@@ -4065,7 +4065,7 @@ We reconsider the :code:`PerformanceQuantiles` object instance *pq* as computed 
 .. code-block:: pycon
    :linenos:
    :name: normedRatingGraph
-   :caption: Computing a normed rating of 10 new decision alternatives
+   :caption: Computing an absolute rating of 10 new decision alternatives
 	     
    >>> from sortingDigraphs import NormedQuantilesRatingDigraph
    >>> newActions = rpg.randomActions(10)
@@ -4194,11 +4194,11 @@ The same result may more conveniently be consulted in a browser view via a speci
 
 .. figure:: heatMap1.png
     :name: heatMap1
-    :alt: heatmap of Normed Quartiles Rating
+    :alt: heatmap of Absolute Quartiles Rating
     :width: 400 px
     :align: center
 
-    Heatmap of normed quartiles ranking 
+    Heatmap of absolute quartiles ranking 
 	    
 Using furthermore a specialised version of the :py:meth:`transitiveDigraphs.TransitiveDigraph.exportGraphViz` method allows drawing the same rating result in a Hasse diagram format (see :numref:`normedRatingDigraph`).
 
@@ -4211,13 +4211,13 @@ Using furthermore a specialised version of the :py:meth:`transitiveDigraphs.Tran
 
 .. figure:: normedRatingDigraph.png
     :name: normedRatingDigraph
-    :alt: drawing of normed Quartiles Rating Digraph
+    :alt: drawing of absolute Quartiles Rating Digraph
     :width: 500 px
     :align: center
 
-    Normed quartiles rating digraph
+    Absolute quartiles rating digraph
 
-We may now answer the **normed rating decision problem** stated at the beginning. Decision alternative *a1001* and alternative *a1010* (see below) are both rated into the same quartile **Q3** class (see :numref:`normedRatingDigraph`), even if the *Copeland* ranking, obtained from the underlying strict outranking digraph (see :numref:`heatMap1`), suggests that alternative *a1010* is effectively *better performing than* alternative *a1001*. 
+We may now answer the **absolute rating decision problem** stated at the beginning. Decision alternative *a1001* and alternative *a1010* (see below) are both rated into the same quartile **Q3** class (see :numref:`normedRatingDigraph`), even if the *Copeland* ranking, obtained from the underlying strict outranking digraph (see :numref:`heatMap1`), suggests that alternative *a1010* is effectively *better performing than* alternative *a1001*. 
 
    ============= ======== ======== ======== ======== ======== ======== ======== 
      Criterion      b1       b2       b3       b4       b5       c1      c2
@@ -4233,7 +4233,7 @@ A preciser rating result may indeed be achieved when using **deciles** instead o
 .. code-block:: pycon
    :linenos:
    :name: decilesRating
-   :caption: Normed deciles rating result 	  
+   :caption: Absolute deciles rating result 	  
 
    >>> pq1 = PerformanceQuantiles(tp, numberOfBins = 'deciles',\
                     LowerClosed=True)
@@ -4257,11 +4257,11 @@ A browser view may again more conveniently illustrate this refined rating result
 
 .. figure:: heatMap2.png
     :name: heatMap2
-    :alt: Heatmap of normed deciles rating
+    :alt: Heatmap of absolute deciles rating
     :width: 400 px
     :align: center
 
-    Heatmap of normed deciles rating 
+    Heatmap of absolute deciles rating 
 
 In this *deciles* rating, decision alternatives *a1001* and *a1010* are now, as expected, rated in the *6th* decile (D6), respectively in the *7th* decile (D7).
 
@@ -4290,18 +4290,18 @@ Back to :ref:`Content Table <Tutorial-label>`
 
 .. _RatingUniversities-Tutorial-label:
 
-Where do study the best students ? : A case study
--------------------------------------------------
+The best students, where to they study ? A case study
+-----------------------------------------------------
 
 .. contents:: 
 	:depth: 2
 	:local:
 
-In 2004, the German magazine *Der Spiegel* conducted an extensive online survey assessing the apparent quality of German University students [28]_. About 70,000 university students from 15 academic disciplines, like German studies, Economics, Physics, Mathematics, Medecine, were questioned on their 'Abitur' and university examens' marks, time of studies and age, grants, awards and publications, IT proficiency, linguistic skills, practical work experience, foreign mobility and civil engagement. Each student received in return a global quality score by a specific weighing of the collected data depending on the disicpline of the student. [29]_.
+In 2004, the German magazine *Der Spiegel* conducted an extensive online survey assessing the apparent quality of German University students [28]_. About 70,000 university students from 15 academic disciplines, like German studies, Economics, Physics, Mathematics, Medicine, were questioned on their 'Abitur' and university exams' marks, time of studies and age, grants, awards and publications, IT proficiency, linguistic skills, practical work experience, foreign mobility and civil engagement. Each student received in return a global quality score by a specific weighing of the collected data depending on the discipline of the student. [29]_.
 
-The published results of the survey concern eventually about 50,000 students mainly enroled in one of the fifteen academic disciplines at the 41 German Universities or Higher Technical Institutes offering at least 8 of the fifteen disciplines.
+The published results of the survey concern eventually about 50,000 students mainly enrolled in one of the fifteen academic disciplines at the 41 German Universities or Higher Technical Institutes offering at least 8 of the fifteen disciplines.
 
-We would like now to rate these 41 German higher education institutions with respect to their apparent enrolment quality.
+We would like now to rate these 41 German higher education institutions with respect to their apparent enrollment quality.
 
 The performance tableau
 .......................
@@ -4317,23 +4317,20 @@ The published data of the 2004 *Spiegel* student survey are stored in a file nam
 
    >>> from perfTabs import PerformanceTableau
    >>> t = PerformanceTableau('studentenSpiegel04')
-   >>> disciplines = [t for t in t.criteria]
-   >>> t.showHTMLPerformanceHeatmap(\
-                     criteriaList=disciplines,ndigits=1)
+   >>> t.showHTMLPerformanceHeatmap(ndigits=1,\
+                                    rankingRule=None)
 
 
 .. Figure:: ratingData.png
-   :name: rankedQualityScores
+   :name: qualityScores
    :width: 600px
    :alt: Quality scores of German University Students
 
-   Quality of enroled students per academic discipline
+   Quality of enrolled students per academic discipline
 
-All fifteen academic disciplines are considered *equally significant* for the rating decisions (see :numref:`rankedQualityScores` row 2). The average enrolment quality scores are coloured along a 7-tiling scheme and the universities are ranked with the *NetFlows* rule applied to the corresponding pairwise *outranking* situations.  
+In :numref:`qualityScores`, the fifteen academic disciplines are grouped into *topical* 'Faculties': *Humanities*; *Law, Economics & Management*; *Life Sciences & Medicine*; *Natural Sciences & Mathematics*; and, *Technology*. All fifteen academic disciplines are considered *equally significant* for the rating decisions (see Row 2). The average enrollment quality scores are coloured along a 7-tiling scheme (see last Row). We may furthermore notice that the Technical University *Dresden* is the only Institution which offers all fifteen academic disciplines. Whereas, on the one side, the Technical University of *München* and the University of *Kaiserslautern* only offer *Sciences* and *Technology* disciplines. On the other side, the University of *Mannheim*, is only offering *Humanities* and *Law, Economics & Management* studies. Most of the 41 Universities do not offer *Engineering* studies. We are, hence, facing a large part of irreducible missing data (see the advanced topic on `coping with missing data <CopingMissing-Data-label>`_). 
 
-In :numref:`rankedQualityScores` we may furthermore notice that the Technical University *Dresden* is the only Institution which offers all fifteen academic disciplines. Whereas, on the one side, the Technical University of *München* and the University of *Kaiserslautern* only offer *Sciences* and *Technology* disciplines. On the other side, the University of *Mannheim*,  is only offering *Humanities* and *Law Studies*.
-
-Details of the rating criteria may be consulted in a browser view (see :numref:`spiegelCriteria` below).
+Details of the enrollment quality criteria (the academic disciplines) may be consulted in a browser view (see :numref:`spiegelCriteria` below).
 
    >>> t.showHTMLCriteria()
 
@@ -4342,30 +4339,130 @@ Details of the rating criteria may be consulted in a browser view (see :numref:`
    :width: 750 px
    :align: center
 
-   Detals of the rating criteria
+   Details of the rating criteria
 
-The computing of a quality score for a student actually depends on the enroled discipline [29]_. The average quality measurement scales may thus differ from discipline to discipline, like *Law Studies* and *Politology* (see :numref:`spiegelCriteria`). The average enrolment quality scores shown in :numref:`spiegelCriteria`, hence, appear to be **incommensurable** between disciplines. To take furthermore into account a potential *imprecision* of the individual scores' computation, we shall assume that, for all disciplines, a difference of 0.1 is *insignificant* and a difference of 0.5 *positively attests* a better average students' quality.
+The computing of a quality score for a student actually depends, indeed, on the enrolled discipline [29]_. The average quality measurement scales may differ from discipline to discipline (see :numref:`spiegelCriteria`), like *Law Studies* (35.0 - 65-0) and *Politology* (50.0 - 70.0). The effectively measured average quality scores, hence, appear to be **incommensurable** between the disciplines.
 
-Let us now inspect the resulting bipolar-valued outranking digraph.
+To take furthermore into account a potential *imprecision* of the individual scores' computation, we shall assume that, for all disciplines, a score difference of 0.1 is *insignificant* and a score difference of 0.5 *positively attests* a better average enrollment quality.
 
-The outranking digraph
-......................
+Using the data in this performance tableau, we may now proceed first with the rating-by-ranking of the average enrollment quality per University.
+
+Rating-by-ranking
+.................
+
+We are going to rank the Universities including 9-tiles average score limits (see previous tutorial). Therefore we need, first, to estimate these 9-tiling limits per academic discipline.
+
+.. code-block:: pycon
+   :name: performanceQuantiles
+   :linenos:
+   :caption: Computing the 9-tiling enrollment quality scores limits
+
+   >>> from performanceQuantiles import PerformanceQuantiles
+   >>> pq = PerformanceQuantiles(t,numberOfBins=9)
+   >>> pq
+    *------- PerformanceQuantiles instance description ------*
+     Instance class   : PerformanceQuantiles
+     Instance name    : 9-tiled_performances
+     # Criteria       : 15
+     # Quantiles      : 9
+     # History sizes  : {'germ': 39, 'pol': 34, 'psy': 34, 'soc': 32,
+                         'law': 32, 'eco': 21, 'mgt': 34,
+			 'bio': 34, 'med': 28,
+			 'phys': 37, 'chem': 35, 'math': 27,
+			 'info': 33, 'elec': 14, 'mec': 13, }
+
+The history sizes, reported in :numref:`performanceQuantiles` above, indicate the number of Universities offering each one of the fifteen disciplines. *German Studies*, for instance, are thus offered in 39 out of 41 Universities, whereas *Electrical* and *Mechanical Engineering* are only offered in 14, respectively 13 Institutions. None of the fifteen disciplines are offered in all the 41 Universities [30]_. 
+
+We may inspect the resulting nine-tiling limits in a browser view.
+
+   >>> pq.showHTMLLimitingQuantiles(Transposed=True,Sorted=False,\
+  	   ndigits=1,title='9-tiled quality score limits')
+
+.. figure:: score9Limits.png
+   :name: score9Limits
+   :width: 350 px
+   :align: center
+
+   9-tiling score limits per academic discipline
+
+In :numref:`score9Limits`, we see confirmed again the differences we observed in the effective enrollment quality scoring between the disciplines, especially between *Law Studies* and *Politology* for instance. Universities offering *Law studies* and not *Politology*, like the University of *Bielefeld*, will see their average enrollment quality score unfairly weakened.
+
+We add, now, these nine-tiling score limits to the 41 Universities and, with the help of the :py:class:`sortingDigraphs.NormedQuantilesRatingDigraph` constructor using the *Copeland* rule, rank them all together. The resulting ranking may be nicely illustrated  with the help of a corresponding heatmap view (see :numref:`ninetiledHeatmap`). 
+
+   >>> from sortingDigraphs import NormedQuantilesRatingDigraph
+   >>> nqr = NormedQuantilesRatingDigraph(pq,t,rankingRule='NetFlows')
+   >>> nqr.showHTMLRatingHeatmap(colorLevels=7,Correlations=True,\
+                ndigits=1,rankingRule='Copeland')
+
+.. figure:: nineTilingResult.png
+   :name: ninetiledHeatmap
+   :width: 650 px
+   :align: center
+
+   Heatmap view of the 9-tiles rating result
+
+Most correlated disciplines with the *Copeland* ranking appear to be *German Studies* (+0.44), *Chemistry* (+0.41), "Management* (+0.39) and *Physics* (+0.39). Due to the abundant missing data, both *Electrical* (+0.07) and *Mechanical Engineering* (+0.05) are the less correlated disciplines (see :numref:`ninetiledHeatmap` Row 3).
+
+From the actual ranking position of the 9-tile class limits, we may now immediately deduce the 9-tiles quality equivalence classes. No University reaches the highest 9-tile class (:math:`[0.89 - [`). In the lowest 9-tile (:math:`[0.00- 0.11]`) we find *Duisburg*. The complete rating result can be easily printed as follows.
+
+.. code-block:: pycon
+   :name: quantilesRating
+   :linenos:
+   :caption: Rating the Universities into enrollment quality 9-tiles 
+
+   >>> nqr.showQuantilesRating()
+    *-------- Quantiles rating result ---------
+     [0.89 - 1.00] []
+     [0.78 - 0.89[ ['tum', 'frei', 'kons', 'leip', 'mu', 'hei']
+     [0.67 - 0.78[ ['stu', 'berh']
+     [0.56 - 0.67[ ['aug', 'mnh', 'tueb', 'mnst', 'jena',
+                    'reg', 'saar']
+     [0.44 - 0.56[ ['wrzb', 'dres', 'ksl', 'marb', 'berf',
+                    'chem', 'koel', 'erl', 'tri']
+     [0.33 - 0.44[ ['goet', 'main', 'bon', 'brem']
+     [0.22 - 0.33[ ['fran', 'ham', 'kiel', 'aach',
+                    'bertu', 'brau', 'darm']
+     [0.11 - 0.22[ ['gie', 'dsd', 'bie', 'boc', 'han']
+     [0.00 - 0.11[ ['duis']
+
+The average enrollment quality at the Technical University of *München*, the Universities *Freiburg*, *Konstanz*, *Leipzig*, *München* as well as  *Heidelberg* appear best rated (:math:`[0.78 - 0.89[`, see :numref:`quantilesRating` Line 3). Last-rated appears the average enrollment quality at the University of *Duisburg* (Line 13). Midfield appear to be the Universities of *Würzburg*, *Dresden*, *Kaiserslautern*, *Marburg*, *Berlin* (Frei), *Chemnitz*, *Köln* , *Erlangen-Nürnberg* and *Trier* (Lines 8-9). A corresponding graphviz drawing gives the following result.
+
+   >>> nqr.exportRatingGraphViz(fileName='ratingResult',\
+				 graphSize='12,12')
+    *---- exporting a dot file for GraphViz tools ---------*
+     Exporting to ratingResult.dot
+     dot -Grankdir=TB -Tpdf dot -o ratingResult.pdf
+
+.. figure:: ratingResult.png
+   :name: ratingResult
+   :width: 650 px
+   :align: center
+
+   Graphviz drawing of the 9-tiles rating result
+
+Considering the abundant amount of missing data (27%), how confident is our rating-by-ranking result? 
+   
+Inspecting the outranking digraph
+.................................
+
+Let us first inspect the underlying bipolar-valued outranking digraph.
 
 .. code-block:: pycon
    :name: outrankings
    :linenos:
    :caption: Inspecting the outranking digraph
 
-    >>> g = BipolarOutrankingDigraph(t)
-    >>> g
-     *------- Object instance description ------*
-      Instance class       : BipolarOutrankingDigraph
-      Instance name        : rel_studentenSpiegel04
-      # Actions            : 41
-      # Criteria           : 15
-      Size                 : 828
-      Determinateness (%)  : 63.67
-      Valuation domain     : [-1.00;1.00]
+   >>> from outrankingDigraphs import BipolarOutrankingDigraph
+   >>> g = BipolarOutrankingDigraph(t) 
+   >>> g
+    *------- Object instance description ------*
+     Instance class       : BipolarOutrankingDigraph
+     Instance name        : rel_studentenSpiegel04
+     # Actions            : 41
+     # Criteria           : 15
+     Size                 : 828
+     Determinateness (%)  : 63.67
+     Valuation domain     : [-1.00;1.00]
    >>> g.computeTransitivityDegree(Comments=True)
     Transitivity degree of digraph <rel_studentenSpiegel04>:
      #triples x>y>z: 57837, #closed: 30714, #open: 27123
@@ -4375,7 +4472,7 @@ The outranking digraph
      #arcs x>y: 793, #symmetric: 35, #asymmetric: 758
      #arcs/#symmetric =  0.044
 
-The actual outranking digraph obtained with the average quality scores per academic discipline shows 828 validatesd pairwise outranking situations between the Universities. Unfortunately, the transitivity of the outranking digraph is far from being satisfied: nearly half of the transitive closure is missing. Despite the rather large preference discrimination threshold we have assumed, there does not occur many indifference situations.
+The bipolar-valued outranking digraph obtained with the given performance tableau *t* (see :numref:`stSpPerfTab`) shows 828 validated pairwise outranking situations between the Universities (see :numref:`outrankings` Line 8). Unfortunately, the transitivity of the outranking digraph is far from being satisfied: nearly half of the transitive closure is missing (Line 15). Despite the rather large preference discrimination threshold we have assumed, there does not occur many indifference situations (Line 19).
 
 We may furthermore check if there exists any *cyclic* outranking situations.
     
@@ -4388,112 +4485,119 @@ We may furthermore check if there exists any *cyclic* outranking situations.
    >>> g.showChordlessCircuits()
     *---- Chordless circuits ----*
      93 circuits.
-      1:  ['aach', 'bertu', 'ham'] , credibility : 0.200
-      2:  ['aach', 'bertu', 'brem'] , credibility : 0.067
-      3:  ['aach', 'bertu', 'brau'] , credibility : 0.200
-      4:  ['aach', 'bie', 'darm', 'brau'] , credibility : 0.067
+      1:  ['aach', 'bie', 'darm', 'brau'] , credibility : 0.067
+      2:  ['aach', 'bertu', 'brau'] , credibility : 0.200
+      3:  ['aach', 'bertu', 'brem'] , credibility : 0.067
+      4:  ['aach', 'bertu', 'ham'] , credibility : 0.200
       5:  ['aug', 'tri', 'marb'] , credibility : 0.067
-      6:  ['aug', 'dres', 'koel'] , credibility : 0.067
+      6:  ['aug', 'jena', 'marb'] , credibility : 0.067
+      7:  ['aug', 'jena', 'koel'] , credibility : 0.067
      ...
      ...
-     28:  ['berh', 'kons', 'stu'] , credibility : 0.133
+     29:  ['berh', 'kons', 'mu'] , credibility : 0.133
      ...
      ...
+     88:  ['main', 'mnh', 'marb'] , credibility : 0.067
+     89:  ['marb', 'saar', 'wrzb'] , credibility : 0.067
      90:  ['marb', 'saar', 'reg'] , credibility : 0.067
      91:  ['marb', 'saar', 'mnst'] , credibility : 0.133
-     92:  ['marb', 'saar', 'wrzb'] , credibility : 0.067
+     92:  ['marb', 'saar', 'tri'] , credibility : 0.067
      93:  ['mnh', 'mu', 'stu'] , credibility : 0.133
 
-Here we observe 93 such outranking circuits, like: *Berlin Humboldt* >= *Konstanz* >= *Stuttgart* >= *Berlin Humboldt* (see :numref:`chordlessCircuits` circuit 28 above). With the *NetFlows* ranking rule, they appear in fact 7th, 6th and 8th ranked (see (:numref:`rankedQualityScores`). The occurence of so many outranking circuits makes any *forced* linear ranking doubtful, independently of the specific ranking rule we might apply.
+Here we observe indeed 93 such outranking circuits, like: *Berlin Humboldt* >= *Konstanz* >= *München* >= *Berlin Humboldt* (see :numref:`chordlessCircuits` circuit 29 above). With the *Copeland* ranking rule, they appear in fact respectively at rank 8, 3 and 5 (see (:numref:`ninetiledHeatmap`).
 
-In this case, it is more convincing to operate quantiles rating of the sutdents' quality scores, as is, indeed, proposed by the *Spiegel* magazine publication [29]_.
+The occurrence of so many outranking circuits makes any *forced* linear ranking doubtful, independently of the specific ranking rule we might apply. To check the quality of the previous rating-ranking result, we shall now compute a direct quantiles sorting of the enrollment quality scores without using any ranking rule (see tutorial on rating with incommensurable criteria).
 
-Nine-tiling the average enrolment quality scores
-................................................
+Rating-by-sorting
+.................
 
-We are going to rate the Universities with a normed 9-tiles rating procedure. Therefore we need, first, to estimate 9-tiling score limits per academic discipline.
+For this rating-by-sorting approach we are using the :py:class:`sortingDigrahs.QuantilesSortingDigraph` constructor.
 
 .. code-block:: pycon
-   :name: performanceQuantiles
+   :name: nineTilesSorting
    :linenos:
-   :caption: Computing the 9-tiling enrolment quality scores limits
+   :caption: Computing the 9-tiles sorting 
 
-   >>> from performanceQuantiles import *
-   >>> pq = PerformanceQuantiles(t,numberOfBins=9)
-   >>> pq
-    *------- PerformanceQuantiles instance description ------*
-     Instance class   : PerformanceQuantiles
-     Instance name    : 9-tiled_performances
-     # Criteria       : 15
-     # Quantiles      : 9
-     # History sizes  : {'germ': 39, 'pol': 34, 'psy': 34, 'soc': 32,
-                          'law': 32, 'eco': 21, 'mgt': 34, 'phys': 37,
-			  'chem': 35, 'math': 27, 'info': 33,
-			  'elec': 14, 'mec': 13, 'bio': 34, 'med': 28}
-   >>> pq.showHTMLLimitingQuantiles(Transposed=True,\
-  	   ndigits=1,title='9-tiled quality score limits')
+   >>> from sortingDigraph import QuantilesSortingDigraph	     
+   >>> qs = QuantilesSortingDigraph(t,9,LowerClosed=True)
+   >>> qs.showActionsSortingResult()
+    Quantiles sorting result per decision action
+    [0.22 - 0.33[: aach with credibility: 0.07 = min(0.07,0.33)
+    [0.44 - 0.78[: aug with credibility: 0.07 = min(0.27,0.07)
+    [0.44 - 0.56[: berf with credibility: 0.07 = min(0.07,0.20)
+    [0.67 - 0.78[: berh with credibility: 0.13 = min(0.13,0.27)
+    [0.11 - 0.33[: bertu with credibility: 0.20 = min(0.33,0.20)
+    [0.00 - 0.22[: bie with credibility: 0.27 = min(0.67,0.27)
+    [0.11 - 0.22[: boc with credibility: 0.13 = min(0.13,0.20)
+    [0.33 - 0.44[: bon with credibility: 0.07 = min(0.13,0.07)
+    [0.11 - 0.33[: brau with credibility: 0.20 = min(0.40,0.20)
+    [0.22 - 0.33[: brem with credibility: 0.13 = min(0.13,0.13)
+    [0.33 - 0.56[: chem with credibility: 0.13 = min(0.13,0.13)
+    [0.11 - 0.33[: darm with credibility: 0.07 = min(0.13,0.07)
+    [0.44 - 0.56[: dres with credibility: 0.20 = min(0.20,0.27)
+    [0.11 - 0.22[: dsd with credibility: 0.07 = min(0.13,0.07)
+    [0.00 - 0.11[: duis with credibility: 0.53 = min(0.73,0.53)
+    [0.33 - 0.44[: erl with credibility: 0.20 = min(0.27,0.20)
+    [0.11 - 0.33[: fran with credibility: 0.40 = min(0.53,0.40)
+    [0.78 - 0.89[: frei with credibility: 0.20 = min(0.20,0.40)
+    [0.11 - 0.22[: gie with credibility: 0.07 = min(0.47,0.07)
+    [0.22 - 0.44[: goet with credibility: 0.27 = min(0.60,0.27)
+    [0.11 - 0.33[: ham with credibility: 0.33 = min(0.40,0.33)
+    [0.00 - 0.11[: han with credibility: 0.07 = min(0.73,0.07)
+    [0.67 - 0.78[: hei with credibility: 0.07 = min(0.13,0.07)
+    [0.44 - 0.67[: jena with credibility: 0.20 = min(0.20,0.40)
+    [0.11 - 0.33[: kiel with credibility: 0.40 = min(0.40,0.53)
+    [0.44 - 0.56[: koel with credibility: 0.07 = min(0.07,0.40)
+    [0.78 - 0.89[: kons with credibility: 0.13 = min(0.13,0.27)
+    [0.44 - 0.67[: ksl with credibility: 0.07 = min(0.20,0.07)
+    [0.67 - 0.78[: leip with credibility: 0.07 = min(0.27,0.07)
+    [0.33 - 0.44[: main with credibility: 0.07 = min(0.07,0.07)
+    [0.44 - 0.56[: marb with credibility: 0.07 = min(0.07,0.07)
+    [0.56 - 0.78[: mnh with credibility: 0.07 = min(0.07,0.13)
+    [0.44 - 0.67[: mnst with credibility: 0.20 = min(0.33,0.20)
+    [0.67 - 0.78[: mu with credibility: 0.13 = min(0.13,0.20)
+    [0.44 - 0.56[: reg with credibility: 0.27 = min(0.47,0.27)
+    [0.56 - 0.67[: saar with credibility: 0.13 = min(0.13,0.13)
+    [0.67 - 0.89[: stu with credibility: 0.13 = min(0.13,0.20)
+    [0.33 - 0.44[: tri with credibility: 0.07 = min(0.07,0.13)
+    [0.56 - 0.67[: tueb with credibility: 0.07 = min(0.20,0.07)
+    [0.89 - <[: tum with credibility: 0.07 = min(0.07,1.00)
+    [0.44 - 0.56[: wrzb with credibility: 0.13 = min(0.20,0.13)
 
-.. figure:: score9Limits.png
-   :name: score9Limits
-   :width: 350 px
+In :numref:`nineTilesSorting` Line 5, we may notice that the Higher Technical School of *Aachen* is rated precisely into the second 9-tile class (:math:`[0.22 - 0.33[`), whereas the University of *Augsburg* is less precisely rated into the fourth until the second highest 9-tile classes (:math:`[0.44 - 0.78[`). The Technical University *München* appears best rated into the highest 9-tiles class (:math:`[0.89 - <[`).
+
+We may now order this result lexicographically by *average rated limits* and rated highest 9-tile class limits.
+
+>>> qs.showHTMLQuantileOrdering(strategy='average')
+
+.. figure:: nineTilingOrdering.png
+   :name: nineTilingOrdering
+   :width: 400 px
    :align: center
 
-   9-tiling score limits per academic discipline
+   Ordering the 9-tiles sorting by average rating limits
 
-The history sizes reported in :numref:`performanceQuantiles` indicate the number of Universities offering each one of the fifteen disciplines. *German Studies*, for instance, are thus offered in 39 out of 41 Universities, whereas *Electrical* and *Mechanical Engineering* are only offered in 14, respectively 13 Instituions. None of the fifteen disciplines are offered in all the 41 Universities.
+In :numref:`nineTilingOrdering` we may indeed notice that the Universities *Augsburg*, *Saarbrücken* and *Tübingen* show the same average limit of 0.615, yet the rated high 9-tile limit for *Augsburg* is higher (0.78) than the one of both the other Universities (0.67). 
 
-We add, now, these nine-tiling score limits to the 41 Universities and sort out, with the help of the :py:class:`sortingDigraphs.NormedQuantilesRatingDigraph` class, the 9-tiles quality equivalence classes.
+The preordered 9-tiles sorting result may eventually be illustrated with a corresponding graphviz drawing.
 
-.. code-block:: pycon
-   :name: ninetiling
-   :linenos:
-   :caption: Rating the Universities into enrolment quality 9-tiles 
+   >>> qs.exportGraphViz('nineTilingDrawing',graphSize='12,12')
+    *---- exporting a dot file for GraphViz tools ---------*
+    Exporting to nineTilingDrawing.dot
+    dot -Grankdir=TB -Tpng nineTilingDrawing.dot\
+			   -o nineTilingDrawing.png
 
-   >>> from sortingDigraphs import NormedQuantilesRatingDigraph
-   >>> nqr = NormedQuantilesRatingDigraph(pq,t,rankingRule='NetFlows')
-   >>> nqr.showQuantilesRating()
-    *-------- Quantiles rating result ---------
-     [0.67 - 0.78[ ['frei', 'tum', 'mu', 'hei', 'leip']
-     [0.56 - 0.67[ ['kons', 'berh', 'stu', 'tueb', 'aug', 'mnst']
-     [0.44 - 0.56[ ['mnh', 'jena', 'reg', 'dres', 'wrzb', 'marb',
-                    'ksl', 'saar', 'berf', 'chem', 'erl', 'goet',
-		    'tri', 'koel']
-     [0.33 - 0.44[ ['bon', 'main', 'brem', 'darm', 'gie',
-                    'bertu', 'aach', 'ham']
-     [0.22 - 0.33[ ['fran', 'brau', 'dsd', 'han', 'kiel',
-                     'boc', 'bie']
-     [0.11 - 0.22[ ['duis']
-
-The average enrolment quality at the Universities of *Freiburg*, *München*, Technical University of *München*, *Heidelberg* as well as *Leipzig* are first rated (see :numref:`ninetiling` Line 5). Last-rated appears the average enrolment quality at the University of *Duisburg* (Line 14). Midfield appear to be the Universities of *Mannheim*, *Jena*, *Regensburg*, *Dresden*, *Würzburg*, *Marburg*, *Saarbrücken*, *Kaiserslautern*, *Berlin* (Frei), *Chemnitz*, *Erlangen-Nürnberg*, *Göttingen*, *Trier* and *Köln* (Line 7).
-
-We may nicely illustrate this rating result with the help of a corresponding heatmap view.
-
->>> nqr.showHTMLRatingHeatmap(colorLevels=7,\
-                ndigits=1,rankingRule='NetFlows')
-
-.. figure:: nineTilingResult.png
-   :name: ninetiledHeatmap
+.. figure:: nineTilingDrawing.png
+   :name: nineTilingDrawing
    :width: 650 px
    :align: center
 
-   Heatmap view of the 9-tiles rating result
+   Graphviz drawing of the 9-tiles sorting digraph
 
-The ranking correlation between the pairwise outranking situations and the shown *NetFlows* ranking is quite high ( +0.939, see :numref:`ninetiledHeatmap` first row). 
+To conclude
+...........
 
-A corresponding graphviz drawing gives the following result.
-
->>> nqr.exportRatingGraphViz(fileName='ratingResult',\
-                             graphSize='12,12')
-*---- exporting a dot file for GraphViz tools ---------*
-Exporting to ratingResult.dot
-dot -Grankdir=TB -Tpdf dot -o ratingResult.pdf
-
-.. figure:: ratingResult.png
-   :name: ratingResult
-   :width: 650 px
-   :align: center
-
-   Graphviz drawing of the 9-tiles rating result 
+In the end, both the *rating-by-ranking* and the *rating-by-sorting* show very similar results. The first approach, with its forced linear ranking, gives an apparent *precisely determined* rating result, whereas the rating-by-sorting leads to a less preciser and *prudent* rating result, yet much less easy to communicate and interpret.
 
 Back to :ref:`Content Table <Tutorial-label>`   
 
@@ -7390,6 +7494,8 @@ Appendices
 .. [28] Ref: *Der Spiegel* 48/2004 p.181, Url: https://www.spiegel.de/thema/studentenspiegel/ .
 
 .. [29] The methology guiding the *Spiegel* survey may be consulted in German `here <_static/spiegelMethod.pdf>`_ . A copy may be consulted in *examples* directory of the *Digraph3* ressources.
+
+.. [30] It would have been much more accurate to estimate quantile limits from the 50,000 qualities scores of the enrolled students. But this data was not available.
 
 ..  LocalWords:  randomDigraph Determinateness valuationdomain py png
 ..  LocalWords:  notGamma tutorialDigraph shortName func irreflexive

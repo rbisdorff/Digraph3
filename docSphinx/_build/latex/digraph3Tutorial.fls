@@ -508,6 +508,16 @@ INPUT ./ratingResult.png
 INPUT ./ratingResult.png
 INPUT ratingResult.png
 INPUT ./ratingResult.png
+INPUT nineTilingOrdering.png
+INPUT ./nineTilingOrdering.png
+INPUT ./nineTilingOrdering.png
+INPUT nineTilingOrdering.png
+INPUT ./nineTilingOrdering.png
+INPUT nineTilingDrawing.png
+INPUT ./nineTilingDrawing.png
+INPUT ./nineTilingDrawing.png
+INPUT nineTilingDrawing.png
+INPUT ./nineTilingDrawing.png
 INPUT sparseRelationMap.png
 INPUT ./sparseRelationMap.png
 INPUT ./sparseRelationMap.png
