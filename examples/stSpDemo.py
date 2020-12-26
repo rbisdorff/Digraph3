@@ -1,43 +1,51 @@
+###############################
+# Digraph3 tutorials
+# R. Bisdorff (c) 2020
+# # Url: https://www.spiegel.de/thema/studentenspiegel/
+# Ref: Der Spiegel 48/2004 p.181
+###################################
+
 #from perfTabs import *
 from outrankingDigraphs import *
 t = PerformanceTableau('studentenSpiegel04')
+disciplines = [t for t in t.criteria]
+t.showHTMLPerformanceHeatmap(\
+                  criteriaList=disciplines,ndigits=1,rankingRule=None)
 t.showHTMLCriteria()
-from linearOrders import *
-thlm = PartialPerformanceTableau(t,objectivesSubset=['HLM'])
-ghlm = BipolarOutrankingDigraph(thlm)
-coph = CopelandRanking(ghlm)
-##thlm.showHTMLPerformanceTableau(\
-##    title='Faculty Humanities, Law & Management',ndigits=0,\
-##    isSorted=False,actionsSubset=coph)
-##thlm.showHTMLPerformanceHeatmap(Correlations=True,colorLevels=3,rankingRule='Copeland',
-##        pageTitle='Faculty Humanities, Law & Management',
-##        ndigits=0)
-##
-tstm = PartialPerformanceTableau(t,objectivesSubset=['STM'])
-gstm = BipolarOutrankingDigraph(tstm)
-cops = CopelandRanking(gstm)
-fs = FusionDigraph(coph,cops)
-##tstm.showHTMLPerformanceTableau(\
-##    title='Faculty Sciences, Technology & Medecine',ndigits=0,\
-##    isSorted=False,actionsSubset=cops)
-##tstm.showHTMLPerformanceHeatmap(Correlations=True,colorLevels=3,
-##            rankingRule='Copeland',
-##            pageTitle='Faculty Sciences, Technology & Medecine',
-##            ndigits=0)
+mdc = 0
+nc = 0
+for d in t.criteria:
+    for x in t.actions:
+        nc += 1
+        if t.evaluation[d][x] == Decimal('-999'):
+            mdc += 1
+print('missing data proportion: %.3f' % (mdc/nc))
+
+###########
+from performanceQuantiles import *
+pq = PerformanceQuantiles(t,numberOfBins=9)
+pq.showHTMLLimitingQuantiles(Transposed=True,Sorted=False)
+
+###########
+from sortingDigraphs import *
+nqr = NormedQuantilesRatingDigraph(pq,t,rankingRule='Copeland')
+print(nqr)
+nqr.showHTMLRatingHeatmap(rankingRule='Copeland',Correlations=True,ndigits=1)
+nqr.showQuantilesRating()
+nqr.exportRatingGraphViz('ratingResult',graphSize='12,12')
+
+###################
 g = BipolarOutrankingDigraph(t)
 print(g)
 g.computeTransitivityDegree(Comments=True)
 g.computeSymmetryDegree(Comments=True)
 g.computeChordlessCircuits()
 g.showChordlessCircuits()
-ranking = g.computeNetFlowsRanking()
-g.showHTMLRelationTable(actionsList=ranking)
 
-from performanceQuantiles import *
-pq = PerformanceQuantiles(t,numberOfBins=9)
-pq.showLimitingQuantiles()
+############
+qs = QuantilesSortingDigraph(t,9,LowerClosed=True)
+qs.showHTMLQuantileOrdering(strategy='average')
+qs.exportGraphViz(graphSize='12,12')
 
-from sortingDigraphs import *
-nqr = NormedQuantilesRatingDigraph(pq,t)
-nqr.showQuantilesRating()
-nqr.exportRatingGraphViz('ratingResult',graphSize='12,12')
+
+

@@ -4290,8 +4290,8 @@ Back to :ref:`Content Table <Tutorial-label>`
 
 .. _RatingUniversities-Tutorial-label:
 
-The best students, where to they study ? A case study
------------------------------------------------------
+The best students, where do they study? A case study
+----------------------------------------------------
 
 .. contents:: 
 	:depth: 2

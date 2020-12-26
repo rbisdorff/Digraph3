@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.20 (TeX Live 2019/Debian) (preloaded format=pdflatex 2020.4.26)  26 DEC 2020 12:30
+This is pdfTeX, Version 3.14159265-2.6-1.40.20 (TeX Live 2019/Debian) (preloaded format=pdflatex 2020.4.26)  26 DEC 2020 13:16
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -1384,13 +1384,13 @@ Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 8689.
 Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 8689.
 
 Package rerunfilecheck Info: File `digraph3Tutorial.out' has not changed.
-(rerunfilecheck)             Checksum: C36E59A61843C3F3D89EEA94EA9CA940;23111.
+(rerunfilecheck)             Checksum: 4B9790CB3A0FC35278BE301009BCBF41;23103.
 Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 8689.
  ) 
 Here is how much of TeX's memory you used:
  15396 strings out of 482504
  226392 string characters out of 5947330
- 660884 words of memory out of 5000000
+ 660877 words of memory out of 5000000
  29297 multiletter control sequences out of 15000+600000
  564467 words of font info for 98 fonts, out of 8000000 for 9000
  396 hyphenation exceptions out of 8191
@@ -1438,7 +1438,7 @@ e/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy6.pfb></usr/share/texli
 ve/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy8.pfb></usr/share/texlive/texm
 f-dist/fonts/type1/public/amsfonts/symbols/msam10.pfb></usr/share/texlive/texmf
 -dist/fonts/type1/public/amsfonts/symbols/msbm10.pfb>
-Output written on digraph3Tutorial.pdf (210 pages, 5078130 bytes).
+Output written on digraph3Tutorial.pdf (210 pages, 5078125 bytes).
 PDF statistics:
  3985 PDF objects out of 4296 (max. 8388607)
  2572 compressed objects within 26 object streams
