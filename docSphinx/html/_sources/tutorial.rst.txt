@@ -4306,9 +4306,7 @@ We would like now to rate these 41 German higher education institutions with res
 The performance tableau
 .......................
 
-The published data of the 2004 *Spiegel* student survey are stored in a file named `studentenSpiegel04.py`_ of :py:class:`perfTabs.PerformanceTableau` format.
-
-    .. _studentenSpiegel04.py: _static/studentenSpiegel04.py
+The published data of the 2004 *Spiegel* student survey are stored in a file named `studentenSpiegel04.py <_static/studentenSpiegel04.py>`_ of :py:class:`perfTabs.PerformanceTableau` format [32]_.
 
 .. code-block:: pycon
    :name: stSpPerfTab
@@ -7498,6 +7496,9 @@ Appendices
 .. [30] It would have been much more accurate to estimate quantile limits from the 50,000 qualities scores of the enrolled students. But this data was not available.
 
 .. [31] Converted from a bipolar-valued credibility 0.07 to a majority significance: (1.0 + 0.07)/2 = 0.535.
+
+.. [32] The performance tableau :code:`studentenSpiegel04.py` is also available in the :code:`examples` directory of the Digraph3 software collection.
+
 
 ..  LocalWords:  randomDigraph Determinateness valuationdomain py png
 ..  LocalWords:  notGamma tutorialDigraph shortName func irreflexive
