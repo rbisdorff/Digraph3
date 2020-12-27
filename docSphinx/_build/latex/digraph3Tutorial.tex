@@ -2410,7 +2410,7 @@ Discrete random variables with a given empirical probability law (here the polls
 \end{footnote}), defined respectively by the two party polls, is rendering a ranking that is more or less in accordance with the simulated balance of the polls: \sphinxhyphen{}\sphinxstyleemphasis{Party\_1} supporters : 460;  \sphinxstyleemphasis{Party\_2} supporters: 436 (see \hyperref[\detokenize{tutorial:linearvotingprofilewithpolls}]{Listing \ref{\detokenize{tutorial:linearvotingprofilewithpolls}}} Lines 26\sphinxhyphen{}40 third column). Despite a random voting behaviour per voter, the given polls apparently show a \sphinxstyleemphasis{very strong incidence} on the eventual election result. In order to avoid any manipulation of the election outcome, public media are therefore in some countries not allowed to publish polls during the last weeks before a general election.
 
 \begin{sphinxadmonition}{note}{Note:}
-Mind that the specific \sphinxstyleemphasis{ranking\sphinxhyphen{}by\sphinxhyphen{}choosing} procedure, we use here on the \sphinxstyleemphasis{Condorcet} digraph, operates the selection procedure by extracting at each step \sphinxstyleemphasis{initial} and \sphinxstyleemphasis{terminal} kernels, i.e. NP\sphinxhyphen{}hard operational problems (see tutorial {\hyperref[\detokenize{tutorial:kernel-tutorial-label}]{\sphinxcrossref{\DUrole{std,std-ref}{On computing digraph kernels}}}} (\autopageref*{\detokenize{tutorial:kernel-tutorial-label}}) and \sphinxcite{tutorial:bis-1999}); A technique that does not allow in general to tackle voting profiles with much more than 30 candidates. The tutorial on {\hyperref[\detokenize{tutorial:ranking-tutorial-label}]{\sphinxcrossref{\DUrole{std,std-ref}{Ranking with multiple incommensurable criteria}}}} (\autopageref*{\detokenize{tutorial:ranking-tutorial-label}}) provides more adequate and efficient techniques for ranking from pairwise majority margins when a larger number of potential candidates is given.
+Mind that the specific \sphinxstyleemphasis{ranking\sphinxhyphen{}by\sphinxhyphen{}choosing} procedure, we use here on the \sphinxstyleemphasis{Condorcet} digraph, operates the selection procedure by extracting at each step \sphinxstyleemphasis{initial} and \sphinxstyleemphasis{terminal} kernels, i.e. NP\sphinxhyphen{}hard operational problems (see tutorial {\hyperref[\detokenize{tutorial:kernel-tutorial-label}]{\sphinxcrossref{\DUrole{std,std-ref}{on computing kernels}}}} (\autopageref*{\detokenize{tutorial:kernel-tutorial-label}}) and \sphinxcite{tutorial:bis-1999}); A technique that does not allow in general to tackle voting profiles with much more than 30 candidates. The tutorial on {\hyperref[\detokenize{tutorial:ranking-tutorial-label}]{\sphinxcrossref{\DUrole{std,std-ref}{ranking}}}} (\autopageref*{\detokenize{tutorial:ranking-tutorial-label}}) provides more adequate and efficient techniques for ranking from pairwise majority margins when a larger number of potential candidates is given.
 \end{sphinxadmonition}
 
 Back to {\hyperref[\detokenize{tutorial:tutorial-label}]{\sphinxcrossref{\DUrole{std,std-ref}{Content Table}}}} (\autopageref*{\detokenize{tutorial:tutorial-label}})
@@ -2498,7 +2498,7 @@ Some ranking rules will work on the associated \sphinxstylestrong{Condorcet Digr
 \PYG{g+go}{     \PYGZsq{}a9\PYGZsq{}  |   0   +1   \PYGZhy{}1   \PYGZhy{}1   \PYGZhy{}1   \PYGZhy{}1   \PYGZhy{}1   \PYGZhy{}1    \PYGZhy{}}
 \end{sphinxVerbatim}
 
-Unfortunately, such crisp median\sphinxhyphen{}cut \sphinxstyleemphasis{Condorcet} digraphs, associated with a given strict outranking digraph, present only exceptionally a linear ordering. Usually, pairwise majority comparisons do not even render a \sphinxstyleemphasis{complete} or, at least, a \sphinxstyleemphasis{transitive} partial order. There may even frequently appear \sphinxstyleemphasis{cyclic} outranking situations (see the tutorial on {\hyperref[\detokenize{tutorial:linearvoting-tutorial-label}]{\sphinxcrossref{\DUrole{std,std-ref}{Computing the winner of an election}}}} (\autopageref*{\detokenize{tutorial:linearvoting-tutorial-label}})).
+Unfortunately, such crisp median\sphinxhyphen{}cut \sphinxstyleemphasis{Condorcet} digraphs, associated with a given strict outranking digraph, present only exceptionally a linear ordering. Usually, pairwise majority comparisons do not even render a \sphinxstyleemphasis{complete} or, at least, a \sphinxstyleemphasis{transitive} partial order. There may even frequently appear \sphinxstyleemphasis{cyclic} outranking situations (see the tutorial on {\hyperref[\detokenize{tutorial:linearvoting-tutorial-label}]{\sphinxcrossref{\DUrole{std,std-ref}{linear voting profiles}}}} (\autopageref*{\detokenize{tutorial:linearvoting-tutorial-label}})).
 
 To estimate how \sphinxstyleemphasis{difficult} this ranking problem here may be, we may have a look at the corresponding strict outranking digraph \sphinxstyleemphasis{graphviz} drawing (\sphinxfootnotemark[1]).
 
@@ -3589,7 +3589,7 @@ One may check that the outranking digraph \sphinxstyleemphasis{g} does not admit
 
 \subsection{\sphinxstyleemphasis{Rubis} best choice recommendations}
 \label{\detokenize{tutorial:rubis-best-choice-recommendations}}
-Following the Rubis outranking method (see \sphinxcite{tutorial:bis-2008}), potential best choice recommendations are determined by the outranking prekernels \textendash{}\sphinxstyleemphasis{weakly independent} and \sphinxstyleemphasis{strictly outranking} choices\textendash{} of the outranking digraph (see the tutorial on {\hyperref[\detokenize{tutorial:kernel-tutorial-label}]{\sphinxcrossref{\DUrole{std,std-ref}{On computing digraph kernels}}}} (\autopageref*{\detokenize{tutorial:kernel-tutorial-label}})). The case given, we previously need to break open all chordless odd circuits at their weakest link.
+Following the Rubis outranking method (see \sphinxcite{tutorial:bis-2008}), potential best choice recommendations are determined by the outranking prekernels \textendash{}\sphinxstyleemphasis{weakly independent} and \sphinxstyleemphasis{strictly outranking} choices\textendash{} of the outranking digraph (see the tutorial on {\hyperref[\detokenize{tutorial:kernel-tutorial-label}]{\sphinxcrossref{\DUrole{std,std-ref}{computing digraph kernels}}}} (\autopageref*{\detokenize{tutorial:kernel-tutorial-label}})). The case given, we previously need to break open all chordless odd circuits at their weakest link.
 
 \begin{sphinxVerbatim}[commandchars=\\\{\},numbers=left,firstnumber=1,stepnumber=1]
 \PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{k+kn}{from} \PYG{n+nn}{digraphs} \PYG{k+kn}{import} \PYG{n}{BrokenCocsDigraph}
@@ -5417,9 +5417,9 @@ The methology guiding the \sphinxstyleemphasis{Spiegel} survey may be consulted 
 %
 \end{footnote}.
 
-The published results of the survey concern eventually about 50,000 students mainly enrolled in one of the fifteen academic disciplines at the 41 German Universities or Higher Technical Institutes offering at least 8 of the fifteen disciplines.
+The published results of the survey concern eventually about 50,000 students mainly enroled in one of the fifteen academic disciplines at the 41 German Universities or Higher Technical Institutes offering at least 8 of the fifteen disciplines.
 
-We would like now to rate these 41 German higher education institutions with respect to their apparent enrollment quality.
+We would like now to rate these 41 German higher education institutions with respect to their apparent enrolment quality.
 
 
 \subsection{The performance tableau}
@@ -5443,11 +5443,13 @@ The performance tableau \sphinxcode{\sphinxupquote{studentenSpiegel04.py}} is al
 \capstart
 
 \noindent\sphinxincludegraphics[width=600\sphinxpxdimen]{{ratingData}.png}
-\caption{Quality of enrolled students per academic discipline}\label{\detokenize{tutorial:qualityscores}}\end{figure}
+\caption{Quality of enroled students per academic discipline}\label{\detokenize{tutorial:qualityscores}}\end{figure}
 
-In \hyperref[\detokenize{tutorial:qualityscores}]{Fig.\@ \ref{\detokenize{tutorial:qualityscores}}}, the fifteen academic disciplines are grouped into \sphinxstyleemphasis{topical} ‘Faculties’: \sphinxstyleemphasis{Humanities}; \sphinxstyleemphasis{Law, Economics \& Management}; \sphinxstyleemphasis{Life Sciences \& Medicine}; \sphinxstyleemphasis{Natural Sciences \& Mathematics}; and, \sphinxstyleemphasis{Technology}. All fifteen academic disciplines are considered \sphinxstyleemphasis{equally significant} for the rating decisions (see Row 2). The average enrollment quality scores are coloured along a 7\sphinxhyphen{}tiling scheme (see last Row). We may furthermore notice that the Technical University \sphinxstyleemphasis{Dresden} is the only Institution which offers all fifteen academic disciplines. Whereas, on the one side, the Technical University of \sphinxstyleemphasis{München} and the University of \sphinxstyleemphasis{Kaiserslautern} only offer \sphinxstyleemphasis{Sciences} and \sphinxstyleemphasis{Technology} disciplines. On the other side, the University of \sphinxstyleemphasis{Mannheim}, is only offering \sphinxstyleemphasis{Humanities} and \sphinxstyleemphasis{Law, Economics \& Management} studies. Most of the 41 Universities do not offer \sphinxstyleemphasis{Engineering} studies. We are, hence, facing a large part of irreducible missing data (see the advanced topic on \sphinxhref{CopingMissing-Data-label}{coping with missing data}).
+In \hyperref[\detokenize{tutorial:qualityscores}]{Fig.\@ \ref{\detokenize{tutorial:qualityscores}}}, the fifteen academic disciplines are grouped into \sphinxstyleemphasis{topical} ‘Faculties’: \sphinxstyleemphasis{Humanities}; \sphinxstyleemphasis{Law, Economics \& Management}; \sphinxstyleemphasis{Life Sciences \& Medicine}; \sphinxstyleemphasis{Natural Sciences \& Mathematics}; and, \sphinxstyleemphasis{Technology}. All fifteen academic disciplines are considered \sphinxstyleemphasis{equally significant} for the rating decisions (see Row 2). The average enrolment quality scores are coloured along a 7\sphinxhyphen{}tiling scheme (see last Row).
 
-Details of the enrollment quality criteria (the academic disciplines) may be consulted in a browser view (see \hyperref[\detokenize{tutorial:spiegelcriteria}]{Fig.\@ \ref{\detokenize{tutorial:spiegelcriteria}}} below).
+We may furthermore notice that the \sphinxstyleemphasis{TU Dresden} is the only Institution which offers all fifteen academic disciplines. Whereas, on the one side, \sphinxstyleemphasis{TU München} and \sphinxstyleemphasis{Kaiserslautern} only offer \sphinxstyleemphasis{Sciences} and \sphinxstyleemphasis{Technology} disciplines. On the other side, \sphinxstyleemphasis{Mannheim}, is only offering \sphinxstyleemphasis{Humanities} and \sphinxstyleemphasis{Law, Economics \& Management} studies. Most of the 41 Universities do not offer \sphinxstyleemphasis{Engineering} studies. We are, hence, facing a large part of irreducible missing data (see the advanced topic on \sphinxtitleref{coping with missing data \textless{}CopingMissing\sphinxhyphen{}Data\sphinxhyphen{}label\textgreater{}}).
+
+Details of the enrolment quality criteria (the academic disciplines) may be consulted in a browser view (see \hyperref[\detokenize{tutorial:spiegelcriteria}]{Fig.\@ \ref{\detokenize{tutorial:spiegelcriteria}}} below).
 
 \begin{sphinxVerbatim}[commandchars=\\\{\}]
 \PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{t}\PYG{o}{.}\PYG{n}{showHTMLCriteria}\PYG{p}{(}\PYG{p}{)}
@@ -5460,27 +5462,27 @@ Details of the enrollment quality criteria (the academic disciplines) may be con
 \noindent\sphinxincludegraphics[width=750\sphinxpxdimen]{{spiegelCriteria}.png}
 \caption{Details of the rating criteria}\label{\detokenize{tutorial:spiegelcriteria}}\end{figure}
 
-The computing of a quality score for a student actually depends, indeed, on the enrolled discipline \sphinxfootnotemark[29]. The average quality measurement scales may differ from discipline to discipline (see \hyperref[\detokenize{tutorial:spiegelcriteria}]{Fig.\@ \ref{\detokenize{tutorial:spiegelcriteria}}}), like \sphinxstyleemphasis{Law Studies} (35.0 \sphinxhyphen{} 65\sphinxhyphen{}0) and \sphinxstyleemphasis{Politology} (50.0 \sphinxhyphen{} 70.0). The effectively measured average quality scores, hence, appear to be \sphinxstylestrong{incommensurable} between the disciplines.
+The computing of a quality score for a student actually depends, indeed, on the enroled discipline \sphinxfootnotemark[29]. The average quality measurement scales may differ from discipline to discipline (see \hyperref[\detokenize{tutorial:spiegelcriteria}]{Fig.\@ \ref{\detokenize{tutorial:spiegelcriteria}}}), like \sphinxstyleemphasis{Law Studies} (35.0 \sphinxhyphen{} 65\sphinxhyphen{}0) and \sphinxstyleemphasis{Politology} (50.0 \sphinxhyphen{} 70.0). The effectively measured average quality scores, hence, appear to be \sphinxstylestrong{incommensurable} between the disciplines.
 
-To take furthermore into account a potential \sphinxstyleemphasis{imprecision} of the individual scores’ computation, we shall assume that, for all disciplines, a score difference of 0.1 is \sphinxstyleemphasis{insignificant} and a score difference of 0.5 \sphinxstyleemphasis{positively attests} a better average enrollment quality.
+To take furthermore into account a potential \sphinxstyleemphasis{imprecision} of the individual scores’ computation, we shall assume that, for all disciplines, a score difference of 0.1 is \sphinxstyleemphasis{insignificant} and a score difference of 0.5 \sphinxstyleemphasis{positively attests} a better average enrolment quality.
 
-Using the data in this performance tableau, we may now proceed first with the rating\sphinxhyphen{}by\sphinxhyphen{}ranking of the average enrollment quality per University.
+Using the data in this performance tableau, we may now proceed first with the rating\sphinxhyphen{}by\sphinxhyphen{}ranking of the average enrolment quality per University.
 
 
 \subsection{Rating\sphinxhyphen{}by\sphinxhyphen{}ranking}
 \label{\detokenize{tutorial:rating-by-ranking}}
-We are going to rank the Universities including 9\sphinxhyphen{}tiles average score limits (see previous tutorial). Therefore we need, first, to estimate these 9\sphinxhyphen{}tiling limits per academic discipline.
-\sphinxSetupCaptionForVerbatim{Computing the 9\sphinxhyphen{}tiling enrollment quality scores limits}
+We are going to rank together the Universities \sphinxstylestrong{and} 9\sphinxhyphen{}tiles average score lower\sphinxhyphen{}closed limits (see tutorial on \sphinxtitleref{rating with learned quantile norms \textless{}Rating\sphinxhyphen{}Tutorial\sphinxhyphen{}label\textgreater{}} ). Therefore we need, first, to estimate these 9\sphinxhyphen{}tiling limits per academic discipline.
+\sphinxSetupCaptionForVerbatim{Computing the 9\sphinxhyphen{}tiling enrolment quality scores limits}
 \def\sphinxLiteralBlockLabel{\label{\detokenize{tutorial:performancequantiles}}}
 \begin{sphinxVerbatim}[commandchars=\\\{\},numbers=left,firstnumber=1,stepnumber=1]
 \PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{k+kn}{from} \PYG{n+nn}{performanceQuantiles} \PYG{k+kn}{import} \PYG{n}{PerformanceQuantiles}
-\PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{pq} \PYG{o}{=} \PYG{n}{PerformanceQuantiles}\PYG{p}{(}\PYG{n}{t}\PYG{p}{,}\PYG{n}{numberOfBins}\PYG{o}{=}\PYG{l+m+mi}{9}\PYG{p}{)}
+\PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{pq} \PYG{o}{=} \PYG{n}{PerformanceQuantiles}\PYG{p}{(}\PYG{n}{t}\PYG{p}{,}\PYG{n}{numberOfBins}\PYG{o}{=}\PYG{l+m+mi}{9}\PYG{p}{,}\PYG{n}{LowerClosed}\PYG{o}{=}\PYG{n+nb+bp}{True}\PYG{p}{)}
 \PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{pq}
 \PYG{g+go}{ *\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{} PerformanceQuantiles instance description \PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}*}
 \PYG{g+go}{  Instance class   : PerformanceQuantiles}
 \PYG{g+go}{  Instance name    : 9\PYGZhy{}tiled\PYGZus{}performances}
 \PYG{g+go}{  \PYGZsh{} Criteria       : 15}
-\PYG{g+go}{  \PYGZsh{} Quantiles      : 9}
+\PYG{g+go}{  \PYGZsh{} Quantiles      : 9 (LowerClosed)}
 \PYG{g+go}{  \PYGZsh{} History sizes  : \PYGZob{}\PYGZsq{}germ\PYGZsq{}: 39, \PYGZsq{}pol\PYGZsq{}: 34, \PYGZsq{}psy\PYGZsq{}: 34, \PYGZsq{}soc\PYGZsq{}: 32,}
 \PYG{g+go}{                      \PYGZsq{}law\PYGZsq{}: 32, \PYGZsq{}eco\PYGZsq{}: 21, \PYGZsq{}mgt\PYGZsq{}: 34,}
 \PYG{g+go}{                      \PYGZsq{}bio\PYGZsq{}: 34, \PYGZsq{}med\PYGZsq{}: 28,}
@@ -5490,7 +5492,7 @@ We are going to rank the Universities including 9\sphinxhyphen{}tiles average sc
 
 The history sizes, reported in \hyperref[\detokenize{tutorial:performancequantiles}]{Listing \ref{\detokenize{tutorial:performancequantiles}}} above, indicate the number of Universities offering each one of the fifteen disciplines. \sphinxstyleemphasis{German Studies}, for instance, are thus offered in 39 out of 41 Universities, whereas \sphinxstyleemphasis{Electrical} and \sphinxstyleemphasis{Mechanical Engineering} are only offered in 14, respectively 13 Institutions. None of the fifteen disciplines are offered in all the 41 Universities %
 \begin{footnote}[30]\sphinxAtStartFootnote
-It would have been much more accurate to estimate quantile limits from the 50,000 qualities scores of the enrolled students. But this data was not available.
+It would have been much more accurate to estimate quantile limits from the 50,000 qualities scores of the enroled students. But this data was not available.
 %
 \end{footnote}.
 
@@ -5508,7 +5510,7 @@ We may inspect the resulting nine\sphinxhyphen{}tiling limits in a browser view.
 \noindent\sphinxincludegraphics[width=350\sphinxpxdimen]{{score9Limits}.png}
 \caption{9\sphinxhyphen{}tiling score limits per academic discipline}\label{\detokenize{tutorial:score9limits}}\end{figure}
 
-In \hyperref[\detokenize{tutorial:score9limits}]{Fig.\@ \ref{\detokenize{tutorial:score9limits}}}, we see confirmed again the differences we observed in the effective enrollment quality scoring between the disciplines, especially between \sphinxstyleemphasis{Law Studies} and \sphinxstyleemphasis{Politology} for instance. Universities offering \sphinxstyleemphasis{Law studies} and not \sphinxstyleemphasis{Politology}, like the University of \sphinxstyleemphasis{Bielefeld}, will see their average enrollment quality score unfairly weakened.
+In \hyperref[\detokenize{tutorial:score9limits}]{Fig.\@ \ref{\detokenize{tutorial:score9limits}}}, we see confirmed again the differences we observe in the effective enrolment quality scoring between the disciplines, especially between \sphinxstyleemphasis{Law Studies} and \sphinxstyleemphasis{Politology} for instance. Universities offering \sphinxstyleemphasis{Law studies} but not \sphinxstyleemphasis{Politology}, like the University of \sphinxstyleemphasis{Bielefeld}, will see their average enrolment quality score unfairly weakened.
 
 We add, now, these nine\sphinxhyphen{}tiling score limits to the 41 Universities and, with the help of the \sphinxcode{\sphinxupquote{sortingDigraphs.NormedQuantilesRatingDigraph}} constructor using the \sphinxstyleemphasis{Copeland} rule, rank them all together. The resulting ranking may be nicely illustrated  with the help of a corresponding heatmap view (see \hyperref[\detokenize{tutorial:ninetiledheatmap}]{Fig.\@ \ref{\detokenize{tutorial:ninetiledheatmap}}}).
 
@@ -5524,12 +5526,12 @@ We add, now, these nine\sphinxhyphen{}tiling score limits to the 41 Universities
 \capstart
 
 \noindent\sphinxincludegraphics[width=650\sphinxpxdimen]{{nineTilingResult}.png}
-\caption{Heatmap view of the 9\sphinxhyphen{}tiles rating result}\label{\detokenize{tutorial:ninetiledheatmap}}\end{figure}
+\caption{Heatmap view of the 9\sphinxhyphen{}tiles rating\sphinxhyphen{}by\sphinxhyphen{}ranking result}\label{\detokenize{tutorial:ninetiledheatmap}}\end{figure}
 
-Most correlated disciplines with the \sphinxstyleemphasis{Copeland} ranking appear to be \sphinxstyleemphasis{German Studies} (+0.51), \sphinxstyleemphasis{Chemistry} (+0.48), “Management* (+0.47) and \sphinxstyleemphasis{Physics} (+0.46). Both \sphinxstyleemphasis{Electrical} (+0.07) and \sphinxstyleemphasis{Mechanical Engineering} (+0.05) are the less correlated disciplines (see \hyperref[\detokenize{tutorial:ninetiledheatmap}]{Fig.\@ \ref{\detokenize{tutorial:ninetiledheatmap}}} Row 3).
+The ordinal correlation of the \sphinxstyleemphasis{Copeland} ranking with the underlying bipolar\sphinxhyphen{}valued outranking digraph is very high (+0.967, see \hyperref[\detokenize{tutorial:ninetiledheatmap}]{Fig.\@ \ref{\detokenize{tutorial:ninetiledheatmap}}} Row 1). Most correlated disciplines with the rating\sphinxhyphen{}by\sphinxhyphen{}ranking result appear to be \sphinxstyleemphasis{German Studies} (+0.51), \sphinxstyleemphasis{Chemistry} (+0.48), “Management* (+0.47) and \sphinxstyleemphasis{Physics} (+0.46). Both \sphinxstyleemphasis{Electrical} (+0.07) and \sphinxstyleemphasis{Mechanical Engineering} (+0.05) are the less correlated disciplines (see Row 3).
 
-From the actual ranking position of the 9\sphinxhyphen{}tile class limits, we may now immediately deduce the 9\sphinxhyphen{}tiles quality equivalence classes. No University reaches the highest 9\sphinxhyphen{}tile class (\([0.89 - [\)). In the lowest 9\sphinxhyphen{}tile (\([0.00- 0.11]\)) we find \sphinxstyleemphasis{Duisburg}. The complete rating result can be easily printed as follows.
-\sphinxSetupCaptionForVerbatim{Rating the Universities into enrollment quality 9\sphinxhyphen{}tiles}
+From the actual ranking position of the 9\sphinxhyphen{}tile class limits, we may now immediately deduce the 9\sphinxhyphen{}tiles enrolment quality equivalence classes. No University reaches the highest 9\sphinxhyphen{}tile class (\([0.89 - [\)). In the lowest 9\sphinxhyphen{}tile (\([0.00- 0.11]\)) we find the University \sphinxstyleemphasis{Duisburg}. The complete rating result can be easily printed out as follows.
+\sphinxSetupCaptionForVerbatim{Rating the Universities into enrolment quality 9\sphinxhyphen{}tiles}
 \def\sphinxLiteralBlockLabel{\label{\detokenize{tutorial:quantilesrating}}}
 \begin{sphinxVerbatim}[commandchars=\\\{\},numbers=left,firstnumber=1,stepnumber=1]
 \PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{nqr}\PYG{o}{.}\PYG{n}{showQuantilesRating}\PYG{p}{(}\PYG{p}{)}
@@ -5548,7 +5550,7 @@ From the actual ranking position of the 9\sphinxhyphen{}tile class limits, we ma
 \PYG{g+go}{  [0.00 \PYGZhy{} 0.11[ [\PYGZsq{}duis\PYGZsq{}]}
 \end{sphinxVerbatim}
 
-The average enrollment quality at the Technical University of \sphinxstyleemphasis{München}, the Universities \sphinxstyleemphasis{Freiburg}, \sphinxstyleemphasis{Konstanz}, \sphinxstyleemphasis{Leipzig}, \sphinxstyleemphasis{München} as well as  \sphinxstyleemphasis{Heidelberg} appear best rated (\([0.78 - 0.89[\), see \hyperref[\detokenize{tutorial:quantilesrating}]{Listing \ref{\detokenize{tutorial:quantilesrating}}} Line 4). Last\sphinxhyphen{}rated appears the average enrollment quality at the University of \sphinxstyleemphasis{Duisburg} (Line 14). Midfield appear to be the Universities of \sphinxstyleemphasis{Würzburg}, \sphinxstyleemphasis{Dresden}, \sphinxstyleemphasis{Kaiserslautern}, \sphinxstyleemphasis{Marburg}, \sphinxstyleemphasis{Berlin} (Frei), \sphinxstyleemphasis{Chemnitz}, \sphinxstyleemphasis{Köln} , \sphinxstyleemphasis{Erlangen\sphinxhyphen{}Nürnberg} and \sphinxstyleemphasis{Trier} (Lines 8\sphinxhyphen{}9). A corresponding graphviz drawing gives the following result.
+The average enrolment quality at following Universities: \sphinxstyleemphasis{TU München}, \sphinxstyleemphasis{Freiburg}, \sphinxstyleemphasis{Konstanz}, \sphinxstyleemphasis{Leipzig}, \sphinxstyleemphasis{München} as well as  \sphinxstyleemphasis{Heidelberg}, appear best rated (\([0.78 - 0.89[\), see \hyperref[\detokenize{tutorial:quantilesrating}]{Listing \ref{\detokenize{tutorial:quantilesrating}}} Line 4). Loweat\sphinxhyphen{}rated appears the average enrolment quality at the University \sphinxstyleemphasis{Duisburg} (Line 14). Midfield consists of the Universities of \sphinxstyleemphasis{Würzburg}, \sphinxstyleemphasis{TU Dresden}, \sphinxstyleemphasis{Kaiserslautern}, \sphinxstyleemphasis{Marburg}, \sphinxstyleemphasis{Berlin (FU)}, \sphinxstyleemphasis{Chemnitz}, \sphinxstyleemphasis{Köln} , \sphinxstyleemphasis{Erlangen\sphinxhyphen{}Nürnberg} and \sphinxstyleemphasis{Trier} (Lines 8\sphinxhyphen{}9). A corresponding graphviz drawing may well illustrate the rating equivalence classes.
 
 \begin{sphinxVerbatim}[commandchars=\\\{\}]
 \PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{nqr}\PYG{o}{.}\PYG{n}{exportRatingGraphViz}\PYG{p}{(}\PYG{n}{fileName}\PYG{o}{=}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{ratingResult}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{,}\PYGZbs{}
@@ -5565,18 +5567,18 @@ The average enrollment quality at the Technical University of \sphinxstyleemphas
 \noindent\sphinxincludegraphics[width=650\sphinxpxdimen]{{ratingResult}.png}
 \caption{Graphviz drawing of the 9\sphinxhyphen{}tiles rating result}\label{\detokenize{tutorial:ratingresult}}\end{figure}
 
-Considering the large amount of missing data (27\%), how confident is our rating\sphinxhyphen{}by\sphinxhyphen{}ranking result?
+Considering the large amount of missing data (168/615 = 27\%), how confident is our rating\sphinxhyphen{}by\sphinxhyphen{}ranking result?
 
 
 \subsection{Inspecting the outranking digraph}
 \label{\detokenize{tutorial:inspecting-the-outranking-digraph}}
-Let us first inspect the underlying bipolar\sphinxhyphen{}valued outranking digraph.
+Let us therfore inspect the underlying bipolar\sphinxhyphen{}valued outranking digraph.
 \sphinxSetupCaptionForVerbatim{Inspecting the outranking digraph}
 \def\sphinxLiteralBlockLabel{\label{\detokenize{tutorial:outrankings}}}
 \begin{sphinxVerbatim}[commandchars=\\\{\},numbers=left,firstnumber=1,stepnumber=1]
 \PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{k+kn}{from} \PYG{n+nn}{outrankingDigraphs} \PYG{k+kn}{import} \PYG{n}{BipolarOutrankingDigraph}
-\PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{g} \PYG{o}{=} \PYG{n}{BipolarOutrankingDigraph}\PYG{p}{(}\PYG{n}{t}\PYG{p}{)}
-\PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{g}
+\PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{dg} \PYG{o}{=} \PYG{n}{BipolarOutrankingDigraph}\PYG{p}{(}\PYG{n}{t}\PYG{p}{)}
+\PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{dg}
 \PYG{g+go}{ *\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{} Object instance description \PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}*}
 \PYG{g+go}{  Instance class       : BipolarOutrankingDigraph}
 \PYG{g+go}{  Instance name        : rel\PYGZus{}studentenSpiegel04}
@@ -5585,24 +5587,24 @@ Let us first inspect the underlying bipolar\sphinxhyphen{}valued outranking digr
 \PYG{g+go}{  Size                 : 828}
 \PYG{g+go}{  Determinateness (\PYGZpc{})  : 63.67}
 \PYG{g+go}{  Valuation domain     : [\PYGZhy{}1.00;1.00]}
-\PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{g}\PYG{o}{.}\PYG{n}{computeTransitivityDegree}\PYG{p}{(}\PYG{n}{Comments}\PYG{o}{=}\PYG{n+nb+bp}{True}\PYG{p}{)}
+\PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{dg}\PYG{o}{.}\PYG{n}{computeTransitivityDegree}\PYG{p}{(}\PYG{n}{Comments}\PYG{o}{=}\PYG{n+nb+bp}{True}\PYG{p}{)}
 \PYG{g+go}{ Transitivity degree of digraph \PYGZlt{}rel\PYGZus{}studentenSpiegel04\PYGZgt{}:}
 \PYG{g+go}{  \PYGZsh{}triples x\PYGZgt{}y\PYGZgt{}z: 57837, \PYGZsh{}closed: 30714, \PYGZsh{}open: 27123}
 \PYG{g+go}{  (\PYGZsh{}closed/\PYGZsh{}triples) =  0.531}
-\PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} } \PYG{n}{g}\PYG{o}{.}\PYG{n}{computeSymmetryDegree}\PYG{p}{(}\PYG{n}{Comments}\PYG{o}{=}\PYG{n+nb+bp}{True}\PYG{p}{)}
+\PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} } \PYG{n}{dg}\PYG{o}{.}\PYG{n}{computeSymmetryDegree}\PYG{p}{(}\PYG{n}{Comments}\PYG{o}{=}\PYG{n+nb+bp}{True}\PYG{p}{)}
 \PYG{g+go}{ Symmetry degree of digraph \PYGZlt{}rel\PYGZus{}studentenSpiegel04\PYGZgt{}:}
 \PYG{g+go}{  \PYGZsh{}arcs x\PYGZgt{}y: 793, \PYGZsh{}symmetric: 35, \PYGZsh{}asymmetric: 758}
 \PYG{g+go}{  \PYGZsh{}arcs/\PYGZsh{}symmetric =  0.044}
 \end{sphinxVerbatim}
 
-The bipolar\sphinxhyphen{}valued outranking digraph obtained with the given performance tableau \sphinxstyleemphasis{t} (see \hyperref[\detokenize{tutorial:stspperftab}]{Listing \ref{\detokenize{tutorial:stspperftab}}}) shows 828 validated pairwise outranking situations between the Universities (see \hyperref[\detokenize{tutorial:outrankings}]{Listing \ref{\detokenize{tutorial:outrankings}}} Line 9). Unfortunately, the transitivity of the outranking digraph is far from being satisfied: nearly half of the transitive closure is missing (Line 15). Despite the rather large preference discrimination threshold we have assumed, there does not occur many indifference situations (Line 19).
+The bipolar\sphinxhyphen{}valued outranking digraph \sphinxstyleemphasis{dg}, obtained with the given performance tableau \sphinxstyleemphasis{t} (see \hyperref[\detokenize{tutorial:stspperftab}]{Listing \ref{\detokenize{tutorial:stspperftab}}}), shows 828 validated pairwise outranking situations between the Universities (see \hyperref[\detokenize{tutorial:outrankings}]{Listing \ref{\detokenize{tutorial:outrankings}}} Line 9). Unfortunately, the transitivity of digraph \sphinxstyleemphasis{dg} is far from being satisfied: nearly half of the transitive closure is missing (Line 15). Despite the rather large preference discrimination threshold we have assumed (0.5, see \hyperref[\detokenize{tutorial:spiegelcriteria}]{Fig.\@ \ref{\detokenize{tutorial:spiegelcriteria}}}), there does not occur many indifference situations (Line 19).
 
 We may furthermore check if there exists any \sphinxstyleemphasis{cyclic} outranking situations.
 \sphinxSetupCaptionForVerbatim{Computing the chordlessCircuits}
 \def\sphinxLiteralBlockLabel{\label{\detokenize{tutorial:chordlesscircuits}}}
 \begin{sphinxVerbatim}[commandchars=\\\{\},numbers=left,firstnumber=1,stepnumber=1]
-\PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{g}\PYG{o}{.}\PYG{n}{computeChordlessCircuits}\PYG{p}{(}\PYG{p}{)}
-\PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{g}\PYG{o}{.}\PYG{n}{showChordlessCircuits}\PYG{p}{(}\PYG{p}{)}
+\PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{dg}\PYG{o}{.}\PYG{n}{computeChordlessCircuits}\PYG{p}{(}\PYG{p}{)}
+\PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{dg}\PYG{o}{.}\PYG{n}{showChordlessCircuits}\PYG{p}{(}\PYG{p}{)}
 \PYG{g+go}{ *\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{} Chordless circuits \PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}*}
 \PYG{g+go}{  93 circuits.}
 \PYG{g+go}{   1:  [\PYGZsq{}aach\PYGZsq{}, \PYGZsq{}bie\PYGZsq{}, \PYGZsq{}darm\PYGZsq{}, \PYGZsq{}brau\PYGZsq{}] , credibility : 0.067}
@@ -5625,14 +5627,14 @@ We may furthermore check if there exists any \sphinxstyleemphasis{cyclic} outran
 \PYG{g+go}{  93:  [\PYGZsq{}mnh\PYGZsq{}, \PYGZsq{}mu\PYGZsq{}, \PYGZsq{}stu\PYGZsq{}] , credibility : 0.133}
 \end{sphinxVerbatim}
 
-Here we observe indeed 93 such outranking circuits, like: \sphinxstyleemphasis{Berlin Humboldt} \textgreater{}= \sphinxstyleemphasis{Konstanz} \textgreater{}= \sphinxstyleemphasis{München} \textgreater{}= \sphinxstyleemphasis{Berlin Humboldt} (see \hyperref[\detokenize{tutorial:chordlesscircuits}]{Listing \ref{\detokenize{tutorial:chordlesscircuits}}} circuit 29 above). With the \sphinxstyleemphasis{Copeland} ranking rule, they appear in fact respectively at rank 8, 3 and 5 (see (\hyperref[\detokenize{tutorial:ninetiledheatmap}]{Fig.\@ \ref{\detokenize{tutorial:ninetiledheatmap}}}).
+Here we observe indeed 93 such outranking circuits, like: \sphinxstyleemphasis{Berlin Humboldt} \textgreater{}= \sphinxstyleemphasis{Konstanz} \textgreater{}= \sphinxstyleemphasis{München} \textgreater{}= \sphinxstyleemphasis{Berlin Humboldt} (see \hyperref[\detokenize{tutorial:chordlesscircuits}]{Listing \ref{\detokenize{tutorial:chordlesscircuits}}} circuit 29 above). In the \sphinxstyleemphasis{Copeland} ranking (see \hyperref[\detokenize{tutorial:ninetiledheatmap}]{Fig.\@ \ref{\detokenize{tutorial:ninetiledheatmap}}}), they appear in fact respectively at rank 10, 4 and 6.
 
-The occurrence of so many outranking circuits makes any \sphinxstyleemphasis{forced} linear ranking doubtful, independently of the specific ranking rule we might apply. To check the quality of the previous rating\sphinxhyphen{}by\sphinxhyphen{}ranking result, we shall now compute a direct quantiles sorting of the enrollment quality scores without using any ranking rule (see tutorial on rating with incommensurable criteria).
+The occurrence of so many outranking circuits, now, makes any \sphinxstyleemphasis{forced} linear ranking doubtful, independently of the specific ranking rule we might apply. To check the quality of the previous rating\sphinxhyphen{}by\sphinxhyphen{}ranking result, we shall therefore compute a direct sorting into quantiles of the enrolment quality scores, without using any ranking rule (see tutorial on {\hyperref[\detokenize{tutorial:quantilesrating-tutorial-label}]{\sphinxcrossref{\DUrole{std,std-ref}{rating with incommensurable criteria}}}} (\autopageref*{\detokenize{tutorial:quantilesrating-tutorial-label}})).
 
 
 \subsection{Rating\sphinxhyphen{}by\sphinxhyphen{}sorting}
 \label{\detokenize{tutorial:rating-by-sorting}}
-For this \sphinxstyleemphasis{rating\sphinxhyphen{}by\sphinxhyphen{}sorting} approach we are using the \sphinxcode{\sphinxupquote{sortingDigrahs.QuantilesSortingDigraph}} constructor.
+For this \sphinxstyleemphasis{rating\sphinxhyphen{}by\sphinxhyphen{}sorting} approach we are going to use the \sphinxcode{\sphinxupquote{sortingDigrahs.QuantilesSortingDigraph}} constructor.
 \sphinxSetupCaptionForVerbatim{Computing the 9\sphinxhyphen{}tiles sorting}
 \def\sphinxLiteralBlockLabel{\label{\detokenize{tutorial:ninetilessorting}}}
 \begin{sphinxVerbatim}[commandchars=\\\{\},numbers=left,firstnumber=1,stepnumber=1]
@@ -5683,7 +5685,7 @@ For this \sphinxstyleemphasis{rating\sphinxhyphen{}by\sphinxhyphen{}sorting} app
 \PYG{g+go}{ [0.44 \PYGZhy{} 0.56[: wrzb with credibility: 0.13 = min(0.20,0.13)}
 \end{sphinxVerbatim}
 
-In \hyperref[\detokenize{tutorial:ninetilessorting}]{Listing \ref{\detokenize{tutorial:ninetilessorting}}} Line 5, we notice that the Higher Technical School of \sphinxstyleemphasis{Aachen} is rated precisely into the second 9\sphinxhyphen{}tile class (\([0.22 - 0.33[\)), whereas the University of \sphinxstyleemphasis{Augsburg} is less precisely rated into the fourth, the fifth and the 6th 9\sphinxhyphen{}tile classes (\([0.44 - 0.78[\)). The Technical University \sphinxstyleemphasis{München} appears best rated into the highest 9\sphinxhyphen{}tiles class (\([0.89 - <[\)). All three rating results are supported by a 53.5\% majority of disciplines %
+In \hyperref[\detokenize{tutorial:ninetilessorting}]{Listing \ref{\detokenize{tutorial:ninetilessorting}}} Line 5, we notice that the \sphinxstyleemphasis{RWTH Aachen} is rated precisely into the second 9\sphinxhyphen{}tile class (\([0.22 - 0.33[\)), whereas the University of \sphinxstyleemphasis{Augsburg} is less precisely rated into the fourth, the fifth and the 6th 9\sphinxhyphen{}tile classes (\([0.44 - 0.78[\)). \sphinxstyleemphasis{TU München} appears best rated into the highest 9\sphinxhyphen{}tiles class (\([0.89 - <[\)). All three rating results are supported by a 53.5\% majority of disciplines %
 \begin{footnote}[31]\sphinxAtStartFootnote
 Converted from a bipolar\sphinxhyphen{}valued credibility 0.07 to a majority significance: (1.0 + 0.07)/2 = 0.535.
 %
@@ -5702,7 +5704,7 @@ We may now lexicographically rank these individual rating results by \sphinxstyl
 \noindent\sphinxincludegraphics[width=400\sphinxpxdimen]{{nineTilingOrdering}.png}
 \caption{The 9\sphinxhyphen{}tiles sorting result ordered by average rating limits}\label{\detokenize{tutorial:ninetilingordering}}\end{figure}
 
-In \hyperref[\detokenize{tutorial:ninetilingordering}]{Fig.\@ \ref{\detokenize{tutorial:ninetilingordering}}} we may notice, for instance, that the Universities \sphinxstyleemphasis{Augsburg}, \sphinxstyleemphasis{Saarbrücken} and \sphinxstyleemphasis{Tübingen} show the same average rating of 0.615, yet the rated high 9\sphinxhyphen{}tile limit for \sphinxstyleemphasis{Augsburg} is higher (0.78) than the one of both the other Universities (0.67).
+In \hyperref[\detokenize{tutorial:ninetilingordering}]{Fig.\@ \ref{\detokenize{tutorial:ninetilingordering}}} we see that the Universities \sphinxstyleemphasis{Augsburg}, \sphinxstyleemphasis{Saarbrücken} and \sphinxstyleemphasis{Tübingen} show the same average rating of 0.615, yet the rated high 9\sphinxhyphen{}tile limit for \sphinxstyleemphasis{Augsburg} is higher (0.78) than the one of both the other Universities (0.67).
 
 The eventual 9\sphinxhyphen{}tiles sorting result may be furthermore illustrated with a graphviz drawing of the corresponding \sphinxcode{\sphinxupquote{QuantilesSorting}} digraph instance \sphinxstyleemphasis{qs}.
 
@@ -5721,10 +5723,12 @@ The eventual 9\sphinxhyphen{}tiles sorting result may be furthermore illustrated
 \noindent\sphinxincludegraphics[width=650\sphinxpxdimen]{{nineTilingDrawing}.png}
 \caption{Graphviz drawing of the 9\sphinxhyphen{}tiles sorting digraph}\label{\detokenize{tutorial:ninetilingdrawing}}\end{figure}
 
+Here we obtain the skeleton of a partial ranking, where the same Universities as with the previous \sphinxstyleemphasis{rating\sphinxhyphen{}by\sphinxhyphen{}ranking} approach, namely \sphinxstyleemphasis{TU München}, \sphinxstyleemphasis{Freiburg}, \sphinxstyleemphasis{Konstanz}, \sphinxstyleemphasis{Stuttgart}, \sphinxstyleemphasis{Berlin Humboldt}, \sphinxstyleemphasis{Heidelberg} and \sphinxstyleemphasis{Leipzig} appear top\sphinxhyphen{}rated. Similarly, the Universities of \sphinxstyleemphasis{Duisburg}, \sphinxstyleemphasis{Hanover}, \sphinxstyleemphasis{Bochum}, \sphinxstyleemphasis{Giessen}, \sphinxstyleemphasis{Düsseldorf} and \sphinxstyleemphasis{Bielefeld} give the lowest\sphinxhyphen{}rated group. The midfield here is also showing the same Universities as with the \sphinxstyleemphasis{rating\sphinxhyphen{}by\sphinxhyphen{}ranking} approach.
+
 
 \subsection{To conclude}
 \label{\detokenize{tutorial:to-conclude}}
-In the end, both the \sphinxstyleemphasis{rating\sphinxhyphen{}by\sphinxhyphen{}ranking}, as well as the \sphinxstyleemphasis{rating\sphinxhyphen{}by\sphinxhyphen{}sorting} show very similar results. The first approach, with its forced linear ranking, gives an apparent \sphinxstyleemphasis{precisely determined} rating result, whereas the \sphinxstyleemphasis{rating\sphinxhyphen{}by\sphinxhyphen{}sorting} leads to a less preciser but \sphinxstyleemphasis{prudent} individual University enrollment quality rating, supported with a known majority of disciplines; a result, yet, much less easy to communicate and interpret.
+In the end, both the \sphinxstyleemphasis{rating\sphinxhyphen{}by\sphinxhyphen{}ranking}, as well as the \sphinxstyleemphasis{rating\sphinxhyphen{}by\sphinxhyphen{}sorting} show very similar results. The first approach, with its \sphinxstyleemphasis{forced} linear ranking, gives on the one hand, \sphinxstyleemphasis{precisely determined} rating equivalence classes. The \sphinxstyleemphasis{rating\sphinxhyphen{}by\sphinxhyphen{}sorting} approach, on the other hand, gives for each individual University a \sphinxstyleemphasis{prudent} but less precise rating, supported with a known majority of disciplines; a global rating result, yet, much less easy to communicate and interpret.
 
 Back to {\hyperref[\detokenize{tutorial:tutorial-label}]{\sphinxcrossref{\DUrole{std,std-ref}{Content Table}}}} (\autopageref*{\detokenize{tutorial:tutorial-label}})
 
@@ -6316,7 +6320,7 @@ Let us inspect the 21 marginal performances of the five best\sphinxhyphen{}ranke
 
 The given ranking problem involves 8 criteria assessing the economic performances, 7 criteria assessing the societal performances and 6 criteria assessing the environmental performances of the decision alternatives. The sum of criteria significance weights (336) is the same for all three decision objectives. The five best\sphinxhyphen{}ranked alternatives are, in decreasing order: \#773909, \#668947, \#567308, \#578560 and \#426464.
 
-Their random performance evaluations were obviously drawn on all criteria with a \sphinxstyleemphasis{good} (+) performance profile, i.e. a Beta(\sphinxstyleemphasis{alpha} = 5.8661, \sphinxstyleemphasis{beta} = 2.62203) law (see the tutorial {\hyperref[\detokenize{tutorial:randomperformancetableau-tutorial-label}]{\sphinxcrossref{\DUrole{std,std-ref}{Generating random performance tableaux}}}} (\autopageref*{\detokenize{tutorial:randomperformancetableau-tutorial-label}})).
+Their random performance evaluations were obviously drawn on all criteria with a \sphinxstyleemphasis{good} (+) performance profile, i.e. a Beta(\sphinxstyleemphasis{alpha} = 5.8661, \sphinxstyleemphasis{beta} = 2.62203) law (see the tutorial {\hyperref[\detokenize{tutorial:randomperformancetableau-tutorial-label}]{\sphinxcrossref{\DUrole{std,std-ref}{generating random performance tableaux}}}} (\autopageref*{\detokenize{tutorial:randomperformancetableau-tutorial-label}})).
 
 \begin{sphinxVerbatim}[commandchars=\\\{\},numbers=left,firstnumber=1,stepnumber=1]
 \PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{k}{for} \PYG{n}{x} \PYG{o+ow}{in} \PYG{n}{qr}\PYG{o}{.}\PYG{n}{boostedRanking}\PYG{p}{[}\PYG{p}{:}\PYG{l+m+mi}{5}\PYG{p}{]}\PYG{p}{:}
@@ -7090,7 +7094,7 @@ Back to {\hyperref[\detokenize{tutorial:tutorial-label}]{\sphinxcrossref{\DUrole
 \label{\detokenize{tutorial:what-is-a-graph-kernel}}
 We call \sphinxstylestrong{choice} in a graph, respectively a digraph, a subset of its vertices, resp. of its nodes or actions. A choice \sphinxstyleemphasis{Y} is called \sphinxstylestrong{internally stable} or \sphinxstylestrong{independent} when there exist \sphinxstylestrong{no links} (edges) or relations (arcs) between its members. Furthermore, a choice \sphinxstyleemphasis{Y} is called \sphinxstylestrong{externally stable} when for each vertex, node or action \sphinxstyleemphasis{x} not in \sphinxstyleemphasis{Y}, there exists at least a member \sphinxstyleemphasis{y} of \sphinxstyleemphasis{Y} such that \sphinxstyleemphasis{x} is linked or related to \sphinxstyleemphasis{y}. Now, an internally \sphinxstylestrong{and} externally stable choice is called a \sphinxstylestrong{kernel}.
 
-A first trivial example is immediately given by the maximal independent vertices sets (MISs) of the n\sphinxhyphen{}cycle graph (see {\hyperref[\detokenize{tutorial:isomorphicmis-tutorial-label}]{\sphinxcrossref{\DUrole{std,std-ref}{Computing the non isomorphic MISs of the 12\sphinxhyphen{}cycle graph}}}} (\autopageref*{\detokenize{tutorial:isomorphicmis-tutorial-label}})). Indeed, each MIS in the n\sphinxhyphen{}cycle graph is by definition independent, i.e. internally stable, and each non selected vertex in the n\sphinxhyphen{}cycle graph is in relation with either one or even two members of the MIS. See, for instance, the four non isomorphic MISs of the 12\sphinxhyphen{}cycle graph as shown in \hyperref[\detokenize{tutorial:misc12}]{Fig.\@ \ref{\detokenize{tutorial:misc12}}}.
+A first trivial example is immediately given by the maximal independent vertices sets (MISs) of the n\sphinxhyphen{}cycle graph (see tutorial on {\hyperref[\detokenize{tutorial:isomorphicmis-tutorial-label}]{\sphinxcrossref{\DUrole{std,std-ref}{computing isomorphic choices}}}} (\autopageref*{\detokenize{tutorial:isomorphicmis-tutorial-label}})). Indeed, each MIS in the n\sphinxhyphen{}cycle graph is by definition independent, i.e. internally stable, and each non selected vertex in the n\sphinxhyphen{}cycle graph is in relation with either one or even two members of the MIS. See, for instance, the four non isomorphic MISs of the 12\sphinxhyphen{}cycle graph as shown in \hyperref[\detokenize{tutorial:misc12}]{Fig.\@ \ref{\detokenize{tutorial:misc12}}}.
 
 In all graph or symmetric digraph, the \sphinxstyleemphasis{maximality condition} imposed on the internal stability is equivalent to the external stability condition. Indeed, if there would exist a vertex or node not related to any of the elements of a choice, then we may safely add this vertex or node to the given choice without violating its internal stability. All kernels must hence be maximal independent choices. In fact, in a topological sense, they correspond to maximal \sphinxstylestrong{holes} in the given graph.
 
@@ -7550,7 +7554,7 @@ Among the six MISs contained in this random digraph (see above Lines 3\sphinxhyp
 \caption{A random digraph oriented by best covering initial and
 best covered terminal kernel}\label{\detokenize{tutorial:orientedlaterality}}\end{figure}
 
-In algorithmic decision theory, initial and terminal prekernels may provide convincing best, resp. worst, choice recommendations (see {\hyperref[\detokenize{tutorial:rubis-tutorial-label}]{\sphinxcrossref{\DUrole{std,std-ref}{Computing a best choice recommendation}}}} (\autopageref*{\detokenize{tutorial:rubis-tutorial-label}})).
+In algorithmic decision theory, initial and terminal prekernels may provide convincing best, resp. worst, choice recommendations (see tutorial on {\hyperref[\detokenize{tutorial:rubis-tutorial-label}]{\sphinxcrossref{\DUrole{std,std-ref}{computing a best choice recommendation}}}} (\autopageref*{\detokenize{tutorial:rubis-tutorial-label}})).
 
 
 \subsection{Computing good and bad choice recommendations}
@@ -7660,7 +7664,7 @@ In \hyperref[\detokenize{tutorial:bestworstorientation}]{Fig.\@ \ref{\detokenize
 \noindent\sphinxincludegraphics[width=300\sphinxpxdimen]{{bestWorstOrientation}.png}
 \caption{The strict outranking digraph oriented by its best and worst choice recommendations}\label{\detokenize{tutorial:bestworstorientation}}\end{figure}
 
-The gray arrows in \hyperref[\detokenize{tutorial:bestworstorientation}]{Fig.\@ \ref{\detokenize{tutorial:bestworstorientation}}}, like the one between actions ‘a4’ and ‘a1’, represent indeterminate preferential situations. Action ‘a1’ appears hence to be rather incomparable to all the other, except action ‘a7’. It may be interesting to compare this result with a \sphinxstyleemphasis{Copeland} ranking of the underlying performance tableau (see {\hyperref[\detokenize{tutorial:ranking-tutorial-label}]{\sphinxcrossref{\DUrole{std,std-ref}{Ranking with multiple incommensurable criteria}}}} (\autopageref*{\detokenize{tutorial:ranking-tutorial-label}})).
+The gray arrows in \hyperref[\detokenize{tutorial:bestworstorientation}]{Fig.\@ \ref{\detokenize{tutorial:bestworstorientation}}}, like the one between actions ‘a4’ and ‘a1’, represent indeterminate preferential situations. Action ‘a1’ appears hence to be rather incomparable to all the other, except action ‘a7’. It may be interesting to compare this result with a \sphinxstyleemphasis{Copeland} ranking of the underlying performance tableau (see the tutorial on {\hyperref[\detokenize{tutorial:ranking-tutorial-label}]{\sphinxcrossref{\DUrole{std,std-ref}{ranking with uncommensurable criteria}}}} (\autopageref*{\detokenize{tutorial:ranking-tutorial-label}})).
 
 \begin{sphinxVerbatim}[commandchars=\\\{\},numbers=left,firstnumber=1,stepnumber=1]
 \PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{g}\PYG{o}{.}\PYG{n}{showHTMLPerformanceHeatmap}\PYG{p}{(}\PYG{n}{colorLevels}\PYG{o}{=}\PYG{l+m+mi}{5}\PYG{p}{,} \PYG{n}{ndigits}\PYG{o}{=}\PYG{l+m+mi}{0}\PYG{p}{,}
@@ -8241,7 +8245,7 @@ We will first \sphinxstylestrong{fuse} both \sphinxstyleemphasis{og} and \sphinx
 \PYG{g+go}{ [\PYGZsq{}v5\PYGZsq{}, \PYGZsq{}v7\PYGZsq{}, \PYGZsq{}v1\PYGZsq{}, \PYGZsq{}v6\PYGZsq{}, \PYGZsq{}v8\PYGZsq{}, \PYGZsq{}v4\PYGZsq{}, \PYGZsq{}v3\PYGZsq{}, \PYGZsq{}v2\PYGZsq{}]}
 \end{sphinxVerbatim}
 
-We obtain by the \sphinxstyleemphasis{Copeland} ranking rule (see {\hyperref[\detokenize{tutorial:ranking-tutorial-label}]{\sphinxcrossref{\DUrole{std,std-ref}{Ranking with multiple incommensurable criteria}}}} (\autopageref*{\detokenize{tutorial:ranking-tutorial-label}}) and the \sphinxcode{\sphinxupquote{digraphs.Digraph.computeCopelandRanking()}} method) a linear ordering of the vertices (see \hyperref[\detokenize{tutorial:fusingorientations}]{Listing \ref{\detokenize{tutorial:fusingorientations}}} Line 5 above).
+We obtain by the \sphinxstyleemphasis{Copeland} ranking rule (see tutorial on {\hyperref[\detokenize{tutorial:ranking-tutorial-label}]{\sphinxcrossref{\DUrole{std,std-ref}{ranking with incommensurable criteria}}}} (\autopageref*{\detokenize{tutorial:ranking-tutorial-label}}) and the \sphinxcode{\sphinxupquote{digraphs.Digraph.computeCopelandRanking()}} method) a linear ordering of the vertices (see \hyperref[\detokenize{tutorial:fusingorientations}]{Listing \ref{\detokenize{tutorial:fusingorientations}}} Line 5 above).
 
 We reverse now the orientation of the edges in \sphinxstyleemphasis{og} (see \sphinxstyleemphasis{\sphinxhyphen{}og} in Line 1 below) in order to generate, again by \sphinxstyleemphasis{disjunctive fusion}, the \sphinxstyleemphasis{inversions} that are produced by the permutation we are looking for. Computing again a ranking with the \sphinxstyleemphasis{Copeland} rule, will show the correspondingly permuted list of vertices (see Line 4 below).
 

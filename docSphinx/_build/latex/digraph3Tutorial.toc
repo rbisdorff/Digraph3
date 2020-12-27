@@ -73,9 +73,9 @@
 \contentsline {subsection}{\numberline {11.3}Inspecting the outranking digraph}{129}{subsection.11.3}%
 \contentsline {subsection}{\numberline {11.4}Rating\sphinxhyphen {}by\sphinxhyphen {}sorting}{130}{subsection.11.4}%
 \contentsline {subsection}{\numberline {11.5}To conclude}{133}{subsection.11.5}%
-\contentsline {section}{\numberline {12}HPC ranking with big outranking digraphs}{133}{section.12}%
+\contentsline {section}{\numberline {12}HPC ranking with big outranking digraphs}{134}{section.12}%
 \contentsline {subsection}{\numberline {12.1}C\sphinxhyphen {}compiled Python modules}{134}{subsection.12.1}%
-\contentsline {subsection}{\numberline {12.2}Big Data performance tableaux}{134}{subsection.12.2}%
+\contentsline {subsection}{\numberline {12.2}Big Data performance tableaux}{135}{subsection.12.2}%
 \contentsline {subsection}{\numberline {12.3}C\sphinxhyphen {}implemented integer\sphinxhyphen {}valued outranking digraphs}{136}{subsection.12.3}%
 \contentsline {subsection}{\numberline {12.4}The sparse outranking digraph implementation}{138}{subsection.12.4}%
 \contentsline {subsection}{\numberline {12.5}Ranking big sets of decision alternatives}{142}{subsection.12.5}%
