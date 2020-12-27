@@ -4399,7 +4399,7 @@ We add, now, these nine-tiling score limits to the 41 Universities and, with the
 
    Heatmap view of the 9-tiles rating result
 
-Most correlated disciplines with the *Copeland* ranking appear to be *German Studies* (+0.44), *Chemistry* (+0.41), "Management* (+0.39) and *Physics* (+0.39). Due to the abundant missing data, both *Electrical* (+0.07) and *Mechanical Engineering* (+0.05) are the less correlated disciplines (see :numref:`ninetiledHeatmap` Row 3).
+Most correlated disciplines with the *Copeland* ranking appear to be *German Studies* (+0.51), *Chemistry* (+0.48), "Management* (+0.47) and *Physics* (+0.46). Both *Electrical* (+0.07) and *Mechanical Engineering* (+0.05) are the less correlated disciplines (see :numref:`ninetiledHeatmap` Row 3).
 
 From the actual ranking position of the 9-tile class limits, we may now immediately deduce the 9-tiles quality equivalence classes. No University reaches the highest 9-tile class (:math:`[0.89 - [`). In the lowest 9-tile (:math:`[0.00- 0.11]`) we find *Duisburg*. The complete rating result can be easily printed as follows.
 
@@ -4562,9 +4562,9 @@ For this *rating-by-sorting* approach we are using the :py:class:`sortingDigrahs
     [0.89 - <[: tum with credibility: 0.07 = min(0.07,1.00)
     [0.44 - 0.56[: wrzb with credibility: 0.13 = min(0.20,0.13)
 
-In :numref:`nineTilesSorting` Line 5, we may notice that the Higher Technical School of *Aachen* is rated precisely into the second 9-tile class (:math:`[0.22 - 0.33[`) with the support of a 53.5% majority of disciplines [31]_, whereas the University of *Augsburg* is less precisely rated into the fourth until the second highest 9-tile classes (:math:`[0.44 - 0.78[`) yet, with the support of a 63.5% majority of disciplines. The Technical University *München* appears best rated into the highest 9-tiles class (:math:`[0.89 - <[`) with the support of a 56.5% of disciplines.
+In :numref:`nineTilesSorting` Line 5, we notice that the Higher Technical School of *Aachen* is rated precisely into the second 9-tile class (:math:`[0.22 - 0.33[`), whereas the University of *Augsburg* is less precisely rated into the fourth, the fifth and the 6th 9-tile classes (:math:`[0.44 - 0.78[`). The Technical University *München* appears best rated into the highest 9-tiles class (:math:`[0.89 - <[`). All three rating results are supported by a 53.5% majority of disciplines [31]_,
 
-We may now lexicographically order this rating result by *average rated class limits* and highest-rated 9-tile class limit.
+We may now lexicographically rank these individual rating results by *average rated class limits* and highest-rated 9-tile class limit.
 
 >>> qs.showHTMLQuantileOrdering(strategy='average')
 
@@ -4573,11 +4573,11 @@ We may now lexicographically order this rating result by *average rated class li
    :width: 400 px
    :align: center
 
-   Ordering the 9-tiles sorting by average rating limits
+   The 9-tiles sorting result ordered by average rating limits
 
 In :numref:`nineTilingOrdering` we may notice, for instance, that the Universities *Augsburg*, *Saarbrücken* and *Tübingen* show the same average rating of 0.615, yet the rated high 9-tile limit for *Augsburg* is higher (0.78) than the one of both the other Universities (0.67). 
 
-The eventual preordered 9-tiles sorting result may be furthermore illustrated with a graphviz drawing of the corresponding :code:`QuantilesSorting` digraph instance *qs*.
+The eventual 9-tiles sorting result may be furthermore illustrated with a graphviz drawing of the corresponding :code:`QuantilesSorting` digraph instance *qs*.
 
    >>> qs.exportGraphViz('nineTilingDrawing',graphSize='12,12')
     *---- exporting a dot file for GraphViz tools ---------*

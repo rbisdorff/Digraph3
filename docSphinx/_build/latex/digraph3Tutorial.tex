@@ -58,7 +58,7 @@
 
 
 \title{Tutorials for the Digraph3 Python software resources}
-\date{December 26, 2020}
+\date{December 27, 2020}
 \release{3.9.0}
 \author{Raymond Bisdorff}
 \newcommand{\sphinxlogo}{\sphinxincludegraphics{introDoc3.png}\par}
@@ -5526,7 +5526,7 @@ We add, now, these nine\sphinxhyphen{}tiling score limits to the 41 Universities
 \noindent\sphinxincludegraphics[width=650\sphinxpxdimen]{{nineTilingResult}.png}
 \caption{Heatmap view of the 9\sphinxhyphen{}tiles rating result}\label{\detokenize{tutorial:ninetiledheatmap}}\end{figure}
 
-Most correlated disciplines with the \sphinxstyleemphasis{Copeland} ranking appear to be \sphinxstyleemphasis{German Studies} (+0.44), \sphinxstyleemphasis{Chemistry} (+0.41), “Management* (+0.39) and \sphinxstyleemphasis{Physics} (+0.39). Due to the abundant missing data, both \sphinxstyleemphasis{Electrical} (+0.07) and \sphinxstyleemphasis{Mechanical Engineering} (+0.05) are the less correlated disciplines (see \hyperref[\detokenize{tutorial:ninetiledheatmap}]{Fig.\@ \ref{\detokenize{tutorial:ninetiledheatmap}}} Row 3).
+Most correlated disciplines with the \sphinxstyleemphasis{Copeland} ranking appear to be \sphinxstyleemphasis{German Studies} (+0.51), \sphinxstyleemphasis{Chemistry} (+0.48), “Management* (+0.47) and \sphinxstyleemphasis{Physics} (+0.46). Both \sphinxstyleemphasis{Electrical} (+0.07) and \sphinxstyleemphasis{Mechanical Engineering} (+0.05) are the less correlated disciplines (see \hyperref[\detokenize{tutorial:ninetiledheatmap}]{Fig.\@ \ref{\detokenize{tutorial:ninetiledheatmap}}} Row 3).
 
 From the actual ranking position of the 9\sphinxhyphen{}tile class limits, we may now immediately deduce the 9\sphinxhyphen{}tiles quality equivalence classes. No University reaches the highest 9\sphinxhyphen{}tile class (\([0.89 - [\)). In the lowest 9\sphinxhyphen{}tile (\([0.00- 0.11]\)) we find \sphinxstyleemphasis{Duisburg}. The complete rating result can be easily printed as follows.
 \sphinxSetupCaptionForVerbatim{Rating the Universities into enrollment quality 9\sphinxhyphen{}tiles}
@@ -5683,13 +5683,13 @@ For this \sphinxstyleemphasis{rating\sphinxhyphen{}by\sphinxhyphen{}sorting} app
 \PYG{g+go}{ [0.44 \PYGZhy{} 0.56[: wrzb with credibility: 0.13 = min(0.20,0.13)}
 \end{sphinxVerbatim}
 
-In \hyperref[\detokenize{tutorial:ninetilessorting}]{Listing \ref{\detokenize{tutorial:ninetilessorting}}} Line 5, we may notice that the Higher Technical School of \sphinxstyleemphasis{Aachen} is rated precisely into the second 9\sphinxhyphen{}tile class (\([0.22 - 0.33[\)) with the support of a 53.5\% majority of disciplines %
+In \hyperref[\detokenize{tutorial:ninetilessorting}]{Listing \ref{\detokenize{tutorial:ninetilessorting}}} Line 5, we notice that the Higher Technical School of \sphinxstyleemphasis{Aachen} is rated precisely into the second 9\sphinxhyphen{}tile class (\([0.22 - 0.33[\)), whereas the University of \sphinxstyleemphasis{Augsburg} is less precisely rated into the fourth, the fifth and the 6th 9\sphinxhyphen{}tile classes (\([0.44 - 0.78[\)). The Technical University \sphinxstyleemphasis{München} appears best rated into the highest 9\sphinxhyphen{}tiles class (\([0.89 - <[\)). All three rating results are supported by a 53.5\% majority of disciplines %
 \begin{footnote}[31]\sphinxAtStartFootnote
 Converted from a bipolar\sphinxhyphen{}valued credibility 0.07 to a majority significance: (1.0 + 0.07)/2 = 0.535.
 %
-\end{footnote}, whereas the University of \sphinxstyleemphasis{Augsburg} is less precisely rated into the fourth until the second highest 9\sphinxhyphen{}tile classes (\([0.44 - 0.78[\)) yet, with the support of a 63.5\% majority of disciplines. The Technical University \sphinxstyleemphasis{München} appears best rated into the highest 9\sphinxhyphen{}tiles class (\([0.89 - <[\)) with the support of a 56.5\% of disciplines.
+\end{footnote},
 
-We may now lexicographically order this rating result by \sphinxstyleemphasis{average rated class limits} and highest\sphinxhyphen{}rated 9\sphinxhyphen{}tile class limit.
+We may now lexicographically rank these individual rating results by \sphinxstyleemphasis{average rated class limits} and highest\sphinxhyphen{}rated 9\sphinxhyphen{}tile class limit.
 
 \begin{sphinxVerbatim}[commandchars=\\\{\}]
 \PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{qs}\PYG{o}{.}\PYG{n}{showHTMLQuantileOrdering}\PYG{p}{(}\PYG{n}{strategy}\PYG{o}{=}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{average}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{)}
@@ -5700,11 +5700,11 @@ We may now lexicographically order this rating result by \sphinxstyleemphasis{av
 \capstart
 
 \noindent\sphinxincludegraphics[width=400\sphinxpxdimen]{{nineTilingOrdering}.png}
-\caption{Ordering the 9\sphinxhyphen{}tiles sorting by average rating limits}\label{\detokenize{tutorial:ninetilingordering}}\end{figure}
+\caption{The 9\sphinxhyphen{}tiles sorting result ordered by average rating limits}\label{\detokenize{tutorial:ninetilingordering}}\end{figure}
 
 In \hyperref[\detokenize{tutorial:ninetilingordering}]{Fig.\@ \ref{\detokenize{tutorial:ninetilingordering}}} we may notice, for instance, that the Universities \sphinxstyleemphasis{Augsburg}, \sphinxstyleemphasis{Saarbrücken} and \sphinxstyleemphasis{Tübingen} show the same average rating of 0.615, yet the rated high 9\sphinxhyphen{}tile limit for \sphinxstyleemphasis{Augsburg} is higher (0.78) than the one of both the other Universities (0.67).
 
-The eventual preordered 9\sphinxhyphen{}tiles sorting result may be furthermore illustrated with a graphviz drawing of the corresponding \sphinxcode{\sphinxupquote{QuantilesSorting}} digraph instance \sphinxstyleemphasis{qs}.
+The eventual 9\sphinxhyphen{}tiles sorting result may be furthermore illustrated with a graphviz drawing of the corresponding \sphinxcode{\sphinxupquote{QuantilesSorting}} digraph instance \sphinxstyleemphasis{qs}.
 
 \begin{sphinxVerbatim}[commandchars=\\\{\}]
 \PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{qs}\PYG{o}{.}\PYG{n}{exportGraphViz}\PYG{p}{(}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{nineTilingDrawing}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{,}\PYG{n}{graphSize}\PYG{o}{=}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{12,12}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{)}
