@@ -4350,7 +4350,7 @@ Using the data in this performance tableau, we may now proceed first with the ra
 Rating-by-ranking
 .................
 
-We are going to rank together the Universities **and** 9-tiles average score lower-closed limits (see tutorial on `rating with learned quantile norms <Rating-Tutorial-label>` ). Therefore we need, first, to estimate these 9-tiling limits per academic discipline.
+We are going to rank together the Universities **and** 9-tiles average score lower-closed limits (see tutorial on :ref:`rating with learned quantile norms <Rating-Tutorial-label>`). Therefore we need, first, to estimate these 9-tiling limits per academic discipline.
 
 .. code-block:: pycon
    :name: performanceQuantiles
