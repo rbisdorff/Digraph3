@@ -4328,7 +4328,7 @@ The published data of the 2004 *Spiegel* student survey are stored in a file nam
 
 In :numref:`qualityScores`, the fifteen academic disciplines are grouped into *topical* 'Faculties': *Humanities*; *Law, Economics & Management*; *Life Sciences & Medicine*; *Natural Sciences & Mathematics*; and, *Technology*. All fifteen academic disciplines are considered *equally significant* for the rating decisions (see Row 2). The average enrolment quality scores are coloured along a 7-tiling scheme (see last Row).
 
-We may furthermore notice that the *TU Dresden* is the only Institution which offers all fifteen academic disciplines. Whereas, on the one side, *TU München* and *Kaiserslautern* only offer *Sciences* and *Technology* disciplines. On the other side, *Mannheim*, is only offering *Humanities* and *Law, Economics & Management* studies. Most of the 41 Universities do not offer *Engineering* studies. We are, hence, facing a large part of irreducible missing data (see the advanced topic on `coping with missing data <CopingMissing-Data-label>`). 
+We may furthermore notice that the *TU Dresden* is the only Institution which offers all fifteen academic disciplines. Whereas, on the one side, *TU München* and *Kaiserslautern* only offer *Sciences* and *Technology* disciplines. On the other side, *Mannheim*, is only offering *Humanities* and *Law, Economics & Management* studies. Most of the 41 Universities do not offer *Engineering* studies. We are, hence, facing a large part of irreducible missing data (see the advanced topic on :ref:`coping with missing data <CopingMissing-Data-label>`). 
 
 Details of the enrolment quality criteria (the academic disciplines) may be consulted in a browser view (see :numref:`spiegelCriteria` below).
 
