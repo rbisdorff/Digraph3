@@ -6,6 +6,14 @@
 # ..$ nosetests3 -vs noseTestsIntegerOutrankingDigraph.py
 # # Current $Revision: 1.8 $
 ########################
+if __name__ == '__main__':
+    from sys import platform
+    if platform == 'darwin':
+        print('start_method set to fork')
+        from multiprocessing import set_start_method, get_start_method, freeze_support
+        set_start_method('fork')
+        print(get_start_method())
+        freeze_support()
 
 #from cIntegerOutrankingDigraphs import *
 from cIntegerOutrankingDigraphs import *
@@ -13,6 +21,7 @@ from cRandPerfTabs import cRandom3ObjectivesPerformanceTableau as cR3ObjPT
 from randomPerfTabs import Random3ObjectivesPerformanceTableau as R3ObjPT
 from outrankingDigraphs import BipolarOutrankingDigraph
 from time import time
+
 
 def testcIntegerOutrankingDigraph():
     print('==>> Testing IntegerBipolarOutrankingDigraph instantiation')

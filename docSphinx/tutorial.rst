@@ -4601,7 +4601,7 @@ The partial ranking, shown here, is hence *independent* of the ordering strategy
 To conclude
 ...........
 
-In the end, both the *rating-by-ranking*, as well as the *rating-by-sorting* show very similar results. The first approach, with its *forced* linear ranking, gives on the one hand, *precisely determined* rating equivalence classes. The *rating-by-sorting* approach, on the other hand, gives for each individual University a *prudent* but less precise rating, supported with a known majority of disciplines; a global rating result, yet, much less easy to communicate and interpret.
+In the end, both the *rating-by-ranking*, as well as the *rating-by-sorting* show very similar results. The first approach, with its *forced* linear ranking, gives on the one hand, *precisely determined* rating equivalence classes. The *rating-by-sorting* approach, on the other hand, gives for each individual University a less precise but *prudent*  rating, supported with a known majority of disciplines; a global rating result, yet, much less easy to communicate and interpret.
 
 Back to :ref:`Content Table <Tutorial-label>`   
 
