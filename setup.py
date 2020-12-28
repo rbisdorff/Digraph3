@@ -1,7 +1,6 @@
 #!/usr/bin/env python3
 # browserauth installation script
 #
-
 from distutils.core import setup
 CythonInstalled = True
 try:
@@ -13,11 +12,11 @@ If you wish tu install the cythonized C-compiled modules you need to run:
 ...$ pip install cython
 from the systems console.
 """)
-    CythonInstalled = False 
+    CythonInstalled = False
 
 if CythonInstalled:
     setup(name='Digraph3',
-          version="Python3.9",
+          version="Python3.9.1",
           #version_command='svn info --show-item revision',
           py_modules=['arithmetics','digraphsTools','digraphs','perfTabs',
                       'outrankingDigraphs','performanceQuantiles',\
@@ -35,7 +34,7 @@ if CythonInstalled:
           )
 else:
     setup(name='Digraph3',
-          version="Python3.9",
+          version="Python3.9.1",
           #version_command='svn info --show-item revision',
           py_modules=['arithmetics','digraphsTools','digraphs','perfTabs',
                       'outrankingDigraphs','performanceQuantiles',\

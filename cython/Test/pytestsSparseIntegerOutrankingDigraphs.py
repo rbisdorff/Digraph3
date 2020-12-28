@@ -1,10 +1,20 @@
 #######################
 # R. Bisdorff 2016
 # cythonized OutrankingDigraphs tests for nose
-# (..$ pip3 install nose   # installing the nose test environment)
-# ..$ nosetests3 -vs noseTestsSparseOutrankingDigraph.py
+# (..$ pip3 install pytest  # installing the pytest environment)
+# ..$ pytest -vs pytestTestsSparseOutrankingDigraph.py
 # # Current $Revision: 1.8 $
 ########################
+
+if __name__ == '__main__':
+    from sys import platform
+    if platform == 'darwin':
+        print('start_method set to fork')
+        from multiprocessing import set_start_method, get_start_method, freeze_support
+        set_start_method('fork')
+        print(get_start_method())
+        freeze_support()
+
 
 from cIntegerOutrankingDigraphs import *
 from cSparseIntegerOutrankingDigraphs import *
