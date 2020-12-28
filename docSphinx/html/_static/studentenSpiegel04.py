@@ -338,7 +338,7 @@ criteria = OrderedDict([
 ('bio', {
 'shortName': 'bio',
 'name': 'Life Sciences',
-'comment': 'Lif Sciences & Medicine',
+'comment': 'Life Sciences & Medicine',
 'weight': Decimal('1.0'),
 'scale': (45.0, 65.0),
 'preferenceDirection': 'max',

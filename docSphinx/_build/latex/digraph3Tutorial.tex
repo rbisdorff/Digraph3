@@ -58,7 +58,7 @@
 
 
 \title{Tutorials for the Digraph3 Python software resources}
-\date{December 27, 2020}
+\date{December 28, 2020}
 \release{3.9.0}
 \author{Raymond Bisdorff}
 \newcommand{\sphinxlogo}{\sphinxincludegraphics{introDoc3.png}\par}
@@ -5723,7 +5723,9 @@ The eventual 9\sphinxhyphen{}tiles sorting result may be furthermore illustrated
 \noindent\sphinxincludegraphics[width=650\sphinxpxdimen]{{nineTilingDrawing}.png}
 \caption{Graphviz drawing of the 9\sphinxhyphen{}tiles sorting digraph}\label{\detokenize{tutorial:ninetilingdrawing}}\end{figure}
 
-Here we obtain the skeleton of a partial ranking, where the same Universities as with the previous \sphinxstyleemphasis{rating\sphinxhyphen{}by\sphinxhyphen{}ranking} approach, namely \sphinxstyleemphasis{TU München}, \sphinxstyleemphasis{Freiburg}, \sphinxstyleemphasis{Konstanz}, \sphinxstyleemphasis{Stuttgart}, \sphinxstyleemphasis{Berlin Humboldt}, \sphinxstyleemphasis{Heidelberg} and \sphinxstyleemphasis{Leipzig} appear top\sphinxhyphen{}rated. Similarly, the Universities of \sphinxstyleemphasis{Duisburg}, \sphinxstyleemphasis{Hanover}, \sphinxstyleemphasis{Bochum}, \sphinxstyleemphasis{Giessen}, \sphinxstyleemphasis{Düsseldorf} and \sphinxstyleemphasis{Bielefeld} give the lowest\sphinxhyphen{}rated group. The midfield here is also showing the same Universities as with the \sphinxstyleemphasis{rating\sphinxhyphen{}by\sphinxhyphen{}ranking} approach.
+In \hyperref[\detokenize{tutorial:ninetilingdrawing}]{Fig.\@ \ref{\detokenize{tutorial:ninetilingdrawing}}} we see the \sphinxstyleemphasis{skeleton} (transitive closure removed) of a partial ranking, where an oriented arc is drawn between Universities \sphinxstyleemphasis{x} and \sphinxstyleemphasis{y} when their 9\sphinxhyphen{}tiles rating intervals are disjoint and the one of \sphinxstyleemphasis{x} is higher rated than the one of \sphinxstyleemphasis{y}. The rating for \sphinxstyleemphasis{TU München}, for instance, is disjoint and higher than the one of the Universities \sphinxstyleemphasis{Freiburg} and \sphinxstyleemphasis{Konstanz}. The partial ranking, shown here, is hence \sphinxstyleemphasis{independent} of the ordering strategy: \sphinxstyleemphasis{average}, \sphinxstyleemphasis{optimistic} or \sphinxstyleemphasis{pessimistic}, of overlapping rating results.
+
+The partial ranking, thus shown in \hyperref[\detokenize{tutorial:ninetilingdrawing}]{Fig.\@ \ref{\detokenize{tutorial:ninetilingdrawing}}}, confirms that the same Universities as with the previous \sphinxstyleemphasis{rating\sphinxhyphen{}by\sphinxhyphen{}ranking} approach, namely \sphinxstyleemphasis{TU München}, \sphinxstyleemphasis{Freiburg}, \sphinxstyleemphasis{Konstanz}, \sphinxstyleemphasis{Stuttgart}, \sphinxstyleemphasis{Berlin Humboldt}, \sphinxstyleemphasis{Heidelberg} and \sphinxstyleemphasis{Leipzig} appear top\sphinxhyphen{}rated. Similarly, the Universities of \sphinxstyleemphasis{Duisburg}, \sphinxstyleemphasis{Hanover}, \sphinxstyleemphasis{Bochum}, \sphinxstyleemphasis{Giessen}, \sphinxstyleemphasis{Düsseldorf} and \sphinxstyleemphasis{Bielefeld} give the lowest\sphinxhyphen{}rated group. The midfield here is also showing more or less the same Universities as with the \sphinxstyleemphasis{rating\sphinxhyphen{}by\sphinxhyphen{}ranking} approach.
 
 
 \subsection{To conclude}

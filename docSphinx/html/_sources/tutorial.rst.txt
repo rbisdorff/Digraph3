@@ -4594,7 +4594,9 @@ The eventual 9-tiles sorting result may be furthermore illustrated with a graphv
 
    Graphviz drawing of the 9-tiles sorting digraph
 
-Here we obtain the skeleton of a partial ranking, where the same Universities as with the previous *rating-by-ranking* approach, namely *TU München*, *Freiburg*, *Konstanz*, *Stuttgart*, *Berlin Humboldt*, *Heidelberg* and *Leipzig* appear top-rated. Similarly, the Universities of *Duisburg*, *Hanover*, *Bochum*, *Giessen*, *Düsseldorf* and *Bielefeld* give the lowest-rated group. The midfield here is also showing the same Universities as with the *rating-by-ranking* approach. 
+In :numref:`nineTilingDrawing` we see the *skeleton* (transitive closure removed) of a partial ranking, where an oriented arc is drawn between Universities *x* and *y* when their 9-tiles rating intervals are disjoint and the one of *x* is higher rated than the one of *y*. The rating for *TU München*, for instance, is disjoint and higher than the one of the Universities *Freiburg* and *Konstanz*. The partial ranking, shown here, is hence *independent* of the ordering strategy: *average*, *optimistic* or *pessimistic*, of overlapping rating results.
+
+The partial ranking, thus shown in :numref:`nineTilingDrawing`, confirms that the same Universities as with the previous *rating-by-ranking* approach, namely *TU München*, *Freiburg*, *Konstanz*, *Stuttgart*, *Berlin Humboldt*, *Heidelberg* and *Leipzig* appear top-rated. Similarly, the Universities of *Duisburg*, *Hanover*, *Bochum*, *Giessen*, *Düsseldorf* and *Bielefeld* give the lowest-rated group. The midfield here is also showing more or less the same Universities as with the *rating-by-ranking* approach. 
 
 To conclude
 ...........
