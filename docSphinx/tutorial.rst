@@ -4297,16 +4297,16 @@ The best students, where do they study? A case study
 	:depth: 2
 	:local:
 
-In 2004, the German magazine *Der Spiegel*, with the help of *McKinsey & Company* and *AOL*, conducted an extensive online survey assessing the apparent quality of German University students [28]_. More than 80,000 university students, by participating, were questioned on their 'Abitur' and university exams' marks, time of studies and age, grants, awards and publications, IT proficiency, linguistic skills, practical work experience, foreign mobility and civil engagement. Each student received in return a *quality score* through a specific weighing of the collected data which depended on the discipline of the student. [29]_.
+In 2004, the German magazine *Der Spiegel*, with the help of *McKinsey & Company* and *AOL*, conducted an extensive online survey assessing the apparent quality of German University students [28]_. More than 80,000 university students, by participating, were questioned on their 'Abitur' and university exams' marks, time of studies and age, grants, awards and publications, IT proficiency, linguistic skills, practical work experience, foreign mobility and civil engagement. Each student received in return a *quality score* through a specific weighing of the collected data which depended on the subject of the student. [29]_.
 
-The eventually published results of the survey concerned nearly 50,000 students, mainly enroled in one of fifteen popular academic disciplines, like *German Studies*, *Life Sciences*, *Psychology*, *Law*  or *Computer Science*. By retaining only those discipline-University combinations, where at least 18 students had correctly filled in the questionnaire, left 41 German Universities where, for at least eight out of the fifteen disciplines, an average enrolment quality score could be determined [29]_.
+The eventually published results of the survey concerned nearly 50,000 students, mainly enroled in one of fifteen popular academic subjects, like *German Studies*, *Life Sciences*, *Psychology*, *Law*  or *Computer Science*. Retaining only those subject-University combinations, where at least 18 students had correctly filled in the questionnaire, left 41 German Universities where, for at least eight out of the fifteen subjects, an average enrolment quality score could be determined [29]_.
 
-Bases on this survey data, we would like now to compute and illustrate the apparent global *enrolment quality* of these 41 German higher education institutions.
+Based on this surveyed data, we would like now to evaluate in this tutorial the apparent global *enrolment quality* of these 41 German higher education institutions.
 
 The performance tableau
 .......................
 
-Published data of the 2004 *Spiegel* student survey are stored, for our purpose here, in a file named `studentenSpiegel04.py <_static/studentenSpiegel04.py>`_ of :py:class:`perfTabs.PerformanceTableau` format [32]_.
+Published data of the 2004 *Spiegel* student survey are stored, for our evaluation purpose here, in a file named `studentenSpiegel04.py <_static/studentenSpiegel04.py>`_ of :py:class:`perfTabs.PerformanceTableau` format [32]_.
 
 .. code-block:: pycon
    :name: stSpPerfTab
@@ -4319,8 +4319,8 @@ Published data of the 2004 *Spiegel* student survey are stored, for our purpose 
     *------- PerformanceTableau instance description ------*
      Instance class    : PerformanceTableau
      Instance name     : studentenSpiegel04
-     # Actions         : 41
-     # Criteria        : 15
+     # Actions         : 41 (Universities)
+     # Criteria        : 15 (academic subjects)
      NA proportion (%) : 27.3
      Attributes        : ['name', 'actions', 'objectives',
                           'criteria', 'weightPreorder',
@@ -4334,13 +4334,13 @@ Published data of the 2004 *Spiegel* student survey are stored, for our purpose 
    :width: 600px
    :alt: Average quality scores of German University Students
 
-   Quality of enroled students per academic discipline
+   Quality of enroled students per academic subject
 
-In :numref:`qualityScores`, the popular fifteen academic disciplines are grouped into topical '*Faculties*': - *Humanities*; - *Law, Economics & Management*; - *Life Sciences & Medicine*; - *Natural Sciences & Mathematics*; and - *Technology*. All fifteen disciplines are considered *equally significant* for our rating  problem (see Row 2). The average enrolment quality scores appear coloured along a 7-tiling scheme (see last Row).
+In :numref:`qualityScores`, the popular fifteen academic subjects are grouped into topical '*Faculties*': - *Humanities*; - *Law, Economics & Management*; - *Life Sciences & Medicine*; - *Natural Sciences & Mathematics*; and - *Technology*. All fifteen subjects are considered *equally significant* for our evaluation problem (see Row 2). The recorded average enrolment quality scores appear coloured along a 7-tiling scheme per subject (see last Row).
 
-We may by the way notice that the *TU Dresden* is the only Institution showing enrolment quality scores in all the fifteen academic disciplines. Whereas, on the one side, *TU München* and *Kaiserslautern* are only valuated in *Sciences* and *Technology* disciplines. On the other side, *Mannheim*, is only valuated in *Humanities* and *Law, Economics & Management* studies. Most of the 41 Universities are not valuated in *Engineering* studies. We are, hence, facing a large part of irreducible missing data (27.3%, see :numref:`stSpPerfTab` Line 9 and the advanced topic on :ref:`coping with missing data <CopingMissing-Data-label>`).
+We may by the way notice that the *TU Dresden* is the only Institution showing enrolment quality scores in all the fifteen academic subjects. Whereas, on the one side, *TU München* and *Kaiserslautern* are only valuated in *Sciences* and *Technology* subjects. On the other side, *Mannheim*, is only valuated in *Humanities* and *Law, Economics & Management* studies. Most of the 41 Universities are not valuated in *Engineering* studies. We are, hence, facing a large part of irreducible missing data (27.3%, see :numref:`stSpPerfTab` Line 9 and the advanced topic on :ref:`coping with missing data <CopingMissing-Data-label>`).
 
-Details of the enrolment quality criteria (the academic disciplines) may be consulted in a browser view (see :numref:`spiegelCriteria` below).
+Details of the enrolment quality criteria (the academic subjects) may be consulted in a browser view (see :numref:`spiegelCriteria` below).
 
    >>> t.showHTMLCriteria()
 
@@ -4351,25 +4351,25 @@ Details of the enrolment quality criteria (the academic disciplines) may be cons
 
    Details of the rating criteria
 
-The computing of the quality score for an individual student actually depends, indeed, on the enroled discipline [29]_. The average quality measurement scales may differ indeed from discipline to discipline (see :numref:`spiegelCriteria`), like *Law Studies* (35.0 - 65-0) and *Politology* (50.0 - 70.0). The measured average enrolment quality scores, hence, appear to be in fact **incommensurable** between the disciplines.
+The evaluation of the indicidual quality score for a participating student actually depends, indeed, on his or her mainly enroled subject [29]_. The average quality measurement scales may thus largely differ indeed from subject to subject (see :numref:`spiegelCriteria`), like *Law Studies* (35.0 - 65-0) and *Politology* (50.0 - 70.0). The recorded average enrolment quality scores, hence, appear to be in fact **incommensurable** between the subjects.
 
-To take furthermore into account a potential *imprecision* of the individual scores' computation, we shall assume that, for all disciplines, an average enrolment quality score difference of 0.1 is **insignificant** and a difference of 0.5 *positively* attests a **better** enrolment quality.
+To take furthermore into account a potential and very likely *imprecision* of the individual quality scores' computation, we shall assume that, for all subjects, an average enrolment quality score difference of 0.1 is **insignificant**, wheras a difference of 0.5 is sufficient to *positively* attest a **better** enrolment quality.
 
-Taking into account this apparent *incommensurability* and very likely *imprecision* of the computed average enrolment quality scores, renders **meaningless** a global average scoring of the enrolment quality per University. We shall therefore, similarly to the methodological approach of the Spiegel publication [29]_, proceed with an order statistics based *rating-by-ranking* approach (see tutorial on :ref:`rating with learned quantile norms <Rating-Tutorial-label>`).
+The apparent *incommensurability* and very likely *imprecision* of the recorded average enrolment quality scores, renders **meaningless** a global average scoring over the subjects per University of the enrolment quality. We shall therefore, similarly to the methodological approach of the *Spiegel* authors [29]_, proceed with an order statistics based *rating-by-ranking* approach (see tutorial on :ref:`rating with learned quantile norms <Rating-Tutorial-label>`).
 
 Rating the University enrolment quality by ranking
 ..................................................
 
-The Spiegel authors, in order to take into account the likely imprecision of the average enrolment quality scores, opted indeed for a 3-tiling of the Universities per discipline, followed by an average *Borda* scores based global ranking [29]_.
+The Spiegel authors, in order to take into account the incommesurability and the likely imprecision of the recorded average enrolment quality scores, opted indeed for a simple 3-tiling of the Universities per valuated academic subject, followed by an average *Borda* scores based global ranking [29]_.
 
-Here, our *outranking* based approach, allows us, with adequate choices of indifference (0.1) and preference (0.6) discrimination thresholds, to compute a preciser 9-tiling of the Universities per discipline and rank conjointly the 41 Universities **and** the 9-tiling quality scores' limits, with the help of the *Copeland* ranking rule apllied to a corresponding *bipolar-valued outranking* digraph.
+Here, our epistemic logic based *outranking* approach, allows us, with adequate choices of indifference (0.1) and preference (0.6) discrimination thresholds, to compute a 9-tiling of the Universities per subject and rank conjointly the 41 Universities **and** the 9-tiling quality scores' limits per subject, with the help of the *Copeland* ranking rule applied to a corresponding *bipolar-valued outranking* digraph.
 
-To do so, we need, first, to estimate these 9-tiling quality score limits per academic discipline.
+We need therefore to, first, estimate, with the help of the :py:class:`performanceQuantiles.PerformanceQuantiles` constructor, these lower-closed 9-tiling quality score limits per academic subject .
 
 .. code-block:: pycon
    :name: performanceQuantiles
    :linenos:
-   :caption: Computing the 9-tiling enrolment quality scores limits
+   :caption: Computing the 9-tiling enrolment quality scores limits per subject
 
    >>> from performanceQuantiles import PerformanceQuantiles
    >>> pq = PerformanceQuantiles(t,numberOfBins=9,LowerClosed=True)
@@ -4385,7 +4385,7 @@ To do so, we need, first, to estimate these 9-tiling quality score limits per ac
 			 'phys': 37, 'chem': 35, 'math': 27,
 			 'info': 33, 'elec': 14, 'mec': 13, }
 
-The *history sizes*, reported in :numref:`performanceQuantiles` above, indicate the number of Universities valuated in each one of the popular fifteen disciplines. *German Studies*, for instance, are thus valuated for 39 out of 41 Universities, whereas *Electrical* and *Mechanical Engineering* are only valuated for 14, respectively 13 Institutions. None of the fifteen disciplines are valuated in all the 41 Universities [30]_. 
+The *history sizes*, reported in :numref:`performanceQuantiles` above, indicate the number of Universities valuated in each one of the popular fifteen subjects. *German Studies*, for instance, are valuated for 39 out of 41 Universities, whereas *Electrical* and *Mechanical Engineering* are only valuated for 14, respectively 13 Institutions. None of the fifteen subjects are valuated in all the 41 Universities [30]_. 
 
 We may inspect the resulting 9-tiling score limits in a browser view.
 
@@ -4397,11 +4397,13 @@ We may inspect the resulting 9-tiling score limits in a browser view.
    :width: 350 px
    :align: center
 
-   9-tiling score limits per academic discipline
+   9-tiling score limits per academic subject
 
-In :numref:`score9Limits`, we see confirmed again the **incommensurability** we notice in the apparent enrolment quality scoring between the disciplines, especially between *Law Studies* (39.1 - 51.1) and *Politology* (50.5 - 65.9) for instance. Universities valuated in *Law studies* but not in *Politology*, like the University of *Bielefeld*, would see their enrolment quality unfairly weakened when simply averaging the enrolment quality over valuated disciplines.
+In :numref:`score9Limits`, we see confirmed again the **incommensurability** we noticed already in the apparent enrolment quality scoring between the subjects, especially between *Law Studies* (39.1 - 51.1) and *Politology* (50.5 - 65.9). Universities valuated in *Law studies* but not in *Politology*, like the University of *Bielefeld*, would see their enrolment quality unfairly weakened when simply averaging the enrolment quality over valuated subjects.
 
-We add, here, these nine-tiling score limits to the records of the 41 Universities and, with the help of the :py:class:`sortingDigraphs.NormedQuantilesRatingDigraph` constructor and using the *Copeland* rule, rank them all together. The resulting ranking of the 41 Universities and the 9-tiling score limits may be nicely illustrated  with the help of a corresponding heatmap view (see :numref:`ninetiledHeatmap`). 
+We add, now, these nine-tiling quality score limits to the records of the 41 Universities and, with the help of the :py:class:`sortingDigraphs.NormedQuantilesRatingDigraph` constructor and, by using the *Copeland* rule, rank them all conjointly together.
+
+The resulting ranking of the 41 Universities including the 9-tiling score limits may be nicely illustrated  with the help of a corresponding heatmap view (see :numref:`ninetiledHeatmap`). 
 
    >>> from sortingDigraphs import NormedQuantilesRatingDigraph
    >>> nqr = NormedQuantilesRatingDigraph(pq,t,\
@@ -4416,9 +4418,9 @@ We add, here, these nine-tiling score limits to the records of the 41 Universiti
 
    Heatmap view of the 9-tiles rating-by-ranking result
 
-The ordinal correlation of the *Copeland* ranking with the underlying bipolar-valued outranking digraph is very high (+0.967, see :numref:`ninetiledHeatmap` Row 1). Most correlated disciplines with the *rating-by-ranking* result appear to be *German Studies* (+0.51), *Chemistry* (+0.48), "Management* (+0.47) and *Physics* (+0.46). Both *Electrical* (+0.07) and *Mechanical Engineering* (+0.05) are the less correlated disciplines (see Row 3).
+The ordinal correlation of the *Copeland ranking* with the underlying bipolar-valued outranking digraph is very high (+0.967, see :numref:`ninetiledHeatmap` Row 1). Most correlated subjects with this *rating-by-ranking* result appear to be *German Studies* (+0.51), *Chemistry* (+0.48), "Management* (+0.47) and *Physics* (+0.46). Both *Electrical* (+0.07) and *Mechanical Engineering* (+0.05) are the less correlated subjects (see Row 3).
 
-From the actual ranking position of the 9-tile class limits, we may now immediately deduce the 9-tiles enrolment quality equivalence classes. No University reaches the highest 9-tile class (:math:`[0.89 - [`). In the lowest 9-tile (:math:`[0.00- 0.11]`) we find the University *Duisburg*. The complete rating result can be easily printed out as follows.
+From the actual ranking position of the 9-tile class limits, we may now immediately deduce the 9-tiles enrolment quality equivalence classes. No University reaches the highest 9-tile class (:math:`[0.89 - [`). In the lowest 9-tile (:math:`[0.00- 0.11]`) we find the University *Duisburg*. The complete rating result may be easily printed out as follows.
 
 .. code-block:: pycon
    :name: quantilesRating
@@ -4457,13 +4459,13 @@ A corresponding graphviz drawing may well illustrate all the rating equivalence 
 
    Graphviz drawing of the 9-tiles rating result
 
-Considering, now, the large amount of missing data (27.3%, see :numref:`stSpPerfTab` Line 9), how confident is our *rating-by-ranking* result above? Let us therfore inspect the *Copeland* ranking underlying bipolar-valued outranking digraph.
+Considering, now, the large amount of missing data (27.3%, see :numref:`stSpPerfTab` Line 9), how confident is this *rating-by-ranking* result? Let us therfore inspect the *Copeland* ranking underlying bipolar-valued outranking digraph.
 
    
 Inspecting the bipolar-valued outranking digraph
 ................................................
 
-We say that University *x* **outranks** (resp. **is outranked by**) University *y* in enrolment quality when there exists a *majority* (resp. a *minority*) of valuated disciplines showing a **greater or equal** average enrolment quality score. To compute these outranking situations, we use the :py:class:`outrankingDigraphs.BipolarOutrankingDigraph` constructor.
+We say that University *x* **outranks** (resp. **is outranked by**) University *y* in enrolment quality when there exists a *majority* (resp. a *minority*) of valuated subjects showing a **greater or equal** average enrolment quality score. To compute these outranking situations, we use the :py:class:`outrankingDigraphs.BipolarOutrankingDigraph` constructor.
 
 .. code-block:: pycon
    :name: outrankings
@@ -4477,7 +4479,7 @@ We say that University *x* **outranks** (resp. **is outranked by**) University *
      Instance class       : BipolarOutrankingDigraph
      Instance name        : rel_studentenSpiegel04
      # Actions            : 41 (Universities)
-     # Criteria           : 15 (disciplines)
+     # Criteria           : 15 (subjects)
      Size                 : 828 (outranking situations)
      Determinateness (%)  : 63.67
      Valuation domain     : [-1.00;1.00]
@@ -4522,19 +4524,19 @@ We may furthermore check if there exists any *cyclic* outranking situations.
      92:  ['marb', 'saar', 'tri'] , credibility : 0.067
      93:  ['mnh', 'mu', 'stu'] , credibility : 0.133
 
-Here we observe indeed 93 such outranking circuits, like: *Berlin Humboldt* >= *Konstanz* >= *München* >= *Berlin Humboldt* (see :numref:`chordlessCircuits` circuit 29 above). In the *Copeland* ranking result (see :numref:`ninetiledHeatmap`), they appear in fact respectively at rank 10, 4 and 6.
+Here we observe indeed 93 such outranking circuits, like: *Berlin Humboldt* >= *Konstanz* >= *München* >= *Berlin Humboldt* supported by a (0.133 + 1.0)/2 = 56.7% majority of subjects [31]_ (see :numref:`chordlessCircuits` circuit 29 above). In the *Copeland* ranking result shown in :numref:`ninetiledHeatmap`, they appear positioned in fact respectively at rank 10, 4 and 6.
 
-The occurrence of so many outranking circuits in digraph *dg*, makes any *forced* linear ranking doubtful, independently of the specific ranking rule we might apply. To check therefore the quality of our previous *rating-by-ranking* result, we shall compute now a direct sorting into 9-tiles of the enrolment quality scores, without using any outranking digraph based ranking rule.
+The occurrence of so many outranking circuits in digraph *dg*, makes now any *forced* linear ranking doubtful, independently of the specific ranking rule we might apply. To effectively check the quality of our previous *rating-by-ranking* result, we shall compute now a direct sorting into 9-tiles of the enrolment quality scores, without using any outranking digraph based ranking rule.
 
 Rating the University enrolment quality by quantiles sorting
 ............................................................
 
-For this *rating-by-sorting* approach, we are going to use the :py:class:`sortingDigrahs.QuantilesSortingDigraph` constructor.
+For this *rating-by-sorting* approach, we are going to use the :py:class:`sortingDigrahs.QuantilesSortingDigraph` constructor for sorting the University enrolment qualities into lower-closed 9-tiles on the basis of our given performance tableau *t*.
 
 .. code-block:: pycon
    :name: nineTilesSorting
    :linenos:
-   :caption: Computing the 9-tiles sorting 
+   :caption: Computing the lower-closed 9-tiles sorting of the 41 Universities 
 
    >>> from sortingDigraph import QuantilesSortingDigraph	     
    >>> qs = QuantilesSortingDigraph(t,\
@@ -4583,9 +4585,9 @@ For this *rating-by-sorting* approach, we are going to use the :py:class:`sortin
     [0.89 -    <[: tum with credibility: 0.07 = min(0.07,1.00)
     [0.44 - 0.56[: wrzb with credibility: 0.13 = min(0.20,0.13)
 
-In the corresponding rating result (see :numref:`nineTilesSorting`), we notice in Line 5 that the *RWTH Aachen* is precisely rated into the second 9-tile class (:math:`[0.22 - 0.33[`), whereas the University of *Augsburg* is less precisely rated conjointly into the *fourth*, the *fifth* and the *6th* 9-tile classes (:math:`[0.44 - 0.78[`). *TU München* appears best rated into the unique highest 9-tiles class (:math:`[0.89 - <[`). All these three rating results are supported by a (0.07 + 1.0)/2 = 53.5% majority of valuated disciplines [31]_. With the support of a (0.53 + 1.0)/2 = 76.5% majority of valuated disciplines, the apparent most confident 9-tiles rating result is the one the University *Duisburg* (see also :numref:`qualityScores` and :numref:`ninetiledHeatmap`). 
+In thw 9-tiles sorting result, shown in :numref:`nineTilesSorting`, we notice in Line 5 that the *RWTH Aachen* is precisely rated into the second 9-tile (:math:`[0.22 - 0.33[`), whereas the University of *Augsburg* is less precisely rated conjointly into the *fourth*, the *fifth* and the *6th* 9-tiles (:math:`[0.44 - 0.78[`). *TU München* appears best rated into the unique highest 9-tile (:math:`[0.89 - <[`). All these three rating results are supported by a (0.07 + 1.0)/2 = 53.5% majority of valuated subjects [31]_. With the support of a (0.53 + 1.0)/2 = 76.5% majority of valuated subjects, the apparent most confident 9-tiles rating result is the one the University *Duisburg* (see also :numref:`qualityScores` and :numref:`ninetiledHeatmap`). 
 
-We shall now lexicographically sort, by *average* rated 9-tile class limits and *highest-rated* 9-tile class limit, these individual rating results per University into ordered rating equivalence classes.
+We shall now lexicographically sort, by *average* rated 9-tile limits and *highest-rated* 9-tile limit, these individual rating results per University into ordered rating equivalence classes.
 
 >>> qs.showHTMLQuantileOrdering(strategy='average')
 
@@ -4613,14 +4615,14 @@ The complete 9-tiles *rating-by-sorting* result may be well illustrated with a g
 
    Graphviz drawing of the 9-tiles sorting digraph
 
-In :numref:`nineTilingDrawing` we see the *skeleton* (transitive closure removed) of a **partial ranking**, where an oriented arc is drawn between Universities *x* and *y* when their 9-tiles rating classes are **disjoint** and the one of *x* is **higher rated** than the one of *y*. The rating for *TU München*, for instance, is disjoint and higher than the one of the Universities *Freiburg* and *Konstanz*.
+In :numref:`nineTilingDrawing` we see the *skeleton* (transitive closure removed) of a **partial ranking**, where an oriented arc is drawn between Universities *x* and *y* when their 9-tiles sorting results are **disjoint** and the one of *x* is **higher rated** than the one of *y*. The rating for *TU München*, for instance, is disjoint and higher than the one of the Universities *Freiburg* and *Konstanz*.
 
-The partial ranking, shown in this drawing, is hence **independent** of any ordering strategy: - *average*, - *optimistic* or - *pessimistic*, of overlapping rating results and confirms that the same Universities as with the previous *rating-by-ranking* approach, namely *TU München*, *Freiburg*, *Konstanz*, *Stuttgart*, *Berlin Humboldt*, *Heidelberg* and *Leipzig* appear top-rated. Similarly, the Universities of *Duisburg*, *Hanover*, *Bochum*, *Giessen*, *Düsseldorf* and *Bielefeld* give the lowest-rated group. The midfield here is also consisting of  more or less the same Universities as with the previous *rating-by-ranking* approach. 
+The partial ranking, shown in this drawing, is hence **independent** of any ordering strategy: - *average*, - *optimistic* or - *pessimistic*, of overlapping rating results and confirms that the same Universities as with the previous *rating-by-ranking* approach, namely *TU München*, *Freiburg*, *Konstanz*, *Stuttgart*, *Berlin Humboldt*, *Heidelberg* and *Leipzig* appear top-rated. Similarly, the Universities of *Duisburg*, *Hanover*, *Bochum*, *Giessen*, *Düsseldorf* and *Bielefeld* give the lowest-rated group. The midfield here is also consisting of  more or less the same Universities as the one observed with the previous *rating-by-ranking* approach. 
 
 To conclude
 ...........
 
-In the end, both the *rating-by-ranking*, as well as the *rating-by-sorting* approach give very similar results. The first approach, with its *forced* linear ranking, determines, on the one hand, *precise* enrolment quality equivalence classes. The *rating-by-sorting* approach, on the other hand, dtermines for each individual University a less precise but *prudent* rating of its enrolment quality, supported with a known majority of valuated disciplines; a *fairer* rating result, yet, much less evident for easily comparing the Universities' apparent enrolment qualities.
+In the end, both the *rating-by-ranking*, as well as the *rating-by-sorting* approach give very similar results. The first approach, with its *forced* linear ranking, determines, on the one hand, *precise* enrolment quality equivalence classes. The *rating-by-sorting* approach, on the other hand, determines for each individual University a less precise but *prudent* rating of its enrolment quality, supported with a known majority of valuated subjects; a somehow *fairer* rating result, yet, much less evident for easily comparing the apparent enrolment quality among Universities.
  
 Back to :ref:`Content Table <Tutorial-label>`   
 
@@ -7520,7 +7522,7 @@ Appendices
 
 .. [30] It would have been much more accurate to estimate such quantile limits from the individual qualitiy scores of all the nearly 50,000 surveyed students. But this data was not public.
 
-.. [31] Converted by a +1.0 shift and a scale reduction of 0.5 from a bipolar-valued credibility of +0.07 in [-1.0,+1.0] to a majority of valued disciplines support in [0,+1.0].
+.. [31] Converted by a +1.0 shift and a scale reduction of 0.5 from a bipolar-valued credibility of +0.07 in [-1.0,+1.0] to a majority of valued subjects support in [0,+1.0].
 
 .. [32] The performance tableau :code:`studentenSpiegel04.py` is also available in the :code:`examples` directory of the Digraph3 software collection.
 

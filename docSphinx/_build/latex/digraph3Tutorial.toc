@@ -72,7 +72,7 @@
 \contentsline {subsection}{\numberline {11.2}Rating the University enrolment quality by ranking}{124}{subsection.11.2}%
 \contentsline {subsection}{\numberline {11.3}Inspecting the bipolar\sphinxhyphen {}valued outranking digraph}{129}{subsection.11.3}%
 \contentsline {subsection}{\numberline {11.4}Rating the University enrolment quality by quantiles sorting}{130}{subsection.11.4}%
-\contentsline {subsection}{\numberline {11.5}To conclude}{133}{subsection.11.5}%
+\contentsline {subsection}{\numberline {11.5}To conclude}{134}{subsection.11.5}%
 \contentsline {section}{\numberline {12}HPC ranking with big outranking digraphs}{134}{section.12}%
 \contentsline {subsection}{\numberline {12.1}C\sphinxhyphen {}compiled Python modules}{134}{subsection.12.1}%
 \contentsline {subsection}{\numberline {12.2}Big Data performance tableaux}{135}{subsection.12.2}%
