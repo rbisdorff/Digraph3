@@ -336,19 +336,21 @@
 <span class="sd">        Default presentation method for PerformanceTableau instances.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">reprString</span> <span class="o">=</span> <span class="s1">&#39;*------- PerformanceTableau instance description ------*</span><span class="se">\n</span><span class="s1">&#39;</span>
-        <span class="n">reprString</span> <span class="o">+=</span> <span class="s1">&#39;Instance class   : </span><span class="si">%s</span><span class="se">\n</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="bp">self</span><span class="o">.</span><span class="vm">__class__</span><span class="o">.</span><span class="vm">__name__</span>
+        <span class="n">reprString</span> <span class="o">+=</span> <span class="s1">&#39;Instance class    : </span><span class="si">%s</span><span class="se">\n</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="bp">self</span><span class="o">.</span><span class="vm">__class__</span><span class="o">.</span><span class="vm">__name__</span>
         <span class="k">try</span><span class="p">:</span>
-            <span class="n">reprString</span> <span class="o">+=</span> <span class="s1">&#39;Seed             : </span><span class="si">%s</span><span class="se">\n</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="nb">str</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">randomSeed</span><span class="p">)</span>
+            <span class="n">reprString</span> <span class="o">+=</span> <span class="s1">&#39;Seed              : </span><span class="si">%s</span><span class="se">\n</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="nb">str</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">randomSeed</span><span class="p">)</span>
         <span class="k">except</span><span class="p">:</span>
             <span class="k">pass</span>
-        <span class="n">reprString</span> <span class="o">+=</span> <span class="s1">&#39;Instance name    : </span><span class="si">%s</span><span class="se">\n</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="bp">self</span><span class="o">.</span><span class="n">name</span>
-        <span class="n">reprString</span> <span class="o">+=</span> <span class="s1">&#39;# Actions        : </span><span class="si">%d</span><span class="se">\n</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">actions</span><span class="p">)</span>
+        <span class="n">reprString</span> <span class="o">+=</span> <span class="s1">&#39;Instance name     : </span><span class="si">%s</span><span class="se">\n</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="bp">self</span><span class="o">.</span><span class="n">name</span>
+        <span class="n">reprString</span> <span class="o">+=</span> <span class="s1">&#39;# Actions         : </span><span class="si">%d</span><span class="se">\n</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">actions</span><span class="p">)</span>
         <span class="k">try</span><span class="p">:</span>
-            <span class="n">reprString</span> <span class="o">+=</span> <span class="s1">&#39;# Objectives     : </span><span class="si">%d</span><span class="se">\n</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">objectives</span><span class="p">)</span>
+            <span class="n">reprString</span> <span class="o">+=</span> <span class="s1">&#39;# Objectives      : </span><span class="si">%d</span><span class="se">\n</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">objectives</span><span class="p">)</span>
         <span class="k">except</span><span class="p">:</span>
             <span class="k">pass</span>       
-        <span class="n">reprString</span> <span class="o">+=</span> <span class="s1">&#39;# Criteria       : </span><span class="si">%d</span><span class="se">\n</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">criteria</span><span class="p">)</span>
-        <span class="n">reprString</span> <span class="o">+=</span> <span class="s1">&#39;Attributes       : </span><span class="si">%s</span><span class="se">\n</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="nb">list</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="vm">__dict__</span><span class="o">.</span><span class="n">keys</span><span class="p">())</span>     
+        <span class="n">reprString</span> <span class="o">+=</span> <span class="s1">&#39;# Criteria        : </span><span class="si">%d</span><span class="se">\n</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">criteria</span><span class="p">)</span>
+        <span class="n">reprString</span> <span class="o">+=</span> <span class="s1">&#39;NA proportion (</span><span class="si">%%</span><span class="s1">) : </span><span class="si">%.1f</span><span class="se">\n</span><span class="s1">&#39;</span> <span class="o">%</span>\
+                        <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">computeMissingDataProportion</span><span class="p">(</span><span class="n">InPercents</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span> <span class="p">)</span>
+        <span class="n">reprString</span> <span class="o">+=</span> <span class="s1">&#39;Attributes        : </span><span class="si">%s</span><span class="se">\n</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="nb">list</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="vm">__dict__</span><span class="o">.</span><span class="n">keys</span><span class="p">())</span>     
         <span class="k">return</span> <span class="n">reprString</span>
 
     <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">filePerfTab</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span><span class="n">isEmpty</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
@@ -1770,7 +1772,35 @@
             <span class="n">fo</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">writeStr</span><span class="p">)</span>
         <span class="n">fo</span><span class="o">.</span><span class="n">close</span><span class="p">()</span></div>
         
+<div class="viewcode-block" id="PerformanceTableau.computeMissingDataProportion"><a class="viewcode-back" href="../techDoc.html#perfTabs.PerformanceTableau.computeMissingDataProportion">[docs]</a>    <span class="k">def</span> <span class="nf">computeMissingDataProportion</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">InPercents</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span><span class="n">Comments</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Renders the proportion of missing data, </span>
+<span class="sd">        i.e. NA == Decimal(&#39;-999&#39;) entries in self.evaluation.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        
+        <span class="n">naCount</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="n">entryCount</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="n">NA</span> <span class="o">=</span> <span class="n">Decimal</span><span class="p">(</span><span class="s1">&#39;-999&#39;</span><span class="p">)</span>
 
+        <span class="k">for</span> <span class="n">g</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">criteria</span><span class="p">:</span>
+            <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">actions</span><span class="p">:</span>
+                <span class="n">entryCount</span> <span class="o">+=</span> <span class="mi">1</span>
+                <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">evaluation</span><span class="p">[</span><span class="n">g</span><span class="p">][</span><span class="n">x</span><span class="p">]</span> <span class="o">==</span> <span class="n">NA</span><span class="p">:</span>
+                    <span class="n">naCount</span> <span class="o">+=</span> <span class="mi">1</span>
+
+        <span class="k">try</span><span class="p">:</span>
+            <span class="n">res</span> <span class="o">=</span> <span class="n">naCount</span><span class="o">/</span><span class="n">entryCount</span>
+        <span class="k">except</span><span class="p">:</span>
+            <span class="n">res</span> <span class="o">=</span> <span class="mf">0.0</span>
+            <span class="k">if</span> <span class="n">Comments</span><span class="p">:</span>
+                <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;!!! Empty performance tableau !!!&#39;</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">InPercents</span><span class="p">:</span>
+            <span class="n">res</span> <span class="o">*=</span> <span class="mf">100.0</span>
+        <span class="k">if</span> <span class="n">Comments</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Missing data proportion: </span><span class="si">%.3f</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="n">res</span><span class="p">))</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">res</span></div>
+   
 <div class="viewcode-block" id="PerformanceTableau.computeMinMaxEvaluations"><a class="viewcode-back" href="../techDoc.html#perfTabs.PerformanceTableau.computeMinMaxEvaluations">[docs]</a>    <span class="k">def</span> <span class="nf">computeMinMaxEvaluations</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">criteria</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span><span class="n">actions</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        renders minimum and maximum performances on each criterion</span>
@@ -7788,8 +7818,10 @@
                                    <span class="n">weightDistribution</span><span class="o">=</span><span class="s1">&#39;equiobjectives&#39;</span><span class="p">,</span>
                                    <span class="n">IntegerWeights</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
                                    <span class="n">NegativeWeights</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+                                   <span class="n">missingDataProbability</span><span class="o">=</span><span class="mf">0.05</span><span class="p">,</span>
                                    <span class="n">seed</span><span class="o">=</span><span class="n">randomSeed</span><span class="p">,</span>
                                    <span class="n">Debug</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">t</span><span class="p">)</span>
 <span class="c1">##    actionsList = [x for x in t.actions.keys()]</span>
 <span class="c1">##    criteriaList = [g for g in t.criteria.keys()]</span>
 <span class="c1">##    print(t._htmlPerformanceHeatmap(argActionsList=actionsList,</span>
@@ -7809,7 +7841,11 @@
 <span class="c1">##                                 rankingRule=&#39;Copeland&#39;,Transposed=False)</span>
     <span class="n">cop</span> <span class="o">=</span> <span class="n">CopelandRanking</span><span class="p">(</span><span class="n">g</span><span class="p">)</span>
     <span class="n">t</span><span class="o">.</span><span class="n">showRankingConsensusQuality</span><span class="p">(</span><span class="n">cop</span><span class="o">.</span><span class="n">copelandRanking</span><span class="p">)</span>
-
+    <span class="n">t</span><span class="o">.</span><span class="n">computeMissingDataProportion</span><span class="p">(</span><span class="n">InPercents</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span><span class="n">Comments</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+    <span class="n">t</span><span class="o">.</span><span class="n">actions</span> <span class="o">=</span> <span class="p">{}</span>
+    <span class="n">t</span><span class="o">.</span><span class="n">computeMissingDataProportion</span><span class="p">(</span><span class="n">InPercents</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span><span class="n">Comments</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+    
+    
     
     <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;*------------------*&#39;</span><span class="p">)</span>
     <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;If you see this line all tests were passed successfully :-)&#39;</span><span class="p">)</span>

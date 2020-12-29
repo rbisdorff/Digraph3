@@ -171,19 +171,21 @@ The performance evaluations of each decision alternative on each criterion are g
         Default presentation method for PerformanceTableau instances.
         """
         reprString = '*------- PerformanceTableau instance description ------*\n'
-        reprString += 'Instance class   : %s\n' % self.__class__.__name__
+        reprString += 'Instance class    : %s\n' % self.__class__.__name__
         try:
-            reprString += 'Seed             : %s\n' % str(self.randomSeed)
+            reprString += 'Seed              : %s\n' % str(self.randomSeed)
         except:
             pass
-        reprString += 'Instance name    : %s\n' % self.name
-        reprString += '# Actions        : %d\n' % len(self.actions)
+        reprString += 'Instance name     : %s\n' % self.name
+        reprString += '# Actions         : %d\n' % len(self.actions)
         try:
-            reprString += '# Objectives     : %d\n' % len(self.objectives)
+            reprString += '# Objectives      : %d\n' % len(self.objectives)
         except:
             pass       
-        reprString += '# Criteria       : %d\n' % len(self.criteria)
-        reprString += 'Attributes       : %s\n' % list(self.__dict__.keys())     
+        reprString += '# Criteria        : %d\n' % len(self.criteria)
+        reprString += 'NA proportion (%%) : %.1f\n' %\
+                        (self.computeMissingDataProportion(InPercents=True) )
+        reprString += 'Attributes        : %s\n' % list(self.__dict__.keys())     
         return reprString
 
     def __init__(self,filePerfTab=None,isEmpty=False):
@@ -1605,7 +1607,35 @@ The performance evaluations of each decision alternative on each criterion are g
             fo.write(writeStr)
         fo.close()
         
+    def computeMissingDataProportion(self,InPercents=False,Comments=False):
+        """
+        Renders the proportion of missing data, 
+        i.e. NA == Decimal('-999') entries in self.evaluation.
+        """
+        
+        naCount = 0
+        entryCount = 0
+        NA = Decimal('-999')
 
+        for g in self.criteria:
+            for x in self.actions:
+                entryCount += 1
+                if self.evaluation[g][x] == NA:
+                    naCount += 1
+
+        try:
+            res = naCount/entryCount
+        except:
+            res = 0.0
+            if Comments:
+                print('!!! Empty performance tableau !!!')
+        if InPercents:
+            res *= 100.0
+        if Comments:
+            print('Missing data proportion: %.3f' % (res))
+        else:
+            return res
+   
     def computeMinMaxEvaluations(self,criteria=None,actions=None):
         """
         renders minimum and maximum performances on each criterion
@@ -7623,8 +7653,10 @@ if __name__ == "__main__":
                                    weightDistribution='equiobjectives',
                                    IntegerWeights=True,
                                    NegativeWeights=False,
+                                   missingDataProbability=0.05,
                                    seed=randomSeed,
                                    Debug=False)
+    print(t)
 ##    actionsList = [x for x in t.actions.keys()]
 ##    criteriaList = [g for g in t.criteria.keys()]
 ##    print(t._htmlPerformanceHeatmap(argActionsList=actionsList,
@@ -7644,7 +7676,11 @@ if __name__ == "__main__":
 ##                                 rankingRule='Copeland',Transposed=False)
     cop = CopelandRanking(g)
     t.showRankingConsensusQuality(cop.copelandRanking)
-
+    t.computeMissingDataProportion(InPercents=True,Comments=True)
+    t.actions = {}
+    t.computeMissingDataProportion(InPercents=False,Comments=True)
+    
+    
     
     print('*------------------*')
     print('If you see this line all tests were passed successfully :-)')
