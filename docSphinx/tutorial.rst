@@ -4290,8 +4290,8 @@ Back to :ref:`Content Table <Tutorial-label>`
 
 .. _RatingUniversities-Tutorial-label:
 
-The best students, where do they study? A case study
-----------------------------------------------------
+Rating the enrolment quality of German Universities: A case study
+-----------------------------------------------------------------
 
 .. contents:: 
 	:depth: 2
@@ -4299,9 +4299,9 @@ The best students, where do they study? A case study
 
 In 2004, the German magazine *Der Spiegel*, with the help of *McKinsey & Company* and *AOL*, conducted an extensive online survey assessing the apparent quality of German University students [28]_. More than 80,000 university students, by participating, were questioned on their 'Abitur' and university exams' marks, time of studies and age, grants, awards and publications, IT proficiency, linguistic skills, practical work experience, foreign mobility and civil engagement. Each student received in return a *quality score* through a specific weighing of the collected data which depended on the subject of the student. [29]_.
 
-The eventually published results of the survey concerned nearly 50,000 students, mainly enroled in one of fifteen popular academic subjects, like *German Studies*, *Life Sciences*, *Psychology*, *Law*  or *Computer Science*. Retaining only those subject-University combinations, where at least 18 students had correctly filled in the questionnaire, left 41 German Universities where, for at least eight out of the fifteen subjects, an average enrolment quality score could be determined [29]_.
+The eventually published results by the *Spiegel* magazine concerned nearly 50,000 students, mainly enroled in one of fifteen popular academic subjects, like *German Studies*, *Life Sciences*, *Psychology*, *Law*  or *Computer Science*. Publishing only those subject-University combinations, where at least 18 students had correctly filled in the questionnaire, left 41 German Universities where, for at least eight out of the fifteen subjects, an average enrolment quality score could be determined [29]_.
 
-Based on this surveyed data, we would like now to evaluate in this tutorial the apparent global *enrolment quality* of these 41 German higher education institutions.
+Based on this published data [28]_, we would like to present and discuss in this tutorial, how to **rate** the apparent global *enrolment quality* of these 41 German higher education institutions with the help of our *Digraph3* software ressources.
 
 The performance tableau
 .......................
@@ -4623,6 +4623,8 @@ To conclude
 ...........
 
 In the end, both the *rating-by-ranking*, as well as the *rating-by-sorting* approach give very similar results. The first approach, with its *forced* linear ranking, determines, on the one hand, *precise* enrolment quality equivalence classes. The *rating-by-sorting* approach, on the other hand, determines for each individual University a less precise but *prudent* rating of its enrolment quality, supported with a known majority of valuated subjects; a somehow *fairer* rating result, yet, much less evident for easily comparing the apparent enrolment quality among Universities.
+
+When facing at present world wide health and environmental problems, we think that a rating by **quantiles sorting** of human activities is definitely more favouring the much needed peaceful cooperation of all human communities, than the, unfortunately more usual, competitive *rating-by-scoring* approach.
  
 Back to :ref:`Content Table <Tutorial-label>`   
 
