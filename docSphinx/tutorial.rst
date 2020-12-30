@@ -4351,7 +4351,7 @@ Details of the enrolment quality criteria (the academic subjects) may be consult
 
    Details of the rating criteria
 
-The evaluation of the indicidual quality score for a participating student actually depends, indeed, on his or her mainly enroled subject [29]_. The average quality measurement scales may thus largely differ indeed from subject to subject (see :numref:`spiegelCriteria`), like *Law Studies* (35.0 - 65-0) and *Politology* (50.0 - 70.0). The recorded average enrolment quality scores, hence, appear to be in fact **incommensurable** between the subjects.
+The evaluation of the individual quality score for a participating student actually depends, indeed, on his or her mainly enroled subject [29]_. The average quality measurement scales may thus largely differ indeed from subject to subject (see :numref:`spiegelCriteria`), like *Law Studies* (35.0 - 65-0) and *Politology* (50.0 - 70.0). The recorded average enrolment quality scores, hence, appear to be in fact **incommensurable** between the subjects.
 
 To take furthermore into account a potential and very likely *imprecision* of the individual quality scores' computation, we shall assume that, for all subjects, an average enrolment quality score difference of 0.1 is **insignificant**, wheras a difference of 0.5 is sufficient to *positively* attest a **better** enrolment quality.
 
@@ -4418,9 +4418,9 @@ The resulting ranking of the 41 Universities including the 9-tiling score limits
 
    Heatmap view of the 9-tiles rating-by-ranking result
 
-The ordinal correlation of the *Copeland ranking* with the underlying bipolar-valued outranking digraph is very high (+0.967, see :numref:`ninetiledHeatmap` Row 1). Most correlated subjects with this *rating-by-ranking* result appear to be *German Studies* (+0.51), *Chemistry* (+0.48), "Management* (+0.47) and *Physics* (+0.46). Both *Electrical* (+0.07) and *Mechanical Engineering* (+0.05) are the less correlated subjects (see Row 3).
+The ordinal correlation of the *Copeland ranking* with the underlying bipolar-valued outranking digraph is very high (+0.967, see :numref:`ninetiledHeatmap` Row 1). Most correlated subjects with this *rating-by-ranking* result appear to be *German Studies* (+0.51), *Chemistry* (+0.48), *Management* (+0.47) and *Physics* (+0.46). Both *Electrical* (+0.07) and *Mechanical Engineering* (+0.05) are the less correlated subjects (see Row 3).
 
-From the actual ranking position of the 9-tile class limits, we may now immediately deduce the 9-tiles enrolment quality equivalence classes. No University reaches the highest 9-tile class (:math:`[0.89 - [`). In the lowest 9-tile (:math:`[0.00- 0.11]`) we find the University *Duisburg*. The complete rating result may be easily printed out as follows.
+From the actual ranking position of the 9-tile class limits, we may now immediately deduce the 9-tiles enrolment quality equivalence classes. No University reaches the highest 9-tile (:math:`[0.89 - [`). In the lowest 9-tile (:math:`[0.00- 0.11]`) we find the University *Duisburg*. The complete rating result may be easily printed out as follows.
 
 .. code-block:: pycon
    :name: quantilesRating
@@ -4526,7 +4526,7 @@ We may furthermore check if there exists any *cyclic* outranking situations.
 
 Here we observe indeed 93 such outranking circuits, like: *Berlin Humboldt* >= *Konstanz* >= *München* >= *Berlin Humboldt* supported by a (0.133 + 1.0)/2 = 56.7% majority of subjects [31]_ (see :numref:`chordlessCircuits` circuit 29 above). In the *Copeland* ranking result shown in :numref:`ninetiledHeatmap`, they appear positioned in fact respectively at rank 10, 4 and 6.
 
-The occurrence of so many outranking circuits in digraph *dg*, makes now any *forced* linear ranking doubtful, independently of the specific ranking rule we might apply. To effectively check the quality of our previous *rating-by-ranking* result, we shall compute now a direct sorting into 9-tiles of the enrolment quality scores, without using any outranking digraph based ranking rule.
+The occurrence of so many outranking circuits in digraph *dg*, makes now any *forced* linear ranking doubtful, independently of the specific ranking rule we might apply. To effectively check the quality of our previous *rating-by-ranking* result, we shall compute now a direct sorting into 9-tiles of the enrolment quality scores, without using any outranking digraph based ranking rule (see tutorial on :ref:`rating with multiple incommensurable criteria <QuantilesRating-Tutorial-label>`).
 
 Rating the University enrolment quality by quantiles sorting
 ............................................................

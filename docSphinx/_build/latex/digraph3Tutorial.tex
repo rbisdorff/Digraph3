@@ -58,7 +58,7 @@
 
 
 \title{Tutorials for the Digraph3 Python software resources}
-\date{December 29, 2020}
+\date{December 30, 2020}
 \release{3.9.0}
 \author{Raymond Bisdorff}
 \newcommand{\sphinxlogo}{\sphinxincludegraphics{introDoc3.png}\par}
@@ -5472,7 +5472,7 @@ Details of the enrolment quality criteria (the academic subjects) may be consult
 \noindent\sphinxincludegraphics[width=750\sphinxpxdimen]{{spiegelCriteria}.png}
 \caption{Details of the rating criteria}\label{\detokenize{tutorial:spiegelcriteria}}\end{figure}
 
-The evaluation of the indicidual quality score for a participating student actually depends, indeed, on his or her mainly enroled subject \sphinxfootnotemark[29]. The average quality measurement scales may thus largely differ indeed from subject to subject (see \hyperref[\detokenize{tutorial:spiegelcriteria}]{Fig.\@ \ref{\detokenize{tutorial:spiegelcriteria}}}), like \sphinxstyleemphasis{Law Studies} (35.0 \sphinxhyphen{} 65\sphinxhyphen{}0) and \sphinxstyleemphasis{Politology} (50.0 \sphinxhyphen{} 70.0). The recorded average enrolment quality scores, hence, appear to be in fact \sphinxstylestrong{incommensurable} between the subjects.
+The evaluation of the individual quality score for a participating student actually depends, indeed, on his or her mainly enroled subject \sphinxfootnotemark[29]. The average quality measurement scales may thus largely differ indeed from subject to subject (see \hyperref[\detokenize{tutorial:spiegelcriteria}]{Fig.\@ \ref{\detokenize{tutorial:spiegelcriteria}}}), like \sphinxstyleemphasis{Law Studies} (35.0 \sphinxhyphen{} 65\sphinxhyphen{}0) and \sphinxstyleemphasis{Politology} (50.0 \sphinxhyphen{} 70.0). The recorded average enrolment quality scores, hence, appear to be in fact \sphinxstylestrong{incommensurable} between the subjects.
 
 To take furthermore into account a potential and very likely \sphinxstyleemphasis{imprecision} of the individual quality scores’ computation, we shall assume that, for all subjects, an average enrolment quality score difference of 0.1 is \sphinxstylestrong{insignificant}, wheras a difference of 0.5 is sufficient to \sphinxstyleemphasis{positively} attest a \sphinxstylestrong{better} enrolment quality.
 
@@ -5545,9 +5545,9 @@ The resulting ranking of the 41 Universities including the 9\sphinxhyphen{}tilin
 \noindent\sphinxincludegraphics[width=650\sphinxpxdimen]{{nineTilingResult}.png}
 \caption{Heatmap view of the 9\sphinxhyphen{}tiles rating\sphinxhyphen{}by\sphinxhyphen{}ranking result}\label{\detokenize{tutorial:ninetiledheatmap}}\end{figure}
 
-The ordinal correlation of the \sphinxstyleemphasis{Copeland ranking} with the underlying bipolar\sphinxhyphen{}valued outranking digraph is very high (+0.967, see \hyperref[\detokenize{tutorial:ninetiledheatmap}]{Fig.\@ \ref{\detokenize{tutorial:ninetiledheatmap}}} Row 1). Most correlated subjects with this \sphinxstyleemphasis{rating\sphinxhyphen{}by\sphinxhyphen{}ranking} result appear to be \sphinxstyleemphasis{German Studies} (+0.51), \sphinxstyleemphasis{Chemistry} (+0.48), “Management* (+0.47) and \sphinxstyleemphasis{Physics} (+0.46). Both \sphinxstyleemphasis{Electrical} (+0.07) and \sphinxstyleemphasis{Mechanical Engineering} (+0.05) are the less correlated subjects (see Row 3).
+The ordinal correlation of the \sphinxstyleemphasis{Copeland ranking} with the underlying bipolar\sphinxhyphen{}valued outranking digraph is very high (+0.967, see \hyperref[\detokenize{tutorial:ninetiledheatmap}]{Fig.\@ \ref{\detokenize{tutorial:ninetiledheatmap}}} Row 1). Most correlated subjects with this \sphinxstyleemphasis{rating\sphinxhyphen{}by\sphinxhyphen{}ranking} result appear to be \sphinxstyleemphasis{German Studies} (+0.51), \sphinxstyleemphasis{Chemistry} (+0.48), \sphinxstyleemphasis{Management} (+0.47) and \sphinxstyleemphasis{Physics} (+0.46). Both \sphinxstyleemphasis{Electrical} (+0.07) and \sphinxstyleemphasis{Mechanical Engineering} (+0.05) are the less correlated subjects (see Row 3).
 
-From the actual ranking position of the 9\sphinxhyphen{}tile class limits, we may now immediately deduce the 9\sphinxhyphen{}tiles enrolment quality equivalence classes. No University reaches the highest 9\sphinxhyphen{}tile class (\([0.89 - [\)). In the lowest 9\sphinxhyphen{}tile (\([0.00- 0.11]\)) we find the University \sphinxstyleemphasis{Duisburg}. The complete rating result may be easily printed out as follows.
+From the actual ranking position of the 9\sphinxhyphen{}tile class limits, we may now immediately deduce the 9\sphinxhyphen{}tiles enrolment quality equivalence classes. No University reaches the highest 9\sphinxhyphen{}tile (\([0.89 - [\)). In the lowest 9\sphinxhyphen{}tile (\([0.00- 0.11]\)) we find the University \sphinxstyleemphasis{Duisburg}. The complete rating result may be easily printed out as follows.
 \sphinxSetupCaptionForVerbatim{Rating the Universities into enrolment quality 9\sphinxhyphen{}tiles}
 \def\sphinxLiteralBlockLabel{\label{\detokenize{tutorial:quantilesrating}}}
 \begin{sphinxVerbatim}[commandchars=\\\{\},numbers=left,firstnumber=1,stepnumber=1]
@@ -5652,7 +5652,7 @@ Converted by a +1.0 shift and a scale reduction of 0.5 from a bipolar\sphinxhyph
 %
 \end{footnote} (see \hyperref[\detokenize{tutorial:chordlesscircuits}]{Listing \ref{\detokenize{tutorial:chordlesscircuits}}} circuit 29 above). In the \sphinxstyleemphasis{Copeland} ranking result shown in \hyperref[\detokenize{tutorial:ninetiledheatmap}]{Fig.\@ \ref{\detokenize{tutorial:ninetiledheatmap}}}, they appear positioned in fact respectively at rank 10, 4 and 6.
 
-The occurrence of so many outranking circuits in digraph \sphinxstyleemphasis{dg}, makes now any \sphinxstyleemphasis{forced} linear ranking doubtful, independently of the specific ranking rule we might apply. To effectively check the quality of our previous \sphinxstyleemphasis{rating\sphinxhyphen{}by\sphinxhyphen{}ranking} result, we shall compute now a direct sorting into 9\sphinxhyphen{}tiles of the enrolment quality scores, without using any outranking digraph based ranking rule.
+The occurrence of so many outranking circuits in digraph \sphinxstyleemphasis{dg}, makes now any \sphinxstyleemphasis{forced} linear ranking doubtful, independently of the specific ranking rule we might apply. To effectively check the quality of our previous \sphinxstyleemphasis{rating\sphinxhyphen{}by\sphinxhyphen{}ranking} result, we shall compute now a direct sorting into 9\sphinxhyphen{}tiles of the enrolment quality scores, without using any outranking digraph based ranking rule (see tutorial on {\hyperref[\detokenize{tutorial:quantilesrating-tutorial-label}]{\sphinxcrossref{\DUrole{std,std-ref}{rating with multiple incommensurable criteria}}}} (\autopageref*{\detokenize{tutorial:quantilesrating-tutorial-label}})).
 
 
 \subsection{Rating the University enrolment quality by quantiles sorting}

@@ -568,3 +568,22 @@ QuantilesSorting   : 0.06608
 Preordering        : 0.00027
 Decomposing        : 0.27844
 Ordering           : 0.00949
+*----- show short --------------*
+Instance name      : random3ObjectivesPerfTab_pr
+Size (in bytes)    : 1861317
+# Actions          : 100
+# Criteria         : 13
+Sorting by         : 5-Tiling
+Ordering strategy  : average
+Local ranking rule : Copeland
+# Components       : 6
+Minimal size       : 1
+Maximal order      : 52
+Average order      : 16.7
+Fill rate          : 34.889%
+*-- Constructor run times (in sec.) --*
+Total time         : 0.36034
+QuantilesSorting   : 0.06218
+Preordering        : 0.00026
+Decomposing        : 0.27995
+Ordering           : 0.01029

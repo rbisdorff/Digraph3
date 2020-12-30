@@ -171,21 +171,21 @@ The performance evaluations of each decision alternative on each criterion are g
         Default presentation method for PerformanceTableau instances.
         """
         reprString = '*------- PerformanceTableau instance description ------*\n'
-        reprString += 'Instance class    : %s\n' % self.__class__.__name__
+        reprString += 'Instance class     : %s\n' % self.__class__.__name__
         try:
-            reprString += 'Seed              : %s\n' % str(self.randomSeed)
+            reprString += 'Seed               : %s\n' % str(self.randomSeed)
         except:
             pass
-        reprString += 'Instance name     : %s\n' % self.name
-        reprString += '# Actions         : %d\n' % len(self.actions)
+        reprString += 'Instance name      : %s\n' % self.name
+        reprString += '# Actions          : %d\n' % len(self.actions)
         try:
-            reprString += '# Objectives      : %d\n' % len(self.objectives)
+            reprString += '# Objectives       : %d\n' % len(self.objectives)
         except:
             pass       
-        reprString += '# Criteria        : %d\n' % len(self.criteria)
-        reprString += 'NA proportion (%%) : %.1f\n' %\
+        reprString += '# Criteria         : %d\n' % len(self.criteria)
+        reprString += 'NaN proportion (%%) : %.1f\n' %\
                         (self.computeMissingDataProportion(InPercents=True) )
-        reprString += 'Attributes        : %s\n' % list(self.__dict__.keys())     
+        reprString += 'Attributes         : %s\n' % list(self.__dict__.keys())     
         return reprString
 
     def __init__(self,filePerfTab=None,isEmpty=False):
@@ -277,9 +277,10 @@ The performance evaluations of each decision alternative on each criterion are g
         
     def computeWeightedAveragePerformances(self,isNormalized=False, lowValue=0.0, highValue=100.0, isListRanked=False):
         """
-        Compute normalized weighted average scores
-        Normalization transforms by default all the scores into a
-        common 0-100 scale. A lowValue and highValue parameter
+        Compute normalized weighted average scores by ignoring missing data.
+        When *isNormalized* == True (False by default), 
+        transforms all the scores into a common 0-100 scale. 
+        A lowValue and highValue parameter
         can be provided for a specific normalisation.
         """
         actions = self.actions
@@ -290,15 +291,19 @@ The performance evaluations of each decision alternative on each criterion are g
         else:
             evaluation = self.evaluation
 
-        sumWeights = Decimal('0.0')
-        for g in dict.keys(criteria):
-            sumWeights += abs(criteria[g]['weight'])
+        #sumWeights = Decimal('0.0')
+        #for g in dict.keys(criteria):
+        #    sumWeights += abs(criteria[g]['weight'])
 
         weightedAverage = {} 
         for x in dict.keys(actions):
+            sumWeights = Decimal('0.0')
             weightedAverage[x] = Decimal('0.0')
             for g in dict.keys(criteria):
-                weightedAverage[x] += evaluation[g][x] * criteria[g]['weight'] / sumWeights
+                if evaluation[g][x] != Decimal('-999'):
+                    sumWeights += abs(criteria[g]['weight'])
+                    weightedAverage[x] +=\
+                        evaluation[g][x] * criteria[g]['weight'] / sumWeights
         if isListRanked:
             ranked = []
             for x in weightedAverage:

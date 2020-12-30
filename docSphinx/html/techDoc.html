@@ -4778,9 +4778,10 @@ lists of criteria.</p>
 <dl class="py method">
 <dt id="perfTabs.PerformanceTableau.computeWeightedAveragePerformances">
 <code class="sig-name descname">computeWeightedAveragePerformances</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">isNormalized</span><span class="o">=</span><span class="default_value">False</span></em>, <em class="sig-param"><span class="n">lowValue</span><span class="o">=</span><span class="default_value">0.0</span></em>, <em class="sig-param"><span class="n">highValue</span><span class="o">=</span><span class="default_value">100.0</span></em>, <em class="sig-param"><span class="n">isListRanked</span><span class="o">=</span><span class="default_value">False</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/perfTabs.html#PerformanceTableau.computeWeightedAveragePerformances"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#perfTabs.PerformanceTableau.computeWeightedAveragePerformances" title="Permalink to this definition">¶</a></dt>
-<dd><p>Compute normalized weighted average scores
-Normalization transforms by default all the scores into a
-common 0-100 scale. A lowValue and highValue parameter
+<dd><p>Compute normalized weighted average scores by ignoring missing data.
+When <em>isNormalized</em> == True (False by default), 
+transforms all the scores into a common 0-100 scale. 
+A lowValue and highValue parameter
 can be provided for a specific normalisation.</p>
 </dd></dl>
 

@@ -336,21 +336,21 @@
 <span class="sd">        Default presentation method for PerformanceTableau instances.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">reprString</span> <span class="o">=</span> <span class="s1">&#39;*------- PerformanceTableau instance description ------*</span><span class="se">\n</span><span class="s1">&#39;</span>
-        <span class="n">reprString</span> <span class="o">+=</span> <span class="s1">&#39;Instance class    : </span><span class="si">%s</span><span class="se">\n</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="bp">self</span><span class="o">.</span><span class="vm">__class__</span><span class="o">.</span><span class="vm">__name__</span>
+        <span class="n">reprString</span> <span class="o">+=</span> <span class="s1">&#39;Instance class     : </span><span class="si">%s</span><span class="se">\n</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="bp">self</span><span class="o">.</span><span class="vm">__class__</span><span class="o">.</span><span class="vm">__name__</span>
         <span class="k">try</span><span class="p">:</span>
-            <span class="n">reprString</span> <span class="o">+=</span> <span class="s1">&#39;Seed              : </span><span class="si">%s</span><span class="se">\n</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="nb">str</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">randomSeed</span><span class="p">)</span>
+            <span class="n">reprString</span> <span class="o">+=</span> <span class="s1">&#39;Seed               : </span><span class="si">%s</span><span class="se">\n</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="nb">str</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">randomSeed</span><span class="p">)</span>
         <span class="k">except</span><span class="p">:</span>
             <span class="k">pass</span>
-        <span class="n">reprString</span> <span class="o">+=</span> <span class="s1">&#39;Instance name     : </span><span class="si">%s</span><span class="se">\n</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="bp">self</span><span class="o">.</span><span class="n">name</span>
-        <span class="n">reprString</span> <span class="o">+=</span> <span class="s1">&#39;# Actions         : </span><span class="si">%d</span><span class="se">\n</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">actions</span><span class="p">)</span>
+        <span class="n">reprString</span> <span class="o">+=</span> <span class="s1">&#39;Instance name      : </span><span class="si">%s</span><span class="se">\n</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="bp">self</span><span class="o">.</span><span class="n">name</span>
+        <span class="n">reprString</span> <span class="o">+=</span> <span class="s1">&#39;# Actions          : </span><span class="si">%d</span><span class="se">\n</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">actions</span><span class="p">)</span>
         <span class="k">try</span><span class="p">:</span>
-            <span class="n">reprString</span> <span class="o">+=</span> <span class="s1">&#39;# Objectives      : </span><span class="si">%d</span><span class="se">\n</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">objectives</span><span class="p">)</span>
+            <span class="n">reprString</span> <span class="o">+=</span> <span class="s1">&#39;# Objectives       : </span><span class="si">%d</span><span class="se">\n</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">objectives</span><span class="p">)</span>
         <span class="k">except</span><span class="p">:</span>
             <span class="k">pass</span>       
-        <span class="n">reprString</span> <span class="o">+=</span> <span class="s1">&#39;# Criteria        : </span><span class="si">%d</span><span class="se">\n</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">criteria</span><span class="p">)</span>
-        <span class="n">reprString</span> <span class="o">+=</span> <span class="s1">&#39;NA proportion (</span><span class="si">%%</span><span class="s1">) : </span><span class="si">%.1f</span><span class="se">\n</span><span class="s1">&#39;</span> <span class="o">%</span>\
+        <span class="n">reprString</span> <span class="o">+=</span> <span class="s1">&#39;# Criteria         : </span><span class="si">%d</span><span class="se">\n</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">criteria</span><span class="p">)</span>
+        <span class="n">reprString</span> <span class="o">+=</span> <span class="s1">&#39;NaN proportion (</span><span class="si">%%</span><span class="s1">) : </span><span class="si">%.1f</span><span class="se">\n</span><span class="s1">&#39;</span> <span class="o">%</span>\
                         <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">computeMissingDataProportion</span><span class="p">(</span><span class="n">InPercents</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span> <span class="p">)</span>
-        <span class="n">reprString</span> <span class="o">+=</span> <span class="s1">&#39;Attributes        : </span><span class="si">%s</span><span class="se">\n</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="nb">list</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="vm">__dict__</span><span class="o">.</span><span class="n">keys</span><span class="p">())</span>     
+        <span class="n">reprString</span> <span class="o">+=</span> <span class="s1">&#39;Attributes         : </span><span class="si">%s</span><span class="se">\n</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="nb">list</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="vm">__dict__</span><span class="o">.</span><span class="n">keys</span><span class="p">())</span>     
         <span class="k">return</span> <span class="n">reprString</span>
 
     <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">filePerfTab</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span><span class="n">isEmpty</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
@@ -442,9 +442,10 @@
         
 <div class="viewcode-block" id="PerformanceTableau.computeWeightedAveragePerformances"><a class="viewcode-back" href="../techDoc.html#perfTabs.PerformanceTableau.computeWeightedAveragePerformances">[docs]</a>    <span class="k">def</span> <span class="nf">computeWeightedAveragePerformances</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">isNormalized</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">lowValue</span><span class="o">=</span><span class="mf">0.0</span><span class="p">,</span> <span class="n">highValue</span><span class="o">=</span><span class="mf">100.0</span><span class="p">,</span> <span class="n">isListRanked</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        Compute normalized weighted average scores</span>
-<span class="sd">        Normalization transforms by default all the scores into a</span>
-<span class="sd">        common 0-100 scale. A lowValue and highValue parameter</span>
+<span class="sd">        Compute normalized weighted average scores by ignoring missing data.</span>
+<span class="sd">        When *isNormalized* == True (False by default), </span>
+<span class="sd">        transforms all the scores into a common 0-100 scale. </span>
+<span class="sd">        A lowValue and highValue parameter</span>
 <span class="sd">        can be provided for a specific normalisation.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">actions</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">actions</span>
@@ -455,15 +456,19 @@
         <span class="k">else</span><span class="p">:</span>
             <span class="n">evaluation</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">evaluation</span>
 
-        <span class="n">sumWeights</span> <span class="o">=</span> <span class="n">Decimal</span><span class="p">(</span><span class="s1">&#39;0.0&#39;</span><span class="p">)</span>
-        <span class="k">for</span> <span class="n">g</span> <span class="ow">in</span> <span class="nb">dict</span><span class="o">.</span><span class="n">keys</span><span class="p">(</span><span class="n">criteria</span><span class="p">):</span>
-            <span class="n">sumWeights</span> <span class="o">+=</span> <span class="nb">abs</span><span class="p">(</span><span class="n">criteria</span><span class="p">[</span><span class="n">g</span><span class="p">][</span><span class="s1">&#39;weight&#39;</span><span class="p">])</span>
+        <span class="c1">#sumWeights = Decimal(&#39;0.0&#39;)</span>
+        <span class="c1">#for g in dict.keys(criteria):</span>
+        <span class="c1">#    sumWeights += abs(criteria[g][&#39;weight&#39;])</span>
 
         <span class="n">weightedAverage</span> <span class="o">=</span> <span class="p">{}</span> 
         <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="nb">dict</span><span class="o">.</span><span class="n">keys</span><span class="p">(</span><span class="n">actions</span><span class="p">):</span>
+            <span class="n">sumWeights</span> <span class="o">=</span> <span class="n">Decimal</span><span class="p">(</span><span class="s1">&#39;0.0&#39;</span><span class="p">)</span>
             <span class="n">weightedAverage</span><span class="p">[</span><span class="n">x</span><span class="p">]</span> <span class="o">=</span> <span class="n">Decimal</span><span class="p">(</span><span class="s1">&#39;0.0&#39;</span><span class="p">)</span>
             <span class="k">for</span> <span class="n">g</span> <span class="ow">in</span> <span class="nb">dict</span><span class="o">.</span><span class="n">keys</span><span class="p">(</span><span class="n">criteria</span><span class="p">):</span>
-                <span class="n">weightedAverage</span><span class="p">[</span><span class="n">x</span><span class="p">]</span> <span class="o">+=</span> <span class="n">evaluation</span><span class="p">[</span><span class="n">g</span><span class="p">][</span><span class="n">x</span><span class="p">]</span> <span class="o">*</span> <span class="n">criteria</span><span class="p">[</span><span class="n">g</span><span class="p">][</span><span class="s1">&#39;weight&#39;</span><span class="p">]</span> <span class="o">/</span> <span class="n">sumWeights</span>
+                <span class="k">if</span> <span class="n">evaluation</span><span class="p">[</span><span class="n">g</span><span class="p">][</span><span class="n">x</span><span class="p">]</span> <span class="o">!=</span> <span class="n">Decimal</span><span class="p">(</span><span class="s1">&#39;-999&#39;</span><span class="p">):</span>
+                    <span class="n">sumWeights</span> <span class="o">+=</span> <span class="nb">abs</span><span class="p">(</span><span class="n">criteria</span><span class="p">[</span><span class="n">g</span><span class="p">][</span><span class="s1">&#39;weight&#39;</span><span class="p">])</span>
+                    <span class="n">weightedAverage</span><span class="p">[</span><span class="n">x</span><span class="p">]</span> <span class="o">+=</span>\
+                        <span class="n">evaluation</span><span class="p">[</span><span class="n">g</span><span class="p">][</span><span class="n">x</span><span class="p">]</span> <span class="o">*</span> <span class="n">criteria</span><span class="p">[</span><span class="n">g</span><span class="p">][</span><span class="s1">&#39;weight&#39;</span><span class="p">]</span> <span class="o">/</span> <span class="n">sumWeights</span>
         <span class="k">if</span> <span class="n">isListRanked</span><span class="p">:</span>
             <span class="n">ranked</span> <span class="o">=</span> <span class="p">[]</span>
             <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">weightedAverage</span><span class="p">:</span>
