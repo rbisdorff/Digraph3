@@ -212,7 +212,8 @@
 <span class="sd">             | (&#39;beta&#39;,mod,(alpha,beta)), mode in ]0,1[.</span>
 <span class="sd">        * valueDigits := &lt;integer&gt;, precision of performance measurements</span>
 <span class="sd">          (2 decimal digits by default).</span>
-<span class="sd">        * missingDataProbability := 0 &lt;= x &lt;= 1.0; probability of missing performance evaluation on a criterion for an alternative (default 0.025).        </span>
+<span class="sd">        * missingDataProbability := 0 &lt;= x &lt;= 1.0; probability of missing performance evaluation on a criterion for an alternative (default 0.025). </span>
+<span class="sd">        * Default NA symbol == Decimal(&#39;-999&#39;)       </span>
 
 <span class="sd">    Code example:</span>
 <span class="sd">        &gt;&gt;&gt; from randomPerfTabs import RandomPerformanceTableau</span>
@@ -249,6 +250,7 @@
                  <span class="n">commonMode</span> <span class="o">=</span> <span class="p">(</span><span class="s1">&#39;beta&#39;</span><span class="p">,</span><span class="kc">None</span><span class="p">,(</span><span class="mi">2</span><span class="p">,</span><span class="mi">2</span><span class="p">)),</span>\
                  <span class="n">valueDigits</span> <span class="o">=</span> <span class="mi">2</span><span class="p">,</span>\
                  <span class="n">missingDataProbability</span> <span class="o">=</span> <span class="mf">0.025</span><span class="p">,</span>\
+                 <span class="n">NA</span> <span class="o">=</span> <span class="o">-</span><span class="mi">999</span><span class="p">,</span>\
                  <span class="n">BigData</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>\
                  <span class="n">seed</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>\
                  <span class="n">Debug</span> <span class="o">=</span> <span class="kc">False</span><span class="p">):</span>
@@ -461,11 +463,13 @@
             <span class="nb">print</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">commonMode</span><span class="p">[</span><span class="mi">0</span><span class="p">]))</span>
             <span class="c1">#sys.exit(1)</span>
         <span class="c1"># randomly insert missing data</span>
+        <span class="n">NA</span> <span class="o">=</span> <span class="n">Decimal</span><span class="p">(</span><span class="n">NA</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">NA</span> <span class="o">=</span> <span class="n">NA</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">missingDataProbability</span> <span class="o">=</span> <span class="n">missingDataProbability</span> 
         <span class="k">for</span> <span class="n">c</span> <span class="ow">in</span> <span class="n">criteria</span><span class="p">:</span>
             <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">actions</span><span class="p">:</span>
                 <span class="k">if</span> <span class="n">random</span><span class="o">.</span><span class="n">random</span><span class="p">()</span> <span class="o">&lt;</span> <span class="n">missingDataProbability</span><span class="p">:</span>
-                    <span class="n">evaluation</span><span class="p">[</span><span class="n">c</span><span class="p">][</span><span class="n">x</span><span class="p">]</span> <span class="o">=</span> <span class="n">Decimal</span><span class="p">(</span><span class="s1">&#39;-999&#39;</span><span class="p">)</span>
+                    <span class="n">evaluation</span><span class="p">[</span><span class="n">c</span><span class="p">][</span><span class="n">x</span><span class="p">]</span> <span class="o">=</span> <span class="n">NA</span>
 
         <span class="c1"># store object dict</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">actions</span> <span class="o">=</span> <span class="n">actions</span>
@@ -745,9 +749,10 @@
 
         <span class="c1"># randomly insert missing data</span>
         <span class="n">missingDataProbability</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">perfTab</span><span class="o">.</span><span class="n">missingDataProbability</span>
+        <span class="n">NA</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">perfTab</span><span class="o">.</span><span class="n">NA</span>
         <span class="k">for</span> <span class="n">c</span> <span class="ow">in</span> <span class="n">criteria</span><span class="p">:</span>
             <span class="k">if</span> <span class="n">random</span><span class="o">.</span><span class="n">random</span><span class="p">()</span> <span class="o">&lt;</span> <span class="n">missingDataProbability</span><span class="p">:</span>
-                <span class="n">evaluation</span><span class="p">[</span><span class="n">c</span><span class="p">]</span> <span class="o">=</span> <span class="n">Decimal</span><span class="p">(</span><span class="s1">&#39;-999&#39;</span><span class="p">)</span>
+                <span class="n">evaluation</span><span class="p">[</span><span class="n">c</span><span class="p">]</span> <span class="o">=</span> <span class="n">NA</span>
 
         <span class="c1"># return a new random decision alternative</span>
         <span class="k">return</span> <span class="p">{</span><span class="s1">&#39;action&#39;</span><span class="p">:</span> <span class="n">action</span><span class="p">,</span><span class="s1">&#39;evaluation&#39;</span><span class="p">:</span><span class="n">evaluation</span><span class="p">}</span>
@@ -909,6 +914,7 @@
                  <span class="n">commonMode</span> <span class="o">=</span> <span class="p">(</span><span class="s1">&#39;triangular&#39;</span><span class="p">,</span><span class="mi">12</span><span class="p">,</span><span class="mf">0.25</span><span class="p">),</span>\
                  <span class="n">commonThresholds</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">IntegerWeights</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span>\
                  <span class="n">BigData</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span> <span class="n">missingDataProbability</span> <span class="o">=</span> <span class="mf">0.0</span><span class="p">,</span>\
+                 <span class="n">NA</span> <span class="o">=</span> <span class="o">-</span><span class="mi">999</span><span class="p">,</span>
                  <span class="n">seed</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>\
                  <span class="n">Debug</span> <span class="o">=</span> <span class="kc">False</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
@@ -1085,15 +1091,17 @@
 
         <span class="c1"># randomly insert missing data</span>
         <span class="c1"># self.missingDataProbability = missingDataProbability</span>
+        <span class="n">NA</span> <span class="o">=</span> <span class="n">Decimal</span><span class="p">(</span><span class="n">NA</span><span class="p">)</span>
         <span class="k">for</span> <span class="n">c</span> <span class="ow">in</span> <span class="n">criteria</span><span class="p">:</span>
             <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">actions</span><span class="p">:</span>
                 <span class="k">if</span> <span class="n">random</span><span class="o">.</span><span class="n">random</span><span class="p">()</span> <span class="o">&lt;</span> <span class="n">missingDataProbability</span><span class="p">:</span>
-                    <span class="n">evaluation</span><span class="p">[</span><span class="n">c</span><span class="p">][</span><span class="n">x</span><span class="p">]</span> <span class="o">=</span> <span class="n">Decimal</span><span class="p">(</span><span class="s1">&#39;-999&#39;</span><span class="p">)</span>
+                    <span class="n">evaluation</span><span class="p">[</span><span class="n">c</span><span class="p">][</span><span class="n">x</span><span class="p">]</span> <span class="o">=</span> <span class="n">NA</span>
 
         <span class="c1"># install object items</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">actions</span> <span class="o">=</span> <span class="n">actions</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">criteria</span> <span class="o">=</span> <span class="n">criteria</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">evaluation</span> <span class="o">=</span> <span class="n">evaluation</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">NA</span> <span class="o">=</span> <span class="n">NA</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">weightPreorder</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">computeWeightPreorder</span><span class="p">()</span>
 
 <div class="viewcode-block" id="RandomAcademicPerformanceTableau.showStudents"><a class="viewcode-back" href="../techDoc.html#randomPerfTabs.RandomAcademicPerformanceTableau.showStudents">[docs]</a>    <span class="k">def</span> <span class="nf">showStudents</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">WithComments</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
@@ -1127,12 +1135,16 @@
 <span class="sd">        Print the performance Tableau.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="kn">from</span> <span class="nn">decimal</span> <span class="k">import</span> <span class="n">Decimal</span>
+        <span class="n">actions</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">actions</span>
+        <span class="n">evaluation</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">evaluation</span>
+        <span class="n">NA</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">NA</span>
+        <span class="n">criteria</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">criteria</span>
         <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;*----  performance tableau -----*&#39;</span><span class="p">)</span>
-        <span class="n">criteriaList</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">criteria</span><span class="p">)</span>
+        <span class="n">criteriaList</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">criteria</span><span class="p">)</span>
         <span class="k">if</span> <span class="n">Sorted</span><span class="p">:</span>
             <span class="n">criteriaList</span><span class="o">.</span><span class="n">sort</span><span class="p">()</span>
         <span class="k">if</span> <span class="n">studentsSubset</span> <span class="o">==</span> <span class="kc">None</span><span class="p">:</span>
-            <span class="n">actionsList</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">actions</span><span class="p">)</span>
+            <span class="n">actionsList</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">actions</span><span class="p">)</span>
             <span class="k">if</span> <span class="n">Sorted</span><span class="p">:</span>
                 <span class="n">actionsList</span><span class="o">.</span><span class="n">sort</span><span class="p">()</span>
         <span class="k">else</span><span class="p">:</span>
@@ -1150,11 +1162,11 @@
             <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\n</span><span class="s1">---------|-----------------------------------------&#39;</span><span class="p">)</span>
             <span class="n">formatString</span> <span class="o">=</span> <span class="s1">&#39; </span><span class="si">%%</span><span class="s1">0</span><span class="si">%d</span><span class="s1">.</span><span class="si">%d</span><span class="s1">f &#39;</span> <span class="o">%</span> <span class="p">(</span><span class="mi">2</span><span class="p">,</span><span class="n">ndigits</span><span class="p">)</span>
             <span class="k">for</span> <span class="n">g</span> <span class="ow">in</span> <span class="n">criteriaList</span><span class="p">:</span>
-                <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;  </span><span class="se">\&#39;</span><span class="s1">&#39;</span> <span class="o">+</span><span class="nb">str</span><span class="p">(</span><span class="n">g</span><span class="p">)</span><span class="o">+</span><span class="s1">&#39;</span><span class="se">\&#39;</span><span class="s1">  |  &#39;</span><span class="o">+</span><span class="nb">str</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">criteria</span><span class="p">[</span><span class="n">g</span><span class="p">][</span><span class="s1">&#39;weight&#39;</span><span class="p">])</span><span class="o">+</span><span class="s1">&#39;   |&#39;</span><span class="p">,</span> <span class="n">end</span><span class="o">=</span><span class="s1">&#39;  &#39;</span><span class="p">)</span>
+                <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;  </span><span class="se">\&#39;</span><span class="s1">&#39;</span> <span class="o">+</span><span class="nb">str</span><span class="p">(</span><span class="n">g</span><span class="p">)</span><span class="o">+</span><span class="s1">&#39;</span><span class="se">\&#39;</span><span class="s1">  |  &#39;</span><span class="o">+</span><span class="nb">str</span><span class="p">(</span><span class="n">criteria</span><span class="p">[</span><span class="n">g</span><span class="p">][</span><span class="s1">&#39;weight&#39;</span><span class="p">])</span><span class="o">+</span><span class="s1">&#39;   |&#39;</span><span class="p">,</span> <span class="n">end</span><span class="o">=</span><span class="s1">&#39;  &#39;</span><span class="p">)</span>
                 <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">fromIndex</span><span class="p">,</span><span class="n">toIndex</span><span class="p">):</span>
                     <span class="n">x</span> <span class="o">=</span> <span class="n">actionsList</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
-                    <span class="n">evalgx</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">evaluation</span><span class="p">[</span><span class="n">g</span><span class="p">][</span><span class="n">x</span><span class="p">]</span>
-                    <span class="k">if</span> <span class="n">evalgx</span> <span class="o">==</span> <span class="n">Decimal</span><span class="p">(</span><span class="s1">&#39;-999&#39;</span><span class="p">):</span>
+                    <span class="n">evalgx</span> <span class="o">=</span> <span class="n">evaluation</span><span class="p">[</span><span class="n">g</span><span class="p">][</span><span class="n">x</span><span class="p">]</span>
+                    <span class="k">if</span> <span class="n">evalgx</span> <span class="o">==</span> <span class="n">NA</span><span class="p">:</span>
                         <span class="nb">print</span><span class="p">(</span><span class="s1">&#39; NA &#39;</span><span class="p">,</span> <span class="n">end</span><span class="o">=</span><span class="s1">&#39;  &#39;</span><span class="p">)</span>
                     <span class="k">else</span><span class="p">:</span>                    
                         <span class="nb">print</span><span class="p">(</span><span class="n">formatString</span> <span class="o">%</span> <span class="p">(</span><span class="n">evalgx</span><span class="p">),</span> <span class="n">end</span><span class="o">=</span><span class="s1">&#39;  &#39;</span><span class="p">)</span>
@@ -1166,15 +1178,15 @@
                 <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\&#39;</span><span class="s1">&#39;</span><span class="o">+</span><span class="nb">str</span><span class="p">(</span><span class="n">g</span><span class="p">)</span><span class="o">+</span><span class="s1">&#39;</span><span class="se">\&#39;</span><span class="s1">&#39;</span><span class="p">,</span> <span class="n">end</span><span class="o">=</span><span class="s1">&#39; &#39;</span><span class="p">)</span>
             <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\n</span><span class="s1">   ECTS  | &#39;</span><span class="p">,</span> <span class="n">end</span><span class="o">=</span><span class="s1">&#39;  &#39;</span><span class="p">)</span>
             <span class="k">for</span> <span class="n">g</span> <span class="ow">in</span> <span class="n">criteriaList</span><span class="p">:</span>
-                <span class="nb">print</span><span class="p">(</span><span class="s1">&#39; </span><span class="si">%s</span><span class="s1">  &#39;</span> <span class="o">%</span> <span class="nb">str</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">criteria</span><span class="p">[</span><span class="n">g</span><span class="p">][</span><span class="s1">&#39;weight&#39;</span><span class="p">]</span> <span class="p">),</span> <span class="n">end</span><span class="o">=</span><span class="s1">&#39;  &#39;</span><span class="p">)</span>          
+                <span class="nb">print</span><span class="p">(</span><span class="s1">&#39; </span><span class="si">%s</span><span class="s1">  &#39;</span> <span class="o">%</span> <span class="nb">str</span><span class="p">(</span><span class="n">criteria</span><span class="p">[</span><span class="n">g</span><span class="p">][</span><span class="s1">&#39;weight&#39;</span><span class="p">]</span> <span class="p">),</span> <span class="n">end</span><span class="o">=</span><span class="s1">&#39;  &#39;</span><span class="p">)</span>          
             <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\n</span><span class="s1">---------|-----------------------------------------&#39;</span><span class="p">)</span>
             <span class="n">formatString</span> <span class="o">=</span> <span class="s1">&#39; </span><span class="si">%%</span><span class="s1">0</span><span class="si">%d</span><span class="s1">.</span><span class="si">%d</span><span class="s1">f &#39;</span> <span class="o">%</span> <span class="p">(</span><span class="mi">2</span><span class="p">,</span><span class="n">ndigits</span><span class="p">)</span>
             <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">fromIndex</span><span class="p">,</span><span class="n">toIndex</span><span class="p">):</span>
                 <span class="n">x</span> <span class="o">=</span> <span class="n">actionsList</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
-                <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;  </span><span class="se">\&#39;</span><span class="s1">&#39;</span><span class="o">+</span><span class="nb">str</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">actions</span><span class="p">[</span><span class="n">x</span><span class="p">][</span><span class="s1">&#39;shortName&#39;</span><span class="p">])</span><span class="o">+</span><span class="s1">&#39;</span><span class="se">\&#39;</span><span class="s1"> |&#39;</span> <span class="p">,</span> <span class="n">end</span><span class="o">=</span><span class="s1">&#39;   &#39;</span><span class="p">)</span>
+                <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;  </span><span class="se">\&#39;</span><span class="s1">&#39;</span><span class="o">+</span><span class="nb">str</span><span class="p">(</span><span class="n">actions</span><span class="p">[</span><span class="n">x</span><span class="p">][</span><span class="s1">&#39;shortName&#39;</span><span class="p">])</span><span class="o">+</span><span class="s1">&#39;</span><span class="se">\&#39;</span><span class="s1"> |&#39;</span> <span class="p">,</span> <span class="n">end</span><span class="o">=</span><span class="s1">&#39;   &#39;</span><span class="p">)</span>
                 <span class="k">for</span> <span class="n">g</span> <span class="ow">in</span> <span class="n">criteriaList</span><span class="p">:</span>
-                    <span class="n">evalgx</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">evaluation</span><span class="p">[</span><span class="n">g</span><span class="p">][</span><span class="n">x</span><span class="p">]</span>
-                    <span class="k">if</span> <span class="n">evalgx</span> <span class="o">==</span> <span class="n">Decimal</span><span class="p">(</span><span class="s1">&#39;-999&#39;</span><span class="p">):</span>
+                    <span class="n">evalgx</span> <span class="o">=</span> <span class="n">evaluation</span><span class="p">[</span><span class="n">g</span><span class="p">][</span><span class="n">x</span><span class="p">]</span>
+                    <span class="k">if</span> <span class="n">evalgx</span> <span class="o">==</span> <span class="n">NA</span><span class="p">:</span>
                         <span class="nb">print</span><span class="p">(</span><span class="s1">&#39; NA &#39;</span><span class="p">,</span> <span class="n">end</span><span class="o">=</span><span class="s1">&#39;  &#39;</span><span class="p">)</span>
                     <span class="k">else</span><span class="p">:</span>                    
                         <span class="nb">print</span><span class="p">(</span><span class="n">formatString</span> <span class="o">%</span> <span class="p">(</span><span class="n">evalgx</span><span class="p">),</span> <span class="n">end</span><span class="o">=</span><span class="s1">&#39;  &#39;</span><span class="p">)</span>
@@ -1202,22 +1214,27 @@
         <span class="n">webbrowser</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="n">url</span><span class="p">,</span><span class="n">new</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span></div>
            
             
-    <span class="k">def</span> <span class="nf">_htmlPerformanceTable</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">actions</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span><span class="n">isSorted</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>\
+    <span class="k">def</span> <span class="nf">_htmlPerformanceTable</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">actions</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span><span class="n">criteria</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span><span class="n">isSorted</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>\
                              <span class="n">Transposed</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span><span class="n">ndigits</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span>\
                              <span class="n">ContentCentered</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
                              <span class="n">title</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span><span class="n">fromIndex</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span><span class="n">toIndex</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Renders the performance table citerion x actions in html format.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="n">criteria</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">criteria</span>
         <span class="n">minMaxEvaluations</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">computeMinMaxEvaluations</span><span class="p">()</span>
         <span class="k">if</span> <span class="n">title</span> <span class="o">==</span> <span class="kc">None</span><span class="p">:</span>
             <span class="n">html</span> <span class="o">=</span> <span class="s1">&#39;&lt;h1&gt;Random Student Gradings&lt;/h1&gt;&#39;</span>
         <span class="k">else</span><span class="p">:</span>
-            <span class="n">html</span> <span class="o">=</span> <span class="s1">&#39;&lt;h1&gt;</span><span class="si">%s</span><span class="s1">&lt;/h1&gt;&#39;</span> <span class="o">%</span> <span class="n">title</span>            
-        <span class="n">criteriaKeys</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">criteria</span><span class="o">.</span><span class="n">keys</span><span class="p">())</span>
+            <span class="n">html</span> <span class="o">=</span> <span class="s1">&#39;&lt;h1&gt;</span><span class="si">%s</span><span class="s1">&lt;/h1&gt;&#39;</span> <span class="o">%</span> <span class="n">title</span>
+        <span class="c1"># criteria</span>
+        <span class="k">if</span> <span class="n">criteria</span> <span class="o">==</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">criteria</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">criteria</span>
+            <span class="n">criteriaKeys</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">criteria</span><span class="o">.</span><span class="n">keys</span><span class="p">())</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">criteriaKeys</span> <span class="o">=</span> <span class="p">[</span><span class="n">g</span> <span class="k">for</span> <span class="n">g</span> <span class="ow">in</span> <span class="n">criteria</span><span class="p">]</span>
         <span class="k">if</span> <span class="n">isSorted</span><span class="p">:</span>
             <span class="n">criteriaKeys</span><span class="o">.</span><span class="n">sort</span><span class="p">()</span>
+        <span class="c1"># actions</span>
         <span class="k">if</span> <span class="n">actions</span> <span class="o">==</span> <span class="kc">None</span><span class="p">:</span>
             <span class="n">actions</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">actions</span>
             <span class="n">actionsKeys</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">actions</span><span class="o">.</span><span class="n">keys</span><span class="p">())</span>
@@ -1229,7 +1246,9 @@
             <span class="n">fromIndex</span> <span class="o">=</span> <span class="mi">0</span>
         <span class="k">if</span> <span class="n">toIndex</span> <span class="o">==</span> <span class="kc">None</span><span class="p">:</span>
             <span class="n">toIndex</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">actionsKeys</span><span class="p">)</span>
+        <span class="c1"># evaluations</span>
         <span class="n">evaluation</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">evaluation</span>
+        <span class="n">NA</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">NA</span>
         <span class="k">if</span> <span class="n">ContentCentered</span><span class="p">:</span>
             <span class="n">alignFormat</span> <span class="o">=</span> <span class="s1">&#39;center&#39;</span>
         <span class="k">else</span><span class="p">:</span>
@@ -1251,8 +1270,8 @@
                     <span class="n">gName</span> <span class="o">=</span> <span class="s1">&#39;</span><span class="si">%s</span><span class="s1"> (</span><span class="si">%d</span><span class="s1">)&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="n">g</span><span class="p">,</span><span class="nb">int</span><span class="p">(</span><span class="n">criteria</span><span class="p">[</span><span class="n">g</span><span class="p">][</span><span class="s1">&#39;weight&#39;</span><span class="p">]))</span>
                 <span class="n">html</span> <span class="o">+=</span> <span class="s1">&#39;&lt;tr&gt;&lt;th bgcolor=&quot;#FFF79B&quot;&gt;</span><span class="si">%s</span><span class="s1">&lt;/th&gt;&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="n">gName</span><span class="p">)</span>
                 <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">actionsKeys</span><span class="p">[</span><span class="n">fromIndex</span><span class="p">:</span><span class="n">toIndex</span><span class="p">]:</span>
-                    <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">evaluation</span><span class="p">[</span><span class="n">g</span><span class="p">][</span><span class="n">x</span><span class="p">]</span> <span class="o">!=</span> <span class="n">Decimal</span><span class="p">(</span><span class="s2">&quot;-999&quot;</span><span class="p">):</span>
-                        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">evaluation</span><span class="p">[</span><span class="n">g</span><span class="p">][</span><span class="n">x</span><span class="p">]</span> <span class="o">&lt;</span> <span class="n">Decimal</span><span class="p">(</span><span class="s1">&#39;10&#39;</span><span class="p">):</span>
+                    <span class="k">if</span> <span class="n">evaluation</span><span class="p">[</span><span class="n">g</span><span class="p">][</span><span class="n">x</span><span class="p">]</span> <span class="o">!=</span> <span class="n">NA</span><span class="p">:</span>
+                        <span class="k">if</span> <span class="n">evaluation</span><span class="p">[</span><span class="n">g</span><span class="p">][</span><span class="n">x</span><span class="p">]</span> <span class="o">&lt;</span> <span class="n">Decimal</span><span class="p">(</span><span class="s1">&#39;10&#39;</span><span class="p">):</span>
                             <span class="n">formatString</span> <span class="o">=</span> <span class="s1">&#39;&lt;td bgcolor=&quot;#ffddff&quot;  align=&quot;</span><span class="si">%s</span><span class="s1">&quot;&gt;</span><span class="si">%%</span><span class="s1"> .</span><span class="si">%d</span><span class="s1">f&lt;/td&gt;&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="n">alignFormat</span><span class="p">,</span><span class="n">ndigits</span><span class="p">)</span>
                             <span class="n">html</span> <span class="o">+=</span> <span class="n">formatString</span> <span class="o">%</span> <span class="p">(</span><span class="n">evaluation</span><span class="p">[</span><span class="n">g</span><span class="p">][</span><span class="n">x</span><span class="p">])</span>
                         <span class="k">elif</span> <span class="n">minMaxEvaluations</span><span class="p">[</span><span class="n">g</span><span class="p">][</span><span class="s1">&#39;minimum&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="n">minMaxEvaluations</span><span class="p">[</span><span class="n">g</span><span class="p">][</span><span class="s1">&#39;maximum&#39;</span><span class="p">]:</span>
@@ -1291,8 +1310,8 @@
                     <span class="n">xName</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
                 <span class="n">html</span> <span class="o">+=</span> <span class="s1">&#39;&lt;tr&gt;&lt;th bgcolor=&quot;#FFF79B&quot;&gt;</span><span class="si">%s</span><span class="s1">&lt;/th&gt;&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="n">xName</span><span class="p">)</span>
                 <span class="k">for</span> <span class="n">g</span> <span class="ow">in</span> <span class="n">criteriaKeys</span><span class="p">:</span>
-                    <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">evaluation</span><span class="p">[</span><span class="n">g</span><span class="p">][</span><span class="n">x</span><span class="p">]</span> <span class="o">!=</span> <span class="n">Decimal</span><span class="p">(</span><span class="s2">&quot;-999&quot;</span><span class="p">):</span>
-                        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">evaluation</span><span class="p">[</span><span class="n">g</span><span class="p">][</span><span class="n">x</span><span class="p">]</span> <span class="o">&lt;</span> <span class="n">Decimal</span><span class="p">(</span><span class="s1">&#39;10&#39;</span><span class="p">):</span>
+                    <span class="k">if</span> <span class="n">evaluation</span><span class="p">[</span><span class="n">g</span><span class="p">][</span><span class="n">x</span><span class="p">]</span> <span class="o">!=</span> <span class="n">NA</span><span class="p">:</span>
+                        <span class="k">if</span> <span class="n">evaluation</span><span class="p">[</span><span class="n">g</span><span class="p">][</span><span class="n">x</span><span class="p">]</span> <span class="o">&lt;</span> <span class="n">Decimal</span><span class="p">(</span><span class="s1">&#39;10&#39;</span><span class="p">):</span>
                             <span class="n">formatString</span> <span class="o">=</span> <span class="s1">&#39;&lt;td bgcolor=&quot;#ffddff&quot;  align=&quot;</span><span class="si">%s</span><span class="s1">&quot;&gt;</span><span class="si">%%</span><span class="s1"> .</span><span class="si">%d</span><span class="s1">f&lt;/td&gt;&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="n">alignFormat</span><span class="p">,</span><span class="n">ndigits</span><span class="p">)</span>
                             <span class="n">html</span> <span class="o">+=</span> <span class="n">formatString</span> <span class="o">%</span> <span class="p">(</span><span class="n">evaluation</span><span class="p">[</span><span class="n">g</span><span class="p">][</span><span class="n">x</span><span class="p">])</span>
                         <span class="k">elif</span> <span class="n">minMaxEvaluations</span><span class="p">[</span><span class="n">g</span><span class="p">][</span><span class="s1">&#39;minimum&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="n">minMaxEvaluations</span><span class="p">[</span><span class="n">g</span><span class="p">][</span><span class="s1">&#39;maximum&#39;</span><span class="p">]:</span>
@@ -1322,6 +1341,7 @@
         <span class="n">criteriaKeys</span><span class="o">.</span><span class="n">sort</span><span class="p">()</span>
         <span class="n">nc</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">criteria</span><span class="p">)</span>
         <span class="n">evaluation</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">evaluation</span>
+        <span class="n">NA</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">NA</span>
         <span class="n">actions</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">actions</span>
         <span class="n">g</span> <span class="o">=</span> <span class="n">courseID</span>
         <span class="n">n</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">actions</span><span class="p">)</span>
@@ -1337,7 +1357,7 @@
         <span class="n">maxEvaluation</span> <span class="o">=</span> <span class="n">Min</span>
         <span class="n">evaluationList</span> <span class="o">=</span> <span class="p">[]</span>
         <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">actions</span><span class="p">:</span>
-            <span class="k">if</span> <span class="n">evaluation</span><span class="p">[</span><span class="n">g</span><span class="p">][</span><span class="n">x</span><span class="p">]</span> <span class="o">!=</span> <span class="n">Decimal</span><span class="p">(</span><span class="s1">&#39;-999&#39;</span><span class="p">):</span>
+            <span class="k">if</span> <span class="n">evaluation</span><span class="p">[</span><span class="n">g</span><span class="p">][</span><span class="n">x</span><span class="p">]</span> <span class="o">!=</span> <span class="n">NA</span><span class="p">:</span>
                 <span class="n">evaluationList</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">evaluation</span><span class="p">[</span><span class="n">g</span><span class="p">][</span><span class="n">x</span><span class="p">])</span>
                 <span class="n">averageEvaluation</span> <span class="o">+=</span> <span class="n">evaluation</span><span class="p">[</span><span class="n">g</span><span class="p">][</span><span class="n">x</span><span class="p">]</span>
                 <span class="n">varianceEvaluation</span> <span class="o">+=</span> <span class="n">evaluation</span><span class="p">[</span><span class="n">g</span><span class="p">][</span><span class="n">x</span><span class="p">]</span><span class="o">**</span><span class="n">Decimal</span><span class="p">(</span><span class="s1">&#39;2&#39;</span><span class="p">)</span>
@@ -1392,7 +1412,7 @@
             <span class="n">nd</span> <span class="o">=</span> <span class="mi">0</span>
             <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">actions</span><span class="p">:</span>
                 <span class="k">for</span> <span class="n">y</span> <span class="ow">in</span> <span class="n">actions</span><span class="p">:</span>
-                    <span class="k">if</span> <span class="n">evaluation</span><span class="p">[</span><span class="n">g</span><span class="p">][</span><span class="n">x</span><span class="p">]</span> <span class="o">!=</span> <span class="n">Decimal</span><span class="p">(</span><span class="s1">&#39;-999&#39;</span><span class="p">)</span> <span class="ow">and</span> <span class="n">evaluation</span><span class="p">[</span><span class="n">g</span><span class="p">][</span><span class="n">y</span><span class="p">]</span> <span class="o">!=</span> <span class="n">Decimal</span><span class="p">(</span><span class="s1">&#39;-999&#39;</span><span class="p">):</span>
+                    <span class="k">if</span> <span class="n">evaluation</span><span class="p">[</span><span class="n">g</span><span class="p">][</span><span class="n">x</span><span class="p">]</span> <span class="o">!=</span> <span class="n">NA</span> <span class="ow">and</span> <span class="n">evaluation</span><span class="p">[</span><span class="n">g</span><span class="p">][</span><span class="n">y</span><span class="p">]</span> <span class="o">!=</span> <span class="n">NA</span><span class="p">:</span>
                         <span class="n">diffxy</span> <span class="o">=</span> <span class="p">(</span><span class="n">evaluation</span><span class="p">[</span><span class="n">g</span><span class="p">][</span><span class="n">x</span><span class="p">]</span> <span class="o">-</span> <span class="n">evaluation</span><span class="p">[</span><span class="n">g</span><span class="p">][</span><span class="n">y</span><span class="p">])</span>
                         <span class="n">averageAbsDiffEvaluation</span> <span class="o">+=</span> <span class="nb">abs</span><span class="p">(</span><span class="n">diffxy</span><span class="p">)</span>
                         <span class="n">varianceDiffEvaluation</span> <span class="o">+=</span> <span class="n">diffxy</span><span class="o">**</span><span class="n">Decimal</span><span class="p">(</span><span class="s1">&#39;2&#39;</span><span class="p">)</span>
@@ -1580,6 +1600,7 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">actions</span> <span class="o">=</span> <span class="n">actions</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">criteria</span> <span class="o">=</span> <span class="n">criteria</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">evaluation</span> <span class="o">=</span> <span class="n">evaluation</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">NA</span> <span class="o">=</span> <span class="n">Decimal</span><span class="p">(</span><span class="s1">&#39;-999&#39;</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">sumWeights</span> <span class="o">=</span> <span class="n">sumWeights</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">weightPreorder</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">computeWeightPreorder</span><span class="p">()</span></div>
 
@@ -1853,6 +1874,7 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">criteriaWeightMode</span> <span class="o">=</span> <span class="n">weightMode</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">criteria</span> <span class="o">=</span> <span class="n">criteria</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">evaluation</span> <span class="o">=</span> <span class="n">evaluation</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">NA</span> <span class="o">=</span> <span class="n">Decimal</span><span class="p">(</span><span class="s1">&#39;-999&#39;</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">weightPreorder</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">computeWeightPreorder</span><span class="p">()</span>
 
 
@@ -2275,6 +2297,7 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">criteriaWeightMode</span> <span class="o">=</span> <span class="n">weightMode</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">criteria</span> <span class="o">=</span> <span class="n">criteria</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">evaluation</span> <span class="o">=</span> <span class="n">evaluation</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">NA</span> <span class="o">=</span> <span class="n">Decimal</span><span class="p">(</span><span class="s1">&#39;-999&#39;</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">weightPreorder</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">computeWeightPreorder</span><span class="p">()</span>
 
 <div class="viewcode-block" id="Random3ObjectivesPerformanceTableau"><a class="viewcode-back" href="../techDoc.html#randomPerfTabs.Random3ObjectivesPerformanceTableau">[docs]</a><span class="k">class</span> <span class="nc">Random3ObjectivesPerformanceTableau</span><span class="p">(</span><span class="n">PerformanceTableau</span><span class="p">):</span>
@@ -2386,6 +2409,7 @@
                  <span class="n">valueDigits</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span>\
                  <span class="n">vetoProbability</span><span class="o">=</span><span class="mf">0.5</span><span class="p">,</span>\
                  <span class="n">missingDataProbability</span> <span class="o">=</span> <span class="mf">0.05</span><span class="p">,</span>\
+                 <span class="n">NA</span> <span class="o">=</span> <span class="o">-</span><span class="mi">999</span><span class="p">,</span>\
                  <span class="n">BigData</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>\
                  <span class="n">seed</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>\
                  <span class="n">Debug</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
@@ -2767,20 +2791,22 @@
                 <span class="n">objWeight</span> <span class="o">+=</span> <span class="nb">abs</span><span class="p">(</span><span class="n">criteria</span><span class="p">[</span><span class="n">g</span><span class="p">][</span><span class="s1">&#39;weight&#39;</span><span class="p">])</span>
             <span class="n">objectives</span><span class="p">[</span><span class="n">obj</span><span class="p">][</span><span class="s1">&#39;weight&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">objWeight</span>
 
+        <span class="c1"># insert missing data</span>
+        <span class="n">NA</span> <span class="o">=</span> <span class="n">Decimal</span><span class="p">(</span><span class="n">NA</span><span class="p">)</span>
+        <span class="k">for</span> <span class="n">g</span> <span class="ow">in</span> <span class="n">criteria</span><span class="p">:</span>
+            <span class="n">sevalg</span> <span class="o">=</span> <span class="n">evaluation</span><span class="p">[</span><span class="n">g</span><span class="p">]</span>
+            <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">actions</span><span class="p">:</span>
+                <span class="k">if</span> <span class="n">_random</span><span class="o">.</span><span class="n">random</span><span class="p">()</span> <span class="o">&lt;</span> <span class="n">missingDataProbability</span><span class="p">:</span>
+                    <span class="n">sevalg</span><span class="p">[</span><span class="n">x</span><span class="p">]</span> <span class="o">=</span> <span class="n">NA</span>
+
         <span class="c1"># instantiate the peformance tableau slots</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">actions</span> <span class="o">=</span> <span class="n">actions</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">objectives</span> <span class="o">=</span> <span class="n">objectives</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">criteriaWeightMode</span> <span class="o">=</span> <span class="n">weightMode</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">criteria</span> <span class="o">=</span> <span class="n">criteria</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">evaluation</span> <span class="o">=</span> <span class="n">evaluation</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">weightPreorder</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">computeWeightPreorder</span><span class="p">()</span>
-
-        <span class="c1"># insert missing data</span>
-        <span class="k">for</span> <span class="n">g</span> <span class="ow">in</span> <span class="n">criteria</span><span class="p">:</span>
-            <span class="n">sevalg</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">evaluation</span><span class="p">[</span><span class="n">g</span><span class="p">]</span>
-            <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">actions</span><span class="p">:</span>
-                <span class="k">if</span> <span class="n">_random</span><span class="o">.</span><span class="n">random</span><span class="p">()</span> <span class="o">&lt;</span> <span class="n">missingDataProbability</span><span class="p">:</span>
-                    <span class="n">sevalg</span><span class="p">[</span><span class="n">x</span><span class="p">]</span> <span class="o">=</span> <span class="n">Decimal</span><span class="p">(</span><span class="s1">&#39;-999&#39;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">evaluation</span> <span class="o">=</span> <span class="n">evaluation</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">NA</span> <span class="o">=</span> <span class="n">NA</span>
 
     <span class="k">def</span> <span class="nf">showObjectives</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;*------ show objectives -------&quot;&#39;</span><span class="p">)</span>
@@ -3032,10 +3058,11 @@
             <span class="nb">print</span><span class="p">(</span><span class="n">evaluation</span><span class="p">)</span>
 
         <span class="c1"># randomly insert missing data</span>
+        <span class="n">NA</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">perfTab</span><span class="o">.</span><span class="n">NA</span>
         <span class="n">missingDataProbability</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">perfTab</span><span class="o">.</span><span class="n">missingDataProbability</span>
         <span class="k">for</span> <span class="n">g</span> <span class="ow">in</span> <span class="n">criteria</span><span class="p">:</span>
             <span class="k">if</span> <span class="n">random</span><span class="o">.</span><span class="n">random</span><span class="p">()</span> <span class="o">&lt;</span> <span class="n">missingDataProbability</span><span class="p">:</span>
-                <span class="n">evaluation</span><span class="p">[</span><span class="n">g</span><span class="p">]</span> <span class="o">=</span> <span class="n">Decimal</span><span class="p">(</span><span class="s1">&#39;-999&#39;</span><span class="p">)</span>
+                <span class="n">evaluation</span><span class="p">[</span><span class="n">g</span><span class="p">]</span> <span class="o">=</span> <span class="n">NA</span>
 
         <span class="c1"># return a new random decision alternative</span>
         <span class="k">return</span> <span class="p">{</span><span class="s1">&#39;action&#39;</span><span class="p">:</span> <span class="n">action</span><span class="p">,</span><span class="s1">&#39;evaluation&#39;</span><span class="p">:</span><span class="n">evaluation</span><span class="p">}</span>
@@ -3063,199 +3090,200 @@
 
 
 <span class="c1">#---------------</span>
-<span class="k">class</span> <span class="nc">_Random3ObjectivesPerformanceTableau</span><span class="p">(</span><span class="n">_RandomCoalitionsPerformanceTableau</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">    Specialization of the RandomCoalitionsPerformanceTableau</span>
-<span class="sd">    for 3 objectives: *A*, *B* and *C*.</span>
+<span class="c1"># class _Random3ObjectivesPerformanceTableau(_RandomCoalitionsPerformanceTableau):</span>
+<span class="c1">#     &quot;&quot;&quot;</span>
+<span class="c1">#     Specialization of the RandomCoalitionsPerformanceTableau</span>
+<span class="c1">#     for 3 objectives: *A*, *B* and *C*.</span>
 
-<span class="sd">    Each decision action is qualified at random as weak (-), fair (~) or good (+)</span>
-<span class="sd">    on each of the three objectives. The action comment shows for each objective the respective position (- ,~, +)</span>
-<span class="sd">    of the evaluation mode, for instance (*A* - *B* + *C* ~).</span>
-<span class="sd">    </span>
-<span class="sd">    Generator parameters are described in the parent class.</span>
-<span class="sd">    </span>
-<span class="sd">    .. note::</span>
+<span class="c1">#     Each decision action is qualified at random as weak (-), fair (~) or good (+)</span>
+<span class="c1">#     on each of the three objectives. The action comment shows for each objective the respective position (- ,~, +)</span>
+<span class="c1">#     of the evaluation mode, for instance (*A* - *B* + *C* ~).</span>
+    
+<span class="c1">#     Generator parameters are described in the parent class.</span>
+    
+<span class="c1">#     .. note::</span>
 
-<span class="sd">        If the mode of the triangular districbution is set to &#39;variable&#39;,</span>
-<span class="sd">        three modes at 0.3 (-), 0.5 (~), respectively 0.7 (+) of the common scale span</span>
-<span class="sd">        are set at random for each coalition and action.</span>
-<span class="sd">    </span>
-<span class="sd">    &quot;&quot;&quot;</span>
-    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">numberOfActions</span> <span class="o">=</span> <span class="mi">20</span><span class="p">,</span> <span class="n">numberOfCriteria</span> <span class="o">=</span> <span class="mi">13</span><span class="p">,</span>\
-                 <span class="n">weightDistribution</span> <span class="o">=</span> <span class="s1">&#39;equiobjectives&#39;</span><span class="p">,</span> <span class="n">weightScale</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>\
-                 <span class="n">IntegerWeights</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span> <span class="n">commonScale</span> <span class="o">=</span> <span class="p">(</span><span class="mf">0.0</span><span class="p">,</span><span class="mf">100.0</span><span class="p">),</span>\
-                 <span class="n">commonThresholds</span> <span class="o">=</span> <span class="p">[(</span><span class="mf">5.0</span><span class="p">,</span><span class="mf">0.0</span><span class="p">),(</span><span class="mf">10.0</span><span class="p">,</span><span class="mf">0.0</span><span class="p">),(</span><span class="mf">60.0</span><span class="p">,</span><span class="mf">0.0</span><span class="p">)],</span>\
-                 <span class="n">commonDistribution</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;triangular&#39;</span><span class="p">,</span><span class="s1">&#39;variable&#39;</span><span class="p">,</span><span class="mf">0.5</span><span class="p">],</span>\
-                 <span class="n">missingDataProbability</span> <span class="o">=</span> <span class="mf">0.05</span><span class="p">,</span>\
-                 <span class="n">valueDigits</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span>\
-                 <span class="n">BigData</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>\
-                 <span class="n">Debug</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> 
-                 <span class="n">seed</span><span class="o">=</span> <span class="kc">None</span><span class="p">):</span>
-        <span class="kn">from</span> <span class="nn">copy</span> <span class="k">import</span> <span class="n">deepcopy</span>
-        <span class="kn">import</span> <span class="nn">random</span>
-        <span class="n">random</span><span class="o">.</span><span class="n">seed</span><span class="p">(</span><span class="n">seed</span><span class="p">)</span>
+<span class="c1">#         If the mode of the triangular districbution is set to &#39;variable&#39;,</span>
+<span class="c1">#         three modes at 0.3 (-), 0.5 (~), respectively 0.7 (+) of the common scale span</span>
+<span class="c1">#         are set at random for each coalition and action.</span>
+    
+<span class="c1">#     &quot;&quot;&quot;</span>
+<span class="c1">#     def __init__(self,numberOfActions = 20, numberOfCriteria = 13,\</span>
+<span class="c1">#                  weightDistribution = &#39;equiobjectives&#39;, weightScale=None,\</span>
+<span class="c1">#                  IntegerWeights = True, commonScale = (0.0,100.0),\</span>
+<span class="c1">#                  commonThresholds = [(5.0,0.0),(10.0,0.0),(60.0,0.0)],\</span>
+<span class="c1">#                  commonDistribution = [&#39;triangular&#39;,&#39;variable&#39;,0.5],\</span>
+<span class="c1">#                  missingDataProbability = 0.05,\</span>
+<span class="c1">#                  NA = -999,\</span>
+<span class="c1">#                  valueDigits=2,\</span>
+<span class="c1">#                  BigData=False,\</span>
+<span class="c1">#                  Debug=False, </span>
+<span class="c1">#                  seed= None):</span>
+<span class="c1">#         from copy import deepcopy</span>
+<span class="c1">#         import random</span>
+<span class="c1">#         random.seed(seed)</span>
         
-        <span class="k">if</span> <span class="n">commonDistribution</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">==</span> <span class="s1">&#39;variable&#39;</span><span class="p">:</span>
-            <span class="n">VariableGenerators</span> <span class="o">=</span> <span class="kc">True</span>
-            <span class="n">commonMode</span> <span class="o">=</span> <span class="p">[</span><span class="n">commonDistribution</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span>
-                          <span class="p">(</span><span class="n">commonScale</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">+</span><span class="n">commonScale</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span><span class="o">/</span><span class="mf">2.0</span><span class="p">,</span>
-                          <span class="n">commonDistribution</span><span class="p">[</span><span class="mi">2</span><span class="p">]]</span>
-        <span class="k">else</span><span class="p">:</span>
-            <span class="n">VariableGenerators</span> <span class="o">=</span> <span class="kc">False</span>
-        <span class="k">if</span> <span class="n">weightDistribution</span> <span class="o">==</span> <span class="s1">&#39;equiobjectives&#39;</span><span class="p">:</span>
-            <span class="n">weightDistribution</span> <span class="o">=</span> <span class="s1">&#39;equicoalitions&#39;</span>
-        <span class="n">t</span> <span class="o">=</span> <span class="n">RandomCoalitionsPerformanceTableau</span><span class="p">(</span><span class="n">numberOfActions</span><span class="o">=</span><span class="n">numberOfActions</span><span class="p">,</span>
-                                               <span class="n">numberOfCriteria</span><span class="o">=</span><span class="n">numberOfCriteria</span><span class="p">,</span>
-                                               <span class="n">weightDistribution</span><span class="o">=</span><span class="n">weightDistribution</span><span class="p">,</span>
-                                               <span class="n">weightScale</span><span class="o">=</span><span class="n">weightScale</span><span class="p">,</span>
-                                               <span class="n">IntegerWeights</span><span class="o">=</span><span class="n">IntegerWeights</span><span class="p">,</span>
-                                               <span class="n">commonScale</span> <span class="o">=</span><span class="n">commonScale</span><span class="p">,</span>
-                                               <span class="n">commonThresholds</span><span class="o">=</span><span class="n">commonThresholds</span><span class="p">,</span>
-                                               <span class="n">commonMode</span><span class="o">=</span><span class="n">commonDistribution</span><span class="p">,</span>
-                                               <span class="n">VariableGenerators</span><span class="o">=</span><span class="n">VariableGenerators</span><span class="p">,</span>
-                                               <span class="n">valueDigits</span><span class="o">=</span><span class="n">valueDigits</span><span class="p">,</span>
-                                               <span class="n">BigData</span><span class="o">=</span><span class="n">BigData</span><span class="p">,</span>
-                                               <span class="n">Debug</span><span class="o">=</span><span class="n">Debug</span><span class="p">,</span> <span class="n">seed</span><span class="o">=</span><span class="n">seed</span><span class="p">)</span>
+<span class="c1">#         if commonDistribution[1] == &#39;variable&#39;:</span>
+<span class="c1">#             VariableGenerators = True</span>
+<span class="c1">#             commonMode = [commonDistribution[0],</span>
+<span class="c1">#                           (commonScale[0]+commonScale[1])/2.0,</span>
+<span class="c1">#                           commonDistribution[2]]</span>
+<span class="c1">#         else:</span>
+<span class="c1">#             VariableGenerators = False</span>
+<span class="c1">#         if weightDistribution == &#39;equiobjectives&#39;:</span>
+<span class="c1">#             weightDistribution = &#39;equicoalitions&#39;</span>
+<span class="c1">#         t = RandomCoalitionsPerformanceTableau(numberOfActions=numberOfActions,</span>
+<span class="c1">#                                                numberOfCriteria=numberOfCriteria,</span>
+<span class="c1">#                                                weightDistribution=weightDistribution,</span>
+<span class="c1">#                                                weightScale=weightScale,</span>
+<span class="c1">#                                                IntegerWeights=IntegerWeights,</span>
+<span class="c1">#                                                commonScale =commonScale,</span>
+<span class="c1">#                                                commonThresholds=commonThresholds,</span>
+<span class="c1">#                                                commonMode=commonDistribution,</span>
+<span class="c1">#                                                VariableGenerators=VariableGenerators,</span>
+<span class="c1">#                                                valueDigits=valueDigits,</span>
+<span class="c1">#                                                BigData=BigData,</span>
+<span class="c1">#                                                Debug=Debug, seed=seed)</span>
 
-        <span class="bp">self</span><span class="o">.</span><span class="vm">__dict__</span> <span class="o">=</span> <span class="n">t</span><span class="o">.</span><span class="vm">__dict__</span>
-        <span class="k">for</span> <span class="n">g</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">criteria</span><span class="p">:</span>
-            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">criteria</span><span class="p">[</span><span class="n">g</span><span class="p">][</span><span class="s1">&#39;name&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="s1">&#39;random criterion of coalition A&#39;</span><span class="p">:</span>
-                <span class="bp">self</span><span class="o">.</span><span class="n">criteria</span><span class="p">[</span><span class="n">g</span><span class="p">][</span><span class="s1">&#39;name&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s1">&#39;random economic criterion&#39;</span>
-                <span class="bp">self</span><span class="o">.</span><span class="n">criteria</span><span class="p">[</span><span class="n">g</span><span class="p">][</span><span class="s1">&#39;objective&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s1">&#39;Eco&#39;</span>
-            <span class="k">elif</span> <span class="bp">self</span><span class="o">.</span><span class="n">criteria</span><span class="p">[</span><span class="n">g</span><span class="p">][</span><span class="s1">&#39;name&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="s1">&#39;random criterion of coalition B&#39;</span><span class="p">:</span>
-                <span class="bp">self</span><span class="o">.</span><span class="n">criteria</span><span class="p">[</span><span class="n">g</span><span class="p">][</span><span class="s1">&#39;name&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s1">&#39;random societal criterion&#39;</span>
-                <span class="bp">self</span><span class="o">.</span><span class="n">criteria</span><span class="p">[</span><span class="n">g</span><span class="p">][</span><span class="s1">&#39;objective&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s1">&#39;Soc&#39;</span>
-            <span class="k">elif</span> <span class="bp">self</span><span class="o">.</span><span class="n">criteria</span><span class="p">[</span><span class="n">g</span><span class="p">][</span><span class="s1">&#39;name&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="s1">&#39;random criterion of coalition C&#39;</span><span class="p">:</span>
-                <span class="bp">self</span><span class="o">.</span><span class="n">criteria</span><span class="p">[</span><span class="n">g</span><span class="p">][</span><span class="s1">&#39;name&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s1">&#39;random environmental criterion&#39;</span>
-                <span class="bp">self</span><span class="o">.</span><span class="n">criteria</span><span class="p">[</span><span class="n">g</span><span class="p">][</span><span class="s1">&#39;objective&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s1">&#39;Env&#39;</span>
+<span class="c1">#         self.__dict__ = t.__dict__</span>
+<span class="c1">#         for g in self.criteria:</span>
+<span class="c1">#             if self.criteria[g][&#39;name&#39;] == &#39;random criterion of coalition A&#39;:</span>
+<span class="c1">#                 self.criteria[g][&#39;name&#39;] = &#39;random economic criterion&#39;</span>
+<span class="c1">#                 self.criteria[g][&#39;objective&#39;] = &#39;Eco&#39;</span>
+<span class="c1">#             elif self.criteria[g][&#39;name&#39;] == &#39;random criterion of coalition B&#39;:</span>
+<span class="c1">#                 self.criteria[g][&#39;name&#39;] = &#39;random societal criterion&#39;</span>
+<span class="c1">#                 self.criteria[g][&#39;objective&#39;] = &#39;Soc&#39;</span>
+<span class="c1">#             elif self.criteria[g][&#39;name&#39;] == &#39;random criterion of coalition C&#39;:</span>
+<span class="c1">#                 self.criteria[g][&#39;name&#39;] = &#39;random environmental criterion&#39;</span>
+<span class="c1">#                 self.criteria[g][&#39;objective&#39;] = &#39;Env&#39;</span>
                 
-        <span class="bp">self</span><span class="o">.</span><span class="n">objectives</span> <span class="o">=</span> <span class="n">OrderedDict</span><span class="p">({</span>
-            <span class="s1">&#39;Eco&#39;</span><span class="p">:</span> <span class="p">{</span><span class="s1">&#39;name&#39;</span><span class="p">:</span><span class="s1">&#39;Economical aspect&#39;</span><span class="p">,</span>
-                  <span class="s1">&#39;comment&#39;</span><span class="p">:</span> <span class="s1">&#39;Random3ObjectivesPerformanceTableau generated&#39;</span><span class="p">},</span>
-            <span class="s1">&#39;Soc&#39;</span><span class="p">:</span> <span class="p">{</span><span class="s1">&#39;name&#39;</span><span class="p">:</span> <span class="s1">&#39;Societal aspect&#39;</span><span class="p">,</span>
-                  <span class="s1">&#39;comment&#39;</span><span class="p">:</span> <span class="s1">&#39;Random3ObjectivesPerformanceTableau generated&#39;</span><span class="p">},</span>
-            <span class="s1">&#39;Env&#39;</span><span class="p">:</span> <span class="p">{</span><span class="s1">&#39;name&#39;</span><span class="p">:</span><span class="s1">&#39;Environmental aspect&#39;</span><span class="p">,</span>
-                  <span class="s1">&#39;comment&#39;</span><span class="p">:</span> <span class="s1">&#39;Random3ObjectivesPerformanceTableau generated&#39;</span><span class="p">}</span>
-            <span class="p">})</span>
+<span class="c1">#         self.objectives = OrderedDict({</span>
+<span class="c1">#             &#39;Eco&#39;: {&#39;name&#39;:&#39;Economical aspect&#39;,</span>
+<span class="c1">#                   &#39;comment&#39;: &#39;Random3ObjectivesPerformanceTableau generated&#39;},</span>
+<span class="c1">#             &#39;Soc&#39;: {&#39;name&#39;: &#39;Societal aspect&#39;,</span>
+<span class="c1">#                   &#39;comment&#39;: &#39;Random3ObjectivesPerformanceTableau generated&#39;},</span>
+<span class="c1">#             &#39;Env&#39;: {&#39;name&#39;:&#39;Environmental aspect&#39;,</span>
+<span class="c1">#                   &#39;comment&#39;: &#39;Random3ObjectivesPerformanceTableau generated&#39;}</span>
+<span class="c1">#             })</span>
         
-        <span class="k">for</span> <span class="n">obj</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">objectives</span><span class="p">:</span>
-            <span class="n">objCriteria</span> <span class="o">=</span> <span class="p">[</span><span class="n">g</span> <span class="k">for</span> <span class="n">g</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">criteria</span> <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">criteria</span><span class="p">[</span><span class="n">g</span><span class="p">][</span><span class="s1">&#39;objective&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="n">obj</span><span class="p">]</span>
-            <span class="c1">#objCriteria.sort()</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">objectives</span><span class="p">[</span><span class="n">obj</span><span class="p">][</span><span class="s1">&#39;criteria&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">objCriteria</span>
-            <span class="n">objWeight</span> <span class="o">=</span> <span class="n">Decimal</span><span class="p">(</span><span class="s1">&#39;0&#39;</span><span class="p">)</span>
-            <span class="k">for</span> <span class="n">g</span> <span class="ow">in</span> <span class="n">objCriteria</span><span class="p">:</span>
-                <span class="n">objWeight</span> <span class="o">+=</span> <span class="bp">self</span><span class="o">.</span><span class="n">criteria</span><span class="p">[</span><span class="n">g</span><span class="p">][</span><span class="s1">&#39;weight&#39;</span><span class="p">]</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">objectives</span><span class="p">[</span><span class="n">obj</span><span class="p">][</span><span class="s1">&#39;weight&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">objWeight</span>
+<span class="c1">#         for obj in self.objectives:</span>
+<span class="c1">#             objCriteria = [g for g in self.criteria if self.criteria[g][&#39;objective&#39;] == obj]</span>
+<span class="c1">#             #objCriteria.sort()</span>
+<span class="c1">#             self.objectives[obj][&#39;criteria&#39;] = objCriteria</span>
+<span class="c1">#             objWeight = Decimal(&#39;0&#39;)</span>
+<span class="c1">#             for g in objCriteria:</span>
+<span class="c1">#                 objWeight += self.criteria[g][&#39;weight&#39;]</span>
+<span class="c1">#             self.objectives[obj][&#39;weight&#39;] = objWeight</span>
 
-        <span class="c1">#actionsList = [x for x in self.actions]</span>
-        <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="nb">dict</span><span class="o">.</span><span class="n">keys</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">actions</span><span class="p">):</span>
-            <span class="k">if</span> <span class="s1">&#39;A- B- C-&#39;</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">actions</span><span class="p">[</span><span class="n">x</span><span class="p">][</span><span class="s1">&#39;name&#39;</span><span class="p">]:</span>
-                <span class="bp">self</span><span class="o">.</span><span class="n">actions</span><span class="p">[</span><span class="n">x</span><span class="p">][</span><span class="s1">&#39;name&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s1">&#39;random decision action (Eco- Soc- Env-)&#39;</span>
-                <span class="bp">self</span><span class="o">.</span><span class="n">actions</span><span class="p">[</span><span class="n">x</span><span class="p">][</span><span class="s1">&#39;profile&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;Eco&#39;</span><span class="p">:</span> <span class="s1">&#39;weak&#39;</span><span class="p">,</span> <span class="s1">&#39;Soc&#39;</span><span class="p">:</span> <span class="s1">&#39;weak&#39;</span><span class="p">,</span><span class="s1">&#39;Env&#39;</span><span class="p">:</span> <span class="s1">&#39;weak&#39;</span><span class="p">}</span>
-            <span class="k">elif</span> <span class="s1">&#39;A~ B- C-&#39;</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">actions</span><span class="p">[</span><span class="n">x</span><span class="p">][</span><span class="s1">&#39;name&#39;</span><span class="p">]:</span>
-                <span class="bp">self</span><span class="o">.</span><span class="n">actions</span><span class="p">[</span><span class="n">x</span><span class="p">][</span><span class="s1">&#39;name&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s1">&#39;random decision action (Eco~ Soc- Env-)&#39;</span>
-                <span class="bp">self</span><span class="o">.</span><span class="n">actions</span><span class="p">[</span><span class="n">x</span><span class="p">][</span><span class="s1">&#39;profile&#39;</span><span class="p">]</span> <span class="o">=</span><span class="p">{</span><span class="s1">&#39;Eco&#39;</span><span class="p">:</span> <span class="s1">&#39;fair&#39;</span><span class="p">,</span> <span class="s1">&#39;Soc&#39;</span><span class="p">:</span> <span class="s1">&#39;weak&#39;</span><span class="p">,</span><span class="s1">&#39;Env&#39;</span><span class="p">:</span> <span class="s1">&#39;weak&#39;</span><span class="p">}</span>
-            <span class="k">elif</span> <span class="s1">&#39;A+ B- C-&#39;</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">actions</span><span class="p">[</span><span class="n">x</span><span class="p">][</span><span class="s1">&#39;name&#39;</span><span class="p">]:</span>
-                <span class="bp">self</span><span class="o">.</span><span class="n">actions</span><span class="p">[</span><span class="n">x</span><span class="p">][</span><span class="s1">&#39;name&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s1">&#39;random decision action (Eco+ Soc- Env-)&#39;</span>
-                <span class="bp">self</span><span class="o">.</span><span class="n">actions</span><span class="p">[</span><span class="n">x</span><span class="p">][</span><span class="s1">&#39;profile&#39;</span><span class="p">]</span> <span class="o">=</span><span class="p">{</span><span class="s1">&#39;Eco&#39;</span><span class="p">:</span> <span class="s1">&#39;good&#39;</span><span class="p">,</span> <span class="s1">&#39;Soc&#39;</span><span class="p">:</span> <span class="s1">&#39;weak&#39;</span><span class="p">,</span><span class="s1">&#39;Env&#39;</span><span class="p">:</span> <span class="s1">&#39;weak&#39;</span><span class="p">}</span>
-            <span class="k">elif</span> <span class="s1">&#39;A- B~ C-&#39;</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">actions</span><span class="p">[</span><span class="n">x</span><span class="p">][</span><span class="s1">&#39;name&#39;</span><span class="p">]:</span>
-                <span class="bp">self</span><span class="o">.</span><span class="n">actions</span><span class="p">[</span><span class="n">x</span><span class="p">][</span><span class="s1">&#39;name&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s1">&#39;random decision action (Eco- Soc~ Env-)&#39;</span>
-                <span class="bp">self</span><span class="o">.</span><span class="n">actions</span><span class="p">[</span><span class="n">x</span><span class="p">][</span><span class="s1">&#39;profile&#39;</span><span class="p">]</span> <span class="o">=</span><span class="p">{</span><span class="s1">&#39;Eco&#39;</span><span class="p">:</span> <span class="s1">&#39;weak&#39;</span><span class="p">,</span> <span class="s1">&#39;Soc&#39;</span><span class="p">:</span> <span class="s1">&#39;fair&#39;</span><span class="p">,</span><span class="s1">&#39;Env&#39;</span><span class="p">:</span> <span class="s1">&#39;weak&#39;</span><span class="p">}</span>
-            <span class="k">elif</span> <span class="s1">&#39;A~ B~ C-&#39;</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">actions</span><span class="p">[</span><span class="n">x</span><span class="p">][</span><span class="s1">&#39;name&#39;</span><span class="p">]:</span>
-                <span class="bp">self</span><span class="o">.</span><span class="n">actions</span><span class="p">[</span><span class="n">x</span><span class="p">][</span><span class="s1">&#39;name&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s1">&#39;random decision action (Eco~ Soc~ Env-)&#39;</span>
-                <span class="bp">self</span><span class="o">.</span><span class="n">actions</span><span class="p">[</span><span class="n">x</span><span class="p">][</span><span class="s1">&#39;profile&#39;</span><span class="p">]</span> <span class="o">=</span><span class="p">{</span><span class="s1">&#39;Eco&#39;</span><span class="p">:</span> <span class="s1">&#39;fair&#39;</span><span class="p">,</span> <span class="s1">&#39;Soc&#39;</span><span class="p">:</span> <span class="s1">&#39;fair&#39;</span><span class="p">,</span><span class="s1">&#39;Env&#39;</span><span class="p">:</span> <span class="s1">&#39;weak&#39;</span><span class="p">}</span>
-            <span class="k">elif</span> <span class="s1">&#39;A+ B~ C-&#39;</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">actions</span><span class="p">[</span><span class="n">x</span><span class="p">][</span><span class="s1">&#39;name&#39;</span><span class="p">]:</span>
-                <span class="bp">self</span><span class="o">.</span><span class="n">actions</span><span class="p">[</span><span class="n">x</span><span class="p">][</span><span class="s1">&#39;name&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s1">&#39;random decision action (Eco+ Soc~ Env-)&#39;</span>
-                <span class="bp">self</span><span class="o">.</span><span class="n">actions</span><span class="p">[</span><span class="n">x</span><span class="p">][</span><span class="s1">&#39;profile&#39;</span><span class="p">]</span> <span class="o">=</span><span class="p">{</span><span class="s1">&#39;Eco&#39;</span><span class="p">:</span> <span class="s1">&#39;good&#39;</span><span class="p">,</span> <span class="s1">&#39;Soc&#39;</span><span class="p">:</span> <span class="s1">&#39;fair&#39;</span><span class="p">,</span><span class="s1">&#39;Env&#39;</span><span class="p">:</span> <span class="s1">&#39;weak&#39;</span><span class="p">}</span>
-            <span class="k">elif</span> <span class="s1">&#39;A- B+ C-&#39;</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">actions</span><span class="p">[</span><span class="n">x</span><span class="p">][</span><span class="s1">&#39;name&#39;</span><span class="p">]:</span>
-                <span class="bp">self</span><span class="o">.</span><span class="n">actions</span><span class="p">[</span><span class="n">x</span><span class="p">][</span><span class="s1">&#39;name&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s1">&#39;random decision action (Eco- Soc+ Env-)&#39;</span>
-                <span class="bp">self</span><span class="o">.</span><span class="n">actions</span><span class="p">[</span><span class="n">x</span><span class="p">][</span><span class="s1">&#39;profile&#39;</span><span class="p">]</span> <span class="o">=</span><span class="p">{</span><span class="s1">&#39;Eco&#39;</span><span class="p">:</span> <span class="s1">&#39;weak&#39;</span><span class="p">,</span> <span class="s1">&#39;Soc&#39;</span><span class="p">:</span> <span class="s1">&#39;good&#39;</span><span class="p">,</span><span class="s1">&#39;Env&#39;</span><span class="p">:</span> <span class="s1">&#39;weak&#39;</span><span class="p">}</span>
-            <span class="k">elif</span> <span class="s1">&#39;A~ B+ C-&#39;</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">actions</span><span class="p">[</span><span class="n">x</span><span class="p">][</span><span class="s1">&#39;name&#39;</span><span class="p">]:</span>
-                <span class="bp">self</span><span class="o">.</span><span class="n">actions</span><span class="p">[</span><span class="n">x</span><span class="p">][</span><span class="s1">&#39;name&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s1">&#39;random decision action (Eco~ Soc+ Env-)&#39;</span>
-                <span class="bp">self</span><span class="o">.</span><span class="n">actions</span><span class="p">[</span><span class="n">x</span><span class="p">][</span><span class="s1">&#39;profile&#39;</span><span class="p">]</span> <span class="o">=</span><span class="p">{</span><span class="s1">&#39;Eco&#39;</span><span class="p">:</span> <span class="s1">&#39;fair&#39;</span><span class="p">,</span> <span class="s1">&#39;Soc&#39;</span><span class="p">:</span> <span class="s1">&#39;good&#39;</span><span class="p">,</span><span class="s1">&#39;Env&#39;</span><span class="p">:</span> <span class="s1">&#39;weak&#39;</span><span class="p">}</span>
-            <span class="k">elif</span> <span class="s1">&#39;A+ B+ C-&#39;</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">actions</span><span class="p">[</span><span class="n">x</span><span class="p">][</span><span class="s1">&#39;name&#39;</span><span class="p">]:</span>
-                <span class="bp">self</span><span class="o">.</span><span class="n">actions</span><span class="p">[</span><span class="n">x</span><span class="p">][</span><span class="s1">&#39;name&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s1">&#39;random decision action (Eco+ Soc+ Env-)&#39;</span>
-                <span class="bp">self</span><span class="o">.</span><span class="n">actions</span><span class="p">[</span><span class="n">x</span><span class="p">][</span><span class="s1">&#39;profile&#39;</span><span class="p">]</span> <span class="o">=</span><span class="p">{</span><span class="s1">&#39;Eco&#39;</span><span class="p">:</span> <span class="s1">&#39;good&#39;</span><span class="p">,</span> <span class="s1">&#39;Soc&#39;</span><span class="p">:</span> <span class="s1">&#39;good&#39;</span><span class="p">,</span><span class="s1">&#39;Env&#39;</span><span class="p">:</span> <span class="s1">&#39;weak&#39;</span><span class="p">}</span>
-            <span class="k">elif</span> <span class="s1">&#39;A- B- C~&#39;</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">actions</span><span class="p">[</span><span class="n">x</span><span class="p">][</span><span class="s1">&#39;name&#39;</span><span class="p">]:</span>
-                <span class="bp">self</span><span class="o">.</span><span class="n">actions</span><span class="p">[</span><span class="n">x</span><span class="p">][</span><span class="s1">&#39;name&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s1">&#39;random decision action (Eco- Soc- Env~)&#39;</span>
-                <span class="bp">self</span><span class="o">.</span><span class="n">actions</span><span class="p">[</span><span class="n">x</span><span class="p">][</span><span class="s1">&#39;profile&#39;</span><span class="p">]</span> <span class="o">=</span><span class="p">{</span><span class="s1">&#39;Eco&#39;</span><span class="p">:</span> <span class="s1">&#39;weak&#39;</span><span class="p">,</span> <span class="s1">&#39;Soc&#39;</span><span class="p">:</span> <span class="s1">&#39;weak&#39;</span><span class="p">,</span><span class="s1">&#39;Env&#39;</span><span class="p">:</span> <span class="s1">&#39;fair&#39;</span><span class="p">}</span>
-            <span class="k">elif</span> <span class="s1">&#39;A~ B- C~&#39;</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">actions</span><span class="p">[</span><span class="n">x</span><span class="p">][</span><span class="s1">&#39;name&#39;</span><span class="p">]:</span>
-                <span class="bp">self</span><span class="o">.</span><span class="n">actions</span><span class="p">[</span><span class="n">x</span><span class="p">][</span><span class="s1">&#39;name&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s1">&#39;random decision action (Eco~ Soc- Env~)&#39;</span>
-                <span class="bp">self</span><span class="o">.</span><span class="n">actions</span><span class="p">[</span><span class="n">x</span><span class="p">][</span><span class="s1">&#39;profile&#39;</span><span class="p">]</span> <span class="o">=</span><span class="p">{</span><span class="s1">&#39;Eco&#39;</span><span class="p">:</span> <span class="s1">&#39;fair&#39;</span><span class="p">,</span> <span class="s1">&#39;Soc&#39;</span><span class="p">:</span> <span class="s1">&#39;weak&#39;</span><span class="p">,</span><span class="s1">&#39;Env&#39;</span><span class="p">:</span> <span class="s1">&#39;fair&#39;</span><span class="p">}</span>
-            <span class="k">elif</span> <span class="s1">&#39;A+ B- C~&#39;</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">actions</span><span class="p">[</span><span class="n">x</span><span class="p">][</span><span class="s1">&#39;name&#39;</span><span class="p">]:</span>
-                <span class="bp">self</span><span class="o">.</span><span class="n">actions</span><span class="p">[</span><span class="n">x</span><span class="p">][</span><span class="s1">&#39;name&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s1">&#39;random decision action (Eco+ Soc- Env~)&#39;</span>
-                <span class="bp">self</span><span class="o">.</span><span class="n">actions</span><span class="p">[</span><span class="n">x</span><span class="p">][</span><span class="s1">&#39;profile&#39;</span><span class="p">]</span> <span class="o">=</span><span class="p">{</span><span class="s1">&#39;Eco&#39;</span><span class="p">:</span> <span class="s1">&#39;good&#39;</span><span class="p">,</span> <span class="s1">&#39;Soc&#39;</span><span class="p">:</span> <span class="s1">&#39;weak&#39;</span><span class="p">,</span><span class="s1">&#39;Env&#39;</span><span class="p">:</span> <span class="s1">&#39;fair&#39;</span><span class="p">}</span>
-            <span class="k">elif</span> <span class="s1">&#39;A- B~ C~&#39;</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">actions</span><span class="p">[</span><span class="n">x</span><span class="p">][</span><span class="s1">&#39;name&#39;</span><span class="p">]:</span>
-                <span class="bp">self</span><span class="o">.</span><span class="n">actions</span><span class="p">[</span><span class="n">x</span><span class="p">][</span><span class="s1">&#39;name&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s1">&#39;random decision action (Eco- Soc~ Env~)&#39;</span>
-                <span class="bp">self</span><span class="o">.</span><span class="n">actions</span><span class="p">[</span><span class="n">x</span><span class="p">][</span><span class="s1">&#39;profile&#39;</span><span class="p">]</span> <span class="o">=</span><span class="p">{</span><span class="s1">&#39;Eco&#39;</span><span class="p">:</span> <span class="s1">&#39;weak&#39;</span><span class="p">,</span> <span class="s1">&#39;Soc&#39;</span><span class="p">:</span> <span class="s1">&#39;fair&#39;</span><span class="p">,</span><span class="s1">&#39;Env&#39;</span><span class="p">:</span> <span class="s1">&#39;fair&#39;</span><span class="p">}</span>
-            <span class="k">elif</span> <span class="s1">&#39;A~ B~ C~&#39;</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">actions</span><span class="p">[</span><span class="n">x</span><span class="p">][</span><span class="s1">&#39;name&#39;</span><span class="p">]:</span>
-                <span class="bp">self</span><span class="o">.</span><span class="n">actions</span><span class="p">[</span><span class="n">x</span><span class="p">][</span><span class="s1">&#39;name&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s1">&#39;random decision action (Eco~ Soc~ Env~)&#39;</span>
-                <span class="bp">self</span><span class="o">.</span><span class="n">actions</span><span class="p">[</span><span class="n">x</span><span class="p">][</span><span class="s1">&#39;profile&#39;</span><span class="p">]</span> <span class="o">=</span><span class="p">{</span><span class="s1">&#39;Eco&#39;</span><span class="p">:</span> <span class="s1">&#39;fair&#39;</span><span class="p">,</span> <span class="s1">&#39;Soc&#39;</span><span class="p">:</span> <span class="s1">&#39;fair&#39;</span><span class="p">,</span><span class="s1">&#39;Env&#39;</span><span class="p">:</span> <span class="s1">&#39;fair&#39;</span><span class="p">}</span>
-            <span class="k">elif</span> <span class="s1">&#39;A+ B~ C~&#39;</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">actions</span><span class="p">[</span><span class="n">x</span><span class="p">][</span><span class="s1">&#39;name&#39;</span><span class="p">]:</span>
-                <span class="bp">self</span><span class="o">.</span><span class="n">actions</span><span class="p">[</span><span class="n">x</span><span class="p">][</span><span class="s1">&#39;name&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s1">&#39;random decision action (Eco+ Soc~ Env~)&#39;</span>
-                <span class="bp">self</span><span class="o">.</span><span class="n">actions</span><span class="p">[</span><span class="n">x</span><span class="p">][</span><span class="s1">&#39;profile&#39;</span><span class="p">]</span> <span class="o">=</span><span class="p">{</span><span class="s1">&#39;Eco&#39;</span><span class="p">:</span> <span class="s1">&#39;good&#39;</span><span class="p">,</span> <span class="s1">&#39;Soc&#39;</span><span class="p">:</span> <span class="s1">&#39;fair&#39;</span><span class="p">,</span><span class="s1">&#39;Env&#39;</span><span class="p">:</span> <span class="s1">&#39;fair&#39;</span><span class="p">}</span>
-            <span class="k">elif</span> <span class="s1">&#39;A- B+ C~&#39;</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">actions</span><span class="p">[</span><span class="n">x</span><span class="p">][</span><span class="s1">&#39;name&#39;</span><span class="p">]:</span>
-                <span class="bp">self</span><span class="o">.</span><span class="n">actions</span><span class="p">[</span><span class="n">x</span><span class="p">][</span><span class="s1">&#39;name&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s1">&#39;random decision action (Eco- Soc+ Env~)&#39;</span>
-                <span class="bp">self</span><span class="o">.</span><span class="n">actions</span><span class="p">[</span><span class="n">x</span><span class="p">][</span><span class="s1">&#39;profile&#39;</span><span class="p">]</span> <span class="o">=</span><span class="p">{</span><span class="s1">&#39;Eco&#39;</span><span class="p">:</span> <span class="s1">&#39;weak&#39;</span><span class="p">,</span> <span class="s1">&#39;Soc&#39;</span><span class="p">:</span> <span class="s1">&#39;good&#39;</span><span class="p">,</span><span class="s1">&#39;Env&#39;</span><span class="p">:</span> <span class="s1">&#39;fair&#39;</span><span class="p">}</span>
-            <span class="k">elif</span> <span class="s1">&#39;A~ B+ C~&#39;</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">actions</span><span class="p">[</span><span class="n">x</span><span class="p">][</span><span class="s1">&#39;name&#39;</span><span class="p">]:</span>
-                <span class="bp">self</span><span class="o">.</span><span class="n">actions</span><span class="p">[</span><span class="n">x</span><span class="p">][</span><span class="s1">&#39;name&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s1">&#39;random decision action (Eco~ Soc+ Env~)&#39;</span>
-                <span class="bp">self</span><span class="o">.</span><span class="n">actions</span><span class="p">[</span><span class="n">x</span><span class="p">][</span><span class="s1">&#39;profile&#39;</span><span class="p">]</span> <span class="o">=</span><span class="p">{</span><span class="s1">&#39;Eco&#39;</span><span class="p">:</span> <span class="s1">&#39;fair&#39;</span><span class="p">,</span> <span class="s1">&#39;Soc&#39;</span><span class="p">:</span> <span class="s1">&#39;good&#39;</span><span class="p">,</span><span class="s1">&#39;Env&#39;</span><span class="p">:</span> <span class="s1">&#39;fair&#39;</span><span class="p">}</span>
-            <span class="k">elif</span> <span class="s1">&#39;A+ B+ C~&#39;</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">actions</span><span class="p">[</span><span class="n">x</span><span class="p">][</span><span class="s1">&#39;name&#39;</span><span class="p">]:</span>
-                <span class="bp">self</span><span class="o">.</span><span class="n">actions</span><span class="p">[</span><span class="n">x</span><span class="p">][</span><span class="s1">&#39;name&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s1">&#39;random decision action (Eco+ Soc+ Env~)&#39;</span>
-                <span class="bp">self</span><span class="o">.</span><span class="n">actions</span><span class="p">[</span><span class="n">x</span><span class="p">][</span><span class="s1">&#39;profile&#39;</span><span class="p">]</span> <span class="o">=</span><span class="p">{</span><span class="s1">&#39;Eco&#39;</span><span class="p">:</span> <span class="s1">&#39;good&#39;</span><span class="p">,</span> <span class="s1">&#39;Soc&#39;</span><span class="p">:</span> <span class="s1">&#39;good&#39;</span><span class="p">,</span><span class="s1">&#39;Env&#39;</span><span class="p">:</span> <span class="s1">&#39;fair&#39;</span><span class="p">}</span>
-            <span class="k">elif</span> <span class="s1">&#39;A- B- C+&#39;</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">actions</span><span class="p">[</span><span class="n">x</span><span class="p">][</span><span class="s1">&#39;name&#39;</span><span class="p">]:</span>
-                <span class="bp">self</span><span class="o">.</span><span class="n">actions</span><span class="p">[</span><span class="n">x</span><span class="p">][</span><span class="s1">&#39;name&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s1">&#39;random decision action (Eco- Soc- Env+)&#39;</span>
-                <span class="bp">self</span><span class="o">.</span><span class="n">actions</span><span class="p">[</span><span class="n">x</span><span class="p">][</span><span class="s1">&#39;profile&#39;</span><span class="p">]</span> <span class="o">=</span><span class="p">{</span><span class="s1">&#39;Eco&#39;</span><span class="p">:</span> <span class="s1">&#39;weak&#39;</span><span class="p">,</span> <span class="s1">&#39;Soc&#39;</span><span class="p">:</span> <span class="s1">&#39;weak&#39;</span><span class="p">,</span><span class="s1">&#39;Env&#39;</span><span class="p">:</span> <span class="s1">&#39;good&#39;</span><span class="p">}</span>
-            <span class="k">elif</span> <span class="s1">&#39;A~ B- C+&#39;</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">actions</span><span class="p">[</span><span class="n">x</span><span class="p">][</span><span class="s1">&#39;name&#39;</span><span class="p">]:</span>
-                <span class="bp">self</span><span class="o">.</span><span class="n">actions</span><span class="p">[</span><span class="n">x</span><span class="p">][</span><span class="s1">&#39;name&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s1">&#39;random decision action (Eco~ Soc- Env+)&#39;</span>
-                <span class="bp">self</span><span class="o">.</span><span class="n">actions</span><span class="p">[</span><span class="n">x</span><span class="p">][</span><span class="s1">&#39;profile&#39;</span><span class="p">]</span> <span class="o">=</span><span class="p">{</span><span class="s1">&#39;Eco&#39;</span><span class="p">:</span> <span class="s1">&#39;fair&#39;</span><span class="p">,</span> <span class="s1">&#39;Soc&#39;</span><span class="p">:</span> <span class="s1">&#39;weak&#39;</span><span class="p">,</span><span class="s1">&#39;Env&#39;</span><span class="p">:</span> <span class="s1">&#39;good&#39;</span><span class="p">}</span>
-            <span class="k">elif</span> <span class="s1">&#39;A+ B- C+&#39;</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">actions</span><span class="p">[</span><span class="n">x</span><span class="p">][</span><span class="s1">&#39;name&#39;</span><span class="p">]:</span>
-                <span class="bp">self</span><span class="o">.</span><span class="n">actions</span><span class="p">[</span><span class="n">x</span><span class="p">][</span><span class="s1">&#39;name&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s1">&#39;random decision action (Eco+ Soc- Env+)&#39;</span>
-                <span class="bp">self</span><span class="o">.</span><span class="n">actions</span><span class="p">[</span><span class="n">x</span><span class="p">][</span><span class="s1">&#39;profile&#39;</span><span class="p">]</span> <span class="o">=</span><span class="p">{</span><span class="s1">&#39;Eco&#39;</span><span class="p">:</span> <span class="s1">&#39;good&#39;</span><span class="p">,</span> <span class="s1">&#39;Soc&#39;</span><span class="p">:</span> <span class="s1">&#39;weak&#39;</span><span class="p">,</span><span class="s1">&#39;Env&#39;</span><span class="p">:</span> <span class="s1">&#39;good&#39;</span><span class="p">}</span>
-            <span class="k">elif</span> <span class="s1">&#39;A- B~ C+&#39;</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">actions</span><span class="p">[</span><span class="n">x</span><span class="p">][</span><span class="s1">&#39;name&#39;</span><span class="p">]:</span>
-                <span class="bp">self</span><span class="o">.</span><span class="n">actions</span><span class="p">[</span><span class="n">x</span><span class="p">][</span><span class="s1">&#39;name&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s1">&#39;random decision action (Eco- Soc~ Env+)&#39;</span>
-                <span class="bp">self</span><span class="o">.</span><span class="n">actions</span><span class="p">[</span><span class="n">x</span><span class="p">][</span><span class="s1">&#39;profile&#39;</span><span class="p">]</span> <span class="o">=</span><span class="p">{</span><span class="s1">&#39;Eco&#39;</span><span class="p">:</span> <span class="s1">&#39;weak&#39;</span><span class="p">,</span> <span class="s1">&#39;Soc&#39;</span><span class="p">:</span> <span class="s1">&#39;fair&#39;</span><span class="p">,</span><span class="s1">&#39;Env&#39;</span><span class="p">:</span> <span class="s1">&#39;good&#39;</span><span class="p">}</span>
-            <span class="k">elif</span> <span class="s1">&#39;A~ B~ C+&#39;</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">actions</span><span class="p">[</span><span class="n">x</span><span class="p">][</span><span class="s1">&#39;name&#39;</span><span class="p">]:</span>
-                <span class="bp">self</span><span class="o">.</span><span class="n">actions</span><span class="p">[</span><span class="n">x</span><span class="p">][</span><span class="s1">&#39;name&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s1">&#39;random decision action (Eco~ Soc~ Env+)&#39;</span>
-                <span class="bp">self</span><span class="o">.</span><span class="n">actions</span><span class="p">[</span><span class="n">x</span><span class="p">][</span><span class="s1">&#39;profile&#39;</span><span class="p">]</span> <span class="o">=</span><span class="p">{</span><span class="s1">&#39;Eco&#39;</span><span class="p">:</span> <span class="s1">&#39;fair&#39;</span><span class="p">,</span> <span class="s1">&#39;Soc&#39;</span><span class="p">:</span> <span class="s1">&#39;fair&#39;</span><span class="p">,</span><span class="s1">&#39;Env&#39;</span><span class="p">:</span> <span class="s1">&#39;good&#39;</span><span class="p">}</span>
-            <span class="k">elif</span> <span class="s1">&#39;A+ B~ C+&#39;</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">actions</span><span class="p">[</span><span class="n">x</span><span class="p">][</span><span class="s1">&#39;name&#39;</span><span class="p">]:</span>
-                <span class="bp">self</span><span class="o">.</span><span class="n">actions</span><span class="p">[</span><span class="n">x</span><span class="p">][</span><span class="s1">&#39;name&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s1">&#39;random decision action (Eco+ Soc~ Env+)&#39;</span>
-                <span class="bp">self</span><span class="o">.</span><span class="n">actions</span><span class="p">[</span><span class="n">x</span><span class="p">][</span><span class="s1">&#39;profile&#39;</span><span class="p">]</span> <span class="o">=</span><span class="p">{</span><span class="s1">&#39;Eco&#39;</span><span class="p">:</span> <span class="s1">&#39;good&#39;</span><span class="p">,</span> <span class="s1">&#39;Soc&#39;</span><span class="p">:</span> <span class="s1">&#39;fair&#39;</span><span class="p">,</span><span class="s1">&#39;Env&#39;</span><span class="p">:</span> <span class="s1">&#39;good&#39;</span><span class="p">}</span>
-            <span class="k">elif</span> <span class="s1">&#39;A- B+ C+&#39;</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">actions</span><span class="p">[</span><span class="n">x</span><span class="p">][</span><span class="s1">&#39;name&#39;</span><span class="p">]:</span>
-                <span class="bp">self</span><span class="o">.</span><span class="n">actions</span><span class="p">[</span><span class="n">x</span><span class="p">][</span><span class="s1">&#39;name&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s1">&#39;random decision action (Eco- Soc+ Env+)&#39;</span>
-                <span class="bp">self</span><span class="o">.</span><span class="n">actions</span><span class="p">[</span><span class="n">x</span><span class="p">][</span><span class="s1">&#39;profile&#39;</span><span class="p">]</span> <span class="o">=</span><span class="p">{</span><span class="s1">&#39;Eco&#39;</span><span class="p">:</span> <span class="s1">&#39;weak&#39;</span><span class="p">,</span> <span class="s1">&#39;Soc&#39;</span><span class="p">:</span> <span class="s1">&#39;good&#39;</span><span class="p">,</span><span class="s1">&#39;Env&#39;</span><span class="p">:</span> <span class="s1">&#39;good&#39;</span><span class="p">}</span>
-            <span class="k">elif</span> <span class="s1">&#39;A~ B+ C+&#39;</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">actions</span><span class="p">[</span><span class="n">x</span><span class="p">][</span><span class="s1">&#39;name&#39;</span><span class="p">]:</span>
-                <span class="bp">self</span><span class="o">.</span><span class="n">actions</span><span class="p">[</span><span class="n">x</span><span class="p">][</span><span class="s1">&#39;name&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s1">&#39;random decision action (Eco~ Soc+ Env+)&#39;</span>
-                <span class="bp">self</span><span class="o">.</span><span class="n">actions</span><span class="p">[</span><span class="n">x</span><span class="p">][</span><span class="s1">&#39;profile&#39;</span><span class="p">]</span> <span class="o">=</span><span class="p">{</span><span class="s1">&#39;Eco&#39;</span><span class="p">:</span> <span class="s1">&#39;fair&#39;</span><span class="p">,</span> <span class="s1">&#39;Soc&#39;</span><span class="p">:</span> <span class="s1">&#39;good&#39;</span><span class="p">,</span><span class="s1">&#39;Env&#39;</span><span class="p">:</span> <span class="s1">&#39;good&#39;</span><span class="p">}</span>
-            <span class="k">elif</span> <span class="s1">&#39;A+ B+ C+&#39;</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">actions</span><span class="p">[</span><span class="n">x</span><span class="p">][</span><span class="s1">&#39;name&#39;</span><span class="p">]:</span>
-                <span class="bp">self</span><span class="o">.</span><span class="n">actions</span><span class="p">[</span><span class="n">x</span><span class="p">][</span><span class="s1">&#39;name&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s1">&#39;random decision action (Eco+ Soc+ Env+)&#39;</span>
-                <span class="bp">self</span><span class="o">.</span><span class="n">actions</span><span class="p">[</span><span class="n">x</span><span class="p">][</span><span class="s1">&#39;profile&#39;</span><span class="p">]</span> <span class="o">=</span><span class="p">{</span><span class="s1">&#39;Eco&#39;</span><span class="p">:</span> <span class="s1">&#39;good&#39;</span><span class="p">,</span> <span class="s1">&#39;Soc&#39;</span><span class="p">:</span> <span class="s1">&#39;good&#39;</span><span class="p">,</span><span class="s1">&#39;Env&#39;</span><span class="p">:</span> <span class="s1">&#39;good&#39;</span><span class="p">}</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">actions</span><span class="p">[</span><span class="n">x</span><span class="p">][</span><span class="s1">&#39;comment&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s1">&#39;Random3ObjectivesPerformanceTableau() generated&#39;</span>
+<span class="c1">#         #actionsList = [x for x in self.actions]</span>
+<span class="c1">#         for x in dict.keys(self.actions):</span>
+<span class="c1">#             if &#39;A- B- C-&#39; in self.actions[x][&#39;name&#39;]:</span>
+<span class="c1">#                 self.actions[x][&#39;name&#39;] = &#39;random decision action (Eco- Soc- Env-)&#39;</span>
+<span class="c1">#                 self.actions[x][&#39;profile&#39;] = {&#39;Eco&#39;: &#39;weak&#39;, &#39;Soc&#39;: &#39;weak&#39;,&#39;Env&#39;: &#39;weak&#39;}</span>
+<span class="c1">#             elif &#39;A~ B- C-&#39; in self.actions[x][&#39;name&#39;]:</span>
+<span class="c1">#                 self.actions[x][&#39;name&#39;] = &#39;random decision action (Eco~ Soc- Env-)&#39;</span>
+<span class="c1">#                 self.actions[x][&#39;profile&#39;] ={&#39;Eco&#39;: &#39;fair&#39;, &#39;Soc&#39;: &#39;weak&#39;,&#39;Env&#39;: &#39;weak&#39;}</span>
+<span class="c1">#             elif &#39;A+ B- C-&#39; in self.actions[x][&#39;name&#39;]:</span>
+<span class="c1">#                 self.actions[x][&#39;name&#39;] = &#39;random decision action (Eco+ Soc- Env-)&#39;</span>
+<span class="c1">#                 self.actions[x][&#39;profile&#39;] ={&#39;Eco&#39;: &#39;good&#39;, &#39;Soc&#39;: &#39;weak&#39;,&#39;Env&#39;: &#39;weak&#39;}</span>
+<span class="c1">#             elif &#39;A- B~ C-&#39; in self.actions[x][&#39;name&#39;]:</span>
+<span class="c1">#                 self.actions[x][&#39;name&#39;] = &#39;random decision action (Eco- Soc~ Env-)&#39;</span>
+<span class="c1">#                 self.actions[x][&#39;profile&#39;] ={&#39;Eco&#39;: &#39;weak&#39;, &#39;Soc&#39;: &#39;fair&#39;,&#39;Env&#39;: &#39;weak&#39;}</span>
+<span class="c1">#             elif &#39;A~ B~ C-&#39; in self.actions[x][&#39;name&#39;]:</span>
+<span class="c1">#                 self.actions[x][&#39;name&#39;] = &#39;random decision action (Eco~ Soc~ Env-)&#39;</span>
+<span class="c1">#                 self.actions[x][&#39;profile&#39;] ={&#39;Eco&#39;: &#39;fair&#39;, &#39;Soc&#39;: &#39;fair&#39;,&#39;Env&#39;: &#39;weak&#39;}</span>
+<span class="c1">#             elif &#39;A+ B~ C-&#39; in self.actions[x][&#39;name&#39;]:</span>
+<span class="c1">#                 self.actions[x][&#39;name&#39;] = &#39;random decision action (Eco+ Soc~ Env-)&#39;</span>
+<span class="c1">#                 self.actions[x][&#39;profile&#39;] ={&#39;Eco&#39;: &#39;good&#39;, &#39;Soc&#39;: &#39;fair&#39;,&#39;Env&#39;: &#39;weak&#39;}</span>
+<span class="c1">#             elif &#39;A- B+ C-&#39; in self.actions[x][&#39;name&#39;]:</span>
+<span class="c1">#                 self.actions[x][&#39;name&#39;] = &#39;random decision action (Eco- Soc+ Env-)&#39;</span>
+<span class="c1">#                 self.actions[x][&#39;profile&#39;] ={&#39;Eco&#39;: &#39;weak&#39;, &#39;Soc&#39;: &#39;good&#39;,&#39;Env&#39;: &#39;weak&#39;}</span>
+<span class="c1">#             elif &#39;A~ B+ C-&#39; in self.actions[x][&#39;name&#39;]:</span>
+<span class="c1">#                 self.actions[x][&#39;name&#39;] = &#39;random decision action (Eco~ Soc+ Env-)&#39;</span>
+<span class="c1">#                 self.actions[x][&#39;profile&#39;] ={&#39;Eco&#39;: &#39;fair&#39;, &#39;Soc&#39;: &#39;good&#39;,&#39;Env&#39;: &#39;weak&#39;}</span>
+<span class="c1">#             elif &#39;A+ B+ C-&#39; in self.actions[x][&#39;name&#39;]:</span>
+<span class="c1">#                 self.actions[x][&#39;name&#39;] = &#39;random decision action (Eco+ Soc+ Env-)&#39;</span>
+<span class="c1">#                 self.actions[x][&#39;profile&#39;] ={&#39;Eco&#39;: &#39;good&#39;, &#39;Soc&#39;: &#39;good&#39;,&#39;Env&#39;: &#39;weak&#39;}</span>
+<span class="c1">#             elif &#39;A- B- C~&#39; in self.actions[x][&#39;name&#39;]:</span>
+<span class="c1">#                 self.actions[x][&#39;name&#39;] = &#39;random decision action (Eco- Soc- Env~)&#39;</span>
+<span class="c1">#                 self.actions[x][&#39;profile&#39;] ={&#39;Eco&#39;: &#39;weak&#39;, &#39;Soc&#39;: &#39;weak&#39;,&#39;Env&#39;: &#39;fair&#39;}</span>
+<span class="c1">#             elif &#39;A~ B- C~&#39; in self.actions[x][&#39;name&#39;]:</span>
+<span class="c1">#                 self.actions[x][&#39;name&#39;] = &#39;random decision action (Eco~ Soc- Env~)&#39;</span>
+<span class="c1">#                 self.actions[x][&#39;profile&#39;] ={&#39;Eco&#39;: &#39;fair&#39;, &#39;Soc&#39;: &#39;weak&#39;,&#39;Env&#39;: &#39;fair&#39;}</span>
+<span class="c1">#             elif &#39;A+ B- C~&#39; in self.actions[x][&#39;name&#39;]:</span>
+<span class="c1">#                 self.actions[x][&#39;name&#39;] = &#39;random decision action (Eco+ Soc- Env~)&#39;</span>
+<span class="c1">#                 self.actions[x][&#39;profile&#39;] ={&#39;Eco&#39;: &#39;good&#39;, &#39;Soc&#39;: &#39;weak&#39;,&#39;Env&#39;: &#39;fair&#39;}</span>
+<span class="c1">#             elif &#39;A- B~ C~&#39; in self.actions[x][&#39;name&#39;]:</span>
+<span class="c1">#                 self.actions[x][&#39;name&#39;] = &#39;random decision action (Eco- Soc~ Env~)&#39;</span>
+<span class="c1">#                 self.actions[x][&#39;profile&#39;] ={&#39;Eco&#39;: &#39;weak&#39;, &#39;Soc&#39;: &#39;fair&#39;,&#39;Env&#39;: &#39;fair&#39;}</span>
+<span class="c1">#             elif &#39;A~ B~ C~&#39; in self.actions[x][&#39;name&#39;]:</span>
+<span class="c1">#                 self.actions[x][&#39;name&#39;] = &#39;random decision action (Eco~ Soc~ Env~)&#39;</span>
+<span class="c1">#                 self.actions[x][&#39;profile&#39;] ={&#39;Eco&#39;: &#39;fair&#39;, &#39;Soc&#39;: &#39;fair&#39;,&#39;Env&#39;: &#39;fair&#39;}</span>
+<span class="c1">#             elif &#39;A+ B~ C~&#39; in self.actions[x][&#39;name&#39;]:</span>
+<span class="c1">#                 self.actions[x][&#39;name&#39;] = &#39;random decision action (Eco+ Soc~ Env~)&#39;</span>
+<span class="c1">#                 self.actions[x][&#39;profile&#39;] ={&#39;Eco&#39;: &#39;good&#39;, &#39;Soc&#39;: &#39;fair&#39;,&#39;Env&#39;: &#39;fair&#39;}</span>
+<span class="c1">#             elif &#39;A- B+ C~&#39; in self.actions[x][&#39;name&#39;]:</span>
+<span class="c1">#                 self.actions[x][&#39;name&#39;] = &#39;random decision action (Eco- Soc+ Env~)&#39;</span>
+<span class="c1">#                 self.actions[x][&#39;profile&#39;] ={&#39;Eco&#39;: &#39;weak&#39;, &#39;Soc&#39;: &#39;good&#39;,&#39;Env&#39;: &#39;fair&#39;}</span>
+<span class="c1">#             elif &#39;A~ B+ C~&#39; in self.actions[x][&#39;name&#39;]:</span>
+<span class="c1">#                 self.actions[x][&#39;name&#39;] = &#39;random decision action (Eco~ Soc+ Env~)&#39;</span>
+<span class="c1">#                 self.actions[x][&#39;profile&#39;] ={&#39;Eco&#39;: &#39;fair&#39;, &#39;Soc&#39;: &#39;good&#39;,&#39;Env&#39;: &#39;fair&#39;}</span>
+<span class="c1">#             elif &#39;A+ B+ C~&#39; in self.actions[x][&#39;name&#39;]:</span>
+<span class="c1">#                 self.actions[x][&#39;name&#39;] = &#39;random decision action (Eco+ Soc+ Env~)&#39;</span>
+<span class="c1">#                 self.actions[x][&#39;profile&#39;] ={&#39;Eco&#39;: &#39;good&#39;, &#39;Soc&#39;: &#39;good&#39;,&#39;Env&#39;: &#39;fair&#39;}</span>
+<span class="c1">#             elif &#39;A- B- C+&#39; in self.actions[x][&#39;name&#39;]:</span>
+<span class="c1">#                 self.actions[x][&#39;name&#39;] = &#39;random decision action (Eco- Soc- Env+)&#39;</span>
+<span class="c1">#                 self.actions[x][&#39;profile&#39;] ={&#39;Eco&#39;: &#39;weak&#39;, &#39;Soc&#39;: &#39;weak&#39;,&#39;Env&#39;: &#39;good&#39;}</span>
+<span class="c1">#             elif &#39;A~ B- C+&#39; in self.actions[x][&#39;name&#39;]:</span>
+<span class="c1">#                 self.actions[x][&#39;name&#39;] = &#39;random decision action (Eco~ Soc- Env+)&#39;</span>
+<span class="c1">#                 self.actions[x][&#39;profile&#39;] ={&#39;Eco&#39;: &#39;fair&#39;, &#39;Soc&#39;: &#39;weak&#39;,&#39;Env&#39;: &#39;good&#39;}</span>
+<span class="c1">#             elif &#39;A+ B- C+&#39; in self.actions[x][&#39;name&#39;]:</span>
+<span class="c1">#                 self.actions[x][&#39;name&#39;] = &#39;random decision action (Eco+ Soc- Env+)&#39;</span>
+<span class="c1">#                 self.actions[x][&#39;profile&#39;] ={&#39;Eco&#39;: &#39;good&#39;, &#39;Soc&#39;: &#39;weak&#39;,&#39;Env&#39;: &#39;good&#39;}</span>
+<span class="c1">#             elif &#39;A- B~ C+&#39; in self.actions[x][&#39;name&#39;]:</span>
+<span class="c1">#                 self.actions[x][&#39;name&#39;] = &#39;random decision action (Eco- Soc~ Env+)&#39;</span>
+<span class="c1">#                 self.actions[x][&#39;profile&#39;] ={&#39;Eco&#39;: &#39;weak&#39;, &#39;Soc&#39;: &#39;fair&#39;,&#39;Env&#39;: &#39;good&#39;}</span>
+<span class="c1">#             elif &#39;A~ B~ C+&#39; in self.actions[x][&#39;name&#39;]:</span>
+<span class="c1">#                 self.actions[x][&#39;name&#39;] = &#39;random decision action (Eco~ Soc~ Env+)&#39;</span>
+<span class="c1">#                 self.actions[x][&#39;profile&#39;] ={&#39;Eco&#39;: &#39;fair&#39;, &#39;Soc&#39;: &#39;fair&#39;,&#39;Env&#39;: &#39;good&#39;}</span>
+<span class="c1">#             elif &#39;A+ B~ C+&#39; in self.actions[x][&#39;name&#39;]:</span>
+<span class="c1">#                 self.actions[x][&#39;name&#39;] = &#39;random decision action (Eco+ Soc~ Env+)&#39;</span>
+<span class="c1">#                 self.actions[x][&#39;profile&#39;] ={&#39;Eco&#39;: &#39;good&#39;, &#39;Soc&#39;: &#39;fair&#39;,&#39;Env&#39;: &#39;good&#39;}</span>
+<span class="c1">#             elif &#39;A- B+ C+&#39; in self.actions[x][&#39;name&#39;]:</span>
+<span class="c1">#                 self.actions[x][&#39;name&#39;] = &#39;random decision action (Eco- Soc+ Env+)&#39;</span>
+<span class="c1">#                 self.actions[x][&#39;profile&#39;] ={&#39;Eco&#39;: &#39;weak&#39;, &#39;Soc&#39;: &#39;good&#39;,&#39;Env&#39;: &#39;good&#39;}</span>
+<span class="c1">#             elif &#39;A~ B+ C+&#39; in self.actions[x][&#39;name&#39;]:</span>
+<span class="c1">#                 self.actions[x][&#39;name&#39;] = &#39;random decision action (Eco~ Soc+ Env+)&#39;</span>
+<span class="c1">#                 self.actions[x][&#39;profile&#39;] ={&#39;Eco&#39;: &#39;fair&#39;, &#39;Soc&#39;: &#39;good&#39;,&#39;Env&#39;: &#39;good&#39;}</span>
+<span class="c1">#             elif &#39;A+ B+ C+&#39; in self.actions[x][&#39;name&#39;]:</span>
+<span class="c1">#                 self.actions[x][&#39;name&#39;] = &#39;random decision action (Eco+ Soc+ Env+)&#39;</span>
+<span class="c1">#                 self.actions[x][&#39;profile&#39;] ={&#39;Eco&#39;: &#39;good&#39;, &#39;Soc&#39;: &#39;good&#39;,&#39;Env&#39;: &#39;good&#39;}</span>
+<span class="c1">#             self.actions[x][&#39;comment&#39;] = &#39;Random3ObjectivesPerformanceTableau() generated&#39;</span>
 
-<span class="c1">##        criteriaList = [g for g in self.criteria]</span>
-<span class="c1">##        criteriaList.sort()</span>
-<span class="c1">##        actionsList = [x for x in self.actions]</span>
-<span class="c1">##        actionsList.sort()</span>
-        <span class="k">for</span> <span class="n">g</span> <span class="ow">in</span> <span class="nb">dict</span><span class="o">.</span><span class="n">keys</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">criteria</span><span class="p">):</span>
-            <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="nb">dict</span><span class="o">.</span><span class="n">keys</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">actions</span><span class="p">):</span>
-                <span class="k">if</span> <span class="n">random</span><span class="o">.</span><span class="n">random</span><span class="p">()</span> <span class="o">&lt;</span> <span class="n">missingDataProbability</span><span class="p">:</span>
-                    <span class="bp">self</span><span class="o">.</span><span class="n">evaluation</span><span class="p">[</span><span class="n">g</span><span class="p">][</span><span class="n">x</span><span class="p">]</span> <span class="o">=</span> <span class="n">Decimal</span><span class="p">(</span><span class="s1">&#39;-999&#39;</span><span class="p">)</span>
+<span class="c1"># ##        criteriaList = [g for g in self.criteria]</span>
+<span class="c1"># ##        criteriaList.sort()</span>
+<span class="c1"># ##        actionsList = [x for x in self.actions]</span>
+<span class="c1"># ##        actionsList.sort()</span>
+<span class="c1">#         for g in dict.keys(self.criteria):</span>
+<span class="c1">#             for x in dict.keys(self.actions):</span>
+<span class="c1">#                 if random.random() &lt; missingDataProbability:</span>
+<span class="c1">#                     self.evaluation[g][x] = self.NA</span>
                 
-    <span class="k">def</span> <span class="nf">showActions</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">Alphabetic</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
-        <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;*----- show decision action --------------*&#39;</span><span class="p">)</span>
-        <span class="n">actions</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">actions</span>
-        <span class="k">if</span> <span class="n">Alphabtic</span><span class="p">:</span>
-            <span class="n">actionsKeys</span> <span class="o">=</span> <span class="p">[</span><span class="n">x</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="nb">dict</span><span class="o">.</span><span class="n">keys</span><span class="p">(</span><span class="n">actions</span><span class="p">)]</span>
-            <span class="n">actionsKeys</span><span class="o">.</span><span class="n">sort</span><span class="p">()</span>
-            <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">actionsKeys</span><span class="p">:</span>
-                <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;key: &#39;</span><span class="p">,</span><span class="n">x</span><span class="p">)</span>
-                <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;  name:      &#39;</span><span class="p">,</span><span class="n">actions</span><span class="p">[</span><span class="n">x</span><span class="p">][</span><span class="s1">&#39;name&#39;</span><span class="p">])</span>
-                <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;  profile:   &#39;</span><span class="p">,</span><span class="n">actions</span><span class="p">[</span><span class="n">x</span><span class="p">][</span><span class="s1">&#39;profile&#39;</span><span class="p">])</span>
-        <span class="k">else</span><span class="p">:</span>
-            <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">actions</span><span class="o">.</span><span class="n">keys</span><span class="p">():</span>
-                <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;key: &#39;</span><span class="p">,</span><span class="n">x</span><span class="p">)</span>
-                <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;  name:      &#39;</span><span class="p">,</span><span class="n">actions</span><span class="p">[</span><span class="n">x</span><span class="p">][</span><span class="s1">&#39;name&#39;</span><span class="p">])</span>
-                <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;  profile:   &#39;</span><span class="p">,</span><span class="n">actions</span><span class="p">[</span><span class="n">x</span><span class="p">][</span><span class="s1">&#39;profile&#39;</span><span class="p">])</span>
+<span class="c1">#     def showActions(self,Alphabetic=False):</span>
+<span class="c1">#         print(&#39;*----- show decision action --------------*&#39;)</span>
+<span class="c1">#         actions = self.actions</span>
+<span class="c1">#         if Alphabtic:</span>
+<span class="c1">#             actionsKeys = [x for x in dict.keys(actions)]</span>
+<span class="c1">#             actionsKeys.sort()</span>
+<span class="c1">#             for x in actionsKeys:</span>
+<span class="c1">#                 print(&#39;key: &#39;,x)</span>
+<span class="c1">#                 print(&#39;  name:      &#39;,actions[x][&#39;name&#39;])</span>
+<span class="c1">#                 print(&#39;  profile:   &#39;,actions[x][&#39;profile&#39;])</span>
+<span class="c1">#         else:</span>
+<span class="c1">#             for x in actions.keys():</span>
+<span class="c1">#                 print(&#39;key: &#39;,x)</span>
+<span class="c1">#                 print(&#39;  name:      &#39;,actions[x][&#39;name&#39;])</span>
+<span class="c1">#                 print(&#39;  profile:   &#39;,actions[x][&#39;profile&#39;])</span>
         
 <span class="c1">#---------------</span>
 <div class="viewcode-block" id="RandomCBPerformanceTableau"><a class="viewcode-back" href="../techDoc.html#randomPerfTabs.RandomCBPerformanceTableau">[docs]</a><span class="k">class</span> <span class="nc">RandomCBPerformanceTableau</span><span class="p">(</span><span class="n">PerformanceTableau</span><span class="p">):</span>
@@ -3365,6 +3393,7 @@
                  <span class="n">commonMode</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>\
                  <span class="n">valueDigits</span> <span class="o">=</span> <span class="mi">2</span><span class="p">,</span>\
                  <span class="n">missingDataProbability</span> <span class="o">=</span> <span class="mf">0.01</span><span class="p">,</span>\
+                 <span class="n">NA</span> <span class="o">=</span> <span class="o">-</span><span class="mi">999</span><span class="p">,</span>\
                  <span class="n">BigData</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>\
                  <span class="n">seed</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>\
                  <span class="n">Threading</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>\
@@ -3387,6 +3416,7 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">digits</span> <span class="o">=</span> <span class="n">valueDigits</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">BigData</span> <span class="o">=</span> <span class="n">BigData</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">missingDataProbability</span> <span class="o">=</span> <span class="n">missingDataProbability</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">NA</span> <span class="o">=</span> <span class="n">Decimal</span><span class="p">(</span><span class="n">NA</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">commonPercentiles</span> <span class="o">=</span> <span class="n">commonPercentiles</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">samplingSize</span> <span class="o">=</span> <span class="n">samplingSize</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">Debug</span> <span class="o">=</span> <span class="n">Debug</span>
@@ -3731,11 +3761,12 @@
                     <span class="k">if</span> <span class="n">Debug</span><span class="p">:</span>
                         <span class="nb">print</span><span class="p">(</span><span class="n">evaluation</span><span class="p">[</span><span class="n">g</span><span class="p">][</span><span class="n">a</span><span class="p">])</span>
                         
-        <span class="c1"># randomly insert missing data </span>
+        <span class="c1"># randomly insert missing data</span>
+        <span class="n">NA</span> <span class="o">=</span> <span class="n">Decimal</span><span class="p">(</span><span class="n">NA</span><span class="p">)</span>
         <span class="k">for</span> <span class="n">g</span> <span class="ow">in</span> <span class="n">criteria</span><span class="p">:</span>
             <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">actions</span><span class="p">:</span>
                 <span class="k">if</span> <span class="n">random</span><span class="o">.</span><span class="n">random</span><span class="p">()</span> <span class="o">&lt;</span> <span class="n">missingDataProbability</span><span class="p">:</span>
-                    <span class="n">evaluation</span><span class="p">[</span><span class="n">g</span><span class="p">][</span><span class="n">x</span><span class="p">]</span> <span class="o">=</span> <span class="n">Decimal</span><span class="p">(</span><span class="s1">&#39;-999&#39;</span><span class="p">)</span>
+                    <span class="n">evaluation</span><span class="p">[</span><span class="n">g</span><span class="p">][</span><span class="n">x</span><span class="p">]</span> <span class="o">=</span> <span class="n">NA</span>
 
         <span class="c1"># final storage</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">actions</span> <span class="o">=</span> <span class="n">actions</span>
@@ -3743,6 +3774,7 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">criteriaWeightMode</span> <span class="o">=</span> <span class="n">weightMode</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">criteria</span> <span class="o">=</span> <span class="n">criteria</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">evaluation</span> <span class="o">=</span> <span class="n">evaluation</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">NA</span> <span class="o">=</span> <span class="n">NA</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">weightPreorder</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">computeWeightPreorder</span><span class="p">()</span>
 
         <span class="c1"># compute discrimination thresholds from commonPercentiles</span>
@@ -3769,10 +3801,10 @@
                 <span class="n">sample</span> <span class="o">=</span> <span class="mi">0</span>
                 <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">actions</span><span class="o">.</span><span class="n">keys</span><span class="p">():</span>
                     <span class="n">evx</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">evaluation</span><span class="p">[</span><span class="n">g</span><span class="p">][</span><span class="n">x</span><span class="p">]</span>
-                    <span class="k">if</span> <span class="n">evx</span> <span class="o">!=</span> <span class="n">Decimal</span><span class="p">(</span><span class="s1">&#39;-999&#39;</span><span class="p">):</span>
+                    <span class="k">if</span> <span class="n">evx</span> <span class="o">!=</span> <span class="n">NA</span><span class="p">:</span>
                         <span class="k">for</span> <span class="n">y</span> <span class="ow">in</span> <span class="n">actions</span><span class="o">.</span><span class="n">keys</span><span class="p">():</span>
                             <span class="n">evy</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">evaluation</span><span class="p">[</span><span class="n">g</span><span class="p">][</span><span class="n">y</span><span class="p">]</span>
-                            <span class="k">if</span> <span class="n">x</span> <span class="o">!=</span> <span class="n">y</span> <span class="ow">and</span> <span class="n">evy</span> <span class="o">!=</span> <span class="n">Decimal</span><span class="p">(</span><span class="s1">&#39;-999&#39;</span><span class="p">):</span>
+                            <span class="k">if</span> <span class="n">x</span> <span class="o">!=</span> <span class="n">y</span> <span class="ow">and</span> <span class="n">evy</span> <span class="o">!=</span> <span class="n">NA</span><span class="p">:</span>
                                 <span class="n">est</span><span class="o">.</span><span class="n">add</span><span class="p">(</span> <span class="nb">float</span><span class="p">(</span> <span class="nb">abs</span><span class="p">(</span><span class="n">evx</span><span class="o">-</span><span class="n">evy</span><span class="p">)</span> <span class="p">)</span> <span class="p">)</span>
                                 <span class="n">sample</span> <span class="o">+=</span> <span class="mi">1</span>
                                 <span class="k">if</span> <span class="n">sample</span> <span class="o">&gt;</span> <span class="n">samplingSize</span><span class="p">:</span>
@@ -3820,17 +3852,19 @@
         <span class="k">else</span><span class="p">:</span>
             <span class="n">quantile</span> <span class="o">=</span> <span class="n">commonPercentiles</span>
         <span class="n">criteria</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">criteria</span>
+        <span class="n">evaluation</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">evaluation</span>
+        <span class="n">NA</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">NA</span>
         <span class="k">for</span> <span class="n">g</span> <span class="ow">in</span> <span class="n">criteria</span><span class="p">:</span>
             <span class="n">criteria</span><span class="p">[</span><span class="n">g</span><span class="p">][</span><span class="s1">&#39;thresholds&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">OrderedDict</span><span class="p">()</span>
             <span class="k">if</span> <span class="n">criteria</span><span class="p">[</span><span class="n">g</span><span class="p">][</span><span class="s1">&#39;scaleType&#39;</span><span class="p">]</span> <span class="o">==</span> <span class="s1">&#39;cardinal&#39;</span> <span class="ow">and</span> <span class="n">n</span> <span class="o">&gt;</span> <span class="mi">1</span><span class="p">:</span>
                 <span class="n">est</span><span class="o">.</span><span class="n">reset</span><span class="p">()</span>
                 <span class="n">sample</span> <span class="o">=</span> <span class="mi">0</span>
                 <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">actions</span><span class="o">.</span><span class="n">keys</span><span class="p">():</span>
-                    <span class="n">evx</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">evaluation</span><span class="p">[</span><span class="n">g</span><span class="p">][</span><span class="n">x</span><span class="p">]</span>
-                    <span class="k">if</span> <span class="n">evx</span> <span class="o">!=</span> <span class="n">Decimal</span><span class="p">(</span><span class="s1">&#39;-999&#39;</span><span class="p">):</span>
+                    <span class="n">evx</span> <span class="o">=</span> <span class="n">evaluation</span><span class="p">[</span><span class="n">g</span><span class="p">][</span><span class="n">x</span><span class="p">]</span>
+                    <span class="k">if</span> <span class="n">evx</span> <span class="o">!=</span> <span class="n">NA</span><span class="p">:</span>
                         <span class="k">for</span> <span class="n">y</span> <span class="ow">in</span> <span class="n">actions</span><span class="o">.</span><span class="n">keys</span><span class="p">():</span>
-                            <span class="n">evy</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">evaluation</span><span class="p">[</span><span class="n">g</span><span class="p">][</span><span class="n">y</span><span class="p">]</span>
-                            <span class="k">if</span> <span class="n">x</span> <span class="o">!=</span> <span class="n">y</span> <span class="ow">and</span> <span class="n">evy</span> <span class="o">!=</span> <span class="n">Decimal</span><span class="p">(</span><span class="s1">&#39;-999&#39;</span><span class="p">):</span>
+                            <span class="n">evy</span> <span class="o">=</span> <span class="n">evaluation</span><span class="p">[</span><span class="n">g</span><span class="p">][</span><span class="n">y</span><span class="p">]</span>
+                            <span class="k">if</span> <span class="n">x</span> <span class="o">!=</span> <span class="n">y</span> <span class="ow">and</span> <span class="n">evy</span> <span class="o">!=</span> <span class="n">NA</span><span class="p">:</span>
                                 <span class="n">est</span><span class="o">.</span><span class="n">add</span><span class="p">(</span> <span class="nb">float</span><span class="p">(</span> <span class="nb">abs</span><span class="p">(</span><span class="n">evx</span><span class="o">-</span><span class="n">evy</span><span class="p">)</span> <span class="p">)</span> <span class="p">)</span>
                                 <span class="n">sample</span> <span class="o">+=</span> <span class="mi">1</span>
                                 <span class="k">if</span> <span class="n">sample</span> <span class="o">&gt;</span> <span class="n">samplingSize</span><span class="p">:</span>
@@ -4025,10 +4059,11 @@
             <span class="nb">print</span><span class="p">(</span><span class="n">evaluation</span><span class="p">)</span>
 
         <span class="c1"># randomly insert missing data</span>
+        <span class="n">NA</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">perfTab</span><span class="o">.</span><span class="n">NA</span>
         <span class="n">missingDataProbability</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">perfTab</span><span class="o">.</span><span class="n">missingDataProbability</span>
         <span class="k">for</span> <span class="n">g</span> <span class="ow">in</span> <span class="n">criteria</span><span class="p">:</span>
             <span class="k">if</span> <span class="n">random</span><span class="o">.</span><span class="n">random</span><span class="p">()</span> <span class="o">&lt;</span> <span class="n">missingDataProbability</span><span class="p">:</span>
-                <span class="n">evaluation</span><span class="p">[</span><span class="n">g</span><span class="p">]</span> <span class="o">=</span> <span class="n">Decimal</span><span class="p">(</span><span class="s1">&#39;-999&#39;</span><span class="p">)</span>
+                <span class="n">evaluation</span><span class="p">[</span><span class="n">g</span><span class="p">]</span> <span class="o">=</span> <span class="n">NA</span>
 
         <span class="c1"># return a new random decision alternative</span>
         <span class="k">return</span> <span class="p">{</span><span class="s1">&#39;action&#39;</span><span class="p">:</span> <span class="n">action</span><span class="p">,</span><span class="s1">&#39;evaluation&#39;</span><span class="p">:</span><span class="n">evaluation</span><span class="p">}</span>

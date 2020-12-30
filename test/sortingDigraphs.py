@@ -219,6 +219,7 @@ class SortingDigraph(BipolarOutrankingDigraph):
         self.criteria = deepcopy(perfTab.criteria)
         self.convertWeight2Decimal()
         self.evaluation = deepcopy(perfTab.evaluation)
+        self.NA = deepcopy(perfTab.NA)
         self.convertEvaluation2Decimal()
 
         # keep a copy of the original actions set before adding the profiles
@@ -1626,6 +1627,7 @@ class QuantilesSortingDigraph(SortingDigraph):
         self.convertWeight2Decimal()
         evaluation = normPerfTab.evaluation
         self.evaluation = evaluation
+        self.NA = copy2self(perfTab.NA)
         self.convertEvaluation2Decimal()
         self.runTimes = {'dataInput': time()-tt}
 
@@ -3229,10 +3231,13 @@ class NormedQuantilesRatingDigraph(QuantilesSortingDigraph,PerformanceQuantiles)
             try:  # randomActions format {'actions': .., 'evaluation':..}
                 self.newActions = newData['actions']
                 self.evaluation = newData['evaluation']
+                ## need NA to found somewhere !!!
+                self.NA = Decimal('-999')
             except:
                 try:  #  randomPerformanceTableau format
                     self.newActions = deepcopy(newData.actions)
                     self.evaluation = deepcopy(newData.evaluation)
+                    self.NA = deepcopy(newData.NA)
                 except:
                     print('Error !!!: valid new Actions or valid new PerformanceTableau required')
         else:
@@ -4269,7 +4274,7 @@ class NormedQuantilesRatingDigraph(QuantilesSortingDigraph,PerformanceQuantiles)
             else:
                 html += '<tr><th bgcolor=%s>%s</th>' % (actionRowHeaderColor,xName)                
             for g in criteriaList:
-                if self.evaluation[g][x] != Decimal("-999"):
+                if self.evaluation[g][x] != self.NA:
                     formatString = '<td bgcolor=%s align="right">%% .%df</td>' % (quantileColor[x][g],ndigits)
                     html += formatString % (self.evaluation[g][x])
                 else:

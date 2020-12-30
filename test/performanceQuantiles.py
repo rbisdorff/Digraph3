@@ -137,6 +137,11 @@ class PerformanceQuantiles(PerformanceTableau):
                 self.missingDataProbability = perfTab.missingDataProbability
             except:
                 pass
+            try:
+                self.NA = perfTab.NA
+            except:
+                pass
+            
             self.criteria = deepcopy(perfTab.criteria)
             self.LowerClosed = LowerClosed
             self.quantilesFrequencies = self._computeQuantilesFrequencies(numberOfBins,Debug=Debug)
@@ -270,11 +275,12 @@ a string out of ['quartiles','quintiles','sextiles','heptiles
         from math import floor
         from copy import copy, deepcopy
         critg = self.criteria[g]
+        NA = self.NA
         gValues = []
         for x in perfTab.actions:
             if Debug:
                 print('g,x,evaluation[g][x]',g,x,perfTab.evaluation[g][x])
-            if perfTab.evaluation[g][x] != Decimal('-999'):
+            if perfTab.evaluation[g][x] != NA:
                 if critg['weight'] > Decimal('0'):
                     gValues.append(perfTab.evaluation[g][x])
                 else:
@@ -546,7 +552,7 @@ a string out of ['quartiles','quintiles','sextiles','heptiles
         # new observations
         nv = []
         for x in newValues:
-            if x != -999:
+            if x != self.NA:
 ##                if self.criteria[g]['weight'] < Decimal('0'):
 ##                    nv.append(-x)
 ##                else:

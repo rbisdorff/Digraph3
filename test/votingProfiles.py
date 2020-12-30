@@ -599,7 +599,8 @@ class LinearVotingProfile(VotingProfile):
                     fo.write('\'' + str(x) + '\':' + str(-evaluation[g][x]) + ',\n')
                     
             fo.write('},\n')
-        fo.write( '}\n')
+        fo.write('}\n')
+        fo.write("NA = Decimal('999')\n")
         fo.close()
 
     def showHTMLVotingHeatmap(self,criteriaList=None, \
@@ -901,7 +902,7 @@ class ApprovalVotingProfile(VotingProfile):
 
               1, if approved;
               0, if disapproved;
-              -999, miising evalaution otherwise,
+              -999, missing evalaution otherwise,
         """
         from copy import deepcopy
         print('*--- Saving as performance tableau in file: <' + str(fileName) + '.py> ---*')

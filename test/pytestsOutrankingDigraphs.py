@@ -58,11 +58,12 @@ def testRobustOutrankingDigraph():
     g1.showGoodChoices()
     g1.showBadChoices()
 
-def testDissimilarityDigraph():
-    print('==>> Testing Dissimilarity Digraph instantiation')
-    f = DissimilarityOutrankingDigraph()
-    f.showAll()
-    f.showStatistics()
+# def testDissimilarityDigraph():
+#     print('==>> Testing Dissimilarity Digraph instantiation')
+#     t1 = RandomCBPerformanceTableau(NegativeWeights=True,seed=1)    
+#     f = DissimilarityOutrankingDigraph(t1)
+#     f.showAll()
+#     f.showStatistics()
 
 def testPolarisedOutrankingDigraph():
     print('==>> Testing PolarisedOutrankingDigraph instantiation')
@@ -137,14 +138,14 @@ def testMoreOrlessRelatedPairs():
     print(gcd.computeMoreOrLessUnrelatedPairs())
     g.showVetos()
 
-def testXMLRubisSaveReadMethods():
-    print('*==>> test rubisOutrankingDigraph XML saving ------------*')
-    t = FullRandomPerformanceTableau(numberOfActions=5,commonMode=['uniform',None,None],IntegerWeights=True)
-    t.save('testperf')
+# def testXMLRubisSaveReadMethods():
+#     print('*==>> test rubisOutrankingDigraph XML saving ------------*')
+#     t = FullRandomPerformanceTableau(numberOfActions=5,commonMode=['uniform',None,None],IntegerWeights=True)
+#     t.save('testperf')
 
-    g = BipolarOutrankingDigraph(t)
-    g.saveXMLRubisOutrankingDigraph('testrel',servingD3=False)
-    g.showVetos()
+#     g = BipolarOutrankingDigraph(t)
+#     g.saveXMLRubisOutrankingDigraph('testrel',servingD3=False)
+#     g.showVetos()
 
 # def testXMLRubisIntegerOutrankingSave():
 #     print('*==>> test rubisIntegerOutrankingDigraph XML saving ------------*')
@@ -161,16 +162,16 @@ def testRobustoutranking():
     t0.saveXMCDA2('testXMLRubis')
     t = XMCDA2PerformanceTableau('testXMLRubis')
     g = BipolarOutrankingDigraph(t)
-    g.saveXMLRubisOutrankingDigraph('test1',servingD3=False)
+    g.showRelationTable()
     go = OrdinalOutrankingDigraph(t)
-    go.saveXMLRubisOutrankingDigraph('testo',servingD3=False)
+    go.showRelationTable()
     gu = UnanimousOutrankingDigraph(t)
-    gu.saveXMLRubisOutrankingDigraph('testu',servingD3=False)
+    gu.showRelationTable()
     gc = BipolarOutrankingDigraph(t)
-    gc.saveXMLRubisOutrankingDigraph('testc',servingD3=False)
-    gr = OldRobustOutrankingDigraph(t)
-    gr.saveXMLRubisOutrankingDigraph('testr',servingD3=False)
-
+    gc.showRelationTable()
+    gor = OldRobustOutrankingDigraph(t)
+    gor.showRelationTable()
+    
 def testPairwiseComparisons():
     print('*==>> test show pairwise comparison-------*')
     t = RandomPerformanceTableau(numberOfActions=7,numberOfCriteria=5)
@@ -214,16 +215,16 @@ def testCriteriaNetFlows():
     print(g.computeSingleCriteriaNetflows())
     g.saveSingleCriterionNetflows()
 
-def testXMCDARubisRecommendation():
-    print('*==>> save XMCDA Rubis Recommendation --------------*')
-    t = FullRandomPerformanceTableau(numberOfActions=10,numberOfCriteria=10)
-    #t = RandomPerformanceTableau(numberOfActions=10,numberOfCriteria=20,commonMode=('uniform',None,None))
-    t.saveXMCDA(servingD3=False)
-    #t.showAll()
-    #g = OldRobustOutrankingDigraph(t)
-    #g.saveXMCDAOutrankingDigraph('testXMCDAOutrankingDigraph',servingD3=False,variant='robustness',category='Robust Rubis',relationName='S_rob')
-    g = BipolarOutrankingDigraph(t)
-    g.saveXMCDAOutrankingDigraph('testXMCDAOutrankingDigraph',servingD3=False,variant='standard',category='Rubis',relationName='Stilde')
+# def testXMCDARubisRecommendation():
+#     print('*==>> save XMCDA Rubis Recommendation --------------*')
+#     t = FullRandomPerformanceTableau(numberOfActions=10,numberOfCriteria=10)
+#     #t = RandomPerformanceTableau(numberOfActions=10,numberOfCriteria=20,commonMode=('uniform',None,None))
+#     t.saveXMCDA2(servingD3=False)
+#     #t.showAll()
+#     #g = OldRobustOutrankingDigraph(t)
+#     #g.saveXMCDAOutrankingDigraph('testXMCDAOutrankingDigraph',servingD3=False,variant='robustness',category='Robust Rubis',relationName='S_rob')
+#     g = BipolarOutrankingDigraph(t)
+#     g.saveXMCDA2OutrankingDigraph('testXMCDAOutrankingDigraph',servingD3=False,variant='standard',category='Rubis',relationName='Stilde')
 
 
 def testPerformanceDifferencesPerCriteria():
@@ -368,20 +369,20 @@ def testEquiSignificanceMajorityOutrankingDigraph():
     gr = RobustOutrankingDigraph(t)
     gr.showRelationTable()
     
-def testStringIOXMCDA2Encoding():
-    print('*---- test mapped memory XMCDA2 encoding for performanceTableau ---*')
-    T = PerformanceTableau()
-    problemTextmmap = T.saveXMCDA2(isStringIO=True,servingD3=False)
-    problemText = T.saveXMCDA2String(servingD3=False)
-    if problemTextmmap != problemText:       
-        print('Error')
-        fo = open('problemTextmmap.txt','w')
-        fo.write(problemTextmmap)
-        fo.close()
-        fo = open('problemText.txt','w')
-        fo.write(problemText)
-        fo.close()
-        exit(1)
+# def testStringIOXMCDA2Encoding():
+#     print('*---- test mapped memory XMCDA2 encoding for performanceTableau ---*')
+#     T = PerformanceTableau()
+#     problemTextmmap = T.saveXMCDA2(isStringIO=True,servingD3=False)
+#     problemText = T.saveXMCDA2String(servingD3=False)
+#     if problemTextmmap != problemText:       
+#         print('Error')
+#         fo = open('problemTextmmap.txt','w')
+#         fo.write(problemTextmmap)
+#         fo.close()
+#         fo = open('problemText.txt','w')
+#         fo.write(problemText)
+#         fo.close()
+#         exit(1)
         
 def testHTMLTables():
     print('*--- test rendering html formatted Performance and Relation Tables ---*')
@@ -659,26 +660,26 @@ def testComputeMarginalVersusGlobalRankingCorrelations():
     print(time()-t0)
     print(criteriaCorrelations)
 
-def testXMCDARubisSolver():
-    print('*------ test xmcda module ----*')
-    t = RandomCBPerformanceTableau(numberOfActions=5,\
-                                   numberOfCriteria=7,\
-                                   weightDistribution='equiobjectives',\
-                                   )
-    t.saveXMCDA2('testXMCDA')
-    import xmcda
-    xmcda.saveXMCDARubisBestChoiceRecommendation(\
-        problemFileName='testXMCDA',\
-        valuationType=None)
-    xmcda.saveXMCDARubisBestChoiceRecommendation(\
-        problemFileName='testXMCDA',\
-        valuationType='noVeto')
-    xmcda.saveXMCDARubisBestChoiceRecommendation(\
-        problemFileName='testXMCDA',\
-        valuationType='confident')
-    xmcda.saveXMCDARubisBestChoiceRecommendation(\
-        problemFileName='testXMCDA',\
-        valuationType='robust')
+# def testXMCDARubisSolver():
+#     print('*------ test xmcda module ----*')
+#     t = RandomCBPerformanceTableau(numberOfActions=5,\
+#                                    numberOfCriteria=7,\
+#                                    weightDistribution='equiobjectives',\
+#                                    )
+#     t.saveXMCDA2('testXMCDA')
+#     import xmcda
+#     xmcda.saveXMCDARubisBestChoiceRecommendation(\
+#         problemFileName='testXMCDA',\
+#         valuationType=None)
+#     xmcda.saveXMCDARubisBestChoiceRecommendation(\
+#         problemFileName='testXMCDA',\
+#         valuationType='noVeto')
+#     xmcda.saveXMCDARubisBestChoiceRecommendation(\
+#         problemFileName='testXMCDA',\
+#         valuationType='confident')
+#     xmcda.saveXMCDARubisBestChoiceRecommendation(\
+#         problemFileName='testXMCDA',\
+#         valuationType='robust')
 
 def testFusionLDigraph():
     print('==>> Testing FusionLDigraph instantiation')

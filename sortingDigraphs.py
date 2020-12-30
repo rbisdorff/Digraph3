@@ -219,6 +219,7 @@ class SortingDigraph(BipolarOutrankingDigraph):
         self.criteria = deepcopy(perfTab.criteria)
         self.convertWeight2Decimal()
         self.evaluation = deepcopy(perfTab.evaluation)
+        self.NA = deepcopy(perfTab.NA)
         self.convertEvaluation2Decimal()
 
         # keep a copy of the original actions set before adding the profiles
@@ -1626,6 +1627,7 @@ class QuantilesSortingDigraph(SortingDigraph):
         self.convertWeight2Decimal()
         evaluation = normPerfTab.evaluation
         self.evaluation = evaluation
+        self.NA = copy2self(perfTab.NA)
         self.convertEvaluation2Decimal()
         self.runTimes = {'dataInput': time()-tt}
 
@@ -2555,17 +2557,22 @@ class QuantilesSortingDigraph(SortingDigraph):
         from math import floor
         from copy import copy, deepcopy
         LowerClosed = self.criteriaCategoryLimits['LowerClosed']
+        criterion = self.criteria[g]
+        evaluation = self.evaluation
+        NA = self.NA
+        actionsOrig = self.actionsOrig
         gValues = []
-        for x in self.actionsOrig:
+        
+        for x in actionsOrig:
             if Debug:
-                print('g,x,evaluation[g][x]',g,x,self.evaluation[g][x])
-            if self.evaluation[g][x] != Decimal('-999'):
-                gValues.append(self.evaluation[g][x])
+                print('g,x,evaluation[g][x]',g,x,evaluation[g][x])
+            if evaluation[g][x] != NA:
+                gValues.append(evaluation[g][x])
         gValues.sort()
         if PrefThresholds:
             try:
-                gPrefThrCst = self.criteria[g]['thresholds']['pref'][0]
-                gPrefThrSlope = self.criteria[g]['thresholds']['pref'][1]
+                gPrefThrCst = criterion['thresholds']['pref'][0]
+                gPrefThrSlope = criterion['thresholds']['pref'][1]
             except:
                 gPrefThrCst = Decimal('0')
                 gPrefThrSlope = Decimal('0')            
@@ -3229,10 +3236,13 @@ class NormedQuantilesRatingDigraph(QuantilesSortingDigraph,PerformanceQuantiles)
             try:  # randomActions format {'actions': .., 'evaluation':..}
                 self.newActions = newData['actions']
                 self.evaluation = newData['evaluation']
+                ## need NA to found somewhere !!!
+                self.NA = Decimal('-999')
             except:
                 try:  #  randomPerformanceTableau format
                     self.newActions = deepcopy(newData.actions)
                     self.evaluation = deepcopy(newData.evaluation)
+                    self.NA = deepcopy(newData.NA)
                 except:
                     print('Error !!!: valid new Actions or valid new PerformanceTableau required')
         else:
@@ -4269,7 +4279,7 @@ class NormedQuantilesRatingDigraph(QuantilesSortingDigraph,PerformanceQuantiles)
             else:
                 html += '<tr><th bgcolor=%s>%s</th>' % (actionRowHeaderColor,xName)                
             for g in criteriaList:
-                if self.evaluation[g][x] != Decimal("-999"):
+                if self.evaluation[g][x] != self.NA:
                     formatString = '<td bgcolor=%s align="right">%% .%df</td>' % (quantileColor[x][g],ndigits)
                     html += formatString % (self.evaluation[g][x])
                 else:

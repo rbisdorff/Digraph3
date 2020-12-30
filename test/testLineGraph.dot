@@ -7,7 +7,7 @@ n2 [shape = "circle", label = "['v6', 'v1']"];
 n3 [shape = "circle", label = "['v3', 'v2']"];
 n4 [shape = "circle", label = "['v3', 'v4']"];
 n5 [shape = "circle", label = "['v5', 'v4']"];
-n6 [shape = "circle", label = "['v6', 'v5']"];
+n6 [shape = "circle", label = "['v5', 'v6']"];
 n1-- n2 [dir=both,style="setlinewidth(1)",color=black, arrowhead=none, arrowtail=none] ;
 n1-- n3 [dir=both,style="setlinewidth(1)",color=black, arrowhead=none, arrowtail=none] ;
 n2-- n6 [dir=both,style="setlinewidth(1)",color=black, arrowhead=none, arrowtail=none] ;

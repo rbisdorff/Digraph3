@@ -490,17 +490,11 @@ def testCBPerformanceTableau():
                                    weightScale=[1,2],\
                                    IntegerWeights=True,\
                                    commonMode=["normal",50.0,25.0])
-    #t.showAll()
-    #t = RandomCBPerformanceTableau(numberOfActions=13,numberOfCriteria=20,IntegerWeights=True,comments=False)
-    t.saveXMCDA(fileName='randomPerformanceTableau',servingD3=False)
     t.showCriteria(Debug=False)
-    #t = XMCDAPerformanceTableau('randomPerformanceTableau')
     g = BipolarOutrankingDigraph(t)
-    #g.showCriteriaCorrelationTable()
     g.exportGraphViz()
     #t.showPerformanceTableau()
-    #g.showRelationTable()
-    #g.showRubyChoice()
+    g.showRelationTable()
 
 # def testRandomS3PerformanceTableau():
 #     print('*==>> random S3 Performance Tableaux ------------*')

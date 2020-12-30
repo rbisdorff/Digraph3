@@ -17119,3 +17119,4 @@ evaluation = {
 's1000':Decimal("16.00"),
 },
 }
+NA = Decimal(-999)

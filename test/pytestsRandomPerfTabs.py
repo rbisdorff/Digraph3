@@ -95,7 +95,7 @@ def testCBPerformanceTableau():
                                    missingDataProbability=0.5,
                                    seed=100,Debug=True)
     print(t)
-    t.saveXMCDA(fileName='randomPerformanceTableau',servingD3=False)
+    t.saveXMCDA2(fileName='randomPerformanceTableau',servingD3=False)
     t.showCriteria(Debug=False)
     t.showStatistics(Debug=True)
     t.showPerformanceTableau()

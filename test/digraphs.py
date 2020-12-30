@@ -10853,8 +10853,13 @@ class EquivalenceDigraph(Digraph):
 
     def computeCorrelation(self):
         """
-        Renders the global bipolar correlation index resulting from the pairwise
-        equivalence valuations.
+        Renders a dictionary with slots: 'correlation' (tau) and 'determination' (d),
+        representing the ordinal correlation
+        between the two digraphs *d1* and *d2* given as arguments 
+        to the EquivalenceDigraph constructor. 
+
+        See the corresponding advanced topic in the Digraph3 documentation.
+
         """
         corr = Decimal('0')
         dterm = Decimal('0')
@@ -10867,8 +10872,16 @@ class EquivalenceDigraph(Digraph):
                     corr += rxy
                     dterm += abs(rxy)
         n = self.order * (self.order-1)
-        return {'correlation': float(corr)/float(dterm),
-                'determination': float(dterm)/float(n)}
+        if dterm > Decimal('0'):
+            tau = float(corr)/float(dterm)
+        else:
+            tau = 0.0
+        if n > 0:
+            d = float(dterm)/float(n)
+        else:
+            d = 0.0
+        return {'correlation': tau,
+                'determination': d}
 
 
 # ------- Specialisations of the Digraph class -----------
