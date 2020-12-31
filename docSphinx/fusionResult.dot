@@ -1,0 +1,167 @@
+digraph G {
+graph [ bgcolor = cornsilk, ordering = out, fontname = "Helvetica-Oblique",
+ fontsize = 12,
+ label = "\nDigraph3 (graphviz)\n R. Bisdorff, 2020", size="30,30",fontsize=10];
+aach [shape = "circle", label = "aach", fontsize=10];
+aug [shape = "circle", label = "aug", fontsize=10];
+berf [shape = "circle", label = "berf", fontsize=10];
+berh [shape = "circle", label = "berh", fontsize=10];
+bertu [shape = "circle", label = "bertu", fontsize=10];
+bie [shape = "circle", label = "bie", fontsize=10];
+boc [shape = "circle", label = "boc", fontsize=10];
+bon [shape = "circle", label = "bon", fontsize=10];
+brau [shape = "circle", label = "brau", fontsize=10];
+brem [shape = "circle", label = "brem", fontsize=10];
+chem [shape = "circle", label = "chem", fontsize=10];
+darm [shape = "circle", label = "darm", fontsize=10];
+dres [shape = "circle", label = "dres", fontsize=10];
+dsd [shape = "circle", label = "dsd", fontsize=10];
+duis [shape = "circle", label = "duis", fontsize=10];
+erl [shape = "circle", label = "erl", fontsize=10];
+fran [shape = "circle", label = "fran", fontsize=10];
+frei [shape = "circle", label = "frei", fontsize=10];
+gie [shape = "circle", label = "gie", fontsize=10];
+goet [shape = "circle", label = "goet", fontsize=10];
+ham [shape = "circle", label = "ham", fontsize=10];
+han [shape = "circle", label = "han", fontsize=10];
+hei [shape = "circle", label = "hei", fontsize=10];
+jena [shape = "circle", label = "jena", fontsize=10];
+kiel [shape = "circle", label = "kiel", fontsize=10];
+koel [shape = "circle", label = "koel", fontsize=10];
+kons [shape = "circle", label = "kons", fontsize=10];
+ksl [shape = "circle", label = "ksl", fontsize=10];
+leip [shape = "circle", label = "leip", fontsize=10];
+main [shape = "circle", label = "main", fontsize=10];
+marb [shape = "circle", label = "marb", fontsize=10];
+mnh [shape = "circle", label = "mnh", fontsize=10];
+mnst [shape = "circle", label = "mnst", fontsize=10];
+mu [shape = "circle", label = "mu", fontsize=10];
+reg [shape = "circle", label = "reg", fontsize=10];
+saar [shape = "circle", label = "saar", fontsize=10];
+stu [shape = "circle", label = "stu", fontsize=10];
+tri [shape = "circle", label = "tri", fontsize=10];
+tueb [shape = "circle", label = "tueb", fontsize=10];
+tum [shape = "circle", label = "tum", fontsize=10];
+wrzb [shape = "circle", label = "wrzb", fontsize=10];
+m1 [shape = "box", fillcolor=lightcoral, style=filled, label = "[0.00 -", fontsize=10];
+m2 [shape = "box", fillcolor=lightcoral, style=filled, label = "[0.11 -", fontsize=10];
+m3 [shape = "box", fillcolor=lightcoral, style=filled, label = "[0.22 -", fontsize=10];
+m4 [shape = "box", fillcolor=lightcoral, style=filled, label = "[0.33 -", fontsize=10];
+m5 [shape = "box", fillcolor=lightcoral, style=filled, label = "[0.44 -", fontsize=10];
+m6 [shape = "box", fillcolor=lightcoral, style=filled, label = "[0.56 -", fontsize=10];
+m7 [shape = "box", fillcolor=lightcoral, style=filled, label = "[0.67 -", fontsize=10];
+m8 [shape = "box", fillcolor=lightcoral, style=filled, label = "[0.78 -", fontsize=10];
+m9 [shape = "box", fillcolor=lightcoral, style=filled, label = "[0.89 -", fontsize=10];
+{ rank = 0; m9; }
+{ rank = 1; m8; }
+{ rank = 2; frei; }
+{ rank = 3; tum; }
+{ rank = 4; mu; }
+{ rank = 5; berh; m7; }
+{ rank = 6; hei; }
+{ rank = 7; leip; }
+{ rank = 8; dres; m6; stu; }
+{ rank = 9; kons; mnst; }
+{ rank = 10; tueb; }
+{ rank = 11; m5; }
+{ rank = 12; erl; }
+{ rank = 13; reg; berf; }
+{ rank = 14; wrzb; jena; }
+{ rank = 15; koel; marb; m4; }
+{ rank = 16; goet; }
+{ rank = 17; main; bon; }
+{ rank = 18; ham; m3; }
+{ rank = 19; fran; }
+{ rank = 20; aug; aach; }
+{ rank = 21; kiel; }
+{ rank = 22; tri; bertu; }
+{ rank = 23; brem; saar; brau; }
+{ rank = 24; m2; han; mnh; chem; }
+{ rank = 25; ksl; }
+{ rank = 26; boc; bie; darm; }
+{ rank = 27; gie; dsd; }
+{ rank = 28; duis; }
+{ rank = 29; m1; }
+m9-> m8 [style="setlinewidth(1)",color=black] ;
+m8-> frei [style="setlinewidth(1)",color=black] ;
+frei-> tum [style="setlinewidth(1)",color=black] ;
+tum-> mu [style="setlinewidth(1)",color=black] ;
+mu-> berh [style="setlinewidth(1)",color=black] ;
+mu-> m7 [style="setlinewidth(1)",color=black] ;
+berh-> hei [style="setlinewidth(1)",color=black] ;
+m7-> hei [style="setlinewidth(1)",color=black] ;
+hei-> leip [style="setlinewidth(1)",color=black] ;
+leip-> dres [style="setlinewidth(1)",color=black] ;
+leip-> m6 [style="setlinewidth(1)",color=black] ;
+leip-> stu [style="setlinewidth(1)",color=black] ;
+dres-> kons [style="setlinewidth(1)",color=black] ;
+dres-> mnst [style="setlinewidth(1)",color=black] ;
+m6-> mnst [style="setlinewidth(1)",color=black] ;
+stu-> kons [style="setlinewidth(1)",color=black] ;
+kons-> m5 [style="setlinewidth(1)",color=black] ;
+mnst-> tueb [style="setlinewidth(1)",color=black] ;
+tueb-> m5 [style="setlinewidth(1)",color=black] ;
+m5-> erl [style="setlinewidth(1)",color=black] ;
+erl-> reg [style="setlinewidth(1)",color=black] ;
+erl-> berf [style="setlinewidth(1)",color=black] ;
+reg-> wrzb [style="setlinewidth(1)",color=black] ;
+berf-> wrzb [style="setlinewidth(1)",color=black] ;
+berf-> jena [style="setlinewidth(1)",color=black] ;
+wrzb-> koel [style="setlinewidth(1)",color=black] ;
+wrzb-> marb [style="setlinewidth(1)",color=black] ;
+wrzb-> m4 [style="setlinewidth(1)",color=black] ;
+jena-> main [style="setlinewidth(1)",color=black] ;
+jena-> bon [style="setlinewidth(1)",color=black] ;
+koel-> goet [style="setlinewidth(1)",color=black] ;
+marb-> main [style="setlinewidth(1)",color=black] ;
+marb-> bon [style="setlinewidth(1)",color=black] ;
+m4-> main [style="setlinewidth(1)",color=black] ;
+goet-> main [style="setlinewidth(1)",color=black] ;
+goet-> bon [style="setlinewidth(1)",color=black] ;
+main-> ham [style="setlinewidth(1)",color=black] ;
+main-> m3 [style="setlinewidth(1)",color=black] ;
+bon-> ham [style="setlinewidth(1)",color=black] ;
+bon-> m3 [style="setlinewidth(1)",color=black] ;
+ham-> fran [style="setlinewidth(1)",color=black] ;
+m3-> aug [style="setlinewidth(1)",color=black] ;
+m3-> aach [style="setlinewidth(1)",color=black] ;
+fran-> aug [style="setlinewidth(1)",color=black] ;
+fran-> aach [style="setlinewidth(1)",color=black] ;
+aug-> brem [style="setlinewidth(1)",color=black] ;
+aug-> saar [style="setlinewidth(1)",color=black] ;
+aug-> brau [style="setlinewidth(1)",color=black] ;
+aach-> kiel [style="setlinewidth(1)",color=black] ;
+kiel-> tri [style="setlinewidth(1)",color=black] ;
+kiel-> bertu [style="setlinewidth(1)",color=black] ;
+tri-> brem [style="setlinewidth(1)",color=black] ;
+tri-> saar [style="setlinewidth(1)",color=black] ;
+tri-> brau [style="setlinewidth(1)",color=black] ;
+bertu-> brem [style="setlinewidth(1)",color=black] ;
+bertu-> brau [style="setlinewidth(1)",color=black] ;
+bertu-> chem [style="setlinewidth(1)",color=black] ;
+brem-> han [style="setlinewidth(1)",color=black] ;
+saar-> han [style="setlinewidth(1)",color=black] ;
+saar-> mnh [style="setlinewidth(1)",color=black] ;
+saar-> chem [style="setlinewidth(1)",color=black] ;
+brau-> m2 [style="setlinewidth(1)",color=black] ;
+brau-> han [style="setlinewidth(1)",color=black] ;
+m2-> boc [style="setlinewidth(1)",color=black] ;
+m2-> bie [style="setlinewidth(1)",color=black] ;
+m2-> darm [style="setlinewidth(1)",color=black] ;
+han-> boc [style="setlinewidth(1)",color=black] ;
+han-> bie [style="setlinewidth(1)",color=black] ;
+han-> darm [style="setlinewidth(1)",color=black] ;
+mnh-> bie [style="setlinewidth(1)",color=black] ;
+mnh-> darm [style="setlinewidth(1)",color=black] ;
+mnh-> dsd [style="setlinewidth(1)",color=black] ;
+chem-> ksl [style="setlinewidth(1)",color=black] ;
+ksl-> boc [style="setlinewidth(1)",color=black] ;
+ksl-> bie [style="setlinewidth(1)",color=black] ;
+ksl-> darm [style="setlinewidth(1)",color=black] ;
+boc-> dsd [style="setlinewidth(1)",color=black] ;
+bie-> gie [style="setlinewidth(1)",color=black] ;
+gie-> duis [style="setlinewidth(1)",color=black] ;
+dsd-> duis [style="setlinewidth(1)",color=black] ;
+duis-> m1 [style="setlinewidth(1)",color=black] ;
+}
+ 

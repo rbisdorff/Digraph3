@@ -4617,14 +4617,32 @@ The complete 9-tiles *rating-by-sorting* result may be well illustrated with a g
 
 In :numref:`nineTilingDrawing` we see the *skeleton* (transitive closure removed) of a **partial ranking**, where an oriented arc is drawn between Universities *x* and *y* when their 9-tiles sorting results are **disjoint** and the one of *x* is **higher rated** than the one of *y*. The rating for *TU München*, for instance, is disjoint and higher than the one of the Universities *Freiburg* and *Konstanz* (see :numref:`nineTilesSorting` Lines 45, 23, 32). Both their ratings are, however, not disjoint from the one, for instance, of the Universty of *Stuttgart* (Line  42). 
 
-The partial ranking, shown in this drawing, is in fact **independent** of any ordering strategy: - *average*, - *optimistic* or - *pessimistic*, of overlapping rating results and confirms that the same Universities as with the previous *rating-by-ranking* approach, namely *TU München*, *Freiburg*, *Konstanz*, *Stuttgart*, *Berlin Humboldt*, *Heidelberg* and *Leipzig* appear top-rated. Similarly, the Universities of *Duisburg*, *Hanover*, *Bochum*, *Giessen*, *Düsseldorf* and *Bielefeld* give the lowest-rated group. The midfield here is also consisting of  more or less the same Universities as the one observed with the previous *rating-by-ranking* approach. 
+.. only:: html
+	  
+    .. sidebar:: Fusion of rating-by-rankings 
+
+	.. figure:: fusionResult.png
+	   :name: fusionResult
+	   :width: 150 px
+	   :align: center
+
+	   Epistemic fusion of simple and iterated *Copeland* rating-by-ranking 
+
+    The partial ranking, shown in :numref:`nineTilingDrawing`, is in fact **independent** of any ordering strategy: - *average*, - *optimistic* or - *pessimistic*, of overlapping rating results and confirms that the same Universities as with the previous *rating-by-ranking* approach, namely *TU München*, *Freiburg*, *Konstanz*, *Stuttgart*, *Berlin Humboldt*, *Heidelberg* and *Leipzig* appear top-rated. Similarly, the Universities of *Duisburg*, *Hanover*, *Bochum*, *Giessen*, *Düsseldorf* and *Bielefeld* give the lowest-rated group. The midfield here is also consisting of  more or less the same Universities as the one observed with the previous *rating-by-ranking* approach.
+
+    It may be interesting, as an exercise, to verify if the *epistemic fusion* of the *rating-by-ranking* results, one may obtain when applying two different ranking rules, like the *copeland* and the *IteratedCopeland* rule (see the tutorial on :ref:`ranking with multiple incommensurable criteria <Ranking-Tutorial-label>`), actually confirms our *ranking-by-sorting* result [33]_ (see :numref:`fusionResult`).
+
+.. only:: latex
+
+    The partial ranking, shown in :numref:`nineTilingDrawing`, is in fact **independent** of any ordering strategy: - *average*, - *optimistic* or - *pessimistic*, of overlapping rating results and confirms that the same Universities as with the previous *rating-by-ranking* approach, namely *TU München*, *Freiburg*, *Konstanz*, *Stuttgart*, *Berlin Humboldt*, *Heidelberg* and *Leipzig* appear top-rated. Similarly, the Universities of *Duisburg*, *Hanover*, *Bochum*, *Giessen*, *Düsseldorf* and *Bielefeld* give the lowest-rated group. The midfield here is also consisting of  more or less the same Universities as the one observed with the previous *rating-by-ranking* approach.
+
+    It may be interesting, as an exercise, to verify if the *epistemic fusion* of the *rating-by-ranking* results, one may obtain when applying two different ranking rules, like the *copeland* and the *IteratedCopeland* rule (see the tutorial on :ref:`ranking with multiple incommensurable criteria <Ranking-Tutorial-label>`), actually confirms our *ranking-by-sorting* result [33]_.
+
 
 To conclude
 ...........
 
 In the end, both the *rating-by-ranking*, as well as the *rating-by-sorting* approach give very similar results. The first approach, with its *forced* linear ranking, determines, on the one hand, *precise* enrolment quality equivalence classes. The *rating-by-sorting* approach, on the other hand, determines for each individual University a less precise but *prudent* rating of its enrolment quality, supported with a known majority of valuated subjects; a somehow *fairer* rating result, yet, much less evident for easily comparing the apparent enrolment quality among Universities.
-
-It may be interesting, as an exercise, to verify if the *epistemic fusion* of the *rating-by-ranking* results, one may obtain when applying two different ranking rules, like the *copeland* and the *IteratedCopeland* rule (see the tutorial on :ref:`ranking with multiple incommensurable criteria <Ranking-Tutorial-label>`), actually confirms our *ranking-by-sorting* result [33]_.
 
 Back to :ref:`Content Table <Tutorial-label>`   
 
