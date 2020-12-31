@@ -2695,6 +2695,10 @@ The performance evaluations of each decision alternative on each criterion are g
 ##            
         fo.write('])\n')
         # evaluation
+        try:
+            fo.write('NA = Decimal(%s)\n' % (str(self.NA)) )
+        except:
+            fo.write("NA = Decimal('-999')\n")
         fo.write('evaluation = {\n')
         for g in criteria:
             fo.write('\'' +str(g)+'\': {\n')

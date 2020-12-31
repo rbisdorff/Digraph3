@@ -2557,17 +2557,22 @@ class QuantilesSortingDigraph(SortingDigraph):
         from math import floor
         from copy import copy, deepcopy
         LowerClosed = self.criteriaCategoryLimits['LowerClosed']
+        criterion = self.criteria[g]
+        evaluation = self.evaluation
+        NA = self.NA
+        actionsOrig = self.actionsOrig
         gValues = []
-        for x in self.actionsOrig:
+        
+        for x in actionsOrig:
             if Debug:
-                print('g,x,evaluation[g][x]',g,x,self.evaluation[g][x])
-            if self.evaluation[g][x] != Decimal('-999'):
-                gValues.append(self.evaluation[g][x])
+                print('g,x,evaluation[g][x]',g,x,evaluation[g][x])
+            if evaluation[g][x] != NA:
+                gValues.append(evaluation[g][x])
         gValues.sort()
         if PrefThresholds:
             try:
-                gPrefThrCst = self.criteria[g]['thresholds']['pref'][0]
-                gPrefThrSlope = self.criteria[g]['thresholds']['pref'][1]
+                gPrefThrCst = criterion['thresholds']['pref'][0]
+                gPrefThrSlope = criterion['thresholds']['pref'][1]
             except:
                 gPrefThrCst = Decimal('0')
                 gPrefThrSlope = Decimal('0')            

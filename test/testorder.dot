@@ -2,13 +2,13 @@ digraph G {
 graph [ bgcolor = cornsilk, ordering = out, fontname = "Helvetica-Oblique",
  fontsize = 12,
  label = "\nDigraph3 (graphviz), R. Bisdorff, 2015", size="7,7"];
-n1 [shape = "circle", label = "a3"];
-n2 [shape = "circle", label = "a1"];
-n3 [shape = "circle", label = "a5"];
+n1 [shape = "circle", label = "a2"];
+n2 [shape = "circle", label = "a5"];
+n3 [shape = "circle", label = "a3"];
 n4 [shape = "circle", label = "a4"];
-n5 [shape = "circle", label = "a2"];
-n1-> n2 [dir=forward,style="setlinewidth(-1)",color=grey, arrowhead=normal] ;
-n2-> n3 [dir=forward,style="setlinewidth(-1)",color=grey, arrowhead=normal] ;
-n3-> n4 [dir=forward,style="setlinewidth(-1)",color=grey, arrowhead=normal] ;
-n4-> n5 [dir=forward,style="setlinewidth(-1)",color=grey, arrowhead=normal] ;
+n5 [shape = "circle", label = "a1"];
+n1-> n2 [dir=forward,style="setlinewidth(0)",color=grey, arrowhead=normal] ;
+n2-> n3 [dir=forward,style="setlinewidth(-3)",color=grey, arrowhead=normal] ;
+n3-> n4 [dir=forward,style="setlinewidth(0)",color=grey, arrowhead=normal] ;
+n4-> n5 [dir=forward,style="setlinewidth(0)",color=grey, arrowhead=normal] ;
 }

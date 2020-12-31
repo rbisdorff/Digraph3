@@ -2694,7 +2694,12 @@ The performance evaluations of each decision alternative on each criterion are g
 ##                    fo.write('}),\n')
 ##            
         fo.write('])\n')
-        # evaluation
+        # missing data symbol
+        try:
+            fo.write("NA = Decimal('%s')\n" % (str(self.NA)) )
+        except:
+            fo.write("NA = Decimal('-999')\n")
+        # evaluations
         fo.write('evaluation = {\n')
         for g in criteria:
             fo.write('\'' +str(g)+'\': {\n')
@@ -2708,8 +2713,6 @@ The performance evaluations of each decision alternative on each criterion are g
                     
             fo.write('},\n')
         fo.write( '}\n')
-        # NA
-        fo.write('NA = Decimal(%s)\n' % (str(self.NA)) )
         fo.close()
 
     def _saveXML(self,name='temp',category='standard',subcategory='standard',author='digraphs Module (RB)',reference='saved from Python'):

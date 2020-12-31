@@ -4357,14 +4357,14 @@ To take furthermore into account a potential and very likely *imprecision* of th
 
 The apparent *incommensurability* and very likely *imprecision* of the recorded average enrolment quality scores, renders **meaningless** a global average scoring over the subjects per University of the enrolment quality. We shall therefore, similarly to the methodological approach of the *Spiegel* authors [29]_, proceed with an order statistics based *rating-by-ranking* approach (see tutorial on :ref:`rating with learned quantile norms <Rating-Tutorial-label>`).
 
-Rating the University enrolment quality by ranking
-..................................................
+Rating by ranking with learned quantiles
+........................................
 
 The Spiegel authors, in order to take into account the incommesurability and the likely imprecision of the recorded average enrolment quality scores, opted indeed for a simple 3-tiling of the Universities per valuated academic subject, followed by an average *Borda* scores based global ranking [29]_.
 
-Here, our epistemic logic based *outranking* approach, allows us, with adequate choices of indifference (0.1) and preference (0.6) discrimination thresholds, to compute a 9-tiling of the Universities per subject and rank conjointly the 41 Universities **and** the 9-tiling quality scores' limits per subject, with the help of the *Copeland* ranking rule applied to a corresponding *bipolar-valued outranking* digraph.
+Here, our epistemic logic based *outranking* approach, allows us, with adequate choices of indifference (0.1) and preference (0.6) discrimination thresholds, to estimate 9-tiles of the enrolment quality scores per subject and rank conjointly the 41 Universities **and** the learned 9-tiling quality scores' limits per subject, with the help of the *Copeland* ranking rule applied to a corresponding *bipolar-valued outranking* digraph.
 
-We need therefore to, first, estimate, with the help of the :py:class:`performanceQuantiles.PerformanceQuantiles` constructor, these lower-closed 9-tiling quality score limits per academic subject .
+We need therefore to, first, estimate, with the help of the :py:class:`performanceQuantiles.PerformanceQuantiles` constructor, these lower-closed 9-tiling quality score limits per academic subject.
 
 .. code-block:: pycon
    :name: performanceQuantiles
@@ -4526,10 +4526,10 @@ We may furthermore check if there exists any *cyclic* outranking situations.
 
 Here we observe indeed 93 such outranking circuits, like: *Berlin Humboldt* >= *Konstanz* >= *München* >= *Berlin Humboldt* supported by a (0.133 + 1.0)/2 = 56.7% majority of subjects [31]_ (see :numref:`chordlessCircuits` circuit 29 above). In the *Copeland* ranking result shown in :numref:`ninetiledHeatmap`, they appear positioned in fact respectively at rank 10, 4 and 6.
 
-The occurrence of so many outranking circuits in digraph *dg*, makes now any *forced* linear ranking doubtful, independently of the specific ranking rule we might apply. To effectively check the quality of our previous *rating-by-ranking* result, we shall compute now a direct sorting into 9-tiles of the enrolment quality scores, without using any outranking digraph based ranking rule (see tutorial on :ref:`rating with multiple incommensurable criteria <QuantilesRating-Tutorial-label>`).
+The occurrence of so many outranking circuits in digraph *dg*, makes any *forced* linear ranking *doubtful*, independently of the specific ranking rule we might apply. To effectively check the quality of our previous *rating-by-ranking* result, we shall compute now a direct sorting into 9-tiles of the enrolment quality scores, without using any outranking digraph based ranking rule (see tutorial on :ref:`rating with multiple incommensurable criteria <QuantilesRating-Tutorial-label>`).
 
-Rating the University enrolment quality by quantiles sorting
-............................................................
+Rating by quantiles sorting
+...........................
 
 For this *rating-by-sorting* approach, we are going to use the :py:class:`sortingDigrahs.QuantilesSortingDigraph` constructor for sorting the University enrolment qualities into lower-closed 9-tiles on the basis of our given performance tableau *t*.
 
@@ -4585,7 +4585,7 @@ For this *rating-by-sorting* approach, we are going to use the :py:class:`sortin
     [0.89 -    <[: tum with credibility: 0.07 = min(0.07,1.00)
     [0.44 - 0.56[: wrzb with credibility: 0.13 = min(0.20,0.13)
 
-In thw 9-tiles sorting result, shown in :numref:`nineTilesSorting`, we notice in Line 5 that the *RWTH Aachen* is precisely rated into the second 9-tile (:math:`[0.22 - 0.33[`), whereas the University of *Augsburg* is less precisely rated conjointly into the *fourth*, the *fifth* and the *6th* 9-tiles (:math:`[0.44 - 0.78[`). *TU München* appears best rated into the unique highest 9-tile (:math:`[0.89 - <[`). All these three rating results are supported by a (0.07 + 1.0)/2 = 53.5% majority of valuated subjects [31]_. With the support of a (0.53 + 1.0)/2 = 76.5% majority of valuated subjects, the apparent most confident 9-tiles rating result is the one the University *Duisburg* (see also :numref:`qualityScores` and :numref:`ninetiledHeatmap`). 
+In the 9-tiles sorting result, shown in :numref:`nineTilesSorting`, we notice in Line 5 that the *RWTH Aachen* is precisely rated into the second 9-tile (:math:`[0.22 - 0.33[`), whereas the University of *Augsburg* is less precisely rated conjointly into the *fourth*, the *fifth* and the *6th* 9-tile (:math:`[0.44 - 0.78[`). *TU München* appears best rated into the unique highest 9-tile (:math:`[0.89 - <[`). All these three rating results are supported by a (0.07 + 1.0)/2 = 53.5% majority of valuated subjects [31]_. With the support of a (0.53 + 1.0)/2 = 76.5% majority of valuated subjects, the apparent most confident 9-tiles rating result is the one the University *Duisburg* (see also :numref:`qualityScores` and :numref:`ninetiledHeatmap`). 
 
 We shall now lexicographically sort, by *average* rated 9-tile limits and *highest-rated* 9-tile limit, these individual rating results per University into ordered rating equivalence classes.
 
@@ -4615,17 +4615,17 @@ The complete 9-tiles *rating-by-sorting* result may be well illustrated with a g
 
    Graphviz drawing of the 9-tiles sorting digraph
 
-In :numref:`nineTilingDrawing` we see the *skeleton* (transitive closure removed) of a **partial ranking**, where an oriented arc is drawn between Universities *x* and *y* when their 9-tiles sorting results are **disjoint** and the one of *x* is **higher rated** than the one of *y*. The rating for *TU München*, for instance, is disjoint and higher than the one of the Universities *Freiburg* and *Konstanz*.
+In :numref:`nineTilingDrawing` we see the *skeleton* (transitive closure removed) of a **partial ranking**, where an oriented arc is drawn between Universities *x* and *y* when their 9-tiles sorting results are **disjoint** and the one of *x* is **higher rated** than the one of *y*. The rating for *TU München*, for instance, is disjoint and higher than the one of the Universities *Freiburg* and *Konstanz* (see :numref:`nineTilesSorting` Lines 45, 23, 32). Both their ratings are, however, not disjoint from the one, for instance, of the Universty of *Stuttgart* (Line  42). 
 
-The partial ranking, shown in this drawing, is hence **independent** of any ordering strategy: - *average*, - *optimistic* or - *pessimistic*, of overlapping rating results and confirms that the same Universities as with the previous *rating-by-ranking* approach, namely *TU München*, *Freiburg*, *Konstanz*, *Stuttgart*, *Berlin Humboldt*, *Heidelberg* and *Leipzig* appear top-rated. Similarly, the Universities of *Duisburg*, *Hanover*, *Bochum*, *Giessen*, *Düsseldorf* and *Bielefeld* give the lowest-rated group. The midfield here is also consisting of  more or less the same Universities as the one observed with the previous *rating-by-ranking* approach. 
+The partial ranking, shown in this drawing, is in fact **independent** of any ordering strategy: - *average*, - *optimistic* or - *pessimistic*, of overlapping rating results and confirms that the same Universities as with the previous *rating-by-ranking* approach, namely *TU München*, *Freiburg*, *Konstanz*, *Stuttgart*, *Berlin Humboldt*, *Heidelberg* and *Leipzig* appear top-rated. Similarly, the Universities of *Duisburg*, *Hanover*, *Bochum*, *Giessen*, *Düsseldorf* and *Bielefeld* give the lowest-rated group. The midfield here is also consisting of  more or less the same Universities as the one observed with the previous *rating-by-ranking* approach. 
 
 To conclude
 ...........
 
 In the end, both the *rating-by-ranking*, as well as the *rating-by-sorting* approach give very similar results. The first approach, with its *forced* linear ranking, determines, on the one hand, *precise* enrolment quality equivalence classes. The *rating-by-sorting* approach, on the other hand, determines for each individual University a less precise but *prudent* rating of its enrolment quality, supported with a known majority of valuated subjects; a somehow *fairer* rating result, yet, much less evident for easily comparing the apparent enrolment quality among Universities.
 
-When facing at present world wide health and environmental problems, we think that a rating by **quantiles sorting** of human activities is definitely more favouring the much needed peaceful cooperation of all human communities, than the, unfortunately more usual, competitive *rating-by-scoring* approach.
- 
+It may be interesting, as an exercise, to verify if the *epistemic fusion* of the *rating-by-ranking* results, one may obtain when applying two different ranking rules, like the *copeland* and the *IteratedCopeland* rule (see the tutorial on :ref:`ranking with multiple incommensurable criteria <Ranking-Tutorial-label>`), actually confirms our *ranking-by-sorting* result [33]_.
+
 Back to :ref:`Content Table <Tutorial-label>`   
 
 --------------
@@ -7528,7 +7528,8 @@ Appendices
 
 .. [32] The performance tableau :code:`studentenSpiegel04.py` is also available in the :code:`examples` directory of the Digraph3 software collection.
 
-
+.. [33] See the :code:`stSpDemo.py` file in the :code:`examples` directory of the *Digraph3* software collection.
+	
 ..  LocalWords:  randomDigraph Determinateness valuationdomain py png
 ..  LocalWords:  notGamma tutorialDigraph shortName func irreflexive
 ..  LocalWords:  hasIntegerValuation showAll tutorialdigraph graphviz

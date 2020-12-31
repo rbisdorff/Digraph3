@@ -5,21 +5,14 @@
 # Ref: Der Spiegel 48/2004 p.181
 ###################################
 
-#from perfTabs import *
 from outrankingDigraphs import *
 t = PerformanceTableau('studentenSpiegel04')
+print(t)
+t.computeMissingDataProportion(Comments=True)
 disciplines = [t for t in t.criteria]
 t.showHTMLPerformanceHeatmap(\
                   criteriaList=disciplines,ndigits=1,rankingRule=None)
 t.showHTMLCriteria()
-mdc = 0
-nc = 0
-for d in t.criteria:
-    for x in t.actions:
-        nc += 1
-        if t.evaluation[d][x] == Decimal('-999'):
-            mdc += 1
-print('missing data proportion: %.3f' % (mdc/nc))
 
 ###########
 from performanceQuantiles import *
@@ -47,5 +40,11 @@ qs = QuantilesSortingDigraph(t,9,LowerClosed=True)
 qs.showHTMLQuantileOrdering(strategy='average')
 qs.exportGraphViz(graphSize='12,12')
 
-
+#############
+nqr1 = NormedQuantilesRatingDigraph(pq,t,rankingRule='IteratedCopeland')
+from transitiveDigraphs import RankingsFusion
+rankings = [nqr.actionsRanking,
+            nqr1.actionsRanking]
+rf = RankingsFusion(nqr,rankings)
+rf.exportGraphViz('fusionResult',graphType='pdf')
 
