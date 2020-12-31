@@ -46,5 +46,7 @@ from transitiveDigraphs import RankingsFusion
 rankings = [nqr.actionsRanking,
             nqr1.actionsRanking]
 rf = RankingsFusion(nqr,rankings)
-rf.exportGraphViz('fusionResult',graphType='pdf')
+rf.exportGraphViz('fusionResult',graphType='png',graphSize='30,30')
+# For decorating the 9-tiles lower limits the fusionResult.dat
+# must be edited by hand like in the ratingResult.dot file
 
