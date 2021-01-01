@@ -4360,7 +4360,7 @@ The apparent *incommensurability* and very likely *imprecision* of the recorded 
 Rating-by-ranking with lower-closed quantile limits
 ...................................................
 
-The Spiegel authors opted indeed for a simple 3-tiling of the Universities per valuated academic subject, followed by an average *Borda* scores based global ranking [29]_. Here, our **pistemic logic* based **outranking approach**, allows us, with adequate choices of indifference (0.1) and preference (0.6) discrimination thresholds, to estimate lower-closed 9-tiles of the enrolment quality scores per subject and rank conjointly, with the help of the *Copeland* ranking rule [34]_ applied to a corresponding *bipolar-valued outranking* digraph, the 41 Universities **and** the lower limits of the estimated 9-tiles limits.
+The Spiegel authors opted indeed for a simple 3-tiling of the Universities per valuated academic subject, followed by an average *Borda* scores based global ranking [29]_. Here, our **epistemic logic* based **outranking approach**, allows us, with adequate choices of indifference (0.1) and preference (0.6) discrimination thresholds, to estimate lower-closed 9-tiles of the enrolment quality scores per subject and rank conjointly, with the help of the *Copeland* ranking rule [34]_ applied to a corresponding *bipolar-valued outranking* digraph, the 41 Universities **and** the lower limits of the estimated 9-tiles limits.
 
 We need therefore to, first, estimate, with the help of the :py:class:`performanceQuantiles.PerformanceQuantiles` constructor, the lowerclosed  9-tiling of the average enrolment quality scores per academic subject.
 
@@ -4585,7 +4585,7 @@ For this *rating-by-sorting* approach, we are going to use the :py:class:`sortin
     [0.89 -    <[: tum with credibility: 0.07 = min(0.07,1.00)
     [0.44 - 0.56[: wrzb with credibility: 0.13 = min(0.20,0.13)
 
-In the 9-tiles sorting result, shown in :numref:`nineTilesSorting`, we notice for instance in Lines 6-7 that the *RWTH Aachen* is precisely rated into the second 9-tile (:math:`[0.22 - 0.33[`), whereas the University *Augsburg* is less precisely rated conjointly into the *fourth*, the *fifth* and the *6th* 9-tile (:math:`[0.44 - 0.78[`). In Line 45, *TU München* appears best rated into the unique highest 9-tile (:math:`[0.89 - <[`). All these three rating results are supported by a (0.07 + 1.0)/2 = 53.5% majority of valuated subjects [31]_. With the support of a 76.5% majority of valuated subjects (Line 20), the apparent most confident rating result is the one of University *Duisburg* (see also :numref:`qualityScores` and :numref:`ninetiledHeatmap`). 
+In the 9-tiles sorting result, shown in :numref:`nineTilesSorting`, we notice for instance in Lines 6-7 that the *RWTH Aachen* is precisely rated into the third 9-tile (:math:`[0.22 - 0.33[`), whereas the University *Augsburg* is less precisely rated conjointly into the *fourth*, the *fifth* and the *6th* 9-tile (:math:`[0.44 - 0.78[`). In Line 45, *TU München* appears best rated into the unique highest 9-tile (:math:`[0.89 - <[`). All three rating results are supported by a (0.07 + 1.0)/2 = 53.5% majority of valuated subjects [31]_. With the support of a 76.5% majority of valuated subjects (Line 20), the apparent most confident rating result is the one of University *Duisburg* (see also :numref:`qualityScores` and :numref:`ninetiledHeatmap`). 
 
 We shall now lexicographically sort these individual rating results per University by *average* rated 9-tile limits and *highest-rated* upper 9-tile limit into ordered, but not necessarily disjoint, enrolment quality 9-tiles.
 
@@ -4600,7 +4600,7 @@ We shall now lexicographically sort these individual rating results per Universi
 
 In :numref:`nineTilingOrdering` we may notice that the Universities: *Augsburg*, *Saarbrücken* and *Tübingen* for instance, show in fact the same average rated 9-tiles score of 0.615; yet, the rated upper 9-tile limit of *Augsburg* is 0.78, whereas the one of both the other Universities reaches only 0.67. Hence, *Augsburg* is ranked higher than both *Saarbrücken* and *Tübingen*. 
 
-We may also illustrate, without a ranking strategy, the 9-tiles *rating-by-sorting* result with a *graphviz* drawing of this :code:`QuantilesSorting` digraph instance *qs*.
+With a *graphviz* drawing of this :code:`QuantilesSorting` digraph instance *qs*we may, without requiring any specific ordering strategy, as well illustrate our 9-tiles *rating-by-sorting* result.
 
    >>> qs.exportGraphViz('nineTilingDrawing',graphSize='12,12')
     *---- exporting a dot file for GraphViz tools ---------*
@@ -4615,10 +4615,14 @@ We may also illustrate, without a ranking strategy, the 9-tiles *rating-by-sorti
 
    Graphviz drawing of the 9-tiles sorting digraph
 
-In :numref:`nineTilingDrawing` we see the *skeleton* (transitive closure removed) of a **partial ranking**, where an oriented arc is drawn between Universities *x* and *y* when their 9-tiles sorting results are **disjoint** and the one of *x* is **higher rated** than the one of *y*. The rating for *TU München* (see :numref:`nineTilesSorting` Lines 45), for instance, is disjoint and higher rated than the one of the Universities *Freiburg* and *Konstanz* (Lines 23, 32). And, toth these ratings of *Feiburg* and Konstanz* are, however, not disjoint from the one, for instance, of the Universty of *Stuttgart* (Line 42). 
+In :numref:`nineTilingDrawing` we actually see the *skeleton* (transitive closure removed) of a **partial order**, where an oriented arc is drawn between Universities *x* and *y* when their 9-tiles sorting results are **disjoint** and the one of *x* is **higher rated** than the one of *y*. The rating for *TU München* (see :numref:`nineTilesSorting` Lines 45), for instance, is disjoint and higher rated than the one of the Universities *Freiburg* and *Konstanz* (Lines 23, 32). And, both the ratings of *Feiburg* and Konstanz* are, however, not disjoint from the one, for instance, of the Universty of *Stuttgart* (Line 42). 
+
+The partial ranking, shown in :numref:`nineTilingDrawing`, is in fact **independent** of any ordering strategy: - *average*, - *optimistic* or - *pessimistic*, of overlapping 9-tiles sorting results, and confirms that the same Universities as with the previous *rating-by-ranking* approach, namely *TU München*, *Freiburg*, *Konstanz*, *Stuttgart*, *Berlin Humboldt*, *Heidelberg* and *Leipzig* appear top-rated. Similarly, the Universities of *Duisburg*, *Hanover*, *Bochum*, *Giessen*, *Düsseldorf* and *Bielefeld* give the lowest-rated group. The midfield here is again consisting of more or less the same Universities as the one observed in the previous *rating-by-ranking* approach (see :numref:`ratingResult`).
 
 .. only:: html
-	  
+
+    It is interesting, as an exercise, to verify if the :ref:`epistemic fusion <Epistemic-Fusion-label>` of the *rating-by-ranking* results (see :numref:`fusionResult`), one may obtain when applying two different ranking rules, like the *Copeland* and the *IteratedCopeland* rule (see the tutorial on :ref:`ranking with multiple incommensurable criteria <Ranking-Tutorial-label>`), does actually confirm our rating results [33]_.
+
     .. sidebar:: Fusion of two ratings 
 
 	.. figure:: fusionResult.png
@@ -4628,27 +4632,20 @@ In :numref:`nineTilingDrawing` we see the *skeleton* (transitive closure removed
 
 	   Fused ratings by simple and iterated *Copeland* ranking rules
 
-    The partial ranking, shown in :numref:`nineTilingDrawing`, is in fact **independent** of any ranking strategy: - *average*, - *optimistic* or - *pessimistic*, of overlapping 9-tiles sorting results, and confirms that the same Universities as with the previous *rating-by-ranking* approach, namely *TU München*, *Freiburg*, *Konstanz*, *Stuttgart*, *Berlin Humboldt*, *Heidelberg* and *Leipzig* appear top-rated. Similarly, the Universities of *Duisburg*, *Hanover*, *Bochum*, *Giessen*, *Düsseldorf* and *Bielefeld* give the lowest-rated group. The midfield here is again consisting of more or less the same Universities as the one observed in the previous *rating-by-ranking* approach (see :numref:`ratingResult`).
-
-    It may be interesting, as an exercise, to verify if the *epistemic fusion* of *rating-by-ranking* results (see :numref:`fusionResult`), obtained when applying two different ranking rules, like the *Copeland* and the *IteratedCopeland* rule (see the tutorial on :ref:`ranking with multiple incommensurable criteria <Ranking-Tutorial-label>`), does actually confirm our *ranking-by-sorting* result [33]_.
-
 .. only:: latex
 
-    The partial ranking, shown in :numref:`nineTilingDrawing`, is in fact **independent** of any ordering strategy: - *average*, - *optimistic* or - *pessimistic*, of overlapping rating results and confirms that the same Universities as with the previous *rating-by-ranking* approach, namely *TU München*, *Freiburg*, *Konstanz*, *Stuttgart*, *Berlin Humboldt*, *Heidelberg* and *Leipzig* appear top-rated. Similarly, the Universities of *Duisburg*, *Hanover*, *Bochum*, *Giessen*, *Düsseldorf* and *Bielefeld* give the lowest-rated group. The midfield here is also consisting of  more or less the same Universities as the one observed with the previous *rating-by-ranking* approach.
-
-    It may be interesting, as an exercise, to verify if the *epistemic fusion* of the *rating-by-ranking* results, one may obtain when applying two different ranking rules, like the *copeland* and the *IteratedCopeland* rule (see the tutorial on :ref:`ranking with multiple incommensurable criteria <Ranking-Tutorial-label>`), actually confirms our *ranking-by-sorting* result [33]_.
-
+    It is interesting, as an exercise, to verify if the ref:`epistemic fusion <Epistemic-Fusion-label>` of the *rating-by-ranking* results, one may obtain when applying two different ranking rules, like the *copeland* and the *IteratedCopeland* rule (see the tutorial on :ref:`ranking with multiple incommensurable criteria <Ranking-Tutorial-label>`), does actually confirm our rating results [33]_.
 
 To conclude
 ...........
 
-In the end, both the *rating-by-ranking*, as well as the *rating-by-sorting* approach give luckily, in our rating case study here, similar results.
+In the end, both the *rating-by-ranking*, as well as the *rating-by-sorting* approach give luckily, in our case study here, very similar results.
 
 Yet, the first approach, with its *forced* linear ranking, determines on the one hand, *precise* enrolment quality equivalence classes; a result, depending potentially a lot on the actually applied ranking rule (see the exercise proposed above).
 
-The *rating-by-sorting* approach, on the other hand, only determines for each University a less precise but *prudent* rating of its individual enrolment quality, furthermore supported by a known majority of performance criteria significance; a somehow *fairer* result, yet, much less evident for easily comparing the apparent enrolment quality among Universities. Universities, not evaluated at all for instance, will trivially appear rated in the whole range of 9-tiles (:math:`[0.00 - 1.00]`).
+The *rating-by-sorting* approach, on the other hand, only determines for each University a less precise but *prudent* rating of its individual enrolment quality, furthermore supported by a known majority of performance criteria significance; a somehow *fairer* and *robuster* result, but, much less evident for easily comparing the apparent enrolment quality among Universities. Poorly, or not at all valuated Universities, for instance, would appear trivially rated into more or less the whole range of 9-tiles.
 
-Let us conclude by saying that, for sure, we recommend this latter, more imprecise but well grounded in an epistemic logical framework, *rating-by-scoring* approach and, that we hope the reader might eventually share our preference.
+Let us conclude by saying that we prefer this latter *rating-by-scoring* approach; perhaps impreciser, due the case given, to missing data and lack of discrimination power of the rating criteria; yet, well grounded in a powerful bipolar-valued logical and computational framework (see the advanced topics of the Digraph3 documentation).
 
 Back to :ref:`Content Table <Tutorial-label>`   
 
