@@ -4600,7 +4600,7 @@ We shall now lexicographically sort these individual rating results per Universi
 
 In :numref:`nineTilingOrdering` we may notice that the Universities: *Augsburg*, *Saarbrücken* and *Tübingen* for instance, show in fact the same average rated 9-tiles score of 0.615; yet, the rated upper 9-tile limit of *Augsburg* is 0.78, whereas the one of both the other Universities reaches only 0.67. Hence, *Augsburg* is ranked higher than both *Saarbrücken* and *Tübingen*. 
 
-With a *graphviz* drawing of this :code:`QuantilesSorting` digraph instance *qs*we may, without requiring any specific ordering strategy, as well illustrate our 9-tiles *rating-by-sorting* result.
+With a *graphviz* drawing of this :code:`QuantilesSorting` digraph instance *qs*, we may, without requiring any specific ordering strategy, as well illustrate our 9-tiles *rating-by-sorting* result.
 
    >>> qs.exportGraphViz('nineTilingDrawing',graphSize='12,12')
     *---- exporting a dot file for GraphViz tools ---------*
