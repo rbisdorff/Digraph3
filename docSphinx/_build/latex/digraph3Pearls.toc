@@ -11,7 +11,7 @@
 \contentsline {section}{\numberline {3}Bipolar\sphinxhyphen {}valued kernel membership characteristic vectors}{17}{section.3}%
 \contentsline {subsection}{\numberline {3.1}\sphinxstyleemphasis {Claude Berge}’s kernel equation systems}{17}{subsection.3.1}%
 \contentsline {subsection}{\numberline {3.2}Solving bipolar\sphinxhyphen {}valued kernel equation systems}{18}{subsection.3.2}%
-\contentsline {section}{\numberline {4}On confident outrankings with uncertain criteria significances}{24}{section.4}%
+\contentsline {section}{\numberline {4}On confident outrankings with uncertain criteria significances}{25}{section.4}%
 \contentsline {subsection}{\numberline {4.1}Modelling uncertain criteria significances}{25}{subsection.4.1}%
 \contentsline {subsection}{\numberline {4.2}Bipolar\sphinxhyphen {}valued likelihood of ‘’at least as good as ” situations}{26}{subsection.4.2}%
 \contentsline {subsection}{\numberline {4.3}Confidence level of outranking situations}{29}{subsection.4.3}%

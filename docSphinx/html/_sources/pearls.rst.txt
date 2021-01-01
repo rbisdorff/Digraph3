@@ -18,6 +18,8 @@
    :description: Documentation of the Digraph3 collection of python3 modules for algorithmic decision theory
    :keywords: Algorithmic Decision Theory, Outranking Digraphs, MIS and kernels, Multiple Criteria Decision Aid
 
+.. _Advanced-Topics-label:
+
 Advanced Topics
 ===============
 
@@ -29,11 +31,11 @@ Advanced Topics
    :PDF version: http://hdl.handle.net/10993/42390
    :Copyright: `R. Bisdorff <_static/digraph3_copyright.html>`_ 2013-2020
 
-.. _Pearls-label:
+.. _Pearls-label:	   
 
 .. only:: html
 	    
-   .. contents::
+   .. contents:: Content Table
       :depth: 1
       :local:
 
@@ -178,6 +180,8 @@ Notice finally the ordinal correlation *tau* values in
 :numref:`graffiti07_2` 3rd row. How may we compute these ordinal correlation indexes ?
 
 Back to :ref:`Content Table <Pearls-label>`
+
+-------------------
 
 .. _OrdinalCorrelation-Tutorial-label:
 	
@@ -512,6 +516,8 @@ In the tutorial on :ref:`Computing Digraph Kernels <Kernel-Tutorial-label>`, we 
 
 Back to :ref:`Content Table <Pearls-label>`
 
+-------------------
+
 .. _Bipolar-Valued-Kernels-Tutorial-label:
 
 Bipolar-valued kernel membership characteristic vectors
@@ -820,6 +826,8 @@ The adjacency matrix of a symmetric digraph staying *unchanged* by the transposi
    It is worthwhile noticing again the essential computational role, the logical **indeterminate value 0.0** is playing in this double fixpoint algorithm. To implement such kind of algorithms without a logical **neutral term** would be like implementing numerical algorithms without a possible usage of the number 0. Infinitely many trivial *impossibility theorems* and *dubious logical results* come up. 
 
 Back to :ref:`Content Table <Pearls-label>`
+
+-----------------
 
 .. _Bipolar-Valued-Likelihood-Tutorial-label:
 
@@ -1130,6 +1138,8 @@ Despite lower likelihood values (see the *g90* relation table above), we keep th
 For concluding, it is worthwhile noticing again that it is the *neutral* value of our bipolar-valued epistemic logic that allows us to easily handle alpha% confidence or not of outranking situations when confronted with uncertain criteria significances. Remarkable furthermore is the usage, the standard Gaussian error function provides by delivering *signed likelihood values* immediately concerning either a *positive* relational statement, or when negative, its negated version. 
 
 Back to :ref:`Content Table <Pearls-label>`
+
+--------------
 
 .. _Stable-Outranking-Tutorial-label:
 
@@ -1553,6 +1563,10 @@ As the inital prekernel is here validated at stability level +2, recommending al
 
 For concluding, let us mention that it is precisely again our bipolar-valued *logical characteristic framework* that provides us here with a **first order distributional dominance** test for effectively qualifying the stability level 2 *robustness* of an outranking digraph when facing performance tableaux with criteria of only ordinal-valued significances. A real world application of our stability analysis with such a kind of performance tableau may be consulted in [BIS-2015p]_.
 
+Back to :ref:`Content Table <Pearls-label>`
+
+----------------
+
 .. _UnOpposed-Outranking-Tutorial-label:
 
 On unopposed outrankings with multiple decision objectives
@@ -1744,6 +1758,9 @@ We may visualize this kind of **Pareto efficient** result in :numref:`unopDigrap
 
 In order to make now an eventual best unique choice, a decision maker will necessarily have to weight, in a second stage of the decision aiding process, the relative importance of the individual decision objectives (see tutorial on :ref:`computing a best choice recommendation <Rubis-Tutorial-label>`).
 
+Back to :ref:`Content Table <Pearls-label>`
+
+----------------
 
 Two-stage elections with multipartisan primary selection
 --------------------------------------------------------
@@ -2092,6 +2109,8 @@ We may eventually visualize in :numref:`drawingRanking` this linear ranking with
    Linear ordering of the eligible candidates
 
 Back to :ref:`Content Table <Pearls-label>`
+
+-------------------
 
 Bibliography
 ------------

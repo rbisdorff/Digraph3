@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.20 (TeX Live 2019/Debian) (preloaded format=pdflatex 2020.4.26)  1 JAN 2021 10:10
+This is pdfTeX, Version 3.14159265-2.6-1.40.20 (TeX Live 2019/Debian) (preloaded format=pdflatex 2020.4.26)  1 JAN 2021 12:05
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -720,88 +720,88 @@ Package pdftex.def Info: graffiti07_6.png  used on input line 255.
 (pdftex.def)             Requested size: 301.12305pt x 255.66255pt.
  [6 <./graffiti07_3.png>] [7 <./graffiti07_6.png>]
 Package hyperref Info: bookmark level for unknown literalblock defaults to 0 on
- input line 304.
+ input line 308.
  [8] [9] [10]
-Overfull \vbox (2.64749pt too high) detected at line 469
+Overfull \vbox (2.64749pt too high) detected at line 473
  []
 
 [11] [12]
 <correlationTable.png, id=343, 847.165pt x 355.3275pt>
 File: correlationTable.png Graphic file (type png)
 <use correlationTable.png>
-Package pdftex.def Info: correlationTable.png  used on input line 532.
+Package pdftex.def Info: correlationTable.png  used on input line 536.
 (pdftex.def)             Requested size: 451.68457pt x 189.45041pt.
  [13 <./correlationTable.png>]
 <correlationPCA.png, id=357, 766.865pt x 771.88374pt>
 File: correlationPCA.png Graphic file (type png)
 <use correlationPCA.png>
-Package pdftex.def Info: correlationPCA.png  used on input line 551.
+Package pdftex.def Info: correlationPCA.png  used on input line 555.
 (pdftex.def)             Requested size: 301.12305pt x 303.09459pt.
  [14 <./correlationPCA.png>]
 <asymmetricPart.png, id=365, 1210.5225pt x 600.2425pt>
 File: asymmetricPart.png Graphic file (type png)
 <use asymmetricPart.png>
-Package pdftex.def Info: asymmetricPart.png  used on input line 572.
+Package pdftex.def Info: asymmetricPart.png  used on input line 576.
 (pdftex.def)             Requested size: 451.68457pt x 223.97299pt.
 <symmetricPart.png, id=366, 1209.51875pt x 602.25pt>
 File: symmetricPart.png Graphic file (type png)
 <use symmetricPart.png>
-Package pdftex.def Info: symmetricPart.png  used on input line 586.
+Package pdftex.def Info: symmetricPart.png  used on input line 590.
 (pdftex.def)             Requested size: 451.68457pt x 224.90585pt.
  [15 <./asymmetricPart.png>] [16 <./symmetricPart.png>]
-Overfull \vbox (0.52747pt too high) detected at line 680
+Overfull \vbox (0.52747pt too high) detected at line 688
  []
 
 [17] [18] [19]
 <k1restricted.png, id=422, 644.4075pt x 375.4025pt>
 File: k1restricted.png Graphic file (type png)
 <use k1restricted.png>
-Package pdftex.def Info: k1restricted.png  used on input line 806.
+Package pdftex.def Info: k1restricted.png  used on input line 814.
 (pdftex.def)             Requested size: 301.12305pt x 175.42531pt.
  [20 <./k1restricted.png>]
 <k2restricted.png, id=430, 648.4225pt x 372.39125pt>
 File: k2restricted.png Graphic file (type png)
 <use k2restricted.png>
-Package pdftex.def Info: k2restricted.png  used on input line 855.
+Package pdftex.def Info: k2restricted.png  used on input line 863.
 (pdftex.def)             Requested size: 301.12305pt x 172.93852pt.
  [21]
 <bestWorstOrientation.png, id=435, 384.43625pt x 403.5075pt>
 File: bestWorstOrientation.png Graphic file (type png)
 <use bestWorstOrientation.png>
-Package pdftex.def Info: bestWorstOrientation.png  used on input line 891.
+Package pdftex.def Info: bestWorstOrientation.png  used on input line 899.
 (pdftex.def)             Requested size: 225.84229pt x 237.05145pt.
  [22 <./k2restricted.png>]
-[23 <./bestWorstOrientation.png>] [24]
-<weightDistributions.png, id=460, 738.76pt x 669.50125pt>
+[23 <./bestWorstOrientation.png>] [24] [25]
+<weightDistributions.png, id=466, 738.76pt x 669.50125pt>
 File: weightDistributions.png Graphic file (type png)
 <use weightDistributions.png>
-Package pdftex.def Info: weightDistributions.png  used on input line 1005.
+Package pdftex.def Info: weightDistributions.png  used on input line 1017.
 (pdftex.def)             Requested size: 338.76343pt x 307.00381pt.
- [25] [26 <./weightDistributions.png>]
+ [26 <./weightDistributions.png>]
 <rCharacteristic.png, id=481, 764.8575pt x 411.5375pt>
 File: rCharacteristic.png Graphic file (type png)
 <use rCharacteristic.png>
-Package pdftex.def Info: rCharacteristic.png  used on input line 1038.
+Package pdftex.def Info: rCharacteristic.png  used on input line 1050.
 (pdftex.def)             Requested size: 338.76343pt x 182.27644pt.
 
 [27 <./rCharacteristic.png>]
 <simulLikelihood.png, id=491, 361.35pt x 252.945pt>
 File: simulLikelihood.png Graphic file (type png)
 <use simulLikelihood.png>
-Package pdftex.def Info: simulLikelihood.png  used on input line 1075.
+Package pdftex.def Info: simulLikelihood.png  used on input line 1087.
 (pdftex.def)             Requested size: 414.04419pt x 289.83467pt.
  [28 <./simulLikelihood.png>] [29] [30]
 <confidentOutranking.png, id=517, 383.4325pt x 428.60126pt>
 File: confidentOutranking.png Graphic file (type png)
 <use confidentOutranking.png>
-Package pdftex.def Info: confidentOutranking.png  used on input line 1213.
+Package pdftex.def Info: confidentOutranking.png  used on input line 1225.
 (pdftex.def)             Requested size: 263.48267pt x 294.53838pt.
  [31 <./confidentOutranking.png>] [32] [33] [34] [35] [36] [37]
-Overfull \vbox (1.24075pt too high) detected at line 1545
+Overfull \vbox (1.24075pt too high) detected at line 1561
  []
 
 [38] [39] [40]
-Underfull \hbox (badness 8038) in paragraph at lines 1852--1853
+Underfull \hbox (badness 8038) in paragraph at lines 1868--1869
 []\T1/cmr/m/n/12 The cor-re-spond-ing \T1/cmr/m/it/12 ro-bust \T1/cmr/m/n/12 ou
 t-rank-ing di-graph may be com-puted with the
  []
@@ -810,86 +810,86 @@ t-rank-ing di-graph may be com-puted with the
 <robStdStrictOutranking.png, id=639, 1010.77625pt x 569.12625pt>
 File: robStdStrictOutranking.png Graphic file (type png)
 <use robStdStrictOutranking.png>
-Package pdftex.def Info: robStdStrictOutranking.png  used on input line 1924.
+Package pdftex.def Info: robStdStrictOutranking.png  used on input line 1940.
 (pdftex.def)             Requested size: 451.68457pt x 254.32419pt.
  [42]
 <robustHeatmap.png, id=651, 1026.83624pt x 525.965pt>
 File: robustHeatmap.png Graphic file (type png)
 <use robustHeatmap.png>
-Package pdftex.def Info: robustHeatmap.png  used on input line 1939.
+Package pdftex.def Info: robustHeatmap.png  used on input line 1955.
 (pdftex.def)             Requested size: 451.68457pt x 231.3611pt.
  [43 <./robStdStrictOutranking.png>] [44 <./robustHeatmap.png>]
 [45]
-Underfull \hbox (badness 7759) in paragraph at lines 2036--2037
+Underfull \hbox (badness 7759) in paragraph at lines 2058--2059
 []\T1/cmr/m/n/12 For eas-ily com-put-ing this kind of \T1/cmr/m/it/12 un-op-pos
 ed mul-ti-ob-jec-tive \T1/cmr/m/n/12 out-rank-ing di-
  []
 
 
-Underfull \vbox (badness 2818) detected at line 2060
+Underfull \vbox (badness 2617) detected at line 2082
  []
 
 [46] [47]
-<unopDigraph.png, id=707, 807.015pt x 467.7475pt>
+<unopDigraph.png, id=708, 807.015pt x 467.7475pt>
 File: unopDigraph.png Graphic file (type png)
 <use unopDigraph.png>
-Package pdftex.def Info: unopDigraph.png  used on input line 2134.
+Package pdftex.def Info: unopDigraph.png  used on input line 2156.
 (pdftex.def)             Requested size: 451.68457pt x 261.8012pt.
  [48] [49 <./unopDigraph.png>] [50] [51]
-<unOpposedOutrankings.png, id=733, 779.91376pt x 528.97626pt>
+<unOpposedOutrankings.png, id=735, 779.91376pt x 528.97626pt>
 File: unOpposedOutrankings.png Graphic file (type png)
 <use unOpposedOutrankings.png>
-Package pdftex.def Info: unOpposedOutrankings.png  used on input line 2285.
+Package pdftex.def Info: unOpposedOutrankings.png  used on input line 2313.
 (pdftex.def)             Requested size: 451.68457pt x 306.35443pt.
  [52] [53 <./unOpposedOutrankings.png>] [54]
-Overfull \vbox (1.2081pt too high) detected at line 2397
+Overfull \vbox (1.2081pt too high) detected at line 2425
  []
 
 [55]
-Overfull \vbox (2.28831pt too high) detected at line 2445
+Overfull \vbox (2.28831pt too high) detected at line 2473
  []
 
 [56]
-<divGraph.png, id=785, 295.1025pt x 500.87125pt>
+<divGraph.png, id=787, 295.1025pt x 500.87125pt>
 File: divGraph.png Graphic file (type png)
 <use divGraph.png>
-Package pdftex.def Info: divGraph.png  used on input line 2464.
+Package pdftex.def Info: divGraph.png  used on input line 2492.
 (pdftex.def)             Requested size: 188.2019pt x 319.43301pt.
  [57 <./divGraph.png>]
-Underfull \hbox (badness 10000) in paragraph at lines 2480--2481
+Underfull \hbox (badness 10000) in paragraph at lines 2512--2513
 \T1/cmr/m/n/12 Per-for-mance Dif-fer-ences^^Q \T1/cmr/m/it/12 Jour-nal of Multi
 -Criteria De-ci-sion Anal-
  []
 
 
-Underfull \hbox (badness 8113) in paragraph at lines 2480--2481
+Underfull \hbox (badness 8113) in paragraph at lines 2512--2513
 \T1/cmr/m/it/12 y-sis \T1/cmr/m/n/12 (Wi-ley) \T1/cmr/bx/n/12 20\T1/cmr/m/n/12 
 :3-12 (down-load-able preprint [][]PDF file 403.5 Kb[][]
  []
 
 
-Underfull \hbox (badness 5460) in paragraph at lines 2484--2485
+Underfull \hbox (badness 5460) in paragraph at lines 2516--2517
 \T1/cmr/m/n/12 ker-nels from bipo-lar val-ued di-graphs^^Q. \T1/cmr/m/it/12 Eu-
 ro-pean Jour-nal of Op-er-
  []
 
 
-Underfull \hbox (badness 6559) in paragraph at lines 2484--2485
+Underfull \hbox (badness 6559) in paragraph at lines 2516--2517
 \T1/cmr/m/it/12 a-tional Re-search\T1/cmr/m/n/12 , 175 (2006) 155-170. (On-line
 ) Elec-tronic ver-sion:
  []
 
 [58] (./digraph3Pearls.ind)
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 2503.
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 2535.
  [59]
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 2503.
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 2535.
  (./digraph3Pearls.aux)
-Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 2503.
-Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 2503.
+Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 2535.
+Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 2535.
 
 Package rerunfilecheck Info: File `digraph3Pearls.out' has not changed.
 (rerunfilecheck)             Checksum: AE246BEE7B226E39E0E3FF3593A76A23;9023.
-Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 2503.
+Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 2535.
  ) 
 Here is how much of TeX's memory you used:
  14102 strings out of 482504
@@ -936,10 +936,10 @@ dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/share/texlive/texmf-dist/f
 onts/type1/public/amsfonts/cm/cmsy6.pfb></usr/share/texlive/texmf-dist/fonts/ty
 pe1/public/amsfonts/cm/cmsy8.pfb></usr/share/texlive/texmf-dist/fonts/type1/pub
 lic/amsfonts/symbols/msam10.pfb>
-Output written on digraph3Pearls.pdf (60 pages, 1970512 bytes).
+Output written on digraph3Pearls.pdf (60 pages, 1970789 bytes).
 PDF statistics:
- 1708 PDF objects out of 1728 (max. 8388607)
- 839 compressed objects within 9 object streams
+ 1710 PDF objects out of 1728 (max. 8388607)
+ 841 compressed objects within 9 object streams
  199 named destinations out of 1000 (max. 500000)
  379 words of extra memory for PDF output out of 10000 (max. 10000000)
 
