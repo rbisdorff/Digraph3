@@ -4623,14 +4623,14 @@ The partial ranking, shown in :numref:`nineTilingDrawing`, is in fact **independ
 
     It is interesting, as an exercise, to verify if the :ref:`epistemic fusion <Epistemic-Fusion-label>` of the *rating-by-ranking* results (see :numref:`fusionResult`), one may obtain when applying two different ranking rules, like the *Copeland* and the *IteratedCopeland* rule (see the tutorial on :ref:`ranking with multiple incommensurable criteria <Ranking-Tutorial-label>`), does actually confirm our rating results [33]_.
 
-    .. sidebar:: Fusion of two ratings 
+    .. sidebar:: Fusion of two rating results
 
 	.. figure:: fusionResult.png
 	   :name: fusionResult
 	   :width: 150 px
 	   :align: center
 
-	   Fused ratings by simple and iterated *Copeland* ranking rules
+	   Fused ratings by simple and iterated Copeland ranking
 
 .. only:: latex
 
@@ -4645,7 +4645,7 @@ Yet, the first approach, with its *forced* linear ranking, determines on the one
 
 The *rating-by-sorting* approach, on the other hand, only determines for each University a less precise but *prudent* rating of its individual enrolment quality, furthermore supported by a known majority of performance criteria significance; a somehow *fairer* and *robuster* result, but, much less evident for easily comparing the apparent enrolment quality among Universities. Poorly, or not at all valuated Universities, for instance, would appear trivially rated into more or less the whole range of 9-tiles.
 
-Let us conclude by saying that we prefer this latter *rating-by-scoring* approach; perhaps impreciser, due the case given, to missing data and lack of discrimination power of the rating criteria; yet, well grounded in a powerful bipolar-valued logical and computational framework (see the advanced topics of the Digraph3 documentation).
+Let us conclude by saying that we prefer this latter *rating-by-scoring* approach; perhaps impreciser, due the case given, to missing data and lack of discrimination power of the rating criteria; yet, well grounded in a powerful bipolar-valued logical and computational framework (see the :ref:`advanced topics of the Digraph3 documentation <Advanced-Topics-label>`).
 
 Back to :ref:`Content Table <Tutorial-label>`   
 
