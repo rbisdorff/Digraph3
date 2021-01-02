@@ -3452,6 +3452,18 @@ class NormedQuantilesRatingDigraph(QuantilesSortingDigraph,PerformanceQuantiles)
             actionsList = rp.rankedPairsRanking
             self.rankingRule = 'RankedPairs'
             self.rankingScores = None
+        elif rankingRule == 'IteratedCopeland':
+            from linearOrders import IteratedCopelandRanking
+            rp = IteratedCopelandRanking(g)
+            actionsList = rp.iteratedCopelandRanking
+            self.rankingRule = 'IteratedCopeland'
+            self.rankingScores = None
+        elif rankingRule == 'IteratedNetFlows':
+            from linearOrders import IteratedNetFlowsRanking
+            rp = IteratedNetFlowsRanking(g)
+            actionsList = rp.iteratedNetFlowsRanking
+            self.rankingRule = 'IteratedNetFlows'
+            self.rankingScores = None
         elif rankingRule == 'Kemeny':
             if g.order > 12:
                 print('Error: the digraph is to big for the Kemeny ranking rule üüü')
@@ -4594,7 +4606,7 @@ if __name__ == "__main__":
     newActions = tpg.randomActions(20)
     pq.updateQuantiles(newActions,historySize=None)
     ira = NormedQuantilesRatingDigraph(pq,newActions,\
-                                    rankingRule='best',\
+                                    rankingRule='IteratedNetFlows',\
                                    WithSorting=True,Debug=False,\
                                        Threading=MP,nbrOfCPUs=nbrOfCPUs)
     print(ira)

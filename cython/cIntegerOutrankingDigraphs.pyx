@@ -330,11 +330,19 @@ class IntegerBipolarOutrankingDigraph(BipolarOutrankingDigraph,PerformanceTablea
             hasBipolarVeto = True
         self.methodData = methodData
 
+        # insert missing data symbol
+        if CopyPerfTab:
+            self.NA = deepcopy(perfTab.NA)
+        else:
+            self.NA = perfTab.NA
+            
         # insert performance Data
         if CopyPerfTab:
             self.evaluation = deepcopy(perfTab.evaluation)
+            self.NA = deepcopy(perfTab.NA)
         else:
             self.evaluation = perfTab.evaluation
+            self.NA = perfTab.NA
         if not BigData:
             #self.convertEvaluationFloatToDecimal()
             try:
@@ -432,11 +440,12 @@ class IntegerBipolarOutrankingDigraph(BipolarOutrankingDigraph,PerformanceTablea
 
         """
         critc = self.criteria[c]
+        NA = self.NA
         if a == b:
             return 1
         else:
 
-            if self.evaluation[c][a] != Decimal('-999') and self.evaluation[c][b] != Decimal('-999'):		
+            if self.evaluation[c][a] != NA and self.evaluation[c][b] != NA:		
                 try:
                     indx = critc['thresholds']['ind'][0]
                     indy = critc['thresholds']['ind'][1]
@@ -784,6 +793,7 @@ class IntegerBipolarOutrankingDigraph(BipolarOutrankingDigraph,PerformanceTablea
         #nc = len(criteria)
         Max = self.valuationdomain['max']
         Med = self.valuationdomain['med']
+        NA = self.NA
         for a in initial:
             relation[a] = {}
             ra = relation[a]
@@ -802,7 +812,7 @@ class IntegerBipolarOutrankingDigraph(BipolarOutrankingDigraph,PerformanceTablea
                         evalcb = evaluation[c][b]
                         #maxAB = max(absFloat(evalca),absFloat(evalcb))
                         
-                        if evalca != Decimal('-999') and evalcb != Decimal('-999'):
+                        if evalca != NA and evalcb != NA:
                             maxAB = cMAX(absFloat(evalca),absFloat(evalcb))
                             try:
                                 indx = crit['thresholds']['ind'][0]
@@ -1328,7 +1338,8 @@ class IntegerBipolarOutrankingDigraph(BipolarOutrankingDigraph,PerformanceTablea
         crit = self.criteria[c]
         Min = self.valuationdomain['min']
         Max = self.valuationdomain['max']
-        if evalca != Decimal('-999') and evalcb != Decimal('-999'):
+        NA = self.NA
+        if evalca != NA and evalcb != NA:
             maxAB = max(absFloat(evalca),absFloat(evalcb))
             try:
                 indx = crit['thresholds']['ind'][0]

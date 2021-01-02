@@ -6095,6 +6095,7 @@ criteria = OrderedDict([
 'weight': Decimal('4'),
 }),
 ])
+NA = Decimal('-999')
 evaluation = {
 'm01': {
 's0001':Decimal("15.00"),
@@ -17119,4 +17120,3 @@ evaluation = {
 's1000':Decimal("16.00"),
 },
 }
-NA = Decimal(-999)

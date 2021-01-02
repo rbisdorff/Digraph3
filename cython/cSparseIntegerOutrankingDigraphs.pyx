@@ -1194,10 +1194,12 @@ class SparseIntegerOutrankingDigraph(SparseIntegerDigraph,cPerformanceTableau):
             self.actions = deepcopy(perfTab.actions)
             self.criteria = deepcopy(perfTab.criteria)
             self.evaluation = deepcopy(perfTab.evaluation)
+            self.NA = deepcopy(perfTab.NA)
         else:
             self.actions = perfTab.actions
             self.criteria = perfTab.criteria
             self.evaluation = perfTab.evaluation
+            self.NA = perfTab.NA
         #self.actions = [x for x in perfTab.actions]
         na = len(self.actions)
         self.order = na
@@ -1288,6 +1290,7 @@ class SparseIntegerOutrankingDigraph(SparseIntegerDigraph,cPerformanceTableau):
                 boostedRanking += pg.computeCopelandRanking()
                 pg.__dict__.pop('criteria')
                 pg.__dict__.pop('evaluation')
+                pg.__dict__.pop('NA')
                 pg.__class__ = Digraph
                 components[compKey]['subGraph'] = pg
         else:   # if self.sortingParameters['Threading'] == True:
@@ -2134,6 +2137,7 @@ class cQuantilesRankingDigraph(SparseIntegerOutrankingDigraph):
         cdef double ttot, t0, tw, tdump
         cdef int maximalComponentSize
         cdef array.array lTest=array.array('i')
+        cdef int NA
 
         global perfTab
         global decomposition
@@ -2163,11 +2167,15 @@ class cQuantilesRankingDigraph(SparseIntegerOutrankingDigraph):
             criteria = self.criteria
             self.evaluation = deepcopy(perfTab.evaluation)
             evaluation = self.evaluation
+            NA = deepcopy(perfTab.NA)
+            
         else:
             self.actions = perfTab.actions
             #self.actionsOrig = [x for x in perfTab.actions]
             criteria = perfTab.criteria
             evaluation = perfTab.evaluation
+            NA = perfTab.NA
+            
         na = len(self.actions)
         self.order = na
         dimension = len(criteria)

@@ -50,6 +50,7 @@ class cPerformanceTableau(PerformanceTableau):
             except:
                 self.weightPreorder = self.computeWeightPreorder()
             self.evaluation = argDict['evaluation']
+            self.NA = argDict['NA']
             self.convertInsite2BigData()
         else:
             self.name = "empty_instance"
@@ -57,6 +58,7 @@ class cPerformanceTableau(PerformanceTableau):
             self.criteria = OrderedDict()
             self.weightPreorder = {}
             self.evaluation = {}
+            self.NA = -999
 
     def convertInsite2BigData(self):
         """
@@ -148,9 +150,10 @@ class cPerformanceTableau(PerformanceTableau):
         evaluation = self.evaluation
         actions = self.actions
         criteria = self.criteria
+        NA = self.NA
         for g in criteria:
             for x in actions:
-                if evaluation[g][x] != Decimal('-999'):
+                if evaluation[g][x] != NA:
                     evaluation[g][x] = float(evaluation[g][x])
         self.evaluation = evaluation
 
@@ -163,10 +166,11 @@ class cPerformanceTableau(PerformanceTableau):
         evaluation = self.evaluation
         actions = self.actions
         criteria = self.criteria
+        NA = self.NA
         fstr = '%%.%df' % ndigits
         for g in criteria:
             for x in actions:
-                if evaluation[g][x] != Decimal('-999'):
+                if evaluation[g][x] != NA:
                     evaluation[g][x] = Decimal(fstr % evaluation[g][x])
         self.evaluation = evaluation
 
@@ -302,6 +306,7 @@ class cPerformanceTableau(PerformanceTableau):
         from decimal import Decimal
         print('*----  performance tableau -----*')
         criteriaList = list(self.criteria)
+        NA = self.NA
         if Sorted:
             criteriaList.sort()
         if actionsSubset == None:
@@ -326,7 +331,7 @@ class cPerformanceTableau(PerformanceTableau):
                 for i in range(fromIndex,toIndex):
                     x = actionsList[i]
                     evalgx = self.evaluation[g][x]
-                    if evalgx == Decimal('-999'):
+                    if evalgx == NA:
                         print(' NA ', end=' ')
                     else:                    
                         print(formatString % (evalgx), end=' ')
@@ -346,7 +351,7 @@ class cPerformanceTableau(PerformanceTableau):
                 print('   \''+str(self.actions[x]['name'])+'\'   |' , end=' ')
                 for g in criteriaList:
                     evalgx = self.evaluation[g][x]
-                    if evalgx == Decimal('-999'):
+                    if evalgx == NA:
                         print('  NA  ', end=' ')
                     else:                    
                         print(formatString % (evalgx), end=' ')
@@ -367,6 +372,7 @@ class cPerformanceTableau(PerformanceTableau):
         criteria = self.criteria
         actions = self.actions
         evaluation = self.evaluation
+        NA = self.NA
 ##        lowValue = Decimal(str(lowValue))
 ##        highValue = Decimal(str(highValue))
         amplitude = highValue-lowValue
@@ -383,7 +389,7 @@ class cPerformanceTableau(PerformanceTableau):
             if Debug:
                 print('-->> g, glow, ghigh, gamp', g, glow, ghigh, gamp)
             for x in actionKeys:
-                if evaluation[g][x] != Decimal('-999'):
+                if evaluation[g][x] != NA:
                     evalx = abs(evaluation[g][x])
                     if Debug:
                         print(evalx)
@@ -403,7 +409,7 @@ class cPerformanceTableau(PerformanceTableau):
                     if Debug:
                         print(criteria[g]['preferenceDirection'], evaluation[g][x], normEvaluation[g][x])
                 else:
-                    normEvaluation[g][x] = Decimal('-999')
+                    normEvaluation[g][x] = NA
                     
         return normEvaluation
 
@@ -492,6 +498,7 @@ class cPerformanceTableau(PerformanceTableau):
             objectives = {}
         criteria = self.criteria
         evaluation = self.evaluation
+        NA = self.NA
         fileNameExt = str(fileName)+str('.py')
         fo = open(fileNameExt, 'w')
         fo.write('# Saved cPerformanceTableau: \n')
@@ -521,6 +528,7 @@ class cPerformanceTableau(PerformanceTableau):
             fo.write('}),\n')
         fo.write('])\n')
         # evaluation
+        fo.write("NA = %d\n" % (NA) )
         fo.write('evaluation = {\n')
         for g in criteria:
             fo.write('\'' +str(g)+'\': {\n')
@@ -624,30 +632,34 @@ class cPartialPerformanceTableau(cPerformanceTableau):
                         objectives[obj]['criteria'].append(g)
         self.objectives = objectives
         try:
-            self.commonScale = perfTab.commonScale
+            self.commonScale = inPerfTab.commonScale
         except:
             pass
         try:
-            self.OrdinalScales = perfTab.OrdinalScales
+            self.OrdinalScales = inPerfTab.OrdinalScales
         except:
             pass
         try:
-            self.BigData = perfTab.BigData
+            self.BigData = inPerfTab.BigData
         except:
             pass
         try:
-            self.missingDataProbability = perfTab.missingDataProbability
+            self.missingDataProbability = inPerfTab.missingDataProbability
         except:
             pass
         
         self.criteria = criteria
         self.weightPreorder = self.computeWeightPreorder()
+
         # evaluations
         try:
-            self.valueDigits = perfTab.valueDigits
+            self.NA = inPerfTab.NA
+        except:
+            self.NA = -999
+        try:
+            self.valueDigits = inPerfTab.valueDigits
         except:
             self.valueDigits = 2
-
         evaluation = {}
         for g in criteria.keys():
             evaluation[g] = {}
@@ -716,6 +728,7 @@ class cRandomPerformanceTableau(cPerformanceTableau):
                  commonMode = None,\
                  int valueDigits = 2,\
                  float missingDataProbability = 0.0,\
+                 int NA = -999,\
                  bint BigData=True,\
                  seed = None,\
                  bint Debug = False):
@@ -903,16 +916,17 @@ class cRandomPerformanceTableau(cPerformanceTableau):
             print('mode error in random evaluation generator !!')
             print(str(commonMode[0]))
             #sys.exit(1)
-        # randomly insert missing data 
+        # randomly insert missing data
         for c in criteria:
             for x in actions:
                 if random.random() < missingDataProbability:
-                    evaluation[c][x] = -999
+                    evaluation[c][x] = NA
 
         # store object dict
         self.actions = actions
         self.criteria = criteria
         self.evaluation = evaluation
+        self.NA = NA
         # store weights preorder
         self.weightPreorder = self.computeWeightPreorder()
 
@@ -1029,6 +1043,7 @@ class cRandomRankPerformanceTableau(cPerformanceTableau):
         self.actions = actions
         self.criteria = criteria
         self.evaluation = evaluation
+        self.NA = -999
         self.weightPreorder = self.computeWeightPreorder()
 
 # ------------------------------
@@ -1455,6 +1470,7 @@ class cRandom3ObjectivesPerformanceTableau(cPerformanceTableau):
                  int valueDigits=2,\
                  float vetoProbability=0.5,\
                  float missingDataProbability = 0.05,\
+                 int NA = -999,\
                  #BigData=False,\
                  seed= None,\
                  bint Debug=False):
@@ -1467,9 +1483,11 @@ class cRandom3ObjectivesPerformanceTableau(cPerformanceTableau):
         self.randomSeed = seed
         import random
         random.seed(seed)
+        # missing data symbol
+        self.NA = NA
 
-        from randomNumbers import ExtendedTriangularRandomVariable as RNGTr            
-
+        # loading random number generator
+        from randomNumbers import ExtendedTriangularRandomVariable as RNGTr     
             
         # generate actions
         nd = len(str(numberOfActions))
@@ -1756,6 +1774,13 @@ class cRandom3ObjectivesPerformanceTableau(cPerformanceTableau):
                 objWeight += criteria[g]['weight']
             objectives[obj]['weight'] = objWeight
 
+        # insert radomly missing data
+        for g in criteria:
+            sevalg = evaluation[g]
+            for x in actions:
+                if random.random() < missingDataProbability:
+                    sevalg[x] = NA
+
         # instantiate the peformance tableau slots
         self.actions = actions
         self.objectives = objectives
@@ -1764,12 +1789,6 @@ class cRandom3ObjectivesPerformanceTableau(cPerformanceTableau):
         self.evaluation = evaluation
         self.weightPreorder = self.computeWeightPreorder()
 
-        # insert missing data
-        for g in criteria:
-            sevalg = self.evaluation[g]
-            for x in actions:
-                if random.random() < missingDataProbability:
-                    sevalg[x] = -999
 
     def showObjectives(self):
         print('*------ show objectives -------"')
@@ -1847,6 +1866,7 @@ class cRandomCBPerformanceTableau(cPerformanceTableau):
                  commonMode = None,\
                  int valueDigits = 2,\
                  float missingDataProbability = 0.05,\
+                 int NA = -999,\
                  #BigData=False,\
                  seed = None,\
                  bint Threading = False,\
@@ -2149,22 +2169,14 @@ class cRandomCBPerformanceTableau(cPerformanceTableau):
                     if Debug:
                         print(evaluation[g][a])
                         
-        # randomly insert missing data 
+        # randomly insert missing data
         for g in criteria:
             for x in actions:
                 if random.random() < missingDataProbability:
-                    evaluation[g][x] = -999
-
-        # final storage
-        self.actions = actions
-        self.objectives = objectives
-        self.criteriaWeightMode = weightMode
-        self.criteria = criteria
-        self.evaluation = evaluation
-        self.weightPreorder = self.computeWeightPreorder()
+                    evaluation[g][x] = NA
 
         # compute discrimination thresholds from commonPercentiles
-        n = len(self.actions)
+        n = len(actions)
         n2 = (n*n) - n
         if n < 1000:
             nbuf = 1000
@@ -2186,11 +2198,11 @@ class cRandomCBPerformanceTableau(cPerformanceTableau):
                 est.reset()
                 sample = 0
                 for x in actions.keys():
-                    evx = self.evaluation[g][x]
-                    if evx != -999:
+                    evx = evaluation[g][x]
+                    if evx != NA:
                         for y in actions.keys():
-                            evy = self.evaluation[g][y]
-                            if x != y and evy != -999:
+                            evy = evaluation[g][y]
+                            if x != y and evy != NA:
                                 est.add( float( abs(evx-evy) ) )
                                 sample += 1
                                 if sample > samplingSize:
@@ -2204,9 +2216,16 @@ class cRandomCBPerformanceTableau(cPerformanceTableau):
             if Comments:
                 print('criteria',g,' default thresholds:')
                 print(criteria[g]['thresholds'])
-    
-        # update criteria
+
+        # final storage
+        self.actions = actions
+        self.objectives = objectives
+        self.criteriaWeightMode = weightMode
         self.criteria = criteria
+        self.NA = NA
+        self.evaluation = evaluation
+        self.weightPreorder = self.computeWeightPreorder()
+
 # ----------------------
 class cNormalizedPerformanceTableau(cPerformanceTableau):
     """
@@ -2239,6 +2258,7 @@ class cNormalizedPerformanceTableau(cPerformanceTableau):
         self.actions = copy.deepcopy(perfTab.actions)
         self.criteria = copy.deepcopy(perfTab.criteria)
         self.evaluation = copy.deepcopy(perfTab.evaluation)
+        self.NA = copy.deepcopy(perfTab.NA)
         self.evaluation = self.normalizeEvaluations(lowValue,highValue,Debug)
         criteria = self.criteria        
         for g in criteria:
@@ -2269,6 +2289,7 @@ class cNormalizedPerformanceTableau(cPerformanceTableau):
         criteria = self.criteria
         actions = self.actions
         evaluation = self.evaluation
+        NA = self.NA
         amplitude = highValue-lowValue
         if Debug:
             print('lowValue', lowValue, 'amplitude', amplitude)
@@ -2283,7 +2304,7 @@ class cNormalizedPerformanceTableau(cPerformanceTableau):
             if Debug:
                 print('-->> g, glow, ghigh, gamp', g, glow, ghigh, gamp)
             for x in actionKeys:
-                if evaluation[g][x] != -999:
+                if evaluation[g][x] != NA:
                     evalx = abs(evaluation[g][x])
                     if Debug:
                         print(evalx)
@@ -2300,7 +2321,7 @@ class cNormalizedPerformanceTableau(cPerformanceTableau):
                     if Debug:
                         print(criteria[g]['preferenceDirection'], evaluation[g][x], normEvaluation[g][x])
                 else:
-                    normEvaluation[g][x] = -999
+                    normEvaluation[g][x] = NA
                     
         return normEvaluation
 

@@ -143,13 +143,14 @@ class IntegerQuantilesSortingDigraph(IntegerBipolarOutrankingDigraph):
         Constructor for IntegerQuantilesSortingDigraph instances.
 
         """
-        cdef int k, i, ox, totalWeight = 0
+        cdef int k, i, ox, NA, totalWeight = 0
         cdef double tt,t0
         cdef float q, lowValue=0.0, highValue=100.0
         from cRandPerfTabs import cNormalizedPerformanceTableau
         global actions
         global criteria
         global evaluation
+        global NA
         global valuationdomain
         global categories
         global profiles
@@ -201,6 +202,8 @@ class IntegerQuantilesSortingDigraph(IntegerBipolarOutrankingDigraph):
         #self.convertWeightFloatToDecimal()
         evaluation = normPerfTab.evaluation
         self.evaluation = evaluation
+        NA = normPerfTab.NA
+        self.NA = NA
         #self.convertEvaluationFloatToDecimal()
         self.runTimes = {'dataInput': time()-tt}
 
@@ -345,6 +348,7 @@ class IntegerQuantilesSortingDigraph(IntegerBipolarOutrankingDigraph):
         self.relation = self._constructRelationWithThreading(
                                                    #criteria, global
                                                    #evaluation, global
+                                                   #NA, global
                                                    initial=initialArg,
                                                    terminal=terminalArg,
                                                    hasNoVeto=hasNoVeto,
@@ -398,6 +402,7 @@ class IntegerQuantilesSortingDigraph(IntegerBipolarOutrankingDigraph):
     def _constructRelationWithThreading(self,
                            #criteria,\ global
                            # evaluation,\ global
+                           # NA,\ global
                            initial=None,\
                            terminal=None,\
                            bint hasNoVeto=False,\
@@ -418,6 +423,7 @@ class IntegerQuantilesSortingDigraph(IntegerBipolarOutrankingDigraph):
         global actions
         global criteria
         global evaluation
+        global NA
         global valuationdomain
         global categories
         global profiles
@@ -537,6 +543,7 @@ class IntegerQuantilesSortingDigraph(IntegerBipolarOutrankingDigraph):
                     global actions
                     global criteria
                     global evaluation
+                    global NA
                     global valuationdomain
                     global categories
                     global profiles
@@ -1206,11 +1213,12 @@ class IntegerQuantilesSortingDigraph(IntegerBipolarOutrankingDigraph):
         from math import floor
         from copy import copy, deepcopy
         LowerClosed = self.criteriaCategoryLimits['LowerClosed']
+        NA = self.NA
         gValues = []
         for x in self.actions:
             if Debug:
                 print('g,x,evaluation[g][x]',g,x,self.evaluation[g][x])
-            if self.evaluation[g][x] != Decimal('-999'):
+            if self.evaluation[g][x] != NA:
                 gValues.append(self.evaluation[g][x])
         gValues.sort()
         if PrefThresholds:
