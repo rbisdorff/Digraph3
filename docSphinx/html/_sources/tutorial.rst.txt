@@ -2238,6 +2238,8 @@ Now, several heuristic ranking rules have been proposed for constructing a linea
 
 The Digraph3 resources provide some of the most common of these ranking rules, like *Copeland*'s, *Kemeny*'s, *Slater*'s, *Kohler*'s, *Arrow-Raynaud*'s or *Tideman*'s ranking rule.
 
+.. _Copeland-Ranking-label:
+
 The *Copeland* ranking
 ......................
 
@@ -4336,7 +4338,7 @@ Published data of the 2004 *Spiegel* student survey is stored, for our evaluatio
 
    Quality of enroled students per academic subject
 
-In :numref:`qualityScores`, the popular fifteen academic subjects are grouped into topical '*Faculties*': - *Humanities*; - *Law, Economics & Management*; - *Life Sciences & Medicine*; - *Natural Sciences & Mathematics*; and - *Technology*. All fifteen subjects are considered *equally significant* for our evaluation problem (see Row 2). The recorded average enrolment quality scores appear coloured along a 7-tiling scheme per subject (see last Row).
+In :numref:`qualityScores`, the fifteen popular academic subjects are grouped into topical '*Faculties*': - *Humanities*; - *Law, Economics & Management*; - *Life Sciences & Medicine*; - *Natural Sciences & Mathematics*; and - *Technology*. All fifteen subjects are considered *equally significant* for our evaluation problem (see Row 2). The recorded average enrolment quality scores appear coloured along a 7-tiling scheme per subject (see last Row).
 
 We may by the way notice that *TU Dresden* is the only Institution showing enrolment quality scores in all the fifteen academic subjects. Whereas, on the one side, *TU München* and *Kaiserslautern* are only valuated in *Sciences* and *Technology* subjects. On the other side, *Mannheim*, is only valuated in *Humanities* and *Law, Economics & Management* studies. Most of the 41 Universities are not valuated in *Engineering* studies. We are, hence, facing a large part (27.3%) of irreducible missing data (see :numref:`stSpPerfTab` Line 9 and the advanced topic on :ref:`coping with missing data <CopingMissing-Data-label>`).
 
@@ -4360,7 +4362,7 @@ The apparent *incommensurability* and very likely *imprecision* of the recorded 
 Rating-by-ranking with lower-closed quantile limits
 ...................................................
 
-The Spiegel authors opted indeed for a simple 3-tiling of the Universities per valuated academic subject, followed by an average *Borda* scores based global ranking [29]_. Here, our **epistemic logic* based **outranking approach**, allows us, with adequate choices of indifference (0.1) and preference (0.6) discrimination thresholds, to estimate lower-closed 9-tiles of the enrolment quality scores per subject and rank conjointly, with the help of the *Copeland* ranking rule [34]_ applied to a corresponding *bipolar-valued outranking* digraph, the 41 Universities **and** the lower limits of the estimated 9-tiles limits.
+The Spiegel authors opted indeed for a simple 3-tiling of the Universities per valuated academic subject, followed by an average *Borda* scores based global ranking [29]_. Here, our **epistemic logic** based **outranking approach**, allows us, with adequate choices of *indifference* (0.1) and *preference* (0.6) discrimination thresholds, to estimate **lower-closed 9-tiles** of the enrolment quality scores per subject and rank conjointly, with the help of the *Copeland* ranking rule [34]_ applied to a corresponding *bipolar-valued outranking* digraph, the 41 Universities **and** the lower limits of the estimated 9-tiles limits.
 
 We need therefore to, first, estimate, with the help of the :py:class:`performanceQuantiles.PerformanceQuantiles` constructor, the lowerclosed  9-tiling of the average enrolment quality scores per academic subject.
 
@@ -4397,9 +4399,9 @@ We may inspect the resulting 9-tiling limits in a browser view.
 
    9-tiling quality score limits per academic subject
 
-In :numref:`score9Limits`, we see confirmed again the **incommensurability** between the subjects, we noticed already in the apparent enrolment quality scoring , especially between *Law Studies* (39.1 - 51.1) and *Politology* (50.5 - 65.9). Universities valuated in *Law studies* but not in *Politology*, like the University of *Bielefeld*, would see their enrolment quality unfairly weakened when simply averaging the enrolment quality scores over valuated subjects.
+In :numref:`score9Limits`, we see confirmed again the **incommensurability** between the subjects, we noticed already in the apparent enrolment quality scoring , especially between *Law Studies* (39.1 - 51.1) and *Politology* (50.5 - 65.9). Universities valuated in *Law studies* but not in *Politology*, like the University of *Bielefeld*, would see their enrolment quality *unfairly weakened* when simply averaging the enrolment quality scores over valuated subjects.
 
-We add, now, these 9-tiling quality score limits to the enrolment quality records of the 41 Universities and rank these records all conjointly together with the help of the :py:class:`sortingDigraphs.NormedQuantilesRatingDigraph` constructor and by using the *Copeland* rule, .
+We add, now, these 9-tiling quality score limits to the enrolment quality records of the 41 Universities and rank all these records conjointly together with the help of the :py:class:`sortingDigraphs.NormedQuantilesRatingDigraph` constructor and by using the :ref:`Copeland ranking rule <Copeland-Ranking-label>`.
 
 The resulting ranking of the 41 Universities including the lower-closed 9-tiling score limits may be nicely illustrated  with the help of a corresponding heatmap view (see :numref:`ninetiledHeatmap`). 
 
@@ -4418,7 +4420,7 @@ The resulting ranking of the 41 Universities including the lower-closed 9-tiling
 
 The *ordinal correlation* (+0.967) [35]_ of the *Copeland ranking* with the underlying bipolar-valued outranking digraph is very high (see :numref:`ninetiledHeatmap` Row 1). Most correlated subjects with this *rating-by-ranking* result appear to be *German Studies* (+0.51), *Chemistry* (+0.48), *Management* (+0.47) and *Physics* (+0.46). Both *Electrical* (+0.07) and *Mechanical Engineering* (+0.05) are the less correlated subjects (see Row 3).
 
-From the actual ranking position of the lower 9-tiling limits, we may now immediately deduce the 9-tiles enrolment quality equivalence classes. No University reaches the highest 9-tile (:math:`[0.89 - [`). In the lowest 9-tile (:math:`[0.00- 0.11]`) we find the University *Duisburg*. The complete rating result may be easily printed out as follows.
+From the actual ranking position of the lower 9-tiling limits, we may now immediately deduce the 9-tile enrolment quality equivalence classes. No University reaches the highest 9-tile (:math:`[0.89 - [`). In the lowest 9-tile (:math:`[0.00- 0.11]`) we find the University *Duisburg*. The complete rating result may be easily printed out as follows.
 
 .. code-block:: pycon
    :name: quantilesRating
@@ -4440,7 +4442,7 @@ From the actual ranking position of the lower 9-tiling limits, we may now immedi
      [0.11 - 0.22[ ['gie', 'dsd', 'bie', 'boc', 'han']
      [0.00 - 0.11[ ['duis']
 
-Following Universities: *TU München*, *Freiburg*, *Konstanz*, *Leipzig*, *München* as well as  *Heidelberg*, appear best rated in the eigth 9-tile (:math:`[0.78 - 0.89[`, see :numref:`quantilesRating` Line 4). Lowest-rated in the first 9-tile, as mentioned before, appears University *Duisburg* (Line 14). Midfield, the fifth 9-tile, consists of the Universities *Würzburg*, *TU Dresden*, *Kaiserslautern*, *Marburg*, *FU Berlin*, *Chemnitz*, *Köln* , *Erlangen-Nürnberg* and *Trier* (Lines 8-9).
+Following Universities: *TU München*, *Freiburg*, *Konstanz*, *Leipzig*, *München* as well as  *Heidelberg*, appear best rated in the eigth 9-tile (:math:`[0.78 - 0.89[`, see :numref:`quantilesRating` Line 4). Lowest-rated in the first 9-tile, as mentioned before, appears University *Duisburg* (Line 14). Midfield, the fifth 9-tile (:math:`[0.44 - 0.56[`), consists of the Universities *Würzburg*, *TU Dresden*, *Kaiserslautern*, *Marburg*, *FU Berlin*, *Chemnitz*, *Köln* , *Erlangen-Nürnberg* and *Trier* (Lines 8-9).
 
 A corresponding *graphviz* drawing may well illustrate all these enrolment quality equivalence classes.
 
@@ -4457,7 +4459,7 @@ A corresponding *graphviz* drawing may well illustrate all these enrolment quali
 
    Graphviz drawing of the 9-tiles rating result
 
-Considering, now, the large amount (27.3%) of missing data (see :numref:`stSpPerfTab` Line 9), how *confident* is our *rating-by-ranking* result? To investigate this question, let us inspect the bipolar-valued **outranking digraph** on which we apply the *Copeland* ranking rule.
+Considering, now, the large amount (27.3%) of missing data (see :numref:`stSpPerfTab` Line 9), how *confident* is our *rating-by-ranking* result? To investigate this question, let us inspect the **outranking digraph** on which we apply the *Copeland* ranking rule.
 
    
 Inspecting the bipolar-valued outranking digraph
@@ -4587,7 +4589,7 @@ For this *rating-by-sorting* approach, we are going to use the :py:class:`sortin
 
 In the 9-tiles sorting result, shown in :numref:`nineTilesSorting`, we notice for instance in Lines 6-7 that the *RWTH Aachen* is precisely rated into the third 9-tile (:math:`[0.22 - 0.33[`), whereas the University *Augsburg* is less precisely rated conjointly into the *fourth*, the *fifth* and the *6th* 9-tile (:math:`[0.44 - 0.78[`). In Line 45, *TU München* appears best rated into the unique highest 9-tile (:math:`[0.89 - <[`). All three rating results are supported by a (0.07 + 1.0)/2 = 53.5% majority of valuated subjects [31]_. With the support of a 76.5% majority of valuated subjects (Line 20), the apparent most confident rating result is the one of University *Duisburg* (see also :numref:`qualityScores` and :numref:`ninetiledHeatmap`). 
 
-We shall now lexicographically sort these individual rating results per University by *average* rated 9-tile limits and *highest-rated* upper 9-tile limit into ordered, but not necessarily disjoint, enrolment quality 9-tiles.
+We shall now lexicographically sort these individual rating results per University, by *average* rated 9-tile limits and *highest-rated* upper 9-tile limit, into ordered, but not necessarily disjoint, enrolment quality quantiles.
 
 >>> qs.showHTMLQuantileOrdering(strategy='average')
 
@@ -4621,7 +4623,7 @@ The partial ranking, shown in :numref:`nineTilingDrawing`, is in fact **independ
 
 .. only:: html
 
-    It is interesting, as an exercise, to verify if the :ref:`epistemic fusion <Epistemic-Fusion-label>` of the *rating-by-ranking* results (see :numref:`fusionResult`), one may obtain when applying two different ranking rules, like the *Copeland* and the *IteratedCopeland* rule (see the tutorial on :ref:`ranking with multiple incommensurable criteria <Ranking-Tutorial-label>`), does actually confirm our rating results [33]_.
+    It is interesting, as an exercise, to verify if the :ref:`epistemic fusion <Epistemic-Fusion-label>` of the *rating-by-ranking* results (see :numref:`fusionResult`), one may obtain when applying two different ranking rules, like the *Copeland* and the *iterated Copeland* rule (see the tutorial on :ref:`ranking with multiple incommensurable criteria <Ranking-Tutorial-label>`), does actually confirm our rating results [33]_.
 
     .. sidebar:: Fusion of two rating results
 
@@ -4634,7 +4636,7 @@ The partial ranking, shown in :numref:`nineTilingDrawing`, is in fact **independ
 
 .. only:: latex
 
-    It is interesting, as an exercise, to verify if the ref:`epistemic fusion <Epistemic-Fusion-label>` of the *rating-by-ranking* results, one may obtain when applying two different ranking rules, like the *copeland* and the *IteratedCopeland* rule (see the tutorial on :ref:`ranking with multiple incommensurable criteria <Ranking-Tutorial-label>`), does actually confirm our rating results [33]_.
+    It is interesting, as an exercise, to verify if the ref:`epistemic fusion <Epistemic-Fusion-label>` of the *rating-by-ranking* results, one may obtain when applying two different ranking rules, like the *copeland* and the *iterated Copeland* rule (see the tutorial on :ref:`ranking with multiple incommensurable criteria <Ranking-Tutorial-label>`), does actually confirm our rating results [33]_.
 
 To conclude
 ...........
