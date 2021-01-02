@@ -41,12 +41,16 @@ qs.showHTMLQuantileOrdering(strategy='average')
 qs.exportGraphViz(graphSize='12,12')
 
 #############
-nqr1 = NormedQuantilesRatingDigraph(pq,t,rankingRule='IteratedCopeland')
-from transitiveDigraphs import RankingsFusion
+nqr1 = NormedQuantilesRatingDigraph(pq,t,rankingRule='NetFlows')
+from transitiveDigraphs import *
 rankings = [nqr.actionsRanking,
             nqr1.actionsRanking]
 rf = RankingsFusion(nqr,rankings)
 rf.exportGraphViz('fusionResult',graphType='png',graphSize='30,30')
 # For decorating the 9-tiles lower limits the fusionResult.dat
 # must be edited by hand like in the ratingResult.dot file
+
+rbc = RankingByChoosingDigraph(nqr,Threading=False)
+print(rbc)
+
 

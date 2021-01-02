@@ -501,7 +501,7 @@ Border and inner parts
 
 We may also extract the border -the part of a digraph induced by the union of its initial and terminal prekernels (see tutorial :ref:`Kernel-Tutorial-label`)-  as well as, the inner part -the *complement* of the border- with the help of two corresponding class constructors: :py:class:`digraphs.GraphBorder` and :py:class:`digraphs.GraphInner` (see :numref:`BorderInnerPart`  Line 1).
 
-Let us illustrate these parts on a linear ordering obtained from the tutorial random valuation digraph *dg* (see :numref:`BorderInnerPart` Line 2-3) with the :ref:`NetFlows ranking rule <Ranking-Tutorial-label>`).  
+Let us illustrate these parts on a linear ordering obtained from the tutorial random valuation digraph *dg* (see :numref:`BorderInnerPart` Line 2-3) with the :ref:`NetFlows ranking rule <NetFlows-Ranking-label>`).  
 
 .. code-block:: pycon
    :name: BorderInnerPart
@@ -1645,7 +1645,7 @@ We may show a statistical summary of the students' grades obtained in the heighe
 
    Ranking the students with a performance heatmap view
 
-The ranking shown here in :numref:`rankingStudents` is produced with the default *NetFlows* rule (see tutorial :ref:`Ranking-Tutorial-label`). With a mean marginal correlation of +0.361 (see :numref:`rankingQuality` Lines 15-) associated with a low standard deviation (0.248), the result represents a rather *fair weighted consensus* made between the individual courses' marginal rankings.
+The ranking shown here in :numref:`rankingStudents` is produced with the default :ref:`NetFlows ranking rule <NetFlows-Ranking-label>`. With a mean marginal correlation of +0.361 (see :numref:`rankingQuality` Lines 15-) associated with a low standard deviation (0.248), the result represents a rather *fair weighted consensus* made between the individual courses' marginal rankings.
 
 .. code-block:: pycon
    :name: rankingQuality
@@ -4623,7 +4623,7 @@ The partial ranking, shown in :numref:`nineTilingDrawing`, is in fact **independ
 
 .. only:: html
 
-    It is interesting, as an exercise, to verify if the :ref:`epistemic fusion <Epistemic-Fusion-label>` of the *rating-by-ranking* results (see :numref:`fusionResult`), one may obtain when applying two different ranking rules, like the *Copeland* and the *iterated Copeland* rule (see the tutorial on :ref:`ranking with multiple incommensurable criteria <Ranking-Tutorial-label>`), does actually confirm our rating results [33]_.
+    It is interesting, as an exercise, to verify if the :ref:`epistemic fusion <Epistemic-Fusion-label>` of the *rating-by-ranking* results (see :numref:`fusionResult`), one may obtain when applying two different ranking rules, like the *Copeland* and the :ref:`NetFlows ranking rule <NetFlows-Ranking-label>`, does actually confirm our rating results [33]_.
 
     .. sidebar:: Fusion of two rating results
 
@@ -4632,11 +4632,11 @@ The partial ranking, shown in :numref:`nineTilingDrawing`, is in fact **independ
 	   :width: 150 px
 	   :align: center
 
-	   Fused ratings by simple and iterated Copeland ranking
+	   Fused ratings by Copeland and NetFlows ranking rules
 
 .. only:: latex
 
-    It is interesting, as an exercise, to verify if the ref:`epistemic fusion <Epistemic-Fusion-label>` of the *rating-by-ranking* results, one may obtain when applying two different ranking rules, like the *copeland* and the *iterated Copeland* rule (see the tutorial on :ref:`ranking with multiple incommensurable criteria <Ranking-Tutorial-label>`), does actually confirm our rating results [33]_.
+    It is interesting, as an exercise, to verify if the ref:`epistemic fusion <Epistemic-Fusion-label>` of the *rating-by-ranking* results, one may obtain when applying two different ranking rules, like the *copeland* and the :ref:`NetFlows ranking rule <NetFlows-Ranking-label>`, does actually confirm our rating results [33]_.
 
 To conclude
 ...........
