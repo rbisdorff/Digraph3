@@ -1198,7 +1198,8 @@ The :py:class:`randomPerfTabs.RandomPerformanceTableau` class, the simplest of t
          | ('beta',None,(alpha,beta)), a beta generator with default alpha=2 and beta=2 parameters.
 	 
     * valueDigits := <integer>, precision of performance measurements (2 decimal digits by default).
-    * missingDataProbability := 0 <= float <= 1.0 ; probability of missing performance evaluation on a criterion for an alternative (default 0.025). 
+    * missingDataProbability := 0 <= float <= 1.0 ; probability of missing performance evaluation on a criterion for an alternative (default 0.025).
+    * NA := <Decimal> (default = -999); missing data symbol. 
   
 Code example.
 
@@ -1245,7 +1246,7 @@ Code example.
 
 .. note::
 
-   Missing (NA) evaluation are registered in a performance tableau as *Decimal('-999')* value (see :numref:`randomPerformanceTableau` Line 24). Best and worst performance on each criterion are marked in *light green*, respectively in *light red*.
+   Missing (NA) evaluation are registered in a performance tableau by default as *Decimal('-999')* value (see :numref:`randomPerformanceTableau` Line 24). Best and worst performance on each criterion are marked in *light green*, respectively in *light red*.
 
 .. _Cost-Benefit-Performance-Tableau-label:
 	    
@@ -1268,6 +1269,8 @@ We provide the :py:class:`randomPerfTabs.RandomCBPerformanceTableau` class for g
     * All cardinal criteria are evaluated with decimals between 0.0 and 100.0 whereas ordinal criteria are evaluated with integers between 0 and 10.
     * commonThresholds is obsolete. Preference discrimination is specified as percentiles of concerned performance differences (see below).
     * commonPercentiles = {'ind':5, 'pref':10, ['weakveto':90,] 'veto':95} are expressed in percents (reversed for vetoes) and only concern cardinal criteria.
+    * missingDataProbability := 0 <= float <= 1.0 ; probability of missing performance evaluation on a criterion for an alternative (default 0.025).
+    * NA := <Decimal> (default = -999); missing data symbol. 
 
 .. warning::
 
@@ -1409,6 +1412,7 @@ Generator directives are the following:
     * commonMode = ['triangular','variable',0.5]: random number generators of various other types ('uniform','beta') are available,
     * valueDigits = 2 (default): evaluations are encoded as Decimals,
     * missingDataProbability = 0.05 (default): random insertion of missing values with given probability,  
+    * NA := <Decimal> (default = -999); missing data symbol. 
     * seed= None. 
 
 .. note::
@@ -1569,6 +1573,7 @@ The :py:class:`randomPerfTabs.RandomAcademicPerformanceTableau` class generates 
     * commonMode := ('triangular',xm=14,r=0.25) (default)
     * commonThresholds := {'ind':(0,0), 'pref':(1,0)} (default)
     * missingDataProbability := 0.0 (default)
+    * NA := <Decimal> (default = -999); missing data symbol. 
         
 When parameter *WithTypes* is set to *True*, the students are randomly allocated to one of the four categories: *weak* (1/6), *fair* (1/3), *good* (1/3), and *excellent* (1/3), in the bracketed proportions. In a default 0-20 grading range, the random range of a weak student is 0-10, of a fair student 4-16, of a good student 8-20, and of an excellent student 12-20. The random grading generator follows in this case a double triangular probablity law with *mode* (*xm*) equal to the middle of the random range and *median repartition* (*r* = 0.5) of probability each side of the mode.
 

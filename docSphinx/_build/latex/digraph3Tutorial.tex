@@ -58,7 +58,7 @@
 
 
 \title{Tutorials for the Digraph3 Python software resources}
-\date{January 02, 2021}
+\date{January 03, 2021}
 \release{3.9.1}
 \author{Raymond Bisdorff}
 \newcommand{\sphinxlogo}{\sphinxincludegraphics{introDoc3.png}\par}
@@ -1397,6 +1397,9 @@ valueDigits := \textless{}integer\textgreater{}, precision of performance measur
 \item {} 
 missingDataProbability := 0 \textless{}= float \textless{}= 1.0 ; probability of missing performance evaluation on a criterion for an alternative (default 0.025).
 
+\item {} 
+NA := \textless{}Decimal\textgreater{} (default = \sphinxhyphen{}999); missing data symbol.
+
 \end{itemize}
 
 Code example.
@@ -1442,7 +1445,7 @@ Code example.
 \caption{Browser view on random performance tableau instance}\label{\detokenize{tutorial:id170}}\end{figure}
 
 \begin{sphinxadmonition}{note}{Note:}
-Missing (NA) evaluation are registered in a performance tableau as \sphinxstyleemphasis{Decimal(‘\sphinxhyphen{}999’)} value (see \hyperref[\detokenize{tutorial:randomperformancetableau}]{Listing \ref{\detokenize{tutorial:randomperformancetableau}}} Line 24). Best and worst performance on each criterion are marked in \sphinxstyleemphasis{light green}, respectively in \sphinxstyleemphasis{light red}.
+Missing (NA) evaluation are registered in a performance tableau by default as \sphinxstyleemphasis{Decimal(‘\sphinxhyphen{}999’)} value (see \hyperref[\detokenize{tutorial:randomperformancetableau}]{Listing \ref{\detokenize{tutorial:randomperformancetableau}}} Line 24). Best and worst performance on each criterion are marked in \sphinxstyleemphasis{light green}, respectively in \sphinxstyleemphasis{light red}.
 \end{sphinxadmonition}
 
 
@@ -1488,6 +1491,12 @@ commonThresholds is obsolete. Preference discrimination is specified as percenti
 
 \item {} 
 commonPercentiles = \{‘ind’:5, ‘pref’:10, {[}‘weakveto’:90,{]} ‘veto’:95\} are expressed in percents (reversed for vetoes) and only concern cardinal criteria.
+
+\item {} 
+missingDataProbability := 0 \textless{}= float \textless{}= 1.0 ; probability of missing performance evaluation on a criterion for an alternative (default 0.025).
+
+\item {} 
+NA := \textless{}Decimal\textgreater{} (default = \sphinxhyphen{}999); missing data symbol.
 
 \end{itemize}
 
@@ -1652,6 +1661,9 @@ valueDigits = 2 (default): evaluations are encoded as Decimals,
 
 \item {} 
 missingDataProbability = 0.05 (default): random insertion of missing values with given probability,
+
+\item {} 
+NA := \textless{}Decimal\textgreater{} (default = \sphinxhyphen{}999); missing data symbol.
 
 \item {} 
 seed= None.
@@ -1832,6 +1844,9 @@ commonThresholds := \{‘ind’:(0,0), ‘pref’:(1,0)\} (default)
 
 \item {} 
 missingDataProbability := 0.0 (default)
+
+\item {} 
+NA := \textless{}Decimal\textgreater{} (default = \sphinxhyphen{}999); missing data symbol.
 
 \end{itemize}
 

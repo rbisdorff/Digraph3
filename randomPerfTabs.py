@@ -458,6 +458,7 @@ class RandomPerformanceGenerator(object):
             newPerfTab.objectives = OrderedDict()
         criteria = self.perfTab.criteria 
         newPerfTab.criteria = criteria
+        newPerfTab.NA = self.perfTab.NA
         newActions = OrderedDict()
         newEvaluation ={}
         for g in criteria:
