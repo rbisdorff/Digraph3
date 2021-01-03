@@ -140,7 +140,7 @@ class PerformanceQuantiles(PerformanceTableau):
             try:
                 self.NA = perfTab.NA
             except:
-                pass
+                self.NA = Decimla('-999.00')
             
             self.criteria = deepcopy(perfTab.criteria)
             self.LowerClosed = LowerClosed
@@ -205,6 +205,7 @@ class PerformanceQuantiles(PerformanceTableau):
             self.quantilesFrequencies = argDict['quantilesFrequencies']
             self.historySizes = argDict['historySizes']
             self.LowerClosed = argDict['LowerClosed']
+            self.NA = argDict['NA']
             self.limitingQuantiles = argDict['limitingQuantiles']
             cdf = {}
             np = len(self.quantilesFrequencies)
@@ -723,6 +724,10 @@ a string out of ['quartiles','quintiles','sextiles','heptiles
         except:
             pass
         try:
+            fo.write('NA = Decimal(\'%s\')\n' % str(self.NA))
+        except:
+            pass
+        try:
             fo.write('commonScale = %s\n' % str(self.commonScale))
         except:
             pass
@@ -1026,12 +1031,14 @@ The number of so far observed evaluations per criteria are the following:
         except:
             newActions = newData.actions
             newEvaluation = newData.evaluation
-            
+
+        NA = self.NA
         for g in self.criteria:
             gNewValues = []
             gNewEvaluation = newEvaluation[g]
             for x in newActions:
-                gNewValues.append(gNewEvaluation[x])
+                if gNewEvaluation[x] != NA:
+                    gNewValues.append(gNewEvaluation[x])
             self._updateCriterionQuantiles(g,gNewValues,historySize=historySize,Debug=Debug)
 ##        self.T += len(newActions)  
     

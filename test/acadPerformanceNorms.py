@@ -4,6 +4,7 @@ from collections import OrderedDict
 perfTabType = 'RandomAcademicPerformanceTableau'
 objectives = OrderedDict([
 ])
+NA = Decimal('-999')
 criteria = OrderedDict([
 ('m01', {
 'name': 'Master course 1',

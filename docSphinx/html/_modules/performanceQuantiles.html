@@ -305,7 +305,7 @@
             <span class="k">try</span><span class="p">:</span>
                 <span class="bp">self</span><span class="o">.</span><span class="n">NA</span> <span class="o">=</span> <span class="n">perfTab</span><span class="o">.</span><span class="n">NA</span>
             <span class="k">except</span><span class="p">:</span>
-                <span class="k">pass</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">NA</span> <span class="o">=</span> <span class="n">Decimla</span><span class="p">(</span><span class="s1">&#39;-999.00&#39;</span><span class="p">)</span>
             
             <span class="bp">self</span><span class="o">.</span><span class="n">criteria</span> <span class="o">=</span> <span class="n">deepcopy</span><span class="p">(</span><span class="n">perfTab</span><span class="o">.</span><span class="n">criteria</span><span class="p">)</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">LowerClosed</span> <span class="o">=</span> <span class="n">LowerClosed</span>
@@ -370,6 +370,7 @@
             <span class="bp">self</span><span class="o">.</span><span class="n">quantilesFrequencies</span> <span class="o">=</span> <span class="n">argDict</span><span class="p">[</span><span class="s1">&#39;quantilesFrequencies&#39;</span><span class="p">]</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">historySizes</span> <span class="o">=</span> <span class="n">argDict</span><span class="p">[</span><span class="s1">&#39;historySizes&#39;</span><span class="p">]</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">LowerClosed</span> <span class="o">=</span> <span class="n">argDict</span><span class="p">[</span><span class="s1">&#39;LowerClosed&#39;</span><span class="p">]</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">NA</span> <span class="o">=</span> <span class="n">argDict</span><span class="p">[</span><span class="s1">&#39;NA&#39;</span><span class="p">]</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">limitingQuantiles</span> <span class="o">=</span> <span class="n">argDict</span><span class="p">[</span><span class="s1">&#39;limitingQuantiles&#39;</span><span class="p">]</span>
             <span class="n">cdf</span> <span class="o">=</span> <span class="p">{}</span>
             <span class="n">np</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">quantilesFrequencies</span><span class="p">)</span>
@@ -888,6 +889,10 @@
         <span class="k">except</span><span class="p">:</span>
             <span class="k">pass</span>
         <span class="k">try</span><span class="p">:</span>
+            <span class="n">fo</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s1">&#39;NA = Decimal(</span><span class="se">\&#39;</span><span class="si">%s</span><span class="se">\&#39;</span><span class="s1">)</span><span class="se">\n</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="nb">str</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">NA</span><span class="p">))</span>
+        <span class="k">except</span><span class="p">:</span>
+            <span class="k">pass</span>
+        <span class="k">try</span><span class="p">:</span>
             <span class="n">fo</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s1">&#39;commonScale = </span><span class="si">%s</span><span class="se">\n</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="nb">str</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">commonScale</span><span class="p">))</span>
         <span class="k">except</span><span class="p">:</span>
             <span class="k">pass</span>
@@ -1191,12 +1196,14 @@
         <span class="k">except</span><span class="p">:</span>
             <span class="n">newActions</span> <span class="o">=</span> <span class="n">newData</span><span class="o">.</span><span class="n">actions</span>
             <span class="n">newEvaluation</span> <span class="o">=</span> <span class="n">newData</span><span class="o">.</span><span class="n">evaluation</span>
-            
+
+        <span class="n">NA</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">NA</span>
         <span class="k">for</span> <span class="n">g</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">criteria</span><span class="p">:</span>
             <span class="n">gNewValues</span> <span class="o">=</span> <span class="p">[]</span>
             <span class="n">gNewEvaluation</span> <span class="o">=</span> <span class="n">newEvaluation</span><span class="p">[</span><span class="n">g</span><span class="p">]</span>
             <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">newActions</span><span class="p">:</span>
-                <span class="n">gNewValues</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">gNewEvaluation</span><span class="p">[</span><span class="n">x</span><span class="p">])</span>
+                <span class="k">if</span> <span class="n">gNewEvaluation</span><span class="p">[</span><span class="n">x</span><span class="p">]</span> <span class="o">!=</span> <span class="n">NA</span><span class="p">:</span>
+                    <span class="n">gNewValues</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">gNewEvaluation</span><span class="p">[</span><span class="n">x</span><span class="p">])</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">_updateCriterionQuantiles</span><span class="p">(</span><span class="n">g</span><span class="p">,</span><span class="n">gNewValues</span><span class="p">,</span><span class="n">historySize</span><span class="o">=</span><span class="n">historySize</span><span class="p">,</span><span class="n">Debug</span><span class="o">=</span><span class="n">Debug</span><span class="p">)</span></div></div>
 <span class="c1">##        self.T += len(newActions)  </span>
     

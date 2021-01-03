@@ -14,16 +14,16 @@ a8 [shape = "circle", label = "a8a", fontsize=10];
 { rank = 1; a5; }
 { rank = 2; a8; }
 { rank = 3; a6; }
-{ rank = 4; a2; a4; }
+{ rank = 4; a4; a2; }
 { rank = 5; a3; }
 { rank = 6; a1; }
 a7-> a5 [style="setlinewidth(1)",color=black] ;
 a5-> a8 [style="setlinewidth(1)",color=black] ;
 a8-> a6 [style="setlinewidth(1)",color=black] ;
-a6-> a2 [style="setlinewidth(1)",color=black] ;
 a6-> a4 [style="setlinewidth(1)",color=black] ;
-a2-> a3 [style="setlinewidth(1)",color=black] ;
+a6-> a2 [style="setlinewidth(1)",color=black] ;
 a4-> a3 [style="setlinewidth(1)",color=black] ;
+a2-> a3 [style="setlinewidth(1)",color=black] ;
 a3-> a1 [style="setlinewidth(1)",color=black] ;
 }
  

@@ -3230,6 +3230,7 @@ class NormedQuantilesRatingDigraph(QuantilesSortingDigraph,PerformanceQuantiles)
         self.limitingQuantiles = deepcopy(perfQuantiles.limitingQuantiles)
         self.historySizes = deepcopy(perfQuantiles.historySizes)
         self.cdf = deepcopy(perfQuantiles.cdf)
+        self.NA = deepcopy(perfQuantiles.NA)
         self.name = 'normedRatingDigraph'
         # import the actions to rate
         if newData != None:
@@ -3237,12 +3238,10 @@ class NormedQuantilesRatingDigraph(QuantilesSortingDigraph,PerformanceQuantiles)
                 self.newActions = newData['actions']
                 self.evaluation = newData['evaluation']
                 ## need NA to found somewhere !!!
-                self.NA = Decimal('-999')
             except:
                 try:  #  randomPerformanceTableau format
                     self.newActions = deepcopy(newData.actions)
                     self.evaluation = deepcopy(newData.evaluation)
-                    self.NA = deepcopy(newData.NA)
                 except:
                     print('Error !!!: valid new Actions or valid new PerformanceTableau required')
         else:
@@ -3255,6 +3254,7 @@ class NormedQuantilesRatingDigraph(QuantilesSortingDigraph,PerformanceQuantiles)
             print('1.')
             print('new actions',self.newActions)
             print('new evaluations',self.evaluation)
+            print('NA symbol',self.NA)
             print('Quantiles frequencies: ', self.quantilesFrequencies)
             print('limitingQuantiles',self.limitingQuantiles)
             print()
@@ -3387,6 +3387,7 @@ class NormedQuantilesRatingDigraph(QuantilesSortingDigraph,PerformanceQuantiles)
         perfTab.actions.update(self.profiles)
         perfTab.criteria = self.criteria
         perfTab.evaluation = deepcopy(self.evaluation)
+        perfTab.NA = self.NA
         
         if Debug:
             print('6.')
@@ -4189,7 +4190,8 @@ class NormedQuantilesRatingDigraph(QuantilesSortingDigraph,PerformanceQuantiles)
                 actionsList = self.actionsRanking
                 rankingRule = self.rankingRule
             else:
-                actionsList = argActionsListrankingRule = self.rankingRule
+                actionsList = argActionsList
+                rankingRule = self.rankingRule
         else:
             if argActionsList == None:
                 if rankingRule == 'Copeland':
@@ -4197,7 +4199,8 @@ class NormedQuantilesRatingDigraph(QuantilesSortingDigraph,PerformanceQuantiles)
                 elif rankingRule == 'NetFlows':
                     actionsList = self.computeNetFlowsRanking()
             else:
-                rankingRule = None 
+                rankingRule = None
+                actionsList = argActionsList
         na = len(actionsList)
         profiles = self.profiles
         categories = self.categories
@@ -4564,7 +4567,7 @@ if __name__ == "__main__":
     print('*-------- Testing class and methods -------')
 
 
-    MP = True
+    MP = False
     seed = 1001
     nbrOfCPUs = 6
 
@@ -4585,13 +4588,13 @@ if __name__ == "__main__":
 ##
 ##    from randomPerfTabs import Random3ObjectivesPerformanceTableau
 ##    from randomPerfTabs import RandomPerformanceGenerator as PerfTabGenerator
-    nbrActions=1000
+    nbrActions=100
     nbrCrit = 21
-    tp = Random3ObjectivesPerformanceTableau(numberOfActions=nbrActions,\
-                                    numberOfCriteria=nbrCrit,seed=seed)
-
-    qs = QuantilesSortingDigraph(tp,4,LowerClosed=True,Threading=MP)
-    qs.showCriteriaCategoryLimits()
+    tp1 = Random3ObjectivesPerformanceTableau(numberOfActions=nbrActions,\
+                numberOfCriteria=nbrCrit,seed=seed,NA=-1,missingDataProbability=0.1)
+    print(tp1.NA)
+##    qs = QuantilesSortingDigraph(tp,4,LowerClosed=True,Threading=MP)
+##    qs.showCriteriaCategoryLimits()
 ##    #qs.showSorting()
 ##    print('==>> average')
 ##    qs.showHTMLQuantileOrdering(strategy='average')
@@ -4601,17 +4604,19 @@ if __name__ == "__main__":
 ##    qs.showQuantileOrdering(strategy='pessimistic')
 ##    from outrankingDigraphs import *
 ##    tp = PerformanceTableau('exL10')
-    pq = PerformanceQuantiles(tp,5,LowerClosed=False,Debug=False)
-    tpg = PerfTabGenerator(tp,instanceCounter=0,seed=seed)
-    newActions = tpg.randomActions(20)
-    pq.updateQuantiles(newActions,historySize=None)
-    ira = NormedQuantilesRatingDigraph(pq,newActions,\
-                                    rankingRule='IteratedNetFlows',\
+    pq1 = PerformanceQuantiles(tp1,5,LowerClosed=False,Debug=False)
+    tpg1 = PerfTabGenerator(tp1,instanceCounter=0,seed=seed)
+    newActions = tpg1.randomActions(20)
+    pq1.updateQuantiles(newActions,historySize=None)
+    ira1 = NormedQuantilesRatingDigraph(pq1,newActions,\
+                                    rankingRule='Copeland',\
                                    WithSorting=True,Debug=False,\
                                        Threading=MP,nbrOfCPUs=nbrOfCPUs)
-    print(ira)
-    ira.showQuantilesRating()
-    ira.sorting = ira.computeSortingCharacteristics()
+    print(ira1)
+    ira1.showHTMLRatingHeatmap(Correlations=True,rankingRule='Copeland')
+##    ira.showQuantilesRating() ira.sorting =
+##    ira.computeSortingCharacteristics()
+    
     #ira.categoryContent = ira.computeCategoryContents()
     #ira.showSorting()
     #for x in ira.newActions:
@@ -4620,7 +4625,7 @@ if __name__ == "__main__":
     #ira.relation = ratingRelation
 ##    #ira.closeTransitive(Irreflexive=True,Reverse=True)
     #ira.showHTMLRelationTable(actionsList=ira.actionsRanking)
-    ira.exportRatingGraphViz('test2',graphType='pdf')
+    ira1.exportRatingGraphViz('test2',graphType='pdf')
 ##    #ira.showSorting()
 ##    #ira.showHTMLSorting()
 ##    ira.showActionsSortingResult()
@@ -4633,8 +4638,8 @@ if __name__ == "__main__":
 ##                                   Correlations=True,
 ##                                   #rankingRule='best',
 ##                                   )
-##    ira.showRankingScores()
-    print(ira)
+##  ira.showRankingScores()
+##    print(ira)
 ##    print(ira.computeQuantileProfile(0.25))
 ##    print(ira.computeQuantileProfile(0.5))
 ##    print(ira.computeQuantileProfile(0.75))
