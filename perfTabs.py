@@ -220,6 +220,36 @@ The performance evaluations of each decision alternative on each criterion are g
             self.evaluation = {}
             self.NA = Decimal('-999')
             
+    def replaceNA(self,newNA=None,Comments=False):
+        """
+        Replaces the current self.NA symbol with the *newNA* symbol of type <Decimal>. If newNA == None, the defauklt value Decimal('-999') is used.
+        """
+        if newNA == None:
+            newNA = Decimal('-999')
+        criteria = self.criteria
+        actions = self.actions
+        evaluation = self.evaluation
+        NA = self.NA
+        count = 0
+        for g in criteria:
+            if criteria[g]['preferenceDirection'] == 'max':
+                if newNA >= criteria[g]['scale'][0] and\
+                         newNA <= criteria[g]['scale'][1]:
+                    print('Warning!!: newNA included in criterion %s scale' % (g))
+                    print(criteria[g]['scale'],newNA)
+            else:
+                if newNA >= -criteria[g]['scale'][1] and\
+                         newNA <= -criteria[g]['scale'][0]:
+                    print('Warning!!: newNA included in criterion %s scale' % (g))
+                    print(-criteria[g]['scale'][0],newNA,-criteria[g]['scale'][1])
+
+            for x in actions:
+                if evaluation[g][x] == NA:
+                    evaluation[g][x] = newNA
+                    count += 1
+        if Comments:
+            print('replaced %d' % (count), NA, 'with', newNA)
+        self.NA = newNA
 
     def hasOddWeightAlgebra(self,Debug=False):
         """
@@ -7288,7 +7318,11 @@ if __name__ == "__main__":
                                    missingDataProbability=0.05,
                                    seed=randomSeed,
                                    Debug=False)
-    print(t)
+    t.showPerformanceTableau()
+    t.computeMissingDataProportion(InPercents=False,Comments=True)
+    t.replaceNA(Decimal('-999'),Comments=True)
+    t.computeMissingDataProportion(InPercents=False,Comments=True)
+                    
 ##    actionsList = [x for x in t.actions.keys()]
 ##    criteriaList = [g for g in t.criteria.keys()]
 ##    print(t._htmlPerformanceHeatmap(argActionsList=actionsList,
@@ -7301,16 +7335,15 @@ if __name__ == "__main__":
 ##                                 rankingRule=None,Transposed=False)
 ##    t.showHTMLPerformanceHeatmap(Correlations=True,colorLevels=5,
 ##                                 rankingRule='NetFlows',Transposed=False)
-    g = BipolarOutrankingDigraph(t,Normalized=True)
-    nf = NetFlowsRanking(g)
-    t.showRankingConsensusQuality(nf.netFlowsRanking)
+    #g = BipolarOutrankingDigraph(t,Normalized=True)
+    #nf = NetFlowsRanking(g)
+    #t.showRankingConsensusQuality(nf.netFlowsRanking)
 ##    t.showHTMLPerformanceHeatmap(Correlations=True,colorLevels=5,
 ##                                 rankingRule='Copeland',Transposed=False)
-    cop = CopelandRanking(g)
-    t.showRankingConsensusQuality(cop.copelandRanking)
-    t.computeMissingDataProportion(InPercents=True,Comments=True)
-    t.actions = {}
-    t.computeMissingDataProportion(InPercents=False,Comments=True)
+    #cop = CopelandRanking(g)
+    #t.showRankingConsensusQuality(cop.copelandRanking)
+    #t.computeMissingDataProportion(InPercents=True,Comments=True)
+    #t.actions = {}
     
     
     

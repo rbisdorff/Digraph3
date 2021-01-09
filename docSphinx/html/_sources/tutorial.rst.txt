@@ -4464,15 +4464,31 @@ A corresponding *graphviz* drawing may well illustrate all these enrolment quali
 
    Graphviz drawing of the 9-tiles rating result
 
-Considering, now, the large amount (27.3%) of missing data (see :numref:`stSpPerfTab` Line 9), how *confident* is our *rating-by-ranking* result? To investigate this question, let us inspect the **outranking digraph** on which we apply the *Copeland* ranking rule.
+.. only:: html
 
+    It is interesting, as an exercise, to verify if the :ref:`epistemic fusion <Epistemic-Fusion-label>` of the *rating-by-ranking* results, one may obtain when applying two different ranking rules [33]_, like the *Copeland* and the :ref:`NetFlows ranking rule <NetFlows-Ranking-label>` (see :numref:`fusionResult`), does actually confirm our rating-by-ranking result shown in :numref:`ratingResult` above.
+
+    .. sidebar:: Fusion of two rating results
+
+	.. figure:: fusionResult.png
+	   :name: fusionResult
+	   :width: 150 px
+	   :align: center
+
+	   Fused ratings by Copeland and NetFlows ranking rules
+
+.. only:: latex
+
+    It is interesting, as an exercise, to verify if the ref:`epistemic fusion <Epistemic-Fusion-label>` of the *rating-by-ranking* results, one may obtain when applying two different ranking rules [33]_, like the :ref:`Copeland ranking rule <Copeland-Ranking-label>` and the :ref:`NetFlows ranking rule <NetFlows-Ranking-label>`, does actually confirm our rating result shown in :numref:`ratingResult` above.
+
+How *confident*, now, is our *rating-by-ranking* result here? To investigate this question, let us inspect the **outranking digraph** on which we actually apply the *Copeland* ranking rule.
    
 Inspecting the bipolar-valued outranking digraph
 ................................................
 
 We say that University *x* **outranks** (resp. **is outranked by**) University *y* in enrolment quality when there exists a **majority** (resp. only a **minority**) of valuated subjects showing an **at least as good as** average enrolment quality score.
 
-To compute these outranking situations, we use the :py:class:`outrankingDigraphs.BipolarOutrankingDigraph` constructor.
+To compute these outranking situations, we use the :py:class:`BipolarOutrankingDigraph` constructor.
 
 .. code-block:: pycon
    :name: outrankings
@@ -4625,23 +4641,6 @@ With a *graphviz* drawing of this :code:`QuantilesSorting` digraph instance *qs*
 In :numref:`nineTilingDrawing` we actually see the *skeleton* (transitive closure removed) of a **partial order**, where an oriented arc is drawn between Universities *x* and *y* when their 9-tiles sorting results are **disjoint** and the one of *x* is **higher rated** than the one of *y*. The rating for *TU München* (see :numref:`nineTilesSorting` Lines 45), for instance, is disjoint and higher rated than the one of the Universities *Freiburg* and *Konstanz* (Lines 23, 32). And, both the ratings of *Feiburg* and Konstanz* are, however, not disjoint from the one, for instance, of the Universty of *Stuttgart* (Line 42). 
 
 The partial ranking, shown in :numref:`nineTilingDrawing`, is in fact **independent** of any ordering strategy: - *average*, - *optimistic* or - *pessimistic*, of overlapping 9-tiles sorting results, and confirms that the same Universities as with the previous *rating-by-ranking* approach, namely *TU München*, *Freiburg*, *Konstanz*, *Stuttgart*, *Berlin Humboldt*, *Heidelberg* and *Leipzig* appear top-rated. Similarly, the Universities of *Duisburg*, *Hanover*, *Bochum*, *Giessen*, *Düsseldorf* and *Bielefeld* give the lowest-rated group. The midfield here is again consisting of more or less the same Universities as the one observed in the previous *rating-by-ranking* approach (see :numref:`ratingResult`).
-
-.. only:: html
-
-    It is interesting, as an exercise, to verify if the :ref:`epistemic fusion <Epistemic-Fusion-label>` of the *rating-by-ranking* results (see :numref:`fusionResult`), one may obtain when applying two different ranking rules, like the *Copeland* and the :ref:`NetFlows ranking rule <NetFlows-Ranking-label>`, does actually confirm our rating results [33]_.
-
-    .. sidebar:: Fusion of two rating results
-
-	.. figure:: fusionResult.png
-	   :name: fusionResult
-	   :width: 150 px
-	   :align: center
-
-	   Fused ratings by Copeland and NetFlows ranking rules
-
-.. only:: latex
-
-    It is interesting, as an exercise, to verify if the ref:`epistemic fusion <Epistemic-Fusion-label>` of the *rating-by-ranking* results, one may obtain when applying two different ranking rules, like the *copeland* and the :ref:`NetFlows ranking rule <NetFlows-Ranking-label>`, does actually confirm our rating results [33]_.
 
 To conclude
 ...........

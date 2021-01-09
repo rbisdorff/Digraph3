@@ -1,6 +1,6 @@
 "criteria","name","weight","scale","prefDir","thresholds","a1","a2","a3","a4","a5","a6","a7"
-"b1","random ordinal benefit criterion","2.0","(0, 10)","max","OrderedDict()",6.00,7.00,6.00,3.00,1.00,6.00,4.00
-"b2","random cardinal benefit criterion","2.0","(0.0, 100.0)","max","OrderedDict([('ind', (Decimal('6.124897712390644'), Decimal('0'))), ('pref', (Decimal('7.26'), Decimal('0'))), ('veto', (Decimal('65.62008564174153'), Decimal('0')))])",59.06,65.53,11.72,51.80,10.90,42.80,77.29
-"b3","random cardinal benefit criterion","2.0","(0.0, 100.0)","max","OrderedDict([('ind', (Decimal('0.6377839898191379'), Decimal('0'))), ('pref', (Decimal('5.67'), Decimal('0'))), ('veto', (Decimal('72.11748602290695'), Decimal('0')))])",87.93,80.02,21.51,15.84,59.84,80.67,88.38
-"c1","random cardinal cost criterion","-3.0","(0.0, 100.0)","min","OrderedDict([('ind', (Decimal('0.16389199490956896'), Decimal('0'))), ('pref', (Decimal('4.43'), Decimal('0'))), ('veto', (Decimal('64.5542756035633'), Decimal('0')))])",74.90,74.73,45.64,79.40,79.33,14.78,31.17
-"c2","random ordinal cost criterion","-3.0","(0, 10)","min","OrderedDict()",6.00,6.00,2.00,4.00,2.00,-999.00,7.00
+"b1","random cardinal benefit criterion","3.0","(0.0, 100.0)","max","OrderedDict([('ind', (Decimal('1.5061787801473188'), Decimal('0'))), ('pref', (Decimal('2.06'), Decimal('0'))), ('veto', (Decimal('77.15345247788359'), Decimal('0')))])",79.17,77.64,57.20,2.64,50.33,56.06,0.58
+"b2","random ordinal benefit criterion","3.0","(0, 10)","max","OrderedDict()",9.00,10.00,8.00,4.00,1.00,4.00,7.00
+"c1","random cardinal cost criterion","-2.0","(0.0, 100.0)","min","OrderedDict([('ind', (Decimal('4.18205959338244'), Decimal('0'))), ('pref', (Decimal('5.32'), Decimal('0'))), ('veto', (Decimal('59.454945870810924'), Decimal('0')))])",46.42,58.78,79.88,62.97,15.43,42.36,20.75
+"c2","random cardinal cost criterion","-2.0","(0.0, 100.0)","min","OrderedDict([('ind', (Decimal('5.161929351586964'), Decimal('0'))), ('pref', (Decimal('12.53'), Decimal('0'))), ('veto', (Decimal('60.845333037830976'), Decimal('0')))])",88.39,38.00,75.86,51.60,15.78,75.28,32.54
+"c3","random ordinal cost criterion","-2.0","(0, 10)","min","OrderedDict()",8.00,3.00,6.00,4.00,2.00,7.00,5.00
