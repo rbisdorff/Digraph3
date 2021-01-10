@@ -4297,8 +4297,8 @@ Back to :ref:`Content Table <Tutorial-label>`
 
 .. _RatingUniversities-Tutorial-label:
 
-Rating the enrolment quality of Universities: A case study
-----------------------------------------------------------
+The best students, where do they study? A rating case study
+-----------------------------------------------------------
 
 .. contents:: 
 	:depth: 2
@@ -4477,7 +4477,7 @@ We have noticed in the tutorial on :ref:`ranking with multiple criteria <Ranking
 
 	   Fused Copeland and NetFlows ratings
 
-    It is, hence, interesting, to verify if the :ref:`epistemic fusion <Epistemic-Fusion-label>` of the *rating-by-ranking* results, one may obtain when applying two different ranking rules, like the *Copeland* and the :ref:`NetFlows ranking rule <NetFlows-Ranking-label>` (see :numref:`rankingsFusion`), does actually confirm our rating-by-ranking result shown in :numref:`ratingResult` above.
+    It is, hence, interesting, to verify if the :ref:`epistemic fusion <Epistemic-Fusion-label>` of the *rating-by-ranking* results, one may obtain when applying two different ranking rules, like the *Copeland* and the :ref:`NetFlows ranking rule <NetFlows-Ranking-label>` (see :numref:`rankingsFusion`), does actually confirm our rating-by-ranking result shown in :numref:`ratingResult` above. For this purpose we use the :py:class:`transitiveDigraphs.RankingsFusionDigraph` constructor (see :numref:`rankingsFusion` Line 9).
 
     .. code-block:: pycon
        :name: rankingsFusion

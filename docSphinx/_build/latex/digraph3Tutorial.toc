@@ -67,7 +67,7 @@
 \contentsline {subsection}{\numberline {10.1}Introduction}{109}{subsection.10.1}%
 \contentsline {subsection}{\numberline {10.2}Incremental learning of historical performance quantiles}{110}{subsection.10.2}%
 \contentsline {subsection}{\numberline {10.3}Rating new performances with quantile norms}{113}{subsection.10.3}%
-\contentsline {section}{\numberline {11}Rating the enrolment quality of Universities: A case study}{120}{section.11}%
+\contentsline {section}{\numberline {11}The best students, where do they study? A rating case study}{120}{section.11}%
 \contentsline {subsection}{\numberline {11.1}The performance tableau}{121}{subsection.11.1}%
 \contentsline {subsection}{\numberline {11.2}Rating\sphinxhyphen {}by\sphinxhyphen {}ranking with lower\sphinxhyphen {}closed quantile limits}{125}{subsection.11.2}%
 \contentsline {subsection}{\numberline {11.3}Inspecting the bipolar\sphinxhyphen {}valued outranking digraph}{130}{subsection.11.3}%
