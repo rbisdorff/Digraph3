@@ -4494,12 +4494,13 @@ We have noticed in the tutorial on :ref:`ranking with multiple criteria <Ranking
                        nqr1.actionsRanking]
        >>> rf = RankingsFusionDigraph(nqr1,rankings)
        >>> rf.exportGraphViz(fileName='fusionResult',\
+                             WithRatingDecoration=True,\
                              graphSize='30,30')
 
 
-    In :numref:`fusionResult` we notice that many Universities appear rated into several adjacent 9-tiles. The best rated Universities: *Freigurg*, *München* and *Berlin Humboldt*, for instance, appear sorted into the sixth and the seventh 9-tile (:math:`[o.56 - 0.78]`). 
+    In :numref:`fusionResult` we notice that many Universities appear now rated into several adjacent 9-tiles. The previously best-rated Universities: *TU München*, *Freiburg*, *München*, *Leipzig*, as well as  *Heidelberg*, for instance, appear now sorted into the *seventh* **and** *eigth* 9-tile (:math:`[o.67 - 0.89]`), whereas *Konstanz* is now, even **more imprecisely**, rated into the *sixth*, the *seventh* and the *eight* 9-tile. 
 
-How *confident*, now, is our *Copeland* *rating-by-ranking* result? To investigate this question, let us therefore inspect the **outranking digraph** on which we actually apply the *Copeland* ranking rule.
+How *confident*, hence, is our precise *Copeland* *rating-by-ranking* result? To investigate this question, let us now inspect the **outranking digraph** on which we actually apply the *Copeland* ranking rule.
    
 Inspecting the bipolar-valued outranking digraph
 ................................................
@@ -4565,14 +4566,14 @@ We may furthermore check if there exists any *cyclic* outranking situations.
      92:  ['marb', 'saar', 'tri'] , credibility : 0.067
      93:  ['mnh', 'mu', 'stu'] , credibility : 0.133
 
-Here we observe indeed 93 such outranking circuits, like: *Berlin Humboldt* >= *Konstanz* >= *München* >= *Berlin Humboldt* supported by a (0.133 + 1.0)/2 = 56.7% majority of subjects [31]_ (see :numref:`chordlessCircuits` circuit 29 above). In the *Copeland* ranking result shown in :numref:`ninetiledHeatmap`, these Universities appear positioned respectively at ranks 10, 4 and 6. The occurrence in digraph *dg* of so many outranking circuits makes any *forced* linear ranking *doubtful*; independently of the specific ranking rule we might have applied.
+Here we observe indeed 93 such outranking circuits, like: *Berlin Humboldt* > *Konstanz* > *München* > *Berlin Humboldt* supported by a (0.133 + 1.0)/2 = 56.7% majority of subjects [31]_ (see :numref:`chordlessCircuits` circuit 29 above). In the *Copeland* ranking result shown in :numref:`ninetiledHeatmap`, these Universities appear positioned respectively at ranks 10, 4 and 6. The occurrence in digraph *dg* of so many outranking circuits makes any *forced* linear ranking *doubtful*; independently of the specific ranking rule we might have applied.
 
-To effectively check the quality of our previous *rating-by-ranking* result, we shall now compute a direct **sorting into 9-tiles** of the enrolment quality scores, without using any outranking digraph based ranking rule (see tutorial on :ref:`rating with incommensurable performance criteria <QuantilesRating-Tutorial-label>`).
+To effectively check the quality of our *Copeland* *rating-by-ranking* result, we shall now compute a direct **sorting into 9-tiles** of the enrolment quality scores, without using any outranking digraph based ranking rule.
 
 Rating by quantiles sorting
 ...........................
 
-For this *rating-by-sorting* approach, we are going to use the :py:class:`sortingDigrahs.QuantilesSortingDigraph` constructor for sorting, on the basis of our given performance tableau *t*, the University enrolment quality records into lower-closed, not necessarily unique, but adjacent 9-tiles.
+For this *rating-by-sorting* approach, we are going to use the :py:class:`sortingDigrahs.QuantilesSortingDigraph` constructor for sorting, on the basis of our given performance tableau *t*, the University enrolment quality records into lower-closed, not necessarily unique, but adjacent 9-tiles (see tutorial on :ref:`rating with incommensurable performance criteria <QuantilesRating-Tutorial-label>`).
 
 .. code-block:: pycon
    :name: nineTilesSorting
@@ -4663,11 +4664,11 @@ The partial ranking, shown in :numref:`nineTilingDrawing`, is in fact **independ
 To conclude
 ...........
 
-In the end, both the *rating-by-ranking*, as well as the *rating-by-sorting* approach give luckily, in our case study here, very similar results.
+In the end, both the *Copeland* *rating-by-ranking*, as well as the *rating-by-sorting* approach give luckily, in our case study here, very similar results.
 
-The first approach, with its *forced* linear ranking, determines on the one hand, *precise* enrolment quality equivalence classes; a result, depending potentially a lot on the actually applied ranking rule. The *rating-by-sorting* approach, on the other hand, only determines for each University a less precise but *prudent* rating of its individual enrolment quality, furthermore supported by a known majority of performance criteria significance; a somehow *fairer* and *robuster* result, but, much less evident for easily comparing the apparent enrolment quality among Universities. Contradictorily, or not at all valuated Universities, for instance, will appear trivially rated into more or less the whole range of 9-tiles.
+The first approach, with its *forced* linear ranking, determines on the one hand, *precise* enrolment quality equivalence classes; a result, depending potentially a lot on the actually applied ranking rule. The *rating-by-sorting* approach, on the other hand, only determines for each University a less precise but *prudent* rating of its individual enrolment quality, furthermore supported by a known majority of performance criteria significance; a somehow *fairer* and *robuster* result, but, much less evident for easily comparing the apparent enrolment quality among Universities. Contradictorily, or not sparsely valuated Universities, for instance, will appear trivially rated into a large range of adjacent 9-tiles.
 
-Let us conclude by saying that we prefer this latter *rating-by-sorting* approach; perhaps impreciser, due the case given, to missing and contradictory data; yet, well grounded in a powerful bipolar-valued logical and computational framework (see the :ref:`advanced topics of the Digraph3 documentation <Advanced-Topics-label>`).
+Let us conclude by saying that we prefer this latter *rating-by-sorting* approach; perhaps impreciser, due the case given, to missing and contradictory performance data; yet, well grounded in a powerful bipolar-valued logical and computational framework (see the :ref:`advanced topics of the Digraph3 documentation <Advanced-Topics-label>`).
 
 Back to :ref:`Content Table <Tutorial-label>`   
 

@@ -33,7 +33,7 @@ from transitiveDigraphs import *
 rankings = [nqr.actionsRanking,
             nqr1.actionsRanking]
 rf = RankingsFusion(nqr1,rankings)
-rf.exportGraphViz(fileName='fusionResult',graphType='png',graphSize='30,30')
+rf.exportGraphViz(fileName='fusionResult',WithRatingDecoration=True,graphType='png',graphSize='30,30')
 # For decorating the 9-tiles lower limits the fusionResult.dat file
 # may be edited by hand like in the ratingResult.dot
 # fileshape = "box", fillcolor=lightcoral, style=filled,

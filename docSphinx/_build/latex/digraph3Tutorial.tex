@@ -5609,7 +5609,7 @@ A corresponding \sphinxstyleemphasis{graphviz} drawing may well illustrate all t
 
 We have noticed in the tutorial on {\hyperref[\detokenize{tutorial:ranking-tutorial-label}]{\sphinxcrossref{\DUrole{std,std-ref}{ranking with multiple criteria}}}} (\autopageref*{\detokenize{tutorial:ranking-tutorial-label}}), that there is not a single optimal rule for ranking from a given outranking digraph. The \sphinxstyleemphasis{Copeland} rule, for instance, has the advantage of being \sphinxstyleemphasis{Condorcet} consistent, i.e. when the outranking digraph models in fact a linear ranking, this ranking will necessarily be the result of the \sphinxstyleemphasis{Copeland} rule. When this is not the case, and especially when the outranking digraph shows many circuits, all potential ranking rules may give very divergent ranking results, and hence also substantially divergent rating\sphinxhyphen{}by\sphinxhyphen{}ranking results.
 
-How \sphinxstyleemphasis{confident}, now, is our \sphinxstyleemphasis{Copeland} \sphinxstyleemphasis{rating\sphinxhyphen{}by\sphinxhyphen{}ranking} result? To investigate this question, let us therefore inspect the \sphinxstylestrong{outranking digraph} on which we actually apply the \sphinxstyleemphasis{Copeland} ranking rule.
+How \sphinxstyleemphasis{confident}, hence, is our precise \sphinxstyleemphasis{Copeland} \sphinxstyleemphasis{rating\sphinxhyphen{}by\sphinxhyphen{}ranking} result? To investigate this question, let us now inspect the \sphinxstylestrong{outranking digraph} on which we actually apply the \sphinxstyleemphasis{Copeland} ranking rule.
 
 
 \subsection{Inspecting the bipolar\sphinxhyphen{}valued outranking digraph}
@@ -5671,18 +5671,18 @@ We may furthermore check if there exists any \sphinxstyleemphasis{cyclic} outran
 \PYG{g+go}{  93:  [\PYGZsq{}mnh\PYGZsq{}, \PYGZsq{}mu\PYGZsq{}, \PYGZsq{}stu\PYGZsq{}] , credibility : 0.133}
 \end{sphinxVerbatim}
 
-Here we observe indeed 93 such outranking circuits, like: \sphinxstyleemphasis{Berlin Humboldt} \textgreater{}= \sphinxstyleemphasis{Konstanz} \textgreater{}= \sphinxstyleemphasis{München} \textgreater{}= \sphinxstyleemphasis{Berlin Humboldt} supported by a (0.133 + 1.0)/2 = 56.7\% majority of subjects %
+Here we observe indeed 93 such outranking circuits, like: \sphinxstyleemphasis{Berlin Humboldt} \textgreater{} \sphinxstyleemphasis{Konstanz} \textgreater{} \sphinxstyleemphasis{München} \textgreater{} \sphinxstyleemphasis{Berlin Humboldt} supported by a (0.133 + 1.0)/2 = 56.7\% majority of subjects %
 \begin{footnote}[31]\sphinxAtStartFootnote
 Converted by a +1.0 shift and a 0.5 * 100 scale transform from a bipolar\sphinxhyphen{}valued credibility of +0.07 in {[}\sphinxhyphen{}1.0, +1.0{]} to a majority (in \%) support.
 %
 \end{footnote} (see \hyperref[\detokenize{tutorial:chordlesscircuits}]{Listing \ref{\detokenize{tutorial:chordlesscircuits}}} circuit 29 above). In the \sphinxstyleemphasis{Copeland} ranking result shown in \hyperref[\detokenize{tutorial:ninetiledheatmap}]{Fig.\@ \ref{\detokenize{tutorial:ninetiledheatmap}}}, these Universities appear positioned respectively at ranks 10, 4 and 6. The occurrence in digraph \sphinxstyleemphasis{dg} of so many outranking circuits makes any \sphinxstyleemphasis{forced} linear ranking \sphinxstyleemphasis{doubtful}; independently of the specific ranking rule we might have applied.
 
-To effectively check the quality of our previous \sphinxstyleemphasis{rating\sphinxhyphen{}by\sphinxhyphen{}ranking} result, we shall now compute a direct \sphinxstylestrong{sorting into 9\sphinxhyphen{}tiles} of the enrolment quality scores, without using any outranking digraph based ranking rule (see tutorial on {\hyperref[\detokenize{tutorial:quantilesrating-tutorial-label}]{\sphinxcrossref{\DUrole{std,std-ref}{rating with incommensurable performance criteria}}}} (\autopageref*{\detokenize{tutorial:quantilesrating-tutorial-label}})).
+To effectively check the quality of our \sphinxstyleemphasis{Copeland} \sphinxstyleemphasis{rating\sphinxhyphen{}by\sphinxhyphen{}ranking} result, we shall now compute a direct \sphinxstylestrong{sorting into 9\sphinxhyphen{}tiles} of the enrolment quality scores, without using any outranking digraph based ranking rule.
 
 
 \subsection{Rating by quantiles sorting}
 \label{\detokenize{tutorial:rating-by-quantiles-sorting}}
-For this \sphinxstyleemphasis{rating\sphinxhyphen{}by\sphinxhyphen{}sorting} approach, we are going to use the \sphinxcode{\sphinxupquote{sortingDigrahs.QuantilesSortingDigraph}} constructor for sorting, on the basis of our given performance tableau \sphinxstyleemphasis{t}, the University enrolment quality records into lower\sphinxhyphen{}closed, not necessarily unique, but adjacent 9\sphinxhyphen{}tiles.
+For this \sphinxstyleemphasis{rating\sphinxhyphen{}by\sphinxhyphen{}sorting} approach, we are going to use the \sphinxcode{\sphinxupquote{sortingDigrahs.QuantilesSortingDigraph}} constructor for sorting, on the basis of our given performance tableau \sphinxstyleemphasis{t}, the University enrolment quality records into lower\sphinxhyphen{}closed, not necessarily unique, but adjacent 9\sphinxhyphen{}tiles (see tutorial on {\hyperref[\detokenize{tutorial:quantilesrating-tutorial-label}]{\sphinxcrossref{\DUrole{std,std-ref}{rating with incommensurable performance criteria}}}} (\autopageref*{\detokenize{tutorial:quantilesrating-tutorial-label}})).
 \sphinxSetupCaptionForVerbatim{Computing the lower\sphinxhyphen{}closed 9\sphinxhyphen{}tiles sorting of the 41 Universities}
 \def\sphinxLiteralBlockLabel{\label{\detokenize{tutorial:ninetilessorting}}}
 \begin{sphinxVerbatim}[commandchars=\\\{\},numbers=left,firstnumber=1,stepnumber=1]
@@ -5775,11 +5775,11 @@ The partial ranking, shown in \hyperref[\detokenize{tutorial:ninetilingdrawing}]
 
 \subsection{To conclude}
 \label{\detokenize{tutorial:to-conclude}}
-In the end, both the \sphinxstyleemphasis{rating\sphinxhyphen{}by\sphinxhyphen{}ranking}, as well as the \sphinxstyleemphasis{rating\sphinxhyphen{}by\sphinxhyphen{}sorting} approach give luckily, in our case study here, very similar results.
+In the end, both the \sphinxstyleemphasis{Copeland} \sphinxstyleemphasis{rating\sphinxhyphen{}by\sphinxhyphen{}ranking}, as well as the \sphinxstyleemphasis{rating\sphinxhyphen{}by\sphinxhyphen{}sorting} approach give luckily, in our case study here, very similar results.
 
-The first approach, with its \sphinxstyleemphasis{forced} linear ranking, determines on the one hand, \sphinxstyleemphasis{precise} enrolment quality equivalence classes; a result, depending potentially a lot on the actually applied ranking rule. The \sphinxstyleemphasis{rating\sphinxhyphen{}by\sphinxhyphen{}sorting} approach, on the other hand, only determines for each University a less precise but \sphinxstyleemphasis{prudent} rating of its individual enrolment quality, furthermore supported by a known majority of performance criteria significance; a somehow \sphinxstyleemphasis{fairer} and \sphinxstyleemphasis{robuster} result, but, much less evident for easily comparing the apparent enrolment quality among Universities. Contradictorily, or not at all valuated Universities, for instance, will appear trivially rated into more or less the whole range of 9\sphinxhyphen{}tiles.
+The first approach, with its \sphinxstyleemphasis{forced} linear ranking, determines on the one hand, \sphinxstyleemphasis{precise} enrolment quality equivalence classes; a result, depending potentially a lot on the actually applied ranking rule. The \sphinxstyleemphasis{rating\sphinxhyphen{}by\sphinxhyphen{}sorting} approach, on the other hand, only determines for each University a less precise but \sphinxstyleemphasis{prudent} rating of its individual enrolment quality, furthermore supported by a known majority of performance criteria significance; a somehow \sphinxstyleemphasis{fairer} and \sphinxstyleemphasis{robuster} result, but, much less evident for easily comparing the apparent enrolment quality among Universities. Contradictorily, or not sparsely valuated Universities, for instance, will appear trivially rated into a large range of adjacent 9\sphinxhyphen{}tiles.
 
-Let us conclude by saying that we prefer this latter \sphinxstyleemphasis{rating\sphinxhyphen{}by\sphinxhyphen{}sorting} approach; perhaps impreciser, due the case given, to missing and contradictory data; yet, well grounded in a powerful bipolar\sphinxhyphen{}valued logical and computational framework (see the \DUrole{xref,std,std-ref}{advanced topics of the Digraph3 documentation}).
+Let us conclude by saying that we prefer this latter \sphinxstyleemphasis{rating\sphinxhyphen{}by\sphinxhyphen{}sorting} approach; perhaps impreciser, due the case given, to missing and contradictory performance data; yet, well grounded in a powerful bipolar\sphinxhyphen{}valued logical and computational framework (see the \DUrole{xref,std,std-ref}{advanced topics of the Digraph3 documentation}).
 
 Back to {\hyperref[\detokenize{tutorial:tutorial-label}]{\sphinxcrossref{\DUrole{std,std-ref}{Content Table}}}} (\autopageref*{\detokenize{tutorial:tutorial-label}})
 
