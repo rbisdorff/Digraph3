@@ -4464,9 +4464,9 @@ A corresponding *graphviz* drawing may well illustrate all these enrolment quali
 
    Graphviz drawing of the 9-tiles rating result
 
-.. only:: html
+We have noticed in the tutorial on :ref:`ranking with multiple criteria <Ranking-Tutorial-label>`, that there is not a single optimal rule for ranking from a given outranking digraph. The *Copeland* rule, for instance, has the advantage of being *Condorcet* consistent, i.e. when the outranking digraph models in fact a linear ranking, this ranking will necessarily be the result of the *Copeland* rule. When this is not the case, and especially when the outranking digraph shows many circuits, all potential ranking rules may give very divergent ranking results, and hence also substantially divergent rating-by-ranking results.
 
-    It is interesting, as an exercise, to verify if the :ref:`epistemic fusion <Epistemic-Fusion-label>` of the *rating-by-ranking* results, one may obtain when applying two different ranking rules [33]_, like the *Copeland* and the :ref:`NetFlows ranking rule <NetFlows-Ranking-label>` (see :numref:`fusionResult`), does actually confirm our rating-by-ranking result shown in :numref:`ratingResult` above.
+.. only:: html
 
     .. sidebar:: Fusion of two rating results
 
@@ -4475,13 +4475,31 @@ A corresponding *graphviz* drawing may well illustrate all these enrolment quali
 	   :width: 150 px
 	   :align: center
 
-	   Fused ratings by Copeland and NetFlows ranking rules
+	   Fused Copeland and NetFlows ratings
 
-.. only:: latex
+    It is, hence, interesting, to verify if the :ref:`epistemic fusion <Epistemic-Fusion-label>` of the *rating-by-ranking* results, one may obtain when applying two different ranking rules, like the *Copeland* and the :ref:`NetFlows ranking rule <NetFlows-Ranking-label>` (see :numref:`rankingsFusion`), does actually confirm our rating-by-ranking result shown in :numref:`ratingResult` above.
 
-    It is interesting, as an exercise, to verify if the ref:`epistemic fusion <Epistemic-Fusion-label>` of the *rating-by-ranking* results, one may obtain when applying two different ranking rules [33]_, like the :ref:`Copeland ranking rule <Copeland-Ranking-label>` and the :ref:`NetFlows ranking rule <NetFlows-Ranking-label>`, does actually confirm our rating result shown in :numref:`ratingResult` above.
+    .. code-block:: pycon
+       :name: rankingsFusion
+       :linenos:
+       :caption: Epistemic fusion of Copeland and Netflows rating-by-ranking results 
 
-How *confident*, now, is our *rating-by-ranking* result here? To investigate this question, let us inspect the **outranking digraph** on which we actually apply the *Copeland* ranking rule.
+       >>> nqr = NormedQuantilesRatingDigraph(\
+                       pq,t,rankingRule='Copeland')
+       >>> nqr1 = NormedQuantilesRatingDigraph(\
+                       pq,t,rankingRule='NetFlows')
+       >>> from transitiveDigraphs import\
+                       RankingsFusionDigraph
+       >>> rankings = [nqr.actionsRanking, \
+                       nqr1.actionsRanking]
+       >>> rf = RankingsFusionDigraph(nqr1,rankings)
+       >>> rf.exportGraphViz(fileName='fusionResult',\
+                             graphSize='30,30')
+
+
+    In :numref:`fusionResult` we notice that many Universities appear rated into several adjacent 9-tiles. The best rated Universities: *Freigurg*, *München* and *Berlin Homboldt*, for instance, appear sorted into the sixth and the seventh 9-tile (:math:`[o.56 - 0.78]`). 
+
+How *confident*, now, is our *Copeland* *rating-by-ranking* result? To investigate this question, let us therefore inspect the **outranking digraph** on which we actually apply the *Copeland* ranking rule.
    
 Inspecting the bipolar-valued outranking digraph
 ................................................
@@ -7554,8 +7572,6 @@ Appendices
 .. [31] Converted by a +1.0 shift and a 0.5 * 100 scale transform from a bipolar-valued credibility of +0.07 in [-1.0, +1.0] to a majority (in %) support.
 
 .. [32] The performance tableau :code:`studentenSpiegel04.py` is also available in the :code:`examples` directory of the Digraph3 software collection.
-
-.. [33] See the :code:`stSpDemo.py` file in the :code:`examples` directory of the *Digraph3* software collection.
 
 .. [34] See the tutorial on :ref:`ranking with incommensurable performance criteria <Ranking-Tutorial-label>`.
 
