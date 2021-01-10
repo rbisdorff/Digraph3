@@ -232,6 +232,17 @@ The performance evaluations of each decision alternative on each criterion are g
         NA = self.NA
         count = 0
         for g in criteria:
+            if criteria[g]['preferenceDirection'] == 'max':
+                if newNA >= criteria[g]['scale'][0] and\
+                         newNA <= criteria[g]['scale'][1]:
+                    print('Warning!!: newNA included in criterion %s scale' % (g))
+                    print(criteria[g]['scale'],newNA)
+            else:
+                if newNA >= -criteria[g]['scale'][1] and\
+                         newNA <= -criteria[g]['scale'][0]:
+                    print('Warning!!: newNA included in criterion %s scale' % (g))
+                    print(-criteria[g]['scale'][0],newNA,-criteria[g]['scale'][1])
+
             for x in actions:
                 if evaluation[g][x] == NA:
                     evaluation[g][x] = newNA
@@ -7309,7 +7320,7 @@ if __name__ == "__main__":
                                    Debug=False)
     t.showPerformanceTableau()
     t.computeMissingDataProportion(InPercents=False,Comments=True)
-    t.replaceNA(Decimal('-20'),Comments=True)
+    t.replaceNA(Decimal('-999'),Comments=True)
     t.computeMissingDataProportion(InPercents=False,Comments=True)
                     
 ##    actionsList = [x for x in t.actions.keys()]

@@ -409,7 +409,7 @@ class TransitiveDigraph(Digraph):
                 print('graphViz tools not avalaible! Please check installation.')
 
 
-class RankingsFusion(TransitiveDigraph):
+class RankingsFusionDigraph(TransitiveDigraph):
     """
     Specialization of the abstract TransitiveDigraph class for 
     digraphs resulting from the epistemic
@@ -422,7 +422,7 @@ class RankingsFusion(TransitiveDigraph):
 
     Example application:
 
-    >>> from TransitiveDigraphs import PartialRanking
+    >>> from TransitiveDigraphs import RankingsFusionDigraph
     >>> from sparseOutrankingDigraphs import PreRankedOutrankingDigraph
     >>> t = RandomPerformanceTableau()
     >>> pr = PreRankedOutrankingDigraph(t,10,quantilesOrderingStrategy='average')
@@ -431,7 +431,7 @@ class RankingsFusion(TransitiveDigraph):
     >>> r2 = pro.boostedRanking
     >>> prp = QuantilesRankingDigraph(t,10,quantilesOrderingStrategy='pessimistic')
     >>> r3 = prp.boostedRanking
-    >>> wqr = PartialRanking(pr,[r1,r2,r3])
+    >>> wqr = RankingsFusionDigraph(pr,[r1,r2,r3])
     >>> wqr.exportGraphViz('partialOrdering',graphType="pdf")
     
     """
@@ -481,6 +481,11 @@ class RankingsFusion(TransitiveDigraph):
         self.relation = relation
         self.gamma = self.gammaSets()
         self.notGamma = self.notGammaSets()
+
+class RankingsFusion(RankingsFusionDigraph):
+    """
+    Obsolete dummy for the RankingsFusionDigraph class
+    """
 
 class KemenyOrdersFusion(TransitiveDigraph):
     """

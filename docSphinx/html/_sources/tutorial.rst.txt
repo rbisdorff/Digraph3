@@ -4497,7 +4497,7 @@ We have noticed in the tutorial on :ref:`ranking with multiple criteria <Ranking
                              graphSize='30,30')
 
 
-    In :numref:`fusionResult` we notice that many Universities appear rated into several adjacent 9-tiles. The best rated Universities: *Freigurg*, *München* and *Berlin Homboldt*, for instance, appear sorted into the sixth and the seventh 9-tile (:math:`[o.56 - 0.78]`). 
+    In :numref:`fusionResult` we notice that many Universities appear rated into several adjacent 9-tiles. The best rated Universities: *Freigurg*, *München* and *Berlin Humboldt*, for instance, appear sorted into the sixth and the seventh 9-tile (:math:`[o.56 - 0.78]`). 
 
 How *confident*, now, is our *Copeland* *rating-by-ranking* result? To investigate this question, let us therefore inspect the **outranking digraph** on which we actually apply the *Copeland* ranking rule.
    
@@ -4665,11 +4665,9 @@ To conclude
 
 In the end, both the *rating-by-ranking*, as well as the *rating-by-sorting* approach give luckily, in our case study here, very similar results.
 
-The first approach, with its *forced* linear ranking, determines on the one hand, *precise* enrolment quality equivalence classes; a result, depending potentially a lot on the actually applied ranking rule (see the exercise proposed above).
+The first approach, with its *forced* linear ranking, determines on the one hand, *precise* enrolment quality equivalence classes; a result, depending potentially a lot on the actually applied ranking rule. The *rating-by-sorting* approach, on the other hand, only determines for each University a less precise but *prudent* rating of its individual enrolment quality, furthermore supported by a known majority of performance criteria significance; a somehow *fairer* and *robuster* result, but, much less evident for easily comparing the apparent enrolment quality among Universities. Contradictorily, or not at all valuated Universities, for instance, will appear trivially rated into more or less the whole range of 9-tiles.
 
-The *rating-by-sorting* approach, on the other hand, only determines for each University a less precise but *prudent* rating of its individual enrolment quality, furthermore supported by a known majority of performance criteria significance; a somehow *fairer* and *robuster* result, but, much less evident for easily comparing the apparent enrolment quality among Universities. Contradictorily, or not at all valuated Universities, for instance, will appear trivially rated into more or less the whole range of 9-tiles.
-
-Let us conclude by saying that we prefer this latter *rating-by-scoring* approach; perhaps impreciser, due the case given, to missing and contradictory data; yet, well grounded in a powerful bipolar-valued logical and computational framework (see the :ref:`advanced topics of the Digraph3 documentation <Advanced-Topics-label>`).
+Let us conclude by saying that we prefer this latter *rating-by-sorting* approach; perhaps impreciser, due the case given, to missing and contradictory data; yet, well grounded in a powerful bipolar-valued logical and computational framework (see the :ref:`advanced topics of the Digraph3 documentation <Advanced-Topics-label>`).
 
 Back to :ref:`Content Table <Tutorial-label>`   
 

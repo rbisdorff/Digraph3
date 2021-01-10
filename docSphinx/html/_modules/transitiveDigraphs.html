@@ -578,7 +578,7 @@
                 <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;graphViz tools not avalaible! Please check installation.&#39;</span><span class="p">)</span></div></div>
 
 
-<div class="viewcode-block" id="RankingsFusion"><a class="viewcode-back" href="../techDoc.html#transitiveDigraphs.RankingsFusion">[docs]</a><span class="k">class</span> <span class="nc">RankingsFusion</span><span class="p">(</span><span class="n">TransitiveDigraph</span><span class="p">):</span>
+<div class="viewcode-block" id="RankingsFusionDigraph"><a class="viewcode-back" href="../techDoc.html#transitiveDigraphs.RankingsFusionDigraph">[docs]</a><span class="k">class</span> <span class="nc">RankingsFusionDigraph</span><span class="p">(</span><span class="n">TransitiveDigraph</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Specialization of the abstract TransitiveDigraph class for </span>
 <span class="sd">    digraphs resulting from the epistemic</span>
@@ -591,7 +591,7 @@
 
 <span class="sd">    Example application:</span>
 
-<span class="sd">    &gt;&gt;&gt; from TransitiveDigraphs import PartialRanking</span>
+<span class="sd">    &gt;&gt;&gt; from TransitiveDigraphs import RankingsFusionDigraph</span>
 <span class="sd">    &gt;&gt;&gt; from sparseOutrankingDigraphs import PreRankedOutrankingDigraph</span>
 <span class="sd">    &gt;&gt;&gt; t = RandomPerformanceTableau()</span>
 <span class="sd">    &gt;&gt;&gt; pr = PreRankedOutrankingDigraph(t,10,quantilesOrderingStrategy=&#39;average&#39;)</span>
@@ -600,7 +600,7 @@
 <span class="sd">    &gt;&gt;&gt; r2 = pro.boostedRanking</span>
 <span class="sd">    &gt;&gt;&gt; prp = QuantilesRankingDigraph(t,10,quantilesOrderingStrategy=&#39;pessimistic&#39;)</span>
 <span class="sd">    &gt;&gt;&gt; r3 = prp.boostedRanking</span>
-<span class="sd">    &gt;&gt;&gt; wqr = PartialRanking(pr,[r1,r2,r3])</span>
+<span class="sd">    &gt;&gt;&gt; wqr = RankingsFusionDigraph(pr,[r1,r2,r3])</span>
 <span class="sd">    &gt;&gt;&gt; wqr.exportGraphViz(&#39;partialOrdering&#39;,graphType=&quot;pdf&quot;)</span>
 <span class="sd">    </span>
 <span class="sd">    &quot;&quot;&quot;</span>
@@ -650,6 +650,11 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">relation</span> <span class="o">=</span> <span class="n">relation</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">gamma</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">gammaSets</span><span class="p">()</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">notGamma</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">notGammaSets</span><span class="p">()</span></div>
+
+<div class="viewcode-block" id="RankingsFusion"><a class="viewcode-back" href="../techDoc.html#transitiveDigraphs.RankingsFusion">[docs]</a><span class="k">class</span> <span class="nc">RankingsFusion</span><span class="p">(</span><span class="n">RankingsFusionDigraph</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Obsolete dummy for the RankingsFusionDigraph class</span>
+<span class="sd">    &quot;&quot;&quot;</span></div>
 
 <div class="viewcode-block" id="KemenyOrdersFusion"><a class="viewcode-back" href="../techDoc.html#transitiveDigraphs.KemenyOrdersFusion">[docs]</a><span class="k">class</span> <span class="nc">KemenyOrdersFusion</span><span class="p">(</span><span class="n">TransitiveDigraph</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;</span>
