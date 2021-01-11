@@ -201,6 +201,10 @@ class PerformanceQuantiles(PerformanceTableau):
                 self.missingDataProbability = argDict['missingDataProbability']
             except:
                 pass
+            try:
+                self.NA = argDict['NA']
+            except:
+                pass
             self.criteria = argDict['criteria']
             self.quantilesFrequencies = argDict['quantilesFrequencies']
             self.historySizes = argDict['historySizes']

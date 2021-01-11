@@ -58,7 +58,7 @@
 
 
 \title{Tutorials for the Digraph3 Python software resources}
-\date{January 10, 2021}
+\date{January 11, 2021}
 \release{3.9.1}
 \author{Raymond Bisdorff}
 \newcommand{\sphinxlogo}{\sphinxincludegraphics{introDoc3.png}\par}
@@ -5106,24 +5106,24 @@ Parameter \sphinxstyleemphasis{historySize} (see \hyperref[\detokenize{tutorial:
 
 \subsection{Rating new performances with quantile norms}
 \label{\detokenize{tutorial:rating-new-performances-with-quantile-norms}}
-For \sphinxstyleemphasis{absolute rating} of a newly given set of decision alternatives with the help of empirical performance quantiles estimated from historical data, we provide the \sphinxcode{\sphinxupquote{sortingDigraphs.NormedQuantilesRatingDigraph}} class, a specialisation of the \sphinxcode{\sphinxupquote{sortingDigraphs.SortingDigraph}} class.
+For \sphinxstyleemphasis{absolute rating} of a newly given set of decision alternatives with the help of empirical performance quantiles estimated from historical data, we provide the \sphinxcode{\sphinxupquote{sortingDigraphs.LearnedQuantilesRatingDigraph}} class, a specialisation of the \sphinxcode{\sphinxupquote{sortingDigraphs.SortingDigraph}} class.
 
 The constructor requires a valid \sphinxcode{\sphinxupquote{performanceQuantiles.PerformanceQuantiles}} instance.
 
 \begin{sphinxadmonition}{note}{Note:}
-It is important to notice that the \sphinxcode{\sphinxupquote{sortingDigraphs.NormedQuantilesRatingDigraph}} class, contrary to the generic \sphinxcode{\sphinxupquote{outrankingDigraphs.OutrankingDigraph}} class, does not inherit from the generic \sphinxcode{\sphinxupquote{perfTabs.PerformanceTableau}} class, but instead from the \sphinxcode{\sphinxupquote{performanceQuantiles.PerformanceQuantiles}} class. The \sphinxstylestrong{actions} in such a \sphinxcode{\sphinxupquote{sortingDigraphs.NormedQuantilesRatingDigraph}} class instance contain not only the newly given decision alternatives, but also the historical quantile profiles obtained from a given \sphinxcode{\sphinxupquote{performanceQuantiles.PerformanceQuantiles}} class instance, i.e. estimated quantile bins’ performance limits from historical performance data.
+It is important to notice that the \sphinxcode{\sphinxupquote{LearnedQuantilesRatingDigraph}} class, contrary to the generic \sphinxcode{\sphinxupquote{OutrankingDigraph}} class, does not inherit from the generic \sphinxcode{\sphinxupquote{PerformanceTableau}} class, but instead from the \sphinxcode{\sphinxupquote{PerformanceQuantiles}} class. The \sphinxstylestrong{actions} in such a \sphinxcode{\sphinxupquote{LearnedQuantilesRatingDigraph}} class instance contain not only the newly given decision alternatives, but also the historical quantile profiles obtained from a given \sphinxcode{\sphinxupquote{PerformanceQuantiles}} class instance, i.e. estimated quantile bins’ performance limits from historical performance data.
 \end{sphinxadmonition}
 
 We reconsider the \sphinxcode{\sphinxupquote{PerformanceQuantiles}} object instance \sphinxstyleemphasis{pq} as computed in the previous section. Let \sphinxstyleemphasis{newActions} be a list of 10 new decision alternatives generated with the same random performance tableau model and including the two decision alternatives \sphinxstyleemphasis{a1001} and \sphinxstyleemphasis{a1010} mentioned at the beginning.
 \sphinxSetupCaptionForVerbatim{Computing an absolute rating of 10 new decision alternatives}
 \def\sphinxLiteralBlockLabel{\label{\detokenize{tutorial:normedratinggraph}}}
 \begin{sphinxVerbatim}[commandchars=\\\{\},numbers=left,firstnumber=1,stepnumber=1]
-\PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{k+kn}{from} \PYG{n+nn}{sortingDigraphs} \PYG{k+kn}{import} \PYG{n}{NormedQuantilesRatingDigraph}
+\PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{k+kn}{from} \PYG{n+nn}{sortingDigraphs} \PYG{k+kn}{import} \PYG{n}{LearnedQuantilesRatingDigraph}
 \PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{newActions} \PYG{o}{=} \PYG{n}{rpg}\PYG{o}{.}\PYG{n}{randomActions}\PYG{p}{(}\PYG{l+m+mi}{10}\PYG{p}{)}
-\PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{nqr} \PYG{o}{=} \PYG{n}{NormedQuantilesRatingDigraph}\PYG{p}{(}\PYG{n}{pq}\PYG{p}{,}\PYG{n}{newActions}\PYG{p}{,}\PYG{n}{rankingRule}\PYG{o}{=}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{best}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{)}
+\PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{nqr} \PYG{o}{=} \PYG{n}{LearnedQuantilesRatingDigraph}\PYG{p}{(}\PYG{n}{pq}\PYG{p}{,}\PYG{n}{newActions}\PYG{p}{,}\PYG{n}{rankingRule}\PYG{o}{=}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{best}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{)}
 \PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{nqr}
 \PYG{g+go}{ *\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{} Object instance description}
-\PYG{g+go}{ Instance class      : NormedQuantilesRatingDigraph}
+\PYG{g+go}{ Instance class      : LearnedQuantilesRatingDigraph}
 \PYG{g+go}{ Instance name       : normedRatingDigraph}
 \PYG{g+go}{ \PYGZsh{} Criteria          : 7}
 \PYG{g+go}{ \PYGZsh{} Quantile profiles : 4}
@@ -5149,7 +5149,7 @@ We reconsider the \sphinxcode{\sphinxupquote{PerformanceQuantiles}} object insta
 \PYG{g+go}{  Compute sorting  : 0.00000}
 \end{sphinxVerbatim}
 
-Data input to the \sphinxcode{\sphinxupquote{sortingDigraphs.NormedQuantilesRatingDigraph}} class constructor (see \hyperref[\detokenize{tutorial:normedratinggraph}]{Listing \ref{\detokenize{tutorial:normedratinggraph}}} Line 3) are a valid PerformanceQuantiles object \sphinxstyleemphasis{pq} and a compatible list \sphinxstyleemphasis{newActions} of new decision alternatives generated from the same random origin.
+Data input to the \sphinxcode{\sphinxupquote{sortingDigraphs.LearnedQuantilesRatingDigraph}} class constructor (see \hyperref[\detokenize{tutorial:normedratinggraph}]{Listing \ref{\detokenize{tutorial:normedratinggraph}}} Line 3) are a valid PerformanceQuantiles object \sphinxstyleemphasis{pq} and a compatible list \sphinxstyleemphasis{newActions} of new decision alternatives generated from the same random origin.
 
 Let us have a look at the digraph’s nodes, here called \sphinxstylestrong{newActions}.
 \sphinxSetupCaptionForVerbatim{Performance tableau of the new incoming decision alternatives}
@@ -5170,7 +5170,7 @@ Let us have a look at the digraph’s nodes, here called \sphinxstylestrong{newA
 
 Among the 10 new incoming decision alternatives (see \hyperref[\detokenize{tutorial:newperftab}]{Listing \ref{\detokenize{tutorial:newperftab}}}), we recognize alternatives \sphinxstyleemphasis{a1001} (see column 2) and \sphinxstyleemphasis{a1010} (see last column) we have mentioned in our introduction.
 
-The \sphinxcode{\sphinxupquote{sortingDigraphs.NormedQuantilesRatingDigraph}} class instance’s \sphinxstyleemphasis{actions} dictionary includes as well the closed lower limits of the four quartile classes: \sphinxstyleemphasis{m1} = {[}0.0\sphinxhyphen{} {[}, \sphinxstyleemphasis{m2} = {[}0.25\sphinxhyphen{} {[}, \sphinxstyleemphasis{m3} = {[}0.5\sphinxhyphen{} {[}, \sphinxstyleemphasis{m4} = {[}0.75 \sphinxhyphen{} {[}. We find these limits in a \sphinxstyleemphasis{profiles} attribute (see \hyperref[\detokenize{tutorial:limitingprofiles}]{Listing \ref{\detokenize{tutorial:limitingprofiles}}} below).
+The \sphinxcode{\sphinxupquote{sortingDigraphs.LearnedQuantilesRatingDigraph}} class instance’s \sphinxstyleemphasis{actions} dictionary includes as well the closed lower limits of the four quartile classes: \sphinxstyleemphasis{m1} = {[}0.0\sphinxhyphen{} {[}, \sphinxstyleemphasis{m2} = {[}0.25\sphinxhyphen{} {[}, \sphinxstyleemphasis{m3} = {[}0.5\sphinxhyphen{} {[}, \sphinxstyleemphasis{m4} = {[}0.75 \sphinxhyphen{} {[}. We find these limits in a \sphinxstyleemphasis{profiles} attribute (see \hyperref[\detokenize{tutorial:limitingprofiles}]{Listing \ref{\detokenize{tutorial:limitingprofiles}}} below).
 \sphinxSetupCaptionForVerbatim{Showing the limiting profiles of the rating quantiles}
 \def\sphinxLiteralBlockLabel{\label{\detokenize{tutorial:limitingprofiles}}}
 \begin{sphinxVerbatim}[commandchars=\\\{\},numbers=left,firstnumber=1,stepnumber=1]
@@ -5187,9 +5187,9 @@ The \sphinxcode{\sphinxupquote{sortingDigraphs.NormedQuantilesRatingDigraph}} cl
 \PYG{g+go}{    \PYGZsq{}c2\PYGZsq{}  | \PYGZhy{}96.4  \PYGZhy{}72.2  \PYGZhy{}52.3  \PYGZhy{}34.0}
 \end{sphinxVerbatim}
 
-The main run time (see \hyperref[\detokenize{tutorial:normedratinggraph}]{Listing \ref{\detokenize{tutorial:normedratinggraph}}} Lines 23\sphinxhyphen{}29) is spent by the class constructor in computing a bipolar\sphinxhyphen{}valued outranking relation on the extended actions set including both the new alternatives as well as the quartile class limits. In case of large volumes, i.e. many new decision alternatives and centile classes for instance, a multi\sphinxhyphen{}threading version may be used when multiple processing cores are available (see the technical description of the \sphinxcode{\sphinxupquote{sortingDigraphs.NormedQuantilesRatingDigraph}} class).
+The main run time (see \hyperref[\detokenize{tutorial:normedratinggraph}]{Listing \ref{\detokenize{tutorial:normedratinggraph}}} Lines 23\sphinxhyphen{}29) is spent by the class constructor in computing a bipolar\sphinxhyphen{}valued outranking relation on the extended actions set including both the new alternatives as well as the quartile class limits. In case of large volumes, i.e. many new decision alternatives and centile classes for instance, a multi\sphinxhyphen{}threading version may be used when multiple processing cores are available (see the technical description of the \sphinxcode{\sphinxupquote{sortingDigraphs.LearnedQuantilesRatingDigraph}} class).
 
-The actual rating procedure will rely on a complete ranking of the new decision alternatives as well as the quantile class limits obtained from the corresponding bipolar\sphinxhyphen{}valued outranking digraph. Two efficient and scalable ranking rules, the \sphinxstylestrong{Copeland} and its valued version, the \sphinxstylestrong{Netflows} rule may be used for this purpose. The \sphinxstyleemphasis{rankingRule} parameter allows to choose one of both. With \sphinxstyleemphasis{rankingRule=’best’} (see \hyperref[\detokenize{tutorial:limitingprofiles}]{Listing \ref{\detokenize{tutorial:limitingprofiles}}} Line 2 ) the \sphinxcode{\sphinxupquote{NormedQuantilesRatingDigraph}} constructor will choose the ranking rule that results in the highest ordinal correlation with the given outranking relation (see \sphinxcite{tutorial:bis-2012}).
+The actual rating procedure will rely on a complete ranking of the new decision alternatives as well as the quantile class limits obtained from the corresponding bipolar\sphinxhyphen{}valued outranking digraph. Two efficient and scalable ranking rules, the \sphinxstylestrong{Copeland} and its valued version, the \sphinxstylestrong{Netflows} rule may be used for this purpose. The \sphinxstyleemphasis{rankingRule} parameter allows to choose one of both. With \sphinxstyleemphasis{rankingRule=’best’} (see \hyperref[\detokenize{tutorial:limitingprofiles}]{Listing \ref{\detokenize{tutorial:limitingprofiles}}} Line 2 ) the \sphinxcode{\sphinxupquote{LearnedQuantilesRatingDigraph}} constructor will choose the ranking rule that results in the highest ordinal correlation with the given outranking relation (see \sphinxcite{tutorial:bis-2012}).
 
 In this rating example, the \sphinxstyleemphasis{Copeland} rule appears to be the more appropriate ranking rule.
 \sphinxSetupCaptionForVerbatim{Copeland ranking of new alternatives and historical quartile limits}
@@ -5349,7 +5349,7 @@ A preciser rating result may indeed be achieved when using \sphinxstylestrong{de
 \PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{pq1} \PYG{o}{=} \PYG{n}{PerformanceQuantiles}\PYG{p}{(}\PYG{n}{tp}\PYG{p}{,} \PYG{n}{numberOfBins} \PYG{o}{=} \PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{deciles}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{,}\PYGZbs{}
 \PYG{g+go}{                 LowerClosed=True)}
 \PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{pq1}\PYG{o}{.}\PYG{n}{updateQuantiles}\PYG{p}{(}\PYG{n}{newTab}\PYG{p}{,}\PYG{n}{historySize}\PYG{o}{=}\PYG{k+kc}{None}\PYG{p}{)}
-\PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{nqr1} \PYG{o}{=} \PYG{n}{NormedQuantilesRatingDigraph}\PYG{p}{(}\PYG{n}{pq1}\PYG{p}{,}\PYG{n}{newActions}\PYG{p}{,}\PYG{n}{rankingRule}\PYG{o}{=}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{best}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{)}
+\PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{nqr1} \PYG{o}{=} \PYG{n}{LearnedQuantilesRatingDigraph}\PYG{p}{(}\PYG{n}{pq1}\PYG{p}{,}\PYG{n}{newActions}\PYG{p}{,}\PYG{n}{rankingRule}\PYG{o}{=}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{best}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{)}
 \PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{nqr1}\PYG{o}{.}\PYG{n}{showQuantilesRating}\PYG{p}{(}\PYG{p}{)}
 \PYG{g+go}{ *\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{} Deciles rating result \PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}}
 \PYG{g+go}{ [0.60 \PYGZhy{} 0.70[ [\PYGZsq{}a1005\PYGZsq{}, \PYGZsq{}a1010\PYGZsq{}, \PYGZsq{}a1008\PYGZsq{}, \PYGZsq{}a1002\PYGZsq{}]}
@@ -5380,7 +5380,7 @@ To avoid having to recompute performance deciles from historical data when wishi
 \sphinxSetupCaptionForVerbatim{From deciles interpolated quartiles rating result}
 \def\sphinxLiteralBlockLabel{\label{\detokenize{tutorial:interpolatedquartilesrating}}}
 \begin{sphinxVerbatim}[commandchars=\\\{\},numbers=left,firstnumber=1,stepnumber=1]
-\PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{nqr2} \PYG{o}{=} \PYG{n}{NormedQuantilesRatingDigraph}\PYG{p}{(}\PYG{n}{pq1}\PYG{p}{,}\PYG{n}{newActions}\PYG{p}{,}
+\PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{nqr2} \PYG{o}{=} \PYG{n}{LearnedQuantilesRatingDigraph}\PYG{p}{(}\PYG{n}{pq1}\PYG{p}{,}\PYG{n}{newActions}\PYG{p}{,}
 \PYG{g+go}{                   quantiles=\PYGZsq{}quartiles\PYGZsq{})}
 \PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{nqr2}\PYG{o}{.}\PYG{n}{showQuantilesRating}\PYG{p}{(}\PYG{p}{)}
 \PYG{g+go}{ *\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{} Deciles rating result \PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}}
@@ -5543,13 +5543,13 @@ We may inspect the resulting 9\sphinxhyphen{}tiling limits in a browser view.
 
 In \hyperref[\detokenize{tutorial:score9limits}]{Fig.\@ \ref{\detokenize{tutorial:score9limits}}}, we see confirmed again the \sphinxstylestrong{incommensurability} between the subjects, we noticed already in the apparent enrolment quality scoring , especially between \sphinxstyleemphasis{Law Studies} (39.1 \sphinxhyphen{} 51.1) and \sphinxstyleemphasis{Politology} (50.5 \sphinxhyphen{} 65.9). Universities valuated in \sphinxstyleemphasis{Law studies} but not in \sphinxstyleemphasis{Politology}, like the University of \sphinxstyleemphasis{Bielefeld}, would see their enrolment quality \sphinxstyleemphasis{unfairly weakened} when simply averaging the enrolment quality scores over valuated subjects.
 
-We add, now, these 9\sphinxhyphen{}tiling quality score limits to the enrolment quality records of the 41 Universities and rank all these records conjointly together with the help of the \sphinxcode{\sphinxupquote{sortingDigraphs.NormedQuantilesRatingDigraph}} constructor and by using the {\hyperref[\detokenize{tutorial:copeland-ranking-label}]{\sphinxcrossref{\DUrole{std,std-ref}{Copeland ranking rule}}}} (\autopageref*{\detokenize{tutorial:copeland-ranking-label}}).
+We add, now, these 9\sphinxhyphen{}tiling quality score limits to the enrolment quality records of the 41 Universities and rank all these records conjointly together with the help of the \sphinxcode{\sphinxupquote{sortingDigraphs.LearnedQuantilesRatingDigraph}} constructor and by using the {\hyperref[\detokenize{tutorial:copeland-ranking-label}]{\sphinxcrossref{\DUrole{std,std-ref}{Copeland ranking rule}}}} (\autopageref*{\detokenize{tutorial:copeland-ranking-label}}).
 
 The resulting ranking of the 41 Universities including the lower\sphinxhyphen{}closed 9\sphinxhyphen{}tiling score limits may be nicely illustrated  with the help of a corresponding heatmap view (see \hyperref[\detokenize{tutorial:ninetiledheatmap}]{Fig.\@ \ref{\detokenize{tutorial:ninetiledheatmap}}}).
 
 \begin{sphinxVerbatim}[commandchars=\\\{\}]
-\PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{k+kn}{from} \PYG{n+nn}{sortingDigraphs} \PYG{k+kn}{import} \PYG{n}{NormedQuantilesRatingDigraph}
-\PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{nqr} \PYG{o}{=} \PYG{n}{NormedQuantilesRatingDigraph}\PYG{p}{(}\PYG{n}{pq}\PYG{p}{,}\PYG{n}{t}\PYG{p}{,}\PYGZbs{}
+\PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{k+kn}{from} \PYG{n+nn}{sortingDigraphs} \PYG{k+kn}{import} \PYG{n}{LearnedQuantilesRatingDigraph}
+\PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{nqr} \PYG{o}{=} \PYG{n}{LearnedQuantilesRatingDigraph}\PYG{p}{(}\PYG{n}{pq}\PYG{p}{,}\PYG{n}{t}\PYG{p}{,}\PYGZbs{}
 \PYG{g+go}{                                       rankingRule=\PYGZsq{}Copeland\PYGZsq{})}
 \PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{nqr}\PYG{o}{.}\PYG{n}{showHTMLRatingHeatmap}\PYG{p}{(}\PYG{n}{colorLevels}\PYG{o}{=}\PYG{l+m+mi}{7}\PYG{p}{,}\PYG{n}{Correlations}\PYG{o}{=}\PYG{k+kc}{True}\PYG{p}{,}\PYGZbs{}
 \PYG{g+go}{             ndigits=1,rankingRule=\PYGZsq{}Copeland\PYGZsq{})}
@@ -5675,7 +5675,7 @@ Here we observe indeed 93 such outranking circuits, like: \sphinxstyleemphasis{B
 \begin{footnote}[31]\sphinxAtStartFootnote
 Converted by a +1.0 shift and a 0.5 * 100 scale transform from a bipolar\sphinxhyphen{}valued credibility of +0.07 in {[}\sphinxhyphen{}1.0, +1.0{]} to a majority (in \%) support.
 %
-\end{footnote} (see \hyperref[\detokenize{tutorial:chordlesscircuits}]{Listing \ref{\detokenize{tutorial:chordlesscircuits}}} circuit 29 above). In the \sphinxstyleemphasis{Copeland} ranking result shown in \hyperref[\detokenize{tutorial:ninetiledheatmap}]{Fig.\@ \ref{\detokenize{tutorial:ninetiledheatmap}}}, these Universities appear positioned respectively at ranks 10, 4 and 6. The occurrence in digraph \sphinxstyleemphasis{dg} of so many outranking circuits makes any \sphinxstyleemphasis{forced} linear ranking \sphinxstyleemphasis{doubtful}; independently of the specific ranking rule we might have applied.
+\end{footnote} (see \hyperref[\detokenize{tutorial:chordlesscircuits}]{Listing \ref{\detokenize{tutorial:chordlesscircuits}}} circuit 29 above). In the \sphinxstyleemphasis{Copeland} ranking result shown in \hyperref[\detokenize{tutorial:ninetiledheatmap}]{Fig.\@ \ref{\detokenize{tutorial:ninetiledheatmap}}}, these Universities appear positioned respectively at ranks 10, 4 and 6. In the \sphinxstyleemphasis{NetFlows} ranking result they would appear respectively at ranks 10, 6 and 5, thus inverting the poritions of \sphinxstyleemphasis{Konstanz} and \sphinxstyleemphasis{München}. The occurrence in digraph \sphinxstyleemphasis{dg} of so many outranking circuits makes indeed any \sphinxstyleemphasis{forced} linear ranking \sphinxstyleemphasis{doubtful}; independently of the specific ranking rule we might have applied.
 
 To effectively check the quality of our \sphinxstyleemphasis{Copeland} \sphinxstyleemphasis{rating\sphinxhyphen{}by\sphinxhyphen{}ranking} result, we shall now compute a direct \sphinxstylestrong{sorting into 9\sphinxhyphen{}tiles} of the enrolment quality scores, without using any outranking digraph based ranking rule.
 

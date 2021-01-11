@@ -3141,10 +3141,10 @@ class QuantilesSortingDigraph(SortingDigraph):
             currActions = currActions - ibch
         return sortingRelation
 
-##############################################################333333
-#-------------
+##############################################################
+
 from performanceQuantiles import PerformanceQuantiles  
-class NormedQuantilesRatingDigraph(QuantilesSortingDigraph,PerformanceQuantiles):
+class LearnedQuantilesRatingDigraph(QuantilesSortingDigraph,PerformanceQuantiles):
     """
     Specialisation of the root :py:class:`sortingDigraphs.SortingDigraph` class
     for absolute rating of a new set of decision actions with
@@ -3171,10 +3171,10 @@ class NormedQuantilesRatingDigraph(QuantilesSortingDigraph,PerformanceQuantiles)
         >>> # rating the new set of decision actions after
         >>> # updating the historical performance quantiles
         >>> pq.updateQuantiles(newActions,historySize=None)
-        >>> nqr = NormedQuantilesRatingDigraph(pq,newActions)
+        >>> nqr = LearnedQuantilesRatingDigraph(pq,newActions)
         >>> # inspecting the rating result
         >>> nqr.showQuantilesRating()
-        *-------- Normed quantiles rating result ---------
+        *-------- Learned quantiles rating result ---------
         [0.60 - 0.70[ ['a01']
         [0.50 - 0.60[ ['a07', 'a10', 'a02', 'a08', 'a09']
         [0.40 - 0.50[ ['a03', 'a06', 'a05']
@@ -3182,7 +3182,7 @@ class NormedQuantilesRatingDigraph(QuantilesSortingDigraph,PerformanceQuantiles)
         >>> nqr.showHTMLRatingHeatmap(pageTitle='Heatmap of Quantiles Rating')
 
     .. image:: heatMap3.png
-        :alt: usage example of Normed Quantiles Rating Digraph
+        :alt: usage example of Learned Quantiles Rating Digraph
         :width: 500 px
         :align: center
 
@@ -3231,7 +3231,7 @@ class NormedQuantilesRatingDigraph(QuantilesSortingDigraph,PerformanceQuantiles)
         self.historySizes = deepcopy(perfQuantiles.historySizes)
         self.cdf = deepcopy(perfQuantiles.cdf)
         self.NA = deepcopy(perfQuantiles.NA)
-        self.name = 'normedRatingDigraph'
+        self.name = 'learnedRatingDigraph'
         # import the actions to rate
         if newData != None:
             try:  # randomActions format {'actions': .., 'evaluation':..}
@@ -4081,7 +4081,7 @@ class NormedQuantilesRatingDigraph(QuantilesSortingDigraph,PerformanceQuantiles)
         dot -Grankdir=TB -Tpng quantilesRatingDigraph.dot -o quantilesRatingDigraph.png
 
         .. image:: quantilesRatingDigraph.png
-            :alt: usage example of Normed Quantiles Rating Digraph
+            :alt: usage example of Learned Quantiles Rating Digraph
             :width: 400 px
             :align: center
         
@@ -4396,7 +4396,7 @@ class NormedQuantilesRatingDigraph(QuantilesSortingDigraph,PerformanceQuantiles)
 
               - *actionsList* and *criteriaList*, if provided,  give the possibility to show the decision alternatives, resp. criteria, in a given ordering.
               - *ndigits* = 0 may be used to show integer evaluation values.
-              - If no *actionsList* is provided, the decision actions are ordered from the best to the worst following the ranking of the NormedQuatilesRatingDigraph instance.              
+              - If no *actionsList* is provided, the decision actions are ordered from the best to the worst following the ranking of the LearnedQuatilesRatingDigraph instance.              
               - It may interesting in some cases to use *RankingRule* = 'NetFlows'.
               - With *Correlations* = *True* and *criteriaList* = *None*, the criteria will be presented from left to right in decreasing order of the correlations between the marginal criterion based ranking and the global ranking used for presenting the decision alternatives.
               - Computing the marginal correlations may be boosted with Threading = True, if multiple parallel computing cores are available.
@@ -4411,7 +4411,7 @@ class NormedQuantilesRatingDigraph(QuantilesSortingDigraph,PerformanceQuantiles)
             ...                           colorLevels = 5)
 
         .. image:: heatMap1.png
-            :alt: usage example of Normed Quantiles Rating Digraph
+            :alt: usage example of Learned Quantiles Rating Digraph
             :width: 550 px
             :align: center
 
@@ -4421,7 +4421,7 @@ class NormedQuantilesRatingDigraph(QuantilesSortingDigraph,PerformanceQuantiles)
         fileName = '/tmp/performanceHeatmap.html'
         fo = open(fileName,'w')
         if pageTitle == None:
-            print('A ranking rule - Copeland (default) or NetFlows may be given with the NormedQuantilesRatingDigraph constructor')
+            print('A ranking rule - Copeland (default) or NetFlows may be given with the LearnedQuantilesRatingDigraph constructor')
             pageTitle = 'Heatmap of Performance Tableau \'%s\'' % self.name
         #quantiles = len(self.quantilesFrequencies)
         fo.write(self._htmlRatingHeatmap(argCriteriaList=criteriaList,
@@ -4540,6 +4540,11 @@ class NormedQuantilesRatingDigraph(QuantilesSortingDigraph,PerformanceQuantiles)
 ##        else:
 ##            return set([action])           
 
+class NormedQuantilesRatingDigraph(LearnedQuantilesRatingDigraph):
+    """
+    Obsolete name for backward compatibility
+    """
+#
 ##########################################################3
 #----------test SortingDigraph class ----------------
 if __name__ == "__main__":
@@ -4608,7 +4613,7 @@ if __name__ == "__main__":
     tpg1 = PerfTabGenerator(tp1,instanceCounter=0,seed=seed)
     newActions = tpg1.randomActions(20)
     pq1.updateQuantiles(newActions,historySize=None)
-    ira1 = NormedQuantilesRatingDigraph(pq1,newActions,\
+    ira1 = LearnedQuantilesRatingDigraph(pq1,newActions,\
                                     rankingRule='Copeland',\
                                    WithSorting=True,Debug=False,\
                                        Threading=MP,nbrOfCPUs=nbrOfCPUs)

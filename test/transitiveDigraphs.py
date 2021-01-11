@@ -294,7 +294,8 @@ class TransitiveDigraph(Digraph):
             if Comments:
                 print('graphViz tools not avalaible! Please check installation.')
 
-    def exportGraphViz(self,fileName=None,relation=None,direction='best',\
+    def exportGraphViz(self,fileName=None,direction='best',\
+                       WithRatingDecoration=False,\
                        Comments=True,graphType='png',\
                        graphSize='7,7',\
                        fontSize=10,Debug=False):
@@ -333,8 +334,8 @@ class TransitiveDigraph(Digraph):
             print('*---- exporting a dot file for GraphViz tools ---------*')
         actionKeys = [x for x in digraph.actions]
         n = len(actionKeys)
-        if relation == None:
-            relation = deepcopy(digraph.relation)
+        #if relation == None:
+        #    relation = deepcopy(digraph.relation)
         Med = digraph.valuationdomain['med']
         i = 0
         if fileName == None:
@@ -354,13 +355,30 @@ class TransitiveDigraph(Digraph):
         fo.write('\\nDigraph3 (graphviz)\\n R. Bisdorff, 2020", size="')
         fo.write(graphSize),fo.write('",fontsize=%d];\n' % fontSize)
         # nodes
-        for x in actionKeys:  
-            try:
-                nodeName = digraph.actions[x]['shortName']
-            except:
-                nodeName = str(x)
-            node = '%s [shape = "circle", label = "%s", fontsize=%d];\n'\
-                   % (str(_safeName(x)),_safeName(nodeName),fontSize)
+        for x in actionKeys:
+            if WithRatingDecoration:
+                if x in digraph.profiles:
+                    cat = digraph.profiles[x]['category']
+                    if digraph.LowerClosed:
+                        nodeName = digraph.categories[cat]['lowLimit'] + ' -'
+                    else:
+                        nodeName = '- ' +digraph.categories[cat]['highLimit']
+                    node = '%s [shape = "box", fillcolor=lightcoral, style=filled, label = "%s", fontsize=%d];\n'\
+                       % (str(x),nodeName,fontSize)           
+                else:
+                    try:
+                        nodeName = digraph.actions[x]['shortName']
+                    except:
+                        nodeName = str(x)
+                    node = '%s [shape = "circle", label = "%s", fontsize=%d];\n'\
+                       % (str(_safeName(x)),_safeName(nodeName),fontSize)       
+            else:
+                try:
+                    nodeName = digraph.actions[x]['shortName']
+                except:
+                    nodeName = str(x)
+                node = '%s [shape = "circle", label = "%s", fontsize=%d];\n'\
+                       % (str(_safeName(x)),_safeName(nodeName),fontSize)
             fo.write(node)
         # same ranks for Hasses equivalence classes
         k = len(rankingByChoosing)
@@ -373,9 +391,7 @@ class TransitiveDigraph(Digraph):
             print(i,sameRank)
             fo.write(sameRank)
 
-        # save original relation
-        #originalRelation = deepcopy(relation)
-        #digraph.closeTransitive(Reverse=False)
+        # open transitive links and write the positive arcs
         relation = digraph.closeTransitive(Reverse=True,InSite=False)
         for i in range(k-1):
             ich = rankingByChoosing[i][1]

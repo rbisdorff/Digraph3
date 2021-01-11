@@ -370,6 +370,10 @@
                 <span class="bp">self</span><span class="o">.</span><span class="n">missingDataProbability</span> <span class="o">=</span> <span class="n">argDict</span><span class="p">[</span><span class="s1">&#39;missingDataProbability&#39;</span><span class="p">]</span>
             <span class="k">except</span><span class="p">:</span>
                 <span class="k">pass</span>
+            <span class="k">try</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">NA</span> <span class="o">=</span> <span class="n">argDict</span><span class="p">[</span><span class="s1">&#39;NA&#39;</span><span class="p">]</span>
+            <span class="k">except</span><span class="p">:</span>
+                <span class="k">pass</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">criteria</span> <span class="o">=</span> <span class="n">argDict</span><span class="p">[</span><span class="s1">&#39;criteria&#39;</span><span class="p">]</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">quantilesFrequencies</span> <span class="o">=</span> <span class="n">argDict</span><span class="p">[</span><span class="s1">&#39;quantilesFrequencies&#39;</span><span class="p">]</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">historySizes</span> <span class="o">=</span> <span class="n">argDict</span><span class="p">[</span><span class="s1">&#39;historySizes&#39;</span><span class="p">]</span>

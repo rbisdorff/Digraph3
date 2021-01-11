@@ -4059,27 +4059,27 @@ Parameter *historySize* (see :numref:`perfGenerator` Line 5) of the :py:meth:`pe
 Rating new performances with quantile norms
 ...........................................
 
-For *absolute rating* of a newly given set of decision alternatives with the help of empirical performance quantiles estimated from historical data, we provide the :py:class:`sortingDigraphs.NormedQuantilesRatingDigraph` class, a specialisation of the :py:class:`sortingDigraphs.SortingDigraph` class.
+For *absolute rating* of a newly given set of decision alternatives with the help of empirical performance quantiles estimated from historical data, we provide the :py:class:`sortingDigraphs.LearnedQuantilesRatingDigraph` class, a specialisation of the :py:class:`sortingDigraphs.SortingDigraph` class.
 
 The constructor requires a valid :py:class:`performanceQuantiles.PerformanceQuantiles` instance.
 
 .. note::
 
-   It is important to notice that the :py:class:`sortingDigraphs.NormedQuantilesRatingDigraph` class, contrary to the generic :py:class:`outrankingDigraphs.OutrankingDigraph` class, does not inherit from the generic :py:class:`perfTabs.PerformanceTableau` class, but instead from the :py:class:`performanceQuantiles.PerformanceQuantiles` class. The **actions** in such a :py:class:`sortingDigraphs.NormedQuantilesRatingDigraph` class instance contain not only the newly given decision alternatives, but also the historical quantile profiles obtained from a given :py:class:`performanceQuantiles.PerformanceQuantiles` class instance, i.e. estimated quantile bins' performance limits from historical performance data.
+   It is important to notice that the :py:class:`LearnedQuantilesRatingDigraph` class, contrary to the generic :py:class:`OutrankingDigraph` class, does not inherit from the generic :py:class:`PerformanceTableau` class, but instead from the :py:class:`PerformanceQuantiles` class. The **actions** in such a :py:class:`LearnedQuantilesRatingDigraph` class instance contain not only the newly given decision alternatives, but also the historical quantile profiles obtained from a given :py:class:`PerformanceQuantiles` class instance, i.e. estimated quantile bins' performance limits from historical performance data.
 
-We reconsider the :code:`PerformanceQuantiles` object instance *pq* as computed in the previous section. Let *newActions* be a list of 10 new decision alternatives generated with the same random performance tableau model and including the two decision alternatives *a1001* and *a1010* mentioned at the beginning.
+We reconsider the :py:class:`PerformanceQuantiles` object instance *pq* as computed in the previous section. Let *newActions* be a list of 10 new decision alternatives generated with the same random performance tableau model and including the two decision alternatives *a1001* and *a1010* mentioned at the beginning.
 
 .. code-block:: pycon
    :linenos:
    :name: normedRatingGraph
    :caption: Computing an absolute rating of 10 new decision alternatives
 	     
-   >>> from sortingDigraphs import NormedQuantilesRatingDigraph
+   >>> from sortingDigraphs import LearnedQuantilesRatingDigraph
    >>> newActions = rpg.randomActions(10)
-   >>> nqr = NormedQuantilesRatingDigraph(pq,newActions,rankingRule='best')
+   >>> nqr = LearnedQuantilesRatingDigraph(pq,newActions,rankingRule='best')
    >>> nqr
     *---- Object instance description
-    Instance class      : NormedQuantilesRatingDigraph
+    Instance class      : LearnedQuantilesRatingDigraph
     Instance name       : normedRatingDigraph
     # Criteria          : 7
     # Quantile profiles : 4
@@ -4104,7 +4104,7 @@ We reconsider the :code:`PerformanceQuantiles` object instance *pq* as computed 
      Compute rating   : 0.00186
      Compute sorting  : 0.00000
 
-Data input to the :py:class:`sortingDigraphs.NormedQuantilesRatingDigraph` class constructor (see :numref:`normedRatingGraph` Line 3) are a valid PerformanceQuantiles object *pq* and a compatible list *newActions* of new decision alternatives generated from the same random origin.
+Data input to the :py:class:`sortingDigraphs.LearnedQuantilesRatingDigraph` class constructor (see :numref:`normedRatingGraph` Line 3) are a valid PerformanceQuantiles object *pq* and a compatible list *newActions* of new decision alternatives generated from the same random origin.
 
 Let us have a look at the digraph's nodes, here called **newActions**.
 
@@ -4127,7 +4127,7 @@ Let us have a look at the digraph's nodes, here called **newActions**.
 
 Among the 10 new incoming decision alternatives (see :numref:`newPerfTab`), we recognize alternatives *a1001* (see column 2) and *a1010* (see last column) we have mentioned in our introduction.
 
-The :py:class:`sortingDigraphs.NormedQuantilesRatingDigraph` class instance's *actions* dictionary includes as well the closed lower limits of the four quartile classes: *m1* = [0.0- [, *m2* = [0.25- [, *m3* = [0.5- [, *m4* = [0.75 - [. We find these limits in a *profiles* attribute (see :numref:`limitingProfiles` below).
+The :py:class:`sortingDigraphs.LearnedQuantilesRatingDigraph` class instance's *actions* dictionary includes as well the closed lower limits of the four quartile classes: *m1* = [0.0- [, *m2* = [0.25- [, *m3* = [0.5- [, *m4* = [0.75 - [. We find these limits in a *profiles* attribute (see :numref:`limitingProfiles` below).
 
 .. code-block:: pycon
    :linenos:
@@ -4146,9 +4146,9 @@ The :py:class:`sortingDigraphs.NormedQuantilesRatingDigraph` class instance's *a
        'c1'  | -10.0   -7.4   -5.4   -3.4  
        'c2'  | -96.4  -72.2  -52.3  -34.0  
 
-The main run time (see :numref:`normedRatingGraph` Lines 23-29) is spent by the class constructor in computing a bipolar-valued outranking relation on the extended actions set including both the new alternatives as well as the quartile class limits. In case of large volumes, i.e. many new decision alternatives and centile classes for instance, a multi-threading version may be used when multiple processing cores are available (see the technical description of the :py:class:`sortingDigraphs.NormedQuantilesRatingDigraph` class).
+The main run time (see :numref:`normedRatingGraph` Lines 23-29) is spent by the class constructor in computing a bipolar-valued outranking relation on the extended actions set including both the new alternatives as well as the quartile class limits. In case of large volumes, i.e. many new decision alternatives and centile classes for instance, a multi-threading version may be used when multiple processing cores are available (see the technical description of the :py:class:`sortingDigraphs.LearnedQuantilesRatingDigraph` class).
 
-The actual rating procedure will rely on a complete ranking of the new decision alternatives as well as the quantile class limits obtained from the corresponding bipolar-valued outranking digraph. Two efficient and scalable ranking rules, the **Copeland** and its valued version, the **Netflows** rule may be used for this purpose. The *rankingRule* parameter allows to choose one of both. With *rankingRule='best'* (see :numref:`limitingProfiles` Line 2 ) the :code:`NormedQuantilesRatingDigraph` constructor will choose the ranking rule that results in the highest ordinal correlation with the given outranking relation (see [BIS-2012]_).
+The actual rating procedure will rely on a complete ranking of the new decision alternatives as well as the quantile class limits obtained from the corresponding bipolar-valued outranking digraph. Two efficient and scalable ranking rules, the **Copeland** and its valued version, the **Netflows** rule may be used for this purpose. The *rankingRule* parameter allows to choose one of both. With *rankingRule='best'* (see :numref:`limitingProfiles` Line 2 ) the :code:`LearnedQuantilesRatingDigraph` constructor will choose the ranking rule that results in the highest ordinal correlation with the given outranking relation (see [BIS-2012]_).
 
 In this rating example, the *Copeland* rule appears to be the more appropriate ranking rule.
 
@@ -4245,7 +4245,7 @@ A preciser rating result may indeed be achieved when using **deciles** instead o
    >>> pq1 = PerformanceQuantiles(tp, numberOfBins = 'deciles',\
                     LowerClosed=True)
    >>> pq1.updateQuantiles(newTab,historySize=None)
-   >>> nqr1 = NormedQuantilesRatingDigraph(pq1,newActions,rankingRule='best')
+   >>> nqr1 = LearnedQuantilesRatingDigraph(pq1,newActions,rankingRule='best')
    >>> nqr1.showQuantilesRating()
     *-------- Deciles rating result ---------
     [0.60 - 0.70[ ['a1005', 'a1010', 'a1008', 'a1002']
@@ -4279,7 +4279,7 @@ To avoid having to recompute performance deciles from historical data when wishi
    :name: interpolatedQuartilesRating
    :caption: From deciles interpolated quartiles rating result 	  
 
-   >>> nqr2 = NormedQuantilesRatingDigraph(pq1,newActions,
+   >>> nqr2 = LearnedQuantilesRatingDigraph(pq1,newActions,
                       quantiles='quartiles')
    >>> nqr2.showQuantilesRating()
     *-------- Deciles rating result ---------
@@ -4406,12 +4406,12 @@ We may inspect the resulting 9-tiling limits in a browser view.
 
 In :numref:`score9Limits`, we see confirmed again the **incommensurability** between the subjects, we noticed already in the apparent enrolment quality scoring , especially between *Law Studies* (39.1 - 51.1) and *Politology* (50.5 - 65.9). Universities valuated in *Law studies* but not in *Politology*, like the University of *Bielefeld*, would see their enrolment quality *unfairly weakened* when simply averaging the enrolment quality scores over valuated subjects.
 
-We add, now, these 9-tiling quality score limits to the enrolment quality records of the 41 Universities and rank all these records conjointly together with the help of the :py:class:`sortingDigraphs.NormedQuantilesRatingDigraph` constructor and by using the :ref:`Copeland ranking rule <Copeland-Ranking-label>`.
+We add, now, these 9-tiling quality score limits to the enrolment quality records of the 41 Universities and rank all these records conjointly together with the help of the :py:class:`sortingDigraphs.LearnedQuantilesRatingDigraph` constructor and by using the :ref:`Copeland ranking rule <Copeland-Ranking-label>`.
 
 The resulting ranking of the 41 Universities including the lower-closed 9-tiling score limits may be nicely illustrated  with the help of a corresponding heatmap view (see :numref:`ninetiledHeatmap`). 
 
-   >>> from sortingDigraphs import NormedQuantilesRatingDigraph
-   >>> nqr = NormedQuantilesRatingDigraph(pq,t,\
+   >>> from sortingDigraphs import LearnedQuantilesRatingDigraph
+   >>> nqr = LearnedQuantilesRatingDigraph(pq,t,\
                                           rankingRule='Copeland')
    >>> nqr.showHTMLRatingHeatmap(colorLevels=7,Correlations=True,\
                 ndigits=1,rankingRule='Copeland')
@@ -4484,9 +4484,9 @@ We have noticed in the tutorial on :ref:`ranking with multiple criteria <Ranking
        :linenos:
        :caption: Epistemic fusion of Copeland and Netflows rating-by-ranking results 
 
-       >>> nqr = NormedQuantilesRatingDigraph(\
+       >>> nqr = LearnedQuantilesRatingDigraph(\
                        pq,t,rankingRule='Copeland')
-       >>> nqr1 = NormedQuantilesRatingDigraph(\
+       >>> nqr1 = LearnedQuantilesRatingDigraph(\
                        pq,t,rankingRule='NetFlows')
        >>> from transitiveDigraphs import\
                        RankingsFusionDigraph
@@ -4566,7 +4566,7 @@ We may furthermore check if there exists any *cyclic* outranking situations.
      92:  ['marb', 'saar', 'tri'] , credibility : 0.067
      93:  ['mnh', 'mu', 'stu'] , credibility : 0.133
 
-Here we observe indeed 93 such outranking circuits, like: *Berlin Humboldt* > *Konstanz* > *München* > *Berlin Humboldt* supported by a (0.133 + 1.0)/2 = 56.7% majority of subjects [31]_ (see :numref:`chordlessCircuits` circuit 29 above). In the *Copeland* ranking result shown in :numref:`ninetiledHeatmap`, these Universities appear positioned respectively at ranks 10, 4 and 6. The occurrence in digraph *dg* of so many outranking circuits makes any *forced* linear ranking *doubtful*; independently of the specific ranking rule we might have applied.
+Here we observe indeed 93 such outranking circuits, like: *Berlin Humboldt* > *Konstanz* > *München* > *Berlin Humboldt* supported by a (0.133 + 1.0)/2 = 56.7% majority of subjects [31]_ (see :numref:`chordlessCircuits` circuit 29 above). In the *Copeland* ranking result shown in :numref:`ninetiledHeatmap`, these Universities appear positioned respectively at ranks 10, 4 and 6. In the *NetFlows* ranking result they would appear respectively at ranks 10, 6 and 5, thus inverting the poritions of *Konstanz* and *München*. The occurrence in digraph *dg* of so many outranking circuits makes indeed any *forced* linear ranking *doubtful*; independently of the specific ranking rule we might have applied.
 
 To effectively check the quality of our *Copeland* *rating-by-ranking* result, we shall now compute a direct **sorting into 9-tiles** of the enrolment quality scores, without using any outranking digraph based ranking rule.
 

@@ -21,7 +21,7 @@ pq.showHTMLLimitingQuantiles(Transposed=True,Sorted=False)
 
 ###########
 from sortingDigraphs import *
-nqr = NormedQuantilesRatingDigraph(pq,t,rankingRule='Copeland')
+nqr = LearnedQuantilesRatingDigraph(pq,t,rankingRule='Copeland')
 print(nqr)
 nqr.showHTMLRatingHeatmap(rankingRule='Copeland',Correlations=True,ndigits=1)
 nqr.showQuantilesRating()
@@ -32,6 +32,7 @@ nqr1 = NormedQuantilesRatingDigraph(pq,t,rankingRule='NetFlows')
 from transitiveDigraphs import *
 rankings = [nqr.actionsRanking,
             nqr1.actionsRanking]
+print(rankings)
 rf = RankingsFusion(nqr1,rankings)
 rf.exportGraphViz(fileName='fusionResult',WithRatingDecoration=True,graphType='png',graphSize='30,30')
 # For decorating the 9-tiles lower limits the fusionResult.dat file

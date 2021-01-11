@@ -121,8 +121,8 @@ def testKemenyWeakOrder():
     wke.exportGraphViz(fileName='test5')
     print(wke.relation)
 
-def testPartialRanking():
-    print('*====>>>> test PartialRanking class ---------')
+def testRankingsFusionDigraph():
+    print('*====>>>> test RankingsFusionDigraph class ---------')
     from sparseOutrankingDigraphs import PreRankedOutrankingDigraph
     t = RandomCBPerformanceTableau(numberOfActions=50,seed=10)
     pra = PreRankedOutrankingDigraph(t,5,quantilesOrderingStrategy='average')
@@ -131,7 +131,7 @@ def testPartialRanking():
     r2 = pro.boostedRanking
     prp = PreRankedOutrankingDigraph(t,5,quantilesOrderingStrategy='pessimistic')
     r3 = prp.boostedRanking
-    wqr = PartialRanking(pra,[r1,r2,r3])
+    wqr = RankingsFusionDigraph(pra,[r1,r2,r3])
     wqr.exportGraphViz(fileName='test6',graphType="pdf")
 
 def testWeakOrders():
