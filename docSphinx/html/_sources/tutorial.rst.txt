@@ -4477,7 +4477,7 @@ We have noticed in the tutorial on :ref:`ranking with multiple criteria <Ranking
 
 	   Fused Copeland and NetFlows ratings
 
-    It is, hence, interesting, to verify if the :ref:`epistemic fusion <Epistemic-Fusion-label>` of the *rating-by-ranking* results, one may obtain when applying two different ranking rules, like the *Copeland* and the :ref:`NetFlows ranking rule <NetFlows-Ranking-label>` (see :numref:`rankingsFusion`), does actually confirm our rating-by-ranking result shown in :numref:`ratingResult` above. For this purpose we use the :py:class:`transitiveDigraphs.RankingsFusionDigraph` constructor (see :numref:`rankingsFusion` Line 9).
+    It is, hence, interesting, to verify if the :ref:`epistemic fusion <Epistemic-Fusion-label>` of the *rating-by-ranking* results, one may obtain when applying two different ranking rules, like the *Copeland* and the :ref:`NetFlows ranking rule <NetFlows-Ranking-label>`, does actually confirm our rating-by-ranking result shown in :numref:`ratingResult` above. For this purpose we make usage of the :py:class:`transitiveDigraphs.RankingsFusionDigraph` constructor (see :numref:`rankingsFusion` Line 9).
 
     .. code-block:: pycon
        :name: rankingsFusion
@@ -4566,7 +4566,7 @@ We may furthermore check if there exists any *cyclic* outranking situations.
      92:  ['marb', 'saar', 'tri'] , credibility : 0.067
      93:  ['mnh', 'mu', 'stu'] , credibility : 0.133
 
-Here we observe indeed 93 such outranking circuits, like: *Berlin Humboldt* > *Konstanz* > *München* > *Berlin Humboldt* supported by a (0.133 + 1.0)/2 = 56.7% majority of subjects [31]_ (see :numref:`chordlessCircuits` circuit 29 above). In the *Copeland* ranking result shown in :numref:`ninetiledHeatmap`, these Universities appear positioned respectively at ranks 10, 4 and 6. In the *NetFlows* ranking result they would appear respectively at ranks 10, 6 and 5, thus inverting the poritions of *Konstanz* and *München*. The occurrence in digraph *dg* of so many outranking circuits makes indeed any *forced* linear ranking *doubtful*; independently of the specific ranking rule we might have applied.
+Here we observe indeed 93 such outranking circuits, like: *Berlin Humboldt* > *Konstanz* > *München* > *Berlin Humboldt* supported by a (0.133 + 1.0)/2 = 56.7% majority of subjects [31]_ (see :numref:`chordlessCircuits` circuit 29 above). In the *Copeland* ranking result shown in :numref:`ninetiledHeatmap`, these Universities appear positioned respectively at ranks 10, 4 and 6. In the *NetFlows* ranking result they would appear respectively at ranks 10, 6 and 5, thus inverting the positions of *Konstanz* and *München*. The occurrence in digraph *dg* of so many outranking circuits makes thus *doubtful* any *forced* linear ranking, independently of the specific ranking rule we might have applied.
 
 To effectively check the quality of our *Copeland* *rating-by-ranking* result, we shall now compute a direct **sorting into 9-tiles** of the enrolment quality scores, without using any outranking digraph based ranking rule.
 
