@@ -1,0 +1,12 @@
+<map id="inheritance869eb85165" name="inheritance869eb85165">
+<area shape="rect" id="node1" href="#digraphs.Digraph" target="_top" title="Genuine root class of all Digraph3 modules." alt="" coords="5,179,77,204"/>
+<area shape="rect" id="node2" href="#digraphs.GridDigraph" target="_top" title="Specialization of the general Digraph class for generating" alt="" coords="204,5,295,31"/>
+<area shape="rect" id="node3" href="#randomDigraphs.RandomDigraph" target="_top" title="Specialization of the general Digraph class for generating" alt="" coords="191,55,307,80"/>
+<area shape="rect" id="node4" href="#randomDigraphs.RandomFixedDegreeSequenceDigraph" target="_top" title="Specialization of the general Digraph class for generating" alt="" coords="125,104,373,129"/>
+<area shape="rect" id="node5" href="#randomDigraphs.RandomFixedSizeDigraph" target="_top" title="Generates a random crisp digraph with a fixed size, " alt="" coords="162,153,337,179"/>
+<area shape="rect" id="node7" href="#randomDigraphs.RandomRegularDigraph" target="_top" title="Specialization of Digraph class for random regular symmetric instances." alt="" coords="169,203,330,228"/>
+<area shape="rect" id="node8" href="#randomDigraphs.RandomTournament" target="_top" title="Specialization of the general Digraph class for generating" alt="" coords="180,252,319,277"/>
+<area shape="rect" id="node9" href="#randomDigraphs.RandomValuationDigraph" target="_top" title="Specialization of the general Digraph class for generating" alt="" coords="165,301,334,327"/>
+<area shape="rect" id="node10" href="#randomDigraphs.RandomWeakTournament" target="_top" title="Specialization of the general Digraph class for generating" alt="" coords="163,351,335,376"/>
+<area shape="rect" id="node6" href="#randomDigraphs.RandomGridDigraph" target="_top" title="Specialization of the general Digraph class for generating" alt="" coords="421,5,561,31"/>
+</map>

@@ -58,7 +58,7 @@
 
 
 \title{Tutorials for the Digraph3 Python software resources}
-\date{January 11, 2021}
+\date{January 16, 2021}
 \release{3.9.1}
 \author{Raymond Bisdorff}
 \newcommand{\sphinxlogo}{\sphinxincludegraphics{introDoc3.png}\par}
@@ -5593,7 +5593,7 @@ Following Universities: \sphinxstyleemphasis{TU München}, \sphinxstyleemphasis{
 A corresponding \sphinxstyleemphasis{graphviz} drawing may well illustrate all these enrolment quality equivalence classes.
 
 \begin{sphinxVerbatim}[commandchars=\\\{\}]
-\PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{nqr}\PYG{o}{.}\PYG{n}{exportRatingGraphViz}\PYG{p}{(}\PYG{n}{fileName}\PYG{o}{=}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{ratingResult}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{,}\PYGZbs{}
+\PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{nqr}\PYG{o}{.}\PYG{n}{exportRatingByRankingGraphViz}\PYG{p}{(}\PYG{n}{fileName}\PYG{o}{=}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{ratingResult}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{,}\PYGZbs{}
 \PYG{g+go}{                              graphSize=\PYGZsq{}12,12\PYGZsq{})}
 \PYG{g+go}{ *\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{} exporting a dot file for GraphViz tools \PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}*}
 \PYG{g+go}{  Exporting to ratingResult.dot}
@@ -5605,7 +5605,7 @@ A corresponding \sphinxstyleemphasis{graphviz} drawing may well illustrate all t
 \capstart
 
 \noindent\sphinxincludegraphics[width=500\sphinxpxdimen]{{ratingResult}.png}
-\caption{Graphviz drawing of the 9\sphinxhyphen{}tiles rating result}\label{\detokenize{tutorial:ratingresult}}\end{figure}
+\caption{Drawing of the 9\sphinxhyphen{}tiles rating\sphinxhyphen{}by\sphinxhyphen{}ranking result}\label{\detokenize{tutorial:ratingresult}}\end{figure}
 
 We have noticed in the tutorial on {\hyperref[\detokenize{tutorial:ranking-tutorial-label}]{\sphinxcrossref{\DUrole{std,std-ref}{ranking with multiple criteria}}}} (\autopageref*{\detokenize{tutorial:ranking-tutorial-label}}), that there is not a single optimal rule for ranking from a given outranking digraph. The \sphinxstyleemphasis{Copeland} rule, for instance, has the advantage of being \sphinxstyleemphasis{Condorcet} consistent, i.e. when the outranking digraph models in fact a linear ranking, this ranking will necessarily be the result of the \sphinxstyleemphasis{Copeland} rule. When this is not the case, and especially when the outranking digraph shows many circuits, all potential ranking rules may give very divergent ranking results, and hence also substantially divergent rating\sphinxhyphen{}by\sphinxhyphen{}ranking results.
 
@@ -5682,64 +5682,61 @@ To effectively check the quality of our \sphinxstyleemphasis{Copeland} \sphinxst
 
 \subsection{Rating by quantiles sorting}
 \label{\detokenize{tutorial:rating-by-quantiles-sorting}}
-For this \sphinxstyleemphasis{rating\sphinxhyphen{}by\sphinxhyphen{}sorting} approach, we are going to use the \sphinxcode{\sphinxupquote{sortingDigrahs.QuantilesSortingDigraph}} constructor for sorting, on the basis of our given performance tableau \sphinxstyleemphasis{t}, the University enrolment quality records into lower\sphinxhyphen{}closed, not necessarily unique, but adjacent 9\sphinxhyphen{}tiles (see tutorial on {\hyperref[\detokenize{tutorial:quantilesrating-tutorial-label}]{\sphinxcrossref{\DUrole{std,std-ref}{rating with incommensurable performance criteria}}}} (\autopageref*{\detokenize{tutorial:quantilesrating-tutorial-label}})).
-\sphinxSetupCaptionForVerbatim{Computing the lower\sphinxhyphen{}closed 9\sphinxhyphen{}tiles sorting of the 41 Universities}
+In our case here, the Universities represent the decision actions: \sphinxstyleemphasis{where to study}. We say now that University \sphinxstyleemphasis{x} is sorted into the lower\sphinxhyphen{}closed 9\sphinxhyphen{}tile \sphinxstyleemphasis{q} when the performance record of \sphinxstyleemphasis{x} \sphinxstylestrong{positively outranks the lower limit} record of 9\sphinxhyphen{}tile \sphinxstyleemphasis{q} and \sphinxstyleemphasis{x} \sphinxstylestrong{does not positively outrank the upper limit} record of 9\sphinxhyphen{}tile \sphinxstyleemphasis{q}.
+\sphinxSetupCaptionForVerbatim{Lower\sphinxhyphen{}closed 9\sphinxhyphen{}tiles sorting of the 41 Universities}
 \def\sphinxLiteralBlockLabel{\label{\detokenize{tutorial:ninetilessorting}}}
 \begin{sphinxVerbatim}[commandchars=\\\{\},numbers=left,firstnumber=1,stepnumber=1]
-\PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{k+kn}{from} \PYG{n+nn}{sortingDigraph} \PYG{k+kn}{import} \PYG{n}{QuantilesSortingDigraph}
-\PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{qs} \PYG{o}{=} \PYG{n}{QuantilesSortingDigraph}\PYG{p}{(}\PYG{n}{t}\PYG{p}{,}\PYGZbs{}
-\PYG{g+go}{                    limitingQuantiles=9,LowerClosed=True)}
-\PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{qs}\PYG{o}{.}\PYG{n}{showActionsSortingResult}\PYG{p}{(}\PYG{p}{)}
+\PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{nqr}\PYG{o}{.}\PYG{n}{showActionsSortingResult}\PYG{p}{(}\PYG{n}{actionSubset}\PYG{o}{=}\PYG{n}{nqr}\PYG{o}{.}\PYG{n}{newActions}\PYG{p}{)}
 \PYG{g+go}{ Quantiles sorting result per decision action}
-\PYG{g+go}{ [0.22 \PYGZhy{} 0.33[: aach with credibility: 0.07 = min(0.07,0.33)}
-\PYG{g+go}{ [0.44 \PYGZhy{} 0.78[: aug with credibility: 0.07 = min(0.27,0.07)}
-\PYG{g+go}{ [0.44 \PYGZhy{} 0.56[: berf with credibility: 0.07 = min(0.07,0.20)}
-\PYG{g+go}{ [0.67 \PYGZhy{} 0.78[: berh with credibility: 0.13 = min(0.13,0.27)}
-\PYG{g+go}{ [0.11 \PYGZhy{} 0.33[: bertu with credibility: 0.20 = min(0.33,0.20)}
-\PYG{g+go}{ [0.00 \PYGZhy{} 0.22[: bie with credibility: 0.27 = min(0.67,0.27)}
-\PYG{g+go}{ [0.11 \PYGZhy{} 0.22[: boc with credibility: 0.13 = min(0.13,0.20)}
-\PYG{g+go}{ [0.33 \PYGZhy{} 0.44[: bon with credibility: 0.07 = min(0.13,0.07)}
-\PYG{g+go}{ [0.11 \PYGZhy{} 0.33[: brau with credibility: 0.20 = min(0.40,0.20)}
-\PYG{g+go}{ [0.22 \PYGZhy{} 0.33[: brem with credibility: 0.13 = min(0.13,0.13)}
-\PYG{g+go}{ [0.33 \PYGZhy{} 0.56[: chem with credibility: 0.13 = min(0.13,0.13)}
-\PYG{g+go}{ [0.11 \PYGZhy{} 0.33[: darm with credibility: 0.07 = min(0.13,0.07)}
-\PYG{g+go}{ [0.44 \PYGZhy{} 0.56[: dres with credibility: 0.20 = min(0.20,0.27)}
-\PYG{g+go}{ [0.11 \PYGZhy{} 0.22[: dsd with credibility: 0.07 = min(0.13,0.07)}
-\PYG{g+go}{ [0.00 \PYGZhy{} 0.11[: duis with credibility: 0.53 = min(0.73,0.53)}
-\PYG{g+go}{ [0.33 \PYGZhy{} 0.44[: erl with credibility: 0.20 = min(0.27,0.20)}
-\PYG{g+go}{ [0.11 \PYGZhy{} 0.33[: fran with credibility: 0.40 = min(0.53,0.40)}
-\PYG{g+go}{ [0.78 \PYGZhy{} 0.89[: frei with credibility: 0.20 = min(0.20,0.40)}
-\PYG{g+go}{ [0.11 \PYGZhy{} 0.22[: gie with credibility: 0.07 = min(0.47,0.07)}
-\PYG{g+go}{ [0.22 \PYGZhy{} 0.44[: goet with credibility: 0.27 = min(0.60,0.27)}
-\PYG{g+go}{ [0.11 \PYGZhy{} 0.33[: ham with credibility: 0.33 = min(0.40,0.33)}
-\PYG{g+go}{ [0.00 \PYGZhy{} 0.11[: han with credibility: 0.07 = min(0.73,0.07)}
-\PYG{g+go}{ [0.67 \PYGZhy{} 0.78[: hei with credibility: 0.07 = min(0.13,0.07)}
-\PYG{g+go}{ [0.44 \PYGZhy{} 0.67[: jena with credibility: 0.20 = min(0.20,0.40)}
-\PYG{g+go}{ [0.11 \PYGZhy{} 0.33[: kiel with credibility: 0.40 = min(0.40,0.53)}
-\PYG{g+go}{ [0.44 \PYGZhy{} 0.56[: koel with credibility: 0.07 = min(0.07,0.40)}
-\PYG{g+go}{ [0.78 \PYGZhy{} 0.89[: kons with credibility: 0.13 = min(0.13,0.27)}
-\PYG{g+go}{ [0.44 \PYGZhy{} 0.67[: ksl with credibility: 0.07 = min(0.20,0.07)}
-\PYG{g+go}{ [0.67 \PYGZhy{} 0.78[: leip with credibility: 0.07 = min(0.27,0.07)}
-\PYG{g+go}{ [0.33 \PYGZhy{} 0.44[: main with credibility: 0.07 = min(0.07,0.07)}
-\PYG{g+go}{ [0.44 \PYGZhy{} 0.56[: marb with credibility: 0.07 = min(0.07,0.07)}
-\PYG{g+go}{ [0.56 \PYGZhy{} 0.78[: mnh with credibility: 0.07 = min(0.07,0.13)}
-\PYG{g+go}{ [0.44 \PYGZhy{} 0.67[: mnst with credibility: 0.20 = min(0.33,0.20)}
-\PYG{g+go}{ [0.67 \PYGZhy{} 0.78[: mu with credibility: 0.13 = min(0.13,0.20)}
-\PYG{g+go}{ [0.44 \PYGZhy{} 0.56[: reg with credibility: 0.27 = min(0.47,0.27)}
-\PYG{g+go}{ [0.56 \PYGZhy{} 0.67[: saar with credibility: 0.13 = min(0.13,0.13)}
-\PYG{g+go}{ [0.67 \PYGZhy{} 0.89[: stu with credibility: 0.13 = min(0.13,0.20)}
-\PYG{g+go}{ [0.33 \PYGZhy{} 0.44[: tri with credibility: 0.07 = min(0.07,0.13)}
-\PYG{g+go}{ [0.56 \PYGZhy{} 0.67[: tueb with credibility: 0.07 = min(0.20,0.07)}
-\PYG{g+go}{ [0.89 \PYGZhy{}    \PYGZlt{}[: tum with credibility: 0.07 = min(0.07,1.00)}
-\PYG{g+go}{ [0.44 \PYGZhy{} 0.56[: wrzb with credibility: 0.13 = min(0.20,0.13)}
+\PYG{g+go}{ [0.33 \PYGZhy{} 0.44[: aach with credibility: 0.13 = min(0.13,0.27)}
+\PYG{g+go}{ [0.56 \PYGZhy{} 0.89[: aug with credibility: 0.13 = min(0.13,0.27)}
+\PYG{g+go}{ [0.44 \PYGZhy{} 0.67[: berf with credibility: 0.13 = min(0.13,0.20)}
+\PYG{g+go}{ [0.78 \PYGZhy{} 0.89[: berh with credibility: 0.13 = min(0.13,0.33)}
+\PYG{g+go}{ [0.22 \PYGZhy{} 0.44[: bertu with credibility: 0.20 = min(0.33,0.20)}
+\PYG{g+go}{ [0.11 \PYGZhy{} 0.22[: bie with credibility: 0.20 = min(0.33,0.20)}
+\PYG{g+go}{ [0.22 \PYGZhy{} 0.33[: boc with credibility: 0.07 = min(0.07,0.07)}
+\PYG{g+go}{ [0.44 \PYGZhy{} 0.56[: bon with credibility: 0.13 = min(0.20,0.13)}
+\PYG{g+go}{ [0.33 \PYGZhy{} 0.44[: brau with credibility: 0.07 = min(0.07,0.27)}
+\PYG{g+go}{ [0.33 \PYGZhy{} 0.44[: brem with credibility: 0.07 = min(0.07,0.07)}
+\PYG{g+go}{ [0.44 \PYGZhy{} 0.56[: chem with credibility: 0.07 = min(0.13,0.07)}
+\PYG{g+go}{ [0.22 \PYGZhy{} 0.56[: darm with credibility: 0.13 = min(0.13,0.13)}
+\PYG{g+go}{ [0.56 \PYGZhy{} 0.67[: dres with credibility: 0.27 = min(0.27,0.47)}
+\PYG{g+go}{ [0.22 \PYGZhy{} 0.33[: dsd with credibility: 0.07 = min(0.07,0.07)}
+\PYG{g+go}{ [0.00 \PYGZhy{} 0.11[: duis with credibility: 0.33 = min(0.73,0.33)}
+\PYG{g+go}{ [0.44 \PYGZhy{} 0.56[: erl with credibility: 0.13 = min(0.27,0.13)}
+\PYG{g+go}{ [0.22 \PYGZhy{} 0.44[: fran with credibility: 0.13 = min(0.13,0.33)}
+\PYG{g+go}{ [0.78 \PYGZhy{} \PYGZlt{}[: frei with credibility: 0.53 = min(0.53,1.00)}
+\PYG{g+go}{ [0.22 \PYGZhy{} 0.33[: gie with credibility: 0.13 = min(0.13,0.20)}
+\PYG{g+go}{ [0.33 \PYGZhy{} 0.44[: goet with credibility: 0.07 = min(0.47,0.07)}
+\PYG{g+go}{ [0.22 \PYGZhy{} 0.33[: ham with credibility: 0.07 = min(0.33,0.07)}
+\PYG{g+go}{ [0.11 \PYGZhy{} 0.22[: han with credibility: 0.20 = min(0.33,0.20)}
+\PYG{g+go}{ [0.78 \PYGZhy{} 0.89[: hei with credibility: 0.13 = min(0.13,0.27)}
+\PYG{g+go}{ [0.56 \PYGZhy{} 0.67[: jena with credibility: 0.07 = min(0.13,0.07)}
+\PYG{g+go}{ [0.33 \PYGZhy{} 0.44[: kiel with credibility: 0.20 = min(0.20,0.47)}
+\PYG{g+go}{ [0.44 \PYGZhy{} 0.56[: koel with credibility: 0.07 = min(0.27,0.07)}
+\PYG{g+go}{ [0.78 \PYGZhy{} \PYGZlt{}[: kons with credibility: 0.20 = min(0.20,1.00)}
+\PYG{g+go}{ [0.56 \PYGZhy{} 0.89[: ksl with credibility: 0.13 = min(0.13,0.40)}
+\PYG{g+go}{ [0.78 \PYGZhy{} 0.89[: leip with credibility: 0.07 = min(0.20,0.07)}
+\PYG{g+go}{ [0.44 \PYGZhy{} 0.56[: main with credibility: 0.07 = min(0.07,0.13)}
+\PYG{g+go}{ [0.56 \PYGZhy{} 0.67[: marb with credibility: 0.07 = min(0.07,0.07)}
+\PYG{g+go}{ [0.56 \PYGZhy{} 0.89[: mnh with credibility: 0.20 = min(0.20,0.27)}
+\PYG{g+go}{ [0.56 \PYGZhy{} 0.67[: mnst with credibility: 0.07 = min(0.20,0.07)}
+\PYG{g+go}{ [0.78 \PYGZhy{} 0.89[: mu with credibility: 0.13 = min(0.13,0.47)}
+\PYG{g+go}{ [0.56 \PYGZhy{} 0.67[: reg with credibility: 0.20 = min(0.20,0.27)}
+\PYG{g+go}{ [0.56 \PYGZhy{} 0.78[: saar with credibility: 0.13 = min(0.13,0.20)}
+\PYG{g+go}{ [0.78 \PYGZhy{} 0.89[: stu with credibility: 0.07 = min(0.13,0.07)}
+\PYG{g+go}{ [0.44 \PYGZhy{} 0.56[: tri with credibility: 0.07 = min(0.13,0.07)}
+\PYG{g+go}{ [0.67 \PYGZhy{} 0.78[: tueb with credibility: 0.13 = min(0.13,0.20)}
+\PYG{g+go}{ [0.89 \PYGZhy{} \PYGZlt{}[: tum with credibility: 0.13 = min(0.13,1.00)}
+\PYG{g+go}{ [0.56 \PYGZhy{} 0.67[: wrzb with credibility: 0.07 = min(0.20,0.07)}
 \end{sphinxVerbatim}
 
-In the 9\sphinxhyphen{}tiles sorting result, shown in \hyperref[\detokenize{tutorial:ninetilessorting}]{Listing \ref{\detokenize{tutorial:ninetilessorting}}}, we notice for instance in Lines 6\sphinxhyphen{}7 that the \sphinxstyleemphasis{RWTH Aachen} is precisely rated into the third 9\sphinxhyphen{}tile (\([0.22 - 0.33[\)), whereas the University \sphinxstyleemphasis{Augsburg} is less precisely rated conjointly into the \sphinxstyleemphasis{fourth}, the \sphinxstyleemphasis{fifth} and the \sphinxstyleemphasis{6th} 9\sphinxhyphen{}tile (\([0.44 - 0.78[\)). In Line 45, \sphinxstyleemphasis{TU München} appears best rated into the unique highest 9\sphinxhyphen{}tile (\([0.89 - <[\)). All three rating results are supported by a (0.07 + 1.0)/2 = 53.5\% majority of valuated subjects \sphinxfootnotemark[31]. With the support of a 76.5\% majority of valuated subjects (Line 20), the apparent most confident rating result is the one of University \sphinxstyleemphasis{Duisburg} (see also \hyperref[\detokenize{tutorial:qualityscores}]{Fig.\@ \ref{\detokenize{tutorial:qualityscores}}} and \hyperref[\detokenize{tutorial:ninetiledheatmap}]{Fig.\@ \ref{\detokenize{tutorial:ninetiledheatmap}}}).
+In the 9\sphinxhyphen{}tiles sorting result, shown in \hyperref[\detokenize{tutorial:ninetilessorting}]{Listing \ref{\detokenize{tutorial:ninetilessorting}}}, we notice for instance in Lines 6\sphinxhyphen{}7 that the \sphinxstyleemphasis{RWTH Aachen} is precisely rated into the 4th 9\sphinxhyphen{}tile (\([0.33 - 0.44[\)), whereas the University \sphinxstyleemphasis{Augsburg} is less precisely rated conjointly into the \sphinxstyleemphasis{6th}, the \sphinxstyleemphasis{7th} and the \sphinxstyleemphasis{8th} 9\sphinxhyphen{}tile (\([0.56 - 0.89[\)). In Line 45, \sphinxstyleemphasis{TU München} appears best rated into the unique highest 9\sphinxhyphen{}tile (\([0.89 - <[\)). All three rating results are supported by a (0.07 + 1.0)/2 = 53.5\% majority of valuated subjects \sphinxfootnotemark[31]. With the support of a 76.5\% majority of valuated subjects (Line 20), the apparent most confident rating result is the one of University \sphinxstyleemphasis{Freiburg} (see also \hyperref[\detokenize{tutorial:qualityscores}]{Fig.\@ \ref{\detokenize{tutorial:qualityscores}}} and \hyperref[\detokenize{tutorial:ninetiledheatmap}]{Fig.\@ \ref{\detokenize{tutorial:ninetiledheatmap}}}).
 
 We shall now lexicographically sort these individual rating results per University, by \sphinxstyleemphasis{average} rated 9\sphinxhyphen{}tile limits and \sphinxstyleemphasis{highest\sphinxhyphen{}rated} upper 9\sphinxhyphen{}tile limit, into ordered, but not necessarily disjoint, enrolment quality quantiles.
 
 \begin{sphinxVerbatim}[commandchars=\\\{\}]
-\PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{qs}\PYG{o}{.}\PYG{n}{showHTMLQuantileOrdering}\PYG{p}{(}\PYG{n}{strategy}\PYG{o}{=}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{average}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{)}
+\PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{nqr}\PYG{o}{.}\PYG{n}{showHTMLQuantileSorting}\PYG{p}{(}\PYG{n}{strategy}\PYG{o}{=}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{average}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{)}
 \end{sphinxVerbatim}
 
 \begin{figure}[H]
@@ -5749,12 +5746,12 @@ We shall now lexicographically sort these individual rating results per Universi
 \noindent\sphinxincludegraphics[width=400\sphinxpxdimen]{{nineTilingOrdering}.png}
 \caption{The ranked 9\sphinxhyphen{}tiles rating\sphinxhyphen{}by\sphinxhyphen{}sorting result}\label{\detokenize{tutorial:ninetilingordering}}\end{figure}
 
-In \hyperref[\detokenize{tutorial:ninetilingordering}]{Fig.\@ \ref{\detokenize{tutorial:ninetilingordering}}} we may notice that the Universities: \sphinxstyleemphasis{Augsburg}, \sphinxstyleemphasis{Saarbrücken} and \sphinxstyleemphasis{Tübingen} for instance, show in fact the same average rated 9\sphinxhyphen{}tiles score of 0.615; yet, the rated upper 9\sphinxhyphen{}tile limit of \sphinxstyleemphasis{Augsburg} is 0.78, whereas the one of both the other Universities reaches only 0.67. Hence, \sphinxstyleemphasis{Augsburg} is ranked higher than both \sphinxstyleemphasis{Saarbrücken} and \sphinxstyleemphasis{Tübingen}.
+In \hyperref[\detokenize{tutorial:ninetilingordering}]{Fig.\@ \ref{\detokenize{tutorial:ninetilingordering}}} we may notice that the Universities: \sphinxstyleemphasis{Augsburg}, \sphinxstyleemphasis{Kaiserslautern}, \sphinxstyleemphasis{Mannheim} and \sphinxstyleemphasis{Tübingen} for instance, show in fact the same average rated 9\sphinxhyphen{}tiles score of 0.725; yet, the rated upper 9\sphinxhyphen{}tile limit of \sphinxstyleemphasis{Tuebingen} is 0.78, whereas the one of the other Universities reaches only 0.89. Hence, \sphinxstyleemphasis{Tuebingen} is ranked below \sphinxstyleemphasis{Augsburg}, \sphinxstyleemphasis{Kaiserslautern} and \sphinxstyleemphasis{Mannheim} .
 
 With a \sphinxstyleemphasis{graphviz} drawing of this \sphinxcode{\sphinxupquote{QuantilesSorting}} digraph instance \sphinxstyleemphasis{qs}, we may, without requiring any specific ordering strategy, as well illustrate our 9\sphinxhyphen{}tiles \sphinxstyleemphasis{rating\sphinxhyphen{}by\sphinxhyphen{}sorting} result.
 
 \begin{sphinxVerbatim}[commandchars=\\\{\}]
-\PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{qs}\PYG{o}{.}\PYG{n}{exportGraphViz}\PYG{p}{(}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{nineTilingDrawing}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{,}\PYG{n}{graphSize}\PYG{o}{=}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{12,12}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{)}
+\PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{nqr}\PYG{o}{.}\PYG{n}{exportRatingBySortingGraphViz}\PYG{p}{(}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{nineTilingDrawing}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{,}\PYG{n}{graphSize}\PYG{o}{=}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{12,12}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{)}
 \PYG{g+go}{ *\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{} exporting a dot file for GraphViz tools \PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}*}
 \PYG{g+go}{ Exporting to nineTilingDrawing.dot}
 \PYG{g+go}{ dot \PYGZhy{}Grankdir=TB \PYGZhy{}Tpng nineTilingDrawing.dot\PYGZbs{}}
@@ -5770,7 +5767,7 @@ With a \sphinxstyleemphasis{graphviz} drawing of this \sphinxcode{\sphinxupquote
 
 In \hyperref[\detokenize{tutorial:ninetilingdrawing}]{Fig.\@ \ref{\detokenize{tutorial:ninetilingdrawing}}} we actually see the \sphinxstyleemphasis{skeleton} (transitive closure removed) of a \sphinxstylestrong{partial order}, where an oriented arc is drawn between Universities \sphinxstyleemphasis{x} and \sphinxstyleemphasis{y} when their 9\sphinxhyphen{}tiles sorting results are \sphinxstylestrong{disjoint} and the one of \sphinxstyleemphasis{x} is \sphinxstylestrong{higher rated} than the one of \sphinxstyleemphasis{y}. The rating for \sphinxstyleemphasis{TU München} (see \hyperref[\detokenize{tutorial:ninetilessorting}]{Listing \ref{\detokenize{tutorial:ninetilessorting}}} Lines 45), for instance, is disjoint and higher rated than the one of the Universities \sphinxstyleemphasis{Freiburg} and \sphinxstyleemphasis{Konstanz} (Lines 23, 32). And, both the ratings of \sphinxstyleemphasis{Feiburg} and Konstanz* are, however, not disjoint from the one, for instance, of the Universty of \sphinxstyleemphasis{Stuttgart} (Line 42).
 
-The partial ranking, shown in \hyperref[\detokenize{tutorial:ninetilingdrawing}]{Fig.\@ \ref{\detokenize{tutorial:ninetilingdrawing}}}, is in fact \sphinxstylestrong{independent} of any ordering strategy: \sphinxhyphen{} \sphinxstyleemphasis{average}, \sphinxhyphen{} \sphinxstyleemphasis{optimistic} or \sphinxhyphen{} \sphinxstyleemphasis{pessimistic}, of overlapping 9\sphinxhyphen{}tiles sorting results, and confirms that the same Universities as with the previous \sphinxstyleemphasis{rating\sphinxhyphen{}by\sphinxhyphen{}ranking} approach, namely \sphinxstyleemphasis{TU München}, \sphinxstyleemphasis{Freiburg}, \sphinxstyleemphasis{Konstanz}, \sphinxstyleemphasis{Stuttgart}, \sphinxstyleemphasis{Berlin Humboldt}, \sphinxstyleemphasis{Heidelberg} and \sphinxstyleemphasis{Leipzig} appear top\sphinxhyphen{}rated. Similarly, the Universities of \sphinxstyleemphasis{Duisburg}, \sphinxstyleemphasis{Hanover}, \sphinxstyleemphasis{Bochum}, \sphinxstyleemphasis{Giessen}, \sphinxstyleemphasis{Düsseldorf} and \sphinxstyleemphasis{Bielefeld} give the lowest\sphinxhyphen{}rated group. The midfield here is again consisting of more or less the same Universities as the one observed in the previous \sphinxstyleemphasis{rating\sphinxhyphen{}by\sphinxhyphen{}ranking} approach (see \hyperref[\detokenize{tutorial:ratingresult}]{Fig.\@ \ref{\detokenize{tutorial:ratingresult}}}).
+The partial ranking, shown in \hyperref[\detokenize{tutorial:ninetilingdrawing}]{Fig.\@ \ref{\detokenize{tutorial:ninetilingdrawing}}}, is in fact \sphinxstylestrong{independent} of any ordering strategy: \sphinxhyphen{} \sphinxstyleemphasis{average}, \sphinxhyphen{} \sphinxstyleemphasis{optimistic} or \sphinxhyphen{} \sphinxstyleemphasis{pessimistic}, of overlapping 9\sphinxhyphen{}tiles sorting results, and confirms that the same Universities as with the previous \sphinxstyleemphasis{rating\sphinxhyphen{}by\sphinxhyphen{}ranking} approach, namely \sphinxstyleemphasis{TU München}, \sphinxstyleemphasis{Freiburg}, \sphinxstyleemphasis{Konstanz}, \sphinxstyleemphasis{Stuttgart}, \sphinxstyleemphasis{Berlin Humboldt}, \sphinxstyleemphasis{Heidelberg} and \sphinxstyleemphasis{Leipzig} appear top\sphinxhyphen{}rated. Similarly, the Universities of \sphinxstyleemphasis{Duisburg}, \sphinxstyleemphasis{Bielefeld}, \sphinxstyleemphasis{Hanover}, \sphinxstyleemphasis{Bochum}, \sphinxstyleemphasis{Giessen}, \sphinxstyleemphasis{Düsseldorf} and \sphinxstyleemphasis{Hamburg} give the lowest\sphinxhyphen{}rated group. The midfield here is again consisting of more or less the same Universities as the one observed in the previous \sphinxstyleemphasis{rating\sphinxhyphen{}by\sphinxhyphen{}ranking} approach (see \hyperref[\detokenize{tutorial:ratingresult}]{Fig.\@ \ref{\detokenize{tutorial:ratingresult}}}).
 
 
 \subsection{To conclude}

@@ -1,0 +1,7 @@
+<map id="inheritanceee6a13e1b7" name="inheritanceee6a13e1b7">
+<area shape="rect" id="node1" href="#sortingDigraphs.NormedQuantilesRatingDigraph" target="_top" title="Specialisation of the root :py:class:`sortingDigraphs.SortingDigraph` class" alt="" coords="405,31,612,56"/>
+<area shape="rect" id="node2" href="#sortingDigraphs.QuantilesSortingDigraph" target="_top" title="Specialisation of the root :py:class:`sortingDigraphs.SortingDigraph` class" alt="" coords="195,5,357,31"/>
+<area shape="rect" id="node3" href="#performanceQuantiles.PerformanceQuantiles" target="_top" title="Implements the incremental performance quantiles representation of a" alt="" coords="201,55,351,80"/>
+<area shape="rect" id="node4" href="#perfTabs.PerformanceTableau" target="_top" title="In this *Digraph3* module, the root :py:class:`perfTabs.PerformanceTableau` class provides a generic **performance table model**. A given object of this class consists in:" alt="" coords="5,55,147,80"/>
+<area shape="rect" id="node5" href="#sortingDigraphs.SortingDigraph" target="_top" title="Specialisation of the digraphs.BipolarOutrankingDigraph Class" alt="" coords="22,5,130,31"/>
+</map>

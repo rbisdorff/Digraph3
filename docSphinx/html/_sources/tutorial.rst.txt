@@ -4451,7 +4451,7 @@ Following Universities: *TU München*, *Freiburg*, *Konstanz*, *Leipzig*, *Münc
 
 A corresponding *graphviz* drawing may well illustrate all these enrolment quality equivalence classes.
 
-   >>> nqr.exportRatingGraphViz(fileName='ratingResult',\
+   >>> nqr.exportRatingByRankingGraphViz(fileName='ratingResult',\
 				 graphSize='12,12')
     *---- exporting a dot file for GraphViz tools ---------*
      Exporting to ratingResult.dot
@@ -4462,7 +4462,7 @@ A corresponding *graphviz* drawing may well illustrate all these enrolment quali
    :width: 500 px
    :align: center
 
-   Graphviz drawing of the 9-tiles rating result
+   Drawing of the 9-tiles rating-by-ranking result
 
 We have noticed in the tutorial on :ref:`ranking with multiple criteria <Ranking-Tutorial-label>`, that there is not a single optimal rule for ranking from a given outranking digraph. The *Copeland* rule, for instance, has the advantage of being *Condorcet* consistent, i.e. when the outranking digraph models in fact a linear ranking, this ranking will necessarily be the result of the *Copeland* rule. When this is not the case, and especially when the outranking digraph shows many circuits, all potential ranking rules may give very divergent ranking results, and hence also substantially divergent rating-by-ranking results.
 
@@ -4573,65 +4573,62 @@ To effectively check the quality of our *Copeland* *rating-by-ranking* result, w
 Rating by quantiles sorting
 ...........................
 
-For this *rating-by-sorting* approach, we are going to use the :py:class:`sortingDigrahs.QuantilesSortingDigraph` constructor for sorting, on the basis of our given performance tableau *t*, the University enrolment quality records into lower-closed, not necessarily unique, but adjacent 9-tiles (see tutorial on :ref:`rating with incommensurable performance criteria <QuantilesRating-Tutorial-label>`).
+In our case here, the Universities represent the decision actions: *where to study*. We say now that University *x* is sorted into the lower-closed 9-tile *q* when the performance record of *x* **positively outranks the lower limit** record of 9-tile *q* and *x* **does not positively outrank the upper limit** record of 9-tile *q*. 
 
 .. code-block:: pycon
    :name: nineTilesSorting
    :linenos:
-   :caption: Computing the lower-closed 9-tiles sorting of the 41 Universities 
+   :caption: Lower-closed 9-tiles sorting of the 41 Universities 
 
-   >>> from sortingDigraph import QuantilesSortingDigraph	     
-   >>> qs = QuantilesSortingDigraph(t,\
-                       limitingQuantiles=9,LowerClosed=True)
-   >>> qs.showActionsSortingResult()
+   >>> nqr.showActionsSortingResult(actionSubset=nqr.newActions)
     Quantiles sorting result per decision action
-    [0.22 - 0.33[: aach with credibility: 0.07 = min(0.07,0.33)
-    [0.44 - 0.78[: aug with credibility: 0.07 = min(0.27,0.07)
-    [0.44 - 0.56[: berf with credibility: 0.07 = min(0.07,0.20)
-    [0.67 - 0.78[: berh with credibility: 0.13 = min(0.13,0.27)
-    [0.11 - 0.33[: bertu with credibility: 0.20 = min(0.33,0.20)
-    [0.00 - 0.22[: bie with credibility: 0.27 = min(0.67,0.27)
-    [0.11 - 0.22[: boc with credibility: 0.13 = min(0.13,0.20)
-    [0.33 - 0.44[: bon with credibility: 0.07 = min(0.13,0.07)
-    [0.11 - 0.33[: brau with credibility: 0.20 = min(0.40,0.20)
-    [0.22 - 0.33[: brem with credibility: 0.13 = min(0.13,0.13)
-    [0.33 - 0.56[: chem with credibility: 0.13 = min(0.13,0.13)
-    [0.11 - 0.33[: darm with credibility: 0.07 = min(0.13,0.07)
-    [0.44 - 0.56[: dres with credibility: 0.20 = min(0.20,0.27)
-    [0.11 - 0.22[: dsd with credibility: 0.07 = min(0.13,0.07)
-    [0.00 - 0.11[: duis with credibility: 0.53 = min(0.73,0.53)
-    [0.33 - 0.44[: erl with credibility: 0.20 = min(0.27,0.20)
-    [0.11 - 0.33[: fran with credibility: 0.40 = min(0.53,0.40)
-    [0.78 - 0.89[: frei with credibility: 0.20 = min(0.20,0.40)
-    [0.11 - 0.22[: gie with credibility: 0.07 = min(0.47,0.07)
-    [0.22 - 0.44[: goet with credibility: 0.27 = min(0.60,0.27)
-    [0.11 - 0.33[: ham with credibility: 0.33 = min(0.40,0.33)
-    [0.00 - 0.11[: han with credibility: 0.07 = min(0.73,0.07)
-    [0.67 - 0.78[: hei with credibility: 0.07 = min(0.13,0.07)
-    [0.44 - 0.67[: jena with credibility: 0.20 = min(0.20,0.40)
-    [0.11 - 0.33[: kiel with credibility: 0.40 = min(0.40,0.53)
-    [0.44 - 0.56[: koel with credibility: 0.07 = min(0.07,0.40)
-    [0.78 - 0.89[: kons with credibility: 0.13 = min(0.13,0.27)
-    [0.44 - 0.67[: ksl with credibility: 0.07 = min(0.20,0.07)
-    [0.67 - 0.78[: leip with credibility: 0.07 = min(0.27,0.07)
-    [0.33 - 0.44[: main with credibility: 0.07 = min(0.07,0.07)
-    [0.44 - 0.56[: marb with credibility: 0.07 = min(0.07,0.07)
-    [0.56 - 0.78[: mnh with credibility: 0.07 = min(0.07,0.13)
-    [0.44 - 0.67[: mnst with credibility: 0.20 = min(0.33,0.20)
-    [0.67 - 0.78[: mu with credibility: 0.13 = min(0.13,0.20)
-    [0.44 - 0.56[: reg with credibility: 0.27 = min(0.47,0.27)
-    [0.56 - 0.67[: saar with credibility: 0.13 = min(0.13,0.13)
-    [0.67 - 0.89[: stu with credibility: 0.13 = min(0.13,0.20)
-    [0.33 - 0.44[: tri with credibility: 0.07 = min(0.07,0.13)
-    [0.56 - 0.67[: tueb with credibility: 0.07 = min(0.20,0.07)
-    [0.89 -    <[: tum with credibility: 0.07 = min(0.07,1.00)
-    [0.44 - 0.56[: wrzb with credibility: 0.13 = min(0.20,0.13)
+    [0.33 - 0.44[: aach with credibility: 0.13 = min(0.13,0.27)
+    [0.56 - 0.89[: aug with credibility: 0.13 = min(0.13,0.27)
+    [0.44 - 0.67[: berf with credibility: 0.13 = min(0.13,0.20)
+    [0.78 - 0.89[: berh with credibility: 0.13 = min(0.13,0.33)
+    [0.22 - 0.44[: bertu with credibility: 0.20 = min(0.33,0.20)
+    [0.11 - 0.22[: bie with credibility: 0.20 = min(0.33,0.20)
+    [0.22 - 0.33[: boc with credibility: 0.07 = min(0.07,0.07)
+    [0.44 - 0.56[: bon with credibility: 0.13 = min(0.20,0.13)
+    [0.33 - 0.44[: brau with credibility: 0.07 = min(0.07,0.27)
+    [0.33 - 0.44[: brem with credibility: 0.07 = min(0.07,0.07)
+    [0.44 - 0.56[: chem with credibility: 0.07 = min(0.13,0.07)
+    [0.22 - 0.56[: darm with credibility: 0.13 = min(0.13,0.13)
+    [0.56 - 0.67[: dres with credibility: 0.27 = min(0.27,0.47)
+    [0.22 - 0.33[: dsd with credibility: 0.07 = min(0.07,0.07)
+    [0.00 - 0.11[: duis with credibility: 0.33 = min(0.73,0.33)
+    [0.44 - 0.56[: erl with credibility: 0.13 = min(0.27,0.13)
+    [0.22 - 0.44[: fran with credibility: 0.13 = min(0.13,0.33)
+    [0.78 - <[: frei with credibility: 0.53 = min(0.53,1.00)
+    [0.22 - 0.33[: gie with credibility: 0.13 = min(0.13,0.20)
+    [0.33 - 0.44[: goet with credibility: 0.07 = min(0.47,0.07)
+    [0.22 - 0.33[: ham with credibility: 0.07 = min(0.33,0.07)
+    [0.11 - 0.22[: han with credibility: 0.20 = min(0.33,0.20)
+    [0.78 - 0.89[: hei with credibility: 0.13 = min(0.13,0.27)
+    [0.56 - 0.67[: jena with credibility: 0.07 = min(0.13,0.07)
+    [0.33 - 0.44[: kiel with credibility: 0.20 = min(0.20,0.47)
+    [0.44 - 0.56[: koel with credibility: 0.07 = min(0.27,0.07)
+    [0.78 - <[: kons with credibility: 0.20 = min(0.20,1.00)
+    [0.56 - 0.89[: ksl with credibility: 0.13 = min(0.13,0.40)
+    [0.78 - 0.89[: leip with credibility: 0.07 = min(0.20,0.07)
+    [0.44 - 0.56[: main with credibility: 0.07 = min(0.07,0.13)
+    [0.56 - 0.67[: marb with credibility: 0.07 = min(0.07,0.07)
+    [0.56 - 0.89[: mnh with credibility: 0.20 = min(0.20,0.27)
+    [0.56 - 0.67[: mnst with credibility: 0.07 = min(0.20,0.07)
+    [0.78 - 0.89[: mu with credibility: 0.13 = min(0.13,0.47)
+    [0.56 - 0.67[: reg with credibility: 0.20 = min(0.20,0.27)
+    [0.56 - 0.78[: saar with credibility: 0.13 = min(0.13,0.20)
+    [0.78 - 0.89[: stu with credibility: 0.07 = min(0.13,0.07)
+    [0.44 - 0.56[: tri with credibility: 0.07 = min(0.13,0.07)
+    [0.67 - 0.78[: tueb with credibility: 0.13 = min(0.13,0.20)
+    [0.89 - <[: tum with credibility: 0.13 = min(0.13,1.00)
+    [0.56 - 0.67[: wrzb with credibility: 0.07 = min(0.20,0.07)
 
-In the 9-tiles sorting result, shown in :numref:`nineTilesSorting`, we notice for instance in Lines 6-7 that the *RWTH Aachen* is precisely rated into the third 9-tile (:math:`[0.22 - 0.33[`), whereas the University *Augsburg* is less precisely rated conjointly into the *fourth*, the *fifth* and the *6th* 9-tile (:math:`[0.44 - 0.78[`). In Line 45, *TU München* appears best rated into the unique highest 9-tile (:math:`[0.89 - <[`). All three rating results are supported by a (0.07 + 1.0)/2 = 53.5% majority of valuated subjects [31]_. With the support of a 76.5% majority of valuated subjects (Line 20), the apparent most confident rating result is the one of University *Duisburg* (see also :numref:`qualityScores` and :numref:`ninetiledHeatmap`). 
+In the 9-tiles sorting result, shown in :numref:`nineTilesSorting`, we notice for instance in Lines 6-7 that the *RWTH Aachen* is precisely rated into the 4th 9-tile (:math:`[0.33 - 0.44[`), whereas the University *Augsburg* is less precisely rated conjointly into the *6th*, the *7th* and the *8th* 9-tile (:math:`[0.56 - 0.89[`). In Line 45, *TU München* appears best rated into the unique highest 9-tile (:math:`[0.89 - <[`). All three rating results are supported by a (0.07 + 1.0)/2 = 53.5% majority of valuated subjects [31]_. With the support of a 76.5% majority of valuated subjects (Line 20), the apparent most confident rating result is the one of University *Freiburg* (see also :numref:`qualityScores` and :numref:`ninetiledHeatmap`). 
 
 We shall now lexicographically sort these individual rating results per University, by *average* rated 9-tile limits and *highest-rated* upper 9-tile limit, into ordered, but not necessarily disjoint, enrolment quality quantiles.
 
->>> qs.showHTMLQuantileOrdering(strategy='average')
+>>> nqr.showHTMLQuantileSorting(strategy='average')
 
 .. figure:: nineTilingOrdering.png
    :name: nineTilingOrdering
@@ -4640,11 +4637,11 @@ We shall now lexicographically sort these individual rating results per Universi
 
    The ranked 9-tiles rating-by-sorting result
 
-In :numref:`nineTilingOrdering` we may notice that the Universities: *Augsburg*, *Saarbrücken* and *Tübingen* for instance, show in fact the same average rated 9-tiles score of 0.615; yet, the rated upper 9-tile limit of *Augsburg* is 0.78, whereas the one of both the other Universities reaches only 0.67. Hence, *Augsburg* is ranked higher than both *Saarbrücken* and *Tübingen*. 
+In :numref:`nineTilingOrdering` we may notice that the Universities: *Augsburg*, *Kaiserslautern*, *Mannheim* and *Tübingen* for instance, show in fact the same average rated 9-tiles score of 0.725; yet, the rated upper 9-tile limit of *Tuebingen* is 0.78, whereas the one of the other Universities reaches only 0.89. Hence, *Tuebingen* is ranked below *Augsburg*, *Kaiserslautern* and *Mannheim* . 
 
 With a *graphviz* drawing of this :code:`QuantilesSorting` digraph instance *qs*, we may, without requiring any specific ordering strategy, as well illustrate our 9-tiles *rating-by-sorting* result.
 
-   >>> qs.exportGraphViz('nineTilingDrawing',graphSize='12,12')
+   >>> nqr.exportRatingBySortingGraphViz('nineTilingDrawing',graphSize='12,12')
     *---- exporting a dot file for GraphViz tools ---------*
     Exporting to nineTilingDrawing.dot
     dot -Grankdir=TB -Tpng nineTilingDrawing.dot\
@@ -4659,7 +4656,7 @@ With a *graphviz* drawing of this :code:`QuantilesSorting` digraph instance *qs*
 
 In :numref:`nineTilingDrawing` we actually see the *skeleton* (transitive closure removed) of a **partial order**, where an oriented arc is drawn between Universities *x* and *y* when their 9-tiles sorting results are **disjoint** and the one of *x* is **higher rated** than the one of *y*. The rating for *TU München* (see :numref:`nineTilesSorting` Lines 45), for instance, is disjoint and higher rated than the one of the Universities *Freiburg* and *Konstanz* (Lines 23, 32). And, both the ratings of *Feiburg* and Konstanz* are, however, not disjoint from the one, for instance, of the Universty of *Stuttgart* (Line 42). 
 
-The partial ranking, shown in :numref:`nineTilingDrawing`, is in fact **independent** of any ordering strategy: - *average*, - *optimistic* or - *pessimistic*, of overlapping 9-tiles sorting results, and confirms that the same Universities as with the previous *rating-by-ranking* approach, namely *TU München*, *Freiburg*, *Konstanz*, *Stuttgart*, *Berlin Humboldt*, *Heidelberg* and *Leipzig* appear top-rated. Similarly, the Universities of *Duisburg*, *Hanover*, *Bochum*, *Giessen*, *Düsseldorf* and *Bielefeld* give the lowest-rated group. The midfield here is again consisting of more or less the same Universities as the one observed in the previous *rating-by-ranking* approach (see :numref:`ratingResult`).
+The partial ranking, shown in :numref:`nineTilingDrawing`, is in fact **independent** of any ordering strategy: - *average*, - *optimistic* or - *pessimistic*, of overlapping 9-tiles sorting results, and confirms that the same Universities as with the previous *rating-by-ranking* approach, namely *TU München*, *Freiburg*, *Konstanz*, *Stuttgart*, *Berlin Humboldt*, *Heidelberg* and *Leipzig* appear top-rated. Similarly, the Universities of *Duisburg*, *Bielefeld*, *Hanover*, *Bochum*, *Giessen*, *Düsseldorf* and *Hamburg* give the lowest-rated group. The midfield here is again consisting of more or less the same Universities as the one observed in the previous *rating-by-ranking* approach (see :numref:`ratingResult`).
 
 To conclude
 ...........

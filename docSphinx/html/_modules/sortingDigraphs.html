@@ -2822,9 +2822,9 @@
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        extract normal actions keys()</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="n">profiles</span> <span class="o">=</span> <span class="nb">set</span><span class="p">([</span><span class="n">x</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="nb">list</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">profiles</span><span class="o">.</span><span class="n">keys</span><span class="p">())])</span>
+        <span class="n">profiles</span> <span class="o">=</span> <span class="nb">set</span><span class="p">([</span><span class="n">x</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">profiles</span><span class="p">])</span>
         <span class="k">if</span> <span class="n">action</span> <span class="o">==</span> <span class="kc">None</span><span class="p">:</span>
-            <span class="n">actionsExt</span> <span class="o">=</span> <span class="nb">set</span><span class="p">([</span><span class="n">x</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="nb">list</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">actions</span><span class="o">.</span><span class="n">keys</span><span class="p">())])</span>
+            <span class="n">actionsExt</span> <span class="o">=</span> <span class="nb">set</span><span class="p">([</span><span class="n">x</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">actions</span><span class="p">])</span>
             <span class="k">if</span> <span class="n">withoutProfiles</span><span class="p">:</span>
                 <span class="k">return</span> <span class="n">actionsExt</span> <span class="o">-</span> <span class="n">profiles</span>
             <span class="k">else</span><span class="p">:</span>
@@ -3284,7 +3284,8 @@
         <span class="n">Max</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">valuationdomain</span><span class="p">[</span><span class="s1">&#39;max&#39;</span><span class="p">]</span>
         <span class="n">Med</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">valuationdomain</span><span class="p">[</span><span class="s1">&#39;med&#39;</span><span class="p">]</span>
         <span class="n">Min</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">valuationdomain</span><span class="p">[</span><span class="s1">&#39;min&#39;</span><span class="p">]</span>
-        <span class="n">actions</span> <span class="o">=</span> <span class="p">[</span><span class="n">x</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">actionsOrig</span><span class="p">]</span>
+        <span class="c1">#actions = [x for x in self.actionsOrig]</span>
+        <span class="n">actions</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">getActionsKeys</span><span class="p">()</span>
         <span class="n">currActions</span> <span class="o">=</span> <span class="nb">set</span><span class="p">(</span><span class="n">actions</span><span class="p">)</span>
         <span class="n">sortingRelation</span> <span class="o">=</span> <span class="p">{}</span>
         <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">actions</span><span class="p">:</span>
@@ -4056,22 +4057,43 @@
 
         <span class="k">return</span> <span class="n">sorting</span></div>
 
-<div class="viewcode-block" id="LearnedQuantilesRatingDigraph.exportGraphViz"><a class="viewcode-back" href="../techDoc.html#sortingDigraphs.LearnedQuantilesRatingDigraph.exportGraphViz">[docs]</a>    <span class="k">def</span> <span class="nf">exportGraphViz</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">fileName</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span><span class="n">relation</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>\
+<div class="viewcode-block" id="LearnedQuantilesRatingDigraph.exportRatingGraphViz"><a class="viewcode-back" href="../techDoc.html#sortingDigraphs.LearnedQuantilesRatingDigraph.exportRatingGraphViz">[docs]</a>    <span class="k">def</span> <span class="nf">exportRatingGraphViz</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">fileName</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>\
                              <span class="n">Comments</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>\
                              <span class="n">graphType</span><span class="o">=</span><span class="s1">&#39;png&#39;</span><span class="p">,</span><span class="n">graphSize</span><span class="o">=</span><span class="s1">&#39;7,7&#39;</span><span class="p">,</span>\
                              <span class="n">fontSize</span><span class="o">=</span><span class="mi">10</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        Dummy for self.exportRatingGraphViz()</span>
+<span class="sd">        Dummy for self.exportRatingByRankingGraphViz()</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">exportRatingGraphViz</span><span class="p">(</span><span class="n">fileName</span><span class="o">=</span><span class="n">fileName</span><span class="p">,</span><span class="n">relation</span><span class="o">=</span><span class="n">relation</span><span class="p">,</span>\
+        <span class="bp">self</span><span class="o">.</span><span class="n">exportRatingByRankingGraphViz</span><span class="p">(</span><span class="n">fileName</span><span class="o">=</span><span class="n">fileName</span><span class="p">,</span>\
                                    <span class="n">Comments</span><span class="o">=</span><span class="n">Comments</span><span class="p">,</span>\
                                    <span class="n">graphType</span><span class="o">=</span><span class="n">graphType</span><span class="p">,</span>\
                                    <span class="n">graphSize</span><span class="o">=</span><span class="n">graphSize</span><span class="p">,</span>
                                    <span class="n">fontSize</span><span class="o">=</span><span class="n">fontSize</span><span class="p">)</span></div>
 
+<div class="viewcode-block" id="LearnedQuantilesRatingDigraph.exportRatingBySortingGraphViz"><a class="viewcode-back" href="../techDoc.html#sortingDigraphs.LearnedQuantilesRatingDigraph.exportRatingBySortingGraphViz">[docs]</a>    <span class="k">def</span> <span class="nf">exportRatingBySortingGraphViz</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">fileName</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>\
+                             <span class="n">Comments</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>\
+                             <span class="n">graphType</span><span class="o">=</span><span class="s1">&#39;png&#39;</span><span class="p">,</span><span class="n">graphSize</span><span class="o">=</span><span class="s1">&#39;12,12&#39;</span><span class="p">,</span>\
+                             <span class="n">fontSize</span><span class="o">=</span><span class="mi">10</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Graphviz drawing of the rating-by-sorting digraph</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="kn">from</span> <span class="nn">copy</span> <span class="kn">import</span> <span class="n">deepcopy</span>
+        <span class="n">selfActions</span> <span class="o">=</span> <span class="n">deepcopy</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">actions</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">actions</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">getActionsKeys</span><span class="p">()</span>
+        <span class="n">sortingRelation</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">computeSortingRelation</span><span class="p">()</span>
+        <span class="n">selfRelation</span> <span class="o">=</span> <span class="n">deepcopy</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">relation</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">relation</span> <span class="o">=</span> <span class="n">sortingRelation</span>
+        <span class="kn">from</span> <span class="nn">sortingDigraphs</span> <span class="kn">import</span> <span class="n">QuantilesSortingDigraph</span>
+        <span class="n">QuantilesSortingDigraph</span><span class="o">.</span><span class="n">exportGraphViz</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span>\
+                                   <span class="n">fileName</span><span class="o">=</span><span class="n">fileName</span><span class="p">,</span>\
+                                   <span class="n">Comments</span><span class="o">=</span><span class="n">Comments</span><span class="p">,</span>\
+                                   <span class="n">graphType</span><span class="o">=</span><span class="n">graphType</span><span class="p">,</span>\
+                                   <span class="n">graphSize</span><span class="o">=</span><span class="n">graphSize</span><span class="p">,</span>
+                                   <span class="n">fontSize</span><span class="o">=</span><span class="n">fontSize</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">actions</span> <span class="o">=</span> <span class="n">selfActions</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">relation</span> <span class="o">=</span> <span class="n">selfRelation</span></div>
 
-<div class="viewcode-block" id="LearnedQuantilesRatingDigraph.exportRatingGraphViz"><a class="viewcode-back" href="../techDoc.html#sortingDigraphs.LearnedQuantilesRatingDigraph.exportRatingGraphViz">[docs]</a>    <span class="k">def</span> <span class="nf">exportRatingGraphViz</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">fileName</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
-                             <span class="n">relation</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+<div class="viewcode-block" id="LearnedQuantilesRatingDigraph.exportRatingByRankingGraphViz"><a class="viewcode-back" href="../techDoc.html#sortingDigraphs.LearnedQuantilesRatingDigraph.exportRatingByRankingGraphViz">[docs]</a>    <span class="k">def</span> <span class="nf">exportRatingByRankingGraphViz</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">fileName</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>\
                              <span class="n">Comments</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span><span class="n">graphType</span><span class="o">=</span><span class="s1">&#39;png&#39;</span><span class="p">,</span>\
                              <span class="n">graphSize</span><span class="o">=</span><span class="s1">&#39;7,7&#39;</span><span class="p">,</span>\
                              <span class="n">fontSize</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span>\
@@ -4125,8 +4147,7 @@
             <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;*---- exporting a dot file for GraphViz tools ---------*&#39;</span><span class="p">)</span>
 
         <span class="c1"># install rating relation (weakly transitive)</span>
-        <span class="k">if</span> <span class="n">relation</span> <span class="o">==</span> <span class="kc">None</span><span class="p">:</span>
-            <span class="n">digraph</span><span class="o">.</span><span class="n">relation</span> <span class="o">=</span> <span class="n">digraph</span><span class="o">.</span><span class="n">computeRatingRelation</span><span class="p">()</span>
+        <span class="n">digraph</span><span class="o">.</span><span class="n">relation</span> <span class="o">=</span> <span class="n">digraph</span><span class="o">.</span><span class="n">computeRatingRelation</span><span class="p">()</span>
         <span class="c1">#    if Debug:</span>
         <span class="c1">#        actionKeys = digraph.computeCopelandRanking()</span>
         <span class="c1">#        digraph.showHTMLRelationTable(actionsList=actionKeys)</span>
@@ -4502,7 +4523,7 @@
         <span class="k">except</span><span class="p">:</span>
             <span class="n">sorting</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">computeSortingCharacteristics</span><span class="p">(</span><span class="n">action</span><span class="o">=</span><span class="n">action</span><span class="p">,</span><span class="n">Debug</span><span class="o">=</span><span class="n">Debug</span><span class="p">)</span>
         <span class="n">catKeys</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">orderedCategoryKeys</span><span class="p">()</span>
-        <span class="n">keys</span> <span class="o">=</span> <span class="p">[</span><span class="n">catKeys</span><span class="p">[</span><span class="mi">0</span><span class="p">],[</span><span class="n">catKeys</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]]]</span>
+        <span class="n">keys</span> <span class="o">=</span> <span class="p">[</span><span class="n">catKeys</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span><span class="n">catKeys</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]]</span>
         <span class="n">lowLimit</span> <span class="o">=</span> <span class="n">sorting</span><span class="p">[</span><span class="n">action</span><span class="p">][</span><span class="n">catKeys</span><span class="p">[</span><span class="mi">0</span><span class="p">]][</span><span class="s1">&#39;lowLimit&#39;</span><span class="p">]</span>
         <span class="n">notHighLimit</span> <span class="o">=</span> <span class="n">sorting</span><span class="p">[</span><span class="n">action</span><span class="p">][</span><span class="n">catKeys</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]][</span><span class="s1">&#39;lowLimit&#39;</span><span class="p">]</span>
         <span class="k">for</span> <span class="n">c</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">orderedCategoryKeys</span><span class="p">():</span>
@@ -4529,16 +4550,16 @@
                 <span class="n">credibility</span>            </div>
 
 
-<div class="viewcode-block" id="LearnedQuantilesRatingDigraph.showActionsSortingResult"><a class="viewcode-back" href="../techDoc.html#sortingDigraphs.LearnedQuantilesRatingDigraph.showActionsSortingResult">[docs]</a>    <span class="k">def</span> <span class="nf">showActionsSortingResult</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">actionSubset</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span><span class="n">Debug</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+<div class="viewcode-block" id="LearnedQuantilesRatingDigraph.showActionsSortingResult"><a class="viewcode-back" href="../techDoc.html#sortingDigraphs.LearnedQuantilesRatingDigraph.showActionsSortingResult">[docs]</a>    <span class="k">def</span> <span class="nf">showActionsSortingResult</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">actionsSubset</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span><span class="n">Debug</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Shows the quantiles sorting result of all (default) or</span>
 <span class="sd">        a subset of the decision actions.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="k">if</span> <span class="n">actionSubset</span> <span class="o">==</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">actionsSubset</span> <span class="o">==</span> <span class="kc">None</span><span class="p">:</span>
             <span class="n">actions</span> <span class="o">=</span> <span class="p">[</span><span class="n">x</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">newActions</span><span class="p">]</span>
             <span class="c1">#actions.sort()</span>
-        <span class="k">else</span><span class="p">:</span>
-            <span class="n">actions</span> <span class="o">=</span> <span class="p">[</span><span class="n">x</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">flatten</span><span class="p">(</span><span class="n">actionSubset</span><span class="p">)]</span>
+        <span class="c1">#else:</span>
+        <span class="c1">#    actions = [x for x in flatten(actionSubset)]</span>
         <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Quantiles sorting result per decision action&#39;</span><span class="p">)</span>
         <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">actions</span><span class="p">:</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">showActionCategories</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="n">Debug</span><span class="o">=</span><span class="n">Debug</span><span class="p">)</span></div>
@@ -4799,7 +4820,8 @@
     <span class="c1">#ira.relation = ratingRelation</span>
 <span class="c1">##    #ira.closeTransitive(Irreflexive=True,Reverse=True)</span>
     <span class="c1">#ira.showHTMLRelationTable(actionsList=ira.actionsRanking)</span>
-    <span class="n">ira1</span><span class="o">.</span><span class="n">exportRatingGraphViz</span><span class="p">(</span><span class="s1">&#39;test2&#39;</span><span class="p">,</span><span class="n">graphType</span><span class="o">=</span><span class="s1">&#39;pdf&#39;</span><span class="p">)</span>
+    <span class="n">ira1</span><span class="o">.</span><span class="n">exportRatingByRankingGraphViz</span><span class="p">(</span><span class="s1">&#39;testRatRank&#39;</span><span class="p">,</span><span class="n">graphType</span><span class="o">=</span><span class="s1">&#39;pdf&#39;</span><span class="p">)</span>
+    <span class="n">ira1</span><span class="o">.</span><span class="n">exportRatingBySortingGraphViz</span><span class="p">(</span><span class="s1">&#39;testRatSort&#39;</span><span class="p">,</span><span class="n">graphType</span><span class="o">=</span><span class="s1">&#39;pdf&#39;</span><span class="p">)</span>
 <span class="c1">##    #ira.showSorting()</span>
 <span class="c1">##    #ira.showHTMLSorting()</span>
 <span class="c1">##    ira.showActionsSortingResult()</span>

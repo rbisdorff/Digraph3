@@ -10,14 +10,14 @@ t = PerformanceTableau('studentenSpiegel04')
 print(t)
 t.computeMissingDataProportion(Comments=True)
 disciplines = [t for t in t.criteria]
-t.showHTMLPerformanceHeatmap(\
-                  criteriaList=disciplines,ndigits=1,rankingRule=None)
-t.showHTMLCriteria()
+#t.showHTMLPerformanceHeatmap(\
+#                  criteriaList=disciplines,ndigits=1,rankingRule=None)
+#t.showHTMLCriteria()
 
 ###########
 from performanceQuantiles import *
 pq = PerformanceQuantiles(t,numberOfBins=9)
-pq.showHTMLLimitingQuantiles(Transposed=True,Sorted=False)
+#pq.showHTMLLimitingQuantiles(Transposed=True,Sorted=False)
 
 ###########
 from sortingDigraphs import *
@@ -25,7 +25,7 @@ nqr = LearnedQuantilesRatingDigraph(pq,t,rankingRule='Copeland')
 print(nqr)
 nqr.showHTMLRatingHeatmap(rankingRule='Copeland',Correlations=True,ndigits=1)
 nqr.showQuantilesRating()
-nqr.exportRatingGraphViz('ratingResult',graphSize='12,12')
+nqr.exportRatingByRankingGraphViz('ratingResult',graphSize='12,12')
 
 #############
 nqr1 = NormedQuantilesRatingDigraph(pq,t,rankingRule='NetFlows')
@@ -35,21 +35,12 @@ rankings = [nqr.actionsRanking,
 print(rankings)
 rf = RankingsFusion(nqr1,rankings)
 rf.exportGraphViz(fileName='fusionResult',WithRatingDecoration=True,graphType='png',graphSize='30,30')
-# For decorating the 9-tiles lower limits the fusionResult.dat file
-# may be edited by hand like in the ratingResult.dot
-# fileshape = "box", fillcolor=lightcoral, style=filled,
 
 ###################
-g = BipolarOutrankingDigraph(t)
-print(g)
-g.computeTransitivityDegree(Comments=True)
-g.computeSymmetryDegree(Comments=True)
-g.computeChordlessCircuits()
-g.showChordlessCircuits()
+nqr.showActionsSortingResult()
+nqr.showHTMLQuantilesSorting()
+nqr.exportRatingBySortingGraphViz('nineTilingDrawing',graphSize='12,12')
 
-############
-qs = QuantilesSortingDigraph(t,9,LowerClosed=True)
-qs.showHTMLQuantileOrdering(strategy='average')
-qs.exportGraphViz(graphSize='12,12')
+
 
 

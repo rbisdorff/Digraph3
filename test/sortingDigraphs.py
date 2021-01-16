@@ -2653,9 +2653,9 @@ class QuantilesSortingDigraph(SortingDigraph):
         """
         extract normal actions keys()
         """
-        profiles = set([x for x in list(self.profiles.keys())])
+        profiles = set([x for x in self.profiles])
         if action == None:
-            actionsExt = set([x for x in list(self.actions.keys())])
+            actionsExt = set([x for x in self.actions])
             if withoutProfiles:
                 return actionsExt - profiles
             else:
@@ -3115,7 +3115,8 @@ class QuantilesSortingDigraph(SortingDigraph):
         Max = self.valuationdomain['max']
         Med = self.valuationdomain['med']
         Min = self.valuationdomain['min']
-        actions = [x for x in self.actionsOrig]
+        #actions = [x for x in self.actionsOrig]
+        actions = self.getActionsKeys()
         currActions = set(actions)
         sortingRelation = {}
         for x in actions:
@@ -3887,22 +3888,43 @@ class LearnedQuantilesRatingDigraph(QuantilesSortingDigraph,PerformanceQuantiles
 
         return sorting
 
-    def exportGraphViz(self,fileName=None,relation=None,\
+    def exportRatingGraphViz(self,fileName=None,\
                              Comments=True,\
                              graphType='png',graphSize='7,7',\
                              fontSize=10):
         """
-        Dummy for self.exportRatingGraphViz()
+        Dummy for self.exportRatingByRankingGraphViz()
         """
-        self.exportRatingGraphViz(fileName=fileName,relation=relation,\
+        self.exportRatingByRankingGraphViz(fileName=fileName,\
                                    Comments=Comments,\
                                    graphType=graphType,\
                                    graphSize=graphSize,
                                    fontSize=fontSize)
 
+    def exportRatingBySortingGraphViz(self,fileName=None,\
+                             Comments=True,\
+                             graphType='png',graphSize='12,12',\
+                             fontSize=10):
+        """
+        Graphviz drawing of the rating-by-sorting digraph
+        """
+        from copy import deepcopy
+        selfActions = deepcopy(self.actions)
+        self.actions = self.getActionsKeys()
+        sortingRelation = self.computeSortingRelation()
+        selfRelation = deepcopy(self.relation)
+        self.relation = sortingRelation
+        from sortingDigraphs import QuantilesSortingDigraph
+        QuantilesSortingDigraph.exportGraphViz(self,\
+                                   fileName=fileName,\
+                                   Comments=Comments,\
+                                   graphType=graphType,\
+                                   graphSize=graphSize,
+                                   fontSize=fontSize)
+        self.actions = selfActions
+        self.relation = selfRelation
 
-    def exportRatingGraphViz(self,fileName=None,
-                             relation=None,
+    def exportRatingByRankingGraphViz(self,fileName=None,\
                              Comments=True,graphType='png',\
                              graphSize='7,7',\
                              fontSize=10,\
@@ -3956,8 +3978,7 @@ class LearnedQuantilesRatingDigraph(QuantilesSortingDigraph,PerformanceQuantiles
             print('*---- exporting a dot file for GraphViz tools ---------*')
 
         # install rating relation (weakly transitive)
-        if relation == None:
-            digraph.relation = digraph.computeRatingRelation()
+        digraph.relation = digraph.computeRatingRelation()
         #    if Debug:
         #        actionKeys = digraph.computeCopelandRanking()
         #        digraph.showHTMLRelationTable(actionsList=actionKeys)
@@ -4333,7 +4354,7 @@ class LearnedQuantilesRatingDigraph(QuantilesSortingDigraph,PerformanceQuantiles
         except:
             sorting = self.computeSortingCharacteristics(action=action,Debug=Debug)
         catKeys = self.orderedCategoryKeys()
-        keys = [catKeys[0],[catKeys[-1]]]
+        keys = [catKeys[0],catKeys[-1]]
         lowLimit = sorting[action][catKeys[0]]['lowLimit']
         notHighLimit = sorting[action][catKeys[-1]]['lowLimit']
         for c in self.orderedCategoryKeys():
@@ -4360,16 +4381,16 @@ class LearnedQuantilesRatingDigraph(QuantilesSortingDigraph,PerformanceQuantiles
                 credibility            
 
 
-    def showActionsSortingResult(self,actionSubset=None,Debug=False):
+    def showActionsSortingResult(self,actionsSubset=None,Debug=False):
         """
         Shows the quantiles sorting result of all (default) or
         a subset of the decision actions.
         """
-        if actionSubset == None:
+        if actionsSubset == None:
             actions = [x for x in self.newActions]
             #actions.sort()
-        else:
-            actions = [x for x in flatten(actionSubset)]
+        #else:
+        #    actions = [x for x in flatten(actionSubset)]
         print('Quantiles sorting result per decision action')
         for x in actions:
             self.showActionCategories(x,Debug=Debug)
@@ -4630,7 +4651,8 @@ if __name__ == "__main__":
     #ira.relation = ratingRelation
 ##    #ira.closeTransitive(Irreflexive=True,Reverse=True)
     #ira.showHTMLRelationTable(actionsList=ira.actionsRanking)
-    ira1.exportRatingGraphViz('test2',graphType='pdf')
+    ira1.exportRatingByRankingGraphViz('testRatRank',graphType='pdf')
+    ira1.exportRatingBySortingGraphViz('testRatSort',graphType='pdf')
 ##    #ira.showSorting()
 ##    #ira.showHTMLSorting()
 ##    ira.showActionsSortingResult()

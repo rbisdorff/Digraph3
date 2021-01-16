@@ -815,3 +815,79 @@ QuantilesSorting   : 0.11601
 Preordering        : 0.00059
 Decomposing        : 0.28689
 Ordering           : 0.01876
+*----- show short --------------*
+Instance name      : random3ObjectivesPerfTab_conf_pr
+Size (in bytes)    : 3118675
+# Actions          : 100
+# Criteria         : 13
+Sorting by         : 5-Tiling
+Ordering strategy  : average
+Local ranking rule : Copeland
+# Components       : 11
+Minimal size       : 1
+Maximal order      : 23
+Average order      : 9.1
+Fill rate          : 15.030%
+*-- Constructor run times (in sec.) --*
+Total time         : 1.69004
+QuantilesSorting   : 0.13445
+Preordering        : 0.00095
+Decomposing        : 0.29416
+Ordering           : 0.01559
+*----- show short --------------*
+Instance name      : random3ObjectivesPerfTab_conf_pr
+Size (in bytes)    : 3208372
+# Actions          : 100
+# Criteria         : 13
+Sorting by         : 5-Tiling
+Ordering strategy  : average
+Local ranking rule : Copeland
+# Components       : 9
+Minimal size       : 1
+Maximal order      : 33
+Average order      : 11.1
+Fill rate          : 19.091%
+*-- Constructor run times (in sec.) --*
+Total time         : 1.73876
+QuantilesSorting   : 0.13150
+Preordering        : 0.00076
+Decomposing        : 0.36986
+Ordering           : 0.01835
+*----- show short --------------*
+Instance name      : random3ObjectivesPerfTab_conf_pr
+Size (in bytes)    : 3132812
+# Actions          : 100
+# Criteria         : 13
+Sorting by         : 5-Tiling
+Ordering strategy  : average
+Local ranking rule : Copeland
+# Components       : 9
+Minimal size       : 1
+Maximal order      : 22
+Average order      : 11.1
+Fill rate          : 16.263%
+*-- Constructor run times (in sec.) --*
+Total time         : 1.66859
+QuantilesSorting   : 0.12039
+Preordering        : 0.00060
+Decomposing        : 0.31097
+Ordering           : 0.01597
+*----- show short --------------*
+Instance name      : random3ObjectivesPerfTab_conf_pr
+Size (in bytes)    : 3147847
+# Actions          : 100
+# Criteria         : 13
+Sorting by         : 5-Tiling
+Ordering strategy  : average
+Local ranking rule : Copeland
+# Components       : 11
+Minimal size       : 1
+Maximal order      : 26
+Average order      : 9.1
+Fill rate          : 15.030%
+*-- Constructor run times (in sec.) --*
+Total time         : 1.66214
+QuantilesSorting   : 0.13087
+Preordering        : 0.00062
+Decomposing        : 0.27291
+Ordering           : 0.01429

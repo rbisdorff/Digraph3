@@ -1,0 +1,18 @@
+<map id="inheritance408ba66a77" name="inheritance408ba66a77">
+<area shape="rect" id="node1" href="#digraphs.Digraph" target="_top" title="Genuine root class of all Digraph3 modules." alt="" coords="5,167,72,190"/>
+<area shape="rect" id="node3" href="#transitiveDigraphs.TransitiveDigraph" target="_top" title="Abstract class for specialized methods addressing transitive digraphs." alt="" coords="117,167,233,190"/>
+<area shape="rect" id="node2" href="#transitiveDigraphs.KemenyOrdersFusion" target="_top" title="Specialization of the abstract TransitiveDigraph class for " alt="" coords="321,5,459,29"/>
+<area shape="rect" id="node4" href="#transitiveDigraphs.KemenyWeakOrder" target="_top" title="dummy class for backward compatibility." alt="" coords="592,5,718,29"/>
+<area shape="rect" id="node5" href="#transitiveDigraphs.KohlerArrowRaynaudFusion" target="_top" title="Specialization of the abstract TransitiveDigraph class for " alt="" coords="304,51,476,75"/>
+<area shape="rect" id="node7" href="#transitiveDigraphs.RankingsFusion" target="_top" title="Specialization of the abstract TransitiveDigraph class for " alt="" coords="336,97,444,121"/>
+<area shape="rect" id="node9" href="#transitiveDigraphs.PrincipalInOutDegreesOrderingFusion" target="_top" title="Specialization of abstract TransitiveDigraph class for ranking by fusion" alt="" coords="278,143,503,167"/>
+<area shape="rect" id="node11" href="#transitiveDigraphs.RankingByChoosingDigraph" target="_top" title="Specialization of the abstract TransitiveDigraph class for " alt="" coords="303,189,477,213"/>
+<area shape="rect" id="node14" href="#transitiveDigraphs.WeakCopelandOrder" target="_top" title="instantiates the Weak Copeland Order from" alt="" coords="324,235,457,259"/>
+<area shape="rect" id="node15" href="#transitiveDigraphs.WeakNetFlowsOrder" target="_top" title="Instantiates the Weak NetFlows Order from" alt="" coords="324,281,457,305"/>
+<area shape="rect" id="node16" href="#transitiveDigraphs.WeakOrder" target="_top" title="dummy class for backward compatibility." alt="" coords="350,327,431,351"/>
+<area shape="rect" id="node6" href="#transitiveDigraphs.PartialRanking" target="_top" title="dummy class for backward compatibility." alt="" coords="606,97,705,121"/>
+<area shape="rect" id="node8" href="#transitiveDigraphs.PrincipalInOutDegreesOrdering" target="_top" title="dummy class for backward compatibility." alt="" coords="561,143,750,167"/>
+<area shape="rect" id="node10" href="#transitiveDigraphs.RankingByBestChoosingDigraph" target="_top" title="Specialization of abstract TransitiveDigraph class for computing a ranking by best&#45;choosing." alt="" coords="556,189,755,213"/>
+<area shape="rect" id="node12" href="#transitiveDigraphs.RankingByLastChoosingDigraph" target="_top" title="Specialization of abstract TransitiveDigraph class for computing a ranking by rejecting." alt="" coords="557,235,754,259"/>
+<area shape="rect" id="node13" href="#transitiveDigraphs.RankingByPrudentChoosingDigraph" target="_top" title="Specialization for ranking&#45;by&#45;rejecting results with prudent single elimination of chordless circuits. By default, the cut level for circuits elimination is set to 20% of the valuation domain maximum (1.0)." alt="" coords="548,281,763,305"/>
+</map>
