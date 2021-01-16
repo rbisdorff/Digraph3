@@ -4637,7 +4637,7 @@ We shall now lexicographically sort these individual rating results per Universi
 
    The ranked 9-tiles rating-by-sorting result
 
-In :numref:`nineTilingOrdering` we may notice that the Universities: *Augsburg*, *Kaiserslautern*, *Mannheim* and *Tübingen* for instance, show in fact the same average rated 9-tiles score of 0.725; yet, the rated upper 9-tile limit of *Tuebingen* is 0.78, whereas the one of the other Universities reaches only 0.89. Hence, *Tuebingen* is ranked below *Augsburg*, *Kaiserslautern* and *Mannheim* . 
+In :numref:`nineTilingOrdering` we may notice that the Universities: *Augsburg*, *Kaiserslautern*, *Mannheim* and *Tübingen* for instance, show in fact the same average rated 9-tiles score of 0.725; yet, the rated upper 9-tile limit of *Tuebingen* is only 0.78, whereas the one of the other Universities reaches 0.89. Hence, *Tuebingen* is ranked below *Augsburg*, *Kaiserslautern* and *Mannheim* . 
 
 With a *graphviz* drawing of this :code:`QuantilesSorting` digraph instance *qs*, we may, without requiring any specific ordering strategy, as well illustrate our 9-tiles *rating-by-sorting* result.
 
@@ -4654,7 +4654,7 @@ With a *graphviz* drawing of this :code:`QuantilesSorting` digraph instance *qs*
 
    Graphviz drawing of the 9-tiles sorting digraph
 
-In :numref:`nineTilingDrawing` we actually see the *skeleton* (transitive closure removed) of a **partial order**, where an oriented arc is drawn between Universities *x* and *y* when their 9-tiles sorting results are **disjoint** and the one of *x* is **higher rated** than the one of *y*. The rating for *TU München* (see :numref:`nineTilesSorting` Lines 45), for instance, is disjoint and higher rated than the one of the Universities *Freiburg* and *Konstanz* (Lines 23, 32). And, both the ratings of *Feiburg* and Konstanz* are, however, not disjoint from the one, for instance, of the Universty of *Stuttgart* (Line 42). 
+In :numref:`nineTilingDrawing` we actually see the *skeleton* (transitive closure removed) of a **partial order**, where an oriented arc is drawn between Universities *x* and *y* when their 9-tiles sorting results are **disjoint** and the one of *x* is **higher rated** than the one of *y*. The rating for *TU München* (see :numref:`nineTilesSorting` Lines 45), for instance, is disjoint and higher rated than the one of the Universities *Freiburg* and *Konstanz* (Lines 23, 32). And, both the ratings of *Feiburg* and *Konstanz* are, however, not disjoint from the one, for instance, of the Universty of *Stuttgart* (Line 42). 
 
 The partial ranking, shown in :numref:`nineTilingDrawing`, is in fact **independent** of any ordering strategy: - *average*, - *optimistic* or - *pessimistic*, of overlapping 9-tiles sorting results, and confirms that the same Universities as with the previous *rating-by-ranking* approach, namely *TU München*, *Freiburg*, *Konstanz*, *Stuttgart*, *Berlin Humboldt*, *Heidelberg* and *Leipzig* appear top-rated. Similarly, the Universities of *Duisburg*, *Bielefeld*, *Hanover*, *Bochum*, *Giessen*, *Düsseldorf* and *Hamburg* give the lowest-rated group. The midfield here is again consisting of more or less the same Universities as the one observed in the previous *rating-by-ranking* approach (see :numref:`ratingResult`).
 

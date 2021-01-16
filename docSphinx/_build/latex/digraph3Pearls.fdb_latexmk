@@ -1,10 +1,10 @@
 # Fdb version 3
-["makeindex digraph3Pearls.idx"] 1591701136 "digraph3Pearls.idx" "digraph3Pearls.ind" "digraph3Pearls" 1610804784
+["makeindex digraph3Pearls.idx"] 1591701136 "digraph3Pearls.idx" "digraph3Pearls.ind" "digraph3Pearls" 1610806992
   "digraph3Pearls.idx" 1610804781 0 d41d8cd98f00b204e9800998ecf8427e "pdflatex"
   (generated)
   "digraph3Pearls.ilg"
   "digraph3Pearls.ind"
-["pdflatex"] 1610804781 "digraph3Pearls.tex" "digraph3Pearls.pdf" "digraph3Pearls" 1610804784
+["pdflatex"] 1610804781 "digraph3Pearls.tex" "digraph3Pearls.pdf" "digraph3Pearls" 1610806992
   "/usr/local/texlive/2020/texmf-dist/fonts/enc/dvips/cm-super/cm-super-t1.enc" 1136849721 2971 def0b6c1f0b107b3b936def894055589 ""
   "/usr/local/texlive/2020/texmf-dist/fonts/enc/dvips/cm-super/cm-super-ts1.enc" 1136849721 2900 1537cc8184ad1792082cd229ecc269f4 ""
   "/usr/local/texlive/2020/texmf-dist/fonts/map/fontname/texfonts.map" 1577235249 3524 cb3e574dea2d1052e39280babc910dc8 ""
@@ -211,18 +211,18 @@
   "robustHeatmap.png" 1595599042 154058 8ede85365a1f8ca8940cef240e931fa3 ""
   "simulLikelihood.png" 1595599042 22562 cf4b77dc733a465112a7dad344b7c667 ""
   "sphinx.sty" 1608292396 82250 00bd36f302b7cc8960761f445d02b13e ""
-  "sphinxhighlight.sty" 1610804730 8137 38a433148fcb7611515a989ff1750dd5 ""
+  "sphinxhighlight.sty" 1610806945 8137 38a433148fcb7611515a989ff1750dd5 ""
   "sphinxhowto.cls" 1608292396 3251 61ceeeffc44f983928ef03a3834a8b58 ""
-  "sphinxmessages.sty" 1610804780 745 3f5fcd6cdd7964ed608767954a8ced6f ""
+  "sphinxmessages.sty" 1610806991 745 3f5fcd6cdd7964ed608767954a8ced6f ""
   "sphinxmulticell.sty" 1595599042 14606 0b6edc2b1a83546ed92026d1f6a311b5 ""
   "symmetricPart.png" 1595599042 74487 bef1531d29a633b766bb94b1dcbb02bb ""
   "unOpposedOutrankings.png" 1605861911 96501 a681b593ae8a94902f526172b011e5dd ""
   "unopDigraph.png" 1605861908 120247 57dcec3f2803162eee385cb68508efc9 ""
   "weightDistributions.png" 1595599042 96093 6882246be0684c7dd44502a778cc71de ""
   (generated)
-  "digraph3Pearls.toc"
-  "digraph3Pearls.log"
   "digraph3Pearls.aux"
   "digraph3Pearls.out"
-  "digraph3Pearls.idx"
   "digraph3Pearls.pdf"
+  "digraph3Pearls.idx"
+  "digraph3Pearls.toc"
+  "digraph3Pearls.log"
