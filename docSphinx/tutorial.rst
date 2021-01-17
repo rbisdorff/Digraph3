@@ -3605,8 +3605,8 @@ Back to :ref:`Content Table <Tutorial-label>`
 
 .. _QuantilesRating-Tutorial-label:
 
-Rating by sorting with multiple incommensurable criteria
---------------------------------------------------------
+Rating by sorting into relative performance quantiles
+-----------------------------------------------------
 
 .. contents:: 
 	:depth: 2
@@ -3615,8 +3615,8 @@ Rating by sorting with multiple incommensurable criteria
 We apply order statistics for sorting a set *X* of *n* potential decision actions, evaluated on *m* incommensurable performance criteria, into *q* quantile equivalence classes, based on pairwise outranking characteristics involving the quantile class limits observed on each criterion. Thus we may implement a weak ordering algorithm of complexity *O(nmq)*.
 
 
-K-sorting on a single criterion
-...............................
+Quantile sorting on a single criterion
+......................................
 
 A single criterion sorting category *K* is a (usually) lower-closed interval :math:`[m_k ; M_k[` on a real-valued performance measurement scale, with :math:`m_k \leq M_k`. If *x* is a measured performance on this scale, we may distinguish three sorting situations.
 
@@ -3636,8 +3636,8 @@ Let :math:`Q=\{Q_0 , Q_1 , ..., Q_q\}` denote the set of *q* + 1 increasing orde
 
 **Example**: Let *A* = { :math:`a_7 = 7.03`, :math:`a_{15}=9.45`, :math:`a_{11}= 20.35`, :math:`a_{16}= 25.94`, :math:`a_{10}= 31.44`, :math:`a_9= 34.48`, :math:`a_{12}= 34.50`, :math:`a_{13}= 35.61`, :math:`a_{14}= 36.54`, :math:`a_{19}= 42.83`, :math:`a_5= 50.04`, :math:`a_2= 59.85`, :math:`a_{17}= 61.35`, :math:`a_{18}= 61.61`, :math:`a_3= 76.91`, :math:`a_6= 91.39`, :math:`a_1= 91.79`, :math:`a_4= 96.52`, :math:`a_8= 96.56`, :math:`a_{20}= 98.42` } be a set of 20 increasing performance measures observed on a given criterion. The lower-closed category limits we obtain with quartiles (*q* = 4) are: :math:`Q_0 = 7.03` = :math:`a_7`, :math:`Q_1= 34.485`, :math:`Q_2= 54.945` (median performance), and :math:`Q_3= 91.69`. And the sorting into these four categories defines on *A* a complete preorder with the following four equivalence classes: :math:`K_1=\{a_7,a_{10},a_{11},a_{10},a_{15},a_{16}\}`, :math:`K_2=\{a_5,a_9,a_{13},a_{14},a_{19}\}`, :math:`K_3=\{a_2,a_3,a_6,a_{17},a_{18}\}`, and :math:`K_4=\{a_1,a_4,a_8,a_{20}\}`.
 
-Rating by quantiles sorting with multiple criteria
-..................................................
+Quantiles sorting with multiple performance criteria
+....................................................
 
 Let us now suppose that we are given a performance tableau with a set *X* of *n* decision alternatives evaluated on a coherent family of *m* performance criteria associated with the corresponding outranking relation :math:`\succsim` defined on *X*. We denote :math:`x_j` the performance of alternative *x* observed on criterion *j*.
 
@@ -3693,7 +3693,7 @@ We may compute, for instance, a five-tiling of a given random performance tablea
      Compute profiles : 0.00075
      Compute relation : 0.02581
      Weak Ordering    : 0.00052
-    >>> qs.showCriteriaCategoryLimits()
+    >>> qs.showCriteriaQuantileLimits()
      Quantile Class Limits (q = 5)
      Upper-closed classes
      crit.	 0.20	 0.40	 0.60	 0.80	 1.00	 
@@ -3923,8 +3923,8 @@ Back to :ref:`Content Table <Tutorial-label>`
 
 .. _Rating-Tutorial-label:
 
-Rating-by-ranking with learned quantile norms
----------------------------------------------
+Rating by ranking with learned performance quantile norms
+---------------------------------------------------------
 
 .. contents:: 
 	:depth: 2
@@ -4056,12 +4056,10 @@ Parameter *historySize* (see :numref:`perfGenerator` Line 5) of the :py:meth:`pe
     Showing the updated quartiles limits	    
     
 
-Rating new performances with quantile norms
-...........................................
+Rating-by-ranking new performances with quantile norms
+......................................................
 
-For *absolute rating* of a newly given set of decision alternatives with the help of empirical performance quantiles estimated from historical data, we provide the :py:class:`sortingDigraphs.LearnedQuantilesRatingDigraph` class, a specialisation of the :py:class:`sortingDigraphs.SortingDigraph` class.
-
-The constructor requires a valid :py:class:`performanceQuantiles.PerformanceQuantiles` instance.
+For **absolute** *rating* of a newly given set of decision alternatives with the help of empirical performance quantiles estimated from historical data, we provide the :py:class:`sortingDigraphs.LearnedQuantilesRatingDigraph` class, a specialisation of the :py:class:`sortingDigraphs.SortingDigraph` class. The rating result is computed by **ranking** the new performance records together with the learned quantile limits. The constructor requires a valid :py:class:`performanceQuantiles.PerformanceQuantiles` instance. By default, the constructor uses, by default, *Copeland*'s or the *NetFlows* ranking rule which **best fits** with the underlying outranking digraph.
 
 .. note::
 
@@ -4358,7 +4356,7 @@ Details of the enrolment quality criteria (the academic subjects) may be consult
 
    Details of the rating criteria
 
-The evaluation of the individual quality score for a participating student actually depends, indeed, on his or her mainly enroled subject [29]_. The apparent quality measurement scales thus largely differ indeed from subject to subject (see :numref:`spiegelCriteria`), like *Law Studies* (35.0 - 65-0) and *Politology* (50.0 - 70.0). The recorded average enrolment quality scores, hence, are in fact **incommensurable** between the subjects.
+The evaluation of the individual quality score for a participating student actually depends on his or her mainly enroled subject [29]_. The apparent quality measurement scales thus largely differ indeed from subject to subject (see :numref:`spiegelCriteria`), like *Law Studies* (35.0 - 65-0) and *Politology* (50.0 - 70.0). The recorded average enrolment quality scores, hence, are in fact **incommensurable** between the subjects.
 
 To take furthermore into account a potential and very likely *imprecision* of the individual quality scores' computation, we shall assume that, for all subjects, an average enrolment quality score difference of **0.1** is **insignificant**, wheras a difference of **0.5** is sufficient to *positively* attest a **better** enrolment quality.
 

@@ -4550,15 +4550,15 @@ Back to {\hyperref[\detokenize{tutorial:tutorial-label}]{\sphinxcrossref{\DUrole
 
 
 
-\section{Rating by sorting with multiple incommensurable criteria}
-\label{\detokenize{tutorial:rating-by-sorting-with-multiple-incommensurable-criteria}}\label{\detokenize{tutorial:quantilesrating-tutorial-label}}
+\section{Rating by sorting into relative performance quantiles}
+\label{\detokenize{tutorial:rating-by-sorting-into-relative-performance-quantiles}}\label{\detokenize{tutorial:quantilesrating-tutorial-label}}
 \begin{sphinxShadowBox}
 \begin{itemize}
 \item {} 
-\phantomsection\label{\detokenize{tutorial:id260}}{\hyperref[\detokenize{tutorial:k-sorting-on-a-single-criterion}]{\sphinxcrossref{K\sphinxhyphen{}sorting on a single criterion}}} (\autopageref*{\detokenize{tutorial:k-sorting-on-a-single-criterion}})
+\phantomsection\label{\detokenize{tutorial:id260}}{\hyperref[\detokenize{tutorial:quantile-sorting-on-a-single-criterion}]{\sphinxcrossref{Quantile sorting on a single criterion}}} (\autopageref*{\detokenize{tutorial:quantile-sorting-on-a-single-criterion}})
 
 \item {} 
-\phantomsection\label{\detokenize{tutorial:id261}}{\hyperref[\detokenize{tutorial:rating-by-quantiles-sorting-with-multiple-criteria}]{\sphinxcrossref{Rating by quantiles sorting with multiple criteria}}} (\autopageref*{\detokenize{tutorial:rating-by-quantiles-sorting-with-multiple-criteria}})
+\phantomsection\label{\detokenize{tutorial:id261}}{\hyperref[\detokenize{tutorial:quantiles-sorting-with-multiple-performance-criteria}]{\sphinxcrossref{Quantiles sorting with multiple performance criteria}}} (\autopageref*{\detokenize{tutorial:quantiles-sorting-with-multiple-performance-criteria}})
 
 \item {} 
 \phantomsection\label{\detokenize{tutorial:id262}}{\hyperref[\detokenize{tutorial:ranking-big-performance-tableaux}]{\sphinxcrossref{Ranking big performance tableaux}}} (\autopageref*{\detokenize{tutorial:ranking-big-performance-tableaux}})
@@ -4569,8 +4569,8 @@ Back to {\hyperref[\detokenize{tutorial:tutorial-label}]{\sphinxcrossref{\DUrole
 We apply order statistics for sorting a set \sphinxstyleemphasis{X} of \sphinxstyleemphasis{n} potential decision actions, evaluated on \sphinxstyleemphasis{m} incommensurable performance criteria, into \sphinxstyleemphasis{q} quantile equivalence classes, based on pairwise outranking characteristics involving the quantile class limits observed on each criterion. Thus we may implement a weak ordering algorithm of complexity \sphinxstyleemphasis{O(nmq)}.
 
 
-\subsection{K\sphinxhyphen{}sorting on a single criterion}
-\label{\detokenize{tutorial:k-sorting-on-a-single-criterion}}
+\subsection{Quantile sorting on a single criterion}
+\label{\detokenize{tutorial:quantile-sorting-on-a-single-criterion}}
 A single criterion sorting category \sphinxstyleemphasis{K} is a (usually) lower\sphinxhyphen{}closed interval \([m_k ; M_k[\) on a real\sphinxhyphen{}valued performance measurement scale, with \(m_k \leq M_k\). If \sphinxstyleemphasis{x} is a measured performance on this scale, we may distinguish three sorting situations.
 \begin{enumerate}
 \sphinxsetlistlabels{\arabic}{enumi}{enumii}{}{.}%
@@ -4598,8 +4598,8 @@ Let \(Q=\{Q_0 , Q_1 , ..., Q_q\}\) denote the set of \sphinxstyleemphasis{q} + 1
 \sphinxstylestrong{Example}: Let \sphinxstyleemphasis{A} = \{ \(a_7 = 7.03\), \(a_{15}=9.45\), \(a_{11}= 20.35\), \(a_{16}= 25.94\), \(a_{10}= 31.44\), \(a_9= 34.48\), \(a_{12}= 34.50\), \(a_{13}= 35.61\), \(a_{14}= 36.54\), \(a_{19}= 42.83\), \(a_5= 50.04\), \(a_2= 59.85\), \(a_{17}= 61.35\), \(a_{18}= 61.61\), \(a_3= 76.91\), \(a_6= 91.39\), \(a_1= 91.79\), \(a_4= 96.52\), \(a_8= 96.56\), \(a_{20}= 98.42\) \} be a set of 20 increasing performance measures observed on a given criterion. The lower\sphinxhyphen{}closed category limits we obtain with quartiles (\sphinxstyleemphasis{q} = 4) are: \(Q_0 = 7.03\) = \(a_7\), \(Q_1= 34.485\), \(Q_2= 54.945\) (median performance), and \(Q_3= 91.69\). And the sorting into these four categories defines on \sphinxstyleemphasis{A} a complete preorder with the following four equivalence classes: \(K_1=\{a_7,a_{10},a_{11},a_{10},a_{15},a_{16}\}\), \(K_2=\{a_5,a_9,a_{13},a_{14},a_{19}\}\), \(K_3=\{a_2,a_3,a_6,a_{17},a_{18}\}\), and \(K_4=\{a_1,a_4,a_8,a_{20}\}\).
 
 
-\subsection{Rating by quantiles sorting with multiple criteria}
-\label{\detokenize{tutorial:rating-by-quantiles-sorting-with-multiple-criteria}}
+\subsection{Quantiles sorting with multiple performance criteria}
+\label{\detokenize{tutorial:quantiles-sorting-with-multiple-performance-criteria}}
 Let us now suppose that we are given a performance tableau with a set \sphinxstyleemphasis{X} of \sphinxstyleemphasis{n} decision alternatives evaluated on a coherent family of \sphinxstyleemphasis{m} performance criteria associated with the corresponding outranking relation \(\succsim\) defined on \sphinxstyleemphasis{X}. We denote \(x_j\) the performance of alternative \sphinxstyleemphasis{x} observed on criterion \sphinxstyleemphasis{j}.
 
 Suppose furthermore that we want to sort the decision alternatives into \sphinxstyleemphasis{q} upper\sphinxhyphen{}closed quantile equivalence classes. We therefore consider a series : \(k = k/q\) for \sphinxstyleemphasis{k} = 0, …, \sphinxstyleemphasis{q} of \sphinxstyleemphasis{q+1} equally spaced quantiles, like quartiles: 0, 0.25, 0.5, 0.75, 1; quintiles: 0, 0.2, 0.4, 0.6, 0.8, 1: or deciles: 0, 0.1, 0.2, …, 0.9, 1, for instance.
@@ -4653,7 +4653,7 @@ We may compute, for instance, a five\sphinxhyphen{}tiling of a given random perf
 \PYG{g+go}{  Compute profiles : 0.00075}
 \PYG{g+go}{  Compute relation : 0.02581}
 \PYG{g+go}{  Weak Ordering    : 0.00052}
-\PYG{g+go}{ \PYGZgt{}\PYGZgt{}\PYGZgt{} qs.showCriteriaCategoryLimits()}
+\PYG{g+go}{ \PYGZgt{}\PYGZgt{}\PYGZgt{} qs.showCriteriaQuantileLimits()}
 \PYG{g+go}{  Quantile Class Limits (q = 5)}
 \PYG{g+go}{  Upper\PYGZhy{}closed classes}
 \PYG{g+go}{  crit.       0.20    0.40    0.60    0.80    1.00}
@@ -4889,8 +4889,8 @@ Back to {\hyperref[\detokenize{tutorial:tutorial-label}]{\sphinxcrossref{\DUrole
 
 
 
-\section{Rating\sphinxhyphen{}by\sphinxhyphen{}ranking with learned quantile norms}
-\label{\detokenize{tutorial:rating-by-ranking-with-learned-quantile-norms}}\label{\detokenize{tutorial:rating-tutorial-label}}
+\section{Rating by ranking with learned performance quantile norms}
+\label{\detokenize{tutorial:rating-by-ranking-with-learned-performance-quantile-norms}}\label{\detokenize{tutorial:rating-tutorial-label}}
 \begin{sphinxShadowBox}
 \begin{itemize}
 \item {} 
@@ -4900,7 +4900,7 @@ Back to {\hyperref[\detokenize{tutorial:tutorial-label}]{\sphinxcrossref{\DUrole
 \phantomsection\label{\detokenize{tutorial:id264}}{\hyperref[\detokenize{tutorial:incremental-learning-of-historical-performance-quantiles}]{\sphinxcrossref{Incremental learning of historical performance quantiles}}} (\autopageref*{\detokenize{tutorial:incremental-learning-of-historical-performance-quantiles}})
 
 \item {} 
-\phantomsection\label{\detokenize{tutorial:id265}}{\hyperref[\detokenize{tutorial:rating-new-performances-with-quantile-norms}]{\sphinxcrossref{Rating new performances with quantile norms}}} (\autopageref*{\detokenize{tutorial:rating-new-performances-with-quantile-norms}})
+\phantomsection\label{\detokenize{tutorial:id265}}{\hyperref[\detokenize{tutorial:rating-by-ranking-new-performances-with-quantile-norms}]{\sphinxcrossref{Rating\sphinxhyphen{}by\sphinxhyphen{}ranking new performances with quantile norms}}} (\autopageref*{\detokenize{tutorial:rating-by-ranking-new-performances-with-quantile-norms}})
 
 \end{itemize}
 \end{sphinxShadowBox}
@@ -5104,11 +5104,9 @@ Parameter \sphinxstyleemphasis{historySize} (see \hyperref[\detokenize{tutorial:
 \caption{Showing the updated quartiles limits}\label{\detokenize{tutorial:exampleperfquantiles}}\end{figure}
 
 
-\subsection{Rating new performances with quantile norms}
-\label{\detokenize{tutorial:rating-new-performances-with-quantile-norms}}
-For \sphinxstyleemphasis{absolute rating} of a newly given set of decision alternatives with the help of empirical performance quantiles estimated from historical data, we provide the \sphinxcode{\sphinxupquote{sortingDigraphs.LearnedQuantilesRatingDigraph}} class, a specialisation of the \sphinxcode{\sphinxupquote{sortingDigraphs.SortingDigraph}} class.
-
-The constructor requires a valid \sphinxcode{\sphinxupquote{performanceQuantiles.PerformanceQuantiles}} instance.
+\subsection{Rating\sphinxhyphen{}by\sphinxhyphen{}ranking new performances with quantile norms}
+\label{\detokenize{tutorial:rating-by-ranking-new-performances-with-quantile-norms}}
+For \sphinxstylestrong{absolute} \sphinxstyleemphasis{rating} of a newly given set of decision alternatives with the help of empirical performance quantiles estimated from historical data, we provide the \sphinxcode{\sphinxupquote{sortingDigraphs.LearnedQuantilesRatingDigraph}} class, a specialisation of the \sphinxcode{\sphinxupquote{sortingDigraphs.SortingDigraph}} class. The rating result is computed by \sphinxstylestrong{ranking} the new performance records together with the learned quantile limits. The constructor requires a valid \sphinxcode{\sphinxupquote{performanceQuantiles.PerformanceQuantiles}} instance. By default, the constructor uses, by default, \sphinxstyleemphasis{Copeland}’s or the \sphinxstyleemphasis{NetFlows} ranking rule which \sphinxstylestrong{best fits} with the underlying outranking digraph.
 
 \begin{sphinxadmonition}{note}{Note:}
 It is important to notice that the \sphinxcode{\sphinxupquote{LearnedQuantilesRatingDigraph}} class, contrary to the generic \sphinxcode{\sphinxupquote{OutrankingDigraph}} class, does not inherit from the generic \sphinxcode{\sphinxupquote{PerformanceTableau}} class, but instead from the \sphinxcode{\sphinxupquote{PerformanceQuantiles}} class. The \sphinxstylestrong{actions} in such a \sphinxcode{\sphinxupquote{LearnedQuantilesRatingDigraph}} class instance contain not only the newly given decision alternatives, but also the historical quantile profiles obtained from a given \sphinxcode{\sphinxupquote{PerformanceQuantiles}} class instance, i.e. estimated quantile bins’ performance limits from historical performance data.
@@ -5487,7 +5485,7 @@ Details of the enrolment quality criteria (the academic subjects) may be consult
 \noindent\sphinxincludegraphics[width=750\sphinxpxdimen]{{spiegelCriteria}.png}
 \caption{Details of the rating criteria}\label{\detokenize{tutorial:spiegelcriteria}}\end{figure}
 
-The evaluation of the individual quality score for a participating student actually depends, indeed, on his or her mainly enroled subject \sphinxfootnotemark[29]. The apparent quality measurement scales thus largely differ indeed from subject to subject (see \hyperref[\detokenize{tutorial:spiegelcriteria}]{Fig.\@ \ref{\detokenize{tutorial:spiegelcriteria}}}), like \sphinxstyleemphasis{Law Studies} (35.0 \sphinxhyphen{} 65\sphinxhyphen{}0) and \sphinxstyleemphasis{Politology} (50.0 \sphinxhyphen{} 70.0). The recorded average enrolment quality scores, hence, are in fact \sphinxstylestrong{incommensurable} between the subjects.
+The evaluation of the individual quality score for a participating student actually depends on his or her mainly enroled subject \sphinxfootnotemark[29]. The apparent quality measurement scales thus largely differ indeed from subject to subject (see \hyperref[\detokenize{tutorial:spiegelcriteria}]{Fig.\@ \ref{\detokenize{tutorial:spiegelcriteria}}}), like \sphinxstyleemphasis{Law Studies} (35.0 \sphinxhyphen{} 65\sphinxhyphen{}0) and \sphinxstyleemphasis{Politology} (50.0 \sphinxhyphen{} 70.0). The recorded average enrolment quality scores, hence, are in fact \sphinxstylestrong{incommensurable} between the subjects.
 
 To take furthermore into account a potential and very likely \sphinxstyleemphasis{imprecision} of the individual quality scores’ computation, we shall assume that, for all subjects, an average enrolment quality score difference of \sphinxstylestrong{0.1} is \sphinxstylestrong{insignificant}, wheras a difference of \sphinxstylestrong{0.5} is sufficient to \sphinxstyleemphasis{positively} attest a \sphinxstylestrong{better} enrolment quality.
 
