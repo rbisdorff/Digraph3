@@ -59,11 +59,11 @@
 \contentsline {subsection}{\numberline {8.2}The performance tableau}{88}{subsection.8.2}%
 \contentsline {subsection}{\numberline {8.3}Building a best choice recommendation}{91}{subsection.8.3}%
 \contentsline {subsection}{\numberline {8.4}Robustness analysis}{97}{subsection.8.4}%
-\contentsline {section}{\numberline {9}Rating with multiple incommensurable criteria}{101}{section.9}%
+\contentsline {section}{\numberline {9}Rating by sorting with multiple incommensurable criteria}{101}{section.9}%
 \contentsline {subsection}{\numberline {9.1}K\sphinxhyphen {}sorting on a single criterion}{101}{subsection.9.1}%
-\contentsline {subsection}{\numberline {9.2}Quantiles sorting with multiple criteria}{102}{subsection.9.2}%
+\contentsline {subsection}{\numberline {9.2}Rating by quantiles sorting with multiple criteria}{102}{subsection.9.2}%
 \contentsline {subsection}{\numberline {9.3}Ranking big performance tableaux}{106}{subsection.9.3}%
-\contentsline {section}{\numberline {10}Rating with learned quantile norms}{109}{section.10}%
+\contentsline {section}{\numberline {10}Rating\sphinxhyphen {}by\sphinxhyphen {}ranking with learned quantile norms}{109}{section.10}%
 \contentsline {subsection}{\numberline {10.1}Introduction}{109}{subsection.10.1}%
 \contentsline {subsection}{\numberline {10.2}Incremental learning of historical performance quantiles}{110}{subsection.10.2}%
 \contentsline {subsection}{\numberline {10.3}Rating new performances with quantile norms}{113}{subsection.10.3}%

@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.21 (TeX Live 2020) (preloaded format=pdflatex 2020.8.12)  16 JAN 2021 15:23
+This is pdfTeX, Version 3.14159265-2.6-1.40.21 (TeX Live 2020) (preloaded format=pdflatex 2020.8.12)  17 JAN 2021 08:58
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -1368,13 +1368,13 @@ Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 8743.
 Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 8743.
 
 Package rerunfilecheck Info: File `digraph3Tutorial.out' has not changed.
-(rerunfilecheck)             Checksum: 683DFA9BC0064A8A1DFB17CBE591307E;23460.
+(rerunfilecheck)             Checksum: 7348654B1CE0CD914527FC29B8E7F0AA;23632.
 Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 8743.
  ) 
 Here is how much of TeX's memory you used:
  15410 strings out of 480608
- 227870 string characters out of 5903630
- 667858 words of memory out of 5000000
+ 227902 string characters out of 5903630
+ 667998 words of memory out of 5000000
  30132 multiletter control sequences out of 15000+600000
  564467 words of font info for 98 fonts, out of 8000000 for 9000
  1142 hyphenation exceptions out of 8191
@@ -1420,7 +1420,7 @@ m-super/sftt1200.pfb></usr/local/texlive/2020/texmf-dist/fonts/type1/public/cm-
 super/sftt1440.pfb></usr/local/texlive/2020/texmf-dist/fonts/type1/public/cm-su
 per/sftt1728.pfb></usr/local/texlive/2020/texmf-dist/fonts/type1/public/cm-supe
 r/sfxc1728.pfb>
-Output written on digraph3Tutorial.pdf (212 pages, 5350568 bytes).
+Output written on digraph3Tutorial.pdf (212 pages, 5350226 bytes).
 PDF statistics:
  2992 PDF objects out of 3580 (max. 8388607)
  2568 compressed objects within 26 object streams
