@@ -28,7 +28,7 @@ Lectures
 
    On *majority decitatorship* in uninominal elections and other difficulties with simple voting rules. How to aggregate voter's preferences? Voting and complexity issues.
 
-3. `On social consensus rankings <_static/3-ranking-2x2.pdf>`_
+3. `On social consensus rankings <_static/3-rankingRules-2x2.pdf>`_
 
    On ranking from different opinions. A typology of ranking rules.
 
