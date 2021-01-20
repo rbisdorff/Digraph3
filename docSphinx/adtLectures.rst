@@ -38,7 +38,7 @@ Lectures
 
 5. `Solving social compromise decision problems with CBA <_static/5-CBA-2x2.pdf>`_
 
-   Critical perspective on the Cost-Benefit Analysis (CBA) decision approach. Its Principles and applications in public transport problems.
+   Critical perspective on the Cost-Benefit Analysis (CBA) decision approach, its Principles and applications in public transport problems.
 
 6. `Chooing with multiple commensurable criteria: the Multiple Attribute Value Theory <_static/6-mavt-2x2.pdf>`_
 
@@ -50,11 +50,11 @@ Lectures
 
 8. `Generating random outranking digraphs <_static/8-randPerfTabs-2x2.pdf>`_
 
-   Random performance geberators. Random performance tableaux. Random Cost-Benefit, 3 objectives or academic performance tableaux.
+   Random performance generators. Random performance tableaux. Special random tableaux: random Cost-Benefit, random 3 objectives or random academic performance tableaux.
 
 9. `On quantiles rating with multiple incommensurable criteria <_static/9-quantilesSortingRating-2x2.pdf>`_
 
-   How to rate with multiple criteria. On sorting with relative quantiles. Absolute rating with quantile norms.
+   How to rate with multiple incommensurable criteria. On sorting with relative quantiles. Absolute rating with quantile norms.
 
 
 10. `On ranking from bipolar-valued pairwise outranking situations <_static/10-rankingOutrankings-2x2.pdf>`_
@@ -63,11 +63,11 @@ Lectures
 
 11. `On ranking by first and last choosing <_static/11-rankingByChoosing-2x2.pdf>`_
 
-    Ranking-by-choosing from an outranking relation. Properties of the Rubis best-choice procedure. Ranking-by-choosing algorithm.
+    Ranking-by-choosing from an outranking relation. Useful properties of the Rubis best-choice procedure. A ranking-by-choosing algorithm.
 
-12. `Ranking big multiple criteria performance tableaux <_static/12-bigPerfTabRanking-2x2.pdf>`_
+12. `Ranking big multiple incommensurable criteria performance tableaux <_static/12-bigPerfTabRanking-2x2.pdf>`_
 
-    Pre-ranking a q-tiles performance tableau. Sparse outranking digraphs. HPC-ranking a big performance tableau.
+    Pre-ranking a q-tiled performance tableau. On sparse outranking digraphs. HPC-ranking a big performance tableau.
  
 
 |location_link3|
