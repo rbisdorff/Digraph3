@@ -4581,8 +4581,8 @@ if __name__ == "__main__":
     ****************************************************
     * Python sortingDigraphs module                    *
     * depends on BipolarOutrankingDigraph and          *
-    * $Revision$                                 *
-    * Copyright (C) 2010 Raymond Bisdorff              *
+    * $Revision$                                       *
+    * Copyright (C) 2010-2020 Raymond Bisdorf          *
     * The module comes with ABSOLUTELY NO WARRANTY     *
     * to the extent permitted by the applicable law.   *
     * This is free software, and you are welcome to    *
@@ -4593,7 +4593,7 @@ if __name__ == "__main__":
     print('*-------- Testing class and methods -------')
 
 
-    MP = False
+    MP = True
     seed = 1001
     nbrOfCPUs = 6
 
@@ -4615,8 +4615,8 @@ if __name__ == "__main__":
 ##    from randomPerfTabs import Random3ObjectivesPerformanceTableau
 ##    from randomPerfTabs import RandomPerformanceGenerator as PerfTabGenerator
     nbrActions=100
-    nbrCrit = 21
-    tp1 = Random3ObjectivesPerformanceTableau(numberOfActions=nbrActions,\
+    nbrCrit = 13
+    tp1 = RandomCBPerformanceTableau(numberOfActions=nbrActions,\
                 numberOfCriteria=nbrCrit,seed=seed,NA=-1,missingDataProbability=0.1)
     print(tp1.NA)
 ##    qs = QuantilesSortingDigraph(tp,4,LowerClosed=True,Threading=MP)
@@ -4634,12 +4634,13 @@ if __name__ == "__main__":
     tpg1 = PerfTabGenerator(tp1,instanceCounter=0,seed=seed)
     newActions = tpg1.randomActions(20)
     pq1.updateQuantiles(newActions,historySize=None)
-    ira1 = LearnedQuantilesRatingDigraph(pq1,newActions,\
+    nqr = LearnedQuantilesRatingDigraph(pq1,newActions,\
                                     rankingRule='Copeland',\
                                    WithSorting=True,Debug=False,\
                                        Threading=MP,nbrOfCPUs=nbrOfCPUs)
-    print(ira1)
-    ira1.showHTMLRatingHeatmap(Correlations=True,rankingRule='Copeland')
+    qs = QuantilesSortingDigraph(tp1,5)
+    
+    #nqr.showHTMLRatingHeatmap(Correlations=True,rankingRule='Copeland')
 ##    ira.showQuantilesRating() ira.sorting =
 ##    ira.computeSortingCharacteristics()
     
@@ -4651,8 +4652,8 @@ if __name__ == "__main__":
     #ira.relation = ratingRelation
 ##    #ira.closeTransitive(Irreflexive=True,Reverse=True)
     #ira.showHTMLRelationTable(actionsList=ira.actionsRanking)
-    ira1.exportRatingByRankingGraphViz('testRatRank',graphType='pdf')
-    ira1.exportRatingBySortingGraphViz('testRatSort',graphType='pdf')
+    #ira1.exportRatingByRankingGraphViz('testRatRank',graphType='pdf')
+    #ira1.exportRatingBySortingGraphViz('testRatSort',graphType='pdf')
 ##    #ira.showSorting()
 ##    #ira.showHTMLSorting()
 ##    ira.showActionsSortingResult()

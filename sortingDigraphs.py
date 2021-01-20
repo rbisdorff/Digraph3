@@ -4581,8 +4581,8 @@ if __name__ == "__main__":
     ****************************************************
     * Python sortingDigraphs module                    *
     * depends on BipolarOutrankingDigraph and          *
-    * $Revision$                                 *
-    * Copyright (C) 2010 Raymond Bisdorff              *
+    * $Revision$                                       *
+    * Copyright (C) 2010-2020 Raymond Bisdorf          *
     * The module comes with ABSOLUTELY NO WARRANTY     *
     * to the extent permitted by the applicable law.   *
     * This is free software, and you are welcome to    *
@@ -4593,7 +4593,7 @@ if __name__ == "__main__":
     print('*-------- Testing class and methods -------')
 
 
-    MP = False
+    MP = True
     seed = 1001
     nbrOfCPUs = 6
 
@@ -4678,8 +4678,8 @@ if __name__ == "__main__":
     print('Enjoy !')
 
     print('*************************************')
-    print('* R.B. december 2010                *')
-    print('* $Revision$                  *')
+    print('* R.B. december 2020                *')
+    print('* $Revision$ Python                 *')
     print('*************************************')
 
 #############################
