@@ -36,11 +36,18 @@ Contents
    
        <small><i>Pearls of bipolar-valued epistemic logic</i></small>
    
-4. `Archives <digraph3Archives.html>`_
+4. `Algorithimc Decision Theory Lectures <adtLectures.html>`_
+
+    .. raw:: html
+
+       <small><i>2x2 reduced copies of the presentation slides</i></small>
+
+5. `Archives <digraph3Archives.html>`_
 
     .. raw:: html
 
        <small><i>Historical case studies and example graphs</i></small>
+
 
 Indices and tables
 ``````````````````
@@ -77,8 +84,14 @@ The third Section exhibits some pearls of **bipolar-valued epistemic logic** tha
 
    .. toctree:: pearls
       :maxdepth: 2
+
+The fourth section provides 2x2-reduced notes of the author's lectures on *Algorithmic Decision Theory* given at the University of Luxembourg during Spring 2020.
+
+   .. toctree:: adtLectures
+      :maxdepth: 2
+
 		 
-The fourth section gathers **historical case studies** with example digraphs compiled before 2006 and concerning the early development of the Digraph3 collection of python3 modules for implementing tools and methods for enumerating *non isomorphic maximal independent sets* in undirected graphs and computing *dominant digraph kernels*. 
+The last section gathers **historical case studies** with example digraphs compiled before 2006 and concerning the early development of the Digraph3 collection of python3 modules for implementing tools and methods for enumerating *non isomorphic maximal independent sets* in undirected graphs and computing *dominant digraph kernels*. 
 
    .. toctree:: digraph3Archives
       :maxdepth: 2
