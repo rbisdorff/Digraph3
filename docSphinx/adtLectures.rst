@@ -1,3 +1,4 @@
+.. meta::
    :description: Documentation of the Digraph3 collection of python3 modules for algorithmic decision theory
    :keywords: Algorithmic Decision Theory, Outranking Digraphs, MIS and kernels, Multiple Criteria Decision Aid
 
@@ -5,7 +6,7 @@ Algorithmic Decision Theory Lectures
 ====================================
 :Author: Raymond Bisdorff, Emeritus Professor of Computer Science and Applied Mathematics
 :Version: |version|
-:Url: https://rbisdorff.github.io/
+:Url: |location_link1|
 :Copyright: R. Bisdorff |location_link3| 2013-2020
 
 Introduction
@@ -13,16 +14,16 @@ Introduction
 
 From 2007 to 2011 the Algorithmic Decision Theory COST Action IC0602, coordinated by Alexis Tsouki`as, gathered researchers coming from different fields such as Decision Theory, Discrete Mathematics, Theoretical Computer Science and Artificial Intelligence in order to improve decision support in the presence of massive data bases, combinatorial structures, partial and/or uncertain information and distributed, possibly interoperating decision makers.
 
-A positive result of this COST action was the organisation from 2011 to 2020 of a Course |location_link4| at the University of Luxembourg in the context of its Master in Information and Computer Science.
+A positive result of this COST action was the organisation from 2012 to 2020 of a Course on |location_link4| at the University of Luxembourg in the context of its Master in Information and Computer Science.
 
-Below are gathered the 2x2 reduced copies of the presentation slides for 12 lectutres.
+Below are gathered the 2x2 reduced copies of the presentation slides for 12 Lectures.
 
 Lectures
 --------
 
 1. `General introduction to Algorithmic Decision Theory <_static/1-adtintro-2x2.pdf>`_
 
-   Historical notes and aknowledgments followed by the presentation of a conceptual framework of *decision aiding processes*: *problem formulation*, *evaluation models* and building *decision recommendations*.
+   Historical notes and aknowledgments followed by the presentation of a generic conceptual framework for studying *decision aiding processes*: *formulating a decision problem*, *choosing the evaluation models* and *building decision recommendations*.
 
 2. `Who wins the election ? Choosing from multiple opinions <_static/2-voting-2x2.pdf>`_ 
 
@@ -42,39 +43,39 @@ Lectures
 
 6. `Choosing with multiple commensurable criteria: the Multiple Attribute Value Theory <_static/6-mavt-2x2.pdf>`_
 
-   Measuring the performances of potential decision alternatives. Comparing costs and benefits. Theoretical foundations of MAVT and critical perspective.
+   Measuring the performances of potential decision alternatives. Comparing *costs* and *benefits*. Theoretical foundations of MAVT and critical perspectives.
 
 7. `Best multiple criteria compromise choice: The Rubis outranking approach <_static/7a-outranking-2x2.pdf>`_
 
-   Comparing alternatives with potentially conflicting criteria. Theoretical foundation of the *outranking* approach. The *Rubis* best-choice recommender system.
+   Comparing alternatives with potentially *conflicting* criteria. Theoretical foundation of the *outranking* approach. The *Rubis* best-choice recommender system.
 
 8. `Generating random outranking digraphs <_static/8-randPerfTabs-2x2.pdf>`_
 
-   Random performance generators. Random performance tableaux. Special random tableaux: random Cost-Benefit, random 3 objectives or random academic performance tableaux.
+   Random performance generators. Random performance tableaux. Special random tableaux: random *Cost-Benefit*, random 3-*Objectives* or random *academic* performance tableaux.
 
-9. `On rating with multiple incommensurable criteria <_static/9-quantilesSortingRating-2x2.pdf>`_
+9. `On rating with multiple criteria <_static/9-quantilesSortingRating-2x2.pdf>`_
 
    How to rate with multiple incommensurable criteria? On *rating-by-sorting* with relative quantiles. Absolute *rating-by-ranking* with learned quantile norms.
 
 
 10. `On ranking from bipolar-valued pairwise outranking situations <_static/10-rankingOutrankings-2x2.pdf>`_
 
-    Ranking with outranking digraphs. *Ranking-by-scoring* and *ranking-by-choosing* rules.
+    Ranking with *outranking* digraphs. *Ranking-by-scoring* and *ranking-by-choosing* rules.
 
 11. `On ranking by first and last choosing <_static/11-rankingByChoosing-2x2.pdf>`_
 
-    Useful properties of the Rubis best-choice procedure. A ranking-by-choosing algorithm.
+    Useful properties of the *Rubis best-choice* procedure. A bipolar *ranking-by-choosing* algorithm.
 
 12. `Ranking big multiple incommensurable criteria performance tableaux <_static/12-bigPerfTabRanking-2x2.pdf>`_
 
-    Pre-ranking a q-tiled performance tableau. On *sparse* outranking digraphs. HPC-ranking a big performance tableau.
+    Pre-ranking a *q-tiled* performance tableau. On *sparse* outranking digraphs. *HPC-ranking* a *big* performance tableau.
  
 
 |location_link3|
 
 .. |location_link1| raw:: html
 
-   <a href="https://digraph3.readthedocs.io/en/latest/" target="_blank">https://digraph3.readthedocs.io/en/latest/</a>
+   <a href="https://rbisdorff.github.io/" target="_blank">https://rbisdorff.github.io/</a>
 
 .. |location_link3| raw:: html
 
@@ -82,4 +83,4 @@ Lectures
 
 .. |location_link4| raw:: html
 
-   <a href="http://hdl.handle.net/10993/37933" target="_blank">on Algorithmic Decision Theory</a>
+   <a href="http://hdl.handle.net/10993/37933" target="_blank">Algorithmic Decision Theory</a>
