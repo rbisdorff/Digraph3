@@ -71,8 +71,6 @@ Lectures
     Pre-ranking a *q-tiled* performance tableau. On *sparse* outranking digraphs. *HPC-ranking* a *big* performance tableau.
  
 
-|location_link3|
-
 .. |location_link1| raw:: html
 
    <a href="https://rbisdorff.github.io/" target="_blank">https://rbisdorff.github.io/</a>
