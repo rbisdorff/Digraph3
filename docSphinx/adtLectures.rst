@@ -21,7 +21,7 @@ Below are gathered the 2x2 reduced copies of the presentation slides for 12 Lect
 Lectures
 --------
 
-1. `General introduction to Algorithmic Decision Theory <_static/1-adtintro-2x2.pdf>`_
+1. `General introduction to Algorithmic Decision Theory <_static/1-adtIntro-2x2.pdf>`_
 
    Historical notes and aknowledgments followed by the presentation of a generic conceptual framework for studying *decision aiding processes*: *formulating a decision problem*, *choosing the evaluation models* and *building decision recommendations*.
 
