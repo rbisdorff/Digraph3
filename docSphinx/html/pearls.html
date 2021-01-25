@@ -3,11 +3,11 @@
 <!DOCTYPE html>
 <html class="writer-html5" lang="en" >
 <head>
-  <meta charset="utf-8" />
+  <meta charset="utf-8">
   <meta content="Documentation of the Digraph3 collection of python3 modules for algorithmic decision theory" name="description" />
 <meta content="Algorithmic Decision Theory, Outranking Digraphs, MIS and kernels, Multiple Criteria Decision Aid" name="keywords" />
 
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
   <title>Advanced Topics &mdash; Digraph3 3.9.1 documentation</title>
   
@@ -19,10 +19,7 @@
 
   
   
-
   
-  
-
   
 
   
@@ -35,6 +32,7 @@
         <script src="_static/jquery.js"></script>
         <script src="_static/underscore.js"></script>
         <script src="_static/doctools.js"></script>
+        <script src="_static/language_data.js"></script>
     
     <script type="text/javascript" src="_static/js/theme.js"></script>
 
@@ -56,7 +54,7 @@
           
 
           
-            <a href="index.html" class="icon icon-home"> Digraph3
+            <a href="index.html" class="icon icon-home" alt="Documentation Home"> Digraph3
           
 
           
@@ -198,8 +196,6 @@
 
 
 
-
-
 <div role="navigation" aria-label="breadcrumbs navigation">
 
   <ul class="wy-breadcrumbs">
@@ -211,7 +207,7 @@
     
       <li class="wy-breadcrumbs-aside">
         
-          
+            
         
       </li>
     
@@ -220,10 +216,10 @@
   
   <div class="rst-breadcrumbs-buttons" role="navigation" aria-label="breadcrumb navigation">
       
-        <a href="adtLectures.html" class="btn btn-neutral float-right" title="Algorithmic Decision Theory Lectures" accesskey="n">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="adtLectures.html" class="btn btn-neutral float-right" title="Algorithmic Decision Theory Lectures" accesskey="n">Next <span class="fa fa-arrow-circle-right"></span></a>
       
       
-        <a href="techDoc.html" class="btn btn-neutral float-left" title="Technical Reference of the Digraph3 modules" accesskey="p"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="techDoc.html" class="btn btn-neutral float-left" title="Technical Reference of the Digraph3 modules" accesskey="p"><span class="fa fa-arrow-circle-left"></span> Previous</a>
       
   </div>
   
@@ -393,10 +389,10 @@ heat map above (see <a class="reference internal" href="#graffiti07-2"><span cla
 14
 15
 16</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">digraphs</span> <span class="kn">import</span> <span class="o">*</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">R1</span> <span class="o">=</span> <span class="n">RandomDigraph</span><span class="p">(</span><span class="n">order</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span><span class="n">Bipolar</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">R2</span> <span class="o">=</span> <span class="n">RandomDigraph</span><span class="p">(</span><span class="n">order</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span><span class="n">Bipolar</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">R1</span> <span class="o">=</span> <span class="n">RandomDigraph</span><span class="p">(</span><span class="n">order</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span><span class="n">Bipolar</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">R2</span> <span class="o">=</span> <span class="n">RandomDigraph</span><span class="p">(</span><span class="n">order</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span><span class="n">Bipolar</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">E</span> <span class="o">=</span> <span class="n">EquivalenceDigraph</span><span class="p">(</span><span class="n">R1</span><span class="p">,</span><span class="n">R2</span><span class="p">)</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">E</span><span class="o">.</span><span class="n">showRelationTable</span><span class="p">(</span><span class="n">ReflexiveTerms</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">E</span><span class="o">.</span><span class="n">showRelationTable</span><span class="p">(</span><span class="n">ReflexiveTerms</span><span class="o">=</span><span class="bp">False</span><span class="p">)</span>
 <span class="go"> * ---- Relation Table -----</span>
 <span class="go"> r(&lt;=&gt;)|  &#39;a1&#39;         &#39;a2&#39;    &#39;a3&#39;    &#39;a4&#39;    &#39;a5&#39;</span>
 <span class="go"> ------|-------------------------------------------</span>
@@ -441,7 +437,7 @@ heat map above (see <a class="reference internal" href="#graffiti07-2"><span cla
 20
 21
 22</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">R1</span> <span class="o">=</span> <span class="n">RandomValuationDigraph</span><span class="p">(</span><span class="n">order</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span><span class="n">seed</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">R1</span><span class="o">.</span><span class="n">showRelationTable</span><span class="p">(</span><span class="n">ReflexiveTerms</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">R1</span><span class="o">.</span><span class="n">showRelationTable</span><span class="p">(</span><span class="n">ReflexiveTerms</span><span class="o">=</span><span class="bp">False</span><span class="p">)</span>
 <span class="go"> * ---- Relation Table -----</span>
 <span class="go">  r(R1)|   &#39;a1&#39;        &#39;a2&#39;    &#39;a3&#39;    &#39;a4&#39;    &#39;a5&#39;</span>
 <span class="go"> ------|-------------------------------------------</span>
@@ -452,7 +448,7 @@ heat map above (see <a class="reference internal" href="#graffiti07-2"><span cla
 <span class="go">  &#39;a5&#39; |  -0.02        0.10    0.54    0.94     -</span>
 <span class="go"> Valuation domain: [-1.00;1.00]</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">R2</span> <span class="o">=</span> <span class="n">RandomValuationDigraph</span><span class="p">(</span><span class="n">order</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span><span class="n">seed</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">R2</span><span class="o">.</span><span class="n">showRelationTable</span><span class="p">(</span><span class="n">ReflexiveTerms</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">R2</span><span class="o">.</span><span class="n">showRelationTable</span><span class="p">(</span><span class="n">ReflexiveTerms</span><span class="o">=</span><span class="bp">False</span><span class="p">)</span>
 <span class="go"> * ---- Relation Table -----</span>
 <span class="go">  r(R2)|   &#39;a1&#39;        &#39;a2&#39;    &#39;a3&#39;    &#39;a4&#39;    &#39;a5&#39;</span>
 <span class="go"> ------|-------------------------------------------</span>
@@ -479,7 +475,7 @@ heat map above (see <a class="reference internal" href="#graffiti07-2"><span cla
  9
 10
 11</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">eq</span> <span class="o">=</span> <span class="n">EquivalenceDigraph</span><span class="p">(</span><span class="n">R1</span><span class="p">,</span><span class="n">R2</span><span class="p">)</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">eq</span><span class="o">.</span><span class="n">showRelationTable</span><span class="p">(</span><span class="n">ReflexiveTerms</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">eq</span><span class="o">.</span><span class="n">showRelationTable</span><span class="p">(</span><span class="n">ReflexiveTerms</span><span class="o">=</span><span class="bp">False</span><span class="p">)</span>
 <span class="go"> * ---- Relation Table -----</span>
 <span class="go"> r(&lt;=&gt;)|  &#39;a1&#39;         &#39;a2&#39;    &#39;a3&#39;    &#39;a4&#39;    &#39;a5&#39;</span>
 <span class="go"> ------|-------------------------------------------</span>
@@ -531,7 +527,7 @@ heat map above (see <a class="reference internal" href="#graffiti07-2"><span cla
 <span class="go">        for y in eq.actions:</span>
 <span class="go">            M += eq.relation[x][y]</span>
 <span class="go">            D += abs(eq.relation[x][y])</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="s1">&#39;r(R1&lt;=&gt;R2) = </span><span class="si">%+.3f</span><span class="s1">, d = </span><span class="si">%.3f</span><span class="s1">, tau = </span><span class="si">%+.3f</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="n">M</span><span class="o">/</span><span class="n">n2</span><span class="p">,</span><span class="n">D</span><span class="o">/</span><span class="n">n2</span><span class="p">,</span><span class="n">M</span><span class="o">/</span><span class="n">D</span><span class="p">))</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">print</span><span class="p">(</span><span class="s1">&#39;r(R1&lt;=&gt;R2) = </span><span class="si">%+.3f</span><span class="s1">, d = </span><span class="si">%.3f</span><span class="s1">, tau = </span><span class="si">%+.3f</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="n">M</span><span class="o">/</span><span class="n">n2</span><span class="p">,</span><span class="n">D</span><span class="o">/</span><span class="n">n2</span><span class="p">,</span><span class="n">M</span><span class="o">/</span><span class="n">D</span><span class="p">))</span>
 <span class="go"> r(R1&lt;=&gt;R2) = +0.026, d = 0.356, tau = +0.073</span>
 </pre></div>
 </td></tr></table></div>
@@ -548,7 +544,7 @@ heat map above (see <a class="reference internal" href="#graffiti07-2"><span cla
 <span class="gp">&gt;&gt;&gt; </span><span class="n">tau</span> <span class="o">=</span> <span class="n">corrR1R2</span><span class="p">[</span><span class="s1">&#39;correlation&#39;</span><span class="p">]</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">d</span> <span class="o">=</span> <span class="n">corrR1R2</span><span class="p">[</span><span class="s1">&#39;determination&#39;</span><span class="p">]</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">r</span> <span class="o">=</span> <span class="n">tau</span> <span class="o">*</span> <span class="n">d</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="s1">&#39;tau(R1,R2) = </span><span class="si">%+.3f</span><span class="s1">, d = </span><span class="si">%.3f</span><span class="s1">, r(R1&lt;=&gt;R2) = </span><span class="si">%+.3f</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="n">tau</span><span class="p">,</span> <span class="n">d</span><span class="p">,</span> <span class="n">r</span><span class="p">))</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">print</span><span class="p">(</span><span class="s1">&#39;tau(R1,R2) = </span><span class="si">%+.3f</span><span class="s1">, d = </span><span class="si">%.3f</span><span class="s1">, r(R1&lt;=&gt;R2) = </span><span class="si">%+.3f</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="n">tau</span><span class="p">,</span> <span class="n">d</span><span class="p">,</span> <span class="n">r</span><span class="p">))</span>
 <span class="go"> tau(R1,R2) = +0.073, d = 0.356, r(R1&lt;=&gt;R2) = +0.026</span>
 </pre></div>
 </td></tr></table></div>
@@ -581,7 +577,7 @@ heat map above (see <a class="reference internal" href="#graffiti07-2"><span cla
 10
 11
 12
-13</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">g</span> <span class="o">=</span> <span class="n">BipolarOutrankingDigraph</span><span class="p">(</span><span class="n">t</span><span class="p">,</span><span class="n">Normalized</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+13</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">g</span> <span class="o">=</span> <span class="n">BipolarOutrankingDigraph</span><span class="p">(</span><span class="n">t</span><span class="p">,</span><span class="n">Normalized</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
 <span class="go"> *------- Object instance description ------*</span>
 <span class="go"> Instance class   : BipolarOutrankingDigraph</span>
 <span class="go"> Instance name    : rel_grafittiPerfTab.xml</span>
@@ -731,7 +727,7 @@ heat map above (see <a class="reference internal" href="#graffiti07-2"><span cla
 11
 12
 13</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">transitiveDigraphs</span> <span class="kn">import</span> <span class="n">RankingByChoosingDigraph</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">rbc</span> <span class="o">=</span> <span class="n">RankingByChoosingDigraph</span><span class="p">(</span><span class="n">g</span><span class="p">,</span><span class="n">CoDual</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">rbc</span> <span class="o">=</span> <span class="n">RankingByChoosingDigraph</span><span class="p">(</span><span class="n">g</span><span class="p">,</span><span class="n">CoDual</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">rbc</span><span class="o">.</span><span class="n">showRankingByChoosing</span><span class="p">()</span>
 <span class="go"> Ranking by Choosing and Rejecting</span>
 <span class="go">  1st Best Choice [&#39;mv_QS&#39;]</span>
@@ -873,8 +869,8 @@ heat map above (see <a class="reference internal" href="#graffiti07-2"><span cla
 12
 13
 14</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">outrankingDigraphs</span> <span class="kn">import</span> <span class="o">*</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">g</span> <span class="o">=</span> <span class="n">RandomBipolarOutrankingDigraph</span><span class="p">(</span><span class="n">Normalized</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span><span class="n">seed</span><span class="o">=</span><span class="mi">5</span><span class="p">)</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">g</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">g</span> <span class="o">=</span> <span class="n">RandomBipolarOutrankingDigraph</span><span class="p">(</span><span class="n">Normalized</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span><span class="n">seed</span><span class="o">=</span><span class="mi">5</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">print</span><span class="p">(</span><span class="n">g</span><span class="p">)</span>
 <span class="go"> *------- Object instance description ------*</span>
 <span class="go"> Instance class      : RandomBipolarOutrankingDigraph</span>
 <span class="go"> Instance name       : rel_randomperftab</span>
@@ -987,7 +983,7 @@ heat map above (see <a class="reference internal" href="#graffiti07-2"><span cla
 19
 20
 21
-22</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">gcd</span><span class="o">.</span><span class="n">computeKernelVector</span><span class="p">([</span><span class="s1">&#39;a1&#39;</span><span class="p">,</span><span class="s1">&#39;a2&#39;</span><span class="p">,</span><span class="s1">&#39;a4&#39;</span><span class="p">],</span><span class="n">Initial</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span><span class="n">Comments</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+22</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">gcd</span><span class="o">.</span><span class="n">computeKernelVector</span><span class="p">([</span><span class="s1">&#39;a1&#39;</span><span class="p">,</span><span class="s1">&#39;a2&#39;</span><span class="p">,</span><span class="s1">&#39;a4&#39;</span><span class="p">],</span><span class="n">Initial</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span><span class="n">Comments</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
 <span class="go"> --&gt; Initial prekernel: {&#39;a1&#39;, &#39;a2&#39;, &#39;a4&#39;}</span>
 <span class="go"> initial low vector : [-1.00, -1.00, -1.00, -1.00, -1.00, -1.00, -1.00]</span>
 <span class="go"> initial high vector: [+1.00, +1.00, +1.00, +1.00, +1.00, +1.00, +1.00]</span>
@@ -1050,7 +1046,7 @@ heat map above (see <a class="reference internal" href="#graffiti07-2"><span cla
 17
 18
 19
-20</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">gcd</span><span class="o">.</span><span class="n">computeKernelVector</span><span class="p">([</span><span class="s1">&#39;a3&#39;</span><span class="p">,</span><span class="s1">&#39;a7&#39;</span><span class="p">],</span><span class="n">Initial</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span><span class="n">Comments</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+20</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">gcd</span><span class="o">.</span><span class="n">computeKernelVector</span><span class="p">([</span><span class="s1">&#39;a3&#39;</span><span class="p">,</span><span class="s1">&#39;a7&#39;</span><span class="p">],</span><span class="n">Initial</span><span class="o">=</span><span class="bp">False</span><span class="p">,</span><span class="n">Comments</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
 <span class="go"> --&gt; Terminal prekernel: {&#39;a3&#39;, &#39;a7&#39;}</span>
 <span class="go"> initial low vector  : [-1.00, -1.00, -1.00, -1.00, -1.00, -1.00, -1.00]</span>
 <span class="go"> initial high vector : [+1.00, +1.00, +1.00, +1.00, +1.00, +1.00, +1.00]</span>
@@ -1125,7 +1121,7 @@ heat map above (see <a class="reference internal" href="#graffiti07-2"><span cla
 17
 18
 19
-20</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">g</span><span class="o">.</span><span class="n">computeKernelVector</span><span class="p">([</span><span class="s1">&#39;2&#39;</span><span class="p">,</span><span class="s1">&#39;5&#39;</span><span class="p">,</span><span class="s1">&#39;7&#39;</span><span class="p">],</span><span class="n">Initial</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span><span class="n">Comments</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+20</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">g</span><span class="o">.</span><span class="n">computeKernelVector</span><span class="p">([</span><span class="s1">&#39;2&#39;</span><span class="p">,</span><span class="s1">&#39;5&#39;</span><span class="p">,</span><span class="s1">&#39;7&#39;</span><span class="p">],</span><span class="n">Initial</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span><span class="n">Comments</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
 <span class="go"> --&gt; Initial kernel: {&#39;2&#39;, &#39;5&#39;, &#39;7&#39;}</span>
 <span class="go"> initial low vector  : [-1.0, -1.0, -1.0, -1.0, -1.0, -1.0, -1.0]</span>
 <span class="go"> initial high vector : [+1.0, +1.0, +1.0, +1.0, +1.0, +1.0, +1.0]</span>
@@ -1265,7 +1261,7 @@ confidence level <em>alpha</em> %, if</p>
 12
 13</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">outrankingDigraphs</span> <span class="kn">import</span> <span class="o">*</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">t</span> <span class="o">=</span> <span class="n">RandomPerformanceTableau</span><span class="p">(</span><span class="n">numberOfActions</span><span class="o">=</span><span class="mi">7</span><span class="p">,</span><span class="n">numberOfCriteria</span><span class="o">=</span><span class="mi">7</span><span class="p">,</span><span class="n">seed</span><span class="o">=</span><span class="mi">100</span><span class="p">)</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">t</span><span class="o">.</span><span class="n">showPerformanceTableau</span><span class="p">(</span><span class="n">Transposed</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">t</span><span class="o">.</span><span class="n">showPerformanceTableau</span><span class="p">(</span><span class="n">Transposed</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
 <span class="go"> *----  performance tableau -----*</span>
 <span class="go"> criteria | weights |   &#39;a1&#39;   &#39;a2&#39;   &#39;a3&#39;   &#39;a4&#39;   &#39;a5&#39;   &#39;a6&#39;   &#39;a7&#39;</span>
 <span class="go"> ---------|------------------------------------------------------------</span>
@@ -1301,7 +1297,7 @@ confidence level <em>alpha</em> %, if</p>
 20
 21
 22</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">g90</span> <span class="o">=</span> <span class="n">ConfidentBipolarOutrankingDigraph</span><span class="p">(</span><span class="n">t</span><span class="p">,</span><span class="n">confidence</span><span class="o">=</span><span class="mi">90</span><span class="p">)</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">g90</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">print</span><span class="p">(</span><span class="n">g90</span><span class="p">)</span>
 <span class="go"> *------- Object instance description ------*</span>
 <span class="go"> Instance class      : ConfidentBipolarOutrankingDigraph</span>
 <span class="go"> Instance name       : rel_randomperftab_CLT</span>
@@ -1347,7 +1343,7 @@ confidence level <em>alpha</em> %, if</p>
 21
 22
 23
-24</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">g90</span><span class="o">.</span><span class="n">showRelationTable</span><span class="p">(</span><span class="n">LikelihoodDenotation</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+24</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">g90</span><span class="o">.</span><span class="n">showRelationTable</span><span class="p">(</span><span class="n">LikelihoodDenotation</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
 <span class="go"> * ---- Outranking Relation Table -----</span>
 <span class="go"> r/(lh) |  &#39;a1&#39;       &#39;a2&#39;    &#39;a3&#39;    &#39;a4&#39;    &#39;a5&#39;    &#39;a6&#39;    &#39;a7&#39;</span>
 <span class="go"> -------|------------------------------------------------------------</span>
@@ -1651,7 +1647,7 @@ confidence level <em>alpha</em> %, if</p>
 11
 12
 13</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">outrankingDigraphs</span> <span class="kn">import</span> <span class="n">BipolarOutrankingDigraph</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">g</span> <span class="o">=</span> <span class="n">BipolarOutrankingDigraph</span><span class="p">(</span><span class="n">t</span><span class="p">,</span><span class="n">Normalized</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">g</span> <span class="o">=</span> <span class="n">BipolarOutrankingDigraph</span><span class="p">(</span><span class="n">t</span><span class="p">,</span><span class="n">Normalized</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">g</span><span class="o">.</span><span class="n">showRelationTable</span><span class="p">()</span>
 <span class="go"> * ---- Relation Table -----</span>
 <span class="go"> r(&gt;=) |  &#39;a1&#39;   &#39;a2&#39;   &#39;a3&#39;   &#39;a4&#39;   &#39;a5&#39;   &#39;a6&#39;   &#39;a7&#39;</span>
@@ -1687,7 +1683,7 @@ confidence level <em>alpha</em> %, if</p>
 15
 16
 17
-18</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">g</span><span class="o">.</span><span class="n">showRelationTable</span><span class="p">(</span><span class="n">StabilityDenotation</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+18</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">g</span><span class="o">.</span><span class="n">showRelationTable</span><span class="p">(</span><span class="n">StabilityDenotation</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
 <span class="go">* ---- Relation Table -----</span>
 <span class="go">r/(stab)  |  &#39;a1&#39;  &#39;a2&#39;  &#39;a3&#39;  &#39;a4&#39;  &#39;a5&#39;  &#39;a6&#39;  &#39;a7&#39;</span>
 <span class="go">----------|------------------------------------------</span>
@@ -2173,7 +2169,7 @@ confidence level <em>alpha</em> %, if</p>
 <span class="go">                        &#39;ordinalRelation&#39;, &#39;equisignificantRelation&#39;,</span>
 <span class="go">                        &#39;unanimousRelation&#39;, &#39;relation&#39;,</span>
 <span class="go">                        &#39;gamma&#39;, &#39;notGamma&#39;]</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">rg</span><span class="o">.</span><span class="n">showRelationTable</span><span class="p">(</span><span class="n">StabilityDenotation</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">rg</span><span class="o">.</span><span class="n">showRelationTable</span><span class="p">(</span><span class="n">StabilityDenotation</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
 <span class="go"> * ---- Relation Table -----</span>
 <span class="go"> r/(stab) |  &#39;a1&#39;   &#39;a2&#39;   &#39;a3&#39;   &#39;a4&#39;   &#39;a5&#39;   &#39;a6&#39;   &#39;a7&#39;</span>
 <span class="go"> ---------|------------------------------------------------------------</span>
@@ -2352,7 +2348,7 @@ confidence level <em>alpha</em> %, if</p>
 <span class="go">                                     for obj in t.objectives]</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">uopg</span> <span class="o">=</span> <span class="n">FusionLDigraph</span><span class="p">([</span><span class="n">geco</span><span class="p">,</span><span class="n">gsoc</span><span class="p">,</span><span class="n">genv</span><span class="p">],</span><span class="n">operator</span><span class="o">=</span><span class="s1">&#39;o-average&#39;</span><span class="p">,</span>\
 <span class="go">                          weights=objectiveWeights)</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">uopg</span><span class="o">.</span><span class="n">showRelationTable</span><span class="p">(</span><span class="n">ReflexiveTerms</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">uopg</span><span class="o">.</span><span class="n">showRelationTable</span><span class="p">(</span><span class="n">ReflexiveTerms</span><span class="o">=</span><span class="bp">False</span><span class="p">)</span>
 <span class="go">* ---- Relation Table -----</span>
 <span class="go"> r   |  &#39;p1&#39;   &#39;p2&#39;   &#39;p3&#39;   &#39;p4&#39;   &#39;p5&#39;   &#39;p6&#39;   &#39;p7&#39;</span>
 <span class="go">-----|------------------------------------------------------------</span>
@@ -2407,7 +2403,7 @@ confidence level <em>alpha</em> %, if</p>
 <span class="go">                        &#39;criteria&#39;, &#39;methodData&#39;, &#39;evaluation&#39;, &#39;order&#39;,</span>
 <span class="go">                        &#39;runTimes&#39;, &#39;relation&#39;, &#39;marginalRelationsRelations&#39;,</span>
 <span class="go">                        &#39;gamma&#39;, &#39;notGamma&#39;]</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">uopg</span><span class="o">.</span><span class="n">computeOppositeness</span><span class="p">(</span><span class="n">InPercents</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">uopg</span><span class="o">.</span><span class="n">computeOppositeness</span><span class="p">(</span><span class="n">InPercents</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
 <span class="go"> {&#39;standardSize&#39;: 23, &#39;unopposedSize&#39;: 13,</span>
 <span class="go">  &#39;oppositeness&#39;: 43.47826086956522}</span>
 </pre></div>
@@ -2772,7 +2768,7 @@ confidence level <em>alpha</em> %, if</p>
 16</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">outrankingDigraphs</span> <span class="kn">import</span> <span class="n">BipolarOutrankingDigraph</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">g2</span> <span class="o">=</span> <span class="n">BipolarOutrankingDigraph</span><span class="p">(</span><span class="n">vpt</span><span class="p">,</span>\
 <span class="go">                   actionsSubset=[&#39;a06&#39;,&#39;a11&#39;,&#39;a13&#39;,&#39;a15&#39;])</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">g2</span><span class="o">.</span><span class="n">showRelationTable</span><span class="p">(</span><span class="n">ReflexiveTerms</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">g2</span><span class="o">.</span><span class="n">showRelationTable</span><span class="p">(</span><span class="n">ReflexiveTerms</span><span class="o">=</span><span class="bp">False</span><span class="p">)</span>
 <span class="go"> * ---- Relation Table -----</span>
 <span class="go">   r    | &#39;a06&#39;  &#39;a11&#39;  &#39;a13&#39;  &#39;a15&#39;</span>
 <span class="go"> .------|-------------------------------</span>
@@ -2964,7 +2960,7 @@ confidence level <em>alpha</em> %, if</p>
 <span class="go"> [&#39;a6&#39;]</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">votingProfiles</span> <span class="kn">import</span> <span class="n">CondorcetDigraph</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">cg</span> <span class="o">=</span> <span class="n">CondorcetDigraph</span><span class="p">(</span><span class="n">lvp</span><span class="p">)</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">cg</span><span class="o">.</span><span class="n">showRelationTable</span><span class="p">(</span><span class="n">ReflexiveTerms</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">cg</span><span class="o">.</span><span class="n">showRelationTable</span><span class="p">(</span><span class="n">ReflexiveTerms</span><span class="o">=</span><span class="bp">False</span><span class="p">)</span>
 <span class="go"> * ---- Relation Table -----</span>
 <span class="go">   S   |  &#39;a1&#39; &#39;a2&#39; &#39;a3&#39; &#39;a4&#39; &#39;a5&#39; &#39;a6&#39; &#39;a7&#39;</span>
 <span class="go"> ------|------------------------------------</span>
@@ -2993,7 +2989,7 @@ confidence level <em>alpha</em> %, if</p>
 2
 3
 4
-5</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">cg</span><span class="o">.</span><span class="n">closeTransitive</span><span class="p">(</span><span class="n">Reverse</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+5</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">cg</span><span class="o">.</span><span class="n">closeTransitive</span><span class="p">(</span><span class="n">Reverse</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">cg</span><span class="o">.</span><span class="n">exportGraphViz</span><span class="p">(</span><span class="s1">&#39;divGraph&#39;</span><span class="p">,</span><span class="n">bestChoice</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;a3&#39;</span><span class="p">],</span><span class="n">worstChoice</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;a1&#39;</span><span class="p">])</span>
 <span class="go"> *---- exporting a dot file for GraphViz tools ---------*</span>
 <span class="go">  Exporting to divGraph.dot</span>
@@ -3082,29 +3078,37 @@ confidence level <em>alpha</em> %, if</p>
            
           </div>
           <footer>
+  
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
-        <a href="adtLectures.html" class="btn btn-neutral float-right" title="Algorithmic Decision Theory Lectures" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
-        <a href="techDoc.html" class="btn btn-neutral float-left" title="Technical Reference of the Digraph3 modules" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+      
+        <a href="adtLectures.html" class="btn btn-neutral float-right" title="Algorithmic Decision Theory Lectures" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="techDoc.html" class="btn btn-neutral float-left" title="Technical Reference of the Digraph3 modules" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
     </div>
+  
 
   <hr/>
 
   <div role="contentinfo">
     <p>
-        &#169; Copyright 2012-2020, Raymond Bisdorff.
+        
+        &copy; Copyright 2012-2020, Raymond Bisdorff
 
     </p>
   </div>
     
     
     
-    Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a
     
-    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a>
     
     provided by <a href="https://readthedocs.org">Read the Docs</a>. 
 
 </footer>
+
         </div>
       </div>
 

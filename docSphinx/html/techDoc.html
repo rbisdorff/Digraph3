@@ -3,11 +3,11 @@
 <!DOCTYPE html>
 <html class="writer-html5" lang="en" >
 <head>
-  <meta charset="utf-8" />
+  <meta charset="utf-8">
   <meta content="Documentation of the Digraph3 collection of python3 modules for algorithmic decision theory" name="description" />
 <meta content="Algorithmic Decision Theory, Outranking Digraphs, MIS and kernels, Multiple Criteria Decision Aid" name="keywords" />
 
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
   <title>Technical Reference of the Digraph3 modules &mdash; Digraph3 3.9.1 documentation</title>
   
@@ -19,10 +19,7 @@
 
   
   
-
   
-  
-
   
 
   
@@ -35,6 +32,7 @@
         <script src="_static/jquery.js"></script>
         <script src="_static/underscore.js"></script>
         <script src="_static/doctools.js"></script>
+        <script src="_static/language_data.js"></script>
     
     <script type="text/javascript" src="_static/js/theme.js"></script>
 
@@ -56,7 +54,7 @@
           
 
           
-            <a href="index.html" class="icon icon-home"> Digraph3
+            <a href="index.html" class="icon icon-home" alt="Documentation Home"> Digraph3
           
 
           
@@ -187,8 +185,6 @@
 
 
 
-
-
 <div role="navigation" aria-label="breadcrumbs navigation">
 
   <ul class="wy-breadcrumbs">
@@ -200,7 +196,7 @@
     
       <li class="wy-breadcrumbs-aside">
         
-          
+            
         
       </li>
     
@@ -209,10 +205,10 @@
   
   <div class="rst-breadcrumbs-buttons" role="navigation" aria-label="breadcrumb navigation">
       
-        <a href="pearls.html" class="btn btn-neutral float-right" title="Advanced Topics" accesskey="n">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="pearls.html" class="btn btn-neutral float-right" title="Advanced Topics" accesskey="n">Next <span class="fa fa-arrow-circle-right"></span></a>
       
       
-        <a href="tutorial.html" class="btn btn-neutral float-left" title="Digraph3 Tutorials" accesskey="p"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="tutorial.html" class="btn btn-neutral float-left" title="Digraph3 Tutorials" accesskey="p"><span class="fa fa-arrow-circle-left"></span> Previous</a>
       
   </div>
   
@@ -789,7 +785,7 @@ and/or negative circular shifts of value 1 to n.</div>
 </dd>
 </dl>
 <p>Example session:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">digraphs</span> <span class="kn">import</span> <span class="n">CirculantDigraph</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">digraphs</span> <span class="k">import</span> <span class="n">CirculantDigraph</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">c8</span> <span class="o">=</span> <span class="n">CirculantDigraph</span><span class="p">(</span><span class="n">order</span><span class="o">=</span><span class="mi">8</span><span class="p">,</span><span class="n">circulants</span><span class="o">=</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">3</span><span class="p">])</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">c8</span><span class="o">.</span><span class="n">exportGraphViz</span><span class="p">(</span><span class="s1">&#39;c8&#39;</span><span class="p">)</span>
 <span class="go">*---- exporting a dot file for GraphViz tools ---------*</span>
@@ -935,11 +931,11 @@ See Digraph3 tutorials.</p>
 <li><p>Its associated <strong>notGamma function</strong> : a dictionary containing the actions that are not direct successors respectively predecessors of each action, automatically added by the object constructor.</p></li>
 </ol>
 <p>A previously stored <a class="reference internal" href="#digraphs.Digraph" title="digraphs.Digraph"><code class="xref py py-class docutils literal notranslate"><span class="pre">digraphs.Digraph</span></code></a> instance may be reloaded with the <em>file</em> argument:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">randomDigraphs</span> <span class="kn">import</span> <span class="n">RandomValuationDigraph</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">randomDigraphs</span> <span class="k">import</span> <span class="n">RandomValuationDigraph</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">dg</span> <span class="o">=</span> <span class="n">RandomValuationDigraph</span><span class="p">(</span><span class="n">order</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span><span class="n">Normalized</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span><span class="n">seed</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">dg</span><span class="o">.</span><span class="n">save</span><span class="p">(</span><span class="s1">&#39;testdigraph&#39;</span><span class="p">)</span>
 <span class="go">Saving digraph in file: &lt;testdigraph.py&gt; </span>
-<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">digraphs</span> <span class="kn">import</span> <span class="n">Digraph</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">digraphs</span> <span class="k">import</span> <span class="n">Digraph</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">dg</span> <span class="o">=</span> <span class="n">Digraph</span><span class="p">(</span><span class="n">file</span><span class="o">=</span><span class="s1">&#39;testdigraph&#39;</span><span class="p">)</span> <span class="c1"># without the .py extenseion</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">dg</span><span class="o">.</span><span class="vm">__dict__</span>
 <span class="go">{&#39;name&#39;: &#39;testdigraph&#39;,</span>
@@ -1312,8 +1308,8 @@ with the all median-valued indeterminate digraph of order n.</p>
 <p><em>determination</em> = sum_(x,y) { abs[ r(xRy) - Med ] } / n(n-1)</p>
 <p>If <em>InPercents</em> is True, returns the average determination in percentage of
 (Max - Med) difference.</p>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">outrankingDigraphs</span> <span class="kn">import</span> <span class="n">BipolarOutrankingDigraph</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">randomPerfTabs</span> <span class="kn">import</span> <span class="n">Random3ObjectivesPerformanceTableau</span>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">outrankingDigraphs</span> <span class="k">import</span> <span class="n">BipolarOutrankingDigraph</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">randomPerfTabs</span> <span class="k">import</span> <span class="n">Random3ObjectivesPerformanceTableau</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">t</span> <span class="o">=</span> <span class="n">Random3ObjectivesPerformanceTableau</span><span class="p">(</span><span class="n">numberOfActions</span><span class="o">=</span><span class="mi">7</span><span class="p">,</span><span class="n">numberOfCriteria</span><span class="o">=</span><span class="mi">7</span><span class="p">,</span><span class="n">seed</span><span class="o">=</span><span class="mi">101</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">g</span> <span class="o">=</span> <span class="n">BipolarOutrankingDigraph</span><span class="p">(</span><span class="n">t</span><span class="p">,</span><span class="n">Normalized</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">g</span>
@@ -2061,7 +2057,7 @@ D3 Library which we use for graph generation and the physics between nodes, whic
 </dd>
 <dt><em>Example 1</em>:</dt><dd><ol class="arabic">
 <li><dl>
-<dt>python3 session:</dt><dd><div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">digraphs</span> <span class="kn">import</span> <span class="n">RandomValuationDigraph</span>
+<dt>python3 session:</dt><dd><div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">digraphs</span> <span class="k">import</span> <span class="n">RandomValuationDigraph</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">dg</span> <span class="o">=</span> <span class="n">RandomValuationDigraph</span><span class="p">(</span><span class="n">order</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span><span class="n">Normalized</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">dg</span><span class="o">.</span><span class="n">exportD3</span><span class="p">()</span>
 <span class="go">or</span>
@@ -2164,7 +2160,7 @@ Inversely,  if supporting arcs are not more credible than the reversed negating 
 we brake the circuits on their weakest arc.</p>
 </div>
 <p>Usage example:</p>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">outrankingDigraphs</span> <span class="kn">import</span> <span class="o">*</span>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">outrankingDigraphs</span> <span class="k">import</span> <span class="o">*</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">t</span> <span class="o">=</span> <span class="n">Random3ObjectivesPerformanceTableau</span><span class="p">(</span><span class="n">seed</span><span class="o">=</span><span class="mi">5</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">g</span> <span class="o">=</span> <span class="n">BipolarOutrankingDigraph</span><span class="p">(</span><span class="n">t</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">g</span><span class="o">.</span><span class="n">showHTMLBestChoiceRecommendation</span><span class="p">()</span>
@@ -2509,7 +2505,7 @@ Inversely,  if supporting arcs are not more credible than the reversed negating 
 we brake the circuits on their weakest arc.</p>
 </div>
 <p>Usage example:</p>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">outrankingDigraphs</span> <span class="kn">import</span> <span class="o">*</span>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">outrankingDigraphs</span> <span class="k">import</span> <span class="o">*</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">t</span> <span class="o">=</span> <span class="n">Random3ObjectivesPerformanceTableau</span><span class="p">(</span><span class="n">seed</span><span class="o">=</span><span class="mi">5</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">g</span> <span class="o">=</span> <span class="n">BipolarOutrankingDigraph</span><span class="p">(</span><span class="n">t</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">g</span><span class="o">.</span><span class="n">showBestChoiceRecommendation</span><span class="p">()</span>
@@ -2582,7 +2578,7 @@ Dummy for showCircuits().</p>
 <dd><p>Launches a browser window with the colored relation map of self.
 See corresponding Digraph.showRelationMap() method.</p>
 <p>Example:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">outrankingDigraphs</span> <span class="kn">import</span> <span class="o">*</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">outrankingDigraphs</span> <span class="k">import</span> <span class="o">*</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">t</span> <span class="o">=</span> <span class="n">RandomCBPerformanceTableau</span><span class="p">(</span><span class="n">numberOfActions</span><span class="o">=</span><span class="mi">25</span><span class="p">,</span><span class="n">seed</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">g</span> <span class="o">=</span> <span class="n">BipolarOutrankingDigraph</span><span class="p">(</span><span class="n">t</span><span class="p">,</span><span class="n">Normalized</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">gcd</span> <span class="o">=</span> <span class="o">~</span><span class="p">(</span><span class="o">-</span><span class="n">g</span><span class="p">)</span>  <span class="c1"># strict outranking relation</span>
@@ -2690,7 +2686,7 @@ For best experience make sure to use Firefox, because other browser restrict the
 <dd><p>Prints the orbits of Choices along the automorphisms of
 the Digraph instance.</p>
 <p>Example Python session for computing the non isomorphic MISs from the 12-cycle graph:</p>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">digraphs</span> <span class="kn">import</span> <span class="o">*</span>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">digraphs</span> <span class="k">import</span> <span class="o">*</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">c12</span> <span class="o">=</span> <span class="n">CirculantDigraph</span><span class="p">(</span><span class="n">order</span><span class="o">=</span><span class="mi">12</span><span class="p">,</span><span class="n">circulants</span><span class="o">=</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">c12</span><span class="o">.</span><span class="n">automorphismGenerators</span><span class="p">()</span>
 <span class="gp">...</span>
@@ -2797,7 +2793,7 @@ certainly validated and certainly invalidated outranking situations.</p>
 <p>The default ordering of the output is following the Copeland ranking rule
 from best to worst actions. Further available ranking rule is the ‘NetFlows’ net flows rule.</p>
 <p>Example:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">outrankingDigraphs</span> <span class="kn">import</span> <span class="o">*</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">outrankingDigraphs</span> <span class="k">import</span> <span class="o">*</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">t</span> <span class="o">=</span> <span class="n">RandomCBPerformanceTableau</span><span class="p">(</span><span class="n">numberOfActions</span><span class="o">=</span><span class="mi">25</span><span class="p">,</span><span class="n">seed</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">g</span> <span class="o">=</span> <span class="n">BipolarOutrankingDigraph</span><span class="p">(</span><span class="n">t</span><span class="p">,</span><span class="n">Normalized</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">gcd</span> <span class="o">=</span> <span class="o">~</span><span class="p">(</span><span class="o">-</span><span class="n">g</span><span class="p">)</span>  <span class="c1"># strict outranking relation</span>
@@ -3295,7 +3291,7 @@ otherwise number of decimals;</p></li>
 <li><p>If seed != none, the random generator is seeded</p></li>
 </ul>
 </dd>
-<dt>Example python3 session:</dt><dd><div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">digraphs</span> <span class="kn">import</span> <span class="n">RandomValuationDigraph</span>
+<dt>Example python3 session:</dt><dd><div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">digraphs</span> <span class="k">import</span> <span class="n">RandomValuationDigraph</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">dg</span> <span class="o">=</span> <span class="n">RandomValuationDigraph</span><span class="p">(</span><span class="n">order</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span><span class="n">Normalized</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">dg</span><span class="o">.</span><span class="n">showAll</span><span class="p">()</span>
 <span class="go">*----- show detail -------------*</span>
@@ -3383,7 +3379,7 @@ with this program; if not, write to the Free Software Foundation, Inc.,
 <dd><p>Constructing the most determined spanning tree (or forest if not connected)
 using Kruskal’s greedy algorithm on the dual valuation.</p>
 <dl>
-<dt>Example Python session:</dt><dd><div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">graphs</span> <span class="kn">import</span> <span class="o">*</span>
+<dt>Example Python session:</dt><dd><div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">graphs</span> <span class="k">import</span> <span class="o">*</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">g</span> <span class="o">=</span> <span class="n">RandomValuationGraph</span><span class="p">(</span><span class="n">seed</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">g</span><span class="o">.</span><span class="n">showShort</span><span class="p">()</span>
 <span class="go">*---- short description of the graph ----*</span>
@@ -3487,7 +3483,7 @@ where Max (resp. Min) equals valuation maximum (resp. minimum).</p>
 </pre></div>
 </div>
 <dl>
-<dt>Example python3 session:</dt><dd><div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">graphs</span> <span class="kn">import</span> <span class="n">Graph</span>
+<dt>Example python3 session:</dt><dd><div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">graphs</span> <span class="k">import</span> <span class="n">Graph</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">g</span> <span class="o">=</span> <span class="n">Graph</span><span class="p">(</span><span class="n">numberOfVertices</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span><span class="n">edgeProbability</span><span class="o">=</span><span class="mf">0.5</span><span class="p">)</span> <span class="c1"># random instance</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">g</span><span class="o">.</span><span class="n">showShort</span><span class="p">()</span>
 <span class="go">*----- show short --------------*</span>
@@ -3710,7 +3706,7 @@ of the vertex keys.</p>
 <code class="sig-name descname">exportEdgeOrientationsGraphViz</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">fileName</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">verticesSubset</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">Comments</span><span class="o">=</span><span class="default_value">True</span></em>, <em class="sig-param"><span class="n">graphType</span><span class="o">=</span><span class="default_value">'png'</span></em>, <em class="sig-param"><span class="n">graphSize</span><span class="o">=</span><span class="default_value">'7,7'</span></em>, <em class="sig-param"><span class="n">layout</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">arcColor</span><span class="o">=</span><span class="default_value">'black'</span></em>, <em class="sig-param"><span class="n">lineWidth</span><span class="o">=</span><span class="default_value">1</span></em>, <em class="sig-param"><span class="n">palette</span><span class="o">=</span><span class="default_value">1</span></em>, <em class="sig-param"><span class="n">Debug</span><span class="o">=</span><span class="default_value">False</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/graphs.html#Graph.exportEdgeOrientationsGraphViz"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#graphs.Graph.exportEdgeOrientationsGraphViz" title="Permalink to this definition">¶</a></dt>
 <dd><p>Exports GraphViz dot file for oriented graph drawing filtering.</p>
 <dl>
-<dt>Example:</dt><dd><div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">graphs</span> <span class="kn">import</span> <span class="o">*</span>
+<dt>Example:</dt><dd><div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">graphs</span> <span class="k">import</span> <span class="o">*</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">g</span> <span class="o">=</span> <span class="n">RandomGraph</span><span class="p">(</span><span class="n">order</span><span class="o">=</span><span class="mi">6</span><span class="p">,</span><span class="n">seed</span><span class="o">=</span><span class="mi">100</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="k">if</span> <span class="n">g</span><span class="o">.</span><span class="n">isComparavbilityGraph</span><span class="p">():</span>
 <span class="gp">... </span>    <span class="n">g</span><span class="o">.</span><span class="n">exportEdgeOrientationGraphViz</span><span class="p">(</span><span class="s1">&#39;orientedGraph&#39;</span><span class="p">)</span>
@@ -3928,7 +3924,7 @@ intervals, ie pairs (a,b) of integer numbers where a &lt; b.</p>
 <em class="property">class </em><code class="sig-prename descclassname">graphs.</code><code class="sig-name descname">IsingModel</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">g</span></em>, <em class="sig-param"><span class="n">beta</span><span class="o">=</span><span class="default_value">0</span></em>, <em class="sig-param"><span class="n">nSim</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">Debug</span><span class="o">=</span><span class="default_value">False</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/graphs.html#IsingModel"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#graphs.IsingModel" title="Permalink to this definition">¶</a></dt>
 <dd><p>Specialisation of a Gibbs Sampler for the Ising model</p>
 <dl>
-<dt>Example:</dt><dd><div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">graphs</span> <span class="kn">import</span> <span class="n">GridGraph</span><span class="p">,</span> <span class="n">IsingModel</span>
+<dt>Example:</dt><dd><div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">graphs</span> <span class="k">import</span> <span class="n">GridGraph</span><span class="p">,</span> <span class="n">IsingModel</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">g</span> <span class="o">=</span> <span class="n">GridGraph</span><span class="p">(</span><span class="n">n</span><span class="o">=</span><span class="mi">15</span><span class="p">,</span><span class="n">m</span><span class="o">=</span><span class="mi">15</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">g</span><span class="o">.</span><span class="n">showShort</span><span class="p">()</span>
 <span class="go">*----- show short --------------*</span>
@@ -4068,8 +4064,8 @@ Odd cyle graphs do not admid any perfect matching.</p>
 <dd><p>Specialisation of a Gibbs Sampler for the hard code model,
 that is a random MIS generator.</p>
 <dl>
-<dt>Example:</dt><dd><div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">graphs</span> <span class="kn">import</span> <span class="n">MISModel</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">digraphs</span> <span class="kn">import</span> <span class="n">CirculantDigraph</span>        
+<dt>Example:</dt><dd><div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">graphs</span> <span class="k">import</span> <span class="n">MISModel</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">digraphs</span> <span class="k">import</span> <span class="n">CirculantDigraph</span>        
 <span class="gp">&gt;&gt;&gt; </span><span class="n">dg</span> <span class="o">=</span> <span class="n">CirculantDigraph</span><span class="p">(</span><span class="n">order</span><span class="o">=</span><span class="mi">15</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">g</span> <span class="o">=</span> <span class="n">dg</span><span class="o">.</span><span class="n">digraph2Graph</span><span class="p">()</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">g</span><span class="o">.</span><span class="n">showShort</span><span class="p">()</span>
@@ -4135,7 +4131,7 @@ When the last set is empty, the independent choice is maximal.</p>
 Metropolis Markov Chain Monte Carlo sampler with a given probability distribution
 probs = {‘v1’: x, ‘v2’: y, …}</p>
 <dl>
-<dt>Usage example:</dt><dd><div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">graphs</span> <span class="kn">import</span> <span class="o">*</span>
+<dt>Usage example:</dt><dd><div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">graphs</span> <span class="k">import</span> <span class="o">*</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">g</span> <span class="o">=</span> <span class="n">Graph</span><span class="p">(</span><span class="n">numberOfVertices</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span><span class="n">edgeProbability</span><span class="o">=</span><span class="mf">0.5</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">g</span><span class="o">.</span><span class="n">showShort</span><span class="p">()</span>
 <span class="go">*---- short description of the graph ----*</span>
@@ -4199,7 +4195,7 @@ vertices X vertices table format.</p>
 <em class="property">class </em><code class="sig-prename descclassname">graphs.</code><code class="sig-name descname">PermutationGraph</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">permutation</span><span class="o">=</span><span class="default_value">[4, 3, 6, 1, 5, 2]</span></em>, <em class="sig-param"><span class="n">Debug</span><span class="o">=</span><span class="default_value">False</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/graphs.html#PermutationGraph"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#graphs.PermutationGraph" title="Permalink to this definition">¶</a></dt>
 <dd><p>Martin Ch. Gulombic, Agorithmic Graph Theory and Perfect Graphs 2nd Ed.,
 Annals of Discrete Mathematics 57, Elsevier, Chapter 7, pp 157-170.</p>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">graphs</span> <span class="kn">import</span> <span class="n">PermutationGraph</span>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">graphs</span> <span class="k">import</span> <span class="n">PermutationGraph</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">g</span> <span class="o">=</span> <span class="n">PermutationGraph</span><span class="p">()</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">g</span>
 <span class="go">*------- Graph instance description ------*</span>
@@ -4263,7 +4259,7 @@ This orientation is always transitive and delivers a weak ordering of the vertic
 nSim simulation steps (default = len(graph.edges)).</p>
 <blockquote>
 <div><dl>
-<dt>Example 3-coloring of a grid 6x6 :</dt><dd><div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">graphs</span> <span class="kn">import</span> <span class="o">*</span>
+<dt>Example 3-coloring of a grid 6x6 :</dt><dd><div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">graphs</span> <span class="k">import</span> <span class="o">*</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">g</span> <span class="o">=</span> <span class="n">GridGraph</span><span class="p">(</span><span class="n">n</span><span class="o">=</span><span class="mi">6</span><span class="p">,</span><span class="n">m</span><span class="o">=</span><span class="mi">6</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">g</span><span class="o">.</span><span class="n">showShort</span><span class="p">()</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">g</span><span class="o">.</span><span class="n">exportGraphViz</span><span class="p">()</span>
@@ -4441,7 +4437,7 @@ where p and q are two coprime integers such that
 <p><em>Reference</em>: M. Aigner,
 Markov’s Theorem and 100 Years of the Uniqueness Conjecture, Springer, 2013, p. 141-149</p>
 <p>S(4/7) snake graph instance:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">graphs</span> <span class="kn">import</span> <span class="n">SnakeGraph</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">graphs</span> <span class="k">import</span> <span class="n">SnakeGraph</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">s4_7</span> <span class="o">=</span> <span class="n">SnakeGraph</span><span class="p">(</span><span class="n">p</span><span class="o">=</span><span class="mi">4</span><span class="p">,</span><span class="n">q</span><span class="o">=</span><span class="mi">7</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">s4_7</span><span class="o">.</span><span class="n">showShort</span><span class="p">()</span>
 <span class="go">*---- short description of the snake graph ----*</span>
@@ -4583,7 +4579,7 @@ instances from a given argPerfTab instance.</p>
 </pre></div>
 </div>
 <dl>
-<dt>With the help of the <code class="xref py py-class docutils literal notranslate"><span class="pre">perfTabs.RandomPerformanceTableau</span></code> class let us generate for illustration a random performance tableau concerning 7 decision actions or alternatives denoted <em>a01</em>, <em>a02</em>, …, <em>a07</em>:</dt><dd><div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">randomPerfTabs</span> <span class="kn">import</span> <span class="n">RandomPerformanceTableau</span>
+<dt>With the help of the <code class="xref py py-class docutils literal notranslate"><span class="pre">perfTabs.RandomPerformanceTableau</span></code> class let us generate for illustration a random performance tableau concerning 7 decision actions or alternatives denoted <em>a01</em>, <em>a02</em>, …, <em>a07</em>:</dt><dd><div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">randomPerfTabs</span> <span class="k">import</span> <span class="n">RandomPerformanceTableau</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">rt</span> <span class="o">=</span> <span class="n">RandomPerformanceTableau</span><span class="p">(</span><span class="n">seed</span><span class="o">=</span><span class="mi">100</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">rt</span><span class="o">.</span><span class="n">showActions</span><span class="p">()</span>
 <span class="go">    *----- show decision action --------------*</span>
@@ -4988,7 +4984,7 @@ presenting the decision alternatives.</p></li>
 <li><p>By default, the number of cores available, will be detected. It may be efficient in a HPC context
 to indicate the exact number of singled threaded cores in fact allocated to the job.</p></li>
 </ul>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">randomPerfTabs</span> <span class="kn">import</span> <span class="n">RandomPerformanceTableau</span>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">randomPerfTabs</span> <span class="k">import</span> <span class="n">RandomPerformanceTableau</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">rt</span> <span class="o">=</span> <span class="n">RandomPerformanceTableau</span><span class="p">(</span><span class="n">seed</span><span class="o">=</span><span class="mi">100</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">rt</span><span class="o">.</span><span class="n">showHTMLPerformanceHeatmap</span><span class="p">(</span><span class="n">colorLevels</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span><span class="n">Correlations</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 </pre></div>
@@ -5092,8 +5088,8 @@ given performance tableau.</p>
 </div></blockquote>
 <dl>
 <dt>Example python session:</dt><dd><div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">performanceQuantiles</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">randomPerfTabs</span> <span class="kn">import</span> <span class="n">RandomCBPerformanceTableau</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">randomPerfTabs</span> <span class="kn">import</span> <span class="n">RandomCBPerformanceGenerator</span> <span class="k">as</span> <span class="n">PerfTabGenerator</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">randomPerfTabs</span> <span class="k">import</span> <span class="n">RandomCBPerformanceTableau</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">randomPerfTabs</span> <span class="k">import</span> <span class="n">RandomCBPerformanceGenerator</span> <span class="k">as</span> <span class="n">PerfTabGenerator</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">nbrActions</span><span class="o">=</span><span class="mi">1000</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">nbrCrit</span> <span class="o">=</span> <span class="mi">7</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">tp</span> <span class="o">=</span> <span class="n">RandomCBPerformanceTableau</span><span class="p">(</span><span class="n">numberOfActions</span><span class="o">=</span><span class="n">nbrActions</span><span class="p">,</span>
@@ -5256,7 +5252,7 @@ on each of the three objectives.</p>
 <p class="admonition-title">Warning</p>
 <p>Minimal number required of criteria is 3!</p>
 </div>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">randomPerfTabs</span> <span class="kn">import</span> <span class="n">Random3ObjectivesPerformanceTableau</span>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">randomPerfTabs</span> <span class="k">import</span> <span class="n">Random3ObjectivesPerformanceTableau</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">t</span> <span class="o">=</span> <span class="n">Random3ObjectivesPerformanceTableau</span><span class="p">(</span><span class="n">numberOfActions</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span><span class="n">numberOfCriteria</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span><span class="n">seed</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">t</span>
 <span class="go">*------- PerformanceTableau instance description ------*</span>
@@ -5361,7 +5357,7 @@ of a fair student 4-16, of a good student 8-20, and of an excellent student 12-2
 The random grading generator follows a double triangular probablity law
 with <em>mode</em> equal to the middle of the random range and <em>median repartition</em> of
 probability each side of the mode.</p>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">randomPerfTabs</span> <span class="kn">import</span> <span class="n">RandomAcademicPerformanceTableau</span>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">randomPerfTabs</span> <span class="k">import</span> <span class="n">RandomAcademicPerformanceTableau</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">t</span> <span class="o">=</span> <span class="n">RandomAcademicPerformanceTableau</span><span class="p">(</span><span class="n">numberOfStudents</span><span class="o">=</span><span class="mi">7</span><span class="p">,</span>
 <span class="gp">... </span>             <span class="n">numberOfCourses</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span> <span class="n">missingDataProbability</span><span class="o">=</span><span class="mf">0.03</span><span class="p">,</span>
 <span class="gp">... </span>             <span class="n">WithTypes</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">seed</span><span class="o">=</span><span class="mi">100</span><span class="p">)</span>
@@ -5519,7 +5515,7 @@ oriented performance tableaux.</p>
 <p>Minimal number required of criteria is 2, and minimal number
 required of decision actions is 3 !</p>
 </div>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">randomPerfTabs</span> <span class="kn">import</span> <span class="n">RandomCBPerformanceTableau</span>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">randomPerfTabs</span> <span class="k">import</span> <span class="n">RandomCBPerformanceTableau</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">t</span> <span class="o">=</span> <span class="n">RandomCBPerformanceTableau</span><span class="p">(</span><span class="n">numberOfActions</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span><span class="n">numberOfCriteria</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span><span class="n">seed</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">t</span>
 <span class="go">*------- PerformanceTableau instance description ------*</span>
@@ -5611,7 +5607,7 @@ RandomPerformanceTableau, RandomCBPerformanceTableau,
 or Random3ObjectivesPerformanceTableau.</p>
 <p>The return format of generated new set of random actions is schown below.
 This return may be directly feeded to the PerformanceQuantiles.updateQuantiles() method.</p>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">randomPerfTabs</span> <span class="kn">import</span> <span class="o">*</span>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">randomPerfTabs</span> <span class="k">import</span> <span class="o">*</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">t</span> <span class="o">=</span> <span class="n">RandomPerformanceTableau</span><span class="p">(</span><span class="n">seed</span><span class="o">=</span><span class="mi">100</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">t</span>
 <span class="go">*------- PerformanceTableau instance description ------*</span>
@@ -5709,7 +5705,7 @@ This return may be directly feeded to the PerformanceQuantiles.updateQuantiles()
 <li><p>Default NA symbol == Decimal(‘-999’)</p></li>
 </ul>
 </dd>
-<dt>Code example:</dt><dd><div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">randomPerfTabs</span> <span class="kn">import</span> <span class="n">RandomPerformanceTableau</span>
+<dt>Code example:</dt><dd><div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">randomPerfTabs</span> <span class="k">import</span> <span class="n">RandomPerformanceTableau</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">t</span> <span class="o">=</span> <span class="n">RandomPerformanceTableau</span><span class="p">(</span><span class="n">numberOfActions</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span><span class="n">numberOfCriteria</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span><span class="n">seed</span><span class="o">=</span><span class="mi">100</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">t</span><span class="o">.</span><span class="n">actions</span>
 <span class="go">    {&#39;a1&#39;: {&#39;comment&#39;: &#39;RandomPerformanceTableau() generated.&#39;, &#39;name&#39;: &#39;random decision action&#39;},</span>
@@ -6391,7 +6387,7 @@ observed on a discordant criteria.</p></li>
 </ul>
 </div></blockquote>
 <p><em>Usage example</em>:</p>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">outrankingDigraphs</span> <span class="kn">import</span> <span class="o">*</span>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">outrankingDigraphs</span> <span class="k">import</span> <span class="o">*</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">t</span> <span class="o">=</span> <span class="n">RandomPerformanceTableau</span><span class="p">(</span><span class="n">numberOfActions</span><span class="o">=</span><span class="mi">7</span><span class="p">,</span><span class="n">weightDistribution</span><span class="o">=</span><span class="s1">&#39;random&#39;</span><span class="p">,</span><span class="n">seed</span><span class="o">=</span><span class="mi">100</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">t</span><span class="o">.</span><span class="n">showPerformanceTableau</span><span class="p">()</span>
 <span class="go"> *----  performance tableau -----*</span>
@@ -6654,7 +6650,7 @@ Rubis Solver computed from a stored XMCDA2 encoded performance tableau.</p>
 </div></blockquote>
 <p>Example:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">xmcda</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">randomPerfTabs</span> <span class="kn">import</span> <span class="n">RandomCBPerformanceTableau</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">randomPerfTabs</span> <span class="k">import</span> <span class="n">RandomCBPerformanceTableau</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">t</span> <span class="o">=</span> <span class="n">RandomCBPerformanceTableau</span><span class="p">()</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">t</span><span class="o">.</span><span class="n">saveXMCDA2</span><span class="p">(</span><span class="s1">&#39;example&#39;</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">xmcda</span><span class="o">.</span><span class="n">showXMCDARubisBestChoiceRecommendation</span><span class="p">(</span><span class="n">problemFileName</span><span class="o">=</span><span class="s1">&#39;example&#39;</span><span class="p">)</span>
@@ -6859,7 +6855,7 @@ Components are stored in an ordered dictionary.</p>
 <dt id="sparseOutrankingDigraphs.PreRankedOutrankingDigraph.showShort">
 <code class="sig-name descname">showShort</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">fileName</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">WithFileSize</span><span class="o">=</span><span class="default_value">True</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/sparseOutrankingDigraphs.html#PreRankedOutrankingDigraph.showShort"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#sparseOutrankingDigraphs.PreRankedOutrankingDigraph.showShort" title="Permalink to this definition">¶</a></dt>
 <dd><p>Default (__repr__) presentation method for big outranking digraphs instances:</p>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">sparseOutrankingDigraphs</span> <span class="kn">import</span> <span class="o">*</span>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">sparseOutrankingDigraphs</span> <span class="k">import</span> <span class="o">*</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">t</span> <span class="o">=</span> <span class="n">RandomCBPerformanceTableau</span><span class="p">(</span><span class="n">numberOfActions</span><span class="o">=</span><span class="mi">100</span><span class="p">,</span><span class="n">seed</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">g</span> <span class="o">=</span> <span class="n">PreRankedOutrankingDigraph</span><span class="p">(</span><span class="n">t</span><span class="p">,</span><span class="n">quantiles</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">g</span><span class="p">)</span>
@@ -7141,7 +7137,7 @@ the diagonal outranking components of the sparse outranking digraph.</p>
 </dd>
 </dl>
 <p>Example:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">sparseOutrankingDigraphs</span> <span class="kn">import</span> <span class="o">*</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">sparseOutrankingDigraphs</span> <span class="k">import</span> <span class="o">*</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">t</span> <span class="o">=</span> <span class="n">RandomCBPerformanceTableau</span><span class="p">(</span><span class="n">numberOfActions</span><span class="o">=</span><span class="mi">50</span><span class="p">,</span><span class="n">seed</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">bg</span> <span class="o">=</span> <span class="n">PreRankedOutrankingDigraph</span><span class="p">(</span><span class="n">t</span><span class="p">,</span><span class="n">quantiles</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span><span class="n">minimalComponentSize</span><span class="o">=</span><span class="mi">5</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">bg</span><span class="p">)</span>
@@ -7269,16 +7265,16 @@ normed performance quantiles gathered from historical data.</p>
 <a class="reference internal" href="#performanceQuantiles.PerformanceQuantiles" title="performanceQuantiles.PerformanceQuantiles"><code class="xref py py-class docutils literal notranslate"><span class="pre">performanceQuantiles.PerformanceQuantiles</span></code></a> instance.</p>
 </div>
 <dl>
-<dt>Example Python session:</dt><dd><div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">sortingDigraphs</span> <span class="kn">import</span> <span class="o">*</span>
+<dt>Example Python session:</dt><dd><div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">sortingDigraphs</span> <span class="k">import</span> <span class="o">*</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="c1"># historical data</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">randomPerfTabs</span> <span class="kn">import</span> <span class="n">RandomCBPerformanceTableau</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">randomPerfTabs</span> <span class="k">import</span> <span class="n">RandomCBPerformanceTableau</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">nbrActions</span><span class="o">=</span><span class="mi">1000</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">nbrCrit</span> <span class="o">=</span> <span class="mi">13</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">seed</span> <span class="o">=</span> <span class="mi">100</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">tp</span> <span class="o">=</span> <span class="n">RandomCBPerformanceTableau</span><span class="p">(</span><span class="n">numberOfActions</span><span class="o">=</span><span class="n">nbrActions</span><span class="p">,</span><span class="n">numberOfCriteria</span><span class="o">=</span><span class="n">nbrCrit</span><span class="p">,</span><span class="n">seed</span><span class="o">=</span><span class="n">seed</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">pq</span> <span class="o">=</span> <span class="n">PerformanceQuantiles</span><span class="p">(</span><span class="n">tp</span><span class="p">,</span><span class="n">numberOfBins</span><span class="o">=</span><span class="s1">&#39;deciles&#39;</span><span class="p">,</span><span class="n">LowerClosed</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span><span class="n">Debug</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="c1"># new incoming decision actions of the same kind</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">randomPerfTabs</span> <span class="kn">import</span> <span class="n">RandomCBPerformanceGenerator</span> <span class="k">as</span> <span class="n">PerfTabGenerator</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">randomPerfTabs</span> <span class="k">import</span> <span class="n">RandomCBPerformanceGenerator</span> <span class="k">as</span> <span class="n">PerfTabGenerator</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">tpg</span> <span class="o">=</span> <span class="n">PerfTabGenerator</span><span class="p">(</span><span class="n">tp</span><span class="p">,</span><span class="n">instanceCounter</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span><span class="n">seed</span><span class="o">=</span><span class="n">seed</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">newActions</span> <span class="o">=</span> <span class="n">tpg</span><span class="o">.</span><span class="n">randomActions</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="c1"># rating the new set of decision actions after</span>
@@ -7409,7 +7405,7 @@ presenting the decision alternatives.</p></li>
 <li><p>By default, the number of cores available, will be detected. It may be efficient in a HPC context
 to indicate the exact number of singled threaded cores in fact allocated to the job.</p></li>
 </ul>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">randomPerfTabs</span> <span class="kn">import</span> <span class="n">RandomPerformanceTableau</span>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">randomPerfTabs</span> <span class="k">import</span> <span class="n">RandomPerformanceTableau</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">rt</span> <span class="o">=</span> <span class="n">RandomPerformanceTableau</span><span class="p">(</span><span class="n">seed</span><span class="o">=</span><span class="mi">100</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">rt</span><span class="o">.</span><span class="n">showHTMLPerformanceHeatmap</span><span class="p">(</span><span class="n">colorLevels</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span><span class="n">Correlations</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 </pre></div>
@@ -7500,8 +7496,8 @@ If no number of limiting quantiles is given, then a default profile with the lim
 By default upper closed limits of categories are supposed to be used in the sorting.</p>
 </div>
 <p>Example Python3 session:</p>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">sortingDigraphs</span> <span class="kn">import</span> <span class="n">QuantilesSortingDigraph</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">randomPerfTabs</span> <span class="kn">import</span> <span class="n">RandomCBPerformanceTableau</span>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">sortingDigraphs</span> <span class="k">import</span> <span class="n">QuantilesSortingDigraph</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">randomPerfTabs</span> <span class="k">import</span> <span class="n">RandomCBPerformanceTableau</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">t</span> <span class="o">=</span> <span class="n">RandomCBPerformanceTableau</span><span class="p">(</span><span class="n">numberOfActions</span><span class="o">=</span><span class="mi">7</span><span class="p">,</span><span class="n">numberOfCriteria</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span>
 <span class="gp">... </span>                               <span class="n">weightDistribution</span><span class="o">=</span><span class="s1">&#39;equiobjectives&#39;</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">qs</span> <span class="o">=</span> <span class="n">QuantilesSortingDigraph</span><span class="p">(</span><span class="n">t</span><span class="p">,</span><span class="n">limitingQuantiles</span><span class="o">=</span><span class="mi">7</span><span class="p">)</span>
@@ -7707,8 +7703,8 @@ on each criteria. By default lower-closed limts of categories are
 supposed to be used in the sorting.</p>
 </div>
 <p>Example Python3 session:</p>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">sortingDigraphs</span> <span class="kn">import</span> <span class="n">SortingDigraph</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">randomPerfTabs</span> <span class="kn">import</span> <span class="n">RandomPerformanceTableau</span>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">sortingDigraphs</span> <span class="k">import</span> <span class="n">SortingDigraph</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">randomPerfTabs</span> <span class="k">import</span> <span class="n">RandomPerformanceTableau</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">t</span> <span class="o">=</span> <span class="n">RandomPerformanceTableau</span><span class="p">(</span><span class="n">seed</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="p">[</span><span class="n">x</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">t</span><span class="o">.</span><span class="n">actions</span><span class="p">]</span>
 <span class="go">[&#39;a01&#39;, &#39;a02&#39;, &#39;a03&#39;, &#39;a04&#39;, &#39;a05&#39;, &#39;a06&#39;, &#39;a07&#39;, &#39;a08&#39;,</span>
@@ -7975,7 +7971,7 @@ bipolar-valued marginal pairwise majority difference digraphs.</p>
 </div>
 </div></blockquote>
 <p>Example Python3 session</p>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">votingDigraphs</span> <span class="kn">import</span> <span class="o">*</span>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">votingDigraphs</span> <span class="k">import</span> <span class="o">*</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">v</span> <span class="o">=</span> <span class="n">RandomLinearVotingProfile</span><span class="p">(</span><span class="n">numberOfVoters</span><span class="o">=</span><span class="mi">101</span><span class="p">,</span><span class="n">numberOfCandidates</span><span class="o">=</span><span class="mi">5</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">v</span><span class="o">.</span><span class="n">showLinearBallots</span><span class="p">()</span>
 <span class="go">v101(1.0):   [&#39;a5&#39;, &#39;a1&#39;, &#39;a2&#39;, &#39;a4&#39;, &#39;a3&#39;]</span>
@@ -8110,7 +8106,7 @@ the self.rankingByChoosing slot is pre-required !</p>
 </pre></div>
 </div>
 <p>Sample Python3 session</p>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">votingDigraphs</span> <span class="kn">import</span> <span class="o">*</span>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">votingDigraphs</span> <span class="k">import</span> <span class="o">*</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">v</span> <span class="o">=</span> <span class="n">RandomLinearVotingProfile</span><span class="p">(</span><span class="n">numberOfVoters</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span><span class="n">numberOfCandidates</span><span class="o">=</span><span class="mi">3</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">v</span><span class="o">.</span><span class="n">showLinearBallots</span><span class="p">()</span>
 <span class="go">voters(weight)       candidates rankings</span>
@@ -8624,7 +8620,7 @@ Kohler linear best ordering and an Arrow-Raynaud linear worst ordering.</p>
 of the principal orders of the variance-covariance of in- 
 (Colwise) and outdegrees (Rowwise).</p>
 <p>Example Python3 session with same outranking digraph g as shown in the RankingByChoosingDigraph example session (see below).</p>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">TransitiveDigraphs</span> <span class="kn">import</span> <span class="n">PrincipalInOutDegreesOrderingFusion</span>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">TransitiveDigraphs</span> <span class="k">import</span> <span class="n">PrincipalInOutDegreesOrderingFusion</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">pro</span> <span class="o">=</span> <span class="n">PrincipalInOutDegreesOrdering</span><span class="p">(</span><span class="n">g</span><span class="p">,</span><span class="n">imageType</span><span class="o">=</span><span class="s2">&quot;png&quot;</span><span class="p">,</span> 
 <span class="go">                 plotFileName=&quot;proTransitiveDigraphing&quot;)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">pro</span><span class="o">.</span><span class="n">showTransitiveDigraph</span><span class="p">()</span>
@@ -8696,7 +8692,7 @@ of the principal orders of the variance-covariance of in-
 <dd><p>Specialization of the abstract TransitiveDigraph class for 
 ranking-by-Rubis-choosing orderings.</p>
 <p>Example python3 session:</p>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">outrankingDigraphs</span> <span class="kn">import</span> <span class="o">*</span>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">outrankingDigraphs</span> <span class="k">import</span> <span class="o">*</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">t</span> <span class="o">=</span> <span class="n">RandomCBPerformanceTableau</span><span class="p">(</span><span class="n">numberOfActions</span><span class="o">=</span><span class="mi">7</span><span class="p">,</span>
 <span class="go">            numberOfCriteria=5,</span>
 <span class="go">            weightDistribution=&#39;equiobjectives&#39;)</span>
@@ -8712,7 +8708,7 @@ ranking-by-Rubis-choosing orderings.</p>
 <span class="go"> &#39;a05&#39; |   +0.00  -0.67  -0.67  -1.00  +0.00  -0.17  +0.33  </span>
 <span class="go"> &#39;a06&#39; |   +0.33  +0.00  -0.33  -0.67  +0.50  +0.00  +1.00  </span>
 <span class="go"> &#39;a07&#39; |   +0.33  +0.00  -0.33  -0.67  +0.50  +0.17  +0.00  </span>
-<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">TransitiveDigraphs</span> <span class="kn">import</span> <span class="n">RankingByChoosingDigraph</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">TransitiveDigraphs</span> <span class="k">import</span> <span class="n">RankingByChoosingDigraph</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">rbc</span> <span class="o">=</span> <span class="n">RankingByChoosingDigraph</span><span class="p">(</span><span class="n">g</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">rbc</span><span class="o">.</span><span class="n">showTransitiveDigraph</span><span class="p">()</span>
 <span class="go"> Ranking by Choosing and Rejecting</span>
@@ -8809,8 +8805,8 @@ disjunctive or conjunctive fusion (omax|omin operator) of a list of rankings.</p
 </ul>
 </div></blockquote>
 <p>Example application:</p>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">TransitiveDigraphs</span> <span class="kn">import</span> <span class="n">RankingsFusionDigraph</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">sparseOutrankingDigraphs</span> <span class="kn">import</span> <span class="n">PreRankedOutrankingDigraph</span>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">TransitiveDigraphs</span> <span class="k">import</span> <span class="n">RankingsFusionDigraph</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">sparseOutrankingDigraphs</span> <span class="k">import</span> <span class="n">PreRankedOutrankingDigraph</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">t</span> <span class="o">=</span> <span class="n">RandomPerformanceTableau</span><span class="p">()</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">pr</span> <span class="o">=</span> <span class="n">PreRankedOutrankingDigraph</span><span class="p">(</span><span class="n">t</span><span class="p">,</span><span class="mi">10</span><span class="p">,</span><span class="n">quantilesOrderingStrategy</span><span class="o">=</span><span class="s1">&#39;average&#39;</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">r1</span> <span class="o">=</span> <span class="n">qr</span><span class="o">.</span><span class="n">boostedRanking</span>
@@ -8956,7 +8952,7 @@ with this program; if not, write to the Free Software Foundation, Inc.,
 <div class="line">seed := integer for fixing the sequence generation.</div>
 </div>
 </dd>
-<dt>Example usage:</dt><dd><div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">randomNumbers</span> <span class="kn">import</span> <span class="n">DiscreteRandomVariable</span>
+<dt>Example usage:</dt><dd><div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">randomNumbers</span> <span class="k">import</span> <span class="n">DiscreteRandomVariable</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">discreteLaw</span> <span class="o">=</span> <span class="p">{</span><span class="mi">0</span><span class="p">:</span><span class="mf">0.0478</span><span class="p">,</span>
 <span class="go">                   1:0.3349,</span>
 <span class="go">                   2:0.2392,</span>
@@ -9035,7 +9031,7 @@ Third Edition</em> (NR3), Cambridge University Press, Cambridge UK 2007.</p>
 <p>See Computational Statistics Course : <a class="reference external" href="http://hdl.handle.net/10993/37870">http://hdl.handle.net/10993/37870</a>
 Lecture 5.</p>
 <p>Example usage:</p>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">randomNumbers</span> <span class="kn">import</span> <span class="n">IncrementalQuantilesEstimator</span>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">randomNumbers</span> <span class="k">import</span> <span class="n">IncrementalQuantilesEstimator</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">random</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">random</span><span class="o">.</span><span class="n">seed</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">iqAgent</span> <span class="o">=</span> <span class="n">IncrementalQuantilesEstimator</span><span class="p">(</span><span class="n">nbuf</span><span class="o">=</span><span class="mi">100</span><span class="p">)</span>
@@ -9122,7 +9118,7 @@ for the data seen so far</p>
 </ul>
 </div></blockquote>
 <p>Sample Python session:</p>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">randomNumbers</span> <span class="kn">import</span> <span class="n">QuasiRandomFareyPointSet</span>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">randomNumbers</span> <span class="k">import</span> <span class="n">QuasiRandomFareyPointSet</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">qrfs</span> <span class="o">=</span> <span class="n">QuasiRandomFareyPointSet</span><span class="p">(</span><span class="n">n</span><span class="o">=</span><span class="mi">20</span><span class="p">,</span><span class="n">s</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span><span class="n">Randomized</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
 <span class="go">                                    fileName=&#39;testFarey&#39;)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">qrfs</span><span class="o">.</span><span class="vm">__dict__</span><span class="o">.</span><span class="n">keys</span><span class="p">())</span>
@@ -9176,7 +9172,7 @@ for the data seen so far</p>
 </ul>
 </div></blockquote>
 <p>Sample Python session:</p>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">randomNumbers</span> <span class="kn">import</span> <span class="n">QuasiRandomKorobovPointSet</span>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">randomNumbers</span> <span class="k">import</span> <span class="n">QuasiRandomKorobovPointSet</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">kor</span> <span class="o">=</span> <span class="n">QuasiRandomKorobovPointSet</span><span class="p">(</span><span class="n">Debug</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 <span class="go">0 [0.0, 0.0, 0.0]</span>
 <span class="go">1 [0.13536725313948247, 0.23158619430934912, 0.8941657924971758]</span>
@@ -9415,9 +9411,9 @@ of non null integers. The <strong>reciprocity theorem</strong> of the Legendre s
 states that, for <em>p</em> being an odd prime, <em>(a/p)</em> = <em>(p/a)</em>,
 apart from those pairs <em>(a/p)</em>, where <em>a</em> = <em>p</em> = 3 (mod 4). In this case, <em>(a/p)</em> = -<em>(p/a)</em>.</p>
 <p>We may graphically illustrate the reciprocity theorem as follows:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">arithmetics</span> <span class="kn">import</span> <span class="o">*</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">arithmetics</span> <span class="k">import</span> <span class="o">*</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">leg</span> <span class="o">=</span> <span class="n">QuadraticResiduesDigraph</span><span class="p">(</span><span class="n">primesBelow</span><span class="p">(</span><span class="mi">20</span><span class="p">,</span><span class="n">Odd</span><span class="o">=</span><span class="kc">True</span><span class="p">))</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">digraphs</span> <span class="kn">import</span> <span class="n">AsymmetricPartialDigraph</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">digraphs</span> <span class="k">import</span> <span class="n">AsymmetricPartialDigraph</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">aleg</span> <span class="o">=</span> <span class="n">AsymmetricPartialDigraph</span><span class="p">(</span><span class="n">leg</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">aleg</span><span class="o">.</span><span class="n">exportGraphViz</span><span class="p">(</span><span class="s1">&#39;legendreAsym&#39;</span><span class="p">)</span>
 </pre></div>
@@ -9455,8 +9451,8 @@ The Python transcription here recodes an original C code of unknown author (see 
 <div><p><img class="math" src="_images/math/170ca217fd12c0b748c6da0b35c2cdfba9e8ec1b.png" alt="\pi = 2 * \sum_{n=0}^{\infty} [ (n !) / (1 * 3  * 5 ... * (2n+1)) ]."/></p>
 </div></blockquote>
 <p>The series gives a new <img class="math" src="_images/math/9cc8517129c87252edd7fe2e4532af9dcf7a54d9.png" alt="\pi"/> decimal after adding in average 3.32 terms.</p>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">arithmetics</span> <span class="kn">import</span> <span class="n">computePiDecimals</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">time</span> <span class="kn">import</span> <span class="n">time</span>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">arithmetics</span> <span class="k">import</span> <span class="n">computePiDecimals</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">time</span> <span class="k">import</span> <span class="n">time</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">t0</span><span class="o">=</span><span class="n">time</span><span class="p">();</span><span class="n">piDecimals</span> <span class="o">=</span> <span class="n">computePiDecimals</span><span class="p">(</span><span class="n">decimalWordLength</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span><span class="n">nbrOfWords</span><span class="o">=</span><span class="mi">100</span><span class="p">);</span><span class="n">t1</span><span class="o">=</span> <span class="n">time</span><span class="p">()</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="s1">&#39;pi = &#39;</span><span class="o">+</span><span class="n">piDecimals</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">+</span><span class="s1">&#39;.&#39;</span><span class="o">+</span><span class="n">piDecimals</span><span class="p">[</span><span class="mi">1</span><span class="p">:])</span>
 <span class="go">pi = 3.14159265358979323846264338327950288419716939937510582097494459</span>
@@ -9776,7 +9772,7 @@ to int format.</p>
 <li><p>By default, the number of cores available, will be detected. It may be necessary in a HPC context to indicate the exact number of singled threaded cores that are actually allocated to the running job.</p></li>
 </ul>
 </div></blockquote>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">cRandomPerfTabs</span> <span class="kn">import</span> <span class="n">RandomPerformanceTableau</span>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">cRandomPerfTabs</span> <span class="k">import</span> <span class="n">RandomPerformanceTableau</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">rt</span> <span class="o">=</span> <span class="n">RandomPerformanceTableau</span><span class="p">(</span><span class="n">seed</span><span class="o">=</span><span class="mi">100</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">rt</span><span class="o">.</span><span class="n">showHTMLPerformanceHeatmap</span><span class="p">(</span><span class="n">colorLevels</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span><span class="n">Correlations</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 </pre></div>
@@ -9936,7 +9932,7 @@ and considerable performance difference discrimination thresholds.</p></li>
 (2 decimal digits by default).</p></li>
 </ul>
 </dd>
-<dt>Code example::</dt><dd><div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">cRandPerfTabs</span> <span class="kn">import</span> <span class="n">RandomPerformanceTableau</span>
+<dt>Code example::</dt><dd><div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">cRandPerfTabs</span> <span class="k">import</span> <span class="n">RandomPerformanceTableau</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">t</span> <span class="o">=</span> <span class="n">RandomPerformanceTableau</span><span class="p">(</span><span class="n">numberOfActions</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span><span class="n">numberOfCriteria</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span><span class="n">seed</span><span class="o">=</span><span class="mi">100</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">t</span><span class="o">.</span><span class="n">actions</span>
 <span class="go">OrderedDict([</span>
@@ -10019,7 +10015,7 @@ If a file name string is given, the performance tableau will directly be loaded 
 <li><p>nbrCores: controls the maximal number of cores that will be used in the multiprocessing phases. If None is given, the os.cpu_count method is used in order to determine the number of availble cores on the SMP machine.</p></li>
 </ul>
 </dd>
-<dt>Example Python session:</dt><dd><div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">cRandPerfTabs</span> <span class="kn">import</span> <span class="o">*</span>
+<dt>Example Python session:</dt><dd><div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">cRandPerfTabs</span> <span class="k">import</span> <span class="o">*</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">tc</span> <span class="o">=</span> <span class="n">cRandomPerformanceTableau</span><span class="p">(</span><span class="n">numberOfActions</span><span class="o">=</span><span class="mi">9</span><span class="p">,</span><span class="n">seed</span><span class="o">=</span><span class="mi">100</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">tc</span>
 <span class="go">*------- PerformanceTableau instance description ------*</span>
@@ -10028,7 +10024,7 @@ If a file name string is given, the performance tableau will directly be loaded 
 <span class="go"># Actions        : 9</span>
 <span class="go"># Criteria       : 7</span>
 <span class="go">Attributes       : [&#39;name&#39;, &#39;actions&#39;, &#39;criteria&#39;, &#39;evaluation&#39;, &#39;weightPreorder&#39;]</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">cIntegerOutrankingDigraphs</span> <span class="kn">import</span> <span class="o">*</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">cIntegerOutrankingDigraphs</span> <span class="k">import</span> <span class="o">*</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">idg</span> <span class="o">=</span> <span class="n">IntegerBipolarOutrankingDigraph</span><span class="p">(</span><span class="n">tc</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">idg</span>
 <span class="go">*------- Object instance description ------*</span>
@@ -10280,7 +10276,7 @@ If no limitingQuantiles parameter quantity is given, a default profile with the 
 <p>By default, upper closed limits of categories are used in the sorting algorithm.</p>
 </div>
 <dl>
-<dt>Example Python session:</dt><dd><div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">cRandPerfTabs</span> <span class="kn">import</span> <span class="o">*</span>
+<dt>Example Python session:</dt><dd><div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">cRandPerfTabs</span> <span class="k">import</span> <span class="o">*</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">t</span> <span class="o">=</span> <span class="n">cRandomPerformanceTableau</span><span class="p">(</span><span class="n">numberOfActions</span><span class="o">=</span><span class="mi">25</span><span class="p">,</span><span class="n">seed</span><span class="o">=</span><span class="mi">100</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">t</span>
 <span class="go"> *------- PerformanceTableau instance description ------*</span>
@@ -10291,7 +10287,7 @@ If no limitingQuantiles parameter quantity is given, a default profile with the 
 <span class="go">  # Criteria       : 7</span>
 <span class="go">  Attributes       : [&#39;randomSeed&#39;, &#39;name&#39;, &#39;actions&#39;, &#39;criteria&#39;,</span>
 <span class="go">                      &#39;evaluation&#39;, &#39;weightPreorder&#39;]</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">cIntegerSortingDigraphs</span> <span class="kn">import</span> <span class="o">*</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">cIntegerSortingDigraphs</span> <span class="k">import</span> <span class="o">*</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">so</span> <span class="o">=</span> <span class="n">IntegerQuantilesSortingDigraph</span><span class="p">(</span><span class="n">t</span><span class="p">,</span>                                       <span class="n">limitingQuantiles</span><span class="o">=</span><span class="s1">&#39;deciles&#39;</span><span class="p">,</span>                                       <span class="n">StoreSorting</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">so</span>
 <span class="go"> *-----  Object instance description -----------*</span>
@@ -10874,7 +10870,7 @@ which is restricted to the decision actions gathered in this quantile equivalenc
 <p>By default, the number of quantiles q is set to quartiles. However, the ranking quality and the best choice results get better with a finer grained quantiles decomposition.</p>
 <p>For other parameters settings, see the corresponding <a class="reference internal" href="#sortingDigraphs.QuantilesSortingDigraph" title="sortingDigraphs.QuantilesSortingDigraph"><code class="xref py py-class docutils literal notranslate"><span class="pre">sortingDigraphs.QuantilesSortingDigraph</span></code></a> class.</p>
 <p>Example python3.6 session:</p>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">cRandPerfTabs</span> <span class="kn">import</span> <span class="o">*</span>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">cRandPerfTabs</span> <span class="k">import</span> <span class="o">*</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">tp</span> <span class="o">=</span> <span class="n">cRandomCBPerformanceTableau</span><span class="p">(</span><span class="n">numberOfActions</span><span class="o">=</span><span class="mi">1000</span><span class="p">,</span>
 <span class="go">                           Threading=True,seed=100)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">tp</span>
@@ -10888,7 +10884,7 @@ which is restricted to the decision actions gathered in this quantile equivalenc
 <span class="go">Attributes       : [&#39;name&#39;, &#39;randomSeed&#39;, &#39;actions&#39;, &#39;objectives&#39;, </span>
 <span class="go">                    &#39;criteriaWeightMode&#39;, &#39;criteria&#39;, </span>
 <span class="go">                    &#39;evaluation&#39;, &#39;weightPreorder&#39;]</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">cSparseIntegerOutrankingDigraphs</span> <span class="kn">import</span> <span class="o">*</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">cSparseIntegerOutrankingDigraphs</span> <span class="k">import</span> <span class="o">*</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">bg</span> <span class="o">=</span> <span class="n">SparseIntegerOutrankingDigraph</span><span class="p">(</span><span class="n">tp</span><span class="p">,</span><span class="n">quantiles</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span>
 <span class="go">                       quantilesOrderingStrategy=&#39;average&#39;,</span>
 <span class="go">                       LowerClosed=False,</span>
@@ -11174,7 +11170,7 @@ Components are stored in an ordered dictionary.</p>
 <p>By default, the number of quantiles q is set to quartiles. However, the ranking quality gets better with a finer grained quantiles decomposition.</p>
 <p>For other parameters settings, see the corresponding <a class="reference internal" href="#sparseOutrankingDigraphs.PreRankedOutrankingDigraph" title="sparseOutrankingDigraphs.PreRankedOutrankingDigraph"><code class="xref py py-class docutils literal notranslate"><span class="pre">sparseOutrankingDigraphs.PreRankedOutrankingDigraph</span></code></a> class.</p>
 <p>Example python3.6 session:</p>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">cRandPerfTabs</span> <span class="kn">import</span> <span class="o">*</span>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">cRandPerfTabs</span> <span class="k">import</span> <span class="o">*</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">tp</span> <span class="o">=</span> <span class="n">cRandomCBPerformanceTableau</span><span class="p">(</span><span class="n">numberOfActions</span><span class="o">=</span><span class="mi">1000</span><span class="p">,</span>
 <span class="gp">... </span>                                   <span class="n">Threading</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span><span class="n">seed</span><span class="o">=</span><span class="mi">100</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">tp</span>
@@ -11187,7 +11183,7 @@ Components are stored in an ordered dictionary.</p>
 <span class="go">Attributes       : [&#39;name&#39;, &#39;randomSeed&#39;, &#39;actions&#39;, &#39;objectives&#39;, </span>
 <span class="go">                    &#39;criteriaWeightMode&#39;, &#39;criteria&#39;, &#39;evaluation&#39;, </span>
 <span class="go">                    &#39;weightPreorder&#39;]</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">cSparseIntegerOutrankingDigraphs</span> <span class="kn">import</span> <span class="o">*</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">cSparseIntegerOutrankingDigraphs</span> <span class="k">import</span> <span class="o">*</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">bg</span> <span class="o">=</span> <span class="n">cQuantilesRankingDigraph</span><span class="p">(</span><span class="n">tp</span><span class="p">,</span><span class="n">quantiles</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span>
 <span class="gp">... </span>                 <span class="n">quantilesOrderingStrategy</span><span class="o">=</span><span class="s1">&#39;optimal&#39;</span><span class="p">,</span>
 <span class="gp">... </span>                 <span class="n">LowerClosed</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
@@ -11422,29 +11418,37 @@ Components are stored in an ordered dictionary.</p>
            
           </div>
           <footer>
+  
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
-        <a href="pearls.html" class="btn btn-neutral float-right" title="Advanced Topics" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
-        <a href="tutorial.html" class="btn btn-neutral float-left" title="Digraph3 Tutorials" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+      
+        <a href="pearls.html" class="btn btn-neutral float-right" title="Advanced Topics" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="tutorial.html" class="btn btn-neutral float-left" title="Digraph3 Tutorials" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
     </div>
+  
 
   <hr/>
 
   <div role="contentinfo">
     <p>
-        &#169; Copyright 2012-2020, Raymond Bisdorff.
+        
+        &copy; Copyright 2012-2020, Raymond Bisdorff
 
     </p>
   </div>
     
     
     
-    Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a
     
-    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a>
     
     provided by <a href="https://readthedocs.org">Read the Docs</a>. 
 
 </footer>
+
         </div>
       </div>
 
