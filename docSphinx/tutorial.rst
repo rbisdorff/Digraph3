@@ -4339,7 +4339,7 @@ Published data of the 2004 *Spiegel* student survey is stored, for our evaluatio
    :width: 600px
    :alt: Average quality scores of German University Students
 
-   Quality of enroled students per academic subject
+   Average quality of enroled students per academic subject
 
 In :numref:`qualityScores`, the fifteen popular academic subjects are grouped into topical '*Faculties*': - *Humanities*; - *Law, Economics & Management*; - *Life Sciences & Medicine*; - *Natural Sciences & Mathematics*; and - *Technology*. All fifteen subjects are considered *equally significant* for our evaluation problem (see Row 2). The recorded average enrolment quality scores appear coloured along a 7-tiling scheme per subject (see last Row).
 
@@ -4365,7 +4365,7 @@ The apparent *incommensurability* and very likely *imprecision* of the recorded 
 Rating-by-ranking with lower-closed quantile limits
 ...................................................
 
-The Spiegel authors opted indeed for a simple 3-tiling of the Universities per valuated academic subject, followed by an average *Borda* scores based global ranking [29]_. Here, our **epistemic logic** based **outranking approach**, allows us, with adequate choices of *indifference* (0.1) and *preference* (0.6) discrimination thresholds, to estimate **lower-closed 9-tiles** of the enrolment quality scores per subject and rank conjointly, with the help of the *Copeland* ranking rule [34]_ applied to a corresponding *bipolar-valued outranking* digraph, the 41 Universities **and** the lower limits of the estimated 9-tiles limits.
+The Spiegel authors opted indeed for a simple 3-tiling of the Universities per valuated academic subject, followed by an average *Borda* scores based global ranking [29]_. Here, our **epistemic logic** based **outranking approach**, allows us, with adequate choices of *indifference* (0.1) and *preference* (0.5) discrimination thresholds, to estimate **lower-closed 9-tiles** of the enrolment quality scores per subject and rank conjointly, with the help of the *Copeland* ranking rule [34]_ applied to a corresponding *bipolar-valued outranking* digraph, the 41 Universities **and** the lower limits of the estimated 9-tiles limits.
 
 We need therefore to, first, estimate, with the help of the :py:class:`performanceQuantiles.PerformanceQuantiles` constructor, the lowerclosed  9-tiling of the average enrolment quality scores per academic subject.
 
@@ -6112,7 +6112,7 @@ Furthermore, as the kernel concept involves conjointly a **positive logical refu
 
 In such a  bipolar-valued context, we call **prekernel** a choice which is **externally stable** and for which the **internal stability** condition is **valid or indeterminate**. We say that the independence condition is in this case only **weakly** validated. Notice that all kernels are hence prekernels, but not vice-versa.
 
-In graphs or symmetric digraphs, where there is essentially no apparent ' *laterality* ', all prekernels are *initial* **and** *terminal* at the same time. They correspond to what we call *holes* in the graph. An *universal* example is given by the **complete** digraph.
+In graphs or symmetric digraphs, where there is essentially no apparent ' *laterality* ', all prekernels are *initial* **and** *terminal* at the same time. They correspond to what we call *holes* in the graph. A *universal* example is given by the **complete** digraph.
 
 .. code-block:: pycon
 
