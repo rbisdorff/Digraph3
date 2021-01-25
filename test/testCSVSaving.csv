@@ -1,6 +1,6 @@
 "criteria","name","weight","scale","prefDir","thresholds","a1","a2","a3","a4","a5","a6","a7"
-"b1","random ordinal benefit criterion","4.0","(0, 10)","max","OrderedDict()",9.00,2.00,7.00,5.00,3.00,1.00,5.00
-"c1","random cardinal cost criterion","-1.0","(0.0, 100.0)","min","OrderedDict([('ind', (Decimal('1.53'), Decimal('0'))), ('pref', (Decimal('4.66'), Decimal('0'))), ('veto', (Decimal('65.31'), Decimal('0')))])",33.52,-999.00,61.35,85.95,87.48,28.86,22.17
-"c2","random ordinal cost criterion","-1.0","(0, 10)","min","OrderedDict()",8.00,3.00,6.00,6.00,9.00,5.00,4.00
-"c3","random cardinal cost criterion","-1.0","(0.0, 100.0)","min","OrderedDict([('ind', (Decimal('3.1316759847287066'), Decimal('0'))), ('pref', (Decimal('4.94'), Decimal('0'))), ('veto', (Decimal('65.15173545146727'), Decimal('0')))])",58.23,55.08,20.31,45.01,42.16,15.37,85.16
-"c4","random cardinal cost criterion","-1.0","(0.0, 100.0)","min","OrderedDict([('ind', (Decimal('2.339459974547845'), Decimal('0'))), ('pref', (Decimal('6.15'), Decimal('0'))), ('veto', (Decimal('57.95421969519106'), Decimal('0')))])",43.41,19.23,66.52,37.26,77.07,17.36,45.78
+"b1","random cardinal benefit criterion","2.0","(0.0, 100.0)","max","OrderedDict([('ind', (Decimal('3.17'), Decimal('0'))), ('pref', (Decimal('8.14'), Decimal('0'))), ('veto', (Decimal('74.04'), Decimal('0')))])",69.70,72.87,6.97,81.01,33.58,44.45,-999.00
+"b2","random ordinal benefit criterion","2.0","(0, 10)","max","OrderedDict()",1.00,6.00,8.00,2.00,1.00,4.00,1.00
+"b3","random ordinal benefit criterion","2.0","(0, 10)","max","OrderedDict()",8.00,3.00,6.00,3.00,7.00,7.00,3.00
+"c1","random cardinal cost criterion","-3.0","(0.0, 100.0)","min","OrderedDict([('ind', (Decimal('3.2598287165169304'), Decimal('0'))), ('pref', (Decimal('3.38'), Decimal('0'))), ('veto', (Decimal('49.84505768755541'), Decimal('0')))])",43.19,39.83,46.57,38.11,89.57,53.75,82.72
+"c2","random cardinal cost criterion","-3.0","(0.0, 100.0)","min","OrderedDict([('ind', (Decimal('3.8701118167444815'), Decimal('0'))), ('pref', (Decimal('4.58'), Decimal('0'))), ('veto', (Decimal('64.16992922494312'), Decimal('0')))])",87.56,27.51,50.31,35.05,23.42,62.14,22.93

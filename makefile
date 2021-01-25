@@ -2,7 +2,7 @@
 ## R Bisdorff Nov 2020
 ## version 3.9
 ########################
-PYTHON=python3.9
+PYTHON=python3.8
 PYTEST=pytest
 SPHINX=sphinx-build
 INSTALLDIR=/usr/local/bin
@@ -206,7 +206,7 @@ verboseCythonTests:
 install:
 		sudo ${PYTHON} setup.py install
 		# uncomment or adapt makefile for multiple python versions
-		#sudo python3.8 setup.py install
+		#sudo python3.9 setup.py install
 
 installVenv:
 		${PYTHON} setup.py install

@@ -4678,8 +4678,8 @@ if __name__ == "__main__":
     print('Enjoy !')
 
     print('*************************************')
-    print('* R.B. december 2010                *')
-    print('* $Revision$                  *')
+    print('* R.B. december 2020                *')
+    print('* $Revision$ Python                 *')
     print('*************************************')
 
 #############################
