@@ -3,7 +3,7 @@ Digraph3 Archives
 
 :Author: *Raymond BISDORFF*, Emeritus Professor of Computer Science and Applied Mathematics
 :Url: https://rbisdorff.github.io/
-:Copyright: `R. Bisdorff <_static/digraph3_copyright.html>`_ 2013-2020
+:Copyright: `R. Bisdorff <_static/digraph3_copyright.html>`_ 2013-2021
 
 Introduction
 ------------
@@ -18,9 +18,12 @@ In our present terms, the *outranking concept* is indeed modelled as a *hybrid* 
 
 Such bipolar-valued outranking digraphs are specifically characterised by the fact that they verify a *weakly completeness* property and the *coduality principle*, i.e. *not outranking* situations necessarily correspond to the corresponding *strictly outranked* situations. Contrary, hence, to the historical outranking digraph examples shown here, we nowadays model a potential *incomparability* situation not via the absence of an outranking, but as an *indeterminate* situation (see :ref:`CopingMissing-Data-label`). With this more accurate epistemic modelling, the *strict outranking kernel* concept gains great effectiveness for computing best choice recommendations from a given outranking digraph (see :ref:`Kernel-Tutorial-label`).     
 
+Historical Archives
+-------------------
+
 .. raw:: html
 	 
-   <h2><a href="_static/GraphDataSets/index.html" target="_blank">Link to the Digraph3 Archives</a></h2>
+   <h3><a href="_static/GraphDataSets/index.html" target="_blank">Link to the Digraph3 Archives</a></h3>
 
 **References**   
    

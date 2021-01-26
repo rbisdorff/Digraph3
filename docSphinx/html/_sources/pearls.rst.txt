@@ -29,7 +29,7 @@ Advanced Topics
    :Url: https://rbisdorff.github.io/
    :Version: |version|
    :PDF version: http://hdl.handle.net/10993/42390
-   :Copyright: `R. Bisdorff <_static/digraph3_copyright.html>`_ 2013-2020
+   :Copyright: `R. Bisdorff <_static/digraph3_copyright.html>`_ 2013-2021
 
 .. _Pearls-label:	   
 

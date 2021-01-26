@@ -29,7 +29,7 @@ Digraph3 Tutorials
    :Url: https://rbisdorff.github.io/
    :Version: |version|
    :PDF version: http://hdl.handle.net/10993/37886
-   :Copyright: `R. Bisdorff <_static/digraph3_copyright.html>`_ 2013-2020
+   :Copyright: `R. Bisdorff <_static/digraph3_copyright.html>`_ 2013-2021
 
 .. _Tutorial-label:
 

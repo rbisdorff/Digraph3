@@ -7,47 +7,47 @@ Algorithmic Decision Theory Lectures
 :Author: Raymond Bisdorff, Emeritus Professor of Computer Science and Applied Mathematics
 :Version: |version|
 :Url: |location_link1|
-:Copyright: R. Bisdorff |location_link3| 2013-2020
+:Copyright: R. Bisdorff |location_link3| 2013-2021
 
 Introduction
 ------------
 
-From 2007 to 2011 the Algorithmic Decision Theory COST Action IC0602, coordinated by Alexis Tsouki`as, gathered researchers coming from different fields such as Decision Theory, Discrete Mathematics, Theoretical Computer Science and Artificial Intelligence in order to improve decision support in the presence of massive data bases, combinatorial structures, partial and/or uncertain information and distributed, possibly interoperating decision makers.
+From 2007 to 2011 the Algorithmic Decision Theory COST Action IC0602, coordinated by Alexis Tsouki`as, gathered researchers coming from different fields such as *Decision Theory*, *Discrete Mathematics*, *Theoretical Computer Science* and *Artificial Intelligence* in order to improve decision support in the presence of **massive data bases**, **combinatorial structures**, **partial** and/or **uncertain information** and **distributed**, possibly **interoperating decision makers**.
 
-A positive result of this COST action was the organisation from 2012 to 2020 of a Course on |location_link4| at the University of Luxembourg in the context of its Master in Information and Computer Science.
+A positive result a.o. of this COST action was the organisation from 2012 to 2020 of a Semester Course on |location_link4| at the *University of Luxembourg* in the context of its **Master in Information and Computer Science**.
 
-Below are gathered the 2x2 reduced copies of the presentation slides for 12 Lectures.
+Below are gathered 2x2 reduced copies of the presentation slides for 12 Lectures.
 
 Lectures
 --------
 
 1. `General introduction to Algorithmic Decision Theory <_static/1-adtIntro-2x2.pdf>`_
 
-   Historical notes and aknowledgments followed by the presentation of a generic conceptual framework for studying *decision aiding processes*: *formulating a decision problem*, *choosing the evaluation models* and *building decision recommendations*.
+   Historical notes and aknowledgments followed by the presentation of a generic conceptual framework for studying **decision aiding processes**: *formulating a decision problem*, *choosing the evaluation models* and *building decision recommendations*.
 
 2. `Who wins the election ? Choosing from multiple opinions <_static/2-voting-2x2.pdf>`_ 
 
-   On *majority decitatorship* in uninominal elections and other difficulties with simple voting rules. How to aggregate voter's preferences? Voting and complexity issues.
+   On **majority decitatorship** in uninominal elections and other difficulties with simple *voting rules*. How to **aggregate voter's preferences**? Voting and complexity issues.
 
 3. `On social consensus rankings <_static/3-rankingRules-2x2.pdf>`_
 
-   On ranking from different opinions. A typology of ranking rules.
+   On **ranking from different opinions**. A typology of ranking rules.
 
 4. `Evaluation models for measuring and aggregating performances <_static/4-grading-2x2.pdf>`_
 
-   Grading students. Rules for aggregating grades. How to aggregate ordinal grades?
+   **Grading students**. Rules for aggregating grades. How to aggregate *ordinal* grades?
 
 5. `Solving social compromise decision problems with CBA <_static/5-CBA-2x2.pdf>`_
 
-   Critical perspective on the *Cost-Benefit Analysis* (CBA) decision approach, its principles and applications in public transport problems.
+   *Critical perspective* on the **Cost-Benefit Analysis** (CBA) decision approach, its principles and applications in *public transport problems*.
 
 6. `Choosing with multiple commensurable criteria: the Multiple Attribute Value Theory <_static/6-mavt-2x2.pdf>`_
 
-   Measuring the performances of potential decision alternatives. Comparing *costs* and *benefits*. Theoretical foundations of MAVT and critical perspectives.
+   Measuring the performances of potential decision alternatives. Comparing **Costs** and **Benefits**. Theoretical foundations of **MAVT** and critical perspective.
 
 7. `Best multiple criteria compromise choice: The Rubis outranking approach <_static/7a-outranking-2x2.pdf>`_
 
-   Comparing alternatives with potentially *conflicting* criteria. Theoretical foundation of the *outranking* approach. The *Rubis* best-choice recommender system.
+   Comparing alternatives with potentially *conflicting* criteria. Theoretical foundation of the **outranking** approach. The *Rubis* best-choice recommender system.
 
 8. `Generating random outranking digraphs <_static/8-randPerfTabs-2x2.pdf>`_
 
@@ -60,7 +60,7 @@ Lectures
 
 10. `On ranking from bipolar-valued pairwise outranking situations <_static/10-rankingOutrankings-2x2.pdf>`_
 
-    Ranking with *outranking* digraphs. *Ranking-by-scoring* and *ranking-by-choosing* rules.
+    Ranking with *outranking* digraphs. **Ranking-by-scoring** and **ranking-by-choosing** rules.
 
 11. `On ranking by first and last choosing <_static/11-rankingByChoosing-2x2.pdf>`_
 
@@ -68,7 +68,7 @@ Lectures
 
 12. `Ranking big multiple incommensurable criteria performance tableaux <_static/12-bigPerfTabRanking-2x2.pdf>`_
 
-    Pre-ranking a *q-tiled* performance tableau. On *sparse* outranking digraphs. *HPC-ranking* a *big* performance tableau.
+    Pre-ranking a *q-tiled* performance tableau. On **sparse outranking digraphs**. *HPC-ranking* a *big* performance tableau.
  
 
 .. |location_link1| raw:: html
