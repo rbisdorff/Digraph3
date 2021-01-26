@@ -13,6 +13,12 @@ Documentation of the Digraph3 Python resources
     :width: 500pt
     :align: center
 
+|
+|      *This documentation is dedicated to*
+|      *our late colleague and dear friend*
+|                  Marc ROUBENS
+|
+
 .. _Documents:
 
 Contents
@@ -33,7 +39,7 @@ Contents
 3. `Advanced topics <pearls.html>`_
 
     .. raw:: html
-   
+
        <small><i>Pearls of bipolar-valued epistemic logic</i></small>
    
 4. `Algorithimc Decision Theory Lectures <adtLectures.html>`_
@@ -48,25 +54,17 @@ Contents
 
        <small><i>Historical case studies and example graphs</i></small>
 
-
-Indices and tables
-``````````````````
+Indices and search results
+``````````````````````````
 
 * :ref:`genindex`
 * :ref:`modindex`
 * :ref:`search`
 
-
 .. _Introduction-label:
 
 Introduction
 ````````````
-
-|
-|      *This documentation is dedicated to*
-|      *our late colleague and dear friend*
-|                  Marc ROUBENS
-|
 
 The *Digraph3 documentation*, available on the `Read The Docs <https://readthedocs.org/>`_ site: |location_link1|, describes the Python3 resources for implementing decision aid algorithms in the context of a **bipolar-valued outranking** approach ([BISD-15]_, [BISD-00]_). These computing resources are useful in the field of `Algorithmic Decision Theory <https://www.lamsade.dauphine.fr/~projet_cost/ALGORITHMIC_DECISION_THEORY/ALGORITHMIC_DECISION_THEORY.html>`_ and more specifically in *outranking* based **Multiple Criteria Decision Aid** (MCDA). They provide practical tools for a Master Course on |location_link4| tought at the University of Luxembourg.
 
