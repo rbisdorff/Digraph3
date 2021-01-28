@@ -5960,8 +5960,8 @@ pairwise perspective (see below), we notice that, with the given preference disc
 28
 29</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">sortingDigraphs</span> <span class="kn">import</span> <span class="n">LearnedQuantilesRatingDigraph</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">newActions</span> <span class="o">=</span> <span class="n">rpg</span><span class="o">.</span><span class="n">randomActions</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">nqr</span> <span class="o">=</span> <span class="n">LearnedQuantilesRatingDigraph</span><span class="p">(</span><span class="n">pq</span><span class="p">,</span><span class="n">newActions</span><span class="p">,</span><span class="n">rankingRule</span><span class="o">=</span><span class="s1">&#39;best&#39;</span><span class="p">)</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">nqr</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">lqr</span> <span class="o">=</span> <span class="n">LearnedQuantilesRatingDigraph</span><span class="p">(</span><span class="n">pq</span><span class="p">,</span><span class="n">newActions</span><span class="p">,</span><span class="n">rankingRule</span><span class="o">=</span><span class="s1">&#39;best&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">lqr</span>
 <span class="go"> *---- Object instance description</span>
 <span class="go"> Instance class      : LearnedQuantilesRatingDigraph</span>
 <span class="go"> Instance name       : normedRatingDigraph</span>
@@ -6004,7 +6004,7 @@ pairwise perspective (see below), we notice that, with the given preference disc
  8
  9
 10
-11</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">nqr</span><span class="o">.</span><span class="n">showPerformanceTableau</span><span class="p">(</span><span class="n">actionsSubset</span><span class="o">=</span><span class="n">nqr</span><span class="o">.</span><span class="n">newActions</span><span class="p">)</span>
+11</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">lqr</span><span class="o">.</span><span class="n">showPerformanceTableau</span><span class="p">(</span><span class="n">actionsSubset</span><span class="o">=</span><span class="n">lqr</span><span class="o">.</span><span class="n">newActions</span><span class="p">)</span>
 <span class="go"> *----  performance tableau -----*</span>
 <span class="go"> criteria | a1001 a1002 a1003 a1004 a1005 a1006 a1007 a1008 a1009 a1010</span>
 <span class="go"> ---------|-------------------------------------------------------------</span>
@@ -6032,7 +6032,7 @@ pairwise perspective (see below), we notice that, with the given preference disc
  8
  9
 10
-11</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">nqr</span><span class="o">.</span><span class="n">showPerformanceTableau</span><span class="p">(</span><span class="n">actionsSubset</span><span class="o">=</span><span class="n">nqr</span><span class="o">.</span><span class="n">profiles</span><span class="p">)</span>
+11</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">lqr</span><span class="o">.</span><span class="n">showPerformanceTableau</span><span class="p">(</span><span class="n">actionsSubset</span><span class="o">=</span><span class="n">lqr</span><span class="o">.</span><span class="n">profiles</span><span class="p">)</span>
 <span class="go"> *----  Quartiles limit profiles -----*</span>
 <span class="go"> criteria |  &#39;m1&#39;   &#39;m2&#39;   &#39;m3&#39;   &#39;m4&#39;</span>
 <span class="go"> ---------|----------------------------</span>
@@ -6060,12 +6060,12 @@ pairwise perspective (see below), we notice that, with the given preference disc
  7
  8
  9
-10</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">nqr</span><span class="o">.</span><span class="n">rankingRule</span>
+10</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">lqr</span><span class="o">.</span><span class="n">rankingRule</span>
 <span class="go"> &#39;Copeland&#39;</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">nqr</span><span class="o">.</span><span class="n">actionsRanking</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">lqr</span><span class="o">.</span><span class="n">actionsRanking</span>
 <span class="go"> [&#39;m4&#39;, &#39;a1005&#39;, &#39;a1010&#39;, &#39;a1002&#39;, &#39;a1008&#39;, &#39;a1006&#39;, &#39;a1001&#39;,</span>
 <span class="go">  &#39;a1003&#39;, &#39;m3&#39;, &#39;a1007&#39;, &#39;a1004&#39;, &#39;a1009&#39;, &#39;m2&#39;, &#39;m1&#39;]</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">nqr</span><span class="o">.</span><span class="n">showCorrelation</span><span class="p">(</span><span class="n">nqr</span><span class="o">.</span><span class="n">rankingCorrelation</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">lqr</span><span class="o">.</span><span class="n">showCorrelation</span><span class="p">(</span><span class="n">lqr</span><span class="o">.</span><span class="n">rankingCorrelation</span><span class="p">)</span>
 <span class="go"> Correlation indexes:</span>
 <span class="go">  Crisp ordinal correlation  : +0.945</span>
 <span class="go">  Epistemic determination    :  0.522</span>
@@ -6079,7 +6079,7 @@ pairwise perspective (see below), we notice that, with the given preference disc
 2
 3
 4
-5</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">nqr</span><span class="o">.</span><span class="n">ratingCategories</span>
+5</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">lqr</span><span class="o">.</span><span class="n">ratingCategories</span>
 <span class="go"> OrderedDict([</span>
 <span class="go"> (&#39;m2&#39;, [&#39;a1007&#39;,&#39;a1004&#39;,&#39;a1009&#39;]),</span>
 <span class="go"> (&#39;m3&#39;, [&#39;a1005&#39;,&#39;a1010&#39;,&#39;a1002&#39;,&#39;a1008&#39;,&#39;a1006&#39;,&#39;a1001&#39;,&#39;a1003&#39;])</span>
@@ -6093,7 +6093,7 @@ pairwise perspective (see below), we notice that, with the given preference disc
 2
 3
 4
-5</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">nqr</span><span class="o">.</span><span class="n">showQuantilesRating</span><span class="p">()</span>
+5</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">lqr</span><span class="o">.</span><span class="n">showQuantilesRating</span><span class="p">()</span>
 <span class="go"> *-------- Quartiles rating result ---------</span>
 <span class="go"> [0.50 - 0.75[ [&#39;a1005&#39;, &#39;a1010&#39;, &#39;a1002&#39;, &#39;a1008&#39;,</span>
 <span class="go">                &#39;a1006&#39;, &#39;a1001&#39;, &#39;a1003&#39;]</span>
@@ -6103,7 +6103,7 @@ pairwise perspective (see below), we notice that, with the given preference disc
 </div>
 <p>The same result may more conveniently be consulted in a browser view via a specialised rating heatmap format ( see <code class="xref py py-meth docutils literal notranslate"><span class="pre">perfTabs:PerformanceTableau.showHTMLPerformanceHeatmap()</span></code> method (see <a class="reference internal" href="#heatmap1"><span class="std std-numref">Fig. 35</span></a>).</p>
 <div class="highlight-pycon notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
-2</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">nqr</span><span class="o">.</span><span class="n">showHTMLRatingHeatmap</span><span class="p">(</span><span class="n">pageTitle</span><span class="o">=</span><span class="s1">&#39;Heatmap of Quartiles Rating&#39;</span><span class="p">,</span>
+2</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">lqr</span><span class="o">.</span><span class="n">showHTMLRatingHeatmap</span><span class="p">(</span><span class="n">pageTitle</span><span class="o">=</span><span class="s1">&#39;Heatmap of Quartiles Rating&#39;</span><span class="p">,</span>
 <span class="go">                   Correlations=True,colorLevels=5)</span>
 </pre></div>
 </td></tr></table></div>
@@ -6115,7 +6115,7 @@ pairwise perspective (see below), we notice that, with the given preference disc
 <div class="highlight-pycon notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
 2
 3
-4</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">nqr</span><span class="o">.</span><span class="n">exportRatingGraphViz</span><span class="p">(</span><span class="s1">&#39;normedRatingDigraph&#39;</span><span class="p">)</span>
+4</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">lqr</span><span class="o">.</span><span class="n">exportRatingGraphViz</span><span class="p">(</span><span class="s1">&#39;normedRatingDigraph&#39;</span><span class="p">)</span>
 <span class="go"> *---- exporting a dot file for GraphViz tools ---------*</span>
 <span class="go">  Exporting to normedRatingDigraph.dot</span>
 <span class="go">  dot -Grankdir=TB -Tpng normedRatingDigraph.dot -o normedRatingDigraph.png</span>
@@ -6195,8 +6195,8 @@ pairwise perspective (see below), we notice that, with the given preference disc
 10</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">pq1</span> <span class="o">=</span> <span class="n">PerformanceQuantiles</span><span class="p">(</span><span class="n">tp</span><span class="p">,</span> <span class="n">numberOfBins</span> <span class="o">=</span> <span class="s1">&#39;deciles&#39;</span><span class="p">,</span>\
 <span class="go">                 LowerClosed=True)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">pq1</span><span class="o">.</span><span class="n">updateQuantiles</span><span class="p">(</span><span class="n">newTab</span><span class="p">,</span><span class="n">historySize</span><span class="o">=</span><span class="bp">None</span><span class="p">)</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">nqr1</span> <span class="o">=</span> <span class="n">LearnedQuantilesRatingDigraph</span><span class="p">(</span><span class="n">pq1</span><span class="p">,</span><span class="n">newActions</span><span class="p">,</span><span class="n">rankingRule</span><span class="o">=</span><span class="s1">&#39;best&#39;</span><span class="p">)</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">nqr1</span><span class="o">.</span><span class="n">showQuantilesRating</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">lqr1</span> <span class="o">=</span> <span class="n">LearnedQuantilesRatingDigraph</span><span class="p">(</span><span class="n">pq1</span><span class="p">,</span><span class="n">newActions</span><span class="p">,</span><span class="n">rankingRule</span><span class="o">=</span><span class="s1">&#39;best&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">lqr1</span><span class="o">.</span><span class="n">showQuantilesRating</span><span class="p">()</span>
 <span class="go"> *-------- Deciles rating result ---------</span>
 <span class="go"> [0.60 - 0.70[ [&#39;a1005&#39;, &#39;a1010&#39;, &#39;a1008&#39;, &#39;a1002&#39;]</span>
 <span class="go"> [0.50 - 0.60[ [&#39;a1006&#39;, &#39;a1001&#39;, &#39;a1003&#39;]</span>
@@ -6208,7 +6208,7 @@ pairwise perspective (see below), we notice that, with the given preference disc
 <p>Compared with the quartiles rating result, we notice in <a class="reference internal" href="#decilesrating"><span class="std std-numref">Listing 71</span></a> that the seven alternatives (<em>a1001</em>, <em>a1002</em>, <em>a1003</em>, <em>a1005</em>, <em>a1006</em>, <em>a1008</em> and <em>a1010</em>), rated before into the third quartile class [0.50-0.75[, are now divided up: alternatives <em>a1002</em>, <em>a1005</em>, <em>a1008</em> and <em>a1010</em> attain now the 7th decile class [0.60-0.70[, whereas alternatives <em>a1001</em>, <em>a1003</em> and <em>a1006</em> attain only the 6th decile class [0.50-0.60[. Of the three <em>Q2</em> [0.25-0.50[ rated alternatives (<em>a1004</em>, <em>a1007</em> and <em>a1009</em>), alternatives <em>a1004</em> and <em>a1007</em> are now rated into the 5th decile class [0.40-0.50[ and <em>a1009</em> is lowest rated into the 4th decile class [0.30-0.40[.</p>
 <p>A browser view may again more conveniently illustrate this refined rating result (see <a class="reference internal" href="#heatmap2"><span class="std std-numref">Fig. 37</span></a>).</p>
 <div class="highlight-pycon notranslate"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre>1
-2</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">nqr1</span><span class="o">.</span><span class="n">showHTMLRatingHeatmap</span><span class="p">(</span><span class="n">pageTitle</span><span class="o">=</span><span class="s1">&#39;Heatmap of the deciles rating&#39;</span><span class="p">,</span>\
+2</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">lqr1</span><span class="o">.</span><span class="n">showHTMLRatingHeatmap</span><span class="p">(</span><span class="n">pageTitle</span><span class="o">=</span><span class="s1">&#39;Heatmap of the deciles rating&#39;</span><span class="p">,</span>\
 <span class="go">                               colorLevels=5,Correlations=True)</span>
 </pre></div>
 </td></tr></table></div>
@@ -6226,9 +6226,9 @@ pairwise perspective (see below), we notice that, with the given preference disc
 4
 5
 6
-7</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">nqr2</span> <span class="o">=</span> <span class="n">LearnedQuantilesRatingDigraph</span><span class="p">(</span><span class="n">pq1</span><span class="p">,</span><span class="n">newActions</span><span class="p">,</span>
+7</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">lqr2</span> <span class="o">=</span> <span class="n">LearnedQuantilesRatingDigraph</span><span class="p">(</span><span class="n">pq1</span><span class="p">,</span><span class="n">newActions</span><span class="p">,</span>
 <span class="go">                   quantiles=&#39;quartiles&#39;)</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">nqr2</span><span class="o">.</span><span class="n">showQuantilesRating</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">lqr2</span><span class="o">.</span><span class="n">showQuantilesRating</span><span class="p">()</span>
 <span class="go"> *-------- Deciles rating result ---------</span>
 <span class="go"> [0.50 - 0.75[ [&#39;a1005&#39;, &#39;a1010&#39;, &#39;a1002&#39;, &#39;a1008&#39;,</span>
 <span class="go">                &#39;a1006&#39;, &#39;a1001&#39;, &#39;a1003&#39;]</span>
@@ -6355,11 +6355,13 @@ pairwise perspective (see below), we notice that, with the given preference disc
 </div>
 <p>In <a class="reference internal" href="#score9limits"><span class="std std-numref">Fig. 40</span></a>, we see confirmed again the <strong>incommensurability</strong> between the subjects, we noticed already in the apparent enrolment quality scoring , especially between <em>Law Studies</em> (39.1 - 51.1) and <em>Politology</em> (50.5 - 65.9). Universities valuated in <em>Law studies</em> but not in <em>Politology</em>, like the University of <em>Bielefeld</em>, would see their enrolment quality <em>unfairly weakened</em> when simply averaging the enrolment quality scores over valuated subjects.</p>
 <p>We add, now, these 9-tiling quality score limits to the enrolment quality records of the 41 Universities and rank all these records conjointly together with the help of the <a class="reference internal" href="techDoc.html#sortingDigraphs.LearnedQuantilesRatingDigraph" title="sortingDigraphs.LearnedQuantilesRatingDigraph"><code class="xref py py-class docutils literal notranslate"><span class="pre">sortingDigraphs.LearnedQuantilesRatingDigraph</span></code></a> constructor and by using the <a class="reference internal" href="#copeland-ranking-label"><span class="std std-ref">Copeland ranking rule</span></a>.</p>
-<p>The resulting ranking of the 41 Universities including the lower-closed 9-tiling score limits may be nicely illustrated  with the help of a corresponding heatmap view (see <a class="reference internal" href="#ninetiledheatmap"><span class="std std-numref">Fig. 41</span></a>).</p>
 <div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">sortingDigraphs</span> <span class="k">import</span> <span class="n">LearnedQuantilesRatingDigraph</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">nqr</span> <span class="o">=</span> <span class="n">LearnedQuantilesRatingDigraph</span><span class="p">(</span><span class="n">pq</span><span class="p">,</span><span class="n">t</span><span class="p">,</span>\
+<span class="gp">&gt;&gt;&gt; </span><span class="n">lqr</span> <span class="o">=</span> <span class="n">LearnedQuantilesRatingDigraph</span><span class="p">(</span><span class="n">pq</span><span class="p">,</span><span class="n">t</span><span class="p">,</span>\
 <span class="go">                                       rankingRule=&#39;Copeland&#39;)</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">nqr</span><span class="o">.</span><span class="n">showHTMLRatingHeatmap</span><span class="p">(</span><span class="n">colorLevels</span><span class="o">=</span><span class="mi">7</span><span class="p">,</span><span class="n">Correlations</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>\
+</pre></div>
+</div>
+<p>The resulting ranking of the 41 Universities including the lower-closed 9-tiling score limits may be nicely illustrated  with the help of a corresponding heatmap view (see <a class="reference internal" href="#ninetiledheatmap"><span class="std std-numref">Fig. 41</span></a>).</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">lqr</span><span class="o">.</span><span class="n">showHTMLRatingHeatmap</span><span class="p">(</span><span class="n">colorLevels</span><span class="o">=</span><span class="mi">7</span><span class="p">,</span><span class="n">Correlations</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>\
 <span class="go">             ndigits=1,rankingRule=&#39;Copeland&#39;)</span>
 </pre></div>
 </div>
@@ -6384,7 +6386,7 @@ pairwise perspective (see below), we notice that, with the given preference disc
 11
 12
 13
-14</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">nqr</span><span class="o">.</span><span class="n">showQuantilesRating</span><span class="p">()</span>
+14</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">lqr</span><span class="o">.</span><span class="n">showQuantilesRating</span><span class="p">()</span>
 <span class="go"> *-------- Quantiles rating result ---------</span>
 <span class="go">  [0.89 - 1.00] []</span>
 <span class="go">  [0.78 - 0.89[ [&#39;tum&#39;, &#39;frei&#39;, &#39;kons&#39;, &#39;leip&#39;, &#39;mu&#39;, &#39;hei&#39;]</span>
@@ -6403,7 +6405,7 @@ pairwise perspective (see below), we notice that, with the given preference disc
 </div>
 <p>Following Universities: <em>TU München</em>, <em>Freiburg</em>, <em>Konstanz</em>, <em>Leipzig</em>, <em>München</em> as well as  <em>Heidelberg</em>, appear best rated in the eigth 9-tile (<img class="math" src="_images/math/031bb737116a1a959281087c96c7150f91ae6203.png" alt="[0.78 - 0.89["/>, see <a class="reference internal" href="#quantilesrating"><span class="std std-numref">Listing 75</span></a> Line 4). Lowest-rated in the first 9-tile, as mentioned before, appears University <em>Duisburg</em> (Line 14). Midfield, the fifth 9-tile (<img class="math" src="_images/math/f3ad0d24fc9256f1d63f28b48c1d04a73be362bd.png" alt="[0.44 - 0.56["/>), consists of the Universities <em>Würzburg</em>, <em>TU Dresden</em>, <em>Kaiserslautern</em>, <em>Marburg</em>, <em>FU Berlin</em>, <em>Chemnitz</em>, <em>Köln</em> , <em>Erlangen-Nürnberg</em> and <em>Trier</em> (Lines 8-9).</p>
 <p>A corresponding <em>graphviz</em> drawing may well illustrate all these enrolment quality equivalence classes.</p>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">nqr</span><span class="o">.</span><span class="n">exportRatingByRankingGraphViz</span><span class="p">(</span><span class="n">fileName</span><span class="o">=</span><span class="s1">&#39;ratingResult&#39;</span><span class="p">,</span>\
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">lqr</span><span class="o">.</span><span class="n">exportRatingByRankingGraphViz</span><span class="p">(</span><span class="n">fileName</span><span class="o">=</span><span class="s1">&#39;ratingResult&#39;</span><span class="p">,</span>\
 <span class="go">                              graphSize=&#39;12,12&#39;)</span>
 <span class="go"> *---- exporting a dot file for GraphViz tools ---------*</span>
 <span class="go">  Exporting to ratingResult.dot</span>
@@ -6436,15 +6438,15 @@ pairwise perspective (see below), we notice that, with the given preference disc
  9
 10
 11
-12</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">nqr</span> <span class="o">=</span> <span class="n">LearnedQuantilesRatingDigraph</span><span class="p">(</span>\
+12</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">lqr</span> <span class="o">=</span> <span class="n">LearnedQuantilesRatingDigraph</span><span class="p">(</span>\
 <span class="go">                pq,t,rankingRule=&#39;Copeland&#39;)</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">nqr1</span> <span class="o">=</span> <span class="n">LearnedQuantilesRatingDigraph</span><span class="p">(</span>\
+<span class="gp">&gt;&gt;&gt; </span><span class="n">lqr1</span> <span class="o">=</span> <span class="n">LearnedQuantilesRatingDigraph</span><span class="p">(</span>\
 <span class="go">                pq,t,rankingRule=&#39;NetFlows&#39;)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">transitiveDigraphs</span> <span class="kn">import</span>\
 <span class="go">                RankingsFusionDigraph</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">rankings</span> <span class="o">=</span> <span class="p">[</span><span class="n">nqr</span><span class="o">.</span><span class="n">actionsRanking</span><span class="p">,</span> \
-<span class="go">                nqr1.actionsRanking]</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">rf</span> <span class="o">=</span> <span class="n">RankingsFusionDigraph</span><span class="p">(</span><span class="n">nqr1</span><span class="p">,</span><span class="n">rankings</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">rankings</span> <span class="o">=</span> <span class="p">[</span><span class="n">lqr</span><span class="o">.</span><span class="n">actionsRanking</span><span class="p">,</span> \
+<span class="go">                lqr1.actionsRanking]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">rf</span> <span class="o">=</span> <span class="n">RankingsFusionDigraph</span><span class="p">(</span><span class="n">lqr</span><span class="p">,</span><span class="n">rankings</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">rf</span><span class="o">.</span><span class="n">exportGraphViz</span><span class="p">(</span><span class="n">fileName</span><span class="o">=</span><span class="s1">&#39;fusionResult&#39;</span><span class="p">,</span>\
 <span class="go">                      WithRatingDecoration=True,\</span>
 <span class="go">                      graphSize=&#39;30,30&#39;)</span>
@@ -6600,7 +6602,7 @@ pairwise perspective (see below), we notice that, with the given preference disc
 40
 41
 42
-43</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">nqr</span><span class="o">.</span><span class="n">showActionsSortingResult</span><span class="p">(</span><span class="n">actionSubset</span><span class="o">=</span><span class="n">nqr</span><span class="o">.</span><span class="n">newActions</span><span class="p">)</span>
+43</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">lqr</span><span class="o">.</span><span class="n">showActionsSortingResult</span><span class="p">(</span><span class="n">actionSubset</span><span class="o">=</span><span class="n">lqr</span><span class="o">.</span><span class="n">newActions</span><span class="p">)</span>
 <span class="go"> Quantiles sorting result per decision action</span>
 <span class="go"> [0.33 - 0.44[: aach with credibility: 0.13 = min(0.13,0.27)</span>
 <span class="go"> [0.56 - 0.89[: aug with credibility: 0.13 = min(0.13,0.27)</span>
@@ -6648,7 +6650,7 @@ pairwise perspective (see below), we notice that, with the given preference disc
 </div>
 <p>In the 9-tiles sorting result, shown in <a class="reference internal" href="#ninetilessorting"><span class="std std-numref">Listing 79</span></a>, we notice for instance in Lines 3-4 that the <em>RWTH Aachen</em> is precisely rated into the 4th 9-tile (<img class="math" src="_images/math/b8853c5991441926a3b0582f01134f486f780e13.png" alt="[0.33 - 0.44["/>), whereas the University <em>Augsburg</em> is less precisely rated conjointly into the <em>6th</em>, the <em>7th</em> and the <em>8th</em> 9-tile (<img class="math" src="_images/math/b3fa753e40b57eb448413ea02f6eefc0186fdc97.png" alt="[0.56 - 0.89["/>). In Line 42, <em>TU München</em> appears best rated into the unique highest 9-tile (<img class="math" src="_images/math/e1fb653231d5603f9c98d137ffe8e3578b474754.png" alt="[0.89 - &lt;["/>). All three rating results are supported by a (0.07 + 1.0)/2 = 53.5% majority of valuated subjects <a class="footnote-reference brackets" href="#id160" id="id84">31</a>. With the support of a 76.5% majority of valuated subjects (Line 20), the apparent most confident rating result is the one of University <em>Freiburg</em> (see also <a class="reference internal" href="#qualityscores"><span class="std std-numref">Fig. 38</span></a> and <a class="reference internal" href="#ninetiledheatmap"><span class="std std-numref">Fig. 41</span></a>).</p>
 <p>We shall now lexicographically sort these individual rating results per University, by <em>average</em> rated 9-tile limits and <em>highest-rated</em> upper 9-tile limit, into ordered, but not necessarily disjoint, enrolment quality quantiles.</p>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">nqr</span><span class="o">.</span><span class="n">showHTMLQuantileSorting</span><span class="p">(</span><span class="n">strategy</span><span class="o">=</span><span class="s1">&#39;average&#39;</span><span class="p">)</span>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">lqr</span><span class="o">.</span><span class="n">showHTMLQuantileSorting</span><span class="p">(</span><span class="n">strategy</span><span class="o">=</span><span class="s1">&#39;average&#39;</span><span class="p">)</span>
 </pre></div>
 </div>
 <div class="figure align-center" id="ninetilingordering">
@@ -6656,8 +6658,8 @@ pairwise perspective (see below), we notice that, with the given preference disc
 <p class="caption"><span class="caption-number">Fig. 44 </span><span class="caption-text">The ranked 9-tiles rating-by-sorting result</span><a class="headerlink" href="#ninetilingordering" title="Permalink to this image">¶</a></p>
 </div>
 <p>In <a class="reference internal" href="#ninetilingordering"><span class="std std-numref">Fig. 44</span></a> we may notice that the Universities: <em>Augsburg</em>, <em>Kaiserslautern</em>, <em>Mannheim</em> and <em>Tübingen</em> for instance, show in fact the same average rated 9-tiles score of 0.725; yet, the rated upper 9-tile limit of <em>Tuebingen</em> is only 0.78, whereas the one of the other Universities reaches 0.89. Hence, <em>Tuebingen</em> is ranked below <em>Augsburg</em>, <em>Kaiserslautern</em> and <em>Mannheim</em> .</p>
-<p>With a <em>graphviz</em> drawing of this <code class="code docutils literal notranslate"><span class="pre">QuantilesSorting</span></code> digraph instance <em>qs</em>, we may, without requiring any specific ordering strategy, as well illustrate our 9-tiles <em>rating-by-sorting</em> result.</p>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">nqr</span><span class="o">.</span><span class="n">exportRatingBySortingGraphViz</span><span class="p">(</span><span class="s1">&#39;nineTilingDrawing&#39;</span><span class="p">,</span><span class="n">graphSize</span><span class="o">=</span><span class="s1">&#39;12,12&#39;</span><span class="p">)</span>
+<p>With a special <em>graphviz</em> drawing of the <code class="code docutils literal notranslate"><span class="pre">LearnedQuantilesRatingDigraph</span></code> instance <em>lqr</em>, we may, without requiring any specific ordering strategy, as well illustrate our 9-tiles <em>rating-by-sorting</em> result.</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">lqr</span><span class="o">.</span><span class="n">exportRatingBySortingGraphViz</span><span class="p">(</span><span class="s1">&#39;nineTilingDrawing&#39;</span><span class="p">,</span><span class="n">graphSize</span><span class="o">=</span><span class="s1">&#39;12,12&#39;</span><span class="p">)</span>
 <span class="go"> *---- exporting a dot file for GraphViz tools ---------*</span>
 <span class="go"> Exporting to nineTilingDrawing.dot</span>
 <span class="go"> dot -Grankdir=TB -Tpng nineTilingDrawing.dot\</span>

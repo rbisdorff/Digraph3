@@ -58,7 +58,7 @@
 
 
 \title{Tutorials for the Digraph3 Python software resources}
-\date{January 26, 2021}
+\date{January 28, 2021}
 \release{3.9.1}
 \author{Raymond Bisdorff}
 \newcommand{\sphinxlogo}{\sphinxincludegraphics{introDoc3.png}\par}
@@ -5118,8 +5118,8 @@ We reconsider the \sphinxcode{\sphinxupquote{PerformanceQuantiles}} object insta
 \begin{sphinxVerbatim}[commandchars=\\\{\},numbers=left,firstnumber=1,stepnumber=1]
 \PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{k+kn}{from} \PYG{n+nn}{sortingDigraphs} \PYG{k+kn}{import} \PYG{n}{LearnedQuantilesRatingDigraph}
 \PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{newActions} \PYG{o}{=} \PYG{n}{rpg}\PYG{o}{.}\PYG{n}{randomActions}\PYG{p}{(}\PYG{l+m+mi}{10}\PYG{p}{)}
-\PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{nqr} \PYG{o}{=} \PYG{n}{LearnedQuantilesRatingDigraph}\PYG{p}{(}\PYG{n}{pq}\PYG{p}{,}\PYG{n}{newActions}\PYG{p}{,}\PYG{n}{rankingRule}\PYG{o}{=}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{best}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{)}
-\PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{nqr}
+\PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{lqr} \PYG{o}{=} \PYG{n}{LearnedQuantilesRatingDigraph}\PYG{p}{(}\PYG{n}{pq}\PYG{p}{,}\PYG{n}{newActions}\PYG{p}{,}\PYG{n}{rankingRule}\PYG{o}{=}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{best}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{)}
+\PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{lqr}
 \PYG{g+go}{ *\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{} Object instance description}
 \PYG{g+go}{ Instance class      : LearnedQuantilesRatingDigraph}
 \PYG{g+go}{ Instance name       : normedRatingDigraph}
@@ -5153,7 +5153,7 @@ Let us have a look at the digraph’s nodes, here called \sphinxstylestrong{newA
 \sphinxSetupCaptionForVerbatim{Performance tableau of the new incoming decision alternatives}
 \def\sphinxLiteralBlockLabel{\label{\detokenize{tutorial:newperftab}}}
 \begin{sphinxVerbatim}[commandchars=\\\{\},numbers=left,firstnumber=1,stepnumber=1]
-\PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{nqr}\PYG{o}{.}\PYG{n}{showPerformanceTableau}\PYG{p}{(}\PYG{n}{actionsSubset}\PYG{o}{=}\PYG{n}{nqr}\PYG{o}{.}\PYG{n}{newActions}\PYG{p}{)}
+\PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{lqr}\PYG{o}{.}\PYG{n}{showPerformanceTableau}\PYG{p}{(}\PYG{n}{actionsSubset}\PYG{o}{=}\PYG{n}{lqr}\PYG{o}{.}\PYG{n}{newActions}\PYG{p}{)}
 \PYG{g+go}{ *\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}  performance tableau \PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}*}
 \PYG{g+go}{ criteria | a1001 a1002 a1003 a1004 a1005 a1006 a1007 a1008 a1009 a1010}
 \PYG{g+go}{ \PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}|\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}}
@@ -5172,7 +5172,7 @@ The \sphinxcode{\sphinxupquote{sortingDigraphs.LearnedQuantilesRatingDigraph}} c
 \sphinxSetupCaptionForVerbatim{Showing the limiting profiles of the rating quantiles}
 \def\sphinxLiteralBlockLabel{\label{\detokenize{tutorial:limitingprofiles}}}
 \begin{sphinxVerbatim}[commandchars=\\\{\},numbers=left,firstnumber=1,stepnumber=1]
-\PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{nqr}\PYG{o}{.}\PYG{n}{showPerformanceTableau}\PYG{p}{(}\PYG{n}{actionsSubset}\PYG{o}{=}\PYG{n}{nqr}\PYG{o}{.}\PYG{n}{profiles}\PYG{p}{)}
+\PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{lqr}\PYG{o}{.}\PYG{n}{showPerformanceTableau}\PYG{p}{(}\PYG{n}{actionsSubset}\PYG{o}{=}\PYG{n}{lqr}\PYG{o}{.}\PYG{n}{profiles}\PYG{p}{)}
 \PYG{g+go}{ *\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}  Quartiles limit profiles \PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}*}
 \PYG{g+go}{ criteria |  \PYGZsq{}m1\PYGZsq{}   \PYGZsq{}m2\PYGZsq{}   \PYGZsq{}m3\PYGZsq{}   \PYGZsq{}m4\PYGZsq{}}
 \PYG{g+go}{ \PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}|\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}}
@@ -5193,12 +5193,12 @@ In this rating example, the \sphinxstyleemphasis{Copeland} rule appears to be th
 \sphinxSetupCaptionForVerbatim{Copeland ranking of new alternatives and historical quartile limits}
 \def\sphinxLiteralBlockLabel{\label{\detokenize{tutorial:rankingcorrelation}}}
 \begin{sphinxVerbatim}[commandchars=\\\{\},numbers=left,firstnumber=1,stepnumber=1]
-\PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{nqr}\PYG{o}{.}\PYG{n}{rankingRule}
+\PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{lqr}\PYG{o}{.}\PYG{n}{rankingRule}
 \PYG{g+go}{ \PYGZsq{}Copeland\PYGZsq{}}
-\PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{nqr}\PYG{o}{.}\PYG{n}{actionsRanking}
+\PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{lqr}\PYG{o}{.}\PYG{n}{actionsRanking}
 \PYG{g+go}{ [\PYGZsq{}m4\PYGZsq{}, \PYGZsq{}a1005\PYGZsq{}, \PYGZsq{}a1010\PYGZsq{}, \PYGZsq{}a1002\PYGZsq{}, \PYGZsq{}a1008\PYGZsq{}, \PYGZsq{}a1006\PYGZsq{}, \PYGZsq{}a1001\PYGZsq{},}
 \PYG{g+go}{  \PYGZsq{}a1003\PYGZsq{}, \PYGZsq{}m3\PYGZsq{}, \PYGZsq{}a1007\PYGZsq{}, \PYGZsq{}a1004\PYGZsq{}, \PYGZsq{}a1009\PYGZsq{}, \PYGZsq{}m2\PYGZsq{}, \PYGZsq{}m1\PYGZsq{}]}
-\PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{nqr}\PYG{o}{.}\PYG{n}{showCorrelation}\PYG{p}{(}\PYG{n}{nqr}\PYG{o}{.}\PYG{n}{rankingCorrelation}\PYG{p}{)}
+\PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{lqr}\PYG{o}{.}\PYG{n}{showCorrelation}\PYG{p}{(}\PYG{n}{lqr}\PYG{o}{.}\PYG{n}{rankingCorrelation}\PYG{p}{)}
 \PYG{g+go}{ Correlation indexes:}
 \PYG{g+go}{  Crisp ordinal correlation  : +0.945}
 \PYG{g+go}{  Epistemic determination    :  0.522}
@@ -5210,7 +5210,7 @@ We achieve here (see \hyperref[\detokenize{tutorial:rankingcorrelation}]{Listing
 The eventual rating procedure is based in this example on the \sphinxstyleemphasis{lower} quartile limits, such that we may collect the quartile classes’ contents in increasing order of the \sphinxstyleemphasis{quartiles}.
 
 \begin{sphinxVerbatim}[commandchars=\\\{\},numbers=left,firstnumber=1,stepnumber=1]
-\PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{nqr}\PYG{o}{.}\PYG{n}{ratingCategories}
+\PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{lqr}\PYG{o}{.}\PYG{n}{ratingCategories}
 \PYG{g+go}{ OrderedDict([}
 \PYG{g+go}{ (\PYGZsq{}m2\PYGZsq{}, [\PYGZsq{}a1007\PYGZsq{},\PYGZsq{}a1004\PYGZsq{},\PYGZsq{}a1009\PYGZsq{}]),}
 \PYG{g+go}{ (\PYGZsq{}m3\PYGZsq{}, [\PYGZsq{}a1005\PYGZsq{},\PYGZsq{}a1010\PYGZsq{},\PYGZsq{}a1002\PYGZsq{},\PYGZsq{}a1008\PYGZsq{},\PYGZsq{}a1006\PYGZsq{},\PYGZsq{}a1001\PYGZsq{},\PYGZsq{}a1003\PYGZsq{}])}
@@ -5221,7 +5221,7 @@ We notice above that no new decision alternatives are actually rated in the lowe
 \sphinxSetupCaptionForVerbatim{Showing a quantiles rating result}
 \def\sphinxLiteralBlockLabel{\label{\detokenize{tutorial:quartilesratingresult}}}
 \begin{sphinxVerbatim}[commandchars=\\\{\},numbers=left,firstnumber=1,stepnumber=1]
-\PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{nqr}\PYG{o}{.}\PYG{n}{showQuantilesRating}\PYG{p}{(}\PYG{p}{)}
+\PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{lqr}\PYG{o}{.}\PYG{n}{showQuantilesRating}\PYG{p}{(}\PYG{p}{)}
 \PYG{g+go}{ *\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{} Quartiles rating result \PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}}
 \PYG{g+go}{ [0.50 \PYGZhy{} 0.75[ [\PYGZsq{}a1005\PYGZsq{}, \PYGZsq{}a1010\PYGZsq{}, \PYGZsq{}a1002\PYGZsq{}, \PYGZsq{}a1008\PYGZsq{},}
 \PYG{g+go}{                \PYGZsq{}a1006\PYGZsq{}, \PYGZsq{}a1001\PYGZsq{}, \PYGZsq{}a1003\PYGZsq{}]}
@@ -5231,7 +5231,7 @@ We notice above that no new decision alternatives are actually rated in the lowe
 The same result may more conveniently be consulted in a browser view via a specialised rating heatmap format ( see \sphinxcode{\sphinxupquote{perfTabs:PerformanceTableau.showHTMLPerformanceHeatmap()}} method (see \hyperref[\detokenize{tutorial:heatmap1}]{Fig.\@ \ref{\detokenize{tutorial:heatmap1}}}).
 
 \begin{sphinxVerbatim}[commandchars=\\\{\},numbers=left,firstnumber=1,stepnumber=1]
-\PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{nqr}\PYG{o}{.}\PYG{n}{showHTMLRatingHeatmap}\PYG{p}{(}\PYG{n}{pageTitle}\PYG{o}{=}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{Heatmap of Quartiles Rating}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{,}
+\PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{lqr}\PYG{o}{.}\PYG{n}{showHTMLRatingHeatmap}\PYG{p}{(}\PYG{n}{pageTitle}\PYG{o}{=}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{Heatmap of Quartiles Rating}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{,}
 \PYG{g+go}{                   Correlations=True,colorLevels=5)}
 \end{sphinxVerbatim}
 
@@ -5245,7 +5245,7 @@ The same result may more conveniently be consulted in a browser view via a speci
 Using furthermore a specialised version of the \sphinxcode{\sphinxupquote{transitiveDigraphs.TransitiveDigraph.exportGraphViz()}} method allows drawing the same rating result in a Hasse diagram format (see \hyperref[\detokenize{tutorial:normedratingdigraph}]{Fig.\@ \ref{\detokenize{tutorial:normedratingdigraph}}}).
 
 \begin{sphinxVerbatim}[commandchars=\\\{\},numbers=left,firstnumber=1,stepnumber=1]
-\PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{nqr}\PYG{o}{.}\PYG{n}{exportRatingGraphViz}\PYG{p}{(}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{normedRatingDigraph}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{)}
+\PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{lqr}\PYG{o}{.}\PYG{n}{exportRatingGraphViz}\PYG{p}{(}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{normedRatingDigraph}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{)}
 \PYG{g+go}{ *\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{} exporting a dot file for GraphViz tools \PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}*}
 \PYG{g+go}{  Exporting to normedRatingDigraph.dot}
 \PYG{g+go}{  dot \PYGZhy{}Grankdir=TB \PYGZhy{}Tpng normedRatingDigraph.dot \PYGZhy{}o normedRatingDigraph.png}
@@ -5347,8 +5347,8 @@ A preciser rating result may indeed be achieved when using \sphinxstylestrong{de
 \PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{pq1} \PYG{o}{=} \PYG{n}{PerformanceQuantiles}\PYG{p}{(}\PYG{n}{tp}\PYG{p}{,} \PYG{n}{numberOfBins} \PYG{o}{=} \PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{deciles}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{,}\PYGZbs{}
 \PYG{g+go}{                 LowerClosed=True)}
 \PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{pq1}\PYG{o}{.}\PYG{n}{updateQuantiles}\PYG{p}{(}\PYG{n}{newTab}\PYG{p}{,}\PYG{n}{historySize}\PYG{o}{=}\PYG{n+nb+bp}{None}\PYG{p}{)}
-\PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{nqr1} \PYG{o}{=} \PYG{n}{LearnedQuantilesRatingDigraph}\PYG{p}{(}\PYG{n}{pq1}\PYG{p}{,}\PYG{n}{newActions}\PYG{p}{,}\PYG{n}{rankingRule}\PYG{o}{=}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{best}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{)}
-\PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{nqr1}\PYG{o}{.}\PYG{n}{showQuantilesRating}\PYG{p}{(}\PYG{p}{)}
+\PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{lqr1} \PYG{o}{=} \PYG{n}{LearnedQuantilesRatingDigraph}\PYG{p}{(}\PYG{n}{pq1}\PYG{p}{,}\PYG{n}{newActions}\PYG{p}{,}\PYG{n}{rankingRule}\PYG{o}{=}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{best}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{)}
+\PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{lqr1}\PYG{o}{.}\PYG{n}{showQuantilesRating}\PYG{p}{(}\PYG{p}{)}
 \PYG{g+go}{ *\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{} Deciles rating result \PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}}
 \PYG{g+go}{ [0.60 \PYGZhy{} 0.70[ [\PYGZsq{}a1005\PYGZsq{}, \PYGZsq{}a1010\PYGZsq{}, \PYGZsq{}a1008\PYGZsq{}, \PYGZsq{}a1002\PYGZsq{}]}
 \PYG{g+go}{ [0.50 \PYGZhy{} 0.60[ [\PYGZsq{}a1006\PYGZsq{}, \PYGZsq{}a1001\PYGZsq{}, \PYGZsq{}a1003\PYGZsq{}]}
@@ -5361,7 +5361,7 @@ Compared with the quartiles rating result, we notice in \hyperref[\detokenize{tu
 A browser view may again more conveniently illustrate this refined rating result (see \hyperref[\detokenize{tutorial:heatmap2}]{Fig.\@ \ref{\detokenize{tutorial:heatmap2}}}).
 
 \begin{sphinxVerbatim}[commandchars=\\\{\},numbers=left,firstnumber=1,stepnumber=1]
-\PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{nqr1}\PYG{o}{.}\PYG{n}{showHTMLRatingHeatmap}\PYG{p}{(}\PYG{n}{pageTitle}\PYG{o}{=}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{Heatmap of the deciles rating}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{,}\PYGZbs{}
+\PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{lqr1}\PYG{o}{.}\PYG{n}{showHTMLRatingHeatmap}\PYG{p}{(}\PYG{n}{pageTitle}\PYG{o}{=}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{Heatmap of the deciles rating}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{,}\PYGZbs{}
 \PYG{g+go}{                               colorLevels=5,Correlations=True)}
 \end{sphinxVerbatim}
 
@@ -5378,9 +5378,9 @@ To avoid having to recompute performance deciles from historical data when wishi
 \sphinxSetupCaptionForVerbatim{From deciles interpolated quartiles rating result}
 \def\sphinxLiteralBlockLabel{\label{\detokenize{tutorial:interpolatedquartilesrating}}}
 \begin{sphinxVerbatim}[commandchars=\\\{\},numbers=left,firstnumber=1,stepnumber=1]
-\PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{nqr2} \PYG{o}{=} \PYG{n}{LearnedQuantilesRatingDigraph}\PYG{p}{(}\PYG{n}{pq1}\PYG{p}{,}\PYG{n}{newActions}\PYG{p}{,}
+\PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{lqr2} \PYG{o}{=} \PYG{n}{LearnedQuantilesRatingDigraph}\PYG{p}{(}\PYG{n}{pq1}\PYG{p}{,}\PYG{n}{newActions}\PYG{p}{,}
 \PYG{g+go}{                   quantiles=\PYGZsq{}quartiles\PYGZsq{})}
-\PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{nqr2}\PYG{o}{.}\PYG{n}{showQuantilesRating}\PYG{p}{(}\PYG{p}{)}
+\PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{lqr2}\PYG{o}{.}\PYG{n}{showQuantilesRating}\PYG{p}{(}\PYG{p}{)}
 \PYG{g+go}{ *\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{} Deciles rating result \PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}}
 \PYG{g+go}{ [0.50 \PYGZhy{} 0.75[ [\PYGZsq{}a1005\PYGZsq{}, \PYGZsq{}a1010\PYGZsq{}, \PYGZsq{}a1002\PYGZsq{}, \PYGZsq{}a1008\PYGZsq{},}
 \PYG{g+go}{                \PYGZsq{}a1006\PYGZsq{}, \PYGZsq{}a1001\PYGZsq{}, \PYGZsq{}a1003\PYGZsq{}]}
@@ -5543,13 +5543,16 @@ In \hyperref[\detokenize{tutorial:score9limits}]{Fig.\@ \ref{\detokenize{tutoria
 
 We add, now, these 9\sphinxhyphen{}tiling quality score limits to the enrolment quality records of the 41 Universities and rank all these records conjointly together with the help of the \sphinxcode{\sphinxupquote{sortingDigraphs.LearnedQuantilesRatingDigraph}} constructor and by using the {\hyperref[\detokenize{tutorial:copeland-ranking-label}]{\sphinxcrossref{\DUrole{std,std-ref}{Copeland ranking rule}}}} (\autopageref*{\detokenize{tutorial:copeland-ranking-label}}).
 
+\begin{sphinxVerbatim}[commandchars=\\\{\}]
+\PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{k+kn}{from} \PYG{n+nn}{sortingDigraphs} \PYG{k}{import} \PYG{n}{LearnedQuantilesRatingDigraph}
+\PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{lqr} \PYG{o}{=} \PYG{n}{LearnedQuantilesRatingDigraph}\PYG{p}{(}\PYG{n}{pq}\PYG{p}{,}\PYG{n}{t}\PYG{p}{,}\PYGZbs{}
+\PYG{g+go}{                                       rankingRule=\PYGZsq{}Copeland\PYGZsq{})}
+\end{sphinxVerbatim}
+
 The resulting ranking of the 41 Universities including the lower\sphinxhyphen{}closed 9\sphinxhyphen{}tiling score limits may be nicely illustrated  with the help of a corresponding heatmap view (see \hyperref[\detokenize{tutorial:ninetiledheatmap}]{Fig.\@ \ref{\detokenize{tutorial:ninetiledheatmap}}}).
 
 \begin{sphinxVerbatim}[commandchars=\\\{\}]
-\PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{k+kn}{from} \PYG{n+nn}{sortingDigraphs} \PYG{k}{import} \PYG{n}{LearnedQuantilesRatingDigraph}
-\PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{nqr} \PYG{o}{=} \PYG{n}{LearnedQuantilesRatingDigraph}\PYG{p}{(}\PYG{n}{pq}\PYG{p}{,}\PYG{n}{t}\PYG{p}{,}\PYGZbs{}
-\PYG{g+go}{                                       rankingRule=\PYGZsq{}Copeland\PYGZsq{})}
-\PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{nqr}\PYG{o}{.}\PYG{n}{showHTMLRatingHeatmap}\PYG{p}{(}\PYG{n}{colorLevels}\PYG{o}{=}\PYG{l+m+mi}{7}\PYG{p}{,}\PYG{n}{Correlations}\PYG{o}{=}\PYG{k+kc}{True}\PYG{p}{,}\PYGZbs{}
+\PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{lqr}\PYG{o}{.}\PYG{n}{showHTMLRatingHeatmap}\PYG{p}{(}\PYG{n}{colorLevels}\PYG{o}{=}\PYG{l+m+mi}{7}\PYG{p}{,}\PYG{n}{Correlations}\PYG{o}{=}\PYG{k+kc}{True}\PYG{p}{,}\PYGZbs{}
 \PYG{g+go}{             ndigits=1,rankingRule=\PYGZsq{}Copeland\PYGZsq{})}
 \end{sphinxVerbatim}
 
@@ -5570,7 +5573,7 @@ From the actual ranking position of the lower 9\sphinxhyphen{}tiling limits, we 
 \sphinxSetupCaptionForVerbatim{Rating the Universities into enrolment quality 9\sphinxhyphen{}tiles}
 \def\sphinxLiteralBlockLabel{\label{\detokenize{tutorial:quantilesrating}}}
 \begin{sphinxVerbatim}[commandchars=\\\{\},numbers=left,firstnumber=1,stepnumber=1]
-\PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{nqr}\PYG{o}{.}\PYG{n}{showQuantilesRating}\PYG{p}{(}\PYG{p}{)}
+\PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{lqr}\PYG{o}{.}\PYG{n}{showQuantilesRating}\PYG{p}{(}\PYG{p}{)}
 \PYG{g+go}{ *\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{} Quantiles rating result \PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}}
 \PYG{g+go}{  [0.89 \PYGZhy{} 1.00] []}
 \PYG{g+go}{  [0.78 \PYGZhy{} 0.89[ [\PYGZsq{}tum\PYGZsq{}, \PYGZsq{}frei\PYGZsq{}, \PYGZsq{}kons\PYGZsq{}, \PYGZsq{}leip\PYGZsq{}, \PYGZsq{}mu\PYGZsq{}, \PYGZsq{}hei\PYGZsq{}]}
@@ -5591,7 +5594,7 @@ Following Universities: \sphinxstyleemphasis{TU München}, \sphinxstyleemphasis{
 A corresponding \sphinxstyleemphasis{graphviz} drawing may well illustrate all these enrolment quality equivalence classes.
 
 \begin{sphinxVerbatim}[commandchars=\\\{\}]
-\PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{nqr}\PYG{o}{.}\PYG{n}{exportRatingByRankingGraphViz}\PYG{p}{(}\PYG{n}{fileName}\PYG{o}{=}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{ratingResult}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{,}\PYGZbs{}
+\PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{lqr}\PYG{o}{.}\PYG{n}{exportRatingByRankingGraphViz}\PYG{p}{(}\PYG{n}{fileName}\PYG{o}{=}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{ratingResult}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{,}\PYGZbs{}
 \PYG{g+go}{                              graphSize=\PYGZsq{}12,12\PYGZsq{})}
 \PYG{g+go}{ *\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{} exporting a dot file for GraphViz tools \PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}*}
 \PYG{g+go}{  Exporting to ratingResult.dot}
@@ -5684,7 +5687,7 @@ In our case here, the Universities represent the decision actions: \sphinxstylee
 \sphinxSetupCaptionForVerbatim{Lower\sphinxhyphen{}closed 9\sphinxhyphen{}tiles sorting of the 41 Universities}
 \def\sphinxLiteralBlockLabel{\label{\detokenize{tutorial:ninetilessorting}}}
 \begin{sphinxVerbatim}[commandchars=\\\{\},numbers=left,firstnumber=1,stepnumber=1]
-\PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{nqr}\PYG{o}{.}\PYG{n}{showActionsSortingResult}\PYG{p}{(}\PYG{n}{actionSubset}\PYG{o}{=}\PYG{n}{nqr}\PYG{o}{.}\PYG{n}{newActions}\PYG{p}{)}
+\PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{lqr}\PYG{o}{.}\PYG{n}{showActionsSortingResult}\PYG{p}{(}\PYG{n}{actionSubset}\PYG{o}{=}\PYG{n}{lqr}\PYG{o}{.}\PYG{n}{newActions}\PYG{p}{)}
 \PYG{g+go}{ Quantiles sorting result per decision action}
 \PYG{g+go}{ [0.33 \PYGZhy{} 0.44[: aach with credibility: 0.13 = min(0.13,0.27)}
 \PYG{g+go}{ [0.56 \PYGZhy{} 0.89[: aug with credibility: 0.13 = min(0.13,0.27)}
@@ -5734,7 +5737,7 @@ In the 9\sphinxhyphen{}tiles sorting result, shown in \hyperref[\detokenize{tuto
 We shall now lexicographically sort these individual rating results per University, by \sphinxstyleemphasis{average} rated 9\sphinxhyphen{}tile limits and \sphinxstyleemphasis{highest\sphinxhyphen{}rated} upper 9\sphinxhyphen{}tile limit, into ordered, but not necessarily disjoint, enrolment quality quantiles.
 
 \begin{sphinxVerbatim}[commandchars=\\\{\}]
-\PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{nqr}\PYG{o}{.}\PYG{n}{showHTMLQuantileSorting}\PYG{p}{(}\PYG{n}{strategy}\PYG{o}{=}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{average}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{)}
+\PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{lqr}\PYG{o}{.}\PYG{n}{showHTMLQuantileSorting}\PYG{p}{(}\PYG{n}{strategy}\PYG{o}{=}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{average}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{)}
 \end{sphinxVerbatim}
 
 \begin{figure}[H]
@@ -5746,10 +5749,10 @@ We shall now lexicographically sort these individual rating results per Universi
 
 In \hyperref[\detokenize{tutorial:ninetilingordering}]{Fig.\@ \ref{\detokenize{tutorial:ninetilingordering}}} we may notice that the Universities: \sphinxstyleemphasis{Augsburg}, \sphinxstyleemphasis{Kaiserslautern}, \sphinxstyleemphasis{Mannheim} and \sphinxstyleemphasis{Tübingen} for instance, show in fact the same average rated 9\sphinxhyphen{}tiles score of 0.725; yet, the rated upper 9\sphinxhyphen{}tile limit of \sphinxstyleemphasis{Tuebingen} is only 0.78, whereas the one of the other Universities reaches 0.89. Hence, \sphinxstyleemphasis{Tuebingen} is ranked below \sphinxstyleemphasis{Augsburg}, \sphinxstyleemphasis{Kaiserslautern} and \sphinxstyleemphasis{Mannheim} .
 
-With a \sphinxstyleemphasis{graphviz} drawing of this \sphinxcode{\sphinxupquote{QuantilesSorting}} digraph instance \sphinxstyleemphasis{qs}, we may, without requiring any specific ordering strategy, as well illustrate our 9\sphinxhyphen{}tiles \sphinxstyleemphasis{rating\sphinxhyphen{}by\sphinxhyphen{}sorting} result.
+With a special \sphinxstyleemphasis{graphviz} drawing of the \sphinxcode{\sphinxupquote{LearnedQuantilesRatingDigraph}} instance \sphinxstyleemphasis{lqr}, we may, without requiring any specific ordering strategy, as well illustrate our 9\sphinxhyphen{}tiles \sphinxstyleemphasis{rating\sphinxhyphen{}by\sphinxhyphen{}sorting} result.
 
 \begin{sphinxVerbatim}[commandchars=\\\{\}]
-\PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{nqr}\PYG{o}{.}\PYG{n}{exportRatingBySortingGraphViz}\PYG{p}{(}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{nineTilingDrawing}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{,}\PYG{n}{graphSize}\PYG{o}{=}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{12,12}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{)}
+\PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{lqr}\PYG{o}{.}\PYG{n}{exportRatingBySortingGraphViz}\PYG{p}{(}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{nineTilingDrawing}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{,}\PYG{n}{graphSize}\PYG{o}{=}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{12,12}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{)}
 \PYG{g+go}{ *\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{} exporting a dot file for GraphViz tools \PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}*}
 \PYG{g+go}{ Exporting to nineTilingDrawing.dot}
 \PYG{g+go}{ dot \PYGZhy{}Grankdir=TB \PYGZhy{}Tpng nineTilingDrawing.dot\PYGZbs{}}

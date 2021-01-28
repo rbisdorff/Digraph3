@@ -46,7 +46,7 @@ installs (with sudo !!) the Digraph3 modules in the current running python envir
 
 A 'make installVenv' allows to install instead into a private virtual python environment. Check and adapt if necessary the makefile install commands. 
 
-If the cython C-compiled modules for Big Data are required, the Cython package must previously be installed in the running Python environment (...$ pip3.5+ install cython).
+If the cython C-compiled modules for Big Data are required, the Cython package must previously be installed in the running Python environment (...$ python3 -m pip install cython).
 
 .. /Digraph3$ make tests
 

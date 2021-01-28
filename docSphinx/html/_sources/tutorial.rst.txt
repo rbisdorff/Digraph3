@@ -4074,8 +4074,8 @@ We reconsider the :py:class:`PerformanceQuantiles` object instance *pq* as compu
 	     
    >>> from sortingDigraphs import LearnedQuantilesRatingDigraph
    >>> newActions = rpg.randomActions(10)
-   >>> nqr = LearnedQuantilesRatingDigraph(pq,newActions,rankingRule='best')
-   >>> nqr
+   >>> lqr = LearnedQuantilesRatingDigraph(pq,newActions,rankingRule='best')
+   >>> lqr
     *---- Object instance description
     Instance class      : LearnedQuantilesRatingDigraph
     Instance name       : normedRatingDigraph
@@ -4111,7 +4111,7 @@ Let us have a look at the digraph's nodes, here called **newActions**.
    :name: newPerfTab
    :caption: Performance tableau of the new incoming decision alternatives
 
-   >>> nqr.showPerformanceTableau(actionsSubset=nqr.newActions)
+   >>> lqr.showPerformanceTableau(actionsSubset=lqr.newActions)
     *----  performance tableau -----*
     criteria | a1001 a1002 a1003 a1004 a1005 a1006 a1007 a1008 a1009 a1010   
     ---------|-------------------------------------------------------------
@@ -4132,7 +4132,7 @@ The :py:class:`sortingDigraphs.LearnedQuantilesRatingDigraph` class instance's *
    :name: limitingProfiles
    :caption: Showing the limiting profiles of the rating quantiles
 
-   >>> nqr.showPerformanceTableau(actionsSubset=nqr.profiles)
+   >>> lqr.showPerformanceTableau(actionsSubset=lqr.profiles)
     *----  Quartiles limit profiles -----*
     criteria |  'm1'   'm2'   'm3'   'm4'   
     ---------|----------------------------
@@ -4155,12 +4155,12 @@ In this rating example, the *Copeland* rule appears to be the more appropriate r
    :name: rankingCorrelation
    :caption: Copeland ranking of new alternatives and historical quartile limits
 
-   >>> nqr.rankingRule
+   >>> lqr.rankingRule
     'Copeland'
-   >>> nqr.actionsRanking
+   >>> lqr.actionsRanking
     ['m4', 'a1005', 'a1010', 'a1002', 'a1008', 'a1006', 'a1001',
      'a1003', 'm3', 'a1007', 'a1004', 'a1009', 'm2', 'm1'] 
-   >>> nqr.showCorrelation(nqr.rankingCorrelation)
+   >>> lqr.showCorrelation(lqr.rankingCorrelation)
     Correlation indexes:
      Crisp ordinal correlation  : +0.945
      Epistemic determination    :  0.522
@@ -4172,7 +4172,7 @@ The eventual rating procedure is based in this example on the *lower* quartile l
 
 .. code-block:: pycon
 
-   >>> nqr.ratingCategories
+   >>> lqr.ratingCategories
     OrderedDict([
     ('m2', ['a1007','a1004','a1009']),
     ('m3', ['a1005','a1010','a1002','a1008','a1006','a1001','a1003'])
@@ -4184,7 +4184,7 @@ We notice above that no new decision alternatives are actually rated in the lowe
    :name: quartilesRatingResult
    :caption: Showing a quantiles rating result 
 
-   >>> nqr.showQuantilesRating()
+   >>> lqr.showQuantilesRating()
     *-------- Quartiles rating result ---------
     [0.50 - 0.75[ ['a1005', 'a1010', 'a1002', 'a1008',
                    'a1006', 'a1001', 'a1003']
@@ -4194,7 +4194,7 @@ The same result may more conveniently be consulted in a browser view via a speci
 
 .. code-block:: pycon
 
-   >>> nqr.showHTMLRatingHeatmap(pageTitle='Heatmap of Quartiles Rating',
+   >>> lqr.showHTMLRatingHeatmap(pageTitle='Heatmap of Quartiles Rating',
                       Correlations=True,colorLevels=5)
 
 .. figure:: heatMap1.png
@@ -4209,7 +4209,7 @@ Using furthermore a specialised version of the :py:meth:`transitiveDigraphs.Tran
 
 .. code-block:: pycon
 
-   >>> nqr.exportRatingGraphViz('normedRatingDigraph')
+   >>> lqr.exportRatingGraphViz('normedRatingDigraph')
     *---- exporting a dot file for GraphViz tools ---------*
      Exporting to normedRatingDigraph.dot
      dot -Grankdir=TB -Tpng normedRatingDigraph.dot -o normedRatingDigraph.png
@@ -4243,8 +4243,8 @@ A preciser rating result may indeed be achieved when using **deciles** instead o
    >>> pq1 = PerformanceQuantiles(tp, numberOfBins = 'deciles',\
                     LowerClosed=True)
    >>> pq1.updateQuantiles(newTab,historySize=None)
-   >>> nqr1 = LearnedQuantilesRatingDigraph(pq1,newActions,rankingRule='best')
-   >>> nqr1.showQuantilesRating()
+   >>> lqr1 = LearnedQuantilesRatingDigraph(pq1,newActions,rankingRule='best')
+   >>> lqr1.showQuantilesRating()
     *-------- Deciles rating result ---------
     [0.60 - 0.70[ ['a1005', 'a1010', 'a1008', 'a1002']
     [0.50 - 0.60[ ['a1006', 'a1001', 'a1003']
@@ -4257,7 +4257,7 @@ A browser view may again more conveniently illustrate this refined rating result
 
 .. code-block:: pycon
 
-   >>> nqr1.showHTMLRatingHeatmap(pageTitle='Heatmap of the deciles rating',\
+   >>> lqr1.showHTMLRatingHeatmap(pageTitle='Heatmap of the deciles rating',\
                                   colorLevels=5,Correlations=True)
 
 .. figure:: heatMap2.png
@@ -4277,9 +4277,9 @@ To avoid having to recompute performance deciles from historical data when wishi
    :name: interpolatedQuartilesRating
    :caption: From deciles interpolated quartiles rating result 	  
 
-   >>> nqr2 = LearnedQuantilesRatingDigraph(pq1,newActions,
+   >>> lqr2 = LearnedQuantilesRatingDigraph(pq1,newActions,
                       quantiles='quartiles')
-   >>> nqr2.showQuantilesRating()
+   >>> lqr2.showQuantilesRating()
     *-------- Deciles rating result ---------
     [0.50 - 0.75[ ['a1005', 'a1010', 'a1002', 'a1008',
                    'a1006', 'a1001', 'a1003']
@@ -4406,12 +4406,13 @@ In :numref:`score9Limits`, we see confirmed again the **incommensurability** bet
 
 We add, now, these 9-tiling quality score limits to the enrolment quality records of the 41 Universities and rank all these records conjointly together with the help of the :py:class:`sortingDigraphs.LearnedQuantilesRatingDigraph` constructor and by using the :ref:`Copeland ranking rule <Copeland-Ranking-label>`.
 
+   >>> from sortingDigraphs import LearnedQuantilesRatingDigraph
+   >>> lqr = LearnedQuantilesRatingDigraph(pq,t,\
+                                          rankingRule='Copeland')
+
 The resulting ranking of the 41 Universities including the lower-closed 9-tiling score limits may be nicely illustrated  with the help of a corresponding heatmap view (see :numref:`ninetiledHeatmap`). 
 
-   >>> from sortingDigraphs import LearnedQuantilesRatingDigraph
-   >>> nqr = LearnedQuantilesRatingDigraph(pq,t,\
-                                          rankingRule='Copeland')
-   >>> nqr.showHTMLRatingHeatmap(colorLevels=7,Correlations=True,\
+   >>> lqr.showHTMLRatingHeatmap(colorLevels=7,Correlations=True,\
                 ndigits=1,rankingRule='Copeland')
 
 .. figure:: nineTilingResult.png
@@ -4430,7 +4431,7 @@ From the actual ranking position of the lower 9-tiling limits, we may now immedi
    :linenos:
    :caption: Rating the Universities into enrolment quality 9-tiles 
 
-   >>> nqr.showQuantilesRating()
+   >>> lqr.showQuantilesRating()
     *-------- Quantiles rating result ---------
      [0.89 - 1.00] []
      [0.78 - 0.89[ ['tum', 'frei', 'kons', 'leip', 'mu', 'hei']
@@ -4449,7 +4450,7 @@ Following Universities: *TU München*, *Freiburg*, *Konstanz*, *Leipzig*, *Münc
 
 A corresponding *graphviz* drawing may well illustrate all these enrolment quality equivalence classes.
 
-   >>> nqr.exportRatingByRankingGraphViz(fileName='ratingResult',\
+   >>> lqr.exportRatingByRankingGraphViz(fileName='ratingResult',\
 				 graphSize='12,12')
     *---- exporting a dot file for GraphViz tools ---------*
      Exporting to ratingResult.dot
@@ -4482,15 +4483,15 @@ We have noticed in the tutorial on :ref:`ranking with multiple criteria <Ranking
        :linenos:
        :caption: Epistemic fusion of Copeland and Netflows rating-by-ranking results 
 
-       >>> nqr = LearnedQuantilesRatingDigraph(\
+       >>> lqr = LearnedQuantilesRatingDigraph(\
                        pq,t,rankingRule='Copeland')
-       >>> nqr1 = LearnedQuantilesRatingDigraph(\
+       >>> lqr1 = LearnedQuantilesRatingDigraph(\
                        pq,t,rankingRule='NetFlows')
        >>> from transitiveDigraphs import\
                        RankingsFusionDigraph
-       >>> rankings = [nqr.actionsRanking, \
-                       nqr1.actionsRanking]
-       >>> rf = RankingsFusionDigraph(nqr1,rankings)
+       >>> rankings = [lqr.actionsRanking, \
+                       lqr1.actionsRanking]
+       >>> rf = RankingsFusionDigraph(lqr,rankings)
        >>> rf.exportGraphViz(fileName='fusionResult',\
                              WithRatingDecoration=True,\
                              graphSize='30,30')
@@ -4578,7 +4579,7 @@ In our case here, the Universities represent the decision actions: *where to stu
    :linenos:
    :caption: Lower-closed 9-tiles sorting of the 41 Universities 
 
-   >>> nqr.showActionsSortingResult(actionSubset=nqr.newActions)
+   >>> lqr.showActionsSortingResult(actionSubset=lqr.newActions)
     Quantiles sorting result per decision action
     [0.33 - 0.44[: aach with credibility: 0.13 = min(0.13,0.27)
     [0.56 - 0.89[: aug with credibility: 0.13 = min(0.13,0.27)
@@ -4626,7 +4627,7 @@ In the 9-tiles sorting result, shown in :numref:`nineTilesSorting`, we notice fo
 
 We shall now lexicographically sort these individual rating results per University, by *average* rated 9-tile limits and *highest-rated* upper 9-tile limit, into ordered, but not necessarily disjoint, enrolment quality quantiles.
 
->>> nqr.showHTMLQuantileSorting(strategy='average')
+>>> lqr.showHTMLQuantileSorting(strategy='average')
 
 .. figure:: nineTilingOrdering.png
    :name: nineTilingOrdering
@@ -4637,9 +4638,9 @@ We shall now lexicographically sort these individual rating results per Universi
 
 In :numref:`nineTilingOrdering` we may notice that the Universities: *Augsburg*, *Kaiserslautern*, *Mannheim* and *Tübingen* for instance, show in fact the same average rated 9-tiles score of 0.725; yet, the rated upper 9-tile limit of *Tuebingen* is only 0.78, whereas the one of the other Universities reaches 0.89. Hence, *Tuebingen* is ranked below *Augsburg*, *Kaiserslautern* and *Mannheim* . 
 
-With a *graphviz* drawing of this :code:`QuantilesSorting` digraph instance *qs*, we may, without requiring any specific ordering strategy, as well illustrate our 9-tiles *rating-by-sorting* result.
+With a special *graphviz* drawing of the :code:`LearnedQuantilesRatingDigraph` instance *lqr*, we may, without requiring any specific ordering strategy, as well illustrate our 9-tiles *rating-by-sorting* result.
 
-   >>> nqr.exportRatingBySortingGraphViz('nineTilingDrawing',graphSize='12,12')
+   >>> lqr.exportRatingBySortingGraphViz('nineTilingDrawing',graphSize='12,12')
     *---- exporting a dot file for GraphViz tools ---------*
     Exporting to nineTilingDrawing.dot
     dot -Grankdir=TB -Tpng nineTilingDrawing.dot\

@@ -9,7 +9,7 @@ except:
     print("""
 The Cython compiler cannot be imported from the running Python environment!
 If you wish tu install the cythonized C-compiled modules you need to run:
-...$ pip install cython
+...$ python3 -m pip install cython
 from the systems console.
 """)
     CythonInstalled = False
