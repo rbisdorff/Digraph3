@@ -6438,7 +6438,10 @@ pairwise perspective (see below), we notice that, with the given preference disc
  9
 10
 11
-12</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">lqr</span> <span class="o">=</span> <span class="n">LearnedQuantilesRatingDigraph</span><span class="p">(</span>\
+12
+13
+14
+15</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">lqr</span> <span class="o">=</span> <span class="n">LearnedQuantilesRatingDigraph</span><span class="p">(</span>\
 <span class="go">                pq,t,rankingRule=&#39;Copeland&#39;)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">lqr1</span> <span class="o">=</span> <span class="n">LearnedQuantilesRatingDigraph</span><span class="p">(</span>\
 <span class="go">                pq,t,rankingRule=&#39;NetFlows&#39;)</span>
@@ -6450,6 +6453,9 @@ pairwise perspective (see below), we notice that, with the given preference disc
 <span class="gp">&gt;&gt;&gt; </span><span class="n">rf</span><span class="o">.</span><span class="n">exportGraphViz</span><span class="p">(</span><span class="n">fileName</span><span class="o">=</span><span class="s1">&#39;fusionResult&#39;</span><span class="p">,</span>\
 <span class="go">                      WithRatingDecoration=True,\</span>
 <span class="go">                      graphSize=&#39;30,30&#39;)</span>
+<span class="go"> *---- exporting a dot file for GraphViz tools ---------*</span>
+<span class="go"> Exporting to fusionResult.dot</span>
+<span class="go"> dot -Grankdir=TB -Tpng fusionResult.dot -o fusionResult.png</span>
 </pre></div>
 </td></tr></table></div>
 </div>
@@ -6659,7 +6665,8 @@ pairwise perspective (see below), we notice that, with the given preference disc
 </div>
 <p>In <a class="reference internal" href="#ninetilingordering"><span class="std std-numref">Fig. 44</span></a> we may notice that the Universities: <em>Augsburg</em>, <em>Kaiserslautern</em>, <em>Mannheim</em> and <em>Tübingen</em> for instance, show in fact the same average rated 9-tiles score of 0.725; yet, the rated upper 9-tile limit of <em>Tuebingen</em> is only 0.78, whereas the one of the other Universities reaches 0.89. Hence, <em>Tuebingen</em> is ranked below <em>Augsburg</em>, <em>Kaiserslautern</em> and <em>Mannheim</em> .</p>
 <p>With a special <em>graphviz</em> drawing of the <code class="code docutils literal notranslate"><span class="pre">LearnedQuantilesRatingDigraph</span></code> instance <em>lqr</em>, we may, without requiring any specific ordering strategy, as well illustrate our 9-tiles <em>rating-by-sorting</em> result.</p>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">lqr</span><span class="o">.</span><span class="n">exportRatingBySortingGraphViz</span><span class="p">(</span><span class="s1">&#39;nineTilingDrawing&#39;</span><span class="p">,</span><span class="n">graphSize</span><span class="o">=</span><span class="s1">&#39;12,12&#39;</span><span class="p">)</span>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">lqr</span><span class="o">.</span><span class="n">exportRatingBySortingGraphViz</span><span class="p">(</span>\
+<span class="go">                    &#39;nineTilingDrawing&#39;,graphSize=&#39;12,12&#39;)</span>
 <span class="go"> *---- exporting a dot file for GraphViz tools ---------*</span>
 <span class="go"> Exporting to nineTilingDrawing.dot</span>
 <span class="go"> dot -Grankdir=TB -Tpng nineTilingDrawing.dot\</span>

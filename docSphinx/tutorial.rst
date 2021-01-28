@@ -4495,8 +4495,10 @@ We have noticed in the tutorial on :ref:`ranking with multiple criteria <Ranking
        >>> rf.exportGraphViz(fileName='fusionResult',\
                              WithRatingDecoration=True,\
                              graphSize='30,30')
-
-
+	*---- exporting a dot file for GraphViz tools ---------*
+        Exporting to fusionResult.dot
+        dot -Grankdir=TB -Tpng fusionResult.dot -o fusionResult.png
+	
     In :numref:`fusionResult` we notice that many Universities appear now rated into several adjacent 9-tiles. The previously best-rated Universities: *TU München*, *Freiburg*, *München*, *Leipzig*, as well as  *Heidelberg*, for instance, appear now sorted into the *seventh* **and** *eigth* 9-tile (:math:`[o.67 - 0.89]`), whereas *Konstanz* is now, even **more imprecisely**, rated into the *sixth*, the *seventh* and the *eight* 9-tile. 
 
 How *confident*, hence, is our precise *Copeland* *rating-by-ranking* result? To investigate this question, let us now inspect the **outranking digraph** on which we actually apply the *Copeland* ranking rule.
@@ -4640,7 +4642,8 @@ In :numref:`nineTilingOrdering` we may notice that the Universities: *Augsburg*,
 
 With a special *graphviz* drawing of the :code:`LearnedQuantilesRatingDigraph` instance *lqr*, we may, without requiring any specific ordering strategy, as well illustrate our 9-tiles *rating-by-sorting* result.
 
-   >>> lqr.exportRatingBySortingGraphViz('nineTilingDrawing',graphSize='12,12')
+   >>> lqr.exportRatingBySortingGraphViz(\
+                       'nineTilingDrawing',graphSize='12,12')
     *---- exporting a dot file for GraphViz tools ---------*
     Exporting to nineTilingDrawing.dot
     dot -Grankdir=TB -Tpng nineTilingDrawing.dot\

@@ -10,37 +10,38 @@ t = PerformanceTableau('studentenSpiegel04')
 print(t)
 t.computeMissingDataProportion(Comments=True)
 disciplines = [t for t in t.criteria]
-#t.showHTMLPerformanceHeatmap(\
-#                  criteriaList=disciplines,ndigits=1,rankingRule=None)
-#t.showHTMLCriteria()
+t.showHTMLPerformanceHeatmap(\
+                criteriaList=disciplines,ndigits=1,rankingRule=None)
 
 ###########
 from performanceQuantiles import *
 pq = PerformanceQuantiles(t,numberOfBins=9)
-#pq.showHTMLLimitingQuantiles(Transposed=True,Sorted=False)
+pq.showHTMLLimitingQuantiles(Transposed=True,Sorted=False)
 
 ###########
 from sortingDigraphs import *
-nqr = LearnedQuantilesRatingDigraph(pq,t,rankingRule='Copeland')
-print(nqr)
-nqr.showHTMLRatingHeatmap(rankingRule='Copeland',Correlations=True,ndigits=1)
-nqr.showQuantilesRating()
-nqr.exportRatingByRankingGraphViz('ratingResult',graphSize='12,12')
-
-#############
-nqr1 = NormedQuantilesRatingDigraph(pq,t,rankingRule='NetFlows')
-from transitiveDigraphs import *
-rankings = [nqr.actionsRanking,
-            nqr1.actionsRanking]
-print(rankings)
-rf = RankingsFusion(nqr1,rankings)
-rf.exportGraphViz(fileName='fusionResult',WithRatingDecoration=True,graphType='png',graphSize='30,30')
-
+lqr = LearnedQuantilesRatingDigraph(pq,t,rankingRule='Copeland',Debug=False)
+print(lqr)
+lqr.showHTMLRatingHeatmap(rankingRule=None,Correlations=True,ndigits=1)
+lqr.showQuantilesRating()
+lqr.exportRatingByRankingGraphViz('ratingResult',graphSize='12,12')
+######
+lqr1 = LearnedQuantilesRatingDigraph(pq,t,rankingRule='NetFlows')
+from transitiveDigraphs import RankingsFusionDigraph
+rankings = [lqr.actionsRanking, lqr1.actionsRanking]
+rf = RankingsFusionDigraph(lqr,rankings)
+rf.exportGraphViz(fileName='fusionResult',\
+                             WithRatingDecoration=True,\
+                             graphSize='30,30')
 ###################
-nqr.showActionsSortingResult()
-nqr.showHTMLQuantilesSorting()
-nqr.exportRatingBySortingGraphViz('nineTilingDrawing',graphSize='12,12')
-
-
-
-
+dg = BipolarOutrankingDigraph(t)
+print(dg)
+dg.computeTransitivityDegree(Comments=True)
+dg.computeSymmetryDegree(Comments=True)
+dg.computeChordlessCircuits()
+dg.showChordlessCircuits()
+##
+##############
+lqr.showActionsSortingResult()
+lqr.showHTMLQuantilesSorting(strategy='average')
+lqr.exportRatingBySortingGraphViz('nineTilingDrawing',graphSize='12,12')

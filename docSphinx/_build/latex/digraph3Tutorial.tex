@@ -5752,7 +5752,8 @@ In \hyperref[\detokenize{tutorial:ninetilingordering}]{Fig.\@ \ref{\detokenize{t
 With a special \sphinxstyleemphasis{graphviz} drawing of the \sphinxcode{\sphinxupquote{LearnedQuantilesRatingDigraph}} instance \sphinxstyleemphasis{lqr}, we may, without requiring any specific ordering strategy, as well illustrate our 9\sphinxhyphen{}tiles \sphinxstyleemphasis{rating\sphinxhyphen{}by\sphinxhyphen{}sorting} result.
 
 \begin{sphinxVerbatim}[commandchars=\\\{\}]
-\PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{lqr}\PYG{o}{.}\PYG{n}{exportRatingBySortingGraphViz}\PYG{p}{(}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{nineTilingDrawing}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{,}\PYG{n}{graphSize}\PYG{o}{=}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{12,12}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{)}
+\PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{lqr}\PYG{o}{.}\PYG{n}{exportRatingBySortingGraphViz}\PYG{p}{(}\PYGZbs{}
+\PYG{g+go}{                    \PYGZsq{}nineTilingDrawing\PYGZsq{},graphSize=\PYGZsq{}12,12\PYGZsq{})}
 \PYG{g+go}{ *\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{} exporting a dot file for GraphViz tools \PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}*}
 \PYG{g+go}{ Exporting to nineTilingDrawing.dot}
 \PYG{g+go}{ dot \PYGZhy{}Grankdir=TB \PYGZhy{}Tpng nineTilingDrawing.dot\PYGZbs{}}
