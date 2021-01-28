@@ -4579,7 +4579,7 @@ In our case here, the Universities represent the decision actions: *where to stu
    :linenos:
    :caption: Lower-closed 9-tiles sorting of the 41 Universities 
 
-   >>> lqr.showActionsSortingResult(actionSubset=lqr.newActions)
+   >>> lqr.showActionsSortingResult()
     Quantiles sorting result per decision action
     [0.33 - 0.44[: aach with credibility: 0.13 = min(0.13,0.27)
     [0.56 - 0.89[: aug with credibility: 0.13 = min(0.13,0.27)
@@ -4627,7 +4627,7 @@ In the 9-tiles sorting result, shown in :numref:`nineTilesSorting`, we notice fo
 
 We shall now lexicographically sort these individual rating results per University, by *average* rated 9-tile limits and *highest-rated* upper 9-tile limit, into ordered, but not necessarily disjoint, enrolment quality quantiles.
 
->>> lqr.showHTMLQuantileSorting(strategy='average')
+>>> lqr.showHTMLQuantilesSorting(strategy='average')
 
 .. figure:: nineTilingOrdering.png
    :name: nineTilingOrdering

@@ -6602,7 +6602,7 @@ pairwise perspective (see below), we notice that, with the given preference disc
 40
 41
 42
-43</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">lqr</span><span class="o">.</span><span class="n">showActionsSortingResult</span><span class="p">(</span><span class="n">actionSubset</span><span class="o">=</span><span class="n">lqr</span><span class="o">.</span><span class="n">newActions</span><span class="p">)</span>
+43</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">lqr</span><span class="o">.</span><span class="n">showActionsSortingResult</span><span class="p">()</span>
 <span class="go"> Quantiles sorting result per decision action</span>
 <span class="go"> [0.33 - 0.44[: aach with credibility: 0.13 = min(0.13,0.27)</span>
 <span class="go"> [0.56 - 0.89[: aug with credibility: 0.13 = min(0.13,0.27)</span>
@@ -6650,7 +6650,7 @@ pairwise perspective (see below), we notice that, with the given preference disc
 </div>
 <p>In the 9-tiles sorting result, shown in <a class="reference internal" href="#ninetilessorting"><span class="std std-numref">Listing 79</span></a>, we notice for instance in Lines 3-4 that the <em>RWTH Aachen</em> is precisely rated into the 4th 9-tile (<img class="math" src="_images/math/b8853c5991441926a3b0582f01134f486f780e13.png" alt="[0.33 - 0.44["/>), whereas the University <em>Augsburg</em> is less precisely rated conjointly into the <em>6th</em>, the <em>7th</em> and the <em>8th</em> 9-tile (<img class="math" src="_images/math/b3fa753e40b57eb448413ea02f6eefc0186fdc97.png" alt="[0.56 - 0.89["/>). In Line 42, <em>TU München</em> appears best rated into the unique highest 9-tile (<img class="math" src="_images/math/e1fb653231d5603f9c98d137ffe8e3578b474754.png" alt="[0.89 - &lt;["/>). All three rating results are supported by a (0.07 + 1.0)/2 = 53.5% majority of valuated subjects <a class="footnote-reference brackets" href="#id160" id="id84">31</a>. With the support of a 76.5% majority of valuated subjects (Line 20), the apparent most confident rating result is the one of University <em>Freiburg</em> (see also <a class="reference internal" href="#qualityscores"><span class="std std-numref">Fig. 38</span></a> and <a class="reference internal" href="#ninetiledheatmap"><span class="std std-numref">Fig. 41</span></a>).</p>
 <p>We shall now lexicographically sort these individual rating results per University, by <em>average</em> rated 9-tile limits and <em>highest-rated</em> upper 9-tile limit, into ordered, but not necessarily disjoint, enrolment quality quantiles.</p>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">lqr</span><span class="o">.</span><span class="n">showHTMLQuantileSorting</span><span class="p">(</span><span class="n">strategy</span><span class="o">=</span><span class="s1">&#39;average&#39;</span><span class="p">)</span>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">lqr</span><span class="o">.</span><span class="n">showHTMLQuantilesSorting</span><span class="p">(</span><span class="n">strategy</span><span class="o">=</span><span class="s1">&#39;average&#39;</span><span class="p">)</span>
 </pre></div>
 </div>
 <div class="figure align-center" id="ninetilingordering">
