@@ -8096,6 +8096,7 @@ class RobustOutrankingDigraph(BipolarOutrankingDigraph):
             pass
         self.criteria = copy.copy(cardinal.criteria)
         self.evaluation = copy.copy(cardinal.evaluation)
+        self.NA = copy.copy(cardinal.NA)
         self.vetos = copy.copy(cardinal.vetos)
         self.valuationdomain = copy.copy(cardinal.valuationdomain)
         self.relation = copy.copy(cardinal.relation)

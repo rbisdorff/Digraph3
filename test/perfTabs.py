@@ -1964,6 +1964,7 @@ The performance evaluations of each decision alternative on each criterion are g
         return html
 
     def showHTMLPerformanceHeatmap(self,actionsList=None,\
+                                   WithActionNames=False,\
                                    fromIndex=None,\
                                    toIndex=None,\
                                    Transposed=False,\
@@ -1972,6 +1973,7 @@ The performance evaluations of each decision alternative on each criterion are g
                                    pageTitle=None,\
                                    ndigits=2,\
                                    SparseModel=False,\
+                                   outrankingModel = 'standard',\
                                    minimalComponentSize=1,\
                                    rankingRule='NetFlows',\
                                    StoreRanking=True,\
@@ -1989,11 +1991,13 @@ The performance evaluations of each decision alternative on each criterion are g
         
         * *actionsList* and *criteriaList*, if provided,  give the possibility to show
           the decision alternatives, resp. criteria, in a given ordering.
+        * *WithActionNames* = True (default False) will show the action names instead of the short names or the identifyers.
         * *ndigits* = 0 may be used to show integer evaluation values.
         * *colorLevels* may be 3, 5, 7, or 9. 
         * When no *actionsList* is provided, the decision actions are ordered from the best to the worst. This
           ranking is obtained by default with the Copeland rule applied on a standard *BipolarOutrankingDigraph*.
-        * When the *SparseModel* flag is put to *True*, a sparse *PreRankedOutrankingDigraph* construction is used instead.                
+        * When the *SparseModel* flag is put to *True*, a sparse *PreRankedOutrankingDigraph* construction is used instead.
+        * the *outrankingModel* parameter (default = 'standard') allows to switch to alternative BipolarOutrankingDigraph constructors, like the 'confident' or 'robust' models.             
         * The *minimalComponentSize* allows to control the fill rate of the pre-ranked model.
           When *minimalComponentSize* = *n* (the number of decision actions) both the pre-ranked model will be
           in fact equivalent to the standard model.
@@ -2035,10 +2039,12 @@ The performance evaluations of each decision alternative on each criterion are g
             
         fo.write(self._htmlPerformanceHeatmap(argCriteriaList=criteriaList,
                                              argActionsList=actionsList,
+                                            WithActionNames=WithActionNames,
                                              fromIndex=fromIndex,
                                              Transposed=Transposed,
                                              toIndex=toIndex,
                                              SparseModel=SparseModel,
+                                              outrankingModel=outrankingModel,
                                              minimalComponentSize=minimalComponentSize,
                                              rankingRule=rankingRule,
                                              StoreRanking=StoreRanking,
@@ -2057,10 +2063,12 @@ The performance evaluations of each decision alternative on each criterion are g
 
     def _htmlPerformanceHeatmap(self,argCriteriaList=None,
                                 argActionsList=None,
+                                WithActionNames=False,
                                 fromIndex=None,
                                 toIndex=None,
                                 Transposed=False,
                                 SparseModel=False,
+                                outrankingModel='standard',
                                 minimalComponentSize=1,
                                 rankingRule=None,
                                 StoreRanking=False,
@@ -2170,8 +2178,17 @@ The performance evaluations of each decision alternative on each criterion are g
                 rankCorrelation = None
                 
             else: # standard outranking model
-                from outrankingDigraphs import BipolarOutrankingDigraph
-                g = BipolarOutrankingDigraph(self,actionsSubset=argActionsList,Normalized=True)
+                if outrankingModel == 'standard':
+                    from outrankingDigraphs import BipolarOutrankingDigraph
+                    g = BipolarOutrankingDigraph(self,actionsSubset=argActionsList,Normalized=True)
+                elif outrankingModel == 'confident':
+                    from outrankingDigraphs import ConfidentBipolarOutrankingDigraph
+                    g = ConfidentBipolarOutrankingDigraph(self,Normalized=True)
+                elif outrankingModel == 'robust':
+                    from outrankingDigraphs import RobustOutrankingDigraph
+                    g = RobustOutrankingDigraph(self)
+                    
+                    
                 if rankingRule == 'NetFlows':
                     actionsList = g.computeNetFlowsRanking()
                     if StoreRanking:
@@ -2410,11 +2427,15 @@ The performance evaluations of each decision alternative on each criterion are g
                 toIndex = len(actionsList)
             for i in range(fromIndex,toIndex):
                 x = actionsList[i]
-                try:
-                    xName = self.actions[x]['shortName']
-                except:
-                    xName = str(x)
-                html += '<tr><th bgcolor=%s>%s</th>' % (rowHeaderColor,xName)
+                if WithActionNames:
+                    xName = '%s (%s)' % (self.actions[x]['name'],str(x))
+                    html += '<tr><th bgcolor=%s align="left">%s</th>' % (rowHeaderColor,xName)
+                else:
+                    try:
+                        xName = self.actions[x]['shortName']
+                    except:
+                        xName = str(x)
+                    html += '<tr><th bgcolor=%s>%s</th>' % (rowHeaderColor,xName)
                 for g in criteriaList:
                     if self.evaluation[g][x] != NA:
                         formatString = '<td bgcolor=%s align="right">%% .%df</td>' % (quantileColor[x][g],ndigits)
@@ -2439,7 +2460,7 @@ The performance evaluations of each decision alternative on each criterion are g
         if criteriaCorrelation != None:
             html += '<b>(*) tau:</b> <i>Ordinal (Kendall) correlation between marginal criterion and global ranking relation</i><br/>\n'
         if rankCorrelation != None:
-            html += '<i>Ranking rule</i>: <b>%s</b><br/>\n' % rankingRule
+            html += '<i>Outranking model</i>: <b>%s</b>, <i>Ranking rule</i>: <b>%s</b><br/>\n' % (outrankingModel,rankingRule)
             html += '<i>Ordinal (Kendall) correlation between global ranking and global outranking relation:</i> <b>%+.3f</b><br/>\n' % (rankCorrelation['correlation'])
             html += '<i>Mean marginal correlation (a)               :</i> <b>%+.3f</b><br/>\n' % (meanMarginalCriteriaCorrelation)
             html += '<i>Standard marginal correlation deviation (b) :</i> <b>%+.3f</b><br/>\n' % (sdMarginalCriteriaCorrelation)
@@ -7331,10 +7352,15 @@ if __name__ == "__main__":
 ##                                   Correlations=True,
 ##                                   ndigits=4,
 ##                                   Debug=False))
-##    t.showHTMLPerformanceHeatmap(Correlations=True,colorLevels=5,
-##                                 rankingRule=None,Transposed=False)
-##    t.showHTMLPerformanceHeatmap(Correlations=True,colorLevels=5,
-##                                 rankingRule='NetFlows',Transposed=False)
+    t.showHTMLPerformanceHeatmap(Correlations=True,colorLevels=5,
+                                 rankingRule='NetFlows',Transposed=False)
+    t.showHTMLPerformanceHeatmap(outrankingModel='standard',Correlations=True,colorLevels=5,
+                                 rankingRule='NetFlows',Transposed=False)
+    t.showHTMLPerformanceHeatmap(outrankingModel='confident',Correlations=True,colorLevels=5,
+                                 rankingRule='NetFlows',Transposed=False)
+    t.showHTMLPerformanceHeatmap(outrankingModel='robust',Correlations=True,colorLevels=5,
+                                 rankingRule='NetFlows',Transposed=False)
+
     #g = BipolarOutrankingDigraph(t,Normalized=True)
     #nf = NetFlowsRanking(g)
     #t.showRankingConsensusQuality(nf.netFlowsRanking)

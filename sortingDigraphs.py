@@ -4126,6 +4126,7 @@ class LearnedQuantilesRatingDigraph(QuantilesSortingDigraph,PerformanceQuantiles
 
     def _htmlRatingHeatmap(self,argCriteriaList=None,
                                argActionsList=None,
+                               WithActionNames=False,
                                #quantiles=None,
                                ndigits=2,
                                contentCentered=True,
@@ -4306,10 +4307,13 @@ class LearnedQuantilesRatingDigraph(QuantilesSortingDigraph,PerformanceQuantiles
                 else:
                     xName = '- ' + categories[xcat]['highLimit']
             else:
-                try:
-                    xName = self.actions[x]['shortName']
-                except:
-                    xName = str(x)
+                if WithActionNames:
+                    xName = self.actions[x]['name']
+                else:
+                    try:
+                        xName = self.actions[x]['shortName']
+                    except:
+                        xName = str(x)
             if x in profiles:
                 html += '<tr class="quantile"><th bgcolor=%s>%s</th>' % (rowHeaderColor,xName)
             else:
@@ -4400,6 +4404,7 @@ class LearnedQuantilesRatingDigraph(QuantilesSortingDigraph,PerformanceQuantiles
         print('Please use the showHTMLRatingHeatmap() here !!')
     
     def showHTMLRatingHeatmap(self,actionsList=None,
+                              WithActionNames=False,
                                    criteriaList=None,
                                    colorLevels=7,
                                    pageTitle=None,
@@ -4447,6 +4452,7 @@ class LearnedQuantilesRatingDigraph(QuantilesSortingDigraph,PerformanceQuantiles
         #quantiles = len(self.quantilesFrequencies)
         fo.write(self._htmlRatingHeatmap(argCriteriaList=criteriaList,
                                              argActionsList=actionsList,
+                                         WithActionNames=WithActionNames,
                                              #quantiles=quantiles,
                                              ndigits=ndigits,
                                              colorLevels=colorLevels,
