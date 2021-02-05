@@ -2164,7 +2164,7 @@
 <span class="sd">        * When no *actionsList* is provided, the decision actions are ordered from the best to the worst. This</span>
 <span class="sd">          ranking is obtained by default with the Copeland rule applied on a standard *BipolarOutrankingDigraph*.</span>
 <span class="sd">        * When the *SparseModel* flag is put to *True*, a sparse *PreRankedOutrankingDigraph* construction is used instead.</span>
-<span class="sd">        * the *outrankingModel* parameter (default = &#39;standard&#39;) allows to switch to alternative BipolarOutrankingDigraph constructors, like the &#39;confident&#39; or &#39;robust&#39; models.             </span>
+<span class="sd">        * the *outrankingModel* parameter (default = &#39;standard&#39;) allows to switch to alternative BipolarOutrankingDigraph constructors, like the &#39;confident&#39; or &#39;robust&#39; models. When called from a bipolar-valued outrankingDigraph instance, *outrankingModel* = &#39;this&#39; keeps the current outranking model without recomputing by default the standard outranking model.            </span>
 <span class="sd">        * The *minimalComponentSize* allows to control the fill rate of the pre-ranked model.</span>
 <span class="sd">          When *minimalComponentSize* = *n* (the number of decision actions) both the pre-ranked model will be</span>
 <span class="sd">          in fact equivalent to the standard model.</span>
@@ -2354,7 +2354,10 @@
                 <span class="k">elif</span> <span class="n">outrankingModel</span> <span class="o">==</span> <span class="s1">&#39;robust&#39;</span><span class="p">:</span>
                     <span class="kn">from</span> <span class="nn">outrankingDigraphs</span> <span class="k">import</span> <span class="n">RobustOutrankingDigraph</span>
                     <span class="n">g</span> <span class="o">=</span> <span class="n">RobustOutrankingDigraph</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
-                    
+                <span class="k">elif</span> <span class="n">outrankingModel</span> <span class="o">==</span> <span class="s1">&#39;this&#39;</span><span class="p">:</span>
+                    <span class="n">g</span> <span class="o">=</span> <span class="bp">self</span>                 
+                <span class="k">else</span><span class="p">:</span>
+                    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;!!! Error: outrankingModel &quot;</span><span class="si">%s</span><span class="s1">&quot; is not implemented !!!&#39;</span> <span class="o">%</span> <span class="n">outrankingModel</span> <span class="p">)</span>
                     
                 <span class="k">if</span> <span class="n">rankingRule</span> <span class="o">==</span> <span class="s1">&#39;NetFlows&#39;</span><span class="p">:</span>
                     <span class="n">actionsList</span> <span class="o">=</span> <span class="n">g</span><span class="o">.</span><span class="n">computeNetFlowsRanking</span><span class="p">()</span>
@@ -7521,14 +7524,20 @@
 <span class="c1">##                                   Debug=False))</span>
     <span class="n">t</span><span class="o">.</span><span class="n">showHTMLPerformanceHeatmap</span><span class="p">(</span><span class="n">Correlations</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span><span class="n">colorLevels</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span>
                                  <span class="n">rankingRule</span><span class="o">=</span><span class="s1">&#39;NetFlows&#39;</span><span class="p">,</span><span class="n">Transposed</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
-    <span class="n">t</span><span class="o">.</span><span class="n">showHTMLPerformanceHeatmap</span><span class="p">(</span><span class="n">outrankingModel</span><span class="o">=</span><span class="s1">&#39;standard&#39;</span><span class="p">,</span><span class="n">Correlations</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span><span class="n">colorLevels</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span>
+<span class="c1">##    t.showHTMLPerformanceHeatmap(outrankingModel=&#39;this&#39;,</span>
+<span class="c1">##                                   Correlations=True,colorLevels=5,</span>
+<span class="c1">##                                rankingRule=&#39;NetFlows&#39;,Transposed=False)</span>
+    <span class="n">t</span><span class="o">.</span><span class="n">showHTMLPerformanceHeatmap</span><span class="p">(</span><span class="n">outrankingModel</span><span class="o">=</span><span class="s1">&#39;confident&#39;</span><span class="p">,</span>
+                                 <span class="n">Correlations</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span><span class="n">colorLevels</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span>
                                  <span class="n">rankingRule</span><span class="o">=</span><span class="s1">&#39;NetFlows&#39;</span><span class="p">,</span><span class="n">Transposed</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
-    <span class="n">t</span><span class="o">.</span><span class="n">showHTMLPerformanceHeatmap</span><span class="p">(</span><span class="n">outrankingModel</span><span class="o">=</span><span class="s1">&#39;confident&#39;</span><span class="p">,</span><span class="n">Correlations</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span><span class="n">colorLevels</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span>
-                                 <span class="n">rankingRule</span><span class="o">=</span><span class="s1">&#39;NetFlows&#39;</span><span class="p">,</span><span class="n">Transposed</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
-    <span class="n">t</span><span class="o">.</span><span class="n">showHTMLPerformanceHeatmap</span><span class="p">(</span><span class="n">outrankingModel</span><span class="o">=</span><span class="s1">&#39;robust&#39;</span><span class="p">,</span><span class="n">Correlations</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span><span class="n">colorLevels</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span>
+    <span class="n">t</span><span class="o">.</span><span class="n">showHTMLPerformanceHeatmap</span><span class="p">(</span><span class="n">outrankingModel</span><span class="o">=</span><span class="s1">&#39;robust&#39;</span><span class="p">,</span>
+                                 <span class="n">Correlations</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span><span class="n">colorLevels</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span>
                                  <span class="n">rankingRule</span><span class="o">=</span><span class="s1">&#39;NetFlows&#39;</span><span class="p">,</span><span class="n">Transposed</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
 
-    <span class="c1">#g = BipolarOutrankingDigraph(t,Normalized=True)</span>
+    <span class="n">g</span> <span class="o">=</span> <span class="n">RobustOutrankingDigraph</span><span class="p">(</span><span class="n">t</span><span class="p">)</span>
+    <span class="n">g</span><span class="o">.</span><span class="n">showHTMLPerformanceHeatmap</span><span class="p">(</span><span class="n">outrankingModel</span><span class="o">=</span><span class="s1">&#39;this&#39;</span><span class="p">,</span>
+                                   <span class="n">Correlations</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span><span class="n">colorLevels</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span>
+                                 <span class="n">rankingRule</span><span class="o">=</span><span class="s1">&#39;NetFlows&#39;</span><span class="p">,</span><span class="n">Transposed</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
     <span class="c1">#nf = NetFlowsRanking(g)</span>
     <span class="c1">#t.showRankingConsensusQuality(nf.netFlowsRanking)</span>
 <span class="c1">##    t.showHTMLPerformanceHeatmap(Correlations=True,colorLevels=5,</span>

@@ -12,23 +12,24 @@ a07 [shape = "circle", label = "a07", fontsize=10];
 a08 [shape = "circle", label = "a08", fontsize=10];
 a09 [shape = "circle", label = "a09", fontsize=10];
 a10 [shape = "circle", label = "a10", fontsize=10];
-{ rank = 0; a05; a10; }
-{ rank = 1; a08; }
-{ rank = 2; a03; }
-{ rank = 3; a07; }
-{ rank = 4; a06; }
-{ rank = 5; a09; }
+{ rank = 0; a09; }
+{ rank = 1; a10; }
+{ rank = 2; a07; }
+{ rank = 3; a04; }
+{ rank = 4; a05; }
+{ rank = 5; a03; }
 { rank = 6; a01; }
-{ rank = 7; a04; }
+{ rank = 7; a06; a08; }
 { rank = 8; a02; }
-a05-> a08 [style="setlinewidth(1)",color=black] ;
-a10-> a08 [style="setlinewidth(1)",color=black] ;
-a08-> a03 [style="setlinewidth(1)",color=black] ;
-a03-> a07 [style="setlinewidth(1)",color=black] ;
-a07-> a06 [style="setlinewidth(1)",color=black] ;
-a06-> a09 [style="setlinewidth(1)",color=black] ;
-a09-> a01 [style="setlinewidth(1)",color=black] ;
-a01-> a04 [style="setlinewidth(1)",color=black] ;
-a04-> a02 [style="setlinewidth(1)",color=black] ;
+a09-> a10 [style="setlinewidth(1)",color=black] ;
+a10-> a07 [style="setlinewidth(1)",color=black] ;
+a07-> a04 [style="setlinewidth(1)",color=black] ;
+a04-> a05 [style="setlinewidth(1)",color=black] ;
+a05-> a03 [style="setlinewidth(1)",color=black] ;
+a03-> a01 [style="setlinewidth(1)",color=black] ;
+a01-> a06 [style="setlinewidth(1)",color=black] ;
+a01-> a08 [style="setlinewidth(1)",color=black] ;
+a06-> a02 [style="setlinewidth(1)",color=black] ;
+a08-> a02 [style="setlinewidth(1)",color=black] ;
 }
  

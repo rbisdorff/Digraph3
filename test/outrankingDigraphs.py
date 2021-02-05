@@ -4346,7 +4346,7 @@ class BipolarOutrankingDigraph(OutrankingDigraph):
                 reprString += 'Uncertainty model  : %s(a=%s,b=%s\n) ' %\
                              (self.distribution,'0','2w') 
             reprString += 'Likelihood domain  : [-1.0;+1.0]\n'
-            reprString += 'Confidence level   : %.2f (%.1f%%\n)' %\
+            reprString += 'Confidence level   : %.2f (%.1f%%)\n' %\
                          (self.bipolarConfidenceLevel,\
                          (self.bipolarConfidenceLevel+1.0)/2.0*100.0)
             reprString += 'Confident majority : %.2f (%.1f%%)\n' %\

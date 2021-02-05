@@ -4964,7 +4964,7 @@ the decision alternatives, resp. criteria, in a given ordering.</p></li>
 <li><p>When no <em>actionsList</em> is provided, the decision actions are ordered from the best to the worst. This
 ranking is obtained by default with the Copeland rule applied on a standard <em>BipolarOutrankingDigraph</em>.</p></li>
 <li><p>When the <em>SparseModel</em> flag is put to <em>True</em>, a sparse <em>PreRankedOutrankingDigraph</em> construction is used instead.</p></li>
-<li><p>the <em>outrankingModel</em> parameter (default = ‘standard’) allows to switch to alternative BipolarOutrankingDigraph constructors, like the ‘confident’ or ‘robust’ models.</p></li>
+<li><p>the <em>outrankingModel</em> parameter (default = ‘standard’) allows to switch to alternative BipolarOutrankingDigraph constructors, like the ‘confident’ or ‘robust’ models. When called from a bipolar-valued outrankingDigraph instance, <em>outrankingModel</em> = ‘this’ keeps the current outranking model without recomputing by default the standard outranking model.</p></li>
 <li><p>The <em>minimalComponentSize</em> allows to control the fill rate of the pre-ranked model.
 When <em>minimalComponentSize</em> = <em>n</em> (the number of decision actions) both the pre-ranked model will be
 in fact equivalent to the standard model.</p></li>
@@ -7387,7 +7387,7 @@ the decision alternatives, resp. criteria, in a given ordering.</p></li>
 <li><p>When no <em>actionsList</em> is provided, the decision actions are ordered from the best to the worst. This
 ranking is obtained by default with the Copeland rule applied on a standard <em>BipolarOutrankingDigraph</em>.</p></li>
 <li><p>When the <em>SparseModel</em> flag is put to <em>True</em>, a sparse <em>PreRankedOutrankingDigraph</em> construction is used instead.</p></li>
-<li><p>the <em>outrankingModel</em> parameter (default = ‘standard’) allows to switch to alternative BipolarOutrankingDigraph constructors, like the ‘confident’ or ‘robust’ models.</p></li>
+<li><p>the <em>outrankingModel</em> parameter (default = ‘standard’) allows to switch to alternative BipolarOutrankingDigraph constructors, like the ‘confident’ or ‘robust’ models. When called from a bipolar-valued outrankingDigraph instance, <em>outrankingModel</em> = ‘this’ keeps the current outranking model without recomputing by default the standard outranking model.</p></li>
 <li><p>The <em>minimalComponentSize</em> allows to control the fill rate of the pre-ranked model.
 When <em>minimalComponentSize</em> = <em>n</em> (the number of decision actions) both the pre-ranked model will be
 in fact equivalent to the standard model.</p></li>

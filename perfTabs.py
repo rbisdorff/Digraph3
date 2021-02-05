@@ -1997,7 +1997,7 @@ The performance evaluations of each decision alternative on each criterion are g
         * When no *actionsList* is provided, the decision actions are ordered from the best to the worst. This
           ranking is obtained by default with the Copeland rule applied on a standard *BipolarOutrankingDigraph*.
         * When the *SparseModel* flag is put to *True*, a sparse *PreRankedOutrankingDigraph* construction is used instead.
-        * the *outrankingModel* parameter (default = 'standard') allows to switch to alternative BipolarOutrankingDigraph constructors, like the 'confident' or 'robust' models.             
+        * the *outrankingModel* parameter (default = 'standard') allows to switch to alternative BipolarOutrankingDigraph constructors, like the 'confident' or 'robust' models. When called from a bipolar-valued outrankingDigraph instance, *outrankingModel* = 'this' keeps the current outranking model without recomputing by default the standard outranking model.            
         * The *minimalComponentSize* allows to control the fill rate of the pre-ranked model.
           When *minimalComponentSize* = *n* (the number of decision actions) both the pre-ranked model will be
           in fact equivalent to the standard model.
@@ -2187,7 +2187,10 @@ The performance evaluations of each decision alternative on each criterion are g
                 elif outrankingModel == 'robust':
                     from outrankingDigraphs import RobustOutrankingDigraph
                     g = RobustOutrankingDigraph(self)
-                    
+                elif outrankingModel == 'this':
+                    g = self                 
+                else:
+                    print('!!! Error: outrankingModel "%s" is not implemented !!!' % outrankingModel )
                     
                 if rankingRule == 'NetFlows':
                     actionsList = g.computeNetFlowsRanking()
@@ -7354,14 +7357,20 @@ if __name__ == "__main__":
 ##                                   Debug=False))
     t.showHTMLPerformanceHeatmap(Correlations=True,colorLevels=5,
                                  rankingRule='NetFlows',Transposed=False)
-    t.showHTMLPerformanceHeatmap(outrankingModel='standard',Correlations=True,colorLevels=5,
+##    t.showHTMLPerformanceHeatmap(outrankingModel='this',
+##                                   Correlations=True,colorLevels=5,
+##                                rankingRule='NetFlows',Transposed=False)
+    t.showHTMLPerformanceHeatmap(outrankingModel='confident',
+                                 Correlations=True,colorLevels=5,
                                  rankingRule='NetFlows',Transposed=False)
-    t.showHTMLPerformanceHeatmap(outrankingModel='confident',Correlations=True,colorLevels=5,
-                                 rankingRule='NetFlows',Transposed=False)
-    t.showHTMLPerformanceHeatmap(outrankingModel='robust',Correlations=True,colorLevels=5,
+    t.showHTMLPerformanceHeatmap(outrankingModel='robust',
+                                 Correlations=True,colorLevels=5,
                                  rankingRule='NetFlows',Transposed=False)
 
-    #g = BipolarOutrankingDigraph(t,Normalized=True)
+    g = RobustOutrankingDigraph(t)
+    g.showHTMLPerformanceHeatmap(outrankingModel='this',
+                                   Correlations=True,colorLevels=5,
+                                 rankingRule='NetFlows',Transposed=False)
     #nf = NetFlowsRanking(g)
     #t.showRankingConsensusQuality(nf.netFlowsRanking)
 ##    t.showHTMLPerformanceHeatmap(Correlations=True,colorLevels=5,

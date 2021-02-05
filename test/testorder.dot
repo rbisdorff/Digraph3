@@ -2,10 +2,10 @@ digraph G {
 graph [ bgcolor = cornsilk, ordering = out, fontname = "Helvetica-Oblique",
  fontsize = 12,
  label = "\nDigraph3 (graphviz), R. Bisdorff, 2015", size="7,7"];
-n1 [shape = "circle", label = "a1"];
-n2 [shape = "circle", label = "a2"];
-n3 [shape = "circle", label = "a4"];
-n4 [shape = "circle", label = "a5"];
+n1 [shape = "circle", label = "a5"];
+n2 [shape = "circle", label = "a4"];
+n3 [shape = "circle", label = "a1"];
+n4 [shape = "circle", label = "a2"];
 n5 [shape = "circle", label = "a3"];
 n1-> n2 [dir=forward,style="setlinewidth(-1)",color=grey, arrowhead=normal] ;
 n2-> n3 [dir=forward,style="setlinewidth(-1)",color=grey, arrowhead=normal] ;
