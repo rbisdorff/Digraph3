@@ -48,15 +48,15 @@
 \contentsline {subsection}{\numberline {6.6}\sphinxstyleemphasis {Kohler}’s ranking\sphinxhyphen {}by\sphinxhyphen {}choosing rule}{73}{subsection.6.6}%
 \contentsline {subsection}{\numberline {6.7}\sphinxstyleemphasis {Tideman}’s ranked\sphinxhyphen {}pairs rule}{75}{subsection.6.7}%
 \contentsline {section}{\numberline {7}Where to study \sphinxstyleemphasis {Computer Science}: a \sphinxstyleemphasis {ranking} case study}{76}{section.7}%
-\contentsline {subsection}{\numberline {7.1}The THE performance tableau}{77}{subsection.7.1}%
-\contentsline {subsection}{\numberline {7.2}Ranking\sphinxhyphen {}by\sphinxhyphen {}scoring with multiple criteria of ordinal significance}{82}{subsection.7.2}%
-\contentsline {subsection}{\numberline {7.3}Ranking with multiple criteria of uncertain significance}{86}{subsection.7.3}%
+\contentsline {subsection}{\numberline {7.1}The \sphinxstyleemphasis {THE} performance tableau}{77}{subsection.7.1}%
+\contentsline {subsection}{\numberline {7.2}Ranking\sphinxhyphen {}by\sphinxhyphen {}scoring with multiple criteria of ordinal significance}{83}{subsection.7.2}%
+\contentsline {subsection}{\numberline {7.3}Ranking with multiple criteria of uncertain significance}{87}{subsection.7.3}%
 \contentsline {section}{\numberline {8}Computing a best choice recommendation}{88}{section.8}%
-\contentsline {subsection}{\numberline {8.1}What site to choose ?}{88}{subsection.8.1}%
+\contentsline {subsection}{\numberline {8.1}What site to choose ?}{89}{subsection.8.1}%
 \contentsline {subsection}{\numberline {8.2}Performance tableau}{90}{subsection.8.2}%
 \contentsline {subsection}{\numberline {8.3}Outranking digraph}{92}{subsection.8.3}%
 \contentsline {subsection}{\numberline {8.4}\sphinxstyleemphasis {Rubis} best choice recommendations}{94}{subsection.8.4}%
-\contentsline {subsection}{\numberline {8.5}Computing \sphinxstyleemphasis {strict best} choice recommendations}{96}{subsection.8.5}%
+\contentsline {subsection}{\numberline {8.5}Computing \sphinxstyleemphasis {strict best} choice recommendations}{97}{subsection.8.5}%
 \contentsline {subsection}{\numberline {8.6}Weakly ordering the outranking digraph}{98}{subsection.8.6}%
 \contentsline {section}{\numberline {9}Alice’s best choice: A \sphinxstyleemphasis {selection} case study }{100}{section.9}%
 \contentsline {subsection}{\numberline {9.1}The decision problem}{101}{subsection.9.1}%
