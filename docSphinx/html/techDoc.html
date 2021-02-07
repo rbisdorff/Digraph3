@@ -435,16 +435,17 @@ class. Notice that the outrankingDigraph class defines a hybrid object type, inh
 <li><dl>
 <dt><a class="reference internal" href="#votingprofiles-label"><span class="std std-ref">votingProfiles module</span></a></dt><dd><p>Classes and methods for handling voting ballots and computing election results
 with main <a class="reference external" href="techDoc.html#votingProfiles.LinearVotingProfile">LinearVotingProfile</a> class.</p>
-<div class="graphviz"><img src="_images/inheritance-8c502b7952689ef66b140d9b4fb2b2c0148e17b8.png" alt="Inheritance diagram of votingProfiles" usemap="#inheritance701037580f" class="inheritance graphviz" /></div>
+<div class="graphviz"><img src="_images/inheritance-b75fb099048aa6692d7a4dff2f9aab0f7fe8d18d.png" alt="Inheritance diagram of votingProfiles" usemap="#inheritance701037580f" class="inheritance graphviz" /></div>
 <map id="inheritance701037580f" name="inheritance701037580f">
-<area shape="rect" id="node1" href="#votingProfiles.ApprovalVotingProfile" target="_top" title="A specialised class for approval voting profiles" alt="" coords="148,55,295,80"/>
-<area shape="rect" id="node6" href="#votingProfiles.RandomApprovalVotingProfile" target="_top" title="A specialized class for generating random approval voting profiles." alt="" coords="343,55,537,80"/>
-<area shape="rect" id="node2" href="#votingProfiles.VotingProfile" target="_top" title="A generic class for storing voting profiles." alt="" coords="5,80,100,105"/>
-<area shape="rect" id="node3" href="#votingProfiles.CondorcetDigraph" target="_top" title="Specialization of the general Digraph class for generating" alt="" coords="158,5,285,31"/>
-<area shape="rect" id="node5" href="#votingProfiles.LinearVotingProfile" target="_top" title="A specialised class for linear voting profiles" alt="" coords="156,104,287,129"/>
-<area shape="rect" id="node8" href="#votingProfiles.RandomVotingProfile" target="_top" title="A subclass for generating random voting profiles." alt="" coords="149,153,293,179"/>
-<area shape="rect" id="node4" href="#digraphs.Digraph" target="_top" title="Genuine root class of all Digraph3 modules." alt="" coords="17,5,89,31"/>
-<area shape="rect" id="node7" href="#votingProfiles.RandomLinearVotingProfile" target="_top" title="A specialized class for generating random liwear voting profiles." alt="" coords="351,104,529,129"/>
+<area shape="rect" id="node1" href="#votingProfiles.ApprovalVotingProfile" target="_top" title="A specialised class for approval voting profiles" alt="" coords="165,55,328,80"/>
+<area shape="rect" id="node7" href="#votingProfiles.RandomApprovalVotingProfile" target="_top" title="A specialized class for generating random approval voting profiles." alt="" coords="384,55,600,80"/>
+<area shape="rect" id="node2" href="#votingProfiles.VotingProfile" target="_top" title="A generic class for storing voting profiles." alt="" coords="5,79,109,104"/>
+<area shape="rect" id="node4" href="#votingProfiles.MajorityMarginsDigraph" target="_top" title="Specialization of the general Digraph class for generating" alt="" coords="157,5,336,31"/>
+<area shape="rect" id="node6" href="#votingProfiles.LinearVotingProfile" target="_top" title="A specialised class for linear voting profiles" alt="" coords="175,153,319,179"/>
+<area shape="rect" id="node9" href="#votingProfiles.RandomVotingProfile" target="_top" title="A subclass for generating random voting profiles." alt="" coords="167,104,326,129"/>
+<area shape="rect" id="node3" href="#votingProfiles.CondorcetDigraph" target="_top" title="Dummy obsolete class name for MajorityMarginsDigraph class." alt="" coords="423,5,561,31"/>
+<area shape="rect" id="node5" href="#digraphs.Digraph" target="_top" title="Genuine root class of all Digraph3 modules." alt="" coords="21,5,94,31"/>
+<area shape="rect" id="node8" href="#votingProfiles.RandomLinearVotingProfile" target="_top" title="A specialized class for generating random liwear voting profiles." alt="" coords="393,153,591,179"/>
 </map></dd>
 </dl>
 </li>
@@ -5180,7 +5181,7 @@ influential compared to the historical data.</p>
 </div>
 <div class="section" id="randomperftabs-module">
 <span id="randomperftabs-label"></span><h2><a class="toc-backref" href="#id10">randomPerfTabs module</a><a class="headerlink" href="#randomperftabs-module" title="Permalink to this headline">¶</a></h2>
-<p>A tutorial with coding examples is available here: <a class="reference internal" href="tutorial.html#randomperformancetableau-tutorial-label"><span class="std std-ref">Generating random performance tableaux</span></a></p>
+<p>A tutorial with coding examples is available here: <a class="reference internal" href="tutorial.html#randomperformancetableau-tutorial-label"><span class="std std-ref">Generating random performance tableaux with the randPerfTabs module</span></a></p>
 <span class="target" id="module-randomPerfTabs"></span><p>Python implementation of digraphs
 Module for generating random performance tableaux  
 Copyright (C) 2015-2020  Raymond Bisdorff</p>
@@ -7874,7 +7875,7 @@ the high category limit.</p>
 </div>
 <div class="section" id="votingprofiles-module">
 <span id="votingprofiles-label"></span><h2><a class="toc-backref" href="#id15">votingProfiles module</a><a class="headerlink" href="#votingprofiles-module" title="Permalink to this headline">¶</a></h2>
-<p>A tutorial with coding examples is available here: <a class="reference internal" href="tutorial.html#linearvoting-tutorial-label"><span class="std std-ref">Computing the winner of an election</span></a></p>
+<p>A tutorial with coding examples is available here: <a class="reference internal" href="tutorial.html#linearvoting-tutorial-label"><span class="std std-ref">Computing the winner of an election with the votingProfiles module</span></a></p>
 <span class="target" id="module-votingProfiles"></span><p>Python 3 implementation of voting digraphs
 Refactored from revision 1.549 of the digraphs module
 Copyright (C) 2011-2020 Raymond Bisdorff</p>
@@ -7964,132 +7965,7 @@ For each voter <em>v</em>, the performance of candidate <em>x</em> corresponds t
 <dl class="py class">
 <dt id="votingProfiles.CondorcetDigraph">
 <em class="property">class </em><code class="sig-prename descclassname">votingProfiles.</code><code class="sig-name descname">CondorcetDigraph</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">argVotingProfile</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">approvalVoting</span><span class="o">=</span><span class="default_value">False</span></em>, <em class="sig-param"><span class="n">coalition</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">majorityMargins</span><span class="o">=</span><span class="default_value">True</span></em>, <em class="sig-param"><span class="n">hasIntegerValuation</span><span class="o">=</span><span class="default_value">True</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/votingProfiles.html#CondorcetDigraph"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#votingProfiles.CondorcetDigraph" title="Permalink to this definition">¶</a></dt>
-<dd><p>Specialization of the general Digraph class for generating
-bipolar-valued marginal pairwise majority difference digraphs.</p>
-<p>Parameters:</p>
-<blockquote>
-<div><div class="line-block">
-<div class="line">stored voting profile (fileName of valid py code) or voting profile object</div>
-<div class="line">optional, coalition (sublist of voters)</div>
-</div>
-</div></blockquote>
-<p>Example Python3 session</p>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">votingDigraphs</span> <span class="k">import</span> <span class="o">*</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">v</span> <span class="o">=</span> <span class="n">RandomLinearVotingProfile</span><span class="p">(</span><span class="n">numberOfVoters</span><span class="o">=</span><span class="mi">101</span><span class="p">,</span><span class="n">numberOfCandidates</span><span class="o">=</span><span class="mi">5</span><span class="p">)</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">v</span><span class="o">.</span><span class="n">showLinearBallots</span><span class="p">()</span>
-<span class="go">v101(1.0):   [&#39;a5&#39;, &#39;a1&#39;, &#39;a2&#39;, &#39;a4&#39;, &#39;a3&#39;]</span>
-<span class="go">v100(1.0):   [&#39;a4&#39;, &#39;a1&#39;, &#39;a5&#39;, &#39;a3&#39;, &#39;a2&#39;]</span>
-<span class="go">v89(1.0):    [&#39;a4&#39;, &#39;a5&#39;, &#39;a1&#39;, &#39;a2&#39;, &#39;a3&#39;]</span>
-<span class="go">v88(1.0):    [&#39;a3&#39;, &#39;a2&#39;, &#39;a5&#39;, &#39;a1&#39;, &#39;a4&#39;]</span>
-<span class="go">v87(1.0):    [&#39;a5&#39;, &#39;a2&#39;, &#39;a4&#39;, &#39;a3&#39;, &#39;a1&#39;]</span>
-<span class="go">v86(1.0):    [&#39;a5&#39;, &#39;a3&#39;, &#39;a1&#39;, &#39;a4&#39;, &#39;a2&#39;]</span>
-<span class="go">v85(1.0):    [&#39;a5&#39;, &#39;a3&#39;, &#39;a2&#39;, &#39;a4&#39;, &#39;a1&#39;]</span>
-<span class="go">v84(1.0):    [&#39;a3&#39;, &#39;a1&#39;, &#39;a2&#39;, &#39;a4&#39;, &#39;a5&#39;]</span>
-<span class="gp">...</span>
-<span class="gp">...</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">g</span> <span class="o">=</span> <span class="n">CondorcetDigraph</span><span class="p">(</span><span class="n">v</span><span class="p">,</span><span class="n">hasIntegerValuation</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">g</span><span class="o">.</span><span class="n">showRelationTable</span><span class="p">()</span>
-<span class="go">* ---- Relation Table -----</span>
-<span class="go"> S   |  &#39;a1&#39;  &#39;a2&#39;   &#39;a3&#39;   &#39;a4&#39;  &#39;a5&#39;        </span>
-<span class="go">-----|------------------------------------------------------------</span>
-<span class="go">&#39;a1&#39; |   -     33     9      11    21        </span>
-<span class="go">&#39;a2&#39; |  -33    -     -19     -1    -5        </span>
-<span class="go">&#39;a3&#39; |  -9     19    -       5     -1        </span>
-<span class="go">&#39;a4&#39; |  -11    1      -5     -     -9        </span>
-<span class="go">&#39;a5&#39; |  -21    5       1     9      -</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">g</span><span class="o">.</span><span class="n">computeCondorcetWinner</span><span class="p">()</span>
-<span class="go">[&#39;a1&#39;]</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">g</span><span class="o">.</span><span class="n">exportGraphViz</span><span class="p">()</span>
-<span class="go">*---- exporting a dot file for GraphViz tools ---------*</span>
-<span class="go">Exporting to rel_randLinearProfile.dot</span>
-<span class="go">dot -Grankdir=BT -Tpng rel_randLinearProfile.dot -o rel_randLinearProfile.png</span>
-</pre></div>
-</div>
-<img alt="_images/rel_randLinearProfile.png" src="_images/rel_randLinearProfile.png" />
-<dl class="py method">
-<dt id="votingProfiles.CondorcetDigraph.computeArrowRaynaudRanking">
-<code class="sig-name descname">computeArrowRaynaudRanking</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">linearOrdered</span><span class="o">=</span><span class="default_value">True</span></em>, <em class="sig-param"><span class="n">Debug</span><span class="o">=</span><span class="default_value">False</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/votingProfiles.html#CondorcetDigraph.computeArrowRaynaudRanking"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#votingProfiles.CondorcetDigraph.computeArrowRaynaudRanking" title="Permalink to this definition">¶</a></dt>
-<dd><p>Renders a ranking of the actions following Arrow&amp;Raynaud’s rule.</p>
-</dd></dl>
-
-<dl class="py method">
-<dt id="votingProfiles.CondorcetDigraph.computeCondorcetWinner">
-<code class="sig-name descname">computeCondorcetWinner</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/votingProfiles.html#CondorcetDigraph.computeCondorcetWinner"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#votingProfiles.CondorcetDigraph.computeCondorcetWinner" title="Permalink to this definition">¶</a></dt>
-<dd><p>compute the Condorcet winner(s)
-renders always a, potentially empty, list</p>
-</dd></dl>
-
-<dl class="py method">
-<dt id="votingProfiles.CondorcetDigraph.computeCopelandRanking">
-<code class="sig-name descname">computeCopelandRanking</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">Debug</span><span class="o">=</span><span class="default_value">False</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/votingProfiles.html#CondorcetDigraph.computeCopelandRanking"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#votingProfiles.CondorcetDigraph.computeCopelandRanking" title="Permalink to this definition">¶</a></dt>
-<dd><p>Renders a ranking of the actions following Copeland’s rule.
-Score(x_i) = Sum_j{ [[x_i &gt; x_j]] - [[x_j &gt; x_i]]}, where
-[[x &gt; y]] = 1 if x&gt;y is true, otherwise 0.</p>
-<p>The alternatives are ranked in decreasing order of their Scores.</p>
-<p>In case of a tie, we use a lexicographic rule applied to the identifiers.</p>
-</dd></dl>
-
-<dl class="py method">
-<dt id="votingProfiles.CondorcetDigraph.computeKohlerRanking">
-<code class="sig-name descname">computeKohlerRanking</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">linearOrdered</span><span class="o">=</span><span class="default_value">True</span></em>, <em class="sig-param"><span class="n">Debug</span><span class="o">=</span><span class="default_value">False</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/votingProfiles.html#CondorcetDigraph.computeKohlerRanking"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#votingProfiles.CondorcetDigraph.computeKohlerRanking" title="Permalink to this definition">¶</a></dt>
-<dd><p>Renders a ranking of the actions following Kohler’s rule.</p>
-</dd></dl>
-
-<dl class="py method">
-<dt id="votingProfiles.CondorcetDigraph.computeNetFlowsRanking">
-<code class="sig-name descname">computeNetFlowsRanking</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">Debug</span><span class="o">=</span><span class="default_value">False</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/votingProfiles.html#CondorcetDigraph.computeNetFlowsRanking"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#votingProfiles.CondorcetDigraph.computeNetFlowsRanking" title="Permalink to this definition">¶</a></dt>
-<dd><p>Renders a ranking of the actions following the Net Flows rule.
-Score(x_i) = Sum_j{M(x_i,x_j)} for i,j = 1..n</p>
-<p>The alternatives are ranked in decreasing order of their Scores.</p>
-<p>In case of a tie, we use a lexicographic rule applied to the identifiers.</p>
-</dd></dl>
-
-<dl class="py method">
-<dt id="votingProfiles.CondorcetDigraph.constructApprovalBallotRelation">
-<code class="sig-name descname">constructApprovalBallotRelation</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">hasIntegerValuation</span><span class="o">=</span><span class="default_value">False</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/votingProfiles.html#CondorcetDigraph.constructApprovalBallotRelation"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#votingProfiles.CondorcetDigraph.constructApprovalBallotRelation" title="Permalink to this definition">¶</a></dt>
-<dd><p>Renders the votes differences between candidates
-on the basis of an approval ballot.</p>
-</dd></dl>
-
-<dl class="py method">
-<dt id="votingProfiles.CondorcetDigraph.constructBallotRelation">
-<code class="sig-name descname">constructBallotRelation</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">hasIntegerValuation</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/votingProfiles.html#CondorcetDigraph.constructBallotRelation"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#votingProfiles.CondorcetDigraph.constructBallotRelation" title="Permalink to this definition">¶</a></dt>
-<dd><p>Renders the marginal majority between candidates
-on the basis of a complete ballot.</p>
-</dd></dl>
-
-<dl class="py method">
-<dt id="votingProfiles.CondorcetDigraph.constructMajorityMarginsRelation">
-<code class="sig-name descname">constructMajorityMarginsRelation</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">hasIntegerValuation</span><span class="o">=</span><span class="default_value">True</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/votingProfiles.html#CondorcetDigraph.constructMajorityMarginsRelation"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#votingProfiles.CondorcetDigraph.constructMajorityMarginsRelation" title="Permalink to this definition">¶</a></dt>
-<dd><p>Renders the marginal majority between candidates
-on the basis of an approval ballot.</p>
-</dd></dl>
-
-<dl class="py method">
-<dt id="votingProfiles.CondorcetDigraph.showMajorityMargins">
-<code class="sig-name descname">showMajorityMargins</code><span class="sig-paren">(</span><em class="sig-param"><span class="o">**</span><span class="n">args</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/votingProfiles.html#CondorcetDigraph.showMajorityMargins"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#votingProfiles.CondorcetDigraph.showMajorityMargins" title="Permalink to this definition">¶</a></dt>
-<dd><p>Wrapper for the
-Digraph.showRelationTable(Sorted=True, IntegerValues=False,
-actionsSubset=None, relation=None, ndigits=2,
-ReflexiveTerms=True)</p>
-<p>See the <a class="reference internal" href="#digraphs.Digraph.showRelationTable" title="digraphs.Digraph.showRelationTable"><code class="xref py py-meth docutils literal notranslate"><span class="pre">digraphs.Digraph.showRelationTable()</span></code></a> description.</p>
-</dd></dl>
-
-<dl class="py method">
-<dt id="votingProfiles.CondorcetDigraph.showRankingByChoosing">
-<code class="sig-name descname">showRankingByChoosing</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">rankingByChoosing</span><span class="o">=</span><span class="default_value">None</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/votingProfiles.html#CondorcetDigraph.showRankingByChoosing"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#votingProfiles.CondorcetDigraph.showRankingByChoosing" title="Permalink to this definition">¶</a></dt>
-<dd><p>A specialized show method for self.rankinByChoosing result from CondorcetDigraphs.</p>
-<p>The bracketed numbers  following the reiterated <em>first</em> and <em>last</em> choices,
-indicate the average majority margin with which the <em>i</em>-th <em>first</em> choice,
-respectively the <em>i</em>-th <em>last</em> choice, is beating, resp. is beaten by,
-the remaining candidates at step <em>i</em>.</p>
-<div class="admonition warning">
-<p class="admonition-title">Warning</p>
-<p>The self.computeRankingByChoosing(CoDual=False/True) method instantiating
-the self.rankingByChoosing slot is pre-required !</p>
-</div>
-</dd></dl>
-
+<dd><p>Dummy obsolete class name for MajorityMarginsDigraph class.</p>
 </dd></dl>
 
 <dl class="py class">
@@ -8231,6 +8107,137 @@ The linear voting profile is previously saved to a stored Performance Tableau.</
 are ordered by increasing Borda Scores.</p>
 <p>In case of decimal voters weights, ndigits allows
 to format the decimal precision of the numerical output.</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt id="votingProfiles.MajorityMarginsDigraph">
+<em class="property">class </em><code class="sig-prename descclassname">votingProfiles.</code><code class="sig-name descname">MajorityMarginsDigraph</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">argVotingProfile</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">approvalVoting</span><span class="o">=</span><span class="default_value">False</span></em>, <em class="sig-param"><span class="n">coalition</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">majorityMargins</span><span class="o">=</span><span class="default_value">True</span></em>, <em class="sig-param"><span class="n">hasIntegerValuation</span><span class="o">=</span><span class="default_value">True</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/votingProfiles.html#MajorityMarginsDigraph"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#votingProfiles.MajorityMarginsDigraph" title="Permalink to this definition">¶</a></dt>
+<dd><p>Specialization of the general Digraph class for generating
+bipolar-valued marginal pairwise majority margins digraphs.</p>
+<p>Parameters:</p>
+<blockquote>
+<div><div class="line-block">
+<div class="line">stored voting profile (fileName of valid py code) or voting profile object</div>
+<div class="line">optional, coalition (sublist of voters)</div>
+</div>
+</div></blockquote>
+<p>Example Python3 session</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">votingDigraphs</span> <span class="k">import</span> <span class="o">*</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">v</span> <span class="o">=</span> <span class="n">RandomLinearVotingProfile</span><span class="p">(</span><span class="n">numberOfVoters</span><span class="o">=</span><span class="mi">101</span><span class="p">,</span><span class="n">numberOfCandidates</span><span class="o">=</span><span class="mi">5</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">v</span><span class="o">.</span><span class="n">showLinearBallots</span><span class="p">()</span>
+<span class="go">v101(1.0):   [&#39;a5&#39;, &#39;a1&#39;, &#39;a2&#39;, &#39;a4&#39;, &#39;a3&#39;]</span>
+<span class="go">v100(1.0):   [&#39;a4&#39;, &#39;a1&#39;, &#39;a5&#39;, &#39;a3&#39;, &#39;a2&#39;]</span>
+<span class="go">v89(1.0):    [&#39;a4&#39;, &#39;a5&#39;, &#39;a1&#39;, &#39;a2&#39;, &#39;a3&#39;]</span>
+<span class="go">v88(1.0):    [&#39;a3&#39;, &#39;a2&#39;, &#39;a5&#39;, &#39;a1&#39;, &#39;a4&#39;]</span>
+<span class="go">v87(1.0):    [&#39;a5&#39;, &#39;a2&#39;, &#39;a4&#39;, &#39;a3&#39;, &#39;a1&#39;]</span>
+<span class="go">v86(1.0):    [&#39;a5&#39;, &#39;a3&#39;, &#39;a1&#39;, &#39;a4&#39;, &#39;a2&#39;]</span>
+<span class="go">v85(1.0):    [&#39;a5&#39;, &#39;a3&#39;, &#39;a2&#39;, &#39;a4&#39;, &#39;a1&#39;]</span>
+<span class="go">v84(1.0):    [&#39;a3&#39;, &#39;a1&#39;, &#39;a2&#39;, &#39;a4&#39;, &#39;a5&#39;]</span>
+<span class="gp">...</span>
+<span class="gp">...</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">g</span> <span class="o">=</span> <span class="n">MajorityMarginsDigraph</span><span class="p">(</span><span class="n">v</span><span class="p">,</span><span class="n">hasIntegerValuation</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">g</span><span class="o">.</span><span class="n">showRelationTable</span><span class="p">()</span>
+<span class="go">* ---- Relation Table -----</span>
+<span class="go"> S   |  &#39;a1&#39;  &#39;a2&#39;   &#39;a3&#39;   &#39;a4&#39;  &#39;a5&#39;        </span>
+<span class="go">-----|------------------------------------------------------------</span>
+<span class="go">&#39;a1&#39; |   -     33     9      11    21        </span>
+<span class="go">&#39;a2&#39; |  -33    -     -19     -1    -5        </span>
+<span class="go">&#39;a3&#39; |  -9     19    -       5     -1        </span>
+<span class="go">&#39;a4&#39; |  -11    1      -5     -     -9        </span>
+<span class="go">&#39;a5&#39; |  -21    5       1     9      -</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">g</span><span class="o">.</span><span class="n">computeCondorcetWinner</span><span class="p">()</span>
+<span class="go">[&#39;a1&#39;]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">g</span><span class="o">.</span><span class="n">exportGraphViz</span><span class="p">()</span>
+<span class="go">*---- exporting a dot file for GraphViz tools ---------*</span>
+<span class="go">Exporting to rel_randLinearProfile.dot</span>
+<span class="go">dot -Grankdir=BT -Tpng rel_randLinearProfile.dot -o rel_randLinearProfile.png</span>
+</pre></div>
+</div>
+<img alt="_images/rel_randLinearProfile.png" src="_images/rel_randLinearProfile.png" />
+<dl class="py method">
+<dt id="votingProfiles.MajorityMarginsDigraph.computeArrowRaynaudRanking">
+<code class="sig-name descname">computeArrowRaynaudRanking</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">linearOrdered</span><span class="o">=</span><span class="default_value">True</span></em>, <em class="sig-param"><span class="n">Debug</span><span class="o">=</span><span class="default_value">False</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/votingProfiles.html#MajorityMarginsDigraph.computeArrowRaynaudRanking"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#votingProfiles.MajorityMarginsDigraph.computeArrowRaynaudRanking" title="Permalink to this definition">¶</a></dt>
+<dd><p>Renders a ranking of the actions following Arrow&amp;Raynaud’s rule.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="votingProfiles.MajorityMarginsDigraph.computeCondorcetWinner">
+<code class="sig-name descname">computeCondorcetWinner</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/votingProfiles.html#MajorityMarginsDigraph.computeCondorcetWinner"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#votingProfiles.MajorityMarginsDigraph.computeCondorcetWinner" title="Permalink to this definition">¶</a></dt>
+<dd><p>compute the Condorcet winner(s)
+renders always a, potentially empty, list</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="votingProfiles.MajorityMarginsDigraph.computeCopelandRanking">
+<code class="sig-name descname">computeCopelandRanking</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">Debug</span><span class="o">=</span><span class="default_value">False</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/votingProfiles.html#MajorityMarginsDigraph.computeCopelandRanking"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#votingProfiles.MajorityMarginsDigraph.computeCopelandRanking" title="Permalink to this definition">¶</a></dt>
+<dd><p>Renders a ranking of the actions following Copeland’s rule.
+Score(x_i) = Sum_j{ [[x_i &gt; x_j]] - [[x_j &gt; x_i]]}, where
+[[x &gt; y]] = 1 if x&gt;y is true, otherwise 0.</p>
+<p>The alternatives are ranked in decreasing order of their Scores.</p>
+<p>In case of a tie, we use a lexicographic rule applied to the identifiers.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="votingProfiles.MajorityMarginsDigraph.computeKohlerRanking">
+<code class="sig-name descname">computeKohlerRanking</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">linearOrdered</span><span class="o">=</span><span class="default_value">True</span></em>, <em class="sig-param"><span class="n">Debug</span><span class="o">=</span><span class="default_value">False</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/votingProfiles.html#MajorityMarginsDigraph.computeKohlerRanking"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#votingProfiles.MajorityMarginsDigraph.computeKohlerRanking" title="Permalink to this definition">¶</a></dt>
+<dd><p>Renders a ranking of the actions following Kohler’s rule.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="votingProfiles.MajorityMarginsDigraph.computeNetFlowsRanking">
+<code class="sig-name descname">computeNetFlowsRanking</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">Debug</span><span class="o">=</span><span class="default_value">False</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/votingProfiles.html#MajorityMarginsDigraph.computeNetFlowsRanking"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#votingProfiles.MajorityMarginsDigraph.computeNetFlowsRanking" title="Permalink to this definition">¶</a></dt>
+<dd><p>Renders a ranking of the actions following the Net Flows rule.
+Score(x_i) = Sum_j{M(x_i,x_j)} for i,j = 1..n</p>
+<p>The alternatives are ranked in decreasing order of their Scores.</p>
+<p>In case of a tie, we use a lexicographic rule applied to the identifiers.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="votingProfiles.MajorityMarginsDigraph.constructApprovalBallotRelation">
+<code class="sig-name descname">constructApprovalBallotRelation</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">hasIntegerValuation</span><span class="o">=</span><span class="default_value">False</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/votingProfiles.html#MajorityMarginsDigraph.constructApprovalBallotRelation"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#votingProfiles.MajorityMarginsDigraph.constructApprovalBallotRelation" title="Permalink to this definition">¶</a></dt>
+<dd><p>Renders the votes differences between candidates
+on the basis of an approval ballot.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="votingProfiles.MajorityMarginsDigraph.constructBallotRelation">
+<code class="sig-name descname">constructBallotRelation</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">hasIntegerValuation</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/votingProfiles.html#MajorityMarginsDigraph.constructBallotRelation"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#votingProfiles.MajorityMarginsDigraph.constructBallotRelation" title="Permalink to this definition">¶</a></dt>
+<dd><p>Renders the marginal majority between candidates
+on the basis of a complete ballot.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="votingProfiles.MajorityMarginsDigraph.constructMajorityMarginsRelation">
+<code class="sig-name descname">constructMajorityMarginsRelation</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">hasIntegerValuation</span><span class="o">=</span><span class="default_value">True</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/votingProfiles.html#MajorityMarginsDigraph.constructMajorityMarginsRelation"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#votingProfiles.MajorityMarginsDigraph.constructMajorityMarginsRelation" title="Permalink to this definition">¶</a></dt>
+<dd><p>Renders the marginal majority between candidates
+on the basis of an approval ballot.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="votingProfiles.MajorityMarginsDigraph.showMajorityMargins">
+<code class="sig-name descname">showMajorityMargins</code><span class="sig-paren">(</span><em class="sig-param"><span class="o">**</span><span class="n">args</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/votingProfiles.html#MajorityMarginsDigraph.showMajorityMargins"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#votingProfiles.MajorityMarginsDigraph.showMajorityMargins" title="Permalink to this definition">¶</a></dt>
+<dd><p>Wrapper for the
+Digraph.showRelationTable(Sorted=True, IntegerValues=False,
+actionsSubset=None, relation=None, ndigits=2,
+ReflexiveTerms=True)</p>
+<p>See the <a class="reference internal" href="#digraphs.Digraph.showRelationTable" title="digraphs.Digraph.showRelationTable"><code class="xref py py-meth docutils literal notranslate"><span class="pre">digraphs.Digraph.showRelationTable()</span></code></a> description.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="votingProfiles.MajorityMarginsDigraph.showRankingByChoosing">
+<code class="sig-name descname">showRankingByChoosing</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">rankingByChoosing</span><span class="o">=</span><span class="default_value">None</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/votingProfiles.html#MajorityMarginsDigraph.showRankingByChoosing"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#votingProfiles.MajorityMarginsDigraph.showRankingByChoosing" title="Permalink to this definition">¶</a></dt>
+<dd><p>A specialized show method for self.rankinByChoosing result from CondorcetDigraphs.</p>
+<p>The bracketed numbers  following the reiterated <em>first</em> and <em>last</em> choices,
+indicate the average majority margin with which the <em>i</em>-th <em>first</em> choice,
+respectively the <em>i</em>-th <em>last</em> choice, is beating, resp. is beaten by,
+the remaining candidates at step <em>i</em>.</p>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>The self.computeRankingByChoosing(CoDual=False/True) method instantiating
+the self.rankingByChoosing slot is pre-required !</p>
+</div>
 </dd></dl>
 
 </dd></dl>

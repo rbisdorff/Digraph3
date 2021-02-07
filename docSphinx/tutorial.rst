@@ -1121,8 +1121,8 @@ Back to :ref:`Content Table <Tutorial-label>`
 
 .. _RandomPerformanceTableau-Tutorial-label:
 
-Generating random performance tableaux
---------------------------------------
+Generating random performance tableaux with the ``randPerfTabs`` module
+-----------------------------------------------------------------------
 
 .. contents:: 
 	:depth: 2
@@ -1702,8 +1702,8 @@ Back to :ref:`Content Table <Tutorial-label>`
 
 .. _LinearVoting-Tutorial-label:
 
-Computing the winner of an election
------------------------------------
+Computing the winner of an election with the ``votingProfiles`` module
+----------------------------------------------------------------------
 
 .. contents:: 
 	:depth: 2
@@ -1849,18 +1849,18 @@ In our randomly generated election results, we are lucky: The instant runoff win
 The Condorcet winner
 ....................
 
-For instance, candidate *a1* is ranked four times before and once behind candidate *a2*. Hence the corresponding **majority margin** *M(a1,a2)* is 4 - 1 = +3. These *majority margins* define on the set of candidates what we call the **Condorcet digraph**. The :py:class:`votingProfiles.CondorcetDigraph` class (a specialization of the :py:class:`digraphs.Digraph` class) is available for handling such kind of digraphs.
+For instance, candidate *a1* is ranked four times before and once behind candidate *a2*. Hence the corresponding **majority margin** *M(a1,a2)* is 4 - 1 = +3. These *majority margins* define on the set of candidates what we call the **majority margins digraph**. The :py:class:`votingProfiles.MajorityMarginsDigraph` class (a specialization of the :py:class:`digraphs.Digraph` class) is available for handling such kind of digraphs.
 
 .. code-block:: pycon
    :name: condorcetDigraph
-   :caption: Example of *Condorcet* digraph
+   :caption: Example of *Majority Margins* digraph
    :linenos:
 
-   >>> from votingProfiles import CondorcetDigraph
-   >>> cdg = CondorcetDigraph(v,hasIntegerValuation=True)
+   >>> from votingProfiles import MajorityMarginsDigraph
+   >>> cdg = MajorityMarginsDigraph(v,hasIntegerValuation=True)
    >>> cdg
     *------- Digraph instance description ------*
-    Instance class      : CondorcetDigraph
+    Instance class      : MajorityMarginsDigraph
     Instance name       : rel_randomLinearVotingProfile1
     Digraph Order       : 3
     Digraph Size        : 3
@@ -1886,9 +1886,9 @@ For instance, candidate *a1* is ranked four times before and once behind candida
         'a3'    |   -1      1     0	 
     Valuation domain: [-15;+15]
 
-Notice that in the case of linear voting profiles, majority margins always verify a zero sum property: *M(x,y)* + *M(y,x)* = 0 for all candidates *x* and *y* (see :numref:`condorcetDigraph` Lines 26-28). This is not true in general for arbitrary voting profiles. The *Condorcet* digraph of linear voting profiles defines in fact a *weak tournament* and belongs, hence, to the class of *self-codual* bipolar-valued digraphs ([13]_).
+Notice that in the case of linear voting profiles, majority margins always verify a zero sum property: *M(x,y)* + *M(y,x)* = 0 for all candidates *x* and *y* (see :numref:`condorcetDigraph` Lines 26-28). This is not true in general for arbitrary voting profiles. The *majority margins* digraph of linear voting profiles defines in fact a *weak tournament* and belongs, hence, to the class of *self-codual* bipolar-valued digraphs ([13]_).
     
-Now, a candidate *x*, showing a positive majority margin *M(x,y)*, is beating candidate *y*  with an absolute majority in a pairwise voting. Hence, a candidate showing only positive terms in her row in the *Condorcet* digraph relation table, beats all other candidates with absolute majority of votes. Condorcet recommends to declare this candidate (is always unique, why?) the winner of the election. Here we are lucky, it is again candidate *a1* who is hence the **Condorcet winner** (see :numref:`condorcetDigraph` Line 26).
+Now, a candidate *x*, showing a positive majority margin *M(x,y)*, is beating candidate *y*  with an absolute majority in a pairwise voting. Hence, a candidate showing only positive terms in her row in the *majority margins* digraph relation table, beats all other candidates with absolute majority of votes. Condorcet recommends to declare this candidate (is always unique, why?) the winner of the election. Here we are lucky, it is again candidate *a1* who is hence the **Condorcet winner** (see :numref:`condorcetDigraph` Line 26).
 
 .. code-block:: pycon
 
@@ -1911,12 +1911,12 @@ By seeing the majority margins like a *bipolar-valued characteristic function* o
 
    Visualizing an election result
 
-In :numref:`tutorialLinearBallots` we notice that the *Condorcet* digraph from our example linear voting profile gives a linear order of the candidates: ['a1', 'a3', 'a2], the same actually as given by the *Borda* scores (see :numref:`BordaScores`). This is by far not given in general. Usually, when aggregating linear ballots, there appear cyclic social preferences.
+In :numref:`tutorialLinearBallots` we notice that the *majority margins* digraph from our example linear voting profile gives a linear order of the candidates: ['a1', 'a3', 'a2], the same actually as given by the *Borda* scores (see :numref:`BordaScores`). This is by far not given in general. Usually, when aggregating linear ballots, there appear cyclic social preferences.
 
 Cyclic social preferences
 .........................
 
-Let us consider for instance the following linear voting profile and construct the corresponding Condorcet digraph.
+Let us consider for instance the following linear voting profile and construct the corresponding majority margins digraph.
 
 .. code-block:: pycon
    :name: linearVotingProfile2
@@ -1934,7 +1934,7 @@ Let us consider for instance the following linear voting profile and construct t
     v7(1): 	 ['a5', 'a4', 'a3', 'a1', 'a2']
     v8(1): 	 ['a2', 'a4', 'a5', 'a1', 'a3']
     v9(1): 	 ['a5', 'a3', 'a4', 'a1', 'a2']
-   >>> cdg = CondorcetDigraph(v)
+   >>> cdg = MajorityMarginsDigraph(v)
    >>> cdg.showRelationTable()
     * ---- Relation Table -----
       S   |  'a1'   'a2'   'a3'	  'a4'	  'a5'	  
@@ -1945,7 +1945,7 @@ Let us consider for instance the following linear voting profile and construct t
     'a4'  |  0.56  -0.11   0.33	   -	  0.11	 
     'a5'  |  0.33   0.11   0.11	 -0.11	   -	 
     
-Now, we cannot find any completely positive row in the relation table (see :numref:`linearVotingProfile2` Lines 17 - ). No one of the five candidates is beating all the others with an absolute majority of votes. There is no *Condorcet* winner anymore. In fact, when looking at a graphviz drawing of this *Condorcet* digraph, we may observe *cyclic* preferences, like (*a1* > *a2* > *a3* > *a1*) for instance (see :numref:`cyclicSocialPreferences`).
+Now, we cannot find any completely positive row in the relation table (see :numref:`linearVotingProfile2` Lines 17 - ). No one of the five candidates is beating all the others with an absolute majority of votes. There is no *Condorcet* winner anymore. In fact, when looking at a graphviz drawing of this *majority margins* digraph, we may observe *cyclic* preferences, like (*a1* > *a2* > *a3* > *a1*) for instance (see :numref:`cyclicSocialPreferences`).
 
 .. code-block:: pycon
 
@@ -1961,7 +1961,7 @@ Now, we cannot find any completely positive row in the relation table (see :numr
 
    Cyclic social preferences
 	   
-But, there may be many cycles appearing in a *Condorcet* digraph, and, we may detect and enumerate all minimal chordless circuits in a Digraph instance with the :py:func:`digraphs.Digraph.computeChordlessCircuits` method.
+But, there may be many cycles appearing in a *majority margins* digraph, and, we may detect and enumerate all minimal chordless circuits in a Digraph instance with the :py:func:`digraphs.Digraph.computeChordlessCircuits` method.
 
 .. code-block:: pycon
 
@@ -2060,17 +2060,17 @@ In this example (see :numref:`linearVotingProfileWithPolls` Lines 18-), we obtai
    >>> lvp.computeBordaWinners()
     ['a06']
 
-Is it also a *Condorcet* winner ? To verify, we start by creating the corresponding *Condorcet* digraph *cdg* with the help of the :py:class:`votingProfiles.CondorcetDigraph` class. The created digraph instance contains 15 *actions* -the candidates- and 105 *oriented* arcs -the *positive* majority margins- (see :numref:`CondorcetWinner` Lines 6-7).
+Is it also a *Condorcet* winner ? To verify, we start by creating the corresponding *majority margins* digraph *cdg* with the help of the :py:class:`votingProfiles.MajorityMarginsDigraph` class. The created digraph instance contains 15 *actions* -the candidates- and 105 *oriented* arcs -the *positive* majority margins- (see :numref:`CondorcetWinner` Lines 6-7).
 
 .. code-block:: pycon
    :name: CondorcetWinner
-   :caption: A Condorcet digraph constructed from a linear voting profile 
+   :caption: A majority margins digraph constructed from a linear voting profile 
    :linenos:
 
-   >>> from votingProfiles import CondorcetDigraph
-   >>> cdg = CondorcetDigraph(lvp)
+   >>> from votingProfiles import MajorityMarginsDigraph
+   >>> cdg = MajorityMarginsDigraph(lvp)
     *------- Digraph instance description ------*
-    Instance class      : CondorcetDigraph
+    Instance class      : MajorityMarginsDigraph
     Instance name       : rel_randLinearProfile
     Digraph Order       : 15
     Digraph Size        : 104
@@ -2091,7 +2091,7 @@ We may visualize the resulting pairwise majority margins by showing the HTML for
    :align: center
    :name: majorityMargins	   
 
-   Browsing the majority margins of a *Condorcet* digraph
+   Browsing the majority margins
 
 In :numref:`majorityMargins`, *light green* cells contain the positive majority margins, whereas *light red* cells contain the negative majority margins. A complete *light green* row reveals hence a *Condorcet* **winner**, whereas a complete *light green* column reveals a *Condorcet* **looser**. We recover again candidate *a06* as *Condorcet* winner ([15]_), whereas the obvious *Condorcet* looser is here candidate *a02*, the candidate with the lowest support in both parties (see :numref:`linearVotingProfileWithPolls` Line 40).
 
@@ -2133,7 +2133,7 @@ Remarkable about both these *ranking-by-choosing* or *ordering-by-rejecting* res
 
 .. note::
 
-   Mind that the specific *ranking-by-choosing* procedure, we use here on the *Condorcet* digraph, operates the selection procedure by extracting at each step *initial* and *terminal* kernels, i.e. NP-hard operational problems (see tutorial :ref:`on computing kernels <Kernel-Tutorial-label>` and [BIS-1999]_); A technique that does not allow in general to tackle voting profiles with much more than 30 candidates. The tutorial on :ref:`ranking <Ranking-Tutorial-label>` provides more adequate and efficient techniques for ranking from pairwise majority margins when a larger number of potential candidates is given.  
+   Mind that the specific *ranking-by-choosing* procedure, we use here on the *majority margins* digraph, operates the selection procedure by extracting at each step *initial* and *terminal* kernels, i.e. NP-hard operational problems (see tutorial :ref:`on computing kernels <Kernel-Tutorial-label>` and [BIS-1999]_); A technique that does not allow in general to tackle voting profiles with much more than 30 candidates. The tutorial on :ref:`ranking <Ranking-Tutorial-label>` provides more adequate and efficient techniques for ranking from pairwise majority margins when a larger number of potential candidates is given.  
 
 Back to :ref:`Content Table <Tutorial-label>`
 
@@ -2704,6 +2704,474 @@ Back to :ref:`Content Table <Tutorial-label>`
 
 --------------
 
+.. _THERanking-Tutorial-label:
+
+Where to study *Computer Science*: a *ranking* case study 
+--------------------------------------------------------------------
+
+.. contents:: 
+	:depth: 2
+	:local:
+
+In this tutorial, we are going to use published data from the *Times Higher Education* (THE) *World University Rankings* 2016 by *Computer Science* subject [36]_. Several hundred Computer Science Departments were ranked that year following an average overall score based on five performance criteria: *Teaching* (the learning environment, 30%), *Research* (volume, income and reputation 30%), *Citations* (research influence, 27.5%), *International outlook* (staff, students, and research, 7.5%), and *Industry income* (innovation, 5%).
+
+First, we shall look in the THE ranking data with the help of short Python scripts allowing us to illustrate the Digraph3 programming resources. In a second Sction, we shall relax the THE commensurability hypothesis and show how to similarly rank with multiple incommensurable performance criteria of ordinal significance. A last Section is eventually devoted to introduce confident pairwise outrankings.  
+
+The THE performance tableau
+...........................
+
+For our turorial purpose here, an extract of the published THE University rankings 2016 by computer science subject is stored in a file named `the_cs_2016.py <_static/the_cs_2016.py>`_ of :py:class:`perfTabs.PerformanceTableau` format [37]_.
+
+.. code-block:: pycon
+   :name: thecsPerfTab
+   :linenos:
+   :caption: The 2016 THE World University Ranking by Computer Science subject
+
+   >>> from perfTabs import PerformanceTableau
+   >>> t = PerformanceTableau('the_cs_2016')
+   >>> t
+    *------- PerformanceTableau instance description ------*
+     Instance class     : PerformanceTableau
+     Instance name      : the_cs_2016
+     # Actions          : 75
+     # Objectives       : 0
+     # Criteria         : 5
+     NaN proportion (%) : 0.0
+     Attributes         : ['name', 'description', 'actions',
+                           'objectives', 'criteria',
+			   'weightPreorder', 'NA', 'evaluation']
+
+Potential *decision actions*, in our case here, are the 75 THE best-ranked *Computer Science Departments*, all of them located at world renownded Institutions, like the *Califormia Institute of Technology*, the *Swiss Federal Institute of Technology Zürich*, the *Technical University München*, the *University of Oxford* or the *National University of Singapore* (see :numref:`thecsActions` below). 
+
+Instead of using prefigured show methods readily available for inspecting such a *PerformanceTableau* instance, we will illustrate below how to write small Python scripts for printing out its content.   
+
+.. code-block:: pycon
+   :name: thecsActions
+   :caption: Printing the potential decision actions 	  
+   :linenos:
+
+   >>> for x in t.actions:
+           print('%s:\t%s (%s)' %\
+	   (x,t.actions[x]['name'],t.actions[x]['comment']) )
+    albt:	University of Alberta (CA)
+    anu:	Australian National University (AU)
+    ariz:	Arizona State University (US)
+    bju:	Beijing University (CN)
+    bro:	Brown University (US)
+    calt:	Califormia Institute of Technology (US)
+    cbu:	Columbia University (US)
+    chku:	Chinese University of Hong Kong (HK)
+    cihk:	City University of Hong Kong (HK)
+    cir:	University of California at Irwine (US)
+    cmel:	Carnegie Mellon University (US)
+    cou:	Cornell University (US)
+    csb:	University of California at Santa Barbara (US)
+    csd:	University Of California at San Diego (US)
+    dut:	Delft University of Technology (NL)
+    eind:	Eindhoven University of Technology (NL)
+    ens:	Superior Normal School at Paris (FR)
+    epfl:	Swiss Federal Institute of Technology Lausanne (CH)
+    epfr:	Polytechnic school of Paris (FR)
+    ethz:	Swiss Federal Institute of Technology Zürich (CH)
+    frei:	University of Freiburg (DE)
+    git:	Georgia Institute of Technology (US)
+    glas:	University of Glasgow (UK)
+    hels:	University of Helsinki (FI)
+    hkpu:	Hong Kong Polytechnic University (CN)
+    hkst:	Hong Kong University of Science and Technology (HK)
+    hku:	Hong Kong University (HK)
+    humb:	Berlin Humboldt University (DE)
+    icl:	Imperial College London (UK)
+    indis:	Indian Institute of Science (IN)
+    itmo:	ITMO University (RU)
+    kcl:	King's College London (UK)
+    kist:	Korea Advances Institute of Science and Tecnology (KR)
+    kit:	Karlsruhe Institute of Technology (DE)
+    kth:	KTH Royal Institute of Technology (SE)
+    kuj:	Kyoto University (JP)
+    kul:	Katholieke Universiteit Leuven (BE)
+    lms:	Lomonosov Moscow State University (RU)
+    man:	University of Manchester (UK)
+    mcp:	University of Maryland College Park (US)
+    mel:	University of Melbourne (AU)
+    mil:	Polytechnic University of Milan (IT)
+    mit:	Massachusetts Institute of Technology (US)
+    naji:	Nanjing University (CN)
+    ntu:	Nanyang Technological University of Singapore (SG)
+    ntw:	National Taiwan University (TW)
+    nyu:	New York University (US)
+    oxf:	University of Oxford (UK)
+    pud:	Purdue University (US)
+    qut:	Queensland University of Technology (AU)
+    rcu:	Rice University (US)
+    rwth:	RWTH Aachen University (DE)
+    shJi:	Shanghai Jiao Tong University (CN)
+    sing:	National University of Singapore (SG)
+    sou:	University of Southhampton (UK)
+    stut:	University of Stutgart (DE)
+    tech:	Technion - Israel Institute of Technology (IL)
+    tlavu:	Tel Aviv University (IR)
+    tsu:	Tsinghua University (CN)
+    tub:	Technical University of Berlin (DE)
+    tud:	Technical University of Darmstadt (DE)
+    tum:	Technical University of München (DE)
+    ucl:	University College London (UK)
+    ued:	University of Edeinburgh (UK)
+    uiu:	University of Illinois at Urbana-Champagne (US)
+    unlu:	University of Luxembourg (LU)
+    unsw:	University of New South Wales (AU)
+    unt:	University of Toronto (CA)
+    uta:	University of Texas at Austin (US)
+    utj:	University of Tokyo (JP)
+    utw:	University of Twente (NL)
+    uwa:	University of Waterloo (CA)
+    wash:	University of Washington (US)
+    wtu:	Vienna University of Technology (AUS)
+    zhej:	Zhejiang University (CN)
+
+The five performance criteria, ordered by decreasing significance, used by THE for ranking the Computer Science Dept at Universities may be printed out as follows.
+
+   >>> for g in t.criteria:
+	   print('%s:\t%s, %s (%.1f%%)' %\
+	       (g,t.criteria[g]['name'],t.criteria[g]['comment'],
+		t.criteria[g]['weight']) )
+    gtch:	Teaching, The learning environment (30.0%)
+    gres:	Research, Volume, income and reputation (30.0%)
+    gcit:	Citations, Research influence (27.5%)
+    gint:	International outlook, In staff, students and research (7.5%)
+    gind:	Industry income, Innovation (5.0%)
+
+The very largest part (87.5%) of ranking criteria significance is allocated to the performance evaluations concerning *Teaching*, *Research* and *Citations*. The remaining part (12.5%) goes to *International outlook* amd *Industry income*.
+
+In order to now rank the Universities based on these five performance criteria, the THE authors, first, replace the actual grades obtained by each University with their corresponding quantiles observed in the cumulative distribution of the grades obtained by all the surveyed institutions. The actual rank is eventually determined by an overall score computed as a weighted average of the respeczive five criteria quantiles (see :numref:`thecsScores` Lines 1-10).       
+
+.. code-block:: pycon
+   :name: thecsScores
+   :caption: Printing the ranked performance table	  
+   :linenos:
+
+   >>> ### compute overall THE scores
+   >>> xSort = []
+   >>> for x in t.actions:
+	   xscore = Decimal('0')
+	   for g in t.criteria:
+	       xscore += t.evaluation[g][x] *\
+			  (t.criteria[g]['weight']/Decimal('100'))
+	   xSort.append((xscore,x))
+   >>> ### sorting the Universities by decreasing overall score
+   >>> xSort.sort(reverse=True)
+   >>> ### show performance quantiles and overall score
+   >>> print('##  Univ \tgtch  gres  gcit  gint  gind  overall')
+   >>> print('-------------------------------------------------')
+   >>> i = 1
+   >>> for it in xSort:
+	   x = it[1]
+	   xscore = it[0]
+	   print('%2d: %s' % (i,x), end=' \t')
+	   for g in t.criteria:
+	       print('%.1f ' % (t.evaluation[g][x]),end=' ')
+	   print(' %.1f' % xscore)
+	   i += 1
+    ##  Univ 	gtch  gres  gcit  gint  gind  overall
+    -------------------------------------------------
+     1: ethz 	89.2  97.3  97.1  93.6  64.1   92.9
+     2: calt 	91.5  96.0  99.8  59.1  85.9   92.4
+     3: oxf 	94.0  92.0  98.8  93.6  44.3   92.2
+     4: mit 	87.3  95.4  99.4  73.9  87.5   92.1
+     5: git 	87.2  99.7  91.3  63.0  79.5   89.9
+     6: cmel 	88.1  92.3  99.4  58.9  71.1   89.4
+     7: icl 	90.1  87.5  95.1  94.3  49.9   89.0
+     8: epfl 	86.3  91.6  94.8  97.2  42.7   88.9
+     9: tum 	87.6  95.1  87.9  52.9  95.1   87.7
+    10: sing 	89.9  91.3  83.0  95.3  50.6   86.9
+    11: cou 	81.6  94.1  99.7  55.7  45.7   86.6
+    12: ucl 	85.5  90.3  87.6  94.7  42.4   86.1
+    13: wash 	84.4  88.7  99.3  57.4  41.2   85.6
+    14: hkst 	74.3  92.0  96.2  84.4  55.8   85.5
+    15: ntu 	76.6  87.7  90.4  92.9  86.9   85.5
+    16: ued 	85.7  85.3  89.7  95.0  38.8   85.0
+    17: unt 	79.9  84.4  99.6  77.6  38.4   84.4
+    18: uiu 	85.0  83.1  99.2  51.4  42.2   83.7
+    19: mcp 	79.7  89.3  94.6  29.8  51.7   81.5
+    20: cbu 	81.2  78.5  94.7  66.9  45.7   81.3
+    21: tsu 	88.1  90.2  76.7  27.1  85.9   80.9
+    22: csd 	75.2  81.6  99.8  39.7  59.8   80.5
+    23: uwa 	75.3  82.6  91.3  72.9  41.5   80.0
+    24: nyu 	71.1  77.4  99.4  78.0  39.8   79.7
+    25: uta 	72.6  85.3  99.6  31.6  49.7   79.6
+    26: kit 	73.8  85.5  84.4  41.3  76.8   77.9
+    27: bju 	83.0  85.3  70.1  30.7  99.4   77.0
+    28: csb 	65.6  70.9  94.8  72.9  74.9   76.2
+    29: rwth 	77.8  85.0  70.8  43.7  89.4   76.1
+    30: hku 	77.0  73.0  77.0  96.8  39.5   75.4
+    31: pud 	76.9  84.8  70.8  58.1  56.7   75.2
+    32: kist 	79.4  88.2  64.2  31.6  92.8   74.9
+    33: kcl 	45.5  94.6  86.3  95.1  38.3   74.8
+    34: chku 	64.1  69.3  94.7  75.6  49.9   74.2
+    35: epfr 	81.7  60.6  78.1  85.3  62.9   73.7
+    36: dut 	64.1  78.3  76.3  69.8  90.1   73.4
+    37: tub 	66.2  82.4  71.0  55.4  99.9   73.3
+    38: utj 	92.0  91.7  48.7  25.8  49.6   72.9
+    39: cir 	68.8  64.6  93.0  65.1  40.4   72.5
+    40: ntw 	81.5  79.8  66.6  25.5  67.6   72.0
+    41: anu 	47.2  73.0  92.2  90.0  48.1   70.6
+    42: rcu 	64.1  53.8  99.4  63.7  46.1   69.8
+    43: mel 	56.1  70.2  83.7  83.3  50.4   69.7
+    44: lms 	81.5  68.1  61.0  31.1  87.8   68.4
+    45: ens 	71.8  40.9  98.7  69.6  43.5   68.3
+    46: wtu 	61.8  73.5  73.7  51.9  62.2   67.9
+    47: tech 	54.9  71.0  85.1  51.7  40.1   67.1
+    48: bro 	58.5  54.9  96.8  52.3  38.6   66.5
+    49: man 	63.5  71.9  62.9  84.1  42.1   66.3
+    50: zhej 	73.5  70.4  60.7  22.6  75.7   65.3
+    51: frei 	54.2  51.6  89.5  49.7  99.9   65.1
+    52: unsw 	60.2  58.2  70.5  87.0  44.3   63.6
+    53: kuj 	75.4  72.8  49.5  28.3  51.4   62.8
+    54: sou 	48.2  60.7  75.5  87.4  43.2   62.1
+    55: shJi 	66.9  68.3  62.4  22.8  38.5   61.4
+    56: itmo 	58.0  32.0  98.7  39.2  68.7   60.5
+    57: kul 	35.2  55.8  92.0  46.0  88.3   60.5
+    58: glas 	35.2  52.5  91.2  85.8  39.2   59.8
+    59: utw 	38.2  52.8  87.0  69.0  60.0   59.4
+    60: stut 	54.2  60.6  61.1  36.3  97.8   58.9
+    61: naji 	51.4  76.9  48.8  39.7  74.4   58.6
+    62: tud 	46.6  53.6  75.9  53.7  66.5   58.3
+    63: unlu 	35.2  44.2  87.4  99.7  54.1   58.0
+    64: qut 	45.5  42.6  82.8  75.2  63.0   58.0
+    65: hkpu 	46.8  36.5  91.4  73.2  41.5   57.7
+    66: albt 	39.2  53.3  69.9  91.9  75.4   57.6
+    67: mil 	46.4  64.3  69.2  44.1  38.5   57.5
+    68: hels 	48.8  49.6  80.4  50.6  39.5   57.4
+    69: cihk 	42.4  44.9  80.1  76.2  67.9   57.3
+    70: tlavu 	34.1  57.2  89.0  45.3  38.6   57.2
+    71: indis 	56.9  76.1  49.3  20.1  41.5   57.0
+    72: ariz 	28.4  61.8  84.3  59.3  42.0   56.8
+    73: kth 	44.8  42.0  83.6  71.6  39.2   56.4
+    74: humb 	48.4  31.3  94.7  41.5  45.5   55.3
+    75: eind 	32.4  48.4  81.5  72.2  45.8   54.4
+
+In :numref:`` (Lines 23 and following) we may thus notice that, in the 2016 edition of the THE World Universities ranking by computer science subject, the Computer Science Dept at the *Swiss Federal Institute of Technology Zürich* was first-ranked with an overall score of 92.9; followed by the Computer Science Dept at the *Califormia Institute of Technology* (overall score: 92.4). The author's own Computer Science Dept at the *University of Luxembourg* was ranked on position 63 with an overall score of 58.0.
+
+Let us have a look at the THE performance criteria.
+
+    >>> t.showHTMLCriteria(Sorted=False)
+
+.. Figure:: the_cs_2016Criteria.png
+    :name: thecsCriteria
+    :width: 500pt
+    :align: center
+
+    The THE ranking criteria
+
+Considering a very plausible imprecision of the performance grades some the potential violation of uniform distributed quantile classes, we assume here that a quantile difference of up to **+2.5%** is **insignificant**, whereas a difference of **+5%** warrants a **clearly better** performance. With quantiles 94%, resp. 87.3%, Oxford's computing science teaching environment, for instance, is thus clearly better evaluated than that of the MIT (see :numref:`thecsScores` Lines 27-28). We shall furthermore assume that a **considerable** quantile difference of **60%** is triggering a **veto**, respectively a **counter-veto** against a *pairwise outranking*, respectively a *pairwise outranked* situtation.   
+
+
+Similarly, the precise decimal significance weights of the five ranking criteria (see :numref:`thecsCriteria` Column **Weight**), is quite questionable. The weights carry in fact a usually hiden strategy for rendering the quantile evaluations commendurable. We shall therefore in the sequel only keep the corresponding signficance weight preorder: *gtch* = *gres* > *gcit* > *gint* > *gind*.
+
+We are now ready to compute a ranking based on *robust* pairwise outranking situations.
+
+Ranking-by-scoring with multiple criteria of ordinal significance
+.................................................................
+
+We say that a Computer Science Dept *x* **robustly outranks** Computer Science Dept *y* when *x* positively outranks *y* with **all** significance weight vectors zhat are compatible with *gtch* = *gres* > *gcit* > *gint* > *gind*. A corresponding digraph constructor is provided by the :py:class:`outrankingDigraphs.RobustOutrankingDigraph` class.
+
+.. code-block:: pycon
+   :name: robustthecsOutranking
+   :caption: Computing the robust outranking digraph	  
+   :linenos:
+
+   >>> rdg = RobustOutrankingDigraph(t)
+   >>> print(rdg)
+    *------- Object instance description ------*
+    Instance class       : RobustOutrankingDigraph
+    Instance name        : robust_the_cs_2016
+    # Actions            : 75
+    # Criteria           : 5
+    Size                 : 2993
+    Determinateness (%)  : 78.16
+    Valuation domain     : [-1.00;1.00]
+    Attributes          : ['name', 'description', 'methodData',
+                           'actions', 'order', 'objectives',
+                           'criteria', 'evaluation', 'NA',
+                           'vetos', 'valuationdomain', 'relation',
+                           'concordanceRelation',
+                           'largePerformanceDifferencesCount',
+                           'ordinalRelation', 'equisignificantRelation',
+                           'unanimousRelation', 'stability',
+                           'gamma', 'notGamma']
+
+In digraph *rdg*, we observe 2993 such robust pairwise outranking situations (see :numref:`robustthecsOutranking` Line 8). We may show all these robust outranking situations with a browser view of the corresponding relation map.
+
+    >>> rdg.showHTMLRelationMap(rankingRule='NetFlows',\
+                         tableTitle='Robust Outranking Map')
+
+.. Figure:: the_cs_RelationMap.png
+    :name: thecsRelationMap
+    :width: 600pt
+    :align: center
+
+    The relation map of the robust outranking digraph
+
+In :numref:`thecsRelationMap`, **green**, resp. **light green** marked positions show **certainly**, resp. **positively** *valid outranking* situations, whereas **red**, resp. **light red** marked positions show **certainly**, respectively **positively** *valid outranked* situtations.
+
+The computer Science Dept are ranked following the *NetFlows* ranking rule.
+
+.. code-block:: pycon
+   :name: robustNetFlowsRankingQuality
+   :caption: Computing the robust NetFlows ranking	  
+   :linenos:
+
+   >>> nfRanking = rdg.computeNetFlowsRanking()
+   >>> corrnf = rdg.computeRankingCorrelation(nfRanking)
+   >>> rdg.showCorrelation(corrnf)
+     Correlation indexes:
+      Crisp ordinal correlation  : +0.901
+      Epistemic determination    :  0.563
+      Bipolar-valued equivalence : +0.507
+   >>> rdg.showRankingConsensusQuality(nfRanking)
+     Robust NetFlows ranking result:
+     ['ethz', 'calt', 'mit', 'oxf', 'cmel', 'git', 'epfl', 'icl',
+      'cou', 'tum', 'wash', 'sing', 'hkst', 'ucl', 'uiu', 'unt',
+      'ued', 'ntu', 'mcp', 'csd', 'cbu', 'uta', 'tsu', 'nyu',
+      'uwa', 'csb', 'kit', 'utj', 'bju', 'kcl', 'chku', 'kist',
+      'rwth', 'pud', 'epfr', 'hku', 'rcu', 'cir', 'dut', 'ens',
+      'ntw', 'anu', 'tub', 'mel', 'lms', 'bro', 'frei', 'wtu',
+      'tech', 'itmo', 'zhej', 'man', 'kuj', 'kul', 'unsw', 'glas',
+      'utw', 'unlu', 'naji', 'sou', 'hkpu', 'qut', 'humb', 'shJi',
+      'stut', 'tud', 'tlavu', 'cihk', 'albt', 'indis', 'ariz',
+      'kth', 'hels', 'eind', 'mil']
+     criterion (weight): correlation
+      gtch (0.300): +0.660
+      gres (0.300): +0.638
+      gcit (0.275): +0.370
+      gint (0.075): +0.155
+      gind (0.050): +0.101
+     Summary:
+      Weighted mean marginal correlation (a): +0.508
+      Standard deviation (b)                : +0.187
+      Ranking fairness (a)-(b)              : +0.321
+
+We actually obtain a very similar group of top-ranked Depts. In :numref:`thecsRelationMap` we may notice that the first five Depts: *ethz*, *calt*, *mit*, *oxf* and *cmel* , all are considered equally well performing. The robust NetFlows ranking correlations with the marginal performance criterion rankings is quite nearly respecting the fixed significance preorder: *gtch* ~ *gres* > *gcit* > *gint* > *gind*.  
+
+It may be interesting to see how the original THE ranking is correlated with the marginal criterion rankings.
+
+.. code-block:: pycon
+   :name: theRankingQuality
+   :caption: Computing the robust NetFlows ranking	  
+   :linenos:
+
+   >>> theRanking = [it[1] for it in xSort]
+   >>> corrthe = rdg.computeRankingCorrelation(theRanking)
+   >>> rdg.showCorrelation(corrthe)
+     Correlation indexes:
+      Crisp ordinal correlation  : +0.907
+      Epistemic determination    :  0.563
+      Bipolar-valued equivalence : +0.511
+   >>> rdg.showRankingConsensusQuality(theRanking)
+     THE overall scores ranking:
+      ['ethz', 'calt', 'oxf', 'mit', 'git', 'cmel', 'icl',
+       'epfl', 'tum', 'sing', 'cou', 'ucl', 'wash', 'hkst',
+       'ntu', 'ued', 'unt', 'uiu', 'mcp', 'cbu', 'tsu', 'csd',
+       'uwa', 'nyu', 'uta', 'kit', 'bju', 'csb', 'rwth', 'hku',
+       'pud', 'kist', 'kcl', 'chku', 'epfr', 'dut', 'tub',
+       'utj', 'cir', 'ntw', 'anu', 'rcu', 'mel', 'lms', 'ens',
+       'wtu', 'tech', 'bro', 'man', 'zhej', 'frei', 'unsw', 'kuj',
+       'sou', 'shJi', 'itmo', 'kul', 'glas', 'utw', 'stut', 'naji',
+       'tud', 'unlu', 'qut', 'hkpu', 'albt', 'mil', 'hels', 'cihk',
+       'tlavu', 'indis', 'ariz', 'kth', 'humb', 'eind']
+     criterion (weight): correlation
+      gtch (0.300): +0.683
+      gres (0.300): +0.670
+      gcit (0.275): +0.319
+      gint (0.075): +0.161
+      gind (0.050): +0.106
+     Summary:
+      Weighted mean marginal correlation (a): +0.511
+      Standard deviation (b)                : +0.210
+      Ranking fairness (a)-(b)              : +0.302
+
+The THE ranking by overall weighted scoring natuarlly gives marginal performance criterion correlations that are compatible with the given significance weight preorder. Yet the *Citations* criterion is a bit less taken into account than with our robust *NetFlows* ranking.
+
+Let us finally completely drop any discriminative assumptions with respect to the actual significance of the five performance criteria and suppose that they are more or less equally important for our ranking purpose. 
+
+Ranking with multiple criteria of uncertain significance
+........................................................
+
+For this purpose, we shall consider the criterion significance weights to be triangular random variables with range [0;2] and mode 1. The :py:class:`outrankingDigraphs.ConfidentBipolarOutrankingDigraph` constructor will deliver us a corresponding 90% confident outranking digraph.
+
+.. code-block:: pycon
+   :name: theConfidentDigraph
+   :caption: Computing the 90% confident outranking digraph	  
+   :linenos:
+
+   >>> for g in t.criteria:
+           t.criteria[g]['weight'] = Decimal('1.0')
+   >>> cdg = ConfidentBipolarOutrankingDigraph(t)
+   >>> print(cdg)
+    *------- Object instance description ------*
+     Instance class       : ConfidentBipolarOutrankingDigraph
+     Instance name        : rel_the_cs_2016_CLT
+     # Actions            : 75
+     # Criteria           : 5
+     Size                 : 2011
+     Uncertainty model    : triangular(a=0,b=2w)
+     Likelihood domain    : [-1.0;+1.0]
+     Confidence level     : 0.80 (90.0%)
+     Confident majority   : 0.20 (60.0%)
+     Determinateness (%)  : 68.52
+     Valuation domain     : [-1.00;1.00]
+     Attributes          : ['name', 'bipolarConfidenceLevel',
+                            'distribution', 'betaParameter',
+			    'actions', 'order', 'valuationdomain',
+			    'criteria', 'evaluation', 'NA',
+			    'concordanceRelation', 'vetos', 'negativeVetos',
+			    'largePerformanceDifferencesCount',
+			    'likelihoods', 'confidenceCutLevel',
+			    'relation', 'gamma', 'notGamma']
+
+In :numref:`` Lines 1-2, we replace the THE significance weights with unit weights. The 90% confident outranking digraph *cdg* keeps 2011 confident pairwise outranking situtaions. The necessary significance majority to be confident amounts to 60%, i.e. three performance criteria are sufficient to validate an outranking situation.
+
+.. code-block:: pycon
+   :name: theConfidentnfRanking
+   :caption: Computing the 90% confident outranking digraph	  
+   :linenos:
+
+   >>> confRanking = cdg.computeNetFlowsRanking()
+   >>> corr = cdg.computeRankingCorrelation(confRanking)
+   >>> cdg.showCorrelation(corr)
+    Correlation indexes:
+     Crisp ordinal correlation  : +0.943
+     Epistemic determination    :  0.370
+     Bipolar-valued equivalence : +0.349
+   >>> cdg.showRankingConsensusQuality(confRanking)
+    90% confident ranking:
+     ['ethz', 'mit', 'calt', 'oxf', 'icl', 'cmel', 'ntu',
+      'git', 'epfl', 'tum', 'sing', 'hkst', 'ucl', 'cou',
+      'ued', 'csb', 'unt', 'wash', 'cbu', 'csd', 'uiu',
+      'chku', 'nyu', 'tsu', 'dut', 'mcp', 'uwa', 'epfr',
+      'uta', 'anu', 'kit', 'tub', 'kcl', 'bju', 'rwth', 'mel',
+      'pud', 'kist', 'rcu', 'hku', 'ens', 'utj', 'frei', 'unlu',
+      'cir', 'albt', 'qut', 'lms', 'itmo', 'ntw', 'wtu', 'kul',
+      'utw', 'cihk', 'unsw', 'man', 'sou', 'glas', 'bro', 'naji',
+      'hkpu', 'zhej', 'stut', 'tud', 'tech', 'eind', 'kuj', 'humb',
+      'kth', 'ariz', 'tlavu', 'hels', 'shJi', 'indis', 'mil']
+     criterion (weight): correlation
+      gtch (0.200): +0.546
+      gres (0.200): +0.536
+      gcit (0.200): +0.386
+      gint (0.200): +0.271
+      gind (0.200): +0.164
+     Summary:
+      Weighted mean marginal correlation (a): +0.381
+      Standard deviation (b)                : +0.149
+      Ranking fairness (a)-(b)              : +0.232
+
+Discuss the result and conclude the tutorial.
+
+Back to :ref:`Content Table <Tutorial-label>`
+
+--------------
+
 .. _Rubis-Tutorial-label:
 
 Computing a best choice recommendation
@@ -3155,8 +3623,8 @@ Back to :ref:`Content Table <Tutorial-label>`
 
 .. _Alice-Tutorial-label:
 
-Alice's best choice: A case study [19]_
----------------------------------------
+Alice's best choice: A *selection* case study [19]_
+---------------------------------------------------
 
 .. contents:: 
 	:depth: 2
@@ -4295,8 +4763,8 @@ Back to :ref:`Content Table <Tutorial-label>`
 
 .. _RatingUniversities-Tutorial-label:
 
-The best students, where do they study? A rating case study
------------------------------------------------------------
+The best students, where do they study? A *rating* case study
+-------------------------------------------------------------
 
 .. contents:: 
 	:depth: 2
@@ -7571,8 +8039,13 @@ Appendices
 
 .. [34] See the tutorial on :ref:`ranking with incommensurable performance criteria <Ranking-Tutorial-label>`.
 
-.. [35] See the advanced topic on :ref:`the ordinal correlation of bipolar-valued digraphs <OrdinalCorrelation-Tutorial-label>`. 
-	
+.. [35] See the advanced topic on :ref:`the ordinal correlation of bipolar-valued digraphs <OrdinalCorrelation-Tutorial-label>`.
+
+.. [36] https://www.timeshighereducation.com/world-university-rankings/about-the-times-higher-education-world-university-rankings
+
+.. [37] The performance tableau :code:`the_cs_2016.py` is also available in the :code:`examples` directory of the Digraph3 software collection.
+
+   
 ..  LocalWords:  randomDigraph Determinateness valuationdomain py png
 ..  LocalWords:  notGamma tutorialDigraph shortName func irreflexive
 ..  LocalWords:  hasIntegerValuation showAll tutorialdigraph graphviz
@@ -7597,7 +8070,7 @@ Appendices
 ..  LocalWords:  computeSimpleMajorityWinner computeRankAnalysis MCDA
 ..  LocalWords:  computeInstantRunoffWinner computeBordaScores favour
 ..  LocalWords:  computeBordaWinners showRankAnalysisTable chordless
-..  LocalWords:  CondorcetDigraph computeChordlessCircuits quintiles
+..  LocalWords:  MajorityMarginsDigraph computeChordlessCircuits quintiles
 ..  LocalWords:  outrankingDigraphs BipolarOutrankingDigraph quintile
 ..  LocalWords:  RandomBipolarOutrankingDigraph showActions quantiles
 ..  LocalWords:  RandomPerformanceTableau equisignificant colorLevels
