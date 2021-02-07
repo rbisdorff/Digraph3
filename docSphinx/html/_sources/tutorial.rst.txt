@@ -888,23 +888,23 @@ In this example we consider furthermore a family of seven equisignificant cardin
     g01 'RandomPerformanceTableau() instance'
       Scale = [0.0, 100.0]
       Weight = 3.0
-      Threshold pref : 20.00 + 0.00x ; percentile:  0.28
-      Threshold ind : 10.00 + 0.00x ; percentile:  0.095
-      Threshold veto : 80.00 + 0.00x ; percentile:  1.0
+      Threshold pref : 20.00 + 0.00x ; percentile:  28.0
+      Threshold ind : 10.00 + 0.00x ;  percentile:   9.5
+      Threshold veto : 80.00 + 0.00x ; percentile: 100.0
     g02 'RandomPerformanceTableau() instance'
       Scale = [0.0, 100.0]
       Weight = 3.0
-      Threshold pref : 20.00 + 0.00x ; percentile:  0.33
-      Threshold ind : 10.00 + 0.00x ; percentile:  0.19
-      Threshold veto : 80.00 + 0.00x ; percentile:  0.95
+      Threshold pref : 20.00 + 0.00x ; percentile:  33.0
+      Threshold ind : 10.00 + 0.00x ;  percentile:  19.0
+      Threshold veto : 80.00 + 0.00x ; percentile:  95.0
     ...
     ...
     g07 'RandomPerformanceTableau() instance'
       Scale = [0.0, 100.0]
       Weight = 10.0
-      Threshold pref : 20.00 + 0.00x ; percentile:  0.476
-      Threshold ind : 10.00 + 0.00x ; percentile:  0.238
-      Threshold veto : 80.00 + 0.00x ; percentile:  1.0
+      Threshold pref : 20.00 + 0.00x ; percentile:  47.6
+      Threshold ind : 10.00 + 0.00x ;  percentile:  23.8
+      Threshold veto : 80.00 + 0.00x ; percentile: 100.0
 
 The performance evaluations of each decision alternative on each criterion are gathered in a *performance tableau*.
 
@@ -1310,9 +1310,9 @@ Example Python session
     g2 'random cardinal cost criterion'
       Scale = (0.0, 100.0)
       Weight = 0.250 
-      Threshold ind  :  1.76 + 0.00x ; percentile:  0.095
-      Threshold pref :  2.16 + 0.00x ; percentile:  0.143
-      Threshold veto : 73.19 + 0.00x ; percentile:  0.952
+      Threshold ind  :  1.76 + 0.00x ; percentile:   9.5
+      Threshold pref :  2.16 + 0.00x ; percentile:  14.3
+      Threshold veto : 73.19 + 0.00x ; percentile:  95.2
     ...
 
 In the example above, we may notice the three types of decision actions (:numref:`randomCBPerformanceTableau` Lines 10-19), as well as the two types (Lines 22-25) of criteria with either an **ordinal** or a **cardinal** performance measuring scale. In the latter case, by default about 5% of the random performance differences will be below the **indifference** and 10% below the **preference discriminating threshold**. About 5% will be considered as **considerably large**. More statistics about the generated performances is available as follows.
@@ -2713,19 +2713,19 @@ Where to study *Computer Science*: a *ranking* case study
 	:depth: 2
 	:local:
 
-In this tutorial, we are going to use published data from the *Times Higher Education* (*THE*) *World University Rankings* 2016 by *Computer Science* subject [36]_. Several hundred Computer Science Departments were ranked that year following an average overall score based on five performance criteria: *Teaching* (the learning environment, 30%), *Research* (volume, income and reputation 30%), *Citations* (research influence, 27.5%), *International outlook* (staff, students, and research, 7.5%), and *Industry income* (innovation, 5%).
+In this tutorial, we are going to use published data from the *Times Higher Education* (THE) *World University Rankings* 2016 by *Computer Science* subject [36]_. Several hundred Computer Science Departments were ranked that year following an average overall score based on five performance criteria: *Teaching* (the learning environment, 30%), *Research* (volume, income and reputation 30%), *Citations* (research influence, 27.5%), *International outlook* (staff, students, and research, 7.5%), and *Industry income* (innovation, 5%).
 
-First, we shall look in the *THE* ranking data with the help of short Python scripts allowing us to illustrate the Digraph3 programming resources. In a second Sction, we shall relax the *THE* commensurability hypothesis and show how to similarly rank with multiple incommensurable performance criteria of ordinal significance. A last Section is eventually devoted to introduce confident pairwise outrankings.  
+First, we shall look in the THE ranking data with the help of short Python scripts allowing us to illustrate the Digraph3 programming resources. In a second Sction, we shall relax the THE commensurability hypothesis and show how to similarly rank with multiple incommensurable performance criteria of ordinal significance. A last Section is eventually devoted to introduce confident pairwise outrankings.  
 
-The *THE* performance tableau
+The THE performance tableau
 .............................
 
-For our turorial purpose here, an extract of the published *THE* University rankings 2016 by computer science subject is stored in a file named `the_cs_2016.py <_static/the_cs_2016.py>`_ of :py:class:`perfTabs.PerformanceTableau` format [37]_.
+For our turorial purpose here, an extract of the published THE University rankings 2016 by computer science subject is stored in a file named `the_cs_2016.py <_static/the_cs_2016.py>`_ of :py:class:`perfTabs.PerformanceTableau` format [37]_.
 
 .. code-block:: pycon
    :name: thecsPerfTab
    :linenos:
-   :caption: The 2016 *THE* World University Ranking by Computer Science subject
+   :caption: The 2016 THE World University Ranking by Computer Science subject
 
    >>> from perfTabs import PerformanceTableau
    >>> t = PerformanceTableau('the_cs_2016')
@@ -2741,7 +2741,7 @@ For our turorial purpose here, an extract of the published *THE* University rank
                            'objectives', 'criteria',
 			   'weightPreorder', 'NA', 'evaluation']
 
-Potential *decision actions*, in our case here, are the 75 *THE* best-ranked *Computer Science Departments*, all of them located at world renownded Institutions, like the *Califormia Institute of Technology*, the *Swiss Federal Institute of Technology Zürich*, the *Technical University München*, the *University of Oxford* or the *National University of Singapore* (see :numref:`thecsActions` below). 
+Potential *decision actions*, in our case here, are the 75 THE best-ranked *Computer Science Departments*, all of them located at world renownded Institutions, like the *Califormia Institute of Technology*, the *Swiss Federal Institute of Technology Zürich*, the *Technical University München*, the *University of Oxford* or the *National University of Singapore* (see :numref:`thecsActions` below). 
 
 Instead of using prefigured show methods readily available for inspecting such a *PerformanceTableau* instance, we will illustrate below how to write small Python scripts for printing out its content.   
 
@@ -2829,7 +2829,7 @@ Instead of using prefigured show methods readily available for inspecting such a
     wtu:	Vienna University of Technology (AUS)
     zhej:	Zhejiang University (CN)
 
-The five performance criteria, ordered by decreasing significance, used by *THE* for ranking the Computer Science Dept at Universities may be printed out as follows.
+The five performance criteria, ordered by decreasing significance, used by THE for ranking the Computer Science Dept at Universities may be printed out as follows.
 
    >>> for g in t.criteria:
 	   print('%s:\t%s, %s (%.1f%%)' %\
@@ -2843,7 +2843,7 @@ The five performance criteria, ordered by decreasing significance, used by *THE*
 
 The very largest part (87.5%) of ranking criteria significance is allocated to the performance evaluations concerning *Teaching*, *Research* and *Citations*. The remaining part (12.5%) goes to *International outlook* amd *Industry income*.
 
-In order to now rank the Universities based on these five performance criteria, the *THE* authors, first, replace the actual grades obtained by each University with their corresponding quantiles observed in the cumulative distribution of the grades obtained by all the surveyed institutions. The actual rank is eventually determined by an overall score computed as a weighted average of the respeczive five criteria quantiles (see :numref:`thecsScores` Lines 1-10).       
+In order to now rank the Universities based on these five performance criteria, the THE authors, first, replace the actual grades obtained by each University with their corresponding quantiles observed in the cumulative distribution of the grades obtained by all the surveyed institutions. The actual rank is eventually determined by an overall score computed as a weighted average of the respeczive five criteria quantiles (see :numref:`thecsScores` Lines 1-10).       
 
 .. code-block:: pycon
    :name: thecsScores
@@ -2952,7 +2952,7 @@ In order to now rank the Universities based on these five performance criteria, 
 
 In :numref:`thecsScores` (Lines 23 and following), we may thus notice that, in the 2016 edition of the *THE World University rankings* by Computer Science subject, the Computer Science Dept at the *Swiss Federal Institute of Technology Zürich* was first-ranked with an overall score of 92.9; followed by the Computer Science Dept at the *Califormia Institute of Technology* (overall score: 92.4) [38]_.
 
-Let us also have a closer look at the *THE* performance criteria.
+Let us also have a closer look at the THE performance criteria.
 
     >>> t.showHTMLCriteria(Sorted=False)
 
@@ -2963,16 +2963,56 @@ Let us also have a closer look at the *THE* performance criteria.
 
     The THE ranking criteria
 
-Considering a very plausible imprecision of the performance grades some the potential violation of uniform distributed quantile classes, we assume here that a quantile difference of up to **+2.5%** is **insignificant**, whereas a difference of **+5%** warrants a **clearly better** performance. With quantiles 94%, resp. 87.3%, *Oxford*'s computing science teaching environment, for instance, is thus clearly better evaluated than that of the *MIT* (see :numref:`thecsScores` Lines 27-28). We shall furthermore assume that a **considerable** quantile difference of **60%** is triggering a **veto**, respectively a **counter-veto** against a *pairwise outranking*, respectively a *pairwise outranked* situtation.   
+Considering a very plausible imprecision of the performance grades some the potential violation of uniform distributed quantile classes, we assume here that a quantile difference of up to **+2.5%** is **insignificant**, whereas a difference of **+5%** warrants a **clearly better** performance. With quantiles 94%, resp. 87.3%, *Oxford*'s computing science teaching environment, for instance, is thus clearly better evaluated than that of the *MIT* (see :numref:`thecsScores` Lines 27-28). We shall furthermore assume that a **considerable** quantile difference of **60%** is triggering a **veto**, respectively a **counter-veto** against a *pairwise outranking*, respectively a *pairwise outranked* situtation.
 
-Similarly, such precise decimal significance weights of the five ranking criteria (see :numref:`thecsCriteria` Column **Weight**), as given by the *THE* authors, are quite questionable. The significance weights carry here in fact a usually hiden strategy for rendering the quantile evaluations commensurable in view of the computation of the overall scores. The ranking result is thus as much depending on the precise values of the criteria significance weights as precise significance weights are, vice versa, depending on the subjectively accepted ranking result. We will therefore drop such precise weights and, instead, only require a corresponding signficance weight preorder: *gtch* = *gres* > *gcit* > *gint* > *gind*.
+The effect of these performance discrimination threshold on the prefrence modelling may be inspected as follws.
 
-To do so, we will compute in the next Secion a *ranking-by-scoring* result based on *robust* pairwise outranking situations.
+.. code-block:: pycon
+   :name: thecsDiscriminationThresholds
+   :caption: Inspecting the performance discrimination thresholds	  
+   :linenos:
+
+   >>> t.showCriteria()
+    *----  criteria -----*
+    gtch 'Teaching'
+      Scale = (Decimal('0.00'), Decimal('100.00'))
+      Weight = 0.300 
+      Threshold ind : 2.50 + 0.00x ;   percentile:  8.07
+      Threshold pref : 5.00 + 0.00x ;  percentile: 15.75
+      Threshold veto : 60.00 + 0.00x ; percentile: 99.75
+    gres 'Research'
+      Scale = (Decimal('0.00'), Decimal('100.00'))
+      Weight = 0.300 
+      Threshold ind : 2.50 + 0.00x ;   percentile:  7.86
+      Threshold pref : 5.00 + 0.00x ;  percentile: 16.14
+      Threshold veto : 60.00 + 0.00x ; percentile: 99.21
+    gcit 'Citations'
+      Scale = (Decimal('0.00'), Decimal('100.00'))
+      Weight = 0.275 
+      Threshold ind : 2.50 + 0.00x ;   percentile:  11.82
+      Threshold pref : 5.00 + 0.00x ;  percentile:  22.99
+      Threshold veto : 60.00 + 0.00x ; percentile: 100.00
+    gint 'International outlook'
+      Scale = (Decimal('0.00'), Decimal('100.00'))
+      Weight = 0.075 
+      Threshold ind : 2.50 + 0.00x ;  percentile:  6.45
+      Threshold pref : 5.00 + 0.00x ; percentile: 11.75
+    gind 'Industry income'
+      Scale = (Decimal('0.00'), Decimal('100.00'))
+      Weight = 0.050 
+      Threshold ind : 2.50 + 0.00x ;  percentile: 11.82
+      Threshold pref : 5.00 + 0.00x ; percentile: 21.51
+
+Between 6% and 12% of the performance differences are considered to be insignificant; between 12% and 23% are considered to be significant. Less than 1% of the performance differences on both the *Teaching* and *Research* criteria actually trigger a veto situation.
+
+Beside this supposed imprecision in the performance evaluations, the precise decimal significance weights, as allocated by the THE authors to the five ranking criteria (see :numref:`thecsCriteria` Column **Weight**) are as well quite questionable. Significance weights may indeed carry usually hiden strategies for rendering the performance evaluations commensurable in view of a numerical computation of the overall ranking scores. The eventual ranking result is thus as much depending on the precise values of the given criteria significance weights as, vice versa, the given precise significance weights are depending on the subjectively expected and accepted ranking results. We will therefore drop such precise weights and, instead, only require a corresponding criteria signficance preorder: *gtch* = *gres* > *gcit* > *gint* > *gind*.
+
+This leads us in the next Secion to a *ranking-by-scoring* result based on *robust* pairwise outranking situations.
 
 Ranking-by-scoring with multiple criteria of ordinal significance
 .................................................................
 
-We say that a Computer Science Dept *x* **robustly outranks** Computer Science Dept *y* when *x* positively outranks *y* with **all** significance weight vectors that are compatible with *gtch* = *gres* > *gcit* > *gint* > *gind*. A corresponding digraph constructor is provided by the :py:class:`outrankingDigraphs.RobustOutrankingDigraph` class.
+We say that Computer Science Dept *x* **robustly outranks** Computer Science Dept *y* when *x* positively outranks *y* with **all** significance weight vectors that are compatible with the significance preorder: *gtch* = *gres* > *gcit* > *gint* > *gind*. A corresponding digraph constructor is provided by the :py:class:`outrankingDigraphs.RobustOutrankingDigraph` class.
 
 .. code-block:: pycon
    :name: robustthecsOutranking
@@ -3032,7 +3072,7 @@ In :numref:`thecsRelationMap`, **green**, resp. **light green** marked positions
      'shJi', 'stut', 'tud',  'tlavu', 'cihk', 'albt', 'indis',
      'ariz', 'kth',  'hels', 'eind',  'mil']
 
-We actually obtain a very similar ranking result as with the previous *THE* overall scores. The same group of seven Depts: *ethz*, *calt*, *mit*, *oxf*, *cmel*, *git* and *epfl*, is top-ranked. In :numref:`thecsRelationMap` (left upper corner), we may notice that they are in fact all considered more or less equally well performing. 
+We actually obtain a very similar ranking result as with the previous THE overall scores. The same group of seven Depts: *ethz*, *calt*, *mit*, *oxf*, *cmel*, *git* and *epfl*, is top-ranked. In :numref:`thecsRelationMap` (left upper corner), we may notice that they are in fact all considered more or less equally well performing. 
 
 The **quality** of the robust *netFlows* ranking result may be evaluated by measuring the ordinal correlations with the underlying pairwise *global* and *marginal* robust outranking relations.   
 
@@ -3053,7 +3093,7 @@ The **quality** of the robust *netFlows* ranking result may be evaluated by meas
 
 The *NetFlows* ranking result is indeed highly correlated (+0.901) with the pairwise global robust outranking relation. The correlations with the marginal performance criterion rankings are, as well, nearly repecting the given significance weights preorder: *gtch* ~ *gres* > *gcit* > *gint* > *gind*.
 
-We may, furthermore, compute the pairwise correlation indexes observed between the marginal criterion rankings. 
+We may, furthermore, compute the pairwise correlation indexes observed between the marginal criterion outranking relations. 
 
    >>> rdg.showCriteriaCorrelationTable()
     Criteria ordinal correlation index
@@ -3067,11 +3107,24 @@ We may, furthermore, compute the pairwise correlation indexes observed between t
 
 Slightly contradictory (-0.11) appear the *Citations* and *Industrial income* criteria. Due to potential confidentiality clauses, it seams not always possible to publish industrially relevant research results in highly ranked journals. However, criteria *Citations* and *International outlook* show a slightly positive correlation (+0.24), whereas the *International outlook* criterion shows no apparent correlation with both the major *Teachning* and *Research* criteria. The latter are however both highly correlated (+0.67).
 
-It may finally be interesting to see what is the quality of the *THE* overall scores based ranking.
+A *Principal Component Analysis* may well illustrate the previous findings.
+
+   >>> rdg.export3DplotOfCriteriaCorrelation(Type='png')
+
+.. Figure:: th_cs_3Dcorrelation.png
+    :name: thecs3Dcorrelation
+    :width: 400pt
+    :align: center
+
+    3D PCA plot of the pairwise criteria correlation table
+
+In :numref:`thecs3Dcorrelation` (factors 1 and 2 plot) we may notice, first, that more than 80% of the total variance of the previous correlation table is explained by the apparent opposition between the marginal outrankings of criteria: *Teaching*, *Research* & *Industry income* on the left side, and the marginal outrankings of criteria: *Citations* & *international outlook* on the right side. Notice also in the left lower corner the nearly identical positions of the marginal outrankings of the major *Teaching* & *Research* criteria. In the factors 2 and 3 plot, about 30% of the total variance is captured by the opposition between the marginal outrankings of the *Teaching* & *Research* criteria and the marginal outrankings of the *Industrial income* criterion. Finally, in the factors 1 and 3 plot, nearly 15% of the total variance is explained by the opposition between the marginal outrankings of the *International outlook* criterion and the marginal outrankings of the *Citations* criterion.
+
+It may finally be interesting to see what is the corresponding quality of the THE overall scores based ranking.
 
 .. code-block:: pycon
    :name: theRankingQuality
-   :caption: Computing the quality of the *THE* ranking	  
+   :caption: Computing the quality of the THE ranking	  
    :linenos:
 
    >>> # Xsort = [(xscore_1,x_1), (xscore_2,x_2),... ]
@@ -3099,11 +3152,13 @@ It may finally be interesting to see what is the quality of the *THE* overall sc
       gint (0.075): +0.161
       gind (0.050): +0.106
 
-The *THE* ranking result is, as the robust *NetFlows* ranking, also highly correlated (+0.907) with the pairwise global robust outranking relation. By its overall weighted scoring rule, the *THE* ranking induces marginal criterion correlations that are naturally compatible with the given significance weight preorder.
+The THE ranking result is, as the robust *NetFlows* ranking, also highly correlated (+0.907) with the pairwise global robust outranking relation. By its overall weighted scoring rule, the THE ranking induces marginal criterion correlations that are naturally compatible with the given significance weight preorder.
 
 It is worthwhile noticing that, without any commensurability hypothesis and by taking, furthermore, into account grading imprecisions and solely ordinal criteria significance weights, we obtain here a very similar and ranking result with a more or less same preference modelling quality.
 
-Yet, is this latter assumption really necessary? Could we not simply drop any discriminative assumptions with respect to the actual significance of the five performance criteria. Such assumptions are actually only relevant in the quest forwhen implementing commensurable ranking scores. Each one of the five ranking criteria may in fact represent a certain decision objective with respect to choosing the best Computer Science Dept. And each one of the five decision objectives: *Quality of teaching environment*, *Research volume and reputation*, *Citation volume and impact*, *International outlook* and *Industrial innovation* should be considered more or less **equally important** for solving our ranking decision problem.      
+Yet, is this latter assumption really necessary? Could we not simply drop any discriminative assumptions with respect to the actual significance of the five performance criteria. Such prisely valued assumptions are actually only relevant when implementing commensurable ranking scores.
+
+Now, each one of the five THE ranking criteria may in fact represent a certain decision objective with respect to choosing the best Computer Science Dept. And each one of the five decision objectives: *Quality of teaching environment*, *Research volume and reputation*, *Citation volume and impact*, *International outlook* and *Industrial innovation* should be considered more or less **equally important** for solving our ranking decision problem.      
 
 Ranking with multiple criteria of uncertain significance
 ........................................................
@@ -3141,7 +3196,7 @@ We shall, hence, consider herafter the criterion significance weights to be tria
 			     'likelihoods', 'confidenceCutLevel',
 			     'relation', 'gamma', 'notGamma']
 
-In :numref:`theConfidentDigraph` (Lines 1-2), we replace the *THE* significance weights with unit weights. The 90% confident outranking digraph *cdg* keeps 2011 confident pairwise outranking situtaions. The necessary significance majority to be confident amounts to 60%, i.e. three performance criteria are sufficient to validate an outranking situation.
+In :numref:`theConfidentDigraph` (Lines 1-2), we replace the THE significance weights with unit weights. The 90% confident outranking digraph *cdg* keeps 2011 confident pairwise outranking situtaions. The necessary significance majority to be confident amounts to 60%, i.e. three performance criteria are sufficient to validate an outranking situation.
 
 .. code-block:: pycon
    :name: theConfidentnfRanking
@@ -3304,14 +3359,14 @@ We thus recover all the input data. To measure the actual preference discriminat
     C 'Costs'
     Scale = (Decimal('0.00'), Decimal('50000.00'))
     Weight = 45
-    Threshold ind : 1000.00 + 0.00x ; percentile:  0.095
-    Threshold pref : 2500.00 + 0.00x ; percentile:  0.143
+    Threshold ind : 1000.00 + 0.00x ;  percentile:  9.5
+    Threshold pref : 2500.00 + 0.00x ; percentile: 14.3
     Cf 'Comfort'
     Scale = (Decimal('0.00'), Decimal('100.00'))
     Weight = 6
-    Threshold ind : 10.00 + 0.00x ; percentile:  0.095
-    Threshold pref : 20.00 + 0.00x ; percentile:  0.286
-    Threshold veto : 80.00 + 0.00x ; percentile:  0.905
+    Threshold ind : 10.00 + 0.00x ;  percentile:   9.5
+    Threshold pref : 20.00 + 0.00x ; percentile:  28.6
+    Threshold veto : 80.00 + 0.00x ; percentile:  90.5
     ...
 
 On the *Costs* criterion, 9.5% of the performance differences are considered insignificant and 14.3% below the preference discrimination threshold (lines 6-7). On the qualitative *Comfort* criterion, we observe again 9.5% of insignificant performance differences (line 11). Due to the imprecision in the subjective grading, we notice here 28.6% of performance differences below the preference discrimination threshold (Line 12). Furthermore, 100.0 - 90.5 = 9.5% of the performance differences are judged *considerably large* (Line 13); 80% and more of satisfaction differences triggering in fact a veto situation. Same information is available for all the other criteria. 
