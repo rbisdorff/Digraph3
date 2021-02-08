@@ -2713,9 +2713,11 @@ Where to study *Computer Science*: a *ranking* case study
 	:depth: 2
 	:local:
 
-In this tutorial, we are going to use published data from the *Times Higher Education* (THE) *World University Rankings* 2016 by *Computer Science* subject [36]_. Several hundred Computer Science Departments were ranked that year following an average overall score based on five performance criteria: *Teaching* (the learning environment, 30%), *Research* (volume, income and reputation 30%), *Citations* (research influence, 27.5%), *International outlook* (staff, students, and research, 7.5%), and *Industry income* (innovation, 5%).
+In this tutorial, we 
 
-First, we shall look in the THE ranking data with the help of short Python scripts allowing us to illustrate our :code:`Digraph3` programming resources. In a second Section, we shall relax the THE commensurability hypothesis and show how to similarly rank with multiple incommensurable performance criteria of ordinal significance. A last Section is eventually devoted to introduce confident pairwise outrankings.  
+We are using published data from the *Times Higher Education* (THE) *World University Rankings* 2016 by *Computer Science* subject [36]_. Several hundred Computer Science Departments were ranked that year following an average overall score based on five performance criteria: *Teaching* (the learning environment, 30%), *Research* (volume, income and reputation 30%), *Citations* (research influence, 27.5%), *International outlook* (staff, students, and research, 7.5%), and *Industry income* (innovation, 5%).
+
+First, we shall look in the THE ranking data with the help of short Python scripts allowing us to illustrate our :code:`Digraph3` programming resources. In a second Section, we shall relax the THE commensurability hypothesis and show how to similarly rank with multiple incommensurable performance criteria of ordinal significance. A last Section is eventually devoted to introduce quality measures for ranking results.
 
 The THE performance tableau
 .............................
@@ -2743,7 +2745,7 @@ For our tutorial purpose here, an extract of the published THE University rankin
 
 Potential *decision actions*, in our case here, are the 75 THE best-ranked *Computer Science Departments*, all of them located at world renowned Institutions, like the *California Institute of Technology*, the *Swiss Federal Institute of Technology Zurich*, the *Technical University München*, the *University of Oxford* or the *National University of Singapore* (see :numref:`thecsActions` below). 
 
-Instead of using prefigured show methods readily available for inspecting such a *PerformanceTableau* instance, we will illustrate below how to write small Python scripts for printing out its content.   
+Instead of using prefigured show methods, readily available for inspecting such a *PerformanceTableau* instance, we will illustrate below how to write small Python scripts for printing out its content.   
 
 .. code-block:: pycon
    :name: thecsActions
@@ -2841,9 +2843,9 @@ The five performance criteria, ordered by decreasing significance, used by THE f
     gint:	International outlook, In staff, students and research (7.5%)
     gind:	Industry income, Innovation (5.0%)
 
-The very largest part (87.5%) of ranking criteria significance is allocated to the performance evaluations concerning *Teaching*, *Research* and *Citations*. The remaining part (12.5%) goes to *International outlook* and *Industry income*.
+The largest part (87.5%) of ranking criteria significance is allocated to the performance evaluations concerning the *Teaching*, *Research* and *Citations*. The small remaining part (12.5%) goes to *International outlook* and *Industry income*.
 
-In order to now rank the Universities based on these five performance criteria, the THE authors, first, replace the actual grades obtained by each University with their corresponding quantiles observed in the cumulative distribution of the grades obtained by all the surveyed institutions [39]_. The actual rank is eventually determined by an overall score computed as a weighted average of the respective five criteria quantiles (see :numref:`thecsScores` Lines 1-10).       
+In order, now, to rank the Universities based on these five performance criteria, the THE authors, first, replace the actual grades obtained by each University with their corresponding **quantiles** observed in the cumulative distribution of the grades obtained by all the surveyed institutions [39]_. The actual rank is eventually determined by an overall score computed as a **weighted average** of the respective five criteria quantiles (see :numref:`thecsScores` Lines 1-10).       
 
 .. code-block:: pycon
    :name: thecsScores
@@ -2952,6 +2954,11 @@ In order to now rank the Universities based on these five performance criteria, 
 
 In :numref:`thecsScores` (Lines 23 and following), we may thus notice that, in the 2016 edition of the *THE World University rankings* by Computer Science subject, the Computer Science Dept at the *Swiss Federal Institute of Technology Zürich* was first-ranked with an overall score of 92.9; followed by the Computer Science Dept at the *California Institute of Technology* (overall score: 92.4) [38]_.
 
+It is important to notice that the ranking with weighted average evaluations requires commensurable ranking criteria with precise numerical evaluations and significance weights. This tutorial shows how to relax these methodological requirements by following our outranking approach.
+
+Ranking-by-scoring with multiple criteria of ordinal significance
+.................................................................
+
 Let us also have a closer look at the THE performance criteria.
 
     >>> t.showHTMLCriteria(Sorted=False)
@@ -2965,7 +2972,7 @@ Let us also have a closer look at the THE performance criteria.
 
 Considering a very plausible imprecision of the performance grades some the potential violation of uniform distributed quantile classes, we assume here that a quantile difference of up to **+2.5%** is **insignificant**, whereas a difference of **+5%** warrants a **clearly better** performance. With quantiles 94%, resp. 87.3%, *Oxford*'s computing science teaching environment, for instance, is thus clearly better evaluated than that of the *MIT* (see :numref:`thecsScores` Lines 27-28). We shall furthermore assume that a **considerable** quantile difference of **60%** is triggering a **veto**, respectively a **counter-veto** against a *pairwise outranking*, respectively a *pairwise outranked* situation.
 
-The effect of these performance discrimination threshold on the preference modelling may be inspected as follows.
+The effect of these performance discrimination thresholds on the preference modelling may be inspected as follows.
 
 .. code-block:: pycon
    :name: thecsDiscriminationThresholds
@@ -3003,16 +3010,13 @@ The effect of these performance discrimination threshold on the preference model
       Threshold ind : 2.50 + 0.00x ;  percentile: 11.82
       Threshold pref : 5.00 + 0.00x ; percentile: 21.51
 
-Between 6% and 12% of the performance differences are considered to be insignificant; between 12% and 23% are considered to be significant. Less than 1% of the performance differences on both the *Teaching* and *Research* criteria actually trigger a veto situation.
+Between 6% and 12% of the performance differences are, indeed, considered to be insignificant; between 12% and 23% are considered to be significant. Less than 1% of the performance differences on both the *Teaching* and *Research* criteria actually trigger a polarisation effect.
 
-Beside this supposed imprecision in the performance evaluations, the precise decimal significance weights, as allocated by the THE authors to the five ranking criteria (see :numref:`thecsCriteria` Column **Weight**) are as well quite questionable. Significance weights may indeed carry usually hidden strategies for rendering the performance evaluations commensurable in view of a numerical computation of the overall ranking scores. The eventual ranking result is thus as much depending on the precise values of the given criteria significance weights as, vice versa, the given precise significance weights are depending on the subjectively expected and accepted ranking results. We will therefore drop such precise weights and, instead, only require a corresponding criteria significance preorder: *gtch* = *gres* > *gcit* > *gint* > *gind*.
+Beside this supposed imprecision in the performance evaluations, the precise decimal significance weights, as allocated by the THE authors to the five ranking criteria (see :numref:`thecsCriteria` Column **Weight**) are as well quite questionable. Significance weights may indeed carry usually hidden strategies for rendering the performance evaluations commensurable in view of a numerical computation of the overall ranking scores. The eventual ranking result is thus as much depending on the precise values of the given criteria significance weights as, vice versa, the given precise significance weights are depending on the subjectively expected and accepted ranking results. We will therefore drop such precise weights and, instead, only require a corresponding criteria significance preorder: *gtch* = *gres* > *gcit* > *gint* > *gind*. This leads us to a *ranking-by-scoring* result based on *robust* pairwise outranking situations.
 
-This leads us in the next Section to a *ranking-by-scoring* result based on *robust* pairwise outranking situations.
+We say that Computer Science Dept *x* **robustly outranks** Computer Science Dept *y* when *x* positively outranks *y* with **all** significance weight vectors that are compatible with the significance preorder: *gtch* = *gres* > *gcit* > *gint* > *gind*.
 
-Ranking-by-scoring with multiple criteria of ordinal significance
-.................................................................
-
-We say that Computer Science Dept *x* **robustly outranks** Computer Science Dept *y* when *x* positively outranks *y* with **all** significance weight vectors that are compatible with the significance preorder: *gtch* = *gres* > *gcit* > *gint* > *gind*. A corresponding digraph constructor is provided by the :py:class:`outrankingDigraphs.RobustOutrankingDigraph` class.
+A corresponding digraph constructor is provided by the :py:class:`outrankingDigraphs.RobustOutrankingDigraph` class.
 
 .. code-block:: pycon
    :name: robustthecsOutranking
@@ -3020,7 +3024,7 @@ We say that Computer Science Dept *x* **robustly outranks** Computer Science Dep
    :linenos:
 
    >>> rdg = RobustOutrankingDigraph(t)
-   >>> print(rdg)
+   >>> rdg
     *------- Object instance description ------*
     Instance class       : RobustOutrankingDigraph
     Instance name        : robust_the_cs_2016
@@ -3029,29 +3033,83 @@ We say that Computer Science Dept *x* **robustly outranks** Computer Science Dep
     Size                 : 2993
     Determinateness (%)  : 78.16
     Valuation domain     : [-1.00;1.00]
-    Attributes           : ['name', 'description', 'methodData',
-                           'actions', 'order', 'objectives',
-                           'criteria', 'evaluation', 'NA',
-                           'vetos', 'valuationdomain', 'relation',
-                           'concordanceRelation',
-                           'largePerformanceDifferencesCount',
-                           'ordinalRelation', 'equisignificantRelation',
-                           'unanimousRelation', 'stability',
-                           'gamma', 'notGamma']
 
-In digraph *rdg* (see :numref:`robustthecsOutranking`), we observe 2993 such robust pairwise outranking situations (Line 8), in fact validated with a mean significance majority of 78% (Line 9). We may illustrate all these robust outranking situations with a browser view of the corresponding relation map following the :ref:`NetFlows ranking rule <NetFlows-Ranking-label>`.
+   >>> rdg.computeTransitivityDegree(Comments=True)
+    Transitivity degree of digraph <robust_the_cs_2016>:
+     #triples x>y>z: 405150, #closed: 218489, #open: 186661
+     (#closed/#triples) =  0.539
+   >>> rdg.computeSymmetryDegree(Comments=True)
+    Symmetry degree (%) of digraph <robust_the_cs_2016>:
+     #arcs x>y: 2673, #symmetric: 320, #asymmetric: 2353
+     (#symmetric/#arcs) =  0.12
 
-    >>> rdg.showHTMLRelationMap(rankingRule='NetFlows',\
-                         tableTitle='Robust Outranking Map')
+   
+In the resulting digraph instance *rdg* (see :numref:`robustthecsOutranking` Line 8), we observe 2993 such **robust pairwise outranking** situations (Line 8), in fact validated with a mean significance majority of 78% (Line 9). Unfortunately, they do not deliver here any linear ranking relation. Nearly half of the transitive closure is missing (Line 14) and 12% of the valid outranking situations correspond in fact to symmetric *indifference* situations (Line 18).
 
-.. Figure:: the_cs_RelationMap.png
-    :name: thecsRelationMap
-    :width: 600pt
-    :align: center
+Furthermore, the digraph instance *rdg* admits a high number (145) of outranking circuits.
 
-    The relation map of the robust outranking digraph
+.. code-block:: pycon
+   :name: robustCircuits
+   :caption: Inspecting outranking circuits	  
+   :linenos:
 
-In :numref:`thecsRelationMap`, **green**, resp. **light green** marked positions show **certainly**, resp. **positively** *valid outranking* situations, whereas **red**, resp. **light red** marked positions show **certainly**, respectively **positively** *valid outranked* situations. The corresponding robust *NetFlows* ranking of the Universities may be computed explicitly as follows. 
+   >>> rdg.computeChordlessCircuits()
+   >>> rdg.showChordlessCircuits()
+    *---- Chordless circuits ----*
+    145 circuits.
+      1:  ['albt', 'unlu', 'ariz', 'hels'] , credibility : 0.300
+      2:  ['albt', 'tlavu', 'hels'] , credibility : 0.150
+      3:  ['anu', 'man', 'itmo'] , credibility : 0.250
+      4:  ['anu', 'zhej', 'rcu'] , credibility : 0.250
+    ...
+    ...
+     82:  ['csb', 'epfr', 'rwth'] , credibility : 0.250
+     83:  ['csb', 'epfr', 'pud', 'nyu'] , credibility : 0.250
+     84:  ['csd', 'kcl', 'kist'] , credibility : 0.250
+    ...
+    ...
+    142:  ['kul', 'qut', 'mil'] , credibility : 0.250
+    143:  ['lms', 'rcu', 'tech'] , credibility : 0.300
+    144:  ['mil', 'stut', 'qut'] , credibility : 0.300
+    145:  ['mil', 'stut', 'tud'] , credibility : 0.300
+
+In :numref:`robustCircuits`, we notice 2 circuits of length 4 (see circuits #1 and #83). Let us explore below the bipolar-valued *r(x >= y)* charactistics of the first circuit.
+
+.. code-block:: pycon
+   :name: robustDenotation
+   :caption: Showing the relation table with stability denotation	  
+   :linenos:
+
+   >>> rdg.showRelationTable(actionsSubset= ['albt','unlu','ariz','hels'],\
+                             Sorted=False)
+    * ---- Relation Table -----
+     r/(stab)|  'albt' 'unlu' 'ariz' 'hels'   
+        -----|------------------------------------------------------------
+      'albt' |  +1.00  +0.30  +0.00  +0.00  
+             |   (+4)   (+2)   (-1)   (-1)  
+      'unlu' |  +0.00  +1.00  +0.40  +0.00  
+             |   (+0)   (+4)   (+2)   (-1)  
+      'ariz' |  +0.00  -0.12  +1.00  +0.40  
+             |   (+1)   (-2)   (+4)   (+2)  
+      'hels' |  +0.45  +0.00  -0.03  +1.00  
+             |   (+2)   (+1)   (-2)   (+4)  
+    Valuation domain: [-1.0; 1.0]
+    Stability denotation semantics:
+     +4|-4 : unanimous outranking | outranked situation;
+     +2|-2 : outranking | outranked situation validated
+	     with all potential significance weights that are
+	     compatible with the given significance preorder;
+     +1|-1 : validated outranking | outranked situation with
+	     the given significance weights;
+       0   : indeterminate relational situation.
+
+In :numref:`robustDenotation`, we may notice that the outranking circuit ['albt','unlu','ariz','hels'], for instance, would indeed reappear with all potential criteria significance weight vectors that are compatible with given preorder: *gtch* = *gres* > *gcit* > *gint* > *gind*. Notice also that all (+1|-1) marked outranking situations, like the one between 'albt' and 'ariz', are only valid with the given weight vector and, hence, put to doubt (0.00). 
+
+Not being transitive, many indifferences and, above all, many robust outranking circuits; all these characteristics make that no ranking algorithm, applied to this robust outranking digraph instance *rdg*, does exist that would produce the *unique* optimal linear ranking. We are only left with ranking heuristics. We have, now, seen in the previous tutorial on :ref:`ranking with multiple criteria <Ranking-Tutorial-label>` that there exist, luckily, several such heuristic ranking rules that may be applied to rank from a pairwise outranking digraph; yet, delivering all potentially more or less diverging results.
+
+Considering the order of our outranking digraph instance *rdg* (75) and the largely unequal significance weights the THE authors allocated to their ranking criteria, we opt, in this tutorial here, rather for the :ref:`NetFlows ranking rule <NetFlows-Ranking-label>` [40]_. Its complexity, in :math:`O(n^2)` is quite tractable, and its treats the ranking criteria in a fair balance by avoiding potential *tyranny of short majority* effects.
+
+This *NetFlows* ranking of the Computer Science Depts may be computed explicitly as follows. 
 
 .. code-block:: pycon
    :name: robustNetFlowsRanking
@@ -3072,26 +3130,195 @@ In :numref:`thecsRelationMap`, **green**, resp. **light green** marked positions
      'shJi', 'stut', 'tud',  'tlavu', 'cihk', 'albt', 'indis',
      'ariz', 'kth',  'hels', 'eind',  'mil']
 
-We actually obtain a very similar ranking result as with the previous THE overall scores. The same group of seven Depts: *ethz*, *calt*, *mit*, *oxf*, *cmel*, *git* and *epfl*, is top-ranked. In :numref:`thecsRelationMap` (left upper corner), we may notice that they are in fact all considered more or less equally well performing. 
+We actually obtain a very similar ranking result as with the previous THE overall scores. The same group of seven Depts: *ethz*, *calt*, *mit*, *oxf*, *cmel*, *git* and *epfl*, is top-ranked. And a same group of Depts: *tlavu*, *cihk*, *indis*, *ariz*, *kth*, *'hels*, *eind*, and *mil* appears at the end of the list.
 
-The **quality** of the robust *netFlows* ranking result may be evaluated by measuring the ordinal correlations with the underlying pairwise *global* and *marginal* robust outranking relations.   
+We may print out the difference between the overall scores based THE ranking and our *NetFlows* ranking with the follong short Python script, where we may use of the *NetFlows* ranking data stored in the previous computation.
+
+.. code-block:: pycon
+   :name: printRobustNetFlowsRanking
+   :caption: Computing the robust *NetFlows* ranking	  
+   :linenos:
+
+   >>> # rdg.netFlowsRankingDict: ordered dictionary with net flow
+   >>> # scores stored in rdg by the computeNetFlowsRanking() method
+   >>> # Xsort = [(xscore_1,x_1), (xscore_2,x_2),... ]
+   >>> # is sorted in decreasing order of xscores_i
+   >>> print(\
+    ' NetFlows ranking   gtch  gres  gcit  gint  gind   THE ranking')
+   >>> for i in range(75):
+           x = nfRanking[i]
+           xnfScore = rdg.netFlowsRankingDict[x]['netFlow']
+           theScore,thex = xSort[i]
+           print('%2d: %s (%.2f) ' % (i+1,x,xnfScore), end=' \t')
+           for g in crit:
+               print('%.1f ' % (t.evaluation[g][x]),end=' ')
+           print(' %s (%.2f)' % (thex,theScore) )
+     NetFlows ranking   gtch  gres  gcit  gint  gind   THE ranking
+     1: ethz (116.95)  	89.2  97.3  97.1  93.6  64.1   ethz (92.88)
+     2: calt (116.15)  	91.5  96.0  99.8  59.1  85.9   calt (92.42)
+     3: mit (112.72)  	87.3  95.4  99.4  73.9  87.5   oxf (92.20)
+     4: oxf (112.00)  	94.0  92.0  98.8  93.6  44.3   mit (92.06)
+     5: cmel (101.60)  	88.1  92.3  99.4  58.9  71.1   git (89.88)
+     6: git (93.40)  	87.2  99.7  91.3  63.0  79.5   cmel (89.43)
+     7: epfl (90.88)  	86.3  91.6  94.8  97.2  42.7   icl (89.00)
+     8: icl (90.62)  	90.1  87.5  95.1  94.3  49.9   epfl (88.86)
+     9: cou (84.60)  	81.6  94.1  99.7  55.7  45.7   tum (87.70)
+    10: tum (80.42)  	87.6  95.1  87.9  52.9  95.1   sing (86.86)
+    11: wash (76.28)  	84.4  88.7  99.3  57.4  41.2   cou (86.59)
+    12: sing (73.05)  	89.9  91.3  83.0  95.3  50.6   ucl (86.05)
+    13: hkst (71.05)  	74.3  92.0  96.2  84.4  55.8   wash (85.60)
+    14: ucl (66.78)  	85.5  90.3  87.6  94.7  42.4   hkst (85.47)
+    15: uiu (64.80)  	85.0  83.1  99.2  51.4  42.2   ntu (85.46)
+    16: unt (62.65)  	79.9  84.4  99.6  77.6  38.4   ued (85.03)
+    17: ued (58.67)  	85.7  85.3  89.7  95.0  38.8   unt (84.42)
+    18: ntu (57.88)  	76.6  87.7  90.4  92.9  86.9   uiu (83.67)
+    19: mcp (54.08)  	79.7  89.3  94.6  29.8  51.7   mcp (81.53)
+    20: csd (46.62)  	75.2  81.6  99.8  39.7  59.8   cbu (81.25)
+    21: cbu (44.27)  	81.2  78.5  94.7  66.9  45.7   tsu (80.91)
+    22: uta (43.27)  	72.6  85.3  99.6  31.6  49.7   csd (80.45)
+    23: tsu (42.42)  	88.1  90.2  76.7  27.1  85.9   uwa (80.02)
+    24: nyu (35.30)  	71.1  77.4  99.4  78.0  39.8   nyu (79.72)
+    25: uwa (28.88)  	75.3  82.6  91.3  72.9  41.5   uta (79.61)
+    26: csb (18.18)  	65.6  70.9  94.8  72.9  74.9   kit (77.94)
+    27: kit (16.32)  	73.8  85.5  84.4  41.3  76.8   bju (77.04)
+    28: utj (15.95)  	92.0  91.7  48.7  25.8  49.6   csb (76.23)
+    29: bju (15.45)  	83.0  85.3  70.1  30.7  99.4   rwth (76.06)
+    30: kcl (11.95)  	45.5  94.6  86.3  95.1  38.3   hku (75.41)
+    31: chku (9.43)  	64.1  69.3  94.7  75.6  49.9   pud (75.17)
+    32: kist (7.30)  	79.4  88.2  64.2  31.6  92.8   kist (74.94)
+    33: rwth (5.00)  	77.8  85.0  70.8  43.7  89.4   kcl (74.81)
+    34: pud (2.40)  	76.9  84.8  70.8  58.1  56.7   chku (74.23)
+    35: epfr (-1.70)  	81.7  60.6  78.1  85.3  62.9   epfr (73.71)
+    36: hku (-3.83)  	77.0  73.0  77.0  96.8  39.5   dut (73.44)
+    37: rcu (-6.38)  	64.1  53.8  99.4  63.7  46.1   tub (73.25)
+    38: cir (-8.20)  	68.8  64.6  93.0  65.1  40.4   utj (72.92)
+    39: dut (-8.85)  	64.1  78.3  76.3  69.8  90.1   cir (72.50)
+    40: ens (-8.97)  	71.8  40.9  98.7  69.6  43.5   ntw (72.00)
+    41: ntw (-11.15)  	81.5  79.8  66.6  25.5  67.6   anu (70.57)
+    42: anu (-11.50)  	47.2  73.0  92.2  90.0  48.1   rcu (69.79)
+    43: tub (-12.20)  	66.2  82.4  71.0  55.4  99.9   mel (69.67)
+    44: mel (-23.98)  	56.1  70.2  83.7  83.3  50.4   lms (68.38)
+    45: lms (-25.43)  	81.5  68.1  61.0  31.1  87.8   ens (68.35)
+    46: bro (-27.18)  	58.5  54.9  96.8  52.3  38.6   wtu (67.86)
+    47: frei (-34.42)  	54.2  51.6  89.5  49.7  99.9   tech (67.06)
+    48: wtu (-35.05)  	61.8  73.5  73.7  51.9  62.2   bro (66.49)
+    49: tech (-37.95)  	54.9  71.0  85.1  51.7  40.1   man (66.33)
+    50: itmo (-38.50)  	58.0  32.0  98.7  39.2  68.7   zhej (65.34)
+    51: zhej (-43.70)  	73.5  70.4  60.7  22.6  75.7   frei (65.08)
+    52: man (-44.83)  	63.5  71.9  62.9  84.1  42.1   unsw (63.65)
+    53: kuj (-47.40)  	75.4  72.8  49.5  28.3  51.4   kuj (62.77)
+    54: kul (-49.98)  	35.2  55.8  92.0  46.0  88.3   sou (62.15)
+    55: unsw (-54.88)  	60.2  58.2  70.5  87.0  44.3   shJi (61.35)
+    56: glas (-56.98)  	35.2  52.5  91.2  85.8  39.2   itmo (60.52)
+    57: utw (-59.27)  	38.2  52.8  87.0  69.0  60.0   kul (60.47)
+    58: unlu (-60.08)  	35.2  44.2  87.4  99.7  54.1   glas (59.78)
+    59: naji (-60.52)  	51.4  76.9  48.8  39.7  74.4   utw (59.40)
+    60: sou (-60.83)  	48.2  60.7  75.5  87.4  43.2   stut (58.85)
+    61: hkpu (-62.05)  	46.8  36.5  91.4  73.2  41.5   naji (58.61)
+    62: qut (-66.17)  	45.5  42.6  82.8  75.2  63.0   tud (58.28)
+    63: humb (-68.10)  	48.4  31.3  94.7  41.5  45.5   unlu (58.04)
+    64: shJi (-69.72)  	66.9  68.3  62.4  22.8  38.5   qut (57.99)
+    65: stut (-69.90)  	54.2  60.6  61.1  36.3  97.8   hkpu (57.69)
+    66: tud (-70.83)  	46.6  53.6  75.9  53.7  66.5   albt (57.63)
+    67: tlavu (-71.50)  34.1  57.2  89.0  45.3  38.6   mil (57.47)
+    68: cihk (-72.20)  	42.4  44.9  80.1  76.2  67.9   hels (57.40)
+    69: albt (-72.33)  	39.2  53.3  69.9  91.9  75.4   cihk (57.33)
+    70: indis (-72.53)  56.9  76.1  49.3  20.1  41.5   tlavu (57.19)
+    71: ariz (-75.10)  	28.4  61.8  84.3  59.3  42.0   indis (57.04)
+    72: kth (-77.10)  	44.8  42.0  83.6  71.6  39.2   ariz (56.79)
+    73: hels (-79.55)  	48.8  49.6  80.4  50.6  39.5   kth (56.36)
+    74: eind (-82.85)  	32.4  48.4  81.5  72.2  45.8   humb (55.34)
+    75: mil (-83.67)  	46.4  64.3  69.2  44.1  38.5   eind (54.36)
+
+The first inversions, we observe in :numref:`printRobustNetFlowsRanking` (Lines 17-18), concerns the *Oxford* (4 -> 3) and *MIT* (3 -> 4) Depts. Most inversions are very short and concern only switching very close positions in either way. There are some slightly more important inversions, like the Computer Science Dept at *Hong Kong University*, ranked in 30th position in the THE ranking and here in the 36th position. The opposite situation may also happen; the *Berlin Humboldt University* Dept, occupying the 74th position in the THE ranking, advances in the *NetFlows* ranking to position 63.
+
+How may we convince now the reader, that our pairwise outranking based ranking result here is more objective, and makes perhaps more sense, than the original THE ranking?  
+
+How to judge the quality of a ranking result
+............................................
+
+In a multiple criteria based ranking problem, inspecting pairwise marginal performance differences may give objectivity to global preferential statements. That a Dept *x* convincingly outranks Dept *y* may thus conventiently be checked. The *ETH Zürich* Computer Science Dept is, for instance, first ranked in both previous rankings before the *Caltech* Dept. Lest us check the preferential reasons.
+
+.. code-block:: pycon
+   :name: pairwiseComparisons
+   :caption: Pairwise comparing criteria performances	  
+   :linenos:
+
+   >>> rdg.showPairwiseOutrankings('ethz','calt')
+    *------------  pairwise comparisons ----*
+    Valuation in range: -100.00 to +100.00
+    Comparing actions : (ethz, calt)
+    crit. wght.  g(x)  g(y)    diff  	| ind   pref    r() 	| 
+    -------------------------------  	 ------------------------
+    gcit   27.50  97.10  99.80  -2.70 	| 2.50  5.00   +0.00 	| 
+    gind   5.00  64.10  85.90  -21.80 	| 2.50  5.00   -5.00 	| 
+    gint   7.50  93.60  59.10  +34.50 	| 2.50  5.00   +7.50 	| 
+    gres   30.00  97.30  96.00  +1.30 	| 2.50  5.00   +30.00 	| 
+    gtch   30.00  89.20  91.50  -2.30 	| 2.50  5.00   +30.00 	| 
+                                            r(x >= y): +62.50
+    crit. wght.  g(y)  g(x)    diff  	| ind   pref    r() 	|
+    -------------------------------  	 ------------------------
+    gcit   27.50  99.80  97.10  +2.70 	| 2.50  5.00   +27.50 	| 
+    gind   5.00  85.90  64.10  +21.80 	| 2.50  5.00    +5.00 	| 
+    gint   7.50  59.10  93.60  -34.50 	| 2.50  5.00    -7.50 	| 
+    gres   30.00  96.00  97.30  -1.30 	| 2.50  5.00   +30.00 	| 
+    gtch   30.00  91.50  89.20  +2.30 	| 2.50  5.00   +30.00 	| 
+                                            r(y >= x): +85.00
+
+A convincing positive performance difference (+21.80), concerning the *Industry income* critrerion (of 5% significance), may be observed in favour of the *Caltech* Dept. Similarly, a convincing positive performance difference (+34.50), concerning the *International outlook* critrerion (of 7,5% significance), may be this time observed in favour of the *ETH Zürich* Dept. This latter, larger positive, performance difference, observed on a more significant criterion, gives so far a first convincing argument of 12.5% significance for putting *ETH Zürich* first, before *Caltech*.
+
+Yet, the slightly positive performance diference (+2.70) between *Caltech* and *ETH Zürich* on the *Citations* criterion (of 27.5% significance) confirms an *at least as good as* situation in favour of the *Caltech* Dept. The inverse negative performance difference (-2.70), however, is neither *insignificant* (<= 2.50), nor significant (<= 5.0), and does hence **neither confirm nor infirm** a *not at least as good as* situation in disfavour of the *ETH Zürich*. We observe here a convincing argument of 27.5% significance for putting *Caltech* first, before*ETH Zürich*. 
+
+Notice finally, that, on the *Teaching* and *Research* criteria of total signficance 60%, both Depts do, with performance differences < abs(2.50), one as well as the other. As these two major performance criteria necessarily support together always a majority significance with the imposed significance weight preorder: *gtch* = *gres* > *gcit* > *gint* > *gind*, both outranking situations are indeed confirmed at stability level *+2* (see :numref:`robustDenotation`).
+
+The decision to eventually put *ETH Zürich* first, before *Caltech*, depends hence on the fact that the first is more convincingly outranking all the other Depts than the second. We may well illustrate all these robust - stable at level > abs(1) - outranking situations with a browser view of the corresponding robust relation map using our *NetFlows* ranking.
+
+   >>> rdg.showHTMLRelationMap(rankingRule='this',\
+                     tableTitle='Robust Outranking Map')
+
+.. figure:: the_cs_RelationMap.png
+	   :name: theRelationMap
+	   :width: 600 px
+	   :align: center
+
+	   Relation map of the robust outranking relation
+
+In :numref:`theRelationMap`, **dark green**, resp. **light green** marked positions show *certainly*, resp. *positively* valid **outranking** situations, whereas **dark red**, resp. **light red** marked positions show *certainly*, respectively *positively* valid **outranked** situations. In the left upper corner we may verify that the five top-ranked Depts (['ethz','calt','oxf','mit','cmel']) are indeed mutually outranking each other and thus are to be considered all *indifferent*. They are even robust *Condorcet* winners, i.e outranking all other Depts.
+
+The non reflexive **white** positions in the relation map mark outranking or outranked situations that are **not robust** with respect to the given significance weight preorder. They are, hence, put to doubt and set to the indeterminate chracteristic value 0.
+
+We may by the way notice, that no certainly valid outranking (dark green) and no certainly valid outranked situations (dark red) appear **below**, resp. **above** the reflexive diagonal positions; none of these are hence violated by our *netFlows* ranking. The **quality** of the robust *netFlows* ranking may be formally evaluated by measuring the **ordinal correlation** with the underlying pairwise *global* and *marginal* robust outranking situations.   
 
 .. code-block:: pycon
    :name: robustNetFlowsRankingQuality
    :caption: Measuring the quality of the *NetFlows* ranking result	  
    :linenos:
 
-   >>> rdg.computeRankingCorrelation(nfRanking)
-    {'correlation': 0.901, 'determination': 0.563}
-   >>> rdg.showRankingConsensusQuality(nfRanking)
-    Criterion (weight): correlation
-     gtch (0.300): +0.660
-     gres (0.300): +0.638
-     gcit (0.275): +0.370
-     gint (0.075): +0.155
-     gind (0.050): +0.101
+   >>> corr = rdg.computeRankingCorrelation(nfRanking)
+   >>> rdg.showCorrelation(corrnf)   
+    Correlation indexes:
+     Crisp ordinal correlation  : +0.901
+     Epistemic determination    :  0.563
+     Bipolar-valued equivalence : +0.507
 
-The *NetFlows* ranking result is indeed highly correlated (+0.901) with the pairwise global robust outranking relation. The correlations with the marginal performance criterion rankings are, as well, nearly respecting the given significance weights preorder: *gtch* ~ *gres* > *gcit* > *gint* > *gind*.
+The *NetFlows* ranking result is indeed highly ordinally correlated in Kendal's tau sense (+0.901) with the pairwise global robust outranking relation. The bipolar-valued relational equivalence (+0.51) indicates a more than (0.51 + 1.0) = 75.5%  majority significance support.
+
+We may as well check how the *netFlows* is balancing the ranking performance criteria.
+
+    >>> rdg.showRankingConsensusQuality(nfRanking)
+     Criterion (weight): correlation
+     -------------------------------
+      gtch (0.300): +0.660
+      gres (0.300): +0.638
+      gcit (0.275): +0.370
+      gint (0.075): +0.155
+      gind (0.050): +0.101
+     Summary:
+     Weighted mean marginal correlation (a): +0.508
+     Standard deviation (b)                : +0.187
+     Ranking fairness (a)-(b)              : +0.321
+
+The correlations with the marginal performance criterion rankings are nearly respecting the given significance weights preorder: gtch ~ gres > gcit > gint > gind. The mean marginal correlation is also quite high (+0.51). Coupled with a low standard deviation (0.187), we obtain a rather fair ranking result. 
 
 We may, furthermore, compute the pairwise correlation indexes observed between the marginal criterion outranking relations. 
 
@@ -3111,7 +3338,7 @@ A *Principal Component Analysis* may well illustrate the previous findings.
 
    >>> rdg.export3DplotOfCriteriaCorrelation(Type='png')
 
-.. Figure:: th_cs_3Dcorrelation.png
+.. Figure:: the_cs_3Dcorrelation.png
     :name: thecs3Dcorrelation
     :width: 400pt
     :align: center
@@ -3120,7 +3347,7 @@ A *Principal Component Analysis* may well illustrate the previous findings.
 
 In :numref:`thecs3Dcorrelation` (factors 1 and 2 plot) we may notice, first, that more than 80% of the total variance of the previous correlation table is explained by the apparent opposition between the marginal outrankings of criteria: *Teaching*, *Research* & *Industry income* on the left side, and the marginal outrankings of criteria: *Citations* & *international outlook* on the right side. Notice also in the left lower corner the nearly identical positions of the marginal outrankings of the major *Teaching* & *Research* criteria. In the factors 2 and 3 plot, about 30% of the total variance is captured by the opposition between the marginal outrankings of the *Teaching* & *Research* criteria and the marginal outrankings of the *Industrial income* criterion. Finally, in the factors 1 and 3 plot, nearly 15% of the total variance is explained by the opposition between the marginal outrankings of the *International outlook* criterion and the marginal outrankings of the *Citations* criterion.
 
-It may finally be interesting to see what is the corresponding quality of the THE overall scores based ranking.
+It may be insteresting to see what is the corresponding ordinal quality of the THE overall scores based ranking.
 
 .. code-block:: pycon
    :name: theRankingQuality
@@ -3130,110 +3357,28 @@ It may finally be interesting to see what is the corresponding quality of the TH
    >>> # Xsort = [(xscore_1,x_1), (xscore_2,x_2),... ]
    >>> # is sorted in decreasing order of xscores
    >>> theRanking = [item[1] for item in xSort]
-   >>> theRanking
-    ['ethz', 'calt', 'oxf',  'mit',  'git',  'cmel', 'icl',
-     'epfl', 'tum',  'sing', 'cou',  'ucl',  'wash', 'hkst',
-     'ntu',  'ued',  'unt',  'uiu',  'mcp',  'cbu',  'tsu',
-     'csd',  'uwa',  'nyu',  'uta',  'kit',  'bju',  'csb',
-     'rwth', 'hku',  'pud',  'kist', 'kcl',  'chku', 'epfr',
-     'dut',  'tub',  'utj',  'cir',  'ntw',  'anu',  'rcu',
-     'mel',  'lms',  'ens',  'wtu',  'tech', 'bro',  'man',
-     'zhej', 'frei', 'unsw', 'kuj',  'sou',  'shJi', 'itmo',
-     'kul',  'glas', 'utw',  'stut', 'naji', 'tud',  'unlu',
-     'qut',  'hkpu', 'albt', 'mil',  'hels', 'cihk', 'tlavu',
-     'indis', 'ariz', 'kth', 'humb', 'eind']
-   >>> rdg.computeRankingCorrelation(theRanking)
-    {'correlation': 0.907, 'determination': 0.563}
-   >>> rdg.showRankingConsensusQuality(theRanking)
-     criterion (weight): correlation
-      gtch (0.300): +0.683
-      gres (0.300): +0.670
-      gcit (0.275): +0.319
-      gint (0.075): +0.161
-      gind (0.050): +0.106
-
-The THE ranking result is, as the robust *NetFlows* ranking, also highly correlated (+0.907) with the pairwise global robust outranking relation. By its overall weighted scoring rule, the THE ranking induces marginal criterion correlations that are naturally compatible with the given significance weight preorder.
-
-It is worthwhile noticing that, without any commensurability hypothesis and by taking, furthermore, into account grading imprecisions and solely ordinal criteria significance weights, we obtain here a very similar and ranking result with a more or less same preference modelling quality.
-
-Yet, is this latter assumption really necessary? Could we not simply drop any discriminating assumptions with respect to the actual significance of the five performance criteria. Such precisely valued assumptions are actually only relevant when implementing commensurable ranking scores.
-
-Now, each one of the five THE ranking criteria may in fact represent a certain decision objective with respect to choosing the best Computer Science Dept. And each one of the five decision objectives: *Quality of teaching environment*, *Research volume and reputation*, *Citation volume and impact*, *International outlook* and *Industrial innovation* should be considered more or less **equally important** for solving our ranking decision problem.      
-
-Ranking with multiple criteria of uncertain significance
-........................................................
-
-We shall, hence, consider hereafter the criterion significance weights to be triangular random variables with range [0;2] and mode 1. The :py:class:`outrankingDigraphs.ConfidentBipolarOutrankingDigraph` constructor will deliver us a corresponding 90% confident outranking digraph.
-
-.. code-block:: pycon
-   :name: theConfidentDigraph
-   :caption: Computing the 90% confident outranking digraph	  
-   :linenos:
-
-   >>> for g in t.criteria:
-           t.criteria[g]['weight'] = Decimal('1.0')
-   >>> cdg = ConfidentBipolarOutrankingDigraph(t,\
-                    distribution='triangular',confidence=90.0)
-   >>> print(cdg)
-    *------- Object instance description ------*
-     Instance class       : ConfidentBipolarOutrankingDigraph
-     Instance name        : rel_the_cs_2016_CLT
-     # Actions            : 75
-     # Criteria           : 5
-     Size                 : 2011
-     Uncertainty model    : triangular(a=0,b=2w)
-     Likelihood domain    : [-1.0;+1.0]
-     Confidence level     : 0.80 (90.0%)
-     Confident majority   : 0.20 (60.0%)
-     Determinateness (%)  : 68.52
-     Valuation domain     : [-1.00;1.00]
-     Attributes           : ['name', 'bipolarConfidenceLevel',
-                             'distribution', 'betaParameter',
-			     'actions', 'order', 'valuationdomain',
-			     'criteria', 'evaluation', 'NA',
-			     'concordanceRelation', 'vetos', 'negativeVetos',
-			     'largePerformanceDifferencesCount',
-			     'likelihoods', 'confidenceCutLevel',
-			     'relation', 'gamma', 'notGamma']
-
-In :numref:`theConfidentDigraph` (Lines 1-2), we replace the THE significance weights with unit weights. The 90% confident outranking digraph *cdg* keeps 2011 confident pairwise outranking situations. The necessary significance majority to be confident amounts to 60%, i.e. three performance criteria are sufficient to validate an outranking situation.
-
-.. code-block:: pycon
-   :name: theConfidentnfRanking
-   :caption: Measuring the quality of the 90% confident outranking relation	  
-   :linenos:
-
-   >>> confRanking = cdg.computeNetFlowsRanking()
-   >>> corr = cdg.computeRankingCorrelation(confRanking)
-   >>> cdg.showCorrelation(corr)
+   >>> corrthe = rdg.computeRankingCorrelation(theRanking)
+   >>> rdg.showCorrelation(corrthe)
     Correlation indexes:
-     Crisp ordinal correlation  : +0.943
-     Epistemic determination    :  0.370
-     Bipolar-valued equivalence : +0.349
-   >>> cdg.showRankingConsensusQuality(confRanking)
-    90% confident ranking:
-     ['ethz', 'mit', 'calt', 'oxf', 'icl', 'cmel', 'ntu',
-      'git', 'epfl', 'tum', 'sing', 'hkst', 'ucl', 'cou',
-      'ued', 'csb', 'unt', 'wash', 'cbu', 'csd', 'uiu',
-      'chku', 'nyu', 'tsu', 'dut', 'mcp', 'uwa', 'epfr',
-      'uta', 'anu', 'kit', 'tub', 'kcl', 'bju', 'rwth', 'mel',
-      'pud', 'kist', 'rcu', 'hku', 'ens', 'utj', 'frei', 'unlu',
-      'cir', 'albt', 'qut', 'lms', 'itmo', 'ntw', 'wtu', 'kul',
-      'utw', 'cihk', 'unsw', 'man', 'sou', 'glas', 'bro', 'naji',
-      'hkpu', 'zhej', 'stut', 'tud', 'tech', 'eind', 'kuj', 'humb',
-      'kth', 'ariz', 'tlavu', 'hels', 'shJi', 'indis', 'mil']
-     criterion (weight): correlation
-      gtch (0.200): +0.546
-      gres (0.200): +0.536
-      gcit (0.200): +0.386
-      gint (0.200): +0.271
-      gind (0.200): +0.164
-     Summary:
-      Weighted mean marginal correlation (a): +0.381
-      Standard deviation (b)                : +0.149
-      Ranking fairness (a)-(b)              : +0.232
+     Crisp ordinal correlation  : +0.907
+     Epistemic determination    :  0.563
+     Bipolar-valued equivalence : +0.511
+   >>> rdg.showRankingConsensusQuality(theRanking)
+    Criterion (weight): correlation
+    -------------------------------
+     gtch (0.300): +0.683
+     gres (0.300): +0.670
+     gcit (0.275): +0.319
+     gint (0.075): +0.161
+     gind (0.050): +0.106
+    Summary:
+     Weighted mean marginal correlation (a): +0.511
+     Standard deviation (b)                : +0.210
+     Ranking fairness (a)-(b)              : +0.302
 
-Discuss the result and conclude the tutorial.
+The THE ranking result is, as the robust *NetFlows* ranking, also highly correlated (+0.907) with the pairwise global robust outranking relation. By its overall weighted scoring rule, the THE ranking induces marginal criterion correlations that are naturally compatible with the given significance weight preorder. Notice that the mean marginal correlation is of a similar value (+0.51) as the *netFlows* ranking's. Yet, the standard deviation is higher, which leads to a slightless fair balancing of the ranking criteria.
+
+To conclude, let us finally emphasize, that, without any commensurability hypothesis and by taking, furthermore, into account, first, the always present more or less imprecision of any performance grading and, secondly, solely ordinal criteria significance weights, we obtain here with our bipolar-valued outranking approach a very similar and ranking result with a more or less same, when not better preference modelling quality.
 
 Back to :ref:`Content Table <Tutorial-label>`
 
@@ -4147,7 +4292,7 @@ Rating by sorting into relative performance quantiles
 	:depth: 2
 	:local:
 
-We apply order statistics for sorting a set *X* of *n* potential decision actions, evaluated on *m* incommensurable performance criteria, into *q* quantile equivalence classes, based on pairwise outranking characteristics involving the quantile class limits observed on each criterion. Thus we may implement a weak ordering algorithm of complexity *O(nmq)*.
+We apply order statistics for sorting a set *X* of *n* potential decision actions, evaluated on *m* incommensurable performance criteria, into *q* quantile equivalence classes, based on pairwise outranking characteristics involving the quantile class limits observed on each criterion. Thus we may implement a weak ordering algorithm of complexity :math:`O(nmq)`.
 
 
 Quantile sorting on a single criterion
@@ -8115,6 +8260,8 @@ Appendices
 .. [38] The author's own Computer Science Dept at the *University of Luxembourg* was ranked on position 63 with an overall score of 58.0.
 
 .. [39] https://www.timeshighereducation.com/world-university-rankings/subject-ranking-2016-2017-computer-science-methodology
+
+.. [40] The reader might try other ranking rules, like *Copeland*'s, *Kohler*'s or *Tideman*'s rule. Mind that the latter *ranking-by-choosing* rules are in complexity :math:`O(n^2 log(n))`. 
 
 ..  LocalWords:  randomDigraph Determinateness valuationdomain py png
 ..  LocalWords:  notGamma tutorialDigraph shortName func irreflexive
