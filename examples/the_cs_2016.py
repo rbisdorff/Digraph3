@@ -44,7 +44,7 @@ actions = OrderedDict([
 'comment': 'HK',
 }),
 ('cir', {
-'name': 'University of California, Irwine',
+'name': 'University of California at Irwine',
 'comment': 'US',
 }),
 ('cmel', {
@@ -56,11 +56,11 @@ actions = OrderedDict([
 'comment': 'US',
 }),
 ('csb', {
-'name': 'University of California, Santa Barbara',
+'name': 'University of California at Santa Barbara',
 'comment': 'US',
 }),
 ('csd', {
-'name': 'University Of California, San Diego',
+'name': 'University Of California at San Diego',
 'comment': 'US',
 }),
 ('dut', {
@@ -72,19 +72,19 @@ actions = OrderedDict([
 'comment': 'NL',
 }),
 ('ens', {
-'name': 'Ecole Normale Supérieure',
+'name': 'Superior Normal School at Paris',
 'comment': 'FR',
 }),
 ('epfl', {
-'name': 'École Polytechnique Fédérale de Lausanne',
+'name': 'Swiss Federal Institute of Technology Lausanne',
 'comment': 'CH',
 }),
 ('epfr', {
-'name': 'Ecole Polytechnique',
+'name': 'Polytechnic school of Paris',
 'comment': 'FR',
 }),
 ('ethz', {
-'name': 'ETH Zürich',
+'name': 'Swiss Federal Institute of Technology Zürich',
 'comment': 'CH',
 }),
 ('frei', {
@@ -116,7 +116,7 @@ actions = OrderedDict([
 'comment': 'HK',
 }),
 ('humb', {
-'name': 'Humboldt University of Berlin',
+'name': 'Berlin Humboldt University',
 'comment': 'DE',
 }),
 ('icl', {
@@ -152,7 +152,7 @@ actions = OrderedDict([
 'comment': 'JP',
 }),
 ('kul', {
-'name': 'KU Leuven',
+'name': 'Katholieke Universiteit Leuven',
 'comment': 'BE',
 }),
 ('lms', {
@@ -180,11 +180,11 @@ actions = OrderedDict([
 'comment': 'US',
 }),
 ('naji', {
-'name': 'Nanjing University China',
+'name': 'Nanjing University',
 'comment': 'CN',
 }),
 ('ntu', {
-'name': 'Nanyang Technoloical University of Singapore',
+'name': 'Nanyang Technological University of Singapore',
 'comment': 'SG',
 }),
 ('ntw', {
@@ -232,7 +232,7 @@ actions = OrderedDict([
 'comment': 'DE',
 }),
 ('tech', {
-'name': 'Technion Israel Institute of Technology',
+'name': 'Technion - Israel Institute of Technology',
 'comment': 'IL',
 }),
 ('tlavu', {
@@ -240,7 +240,7 @@ actions = OrderedDict([
 'comment': 'IR',
 }),
 ('tsu', {
-'name': 'Tsinghua University, China',
+'name': 'Tsinghua University',
 'comment': 'CN',
 }),
 ('tub', {
@@ -252,7 +252,7 @@ actions = OrderedDict([
 'comment': 'DE',
 }),
 ('tum', {
-'name': 'Technische Universität München',
+'name': 'Technical University of München',
 'comment': 'DE',
 }),
 ('ucl', {
@@ -304,57 +304,57 @@ actions = OrderedDict([
 'comment': 'AUS',
 }),
 ('zhej', {
-'name': 'Zhejiang University China',
+'name': 'Zhejiang University',
 'comment': 'CN',
 }),
 ])
 objectives = OrderedDict([
 ])
 criteria = OrderedDict([
-('gcit', {
-'name': 'Citations',
-'comment': 'Research influence',
-'version': 'performance',
-'preferenceDirection': 'max',
-'scale': (Decimal('0.00'), Decimal('100.00')),
-'weight': Decimal('2.00'),
-'thresholds': {'ind': (Decimal('1.00'), Decimal('0.0')), 'pref': (Decimal('5.00'), Decimal('0.0')), 'veto': (Decimal('80.00'), Decimal('0.0'))},
-}),
-('gind', {
-'name': 'Industry',
-'comment': 'Industry incomme and innovation',
-'version': 'performance',
-'preferenceDirection': 'max',
-'scale': (Decimal('0.00'), Decimal('100.00')),
-'weight': Decimal('1.00'),
-'thresholds': {'ind': (Decimal('1.00'), Decimal('0.0')), 'pref': (Decimal('5.00'), Decimal('0.0')), 'veto': (Decimal('80.00'), Decimal('0.0'))},
-}),
-('gint', {
-'name': 'International',
-'comment': 'International outlook in staff, students and research',
-'version': 'performance',
-'preferenceDirection': 'max',
-'scale': (Decimal('0.00'), Decimal('100.00')),
-'weight': Decimal('1.50'),
-'thresholds': {'ind': (Decimal('1.00'), Decimal('0.0')), 'pref': (Decimal('5.00'), Decimal('0.0')), 'veto': (Decimal('80.00'), Decimal('0.0'))},
-}),
-('gres', {
-'name': 'Research',
-'comment': 'Research volume, income and reputation',
-'version': 'performance',
-'preferenceDirection': 'max',
-'scale': (Decimal('0.00'), Decimal('100.00')),
-'weight': Decimal('1.50'),
-'thresholds': {'ind': (Decimal('1.00'), Decimal('0.0')), 'pref': (Decimal('5.00'), Decimal('0.0')), 'veto': (Decimal('80.00'), Decimal('0.0'))},
-}),
 ('gtch', {
 'name': 'Teaching',
 'comment': 'The learning environment',
 'version': 'performance',
 'preferenceDirection': 'max',
 'scale': (Decimal('0.00'), Decimal('100.00')),
-'weight': Decimal('3.00'),
-'thresholds': {'ind': (Decimal('1.00'), Decimal('0.0')), 'pref': (Decimal('5.00'), Decimal('0.0')), 'veto': (Decimal('80.00'), Decimal('0.0'))},
+'weight': Decimal('30.00'),
+'thresholds': {'ind': (Decimal('2.50'), Decimal('0.0')), 'pref': (Decimal('5.00'), Decimal('0.0')), 'veto': (Decimal('60.00'), Decimal('0.0'))},
+}),
+('gres', {
+'name': 'Research',
+'comment': 'Volume, income and reputation',
+'version': 'performance',
+'preferenceDirection': 'max',
+'scale': (Decimal('0.00'), Decimal('100.00')),
+'weight': Decimal('30.00'),
+'thresholds': {'ind': (Decimal('2.50'), Decimal('0.0')), 'pref': (Decimal('5.00'), Decimal('0.0')), 'veto': (Decimal('60.00'), Decimal('0.0'))},
+}),
+('gcit', {
+'name': 'Citations',
+'comment': 'Research influence',
+'version': 'performance',
+'preferenceDirection': 'max',
+'scale': (Decimal('0.00'), Decimal('100.00')),
+'weight': Decimal('27.50'),
+'thresholds': {'ind': (Decimal('2.50'), Decimal('0.0')), 'pref': (Decimal('5.00'), Decimal('0.0')), 'veto': (Decimal('60.00'), Decimal('0.0'))},
+}),
+('gint', {
+'name': 'International outlook',
+'comment': 'In staff, students and research',
+'version': 'performance',
+'preferenceDirection': 'max',
+'scale': (Decimal('0.00'), Decimal('100.00')),
+'weight': Decimal('7.50'),
+'thresholds': {'ind': (Decimal('2.50'), Decimal('0.0')), 'pref': (Decimal('5.00'), Decimal('0.0'))},
+}),
+('gind', {
+'name': 'Industry income',
+'comment': 'Innovation',
+'version': 'performance',
+'preferenceDirection': 'max',
+'scale': (Decimal('0.00'), Decimal('100.00')),
+'weight': Decimal('5.00'),
+'thresholds': {'ind': (Decimal('2.50'), Decimal('0.0')), 'pref': (Decimal('5.00'), Decimal('0.0'))},
 }),
 ])
 evaluation = {
@@ -456,7 +456,7 @@ evaluation = {
 'epfl':Decimal("42.70"),
 'epfr':Decimal("62.90"),
 'ethz':Decimal("64.10"),
-'frei':Decimal("100.00"),
+'frei':Decimal("99.90"),
 'git':Decimal("79.50"),
 'glas':Decimal("39.20"),
 'hels':Decimal("39.50"),
@@ -495,7 +495,7 @@ evaluation = {
 'tech':Decimal("40.10"),
 'tlavu':Decimal("38.60"),
 'tsu':Decimal("85.90"),
-'tub':Decimal("100.00"),
+'tub':Decimal("99.90"),
 'tud':Decimal("66.50"),
 'tum':Decimal("95.10"),
 'ucl':Decimal("42.40"),
