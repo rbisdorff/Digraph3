@@ -49,8 +49,8 @@
 \contentsline {subsection}{\numberline {6.7}\sphinxstyleemphasis {Tideman}’s ranked\sphinxhyphen {}pairs rule}{75}{subsection.6.7}%
 \contentsline {section}{\numberline {7}Where to study \sphinxstyleemphasis {Computer Science}: a \sphinxstyleemphasis {ranking} case study}{76}{section.7}%
 \contentsline {subsection}{\numberline {7.1}The THE performance tableau}{77}{subsection.7.1}%
-\contentsline {subsection}{\numberline {7.2}Ranking\sphinxhyphen {}by\sphinxhyphen {}scoring with multiple criteria of ordinal significance}{82}{subsection.7.2}%
-\contentsline {subsection}{\numberline {7.3}How to judge the quality of a ranking result}{88}{subsection.7.3}%
+\contentsline {subsection}{\numberline {7.2}Ranking\sphinxhyphen {}by\sphinxhyphen {}scoring with multiple criteria of ordinal significance}{84}{subsection.7.2}%
+\contentsline {subsection}{\numberline {7.3}How to judge the quality of a ranking result}{89}{subsection.7.3}%
 \contentsline {section}{\numberline {8}Computing a best choice recommendation}{94}{section.8}%
 \contentsline {subsection}{\numberline {8.1}What site to choose ?}{94}{subsection.8.1}%
 \contentsline {subsection}{\numberline {8.2}Performance tableau}{96}{subsection.8.2}%

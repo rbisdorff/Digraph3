@@ -58,7 +58,7 @@
 
 
 \title{Tutorials for the Digraph3 Python software resources}
-\date{February 08, 2021}
+\date{February 09, 2021}
 \release{3.9.1}
 \author{Raymond Bisdorff}
 \newcommand{\sphinxlogo}{\sphinxincludegraphics{introDoc3.png}\par}
@@ -3031,20 +3031,18 @@ Back to {\hyperref[\detokenize{tutorial:tutorial-label}]{\sphinxcrossref{\DUrole
 \end{itemize}
 \end{sphinxShadowBox}
 
-In this tutorial, we
-
-We are using published data from the \sphinxstyleemphasis{Times Higher Education} (THE) \sphinxstyleemphasis{World University Rankings} 2016 by \sphinxstyleemphasis{Computer Science} subject %
+In this tutorial, we are going to study a ranking decision problem based on published data from the \sphinxstyleemphasis{Times Higher Education} (THE) \sphinxstyleemphasis{World University Rankings} 2016 by \sphinxstyleemphasis{Computer Science} subject %
 \begin{footnote}[36]\sphinxAtStartFootnote
 \sphinxurl{https://www.timeshighereducation.com/world-university-rankings/2017/subject-ranking/computer-science\#!/page/0/length/25/sort\_by/rank/sort\_order/asc/cols/scores}
 %
-\end{footnote}. Several hundred Computer Science Departments were ranked that year following an average overall score based on five performance criteria: \sphinxstyleemphasis{Teaching} (the learning environment, 30\%), \sphinxstyleemphasis{Research} (volume, income and reputation 30\%), \sphinxstyleemphasis{Citations} (research influence, 27.5\%), \sphinxstyleemphasis{International outlook} (staff, students, and research, 7.5\%), and \sphinxstyleemphasis{Industry income} (innovation, 5\%).
+\end{footnote}. Several hundred worldwide Computer Science Departments were ranked that year following an average overall score based on five performance criteria: \sphinxstyleemphasis{Teaching} (the learning environment, 30\%), \sphinxstyleemphasis{Research} (volume, income and reputation 30\%), \sphinxstyleemphasis{Citations} (research influence, 27.5\%), \sphinxstyleemphasis{International outlook} (staff, students, and research, 7.5\%), and \sphinxstyleemphasis{Industry income} (innovation, 5\%).
 
-First, we shall look in the THE ranking data with the help of short Python scripts allowing us to illustrate our \sphinxcode{\sphinxupquote{Digraph3}} programming resources. In a second Section, we shall relax the THE commensurability hypothesis and show how to similarly rank with multiple incommensurable performance criteria of ordinal significance. A last Section is eventually devoted to introduce quality measures for ranking results.
+First, we shall look in the THE ranking data with the help of short Python scripts, allowing us by the way to illustrate some of our \sphinxcode{\sphinxupquote{Digraph3}} programming resources. In a second Section, we shall relax the THE commensurability hypothesis and show how to similarly rank with multiple incommensurable performance criteria of ordinal significance. A last Section is eventually devoted to introduce quality measures for ranking results.
 
 
 \subsection{The THE performance tableau}
 \label{\detokenize{tutorial:the-the-performance-tableau}}
-For our tutorial purpose here, an extract of the published THE University rankings 2016 by computer science subject is stored in a file named \sphinxhref{\_static/the\_cs\_2016.py}{the\_cs\_2016.py} of \sphinxcode{\sphinxupquote{perfTabs.PerformanceTableau}} format %
+For our tutorial purpose here, an extract of the published THE University rankings 2016 by computer science subject data, concerning the 75 first\sphinxhyphen{}ranked academic Institutions, is stored in a file named \sphinxhref{\_static/the\_cs\_2016.py}{the\_cs\_2016.py} of \sphinxcode{\sphinxupquote{perfTabs.PerformanceTableau}} format %
 \begin{footnote}[37]\sphinxAtStartFootnote
 The performance tableau \sphinxcode{\sphinxupquote{the\_cs\_2016.py}} is also available in the \sphinxcode{\sphinxupquote{examples}} directory of the Digraph3 software collection.
 %
@@ -3069,7 +3067,7 @@ The performance tableau \sphinxcode{\sphinxupquote{the\_cs\_2016.py}} is also av
 
 Potential \sphinxstyleemphasis{decision actions}, in our case here, are the 75 THE best\sphinxhyphen{}ranked \sphinxstyleemphasis{Computer Science Departments}, all of them located at world renowned Institutions, like the \sphinxstyleemphasis{California Institute of Technology}, the \sphinxstyleemphasis{Swiss Federal Institute of Technology Zurich}, the \sphinxstyleemphasis{Technical University München}, the \sphinxstyleemphasis{University of Oxford} or the \sphinxstyleemphasis{National University of Singapore} (see \hyperref[\detokenize{tutorial:thecsactions}]{Listing \ref{\detokenize{tutorial:thecsactions}}} below).
 
-Instead of using prefigured show methods, readily available for inspecting such a \sphinxstyleemphasis{PerformanceTableau} instance, we will illustrate below how to write small Python scripts for printing out its content.
+Instead of using prefigured \sphinxcode{\sphinxupquote{Digraph3}} show methods, readily available for inspecting such a \sphinxstyleemphasis{PerformanceTableau} instance, we will illustrate below how to write small Python scripts for printing out its content.
 \sphinxSetupCaptionForVerbatim{Printing the potential decision actions}
 \def\sphinxLiteralBlockLabel{\label{\detokenize{tutorial:thecsactions}}}
 \begin{sphinxVerbatim}[commandchars=\\\{\},numbers=left,firstnumber=1,stepnumber=1]
@@ -3153,7 +3151,7 @@ Instead of using prefigured show methods, readily available for inspecting such 
 \PYG{g+go}{ zhej:       Zhejiang University (CN)}
 \end{sphinxVerbatim}
 
-The five performance criteria, ordered by decreasing significance, used by THE for ranking the Computer Science Dept at Universities may be printed out as follows.
+The five performance criteria, ordered by decreasing significance weight, used by THE for ranking the Computer Science Depts, may be printed out as follows.
 
 \begin{sphinxVerbatim}[commandchars=\\\{\}]
 \PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{k}{for} \PYG{n}{g} \PYG{o+ow}{in} \PYG{n}{t}\PYG{o}{.}\PYG{n}{criteria}\PYG{p}{:}
@@ -3169,7 +3167,7 @@ The five performance criteria, ordered by decreasing significance, used by THE f
 
 The largest part (87.5\%) of ranking criteria significance is allocated to the performance evaluations concerning the \sphinxstyleemphasis{Teaching}, \sphinxstyleemphasis{Research} and \sphinxstyleemphasis{Citations}. The small remaining part (12.5\%) goes to \sphinxstyleemphasis{International outlook} and \sphinxstyleemphasis{Industry income}.
 
-In order, now, to rank the Universities based on these five performance criteria, the THE authors, first, replace the actual grades obtained by each University with their corresponding \sphinxstylestrong{quantiles} observed in the cumulative distribution of the grades obtained by all the surveyed institutions %
+In order, now, to rank the Universities based on these five performance criteria, the THE authors, first, replace the performance grade obtained by each University with their corresponding \sphinxstylestrong{quantile} observed in the cumulative distribution of the grades obtained by all the surveyed institutions %
 \begin{footnote}[39]\sphinxAtStartFootnote
 \sphinxurl{https://www.timeshighereducation.com/world-university-rankings/subject-ranking-2016-2017-computer-science-methodology}
 %
@@ -3278,18 +3276,15 @@ In order, now, to rank the Universities based on these five performance criteria
 \PYG{g+go}{ 75: eind    32.4  48.4  81.5  72.2  45.8   54.4}
 \end{sphinxVerbatim}
 
-In \hyperref[\detokenize{tutorial:thecsscores}]{Listing \ref{\detokenize{tutorial:thecsscores}}} (Lines 23 and following), we may thus notice that, in the 2016 edition of the \sphinxstyleemphasis{THE World University rankings} by Computer Science subject, the Computer Science Dept at the \sphinxstyleemphasis{Swiss Federal Institute of Technology Zürich} was first\sphinxhyphen{}ranked with an overall score of 92.9; followed by the Computer Science Dept at the \sphinxstyleemphasis{California Institute of Technology} (overall score: 92.4) %
+In \hyperref[\detokenize{tutorial:thecsscores}]{Listing \ref{\detokenize{tutorial:thecsscores}}} (Lines 23 and following), we may thus notice that, in the 2016 edition of the \sphinxstyleemphasis{THE World University rankings} by Computer Science subject, the \sphinxstyleemphasis{Swiss Federal Institute of Technology Zürich} was first\sphinxhyphen{}ranked with an overall score of 92.9; followed by the \sphinxstyleemphasis{California Institute of Technology} (overall score: 92.4) %
 \begin{footnote}[38]\sphinxAtStartFootnote
 The author’s own Computer Science Dept at the \sphinxstyleemphasis{University of Luxembourg} was ranked on position 63 with an overall score of 58.0.
 %
 \end{footnote}.
 
-It is important to notice that the ranking with weighted average evaluations requires commensurable ranking criteria with precise numerical evaluations and significance weights. This tutorial shows how to relax these methodological requirements by following our outranking approach.
+It is important to notice that a ranking with weighted average evaluations requires commensurable ranking criteria with precise decimal grades and significance weights. This tutorial shows how to relax these methodological requirements by following our epistemic logic based outranking approach.
 
-
-\subsection{Ranking\sphinxhyphen{}by\sphinxhyphen{}scoring with multiple criteria of ordinal significance}
-\label{\detokenize{tutorial:ranking-by-scoring-with-multiple-criteria-of-ordinal-significance}}
-Let us also have a closer look at the THE performance criteria.
+Let us have a closer look at the THE performance criteria.
 
 \begin{sphinxVerbatim}[commandchars=\\\{\}]
 \PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{t}\PYG{o}{.}\PYG{n}{showHTMLCriteria}\PYG{p}{(}\PYG{n}{Sorted}\PYG{o}{=}\PYG{k+kc}{False}\PYG{p}{)}
@@ -3302,7 +3297,7 @@ Let us also have a closer look at the THE performance criteria.
 \noindent\sphinxincludegraphics[width=500bp]{{the_cs_2016Criteria}.png}
 \caption{The THE ranking criteria}\label{\detokenize{tutorial:thecscriteria}}\end{figure}
 
-Considering a very plausible imprecision of the performance grades some the potential violation of uniform distributed quantile classes, we assume here that a quantile difference of up to \sphinxstylestrong{+2.5\%} is \sphinxstylestrong{insignificant}, whereas a difference of \sphinxstylestrong{+5\%} warrants a \sphinxstylestrong{clearly better} performance. With quantiles 94\%, resp. 87.3\%, \sphinxstyleemphasis{Oxford}’s computing science teaching environment, for instance, is thus clearly better evaluated than that of the \sphinxstyleemphasis{MIT} (see \hyperref[\detokenize{tutorial:thecsscores}]{Listing \ref{\detokenize{tutorial:thecsscores}}} Lines 27\sphinxhyphen{}28). We shall furthermore assume that a \sphinxstylestrong{considerable} quantile difference of \sphinxstylestrong{60\%} is triggering a \sphinxstylestrong{veto}, respectively a \sphinxstylestrong{counter\sphinxhyphen{}veto} against a \sphinxstyleemphasis{pairwise outranking}, respectively a \sphinxstyleemphasis{pairwise outranked} situation.
+Considering a very plausible imprecision of the performance grades some the potential violation of uniform distributed quantile classes, we assume here that a quantile difference of up to \sphinxstylestrong{abs(2.5)\%} is \sphinxstylestrong{insignificant}, whereas a difference of \sphinxstylestrong{abs(5)\%} warrants a \sphinxstylestrong{clearly better}, resp. \sphinxstylestrong{clearly less good}, performance. With quantiles 94\%, resp. 87.3\%, \sphinxstyleemphasis{Oxford}’s computing science teaching environment, for instance, is thus clearly better evaluated than that of the \sphinxstyleemphasis{MIT} (see \hyperref[\detokenize{tutorial:thecsscores}]{Listing \ref{\detokenize{tutorial:thecsscores}}} Lines 27\sphinxhyphen{}28). We shall furthermore assume that a \sphinxstylestrong{considerable} quantile difference of \sphinxstylestrong{abs(60)\%} is triggering a \sphinxstylestrong{veto}, respectively a \sphinxstylestrong{counter\sphinxhyphen{}veto} against a \sphinxstyleemphasis{pairwise outranking}, respectively a \sphinxstyleemphasis{pairwise outranked} situation.
 
 The effect of these performance discrimination thresholds on the preference modelling may be inspected as follows.
 \sphinxSetupCaptionForVerbatim{Inspecting the performance discrimination thresholds}
@@ -3344,6 +3339,9 @@ Between 6\% and 12\% of the performance differences are, indeed, considered to b
 
 Beside this supposed imprecision in the performance evaluations, the precise decimal significance weights, as allocated by the THE authors to the five ranking criteria (see \hyperref[\detokenize{tutorial:thecscriteria}]{Fig.\@ \ref{\detokenize{tutorial:thecscriteria}}} Column \sphinxstylestrong{Weight}) are as well quite questionable. Significance weights may indeed carry usually hidden strategies for rendering the performance evaluations commensurable in view of a numerical computation of the overall ranking scores. The eventual ranking result is thus as much depending on the precise values of the given criteria significance weights as, vice versa, the given precise significance weights are depending on the subjectively expected and accepted ranking results. We will therefore drop such precise weights and, instead, only require a corresponding criteria significance preorder: \sphinxstyleemphasis{gtch} = \sphinxstyleemphasis{gres} \textgreater{} \sphinxstyleemphasis{gcit} \textgreater{} \sphinxstyleemphasis{gint} \textgreater{} \sphinxstyleemphasis{gind}. This leads us to a \sphinxstyleemphasis{ranking\sphinxhyphen{}by\sphinxhyphen{}scoring} result based on \sphinxstyleemphasis{robust} pairwise outranking situations.
 
+
+\subsection{Ranking\sphinxhyphen{}by\sphinxhyphen{}scoring with multiple criteria of ordinal significance}
+\label{\detokenize{tutorial:ranking-by-scoring-with-multiple-criteria-of-ordinal-significance}}
 We say that Computer Science Dept \sphinxstyleemphasis{x} \sphinxstylestrong{robustly outranks} Computer Science Dept \sphinxstyleemphasis{y} when \sphinxstyleemphasis{x} positively outranks \sphinxstyleemphasis{y} with \sphinxstylestrong{all} significance weight vectors that are compatible with the significance preorder: \sphinxstyleemphasis{gtch} = \sphinxstyleemphasis{gres} \textgreater{} \sphinxstyleemphasis{gcit} \textgreater{} \sphinxstyleemphasis{gint} \textgreater{} \sphinxstyleemphasis{gind}.
 
 A corresponding digraph constructor is provided by the \sphinxcode{\sphinxupquote{outrankingDigraphs.RobustOutrankingDigraph}} class.

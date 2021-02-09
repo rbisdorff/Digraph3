@@ -2713,16 +2713,14 @@ Where to study *Computer Science*: a *ranking* case study
 	:depth: 2
 	:local:
 
-In this tutorial, we 
+In this tutorial, we are going to study a ranking decision problem based on published data from the *Times Higher Education* (THE) *World University Rankings* 2016 by *Computer Science* subject [36]_. Several hundred worldwide Computer Science Departments were ranked that year following an average overall score based on five performance criteria: *Teaching* (the learning environment, 30%), *Research* (volume, income and reputation 30%), *Citations* (research influence, 27.5%), *International outlook* (staff, students, and research, 7.5%), and *Industry income* (innovation, 5%).
 
-We are using published data from the *Times Higher Education* (THE) *World University Rankings* 2016 by *Computer Science* subject [36]_. Several hundred Computer Science Departments were ranked that year following an average overall score based on five performance criteria: *Teaching* (the learning environment, 30%), *Research* (volume, income and reputation 30%), *Citations* (research influence, 27.5%), *International outlook* (staff, students, and research, 7.5%), and *Industry income* (innovation, 5%).
-
-First, we shall look in the THE ranking data with the help of short Python scripts allowing us to illustrate our :code:`Digraph3` programming resources. In a second Section, we shall relax the THE commensurability hypothesis and show how to similarly rank with multiple incommensurable performance criteria of ordinal significance. A last Section is eventually devoted to introduce quality measures for ranking results.
+First, we shall look in the THE ranking data with the help of short Python scripts, allowing us by the way to illustrate some of our :code:`Digraph3` programming resources. In a second Section, we shall relax the THE commensurability hypothesis and show how to similarly rank with multiple incommensurable performance criteria of ordinal significance. A last Section is eventually devoted to introduce quality measures for ranking results.
 
 The THE performance tableau
-.............................
+...........................
 
-For our tutorial purpose here, an extract of the published THE University rankings 2016 by computer science subject is stored in a file named `the_cs_2016.py <_static/the_cs_2016.py>`_ of :py:class:`perfTabs.PerformanceTableau` format [37]_.
+For our tutorial purpose here, an extract of the published THE University rankings 2016 by computer science subject data, concerning the 75 first-ranked academic Institutions, is stored in a file named `the_cs_2016.py <_static/the_cs_2016.py>`_ of :py:class:`perfTabs.PerformanceTableau` format [37]_.
 
 .. code-block:: pycon
    :name: thecsPerfTab
@@ -2745,7 +2743,7 @@ For our tutorial purpose here, an extract of the published THE University rankin
 
 Potential *decision actions*, in our case here, are the 75 THE best-ranked *Computer Science Departments*, all of them located at world renowned Institutions, like the *California Institute of Technology*, the *Swiss Federal Institute of Technology Zurich*, the *Technical University München*, the *University of Oxford* or the *National University of Singapore* (see :numref:`thecsActions` below). 
 
-Instead of using prefigured show methods, readily available for inspecting such a *PerformanceTableau* instance, we will illustrate below how to write small Python scripts for printing out its content.   
+Instead of using prefigured :code:`Digraph3` show methods, readily available for inspecting such a *PerformanceTableau* instance, we will illustrate below how to write small Python scripts for printing out its content.   
 
 .. code-block:: pycon
    :name: thecsActions
@@ -2831,7 +2829,7 @@ Instead of using prefigured show methods, readily available for inspecting such 
     wtu:	Vienna University of Technology (AUS)
     zhej:	Zhejiang University (CN)
 
-The five performance criteria, ordered by decreasing significance, used by THE for ranking the Computer Science Dept at Universities may be printed out as follows.
+The five performance criteria, ordered by decreasing significance weight, used by THE for ranking the Computer Science Depts, may be printed out as follows.
 
    >>> for g in t.criteria:
 	   print('%s:\t%s, %s (%.1f%%)' %\
@@ -2845,7 +2843,7 @@ The five performance criteria, ordered by decreasing significance, used by THE f
 
 The largest part (87.5%) of ranking criteria significance is allocated to the performance evaluations concerning the *Teaching*, *Research* and *Citations*. The small remaining part (12.5%) goes to *International outlook* and *Industry income*.
 
-In order, now, to rank the Universities based on these five performance criteria, the THE authors, first, replace the actual grades obtained by each University with their corresponding **quantiles** observed in the cumulative distribution of the grades obtained by all the surveyed institutions [39]_. The actual rank is eventually determined by an overall score computed as a **weighted average** of the respective five criteria quantiles (see :numref:`thecsScores` Lines 1-10).       
+In order, now, to rank the Universities based on these five performance criteria, the THE authors, first, replace the performance grade obtained by each University with their corresponding **quantile** observed in the cumulative distribution of the grades obtained by all the surveyed institutions [39]_. The actual rank is eventually determined by an overall score computed as a **weighted average** of the respective five criteria quantiles (see :numref:`thecsScores` Lines 1-10).       
 
 .. code-block:: pycon
    :name: thecsScores
@@ -2952,14 +2950,11 @@ In order, now, to rank the Universities based on these five performance criteria
     74: humb 	48.4  31.3  94.7  41.5  45.5   55.3
     75: eind 	32.4  48.4  81.5  72.2  45.8   54.4
 
-In :numref:`thecsScores` (Lines 23 and following), we may thus notice that, in the 2016 edition of the *THE World University rankings* by Computer Science subject, the Computer Science Dept at the *Swiss Federal Institute of Technology Zürich* was first-ranked with an overall score of 92.9; followed by the Computer Science Dept at the *California Institute of Technology* (overall score: 92.4) [38]_.
+In :numref:`thecsScores` (Lines 23 and following), we may thus notice that, in the 2016 edition of the *THE World University rankings* by Computer Science subject, the *Swiss Federal Institute of Technology Zürich* was first-ranked with an overall score of 92.9; followed by the *California Institute of Technology* (overall score: 92.4) [38]_.
 
-It is important to notice that the ranking with weighted average evaluations requires commensurable ranking criteria with precise numerical evaluations and significance weights. This tutorial shows how to relax these methodological requirements by following our outranking approach.
+It is important to notice that a ranking with weighted average evaluations requires commensurable ranking criteria with precise decimal grades and significance weights. This tutorial shows how to relax these methodological requirements by following our epistemic logic based outranking approach.
 
-Ranking-by-scoring with multiple criteria of ordinal significance
-.................................................................
-
-Let us also have a closer look at the THE performance criteria.
+Let us have a closer look at the THE performance criteria.
 
     >>> t.showHTMLCriteria(Sorted=False)
 
@@ -2970,7 +2965,7 @@ Let us also have a closer look at the THE performance criteria.
 
     The THE ranking criteria
 
-Considering a very plausible imprecision of the performance grades some the potential violation of uniform distributed quantile classes, we assume here that a quantile difference of up to **+2.5%** is **insignificant**, whereas a difference of **+5%** warrants a **clearly better** performance. With quantiles 94%, resp. 87.3%, *Oxford*'s computing science teaching environment, for instance, is thus clearly better evaluated than that of the *MIT* (see :numref:`thecsScores` Lines 27-28). We shall furthermore assume that a **considerable** quantile difference of **60%** is triggering a **veto**, respectively a **counter-veto** against a *pairwise outranking*, respectively a *pairwise outranked* situation.
+Considering a very plausible imprecision of the performance grades some the potential violation of uniform distributed quantile classes, we assume here that a quantile difference of up to **abs(2.5)%** is **insignificant**, whereas a difference of **abs(5)%** warrants a **clearly better**, resp. **clearly less good**, performance. With quantiles 94%, resp. 87.3%, *Oxford*'s computing science teaching environment, for instance, is thus clearly better evaluated than that of the *MIT* (see :numref:`thecsScores` Lines 27-28). We shall furthermore assume that a **considerable** quantile difference of **abs(60)%** is triggering a **veto**, respectively a **counter-veto** against a *pairwise outranking*, respectively a *pairwise outranked* situation.
 
 The effect of these performance discrimination thresholds on the preference modelling may be inspected as follows.
 
@@ -3013,6 +3008,9 @@ The effect of these performance discrimination thresholds on the preference mode
 Between 6% and 12% of the performance differences are, indeed, considered to be insignificant; between 12% and 23% are considered to be significant. Less than 1% of the performance differences on both the *Teaching* and *Research* criteria actually trigger a polarisation effect.
 
 Beside this supposed imprecision in the performance evaluations, the precise decimal significance weights, as allocated by the THE authors to the five ranking criteria (see :numref:`thecsCriteria` Column **Weight**) are as well quite questionable. Significance weights may indeed carry usually hidden strategies for rendering the performance evaluations commensurable in view of a numerical computation of the overall ranking scores. The eventual ranking result is thus as much depending on the precise values of the given criteria significance weights as, vice versa, the given precise significance weights are depending on the subjectively expected and accepted ranking results. We will therefore drop such precise weights and, instead, only require a corresponding criteria significance preorder: *gtch* = *gres* > *gcit* > *gint* > *gind*. This leads us to a *ranking-by-scoring* result based on *robust* pairwise outranking situations.
+
+Ranking-by-scoring with multiple criteria of ordinal significance
+.................................................................
 
 We say that Computer Science Dept *x* **robustly outranks** Computer Science Dept *y* when *x* positively outranks *y* with **all** significance weight vectors that are compatible with the significance preorder: *gtch* = *gres* > *gcit* > *gint* > *gind*.
 
