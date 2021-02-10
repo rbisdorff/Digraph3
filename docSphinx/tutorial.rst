@@ -2841,7 +2841,7 @@ The five performance criteria, ordered by decreasing significance weight, used b
     gint:	International outlook, In staff, students and research (7.5%)
     gind:	Industry income, Innovation (5.0%)
 
-The largest part (87.5%) of ranking criteria significance is allocated to the performance evaluations concerning the *Teaching*, *Research* and *Citations*. The small remaining part (12.5%) goes to *International outlook* and *Industry income*.
+The largest part (87.5%) of ranking criteria significance is allocated more or less equally to *Teaching*, *Research* and *Citations*. The small remaining part (12.5%) goes to *International outlook* and *Industry income*.
 
 In order, now, to rank the Universities based on these five performance criteria, the THE authors, first, replace the performance grade obtained per criterion by each University with their corresponding **quantile** observed in the *cumulative distribution* of the grades obtained by all the surveyed institutions [39]_. The actual rank is eventually determined by an overall score computed as a **weighted average** of the respective five criteria quantiles (see :numref:`thecsScores` Lines 1-10).       
 
@@ -3010,7 +3010,7 @@ The effect of these performance discrimination thresholds on the preference mode
 
 Between 6% and 12% of the performance differences are, thus, considered to be insignificant; between 12% and 23% are considered to be significant. Less than 1% of considerable performance differences on both the *Teaching* and *Research* criteria will actually trigger a polarisation effect [BIS-2013]_.
 
-Beside this supposed imprecision in the performance evaluations, the precise decimal significance weights, as allocated by the THE authors to the five ranking criteria (see :numref:`thecsCriteria` Column **Weight**) are as well quite questionable. Significance weights may indeed carry usually hidden strategies for rendering the performance evaluations commensurable in view of a numerical computation of the overall ranking scores. The eventual ranking result is thus as much depending on the precise values of the given criteria significance weights as, vice versa, the given precise significance weights are depending on the subjectively expected and accepted ranking results. We will therefore drop such precise weights and, instead, only require a corresponding criteria significance preorder: *gtch* = *gres* > *gcit* > *gint* > *gind*. Quality of the *teaching environment* and *research volume and reputation* are equally considered most important, followed by the *research influence*. Than comes the *international outlook in staff, students and research* and, least important finally, *industry income and innovation*.
+Beside this supposed imprecision in the performance evaluations, the precise decimal significance weights, as allocated by the THE authors to the five ranking criteria (see :numref:`thecsCriteria` Column **Weight**) are as well quite questionable. Significance weights may indeed carry usually hidden strategies for rendering the performance evaluations commensurable in view of a numerical computation of the overall ranking scores. The eventual ranking result is thus as much depending on the precise values of the given criteria significance weights as, vice versa, the given precise significance weights are depending on the subjectively expected and accepted ranking results. We will therefore drop such precise weights and, instead, only require a corresponding criteria significance preorder: *gtch* = *gres* > *gcit* > *gint* > *gind*. *Teaching environment* and *research volume and reputation* are equally considered most important, followed by the *research influence*. Than comes the *International outlook in staff, students and research* and, least important finally, *industry income and innovation*.
 
 These working hypotheses give us way to a *ranking-by-scoring* approach based on *robust* pairwise outranking situations [BIS-2004b]_:
 
@@ -3132,7 +3132,7 @@ This *NetFlows* ranking of the Computer Science Depts may be computed explicitly
 
 We actually obtain a very similar ranking result as with the previous THE overall scores. The same group of seven Depts: *ethz*, *calt*, *mit*, *oxf*, *cmel*, *git* and *epfl*, is top-ranked. And a same group of Depts: *tlavu*, *cihk*, *indis*, *ariz*, *kth*, *'hels*, *eind*, and *mil* appears at the end of the list.
 
-We may print out the difference between the overall scores based THE ranking and our *NetFlows* ranking with the following short Python script, where we may use of the *NetFlows* ranking data stored implicitly in the previous computation.
+We may print out the difference between the overall scores based THE ranking and our *NetFlows* ranking with the following short Python script, where we make use of the *NetFlows* ranking data stored implicitly in the previous computation.
 
 .. code-block:: pycon
    :name: printRobustNetFlowsRanking
@@ -3396,7 +3396,7 @@ It may be interesting, finally, to see what gives the corresponding quality asse
 
 The THE ranking result is, as the robust *NetFlows* ranking, also highly correlated (+0.907) with the pairwise global robust outranking relation. By its overall weighted scoring rule, the THE ranking induces marginal criterion correlations that are naturally compatible with the given significance weight preorder. Notice that the mean marginal correlation is of a similar value (+0.51) as the *netFlows* ranking's. Yet, the standard deviation is higher, which leads to a slight less fair balancing of the three major ranking criteria.
 
-To conclude, let us finally emphasize, that, without any commensurability hypothesis and by taking, furthermore, into account, first, the always present more or less imprecision of any performance grading and, secondly, solely ordinal criteria significance weights, we may obtain here with our bipolar-valued outranking approach a very similar ranking result with more or less a same, when not better preference modelling quality. The reader is invited to out other outranking based ranking heuristics.
+To conclude, let us finally emphasize, that, without any commensurability hypothesis and by taking, furthermore, into account, first, the always present more or less imprecision of any performance grading and, secondly, solely ordinal criteria significance weights, we may obtain here with our bipolar-valued outranking approach a very similar ranking result with more or less a same, when not better preference modelling quality. The reader is invited to try out other outranking based ranking heuristics.
 
 Back to :ref:`Content Table <Tutorial-label>`
 
