@@ -2814,9 +2814,49 @@
         <span class="k">else</span><span class="p">:</span>
             <span class="k">return</span> <span class="n">symRelation</span></div>
 
+<div class="viewcode-block" id="Digraph.computeIncomparabilityDegree"><a class="viewcode-back" href="../techDoc.html#digraphs.Digraph.computeIncomparabilityDegree">[docs]</a>    <span class="k">def</span> <span class="nf">computeIncomparabilityDegree</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">InPercents</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span><span class="n">Comments</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Renders the incomparability degree (Decimal), i.e. the relative number of symmetric indeterminate relations of the irreflexive part of a digraph. </span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="kn">from</span> <span class="nn">decimal</span> <span class="k">import</span> <span class="n">Decimal</span>
+        <span class="n">Med</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">valuationdomain</span><span class="p">[</span><span class="s1">&#39;med&#39;</span><span class="p">]</span>
+        <span class="n">na</span>  <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">actions</span><span class="p">)</span>
+        <span class="n">actions</span> <span class="o">=</span> <span class="p">[</span><span class="n">x</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">actions</span><span class="p">]</span>
+        <span class="n">relation</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">relation</span>
+        <span class="n">nLinks</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="n">notDetLinks</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">na</span><span class="p">):</span>
+            <span class="n">x</span> <span class="o">=</span> <span class="n">actions</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
+            <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">,</span><span class="n">na</span><span class="p">):</span>
+                <span class="n">y</span> <span class="o">=</span> <span class="n">actions</span><span class="p">[</span><span class="n">j</span><span class="p">]</span>
+                <span class="n">nLinks</span> <span class="o">+=</span> <span class="mi">1</span>
+                <span class="k">if</span> <span class="n">relation</span><span class="p">[</span><span class="n">x</span><span class="p">][</span><span class="n">y</span><span class="p">]</span> <span class="o">==</span> <span class="n">Med</span> <span class="ow">and</span> <span class="n">relation</span><span class="p">[</span><span class="n">y</span><span class="p">][</span><span class="n">x</span><span class="p">]</span> <span class="o">==</span> <span class="n">Med</span><span class="p">:</span>
+                    <span class="n">notDetLinks</span> <span class="o">+=</span> <span class="mi">1</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="n">res</span> <span class="o">=</span> <span class="n">Decimal</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">notDetLinks</span><span class="p">))</span><span class="o">/</span><span class="n">Decimal</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">nLinks</span><span class="p">))</span>
+        <span class="k">except</span><span class="p">:</span>
+            <span class="n">res</span> <span class="o">=</span> <span class="n">Decimal</span><span class="p">(</span><span class="s1">&#39;1.0&#39;</span><span class="p">)</span>
+            <span class="k">if</span> <span class="n">Comments</span><span class="p">:</span>
+                <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Digraph instance </span><span class="si">%s</span><span class="s1"> has order 0&#39;</span> <span class="o">%</span> <span class="bp">self</span><span class="o">.</span><span class="n">name</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">InPercents</span><span class="p">:</span>
+            <span class="n">res</span> <span class="o">*=</span> <span class="n">Decimal</span><span class="p">(</span><span class="s1">&#39;100.0&#39;</span><span class="p">)</span> 
+        <span class="k">if</span> <span class="n">Comments</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">InPercents</span><span class="p">:</span>
+                <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Incomparability degree (</span><span class="si">%%</span><span class="s1">) of digraph &lt;</span><span class="si">%s</span><span class="s1">&gt;:&#39;</span> <span class="o">%</span> <span class="bp">self</span><span class="o">.</span><span class="n">name</span><span class="p">)</span>
+                <span class="nb">print</span><span class="p">(</span><span class="s1">&#39; #links x&lt;-&gt;y y: </span><span class="si">%d</span><span class="s1">, #incomparable: </span><span class="si">%d</span><span class="s1">, #comparable: </span><span class="si">%d</span><span class="s1">&#39;</span> <span class="o">%</span>\
+                      <span class="p">(</span><span class="n">nLinks</span><span class="p">,</span><span class="n">notDetLinks</span><span class="p">,</span><span class="n">nLinks</span><span class="o">-</span><span class="n">notDetLinks</span><span class="p">)</span> <span class="p">)</span>
+                <span class="nb">print</span><span class="p">(</span><span class="s1">&#39; (#incomparable/#links) =  </span><span class="si">%.1f</span><span class="s1">&#39;</span> <span class="o">%</span><span class="p">(</span><span class="n">res</span><span class="p">)</span> <span class="p">)</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Incomparability degree of digraph &lt;</span><span class="si">%s</span><span class="s1">&gt;:&#39;</span> <span class="o">%</span> <span class="bp">self</span><span class="o">.</span><span class="n">name</span><span class="p">)</span>
+                <span class="nb">print</span><span class="p">(</span><span class="s1">&#39; #links: </span><span class="si">%d</span><span class="s1">, #incomparable: </span><span class="si">%d</span><span class="s1">, #comparable: </span><span class="si">%d</span><span class="s1">&#39;</span> <span class="o">%</span>\
+                      <span class="p">(</span><span class="n">nLinks</span><span class="p">,</span><span class="n">notDetLinks</span><span class="p">,</span><span class="n">nLinks</span><span class="o">-</span><span class="n">notDetLinks</span><span class="p">)</span> <span class="p">)</span>
+                <span class="nb">print</span><span class="p">(</span><span class="s1">&#39; (#incomparable/#links) =  </span><span class="si">%.3f</span><span class="s1">&#39;</span> <span class="o">%</span><span class="p">(</span><span class="n">res</span><span class="p">)</span> <span class="p">)</span>
+        <span class="k">return</span> <span class="n">res</span></div>
+
 <div class="viewcode-block" id="Digraph.computeSymmetryDegree"><a class="viewcode-back" href="../techDoc.html#digraphs.Digraph.computeSymmetryDegree">[docs]</a>    <span class="k">def</span> <span class="nf">computeSymmetryDegree</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">InPercents</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span><span class="n">Comments</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        Renders the symmetry degree (Decimal) of the reflexive part of a digraph.</span>
+<span class="sd">        Renders the symmetry degree (Decimal) of the irreflexive part of a digraph.</span>
 
 <span class="sd">        .. note::</span>
 
@@ -2853,12 +2893,12 @@
                 <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Symmetry degree (</span><span class="si">%%</span><span class="s1">) of digraph &lt;</span><span class="si">%s</span><span class="s1">&gt;:&#39;</span> <span class="o">%</span> <span class="bp">self</span><span class="o">.</span><span class="n">name</span><span class="p">)</span>
                 <span class="nb">print</span><span class="p">(</span><span class="s1">&#39; #arcs x&gt;y: </span><span class="si">%d</span><span class="s1">, #symmetric: </span><span class="si">%d</span><span class="s1">, #asymmetric: </span><span class="si">%d</span><span class="s1">&#39;</span> <span class="o">%</span>\
                       <span class="p">(</span><span class="n">narcs</span><span class="p">,</span><span class="n">nsymArc</span><span class="p">,</span><span class="n">narcs</span><span class="o">-</span><span class="n">nsymArc</span><span class="p">)</span> <span class="p">)</span>
-                <span class="nb">print</span><span class="p">(</span><span class="s1">&#39; #symmetric/#arcs =  </span><span class="si">%.1f</span><span class="s1">&#39;</span> <span class="o">%</span><span class="p">(</span><span class="n">res</span><span class="p">)</span> <span class="p">)</span>
+                <span class="nb">print</span><span class="p">(</span><span class="s1">&#39; (#symmetric/#arcs) =  </span><span class="si">%.1f</span><span class="s1">&#39;</span> <span class="o">%</span><span class="p">(</span><span class="n">res</span><span class="p">)</span> <span class="p">)</span>
             <span class="k">else</span><span class="p">:</span>
                 <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Symmetry degree of digraph &lt;</span><span class="si">%s</span><span class="s1">&gt;:&#39;</span> <span class="o">%</span> <span class="bp">self</span><span class="o">.</span><span class="n">name</span><span class="p">)</span>
                 <span class="nb">print</span><span class="p">(</span><span class="s1">&#39; #arcs x&gt;y: </span><span class="si">%d</span><span class="s1">, #symmetric: </span><span class="si">%d</span><span class="s1">, #asymmetric: </span><span class="si">%d</span><span class="s1">&#39;</span> <span class="o">%</span>\
                       <span class="p">(</span><span class="n">narcs</span><span class="p">,</span><span class="n">nsymArc</span><span class="p">,</span><span class="n">narcs</span><span class="o">-</span><span class="n">nsymArc</span><span class="p">)</span> <span class="p">)</span>
-                <span class="nb">print</span><span class="p">(</span><span class="s1">&#39; #arcs/#symmetric =  </span><span class="si">%.3f</span><span class="s1">&#39;</span> <span class="o">%</span><span class="p">(</span><span class="n">res</span><span class="p">)</span> <span class="p">)</span>
+                <span class="nb">print</span><span class="p">(</span><span class="s1">&#39; (#symmetric/#arcs) =  </span><span class="si">%.3f</span><span class="s1">&#39;</span> <span class="o">%</span><span class="p">(</span><span class="n">res</span><span class="p">)</span> <span class="p">)</span>
         <span class="k">return</span> <span class="n">res</span></div>
 
 <div class="viewcode-block" id="Digraph.isSymmetric"><a class="viewcode-back" href="../techDoc.html#digraphs.Digraph.isSymmetric">[docs]</a>    <span class="k">def</span> <span class="nf">isSymmetric</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">Comments</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
@@ -2917,39 +2957,6 @@
                 <span class="nb">print</span><span class="p">(</span><span class="s1">&#39; (#closed/#triples) =  </span><span class="si">%.3f</span><span class="s1">&#39;</span> <span class="o">%</span><span class="p">(</span><span class="n">res</span><span class="p">)</span> <span class="p">)</span>
         <span class="k">return</span> <span class="n">res</span></div>
             
-    <span class="c1"># def computeTransitivityDegreeOld(self,Comments=False):</span>
-    <span class="c1">#     &quot;&quot;&quot;</span>
-    <span class="c1">#     Renders the transitivity degree of a digraph.</span>
-    <span class="c1">#     &quot;&quot;&quot;</span>
-    <span class="c1">#     from copy import deepcopy</span>
-    <span class="c1">#     Med = self.valuationdomain[&#39;med&#39;]</span>
-    <span class="c1">#     actions = self.actions</span>
-    <span class="c1">#     origRelation = self.relation</span>
-    <span class="c1">#     closedRelation = self.closeTransitive(InSite=False,Comments=Comments)</span>
-    <span class="c1">#     openedRelation = self.closeTransitive(Reverse=True,\</span>
-    <span class="c1">#                             InSite=False,Comments=Comments)</span>
-    <span class="c1">#     nopen = 0</span>
-    <span class="c1">#     nclosed = 0</span>
-    <span class="c1">#     norig = 0</span>
-    <span class="c1">#     for x in actions:</span>
-    <span class="c1">#         rorigx = origRelation[x]</span>
-    <span class="c1">#         rclosedx = closedRelation[x]</span>
-    <span class="c1">#         ropenx = openedRelation[x]</span>
-    <span class="c1">#         for y in actions:</span>
-    <span class="c1">#             if ropenx[y] &gt; Med:</span>
-    <span class="c1">#                 nopen += 1</span>
-    <span class="c1">#             if rclosedx[y] &gt; Med:</span>
-    <span class="c1">#                 nclosed += 1</span>
-    <span class="c1">#             if rorigx[y] &gt; Med:</span>
-    <span class="c1">#                 norig += 1</span>
-    <span class="c1">#     if nclosed &gt; nopen:</span>
-    <span class="c1">#         res = (norig-nopen)/(nclosed-nopen)</span>
-    <span class="c1">#     else:</span>
-    <span class="c1">#         res = 0.0</span>
-    <span class="c1">#     if Comments:</span>
-    <span class="c1">#         print(&#39;Transitivity degree of graph &lt;%s&gt; : %.2f&#39; %(self.name,res))</span>
-    <span class="c1">#     return res</span>
-
 <div class="viewcode-block" id="Digraph.isTransitive"><a class="viewcode-back" href="../techDoc.html#digraphs.Digraph.isTransitive">[docs]</a>    <span class="k">def</span> <span class="nf">isTransitive</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">Comments</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        True if transitivity degree == 1.0.</span>
@@ -13738,20 +13745,26 @@
 
         <span class="kn">from</span> <span class="nn">time</span> <span class="k">import</span> <span class="n">time</span>
         <span class="kn">from</span> <span class="nn">digraphsTools</span> <span class="k">import</span> <span class="o">*</span>
+        <span class="kn">from</span> <span class="nn">outrankingDigraphs</span> <span class="k">import</span> <span class="o">*</span>
         <span class="n">t</span> <span class="o">=</span> <span class="n">RandomCBPerformanceTableau</span><span class="p">(</span><span class="n">weightDistribution</span><span class="o">=</span><span class="s2">&quot;equiobjectives&quot;</span><span class="p">,</span>
-                                       <span class="n">numberOfActions</span><span class="o">=</span><span class="mi">20</span><span class="p">,</span><span class="n">seed</span><span class="o">=</span><span class="mi">106</span><span class="p">)</span>
-        <span class="n">g</span> <span class="o">=</span> <span class="n">BipolarOutrankingDigraph</span><span class="p">(</span><span class="n">t</span><span class="p">)</span>
-        <span class="n">g</span><span class="o">.</span><span class="n">computeTransitivityDegree</span><span class="p">(</span><span class="n">Comments</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+                                       <span class="n">numberOfActions</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span><span class="n">seed</span><span class="o">=</span><span class="mi">106</span><span class="p">,</span>
+                                       <span class="n">missingDataProbability</span><span class="o">=</span><span class="mf">0.1</span><span class="p">)</span>
+        <span class="n">g</span> <span class="o">=</span> <span class="n">RobustOutrankingDigraph</span><span class="p">(</span><span class="n">t</span><span class="p">)</span>
+        <span class="n">g</span><span class="o">.</span><span class="n">showRelationTable</span><span class="p">()</span>
+        <span class="c1">#g.computeTransitivityDegree(Comments=True)</span>
+        <span class="n">g</span><span class="o">.</span><span class="n">computeIncomparabilityDegree</span><span class="p">(</span><span class="n">Comments</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+        <span class="n">g</span><span class="o">.</span><span class="n">computeIncomparabilityDegree</span><span class="p">(</span><span class="n">InPercents</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span><span class="n">Comments</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
         <span class="c1">#g.computeTransitivityDegreeOld(Comments=True)</span>
-        <span class="n">g</span><span class="o">.</span><span class="n">closeTransitive</span><span class="p">(</span><span class="n">Reverse</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span><span class="n">Comments</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+        <span class="c1">#g.closeTransitive(Reverse=True,Comments=True)</span>
         <span class="c1">#print(g)</span>
-        <span class="n">g</span><span class="o">.</span><span class="n">computeTransitivityDegree</span><span class="p">(</span><span class="n">Comments</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+        <span class="c1">#g.computeTransitivityDegree(Comments=True)</span>
         <span class="c1">#g = EmptyDigraph()</span>
         <span class="c1">#g = CirculantDigraph(circulants=[1,-1])</span>
-        <span class="n">g</span> <span class="o">=</span> <span class="n">EmptyDigraph</span><span class="p">()</span>
-        <span class="n">g</span><span class="o">.</span><span class="n">computeTransitivityDegree</span><span class="p">(</span><span class="n">Comments</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
-        <span class="n">g</span> <span class="o">=</span> <span class="n">CompleteDigraph</span><span class="p">()</span>
-        <span class="n">g</span><span class="o">.</span><span class="n">computeTransitivityDegree</span><span class="p">(</span><span class="n">Comments</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+        <span class="c1">#g = EmptyDigraph()</span>
+        <span class="c1">#g.computeTransitivityDegree(Comments=True)</span>
+        <span class="c1">#g = CompleteDigraph()</span>
+        <span class="c1">#g.computeTransitivityDegree(Comments=True)</span>
+        
         <span class="c1">#g.closeSymmetric()</span>
         <span class="c1"># print(g.computeSymmetryDegree(Comments=True))</span>
         <span class="c1"># print(g.isSymmetric(Comments=True))</span>

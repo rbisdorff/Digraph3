@@ -2647,9 +2647,49 @@ class Digraph(object):
         else:
             return symRelation
 
+    def computeIncomparabilityDegree(self,InPercents=False,Comments=False):
+        """
+        Renders the incomparability degree (Decimal), i.e. the relative number of symmetric indeterminate relations of the irreflexive part of a digraph. 
+
+        """
+        from decimal import Decimal
+        Med = self.valuationdomain['med']
+        na  = len(self.actions)
+        actions = [x for x in self.actions]
+        relation = self.relation
+        nLinks = 0
+        notDetLinks = 0
+        for i in range(na):
+            x = actions[i]
+            for j in range(i+1,na):
+                y = actions[j]
+                nLinks += 1
+                if relation[x][y] == Med and relation[y][x] == Med:
+                    notDetLinks += 1
+        try:
+            res = Decimal(str(notDetLinks))/Decimal(str(nLinks))
+        except:
+            res = Decimal('1.0')
+            if Comments:
+                print('Digraph instance %s has order 0' % self.name)
+        if InPercents:
+            res *= Decimal('100.0') 
+        if Comments:
+            if InPercents:
+                print('Incomparability degree (%%) of digraph <%s>:' % self.name)
+                print(' #links x<->y y: %d, #incomparable: %d, #comparable: %d' %\
+                      (nLinks,notDetLinks,nLinks-notDetLinks) )
+                print(' (#incomparable/#links) =  %.1f' %(res) )
+            else:
+                print('Incomparability degree of digraph <%s>:' % self.name)
+                print(' #links: %d, #incomparable: %d, #comparable: %d' %\
+                      (nLinks,notDetLinks,nLinks-notDetLinks) )
+                print(' (#incomparable/#links) =  %.3f' %(res) )
+        return res
+
     def computeSymmetryDegree(self,InPercents=False,Comments=False):
         """
-        Renders the symmetry degree (Decimal) of the reflexive part of a digraph.
+        Renders the symmetry degree (Decimal) of the irreflexive part of a digraph.
 
         .. note::
 
@@ -2686,12 +2726,12 @@ class Digraph(object):
                 print('Symmetry degree (%%) of digraph <%s>:' % self.name)
                 print(' #arcs x>y: %d, #symmetric: %d, #asymmetric: %d' %\
                       (narcs,nsymArc,narcs-nsymArc) )
-                print(' #symmetric/#arcs =  %.1f' %(res) )
+                print(' (#symmetric/#arcs) =  %.1f' %(res) )
             else:
                 print('Symmetry degree of digraph <%s>:' % self.name)
                 print(' #arcs x>y: %d, #symmetric: %d, #asymmetric: %d' %\
                       (narcs,nsymArc,narcs-nsymArc) )
-                print(' #arcs/#symmetric =  %.3f' %(res) )
+                print(' (#symmetric/#arcs) =  %.3f' %(res) )
         return res
 
     def isSymmetric(self,Comments=False):
@@ -2750,39 +2790,6 @@ class Digraph(object):
                 print(' (#closed/#triples) =  %.3f' %(res) )
         return res
             
-    # def computeTransitivityDegreeOld(self,Comments=False):
-    #     """
-    #     Renders the transitivity degree of a digraph.
-    #     """
-    #     from copy import deepcopy
-    #     Med = self.valuationdomain['med']
-    #     actions = self.actions
-    #     origRelation = self.relation
-    #     closedRelation = self.closeTransitive(InSite=False,Comments=Comments)
-    #     openedRelation = self.closeTransitive(Reverse=True,\
-    #                             InSite=False,Comments=Comments)
-    #     nopen = 0
-    #     nclosed = 0
-    #     norig = 0
-    #     for x in actions:
-    #         rorigx = origRelation[x]
-    #         rclosedx = closedRelation[x]
-    #         ropenx = openedRelation[x]
-    #         for y in actions:
-    #             if ropenx[y] > Med:
-    #                 nopen += 1
-    #             if rclosedx[y] > Med:
-    #                 nclosed += 1
-    #             if rorigx[y] > Med:
-    #                 norig += 1
-    #     if nclosed > nopen:
-    #         res = (norig-nopen)/(nclosed-nopen)
-    #     else:
-    #         res = 0.0
-    #     if Comments:
-    #         print('Transitivity degree of graph <%s> : %.2f' %(self.name,res))
-    #     return res
-
     def isTransitive(self,Comments=False):
         """
         True if transitivity degree == 1.0.
@@ -13571,20 +13578,26 @@ if __name__ == "__main__":
 
         from time import time
         from digraphsTools import *
+        from outrankingDigraphs import *
         t = RandomCBPerformanceTableau(weightDistribution="equiobjectives",
-                                       numberOfActions=20,seed=106)
-        g = BipolarOutrankingDigraph(t)
-        g.computeTransitivityDegree(Comments=True)
+                                       numberOfActions=10,seed=106,
+                                       missingDataProbability=0.1)
+        g = RobustOutrankingDigraph(t)
+        g.showRelationTable()
+        #g.computeTransitivityDegree(Comments=True)
+        g.computeIncomparabilityDegree(Comments=True)
+        g.computeIncomparabilityDegree(InPercents=True,Comments=True)
         #g.computeTransitivityDegreeOld(Comments=True)
-        g.closeTransitive(Reverse=True,Comments=True)
+        #g.closeTransitive(Reverse=True,Comments=True)
         #print(g)
-        g.computeTransitivityDegree(Comments=True)
+        #g.computeTransitivityDegree(Comments=True)
         #g = EmptyDigraph()
         #g = CirculantDigraph(circulants=[1,-1])
-        g = EmptyDigraph()
-        g.computeTransitivityDegree(Comments=True)
-        g = CompleteDigraph()
-        g.computeTransitivityDegree(Comments=True)
+        #g = EmptyDigraph()
+        #g.computeTransitivityDegree(Comments=True)
+        #g = CompleteDigraph()
+        #g.computeTransitivityDegree(Comments=True)
+        
         #g.closeSymmetric()
         # print(g.computeSymmetryDegree(Comments=True))
         # print(g.isSymmetric(Comments=True))
