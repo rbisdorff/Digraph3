@@ -47,6 +47,7 @@ for it in xSort:
 ### the robust outranking digraph
 rdg = RobustOutrankingDigraph(t)
 print(rdg)
+rdg.computeIncomparabilityDegree(Comments=True)
 rdg.computeTransitivityDegree(Comments=True)
 rdg.computeSymmetryDegree(Comments=True)
 rdg.computeChordlessCircuits()
