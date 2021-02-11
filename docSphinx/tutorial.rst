@@ -3008,15 +3008,15 @@ The effect of these performance discrimination thresholds on the preference mode
       Threshold ind : 2.50 + 0.00x ;  percentile: 11.82
       Threshold pref : 5.00 + 0.00x ; percentile: 21.51
 
-Between 6% and 12% of the performance differences are, thus, considered to be insignificant; between 12% and 23% are considered to be significant. Less than 1% of considerable performance differences on both the *Teaching* and *Research* criteria will actually trigger a polarisation effect [BIS-2013]_.
+Between 6% and 12% of the performance differences are, thus, considered to be *insignificant*. Similarly, between 77% (100.0 - 23.0) and 88% (100.0 - 12.0) are considered to be *significant*. Less than 1% (100.0 - 99.0) correspond to *considerable* performance differences on both the *Teaching* and *Research* criteria actually triggering an epistemic *polarisation* effect [BIS-2013]_.
 
-Beside this supposed imprecision in the performance evaluation, the **precise decimal** significance weights, as allocated by the THE authors to the five ranking criteria (see :numref:`thecsCriteria` Column *Weight*) are, as well, quite **questionable**. Significance weights may indeed carry usually hidden strategies for rendering the performance evaluations commensurable in view of a numerical computation of the overall ranking scores. The eventual ranking result is thus as much depending on the precise values of the given criteria significance weights as, vice versa, the given precise significance weights are depending on the subjectively expected and accepted ranking results. We will therefore drop such precise weights and, instead, only require a corresponding criteria significance preorder: *gtch* = *gres* > *gcit* > *gint* > *gind*. *Teaching environment* and *Research volume and reputation* are equally considered most important, followed by *Research influence*. Than comes *International outlook in staff, students and research* and, least important finally, *Industry income and innovation*.
+Beside the likely imprecise performance discrimination, the **precise decimal** significance weights, as allocated by the THE authors to the five ranking criteria (see :numref:`thecsCriteria` Column *Weight*) are, as well, quite **questionable**. Significance weights may indeed carry usually hidden strategies for rendering the performance evaluations commensurable in view of a numerical computation of the overall ranking scores. The eventual ranking result is thus as much depending on the precise values of the given criteria significance weights as, vice versa, the given precise significance weights are depending on the subjectively expected and accepted ranking results. We will therefore drop such precise weights and, instead, only require a corresponding criteria significance preorder: *gtch* = *gres* > *gcit* > *gint* > *gind*. *Teaching environment* and *Research volume and reputation* are equally considered most important, followed by *Research influence*. Than comes *International outlook in staff, students and research* and, least important finally, *Industry income and innovation*.
 
-These working hypotheses give us way to a *ranking-by-scoring* approach based on *robust* pairwise outranking situations [BIS-2004b]_:
+Both these working hypotheses: performance *discrimitation* thresholds and solely *ordinal* criteria significance, give us way to a ranking methodology based on **robust pairwise outranking** situations [BIS-2004b]_:
 
     - We say that Computer Science Dept *x* **robustly outranks** Computer Science Dept *y* when *x* positively outranks *y* with **all** significance weight vectors that are **compatible** with the *significance preorder*: *gtch* = *gres* > *gcit* > *gint* > *gind*;
     - We say that Computer Science Dept *x* is **robustly outranked** by Computer Science Dept *y* when *x* is positively outranked by *y* with **all** significance weight vectors that are **compatible** with the *significance preorder*: *gtch* = *gres* > *gcit* > *gint* > *gind*;
-    - Otherwise, Computer Science Depts *x* and *y* are **incomparable**.
+    - Otherwise, Computer Science Depts *x* and *y* are considered to be **incomparable**.
 
 A corresponding digraph constructor is provided by the :py:class:`outrankingDigraphs.RobustOutrankingDigraph` class.
 
@@ -3048,9 +3048,9 @@ A corresponding digraph constructor is provided by the :py:class:`outrankingDigr
      #arcs x>y: 2673, #symmetric: 320, #asymmetric: 2353
      (#symmetric/#arcs) =  0.12
 
-In the resulting digraph instance *rdg* (see :numref:`robustthecsOutranking` Line 8), we observe 2993 such **robust pairwise outranking** situations (Line 8), in fact validated with a mean significance majority of 78% (Line 9). Unfortunately, they do not deliver here any complete linear ranking relation. The robust outranking digraph *rdg* contains 102 (3.7%) of incomparability situations (Line 13); nearly half of its transitive closure is missing (Line 18) and 12% of the positive outranking situations correspond in fact to symmetric *indifference* situations (Line 22).
+In the resulting digraph instance *rdg* (see :numref:`robustthecsOutranking` Line 8), we observe 2993 such **robust pairwise outranking** situations (Line 8), in fact validated with a mean significance majority of 78% (Line 9). Unfortunately, in our case here, they do not deliver any complete linear ranking relation. The robust outranking digraph *rdg* contains in fact 102 (3.7%) of incomparability situations (Line 13); nearly half of its transitive closure is missing (Line 18) and 12% of the positive outranking situations correspond in fact to symmetric *indifference* situations (Line 22).
 
-Furthermore, the digraph instance *rdg* admits a high number (145) of outranking circuits.
+Worse even, the digraph *rdg* admits furthermore a high number of outranking circuits.
 
 .. code-block:: pycon
    :name: robustCircuits
@@ -3077,7 +3077,7 @@ Furthermore, the digraph instance *rdg* admits a high number (145) of outranking
     144:  ['mil', 'stut', 'qut'] , credibility : 0.300
     145:  ['mil', 'stut', 'tud'] , credibility : 0.300
 
-In :numref:`robustCircuits`, we notice 2 circuits of length 4 (see circuits #1 and #83). Let us explore below the bipolar-valued *r(x >= y)* characteristics of the first circuit.
+In :numref:`robustCircuits`, we notice 2 circuits of length 4 (see circuits #1 and #83). Let us explore below the bipolar-valued robust outranking characteristics :math:`r(x \succsim y)` of the first circuit.
 
 .. code-block:: pycon
    :name: robustDenotation
@@ -3107,11 +3107,9 @@ In :numref:`robustCircuits`, we notice 2 circuits of length 4 (see circuits #1 a
 	     the given significance weights;
        0   : indeterminate relational situation.
 
-In :numref:`robustDenotation`, we may notice that the outranking circuit ['albt', 'unlu', 'ariz', 'hels'], for instance, would indeed reappear with all potential criteria significance weight vectors that are compatible with given preorder: *gtch* = *gres* > *gcit* > *gint* > *gind*. Notice also that all (+1|-1) marked outranking situations, like the one between 'albt' and 'ariz'. The statement that *Arizona State University* strictly  outranks *University of Alberta* is only valid with the given precise THE weight vector and **put to doubt** (0.00) with only ordinal significance weights. *University of Alberta* and *Arizona State University* are, hence, **incomparable** in a robust outranking sense.  
+In :numref:`robustDenotation`, we may notice that the outranking circuit ['albt', 'unlu', 'ariz', 'hels']  will indeed reappear with all potential criteria significance weight vectors that are compatible with given preorder: *gtch* = *gres* > *gcit* > *gint* > *gind*. Notice also the (+1|-1) marked outranking situations, like the one between 'albt' and 'ariz'. The statement that "*Arizona State University* strictly  outranks *University of Alberta*" is indeed valid with the precise THE weight vector, but not with all potential weight vectors compatible with the given significance preorder. All these situations are considered to be **doubtful** (:math:`r(x \succsim y) = 0.00`) and the corresponding Computer Science Depts, like *University of Alberta* and *Arizona State University*, become **incomparable** in a *robust outranking* sense.  
 
-Not being transitive, showing many indifferences and, above all, many robust outranking circuits; all these characteristics make that no ranking algorithm, applied to this robust outranking digraph instance *rdg*, does exist that would produce the *unique* optimal linear ranking. Methodologically, we are only left with *ranking heuristics*. We have seen, now, in the previous tutorial on :ref:`ranking with multiple criteria <Ranking-Tutorial-label>` that there exist, luckily, several such heuristic ranking rules that may be applied to rank from a pairwise outranking digraph; yet, delivering all potentially more or less diverging results.
-
-Considering here the order of our outranking digraph instance *rdg* (75) and the largely unequal THE criteria significance weights, we opt, in this tutorial, rather for the :ref:`NetFlows ranking rule <NetFlows-Ranking-label>` [40]_. Its complexity, in :math:`O(n^2)`, is indeed quite tractable and takes the ranking criteria, by avoiding potential *tyranny of short majority* effects, into a more fairly balanced account.
+Showing many incomparabilities and indifferences, not being transitive and containing many robust outranking circuits, all these characteristics, make that no ranking algorithm, applied to our robust outranking digraph *rdg*, does exist that would produce the *unique* optimal linear ranking. Methodologically, we are only left with *ranking heuristics*. In the previous tutorial on :ref:`ranking with multiple criteria <Ranking-Tutorial-label>` we have, now, seen several potential heuristic ranking rules that may be applied to rank from a pairwise outranking digraph; yet, delivering all potentially more or less diverging results. Considering the order of digraph *rdg* (75) and the largely unequal THE criteria significance weights, we opt, in this tutorial, rather for the :ref:`NetFlows ranking rule <NetFlows-Ranking-label>` [40]_. Its complexity (in :math:`O(n^2)`) is indeed quite tractable and it takes the ranking criteria, by avoiding potential *tyranny of short majority* effects, into a more fairly balanced account.
 
 This *NetFlows* ranking of the Computer Science Depts may be computed explicitly as follows. 
 
@@ -3136,7 +3134,7 @@ This *NetFlows* ranking of the Computer Science Depts may be computed explicitly
 
 We actually obtain a very similar ranking result as with the previous THE overall scores. The same group of seven Depts: *ethz*, *calt*, *mit*, *oxf*, *cmel*, *git* and *epfl*, is top-ranked. And a same group of Depts: *tlavu*, *cihk*, *indis*, *ariz*, *kth*, *'hels*, *eind*, and *mil* appears at the end of the list.
 
-We may print out the difference between the overall scores based THE ranking and our *NetFlows* ranking with the following short Python script, where we make use of the *NetFlows* ranking data stored implicitly in the previous computation.
+We may print out the difference between the overall scores based THE ranking and our *NetFlows* ranking with the following short Python script, where we make use of an ordered Python dictionary with *net flow scores*, stored in the *rdg.netFlowsRankingDict* attribute by the previous computation.
 
 .. code-block:: pycon
    :name: printRobustNetFlowsRanking
@@ -3242,13 +3240,16 @@ In our bipolar-valued epistemic framework, the *NetFlows* score of any Dept *x* 
 
 Using the robust outranking characteristics of digraph *rdg*, we may thus explicitly compute, for instance, *ETH Zürich*'s score, denoted *nfx* below.
 
-    >>> x = 'ethz'
-    >>> nfx = Decimal('0')
-    >>> for y in rdg.actions:
-    >>>     if x != y:
-    >>>         nfx += (rdg.relation[x][y] - rdg.relation[y][x])
-    >>> print(x, nfx)
-     ethz 116.950
+.. code-block:: pycon	  
+   :linenos:
+
+   >>> x = 'ethz'
+   >>> nfx = Decimal('0')
+   >>> for y in rdg.actions:
+   >>>     if x != y:
+   >>>         nfx += (rdg.relation[x][y] - rdg.relation[y][x])
+   >>> print(x, nfx)
+    ethz 116.950
 
 In :numref:`printRobustNetFlowsRanking`, we may now verify that *ETH Zürich* obtains indeed the highest *NetFlows* score, and gives, hence the **most credible** *first-ranked* Dept of the 75 potential candidates.
 
@@ -3327,9 +3328,12 @@ The *NetFlows* ranking result is indeed highly ordinally correlated, in *Kendall
 
 We may as well check how the *netFlows* ranking rule is actually balancing the ranking performance criteria.
 
-    >>> rdg.showRankingConsensusQuality(nfRanking)
-     Criterion (weight): correlation
-     -------------------------------
+.. code-block:: pycon	  
+   :linenos:
+
+   >>> rdg.showRankingConsensusQuality(nfRanking)
+    Criterion (weight): correlation
+    -------------------------------
       gtch (0.300): +0.660
       gres (0.300): +0.638
       gcit (0.275): +0.370
@@ -3343,6 +3347,9 @@ We may as well check how the *netFlows* ranking rule is actually balancing the r
 The correlations with the marginal performance criterion rankings are nearly respecting the given significance weights preorder: *gtch* ~ *gres* > *gcit* > *gint* > *gind*. The mean *marginal correlation* is quite high (+0.51). Coupled with a low standard deviation (0.187), we obtain a rather fair ranking result. 
 
 We may also compute the pairwise correlation indexes observed between the marginal criterion robust outranking relations. 
+
+.. code-block:: pycon	  
+   :linenos:
 
    >>> rdg.showCriteriaCorrelationTable()
     Criteria ordinal correlation index

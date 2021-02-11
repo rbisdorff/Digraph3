@@ -3338,11 +3338,11 @@ The effect of these performance discrimination thresholds on the preference mode
 \PYG{g+go}{   Threshold pref : 5.00 + 0.00x ; percentile: 21.51}
 \end{sphinxVerbatim}
 
-Between 6\% and 12\% of the performance differences are, thus, considered to be insignificant; between 12\% and 23\% are considered to be significant. Less than 1\% of considerable performance differences on both the \sphinxstyleemphasis{Teaching} and \sphinxstyleemphasis{Research} criteria will actually trigger a polarisation effect \sphinxcite{tutorial:bis-2013}.
+Between 6\% and 12\% of the performance differences are, thus, considered to be \sphinxstyleemphasis{insignificant}. Similarly, between 77\% (100.0 \sphinxhyphen{} 23.0) and 88\% (100.0 \sphinxhyphen{} 12.0) are considered to be \sphinxstyleemphasis{significant}. Less than 1\% (100.0 \sphinxhyphen{} 99.0) correspond to \sphinxstyleemphasis{considerable} performance differences on both the \sphinxstyleemphasis{Teaching} and \sphinxstyleemphasis{Research} criteria actually triggering an epistemic \sphinxstyleemphasis{polarisation} effect \sphinxcite{tutorial:bis-2013}.
 
-Beside this supposed imprecision in the performance evaluation, the \sphinxstylestrong{precise decimal} significance weights, as allocated by the THE authors to the five ranking criteria (see \hyperref[\detokenize{tutorial:thecscriteria}]{Fig.\@ \ref{\detokenize{tutorial:thecscriteria}}} Column \sphinxstyleemphasis{Weight}) are, as well, quite \sphinxstylestrong{questionable}. Significance weights may indeed carry usually hidden strategies for rendering the performance evaluations commensurable in view of a numerical computation of the overall ranking scores. The eventual ranking result is thus as much depending on the precise values of the given criteria significance weights as, vice versa, the given precise significance weights are depending on the subjectively expected and accepted ranking results. We will therefore drop such precise weights and, instead, only require a corresponding criteria significance preorder: \sphinxstyleemphasis{gtch} = \sphinxstyleemphasis{gres} \textgreater{} \sphinxstyleemphasis{gcit} \textgreater{} \sphinxstyleemphasis{gint} \textgreater{} \sphinxstyleemphasis{gind}. \sphinxstyleemphasis{Teaching environment} and \sphinxstyleemphasis{Research volume and reputation} are equally considered most important, followed by \sphinxstyleemphasis{Research influence}. Than comes \sphinxstyleemphasis{International outlook in staff, students and research} and, least important finally, \sphinxstyleemphasis{Industry income and innovation}.
+Beside the likely imprecise performance discrimination, the \sphinxstylestrong{precise decimal} significance weights, as allocated by the THE authors to the five ranking criteria (see \hyperref[\detokenize{tutorial:thecscriteria}]{Fig.\@ \ref{\detokenize{tutorial:thecscriteria}}} Column \sphinxstyleemphasis{Weight}) are, as well, quite \sphinxstylestrong{questionable}. Significance weights may indeed carry usually hidden strategies for rendering the performance evaluations commensurable in view of a numerical computation of the overall ranking scores. The eventual ranking result is thus as much depending on the precise values of the given criteria significance weights as, vice versa, the given precise significance weights are depending on the subjectively expected and accepted ranking results. We will therefore drop such precise weights and, instead, only require a corresponding criteria significance preorder: \sphinxstyleemphasis{gtch} = \sphinxstyleemphasis{gres} \textgreater{} \sphinxstyleemphasis{gcit} \textgreater{} \sphinxstyleemphasis{gint} \textgreater{} \sphinxstyleemphasis{gind}. \sphinxstyleemphasis{Teaching environment} and \sphinxstyleemphasis{Research volume and reputation} are equally considered most important, followed by \sphinxstyleemphasis{Research influence}. Than comes \sphinxstyleemphasis{International outlook in staff, students and research} and, least important finally, \sphinxstyleemphasis{Industry income and innovation}.
 
-These working hypotheses give us way to a \sphinxstyleemphasis{ranking\sphinxhyphen{}by\sphinxhyphen{}scoring} approach based on \sphinxstyleemphasis{robust} pairwise outranking situations \sphinxcite{tutorial:bis-2004b}:
+Both these working hypotheses: performance \sphinxstyleemphasis{discrimitation} thresholds and solely \sphinxstyleemphasis{ordinal} criteria significance, give us way to a ranking methodology based on \sphinxstylestrong{robust pairwise outranking} situations \sphinxcite{tutorial:bis-2004b}:
 \begin{itemize}
 \item {} 
 We say that Computer Science Dept \sphinxstyleemphasis{x} \sphinxstylestrong{robustly outranks} Computer Science Dept \sphinxstyleemphasis{y} when \sphinxstyleemphasis{x} positively outranks \sphinxstyleemphasis{y} with \sphinxstylestrong{all} significance weight vectors that are \sphinxstylestrong{compatible} with the \sphinxstyleemphasis{significance preorder}: \sphinxstyleemphasis{gtch} = \sphinxstyleemphasis{gres} \textgreater{} \sphinxstyleemphasis{gcit} \textgreater{} \sphinxstyleemphasis{gint} \textgreater{} \sphinxstyleemphasis{gind};
@@ -3351,7 +3351,7 @@ We say that Computer Science Dept \sphinxstyleemphasis{x} \sphinxstylestrong{rob
 We say that Computer Science Dept \sphinxstyleemphasis{x} is \sphinxstylestrong{robustly outranked} by Computer Science Dept \sphinxstyleemphasis{y} when \sphinxstyleemphasis{x} is positively outranked by \sphinxstyleemphasis{y} with \sphinxstylestrong{all} significance weight vectors that are \sphinxstylestrong{compatible} with the \sphinxstyleemphasis{significance preorder}: \sphinxstyleemphasis{gtch} = \sphinxstyleemphasis{gres} \textgreater{} \sphinxstyleemphasis{gcit} \textgreater{} \sphinxstyleemphasis{gint} \textgreater{} \sphinxstyleemphasis{gind};
 
 \item {} 
-Otherwise, Computer Science Depts \sphinxstyleemphasis{x} and \sphinxstyleemphasis{y} are \sphinxstylestrong{incomparable}.
+Otherwise, Computer Science Depts \sphinxstyleemphasis{x} and \sphinxstyleemphasis{y} are considered to be \sphinxstylestrong{incomparable}.
 
 \end{itemize}
 
@@ -3383,9 +3383,9 @@ A corresponding digraph constructor is provided by the \sphinxcode{\sphinxupquot
 \PYG{g+go}{  (\PYGZsh{}symmetric/\PYGZsh{}arcs) =  0.12}
 \end{sphinxVerbatim}
 
-In the resulting digraph instance \sphinxstyleemphasis{rdg} (see \hyperref[\detokenize{tutorial:robustthecsoutranking}]{Listing \ref{\detokenize{tutorial:robustthecsoutranking}}} Line 8), we observe 2993 such \sphinxstylestrong{robust pairwise outranking} situations (Line 8), in fact validated with a mean significance majority of 78\% (Line 9). Unfortunately, they do not deliver here any complete linear ranking relation. The robust outranking digraph \sphinxstyleemphasis{rdg} contains 102 (3.7\%) of incomparability situations (Line 13); nearly half of its transitive closure is missing (Line 18) and 12\% of the positive outranking situations correspond in fact to symmetric \sphinxstyleemphasis{indifference} situations (Line 22).
+In the resulting digraph instance \sphinxstyleemphasis{rdg} (see \hyperref[\detokenize{tutorial:robustthecsoutranking}]{Listing \ref{\detokenize{tutorial:robustthecsoutranking}}} Line 8), we observe 2993 such \sphinxstylestrong{robust pairwise outranking} situations (Line 8), in fact validated with a mean significance majority of 78\% (Line 9). Unfortunately, in our case here, they do not deliver any complete linear ranking relation. The robust outranking digraph \sphinxstyleemphasis{rdg} contains in fact 102 (3.7\%) of incomparability situations (Line 13); nearly half of its transitive closure is missing (Line 18) and 12\% of the positive outranking situations correspond in fact to symmetric \sphinxstyleemphasis{indifference} situations (Line 22).
 
-Furthermore, the digraph instance \sphinxstyleemphasis{rdg} admits a high number (145) of outranking circuits.
+Worse even, the digraph \sphinxstyleemphasis{rdg} admits furthermore a high number of outranking circuits.
 \sphinxSetupCaptionForVerbatim{Inspecting outranking circuits}
 \def\sphinxLiteralBlockLabel{\label{\detokenize{tutorial:robustcircuits}}}
 \begin{sphinxVerbatim}[commandchars=\\\{\},numbers=left,firstnumber=1,stepnumber=1]
@@ -3410,7 +3410,7 @@ Furthermore, the digraph instance \sphinxstyleemphasis{rdg} admits a high number
 \PYG{g+go}{ 145:  [\PYGZsq{}mil\PYGZsq{}, \PYGZsq{}stut\PYGZsq{}, \PYGZsq{}tud\PYGZsq{}] , credibility : 0.300}
 \end{sphinxVerbatim}
 
-In \hyperref[\detokenize{tutorial:robustcircuits}]{Listing \ref{\detokenize{tutorial:robustcircuits}}}, we notice 2 circuits of length 4 (see circuits \#1 and \#83). Let us explore below the bipolar\sphinxhyphen{}valued \sphinxstyleemphasis{r(x \textgreater{}= y)} characteristics of the first circuit.
+In \hyperref[\detokenize{tutorial:robustcircuits}]{Listing \ref{\detokenize{tutorial:robustcircuits}}}, we notice 2 circuits of length 4 (see circuits \#1 and \#83). Let us explore below the bipolar\sphinxhyphen{}valued robust outranking characteristics \(r(x \succsim y)\) of the first circuit.
 \sphinxSetupCaptionForVerbatim{Showing the relation table with stability denotation}
 \def\sphinxLiteralBlockLabel{\label{\detokenize{tutorial:robustdenotation}}}
 \begin{sphinxVerbatim}[commandchars=\\\{\},numbers=left,firstnumber=1,stepnumber=1]
@@ -3438,15 +3438,13 @@ In \hyperref[\detokenize{tutorial:robustcircuits}]{Listing \ref{\detokenize{tuto
 \PYG{g+go}{    0   : indeterminate relational situation.}
 \end{sphinxVerbatim}
 
-In \hyperref[\detokenize{tutorial:robustdenotation}]{Listing \ref{\detokenize{tutorial:robustdenotation}}}, we may notice that the outranking circuit {[}‘albt’, ‘unlu’, ‘ariz’, ‘hels’{]}, for instance, would indeed reappear with all potential criteria significance weight vectors that are compatible with given preorder: \sphinxstyleemphasis{gtch} = \sphinxstyleemphasis{gres} \textgreater{} \sphinxstyleemphasis{gcit} \textgreater{} \sphinxstyleemphasis{gint} \textgreater{} \sphinxstyleemphasis{gind}. Notice also that all (+1|\sphinxhyphen{}1) marked outranking situations, like the one between ‘albt’ and ‘ariz’. The statement that \sphinxstyleemphasis{Arizona State University} strictly  outranks \sphinxstyleemphasis{University of Alberta} is only valid with the given precise THE weight vector and \sphinxstylestrong{put to doubt} (0.00) with only ordinal significance weights. \sphinxstyleemphasis{University of Alberta} and \sphinxstyleemphasis{Arizona State University} are, hence, \sphinxstylestrong{incomparable} in a robust outranking sense.
+In \hyperref[\detokenize{tutorial:robustdenotation}]{Listing \ref{\detokenize{tutorial:robustdenotation}}}, we may notice that the outranking circuit {[}‘albt’, ‘unlu’, ‘ariz’, ‘hels’{]}  will indeed reappear with all potential criteria significance weight vectors that are compatible with given preorder: \sphinxstyleemphasis{gtch} = \sphinxstyleemphasis{gres} \textgreater{} \sphinxstyleemphasis{gcit} \textgreater{} \sphinxstyleemphasis{gint} \textgreater{} \sphinxstyleemphasis{gind}. Notice also the (+1|\sphinxhyphen{}1) marked outranking situations, like the one between ‘albt’ and ‘ariz’. The statement that “\sphinxstyleemphasis{Arizona State University} strictly  outranks \sphinxstyleemphasis{University of Alberta}” is indeed valid with the precise THE weight vector, but not with all potential weight vectors compatible with the given significance preorder. All these situations are considered to be \sphinxstylestrong{doubtful} (\(r(x \succsim y) = 0.00\)) and the corresponding Computer Science Depts, like \sphinxstyleemphasis{University of Alberta} and \sphinxstyleemphasis{Arizona State University}, become \sphinxstylestrong{incomparable} in a \sphinxstyleemphasis{robust outranking} sense.
 
-Not being transitive, showing many indifferences and, above all, many robust outranking circuits; all these characteristics make that no ranking algorithm, applied to this robust outranking digraph instance \sphinxstyleemphasis{rdg}, does exist that would produce the \sphinxstyleemphasis{unique} optimal linear ranking. Methodologically, we are only left with \sphinxstyleemphasis{ranking heuristics}. We have seen, now, in the previous tutorial on {\hyperref[\detokenize{tutorial:ranking-tutorial-label}]{\sphinxcrossref{\DUrole{std,std-ref}{ranking with multiple criteria}}}} (\autopageref*{\detokenize{tutorial:ranking-tutorial-label}}) that there exist, luckily, several such heuristic ranking rules that may be applied to rank from a pairwise outranking digraph; yet, delivering all potentially more or less diverging results.
-
-Considering here the order of our outranking digraph instance \sphinxstyleemphasis{rdg} (75) and the largely unequal THE criteria significance weights, we opt, in this tutorial, rather for the {\hyperref[\detokenize{tutorial:netflows-ranking-label}]{\sphinxcrossref{\DUrole{std,std-ref}{NetFlows ranking rule}}}} (\autopageref*{\detokenize{tutorial:netflows-ranking-label}}) %
+Showing many incomparabilities and indifferences, not being transitive and containing many robust outranking circuits, all these characteristics, make that no ranking algorithm, applied to our robust outranking digraph \sphinxstyleemphasis{rdg}, does exist that would produce the \sphinxstyleemphasis{unique} optimal linear ranking. Methodologically, we are only left with \sphinxstyleemphasis{ranking heuristics}. In the previous tutorial on {\hyperref[\detokenize{tutorial:ranking-tutorial-label}]{\sphinxcrossref{\DUrole{std,std-ref}{ranking with multiple criteria}}}} (\autopageref*{\detokenize{tutorial:ranking-tutorial-label}}) we have, now, seen several potential heuristic ranking rules that may be applied to rank from a pairwise outranking digraph; yet, delivering all potentially more or less diverging results. Considering the order of digraph \sphinxstyleemphasis{rdg} (75) and the largely unequal THE criteria significance weights, we opt, in this tutorial, rather for the {\hyperref[\detokenize{tutorial:netflows-ranking-label}]{\sphinxcrossref{\DUrole{std,std-ref}{NetFlows ranking rule}}}} (\autopageref*{\detokenize{tutorial:netflows-ranking-label}}) %
 \begin{footnote}[40]\sphinxAtStartFootnote
 The reader might try other ranking rules, like \sphinxstyleemphasis{Copeland}’s, \sphinxstyleemphasis{Kohler}’s or \sphinxstyleemphasis{Tideman}’s rule. Mind that the latter \sphinxstyleemphasis{ranking\sphinxhyphen{}by\sphinxhyphen{}choosing} rules are in complexity \(O(n^3)\).
 %
-\end{footnote}. Its complexity, in \(O(n^2)\), is indeed quite tractable and takes the ranking criteria, by avoiding potential \sphinxstyleemphasis{tyranny of short majority} effects, into a more fairly balanced account.
+\end{footnote}. Its complexity (in \(O(n^2)\)) is indeed quite tractable and it takes the ranking criteria, by avoiding potential \sphinxstyleemphasis{tyranny of short majority} effects, into a more fairly balanced account.
 
 This \sphinxstyleemphasis{NetFlows} ranking of the Computer Science Depts may be computed explicitly as follows.
 \sphinxSetupCaptionForVerbatim{Computing the robust \sphinxstyleemphasis{NetFlows} ranking}
@@ -3469,7 +3467,7 @@ This \sphinxstyleemphasis{NetFlows} ranking of the Computer Science Depts may be
 
 We actually obtain a very similar ranking result as with the previous THE overall scores. The same group of seven Depts: \sphinxstyleemphasis{ethz}, \sphinxstyleemphasis{calt}, \sphinxstyleemphasis{mit}, \sphinxstyleemphasis{oxf}, \sphinxstyleemphasis{cmel}, \sphinxstyleemphasis{git} and \sphinxstyleemphasis{epfl}, is top\sphinxhyphen{}ranked. And a same group of Depts: \sphinxstyleemphasis{tlavu}, \sphinxstyleemphasis{cihk}, \sphinxstyleemphasis{indis}, \sphinxstyleemphasis{ariz}, \sphinxstyleemphasis{kth}, \sphinxstyleemphasis{‘hels}, \sphinxstyleemphasis{eind}, and \sphinxstyleemphasis{mil} appears at the end of the list.
 
-We may print out the difference between the overall scores based THE ranking and our \sphinxstyleemphasis{NetFlows} ranking with the following short Python script, where we make use of the \sphinxstyleemphasis{NetFlows} ranking data stored implicitly in the previous computation.
+We may print out the difference between the overall scores based THE ranking and our \sphinxstyleemphasis{NetFlows} ranking with the following short Python script, where we make use of an ordered Python dictionary with \sphinxstyleemphasis{net flow scores}, stored in the \sphinxstyleemphasis{rdg.netFlowsRankingDict} attribute by the previous computation.
 \sphinxSetupCaptionForVerbatim{Computing the robust \sphinxstyleemphasis{NetFlows} ranking}
 \def\sphinxLiteralBlockLabel{\label{\detokenize{tutorial:printrobustnetflowsranking}}}
 \begin{sphinxVerbatim}[commandchars=\\\{\},numbers=left,firstnumber=1,stepnumber=1]
@@ -3575,13 +3573,13 @@ r(\sphinxstyleemphasis{x} is first\sphinxhyphen{}ranked) \(= \; \sum_{y \neq x} 
 
 Using the robust outranking characteristics of digraph \sphinxstyleemphasis{rdg}, we may thus explicitly compute, for instance, \sphinxstyleemphasis{ETH Zürich}’s score, denoted \sphinxstyleemphasis{nfx} below.
 
-\begin{sphinxVerbatim}[commandchars=\\\{\}]
+\begin{sphinxVerbatim}[commandchars=\\\{\},numbers=left,firstnumber=1,stepnumber=1]
 \PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{x} \PYG{o}{=} \PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{ethz}\PYG{l+s+s1}{\PYGZsq{}}
 \PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{nfx} \PYG{o}{=} \PYG{n}{Decimal}\PYG{p}{(}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{0}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{)}
 \PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{k}{for} \PYG{n}{y} \PYG{o+ow}{in} \PYG{n}{rdg}\PYG{o}{.}\PYG{n}{actions}\PYG{p}{:}
 \PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }    \PYG{k}{if} \PYG{n}{x} \PYG{o}{!=} \PYG{n}{y}\PYG{p}{:}
 \PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }        \PYG{n}{nfx} \PYG{o}{+}\PYG{o}{=} \PYG{p}{(}\PYG{n}{rdg}\PYG{o}{.}\PYG{n}{relation}\PYG{p}{[}\PYG{n}{x}\PYG{p}{]}\PYG{p}{[}\PYG{n}{y}\PYG{p}{]} \PYG{o}{\PYGZhy{}} \PYG{n}{rdg}\PYG{o}{.}\PYG{n}{relation}\PYG{p}{[}\PYG{n}{y}\PYG{p}{]}\PYG{p}{[}\PYG{n}{x}\PYG{p}{]}\PYG{p}{)}
-\PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n+nb}{print}\PYG{p}{(}\PYG{n}{x}\PYG{p}{,} \PYG{n}{nfx}\PYG{p}{)}
+\PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{k}{print}\PYG{p}{(}\PYG{n}{x}\PYG{p}{,} \PYG{n}{nfx}\PYG{p}{)}
 \PYG{g+go}{ ethz 116.950}
 \end{sphinxVerbatim}
 
@@ -3664,26 +3662,26 @@ The \sphinxstyleemphasis{NetFlows} ranking result is indeed highly ordinally cor
 
 We may as well check how the \sphinxstyleemphasis{netFlows} ranking rule is actually balancing the ranking performance criteria.
 
-\begin{sphinxVerbatim}[commandchars=\\\{\}]
+\begin{sphinxVerbatim}[commandchars=\\\{\},numbers=left,firstnumber=1,stepnumber=1]
 \PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{rdg}\PYG{o}{.}\PYG{n}{showRankingConsensusQuality}\PYG{p}{(}\PYG{n}{nfRanking}\PYG{p}{)}
 \PYG{g+go}{ Criterion (weight): correlation}
 \PYG{g+go}{ \PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}}
-\PYG{g+go}{  gtch (0.300): +0.660}
-\PYG{g+go}{  gres (0.300): +0.638}
-\PYG{g+go}{  gcit (0.275): +0.370}
-\PYG{g+go}{  gint (0.075): +0.155}
-\PYG{g+go}{  gind (0.050): +0.101}
-\PYG{g+go}{ Summary:}
-\PYG{g+go}{ Weighted mean marginal correlation (a): +0.508}
-\PYG{g+go}{ Standard deviation (b)                : +0.187}
-\PYG{g+go}{ Ranking fairness (a)\PYGZhy{}(b)              : +0.321}
+\PYG{g+go}{   gtch (0.300): +0.660}
+\PYG{g+go}{   gres (0.300): +0.638}
+\PYG{g+go}{   gcit (0.275): +0.370}
+\PYG{g+go}{   gint (0.075): +0.155}
+\PYG{g+go}{   gind (0.050): +0.101}
+\PYG{g+go}{  Summary:}
+\PYG{g+go}{  Weighted mean marginal correlation (a): +0.508}
+\PYG{g+go}{  Standard deviation (b)                : +0.187}
+\PYG{g+go}{  Ranking fairness (a)\PYGZhy{}(b)              : +0.321}
 \end{sphinxVerbatim}
 
 The correlations with the marginal performance criterion rankings are nearly respecting the given significance weights preorder: \sphinxstyleemphasis{gtch} \textasciitilde{} \sphinxstyleemphasis{gres} \textgreater{} \sphinxstyleemphasis{gcit} \textgreater{} \sphinxstyleemphasis{gint} \textgreater{} \sphinxstyleemphasis{gind}. The mean \sphinxstyleemphasis{marginal correlation} is quite high (+0.51). Coupled with a low standard deviation (0.187), we obtain a rather fair ranking result.
 
 We may also compute the pairwise correlation indexes observed between the marginal criterion robust outranking relations.
 
-\begin{sphinxVerbatim}[commandchars=\\\{\}]
+\begin{sphinxVerbatim}[commandchars=\\\{\},numbers=left,firstnumber=1,stepnumber=1]
 \PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{rdg}\PYG{o}{.}\PYG{n}{showCriteriaCorrelationTable}\PYG{p}{(}\PYG{p}{)}
 \PYG{g+go}{ Criteria ordinal correlation index}
 \PYG{g+go}{      |  gcit    gind    gint    gres    gtch}
