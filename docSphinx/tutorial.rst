@@ -3398,7 +3398,7 @@ It may be interesting, finally, to see what gives the corresponding quality asse
      Standard deviation (b)                : +0.210
      Ranking fairness (a)-(b)              : +0.302
 
-The THE ranking result is, as the robust *NetFlows* ranking, also highly correlated (+0.907) with the pairwise global robust outranking relation. By its overall weighted scoring rule, the THE ranking induces marginal criterion correlations that are naturally compatible with the given significance weight preorder. Notice that the mean marginal correlation is of a similar value (+0.51) as the *netFlows* ranking's. Yet, the standard deviation is higher, which leads to a slight less fair balancing of the three major ranking criteria.
+The THE ranking result is, as the robust *NetFlows* ranking, also highly correlated (+0.907) with the pairwise global robust outranking relation. By its overall weighted scoring rule, the THE ranking induces marginal criterion correlations that are naturally compatible with the given significance weight preorder. Notice that the mean marginal correlation is of a similar value (+0.51) as the *netFlows* ranking's. Yet, the standard deviation is higher, which leads to a slightly less fair balancing of the three major ranking criteria.
 
 To conclude, let us finally emphasize, that, without any commensurability hypothesis and by taking, furthermore, into account, first, the always present more or less imprecision of any performance grading and, secondly, solely ordinal criteria significance weights, we may obtain here with our bipolar-valued outranking approach a very similar ranking result with more or less a same, when not better preference modelling quality. The reader is invited to try out other outranking based ranking heuristics.
 
