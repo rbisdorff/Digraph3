@@ -1,10 +1,10 @@
 # Fdb version 3
-["makeindex digraph3Tutorial.idx"] 1591703140 "digraph3Tutorial.idx" "digraph3Tutorial.ind" "digraph3Tutorial" 1613144315
-  "digraph3Tutorial.idx" 1613144310 0 d41d8cd98f00b204e9800998ecf8427e "pdflatex"
+["makeindex digraph3Tutorial.idx"] 1591703140 "digraph3Tutorial.idx" "digraph3Tutorial.ind" "digraph3Tutorial" 1613213086
+  "digraph3Tutorial.idx" 1613213081 0 d41d8cd98f00b204e9800998ecf8427e "pdflatex"
   (generated)
-  "digraph3Tutorial.ind"
   "digraph3Tutorial.ilg"
-["pdflatex"] 1613144310 "digraph3Tutorial.tex" "digraph3Tutorial.pdf" "digraph3Tutorial" 1613144315
+  "digraph3Tutorial.ind"
+["pdflatex"] 1613213081 "digraph3Tutorial.tex" "digraph3Tutorial.pdf" "digraph3Tutorial" 1613213086
   "/etc/texmf/web2c/texmf.cnf" 1587900120 475 c0e671620eb5563b2130f56340a5fde8 ""
   "/home/bisdorff/.texlive2019/texmf-var/fonts/pk/ljfour/jknappen/ec/ecbi1200.600pk" 1587973246 42704 d368a7ce1aec4e25702f76b9f9b826e8 ""
   "/home/bisdorff/.texlive2019/texmf-var/fonts/pk/ljfour/jknappen/ec/ecbx1200.600pk" 1587973237 31928 b6a0d95e5aac173e646f5786657faf1e ""
@@ -223,11 +223,11 @@
   "coloredPermutationGraph.png" 1585648195 21229 add9dd95863e3174ea798afe34f56afe ""
   "converse-dual_rel_best10.png" 1585648195 65760 5d5d409f110f9914d7fe19fce26ff459 ""
   "cycles.png" 1585648195 38389 9515e841f4881dd2df51947edd07b3e9 ""
-  "digraph3Tutorial.aux" 1613144315 105900 77f914535d32c0a68f47e933a1bccf0b "pdflatex"
+  "digraph3Tutorial.aux" 1613213086 105900 77f914535d32c0a68f47e933a1bccf0b "pdflatex"
   "digraph3Tutorial.ind" 1585648195 0 d41d8cd98f00b204e9800998ecf8427e "makeindex digraph3Tutorial.idx"
-  "digraph3Tutorial.out" 1613144315 25493 3465df0663fc0bf791bf82446fe2fe4f "pdflatex"
-  "digraph3Tutorial.tex" 1613144300 849665 801ed59eadd5de662fc46fb2d22697ff ""
-  "digraph3Tutorial.toc" 1613144315 12166 cd11bf9d3d6a25e2bf8bd56ac04bf88d "pdflatex"
+  "digraph3Tutorial.out" 1613213086 25493 3465df0663fc0bf791bf82446fe2fe4f "pdflatex"
+  "digraph3Tutorial.tex" 1613213074 849668 97ed761737a59cc5d38c048afa782af9 ""
+  "digraph3Tutorial.toc" 1613213086 12166 cd11bf9d3d6a25e2bf8bd56ac04bf88d "pdflatex"
   "dualChordlessCircuit.png" 1585648195 42179 2859130e8357d66ccd923f51dd2efd4b ""
   "examplePerfQuantiles.png" 1585648195 30034 de4be4a13314dc1ab56736b4dc6e1d3c ""
   "footnotehyper-sphinx.sty" 1585648195 8888 1bbd7bdeae8c8bed1d10d551bddb1cc9 ""
@@ -275,9 +275,9 @@
   "spanningForest.png" 1585648195 50782 a3bc0381daeccbc2812bcc4195a99052 ""
   "sparseRelationMap.png" 1585648195 13187 df51199ccfddd95f44d62a9338454774 ""
   "sphinx.sty" 1607269359 82250 00bd36f302b7cc8960761f445d02b13e ""
-  "sphinxhighlight.sty" 1613144261 8137 38a433148fcb7611515a989ff1750dd5 ""
+  "sphinxhighlight.sty" 1613213034 8137 38a433148fcb7611515a989ff1750dd5 ""
   "sphinxhowto.cls" 1607269359 3251 61ceeeffc44f983928ef03a3834a8b58 ""
-  "sphinxmessages.sty" 1613144304 745 3f5fcd6cdd7964ed608767954a8ced6f ""
+  "sphinxmessages.sty" 1613213078 745 3f5fcd6cdd7964ed608767954a8ced6f ""
   "sphinxmulticell.sty" 1585648195 14606 0b6edc2b1a83546ed92026d1f6a311b5 ""
   "spiegelCriteria.png" 1609596183 178900 dbae6a2ecb483211726c433bf94fd256 ""
   "strongComponents.png" 1585648195 79190 bf10e090cef5309997c9efe66fbb33a5 ""
@@ -305,9 +305,9 @@
   "weakChordlessCircuit.png" 1585648195 65619 d9ee17dd6ac35e83e1cbbd889663c392 ""
   "weakCopelandRanking.png" 1585648196 26872 7f7bedb326411ae7ecc65d34ddabc4cb ""
   (generated)
-  "digraph3Tutorial.idx"
-  "digraph3Tutorial.aux"
-  "digraph3Tutorial.out"
   "digraph3Tutorial.toc"
   "digraph3Tutorial.pdf"
+  "digraph3Tutorial.aux"
+  "digraph3Tutorial.idx"
+  "digraph3Tutorial.out"
   "digraph3Tutorial.log"

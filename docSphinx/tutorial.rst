@@ -3437,7 +3437,7 @@ The THE ranking result is similarly correlated (+0.907, Line 7) with the pairwis
 
 To conclude, let us emphasize, that, without any commensurability hypothesis and by taking, furthermore, into account, first, the always present more or less imprecision of any performance grading and, secondly, solely ordinal criteria significance weights, we may obtain here with our robust outranking approach a very similar ranking result with more or less a same, when not better, preference modelling quality.
 
-As an exercise, the reader is invited to try out other outranking based ranking heuristics. Notice also that we have not challenged in this tutorial the THE provided criteria significance preorder. It would be very interesting to consider the five ranking objectives as equally important and, consequently, consider the ranking crieria to be equisignificant. Curious to see the ranking results in these settings.
+As an exercise, the reader is invited to try out other outranking based ranking heuristics. Notice also that we have not challenged in this tutorial the THE provided criteria significance preorder. It would be very interesting to consider the five ranking objectives as equally important and, consequently, consider the ranking criteria to be equisignificant. Curious to see the ranking results under such settings.
 
 Back to :ref:`Content Table <Tutorial-label>`
 
