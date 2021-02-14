@@ -58,7 +58,7 @@
 
 
 \title{Tutorials for the Digraph3 Python software resources}
-\date{February 13, 2021}
+\date{February 14, 2021}
 \release{3.9.1}
 \author{Raymond Bisdorff}
 \newcommand{\sphinxlogo}{\sphinxincludegraphics{introDoc3.png}\par}
@@ -3206,26 +3206,26 @@ In order to render commensurable these performance criteria, the THE authors rep
 \def\sphinxLiteralBlockLabel{\label{\detokenize{tutorial:thecsscores}}}
 \begin{sphinxVerbatim}[commandchars=\\\{\},numbers=left,firstnumber=1,stepnumber=1]
 \PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{c+c1}{\PYGZsh{}\PYGZsh{}\PYGZsh{} compute overall THE scores}
-\PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{xSort} \PYG{o}{=} \PYG{p}{[}\PYG{p}{]}
+\PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{theScores} \PYG{o}{=} \PYG{p}{[}\PYG{p}{]}
 \PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{k}{for} \PYG{n}{x} \PYG{o+ow}{in} \PYG{n}{t}\PYG{o}{.}\PYG{n}{actions}\PYG{p}{:}
 \PYG{g+go}{        xscore = Decimal(\PYGZsq{}0\PYGZsq{})}
 \PYG{g+go}{        for g in t.criteria:}
 \PYG{g+go}{            xscore += t.evaluation[g][x] *\PYGZbs{}}
 \PYG{g+go}{                       (t.criteria[g][\PYGZsq{}weight\PYGZsq{}]/Decimal(\PYGZsq{}100\PYGZsq{}))}
-\PYG{g+go}{        xSort.append((xscore,x))}
+\PYG{g+go}{        theScores.append((xscore,x))}
 \PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{c+c1}{\PYGZsh{}\PYGZsh{}\PYGZsh{} sorting the Universities by decreasing overall score}
-\PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{xSort}\PYG{o}{.}\PYG{n}{sort}\PYG{p}{(}\PYG{n}{reverse}\PYG{o}{=}\PYG{n+nb+bp}{True}\PYG{p}{)}
+\PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{theScores}\PYG{o}{.}\PYG{n}{sort}\PYG{p}{(}\PYG{n}{reverse}\PYG{o}{=}\PYG{n+nb+bp}{True}\PYG{p}{)}
 \PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{c+c1}{\PYGZsh{}\PYGZsh{}\PYGZsh{} show performance quantiles and overall score}
 \PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{k}{print}\PYG{p}{(}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{\PYGZsh{}\PYGZsh{}  Univ }\PYG{l+s+se}{\PYGZbs{}t}\PYG{l+s+s1}{gtch  gres  gcit  gint  gind  overall}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{)}
 \PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{k}{print}\PYG{p}{(}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{)}
 \PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{i} \PYG{o}{=} \PYG{l+m+mi}{1}
-\PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{k}{for} \PYG{n}{it} \PYG{o+ow}{in} \PYG{n}{xSort}\PYG{p}{:}
+\PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{k}{for} \PYG{n}{it} \PYG{o+ow}{in} \PYG{n}{theScores}\PYG{p}{:}
 \PYG{g+go}{        x = it[1]}
-\PYG{g+go}{        xscore = it[0]}
+\PYG{g+go}{        xScore = it[0]}
 \PYG{g+go}{        print(\PYGZsq{}\PYGZpc{}2d: \PYGZpc{}s\PYGZsq{} \PYGZpc{} (i,x), end=\PYGZsq{} \PYGZbs{}t\PYGZsq{})}
 \PYG{g+go}{        for g in t.criteria:}
 \PYG{g+go}{            print(\PYGZsq{}\PYGZpc{}.1f \PYGZsq{} \PYGZpc{} (t.evaluation[g][x]),end=\PYGZsq{} \PYGZsq{})}
-\PYG{g+go}{        print(\PYGZsq{} \PYGZpc{}.1f\PYGZsq{} \PYGZpc{} xscore)}
+\PYG{g+go}{        print(\PYGZsq{} \PYGZpc{}.1f\PYGZsq{} \PYGZpc{} xScore)}
 \PYG{g+go}{        i += 1}
 \PYG{g+go}{ \PYGZsh{}\PYGZsh{}  Univ    gtch  gres  gcit  gint  gind  overall}
 \PYG{g+go}{ \PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}}
@@ -3507,18 +3507,18 @@ We may print out the difference between the \sphinxstyleemphasis{overall scores}
 \begin{sphinxVerbatim}[commandchars=\\\{\},numbers=left,firstnumber=1,stepnumber=1]
 \PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{c+c1}{\PYGZsh{} rdg.netFlowsRankingDict: ordered dictionary with net flow}
 \PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{c+c1}{\PYGZsh{} scores stored in rdg by the computeNetFlowsRanking() method}
-\PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{c+c1}{\PYGZsh{} Xsort = [(xscore\PYGZus{}1,x\PYGZus{}1), (xscore\PYGZus{}2,x\PYGZus{}2),... ]}
+\PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{c+c1}{\PYGZsh{} theScires = [(xScore\PYGZus{}1,x\PYGZus{}1), (xScore\PYGZus{}2,x\PYGZus{}2),... ]}
 \PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{c+c1}{\PYGZsh{} is sorted in decreasing order of xscores\PYGZus{}i}
 \PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{k}{print}\PYG{p}{(}\PYGZbs{}
 \PYG{g+go}{ \PYGZsq{} NetFlows ranking   gtch  gres  gcit  gint  gind   THE ranking\PYGZsq{})}
 \PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{k}{for} \PYG{n}{i} \PYG{o+ow}{in} \PYG{n+nb}{range}\PYG{p}{(}\PYG{l+m+mi}{75}\PYG{p}{)}\PYG{p}{:}
 \PYG{g+go}{        x = nfRanking[i]}
-\PYG{g+go}{        xnfScore = rdg.netFlowsRankingDict[x][\PYGZsq{}netFlow\PYGZsq{}]}
-\PYG{g+go}{        theScore,thex = xSort[i]}
-\PYG{g+go}{        print(\PYGZsq{}\PYGZpc{}2d: \PYGZpc{}s (\PYGZpc{}.2f) \PYGZsq{} \PYGZpc{} (i+1,x,xnfScore), end=\PYGZsq{} \PYGZbs{}t\PYGZsq{})}
+\PYG{g+go}{        xScore = rdg.netFlowsRankingDict[x][\PYGZsq{}netFlow\PYGZsq{}]}
+\PYG{g+go}{        thexScore,thex = theScores[i]}
+\PYG{g+go}{        print(\PYGZsq{}\PYGZpc{}2d: \PYGZpc{}s (\PYGZpc{}.2f) \PYGZsq{} \PYGZpc{} (i+1,x,xScore), end=\PYGZsq{} \PYGZbs{}t\PYGZsq{})}
 \PYG{g+go}{        for g in crit:}
 \PYG{g+go}{            print(\PYGZsq{}\PYGZpc{}.1f \PYGZsq{} \PYGZpc{} (t.evaluation[g][x]),end=\PYGZsq{} \PYGZsq{})}
-\PYG{g+go}{        print(\PYGZsq{} \PYGZpc{}s (\PYGZpc{}.2f)\PYGZsq{} \PYGZpc{} (thex,theScore) )}
+\PYG{g+go}{        print(\PYGZsq{} \PYGZpc{}s (\PYGZpc{}.2f)\PYGZsq{} \PYGZpc{} (thex,thexScore) )}
 \PYG{g+go}{  NetFlows ranking   gtch  gres  gcit  gint  gind   THE ranking}
 \PYG{g+go}{  1: ethz (116.95)   89.2  97.3  97.1  93.6  64.1   ethz (92.88)}
 \PYG{g+go}{  2: calt (116.15)   91.5  96.0  99.8  59.1  85.9   calt (92.42)}
@@ -3746,9 +3746,9 @@ It may, finally, be interesting to assess, similarly, the ordinal correlation of
 \sphinxSetupCaptionForVerbatim{Computing the ordinal quality of the THE ranking}
 \def\sphinxLiteralBlockLabel{\label{\detokenize{tutorial:therankingquality}}}
 \begin{sphinxVerbatim}[commandchars=\\\{\},numbers=left,firstnumber=1,stepnumber=1]
-\PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{c+c1}{\PYGZsh{} Xsort = [(xscore\PYGZus{}1,x\PYGZus{}1), (xscore\PYGZus{}2,x\PYGZus{}2),... ]}
+\PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{c+c1}{\PYGZsh{} theScores = [(xScore\PYGZus{}1,x\PYGZus{}1), (xScore\PYGZus{}2,x\PYGZus{}2),... ]}
 \PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{c+c1}{\PYGZsh{} is sorted in decreasing order of xscores}
-\PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{theRanking} \PYG{o}{=} \PYG{p}{[}\PYG{n}{item}\PYG{p}{[}\PYG{l+m+mi}{1}\PYG{p}{]} \PYG{k}{for} \PYG{n}{item} \PYG{o+ow}{in} \PYG{n}{xSort}\PYG{p}{]}
+\PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{theRanking} \PYG{o}{=} \PYG{p}{[}\PYG{n}{item}\PYG{p}{[}\PYG{l+m+mi}{1}\PYG{p}{]} \PYG{k}{for} \PYG{n}{item} \PYG{o+ow}{in} \PYG{n}{theScores}\PYG{p}{]}
 \PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{corrthe} \PYG{o}{=} \PYG{n}{rdg}\PYG{o}{.}\PYG{n}{computeRankingCorrelation}\PYG{p}{(}\PYG{n}{theRanking}\PYG{p}{)}
 \PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{rdg}\PYG{o}{.}\PYG{n}{showCorrelation}\PYG{p}{(}\PYG{n}{corrthe}\PYG{p}{)}
 \PYG{g+go}{ Correlation indexes:}

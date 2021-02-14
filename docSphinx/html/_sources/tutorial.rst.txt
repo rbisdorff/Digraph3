@@ -2881,26 +2881,26 @@ In order to render commensurable these performance criteria, the THE authors rep
    :linenos:
 
    >>> ### compute overall THE scores
-   >>> xSort = []
+   >>> theScores = []
    >>> for x in t.actions:
 	   xscore = Decimal('0')
 	   for g in t.criteria:
 	       xscore += t.evaluation[g][x] *\
 			  (t.criteria[g]['weight']/Decimal('100'))
-	   xSort.append((xscore,x))
+	   theScores.append((xscore,x))
    >>> ### sorting the Universities by decreasing overall score
-   >>> xSort.sort(reverse=True)
+   >>> theScores.sort(reverse=True)
    >>> ### show performance quantiles and overall score
    >>> print('##  Univ \tgtch  gres  gcit  gint  gind  overall')
    >>> print('-------------------------------------------------')
    >>> i = 1
-   >>> for it in xSort:
+   >>> for it in theScores:
 	   x = it[1]
-	   xscore = it[0]
+	   xScore = it[0]
 	   print('%2d: %s' % (i,x), end=' \t')
 	   for g in t.criteria:
 	       print('%.1f ' % (t.evaluation[g][x]),end=' ')
-	   print(' %.1f' % xscore)
+	   print(' %.1f' % xScore)
 	   i += 1
     ##  Univ 	gtch  gres  gcit  gint  gind  overall
     -------------------------------------------------
@@ -3173,18 +3173,18 @@ We may print out the difference between the *overall scores* based THE ranking a
 
    >>> # rdg.netFlowsRankingDict: ordered dictionary with net flow
    >>> # scores stored in rdg by the computeNetFlowsRanking() method
-   >>> # Xsort = [(xscore_1,x_1), (xscore_2,x_2),... ]
+   >>> # theScires = [(xScore_1,x_1), (xScore_2,x_2),... ]
    >>> # is sorted in decreasing order of xscores_i
    >>> print(\
     ' NetFlows ranking   gtch  gres  gcit  gint  gind   THE ranking')
    >>> for i in range(75):
            x = nfRanking[i]
-           xnfScore = rdg.netFlowsRankingDict[x]['netFlow']
-           theScore,thex = xSort[i]
-           print('%2d: %s (%.2f) ' % (i+1,x,xnfScore), end=' \t')
+           xScore = rdg.netFlowsRankingDict[x]['netFlow']
+           thexScore,thex = theScores[i]
+           print('%2d: %s (%.2f) ' % (i+1,x,xScore), end=' \t')
            for g in crit:
                print('%.1f ' % (t.evaluation[g][x]),end=' ')
-           print(' %s (%.2f)' % (thex,theScore) )
+           print(' %s (%.2f)' % (thex,thexScore) )
      NetFlows ranking   gtch  gres  gcit  gint  gind   THE ranking
      1: ethz (116.95)  	89.2  97.3  97.1  93.6  64.1   ethz (92.88)
      2: calt (116.15)  	91.5  96.0  99.8  59.1  85.9   calt (92.42)
@@ -3411,9 +3411,9 @@ It may, finally, be interesting to assess, similarly, the ordinal correlation of
    :caption: Computing the ordinal quality of the THE ranking	  
    :linenos:
 
-   >>> # Xsort = [(xscore_1,x_1), (xscore_2,x_2),... ]
+   >>> # theScores = [(xScore_1,x_1), (xScore_2,x_2),... ]
    >>> # is sorted in decreasing order of xscores
-   >>> theRanking = [item[1] for item in xSort]
+   >>> theRanking = [item[1] for item in theScores]
    >>> corrthe = rdg.computeRankingCorrelation(theRanking)
    >>> rdg.showCorrelation(corrthe)
     Correlation indexes:

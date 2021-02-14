@@ -4227,26 +4227,26 @@ three modes at 0.3 (-), 0.5 (~), respectively 0.7 (+) of the common scale span a
 97
 98
 99</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="c1">### compute overall THE scores</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">xSort</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">theScores</span> <span class="o">=</span> <span class="p">[]</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">t</span><span class="o">.</span><span class="n">actions</span><span class="p">:</span>
 <span class="go">        xscore = Decimal(&#39;0&#39;)</span>
 <span class="go">        for g in t.criteria:</span>
 <span class="go">            xscore += t.evaluation[g][x] *\</span>
 <span class="go">                       (t.criteria[g][&#39;weight&#39;]/Decimal(&#39;100&#39;))</span>
-<span class="go">        xSort.append((xscore,x))</span>
+<span class="go">        theScores.append((xscore,x))</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="c1">### sorting the Universities by decreasing overall score</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">xSort</span><span class="o">.</span><span class="n">sort</span><span class="p">(</span><span class="n">reverse</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">theScores</span><span class="o">.</span><span class="n">sort</span><span class="p">(</span><span class="n">reverse</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="c1">### show performance quantiles and overall score</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="k">print</span><span class="p">(</span><span class="s1">&#39;##  Univ </span><span class="se">\t</span><span class="s1">gtch  gres  gcit  gint  gind  overall&#39;</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="k">print</span><span class="p">(</span><span class="s1">&#39;-------------------------------------------------&#39;</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">i</span> <span class="o">=</span> <span class="mi">1</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="k">for</span> <span class="n">it</span> <span class="ow">in</span> <span class="n">xSort</span><span class="p">:</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="k">for</span> <span class="n">it</span> <span class="ow">in</span> <span class="n">theScores</span><span class="p">:</span>
 <span class="go">        x = it[1]</span>
-<span class="go">        xscore = it[0]</span>
+<span class="go">        xScore = it[0]</span>
 <span class="go">        print(&#39;%2d: %s&#39; % (i,x), end=&#39; \t&#39;)</span>
 <span class="go">        for g in t.criteria:</span>
 <span class="go">            print(&#39;%.1f &#39; % (t.evaluation[g][x]),end=&#39; &#39;)</span>
-<span class="go">        print(&#39; %.1f&#39; % xscore)</span>
+<span class="go">        print(&#39; %.1f&#39; % xScore)</span>
 <span class="go">        i += 1</span>
 <span class="go"> ##  Univ    gtch  gres  gcit  gint  gind  overall</span>
 <span class="go"> -------------------------------------------------</span>
@@ -4687,18 +4687,18 @@ three modes at 0.3 (-), 0.5 (~), respectively 0.7 (+) of the common scale span a
 89
 90</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="c1"># rdg.netFlowsRankingDict: ordered dictionary with net flow</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="c1"># scores stored in rdg by the computeNetFlowsRanking() method</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="c1"># Xsort = [(xscore_1,x_1), (xscore_2,x_2),... ]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="c1"># theScires = [(xScore_1,x_1), (xScore_2,x_2),... ]</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="c1"># is sorted in decreasing order of xscores_i</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="k">print</span><span class="p">(</span>\
 <span class="go"> &#39; NetFlows ranking   gtch  gres  gcit  gint  gind   THE ranking&#39;)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">75</span><span class="p">):</span>
 <span class="go">        x = nfRanking[i]</span>
-<span class="go">        xnfScore = rdg.netFlowsRankingDict[x][&#39;netFlow&#39;]</span>
-<span class="go">        theScore,thex = xSort[i]</span>
-<span class="go">        print(&#39;%2d: %s (%.2f) &#39; % (i+1,x,xnfScore), end=&#39; \t&#39;)</span>
+<span class="go">        xScore = rdg.netFlowsRankingDict[x][&#39;netFlow&#39;]</span>
+<span class="go">        thexScore,thex = theScores[i]</span>
+<span class="go">        print(&#39;%2d: %s (%.2f) &#39; % (i+1,x,xScore), end=&#39; \t&#39;)</span>
 <span class="go">        for g in crit:</span>
 <span class="go">            print(&#39;%.1f &#39; % (t.evaluation[g][x]),end=&#39; &#39;)</span>
-<span class="go">        print(&#39; %s (%.2f)&#39; % (thex,theScore) )</span>
+<span class="go">        print(&#39; %s (%.2f)&#39; % (thex,thexScore) )</span>
 <span class="go">  NetFlows ranking   gtch  gres  gcit  gint  gind   THE ranking</span>
 <span class="go">  1: ethz (116.95)   89.2  97.3  97.1  93.6  64.1   ethz (92.88)</span>
 <span class="go">  2: calt (116.15)   91.5  96.0  99.8  59.1  85.9   calt (92.42)</span>
@@ -4961,9 +4961,9 @@ three modes at 0.3 (-), 0.5 (~), respectively 0.7 (+) of the common scale span a
 18
 19
 20
-21</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="c1"># Xsort = [(xscore_1,x_1), (xscore_2,x_2),... ]</span>
+21</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="c1"># theScores = [(xScore_1,x_1), (xScore_2,x_2),... ]</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="c1"># is sorted in decreasing order of xscores</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">theRanking</span> <span class="o">=</span> <span class="p">[</span><span class="n">item</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="k">for</span> <span class="n">item</span> <span class="ow">in</span> <span class="n">xSort</span><span class="p">]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">theRanking</span> <span class="o">=</span> <span class="p">[</span><span class="n">item</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="k">for</span> <span class="n">item</span> <span class="ow">in</span> <span class="n">theScores</span><span class="p">]</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">corrthe</span> <span class="o">=</span> <span class="n">rdg</span><span class="o">.</span><span class="n">computeRankingCorrelation</span><span class="p">(</span><span class="n">theRanking</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">rdg</span><span class="o">.</span><span class="n">showCorrelation</span><span class="p">(</span><span class="n">corrthe</span><span class="p">)</span>
 <span class="go"> Correlation indexes:</span>
