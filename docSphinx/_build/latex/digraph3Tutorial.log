@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.20 (TeX Live 2019/Debian) (preloaded format=pdflatex 2020.4.26)  16 FEB 2021 11:07
+This is pdfTeX, Version 3.14159265-2.6-1.40.20 (TeX Live 2019/Debian) (preloaded format=pdflatex 2020.4.26)  16 FEB 2021 11:23
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -945,11 +945,11 @@ File: the_cs_3Dcorrelation.png Graphic file (type png)
 Package pdftex.def Info: the_cs_3Dcorrelation.png  used on input line 3740.
 (pdftex.def)             Requested size: 401.5pt x 401.51126pt.
  [94 <./the_cs_3Dcorrelation.png (PNG copy)>]
-<theHeatmap.png, id=1584, 855.195pt x 860.21375pt>
+<theHeatmap.png, id=1584, 766.865pt x 870.25125pt>
 File: theHeatmap.png Graphic file (type png)
 <use theHeatmap.png>
 Package pdftex.def Info: theHeatmap.png  used on input line 3788.
-(pdftex.def)             Requested size: 452.96413pt x 455.63547pt.
+(pdftex.def)             Requested size: 452.973pt x 514.09447pt.
  [95] [96 <./theHeatmap.png>] [97] [98] [99]
 <officeChoiceHeatmap.png, id=1645, 655.44875pt x 362.35374pt>
 File: officeChoiceHeatmap.png Graphic file (type png)
@@ -1497,7 +1497,7 @@ e/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy6.pfb></usr/share/texli
 ve/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy8.pfb></usr/share/texlive/texm
 f-dist/fonts/type1/public/amsfonts/symbols/msam10.pfb></usr/share/texlive/texmf
 -dist/fonts/type1/public/amsfonts/symbols/msbm10.pfb>
-Output written on digraph3Tutorial.pdf (235 pages, 5547417 bytes).
+Output written on digraph3Tutorial.pdf (235 pages, 5537268 bytes).
 PDF statistics:
  4287 PDF objects out of 4296 (max. 8388607)
  2785 compressed objects within 28 object streams
