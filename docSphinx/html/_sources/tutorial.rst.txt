@@ -3345,7 +3345,7 @@ By measuring the **ordinal correlation** with the underlying pairwise *global* a
    :caption: Measuring the quality of the *NetFlows* ranking result	  
    :linenos:
 
-   >>> corr = rdg.computeRankingCorrelation(nfRanking)
+   >>> corrnf = rdg.computeRankingCorrelation(nfRanking)
    >>> rdg.showCorrelation(corrnf)   
     Correlation indexes:
      Crisp ordinal correlation  : +0.901
