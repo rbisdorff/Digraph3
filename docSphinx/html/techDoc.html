@@ -2017,90 +2017,6 @@ Renders dominant prekernel restricted relation.</p>
 </dd></dl>
 
 <dl class="py method">
-<dt id="digraphs.Digraph.exportD3">
-<code class="sig-name descname">exportD3</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">fileName</span><span class="o">=</span><span class="default_value">'index'</span></em>, <em class="sig-param"><span class="n">Comments</span><span class="o">=</span><span class="default_value">True</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/digraphs.html#Digraph.exportD3"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#digraphs.Digraph.exportD3" title="Permalink to this definition">¶</a></dt>
-<dd><p>This function was designed and implemented by Gary Cornelius, 2014 for his bachelor thesis at the University of Luxembourg. 
-The thesis document with more explanations can be found in the literature/Cornelius directory of a Digraph3 working copy. .</p>
-<dl class="simple">
-<dt><em>Parameters</em>:</dt><dd><ul class="simple">
-<li><p>fileName, name of the generated html file, default = None (graph name as defined in python);</p></li>
-<li><p>Comments, True = default;</p></li>
-</ul>
-</dd>
-</dl>
-<p>The idea of the project was to find a way that allows you to easily get details about certain nodes or edges of a directed graph in a dynamic format. 
-Therefore this function allows you to export a html file together with all the needed libraries, including the 
-D3 Library which we use for graph generation and the physics between nodes, which attracts or pushes nodes away from each other.</p>
-<dl class="simple">
-<dt>Features of our graph include i.e.<span class="classifier"></span></dt><dd><ul class="simple">
-<li><p>A way to only inspect a node and it’s neighbours</p></li>
-<li><p>Dynamic draging and freezing of the graph</p></li>
-<li><p>Export of a newly created general graph</p></li>
-</ul>
-</dd>
-</dl>
-<p>You can find the list of fututres in the Section below which is arranged according to the graph type.</p>
-<dl class="simple">
-<dt><em>If the graph is an outrankingdigraphs</em>:</dt><dd><ul class="simple">
-<li><p>Nodes can be dragged and only the name and comment can be edited.</p></li>
-<li><p>Edges can be inspected but not edited for this purpose a special json array containing all possible pairwiseComparisions is generated.</p></li>
-</ul>
-</dd>
-<dt><em>If the graph is a general graph</em>:</dt><dd><ul class="simple">
-<li><p>Nodes can be dragged, added, removed and edited.</p></li>
-<li><p>Edges can be added, removed, inverted and edited. But edges cannot be inspected.</p></li>
-<li><p>The pairwiseComparisions key leads to an empty array {}.</p></li>
-</ul>
-</dd>
-</dl>
-<p>In both cases, undefined edges can be hidden and reappear after a simple reload.(right click - reload)</p>
-<dl>
-<dt><em>The generated files</em>:</dt><dd><ul class="simple">
-<li><p>d3.v3.js, contains the D3 Data-driven Documents source code, containing one small addition that we made in order to be able to easyly import links with a different formatself.</p></li>
-<li><p>digraph3lib.js, contains our library. This file contains everything that we need from import of an XMCDA2 file, visualization of the graph to export of the changed graph.</p></li>
-<li><p>d3export.json, usually named after the python graph name followed by a ticket number if the file is already present. It is the JSON file that is exported with the format “{“xmcda2”: “some xml”,”pairwiseComparisions”:”{“a01”: “some html”,…}”}.</p></li>
-</ul>
-</dd>
-<dt><em>Example 1</em>:</dt><dd><ol class="arabic">
-<li><dl>
-<dt>python3 session:</dt><dd><div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">digraphs</span> <span class="k">import</span> <span class="n">RandomValuationDigraph</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">dg</span> <span class="o">=</span> <span class="n">RandomValuationDigraph</span><span class="p">(</span><span class="n">order</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span><span class="n">Normalized</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">dg</span><span class="o">.</span><span class="n">exportD3</span><span class="p">()</span>
-<span class="go">or</span>
-<span class="go">&gt;&gt; dg.showInteractiveGraph()</span>
-</pre></div>
-</div>
-</dd>
-</dl>
-</li>
-<li><dl>
-<dt>index.html:   </dt><dd><ul>
-<li><dl>
-<dt>Main Screen:</dt><dd><img alt="_images/randomvaluation_d3_main.png" src="_images/randomvaluation_d3_main.png" />
-</dd>
-</dl>
-</li>
-<li><dl>
-<dt>Inspect function:</dt><dd><img alt="_images/randomvaluation_d3_inspect.png" src="_images/randomvaluation_d3_inspect.png" />
-</dd>
-</dl>
-</li>
-</ul>
-</dd>
-</dl>
-</li>
-</ol>
-</dd>
-</dl>
-<div class="admonition note">
-<p class="admonition-title">Note</p>
-<p>If you want to use the automatic load in Chrome, try using the command: “python -m SimpleHTTPServer”
-and then access the index.html via “<a class="reference external" href="http://0.0.0.0:8000/index.html">http://0.0.0.0:8000/index.html</a>”.
-In order to load the CSS an active internet connection is needed!</p>
-</div>
-</dd></dl>
-
-<dl class="py method">
 <dt id="digraphs.Digraph.exportGraphViz">
 <code class="sig-name descname">exportGraphViz</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">fileName</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">actionsSubset</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">bestChoice</span><span class="o">=</span><span class="default_value">{}</span></em>, <em class="sig-param"><span class="n">worstChoice</span><span class="o">=</span><span class="default_value">{}</span></em>, <em class="sig-param"><span class="n">Comments</span><span class="o">=</span><span class="default_value">True</span></em>, <em class="sig-param"><span class="n">graphType</span><span class="o">=</span><span class="default_value">'png'</span></em>, <em class="sig-param"><span class="n">graphSize</span><span class="o">=</span><span class="default_value">'7,7'</span></em>, <em class="sig-param"><span class="n">relation</span><span class="o">=</span><span class="default_value">None</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/digraphs.html#Digraph.exportGraphViz"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#digraphs.Digraph.exportGraphViz" title="Permalink to this definition">¶</a></dt>
 <dd><p>export GraphViz dot file  for graph drawing filtering.</p>
@@ -2598,13 +2514,6 @@ See corresponding Digraph.showRelationMap() method.</p>
 <dt id="digraphs.Digraph.showHTMLRelationTable">
 <code class="sig-name descname">showHTMLRelationTable</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">actionsList</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">relation</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">IntegerValues</span><span class="o">=</span><span class="default_value">False</span></em>, <em class="sig-param"><span class="n">ndigits</span><span class="o">=</span><span class="default_value">2</span></em>, <em class="sig-param"><span class="n">Colored</span><span class="o">=</span><span class="default_value">True</span></em>, <em class="sig-param"><span class="n">tableTitle</span><span class="o">=</span><span class="default_value">'Valued Adjacency Matrix'</span></em>, <em class="sig-param"><span class="n">relationName</span><span class="o">=</span><span class="default_value">'r(x S y)'</span></em>, <em class="sig-param"><span class="n">ReflexiveTerms</span><span class="o">=</span><span class="default_value">False</span></em>, <em class="sig-param"><span class="n">fromIndex</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">toIndex</span><span class="o">=</span><span class="default_value">None</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/digraphs.html#Digraph.showHTMLRelationTable"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#digraphs.Digraph.showHTMLRelationTable" title="Permalink to this definition">¶</a></dt>
 <dd><p>Launches a browser window with the colored relation table of self.</p>
-</dd></dl>
-
-<dl class="py method">
-<dt id="digraphs.Digraph.showInteractiveGraph">
-<code class="sig-name descname">showInteractiveGraph</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/digraphs.html#Digraph.showInteractiveGraph"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#digraphs.Digraph.showInteractiveGraph" title="Permalink to this definition">¶</a></dt>
-<dd><p>Save the graph and all needed files for the visualization of an interactive graph generated by the exportD3() function.
-For best experience make sure to use Firefox, because other browser restrict the loading of local files.</p>
 </dd></dl>
 
 <dl class="py method">

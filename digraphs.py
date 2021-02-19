@@ -4218,170 +4218,170 @@ class Digraph(object):
             if Comments:
                 print('graphViz tools not avalaible! Please check installation.')
 
-    def exportD3(self, fileName="index", Comments=True):
-        """
-    This function was designed and implemented by Gary Cornelius, 2014 for his bachelor thesis at the University of Luxembourg. 
-    The thesis document with more explanations can be found in the literature/Cornelius directory of a Digraph3 working copy. .
+    # def _exportD3(self, fileName="index", Comments=True):
+    #     """
+    # This function was designed and implemented by Gary Cornelius, 2014 for his bachelor thesis at the University of Luxembourg. 
+    # The thesis document with more explanations can be found in the literature/Cornelius directory of a Digraph3 working copy. .
     
-    *Parameters*:
-        * fileName, name of the generated html file, default = None (graph name as defined in python);
-        * Comments, True = default;
+    # *Parameters*:
+    #     * fileName, name of the generated html file, default = None (graph name as defined in python);
+    #     * Comments, True = default;
 
-    The idea of the project was to find a way that allows you to easily get details about certain nodes or edges of a directed graph in a dynamic format. 
-    Therefore this function allows you to export a html file together with all the needed libraries, including the 
-    D3 Library which we use for graph generation and the physics between nodes, which attracts or pushes nodes away from each other.
+    # The idea of the project was to find a way that allows you to easily get details about certain nodes or edges of a directed graph in a dynamic format. 
+    # Therefore this function allows you to export a html file together with all the needed libraries, including the 
+    # D3 Library which we use for graph generation and the physics between nodes, which attracts or pushes nodes away from each other.
 
-    Features of our graph include i.e. : 
-        * A way to only inspect a node and it's neighbours 
-        * Dynamic draging and freezing of the graph
-        * Export of a newly created general graph
+    # Features of our graph include i.e. : 
+    #     * A way to only inspect a node and it's neighbours 
+    #     * Dynamic draging and freezing of the graph
+    #     * Export of a newly created general graph
 
-    You can find the list of fututres in the Section below which is arranged according to the graph type.
+    # You can find the list of fututres in the Section below which is arranged according to the graph type.
     
-    *If the graph is an outrankingdigraphs*:
-        * Nodes can be dragged and only the name and comment can be edited. 
-        * Edges can be inspected but not edited for this purpose a special json array containing all possible pairwiseComparisions is generated.
+    # *If the graph is an outrankingdigraphs*:
+    #     * Nodes can be dragged and only the name and comment can be edited. 
+    #     * Edges can be inspected but not edited for this purpose a special json array containing all possible pairwiseComparisions is generated.
 
-    *If the graph is a general graph*:
-        * Nodes can be dragged, added, removed and edited.
-        * Edges can be added, removed, inverted and edited. But edges cannot be inspected.
-        * The pairwiseComparisions key leads to an empty array {}.
+    # *If the graph is a general graph*:
+    #     * Nodes can be dragged, added, removed and edited.
+    #     * Edges can be added, removed, inverted and edited. But edges cannot be inspected.
+    #     * The pairwiseComparisions key leads to an empty array {}.
 
-    In both cases, undefined edges can be hidden and reappear after a simple reload.(right click - reload)
+    # In both cases, undefined edges can be hidden and reappear after a simple reload.(right click - reload)
 
-    *The generated files*:
-        * d3.v3.js, contains the D3 Data-driven Documents source code, containing one small addition that we made in order to be able to easyly import links with a different formatself.
-        * digraph3lib.js, contains our library. This file contains everything that we need from import of an XMCDA2 file, visualization of the graph to export of the changed graph.
-        * d3export.json, usually named after the python graph name followed by a ticket number if the file is already present. It is the JSON file that is exported with the format "{"xmcda2": "some xml","pairwiseComparisions":"{"a01": "some html",...}"}.
+    # *The generated files*:
+    #     * d3.v3.js, contains the D3 Data-driven Documents source code, containing one small addition that we made in order to be able to easyly import links with a different formatself.
+    #     * digraph3lib.js, contains our library. This file contains everything that we need from import of an XMCDA2 file, visualization of the graph to export of the changed graph.
+    #     * d3export.json, usually named after the python graph name followed by a ticket number if the file is already present. It is the JSON file that is exported with the format "{"xmcda2": "some xml","pairwiseComparisions":"{"a01": "some html",...}"}.
 
-    *Example 1*:
-        #. python3 session:
-            >>> from digraphs import RandomValuationDigraph
-            >>> dg = RandomValuationDigraph(order=5,Normalized=True)
-            >>> dg.exportD3()
-            or
-            >> dg.showInteractiveGraph()
+    # *Example 1*:
+    #     #. python3 session:
+    #         >>> from digraphs import RandomValuationDigraph
+    #         >>> dg = RandomValuationDigraph(order=5,Normalized=True)
+    #         >>> dg.exportD3()
+    #         or
+    #         >> dg.showInteractiveGraph()
     
-        #. index.html:   
-            * Main Screen:
-                .. image:: randomvaluation_d3_main.png
-            * Inspect function:
-                .. image:: randomvaluation_d3_inspect.png
+    #     #. index.html:   
+    #         * Main Screen:
+    #             .. image:: randomvaluation_d3_main.png
+    #         * Inspect function:
+    #             .. image:: randomvaluation_d3_inspect.png
 
-    .. note::
+    # .. note::
     
-            If you want to use the automatic load in Chrome, try using the command: "python -m SimpleHTTPServer"
-            and then access the index.html via "http://0.0.0.0:8000/index.html".
-            In order to load the CSS an active internet connection is needed! 
+    #         If you want to use the automatic load in Chrome, try using the command: "python -m SimpleHTTPServer"
+    #         and then access the index.html via "http://0.0.0.0:8000/index.html".
+    #         In order to load the CSS an active internet connection is needed! 
 
-        """
-        import os
-        import json
-        import urllib
-        import htmlmodel,json
+    #     """
+    #     import os
+    #     import json
+    #     import urllib
+    #     import htmlmodel,json
 
-        if Comments:
-            print('*---- exporting all needed files ---------*')
+    #     if Comments:
+    #         print('*---- exporting all needed files ---------*')
 
-        if fileName == "index":
-            fileName = self.name
+    #     if fileName == "index":
+    #         fileName = self.name
 
-        file=fileName+".html"
-        dst_dir=os.getcwd()
-        basename = os.path.basename(file)
-        head, tail = os.path.splitext(basename)
-        dst_file = os.path.join(dst_dir, basename)
-        # rename if necessary
-        count = 0
-        print(dst_file)
-        while os.path.exists(dst_file):
-            count += 1
-            dst_file = os.path.join(dst_dir, '%s-%d%s' % (head, count, tail))
+    #     file=fileName+".html"
+    #     dst_dir=os.getcwd()
+    #     basename = os.path.basename(file)
+    #     head, tail = os.path.splitext(basename)
+    #     dst_file = os.path.join(dst_dir, basename)
+    #     # rename if necessary
+    #     count = 0
+    #     print(dst_file)
+    #     while os.path.exists(dst_file):
+    #         count += 1
+    #         dst_file = os.path.join(dst_dir, '%s-%d%s' % (head, count, tail))
 
-        actionkeys = [x for x in self.actions]
-        n = len(actionkeys)
-        relation = self.relation
-        Med = self.valuationdomain['med']
+    #     actionkeys = [x for x in self.actions]
+    #     n = len(actionkeys)
+    #     relation = self.relation
+    #     Med = self.valuationdomain['med']
         
-        pageName=""
+    #     pageName=""
               
         
-        fw = open("digraph3lib.js",'w')
-        fw.write(htmlmodel.javascript())
-        fw.close()
-        if Comments:
-            print("File: digraph3lib.js saved!")
+    #     fw = open("digraph3lib.js",'w')
+    #     fw.write(htmlmodel.javascript())
+    #     fw.close()
+    #     if Comments:
+    #         print("File: digraph3lib.js saved!")
 
-        fw = open("d3.v3.js",'w')
-        fw.write(htmlmodel.d3export())
-        fw.close()
-        if Comments:
-            print("File: d3.v3.js saved!")
-        pairwise={}
-        try:
-            for x in self.actions:
-                pairwise[x]={}
-            for x in actionkeys:
-                for y in actionkeys:
-                    if(not(x == y)):
-                        pairwise[x][y] =  str(self.showPairwiseComparison(x,y,isReturningHTML=True))
-        except:
-            pairwise={}
-        d3export={}
-        if(pairwise):
-            temp = "outranking_"+fileName
-            self.saveXMCDA2(fileName=temp+"-"+str(count))
-        else:
-            temp = "general_"+fileName
-            self.saveXMCDA2(fileName=temp+"-"+str(count))
-        with open(temp+"-"+str(count)+".xmcda2","r") as myFile:
-            data=myFile.read().replace("\n","")
-        try:
-            os.remove(temp+"-"+str(count)+".xmcda2")
-        except OSError:
-            pass
-        d3export["xmcda2"]= str(data)
-        d3export["pairwiseComparisions"] = json.dumps(pairwise)
+    #     fw = open("d3.v3.js",'w')
+    #     fw.write(htmlmodel.d3export())
+    #     fw.close()
+    #     if Comments:
+    #         print("File: d3.v3.js saved!")
+    #     pairwise={}
+    #     try:
+    #         for x in self.actions:
+    #             pairwise[x]={}
+    #         for x in actionkeys:
+    #             for y in actionkeys:
+    #                 if(not(x == y)):
+    #                     pairwise[x][y] =  str(self.showPairwiseComparison(x,y,isReturningHTML=True))
+    #     except:
+    #         pairwise={}
+    #     d3export={}
+    #     if(pairwise):
+    #         temp = "outranking_"+fileName
+    #         self.saveXMCDA2(fileName=temp+"-"+str(count))
+    #     else:
+    #         temp = "general_"+fileName
+    #         self.saveXMCDA2(fileName=temp+"-"+str(count))
+    #     with open(temp+"-"+str(count)+".xmcda2","r") as myFile:
+    #         data=myFile.read().replace("\n","")
+    #     try:
+    #         os.remove(temp+"-"+str(count)+".xmcda2")
+    #     except OSError:
+    #         pass
+    #     d3export["xmcda2"]= str(data)
+    #     d3export["pairwiseComparisions"] = json.dumps(pairwise)
 
-        if(count==0):
-            fw = open(temp+".json","w")
-            if Comments:
-                print("File: "+temp+".json saved!") 
-        else:
-            fw = open(temp+"-"+str(count)+".json","w")
-            if Comments:
-                print("File:"+temp+"-"+str(count)+".json saved!") 
-        fw.write(json.dumps(d3export))
-        fw.close()
+    #     if(count==0):
+    #         fw = open(temp+".json","w")
+    #         if Comments:
+    #             print("File: "+temp+".json saved!") 
+    #     else:
+    #         fw = open(temp+"-"+str(count)+".json","w")
+    #         if Comments:
+    #             print("File:"+temp+"-"+str(count)+".json saved!") 
+    #     fw.write(json.dumps(d3export))
+    #     fw.close()
 
-        if(count==0):
-            fw = open(fileName+".html","w")
-            fw.write(htmlmodel.htmlmodel(jsonName=temp+".json"))
-            pageName=fileName+".html"
-            if Comments:
-                print("File: "+fileName+".html generated!")
-        else:
-            fw = open(fileName+"-"+str(count)+".html",'w')
-            fw.write(htmlmodel.htmlmodel(jsonName=temp+"-"+str(count)+".json"))
-            pageName=fileName+"-"+str(count)+".html"
-            if Comments:
-                print("File: "+fileName+"-"+str(count)+".html generated!")
-        fw.close()
+    #     if(count==0):
+    #         fw = open(fileName+".html","w")
+    #         fw.write(htmlmodel.htmlmodel(jsonName=temp+".json"))
+    #         pageName=fileName+".html"
+    #         if Comments:
+    #             print("File: "+fileName+".html generated!")
+    #     else:
+    #         fw = open(fileName+"-"+str(count)+".html",'w')
+    #         fw.write(htmlmodel.htmlmodel(jsonName=temp+"-"+str(count)+".json"))
+    #         pageName=fileName+"-"+str(count)+".html"
+    #         if Comments:
+    #             print("File: "+fileName+"-"+str(count)+".html generated!")
+    #     fw.close()
 
-        if Comments:
-            print('*---- export done ---------*')
-        return pageName
+    #     if Comments:
+    #         print('*---- export done ---------*')
+    #     return pageName
 
-    def showInteractiveGraph(self):
-        '''
-        Save the graph and all needed files for the visualization of an interactive graph generated by the exportD3() function.
-        For best experience make sure to use Firefox, because other browser restrict the loading of local files.
-        '''
-        import os,webbrowser
-        newTab=2
-        url = "file://"+os.getcwd()+"/%s" % self.exportD3()
-        webbrowser=webbrowser.get("firefox")
-        webbrowser.open(url,new=newTab)
+    # def _showInteractiveGraph(self):
+    #     '''
+    #     Save the graph and all needed files for the visualization of an interactive graph generated by the exportD3() function.
+    #     For best experience make sure to use Firefox, because other browser restrict the loading of local files.
+    #     '''
+    #     import os,webbrowser
+    #     newTab=2
+    #     url = "file://"+os.getcwd()+"/%s" % self.exportD3()
+    #     webbrowser=webbrowser.get("firefox")
+    #     webbrowser.open(url,new=newTab)
     
             
     def savedre(self,fileName='temp'):
