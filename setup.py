@@ -22,7 +22,7 @@ if CythonInstalled:
                       'outrankingDigraphs','performanceQuantiles',\
             'sortingDigraphs','votingProfiles',\
             'linearOrders','transitiveDigraphs',\
-            'graphs','htmlmodel','randomNumbers','randomDigraphs',\
+            'graphs','randomNumbers','randomDigraphs',\
             'randomPerfTabs', 'sparseOutrankingDigraphs','xmcda'],
           ext_modules=cythonize("cython/*.pyx",language_level=3),
           license='digraph3_copyright.html',
@@ -39,7 +39,7 @@ else:
           py_modules=['arithmetics','digraphsTools','digraphs','perfTabs',
                       'outrankingDigraphs','performanceQuantiles',\
             'sortingDigraphs','votingProfiles',\
-            'linearOrders','transitiveDigraphs','graphs','htmlmodel','randomNumbers',\
+            'linearOrders','transitiveDigraphs','graphs','randomNumbers',\
             'randomDigraphs','randomPerfTabs','sparseOutrankingDigraphs',\
                       'xmcda'],
           license='digraph3_copyright.html',

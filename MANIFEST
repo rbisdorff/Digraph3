@@ -29,7 +29,6 @@ cython/README
 cython/Test/pytestsVerifyFitness.py
 cython/Test/pytestsSparseIntegerOutrankingDigraphs.py
 cython/Test/pytestsIntegerOutrankingDigraphs.py
-htmlmodel.py
 xmcda.py
 makefile
 MANIFEST
@@ -76,5 +75,4 @@ examples/samplePerformaceTableau.py
 examples/sampleDigraph.xml
 examples/rubis2xmcda.py
 examples/xmcda2Rubis.xsl
-js/d3.v3.js
 

@@ -1,6 +1,6 @@
 #--------------------------------------------------------------------------
 # Python3 implementation of the Digraph software
-# Current revision Py39
+# Current revision Py391
 # Copyright (C) 2006-2017 Raymond Bisdorff
 #
 #    This resource is free software; you can redistribute it and/or modify
@@ -50,14 +50,14 @@ If the cython C-compiled modules for Big Data are required, the Cython package m
 
 .. /Digraph3$ make tests
 
-runs a pytest suite in the ./test directory ( python3 pytest package required  ...$ pip3 install pytest )
+runs a pytest suite in the ./test directory ( python3 pytest package required  ...$ python3 -m pip install pytest )
 
 .. /Digraph3$ make verboseTests
 runs a verbose (with stdout not captured) pytest suite 
 
 Tutorials and technical documentation of modules, classes and methods are available under the following link:
 
-http://digraph3.readthedocs.io/en/latest/
+https://digraph3.readthedocs.io/en/latest/
 
 Enjoy !!
 R Bisdorff
