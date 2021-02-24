@@ -140,6 +140,9 @@ Parameters:&nbsp;quantile&nbsp;=&nbsp;{'ind':&nbsp;10,&nbsp;'pref':&nbsp;20,&nbs
 <dl><dt><a name="PerformanceQuantiles-computeMinMaxEvaluations"><strong>computeMinMaxEvaluations</strong></a>(self, criteria=None, actions=None)</dt><dd><tt>renders&nbsp;minimum&nbsp;and&nbsp;maximum&nbsp;performances&nbsp;on&nbsp;each&nbsp;criterion<br>
 in&nbsp;dictionary&nbsp;form:&nbsp;{'g':&nbsp;{'minimum':&nbsp;x,&nbsp;'maximum':&nbsp;x}}</tt></dd></dl>
 
+<dl><dt><a name="PerformanceQuantiles-computeMissingDataProportion"><strong>computeMissingDataProportion</strong></a>(self, InPercents=False, Comments=False)</dt><dd><tt>Renders&nbsp;the&nbsp;proportion&nbsp;of&nbsp;missing&nbsp;data,&nbsp;<br>
+i.e.&nbsp;NA&nbsp;==&nbsp;Decimal('-999')&nbsp;entries&nbsp;in&nbsp;self.<strong>evaluation</strong>.</tt></dd></dl>
+
 <dl><dt><a name="PerformanceQuantiles-computeNormalizedDiffEvaluations"><strong>computeNormalizedDiffEvaluations</strong></a>(self, lowValue=0.0, highValue=100.0, withOutput=False, Debug=False)</dt><dd><tt>renders&nbsp;and&nbsp;csv&nbsp;stores&nbsp;(withOutput=True)&nbsp;the<br>
 list&nbsp;of&nbsp;normalized&nbsp;evaluation&nbsp;differences&nbsp;observed&nbsp;on&nbsp;the&nbsp;family&nbsp;of&nbsp;criteria<br>
 Is&nbsp;only&nbsp;adequate&nbsp;if&nbsp;all&nbsp;criteria&nbsp;have&nbsp;the&nbsp;same<br>
@@ -179,9 +182,10 @@ of&nbsp;the&nbsp;performance&nbsp;differences&nbsp;of&nbsp;a&nbsp;given&nbsp;thr
 criteria&nbsp;weights&nbsp;in&nbsp;a&nbsp;list&nbsp;of&nbsp;increasing&nbsp;equivalence<br>
 lists&nbsp;of&nbsp;criteria.</tt></dd></dl>
 
-<dl><dt><a name="PerformanceQuantiles-computeWeightedAveragePerformances"><strong>computeWeightedAveragePerformances</strong></a>(self, isNormalized=False, lowValue=0.0, highValue=100.0, isListRanked=False)</dt><dd><tt>Compute&nbsp;normalized&nbsp;weighted&nbsp;average&nbsp;scores<br>
-Normalization&nbsp;transforms&nbsp;by&nbsp;default&nbsp;all&nbsp;the&nbsp;scores&nbsp;into&nbsp;a<br>
-common&nbsp;0-100&nbsp;scale.&nbsp;A&nbsp;lowValue&nbsp;and&nbsp;highValue&nbsp;parameter<br>
+<dl><dt><a name="PerformanceQuantiles-computeWeightedAveragePerformances"><strong>computeWeightedAveragePerformances</strong></a>(self, isNormalized=False, lowValue=0.0, highValue=100.0, isListRanked=False)</dt><dd><tt>Compute&nbsp;normalized&nbsp;weighted&nbsp;average&nbsp;scores&nbsp;by&nbsp;ignoring&nbsp;missing&nbsp;data.<br>
+When&nbsp;*isNormalized*&nbsp;==&nbsp;True&nbsp;(False&nbsp;by&nbsp;default),&nbsp;<br>
+transforms&nbsp;all&nbsp;the&nbsp;scores&nbsp;into&nbsp;a&nbsp;common&nbsp;0-100&nbsp;scale.&nbsp;<br>
+A&nbsp;lowValue&nbsp;and&nbsp;highValue&nbsp;parameter<br>
 can&nbsp;be&nbsp;provided&nbsp;for&nbsp;a&nbsp;specific&nbsp;normalisation.</tt></dd></dl>
 
 <dl><dt><a name="PerformanceQuantiles-convert2BigData"><strong>convert2BigData</strong></a>(self)</dt><dd><tt>Renders&nbsp;a&nbsp;cPerformanceTableau&nbsp;instance,&nbsp;by&nbsp;converting&nbsp;the&nbsp;action&nbsp;keys&nbsp;to&nbsp;integers&nbsp;and&nbsp;evaluations&nbsp;to&nbsp;floats,&nbsp;including&nbsp;the&nbsp;discrimination&nbsp;thresholds,&nbsp;the&nbsp;case&nbsp;given.</tt></dd></dl>
@@ -217,21 +221,17 @@ Return&nbsp;a&nbsp;Boolen&nbsp;value.</tt></dd></dl>
 
 <dl><dt><a name="PerformanceQuantiles-normalizeEvaluations"><strong>normalizeEvaluations</strong></a>(self, lowValue=0.0, highValue=100.0, Debug=False)</dt><dd><tt>recode&nbsp;the&nbsp;evaluations&nbsp;between&nbsp;lowValue&nbsp;and&nbsp;highValue&nbsp;on&nbsp;all&nbsp;criteria</tt></dd></dl>
 
+<dl><dt><a name="PerformanceQuantiles-replaceNA"><strong>replaceNA</strong></a>(self, newNA=None, Comments=False)</dt><dd><tt>Replaces&nbsp;the&nbsp;current&nbsp;self.<strong>NA</strong>&nbsp;symbol&nbsp;with&nbsp;the&nbsp;*newNA*&nbsp;symbol&nbsp;of&nbsp;type&nbsp;&lt;Decimal&gt;.&nbsp;If&nbsp;newNA&nbsp;==&nbsp;None,&nbsp;the&nbsp;defauklt&nbsp;value&nbsp;Decimal('-999')&nbsp;is&nbsp;used.</tt></dd></dl>
+
 <dl><dt><a name="PerformanceQuantiles-restoreOriginalEvaluations"><strong>restoreOriginalEvaluations</strong></a>(self, lowValue=0.0, highValue=100.0, Debug=False)</dt><dd><tt>recode&nbsp;the&nbsp;evaluations&nbsp;to&nbsp;their&nbsp;original&nbsp;values&nbsp;on&nbsp;all&nbsp;criteria</tt></dd></dl>
 
 <dl><dt><a name="PerformanceQuantiles-saveCSV"><strong>saveCSV</strong></a>(self, fileName='tempPerfTab', Sorted=True, criteriaList=None, actionsList=None, ndigits=2, Debug=False)</dt><dd><tt>1<br>
 Store&nbsp;the&nbsp;performance&nbsp;Tableau&nbsp;self&nbsp;Actions&nbsp;x&nbsp;Criteria&nbsp;in&nbsp;CSV&nbsp;format.</tt></dd></dl>
 
-<dl><dt><a name="PerformanceQuantiles-saveXMCDA"><strong>saveXMCDA</strong></a>(self, fileName='temp', category='New XMCDA Rubis format', user='digraphs Module (RB)', version='saved from Python session', variant='Rubis', valuationType='standard', servingD3=True)</dt><dd><tt>save&nbsp;performance&nbsp;tableau&nbsp;object&nbsp;self&nbsp;in&nbsp;XMCDA&nbsp;format.</tt></dd></dl>
-
 <dl><dt><a name="PerformanceQuantiles-saveXMCDA2"><strong>saveXMCDA2</strong></a>(self, fileName='temp', category='XMCDA 2.0 Extended format', user='digraphs Module (RB)', version='saved from Python session', title='Performance Tableau in XMCDA-2.0 format.', variant='Rubis', valuationType='bipolar', servingD3=False, isStringIO=False, stringNA='NA', comment='produced by saveXMCDA2()', hasVeto=True)</dt><dd><tt>save&nbsp;performance&nbsp;tableau&nbsp;object&nbsp;self&nbsp;in&nbsp;XMCDA&nbsp;2.0&nbsp;format&nbsp;including&nbsp;decision&nbsp;objectives,&nbsp;the&nbsp;case&nbsp;given.</tt></dd></dl>
 
 <dl><dt><a name="PerformanceQuantiles-saveXMCDA2String"><strong>saveXMCDA2String</strong></a>(self, fileName='temp', category='XMCDA 2.0 format', user='digraphs Module (RB)', version='saved from Python session', title='Performance Tableau in XMCDA-2.0 format.', variant='Rubis', valuationType='bipolar', servingD3=True, comment='produced by stringIO()', stringNA='NA')</dt><dd><tt>save&nbsp;performance&nbsp;tableau&nbsp;object&nbsp;self&nbsp;in&nbsp;XMCDA&nbsp;2.0&nbsp;format.<br>
 !!!&nbsp;obsolete:&nbsp;replaced&nbsp;by&nbsp;the&nbsp;isStringIO&nbsp;in&nbsp;the&nbsp;saveXMCDA2&nbsp;method&nbsp;!!!</tt></dd></dl>
-
-<dl><dt><a name="PerformanceQuantiles-saveXML"><strong>saveXML</strong></a>(self, name='temp', category='standard', subcategory='standard', author='digraphs Module (RB)', reference='saved from Python')</dt><dd><tt>save&nbsp;temporary&nbsp;performance&nbsp;tableau&nbsp;self&nbsp;in&nbsp;XML&nbsp;format.</tt></dd></dl>
-
-<dl><dt><a name="PerformanceQuantiles-saveXMLRubis"><strong>saveXMLRubis</strong></a>(self, name='temp', category='Rubis', subcategory='new D2 version', author='digraphs Module (RB)', reference='saved from Python')</dt><dd><tt>save&nbsp;temporary&nbsp;performance&nbsp;tableau&nbsp;self&nbsp;in&nbsp;XML&nbsp;Rubis&nbsp;format.</tt></dd></dl>
 
 <dl><dt><a name="PerformanceQuantiles-showAll"><strong>showAll</strong></a>(self)</dt><dd><tt>Show&nbsp;fonction&nbsp;for&nbsp;performance&nbsp;tableau</tt></dd></dl>
 
@@ -242,18 +242,20 @@ the&nbsp;values&nbsp;observed&nbsp;in&nbsp;the&nbsp;performance&nbsp;Tableau.</t
 
 <dl><dt><a name="PerformanceQuantiles-showHTMLCriteria"><strong>showHTMLCriteria</strong></a>(self, criteriaSubset=None, Sorted=True, ndigits=2, title=None)</dt><dd><tt>shows&nbsp;the&nbsp;criteria&nbsp;in&nbsp;the&nbsp;system&nbsp;browser&nbsp;view.</tt></dd></dl>
 
-<dl><dt><a name="PerformanceQuantiles-showHTMLPerformanceHeatmap"><strong>showHTMLPerformanceHeatmap</strong></a>(self, actionsList=None, fromIndex=None, toIndex=None, Transposed=False, criteriaList=None, colorLevels=7, pageTitle=None, ndigits=2, SparseModel=False, minimalComponentSize=1, rankingRule='NetFlows', StoreRanking=True, quantiles=None, strategy='average', Correlations=False, Threading=False, nbrOfCPUs=None, Debug=False)</dt><dd><tt>shows&nbsp;the&nbsp;html&nbsp;heatmap&nbsp;version&nbsp;of&nbsp;the&nbsp;performance&nbsp;tableau&nbsp;in&nbsp;a&nbsp;browser&nbsp;window<br>
+<dl><dt><a name="PerformanceQuantiles-showHTMLPerformanceHeatmap"><strong>showHTMLPerformanceHeatmap</strong></a>(self, actionsList=None, WithActionNames=False, fromIndex=None, toIndex=None, Transposed=False, criteriaList=None, colorLevels=7, pageTitle=None, ndigits=2, SparseModel=False, outrankingModel='standard', minimalComponentSize=1, rankingRule='NetFlows', StoreRanking=True, quantiles=None, strategy='average', Correlations=False, Threading=False, nbrOfCPUs=None, Debug=False)</dt><dd><tt>shows&nbsp;the&nbsp;html&nbsp;heatmap&nbsp;version&nbsp;of&nbsp;the&nbsp;performance&nbsp;tableau&nbsp;in&nbsp;a&nbsp;browser&nbsp;window<br>
 (see&nbsp;perfTabs.htmlPerformanceHeatMap()&nbsp;method&nbsp;).<br>
 &nbsp;<br>
 **Parameters**:<br>
 &nbsp;<br>
 *&nbsp;*actionsList*&nbsp;and&nbsp;*criteriaList*,&nbsp;if&nbsp;provided,&nbsp;&nbsp;give&nbsp;the&nbsp;possibility&nbsp;to&nbsp;show<br>
 &nbsp;&nbsp;the&nbsp;decision&nbsp;alternatives,&nbsp;resp.&nbsp;criteria,&nbsp;in&nbsp;a&nbsp;given&nbsp;ordering.<br>
+*&nbsp;*WithActionNames*&nbsp;=&nbsp;True&nbsp;(default&nbsp;False)&nbsp;will&nbsp;show&nbsp;the&nbsp;action&nbsp;names&nbsp;instead&nbsp;of&nbsp;the&nbsp;short&nbsp;names&nbsp;or&nbsp;the&nbsp;identifyers.<br>
 *&nbsp;*ndigits*&nbsp;=&nbsp;0&nbsp;may&nbsp;be&nbsp;used&nbsp;to&nbsp;show&nbsp;integer&nbsp;evaluation&nbsp;values.<br>
 *&nbsp;*colorLevels*&nbsp;may&nbsp;be&nbsp;3,&nbsp;5,&nbsp;7,&nbsp;or&nbsp;9.&nbsp;<br>
 *&nbsp;When&nbsp;no&nbsp;*actionsList*&nbsp;is&nbsp;provided,&nbsp;the&nbsp;decision&nbsp;actions&nbsp;are&nbsp;ordered&nbsp;from&nbsp;the&nbsp;best&nbsp;to&nbsp;the&nbsp;worst.&nbsp;This<br>
 &nbsp;&nbsp;ranking&nbsp;is&nbsp;obtained&nbsp;by&nbsp;default&nbsp;with&nbsp;the&nbsp;Copeland&nbsp;rule&nbsp;applied&nbsp;on&nbsp;a&nbsp;standard&nbsp;*BipolarOutrankingDigraph*.<br>
-*&nbsp;When&nbsp;the&nbsp;*SparseModel*&nbsp;flag&nbsp;is&nbsp;put&nbsp;to&nbsp;*True*,&nbsp;a&nbsp;sparse&nbsp;*PreRankedOutrankingDigraph*&nbsp;construction&nbsp;is&nbsp;used&nbsp;instead.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<br>
+*&nbsp;When&nbsp;the&nbsp;*SparseModel*&nbsp;flag&nbsp;is&nbsp;put&nbsp;to&nbsp;*True*,&nbsp;a&nbsp;sparse&nbsp;*PreRankedOutrankingDigraph*&nbsp;construction&nbsp;is&nbsp;used&nbsp;instead.<br>
+*&nbsp;the&nbsp;*outrankingModel*&nbsp;parameter&nbsp;(default&nbsp;=&nbsp;'standard')&nbsp;allows&nbsp;to&nbsp;switch&nbsp;to&nbsp;alternative&nbsp;BipolarOutrankingDigraph&nbsp;constructors,&nbsp;like&nbsp;the&nbsp;'confident'&nbsp;or&nbsp;'robust'&nbsp;models.&nbsp;When&nbsp;called&nbsp;from&nbsp;a&nbsp;bipolar-valued&nbsp;outrankingDigraph&nbsp;instance,&nbsp;*outrankingModel*&nbsp;=&nbsp;'this'&nbsp;keeps&nbsp;the&nbsp;current&nbsp;outranking&nbsp;model&nbsp;without&nbsp;recomputing&nbsp;by&nbsp;default&nbsp;the&nbsp;standard&nbsp;outranking&nbsp;model.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<br>
 *&nbsp;The&nbsp;*minimalComponentSize*&nbsp;allows&nbsp;to&nbsp;control&nbsp;the&nbsp;fill&nbsp;rate&nbsp;of&nbsp;the&nbsp;pre-ranked&nbsp;model.<br>
 &nbsp;&nbsp;When&nbsp;*minimalComponentSize*&nbsp;=&nbsp;*n*&nbsp;(the&nbsp;number&nbsp;of&nbsp;decision&nbsp;actions)&nbsp;both&nbsp;the&nbsp;pre-ranked&nbsp;model&nbsp;will&nbsp;be<br>
 &nbsp;&nbsp;in&nbsp;fact&nbsp;equivalent&nbsp;to&nbsp;the&nbsp;standard&nbsp;model.<br>

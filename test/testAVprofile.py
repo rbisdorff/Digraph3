@@ -32,16 +32,16 @@ voters = OrderedDict([
 ])
 approvalBallot = {
 'v1': [
-'a3',
+'a5',
 ],
 'v2': [
-'a1',
+'a6',
 ],
 'v3': [
-'a5',
+'a2',
 ],
 'v4': [
-'a5',
+'a1',
 ],
 'v5': [
 'a6',
@@ -50,7 +50,7 @@ approvalBallot = {
 'a4',
 ],
 'v7': [
-'a5',
+'a4',
 ],
 'v8': [
 'a6',

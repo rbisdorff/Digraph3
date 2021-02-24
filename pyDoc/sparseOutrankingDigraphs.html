@@ -36,12 +36,10 @@ Copyright&nbsp;(C)&nbsp;2016-20&nbsp;&nbsp;Raymond&nbsp;Bisdorff<br>
     
 <tr><td bgcolor="#aa55cc"><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</tt></td><td>&nbsp;</td>
 <td width="100%"><table width="100%" summary="list"><tr><td width="25%" valign=top><a href="itertools.html">itertools</a><br>
-<a href="collections.abc.html">collections.abc</a><br>
+</td><td width="25%" valign=top><a href="collections.abc.html">collections.abc</a><br>
 </td><td width="25%" valign=top><a href="decimal.html">decimal</a><br>
-<a href="xml.sax.handler.html">xml.sax.handler</a><br>
 </td><td width="25%" valign=top><a href="json.html">json</a><br>
-<a href="xml.sax.xmlreader.html">xml.sax.xmlreader</a><br>
-</td><td width="25%" valign=top></td></tr></table></td></tr></table><p>
+</td></tr></table></td></tr></table><p>
 <table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
 <tr bgcolor="#ee77aa">
 <td colspan=3 valign=bottom>&nbsp;<br>
@@ -572,10 +570,6 @@ the&nbsp;criteria&nbsp;ordinal&nbsp;correlation&nbsp;table.<br>
 
 <dl><dt><a name="PreRankedConfidentOutrankingDigraph-saveXMCDA2RubisChoiceRecommendation"><strong>saveXMCDA2RubisChoiceRecommendation</strong></a>(self, fileName='temp', category='Rubis', subcategory='Choice Recommendation', author='digraphs Module (RB)', reference='saved from Python', comment=True, servingD3=False, relationName='Stilde', graphValuationType='bipolar', variant='standard', instanceID='void', stringNA='NA', _OldCoca=True, Debug=False)</dt><dd><tt>save&nbsp;complete&nbsp;Rubis&nbsp;problem&nbsp;and&nbsp;result&nbsp;in&nbsp;XMCDA&nbsp;2.0&nbsp;format&nbsp;with&nbsp;unicode&nbsp;encoding.</tt></dd></dl>
 
-<dl><dt><a name="PreRankedConfidentOutrankingDigraph-saveXMCDAOutrankingDigraph"><strong>saveXMCDAOutrankingDigraph</strong></a>(self, fileName='temp', category='Rubis', subcategory='Choice Recommendation', author='digraphs Module (RB)', reference='saved from Python', comment=True, servingD3=False, relationName='Stilde', valuationType='bipolar', variant='standard', instanceID='void')</dt><dd><tt>save&nbsp;complete&nbsp;Rubis&nbsp;problem&nbsp;and&nbsp;result&nbsp;in&nbsp;XMCDA&nbsp;format&nbsp;with&nbsp;unicode&nbsp;encoding.</tt></dd></dl>
-
-<dl><dt><a name="PreRankedConfidentOutrankingDigraph-saveXMLRubisOutrankingDigraph"><strong>saveXMLRubisOutrankingDigraph</strong></a>(self, name='temp', category='Rubis outranking digraph', subcategory='Choice recommendation', author='digraphs Module (RB)', reference='saved from Python', Comments=False, servingD3=True)</dt><dd><tt>save&nbsp;complete&nbsp;Rubis&nbsp;problem&nbsp;and&nbsp;result&nbsp;in&nbsp;XML&nbsp;format&nbsp;with&nbsp;unicode&nbsp;encoding.</tt></dd></dl>
-
 <dl><dt><a name="PreRankedConfidentOutrankingDigraph-showAll"><strong>showAll</strong></a>(self)</dt><dd><tt>specialize&nbsp;the&nbsp;general&nbsp;showAll&nbsp;method&nbsp;with&nbsp;criteria<br>
 and&nbsp;performance&nbsp;tableau&nbsp;output</tt></dd></dl>
 
@@ -805,6 +799,8 @@ arc&nbsp;density,&nbsp;double&nbsp;arc&nbsp;density,&nbsp;single&nbsp;arc&nbsp;d
 <dl><dt><a name="PreRankedConfidentOutrankingDigraph-computeGoodPirlotChoices"><strong>computeGoodPirlotChoices</strong></a>(self, Comments=False)</dt><dd><tt>Characteristic&nbsp;values&nbsp;for&nbsp;potentially&nbsp;good&nbsp;choices<br>
 using&nbsp;the&nbsp;Pirlot&nbsp;fixpoint&nbsp;algorithm.</tt></dd></dl>
 
+<dl><dt><a name="PreRankedConfidentOutrankingDigraph-computeIncomparabilityDegree"><strong>computeIncomparabilityDegree</strong></a>(self, InPercents=False, Comments=False)</dt><dd><tt>Renders&nbsp;the&nbsp;incomparability&nbsp;degree&nbsp;(Decimal),&nbsp;i.e.&nbsp;the&nbsp;relative&nbsp;number&nbsp;of&nbsp;symmetric&nbsp;indeterminate&nbsp;relations&nbsp;of&nbsp;the&nbsp;irreflexive&nbsp;part&nbsp;of&nbsp;a&nbsp;digraph.</tt></dd></dl>
+
 <dl><dt><a name="PreRankedConfidentOutrankingDigraph-computeKemenyIndex"><strong>computeKemenyIndex</strong></a>(self, otherRelation)</dt><dd><tt>renders&nbsp;the&nbsp;Kemeny&nbsp;index&nbsp;of&nbsp;the&nbsp;self.<strong>relation</strong><br>
 compared&nbsp;with&nbsp;a&nbsp;given&nbsp;crisp&nbsp;valued&nbsp;relation&nbsp;of&nbsp;a&nbsp;compatible<br>
 other&nbsp;digraph&nbsp;(same&nbsp;nodes&nbsp;or&nbsp;actions).</tt></dd></dl>
@@ -989,7 +985,7 @@ old&nbsp;versions&nbsp;compatibility.</tt></dd></dl>
 <dl><dt><a name="PreRankedConfidentOutrankingDigraph-computeSlaterRanking"><strong>computeSlaterRanking</strong></a>(self, isProbabilistic=False, seed=None, sampleSize=1000, Debug=False)</dt><dd><tt>Renders&nbsp;a&nbsp;ranking&nbsp;of&nbsp;the&nbsp;actions&nbsp;with&nbsp;minimal&nbsp;Slater&nbsp;index.<br>
 Return&nbsp;a&nbsp;tuple:&nbsp;slaterOrder,&nbsp;slaterIndex</tt></dd></dl>
 
-<dl><dt><a name="PreRankedConfidentOutrankingDigraph-computeSymmetryDegree"><strong>computeSymmetryDegree</strong></a>(self, InPercents=False, Comments=False)</dt><dd><tt>Renders&nbsp;the&nbsp;symmetry&nbsp;degree&nbsp;(Decimal)&nbsp;of&nbsp;the&nbsp;reflexive&nbsp;part&nbsp;of&nbsp;a&nbsp;digraph.<br>
+<dl><dt><a name="PreRankedConfidentOutrankingDigraph-computeSymmetryDegree"><strong>computeSymmetryDegree</strong></a>(self, InPercents=False, Comments=False)</dt><dd><tt>Renders&nbsp;the&nbsp;symmetry&nbsp;degree&nbsp;(Decimal)&nbsp;of&nbsp;the&nbsp;irreflexive&nbsp;part&nbsp;of&nbsp;a&nbsp;digraph.<br>
 &nbsp;<br>
 ..&nbsp;note::<br>
 &nbsp;<br>
@@ -1106,60 +1102,6 @@ If&nbsp;inPercent,&nbsp;*result*&nbsp;shifted&nbsp;(+1)&nbsp;and&nbsp;reduced&nb
 
 <dl><dt><a name="PreRankedConfidentOutrankingDigraph-domkernelrestrict"><strong>domkernelrestrict</strong></a>(self, prekernel)</dt><dd><tt>Parameter:&nbsp;dominant&nbsp;prekernel<br>
 Renders&nbsp;dominant&nbsp;prekernel&nbsp;restricted&nbsp;relation.</tt></dd></dl>
-
-<dl><dt><a name="PreRankedConfidentOutrankingDigraph-exportD3"><strong>exportD3</strong></a>(self, fileName='index', Comments=True)</dt><dd><tt>This&nbsp;function&nbsp;was&nbsp;designed&nbsp;and&nbsp;implemented&nbsp;by&nbsp;Gary&nbsp;Cornelius,&nbsp;2014&nbsp;for&nbsp;his&nbsp;bachelor&nbsp;thesis&nbsp;at&nbsp;the&nbsp;University&nbsp;of&nbsp;Luxembourg.&nbsp;<br>
-The&nbsp;thesis&nbsp;document&nbsp;with&nbsp;more&nbsp;explanations&nbsp;can&nbsp;be&nbsp;found&nbsp;in&nbsp;the&nbsp;literature/Cornelius&nbsp;directory&nbsp;of&nbsp;a&nbsp;Digraph3&nbsp;working&nbsp;copy.&nbsp;.<br>
-&nbsp;<br>
-*Parameters*:<br>
-&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;fileName,&nbsp;name&nbsp;of&nbsp;the&nbsp;generated&nbsp;html&nbsp;file,&nbsp;default&nbsp;=&nbsp;None&nbsp;(graph&nbsp;name&nbsp;as&nbsp;defined&nbsp;in&nbsp;python);<br>
-&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;Comments,&nbsp;True&nbsp;=&nbsp;default;<br>
-&nbsp;<br>
-The&nbsp;idea&nbsp;of&nbsp;the&nbsp;project&nbsp;was&nbsp;to&nbsp;find&nbsp;a&nbsp;way&nbsp;that&nbsp;allows&nbsp;you&nbsp;to&nbsp;easily&nbsp;get&nbsp;details&nbsp;about&nbsp;certain&nbsp;nodes&nbsp;or&nbsp;edges&nbsp;of&nbsp;a&nbsp;directed&nbsp;graph&nbsp;in&nbsp;a&nbsp;dynamic&nbsp;format.&nbsp;<br>
-Therefore&nbsp;this&nbsp;function&nbsp;allows&nbsp;you&nbsp;to&nbsp;export&nbsp;a&nbsp;html&nbsp;file&nbsp;together&nbsp;with&nbsp;all&nbsp;the&nbsp;needed&nbsp;libraries,&nbsp;including&nbsp;the&nbsp;<br>
-D3&nbsp;Library&nbsp;which&nbsp;we&nbsp;use&nbsp;for&nbsp;graph&nbsp;generation&nbsp;and&nbsp;the&nbsp;physics&nbsp;between&nbsp;nodes,&nbsp;which&nbsp;attracts&nbsp;or&nbsp;pushes&nbsp;nodes&nbsp;away&nbsp;from&nbsp;each&nbsp;other.<br>
-&nbsp;<br>
-Features&nbsp;of&nbsp;our&nbsp;graph&nbsp;include&nbsp;i.e.&nbsp;:&nbsp;<br>
-&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;A&nbsp;way&nbsp;to&nbsp;only&nbsp;inspect&nbsp;a&nbsp;node&nbsp;and&nbsp;it's&nbsp;neighbours&nbsp;<br>
-&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;Dynamic&nbsp;draging&nbsp;and&nbsp;freezing&nbsp;of&nbsp;the&nbsp;graph<br>
-&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;Export&nbsp;of&nbsp;a&nbsp;newly&nbsp;created&nbsp;general&nbsp;graph<br>
-&nbsp;<br>
-You&nbsp;can&nbsp;find&nbsp;the&nbsp;list&nbsp;of&nbsp;fututres&nbsp;in&nbsp;the&nbsp;Section&nbsp;below&nbsp;which&nbsp;is&nbsp;arranged&nbsp;according&nbsp;to&nbsp;the&nbsp;graph&nbsp;type.<br>
-&nbsp;<br>
-*If&nbsp;the&nbsp;graph&nbsp;is&nbsp;an&nbsp;outrankingdigraphs*:<br>
-&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;Nodes&nbsp;can&nbsp;be&nbsp;dragged&nbsp;and&nbsp;only&nbsp;the&nbsp;name&nbsp;and&nbsp;comment&nbsp;can&nbsp;be&nbsp;edited.&nbsp;<br>
-&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;Edges&nbsp;can&nbsp;be&nbsp;inspected&nbsp;but&nbsp;not&nbsp;edited&nbsp;for&nbsp;this&nbsp;purpose&nbsp;a&nbsp;special&nbsp;json&nbsp;array&nbsp;containing&nbsp;all&nbsp;possible&nbsp;pairwiseComparisions&nbsp;is&nbsp;generated.<br>
-&nbsp;<br>
-*If&nbsp;the&nbsp;graph&nbsp;is&nbsp;a&nbsp;general&nbsp;graph*:<br>
-&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;Nodes&nbsp;can&nbsp;be&nbsp;dragged,&nbsp;added,&nbsp;removed&nbsp;and&nbsp;edited.<br>
-&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;Edges&nbsp;can&nbsp;be&nbsp;added,&nbsp;removed,&nbsp;inverted&nbsp;and&nbsp;edited.&nbsp;But&nbsp;edges&nbsp;cannot&nbsp;be&nbsp;inspected.<br>
-&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;The&nbsp;pairwiseComparisions&nbsp;key&nbsp;leads&nbsp;to&nbsp;an&nbsp;empty&nbsp;array&nbsp;{}.<br>
-&nbsp;<br>
-In&nbsp;both&nbsp;cases,&nbsp;undefined&nbsp;edges&nbsp;can&nbsp;be&nbsp;hidden&nbsp;and&nbsp;reappear&nbsp;after&nbsp;a&nbsp;simple&nbsp;reload.(right&nbsp;click&nbsp;-&nbsp;reload)<br>
-&nbsp;<br>
-*The&nbsp;generated&nbsp;files*:<br>
-&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;d3.v3.js,&nbsp;contains&nbsp;the&nbsp;D3&nbsp;Data-driven&nbsp;Documents&nbsp;source&nbsp;code,&nbsp;containing&nbsp;one&nbsp;small&nbsp;addition&nbsp;that&nbsp;we&nbsp;made&nbsp;in&nbsp;order&nbsp;to&nbsp;be&nbsp;able&nbsp;to&nbsp;easyly&nbsp;import&nbsp;links&nbsp;with&nbsp;a&nbsp;different&nbsp;formatself.<br>
-&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;digraph3lib.js,&nbsp;contains&nbsp;our&nbsp;library.&nbsp;This&nbsp;file&nbsp;contains&nbsp;everything&nbsp;that&nbsp;we&nbsp;need&nbsp;from&nbsp;import&nbsp;of&nbsp;an&nbsp;XMCDA2&nbsp;file,&nbsp;visualization&nbsp;of&nbsp;the&nbsp;graph&nbsp;to&nbsp;export&nbsp;of&nbsp;the&nbsp;changed&nbsp;graph.<br>
-&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;d3export.json,&nbsp;usually&nbsp;named&nbsp;after&nbsp;the&nbsp;python&nbsp;graph&nbsp;name&nbsp;followed&nbsp;by&nbsp;a&nbsp;ticket&nbsp;number&nbsp;if&nbsp;the&nbsp;file&nbsp;is&nbsp;already&nbsp;present.&nbsp;It&nbsp;is&nbsp;the&nbsp;JSON&nbsp;file&nbsp;that&nbsp;is&nbsp;exported&nbsp;with&nbsp;the&nbsp;format&nbsp;"{"xmcda2":&nbsp;"some&nbsp;xml","pairwiseComparisions":"{"a01":&nbsp;"some&nbsp;html",...}"}.<br>
-&nbsp;<br>
-*Example&nbsp;1*:<br>
-&nbsp;&nbsp;&nbsp;&nbsp;#.&nbsp;python3&nbsp;session:<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&gt;&gt;&gt;&nbsp;from&nbsp;digraphs&nbsp;import&nbsp;RandomValuationDigraph<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&gt;&gt;&gt;&nbsp;dg&nbsp;=&nbsp;RandomValuationDigraph(order=5,Normalized=True)<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&gt;&gt;&gt;&nbsp;dg.<a href="#PreRankedConfidentOutrankingDigraph-exportD3">exportD3</a>()<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;or<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&gt;&gt;&nbsp;dg.<a href="#PreRankedConfidentOutrankingDigraph-showInteractiveGraph">showInteractiveGraph</a>()<br>
-&nbsp;<br>
-&nbsp;&nbsp;&nbsp;&nbsp;#.&nbsp;index.html:&nbsp;&nbsp;&nbsp;<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;Main&nbsp;Screen:<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;..&nbsp;image::&nbsp;randomvaluation_d3_main.png<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;Inspect&nbsp;function:<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;..&nbsp;image::&nbsp;randomvaluation_d3_inspect.png<br>
-&nbsp;<br>
-..&nbsp;note::<br>
-&nbsp;<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;If&nbsp;you&nbsp;want&nbsp;to&nbsp;use&nbsp;the&nbsp;automatic&nbsp;load&nbsp;in&nbsp;Chrome,&nbsp;try&nbsp;using&nbsp;the&nbsp;command:&nbsp;"python&nbsp;-m&nbsp;SimpleHTTPServer"<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;and&nbsp;then&nbsp;access&nbsp;the&nbsp;index.html&nbsp;via&nbsp;"<a href="http://0.0.0.0:8000/index.html">http://0.0.0.0:8000/index.html</a>".<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;In&nbsp;order&nbsp;to&nbsp;load&nbsp;the&nbsp;CSS&nbsp;an&nbsp;active&nbsp;internet&nbsp;connection&nbsp;is&nbsp;needed!</tt></dd></dl>
 
 <dl><dt><a name="PreRankedConfidentOutrankingDigraph-exportPrincipalImage"><strong>exportPrincipalImage</strong></a>(self, Reduced=False, Colwise=False, plotFileName=None, Type='png', TempDir='.', Comments=False)</dt><dd><tt>Export&nbsp;as&nbsp;PNG&nbsp;(default)&nbsp;or&nbsp;PDF&nbsp;the&nbsp;principal&nbsp;projection&nbsp;of<br>
 the&nbsp;valued&nbsp;relation&nbsp;using&nbsp;the&nbsp;three&nbsp;principal&nbsp;eigen&nbsp;vectors.<br>
@@ -1348,9 +1290,6 @@ Dummy&nbsp;for&nbsp;<a href="#PreRankedConfidentOutrankingDigraph-showCircuits">
 
 <dl><dt><a name="PreRankedConfidentOutrankingDigraph-showHTMLBestChoiceRecommendation"><strong>showHTMLBestChoiceRecommendation</strong></a>(self, pageTitle=None, ChoiceVector=False, CoDual=True, Debug=False, _OldCoca=False, BrokenCocs=True, Cpp=False)</dt></dl>
 
-<dl><dt><a name="PreRankedConfidentOutrankingDigraph-showInteractiveGraph"><strong>showInteractiveGraph</strong></a>(self)</dt><dd><tt>Save&nbsp;the&nbsp;graph&nbsp;and&nbsp;all&nbsp;needed&nbsp;files&nbsp;for&nbsp;the&nbsp;visualization&nbsp;of&nbsp;an&nbsp;interactive&nbsp;graph&nbsp;generated&nbsp;by&nbsp;the&nbsp;<a href="#PreRankedConfidentOutrankingDigraph-exportD3">exportD3</a>()&nbsp;function.<br>
-For&nbsp;best&nbsp;experience&nbsp;make&nbsp;sure&nbsp;to&nbsp;use&nbsp;Firefox,&nbsp;because&nbsp;other&nbsp;browser&nbsp;restrict&nbsp;the&nbsp;loading&nbsp;of&nbsp;local&nbsp;files.</tt></dd></dl>
-
 <dl><dt><a name="PreRankedConfidentOutrankingDigraph-showMIS"><strong>showMIS</strong></a>(self, withListing=True)</dt><dd><tt>Prints&nbsp;all&nbsp;maximal&nbsp;independent&nbsp;choices:<br>
 &nbsp;&nbsp;&nbsp;&nbsp;Result&nbsp;in&nbsp;self.<strong>misset</strong>.</tt></dd></dl>
 
@@ -1529,6 +1468,9 @@ Parameters:&nbsp;quantile&nbsp;=&nbsp;{'ind':&nbsp;10,&nbsp;'pref':&nbsp;20,&nbs
 <dl><dt><a name="PreRankedConfidentOutrankingDigraph-computeMinMaxEvaluations"><strong>computeMinMaxEvaluations</strong></a>(self, criteria=None, actions=None)</dt><dd><tt>renders&nbsp;minimum&nbsp;and&nbsp;maximum&nbsp;performances&nbsp;on&nbsp;each&nbsp;criterion<br>
 in&nbsp;dictionary&nbsp;form:&nbsp;{'g':&nbsp;{'minimum':&nbsp;x,&nbsp;'maximum':&nbsp;x}}</tt></dd></dl>
 
+<dl><dt><a name="PreRankedConfidentOutrankingDigraph-computeMissingDataProportion"><strong>computeMissingDataProportion</strong></a>(self, InPercents=False, Comments=False)</dt><dd><tt>Renders&nbsp;the&nbsp;proportion&nbsp;of&nbsp;missing&nbsp;data,&nbsp;<br>
+i.e.&nbsp;NA&nbsp;==&nbsp;Decimal('-999')&nbsp;entries&nbsp;in&nbsp;self.<strong>evaluation</strong>.</tt></dd></dl>
+
 <dl><dt><a name="PreRankedConfidentOutrankingDigraph-computeNormalizedDiffEvaluations"><strong>computeNormalizedDiffEvaluations</strong></a>(self, lowValue=0.0, highValue=100.0, withOutput=False, Debug=False)</dt><dd><tt>renders&nbsp;and&nbsp;csv&nbsp;stores&nbsp;(withOutput=True)&nbsp;the<br>
 list&nbsp;of&nbsp;normalized&nbsp;evaluation&nbsp;differences&nbsp;observed&nbsp;on&nbsp;the&nbsp;family&nbsp;of&nbsp;criteria<br>
 Is&nbsp;only&nbsp;adequate&nbsp;if&nbsp;all&nbsp;criteria&nbsp;have&nbsp;the&nbsp;same<br>
@@ -1568,9 +1510,10 @@ of&nbsp;the&nbsp;performance&nbsp;differences&nbsp;of&nbsp;a&nbsp;given&nbsp;thr
 criteria&nbsp;weights&nbsp;in&nbsp;a&nbsp;list&nbsp;of&nbsp;increasing&nbsp;equivalence<br>
 lists&nbsp;of&nbsp;criteria.</tt></dd></dl>
 
-<dl><dt><a name="PreRankedConfidentOutrankingDigraph-computeWeightedAveragePerformances"><strong>computeWeightedAveragePerformances</strong></a>(self, isNormalized=False, lowValue=0.0, highValue=100.0, isListRanked=False)</dt><dd><tt>Compute&nbsp;normalized&nbsp;weighted&nbsp;average&nbsp;scores<br>
-Normalization&nbsp;transforms&nbsp;by&nbsp;default&nbsp;all&nbsp;the&nbsp;scores&nbsp;into&nbsp;a<br>
-common&nbsp;0-100&nbsp;scale.&nbsp;A&nbsp;lowValue&nbsp;and&nbsp;highValue&nbsp;parameter<br>
+<dl><dt><a name="PreRankedConfidentOutrankingDigraph-computeWeightedAveragePerformances"><strong>computeWeightedAveragePerformances</strong></a>(self, isNormalized=False, lowValue=0.0, highValue=100.0, isListRanked=False)</dt><dd><tt>Compute&nbsp;normalized&nbsp;weighted&nbsp;average&nbsp;scores&nbsp;by&nbsp;ignoring&nbsp;missing&nbsp;data.<br>
+When&nbsp;*isNormalized*&nbsp;==&nbsp;True&nbsp;(False&nbsp;by&nbsp;default),&nbsp;<br>
+transforms&nbsp;all&nbsp;the&nbsp;scores&nbsp;into&nbsp;a&nbsp;common&nbsp;0-100&nbsp;scale.&nbsp;<br>
+A&nbsp;lowValue&nbsp;and&nbsp;highValue&nbsp;parameter<br>
 can&nbsp;be&nbsp;provided&nbsp;for&nbsp;a&nbsp;specific&nbsp;normalisation.</tt></dd></dl>
 
 <dl><dt><a name="PreRankedConfidentOutrankingDigraph-convert2BigData"><strong>convert2BigData</strong></a>(self)</dt><dd><tt>Renders&nbsp;a&nbsp;cPerformanceTableau&nbsp;instance,&nbsp;by&nbsp;converting&nbsp;the&nbsp;action&nbsp;keys&nbsp;to&nbsp;integers&nbsp;and&nbsp;evaluations&nbsp;to&nbsp;floats,&nbsp;including&nbsp;the&nbsp;discrimination&nbsp;thresholds,&nbsp;the&nbsp;case&nbsp;given.</tt></dd></dl>
@@ -1606,12 +1549,12 @@ Return&nbsp;a&nbsp;Boolen&nbsp;value.</tt></dd></dl>
 
 <dl><dt><a name="PreRankedConfidentOutrankingDigraph-normalizeEvaluations"><strong>normalizeEvaluations</strong></a>(self, lowValue=0.0, highValue=100.0, Debug=False)</dt><dd><tt>recode&nbsp;the&nbsp;evaluations&nbsp;between&nbsp;lowValue&nbsp;and&nbsp;highValue&nbsp;on&nbsp;all&nbsp;criteria</tt></dd></dl>
 
+<dl><dt><a name="PreRankedConfidentOutrankingDigraph-replaceNA"><strong>replaceNA</strong></a>(self, newNA=None, Comments=False)</dt><dd><tt>Replaces&nbsp;the&nbsp;current&nbsp;self.<strong>NA</strong>&nbsp;symbol&nbsp;with&nbsp;the&nbsp;*newNA*&nbsp;symbol&nbsp;of&nbsp;type&nbsp;&lt;Decimal&gt;.&nbsp;If&nbsp;newNA&nbsp;==&nbsp;None,&nbsp;the&nbsp;defauklt&nbsp;value&nbsp;Decimal('-999')&nbsp;is&nbsp;used.</tt></dd></dl>
+
 <dl><dt><a name="PreRankedConfidentOutrankingDigraph-restoreOriginalEvaluations"><strong>restoreOriginalEvaluations</strong></a>(self, lowValue=0.0, highValue=100.0, Debug=False)</dt><dd><tt>recode&nbsp;the&nbsp;evaluations&nbsp;to&nbsp;their&nbsp;original&nbsp;values&nbsp;on&nbsp;all&nbsp;criteria</tt></dd></dl>
 
 <dl><dt><a name="PreRankedConfidentOutrankingDigraph-saveXMCDA2String"><strong>saveXMCDA2String</strong></a>(self, fileName='temp', category='XMCDA 2.0 format', user='digraphs Module (RB)', version='saved from Python session', title='Performance Tableau in XMCDA-2.0 format.', variant='Rubis', valuationType='bipolar', servingD3=True, comment='produced by stringIO()', stringNA='NA')</dt><dd><tt>save&nbsp;performance&nbsp;tableau&nbsp;object&nbsp;self&nbsp;in&nbsp;XMCDA&nbsp;2.0&nbsp;format.<br>
 !!!&nbsp;obsolete:&nbsp;replaced&nbsp;by&nbsp;the&nbsp;isStringIO&nbsp;in&nbsp;the&nbsp;saveXMCDA2&nbsp;method&nbsp;!!!</tt></dd></dl>
-
-<dl><dt><a name="PreRankedConfidentOutrankingDigraph-saveXMLRubis"><strong>saveXMLRubis</strong></a>(self, name='temp', category='Rubis', subcategory='new D2 version', author='digraphs Module (RB)', reference='saved from Python')</dt><dd><tt>save&nbsp;temporary&nbsp;performance&nbsp;tableau&nbsp;self&nbsp;in&nbsp;XML&nbsp;Rubis&nbsp;format.</tt></dd></dl>
 
 <dl><dt><a name="PreRankedConfidentOutrankingDigraph-showAllQuantiles"><strong>showAllQuantiles</strong></a>(self, Sorted=True)</dt><dd><tt>prints&nbsp;the&nbsp;performance&nbsp;quantiles&nbsp;tableau&nbsp;in&nbsp;the&nbsp;session&nbsp;console.</tt></dd></dl>
 
@@ -1620,18 +1563,20 @@ the&nbsp;values&nbsp;observed&nbsp;in&nbsp;the&nbsp;performance&nbsp;Tableau.</t
 
 <dl><dt><a name="PreRankedConfidentOutrankingDigraph-showHTMLCriteria"><strong>showHTMLCriteria</strong></a>(self, criteriaSubset=None, Sorted=True, ndigits=2, title=None)</dt><dd><tt>shows&nbsp;the&nbsp;criteria&nbsp;in&nbsp;the&nbsp;system&nbsp;browser&nbsp;view.</tt></dd></dl>
 
-<dl><dt><a name="PreRankedConfidentOutrankingDigraph-showHTMLPerformanceHeatmap"><strong>showHTMLPerformanceHeatmap</strong></a>(self, actionsList=None, fromIndex=None, toIndex=None, Transposed=False, criteriaList=None, colorLevels=7, pageTitle=None, ndigits=2, SparseModel=False, minimalComponentSize=1, rankingRule='NetFlows', StoreRanking=True, quantiles=None, strategy='average', Correlations=False, Threading=False, nbrOfCPUs=None, Debug=False)</dt><dd><tt>shows&nbsp;the&nbsp;html&nbsp;heatmap&nbsp;version&nbsp;of&nbsp;the&nbsp;performance&nbsp;tableau&nbsp;in&nbsp;a&nbsp;browser&nbsp;window<br>
+<dl><dt><a name="PreRankedConfidentOutrankingDigraph-showHTMLPerformanceHeatmap"><strong>showHTMLPerformanceHeatmap</strong></a>(self, actionsList=None, WithActionNames=False, fromIndex=None, toIndex=None, Transposed=False, criteriaList=None, colorLevels=7, pageTitle=None, ndigits=2, SparseModel=False, outrankingModel='standard', minimalComponentSize=1, rankingRule='NetFlows', StoreRanking=True, quantiles=None, strategy='average', Correlations=False, Threading=False, nbrOfCPUs=None, Debug=False)</dt><dd><tt>shows&nbsp;the&nbsp;html&nbsp;heatmap&nbsp;version&nbsp;of&nbsp;the&nbsp;performance&nbsp;tableau&nbsp;in&nbsp;a&nbsp;browser&nbsp;window<br>
 (see&nbsp;perfTabs.htmlPerformanceHeatMap()&nbsp;method&nbsp;).<br>
 &nbsp;<br>
 **Parameters**:<br>
 &nbsp;<br>
 *&nbsp;*actionsList*&nbsp;and&nbsp;*criteriaList*,&nbsp;if&nbsp;provided,&nbsp;&nbsp;give&nbsp;the&nbsp;possibility&nbsp;to&nbsp;show<br>
 &nbsp;&nbsp;the&nbsp;decision&nbsp;alternatives,&nbsp;resp.&nbsp;criteria,&nbsp;in&nbsp;a&nbsp;given&nbsp;ordering.<br>
+*&nbsp;*WithActionNames*&nbsp;=&nbsp;True&nbsp;(default&nbsp;False)&nbsp;will&nbsp;show&nbsp;the&nbsp;action&nbsp;names&nbsp;instead&nbsp;of&nbsp;the&nbsp;short&nbsp;names&nbsp;or&nbsp;the&nbsp;identifyers.<br>
 *&nbsp;*ndigits*&nbsp;=&nbsp;0&nbsp;may&nbsp;be&nbsp;used&nbsp;to&nbsp;show&nbsp;integer&nbsp;evaluation&nbsp;values.<br>
 *&nbsp;*colorLevels*&nbsp;may&nbsp;be&nbsp;3,&nbsp;5,&nbsp;7,&nbsp;or&nbsp;9.&nbsp;<br>
 *&nbsp;When&nbsp;no&nbsp;*actionsList*&nbsp;is&nbsp;provided,&nbsp;the&nbsp;decision&nbsp;actions&nbsp;are&nbsp;ordered&nbsp;from&nbsp;the&nbsp;best&nbsp;to&nbsp;the&nbsp;worst.&nbsp;This<br>
 &nbsp;&nbsp;ranking&nbsp;is&nbsp;obtained&nbsp;by&nbsp;default&nbsp;with&nbsp;the&nbsp;Copeland&nbsp;rule&nbsp;applied&nbsp;on&nbsp;a&nbsp;standard&nbsp;*<a href="outrankingDigraphs.html#BipolarOutrankingDigraph">BipolarOutrankingDigraph</a>*.<br>
-*&nbsp;When&nbsp;the&nbsp;*SparseModel*&nbsp;flag&nbsp;is&nbsp;put&nbsp;to&nbsp;*True*,&nbsp;a&nbsp;sparse&nbsp;*<a href="#PreRankedOutrankingDigraph">PreRankedOutrankingDigraph</a>*&nbsp;construction&nbsp;is&nbsp;used&nbsp;instead.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<br>
+*&nbsp;When&nbsp;the&nbsp;*SparseModel*&nbsp;flag&nbsp;is&nbsp;put&nbsp;to&nbsp;*True*,&nbsp;a&nbsp;sparse&nbsp;*<a href="#PreRankedOutrankingDigraph">PreRankedOutrankingDigraph</a>*&nbsp;construction&nbsp;is&nbsp;used&nbsp;instead.<br>
+*&nbsp;the&nbsp;*outrankingModel*&nbsp;parameter&nbsp;(default&nbsp;=&nbsp;'standard')&nbsp;allows&nbsp;to&nbsp;switch&nbsp;to&nbsp;alternative&nbsp;<a href="outrankingDigraphs.html#BipolarOutrankingDigraph">BipolarOutrankingDigraph</a>&nbsp;constructors,&nbsp;like&nbsp;the&nbsp;'confident'&nbsp;or&nbsp;'robust'&nbsp;models.&nbsp;When&nbsp;called&nbsp;from&nbsp;a&nbsp;bipolar-valued&nbsp;outrankingDigraph&nbsp;instance,&nbsp;*outrankingModel*&nbsp;=&nbsp;'this'&nbsp;keeps&nbsp;the&nbsp;current&nbsp;outranking&nbsp;model&nbsp;without&nbsp;recomputing&nbsp;by&nbsp;default&nbsp;the&nbsp;standard&nbsp;outranking&nbsp;model.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<br>
 *&nbsp;The&nbsp;*minimalComponentSize*&nbsp;allows&nbsp;to&nbsp;control&nbsp;the&nbsp;fill&nbsp;rate&nbsp;of&nbsp;the&nbsp;pre-ranked&nbsp;model.<br>
 &nbsp;&nbsp;When&nbsp;*minimalComponentSize*&nbsp;=&nbsp;*n*&nbsp;(the&nbsp;number&nbsp;of&nbsp;decision&nbsp;actions)&nbsp;both&nbsp;the&nbsp;pre-ranked&nbsp;model&nbsp;will&nbsp;be<br>
 &nbsp;&nbsp;in&nbsp;fact&nbsp;equivalent&nbsp;to&nbsp;the&nbsp;standard&nbsp;model.<br>
@@ -2176,10 +2121,6 @@ the&nbsp;criteria&nbsp;ordinal&nbsp;correlation&nbsp;table.<br>
 
 <dl><dt><a name="PreRankedOutrankingDigraph-saveXMCDA2RubisChoiceRecommendation"><strong>saveXMCDA2RubisChoiceRecommendation</strong></a>(self, fileName='temp', category='Rubis', subcategory='Choice Recommendation', author='digraphs Module (RB)', reference='saved from Python', comment=True, servingD3=False, relationName='Stilde', graphValuationType='bipolar', variant='standard', instanceID='void', stringNA='NA', _OldCoca=True, Debug=False)</dt><dd><tt>save&nbsp;complete&nbsp;Rubis&nbsp;problem&nbsp;and&nbsp;result&nbsp;in&nbsp;XMCDA&nbsp;2.0&nbsp;format&nbsp;with&nbsp;unicode&nbsp;encoding.</tt></dd></dl>
 
-<dl><dt><a name="PreRankedOutrankingDigraph-saveXMCDAOutrankingDigraph"><strong>saveXMCDAOutrankingDigraph</strong></a>(self, fileName='temp', category='Rubis', subcategory='Choice Recommendation', author='digraphs Module (RB)', reference='saved from Python', comment=True, servingD3=False, relationName='Stilde', valuationType='bipolar', variant='standard', instanceID='void')</dt><dd><tt>save&nbsp;complete&nbsp;Rubis&nbsp;problem&nbsp;and&nbsp;result&nbsp;in&nbsp;XMCDA&nbsp;format&nbsp;with&nbsp;unicode&nbsp;encoding.</tt></dd></dl>
-
-<dl><dt><a name="PreRankedOutrankingDigraph-saveXMLRubisOutrankingDigraph"><strong>saveXMLRubisOutrankingDigraph</strong></a>(self, name='temp', category='Rubis outranking digraph', subcategory='Choice recommendation', author='digraphs Module (RB)', reference='saved from Python', Comments=False, servingD3=True)</dt><dd><tt>save&nbsp;complete&nbsp;Rubis&nbsp;problem&nbsp;and&nbsp;result&nbsp;in&nbsp;XML&nbsp;format&nbsp;with&nbsp;unicode&nbsp;encoding.</tt></dd></dl>
-
 <dl><dt><a name="PreRankedOutrankingDigraph-showAll"><strong>showAll</strong></a>(self)</dt><dd><tt>specialize&nbsp;the&nbsp;general&nbsp;showAll&nbsp;method&nbsp;with&nbsp;criteria<br>
 and&nbsp;performance&nbsp;tableau&nbsp;output</tt></dd></dl>
 
@@ -2409,6 +2350,8 @@ arc&nbsp;density,&nbsp;double&nbsp;arc&nbsp;density,&nbsp;single&nbsp;arc&nbsp;d
 <dl><dt><a name="PreRankedOutrankingDigraph-computeGoodPirlotChoices"><strong>computeGoodPirlotChoices</strong></a>(self, Comments=False)</dt><dd><tt>Characteristic&nbsp;values&nbsp;for&nbsp;potentially&nbsp;good&nbsp;choices<br>
 using&nbsp;the&nbsp;Pirlot&nbsp;fixpoint&nbsp;algorithm.</tt></dd></dl>
 
+<dl><dt><a name="PreRankedOutrankingDigraph-computeIncomparabilityDegree"><strong>computeIncomparabilityDegree</strong></a>(self, InPercents=False, Comments=False)</dt><dd><tt>Renders&nbsp;the&nbsp;incomparability&nbsp;degree&nbsp;(Decimal),&nbsp;i.e.&nbsp;the&nbsp;relative&nbsp;number&nbsp;of&nbsp;symmetric&nbsp;indeterminate&nbsp;relations&nbsp;of&nbsp;the&nbsp;irreflexive&nbsp;part&nbsp;of&nbsp;a&nbsp;digraph.</tt></dd></dl>
+
 <dl><dt><a name="PreRankedOutrankingDigraph-computeKemenyIndex"><strong>computeKemenyIndex</strong></a>(self, otherRelation)</dt><dd><tt>renders&nbsp;the&nbsp;Kemeny&nbsp;index&nbsp;of&nbsp;the&nbsp;self.<strong>relation</strong><br>
 compared&nbsp;with&nbsp;a&nbsp;given&nbsp;crisp&nbsp;valued&nbsp;relation&nbsp;of&nbsp;a&nbsp;compatible<br>
 other&nbsp;digraph&nbsp;(same&nbsp;nodes&nbsp;or&nbsp;actions).</tt></dd></dl>
@@ -2593,7 +2536,7 @@ old&nbsp;versions&nbsp;compatibility.</tt></dd></dl>
 <dl><dt><a name="PreRankedOutrankingDigraph-computeSlaterRanking"><strong>computeSlaterRanking</strong></a>(self, isProbabilistic=False, seed=None, sampleSize=1000, Debug=False)</dt><dd><tt>Renders&nbsp;a&nbsp;ranking&nbsp;of&nbsp;the&nbsp;actions&nbsp;with&nbsp;minimal&nbsp;Slater&nbsp;index.<br>
 Return&nbsp;a&nbsp;tuple:&nbsp;slaterOrder,&nbsp;slaterIndex</tt></dd></dl>
 
-<dl><dt><a name="PreRankedOutrankingDigraph-computeSymmetryDegree"><strong>computeSymmetryDegree</strong></a>(self, InPercents=False, Comments=False)</dt><dd><tt>Renders&nbsp;the&nbsp;symmetry&nbsp;degree&nbsp;(Decimal)&nbsp;of&nbsp;the&nbsp;reflexive&nbsp;part&nbsp;of&nbsp;a&nbsp;digraph.<br>
+<dl><dt><a name="PreRankedOutrankingDigraph-computeSymmetryDegree"><strong>computeSymmetryDegree</strong></a>(self, InPercents=False, Comments=False)</dt><dd><tt>Renders&nbsp;the&nbsp;symmetry&nbsp;degree&nbsp;(Decimal)&nbsp;of&nbsp;the&nbsp;irreflexive&nbsp;part&nbsp;of&nbsp;a&nbsp;digraph.<br>
 &nbsp;<br>
 ..&nbsp;note::<br>
 &nbsp;<br>
@@ -2710,60 +2653,6 @@ If&nbsp;inPercent,&nbsp;*result*&nbsp;shifted&nbsp;(+1)&nbsp;and&nbsp;reduced&nb
 
 <dl><dt><a name="PreRankedOutrankingDigraph-domkernelrestrict"><strong>domkernelrestrict</strong></a>(self, prekernel)</dt><dd><tt>Parameter:&nbsp;dominant&nbsp;prekernel<br>
 Renders&nbsp;dominant&nbsp;prekernel&nbsp;restricted&nbsp;relation.</tt></dd></dl>
-
-<dl><dt><a name="PreRankedOutrankingDigraph-exportD3"><strong>exportD3</strong></a>(self, fileName='index', Comments=True)</dt><dd><tt>This&nbsp;function&nbsp;was&nbsp;designed&nbsp;and&nbsp;implemented&nbsp;by&nbsp;Gary&nbsp;Cornelius,&nbsp;2014&nbsp;for&nbsp;his&nbsp;bachelor&nbsp;thesis&nbsp;at&nbsp;the&nbsp;University&nbsp;of&nbsp;Luxembourg.&nbsp;<br>
-The&nbsp;thesis&nbsp;document&nbsp;with&nbsp;more&nbsp;explanations&nbsp;can&nbsp;be&nbsp;found&nbsp;in&nbsp;the&nbsp;literature/Cornelius&nbsp;directory&nbsp;of&nbsp;a&nbsp;Digraph3&nbsp;working&nbsp;copy.&nbsp;.<br>
-&nbsp;<br>
-*Parameters*:<br>
-&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;fileName,&nbsp;name&nbsp;of&nbsp;the&nbsp;generated&nbsp;html&nbsp;file,&nbsp;default&nbsp;=&nbsp;None&nbsp;(graph&nbsp;name&nbsp;as&nbsp;defined&nbsp;in&nbsp;python);<br>
-&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;Comments,&nbsp;True&nbsp;=&nbsp;default;<br>
-&nbsp;<br>
-The&nbsp;idea&nbsp;of&nbsp;the&nbsp;project&nbsp;was&nbsp;to&nbsp;find&nbsp;a&nbsp;way&nbsp;that&nbsp;allows&nbsp;you&nbsp;to&nbsp;easily&nbsp;get&nbsp;details&nbsp;about&nbsp;certain&nbsp;nodes&nbsp;or&nbsp;edges&nbsp;of&nbsp;a&nbsp;directed&nbsp;graph&nbsp;in&nbsp;a&nbsp;dynamic&nbsp;format.&nbsp;<br>
-Therefore&nbsp;this&nbsp;function&nbsp;allows&nbsp;you&nbsp;to&nbsp;export&nbsp;a&nbsp;html&nbsp;file&nbsp;together&nbsp;with&nbsp;all&nbsp;the&nbsp;needed&nbsp;libraries,&nbsp;including&nbsp;the&nbsp;<br>
-D3&nbsp;Library&nbsp;which&nbsp;we&nbsp;use&nbsp;for&nbsp;graph&nbsp;generation&nbsp;and&nbsp;the&nbsp;physics&nbsp;between&nbsp;nodes,&nbsp;which&nbsp;attracts&nbsp;or&nbsp;pushes&nbsp;nodes&nbsp;away&nbsp;from&nbsp;each&nbsp;other.<br>
-&nbsp;<br>
-Features&nbsp;of&nbsp;our&nbsp;graph&nbsp;include&nbsp;i.e.&nbsp;:&nbsp;<br>
-&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;A&nbsp;way&nbsp;to&nbsp;only&nbsp;inspect&nbsp;a&nbsp;node&nbsp;and&nbsp;it's&nbsp;neighbours&nbsp;<br>
-&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;Dynamic&nbsp;draging&nbsp;and&nbsp;freezing&nbsp;of&nbsp;the&nbsp;graph<br>
-&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;Export&nbsp;of&nbsp;a&nbsp;newly&nbsp;created&nbsp;general&nbsp;graph<br>
-&nbsp;<br>
-You&nbsp;can&nbsp;find&nbsp;the&nbsp;list&nbsp;of&nbsp;fututres&nbsp;in&nbsp;the&nbsp;Section&nbsp;below&nbsp;which&nbsp;is&nbsp;arranged&nbsp;according&nbsp;to&nbsp;the&nbsp;graph&nbsp;type.<br>
-&nbsp;<br>
-*If&nbsp;the&nbsp;graph&nbsp;is&nbsp;an&nbsp;outrankingdigraphs*:<br>
-&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;Nodes&nbsp;can&nbsp;be&nbsp;dragged&nbsp;and&nbsp;only&nbsp;the&nbsp;name&nbsp;and&nbsp;comment&nbsp;can&nbsp;be&nbsp;edited.&nbsp;<br>
-&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;Edges&nbsp;can&nbsp;be&nbsp;inspected&nbsp;but&nbsp;not&nbsp;edited&nbsp;for&nbsp;this&nbsp;purpose&nbsp;a&nbsp;special&nbsp;json&nbsp;array&nbsp;containing&nbsp;all&nbsp;possible&nbsp;pairwiseComparisions&nbsp;is&nbsp;generated.<br>
-&nbsp;<br>
-*If&nbsp;the&nbsp;graph&nbsp;is&nbsp;a&nbsp;general&nbsp;graph*:<br>
-&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;Nodes&nbsp;can&nbsp;be&nbsp;dragged,&nbsp;added,&nbsp;removed&nbsp;and&nbsp;edited.<br>
-&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;Edges&nbsp;can&nbsp;be&nbsp;added,&nbsp;removed,&nbsp;inverted&nbsp;and&nbsp;edited.&nbsp;But&nbsp;edges&nbsp;cannot&nbsp;be&nbsp;inspected.<br>
-&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;The&nbsp;pairwiseComparisions&nbsp;key&nbsp;leads&nbsp;to&nbsp;an&nbsp;empty&nbsp;array&nbsp;{}.<br>
-&nbsp;<br>
-In&nbsp;both&nbsp;cases,&nbsp;undefined&nbsp;edges&nbsp;can&nbsp;be&nbsp;hidden&nbsp;and&nbsp;reappear&nbsp;after&nbsp;a&nbsp;simple&nbsp;reload.(right&nbsp;click&nbsp;-&nbsp;reload)<br>
-&nbsp;<br>
-*The&nbsp;generated&nbsp;files*:<br>
-&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;d3.v3.js,&nbsp;contains&nbsp;the&nbsp;D3&nbsp;Data-driven&nbsp;Documents&nbsp;source&nbsp;code,&nbsp;containing&nbsp;one&nbsp;small&nbsp;addition&nbsp;that&nbsp;we&nbsp;made&nbsp;in&nbsp;order&nbsp;to&nbsp;be&nbsp;able&nbsp;to&nbsp;easyly&nbsp;import&nbsp;links&nbsp;with&nbsp;a&nbsp;different&nbsp;formatself.<br>
-&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;digraph3lib.js,&nbsp;contains&nbsp;our&nbsp;library.&nbsp;This&nbsp;file&nbsp;contains&nbsp;everything&nbsp;that&nbsp;we&nbsp;need&nbsp;from&nbsp;import&nbsp;of&nbsp;an&nbsp;XMCDA2&nbsp;file,&nbsp;visualization&nbsp;of&nbsp;the&nbsp;graph&nbsp;to&nbsp;export&nbsp;of&nbsp;the&nbsp;changed&nbsp;graph.<br>
-&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;d3export.json,&nbsp;usually&nbsp;named&nbsp;after&nbsp;the&nbsp;python&nbsp;graph&nbsp;name&nbsp;followed&nbsp;by&nbsp;a&nbsp;ticket&nbsp;number&nbsp;if&nbsp;the&nbsp;file&nbsp;is&nbsp;already&nbsp;present.&nbsp;It&nbsp;is&nbsp;the&nbsp;JSON&nbsp;file&nbsp;that&nbsp;is&nbsp;exported&nbsp;with&nbsp;the&nbsp;format&nbsp;"{"xmcda2":&nbsp;"some&nbsp;xml","pairwiseComparisions":"{"a01":&nbsp;"some&nbsp;html",...}"}.<br>
-&nbsp;<br>
-*Example&nbsp;1*:<br>
-&nbsp;&nbsp;&nbsp;&nbsp;#.&nbsp;python3&nbsp;session:<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&gt;&gt;&gt;&nbsp;from&nbsp;digraphs&nbsp;import&nbsp;RandomValuationDigraph<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&gt;&gt;&gt;&nbsp;dg&nbsp;=&nbsp;RandomValuationDigraph(order=5,Normalized=True)<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&gt;&gt;&gt;&nbsp;dg.<a href="#PreRankedOutrankingDigraph-exportD3">exportD3</a>()<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;or<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&gt;&gt;&nbsp;dg.<a href="#PreRankedOutrankingDigraph-showInteractiveGraph">showInteractiveGraph</a>()<br>
-&nbsp;<br>
-&nbsp;&nbsp;&nbsp;&nbsp;#.&nbsp;index.html:&nbsp;&nbsp;&nbsp;<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;Main&nbsp;Screen:<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;..&nbsp;image::&nbsp;randomvaluation_d3_main.png<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;Inspect&nbsp;function:<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;..&nbsp;image::&nbsp;randomvaluation_d3_inspect.png<br>
-&nbsp;<br>
-..&nbsp;note::<br>
-&nbsp;<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;If&nbsp;you&nbsp;want&nbsp;to&nbsp;use&nbsp;the&nbsp;automatic&nbsp;load&nbsp;in&nbsp;Chrome,&nbsp;try&nbsp;using&nbsp;the&nbsp;command:&nbsp;"python&nbsp;-m&nbsp;SimpleHTTPServer"<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;and&nbsp;then&nbsp;access&nbsp;the&nbsp;index.html&nbsp;via&nbsp;"<a href="http://0.0.0.0:8000/index.html">http://0.0.0.0:8000/index.html</a>".<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;In&nbsp;order&nbsp;to&nbsp;load&nbsp;the&nbsp;CSS&nbsp;an&nbsp;active&nbsp;internet&nbsp;connection&nbsp;is&nbsp;needed!</tt></dd></dl>
 
 <dl><dt><a name="PreRankedOutrankingDigraph-exportPrincipalImage"><strong>exportPrincipalImage</strong></a>(self, Reduced=False, Colwise=False, plotFileName=None, Type='png', TempDir='.', Comments=False)</dt><dd><tt>Export&nbsp;as&nbsp;PNG&nbsp;(default)&nbsp;or&nbsp;PDF&nbsp;the&nbsp;principal&nbsp;projection&nbsp;of<br>
 the&nbsp;valued&nbsp;relation&nbsp;using&nbsp;the&nbsp;three&nbsp;principal&nbsp;eigen&nbsp;vectors.<br>
@@ -2952,9 +2841,6 @@ Dummy&nbsp;for&nbsp;<a href="#PreRankedOutrankingDigraph-showCircuits">showCircu
 
 <dl><dt><a name="PreRankedOutrankingDigraph-showHTMLBestChoiceRecommendation"><strong>showHTMLBestChoiceRecommendation</strong></a>(self, pageTitle=None, ChoiceVector=False, CoDual=True, Debug=False, _OldCoca=False, BrokenCocs=True, Cpp=False)</dt></dl>
 
-<dl><dt><a name="PreRankedOutrankingDigraph-showInteractiveGraph"><strong>showInteractiveGraph</strong></a>(self)</dt><dd><tt>Save&nbsp;the&nbsp;graph&nbsp;and&nbsp;all&nbsp;needed&nbsp;files&nbsp;for&nbsp;the&nbsp;visualization&nbsp;of&nbsp;an&nbsp;interactive&nbsp;graph&nbsp;generated&nbsp;by&nbsp;the&nbsp;<a href="#PreRankedOutrankingDigraph-exportD3">exportD3</a>()&nbsp;function.<br>
-For&nbsp;best&nbsp;experience&nbsp;make&nbsp;sure&nbsp;to&nbsp;use&nbsp;Firefox,&nbsp;because&nbsp;other&nbsp;browser&nbsp;restrict&nbsp;the&nbsp;loading&nbsp;of&nbsp;local&nbsp;files.</tt></dd></dl>
-
 <dl><dt><a name="PreRankedOutrankingDigraph-showMIS"><strong>showMIS</strong></a>(self, withListing=True)</dt><dd><tt>Prints&nbsp;all&nbsp;maximal&nbsp;independent&nbsp;choices:<br>
 &nbsp;&nbsp;&nbsp;&nbsp;Result&nbsp;in&nbsp;self.<strong>misset</strong>.</tt></dd></dl>
 
@@ -3133,6 +3019,9 @@ Parameters:&nbsp;quantile&nbsp;=&nbsp;{'ind':&nbsp;10,&nbsp;'pref':&nbsp;20,&nbs
 <dl><dt><a name="PreRankedOutrankingDigraph-computeMinMaxEvaluations"><strong>computeMinMaxEvaluations</strong></a>(self, criteria=None, actions=None)</dt><dd><tt>renders&nbsp;minimum&nbsp;and&nbsp;maximum&nbsp;performances&nbsp;on&nbsp;each&nbsp;criterion<br>
 in&nbsp;dictionary&nbsp;form:&nbsp;{'g':&nbsp;{'minimum':&nbsp;x,&nbsp;'maximum':&nbsp;x}}</tt></dd></dl>
 
+<dl><dt><a name="PreRankedOutrankingDigraph-computeMissingDataProportion"><strong>computeMissingDataProportion</strong></a>(self, InPercents=False, Comments=False)</dt><dd><tt>Renders&nbsp;the&nbsp;proportion&nbsp;of&nbsp;missing&nbsp;data,&nbsp;<br>
+i.e.&nbsp;NA&nbsp;==&nbsp;Decimal('-999')&nbsp;entries&nbsp;in&nbsp;self.<strong>evaluation</strong>.</tt></dd></dl>
+
 <dl><dt><a name="PreRankedOutrankingDigraph-computeNormalizedDiffEvaluations"><strong>computeNormalizedDiffEvaluations</strong></a>(self, lowValue=0.0, highValue=100.0, withOutput=False, Debug=False)</dt><dd><tt>renders&nbsp;and&nbsp;csv&nbsp;stores&nbsp;(withOutput=True)&nbsp;the<br>
 list&nbsp;of&nbsp;normalized&nbsp;evaluation&nbsp;differences&nbsp;observed&nbsp;on&nbsp;the&nbsp;family&nbsp;of&nbsp;criteria<br>
 Is&nbsp;only&nbsp;adequate&nbsp;if&nbsp;all&nbsp;criteria&nbsp;have&nbsp;the&nbsp;same<br>
@@ -3172,9 +3061,10 @@ of&nbsp;the&nbsp;performance&nbsp;differences&nbsp;of&nbsp;a&nbsp;given&nbsp;thr
 criteria&nbsp;weights&nbsp;in&nbsp;a&nbsp;list&nbsp;of&nbsp;increasing&nbsp;equivalence<br>
 lists&nbsp;of&nbsp;criteria.</tt></dd></dl>
 
-<dl><dt><a name="PreRankedOutrankingDigraph-computeWeightedAveragePerformances"><strong>computeWeightedAveragePerformances</strong></a>(self, isNormalized=False, lowValue=0.0, highValue=100.0, isListRanked=False)</dt><dd><tt>Compute&nbsp;normalized&nbsp;weighted&nbsp;average&nbsp;scores<br>
-Normalization&nbsp;transforms&nbsp;by&nbsp;default&nbsp;all&nbsp;the&nbsp;scores&nbsp;into&nbsp;a<br>
-common&nbsp;0-100&nbsp;scale.&nbsp;A&nbsp;lowValue&nbsp;and&nbsp;highValue&nbsp;parameter<br>
+<dl><dt><a name="PreRankedOutrankingDigraph-computeWeightedAveragePerformances"><strong>computeWeightedAveragePerformances</strong></a>(self, isNormalized=False, lowValue=0.0, highValue=100.0, isListRanked=False)</dt><dd><tt>Compute&nbsp;normalized&nbsp;weighted&nbsp;average&nbsp;scores&nbsp;by&nbsp;ignoring&nbsp;missing&nbsp;data.<br>
+When&nbsp;*isNormalized*&nbsp;==&nbsp;True&nbsp;(False&nbsp;by&nbsp;default),&nbsp;<br>
+transforms&nbsp;all&nbsp;the&nbsp;scores&nbsp;into&nbsp;a&nbsp;common&nbsp;0-100&nbsp;scale.&nbsp;<br>
+A&nbsp;lowValue&nbsp;and&nbsp;highValue&nbsp;parameter<br>
 can&nbsp;be&nbsp;provided&nbsp;for&nbsp;a&nbsp;specific&nbsp;normalisation.</tt></dd></dl>
 
 <dl><dt><a name="PreRankedOutrankingDigraph-convert2BigData"><strong>convert2BigData</strong></a>(self)</dt><dd><tt>Renders&nbsp;a&nbsp;cPerformanceTableau&nbsp;instance,&nbsp;by&nbsp;converting&nbsp;the&nbsp;action&nbsp;keys&nbsp;to&nbsp;integers&nbsp;and&nbsp;evaluations&nbsp;to&nbsp;floats,&nbsp;including&nbsp;the&nbsp;discrimination&nbsp;thresholds,&nbsp;the&nbsp;case&nbsp;given.</tt></dd></dl>
@@ -3210,12 +3100,12 @@ Return&nbsp;a&nbsp;Boolen&nbsp;value.</tt></dd></dl>
 
 <dl><dt><a name="PreRankedOutrankingDigraph-normalizeEvaluations"><strong>normalizeEvaluations</strong></a>(self, lowValue=0.0, highValue=100.0, Debug=False)</dt><dd><tt>recode&nbsp;the&nbsp;evaluations&nbsp;between&nbsp;lowValue&nbsp;and&nbsp;highValue&nbsp;on&nbsp;all&nbsp;criteria</tt></dd></dl>
 
+<dl><dt><a name="PreRankedOutrankingDigraph-replaceNA"><strong>replaceNA</strong></a>(self, newNA=None, Comments=False)</dt><dd><tt>Replaces&nbsp;the&nbsp;current&nbsp;self.<strong>NA</strong>&nbsp;symbol&nbsp;with&nbsp;the&nbsp;*newNA*&nbsp;symbol&nbsp;of&nbsp;type&nbsp;&lt;Decimal&gt;.&nbsp;If&nbsp;newNA&nbsp;==&nbsp;None,&nbsp;the&nbsp;defauklt&nbsp;value&nbsp;Decimal('-999')&nbsp;is&nbsp;used.</tt></dd></dl>
+
 <dl><dt><a name="PreRankedOutrankingDigraph-restoreOriginalEvaluations"><strong>restoreOriginalEvaluations</strong></a>(self, lowValue=0.0, highValue=100.0, Debug=False)</dt><dd><tt>recode&nbsp;the&nbsp;evaluations&nbsp;to&nbsp;their&nbsp;original&nbsp;values&nbsp;on&nbsp;all&nbsp;criteria</tt></dd></dl>
 
 <dl><dt><a name="PreRankedOutrankingDigraph-saveXMCDA2String"><strong>saveXMCDA2String</strong></a>(self, fileName='temp', category='XMCDA 2.0 format', user='digraphs Module (RB)', version='saved from Python session', title='Performance Tableau in XMCDA-2.0 format.', variant='Rubis', valuationType='bipolar', servingD3=True, comment='produced by stringIO()', stringNA='NA')</dt><dd><tt>save&nbsp;performance&nbsp;tableau&nbsp;object&nbsp;self&nbsp;in&nbsp;XMCDA&nbsp;2.0&nbsp;format.<br>
 !!!&nbsp;obsolete:&nbsp;replaced&nbsp;by&nbsp;the&nbsp;isStringIO&nbsp;in&nbsp;the&nbsp;saveXMCDA2&nbsp;method&nbsp;!!!</tt></dd></dl>
-
-<dl><dt><a name="PreRankedOutrankingDigraph-saveXMLRubis"><strong>saveXMLRubis</strong></a>(self, name='temp', category='Rubis', subcategory='new D2 version', author='digraphs Module (RB)', reference='saved from Python')</dt><dd><tt>save&nbsp;temporary&nbsp;performance&nbsp;tableau&nbsp;self&nbsp;in&nbsp;XML&nbsp;Rubis&nbsp;format.</tt></dd></dl>
 
 <dl><dt><a name="PreRankedOutrankingDigraph-showAllQuantiles"><strong>showAllQuantiles</strong></a>(self, Sorted=True)</dt><dd><tt>prints&nbsp;the&nbsp;performance&nbsp;quantiles&nbsp;tableau&nbsp;in&nbsp;the&nbsp;session&nbsp;console.</tt></dd></dl>
 
@@ -3224,18 +3114,20 @@ the&nbsp;values&nbsp;observed&nbsp;in&nbsp;the&nbsp;performance&nbsp;Tableau.</t
 
 <dl><dt><a name="PreRankedOutrankingDigraph-showHTMLCriteria"><strong>showHTMLCriteria</strong></a>(self, criteriaSubset=None, Sorted=True, ndigits=2, title=None)</dt><dd><tt>shows&nbsp;the&nbsp;criteria&nbsp;in&nbsp;the&nbsp;system&nbsp;browser&nbsp;view.</tt></dd></dl>
 
-<dl><dt><a name="PreRankedOutrankingDigraph-showHTMLPerformanceHeatmap"><strong>showHTMLPerformanceHeatmap</strong></a>(self, actionsList=None, fromIndex=None, toIndex=None, Transposed=False, criteriaList=None, colorLevels=7, pageTitle=None, ndigits=2, SparseModel=False, minimalComponentSize=1, rankingRule='NetFlows', StoreRanking=True, quantiles=None, strategy='average', Correlations=False, Threading=False, nbrOfCPUs=None, Debug=False)</dt><dd><tt>shows&nbsp;the&nbsp;html&nbsp;heatmap&nbsp;version&nbsp;of&nbsp;the&nbsp;performance&nbsp;tableau&nbsp;in&nbsp;a&nbsp;browser&nbsp;window<br>
+<dl><dt><a name="PreRankedOutrankingDigraph-showHTMLPerformanceHeatmap"><strong>showHTMLPerformanceHeatmap</strong></a>(self, actionsList=None, WithActionNames=False, fromIndex=None, toIndex=None, Transposed=False, criteriaList=None, colorLevels=7, pageTitle=None, ndigits=2, SparseModel=False, outrankingModel='standard', minimalComponentSize=1, rankingRule='NetFlows', StoreRanking=True, quantiles=None, strategy='average', Correlations=False, Threading=False, nbrOfCPUs=None, Debug=False)</dt><dd><tt>shows&nbsp;the&nbsp;html&nbsp;heatmap&nbsp;version&nbsp;of&nbsp;the&nbsp;performance&nbsp;tableau&nbsp;in&nbsp;a&nbsp;browser&nbsp;window<br>
 (see&nbsp;perfTabs.htmlPerformanceHeatMap()&nbsp;method&nbsp;).<br>
 &nbsp;<br>
 **Parameters**:<br>
 &nbsp;<br>
 *&nbsp;*actionsList*&nbsp;and&nbsp;*criteriaList*,&nbsp;if&nbsp;provided,&nbsp;&nbsp;give&nbsp;the&nbsp;possibility&nbsp;to&nbsp;show<br>
 &nbsp;&nbsp;the&nbsp;decision&nbsp;alternatives,&nbsp;resp.&nbsp;criteria,&nbsp;in&nbsp;a&nbsp;given&nbsp;ordering.<br>
+*&nbsp;*WithActionNames*&nbsp;=&nbsp;True&nbsp;(default&nbsp;False)&nbsp;will&nbsp;show&nbsp;the&nbsp;action&nbsp;names&nbsp;instead&nbsp;of&nbsp;the&nbsp;short&nbsp;names&nbsp;or&nbsp;the&nbsp;identifyers.<br>
 *&nbsp;*ndigits*&nbsp;=&nbsp;0&nbsp;may&nbsp;be&nbsp;used&nbsp;to&nbsp;show&nbsp;integer&nbsp;evaluation&nbsp;values.<br>
 *&nbsp;*colorLevels*&nbsp;may&nbsp;be&nbsp;3,&nbsp;5,&nbsp;7,&nbsp;or&nbsp;9.&nbsp;<br>
 *&nbsp;When&nbsp;no&nbsp;*actionsList*&nbsp;is&nbsp;provided,&nbsp;the&nbsp;decision&nbsp;actions&nbsp;are&nbsp;ordered&nbsp;from&nbsp;the&nbsp;best&nbsp;to&nbsp;the&nbsp;worst.&nbsp;This<br>
 &nbsp;&nbsp;ranking&nbsp;is&nbsp;obtained&nbsp;by&nbsp;default&nbsp;with&nbsp;the&nbsp;Copeland&nbsp;rule&nbsp;applied&nbsp;on&nbsp;a&nbsp;standard&nbsp;*<a href="outrankingDigraphs.html#BipolarOutrankingDigraph">BipolarOutrankingDigraph</a>*.<br>
-*&nbsp;When&nbsp;the&nbsp;*SparseModel*&nbsp;flag&nbsp;is&nbsp;put&nbsp;to&nbsp;*True*,&nbsp;a&nbsp;sparse&nbsp;*<a href="#PreRankedOutrankingDigraph">PreRankedOutrankingDigraph</a>*&nbsp;construction&nbsp;is&nbsp;used&nbsp;instead.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<br>
+*&nbsp;When&nbsp;the&nbsp;*SparseModel*&nbsp;flag&nbsp;is&nbsp;put&nbsp;to&nbsp;*True*,&nbsp;a&nbsp;sparse&nbsp;*<a href="#PreRankedOutrankingDigraph">PreRankedOutrankingDigraph</a>*&nbsp;construction&nbsp;is&nbsp;used&nbsp;instead.<br>
+*&nbsp;the&nbsp;*outrankingModel*&nbsp;parameter&nbsp;(default&nbsp;=&nbsp;'standard')&nbsp;allows&nbsp;to&nbsp;switch&nbsp;to&nbsp;alternative&nbsp;<a href="outrankingDigraphs.html#BipolarOutrankingDigraph">BipolarOutrankingDigraph</a>&nbsp;constructors,&nbsp;like&nbsp;the&nbsp;'confident'&nbsp;or&nbsp;'robust'&nbsp;models.&nbsp;When&nbsp;called&nbsp;from&nbsp;a&nbsp;bipolar-valued&nbsp;outrankingDigraph&nbsp;instance,&nbsp;*outrankingModel*&nbsp;=&nbsp;'this'&nbsp;keeps&nbsp;the&nbsp;current&nbsp;outranking&nbsp;model&nbsp;without&nbsp;recomputing&nbsp;by&nbsp;default&nbsp;the&nbsp;standard&nbsp;outranking&nbsp;model.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<br>
 *&nbsp;The&nbsp;*minimalComponentSize*&nbsp;allows&nbsp;to&nbsp;control&nbsp;the&nbsp;fill&nbsp;rate&nbsp;of&nbsp;the&nbsp;pre-ranked&nbsp;model.<br>
 &nbsp;&nbsp;When&nbsp;*minimalComponentSize*&nbsp;=&nbsp;*n*&nbsp;(the&nbsp;number&nbsp;of&nbsp;decision&nbsp;actions)&nbsp;both&nbsp;the&nbsp;pre-ranked&nbsp;model&nbsp;will&nbsp;be<br>
 &nbsp;&nbsp;in&nbsp;fact&nbsp;equivalent&nbsp;to&nbsp;the&nbsp;standard&nbsp;model.<br>
@@ -3683,10 +3575,6 @@ the&nbsp;criteria&nbsp;ordinal&nbsp;correlation&nbsp;table.<br>
 
 <dl><dt><a name="SparseOutrankingDigraph-saveXMCDA2RubisChoiceRecommendation"><strong>saveXMCDA2RubisChoiceRecommendation</strong></a>(self, fileName='temp', category='Rubis', subcategory='Choice Recommendation', author='digraphs Module (RB)', reference='saved from Python', comment=True, servingD3=False, relationName='Stilde', graphValuationType='bipolar', variant='standard', instanceID='void', stringNA='NA', _OldCoca=True, Debug=False)</dt><dd><tt>save&nbsp;complete&nbsp;Rubis&nbsp;problem&nbsp;and&nbsp;result&nbsp;in&nbsp;XMCDA&nbsp;2.0&nbsp;format&nbsp;with&nbsp;unicode&nbsp;encoding.</tt></dd></dl>
 
-<dl><dt><a name="SparseOutrankingDigraph-saveXMCDAOutrankingDigraph"><strong>saveXMCDAOutrankingDigraph</strong></a>(self, fileName='temp', category='Rubis', subcategory='Choice Recommendation', author='digraphs Module (RB)', reference='saved from Python', comment=True, servingD3=False, relationName='Stilde', valuationType='bipolar', variant='standard', instanceID='void')</dt><dd><tt>save&nbsp;complete&nbsp;Rubis&nbsp;problem&nbsp;and&nbsp;result&nbsp;in&nbsp;XMCDA&nbsp;format&nbsp;with&nbsp;unicode&nbsp;encoding.</tt></dd></dl>
-
-<dl><dt><a name="SparseOutrankingDigraph-saveXMLRubisOutrankingDigraph"><strong>saveXMLRubisOutrankingDigraph</strong></a>(self, name='temp', category='Rubis outranking digraph', subcategory='Choice recommendation', author='digraphs Module (RB)', reference='saved from Python', Comments=False, servingD3=True)</dt><dd><tt>save&nbsp;complete&nbsp;Rubis&nbsp;problem&nbsp;and&nbsp;result&nbsp;in&nbsp;XML&nbsp;format&nbsp;with&nbsp;unicode&nbsp;encoding.</tt></dd></dl>
-
 <dl><dt><a name="SparseOutrankingDigraph-showAll"><strong>showAll</strong></a>(self)</dt><dd><tt>specialize&nbsp;the&nbsp;general&nbsp;showAll&nbsp;method&nbsp;with&nbsp;criteria<br>
 and&nbsp;performance&nbsp;tableau&nbsp;output</tt></dd></dl>
 
@@ -3920,6 +3808,8 @@ arc&nbsp;density,&nbsp;double&nbsp;arc&nbsp;density,&nbsp;single&nbsp;arc&nbsp;d
 <dl><dt><a name="SparseOutrankingDigraph-computeGoodPirlotChoices"><strong>computeGoodPirlotChoices</strong></a>(self, Comments=False)</dt><dd><tt>Characteristic&nbsp;values&nbsp;for&nbsp;potentially&nbsp;good&nbsp;choices<br>
 using&nbsp;the&nbsp;Pirlot&nbsp;fixpoint&nbsp;algorithm.</tt></dd></dl>
 
+<dl><dt><a name="SparseOutrankingDigraph-computeIncomparabilityDegree"><strong>computeIncomparabilityDegree</strong></a>(self, InPercents=False, Comments=False)</dt><dd><tt>Renders&nbsp;the&nbsp;incomparability&nbsp;degree&nbsp;(Decimal),&nbsp;i.e.&nbsp;the&nbsp;relative&nbsp;number&nbsp;of&nbsp;symmetric&nbsp;indeterminate&nbsp;relations&nbsp;of&nbsp;the&nbsp;irreflexive&nbsp;part&nbsp;of&nbsp;a&nbsp;digraph.</tt></dd></dl>
+
 <dl><dt><a name="SparseOutrankingDigraph-computeKemenyIndex"><strong>computeKemenyIndex</strong></a>(self, otherRelation)</dt><dd><tt>renders&nbsp;the&nbsp;Kemeny&nbsp;index&nbsp;of&nbsp;the&nbsp;self.<strong>relation</strong><br>
 compared&nbsp;with&nbsp;a&nbsp;given&nbsp;crisp&nbsp;valued&nbsp;relation&nbsp;of&nbsp;a&nbsp;compatible<br>
 other&nbsp;digraph&nbsp;(same&nbsp;nodes&nbsp;or&nbsp;actions).</tt></dd></dl>
@@ -4104,7 +3994,7 @@ old&nbsp;versions&nbsp;compatibility.</tt></dd></dl>
 <dl><dt><a name="SparseOutrankingDigraph-computeSlaterRanking"><strong>computeSlaterRanking</strong></a>(self, isProbabilistic=False, seed=None, sampleSize=1000, Debug=False)</dt><dd><tt>Renders&nbsp;a&nbsp;ranking&nbsp;of&nbsp;the&nbsp;actions&nbsp;with&nbsp;minimal&nbsp;Slater&nbsp;index.<br>
 Return&nbsp;a&nbsp;tuple:&nbsp;slaterOrder,&nbsp;slaterIndex</tt></dd></dl>
 
-<dl><dt><a name="SparseOutrankingDigraph-computeSymmetryDegree"><strong>computeSymmetryDegree</strong></a>(self, InPercents=False, Comments=False)</dt><dd><tt>Renders&nbsp;the&nbsp;symmetry&nbsp;degree&nbsp;(Decimal)&nbsp;of&nbsp;the&nbsp;reflexive&nbsp;part&nbsp;of&nbsp;a&nbsp;digraph.<br>
+<dl><dt><a name="SparseOutrankingDigraph-computeSymmetryDegree"><strong>computeSymmetryDegree</strong></a>(self, InPercents=False, Comments=False)</dt><dd><tt>Renders&nbsp;the&nbsp;symmetry&nbsp;degree&nbsp;(Decimal)&nbsp;of&nbsp;the&nbsp;irreflexive&nbsp;part&nbsp;of&nbsp;a&nbsp;digraph.<br>
 &nbsp;<br>
 ..&nbsp;note::<br>
 &nbsp;<br>
@@ -4221,60 +4111,6 @@ If&nbsp;inPercent,&nbsp;*result*&nbsp;shifted&nbsp;(+1)&nbsp;and&nbsp;reduced&nb
 
 <dl><dt><a name="SparseOutrankingDigraph-domkernelrestrict"><strong>domkernelrestrict</strong></a>(self, prekernel)</dt><dd><tt>Parameter:&nbsp;dominant&nbsp;prekernel<br>
 Renders&nbsp;dominant&nbsp;prekernel&nbsp;restricted&nbsp;relation.</tt></dd></dl>
-
-<dl><dt><a name="SparseOutrankingDigraph-exportD3"><strong>exportD3</strong></a>(self, fileName='index', Comments=True)</dt><dd><tt>This&nbsp;function&nbsp;was&nbsp;designed&nbsp;and&nbsp;implemented&nbsp;by&nbsp;Gary&nbsp;Cornelius,&nbsp;2014&nbsp;for&nbsp;his&nbsp;bachelor&nbsp;thesis&nbsp;at&nbsp;the&nbsp;University&nbsp;of&nbsp;Luxembourg.&nbsp;<br>
-The&nbsp;thesis&nbsp;document&nbsp;with&nbsp;more&nbsp;explanations&nbsp;can&nbsp;be&nbsp;found&nbsp;in&nbsp;the&nbsp;literature/Cornelius&nbsp;directory&nbsp;of&nbsp;a&nbsp;Digraph3&nbsp;working&nbsp;copy.&nbsp;.<br>
-&nbsp;<br>
-*Parameters*:<br>
-&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;fileName,&nbsp;name&nbsp;of&nbsp;the&nbsp;generated&nbsp;html&nbsp;file,&nbsp;default&nbsp;=&nbsp;None&nbsp;(graph&nbsp;name&nbsp;as&nbsp;defined&nbsp;in&nbsp;python);<br>
-&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;Comments,&nbsp;True&nbsp;=&nbsp;default;<br>
-&nbsp;<br>
-The&nbsp;idea&nbsp;of&nbsp;the&nbsp;project&nbsp;was&nbsp;to&nbsp;find&nbsp;a&nbsp;way&nbsp;that&nbsp;allows&nbsp;you&nbsp;to&nbsp;easily&nbsp;get&nbsp;details&nbsp;about&nbsp;certain&nbsp;nodes&nbsp;or&nbsp;edges&nbsp;of&nbsp;a&nbsp;directed&nbsp;graph&nbsp;in&nbsp;a&nbsp;dynamic&nbsp;format.&nbsp;<br>
-Therefore&nbsp;this&nbsp;function&nbsp;allows&nbsp;you&nbsp;to&nbsp;export&nbsp;a&nbsp;html&nbsp;file&nbsp;together&nbsp;with&nbsp;all&nbsp;the&nbsp;needed&nbsp;libraries,&nbsp;including&nbsp;the&nbsp;<br>
-D3&nbsp;Library&nbsp;which&nbsp;we&nbsp;use&nbsp;for&nbsp;graph&nbsp;generation&nbsp;and&nbsp;the&nbsp;physics&nbsp;between&nbsp;nodes,&nbsp;which&nbsp;attracts&nbsp;or&nbsp;pushes&nbsp;nodes&nbsp;away&nbsp;from&nbsp;each&nbsp;other.<br>
-&nbsp;<br>
-Features&nbsp;of&nbsp;our&nbsp;graph&nbsp;include&nbsp;i.e.&nbsp;:&nbsp;<br>
-&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;A&nbsp;way&nbsp;to&nbsp;only&nbsp;inspect&nbsp;a&nbsp;node&nbsp;and&nbsp;it's&nbsp;neighbours&nbsp;<br>
-&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;Dynamic&nbsp;draging&nbsp;and&nbsp;freezing&nbsp;of&nbsp;the&nbsp;graph<br>
-&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;Export&nbsp;of&nbsp;a&nbsp;newly&nbsp;created&nbsp;general&nbsp;graph<br>
-&nbsp;<br>
-You&nbsp;can&nbsp;find&nbsp;the&nbsp;list&nbsp;of&nbsp;fututres&nbsp;in&nbsp;the&nbsp;Section&nbsp;below&nbsp;which&nbsp;is&nbsp;arranged&nbsp;according&nbsp;to&nbsp;the&nbsp;graph&nbsp;type.<br>
-&nbsp;<br>
-*If&nbsp;the&nbsp;graph&nbsp;is&nbsp;an&nbsp;outrankingdigraphs*:<br>
-&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;Nodes&nbsp;can&nbsp;be&nbsp;dragged&nbsp;and&nbsp;only&nbsp;the&nbsp;name&nbsp;and&nbsp;comment&nbsp;can&nbsp;be&nbsp;edited.&nbsp;<br>
-&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;Edges&nbsp;can&nbsp;be&nbsp;inspected&nbsp;but&nbsp;not&nbsp;edited&nbsp;for&nbsp;this&nbsp;purpose&nbsp;a&nbsp;special&nbsp;json&nbsp;array&nbsp;containing&nbsp;all&nbsp;possible&nbsp;pairwiseComparisions&nbsp;is&nbsp;generated.<br>
-&nbsp;<br>
-*If&nbsp;the&nbsp;graph&nbsp;is&nbsp;a&nbsp;general&nbsp;graph*:<br>
-&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;Nodes&nbsp;can&nbsp;be&nbsp;dragged,&nbsp;added,&nbsp;removed&nbsp;and&nbsp;edited.<br>
-&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;Edges&nbsp;can&nbsp;be&nbsp;added,&nbsp;removed,&nbsp;inverted&nbsp;and&nbsp;edited.&nbsp;But&nbsp;edges&nbsp;cannot&nbsp;be&nbsp;inspected.<br>
-&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;The&nbsp;pairwiseComparisions&nbsp;key&nbsp;leads&nbsp;to&nbsp;an&nbsp;empty&nbsp;array&nbsp;{}.<br>
-&nbsp;<br>
-In&nbsp;both&nbsp;cases,&nbsp;undefined&nbsp;edges&nbsp;can&nbsp;be&nbsp;hidden&nbsp;and&nbsp;reappear&nbsp;after&nbsp;a&nbsp;simple&nbsp;reload.(right&nbsp;click&nbsp;-&nbsp;reload)<br>
-&nbsp;<br>
-*The&nbsp;generated&nbsp;files*:<br>
-&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;d3.v3.js,&nbsp;contains&nbsp;the&nbsp;D3&nbsp;Data-driven&nbsp;Documents&nbsp;source&nbsp;code,&nbsp;containing&nbsp;one&nbsp;small&nbsp;addition&nbsp;that&nbsp;we&nbsp;made&nbsp;in&nbsp;order&nbsp;to&nbsp;be&nbsp;able&nbsp;to&nbsp;easyly&nbsp;import&nbsp;links&nbsp;with&nbsp;a&nbsp;different&nbsp;formatself.<br>
-&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;digraph3lib.js,&nbsp;contains&nbsp;our&nbsp;library.&nbsp;This&nbsp;file&nbsp;contains&nbsp;everything&nbsp;that&nbsp;we&nbsp;need&nbsp;from&nbsp;import&nbsp;of&nbsp;an&nbsp;XMCDA2&nbsp;file,&nbsp;visualization&nbsp;of&nbsp;the&nbsp;graph&nbsp;to&nbsp;export&nbsp;of&nbsp;the&nbsp;changed&nbsp;graph.<br>
-&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;d3export.json,&nbsp;usually&nbsp;named&nbsp;after&nbsp;the&nbsp;python&nbsp;graph&nbsp;name&nbsp;followed&nbsp;by&nbsp;a&nbsp;ticket&nbsp;number&nbsp;if&nbsp;the&nbsp;file&nbsp;is&nbsp;already&nbsp;present.&nbsp;It&nbsp;is&nbsp;the&nbsp;JSON&nbsp;file&nbsp;that&nbsp;is&nbsp;exported&nbsp;with&nbsp;the&nbsp;format&nbsp;"{"xmcda2":&nbsp;"some&nbsp;xml","pairwiseComparisions":"{"a01":&nbsp;"some&nbsp;html",...}"}.<br>
-&nbsp;<br>
-*Example&nbsp;1*:<br>
-&nbsp;&nbsp;&nbsp;&nbsp;#.&nbsp;python3&nbsp;session:<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&gt;&gt;&gt;&nbsp;from&nbsp;digraphs&nbsp;import&nbsp;RandomValuationDigraph<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&gt;&gt;&gt;&nbsp;dg&nbsp;=&nbsp;RandomValuationDigraph(order=5,Normalized=True)<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&gt;&gt;&gt;&nbsp;dg.<a href="#SparseOutrankingDigraph-exportD3">exportD3</a>()<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;or<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&gt;&gt;&nbsp;dg.<a href="#SparseOutrankingDigraph-showInteractiveGraph">showInteractiveGraph</a>()<br>
-&nbsp;<br>
-&nbsp;&nbsp;&nbsp;&nbsp;#.&nbsp;index.html:&nbsp;&nbsp;&nbsp;<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;Main&nbsp;Screen:<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;..&nbsp;image::&nbsp;randomvaluation_d3_main.png<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;Inspect&nbsp;function:<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;..&nbsp;image::&nbsp;randomvaluation_d3_inspect.png<br>
-&nbsp;<br>
-..&nbsp;note::<br>
-&nbsp;<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;If&nbsp;you&nbsp;want&nbsp;to&nbsp;use&nbsp;the&nbsp;automatic&nbsp;load&nbsp;in&nbsp;Chrome,&nbsp;try&nbsp;using&nbsp;the&nbsp;command:&nbsp;"python&nbsp;-m&nbsp;SimpleHTTPServer"<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;and&nbsp;then&nbsp;access&nbsp;the&nbsp;index.html&nbsp;via&nbsp;"<a href="http://0.0.0.0:8000/index.html">http://0.0.0.0:8000/index.html</a>".<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;In&nbsp;order&nbsp;to&nbsp;load&nbsp;the&nbsp;CSS&nbsp;an&nbsp;active&nbsp;internet&nbsp;connection&nbsp;is&nbsp;needed!</tt></dd></dl>
 
 <dl><dt><a name="SparseOutrankingDigraph-exportPrincipalImage"><strong>exportPrincipalImage</strong></a>(self, Reduced=False, Colwise=False, plotFileName=None, Type='png', TempDir='.', Comments=False)</dt><dd><tt>Export&nbsp;as&nbsp;PNG&nbsp;(default)&nbsp;or&nbsp;PDF&nbsp;the&nbsp;principal&nbsp;projection&nbsp;of<br>
 the&nbsp;valued&nbsp;relation&nbsp;using&nbsp;the&nbsp;three&nbsp;principal&nbsp;eigen&nbsp;vectors.<br>
@@ -4467,9 +4303,6 @@ Dummy&nbsp;for&nbsp;<a href="#SparseOutrankingDigraph-showCircuits">showCircuits
 
 <dl><dt><a name="SparseOutrankingDigraph-showHTMLBestChoiceRecommendation"><strong>showHTMLBestChoiceRecommendation</strong></a>(self, pageTitle=None, ChoiceVector=False, CoDual=True, Debug=False, _OldCoca=False, BrokenCocs=True, Cpp=False)</dt></dl>
 
-<dl><dt><a name="SparseOutrankingDigraph-showInteractiveGraph"><strong>showInteractiveGraph</strong></a>(self)</dt><dd><tt>Save&nbsp;the&nbsp;graph&nbsp;and&nbsp;all&nbsp;needed&nbsp;files&nbsp;for&nbsp;the&nbsp;visualization&nbsp;of&nbsp;an&nbsp;interactive&nbsp;graph&nbsp;generated&nbsp;by&nbsp;the&nbsp;<a href="#SparseOutrankingDigraph-exportD3">exportD3</a>()&nbsp;function.<br>
-For&nbsp;best&nbsp;experience&nbsp;make&nbsp;sure&nbsp;to&nbsp;use&nbsp;Firefox,&nbsp;because&nbsp;other&nbsp;browser&nbsp;restrict&nbsp;the&nbsp;loading&nbsp;of&nbsp;local&nbsp;files.</tt></dd></dl>
-
 <dl><dt><a name="SparseOutrankingDigraph-showMIS"><strong>showMIS</strong></a>(self, withListing=True)</dt><dd><tt>Prints&nbsp;all&nbsp;maximal&nbsp;independent&nbsp;choices:<br>
 &nbsp;&nbsp;&nbsp;&nbsp;Result&nbsp;in&nbsp;self.<strong>misset</strong>.</tt></dd></dl>
 
@@ -4648,6 +4481,9 @@ Parameters:&nbsp;quantile&nbsp;=&nbsp;{'ind':&nbsp;10,&nbsp;'pref':&nbsp;20,&nbs
 <dl><dt><a name="SparseOutrankingDigraph-computeMinMaxEvaluations"><strong>computeMinMaxEvaluations</strong></a>(self, criteria=None, actions=None)</dt><dd><tt>renders&nbsp;minimum&nbsp;and&nbsp;maximum&nbsp;performances&nbsp;on&nbsp;each&nbsp;criterion<br>
 in&nbsp;dictionary&nbsp;form:&nbsp;{'g':&nbsp;{'minimum':&nbsp;x,&nbsp;'maximum':&nbsp;x}}</tt></dd></dl>
 
+<dl><dt><a name="SparseOutrankingDigraph-computeMissingDataProportion"><strong>computeMissingDataProportion</strong></a>(self, InPercents=False, Comments=False)</dt><dd><tt>Renders&nbsp;the&nbsp;proportion&nbsp;of&nbsp;missing&nbsp;data,&nbsp;<br>
+i.e.&nbsp;NA&nbsp;==&nbsp;Decimal('-999')&nbsp;entries&nbsp;in&nbsp;self.<strong>evaluation</strong>.</tt></dd></dl>
+
 <dl><dt><a name="SparseOutrankingDigraph-computeNormalizedDiffEvaluations"><strong>computeNormalizedDiffEvaluations</strong></a>(self, lowValue=0.0, highValue=100.0, withOutput=False, Debug=False)</dt><dd><tt>renders&nbsp;and&nbsp;csv&nbsp;stores&nbsp;(withOutput=True)&nbsp;the<br>
 list&nbsp;of&nbsp;normalized&nbsp;evaluation&nbsp;differences&nbsp;observed&nbsp;on&nbsp;the&nbsp;family&nbsp;of&nbsp;criteria<br>
 Is&nbsp;only&nbsp;adequate&nbsp;if&nbsp;all&nbsp;criteria&nbsp;have&nbsp;the&nbsp;same<br>
@@ -4687,9 +4523,10 @@ of&nbsp;the&nbsp;performance&nbsp;differences&nbsp;of&nbsp;a&nbsp;given&nbsp;thr
 criteria&nbsp;weights&nbsp;in&nbsp;a&nbsp;list&nbsp;of&nbsp;increasing&nbsp;equivalence<br>
 lists&nbsp;of&nbsp;criteria.</tt></dd></dl>
 
-<dl><dt><a name="SparseOutrankingDigraph-computeWeightedAveragePerformances"><strong>computeWeightedAveragePerformances</strong></a>(self, isNormalized=False, lowValue=0.0, highValue=100.0, isListRanked=False)</dt><dd><tt>Compute&nbsp;normalized&nbsp;weighted&nbsp;average&nbsp;scores<br>
-Normalization&nbsp;transforms&nbsp;by&nbsp;default&nbsp;all&nbsp;the&nbsp;scores&nbsp;into&nbsp;a<br>
-common&nbsp;0-100&nbsp;scale.&nbsp;A&nbsp;lowValue&nbsp;and&nbsp;highValue&nbsp;parameter<br>
+<dl><dt><a name="SparseOutrankingDigraph-computeWeightedAveragePerformances"><strong>computeWeightedAveragePerformances</strong></a>(self, isNormalized=False, lowValue=0.0, highValue=100.0, isListRanked=False)</dt><dd><tt>Compute&nbsp;normalized&nbsp;weighted&nbsp;average&nbsp;scores&nbsp;by&nbsp;ignoring&nbsp;missing&nbsp;data.<br>
+When&nbsp;*isNormalized*&nbsp;==&nbsp;True&nbsp;(False&nbsp;by&nbsp;default),&nbsp;<br>
+transforms&nbsp;all&nbsp;the&nbsp;scores&nbsp;into&nbsp;a&nbsp;common&nbsp;0-100&nbsp;scale.&nbsp;<br>
+A&nbsp;lowValue&nbsp;and&nbsp;highValue&nbsp;parameter<br>
 can&nbsp;be&nbsp;provided&nbsp;for&nbsp;a&nbsp;specific&nbsp;normalisation.</tt></dd></dl>
 
 <dl><dt><a name="SparseOutrankingDigraph-convert2BigData"><strong>convert2BigData</strong></a>(self)</dt><dd><tt>Renders&nbsp;a&nbsp;cPerformanceTableau&nbsp;instance,&nbsp;by&nbsp;converting&nbsp;the&nbsp;action&nbsp;keys&nbsp;to&nbsp;integers&nbsp;and&nbsp;evaluations&nbsp;to&nbsp;floats,&nbsp;including&nbsp;the&nbsp;discrimination&nbsp;thresholds,&nbsp;the&nbsp;case&nbsp;given.</tt></dd></dl>
@@ -4725,12 +4562,12 @@ Return&nbsp;a&nbsp;Boolen&nbsp;value.</tt></dd></dl>
 
 <dl><dt><a name="SparseOutrankingDigraph-normalizeEvaluations"><strong>normalizeEvaluations</strong></a>(self, lowValue=0.0, highValue=100.0, Debug=False)</dt><dd><tt>recode&nbsp;the&nbsp;evaluations&nbsp;between&nbsp;lowValue&nbsp;and&nbsp;highValue&nbsp;on&nbsp;all&nbsp;criteria</tt></dd></dl>
 
+<dl><dt><a name="SparseOutrankingDigraph-replaceNA"><strong>replaceNA</strong></a>(self, newNA=None, Comments=False)</dt><dd><tt>Replaces&nbsp;the&nbsp;current&nbsp;self.<strong>NA</strong>&nbsp;symbol&nbsp;with&nbsp;the&nbsp;*newNA*&nbsp;symbol&nbsp;of&nbsp;type&nbsp;&lt;Decimal&gt;.&nbsp;If&nbsp;newNA&nbsp;==&nbsp;None,&nbsp;the&nbsp;defauklt&nbsp;value&nbsp;Decimal('-999')&nbsp;is&nbsp;used.</tt></dd></dl>
+
 <dl><dt><a name="SparseOutrankingDigraph-restoreOriginalEvaluations"><strong>restoreOriginalEvaluations</strong></a>(self, lowValue=0.0, highValue=100.0, Debug=False)</dt><dd><tt>recode&nbsp;the&nbsp;evaluations&nbsp;to&nbsp;their&nbsp;original&nbsp;values&nbsp;on&nbsp;all&nbsp;criteria</tt></dd></dl>
 
 <dl><dt><a name="SparseOutrankingDigraph-saveXMCDA2String"><strong>saveXMCDA2String</strong></a>(self, fileName='temp', category='XMCDA 2.0 format', user='digraphs Module (RB)', version='saved from Python session', title='Performance Tableau in XMCDA-2.0 format.', variant='Rubis', valuationType='bipolar', servingD3=True, comment='produced by stringIO()', stringNA='NA')</dt><dd><tt>save&nbsp;performance&nbsp;tableau&nbsp;object&nbsp;self&nbsp;in&nbsp;XMCDA&nbsp;2.0&nbsp;format.<br>
 !!!&nbsp;obsolete:&nbsp;replaced&nbsp;by&nbsp;the&nbsp;isStringIO&nbsp;in&nbsp;the&nbsp;saveXMCDA2&nbsp;method&nbsp;!!!</tt></dd></dl>
-
-<dl><dt><a name="SparseOutrankingDigraph-saveXMLRubis"><strong>saveXMLRubis</strong></a>(self, name='temp', category='Rubis', subcategory='new D2 version', author='digraphs Module (RB)', reference='saved from Python')</dt><dd><tt>save&nbsp;temporary&nbsp;performance&nbsp;tableau&nbsp;self&nbsp;in&nbsp;XML&nbsp;Rubis&nbsp;format.</tt></dd></dl>
 
 <dl><dt><a name="SparseOutrankingDigraph-showAllQuantiles"><strong>showAllQuantiles</strong></a>(self, Sorted=True)</dt><dd><tt>prints&nbsp;the&nbsp;performance&nbsp;quantiles&nbsp;tableau&nbsp;in&nbsp;the&nbsp;session&nbsp;console.</tt></dd></dl>
 
@@ -4741,18 +4578,20 @@ the&nbsp;values&nbsp;observed&nbsp;in&nbsp;the&nbsp;performance&nbsp;Tableau.</t
 
 <dl><dt><a name="SparseOutrankingDigraph-showHTMLCriteria"><strong>showHTMLCriteria</strong></a>(self, criteriaSubset=None, Sorted=True, ndigits=2, title=None)</dt><dd><tt>shows&nbsp;the&nbsp;criteria&nbsp;in&nbsp;the&nbsp;system&nbsp;browser&nbsp;view.</tt></dd></dl>
 
-<dl><dt><a name="SparseOutrankingDigraph-showHTMLPerformanceHeatmap"><strong>showHTMLPerformanceHeatmap</strong></a>(self, actionsList=None, fromIndex=None, toIndex=None, Transposed=False, criteriaList=None, colorLevels=7, pageTitle=None, ndigits=2, SparseModel=False, minimalComponentSize=1, rankingRule='NetFlows', StoreRanking=True, quantiles=None, strategy='average', Correlations=False, Threading=False, nbrOfCPUs=None, Debug=False)</dt><dd><tt>shows&nbsp;the&nbsp;html&nbsp;heatmap&nbsp;version&nbsp;of&nbsp;the&nbsp;performance&nbsp;tableau&nbsp;in&nbsp;a&nbsp;browser&nbsp;window<br>
+<dl><dt><a name="SparseOutrankingDigraph-showHTMLPerformanceHeatmap"><strong>showHTMLPerformanceHeatmap</strong></a>(self, actionsList=None, WithActionNames=False, fromIndex=None, toIndex=None, Transposed=False, criteriaList=None, colorLevels=7, pageTitle=None, ndigits=2, SparseModel=False, outrankingModel='standard', minimalComponentSize=1, rankingRule='NetFlows', StoreRanking=True, quantiles=None, strategy='average', Correlations=False, Threading=False, nbrOfCPUs=None, Debug=False)</dt><dd><tt>shows&nbsp;the&nbsp;html&nbsp;heatmap&nbsp;version&nbsp;of&nbsp;the&nbsp;performance&nbsp;tableau&nbsp;in&nbsp;a&nbsp;browser&nbsp;window<br>
 (see&nbsp;perfTabs.htmlPerformanceHeatMap()&nbsp;method&nbsp;).<br>
 &nbsp;<br>
 **Parameters**:<br>
 &nbsp;<br>
 *&nbsp;*actionsList*&nbsp;and&nbsp;*criteriaList*,&nbsp;if&nbsp;provided,&nbsp;&nbsp;give&nbsp;the&nbsp;possibility&nbsp;to&nbsp;show<br>
 &nbsp;&nbsp;the&nbsp;decision&nbsp;alternatives,&nbsp;resp.&nbsp;criteria,&nbsp;in&nbsp;a&nbsp;given&nbsp;ordering.<br>
+*&nbsp;*WithActionNames*&nbsp;=&nbsp;True&nbsp;(default&nbsp;False)&nbsp;will&nbsp;show&nbsp;the&nbsp;action&nbsp;names&nbsp;instead&nbsp;of&nbsp;the&nbsp;short&nbsp;names&nbsp;or&nbsp;the&nbsp;identifyers.<br>
 *&nbsp;*ndigits*&nbsp;=&nbsp;0&nbsp;may&nbsp;be&nbsp;used&nbsp;to&nbsp;show&nbsp;integer&nbsp;evaluation&nbsp;values.<br>
 *&nbsp;*colorLevels*&nbsp;may&nbsp;be&nbsp;3,&nbsp;5,&nbsp;7,&nbsp;or&nbsp;9.&nbsp;<br>
 *&nbsp;When&nbsp;no&nbsp;*actionsList*&nbsp;is&nbsp;provided,&nbsp;the&nbsp;decision&nbsp;actions&nbsp;are&nbsp;ordered&nbsp;from&nbsp;the&nbsp;best&nbsp;to&nbsp;the&nbsp;worst.&nbsp;This<br>
 &nbsp;&nbsp;ranking&nbsp;is&nbsp;obtained&nbsp;by&nbsp;default&nbsp;with&nbsp;the&nbsp;Copeland&nbsp;rule&nbsp;applied&nbsp;on&nbsp;a&nbsp;standard&nbsp;*<a href="outrankingDigraphs.html#BipolarOutrankingDigraph">BipolarOutrankingDigraph</a>*.<br>
-*&nbsp;When&nbsp;the&nbsp;*SparseModel*&nbsp;flag&nbsp;is&nbsp;put&nbsp;to&nbsp;*True*,&nbsp;a&nbsp;sparse&nbsp;*<a href="#PreRankedOutrankingDigraph">PreRankedOutrankingDigraph</a>*&nbsp;construction&nbsp;is&nbsp;used&nbsp;instead.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<br>
+*&nbsp;When&nbsp;the&nbsp;*SparseModel*&nbsp;flag&nbsp;is&nbsp;put&nbsp;to&nbsp;*True*,&nbsp;a&nbsp;sparse&nbsp;*<a href="#PreRankedOutrankingDigraph">PreRankedOutrankingDigraph</a>*&nbsp;construction&nbsp;is&nbsp;used&nbsp;instead.<br>
+*&nbsp;the&nbsp;*outrankingModel*&nbsp;parameter&nbsp;(default&nbsp;=&nbsp;'standard')&nbsp;allows&nbsp;to&nbsp;switch&nbsp;to&nbsp;alternative&nbsp;<a href="outrankingDigraphs.html#BipolarOutrankingDigraph">BipolarOutrankingDigraph</a>&nbsp;constructors,&nbsp;like&nbsp;the&nbsp;'confident'&nbsp;or&nbsp;'robust'&nbsp;models.&nbsp;When&nbsp;called&nbsp;from&nbsp;a&nbsp;bipolar-valued&nbsp;outrankingDigraph&nbsp;instance,&nbsp;*outrankingModel*&nbsp;=&nbsp;'this'&nbsp;keeps&nbsp;the&nbsp;current&nbsp;outranking&nbsp;model&nbsp;without&nbsp;recomputing&nbsp;by&nbsp;default&nbsp;the&nbsp;standard&nbsp;outranking&nbsp;model.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<br>
 *&nbsp;The&nbsp;*minimalComponentSize*&nbsp;allows&nbsp;to&nbsp;control&nbsp;the&nbsp;fill&nbsp;rate&nbsp;of&nbsp;the&nbsp;pre-ranked&nbsp;model.<br>
 &nbsp;&nbsp;When&nbsp;*minimalComponentSize*&nbsp;=&nbsp;*n*&nbsp;(the&nbsp;number&nbsp;of&nbsp;decision&nbsp;actions)&nbsp;both&nbsp;the&nbsp;pre-ranked&nbsp;model&nbsp;will&nbsp;be<br>
 &nbsp;&nbsp;in&nbsp;fact&nbsp;equivalent&nbsp;to&nbsp;the&nbsp;standard&nbsp;model.<br>
@@ -4863,6 +4702,5 @@ Fractions&nbsp;of&nbsp;a&nbsp;second&nbsp;may&nbsp;be&nbsp;present&nbsp;if&nbsp;
 <font color="#ffffff" face="helvetica, arial"><big><strong>Data</strong></big></font></td></tr>
     
 <tr><td bgcolor="#55aa55"><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</tt></td><td>&nbsp;</td>
-<td width="100%"><strong>colorPalettes</strong> = {1: ['none', '#EA2027', '#006266', '#1B1464', '#5758BB', '#6F1E51', '#EE5A24', '#009432', '#0652DD', '#9980FA', '#833471', '#F79F1F', '#A3CB38', '#1289A7', '#D980FA', '#B53471', '#FFC312', '#C4E538', '#12CBC4', '#FDA7DF', ...], 2: ['black', 'blue', 'coral', 'gold', 'gray', 'black', 'pink', 'green', 'orange', 'skyblue', 'wheat', 'salmon'], 3: ['none', 'black', 'red', 'cyan', 'green', 'brown', 'blue', 'gold', 'orange', 'grey', 'green2']}<br>
-<strong>default_parser_list</strong> = ['xml.sax.expatreader']</td></tr></table>
+<td width="100%"><strong>colorPalettes</strong> = {1: ['none', '#EA2027', '#006266', '#1B1464', '#5758BB', '#6F1E51', '#EE5A24', '#009432', '#0652DD', '#9980FA', '#833471', '#F79F1F', '#A3CB38', '#1289A7', '#D980FA', '#B53471', '#FFC312', '#C4E538', '#12CBC4', '#FDA7DF', ...], 2: ['black', 'blue', 'coral', 'gold', 'gray', 'black', 'pink', 'green', 'orange', 'skyblue', 'wheat', 'salmon'], 3: ['none', 'black', 'red', 'cyan', 'green', 'brown', 'blue', 'gold', 'orange', 'grey', 'green2']}</td></tr></table>
 </body></html>

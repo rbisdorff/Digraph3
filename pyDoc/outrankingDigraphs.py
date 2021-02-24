@@ -333,11 +333,17 @@ class OutrankingDigraph(Digraph,PerformanceTableau):
         compute the outranking characteristic for actions x and y
         on criterion c.
         """
+        criteria = self.criteria
+        evaluation = self.evaluation
+        try:
+            NA = self.NA
+        except:
+            NA = Decimal('-999')
         if a == b:
             return Decimal("1.0")
         else:
 
-            if self.evaluation[c][a] != Decimal('-999') and self.evaluation[c][b] != Decimal('-999'):		
+            if self.evaluation[c][a] != NA and self.evaluation[c][b] != NA:		
                 try:
                     indx = self.criteria[c]['thresholds']['ind'][0]
                     indy = self.criteria[c]['thresholds']['ind'][1]
@@ -475,6 +481,7 @@ class OutrankingDigraph(Digraph,PerformanceTableau):
         of a given performance tableau instantiation PerfTab.
         """
         actions = self.actions
+        NA = self.NA
         Min = Decimal(str(self.valuationdomain['min']))
         Max = Decimal(str(self.valuationdomain['max']))
         totalweight = Decimal('0.0')
@@ -493,7 +500,7 @@ class OutrankingDigraph(Digraph,PerformanceTableau):
                     veto = Decimal('0')
                     abvetos = []
                     for c in criteria:
-                        if evaluation[c][a] != Decimal('-999') and evaluation[c][b] != Decimal('-999'):		
+                        if evaluation[c][a] != NA and evaluation[c][b] != NA:		
                             try:
                                 ax = criteria[c]['thresholds']['ind'][0]
                                 ay = criteria[c]['thresholds']['ind'][1]
@@ -551,6 +558,7 @@ class OutrankingDigraph(Digraph,PerformanceTableau):
         Debug = False
         
         evaluation = self.evaluation
+        NA = self.NA
         criteria = self.criteria
         actionsList = [x for x in self.actions]
 
@@ -558,7 +566,7 @@ class OutrankingDigraph(Digraph,PerformanceTableau):
         pairwiseComparison = {'v':0, 'wv':0, 'lt':0, 'leq':0, 'eq':0, 'geq':0, 'gt':0, 'gwvt':0, 'gvt':0}
 
         # main loop
-        if evaluation[c][a] != Decimal('-999') or evaluation[c][b] != Decimal('-999'):
+        if evaluation[c][a] != NA or evaluation[c][b] != NA:
             # compute discrimination thresholds
             try:
                 indx = criteria[c]['thresholds']['ind'][0]
@@ -1284,6 +1292,7 @@ class OutrankingDigraph(Digraph,PerformanceTableau):
         renders pairwise comparison parameters for all pairs of actions
         """
         evaluation = self.evaluation
+        NA = self.NA
         criteria = self.criteria
         actionsList = [x for x in self.actions]
         
@@ -1295,7 +1304,7 @@ class OutrankingDigraph(Digraph,PerformanceTableau):
         for a in actionsList:
             for b in actionsList:
                 for c in criteria:
-                    if evaluation[c][a] != Decimal('-999') and evaluation[c][b] != Decimal('-999'):		
+                    if evaluation[c][a] != NA and evaluation[c][b] != NA:		
                         try:
                             indx = criteria[c]['thresholds']['ind'][0]
                             indy = criteria[c]['thresholds']['ind'][1]
@@ -1369,6 +1378,7 @@ class OutrankingDigraph(Digraph,PerformanceTableau):
         with weak preference and weak veto thresholds.
         """
         evaluation = self.evaluation
+        NA = self.NA
         criteria = self.criteria
         if Debug:
             print('a,b =', a, b)
@@ -1391,7 +1401,7 @@ class OutrankingDigraph(Digraph,PerformanceTableau):
             criteriaList.sort()
             for c in criteriaList:
                 sumWeights += abs(criteria[c]['weight'])
-                if evaluation[c][a] != Decimal('-999') and evaluation[c][b] != Decimal('-999'):		
+                if evaluation[c][a] != NA and evaluation[c][b] != NA:		
                     try:
                         indx = criteria[c]['thresholds']['ind'][0]
                         indy = criteria[c]['thresholds']['ind'][1]
@@ -1525,11 +1535,11 @@ class OutrankingDigraph(Digraph,PerformanceTableau):
                                         html += '</tr>'
                         
                 else:
-                    if evaluation[c][a] == Decimal("-999"):
+                    if evaluation[c][a] == NA:
                         eval_c_a = 'NA'
                     else:
                         eval_c_a = '%2.2f' % evaluation[c][a]
-                    if evaluation[c][b] == Decimal("-999"):
+                    if evaluation[c][b] == NA:
                         eval_c_b = 'NA'
                     else:
                         eval_c_b = '%2.2f' % evaluation[c][b]
@@ -1556,6 +1566,7 @@ class OutrankingDigraph(Digraph,PerformanceTableau):
         in html format
         """
         evaluation = self.evaluation
+        NA = self.NA
         criteria = self.criteria
         if Debug:
             print('a,b =', a, b)
@@ -1578,7 +1589,7 @@ class OutrankingDigraph(Digraph,PerformanceTableau):
             criteriaList.sort()
             for c in criteriaList:
                 sumWeights += abs(criteria[c]['weight'])
-                if evaluation[c][a] != Decimal('-999') and evaluation[c][b] != Decimal('-999'):		
+                if evaluation[c][a] != NA and evaluation[c][b] != NA:		
                     try:
                         indx = criteria[c]['thresholds']['ind'][0]
                         indy = criteria[c]['thresholds']['ind'][1]
@@ -1707,11 +1718,11 @@ class OutrankingDigraph(Digraph,PerformanceTableau):
                                     html += '</tr>'
                         
                 else:
-                    if evaluation[c][a] == Decimal("-999"):
+                    if evaluation[c][a] == NA:
                         eval_c_a = 'NA'
                     else:
                         eval_c_a = '%2.2f' % evaluation[c][a]
-                    if evaluation[c][b] == Decimal("-999"):
+                    if evaluation[c][b] == NA:
                         eval_c_b = 'NA'
                     else:
                         eval_c_b = '%2.2f' % evaluation[c][b]
@@ -1950,6 +1961,8 @@ class OutrankingDigraph(Digraph,PerformanceTableau):
         """
         Print the performance Tableau.
         """
+        evaluation = self.evaluation
+        NA = self.NA
         print('*----  performance tableau -----*')
         criteriaList = list(self.criteria)
         criteriaList.sort()
@@ -1965,7 +1978,10 @@ class OutrankingDigraph(Digraph,PerformanceTableau):
         for g in criteriaList:
             print('   \''+str(g)+'\'  |', end=' ')
             for x in actionsList:
-                print('% .1f, ' % (self.evaluation[g][x]), end=' ')
+                if evaluation[g][x] != NA:
+                    print('% .1f, ' % (evaluation[g][x]), end=' ')
+                else:
+                    print(' NA, ', end=' ')
             print()      
 
     def computeVetosShort(self):
@@ -2167,1017 +2183,1017 @@ class OutrankingDigraph(Digraph,PerformanceTableau):
                        negativeVetos[i][0][1],negativeVetos[i][0][2],Med) )
                
 
-    def saveXMLRubisOutrankingDigraph(self,name='temp',category='Rubis outranking digraph',subcategory='Choice recommendation',author='digraphs Module (RB)',reference='saved from Python',Comments=False,servingD3=True):
-        """
-        save complete Rubis problem and result in XML format with unicode encoding.
-        """
-        import codecs
-        self.computeRubyChoice()
+#     def saveXMLRubisOutrankingDigraph(self,name='temp',category='Rubis outranking digraph',subcategory='Choice recommendation',author='digraphs Module (RB)',reference='saved from Python',Comments=False,servingD3=True):
+#         """
+#         save complete Rubis problem and result in XML format with unicode encoding.
+#         """
+#         import codecs
+#         self.computeRubyChoice()
 
-        if Comments:
-            print('*----- saving digraph in XML format  -------------*')        
-        nameExt = name+'.xml'
-        fo = codecs.open(nameExt,'w',encoding='utf-8')
-        fo.write('<?xml version="1.0" encoding="UTF-8"?>\n')
-        #fo.write('<!DOCTYPE rubisOutrankingDigraph SYSTEM "http://localhost/rubisServer/Schemas/rubisOutrankingDigraph-1.0/rubisOutrankingDigraph.dtd">\n')
-        if not servingD3:
-            fo.write('<?xml-stylesheet type="text/xsl" href="rubisOutrankingDigraph.xsl"?>\n')
-        else:
-            fo.write('<!-- ?xml-stylesheet type="text/xsl" href="rubisOutrankingDigraph.xsl"? -->\n')
-        fo.write('<rubisOutrankingDigraph xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="rubisOutrankingDigraph.xsd"')
-        fo.write(' category="' + str(category)+'" subcategory="'+str(subcategory)+'">\n')
+#         if Comments:
+#             print('*----- saving digraph in XML format  -------------*')        
+#         nameExt = name+'.xml'
+#         fo = codecs.open(nameExt,'w',encoding='utf-8')
+#         fo.write('<?xml version="1.0" encoding="UTF-8"?>\n')
+#         #fo.write('<!DOCTYPE rubisOutrankingDigraph SYSTEM "http://localhost/rubisServer/Schemas/rubisOutrankingDigraph-1.0/rubisOutrankingDigraph.dtd">\n')
+#         if not servingD3:
+#             fo.write('<?xml-stylesheet type="text/xsl" href="rubisOutrankingDigraph.xsl"?>\n')
+#         else:
+#             fo.write('<!-- ?xml-stylesheet type="text/xsl" href="rubisOutrankingDigraph.xsl"? -->\n')
+#         fo.write('<rubisOutrankingDigraph xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="rubisOutrankingDigraph.xsd"')
+#         fo.write(' category="' + str(category)+'" subcategory="'+str(subcategory)+'">\n')
 
-        fo.write('<header>\n')
-        fo.write('<comment>header declaration </comment>\n')
-        fo.write('<name>')
-        fo.write(str(nameExt))
-        fo.write('</name>\n')       
-        fo.write('<author>')
-        fo.write(str(author))
-        fo.write('</author>\n')
-        fo.write('<reference>')
-        fo.write(str(reference))
-        fo.write('</reference>\n')
-        fo.write('</header>')
+#         fo.write('<header>\n')
+#         fo.write('<comment>header declaration </comment>\n')
+#         fo.write('<name>')
+#         fo.write(str(nameExt))
+#         fo.write('</name>\n')       
+#         fo.write('<author>')
+#         fo.write(str(author))
+#         fo.write('</author>\n')
+#         fo.write('<reference>')
+#         fo.write(str(reference))
+#         fo.write('</reference>\n')
+#         fo.write('</header>')
 
-        actionsOrigList = [x for x in self.actions_orig]
-        actionsOrigList.sort()
-        fo.write('<actions>\n')
-        fo.write('<comment>Potential decision actions </comment>\n')
-        for x in actionsOrigList:
-            fo.write('<action id="'+str(x)+'">\n')
-            fo.write('<name>')
-            try:
-                fo.write(str(self.actions_orig[x]['name']))
-            except:
-                pass
-            fo.write('</name>\n')
-            fo.write('<comment>')
-            try:
-                fo.write(str(self.actions_orig[x]['comment'])) 
-            except:
-                pass
-            fo.write('</comment>\n')
-            fo.write('</action>\n')
-        fo.write('</actions>\n')
+#         actionsOrigList = [x for x in self.actions_orig]
+#         actionsOrigList.sort()
+#         fo.write('<actions>\n')
+#         fo.write('<comment>Potential decision actions </comment>\n')
+#         for x in actionsOrigList:
+#             fo.write('<action id="'+str(x)+'">\n')
+#             fo.write('<name>')
+#             try:
+#                 fo.write(str(self.actions_orig[x]['name']))
+#             except:
+#                 pass
+#             fo.write('</name>\n')
+#             fo.write('<comment>')
+#             try:
+#                 fo.write(str(self.actions_orig[x]['comment'])) 
+#             except:
+#                 pass
+#             fo.write('</comment>\n')
+#             fo.write('</action>\n')
+#         fo.write('</actions>\n')
 
-        fo.write('<criteria>\n')
-        fo.write('<comment>List of performance criteria </comment>\n')
-        criteriaList = [g for g in self.criteria]
-        criteriaList.sort()
-        #print criteriaList
-        for g in criteriaList:
-            fo.write('<criterion id="'+str(g)+'" category="performance">\n')
-            fo.write('<name>')
-            try:
-                fo.write(str(self.criteria[g]['name']))
-            except:
-                pass
-            fo.write('</name>\n')
-            fo.write('<comment>')
-            try:
-                fo.write(str(self.criteria[g]['comment'])) 
-            except:
-                pass
-            fo.write('</comment>\n')
-            fo.write('<scale>')
-            fo.write('<min>')
-            #print self.criteria[g]
-            fo.write('%.2f' % (self.criteria[g]['scale'][0]))
-            fo.write('</min>')
-            fo.write('<max>')
-            fo.write('%.2f' % (self.criteria[g]['scale'][1]))
-            fo.write('</max>')
-            fo.write('</scale>\n')
-            fo.write('<thresholds>\n')
-            try:
-                th1,th2 = self.criteria[g]['thresholds']['ind']
-                fo.write('<indifference>'),fo.write('(%.2f,%.2f)' % (th1,th2) ), fo.write('</indifference>\n')
-            except:
-                try:
-                    th1,th2 = self.criteria[g]['thresholds']['weakPreference']
-                    fo.write('<weakPreference>'),fo.write('(%.2f,%.2f)' % (th1,th2) ),fo.write('</weakPreference>\n')
-                except:
-                    pass
-            try:
-                th1,th2 = self.criteria[g]['thresholds']['pref']
-                fo.write('<preference>'),
-                fo.write('(%.2f,%.2f)' % (th1,th2)),   
-                fo.write('</preference>\n')
-            except:
-                pass
-            try:
-                th1,th2 = self.criteria[g]['thresholds']['weakVeto']
-                fo.write('<weakVeto>'),fo.write('(%.2f,%.2f)' % (th1,th2) ),fo.write('</weakVeto>\n')
-            except:
-                pass
-            try:
-                th1,th2 = self.criteria[g]['thresholds']['veto']
-                fo.write('<veto>'),fo.write('(%.2f,%.2f)' % (th1,th2) ),fo.write('</veto>\n')
-            except:
-                pass
+#         fo.write('<criteria>\n')
+#         fo.write('<comment>List of performance criteria </comment>\n')
+#         criteriaList = [g for g in self.criteria]
+#         criteriaList.sort()
+#         #print criteriaList
+#         for g in criteriaList:
+#             fo.write('<criterion id="'+str(g)+'" category="performance">\n')
+#             fo.write('<name>')
+#             try:
+#                 fo.write(str(self.criteria[g]['name']))
+#             except:
+#                 pass
+#             fo.write('</name>\n')
+#             fo.write('<comment>')
+#             try:
+#                 fo.write(str(self.criteria[g]['comment'])) 
+#             except:
+#                 pass
+#             fo.write('</comment>\n')
+#             fo.write('<scale>')
+#             fo.write('<min>')
+#             #print self.criteria[g]
+#             fo.write('%.2f' % (self.criteria[g]['scale'][0]))
+#             fo.write('</min>')
+#             fo.write('<max>')
+#             fo.write('%.2f' % (self.criteria[g]['scale'][1]))
+#             fo.write('</max>')
+#             fo.write('</scale>\n')
+#             fo.write('<thresholds>\n')
+#             try:
+#                 th1,th2 = self.criteria[g]['thresholds']['ind']
+#                 fo.write('<indifference>'),fo.write('(%.2f,%.2f)' % (th1,th2) ), fo.write('</indifference>\n')
+#             except:
+#                 try:
+#                     th1,th2 = self.criteria[g]['thresholds']['weakPreference']
+#                     fo.write('<weakPreference>'),fo.write('(%.2f,%.2f)' % (th1,th2) ),fo.write('</weakPreference>\n')
+#                 except:
+#                     pass
+#             try:
+#                 th1,th2 = self.criteria[g]['thresholds']['pref']
+#                 fo.write('<preference>'),
+#                 fo.write('(%.2f,%.2f)' % (th1,th2)),   
+#                 fo.write('</preference>\n')
+#             except:
+#                 pass
+#             try:
+#                 th1,th2 = self.criteria[g]['thresholds']['weakVeto']
+#                 fo.write('<weakVeto>'),fo.write('(%.2f,%.2f)' % (th1,th2) ),fo.write('</weakVeto>\n')
+#             except:
+#                 pass
+#             try:
+#                 th1,th2 = self.criteria[g]['thresholds']['veto']
+#                 fo.write('<veto>'),fo.write('(%.2f,%.2f)' % (th1,th2) ),fo.write('</veto>\n')
+#             except:
+#                 pass
              
-            fo.write('</thresholds>')
-            fo.write('<weight>')
-##             fo.write(str(self.criteria[g]['weight']))
-            fo.write('%.2f' % (self.criteria[g]['weight']))
-            fo.write('</weight>')       
-            fo.write('</criterion>\n')
-        fo.write('</criteria>\n')
+#             fo.write('</thresholds>')
+#             fo.write('<weight>')
+# ##             fo.write(str(self.criteria[g]['weight']))
+#             fo.write('%.2f' % (self.criteria[g]['weight']))
+#             fo.write('</weight>')       
+#             fo.write('</criterion>\n')
+#         fo.write('</criteria>\n')
 
-        evaluation = self.evaluation
-        fo.write('<evaluations>\n')
-        fo.write('<comment>performance table </comment>\n')
-        for g in criteriaList:
-            fo.write('<evaluation>\n')
-            fo.write('<criterionID>'+str(g)+'</criterionID>\n')
-            for x in actionsOrigList:
-                fo.write('<performance>\n')
-                fo.write('<actionID>')       
-                fo.write(str(x))
-                fo.write('</actionID>\n')                    
-                fo.write('<value>')
-##                 fo.write(str(evaluation[g][x]))
-                fo.write('%.2f' % (evaluation[g][x]))
-                fo.write('</value>\n')
-                fo.write('</performance>\n')
-            fo.write('</evaluation>\n')        
-        fo.write('</evaluations>\n')        
+#         evaluation = self.evaluation
+#         fo.write('<evaluations>\n')
+#         fo.write('<comment>performance table </comment>\n')
+#         for g in criteriaList:
+#             fo.write('<evaluation>\n')
+#             fo.write('<criterionID>'+str(g)+'</criterionID>\n')
+#             for x in actionsOrigList:
+#                 fo.write('<performance>\n')
+#                 fo.write('<actionID>')       
+#                 fo.write(str(x))
+#                 fo.write('</actionID>\n')                    
+#                 fo.write('<value>')
+# ##                 fo.write(str(evaluation[g][x]))
+#                 fo.write('%.2f' % (evaluation[g][x]))
+#                 fo.write('</value>\n')
+#                 fo.write('</performance>\n')
+#             fo.write('</evaluation>\n')        
+#         fo.write('</evaluations>\n')        
   
-        Max = self.valuationdomain['max']
-        Med = self.valuationdomain['med']
-        Min = self.valuationdomain['min']
-        if Max == 1.0 and Min == -1.0:
-            fo.write('<valuationDomain category="bipolar" subcategory="normalized">\n')
-        elif Med == 0 or Med == 0.0:
-            fo.write('<valuationDomain category="bipolar" subcategory="not normalized">\n')
-        else:
-            fo.write('<valuationDomain category="general" subcategory="general">\n')               
-        fo.write('<comment>valuation domain declaration </comment>')
-        fo.write('<min>')
-        fo.write('%.2f' % (Min))
-        fo.write('</min>\n')
-        fo.write('<med>')
-        fo.write('%.2f' % (Med))
-        fo.write('</med>\n')
-        fo.write('<max>')
-        fo.write('%.2f' % (Max))
-        fo.write('</max>\n')
-        fo.write('</valuationDomain>\n')
+#         Max = self.valuationdomain['max']
+#         Med = self.valuationdomain['med']
+#         Min = self.valuationdomain['min']
+#         if Max == 1.0 and Min == -1.0:
+#             fo.write('<valuationDomain category="bipolar" subcategory="normalized">\n')
+#         elif Med == 0 or Med == 0.0:
+#             fo.write('<valuationDomain category="bipolar" subcategory="not normalized">\n')
+#         else:
+#             fo.write('<valuationDomain category="general" subcategory="general">\n')               
+#         fo.write('<comment>valuation domain declaration </comment>')
+#         fo.write('<min>')
+#         fo.write('%.2f' % (Min))
+#         fo.write('</min>\n')
+#         fo.write('<med>')
+#         fo.write('%.2f' % (Med))
+#         fo.write('</med>\n')
+#         fo.write('<max>')
+#         fo.write('%.2f' % (Max))
+#         fo.write('</max>\n')
+#         fo.write('</valuationDomain>\n')
 
-        fo.write('<relation>\n')
-        relation = self.relation_orig
-        fo.write('<comment>valued outranking relation declaration. </comment>')
-        for x in actionsOrigList:
-            for y in actionsOrigList:
-                fo.write('<arc>\n')        
-                fo.write('<initialActionID>')
-                fo.write(str(x))
-                fo.write('</initialActionID>\n')                       
-                fo.write('<terminalActionID>')
-                fo.write(str(y))
-                fo.write('</terminalActionID>\n')                                             
-                fo.write('<value>')
-##                 fo.write(str(relation[x][y]))
-                fo.write('%.2f' % (relation[x][y]))
-                fo.write('</value>\n')                       
-                fo.write('</arc>\n')        
-        fo.write('</relation>\n')
+#         fo.write('<relation>\n')
+#         relation = self.relation_orig
+#         fo.write('<comment>valued outranking relation declaration. </comment>')
+#         for x in actionsOrigList:
+#             for y in actionsOrigList:
+#                 fo.write('<arc>\n')        
+#                 fo.write('<initialActionID>')
+#                 fo.write(str(x))
+#                 fo.write('</initialActionID>\n')                       
+#                 fo.write('<terminalActionID>')
+#                 fo.write(str(y))
+#                 fo.write('</terminalActionID>\n')                                             
+#                 fo.write('<value>')
+# ##                 fo.write(str(relation[x][y]))
+#                 fo.write('%.2f' % (relation[x][y]))
+#                 fo.write('</value>\n')                       
+#                 fo.write('</arc>\n')        
+#         fo.write('</relation>\n')
 
-        fo.write('<vetos>\n')
-        fo.write('<comment>Effective and potential weto situations.</comment>\n')
-        try:
-            vetos = self.vetos
-            for veto in vetos:
-                fo.write('<veto>\n')
-                arc = veto[0]
-                fo.write('<arc>\n')
-                fo.write('<initialActionID>')
-                fo.write(str(arc[0]))
-                fo.write('</initialActionID>\n')                       
-                fo.write('<terminalActionID>')
-                fo.write(str(arc[1]))
-                fo.write('</terminalActionID>\n')                                             
-                fo.write('<concordanceDegree>')
-                fo.write('%.2f' % (arc[2]))
-                fo.write('</concordanceDegree>\n')                                    
-                fo.write('</arc>\n')
-                situations = veto[1]
-                fo.write('<vetoSituations>\n')
-                for v in situations:
-                    fo.write('<vetoSituation>\n')
-                    fo.write('<criterionID>')
-                    fo.write(str(v[0]))
-                    fo.write('</criterionID>\n')
-                    fo.write('<performanceDifference>')
-                    fo.write('%.2f' % (v[1][1]))
-                    fo.write('</performanceDifference>\n')
-                    fo.write('<vetoCharacteristic>')
-                    fo.write('%.2f' % (v[1][0]))
-                    fo.write('</vetoCharacteristic>\n')
-                    fo.write('<comment>')
-                    if arc[2] > Med:
-                        if v[1][0] > 0:
-                            fo.write('effective veto')
-                        else:
-                            fo.write('effective weak veto')
-                    elif arc[2] == Med:
-                        if v[1][0] > 0:
-                            fo.write('effective veto')
-                        else:
-                            fo.write('potential weak veto')
-                    else:
-                        if v[1][0] > 0:
-                            fo.write('potential veto')
-                        else:
-                            fo.write('potential weak veto')                   
-                    fo.write('</comment>\n')
-                    fo.write('</vetoSituation>\n')
+#         fo.write('<vetos>\n')
+#         fo.write('<comment>Effective and potential weto situations.</comment>\n')
+#         try:
+#             vetos = self.vetos
+#             for veto in vetos:
+#                 fo.write('<veto>\n')
+#                 arc = veto[0]
+#                 fo.write('<arc>\n')
+#                 fo.write('<initialActionID>')
+#                 fo.write(str(arc[0]))
+#                 fo.write('</initialActionID>\n')                       
+#                 fo.write('<terminalActionID>')
+#                 fo.write(str(arc[1]))
+#                 fo.write('</terminalActionID>\n')                                             
+#                 fo.write('<concordanceDegree>')
+#                 fo.write('%.2f' % (arc[2]))
+#                 fo.write('</concordanceDegree>\n')                                    
+#                 fo.write('</arc>\n')
+#                 situations = veto[1]
+#                 fo.write('<vetoSituations>\n')
+#                 for v in situations:
+#                     fo.write('<vetoSituation>\n')
+#                     fo.write('<criterionID>')
+#                     fo.write(str(v[0]))
+#                     fo.write('</criterionID>\n')
+#                     fo.write('<performanceDifference>')
+#                     fo.write('%.2f' % (v[1][1]))
+#                     fo.write('</performanceDifference>\n')
+#                     fo.write('<vetoCharacteristic>')
+#                     fo.write('%.2f' % (v[1][0]))
+#                     fo.write('</vetoCharacteristic>\n')
+#                     fo.write('<comment>')
+#                     if arc[2] > Med:
+#                         if v[1][0] > 0:
+#                             fo.write('effective veto')
+#                         else:
+#                             fo.write('effective weak veto')
+#                     elif arc[2] == Med:
+#                         if v[1][0] > 0:
+#                             fo.write('effective veto')
+#                         else:
+#                             fo.write('potential weak veto')
+#                     else:
+#                         if v[1][0] > 0:
+#                             fo.write('potential veto')
+#                         else:
+#                             fo.write('potential weak veto')                   
+#                     fo.write('</comment>\n')
+#                     fo.write('</vetoSituation>\n')
 
-                fo.write('</vetoSituations>\n')
-                fo.write('</veto>\n')
-        except:
-            pass
-        fo.write('</vetos>\n')
+#                 fo.write('</vetoSituations>\n')
+#                 fo.write('</veto>\n')
+#         except:
+#             pass
+#         fo.write('</vetos>\n')
         
-        fo.write('<choiceRecommendation category="Rubis">\n')
-        fo.write('<comment>List of good and bad choices following the Rubis methodology.</comment>\n')
+#         fo.write('<choiceRecommendation category="Rubis">\n')
+#         fo.write('<comment>List of good and bad choices following the Rubis methodology.</comment>\n')
 
-        cocaActionsList = [x for x in self.actions if isinstance(x,frozenset)]
-        if cocaActionsList != []:
-            cocaActionsList.sort()
-            fo.write('<cocaActions>\n')
-            fo.write("<comment>weak COCA digraph actions' declaration </comment>\n")
-            for x in cocaActionsList:
-                fo.write('<cocaAction id="'+str(x)+'">\n')
-                fo.write('<name>')
-                fo.write('chordless odd circuit')
-                fo.write('</name>\n')
-                fo.write('<comment>')
-                fo.write('Rubis construction')
-                fo.write('</comment>\n')
-                fo.write('</cocaAction>\n')     
-            fo.write('</cocaActions>\n')
-        amplitude = float(Max - Min)/float(100.0)
-        fo.write('<goodChoices>\n')
-        for ch in self.goodChoices:
-##             fo.write('<choiceSet independence="'+str(ch[2])+'" outranking="'+str(ch[3])+'" outranked="'+str(ch[4])+'" determinateness="'+str(-ch[0])+'" >')
-            if ch[3] > ch[4]:
-                #independent = float(ch[2])/amplitude
-                #outranking = float(ch[3])/amplitude
-                #outranked = float(ch[4])/amplitude
-                independent = ch[2]
-                outranking = ch[3]
-                outranked = ch[4]
-                determ = -ch[0]*Decimal('100.0')
-                fo.write('<choiceSet independence="%.2f" outranking="%.2f" outranked="%.2f" determinateness="%.2f" >\n' % (independent,outranking,outranked,determ))
-                fo.write('<choiceActions>\n')
-                for x in ch[5]:
-                    fo.write('<actionID>')
-                    fo.write(str(x))
-                    fo.write('</actionID>\n')
-                fo.write('</choiceActions>\n')              
-                fo.write('</choiceSet>\n')
-        fo.write('</goodChoices>\n')
+#         cocaActionsList = [x for x in self.actions if isinstance(x,frozenset)]
+#         if cocaActionsList != []:
+#             cocaActionsList.sort()
+#             fo.write('<cocaActions>\n')
+#             fo.write("<comment>weak COCA digraph actions' declaration </comment>\n")
+#             for x in cocaActionsList:
+#                 fo.write('<cocaAction id="'+str(x)+'">\n')
+#                 fo.write('<name>')
+#                 fo.write('chordless odd circuit')
+#                 fo.write('</name>\n')
+#                 fo.write('<comment>')
+#                 fo.write('Rubis construction')
+#                 fo.write('</comment>\n')
+#                 fo.write('</cocaAction>\n')     
+#             fo.write('</cocaActions>\n')
+#         amplitude = float(Max - Min)/float(100.0)
+#         fo.write('<goodChoices>\n')
+#         for ch in self.goodChoices:
+# ##             fo.write('<choiceSet independence="'+str(ch[2])+'" outranking="'+str(ch[3])+'" outranked="'+str(ch[4])+'" determinateness="'+str(-ch[0])+'" >')
+#             if ch[3] > ch[4]:
+#                 #independent = float(ch[2])/amplitude
+#                 #outranking = float(ch[3])/amplitude
+#                 #outranked = float(ch[4])/amplitude
+#                 independent = ch[2]
+#                 outranking = ch[3]
+#                 outranked = ch[4]
+#                 determ = -ch[0]*Decimal('100.0')
+#                 fo.write('<choiceSet independence="%.2f" outranking="%.2f" outranked="%.2f" determinateness="%.2f" >\n' % (independent,outranking,outranked,determ))
+#                 fo.write('<choiceActions>\n')
+#                 for x in ch[5]:
+#                     fo.write('<actionID>')
+#                     fo.write(str(x))
+#                     fo.write('</actionID>\n')
+#                 fo.write('</choiceActions>\n')              
+#                 fo.write('</choiceSet>\n')
+#         fo.write('</goodChoices>\n')
 
-        fo.write('<badChoices>\n')
-        for ch in self.badChoices:
-##             fo.write('<choiceSet independence="'+str(ch[2])+'" outranking="'+str(ch[3])+'" outranked="'+str(ch[4])+'" determinateness="'+str(-ch[0])+'" >')
-            if ch[4] >= ch[3]:
-                #independent = float(ch[2])/float(amplitude)
-                #outranking = float(ch[3])/float(amplitude)
-                #outranked = float(ch[4])/float(amplitude)
-                independent = ch[2]
-                outranking = ch[3]
-                outranked = ch[4]
-                determ = -ch[0]*Decimal('100.0')
-                fo.write('<choiceSet independence="%.2f" outranking="%.2f" outranked="%.2f" determinateness="%.2f" >\n' % (independent,outranking,outranked,determ))
-                fo.write('<choiceActions>\n')
-                for x in ch[5]:
-                    fo.write('<actionID>')
-                    fo.write(str(x))
-                    fo.write('</actionID>\n')
-                fo.write('</choiceActions>\n')              
-                fo.write('</choiceSet>\n')
-        fo.write('</badChoices>\n')
+#         fo.write('<badChoices>\n')
+#         for ch in self.badChoices:
+# ##             fo.write('<choiceSet independence="'+str(ch[2])+'" outranking="'+str(ch[3])+'" outranked="'+str(ch[4])+'" determinateness="'+str(-ch[0])+'" >')
+#             if ch[4] >= ch[3]:
+#                 #independent = float(ch[2])/float(amplitude)
+#                 #outranking = float(ch[3])/float(amplitude)
+#                 #outranked = float(ch[4])/float(amplitude)
+#                 independent = ch[2]
+#                 outranking = ch[3]
+#                 outranked = ch[4]
+#                 determ = -ch[0]*Decimal('100.0')
+#                 fo.write('<choiceSet independence="%.2f" outranking="%.2f" outranked="%.2f" determinateness="%.2f" >\n' % (independent,outranking,outranked,determ))
+#                 fo.write('<choiceActions>\n')
+#                 for x in ch[5]:
+#                     fo.write('<actionID>')
+#                     fo.write(str(x))
+#                     fo.write('</actionID>\n')
+#                 fo.write('</choiceActions>\n')              
+#                 fo.write('</choiceSet>\n')
+#         fo.write('</badChoices>\n')
         
-        fo.write('</choiceRecommendation>\n')
+#         fo.write('</choiceRecommendation>\n')
 
-        fo.write('</rubisOutrankingDigraph>\n')
+#         fo.write('</rubisOutrankingDigraph>\n')
         
-        fo.close()
-        if Comments:
-            print('File: ' + nameExt + ' saved !')
+#         fo.close()
+#         if Comments:
+#             print('File: ' + nameExt + ' saved !')
 
 
 
-    def saveXMCDAOutrankingDigraph(self,fileName='temp',category='Rubis',subcategory='Choice Recommendation',author='digraphs Module (RB)',reference='saved from Python',comment=True,servingD3=False,relationName='Stilde',valuationType='bipolar',variant='standard',instanceID='void'):
-        """
-        save complete Rubis problem and result in XMCDA format with unicode encoding.
-        """
-        import codecs,copy
-        selfOrig=copy.deepcopy(self)
-        self.computeRubyChoice()
+    # def saveXMCDAOutrankingDigraph(self,fileName='temp',category='Rubis',subcategory='Choice Recommendation',author='digraphs Module (RB)',reference='saved from Python',comment=True,servingD3=False,relationName='Stilde',valuationType='bipolar',variant='standard',instanceID='void'):
+    #     """
+    #     save complete Rubis problem and result in XMCDA format with unicode encoding.
+    #     """
+    #     import codecs,copy
+    #     selfOrig=copy.deepcopy(self)
+    #     self.computeRubyChoice()
 
-        if isinstance(self,RobustOutrankingDigraph):
-            category = 'Robust Rubis'
+    #     if isinstance(self,RobustOutrankingDigraph):
+    #         category = 'Robust Rubis'
 
-        if comment:
-            print('*----- saving digraph in XMCDA format  -------------*')        
-        nameExt = fileName+'.xmcda'
-        fo = codecs.open(nameExt,'w',encoding='utf-8')
-        fo.write('<?xml version="1.0" encoding="UTF-8"?>\n')
-        if category=='Rubis':
-            if not servingD3:
-                fo.write('<?xml-stylesheet type="text/xsl" href="xmcdaRubis.xsl"?>\n')
-            else:
-                fo.write('<!-- ?xml-stylesheet type="text/xsl" href="xmcdaRubis.xsl"? -->\n')
-        elif category=='Robust Rubis':
-            if not servingD3:
-                fo.write('<?xml-stylesheet type="text/xsl" href="xmcdaRobustRubis.xsl"?>\n')
-            else:
-                fo.write('<!-- ?xml-stylesheet type="text/xsl" href="xmcdaRobustRubis.xsl"? -->\n')
-        else:
-            if not servingD3:
-                fo.write('<?xml-stylesheet type="text/xsl" href="xmcdaDefault.xsl"?>\n')
-            else:
-                fo.write('<!-- ?xml-stylesheet type="text/xsl" href="xmcdaDefault.xsl"? -->\n')     
-        fo.write('<xmcda:XMCDA xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"\n xsi:schemaLocation="http://www.decision-deck.org/2008/UMCDA-ML-1.0 umcda-ml-1.0.xsd"\n xmlns:xmcda="http://www.decision-deck.org/2008/UMCDA-ML-1.0" instanceID="%s">\n' % str(instanceID) )
+    #     if comment:
+    #         print('*----- saving digraph in XMCDA format  -------------*')        
+    #     nameExt = fileName+'.xmcda'
+    #     fo = codecs.open(nameExt,'w',encoding='utf-8')
+    #     fo.write('<?xml version="1.0" encoding="UTF-8"?>\n')
+    #     if category=='Rubis':
+    #         if not servingD3:
+    #             fo.write('<?xml-stylesheet type="text/xsl" href="xmcdaRubis.xsl"?>\n')
+    #         else:
+    #             fo.write('<!-- ?xml-stylesheet type="text/xsl" href="xmcdaRubis.xsl"? -->\n')
+    #     elif category=='Robust Rubis':
+    #         if not servingD3:
+    #             fo.write('<?xml-stylesheet type="text/xsl" href="xmcdaRobustRubis.xsl"?>\n')
+    #         else:
+    #             fo.write('<!-- ?xml-stylesheet type="text/xsl" href="xmcdaRobustRubis.xsl"? -->\n')
+    #     else:
+    #         if not servingD3:
+    #             fo.write('<?xml-stylesheet type="text/xsl" href="xmcdaDefault.xsl"?>\n')
+    #         else:
+    #             fo.write('<!-- ?xml-stylesheet type="text/xsl" href="xmcdaDefault.xsl"? -->\n')     
+    #     fo.write('<xmcda:XMCDA xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"\n xsi:schemaLocation="http://www.decision-deck.org/2008/UMCDA-ML-1.0 umcda-ml-1.0.xsd"\n xmlns:xmcda="http://www.decision-deck.org/2008/UMCDA-ML-1.0" instanceID="%s">\n' % str(instanceID) )
 
-        # write description
-        fo.write('<caseReference>\n')
-        # titles
-        title = 'Rubis Best Choice Recommendation'
-        fo.write('<%s>%s</%s>\n' % ('title', str(title),'title') )
-        try:
-            fo.write('<%s>%s</%s>\n' % ('subTitle', str(self.description['title']),'subTitle') )
-        except:
-            pass
-        try:
-            fo.write('<%s>%s</%s>\n' % ('subSubTitle', str(self.description['subTitle']),'subSubTitle') )
-        except:
-            pass
-        # rest of case description including the bibliography
-        try:
-            for entry in self.description:
-                if entry == 'bibliography':
-                    fo.write('<bibliography>\n')
-                    for bibEntry in [x for x in self.description[entry]]:
-                        if bibEntry == 'description':
-                            fo.write('<description><subSubTitle>%s</subSubTitle></description>\n' % (str(self.description['bibliography']['description']['subSubTitle'])) )
-                        else:
-                            fo.write('<bibEntry>%s</bibEntry>\n' % (str(self.description['bibliography'][bibEntry])) )
-                    fo.write('</bibliography>\n')
-                elif entry != 'title' and entry != 'subTitle' and entry != 'subSubTitle':
-                    fo.write('<%s>%s</%s>\n' % (entry, str(self.description[entry]),entry) )
-        except:
-            if category == 'Robust Rubis':
-                fo.write('<title>Valued Outranking Robustness Digraph in XMCDA format</title>\n')
-            else:
-                fo.write('<title>Valued Outranking Digraph in XMCDA format</title>\n') 
-            fo.write('<id>%s</id>\n' % (fileName) )
-            fo.write('<name>%s</name>\n' % (str(self.name)) )
-            fo.write('<type>root</type>\n')
-            fo.write('<author>%s</author>\n' % (str(author)) )
-            fo.write('<version>%s</version>\n' % (str(reference)) )
-        fo.write('</caseReference>\n')
+    #     # write description
+    #     fo.write('<caseReference>\n')
+    #     # titles
+    #     title = 'Rubis Best Choice Recommendation'
+    #     fo.write('<%s>%s</%s>\n' % ('title', str(title),'title') )
+    #     try:
+    #         fo.write('<%s>%s</%s>\n' % ('subTitle', str(self.description['title']),'subTitle') )
+    #     except:
+    #         pass
+    #     try:
+    #         fo.write('<%s>%s</%s>\n' % ('subSubTitle', str(self.description['subTitle']),'subSubTitle') )
+    #     except:
+    #         pass
+    #     # rest of case description including the bibliography
+    #     try:
+    #         for entry in self.description:
+    #             if entry == 'bibliography':
+    #                 fo.write('<bibliography>\n')
+    #                 for bibEntry in [x for x in self.description[entry]]:
+    #                     if bibEntry == 'description':
+    #                         fo.write('<description><subSubTitle>%s</subSubTitle></description>\n' % (str(self.description['bibliography']['description']['subSubTitle'])) )
+    #                     else:
+    #                         fo.write('<bibEntry>%s</bibEntry>\n' % (str(self.description['bibliography'][bibEntry])) )
+    #                 fo.write('</bibliography>\n')
+    #             elif entry != 'title' and entry != 'subTitle' and entry != 'subSubTitle':
+    #                 fo.write('<%s>%s</%s>\n' % (entry, str(self.description[entry]),entry) )
+    #     except:
+    #         if category == 'Robust Rubis':
+    #             fo.write('<title>Valued Outranking Robustness Digraph in XMCDA format</title>\n')
+    #         else:
+    #             fo.write('<title>Valued Outranking Digraph in XMCDA format</title>\n') 
+    #         fo.write('<id>%s</id>\n' % (fileName) )
+    #         fo.write('<name>%s</name>\n' % (str(self.name)) )
+    #         fo.write('<type>root</type>\n')
+    #         fo.write('<author>%s</author>\n' % (str(author)) )
+    #         fo.write('<version>%s</version>\n' % (str(reference)) )
+    #     fo.write('</caseReference>\n')
 
-        # write methodData
-        fo.write('<methodData>\n')
-        fo.write('<description>\n')
-        fo.write('<subTitle>Method data</subTitle>\n')
-        if category == 'Robust Rubis':
-            fo.write('<id>%s</id>\n' % ('Robust Rubis') )
-            fo.write('<name>%s</name>\n' % ('Robustness analysis of Rubis best choice method') )
-            fo.write('<type>methodData</type>\n')
-            fo.write('<comment>Robust Rubis best choice recommendation in XMCDA format.</comment>\n')
-        else:
-            fo.write('<id>%s</id>\n' % ('Rubis') )
-            fo.write('<name>%s</name>\n' % ('Rubis best choice method') )
-            fo.write('<type>methodData</type>\n')
-            fo.write('<comment>Rubis best choice recommendation in XMCDA format.</comment>\n')        
-        fo.write('<version>%s</version>\n' % ('1.0'))
-        fo.write('</description>\n')
-        fo.write('<parameters>\n')
-        fo.write('<parameter>\n')
-        fo.write('<name>%s</name>\n' % ('variant') )
-        fo.write('<value>\n')
-        try:
-            variant = self.methodData['parameter']['variant']
-        except:
-            pass
-        fo.write('<label>%s</label>\n' % (variant) )
-        fo.write('</value>\n')
-        fo.write('</parameter>\n')
-        fo.write('<parameter>\n')
-        fo.write('<name>%s</name>\n' % ('valuationType') )
-        fo.write('<value>\n')
-        try:
-            valuationType = self.methodData['parameter']['valuationType']
-        except:
-            pass   
-        fo.write('<label>%s</label>\n' % (valuationType) )
-        fo.write('</value>\n')
-        fo.write('</parameter>\n')
-        fo.write('</parameters>\n')
-        fo.write('</methodData>\n')
+    #     # write methodData
+    #     fo.write('<methodData>\n')
+    #     fo.write('<description>\n')
+    #     fo.write('<subTitle>Method data</subTitle>\n')
+    #     if category == 'Robust Rubis':
+    #         fo.write('<id>%s</id>\n' % ('Robust Rubis') )
+    #         fo.write('<name>%s</name>\n' % ('Robustness analysis of Rubis best choice method') )
+    #         fo.write('<type>methodData</type>\n')
+    #         fo.write('<comment>Robust Rubis best choice recommendation in XMCDA format.</comment>\n')
+    #     else:
+    #         fo.write('<id>%s</id>\n' % ('Rubis') )
+    #         fo.write('<name>%s</name>\n' % ('Rubis best choice method') )
+    #         fo.write('<type>methodData</type>\n')
+    #         fo.write('<comment>Rubis best choice recommendation in XMCDA format.</comment>\n')        
+    #     fo.write('<version>%s</version>\n' % ('1.0'))
+    #     fo.write('</description>\n')
+    #     fo.write('<parameters>\n')
+    #     fo.write('<parameter>\n')
+    #     fo.write('<name>%s</name>\n' % ('variant') )
+    #     fo.write('<value>\n')
+    #     try:
+    #         variant = self.methodData['parameter']['variant']
+    #     except:
+    #         pass
+    #     fo.write('<label>%s</label>\n' % (variant) )
+    #     fo.write('</value>\n')
+    #     fo.write('</parameter>\n')
+    #     fo.write('<parameter>\n')
+    #     fo.write('<name>%s</name>\n' % ('valuationType') )
+    #     fo.write('<value>\n')
+    #     try:
+    #         valuationType = self.methodData['parameter']['valuationType']
+    #     except:
+    #         pass   
+    #     fo.write('<label>%s</label>\n' % (valuationType) )
+    #     fo.write('</value>\n')
+    #     fo.write('</parameter>\n')
+    #     fo.write('</parameters>\n')
+    #     fo.write('</methodData>\n')
 
-        # write potential actions 
-        origActionsList = [x for x in self.actions_orig]
-        origActionsList.sort()
-        fo.write('<alternatives>\n')
-        fo.write('<description>\n')
-        fo.write('<title>%s</title>\n' % ('List of Alternatives'))
-        fo.write('<subTitle>Potential decision actions.</subTitle>\n')
-        fo.write('<type>%s</type>\n' % ('alternatives'))
-        fo.write('</description>\n')                  
-        for x in origActionsList:
-            fo.write('<alternative id="'+str(x)+'">\n')
-            fo.write('<description>\n')
-            fo.write('<name>')
-            try:
-                fo.write(str(self.actions_orig[x]['name']))
-            except:
-                pass
-            fo.write('</name>\n')
-            fo.write('<comment>')
-            try:
-                fo.write(str(self.actions_orig[x]['comment'])) 
-            except:
-                pass
-            fo.write('</comment>\n')
-            fo.write('</description>\n')
-            fo.write('<alternativeType>potential</alternativeType>\n')
-            fo.write('<status>active</status>\n')
-            fo.write('</alternative>\n')
-        fo.write('</alternatives>\n')
+    #     # write potential actions 
+    #     origActionsList = [x for x in self.actions_orig]
+    #     origActionsList.sort()
+    #     fo.write('<alternatives>\n')
+    #     fo.write('<description>\n')
+    #     fo.write('<title>%s</title>\n' % ('List of Alternatives'))
+    #     fo.write('<subTitle>Potential decision actions.</subTitle>\n')
+    #     fo.write('<type>%s</type>\n' % ('alternatives'))
+    #     fo.write('</description>\n')                  
+    #     for x in origActionsList:
+    #         fo.write('<alternative id="'+str(x)+'">\n')
+    #         fo.write('<description>\n')
+    #         fo.write('<name>')
+    #         try:
+    #             fo.write(str(self.actions_orig[x]['name']))
+    #         except:
+    #             pass
+    #         fo.write('</name>\n')
+    #         fo.write('<comment>')
+    #         try:
+    #             fo.write(str(self.actions_orig[x]['comment'])) 
+    #         except:
+    #             pass
+    #         fo.write('</comment>\n')
+    #         fo.write('</description>\n')
+    #         fo.write('<alternativeType>potential</alternativeType>\n')
+    #         fo.write('<status>active</status>\n')
+    #         fo.write('</alternative>\n')
+    #     fo.write('</alternatives>\n')
         
-        # coca actions if any
-        cocaActionsList = [x for x in self.actions if isinstance(x,frozenset)]
-        if cocaActionsList != []:
-            cocaActionsList.sort()
-            fo.write('<alternatives>\n')
-            fo.write('<description>\n')
-            fo.write('<subTitle>%s</subTitle>\n' % ('Coca digraph actions'))
-            fo.write('<type>%s</type>\n' % ('cocaActions'))
-            fo.write('<comment>Chordless odd circuits added to the original outranking digraph.</comment>\n')
-            fo.write('</description>\n')                  
-            for x in cocaActionsList:
-                fo.write('<alternative id="'+str(self.actions[x]['name'])+'">\n')
-                fo.write('<description>\n')
-                fo.write('<name>%s</name>\n' % (str(self.actions[x]['name']) ) )
-                fo.write('<comment>%s</comment>\n' % (str(self.actions[x]['comment'])) )
-                fo.write('</description>\n')   
-                fo.write('</alternative>\n')
-            fo.write('</alternatives>\n')
+    #     # coca actions if any
+    #     cocaActionsList = [x for x in self.actions if isinstance(x,frozenset)]
+    #     if cocaActionsList != []:
+    #         cocaActionsList.sort()
+    #         fo.write('<alternatives>\n')
+    #         fo.write('<description>\n')
+    #         fo.write('<subTitle>%s</subTitle>\n' % ('Coca digraph actions'))
+    #         fo.write('<type>%s</type>\n' % ('cocaActions'))
+    #         fo.write('<comment>Chordless odd circuits added to the original outranking digraph.</comment>\n')
+    #         fo.write('</description>\n')                  
+    #         for x in cocaActionsList:
+    #             fo.write('<alternative id="'+str(self.actions[x]['name'])+'">\n')
+    #             fo.write('<description>\n')
+    #             fo.write('<name>%s</name>\n' % (str(self.actions[x]['name']) ) )
+    #             fo.write('<comment>%s</comment>\n' % (str(self.actions[x]['comment'])) )
+    #             fo.write('</description>\n')   
+    #             fo.write('</alternative>\n')
+    #         fo.write('</alternatives>\n')
         
-        # save criteria
-        criteriaList = [x for x in self.criteria]
-        criteriaList.sort()
-        criteria = self.criteria
-        fo.write('<criteria>\n')
-        fo.write('<description>\n')
-        fo.write('<title>Rubis family of criteria.</title>\n')
-        fo.write('<type>%s</type>\n' % ('criteria'))
-        fo.write('</description>\n')       
-        for g in criteriaList:   
-            fo.write('<criterion id="%s" >\n' % (g) )
-            fo.write('<description>\n')
-            try:
-                fo.write('<name>%s</name>\n' % (str(criteria[g]['name'])) )
-            except:
-                fo.write('<name>%s</name>\n' % ('nameless') )
-            fo.write('<type>%s</type>\n' % ('criterion'))
-            try:
-                fo.write('<comment>%s</comment>\n' % (str(criteria[g]['comment'])) )
-            except:
-                fo.write('<comment>%s</comment>\n' % ('no comment') )
-            fo.write('<version>%s</version>\n' % ('performance') )
-            fo.write('</description>\n')
-            fo.write('<status>active</status>\n')
-            try:
-                if criteria[g]['IntegerWeights']:
-                    fo.write('<significance><integer>%d</integer></significance>\n' % (criteria[g]['weight']) )
-                else:
-                    fo.write('<significance><real>%.2f</real></significance>\n' % (criteria[g]['weight']) )
-            except:
-                fo.write('<significance><real>%.2f</real></significance>\n' % (criteria[g]['weight']) )
+    #     # save criteria
+    #     criteriaList = [x for x in self.criteria]
+    #     criteriaList.sort()
+    #     criteria = self.criteria
+    #     fo.write('<criteria>\n')
+    #     fo.write('<description>\n')
+    #     fo.write('<title>Rubis family of criteria.</title>\n')
+    #     fo.write('<type>%s</type>\n' % ('criteria'))
+    #     fo.write('</description>\n')       
+    #     for g in criteriaList:   
+    #         fo.write('<criterion id="%s" >\n' % (g) )
+    #         fo.write('<description>\n')
+    #         try:
+    #             fo.write('<name>%s</name>\n' % (str(criteria[g]['name'])) )
+    #         except:
+    #             fo.write('<name>%s</name>\n' % ('nameless') )
+    #         fo.write('<type>%s</type>\n' % ('criterion'))
+    #         try:
+    #             fo.write('<comment>%s</comment>\n' % (str(criteria[g]['comment'])) )
+    #         except:
+    #             fo.write('<comment>%s</comment>\n' % ('no comment') )
+    #         fo.write('<version>%s</version>\n' % ('performance') )
+    #         fo.write('</description>\n')
+    #         fo.write('<status>active</status>\n')
+    #         try:
+    #             if criteria[g]['IntegerWeights']:
+    #                 fo.write('<significance><integer>%d</integer></significance>\n' % (criteria[g]['weight']) )
+    #             else:
+    #                 fo.write('<significance><real>%.2f</real></significance>\n' % (criteria[g]['weight']) )
+    #         except:
+    #             fo.write('<significance><real>%.2f</real></significance>\n' % (criteria[g]['weight']) )
  
-            fo.write('<criterionFunction category="%s" subCategory="%s" >\n' % ('Rubis','performance'))
-            fo.write('<scale>\n')
-            fo.write('<quantitative>\n')
-            try:
-                fo.write('<preferenceDirection>%s</preferenceDirection>\n' % (criteria[g]['preferenceDirection']) )
-                if criteria[g]['preferenceDirection'] == 'min':
-                    pdir = -1
-                else:
-                    pdir = 1
-            except:
-                fo.write('<preferenceDirection>%s</preferenceDirection>\n' % ('max') )
-                pdir = 1
-            fo.write('<min><real>%.2f</real></min>\n' % (criteria[g]['scale'][0]) )
-            fo.write('<max><real>%.2f</real></max>\n' % (criteria[g]['scale'][1]) )
+    #         fo.write('<criterionFunction category="%s" subCategory="%s" >\n' % ('Rubis','performance'))
+    #         fo.write('<scale>\n')
+    #         fo.write('<quantitative>\n')
+    #         try:
+    #             fo.write('<preferenceDirection>%s</preferenceDirection>\n' % (criteria[g]['preferenceDirection']) )
+    #             if criteria[g]['preferenceDirection'] == 'min':
+    #                 pdir = -1
+    #             else:
+    #                 pdir = 1
+    #         except:
+    #             fo.write('<preferenceDirection>%s</preferenceDirection>\n' % ('max') )
+    #             pdir = 1
+    #         fo.write('<min><real>%.2f</real></min>\n' % (criteria[g]['scale'][0]) )
+    #         fo.write('<max><real>%.2f</real></max>\n' % (criteria[g]['scale'][1]) )
 
-            fo.write('</quantitative>\n')
-            fo.write('</scale>\n')
-            fo.write('<thresholds>\n')
-            try:
-                if criteria[g]['thresholds']['ind'] != None:
-                    fo.write('<threshold><type>ind</type>\n')
-                    if criteria[g]['thresholds']['ind'][1] != Decimal('0.0'):
-                        fo.write('<function><linear>\n')
-                        fo.write('<slope><real>%.2f</real></slope>\n' % (pdir*criteria[g]['thresholds']['ind'][1]) )
-                        fo.write('<intercept><real>%.2f</real></intercept>\n' % (criteria[g]['thresholds']['ind'][0]) )
-                        fo.write('</linear></function>\n')
-                    else:
-                        fo.write('<function><constant>\n')
-                        fo.write('<real>%.2f</real>\n' % (criteria[g]['thresholds']['ind'][0]) )
-                        fo.write('</constant></function>\n')                       
-                    fo.write('</threshold>\n')
+    #         fo.write('</quantitative>\n')
+    #         fo.write('</scale>\n')
+    #         fo.write('<thresholds>\n')
+    #         try:
+    #             if criteria[g]['thresholds']['ind'] != None:
+    #                 fo.write('<threshold><type>ind</type>\n')
+    #                 if criteria[g]['thresholds']['ind'][1] != Decimal('0.0'):
+    #                     fo.write('<function><linear>\n')
+    #                     fo.write('<slope><real>%.2f</real></slope>\n' % (pdir*criteria[g]['thresholds']['ind'][1]) )
+    #                     fo.write('<intercept><real>%.2f</real></intercept>\n' % (criteria[g]['thresholds']['ind'][0]) )
+    #                     fo.write('</linear></function>\n')
+    #                 else:
+    #                     fo.write('<function><constant>\n')
+    #                     fo.write('<real>%.2f</real>\n' % (criteria[g]['thresholds']['ind'][0]) )
+    #                     fo.write('</constant></function>\n')                       
+    #                 fo.write('</threshold>\n')
                 
-            except:
-                pass
-            try:
-                if criteria[g]['thresholds']['weakPreference'] != None:
-                    fo.write('<threshold><type>weakPreference</type>\n')
-                    if criteria[g]['thresholds']['weakPreference'][1] != Decimal('0.0'):
-                        fo.write('<function><linear>\n')
-                        fo.write('<slope><real>%.2f</real></slope>\n' % (pdir*criteria[g]['thresholds']['weakPreference'][1]) )
-                        fo.write('<intercept><real>%.2f</real></intercept>\n' % (criteria[g]['thresholds']['weakPreference'][0]) )
-                        fo.write('</linear></function>\n')
-                    else:
-                        fo.write('<function><constant>\n')
-                        fo.write('<real>%.2f</real>\n' % (criteria[g]['thresholds']['weakPreference'][0]) )
-                        fo.write('</constant></function>\n')                       
-                    fo.write('</threshold>\n')
-            except:
-                pass
-            try:
-                if criteria[g]['thresholds']['pref'] != None:
-                    fo.write('<threshold><type>pref</type>\n')
-                    if criteria[g]['thresholds']['pref'][1] != Decimal('0.0'):
-                        fo.write('<function><linear>\n')
-                        fo.write('<slope><real>%.2f</real></slope>\n' % (pdir*criteria[g]['thresholds']['pref'][1]) )
-                        fo.write('<intercept><real>%.2f</real></intercept>\n' % (criteria[g]['thresholds']['pref'][0]) )
-                        fo.write('</linear></function>\n')
-                    else:
-                        fo.write('<function><constant>\n')
-                        fo.write('<real>%.2f</real>\n' % (criteria[g]['thresholds']['pref'][0]) )
-                        fo.write('</constant></function>\n')                       
-                    fo.write('</threshold>\n')
-            except:
-                pass
-            try:
-                if criteria[g]['thresholds']['weakVeto'] != None:
-                    fo.write('<threshold><type>weakVeto</type>\n')
-                    if criteria[g]['thresholds']['weakVeto'][1] != Decimal('0.0'):
-                        fo.write('<function><linear>\n')
-                        fo.write('<slope><real>%.2f</real></slope>\n' % (pdir*criteria[g]['thresholds']['weakVeto'][1]) )
-                        fo.write('<intercept><real>%.2f</real></intercept>\n' % (criteria[g]['thresholds']['weakVeto'][0]) )
-                        fo.write('</linear></function>\n')
-                    else:
-                        fo.write('<function><constant>\n')
-                        fo.write('<real>%.2f</real>\n' % (criteria[g]['thresholds']['weakVeto'][0]) )
-                        fo.write('</constant></function>\n')                       
-                    fo.write('</threshold>\n')
-            except:
-                pass
-            try:
-                if criteria[g]['thresholds']['veto'] != None:
-                    fo.write('<threshold><type>veto</type>\n')
-                    if criteria[g]['thresholds']['veto'][1] != Decimal('0.0'):
-                        fo.write('<function><linear>\n')
-                        fo.write('<slope><real>%.2f</real></slope>\n' % (pdir*criteria[g]['thresholds']['veto'][1]) )
-                        fo.write('<intercept><real>%.2f</real></intercept>\n' % (criteria[g]['thresholds']['veto'][0]) )
-                        fo.write('</linear></function>\n')
-                    else:
-                        fo.write('<function><constant>\n')
-                        fo.write('<real>%.2f</real>\n' % (criteria[g]['thresholds']['veto'][0]) )
-                        fo.write('</constant></function>\n')                       
-                    fo.write('</threshold>\n')
-            except:
-                pass
-            fo.write('</thresholds>\n')
-            fo.write('</criterionFunction>\n')
-            fo.write('</criterion>\n')
-        fo.write('<majorityThreshold><value><real>0.5</real></value></majorityThreshold>\n')
-        fo.write('</criteria>\n')
+    #         except:
+    #             pass
+    #         try:
+    #             if criteria[g]['thresholds']['weakPreference'] != None:
+    #                 fo.write('<threshold><type>weakPreference</type>\n')
+    #                 if criteria[g]['thresholds']['weakPreference'][1] != Decimal('0.0'):
+    #                     fo.write('<function><linear>\n')
+    #                     fo.write('<slope><real>%.2f</real></slope>\n' % (pdir*criteria[g]['thresholds']['weakPreference'][1]) )
+    #                     fo.write('<intercept><real>%.2f</real></intercept>\n' % (criteria[g]['thresholds']['weakPreference'][0]) )
+    #                     fo.write('</linear></function>\n')
+    #                 else:
+    #                     fo.write('<function><constant>\n')
+    #                     fo.write('<real>%.2f</real>\n' % (criteria[g]['thresholds']['weakPreference'][0]) )
+    #                     fo.write('</constant></function>\n')                       
+    #                 fo.write('</threshold>\n')
+    #         except:
+    #             pass
+    #         try:
+    #             if criteria[g]['thresholds']['pref'] != None:
+    #                 fo.write('<threshold><type>pref</type>\n')
+    #                 if criteria[g]['thresholds']['pref'][1] != Decimal('0.0'):
+    #                     fo.write('<function><linear>\n')
+    #                     fo.write('<slope><real>%.2f</real></slope>\n' % (pdir*criteria[g]['thresholds']['pref'][1]) )
+    #                     fo.write('<intercept><real>%.2f</real></intercept>\n' % (criteria[g]['thresholds']['pref'][0]) )
+    #                     fo.write('</linear></function>\n')
+    #                 else:
+    #                     fo.write('<function><constant>\n')
+    #                     fo.write('<real>%.2f</real>\n' % (criteria[g]['thresholds']['pref'][0]) )
+    #                     fo.write('</constant></function>\n')                       
+    #                 fo.write('</threshold>\n')
+    #         except:
+    #             pass
+    #         try:
+    #             if criteria[g]['thresholds']['weakVeto'] != None:
+    #                 fo.write('<threshold><type>weakVeto</type>\n')
+    #                 if criteria[g]['thresholds']['weakVeto'][1] != Decimal('0.0'):
+    #                     fo.write('<function><linear>\n')
+    #                     fo.write('<slope><real>%.2f</real></slope>\n' % (pdir*criteria[g]['thresholds']['weakVeto'][1]) )
+    #                     fo.write('<intercept><real>%.2f</real></intercept>\n' % (criteria[g]['thresholds']['weakVeto'][0]) )
+    #                     fo.write('</linear></function>\n')
+    #                 else:
+    #                     fo.write('<function><constant>\n')
+    #                     fo.write('<real>%.2f</real>\n' % (criteria[g]['thresholds']['weakVeto'][0]) )
+    #                     fo.write('</constant></function>\n')                       
+    #                 fo.write('</threshold>\n')
+    #         except:
+    #             pass
+    #         try:
+    #             if criteria[g]['thresholds']['veto'] != None:
+    #                 fo.write('<threshold><type>veto</type>\n')
+    #                 if criteria[g]['thresholds']['veto'][1] != Decimal('0.0'):
+    #                     fo.write('<function><linear>\n')
+    #                     fo.write('<slope><real>%.2f</real></slope>\n' % (pdir*criteria[g]['thresholds']['veto'][1]) )
+    #                     fo.write('<intercept><real>%.2f</real></intercept>\n' % (criteria[g]['thresholds']['veto'][0]) )
+    #                     fo.write('</linear></function>\n')
+    #                 else:
+    #                     fo.write('<function><constant>\n')
+    #                     fo.write('<real>%.2f</real>\n' % (criteria[g]['thresholds']['veto'][0]) )
+    #                     fo.write('</constant></function>\n')                       
+    #                 fo.write('</threshold>\n')
+    #         except:
+    #             pass
+    #         fo.write('</thresholds>\n')
+    #         fo.write('</criterionFunction>\n')
+    #         fo.write('</criterion>\n')
+    #     fo.write('<majorityThreshold><value><real>0.5</real></value></majorityThreshold>\n')
+    #     fo.write('</criteria>\n')
         
-        # save performance table
-        evaluation = self.evaluation
-        fo.write('<performanceTable>\n')
-        fo.write('<description>\n')
-        fo.write('<title>Rubis Performance Table</title>\n')
-        fo.write('<type>%s</type>\n' % ('performanceTable'))            
-        fo.write('</description>\n')
-        for g in criteriaList:
-            fo.write('<criterionEvaluations>\n')
-            fo.write('<criterionID>'+str(g)+'</criterionID>\n')
-            try:
-                if self.criteria[g]['preferenceDirection'] == 'min':
-                    pdir = Decimal('-1')
-                else:
-                    pdir = Decimal('1')
-            except:
-                pdir = Decimal('1')
-            for i in range(len(origActionsList)):
-                fo.write('<evaluation>\n')
-                fo.write('<alternativeID>')       
-                fo.write(str(origActionsList[i]))
-                fo.write('</alternativeID>\n')                    
-                fo.write('<value><real>')
-                fo.write('%.2f' % (pdir*evaluation[g][origActionsList[i]]) )
-                fo.write('</real></value>\n')
-                fo.write('</evaluation>\n')
-            fo.write('</criterionEvaluations>\n')
-        fo.write('</performanceTable>\n')        
+    #     # save performance table
+    #     evaluation = self.evaluation
+    #     fo.write('<performanceTable>\n')
+    #     fo.write('<description>\n')
+    #     fo.write('<title>Rubis Performance Table</title>\n')
+    #     fo.write('<type>%s</type>\n' % ('performanceTable'))            
+    #     fo.write('</description>\n')
+    #     for g in criteriaList:
+    #         fo.write('<criterionEvaluations>\n')
+    #         fo.write('<criterionID>'+str(g)+'</criterionID>\n')
+    #         try:
+    #             if self.criteria[g]['preferenceDirection'] == 'min':
+    #                 pdir = Decimal('-1')
+    #             else:
+    #                 pdir = Decimal('1')
+    #         except:
+    #             pdir = Decimal('1')
+    #         for i in range(len(origActionsList)):
+    #             fo.write('<evaluation>\n')
+    #             fo.write('<alternativeID>')       
+    #             fo.write(str(origActionsList[i]))
+    #             fo.write('</alternativeID>\n')                    
+    #             fo.write('<value><real>')
+    #             fo.write('%.2f' % (pdir*evaluation[g][origActionsList[i]]) )
+    #             fo.write('</real></value>\n')
+    #             fo.write('</evaluation>\n')
+    #         fo.write('</criterionEvaluations>\n')
+    #     fo.write('</performanceTable>\n')        
 
-        # criteria ordinal correlation analysis
-        if category != 'Robust Rubis':
-            corr,d = selfOrig.computeCriteriaCorrelations()
-            criteriaList = [x for x in self.criteria]
-            cn = len(criteriaList)
-            criteriaList.sort()
-            criteria = self.criteria
-            fo.write('<relationOnCriteria>\n')
-            fo.write('<description>\n')
-            fo.write('<title>%s</title>\n' % ('Ordinal Criteria Correlation Index'))
-            fo.write('<type>%s</type>\n' % ('correlationTable') )
-            fo.write('<comment>%s</comment>\n' % ('Generalisation of Kendall&apos;s &#964; to nested homogeneous semiorders.') )
-            fo.write('</description>\n')
-            fo.write('<arcs>\n')
-            for ci in range(cn):
-                for cj in range(cn):
-                    fo.write('<arc>\n')        
-                    fo.write('<from><criterionID>')
-                    fo.write(str(criteriaList[ci]))
-                    fo.write('</criterionID></from>\n')                       
-                    fo.write('<to><criterionID>')
-                    fo.write(str(criteriaList[cj]))
-                    fo.write('</criterionID></to>\n')                                             
-                    fo.write('<value><real>%2.2f' % (corr[criteriaList[ci]][criteriaList[cj]]) )
-                    fo.write('</real></value>\n')                       
-                    fo.write('</arc>\n')               
-            fo.write('</arcs>\n')
-            fo.write('</relationOnCriteria>\n')
+    #     # criteria ordinal correlation analysis
+    #     if category != 'Robust Rubis':
+    #         corr,d = selfOrig.computeCriteriaCorrelations()
+    #         criteriaList = [x for x in self.criteria]
+    #         cn = len(criteriaList)
+    #         criteriaList.sort()
+    #         criteria = self.criteria
+    #         fo.write('<relationOnCriteria>\n')
+    #         fo.write('<description>\n')
+    #         fo.write('<title>%s</title>\n' % ('Ordinal Criteria Correlation Index'))
+    #         fo.write('<type>%s</type>\n' % ('correlationTable') )
+    #         fo.write('<comment>%s</comment>\n' % ('Generalisation of Kendall&apos;s &#964; to nested homogeneous semiorders.') )
+    #         fo.write('</description>\n')
+    #         fo.write('<arcs>\n')
+    #         for ci in range(cn):
+    #             for cj in range(cn):
+    #                 fo.write('<arc>\n')        
+    #                 fo.write('<from><criterionID>')
+    #                 fo.write(str(criteriaList[ci]))
+    #                 fo.write('</criterionID></from>\n')                       
+    #                 fo.write('<to><criterionID>')
+    #                 fo.write(str(criteriaList[cj]))
+    #                 fo.write('</criterionID></to>\n')                                             
+    #                 fo.write('<value><real>%2.2f' % (corr[criteriaList[ci]][criteriaList[cj]]) )
+    #                 fo.write('</real></value>\n')                       
+    #                 fo.write('</arc>\n')               
+    #         fo.write('</arcs>\n')
+    #         fo.write('</relationOnCriteria>\n')
         
-        # outranking digraph
-        fo.write('<relationOnAlternatives>\n')
-        if category != 'Robust Rubis':
-            fo.write('<description>\n')
-            fo.write('<title>%s</title>\n' % ('Bipolar-valued Outranking Relation'))
-            fo.write('<name>%s</name>\n' % (relationName) )
-            fo.write('<type>%s</type>\n' % ('outrankingDigraph'))
-            fo.write('<comment>%s %s Relation</comment>\n' % (category,subcategory) )
-        else:
-            fo.write('<description>\n')
-            fo.write('<title>%s</title>\n' % ('Outranking Robustness Relation'))
-            fo.write('<name>%s</name>\n' % (relationName) )
-            fo.write('<type>%s</type>\n' % ('outrankingDigraph'))
-            fo.write('<comment>%s %s Relation</comment>\n' % (category,subcategory) )
+    #     # outranking digraph
+    #     fo.write('<relationOnAlternatives>\n')
+    #     if category != 'Robust Rubis':
+    #         fo.write('<description>\n')
+    #         fo.write('<title>%s</title>\n' % ('Bipolar-valued Outranking Relation'))
+    #         fo.write('<name>%s</name>\n' % (relationName) )
+    #         fo.write('<type>%s</type>\n' % ('outrankingDigraph'))
+    #         fo.write('<comment>%s %s Relation</comment>\n' % (category,subcategory) )
+    #     else:
+    #         fo.write('<description>\n')
+    #         fo.write('<title>%s</title>\n' % ('Outranking Robustness Relation'))
+    #         fo.write('<name>%s</name>\n' % (relationName) )
+    #         fo.write('<type>%s</type>\n' % ('outrankingDigraph'))
+    #         fo.write('<comment>%s %s Relation</comment>\n' % (category,subcategory) )
             
-        fo.write('</description>\n')                  
-        fo.write('<valuationDomain>\n')
-        fo.write('<description>\n')
-        fo.write('<subTitle>%s</subTitle>\n' % ('Valuation Domain'))
-        fo.write('</description>\n')
-        fo.write('<valuationType>%s</valuationType>\n' % (valuationType) )
-        Max = self.valuationdomain['max']
-        Min = self.valuationdomain['min']
-        if category == 'Robust Rubis':        
-            fo.write('<minimum><real>%d</real></minimum>\n' % (Min))
-            fo.write('<maximum><real>%d</real></maximum>\n' % (Max))
-        else:
-            fo.write('<minimum><real>%2.2f</real></minimum>\n' % (Min))
-            fo.write('<maximum><real>%2.2f</real></maximum>\n' % (Max))            
-        fo.write('</valuationDomain>\n')
-        fo.write('<arcs>\n')
-        fo.write('<description>\n')
-        fo.write('<subTitle>%s</subTitle>\n' % ('Valued Adjacency Table'))
-        try:
-            category = self.category
-            subcategory = self.subcategory
-        except:
-            pass
-        fo.write('<comment>%s %s</comment>\n' % (category,subcategory) )
-        fo.write('</description>\n')                  
-        relation = self.relation
-        for x in origActionsList:
-            for y in origActionsList:
-                fo.write('<arc>\n')        
-                fo.write('<from><alternativeID>')
-                fo.write(str(x))
-                fo.write('</alternativeID></from>\n')                       
-                fo.write('<to><alternativeID>')
-                fo.write(str(y))
-                fo.write('</alternativeID></to>\n')
-                try:
-                    if self.methodData['parameter']['valuationType'] == 'integer':
-                        fo.write('<value><integer>%d</integer></value>' % (relation[x][y]) )
-                    elif category == 'Robust Rubis':
-                        fo.write('<value><integer>%d</integer></value>' % (relation[x][y]) )
-                    else:
-                        fo.write('<value><real>%2.2f</real></value>' % (relation[x][y]) )
-                except:
-                    if category == 'Robust Rubis':
-                        fo.write('<value><integer>%d' % (int(relation[x][y])) )
-                        fo.write('</integer></value>\n') 
-                    else:
-                        fo.write('<value><real>%2.2f' % (relation[x][y]) )
-                        fo.write('</real></value>\n')                       
-                fo.write('</arc>\n')
-        fo.write('</arcs>\n')
-        fo.write('</relationOnAlternatives>\n')     
+    #     fo.write('</description>\n')                  
+    #     fo.write('<valuationDomain>\n')
+    #     fo.write('<description>\n')
+    #     fo.write('<subTitle>%s</subTitle>\n' % ('Valuation Domain'))
+    #     fo.write('</description>\n')
+    #     fo.write('<valuationType>%s</valuationType>\n' % (valuationType) )
+    #     Max = self.valuationdomain['max']
+    #     Min = self.valuationdomain['min']
+    #     if category == 'Robust Rubis':        
+    #         fo.write('<minimum><real>%d</real></minimum>\n' % (Min))
+    #         fo.write('<maximum><real>%d</real></maximum>\n' % (Max))
+    #     else:
+    #         fo.write('<minimum><real>%2.2f</real></minimum>\n' % (Min))
+    #         fo.write('<maximum><real>%2.2f</real></maximum>\n' % (Max))            
+    #     fo.write('</valuationDomain>\n')
+    #     fo.write('<arcs>\n')
+    #     fo.write('<description>\n')
+    #     fo.write('<subTitle>%s</subTitle>\n' % ('Valued Adjacency Table'))
+    #     try:
+    #         category = self.category
+    #         subcategory = self.subcategory
+    #     except:
+    #         pass
+    #     fo.write('<comment>%s %s</comment>\n' % (category,subcategory) )
+    #     fo.write('</description>\n')                  
+    #     relation = self.relation
+    #     for x in origActionsList:
+    #         for y in origActionsList:
+    #             fo.write('<arc>\n')        
+    #             fo.write('<from><alternativeID>')
+    #             fo.write(str(x))
+    #             fo.write('</alternativeID></from>\n')                       
+    #             fo.write('<to><alternativeID>')
+    #             fo.write(str(y))
+    #             fo.write('</alternativeID></to>\n')
+    #             try:
+    #                 if self.methodData['parameter']['valuationType'] == 'integer':
+    #                     fo.write('<value><integer>%d</integer></value>' % (relation[x][y]) )
+    #                 elif category == 'Robust Rubis':
+    #                     fo.write('<value><integer>%d</integer></value>' % (relation[x][y]) )
+    #                 else:
+    #                     fo.write('<value><real>%2.2f</real></value>' % (relation[x][y]) )
+    #             except:
+    #                 if category == 'Robust Rubis':
+    #                     fo.write('<value><integer>%d' % (int(relation[x][y])) )
+    #                     fo.write('</integer></value>\n') 
+    #                 else:
+    #                     fo.write('<value><real>%2.2f' % (relation[x][y]) )
+    #                     fo.write('</real></value>\n')                       
+    #             fo.write('</arc>\n')
+    #     fo.write('</arcs>\n')
+    #     fo.write('</relationOnAlternatives>\n')     
 
-        # vetos if any
-        try:
-            vetos = self.vetos
-            if vetos != []:
-                Med = self.valuationdomain['med']
-                fo.write('<relationOnAlternatives>\n')
-                fo.write('<description>\n')
-                fo.write('<title>%s</title>\n' % ('Vetoes'))
-                fo.write('<type>%s</type>\n' % ('Vetoes'))
-                fo.write('</description>\n')                  
-                fo.write('<arcs>\n')
-                fo.write('<description>\n')
-                fo.write('<subTitle>%s</subTitle>\n' % ('Effective and potential veto situations'))
-                fo.write('</description>\n')                  
-                for veto in vetos:
-                    arc = veto[0]
-                    fo.write('<arc>\n')
-                    fo.write('<description>\n')
-                    fo.write('<comment>concordance degree:%.2f</comment>\n' % (arc[2]) )
-                    fo.write('</description>\n')
-                    fo.write('<from><alternativeID>')
-                    fo.write(str(arc[0]))
-                    fo.write('</alternativeID></from>\n')                       
-                    fo.write('<to><alternativeID>')
-                    fo.write(str(arc[1]))
-                    fo.write('</alternativeID></to>\n')                                             
-                    situations = veto[1]
-                    for v in situations:
-                        fo.write('<values>\n')
-                        fo.write('<description>\n')
-                        fo.write('<id>')
-                        fo.write(str(v[0]))
-                        fo.write('</id>\n')
-                        fo.write('<comment>')
-                        if arc[2] > Med:
-                            if v[1][0] > Decimal('0'):
-                                fo.write('effective veto')
-                            else:
-                                fo.write('effective weak veto')
-                        elif arc[2] == Med:
-                            if v[1][0] > Decimal('0'):
-                                fo.write('effective veto')
-                            else:
-                                fo.write('potential weak veto')
-                        else:
-                            if v[1][0] > Decimal('0'):
-                                fo.write('potential veto')
-                            else:
-                                fo.write('potential weak veto')                   
-                        fo.write('</comment>\n')
-                        fo.write('</description>\n')
-                        fo.write('<value>\n')
-                        fo.write('<description><name>performanceDifference</name></description>\n')
-                        fo.write('<real>%.2f</real>' % (v[1][1]))
-                        fo.write('</value>\n')
-                        fo.write('<value>\n')
-                        fo.write('<description><name>vetoCharacteristic</name></description>\n')
-                        fo.write('<real>%.2f</real>' % (v[1][0]))
-                        fo.write('</value>\n')
-                        fo.write('</values>\n')
-                    fo.write('</arc>\n')
-                fo.write('</arcs>\n')
-                fo.write('</relationOnAlternatives>\n') 
-        except:
-            pass
+    #     # vetos if any
+    #     try:
+    #         vetos = self.vetos
+    #         if vetos != []:
+    #             Med = self.valuationdomain['med']
+    #             fo.write('<relationOnAlternatives>\n')
+    #             fo.write('<description>\n')
+    #             fo.write('<title>%s</title>\n' % ('Vetoes'))
+    #             fo.write('<type>%s</type>\n' % ('Vetoes'))
+    #             fo.write('</description>\n')                  
+    #             fo.write('<arcs>\n')
+    #             fo.write('<description>\n')
+    #             fo.write('<subTitle>%s</subTitle>\n' % ('Effective and potential veto situations'))
+    #             fo.write('</description>\n')                  
+    #             for veto in vetos:
+    #                 arc = veto[0]
+    #                 fo.write('<arc>\n')
+    #                 fo.write('<description>\n')
+    #                 fo.write('<comment>concordance degree:%.2f</comment>\n' % (arc[2]) )
+    #                 fo.write('</description>\n')
+    #                 fo.write('<from><alternativeID>')
+    #                 fo.write(str(arc[0]))
+    #                 fo.write('</alternativeID></from>\n')                       
+    #                 fo.write('<to><alternativeID>')
+    #                 fo.write(str(arc[1]))
+    #                 fo.write('</alternativeID></to>\n')                                             
+    #                 situations = veto[1]
+    #                 for v in situations:
+    #                     fo.write('<values>\n')
+    #                     fo.write('<description>\n')
+    #                     fo.write('<id>')
+    #                     fo.write(str(v[0]))
+    #                     fo.write('</id>\n')
+    #                     fo.write('<comment>')
+    #                     if arc[2] > Med:
+    #                         if v[1][0] > Decimal('0'):
+    #                             fo.write('effective veto')
+    #                         else:
+    #                             fo.write('effective weak veto')
+    #                     elif arc[2] == Med:
+    #                         if v[1][0] > Decimal('0'):
+    #                             fo.write('effective veto')
+    #                         else:
+    #                             fo.write('potential weak veto')
+    #                     else:
+    #                         if v[1][0] > Decimal('0'):
+    #                             fo.write('potential veto')
+    #                         else:
+    #                             fo.write('potential weak veto')                   
+    #                     fo.write('</comment>\n')
+    #                     fo.write('</description>\n')
+    #                     fo.write('<value>\n')
+    #                     fo.write('<description><name>performanceDifference</name></description>\n')
+    #                     fo.write('<real>%.2f</real>' % (v[1][1]))
+    #                     fo.write('</value>\n')
+    #                     fo.write('<value>\n')
+    #                     fo.write('<description><name>vetoCharacteristic</name></description>\n')
+    #                     fo.write('<real>%.2f</real>' % (v[1][0]))
+    #                     fo.write('</value>\n')
+    #                     fo.write('</values>\n')
+    #                 fo.write('</arc>\n')
+    #             fo.write('</arcs>\n')
+    #             fo.write('</relationOnAlternatives>\n') 
+    #     except:
+    #         pass
    
-        # good choices
+    #     # good choices
         
-        amplitude = (Max - Min) / Decimal('100.0')
-        fo.write('<choices>\n')
-        fo.write('<description>\n')
-        fo.write('<title>%s</title>\n' % ('Rubis Choice Recommendation'))
-        fo.write('<type>%s</type>\n' % ('goodChoices'))
-        if category == 'Robust Rubis':
-            fo.write('<comment>In decreasing order of determinateness.</comment>\n')
-        else:
-            fo.write('<comment>In decreasing order of determinateness. All values expressed in %. </comment>\n')
-        fo.write('</description>\n')
-        nb = Decimal('0')
-        maxDet = Decimal('0.0')
-        for ch in self.goodChoices:
-            maxDet = max(maxDet,-ch[0])
-        for ch in self.goodChoices:
-            if ch[3] > ch[4]:
-                nb += 1
-                fo.write('<choice id="good_%d">\n' % (nb) )
-                fo.write('<description>\n')
-                fo.write('<type>%s</type>\n' % ('goodChoice'))
-                if category == 'Robust Rubis':
-                    determ = (-ch[0]*Decimal('6')) - Decimal('3')
-                    if determ > Decimal('1'):
-                        fo.write('<comment>Robust good choice</comment>\n')
-                    else:
-                        fo.write('<comment>Potential good choice</comment>\n')
-                else:
-                    if maxDet == -ch[0]:
-                        fo.write('<comment>Best choice</comment>\n')
-                    else:
-                        fo.write('<comment>Potential good choice</comment>\n')                    
-                fo.write('</description>\n')
-                fo.write('<choiceMembersList>\n')
-                for x in ch[5]:
-                    fo.write('<choiceMember>\n')
-                    fo.write('<alternativeID>')
-                    if isinstance(x,frozenset):
-                        fo.write(str(self.actions[x]['name']))
-                    else:
-                        fo.write(str(x))
-                    fo.write('</alternativeID>\n')
-                    fo.write('</choiceMember>\n')
-                fo.write('</choiceMembersList>\n')
-                if category == 'Robust Rubis':
-                    fo.write('<qualities>')
-                    independent = ch[2]
-                    fo.write('<parameter>')
-                    fo.write('<name>')
-                    fo.write('choiceSet independence')
-                    fo.write('</name>')
-                    fo.write('<value><integer>%d</integer></value>' %(independent) )
-                    fo.write('</parameter>')
-                    outranking = ch[3]
-                    fo.write('<parameter>')
-                    fo.write('<name>')
-                    fo.write('outranking')
-                    fo.write('</name>')
-                    fo.write('<value><integer>%d</integer></value>' %(outranking) )
-                    fo.write('</parameter>')
-                    outranked = ch[4]
-                    fo.write('<parameter>')
-                    fo.write('<name>')
-                    fo.write('outranked')
-                    fo.write('</name>')
-                    fo.write('<value><integer>%d</integer></value>' % (outranked) )
-                    fo.write('</parameter>')
-                    determ = (-ch[0]*Decimal('6'))-Decimal('3')
-                    fo.write('<parameter>')
-                    fo.write('<name>')
-                    fo.write('determinateness')
-                    fo.write('</name>')
-                    fo.write('<value><real>%2.2f</real></value>' % (determ)  )
-                    fo.write('</parameter>')
-                    fo.write('</qualities>')
-                else:
-                    fo.write('<qualities>')
-                    independent = (ch[2] - Min) / amplitude
-                    fo.write('<parameter>')
-                    fo.write('<name>')
-                    fo.write('choiceSet independence')
-                    fo.write('</name>')
-                    fo.write('<value><real>%2.2f</real></value>' %(independent) )
-                    fo.write('</parameter>')
-                    outranking = (ch[3] - Min) / amplitude
-                    fo.write('<parameter>')
-                    fo.write('<name>')
-                    fo.write('outranking')
-                    fo.write('</name>')
-                    fo.write('<value><real>%2.2f</real></value>' %(outranking) )
-                    fo.write('</parameter>')
-                    outranked = (ch[4] - Min) / amplitude
-                    fo.write('<parameter>')
-                    fo.write('<name>')
-                    fo.write('outranked')
-                    fo.write('</name>')
-                    fo.write('<value><real>%2.2f</real></value>' %(outranked) )
-                    fo.write('</parameter>')
-                    determ = -ch[0]*Decimal('100.0')
-                    fo.write('<parameter>')
-                    fo.write('<name>')
-                    fo.write('determinateness')
-                    fo.write('</name>')
-                    fo.write('<value><real>%2.2f</real></value>' %(determ) )
-                    fo.write('</parameter>')
-                    fo.write('</qualities>')                    
-                fo.write('</choice>\n')             
-        fo.write('</choices>\n')
+    #     amplitude = (Max - Min) / Decimal('100.0')
+    #     fo.write('<choices>\n')
+    #     fo.write('<description>\n')
+    #     fo.write('<title>%s</title>\n' % ('Rubis Choice Recommendation'))
+    #     fo.write('<type>%s</type>\n' % ('goodChoices'))
+    #     if category == 'Robust Rubis':
+    #         fo.write('<comment>In decreasing order of determinateness.</comment>\n')
+    #     else:
+    #         fo.write('<comment>In decreasing order of determinateness. All values expressed in %. </comment>\n')
+    #     fo.write('</description>\n')
+    #     nb = Decimal('0')
+    #     maxDet = Decimal('0.0')
+    #     for ch in self.goodChoices:
+    #         maxDet = max(maxDet,-ch[0])
+    #     for ch in self.goodChoices:
+    #         if ch[3] > ch[4]:
+    #             nb += 1
+    #             fo.write('<choice id="good_%d">\n' % (nb) )
+    #             fo.write('<description>\n')
+    #             fo.write('<type>%s</type>\n' % ('goodChoice'))
+    #             if category == 'Robust Rubis':
+    #                 determ = (-ch[0]*Decimal('6')) - Decimal('3')
+    #                 if determ > Decimal('1'):
+    #                     fo.write('<comment>Robust good choice</comment>\n')
+    #                 else:
+    #                     fo.write('<comment>Potential good choice</comment>\n')
+    #             else:
+    #                 if maxDet == -ch[0]:
+    #                     fo.write('<comment>Best choice</comment>\n')
+    #                 else:
+    #                     fo.write('<comment>Potential good choice</comment>\n')                    
+    #             fo.write('</description>\n')
+    #             fo.write('<choiceMembersList>\n')
+    #             for x in ch[5]:
+    #                 fo.write('<choiceMember>\n')
+    #                 fo.write('<alternativeID>')
+    #                 if isinstance(x,frozenset):
+    #                     fo.write(str(self.actions[x]['name']))
+    #                 else:
+    #                     fo.write(str(x))
+    #                 fo.write('</alternativeID>\n')
+    #                 fo.write('</choiceMember>\n')
+    #             fo.write('</choiceMembersList>\n')
+    #             if category == 'Robust Rubis':
+    #                 fo.write('<qualities>')
+    #                 independent = ch[2]
+    #                 fo.write('<parameter>')
+    #                 fo.write('<name>')
+    #                 fo.write('choiceSet independence')
+    #                 fo.write('</name>')
+    #                 fo.write('<value><integer>%d</integer></value>' %(independent) )
+    #                 fo.write('</parameter>')
+    #                 outranking = ch[3]
+    #                 fo.write('<parameter>')
+    #                 fo.write('<name>')
+    #                 fo.write('outranking')
+    #                 fo.write('</name>')
+    #                 fo.write('<value><integer>%d</integer></value>' %(outranking) )
+    #                 fo.write('</parameter>')
+    #                 outranked = ch[4]
+    #                 fo.write('<parameter>')
+    #                 fo.write('<name>')
+    #                 fo.write('outranked')
+    #                 fo.write('</name>')
+    #                 fo.write('<value><integer>%d</integer></value>' % (outranked) )
+    #                 fo.write('</parameter>')
+    #                 determ = (-ch[0]*Decimal('6'))-Decimal('3')
+    #                 fo.write('<parameter>')
+    #                 fo.write('<name>')
+    #                 fo.write('determinateness')
+    #                 fo.write('</name>')
+    #                 fo.write('<value><real>%2.2f</real></value>' % (determ)  )
+    #                 fo.write('</parameter>')
+    #                 fo.write('</qualities>')
+    #             else:
+    #                 fo.write('<qualities>')
+    #                 independent = (ch[2] - Min) / amplitude
+    #                 fo.write('<parameter>')
+    #                 fo.write('<name>')
+    #                 fo.write('choiceSet independence')
+    #                 fo.write('</name>')
+    #                 fo.write('<value><real>%2.2f</real></value>' %(independent) )
+    #                 fo.write('</parameter>')
+    #                 outranking = (ch[3] - Min) / amplitude
+    #                 fo.write('<parameter>')
+    #                 fo.write('<name>')
+    #                 fo.write('outranking')
+    #                 fo.write('</name>')
+    #                 fo.write('<value><real>%2.2f</real></value>' %(outranking) )
+    #                 fo.write('</parameter>')
+    #                 outranked = (ch[4] - Min) / amplitude
+    #                 fo.write('<parameter>')
+    #                 fo.write('<name>')
+    #                 fo.write('outranked')
+    #                 fo.write('</name>')
+    #                 fo.write('<value><real>%2.2f</real></value>' %(outranked) )
+    #                 fo.write('</parameter>')
+    #                 determ = -ch[0]*Decimal('100.0')
+    #                 fo.write('<parameter>')
+    #                 fo.write('<name>')
+    #                 fo.write('determinateness')
+    #                 fo.write('</name>')
+    #                 fo.write('<value><real>%2.2f</real></value>' %(determ) )
+    #                 fo.write('</parameter>')
+    #                 fo.write('</qualities>')                    
+    #             fo.write('</choice>\n')             
+    #     fo.write('</choices>\n')
 
-        # bad choices if any
+    #     # bad choices if any
 
-        if self.badChoices != []:
-            #amplitude = float(Max - Min)/float(100.0)
-            fo.write('<choices>\n')
-            fo.write('<description>\n')
-            fo.write('<subTitle>%s</subTitle>\n' % ('Potentially Bad Choices'))
-            fo.write('<type>%s</type>\n' % ('badChoices'))
-            if category != 'Robust Rubis':
-                fo.write('<comment>All values expressed in %.</comment>\n')
-            fo.write('</description>\n')
-            nb = 0
-            for ch in self.badChoices:
-                if ch[3] <= ch[4]: 
-                    nb += 1
-                    fo.write('<choice id="bad_%d">\n' % (nb) )
-                    fo.write('<description>\n')
-                    fo.write('<type>%s</type>\n' % ('badChoice'))
-                    if category == 'Robust Rubis':
-                        determ = (-ch[0]*Decimal('6'))-Decimal('3')
-                        if determ > Decimal('1'):
-                            fo.write('<comment>Robust bad choice</comment>\n')
-                        else:
-                            fo.write('<comment>Potential bad choice</comment>\n')
-                    else:
-                        if ch[4] > ch[3]:
-                            fo.write('<comment>Bad choice</comment>\n')
-                        else:
-                            fo.write('<comment>Ambiguous choice</comment>\n')
-                    fo.write('</description>\n')
-                    fo.write('<choiceMembersList>\n')
-                    for x in ch[5]:
-                        fo.write('<choiceMember>\n')
-                        fo.write('<alternativeID>')
-                        if isinstance(x,frozenset):
-                            fo.write(str(self.actions[x]['name']))
-                        else:
-                            fo.write(str(x))
-                        fo.write('</alternativeID>\n')
-                        fo.write('</choiceMember>\n')
-                    fo.write('</choiceMembersList>\n')
-                    if category == 'Robust Rubis':
-                        fo.write('<qualities>')
-                        independent = ch[2]
-                        fo.write('<parameter>')
-                        fo.write('<name>')
-                        fo.write('choiceSet independence')
-                        fo.write('</name>')
-                        fo.write('<value><integer>%d</integer></value>' %(independent) )
-                        fo.write('</parameter>')
-                        outranking = ch[3]
-                        fo.write('<parameter>')
-                        fo.write('<name>')
-                        fo.write('outranking')
-                        fo.write('</name>')
-                        fo.write('<value><integer>%d</integer></value>' %(outranking) )
-                        fo.write('</parameter>')
-                        outranked = ch[4]
-                        fo.write('<parameter>')
-                        fo.write('<name>')
-                        fo.write('outranked')
-                        fo.write('</name>')
-                        fo.write('<value><integer>%d</integer></value>' %(outranked) )
-                        fo.write('</parameter>')
-                        determ = (-ch[0]*Decimal('6')) - Decimal('3')
-                        fo.write('<parameter>')
-                        fo.write('<name>')
-                        fo.write('determinateness')
-                        fo.write('</name>')
-                        fo.write('<value><real>%2.2f</real></value>' %(determ) )
-                        fo.write('</parameter>')
-                        fo.write('</qualities>')
-                    else:
-                        fo.write('<qualities>')
-                        independent = (ch[2] - Min)/amplitude
-                        fo.write('<parameter>')
-                        fo.write('<name>')
-                        fo.write('choiceSet independence')
-                        fo.write('</name>')
-                        fo.write('<value><real>%2.2f</real></value>' %(independent) )
-                        fo.write('</parameter>')
-                        outranking = (ch[3] - Min)/amplitude
-                        fo.write('<parameter>')
-                        fo.write('<name>')
-                        fo.write('outranking')
-                        fo.write('</name>')
-                        fo.write('<value><real>%2.2f</real></value>' %(outranking) )
-                        fo.write('</parameter>')
-                        outranked = (ch[4] - Min)/amplitude
-                        fo.write('<parameter>')
-                        fo.write('<name>')
-                        fo.write('outranked')
-                        fo.write('</name>')
-                        fo.write('<value><real>%2.2f</real></value>' %(outranked) )
-                        fo.write('</parameter>')
-                        determ = -ch[0]*Decimal('100.0')
-                        fo.write('<parameter>')
-                        fo.write('<name>')
-                        fo.write('determinateness')
-                        fo.write('</name>')
-                        fo.write('<value><real>%2.2f</real></value>' %(determ) )
-                        fo.write('</parameter>')
-                        fo.write('</qualities>')                    
-                    fo.write('</choice>\n')             
-            fo.write('</choices>\n')
+    #     if self.badChoices != []:
+    #         #amplitude = float(Max - Min)/float(100.0)
+    #         fo.write('<choices>\n')
+    #         fo.write('<description>\n')
+    #         fo.write('<subTitle>%s</subTitle>\n' % ('Potentially Bad Choices'))
+    #         fo.write('<type>%s</type>\n' % ('badChoices'))
+    #         if category != 'Robust Rubis':
+    #             fo.write('<comment>All values expressed in %.</comment>\n')
+    #         fo.write('</description>\n')
+    #         nb = 0
+    #         for ch in self.badChoices:
+    #             if ch[3] <= ch[4]: 
+    #                 nb += 1
+    #                 fo.write('<choice id="bad_%d">\n' % (nb) )
+    #                 fo.write('<description>\n')
+    #                 fo.write('<type>%s</type>\n' % ('badChoice'))
+    #                 if category == 'Robust Rubis':
+    #                     determ = (-ch[0]*Decimal('6'))-Decimal('3')
+    #                     if determ > Decimal('1'):
+    #                         fo.write('<comment>Robust bad choice</comment>\n')
+    #                     else:
+    #                         fo.write('<comment>Potential bad choice</comment>\n')
+    #                 else:
+    #                     if ch[4] > ch[3]:
+    #                         fo.write('<comment>Bad choice</comment>\n')
+    #                     else:
+    #                         fo.write('<comment>Ambiguous choice</comment>\n')
+    #                 fo.write('</description>\n')
+    #                 fo.write('<choiceMembersList>\n')
+    #                 for x in ch[5]:
+    #                     fo.write('<choiceMember>\n')
+    #                     fo.write('<alternativeID>')
+    #                     if isinstance(x,frozenset):
+    #                         fo.write(str(self.actions[x]['name']))
+    #                     else:
+    #                         fo.write(str(x))
+    #                     fo.write('</alternativeID>\n')
+    #                     fo.write('</choiceMember>\n')
+    #                 fo.write('</choiceMembersList>\n')
+    #                 if category == 'Robust Rubis':
+    #                     fo.write('<qualities>')
+    #                     independent = ch[2]
+    #                     fo.write('<parameter>')
+    #                     fo.write('<name>')
+    #                     fo.write('choiceSet independence')
+    #                     fo.write('</name>')
+    #                     fo.write('<value><integer>%d</integer></value>' %(independent) )
+    #                     fo.write('</parameter>')
+    #                     outranking = ch[3]
+    #                     fo.write('<parameter>')
+    #                     fo.write('<name>')
+    #                     fo.write('outranking')
+    #                     fo.write('</name>')
+    #                     fo.write('<value><integer>%d</integer></value>' %(outranking) )
+    #                     fo.write('</parameter>')
+    #                     outranked = ch[4]
+    #                     fo.write('<parameter>')
+    #                     fo.write('<name>')
+    #                     fo.write('outranked')
+    #                     fo.write('</name>')
+    #                     fo.write('<value><integer>%d</integer></value>' %(outranked) )
+    #                     fo.write('</parameter>')
+    #                     determ = (-ch[0]*Decimal('6')) - Decimal('3')
+    #                     fo.write('<parameter>')
+    #                     fo.write('<name>')
+    #                     fo.write('determinateness')
+    #                     fo.write('</name>')
+    #                     fo.write('<value><real>%2.2f</real></value>' %(determ) )
+    #                     fo.write('</parameter>')
+    #                     fo.write('</qualities>')
+    #                 else:
+    #                     fo.write('<qualities>')
+    #                     independent = (ch[2] - Min)/amplitude
+    #                     fo.write('<parameter>')
+    #                     fo.write('<name>')
+    #                     fo.write('choiceSet independence')
+    #                     fo.write('</name>')
+    #                     fo.write('<value><real>%2.2f</real></value>' %(independent) )
+    #                     fo.write('</parameter>')
+    #                     outranking = (ch[3] - Min)/amplitude
+    #                     fo.write('<parameter>')
+    #                     fo.write('<name>')
+    #                     fo.write('outranking')
+    #                     fo.write('</name>')
+    #                     fo.write('<value><real>%2.2f</real></value>' %(outranking) )
+    #                     fo.write('</parameter>')
+    #                     outranked = (ch[4] - Min)/amplitude
+    #                     fo.write('<parameter>')
+    #                     fo.write('<name>')
+    #                     fo.write('outranked')
+    #                     fo.write('</name>')
+    #                     fo.write('<value><real>%2.2f</real></value>' %(outranked) )
+    #                     fo.write('</parameter>')
+    #                     determ = -ch[0]*Decimal('100.0')
+    #                     fo.write('<parameter>')
+    #                     fo.write('<name>')
+    #                     fo.write('determinateness')
+    #                     fo.write('</name>')
+    #                     fo.write('<value><real>%2.2f</real></value>' %(determ) )
+    #                     fo.write('</parameter>')
+    #                     fo.write('</qualities>')                    
+    #                 fo.write('</choice>\n')             
+    #         fo.write('</choices>\n')
 
-        # end of XMCDA file
-        fo.write('</xmcda:XMCDA>\n')
+    #     # end of XMCDA file
+    #     fo.write('</xmcda:XMCDA>\n')
         
-        fo.close()
+    #     fo.close()
         
-        if comment:
-            print('File: ' + nameExt + ' saved !')
+    #     if comment:
+    #         print('File: ' + nameExt + ' saved !')
 
 #####    XMCDA 2.0            
 
@@ -3542,6 +3558,7 @@ class OutrankingDigraph(Digraph,PerformanceTableau):
         
         # save performance table
         evaluation = self.evaluation
+        NA = self.NA
         fo.write('<performanceTable mcdaConcept="%s">\n' %('performanceTable') )
         fo.write('<description>\n')
         fo.write('<title>Rubis Performance Table</title>\n')            
@@ -3555,7 +3572,7 @@ class OutrankingDigraph(Digraph,PerformanceTableau):
                 fo.write(g)
                 fo.write('</criterionID>\n')
                 val = evaluation[g][origActionsList[i]]
-                if val == Decimal('-999'):
+                if val == NA:
                     fo.write('<value><NA>')
                     fo.write('%s' % stringNA )
                     fo.write('</NA></value>\n')
@@ -4027,6 +4044,7 @@ class _Electre3OutrankingDigraph(OutrankingDigraph):
         of a given performance tableau instantiation PerfTab.
         """
         actions = self.actions
+        NA = self.NA
         totalweight = Decimal('0.0')
         for c in criteria:
             totalweight = totalweight + abs(criteria[c]['weight'])
@@ -4042,7 +4060,7 @@ class _Electre3OutrankingDigraph(OutrankingDigraph):
                     counter = Decimal('0.0')
                     veto = {}
                     for c in criteria:
-                        if evaluation[c][a] != Decimal('-999') and evaluation[c][b] != Decimal('-999'):		
+                        if evaluation[c][a] != NA and evaluation[c][b] != NA:		
                             try:
                                 ax = criteria[c]['thresholds']['ind'][0]
                                 ay = criteria[c]['thresholds']['ind'][1]
@@ -4103,43 +4121,46 @@ class _Electre3OutrankingDigraph(OutrankingDigraph):
         compute the outranking characteristic for actions x and y
         on criterion c.
         """
+        criteria = self.criteria
+        evaluation = self.evaluation
+        NA = self.NA
         if a == b:
             return Decimal("1.0")
         else:
 
-            if self.evaluation[c][a] != Decimal('-999') and self.evaluation[c][b] != Decimal('-999'):		
+            if evaluation[c][a] != NA and evaluation[c][b] != NA:		
                 try:
-                    indx = self.criteria[c]['thresholds']['ind'][0]
-                    indy = self.criteria[c]['thresholds']['ind'][1]
+                    indx = criteria[c]['thresholds']['ind'][0]
+                    indy = criteria[c]['thresholds']['ind'][1]
                     if hasSymmetricThresholds:
-                        ind = indx + indy * max(abs(self.evaluation[c][a]),abs(self.evaluation[c][b]))
+                        ind = indx + indy * max(abs(evaluation[c][a]),abs(evaluation[c][b]))
                     else:
-                        ind = indx + indy * abs(self.evaluation[c][a])
+                        ind = indx + indy * abs(evaluation[c][a])
                 except:
                     ind = Decimal("0.0")
                 try:
-                    wpx = self.criteria[c]['thresholds']['weakPreference'][0]
-                    wpy = self.criteria[c]['thresholds']['weakPreference'][1]
+                    wpx = criteria[c]['thresholds']['weakPreference'][0]
+                    wpy = criteria[c]['thresholds']['weakPreference'][1]
                     if hasSymmetricThresholds:
-                        wp = wpx + wpy * max(abs(self.evaluation[c][a]),abs(self.evaluation[c][b]))
+                        wp = wpx + wpy * max(abs(evaluation[c][a]),abs(evaluation[c][b]))
                     else:
-                        wp = wpx + wpy * abs(self.evaluation[c][a])
+                        wp = wpx + wpy * abs(evaluation[c][a])
                     ind = wp
                 except:
                     wp = None
                 try:
-                    px = self.criteria[c]['thresholds']['pref'][0]
-                    py = self.criteria[c]['thresholds']['pref'][1]
+                    px = criteria[c]['thresholds']['pref'][0]
+                    py = criteria[c]['thresholds']['pref'][1]
                     if hasSymmetricThresholds:
-                        p = px + py * max(abs(self.evaluation[c][a]),abs(self.evaluation[c][b]))
+                        p = px + py * max(abs(evaluation[c][a]),abs(evaluation[c][b]))
                     else:
-                        p = px + py * abs(self.evaluation[c][a]) 
+                        p = px + py * abs(evaluation[c][a]) 
                 except:
                     p = None
-                if self.criteria[c]['weight'] > Decimal('0.0'):
-                    d = self.evaluation[c][a] - self.evaluation[c][b]
+                if criteria[c]['weight'] > Decimal('0.0'):
+                    d = evaluation[c][a] - evaluation[c][b]
                 else:
-                    d = self.evaluation[c][b] - self.evaluation[c][a]
+                    d = evaluation[c][b] - evaluation[c][a]
                 return self._localConcordance(d,ind,wp,p)
 
             else:
@@ -4322,13 +4343,13 @@ class BipolarOutrankingDigraph(OutrankingDigraph):
                 reprString += 'Uncertainty model  : %s(a=%.1f,b=%.1f)\n' %\
                     (self.distribution,self.betaParameter,self.betaParameter)
             else:
-                reprString += 'Uncertainty model  : %s(a=%s,b=%s\n) ' %\
+                reprString += 'Uncertainty model    : %s(a=%s,b=%s)\n' %\
                              (self.distribution,'0','2w') 
-            reprString += 'Likelihood domain  : [-1.0;+1.0]\n'
-            reprString += 'Confidence level   : %.2f (%.1f%%\n)' %\
+            reprString += 'Likelihood domain    : [-1.0;+1.0]\n'
+            reprString += 'Confidence level     : %.2f (%.1f%%)\n' %\
                          (self.bipolarConfidenceLevel,\
                          (self.bipolarConfidenceLevel+1.0)/2.0*100.0)
-            reprString += 'Confident majority : %.2f (%.1f%%)\n' %\
+            reprString += 'Confident majority   : %.2f (%.1f%%)\n' %\
                 (self.confidenceCutLevel,\
                 (self.confidenceCutLevel+Decimal('1.0'))/Decimal('2.0')*Decimal('100.0'))
         except:
@@ -4338,7 +4359,7 @@ class BipolarOutrankingDigraph(OutrankingDigraph):
         reprString += 'Valuation domain     : [%.2f;%.2f]\n' \
             % (self.valuationdomain['min'],self.valuationdomain['max'])
         #reprString += 'Valuation domain : %s\n' % str(self.valuationdomain)
-        reprString += 'Attributes          : %s\n' % list(self.__dict__.keys())
+        reprString += 'Attributes           : %s\n' % list(self.__dict__.keys())
         try:
             val1 = self.runTimes['totalTime']
             val2 = self.runTimes['dataInput']
@@ -4529,8 +4550,10 @@ class BipolarOutrankingDigraph(OutrankingDigraph):
         # insert performance Data
         if CopyPerfTab:
             self.evaluation = deepcopy(perfTab.evaluation)
+            self.NA = deepcopy(perfTab.NA)
         else:
             self.evaluation = perfTab.evaluation
+            self.NA = perfTab.NA
         if not BigData:
             self.convertEvaluation2Decimal()
         try:
@@ -4586,42 +4609,45 @@ class BipolarOutrankingDigraph(OutrankingDigraph):
         Compute the outranking characteristic for actions x and y
         on criterion c.
         """
+        criteria = self.criteria
+        evaluation = self.evaluation
+        NA = self.NA
         if a == b:
             return Decimal("1.0")
         else:
 
-            if self.evaluation[c][a] != Decimal('-999') and self.evaluation[c][b] != Decimal('-999'):		
+            if self.evaluation[c][a] != NA and self.evaluation[c][b] != NA:		
                 try:
-                    indx = self.criteria[c]['thresholds']['ind'][0]
-                    indy = self.criteria[c]['thresholds']['ind'][1]
+                    indx = criteria[c]['thresholds']['ind'][0]
+                    indy = criteria[c]['thresholds']['ind'][1]
                     if hasSymmetricThresholds:
-                        ind = indx +indy * max(abs(self.evaluation[c][a]), abs(self.evaluation[c][b]))
+                        ind = indx +indy * max(abs(evaluation[c][a]), abs(evaluation[c][b]))
                     else:
-                        ind = indx +indy * abs(self.evaluation[c][a])
+                        ind = indx +indy * abs(evaluation[c][a])
                 except:
                     ind = None
                 try:
-                    wpx = self.criteria[c]['thresholds']['weakPreference'][0]
-                    wpy = self.criteria[c]['thresholds']['weakPreference'][1]
+                    wpx = criteria[c]['thresholds']['weakPreference'][0]
+                    wpy = criteria[c]['thresholds']['weakPreference'][1]
                     if hasSymmetricThresholds:
-                        wp = wpx + wpy * max(abs(self.evaluation[c][a]), abs(self.evaluation[c][b]))
+                        wp = wpx + wpy * max(abs(evaluation[c][a]), abs(evaluation[c][b]))
                     else:
-                        wp = wpx + wpy * abs(self.evaluation[c][a])
+                        wp = wpx + wpy * abs(evaluation[c][a])
                 except:
                     wp = None
                 try:
-                    px = self.criteria[c]['thresholds']['pref'][0]
-                    py = self.criteria[c]['thresholds']['pref'][1]
+                    px = criteria[c]['thresholds']['pref'][0]
+                    py = criteria[c]['thresholds']['pref'][1]
                     if hasSymmetricThresholds:
-                        p = px + py * max(abs(self.evaluation[c][a]), abs(self.evaluation[c][b]))
+                        p = px + py * max(abs(evaluation[c][a]), abs(evaluation[c][b]))
                     else:
-                        p = px + py * abs(self.evaluation[c][a]) 
+                        p = px + py * abs(evaluation[c][a]) 
                 except:
                     p = None
                 if self.criteria[c]['weight'] > Decimal("0.0"):
-                    d = self.evaluation[c][a] - self.evaluation[c][b]
+                    d = evaluation[c][a] - evaluation[c][b]
                 else:
-                    d = self.evaluation[c][b] - self.evaluation[c][a]
+                    d = evaluation[c][b] - evaluation[c][a]
 
                 return self._localConcordance(d,ind,wp,p)
 
@@ -4837,6 +4863,7 @@ class BipolarOutrankingDigraph(OutrankingDigraph):
         negativeVetos = []
         
         #nc = len(criteria)
+        NA = self.NA
         Max = self.valuationdomain['max']
         Med = self.valuationdomain['med']
         for a in initial:
@@ -4857,7 +4884,7 @@ class BipolarOutrankingDigraph(OutrankingDigraph):
                         evalcb = evaluation[c][b]
                         maxAB = max(abs(evalca),abs(evalcb))
                         
-                        if evalca != Decimal('-999') and evalcb != Decimal('-999'):		
+                        if evalca != NA and evalcb != NA:		
                             try:
                                 indx = crit['thresholds']['ind'][0]
                                 indy = crit['thresholds']['ind'][1]
@@ -5010,6 +5037,7 @@ class BipolarOutrankingDigraph(OutrankingDigraph):
         #nc = len(criteria)
         Max = self.valuationdomain['max']
         Med = self.valuationdomain['med']
+        NA = self.NA
         for a in initial:
             relation[a] = {}
             ra = relation[a]
@@ -5034,7 +5062,7 @@ class BipolarOutrankingDigraph(OutrankingDigraph):
                         evalca = evaluation[c][a]
                         evalcb = evaluation[c][b]
                         maxAB = max(abs(evalca),abs(evalcb))
-                        if evalca != Decimal('-999') and evalcb != Decimal('-999'):		
+                        if evalca != NA and evalcb != NA:		
                             try:
                                 indx = crit['thresholds']['ind'][0]
                                 indy = crit['thresholds']['ind'][1]
@@ -5177,7 +5205,8 @@ class BipolarOutrankingDigraph(OutrankingDigraph):
         crit = self.criteria[c]
         Min = self.valuationdomain['min']
         Max = self.valuationdomain['max']
-        if evalca != Decimal('-999') and evalcb != Decimal('-999'):		
+        NA = self.NA
+        if evalca != NA and evalcb != NA:		
             try:
                 indx = crit['thresholds']['ind'][0]
                 indy = crit['thresholds']['ind'][1]
@@ -5510,42 +5539,45 @@ class _BipolarOutrankingDigraph(OutrankingDigraph):
         Compute the outranking characteristic for actions x and y
         on criterion c.
         """
+        criterion = self.criteria[c]
+        evaluation = self.evaluation
+        NA = self.NA
         if a == b:
             return Decimal("1.0")
         else:
 
-            if self.evaluation[c][a] != Decimal('-999') and self.evaluation[c][b] != Decimal('-999'):		
+            if evaluation[c][a] != NA and evaluation[c][b] != NA:		
                 try:
-                    indx = self.criteria[c]['thresholds']['ind'][0]
-                    indy = self.criteria[c]['thresholds']['ind'][1]
+                    indx = criterion['thresholds']['ind'][0]
+                    indy = criterion['thresholds']['ind'][1]
                     if hasSymmetricThresholds:
-                        ind = indx +indy * max(abs(self.evaluation[c][a]), abs(self.evaluation[c][b]))
+                        ind = indx +indy * max(abs(evaluation[c][a]), abs(evaluation[c][b]))
                     else:
-                        ind = indx +indy * abs(self.evaluation[c][a])
+                        ind = indx +indy * abs(evaluation[c][a])
                 except:
                     ind = None
                 try:
-                    wpx = self.criteria[c]['thresholds']['weakPreference'][0]
-                    wpy = self.criteria[c]['thresholds']['weakPreference'][1]
+                    wpx = criterion['thresholds']['weakPreference'][0]
+                    wpy = criterion['thresholds']['weakPreference'][1]
                     if hasSymmetricThresholds:
-                        wp = wpx + wpy * max(abs(self.evaluation[c][a]), abs(self.evaluation[c][b]))
+                        wp = wpx + wpy * max(abs(evaluation[c][a]), abs(evaluation[c][b]))
                     else:
-                        wp = wpx + wpy * abs(self.evaluation[c][a])
+                        wp = wpx + wpy * abs(evaluation[c][a])
                 except:
                     wp = None
                 try:
                     px = self.criteria[c]['thresholds']['pref'][0]
                     py = self.criteria[c]['thresholds']['pref'][1]
                     if hasSymmetricThresholds:
-                        p = px + py * max(abs(self.evaluation[c][a]), abs(self.evaluation[c][b]))
+                        p = px + py * max(abs(evaluation[c][a]), abs(evaluation[c][b]))
                     else:
-                        p = px + py * abs(self.evaluation[c][a]) 
+                        p = px + py * abs(evaluation[c][a]) 
                 except:
                     p = None
-                if self.criteria[c]['weight'] > Decimal('0.0'):
-                    d = self.evaluation[c][a] - self.evaluation[c][b]
+                if self.criteriion['weight'] > Decimal('0.0'):
+                    d = evaluation[c][a] - evaluation[c][b]
                 else:
-                    d = self.evaluation[c][b] - self.evaluation[c][a]
+                    d = evaluation[c][b] - evaluation[c][a]
                 return self._localConcordance(d,ind,wp,p)
 
             else:
@@ -5825,6 +5857,7 @@ class _BipolarOutrankingDigraph(OutrankingDigraph):
 
         Max = self.valuationdomain['max']                                             
         Med = self.valuationdomain['med']
+        NA = self.NA
         for a in initial:
             relation[a] = {}
             concordanceRelation[a] = {}
@@ -5844,7 +5877,7 @@ class _BipolarOutrankingDigraph(OutrankingDigraph):
                         abNegativeVetos=[]
 
                     for c in criteria:
-                        if evaluation[c][a] != Decimal('-999') and evaluation[c][b] != Decimal('-999'):		
+                        if evaluation[c][a] != NA and evaluation[c][b] != NA:		
                             try:
                                 indx = criteria[c]['thresholds']['ind'][0]
                                 indy = criteria[c]['thresholds']['ind'][1]
@@ -5979,13 +6012,14 @@ class _BipolarOutrankingDigraph(OutrankingDigraph):
         Renders the characteristic value of the comparison of a and b on criterion c.
         """
         evaluation = self.evaluation
-        criteria = self.criteria
+        NA = self.NA
+        criterion = self.criteria[c]
         Min = self.valuationdomain['min']
         Max = self.valuationdomain['max']
-        if evaluation[c][a] != Decimal('-999') and evaluation[c][b] != Decimal('-999'):		
+        if evaluation[c][a] != NA and evaluation[c][b] != NA:		
             try:
-                indx = criteria[c]['thresholds']['ind'][0]
-                indy = criteria[c]['thresholds']['ind'][1]
+                indx = criterion['thresholds']['ind'][0]
+                indy = criterion['thresholds']['ind'][1]
                 if hasSymmetricThresholds:
                     ind = indx +indy * max(abs(evaluation[c][a]),abs(evaluation[c][b]))
                 else:
@@ -5993,8 +6027,8 @@ class _BipolarOutrankingDigraph(OutrankingDigraph):
             except:
                 ind = None
             try:
-                wpx = criteria[c]['thresholds']['weakPreference'][0]
-                wpy = criteria[c]['thresholds']['weakPreference'][1]
+                wpx = criterion['thresholds']['weakPreference'][0]
+                wpy = criterion['thresholds']['weakPreference'][1]
                 if hasSymmetricThresholds:
                     wp = wpx + wpy * max(abs(evaluation[c][a]),abs(evaluation[c][b]))
                 else:
@@ -6002,15 +6036,15 @@ class _BipolarOutrankingDigraph(OutrankingDigraph):
             except:
                 wp = None
             try:
-                px = criteria[c]['thresholds']['pref'][0]
-                py = criteria[c]['thresholds']['pref'][1]
+                px = criterion['thresholds']['pref'][0]
+                py = criterion['thresholds']['pref'][1]
                 if hasSymmetricThresholds:
                     p = px + py * max(abs(evaluation[c][a]),abs(evaluation[c][b]))
                 else:
                     p = px + py * abs(evaluation[c][a])
             except:
                 p = None
-            if criteria[c]['weight'] > Decimal('0'):
+            if criterion['weight'] > Decimal('0'):
                 d = evaluation[c][a] - evaluation[c][b]
             else:
                 d = evaluation[c][b] - evaluation[c][a]
@@ -6231,6 +6265,7 @@ class _BipolarPreferenceDigraph(BipolarOutrankingDigraph,PerformanceTableau):
 
         """
         actions = self.actions
+        NA = self.NA
         totalweight = Decimal('0.0')
         for c in criteria:
             totalweight = totalweight + abs(criteria[c]['weight'])
@@ -6250,10 +6285,11 @@ class _BipolarPreferenceDigraph(BipolarOutrankingDigraph,PerformanceTableau):
                     if hasBipolarVeto:
                         negativeVeto = {}
                     for c in criteria:
-                        if evaluation[c][a] != Decimal('-999') and evaluation[c][b] != Decimal('-999'):		
+                        criterion = criteria[c]
+                        if evaluation[c][a] != NA and evaluation[c][b] != NA:		
                             try:
-                                indx = criteria[c]['thresholds']['ind'][0]
-                                indy = criteria[c]['thresholds']['ind'][1]
+                                indx = criterion['thresholds']['ind'][0]
+                                indy = criterion['thresholds']['ind'][1]
                                 if hasSymmetricThresholds:
                                     ind = indx +indy * max(abs(evaluation[c][a]),abs(evaluation[c][b]))
                                 else:
@@ -6261,8 +6297,8 @@ class _BipolarPreferenceDigraph(BipolarOutrankingDigraph,PerformanceTableau):
                             except:
                                 ind = None
                             try:
-                                wpx = criteria[c]['thresholds']['weakPreference'][0]
-                                wpy = criteria[c]['thresholds']['weakPreference'][1]
+                                wpx = criterion['thresholds']['weakPreference'][0]
+                                wpy = criterion['thresholds']['weakPreference'][1]
                                 if hasSymmetricThresholds:
                                     wp = wpx + wpy * max(abs(evaluation[c][a]),abs(evaluation[c][b]))
                                 else:
@@ -6270,8 +6306,8 @@ class _BipolarPreferenceDigraph(BipolarOutrankingDigraph,PerformanceTableau):
                             except:
                                 wp = None
                             try:
-                                px = criteria[c]['thresholds']['pref'][0]
-                                py = criteria[c]['thresholds']['pref'][1]
+                                px = criterion['thresholds']['pref'][0]
+                                py = criterion['thresholds']['pref'][1]
                                 if hasSymmetricThresholds:
                                     p = px + py * max(abs(evaluation[c][a]),abs(evaluation[c][b]))
                                 else:
@@ -6279,16 +6315,16 @@ class _BipolarPreferenceDigraph(BipolarOutrankingDigraph,PerformanceTableau):
                                     
                             except:
                                 p = None
-                            if criteria[c]['weight'] > Decimal('0'):
+                            if criterion['weight'] > Decimal('0'):
                                 d = evaluation[c][a] - evaluation[c][b]
                             else:
                                 d = evaluation[c][b] - evaluation[c][a]
                             lc0 = self._localConcordance(d,ind,wp,p)
                             ## print 'c,a,b,d,ind,wp,p,lco = ',c,a,b,d, ind,wp,p,lc0
-                            concordance = concordance + (lc0 * criteria[c]['weight'])
+                            concordance = concordance + (lc0 * criterion['weight'])
                             try:
-                                wvx = criteria[c]['thresholds']['weakVeto'][0]
-                                wvy = criteria[c]['thresholds']['weakVeto'][1]
+                                wvx = criterion['thresholds']['weakVeto'][0]
+                                wvy = criterion['thresholds']['weakVeto'][1]
                                 if hasNoVeto:
                                     wv = None
                                 else:
@@ -6299,8 +6335,8 @@ class _BipolarPreferenceDigraph(BipolarOutrankingDigraph,PerformanceTableau):
                             except:
                                 wv = None
                             try:
-                                vx = criteria[c]['thresholds']['veto'][0]
-                                vy = criteria[c]['thresholds']['veto'][1]
+                                vx = criterion['thresholds']['veto'][0]
+                                vy = criterion['thresholds']['veto'][1]
                                 if hasNoVeto:
                                     v = None
                                 else:
@@ -6318,7 +6354,7 @@ class _BipolarPreferenceDigraph(BipolarOutrankingDigraph,PerformanceTableau):
                                 ## if d > wv:
                                 ##     print 'd,wv,v,negativeVeto[c]',d,wv,v,negativeVeto[c] 
                         else:
-                            concordance = concordance + Decimal('0.0') * criteria[c]['weight']
+                            concordance = concordance + Decimal('0.0') * criterion['weight']
                             veto[c] = (Decimal('-1.0'),None,None,None)
                             if hasBipolarVeto:
                                 negativeVeto[c] = (Decimal('-1.0'),None,None,None)
@@ -6379,13 +6415,14 @@ class _BipolarPreferenceDigraph(BipolarOutrankingDigraph,PerformanceTableau):
         Renders the characteristic value of the comparison of a and b on criterion c.
         """
         evaluation = self.evaluation
-        criteria = self.criteria
+        NA = self.NA
+        criterion = self.criteria[c]
         Min = self.valuationdomain['min']
         Max = self.valuationdomain['max']
-        if evaluation[c][a] != Decimal('-999') and evaluation[c][b] != Decimal('-999'):		
+        if evaluation[c][a] != NA and evaluation[c][b] != NA:		
             try:
-                indx = criteria[c]['thresholds']['ind'][0]
-                indy = criteria[c]['thresholds']['ind'][1]
+                indx = criterion['thresholds']['ind'][0]
+                indy = criterion['thresholds']['ind'][1]
                 if hasSymmetricThresholds:
                     ind = indx +indy * max(abs(evaluation[c][a]),abs(evaluation[c][b]))
                 else:
@@ -6393,8 +6430,8 @@ class _BipolarPreferenceDigraph(BipolarOutrankingDigraph,PerformanceTableau):
             except:
                 ind = None
             try:
-                wpx = criteria[c]['thresholds']['weakPreference'][0]
-                wpy = criteria[c]['thresholds']['weakPreference'][1]
+                wpx = criterion['thresholds']['weakPreference'][0]
+                wpy = criterion['thresholds']['weakPreference'][1]
                 if hasSymmetricThresholds:
                     wp = wpx + wpy * max(abs(evaluation[c][a]),abs(evaluation[c][b]))
                 else:
@@ -6402,15 +6439,15 @@ class _BipolarPreferenceDigraph(BipolarOutrankingDigraph,PerformanceTableau):
             except:
                 wp = None
             try:
-                px = criteria[c]['thresholds']['pref'][0]
-                py = criteria[c]['thresholds']['pref'][1]
+                px = criterion['thresholds']['pref'][0]
+                py = criterion['thresholds']['pref'][1]
                 if hasSymmetricThresholds:
                     p = px + py * max(abs(evaluation[c][a]),abs(evaluation[c][b]))
                 else:
                     p = px + py * abs(evaluation[c][a])
             except:
                 p = None
-            if criteria[c]['weight'] > Decimal('0'):
+            if criterion['weight'] > Decimal('0'):
                 d = evaluation[c][a] - evaluation[c][b]
             else:
                 d = evaluation[c][b] - evaluation[c][a]
@@ -6794,6 +6831,7 @@ class _BipolarIntegerOutrankingDigraph(BipolarOutrankingDigraph,PerformanceTable
         Max = self.valuationdomain['max']
         Med = self.valuationdomain['med']
         Min = self.valuationdomain['min']
+        NA = self.NA
         relation = {}
         vetos = []
         if hasBipolarVeto:
@@ -6817,10 +6855,11 @@ class _BipolarIntegerOutrankingDigraph(BipolarOutrankingDigraph,PerformanceTable
                         negativeVeto = {}
                         abNegativeVetos=[]
                     for c in criteria:
-                        if evaluation[c][a] != Decimal('-999') and evaluation[c][b] != Decimal('-999'):		
+                        criterion = criteria[c]
+                        if evaluation[c][a] != NA and evaluation[c][b] != NA:		
                             try:
-                                indx = criteria[c]['thresholds']['ind'][0]
-                                indy = criteria[c]['thresholds']['ind'][1]
+                                indx = criterion['thresholds']['ind'][0]
+                                indy = criterion['thresholds']['ind'][1]
                                 if hasSymmetricThresholds:
                                     ind = indx +indy * max(abs(evaluation[c][a]),abs(evaluation[c][b]))
                                 else:
@@ -6829,8 +6868,8 @@ class _BipolarIntegerOutrankingDigraph(BipolarOutrankingDigraph,PerformanceTable
                             except:
                                 ind = None
                             try:    
-                                wpx = criteria[c]['thresholds']['weakPreference'][0]
-                                wpy = criteria[c]['thresholds']['weakPreference'][1]
+                                wpx = criterion['thresholds']['weakPreference'][0]
+                                wpy = criterion['thresholds']['weakPreference'][1]
                                 if hasSymmetricThresholds:
                                     wp = wpx + wpy * max(abs(evaluation[c][a]),abs(evaluation[c][b]))
                                 else:
@@ -6839,8 +6878,8 @@ class _BipolarIntegerOutrankingDigraph(BipolarOutrankingDigraph,PerformanceTable
                             except:
                                 wp = None
                             try:
-                                prefx = criteria[c]['thresholds']['pref'][0]
-                                prefy = criteria[c]['thresholds']['pref'][1]
+                                prefx = criterion['thresholds']['pref'][0]
+                                prefy = criterion['thresholds']['pref'][1]
                                 if hasSymmetricThresholds:
                                     p = prefx + prefy * max(abs(evaluation[c][a]),abs(evaluation[c][b]))
                                 else:
@@ -6857,8 +6896,8 @@ class _BipolarIntegerOutrankingDigraph(BipolarOutrankingDigraph,PerformanceTable
                             #print 'a,b,c,w,d,ind,wp,p,localConcordance(d,ind,wp,p)',a,b,c,criteria[c]['weight'],d,ind,wp,p,lc0
                             concordance = concordance + (lc0 * criteria[c]['weight'])
                             try:
-                                wvx = criteria[c]['thresholds']['weakVeto'][0]
-                                wvy = criteria[c]['thresholds']['weakVeto'][1]
+                                wvx = criterion['thresholds']['weakVeto'][0]
+                                wvy = criterion['thresholds']['weakVeto'][1]
                                 if hasSymmetricThresholds:
                                     wv = wvx + wvy * max(abs(evaluation[c][a]),abs(evaluation[c][b]))
                                 else:
@@ -6866,8 +6905,8 @@ class _BipolarIntegerOutrankingDigraph(BipolarOutrankingDigraph,PerformanceTable
                             except:
                                 wv = None
                             try:
-                                vx = criteria[c]['thresholds']['veto'][0]
-                                vy = criteria[c]['thresholds']['veto'][1]
+                                vx = criterion['thresholds']['veto'][0]
+                                vy = criterion['thresholds']['veto'][1]
                                 if hasSymmetricThresholds:
                                     v = vx + vy * max(abs(evaluation[c][a]),abs(evaluation[c][b]))
                                 else:
@@ -7200,29 +7239,28 @@ class RandomBipolarOutrankingDigraph(BipolarOutrankingDigraph):
                  commonThresholds = [(10.0,0.0),(20.0,0.0),(80.0,0.0),(80.0,0.0)],
                  commonMode=('uniform',None,None),
                  hasBipolarVeto=True,
-                 Normalized=False,
+                 Normalized=True,
                  seed=None):
         # generate random performance tableau
-        import copy
-        tb = RandomPerformanceTableau(numberOfActions=numberOfActions,
-                                      numberOfCriteria=numberOfCriteria,
-                                      weightDistribution=weightDistribution,
-                                      weightScale=weightScale,
-                                      commonScale=commonScale,
-                                      commonThresholds = commonThresholds,
-                                      commonMode=commonMode,
+        from copy import deepcopy
+        tb = RandomPerformanceTableau(numberOfActions=numberOfActions,\
+                                      numberOfCriteria=numberOfCriteria,\
+                                      weightDistribution=weightDistribution,\
+                                      weightScale=weightScale,\
+                                      commonScale=commonScale,\
+                                      commonThresholds = commonThresholds,\
+                                      commonMode=commonMode,\
                                       seed=seed)
-        g = BipolarOutrankingDigraph(tb,
+        g = BipolarOutrankingDigraph(tb,Normalized=Normalized,\
                                      hasBipolarVeto=hasBipolarVeto)
-        self.name = copy.copy(g.name)
-        self.actions = copy.copy(g.actions)
-        self.criteria = copy.copy(g.criteria)
-        self.evaluation = copy.copy(g.evaluation)
-        self.relation = copy.copy(g.relation)
-        self.valuationdomain = copy.copy(g.valuationdomain)
+        self.name = deepcopy(g.name)
+        self.actions = deepcopy(g.actions)
+        self.criteria = deepcopy(g.criteria)
+        self.evaluation = deepcopy(g.evaluation)
+        self.relation = deepcopy(g.relation)
+        self.valuationdomain = deepcopy(g.valuationdomain)
+        self.NA = deepcopy(g.NA)
         self.order = len(self.actions)
-        if Normalized:
-            self.recodeValuation(-1,1)
         self.gamma = self.gammaSets()
         self.notGamma = self.notGammaSets()
 
@@ -7249,6 +7287,7 @@ class PolarisedOutrankingDigraph(PolarisedDigraph,OutrankingDigraph):
                                   AlphaCut=AlphaCut,StrictCut=StrictCut)
         self.criteria = copy.copy(digraph.criteria)
         self.evaluation = copy.copy(digraph.evaluation)
+        self.NA = copy.copy(digraph.NA)
         #self.vetos = self.computeVetos(digraph,level)
         try:
             self.vetos = copy.copy(digraph.vetos)
@@ -7392,6 +7431,7 @@ class OrdinalOutrankingDigraph(OutrankingDigraph):
         self.criteria = criteria
         self.convertWeight2Decimal()
         self.evaluation = copy.deepcopy(perfTab.evaluation)
+        self.NA = copy.deepcopy(perfTab.NA)
         self.convertEvaluation2Decimal()
         self.relation = self._constructRelation(criteria,perfTab.evaluation,hasNoVeto=hasNoVeto)
         methodData = {}
@@ -7444,6 +7484,7 @@ class OrdinalOutrankingDigraph(OutrankingDigraph):
         Min = self.valuationdomain['min']
         Max = self.valuationdomain['max']
         Med = self.valuationdomain['med']
+        NA = self.NA
         # computing weight distributions
         relation = {}
         for a in actions:
@@ -7455,10 +7496,11 @@ class OrdinalOutrankingDigraph(OutrankingDigraph):
                 for i in lsr:
                     v[i] = Decimal('0.0')
                 for c in criteria:
-                    if evaluation[c][a] != Decimal('-999') and evaluation[c][b] != Decimal('-999'):
+                    criterion = criteria[c]
+                    if evaluation[c][a] != NA and evaluation[c][b] != NA:
                         try:
-                            indx = criteria[c]['thresholds']['ind'][0]
-                            indy = criteria[c]['thresholds']['ind'][1]
+                            indx = criterion['thresholds']['ind'][0]
+                            indy = criterion['thresholds']['ind'][1]
                             if hasSymmetricThresholds:
                                 ind = indx +indy * max(abs(evaluation[c][a]),abs(evaluation[c][b]))
                             else:
@@ -7467,8 +7509,8 @@ class OrdinalOutrankingDigraph(OutrankingDigraph):
                         except:
                             ind = None
                         try:    
-                            wpx = criteria[c]['thresholds']['weakPreference'][0]
-                            wpy = criteria[c]['thresholds']['weakPreference'][1]
+                            wpx = criterion['thresholds']['weakPreference'][0]
+                            wpy = criterion['thresholds']['weakPreference'][1]
                             if hasSymmetricThresholds:
                                 wp = wpx + wpy * max(abs(evaluation[c][a]),abs(evaluation[c][b]))
                             else:
@@ -7477,8 +7519,8 @@ class OrdinalOutrankingDigraph(OutrankingDigraph):
                         except:
                             wp = None
                         try:
-                            prefx = criteria[c]['thresholds']['pref'][0]
-                            prefy = criteria[c]['thresholds']['pref'][1]
+                            prefx = criterion['thresholds']['pref'][0]
+                            prefy = criterion['thresholds']['pref'][1]
                             if hasSymmetricThresholds:
                                 p = prefx + prefy * max(abs(evaluation[c][a]),abs(evaluation[c][b]))
                             else:
@@ -7487,8 +7529,8 @@ class OrdinalOutrankingDigraph(OutrankingDigraph):
                             p = None
                                                     
                         try:
-                            wvx = criteria[c]['thresholds']['weakVeto'][0]
-                            wvy = criteria[c]['thresholds']['weakVeto'][1]
+                            wvx = criterion['thresholds']['weakVeto'][0]
+                            wvy = criterion['thresholds']['weakVeto'][1]
                             if hasSymmetricThresholds:
                                 wvv = wvx + wvy * max(abs(evaluation[c][a]),abs(evaluation[c][b]))
                             else:
@@ -7498,8 +7540,8 @@ class OrdinalOutrankingDigraph(OutrankingDigraph):
                         if hasNoVeto:
                             wvv = None
                         try:
-                            vx = criteria[c]['thresholds']['veto'][0]
-                            vy = criteria[c]['thresholds']['veto'][1]
+                            vx = criterion['thresholds']['veto'][0]
+                            vy = criterion['thresholds']['veto'][1]
                             if hasSymmetricThresholds:
                                 vv = vx + vy * max(abs(evaluation[c][a]),abs(evaluation[c][b]))
                             else:
@@ -7509,7 +7551,7 @@ class OrdinalOutrankingDigraph(OutrankingDigraph):
                         if hasNoVeto:
                             vv = None
                             
-                        if criteria[c]['weight'] < Decimal('0'):
+                        if criterion['weight'] < Decimal('0'):
                             d = evaluation[c][b] - evaluation[c][a]
                         else:
                             d = evaluation[c][a] - evaluation[c][b]
@@ -7545,10 +7587,11 @@ class OrdinalOutrankingDigraph(OutrankingDigraph):
                 for i in lsr:
                     vn[i] = Decimal('0.0')
                 for c in criteria:
-                    if evaluation[c][a] != Decimal('-999') and evaluation[c][b] != Decimal('-999'):
+                    criterion = criteria[c]
+                    if evaluation[c][a] != NA and evaluation[c][b] != NA:
                         try:
-                            indx = criteria[c]['thresholds']['ind'][0]
-                            indy = criteria[c]['thresholds']['ind'][1]
+                            indx = criterion['thresholds']['ind'][0]
+                            indy = criterion['thresholds']['ind'][1]
                             if hasSymmetricThresholds:
                                 ind = indx +indy * max(abs(evaluation[c][a]),abs(evaluation[c][b]))
                             else:
@@ -7557,8 +7600,8 @@ class OrdinalOutrankingDigraph(OutrankingDigraph):
                         except:
                             ind = None
                         try:    
-                            wpx = criteria[c]['thresholds']['weakPreference'][0]
-                            wpy = criteria[c]['thresholds']['weakPreference'][1]
+                            wpx = criterion['thresholds']['weakPreference'][0]
+                            wpy = criterion['thresholds']['weakPreference'][1]
                             if hasSymmetricThresholds:
                                 wp = wpx + wpy * max(abs(evaluation[c][a]),abs(evaluation[c][b]))
                             else:
@@ -7568,8 +7611,8 @@ class OrdinalOutrankingDigraph(OutrankingDigraph):
                             wp = None
 
                         try:
-                            prefx = criteria[c]['thresholds']['pref'][0]
-                            prefy = criteria[c]['thresholds']['pref'][1]
+                            prefx = criterion['thresholds']['pref'][0]
+                            prefy = criterion['thresholds']['pref'][1]
                             if hasSymmetricThresholds:
                                 p = prefx + prefy * max(abs(evaluation[c][a]),abs(evaluation[c][b]))
                             else:
@@ -7577,7 +7620,7 @@ class OrdinalOutrankingDigraph(OutrankingDigraph):
                         except:
                             p = None
                         
-                        if criteria[c]['weight'] < Decimal('0'):
+                        if criterion['weight'] < Decimal('0'):
                             d = evaluation[c][b] - evaluation[c][a]
                         else:
                             d = evaluation[c][a] - evaluation[c][b]
@@ -7751,6 +7794,7 @@ class UnanimousOutrankingDigraph(OutrankingDigraph):
         self.criteria = criteria
         self.convertWeight2Decimal()
         self.evaluation = copy.deepcopy(perfTab.evaluation)
+        self.NA = copy.deepcopy(perfTab.NA)
         self.convertEvaluation2Decimal()
         self.relation = self._constructRelation(criteria,perfTab.evaluation,hasNoVeto=hasNoVeto)
         methodData = {}
@@ -7770,6 +7814,7 @@ class UnanimousOutrankingDigraph(OutrankingDigraph):
         Min = self.valuationdomain['min']
         Max = self.valuationdomain['max']
         Med = self.valuationdomain['med']
+        NA = self.NA
         relation = {}
         for a in actions:
             relation[a] = {}
@@ -7779,11 +7824,12 @@ class UnanimousOutrankingDigraph(OutrankingDigraph):
                 counter = 0
                 veto = 0
                 for c in criteria:
-                    if evaluation[c][a] != Decimal('-999') and evaluation[c][b] != Decimal('-999'):
+                    criterion = criteria[c]
+                    if evaluation[c][a] != NA and evaluation[c][b] != NA:
                         #d = evaluation[c][a] - evaluation[c][b]
                         try:
-                            indx = criteria[c]['thresholds']['ind'][0]
-                            indy = criteria[c]['thresholds']['ind'][1]
+                            indx = criterion['thresholds']['ind'][0]
+                            indy = criterion['thresholds']['ind'][1]
                             if hasSymmetricThresholds:
                                 ind = indx +indy * max(abs(evaluation[c][a]),abs(evaluation[c][b]))
                             else:
@@ -7792,8 +7838,8 @@ class UnanimousOutrankingDigraph(OutrankingDigraph):
                         except:
                             ind = None
                         try:    
-                            wpx = criteria[c]['thresholds']['weakPreference'][0]
-                            wpy = criteria[c]['thresholds']['weakPreference'][1]
+                            wpx = criterion['thresholds']['weakPreference'][0]
+                            wpy = criterion['thresholds']['weakPreference'][1]
                             if hasSymmetricThresholds:
                                 wp = wpx + wpy * max(abs(evaluation[c][a]),abs(evaluation[c][b]))
                             else:
@@ -7802,8 +7848,8 @@ class UnanimousOutrankingDigraph(OutrankingDigraph):
                         except:
                             wp = None
                         try:
-                            prefx = criteria[c]['thresholds']['pref'][0]
-                            prefy = criteria[c]['thresholds']['pref'][1]
+                            prefx = criterion['thresholds']['pref'][0]
+                            prefy = criterion['thresholds']['pref'][1]
                             if hasSymmetricThresholds:
                                 p = prefx + prefy * max(abs(evaluation[c][a]),abs(evaluation[c][b]))
                             else:
@@ -7811,7 +7857,7 @@ class UnanimousOutrankingDigraph(OutrankingDigraph):
                         except:
                             p = None
                             
-                        if criteria[c]['weight'] < Decimal('0'):    
+                        if criterion['weight'] < Decimal('0'):    
                             d = evaluation[c][b] - evaluation[c][a]
                         else:
                             d = evaluation[c][a] - evaluation[c][b]
@@ -7821,8 +7867,8 @@ class UnanimousOutrankingDigraph(OutrankingDigraph):
                         counter += lc0
                         if not hasNoVeto:
                             try:
-                                vx = criteria[c]['thresholds']['veto'][0]
-                                vy = criteria[c]['thresholds']['veto'][1]
+                                vx = criterion['thresholds']['veto'][0]
+                                vy = criterion['thresholds']['veto'][1]
                                 if hasSymmetricThresholds:
                                     v = vx + vy * max(abs(evaluation[c][a]),abs(evaluation[c][b]))
                                 else:
@@ -8050,6 +8096,7 @@ class RobustOutrankingDigraph(BipolarOutrankingDigraph):
             pass
         self.criteria = copy.copy(cardinal.criteria)
         self.evaluation = copy.copy(cardinal.evaluation)
+        self.NA = copy.copy(cardinal.NA)
         self.vetos = copy.copy(cardinal.vetos)
         self.valuationdomain = copy.copy(cardinal.valuationdomain)
         self.relation = copy.copy(cardinal.relation)
@@ -8206,6 +8253,7 @@ class OldRobustOutrankingDigraph(BipolarOutrankingDigraph):
         self.order = len(self.actions)
         self.criteria = copy.copy(cardinal.criteria)
         self.evaluation = copy.copy(cardinal.evaluation)
+        self.NA = copy.copy(cardinal.NA)
         self.vetos = copy.copy(cardinal.vetos)
         self.valuationdomain = {'min':Decimal("-3"), 'med':Decimal("0"), 'max':Decimal("3")}
         self.cardinalRelation = copy.copy(cardinal.relation)
@@ -8762,7 +8810,7 @@ class DissimilarityOutrankingDigraph(OutrankingDigraph):
     Specialization of the OutrankingDigraph class for generating
     temporary dissimilarity random graphs
     """
-    def __init__(self,argPerfTab=None):
+    def __init__(self,argPerfTab=None,Debug=False):
         if argPerfTab == None:
             print('Performance tableau required !')
             perfTab = RandomPerformanceTableau(commonThresholds = [(10.0,0.0),(20.0,0.0),(80.0,0.0),(101.0,0.0)])
@@ -8778,51 +8826,61 @@ class DissimilarityOutrankingDigraph(OutrankingDigraph):
 ##        perfTab = PerformanceTableau(filePerfTab)
         self.name = 'rel_'+perfTab.name
         self.actions = copy.copy(perfTab.actions)
-        Min = Decimal('0.0')
-        Med = Decimal('50.0')
-        Max = Decimal('100.0')
+        self.criteria = copy.copy(perfTab.criteria)
+        self.evaluation = copy.copy(perfTab.evaluation)
+        Min = Decimal('-1.0')
+        Med = Decimal('0.0')
+        Max = Decimal('1.0')
         self.valuationdomain = {'min':Min,'med':Med,'max':Max}
         weightPreorder = perfTab.computeWeightPreorder()
-        self.relation = self._constructRelation(perfTab.criteria, perfTab.evaluation)
-        self.criteria = copy.copy(perfTab.actions)
-        self.evaluation = copy.copy(perfTab.evaluation) 
-        actions = []
-        for g in perfTab.criteria:
-            actions.append(g)
-        self.actions = actions
+        self.NA = copy.copy(perfTab.NA)
+        self.relation = self._constructRelation(Debug=Debug)
+        # for g in perfTab.actions:
+        #     actions.append(g)
         self.order = len(self.actions)
         self.gamma = self.gammaSets()
         self.notGamma = self.notGammaSets()
 
-    def _constructRelation(self,criteria,evaluation):
+    def _constructRelation(self,Debug=False):
         """
         Renders the valued dissimilarity relation between criteria.
         """
         actions = self.actions
+        if Debug:
+            print(actions)
+        criteria = self.criteria
+        if Debug:
+            print(criteria)
+        evaluation = self.evaluation
+        if Debug:
+            print(evaluation)
+        NA = self.NA        
         Min = self.valuationdomain['min']
         Max = self.valuationdomain['max']
         Med = self.valuationdomain['med']
         relation = {}
         for ga in criteria:
+            criteriona = criteria[ga]
             relation[ga] = {}
             for gb in criteria:
+                criterionb = criteria[gb]
                 if ga != gb:
                     na = len(actions)
                     counter = Decimal('0')
                     for x in actions:
-                        if evaluation[ga][x] != Decimal('-999') and evaluation[gb][x] != Decimal('-999'):
+                        if evaluation[ga][x] != NA and evaluation[gb][x] != NA:
                             d = abs(evaluation[ga][x] - evaluation[gb][x])
-                            hgax = criteria[ga]['thresholds']['ind'][0]
-                            hgay = criteria[ga]['thresholds']['ind'][1]
+                            hgax = criteriona['thresholds']['ind'][0]
+                            hgay = criteriona['thresholds']['ind'][1]
                             hga = hgax + hgay * evaluation[ga][x]
-                            hgbx = criteria[gb]['thresholds']['ind'][0]
-                            hgby = criteria[gb]['thresholds']['ind'][1]
+                            hgbx = criterionb['thresholds']['ind'][0]
+                            hgby = criterionb['thresholds']['ind'][1]
                             hgb = hgbx + hgby * evaluation[gb][x]
-                            qgax = criteria[ga]['thresholds']['pref'][0]
-                            qgay = criteria[ga]['thresholds']['pref'][1]
+                            qgax = criteriona['thresholds']['pref'][0]
+                            qgay = criteriona['thresholds']['pref'][1]
                             qga = qgax + qgay * evaluation[ga][x]
-                            qgbx = criteria[gb]['thresholds']['pref'][0]
-                            qgby = criteria[gb]['thresholds']['pref'][1]
+                            qgbx = criterionb['thresholds']['pref'][0]
+                            qgby = criterionb['thresholds']['pref'][1]
                             qgb = qgbx + qgby * evaluation[gb][x]
                             h = max(hga,hgb)
                             q = max(qga,qgb)
@@ -8895,6 +8953,7 @@ class MultiCriteriaDissimilarityDigraph(OutrankingDigraph):
         weightPreorder = perfTab.computeWeightPreorder()
         self.criteria = copy.copy(perfTab.criteria)
         self.evaluation = copy.copy(perfTab.evaluation)
+        self.NA = copy.copy(perfTab.NA)
         self.relation = self._constructRelation()
         self.order = len(self.actions)
         self.gamma = self.gammaSets()
@@ -8907,6 +8966,7 @@ class MultiCriteriaDissimilarityDigraph(OutrankingDigraph):
         actions = self.actions
         criteria = self.criteria
         evaluation = self.evaluation
+        NA = self.NA
         maxWeight = Decimal('0.0')
         for g in criteria:
             maxWeight += abs(criteria[g]['weight'])
@@ -8921,33 +8981,34 @@ class MultiCriteriaDissimilarityDigraph(OutrankingDigraph):
                     nc = len(criteria)
                     counter = Decimal('0.0')
                     for g in criteria:
-                        if evaluation[g][a] != Decimal('-999') and evaluation[g][b] != Decimal('-999'):
-                            if criteria[g]['weight'] > Decimal('0'):
+                        criterion = criteria[g]
+                        if evaluation[g][a] != NA and evaluation[g][b] != NA:
+                            if criterion['weight'] > Decimal('0'):
                                 d = abs(evaluation[g][a] - evaluation[g][b])
                             else:
                                 d = abs(evaluation[g][b] - evaluation[g][a])
                             try:
-                                hx = criteria[g]['thresholds']['ind'][0]
-                                hy = criteria[g]['thresholds']['ind'][1]
+                                hx = criterion['thresholds']['ind'][0]
+                                hy = criterion['thresholds']['ind'][1]
                                 h = hx + hy * evaluation[g][a]
                             except:
                                 h = None
                             try:
-                                wpx = criteria[g]['thresholds']['weakPref'][0]
-                                wpy = criteria[g]['thresholds']['weakPref'][1]
+                                wpx = criterion['thresholds']['weakPref'][0]
+                                wpy = criterion['thresholds']['weakPref'][1]
                                 wp = wpx + wpy * evaluation[g][a]
                             except:
                                 wp = None
                             try:
-                                px = criteria[g]['thresholds']['pref'][0]
-                                py = criteria[ga]['thresholds']['pref'][1]
+                                px = criterion['thresholds']['pref'][0]
+                                py = criterion['thresholds']['pref'][1]
                                 p = px + py * evaluation[g][a]
                             except:
                                 p = None
                             index = self._localDissimilarity(d,h,wp,p)
 ##                             print d,h,wp,p
 ##                             print counter, index, criteria[g]['weight']
-                            counter += index * criteria[g]['weight']
+                            counter += index * criterion['weight']
                         else:
                             counter += Decimal('0.0')
 ##                    relation[a][b] = counter/maxWeight*(Max-Min) + Min
@@ -9053,6 +9114,7 @@ class ConfidentBipolarOutrankingDigraph(BipolarOutrankingDigraph):
         self.valuationdomain = copy(bodg.valuationdomain)
         self.criteria = copy(bodg.criteria)
         self.evaluation = copy(bodg.evaluation)
+        self.NA = copy(bodg.NA)
         if not Threading:
             self.concordanceRelation = copy(bodg.concordanceRelation)
             self.vetos = copy(bodg.vetos)
@@ -9411,6 +9473,7 @@ class StochasticBipolarOutrankingDigraph(BipolarOutrankingDigraph):
         self.valuationdomain = copy(bodg.valuationdomain)
         self.criteria = copy(bodg.criteria)
         self.evaluation = copy(bodg.evaluation)
+        self.NA = copy(bodg.NA)
         self.relation = copy(bodg.relation)
         
         # normalize valuation to percentages

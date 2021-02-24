@@ -47,7 +47,8 @@ class RandomPerformanceTableau(PerformanceTableau):
              | ('beta',mod,(alpha,beta)), mode in ]0,1[.
         * valueDigits := <integer>, precision of performance measurements
           (2 decimal digits by default).
-        * missingDataProbability := 0 <= x <= 1.0; probability of missing performance evaluation on a criterion for an alternative (default 0.025).        
+        * missingDataProbability := 0 <= x <= 1.0; probability of missing performance evaluation on a criterion for an alternative (default 0.025). 
+        * Default NA symbol == Decimal('-999')       
 
     Code example:
         >>> from randomPerfTabs import RandomPerformanceTableau
@@ -84,6 +85,7 @@ class RandomPerformanceTableau(PerformanceTableau):
                  commonMode = ('beta',None,(2,2)),\
                  valueDigits = 2,\
                  missingDataProbability = 0.025,\
+                 NA = -999,\
                  BigData=False,\
                  seed = None,\
                  Debug = False):
@@ -296,11 +298,13 @@ class RandomPerformanceTableau(PerformanceTableau):
             print(str(commonMode[0]))
             #sys.exit(1)
         # randomly insert missing data
+        NA = Decimal(NA)
+        self.NA = NA
         self.missingDataProbability = missingDataProbability 
         for c in criteria:
             for x in actions:
                 if random.random() < missingDataProbability:
-                    evaluation[c][x] = Decimal('-999')
+                    evaluation[c][x] = NA
 
         # store object dict
         self.actions = actions
@@ -454,6 +458,7 @@ class RandomPerformanceGenerator(object):
             newPerfTab.objectives = OrderedDict()
         criteria = self.perfTab.criteria 
         newPerfTab.criteria = criteria
+        newPerfTab.NA = self.perfTab.NA
         newActions = OrderedDict()
         newEvaluation ={}
         for g in criteria:
@@ -580,9 +585,10 @@ class _RandomStdPerformanceGenerator(RandomPerformanceGenerator):
 
         # randomly insert missing data
         missingDataProbability = self.perfTab.missingDataProbability
+        NA = self.perfTab.NA
         for c in criteria:
             if random.random() < missingDataProbability:
-                evaluation[c] = Decimal('-999')
+                evaluation[c] = NA
 
         # return a new random decision alternative
         return {'action': action,'evaluation':evaluation}
@@ -744,6 +750,7 @@ class RandomAcademicPerformanceTableau(PerformanceTableau):
                  commonMode = ('triangular',12,0.25),\
                  commonThresholds = None, IntegerWeights = True,\
                  BigData = False, missingDataProbability = 0.0,\
+                 NA = -999,
                  seed = None,\
                  Debug = False):
         """
@@ -920,15 +927,17 @@ class RandomAcademicPerformanceTableau(PerformanceTableau):
 
         # randomly insert missing data
         # self.missingDataProbability = missingDataProbability
+        NA = Decimal(NA)
         for c in criteria:
             for x in actions:
                 if random.random() < missingDataProbability:
-                    evaluation[c][x] = Decimal('-999')
+                    evaluation[c][x] = NA
 
         # install object items
         self.actions = actions
         self.criteria = criteria
         self.evaluation = evaluation
+        self.NA = NA
         self.weightPreorder = self.computeWeightPreorder()
 
     def showStudents(self,WithComments=False):
@@ -962,12 +971,16 @@ class RandomAcademicPerformanceTableau(PerformanceTableau):
         Print the performance Tableau.
         """
         from decimal import Decimal
+        actions = self.actions
+        evaluation = self.evaluation
+        NA = self.NA
+        criteria = self.criteria
         print('*----  performance tableau -----*')
-        criteriaList = list(self.criteria)
+        criteriaList = list(criteria)
         if Sorted:
             criteriaList.sort()
         if studentsSubset == None:
-            actionsList = list(self.actions)
+            actionsList = list(actions)
             if Sorted:
                 actionsList.sort()
         else:
@@ -985,11 +998,11 @@ class RandomAcademicPerformanceTableau(PerformanceTableau):
             print('\n---------|-----------------------------------------')
             formatString = ' %%0%d.%df ' % (2,ndigits)
             for g in criteriaList:
-                print('  \'' +str(g)+'\'  |  '+str(self.criteria[g]['weight'])+'   |', end='  ')
+                print('  \'' +str(g)+'\'  |  '+str(criteria[g]['weight'])+'   |', end='  ')
                 for i in range(fromIndex,toIndex):
                     x = actionsList[i]
-                    evalgx = self.evaluation[g][x]
-                    if evalgx == Decimal('-999'):
+                    evalgx = evaluation[g][x]
+                    if evalgx == NA:
                         print(' NA ', end='  ')
                     else:                    
                         print(formatString % (evalgx), end='  ')
@@ -1001,15 +1014,15 @@ class RandomAcademicPerformanceTableau(PerformanceTableau):
                 print('\''+str(g)+'\'', end=' ')
             print('\n   ECTS  | ', end='  ')
             for g in criteriaList:
-                print(' %s  ' % str(self.criteria[g]['weight'] ), end='  ')          
+                print(' %s  ' % str(criteria[g]['weight'] ), end='  ')          
             print('\n---------|-----------------------------------------')
             formatString = ' %%0%d.%df ' % (2,ndigits)
             for i in range(fromIndex,toIndex):
                 x = actionsList[i]
-                print('  \''+str(self.actions[x]['shortName'])+'\' |' , end='   ')
+                print('  \''+str(actions[x]['shortName'])+'\' |' , end='   ')
                 for g in criteriaList:
-                    evalgx = self.evaluation[g][x]
-                    if evalgx == Decimal('-999'):
+                    evalgx = evaluation[g][x]
+                    if evalgx == NA:
                         print(' NA ', end='  ')
                     else:                    
                         print(formatString % (evalgx), end='  ')
@@ -1037,22 +1050,27 @@ class RandomAcademicPerformanceTableau(PerformanceTableau):
         webbrowser.open(url,new=2)
            
             
-    def _htmlPerformanceTable(self,actions=None,isSorted=False,\
+    def _htmlPerformanceTable(self,actions=None,criteria=None,isSorted=False,\
                              Transposed=False,ndigits=0,\
                              ContentCentered=True,
                              title=None,fromIndex=None,toIndex=None):
         """
         Renders the performance table citerion x actions in html format.
         """
-        criteria = self.criteria
         minMaxEvaluations = self.computeMinMaxEvaluations()
         if title == None:
             html = '<h1>Random Student Gradings</h1>'
         else:
-            html = '<h1>%s</h1>' % title            
-        criteriaKeys = list(criteria.keys())
+            html = '<h1>%s</h1>' % title
+        # criteria
+        if criteria == None:
+            criteria = self.criteria
+            criteriaKeys = list(criteria.keys())
+        else:
+            criteriaKeys = [g for g in criteria]
         if isSorted:
             criteriaKeys.sort()
+        # actions
         if actions == None:
             actions = self.actions
             actionsKeys = list(self.actions.keys())
@@ -1064,7 +1082,9 @@ class RandomAcademicPerformanceTableau(PerformanceTableau):
             fromIndex = 0
         if toIndex == None:
             toIndex = len(actionsKeys)
+        # evaluations
         evaluation = self.evaluation
+        NA = self.NA
         if ContentCentered:
             alignFormat = 'center'
         else:
@@ -1086,8 +1106,8 @@ class RandomAcademicPerformanceTableau(PerformanceTableau):
                     gName = '%s (%d)' % (g,int(criteria[g]['weight']))
                 html += '<tr><th bgcolor="#FFF79B">%s</th>' % (gName)
                 for x in actionsKeys[fromIndex:toIndex]:
-                    if self.evaluation[g][x] != Decimal("-999"):
-                        if self.evaluation[g][x] < Decimal('10'):
+                    if evaluation[g][x] != NA:
+                        if evaluation[g][x] < Decimal('10'):
                             formatString = '<td bgcolor="#ffddff"  align="%s">%% .%df</td>' % (alignFormat,ndigits)
                             html += formatString % (evaluation[g][x])
                         elif minMaxEvaluations[g]['minimum'] == minMaxEvaluations[g]['maximum']:
@@ -1126,8 +1146,8 @@ class RandomAcademicPerformanceTableau(PerformanceTableau):
                     xName = str(x)
                 html += '<tr><th bgcolor="#FFF79B">%s</th>' % (xName)
                 for g in criteriaKeys:
-                    if self.evaluation[g][x] != Decimal("-999"):
-                        if self.evaluation[g][x] < Decimal('10'):
+                    if evaluation[g][x] != NA:
+                        if evaluation[g][x] < Decimal('10'):
                             formatString = '<td bgcolor="#ffddff"  align="%s">%% .%df</td>' % (alignFormat,ndigits)
                             html += formatString % (evaluation[g][x])
                         elif minMaxEvaluations[g]['minimum'] == minMaxEvaluations[g]['maximum']:
@@ -1157,6 +1177,7 @@ class RandomAcademicPerformanceTableau(PerformanceTableau):
         criteriaKeys.sort()
         nc = len(self.criteria)
         evaluation = self.evaluation
+        NA = self.NA
         actions = self.actions
         g = courseID
         n = len(actions)
@@ -1172,7 +1193,7 @@ class RandomAcademicPerformanceTableau(PerformanceTableau):
         maxEvaluation = Min
         evaluationList = []
         for x in actions:
-            if evaluation[g][x] != Decimal('-999'):
+            if evaluation[g][x] != NA:
                 evaluationList.append(evaluation[g][x])
                 averageEvaluation += evaluation[g][x]
                 varianceEvaluation += evaluation[g][x]**Decimal('2')
@@ -1227,7 +1248,7 @@ class RandomAcademicPerformanceTableau(PerformanceTableau):
             nd = 0
             for x in actions:
                 for y in actions:
-                    if evaluation[g][x] != Decimal('-999') and evaluation[g][y] != Decimal('-999'):
+                    if evaluation[g][x] != NA and evaluation[g][y] != NA:
                         diffxy = (evaluation[g][x] - evaluation[g][y])
                         averageAbsDiffEvaluation += abs(diffxy)
                         varianceDiffEvaluation += diffxy**Decimal('2')
@@ -1415,6 +1436,7 @@ class RandomRankPerformanceTableau(PerformanceTableau):
         self.actions = actions
         self.criteria = criteria
         self.evaluation = evaluation
+        self.NA = Decimal('-999')
         self.sumWeights = sumWeights
         self.weightPreorder = self.computeWeightPreorder()
 
@@ -1688,6 +1710,7 @@ class _FullRandomPerformanceTableau(PerformanceTableau):
         self.criteriaWeightMode = weightMode
         self.criteria = criteria
         self.evaluation = evaluation
+        self.NA = Decimal('-999')
         self.weightPreorder = self.computeWeightPreorder()
 
 
@@ -2110,6 +2133,7 @@ class _RandomCoalitionsPerformanceTableau(PerformanceTableau):
         self.criteriaWeightMode = weightMode
         self.criteria = criteria
         self.evaluation = evaluation
+        self.NA = Decimal('-999')
         self.weightPreorder = self.computeWeightPreorder()
 
 class Random3ObjectivesPerformanceTableau(PerformanceTableau):
@@ -2221,6 +2245,7 @@ class Random3ObjectivesPerformanceTableau(PerformanceTableau):
                  valueDigits=2,\
                  vetoProbability=0.5,\
                  missingDataProbability = 0.05,\
+                 NA = -999,\
                  BigData=False,\
                  seed=None,\
                  Debug=False):
@@ -2602,20 +2627,22 @@ class Random3ObjectivesPerformanceTableau(PerformanceTableau):
                 objWeight += abs(criteria[g]['weight'])
             objectives[obj]['weight'] = objWeight
 
+        # insert missing data
+        NA = Decimal(NA)
+        for g in criteria:
+            sevalg = evaluation[g]
+            for x in actions:
+                if _random.random() < missingDataProbability:
+                    sevalg[x] = NA
+
         # instantiate the peformance tableau slots
         self.actions = actions
         self.objectives = objectives
         self.criteriaWeightMode = weightMode
         self.criteria = criteria
-        self.evaluation = evaluation
         self.weightPreorder = self.computeWeightPreorder()
-
-        # insert missing data
-        for g in criteria:
-            sevalg = self.evaluation[g]
-            for x in actions:
-                if _random.random() < missingDataProbability:
-                    sevalg[x] = Decimal('-999')
+        self.evaluation = evaluation
+        self.NA = NA
 
     def showObjectives(self):
         print('*------ show objectives -------"')
@@ -2867,10 +2894,11 @@ class _Random3ObjectivesPerformanceGenerator(RandomPerformanceGenerator):
             print(evaluation)
 
         # randomly insert missing data
+        NA = self.perfTab.NA
         missingDataProbability = self.perfTab.missingDataProbability
         for g in criteria:
             if random.random() < missingDataProbability:
-                evaluation[g] = Decimal('-999')
+                evaluation[g] = NA
 
         # return a new random decision alternative
         return {'action': action,'evaluation':evaluation}
@@ -2898,199 +2926,200 @@ class _Random3ObjectivesPerformanceGenerator(RandomPerformanceGenerator):
 
 
 #---------------
-class _Random3ObjectivesPerformanceTableau(_RandomCoalitionsPerformanceTableau):
-    """
-    Specialization of the RandomCoalitionsPerformanceTableau
-    for 3 objectives: *A*, *B* and *C*.
+# class _Random3ObjectivesPerformanceTableau(_RandomCoalitionsPerformanceTableau):
+#     """
+#     Specialization of the RandomCoalitionsPerformanceTableau
+#     for 3 objectives: *A*, *B* and *C*.
 
-    Each decision action is qualified at random as weak (-), fair (~) or good (+)
-    on each of the three objectives. The action comment shows for each objective the respective position (- ,~, +)
-    of the evaluation mode, for instance (*A* - *B* + *C* ~).
+#     Each decision action is qualified at random as weak (-), fair (~) or good (+)
+#     on each of the three objectives. The action comment shows for each objective the respective position (- ,~, +)
+#     of the evaluation mode, for instance (*A* - *B* + *C* ~).
     
-    Generator parameters are described in the parent class.
+#     Generator parameters are described in the parent class.
     
-    .. note::
+#     .. note::
 
-        If the mode of the triangular districbution is set to 'variable',
-        three modes at 0.3 (-), 0.5 (~), respectively 0.7 (+) of the common scale span
-        are set at random for each coalition and action.
+#         If the mode of the triangular districbution is set to 'variable',
+#         three modes at 0.3 (-), 0.5 (~), respectively 0.7 (+) of the common scale span
+#         are set at random for each coalition and action.
     
-    """
-    def __init__(self,numberOfActions = 20, numberOfCriteria = 13,\
-                 weightDistribution = 'equiobjectives', weightScale=None,\
-                 IntegerWeights = True, commonScale = (0.0,100.0),\
-                 commonThresholds = [(5.0,0.0),(10.0,0.0),(60.0,0.0)],\
-                 commonDistribution = ['triangular','variable',0.5],\
-                 missingDataProbability = 0.05,\
-                 valueDigits=2,\
-                 BigData=False,\
-                 Debug=False, 
-                 seed= None):
-        from copy import deepcopy
-        import random
-        random.seed(seed)
+#     """
+#     def __init__(self,numberOfActions = 20, numberOfCriteria = 13,\
+#                  weightDistribution = 'equiobjectives', weightScale=None,\
+#                  IntegerWeights = True, commonScale = (0.0,100.0),\
+#                  commonThresholds = [(5.0,0.0),(10.0,0.0),(60.0,0.0)],\
+#                  commonDistribution = ['triangular','variable',0.5],\
+#                  missingDataProbability = 0.05,\
+#                  NA = -999,\
+#                  valueDigits=2,\
+#                  BigData=False,\
+#                  Debug=False, 
+#                  seed= None):
+#         from copy import deepcopy
+#         import random
+#         random.seed(seed)
         
-        if commonDistribution[1] == 'variable':
-            VariableGenerators = True
-            commonMode = [commonDistribution[0],
-                          (commonScale[0]+commonScale[1])/2.0,
-                          commonDistribution[2]]
-        else:
-            VariableGenerators = False
-        if weightDistribution == 'equiobjectives':
-            weightDistribution = 'equicoalitions'
-        t = RandomCoalitionsPerformanceTableau(numberOfActions=numberOfActions,
-                                               numberOfCriteria=numberOfCriteria,
-                                               weightDistribution=weightDistribution,
-                                               weightScale=weightScale,
-                                               IntegerWeights=IntegerWeights,
-                                               commonScale =commonScale,
-                                               commonThresholds=commonThresholds,
-                                               commonMode=commonDistribution,
-                                               VariableGenerators=VariableGenerators,
-                                               valueDigits=valueDigits,
-                                               BigData=BigData,
-                                               Debug=Debug, seed=seed)
+#         if commonDistribution[1] == 'variable':
+#             VariableGenerators = True
+#             commonMode = [commonDistribution[0],
+#                           (commonScale[0]+commonScale[1])/2.0,
+#                           commonDistribution[2]]
+#         else:
+#             VariableGenerators = False
+#         if weightDistribution == 'equiobjectives':
+#             weightDistribution = 'equicoalitions'
+#         t = RandomCoalitionsPerformanceTableau(numberOfActions=numberOfActions,
+#                                                numberOfCriteria=numberOfCriteria,
+#                                                weightDistribution=weightDistribution,
+#                                                weightScale=weightScale,
+#                                                IntegerWeights=IntegerWeights,
+#                                                commonScale =commonScale,
+#                                                commonThresholds=commonThresholds,
+#                                                commonMode=commonDistribution,
+#                                                VariableGenerators=VariableGenerators,
+#                                                valueDigits=valueDigits,
+#                                                BigData=BigData,
+#                                                Debug=Debug, seed=seed)
 
-        self.__dict__ = t.__dict__
-        for g in self.criteria:
-            if self.criteria[g]['name'] == 'random criterion of coalition A':
-                self.criteria[g]['name'] = 'random economic criterion'
-                self.criteria[g]['objective'] = 'Eco'
-            elif self.criteria[g]['name'] == 'random criterion of coalition B':
-                self.criteria[g]['name'] = 'random societal criterion'
-                self.criteria[g]['objective'] = 'Soc'
-            elif self.criteria[g]['name'] == 'random criterion of coalition C':
-                self.criteria[g]['name'] = 'random environmental criterion'
-                self.criteria[g]['objective'] = 'Env'
+#         self.__dict__ = t.__dict__
+#         for g in self.criteria:
+#             if self.criteria[g]['name'] == 'random criterion of coalition A':
+#                 self.criteria[g]['name'] = 'random economic criterion'
+#                 self.criteria[g]['objective'] = 'Eco'
+#             elif self.criteria[g]['name'] == 'random criterion of coalition B':
+#                 self.criteria[g]['name'] = 'random societal criterion'
+#                 self.criteria[g]['objective'] = 'Soc'
+#             elif self.criteria[g]['name'] == 'random criterion of coalition C':
+#                 self.criteria[g]['name'] = 'random environmental criterion'
+#                 self.criteria[g]['objective'] = 'Env'
                 
-        self.objectives = OrderedDict({
-            'Eco': {'name':'Economical aspect',
-                  'comment': 'Random3ObjectivesPerformanceTableau generated'},
-            'Soc': {'name': 'Societal aspect',
-                  'comment': 'Random3ObjectivesPerformanceTableau generated'},
-            'Env': {'name':'Environmental aspect',
-                  'comment': 'Random3ObjectivesPerformanceTableau generated'}
-            })
+#         self.objectives = OrderedDict({
+#             'Eco': {'name':'Economical aspect',
+#                   'comment': 'Random3ObjectivesPerformanceTableau generated'},
+#             'Soc': {'name': 'Societal aspect',
+#                   'comment': 'Random3ObjectivesPerformanceTableau generated'},
+#             'Env': {'name':'Environmental aspect',
+#                   'comment': 'Random3ObjectivesPerformanceTableau generated'}
+#             })
         
-        for obj in self.objectives:
-            objCriteria = [g for g in self.criteria if self.criteria[g]['objective'] == obj]
-            #objCriteria.sort()
-            self.objectives[obj]['criteria'] = objCriteria
-            objWeight = Decimal('0')
-            for g in objCriteria:
-                objWeight += self.criteria[g]['weight']
-            self.objectives[obj]['weight'] = objWeight
+#         for obj in self.objectives:
+#             objCriteria = [g for g in self.criteria if self.criteria[g]['objective'] == obj]
+#             #objCriteria.sort()
+#             self.objectives[obj]['criteria'] = objCriteria
+#             objWeight = Decimal('0')
+#             for g in objCriteria:
+#                 objWeight += self.criteria[g]['weight']
+#             self.objectives[obj]['weight'] = objWeight
 
-        #actionsList = [x for x in self.actions]
-        for x in dict.keys(self.actions):
-            if 'A- B- C-' in self.actions[x]['name']:
-                self.actions[x]['name'] = 'random decision action (Eco- Soc- Env-)'
-                self.actions[x]['profile'] = {'Eco': 'weak', 'Soc': 'weak','Env': 'weak'}
-            elif 'A~ B- C-' in self.actions[x]['name']:
-                self.actions[x]['name'] = 'random decision action (Eco~ Soc- Env-)'
-                self.actions[x]['profile'] ={'Eco': 'fair', 'Soc': 'weak','Env': 'weak'}
-            elif 'A+ B- C-' in self.actions[x]['name']:
-                self.actions[x]['name'] = 'random decision action (Eco+ Soc- Env-)'
-                self.actions[x]['profile'] ={'Eco': 'good', 'Soc': 'weak','Env': 'weak'}
-            elif 'A- B~ C-' in self.actions[x]['name']:
-                self.actions[x]['name'] = 'random decision action (Eco- Soc~ Env-)'
-                self.actions[x]['profile'] ={'Eco': 'weak', 'Soc': 'fair','Env': 'weak'}
-            elif 'A~ B~ C-' in self.actions[x]['name']:
-                self.actions[x]['name'] = 'random decision action (Eco~ Soc~ Env-)'
-                self.actions[x]['profile'] ={'Eco': 'fair', 'Soc': 'fair','Env': 'weak'}
-            elif 'A+ B~ C-' in self.actions[x]['name']:
-                self.actions[x]['name'] = 'random decision action (Eco+ Soc~ Env-)'
-                self.actions[x]['profile'] ={'Eco': 'good', 'Soc': 'fair','Env': 'weak'}
-            elif 'A- B+ C-' in self.actions[x]['name']:
-                self.actions[x]['name'] = 'random decision action (Eco- Soc+ Env-)'
-                self.actions[x]['profile'] ={'Eco': 'weak', 'Soc': 'good','Env': 'weak'}
-            elif 'A~ B+ C-' in self.actions[x]['name']:
-                self.actions[x]['name'] = 'random decision action (Eco~ Soc+ Env-)'
-                self.actions[x]['profile'] ={'Eco': 'fair', 'Soc': 'good','Env': 'weak'}
-            elif 'A+ B+ C-' in self.actions[x]['name']:
-                self.actions[x]['name'] = 'random decision action (Eco+ Soc+ Env-)'
-                self.actions[x]['profile'] ={'Eco': 'good', 'Soc': 'good','Env': 'weak'}
-            elif 'A- B- C~' in self.actions[x]['name']:
-                self.actions[x]['name'] = 'random decision action (Eco- Soc- Env~)'
-                self.actions[x]['profile'] ={'Eco': 'weak', 'Soc': 'weak','Env': 'fair'}
-            elif 'A~ B- C~' in self.actions[x]['name']:
-                self.actions[x]['name'] = 'random decision action (Eco~ Soc- Env~)'
-                self.actions[x]['profile'] ={'Eco': 'fair', 'Soc': 'weak','Env': 'fair'}
-            elif 'A+ B- C~' in self.actions[x]['name']:
-                self.actions[x]['name'] = 'random decision action (Eco+ Soc- Env~)'
-                self.actions[x]['profile'] ={'Eco': 'good', 'Soc': 'weak','Env': 'fair'}
-            elif 'A- B~ C~' in self.actions[x]['name']:
-                self.actions[x]['name'] = 'random decision action (Eco- Soc~ Env~)'
-                self.actions[x]['profile'] ={'Eco': 'weak', 'Soc': 'fair','Env': 'fair'}
-            elif 'A~ B~ C~' in self.actions[x]['name']:
-                self.actions[x]['name'] = 'random decision action (Eco~ Soc~ Env~)'
-                self.actions[x]['profile'] ={'Eco': 'fair', 'Soc': 'fair','Env': 'fair'}
-            elif 'A+ B~ C~' in self.actions[x]['name']:
-                self.actions[x]['name'] = 'random decision action (Eco+ Soc~ Env~)'
-                self.actions[x]['profile'] ={'Eco': 'good', 'Soc': 'fair','Env': 'fair'}
-            elif 'A- B+ C~' in self.actions[x]['name']:
-                self.actions[x]['name'] = 'random decision action (Eco- Soc+ Env~)'
-                self.actions[x]['profile'] ={'Eco': 'weak', 'Soc': 'good','Env': 'fair'}
-            elif 'A~ B+ C~' in self.actions[x]['name']:
-                self.actions[x]['name'] = 'random decision action (Eco~ Soc+ Env~)'
-                self.actions[x]['profile'] ={'Eco': 'fair', 'Soc': 'good','Env': 'fair'}
-            elif 'A+ B+ C~' in self.actions[x]['name']:
-                self.actions[x]['name'] = 'random decision action (Eco+ Soc+ Env~)'
-                self.actions[x]['profile'] ={'Eco': 'good', 'Soc': 'good','Env': 'fair'}
-            elif 'A- B- C+' in self.actions[x]['name']:
-                self.actions[x]['name'] = 'random decision action (Eco- Soc- Env+)'
-                self.actions[x]['profile'] ={'Eco': 'weak', 'Soc': 'weak','Env': 'good'}
-            elif 'A~ B- C+' in self.actions[x]['name']:
-                self.actions[x]['name'] = 'random decision action (Eco~ Soc- Env+)'
-                self.actions[x]['profile'] ={'Eco': 'fair', 'Soc': 'weak','Env': 'good'}
-            elif 'A+ B- C+' in self.actions[x]['name']:
-                self.actions[x]['name'] = 'random decision action (Eco+ Soc- Env+)'
-                self.actions[x]['profile'] ={'Eco': 'good', 'Soc': 'weak','Env': 'good'}
-            elif 'A- B~ C+' in self.actions[x]['name']:
-                self.actions[x]['name'] = 'random decision action (Eco- Soc~ Env+)'
-                self.actions[x]['profile'] ={'Eco': 'weak', 'Soc': 'fair','Env': 'good'}
-            elif 'A~ B~ C+' in self.actions[x]['name']:
-                self.actions[x]['name'] = 'random decision action (Eco~ Soc~ Env+)'
-                self.actions[x]['profile'] ={'Eco': 'fair', 'Soc': 'fair','Env': 'good'}
-            elif 'A+ B~ C+' in self.actions[x]['name']:
-                self.actions[x]['name'] = 'random decision action (Eco+ Soc~ Env+)'
-                self.actions[x]['profile'] ={'Eco': 'good', 'Soc': 'fair','Env': 'good'}
-            elif 'A- B+ C+' in self.actions[x]['name']:
-                self.actions[x]['name'] = 'random decision action (Eco- Soc+ Env+)'
-                self.actions[x]['profile'] ={'Eco': 'weak', 'Soc': 'good','Env': 'good'}
-            elif 'A~ B+ C+' in self.actions[x]['name']:
-                self.actions[x]['name'] = 'random decision action (Eco~ Soc+ Env+)'
-                self.actions[x]['profile'] ={'Eco': 'fair', 'Soc': 'good','Env': 'good'}
-            elif 'A+ B+ C+' in self.actions[x]['name']:
-                self.actions[x]['name'] = 'random decision action (Eco+ Soc+ Env+)'
-                self.actions[x]['profile'] ={'Eco': 'good', 'Soc': 'good','Env': 'good'}
-            self.actions[x]['comment'] = 'Random3ObjectivesPerformanceTableau() generated'
+#         #actionsList = [x for x in self.actions]
+#         for x in dict.keys(self.actions):
+#             if 'A- B- C-' in self.actions[x]['name']:
+#                 self.actions[x]['name'] = 'random decision action (Eco- Soc- Env-)'
+#                 self.actions[x]['profile'] = {'Eco': 'weak', 'Soc': 'weak','Env': 'weak'}
+#             elif 'A~ B- C-' in self.actions[x]['name']:
+#                 self.actions[x]['name'] = 'random decision action (Eco~ Soc- Env-)'
+#                 self.actions[x]['profile'] ={'Eco': 'fair', 'Soc': 'weak','Env': 'weak'}
+#             elif 'A+ B- C-' in self.actions[x]['name']:
+#                 self.actions[x]['name'] = 'random decision action (Eco+ Soc- Env-)'
+#                 self.actions[x]['profile'] ={'Eco': 'good', 'Soc': 'weak','Env': 'weak'}
+#             elif 'A- B~ C-' in self.actions[x]['name']:
+#                 self.actions[x]['name'] = 'random decision action (Eco- Soc~ Env-)'
+#                 self.actions[x]['profile'] ={'Eco': 'weak', 'Soc': 'fair','Env': 'weak'}
+#             elif 'A~ B~ C-' in self.actions[x]['name']:
+#                 self.actions[x]['name'] = 'random decision action (Eco~ Soc~ Env-)'
+#                 self.actions[x]['profile'] ={'Eco': 'fair', 'Soc': 'fair','Env': 'weak'}
+#             elif 'A+ B~ C-' in self.actions[x]['name']:
+#                 self.actions[x]['name'] = 'random decision action (Eco+ Soc~ Env-)'
+#                 self.actions[x]['profile'] ={'Eco': 'good', 'Soc': 'fair','Env': 'weak'}
+#             elif 'A- B+ C-' in self.actions[x]['name']:
+#                 self.actions[x]['name'] = 'random decision action (Eco- Soc+ Env-)'
+#                 self.actions[x]['profile'] ={'Eco': 'weak', 'Soc': 'good','Env': 'weak'}
+#             elif 'A~ B+ C-' in self.actions[x]['name']:
+#                 self.actions[x]['name'] = 'random decision action (Eco~ Soc+ Env-)'
+#                 self.actions[x]['profile'] ={'Eco': 'fair', 'Soc': 'good','Env': 'weak'}
+#             elif 'A+ B+ C-' in self.actions[x]['name']:
+#                 self.actions[x]['name'] = 'random decision action (Eco+ Soc+ Env-)'
+#                 self.actions[x]['profile'] ={'Eco': 'good', 'Soc': 'good','Env': 'weak'}
+#             elif 'A- B- C~' in self.actions[x]['name']:
+#                 self.actions[x]['name'] = 'random decision action (Eco- Soc- Env~)'
+#                 self.actions[x]['profile'] ={'Eco': 'weak', 'Soc': 'weak','Env': 'fair'}
+#             elif 'A~ B- C~' in self.actions[x]['name']:
+#                 self.actions[x]['name'] = 'random decision action (Eco~ Soc- Env~)'
+#                 self.actions[x]['profile'] ={'Eco': 'fair', 'Soc': 'weak','Env': 'fair'}
+#             elif 'A+ B- C~' in self.actions[x]['name']:
+#                 self.actions[x]['name'] = 'random decision action (Eco+ Soc- Env~)'
+#                 self.actions[x]['profile'] ={'Eco': 'good', 'Soc': 'weak','Env': 'fair'}
+#             elif 'A- B~ C~' in self.actions[x]['name']:
+#                 self.actions[x]['name'] = 'random decision action (Eco- Soc~ Env~)'
+#                 self.actions[x]['profile'] ={'Eco': 'weak', 'Soc': 'fair','Env': 'fair'}
+#             elif 'A~ B~ C~' in self.actions[x]['name']:
+#                 self.actions[x]['name'] = 'random decision action (Eco~ Soc~ Env~)'
+#                 self.actions[x]['profile'] ={'Eco': 'fair', 'Soc': 'fair','Env': 'fair'}
+#             elif 'A+ B~ C~' in self.actions[x]['name']:
+#                 self.actions[x]['name'] = 'random decision action (Eco+ Soc~ Env~)'
+#                 self.actions[x]['profile'] ={'Eco': 'good', 'Soc': 'fair','Env': 'fair'}
+#             elif 'A- B+ C~' in self.actions[x]['name']:
+#                 self.actions[x]['name'] = 'random decision action (Eco- Soc+ Env~)'
+#                 self.actions[x]['profile'] ={'Eco': 'weak', 'Soc': 'good','Env': 'fair'}
+#             elif 'A~ B+ C~' in self.actions[x]['name']:
+#                 self.actions[x]['name'] = 'random decision action (Eco~ Soc+ Env~)'
+#                 self.actions[x]['profile'] ={'Eco': 'fair', 'Soc': 'good','Env': 'fair'}
+#             elif 'A+ B+ C~' in self.actions[x]['name']:
+#                 self.actions[x]['name'] = 'random decision action (Eco+ Soc+ Env~)'
+#                 self.actions[x]['profile'] ={'Eco': 'good', 'Soc': 'good','Env': 'fair'}
+#             elif 'A- B- C+' in self.actions[x]['name']:
+#                 self.actions[x]['name'] = 'random decision action (Eco- Soc- Env+)'
+#                 self.actions[x]['profile'] ={'Eco': 'weak', 'Soc': 'weak','Env': 'good'}
+#             elif 'A~ B- C+' in self.actions[x]['name']:
+#                 self.actions[x]['name'] = 'random decision action (Eco~ Soc- Env+)'
+#                 self.actions[x]['profile'] ={'Eco': 'fair', 'Soc': 'weak','Env': 'good'}
+#             elif 'A+ B- C+' in self.actions[x]['name']:
+#                 self.actions[x]['name'] = 'random decision action (Eco+ Soc- Env+)'
+#                 self.actions[x]['profile'] ={'Eco': 'good', 'Soc': 'weak','Env': 'good'}
+#             elif 'A- B~ C+' in self.actions[x]['name']:
+#                 self.actions[x]['name'] = 'random decision action (Eco- Soc~ Env+)'
+#                 self.actions[x]['profile'] ={'Eco': 'weak', 'Soc': 'fair','Env': 'good'}
+#             elif 'A~ B~ C+' in self.actions[x]['name']:
+#                 self.actions[x]['name'] = 'random decision action (Eco~ Soc~ Env+)'
+#                 self.actions[x]['profile'] ={'Eco': 'fair', 'Soc': 'fair','Env': 'good'}
+#             elif 'A+ B~ C+' in self.actions[x]['name']:
+#                 self.actions[x]['name'] = 'random decision action (Eco+ Soc~ Env+)'
+#                 self.actions[x]['profile'] ={'Eco': 'good', 'Soc': 'fair','Env': 'good'}
+#             elif 'A- B+ C+' in self.actions[x]['name']:
+#                 self.actions[x]['name'] = 'random decision action (Eco- Soc+ Env+)'
+#                 self.actions[x]['profile'] ={'Eco': 'weak', 'Soc': 'good','Env': 'good'}
+#             elif 'A~ B+ C+' in self.actions[x]['name']:
+#                 self.actions[x]['name'] = 'random decision action (Eco~ Soc+ Env+)'
+#                 self.actions[x]['profile'] ={'Eco': 'fair', 'Soc': 'good','Env': 'good'}
+#             elif 'A+ B+ C+' in self.actions[x]['name']:
+#                 self.actions[x]['name'] = 'random decision action (Eco+ Soc+ Env+)'
+#                 self.actions[x]['profile'] ={'Eco': 'good', 'Soc': 'good','Env': 'good'}
+#             self.actions[x]['comment'] = 'Random3ObjectivesPerformanceTableau() generated'
 
-##        criteriaList = [g for g in self.criteria]
-##        criteriaList.sort()
-##        actionsList = [x for x in self.actions]
-##        actionsList.sort()
-        for g in dict.keys(self.criteria):
-            for x in dict.keys(self.actions):
-                if random.random() < missingDataProbability:
-                    self.evaluation[g][x] = Decimal('-999')
+# ##        criteriaList = [g for g in self.criteria]
+# ##        criteriaList.sort()
+# ##        actionsList = [x for x in self.actions]
+# ##        actionsList.sort()
+#         for g in dict.keys(self.criteria):
+#             for x in dict.keys(self.actions):
+#                 if random.random() < missingDataProbability:
+#                     self.evaluation[g][x] = self.NA
                 
-    def showActions(self,Alphabetic=False):
-        print('*----- show decision action --------------*')
-        actions = self.actions
-        if Alphabtic:
-            actionsKeys = [x for x in dict.keys(actions)]
-            actionsKeys.sort()
-            for x in actionsKeys:
-                print('key: ',x)
-                print('  name:      ',actions[x]['name'])
-                print('  profile:   ',actions[x]['profile'])
-        else:
-            for x in actions.keys():
-                print('key: ',x)
-                print('  name:      ',actions[x]['name'])
-                print('  profile:   ',actions[x]['profile'])
+#     def showActions(self,Alphabetic=False):
+#         print('*----- show decision action --------------*')
+#         actions = self.actions
+#         if Alphabtic:
+#             actionsKeys = [x for x in dict.keys(actions)]
+#             actionsKeys.sort()
+#             for x in actionsKeys:
+#                 print('key: ',x)
+#                 print('  name:      ',actions[x]['name'])
+#                 print('  profile:   ',actions[x]['profile'])
+#         else:
+#             for x in actions.keys():
+#                 print('key: ',x)
+#                 print('  name:      ',actions[x]['name'])
+#                 print('  profile:   ',actions[x]['profile'])
         
 #---------------
 class RandomCBPerformanceTableau(PerformanceTableau):
@@ -3200,6 +3229,7 @@ class RandomCBPerformanceTableau(PerformanceTableau):
                  commonMode = None,\
                  valueDigits = 2,\
                  missingDataProbability = 0.01,\
+                 NA = -999,\
                  BigData=False,\
                  seed = None,\
                  Threading = False,\
@@ -3222,6 +3252,7 @@ class RandomCBPerformanceTableau(PerformanceTableau):
         self.digits = valueDigits
         self.BigData = BigData
         self.missingDataProbability = missingDataProbability
+        self.NA = Decimal(NA)
         self.commonPercentiles = commonPercentiles
         self.samplingSize = samplingSize
         self.Debug = Debug
@@ -3566,11 +3597,12 @@ class RandomCBPerformanceTableau(PerformanceTableau):
                     if Debug:
                         print(evaluation[g][a])
                         
-        # randomly insert missing data 
+        # randomly insert missing data
+        NA = Decimal(NA)
         for g in criteria:
             for x in actions:
                 if random.random() < missingDataProbability:
-                    evaluation[g][x] = Decimal('-999')
+                    evaluation[g][x] = NA
 
         # final storage
         self.actions = actions
@@ -3578,6 +3610,7 @@ class RandomCBPerformanceTableau(PerformanceTableau):
         self.criteriaWeightMode = weightMode
         self.criteria = criteria
         self.evaluation = evaluation
+        self.NA = NA
         self.weightPreorder = self.computeWeightPreorder()
 
         # compute discrimination thresholds from commonPercentiles
@@ -3604,10 +3637,10 @@ class RandomCBPerformanceTableau(PerformanceTableau):
                 sample = 0
                 for x in actions.keys():
                     evx = self.evaluation[g][x]
-                    if evx != Decimal('-999'):
+                    if evx != NA:
                         for y in actions.keys():
                             evy = self.evaluation[g][y]
-                            if x != y and evy != Decimal('-999'):
+                            if x != y and evy != NA:
                                 est.add( float( abs(evx-evy) ) )
                                 sample += 1
                                 if sample > samplingSize:
@@ -3655,17 +3688,19 @@ class RandomCBPerformanceTableau(PerformanceTableau):
         else:
             quantile = commonPercentiles
         criteria = self.criteria
+        evaluation = self.evaluation
+        NA = self.NA
         for g in criteria:
             criteria[g]['thresholds'] = OrderedDict()
             if criteria[g]['scaleType'] == 'cardinal' and n > 1:
                 est.reset()
                 sample = 0
                 for x in actions.keys():
-                    evx = self.evaluation[g][x]
-                    if evx != Decimal('-999'):
+                    evx = evaluation[g][x]
+                    if evx != NA:
                         for y in actions.keys():
-                            evy = self.evaluation[g][y]
-                            if x != y and evy != Decimal('-999'):
+                            evy = evaluation[g][y]
+                            if x != y and evy != NA:
                                 est.add( float( abs(evx-evy) ) )
                                 sample += 1
                                 if sample > samplingSize:
@@ -3860,10 +3895,11 @@ class _RandomCBPerformanceGenerator(RandomPerformanceGenerator):
             print(evaluation)
 
         # randomly insert missing data
+        NA = self.perfTab.NA
         missingDataProbability = self.perfTab.missingDataProbability
         for g in criteria:
             if random.random() < missingDataProbability:
-                evaluation[g] = Decimal('-999')
+                evaluation[g] = NA
 
         # return a new random decision alternative
         return {'action': action,'evaluation':evaluation}

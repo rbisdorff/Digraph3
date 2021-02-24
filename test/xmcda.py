@@ -1,6 +1,11 @@
 #!/Usr/bin/env python3
 """
 Python3+ implementation of xmcda tools
+
+.. warning::
+
+   These resources are now deprecated and should no more be considered for ongoing usage!! They were developped in the context of now obsolete xml encoded web services deployments. A replacement alternative is given with the standard save() methods of performance tableaux, digraphs and graphs. 
+  
 Copyright (C) 2016-2020  Raymond Bisdorff
 
     This program is free software; you can redistribute it and/or modify it under the terms of the GNU General Public License as published by the Free Software Foundation; either version 3 of the License, or (at your option) any later version.

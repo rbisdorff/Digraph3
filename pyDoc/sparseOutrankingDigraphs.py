@@ -1373,6 +1373,7 @@ class PreRankedOutrankingDigraph(SparseOutrankingDigraph,PerformanceTableau):
             self.actions = deepcopy(perfTab.actions)
             self.criteria = deepcopy(perfTab.criteria)
             self.evaluation = deepcopy(perfTab.evaluation)
+            self.NA = deepcopy(perfTab.NA)
         else:
             self.__dict__.update(perfTab.__dict__)
 ##            self.actions = perfTab.actions
@@ -1421,6 +1422,7 @@ class PreRankedOutrankingDigraph(SparseOutrankingDigraph,PerformanceTableau):
         self.categories = qs.categories
         self.sorting = qs.sorting
         self.evaluation = qs.evaluation
+        self.NA = qs.NA
         self.runTimes['sorting'] =  time() - t0
         if Comments:
             print('sorting time: %.4f' % (self.runTimes['sorting']))

@@ -315,6 +315,8 @@ Valuation&nbsp;domain&nbsp;&nbsp;&nbsp;&nbsp;:&nbsp;[0.00;1.00]<br>
 <dl><dt><a name="QuadraticResiduesDigraph-computeGoodPirlotChoices"><strong>computeGoodPirlotChoices</strong></a>(self, Comments=False)</dt><dd><tt>Characteristic&nbsp;values&nbsp;for&nbsp;potentially&nbsp;good&nbsp;choices<br>
 using&nbsp;the&nbsp;Pirlot&nbsp;fixpoint&nbsp;algorithm.</tt></dd></dl>
 
+<dl><dt><a name="QuadraticResiduesDigraph-computeIncomparabilityDegree"><strong>computeIncomparabilityDegree</strong></a>(self, InPercents=False, Comments=False)</dt><dd><tt>Renders&nbsp;the&nbsp;incomparability&nbsp;degree&nbsp;(Decimal),&nbsp;i.e.&nbsp;the&nbsp;relative&nbsp;number&nbsp;of&nbsp;symmetric&nbsp;indeterminate&nbsp;relations&nbsp;of&nbsp;the&nbsp;irreflexive&nbsp;part&nbsp;of&nbsp;a&nbsp;digraph.</tt></dd></dl>
+
 <dl><dt><a name="QuadraticResiduesDigraph-computeKemenyIndex"><strong>computeKemenyIndex</strong></a>(self, otherRelation)</dt><dd><tt>renders&nbsp;the&nbsp;Kemeny&nbsp;index&nbsp;of&nbsp;the&nbsp;self.<strong>relation</strong><br>
 compared&nbsp;with&nbsp;a&nbsp;given&nbsp;crisp&nbsp;valued&nbsp;relation&nbsp;of&nbsp;a&nbsp;compatible<br>
 other&nbsp;digraph&nbsp;(same&nbsp;nodes&nbsp;or&nbsp;actions).</tt></dd></dl>
@@ -557,7 +559,7 @@ res&nbsp;=&nbsp;((netdet,singleton,dom,absorb)+)</tt></dd></dl>
 <dl><dt><a name="QuadraticResiduesDigraph-computeSlaterRanking"><strong>computeSlaterRanking</strong></a>(self, isProbabilistic=False, seed=None, sampleSize=1000, Debug=False)</dt><dd><tt>Renders&nbsp;a&nbsp;ranking&nbsp;of&nbsp;the&nbsp;actions&nbsp;with&nbsp;minimal&nbsp;Slater&nbsp;index.<br>
 Return&nbsp;a&nbsp;tuple:&nbsp;slaterOrder,&nbsp;slaterIndex</tt></dd></dl>
 
-<dl><dt><a name="QuadraticResiduesDigraph-computeSymmetryDegree"><strong>computeSymmetryDegree</strong></a>(self, InPercents=False, Comments=False)</dt><dd><tt>Renders&nbsp;the&nbsp;symmetry&nbsp;degree&nbsp;(Decimal)&nbsp;of&nbsp;the&nbsp;reflexive&nbsp;part&nbsp;of&nbsp;a&nbsp;digraph.<br>
+<dl><dt><a name="QuadraticResiduesDigraph-computeSymmetryDegree"><strong>computeSymmetryDegree</strong></a>(self, InPercents=False, Comments=False)</dt><dd><tt>Renders&nbsp;the&nbsp;symmetry&nbsp;degree&nbsp;(Decimal)&nbsp;of&nbsp;the&nbsp;irreflexive&nbsp;part&nbsp;of&nbsp;a&nbsp;digraph.<br>
 &nbsp;<br>
 ..&nbsp;note::<br>
 &nbsp;<br>
@@ -674,60 +676,6 @@ If&nbsp;inPercent,&nbsp;*result*&nbsp;shifted&nbsp;(+1)&nbsp;and&nbsp;reduced&nb
 
 <dl><dt><a name="QuadraticResiduesDigraph-domkernelrestrict"><strong>domkernelrestrict</strong></a>(self, prekernel)</dt><dd><tt>Parameter:&nbsp;dominant&nbsp;prekernel<br>
 Renders&nbsp;dominant&nbsp;prekernel&nbsp;restricted&nbsp;relation.</tt></dd></dl>
-
-<dl><dt><a name="QuadraticResiduesDigraph-exportD3"><strong>exportD3</strong></a>(self, fileName='index', Comments=True)</dt><dd><tt>This&nbsp;function&nbsp;was&nbsp;designed&nbsp;and&nbsp;implemented&nbsp;by&nbsp;Gary&nbsp;Cornelius,&nbsp;2014&nbsp;for&nbsp;his&nbsp;bachelor&nbsp;thesis&nbsp;at&nbsp;the&nbsp;University&nbsp;of&nbsp;Luxembourg.&nbsp;<br>
-The&nbsp;thesis&nbsp;document&nbsp;with&nbsp;more&nbsp;explanations&nbsp;can&nbsp;be&nbsp;found&nbsp;in&nbsp;the&nbsp;literature/Cornelius&nbsp;directory&nbsp;of&nbsp;a&nbsp;Digraph3&nbsp;working&nbsp;copy.&nbsp;.<br>
-&nbsp;<br>
-*Parameters*:<br>
-&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;fileName,&nbsp;name&nbsp;of&nbsp;the&nbsp;generated&nbsp;html&nbsp;file,&nbsp;default&nbsp;=&nbsp;None&nbsp;(graph&nbsp;name&nbsp;as&nbsp;defined&nbsp;in&nbsp;python);<br>
-&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;Comments,&nbsp;True&nbsp;=&nbsp;default;<br>
-&nbsp;<br>
-The&nbsp;idea&nbsp;of&nbsp;the&nbsp;project&nbsp;was&nbsp;to&nbsp;find&nbsp;a&nbsp;way&nbsp;that&nbsp;allows&nbsp;you&nbsp;to&nbsp;easily&nbsp;get&nbsp;details&nbsp;about&nbsp;certain&nbsp;nodes&nbsp;or&nbsp;edges&nbsp;of&nbsp;a&nbsp;directed&nbsp;graph&nbsp;in&nbsp;a&nbsp;dynamic&nbsp;format.&nbsp;<br>
-Therefore&nbsp;this&nbsp;function&nbsp;allows&nbsp;you&nbsp;to&nbsp;export&nbsp;a&nbsp;html&nbsp;file&nbsp;together&nbsp;with&nbsp;all&nbsp;the&nbsp;needed&nbsp;libraries,&nbsp;including&nbsp;the&nbsp;<br>
-D3&nbsp;Library&nbsp;which&nbsp;we&nbsp;use&nbsp;for&nbsp;graph&nbsp;generation&nbsp;and&nbsp;the&nbsp;physics&nbsp;between&nbsp;nodes,&nbsp;which&nbsp;attracts&nbsp;or&nbsp;pushes&nbsp;nodes&nbsp;away&nbsp;from&nbsp;each&nbsp;other.<br>
-&nbsp;<br>
-Features&nbsp;of&nbsp;our&nbsp;graph&nbsp;include&nbsp;i.e.&nbsp;:&nbsp;<br>
-&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;A&nbsp;way&nbsp;to&nbsp;only&nbsp;inspect&nbsp;a&nbsp;node&nbsp;and&nbsp;it's&nbsp;neighbours&nbsp;<br>
-&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;Dynamic&nbsp;draging&nbsp;and&nbsp;freezing&nbsp;of&nbsp;the&nbsp;graph<br>
-&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;Export&nbsp;of&nbsp;a&nbsp;newly&nbsp;created&nbsp;general&nbsp;graph<br>
-&nbsp;<br>
-You&nbsp;can&nbsp;find&nbsp;the&nbsp;list&nbsp;of&nbsp;fututres&nbsp;in&nbsp;the&nbsp;Section&nbsp;below&nbsp;which&nbsp;is&nbsp;arranged&nbsp;according&nbsp;to&nbsp;the&nbsp;graph&nbsp;type.<br>
-&nbsp;<br>
-*If&nbsp;the&nbsp;graph&nbsp;is&nbsp;an&nbsp;outrankingdigraphs*:<br>
-&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;Nodes&nbsp;can&nbsp;be&nbsp;dragged&nbsp;and&nbsp;only&nbsp;the&nbsp;name&nbsp;and&nbsp;comment&nbsp;can&nbsp;be&nbsp;edited.&nbsp;<br>
-&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;Edges&nbsp;can&nbsp;be&nbsp;inspected&nbsp;but&nbsp;not&nbsp;edited&nbsp;for&nbsp;this&nbsp;purpose&nbsp;a&nbsp;special&nbsp;json&nbsp;array&nbsp;containing&nbsp;all&nbsp;possible&nbsp;pairwiseComparisions&nbsp;is&nbsp;generated.<br>
-&nbsp;<br>
-*If&nbsp;the&nbsp;graph&nbsp;is&nbsp;a&nbsp;general&nbsp;graph*:<br>
-&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;Nodes&nbsp;can&nbsp;be&nbsp;dragged,&nbsp;added,&nbsp;removed&nbsp;and&nbsp;edited.<br>
-&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;Edges&nbsp;can&nbsp;be&nbsp;added,&nbsp;removed,&nbsp;inverted&nbsp;and&nbsp;edited.&nbsp;But&nbsp;edges&nbsp;cannot&nbsp;be&nbsp;inspected.<br>
-&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;The&nbsp;pairwiseComparisions&nbsp;key&nbsp;leads&nbsp;to&nbsp;an&nbsp;empty&nbsp;array&nbsp;{}.<br>
-&nbsp;<br>
-In&nbsp;both&nbsp;cases,&nbsp;undefined&nbsp;edges&nbsp;can&nbsp;be&nbsp;hidden&nbsp;and&nbsp;reappear&nbsp;after&nbsp;a&nbsp;simple&nbsp;reload.(right&nbsp;click&nbsp;-&nbsp;reload)<br>
-&nbsp;<br>
-*The&nbsp;generated&nbsp;files*:<br>
-&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;d3.v3.js,&nbsp;contains&nbsp;the&nbsp;D3&nbsp;Data-driven&nbsp;Documents&nbsp;source&nbsp;code,&nbsp;containing&nbsp;one&nbsp;small&nbsp;addition&nbsp;that&nbsp;we&nbsp;made&nbsp;in&nbsp;order&nbsp;to&nbsp;be&nbsp;able&nbsp;to&nbsp;easyly&nbsp;import&nbsp;links&nbsp;with&nbsp;a&nbsp;different&nbsp;formatself.<br>
-&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;digraph3lib.js,&nbsp;contains&nbsp;our&nbsp;library.&nbsp;This&nbsp;file&nbsp;contains&nbsp;everything&nbsp;that&nbsp;we&nbsp;need&nbsp;from&nbsp;import&nbsp;of&nbsp;an&nbsp;XMCDA2&nbsp;file,&nbsp;visualization&nbsp;of&nbsp;the&nbsp;graph&nbsp;to&nbsp;export&nbsp;of&nbsp;the&nbsp;changed&nbsp;graph.<br>
-&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;d3export.json,&nbsp;usually&nbsp;named&nbsp;after&nbsp;the&nbsp;python&nbsp;graph&nbsp;name&nbsp;followed&nbsp;by&nbsp;a&nbsp;ticket&nbsp;number&nbsp;if&nbsp;the&nbsp;file&nbsp;is&nbsp;already&nbsp;present.&nbsp;It&nbsp;is&nbsp;the&nbsp;JSON&nbsp;file&nbsp;that&nbsp;is&nbsp;exported&nbsp;with&nbsp;the&nbsp;format&nbsp;"{"xmcda2":&nbsp;"some&nbsp;xml","pairwiseComparisions":"{"a01":&nbsp;"some&nbsp;html",...}"}.<br>
-&nbsp;<br>
-*Example&nbsp;1*:<br>
-&nbsp;&nbsp;&nbsp;&nbsp;#.&nbsp;python3&nbsp;session:<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&gt;&gt;&gt;&nbsp;from&nbsp;digraphs&nbsp;import&nbsp;RandomValuationDigraph<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&gt;&gt;&gt;&nbsp;dg&nbsp;=&nbsp;RandomValuationDigraph(order=5,Normalized=True)<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&gt;&gt;&gt;&nbsp;dg.<a href="#QuadraticResiduesDigraph-exportD3">exportD3</a>()<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;or<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&gt;&gt;&nbsp;dg.<a href="#QuadraticResiduesDigraph-showInteractiveGraph">showInteractiveGraph</a>()<br>
-&nbsp;<br>
-&nbsp;&nbsp;&nbsp;&nbsp;#.&nbsp;index.html:&nbsp;&nbsp;&nbsp;<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;Main&nbsp;Screen:<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;..&nbsp;image::&nbsp;randomvaluation_d3_main.png<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;Inspect&nbsp;function:<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;..&nbsp;image::&nbsp;randomvaluation_d3_inspect.png<br>
-&nbsp;<br>
-..&nbsp;note::<br>
-&nbsp;<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;If&nbsp;you&nbsp;want&nbsp;to&nbsp;use&nbsp;the&nbsp;automatic&nbsp;load&nbsp;in&nbsp;Chrome,&nbsp;try&nbsp;using&nbsp;the&nbsp;command:&nbsp;"python&nbsp;-m&nbsp;SimpleHTTPServer"<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;and&nbsp;then&nbsp;access&nbsp;the&nbsp;index.html&nbsp;via&nbsp;"<a href="http://0.0.0.0:8000/index.html">http://0.0.0.0:8000/index.html</a>".<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;In&nbsp;order&nbsp;to&nbsp;load&nbsp;the&nbsp;CSS&nbsp;an&nbsp;active&nbsp;internet&nbsp;connection&nbsp;is&nbsp;needed!</tt></dd></dl>
 
 <dl><dt><a name="QuadraticResiduesDigraph-exportGraphViz"><strong>exportGraphViz</strong></a>(self, fileName=None, actionsSubset=None, bestChoice=set(), worstChoice=set(), Comments=True, graphType='png', graphSize='7,7', relation=None)</dt><dd><tt>export&nbsp;GraphViz&nbsp;dot&nbsp;file&nbsp;&nbsp;for&nbsp;graph&nbsp;drawing&nbsp;filtering.</tt></dd></dl>
 
@@ -992,9 +940,6 @@ Example::<br>
 &nbsp;&nbsp;&nbsp;:align:&nbsp;center</tt></dd></dl>
 
 <dl><dt><a name="QuadraticResiduesDigraph-showHTMLRelationTable"><strong>showHTMLRelationTable</strong></a>(self, actionsList=None, relation=None, IntegerValues=False, ndigits=2, Colored=True, tableTitle='Valued Adjacency Matrix', relationName='r(x S y)', ReflexiveTerms=False, fromIndex=None, toIndex=None)</dt><dd><tt>Launches&nbsp;a&nbsp;browser&nbsp;window&nbsp;with&nbsp;the&nbsp;colored&nbsp;relation&nbsp;table&nbsp;of&nbsp;self.</tt></dd></dl>
-
-<dl><dt><a name="QuadraticResiduesDigraph-showInteractiveGraph"><strong>showInteractiveGraph</strong></a>(self)</dt><dd><tt>Save&nbsp;the&nbsp;graph&nbsp;and&nbsp;all&nbsp;needed&nbsp;files&nbsp;for&nbsp;the&nbsp;visualization&nbsp;of&nbsp;an&nbsp;interactive&nbsp;graph&nbsp;generated&nbsp;by&nbsp;the&nbsp;<a href="#QuadraticResiduesDigraph-exportD3">exportD3</a>()&nbsp;function.<br>
-For&nbsp;best&nbsp;experience&nbsp;make&nbsp;sure&nbsp;to&nbsp;use&nbsp;Firefox,&nbsp;because&nbsp;other&nbsp;browser&nbsp;restrict&nbsp;the&nbsp;loading&nbsp;of&nbsp;local&nbsp;files.</tt></dd></dl>
 
 <dl><dt><a name="QuadraticResiduesDigraph-showMIS"><strong>showMIS</strong></a>(self, withListing=True)</dt><dd><tt>Prints&nbsp;all&nbsp;maximal&nbsp;independent&nbsp;choices:<br>
 &nbsp;&nbsp;&nbsp;&nbsp;Result&nbsp;in&nbsp;self.<strong>misset</strong>.</tt></dd></dl>

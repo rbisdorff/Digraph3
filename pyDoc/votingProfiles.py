@@ -599,7 +599,8 @@ class LinearVotingProfile(VotingProfile):
                     fo.write('\'' + str(x) + '\':' + str(-evaluation[g][x]) + ',\n')
                     
             fo.write('},\n')
-        fo.write( '}\n')
+        fo.write('}\n')
+        fo.write("NA = Decimal('999')\n")
         fo.close()
 
     def showHTMLVotingHeatmap(self,criteriaList=None, \
@@ -901,7 +902,7 @@ class ApprovalVotingProfile(VotingProfile):
 
               1, if approved;
               0, if disapproved;
-              -999, miising evalaution otherwise,
+              -999, missing evalaution otherwise,
         """
         from copy import deepcopy
         print('*--- Saving as performance tableau in file: <' + str(fileName) + '.py> ---*')
@@ -1371,10 +1372,10 @@ class RandomVotingProfile(VotingProfile):
         return ballot
 
 #--------------------------------
-class CondorcetDigraph(Digraph,VotingProfile):
+class MajorityMarginsDigraph(Digraph,VotingProfile):
     """
     Specialization of the general Digraph class for generating
-    bipolar-valued marginal pairwise majority difference digraphs.
+    bipolar-valued marginal pairwise majority margins digraphs.
 
     Parameters:
 
@@ -1396,7 +1397,7 @@ class CondorcetDigraph(Digraph,VotingProfile):
     v84(1.0): 	 ['a3', 'a1', 'a2', 'a4', 'a5']
     ...
     ...
-    >>> g = CondorcetDigraph(v,hasIntegerValuation=True)
+    >>> g = MajorityMarginsDigraph(v,hasIntegerValuation=True)
     >>> g.showRelationTable()
     * ---- Relation Table -----
      S   |  'a1'  'a2'	 'a3'	'a4'  'a5'	  
@@ -1816,6 +1817,11 @@ class CondorcetDigraph(Digraph,VotingProfile):
                 print('  %s Ambiguous ranking %s' % (space,list(iach)))
             print(' %s%s%s last ranked: %s (%.2f)' % (space,n-i,nstr,ch,rankingByChoosing[n-i-1][1][0]))
 
+class CondorcetDigraph(MajorityMarginsDigraph):
+    """
+    Dummy obsolete class name for MajorityMarginsDigraph class.
+    """
+
 #----------test voting Digraph class ----------------
 if __name__ == "__main__":
     from transitiveDigraphs import *
@@ -1832,10 +1838,13 @@ if __name__ == "__main__":
 
     print('*-------- Testing classes and methods -------')
 
-    ## v = RandomVotingProfile(hasRandomWeights=True,maxWeight=4,Debug=True)
+    v = RandomVotingProfile(hasRandomWeights=True,maxWeight=4,Debug=True)
     ## v.save('testprofile')
     ## v.showAll()
-    ## c = CondorcetDigraph(v)
+    c = CondorcetDigraph(v)
+    print(c)
+    mm = MajorityMarginsDigraph(v)
+    print(mm)
     ## c.save('testcondorcet')
     ## c.showRelationTable()
     ## kr = c.computeKohlerRanking(Debug=False)
@@ -1849,30 +1858,30 @@ if __name__ == "__main__":
     ## for x in arrowRaynaudRanking:
     ##     print '%s: %d (%.2f)' % (x[1], x[0], aar[x[1]]['majorityMargin'])
 
-    lvp = RandomLinearVotingProfile(numberOfCandidates=7,
-                            numberOfVoters=500,
-                            WithPolls=True,
-                            partyRepartition=0.4,
-                            other=0.2,
-                            DivisivePolitics=True,
-                            #seed=0.20990710811162194) # 1 circuit
-                            #seed=0.8077233289616987)  # 2 circuits !
-                            seed=1,
-                            Debug=False)
-    lvp.showRandomPolls()
-##    ## lvp = LinearVotingProfile('templinearprofile')
-##    lvp.save('test')
-##    lvp1 = LinearVotingProfile('test')
-    lvp.save2PerfTab()
-    from outrankingDigraphs import *
-    t = PerformanceTableau('votingPerfTab')
-##    g = BipolarOutrankingDigraph(t)
-##    g.showRelationTable(ReflexiveTerms=False)
-    uog = UnOpposedBipolarOutrankingDigraph(t)
-    uog.showRelationTable(ReflexiveTerms=False)
-    print(uog)
-    uog.showPreKernels()
-    uog.showBestChoiceRecommendation()
+#     lvp = RandomLinearVotingProfile(numberOfCandidates=7,
+#                             numberOfVoters=500,
+#                             WithPolls=True,
+#                             partyRepartition=0.4,
+#                             other=0.2,
+#                             DivisivePolitics=True,
+#                             #seed=0.20990710811162194) # 1 circuit
+#                             #seed=0.8077233289616987)  # 2 circuits !
+#                             seed=1,
+#                             Debug=False)
+#     lvp.showRandomPolls()
+# ##    ## lvp = LinearVotingProfile('templinearprofile')
+# ##    lvp.save('test')
+# ##    lvp1 = LinearVotingProfile('test')
+#     lvp.save2PerfTab()
+#     from outrankingDigraphs import *
+#     t = PerformanceTableau('votingPerfTab')
+# ##    g = BipolarOutrankingDigraph(t)
+# ##    g.showRelationTable(ReflexiveTerms=False)
+#     uog = UnOpposedBipolarOutrankingDigraph(t)
+#     uog.showRelationTable(ReflexiveTerms=False)
+#     print(uog)
+#     uog.showPreKernels()
+#     uog.showBestChoiceRecommendation()
 ##    lvp1 = LinearVotingProfile('templinearprofile')
 ##    lvp1 = LinearVotingProfile('example1')
 ##    lvp1.computeBallot()

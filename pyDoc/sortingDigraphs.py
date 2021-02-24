@@ -219,6 +219,7 @@ class SortingDigraph(BipolarOutrankingDigraph):
         self.criteria = deepcopy(perfTab.criteria)
         self.convertWeight2Decimal()
         self.evaluation = deepcopy(perfTab.evaluation)
+        self.NA = deepcopy(perfTab.NA)
         self.convertEvaluation2Decimal()
 
         # keep a copy of the original actions set before adding the profiles
@@ -1626,6 +1627,7 @@ class QuantilesSortingDigraph(SortingDigraph):
         self.convertWeight2Decimal()
         evaluation = normPerfTab.evaluation
         self.evaluation = evaluation
+        self.NA = copy2self(perfTab.NA)
         self.convertEvaluation2Decimal()
         self.runTimes = {'dataInput': time()-tt}
 
@@ -2555,17 +2557,22 @@ class QuantilesSortingDigraph(SortingDigraph):
         from math import floor
         from copy import copy, deepcopy
         LowerClosed = self.criteriaCategoryLimits['LowerClosed']
+        criterion = self.criteria[g]
+        evaluation = self.evaluation
+        NA = self.NA
+        actionsOrig = self.actionsOrig
         gValues = []
-        for x in self.actionsOrig:
+        
+        for x in actionsOrig:
             if Debug:
-                print('g,x,evaluation[g][x]',g,x,self.evaluation[g][x])
-            if self.evaluation[g][x] != Decimal('-999'):
-                gValues.append(self.evaluation[g][x])
+                print('g,x,evaluation[g][x]',g,x,evaluation[g][x])
+            if evaluation[g][x] != NA:
+                gValues.append(evaluation[g][x])
         gValues.sort()
         if PrefThresholds:
             try:
-                gPrefThrCst = self.criteria[g]['thresholds']['pref'][0]
-                gPrefThrSlope = self.criteria[g]['thresholds']['pref'][1]
+                gPrefThrCst = criterion['thresholds']['pref'][0]
+                gPrefThrSlope = criterion['thresholds']['pref'][1]
             except:
                 gPrefThrCst = Decimal('0')
                 gPrefThrSlope = Decimal('0')            
@@ -2646,9 +2653,9 @@ class QuantilesSortingDigraph(SortingDigraph):
         """
         extract normal actions keys()
         """
-        profiles = set([x for x in list(self.profiles.keys())])
+        profiles = set([x for x in self.profiles])
         if action == None:
-            actionsExt = set([x for x in list(self.actions.keys())])
+            actionsExt = set([x for x in self.actions])
             if withoutProfiles:
                 return actionsExt - profiles
             else:
@@ -3108,7 +3115,8 @@ class QuantilesSortingDigraph(SortingDigraph):
         Max = self.valuationdomain['max']
         Med = self.valuationdomain['med']
         Min = self.valuationdomain['min']
-        actions = [x for x in self.actionsOrig]
+        #actions = [x for x in self.actionsOrig]
+        actions = self.getActionsKeys()
         currActions = set(actions)
         sortingRelation = {}
         for x in actions:
@@ -3134,10 +3142,10 @@ class QuantilesSortingDigraph(SortingDigraph):
             currActions = currActions - ibch
         return sortingRelation
 
-##############################################################333333
-#-------------
+##############################################################
+
 from performanceQuantiles import PerformanceQuantiles  
-class NormedQuantilesRatingDigraph(QuantilesSortingDigraph,PerformanceQuantiles):
+class LearnedQuantilesRatingDigraph(QuantilesSortingDigraph,PerformanceQuantiles):
     """
     Specialisation of the root :py:class:`sortingDigraphs.SortingDigraph` class
     for absolute rating of a new set of decision actions with
@@ -3164,10 +3172,10 @@ class NormedQuantilesRatingDigraph(QuantilesSortingDigraph,PerformanceQuantiles)
         >>> # rating the new set of decision actions after
         >>> # updating the historical performance quantiles
         >>> pq.updateQuantiles(newActions,historySize=None)
-        >>> nqr = NormedQuantilesRatingDigraph(pq,newActions)
+        >>> nqr = LearnedQuantilesRatingDigraph(pq,newActions)
         >>> # inspecting the rating result
         >>> nqr.showQuantilesRating()
-        *-------- Normed quantiles rating result ---------
+        *-------- Learned quantiles rating result ---------
         [0.60 - 0.70[ ['a01']
         [0.50 - 0.60[ ['a07', 'a10', 'a02', 'a08', 'a09']
         [0.40 - 0.50[ ['a03', 'a06', 'a05']
@@ -3175,7 +3183,7 @@ class NormedQuantilesRatingDigraph(QuantilesSortingDigraph,PerformanceQuantiles)
         >>> nqr.showHTMLRatingHeatmap(pageTitle='Heatmap of Quantiles Rating')
 
     .. image:: heatMap3.png
-        :alt: usage example of Normed Quantiles Rating Digraph
+        :alt: usage example of Learned Quantiles Rating Digraph
         :width: 500 px
         :align: center
 
@@ -3223,12 +3231,14 @@ class NormedQuantilesRatingDigraph(QuantilesSortingDigraph,PerformanceQuantiles)
         self.limitingQuantiles = deepcopy(perfQuantiles.limitingQuantiles)
         self.historySizes = deepcopy(perfQuantiles.historySizes)
         self.cdf = deepcopy(perfQuantiles.cdf)
-        self.name = 'normedRatingDigraph'
+        self.NA = deepcopy(perfQuantiles.NA)
+        self.name = 'learnedRatingDigraph'
         # import the actions to rate
         if newData != None:
             try:  # randomActions format {'actions': .., 'evaluation':..}
                 self.newActions = newData['actions']
                 self.evaluation = newData['evaluation']
+                ## need NA to found somewhere !!!
             except:
                 try:  #  randomPerformanceTableau format
                     self.newActions = deepcopy(newData.actions)
@@ -3245,6 +3255,7 @@ class NormedQuantilesRatingDigraph(QuantilesSortingDigraph,PerformanceQuantiles)
             print('1.')
             print('new actions',self.newActions)
             print('new evaluations',self.evaluation)
+            print('NA symbol',self.NA)
             print('Quantiles frequencies: ', self.quantilesFrequencies)
             print('limitingQuantiles',self.limitingQuantiles)
             print()
@@ -3377,6 +3388,7 @@ class NormedQuantilesRatingDigraph(QuantilesSortingDigraph,PerformanceQuantiles)
         perfTab.actions.update(self.profiles)
         perfTab.criteria = self.criteria
         perfTab.evaluation = deepcopy(self.evaluation)
+        perfTab.NA = self.NA
         
         if Debug:
             print('6.')
@@ -3441,6 +3453,18 @@ class NormedQuantilesRatingDigraph(QuantilesSortingDigraph,PerformanceQuantiles)
             rp = RankedPairsRanking(g)
             actionsList = rp.rankedPairsRanking
             self.rankingRule = 'RankedPairs'
+            self.rankingScores = None
+        elif rankingRule == 'IteratedCopeland':
+            from linearOrders import IteratedCopelandRanking
+            rp = IteratedCopelandRanking(g)
+            actionsList = rp.iteratedCopelandRanking
+            self.rankingRule = 'IteratedCopeland'
+            self.rankingScores = None
+        elif rankingRule == 'IteratedNetFlows':
+            from linearOrders import IteratedNetFlowsRanking
+            rp = IteratedNetFlowsRanking(g)
+            actionsList = rp.iteratedNetFlowsRanking
+            self.rankingRule = 'IteratedNetFlows'
             self.rankingScores = None
         elif rankingRule == 'Kemeny':
             if g.order > 12:
@@ -3864,22 +3888,43 @@ class NormedQuantilesRatingDigraph(QuantilesSortingDigraph,PerformanceQuantiles)
 
         return sorting
 
-    def exportGraphViz(self,fileName=None,relation=None,\
+    def exportRatingGraphViz(self,fileName=None,\
                              Comments=True,\
                              graphType='png',graphSize='7,7',\
                              fontSize=10):
         """
-        Dummy for self.exportRatingGraphViz()
+        Dummy for self.exportRatingByRankingGraphViz()
         """
-        self.exportRatingGraphViz(fileName=fileName,relation=relation,\
+        self.exportRatingByRankingGraphViz(fileName=fileName,\
                                    Comments=Comments,\
                                    graphType=graphType,\
                                    graphSize=graphSize,
                                    fontSize=fontSize)
 
+    def exportRatingBySortingGraphViz(self,fileName=None,\
+                             Comments=True,\
+                             graphType='png',graphSize='12,12',\
+                             fontSize=10):
+        """
+        Graphviz drawing of the rating-by-sorting digraph
+        """
+        from copy import deepcopy
+        selfActions = deepcopy(self.actions)
+        self.actions = self.getActionsKeys()
+        sortingRelation = self.computeSortingRelation()
+        selfRelation = deepcopy(self.relation)
+        self.relation = sortingRelation
+        from sortingDigraphs import QuantilesSortingDigraph
+        QuantilesSortingDigraph.exportGraphViz(self,\
+                                   fileName=fileName,\
+                                   Comments=Comments,\
+                                   graphType=graphType,\
+                                   graphSize=graphSize,
+                                   fontSize=fontSize)
+        self.actions = selfActions
+        self.relation = selfRelation
 
-    def exportRatingGraphViz(self,fileName=None,
-                             relation=None,
+    def exportRatingByRankingGraphViz(self,fileName=None,\
                              Comments=True,graphType='png',\
                              graphSize='7,7',\
                              fontSize=10,\
@@ -3933,8 +3978,7 @@ class NormedQuantilesRatingDigraph(QuantilesSortingDigraph,PerformanceQuantiles)
             print('*---- exporting a dot file for GraphViz tools ---------*')
 
         # install rating relation (weakly transitive)
-        if relation == None:
-            digraph.relation = digraph.computeRatingRelation()
+        digraph.relation = digraph.computeRatingRelation()
         #    if Debug:
         #        actionKeys = digraph.computeCopelandRanking()
         #        digraph.showHTMLRelationTable(actionsList=actionKeys)
@@ -4058,7 +4102,7 @@ class NormedQuantilesRatingDigraph(QuantilesSortingDigraph,PerformanceQuantiles)
         dot -Grankdir=TB -Tpng quantilesRatingDigraph.dot -o quantilesRatingDigraph.png
 
         .. image:: quantilesRatingDigraph.png
-            :alt: usage example of Normed Quantiles Rating Digraph
+            :alt: usage example of Learned Quantiles Rating Digraph
             :width: 400 px
             :align: center
         
@@ -4082,6 +4126,7 @@ class NormedQuantilesRatingDigraph(QuantilesSortingDigraph,PerformanceQuantiles)
 
     def _htmlRatingHeatmap(self,argCriteriaList=None,
                                argActionsList=None,
+                               WithActionNames=False,
                                #quantiles=None,
                                ndigits=2,
                                contentCentered=True,
@@ -4167,7 +4212,8 @@ class NormedQuantilesRatingDigraph(QuantilesSortingDigraph,PerformanceQuantiles)
                 actionsList = self.actionsRanking
                 rankingRule = self.rankingRule
             else:
-                actionsList = argActionsListrankingRule = self.rankingRule
+                actionsList = argActionsList
+                rankingRule = self.rankingRule
         else:
             if argActionsList == None:
                 if rankingRule == 'Copeland':
@@ -4175,7 +4221,8 @@ class NormedQuantilesRatingDigraph(QuantilesSortingDigraph,PerformanceQuantiles)
                 elif rankingRule == 'NetFlows':
                     actionsList = self.computeNetFlowsRanking()
             else:
-                rankingRule = None 
+                rankingRule = None
+                actionsList = argActionsList
         na = len(actionsList)
         profiles = self.profiles
         categories = self.categories
@@ -4260,16 +4307,19 @@ class NormedQuantilesRatingDigraph(QuantilesSortingDigraph,PerformanceQuantiles)
                 else:
                     xName = '- ' + categories[xcat]['highLimit']
             else:
-                try:
-                    xName = self.actions[x]['shortName']
-                except:
-                    xName = str(x)
+                if WithActionNames:
+                    xName = self.actions[x]['name']
+                else:
+                    try:
+                        xName = self.actions[x]['shortName']
+                    except:
+                        xName = str(x)
             if x in profiles:
                 html += '<tr class="quantile"><th bgcolor=%s>%s</th>' % (rowHeaderColor,xName)
             else:
                 html += '<tr><th bgcolor=%s>%s</th>' % (actionRowHeaderColor,xName)                
             for g in criteriaList:
-                if self.evaluation[g][x] != Decimal("-999"):
+                if self.evaluation[g][x] != self.NA:
                     formatString = '<td bgcolor=%s align="right">%% .%df</td>' % (quantileColor[x][g],ndigits)
                     html += formatString % (self.evaluation[g][x])
                 else:
@@ -4308,7 +4358,7 @@ class NormedQuantilesRatingDigraph(QuantilesSortingDigraph,PerformanceQuantiles)
         except:
             sorting = self.computeSortingCharacteristics(action=action,Debug=Debug)
         catKeys = self.orderedCategoryKeys()
-        keys = [catKeys[0],[catKeys[-1]]]
+        keys = [catKeys[0],catKeys[-1]]
         lowLimit = sorting[action][catKeys[0]]['lowLimit']
         notHighLimit = sorting[action][catKeys[-1]]['lowLimit']
         for c in self.orderedCategoryKeys():
@@ -4335,16 +4385,16 @@ class NormedQuantilesRatingDigraph(QuantilesSortingDigraph,PerformanceQuantiles)
                 credibility            
 
 
-    def showActionsSortingResult(self,actionSubset=None,Debug=False):
+    def showActionsSortingResult(self,actionsSubset=None,Debug=False):
         """
         Shows the quantiles sorting result of all (default) or
         a subset of the decision actions.
         """
-        if actionSubset == None:
+        if actionsSubset == None:
             actions = [x for x in self.newActions]
             #actions.sort()
-        else:
-            actions = [x for x in flatten(actionSubset)]
+        #else:
+        #    actions = [x for x in flatten(actionSubset)]
         print('Quantiles sorting result per decision action')
         for x in actions:
             self.showActionCategories(x,Debug=Debug)
@@ -4354,6 +4404,7 @@ class NormedQuantilesRatingDigraph(QuantilesSortingDigraph,PerformanceQuantiles)
         print('Please use the showHTMLRatingHeatmap() here !!')
     
     def showHTMLRatingHeatmap(self,actionsList=None,
+                              WithActionNames=False,
                                    criteriaList=None,
                                    colorLevels=7,
                                    pageTitle=None,
@@ -4371,7 +4422,7 @@ class NormedQuantilesRatingDigraph(QuantilesSortingDigraph,PerformanceQuantiles)
 
               - *actionsList* and *criteriaList*, if provided,  give the possibility to show the decision alternatives, resp. criteria, in a given ordering.
               - *ndigits* = 0 may be used to show integer evaluation values.
-              - If no *actionsList* is provided, the decision actions are ordered from the best to the worst following the ranking of the NormedQuatilesRatingDigraph instance.              
+              - If no *actionsList* is provided, the decision actions are ordered from the best to the worst following the ranking of the LearnedQuatilesRatingDigraph instance.              
               - It may interesting in some cases to use *RankingRule* = 'NetFlows'.
               - With *Correlations* = *True* and *criteriaList* = *None*, the criteria will be presented from left to right in decreasing order of the correlations between the marginal criterion based ranking and the global ranking used for presenting the decision alternatives.
               - Computing the marginal correlations may be boosted with Threading = True, if multiple parallel computing cores are available.
@@ -4386,7 +4437,7 @@ class NormedQuantilesRatingDigraph(QuantilesSortingDigraph,PerformanceQuantiles)
             ...                           colorLevels = 5)
 
         .. image:: heatMap1.png
-            :alt: usage example of Normed Quantiles Rating Digraph
+            :alt: usage example of Learned Quantiles Rating Digraph
             :width: 550 px
             :align: center
 
@@ -4396,11 +4447,12 @@ class NormedQuantilesRatingDigraph(QuantilesSortingDigraph,PerformanceQuantiles)
         fileName = '/tmp/performanceHeatmap.html'
         fo = open(fileName,'w')
         if pageTitle == None:
-            print('A ranking rule - Copeland (default) or NetFlows may be given with the NormedQuantilesRatingDigraph constructor')
+            print('A ranking rule - Copeland (default) or NetFlows may be given with the LearnedQuantilesRatingDigraph constructor')
             pageTitle = 'Heatmap of Performance Tableau \'%s\'' % self.name
         #quantiles = len(self.quantilesFrequencies)
         fo.write(self._htmlRatingHeatmap(argCriteriaList=criteriaList,
                                              argActionsList=actionsList,
+                                         WithActionNames=WithActionNames,
                                              #quantiles=quantiles,
                                              ndigits=ndigits,
                                              colorLevels=colorLevels,
@@ -4515,6 +4567,11 @@ class NormedQuantilesRatingDigraph(QuantilesSortingDigraph,PerformanceQuantiles)
 ##        else:
 ##            return set([action])           
 
+class NormedQuantilesRatingDigraph(LearnedQuantilesRatingDigraph):
+    """
+    Obsolete name for backward compatibility
+    """
+#
 ##########################################################3
 #----------test SortingDigraph class ----------------
 if __name__ == "__main__":
@@ -4530,8 +4587,8 @@ if __name__ == "__main__":
     ****************************************************
     * Python sortingDigraphs module                    *
     * depends on BipolarOutrankingDigraph and          *
-    * $Revision$                                 *
-    * Copyright (C) 2010 Raymond Bisdorff              *
+    * $Revision$                                       *
+    * Copyright (C) 2010-2020 Raymond Bisdorf          *
     * The module comes with ABSOLUTELY NO WARRANTY     *
     * to the extent permitted by the applicable law.   *
     * This is free software, and you are welcome to    *
@@ -4563,13 +4620,13 @@ if __name__ == "__main__":
 ##
 ##    from randomPerfTabs import Random3ObjectivesPerformanceTableau
 ##    from randomPerfTabs import RandomPerformanceGenerator as PerfTabGenerator
-    nbrActions=1000
-    nbrCrit = 21
-    tp = Random3ObjectivesPerformanceTableau(numberOfActions=nbrActions,\
-                                    numberOfCriteria=nbrCrit,seed=seed)
-
-    qs = QuantilesSortingDigraph(tp,4,LowerClosed=True,Threading=MP)
-    qs.showCriteriaCategoryLimits()
+    nbrActions=100
+    nbrCrit = 13
+    tp1 = RandomCBPerformanceTableau(numberOfActions=nbrActions,\
+                numberOfCriteria=nbrCrit,seed=seed,NA=-1,missingDataProbability=0.1)
+    print(tp1.NA)
+##    qs = QuantilesSortingDigraph(tp,4,LowerClosed=True,Threading=MP)
+##    qs.showCriteriaCategoryLimits()
 ##    #qs.showSorting()
 ##    print('==>> average')
 ##    qs.showHTMLQuantileOrdering(strategy='average')
@@ -4579,17 +4636,20 @@ if __name__ == "__main__":
 ##    qs.showQuantileOrdering(strategy='pessimistic')
 ##    from outrankingDigraphs import *
 ##    tp = PerformanceTableau('exL10')
-    pq = PerformanceQuantiles(tp,5,LowerClosed=False,Debug=False)
-    tpg = PerfTabGenerator(tp,instanceCounter=0,seed=seed)
-    newActions = tpg.randomActions(20)
-    pq.updateQuantiles(newActions,historySize=None)
-    ira = NormedQuantilesRatingDigraph(pq,newActions,\
-                                    rankingRule='best',\
+    pq1 = PerformanceQuantiles(tp1,5,LowerClosed=False,Debug=False)
+    tpg1 = PerfTabGenerator(tp1,instanceCounter=0,seed=seed)
+    newActions = tpg1.randomActions(20)
+    pq1.updateQuantiles(newActions,historySize=None)
+    nqr = LearnedQuantilesRatingDigraph(pq1,newActions,\
+                                    rankingRule='Copeland',\
                                    WithSorting=True,Debug=False,\
                                        Threading=MP,nbrOfCPUs=nbrOfCPUs)
-    print(ira)
-    ira.showQuantilesRating()
-    ira.sorting = ira.computeSortingCharacteristics()
+    qs = QuantilesSortingDigraph(tp1,5)
+    
+    #nqr.showHTMLRatingHeatmap(Correlations=True,rankingRule='Copeland')
+##    ira.showQuantilesRating() ira.sorting =
+##    ira.computeSortingCharacteristics()
+    
     #ira.categoryContent = ira.computeCategoryContents()
     #ira.showSorting()
     #for x in ira.newActions:
@@ -4598,7 +4658,8 @@ if __name__ == "__main__":
     #ira.relation = ratingRelation
 ##    #ira.closeTransitive(Irreflexive=True,Reverse=True)
     #ira.showHTMLRelationTable(actionsList=ira.actionsRanking)
-    ira.exportRatingGraphViz('test2',graphType='pdf')
+    #ira1.exportRatingByRankingGraphViz('testRatRank',graphType='pdf')
+    #ira1.exportRatingBySortingGraphViz('testRatSort',graphType='pdf')
 ##    #ira.showSorting()
 ##    #ira.showHTMLSorting()
 ##    ira.showActionsSortingResult()
@@ -4611,8 +4672,8 @@ if __name__ == "__main__":
 ##                                   Correlations=True,
 ##                                   #rankingRule='best',
 ##                                   )
-##    ira.showRankingScores()
-    print(ira)
+##  ira.showRankingScores()
+##    print(ira)
 ##    print(ira.computeQuantileProfile(0.25))
 ##    print(ira.computeQuantileProfile(0.5))
 ##    print(ira.computeQuantileProfile(0.75))
@@ -4623,8 +4684,8 @@ if __name__ == "__main__":
     print('Enjoy !')
 
     print('*************************************')
-    print('* R.B. december 2010                *')
-    print('* $Revision$                  *')
+    print('* R.B. december 2020                *')
+    print('* $Revision$ Python                 *')
     print('*************************************')
 
 #############################

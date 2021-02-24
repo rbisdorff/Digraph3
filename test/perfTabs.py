@@ -584,7 +584,8 @@ The performance evaluations of each decision alternative on each criterion are g
                                 print('-->>>', th,criteria[g]['thresholds'][th][0],criteria[g]['thresholds'][th][1])
                             print('  Threshold %s : %.2f + %.2fx' %\
                                   (th,criteria[g]['thresholds'][th][0],criteria[g]['thresholds'][th][1]), end=' ')
-                            print('; percentile: ',self.computeVariableThresholdPercentile(g,th,Debug))
+                            print('; percentile: %.2f' %\
+                                  (self.computeVariableThresholdPercentile(g,th,Debug)*100.0) )
                     except:
                         pass
                     print()
@@ -616,7 +617,7 @@ The performance evaluations of each decision alternative on each criterion are g
                         print('  Threshold %s : %.2f + %.2fx'\
                               % (th,criteria[g]['thresholds'][th][0],criteria[g]['thresholds'][th][1]), end=' ')
                         #print self.criteria[g]['thresholds'][th]
-                        print('; percentile: ',self.computeVariableThresholdPercentile(g,th,Debug))
+                        print('; percentile: %.2f' % (self.computeVariableThresholdPercentile(g,th,Debug)*100.0) )
                 except:
                     pass
                 print()

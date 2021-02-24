@@ -3108,7 +3108,7 @@ Worse even, the digraph *rdg* admits furthermore a high number of outranking cir
     144:  ['mil', 'stut', 'qut'] , credibility : 0.300
     145:  ['mil', 'stut', 'tud'] , credibility : 0.300
 
-In :numref:`robustCircuits`, we notice, for instance, two outranking circuits of length 4 (see circuits #1 and #83). Let us explore below the bipolar-valued robust outranking characteristics :math:`r(x \succsim y)` of the first circuit.
+Among the 145 detected robust outranking circuits reported in :numref:`robustCircuits`, we notice, for instance, two outranking circuits of length 4 (see circuits #1 and #83). Let us explore below the bipolar-valued robust outranking characteristics :math:`r(x \succsim y)` of the first circuit.
 
 .. code-block:: pycon
    :name: robustDenotation
@@ -3174,7 +3174,7 @@ We may print out the difference between the *overall scores* based THE ranking a
 
    >>> # rdg.netFlowsRankingDict: ordered dictionary with net flow
    >>> # scores stored in rdg by the computeNetFlowsRanking() method
-   >>> # theScires = [(xScore_1,x_1), (xScore_2,x_2),... ]
+   >>> # theScores = [(xScore_1,x_1), (xScore_2,x_2),... ]
    >>> # is sorted in decreasing order of xscores_i
    >>> print(\
     ' NetFlows ranking   gtch  gres  gcit  gint  gind   THE ranking')
