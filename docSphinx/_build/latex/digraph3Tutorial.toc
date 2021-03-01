@@ -55,7 +55,7 @@
 \contentsline {subsection}{\numberline {8.2}Performance tableau}{98}{subsection.8.2}%
 \contentsline {subsection}{\numberline {8.3}Outranking digraph}{100}{subsection.8.3}%
 \contentsline {subsection}{\numberline {8.4}\sphinxstyleemphasis {Rubis} best choice recommendations}{102}{subsection.8.4}%
-\contentsline {subsection}{\numberline {8.5}Computing \sphinxstyleemphasis {strict best} choice recommendations}{104}{subsection.8.5}%
+\contentsline {subsection}{\numberline {8.5}Computing \sphinxstyleemphasis {strict best} choice recommendations}{105}{subsection.8.5}%
 \contentsline {subsection}{\numberline {8.6}Weakly ordering the outranking digraph}{106}{subsection.8.6}%
 \contentsline {section}{\numberline {9}Alice’s best choice: A \sphinxstyleemphasis {selection} case study }{108}{section.9}%
 \contentsline {subsection}{\numberline {9.1}The decision problem}{109}{subsection.9.1}%

@@ -3436,7 +3436,7 @@ It may, finally, be interesting to assess, similarly, the ordinal correlation of
 
 The THE ranking result is similarly correlated (+0.907, Line 7) with the pairwise global robust outranking relation. By its overall weighted scoring rule, the THE ranking induces marginal criterion correlations that are naturally compatible with the given significance weight preorder (Lines 13-17). Notice that the mean marginal correlation is of a similar value (+0.51, Line 19) as the *netFlows* ranking's. Yet, its standard deviation is higher, which leads to a slightly less fair balancing of the three major ranking criteria.
 
-To conclude, let us emphasize, that, without any commensurability hypothesis and by taking, furthermore, into account, first, the always present more or less imprecision of any performance grading and, secondly, solely ordinal criteria significance weights, we may obtain here with our robust outranking approach a very similar ranking result with more or less a same, when not better, preference modelling quality. A convincing heatmap view may be generated in the default system browser with following command.
+To conclude, let us emphasize, that, without any commensurability hypothesis and by taking, furthermore, into account, first, the always present more or less imprecision of any performance grading and, secondly, solely ordinal criteria significance weights, we may obtain here with our robust outranking approach a very similar ranking result with more or less a same, when not better, preference modelling quality. A convincing heatmap view of the 25 first-ranked Institutions may be generated in the default system browser with following command.
 
 .. code-block:: pycon
    :linenos:
@@ -3445,7 +3445,8 @@ To conclude, let us emphasize, that, without any commensurability hypothesis and
                                    outrankingModel='this',\
 				   rankingRule='NetFlows',\
 				   ndigits=1,\
-				   Correlations=True)
+				   Correlations=True,
+				   fromIndex=0,toIndex=25)
 
 .. Figure:: theHeatmap.png
     :width: 600pt
