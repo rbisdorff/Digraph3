@@ -3394,7 +3394,7 @@ Slightly contradictory (-0.11) appear the *Citations* and *Industrial income* cr
 
 A *Principal Component Analysis* may well illustrate the previous findings.
 
-   >>> rdg.export3DplotOfCriteriaCorrelation(Type='png')
+   >>> rdg.export3DplotOfCriteriaCorrelation(graphType='png')
 
 .. Figure:: the_cs_3Dcorrelation.png
     :name: thecs3Dcorrelation
@@ -3445,7 +3445,7 @@ To conclude, let us emphasize, that, without any commensurability hypothesis and
                                    outrankingModel='this',\
 				   rankingRule='NetFlows',\
 				   ndigits=1,\
-				   Correlations=True,
+				   Correlations=True,\
 				   fromIndex=0,toIndex=25)
 
 .. Figure:: theHeatmap.png

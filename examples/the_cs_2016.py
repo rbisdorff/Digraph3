@@ -260,7 +260,7 @@ actions = OrderedDict([
 'comment': 'UK',
 }),
 ('ued', {
-'name': 'University of Edeinburgh',
+'name': 'University of Edinburgh',
 'comment': 'UK',
 }),
 ('uiu', {
@@ -309,6 +309,28 @@ actions = OrderedDict([
 }),
 ])
 objectives = OrderedDict([
+    ('Teaching',{'name':'Best learning environment',
+             'comment':'Reputation survey; Staff-to-student ration; Doctorate-to-student ratio, Doctorate-to-academic-staff ratio, Institutional income.',
+             'criteria':['gtch'],
+             'weight':Decimal('30.0')}),
+   ('Research',{'name':'Highest volume and repustation',
+            'comment':'Reputation survey; Research income; Research productivity',
+            'criteria':['gres'],
+            'weight':Decimal('30.0')}),
+   ('Citations',{'name':'Highest research influence',
+            'comment':'Impact',
+            'criteria':['gcit'],
+            'weight':Decimal('27.5')}),
+   ('International outlook',{'name':'Most international staff, students and research',
+            'comment':'Proportion of international students; - of international staff; international collaborations',
+            'criteria':['gint'],
+            'weight':Decimal('7.5'),
+            }),
+   ('Industry income',{'name':'Best knowledge transfer',
+            'comment':'Volume',
+            'criteria':['gind'],
+            'weight':Decimal('5.0'),
+            }),
 ])
 criteria = OrderedDict([
 ('gtch', {
@@ -349,7 +371,7 @@ criteria = OrderedDict([
 }),
 ('gind', {
 'name': 'Industry income',
-'comment': 'Innovation',
+'comment': 'Knowledge transfer',
 'version': 'performance',
 'preferenceDirection': 'max',
 'scale': (Decimal('0.00'), Decimal('100.00')),

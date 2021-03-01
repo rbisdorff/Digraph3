@@ -1010,8 +1010,9 @@ class OutrankingDigraph(Digraph,PerformanceTableau):
 
     def export3DplotOfCriteriaCorrelation(self,plotFileName="correlation",
                                           ValuedCorrelation=False,Type="pdf",
+                                          graphType='pdf',
                                           Comments=False,bipolarFlag=False,
-                                          dist=True,centeredFlag=False,
+                                          _dist=True,_centeredFlag=False,
                                           tempDir=None):
         """
         use Calmat and R for producing a plot of the principal components of
@@ -1020,12 +1021,13 @@ class OutrankingDigraph(Digraph,PerformanceTableau):
         *Parameters*;
 
             * *plotFileName* := name of the created R plot image.
-            * *Type* := format of graphics file: pdf, png, jpeg, xfig 
+            * deprecated ! *Type*,
+            * *graphType* := format of graphics file: pdf, png, jpeg, xfig, 
             * *ValuedCorrelation* := False (tau by default) | True (r(<=>) otherwise
             * *tempDir* : if None the tempfile.gettempdir() is used to get the platform independent temporary directory.
             * *bipolarFlag*: obsolete
-            * *dist*: internal Calmat flag
-            * *centeredFlag* : internal Calmat flag
+            * *_dist*: internal Calmat flag
+            * *_centeredFlag* : internal Calmat flag
             
         """
         import time
@@ -1034,6 +1036,7 @@ class OutrankingDigraph(Digraph,PerformanceTableau):
         currentDir = os.getcwd()
         #print(currentDir)
         plotFileName = '%s/%s' % (currentDir,plotFileName)
+        Type = graphType
         if Comments:
             print('3DplotFileName: %s' % plotFileName)
         if tempDir == None:
@@ -1051,16 +1054,16 @@ class OutrankingDigraph(Digraph,PerformanceTableau):
             fo.close()
             self.saveCriteriaCorrelationTable(fileName='tempcorr.prn',Silent=True,
                                               ValuedCorrelation=ValuedCorrelation,
-                                              Bipolar=bipolarFlag,Centered=centeredFlag)
+                                              Bipolar=bipolarFlag,Centered=_centeredFlag)
             # create Calmat script and calmat execution (the prn extension is standard)
             try:
                 if Comments:
-                    if dist:
+                    if _dist:
                         cmd = 'env defdist.sh tempcorr '+str(n)+' '+str(n)
                     else:
                         cmd = 'env defdista.sh tempcorr '+str(n)+' '+str(n) 
                 else:
-                    if dist:
+                    if _dist:
                         cmd = 'env defdist.sh tempcorr '+str(n)+' '+str(n)+' > /dev/null'
                     else:
                         cmd = 'env defdista.sh tempcorr '+str(n)+' '+str(n)+' > /dev/null'
@@ -1097,7 +1100,7 @@ class OutrankingDigraph(Digraph,PerformanceTableau):
                 fo.write('test.mat <- matrix(scan("compolg.prn"),ncol=%d,byrow=T)\n' % (n))
                 fo.write('lim1 <- max(test.mat)\n')
                 fo.write('lim2 <- min(test.mat)\n')
-                if centeredFlag:
+                if _centeredFlag:
                     fo.write('choose12<-c(%d,%d)\n' % (1,2))
                     fo.write('choose23<-c(%d,%d)\n' % (2,3))
                     fo.write('choose13<-c(%d,%d)\n' % (1,3))
@@ -1135,7 +1138,7 @@ class OutrankingDigraph(Digraph,PerformanceTableau):
                 fo.write('abline(h=0,v=0,col="grey",lty="dotted")\n')            
                 fo.write('title(sub=paste("total inertia:",(valprop[choose13,2][1]+valprop[choose13,2][2])*100,"%"),main="factors 1 and 3",col="blue")\n')
                 fo.write('text(test.mat[,choose13],labels=test.labels,col="red3",cex=1.0)\n')
-                if centeredFlag:
+                if _centeredFlag:
                     fo.write('barplot(valprop[1:nrow(valprop)-1,2]*100,names.arg=c(1:%d),main="Axis inertia (in %%)",col="orangered")\n' % (n-1))
                 else:
                     fo.write('barplot(valprop[nrow(valprop):2,2]*100,names.arg=c(1:%d),main="Axis inertia (in %%)",col="orangered")\n' % (n-1))     
@@ -1161,17 +1164,19 @@ class OutrankingDigraph(Digraph,PerformanceTableau):
         os.chdir(currentDir)
         
 
-    def export3DplotOfActionsCorrelation(self,plotFileName="correlation",Type="pdf",Comments=False,bipolarFlag=False,dist=True,centeredFlag=False):
+    def export3DplotOfActionsCorrelation(self,plotFileName="correlation",Type="pdf",graphType='pdf',Comments=False,bipolarFlag=False,_dist=True,_centeredFlag=False):
         """
         use Calmat and R for producing a png plot of the principal components of
-        the the actions ordinal correlation table.
+        the the actions ordinal correlation table. 
+
+        See export3DPlotCriteriaCorrelation()
         """
         import time
         #from tempfile import TemporaryDirectory
         #with TemporaryDirectory(dir=tempDir) as tempDirName:
-    
+        Type = graphType
         if Comments:
-            print('*----  export 3dplot of type %s -----' % (Type))
+            print('*----  export 3dplot of type %s -----' % (graphType))
         import os
         actionsList = [x for x in self.actions]
         actionsList.sort()
@@ -1181,16 +1186,16 @@ class OutrankingDigraph(Digraph,PerformanceTableau):
             fo.write('%s ' % (key))
         fo.close()
         self.saveActionsCorrelationTable(fileName='tempcorr.prn',Silent=True,
-                                         Bipolar=bipolarFlag,Centered=centeredFlag)
+                                         Bipolar=bipolarFlag,Centered=_centeredFlag)
         # create Calmat script and calmat execution (the prn extension is standard)
         try:
             if Comments:
-                if dist:
+                if _dist:
                     cmd = 'env defdist.sh tempcorr '+str(n)+' '+str(n)
                 else:
                     cmd = 'env defdista.sh tempcorr '+str(n)+' '+str(n) 
             else:
-                if dist:
+                if _dist:
                     cmd = 'env defdist.sh tempcorr '+str(n)+' '+str(n)+' > /dev/null'
                 else:
                     cmd = 'env defdista.sh tempcorr '+str(n)+' '+str(n)+' > /dev/null'
@@ -1227,7 +1232,7 @@ class OutrankingDigraph(Digraph,PerformanceTableau):
             fo.write('test.mat <- matrix(scan("compolg.prn"),ncol=%d,byrow=T)\n' % (n))
             fo.write('lim1 <- max(test.mat)\n')
             fo.write('lim2 <- min(test.mat)\n')
-            if centeredFlag:
+            if _centeredFlag:
                 fo.write('choose12<-c(%d,%d)\n' % (1,2))
                 fo.write('choose23<-c(%d,%d)\n' % (2,3))
                 fo.write('choose13<-c(%d,%d)\n' % (1,3))
@@ -1265,7 +1270,7 @@ class OutrankingDigraph(Digraph,PerformanceTableau):
             fo.write('abline(h=0,v=0,col="grey",lty="dotted")\n')            
             fo.write('title(sub=paste("total inertia:",(valprop[choose13,2][1]+valprop[choose13,2][2])*100,"%"),main="factors 1 and 3",col="blue")\n')
             fo.write('text(test.mat[,choose13],labels=test.labels,col="red3",cex=1.0)\n')
-            if centeredFlag:
+            if _centeredFlag:
                 fo.write('barplot(valprop[1:nrow(valprop)-1,2]*100,names.arg=c(1:%d),main="Axis inertia (in %%)",col="orangered")\n' % (n-1))
             else:
                 fo.write('barplot(valprop[nrow(valprop):2,2]*100,names.arg=c(1:%d),main="Axis inertia (in %%)",col="orangered")\n' % (n-1))     
