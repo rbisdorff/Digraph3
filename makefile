@@ -3,7 +3,7 @@
 ## version 3.9
 ########################
 PYTHON=python3.9
-PYTEST=pytest
+PYTEST=${PYTHON} -m pytest
 SPHINX=sphinx-build
 INSTALLDIR=/usr/local/bin
 CC=gcc

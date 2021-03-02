@@ -1,6 +1,6 @@
 "criteria","name","weight","scale","prefDir","thresholds","a1","a2","a3","a4","a5","a6","a7"
-"b1","random ordinal benefit criterion","2.0","(0, 10)","max","OrderedDict()",5.00,5.00,8.00,5.00,3.00,4.00,3.00
-"b2","random ordinal benefit criterion","2.0","(0, 10)","max","OrderedDict()",8.00,2.00,6.00,9.00,7.00,3.00,4.00
-"b3","random ordinal benefit criterion","2.0","(0, 10)","max","OrderedDict()",9.00,3.00,3.00,8.00,1.00,2.00,4.00
-"c1","random ordinal cost criterion","-3.0","(0, 10)","min","OrderedDict()",10.00,3.00,6.00,7.00,5.00,3.00,9.00
-"c2","random cardinal cost criterion","-3.0","(0.0, 100.0)","min","OrderedDict([('ind', (Decimal('3.181035450850369'), Decimal('0'))), ('pref', (Decimal('6.41'), Decimal('0'))), ('veto', (Decimal('49.29152312629661'), Decimal('0')))])",65.05,38.52,53.32,71.89,16.58,35.16,65.48
+"b1","random ordinal benefit criterion","1.0","(0, 10)","max","OrderedDict()",2.00,5.00,3.00,7.00,6.00,7.00,7.00
+"b2","random cardinal benefit criterion","1.0","(0.0, 100.0)","max","OrderedDict([('ind', (Decimal('0.6081675984728707'), Decimal('0'))), ('pref', (Decimal('1.53'), Decimal('0'))), ('veto', (Decimal('60.43725883105163'), Decimal('0')))])",27.10,78.16,46.73,87.50,48.26,77.58,26.49
+"b3","random cardinal benefit criterion","1.0","(0.0, 100.0)","max","OrderedDict([('ind', (Decimal('3.4140335450233446'), Decimal('0'))), ('pref', (Decimal('5.88'), Decimal('0'))), ('veto', (Decimal('59.95659212217034'), Decimal('0')))])",28.45,84.78,22.57,24.97,42.12,68.47,75.40
+"b4","random cardinal benefit criterion","1.0","(0.0, 100.0)","max","OrderedDict([('ind', (Decimal('5.286830622343956'), Decimal('0'))), ('pref', (Decimal('6.45'), Decimal('0'))), ('veto', (Decimal('51.62594027997369'), Decimal('0')))])",55.87,84.70,33.41,90.20,48.90,78.25,76.24
+"c1","random cardinal cost criterion","-4.0","(0.0, 100.0)","min","OrderedDict([('ind', (Decimal('2.9466331638579395'), Decimal('0'))), ('pref', (Decimal('3.7'), Decimal('0'))), ('veto', (Decimal('52.26262935220388'), Decimal('0')))])",26.70,75.08,23.71,57.77,42.68,72.80,78.78

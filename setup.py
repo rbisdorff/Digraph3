@@ -16,7 +16,7 @@ from the systems console.
 
 if CythonInstalled:
     setup(name='Digraph3',
-          version="Python3.9.1",
+          version="Python3.9.2",
           #version_command='svn info --show-item revision',
           py_modules=['arithmetics','digraphsTools','digraphs','perfTabs',
                       'outrankingDigraphs','performanceQuantiles',\
@@ -34,7 +34,7 @@ if CythonInstalled:
           )
 else:
     setup(name='Digraph3',
-          version="Python3.9.1",
+          version="Python3.9.2",
           #version_command='svn info --show-item revision',
           py_modules=['arithmetics','digraphsTools','digraphs','perfTabs',
                       'outrankingDigraphs','performanceQuantiles',\
