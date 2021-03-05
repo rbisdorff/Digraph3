@@ -29,35 +29,35 @@
 <description>
 <subTitle>Potential decision actions.</subTitle>
 </description>
-<alternative id="a1" name="random decision action A+ B~ C- D+ E+ F- G~ H~ I+ J+" mcdaConcept="potentialDecisionAction">
+<alternative id="a1" name="random decision action A+ B~ C+ D- E+ F~ G- H- I- J+" mcdaConcept="potentialDecisionAction">
 <description>
 <comment>RandomCoalitionsPerformanceTableau() generated.</comment>
 </description>
 <type>real</type>
 <active>true</active>
 </alternative>
-<alternative id="a2" name="random decision action A~ B+ C- D- E+ F+ G+ H+ I+ J~" mcdaConcept="potentialDecisionAction">
+<alternative id="a2" name="random decision action A- B- C- D~ E- F~ G- H~ I- J+" mcdaConcept="potentialDecisionAction">
 <description>
 <comment>RandomCoalitionsPerformanceTableau() generated.</comment>
 </description>
 <type>real</type>
 <active>true</active>
 </alternative>
-<alternative id="a3" name="random decision action A- B~ C- D- E~ F- G- H- I+ J-" mcdaConcept="potentialDecisionAction">
+<alternative id="a3" name="random decision action A- B+ C- D+ E- F- G~ H+ I- J~" mcdaConcept="potentialDecisionAction">
 <description>
 <comment>RandomCoalitionsPerformanceTableau() generated.</comment>
 </description>
 <type>real</type>
 <active>true</active>
 </alternative>
-<alternative id="a4" name="random decision action A- B- C+ D~ E~ F+ G- H~ I+ J-" mcdaConcept="potentialDecisionAction">
+<alternative id="a4" name="random decision action A~ B- C~ D- E- F~ G- H+ I+ J-" mcdaConcept="potentialDecisionAction">
 <description>
 <comment>RandomCoalitionsPerformanceTableau() generated.</comment>
 </description>
 <type>real</type>
 <active>true</active>
 </alternative>
-<alternative id="a5" name="random decision action A~ B+ C- D- E- F- G+ H~ I~ J~" mcdaConcept="potentialDecisionAction">
+<alternative id="a5" name="random decision action A- B~ C- D- E~ F+ G~ H- I+ J~" mcdaConcept="potentialDecisionAction">
 <description>
 <comment>RandomCoalitionsPerformanceTableau() generated.</comment>
 </description>
@@ -69,7 +69,103 @@
 <description>
 <subTitle>Family of criteria.</subTitle>
 </description>
-<criterion id="g01" name="random criterion of coalition D" mcdaConcept="criterion">
+<criterion id="g01" name="random criterion of coalition C" mcdaConcept="criterion">
+<description>
+<comment>Variable beta performance generator with random low (-), medium (~) or high (+) parameters.</comment>
+<version>performance</version>
+</description>
+<active>true</active>
+<criterionValue><value><real>10.00</real></value></criterionValue>
+<scale>
+<quantitative>
+<preferenceDirection>max</preferenceDirection>
+<minimum><real>0.00</real></minimum>
+<maximum><real>100.00</real></maximum>
+</quantitative>
+</scale>
+<thresholds>
+<threshold id="ind" name="indifference" mcdaConcept="performanceDiscriminationThreshold">
+<constant>
+<real>5.00</real>
+</constant>
+</threshold>
+<threshold id="pref" name="preference" mcdaConcept="performanceDiscriminationThreshold">
+<constant>
+<real>10.00</real>
+</constant>
+</threshold>
+<threshold id="veto" name="veto" mcdaConcept="performanceDiscriminationThreshold">
+<constant>
+<real>50.00</real>
+</constant>
+</threshold>
+</thresholds>
+</criterion>
+<criterion id="g02" name="random criterion of coalition B" mcdaConcept="criterion">
+<description>
+<comment>Variable beta performance generator with random low (-), medium (~) or high (+) parameters.</comment>
+<version>performance</version>
+</description>
+<active>true</active>
+<criterionValue><value><real>4.00</real></value></criterionValue>
+<scale>
+<quantitative>
+<preferenceDirection>max</preferenceDirection>
+<minimum><real>0.00</real></minimum>
+<maximum><real>100.00</real></maximum>
+</quantitative>
+</scale>
+<thresholds>
+<threshold id="ind" name="indifference" mcdaConcept="performanceDiscriminationThreshold">
+<constant>
+<real>5.00</real>
+</constant>
+</threshold>
+<threshold id="pref" name="preference" mcdaConcept="performanceDiscriminationThreshold">
+<constant>
+<real>10.00</real>
+</constant>
+</threshold>
+<threshold id="veto" name="veto" mcdaConcept="performanceDiscriminationThreshold">
+<constant>
+<real>50.00</real>
+</constant>
+</threshold>
+</thresholds>
+</criterion>
+<criterion id="g03" name="random criterion of coalition A" mcdaConcept="criterion">
+<description>
+<comment>Variable beta performance generator with random low (-), medium (~) or high (+) parameters.</comment>
+<version>performance</version>
+</description>
+<active>true</active>
+<criterionValue><value><real>3.00</real></value></criterionValue>
+<scale>
+<quantitative>
+<preferenceDirection>max</preferenceDirection>
+<minimum><real>0.00</real></minimum>
+<maximum><real>100.00</real></maximum>
+</quantitative>
+</scale>
+<thresholds>
+<threshold id="ind" name="indifference" mcdaConcept="performanceDiscriminationThreshold">
+<constant>
+<real>5.00</real>
+</constant>
+</threshold>
+<threshold id="pref" name="preference" mcdaConcept="performanceDiscriminationThreshold">
+<constant>
+<real>10.00</real>
+</constant>
+</threshold>
+<threshold id="veto" name="veto" mcdaConcept="performanceDiscriminationThreshold">
+<constant>
+<real>50.00</real>
+</constant>
+</threshold>
+</thresholds>
+</criterion>
+<criterion id="g04" name="random criterion of coalition C" mcdaConcept="criterion">
 <description>
 <comment>Variable beta performance generator with random low (-), medium (~) or high (+) parameters.</comment>
 <version>performance</version>
@@ -101,231 +197,7 @@
 </threshold>
 </thresholds>
 </criterion>
-<criterion id="g02" name="random criterion of coalition J" mcdaConcept="criterion">
-<description>
-<comment>Variable beta performance generator with random low (-), medium (~) or high (+) parameters.</comment>
-<version>performance</version>
-</description>
-<active>true</active>
-<criterionValue><value><real>12.00</real></value></criterionValue>
-<scale>
-<quantitative>
-<preferenceDirection>max</preferenceDirection>
-<minimum><real>0.00</real></minimum>
-<maximum><real>100.00</real></maximum>
-</quantitative>
-</scale>
-<thresholds>
-<threshold id="ind" name="indifference" mcdaConcept="performanceDiscriminationThreshold">
-<constant>
-<real>5.00</real>
-</constant>
-</threshold>
-<threshold id="pref" name="preference" mcdaConcept="performanceDiscriminationThreshold">
-<constant>
-<real>10.00</real>
-</constant>
-</threshold>
-<threshold id="veto" name="veto" mcdaConcept="performanceDiscriminationThreshold">
-<constant>
-<real>50.00</real>
-</constant>
-</threshold>
-</thresholds>
-</criterion>
-<criterion id="g03" name="random criterion of coalition H" mcdaConcept="criterion">
-<description>
-<comment>Variable beta performance generator with random low (-), medium (~) or high (+) parameters.</comment>
-<version>performance</version>
-</description>
-<active>true</active>
-<criterionValue><value><real>5.00</real></value></criterionValue>
-<scale>
-<quantitative>
-<preferenceDirection>max</preferenceDirection>
-<minimum><real>0.00</real></minimum>
-<maximum><real>100.00</real></maximum>
-</quantitative>
-</scale>
-<thresholds>
-<threshold id="ind" name="indifference" mcdaConcept="performanceDiscriminationThreshold">
-<constant>
-<real>5.00</real>
-</constant>
-</threshold>
-<threshold id="pref" name="preference" mcdaConcept="performanceDiscriminationThreshold">
-<constant>
-<real>10.00</real>
-</constant>
-</threshold>
-<threshold id="veto" name="veto" mcdaConcept="performanceDiscriminationThreshold">
-<constant>
-<real>50.00</real>
-</constant>
-</threshold>
-</thresholds>
-</criterion>
-<criterion id="g04" name="random criterion of coalition D" mcdaConcept="criterion">
-<description>
-<comment>Variable beta performance generator with random low (-), medium (~) or high (+) parameters.</comment>
-<version>performance</version>
-</description>
-<active>true</active>
-<criterionValue><value><real>13.00</real></value></criterionValue>
-<scale>
-<quantitative>
-<preferenceDirection>max</preferenceDirection>
-<minimum><real>0.00</real></minimum>
-<maximum><real>100.00</real></maximum>
-</quantitative>
-</scale>
-<thresholds>
-<threshold id="ind" name="indifference" mcdaConcept="performanceDiscriminationThreshold">
-<constant>
-<real>5.00</real>
-</constant>
-</threshold>
-<threshold id="pref" name="preference" mcdaConcept="performanceDiscriminationThreshold">
-<constant>
-<real>10.00</real>
-</constant>
-</threshold>
-<threshold id="veto" name="veto" mcdaConcept="performanceDiscriminationThreshold">
-<constant>
-<real>50.00</real>
-</constant>
-</threshold>
-</thresholds>
-</criterion>
-<criterion id="g05" name="random criterion of coalition C" mcdaConcept="criterion">
-<description>
-<comment>Variable beta performance generator with random low (-), medium (~) or high (+) parameters.</comment>
-<version>performance</version>
-</description>
-<active>true</active>
-<criterionValue><value><real>13.00</real></value></criterionValue>
-<scale>
-<quantitative>
-<preferenceDirection>max</preferenceDirection>
-<minimum><real>0.00</real></minimum>
-<maximum><real>100.00</real></maximum>
-</quantitative>
-</scale>
-<thresholds>
-<threshold id="ind" name="indifference" mcdaConcept="performanceDiscriminationThreshold">
-<constant>
-<real>5.00</real>
-</constant>
-</threshold>
-<threshold id="pref" name="preference" mcdaConcept="performanceDiscriminationThreshold">
-<constant>
-<real>10.00</real>
-</constant>
-</threshold>
-<threshold id="veto" name="veto" mcdaConcept="performanceDiscriminationThreshold">
-<constant>
-<real>50.00</real>
-</constant>
-</threshold>
-</thresholds>
-</criterion>
-<criterion id="g06" name="random criterion of coalition A" mcdaConcept="criterion">
-<description>
-<comment>Variable beta performance generator with random low (-), medium (~) or high (+) parameters.</comment>
-<version>performance</version>
-</description>
-<active>true</active>
-<criterionValue><value><real>1.00</real></value></criterionValue>
-<scale>
-<quantitative>
-<preferenceDirection>max</preferenceDirection>
-<minimum><real>0.00</real></minimum>
-<maximum><real>100.00</real></maximum>
-</quantitative>
-</scale>
-<thresholds>
-<threshold id="ind" name="indifference" mcdaConcept="performanceDiscriminationThreshold">
-<constant>
-<real>5.00</real>
-</constant>
-</threshold>
-<threshold id="pref" name="preference" mcdaConcept="performanceDiscriminationThreshold">
-<constant>
-<real>10.00</real>
-</constant>
-</threshold>
-<threshold id="veto" name="veto" mcdaConcept="performanceDiscriminationThreshold">
-<constant>
-<real>50.00</real>
-</constant>
-</threshold>
-</thresholds>
-</criterion>
-<criterion id="g07" name="random criterion of coalition B" mcdaConcept="criterion">
-<description>
-<comment>Variable beta performance generator with random low (-), medium (~) or high (+) parameters.</comment>
-<version>performance</version>
-</description>
-<active>true</active>
-<criterionValue><value><real>11.00</real></value></criterionValue>
-<scale>
-<quantitative>
-<preferenceDirection>max</preferenceDirection>
-<minimum><real>0.00</real></minimum>
-<maximum><real>100.00</real></maximum>
-</quantitative>
-</scale>
-<thresholds>
-<threshold id="ind" name="indifference" mcdaConcept="performanceDiscriminationThreshold">
-<constant>
-<real>5.00</real>
-</constant>
-</threshold>
-<threshold id="pref" name="preference" mcdaConcept="performanceDiscriminationThreshold">
-<constant>
-<real>10.00</real>
-</constant>
-</threshold>
-<threshold id="veto" name="veto" mcdaConcept="performanceDiscriminationThreshold">
-<constant>
-<real>50.00</real>
-</constant>
-</threshold>
-</thresholds>
-</criterion>
-<criterion id="g08" name="random criterion of coalition B" mcdaConcept="criterion">
-<description>
-<comment>Variable beta performance generator with random low (-), medium (~) or high (+) parameters.</comment>
-<version>performance</version>
-</description>
-<active>true</active>
-<criterionValue><value><real>5.00</real></value></criterionValue>
-<scale>
-<quantitative>
-<preferenceDirection>max</preferenceDirection>
-<minimum><real>0.00</real></minimum>
-<maximum><real>100.00</real></maximum>
-</quantitative>
-</scale>
-<thresholds>
-<threshold id="ind" name="indifference" mcdaConcept="performanceDiscriminationThreshold">
-<constant>
-<real>5.00</real>
-</constant>
-</threshold>
-<threshold id="pref" name="preference" mcdaConcept="performanceDiscriminationThreshold">
-<constant>
-<real>10.00</real>
-</constant>
-</threshold>
-<threshold id="veto" name="veto" mcdaConcept="performanceDiscriminationThreshold">
-<constant>
-<real>50.00</real>
-</constant>
-</threshold>
-</thresholds>
-</criterion>
-<criterion id="g09" name="random criterion of coalition A" mcdaConcept="criterion">
+<criterion id="g05" name="random criterion of coalition A" mcdaConcept="criterion">
 <description>
 <comment>Variable beta performance generator with random low (-), medium (~) or high (+) parameters.</comment>
 <version>performance</version>
@@ -357,7 +229,7 @@
 </threshold>
 </thresholds>
 </criterion>
-<criterion id="g10" name="random criterion of coalition G" mcdaConcept="criterion">
+<criterion id="g06" name="random criterion of coalition G" mcdaConcept="criterion">
 <description>
 <comment>Variable beta performance generator with random low (-), medium (~) or high (+) parameters.</comment>
 <version>performance</version>
@@ -389,13 +261,13 @@
 </threshold>
 </thresholds>
 </criterion>
-<criterion id="g11" name="random criterion of coalition C" mcdaConcept="criterion">
+<criterion id="g07" name="random criterion of coalition F" mcdaConcept="criterion">
 <description>
 <comment>Variable beta performance generator with random low (-), medium (~) or high (+) parameters.</comment>
 <version>performance</version>
 </description>
 <active>true</active>
-<criterionValue><value><real>12.00</real></value></criterionValue>
+<criterionValue><value><real>6.00</real></value></criterionValue>
 <scale>
 <quantitative>
 <preferenceDirection>max</preferenceDirection>
@@ -421,7 +293,71 @@
 </threshold>
 </thresholds>
 </criterion>
-<criterion id="g12" name="random criterion of coalition E" mcdaConcept="criterion">
+<criterion id="g08" name="random criterion of coalition B" mcdaConcept="criterion">
+<description>
+<comment>Variable beta performance generator with random low (-), medium (~) or high (+) parameters.</comment>
+<version>performance</version>
+</description>
+<active>true</active>
+<criterionValue><value><real>3.00</real></value></criterionValue>
+<scale>
+<quantitative>
+<preferenceDirection>max</preferenceDirection>
+<minimum><real>0.00</real></minimum>
+<maximum><real>100.00</real></maximum>
+</quantitative>
+</scale>
+<thresholds>
+<threshold id="ind" name="indifference" mcdaConcept="performanceDiscriminationThreshold">
+<constant>
+<real>5.00</real>
+</constant>
+</threshold>
+<threshold id="pref" name="preference" mcdaConcept="performanceDiscriminationThreshold">
+<constant>
+<real>10.00</real>
+</constant>
+</threshold>
+<threshold id="veto" name="veto" mcdaConcept="performanceDiscriminationThreshold">
+<constant>
+<real>50.00</real>
+</constant>
+</threshold>
+</thresholds>
+</criterion>
+<criterion id="g09" name="random criterion of coalition H" mcdaConcept="criterion">
+<description>
+<comment>Variable beta performance generator with random low (-), medium (~) or high (+) parameters.</comment>
+<version>performance</version>
+</description>
+<active>true</active>
+<criterionValue><value><real>13.00</real></value></criterionValue>
+<scale>
+<quantitative>
+<preferenceDirection>max</preferenceDirection>
+<minimum><real>0.00</real></minimum>
+<maximum><real>100.00</real></maximum>
+</quantitative>
+</scale>
+<thresholds>
+<threshold id="ind" name="indifference" mcdaConcept="performanceDiscriminationThreshold">
+<constant>
+<real>5.00</real>
+</constant>
+</threshold>
+<threshold id="pref" name="preference" mcdaConcept="performanceDiscriminationThreshold">
+<constant>
+<real>10.00</real>
+</constant>
+</threshold>
+<threshold id="veto" name="veto" mcdaConcept="performanceDiscriminationThreshold">
+<constant>
+<real>50.00</real>
+</constant>
+</threshold>
+</thresholds>
+</criterion>
+<criterion id="g10" name="random criterion of coalition A" mcdaConcept="criterion">
 <description>
 <comment>Variable beta performance generator with random low (-), medium (~) or high (+) parameters.</comment>
 <version>performance</version>
@@ -453,7 +389,7 @@
 </threshold>
 </thresholds>
 </criterion>
-<criterion id="g13" name="random criterion of coalition I" mcdaConcept="criterion">
+<criterion id="g11" name="random criterion of coalition I" mcdaConcept="criterion">
 <description>
 <comment>Variable beta performance generator with random low (-), medium (~) or high (+) parameters.</comment>
 <version>performance</version>
@@ -485,13 +421,13 @@
 </threshold>
 </thresholds>
 </criterion>
-<criterion id="g14" name="random criterion of coalition E" mcdaConcept="criterion">
+<criterion id="g12" name="random criterion of coalition A" mcdaConcept="criterion">
 <description>
 <comment>Variable beta performance generator with random low (-), medium (~) or high (+) parameters.</comment>
 <version>performance</version>
 </description>
 <active>true</active>
-<criterionValue><value><real>11.00</real></value></criterionValue>
+<criterionValue><value><real>9.00</real></value></criterionValue>
 <scale>
 <quantitative>
 <preferenceDirection>max</preferenceDirection>
@@ -517,13 +453,77 @@
 </threshold>
 </thresholds>
 </criterion>
-<criterion id="g15" name="random criterion of coalition F" mcdaConcept="criterion">
+<criterion id="g13" name="random criterion of coalition E" mcdaConcept="criterion">
 <description>
 <comment>Variable beta performance generator with random low (-), medium (~) or high (+) parameters.</comment>
 <version>performance</version>
 </description>
 <active>true</active>
-<criterionValue><value><real>11.00</real></value></criterionValue>
+<criterionValue><value><real>5.00</real></value></criterionValue>
+<scale>
+<quantitative>
+<preferenceDirection>max</preferenceDirection>
+<minimum><real>0.00</real></minimum>
+<maximum><real>100.00</real></maximum>
+</quantitative>
+</scale>
+<thresholds>
+<threshold id="ind" name="indifference" mcdaConcept="performanceDiscriminationThreshold">
+<constant>
+<real>5.00</real>
+</constant>
+</threshold>
+<threshold id="pref" name="preference" mcdaConcept="performanceDiscriminationThreshold">
+<constant>
+<real>10.00</real>
+</constant>
+</threshold>
+<threshold id="veto" name="veto" mcdaConcept="performanceDiscriminationThreshold">
+<constant>
+<real>50.00</real>
+</constant>
+</threshold>
+</thresholds>
+</criterion>
+<criterion id="g14" name="random criterion of coalition J" mcdaConcept="criterion">
+<description>
+<comment>Variable beta performance generator with random low (-), medium (~) or high (+) parameters.</comment>
+<version>performance</version>
+</description>
+<active>true</active>
+<criterionValue><value><real>8.00</real></value></criterionValue>
+<scale>
+<quantitative>
+<preferenceDirection>max</preferenceDirection>
+<minimum><real>0.00</real></minimum>
+<maximum><real>100.00</real></maximum>
+</quantitative>
+</scale>
+<thresholds>
+<threshold id="ind" name="indifference" mcdaConcept="performanceDiscriminationThreshold">
+<constant>
+<real>5.00</real>
+</constant>
+</threshold>
+<threshold id="pref" name="preference" mcdaConcept="performanceDiscriminationThreshold">
+<constant>
+<real>10.00</real>
+</constant>
+</threshold>
+<threshold id="veto" name="veto" mcdaConcept="performanceDiscriminationThreshold">
+<constant>
+<real>50.00</real>
+</constant>
+</threshold>
+</thresholds>
+</criterion>
+<criterion id="g15" name="random criterion of coalition D" mcdaConcept="criterion">
+<description>
+<comment>Variable beta performance generator with random low (-), medium (~) or high (+) parameters.</comment>
+<version>performance</version>
+</description>
+<active>true</active>
+<criterionValue><value><real>7.00</real></value></criterionValue>
 <scale>
 <quantitative>
 <preferenceDirection>max</preferenceDirection>
@@ -558,315 +558,315 @@
 <alternativeID>a1</alternativeID>
 <performance>
 <criterionID>g01</criterionID>
-<value><real>89.76</real></value>
+<value><real>69.82</real></value>
 </performance>
 <performance>
 <criterionID>g02</criterionID>
-<value><real>72.42</real></value>
+<value><real>66.03</real></value>
 </performance>
 <performance>
 <criterionID>g03</criterionID>
-<value><real>37.44</real></value>
+<value><real>55.95</real></value>
 </performance>
 <performance>
 <criterionID>g04</criterionID>
-<value><real>57.58</real></value>
+<value><real>83.18</real></value>
 </performance>
 <performance>
 <criterionID>g05</criterionID>
-<value><real>5.44</real></value>
+<value><real>31.95</real></value>
 </performance>
 <performance>
 <criterionID>g06</criterionID>
-<value><real>79.97</real></value>
+<value><real>15.25</real></value>
 </performance>
 <performance>
 <criterionID>g07</criterionID>
-<value><real>32.94</real></value>
+<value><real>47.47</real></value>
 </performance>
 <performance>
 <criterionID>g08</criterionID>
-<value><real>43.19</real></value>
+<value><real>34.42</real></value>
 </performance>
 <performance>
 <criterionID>g09</criterionID>
-<value><real>74.72</real></value>
+<value><real>29.39</real></value>
 </performance>
 <performance>
 <criterionID>g10</criterionID>
-<value><real>27.63</real></value>
+<value><real>67.38</real></value>
 </performance>
 <performance>
 <criterionID>g11</criterionID>
-<value><real>66.93</real></value>
+<value><real>34.61</real></value>
 </performance>
 <performance>
 <criterionID>g12</criterionID>
-<value><real>78.11</real></value>
+<value><real>19.92</real></value>
 </performance>
 <performance>
 <criterionID>g13</criterionID>
-<value><real>89.93</real></value>
+<value><real>76.45</real></value>
 </performance>
 <performance>
 <criterionID>g14</criterionID>
-<value><real>98.13</real></value>
+<value><real>67.89</real></value>
 </performance>
 <performance>
 <criterionID>g15</criterionID>
-<value><real>15.73</real></value>
+<value><real>26.77</real></value>
 </performance>
 </alternativePerformances>
 <alternativePerformances>
 <alternativeID>a2</alternativeID>
 <performance>
 <criterionID>g01</criterionID>
-<value><real>25.61</real></value>
+<value><real>27.34</real></value>
 </performance>
 <performance>
 <criterionID>g02</criterionID>
-<value><real>42.50</real></value>
+<value><real>53.08</real></value>
 </performance>
 <performance>
 <criterionID>g03</criterionID>
-<value><real>79.57</real></value>
+<value><real>33.19</real></value>
 </performance>
 <performance>
 <criterionID>g04</criterionID>
-<value><real>21.87</real></value>
+<value><real>32.34</real></value>
 </performance>
 <performance>
 <criterionID>g05</criterionID>
-<value><real>65.18</real></value>
+<value><real>17.99</real></value>
 </performance>
 <performance>
 <criterionID>g06</criterionID>
-<value><real>44.64</real></value>
+<value><real>30.42</real></value>
 </performance>
 <performance>
 <criterionID>g07</criterionID>
-<value><real>47.68</real></value>
+<value><real>31.61</real></value>
 </performance>
 <performance>
 <criterionID>g08</criterionID>
-<value><real>74.99</real></value>
+<value><real>52.10</real></value>
 </performance>
 <performance>
 <criterionID>g09</criterionID>
-<value><real>52.12</real></value>
+<value><real>58.58</real></value>
 </performance>
 <performance>
 <criterionID>g10</criterionID>
-<value><real>56.25</real></value>
+<value><real>26.43</real></value>
 </performance>
 <performance>
 <criterionID>g11</criterionID>
-<value><real>70.69</real></value>
+<value><real>17.49</real></value>
 </performance>
 <performance>
 <criterionID>g12</criterionID>
-<value><real>82.25</real></value>
+<value><real>22.17</real></value>
 </performance>
 <performance>
 <criterionID>g13</criterionID>
-<value><real>72.02</real></value>
+<value><real>48.87</real></value>
 </performance>
 <performance>
 <criterionID>g14</criterionID>
-<value><real>40.56</real></value>
+<value><real>63.09</real></value>
 </performance>
 <performance>
 <criterionID>g15</criterionID>
-<value><real>85.97</real></value>
+<value><real>46.20</real></value>
 </performance>
 </alternativePerformances>
 <alternativePerformances>
 <alternativeID>a3</alternativeID>
 <performance>
 <criterionID>g01</criterionID>
-<value><real>24.79</real></value>
+<value><real>39.68</real></value>
 </performance>
 <performance>
 <criterionID>g02</criterionID>
-<value><real>9.82</real></value>
+<value><real>57.02</real></value>
 </performance>
 <performance>
 <criterionID>g03</criterionID>
-<value><real>36.87</real></value>
+<value><real>32.27</real></value>
 </performance>
 <performance>
 <criterionID>g04</criterionID>
-<value><real>30.35</real></value>
+<value><real>35.16</real></value>
 </performance>
 <performance>
 <criterionID>g05</criterionID>
-<value><real>27.87</real></value>
+<value><real>48.60</real></value>
 </performance>
 <performance>
 <criterionID>g06</criterionID>
-<value><real>24.68</real></value>
+<value><real>48.27</real></value>
 </performance>
 <performance>
 <criterionID>g07</criterionID>
-<value><real>76.23</real></value>
+<value><real>20.29</real></value>
 </performance>
 <performance>
 <criterionID>g08</criterionID>
-<value><real>48.94</real></value>
+<value><real>83.37</real></value>
 </performance>
 <performance>
 <criterionID>g09</criterionID>
-<value><real>51.29</real></value>
+<value><real>59.64</real></value>
 </performance>
 <performance>
 <criterionID>g10</criterionID>
-<value><real>65.70</real></value>
+<value><real>19.76</real></value>
 </performance>
 <performance>
 <criterionID>g11</criterionID>
-<value><real>44.69</real></value>
+<value><real>15.17</real></value>
 </performance>
 <performance>
 <criterionID>g12</criterionID>
-<value><real>58.84</real></value>
+<value><real>24.78</real></value>
 </performance>
 <performance>
 <criterionID>g13</criterionID>
-<value><real>55.74</real></value>
+<value><real>19.21</real></value>
 </performance>
 <performance>
 <criterionID>g14</criterionID>
-<value><real>41.14</real></value>
+<value><real>47.31</real></value>
 </performance>
 <performance>
 <criterionID>g15</criterionID>
-<value><real>15.83</real></value>
+<value><real>79.69</real></value>
 </performance>
 </alternativePerformances>
 <alternativePerformances>
 <alternativeID>a4</alternativeID>
 <performance>
 <criterionID>g01</criterionID>
-<value><real>53.53</real></value>
+<value><real>48.91</real></value>
 </performance>
 <performance>
 <criterionID>g02</criterionID>
-<value><real>15.80</real></value>
+<value><real>20.84</real></value>
 </performance>
 <performance>
 <criterionID>g03</criterionID>
-<value><real>42.07</real></value>
+<value><real>69.31</real></value>
 </performance>
 <performance>
 <criterionID>g04</criterionID>
-<value><real>39.80</real></value>
+<value><real>26.89</real></value>
 </performance>
 <performance>
 <criterionID>g05</criterionID>
-<value><real>82.27</real></value>
+<value><real>48.18</real></value>
 </performance>
 <performance>
 <criterionID>g06</criterionID>
-<value><real>9.14</real></value>
+<value><real>35.41</real></value>
 </performance>
 <performance>
 <criterionID>g07</criterionID>
-<value><real>41.05</real></value>
+<value><real>50.58</real></value>
 </performance>
 <performance>
 <criterionID>g08</criterionID>
-<value><real>22.64</real></value>
+<value><real>34.06</real></value>
 </performance>
 <performance>
 <criterionID>g09</criterionID>
-<value><real>11.54</real></value>
+<value><real>49.43</real></value>
 </performance>
 <performance>
 <criterionID>g10</criterionID>
-<value><real>49.95</real></value>
+<value><real>49.88</real></value>
 </performance>
 <performance>
 <criterionID>g11</criterionID>
-<value><real>70.71</real></value>
+<value><real>55.93</real></value>
 </performance>
 <performance>
 <criterionID>g12</criterionID>
-<value><real>56.99</real></value>
+<value><real>30.99</real></value>
 </performance>
 <performance>
 <criterionID>g13</criterionID>
-<value><real>75.03</real></value>
+<value><real>30.62</real></value>
 </performance>
 <performance>
 <criterionID>g14</criterionID>
-<value><real>62.49</real></value>
+<value><real>22.46</real></value>
 </performance>
 <performance>
 <criterionID>g15</criterionID>
-<value><real>62.60</real></value>
+<value><real>20.96</real></value>
 </performance>
 </alternativePerformances>
 <alternativePerformances>
 <alternativeID>a5</alternativeID>
 <performance>
 <criterionID>g01</criterionID>
-<value><real>36.28</real></value>
+<value><real>38.17</real></value>
 </performance>
 <performance>
 <criterionID>g02</criterionID>
-<value><real>29.15</real></value>
+<value><real>61.29</real></value>
 </performance>
 <performance>
 <criterionID>g03</criterionID>
-<value><real>61.73</real></value>
+<value><real>15.64</real></value>
 </performance>
 <performance>
 <criterionID>g04</criterionID>
-<value><real>49.87</real></value>
+<value><real>38.68</real></value>
 </performance>
 <performance>
 <criterionID>g05</criterionID>
-<value><real>42.54</real></value>
+<value><real>9.53</real></value>
 </performance>
 <performance>
 <criterionID>g06</criterionID>
-<value><real>55.80</real></value>
+<value><real>42.39</real></value>
 </performance>
 <performance>
 <criterionID>g07</criterionID>
-<value><real>43.64</real></value>
+<value><real>94.88</real></value>
 </performance>
 <performance>
 <criterionID>g08</criterionID>
-<value><real>78.30</real></value>
+<value><real>27.24</real></value>
 </performance>
 <performance>
 <criterionID>g09</criterionID>
-<value><real>36.39</real></value>
+<value><real>4.94</real></value>
 </performance>
 <performance>
 <criterionID>g10</criterionID>
-<value><real>79.74</real></value>
+<value><real>62.27</real></value>
 </performance>
 <performance>
 <criterionID>g11</criterionID>
-<value><real>25.93</real></value>
+<value><real>76.84</real></value>
 </performance>
 <performance>
 <criterionID>g12</criterionID>
-<value><real>31.21</real></value>
+<value><real>17.14</real></value>
 </performance>
 <performance>
 <criterionID>g13</criterionID>
-<value><real>39.13</real></value>
+<value><real>67.68</real></value>
 </performance>
 <performance>
 <criterionID>g14</criterionID>
-<value><real>18.26</real></value>
+<value><real>73.88</real></value>
 </performance>
 <performance>
 <criterionID>g15</criterionID>
-<value><real>22.29</real></value>
+<value><real>40.37</real></value>
 </performance>
 </alternativePerformances>
 </performanceTable>

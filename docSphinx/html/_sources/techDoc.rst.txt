@@ -37,30 +37,33 @@ On Linux or Mac OS, ..$ cd to the extracted <Digraph3> directory::
 
      ../Digraph3$ make install
 
-installs (with sudo !!) the Digraph3 modules in the current running python environment. Pythhon 3.5 (or later) environment is recommended. Whereas::
+installs (with sudo !!) the Digraph3 modules in the current running python environment. Python 3.8 (or later) environment is recommended (see the makefile for adapting to your python environment). Whereas::
 
      ../Digraph3$ make installVenv
           
-installs the Digraph3 modules in an activated virtual python environment.
-     
-If the **cython** (https://cython.org/) C-compiled modules for Big Data applications are required, it is necessary to previously install the Cython package in the running Python environment::
+installs the Digraph3 modules in an activated virtual python environment. If the **cython** (https://cython.org/) C-compiled modules for Big Data applications are required, it is necessary to previously install the Cython package in the running Python environment::
 
-     ...$ pip3.5+ install cython
+     ...$ python3 -m pip install cython
 
-It is recommended to run a pytest suite::
+It is recommended to run a test suite::
     
      .../Digraph3$ make tests
 
-Test results are stored in the <Digraph3/test> directory. Notice, the python3 pytest package is required::
+Test results are stored in the <Digraph3/test> directory. Notice, the python3 :code:`pytest` package is required::
 
-      ...$ pip3 install pytest
+      ...$ python3 -m pip install pytest
+
+A verbose (with stdout not captured) pytest suite may be run as follows::
+      
       .../Digraph3$ make verboseTests
 
-runs a verbose (with stdout not captured) pytest suite::
+When the GNU `parallel <https://www.gnu.org/software/parallel/>`_ shell tool is installed and multiple cores are detected, the tests may be executed in multiple processing mode::
 
-     ../Digraph3$ make pTests
+       ../Digraph3$ make pTests 
 
-runs the pytest suite in multiple processing mode when the GNU `parallel <https://www.gnu.org/software/parallel/>`_ shell tool is installed and multiple cores are detected.
+Individual module pytest suites are also provided (see the makefile), like the one for the :py:mod:`outrankingDigraphs` module::
+
+     ../Digraph3$ make outrankingDigraphsTests
 
 **Dependencies**
 

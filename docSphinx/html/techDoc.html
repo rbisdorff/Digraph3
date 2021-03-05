@@ -279,29 +279,34 @@
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span>../Digraph3$ make install
 </pre></div>
 </div>
-<p>installs (with sudo !!) the Digraph3 modules in the current running python environment. Pythhon 3.5 (or later) environment is recommended. Whereas:</p>
+<p>installs (with sudo !!) the Digraph3 modules in the current running python environment. Python 3.8 (or later) environment is recommended (see the makefile for adapting to your python environment). Whereas:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span>../Digraph3$ make installVenv
 </pre></div>
 </div>
-<p>installs the Digraph3 modules in an activated virtual python environment.</p>
-<p>If the <strong>cython</strong> (<a class="reference external" href="https://cython.org/">https://cython.org/</a>) C-compiled modules for Big Data applications are required, it is necessary to previously install the Cython package in the running Python environment:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>...$ pip3.5+ install cython
+<p>installs the Digraph3 modules in an activated virtual python environment. If the <strong>cython</strong> (<a class="reference external" href="https://cython.org/">https://cython.org/</a>) C-compiled modules for Big Data applications are required, it is necessary to previously install the Cython package in the running Python environment:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>...$ python3 -m pip install cython
 </pre></div>
 </div>
-<p>It is recommended to run a pytest suite:</p>
+<p>It is recommended to run a test suite:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span>.../Digraph3$ make tests
 </pre></div>
 </div>
-<p>Test results are stored in the &lt;Digraph3/test&gt; directory. Notice, the python3 pytest package is required:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>...$ pip3 install pytest
-.../Digraph3$ make verboseTests
+<p>Test results are stored in the &lt;Digraph3/test&gt; directory. Notice, the python3 <code class="code docutils literal notranslate"><span class="pre">pytest</span></code> package is required:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>...$ python3 -m pip install pytest
 </pre></div>
 </div>
-<p>runs a verbose (with stdout not captured) pytest suite:</p>
+<p>A verbose (with stdout not captured) pytest suite may be run as follows:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>.../Digraph3$ make verboseTests
+</pre></div>
+</div>
+<p>When the GNU <a class="reference external" href="https://www.gnu.org/software/parallel/">parallel</a> shell tool is installed and multiple cores are detected, the tests may be executed in multiple processing mode:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span>../Digraph3$ make pTests
 </pre></div>
 </div>
-<p>runs the pytest suite in multiple processing mode when the GNU <a class="reference external" href="https://www.gnu.org/software/parallel/">parallel</a> shell tool is installed and multiple cores are detected.</p>
+<p>Individual module pytest suites are also provided (see the makefile), like the one for the <a class="reference internal" href="#module-outrankingDigraphs" title="outrankingDigraphs"><code class="xref py py-mod docutils literal notranslate"><span class="pre">outrankingDigraphs</span></code></a> module:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>../Digraph3$ make outrankingDigraphsTests
+</pre></div>
+</div>
 <p><strong>Dependencies</strong></p>
 <ul>
 <li><p>To be fully functional, the Digraph3 resources mainly need the <a class="reference external" href="https://graphviz.org">graphviz</a> tools and the <a class="reference external" href="https://www.r-project.org">R statistics resources</a> to be installed.</p></li>

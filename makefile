@@ -1,8 +1,12 @@
 ## makefile for digraphs module installation
-## R Bisdorff Nov 2020
+## R Bisdorff Mar 2021
 ## version 3.9
 ########################
-PYTHON=python3.9
+# use PYTHON parameter for selecting a
+# specific Python environment as follows:
+# ..$ make install PYTHON=python3.9
+########################
+PYTHON=python3
 PYTEST=${PYTHON} -m pytest
 SPHINX=sphinx-build
 INSTALLDIR=/usr/local/bin
@@ -12,7 +16,7 @@ CFLAGS=-Wall -O3
 modules = arithmetics.py digraphs.py digraphsTools.py graphs.py linearOrders.py outrankingDigraphs.py performanceQuantiles.py perfTabs.py randomDigraphs.py randomNumbers.py randomPerfTabs.py sortingDigraphs.py sparseOutrankingDigraphs.py transitiveDigraphs.py votingProfiles.py xmcda.py
 
 readme:
-		echo -n " Digraph3 python3 modules' installer \n (c) R Bisdorff 2013-2014 University of Luxembourg\n Usage: \n ..$$ make install      # installs with sudo in Python3+ (Linux, Mac OS)\n ..$$ make installVenv  # installs in a user's virtual python environment\n ..$$ make tests        # runs a series of pytests \n ..$$ make verbosetests # runs the verbose pytests\n ..$$ make pTests       # runs all available pytests with GNU parallel\n\n Technical documentation available here:\n http://digraph3.readthedocs.io/en/latest/ \n"
+		echo -n " Digraph3 python3 modules' installer \n (c) R Bisdorff 2013-2021 University of Luxembourg\n Usage: \n ..$$ make install      # installs with sudo in Python3+ (Linux, Mac OS)\n ..$$ make installVenv  # installs in a user's virtual python environment\n ..$$ make tests        # runs a series of pytests \n ..$$ make verbosetests # runs the verbose pytests\n ..$$ make pTests       # runs all available pytests with GNU parallel\n\n Technical documentation available here:\n http://digraph3.readthedocs.io/en/latest/ \n"
 sphinx:
 		(cd docSphinx; \
 		${SPHINX} -Ea . html/ )
@@ -205,8 +209,9 @@ verboseCythonTests:
 
 install:
 		sudo ${PYTHON} setup.py install
-		# uncomment or adapt makefile for multiple python versions
-		#sudo python3.8 setup.py install
+		# use PYTHON parameter for selecting a
+		# specific Python environment like:
+		# ..$ make install PYTHON=python3.9
 
 installVenv:
 		${PYTHON} setup.py install
