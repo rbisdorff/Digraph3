@@ -1663,7 +1663,7 @@ class PrincipalOrder(LinearOrder):
         n = len(actionsList)
         relation = deepcopy(other.relation)
         with TemporaryDirectory(dir=tempDir) as tempDirName:
-            principalScores = other.computePrincipalOrder(Colwise=Colwise,
+            principalScores = other.computePrincipalScores(Colwise=Colwise,
                                                       imageType=imageType,
                                                       plotFileName=plotFileName,
                                                       tempDir=tempDir,

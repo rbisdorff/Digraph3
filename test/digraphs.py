@@ -9877,7 +9877,7 @@ class Digraph(object):
 
     def computeCopelandOrder(self):
         """
-        renders a linear ranking from best to worst of the actions following Arrow&Raynaud's rule.
+        renders a linear ordering from worst to best of the actions following Arrow&Raynaud's rule.
         """
         try:
             ordering = self.copelandOrder
@@ -9971,8 +9971,7 @@ class Digraph(object):
                            orderLimit=7,Threading=False,nbrOfCPUs=1,
                            Comments=False,Debug=False):
         """
-        Renders a ordering from worst to best of the actions with maximal marginal correlation
-        and minimal marginal correlation amplitude.
+        Renders a ranking from best to worest of the actions with maximal marginal correlation  and minimal marginal correlation amplitude.
 
         .. note::
         
@@ -10049,7 +10048,7 @@ class Digraph(object):
                            orderLimit=7, seed=None,
                            sampleSize=1000, Debug=False):
         """
-        Renders a ordering from worst to best of the actions with maximal Kemeny index.
+        Renders a ranking from best to worst of the actions with maximal Kemeny index.
 
         .. note::
         
@@ -10147,13 +10146,12 @@ class Digraph(object):
             ranking.reverse()
         return ranking, self.kemenyIndex
 
-    def computePrincipalOrder(self, plotFileName=None,\
+    def computePrincipalScores(self, plotFileName=None,\
                               Colwise=False, imageType=None,\
                               tempDir=None,\
                               Comments=False, Debug=False):
         """
-        Renders a ordered list of self.actions using the decreasing scores from the
-        first rincipal eigenvector of the covariance of the valued outdegrees of self.
+        Renders a ordered list of the first principal eigenvector of the covariance of the valued outdegrees of self.
 
         .. note::
 
@@ -10193,6 +10191,27 @@ class Digraph(object):
             tempd.cleanup()
         return principalScores
 
+    def computePrincipalRanking(self,Comments=False):
+        """
+        Rendesr a ranking from best to worst of the decision actions.
+        """
+        principalScores = self.computePrincipalScores()
+        if Comments:
+            for x in principalScores:
+                print('%s: %.3f' % (x[1],x[0]))
+        principalRanking = [x[1] for x in principalScores]
+        return principalRanking
+
+    def computePrincipalOrder(self,Comments=False):
+        """
+        Rendesr an ordering from wrost to best of the decision actions.
+        """
+        principalScores = self.computePrincipalScores()
+        if Comments:
+            for x in principalScores:
+                print('%s: %.3f' % (x[1],x[0]))
+        principalOrder = list(reversed([x[1] for x in principalScores]))
+        return principalOrder    
 
     def computeSlaterRanking(self,isProbabilistic=False, seed=None, sampleSize=1000, Debug=False):
         """
@@ -13587,6 +13606,10 @@ if __name__ == "__main__":
         #g.computeTransitivityDegree(Comments=True)
         g.computeIncomparabilityDegree(Comments=True)
         g.computeIncomparabilityDegree(InPercents=True,Comments=True)
+        print(g.computeCopelandOrder())
+        print(g.computePrincipalOrder(Comments=True))
+        print(g.computePrincipalRanking(Comments=True))
+        
         #g.computeTransitivityDegreeOld(Comments=True)
         #g.closeTransitive(Reverse=True,Comments=True)
         #print(g)
@@ -13629,8 +13652,8 @@ if __name__ == "__main__":
         print('Enjoy !')
 
     print('*************************************')
-    print('* R.B. July 2018                    *')
-    print('* $Revision: 2500+ $                *')
+    print('* R.B. Mar 2021                     *')
+    print('* $Revision: Python3.9.2$           *')
     print('*************************************')
 
 #############################

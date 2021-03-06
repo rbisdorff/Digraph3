@@ -1263,7 +1263,7 @@ Based on the triangles summation formula.</p>
 <dl class="py method">
 <dt id="digraphs.Digraph.computeCopelandOrder">
 <code class="sig-name descname">computeCopelandOrder</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/digraphs.html#Digraph.computeCopelandOrder"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#digraphs.Digraph.computeCopelandOrder" title="Permalink to this definition">¶</a></dt>
-<dd><p>renders a linear ranking from best to worst of the actions following Arrow&amp;Raynaud’s rule.</p>
+<dd><p>renders a linear ordering from worst to best of the actions following Arrow&amp;Raynaud’s rule.</p>
 </dd></dl>
 
 <dl class="py method">
@@ -1400,7 +1400,7 @@ Return a tuple: kemenyOrder (from worst to best), kemenyIndex</p>
 <dl class="py method">
 <dt id="digraphs.Digraph.computeKemenyRanking">
 <code class="sig-name descname">computeKemenyRanking</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">isProbabilistic</span><span class="o">=</span><span class="default_value">False</span></em>, <em class="sig-param"><span class="n">orderLimit</span><span class="o">=</span><span class="default_value">7</span></em>, <em class="sig-param"><span class="n">seed</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">sampleSize</span><span class="o">=</span><span class="default_value">1000</span></em>, <em class="sig-param"><span class="n">Debug</span><span class="o">=</span><span class="default_value">False</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/digraphs.html#Digraph.computeKemenyRanking"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#digraphs.Digraph.computeKemenyRanking" title="Permalink to this definition">¶</a></dt>
-<dd><p>Renders a ordering from worst to best of the actions with maximal Kemeny index.</p>
+<dd><p>Renders a ranking from best to worst of the actions with maximal Kemeny index.</p>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
 <p>Returns a tuple: kemenyRanking (from best to worst), kemenyIndex.</p>
@@ -1466,8 +1466,7 @@ in the corresponding disjunctive undirected graph.</p>
 <dl class="py method">
 <dt id="digraphs.Digraph.computeMedianRanking">
 <code class="sig-name descname">computeMedianRanking</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">orderLimit</span><span class="o">=</span><span class="default_value">7</span></em>, <em class="sig-param"><span class="n">Threading</span><span class="o">=</span><span class="default_value">False</span></em>, <em class="sig-param"><span class="n">nbrOfCPUs</span><span class="o">=</span><span class="default_value">1</span></em>, <em class="sig-param"><span class="n">Comments</span><span class="o">=</span><span class="default_value">False</span></em>, <em class="sig-param"><span class="n">Debug</span><span class="o">=</span><span class="default_value">False</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/digraphs.html#Digraph.computeMedianRanking"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#digraphs.Digraph.computeMedianRanking" title="Permalink to this definition">¶</a></dt>
-<dd><p>Renders a ordering from worst to best of the actions with maximal marginal correlation
-and minimal marginal correlation amplitude.</p>
+<dd><p>Renders a ranking from best to worest of the actions with maximal marginal correlation  and minimal marginal correlation amplitude.</p>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
 <p>Returns a triple: (medianRanking (from best to worst),
@@ -1615,9 +1614,20 @@ a given preordering in increasing levels (list of lists) result.</p>
 
 <dl class="py method">
 <dt id="digraphs.Digraph.computePrincipalOrder">
-<code class="sig-name descname">computePrincipalOrder</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">plotFileName</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">Colwise</span><span class="o">=</span><span class="default_value">False</span></em>, <em class="sig-param"><span class="n">imageType</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">tempDir</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">Comments</span><span class="o">=</span><span class="default_value">False</span></em>, <em class="sig-param"><span class="n">Debug</span><span class="o">=</span><span class="default_value">False</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/digraphs.html#Digraph.computePrincipalOrder"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#digraphs.Digraph.computePrincipalOrder" title="Permalink to this definition">¶</a></dt>
-<dd><p>Renders a ordered list of self.actions using the decreasing scores from the
-first rincipal eigenvector of the covariance of the valued outdegrees of self.</p>
+<code class="sig-name descname">computePrincipalOrder</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">Comments</span><span class="o">=</span><span class="default_value">False</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/digraphs.html#Digraph.computePrincipalOrder"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#digraphs.Digraph.computePrincipalOrder" title="Permalink to this definition">¶</a></dt>
+<dd><p>Rendesr an ordering from wrost to best of the decision actions.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="digraphs.Digraph.computePrincipalRanking">
+<code class="sig-name descname">computePrincipalRanking</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">Comments</span><span class="o">=</span><span class="default_value">False</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/digraphs.html#Digraph.computePrincipalRanking"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#digraphs.Digraph.computePrincipalRanking" title="Permalink to this definition">¶</a></dt>
+<dd><p>Rendesr a ranking from best to worst of the decision actions.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt id="digraphs.Digraph.computePrincipalScores">
+<code class="sig-name descname">computePrincipalScores</code><span class="sig-paren">(</span><em class="sig-param"><span class="n">plotFileName</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">Colwise</span><span class="o">=</span><span class="default_value">False</span></em>, <em class="sig-param"><span class="n">imageType</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">tempDir</span><span class="o">=</span><span class="default_value">None</span></em>, <em class="sig-param"><span class="n">Comments</span><span class="o">=</span><span class="default_value">False</span></em>, <em class="sig-param"><span class="n">Debug</span><span class="o">=</span><span class="default_value">False</span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/digraphs.html#Digraph.computePrincipalScores"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#digraphs.Digraph.computePrincipalScores" title="Permalink to this definition">¶</a></dt>
+<dd><p>Renders a ordered list of the first principal eigenvector of the covariance of the valued outdegrees of self.</p>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
 <p>The method, relying on writing and reading temporary files by default in a temporary directory is threading and multiprocessing safe !

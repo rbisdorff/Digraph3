@@ -10044,7 +10044,7 @@
 
 <div class="viewcode-block" id="Digraph.computeCopelandOrder"><a class="viewcode-back" href="../techDoc.html#digraphs.Digraph.computeCopelandOrder">[docs]</a>    <span class="k">def</span> <span class="nf">computeCopelandOrder</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        renders a linear ranking from best to worst of the actions following Arrow&amp;Raynaud&#39;s rule.</span>
+<span class="sd">        renders a linear ordering from worst to best of the actions following Arrow&amp;Raynaud&#39;s rule.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">try</span><span class="p">:</span>
             <span class="n">ordering</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">copelandOrder</span>
@@ -10138,8 +10138,7 @@
                            <span class="n">orderLimit</span><span class="o">=</span><span class="mi">7</span><span class="p">,</span><span class="n">Threading</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span><span class="n">nbrOfCPUs</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span>
                            <span class="n">Comments</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span><span class="n">Debug</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        Renders a ordering from worst to best of the actions with maximal marginal correlation</span>
-<span class="sd">        and minimal marginal correlation amplitude.</span>
+<span class="sd">        Renders a ranking from best to worest of the actions with maximal marginal correlation  and minimal marginal correlation amplitude.</span>
 
 <span class="sd">        .. note::</span>
 <span class="sd">        </span>
@@ -10216,7 +10215,7 @@
                            <span class="n">orderLimit</span><span class="o">=</span><span class="mi">7</span><span class="p">,</span> <span class="n">seed</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
                            <span class="n">sampleSize</span><span class="o">=</span><span class="mi">1000</span><span class="p">,</span> <span class="n">Debug</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        Renders a ordering from worst to best of the actions with maximal Kemeny index.</span>
+<span class="sd">        Renders a ranking from best to worst of the actions with maximal Kemeny index.</span>
 
 <span class="sd">        .. note::</span>
 <span class="sd">        </span>
@@ -10314,13 +10313,12 @@
             <span class="n">ranking</span><span class="o">.</span><span class="n">reverse</span><span class="p">()</span>
         <span class="k">return</span> <span class="n">ranking</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">kemenyIndex</span></div>
 
-<div class="viewcode-block" id="Digraph.computePrincipalOrder"><a class="viewcode-back" href="../techDoc.html#digraphs.Digraph.computePrincipalOrder">[docs]</a>    <span class="k">def</span> <span class="nf">computePrincipalOrder</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">plotFileName</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>\
+<div class="viewcode-block" id="Digraph.computePrincipalScores"><a class="viewcode-back" href="../techDoc.html#digraphs.Digraph.computePrincipalScores">[docs]</a>    <span class="k">def</span> <span class="nf">computePrincipalScores</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">plotFileName</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>\
                               <span class="n">Colwise</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">imageType</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>\
                               <span class="n">tempDir</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>\
                               <span class="n">Comments</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">Debug</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        Renders a ordered list of self.actions using the decreasing scores from the</span>
-<span class="sd">        first rincipal eigenvector of the covariance of the valued outdegrees of self.</span>
+<span class="sd">        Renders a ordered list of the first principal eigenvector of the covariance of the valued outdegrees of self.</span>
 
 <span class="sd">        .. note::</span>
 
@@ -10360,6 +10358,27 @@
             <span class="n">tempd</span><span class="o">.</span><span class="n">cleanup</span><span class="p">()</span>
         <span class="k">return</span> <span class="n">principalScores</span></div>
 
+<div class="viewcode-block" id="Digraph.computePrincipalRanking"><a class="viewcode-back" href="../techDoc.html#digraphs.Digraph.computePrincipalRanking">[docs]</a>    <span class="k">def</span> <span class="nf">computePrincipalRanking</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">Comments</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Rendesr a ranking from best to worst of the decision actions.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">principalScores</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">computePrincipalScores</span><span class="p">()</span>
+        <span class="k">if</span> <span class="n">Comments</span><span class="p">:</span>
+            <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">principalScores</span><span class="p">:</span>
+                <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;</span><span class="si">%s</span><span class="s1">: </span><span class="si">%.3f</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="n">x</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span><span class="n">x</span><span class="p">[</span><span class="mi">0</span><span class="p">]))</span>
+        <span class="n">principalRanking</span> <span class="o">=</span> <span class="p">[</span><span class="n">x</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">principalScores</span><span class="p">]</span>
+        <span class="k">return</span> <span class="n">principalRanking</span></div>
+
+<div class="viewcode-block" id="Digraph.computePrincipalOrder"><a class="viewcode-back" href="../techDoc.html#digraphs.Digraph.computePrincipalOrder">[docs]</a>    <span class="k">def</span> <span class="nf">computePrincipalOrder</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">Comments</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Rendesr an ordering from wrost to best of the decision actions.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">principalScores</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">computePrincipalScores</span><span class="p">()</span>
+        <span class="k">if</span> <span class="n">Comments</span><span class="p">:</span>
+            <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">principalScores</span><span class="p">:</span>
+                <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;</span><span class="si">%s</span><span class="s1">: </span><span class="si">%.3f</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="n">x</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span><span class="n">x</span><span class="p">[</span><span class="mi">0</span><span class="p">]))</span>
+        <span class="n">principalOrder</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="nb">reversed</span><span class="p">([</span><span class="n">x</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">principalScores</span><span class="p">]))</span>
+        <span class="k">return</span> <span class="n">principalOrder</span>    </div>
 
 <div class="viewcode-block" id="Digraph.computeSlaterRanking"><a class="viewcode-back" href="../techDoc.html#digraphs.Digraph.computeSlaterRanking">[docs]</a>    <span class="k">def</span> <span class="nf">computeSlaterRanking</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">isProbabilistic</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">seed</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">sampleSize</span><span class="o">=</span><span class="mi">1000</span><span class="p">,</span> <span class="n">Debug</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
@@ -13754,6 +13773,10 @@
         <span class="c1">#g.computeTransitivityDegree(Comments=True)</span>
         <span class="n">g</span><span class="o">.</span><span class="n">computeIncomparabilityDegree</span><span class="p">(</span><span class="n">Comments</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
         <span class="n">g</span><span class="o">.</span><span class="n">computeIncomparabilityDegree</span><span class="p">(</span><span class="n">InPercents</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span><span class="n">Comments</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="n">g</span><span class="o">.</span><span class="n">computeCopelandOrder</span><span class="p">())</span>
+        <span class="nb">print</span><span class="p">(</span><span class="n">g</span><span class="o">.</span><span class="n">computePrincipalOrder</span><span class="p">(</span><span class="n">Comments</span><span class="o">=</span><span class="kc">True</span><span class="p">))</span>
+        <span class="nb">print</span><span class="p">(</span><span class="n">g</span><span class="o">.</span><span class="n">computePrincipalRanking</span><span class="p">(</span><span class="n">Comments</span><span class="o">=</span><span class="kc">True</span><span class="p">))</span>
+        
         <span class="c1">#g.computeTransitivityDegreeOld(Comments=True)</span>
         <span class="c1">#g.closeTransitive(Reverse=True,Comments=True)</span>
         <span class="c1">#print(g)</span>
@@ -13796,8 +13819,8 @@
         <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Enjoy !&#39;</span><span class="p">)</span>
 
     <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;*************************************&#39;</span><span class="p">)</span>
-    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;* R.B. July 2018                    *&#39;</span><span class="p">)</span>
-    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;* $Revision: 2500+ $                *&#39;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;* R.B. Mar 2021                     *&#39;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;* $Revision: Python3.9.2$           *&#39;</span><span class="p">)</span>
     <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;*************************************&#39;</span><span class="p">)</span>
 
 <span class="c1">#############################</span>
