@@ -708,7 +708,7 @@ if __name__ == "__main__":
 
     print('****************************************************')
     print('* Python randomDigraphs module                     *')
-    print('* Copyright (C) 2015 University of Luxembourg      *')
+    print('* Copyright (C) 2015-2021 R. Bisdorff              *')
     print('* The module comes with ABSOLUTELY NO WARRANTY     *')
     print('* to the extent permitted by the applicable law.   *')
     print('* This is free software, and you are welcome to    *')
@@ -718,17 +718,6 @@ if __name__ == "__main__":
 
     print('*-------- Testing classes and methods -------')
 
-##    rg1 = RandomDigraph(order=5,seed=1)
-##    rg2 = RandomDigraph(Bipolar=True,order=5,seed=1)
-##    rg1.showRelationTable()
-##    rg2.showRelationTable()
-    
-##    dg = RandomValuationDigraph(Normalized=True,
-##                                #IntegerValuation=True,
-##                                ndigits=2,
-##                                seed=1)
-##    dg.showRelationTable()
-
     dg = RandomGridDigraph()
     dg.exportGraphViz()
 
@@ -736,12 +725,4 @@ if __name__ == "__main__":
     print('If you see this line all tests were passed successfully :-)')
     print('Enjoy !')
 
-    print('*************************************')
-    print('* R.B. July 2012                    *')
-    print('* $Revision: 1.697 $                *')
-    print('*************************************')
-
-#############################
-# Log record for changes:
-# $Log: randomDigraphs.py,v $
 #############################

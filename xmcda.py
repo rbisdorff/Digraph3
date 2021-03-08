@@ -3266,10 +3266,15 @@ def showXMCDARubisBestChoiceRecommendation(problemFileName=None,valuationType=No
    
 ###############################
 if __name__ == '__main__':
-    ######  scratch pad for testing the module components
-    from randomPerfTabs import RandomCBPerformanceTableau
-    t = RandomCBPerformanceTableau(seed=10)
-    t.saveXMCDA2('example')
-    import xmcda
-    xmcda.showXMCDARubisBestChoiceRecommendation(problemFileName='example',valuationType=None)
+    print("""
+    ****************************************************
+    * Python xmcda module                              *
+    * Copyright (C) 2011-2021 Raymond Bisdorff         *
+    * The module comes with ABSOLUTELY NO WARRANTY     *
+    * to the extent permitted by the applicable law.   *
+    * This is free software, and you are welcome to    *
+    * redistribute it if it remains free software.     *
+    ****************************************************
+    """)
 
+    ######  scratch pad for testing the module components

@@ -1909,7 +1909,10 @@
             <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;principal ordered relation table:&#39;</span><span class="p">)</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">showRelationTable</span><span class="p">()</span></div>
 
+<span class="c1">##################################################### </span>
 <span class="c1">#----------test  linearOrders module classes  ----------------</span>
+<span class="c1">#        for testing ongoing developmens</span>
+<span class="c1">####################################</span>
 <span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s2">&quot;__main__&quot;</span><span class="p">:</span>
     <span class="kn">import</span> <span class="nn">sys</span><span class="o">,</span><span class="nn">array</span>
     <span class="kn">from</span> <span class="nn">time</span> <span class="k">import</span> <span class="n">time</span>
@@ -1923,7 +1926,7 @@
     <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;&quot;&quot;</span>
 <span class="s2">    ****************************************************</span>
 <span class="s2">    * Python linearOrders module                       *</span>
-<span class="s2">    * Copyright (C) 2011-2015 Raymond Bisdorff         *</span>
+<span class="s2">    * Copyright (C) 2011-2021 Raymond Bisdorff         *</span>
 <span class="s2">    * The module comes with ABSOLUTELY NO WARRANTY     *</span>
 <span class="s2">    * to the extent permitted by the applicable law.   *</span>
 <span class="s2">    * This is free software, and you are welcome to    *</span>
@@ -1944,126 +1947,6 @@
     <span class="c1">#t = PerformanceTableau(&#39;testLin&#39;)    </span>
     <span class="n">g</span> <span class="o">=</span> <span class="n">BipolarOutrankingDigraph</span><span class="p">(</span><span class="n">t</span><span class="p">,</span><span class="n">Normalized</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
     <span class="c1">#g.showRelationTable()</span>
-<span class="c1">##    #mr = MedianRanking(g,Threading=False,nbrOfCPUs=8,Debug=False)</span>
-<span class="c1">##    t.showHTMLPerformanceHeatmap(pageTitle=&#39;Median Ranking&#39;,actionsList=mr.medianRanking,</span>
-<span class="c1">##                                 Correlations=True,colorLevels=5)</span>
-<span class="c1">##    #ke = KemenyRanking(g)</span>
-<span class="c1">##    print(&#39;median&#39;)</span>
-<span class="c1">##    for r in mr.maximalRankings:</span>
-<span class="c1">##        corr = g.computeRankingConsensusQuality(r)</span>
-<span class="c1">##        print(r,&#39;%.4f&#39; % (corr[1]), &#39;%.4f&#39; % (corr[2]) )</span>
-<span class="c1">##    print(&#39;Kemeny&#39;)</span>
-<span class="c1">##    for r in ke.maximalRankings:</span>
-<span class="c1">##        cons = g.computeRankingConsensusQuality(r)</span>
-<span class="c1">##        print(r,cons[1],cons[2])</span>
-<span class="c1">##    for r in ke.orderedMaximalRankings:</span>
-<span class="c1">##        print(r[2],r[0],r[1])</span>
-<span class="c1">##</span>
-<span class="c1">##    time.sleep(3)</span>
-<span class="c1">##    t.showHTMLPerformanceHeatmap(pageTitle=&#39;Kemeny Ranking&#39;,actionsList=ke.kemenyRanking,</span>
-<span class="c1">##                                 Correlations=True,colorLevels=5)</span>
-<span class="c1">##    print()</span>
-<span class="c1">##    print(&#39;==&gt;&gt; net flows ordering:&#39;)</span>
-<span class="c1">##    t0 = time()</span>
-<span class="c1">##    nf = NetFlowsOrder(g,Debug=False)</span>
-<span class="c1">##    #g.showRelationTable(actionsSubset=nf.netFlowsRanking,Sorted=False)</span>
-<span class="c1">##    #print(nf.netFlowsRanking)</span>
-<span class="c1">##    #print(nf.netFlowsOrder)</span>
-<span class="c1">##    #corr = g.computeOrdinalCorrelation(nf)</span>
-<span class="c1">##    #g.showCorrelation(corr)</span>
-<span class="c1">##    #print(time()-t0)</span>
-<span class="c1">##    t.showHTMLPerformanceHeatmap(pageTitle=&#39;NetFlows Ranking&#39;,actionsList=nf.netFlowsRanking,</span>
-<span class="c1">##                                 colorLevels=5,Correlations=True)</span>
-<span class="c1">##    print()</span>
-<span class="c1">##    print(&#39;==&gt;&gt; iterated net flows ordering:&#39;)</span>
-<span class="c1">##    from linearOrders import IteratedNetFlowsRanking</span>
-<span class="c1">##    t0 = time()</span>
-<span class="c1">##    inf = IteratedNetFlowsRanking(g,Comments=False,Valued=False,Debug=False)</span>
-<span class="c1">##    inf.showRelationTable(actionsSubset=inf.iteratedNetFlowsRanking,Sorted=False)</span>
-<span class="c1">##    print(inf.iteratedNetFlowsRanking)</span>
-<span class="c1">##    print(inf.iteratedNetFlowsOrdering)</span>
-<span class="c1">##    print(&#39;netfloes&#39;)</span>
-<span class="c1">##    corr = g.computeOrdinalCorrelation(nf)</span>
-<span class="c1">##    g.showCorrelation(corr)</span>
-<span class="c1">##    g.computeRankingConsensusQuality(inf.iteratedNetFlowsRanking,</span>
-<span class="c1">##                                     Comments=True)</span>
-<span class="c1">##    print(time()-t0)</span>
-<span class="c1">##    print(&#39;iterated netflows&#39;)</span>
-<span class="c1">##    corr = g.computeRankingCorrelation(inf.iteratedNetFlowsRanking)</span>
-<span class="c1">##    g.showCorrelation(corr)</span>
-<span class="c1">##    corr = g.computeOrderCorrelation(inf.iteratedNetFlowsOrdering)</span>
-<span class="c1">##    g.showCorrelation(corr)</span>
-<span class="c1">##    </span>
-<span class="c1">##    print(&#39;==&gt;&gt; iterated Copeland ordering:&#39;)</span>
-<span class="c1">##    from linearOrders import IteratedCopelandRanking</span>
-<span class="c1">##    t0 = time()</span>
-<span class="c1">##    icop = IteratedCopelandRanking(g,Comments=False,Valued=False,Debug=False)</span>
-<span class="c1">##    icop.showRelationTable(actionsSubset=icop.iteratedCopelandRanking,Sorted=False)</span>
-<span class="c1">##    print(icop.iteratedCopelandRanking)</span>
-<span class="c1">##    print(icop.iteratedCopelandOrdering)</span>
-<span class="c1">##    print(&#39;Copeland&#39;)</span>
-<span class="c1">##    from linearOrders import CopelandOrder</span>
-<span class="c1">##    cop = CopelandOrder(g)</span>
-<span class="c1">##    print(cop.copelandRanking)</span>
-<span class="c1">##    corr = g.computeOrdinalCorrelation(cop)</span>
-<span class="c1">##    g.showCorrelation(corr)</span>
-<span class="c1">##    g.computeRankingConsensusQuality(icop.iteratedCopelandRanking,</span>
-<span class="c1">##                                     Comments=True)</span>
-<span class="c1">##    print(time()-t0)</span>
-<span class="c1">##    print(&#39;iterated Copeland&#39;)</span>
-<span class="c1">##    corr = g.computeRankingCorrelation(icop.iteratedCopelandRanking)</span>
-<span class="c1">##    g.showCorrelation(corr)</span>
-<span class="c1">##    corr = g.computeOrderCorrelation(icop.iteratedCopelandOrdering)</span>
-<span class="c1">##    g.showCorrelation(corr)</span>
-<span class="c1">##</span>
-<span class="c1">##    #t.showHTMLPerformanceHeatmap(actionsList=inf.iteratedNetFlowsRanking,Correlations=True)</span>
-<span class="c1">##    print()</span>
-<span class="c1">##    print(&#39;==&gt;&gt; Kemeny ordering:&#39;)</span>
-<span class="c1">##    t0 = time()</span>
-<span class="c1">##    ke = KemenyOrder(g,Debug=False,orderLimit=9)</span>
-<span class="c1">##    #g.showRelationTable()</span>
-<span class="c1">##    try:</span>
-<span class="c1">##        print(ke.kemenyRanking)</span>
-<span class="c1">##        print(ke.kemenyOrder)</span>
-<span class="c1">##        corr = g.computeOrdinalCorrelation(ke)</span>
-<span class="c1">##        ke.showCorrelation(corr)</span>
-<span class="c1">##        print(ke.maximalRankings)</span>
-<span class="c1">##        print(time()-t0)</span>
-<span class="c1">##    except:</span>
-<span class="c1">##        pass</span>
-<span class="c1">##    print()</span>
-<span class="c1">##    print(&#39;==&gt;&gt; slater ordering:&#39;)</span>
-<span class="c1">##    sl = SlaterOrder(g,Debug=False,orderLimit=9)</span>
-<span class="c1">##    #g.showRelationTable()</span>
-<span class="c1">##    try:</span>
-<span class="c1">##        print(sl.slaterRanking)</span>
-<span class="c1">##        print(sl.slaterOrder)</span>
-<span class="c1">##        corr = g.computeOrdinalCorrelation(sl)</span>
-<span class="c1">##        sl.showCorrelation(corr)</span>
-<span class="c1">##        print(sl.maximalRankings)</span>
-<span class="c1">##        print(time()-t0)</span>
-<span class="c1">##    except:</span>
-<span class="c1">##        pass</span>
-<span class="c1">##    print()</span>
-     
-<span class="c1">##    print(&#39;==&gt;&gt; principal ordering:&#39;)</span>
-<span class="c1">##    t0 = time()    </span>
-<span class="c1">##    pri = PrincipalOrder(g,tempDir=None)</span>
-<span class="c1">##    g.showRelationTable(actionsSubset=pri.principalRanking)</span>
-<span class="c1">##    print(pri.principalRanking)</span>
-<span class="c1">##    print(pri.principalOrder)</span>
-<span class="c1">##    print(g.computeOrdinalCorrelation(pri))</span>
-<span class="c1">##    print(time()-t0)</span>
-<span class="c1">##    print()</span>
-<span class="c1">##    # print(&#39;==&gt;&gt; out flows ordering:&#39;)</span>
-<span class="c1">##    # t0 = time()</span>
-<span class="c1">##    # of = OutFlowsOrder(g)</span>
-<span class="c1">##    # g.showRelationTable(actionsSubset=of.outFlowsRanking)</span>
-<span class="c1">##    # print(of.outFlowsRanking)</span>
-<span class="c1">##    # print(of.outFlowsOrder)</span>
-<span class="c1">##    # print(g.computeOrdinalCorrelation(of))</span>
-<span class="c1">##    # print(time()-t0)</span>
-<span class="c1">##    # print()</span>
     <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;==&gt;&gt; Copeland ordering:&#39;</span><span class="p">)</span>
     <span class="n">t0</span> <span class="o">=</span> <span class="n">time</span><span class="p">()</span>
     <span class="n">cop</span> <span class="o">=</span> <span class="n">CopelandOrder</span><span class="p">(</span><span class="n">g</span><span class="p">,</span><span class="n">Comments</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
@@ -2095,96 +1978,7 @@
     <span class="n">le</span> <span class="o">=</span> <span class="n">RankedPairsOrder</span><span class="p">((</span><span class="o">-</span><span class="n">g</span><span class="p">),</span><span class="n">Leximin</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
     <span class="n">g</span><span class="o">.</span><span class="n">showRelationTable</span><span class="p">()</span>
     <span class="nb">print</span><span class="p">(</span><span class="n">le</span><span class="o">.</span><span class="n">rankedPairsOrder</span><span class="p">)</span>
-    <span class="nb">print</span><span class="p">((</span><span class="o">-</span><span class="n">g</span><span class="p">)</span><span class="o">.</span><span class="n">computeOrdinalCorrelation</span><span class="p">(</span><span class="n">le</span><span class="p">))</span>
-
-    
-<span class="c1">##    t = RandomCBPerformanceTableau(weightDistribution=&quot;equiobjectives&quot;,</span>
-<span class="c1">##                                   numberOfActions=200)</span>
-<span class="c1">##    t.saveXMCDA2(&#39;test&#39;)</span>
-<span class="c1">##    t = XMCDA2PerformanceTableau(&#39;uniSorting&#39;)</span>
-<span class="c1">##    #t = XMCDA2PerformanceTableau(&#39;test&#39;)</span>
-<span class="c1">##    g = BipolarOutrankingDigraph(t,Normalized=True,Threading=Threading)</span>
-<span class="c1">##    ko = KohlerOrder(g)</span>
-<span class="c1">##    ko.showOrdering()</span>
-<span class="c1">##    bko = BoostedKohlerOrder(t,strategy=&quot;average&quot;,Threading=Threading,Debug=False)</span>
-<span class="c1">##    #qr = QuantilesRankingDigraph(t,100,Threading=Threading)</span>
-<span class="c1">##    bko.showSorting()</span>
-<span class="c1">##    bko.showOrdering()</span>
-<span class="c1">##    #bko.showQuantileOrdering()</span>
-<span class="c1">##    #bko.showHTMLRelationTable(actionsList=bko.computeOrder())</span>
-<span class="c1">##    print(bko.runTimes)</span>
-<span class="c1">##    print(g.computeOrdinalCorrelation(bko))</span>
-<span class="c1">##    #print(qr.runTimes)</span>
-<span class="c1">##    #print(g.computeOrdinalCorrelation(qr))</span>
-<span class="c1">##    print(ko.computeOrdinalCorrelation(bko))</span>
-<span class="c1">##    QuantilesRankingDigraph.exportSortingGraphViz(bko)</span>
-<span class="c1">##    nf = NetFlowsOrder(g)</span>
-<span class="c1">##    #nf.showRelationTable()</span>
-<span class="c1">##    nf.showOrdering()</span>
-<span class="c1">##    print(g.computeOrdinalCorrelation(nf))</span>
-    
-    <span class="c1">## t = RandomRankPerformanceTableau(numberOfActions=20)</span>
-    <span class="c1">## t.saveXMCDA2(&#39;testRP&#39;)</span>
-    <span class="c1">## #t = XMCDA2PerformanceTableau(&#39;testRP&#39;)</span>
-    <span class="c1">## #g = Digraph(&#39;testLuisJune2&#39;)</span>
-    <span class="c1">## g = BipolarOutrankingDigraph(t)</span>
-    <span class="c1">## #g.showRelationTable()</span>
-    <span class="c1">## gcd = CoDualDigraph(g)</span>
-    <span class="c1">## #print gcd.valuationdomain</span>
-    <span class="c1">## #gcd.showRelationTable()</span>
-    <span class="c1">## gcd.exportGraphViz()</span>
-    <span class="c1">## print &#39;All ranking rules on S and/or codual S with ordinal distance to S&#39;</span>
-    <span class="c1">## print &#39;S determinateness = &#39;, g.computeDeterminateness()*g.order*(g.order-1)*100</span>
-
-    <span class="c1">## ## k = KemenyOrder(g)</span>
-    <span class="c1">## ## print &#39;Kemeny           : &#39;, k.computeOrder(), k.computeKemenyIndex(g)</span>
-    <span class="c1">## t0 = time()</span>
-    <span class="c1">## rps = RankedPairsOrder(g,isExtendedPrudent=False,coDual=False,Debug=False)</span>
-    <span class="c1">## print &#39;RP on S          : &#39;, rps.computeOrder(), rps.computeKemenyIndex(g),time()-t0,&#39;sec.&#39;</span>
-    <span class="c1">## t1 = time()</span>
-    <span class="c1">## rpeps = RankedPairsOrder(g,isExtendedPrudent=True,coDual=False,Debug=False)</span>
-    <span class="c1">## print &#39;RPEP on S        : &#39;, rpeps.computeOrder(), rpeps.computeKemenyIndex(g),time()-t1,&#39;sec.&#39;</span>
-    <span class="c1">## t0 = time()</span>
-    <span class="c1">## rps = RankedPairsOrder(g,isExtendedPrudent=False,Cpp=True, coDual=False,Debug=False)</span>
-    <span class="c1">## print &#39;RP on S          : &#39;, rps.computeOrder(), rps.computeKemenyIndex(g),time()-t0,&#39;sec.&#39;</span>
-    <span class="c1">## t1 = time()</span>
-    <span class="c1">## rpeps = RankedPairsOrder(g,isExtendedPrudent=True,Cpp=True, coDual=False,Debug=False)</span>
-    <span class="c1">## print &#39;RPEP on S        : &#39;, rpeps.computeOrder(), rpeps.computeKemenyIndex(g),time()-t1,&#39;sec.&#39;</span>
-    <span class="c1">## ## rpcd = RankedPairsOrder(g,coDual=True,Debug=False)</span>
-    <span class="c1">## ## print &#39;RP on cdS        : &#39;, rpcd.computeOrder(), rpcd.computeKemenyIndex(g)</span>
-
-    <span class="c1">## ## kos = KohlerOrder(g,coDual=False,Debug=False)</span>
-    <span class="c1">## ## print &#39;Kohler on S      : &#39;, kos.computeOrder(),kos.computeKemenyIndex(g)</span>
-    <span class="c1">## ## kocd = KohlerOrder(g,coDual=True,Debug=False)</span>
-    <span class="c1">## ## print &#39;Kohler on codual : &#39;, kocd.computeOrder(),kocd.computeKemenyIndex(g)</span>
-
-    <span class="c1">## ## nfs = NetFlowsOrder(g,coDual=False,Debug=False)</span>
-    <span class="c1">## ## print &#39;Net flows        : &#39;, nfs.computeOrder(), nfs.computeKemenyIndex(g</span>
-    <span class="c1">## ##)</span>
-<span class="c1">##    from outrankingDigraphs import RandomBipolarOutrankingDigraph</span>
-<span class="c1">##    g1 = RandomBipolarOutrankingDigraph(Normalized=True)</span>
-<span class="c1">##    g1.save(&#39;test&#39;)</span>
-<span class="c1">##    g1 = Digraph(&#39;test&#39;)</span>
-<span class="c1">##    g1.showRelationTable()</span>
-<span class="c1">##    p = PrincipalOrder(g1,Colwise=True,imageType=None,Debug=False)</span>
-<span class="c1">##    print(p.computeOrder())</span>
-<span class="c1">##    print(g1.computeOrdinalCorrelation(p))</span>
-<span class="c1">##    #p.showRelationTable()</span>
-<span class="c1">##    rbc = RankingByChoosingDigraph(g1,Debug=False)</span>
-<span class="c1">##    #rbc.showRelationTable()</span>
-<span class="c1">##    pio = PrincipalInOutDegreesOrdering(g1,Debug=True)</span>
-    
-<span class="c1">##    g1.showRelationTable()</span>
-<span class="c1">##    g2 = RandomLinearOrder(numberOfActions=10,Debug=True)</span>
-<span class="c1">##    g2.showRelationTable()</span>
-<span class="c1">##    print(g1.computeBipolarCorrelation(g2))</span>
-<span class="c1">##    g1 = RandomLinearOrder(OutrankingModel=True, Debug=True)</span>
-<span class="c1">##    g1.showRelationTable()</span>
-<span class="c1">##    g2 = RandomLinearOrder(OutrankingModel=True,Debug=True)</span>
-<span class="c1">##    g2.showRelationTable()</span>
-<span class="c1">##    print(g1.computeBipolarCorrelation(g2))</span>
-<span class="c1">##    </span>
-    
+    <span class="nb">print</span><span class="p">((</span><span class="o">-</span><span class="n">g</span><span class="p">)</span><span class="o">.</span><span class="n">computeOrdinalCorrelation</span><span class="p">(</span><span class="n">le</span><span class="p">))</span>    
     
     <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;*------------------*&#39;</span><span class="p">)</span>
     <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;If you see this line all tests were passed successfully :-)&#39;</span><span class="p">)</span>
@@ -2192,33 +1986,9 @@
         
     <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;*************************************&#39;</span><span class="p">)</span>
     <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;* R.B. June 2011                    *&#39;</span><span class="p">)</span>
-    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;* $Revision: 1.18 $                *&#39;</span><span class="p">)</span>                   
+    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;* $Revision: Python3.0 $            *&#39;</span><span class="p">)</span>                   
     <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;*************************************&#39;</span><span class="p">)</span>
 
-<span class="c1">#############################</span>
-<span class="c1"># Log record for changes:</span>
-<span class="c1"># $Log: linearOrders.py,v $</span>
-<span class="c1"># Revision 1.18  2012/10/26 11:25:28  bisi</span>
-<span class="c1"># minor</span>
-<span class="c1">#</span>
-<span class="c1"># Revision 1.17  2012/09/14 08:12:13  bisi</span>
-<span class="c1"># sync</span>
-<span class="c1">#</span>
-<span class="c1"># Revision 1.16  2012/09/14 05:03:21  bisi</span>
-<span class="c1"># Added RandomLinearOrder class for generating random linear orders.</span>
-<span class="c1">#</span>
-<span class="c1"># Revision 1.12  2012/05/09 10:51:43  bisi</span>
-<span class="c1"># GPL version 3 licensing installed</span>
-<span class="c1">#</span>
-<span class="c1"># Revision 1.9  2011/08/13 05:25:35  bisi</span>
-<span class="c1"># addedd piping C++ subprocess for chordless circuits enumeration</span>
-<span class="c1">#</span>
-<span class="c1"># Revision 1.8  2011/08/12 08:59:51  bisi</span>
-<span class="c1"># added agrum directory with C++ sources for chordless circuits enumeration adn detection</span>
-<span class="c1">#</span>
-<span class="c1"># Revision 1.2  2011/06/02 08:24:10  bisi</span>
-<span class="c1"># Added NetFlowsOrder class implementing the Promethee ranking base on the net flows&quot;</span>
-<span class="c1">#</span>
 <span class="c1">#############################</span>
 </pre></div>
 

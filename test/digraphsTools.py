@@ -486,6 +486,18 @@ def total_size(o, handlers={}, verbose=False):
 if __name__ == '__main__':
     ######  scratch pad for testing the module components
 
+    print("""
+    ****************************************************
+    * Python3 digraphsTools module                     *
+    * Copyright (C) 2010-2021 Raymond Bisdorf          *
+    * The module comes with ABSOLUTELY NO WARRANTY     *
+    * to the extent permitted by the applicable law.   *
+    * This is free software, and you are welcome to    *
+    * redistribute it if it remains free software.     *
+    ****************************************************
+    """)
+
+     
     from randomDigraphs import *
     g1 = RandomValuationDigraph(order=5,seed=1)
     g2 = RandomValuationDigraph(order=5,seed=2)
@@ -504,28 +516,9 @@ if __name__ == '__main__':
     fga = FusionLDigraph([g1,g2,g3],weights=[1,2,3],operator='o-average')
     fga.showRelationTable()
 
-##    print(grayCode(4))
-##    #print(list(generateBipolarGrayCode(4)))
-##    print(list(generateGrayCode(4)))
-##    print(list(generateLooplessGrayCode(4)))
-##
-##    X = list(range(4))
-##    n = len(X)
-##    for g in generateGrayCode(n):
-##        Xg = set()
-##        for i in range(n):
-##            if g[i] == 1:
-##                Xg.add(X[i])
-##        print(Xg)
-##        
-##    from outrankingDigraphs import *
-##    t = RandomPerformanceTableau()
-##    g = BipolarOutrankingDigraph(t)
-##    print(total_size(g))
-##
-##    from sparseOutrankingDigraphs import *
-##    pr = PreRankedOutrankingDigraph(t)
-##    print(total_size(pr))
-
              
+    print('*------------------*')
+    print('If you see this line all tests were passed successfully :-)')
+    print('Enjoy !')
+#####################################
 

@@ -7315,25 +7315,20 @@ if __name__ == "__main__":
     from randomPerfTabs import *
     from time import time
     import random
+
+    print("""
+    ****************************************************
+    * Python perfTabs module                           *
+    * Copyright (C) 2011-2021 Raymond Bisdorff         *
+    * The module comes with ABSOLUTELY NO WARRANTY     *
+    * to the extent permitted by the applicable law.   *
+    * This is free software, and you are welcome to    *
+    * redistribute it if it remains free software.     *
+    ****************************************************
+    """)
     
     print('*-------- Testing classes and methods -------')
 
-##    t = FullRandomPerformanceTableau(commonScale=(0.0,100.0),numberOfCriteria=10,numberOfActions=10,commonMode=('triangular',30.0,0.7))
-    ## t.showStatistics()
-##    t = Random3ObjectivesPerformanceTableau(numberOfCriteria=13,
-##                                   numberOfActions=20,
-##                                   weightDistribution='equiobjectives',
-##                                   IntegerWeights=True,
-##                                   #NegativeWeights=False,
-##                                   Debug=False,
-##                                   missingDataProbability=0.1,
-##                                   seed=101,
-##                                            #Threading=False
-##                                            )
-##    t.showWeightPreorder()
-##    t.showHTMLPerformanceHeatmap(Correlations=True,rankingRule='NetFlows',Transposed=False)
-##    t.computeRankingConsensusQuality(t.netFlowsRanking)
-##    print('*------ test performance heatmap -----*')
     randomSeed = random.randint(1,1000)
     t = RandomCBPerformanceTableau(numberOfCriteria=21,
                                    numberOfActions=13,
@@ -7348,14 +7343,6 @@ if __name__ == "__main__":
     t.replaceNA(Decimal('-999'),Comments=True)
     t.computeMissingDataProportion(InPercents=False,Comments=True)
                     
-##    actionsList = [x for x in t.actions.keys()]
-##    criteriaList = [g for g in t.criteria.keys()]
-##    print(t._htmlPerformanceHeatmap(argActionsList=actionsList,
-##                                   argCriteriaList=criteriaList,
-##                                   colorLevels=9,
-##                                   Correlations=True,
-##                                   ndigits=4,
-##                                   Debug=False))
     t.showHTMLPerformanceHeatmap(Correlations=True,colorLevels=5,
                                  rankingRule='NetFlows',Transposed=False)
 ##    t.showHTMLPerformanceHeatmap(outrankingModel='this',
@@ -7371,16 +7358,7 @@ if __name__ == "__main__":
     g = RobustOutrankingDigraph(t)
     g.showHTMLPerformanceHeatmap(outrankingModel='this',
                                    Correlations=True,colorLevels=5,
-                                 rankingRule='NetFlows',Transposed=False)
-    #nf = NetFlowsRanking(g)
-    #t.showRankingConsensusQuality(nf.netFlowsRanking)
-##    t.showHTMLPerformanceHeatmap(Correlations=True,colorLevels=5,
-##                                 rankingRule='Copeland',Transposed=False)
-    #cop = CopelandRanking(g)
-    #t.showRankingConsensusQuality(cop.copelandRanking)
-    #t.computeMissingDataProportion(InPercents=True,Comments=True)
-    #t.actions = {}
-    
+                                 rankingRule='NetFlows',Transposed=False)    
     
     
     print('*------------------*')
@@ -7389,7 +7367,7 @@ if __name__ == "__main__":
 
     print('*************************************')
     print('* R.B. August 2015                  *')
-    print('* $Revision: 1.37 $                 *')                   
+    print('* $Revision: Python3.9 $            *')                   
     print('*************************************')
 
 #############################

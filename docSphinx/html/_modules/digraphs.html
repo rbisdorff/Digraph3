@@ -10367,7 +10367,12 @@
             <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">principalScores</span><span class="p">:</span>
                 <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;</span><span class="si">%s</span><span class="s1">: </span><span class="si">%.3f</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="n">x</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span><span class="n">x</span><span class="p">[</span><span class="mi">0</span><span class="p">]))</span>
         <span class="n">principalRanking</span> <span class="o">=</span> <span class="p">[</span><span class="n">x</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">principalScores</span><span class="p">]</span>
-        <span class="k">return</span> <span class="n">principalRanking</span></div>
+        <span class="n">corr</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">computeRankingCorrelation</span><span class="p">(</span><span class="n">principalRanking</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="n">corr</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">corr</span><span class="p">[</span><span class="s1">&#39;correlation&#39;</span><span class="p">]</span> <span class="o">&gt;</span> <span class="mf">0.0</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">principalRanking</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">return</span> <span class="nb">list</span><span class="p">(</span><span class="nb">reversed</span><span class="p">([</span><span class="n">x</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">principalScores</span><span class="p">]))</span></div>
 
 <div class="viewcode-block" id="Digraph.computePrincipalOrder"><a class="viewcode-back" href="../techDoc.html#digraphs.Digraph.computePrincipalOrder">[docs]</a>    <span class="k">def</span> <span class="nf">computePrincipalOrder</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">Comments</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
@@ -10377,8 +10382,13 @@
         <span class="k">if</span> <span class="n">Comments</span><span class="p">:</span>
             <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">principalScores</span><span class="p">:</span>
                 <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;</span><span class="si">%s</span><span class="s1">: </span><span class="si">%.3f</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="n">x</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span><span class="n">x</span><span class="p">[</span><span class="mi">0</span><span class="p">]))</span>
-        <span class="n">principalOrder</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="nb">reversed</span><span class="p">([</span><span class="n">x</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">principalScores</span><span class="p">]))</span>
-        <span class="k">return</span> <span class="n">principalOrder</span>    </div>
+        <span class="n">principalOrder</span> <span class="o">=</span> <span class="p">[</span><span class="n">x</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">principalScores</span><span class="p">]</span>
+        <span class="n">corr</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">computeOrderCorrelation</span><span class="p">(</span><span class="n">principalOrder</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="n">corr</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">corr</span><span class="p">[</span><span class="s1">&#39;correlation&#39;</span><span class="p">]</span> <span class="o">&gt;</span> <span class="mf">0.0</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">principalOrder</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">return</span> <span class="nb">list</span><span class="p">(</span><span class="nb">reversed</span><span class="p">([</span><span class="n">x</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">principalScores</span><span class="p">]))</span></div>
 
 <div class="viewcode-block" id="Digraph.computeSlaterRanking"><a class="viewcode-back" href="../techDoc.html#digraphs.Digraph.computeSlaterRanking">[docs]</a>    <span class="k">def</span> <span class="nf">computeSlaterRanking</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">isProbabilistic</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">seed</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">sampleSize</span><span class="o">=</span><span class="mi">1000</span><span class="p">,</span> <span class="n">Debug</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
@@ -13668,20 +13678,13 @@
 <span class="kn">from</span> <span class="nn">randomDigraphs</span> <span class="k">import</span> <span class="o">*</span>
 
 <span class="c1">#############################################</span>
-
+<span class="c1"># scratch space for testing ongoing developments</span>
 <span class="c1">#----------test Digraph class ----------------</span>
 <span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s2">&quot;__main__&quot;</span><span class="p">:</span>
-    <span class="kn">import</span> <span class="nn">sys</span><span class="o">,</span><span class="nn">array</span>
-    <span class="kn">from</span> <span class="nn">digraphsTools</span> <span class="k">import</span> <span class="o">*</span>
-    <span class="kn">from</span> <span class="nn">outrankingDigraphs</span> <span class="k">import</span> <span class="n">OutrankingDigraph</span><span class="p">,</span>\
-    <span class="n">RandomOutrankingDigraph</span><span class="p">,</span> <span class="n">BipolarOutrankingDigraph</span>
-    <span class="kn">from</span> <span class="nn">votingProfiles</span> <span class="k">import</span> <span class="n">CondorcetDigraph</span>
-    <span class="kn">from</span> <span class="nn">randomPerfTabs</span> <span class="k">import</span> <span class="o">*</span>
-
 
     <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;*****************************************************&#39;</span><span class="p">)</span>
     <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;* Python digraphs module                            *&#39;</span><span class="p">)</span>
-    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;* $Revision: 2500+ $                                *&#39;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;* $Revision: Python3.9 $                            *&#39;</span><span class="p">)</span>
     <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;* Copyright (C) 2006-20018 Raymond Bisdorff         *&#39;</span><span class="p">)</span>
     <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;* The module comes with ABSOLUTELY NO WARRANTY      *&#39;</span><span class="p">)</span>
     <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;* to the extent permitted by the applicable law.    *&#39;</span><span class="p">)</span>
@@ -13689,134 +13692,25 @@
     <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;* redistribute it if it remains free software.      *&#39;</span><span class="p">)</span>
     <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;*****************************************************&#39;</span><span class="p">)</span>
 
-    <span class="n">narg</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">sys</span><span class="o">.</span><span class="n">argv</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;*-------- Testing classes and methods -------&#39;</span><span class="p">)</span>
 
-    <span class="n">noTest</span> <span class="o">=</span> <span class="kc">True</span>
-
-    <span class="k">if</span> <span class="n">narg</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
-        <span class="n">noTest</span> <span class="o">=</span> <span class="kc">False</span>
-
-    <span class="k">elif</span> <span class="n">narg</span> <span class="o">==</span> <span class="mi">2</span><span class="p">:</span>
-        <span class="k">if</span> <span class="n">sys</span><span class="o">.</span><span class="n">argv</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">==</span> <span class="s1">&#39;-r&#39;</span><span class="p">:</span>
-            <span class="n">g</span> <span class="o">=</span> <span class="n">RandomValuationDigraph</span><span class="p">()</span>
-        <span class="k">elif</span> <span class="n">sys</span><span class="o">.</span><span class="n">argv</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">==</span> <span class="s1">&#39;-rt&#39;</span><span class="p">:</span>
-            <span class="n">t</span> <span class="o">=</span> <span class="n">RandomPerformanceTableau</span><span class="p">()</span>
-            <span class="n">g</span> <span class="o">=</span> <span class="n">BipolarOutrankingDigraph</span><span class="p">(</span><span class="n">t</span><span class="p">)</span>
-        <span class="k">elif</span> <span class="n">sys</span><span class="o">.</span><span class="n">argv</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">==</span> <span class="s1">&#39;-h&#39;</span> <span class="ow">or</span> <span class="n">sys</span><span class="o">.</span><span class="n">argv</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">==</span> <span class="s1">&#39;--help&#39;</span> <span class="ow">or</span> <span class="n">sys</span><span class="o">.</span><span class="n">argv</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">==</span> <span class="s1">&#39;-?&#39;</span><span class="p">:</span>
-            <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;usage: digraphs.py [[-t|rt|v|av] &lt;filename&gt; | -r [n]] | -rt [[n] [m]]&#39;</span><span class="p">)</span>
-            <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;  &lt;filename&gt; of valid python digraph (without .py extension)&#39;</span><span class="p">)</span>
-            <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;  option = -t means valid performance tableau input.&#39;</span><span class="p">)</span>
-            <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;  option = -rt means  performance tableau input.&#39;</span><span class="p">)</span>
-            <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;  option = -v means valid voting profile input.&#39;</span><span class="p">)</span>
-            <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;  option = -av means valid approval voting profile input.&#39;</span><span class="p">)</span>
-            <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;  option = -r n : means a random digraph of order n (default n=10).&#39;</span><span class="p">)</span>
-            <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;  option = -rt n m : means an outranking digraph from a random&#39;</span><span class="p">)</span>
-            <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;                     performance tableau input with n actions and m criteria&#39;</span><span class="p">)</span>
-            <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;                     (default n = 10, m = 7).&#39;</span><span class="p">)</span>
-            <span class="n">sys</span><span class="o">.</span><span class="n">exit</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
-        <span class="k">else</span><span class="p">:</span>
-            <span class="n">file</span> <span class="o">=</span> <span class="n">sys</span><span class="o">.</span><span class="n">argv</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
-            <span class="n">g</span> <span class="o">=</span> <span class="n">Digraph</span><span class="p">(</span><span class="n">file</span><span class="p">)</span>
-    <span class="k">elif</span> <span class="n">narg</span> <span class="o">==</span> <span class="mi">3</span><span class="p">:</span>
-        <span class="k">if</span> <span class="n">sys</span><span class="o">.</span><span class="n">argv</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">==</span> <span class="s1">&#39;-r&#39;</span><span class="p">:</span>
-            <span class="n">order</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">sys</span><span class="o">.</span><span class="n">argv</span><span class="p">[</span><span class="mi">2</span><span class="p">])</span>
-            <span class="n">g</span> <span class="o">=</span> <span class="n">RandomValuationDigraph</span><span class="p">(</span><span class="n">order</span><span class="p">)</span>
-        <span class="k">elif</span> <span class="n">sys</span><span class="o">.</span><span class="n">argv</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">==</span> <span class="s1">&#39;-rt&#39;</span><span class="p">:</span>
-            <span class="n">actions</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">sys</span><span class="o">.</span><span class="n">argv</span><span class="p">[</span><span class="mi">2</span><span class="p">])</span>
-            <span class="n">t</span> <span class="o">=</span> <span class="n">RandomPerformanceTableau</span><span class="p">(</span><span class="n">numberOfActions</span><span class="o">=</span><span class="n">actions</span><span class="p">)</span>
-            <span class="n">g</span> <span class="o">=</span> <span class="n">BipolarOutrankingDigraph</span><span class="p">(</span><span class="n">t</span><span class="p">)</span>
-        <span class="k">elif</span> <span class="n">sys</span><span class="o">.</span><span class="n">argv</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">==</span> <span class="s1">&#39;-t&#39;</span><span class="p">:</span>
-            <span class="n">file</span> <span class="o">=</span> <span class="n">sys</span><span class="o">.</span><span class="n">argv</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span>
-            <span class="n">g</span> <span class="o">=</span> <span class="n">BipolarOutrankingDigraph</span><span class="p">(</span><span class="n">file</span><span class="p">)</span>
-        <span class="k">elif</span> <span class="n">sys</span><span class="o">.</span><span class="n">argv</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">==</span> <span class="s1">&#39;-v&#39;</span><span class="p">:</span>
-            <span class="n">file</span> <span class="o">=</span> <span class="n">sys</span><span class="o">.</span><span class="n">argv</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span>
-            <span class="n">g</span> <span class="o">=</span> <span class="n">CondorcetDigraph</span><span class="p">(</span><span class="n">file</span><span class="p">)</span>
-        <span class="k">elif</span> <span class="n">sys</span><span class="o">.</span><span class="n">argv</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">==</span> <span class="s1">&#39;-av&#39;</span><span class="p">:</span>
-            <span class="n">file</span> <span class="o">=</span> <span class="n">sys</span><span class="o">.</span><span class="n">argv</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span>
-            <span class="n">g</span> <span class="o">=</span> <span class="n">CondorcetDigraph</span><span class="p">(</span><span class="n">file</span><span class="p">,</span><span class="n">approvalVoting</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
-    <span class="k">elif</span> <span class="n">narg</span> <span class="o">==</span> <span class="mi">4</span><span class="p">:</span>
-        <span class="k">if</span> <span class="n">sys</span><span class="o">.</span><span class="n">argv</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">==</span> <span class="s1">&#39;-rt&#39;</span><span class="p">:</span>
-            <span class="n">nActions</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">sys</span><span class="o">.</span><span class="n">argv</span><span class="p">[</span><span class="mi">2</span><span class="p">])</span>
-            <span class="n">mCriteria</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">sys</span><span class="o">.</span><span class="n">argv</span><span class="p">[</span><span class="mi">3</span><span class="p">])</span>
-            <span class="n">t</span> <span class="o">=</span> <span class="n">RandomPerformanceTableau</span><span class="p">(</span><span class="n">numberOfActions</span><span class="o">=</span><span class="n">nActions</span><span class="p">,</span><span class="n">numberOfCriteria</span><span class="o">=</span><span class="n">mCriteria</span><span class="p">)</span>
-            <span class="n">g</span> <span class="o">=</span> <span class="n">BipolarOutrankingDigraph</span><span class="p">(</span><span class="n">t</span><span class="p">)</span>
-    <span class="k">else</span><span class="p">:</span>
-        <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;usage: digraphs.py [[-t|rt|v|av] &lt;filename&gt; | -r [n]] | -rt [[n] [m]]&#39;</span><span class="p">)</span>
-        <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;  &lt;filename&gt; of valid python digraph (without .py extension)&#39;</span><span class="p">)</span>
-        <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;  option = -t means valid performance tableau input.&#39;</span><span class="p">)</span>
-        <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;  option = -rt means  performance tableau input.&#39;</span><span class="p">)</span>
-        <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;  option = -v means valid voting profile input.&#39;</span><span class="p">)</span>
-        <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;  option = -av means valid approval voting profile input.&#39;</span><span class="p">)</span>
-        <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;  option = -r n : means a random digraph of order n (default n=10).&#39;</span><span class="p">)</span>
-        <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;  option = -rt n m : means an outranking digraph from a random&#39;</span><span class="p">)</span>
-        <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;                     performance tableau input with n actions and m criteria&#39;</span><span class="p">)</span>
-        <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;                     (default n = 10, m = 7).&#39;</span><span class="p">)</span>
-        <span class="n">sys</span><span class="o">.</span><span class="n">exit</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
-    <span class="k">if</span> <span class="n">noTest</span><span class="p">:</span>
-        <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;*------ Results -------&quot;&#39;</span><span class="p">)</span>
-        <span class="n">g</span><span class="o">.</span><span class="n">showRelationTable</span><span class="p">()</span>
-        <span class="n">g</span><span class="o">.</span><span class="n">showAll</span><span class="p">()</span>
-        <span class="n">g</span><span class="o">.</span><span class="n">showStatistics</span><span class="p">()</span>
-                    
-
-    <span class="k">else</span><span class="p">:</span>
-        <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;*-------- Testing classes and methods -------&#39;</span><span class="p">)</span>
-
-        <span class="kn">from</span> <span class="nn">time</span> <span class="k">import</span> <span class="n">time</span>
-        <span class="kn">from</span> <span class="nn">digraphsTools</span> <span class="k">import</span> <span class="o">*</span>
-        <span class="kn">from</span> <span class="nn">outrankingDigraphs</span> <span class="k">import</span> <span class="o">*</span>
-        <span class="n">t</span> <span class="o">=</span> <span class="n">RandomCBPerformanceTableau</span><span class="p">(</span><span class="n">weightDistribution</span><span class="o">=</span><span class="s2">&quot;equiobjectives&quot;</span><span class="p">,</span>
-                                       <span class="n">numberOfActions</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span><span class="n">seed</span><span class="o">=</span><span class="mi">106</span><span class="p">,</span>
-                                       <span class="n">missingDataProbability</span><span class="o">=</span><span class="mf">0.1</span><span class="p">)</span>
-        <span class="n">g</span> <span class="o">=</span> <span class="n">RobustOutrankingDigraph</span><span class="p">(</span><span class="n">t</span><span class="p">)</span>
-        <span class="n">g</span><span class="o">.</span><span class="n">showRelationTable</span><span class="p">()</span>
-        <span class="c1">#g.computeTransitivityDegree(Comments=True)</span>
-        <span class="n">g</span><span class="o">.</span><span class="n">computeIncomparabilityDegree</span><span class="p">(</span><span class="n">Comments</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
-        <span class="n">g</span><span class="o">.</span><span class="n">computeIncomparabilityDegree</span><span class="p">(</span><span class="n">InPercents</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span><span class="n">Comments</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
-        <span class="nb">print</span><span class="p">(</span><span class="n">g</span><span class="o">.</span><span class="n">computeCopelandOrder</span><span class="p">())</span>
-        <span class="nb">print</span><span class="p">(</span><span class="n">g</span><span class="o">.</span><span class="n">computePrincipalOrder</span><span class="p">(</span><span class="n">Comments</span><span class="o">=</span><span class="kc">True</span><span class="p">))</span>
-        <span class="nb">print</span><span class="p">(</span><span class="n">g</span><span class="o">.</span><span class="n">computePrincipalRanking</span><span class="p">(</span><span class="n">Comments</span><span class="o">=</span><span class="kc">True</span><span class="p">))</span>
-        
-        <span class="c1">#g.computeTransitivityDegreeOld(Comments=True)</span>
-        <span class="c1">#g.closeTransitive(Reverse=True,Comments=True)</span>
-        <span class="c1">#print(g)</span>
-        <span class="c1">#g.computeTransitivityDegree(Comments=True)</span>
-        <span class="c1">#g = EmptyDigraph()</span>
-        <span class="c1">#g = CirculantDigraph(circulants=[1,-1])</span>
-        <span class="c1">#g = EmptyDigraph()</span>
-        <span class="c1">#g.computeTransitivityDegree(Comments=True)</span>
-        <span class="c1">#g = CompleteDigraph()</span>
-        <span class="c1">#g.computeTransitivityDegree(Comments=True)</span>
-        
-        <span class="c1">#g.closeSymmetric()</span>
-        <span class="c1"># print(g.computeSymmetryDegree(Comments=True))</span>
-        <span class="c1"># print(g.isSymmetric(Comments=True))</span>
-        <span class="c1"># #g.closeTransitive(Reverse=True)</span>
-        <span class="c1"># print(g.computeTransitivityDegree(Comments=False))</span>
-        <span class="c1"># print(g.isTransitive(Comments=True))</span>
-        <span class="c1"># g.computeRankingByBestChoosing(CoDual=True,Debug=False)</span>
-        <span class="c1"># print(g.rankingByBestChoosing)</span>
-        <span class="c1"># g.showRankingByBestChoosing()</span>
-        <span class="c1"># g.computeRankingByLastChoosing(CoDual=True,Debug=False)</span>
-        <span class="c1"># print(g.rankingByLastChoosing)</span>
-        <span class="c1"># g.showRankingByLastChoosing()</span>
-        <span class="c1"># from transitiveDigraphs import *</span>
-        <span class="c1"># rbc = RankingByChoosingDigraph(g,CoDual=False,Threading=False)</span>
-        <span class="c1"># rbc.showRankingByBestChoosing()</span>
-        <span class="c1"># rbc.showRankingByLastChoosing()</span>
-        <span class="c1"># rbc.showRankingByChoosing()</span>
-        <span class="c1"># print(rbc.computeTopologicalRanking())</span>
-        <span class="c1"># print(rbc.topologicalSort())</span>
-<span class="c1">##        print(rbc.rankingByLastChoosing)</span>
-<span class="c1">##        rbc.exportGraphViz(fileName=&#39;test5&#39;,direction=&#39;worst&#39;)</span>
-<span class="c1">##        print(rbc.rankingByBestChoosing)</span>
-<span class="c1">##        rbc.exportGraphViz(fileName=&#39;test6&#39;,direction=&#39;best&#39;)</span>
-        
-       
-
-        <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;*------------------*&#39;</span><span class="p">)</span>
-        <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;If you see this line all tests were passed successfully :-)&#39;</span><span class="p">)</span>
-        <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Enjoy !&#39;</span><span class="p">)</span>
+    <span class="kn">from</span> <span class="nn">time</span> <span class="k">import</span> <span class="n">time</span>
+    <span class="kn">from</span> <span class="nn">digraphsTools</span> <span class="k">import</span> <span class="o">*</span>
+    <span class="kn">from</span> <span class="nn">outrankingDigraphs</span> <span class="k">import</span> <span class="o">*</span>
+    <span class="n">t</span> <span class="o">=</span> <span class="n">RandomCBPerformanceTableau</span><span class="p">(</span><span class="n">weightDistribution</span><span class="o">=</span><span class="s2">&quot;equiobjectives&quot;</span><span class="p">,</span>
+                                   <span class="n">numberOfActions</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span><span class="n">seed</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+                                   <span class="n">missingDataProbability</span><span class="o">=</span><span class="mf">0.1</span><span class="p">)</span>
+    <span class="n">g</span> <span class="o">=</span> <span class="n">RobustOutrankingDigraph</span><span class="p">(</span><span class="n">t</span><span class="p">)</span>
+    <span class="n">g</span><span class="o">.</span><span class="n">showRelationTable</span><span class="p">()</span>
+    <span class="c1">#g.computeTransitivityDegree(Comments=True)</span>
+    <span class="n">g</span><span class="o">.</span><span class="n">computeIncomparabilityDegree</span><span class="p">(</span><span class="n">Comments</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+    <span class="n">g</span><span class="o">.</span><span class="n">computeIncomparabilityDegree</span><span class="p">(</span><span class="n">InPercents</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span><span class="n">Comments</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">g</span><span class="o">.</span><span class="n">computeCopelandOrder</span><span class="p">())</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">g</span><span class="o">.</span><span class="n">computePrincipalOrder</span><span class="p">(</span><span class="n">Comments</span><span class="o">=</span><span class="kc">True</span><span class="p">))</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">g</span><span class="o">.</span><span class="n">computePrincipalRanking</span><span class="p">(</span><span class="n">Comments</span><span class="o">=</span><span class="kc">True</span><span class="p">))</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;*------------------*&#39;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;If you see this line all tests were passed successfully :-)&#39;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Enjoy !&#39;</span><span class="p">)</span>
 
     <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;*************************************&#39;</span><span class="p">)</span>
     <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;* R.B. Mar 2021                     *&#39;</span><span class="p">)</span>

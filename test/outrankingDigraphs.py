@@ -10386,7 +10386,7 @@ class _RubisRestServer(ServerProxy):
         except:
             print(answer['message'])
 
- 
+################################################################ 
 #----------test outrankingDigraphs classes ----------------
 if __name__ == "__main__":
 
@@ -10395,6 +10395,16 @@ if __name__ == "__main__":
     from random import randint
     from outrankingDigraphs import BipolarOutrankingDigraph
     from transitiveDigraphs import RankingByChoosingDigraph
+    print("""
+    ****************************************************
+    * Python outrankingDigraphs module                 *
+    * Copyright (C) 2011-2021 Raymond Bisdorff         *
+    * The module comes with ABSOLUTELY NO WARRANTY     *
+    * to the extent permitted by the applicable law.   *
+    * This is free software, and you are welcome to    *
+    * redistribute it if it remains free software.     *
+    ****************************************************
+    """)
     
     print('*-------- Testing classes and methods -------')
 
@@ -10421,87 +10431,6 @@ if __name__ == "__main__":
     uog = UnOpposedBipolarOutrankingDigraph(t,Comments=True)
     uog.showRelationTable()
     uog.exportGraphViz()
-
-                  
-##    g.showRelationTable(StabilityDenotation=True)
-##    rg = RobustOutrankingDigraph(t,Debug=False)
-##    rg.showRelationTable()
-##    cg = ConfidentBipolarOutrankingDigraph(t)
-##    cg.showRelationTable()
-    
-    #print(g1)
-    #g1.saveXMCDA2RubisChoiceRecommendation()
-    #g1.showRelationTable()
-##    t2 = Random3ObjectivesPerformanceTableau(numberOfActions=300,\
-##                                   numberOfCriteria=13,\
-##                                   weightDistribution='equiobjectives',
-##                                   seed=100)
-##    
-##    g2 = BipolarOutrankingDigraph(t2,Normalized=True,Threading=Threading,Comments=True)
-    #g2.showRelationTable()
-##    from time import time
-##    t0 = time();print(g1.computeOrdinalCorrelationMP(g2,Threading=Threading,Debug=False));print(time()-t0)
-##    #t0 = time();print(g1.computeOrdinalCorrelation(g2));print(time()-t0)
-##    
-##    t0 = time()
-##    criteriaCorrelations = g1.computeMarginalVersusGlobalOutrankingCorrelations(Threading=Threading)
-##    print(time()-t0)
-##    print(criteriaCorrelations)
-####    Threading = False
-##    t0 = time()
-##    ranking = g1.computeNetFlowsRanking()
-##    criteriaCorrelations = g1.computeMarginalVersusGlobalRankingCorrelations(ranking,Threading=Threading)
-##    print(time()-t0)
-##    print(criteriaCorrelations)
-##    print(g1)
-##    print(g2)
-    
-##    t.saveXMCDA2('test')
-##    t = XMCDA2PerformanceTableau('test')
-##    sg = StochasticBipolarOutrankingDigraph(t,distribution="extTriangular")
-##    print(sg.computeCLTLikelihoods(Debug=False))
-##    sg.showRelationTable()
-##    t0 = time()
-##    lg = ConfidentBipolarOutrankingDigraph(t,
-##                                        distribution="beta",
-##                                        confidence=80,
-##                                        betaParameter=2,
-##                                        Normalized=True,
-##                                        Debug=True,
-##                                        Threading=False)
-##    print(time()-t0,' sec.')
-##    print(lg.computeDeterminateness())
-##    lg.showRelationTable(LikelihoodDenotation=True,Debug=False)
-    ## t0 = time()
-    ## g = BipolarOutrankingDigraph(t,Threading=False)
-    ## print(time()-t0)
-    ## print(g.computeDeterminateness())
-    ## g.showMarginalVersusGlobalOutrankingCorrelation()
-    ## g.showHTMLPerformanceHeatmap(Correlations=True)
-    ## criteriaList = [x for x in g.criteria]
-    ## criteriaCorrelation = []
-    ## for c in criteriaList:
-    ##     corr = g.computeCriterionCorrelation(c,Debug=True)
-    ##     criteriaCorrelation.append((corr['correlation'],c))
-    ## criteriaCorrelation.sort(reverse=True)
-    ## print('criterion\t weight\t correlation')
-    ## for x in criteriaCorrelation:
-    ##     c = x[1]
-    ##     print('%9s\t %.2f \t %.3f' % (c,g.criteria[c]['weight'],x[0]))
-    
-##    g.showRelationTable()
-##    
-##    solver = RubisRestServer(host="http://leopold-loewenheim.uni.lu/cgi-bin/xmlrpc_cgi.py",Debug=True)
-##    #solver.ping()
-##    solver.submitProblem(t,valuation='robust',Debug=True)
-##    #solver.submitXMCDA2Problem('test',Debug=False)
-##    #solver.viewSolution()
-    
-    
-##    t0=time();g = BipolarOutrankingDigraph(t,Threading=False);print(time()-t0)
-##    #g.showRelationTable()
-##    t0=time();g = BipolarOutrankingDigraph(t,Threading=True,Debug=False);print(time()-t0)
-##    #g.showRelationTable()
 
     
 #############################

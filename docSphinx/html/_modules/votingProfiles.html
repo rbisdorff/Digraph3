@@ -1995,7 +1995,7 @@
 
     <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;****************************************************&#39;</span><span class="p">)</span>
     <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;* Python voting digraphs module                    *&#39;</span><span class="p">)</span>
-    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;* $Revision: 2484 $                                   *&#39;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;* $Revision: Python3.9 $                           *&#39;</span><span class="p">)</span>
     <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;* Copyright (C) 2006-2007 University of Luxembourg *&#39;</span><span class="p">)</span>
     <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;* The module comes with ABSOLUTELY NO WARRANTY     *&#39;</span><span class="p">)</span>
     <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;* to the extent permitted by the applicable law.   *&#39;</span><span class="p">)</span>
@@ -2012,116 +2012,7 @@
     <span class="nb">print</span><span class="p">(</span><span class="n">c</span><span class="p">)</span>
     <span class="n">mm</span> <span class="o">=</span> <span class="n">MajorityMarginsDigraph</span><span class="p">(</span><span class="n">v</span><span class="p">)</span>
     <span class="nb">print</span><span class="p">(</span><span class="n">mm</span><span class="p">)</span>
-    <span class="c1">## c.save(&#39;testcondorcet&#39;)</span>
-    <span class="c1">## c.showRelationTable()</span>
-    <span class="c1">## kr = c.computeKohlerRanking(Debug=False)</span>
-    <span class="c1">## kohlerRanking = [(kr[x][&#39;rank&#39;],x) for x in kr]</span>
-    <span class="c1">## kohlerRanking.sort()</span>
-    <span class="c1">## for x in kohlerRanking:</span>
-    <span class="c1">##     print &#39;%s: %d (%.2f)&#39; % (x[1], x[0], kr[x[1]][&#39;majorityMargin&#39;])</span>
-    <span class="c1">## aar = c.computeArrowRaynaudRanking(Debug=True)</span>
-    <span class="c1">## arrowRaynaudRanking = [(aar[x][&#39;rank&#39;],x) for x in aar]</span>
-    <span class="c1">## arrowRaynaudRanking.sort()</span>
-    <span class="c1">## for x in arrowRaynaudRanking:</span>
-    <span class="c1">##     print &#39;%s: %d (%.2f)&#39; % (x[1], x[0], aar[x[1]][&#39;majorityMargin&#39;])</span>
-
-<span class="c1">#     lvp = RandomLinearVotingProfile(numberOfCandidates=7,</span>
-<span class="c1">#                             numberOfVoters=500,</span>
-<span class="c1">#                             WithPolls=True,</span>
-<span class="c1">#                             partyRepartition=0.4,</span>
-<span class="c1">#                             other=0.2,</span>
-<span class="c1">#                             DivisivePolitics=True,</span>
-<span class="c1">#                             #seed=0.20990710811162194) # 1 circuit</span>
-<span class="c1">#                             #seed=0.8077233289616987)  # 2 circuits !</span>
-<span class="c1">#                             seed=1,</span>
-<span class="c1">#                             Debug=False)</span>
-<span class="c1">#     lvp.showRandomPolls()</span>
-<span class="c1"># ##    ## lvp = LinearVotingProfile(&#39;templinearprofile&#39;)</span>
-<span class="c1"># ##    lvp.save(&#39;test&#39;)</span>
-<span class="c1"># ##    lvp1 = LinearVotingProfile(&#39;test&#39;)</span>
-<span class="c1">#     lvp.save2PerfTab()</span>
-<span class="c1">#     from outrankingDigraphs import *</span>
-<span class="c1">#     t = PerformanceTableau(&#39;votingPerfTab&#39;)</span>
-<span class="c1"># ##    g = BipolarOutrankingDigraph(t)</span>
-<span class="c1"># ##    g.showRelationTable(ReflexiveTerms=False)</span>
-<span class="c1">#     uog = UnOpposedBipolarOutrankingDigraph(t)</span>
-<span class="c1">#     uog.showRelationTable(ReflexiveTerms=False)</span>
-<span class="c1">#     print(uog)</span>
-<span class="c1">#     uog.showPreKernels()</span>
-<span class="c1">#     uog.showBestChoiceRecommendation()</span>
-<span class="c1">##    lvp1 = LinearVotingProfile(&#39;templinearprofile&#39;)</span>
-<span class="c1">##    lvp1 = LinearVotingProfile(&#39;example1&#39;)</span>
-<span class="c1">##    lvp1.computeBallot()</span>
-<span class="c1">##    ## for x in lvp.voters:</span>
-<span class="c1">##    ##    print x, lvp.linearBallot[x]</span>
-<span class="c1">##    lvp1.showLinearBallots(IntegerWeights=True)</span>
-<span class="c1">##    lvp1.showVoterBallot(&#39;v001&#39;)</span>
-<span class="c1">####    print(lvp.computeRankAnalysis())</span>
-<span class="c1">##    lvp1.computeInstantRunoffWinner()</span>
-<span class="c1">##    lvp1.showRankAnalysisTable(Debug=False)</span>
-<span class="c1">##    lvp1.showBordaRanking()</span>
-<span class="c1">##    lvp1.computeBordaWinners()</span>
-<span class="c1">##    lvp1.save2PerfTab(&#39;votingPerfTab&#39;)</span>
-<span class="c1">##    t = PerformanceTableau(&#39;votingPerfTab&#39;)</span>
-<span class="c1">##    #t.showHTMLPerformanceHeatmap(Transposed=True,Correlations=True,ndigits=0)</span>
-<span class="c1">##    #lvp.showHTMLVotingHeatmap(Correlations=True)</span>
-    <span class="c1"># c = CondorcetDigraph(lvp)</span>
-    <span class="c1"># #c.recodeValuation()</span>
-    <span class="c1"># c.showRelationTable()</span>
-<span class="c1">##    (~(-c)).showRelationTable()</span>
-    <span class="c1"># print(c.computeCopelandRanking(Debug=False))</span>
-    <span class="c1"># print(c.computeNetFlowsRanking(Debug=False))</span>
-    <span class="c1"># lvp.showRandomPolls()</span>
-    <span class="c1"># print(c.computeTransitivityDegree())</span>
-    <span class="c1"># c.computeChordlessCircuits()</span>
-    <span class="c1"># c.showChordlessCircuits()</span>
-    <span class="c1"># if c.chordlessCircuits != []:</span>
-    <span class="c1">#     #MP = True</span>
-    <span class="c1">#     c.recodeValuation()</span>
-    <span class="c1">#     wc = WeakCopelandOrder(c)</span>
-    <span class="c1">#     print(&#39;Weak Copeland ranking&#39;)</span>
-    <span class="c1">#     wc.showRankingByChoosing()</span>
-    <span class="c1">#     corr = c.computeRankingCorrelation(wc.copelandRanking)</span>
-    <span class="c1">#     wc.showCorrelation(corr)</span>
-    <span class="c1">#     wn = WeakNetFlowsOrder(c)</span>
-    <span class="c1">#     print(&#39;Weak NetFlows ranking&#39;)</span>
-    <span class="c1">#     wn.showRankingByChoosing()</span>
-    <span class="c1">#     corr = c.computeRankingCorrelation(wn.netFlowsRanking)</span>
-    <span class="c1">#     wn.showCorrelation(corr)</span>
-    <span class="c1">#     lvp.showRandomPolls()</span>
-    <span class="c1">#     print(lvp.seed)</span>
-
-<span class="c1">##    from linearOrders import NetFlowsOrder</span>
-<span class="c1">##    nf = NetFlowsOrder(c,Debug=True)</span>
-<span class="c1">##    from outrankingDigraphs import *</span>
-<span class="c1">##    t1 = RandomCBPerformanceTableau(numberOfActions=5)</span>
-<span class="c1">##    g1 = BipolarOutrankingDigraph(t1)</span>
-<span class="c1">##    g1.showRelationTable()</span>
-<span class="c1">##    nf1 = NetFlowsOrder(g1,Debug=True)</span>
     
-    
-<span class="c1">##    lvp1.showHTMLVotingHeatmap()</span>
-<span class="c1">##    </span>
-<span class="c1">##    print(lvp.computeBordaWinners())</span>
-<span class="c1">##    print(lvp.computeUninominalVotes(lvp.candidates,lvp.linearBallot))</span>
-<span class="c1">##    print(lvp.computeInstantRunoffWinner(Comments=True))</span>
-<span class="c1">##    print(lvp.computeSimpleMajorityWinner(Comments=True))</span>
-<span class="c1">##</span>
-<span class="c1">##    c = CondorcetDigraph(lvp)</span>
-<span class="c1">##    c.exportGraphViz()</span>
-<span class="c1">##    print(&#39;Chordless circuits = &#39;, c.computeChordlessCircuits())</span>
-<span class="c1">##    print(&#39;Condorcet Winner = &#39;, c.computeCondorcetWinner())</span>
-<span class="c1">##    m = len(lvp.voters)</span>
-<span class="c1">##    c.recodeValuation(-m,m)</span>
-<span class="c1">##    c.showRelationTable()</span>
-
-<span class="c1">##    av = ApprovalVotingProfile(&#39;approvalInvitation&#39;)</span>
-<span class="c1">##    av.save2PerfTab()</span>
-<span class="c1">##    t = PerformanceTableau(&#39;votingPerfTab&#39;)</span>
-<span class="c1">##    t.showHTMLPerformanceHeatmap(Correlations=True,ndigits=0)</span>
-    
-    
-
     <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;*------------------*&#39;</span><span class="p">)</span>
     <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;If you see this line all tests were passed successfully :-)&#39;</span><span class="p">)</span>
     <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Enjoy !&#39;</span><span class="p">)</span>

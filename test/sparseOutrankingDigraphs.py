@@ -3076,19 +3076,23 @@ class PreRankedConfidentOutrankingDigraph(PreRankedOutrankingDigraph,Performance
 #######################################################################
 #----------test classes and methods ----------------
 if __name__ == "__main__":
+    
+    print("""
+    ****************************************************
+    * Python3 sparseOutrankingDigraphs module          *
+    * Copyright (C) 2010-2021 Raymond Bisdorf          *
+    * The module comes with ABSOLUTELY NO WARRANTY     *
+    * to the extent permitted by the applicable law.   *
+    * This is free software, and you are welcome to    *
+    * redistribute it if it remains free software.     *
+    ****************************************************
+    """)
+    
+    print('*-------- Testing classes and methods -------')
 
     from time import time
-##    t = XMCDA2PerformanceTableau('project_7')
-##    tenv = PartialPerformanceTableau(t,objectivesSubset=['Eco'])
-##    pre = PreRankedOutrankingDigraph(tenv,Debug=True)
-##    print(pre.computeOrderCorrelation(pre.boostedOrder))
-##    tenv.showHTMLPerformanceHeatmap()
     MP  = True
-    nbrActions=100
-##    t0 = time()
-##    tp = Random3ObjectivesPerformanceTableau(numberOfActions=nbrActions,seed=100)
-##    tp = XMCDA2PerformanceTableau('the_cs_2016')
-
+    nbrActions = 1000
     tp = RandomCBPerformanceTableau(numberOfActions=nbrActions,Threading=MP,
                                      BigData=False,seed=100)
     bg1 = PreRankedOutrankingDigraph(tp,CopyPerfTab=True,quantiles=10,
@@ -3105,19 +3109,9 @@ if __name__ == "__main__":
 
     seed= 1
     sampleSize = 100
-##    import random
-##    random.seed(seed)
-##    actionKeys = [x for x in bg1.actions]
-##    sample = random.sample(actionKeys,sampleSize)
-##    print(sample)
-##    print(bg1.boostedRanking)
-##    preRankedSample = []
-##    for x in bg1.boostedRanking:
-##        if x in sample:
-##            preRankedSample.append(x)
-##    print(preRankedSample)
-##    ptp = PartialPerformanceTableau(tp,sample)
-##    from outrankingDigraphs import BipolarOutrankingDigraph
-##    pg = BipolarOutrankingDigraph(ptp,Normalized=True)
-##    print(pg.computeRankingCorrelation(preRankedSample))
     print(bg1.estimateRankingCorrelation(sampleSize,seed))
+
+    print('*------------------*')
+    print('If you see this line all tests were passed successfully :-)')
+    print('Enjoy !')
+#####################################

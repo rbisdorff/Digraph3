@@ -653,6 +653,18 @@
 <span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s1">&#39;__main__&#39;</span><span class="p">:</span>
     <span class="c1">######  scratch pad for testing the module components</span>
 
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;&quot;&quot;</span>
+<span class="s2">    ****************************************************</span>
+<span class="s2">    * Python3 digraphsTools module                     *</span>
+<span class="s2">    * Copyright (C) 2010-2021 Raymond Bisdorf          *</span>
+<span class="s2">    * The module comes with ABSOLUTELY NO WARRANTY     *</span>
+<span class="s2">    * to the extent permitted by the applicable law.   *</span>
+<span class="s2">    * This is free software, and you are welcome to    *</span>
+<span class="s2">    * redistribute it if it remains free software.     *</span>
+<span class="s2">    ****************************************************</span>
+<span class="s2">    &quot;&quot;&quot;</span><span class="p">)</span>
+
+     
     <span class="kn">from</span> <span class="nn">randomDigraphs</span> <span class="k">import</span> <span class="o">*</span>
     <span class="n">g1</span> <span class="o">=</span> <span class="n">RandomValuationDigraph</span><span class="p">(</span><span class="n">order</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span><span class="n">seed</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
     <span class="n">g2</span> <span class="o">=</span> <span class="n">RandomValuationDigraph</span><span class="p">(</span><span class="n">order</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span><span class="n">seed</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
@@ -671,30 +683,11 @@
     <span class="n">fga</span> <span class="o">=</span> <span class="n">FusionLDigraph</span><span class="p">([</span><span class="n">g1</span><span class="p">,</span><span class="n">g2</span><span class="p">,</span><span class="n">g3</span><span class="p">],</span><span class="n">weights</span><span class="o">=</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">],</span><span class="n">operator</span><span class="o">=</span><span class="s1">&#39;o-average&#39;</span><span class="p">)</span>
     <span class="n">fga</span><span class="o">.</span><span class="n">showRelationTable</span><span class="p">()</span>
 
-<span class="c1">##    print(grayCode(4))</span>
-<span class="c1">##    #print(list(generateBipolarGrayCode(4)))</span>
-<span class="c1">##    print(list(generateGrayCode(4)))</span>
-<span class="c1">##    print(list(generateLooplessGrayCode(4)))</span>
-<span class="c1">##</span>
-<span class="c1">##    X = list(range(4))</span>
-<span class="c1">##    n = len(X)</span>
-<span class="c1">##    for g in generateGrayCode(n):</span>
-<span class="c1">##        Xg = set()</span>
-<span class="c1">##        for i in range(n):</span>
-<span class="c1">##            if g[i] == 1:</span>
-<span class="c1">##                Xg.add(X[i])</span>
-<span class="c1">##        print(Xg)</span>
-<span class="c1">##        </span>
-<span class="c1">##    from outrankingDigraphs import *</span>
-<span class="c1">##    t = RandomPerformanceTableau()</span>
-<span class="c1">##    g = BipolarOutrankingDigraph(t)</span>
-<span class="c1">##    print(total_size(g))</span>
-<span class="c1">##</span>
-<span class="c1">##    from sparseOutrankingDigraphs import *</span>
-<span class="c1">##    pr = PreRankedOutrankingDigraph(t)</span>
-<span class="c1">##    print(total_size(pr))</span>
-
              
+    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;*------------------*&#39;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;If you see this line all tests were passed successfully :-)&#39;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Enjoy !&#39;</span><span class="p">)</span>
+<span class="c1">#####################################</span>
 
 </pre></div>
 

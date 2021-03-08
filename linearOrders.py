@@ -1742,7 +1742,10 @@ class PrincipalOrder(LinearOrder):
             print('principal ordered relation table:')
             self.showRelationTable()
 
+##################################################### 
 #----------test  linearOrders module classes  ----------------
+#        for testing ongoing developmens
+####################################
 if __name__ == "__main__":
     import sys,array
     from time import time
@@ -1756,7 +1759,7 @@ if __name__ == "__main__":
     print("""
     ****************************************************
     * Python linearOrders module                       *
-    * Copyright (C) 2011-2015 Raymond Bisdorff         *
+    * Copyright (C) 2011-2021 Raymond Bisdorff         *
     * The module comes with ABSOLUTELY NO WARRANTY     *
     * to the extent permitted by the applicable law.   *
     * This is free software, and you are welcome to    *
@@ -1777,126 +1780,6 @@ if __name__ == "__main__":
     #t = PerformanceTableau('testLin')    
     g = BipolarOutrankingDigraph(t,Normalized=True)
     #g.showRelationTable()
-##    #mr = MedianRanking(g,Threading=False,nbrOfCPUs=8,Debug=False)
-##    t.showHTMLPerformanceHeatmap(pageTitle='Median Ranking',actionsList=mr.medianRanking,
-##                                 Correlations=True,colorLevels=5)
-##    #ke = KemenyRanking(g)
-##    print('median')
-##    for r in mr.maximalRankings:
-##        corr = g.computeRankingConsensusQuality(r)
-##        print(r,'%.4f' % (corr[1]), '%.4f' % (corr[2]) )
-##    print('Kemeny')
-##    for r in ke.maximalRankings:
-##        cons = g.computeRankingConsensusQuality(r)
-##        print(r,cons[1],cons[2])
-##    for r in ke.orderedMaximalRankings:
-##        print(r[2],r[0],r[1])
-##
-##    time.sleep(3)
-##    t.showHTMLPerformanceHeatmap(pageTitle='Kemeny Ranking',actionsList=ke.kemenyRanking,
-##                                 Correlations=True,colorLevels=5)
-##    print()
-##    print('==>> net flows ordering:')
-##    t0 = time()
-##    nf = NetFlowsOrder(g,Debug=False)
-##    #g.showRelationTable(actionsSubset=nf.netFlowsRanking,Sorted=False)
-##    #print(nf.netFlowsRanking)
-##    #print(nf.netFlowsOrder)
-##    #corr = g.computeOrdinalCorrelation(nf)
-##    #g.showCorrelation(corr)
-##    #print(time()-t0)
-##    t.showHTMLPerformanceHeatmap(pageTitle='NetFlows Ranking',actionsList=nf.netFlowsRanking,
-##                                 colorLevels=5,Correlations=True)
-##    print()
-##    print('==>> iterated net flows ordering:')
-##    from linearOrders import IteratedNetFlowsRanking
-##    t0 = time()
-##    inf = IteratedNetFlowsRanking(g,Comments=False,Valued=False,Debug=False)
-##    inf.showRelationTable(actionsSubset=inf.iteratedNetFlowsRanking,Sorted=False)
-##    print(inf.iteratedNetFlowsRanking)
-##    print(inf.iteratedNetFlowsOrdering)
-##    print('netfloes')
-##    corr = g.computeOrdinalCorrelation(nf)
-##    g.showCorrelation(corr)
-##    g.computeRankingConsensusQuality(inf.iteratedNetFlowsRanking,
-##                                     Comments=True)
-##    print(time()-t0)
-##    print('iterated netflows')
-##    corr = g.computeRankingCorrelation(inf.iteratedNetFlowsRanking)
-##    g.showCorrelation(corr)
-##    corr = g.computeOrderCorrelation(inf.iteratedNetFlowsOrdering)
-##    g.showCorrelation(corr)
-##    
-##    print('==>> iterated Copeland ordering:')
-##    from linearOrders import IteratedCopelandRanking
-##    t0 = time()
-##    icop = IteratedCopelandRanking(g,Comments=False,Valued=False,Debug=False)
-##    icop.showRelationTable(actionsSubset=icop.iteratedCopelandRanking,Sorted=False)
-##    print(icop.iteratedCopelandRanking)
-##    print(icop.iteratedCopelandOrdering)
-##    print('Copeland')
-##    from linearOrders import CopelandOrder
-##    cop = CopelandOrder(g)
-##    print(cop.copelandRanking)
-##    corr = g.computeOrdinalCorrelation(cop)
-##    g.showCorrelation(corr)
-##    g.computeRankingConsensusQuality(icop.iteratedCopelandRanking,
-##                                     Comments=True)
-##    print(time()-t0)
-##    print('iterated Copeland')
-##    corr = g.computeRankingCorrelation(icop.iteratedCopelandRanking)
-##    g.showCorrelation(corr)
-##    corr = g.computeOrderCorrelation(icop.iteratedCopelandOrdering)
-##    g.showCorrelation(corr)
-##
-##    #t.showHTMLPerformanceHeatmap(actionsList=inf.iteratedNetFlowsRanking,Correlations=True)
-##    print()
-##    print('==>> Kemeny ordering:')
-##    t0 = time()
-##    ke = KemenyOrder(g,Debug=False,orderLimit=9)
-##    #g.showRelationTable()
-##    try:
-##        print(ke.kemenyRanking)
-##        print(ke.kemenyOrder)
-##        corr = g.computeOrdinalCorrelation(ke)
-##        ke.showCorrelation(corr)
-##        print(ke.maximalRankings)
-##        print(time()-t0)
-##    except:
-##        pass
-##    print()
-##    print('==>> slater ordering:')
-##    sl = SlaterOrder(g,Debug=False,orderLimit=9)
-##    #g.showRelationTable()
-##    try:
-##        print(sl.slaterRanking)
-##        print(sl.slaterOrder)
-##        corr = g.computeOrdinalCorrelation(sl)
-##        sl.showCorrelation(corr)
-##        print(sl.maximalRankings)
-##        print(time()-t0)
-##    except:
-##        pass
-##    print()
-     
-##    print('==>> principal ordering:')
-##    t0 = time()    
-##    pri = PrincipalOrder(g,tempDir=None)
-##    g.showRelationTable(actionsSubset=pri.principalRanking)
-##    print(pri.principalRanking)
-##    print(pri.principalOrder)
-##    print(g.computeOrdinalCorrelation(pri))
-##    print(time()-t0)
-##    print()
-##    # print('==>> out flows ordering:')
-##    # t0 = time()
-##    # of = OutFlowsOrder(g)
-##    # g.showRelationTable(actionsSubset=of.outFlowsRanking)
-##    # print(of.outFlowsRanking)
-##    # print(of.outFlowsOrder)
-##    # print(g.computeOrdinalCorrelation(of))
-##    # print(time()-t0)
-##    # print()
     print('==>> Copeland ordering:')
     t0 = time()
     cop = CopelandOrder(g,Comments=True)
@@ -1928,96 +1811,7 @@ if __name__ == "__main__":
     le = RankedPairsOrder((-g),Leximin=True)
     g.showRelationTable()
     print(le.rankedPairsOrder)
-    print((-g).computeOrdinalCorrelation(le))
-
-    
-##    t = RandomCBPerformanceTableau(weightDistribution="equiobjectives",
-##                                   numberOfActions=200)
-##    t.saveXMCDA2('test')
-##    t = XMCDA2PerformanceTableau('uniSorting')
-##    #t = XMCDA2PerformanceTableau('test')
-##    g = BipolarOutrankingDigraph(t,Normalized=True,Threading=Threading)
-##    ko = KohlerOrder(g)
-##    ko.showOrdering()
-##    bko = BoostedKohlerOrder(t,strategy="average",Threading=Threading,Debug=False)
-##    #qr = QuantilesRankingDigraph(t,100,Threading=Threading)
-##    bko.showSorting()
-##    bko.showOrdering()
-##    #bko.showQuantileOrdering()
-##    #bko.showHTMLRelationTable(actionsList=bko.computeOrder())
-##    print(bko.runTimes)
-##    print(g.computeOrdinalCorrelation(bko))
-##    #print(qr.runTimes)
-##    #print(g.computeOrdinalCorrelation(qr))
-##    print(ko.computeOrdinalCorrelation(bko))
-##    QuantilesRankingDigraph.exportSortingGraphViz(bko)
-##    nf = NetFlowsOrder(g)
-##    #nf.showRelationTable()
-##    nf.showOrdering()
-##    print(g.computeOrdinalCorrelation(nf))
-    
-    ## t = RandomRankPerformanceTableau(numberOfActions=20)
-    ## t.saveXMCDA2('testRP')
-    ## #t = XMCDA2PerformanceTableau('testRP')
-    ## #g = Digraph('testLuisJune2')
-    ## g = BipolarOutrankingDigraph(t)
-    ## #g.showRelationTable()
-    ## gcd = CoDualDigraph(g)
-    ## #print gcd.valuationdomain
-    ## #gcd.showRelationTable()
-    ## gcd.exportGraphViz()
-    ## print 'All ranking rules on S and/or codual S with ordinal distance to S'
-    ## print 'S determinateness = ', g.computeDeterminateness()*g.order*(g.order-1)*100
-
-    ## ## k = KemenyOrder(g)
-    ## ## print 'Kemeny           : ', k.computeOrder(), k.computeKemenyIndex(g)
-    ## t0 = time()
-    ## rps = RankedPairsOrder(g,isExtendedPrudent=False,coDual=False,Debug=False)
-    ## print 'RP on S          : ', rps.computeOrder(), rps.computeKemenyIndex(g),time()-t0,'sec.'
-    ## t1 = time()
-    ## rpeps = RankedPairsOrder(g,isExtendedPrudent=True,coDual=False,Debug=False)
-    ## print 'RPEP on S        : ', rpeps.computeOrder(), rpeps.computeKemenyIndex(g),time()-t1,'sec.'
-    ## t0 = time()
-    ## rps = RankedPairsOrder(g,isExtendedPrudent=False,Cpp=True, coDual=False,Debug=False)
-    ## print 'RP on S          : ', rps.computeOrder(), rps.computeKemenyIndex(g),time()-t0,'sec.'
-    ## t1 = time()
-    ## rpeps = RankedPairsOrder(g,isExtendedPrudent=True,Cpp=True, coDual=False,Debug=False)
-    ## print 'RPEP on S        : ', rpeps.computeOrder(), rpeps.computeKemenyIndex(g),time()-t1,'sec.'
-    ## ## rpcd = RankedPairsOrder(g,coDual=True,Debug=False)
-    ## ## print 'RP on cdS        : ', rpcd.computeOrder(), rpcd.computeKemenyIndex(g)
-
-    ## ## kos = KohlerOrder(g,coDual=False,Debug=False)
-    ## ## print 'Kohler on S      : ', kos.computeOrder(),kos.computeKemenyIndex(g)
-    ## ## kocd = KohlerOrder(g,coDual=True,Debug=False)
-    ## ## print 'Kohler on codual : ', kocd.computeOrder(),kocd.computeKemenyIndex(g)
-
-    ## ## nfs = NetFlowsOrder(g,coDual=False,Debug=False)
-    ## ## print 'Net flows        : ', nfs.computeOrder(), nfs.computeKemenyIndex(g
-    ## ##)
-##    from outrankingDigraphs import RandomBipolarOutrankingDigraph
-##    g1 = RandomBipolarOutrankingDigraph(Normalized=True)
-##    g1.save('test')
-##    g1 = Digraph('test')
-##    g1.showRelationTable()
-##    p = PrincipalOrder(g1,Colwise=True,imageType=None,Debug=False)
-##    print(p.computeOrder())
-##    print(g1.computeOrdinalCorrelation(p))
-##    #p.showRelationTable()
-##    rbc = RankingByChoosingDigraph(g1,Debug=False)
-##    #rbc.showRelationTable()
-##    pio = PrincipalInOutDegreesOrdering(g1,Debug=True)
-    
-##    g1.showRelationTable()
-##    g2 = RandomLinearOrder(numberOfActions=10,Debug=True)
-##    g2.showRelationTable()
-##    print(g1.computeBipolarCorrelation(g2))
-##    g1 = RandomLinearOrder(OutrankingModel=True, Debug=True)
-##    g1.showRelationTable()
-##    g2 = RandomLinearOrder(OutrankingModel=True,Debug=True)
-##    g2.showRelationTable()
-##    print(g1.computeBipolarCorrelation(g2))
-##    
-    
+    print((-g).computeOrdinalCorrelation(le))    
     
     print('*------------------*')
     print('If you see this line all tests were passed successfully :-)')
@@ -2025,31 +1819,7 @@ if __name__ == "__main__":
         
     print('*************************************')
     print('* R.B. June 2011                    *')
-    print('* $Revision: 1.18 $                *')                   
+    print('* $Revision: Python3.0 $            *')                   
     print('*************************************')
 
-#############################
-# Log record for changes:
-# $Log: linearOrders.py,v $
-# Revision 1.18  2012/10/26 11:25:28  bisi
-# minor
-#
-# Revision 1.17  2012/09/14 08:12:13  bisi
-# sync
-#
-# Revision 1.16  2012/09/14 05:03:21  bisi
-# Added RandomLinearOrder class for generating random linear orders.
-#
-# Revision 1.12  2012/05/09 10:51:43  bisi
-# GPL version 3 licensing installed
-#
-# Revision 1.9  2011/08/13 05:25:35  bisi
-# addedd piping C++ subprocess for chordless circuits enumeration
-#
-# Revision 1.8  2011/08/12 08:59:51  bisi
-# added agrum directory with C++ sources for chordless circuits enumeration adn detection
-#
-# Revision 1.2  2011/06/02 08:24:10  bisi
-# Added NetFlowsOrder class implementing the Promethee ranking base on the net flows"
-#
 #############################

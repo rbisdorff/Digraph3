@@ -1774,6 +1774,19 @@ if __name__ == "__main__":
     from votingProfiles import *
     from time import time
 
+    print("""
+    ****************************************************
+    * Python transitiveDigraphs module                 *
+    * depends on BipolarOutrankingDigraph and          *
+    * $Revision$                                       *
+    * Copyright (C) 2010-2021 Raymond Bisdorf          *
+    * The module comes with ABSOLUTELY NO WARRANTY     *
+    * to the extent permitted by the applicable law.   *
+    * This is free software, and you are welcome to    *
+    * redistribute it if it remains free software.     *
+    ****************************************************
+    """)
+
     v = RandomLinearVotingProfile(numberOfVoters=99,\
                                   numberOfCandidates=9,seed=201)
     g = CondorcetDigraph(v)
@@ -1783,67 +1796,9 @@ if __name__ == "__main__":
     print(rbc)
     rbc.exportTopologicalGraphViz('test')
     rbc.exportGraphViz('test1')
-##    wc = WeakCopelandOrder(g,SelfCoDual=True,Debug=False)
-##    wc.showRelationTable()
-##    cop = CopelandOrder(g)
-##    cop.showRelationTable()
-##    wc.showScores()
-##    cop.showScores()
-##    g.showRelationTable()
-##    order = g.computeCopelandOrder()
-##    print(g.computeOrderCorrelation(order))
-##    print(g.computeOrdinalCorrelation(cop))
-##    print(g.computeOrdinalCorrelation(wc))
-##    wnf = WeakNetFlowsOrder(g,SelfCoDual=False,Debug=False)
-##    wnf.showRelationTable()
-##    wnf.showScores()
-##    g.showRelationTable()
-##    print(wc.copelandOrder)
-##    print(wnf.netFlowsOrder)
-##    wc.showTransitiveDigraph()
-##    wnf.showTransitiveDigraph()
-##    print(g.computeOrdinalCorrelation(wc))
-##    print(g.computeOrdinalCorrelation(wnf))
-
-##    Threading=False
-##    t = PerformanceTableau('auditor2_2')
-##    t.showHTMLPerformanceHeatmap(Correlations=True,ndigits=0,Debug=False)
-##    t = XMCDA2PerformanceTableau('uniSorting')
-##    t = RandomCBPerformanceTableau(weightDistribution="equiobjectives",
-##                                   numberOfActions=8,seed=105)
-##    g = BipolarOutrankingDigraph(t)
-##    g.exportGraphViz('testg')
-##    wke = KemenyOrdersFusion(g,orderLimit=8)
-##    print(wke.topologicalSort())
-##    wke.exportGraphViz(fileName='testwke')
-##    print(wke.relation)
-##
-##    from transitiveDigraphs import RankingsFusion
-##    from sparseOutrankingDigraphs import PreRankedOutrankingDigraph
-##    t = RandomCBPerformanceTableau(numberOfActions=50,seed=10)
-##    from outrankingDigraphs import *
-##    g = BipolarOutrankingDigraph(t,Normalized=True)
-##    from linearOrders import *
-##    cop = CopelandOrder(g)
-##    nf = NetFlowsOrder(g)
-##    wr = RankingsFusion(g,[cop.copelandRanking,nf.netFlowsRanking])
-##    print(wr.topologicalSort())
-## 
-    # pra = PreRankedOutrankingDigraph(t,5,quantilesOrderingStrategy='average')
-    # r1 = pra.boostedRanking
-    # pro = PreRankedOutrankingDigraph(t,5,quantilesOrderingStrategy='optimistic')
-    # r2 = pro.boostedRanking
-    # prp = PreRankedOutrankingDigraph(t,5,quantilesOrderingStrategy='pessimistic')
-    # r3 = prp.boostedRanking
-    # wqr = RankingsFusionDigraph(pra,[r1,r2,r3])
-    # wqr.exportGraphViz(fileName='partialOrdering',graphType="pdf")
  
    
     print('*------------------*')
     print('If you see this line all tests were passed successfully :-)')
     print('Enjoy !')
 
-    print('*************************************')
-    print('* R.B. october 2014                 *')
-    print('* $Revision:  $                  *')
-    print('*************************************')

@@ -4636,53 +4636,18 @@
 <span class="c1"># --------------testing the module ----</span>
 <span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s1">&#39;__main__&#39;</span><span class="p">:</span>
 
-    <span class="c1">#g = PermutationGraph(permutation=[4,3,6,1,5,2])</span>
-    <span class="c1">#g = CycleGraph(order=6)</span>
-    <span class="c1">#g = Graph(&#39;test&#39;)</span>
-<span class="c1">##    g = RandomGraph(seed=100)</span>
-<span class="c1">##    print(g)</span>
-<span class="c1">##    g.exportGraphViz()</span>
-<span class="c1">##    #g.exportPermutationGraphViz()</span>
-<span class="c1">##    #g.computeMinimalVertexColoring(Comments=True,Debug=True)</span>
-<span class="c1">##    #g.exportGraphViz(WithVertexColoring=True)</span>
-<span class="c1">##</span>
-<span class="c1">##    #b = BestDeterminedSpanningForest(g)</span>
-<span class="c1">##    #print(b)</span>
-<span class="c1">##    if g.isComparabilityGraph(Debug=True):</span>
-<span class="c1">##        print(&#39;Comparability Graph ? = True&#39;,g.edgeOrientations)</span>
-<span class="c1">##        dg = g.computeTransitivelyOrientedDigraph()</span>
-<span class="c1">##        if dg != None:</span>
-<span class="c1">##            print(dg)</span>
-<span class="c1">##            print(dg.computeTransitivityDegree())</span>
-<span class="c1">##            dg.exportGraphViz()</span>
-<span class="c1">##    else:</span>
-<span class="c1">##        print(&#39;Comparability Graph ? = False&#39;)</span>
-<span class="c1">##    print(g.isTriangulated())</span>
-<span class="c1">##    print((-g).isComparabilityGraph())</span>
-<span class="c1">##    g.isIntervalGraph(Comments=True)</span>
-<span class="c1">##</span>
-<span class="c1">##    intervals = [(1,5),(2,3),(3,5),(7,8),(3,5),(1,9)]</span>
-<span class="c1">##    i = LineIntersectionsGraph(intervals)</span>
-<span class="c1">##    print(i)</span>
-<span class="c1">##    print(i.intervals)</span>
-<span class="c1">##    print(i.isTriangulated())</span>
-<span class="c1">##    print((-i).isTriangulated())</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;&quot;&quot;</span>
+<span class="s2">    ****************************************************</span>
+<span class="s2">    * Python3 graphs module                            *</span>
+<span class="s2">    * Copyright (C) 2010-2021 Raymond Bisdorff         *</span>
+<span class="s2">    * The module comes with ABSOLUTELY NO WARRANTY     *</span>
+<span class="s2">    * to the extent permitted by the applicable law.   *</span>
+<span class="s2">    * This is free software, and you are welcome to    *</span>
+<span class="s2">    * redistribute it if it remains free software.     *</span>
+<span class="s2">    ****************************************************</span>
+<span class="s2">    &quot;&quot;&quot;</span><span class="p">)</span>
 
-<span class="c1">##    ri = RandomGraph(order=8,seed=4335)</span>
-<span class="c1">##    print(ri)</span>
-<span class="c1">##    #print(ri.intervals)</span>
-<span class="c1">##    #print(ri.isIntervalGraph(Comments=True))</span>
-<span class="c1">##    #print(ri.isTriangulated())</span>
-<span class="c1">##    #print((-ri).isTriangulated())</span>
-<span class="c1">##    ri.exportGraphViz()</span>
-<span class="c1">##    #ri.isSplitGraph(Comments=True)</span>
-<span class="c1">##    #ri.isPermutationGraph(Comments=True)</span>
-<span class="c1">##    #print(ri.computePermutation())</span>
-<span class="c1">##    if ri.isComparabilityGraph():</span>
-<span class="c1">##        ri.exportEdgeOrientationsGraphViz(&#39;testColors1&#39;)</span>
-<span class="c1">##    rid = -ri</span>
-<span class="c1">##    if rid.isComparabilityGraph():</span>
-<span class="c1">##        rid.exportEdgeOrientationsGraphViz(&#39;testColors2&#39;,palette=2)</span>
+ 
 
     <span class="n">g</span> <span class="o">=</span> <span class="n">RandomGraph</span><span class="p">(</span><span class="n">order</span><span class="o">=</span><span class="mi">9</span><span class="p">,</span><span class="n">edgeProbability</span><span class="o">=</span><span class="mf">0.5</span><span class="p">)</span>
     <span class="n">g</span><span class="o">.</span><span class="n">save</span><span class="p">(</span><span class="s1">&#39;testPerfectGraph&#39;</span><span class="p">)</span>
@@ -4694,75 +4659,11 @@
     <span class="n">g</span><span class="o">.</span><span class="n">computeGirth</span><span class="p">(</span><span class="n">girthType</span><span class="o">=</span><span class="s2">&quot;even&quot;</span><span class="p">,</span><span class="n">Comments</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
     <span class="n">g</span><span class="o">.</span><span class="n">computeGirth</span><span class="p">(</span><span class="n">Comments</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
     
-<span class="c1">##    rg = RandomPermutationGraph(order=6,seed=None)</span>
-<span class="c1">##    print(rg)</span>
-<span class="c1">##    dg = g.transitiveOrientation()</span>
-<span class="c1">##    print(dg)</span>
-<span class="c1">##    dg.exportGraphViz()</span>
-<span class="c1">##    rgd = -rg</span>
-<span class="c1">##    print(rgd)</span>
-<span class="c1">##    </span>
-<span class="c1">##    g = RandomGraph(order=8,seed=4335)</span>
-<span class="c1">##    og = g.computeOrientedDigraph(PartiallyDetermined=True)</span>
-<span class="c1">##    print(&#39;Transitivity degree: %.3f&#39; % og.transitivityDegree)</span>
-<span class="c1">##    gd = -g</span>
-<span class="c1">##    ogd = gd.computeOrientedDigraph(PartiallyDetermined=True)</span>
-<span class="c1">##    print(&#39;Dual transitivity degree: %.3f&#39; % ogd.transitivityDegree)</span>
-<span class="c1">##    print(g.computePermutation(Debug=False))</span>
-<span class="c1">##    from digraphs import FusionDigraph</span>
-<span class="c1">##    from linearOrders import LinearOrder</span>
-<span class="c1">##    f1gd = FusionDigraph(og,ogd,&#39;o-max&#39;)</span>
-<span class="c1">##    s1 = LinearOrder.computeOrder(f1gd)</span>
-<span class="c1">##    f2gd = FusionDigraph((-og),ogd,&#39;o-max&#39;)</span>
-<span class="c1">##    s2 = LinearOrder.computeOrder(f2gd)</span>
-<span class="c1">##    print(s1)</span>
-<span class="c1">##    print(s2)</span>
-<span class="c1">##    permutation= Graph.computePermutation(g)</span>
-<span class="c1">##    print(permutation)</span>
-<span class="c1">##    gtest = PermutationGraph(permutation=permutation)</span>
-<span class="c1">##    print(gtest)</span>
-<span class="c1">##    print(g)</span>
-<span class="c1">##    gtest.exportPermutationGraphViz()</span>
-<span class="c1">##    </span>
-
-    <span class="c1">#g = CycleGraph(order=12)</span>
-<span class="c1">##    g = RandomGraph(order=7)</span>
-<span class="c1">##    print(g)</span>
-<span class="c1">##    g.showShort()</span>
-<span class="c1">##    lg = LineGraph(g)</span>
-<span class="c1">##    print(lg)</span>
-<span class="c1">##    lg.showShort()</span>
-<span class="c1">##    llg = LineGraph(lg)</span>
-<span class="c1">##    print(llg)</span>
-<span class="c1">##    llg.showShort()</span>
-<span class="c1">##    lg.showMIS()</span>
-<span class="c1">##    maxMatching = g.computeMaximumMatching(Comments=False)</span>
-<span class="c1">##    g.exportGraphViz(matching=maxMatching)</span>
     
-        <span class="c1"># from graphs import SnakeGraph</span>
-        <span class="c1"># S = SnakeGraph(p=3,q=7)</span>
-        <span class="c1"># S.showShort()</span>
-        <span class="c1"># S.exportGraphViz(&#39;4_7_snake&#39;,lineWidth=3,arcColor=&quot;red&quot;)</span>
-
-<span class="c1">##    from time import time</span>
-<span class="c1">##    #g = GridGraph(4,4)</span>
-<span class="c1">##    g = RandomGraph(order=30,seed=10)</span>
-<span class="c1">##    #g.exportGraphViz()</span>
-<span class="c1">##    #print(g._degreeLabelling())</span>
-<span class="c1">##    #print(g._triplets(Comments=True))</span>
-<span class="c1">##    t0 = time();print(len(g._computeChordlessCycles(Cycle3=True,Comments=False)));print(time()-t0)</span>
-<span class="c1">##    t0 = time();print(len(g.computeChordlessCycles(Cycle3=True,Comments=False)));print(time()-t0)</span>
-    
-    
-    <span class="c1">#g.save(&#39;test&#39;)</span>
-    <span class="c1">#g = Graph(&#39;test&#39;)</span>
-<span class="c1">##    ust = RandomSpanningTree(g,seed=200,Debug=False)</span>
-<span class="c1">##    ust.showShort()</span>
-<span class="c1">##    ust.showMore()</span>
-<span class="c1">##    ust.dfs = ust.randomDepthFirstSearch()</span>
-<span class="c1">##    ust.exportGraphViz(WithSpanningTree=True)</span>
-<span class="c1">##    print(ust.prueferCode)</span>
-    
+    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;*------------------*&#39;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;If you see this line all tests were passed successfully :-)&#39;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Enjoy !&#39;</span><span class="p">)</span>
+<span class="c1">#####################################</span>
 </pre></div>
 
            </div>

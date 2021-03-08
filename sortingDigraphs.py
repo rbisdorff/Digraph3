@@ -4588,7 +4588,7 @@ if __name__ == "__main__":
     * Python sortingDigraphs module                    *
     * depends on BipolarOutrankingDigraph and          *
     * $Revision$                                       *
-    * Copyright (C) 2010-2020 Raymond Bisdorf          *
+    * Copyright (C) 2010-2021 Raymond Bisdorf          *
     * The module comes with ABSOLUTELY NO WARRANTY     *
     * to the extent permitted by the applicable law.   *
     * This is free software, and you are welcome to    *
@@ -4605,37 +4605,11 @@ if __name__ == "__main__":
 
     from randomPerfTabs import RandomPerformanceTableau
     from randomPerfTabs import RandomPerformanceGenerator as PerfTabGenerator
-##    nbrActions=1000
-##    nbrCrit = 13
-##    tp = RandomPerformanceTableau(numberOfActions=nbrActions,\
-##                                    numberOfCriteria=nbrCrit,seed=seed)
-
-##    from randomPerfTabs import RandomCBPerformanceTableau
-##    from randomPerfTabs import RandomCBPerformanceGenerator as PerfTabGenerator
-##    nbrActions=100
-##    nbrCrit = 13
-##    tp = RandomCBPerformanceTableau(numberOfActions=nbrActions,\
-##                                    numberOfCriteria=nbrCrit,\
-##                                    Threading=MP,seed=seed)
-##
-##    from randomPerfTabs import Random3ObjectivesPerformanceTableau
-##    from randomPerfTabs import RandomPerformanceGenerator as PerfTabGenerator
     nbrActions=100
     nbrCrit = 13
     tp1 = RandomCBPerformanceTableau(numberOfActions=nbrActions,\
                 numberOfCriteria=nbrCrit,seed=seed,NA=-1,missingDataProbability=0.1)
     print(tp1.NA)
-##    qs = QuantilesSortingDigraph(tp,4,LowerClosed=True,Threading=MP)
-##    qs.showCriteriaCategoryLimits()
-##    #qs.showSorting()
-##    print('==>> average')
-##    qs.showHTMLQuantileOrdering(strategy='average')
-##    print('==>> optimistic')
-##    qs.showQuantileOrdering(strategy='optimistic')
-##    print('==>> pessimistic')
-##    qs.showQuantileOrdering(strategy='pessimistic')
-##    from outrankingDigraphs import *
-##    tp = PerformanceTableau('exL10')
     pq1 = PerformanceQuantiles(tp1,5,LowerClosed=False,Debug=False)
     tpg1 = PerfTabGenerator(tp1,instanceCounter=0,seed=seed)
     newActions = tpg1.randomActions(20)
@@ -4646,47 +4620,11 @@ if __name__ == "__main__":
                                        Threading=MP,nbrOfCPUs=nbrOfCPUs)
     qs = QuantilesSortingDigraph(tp1,5)
     
-    #nqr.showHTMLRatingHeatmap(Correlations=True,rankingRule='Copeland')
-##    ira.showQuantilesRating() ira.sorting =
-##    ira.computeSortingCharacteristics()
-    
-    #ira.categoryContent = ira.computeCategoryContents()
-    #ira.showSorting()
-    #for x in ira.newActions:
-        #ira.showActionCategories(x,Comments=True)
-    #ratingRelation = ira.computeRatingRelation()
-    #ira.relation = ratingRelation
-##    #ira.closeTransitive(Irreflexive=True,Reverse=True)
-    #ira.showHTMLRelationTable(actionsList=ira.actionsRanking)
-    #ira1.exportRatingByRankingGraphViz('testRatRank',graphType='pdf')
-    #ira1.exportRatingBySortingGraphViz('testRatSort',graphType='pdf')
-##    #ira.showSorting()
-##    #ira.showHTMLSorting()
-##    ira.showActionsSortingResult()
-##    ira.showQuantilesSorting()
-##    ira.showHTMLQuantilesSorting()
-##    #ira.showRefinedQuantileOrdering()
-##    #ira.showOrderedRelationTable()
-##    #ira.showSortingCharacteristics()
-##    ira.showHTMLRatingHeatmap(pageTitle='Heat map of the ratings',
-##                                   Correlations=True,
-##                                   #rankingRule='best',
-##                                   )
-##  ira.showRankingScores()
-##    print(ira)
-##    print(ira.computeQuantileProfile(0.25))
-##    print(ira.computeQuantileProfile(0.5))
-##    print(ira.computeQuantileProfile(0.75))
 
     
     print('*------------------*')
     print('If you see this line all tests were passed successfully :-)')
     print('Enjoy !')
-
-    print('*************************************')
-    print('* R.B. december 2020                *')
-    print('* $Revision$ Python                 *')
-    print('*************************************')
 
 #############################
 # Log record for changes:

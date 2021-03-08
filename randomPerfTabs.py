@@ -3936,6 +3936,18 @@ class _RandomS3PerformanceTableau(_RandomCoalitionsPerformanceTableau):
 #----------test Digraph class ----------------
 if __name__ == "__main__":
     
+    print("""
+    ****************************************************
+    * Python3 randomPerfTabs module                    *
+    * depends on BipolarOutrankingDigraph and          *
+    * Copyright (C) 2010-2021 Raymond Bisdorf          *
+    * The module comes with ABSOLUTELY NO WARRANTY     *
+    * to the extent permitted by the applicable law.   *
+    * This is free software, and you are welcome to    *
+    * redistribute it if it remains free software.     *
+    ****************************************************
+    """)
+    
     print('*-------- Testing classes and methods -------')
 
     from digraphs import *
@@ -3951,130 +3963,9 @@ if __name__ == "__main__":
                                 seed=1)
     t.showStudents()
     t.showCourses()
-    #print('transposed')
-    #t.showPerformanceTableau(Transposed=True)
-    #print('not transposed')
-    #t.showPerformanceTableau(Transposed=False)
-    #t.showHTMLPerformanceTableau(Transposed=True)
-    #t.showHTMLPerformanceHeatmap(Correlations=True,colorLevels=5,ndigits=0)
-                                             
-
-
-
-##    from time import time
-##    t0 = time()
-##    t = RandomCBPerformanceTableau(numberOfActions=20,
-##                                   numberOfCriteria=13,
-##                                   samplingSize=100000,
-##                                   BigData=True,
-##                                   seed=100)
-##    print(time()-t0)
-##    t.saveXMCDA2('test2')
-##    t.showCriteria()
-    # t = Random3ObjectivesPerformanceTableau(numberOfActions=10,
-    #                                         numberOfCriteria=13,
-    #                                         OrdinalScales=False,
-    #                                         commonScale=None,
-    #                                         weightDistribution='equiobjectives',
-    #  #weightScale=(1,5),
-    #                                         commonMode=('triangular','variable',None),
-    #                                         vetoProbability=0.5,
-    #                                         NegativeWeights=False,
-    #                                         negativeWeightProbability=0.25,
-    #                                         seed=120,Debug=False)
-
-    # t.showObjectives()
-    # t.showCriteria()
-    # t.showPerformanceTableau()
-    # t.csvAllQuantiles('q')
-    # t.showAllQuantiles()
-    # t.showStatistics()
-    
-##    #t.showActions(Debug=True)
-##    teco = PartialPerformanceTableau(t,criteriaSubset=t.objectives['Eco']['criteria'])
-##    tenv = PartialPerformanceTableau(t,criteriaSubset=t.objectives['Env']['criteria'])
-##    tsoc = PartialPerformanceTableau(t,criteriaSubset=t.objectives['Soc']['criteria'])
-##    geco = BipolarOutrankingDigraph(teco)
-##    genv = BipolarOutrankingDigraph(tenv)
-##    gsoc = BipolarOutrankingDigraph(tsoc)
-##    gfus = FusionLDigraph([geco,genv,gsoc])
-##    scc = StrongComponentsCollapsedDigraph(gfus)
-##    scc.showActions()
-##    scc.exportGraphViz('sccFusionObjectives')
-    
-    
-##    t.showStatistics()
-##    t.showHTMLPerformanceTableau()
-    
-##    print('*---------- test percentiles of variable thresholds --------*') 
-####    t = RandomCoalitionsPerformanceTableau(weightDistribution='equicoalitions',
-####                                           seed=100)
-##    t = Random3ObjectivesPerformanceTableau(numberOfActions=10,OrdinalScales=True,
-##                                            commonScale=(0.0,10.0),
-##                                            commonThresholds=((0.1,0.0),(0.2,0.0),(0.6,0.0)),
-##                                           seed=100)
-##    t.showAll()
-##    rag1 = Random3ObjectivesPerformanceGenerator(t,\
-##                actionNamePrefix='b',seed=100)
-##    sampleSize = 5
-##    rag1.randomActions(sampleSize)
-##    #t.showHTMLPerformanceHeatmap(Correlations=True)
-##    rag2 = Random3ObjectivesPerformanceGenerator(t,actionNamePrefix='c',seed=110)
-##    #rag2.randomUpdate(nbrOfRandomActions=5)
-##    print(rag2.randomActions(2))
-##    ntp = rag2.randomPerformanceTableau(nbrOfRandomActions=10)
-##    #t.showHTMLPerformanceHeatmap(ndigits=0,Correlations=True)
-##    # t.updateDiscriminationThresholds(Comments=True,Debug=True)
-    
-    
-##
-##    t.computeDefaultDiscriminationThresholds(quantile={'ind':10.0,'pref':20.0,'weakVeto':90.0,'veto':95.0})
-##    for g in [y for y in t.criteria]:
-##        print(g, t.criteria[g]['thresholds'])
-##        for th in t.criteria[g]['thresholds']:
-##            print(th)
-##            print(' variable:', end=' ')
-##            print(t.computeVariableThresholdPercentile(g,th,Debug=False))
-##            print(' constant:', end=' ') 
-##            print(t.computeThresholdPercentile(g,th))
-##    t.showPerformanceTableau()
-##    t.showCriteria(Debug=False)
-##    t.saveXMCDA2('testPerc',servingD3=False)
-##    t.showHTMLPerformanceHeatmap(Correlations=True)
-##
-    
-
-##    t = RandomPerformanceTableau(weightScale=(1,10),
-##                                 commonScale=(0.0,50),
-##                                 commonMode=('triangular',30,0.5),
-##                                 seed=100)
-####    t = RandomCoalitionsPerformanceTableau(numberOfActions=10,
-####                                           numberOfCriteria=7,
-####                                           commonMode=('beta',None,None),
-####                                           weightDistribution='equicoalitions',
-####                                           seed=100)
-##    t.showAll()
-##    t.showStatistics()
-##    t.showCriteria()
-##    
-##    t = RandomRankPerformanceTableau(seed=100)
-##    t.showAll()
-##    t.showStatistics()
-##    t.showCriteria()
-    # t = RandomCBPerformanceTableau(seed=100)
-    # t.showAll()
-    # t.showStatistics()
-    #  #t.showHTMLPerformanceHeatmap(Correlations=True)
-    # g = BipolarOutrankingDigraph(t,Normalized=True)
-    # g.showAll()
      
     print('*------------------*')
     print('If you see this line all tests were passed successfully :-)')
     print('Enjoy !')
-
-    print('*************************************')
-    print('* R.B. August 2011                    *')
-    print('* $Revision: 1.37 $                *')                   
-    print('*************************************')
 
 #############################

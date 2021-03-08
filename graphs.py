@@ -4469,53 +4469,18 @@ class RandomPermutationGraph(PermutationGraph):
 # --------------testing the module ----
 if __name__ == '__main__':
 
-    #g = PermutationGraph(permutation=[4,3,6,1,5,2])
-    #g = CycleGraph(order=6)
-    #g = Graph('test')
-##    g = RandomGraph(seed=100)
-##    print(g)
-##    g.exportGraphViz()
-##    #g.exportPermutationGraphViz()
-##    #g.computeMinimalVertexColoring(Comments=True,Debug=True)
-##    #g.exportGraphViz(WithVertexColoring=True)
-##
-##    #b = BestDeterminedSpanningForest(g)
-##    #print(b)
-##    if g.isComparabilityGraph(Debug=True):
-##        print('Comparability Graph ? = True',g.edgeOrientations)
-##        dg = g.computeTransitivelyOrientedDigraph()
-##        if dg != None:
-##            print(dg)
-##            print(dg.computeTransitivityDegree())
-##            dg.exportGraphViz()
-##    else:
-##        print('Comparability Graph ? = False')
-##    print(g.isTriangulated())
-##    print((-g).isComparabilityGraph())
-##    g.isIntervalGraph(Comments=True)
-##
-##    intervals = [(1,5),(2,3),(3,5),(7,8),(3,5),(1,9)]
-##    i = LineIntersectionsGraph(intervals)
-##    print(i)
-##    print(i.intervals)
-##    print(i.isTriangulated())
-##    print((-i).isTriangulated())
+    print("""
+    ****************************************************
+    * Python3 graphs module                            *
+    * Copyright (C) 2010-2021 Raymond Bisdorff         *
+    * The module comes with ABSOLUTELY NO WARRANTY     *
+    * to the extent permitted by the applicable law.   *
+    * This is free software, and you are welcome to    *
+    * redistribute it if it remains free software.     *
+    ****************************************************
+    """)
 
-##    ri = RandomGraph(order=8,seed=4335)
-##    print(ri)
-##    #print(ri.intervals)
-##    #print(ri.isIntervalGraph(Comments=True))
-##    #print(ri.isTriangulated())
-##    #print((-ri).isTriangulated())
-##    ri.exportGraphViz()
-##    #ri.isSplitGraph(Comments=True)
-##    #ri.isPermutationGraph(Comments=True)
-##    #print(ri.computePermutation())
-##    if ri.isComparabilityGraph():
-##        ri.exportEdgeOrientationsGraphViz('testColors1')
-##    rid = -ri
-##    if rid.isComparabilityGraph():
-##        rid.exportEdgeOrientationsGraphViz('testColors2',palette=2)
+ 
 
     g = RandomGraph(order=9,edgeProbability=0.5)
     g.save('testPerfectGraph')
@@ -4527,72 +4492,8 @@ if __name__ == '__main__':
     g.computeGirth(girthType="even",Comments=True)
     g.computeGirth(Comments=True)
     
-##    rg = RandomPermutationGraph(order=6,seed=None)
-##    print(rg)
-##    dg = g.transitiveOrientation()
-##    print(dg)
-##    dg.exportGraphViz()
-##    rgd = -rg
-##    print(rgd)
-##    
-##    g = RandomGraph(order=8,seed=4335)
-##    og = g.computeOrientedDigraph(PartiallyDetermined=True)
-##    print('Transitivity degree: %.3f' % og.transitivityDegree)
-##    gd = -g
-##    ogd = gd.computeOrientedDigraph(PartiallyDetermined=True)
-##    print('Dual transitivity degree: %.3f' % ogd.transitivityDegree)
-##    print(g.computePermutation(Debug=False))
-##    from digraphs import FusionDigraph
-##    from linearOrders import LinearOrder
-##    f1gd = FusionDigraph(og,ogd,'o-max')
-##    s1 = LinearOrder.computeOrder(f1gd)
-##    f2gd = FusionDigraph((-og),ogd,'o-max')
-##    s2 = LinearOrder.computeOrder(f2gd)
-##    print(s1)
-##    print(s2)
-##    permutation= Graph.computePermutation(g)
-##    print(permutation)
-##    gtest = PermutationGraph(permutation=permutation)
-##    print(gtest)
-##    print(g)
-##    gtest.exportPermutationGraphViz()
-##    
-
-    #g = CycleGraph(order=12)
-##    g = RandomGraph(order=7)
-##    print(g)
-##    g.showShort()
-##    lg = LineGraph(g)
-##    print(lg)
-##    lg.showShort()
-##    llg = LineGraph(lg)
-##    print(llg)
-##    llg.showShort()
-##    lg.showMIS()
-##    maxMatching = g.computeMaximumMatching(Comments=False)
-##    g.exportGraphViz(matching=maxMatching)
     
-        # from graphs import SnakeGraph
-        # S = SnakeGraph(p=3,q=7)
-        # S.showShort()
-        # S.exportGraphViz('4_7_snake',lineWidth=3,arcColor="red")
-
-##    from time import time
-##    #g = GridGraph(4,4)
-##    g = RandomGraph(order=30,seed=10)
-##    #g.exportGraphViz()
-##    #print(g._degreeLabelling())
-##    #print(g._triplets(Comments=True))
-##    t0 = time();print(len(g._computeChordlessCycles(Cycle3=True,Comments=False)));print(time()-t0)
-##    t0 = time();print(len(g.computeChordlessCycles(Cycle3=True,Comments=False)));print(time()-t0)
-    
-    
-    #g.save('test')
-    #g = Graph('test')
-##    ust = RandomSpanningTree(g,seed=200,Debug=False)
-##    ust.showShort()
-##    ust.showMore()
-##    ust.dfs = ust.randomDepthFirstSearch()
-##    ust.exportGraphViz(WithSpanningTree=True)
-##    print(ust.prueferCode)
-    
+    print('*------------------*')
+    print('If you see this line all tests were passed successfully :-)')
+    print('Enjoy !')
+#####################################

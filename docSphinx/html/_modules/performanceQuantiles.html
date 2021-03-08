@@ -1221,23 +1221,24 @@
 <span class="c1">#######################################################################</span>
 <span class="c1">#----------test classes and methods ----------------</span>
 <span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s2">&quot;__main__&quot;</span><span class="p">:</span>
+    
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;&quot;&quot;</span>
+<span class="s2">    ****************************************************</span>
+<span class="s2">    * Python performanceQunatiles module               *</span>
+<span class="s2">    * depends on BipolarOutrankingDigraph and          *</span>
+<span class="s2">    * $Revision$                                       *</span>
+<span class="s2">    * Copyright (C) 2010-2021 Raymond Bisdorf          *</span>
+<span class="s2">    * The module comes with ABSOLUTELY NO WARRANTY     *</span>
+<span class="s2">    * to the extent permitted by the applicable law.   *</span>
+<span class="s2">    * This is free software, and you are welcome to    *</span>
+<span class="s2">    * redistribute it if it remains free software.     *</span>
+<span class="s2">    ****************************************************</span>
+<span class="s2">    &quot;&quot;&quot;</span><span class="p">)</span>
 
     <span class="kn">from</span> <span class="nn">performanceQuantiles</span> <span class="k">import</span> <span class="o">*</span>
     <span class="n">seed</span> <span class="o">=</span> <span class="mi">100</span>
     <span class="n">nbrActions</span> <span class="o">=</span> <span class="mi">20</span>
     <span class="n">nbrCrit</span> <span class="o">=</span> <span class="mi">13</span>
-<span class="c1">##    from randomPerfTabs import RandomPerformanceTableau</span>
-<span class="c1">##    from randomPerfTabs import RandomPerformanceGenerator as PerfTabGenerator</span>
-<span class="c1">##    nbrActions=nbrActions</span>
-<span class="c1">##    nbrCrit = nbrCrit</span>
-<span class="c1">##    tp = RandomPerformanceTableau(numberOfActions=nbrActions,</span>
-<span class="c1">##                                    numberOfCriteria=nbrCrit,seed=seed)</span>
-<span class="c1">##    from randomPerfTabs import RandomCBPerformanceTableau</span>
-<span class="c1">##    from randomPerfTabs import RandomCBPerformanceGenerator as PerfTabGenerator</span>
-<span class="c1">##    nbrActions=nbrActions</span>
-<span class="c1">##    nbrCrit = nbrCrit</span>
-<span class="c1">##    tp = RandomCBPerformanceTableau(numberOfActions=nbrActions,</span>
-<span class="c1">##                                    numberOfCriteria=nbrCrit,seed=seed)</span>
     <span class="kn">from</span> <span class="nn">randomPerfTabs</span> <span class="k">import</span> <span class="n">Random3ObjectivesPerformanceTableau</span>
     <span class="kn">from</span> <span class="nn">randomPerfTabs</span> <span class="k">import</span> <span class="n">RandomPerformanceGenerator</span> <span class="k">as</span> <span class="n">PerfTabGenerator</span>
     <span class="n">nbrActions</span><span class="o">=</span><span class="n">nbrActions</span>
@@ -1255,38 +1256,11 @@
     <span class="c1">#pq.showHTMLLimitingQuantiles(Transposed=True)</span>
     <span class="c1">#print(pq.limitingQuantiles)</span>
     <span class="n">pq</span><span class="o">.</span><span class="n">showLimitingQuantiles</span><span class="p">(</span><span class="n">ByObjectives</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
-    <span class="c1">#pq.showHTMLLimitingQuantiles(Transposed=True)</span>
-    <span class="c1">#pq.showActions()</span>
-    <span class="c1">#pq.showCriteria(ByObjectives=True)</span>
-    <span class="c1">#tpg = PerfTabGenerator(tp,seed=None)</span>
-    <span class="c1">#newActions = tpg.randomActions(10)</span>
-    <span class="c1">#pq.updateQuantiles(newActions,historySize=0)</span>
-    <span class="c1">#pq.showHTMLLimitingQuantiles(Transposed=True)</span>
-    <span class="c1">#tpg = PerfTabGenerator(tp,seed=None)</span>
-    <span class="c1">#newActions = tpg.randomActions(10)</span>
-    <span class="c1">#pq.updateQuantiles(newActions,historySize=0)</span>
-    <span class="c1">#pq.showHTMLLimitingQuantiles(Transposed=True)</span>
-<span class="c1">##    pq.save(&#39;test&#39;)</span>
-<span class="c1">##    pq1 = PerformanceQuantiles(&#39;test&#39;)</span>
-<span class="c1">##    from randomPerfTabs import *</span>
-<span class="c1">##    rg = RandomPerformanceGenerator(pq1)</span>
-<span class="c1">##    newTab = rg.randomPerformanceTableau(10)</span>
-<span class="c1">##    from sortingDigraphs import NormedQuantilesRatingDigraph</span>
-<span class="c1">##    nqr1 = NormedQuantilesRatingDigraph(pq,newActions,\</span>
-<span class="c1">##                                        rankingRule=&#39;best&#39;,\</span>
-<span class="c1">##                                        Debug=False)</span>
-<span class="c1">##    print(nqr1)</span>
-<span class="c1">##    nqr1.showHTMLRatingHeatmap(pageTitle=&#39;Heat map of the qintiles rating&#39;,</span>
-<span class="c1">##                                       colorLevels=7,</span>
-<span class="c1">##                                       Correlations=True,</span>
-<span class="c1">##                                       )</span>
-<span class="c1">##    nqr1.showQuantilesRating()</span>
-<span class="c1">##    nqr1.exportRatingGraphViz(Comments=False)</span>
-    <span class="c1">#print(pq.computeQuantileProfile(0.5))</span>
-    <span class="c1">#pq.save(fileName=&#39;testPerfQuant&#39;)</span>
-
-    <span class="c1">#pq1 = PerformanceQuantiles(filePerfQuant=&#39;testPerfQuant&#39;)</span>
     
+    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;*------------------*&#39;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;If you see this line all tests were passed successfully :-)&#39;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Enjoy !&#39;</span><span class="p">)</span>
+
 </pre></div>
 
            </div>

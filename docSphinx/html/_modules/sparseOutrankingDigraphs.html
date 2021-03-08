@@ -3243,19 +3243,23 @@
 <span class="c1">#######################################################################</span>
 <span class="c1">#----------test classes and methods ----------------</span>
 <span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s2">&quot;__main__&quot;</span><span class="p">:</span>
+    
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;&quot;&quot;</span>
+<span class="s2">    ****************************************************</span>
+<span class="s2">    * Python3 sparseOutrankingDigraphs module          *</span>
+<span class="s2">    * Copyright (C) 2010-2021 Raymond Bisdorf          *</span>
+<span class="s2">    * The module comes with ABSOLUTELY NO WARRANTY     *</span>
+<span class="s2">    * to the extent permitted by the applicable law.   *</span>
+<span class="s2">    * This is free software, and you are welcome to    *</span>
+<span class="s2">    * redistribute it if it remains free software.     *</span>
+<span class="s2">    ****************************************************</span>
+<span class="s2">    &quot;&quot;&quot;</span><span class="p">)</span>
+    
+    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;*-------- Testing classes and methods -------&#39;</span><span class="p">)</span>
 
     <span class="kn">from</span> <span class="nn">time</span> <span class="k">import</span> <span class="n">time</span>
-<span class="c1">##    t = XMCDA2PerformanceTableau(&#39;project_7&#39;)</span>
-<span class="c1">##    tenv = PartialPerformanceTableau(t,objectivesSubset=[&#39;Eco&#39;])</span>
-<span class="c1">##    pre = PreRankedOutrankingDigraph(tenv,Debug=True)</span>
-<span class="c1">##    print(pre.computeOrderCorrelation(pre.boostedOrder))</span>
-<span class="c1">##    tenv.showHTMLPerformanceHeatmap()</span>
     <span class="n">MP</span>  <span class="o">=</span> <span class="kc">True</span>
-    <span class="n">nbrActions</span><span class="o">=</span><span class="mi">100</span>
-<span class="c1">##    t0 = time()</span>
-<span class="c1">##    tp = Random3ObjectivesPerformanceTableau(numberOfActions=nbrActions,seed=100)</span>
-<span class="c1">##    tp = XMCDA2PerformanceTableau(&#39;the_cs_2016&#39;)</span>
-
+    <span class="n">nbrActions</span> <span class="o">=</span> <span class="mi">1000</span>
     <span class="n">tp</span> <span class="o">=</span> <span class="n">RandomCBPerformanceTableau</span><span class="p">(</span><span class="n">numberOfActions</span><span class="o">=</span><span class="n">nbrActions</span><span class="p">,</span><span class="n">Threading</span><span class="o">=</span><span class="n">MP</span><span class="p">,</span>
                                      <span class="n">BigData</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span><span class="n">seed</span><span class="o">=</span><span class="mi">100</span><span class="p">)</span>
     <span class="n">bg1</span> <span class="o">=</span> <span class="n">PreRankedOutrankingDigraph</span><span class="p">(</span><span class="n">tp</span><span class="p">,</span><span class="n">CopyPerfTab</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span><span class="n">quantiles</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span>
@@ -3272,22 +3276,12 @@
 
     <span class="n">seed</span><span class="o">=</span> <span class="mi">1</span>
     <span class="n">sampleSize</span> <span class="o">=</span> <span class="mi">100</span>
-<span class="c1">##    import random</span>
-<span class="c1">##    random.seed(seed)</span>
-<span class="c1">##    actionKeys = [x for x in bg1.actions]</span>
-<span class="c1">##    sample = random.sample(actionKeys,sampleSize)</span>
-<span class="c1">##    print(sample)</span>
-<span class="c1">##    print(bg1.boostedRanking)</span>
-<span class="c1">##    preRankedSample = []</span>
-<span class="c1">##    for x in bg1.boostedRanking:</span>
-<span class="c1">##        if x in sample:</span>
-<span class="c1">##            preRankedSample.append(x)</span>
-<span class="c1">##    print(preRankedSample)</span>
-<span class="c1">##    ptp = PartialPerformanceTableau(tp,sample)</span>
-<span class="c1">##    from outrankingDigraphs import BipolarOutrankingDigraph</span>
-<span class="c1">##    pg = BipolarOutrankingDigraph(ptp,Normalized=True)</span>
-<span class="c1">##    print(pg.computeRankingCorrelation(preRankedSample))</span>
     <span class="nb">print</span><span class="p">(</span><span class="n">bg1</span><span class="o">.</span><span class="n">estimateRankingCorrelation</span><span class="p">(</span><span class="n">sampleSize</span><span class="p">,</span><span class="n">seed</span><span class="p">))</span>
+
+    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;*------------------*&#39;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;If you see this line all tests were passed successfully :-)&#39;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Enjoy !&#39;</span><span class="p">)</span>
+<span class="c1">#####################################</span>
 </pre></div>
 
            </div>

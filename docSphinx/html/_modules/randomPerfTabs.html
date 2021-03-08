@@ -4103,6 +4103,18 @@
 <span class="c1">#----------test Digraph class ----------------</span>
 <span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s2">&quot;__main__&quot;</span><span class="p">:</span>
     
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;&quot;&quot;</span>
+<span class="s2">    ****************************************************</span>
+<span class="s2">    * Python3 randomPerfTabs module                    *</span>
+<span class="s2">    * depends on BipolarOutrankingDigraph and          *</span>
+<span class="s2">    * Copyright (C) 2010-2021 Raymond Bisdorf          *</span>
+<span class="s2">    * The module comes with ABSOLUTELY NO WARRANTY     *</span>
+<span class="s2">    * to the extent permitted by the applicable law.   *</span>
+<span class="s2">    * This is free software, and you are welcome to    *</span>
+<span class="s2">    * redistribute it if it remains free software.     *</span>
+<span class="s2">    ****************************************************</span>
+<span class="s2">    &quot;&quot;&quot;</span><span class="p">)</span>
+    
     <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;*-------- Testing classes and methods -------&#39;</span><span class="p">)</span>
 
     <span class="kn">from</span> <span class="nn">digraphs</span> <span class="k">import</span> <span class="o">*</span>
@@ -4118,131 +4130,10 @@
                                 <span class="n">seed</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
     <span class="n">t</span><span class="o">.</span><span class="n">showStudents</span><span class="p">()</span>
     <span class="n">t</span><span class="o">.</span><span class="n">showCourses</span><span class="p">()</span>
-    <span class="c1">#print(&#39;transposed&#39;)</span>
-    <span class="c1">#t.showPerformanceTableau(Transposed=True)</span>
-    <span class="c1">#print(&#39;not transposed&#39;)</span>
-    <span class="c1">#t.showPerformanceTableau(Transposed=False)</span>
-    <span class="c1">#t.showHTMLPerformanceTableau(Transposed=True)</span>
-    <span class="c1">#t.showHTMLPerformanceHeatmap(Correlations=True,colorLevels=5,ndigits=0)</span>
-                                             
-
-
-
-<span class="c1">##    from time import time</span>
-<span class="c1">##    t0 = time()</span>
-<span class="c1">##    t = RandomCBPerformanceTableau(numberOfActions=20,</span>
-<span class="c1">##                                   numberOfCriteria=13,</span>
-<span class="c1">##                                   samplingSize=100000,</span>
-<span class="c1">##                                   BigData=True,</span>
-<span class="c1">##                                   seed=100)</span>
-<span class="c1">##    print(time()-t0)</span>
-<span class="c1">##    t.saveXMCDA2(&#39;test2&#39;)</span>
-<span class="c1">##    t.showCriteria()</span>
-    <span class="c1"># t = Random3ObjectivesPerformanceTableau(numberOfActions=10,</span>
-    <span class="c1">#                                         numberOfCriteria=13,</span>
-    <span class="c1">#                                         OrdinalScales=False,</span>
-    <span class="c1">#                                         commonScale=None,</span>
-    <span class="c1">#                                         weightDistribution=&#39;equiobjectives&#39;,</span>
-    <span class="c1">#  #weightScale=(1,5),</span>
-    <span class="c1">#                                         commonMode=(&#39;triangular&#39;,&#39;variable&#39;,None),</span>
-    <span class="c1">#                                         vetoProbability=0.5,</span>
-    <span class="c1">#                                         NegativeWeights=False,</span>
-    <span class="c1">#                                         negativeWeightProbability=0.25,</span>
-    <span class="c1">#                                         seed=120,Debug=False)</span>
-
-    <span class="c1"># t.showObjectives()</span>
-    <span class="c1"># t.showCriteria()</span>
-    <span class="c1"># t.showPerformanceTableau()</span>
-    <span class="c1"># t.csvAllQuantiles(&#39;q&#39;)</span>
-    <span class="c1"># t.showAllQuantiles()</span>
-    <span class="c1"># t.showStatistics()</span>
-    
-<span class="c1">##    #t.showActions(Debug=True)</span>
-<span class="c1">##    teco = PartialPerformanceTableau(t,criteriaSubset=t.objectives[&#39;Eco&#39;][&#39;criteria&#39;])</span>
-<span class="c1">##    tenv = PartialPerformanceTableau(t,criteriaSubset=t.objectives[&#39;Env&#39;][&#39;criteria&#39;])</span>
-<span class="c1">##    tsoc = PartialPerformanceTableau(t,criteriaSubset=t.objectives[&#39;Soc&#39;][&#39;criteria&#39;])</span>
-<span class="c1">##    geco = BipolarOutrankingDigraph(teco)</span>
-<span class="c1">##    genv = BipolarOutrankingDigraph(tenv)</span>
-<span class="c1">##    gsoc = BipolarOutrankingDigraph(tsoc)</span>
-<span class="c1">##    gfus = FusionLDigraph([geco,genv,gsoc])</span>
-<span class="c1">##    scc = StrongComponentsCollapsedDigraph(gfus)</span>
-<span class="c1">##    scc.showActions()</span>
-<span class="c1">##    scc.exportGraphViz(&#39;sccFusionObjectives&#39;)</span>
-    
-    
-<span class="c1">##    t.showStatistics()</span>
-<span class="c1">##    t.showHTMLPerformanceTableau()</span>
-    
-<span class="c1">##    print(&#39;*---------- test percentiles of variable thresholds --------*&#39;) </span>
-<span class="c1">####    t = RandomCoalitionsPerformanceTableau(weightDistribution=&#39;equicoalitions&#39;,</span>
-<span class="c1">####                                           seed=100)</span>
-<span class="c1">##    t = Random3ObjectivesPerformanceTableau(numberOfActions=10,OrdinalScales=True,</span>
-<span class="c1">##                                            commonScale=(0.0,10.0),</span>
-<span class="c1">##                                            commonThresholds=((0.1,0.0),(0.2,0.0),(0.6,0.0)),</span>
-<span class="c1">##                                           seed=100)</span>
-<span class="c1">##    t.showAll()</span>
-<span class="c1">##    rag1 = Random3ObjectivesPerformanceGenerator(t,\</span>
-<span class="c1">##                actionNamePrefix=&#39;b&#39;,seed=100)</span>
-<span class="c1">##    sampleSize = 5</span>
-<span class="c1">##    rag1.randomActions(sampleSize)</span>
-<span class="c1">##    #t.showHTMLPerformanceHeatmap(Correlations=True)</span>
-<span class="c1">##    rag2 = Random3ObjectivesPerformanceGenerator(t,actionNamePrefix=&#39;c&#39;,seed=110)</span>
-<span class="c1">##    #rag2.randomUpdate(nbrOfRandomActions=5)</span>
-<span class="c1">##    print(rag2.randomActions(2))</span>
-<span class="c1">##    ntp = rag2.randomPerformanceTableau(nbrOfRandomActions=10)</span>
-<span class="c1">##    #t.showHTMLPerformanceHeatmap(ndigits=0,Correlations=True)</span>
-<span class="c1">##    # t.updateDiscriminationThresholds(Comments=True,Debug=True)</span>
-    
-    
-<span class="c1">##</span>
-<span class="c1">##    t.computeDefaultDiscriminationThresholds(quantile={&#39;ind&#39;:10.0,&#39;pref&#39;:20.0,&#39;weakVeto&#39;:90.0,&#39;veto&#39;:95.0})</span>
-<span class="c1">##    for g in [y for y in t.criteria]:</span>
-<span class="c1">##        print(g, t.criteria[g][&#39;thresholds&#39;])</span>
-<span class="c1">##        for th in t.criteria[g][&#39;thresholds&#39;]:</span>
-<span class="c1">##            print(th)</span>
-<span class="c1">##            print(&#39; variable:&#39;, end=&#39; &#39;)</span>
-<span class="c1">##            print(t.computeVariableThresholdPercentile(g,th,Debug=False))</span>
-<span class="c1">##            print(&#39; constant:&#39;, end=&#39; &#39;) </span>
-<span class="c1">##            print(t.computeThresholdPercentile(g,th))</span>
-<span class="c1">##    t.showPerformanceTableau()</span>
-<span class="c1">##    t.showCriteria(Debug=False)</span>
-<span class="c1">##    t.saveXMCDA2(&#39;testPerc&#39;,servingD3=False)</span>
-<span class="c1">##    t.showHTMLPerformanceHeatmap(Correlations=True)</span>
-<span class="c1">##</span>
-    
-
-<span class="c1">##    t = RandomPerformanceTableau(weightScale=(1,10),</span>
-<span class="c1">##                                 commonScale=(0.0,50),</span>
-<span class="c1">##                                 commonMode=(&#39;triangular&#39;,30,0.5),</span>
-<span class="c1">##                                 seed=100)</span>
-<span class="c1">####    t = RandomCoalitionsPerformanceTableau(numberOfActions=10,</span>
-<span class="c1">####                                           numberOfCriteria=7,</span>
-<span class="c1">####                                           commonMode=(&#39;beta&#39;,None,None),</span>
-<span class="c1">####                                           weightDistribution=&#39;equicoalitions&#39;,</span>
-<span class="c1">####                                           seed=100)</span>
-<span class="c1">##    t.showAll()</span>
-<span class="c1">##    t.showStatistics()</span>
-<span class="c1">##    t.showCriteria()</span>
-<span class="c1">##    </span>
-<span class="c1">##    t = RandomRankPerformanceTableau(seed=100)</span>
-<span class="c1">##    t.showAll()</span>
-<span class="c1">##    t.showStatistics()</span>
-<span class="c1">##    t.showCriteria()</span>
-    <span class="c1"># t = RandomCBPerformanceTableau(seed=100)</span>
-    <span class="c1"># t.showAll()</span>
-    <span class="c1"># t.showStatistics()</span>
-    <span class="c1">#  #t.showHTMLPerformanceHeatmap(Correlations=True)</span>
-    <span class="c1"># g = BipolarOutrankingDigraph(t,Normalized=True)</span>
-    <span class="c1"># g.showAll()</span>
      
     <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;*------------------*&#39;</span><span class="p">)</span>
     <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;If you see this line all tests were passed successfully :-)&#39;</span><span class="p">)</span>
     <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Enjoy !&#39;</span><span class="p">)</span>
-
-    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;*************************************&#39;</span><span class="p">)</span>
-    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;* R.B. August 2011                    *&#39;</span><span class="p">)</span>
-    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;* $Revision: 1.37 $                *&#39;</span><span class="p">)</span>                   
-    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;*************************************&#39;</span><span class="p">)</span>
 
 <span class="c1">#############################</span>
 </pre></div>

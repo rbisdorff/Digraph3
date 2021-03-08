@@ -731,79 +731,19 @@
 
 <span class="c1">###############################</span>
 <span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s1">&#39;__main__&#39;</span><span class="p">:</span>
-    <span class="c1">######  scratch pad for testing the module components</span>
-<span class="c1">##    from digraphs import *</span>
-<span class="c1">##    print(factorization(2224))</span>
-<span class="c1">##    print(gcd(2224,12345))</span>
-<span class="c1">##    print(lcm(2224,12345))</span>
-<span class="c1">##    print(totient(11))</span>
-<span class="c1">##    print(zn_squareroots(60,Comments=True))</span>
-<span class="c1">##</span>
-<span class="c1">##    a = 17</span>
-<span class="c1">##    b = 1</span>
-<span class="c1">##    m = 19</span>
-<span class="c1">##    </span>
-<span class="c1">##    print( ( &quot;Congruence: %dx =  %d (mod %d)&quot; % (a,b,m) ) )  # \equiv = \u2262</span>
-<span class="c1">##</span>
-<span class="c1">##    x,y,A,B = solPartEqnDioph(a,m,b)</span>
-<span class="c1">##</span>
-<span class="c1">##    if x == None:</span>
-<span class="c1">##        print(&quot;Pas de solution&quot;)</span>
-<span class="c1">##    else:</span>
-<span class="c1">##        print(&quot;Solution générale: x = %d + %dn&quot; % (x,B))</span>
-<span class="c1">##        h = gcd(a,m)</span>
-<span class="c1">##        y = m / h</span>
-<span class="c1">##        print(&#39;m,h,y&#39;,m,h,y)</span>
-<span class="c1">##        print(&quot;Il y a %d solution(s) particulière(s):&quot; % (h))</span>
-<span class="c1">##        for i in range(h):</span>
-<span class="c1">##            print(&quot;x_%d = %d + %d*%d (mod %d) = %d&quot; % (i+1,x,i,y,m,(x + (i*y))%m ))</span>
-<span class="c1">##            </span>
-<span class="c1">##    l = QuadraticResiduesDigraph(primesBelow(20,Odd=True))</span>
-<span class="c1">##    l = QuadraticResiduesDigraph(range(1,20))</span>
-<span class="c1">##    l.showRelationTable(Sorted=False)</span>
-<span class="c1">##    l.exportGraphViz(&#39;legendre&#39;)</span>
-<span class="c1">##    al = AsymmetricPartialDigraph(l)</span>
-<span class="c1">##    al.exportGraphViz(&#39;legendreAsym&#39;)</span>
-<span class="c1">##    al.computeChordlessCircuits()</span>
-<span class="c1">##    al.showChordlessCircuits()</span>
-<span class="c1">##</span>
-<span class="c1">##    for i in range(1,13):</span>
-<span class="c1">##        print(i,moebius_mu(i))</span>
-<span class="c1">##</span>
-<span class="c1">##    f12 = Factorizations</span>
-<span class="c1">##    D12 = divisors(12)</span>
-<span class="c1">##    print(D12)</span>
-<span class="c1">##    print(totient(234))</span>
-<span class="c1">##    tot = 0</span>
-<span class="c1">##    for d in divisors(234):</span>
-<span class="c1">##        tot += moebius_mu(d)*234//d</span>
-<span class="c1">##    print(tot)</span>
-<span class="c1">##    tot = 0</span>
-<span class="c1">##    for d in divisors(234):</span>
-<span class="c1">##        tot += d * moebius_mu(234//d)</span>
-<span class="c1">##    print(tot)</span>
-<span class="c1">##    for i in range(1,100):</span>
-<span class="c1">##        df = divisorsFunction(0,i)</span>
-<span class="c1">##        print(df)</span>
-<span class="c1">##        if df % 2 == 1:</span>
-<span class="c1">##            print(&#39;--&gt;&#39;,i)</span>
-<span class="c1">##        print(divisorsFunction(1,i))</span>
-<span class="c1">##        print(divisorsFunction(2,i))</span>
-        
-    <span class="c1"># from time import time</span>
-    <span class="c1"># t0 = time()</span>
-    <span class="c1"># piDecimals = computePiDecimals(decimalWordLength=5,nbrOfWords=1000)</span>
-    <span class="c1"># print(time()-t0,end=&#39; sec.\n&#39;)</span>
-    <span class="c1"># print(&#39;pi = &#39;+piDecimals[0]+&#39;.&#39;)</span>
-    <span class="c1"># print(piDecimals[1:])</span>
-    <span class="c1"># print(&#39;precision = &#39;+str(len(piDecimals[1:])),end=&quot; decimals\n&quot;)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;&quot;&quot;</span>
+<span class="s2">    ****************************************************</span>
+<span class="s2">    * Python3 arithmetics module                       *</span>
+<span class="s2">    * Copyright (C) 2010-2021 Raymond Bisdorff         *</span>
+<span class="s2">    * The module comes with ABSOLUTELY NO WARRANTY     *</span>
+<span class="s2">    * to the extent permitted by the applicable law.   *</span>
+<span class="s2">    * This is free software, and you are welcome to    *</span>
+<span class="s2">    * redistribute it if it remains free software.     *</span>
+<span class="s2">    ****************************************************</span>
+<span class="s2">    &quot;&quot;&quot;</span><span class="p">)</span>
+
     
-<span class="c1">##    sb = sternBrocot(21,101)</span>
-<span class="c1">##    print(sb)</span>
-<span class="c1">##    (m,n) = invSternBrocot(sb)</span>
-<span class="c1">##    print(m,n)</span>
-<span class="c1">##    print(computeFareySeries(n=10,AsFloats=False,Debug=True))</span>
-<span class="c1">##</span>
+    <span class="c1">######  scratch pad for testing the module components</span>
     <span class="kn">from</span> <span class="nn">math</span> <span class="k">import</span> <span class="n">sqrt</span>
     <span class="n">p</span> <span class="o">=</span> <span class="mi">5</span>
     <span class="n">q</span> <span class="o">=</span> <span class="mi">8</span>
@@ -814,6 +754,12 @@
     <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;cf(sqrt(2))_</span><span class="si">%d</span><span class="s1"> = &#39;</span> <span class="o">%</span> <span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">cf</span><span class="p">)</span><span class="o">-</span><span class="mi">1</span><span class="p">),</span> <span class="n">cf</span> <span class="p">)</span>
     <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;eval(cf(sqrt(2))_</span><span class="si">%d</span><span class="s1">) = &#39;</span> <span class="o">%</span> <span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">cf</span><span class="p">)</span><span class="o">-</span><span class="mi">1</span><span class="p">),</span> <span class="n">evalContinuedFraction</span><span class="p">(</span><span class="n">cf</span><span class="p">)</span> <span class="p">)</span>
     <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;sqrt(2)              = &#39;</span><span class="p">,</span> <span class="n">sqrt</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span> <span class="p">)</span>
+
+
+    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;*------------------*&#39;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;If you see this line all tests were passed successfully :-)&#39;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Enjoy !&#39;</span><span class="p">)</span>
+<span class="c1">#####################################</span>
 </pre></div>
 
            </div>

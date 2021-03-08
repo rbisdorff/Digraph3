@@ -1054,23 +1054,24 @@ The number of so far observed evaluations per criteria are the following:
 #######################################################################
 #----------test classes and methods ----------------
 if __name__ == "__main__":
+    
+    print("""
+    ****************************************************
+    * Python performanceQunatiles module               *
+    * depends on BipolarOutrankingDigraph and          *
+    * $Revision$                                       *
+    * Copyright (C) 2010-2021 Raymond Bisdorf          *
+    * The module comes with ABSOLUTELY NO WARRANTY     *
+    * to the extent permitted by the applicable law.   *
+    * This is free software, and you are welcome to    *
+    * redistribute it if it remains free software.     *
+    ****************************************************
+    """)
 
     from performanceQuantiles import *
     seed = 100
     nbrActions = 20
     nbrCrit = 13
-##    from randomPerfTabs import RandomPerformanceTableau
-##    from randomPerfTabs import RandomPerformanceGenerator as PerfTabGenerator
-##    nbrActions=nbrActions
-##    nbrCrit = nbrCrit
-##    tp = RandomPerformanceTableau(numberOfActions=nbrActions,
-##                                    numberOfCriteria=nbrCrit,seed=seed)
-##    from randomPerfTabs import RandomCBPerformanceTableau
-##    from randomPerfTabs import RandomCBPerformanceGenerator as PerfTabGenerator
-##    nbrActions=nbrActions
-##    nbrCrit = nbrCrit
-##    tp = RandomCBPerformanceTableau(numberOfActions=nbrActions,
-##                                    numberOfCriteria=nbrCrit,seed=seed)
     from randomPerfTabs import Random3ObjectivesPerformanceTableau
     from randomPerfTabs import RandomPerformanceGenerator as PerfTabGenerator
     nbrActions=nbrActions
@@ -1088,35 +1089,8 @@ if __name__ == "__main__":
     #pq.showHTMLLimitingQuantiles(Transposed=True)
     #print(pq.limitingQuantiles)
     pq.showLimitingQuantiles(ByObjectives=False)
-    #pq.showHTMLLimitingQuantiles(Transposed=True)
-    #pq.showActions()
-    #pq.showCriteria(ByObjectives=True)
-    #tpg = PerfTabGenerator(tp,seed=None)
-    #newActions = tpg.randomActions(10)
-    #pq.updateQuantiles(newActions,historySize=0)
-    #pq.showHTMLLimitingQuantiles(Transposed=True)
-    #tpg = PerfTabGenerator(tp,seed=None)
-    #newActions = tpg.randomActions(10)
-    #pq.updateQuantiles(newActions,historySize=0)
-    #pq.showHTMLLimitingQuantiles(Transposed=True)
-##    pq.save('test')
-##    pq1 = PerformanceQuantiles('test')
-##    from randomPerfTabs import *
-##    rg = RandomPerformanceGenerator(pq1)
-##    newTab = rg.randomPerformanceTableau(10)
-##    from sortingDigraphs import NormedQuantilesRatingDigraph
-##    nqr1 = NormedQuantilesRatingDigraph(pq,newActions,\
-##                                        rankingRule='best',\
-##                                        Debug=False)
-##    print(nqr1)
-##    nqr1.showHTMLRatingHeatmap(pageTitle='Heat map of the qintiles rating',
-##                                       colorLevels=7,
-##                                       Correlations=True,
-##                                       )
-##    nqr1.showQuantilesRating()
-##    nqr1.exportRatingGraphViz(Comments=False)
-    #print(pq.computeQuantileProfile(0.5))
-    #pq.save(fileName='testPerfQuant')
-
-    #pq1 = PerformanceQuantiles(filePerfQuant='testPerfQuant')
     
+    print('*------------------*')
+    print('If you see this line all tests were passed successfully :-)')
+    print('Enjoy !')
+

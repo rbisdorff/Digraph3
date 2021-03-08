@@ -10200,7 +10200,12 @@ class Digraph(object):
             for x in principalScores:
                 print('%s: %.3f' % (x[1],x[0]))
         principalRanking = [x[1] for x in principalScores]
-        return principalRanking
+        corr = self.computeRankingCorrelation(principalRanking)
+        print(corr)
+        if corr['correlation'] > 0.0:
+            return principalRanking
+        else:
+            return list(reversed([x[1] for x in principalScores]))
 
     def computePrincipalOrder(self,Comments=False):
         """
@@ -10210,8 +10215,13 @@ class Digraph(object):
         if Comments:
             for x in principalScores:
                 print('%s: %.3f' % (x[1],x[0]))
-        principalOrder = list(reversed([x[1] for x in principalScores]))
-        return principalOrder    
+        principalOrder = [x[1] for x in principalScores]
+        corr = self.computeOrderCorrelation(principalOrder)
+        print(corr)
+        if corr['correlation'] > 0.0:
+            return principalOrder
+        else:
+            return list(reversed([x[1] for x in principalScores]))
 
     def computeSlaterRanking(self,isProbabilistic=False, seed=None, sampleSize=1000, Debug=False):
         """
@@ -13501,20 +13511,13 @@ class XMCDA2Digraph(Digraph):
 from randomDigraphs import *
 
 #############################################
-
+# scratch space for testing ongoing developments
 #----------test Digraph class ----------------
 if __name__ == "__main__":
-    import sys,array
-    from digraphsTools import *
-    from outrankingDigraphs import OutrankingDigraph,\
-    RandomOutrankingDigraph, BipolarOutrankingDigraph
-    from votingProfiles import CondorcetDigraph
-    from randomPerfTabs import *
-
 
     print('*****************************************************')
     print('* Python digraphs module                            *')
-    print('* $Revision: 2500+ $                                *')
+    print('* $Revision: Python3.9 $                            *')
     print('* Copyright (C) 2006-20018 Raymond Bisdorff         *')
     print('* The module comes with ABSOLUTELY NO WARRANTY      *')
     print('* to the extent permitted by the applicable law.    *')
@@ -13522,134 +13525,25 @@ if __name__ == "__main__":
     print('* redistribute it if it remains free software.      *')
     print('*****************************************************')
 
-    narg = len(sys.argv)
+    print('*-------- Testing classes and methods -------')
 
-    noTest = True
-
-    if narg == 1:
-        noTest = False
-
-    elif narg == 2:
-        if sys.argv[1] == '-r':
-            g = RandomValuationDigraph()
-        elif sys.argv[1] == '-rt':
-            t = RandomPerformanceTableau()
-            g = BipolarOutrankingDigraph(t)
-        elif sys.argv[1] == '-h' or sys.argv[1] == '--help' or sys.argv[1] == '-?':
-            print('usage: digraphs.py [[-t|rt|v|av] <filename> | -r [n]] | -rt [[n] [m]]')
-            print('  <filename> of valid python digraph (without .py extension)')
-            print('  option = -t means valid performance tableau input.')
-            print('  option = -rt means  performance tableau input.')
-            print('  option = -v means valid voting profile input.')
-            print('  option = -av means valid approval voting profile input.')
-            print('  option = -r n : means a random digraph of order n (default n=10).')
-            print('  option = -rt n m : means an outranking digraph from a random')
-            print('                     performance tableau input with n actions and m criteria')
-            print('                     (default n = 10, m = 7).')
-            sys.exit(1)
-        else:
-            file = sys.argv[1]
-            g = Digraph(file)
-    elif narg == 3:
-        if sys.argv[1] == '-r':
-            order = int(sys.argv[2])
-            g = RandomValuationDigraph(order)
-        elif sys.argv[1] == '-rt':
-            actions = int(sys.argv[2])
-            t = RandomPerformanceTableau(numberOfActions=actions)
-            g = BipolarOutrankingDigraph(t)
-        elif sys.argv[1] == '-t':
-            file = sys.argv[2]
-            g = BipolarOutrankingDigraph(file)
-        elif sys.argv[1] == '-v':
-            file = sys.argv[2]
-            g = CondorcetDigraph(file)
-        elif sys.argv[1] == '-av':
-            file = sys.argv[2]
-            g = CondorcetDigraph(file,approvalVoting=True)
-    elif narg == 4:
-        if sys.argv[1] == '-rt':
-            nActions = int(sys.argv[2])
-            mCriteria = int(sys.argv[3])
-            t = RandomPerformanceTableau(numberOfActions=nActions,numberOfCriteria=mCriteria)
-            g = BipolarOutrankingDigraph(t)
-    else:
-        print('usage: digraphs.py [[-t|rt|v|av] <filename> | -r [n]] | -rt [[n] [m]]')
-        print('  <filename> of valid python digraph (without .py extension)')
-        print('  option = -t means valid performance tableau input.')
-        print('  option = -rt means  performance tableau input.')
-        print('  option = -v means valid voting profile input.')
-        print('  option = -av means valid approval voting profile input.')
-        print('  option = -r n : means a random digraph of order n (default n=10).')
-        print('  option = -rt n m : means an outranking digraph from a random')
-        print('                     performance tableau input with n actions and m criteria')
-        print('                     (default n = 10, m = 7).')
-        sys.exit(1)
-    if noTest:
-        print('*------ Results -------"')
-        g.showRelationTable()
-        g.showAll()
-        g.showStatistics()
-                    
-
-    else:
-        print('*-------- Testing classes and methods -------')
-
-        from time import time
-        from digraphsTools import *
-        from outrankingDigraphs import *
-        t = RandomCBPerformanceTableau(weightDistribution="equiobjectives",
-                                       numberOfActions=10,seed=106,
-                                       missingDataProbability=0.1)
-        g = RobustOutrankingDigraph(t)
-        g.showRelationTable()
-        #g.computeTransitivityDegree(Comments=True)
-        g.computeIncomparabilityDegree(Comments=True)
-        g.computeIncomparabilityDegree(InPercents=True,Comments=True)
-        print(g.computeCopelandOrder())
-        print(g.computePrincipalOrder(Comments=True))
-        print(g.computePrincipalRanking(Comments=True))
-        
-        #g.computeTransitivityDegreeOld(Comments=True)
-        #g.closeTransitive(Reverse=True,Comments=True)
-        #print(g)
-        #g.computeTransitivityDegree(Comments=True)
-        #g = EmptyDigraph()
-        #g = CirculantDigraph(circulants=[1,-1])
-        #g = EmptyDigraph()
-        #g.computeTransitivityDegree(Comments=True)
-        #g = CompleteDigraph()
-        #g.computeTransitivityDegree(Comments=True)
-        
-        #g.closeSymmetric()
-        # print(g.computeSymmetryDegree(Comments=True))
-        # print(g.isSymmetric(Comments=True))
-        # #g.closeTransitive(Reverse=True)
-        # print(g.computeTransitivityDegree(Comments=False))
-        # print(g.isTransitive(Comments=True))
-        # g.computeRankingByBestChoosing(CoDual=True,Debug=False)
-        # print(g.rankingByBestChoosing)
-        # g.showRankingByBestChoosing()
-        # g.computeRankingByLastChoosing(CoDual=True,Debug=False)
-        # print(g.rankingByLastChoosing)
-        # g.showRankingByLastChoosing()
-        # from transitiveDigraphs import *
-        # rbc = RankingByChoosingDigraph(g,CoDual=False,Threading=False)
-        # rbc.showRankingByBestChoosing()
-        # rbc.showRankingByLastChoosing()
-        # rbc.showRankingByChoosing()
-        # print(rbc.computeTopologicalRanking())
-        # print(rbc.topologicalSort())
-##        print(rbc.rankingByLastChoosing)
-##        rbc.exportGraphViz(fileName='test5',direction='worst')
-##        print(rbc.rankingByBestChoosing)
-##        rbc.exportGraphViz(fileName='test6',direction='best')
-        
-       
-
-        print('*------------------*')
-        print('If you see this line all tests were passed successfully :-)')
-        print('Enjoy !')
+    from time import time
+    from digraphsTools import *
+    from outrankingDigraphs import *
+    t = RandomCBPerformanceTableau(weightDistribution="equiobjectives",
+                                   numberOfActions=10,seed=None,
+                                   missingDataProbability=0.1)
+    g = RobustOutrankingDigraph(t)
+    g.showRelationTable()
+    #g.computeTransitivityDegree(Comments=True)
+    g.computeIncomparabilityDegree(Comments=True)
+    g.computeIncomparabilityDegree(InPercents=True,Comments=True)
+    print(g.computeCopelandOrder())
+    print(g.computePrincipalOrder(Comments=True))
+    print(g.computePrincipalRanking(Comments=True))
+    print('*------------------*')
+    print('If you see this line all tests were passed successfully :-)')
+    print('Enjoy !')
 
     print('*************************************')
     print('* R.B. Mar 2021                     *')

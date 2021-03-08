@@ -564,79 +564,19 @@ def computeFareySeries(n=7,AsFloats=False,Debug=False):
 
 ###############################
 if __name__ == '__main__':
-    ######  scratch pad for testing the module components
-##    from digraphs import *
-##    print(factorization(2224))
-##    print(gcd(2224,12345))
-##    print(lcm(2224,12345))
-##    print(totient(11))
-##    print(zn_squareroots(60,Comments=True))
-##
-##    a = 17
-##    b = 1
-##    m = 19
-##    
-##    print( ( "Congruence: %dx =  %d (mod %d)" % (a,b,m) ) )  # \equiv = \u2262
-##
-##    x,y,A,B = solPartEqnDioph(a,m,b)
-##
-##    if x == None:
-##        print("Pas de solution")
-##    else:
-##        print("Solution générale: x = %d + %dn" % (x,B))
-##        h = gcd(a,m)
-##        y = m / h
-##        print('m,h,y',m,h,y)
-##        print("Il y a %d solution(s) particulière(s):" % (h))
-##        for i in range(h):
-##            print("x_%d = %d + %d*%d (mod %d) = %d" % (i+1,x,i,y,m,(x + (i*y))%m ))
-##            
-##    l = QuadraticResiduesDigraph(primesBelow(20,Odd=True))
-##    l = QuadraticResiduesDigraph(range(1,20))
-##    l.showRelationTable(Sorted=False)
-##    l.exportGraphViz('legendre')
-##    al = AsymmetricPartialDigraph(l)
-##    al.exportGraphViz('legendreAsym')
-##    al.computeChordlessCircuits()
-##    al.showChordlessCircuits()
-##
-##    for i in range(1,13):
-##        print(i,moebius_mu(i))
-##
-##    f12 = Factorizations
-##    D12 = divisors(12)
-##    print(D12)
-##    print(totient(234))
-##    tot = 0
-##    for d in divisors(234):
-##        tot += moebius_mu(d)*234//d
-##    print(tot)
-##    tot = 0
-##    for d in divisors(234):
-##        tot += d * moebius_mu(234//d)
-##    print(tot)
-##    for i in range(1,100):
-##        df = divisorsFunction(0,i)
-##        print(df)
-##        if df % 2 == 1:
-##            print('-->',i)
-##        print(divisorsFunction(1,i))
-##        print(divisorsFunction(2,i))
-        
-    # from time import time
-    # t0 = time()
-    # piDecimals = computePiDecimals(decimalWordLength=5,nbrOfWords=1000)
-    # print(time()-t0,end=' sec.\n')
-    # print('pi = '+piDecimals[0]+'.')
-    # print(piDecimals[1:])
-    # print('precision = '+str(len(piDecimals[1:])),end=" decimals\n")
+    print("""
+    ****************************************************
+    * Python3 arithmetics module                       *
+    * Copyright (C) 2010-2021 Raymond Bisdorff         *
+    * The module comes with ABSOLUTELY NO WARRANTY     *
+    * to the extent permitted by the applicable law.   *
+    * This is free software, and you are welcome to    *
+    * redistribute it if it remains free software.     *
+    ****************************************************
+    """)
+
     
-##    sb = sternBrocot(21,101)
-##    print(sb)
-##    (m,n) = invSternBrocot(sb)
-##    print(m,n)
-##    print(computeFareySeries(n=10,AsFloats=False,Debug=True))
-##
+    ######  scratch pad for testing the module components
     from math import sqrt
     p = 5
     q = 8
@@ -647,3 +587,9 @@ if __name__ == '__main__':
     print('cf(sqrt(2))_%d = ' % (len(cf)-1), cf )
     print('eval(cf(sqrt(2))_%d) = ' % (len(cf)-1), evalContinuedFraction(cf) )
     print('sqrt(2)              = ', sqrt(2) )
+
+
+    print('*------------------*')
+    print('If you see this line all tests were passed successfully :-)')
+    print('Enjoy !')
+#####################################

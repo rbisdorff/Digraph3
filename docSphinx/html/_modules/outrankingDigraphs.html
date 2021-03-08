@@ -10553,7 +10553,7 @@
         <span class="k">except</span><span class="p">:</span>
             <span class="nb">print</span><span class="p">(</span><span class="n">answer</span><span class="p">[</span><span class="s1">&#39;message&#39;</span><span class="p">])</span>
 
- 
+<span class="c1">################################################################ </span>
 <span class="c1">#----------test outrankingDigraphs classes ----------------</span>
 <span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s2">&quot;__main__&quot;</span><span class="p">:</span>
 
@@ -10562,6 +10562,16 @@
     <span class="kn">from</span> <span class="nn">random</span> <span class="k">import</span> <span class="n">randint</span>
     <span class="kn">from</span> <span class="nn">outrankingDigraphs</span> <span class="k">import</span> <span class="n">BipolarOutrankingDigraph</span>
     <span class="kn">from</span> <span class="nn">transitiveDigraphs</span> <span class="k">import</span> <span class="n">RankingByChoosingDigraph</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;&quot;&quot;</span>
+<span class="s2">    ****************************************************</span>
+<span class="s2">    * Python outrankingDigraphs module                 *</span>
+<span class="s2">    * Copyright (C) 2011-2021 Raymond Bisdorff         *</span>
+<span class="s2">    * The module comes with ABSOLUTELY NO WARRANTY     *</span>
+<span class="s2">    * to the extent permitted by the applicable law.   *</span>
+<span class="s2">    * This is free software, and you are welcome to    *</span>
+<span class="s2">    * redistribute it if it remains free software.     *</span>
+<span class="s2">    ****************************************************</span>
+<span class="s2">    &quot;&quot;&quot;</span><span class="p">)</span>
     
     <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;*-------- Testing classes and methods -------&#39;</span><span class="p">)</span>
 
@@ -10588,87 +10598,6 @@
     <span class="n">uog</span> <span class="o">=</span> <span class="n">UnOpposedBipolarOutrankingDigraph</span><span class="p">(</span><span class="n">t</span><span class="p">,</span><span class="n">Comments</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
     <span class="n">uog</span><span class="o">.</span><span class="n">showRelationTable</span><span class="p">()</span>
     <span class="n">uog</span><span class="o">.</span><span class="n">exportGraphViz</span><span class="p">()</span>
-
-                  
-<span class="c1">##    g.showRelationTable(StabilityDenotation=True)</span>
-<span class="c1">##    rg = RobustOutrankingDigraph(t,Debug=False)</span>
-<span class="c1">##    rg.showRelationTable()</span>
-<span class="c1">##    cg = ConfidentBipolarOutrankingDigraph(t)</span>
-<span class="c1">##    cg.showRelationTable()</span>
-    
-    <span class="c1">#print(g1)</span>
-    <span class="c1">#g1.saveXMCDA2RubisChoiceRecommendation()</span>
-    <span class="c1">#g1.showRelationTable()</span>
-<span class="c1">##    t2 = Random3ObjectivesPerformanceTableau(numberOfActions=300,\</span>
-<span class="c1">##                                   numberOfCriteria=13,\</span>
-<span class="c1">##                                   weightDistribution=&#39;equiobjectives&#39;,</span>
-<span class="c1">##                                   seed=100)</span>
-<span class="c1">##    </span>
-<span class="c1">##    g2 = BipolarOutrankingDigraph(t2,Normalized=True,Threading=Threading,Comments=True)</span>
-    <span class="c1">#g2.showRelationTable()</span>
-<span class="c1">##    from time import time</span>
-<span class="c1">##    t0 = time();print(g1.computeOrdinalCorrelationMP(g2,Threading=Threading,Debug=False));print(time()-t0)</span>
-<span class="c1">##    #t0 = time();print(g1.computeOrdinalCorrelation(g2));print(time()-t0)</span>
-<span class="c1">##    </span>
-<span class="c1">##    t0 = time()</span>
-<span class="c1">##    criteriaCorrelations = g1.computeMarginalVersusGlobalOutrankingCorrelations(Threading=Threading)</span>
-<span class="c1">##    print(time()-t0)</span>
-<span class="c1">##    print(criteriaCorrelations)</span>
-<span class="c1">####    Threading = False</span>
-<span class="c1">##    t0 = time()</span>
-<span class="c1">##    ranking = g1.computeNetFlowsRanking()</span>
-<span class="c1">##    criteriaCorrelations = g1.computeMarginalVersusGlobalRankingCorrelations(ranking,Threading=Threading)</span>
-<span class="c1">##    print(time()-t0)</span>
-<span class="c1">##    print(criteriaCorrelations)</span>
-<span class="c1">##    print(g1)</span>
-<span class="c1">##    print(g2)</span>
-    
-<span class="c1">##    t.saveXMCDA2(&#39;test&#39;)</span>
-<span class="c1">##    t = XMCDA2PerformanceTableau(&#39;test&#39;)</span>
-<span class="c1">##    sg = StochasticBipolarOutrankingDigraph(t,distribution=&quot;extTriangular&quot;)</span>
-<span class="c1">##    print(sg.computeCLTLikelihoods(Debug=False))</span>
-<span class="c1">##    sg.showRelationTable()</span>
-<span class="c1">##    t0 = time()</span>
-<span class="c1">##    lg = ConfidentBipolarOutrankingDigraph(t,</span>
-<span class="c1">##                                        distribution=&quot;beta&quot;,</span>
-<span class="c1">##                                        confidence=80,</span>
-<span class="c1">##                                        betaParameter=2,</span>
-<span class="c1">##                                        Normalized=True,</span>
-<span class="c1">##                                        Debug=True,</span>
-<span class="c1">##                                        Threading=False)</span>
-<span class="c1">##    print(time()-t0,&#39; sec.&#39;)</span>
-<span class="c1">##    print(lg.computeDeterminateness())</span>
-<span class="c1">##    lg.showRelationTable(LikelihoodDenotation=True,Debug=False)</span>
-    <span class="c1">## t0 = time()</span>
-    <span class="c1">## g = BipolarOutrankingDigraph(t,Threading=False)</span>
-    <span class="c1">## print(time()-t0)</span>
-    <span class="c1">## print(g.computeDeterminateness())</span>
-    <span class="c1">## g.showMarginalVersusGlobalOutrankingCorrelation()</span>
-    <span class="c1">## g.showHTMLPerformanceHeatmap(Correlations=True)</span>
-    <span class="c1">## criteriaList = [x for x in g.criteria]</span>
-    <span class="c1">## criteriaCorrelation = []</span>
-    <span class="c1">## for c in criteriaList:</span>
-    <span class="c1">##     corr = g.computeCriterionCorrelation(c,Debug=True)</span>
-    <span class="c1">##     criteriaCorrelation.append((corr[&#39;correlation&#39;],c))</span>
-    <span class="c1">## criteriaCorrelation.sort(reverse=True)</span>
-    <span class="c1">## print(&#39;criterion\t weight\t correlation&#39;)</span>
-    <span class="c1">## for x in criteriaCorrelation:</span>
-    <span class="c1">##     c = x[1]</span>
-    <span class="c1">##     print(&#39;%9s\t %.2f \t %.3f&#39; % (c,g.criteria[c][&#39;weight&#39;],x[0]))</span>
-    
-<span class="c1">##    g.showRelationTable()</span>
-<span class="c1">##    </span>
-<span class="c1">##    solver = RubisRestServer(host=&quot;http://leopold-loewenheim.uni.lu/cgi-bin/xmlrpc_cgi.py&quot;,Debug=True)</span>
-<span class="c1">##    #solver.ping()</span>
-<span class="c1">##    solver.submitProblem(t,valuation=&#39;robust&#39;,Debug=True)</span>
-<span class="c1">##    #solver.submitXMCDA2Problem(&#39;test&#39;,Debug=False)</span>
-<span class="c1">##    #solver.viewSolution()</span>
-    
-    
-<span class="c1">##    t0=time();g = BipolarOutrankingDigraph(t,Threading=False);print(time()-t0)</span>
-<span class="c1">##    #g.showRelationTable()</span>
-<span class="c1">##    t0=time();g = BipolarOutrankingDigraph(t,Threading=True,Debug=False);print(time()-t0)</span>
-<span class="c1">##    #g.showRelationTable()</span>
 
     
 <span class="c1">#############################</span>

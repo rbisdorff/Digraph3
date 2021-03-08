@@ -1941,6 +1941,19 @@
     <span class="kn">from</span> <span class="nn">votingProfiles</span> <span class="k">import</span> <span class="o">*</span>
     <span class="kn">from</span> <span class="nn">time</span> <span class="k">import</span> <span class="n">time</span>
 
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;&quot;&quot;</span>
+<span class="s2">    ****************************************************</span>
+<span class="s2">    * Python transitiveDigraphs module                 *</span>
+<span class="s2">    * depends on BipolarOutrankingDigraph and          *</span>
+<span class="s2">    * $Revision$                                       *</span>
+<span class="s2">    * Copyright (C) 2010-2021 Raymond Bisdorf          *</span>
+<span class="s2">    * The module comes with ABSOLUTELY NO WARRANTY     *</span>
+<span class="s2">    * to the extent permitted by the applicable law.   *</span>
+<span class="s2">    * This is free software, and you are welcome to    *</span>
+<span class="s2">    * redistribute it if it remains free software.     *</span>
+<span class="s2">    ****************************************************</span>
+<span class="s2">    &quot;&quot;&quot;</span><span class="p">)</span>
+
     <span class="n">v</span> <span class="o">=</span> <span class="n">RandomLinearVotingProfile</span><span class="p">(</span><span class="n">numberOfVoters</span><span class="o">=</span><span class="mi">99</span><span class="p">,</span>\
                                   <span class="n">numberOfCandidates</span><span class="o">=</span><span class="mi">9</span><span class="p">,</span><span class="n">seed</span><span class="o">=</span><span class="mi">201</span><span class="p">)</span>
     <span class="n">g</span> <span class="o">=</span> <span class="n">CondorcetDigraph</span><span class="p">(</span><span class="n">v</span><span class="p">)</span>
@@ -1950,70 +1963,12 @@
     <span class="nb">print</span><span class="p">(</span><span class="n">rbc</span><span class="p">)</span>
     <span class="n">rbc</span><span class="o">.</span><span class="n">exportTopologicalGraphViz</span><span class="p">(</span><span class="s1">&#39;test&#39;</span><span class="p">)</span>
     <span class="n">rbc</span><span class="o">.</span><span class="n">exportGraphViz</span><span class="p">(</span><span class="s1">&#39;test1&#39;</span><span class="p">)</span>
-<span class="c1">##    wc = WeakCopelandOrder(g,SelfCoDual=True,Debug=False)</span>
-<span class="c1">##    wc.showRelationTable()</span>
-<span class="c1">##    cop = CopelandOrder(g)</span>
-<span class="c1">##    cop.showRelationTable()</span>
-<span class="c1">##    wc.showScores()</span>
-<span class="c1">##    cop.showScores()</span>
-<span class="c1">##    g.showRelationTable()</span>
-<span class="c1">##    order = g.computeCopelandOrder()</span>
-<span class="c1">##    print(g.computeOrderCorrelation(order))</span>
-<span class="c1">##    print(g.computeOrdinalCorrelation(cop))</span>
-<span class="c1">##    print(g.computeOrdinalCorrelation(wc))</span>
-<span class="c1">##    wnf = WeakNetFlowsOrder(g,SelfCoDual=False,Debug=False)</span>
-<span class="c1">##    wnf.showRelationTable()</span>
-<span class="c1">##    wnf.showScores()</span>
-<span class="c1">##    g.showRelationTable()</span>
-<span class="c1">##    print(wc.copelandOrder)</span>
-<span class="c1">##    print(wnf.netFlowsOrder)</span>
-<span class="c1">##    wc.showTransitiveDigraph()</span>
-<span class="c1">##    wnf.showTransitiveDigraph()</span>
-<span class="c1">##    print(g.computeOrdinalCorrelation(wc))</span>
-<span class="c1">##    print(g.computeOrdinalCorrelation(wnf))</span>
-
-<span class="c1">##    Threading=False</span>
-<span class="c1">##    t = PerformanceTableau(&#39;auditor2_2&#39;)</span>
-<span class="c1">##    t.showHTMLPerformanceHeatmap(Correlations=True,ndigits=0,Debug=False)</span>
-<span class="c1">##    t = XMCDA2PerformanceTableau(&#39;uniSorting&#39;)</span>
-<span class="c1">##    t = RandomCBPerformanceTableau(weightDistribution=&quot;equiobjectives&quot;,</span>
-<span class="c1">##                                   numberOfActions=8,seed=105)</span>
-<span class="c1">##    g = BipolarOutrankingDigraph(t)</span>
-<span class="c1">##    g.exportGraphViz(&#39;testg&#39;)</span>
-<span class="c1">##    wke = KemenyOrdersFusion(g,orderLimit=8)</span>
-<span class="c1">##    print(wke.topologicalSort())</span>
-<span class="c1">##    wke.exportGraphViz(fileName=&#39;testwke&#39;)</span>
-<span class="c1">##    print(wke.relation)</span>
-<span class="c1">##</span>
-<span class="c1">##    from transitiveDigraphs import RankingsFusion</span>
-<span class="c1">##    from sparseOutrankingDigraphs import PreRankedOutrankingDigraph</span>
-<span class="c1">##    t = RandomCBPerformanceTableau(numberOfActions=50,seed=10)</span>
-<span class="c1">##    from outrankingDigraphs import *</span>
-<span class="c1">##    g = BipolarOutrankingDigraph(t,Normalized=True)</span>
-<span class="c1">##    from linearOrders import *</span>
-<span class="c1">##    cop = CopelandOrder(g)</span>
-<span class="c1">##    nf = NetFlowsOrder(g)</span>
-<span class="c1">##    wr = RankingsFusion(g,[cop.copelandRanking,nf.netFlowsRanking])</span>
-<span class="c1">##    print(wr.topologicalSort())</span>
-<span class="c1">## </span>
-    <span class="c1"># pra = PreRankedOutrankingDigraph(t,5,quantilesOrderingStrategy=&#39;average&#39;)</span>
-    <span class="c1"># r1 = pra.boostedRanking</span>
-    <span class="c1"># pro = PreRankedOutrankingDigraph(t,5,quantilesOrderingStrategy=&#39;optimistic&#39;)</span>
-    <span class="c1"># r2 = pro.boostedRanking</span>
-    <span class="c1"># prp = PreRankedOutrankingDigraph(t,5,quantilesOrderingStrategy=&#39;pessimistic&#39;)</span>
-    <span class="c1"># r3 = prp.boostedRanking</span>
-    <span class="c1"># wqr = RankingsFusionDigraph(pra,[r1,r2,r3])</span>
-    <span class="c1"># wqr.exportGraphViz(fileName=&#39;partialOrdering&#39;,graphType=&quot;pdf&quot;)</span>
  
    
     <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;*------------------*&#39;</span><span class="p">)</span>
     <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;If you see this line all tests were passed successfully :-)&#39;</span><span class="p">)</span>
     <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Enjoy !&#39;</span><span class="p">)</span>
 
-    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;*************************************&#39;</span><span class="p">)</span>
-    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;* R.B. october 2014                 *&#39;</span><span class="p">)</span>
-    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;* $Revision:  $                  *&#39;</span><span class="p">)</span>
-    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;*************************************&#39;</span><span class="p">)</span>
 </pre></div>
 
            </div>

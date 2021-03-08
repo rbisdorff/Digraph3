@@ -1828,7 +1828,7 @@ if __name__ == "__main__":
 
     print('****************************************************')
     print('* Python voting digraphs module                    *')
-    print('* $Revision: 2484 $                                   *')
+    print('* $Revision: Python3.9 $                           *')
     print('* Copyright (C) 2006-2007 University of Luxembourg *')
     print('* The module comes with ABSOLUTELY NO WARRANTY     *')
     print('* to the extent permitted by the applicable law.   *')
@@ -1845,116 +1845,7 @@ if __name__ == "__main__":
     print(c)
     mm = MajorityMarginsDigraph(v)
     print(mm)
-    ## c.save('testcondorcet')
-    ## c.showRelationTable()
-    ## kr = c.computeKohlerRanking(Debug=False)
-    ## kohlerRanking = [(kr[x]['rank'],x) for x in kr]
-    ## kohlerRanking.sort()
-    ## for x in kohlerRanking:
-    ##     print '%s: %d (%.2f)' % (x[1], x[0], kr[x[1]]['majorityMargin'])
-    ## aar = c.computeArrowRaynaudRanking(Debug=True)
-    ## arrowRaynaudRanking = [(aar[x]['rank'],x) for x in aar]
-    ## arrowRaynaudRanking.sort()
-    ## for x in arrowRaynaudRanking:
-    ##     print '%s: %d (%.2f)' % (x[1], x[0], aar[x[1]]['majorityMargin'])
-
-#     lvp = RandomLinearVotingProfile(numberOfCandidates=7,
-#                             numberOfVoters=500,
-#                             WithPolls=True,
-#                             partyRepartition=0.4,
-#                             other=0.2,
-#                             DivisivePolitics=True,
-#                             #seed=0.20990710811162194) # 1 circuit
-#                             #seed=0.8077233289616987)  # 2 circuits !
-#                             seed=1,
-#                             Debug=False)
-#     lvp.showRandomPolls()
-# ##    ## lvp = LinearVotingProfile('templinearprofile')
-# ##    lvp.save('test')
-# ##    lvp1 = LinearVotingProfile('test')
-#     lvp.save2PerfTab()
-#     from outrankingDigraphs import *
-#     t = PerformanceTableau('votingPerfTab')
-# ##    g = BipolarOutrankingDigraph(t)
-# ##    g.showRelationTable(ReflexiveTerms=False)
-#     uog = UnOpposedBipolarOutrankingDigraph(t)
-#     uog.showRelationTable(ReflexiveTerms=False)
-#     print(uog)
-#     uog.showPreKernels()
-#     uog.showBestChoiceRecommendation()
-##    lvp1 = LinearVotingProfile('templinearprofile')
-##    lvp1 = LinearVotingProfile('example1')
-##    lvp1.computeBallot()
-##    ## for x in lvp.voters:
-##    ##    print x, lvp.linearBallot[x]
-##    lvp1.showLinearBallots(IntegerWeights=True)
-##    lvp1.showVoterBallot('v001')
-####    print(lvp.computeRankAnalysis())
-##    lvp1.computeInstantRunoffWinner()
-##    lvp1.showRankAnalysisTable(Debug=False)
-##    lvp1.showBordaRanking()
-##    lvp1.computeBordaWinners()
-##    lvp1.save2PerfTab('votingPerfTab')
-##    t = PerformanceTableau('votingPerfTab')
-##    #t.showHTMLPerformanceHeatmap(Transposed=True,Correlations=True,ndigits=0)
-##    #lvp.showHTMLVotingHeatmap(Correlations=True)
-    # c = CondorcetDigraph(lvp)
-    # #c.recodeValuation()
-    # c.showRelationTable()
-##    (~(-c)).showRelationTable()
-    # print(c.computeCopelandRanking(Debug=False))
-    # print(c.computeNetFlowsRanking(Debug=False))
-    # lvp.showRandomPolls()
-    # print(c.computeTransitivityDegree())
-    # c.computeChordlessCircuits()
-    # c.showChordlessCircuits()
-    # if c.chordlessCircuits != []:
-    #     #MP = True
-    #     c.recodeValuation()
-    #     wc = WeakCopelandOrder(c)
-    #     print('Weak Copeland ranking')
-    #     wc.showRankingByChoosing()
-    #     corr = c.computeRankingCorrelation(wc.copelandRanking)
-    #     wc.showCorrelation(corr)
-    #     wn = WeakNetFlowsOrder(c)
-    #     print('Weak NetFlows ranking')
-    #     wn.showRankingByChoosing()
-    #     corr = c.computeRankingCorrelation(wn.netFlowsRanking)
-    #     wn.showCorrelation(corr)
-    #     lvp.showRandomPolls()
-    #     print(lvp.seed)
-
-##    from linearOrders import NetFlowsOrder
-##    nf = NetFlowsOrder(c,Debug=True)
-##    from outrankingDigraphs import *
-##    t1 = RandomCBPerformanceTableau(numberOfActions=5)
-##    g1 = BipolarOutrankingDigraph(t1)
-##    g1.showRelationTable()
-##    nf1 = NetFlowsOrder(g1,Debug=True)
     
-    
-##    lvp1.showHTMLVotingHeatmap()
-##    
-##    print(lvp.computeBordaWinners())
-##    print(lvp.computeUninominalVotes(lvp.candidates,lvp.linearBallot))
-##    print(lvp.computeInstantRunoffWinner(Comments=True))
-##    print(lvp.computeSimpleMajorityWinner(Comments=True))
-##
-##    c = CondorcetDigraph(lvp)
-##    c.exportGraphViz()
-##    print('Chordless circuits = ', c.computeChordlessCircuits())
-##    print('Condorcet Winner = ', c.computeCondorcetWinner())
-##    m = len(lvp.voters)
-##    c.recodeValuation(-m,m)
-##    c.showRelationTable()
-
-##    av = ApprovalVotingProfile('approvalInvitation')
-##    av.save2PerfTab()
-##    t = PerformanceTableau('votingPerfTab')
-##    t.showHTMLPerformanceHeatmap(Correlations=True,ndigits=0)
-    
-    
-
     print('*------------------*')
     print('If you see this line all tests were passed successfully :-)')
     print('Enjoy !')
