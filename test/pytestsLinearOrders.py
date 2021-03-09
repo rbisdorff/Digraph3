@@ -13,15 +13,6 @@ from outrankingDigraphs import *
 from linearOrders import *
 from decimal import Decimal
 
-##def testExtendedPrudentDigraph():
-##    print('*-------- Testing ExtendedPrudentDigraph class -------')
-##    t = RandomCBPerformanceTableau(numberOfActions=13)
-##    t.save('testExtPrud')
-##    g = BipolarOutrankingDigraph(t)
-##    level = g.computePrudentBetaLevel(Debug=True)
-##    gep = ExtendedPrudentDigraph(g,prudentBetaLevel=level,Debug=True)
-##    gep.showRelationTable()
-
 def testKemenyOrdering():
     print('*-------- Testing KemenyOrder class -------')
     t = RandomCBPerformanceTableau(numberOfActions=5)
@@ -176,3 +167,16 @@ def testRankingCorrelations():
     print(rp.rankedPairsOrder)
     print(g.computeOrdinalCorrelation(rp))
     print()
+    print('==>> principal ordering:')
+    print('Column wise')
+    poc = PrincipalOrder(g,Colwise=True,Comments=True)
+    print(poc.principalOrder)
+    print(g.computeOrderCorrelation(poc.principalOrder))
+    print(poc.principalRanking)
+    print(g.computeRankingCorrelation(poc.principalRanking))
+    print('Row wise')
+    por = PrincipalOrder(g,Colwise=False,Comments=True)
+    print(por.principalOrder)
+    print(g.computeOrderCorrelation(por.principalOrder))
+    print(por.principalRanking)
+    print(g.computeRankingCorrelation(por.principalRanking))

@@ -190,18 +190,6 @@
 <span class="c1">#--------- Decimal precision --------------</span>
 <span class="kn">from</span> <span class="nn">decimal</span> <span class="k">import</span> <span class="n">Decimal</span>
 
-<span class="c1">#---------- general methods -----------------</span>
-<span class="c1"># generate all permutations from a string or a list</span>
-<span class="c1"># From Michael Davies&#39;s recipe:</span>
-<span class="c1"># http://snippets.dzone.com/posts/show/753</span>
-<span class="c1">## def all_perms(str):</span>
-<span class="c1">##     if len(str) &lt;=1:</span>
-<span class="c1">##         yield str</span>
-<span class="c1">##     else:</span>
-<span class="c1">##         for perm in all_perms(str[1:]):</span>
-<span class="c1">##             for i in range(len(perm)+1):</span>
-<span class="c1">##                 yield perm[:i] + str[0:1] + perm[i:]</span>
-
 <span class="c1">#--------- Partial Extended Prudent Digraph class ---------</span>
 
 <span class="k">class</span> <span class="nc">_ExtendedPrudentDigraph</span><span class="p">(</span><span class="n">Digraph</span><span class="p">):</span>
@@ -1804,8 +1792,9 @@
 <span class="sd">    princiapl axis of the eigen deomposition of the covariance of the</span>
 <span class="sd">    outdegrees of the valued digraph &#39;other&#39;.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
-    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">other</span><span class="p">,</span><span class="n">Colwise</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span><span class="n">imageType</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
-                 <span class="n">plotFileName</span><span class="o">=</span><span class="s2">&quot;principalOrdering&quot;</span><span class="p">,</span><span class="n">tempDir</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span><span class="n">Debug</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">other</span><span class="p">,</span><span class="n">Colwise</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span><span class="n">imageType</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>\
+                 <span class="n">plotFileName</span><span class="o">=</span><span class="s2">&quot;principalOrdering&quot;</span><span class="p">,</span>\
+                 <span class="n">tempDir</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span><span class="n">Comments</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span><span class="n">Debug</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        constructor for generating a linear order</span>
 <span class="sd">        from a given other digraph by using the first</span>
@@ -1841,6 +1830,10 @@
             <span class="k">return</span>
         <span class="k">if</span> <span class="n">Debug</span><span class="p">:</span>
             <span class="nb">print</span><span class="p">(</span><span class="n">principalScores</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">principalScores</span> <span class="o">=</span> <span class="n">principalScores</span>
+        <span class="k">if</span> <span class="n">Comments</span><span class="p">:</span>
+            <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">principalScores</span><span class="p">:</span>
+                <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;</span><span class="si">%s</span><span class="s1">: </span><span class="si">%-3f</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="n">x</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span><span class="n">x</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span> <span class="p">)</span>
         <span class="c1"># instatiates a Digraph template</span>
         
         <span class="n">g</span> <span class="o">=</span> <span class="n">IndeterminateDigraph</span><span class="p">(</span><span class="n">order</span><span class="o">=</span><span class="n">n</span><span class="p">)</span>
@@ -1940,46 +1933,25 @@
     <span class="n">Threading</span> <span class="o">=</span> <span class="kc">False</span>
     <span class="n">seed</span> <span class="o">=</span> <span class="n">random</span><span class="o">.</span><span class="n">randint</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">1000</span><span class="p">)</span>
     <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;*-------- Testing MedianRanking class -------&#39;</span><span class="p">)</span>
-    <span class="n">t</span> <span class="o">=</span> <span class="n">Random3ObjectivesPerformanceTableau</span><span class="p">(</span><span class="n">numberOfActions</span><span class="o">=</span><span class="mi">7</span><span class="p">,</span><span class="n">numberOfCriteria</span><span class="o">=</span><span class="mi">13</span><span class="p">,</span>
+    <span class="n">t</span> <span class="o">=</span> <span class="n">Random3ObjectivesPerformanceTableau</span><span class="p">(</span><span class="n">numberOfActions</span><span class="o">=</span><span class="mi">13</span><span class="p">,</span><span class="n">numberOfCriteria</span><span class="o">=</span><span class="mi">21</span><span class="p">,</span>
                                    <span class="n">NegativeWeights</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
                                    <span class="n">seed</span><span class="o">=</span><span class="n">seed</span><span class="p">)</span>
-    <span class="n">t</span><span class="o">.</span><span class="n">showHTMLPerformanceHeatmap</span><span class="p">(</span><span class="n">Correlations</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span><span class="n">colorLevels</span><span class="o">=</span><span class="mi">5</span><span class="p">)</span>
+    <span class="c1">#t.showHTMLPerformanceHeatmap(Correlations=True,colorLevels=5)</span>
     <span class="c1">#t = PerformanceTableau(&#39;testLin&#39;)    </span>
     <span class="n">g</span> <span class="o">=</span> <span class="n">BipolarOutrankingDigraph</span><span class="p">(</span><span class="n">t</span><span class="p">,</span><span class="n">Normalized</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
     <span class="c1">#g.showRelationTable()</span>
-    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;==&gt;&gt; Copeland ordering:&#39;</span><span class="p">)</span>
-    <span class="n">t0</span> <span class="o">=</span> <span class="n">time</span><span class="p">()</span>
-    <span class="n">cop</span> <span class="o">=</span> <span class="n">CopelandOrder</span><span class="p">(</span><span class="n">g</span><span class="p">,</span><span class="n">Comments</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
-    <span class="n">g</span><span class="o">.</span><span class="n">showRelationTable</span><span class="p">(</span><span class="n">actionsSubset</span><span class="o">=</span><span class="n">cop</span><span class="o">.</span><span class="n">copelandRanking</span><span class="p">)</span>
-    <span class="nb">print</span><span class="p">(</span><span class="n">cop</span><span class="o">.</span><span class="n">copelandRanking</span><span class="p">)</span>
-    <span class="nb">print</span><span class="p">(</span><span class="n">cop</span><span class="o">.</span><span class="n">copelandOrder</span><span class="p">)</span>
-    <span class="nb">print</span><span class="p">(</span><span class="n">g</span><span class="o">.</span><span class="n">computeOrdinalCorrelation</span><span class="p">(</span><span class="n">cop</span><span class="p">))</span>
-    <span class="nb">print</span><span class="p">(</span><span class="n">time</span><span class="p">()</span><span class="o">-</span><span class="n">t0</span><span class="p">)</span>
-    <span class="nb">print</span><span class="p">()</span>
-    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;==&gt;&gt; Kohler ordering:&#39;</span><span class="p">)</span>
-    <span class="n">t0</span> <span class="o">=</span> <span class="n">time</span><span class="p">()</span>
-    <span class="n">ko</span> <span class="o">=</span> <span class="n">KohlerOrder</span><span class="p">(</span><span class="n">g</span><span class="p">)</span>
-    <span class="n">g</span><span class="o">.</span><span class="n">showRelationTable</span><span class="p">(</span><span class="n">actionsSubset</span><span class="o">=</span><span class="n">ko</span><span class="o">.</span><span class="n">kohlerRanking</span><span class="p">)</span>
-    <span class="nb">print</span><span class="p">(</span><span class="n">ko</span><span class="o">.</span><span class="n">kohlerRanking</span><span class="p">)</span>
-    <span class="nb">print</span><span class="p">(</span><span class="n">ko</span><span class="o">.</span><span class="n">kohlerOrder</span><span class="p">)</span>
-    <span class="nb">print</span><span class="p">(</span><span class="n">g</span><span class="o">.</span><span class="n">computeOrdinalCorrelation</span><span class="p">(</span><span class="n">ko</span><span class="p">))</span>
-    <span class="nb">print</span><span class="p">(</span><span class="n">time</span><span class="p">()</span><span class="o">-</span><span class="n">t0</span><span class="p">)</span>
-    <span class="nb">print</span><span class="p">()</span>
-    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;==&gt;&gt; ranked pairs ordering:&#39;</span><span class="p">)</span>
-    <span class="n">t0</span> <span class="o">=</span> <span class="n">time</span><span class="p">()</span>
-    <span class="n">rp</span> <span class="o">=</span> <span class="n">RankedPairsOrder</span><span class="p">(</span><span class="n">g</span><span class="p">)</span>
-    <span class="n">g</span><span class="o">.</span><span class="n">showRelationTable</span><span class="p">(</span><span class="n">actionsSubset</span><span class="o">=</span><span class="n">rp</span><span class="o">.</span><span class="n">rankedPairsRanking</span><span class="p">)</span>
-    <span class="nb">print</span><span class="p">(</span><span class="n">rp</span><span class="o">.</span><span class="n">rankedPairsRanking</span><span class="p">)</span>
-    <span class="nb">print</span><span class="p">(</span><span class="n">rp</span><span class="o">.</span><span class="n">rankedPairsOrder</span><span class="p">)</span>
-    <span class="nb">print</span><span class="p">(</span><span class="n">g</span><span class="o">.</span><span class="n">computeOrdinalCorrelation</span><span class="p">(</span><span class="n">rp</span><span class="p">))</span>
-    <span class="nb">print</span><span class="p">(</span><span class="n">time</span><span class="p">()</span><span class="o">-</span><span class="n">t0</span><span class="p">)</span>
-    <span class="nb">print</span><span class="p">()</span>
-    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;==&gt;&gt; Leximin ordering:&#39;</span><span class="p">)</span>
-    <span class="n">le</span> <span class="o">=</span> <span class="n">RankedPairsOrder</span><span class="p">((</span><span class="o">-</span><span class="n">g</span><span class="p">),</span><span class="n">Leximin</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
-    <span class="n">g</span><span class="o">.</span><span class="n">showRelationTable</span><span class="p">()</span>
-    <span class="nb">print</span><span class="p">(</span><span class="n">le</span><span class="o">.</span><span class="n">rankedPairsOrder</span><span class="p">)</span>
-    <span class="nb">print</span><span class="p">((</span><span class="o">-</span><span class="n">g</span><span class="p">)</span><span class="o">.</span><span class="n">computeOrdinalCorrelation</span><span class="p">(</span><span class="n">le</span><span class="p">))</span>    
-    
+    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;==&gt;&gt; Principal ordering:&#39;</span><span class="p">)</span>
+    <span class="n">po</span> <span class="o">=</span> <span class="n">PrincipalOrder</span><span class="p">(</span><span class="n">g</span><span class="p">,</span><span class="n">Colwise</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">po</span><span class="o">.</span><span class="n">principalOrder</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">g</span><span class="o">.</span><span class="n">computeOrderCorrelation</span><span class="p">(</span><span class="n">po</span><span class="o">.</span><span class="n">principalOrder</span><span class="p">))</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">po</span><span class="o">.</span><span class="n">principalRanking</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">g</span><span class="o">.</span><span class="n">computeRankingCorrelation</span><span class="p">(</span><span class="n">po</span><span class="o">.</span><span class="n">principalRanking</span><span class="p">))</span>
+    <span class="n">por</span> <span class="o">=</span> <span class="n">PrincipalOrder</span><span class="p">(</span><span class="n">g</span><span class="p">,</span><span class="n">Colwise</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">por</span><span class="o">.</span><span class="n">principalOrder</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">g</span><span class="o">.</span><span class="n">computeOrderCorrelation</span><span class="p">(</span><span class="n">por</span><span class="o">.</span><span class="n">principalOrder</span><span class="p">))</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">por</span><span class="o">.</span><span class="n">principalRanking</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">g</span><span class="o">.</span><span class="n">computeRankingCorrelation</span><span class="p">(</span><span class="n">por</span><span class="o">.</span><span class="n">principalRanking</span><span class="p">))</span>
+     
     <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;*------------------*&#39;</span><span class="p">)</span>
     <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;If you see this line all tests were passed successfully :-)&#39;</span><span class="p">)</span>
     <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Enjoy !&#39;</span><span class="p">)</span>

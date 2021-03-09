@@ -10191,11 +10191,11 @@ class Digraph(object):
             tempd.cleanup()
         return principalScores
 
-    def computePrincipalRanking(self,Comments=False):
+    def computePrincipalRanking(self,Colwise=False,Comments=False):
         """
         Rendesr a ranking from best to worst of the decision actions.
         """
-        principalScores = self.computePrincipalScores()
+        principalScores = self.computePrincipalScores(Colwise=Colwise)
         if Comments:
             for x in principalScores:
                 print('%s: %.3f' % (x[1],x[0]))
@@ -10207,11 +10207,11 @@ class Digraph(object):
         else:
             return list(reversed([x[1] for x in principalScores]))
 
-    def computePrincipalOrder(self,Comments=False):
+    def computePrincipalOrder(self,Colwise=False,Comments=False):
         """
         Rendesr an ordering from wrost to best of the decision actions.
         """
-        principalScores = self.computePrincipalScores()
+        principalScores = self.computePrincipalScores(Colwise=Colwise)
         if Comments:
             for x in principalScores:
                 print('%s: %.3f' % (x[1],x[0]))
@@ -13541,6 +13541,9 @@ if __name__ == "__main__":
     print(g.computeCopelandOrder())
     print(g.computePrincipalOrder(Comments=True))
     print(g.computePrincipalRanking(Comments=True))
+    print(g.computePrincipalOrder(Colwise=True,Comments=True))
+    print(g.computePrincipalRanking(Colwise=True,Comments=True))
+
     print('*------------------*')
     print('If you see this line all tests were passed successfully :-)')
     print('Enjoy !')

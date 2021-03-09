@@ -23,18 +23,6 @@ from linearOrders import *
 #--------- Decimal precision --------------
 from decimal import Decimal
 
-#---------- general methods -----------------
-# generate all permutations from a string or a list
-# From Michael Davies's recipe:
-# http://snippets.dzone.com/posts/show/753
-## def all_perms(str):
-##     if len(str) <=1:
-##         yield str
-##     else:
-##         for perm in all_perms(str[1:]):
-##             for i in range(len(perm)+1):
-##                 yield perm[:i] + str[0:1] + perm[i:]
-
 #--------- Partial Extended Prudent Digraph class ---------
 
 class _ExtendedPrudentDigraph(Digraph):
@@ -1637,8 +1625,9 @@ class PrincipalOrder(LinearOrder):
     princiapl axis of the eigen deomposition of the covariance of the
     outdegrees of the valued digraph 'other'.
     """
-    def __init__(self,other,Colwise=True,imageType=None,
-                 plotFileName="principalOrdering",tempDir=None,Debug=False):
+    def __init__(self,other,Colwise=True,imageType=None,\
+                 plotFileName="principalOrdering",\
+                 tempDir=None,Comments=False,Debug=False):
         """
         constructor for generating a linear order
         from a given other digraph by using the first
@@ -1674,6 +1663,10 @@ class PrincipalOrder(LinearOrder):
             return
         if Debug:
             print(principalScores)
+        self.principalScores = principalScores
+        if Comments:
+            for x in principalScores:
+                print('%s: %-3f' % (x[1],x[0]) )
         # instatiates a Digraph template
         
         g = IndeterminateDigraph(order=n)
@@ -1773,46 +1766,25 @@ if __name__ == "__main__":
     Threading = False
     seed = random.randint(1,1000)
     print('*-------- Testing MedianRanking class -------')
-    t = Random3ObjectivesPerformanceTableau(numberOfActions=7,numberOfCriteria=13,
+    t = Random3ObjectivesPerformanceTableau(numberOfActions=13,numberOfCriteria=21,
                                    NegativeWeights=False,
                                    seed=seed)
-    t.showHTMLPerformanceHeatmap(Correlations=True,colorLevels=5)
+    #t.showHTMLPerformanceHeatmap(Correlations=True,colorLevels=5)
     #t = PerformanceTableau('testLin')    
     g = BipolarOutrankingDigraph(t,Normalized=True)
     #g.showRelationTable()
-    print('==>> Copeland ordering:')
-    t0 = time()
-    cop = CopelandOrder(g,Comments=True)
-    g.showRelationTable(actionsSubset=cop.copelandRanking)
-    print(cop.copelandRanking)
-    print(cop.copelandOrder)
-    print(g.computeOrdinalCorrelation(cop))
-    print(time()-t0)
-    print()
-    print('==>> Kohler ordering:')
-    t0 = time()
-    ko = KohlerOrder(g)
-    g.showRelationTable(actionsSubset=ko.kohlerRanking)
-    print(ko.kohlerRanking)
-    print(ko.kohlerOrder)
-    print(g.computeOrdinalCorrelation(ko))
-    print(time()-t0)
-    print()
-    print('==>> ranked pairs ordering:')
-    t0 = time()
-    rp = RankedPairsOrder(g)
-    g.showRelationTable(actionsSubset=rp.rankedPairsRanking)
-    print(rp.rankedPairsRanking)
-    print(rp.rankedPairsOrder)
-    print(g.computeOrdinalCorrelation(rp))
-    print(time()-t0)
-    print()
-    print('==>> Leximin ordering:')
-    le = RankedPairsOrder((-g),Leximin=True)
-    g.showRelationTable()
-    print(le.rankedPairsOrder)
-    print((-g).computeOrdinalCorrelation(le))    
-    
+    print('==>> Principal ordering:')
+    po = PrincipalOrder(g,Colwise=True)
+    print(po.principalOrder)
+    print(g.computeOrderCorrelation(po.principalOrder))
+    print(po.principalRanking)
+    print(g.computeRankingCorrelation(po.principalRanking))
+    por = PrincipalOrder(g,Colwise=False)
+    print(por.principalOrder)
+    print(g.computeOrderCorrelation(por.principalOrder))
+    print(por.principalRanking)
+    print(g.computeRankingCorrelation(por.principalRanking))
+     
     print('*------------------*')
     print('If you see this line all tests were passed successfully :-)')
     print('Enjoy !')
