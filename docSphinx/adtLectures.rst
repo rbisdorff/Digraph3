@@ -4,9 +4,7 @@
 
 Algorithmic Decision Theory Lectures
 ====================================
-:Author: Raymond Bisdorff, Emeritus Professor of Computer Science and Applied Mathematics
-:Version: |version|
-:Url: |location_link1|
+:Author: Raymond Bisdorff, Emeritus Professor of Applied Mathematics and Computer Science
 :Copyright: R. Bisdorff |location_link3| 2013-2021
 
 Introduction

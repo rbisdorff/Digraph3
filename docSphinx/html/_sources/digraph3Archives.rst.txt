@@ -1,8 +1,7 @@
 Digraph3 Archives
 =================
 
-:Author: *Raymond BISDORFF*, Emeritus Professor of Computer Science and Applied Mathematics
-:Url: https://rbisdorff.github.io/
+:Author: *Raymond BISDORFF*, Emeritus Professor of Applied Mathematics and Computer Science
 :Copyright: `R. Bisdorff <_static/digraph3_copyright.html>`_ 2013-2021
 
 Introduction
