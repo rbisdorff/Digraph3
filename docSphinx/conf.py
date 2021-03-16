@@ -259,7 +259,7 @@ latex_elements = {
         \begin{center}
         \emph{This documentation is dedicated to our}\\
         \emph{late colleague and dear friend}\\
-         Marc ROUBENS.
+         Prof. Marc ROUBENS.
         \end{center}
 
         %% \vfill adds at the bottom
