@@ -1,0 +1,33 @@
+digraph G {
+graph [ bgcolor = cornsilk, ordering = out, fontname = "Helvetica-Oblique",
+ fontsize = 12,
+ label = "\nDigraph3 (graphviz)\n R. Bisdorff, 2020", size="7,7",fontsize=10];
+T_UD [shape = "circle", label = "T_UD", fontsize=10];
+T_FHK [shape = "circle", label = "T_FHK", fontsize=10];
+T_FHM [shape = "circle", label = "T_FHM", fontsize=10];
+I_FHK [shape = "circle", label = "I_FHK", fontsize=10];
+T_USB [shape = "circle", label = "T_USB", fontsize=10];
+I_USB [shape = "circle", label = "I_USB", fontsize=10];
+T_UHB [shape = "circle", label = "T_UHB", fontsize=10];
+I_UHB [shape = "circle", label = "I_UHB", fontsize=10];
+S_HKK [shape = "circle", label = "S_HKK", fontsize=10];
+C_HKK [shape = "circle", label = "C_HKK", fontsize=10];
+{ rank = 0; I_FHK; }
+{ rank = 1; T_FHK; I_USB; }
+{ rank = 2; C_HKK; T_UD; I_UHB; }
+{ rank = 3; T_USB; S_HKK; }
+{ rank = 4; T_UHB; }
+{ rank = 5; T_FHM; }
+I_FHK-> T_FHK [style="setlinewidth(1)",color=black] ;
+I_FHK-> I_USB [style="setlinewidth(1)",color=black] ;
+T_FHK-> C_HKK [style="setlinewidth(1)",color=black] ;
+T_FHK-> T_UD [style="setlinewidth(1)",color=black] ;
+I_USB-> I_UHB [style="setlinewidth(1)",color=black] ;
+I_USB-> T_USB [style="setlinewidth(1)",color=black] ;
+C_HKK-> S_HKK [style="setlinewidth(1)",color=black] ;
+T_UD-> T_USB [style="setlinewidth(1)",color=black] ;
+I_UHB-> T_UHB [style="setlinewidth(1)",color=black] ;
+T_USB-> T_UHB [style="setlinewidth(1)",color=black] ;
+T_UHB-> T_FHM [style="setlinewidth(1)",color=black] ;
+}
+ 

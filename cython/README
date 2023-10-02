@@ -1,0 +1,41 @@
+#--------------------------------------------------------------------------
+# cython development implementation of the Digraph3 software ressources
+# Current revision Py35
+# Copyright (C) 2016-2017 Raymond Bisdorff
+#
+#    This resource is free software; you can redistribute it and/or modify
+#    it under the terms of the GNU General Public License as published by
+#    the Free Software Foundation; either version 2 of the License, or
+#    (at your option) any later version.
+#
+#    This software is distributed in the hope that it will be useful,
+#    but WITHOUT ANY WARRANTY; without even the implied warranty of
+#    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+#    GNU General Public License for more details.
+#
+#    You should have received a copy of the GNU General Public License along
+#    with this program; if not, write to the Free Software Foundation, Inc.,
+#    51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
+#
+#-----------------------------------------------------------------------------
+
+Installation instructions:
+
+../Digraph3/cython$ make install
+installs (with sudo !!) cythonized Digraph3 modules in the current running python3 environment. 
+
+Pythhon 3.5+ environment is recommemded and a cython compiler is required (...$pip3.5+ install cython). 
+
+In case of a virtual environment, use:
+../Digraph3/cython$ make installVenv
+
+Nose tests are gathered in the Digraph3/cython/Test directory (...$ pip3 install nose ):
+.. /Digraph3/cython$ make tests
+Runs a nose test suite providing programming examples
+
+A sample program example testCythonInteger.py is also included in the Test directory.
+
+Notice that the cythonized versions of the corresponding standard modules are only meant for big data problems with several thousands of decision actions. Decision actions keys are integers. All Decimal evaluations are replaced with flooat. Conversion from and to standard performance tableaux are provided both in the standard and in the cythonized modules. The cythonized outranking digraph model takes an integer valuation domain. The main reason consists in accelerating the computation of outranking characteristics.
+
+Enjoy !!
+R Bisdorff

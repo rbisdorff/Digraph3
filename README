@@ -1,0 +1,72 @@
+#--------------------------------------------------------------------------
+# Python3 implementation of the Digraph software
+# Current revision Py391
+# Copyright (C) 2006-2022 Raymond Bisdorff
+#
+#    This resource is free software; you can redistribute it and/or modify
+#    it under the terms of the GNU General Public License as published by
+#    the Free Software Foundation; either version 2 of the License, or
+#    (at your option) any later version.
+#
+#    This software is distributed in the hope that it will be useful,
+#    but WITHOUT ANY WARRANTY; without even the implied warranty of
+#    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+#    GNU General Public License for more details.
+#
+#    You should have received a copy of the GNU General Public License along
+#    with this program; if not, write to the Free Software Foundation, Inc.,
+#    51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
+#
+#-----------------------------------------------------------------------------
+
+This Python3 software resources implement decision aid algorithms useful in the field of 
+Algorithmic Decision Theory and more specifically 
+in outranking based Multiple Criteria Decision Aid (MCDA).
+
+Installation instructions:
+
+On a (Unix, Mac OSX) command line using a git client and either, cloning from github.com:
+
+...$ git clone https://github.com/rbisdorff/Digraph3
+
+or, from sourceforge.net:
+
+...$ git clone https://git.code.sf.net/p/digraph3/code Digraph3
+
+You may also download and extract a zip archive fom the github link above, or a 
+ zip archive (not always the latest) from 
+
+https://sourceforge.net/projects/digraph3/.
+
+On Linux or Mac OS, ..$ *cd* to the extracted <Digraph3> directory::
+
+     ../Digraph3$ make installVenv
+          
+installs the Digraph3 modules in an activated virtual Python environment (the official python recommended option), or in the user's local python3 *site-packages*. Whereas::
+
+     ../Digraph3$ make install
+
+installs (with *sudo ${PYTHON} setup.py*) the Digraph3 modules system wide in the current running python environment. Python 3.8 (or later) environment is recommended (see the makefile for adapting to your *PYTHON* make constant). 
+
+From Python3.10.4 on, the *distutils* package and the direct usage of *setup.py* are deprecated. The instead recommended installation via the *pip* module is provided with::
+
+     ../Digraph3$ make installPip
+
+This *make* command  launches in fact a *${PYTHON} -m pip -v install --upgrade --scr = .* command that installs the Digraph3 modules in the running virtual environment (recommended option) or the user's local *site-packages* directory. A system wide installation is possible with prefixing the *make installPip* commad with *sudo*.
+
+If the cython C-compiled modules for Big Data are required, the Cython package must previously be installed in the running Python environment (...$ python3 -m pip install cython).
+
+.. /Digraph3$ make tests
+
+runs a pytest suite in the ./test directory ( python3 pytest package required  ...$ python3 -m pip install pytest )
+
+.. /Digraph3$ make verboseTests
+runs a verbose (with stdout not captured) pytest suite 
+
+Tutorials and technical documentation of modules, classes and methods are available under the following link:
+
+https://digraph3.readthedocs.io/en/latest/
+
+Enjoy !!
+R Bisdorff
+http://rbisdorff.github.io/

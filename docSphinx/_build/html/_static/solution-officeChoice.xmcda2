@@ -1,0 +1,1370 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?xml-stylesheet type="text/xsl" href="xmcda2RubisChoice.xsl"?>
+<xmcda:XMCDA xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+ xsi:schemaLocation="http://www.decision-deck.org/2009/XMCDA-2.0.0 http://www.decision-deck.org/xmcda/_downloads/XMCDA-2.0.0.xsd"
+ xmlns:xmcda="http://www.decision-deck.org/2009/XMCDA-2.0.0" instanceID="officeChoice">
+<projectReference id="docSphinx/_static/solution-officeChoice" name="rel_officeChoice.xml">
+<title>Rubis Best Choice Recommendation</title>
+<subTitle>Performance Tableau in XMCDA-2.0 format.</subTitle>
+<author>digraphs Module (RB)</author>
+<version>saved from Python session</version>
+</projectReference>
+<methodParameters id="Rubis" name="Rubis best choice method">
+<description>
+<subTitle>Method data</subTitle>
+<comment>Rubis best choice recommendation in XMCDA format.</comment>
+<version>1.0</version>
+</description>
+<parameters>
+<parameter name="variant">
+<value>
+<label>Rubis</label>
+</value>
+</parameter>
+<parameter name="valuationType">
+<value>
+<label>bipolar</label>
+</value>
+</parameter>
+<parameter name="vetoType">
+<value>
+<label>standard</label>
+</value>
+</parameter>
+</parameters>
+</methodParameters>
+<alternatives mcdaConcept="alternatives">
+<description>
+<title>List of Alternatives</title>
+<subTitle>Potential decision actions.</subTitle>
+</description>
+<alternative id="A" name="Avenue de la Liberté">
+<description>
+<comment>High standing city centre</comment>
+</description>
+<type>real</type>
+<active>true</active>
+</alternative>
+<alternative id="B" name="Bonnevoie">
+<description>
+<comment>Industrial environment</comment>
+</description>
+<type>real</type>
+<active>true</active>
+</alternative>
+<alternative id="C" name="Cessange">
+<description>
+<comment>suburb location</comment>
+</description>
+<type>real</type>
+<active>true</active>
+</alternative>
+<alternative id="D" name="Dommeldange">
+<description>
+<comment>Industrial suburb environment</comment>
+</description>
+<type>real</type>
+<active>true</active>
+</alternative>
+<alternative id="E" name="Esch-Belval">
+<description>
+<comment>New and ambitious urbanization far from the city</comment>
+</description>
+<type>real</type>
+<active>true</active>
+</alternative>
+<alternative id="F" name="Fentange">
+<description>
+<comment>Out in the countryside</comment>
+</description>
+<type>real</type>
+<active>true</active>
+</alternative>
+<alternative id="G" name="Avenue de la Gare">
+<description>
+<comment>Main town shopping aera</comment>
+</description>
+<type>real</type>
+<active>true</active>
+</alternative>
+</alternatives>
+<criteria mcdaConcept="criteria">
+<description>
+<title>Rubis family of criteria.</title>
+</description>
+<criterion id="C" name="Costs" mcdaConcept="criterion">
+<description>
+<comment>rent, charges and cleaning</comment>
+<version>performance</version>
+</description>
+<active>true</active>
+<criterionValue><value><real>3.00</real></value></criterionValue>
+<scale>
+<quantitative>
+<preferenceDirection>min</preferenceDirection>
+<minimum><real>0.00</real></minimum>
+<maximum><real>50000.00</real></maximum>
+</quantitative>
+</scale>
+<thresholds>
+<threshold id="ind">
+<constant>
+<real>1000.00</real>
+</constant>
+</threshold>
+<threshold id="pref">
+<constant>
+<real>2500.00</real>
+</constant>
+</threshold>
+<threshold id="veto">
+<constant>
+<real>35000.00</real>
+</constant>
+</threshold>
+</thresholds>
+</criterion>
+<criterion id="Cf" name="Comfort" mcdaConcept="criterion">
+<description>
+<comment>quality of the office equipments</comment>
+<version>performance</version>
+</description>
+<active>true</active>
+<criterionValue><value><real>1.00</real></value></criterionValue>
+<scale>
+<quantitative>
+<preferenceDirection>max</preferenceDirection>
+<minimum><real>0.00</real></minimum>
+<maximum><real>100.00</real></maximum>
+</quantitative>
+</scale>
+<thresholds>
+<threshold id="ind">
+<constant>
+<real>10.00</real>
+</constant>
+</threshold>
+<threshold id="pref">
+<constant>
+<real>20.00</real>
+</constant>
+</threshold>
+<threshold id="veto">
+<constant>
+<real>80.00</real>
+</constant>
+</threshold>
+</thresholds>
+</criterion>
+<criterion id="P" name="Parking" mcdaConcept="criterion">
+<description>
+<comment>available parking facilities</comment>
+<version>performance</version>
+</description>
+<active>true</active>
+<criterionValue><value><real>1.00</real></value></criterionValue>
+<scale>
+<quantitative>
+<preferenceDirection>max</preferenceDirection>
+<minimum><real>0.00</real></minimum>
+<maximum><real>100.00</real></maximum>
+</quantitative>
+</scale>
+<thresholds>
+<threshold id="ind">
+<constant>
+<real>10.00</real>
+</constant>
+</threshold>
+<threshold id="pref">
+<constant>
+<real>20.00</real>
+</constant>
+</threshold>
+<threshold id="veto">
+<constant>
+<real>80.00</real>
+</constant>
+</threshold>
+</thresholds>
+</criterion>
+<criterion id="Pr" name="Proximity" mcdaConcept="criterion">
+<description>
+<comment>distance from a town center</comment>
+<version>performance</version>
+</description>
+<active>true</active>
+<criterionValue><value><real>1.00</real></value></criterionValue>
+<scale>
+<quantitative>
+<preferenceDirection>max</preferenceDirection>
+<minimum><real>0.00</real></minimum>
+<maximum><real>100.00</real></maximum>
+</quantitative>
+</scale>
+<thresholds>
+<threshold id="ind">
+<constant>
+<real>10.00</real>
+</constant>
+</threshold>
+<threshold id="pref">
+<constant>
+<real>20.00</real>
+</constant>
+</threshold>
+<threshold id="veto">
+<constant>
+<real>80.00</real>
+</constant>
+</threshold>
+</thresholds>
+</criterion>
+<criterion id="St" name="Standing" mcdaConcept="criterion">
+<description>
+<comment>image et presentation</comment>
+<version>performance</version>
+</description>
+<active>true</active>
+<criterionValue><value><real>1.00</real></value></criterionValue>
+<scale>
+<quantitative>
+<preferenceDirection>max</preferenceDirection>
+<minimum><real>0.00</real></minimum>
+<maximum><real>100.00</real></maximum>
+</quantitative>
+</scale>
+<thresholds>
+<threshold id="ind">
+<constant>
+<real>10.00</real>
+</constant>
+</threshold>
+<threshold id="pref">
+<constant>
+<real>20.00</real>
+</constant>
+</threshold>
+<threshold id="veto">
+<constant>
+<real>80.00</real>
+</constant>
+</threshold>
+</thresholds>
+</criterion>
+<criterion id="V" name="Visibility" mcdaConcept="criterion">
+<description>
+<comment>circulation of potential customers</comment>
+<version>performance</version>
+</description>
+<active>true</active>
+<criterionValue><value><real>1.00</real></value></criterionValue>
+<scale>
+<quantitative>
+<preferenceDirection>max</preferenceDirection>
+<minimum><real>0.00</real></minimum>
+<maximum><real>100.00</real></maximum>
+</quantitative>
+</scale>
+<thresholds>
+<threshold id="ind">
+<constant>
+<real>10.00</real>
+</constant>
+</threshold>
+<threshold id="pref">
+<constant>
+<real>20.00</real>
+</constant>
+</threshold>
+<threshold id="veto">
+<constant>
+<real>80.00</real>
+</constant>
+</threshold>
+</thresholds>
+</criterion>
+<criterion id="W" name="Working space" mcdaConcept="criterion">
+<description>
+<comment>in square meters</comment>
+<version>performance</version>
+</description>
+<active>true</active>
+<criterionValue><value><real>1.00</real></value></criterionValue>
+<scale>
+<quantitative>
+<preferenceDirection>max</preferenceDirection>
+<minimum><real>0.00</real></minimum>
+<maximum><real>100.00</real></maximum>
+</quantitative>
+</scale>
+<thresholds>
+<threshold id="ind">
+<constant>
+<real>10.00</real>
+</constant>
+</threshold>
+<threshold id="pref">
+<constant>
+<real>20.00</real>
+</constant>
+</threshold>
+<threshold id="veto">
+<constant>
+<real>80.00</real>
+</constant>
+</threshold>
+</thresholds>
+</criterion>
+</criteria>
+<performanceTable mcdaConcept="performanceTable">
+<description>
+<title>Rubis Performance Table</title>
+</description>
+<alternativePerformances>
+<alternativeID>A</alternativeID>
+<performance>
+<criterionID>C</criterionID>
+<value><real>35000.00</real></value>
+</performance>
+<performance>
+<criterionID>Cf</criterionID>
+<value><real>0.00</real></value>
+</performance>
+<performance>
+<criterionID>P</criterionID>
+<value><real>90.00</real></value>
+</performance>
+<performance>
+<criterionID>Pr</criterionID>
+<value><real>100.00</real></value>
+</performance>
+<performance>
+<criterionID>St</criterionID>
+<value><real>100.00</real></value>
+</performance>
+<performance>
+<criterionID>V</criterionID>
+<value><real>60.00</real></value>
+</performance>
+<performance>
+<criterionID>W</criterionID>
+<value><real>75.00</real></value>
+</performance>
+</alternativePerformances>
+<alternativePerformances>
+<alternativeID>B</alternativeID>
+<performance>
+<criterionID>C</criterionID>
+<value><real>17800.00</real></value>
+</performance>
+<performance>
+<criterionID>Cf</criterionID>
+<value><real>100.00</real></value>
+</performance>
+<performance>
+<criterionID>P</criterionID>
+<value><real>30.00</real></value>
+</performance>
+<performance>
+<criterionID>Pr</criterionID>
+<value><real>20.00</real></value>
+</performance>
+<performance>
+<criterionID>St</criterionID>
+<value><real>10.00</real></value>
+</performance>
+<performance>
+<criterionID>V</criterionID>
+<value><real>80.00</real></value>
+</performance>
+<performance>
+<criterionID>W</criterionID>
+<value><real>30.00</real></value>
+</performance>
+</alternativePerformances>
+<alternativePerformances>
+<alternativeID>C</alternativeID>
+<performance>
+<criterionID>C</criterionID>
+<value><real>6700.00</real></value>
+</performance>
+<performance>
+<criterionID>Cf</criterionID>
+<value><real>10.00</real></value>
+</performance>
+<performance>
+<criterionID>P</criterionID>
+<value><real>100.00</real></value>
+</performance>
+<performance>
+<criterionID>Pr</criterionID>
+<value><real>80.00</real></value>
+</performance>
+<performance>
+<criterionID>St</criterionID>
+<value><real>0.00</real></value>
+</performance>
+<performance>
+<criterionID>V</criterionID>
+<value><real>70.00</real></value>
+</performance>
+<performance>
+<criterionID>W</criterionID>
+<value><real>0.00</real></value>
+</performance>
+</alternativePerformances>
+<alternativePerformances>
+<alternativeID>D</alternativeID>
+<performance>
+<criterionID>C</criterionID>
+<value><real>14100.00</real></value>
+</performance>
+<performance>
+<criterionID>Cf</criterionID>
+<value><real>30.00</real></value>
+</performance>
+<performance>
+<criterionID>P</criterionID>
+<value><real>90.00</real></value>
+</performance>
+<performance>
+<criterionID>Pr</criterionID>
+<value><real>70.00</real></value>
+</performance>
+<performance>
+<criterionID>St</criterionID>
+<value><real>30.00</real></value>
+</performance>
+<performance>
+<criterionID>V</criterionID>
+<value><real>50.00</real></value>
+</performance>
+<performance>
+<criterionID>W</criterionID>
+<value><real>55.00</real></value>
+</performance>
+</alternativePerformances>
+<alternativePerformances>
+<alternativeID>E</alternativeID>
+<performance>
+<criterionID>C</criterionID>
+<value><real>34800.00</real></value>
+</performance>
+<performance>
+<criterionID>Cf</criterionID>
+<value><real>60.00</real></value>
+</performance>
+<performance>
+<criterionID>P</criterionID>
+<value><real>70.00</real></value>
+</performance>
+<performance>
+<criterionID>Pr</criterionID>
+<value><real>40.00</real></value>
+</performance>
+<performance>
+<criterionID>St</criterionID>
+<value><real>90.00</real></value>
+</performance>
+<performance>
+<criterionID>V</criterionID>
+<value><real>60.00</real></value>
+</performance>
+<performance>
+<criterionID>W</criterionID>
+<value><real>100.00</real></value>
+</performance>
+</alternativePerformances>
+<alternativePerformances>
+<alternativeID>F</alternativeID>
+<performance>
+<criterionID>C</criterionID>
+<value><real>18600.00</real></value>
+</performance>
+<performance>
+<criterionID>Cf</criterionID>
+<value><real>80.00</real></value>
+</performance>
+<performance>
+<criterionID>P</criterionID>
+<value><real>0.00</real></value>
+</performance>
+<performance>
+<criterionID>Pr</criterionID>
+<value><real>0.00</real></value>
+</performance>
+<performance>
+<criterionID>St</criterionID>
+<value><real>70.00</real></value>
+</performance>
+<performance>
+<criterionID>V</criterionID>
+<value><real>0.00</real></value>
+</performance>
+<performance>
+<criterionID>W</criterionID>
+<value><real>0.00</real></value>
+</performance>
+</alternativePerformances>
+<alternativePerformances>
+<alternativeID>G</alternativeID>
+<performance>
+<criterionID>C</criterionID>
+<value><real>12000.00</real></value>
+</performance>
+<performance>
+<criterionID>Cf</criterionID>
+<value><real>50.00</real></value>
+</performance>
+<performance>
+<criterionID>P</criterionID>
+<value><real>80.00</real></value>
+</performance>
+<performance>
+<criterionID>Pr</criterionID>
+<value><real>60.00</real></value>
+</performance>
+<performance>
+<criterionID>St</criterionID>
+<value><real>20.00</real></value>
+</performance>
+<performance>
+<criterionID>V</criterionID>
+<value><real>100.00</real></value>
+</performance>
+<performance>
+<criterionID>W</criterionID>
+<value><real>50.00</real></value>
+</performance>
+</alternativePerformances>
+</performanceTable>
+<criteriaComparisons mcdaConcept="correlationTable">
+<description>
+<title>Ordinal Criteria Correlation Index</title>
+<comment>Generalisation of Kendall&apos;s &#964; to nested homogeneous semiorders.</comment>
+</description>
+<comparisonType>correlation</comparisonType><pairs>
+<pair>
+<initial><criterionID>C</criterionID></initial>
+<terminal><criterionID>C</criterionID></terminal>
+<value><real>1.00</real></value>
+</pair>
+<pair>
+<initial><criterionID>C</criterionID></initial>
+<terminal><criterionID>Cf</criterionID></terminal>
+<value><real>-0.17</real></value>
+</pair>
+<pair>
+<initial><criterionID>C</criterionID></initial>
+<terminal><criterionID>P</criterionID></terminal>
+<value><real>0.27</real></value>
+</pair>
+<pair>
+<initial><criterionID>C</criterionID></initial>
+<terminal><criterionID>Pr</criterionID></terminal>
+<value><real>0.17</real></value>
+</pair>
+<pair>
+<initial><criterionID>C</criterionID></initial>
+<terminal><criterionID>St</criterionID></terminal>
+<value><real>-0.61</real></value>
+</pair>
+<pair>
+<initial><criterionID>C</criterionID></initial>
+<terminal><criterionID>V</criterionID></terminal>
+<value><real>0.32</real></value>
+</pair>
+<pair>
+<initial><criterionID>C</criterionID></initial>
+<terminal><criterionID>W</criterionID></terminal>
+<value><real>-0.41</real></value>
+</pair>
+<pair>
+<initial><criterionID>Cf</criterionID></initial>
+<terminal><criterionID>C</criterionID></terminal>
+<value><real>-0.17</real></value>
+</pair>
+<pair>
+<initial><criterionID>Cf</criterionID></initial>
+<terminal><criterionID>Cf</criterionID></terminal>
+<value><real>1.00</real></value>
+</pair>
+<pair>
+<initial><criterionID>Cf</criterionID></initial>
+<terminal><criterionID>P</criterionID></terminal>
+<value><real>-0.52</real></value>
+</pair>
+<pair>
+<initial><criterionID>Cf</criterionID></initial>
+<terminal><criterionID>Pr</criterionID></terminal>
+<value><real>-0.71</real></value>
+</pair>
+<pair>
+<initial><criterionID>Cf</criterionID></initial>
+<terminal><criterionID>St</criterionID></terminal>
+<value><real>-0.05</real></value>
+</pair>
+<pair>
+<initial><criterionID>Cf</criterionID></initial>
+<terminal><criterionID>V</criterionID></terminal>
+<value><real>0.05</real></value>
+</pair>
+<pair>
+<initial><criterionID>Cf</criterionID></initial>
+<terminal><criterionID>W</criterionID></terminal>
+<value><real>-0.14</real></value>
+</pair>
+<pair>
+<initial><criterionID>P</criterionID></initial>
+<terminal><criterionID>C</criterionID></terminal>
+<value><real>0.27</real></value>
+</pair>
+<pair>
+<initial><criterionID>P</criterionID></initial>
+<terminal><criterionID>Cf</criterionID></terminal>
+<value><real>-0.52</real></value>
+</pair>
+<pair>
+<initial><criterionID>P</criterionID></initial>
+<terminal><criterionID>P</criterionID></terminal>
+<value><real>1.00</real></value>
+</pair>
+<pair>
+<initial><criterionID>P</criterionID></initial>
+<terminal><criterionID>Pr</criterionID></terminal>
+<value><real>0.81</real></value>
+</pair>
+<pair>
+<initial><criterionID>P</criterionID></initial>
+<terminal><criterionID>St</criterionID></terminal>
+<value><real>-0.05</real></value>
+</pair>
+<pair>
+<initial><criterionID>P</criterionID></initial>
+<terminal><criterionID>V</criterionID></terminal>
+<value><real>0.24</real></value>
+</pair>
+<pair>
+<initial><criterionID>P</criterionID></initial>
+<terminal><criterionID>W</criterionID></terminal>
+<value><real>0.24</real></value>
+</pair>
+<pair>
+<initial><criterionID>Pr</criterionID></initial>
+<terminal><criterionID>C</criterionID></terminal>
+<value><real>0.17</real></value>
+</pair>
+<pair>
+<initial><criterionID>Pr</criterionID></initial>
+<terminal><criterionID>Cf</criterionID></terminal>
+<value><real>-0.71</real></value>
+</pair>
+<pair>
+<initial><criterionID>Pr</criterionID></initial>
+<terminal><criterionID>P</criterionID></terminal>
+<value><real>0.81</real></value>
+</pair>
+<pair>
+<initial><criterionID>Pr</criterionID></initial>
+<terminal><criterionID>Pr</criterionID></terminal>
+<value><real>1.00</real></value>
+</pair>
+<pair>
+<initial><criterionID>Pr</criterionID></initial>
+<terminal><criterionID>St</criterionID></terminal>
+<value><real>0.05</real></value>
+</pair>
+<pair>
+<initial><criterionID>Pr</criterionID></initial>
+<terminal><criterionID>V</criterionID></terminal>
+<value><real>0.14</real></value>
+</pair>
+<pair>
+<initial><criterionID>Pr</criterionID></initial>
+<terminal><criterionID>W</criterionID></terminal>
+<value><real>0.33</real></value>
+</pair>
+<pair>
+<initial><criterionID>St</criterionID></initial>
+<terminal><criterionID>C</criterionID></terminal>
+<value><real>-0.61</real></value>
+</pair>
+<pair>
+<initial><criterionID>St</criterionID></initial>
+<terminal><criterionID>Cf</criterionID></terminal>
+<value><real>-0.05</real></value>
+</pair>
+<pair>
+<initial><criterionID>St</criterionID></initial>
+<terminal><criterionID>P</criterionID></terminal>
+<value><real>-0.05</real></value>
+</pair>
+<pair>
+<initial><criterionID>St</criterionID></initial>
+<terminal><criterionID>Pr</criterionID></terminal>
+<value><real>0.05</real></value>
+</pair>
+<pair>
+<initial><criterionID>St</criterionID></initial>
+<terminal><criterionID>St</criterionID></terminal>
+<value><real>1.00</real></value>
+</pair>
+<pair>
+<initial><criterionID>St</criterionID></initial>
+<terminal><criterionID>V</criterionID></terminal>
+<value><real>-0.24</real></value>
+</pair>
+<pair>
+<initial><criterionID>St</criterionID></initial>
+<terminal><criterionID>W</criterionID></terminal>
+<value><real>0.52</real></value>
+</pair>
+<pair>
+<initial><criterionID>V</criterionID></initial>
+<terminal><criterionID>C</criterionID></terminal>
+<value><real>0.32</real></value>
+</pair>
+<pair>
+<initial><criterionID>V</criterionID></initial>
+<terminal><criterionID>Cf</criterionID></terminal>
+<value><real>0.05</real></value>
+</pair>
+<pair>
+<initial><criterionID>V</criterionID></initial>
+<terminal><criterionID>P</criterionID></terminal>
+<value><real>0.24</real></value>
+</pair>
+<pair>
+<initial><criterionID>V</criterionID></initial>
+<terminal><criterionID>Pr</criterionID></terminal>
+<value><real>0.14</real></value>
+</pair>
+<pair>
+<initial><criterionID>V</criterionID></initial>
+<terminal><criterionID>St</criterionID></terminal>
+<value><real>-0.24</real></value>
+</pair>
+<pair>
+<initial><criterionID>V</criterionID></initial>
+<terminal><criterionID>V</criterionID></terminal>
+<value><real>1.00</real></value>
+</pair>
+<pair>
+<initial><criterionID>V</criterionID></initial>
+<terminal><criterionID>W</criterionID></terminal>
+<value><real>0.05</real></value>
+</pair>
+<pair>
+<initial><criterionID>W</criterionID></initial>
+<terminal><criterionID>C</criterionID></terminal>
+<value><real>-0.41</real></value>
+</pair>
+<pair>
+<initial><criterionID>W</criterionID></initial>
+<terminal><criterionID>Cf</criterionID></terminal>
+<value><real>-0.14</real></value>
+</pair>
+<pair>
+<initial><criterionID>W</criterionID></initial>
+<terminal><criterionID>P</criterionID></terminal>
+<value><real>0.24</real></value>
+</pair>
+<pair>
+<initial><criterionID>W</criterionID></initial>
+<terminal><criterionID>Pr</criterionID></terminal>
+<value><real>0.33</real></value>
+</pair>
+<pair>
+<initial><criterionID>W</criterionID></initial>
+<terminal><criterionID>St</criterionID></terminal>
+<value><real>0.52</real></value>
+</pair>
+<pair>
+<initial><criterionID>W</criterionID></initial>
+<terminal><criterionID>V</criterionID></terminal>
+<value><real>0.05</real></value>
+</pair>
+<pair>
+<initial><criterionID>W</criterionID></initial>
+<terminal><criterionID>W</criterionID></terminal>
+<value><real>1.00</real></value>
+</pair>
+</pairs>
+</criteriaComparisons>
+<alternativesComparisons name="Stilde" mcdaConcept="outrankingDigraph">
+<description>
+<title>Bipolar-valued Outranking Relation</title>
+<comment>Rubis Choice Recommendation Relation</comment>
+</description>
+<valuation>
+<description>
+<subTitle>Valuation Domain</subTitle>
+<comment>Significance degrees</comment>
+</description>
+<valuationType>bipolar</valuationType>
+<quantitative><minimum><real>-100.00</real></minimum><maximum><real>100.00</real></maximum></quantitative>
+</valuation>
+<pairs>
+<description>
+<subTitle>Valued Adjacency Table</subTitle>
+<comment>Pairwise outranking significance degrees in the range: -100.00 to 100.00</comment>
+</description>
+<pair>
+<initial><alternativeID>A</alternativeID></initial>
+<terminal><alternativeID>A</alternativeID></terminal>
+<value><real>0.00</real></value></pair>
+<pair>
+<initial><alternativeID>A</alternativeID></initial>
+<terminal><alternativeID>B</alternativeID></terminal>
+<value><real>0.00</real></value></pair>
+<pair>
+<initial><alternativeID>A</alternativeID></initial>
+<terminal><alternativeID>C</alternativeID></terminal>
+<value><real>100.00</real></value></pair>
+<pair>
+<initial><alternativeID>A</alternativeID></initial>
+<terminal><alternativeID>D</alternativeID></terminal>
+<value><real>11.11</real></value></pair>
+<pair>
+<initial><alternativeID>A</alternativeID></initial>
+<terminal><alternativeID>E</alternativeID></terminal>
+<value><real>55.56</real></value></pair>
+<pair>
+<initial><alternativeID>A</alternativeID></initial>
+<terminal><alternativeID>F</alternativeID></terminal>
+<value><real>0.00</real></value></pair>
+<pair>
+<initial><alternativeID>A</alternativeID></initial>
+<terminal><alternativeID>G</alternativeID></terminal>
+<value><real>0.00</real></value></pair>
+<pair>
+<initial><alternativeID>B</alternativeID></initial>
+<terminal><alternativeID>A</alternativeID></terminal>
+<value><real>0.00</real></value></pair>
+<pair>
+<initial><alternativeID>B</alternativeID></initial>
+<terminal><alternativeID>B</alternativeID></terminal>
+<value><real>0.00</real></value></pair>
+<pair>
+<initial><alternativeID>B</alternativeID></initial>
+<terminal><alternativeID>C</alternativeID></terminal>
+<value><real>0.00</real></value></pair>
+<pair>
+<initial><alternativeID>B</alternativeID></initial>
+<terminal><alternativeID>D</alternativeID></terminal>
+<value><real>-55.56</real></value></pair>
+<pair>
+<initial><alternativeID>B</alternativeID></initial>
+<terminal><alternativeID>E</alternativeID></terminal>
+<value><real>0.00</real></value></pair>
+<pair>
+<initial><alternativeID>B</alternativeID></initial>
+<terminal><alternativeID>F</alternativeID></terminal>
+<value><real>100.00</real></value></pair>
+<pair>
+<initial><alternativeID>B</alternativeID></initial>
+<terminal><alternativeID>G</alternativeID></terminal>
+<value><real>-55.56</real></value></pair>
+<pair>
+<initial><alternativeID>C</alternativeID></initial>
+<terminal><alternativeID>A</alternativeID></terminal>
+<value><real>0.00</real></value></pair>
+<pair>
+<initial><alternativeID>C</alternativeID></initial>
+<terminal><alternativeID>B</alternativeID></terminal>
+<value><real>0.00</real></value></pair>
+<pair>
+<initial><alternativeID>C</alternativeID></initial>
+<terminal><alternativeID>C</alternativeID></terminal>
+<value><real>0.00</real></value></pair>
+<pair>
+<initial><alternativeID>C</alternativeID></initial>
+<terminal><alternativeID>D</alternativeID></terminal>
+<value><real>33.33</real></value></pair>
+<pair>
+<initial><alternativeID>C</alternativeID></initial>
+<terminal><alternativeID>E</alternativeID></terminal>
+<value><real>0.00</real></value></pair>
+<pair>
+<initial><alternativeID>C</alternativeID></initial>
+<terminal><alternativeID>F</alternativeID></terminal>
+<value><real>100.00</real></value></pair>
+<pair>
+<initial><alternativeID>C</alternativeID></initial>
+<terminal><alternativeID>G</alternativeID></terminal>
+<value><real>11.11</real></value></pair>
+<pair>
+<initial><alternativeID>D</alternativeID></initial>
+<terminal><alternativeID>A</alternativeID></terminal>
+<value><real>33.33</real></value></pair>
+<pair>
+<initial><alternativeID>D</alternativeID></initial>
+<terminal><alternativeID>B</alternativeID></terminal>
+<value><real>55.56</real></value></pair>
+<pair>
+<initial><alternativeID>D</alternativeID></initial>
+<terminal><alternativeID>C</alternativeID></terminal>
+<value><real>11.11</real></value></pair>
+<pair>
+<initial><alternativeID>D</alternativeID></initial>
+<terminal><alternativeID>D</alternativeID></terminal>
+<value><real>0.00</real></value></pair>
+<pair>
+<initial><alternativeID>D</alternativeID></initial>
+<terminal><alternativeID>E</alternativeID></terminal>
+<value><real>33.33</real></value></pair>
+<pair>
+<initial><alternativeID>D</alternativeID></initial>
+<terminal><alternativeID>F</alternativeID></terminal>
+<value><real>100.00</real></value></pair>
+<pair>
+<initial><alternativeID>D</alternativeID></initial>
+<terminal><alternativeID>G</alternativeID></terminal>
+<value><real>22.22</real></value></pair>
+<pair>
+<initial><alternativeID>E</alternativeID></initial>
+<terminal><alternativeID>A</alternativeID></terminal>
+<value><real>55.56</real></value></pair>
+<pair>
+<initial><alternativeID>E</alternativeID></initial>
+<terminal><alternativeID>B</alternativeID></terminal>
+<value><real>0.00</real></value></pair>
+<pair>
+<initial><alternativeID>E</alternativeID></initial>
+<terminal><alternativeID>C</alternativeID></terminal>
+<value><real>0.00</real></value></pair>
+<pair>
+<initial><alternativeID>E</alternativeID></initial>
+<terminal><alternativeID>D</alternativeID></terminal>
+<value><real>-11.11</real></value></pair>
+<pair>
+<initial><alternativeID>E</alternativeID></initial>
+<terminal><alternativeID>E</alternativeID></terminal>
+<value><real>0.00</real></value></pair>
+<pair>
+<initial><alternativeID>E</alternativeID></initial>
+<terminal><alternativeID>F</alternativeID></terminal>
+<value><real>100.00</real></value></pair>
+<pair>
+<initial><alternativeID>E</alternativeID></initial>
+<terminal><alternativeID>G</alternativeID></terminal>
+<value><real>-11.11</real></value></pair>
+<pair>
+<initial><alternativeID>F</alternativeID></initial>
+<terminal><alternativeID>A</alternativeID></terminal>
+<value><real>0.00</real></value></pair>
+<pair>
+<initial><alternativeID>F</alternativeID></initial>
+<terminal><alternativeID>B</alternativeID></terminal>
+<value><real>-100.00</real></value></pair>
+<pair>
+<initial><alternativeID>F</alternativeID></initial>
+<terminal><alternativeID>C</alternativeID></terminal>
+<value><real>-100.00</real></value></pair>
+<pair>
+<initial><alternativeID>F</alternativeID></initial>
+<terminal><alternativeID>D</alternativeID></terminal>
+<value><real>-100.00</real></value></pair>
+<pair>
+<initial><alternativeID>F</alternativeID></initial>
+<terminal><alternativeID>E</alternativeID></terminal>
+<value><real>-100.00</real></value></pair>
+<pair>
+<initial><alternativeID>F</alternativeID></initial>
+<terminal><alternativeID>F</alternativeID></terminal>
+<value><real>0.00</real></value></pair>
+<pair>
+<initial><alternativeID>F</alternativeID></initial>
+<terminal><alternativeID>G</alternativeID></terminal>
+<value><real>-100.00</real></value></pair>
+<pair>
+<initial><alternativeID>G</alternativeID></initial>
+<terminal><alternativeID>A</alternativeID></terminal>
+<value><real>0.00</real></value></pair>
+<pair>
+<initial><alternativeID>G</alternativeID></initial>
+<terminal><alternativeID>B</alternativeID></terminal>
+<value><real>77.78</real></value></pair>
+<pair>
+<initial><alternativeID>G</alternativeID></initial>
+<terminal><alternativeID>C</alternativeID></terminal>
+<value><real>-11.11</real></value></pair>
+<pair>
+<initial><alternativeID>G</alternativeID></initial>
+<terminal><alternativeID>D</alternativeID></terminal>
+<value><real>100.00</real></value></pair>
+<pair>
+<initial><alternativeID>G</alternativeID></initial>
+<terminal><alternativeID>E</alternativeID></terminal>
+<value><real>55.56</real></value></pair>
+<pair>
+<initial><alternativeID>G</alternativeID></initial>
+<terminal><alternativeID>F</alternativeID></terminal>
+<value><real>100.00</real></value></pair>
+<pair>
+<initial><alternativeID>G</alternativeID></initial>
+<terminal><alternativeID>G</alternativeID></terminal>
+<value><real>0.00</real></value></pair>
+</pairs>
+</alternativesComparisons>
+<alternativesComparisons mcdaConcept="Vetoes">
+<description>
+<title>Vetoes</title>
+</description>
+<pairs>
+<description>
+<subTitle>Effective and potential veto situations</subTitle>
+</description>
+<pair>
+<description>
+<comment>concordance degree:-11.11</comment>
+</description>
+<initial><alternativeID>A</alternativeID></initial>
+<terminal><alternativeID>B</alternativeID></terminal>
+<values id="Cf">
+<description>
+<comment>potential veto</comment>
+</description>
+<value name="performanceDifference">
+<real>-100.00</real></value>
+<value name="vetoCharacteristic">
+<real>1.00</real></value>
+</values>
+</pair>
+<pair>
+<description>
+<comment>concordance degree:11.11</comment>
+</description>
+<initial><alternativeID>A</alternativeID></initial>
+<terminal><alternativeID>F</alternativeID></terminal>
+<values id="Cf">
+<description>
+<comment>effective veto</comment>
+</description>
+<value name="performanceDifference">
+<real>-80.00</real></value>
+<value name="vetoCharacteristic">
+<real>1.00</real></value>
+</values>
+</pair>
+<pair>
+<description>
+<comment>concordance degree:11.11</comment>
+</description>
+<initial><alternativeID>B</alternativeID></initial>
+<terminal><alternativeID>A</alternativeID></terminal>
+<values id="Pr">
+<description>
+<comment>effective veto</comment>
+</description>
+<value name="performanceDifference">
+<real>-80.00</real></value>
+<value name="vetoCharacteristic">
+<real>1.00</real></value>
+</values>
+<values id="St">
+<description>
+<comment>effective veto</comment>
+</description>
+<value name="performanceDifference">
+<real>-90.00</real></value>
+<value name="vetoCharacteristic">
+<real>1.00</real></value>
+</values>
+</pair>
+<pair>
+<description>
+<comment>concordance degree:11.11</comment>
+</description>
+<initial><alternativeID>B</alternativeID></initial>
+<terminal><alternativeID>E</alternativeID></terminal>
+<values id="St">
+<description>
+<comment>effective veto</comment>
+</description>
+<value name="performanceDifference">
+<real>-80.00</real></value>
+<value name="vetoCharacteristic">
+<real>1.00</real></value>
+</values>
+</pair>
+<pair>
+<description>
+<comment>concordance degree:33.33</comment>
+</description>
+<initial><alternativeID>C</alternativeID></initial>
+<terminal><alternativeID>A</alternativeID></terminal>
+<values id="St">
+<description>
+<comment>effective veto</comment>
+</description>
+<value name="performanceDifference">
+<real>-100.00</real></value>
+<value name="vetoCharacteristic">
+<real>1.00</real></value>
+</values>
+</pair>
+<pair>
+<description>
+<comment>concordance degree:55.56</comment>
+</description>
+<initial><alternativeID>C</alternativeID></initial>
+<terminal><alternativeID>B</alternativeID></terminal>
+<values id="Cf">
+<description>
+<comment>effective veto</comment>
+</description>
+<value name="performanceDifference">
+<real>-90.00</real></value>
+<value name="vetoCharacteristic">
+<real>1.00</real></value>
+</values>
+</pair>
+<pair>
+<description>
+<comment>concordance degree:33.33</comment>
+</description>
+<initial><alternativeID>C</alternativeID></initial>
+<terminal><alternativeID>E</alternativeID></terminal>
+<values id="St">
+<description>
+<comment>effective veto</comment>
+</description>
+<value name="performanceDifference">
+<real>-90.00</real></value>
+<value name="vetoCharacteristic">
+<real>1.00</real></value>
+</values>
+<values id="W">
+<description>
+<comment>effective veto</comment>
+</description>
+<value name="performanceDifference">
+<real>-100.00</real></value>
+<value name="vetoCharacteristic">
+<real>1.00</real></value>
+</values>
+</pair>
+<pair>
+<description>
+<comment>concordance degree:-11.11</comment>
+</description>
+<initial><alternativeID>F</alternativeID></initial>
+<terminal><alternativeID>A</alternativeID></terminal>
+<values id="P">
+<description>
+<comment>potential veto</comment>
+</description>
+<value name="performanceDifference">
+<real>-90.00</real></value>
+<value name="vetoCharacteristic">
+<real>1.00</real></value>
+</values>
+<values id="Pr">
+<description>
+<comment>potential veto</comment>
+</description>
+<value name="performanceDifference">
+<real>-100.00</real></value>
+<value name="vetoCharacteristic">
+<real>1.00</real></value>
+</values>
+</pair>
+<pair>
+<description>
+<comment>concordance degree:-11.11</comment>
+</description>
+<initial><alternativeID>F</alternativeID></initial>
+<terminal><alternativeID>B</alternativeID></terminal>
+<values id="V">
+<description>
+<comment>potential veto</comment>
+</description>
+<value name="performanceDifference">
+<real>-80.00</real></value>
+<value name="vetoCharacteristic">
+<real>1.00</real></value>
+</values>
+</pair>
+<pair>
+<description>
+<comment>concordance degree:-33.33</comment>
+</description>
+<initial><alternativeID>F</alternativeID></initial>
+<terminal><alternativeID>C</alternativeID></terminal>
+<values id="P">
+<description>
+<comment>potential veto</comment>
+</description>
+<value name="performanceDifference">
+<real>-100.00</real></value>
+<value name="vetoCharacteristic">
+<real>1.00</real></value>
+</values>
+<values id="Pr">
+<description>
+<comment>potential veto</comment>
+</description>
+<value name="performanceDifference">
+<real>-80.00</real></value>
+<value name="vetoCharacteristic">
+<real>1.00</real></value>
+</values>
+</pair>
+<pair>
+<description>
+<comment>concordance degree:-55.56</comment>
+</description>
+<initial><alternativeID>F</alternativeID></initial>
+<terminal><alternativeID>D</alternativeID></terminal>
+<values id="P">
+<description>
+<comment>potential veto</comment>
+</description>
+<value name="performanceDifference">
+<real>-90.00</real></value>
+<value name="vetoCharacteristic">
+<real>1.00</real></value>
+</values>
+</pair>
+<pair>
+<description>
+<comment>concordance degree:-11.11</comment>
+</description>
+<initial><alternativeID>F</alternativeID></initial>
+<terminal><alternativeID>E</alternativeID></terminal>
+<values id="W">
+<description>
+<comment>potential veto</comment>
+</description>
+<value name="performanceDifference">
+<real>-100.00</real></value>
+<value name="vetoCharacteristic">
+<real>1.00</real></value>
+</values>
+</pair>
+<pair>
+<description>
+<comment>concordance degree:-55.56</comment>
+</description>
+<initial><alternativeID>F</alternativeID></initial>
+<terminal><alternativeID>G</alternativeID></terminal>
+<values id="P">
+<description>
+<comment>potential veto</comment>
+</description>
+<value name="performanceDifference">
+<real>-80.00</real></value>
+<value name="vetoCharacteristic">
+<real>1.00</real></value>
+</values>
+<values id="V">
+<description>
+<comment>potential veto</comment>
+</description>
+<value name="performanceDifference">
+<real>-100.00</real></value>
+<value name="vetoCharacteristic">
+<real>1.00</real></value>
+</values>
+</pair>
+<pair>
+<description>
+<comment>concordance degree:33.33</comment>
+</description>
+<initial><alternativeID>G</alternativeID></initial>
+<terminal><alternativeID>A</alternativeID></terminal>
+<values id="St">
+<description>
+<comment>effective veto</comment>
+</description>
+<value name="performanceDifference">
+<real>-80.00</real></value>
+<value name="vetoCharacteristic">
+<real>1.00</real></value>
+</values>
+</pair>
+</pairs>
+</alternativesComparisons>
+<alternativesSets mcdaConcept="goodChoices">
+<description>
+<title>Rubis Choice Recommendation</title>
+<comment>In decreasing order of determinateness. All values expressed in %. </comment>
+</description>
+<alternativesSet id="good_1" mcdaConcept="goodChoice">
+<description>
+<comment>Best choice</comment>
+</description>
+<element>
+<alternativeID>D</alternativeID>
+</element>
+<values>
+<value name="choiceSet independence"><real>100.00</real></value>
+<value name="outranking"><real>55.56</real></value>
+<value name="outranked"><real>0.00</real></value>
+<value name="determinateness"><real>55.56</real></value>
+</values>
+</alternativesSet>
+<alternativesSet id="good_2" mcdaConcept="goodChoice">
+<description>
+<comment>Potential good choice</comment>
+</description>
+<element>
+<alternativeID>A</alternativeID>
+</element>
+<element>
+<alternativeID>G</alternativeID>
+</element>
+<values>
+<value name="choiceSet independence"><real>50.00</real></value>
+<value name="outranking"><real>77.78</real></value>
+<value name="outranked"><real>50.00</real></value>
+<value name="determinateness"><real>50.00</real></value>
+</values>
+</alternativesSet>
+<alternativesSet id="good_3" mcdaConcept="goodChoice">
+<description>
+<comment>Potential good choice</comment>
+</description>
+<element>
+<alternativeID>B</alternativeID>
+</element>
+<element>
+<alternativeID>E</alternativeID>
+</element>
+<element>
+<alternativeID>C</alternativeID>
+</element>
+<values>
+<value name="choiceSet independence"><real>50.00</real></value>
+<value name="outranking"><real>55.56</real></value>
+<value name="outranked"><real>0.00</real></value>
+<value name="determinateness"><real>50.00</real></value>
+</values>
+</alternativesSet>
+</alternativesSets>
+<alternativesSets mcdaConcept="badChoices">
+<description>
+<subTitle>Potentially Bad Choices</subTitle>
+<comment>All values expressed in %.</comment>
+</description>
+<alternativesSet id="bad_1" mcdaConcept="badChoice">
+<description>
+<comment>Bad choice</comment>
+</description>
+<element>
+<alternativeID>F</alternativeID>
+</element>
+<element>
+<alternativeID>A</alternativeID>
+</element>
+<values>
+<value name="choiceSet independence"><real>50.00</real></value>
+<value name="outranking"><real>50.00</real></value>
+<value name="outranked"><real>100.00</real></value>
+<value name="determinateness"><real>50.00</real></value>
+</values>
+</alternativesSet>
+</alternativesSets>
+</xmcda:XMCDA>

@@ -1,0 +1,54 @@
+<html>
+<head>
+<meta name="description" content="Entry level to the RuBy decision support methodology pages">
+<meta name="author" content="Raymond Bisdorff">
+<meta name="keywords" content="Digraph3, University, Decision-Aid, RuBy decision support methodology, Operational Research, Graph Theory, Random Graphs, Graph Automorphism, Kernels, Bipolar Valued Logic">
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<meta http-equiv="Content-Style-Type" content="text/css">
+<STYLE type="text/css">
+  BODY       { font-family:Verdana }
+  H1         { font-size:16pt; color:#339966 }
+  H2         { font-size:14pt; color:#AD2B2E }
+  P          { font-size:10pt }
+  P.tty { font-family:courier }
+  B.tty { font-family:courier }
+</STYLE>
+<title>Digraph3 Data set: The Chv&aacute;tal Graph</title>
+</head>
+<body>
+<h1>Digraph3 Data set</h1>
+<h2>The Chv&aacute;tal Graph</h2>
+<h3>Data type</h3>
+<p>Crisp symmetric simple graphs</p>
+<h3>Problematics</h3>
+<p>Symmetric graphs, graph automorphism, unlabelled kernels, St-Nicolas graphs</p>
+<h3>Description</h3>
+<p>Gr&uuml;nbaum conjectured that for every <i>m>1</i>, <i>n</i>>2, there exists an <i>m</i>-regular, <i>m</i>-chromatic graph of girth at least <i>n</i>. This result is trivial for <i>n</i>=2 and <i>m</i>=2,3, but only two other such graphs are known: the Chv&aacute;tal graph illustrated below, and the Gr&uuml;nbaum graph.</p>
+<img src="chvatal.png" />
+
+<p>The Chv&aacute;tal graph is a quartic Hamiltonian graph on 12 nodes and 24 edges. It has chromatic number 4, and girth 4 and unlabelled kernel number <b>3</b>.
+<h3>Proof</h3>
+<p>Indeed, Chv&aacute;tal's graph supports an automorphisms group with two generating reflections, shown below, delivering two orbits of isomorphic labelled graphs.</p>
+<img src="Chvatal12-4Sym-1.png" />
+<img src="Chvatal12-4Sym-2.png" />
+
+<p>The autumorhism group delivers3 kernel orbits of respectively 2 x 8 and 4 isomorph labelled kernels.</p>
+<img src="chvatal-3.png" />
+
+<p>It is worthwhile noticing that the Chv&aacute;tal graph contains a <font color="red"><a href="Classif04Handouts.pdf">St-Nicolas subgraph</a></font> of order 8, induced by the two exterior rectangles: vertices 1,2,3,4, and vertices 7,8,9,10. More precisely, this St-Nicolas graph is in fact the Andr&aacute;sfai graph of order 3, i.e. the M&ouml;bius ladder of order 4.</p>
+<img src="and-3.png" />
+<p>The only known St-Nicolas graphs of order 12 are the clique K12 and the circulant graph {<b>Z</b>_12, [1,4,6]}.</p>
+
+<H3>Files</H3>
+<ul>
+<li><a href="chvatal12-4.py">Python file</a>
+</ul>
+<h3>References</h3>
+<ul>
+<li><a href="http://mathworld.wolfram.com/ChvatalGraph.html">http://mathworld.wolfram.com/ChvatalGraph.html</a>
+<li>R. Bisdorff, <a href="Classif04Handouts.pdf">St-Niclas graphs</a>, Communication, 4th Workshop on Classification, Luxembourg, December 2005</li>
+</ul>
+<hr>
+<p><a href="index.html">Return to <b class="sc">Content table</b></a></p>
+</body>
+</html>

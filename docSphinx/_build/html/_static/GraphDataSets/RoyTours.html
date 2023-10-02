@@ -1,0 +1,55 @@
+<html>
+<head>
+<title>Digraph3 Data Set</title>
+<STYLE>
+<!--
+		TD { text-align: right }
+-->
+</STYLE>
+
+</head>
+<body>
+<h1>Digraph3 Data Set</h1>
+<h2>Title</h2>
+<p>Roy's Tours example</p>
+<h2>Data type</h2>
+<p>[0-100]-valued digraph</p>
+<h2>Problematics</h2>
+<p>Best unique choice problematics (P.alpha). Collapsing intranistive circuits.</p>
+<h2>Description</h2>
+<p>B. Roy proposed this example in February 2005 (ROADEF'2005, Tours) in order to illustrate the necessity to take into accounts intransitive circuits when constructing best choice recommendations.</p>
+
+<p><i>A</i> =  {a,b,c,d,e}, <i>L</i> =[0 - 100].
+<table border="1">
+<thead>
+<tr><th>S<th>a<th>b<th>c<th>d<th>e
+<tbody>
+<tr><th>a<td>-<td>51<td>0<td>0<td>0
+<tr><th>b<td>0<td>-<td>100<td>100<td>50
+<tr><th>c<td>0<td>0<td>-<td>51<td>100
+<tr><th>d<td>100<td>0<td>0<td>-<td>100
+<tr><th>e<td>0<td>0<td>0<td>0<td>-
+</tbody>
+</table>
+</p>
+<p><img src="roy21Avr05one.jpg"></p>
+<p>Following the Electre methodology, the cycle {a,b,c,d} may well be collapsed into a single class of potentially equivalent decision actions which dominate action {e}. Thus these actions constitute the best choice recommendation.</p>
+
+<p>The shown digraph above supports a unique dominant kernel {a,c} with credibility 51%, which should give, following the Ruby methodology, a natural and convincing best choice recommendation. </p> 
+
+<p>In the Ruby methodology we only consider odd intransitive circuits for best choice recommendations, so that we here may add the circuit {a,b,d} as potential best choice. In the given mixed hypergraph, the circuit {a,b,d} gives a sure stable partial best choice (100%), whereas {e} represents a sure stable partial worst choice (100%). The initial dominant kernel {a,c} remains however the unique determined best choice recommendation, it is true, with a very low credibility.</p>
+ 
+<H2>Files</H2>
+<ul>
+<li><a href="roy21Avr05one.py">Python data file</a>
+<li><a href="roy21Avr05oneh1.py">Hypergraph Python data file</a>
+</ul>
+<h2>References</h2>
+<ul>
+<li>Bisdorff, R., Meyer P. and Roubens, M., <em><b>RUBY</b>: a new best choice methodology</em>. SMA Working paper, University of Luxembourg, 2005.
+</ul>
+
+<h2>Digraph3 Data Sets</h2>
+<p><a href="index.html">All Digraph3 data sets.</a>
+
+</body>

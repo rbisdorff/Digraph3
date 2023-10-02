@@ -1,0 +1,53 @@
+<html>
+<head>
+<meta name="description" content="Entry level to the RuBy decision support methodology pages">
+<meta name="author" content="Raymond Bisdorff">
+<meta name="keywords" content="University, Decision-Aid, RuBy decision support methodology, Operational Research, Graph Theory, Random Graphs, Graph Automorphism, Kernels, Bipolar Valued Logic">
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<meta http-equiv="Content-Style-Type" content="text/css">
+<title>Digraph3 Data Set: Roubens' example 1</title>
+<STYLE type="text/css">
+  BODY       { font-family:Verdana }
+  H1         { font-size:16pt; color:#339966 }
+  H2         { font-size:14pt; color:#AD2B2E }
+  P          { font-size:10pt }
+  P.tty { font-family:courier }
+  B.tty { font-family:courier }
+  B.sc  { font-variant:small-caps }
+</STYLE>
+
+</head>
+<body>
+<h1><b class="sc">Digraph3</b> Data Set</h1>
+<h2>Roubens' example 1</h2>
+<h3>Data type</h3>
+<p>{0,1}-valued digraph</p>
+<h3>Problematics</h3>
+<p>Best unique choice problematics, <b class="sc">RuBy</b> methodology, Super strict dominant kernels</p>
+<h3>Description</h3>
+<p><i>A</i> = {1,2,3,4,5,6}, <i>L</i> = {0,1}.</p>
+<p><img src = "roubensEx1.png"></p>
+<p>Marc Roubens proposed this example in spring 2004, as support for the discussion of the <b class="sc">RuBy</b> methodology.</p>
+
+<h3>The <b class="sc">RuBy</b> best choice recommendation</h3>
+<p>We may observe two <em>outranking</em> kernels: {3,4} and {1,5,6}, and one <em>outranked</em> kernel: {2,5,6}.</p>
+<p><img src = "roubensex1kernels.png"></p>
+
+<p>The first choice: {3,4} is clearly not in intersection with the outranked kernel and therefore delivers the <b class="sc">RuBy</b> best choice recommendation. We call such kernels <em>super strict outranking</em>.</p>
+
+<p>Following the <b class="sc">Electre I</b> methodology, one would collapse the circuit (2,3,5,4,2) and propose more readily these nodes as equivalent best choice recommendations. Here the <b class="sc">RuBy</b> recommendation with the <em>super strict outranking</em> kernel concept is more discriminant.</p>
+
+<H3>Files</H3>
+<ul>
+<li><a href="roubensEx1.py">Python data file</a>
+</ul>
+<h3>References</h3>
+<ul>
+<li>Bisdorff, R. et Roubens, M., Le temps de noyaux. Dans <em>Regards crois&eacute;ses sur les m&eacute;thodes quantitatives de gestion. J. Bair et V. Henry (ed.), Les Editions de l'Universit&eacute; de Li&egrave;ge, 2004, 41-54.
+</ul>
+
+<h3>Digraph3 Data Sets</h3>
+<p><a href="index.html">All Digraph3 data sets.</a>
+
+</body>
+</html>

@@ -1,0 +1,37 @@
+digraph G {
+graph [ bgcolor = cornsilk, fontname = "Helvetica-Oblique",
+ fontsize = 12,
+ label = "\nDigraph3 (graphviz), R. Bisdorff, 2020", size="7,7"];
+n1 [shape = "circle", label = "T-UD"];
+n2 [shape = "circle", label = "T-FHK"];
+n3 [shape = "circle", label = "T-FHM"];
+n4 [shape = "circle", label = "I-FHK", style = "filled", color = gold];
+n5 [shape = "circle", label = "T-USB"];
+n6 [shape = "circle", label = "I-USB"];
+n7 [shape = "circle", label = "T-UHB"];
+n8 [shape = "circle", label = "I-UHB"];
+n9 [shape = "circle", label = "S-HKK", style = "filled", color = lightblue];
+n10 [shape = "circle", label = "C-HKK", style = "filled", color = lightblue];
+{rank = 0; n4; }
+{rank = 1; n2; n6; n8; }
+{rank = 2; n7; }
+{rank = 3; n1; n3; n5; n7;}
+{rank = 4; n9; n10; }
+n4-> n1 [dir=forward, color=black] ;
+n1-> n9 [dir=forward, color=black] ;
+n1-> n10 [dir=forward, color=black] ;
+n2-> n9 [dir=forward, color=black] ;
+n2-> n10 [dir=forward, color=black] ;
+n4-> n3 [dir=forward, color=black] ;
+n6-> n3 [dir=forward, color=black] ;
+n8-> n3 [dir=forward, color=black] ;
+n3-> n9 [dir=forward, color=black] ;
+n3-> n10 [dir=forward, color=black] ;
+n4-> n5 [dir=forward, color=black] ;
+n4-> n7 [dir=forward, color=black] ;
+n5-> n9 [dir=forward, color=black] ;
+n5-> n10 [dir=forward, color=black] ;
+n6-> n7 [dir=forward, color=black] ;
+n7-> n9 [dir=forward, color=black] ;
+n7-> n10 [dir=forward, color=black] ;
+}

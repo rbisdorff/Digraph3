@@ -1,0 +1,20 @@
+digraph G {
+graph [ bgcolor = cornsilk, fontname = "Helvetica-Oblique",
+ fontsize = 12,
+ label = "\nRubis Python Server (graphviz), R. Bisdorff, 2008", size="7,7"];
+n1 [shape = "circle", label = "a2"];
+n2 [shape = "circle", label = "a5"];
+n3 [shape = "circle", label = "a1"];
+n4 [shape = "circle", label = "a4"];
+n5 [shape = "circle", label = "a3"];
+n1-> n2 [dir=back, color=black] ;
+n1-> n3 [dir=back, color=black] ;
+n1-> n4 [dir=forward, color=black] ;
+n1-> n5 [dir=forward, color=black] ;
+n2-> n3 [dir=forward, color=black] ;
+n2-> n4 [dir=back, color=black] ;
+n2-> n5 [dir=forward, color=black] ;
+n3-> n4 [dir=back, color=black] ;
+n3-> n5 [dir=back, color=black] ;
+n4-> n5 [dir=forward, color=black] ;
+}

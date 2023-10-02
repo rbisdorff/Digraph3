@@ -1,0 +1,53 @@
+% Automatic conversion from python berge54.py relation
+actionset( ['1', '2', '3', '4', '5', '6', '7'] ).
+evaluationdomain:-
+asserta((valuationdomain(V) :- fd_domain(V, 0 , 100 ))).
+relation('1','1', 0 ):-!.
+relation('1','2', 100 ):-!.
+relation('1','3', 0 ):-!.
+relation('1','4', 100 ):-!.
+relation('1','5', 0 ):-!.
+relation('1','6', 0 ):-!.
+relation('1','7', 0 ):-!.
+relation('2','1', 0 ):-!.
+relation('2','2', 0 ):-!.
+relation('2','3', 100 ):-!.
+relation('2','4', 0 ):-!.
+relation('2','5', 0 ):-!.
+relation('2','6', 100 ):-!.
+relation('2','7', 0 ):-!.
+relation('3','1', 100 ):-!.
+relation('3','2', 0 ):-!.
+relation('3','3', 0 ):-!.
+relation('3','4', 0 ):-!.
+relation('3','5', 100 ):-!.
+relation('3','6', 0 ):-!.
+relation('3','7', 0 ):-!.
+relation('4','1', 0 ):-!.
+relation('4','2', 0 ):-!.
+relation('4','3', 0 ):-!.
+relation('4','4', 0 ):-!.
+relation('4','5', 0 ):-!.
+relation('4','6', 0 ):-!.
+relation('4','7', 100 ):-!.
+relation('5','1', 0 ):-!.
+relation('5','2', 0 ):-!.
+relation('5','3', 0 ):-!.
+relation('5','4', 0 ):-!.
+relation('5','5', 0 ):-!.
+relation('5','6', 0 ):-!.
+relation('5','7', 100 ):-!.
+relation('6','1', 0 ):-!.
+relation('6','2', 0 ):-!.
+relation('6','3', 0 ):-!.
+relation('6','4', 0 ):-!.
+relation('6','5', 0 ):-!.
+relation('6','6', 0 ):-!.
+relation('6','7', 100 ):-!.
+relation('7','1', 0 ):-!.
+relation('7','2', 0 ):-!.
+relation('7','3', 0 ):-!.
+relation('7','4', 0 ):-!.
+relation('7','5', 0 ):-!.
+relation('7','6', 0 ):-!.
+relation('7','7', 0 ):-!.

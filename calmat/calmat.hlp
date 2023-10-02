@@ -1,0 +1,186 @@
+ **************************************************************
+ *    CALMAT interprète de calculs matriciels ver. 5.0 Linux  
+ *          Université du Luxembourg                          
+ *      (c) R. Bisdorff  2008 $Revision: 1.7 $               
+ **************************************************************
+
+*Downloading and installing*:
+
+..$ svn co http://leopold-loewenheim.uni.lu/svn/repos/Calmat
+..$ cd Calmat
+..$ make   # needs a gcc running, otherwise edit the makefile
+..$ sudo make install  # installs under /usr/local/bin, adapt the makefile for user installation 
+
+*Commandes de Calmat*:
+
+rem   < texte > ou "<texte>"
+       ligne de commentaire. Si le texte est mis entre
+       guillemets, il est affiché lors de l'exécution.
+
+:<label>
+       permet de définir des points de référence dans le texte
+       ( maximum 32 caractères )
+
+goto <label>
+       branchement au <label> indiqué
+
+if <expression> <opérateur logique> <expression>
+    [commandes ....] endif
+
+while <expression> <opérateur logique> <expression>
+    [commandes .... ]
+    endwhile
+
+load  <fichier> <variable> n1 n2
+       fichier : fichier ASCII avec des nombres réels séparés
+       par des blancs, chaque ligne se termine avec un CR;
+       variable = {a,b,.....,z};
+       n1 = nombre de lignes;
+       n2 = nombre de colonnes.
+       Le nombre d'éléments de la matrice (n1*n2)
+			 doit être inférieure à 50000 !!
+
+print <variable>
+       affichage de la matrice sur l'écran.
+
+save <variable> <fichier>
+       sauvegarde d'une variable sur le fichier indiqué.
+
+tridiag <variable> <fichier1> <fichier2>
+     diagonalisation de la variable par la méthode de
+     GIVENS-HOUSEHOLDER ( tridiagonalisation et diagonalistion)
+     retour des valeurs propres sur fichier1 ( variable.n2, 2)
+     retour des vecteurs propres en colonnes !!!! sur fichier2
+		     ( variable.n2, variable.n2)
+     La variable doit être une matrice symétrique !!!!
+
+compocor <variable1> <variable2> <variable3> <fichier1> <fichier2> <fichier3>
+     calcul des composantes principales de l'analyse des correspondances:
+     variable1: matrice des distributions initiales (n1,n2)
+     variable2: vecteurs propres en lignes  !!!! (n2,n2)
+     variable3: valeurs propres (n2,1)
+     retour sur les fichiers suivants:
+     fichier1: fichier des composantes principales (n2+n1,n2-1)
+     fichier2: fichier des contributions absolues  (n2+n1,n2-1)
+     fichier3: fichier des contributions relatives  (n2+n1,n2-1)
+
+composupp <variable1> <variable2> <variable3> <fichier1>
+     calcul des coordonnées de points lignes supplémentaires:
+     variable1: matrice des distributions initiales (n1,n2) supplémentaires;
+     variable2: composantes principales des points colonnes (n2, n2-1 !!!);
+     variable3: valeurs propres (n2,1)
+     retour sur le fichier suivant:
+     fichier1: fichier des composantes principales
+
+compocsupp <variable1> <variable2> <variable3> <fichier_retour>
+     calcul des coordonnées de points colonnes supplémentaires:
+     variable1: matrice des colonnes supplémentaires (n1,n2);
+     variable2: composantes principales originales compo.prn (n3, n4-1 !!!);
+     variable3: valeurs propres (n4,2)
+     retour sur le fichier suivant:
+     fichier_retour: fichier des coordonnées des pts col. supp.
+
+
+<variable> = <expression>
+
+    expression ::= terme [+/-/|/& terme [ ....   ]]
+    terme      ::= facteur[ */^ facteur [ * ....  ]]
+    facteur    ::= fonction(expression)
+	       ::= `/~ expression
+	       ::= (expression)
+	       ::= variable/nombre réel
+
+opérateurs arithmtiques ::=
+	     +/-  addition/soustraction réelle
+	     |/&  union /intersection booléenne ( max/min )
+	     *    multiplication réelle
+	     ^    multiplication booléenne  (maxmin)
+	     ~    complémentation booléenne
+
+opérateurs logiques ::=
+	     >    plus grand ou égal ( terme par terme )
+	     <    plus petit ou égal ( terme par terme )
+	     =    identique      (terme par terme)
+
+Fonctions   ::=
+
+chi_deux(<expression>)  :  calcul des distances de chi_deux sur
+               un tableau de contingences;
+               v(j,j') = S_i( nij.nij'/n..ni.) - (n.j n.j'/n..^2)
+
+dist_fact(<expression>) :  calcul des distances sur un tableau de
+               différences (Benzécri, Tome 2 Chapitre 3);
+               d(i,j) = dif(i,j)^2 - dif(i,.)^2 - dif(.,j)^2 + dif(.,.)^2
+
+cent_red(<expression>)  :  centrage et réduction d'une matrice par colonne;
+	       e(i,j) =  (x(i,j) - 1/n2x(.j))/S_j.
+
+matint(n1, n2)  :  matrice unitaire de dimension n1*n2;
+matzero(n1,n2)  :  matrice zéro de dimension n1*n2;
+
+Exemples de procédures:
+
+     rem Exemple de calculs sur des matrices  booléennes  (valeurs 0/1)
+     load matb.prn a 4 4
+     load matb1.prn b 4 4
+     c = ( ( a | b ) ^ ~( a & b ) )
+     print c
+     save  c  result.prn
+     end
+
+
+     rem Analyse des différences
+     rem  entre lignes d'un tableau
+     load can79_84.prn a 13 4
+     b = dist_fact(a * `a)
+     tridiag b val_prlg.prn vec_prlg.prn
+     load vec_prlg.prn c 13 13
+     d = b * c
+     save d compolg.prn
+     rem analyse des différences 
+     rem entre colonnes du tableau
+     load can79_84.prn a 13 4
+     b = dist_fact(`a * a)
+     tridiag b val_prcl.prn vec_prcl.prn
+     load vec_prlg.prn c 4 4
+     d = b * c
+     save d compocl.prn
+     end
+
+     rem analyse des corresspondances
+     load testf.prn a 4 4
+     b = chi_deux(a)
+     tridiag b val_prop.prn vec_prop.prn
+     load vec_prop.prn c 4 4
+     c = `c
+     load val_prop.prn d 4 1
+     compocor a c d compo.prn compabs.prn comprel.prn
+     rem   goto fin
+     :pt_supp
+     rem  représentation de points supplémentaires
+     load ptsupp.prn a 2 4
+     load compo.prn b 4 3
+     composupp a b d compsupp.prn
+     :fin
+     end
+
+     rem **********************************
+     rem *   CALMAT 5.0  2008             *
+     rem * UL-FSTC/CSC (c) R.Bisdorff     *
+     rem * Analyse des corresspondances   *
+     rem * corr.prg %1 %2 %3              *
+     rem * %1 : fichier des données       *
+     rem * dimensions : %2 x %3           *
+     rem **********************************
+     load %1.prn a %2 %3
+     rem "Calcul des distances de chi_deux"
+     b = chi_deux(a)
+     rem "Calcul des valeurs et vecteurs propres"
+     tridiag b val_prop.prn vec_prop.prn
+     load vec_prop.prn c %3 %3
+     c = `c
+     load val_prop.prn d %3 1
+     rem "Calcul des nouvelles coordonnées dans la base propre"
+     compocor a c d compo.prn compabs.prn comprel.prn
+     end
+

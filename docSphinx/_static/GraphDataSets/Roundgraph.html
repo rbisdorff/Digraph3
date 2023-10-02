@@ -1,0 +1,46 @@
+<html>
+<head>
+<title>Digraph3 Data Set</title>
+</head>
+<body>
+<h1>Digraph3 Data Set</h1>
+<h2>Title</h2>
+<p>Round digraphs</p>
+<h2>Data type</h2>
+<p>{0,1}-valued digraph</p>
+<h2>Problematics</h2>
+<p>Hyperkernel approach test, minimal odd circuits collapse fixpoint</p>
+<h2>Description</h2>
+<p><i>A</i> = {1,2,3,4,5}, <i>L</i>={0,1}</p>
+<p><img src="roundgraph.png"></p>
+<p>This example of a round digraph illustrates the fact that it is not sufficient in general to collapse minimal odd circuits from a digraph, in order to get a odd circuit free digraph. We have to iterate the procedure until no new odd circuit may be detected anymore.</p>
+<p>In this example we have to iterate the minimal odd circuit detection twice. A first cicruit '_1_2_3_' is added the first time. The second time a further odd circuit: '__1_2_3__4_5_' is added. No further odd circuits may be added and the final hyper graph is the following:<br>
+<tt>
+<i>A</i> = {1, 2, 3, 4, 5, _1_2_3_, __1_2_3__5_4_}<br>
+<i>S</i> = {(1, 2), (1, _1_2_3), (1, __1_2_3__5_4_),<br> 
+(2, 3), (2, _1_2_3), (2, __1_2_3__5_4_),<br> 
+(3, 1), (3, 4), (3, _1_2_3), (3, __1_2_3__5_4_),<br> 
+(4, 5), (4, __1_2_3__5_4_),<br>
+(5, 1), (5, _1_2_3),(5, __1_2_3__5_4_), <br>
+(_1_2_3_, 1),(_1_2_3_, 2),(_1_2_3_, 3),(_1_2_3_, 4), <br>
+(__1_2_3__5_4_, 1), (__1_2_3__5_4_, 2), (__1_2_3__5_4_, 3),(__1_2_3__5_4_, 4),(__1_2_3__5_4_, 5)}
+</tt> </p>
+<p>The final hyper graph supports a unique dominant as well as absorbent kernel which is as expected the odd circuit '__1_2_3__4_5_'.</p>
+
+<H2>Files</H2>
+<ul>
+<li><a href="roundgraph.py">Python data file</a>
+<li><a href="roundgraphh1.py">Hypergraph 1 </a>
+<li><a href="roundgraphh2.py">Hypergraph 2 </a>
+</ul>
+
+<h2>References</h2>
+<ul>
+<li>Bisdorff, R., Meyer P. and Roubens, M., <em><b>RUBY</b>: a new best choice methodology</em>. SMA Working paper, University of Luxembourg, 2005.
+<li>Bang-Jensen, J. and Gutin, G., <em>Digraphs: Theory and applications</em>. Springer 2001, 203-207
+</ul>
+
+<h2>Digraph3 Data Sets</h2>
+<p><a href="index.html">All Digraph3 data sets.</a>
+
+</body>

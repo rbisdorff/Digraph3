@@ -1,0 +1,46 @@
+#--------------------------------------------------------------------------
+# The Digraph3 software collection
+# Current revision Py36
+# Copyright (C) 2018 Raymond Bisdorff
+#
+#    This resource is free software; you can redistribute it and/or modify
+#    it under the terms of the GNU General Public License as published by
+#    the Free Software Foundation; either version 2 of the License, or
+#    (at your option) any later version.
+#
+#    This software is distributed in the hope that it will be useful,
+#    but WITHOUT ANY WARRANTY; without even the implied warranty of
+#    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+#    GNU General Public License for more details.
+#
+#    You should have received a copy of the GNU General Public License along
+#    with this program; if not, write to the Free Software Foundation, Inc.,
+#    51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
+#
+#-----------------------------------------------------------------------------
+
+The C file perrinMIS.c is computing the set of maximal independent sets MISs(n) of the n-cycle graph for n > 20 with the Perrin sequence algorithm - MISs(n) is obtained from  MISs(n-2) and  MISs(n-3) - by using recursively temporary data files.
+
+The algorithm is even versus odd graph order optimized.
+
+The final result in 01 format is available in the file <curd.dat>.
+
+See https://digraph3.readthedocs.io/en/latest/tutorial.html#computing-a-non-isomorphic-mis
+
+To compile on Unix type machines with the GNU C Compiler:
+...$gcc -Wall -O3 -o perrinMIS perrinMIS.c
+
+To install automatically with the Digraph3 make file:
+
+.../Digraph3/$ make installPerrin
+
+By default the perrinMIS command is installed system-wide with sudo into /usr/local/bin. This may be changed with setting explicitely the INSTALLDIR flag.
+
+To install into the user's bin directory :
+
+.../Digraph3/$ make installPerrinUser
+
+Luxembourg, December 2018
+RB
+#-------------------------------------------------------#
+

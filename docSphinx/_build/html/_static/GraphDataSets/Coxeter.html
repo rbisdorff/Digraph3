@@ -1,0 +1,76 @@
+<html>
+<head>
+<meta name="description" content="Entry level to the RuBy decision support methodology pages">
+<meta name="author" content="Raymond Bisdorff">
+<meta name="keywords" content="University, Decision-Aid, RuBy decision support methodology, Operational Research, Graph Theory, Random Graphs, Graph Automorphism, Kernels, Bipolar Valued Logic">
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<meta http-equiv="Content-Style-Type" content="text/css">
+<title>Digraph3 Data set: The Coxeter graph</title>
+<STYLE type="text/css">
+  BODY       { font-family:Verdana }
+  H1         { font-size:16pt; color:#339966 }
+  H2         { font-size:14pt; color:#AD2B2E }
+  P          { font-size:10pt }
+  P.tty { font-family:courier }
+  B.tty { font-family:courier }
+  B.sc  { font-variant:small-caps }
+</STYLE>
+
+</head>
+<body>
+<h1>Digraph3 Data set</h1>
+<h2>The Coxeter graph</h2>
+<h3>Data type</h3>
+<p>Arc-transitive (symmetric) graph</p>
+<h3>Problematics</h3>
+<p>Kernel equation system solution space symmetries, conjecture on kernel numbers, clustering</p>
+<h3>Description</h3>
+
+<p>The Coxeter graph is a famous 28-vertex cubic graph with girth seven. It is constructed from X = {1,2,3,4,5,6,7} and its circulants {-1,1}, {-2,2} and {-3,3}.</p>
+<img src="coxeter.png">
+
+<p>The Coxeter graph is in fact a remarquable subgraph of the Kneser graph J(7,3,0) of order 35, hence its natural similarity with the <a href="Petersen.html">Petersen graph</a> who is the corresponding J(5,2,0) graph. These kinds of graph appear when taking the dual of a similarity relation, a situation we naturally have to tackle in clustering problems.</p>
+
+<p>The Coxeter graph supports 1562 different kernels, among them obviously the minimal set of 0-circulant (pink coloured) nodes of cardinality 7.</p> 
+
+<p>W should find anough symmetry in the Coxeter graph such that the symmetry congruence classes induced on the kernel equation system solution space is less or equal 28, i.e. the order of the graph.</p>
+
+<p>Indeed, the unlabelled kernel number of the Coxeter graph is <b>13.</b></p>
+<h3>Proof</h3>
+<p>The <a href="http://cs.anu.edu.au/~bdm/nauty/">nauty</a> program, a software package for computing the automorhism group of a graph, reveals us that the Coxeter graph supports four automorphic actions: three bilateral symmteric foldings with each time four fixed nodes, and an obvious 7 steps central rotational symmetry k_i to (k+j)_i, with k,j in Z7 and i = 0 (circulant {-1,1}), 1 (circulent {0,0}), 2 (circulent {-2,2}), and 3 (circulent {-3,3}). The total order of the automorphism group generated with these actions is 336.</p>
+<p>In the figure below we illustrate one the three bilateral foldings where the nodes are enumerated continuously from 1 to 28 in increasing order of the four circulants {-1,1}: 1-7, {0,0}: 8-14, {-2,2}: 15-20 and {-3,3}: 21-28.</p>
+<img src="coxeterlateral3.png" width="700">
+<p>The four generators of the Coxeter automorphism group map on the kernel equation system solution space 13 disjoint orbits with the following representatively labelled choices, in increasing cardinalities of the choice and the corresponding orbit:
+<table>
+<tr><th>#<th>Choice<th>Choice cardinality<th>Orbit cardinality
+<tr><td>1<td>['3_0', '5_0', '6_0', '1_0', '2_0', '4_0', '7_0']<td> 7 <td>8
+<tr><td>2<td>['3_2', '6_3', '2_1', '5_3', '5_1', '1_0', '4_2', '4_3', '7_0']<td> 9<td> 56
+<tr><td>3<td>['3_3', '3_2', '6_2', '2_1', '2_3', '5_1', '1_3', '4_0', '7_1', '7_2']<td>  10<td>28
+<tr><td>4<td>['3_3', '6_0', '2_1', '5_3', '5_2', '1_0', '4_2', '4_3', '4_1', '7_0']<td>  10<td> 56
+<tr><td>5<td>['3_1', '3_2', '6_0', '2_0', '5_0', '1_3', '1_1', '4_0', '7_3', '7_2']<td>  10<td> 56
+<tr><td>6<td>['3_0', '6_0', '2_1', '2_3', '5_2', '1_2', '4_2', '4_3', '4_1', '7_1']<td>  10<td> 84
+<tr><td>7<td>['3_0', '6_3', '2_0', '5_3', '5_1', '1_2', '4_2', '7_1', '7_3', '7_2']<td>  10<td> 84
+<tr><td>8<td>['3_3', '6_0', '2_1', '5_3', '5_2', '1_2', '4_2', '4_3', '4_1', '7_1']<td>  10<td> 168
+<tr><td>9<td>['3_0', '6_0', '2_1', '2_2', '5_3', '5_2', '5_1', '1_2', '4_0', '7_0']<td>  10<td> 168
+<tr><td>10<td>['3_3', '3_2', '6_0', '2_1', '2_3', '5_1', '1_0', '4_2', '4_3', '7_0']<td>  10<td> 336
+<tr><td>11<td>['3_0', '6_0', '2_0', '5_2', '5_1', '1_3', '1_2', '1_1', '4_0', '7_3']<td>  10<td> 336
+<tr><td>12<td>['3_1', '3_2', '6_1', '6_2', '6_3', '2_0', '5_3', '1_0', '4_0', '7_3', '7_2']<td>  11<td> 168
+<tr><td>13<td>['3_1', '3_3', '6_0', '2_2', '2_3', '5_2', '5_1', '1_3', '1_2', '1_1', '4_0', '7_0']<td>  12<td> 14
+</table>
+
+<H3>Files</H3>
+<ul>
+<li><a href="coxeter.py">The Coxeter graph (Python file format)</a>
+<li><a href="coxeter.txt">All 1562 kernel solutions of the Coxeter graph (Text file format)</a>
+</ul>
+
+<h3>References</h3>
+<ul>
+<li>Weisstein, E. W., <em>From MathWorld--A Wolfram Web Resource</em>. <a href="http://mathworld.wolfram.com/CoxeterGraph.html">http://mathworld.wolfram.com/CoxeterGraph.html</a>
+<li>Godsil, Chr. and Royle, G., <em>Algebraic Graph Theory</em>. Springer-Verlag, 2001 [ISBN 0-387-95241-1] (p. 69). 
+</ul>
+
+<h3>Digraph3 Data Sets</h3>
+<p><a href="index.html">All Digraph3 data sets.</a>
+</body>
+</html>

@@ -1,0 +1,83 @@
+<html>
+<head>
+<meta name="description" content="Entry level to the RuBy decision support methodology pages">
+<meta name="author" content="Raymond Bisdorff">
+<meta name="keywords" content="University, Decision-Aid, RuBy decision support methodology, Operational Research, Graph Theory, Random Graphs, Graph Automorphism, Kernels, Bipolar Valued Logic">
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<meta http-equiv="Content-Style-Type" content="text/css">
+<title>Ruby Data set: The Tutte-Coxeter (Levi) graph</title>
+<STYLE type="text/css">
+  BODY       { font-family:Verdana }
+  H1         { font-size:16pt; color:#339966 }
+  H2         { font-size:14pt; color:#AD2B2E }
+  P          { font-size:10pt }
+  P.tty { font-family:courier }
+  B.tty { font-family:courier }
+  B.sc  { font-variant:small-caps }
+</STYLE>
+</head>
+<body>
+<h1>Digraph3 Data Set</h1>
+<h2>The Tutte-Coxeter (Levi) graph</h2>
+<h3>Data type</h3>
+<p>Arc-transitive (symmetric) graph</p>
+<h3>Problematics</h3>
+<p>Kernel equation system solution space symmetries, conjecture on kernel numbers, clustering</p>
+<h3>Description</h3>
+
+<p>The Tutte-Coxeter (or Levi graph) is a famous cubic graph on 30 with girth 8. It is constructed from X = {0,1, ..., 9} and its circulants {-1,1}, and {-4,4}.</p>
+<img src="tuttes8cage.png">
+
+<p>The Tutte-Coxeter graph (also called Tutte's 8-cage or Levi Graph) is a generalized polygon as it is the point/line incidence graph of a generalized quadrangle. It is a 4-arc transitive cubic graph, first discovered by Tutte (1947).</p>
+
+<p>The Tutte-Coxeter graph supports 3264 different kernels, among them obviously the set of 0-circulant (pink coloured) nodes of cardinality 10.</p> 
+
+<p>The unlabelled kernel number of the Tutte-Coxeter graph is <b>15.</b></p>
+<h3>Proof</h3>
+<p>The <a href="http://cs.anu.edu.au/~bdm/nauty/">nauty</a> program, a software package for computing the automorhism group of a graph, reveals us that Tutte-Coxeter supports four automorphic actions, very similar to the Coxeter graph:
+<ol>
+<li>a bilateral reflection: (5 14)(6 24)(7 27)(8 20)(9 10)(15 19)(16 21)(18 23)(25 29)(26 28),
+<li>a bilateral reflection: (4 13)(5 23)(6 26)(7 29)(8 19)(14 18)(15 20)(17 22)(24 28)(25 27),
+<li>a bilateral reflection: (1 10)(2 15)(3 5)(6 13)(7 18)(11 20)(12 25)(16 23)(17 28)(21 27),
+<li>a synchronized central rotation of the three circulants: (0 1 2 3 4 5 6 7 8 9)(10 11 12 13 14 15 16 17 18 19)(20 21 22 23 24 25 26 27 28 29).
+</ol>
+The total order of the automorphism group generated with these actions is 1440.</p>
+<p>The four generators of the Tutte-Coxeter graph automorphism group map on the kernel equation system solution space 15 disjoint orbits with the following representatively labelled choices, in increasing cardinalities of the choice and the corresponding orbit:
+<table>
+<tr><th>#<th>Labelled choice<th>Choice cardinality<th>Orbit cardinality
+<tr><td>1<td>['2', '4', '8', '10', '13', '16', '27', '28', '29']<td>9<td> 90
+<tr><td>2<td>[ '2', '4', '8', '10', '16', '17', '19', '21', '23', '25']<td>  10<td>72
+<tr><td>3<td>['1', '4', '7', '9', '15', '16', '18', '20', '21', '22']<td>  10<td>120
+<tr><td>4<td>['4', '7', '9', '10', '11', '12', '18', '25', '26', '27']<td> 10 <td>360
+<tr><td>5<td>['1', '3', '5', '7', '10', '19', '22', '26', '27', '28']<td>  10<td> 360
+<tr><td>6<td>['2', '4', '7', '9', '15', '16', '18', '20', '21', '22']<td>  10<td>720
+<tr><td>7<td>['0', '2', '4', '6', '8', '13', '21', '25', '27', '29']<td>10 <td> 720
+<tr><td>8<td>[ '1', '3', '8', '6', '12', '15', '19', '20', '24', '26', '28']<td>  11<td> 30
+<tr><td>9<td>['0', '4', '6', '8', '12', '13', '15', '19', '20', '21', '26']<td> 11<td> 120
+<tr><td>10<td>['1', '3', '5', '7', '12', '18', '19', '20', '24', '25', '26']<td>  11<td>180
+<tr><td>11<td>['0', '2', '5', '7', '11', '18', '19', '20', '22', '24', '26']<td>  11<td>360
+<tr><td>12<td>['0', '2', '4', '7', '15', '16', '18', '19', '21', '22', '23', '27']<td>12<td>10
+<tr><td>13<td>['1', '3', '5', '7', '9', '10', '12', '16', '24', '23', '28', '29']<td>  12<td>90
+<tr><td>14<td>['0', '3', '6', '8', '11', '15', '17', '19', '20', '22', '24', '26', '28']<td>13<td> 30
+<tr><td>15<td>['0', '2', '4', '6', '8', '11', '13', '15', '17', '19', '20', '22', '24', '26', '28']<td>15<td>2
+</table>
+</p>
+<p> Some of the representative solutions listed above are shown in the next Figure.</p>
+<img src="tuttes8cageKernels.png">
+<H3>Files</H3>
+<ul>
+<li><a href="tuttes8cage.py">The Tutte-Coxeter graph(Python file format)</a>
+<li><a href="tuttes8cage.txt">All 3264 kernel solutions of the Tutte-Coxeter graph (Text file format)</a>
+</ul>
+
+<h3>References</h3>
+<ul>
+<li>Weisstein, E. W., <em>From MathWorld--A Wolfram Web Resource</em>. <a href="http://mathworld.wolfram.com/LeviGraph.html">http://mathworld.wolfram.com/LeviGraph.html</a>
+<li>Godsil, Chr. and Royle, G., <em>Algebraic Graph Theory</em>. Springer-Verlag, 2001 [ISBN 0-387-95241-1] (p. 71). 
+</ul>
+
+<h3>Digraph3 Data Sets</h3>
+<p><a href="index.html">All Digraph3 data sets.</a>
+
+</body>
+</html>

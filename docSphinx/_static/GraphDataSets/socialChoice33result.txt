@@ -1,0 +1,93 @@
+*******************************************************************
+* Extraction of minimal domiant and absorbent choices             *
+* by reduction of X to dominant hyperkernels and characterisation *
+* with Pirlot's fixpoint algorithm                                *
+* allprekernelsPirlot.py                                          *
+* R. Bisdorff, July 2005                                          *
+*******************************************************************
+--->>>
+Hypergraph source: socialChoice33normh1.py
+
+actionset(['a', 'c', 'b', 'e', 'd', '_c_b_d_'])
+
+direct neighbors :  {'a': (set(['a', 'e']), set(['a', 'c', 'b',
+'_c_b_d_', 'd'])), 'c': (set(['a', '_c_b_d_', 'c', 'e', 'd']),
+set(['c', 'b', '_c_b_d_'])), 'b': (set(['a', '_c_b_d_', 'c', 'b',
+'e']), set(['b', '_c_b_d_', 'd'])), 'e': (set(['e']), set(['a', 'c',
+'b', 'e', 'd', '_c_b_d_'])), 'd': (set(['a', '_c_b_d_', 'b', 'e',
+'d']), set(['c', '_c_b_d_', 'd'])), '_c_b_d_': (set(['a', 'c', 'b',
+'e', 'd']), set(['c', 'b', 'd']))}
+
+not direct neighbors :  {'a': (set(['c', 'b', '_c_b_d_', 'd']),
+set(['e'])), 'c': (set(['b']), set(['a', 'e', 'd'])), 'b':
+(set(['d']), set(['a', 'c', 'e'])), 'e': (set(['a', 'c', 'b',
+'_c_b_d_', 'd']), set([])), 'd': (set(['c']), set(['a', 'b', 'e'])),
+'_c_b_d_': (set([]), set(['a', 'e']))}
+
+
+Connected Components:
+
+1: set(['a', 'c', 'b', 'e', 'd', '_c_b_d_'])
+
+--->>> Kernel extraction by maximising independent choices
+--- Iterations
+1 ------------ 
+memory in use:  0.0 Mb
+2 ------------ 
+memory in use:  0.0 Mb
+3 ------------ 
+memory in use:  0.0 Mb
+4 ------------
+Minimal absorbent kernel:  frozenset(['e'])
+memory in use:  0.0 Mb
+5 ------------
+memory in use:  0.0 Mb
+6 ------------
+Minimal dominant kernel:  frozenset(['_c_b_d_'])
+memory in use:  0.0 Mb
+--- Statistics
+Time     : 0.0
+History  : 6
+Solutions: 2
+
+--->>> Global Results
+
+--- Potentially good choices
+
+valuationdomain {'med': 50, 'min': 0, 'max': 100}
+Dominant kernel : ['_c_b_d_']
+L-domain         : {'med': 50, 'min': 0, 'max': 100}
++irredundance    : 100
+independence     : 100
+dominance        : 57
+absorbency       : 43
+characterization :
+'_c_b_d_':  57.0
+'a':  43.0
+'b':  43.0
+'c':  43.0
+'d':  43.0
+'e':  43.0
+
+--- Potentially bad choices
+
+valuationdomain {'med': 50, 'min': 0, 'max': 100}
+Absorbent kernel : ['e']
+valuation domain : {'med': 50, 'min': 0, 'max': 100}
++-irredundance   : 100
+independence     : 100
+dominance        : 14
+absorbency       : 57
+characterization :
+'_c_b_d_':  43.0
+'a':  43.0
+'b':  43.0
+'c':  43.0
+'d':  43.0
+'e':  57.0
+
+
+***************************
+* allprekernelsPirlot.py  *
+* R.B. June 2005          *
+***************************

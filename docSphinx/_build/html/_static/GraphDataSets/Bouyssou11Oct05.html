@@ -1,0 +1,47 @@
+<html>
+<head>
+<meta name="description" content="Entry level to the RuBy decision support methodology pages">
+<meta name="author" content="Raymond Bisdorff">
+<meta name="keywords" content="University, Decision-Aid, RuBy decision support methodology, Operational Research, Graph Theory, Random Graphs, Graph Automorphism, Kernels, Bipolar Valued Logic">
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<meta http-equiv="Content-Style-Type" content="text/css">
+<title>Digraph3 Data Set: Denis Bouyssou's example from October 11 2005</title>
+<STYLE type="text/css">
+  BODY       { font-family:Verdana }
+  H1         { font-size:16pt; color:#339966 }
+  H2         { font-size:14pt; color:#AD2B2E }
+  P          { font-size:10pt }
+  P.tty { font-family:courier }
+  B.tty { font-family:courier }
+  B.sc  { font-variant:small-caps }
+  p.quote {margin-left:15px; }  
+</STYLE>
+</head>
+<body>
+<h1>Digraph3 Data Set</h1>
+<h2>Denis Bouyssou's example from October 11 2005</h2>
+<h3>Data type</h3>
+<p>Didactical digraph</p>
+<h3>Problematics</h3>
+<p>Best unique choice problematics, the stability principle in question</p>
+<h3>Description</h3>
+<p>We consider the outranking graph <em>G</em>(<em>A</em>,<em>S</em>), where <em>A</em> = { <em>a</em>,<em>b</em>,<em>c</em>,<em>d</em> } is a set of four decision actions supporting the outranking relation <em>S</em> = { <em>a</em> S <em>b</em>, <em>a</em> S <em>c</em>, <em>b</em> S <em>c</em>, <em>b</em> S <em>d</em>, <em>c</em> S <em>d</em> }.</p>
+<p><img src="bouyssou11Oct05.png"></p>
+<p>The outranking graph <em>G</em>(<em>A</em>,<em>S</em>) supports three minimal outranking choices: {<em>a</em>,<em>b</em>}, {<em>a</em>, <em>c</em>}, and {<em>a</em>,<em>d</em>}. The first and second choice are not independent and not outranked, whereas the last one is a null kernel, i.e. an independent and conjointly outranking and outranked choice. Following our RUBY methodology, the graph in question does not support any reasonnable best choice recommendation. Indeed, the lack of transitivity of the outranking relation between <em>a</em> and <em>d</em> suggests that three circular geometrical dispositions of the given outranking graph are equally plausible (see figure below). The first suggests that <em>a</em> and <em>b</em> might be considered equivalent, the second that <em>a</em> and <em>c</em> might also be considered equivalent and the last suggests that <em>a</em> and <em>d</em> might again be considered equivalent. So all four actions appear potentially to be equivalent and the given outranking graph does in fact not support any convincing best choice recommendation.</p>
+<p><img src="bouyssou11Oct05circ.png"></p>
+<p>However, among the three minimal outranking choices, {<em>a</em>,<em>b</em>} shows the strongest outranking irredundancy with two non empty private outranked open neighbourhoods: {<em>c</em>} for <em>a</em>, and {<em>c</em>,<em>d</em>} for <em>b</em>. The choice {<em>a</em>,<em>c</em>} also supports two non empty private outranked open neighbourhoods: {<em>b</em>} for <em>a</em> and {<em>d</em>} for <em>c</em>, but of smaller cardinality. Whereas the kernel {<em>a</em>,<em>d</em>} shows the weakest outranking irredundancy with a single non empty private outranked open neighbourhood: {<em>b</em>,<em>c</em>} for <em>a</em>.</p>
+<p> If the instability of the best choice recommendation is not considered a problem then the choice {<em>a</em>,<em>b</em>} shows the most convincing strict outranking quality and could be considered in priority for recommendation as unique best choice candidates as suggested below by Denis Bouyssou:</p>
+<p class="quote">&laquo; &nbsp;... le noyau classique renvoie {<em>a</em>, <em>d</em>}. le choix de <em>d</em> ne me semble pas convaincant car il y a dans le graphe un sommet qui &agrave; tous &eacute;gards est meilleur que <em>d</em> : le somment <em>b</em>. L'argument faisant valoir que la lev&eacute;e de l'incomparabilit&eacute; entre <em>a</em> et <em>d</em> pourrait jouer en faveur de <em>d</em> est int&eacute;ressant mais je ne comprends pas pourquoi, a priori, on privil&eacute;gierai une telle hypoth&egrave;se. Une autre hypoth&egrave;se pourrait &ecirc;tre que en fait <em>b</em> <em>S</em> <em>a</em>. Dans ce cas il me semble clair que le choix devrait se reduire &agrave; <em>b</em>. A moins d'avoir d'autres informations &agrave; disposition (un tableau de performances ou la m&eacute;thode utilis&eacute;e pour b&acirc;tir <em>S</em>), je ne comprends pas pourquoi la premi&egrave;re hypoth&egrave;se est priviligi&eacute;e. Par exemple si <em>d</em> est une action "bizarre", l'action <em>b</em> pourrait &ecirc;tre &agrave; mi-chemin entre <em>a</em> et <em>d</em> et le fait que <em>b</em> <em>S</em> <em>d</em> laisse croire qu'aller plus loin dans cette direction n'est pas souhaitable (&Agrave; ce propos, il me semblerait int&eacute;ressant d'&eacute;tudier des m&eacute;canismes qui sont coh&eacute;rents avec la s&eacute;mantique de la relation de surclassement. Un arc absent ne signifie pas qu'il n'existe pas mais que l'on n'a pas pu l'&eacute;tablir avec probance). En tout &eacute;tat de cause, il faut &ecirc;tre tr&egrave;s clair sur l'information dont on dispose pour juger d'une proc&eacute;dure de choix. Si la <b>seule</b> information est la relation <em>S</em> (sans autre pr&eacute;cision sur sa nature), je persiste &agrave; croire que <em>b</em> devrait &ecirc;tre dans le choix.&nbsp;&raquo; <em>D. Bouyssou, private communication, 14 octobre 2005.</em> </p>
+<p>Quid of the stability principle ?</p>
+<H3>Files</H3>
+<ul>
+<li><a href="bouyssou11Oct05crisp.py">Python file</a>
+</ul>
+<h3>References</h3>
+<ul>
+<li>R. Bisdorff, <em>Exloitation en probl&eacute;matique du choix d'une relation de surclassement valu&eacute;e</em>. Communication au S&eacute;minaire du Lamsade, 11 octobre 2005. <a href="lamsadeHandouts.pdf">(PDF for dowloading)</a>.
+</ul>
+<h3>Digraph3 Data Sets</h3>
+<p><a href="index.html">All Digraph3 data sets.</a>
+</body>
+</html>

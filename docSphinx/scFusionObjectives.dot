@@ -1,0 +1,41 @@
+digraph G {
+graph [ bgcolor = cornsilk, fontname = "Helvetica-Oblique",
+ fontsize = 12,
+ label = "\nRubis Python Server (graphviz), R. Bisdorff, 2008", size="7,7"];
+n1 [shape = "circle", label = "Scc_4"];
+n2 [shape = "circle", label = "Scc_1"];
+n3 [shape = "circle", label = "Scc_5"];
+n4 [shape = "circle", label = "Scc_6"];
+n5 [shape = "circle", label = "Scc_2"];
+n6 [shape = "circle", label = "Scc_3"];
+n7 [shape = "circle", label = "Scc_7"];
+n8 [shape = "circle", label = "Scc_8"];
+n1-> n2 [dir=both, color=black, arrowhead=normal, arrowtail=empty] ;
+n1-> n3 [dir=forward, color=black] ;
+n1-> n4 [dir=both, color=black, arrowhead=normal, arrowtail=empty] ;
+n1-> n5 [dir=both, color=grey, arrowhead=empty, arrowtail=empty] ;
+n1-> n6 [dir=both, color=black, arrowhead=normal, arrowtail=empty] ;
+n1-> n7 [dir=forward, color=black] ;
+n1-> n8 [dir=forward, color=black] ;
+n2-> n3 [dir=both, color=black, arrowtail=normal, arrowhead=empty] ;
+n2-> n4 [dir=both, color=black, arrowtail=normal, arrowhead=empty] ;
+n2-> n5 [dir=both, color=black, arrowtail=normal, arrowhead=empty] ;
+n2-> n6 [dir=both, color=black, arrowtail=normal, arrowhead=empty] ;
+n2-> n7 [dir=both, color=black, arrowhead=normal, arrowtail=empty] ;
+n2-> n8 [dir=both, color=black, arrowhead=normal, arrowtail=empty] ;
+n3-> n4 [dir=both, color=black, arrowtail=normal, arrowhead=empty] ;
+n3-> n5 [dir=both, color=grey, arrowhead=empty, arrowtail=empty] ;
+n3-> n6 [dir=back, color=black] ;
+n3-> n7 [dir=both, color=grey, arrowhead=empty, arrowtail=empty] ;
+n3-> n8 [dir=both, color=black, arrowhead=normal, arrowtail=empty] ;
+n4-> n5 [dir=both, color=grey, arrowhead=empty, arrowtail=empty] ;
+n4-> n6 [dir=both, color=black, arrowhead=normal, arrowtail=empty] ;
+n4-> n7 [dir=both, color=black, arrowhead=normal, arrowtail=empty] ;
+n4-> n8 [dir=both, color=black, arrowhead=normal, arrowtail=empty] ;
+n5-> n6 [dir=both, color=grey, arrowhead=empty, arrowtail=empty] ;
+n5-> n7 [dir=both, color=grey, arrowhead=empty, arrowtail=empty] ;
+n5-> n8 [dir=forward, color=black] ;
+n6-> n7 [dir=forward, color=black] ;
+n6-> n8 [dir=both, color=black, arrowhead=normal, arrowtail=empty] ;
+n7-> n8 [dir=both, color=grey, arrowhead=empty, arrowtail=empty] ;
+}

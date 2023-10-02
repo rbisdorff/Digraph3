@@ -1,0 +1,103 @@
+<html>
+<head>
+<meta name="description" content="Entry level to the RuBy decision support methodology pages">
+<meta name="author" content="Raymond Bisdorff">
+<meta name="keywords" content="University, Decision-Aid, RuBy decision support methodology, Operational Research, Graph Theory, Random Graphs, Graph Automorphism, Kernels, Bipolar Valued Logic">
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<meta http-equiv="Content-Style-Type" content="text/css">
+<title>Digraph3 Data Set: Roy's Lausanne example (1995)</title>
+<STYLE type="text/css">
+  BODY       { font-family:Verdana }
+  H1         { font-size:16pt; color:#339966 }
+  H2         { font-size:14pt; color:#AD2B2E }
+  P          { font-size:10pt }
+  P.tty { font-family:courier }
+  B.tty { font-family:courier }
+  B.sc  { font-variant:small-caps }
+  TD    { text-align:center }
+</STYLE>
+
+</head>
+<body>
+<h1><b class="sc">Digraph3</b> Data Set</h1>
+<h2>Roy's Lausanne example (1995)</h2>
+<h3>Data type</h3>
+<p>[0-100]-valued digraph</p>
+<h3>Problematics</h3>
+<p>Best unique choice problematics, Kitainik's theorem</p>
+<h3>Description</h3>
+<p>The problem, proposed by B. Roy in March 1995 at the Lausanne meeting of the EWG MCDA, concerns the construction of a unique best choice
+recommendation on the basis of the following pairwise outranking
+index (in %) delivered on three decision alternatives.</p>
+<TABLE border=1>
+<THEAD>
+<TR><TH>S<TH>a<TH>b<TH>c
+<TBODY>
+<TR><TH>a<TD>-<TD>55<TD>100
+<TR><TH>b<TD>0<TD>-<TD>100
+<TR><TH>c<TD>55<TD>55<TD>-
+</TBODY>
+</TABLE>
+<p>The example supports the fact that an associated strict median cut digraph does not necessarily deliver a unique best choice. Indeed,  we obtain here two potential best choices: {a} and {c}. But the latter is conjointly a worst choice. This is the starting point for the <b class="sc">Rubis</b> best choice methodology.</p>
+
+<h3>The <b class="sc">Rubis</b> best choice recommendation</h3>
+
+<p>The valued outranking graph admits two outranking kernels: {<b>a</b>} and {<b>c</b>}, and two outranked kernels: {<b>b</b>}, and {<b>c</b>}.</p>
+
+<p><img src="royLausKernels.png"></p>
+
+<p>To make a <b class="sc">Rubis</b> recommendation, we must have a look at the <i>L</i>-qualifications of the outranking kernels.</p>
+
+<table border=1>
+<thead><tr>
+<th>Choice
+<th>a
+<th>b
+<th>c
+<th>Dom.
+<th>Abs.
+<tbody>
+<tr><th><font color="red">{a}<br><b class="sc">Rubis</b> choice</font>
+<th><font color="red">100</font>
+<td>45
+<td>0
+<th><font color="red">55</font>
+<td>45
+<tr><th>{c}
+<td>45
+<td>45
+<th>55
+<th>55
+<th>100
+<tr><th>{b}
+<td>45
+<th>55
+<td>55
+<td>0
+<th>55
+<tr><th>{c}
+<td>0
+<td>0
+<th>100
+<th>55
+<th>100
+</tbody>
+</table>
+<p>Choice {a} delivers the only effective best choice recommendation.</p>
+<H2>Files</H2>
+<ul>
+<li><a href="roylausorig.py">Python data file</a>
+<li><a href="roylausorig.pl">Gnu-Prolog data file</a>
+</ul>
+
+<h2>References</h2>
+<ul>
+<li>Roy, B & Bouyssou, D., <em>Aide Multicrt&egrave;re &agrave; la D&eacute;cision: M&eacute;thodes et Cas</em>. Economica, Paris, 1993, p. 336 
+<li>Bisdorff, R., Logical foundation of fuzzy preferential systems with application to the electre decision aid methods. <em>Computer & Operations Research</em> 27 (2000) 673-687.
+</ul>
+
+<h2>Digraph3 Data Sets</h2>
+<p><a href="index.html">All Digraph3 data sets.</a>
+
+</body>
+</html>

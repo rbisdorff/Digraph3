@@ -1,0 +1,1123 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>randomDigraphs &mdash; Digraph3 3.11.4 documentation</title>
+      <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/graphviz.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/copybutton.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/css/tooltipster.custom.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/css/tooltipster.bundle.min.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/css/tooltipster-sideTip-shadow.min.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/css/tooltipster-sideTip-punk.min.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/css/tooltipster-sideTip-noir.min.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/css/tooltipster-sideTip-light.min.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/css/tooltipster-sideTip-borderless.min.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/css/micromodal.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/css/sphinx_rtd_theme.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script src="../_static/jquery.js?v=5d32c60e"></script>
+        <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script src="../_static/documentation_options.js?v=7574ce52"></script>
+        <script src="../_static/doctools.js?v=888ff710"></script>
+        <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+        <script src="../_static/clipboard.min.js?v=a7894cd8"></script>
+        <script src="../_static/copybutton.js?v=15d7cbb8"></script>
+        <script src="../_static/js/hoverxref.js?v=d4da329d"></script>
+        <script src="../_static/js/tooltipster.bundle.min.js?v=18bf091b"></script>
+        <script src="../_static/js/micromodal.min.js?v=04d6302d"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../index.html" class="icon icon-home">
+            Digraph3
+              <img src="../_static/htmlLogo.png" class="logo" alt="Logo"/>
+          </a>
+              <div class="version">
+                Python 3.11
+              </div>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="../tutorial.html">1. Digraph3 Tutorials</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../techDoc.html">2. Technical Reference of the Digraph3 modules</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../pearls.html">3. Advanced Topics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../adtLectures.html">4. Algorithmic Decision Theory Lectures</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../compStatLectures.html">5. Computational Statistics Lectures</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../digraph3Archives.html">6. Digraph3 Archives</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../errataList.html">7. Digraph3 Book Errata List</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">Digraph3</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content style-external-links">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="index.html">Module code</a></li>
+      <li class="breadcrumb-item active">randomDigraphs</li>
+
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <h1>Source code for randomDigraphs</h1><div class="highlight"><pre>
+<span></span><span class="ch">#!/usr/bin/env python3</span>
+<span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">Python3+ implementation of some models of random digraphs</span>
+<span class="sd">Based on Digraphs3 ressources</span>
+<span class="sd">Copyright (C) 2015-2023  Raymond Bisdorff</span>
+
+<span class="sd">    This program is free software; you can redistribute it and/or modify it under the terms of the GNU General Public License as published by the Free Software Foundation; either version 3 of the License, or (at your option) any later version.</span>
+
+<span class="sd">    This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU General Public License for more details.</span>
+
+<span class="sd">    You should have received a copy of the GNU General Public License along with this program; if not, write to the Free Software Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.</span>
+
+<span class="sd">&quot;&quot;&quot;</span>
+<span class="c1">#######################</span>
+
+<span class="n">__version__</span> <span class="o">=</span> <span class="s2">&quot;$Revision: 3.10 $&quot;</span>
+
+
+<span class="kn">from</span> <span class="nn">digraphsTools</span> <span class="kn">import</span> <span class="o">*</span>
+<span class="kn">from</span> <span class="nn">decimal</span> <span class="kn">import</span> <span class="n">Decimal</span>
+<span class="kn">from</span> <span class="nn">collections</span> <span class="kn">import</span> <span class="n">OrderedDict</span>
+
+<span class="c1">#---------- Random Digraph classes -----------------</span>
+<span class="kn">from</span> <span class="nn">digraphs</span> <span class="kn">import</span> <span class="o">*</span>
+
+<div class="viewcode-block" id="RandomDigraph">
+<a class="viewcode-back" href="../techDoc.html#randomDigraphs.RandomDigraph">[docs]</a>
+<span class="k">class</span> <span class="nc">RandomDigraph</span><span class="p">(</span><span class="n">Digraph</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Specialization of the general Digraph class for generating</span>
+<span class="sd">    temporary crisp (irreflexive) random crisp digraphs.</span>
+<span class="sd">    </span>
+<span class="sd">    *Parameters*:</span>
+<span class="sd">        * order (default = 10);</span>
+<span class="sd">        * arcProbability (in [0.,1.], default=0.5)</span>
+<span class="sd">        * IntegerValuation (default = True);</span>
+<span class="sd">        * If Bipolar=True, valuation domain = {-1,1} otherwise = {0,1}</span>
+<span class="sd">        * If seed is not None, the random generator is seeded </span>
+
+<span class="sd">     &quot;&quot;&quot;</span>
+
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">order</span><span class="o">=</span><span class="mi">9</span><span class="p">,</span><span class="n">arcProbability</span><span class="o">=</span><span class="mf">0.5</span><span class="p">,</span>
+                 <span class="n">IntegerValuation</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">Bipolar</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+                 <span class="n">seed</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+
+        <span class="n">arcProbability</span> <span class="o">=</span> <span class="n">Decimal</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">arcProbability</span><span class="p">))</span>
+        <span class="k">if</span> <span class="n">arcProbability</span> <span class="o">&gt;</span> <span class="n">Decimal</span><span class="p">(</span><span class="s2">&quot;1.0&quot;</span><span class="p">):</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Error: arc probability too high !!&#39;</span><span class="p">)</span>
+        <span class="k">elif</span> <span class="n">arcProbability</span> <span class="o">&lt;</span> <span class="n">Decimal</span><span class="p">(</span><span class="s2">&quot;0.0&quot;</span><span class="p">):</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Error: arc probability too low !!&#39;</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="kn">import</span> <span class="nn">random</span>
+            <span class="n">random</span><span class="o">.</span><span class="n">seed</span><span class="p">(</span><span class="n">seed</span><span class="p">)</span>
+            <span class="kn">from</span> <span class="nn">digraphs</span> <span class="kn">import</span> <span class="n">EmptyDigraph</span>
+            <span class="k">if</span> <span class="n">Bipolar</span><span class="p">:</span>
+                <span class="n">domain</span> <span class="o">=</span> <span class="p">(</span><span class="o">-</span><span class="mf">1.0</span><span class="p">,</span><span class="mf">1.0</span><span class="p">)</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">domain</span> <span class="o">=</span> <span class="p">(</span><span class="mf">0.0</span><span class="p">,</span><span class="mf">1.0</span><span class="p">)</span>
+            <span class="n">nd</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">order</span><span class="p">))</span>
+            <span class="n">actions</span> <span class="o">=</span> <span class="n">OrderedDict</span><span class="p">()</span>
+            <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">order</span><span class="p">):</span>
+                <span class="n">actionKey</span> <span class="o">=</span> <span class="p">(</span><span class="s1">&#39;a</span><span class="si">%%</span><span class="s1">0</span><span class="si">%d</span><span class="s1">d&#39;</span> <span class="o">%</span> <span class="n">nd</span><span class="p">)</span> <span class="o">%</span> <span class="p">(</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span>
+                <span class="n">actions</span><span class="p">[</span><span class="n">actionKey</span><span class="p">]</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;shortName&#39;</span><span class="p">:</span><span class="n">actionKey</span><span class="p">,</span>
+                                      <span class="s1">&#39;name&#39;</span><span class="p">:</span> <span class="s1">&#39;random decision action&#39;</span><span class="p">}</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">actions</span> <span class="o">=</span> <span class="n">actions</span>
+<span class="c1">##            actionsList = [x for x in self.actions]</span>
+<span class="c1">##            actionsList.sort()</span>
+            <span class="n">valuationdomain</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">()</span>
+            <span class="n">Min</span> <span class="o">=</span> <span class="n">Decimal</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">domain</span><span class="p">[</span><span class="mi">0</span><span class="p">]))</span>
+            <span class="n">Max</span> <span class="o">=</span> <span class="n">Decimal</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">domain</span><span class="p">[</span><span class="mi">1</span><span class="p">]))</span>
+            <span class="n">Med</span> <span class="o">=</span> <span class="n">Min</span> <span class="o">+</span> \
+                <span class="p">(</span><span class="n">Max</span><span class="o">-</span><span class="n">Min</span><span class="p">)</span><span class="o">/</span><span class="n">Decimal</span><span class="p">(</span><span class="s1">&#39;2.0&#39;</span><span class="p">)</span>
+            <span class="n">valuationdomain</span><span class="p">[</span><span class="s1">&#39;min&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">Min</span>
+            <span class="n">valuationdomain</span><span class="p">[</span><span class="s1">&#39;max&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">Max</span>
+            <span class="n">valuationdomain</span><span class="p">[</span><span class="s1">&#39;med&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">Med</span>
+            <span class="n">valuationdomain</span><span class="p">[</span><span class="s1">&#39;hasIntegerValuation&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">IntegerValuation</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">valuationdomain</span> <span class="o">=</span> <span class="n">valuationdomain</span>
+            <span class="n">relation</span> <span class="o">=</span> <span class="p">{}</span>
+            <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">actions</span><span class="o">.</span><span class="n">keys</span><span class="p">():</span>
+                <span class="n">relation</span><span class="p">[</span><span class="n">x</span><span class="p">]</span> <span class="o">=</span> <span class="p">{}</span>
+                <span class="n">rx</span> <span class="o">=</span> <span class="n">relation</span><span class="p">[</span><span class="n">x</span><span class="p">]</span>
+                <span class="k">for</span> <span class="n">y</span> <span class="ow">in</span> <span class="n">actions</span><span class="o">.</span><span class="n">keys</span><span class="p">():</span>
+                    <span class="k">if</span> <span class="n">x</span> <span class="o">==</span> <span class="n">y</span><span class="p">:</span>
+                        <span class="n">rx</span><span class="p">[</span><span class="n">y</span><span class="p">]</span> <span class="o">=</span> <span class="n">Min</span>
+                    <span class="k">else</span><span class="p">:</span>
+                        <span class="k">if</span> <span class="n">random</span><span class="o">.</span><span class="n">random</span><span class="p">()</span> <span class="o">&lt;=</span> <span class="n">arcProbability</span><span class="p">:</span>
+                            <span class="n">rx</span><span class="p">[</span><span class="n">y</span><span class="p">]</span> <span class="o">=</span> <span class="n">Max</span>
+                        <span class="k">else</span><span class="p">:</span>
+                            <span class="n">rx</span><span class="p">[</span><span class="n">y</span><span class="p">]</span> <span class="o">=</span> <span class="n">Min</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">relation</span> <span class="o">=</span> <span class="n">relation</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">seed</span> <span class="o">=</span> <span class="n">seed</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">arcProbability</span> <span class="o">=</span> <span class="n">arcProbability</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">order</span> <span class="o">=</span> <span class="n">order</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="s1">&#39;randomDigraph&#39;</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">gamma</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">gammaSets</span><span class="p">()</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">notGamma</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">notGammaSets</span><span class="p">()</span></div>
+
+
+
+<div class="viewcode-block" id="RandomValuationDigraph">
+<a class="viewcode-back" href="../techDoc.html#randomDigraphs.RandomValuationDigraph">[docs]</a>
+<span class="k">class</span> <span class="nc">RandomValuationDigraph</span><span class="p">(</span><span class="n">Digraph</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Specialization of the general Digraph class for generating</span>
+<span class="sd">    temporary uniformly valuated random digraphs.</span>
+
+<span class="sd">    *Parameters*:</span>
+<span class="sd">        * order &gt; 0, number of arcs;</span>
+<span class="sd">        * ndigits &gt; 0, number of digits if IntegerValuation = True, </span>
+<span class="sd">          otherwise number of decimals;</span>
+<span class="sd">        * Normalized = True (r in [-1,1] (default), r in [0,1] if False);</span>
+<span class="sd">        * IntegerValuation = False (default)</span>
+<span class="sd">        * If seed is not None, the random generator is seeded</span>
+
+<span class="sd">    Example python3 session:</span>
+<span class="sd">        &gt;&gt;&gt; from randomDigraphs import RandomValuationDigraph</span>
+<span class="sd">        &gt;&gt;&gt; dg = RandomValuationDigraph(order=5,Normalized=True)</span>
+<span class="sd">        &gt;&gt;&gt; dg.showAll()</span>
+<span class="sd">        *----- show detail -------------*</span>
+<span class="sd">        Digraph          : randomValuationDigraph</span>
+<span class="sd">        *---- Actions ----*</span>
+<span class="sd">        [&#39;1&#39;, &#39;2&#39;, &#39;3&#39;, &#39;4&#39;, &#39;5&#39;]</span>
+<span class="sd">        *---- Characteristic valuation domain ----*</span>
+<span class="sd">        {&#39;max&#39;: Decimal(&#39;1.0&#39;), &#39;min&#39;: Decimal(&#39;-1.0&#39;),</span>
+<span class="sd">         &#39;med&#39;: Decimal(&#39;0.0&#39;), &#39;hasIntegerValuation&#39;: False}</span>
+<span class="sd">        * ---- Relation Table -----</span>
+<span class="sd">          S   |  &#39;1&#39;    &#39;2&#39;    &#39;3&#39;    &#39;4&#39;     &#39;5&#39;     </span>
+<span class="sd">         -----|-----------------------------------</span>
+<span class="sd">          &#39;1&#39; |  0.00   0.28   0.46  -0.66   0.90    </span>
+<span class="sd">          &#39;2&#39; | -0.08   0.00  -0.46  -0.42   0.52    </span>
+<span class="sd">          &#39;3&#39; |  0.84  -0.10   0.00  -0.54   0.58    </span>
+<span class="sd">          &#39;4&#39; |  0.90   0.88   0.90   0.00  -0.38    </span>
+<span class="sd">          &#39;5&#39; | -0.50   0.64   0.42  -0.94   0.00    </span>
+<span class="sd">        *--- Connected Components ---*</span>
+<span class="sd">        1: [&#39;1&#39;, &#39;2&#39;, &#39;3&#39;, &#39;4&#39;, &#39;5&#39;]</span>
+<span class="sd">        Neighborhoods:</span>
+<span class="sd">          Gamma     :</span>
+<span class="sd">        &#39;4&#39;: in =&gt; set(), out =&gt; {&#39;1&#39;, &#39;2&#39;, &#39;3&#39;}</span>
+<span class="sd">        &#39;5&#39;: in =&gt; {&#39;1&#39;, &#39;2&#39;, &#39;3&#39;}, out =&gt; {&#39;2&#39;, &#39;3&#39;}</span>
+<span class="sd">        &#39;1&#39;: in =&gt; {&#39;4&#39;, &#39;3&#39;}, out =&gt; {&#39;5&#39;, &#39;2&#39;, &#39;3&#39;}</span>
+<span class="sd">        &#39;2&#39;: in =&gt; {&#39;4&#39;, &#39;5&#39;, &#39;1&#39;}, out =&gt; {&#39;5&#39;}</span>
+<span class="sd">        &#39;3&#39;: in =&gt; {&#39;4&#39;, &#39;5&#39;, &#39;1&#39;}, out =&gt; {&#39;5&#39;, &#39;1&#39;}</span>
+<span class="sd">          Not Gamma :</span>
+<span class="sd">        &#39;4&#39;: in =&gt; {&#39;5&#39;, &#39;1&#39;, &#39;2&#39;, &#39;3&#39;}, out =&gt; {&#39;5&#39;}</span>
+<span class="sd">        &#39;5&#39;: in =&gt; {&#39;4&#39;}, out =&gt; {&#39;4&#39;, &#39;1&#39;}</span>
+<span class="sd">        &#39;1&#39;: in =&gt; {&#39;5&#39;, &#39;2&#39;}, out =&gt; {&#39;4&#39;}</span>
+<span class="sd">        &#39;2&#39;: in =&gt; {&#39;3&#39;}, out =&gt; {&#39;4&#39;, &#39;1&#39;, &#39;3&#39;}</span>
+<span class="sd">        &#39;3&#39;: in =&gt; {&#39;2&#39;}, out =&gt; {&#39;4&#39;, &#39;2&#39;}</span>
+
+<span class="sd">        &gt;&gt;&gt; dg.exportGraphViz()</span>
+
+<span class="sd">    .. image:: randomValuationDigraph.png</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">order</span><span class="o">=</span><span class="mi">9</span><span class="p">,</span> <span class="n">ndigits</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span>
+                 <span class="n">Normalized</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+                 <span class="n">IntegerValuation</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+                 <span class="n">seed</span> <span class="o">=</span> <span class="kc">None</span><span class="p">):</span>
+        <span class="kn">import</span> <span class="nn">random</span>
+        <span class="n">random</span><span class="o">.</span><span class="n">seed</span><span class="p">(</span><span class="n">seed</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="s1">&#39;randomValuationDigraph&#39;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">order</span> <span class="o">=</span> <span class="n">order</span>
+        <span class="n">nd</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">order</span><span class="p">))</span>
+        <span class="n">actions</span> <span class="o">=</span> <span class="n">OrderedDict</span><span class="p">()</span>
+        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">order</span><span class="p">):</span>
+            <span class="n">actionKey</span> <span class="o">=</span> <span class="p">(</span><span class="s1">&#39;a</span><span class="si">%%</span><span class="s1">0</span><span class="si">%d</span><span class="s1">d&#39;</span> <span class="o">%</span> <span class="n">nd</span><span class="p">)</span> <span class="o">%</span> <span class="p">(</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span>
+            <span class="n">actions</span><span class="p">[</span><span class="n">actionKey</span><span class="p">]</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;shortName&#39;</span><span class="p">:</span><span class="n">actionKey</span><span class="p">,</span> <span class="s1">&#39;name&#39;</span><span class="p">:</span> <span class="s1">&#39;random decision action&#39;</span><span class="p">}</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">actions</span> <span class="o">=</span> <span class="n">actions</span>
+<span class="c1">##        actionsList = [x for x in self.actions]</span>
+<span class="c1">##        actionsList.sort()</span>
+        <span class="k">if</span> <span class="n">IntegerValuation</span><span class="p">:</span>
+            <span class="n">precision</span> <span class="o">=</span> <span class="nb">pow</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span><span class="n">ndigits</span><span class="p">)</span> <span class="o">-</span> <span class="mi">1</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">precision</span> <span class="o">=</span> <span class="nb">pow</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span><span class="n">ndigits</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">IntegerValuation</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">valuationdomain</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;min&#39;</span><span class="p">:</span><span class="o">-</span><span class="n">precision</span><span class="p">,</span> <span class="s1">&#39;med&#39;</span><span class="p">:</span><span class="mi">0</span><span class="p">,</span> <span class="s1">&#39;max&#39;</span><span class="p">:</span><span class="n">precision</span><span class="p">}</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">Normalized</span><span class="p">:</span>
+                 <span class="bp">self</span><span class="o">.</span><span class="n">valuationdomain</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;min&#39;</span><span class="p">:</span><span class="n">Decimal</span><span class="p">(</span><span class="s1">&#39;-1.0&#39;</span><span class="p">),</span> <span class="s1">&#39;med&#39;</span><span class="p">:</span><span class="n">Decimal</span><span class="p">(</span><span class="s1">&#39;0.0&#39;</span><span class="p">),</span> <span class="s1">&#39;max&#39;</span><span class="p">:</span><span class="n">Decimal</span><span class="p">(</span><span class="s1">&#39;1.0&#39;</span><span class="p">)}</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">valuationdomain</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;min&#39;</span><span class="p">:</span><span class="n">Decimal</span><span class="p">(</span><span class="s1">&#39;0&#39;</span><span class="p">),</span> <span class="s1">&#39;med&#39;</span><span class="p">:</span><span class="n">Decimal</span><span class="p">(</span><span class="s1">&#39;0.5&#39;</span><span class="p">),</span> <span class="s1">&#39;max&#39;</span><span class="p">:</span><span class="n">Decimal</span><span class="p">(</span><span class="s1">&#39;1.0&#39;</span><span class="p">)}</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">valuationdomain</span><span class="p">[</span><span class="s1">&#39;hasIntegerValuation&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">IntegerValuation</span>
+        <span class="n">Med</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">valuationdomain</span><span class="p">[</span><span class="s1">&#39;med&#39;</span><span class="p">]</span>
+        <span class="n">relation</span> <span class="o">=</span> <span class="p">{}</span>
+        <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">actions</span><span class="o">.</span><span class="n">keys</span><span class="p">():</span>
+            <span class="n">relation</span><span class="p">[</span><span class="n">x</span><span class="p">]</span> <span class="o">=</span> <span class="p">{}</span>
+            <span class="n">rx</span> <span class="o">=</span> <span class="n">relation</span><span class="p">[</span><span class="n">x</span><span class="p">]</span>
+            <span class="k">for</span> <span class="n">y</span> <span class="ow">in</span> <span class="n">actions</span><span class="o">.</span><span class="n">keys</span><span class="p">():</span>
+                <span class="k">if</span> <span class="n">x</span> <span class="o">==</span> <span class="n">y</span><span class="p">:</span>
+                    <span class="n">rx</span><span class="p">[</span><span class="n">y</span><span class="p">]</span> <span class="o">=</span> <span class="n">Med</span>
+                <span class="k">else</span><span class="p">:</span>
+                    <span class="k">if</span> <span class="n">IntegerValuation</span><span class="p">:</span>
+                        <span class="n">rx</span><span class="p">[</span><span class="n">y</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="mi">2</span><span class="o">*</span><span class="n">random</span><span class="o">.</span><span class="n">randrange</span><span class="p">(</span><span class="n">start</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span><span class="n">stop</span><span class="o">=</span><span class="n">precision</span><span class="p">))</span> <span class="o">-</span> <span class="n">precision</span>
+                    <span class="k">elif</span> <span class="n">Normalized</span><span class="p">:</span>
+                        <span class="n">rx</span><span class="p">[</span><span class="n">y</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="n">Decimal</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="nb">round</span><span class="p">(</span><span class="nb">float</span><span class="p">(</span><span class="n">random</span><span class="o">.</span><span class="n">randrange</span><span class="p">(</span><span class="n">start</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span><span class="n">stop</span><span class="o">=</span><span class="n">precision</span><span class="p">))</span><span class="o">/</span><span class="n">precision</span><span class="p">,</span><span class="n">ndigits</span><span class="p">)))</span> <span class="o">*</span> <span class="n">Decimal</span><span class="p">(</span><span class="s1">&#39;2.0&#39;</span><span class="p">))</span> <span class="o">-</span> <span class="n">Decimal</span><span class="p">(</span><span class="s1">&#39;1.0&#39;</span><span class="p">)</span>
+                    <span class="k">else</span><span class="p">:</span>
+                        <span class="n">rx</span><span class="p">[</span><span class="n">y</span><span class="p">]</span> <span class="o">=</span> <span class="n">Decimal</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="nb">round</span><span class="p">(</span><span class="nb">float</span><span class="p">(</span><span class="n">random</span><span class="o">.</span><span class="n">randrange</span><span class="p">(</span><span class="n">start</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span><span class="n">stop</span><span class="o">=</span><span class="n">precision</span><span class="p">))</span><span class="o">/</span><span class="n">precision</span><span class="p">,</span><span class="n">ndigits</span><span class="p">)))</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">relation</span> <span class="o">=</span> <span class="n">relation</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">recodeValuation</span><span class="p">(</span><span class="n">ndigits</span><span class="o">=</span><span class="n">ndigits</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">seed</span> <span class="o">=</span> <span class="n">seed</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">gamma</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">gammaSets</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">notGamma</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">notGammaSets</span><span class="p">()</span></div>
+
+
+<div class="viewcode-block" id="RandomOutrankingValuationDigraph">
+<a class="viewcode-back" href="../techDoc.html#randomDigraphs.RandomOutrankingValuationDigraph">[docs]</a>
+<span class="k">class</span> <span class="nc">RandomOutrankingValuationDigraph</span><span class="p">(</span><span class="n">Digraph</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Specialization of the general Digraph class for generating</span>
+<span class="sd">    temporary uniform random outranking valuation digraphs.</span>
+
+<span class="sd">    .. note:: The valuation verifies the characteristic condition:</span>
+<span class="sd">              r(x,y) &gt;= -r(y,x) for x neq y</span>
+
+<span class="sd">    *Parameters*:</span>
+<span class="sd">        - *weightsSum* := integer (default = 10), supposed sum of criteria significance weights)</span>
+<span class="sd">        - *distribution* := &#39;uniform&#39; (default) | &#39;triangular&#39;</span>
+<span class="sd">        - *incomparabilityProbability* := float (default = 0.05),</span>
+<span class="sd">        - *polarizationProbability* := float (default = 0.05).</span>
+<span class="sd">    </span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">order</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span><span class="n">weightsSum</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span>
+                 <span class="n">distribution</span><span class="o">=</span><span class="s1">&#39;uniform&#39;</span><span class="p">,</span>
+                 <span class="n">incomparabilityProbability</span><span class="o">=</span><span class="mf">0.1</span><span class="p">,</span>
+                 <span class="n">polarizationProbability</span><span class="o">=</span><span class="mf">0.05</span><span class="p">,</span>
+                 <span class="n">ndigits</span><span class="o">=</span><span class="mi">4</span><span class="p">,</span>
+                 <span class="n">seed</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span><span class="n">Debug</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+        <span class="kn">from</span> <span class="nn">decimal</span> <span class="kn">import</span> <span class="n">Decimal</span>
+        <span class="kn">import</span> <span class="nn">random</span>
+        <span class="c1"># seeding the random generator</span>
+        <span class="n">random</span><span class="o">.</span><span class="n">seed</span><span class="p">(</span><span class="n">seed</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">seed</span> <span class="o">=</span> <span class="n">seed</span>
+        <span class="c1"># setting the name</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="s1">&#39;randomOutrankingValuationDigraph&#39;</span>
+        <span class="c1"># init decision actions</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">order</span> <span class="o">=</span> <span class="n">order</span>
+        <span class="n">nd</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">order</span><span class="p">))</span>
+        <span class="n">actions</span> <span class="o">=</span> <span class="n">OrderedDict</span><span class="p">()</span>
+        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">order</span><span class="p">):</span>
+            <span class="n">actionKey</span> <span class="o">=</span> <span class="p">(</span><span class="s1">&#39;a</span><span class="si">%%</span><span class="s1">0</span><span class="si">%d</span><span class="s1">d&#39;</span> <span class="o">%</span> <span class="n">nd</span><span class="p">)</span> <span class="o">%</span> <span class="p">(</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span>
+            <span class="n">actions</span><span class="p">[</span><span class="n">actionKey</span><span class="p">]</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;shortName&#39;</span><span class="p">:</span><span class="n">actionKey</span><span class="p">,</span>
+                                  <span class="s1">&#39;name&#39;</span><span class="p">:</span> <span class="s1">&#39;random decision action&#39;</span><span class="p">}</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">actions</span> <span class="o">=</span> <span class="n">actions</span>
+        <span class="c1"># setting integer valuation domain</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">weightsSum</span> <span class="o">=</span> <span class="n">weightsSum</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">valuationdomain</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;min&#39;</span><span class="p">:</span><span class="n">Decimal</span><span class="p">(</span><span class="o">-</span><span class="n">weightsSum</span><span class="p">),</span>
+                                <span class="s1">&#39;med&#39;</span><span class="p">:</span><span class="n">Decimal</span><span class="p">(</span><span class="mi">0</span><span class="p">),</span>
+                                <span class="s1">&#39;max&#39;</span><span class="p">:</span><span class="n">Decimal</span><span class="p">(</span><span class="n">weightsSum</span><span class="p">)</span> <span class="p">}</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">valuationdomain</span><span class="p">[</span><span class="s1">&#39;hasIntegerValuation&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="kc">True</span>
+        <span class="n">Med</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">valuationdomain</span><span class="p">[</span><span class="s1">&#39;med&#39;</span><span class="p">]</span>
+        <span class="n">Max</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">valuationdomain</span><span class="p">[</span><span class="s1">&#39;max&#39;</span><span class="p">]</span>
+        <span class="n">Min</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">valuationdomain</span><span class="p">[</span><span class="s1">&#39;min&#39;</span><span class="p">]</span>
+        <span class="c1"># init relation dictionary:</span>
+        <span class="n">relation</span> <span class="o">=</span> <span class="p">{}</span>
+        <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">actions</span><span class="p">:</span>
+            <span class="n">relation</span><span class="p">[</span><span class="n">x</span><span class="p">]</span> <span class="o">=</span> <span class="p">{}</span>
+            <span class="k">for</span> <span class="n">y</span> <span class="ow">in</span> <span class="n">actions</span><span class="p">:</span>
+                <span class="k">if</span> <span class="n">x</span> <span class="o">==</span> <span class="n">y</span><span class="p">:</span>
+                    <span class="n">relation</span><span class="p">[</span><span class="n">x</span><span class="p">][</span><span class="n">y</span><span class="p">]</span> <span class="o">=</span> <span class="n">Max</span>
+                <span class="k">else</span><span class="p">:</span>
+                    <span class="n">relation</span><span class="p">[</span><span class="n">x</span><span class="p">][</span><span class="n">y</span><span class="p">]</span> <span class="o">=</span> <span class="n">Med</span>
+        <span class="c1"># generate random outranking valuation:</span>
+        <span class="c1">#   r(x,y) &gt;= -r(y,x) for x neq y</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">incomparabilityProbability</span> <span class="o">=</span> <span class="n">incomparabilityProbability</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">polarizationProbability</span> <span class="o">=</span> <span class="n">polarizationProbability</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">distribution</span> <span class="o">=</span> <span class="n">distribution</span>
+        <span class="n">actionsList</span> <span class="o">=</span> <span class="p">[</span><span class="n">x</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">actions</span><span class="p">]</span>
+        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">order</span><span class="p">):</span>
+            <span class="n">x</span> <span class="o">=</span> <span class="n">actionsList</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
+            <span class="n">rx</span> <span class="o">=</span> <span class="n">relation</span><span class="p">[</span><span class="n">x</span><span class="p">]</span>
+            <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">,</span><span class="n">order</span><span class="p">):</span>
+                <span class="n">y</span> <span class="o">=</span> <span class="n">actionsList</span><span class="p">[</span><span class="n">j</span><span class="p">]</span>
+                <span class="n">ry</span> <span class="o">=</span> <span class="n">relation</span><span class="p">[</span><span class="n">y</span><span class="p">]</span>
+                <span class="n">u</span> <span class="o">=</span> <span class="n">random</span><span class="o">.</span><span class="n">random</span><span class="p">()</span>
+                <span class="k">if</span> <span class="n">u</span> <span class="o">&lt;</span> <span class="n">incomparabilityProbability</span><span class="p">:</span>
+                    <span class="n">ry</span><span class="p">[</span><span class="n">x</span><span class="p">]</span> <span class="o">=</span> <span class="n">Med</span> 
+                    <span class="n">rx</span><span class="p">[</span><span class="n">y</span><span class="p">]</span> <span class="o">=</span> <span class="n">Med</span>
+                <span class="k">elif</span> <span class="n">u</span> <span class="o">&lt;</span> <span class="p">(</span><span class="n">incomparabilityProbability</span> <span class="o">+</span> <span class="n">polarizationProbability</span><span class="p">):</span>
+                    <span class="n">choices</span> <span class="o">=</span> <span class="p">[</span><span class="n">weightsSum</span><span class="p">,</span><span class="o">-</span><span class="n">weightsSum</span><span class="p">]</span>
+                    <span class="n">ry</span><span class="p">[</span><span class="n">x</span><span class="p">]</span> <span class="o">=</span> <span class="n">random</span><span class="o">.</span><span class="n">choice</span><span class="p">(</span><span class="n">choices</span><span class="p">)</span>
+                    <span class="n">rx</span><span class="p">[</span><span class="n">y</span><span class="p">]</span> <span class="o">=</span> <span class="n">Decimal</span><span class="p">(</span><span class="n">random</span><span class="o">.</span><span class="n">randrange</span><span class="p">(</span><span class="n">start</span><span class="o">=-</span><span class="n">ry</span><span class="p">[</span><span class="n">x</span><span class="p">],</span>
+                                                 <span class="n">stop</span><span class="o">=</span><span class="n">weightsSum</span><span class="o">+</span><span class="mi">1</span><span class="p">))</span>                  
+                <span class="k">elif</span> <span class="n">distribution</span> <span class="o">==</span> <span class="s1">&#39;uniform&#39;</span><span class="p">:</span>
+                    <span class="n">u1</span> <span class="o">=</span> <span class="n">random</span><span class="o">.</span><span class="n">randrange</span><span class="p">(</span><span class="n">start</span><span class="o">=-</span><span class="n">weightsSum</span><span class="p">,</span>
+                                          <span class="n">stop</span><span class="o">=</span><span class="n">weightsSum</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span>
+                    <span class="n">ry</span><span class="p">[</span><span class="n">x</span><span class="p">]</span> <span class="o">=</span> <span class="n">Decimal</span><span class="p">(</span><span class="n">u1</span><span class="p">)</span> 
+                    <span class="n">rx</span><span class="p">[</span><span class="n">y</span><span class="p">]</span> <span class="o">=</span> <span class="n">Decimal</span><span class="p">(</span><span class="n">random</span><span class="o">.</span><span class="n">randrange</span><span class="p">(</span><span class="n">start</span><span class="o">=-</span><span class="n">u1</span><span class="p">,</span>
+                                                     <span class="n">stop</span><span class="o">=</span><span class="n">weightsSum</span><span class="o">+</span><span class="mi">1</span><span class="p">))</span>
+                <span class="k">elif</span> <span class="n">distribution</span> <span class="o">==</span> <span class="s1">&#39;triangular&#39;</span><span class="p">:</span>
+                    <span class="c1">#from randomNumbers import ExtendedTriangularRandomVariable</span>
+                    <span class="n">amplitude1</span> <span class="o">=</span> <span class="mi">2</span> <span class="o">*</span> <span class="n">weightsSum</span>
+                    <span class="n">u1</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">random</span><span class="o">.</span><span class="n">triangular</span><span class="p">(</span><span class="n">low</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span>
+                                        <span class="n">high</span><span class="o">=</span><span class="n">amplitude1</span><span class="p">))</span>
+                    <span class="c1">#u1 = int(extr1.random())</span>
+                    <span class="n">ry</span><span class="p">[</span><span class="n">x</span><span class="p">]</span> <span class="o">=</span> <span class="n">Decimal</span><span class="p">(</span><span class="n">u1</span> <span class="o">-</span> <span class="n">weightsSum</span><span class="p">)</span>
+                    <span class="n">lowLim</span> <span class="o">=</span> <span class="n">amplitude1</span> <span class="o">-</span> <span class="n">u1</span>
+                    <span class="n">u2</span> <span class="o">=</span> <span class="n">random</span><span class="o">.</span><span class="n">randrange</span><span class="p">(</span><span class="n">start</span><span class="o">=</span><span class="n">lowLim</span><span class="p">,</span>
+                                          <span class="n">stop</span><span class="o">=</span><span class="n">amplitude1</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span>        
+                    <span class="n">rx</span><span class="p">[</span><span class="n">y</span><span class="p">]</span> <span class="o">=</span> <span class="n">Decimal</span><span class="p">(</span><span class="n">u2</span> <span class="o">-</span> <span class="n">weightsSum</span><span class="p">)</span>                    
+                    <span class="k">if</span> <span class="n">Debug</span><span class="p">:</span>
+                        <span class="nb">print</span><span class="p">(</span><span class="n">y</span><span class="p">,</span><span class="n">x</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="n">amplitude1</span><span class="p">,</span><span class="n">u1</span><span class="p">,</span><span class="n">ry</span><span class="p">[</span><span class="n">x</span><span class="p">])</span>
+                        <span class="nb">print</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="n">y</span><span class="p">,</span><span class="n">lowLim</span><span class="p">,</span><span class="n">amplitude1</span><span class="p">,</span><span class="n">u2</span><span class="p">,</span><span class="n">rx</span><span class="p">[</span><span class="n">y</span><span class="p">])</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">relation</span> <span class="o">=</span> <span class="n">relation</span>
+        <span class="c1">#self.recodeValuation(ndigits=ndigits)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">gamma</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">gammaSets</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">notGamma</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">notGammaSets</span><span class="p">()</span></div>
+
+
+<div class="viewcode-block" id="RandomWeakTournament">
+<a class="viewcode-back" href="../techDoc.html#randomDigraphs.RandomWeakTournament">[docs]</a>
+<span class="k">class</span> <span class="nc">RandomWeakTournament</span><span class="p">(</span><span class="n">Digraph</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Specialization of the general Digraph class for generating</span>
+<span class="sd">    temporary bipolar-valued weak, i.e. partially determinate, tournaments.</span>
+
+<span class="sd">    *Parameters*:</span>
+<span class="sd">        * order = n &gt; 0</span>
+<span class="sd">        * weaknessDegree in [0.0,1.0]: proportion of indeterminate links (default = 0.25)</span>
+<span class="sd">        * If IntegerValuation = True,</span>
+<span class="sd">          valuation domain = [-pow(10,ndigits); + pow(10,ndigits)]</span>
+<span class="sd">          else valuation domain = [-1.0,1.0]</span>
+<span class="sd">        * If seed is not None, the random number generator is seeded</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">order</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span><span class="n">ndigits</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span>
+                 <span class="n">IntegerValuation</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+                 <span class="n">weaknessDegree</span><span class="o">=</span><span class="mf">0.25</span><span class="p">,</span>
+                 <span class="n">indeterminatenessProbability</span><span class="o">=</span><span class="mf">0.0</span><span class="p">,</span>
+                 <span class="n">seed</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+                 <span class="n">Comments</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+        <span class="kn">from</span> <span class="nn">decimal</span> <span class="kn">import</span> <span class="n">Decimal</span>
+        <span class="kn">import</span> <span class="nn">random</span>
+        <span class="n">random</span><span class="o">.</span><span class="n">seed</span><span class="p">(</span><span class="n">seed</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">seed</span><span class="o">=</span> <span class="n">seed</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">weaknessDegree</span> <span class="o">=</span> <span class="n">weaknessDegree</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">indeterminatenessProbability</span> <span class="o">=</span> <span class="n">indeterminatenessProbability</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="s1">&#39;randomWeakTournament&#39;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">order</span> <span class="o">=</span> <span class="n">order</span>
+        <span class="n">nd</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">order</span><span class="p">))</span>
+        <span class="n">actions</span> <span class="o">=</span> <span class="n">OrderedDict</span><span class="p">()</span>
+        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">order</span><span class="p">):</span>
+            <span class="n">actionKey</span> <span class="o">=</span> <span class="p">(</span><span class="s1">&#39;a</span><span class="si">%%</span><span class="s1">0</span><span class="si">%d</span><span class="s1">d&#39;</span> <span class="o">%</span> <span class="n">nd</span><span class="p">)</span> <span class="o">%</span> <span class="p">(</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span>
+            <span class="n">actions</span><span class="p">[</span><span class="n">actionKey</span><span class="p">]</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;shortName&#39;</span><span class="p">:</span><span class="n">actionKey</span><span class="p">,</span>
+                                  <span class="s1">&#39;name&#39;</span><span class="p">:</span> <span class="s1">&#39;random decision action&#39;</span><span class="p">}</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">actions</span> <span class="o">=</span> <span class="n">actions</span>
+<span class="c1">##        actionlist = list(range(order+1))</span>
+<span class="c1">##        actionlist.remove(0)</span>
+<span class="c1">##        actions = []</span>
+<span class="c1">##        for x in actionlist:</span>
+<span class="c1">##            actions.append(str(x))</span>
+<span class="c1">##        self.actions = actions</span>
+        <span class="n">Max</span> <span class="o">=</span> <span class="nb">pow</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span><span class="n">ndigits</span><span class="p">)</span>
+        <span class="n">Min</span> <span class="o">=</span> <span class="o">-</span> <span class="n">Max</span>
+        <span class="n">Med</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="n">precision</span> <span class="o">=</span> <span class="n">Max</span>
+        <span class="n">dPrecision</span> <span class="o">=</span> <span class="n">Decimal</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">precision</span><span class="p">))</span>
+        <span class="k">if</span> <span class="n">IntegerValuation</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">valuationdomain</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;hasIntegerValuation&#39;</span><span class="p">:</span><span class="kc">True</span><span class="p">,</span> <span class="s1">&#39;min&#39;</span><span class="p">:</span><span class="n">Decimal</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">Min</span><span class="p">)),</span> <span class="s1">&#39;med&#39;</span><span class="p">:</span><span class="n">Decimal</span><span class="p">(</span><span class="s1">&#39;0&#39;</span><span class="p">),</span> <span class="s1">&#39;max&#39;</span><span class="p">:</span><span class="n">Decimal</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">Max</span><span class="p">))}</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">valuationdomain</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;hasIntegerValuation&#39;</span><span class="p">:</span><span class="kc">False</span><span class="p">,</span> <span class="s1">&#39;min&#39;</span><span class="p">:</span><span class="n">Decimal</span><span class="p">(</span><span class="s1">&#39;-1.0&#39;</span><span class="p">),</span> <span class="s1">&#39;med&#39;</span><span class="p">:</span><span class="n">Decimal</span><span class="p">(</span><span class="s1">&#39;0.0&#39;</span><span class="p">),</span> <span class="s1">&#39;max&#39;</span><span class="p">:</span><span class="n">Decimal</span><span class="p">(</span><span class="s1">&#39;1.0&#39;</span><span class="p">)}</span>
+        <span class="n">relation</span> <span class="o">=</span> <span class="p">{}</span>
+        <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">actions</span><span class="o">.</span><span class="n">keys</span><span class="p">():</span>
+            <span class="n">relation</span><span class="p">[</span><span class="n">x</span><span class="p">]</span> <span class="o">=</span> <span class="p">{}</span>
+            <span class="n">rx</span> <span class="o">=</span> <span class="n">relation</span><span class="p">[</span><span class="n">x</span><span class="p">]</span>
+            <span class="k">for</span> <span class="n">y</span> <span class="ow">in</span> <span class="n">actions</span><span class="o">.</span><span class="n">keys</span><span class="p">():</span>
+                <span class="n">rx</span><span class="p">[</span><span class="n">y</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">valuationdomain</span><span class="p">[</span><span class="s1">&#39;med&#39;</span><span class="p">]</span>
+
+        <span class="n">actionsList</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">actions</span><span class="o">.</span><span class="n">keys</span><span class="p">())</span>
+        <span class="n">random</span><span class="o">.</span><span class="n">shuffle</span><span class="p">(</span><span class="n">actionsList</span><span class="p">)</span>
+        <span class="n">weaknessDegree</span> <span class="o">=</span> <span class="n">Decimal</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">weaknessDegree</span><span class="p">))</span>
+        <span class="n">forwardDegree</span> <span class="o">=</span> <span class="p">(</span><span class="n">Decimal</span><span class="p">(</span><span class="s1">&#39;1.0&#39;</span><span class="p">)</span> <span class="o">-</span> <span class="n">weaknessDegree</span><span class="p">)</span><span class="o">/</span><span class="n">Decimal</span><span class="p">(</span><span class="s1">&#39;2&#39;</span><span class="p">)</span>
+
+        <span class="c1">#print actionsList</span>
+        <span class="n">n</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">actionsList</span><span class="p">)</span>
+        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
+            <span class="n">rai</span> <span class="o">=</span> <span class="n">relation</span><span class="p">[</span><span class="n">actionsList</span><span class="p">[</span><span class="n">i</span><span class="p">]]</span>
+            <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">i</span><span class="p">,</span><span class="n">n</span><span class="p">):</span>
+                <span class="c1">#print i,j</span>
+                <span class="k">if</span> <span class="n">i</span> <span class="o">==</span> <span class="n">j</span><span class="p">:</span>
+                    <span class="c1">#print actionsList[i],actionsList[j]</span>
+                    <span class="n">rai</span><span class="p">[</span><span class="n">actionsList</span><span class="p">[</span><span class="n">j</span><span class="p">]]</span> <span class="o">=</span> <span class="n">Med</span>
+                <span class="k">else</span><span class="p">:</span>
+                    <span class="n">u</span> <span class="o">=</span> <span class="n">Decimal</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">random</span><span class="o">.</span><span class="n">randint</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="n">precision</span><span class="p">)))</span><span class="o">/</span><span class="n">dPrecision</span>
+                    <span class="n">u1</span> <span class="o">=</span> <span class="n">Decimal</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">random</span><span class="o">.</span><span class="n">randint</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="n">precision</span><span class="p">)))</span>
+                    <span class="n">u2</span> <span class="o">=</span> <span class="n">Decimal</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">random</span><span class="o">.</span><span class="n">randint</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="n">precision</span><span class="p">)))</span>
+
+                    <span class="k">if</span> <span class="n">u</span> <span class="o">&lt;</span> <span class="n">weaknessDegree</span><span class="p">:</span> <span class="c1"># i = j</span>
+                        <span class="k">if</span> <span class="n">IntegerValuation</span><span class="p">:</span>
+                            <span class="n">randeval1</span> <span class="o">=</span> <span class="n">u1</span>
+                            <span class="n">randeval2</span> <span class="o">=</span> <span class="n">u2</span>
+                        <span class="k">else</span><span class="p">:</span>
+                            <span class="n">randeval1</span> <span class="o">=</span> <span class="n">u1</span><span class="o">/</span><span class="n">dPrecision</span>
+                            <span class="n">randeval2</span> <span class="o">=</span> <span class="n">u2</span><span class="o">/</span><span class="n">dPrecision</span>
+
+                    <span class="k">elif</span> <span class="n">u</span> <span class="o">&lt;</span> <span class="n">forwardDegree</span><span class="p">:</span> <span class="c1"># i &gt; j</span>
+                        <span class="k">if</span> <span class="n">IntegerValuation</span><span class="p">:</span>
+                            <span class="n">randeval1</span> <span class="o">=</span> <span class="n">u1</span>
+                            <span class="n">randeval2</span> <span class="o">=</span> <span class="n">Min</span> <span class="o">+</span> <span class="n">u2</span>
+                        <span class="k">else</span><span class="p">:</span>
+                            <span class="n">randeval1</span> <span class="o">=</span> <span class="n">u1</span><span class="o">/</span><span class="n">dPrecision</span>
+                            <span class="n">randeval2</span> <span class="o">=</span> <span class="p">(</span><span class="n">Min</span> <span class="o">+</span> <span class="n">u2</span><span class="p">)</span><span class="o">/</span><span class="n">dPrecision</span>
+
+                    <span class="k">else</span><span class="p">:</span> <span class="c1"># j &gt; i</span>
+                        <span class="k">if</span> <span class="n">IntegerValuation</span><span class="p">:</span>
+                            <span class="n">randeval1</span> <span class="o">=</span> <span class="n">Min</span> <span class="o">+</span> <span class="n">u1</span>
+                            <span class="n">randeval2</span> <span class="o">=</span> <span class="n">u2</span>
+                        <span class="k">else</span><span class="p">:</span>
+                            <span class="n">randeval1</span> <span class="o">=</span> <span class="p">(</span><span class="n">Min</span> <span class="o">+</span> <span class="n">u1</span><span class="p">)</span><span class="o">/</span><span class="n">dPrecision</span>
+                            <span class="n">randeval2</span> <span class="o">=</span> <span class="n">u2</span><span class="o">/</span><span class="n">dPrecision</span>
+
+                    <span class="k">if</span> <span class="n">IntegerValuation</span><span class="p">:</span>
+                        <span class="n">rai</span><span class="p">[</span><span class="n">actionsList</span><span class="p">[</span><span class="n">j</span><span class="p">]]</span> <span class="o">=</span> <span class="n">Decimal</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">randeval1</span><span class="p">))</span>
+                        <span class="n">relation</span><span class="p">[</span><span class="n">actionsList</span><span class="p">[</span><span class="n">j</span><span class="p">]][</span><span class="n">actionsList</span><span class="p">[</span><span class="n">i</span><span class="p">]]</span> <span class="o">=</span> <span class="n">Decimal</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">randeval2</span><span class="p">))</span>
+                    <span class="k">else</span><span class="p">:</span>
+                        <span class="n">rai</span><span class="p">[</span><span class="n">actionsList</span><span class="p">[</span><span class="n">j</span><span class="p">]]</span> <span class="o">=</span> <span class="n">Decimal</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="nb">round</span><span class="p">(</span><span class="n">randeval1</span><span class="p">,</span><span class="n">ndigits</span><span class="p">)))</span>
+                        <span class="n">relation</span><span class="p">[</span><span class="n">actionsList</span><span class="p">[</span><span class="n">j</span><span class="p">]][</span><span class="n">actionsList</span><span class="p">[</span><span class="n">i</span><span class="p">]]</span> <span class="o">=</span> <span class="n">Decimal</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="nb">round</span><span class="p">(</span><span class="n">randeval2</span><span class="p">,</span><span class="n">ndigits</span><span class="p">)))</span>
+        <span class="c1"># random weak-completeness (r(x,y) &lt;= Med) =&gt; (r(y,x) &gt; Med)</span>
+        <span class="n">updateRelation</span> <span class="o">=</span> <span class="p">{}</span>
+        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
+            <span class="n">x</span> <span class="o">=</span> <span class="n">actionsList</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
+            <span class="n">updateRelation</span><span class="p">[</span><span class="n">x</span><span class="p">]</span> <span class="o">=</span> <span class="p">{}</span>
+            <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
+                <span class="n">y</span> <span class="o">=</span> <span class="n">actionsList</span><span class="p">[</span><span class="n">j</span><span class="p">]</span>
+                <span class="k">if</span> <span class="n">relation</span><span class="p">[</span><span class="n">y</span><span class="p">][</span><span class="n">x</span><span class="p">]</span> <span class="o">&gt;</span> <span class="n">Med</span><span class="p">:</span>
+                    <span class="k">if</span> <span class="n">random</span><span class="o">.</span><span class="n">random</span><span class="p">()</span> <span class="o">&lt;=</span> <span class="n">indeterminatenessProbability</span><span class="p">:</span>
+                        <span class="n">updateRelation</span><span class="p">[</span><span class="n">x</span><span class="p">][</span><span class="n">y</span><span class="p">]</span> <span class="o">=</span> <span class="n">Med</span>
+                    <span class="k">else</span><span class="p">:</span>
+                        <span class="n">updateRelation</span><span class="p">[</span><span class="n">x</span><span class="p">][</span><span class="n">y</span><span class="p">]</span> <span class="o">=</span> <span class="n">relation</span><span class="p">[</span><span class="n">x</span><span class="p">][</span><span class="n">y</span><span class="p">]</span>
+                <span class="k">else</span><span class="p">:</span>
+                    <span class="n">updateRelation</span><span class="p">[</span><span class="n">x</span><span class="p">][</span><span class="n">y</span><span class="p">]</span> <span class="o">=</span> <span class="nb">abs</span><span class="p">(</span><span class="n">relation</span><span class="p">[</span><span class="n">x</span><span class="p">][</span><span class="n">y</span><span class="p">])</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">relation</span> <span class="o">=</span> <span class="n">updateRelation</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">recodeValuation</span><span class="p">(</span><span class="n">ndigits</span><span class="o">=</span><span class="n">ndigits</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">gamma</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">gammaSets</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">notGamma</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">notGammaSets</span><span class="p">()</span>
+
+        <span class="k">if</span> <span class="n">Comments</span><span class="p">:</span>
+             <span class="nb">print</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">order</span><span class="o">*</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">order</span><span class="o">-</span><span class="mi">1</span><span class="p">),</span> <span class="bp">self</span><span class="o">.</span><span class="n">computeRelationalStructure</span><span class="p">())</span></div>
+
+
+
+<div class="viewcode-block" id="RandomPartialTournament">
+<a class="viewcode-back" href="../techDoc.html#randomDigraphs.RandomPartialTournament">[docs]</a>
+<span class="k">class</span> <span class="nc">RandomPartialTournament</span><span class="p">(</span><span class="n">Digraph</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Specialization of the general Digraph class for generating</span>
+<span class="sd">    temporary partial tournaments.</span>
+
+<span class="sd">    *Parameter*:</span>
+<span class="sd">       * order = n &gt; 0</span>
+<span class="sd">       * If valuationDomain = None, valuation is normalized (in [-1.0,1.0])</span>
+<span class="sd">       * If is Crips = True, valuation is polarized to min and max values</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">order</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span><span class="n">ndigits</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span>
+                 <span class="n">Crisp</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+                 <span class="n">missingRelationProbability</span> <span class="o">=</span> <span class="mf">0.3</span><span class="p">,</span>
+                 <span class="n">seed</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+                 <span class="n">Debug</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+        <span class="kn">from</span> <span class="nn">decimal</span> <span class="kn">import</span> <span class="n">Decimal</span>
+        <span class="kn">import</span> <span class="nn">random</span>
+        <span class="k">if</span> <span class="n">seed</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">seed</span> <span class="o">=</span> <span class="n">random</span><span class="o">.</span><span class="n">randint</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">1000</span><span class="p">)</span>
+        <span class="n">random</span><span class="o">.</span><span class="n">seed</span><span class="p">(</span><span class="n">seed</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">seed</span> <span class="o">=</span> <span class="n">seed</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="s1">&#39;randomPartialTournament&#39;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">order</span> <span class="o">=</span> <span class="n">order</span>
+        <span class="n">nd</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">order</span><span class="p">))</span>
+        <span class="n">actions</span> <span class="o">=</span> <span class="n">OrderedDict</span><span class="p">()</span>
+        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">order</span><span class="p">):</span>
+            <span class="n">actionKey</span> <span class="o">=</span> <span class="p">(</span><span class="s1">&#39;a</span><span class="si">%%</span><span class="s1">0</span><span class="si">%d</span><span class="s1">d&#39;</span> <span class="o">%</span> <span class="n">nd</span><span class="p">)</span> <span class="o">%</span> <span class="p">(</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span>
+            <span class="n">actions</span><span class="p">[</span><span class="n">actionKey</span><span class="p">]</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;shortName&#39;</span><span class="p">:</span><span class="n">actionKey</span><span class="p">,</span>
+                                  <span class="s1">&#39;name&#39;</span><span class="p">:</span> <span class="s1">&#39;random decision action&#39;</span><span class="p">}</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">actions</span> <span class="o">=</span> <span class="n">actions</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">valuationdomain</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;min&#39;</span><span class="p">:</span><span class="n">Decimal</span><span class="p">(</span><span class="s1">&#39;-1.0&#39;</span><span class="p">),</span>
+                                <span class="s1">&#39;med&#39;</span><span class="p">:</span><span class="n">Decimal</span><span class="p">(</span><span class="s1">&#39;0.0&#39;</span><span class="p">),</span>
+                                <span class="s1">&#39;max&#39;</span><span class="p">:</span><span class="n">Decimal</span><span class="p">(</span><span class="s1">&#39;1.0&#39;</span><span class="p">)}</span>
+        <span class="n">Max</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">valuationdomain</span><span class="p">[</span><span class="s1">&#39;max&#39;</span><span class="p">]</span>
+        <span class="n">Min</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">valuationdomain</span><span class="p">[</span><span class="s1">&#39;min&#39;</span><span class="p">]</span>
+        <span class="n">Med</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">valuationdomain</span><span class="p">[</span><span class="s1">&#39;med&#39;</span><span class="p">]</span>
+        <span class="n">valuationRange</span> <span class="o">=</span> <span class="n">Max</span> <span class="o">-</span> <span class="n">Min</span>
+        <span class="n">precision</span> <span class="o">=</span> <span class="nb">pow</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span><span class="n">ndigits</span><span class="p">)</span>
+        <span class="n">relation</span> <span class="o">=</span> <span class="p">{}</span>
+        <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">actions</span><span class="p">:</span>
+            <span class="n">relation</span><span class="p">[</span><span class="n">x</span><span class="p">]</span> <span class="o">=</span> <span class="p">{}</span>
+            <span class="n">rx</span> <span class="o">=</span> <span class="n">relation</span><span class="p">[</span><span class="n">x</span><span class="p">]</span>
+            <span class="k">for</span> <span class="n">y</span> <span class="ow">in</span> <span class="n">actions</span><span class="p">:</span>
+                <span class="n">rx</span><span class="p">[</span><span class="n">y</span><span class="p">]</span> <span class="o">=</span> <span class="n">Med</span>
+<span class="c1">##        if seed is not None:</span>
+<span class="c1">##            random.seed(seed)</span>
+        <span class="n">actionsList</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">actions</span><span class="o">.</span><span class="n">keys</span><span class="p">())</span>
+        <span class="k">if</span> <span class="n">Debug</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="n">actionsList</span><span class="p">)</span>
+        <span class="n">n</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">actionsList</span><span class="p">)</span>
+        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
+            <span class="n">rai</span> <span class="o">=</span> <span class="n">relation</span><span class="p">[</span><span class="n">actionsList</span><span class="p">[</span><span class="n">i</span><span class="p">]]</span>
+            <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">,</span><span class="n">n</span><span class="p">):</span>
+                <span class="n">raj</span> <span class="o">=</span> <span class="n">relation</span><span class="p">[</span><span class="n">actionsList</span><span class="p">[</span><span class="n">j</span><span class="p">]]</span>
+                <span class="n">u0</span> <span class="o">=</span> <span class="n">random</span><span class="o">.</span><span class="n">randint</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="n">precision</span><span class="p">)</span><span class="o">/</span><span class="n">precision</span>
+                <span class="k">if</span> <span class="n">Debug</span><span class="p">:</span>
+                    <span class="nb">print</span><span class="p">(</span><span class="n">i</span><span class="p">,</span><span class="n">j</span><span class="p">,</span><span class="n">u0</span><span class="p">,</span><span class="n">missingRelationProbability</span><span class="p">)</span>
+                <span class="k">if</span> <span class="n">u0</span> <span class="o">&gt;=</span> <span class="n">missingRelationProbability</span><span class="p">:</span>
+                    <span class="k">if</span> <span class="n">Debug</span><span class="p">:</span>
+                        <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;asymmetric situation&#39;</span><span class="p">)</span>
+                    <span class="n">u</span> <span class="o">=</span> <span class="n">Decimal</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">random</span><span class="o">.</span><span class="n">randint</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="n">precision</span><span class="p">)</span><span class="o">/</span><span class="n">precision</span><span class="p">))</span>
+                    <span class="k">if</span> <span class="n">Debug</span><span class="p">:</span>
+                        <span class="nb">print</span><span class="p">(</span><span class="n">u</span><span class="p">)</span>
+                    <span class="k">if</span> <span class="n">Crisp</span><span class="p">:</span>
+                        <span class="k">if</span> <span class="n">u</span> <span class="o">&lt;</span> <span class="n">Decimal</span><span class="p">(</span><span class="s1">&#39;0.5&#39;</span><span class="p">):</span>
+                            <span class="n">rai</span><span class="p">[</span><span class="n">actionsList</span><span class="p">[</span><span class="n">j</span><span class="p">]]</span> <span class="o">=</span> <span class="n">Min</span>
+                            <span class="n">raj</span><span class="p">[</span><span class="n">actionsList</span><span class="p">[</span><span class="n">i</span><span class="p">]]</span> <span class="o">=</span> <span class="n">Max</span>
+                        <span class="k">else</span><span class="p">:</span>
+                            <span class="n">rai</span><span class="p">[</span><span class="n">actionsList</span><span class="p">[</span><span class="n">j</span><span class="p">]]</span> <span class="o">=</span> <span class="n">Max</span>
+                            <span class="n">raj</span><span class="p">[</span><span class="n">actionsList</span><span class="p">[</span><span class="n">i</span><span class="p">]]</span> <span class="o">=</span> <span class="n">Min</span>
+                    <span class="k">else</span><span class="p">:</span>
+                        <span class="n">valuation</span> <span class="o">=</span> <span class="n">Decimal</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="nb">round</span><span class="p">(</span><span class="n">u</span><span class="p">,</span><span class="n">ndigits</span><span class="p">)))</span>
+                        <span class="n">rai</span><span class="p">[</span><span class="n">actionsList</span><span class="p">[</span><span class="n">j</span><span class="p">]]</span> <span class="o">=</span> <span class="n">valuation</span>
+                        <span class="n">raj</span><span class="p">[</span><span class="n">actionsList</span><span class="p">[</span><span class="n">i</span><span class="p">]]</span> <span class="o">=</span> <span class="o">-</span><span class="n">valuation</span>
+                <span class="k">else</span><span class="p">:</span> <span class="c1"># missing asymmetric relation</span>
+                    <span class="k">if</span> <span class="n">Debug</span><span class="p">:</span>
+                        <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;absence situation&#39;</span><span class="p">)</span>
+                    
+                    <span class="k">if</span> <span class="n">Crisp</span><span class="p">:</span>
+                        <span class="n">rai</span><span class="p">[</span><span class="n">actionsList</span><span class="p">[</span><span class="n">j</span><span class="p">]]</span> <span class="o">=</span> <span class="n">Min</span>
+                        <span class="n">raj</span><span class="p">[</span><span class="n">actionsList</span><span class="p">[</span><span class="n">i</span><span class="p">]]</span> <span class="o">=</span> <span class="n">Min</span>
+                    <span class="k">else</span><span class="p">:</span>
+                        <span class="n">randeval</span> <span class="o">=</span> <span class="n">Decimal</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">random</span><span class="o">.</span><span class="n">randint</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="n">precision</span><span class="p">)</span><span class="o">/</span><span class="n">precision</span><span class="p">))</span>
+                        <span class="n">valuation</span> <span class="o">=</span> <span class="o">-</span><span class="nb">abs</span><span class="p">(</span><span class="n">Decimal</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="nb">round</span><span class="p">(</span><span class="n">randeval</span><span class="p">,</span><span class="n">ndigits</span><span class="p">))))</span>
+                        <span class="n">rai</span><span class="p">[</span><span class="n">actionsList</span><span class="p">[</span><span class="n">j</span><span class="p">]]</span> <span class="o">=</span> <span class="n">valuation</span>
+                        <span class="n">raj</span><span class="p">[</span><span class="n">actionsList</span><span class="p">[</span><span class="n">i</span><span class="p">]]</span> <span class="o">=</span> <span class="n">valuation</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">relation</span> <span class="o">=</span> <span class="n">relation</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">recodeValuation</span><span class="p">(</span><span class="n">ndigits</span><span class="o">=</span><span class="n">ndigits</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">gamma</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">gammaSets</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">notGamma</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">notGammaSets</span><span class="p">()</span></div>
+
+
+<div class="viewcode-block" id="RandomTournament">
+<a class="viewcode-back" href="../techDoc.html#randomDigraphs.RandomTournament">[docs]</a>
+<span class="k">class</span> <span class="nc">RandomTournament</span><span class="p">(</span><span class="n">Digraph</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Specialization of the general Digraph class for generating</span>
+<span class="sd">    temporary complete tournaments.</span>
+
+<span class="sd">    *Parameter*:</span>
+<span class="sd">       * order = n &gt; 0</span>
+<span class="sd">       * If valuationDomain = None, valuation is normalized (in [-1.0,1.0])</span>
+<span class="sd">       * If is Crips = True, valuation is polarized to min and max values</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">order</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span><span class="n">ndigits</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span>
+                 <span class="n">Crisp</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+                 <span class="n">valuationDomain</span><span class="o">=</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">],</span>
+                 <span class="n">seed</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+        <span class="kn">from</span> <span class="nn">decimal</span> <span class="kn">import</span> <span class="n">Decimal</span>
+        <span class="kn">import</span> <span class="nn">random</span>
+        <span class="n">random</span><span class="o">.</span><span class="n">seed</span><span class="p">(</span><span class="n">seed</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">seed</span> <span class="o">=</span> <span class="n">seed</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="s1">&#39;randomTournament&#39;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">order</span> <span class="o">=</span> <span class="n">order</span>
+        <span class="n">nd</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">order</span><span class="p">))</span>
+        <span class="n">actions</span> <span class="o">=</span> <span class="n">OrderedDict</span><span class="p">()</span>
+        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">order</span><span class="p">):</span>
+            <span class="n">actionKey</span> <span class="o">=</span> <span class="p">(</span><span class="s1">&#39;a</span><span class="si">%%</span><span class="s1">0</span><span class="si">%d</span><span class="s1">d&#39;</span> <span class="o">%</span> <span class="n">nd</span><span class="p">)</span> <span class="o">%</span> <span class="p">(</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span>
+            <span class="n">actions</span><span class="p">[</span><span class="n">actionKey</span><span class="p">]</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;shortName&#39;</span><span class="p">:</span><span class="n">actionKey</span><span class="p">,</span>
+                                  <span class="s1">&#39;name&#39;</span><span class="p">:</span> <span class="s1">&#39;random decision action&#39;</span><span class="p">}</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">actions</span> <span class="o">=</span> <span class="n">actions</span>
+<span class="c1">##</span>
+<span class="c1">##        actionlist = list(range(order+1))</span>
+<span class="c1">##        actionlist.remove(0)</span>
+<span class="c1">##        actions = []</span>
+<span class="c1">##        for x in actionlist:</span>
+<span class="c1">##            actions.append(str(x))</span>
+<span class="c1">##        self.actions = actions</span>
+        <span class="k">if</span> <span class="n">valuationDomain</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">valuationdomain</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;min&#39;</span><span class="p">:</span><span class="n">Decimal</span><span class="p">(</span><span class="s1">&#39;-1.0&#39;</span><span class="p">),</span>
+                                    <span class="s1">&#39;med&#39;</span><span class="p">:</span><span class="n">Decimal</span><span class="p">(</span><span class="s1">&#39;0.0&#39;</span><span class="p">),</span>
+                                    <span class="s1">&#39;max&#39;</span><span class="p">:</span><span class="n">Decimal</span><span class="p">(</span><span class="s1">&#39;1.0&#39;</span><span class="p">)}</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="c1">#print(valuationDomain)</span>
+            <span class="n">vdMax</span> <span class="o">=</span> <span class="n">Decimal</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">valuationDomain</span><span class="p">[</span><span class="mi">0</span><span class="p">]))</span>
+            <span class="n">vdMin</span> <span class="o">=</span> <span class="n">Decimal</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">valuationDomain</span><span class="p">[</span><span class="mi">1</span><span class="p">]))</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">valuationdomain</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;min&#39;</span><span class="p">:</span> <span class="n">vdMax</span><span class="p">,</span> <span class="s1">&#39;max&#39;</span><span class="p">:</span> <span class="n">vdMin</span><span class="p">}</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">valuationdomain</span><span class="p">[</span><span class="s1">&#39;med&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="n">vdMin</span> <span class="o">+</span> <span class="n">vdMax</span><span class="p">)</span><span class="o">/</span><span class="n">Decimal</span><span class="p">(</span><span class="s1">&#39;2.0&#39;</span><span class="p">)</span>
+        <span class="n">valuationRange</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">valuationdomain</span><span class="p">[</span><span class="s1">&#39;max&#39;</span><span class="p">]</span> <span class="o">-</span> <span class="bp">self</span><span class="o">.</span><span class="n">valuationdomain</span><span class="p">[</span><span class="s1">&#39;min&#39;</span><span class="p">]</span>
+        <span class="n">Max</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">valuationdomain</span><span class="p">[</span><span class="s1">&#39;max&#39;</span><span class="p">]</span>
+        <span class="n">Min</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">valuationdomain</span><span class="p">[</span><span class="s1">&#39;min&#39;</span><span class="p">]</span>
+        <span class="n">Med</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">valuationdomain</span><span class="p">[</span><span class="s1">&#39;med&#39;</span><span class="p">]</span>
+        <span class="n">relation</span> <span class="o">=</span> <span class="p">{}</span>
+        <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">actions</span><span class="p">:</span>
+            <span class="n">relation</span><span class="p">[</span><span class="n">x</span><span class="p">]</span> <span class="o">=</span> <span class="p">{}</span>
+            <span class="n">rx</span> <span class="o">=</span> <span class="n">relation</span><span class="p">[</span><span class="n">x</span><span class="p">]</span>
+            <span class="k">for</span> <span class="n">y</span> <span class="ow">in</span> <span class="n">actions</span><span class="p">:</span>
+                <span class="n">rx</span><span class="p">[</span><span class="n">y</span><span class="p">]</span> <span class="o">=</span> <span class="n">Decimal</span><span class="p">(</span><span class="s1">&#39;0.0&#39;</span><span class="p">)</span>
+<span class="c1">##        if seed is not None:</span>
+<span class="c1">##            random.seed(seed)</span>
+        <span class="n">precision</span> <span class="o">=</span> <span class="nb">pow</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span><span class="n">ndigits</span><span class="p">)</span>
+        <span class="n">actionsList</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">actions</span><span class="o">.</span><span class="n">keys</span><span class="p">())</span>
+        <span class="c1">#print actionsList</span>
+        <span class="n">n</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">actionsList</span><span class="p">)</span>
+        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
+            <span class="n">rai</span> <span class="o">=</span> <span class="n">relation</span><span class="p">[</span><span class="n">actionsList</span><span class="p">[</span><span class="n">i</span><span class="p">]]</span>
+            <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">i</span><span class="p">,</span><span class="n">n</span><span class="p">):</span>
+                <span class="n">raj</span> <span class="o">=</span> <span class="n">relation</span><span class="p">[</span><span class="n">actionsList</span><span class="p">[</span><span class="n">j</span><span class="p">]]</span>
+                <span class="c1">#print i,j</span>
+                <span class="k">if</span> <span class="n">i</span> <span class="o">==</span> <span class="n">j</span><span class="p">:</span>
+                    <span class="c1">#print actionsList[i],actionsList[j]</span>
+                    <span class="n">rai</span><span class="p">[</span><span class="n">actionsList</span><span class="p">[</span><span class="n">j</span><span class="p">]]</span> <span class="o">=</span> <span class="n">Med</span>
+                <span class="k">else</span><span class="p">:</span>
+                    <span class="n">u</span> <span class="o">=</span> <span class="n">random</span><span class="o">.</span><span class="n">randint</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="n">precision</span><span class="p">)</span>
+                    <span class="k">if</span> <span class="n">Crisp</span><span class="p">:</span>
+                        <span class="k">if</span> <span class="n">u</span> <span class="o">&lt;</span> <span class="n">Decimal</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">precision</span><span class="p">))</span><span class="o">/</span><span class="n">Decimal</span><span class="p">(</span><span class="s1">&#39;2&#39;</span><span class="p">):</span>
+                            <span class="n">rai</span><span class="p">[</span><span class="n">actionsList</span><span class="p">[</span><span class="n">j</span><span class="p">]]</span> <span class="o">=</span> <span class="n">Min</span>
+                            <span class="n">raj</span><span class="p">[</span><span class="n">actionsList</span><span class="p">[</span><span class="n">i</span><span class="p">]]</span> <span class="o">=</span> <span class="n">Max</span>
+                        <span class="k">else</span><span class="p">:</span>
+                            <span class="n">rai</span><span class="p">[</span><span class="n">actionsList</span><span class="p">[</span><span class="n">j</span><span class="p">]]</span> <span class="o">=</span> <span class="n">Max</span>
+                            <span class="n">raj</span><span class="p">[</span><span class="n">actionsList</span><span class="p">[</span><span class="n">i</span><span class="p">]]</span> <span class="o">=</span> <span class="n">Min</span>
+                    <span class="k">else</span><span class="p">:</span>
+                        <span class="n">randeval</span> <span class="o">=</span> <span class="n">Min</span> <span class="o">+</span> <span class="n">Decimal</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">u</span><span class="p">))</span><span class="o">/</span><span class="n">Decimal</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">precision</span><span class="p">))</span><span class="o">*</span><span class="n">valuationRange</span>
+                        <span class="n">valuation</span> <span class="o">=</span> <span class="n">Decimal</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="nb">round</span><span class="p">(</span><span class="n">randeval</span><span class="p">,</span><span class="n">ndigits</span><span class="p">)))</span>
+                        <span class="n">rai</span><span class="p">[</span><span class="n">actionsList</span><span class="p">[</span><span class="n">j</span><span class="p">]]</span> <span class="o">=</span> <span class="n">valuation</span>
+                        <span class="n">raj</span><span class="p">[</span><span class="n">actionsList</span><span class="p">[</span><span class="n">i</span><span class="p">]]</span> <span class="o">=</span> <span class="n">Max</span> <span class="o">-</span> <span class="n">valuation</span> <span class="o">+</span> <span class="n">Min</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">relation</span> <span class="o">=</span> <span class="n">relation</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">recodeValuation</span><span class="p">(</span><span class="n">ndigits</span><span class="o">=</span><span class="n">ndigits</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">gamma</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">gammaSets</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">notGamma</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">notGammaSets</span><span class="p">()</span></div>
+
+
+<div class="viewcode-block" id="RandomFixedSizeDigraph">
+<a class="viewcode-back" href="../techDoc.html#randomDigraphs.RandomFixedSizeDigraph">[docs]</a>
+<span class="k">class</span> <span class="nc">RandomFixedSizeDigraph</span><span class="p">(</span><span class="n">Digraph</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Generates a random crisp digraph with a fixed size, </span>
+<span class="sd">    by instantiating a fixed numbers of arcs</span>
+<span class="sd">    from random choices in the set of potential oriented </span>
+<span class="sd">    pairs of nodes numbered from 1 to order. </span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">order</span><span class="o">=</span><span class="mi">7</span><span class="p">,</span><span class="n">size</span><span class="o">=</span><span class="mi">14</span><span class="p">,</span><span class="n">seed</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+        <span class="kn">import</span> <span class="nn">random</span><span class="o">,</span><span class="nn">copy</span>
+        <span class="n">random</span><span class="o">.</span><span class="n">seed</span><span class="p">(</span><span class="n">seed</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">seed</span> <span class="o">=</span> <span class="n">seed</span>
+        <span class="c1"># check feasability</span>
+        <span class="n">r</span> <span class="o">=</span> <span class="p">(</span><span class="n">order</span> <span class="o">*</span> <span class="n">order</span><span class="p">)</span> <span class="o">-</span> <span class="n">order</span>
+        <span class="k">if</span> <span class="n">size</span> <span class="o">&gt;</span> <span class="n">r</span> <span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Graph not feasable (1) !!&#39;</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="s1">&#39;randomFixedSize&#39;</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">order</span> <span class="o">=</span> <span class="n">order</span>
+            <span class="n">nd</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">order</span><span class="p">))</span>
+            <span class="n">actions</span> <span class="o">=</span> <span class="n">OrderedDict</span><span class="p">()</span>
+            <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">order</span><span class="p">):</span>
+                <span class="n">actionKey</span> <span class="o">=</span> <span class="p">(</span><span class="s1">&#39;a</span><span class="si">%%</span><span class="s1">0</span><span class="si">%d</span><span class="s1">d&#39;</span> <span class="o">%</span> <span class="n">nd</span><span class="p">)</span> <span class="o">%</span> <span class="p">(</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span>
+                <span class="n">actions</span><span class="p">[</span><span class="n">actionKey</span><span class="p">]</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;shortName&#39;</span><span class="p">:</span><span class="n">actionKey</span><span class="p">,</span>
+                                      <span class="s1">&#39;name&#39;</span><span class="p">:</span> <span class="s1">&#39;random decision action&#39;</span><span class="p">}</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">actions</span> <span class="o">=</span> <span class="n">actions</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">valuationdomain</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;min&#39;</span><span class="p">:</span><span class="n">Decimal</span><span class="p">(</span><span class="s1">&#39;-1.0&#39;</span><span class="p">),</span>
+                                    <span class="s1">&#39;med&#39;</span><span class="p">:</span><span class="n">Decimal</span><span class="p">(</span><span class="s1">&#39;0.0&#39;</span><span class="p">),</span>
+                                    <span class="s1">&#39;max&#39;</span><span class="p">:</span><span class="n">Decimal</span><span class="p">(</span><span class="s1">&#39;1.0&#39;</span><span class="p">)}</span>
+            <span class="n">Min</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">valuationdomain</span><span class="p">[</span><span class="s1">&#39;min&#39;</span><span class="p">]</span>
+            <span class="n">Max</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">valuationdomain</span><span class="p">[</span><span class="s1">&#39;max&#39;</span><span class="p">]</span>
+            <span class="n">allarcs</span> <span class="o">=</span> <span class="p">[]</span>
+            <span class="n">relation</span> <span class="o">=</span> <span class="p">{}</span>
+            <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">actions</span><span class="o">.</span><span class="n">keys</span><span class="p">():</span>
+                <span class="n">relation</span><span class="p">[</span><span class="n">x</span><span class="p">]</span> <span class="o">=</span> <span class="p">{}</span>
+                <span class="n">rx</span> <span class="o">=</span> <span class="n">relation</span><span class="p">[</span><span class="n">x</span><span class="p">]</span> 
+                <span class="k">for</span> <span class="n">y</span> <span class="ow">in</span> <span class="n">actions</span><span class="o">.</span><span class="n">keys</span><span class="p">():</span>
+                    <span class="n">rx</span><span class="p">[</span><span class="n">y</span><span class="p">]</span> <span class="o">=</span> <span class="n">Min</span>
+                    <span class="k">if</span> <span class="n">x</span> <span class="o">!=</span> <span class="n">y</span><span class="p">:</span>
+                        <span class="n">allarcs</span><span class="o">.</span><span class="n">append</span><span class="p">((</span><span class="n">x</span><span class="p">,</span><span class="n">y</span><span class="p">))</span>
+            <span class="k">for</span> <span class="n">arc</span> <span class="ow">in</span> <span class="n">random</span><span class="o">.</span><span class="n">sample</span><span class="p">(</span><span class="n">allarcs</span><span class="p">,</span><span class="n">size</span><span class="p">):</span>
+                <span class="n">relation</span><span class="p">[</span><span class="n">arc</span><span class="p">[</span><span class="mi">0</span><span class="p">]][</span><span class="n">arc</span><span class="p">[</span><span class="mi">1</span><span class="p">]]</span> <span class="o">=</span> <span class="n">Max</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">relation</span> <span class="o">=</span> <span class="n">relation</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">gamma</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">gammaSets</span><span class="p">()</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">notGamma</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">notGammaSets</span><span class="p">()</span></div>
+
+
+<div class="viewcode-block" id="RandomFixedDegreeSequenceDigraph">
+<a class="viewcode-back" href="../techDoc.html#randomDigraphs.RandomFixedDegreeSequenceDigraph">[docs]</a>
+<span class="k">class</span> <span class="nc">RandomFixedDegreeSequenceDigraph</span><span class="p">(</span><span class="n">Digraph</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Specialization of the general Digraph class for generating</span>
+<span class="sd">    temporary random crisp graphs (symmetric digraphs) with a fixed sequence of degrees.</span>
+
+<span class="sd">    *Parameters*:</span>
+<span class="sd">        order=n and degreeSequence=[degree_1, ... ,degree_n]&gt;</span>
+
+<span class="sd">    .. warning::</span>
+
+<span class="sd">        The implementation is not guaranteeing a uniform choice among all potential valid graph instances.</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">order</span><span class="o">=</span><span class="mi">7</span><span class="p">,</span><span class="n">degreeSequence</span><span class="o">=</span><span class="p">[</span><span class="mi">3</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">0</span><span class="p">],</span><span class="n">seed</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+        <span class="kn">import</span> <span class="nn">random</span><span class="o">,</span><span class="nn">copy</span>
+        <span class="n">random</span><span class="o">.</span><span class="n">seed</span><span class="p">(</span><span class="n">seed</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">seed</span> <span class="o">=</span> <span class="n">seed</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">degreeSequence</span> <span class="o">=</span> <span class="n">degreeSequence</span>
+        <span class="c1"># check feasability</span>
+        <span class="n">degree</span> <span class="o">=</span> <span class="nb">max</span><span class="p">(</span><span class="n">degreeSequence</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">degree</span> <span class="o">&gt;=</span> <span class="n">order</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;!!! Graph not feasable (1) !!!&#39;</span><span class="p">)</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Maximum degree &gt; order !!!&#39;</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">=</span><span class="kc">None</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">sumdegrees</span> <span class="o">=</span> <span class="mi">0</span>
+            <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">order</span><span class="p">):</span>
+                <span class="n">sumdegrees</span> <span class="o">+=</span> <span class="n">degreeSequence</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
+            <span class="n">r</span> <span class="o">=</span> <span class="n">sumdegrees</span> <span class="o">%</span> <span class="mi">2</span>
+            <span class="k">if</span> <span class="n">r</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
+                <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;!!! Graph not feasable (1) !!!&#39;</span><span class="p">)</span>
+                <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Odd sum of degrees : &#39;</span><span class="p">,</span><span class="n">sumdegrees</span><span class="p">,</span><span class="s1">&#39;!!&#39;</span><span class="p">)</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="s1">&#39;randomFixedDegreeSequence&#39;</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">order</span> <span class="o">=</span> <span class="n">order</span>
+                <span class="n">nd</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">order</span><span class="p">))</span>
+                <span class="n">actions</span> <span class="o">=</span> <span class="n">OrderedDict</span><span class="p">()</span>
+                <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">order</span><span class="p">):</span>
+                    <span class="n">actionKey</span> <span class="o">=</span> <span class="p">(</span><span class="s1">&#39;a</span><span class="si">%%</span><span class="s1">0</span><span class="si">%d</span><span class="s1">d&#39;</span> <span class="o">%</span> <span class="n">nd</span><span class="p">)</span> <span class="o">%</span> <span class="p">(</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span>
+                    <span class="n">actions</span><span class="p">[</span><span class="n">actionKey</span><span class="p">]</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;shortName&#39;</span><span class="p">:</span><span class="n">actionKey</span><span class="p">,</span>
+                                          <span class="s1">&#39;name&#39;</span><span class="p">:</span> <span class="s1">&#39;random decision action&#39;</span><span class="p">}</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">actions</span> <span class="o">=</span> <span class="n">actions</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">valuationdomain</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;min&#39;</span><span class="p">:</span><span class="n">Decimal</span><span class="p">(</span><span class="s1">&#39;-1.0&#39;</span><span class="p">),</span>
+                                        <span class="s1">&#39;med&#39;</span><span class="p">:</span><span class="n">Decimal</span><span class="p">(</span><span class="s1">&#39;0.0&#39;</span><span class="p">),</span>
+                                        <span class="s1">&#39;max&#39;</span><span class="p">:</span><span class="n">Decimal</span><span class="p">(</span><span class="s1">&#39;1.0&#39;</span><span class="p">)}</span>
+                <span class="n">Min</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">valuationdomain</span><span class="p">[</span><span class="s1">&#39;min&#39;</span><span class="p">]</span>
+                <span class="n">Max</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">valuationdomain</span><span class="p">[</span><span class="s1">&#39;max&#39;</span><span class="p">]</span>
+                <span class="n">relation</span> <span class="o">=</span> <span class="p">{}</span>
+                <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">actions</span><span class="o">.</span><span class="n">keys</span><span class="p">():</span>
+                    <span class="n">relation</span><span class="p">[</span><span class="n">x</span><span class="p">]</span> <span class="o">=</span> <span class="p">{}</span>
+                    <span class="n">rx</span> <span class="o">=</span> <span class="n">relation</span><span class="p">[</span><span class="n">x</span><span class="p">]</span>
+                    <span class="k">for</span> <span class="n">y</span> <span class="ow">in</span> <span class="n">actions</span><span class="o">.</span><span class="n">keys</span><span class="p">():</span>
+                        <span class="n">rx</span><span class="p">[</span><span class="n">y</span><span class="p">]</span> <span class="o">=</span> <span class="n">Min</span>
+                <span class="c1"># create a random pairing</span>
+                <span class="n">feasable</span> <span class="o">=</span> <span class="mi">0</span>
+                <span class="n">s</span> <span class="o">=</span> <span class="mi">0</span>
+                <span class="k">while</span> <span class="n">feasable</span> <span class="o">==</span> <span class="mi">0</span> <span class="ow">and</span> <span class="n">s</span> <span class="o">&lt;</span> <span class="mi">100</span><span class="p">:</span>
+                    <span class="n">s</span> <span class="o">+=</span> <span class="mi">1</span>
+                    <span class="n">edges</span> <span class="o">=</span> <span class="p">[]</span>
+                    <span class="n">cells</span> <span class="o">=</span> <span class="p">[]</span>
+                    <span class="n">degreeseq</span> <span class="o">=</span> <span class="p">{}</span>
+                    <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span>
+                    <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">actions</span><span class="o">.</span><span class="n">keys</span><span class="p">():</span>
+                        <span class="n">degreeseq</span><span class="p">[</span><span class="n">x</span><span class="p">]</span> <span class="o">=</span> <span class="n">degreeSequence</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
+                        <span class="n">cells</span><span class="o">.</span><span class="n">append</span><span class="p">((</span><span class="n">x</span><span class="p">,</span><span class="n">degree</span><span class="p">))</span>
+                        <span class="n">i</span> <span class="o">+=</span> <span class="mi">1</span>
+                    <span class="k">while</span> <span class="nb">len</span><span class="p">(</span><span class="n">cells</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">1</span><span class="p">:</span>
+                        <span class="n">cell</span> <span class="o">=</span> <span class="n">random</span><span class="o">.</span><span class="n">choice</span><span class="p">(</span><span class="n">cells</span><span class="p">)</span>
+                        <span class="n">cells</span><span class="o">.</span><span class="n">remove</span><span class="p">(</span><span class="n">cell</span><span class="p">)</span>
+                        <span class="n">xc</span> <span class="o">=</span> <span class="n">cell</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+                        <span class="n">edgescur</span> <span class="o">=</span> <span class="p">[]</span>
+                        <span class="n">copycells</span> <span class="o">=</span> <span class="n">copy</span><span class="o">.</span><span class="n">copy</span><span class="p">(</span><span class="n">cells</span><span class="p">)</span>
+                        <span class="k">while</span> <span class="n">degreeseq</span><span class="p">[</span><span class="n">xc</span><span class="p">]</span> <span class="o">&gt;</span> <span class="mi">0</span> <span class="ow">and</span> <span class="nb">len</span><span class="p">(</span><span class="n">copycells</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+                            <span class="n">other</span> <span class="o">=</span> <span class="n">random</span><span class="o">.</span><span class="n">choice</span><span class="p">(</span><span class="n">copycells</span><span class="p">)</span>
+                            <span class="n">copycells</span><span class="o">.</span><span class="n">remove</span><span class="p">(</span><span class="n">other</span><span class="p">)</span>
+                            <span class="n">edgescur</span><span class="o">.</span><span class="n">append</span><span class="p">((</span><span class="n">xc</span><span class="p">,</span><span class="n">other</span><span class="p">[</span><span class="mi">0</span><span class="p">]))</span>
+                            <span class="n">degreeseq</span><span class="p">[</span><span class="n">other</span><span class="p">[</span><span class="mi">0</span><span class="p">]]</span> <span class="o">-=</span> <span class="mi">1</span>
+                            <span class="n">degreeseq</span><span class="p">[</span><span class="n">xc</span><span class="p">]</span> <span class="o">-=</span> <span class="mi">1</span>
+                        <span class="n">edges</span> <span class="o">+=</span> <span class="n">edgescur</span>
+                        <span class="k">for</span> <span class="n">c</span> <span class="ow">in</span> <span class="n">cells</span><span class="p">:</span>
+                            <span class="k">if</span> <span class="n">degreeseq</span><span class="p">[</span><span class="n">c</span><span class="p">[</span><span class="mi">0</span><span class="p">]]</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+                                <span class="n">cells</span><span class="o">.</span><span class="n">remove</span><span class="p">(</span><span class="n">c</span><span class="p">)</span>
+                    <span class="n">feasable</span> <span class="o">=</span> <span class="mi">1</span>
+                    <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">actions</span><span class="o">.</span><span class="n">keys</span><span class="p">():</span>
+                        <span class="k">if</span> <span class="n">degreeseq</span><span class="p">[</span><span class="n">x</span><span class="p">]</span> <span class="o">!=</span> <span class="mi">0</span><span class="p">:</span>
+                            <span class="n">feasable</span> <span class="o">=</span> <span class="mi">0</span>
+                            <span class="k">break</span>
+                <span class="k">if</span> <span class="n">feasable</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+                    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Graph not feasable (2) !!&#39;</span><span class="p">)</span>
+                <span class="k">else</span><span class="p">:</span>
+                    <span class="k">for</span> <span class="n">edge</span> <span class="ow">in</span> <span class="n">edges</span><span class="p">:</span>
+                        <span class="n">relation</span><span class="p">[</span><span class="n">edge</span><span class="p">[</span><span class="mi">0</span><span class="p">]][</span><span class="n">edge</span><span class="p">[</span><span class="mi">1</span><span class="p">]]</span> <span class="o">=</span> <span class="n">Max</span>
+                        <span class="n">relation</span><span class="p">[</span><span class="n">edge</span><span class="p">[</span><span class="mi">1</span><span class="p">]][</span><span class="n">edge</span><span class="p">[</span><span class="mi">0</span><span class="p">]]</span> <span class="o">=</span> <span class="n">Max</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">relation</span> <span class="o">=</span> <span class="n">relation</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">gamma</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">gammaSets</span><span class="p">()</span></div>
+
+
+<span class="c1">#######################################</span>
+
+<div class="viewcode-block" id="RandomRegularDigraph">
+<a class="viewcode-back" href="../techDoc.html#randomDigraphs.RandomRegularDigraph">[docs]</a>
+<span class="k">class</span> <span class="nc">RandomRegularDigraph</span><span class="p">(</span><span class="n">Digraph</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Specialization of Digraph class for random regular symmetric instances.</span>
+
+<span class="sd">    *Parameters*:</span>
+<span class="sd">        order and degree.</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">order</span><span class="o">=</span><span class="mi">7</span><span class="p">,</span><span class="n">degree</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">seed</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+        <span class="kn">import</span> <span class="nn">random</span><span class="o">,</span><span class="nn">copy</span>
+        <span class="n">random</span><span class="o">.</span><span class="n">seed</span><span class="p">(</span><span class="n">seed</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">seed</span> <span class="o">=</span> <span class="n">seed</span>
+        <span class="c1"># check feasability</span>
+        <span class="n">r</span> <span class="o">=</span> <span class="p">(</span><span class="n">order</span> <span class="o">*</span> <span class="n">degree</span><span class="p">)</span> <span class="o">%</span> <span class="mi">2</span>
+        <span class="k">if</span> <span class="n">degree</span> <span class="o">&gt;=</span> <span class="n">order</span> <span class="ow">or</span> <span class="n">r</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Graph not feasable (1) !!&#39;</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="s1">&#39;randomRegular&#39;</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">order</span> <span class="o">=</span> <span class="n">order</span>
+            <span class="n">nd</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">order</span><span class="p">))</span>
+            <span class="n">actions</span> <span class="o">=</span> <span class="n">OrderedDict</span><span class="p">()</span>
+            <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">order</span><span class="p">):</span>
+                <span class="n">actionKey</span> <span class="o">=</span> <span class="p">(</span><span class="s1">&#39;a</span><span class="si">%%</span><span class="s1">0</span><span class="si">%d</span><span class="s1">d&#39;</span> <span class="o">%</span> <span class="n">nd</span><span class="p">)</span> <span class="o">%</span> <span class="p">(</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span>
+                <span class="n">actions</span><span class="p">[</span><span class="n">actionKey</span><span class="p">]</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;shortName&#39;</span><span class="p">:</span><span class="n">actionKey</span><span class="p">,</span>
+                                      <span class="s1">&#39;name&#39;</span><span class="p">:</span> <span class="s1">&#39;random decision action&#39;</span><span class="p">}</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">actions</span> <span class="o">=</span> <span class="n">actions</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">valuationdomain</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;min&#39;</span><span class="p">:</span><span class="n">Decimal</span><span class="p">(</span><span class="s1">&#39;-1.0&#39;</span><span class="p">),</span>
+                                    <span class="s1">&#39;med&#39;</span><span class="p">:</span><span class="n">Decimal</span><span class="p">(</span><span class="s1">&#39;0.0&#39;</span><span class="p">),</span>
+                                    <span class="s1">&#39;max&#39;</span><span class="p">:</span><span class="n">Decimal</span><span class="p">(</span><span class="s1">&#39;1.0&#39;</span><span class="p">)}</span>
+            <span class="c1"># create a random pairing</span>
+            <span class="n">feasable</span> <span class="o">=</span> <span class="mi">0</span>
+            <span class="n">s</span> <span class="o">=</span> <span class="mi">0</span>
+            <span class="k">while</span> <span class="n">feasable</span> <span class="o">==</span> <span class="mi">0</span> <span class="ow">and</span> <span class="n">s</span> <span class="o">&lt;</span> <span class="mi">100</span><span class="p">:</span>
+                <span class="n">s</span> <span class="o">+=</span> <span class="mi">1</span>
+                <span class="n">edges</span> <span class="o">=</span> <span class="p">[]</span>
+                <span class="n">cells</span> <span class="o">=</span> <span class="p">[]</span>
+                <span class="n">degreeseq</span> <span class="o">=</span> <span class="p">{}</span>
+                <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">actions</span><span class="o">.</span><span class="n">keys</span><span class="p">():</span>
+                    <span class="n">degreeseq</span><span class="p">[</span><span class="n">x</span><span class="p">]</span> <span class="o">=</span> <span class="n">degree</span>
+                    <span class="n">cells</span><span class="o">.</span><span class="n">append</span><span class="p">((</span><span class="n">x</span><span class="p">,</span><span class="n">degree</span><span class="p">))</span>
+                <span class="k">while</span> <span class="nb">len</span><span class="p">(</span><span class="n">cells</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">1</span><span class="p">:</span>
+                    <span class="n">cell</span> <span class="o">=</span> <span class="n">random</span><span class="o">.</span><span class="n">choice</span><span class="p">(</span><span class="n">cells</span><span class="p">)</span>
+                    <span class="n">cells</span><span class="o">.</span><span class="n">remove</span><span class="p">(</span><span class="n">cell</span><span class="p">)</span>
+                    <span class="n">xc</span> <span class="o">=</span> <span class="n">cell</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+                    <span class="n">edgescur</span> <span class="o">=</span> <span class="p">[]</span>
+                    <span class="n">copycells</span> <span class="o">=</span> <span class="n">copy</span><span class="o">.</span><span class="n">copy</span><span class="p">(</span><span class="n">cells</span><span class="p">)</span>
+                    <span class="k">while</span> <span class="n">degreeseq</span><span class="p">[</span><span class="n">xc</span><span class="p">]</span> <span class="o">&gt;</span> <span class="mi">0</span> <span class="ow">and</span> <span class="nb">len</span><span class="p">(</span><span class="n">copycells</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+                        <span class="n">other</span> <span class="o">=</span> <span class="n">random</span><span class="o">.</span><span class="n">choice</span><span class="p">(</span><span class="n">copycells</span><span class="p">)</span>
+                        <span class="n">copycells</span><span class="o">.</span><span class="n">remove</span><span class="p">(</span><span class="n">other</span><span class="p">)</span>
+                        <span class="n">edgescur</span><span class="o">.</span><span class="n">append</span><span class="p">((</span><span class="n">xc</span><span class="p">,</span><span class="n">other</span><span class="p">[</span><span class="mi">0</span><span class="p">]))</span>
+                        <span class="n">degreeseq</span><span class="p">[</span><span class="n">other</span><span class="p">[</span><span class="mi">0</span><span class="p">]]</span> <span class="o">-=</span> <span class="mi">1</span>
+                        <span class="n">degreeseq</span><span class="p">[</span><span class="n">xc</span><span class="p">]</span> <span class="o">-=</span> <span class="mi">1</span>
+                    <span class="n">edges</span> <span class="o">+=</span> <span class="n">edgescur</span>
+                    <span class="k">for</span> <span class="n">c</span> <span class="ow">in</span> <span class="n">cells</span><span class="p">:</span>
+                        <span class="k">if</span> <span class="n">degreeseq</span><span class="p">[</span><span class="n">c</span><span class="p">[</span><span class="mi">0</span><span class="p">]]</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+                            <span class="n">cells</span><span class="o">.</span><span class="n">remove</span><span class="p">(</span><span class="n">c</span><span class="p">)</span>
+                <span class="n">feasable</span> <span class="o">=</span> <span class="mi">1</span>
+                <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">actions</span><span class="p">:</span>
+                    <span class="k">if</span> <span class="n">degreeseq</span><span class="p">[</span><span class="n">x</span><span class="p">]</span> <span class="o">!=</span> <span class="mi">0</span><span class="p">:</span>
+                        <span class="n">feasable</span> <span class="o">=</span> <span class="mi">0</span>
+                        <span class="k">break</span>
+            <span class="k">if</span> <span class="n">feasable</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+                <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Graph not feasable (2) !!&#39;</span><span class="p">)</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">relation</span> <span class="o">=</span> <span class="p">{}</span>
+                <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">actions</span><span class="o">.</span><span class="n">keys</span><span class="p">():</span>
+                    <span class="n">relation</span><span class="p">[</span><span class="n">x</span><span class="p">]</span> <span class="o">=</span> <span class="p">{}</span>
+                    <span class="k">for</span> <span class="n">y</span> <span class="ow">in</span> <span class="n">actions</span><span class="p">:</span>
+                        <span class="n">relation</span><span class="p">[</span><span class="n">x</span><span class="p">][</span><span class="n">y</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">valuationdomain</span><span class="p">[</span><span class="s1">&#39;min&#39;</span><span class="p">]</span>
+                <span class="k">for</span> <span class="n">edge</span> <span class="ow">in</span> <span class="n">edges</span><span class="p">:</span>
+                    <span class="n">relation</span><span class="p">[</span><span class="n">edge</span><span class="p">[</span><span class="mi">0</span><span class="p">]][</span><span class="n">edge</span><span class="p">[</span><span class="mi">1</span><span class="p">]]</span> <span class="o">=</span> <span class="n">Decimal</span><span class="p">(</span><span class="s1">&#39;1.0&#39;</span><span class="p">)</span>
+                    <span class="n">relation</span><span class="p">[</span><span class="n">edge</span><span class="p">[</span><span class="mi">1</span><span class="p">]][</span><span class="n">edge</span><span class="p">[</span><span class="mi">0</span><span class="p">]]</span> <span class="o">=</span> <span class="n">Decimal</span><span class="p">(</span><span class="s1">&#39;1.0&#39;</span><span class="p">)</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">relation</span> <span class="o">=</span> <span class="n">relation</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">gamma</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">gammaSets</span><span class="p">()</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">notGamma</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">notGammaSets</span><span class="p">()</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">componentslist</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">components</span><span class="p">()</span></div>
+
+
+<span class="c1">###############################3</span>
+
+<div class="viewcode-block" id="RandomGridDigraph">
+<a class="viewcode-back" href="../techDoc.html#randomDigraphs.RandomGridDigraph">[docs]</a>
+<span class="k">class</span> <span class="nc">RandomGridDigraph</span><span class="p">(</span><span class="n">GridDigraph</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Specialization of the general Digraph class for generating</span>
+<span class="sd">    temporary randomly oriented Grid digraphs of dimension n time m</span>
+<span class="sd">    (default 5x5).</span>
+
+<span class="sd">    Parameters:</span>
+<span class="sd">        * n,m &gt; 0;</span>
+<span class="sd">        * valuationdomain ={&#39;min&#39;:-1 (default),&#39;max&#39;: 1 (default)}.</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">n</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span><span class="n">m</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span><span class="n">valuationdomain</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;min&#39;</span><span class="p">:</span><span class="o">-</span><span class="mf">1.0</span><span class="p">,</span><span class="s1">&#39;max&#39;</span><span class="p">:</span><span class="mf">1.0</span><span class="p">},</span>
+                 <span class="n">seed</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span><span class="n">Debug</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+        <span class="kn">import</span> <span class="nn">random</span>
+        <span class="n">random</span><span class="o">.</span><span class="n">seed</span><span class="p">(</span><span class="n">seed</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">seed</span> <span class="o">=</span> <span class="n">seed</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="s1">&#39;randomGrid-&#39;</span><span class="o">+</span><span class="nb">str</span><span class="p">(</span><span class="n">n</span><span class="p">)</span><span class="o">+</span><span class="s1">&#39;-&#39;</span><span class="o">+</span><span class="nb">str</span><span class="p">(</span><span class="n">m</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">n</span> <span class="o">=</span> <span class="n">n</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">m</span> <span class="o">=</span> <span class="n">m</span>
+        <span class="c1"># constructing the grid</span>
+        <span class="n">na</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="n">n</span><span class="o">+</span><span class="mi">1</span><span class="p">))</span>
+        <span class="n">na</span><span class="o">.</span><span class="n">remove</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+        <span class="n">ma</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="n">m</span><span class="o">+</span><span class="mi">1</span><span class="p">))</span>
+        <span class="n">ma</span><span class="o">.</span><span class="n">remove</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+        <span class="n">actions</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="n">gridNodes</span><span class="o">=</span><span class="p">{}</span>
+        <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">na</span><span class="p">:</span>
+            <span class="k">for</span> <span class="n">y</span> <span class="ow">in</span> <span class="n">ma</span><span class="p">:</span>
+                <span class="n">action</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="n">x</span><span class="p">)</span><span class="o">+</span><span class="s1">&#39;-&#39;</span><span class="o">+</span><span class="nb">str</span><span class="p">(</span><span class="n">y</span><span class="p">)</span>
+                <span class="n">gridNodes</span><span class="p">[</span><span class="n">action</span><span class="p">]</span><span class="o">=</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="n">y</span><span class="p">)</span>
+                <span class="n">actions</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">action</span><span class="p">)</span>
+        <span class="n">order</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">actions</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">order</span> <span class="o">=</span> <span class="n">order</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">actions</span> <span class="o">=</span> <span class="n">actions</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">gridNodes</span> <span class="o">=</span> <span class="n">gridNodes</span>
+        <span class="k">if</span> <span class="n">Debug</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="n">n</span><span class="p">,</span><span class="n">m</span><span class="p">,</span><span class="n">actions</span><span class="p">,</span><span class="n">gridNodes</span><span class="p">)</span>
+        <span class="c1"># defining the valuation domain</span>
+        <span class="n">Min</span> <span class="o">=</span> <span class="n">Decimal</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">valuationdomain</span><span class="p">[</span><span class="s1">&#39;min&#39;</span><span class="p">]))</span>
+        <span class="n">Max</span> <span class="o">=</span> <span class="n">Decimal</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">valuationdomain</span><span class="p">[</span><span class="s1">&#39;max&#39;</span><span class="p">]))</span>
+        <span class="n">Med</span> <span class="o">=</span> <span class="p">(</span><span class="n">Max</span> <span class="o">+</span> <span class="n">Min</span><span class="p">)</span><span class="o">/</span><span class="n">Decimal</span><span class="p">(</span><span class="s1">&#39;2&#39;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">valuationdomain</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;min&#39;</span><span class="p">:</span><span class="n">Min</span><span class="p">,</span><span class="s1">&#39;med&#39;</span><span class="p">:</span><span class="n">Med</span><span class="p">,</span><span class="s1">&#39;max&#39;</span><span class="p">:</span><span class="n">Max</span><span class="p">}</span>
+        <span class="c1"># instantiate empty relation dictionary </span>
+        <span class="n">relation</span> <span class="o">=</span> <span class="p">{}</span>
+        <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">actions</span><span class="p">:</span>
+            <span class="n">relation</span><span class="p">[</span><span class="n">x</span><span class="p">]</span> <span class="o">=</span> <span class="p">{}</span>
+            <span class="k">for</span> <span class="n">y</span> <span class="ow">in</span> <span class="n">actions</span><span class="p">:</span>
+                <span class="n">relation</span><span class="p">[</span><span class="n">x</span><span class="p">][</span><span class="n">y</span><span class="p">]</span> <span class="o">=</span> <span class="n">Med</span>
+        <span class="c1"># instantiate random orientation</span>
+        <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">actions</span><span class="p">:</span>
+            <span class="k">for</span> <span class="n">y</span> <span class="ow">in</span> <span class="n">actions</span><span class="p">:</span>
+                <span class="k">if</span> <span class="n">gridNodes</span><span class="p">[</span><span class="n">x</span><span class="p">][</span><span class="mi">1</span><span class="p">]</span> <span class="o">==</span> <span class="n">gridNodes</span><span class="p">[</span><span class="n">y</span><span class="p">][</span><span class="mi">1</span><span class="p">]:</span>
+                    <span class="k">if</span> <span class="n">gridNodes</span><span class="p">[</span><span class="n">x</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span> <span class="o">==</span> <span class="n">gridNodes</span><span class="p">[</span><span class="n">y</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span><span class="o">-</span><span class="mi">1</span> <span class="p">:</span>
+                        <span class="k">if</span> <span class="n">random</span><span class="o">.</span><span class="n">random</span><span class="p">()</span> <span class="o">&gt;</span> <span class="mf">0.5</span><span class="p">:</span>
+                            <span class="n">relation</span><span class="p">[</span><span class="n">x</span><span class="p">][</span><span class="n">y</span><span class="p">]</span> <span class="o">=</span> <span class="n">Max</span>
+                            <span class="n">relation</span><span class="p">[</span><span class="n">y</span><span class="p">][</span><span class="n">x</span><span class="p">]</span> <span class="o">=</span> <span class="n">Min</span>
+                        <span class="k">else</span><span class="p">:</span>
+                            <span class="n">relation</span><span class="p">[</span><span class="n">x</span><span class="p">][</span><span class="n">y</span><span class="p">]</span> <span class="o">=</span> <span class="n">Min</span>
+                            <span class="n">relation</span><span class="p">[</span><span class="n">y</span><span class="p">][</span><span class="n">x</span><span class="p">]</span> <span class="o">=</span> <span class="n">Max</span>
+                    <span class="k">elif</span> <span class="n">gridNodes</span><span class="p">[</span><span class="n">x</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span> <span class="o">==</span> <span class="n">gridNodes</span><span class="p">[</span><span class="n">y</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span><span class="o">+</span><span class="mi">1</span><span class="p">:</span>
+                        <span class="k">if</span> <span class="n">random</span><span class="o">.</span><span class="n">random</span><span class="p">()</span> <span class="o">&gt;</span> <span class="mf">0.5</span><span class="p">:</span>
+                            <span class="n">relation</span><span class="p">[</span><span class="n">x</span><span class="p">][</span><span class="n">y</span><span class="p">]</span> <span class="o">=</span> <span class="n">Max</span>
+                            <span class="n">relation</span><span class="p">[</span><span class="n">y</span><span class="p">][</span><span class="n">x</span><span class="p">]</span> <span class="o">=</span> <span class="n">Min</span>
+                        <span class="k">else</span><span class="p">:</span>
+                            <span class="n">relation</span><span class="p">[</span><span class="n">x</span><span class="p">][</span><span class="n">y</span><span class="p">]</span> <span class="o">=</span> <span class="n">Min</span>
+                            <span class="n">relation</span><span class="p">[</span><span class="n">y</span><span class="p">][</span><span class="n">x</span><span class="p">]</span> <span class="o">=</span> <span class="n">Max</span>
+                    <span class="k">else</span><span class="p">:</span>
+                        <span class="n">relation</span><span class="p">[</span><span class="n">x</span><span class="p">][</span><span class="n">y</span><span class="p">]</span> <span class="o">=</span> <span class="n">Min</span>
+                <span class="k">elif</span> <span class="n">gridNodes</span><span class="p">[</span><span class="n">x</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span> <span class="o">==</span> <span class="n">gridNodes</span><span class="p">[</span><span class="n">y</span><span class="p">][</span><span class="mi">0</span><span class="p">]:</span>
+                    <span class="k">if</span> <span class="n">gridNodes</span><span class="p">[</span><span class="n">x</span><span class="p">][</span><span class="mi">1</span><span class="p">]</span> <span class="o">==</span> <span class="n">gridNodes</span><span class="p">[</span><span class="n">y</span><span class="p">][</span><span class="mi">1</span><span class="p">]</span><span class="o">-</span><span class="mi">1</span><span class="p">:</span>
+                        <span class="k">if</span> <span class="n">random</span><span class="o">.</span><span class="n">random</span><span class="p">()</span> <span class="o">&gt;</span> <span class="mf">0.5</span><span class="p">:</span>
+                            <span class="n">relation</span><span class="p">[</span><span class="n">x</span><span class="p">][</span><span class="n">y</span><span class="p">]</span> <span class="o">=</span> <span class="n">Max</span>
+                            <span class="n">relation</span><span class="p">[</span><span class="n">y</span><span class="p">][</span><span class="n">x</span><span class="p">]</span> <span class="o">=</span> <span class="n">Min</span>
+                        <span class="k">else</span><span class="p">:</span>
+                            <span class="n">relation</span><span class="p">[</span><span class="n">x</span><span class="p">][</span><span class="n">y</span><span class="p">]</span> <span class="o">=</span> <span class="n">Min</span>
+                            <span class="n">relation</span><span class="p">[</span><span class="n">y</span><span class="p">][</span><span class="n">x</span><span class="p">]</span> <span class="o">=</span> <span class="n">Max</span>
+                    <span class="k">elif</span> <span class="n">gridNodes</span><span class="p">[</span><span class="n">x</span><span class="p">][</span><span class="mi">1</span><span class="p">]</span> <span class="o">==</span> <span class="n">gridNodes</span><span class="p">[</span><span class="n">y</span><span class="p">][</span><span class="mi">1</span><span class="p">]</span><span class="o">+</span><span class="mi">1</span><span class="p">:</span>
+                        <span class="k">if</span> <span class="n">random</span><span class="o">.</span><span class="n">random</span><span class="p">()</span> <span class="o">&gt;</span> <span class="mf">0.5</span><span class="p">:</span>
+                            <span class="n">relation</span><span class="p">[</span><span class="n">x</span><span class="p">][</span><span class="n">y</span><span class="p">]</span> <span class="o">=</span> <span class="n">Max</span>
+                            <span class="n">relation</span><span class="p">[</span><span class="n">y</span><span class="p">][</span><span class="n">x</span><span class="p">]</span> <span class="o">=</span> <span class="n">Min</span>
+                        <span class="k">else</span><span class="p">:</span>
+                            <span class="n">relation</span><span class="p">[</span><span class="n">x</span><span class="p">][</span><span class="n">y</span><span class="p">]</span> <span class="o">=</span> <span class="n">Min</span>
+                            <span class="n">relation</span><span class="p">[</span><span class="n">y</span><span class="p">][</span><span class="n">x</span><span class="p">]</span> <span class="o">=</span> <span class="n">Max</span>
+                    <span class="k">else</span><span class="p">:</span>
+                        <span class="n">relation</span><span class="p">[</span><span class="n">x</span><span class="p">][</span><span class="n">y</span><span class="p">]</span> <span class="o">=</span> <span class="n">Min</span>
+                <span class="k">else</span><span class="p">:</span>
+                    <span class="n">relation</span><span class="p">[</span><span class="n">x</span><span class="p">][</span><span class="n">y</span><span class="p">]</span> <span class="o">=</span> <span class="n">Min</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">relation</span> <span class="o">=</span> <span class="n">relation</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">gamma</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">gammaSets</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">notGamma</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">notGammaSets</span><span class="p">()</span></div>
+
+    
+
+<span class="c1">#############################################</span>
+
+<span class="c1">#----------test Random Digraph classes ----------------</span>
+<span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s2">&quot;__main__&quot;</span><span class="p">:</span>
+
+    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;****************************************************&#39;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;* Python randomDigraphs module                     *&#39;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;* Copyright (C) 2015-2021 R. Bisdorff              *&#39;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;* The module comes with ABSOLUTELY NO WARRANTY     *&#39;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;* to the extent permitted by the applicable law.   *&#39;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;* This is free software, and you are welcome to    *&#39;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;* redistribute it if it remains free software.     *&#39;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;****************************************************&#39;</span><span class="p">)</span>
+
+
+    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;*-------- Testing classes and methods -------&#39;</span><span class="p">)</span>
+
+    <span class="c1">#dg = RandomPartialTournament(order=5,missingRelationProbability=0.2,seed=None)</span>
+    <span class="n">dg</span> <span class="o">=</span> <span class="n">RandomOutrankingValuationDigraph</span><span class="p">(</span><span class="n">order</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span><span class="n">weightsSum</span><span class="o">=</span><span class="mi">20</span><span class="p">,</span><span class="n">seed</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span>
+                                          <span class="n">distribution</span><span class="o">=</span><span class="s1">&#39;uniform&#39;</span><span class="p">,</span>
+                                          <span class="c1">#distribution=&#39;triangular&#39;,</span>
+                                          <span class="n">Debug</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+    <span class="n">dg</span><span class="o">.</span><span class="n">showRelationTable</span><span class="p">()</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Is outranking valuation ?: </span><span class="si">%s</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="n">dg</span><span class="o">.</span><span class="n">isOutrankingDigraph</span><span class="p">()</span> <span class="p">)</span>
+    <span class="n">dg</span><span class="o">.</span><span class="n">showFirstChoiceRecommendation</span><span class="p">()</span>
+    <span class="p">(</span><span class="o">~</span><span class="p">(</span><span class="o">-</span><span class="n">dg</span><span class="p">))</span><span class="o">.</span><span class="n">exportGraphViz</span><span class="p">()</span>
+    <span class="n">dg</span><span class="o">.</span><span class="n">showChordlessCircuits</span><span class="p">()</span>
+    <span class="c1">#print(&#39;seed = &#39;,dg.seed)</span>
+    <span class="c1">#dg.isAsymmetricIndeterminate()</span>
+
+    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;*------------------*&#39;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;If you see this line all tests were passed successfully :-)&#39;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Enjoy !&#39;</span><span class="p">)</span>
+
+<span class="c1">#############################</span>
+</pre></div>
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2012-2023, Raymond Bisdorff.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

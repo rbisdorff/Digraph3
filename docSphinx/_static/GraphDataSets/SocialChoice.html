@@ -1,0 +1,156 @@
+<html>
+<head>
+<title>Digraph3 Data Set</title>
+</head>
+<body>
+<h1>Digraph3 Data Set</h1>
+<h2>Title</h2>
+<p>Social Choice</p>
+<h2>Data type</h2>
+<p>Voting profiles</p>
+<h2>Problematics</h2>
+<p>Best unique choice problematics, hyperkernel approach test</p>
+<h2>Description</h2>
+<p>The example concerns the determination of a winner in a voting game.</p>
+<p>The set of 5 candidates is denoted <i>A</i> = {<i>a</i>,<i>b</i>,<i>c</i>,<i>d</i>,<i>e</i>}. The jury consists of seven equi-significant voters <i>C</i> = {<i>v</i>_1,<i>v</i>_2,<i>v</i>_3,<i>v</i>_4,<i>v</i>_5,<i>v</i>_6,<i>v</i>_7} with following individual preferences:</p>
+<p><table border="1">
+<thead><tr>
+<th>rank
+<th><i>v</i>_1
+<th><i>v</i>_2
+<th><i>v</i>_3
+<th><i>v</i>_4 
+<th><i>v</i>_5
+<th><i>v</i>_6
+<th><i>v</i>_7
+<tbody>
+<tr>
+<th>1
+<td><i>a</i> 
+<td><i>a</i>
+<td><i>a</i> 
+<td><i>c</i> 
+<td><i>c</i>
+<td><i>b</i> 
+<td><i>e</i> 
+<tr>
+<th>2
+<td><i>b</i> 
+<td><i>d</i>
+<td><i>d</i> 
+<td><i>b</i> 
+<td><i>d</i> 
+<td><i>c</i>
+<td><i>c</i> 
+<tr>
+<th>3
+<td><i>c</i> 
+<td><i>b</i>
+<td><i>b</i> 
+<td><i>d</i> 
+<td><i>b</i>
+<td><i>d</i>
+<td><i>d</i>
+<tr>
+<th>4
+<td><i>d</i>  
+<td><i>e</i>
+<td><i>e</i>
+<td><i>e</i>
+<td><i>a</i>
+<td><i>a</i>
+<td><i>b</i>
+<tr>
+<th>5
+<td><i>e</i>
+<td><i>c</i>
+<td><i>c</i>
+<td><i>a</i>
+<td><i>e</i>
+<td><i>e</i>
+<td><i>a</i>
+</tbody>
+</table>
+<small>Source: Taylor (2005) p. 33</small></p>
+<p>The simple pairwise majority voting gives the following global preference or indifference relation on <i>A</i>:</p>
+<p><img src="socialChoice33.png"</p>
+<p>We observe a Condorcet paradox at the beginning of the simple pairwise majority voting. Indeed, <i>b</i> is preferred or indifferent to <i>d</i>, which is preferred or indifferent to <i>c</i>, which is in turn preferred or indifferent to <i>b</i>.</p>
+<p>The weighted concordance index <i>S</i> of the global preference or indifference relation is the following:</p>
+<table border="1">
+<thead><tr>
+<th><i>S</i>
+<th><i>a</i>
+<th><i>b</i>
+<th><i>c</i>
+<th><i>d</i> 
+<th><i>e</i>
+<th><i>ds</i>
+<tr>
+<th><i>a</i>
+<td>1.00
+<td>0.43
+<td>0.43
+<td>0.43
+<td><b>0.71</b>
+<td><b>3.00</b>
+<tr>
+<th><i>b</i>
+<td><b>0.57</b>
+<td>1.00
+<td><b>0.57</b>
+<td>0.43
+<td><b>0.86</b>
+<td><b>3.43</b>
+<tr>
+<th><i>c</i>
+<td><b>0.57</b>
+<td>0.43
+<td>1.00
+<td><b>0.71</b>
+<td><b>0.57</b>
+<td><b>3.28</b>
+<tr>
+<th><i>d</i>
+<td><b>0.57</b>
+<td><b>0.57</b>
+<td>0.29
+<td>1.00
+<td><b>0.86</b>
+<td><b>3.29</b>
+<tr>
+<th><i>e</i>
+<td>0.29
+<td>0.14
+<td>0.43
+<td>0.14
+<td>1.00
+<td><b>2.29</b>
+<tr>
+<th><i>de</i>
+<td><b>3.00</b>
+<td><b>2.57</b>
+<td><b>2.72</b>
+<td><b>3.00</b>
+<td><b>4.00</b>
+<td><b>15.29</b>
+</tbody>
+</table>
+<p>Due to the tricycle <<i>b,c,d</i>> at the beginning of the relation <i>S</i>, the valued digraph does not support any dominant kernel. But candidate <i>e</i> is clearly ranked as worst choice.</p>
+<p>The odd circuit augmented digraph however correctly supports <i>b,c,d</i> as dominant hyperkernel.</p>
+
+<H2>Files</H2>
+<ul>
+<li><a href="socialChoice33.py">Indiviudal preferences</a> (Python data file).
+<li><a href="socialChoice33norm.py">Pairwise preference and indifference relation</a> (Python data file).
+<li><a href="socialChoice33normh1.py">Circuit augmented, pairwise preference and indifference relation,</a> (Python data file).
+<li><a href="socialChoice33result.txt">Global results</a> (Text file).
+</ul>
+<h2>References</h2>
+<ul>
+<li>Taylor, Alan D., <em>Social Choice and the Mathematics of Manipulation</em>. Cambridge University Press, 2005, [ISBN:0-521-00883-2] 
+<li>Bisdorff, R., Meyer, P. and Roubens, M., <em>Revisiting the choice problem</em>. SMA working paper 05-2, University of Luxembourg, 2005 <a href="SMAWP05-02.pdf">(PDF for downloading)</a>.
+</ul>
+
+<h2>Digraph3 Data Sets</h2>
+<p><a href="index.html">All Digraph3 data sets.</a>
+</body>

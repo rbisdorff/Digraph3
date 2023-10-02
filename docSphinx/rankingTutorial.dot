@@ -1,0 +1,45 @@
+digraph G {
+graph [ bgcolor = cornsilk, fontname = "Helvetica-Oblique",
+ fontsize = 12,
+ label = "\nRubis Python Server (graphviz), R. Bisdorff, 2008", size="7,7"];
+n1 [shape = "circle", label = "a1c"];
+n2 [shape = "circle", label = "a2c"];
+n3 [shape = "circle", label = "a3c"];
+n4 [shape = "circle", label = "a4n"];
+n5 [shape = "circle", label = "a5c"];
+n6 [shape = "circle", label = "a6a"];
+n7 [shape = "circle", label = "a7a"];
+n8 [shape = "circle", label = "a8n"];
+n9 [shape = "circle", label = "a9n"];
+n1-> n2 [dir=both, color=grey, arrowhead=empty, arrowtail=empty] ;
+n1-> n3 [dir=both, color=grey, arrowhead=empty, arrowtail=empty] ;
+n1-> n4 [dir=back, color=black] ;
+n1-> n5 [dir=back, color=black] ;
+n1-> n6 [dir=forward, color=grey, arrowhead=empty] ;
+n1-> n7 [dir=back, color=black] ;
+n1-> n8 [dir=back, color=black] ;
+n1-> n9 [dir=back, color=grey, arrowtail=empty] ;
+n2-> n3 [dir=forward, color=black] ;
+n2-> n6 [dir=forward, color=black] ;
+n2-> n7 [dir=forward, color=black] ;
+n2-> n8 [dir=forward, color=black] ;
+n2-> n9 [dir=both, color=grey, arrowhead=empty, arrowtail=empty] ;
+n3-> n4 [dir=back, color=black] ;
+n3-> n5 [dir=back, color=black] ;
+n3-> n6 [dir=back, color=black] ;
+n3-> n7 [dir=both, color=grey, arrowhead=empty, arrowtail=empty] ;
+n3-> n8 [dir=forward, color=black] ;
+n3-> n9 [dir=back, color=black] ;
+n4-> n5 [dir=back, color=black] ;
+n4-> n6 [dir=forward, color=grey, arrowhead=empty] ;
+n4-> n7 [dir=forward, color=black] ;
+n4-> n8 [dir=forward, color=black] ;
+n4-> n9 [dir=forward, color=black] ;
+n5-> n6 [dir=both, color=grey, arrowhead=empty, arrowtail=empty] ;
+n5-> n9 [dir=back, color=black] ;
+n6-> n7 [dir=forward, color=black] ;
+n6-> n8 [dir=forward, color=black] ;
+n6-> n9 [dir=back, color=grey, arrowtail=empty] ;
+n7-> n9 [dir=back, color=black] ;
+n8-> n9 [dir=back, color=black] ;
+}

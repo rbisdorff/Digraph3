@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+<meta content="Documentation of the Digraph3 collection of python3 modules for algorithmic decision theory" name="description" />
+<meta content="Algorithmic Decision Theory, Outranking Digraphs, MIS and kernels, Multiple Criteria Decision Aid" name="keywords" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>5. Computational Statistics Lectures &mdash; Digraph3 3.11.5 documentation</title>
+      <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="_static/graphviz.css" type="text/css" />
+      <link rel="stylesheet" href="_static/copybutton.css" type="text/css" />
+      <link rel="stylesheet" href="_static/css/tooltipster.custom.css" type="text/css" />
+      <link rel="stylesheet" href="_static/css/tooltipster.bundle.min.css" type="text/css" />
+      <link rel="stylesheet" href="_static/css/tooltipster-sideTip-shadow.min.css" type="text/css" />
+      <link rel="stylesheet" href="_static/css/tooltipster-sideTip-punk.min.css" type="text/css" />
+      <link rel="stylesheet" href="_static/css/tooltipster-sideTip-noir.min.css" type="text/css" />
+      <link rel="stylesheet" href="_static/css/tooltipster-sideTip-light.min.css" type="text/css" />
+      <link rel="stylesheet" href="_static/css/tooltipster-sideTip-borderless.min.css" type="text/css" />
+      <link rel="stylesheet" href="_static/css/micromodal.css" type="text/css" />
+      <link rel="stylesheet" href="_static/css/sphinx_rtd_theme.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script src="_static/jquery.js?v=5d32c60e"></script>
+        <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script src="_static/documentation_options.js?v=d10c4a4b"></script>
+        <script src="_static/doctools.js?v=888ff710"></script>
+        <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+        <script src="_static/clipboard.min.js?v=a7894cd8"></script>
+        <script src="_static/copybutton.js?v=15d7cbb8"></script>
+        <script src="_static/js/hoverxref.js?v=82c55261"></script>
+        <script src="_static/js/tooltipster.bundle.min.js?v=18bf091b"></script>
+        <script src="_static/js/micromodal.min.js?v=04d6302d"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="6. Digraph3 Archives" href="digraph3Archives.html" />
+    <link rel="prev" title="4. Algorithmic Decision Theory Lectures" href="adtLectures.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="index.html" class="icon icon-home">
+            Digraph3
+              <img src="_static/htmlLogo.png" class="logo" alt="Logo"/>
+          </a>
+              <div class="version">
+                Python 3.11
+              </div>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="tutorial.html">1. Digraph3 Tutorials</a></li>
+<li class="toctree-l1"><a class="reference internal" href="techDoc.html">2. Technical Reference of the Digraph3 modules</a></li>
+<li class="toctree-l1"><a class="reference internal" href="pearls.html">3. Advanced Topics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="adtLectures.html">4. Algorithmic Decision Theory Lectures</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">5. Computational Statistics Lectures</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#introduction">5.1. Introduction</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#lectures">5.2. Lectures</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="digraph3Archives.html">6. Digraph3 Archives</a></li>
+<li class="toctree-l1"><a class="reference internal" href="errataList.html">7. Digraph3 Book Errata List</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">Digraph3</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content style-external-links">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active"><span class="section-number">5. </span>Computational Statistics Lectures</li>
+
+  </ul><div class="rst-breadcrumbs-buttons" role="navigation" aria-label="Sequential page navigation">
+        <a href="adtLectures.html" class="btn btn-neutral float-left" title="4. Algorithmic Decision Theory Lectures" accesskey="p"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="digraph3Archives.html" class="btn btn-neutral float-right" title="6. Digraph3 Archives" accesskey="n">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+  </div>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="computational-statistics-lectures">
+<h1><span class="section-number">5. </span>Computational Statistics Lectures<a class="headerlink" href="#computational-statistics-lectures" title="Link to this heading"></a></h1>
+<dl class="field-list simple">
+<dt class="field-odd">Author<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Raymond Bisdorff, Emeritus Professor of Applied Mathematics and Computer Science</p>
+</dd>
+<dt class="field-even">Copyright<span class="colon">:</span></dt>
+<dd class="field-even"><ol class="upperalpha simple" start="18">
+<li><p>Bisdorff <a href="_static/digraph3_copyright.html" target="_blank">&copy;</a> 2013-2022</p></li>
+</ol>
+</dd>
+</dl>
+<section id="introduction">
+<h2><span class="section-number">5.1. </span>Introduction<a class="headerlink" href="#introduction" title="Link to this heading"></a></h2>
+<p>From 2007 to 2011 the Algorithmic Decision Theory COST Action IC0602, coordinated by Alexis Tsoukiàs, gathered researchers coming from different fields such as <em>Decision Theory</em>, <em>Discrete Mathematics</em>, <em>Theoretical Computer Science</em> and <em>Artificial Intelligence</em> in order to improve decision support in the presence of <strong>massive data bases</strong>, <strong>combinatorial structures</strong>, <strong>partial</strong> and/or <strong>uncertain information</strong> and <strong>distributed</strong>, possibly <strong>interoperating decision makers</strong>.</p>
+<p>A positive result a.o. of this COST action was the organisation from 2010 to 2020 of a Semester Course on <a href="http://hdl.handle.net/10993/37870" target="_blank">Computational Statistics</a> at the <em>University of Luxembourg</em> in the context of its <strong>Master in Information and Computer Science</strong>.</p>
+<p>Below are gathered 2x2 reduced copies of the presentation slides for 8 Lectures from the Winter Semester 2019.</p>
+</section>
+<section id="lectures">
+<h2><span class="section-number">5.2. </span>Lectures<a class="headerlink" href="#lectures" title="Link to this heading"></a></h2>
+<dl class="simple">
+<dt>L1. <a class="reference external" href="_static/1-randomNumbers-2x2.pdf">Generating random numbers for simulations</a></dt><dd><ol class="arabic simple">
+<li><p>On numbers “chosen at random”, computer generated random numbers and multiple recursive random number generators over <em>F2</em></p></li>
+<li><p>Recommendations and traps to watch for with home brewed generators</p></li>
+<li><p>Combining random number generators and testing randomness</p></li>
+</ol>
+</dd>
+<dt>L2. <a class="reference external" href="_static/2-intro-R-2x2.pdf">Introduction to statistical computing</a></dt><dd><ol class="arabic simple">
+<li><p>On generating simulation data with Python and exploring simulation data with <em>gretl</em>. Getting started with <em>R</em>. Introducing <em>R</em> objects: vectors, matrices, lists, data frames. Reading CSV data files into data frames</p></li>
+<li><p>Doing linear algebra in <em>R</em>. Constructing matrix objects, matrix operations and inversion, solving linear systems, eigen-values and -vectors, singular value decomposition, Choleski and QR decompositions</p></li>
+<li><p>Principal component analysis (PCA) and discrete Markov chain simulating</p></li>
+</ol>
+</dd>
+<dt>L3. <a class="reference external" href="_static/3-randVarGen-2x2.pdf">Continuous Random Variables</a></dt><dd><ol class="arabic simple">
+<li><p>Probability distributions in <em>R</em>-core, simulating a continuous uniform random distribution, the spectral test for random number generators</p></li>
+<li><p>Simulating random variables by a continuous inverse transform, standard exponential law based generators</p></li>
+<li><p>The Gaussian random variables, important properties, simulating Gaussian random variables</p></li>
+</ol>
+</dd>
+<dt>L4. <a class="reference external" href="_static/4-randDiscrVarGen-2x2.pdf">Simulating from Discrete Random Variables</a></dt><dd><ol class="arabic simple">
+<li><p>Simulating Bernoulli and Binomial random variables. The CLT for binomial distributions</p></li>
+<li><p>Simulating a Poisson random variable and Poisson processes with exponential time intervals</p></li>
+<li><p>Simulating Gamma variables, integer alpha parameter and the sum rule for Gamma Variables</p></li>
+</ol>
+</dd>
+<dt>L5. <a class="reference external" href="_static/5-QuantileEstimation-2x2.pdf">Simulating from arbitrary empirical random distributions</a></dt><dd><ol class="arabic simple">
+<li><p>Single pass estimation of arbitrary quantiles: computing sample quantiles, quantiles via selecting algorithms, tracking the <em>M</em>-largest element in a single pass</p></li>
+<li><p>Computing quantiles from binned data: equally binned observation data, linear integration formulas, regular binned data quantiles</p></li>
+<li><p>Incremental quantiles estimation with the IQ-agent: using the IQ-agent for Monte-Carlo simulations</p></li>
+</ol>
+</dd>
+<dt>L6. <a class="reference external" href="_static/6-chiSquareTest-2x2.pdf">Two distributions, are they of the same kind?</a></dt><dd><ol class="arabic simple">
+<li><p>Methodology: comparing statistical distributions, methodological approach and statistical tests</p></li>
+<li><p>Comparing histograms: Chi-square test against a known distribution, comparing two binned data sets, testing uniform randomness</p></li>
+<li><p>Comparing continuous distributions with the  Kolmogorov-Smirnov test</p></li>
+</ol>
+</dd>
+<dt>L7. <a class="reference external" href="_static/7-averaging-2x2.pdf">On Averaging</a></dt><dd><ol class="arabic simple">
+<li><p>The benefit from averaging: the law of large numbers, estimating distribution parameters, how to reduce noise</p></li>
+<li><p>Convergence of the averaging: Convergence of the mean for a standard Gaussian, and if there are outliers? Non convergence of a Cauchy mean</p></li>
+<li><p>Comparing two empiric means: robustness of the <em>t</em> statistic, estimating <em>t</em> statistics, Monte Carlo simulation of the <em>H0</em> rejection</p></li>
+</ol>
+</dd>
+<dt>L8. <a class="reference external" href="_static/8-acceptReject-2x2.pdf">Accept-Reject Simulation Methods</a></dt><dd><ol class="arabic simple">
+<li><p>Classical Monte Carlo Integration: principles and applications</p></li>
+<li><p>Accept-reject simulation methods</p></li>
+<li><p>Accept-reject simulation applications: pi estimation, Box-Muller transform, Ratio-Of-Uniforms method</p></li>
+</ol>
+</dd>
+</dl>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="adtLectures.html" class="btn btn-neutral float-left" title="4. Algorithmic Decision Theory Lectures" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="digraph3Archives.html" class="btn btn-neutral float-right" title="6. Digraph3 Archives" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2012-2023, Raymond Bisdorff.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

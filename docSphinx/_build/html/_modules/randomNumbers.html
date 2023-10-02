@@ -1,0 +1,1498 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>randomNumbers &mdash; Digraph3 3.11.4 documentation</title>
+      <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/graphviz.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/copybutton.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/css/tooltipster.custom.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/css/tooltipster.bundle.min.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/css/tooltipster-sideTip-shadow.min.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/css/tooltipster-sideTip-punk.min.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/css/tooltipster-sideTip-noir.min.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/css/tooltipster-sideTip-light.min.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/css/tooltipster-sideTip-borderless.min.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/css/micromodal.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/css/sphinx_rtd_theme.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script src="../_static/jquery.js?v=5d32c60e"></script>
+        <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script src="../_static/documentation_options.js?v=7574ce52"></script>
+        <script src="../_static/doctools.js?v=888ff710"></script>
+        <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+        <script src="../_static/clipboard.min.js?v=a7894cd8"></script>
+        <script src="../_static/copybutton.js?v=15d7cbb8"></script>
+        <script src="../_static/js/hoverxref.js?v=d4da329d"></script>
+        <script src="../_static/js/tooltipster.bundle.min.js?v=18bf091b"></script>
+        <script src="../_static/js/micromodal.min.js?v=04d6302d"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../index.html" class="icon icon-home">
+            Digraph3
+              <img src="../_static/htmlLogo.png" class="logo" alt="Logo"/>
+          </a>
+              <div class="version">
+                Python 3.11
+              </div>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="../tutorial.html">1. Digraph3 Tutorials</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../techDoc.html">2. Technical Reference of the Digraph3 modules</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../pearls.html">3. Advanced Topics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../adtLectures.html">4. Algorithmic Decision Theory Lectures</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../compStatLectures.html">5. Computational Statistics Lectures</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../digraph3Archives.html">6. Digraph3 Archives</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../errataList.html">7. Digraph3 Book Errata List</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">Digraph3</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content style-external-links">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="index.html">Module code</a></li>
+      <li class="breadcrumb-item active">randomNumbers</li>
+
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <h1>Source code for randomNumbers</h1><div class="highlight"><pre>
+<span></span><span class="ch">#!/usr/bin/env python3</span>
+<span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">Python3+ implementation of random number generators</span>
+<span class="sd">Copyright (C) 2014-2023  Raymond Bisdorff</span>
+
+<span class="sd">    This program is free software; you can redistribute it and/or modify</span>
+<span class="sd">    it under the terms of the GNU General Public License as published by</span>
+<span class="sd">    the Free Software Foundation; either version 3 of the License, or</span>
+<span class="sd">    (at your option) any later version.</span>
+
+<span class="sd">    This program is distributed in the hope that it will be useful,</span>
+<span class="sd">    but WITHOUT ANY WARRANTY; without even the implied warranty of</span>
+<span class="sd">    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the</span>
+<span class="sd">    GNU General Public License for more details.</span>
+
+<span class="sd">    You should have received a copy of the GNU General Public License along</span>
+<span class="sd">    with this program; if not, write to the Free Software Foundation, Inc.,</span>
+<span class="sd">    51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.</span>
+
+<span class="sd">&quot;&quot;&quot;</span>
+<span class="c1">#######################</span>
+
+<span class="n">__version__</span> <span class="o">=</span> <span class="s2">&quot;$Revision: Python 3.10&quot;</span>
+
+<div class="viewcode-block" id="IncrementalQuantilesEstimator">
+<a class="viewcode-back" href="../techDoc.html#randomNumbers.IncrementalQuantilesEstimator">[docs]</a>
+<span class="k">class</span> <span class="nc">IncrementalQuantilesEstimator</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    *References*: </span>
+<span class="sd">       - John M. Chambers (et al.), Monitoring Networked Applications </span>
+<span class="sd">    with incremental Quantile estimation, *Statistical Science* 2006 (4):463-475</span>
+<span class="sd">       - William H. Press, Saul A. Teukolsky, William T. Vetterling, and Brian P. Flannery, *Numerical Recipes : The Art of Scientific Computing,Third Edition* (NR3), Cambridge University Press, Cambridge UK 2007.</span>
+
+<span class="sd">    Python reimplementation (RB) from the C++/NR3 source code.</span>
+<span class="sd"> </span>
+<span class="sd">    See Computational Statistics Course : http://hdl.handle.net/10993/37870</span>
+<span class="sd">    Lecture 5.</span>
+
+<span class="sd">    Example usage:</span>
+
+<span class="sd">        &gt;&gt;&gt; from randomNumbers import IncrementalQuantilesEstimator</span>
+<span class="sd">        &gt;&gt;&gt; import random</span>
+<span class="sd">        &gt;&gt;&gt; random.seed(1)</span>
+<span class="sd">        &gt;&gt;&gt; iqAgent = IncrementalQuantilesEstimator(nbuf=100)</span>
+<span class="sd">        &gt;&gt;&gt; # feeding the iqAgent with standard Gaussian random numbers </span>
+<span class="sd">        &gt;&gt;&gt; for i in range(1000):</span>
+<span class="sd">        ...     iqAgent.add(random.gauss(mu=0,sigma=1))</span>
+<span class="sd">        &gt;&gt;&gt; # reporting the estimated Gaussian quartiles</span>
+<span class="sd">        &gt;&gt;&gt; print(iqAgent.report(0.0))</span>
+<span class="sd">        -2.961214270519158</span>
+<span class="sd">        &gt;&gt;&gt; print(iqAgent.report(0.25))</span>
+<span class="sd">        -0.6832621550224423</span>
+<span class="sd">        &gt;&gt;&gt; print(iqAgent.report(0.50))</span>
+<span class="sd">        -0.014392849958746522</span>
+<span class="sd">        &gt;&gt;&gt; print(iqAgent.report(0.75))</span>
+<span class="sd">        0.7029655732010196</span>
+<span class="sd">        &gt;&gt;&gt; print(iqAgent.report(1.00))</span>
+<span class="sd">        2.737259509189501</span>
+<span class="sd">        &gt;&gt;&gt; # saving the iqAgent&#39;s state</span>
+<span class="sd">        &gt;&gt;&gt; iqAgent.saveState(&#39;test.csv&#39;)</span>
+<span class="sd">  </span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">nbuf</span><span class="o">=</span><span class="mi">1000</span><span class="p">,</span><span class="n">Debug</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        *nbuf* := buffersize in bytes (default = 1000B)</span>
+<span class="sd">        250 quantiles containing all percentiles from 0.10 to 0.90</span>
+<span class="sd">        and heavy tails.</span>
+<span class="sd">        </span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="kn">from</span> <span class="nn">sys</span> <span class="kn">import</span> <span class="n">float_info</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">Debug</span><span class="o">=</span><span class="n">Debug</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">nbrupd</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">nq</span> <span class="o">=</span> <span class="mi">251</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">qile</span> <span class="o">=</span> <span class="p">[</span><span class="mf">0.0</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">nq</span><span class="p">)]</span>
+        <span class="n">pval</span> <span class="o">=</span> <span class="p">[</span><span class="mf">0.0</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">nq</span><span class="p">)]</span>
+        <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">85</span><span class="p">,</span><span class="mi">166</span><span class="p">):</span>
+            <span class="n">pval</span><span class="p">[</span><span class="n">j</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="n">j</span><span class="o">-</span><span class="mf">75.0</span><span class="p">)</span><span class="o">/</span><span class="mf">100.0</span>
+        <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">84</span><span class="p">,</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="o">-</span><span class="mi">1</span><span class="p">):</span>
+            <span class="n">pval</span><span class="p">[</span><span class="n">j</span><span class="p">]</span> <span class="o">=</span> <span class="mf">0.87191909</span><span class="o">*</span><span class="n">pval</span><span class="p">[</span><span class="n">j</span><span class="o">+</span><span class="mi">1</span><span class="p">]</span>
+            <span class="n">pval</span><span class="p">[</span><span class="mi">250</span><span class="o">-</span><span class="n">j</span><span class="p">]</span> <span class="o">=</span> <span class="mf">1.0</span><span class="o">-</span><span class="n">pval</span><span class="p">[</span><span class="n">j</span><span class="p">]</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">pval</span> <span class="o">=</span> <span class="n">pval</span>
+        
+        <span class="bp">self</span><span class="o">.</span><span class="n">nt</span> <span class="o">=</span> <span class="mi">0</span>
+        
+        <span class="bp">self</span><span class="o">.</span><span class="n">nbuf</span> <span class="o">=</span> <span class="n">nbuf</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">dbuf</span> <span class="o">=</span> <span class="p">[]</span>
+        
+        <span class="bp">self</span><span class="o">.</span><span class="n">q0</span> <span class="o">=</span> <span class="n">float_info</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="c1"># max float</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">qm</span> <span class="o">=</span> <span class="n">float_info</span><span class="p">[</span><span class="mi">3</span><span class="p">]</span> <span class="c1"># min float</span>
+        <span class="k">if</span> <span class="n">Debug</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">saveState</span><span class="p">(</span><span class="s1">&#39;initState.csv&#39;</span><span class="p">)</span>
+
+<div class="viewcode-block" id="IncrementalQuantilesEstimator.reset">
+<a class="viewcode-back" href="../techDoc.html#randomNumbers.IncrementalQuantilesEstimator.reset">[docs]</a>
+    <span class="k">def</span> <span class="nf">reset</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Reset the content of the estimator to the initial state.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">nbrupd</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">qile</span> <span class="o">=</span> <span class="p">[</span><span class="mf">0.0</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">nq</span><span class="p">)]</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">nt</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">dbuf</span> <span class="o">=</span> <span class="p">[]</span></div>
+
+
+<div class="viewcode-block" id="IncrementalQuantilesEstimator.add">
+<a class="viewcode-back" href="../techDoc.html#randomNumbers.IncrementalQuantilesEstimator.add">[docs]</a>
+    <span class="k">def</span> <span class="nf">add</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">datum</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Assimilate a new value from the stream</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">x</span> <span class="o">=</span> <span class="n">datum</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">dbuf</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">x</span> <span class="o">&lt;</span> <span class="bp">self</span><span class="o">.</span><span class="n">q0</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">q0</span> <span class="o">=</span> <span class="n">x</span>
+        <span class="k">if</span> <span class="n">x</span> <span class="o">&gt;</span> <span class="bp">self</span><span class="o">.</span><span class="n">qm</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">qm</span> <span class="o">=</span> <span class="n">x</span>
+        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">dbuf</span><span class="p">)</span> <span class="o">==</span> <span class="bp">self</span><span class="o">.</span><span class="n">nbuf</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_update</span><span class="p">()</span></div>
+
+
+<div class="viewcode-block" id="IncrementalQuantilesEstimator.addList">
+<a class="viewcode-back" href="../techDoc.html#randomNumbers.IncrementalQuantilesEstimator.addList">[docs]</a>
+    <span class="k">def</span> <span class="nf">addList</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">listDatum</span><span class="p">,</span><span class="n">historyWeight</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Assimilate a list of new values.</span>
+
+<span class="sd">        Parameter:</span>
+
+<span class="sd">        *historyWeight* takes decimal values in [0.0;1.0[ and  </span>
+<span class="sd">        indicates a requested proportional weight of the history </span>
+<span class="sd">        wrt to the length of listDatum. </span>
+
+<span class="sd">        Is ignored when None (default).</span>
+<span class="sd">        </span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="n">historyWeight</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="k">if</span> <span class="p">(</span><span class="n">historyWeight</span> <span class="o">&lt;</span> <span class="mf">0.0</span><span class="p">)</span> <span class="ow">or</span> <span class="p">(</span><span class="n">historyWeight</span> <span class="o">&gt;=</span> <span class="mf">1.0</span><span class="p">):</span>
+                <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Error: historyWeight %.f must be in [0.0;1.0[&#39;</span> \
+                      <span class="o">%</span> <span class="n">historyWeight</span><span class="p">)</span>
+                <span class="k">return</span>
+            <span class="n">m</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">listDatum</span><span class="p">)</span>
+            <span class="k">if</span> <span class="n">m</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">nt</span> <span class="o">=</span> <span class="nb">round</span><span class="p">(</span><span class="n">historyWeight</span><span class="o">/</span><span class="p">(</span><span class="mf">1.0</span> <span class="o">-</span> <span class="n">historyWeight</span><span class="p">)</span><span class="o">*</span><span class="n">m</span><span class="p">)</span>
+        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">dbuf</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_update</span><span class="p">()</span> <span class="c1"># clearing the income buffer</span>
+        <span class="k">for</span> <span class="n">datum</span> <span class="ow">in</span> <span class="n">listDatum</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">datum</span><span class="p">)</span></div>
+
+
+    <span class="k">def</span> <span class="nf">_update</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Batch update. For internal use only.</span>
+<span class="sd">        Called a.o. by self.add(), self.report() and</span>
+<span class="sd">        self.saveState() methods</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">jd</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="n">jq</span> <span class="o">=</span> <span class="mi">1</span>
+        <span class="n">told</span> <span class="o">=</span> <span class="mf">0.0</span>
+        <span class="n">tnew</span> <span class="o">=</span> <span class="mf">0.0</span>
+        <span class="n">nq</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">nq</span>
+        <span class="n">nt</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">nt</span>
+        <span class="n">q0</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">q0</span>
+        <span class="n">qm</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">qm</span>
+        <span class="n">dbuf</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">dbuf</span>
+        <span class="n">dbuf</span><span class="o">.</span><span class="n">sort</span><span class="p">()</span>
+        <span class="n">nd</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">dbuf</span><span class="p">)</span>
+        <span class="n">pval</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">pval</span>
+        <span class="n">qile</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">qile</span>
+        <span class="n">newqile</span> <span class="o">=</span> <span class="p">[</span><span class="mf">0.0</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">nq</span><span class="p">)]</span>
+
+        <span class="c1"># set lowest and highest to min and max values seen so far</span>
+        <span class="n">qold</span> <span class="o">=</span> <span class="n">q0</span>
+        <span class="n">qnew</span> <span class="o">=</span> <span class="n">q0</span>
+        <span class="n">qile</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="n">q0</span>
+        <span class="n">newqile</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="n">q0</span>
+        <span class="n">qile</span><span class="p">[</span><span class="n">nq</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="n">qm</span>
+        <span class="n">newqile</span><span class="p">[</span><span class="n">nq</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="n">qm</span>
+        <span class="c1"># and set compatible p-values</span>
+        <span class="n">pval</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="nb">min</span><span class="p">(</span><span class="mf">0.5</span><span class="o">/</span><span class="p">(</span><span class="n">nt</span><span class="o">+</span><span class="n">nd</span><span class="p">),</span><span class="mf">0.5</span><span class="o">*</span><span class="n">pval</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
+        <span class="n">pval</span><span class="p">[</span><span class="n">nq</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="nb">max</span><span class="p">(</span><span class="mf">1.0</span><span class="o">-</span><span class="mf">0.5</span><span class="o">/</span><span class="p">(</span><span class="n">nt</span><span class="o">+</span><span class="n">nd</span><span class="p">),</span><span class="mf">0.5</span><span class="o">*</span><span class="p">(</span><span class="mf">1.0</span><span class="o">+</span><span class="n">pval</span><span class="p">[</span><span class="n">nq</span><span class="o">-</span><span class="mi">2</span><span class="p">]))</span>
+
+        <span class="k">for</span> <span class="n">iq</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="n">nq</span><span class="o">-</span><span class="mi">1</span><span class="p">):</span>
+            <span class="c1"># main loop over target p-values for interpolation</span>
+            <span class="n">target</span> <span class="o">=</span> <span class="p">(</span><span class="n">nt</span><span class="o">+</span><span class="n">nd</span><span class="p">)</span><span class="o">*</span><span class="n">pval</span><span class="p">[</span><span class="n">iq</span><span class="p">]</span>
+            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">Debug</span><span class="p">:</span>
+                <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;--&gt;&gt; enter quantile iq: &#39;</span><span class="p">,</span> <span class="n">iq</span><span class="p">)</span>
+                <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;        tnew, target &#39;</span> <span class="p">,</span><span class="n">tnew</span><span class="p">,</span><span class="n">target</span><span class="p">)</span>
+            <span class="k">if</span> <span class="n">tnew</span> <span class="o">&lt;</span> <span class="n">target</span><span class="p">:</span>
+                <span class="c1"># find a succession of abcissa-ordinate pairs (qnew,tnew) that</span>
+                <span class="c1"># are the discontinuity of value or slope and break to perform</span>
+                <span class="c1"># an interpolation as we cross each target</span>
+                <span class="k">while</span> <span class="kc">True</span><span class="p">:</span>
+                    <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">Debug</span><span class="p">:</span>
+                        <span class="k">try</span><span class="p">:</span>
+                            <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;iq, jq, nq, jd, nd, qile[jq], dbuf[jd]&#39;</span><span class="p">,</span>\
+                                  <span class="n">iq</span><span class="p">,</span> <span class="n">jq</span><span class="p">,</span> <span class="n">nq</span><span class="p">,</span> <span class="n">jd</span><span class="p">,</span> <span class="n">nd</span><span class="p">,</span> <span class="n">qile</span><span class="p">[</span><span class="n">jq</span><span class="p">],</span> <span class="n">dbuf</span><span class="p">[</span><span class="n">jd</span><span class="p">])</span>
+                        <span class="k">except</span><span class="p">:</span>
+                            <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\n</span><span class="s1">iq, jq, nq, jd, nd, qile[jq]&#39;</span><span class="p">,</span>\
+                                  <span class="n">iq</span><span class="p">,</span> <span class="n">jq</span><span class="p">,</span> <span class="n">nq</span><span class="p">,</span> <span class="n">jd</span><span class="p">,</span> <span class="n">nd</span><span class="p">,</span> <span class="n">qile</span><span class="p">[</span><span class="n">jq</span><span class="p">])</span>
+                    <span class="k">if</span> <span class="p">(</span><span class="n">jq</span> <span class="o">&lt;</span> <span class="n">nq</span><span class="p">)</span> <span class="ow">and</span> <span class="p">(</span> <span class="p">(</span><span class="n">jd</span> <span class="o">&gt;=</span> <span class="n">nd</span><span class="p">)</span> <span class="ow">or</span> <span class="p">(</span><span class="n">qile</span><span class="p">[</span><span class="n">jq</span><span class="p">]</span> <span class="o">&lt;</span> <span class="n">dbuf</span><span class="p">[</span><span class="n">jd</span><span class="p">])</span> <span class="p">):</span>
+                        <span class="c1"># found slope discontinuity from old cdf</span>
+                        <span class="n">qnew</span> <span class="o">=</span> <span class="n">qile</span><span class="p">[</span><span class="n">jq</span><span class="p">]</span>
+                        <span class="n">tnew</span> <span class="o">=</span> <span class="n">jd</span> <span class="o">+</span> <span class="n">nt</span><span class="o">*</span><span class="n">pval</span><span class="p">[</span><span class="n">jq</span><span class="p">]</span>
+                        <span class="n">jq</span> <span class="o">+=</span> <span class="mi">1</span>
+                        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">Debug</span><span class="p">:</span>
+                            <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;slope: tnew, target&#39;</span><span class="p">,</span> <span class="n">tnew</span><span class="p">,</span> <span class="n">target</span><span class="p">)</span>
+                        <span class="k">if</span> <span class="n">tnew</span> <span class="o">&gt;=</span> <span class="n">target</span><span class="p">:</span>
+                            <span class="k">break</span>
+                    <span class="k">else</span><span class="p">:</span>
+                        <span class="c1"># found value discontinuity from batch cdf</span>
+                        <span class="n">qnew</span> <span class="o">=</span> <span class="n">dbuf</span><span class="p">[</span><span class="n">jd</span><span class="p">]</span>
+                        <span class="n">tnew</span> <span class="o">=</span> <span class="n">told</span>
+                        
+                        <span class="k">if</span> <span class="n">qile</span><span class="p">[</span><span class="n">jq</span><span class="p">]</span> <span class="o">&gt;</span> <span class="n">qile</span><span class="p">[</span><span class="n">jq</span><span class="o">-</span><span class="mi">1</span><span class="p">]:</span>
+                            <span class="n">tnew</span> <span class="o">+=</span> <span class="n">nt</span><span class="o">*</span><span class="p">(</span><span class="n">pval</span><span class="p">[</span><span class="n">jq</span><span class="p">]</span><span class="o">-</span><span class="n">pval</span><span class="p">[</span><span class="n">jq</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span>\
+                                    <span class="o">*</span> <span class="p">(</span><span class="n">qnew</span><span class="o">-</span><span class="n">qold</span><span class="p">)</span><span class="o">/</span><span class="p">(</span><span class="n">qile</span><span class="p">[</span><span class="n">jq</span><span class="p">]</span><span class="o">-</span><span class="n">qile</span><span class="p">[</span><span class="n">jq</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span>
+                        <span class="n">jd</span> <span class="o">+=</span> <span class="mi">1</span>
+                        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">Debug</span><span class="p">:</span>
+                            <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;value 1: tnew, target&#39;</span><span class="p">,</span> <span class="n">tnew</span><span class="p">,</span> <span class="n">target</span><span class="p">)</span>
+                        <span class="k">if</span> <span class="n">tnew</span> <span class="o">&gt;=</span> <span class="n">target</span><span class="p">:</span>
+                            <span class="k">break</span>
+                        <span class="n">told</span> <span class="o">=</span> <span class="n">tnew</span>
+                        <span class="n">tnew</span> <span class="o">+=</span> <span class="mf">1.0</span>
+                        <span class="n">qold</span> <span class="o">=</span> <span class="n">qnew</span>
+                        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">Debug</span><span class="p">:</span>
+                            <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;value 2: tnew, target&#39;</span><span class="p">,</span> <span class="n">tnew</span><span class="p">,</span> <span class="n">target</span><span class="p">)</span>
+                        <span class="k">if</span> <span class="n">tnew</span> <span class="o">&gt;=</span> <span class="n">target</span><span class="p">:</span>
+                            <span class="k">break</span>
+
+                    <span class="n">told</span> <span class="o">=</span> <span class="n">tnew</span>
+                    <span class="n">qold</span> <span class="o">=</span> <span class="n">qnew</span>
+            <span class="c1"># break to here and perform the new interpolation</span>
+            <span class="k">if</span> <span class="n">tnew</span> <span class="o">==</span> <span class="n">told</span><span class="p">:</span>
+                <span class="n">newqile</span><span class="p">[</span><span class="n">iq</span><span class="p">]</span> <span class="o">=</span> <span class="mf">0.5</span><span class="o">*</span> <span class="p">(</span><span class="n">qold</span><span class="o">+</span><span class="n">qnew</span><span class="p">)</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">newqile</span><span class="p">[</span><span class="n">iq</span><span class="p">]</span> <span class="o">=</span> <span class="n">qold</span> <span class="o">+</span> <span class="p">(</span><span class="n">qnew</span> <span class="o">-</span> <span class="n">qold</span><span class="p">)</span><span class="o">*</span><span class="p">(</span><span class="n">target</span><span class="o">-</span><span class="n">told</span><span class="p">)</span><span class="o">/</span><span class="p">(</span><span class="n">tnew</span><span class="o">-</span><span class="n">told</span><span class="p">)</span>
+            <span class="n">told</span> <span class="o">=</span> <span class="n">tnew</span>
+            <span class="n">qold</span> <span class="o">=</span> <span class="n">qnew</span>
+
+        
+        <span class="bp">self</span><span class="o">.</span><span class="n">q0</span> <span class="o">=</span> <span class="n">q0</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">qm</span> <span class="o">=</span> <span class="n">qm</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">pval</span> <span class="o">=</span> <span class="n">pval</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">qile</span> <span class="o">=</span> <span class="n">newqile</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">nt</span> <span class="o">+=</span> <span class="n">nd</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">dbuf</span> <span class="o">=</span> <span class="p">[]</span>
+
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">Debug</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">nbrupd</span> <span class="o">+=</span> <span class="mi">1</span>
+            <span class="n">fileName</span> <span class="o">=</span> <span class="s1">&#39;saveState-</span><span class="si">%d</span><span class="s1">.csv&#39;</span> <span class="o">%</span> <span class="bp">self</span><span class="o">.</span><span class="n">nbrupd</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">saveState</span><span class="p">(</span><span class="n">fileName</span><span class="p">)</span>
+        
+<div class="viewcode-block" id="IncrementalQuantilesEstimator.report">
+<a class="viewcode-back" href="../techDoc.html#randomNumbers.IncrementalQuantilesEstimator.report">[docs]</a>
+    <span class="k">def</span> <span class="nf">report</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">p</span> <span class="o">=</span> <span class="mf">0.5</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Return estimated *p*-quantile (default = median)</span>
+<span class="sd">        for the data seen so far </span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">nq</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">nq</span>
+        <span class="n">pval</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">pval</span>
+        <span class="n">qile</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">qile</span>
+        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">dbuf</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_update</span><span class="p">()</span>
+        <span class="n">jl</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="n">jh</span> <span class="o">=</span> <span class="n">nq</span><span class="o">-</span><span class="mi">1</span>
+        <span class="k">while</span> <span class="p">(</span><span class="n">jh</span> <span class="o">-</span> <span class="n">jl</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">1</span><span class="p">:</span>
+            <span class="n">j</span> <span class="o">=</span> <span class="p">(</span><span class="n">jh</span> <span class="o">+</span> <span class="n">jl</span><span class="p">)</span> <span class="o">&gt;&gt;</span> <span class="mi">1</span>
+            <span class="k">if</span> <span class="n">p</span> <span class="o">&gt;</span> <span class="n">pval</span><span class="p">[</span><span class="n">j</span><span class="p">]:</span>
+                <span class="n">jl</span> <span class="o">=</span> <span class="n">j</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">jh</span> <span class="o">=</span> <span class="n">j</span>
+        <span class="n">j</span> <span class="o">=</span> <span class="n">jl</span>
+        
+        <span class="k">try</span><span class="p">:</span>
+            <span class="n">q</span> <span class="o">=</span> <span class="n">qile</span><span class="p">[</span><span class="n">j</span><span class="p">]</span> <span class="o">+</span> <span class="p">(</span><span class="n">qile</span><span class="p">[</span><span class="n">j</span><span class="o">+</span><span class="mi">1</span><span class="p">]</span><span class="o">-</span><span class="n">qile</span><span class="p">[</span><span class="n">j</span><span class="p">])</span><span class="o">*</span><span class="p">(</span><span class="n">p</span><span class="o">-</span><span class="n">pval</span><span class="p">[</span><span class="n">j</span><span class="p">])</span><span class="o">/</span><span class="p">(</span><span class="n">pval</span><span class="p">[</span><span class="n">j</span><span class="o">+</span><span class="mi">1</span><span class="p">]</span><span class="o">-</span><span class="n">pval</span><span class="p">[</span><span class="n">j</span><span class="p">])</span>
+        <span class="k">except</span><span class="p">:</span>
+            <span class="n">q</span> <span class="o">=</span> <span class="n">qile</span><span class="p">[</span><span class="n">j</span><span class="p">]</span>
+            
+        <span class="k">return</span> <span class="nb">max</span><span class="p">(</span><span class="n">qile</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span><span class="nb">min</span><span class="p">(</span><span class="n">qile</span><span class="p">[</span><span class="n">nq</span><span class="o">-</span><span class="mi">1</span><span class="p">],</span><span class="n">q</span><span class="p">))</span></div>
+
+
+<div class="viewcode-block" id="IncrementalQuantilesEstimator.cdf">
+<a class="viewcode-back" href="../techDoc.html#randomNumbers.IncrementalQuantilesEstimator.cdf">[docs]</a>
+    <span class="k">def</span> <span class="nf">cdf</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">x</span><span class="o">=</span><span class="mi">0</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        return proportion of data lower or equal to value x</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">nq</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">nq</span>
+        <span class="n">pval</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">pval</span>
+        <span class="n">qile</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">qile</span>
+        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">dbuf</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_update</span>
+        <span class="n">jl</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="n">jh</span> <span class="o">=</span> <span class="n">nq</span><span class="o">-</span><span class="mi">1</span>
+        <span class="k">while</span> <span class="p">(</span><span class="n">jh</span> <span class="o">-</span> <span class="n">jl</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">1</span><span class="p">:</span>
+            <span class="n">j</span> <span class="o">=</span> <span class="p">(</span><span class="n">jh</span> <span class="o">+</span> <span class="n">jl</span><span class="p">)</span> <span class="o">&gt;&gt;</span> <span class="mi">1</span>
+            <span class="k">if</span> <span class="n">x</span> <span class="o">&gt;</span> <span class="n">qile</span><span class="p">[</span><span class="n">j</span><span class="p">]:</span>
+                <span class="n">jl</span> <span class="o">=</span> <span class="n">j</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">jh</span> <span class="o">=</span> <span class="n">j</span>
+        <span class="n">j</span> <span class="o">=</span> <span class="n">jl</span>
+        <span class="k">if</span> <span class="p">(</span><span class="n">qile</span><span class="p">[</span><span class="n">j</span><span class="o">+</span><span class="mi">1</span><span class="p">]</span> <span class="o">-</span> <span class="n">qile</span><span class="p">[</span><span class="n">j</span><span class="p">])</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="n">p</span> <span class="o">=</span> <span class="n">pval</span><span class="p">[</span><span class="n">j</span><span class="p">]</span> <span class="o">+</span> <span class="p">(</span><span class="n">pval</span><span class="p">[</span><span class="n">j</span><span class="o">+</span><span class="mi">1</span><span class="p">]</span><span class="o">-</span><span class="n">pval</span><span class="p">[</span><span class="n">j</span><span class="p">])</span><span class="o">*</span><span class="p">(</span><span class="n">x</span> <span class="o">-</span> <span class="n">qile</span><span class="p">[</span><span class="n">j</span><span class="p">])</span><span class="o">/</span><span class="p">(</span><span class="n">qile</span><span class="p">[</span><span class="n">j</span><span class="o">+</span><span class="mi">1</span><span class="p">]</span><span class="o">-</span><span class="n">qile</span><span class="p">[</span><span class="n">j</span><span class="p">])</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">p</span> <span class="o">=</span> <span class="n">pval</span><span class="p">[</span><span class="n">j</span><span class="p">]</span>
+        <span class="k">return</span> <span class="nb">max</span><span class="p">(</span><span class="n">pval</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="nb">min</span><span class="p">(</span><span class="n">pval</span><span class="p">[</span><span class="n">nq</span><span class="o">-</span><span class="mi">1</span><span class="p">],</span><span class="n">p</span><span class="p">))</span></div>
+
+
+        
+<div class="viewcode-block" id="IncrementalQuantilesEstimator.saveState">
+<a class="viewcode-back" href="../techDoc.html#randomNumbers.IncrementalQuantilesEstimator.saveState">[docs]</a>
+    <span class="k">def</span> <span class="nf">saveState</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">fileName</span><span class="o">=</span><span class="s1">&#39;state.csv&#39;</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Save the state of the IncrementalQuantileEstimator self instance</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">dbuf</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_update</span><span class="p">()</span>
+        <span class="n">fo</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="n">fileName</span><span class="p">,</span><span class="s1">&#39;w&#39;</span><span class="p">)</span>
+        <span class="n">fo</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s1">&#39;&quot;p-value&quot;,&quot;quantile&quot;</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)</span>
+        <span class="k">for</span> <span class="n">iq</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">nq</span><span class="p">):</span>
+            <span class="n">fo</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s1">&#39;</span><span class="si">%.7f</span><span class="s1">, </span><span class="si">%.5f</span><span class="se">\n</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">pval</span><span class="p">[</span><span class="n">iq</span><span class="p">],</span><span class="bp">self</span><span class="o">.</span><span class="n">qile</span><span class="p">[</span><span class="n">iq</span><span class="p">]))</span>
+        <span class="n">fo</span><span class="o">.</span><span class="n">close</span><span class="p">()</span></div>
+
+
+<div class="viewcode-block" id="IncrementalQuantilesEstimator.loadState">
+<a class="viewcode-back" href="../techDoc.html#randomNumbers.IncrementalQuantilesEstimator.loadState">[docs]</a>
+    <span class="k">def</span> <span class="nf">loadState</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">FileName</span><span class="o">=</span><span class="s1">&#39;state.csv&#39;</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Load a previously saved state of the estimator</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="kn">from</span> <span class="nn">csv</span> <span class="kn">import</span> <span class="n">DictReader</span>
+        <span class="n">fo</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="n">FileName</span><span class="p">,</span><span class="s1">&#39;r&#39;</span><span class="p">)</span>
+        <span class="n">csvDict</span> <span class="o">=</span> <span class="n">DictReader</span><span class="p">(</span><span class="n">fo</span><span class="p">)</span>
+        <span class="k">for</span> <span class="n">i</span><span class="p">,</span><span class="n">row</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">csvDict</span><span class="p">):</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">pval</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">row</span><span class="p">[</span><span class="s1">&#39;p-value&#39;</span><span class="p">])</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">qile</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">row</span><span class="p">[</span><span class="s1">&#39;quantile&#39;</span><span class="p">])</span>
+        <span class="n">fo</span><span class="o">.</span><span class="n">close</span><span class="p">()</span></div>
+</div>
+
+
+
+<div class="viewcode-block" id="DiscreteRandomVariable">
+<a class="viewcode-back" href="../techDoc.html#randomNumbers.DiscreteRandomVariable">[docs]</a>
+<span class="k">class</span> <span class="nc">DiscreteRandomVariable</span><span class="p">():</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Discrete random variable generator</span>
+
+<span class="sd">    Parameters:</span>
+<span class="sd">        | discreteLaw := dictionary with discrete variable states</span>
+<span class="sd">        |                as keys and corresponding probabilities</span>
+<span class="sd">        |                as float values,</span>
+<span class="sd">        | seed := integer for fixing the sequence generation.</span>
+
+<span class="sd">    Example usage:</span>
+<span class="sd">        &gt;&gt;&gt; from randomNumbers import DiscreteRandomVariable</span>
+<span class="sd">        &gt;&gt;&gt; discreteLaw = {0:0.0478,</span>
+<span class="sd">        ...                1:0.3349,</span>
+<span class="sd">        ...                2:0.2392,</span>
+<span class="sd">        ...                3:0.1435,</span>
+<span class="sd">        ...                4:0.0957,</span>
+<span class="sd">        ...                5:0.0670,</span>
+<span class="sd">        ...                6:0.0478,</span>
+<span class="sd">        ...                7:0.0096,</span>
+<span class="sd">        ...                8:0.0096,</span>
+<span class="sd">        ...                9:0.0048,}</span>
+<span class="sd">        &gt;&gt;&gt; ## initialze the random generator</span>
+<span class="sd">        &gt;&gt;&gt; rdv = DiscreteRandomVariable(discreteLaw,seed=1)</span>
+<span class="sd">        &gt;&gt;&gt; ## sample discrete random variable and</span>
+<span class="sd">        &gt;&gt;&gt; ## count frequencies of obtained values</span>
+<span class="sd">        &gt;&gt;&gt; sampleSize = 1000</span>
+<span class="sd">        &gt;&gt;&gt; frequencies = {}</span>
+<span class="sd">        &gt;&gt;&gt; for i in range(sampleSize):</span>
+<span class="sd">        ...     x = rdv.random() </span>
+<span class="sd">        ...     try:</span>
+<span class="sd">        ...         frequencies[x] += 1</span>
+<span class="sd">        ...     except:</span>
+<span class="sd">        ...         frequencies[x] = 1</span>
+<span class="sd">        &gt;&gt;&gt; ## print results</span>
+<span class="sd">        &gt;&gt;&gt; results = [x for x in frequencies]</span>
+<span class="sd">        &gt;&gt;&gt; results.sort()</span>
+<span class="sd">        &gt;&gt;&gt; counts= 0.0</span>
+<span class="sd">        &gt;&gt;&gt; for x in results:</span>
+<span class="sd">        ...     counts += frequencies[x]</span>
+<span class="sd">        ...     print(&#39;%s, %d, %.3f, %.3f&#39;\</span>
+<span class="sd">                      % (x, frequencies[x],\</span>
+<span class="sd">                      float(frequencies[x])/float(sampleSize),\</span>
+<span class="sd">                      discreteLaw[x]))</span>
+<span class="sd">        0, 53, 0.053, 0.048</span>
+<span class="sd">        1, 308, 0.308, 0.335</span>
+<span class="sd">        2, 243, 0.243, 0.239</span>
+<span class="sd">        3, 143, 0.143, 0.143</span>
+<span class="sd">        4, 107, 0.107, 0.096</span>
+<span class="sd">        5, 74, 0.074, 0.067</span>
+<span class="sd">        6, 45, 0.045, 0.048</span>
+<span class="sd">        7, 12, 0.012, 0.010</span>
+<span class="sd">        8, 12, 0.012, 0.010</span>
+<span class="sd">        9, 3, 0.003, 0.005</span>
+<span class="sd">        &gt;&gt;&gt; print (&#39;# of valid samples = %d&#39; % counts)</span>
+<span class="sd">        # of valid samples = 1000</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">discreteLaw</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">seed</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">Debug</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Constructor for discrete random variables with</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="kn">import</span> <span class="nn">random</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_random</span> <span class="o">=</span> <span class="n">random</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">seed</span> <span class="o">=</span> <span class="n">seed</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">seed</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_random</span><span class="o">.</span><span class="n">seed</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">seed</span><span class="p">)</span>
+            <span class="k">if</span> <span class="n">Debug</span><span class="p">:</span>
+                <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;seed </span><span class="si">%d</span><span class="s1"> is used&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="n">seed</span><span class="p">))</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">Debug</span><span class="p">:</span>
+                <span class="nb">print</span> <span class="p">(</span><span class="s1">&#39;No seed is used&#39;</span><span class="p">)</span>
+            
+        <span class="k">if</span> <span class="n">discreteLaw</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">discreteLaw</span> <span class="o">=</span> <span class="n">discreteLaw</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">F</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_cumulative</span><span class="p">()</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;!!! Error: A discrete law is required here!&#39;</span><span class="p">)</span>
+        
+
+    <span class="k">def</span> <span class="nf">_cumulative</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Renders the cumulative probability distribution F(x)</span>
+<span class="sd">        of self.discreteLaw</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">quantile</span> <span class="o">=</span> <span class="p">[</span><span class="n">x</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">discreteLaw</span><span class="p">]</span>
+        <span class="n">quantile</span><span class="o">.</span><span class="n">sort</span><span class="p">()</span>
+        <span class="n">F</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="n">percentile</span> <span class="o">=</span> <span class="mf">0.0</span>
+        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">quantile</span><span class="p">)):</span>
+            <span class="n">percentile</span> <span class="o">+=</span> <span class="bp">self</span><span class="o">.</span><span class="n">discreteLaw</span><span class="p">[</span><span class="n">quantile</span><span class="p">[</span><span class="n">i</span><span class="p">]]</span>
+            <span class="n">F</span><span class="o">.</span><span class="n">append</span><span class="p">((</span><span class="n">quantile</span><span class="p">[</span><span class="n">i</span><span class="p">],</span><span class="n">percentile</span><span class="p">))</span>
+        <span class="k">return</span> <span class="n">F</span>
+    
+
+<div class="viewcode-block" id="DiscreteRandomVariable.random">
+<a class="viewcode-back" href="../techDoc.html#randomNumbers.DiscreteRandomVariable.random">[docs]</a>
+    <span class="k">def</span> <span class="nf">random</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Generates discrete random values from a discrete random variable.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">frequencies</span> <span class="o">=</span> <span class="p">{}</span>
+    
+        <span class="n">u</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_random</span><span class="o">.</span><span class="n">random</span><span class="p">()</span>
+
+        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">F</span><span class="p">)):</span>
+            <span class="k">if</span> <span class="n">u</span> <span class="o">&lt;</span> <span class="bp">self</span><span class="o">.</span><span class="n">F</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="mi">1</span><span class="p">]:</span>
+                <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">F</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span>
+
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">F</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span></div>
+</div>
+
+        
+<span class="c1">######################################</span>
+
+<div class="viewcode-block" id="ExtendedTriangularRandomVariable">
+<a class="viewcode-back" href="../techDoc.html#randomNumbers.ExtendedTriangularRandomVariable">[docs]</a>
+<span class="k">class</span> <span class="nc">ExtendedTriangularRandomVariable</span><span class="p">():</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Extended triangular random variable generator</span>
+
+<span class="sd">    Parameters:</span>
+<span class="sd">        - mode := most frequently observed value</span>
+<span class="sd">        - probRepart := probability mass distributed until the mode</span>
+<span class="sd">        - seed := number for fixing the sequence generation.</span>
+
+<span class="sd">    .. image:: extTrDistribution.png</span>
+<span class="sd">        :alt: Extended triangular distribution</span>
+<span class="sd">        :width: 500 px</span>
+<span class="sd">        :align: center</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+    
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">lowLimit</span><span class="o">=</span><span class="mf">0.0</span><span class="p">,</span> <span class="n">highLimit</span> <span class="o">=</span> <span class="mf">1.0</span><span class="p">,</span>
+                 <span class="n">mode</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">probRepart</span><span class="o">=</span><span class="mf">0.5</span><span class="p">,</span> <span class="n">seed</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">Debug</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Constructor for extended triangular random variables</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="kn">import</span> <span class="nn">random</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_random</span> <span class="o">=</span> <span class="n">random</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">seed</span> <span class="o">=</span> <span class="n">seed</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">seed</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_random</span><span class="o">.</span><span class="n">seed</span><span class="p">(</span><span class="n">seed</span><span class="p">)</span>
+            <span class="k">if</span> <span class="n">Debug</span><span class="p">:</span>
+                <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;seed </span><span class="si">%d</span><span class="s1"> is used&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="n">seed</span><span class="p">))</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">Debug</span><span class="p">:</span>
+                <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Default seed is used&#39;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">m</span> <span class="o">=</span> <span class="n">lowLimit</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">M</span> <span class="o">=</span> <span class="n">highLimit</span>
+            
+        <span class="k">if</span> <span class="n">mode</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">amplitude</span> <span class="o">=</span> <span class="n">highLimit</span><span class="o">-</span><span class="n">lowLimit</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">xm</span> <span class="o">=</span> <span class="n">highLimit</span> <span class="o">-</span> <span class="p">(</span><span class="n">amplitude</span><span class="o">/</span><span class="mf">2.0</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">mode</span> <span class="o">&gt;=</span> <span class="n">lowLimit</span> <span class="ow">and</span> <span class="n">mode</span> <span class="o">&lt;=</span> <span class="n">highLimit</span><span class="p">:</span> 
+                <span class="bp">self</span><span class="o">.</span><span class="n">xm</span> <span class="o">=</span> <span class="n">mode</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;!!! Error: mode out of value range !!&#39;</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">probRepart</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">r</span> <span class="o">=</span> <span class="mf">0.5</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">probRepart</span> <span class="o">&gt;=</span> <span class="mf">0.0</span> <span class="ow">and</span> <span class="n">probRepart</span> <span class="o">&lt;=</span> <span class="mf">1.0</span><span class="p">:</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">r</span> <span class="o">=</span> <span class="n">probRepart</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;!!! Error: probility repartition out of value range !!&#39;</span><span class="p">)</span>
+            
+        
+<div class="viewcode-block" id="ExtendedTriangularRandomVariable.random">
+<a class="viewcode-back" href="../techDoc.html#randomNumbers.ExtendedTriangularRandomVariable.random">[docs]</a>
+    <span class="k">def</span> <span class="nf">random</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Generates an extended triangular random number.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        
+        <span class="kn">from</span> <span class="nn">math</span> <span class="kn">import</span> <span class="n">sqrt</span>
+        <span class="n">u</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_random</span><span class="o">.</span><span class="n">random</span><span class="p">()</span>
+
+        <span class="k">if</span> <span class="n">u</span> <span class="o">&lt;</span> <span class="bp">self</span><span class="o">.</span><span class="n">r</span><span class="p">:</span>
+            <span class="n">randeval</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">m</span> <span class="o">+</span> <span class="n">sqrt</span><span class="p">(</span><span class="n">u</span><span class="o">/</span><span class="bp">self</span><span class="o">.</span><span class="n">r</span><span class="p">)</span><span class="o">*</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">xm</span><span class="o">-</span><span class="bp">self</span><span class="o">.</span><span class="n">m</span><span class="p">)</span>                   
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">randeval</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">M</span> <span class="o">-</span> <span class="n">sqrt</span><span class="p">((</span><span class="mi">1</span><span class="o">-</span><span class="n">u</span><span class="p">)</span><span class="o">/</span><span class="p">(</span><span class="mi">1</span><span class="o">-</span><span class="bp">self</span><span class="o">.</span><span class="n">r</span><span class="p">))</span><span class="o">*</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">M</span><span class="o">-</span><span class="bp">self</span><span class="o">.</span><span class="n">xm</span><span class="p">)</span>
+
+        <span class="k">return</span> <span class="n">randeval</span></div>
+</div>
+
+
+<span class="c1">#-------------------</span>
+                  
+<div class="viewcode-block" id="BinomialRandomVariable">
+<a class="viewcode-back" href="../techDoc.html#randomNumbers.BinomialRandomVariable">[docs]</a>
+<span class="k">class</span> <span class="nc">BinomialRandomVariable</span><span class="p">():</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Binomial random variable generator</span>
+
+<span class="sd">    Parameters:</span>
+<span class="sd">        - size := integer number &gt; 0 of trials</span>
+<span class="sd">        - prob := float success probability </span>
+<span class="sd">        - seed := number for fixing the sequence generation.</span>
+<span class="sd">    </span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="n">prob</span> <span class="o">=</span> <span class="mf">0.5</span><span class="p">,</span>
+                 <span class="n">seed</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">Debug</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        constructor for binomial random variables.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="kn">import</span> <span class="nn">random</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_random</span> <span class="o">=</span> <span class="n">random</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">seed</span> <span class="o">=</span> <span class="n">seed</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">seed</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_random</span><span class="o">.</span><span class="n">seed</span><span class="p">(</span><span class="n">seed</span><span class="p">)</span>
+            <span class="k">if</span> <span class="n">Debug</span><span class="p">:</span>
+                <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;seed </span><span class="si">%d</span><span class="s1"> is used&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="n">seed</span><span class="p">))</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">Debug</span><span class="p">:</span>
+                <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Default seed is used&#39;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">size</span> <span class="o">=</span> <span class="n">size</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">prob</span> <span class="o">=</span> <span class="n">prob</span>            
+        
+<div class="viewcode-block" id="BinomialRandomVariable.random">
+<a class="viewcode-back" href="../techDoc.html#randomNumbers.BinomialRandomVariable.random">[docs]</a>
+    <span class="k">def</span> <span class="nf">random</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Generates a binomial random number by</span>
+<span class="sd">        repeating *self.size* Bernouilli trials.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">successCount</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="n">size</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">size</span>
+        <span class="n">prob</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">prob</span>
+        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">size</span><span class="p">):</span>
+            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_random</span><span class="o">.</span><span class="n">random</span><span class="p">()</span> <span class="o">&lt;</span> <span class="n">prob</span><span class="p">:</span>
+                <span class="n">successCount</span> <span class="o">+=</span> <span class="mi">1</span>                  
+        <span class="k">return</span> <span class="n">successCount</span></div>
+</div>
+
+
+<span class="c1">#-------------------</span>
+                  
+<div class="viewcode-block" id="CauchyRandomVariable">
+<a class="viewcode-back" href="../techDoc.html#randomNumbers.CauchyRandomVariable">[docs]</a>
+<span class="k">class</span> <span class="nc">CauchyRandomVariable</span><span class="p">():</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Cauchy random variable generator.</span>
+
+<span class="sd">    Parameters:</span>
+<span class="sd">        - position := median (default=0.0) of the Cauchy distribution</span>
+<span class="sd">        - scale := typical spread (default=1.0) with respect to median </span>
+<span class="sd">        - seed := number (default=None) for fixing the sequence generation.</span>
+<span class="sd">    </span>
+<span class="sd">    Cauchy quantile (inverse cdf) function:</span>
+<span class="sd">        Q(x|position,scale) = position + scale*tan[pi(x-1/2)]</span>
+
+<span class="sd">    .. image:: cauchyDistribution.png</span>
+<span class="sd">        :alt: Cauchy Distribution</span>
+<span class="sd">        :width: 500 px</span>
+<span class="sd">        :align: center</span>
+
+
+<span class="sd">    &quot;&quot;&quot;</span>
+    
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">position</span><span class="o">=</span><span class="mf">0.0</span><span class="p">,</span> <span class="n">scale</span> <span class="o">=</span> <span class="mf">1.0</span><span class="p">,</span>
+                 <span class="n">seed</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">Debug</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Constructor for Cauchy random variables.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="kn">import</span> <span class="nn">random</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_random</span> <span class="o">=</span> <span class="n">random</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">seed</span> <span class="o">=</span> <span class="n">seed</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">seed</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_random</span><span class="o">.</span><span class="n">seed</span><span class="p">(</span><span class="n">seed</span><span class="p">)</span>
+            <span class="k">if</span> <span class="n">Debug</span><span class="p">:</span>
+                <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;seed </span><span class="si">%d</span><span class="s1"> is used&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="n">seed</span><span class="p">))</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">Debug</span><span class="p">:</span>
+                <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Default seed is used&#39;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">position</span> <span class="o">=</span> <span class="n">position</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">scale</span> <span class="o">=</span> <span class="n">scale</span>            
+        
+<div class="viewcode-block" id="CauchyRandomVariable.random">
+<a class="viewcode-back" href="../techDoc.html#randomNumbers.CauchyRandomVariable.random">[docs]</a>
+    <span class="k">def</span> <span class="nf">random</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Generates a Cauchy random number.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        
+        <span class="kn">from</span> <span class="nn">math</span> <span class="kn">import</span> <span class="n">pi</span><span class="p">,</span><span class="n">tan</span>
+
+        <span class="n">prob</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_random</span><span class="o">.</span><span class="n">random</span><span class="p">()</span>
+
+        <span class="n">randeval</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">position</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">scale</span><span class="o">*</span><span class="p">(</span> <span class="n">tan</span><span class="p">(</span> <span class="n">pi</span><span class="o">*</span><span class="p">(</span><span class="n">prob</span> <span class="o">-</span> <span class="mf">0.5</span><span class="p">)</span> <span class="p">)</span> <span class="p">)</span>                  
+
+        <span class="k">return</span> <span class="n">randeval</span></div>
+</div>
+
+
+<span class="c1">#---------</span>
+<div class="viewcode-block" id="QuasiRandomPointSet">
+<a class="viewcode-back" href="../techDoc.html#randomNumbers.QuasiRandomPointSet">[docs]</a>
+<span class="k">class</span> <span class="nc">QuasiRandomPointSet</span><span class="p">():</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Abstract class for generic quasi random point set methods and tools.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+<div class="viewcode-block" id="QuasiRandomPointSet.testFct">
+<a class="viewcode-back" href="../techDoc.html#randomNumbers.QuasiRandomPointSet.testFct">[docs]</a>
+    <span class="k">def</span> <span class="nf">testFct</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">seq</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span><span class="n">buggyRegionLimits</span><span class="o">=</span><span class="p">(</span><span class="mf">0.45</span><span class="p">,</span><span class="mf">0.55</span><span class="p">)):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Tiny buggy hypercube for testing a quasi random Korobov 3D sequence.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">s</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">s</span>
+        <span class="n">buggyHypercube</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">()</span>
+        <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">s</span><span class="p">):</span>
+            <span class="n">buggyHypercube</span><span class="p">[</span><span class="n">j</span><span class="p">]</span> <span class="o">=</span> <span class="n">buggyRegionLimits</span>
+        <span class="n">Bugs</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="k">if</span> <span class="n">seq</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">seq</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">pointSet</span>
+        <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">seq</span><span class="p">:</span>
+            <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">s</span><span class="p">):</span>
+                <span class="k">if</span> <span class="p">(</span><span class="n">x</span><span class="p">[</span><span class="n">j</span><span class="p">]</span> <span class="o">&gt;=</span> <span class="n">buggyHypercube</span><span class="p">[</span><span class="n">j</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span> <span class="ow">and</span> <span class="n">x</span><span class="p">[</span><span class="n">j</span><span class="p">]</span> <span class="o">&lt;=</span> <span class="n">buggyHypercube</span><span class="p">[</span><span class="n">j</span><span class="p">][</span><span class="mi">1</span><span class="p">]):</span>
+                    <span class="n">BuggyPoint</span> <span class="o">=</span> <span class="kc">True</span>
+                <span class="k">else</span><span class="p">:</span>
+                    <span class="n">BuggyPoint</span> <span class="o">=</span> <span class="kc">False</span>
+                    <span class="k">break</span>
+            <span class="k">if</span> <span class="n">BuggyPoint</span><span class="p">:</span>
+                <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Bug:&#39;</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">buggyHypercube</span><span class="p">)</span>
+                <span class="n">Bugs</span> <span class="o">+=</span> <span class="mi">1</span>
+        <span class="k">if</span> <span class="n">Bugs</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="k">return</span> <span class="s1">&#39;</span><span class="si">%d</span><span class="s1"> bug(s) detected !!!&#39;</span> <span class="o">%</span> <span class="n">Bugs</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">return</span> <span class="s1">&#39;No bugs detected&#39;</span></div>
+
+
+<div class="viewcode-block" id="QuasiRandomPointSet.countHits">
+<a class="viewcode-back" href="../techDoc.html#randomNumbers.QuasiRandomPointSet.countHits">[docs]</a>
+    <span class="k">def</span> <span class="nf">countHits</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">regionLimits</span><span class="p">,</span><span class="n">pointSet</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Counts *hits* of a quasi random point set in given regionLimits.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">s</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">s</span>
+        <span class="n">hits</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="k">if</span> <span class="n">pointSet</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">pointSet</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">pointSet</span>
+        <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">pointSet</span><span class="p">:</span>
+            <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">s</span><span class="p">):</span>
+                <span class="k">if</span> <span class="p">(</span><span class="n">x</span><span class="p">[</span><span class="n">j</span><span class="p">]</span> <span class="o">&gt;=</span> <span class="n">regionLimits</span><span class="p">[</span><span class="n">j</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span> <span class="ow">and</span> <span class="n">x</span><span class="p">[</span><span class="n">j</span><span class="p">]</span> <span class="o">&lt;=</span> <span class="n">regionLimits</span><span class="p">[</span><span class="n">j</span><span class="p">][</span><span class="mi">1</span><span class="p">]):</span>
+                    <span class="n">HitPoint</span> <span class="o">=</span> <span class="kc">True</span>
+                <span class="k">else</span><span class="p">:</span>
+                    <span class="n">HitPoint</span> <span class="o">=</span> <span class="kc">False</span>
+                    <span class="k">break</span>
+            <span class="k">if</span> <span class="n">HitPoint</span><span class="p">:</span>
+                <span class="c1">#print(&#39;Hit:&#39;, x, regionLimits)</span>
+                <span class="n">hits</span> <span class="o">+=</span> <span class="mi">1</span>
+        <span class="k">return</span> <span class="n">hits</span></div>
+
+    
+<div class="viewcode-block" id="QuasiRandomPointSet.testUniformityDiscrepancy">
+<a class="viewcode-back" href="../techDoc.html#randomNumbers.QuasiRandomPointSet.testUniformityDiscrepancy">[docs]</a>
+    <span class="k">def</span> <span class="nf">testUniformityDiscrepancy</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">k</span><span class="o">=</span><span class="mi">4</span><span class="p">,</span><span class="n">pointSet</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span><span class="n">fileName</span><span class="o">=</span><span class="s1">&#39;testUniformity&#39;</span><span class="p">,</span><span class="n">Debug</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Counts the number of point in each partial hypercube [(x-1)/k,x/k]^d</span>
+<span class="sd">        where x integer ands 0 &lt; x &lt;= k.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="kn">from</span> <span class="nn">itertools</span> <span class="kn">import</span> <span class="n">product</span>
+        <span class="n">s</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">s</span>
+        <span class="n">ctrlLists</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="n">kf</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">k</span><span class="p">)</span>
+        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">s</span><span class="p">):</span>
+            <span class="n">ctrlLists</span><span class="o">.</span><span class="n">append</span><span class="p">([((</span><span class="n">x</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span><span class="o">/</span><span class="n">kf</span><span class="p">,</span><span class="n">x</span><span class="o">/</span><span class="n">kf</span><span class="p">)</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="n">k</span><span class="o">+</span><span class="mi">1</span><span class="p">)])</span>
+            <span class="c1">#if Debug:</span>
+            <span class="c1">#    print(ctrlLists)</span>
+        <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">fileName</span><span class="o">+</span><span class="s1">&#39;.csv&#39;</span><span class="p">,</span><span class="s1">&#39;w&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">fo</span><span class="p">:</span>
+            <span class="n">fo</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s1">&#39;&quot;x</span><span class="se">\n</span><span class="s1">&quot;&#39;</span><span class="p">)</span>
+            <span class="k">for</span> <span class="n">region</span> <span class="ow">in</span> <span class="n">product</span><span class="p">(</span><span class="o">*</span><span class="n">ctrlLists</span><span class="p">):</span>
+                <span class="c1">#print(region)</span>
+                <span class="n">hits</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">countHits</span><span class="p">(</span><span class="n">region</span><span class="p">,</span><span class="n">pointSet</span><span class="p">)</span>
+                <span class="n">fo</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s1">&#39;</span><span class="si">%d</span><span class="se">\n</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="n">hits</span><span class="p">)</span>            
+        <span class="n">r</span> <span class="o">=</span> <span class="n">k</span><span class="o">**</span><span class="n">s</span>
+        <span class="k">if</span> <span class="n">pointSet</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">cardPtSet</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">pointSet</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">cardPtSet</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">pointSetCardinality</span>
+        <span class="n">thProb</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">cardPtSet</span><span class="p">)</span><span class="o">/</span><span class="n">r</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Theoretical distribution: </span><span class="si">%d</span><span class="s1"> / </span><span class="si">%d</span><span class="s1"> = </span><span class="si">%.3f</span><span class="s1">&#39;</span>\
+              <span class="o">%</span> <span class="p">(</span><span class="n">cardPtSet</span><span class="p">,</span><span class="n">r</span><span class="p">,</span><span class="n">thProb</span><span class="p">)</span> <span class="p">)</span></div>
+</div>
+
+        
+            
+    
+<span class="c1">#----------</span>
+<div class="viewcode-block" id="QuasiRandomKorobovPointSet">
+<a class="viewcode-back" href="../techDoc.html#randomNumbers.QuasiRandomKorobovPointSet">[docs]</a>
+<span class="k">class</span> <span class="nc">QuasiRandomKorobovPointSet</span><span class="p">(</span><span class="n">QuasiRandomPointSet</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Constructor for rendering a Korobov point set of dimension *n* which is *fully projection regular* in the $s$-dimensional real-valued [0,1)^s hypercube. The constructor uses a MLCG generator with potentially a full period. The point set is stored in a self.sequence attribute and saved in a CSV formatted file.</span>
+
+<span class="sd">    *Source*: Chr. Lemieux, Monte Carlo and quasi Monte Carlo Sampling Springer 2009 Fig. 5.12 p. 176.</span>
+
+<span class="sd">    *Parameters*:</span>
+
+<span class="sd">        * *n* : (default=997) number of Korobov points and modulus of the underlying MLCG</span>
+<span class="sd">        * *s* : (default=3) dimension of the hypercube</span>
+<span class="sd">        * *Randomized* : (default=False) the sequence is randomly shifted (mod 1) to avoid cycling when *s* &gt; *n*</span>
+<span class="sd">        * *a* : (default=383) MLCG coefficient (0 &lt; *a* &lt; *n*), primitive with *n*. The choice of *a* and *n* is crucial for getting an MLCG with full period and hence a fully projection-regular sequence. A second good pair is given with *n* = 1021 (prime) and *a* = 76.</span>
+<span class="sd">        * *fileName*: (default=&#39;korobov&#39;) name -without the csv suffix- of the stored result. </span>
+<span class="sd">        * *seed* := number (default=None) for fixing the sequence generation.</span>
+
+<span class="sd">    Sample Python session:</span>
+
+<span class="sd">        &gt;&gt;&gt; from randomNumbers import QuasiRandomKorobovPointSet</span>
+<span class="sd">        &gt;&gt;&gt; kor = QuasiRandomKorobovPointSet(Debug=True)</span>
+<span class="sd">        0 [0.0, 0.0, 0.0]</span>
+<span class="sd">        1 [0.13536725313948247, 0.23158619430934912, 0.8941657924971758]</span>
+<span class="sd">        2 [0.36595043842175035, 0.7415995294344084, 0.7035940773517395]</span>
+<span class="sd">        3 [0.8759637735468097, 0.5510278142889722, 0.714627176649633]</span>
+<span class="sd">        4 [0.6853920584013734, 0.5620609135868657, 0.9403042077429129]</span>
+<span class="sd">        5 [0.6964251576992669, 0.7877379446801456, 0.3746071164690914]</span>
+
+<span class="sd">    The resulting Korobov sequence may be inspected in an **R** session::</span>
+
+<span class="sd">        &gt; x = read.csv(&#39;korobov.csv&#39;)</span>
+<span class="sd">        &gt; x[1:5,]</span>
+<span class="sd">        &gt;    x1       x2       x3</span>
+<span class="sd">        1 0.000000 0.000000 0.000000</span>
+<span class="sd">        2 0.135367 0.231586 0.894166</span>
+<span class="sd">        3 0.365950 0.741600 0.703594</span>
+<span class="sd">        4 0.875964 0.551028 0.714627</span>
+<span class="sd">        5 0.685392 0.562061 0.940304</span>
+<span class="sd">        &gt; library(&#39;lattice&#39;)</span>
+<span class="sd">        &gt; cloud(x$x3 ~ x$x1 + x$x2)</span>
+<span class="sd">        &gt; plot(x$x1,x$x2,pch=&#39;°&#39;)</span>
+<span class="sd">        &gt; plot(x$x1,x$x3,pch=&quot;°&quot;)</span>
+
+<span class="sd">    .. image:: korobov3D.png</span>
+<span class="sd">        :alt: Checking projection regularity</span>
+<span class="sd">        :width: 500 px</span>
+<span class="sd">        :align: center</span>
+
+<span class="sd">    .. image:: korobovProjection12.png</span>
+<span class="sd">        :alt: Checking projection regularity</span>
+<span class="sd">        :width: 400 px</span>
+<span class="sd">        :align: center</span>
+
+<span class="sd">    .. image:: korobovProjection13.png</span>
+<span class="sd">        :alt: Checking projection regularity</span>
+<span class="sd">        :width: 400 px</span>
+<span class="sd">        :align: center</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+    
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">n</span><span class="o">=</span><span class="mi">997</span><span class="p">,</span> <span class="n">s</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span> <span class="n">a</span><span class="o">=</span><span class="mi">383</span><span class="p">,</span> <span class="n">Randomized</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">seed</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>\
+                 <span class="n">fileName</span><span class="o">=</span><span class="s1">&#39;korobov&#39;</span><span class="p">,</span><span class="n">Debug</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+        <span class="c1"># storing parameters</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">n</span> <span class="o">=</span> <span class="n">n</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">s</span> <span class="o">=</span> <span class="n">s</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">a</span> <span class="o">=</span> <span class="n">a</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">Randomized</span> <span class="o">=</span> <span class="n">Randomized</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">seed</span> <span class="o">=</span> <span class="n">seed</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">fileName</span> <span class="o">=</span> <span class="n">fileName</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">Debug</span> <span class="o">=</span> <span class="n">Debug</span>
+        <span class="c1"># float casting</span>
+        <span class="n">nf</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">n</span><span class="p">)</span>
+        <span class="c1"># randomization</span>
+        <span class="k">if</span> <span class="n">Randomized</span><span class="p">:</span>
+            <span class="kn">import</span> <span class="nn">random</span>
+            <span class="n">random</span><span class="o">.</span><span class="n">seed</span><span class="p">(</span><span class="n">seed</span><span class="p">)</span>
+            <span class="n">v</span> <span class="o">=</span> <span class="p">[</span><span class="n">random</span><span class="o">.</span><span class="n">random</span><span class="p">()</span> <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">s</span><span class="p">)]</span>
+        <span class="c1"># storing the simulated point set</span>
+        <span class="n">sequence</span> <span class="o">=</span> <span class="p">[]</span> 
+        <span class="n">fileName</span> <span class="o">+=</span> <span class="s1">&#39;.csv&#39;</span>
+        <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">fileName</span><span class="p">,</span><span class="s1">&#39;w&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">fo</span><span class="p">:</span>
+            <span class="c1"># csv header row</span>
+            <span class="n">wstr</span> <span class="o">=</span> <span class="s1">&#39;&#39;</span>
+            <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">s</span><span class="o">-</span><span class="mi">1</span><span class="p">):</span>
+                <span class="n">wstr</span> <span class="o">+=</span> <span class="s1">&#39;&quot;x</span><span class="si">%d</span><span class="s1">&quot;,&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="n">j</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span>
+            <span class="n">wstr</span> <span class="o">+=</span> <span class="s1">&#39;&quot;x</span><span class="si">%d</span><span class="s1">&quot;</span><span class="se">\n</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="n">s</span><span class="p">)</span>
+            <span class="n">fo</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">wstr</span><span class="p">)</span>
+            <span class="c1"># start point set at origin</span>
+            <span class="n">u</span> <span class="o">=</span> <span class="p">[</span><span class="mf">0.0</span> <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">s</span><span class="p">)]</span>
+            <span class="n">sequence</span><span class="o">.</span><span class="n">append</span><span class="p">((</span><span class="nb">tuple</span><span class="p">(</span><span class="n">u</span><span class="p">)))</span>
+            <span class="k">if</span> <span class="n">Debug</span><span class="p">:</span>
+                <span class="nb">print</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="n">u</span><span class="p">)</span>
+            <span class="n">wstr</span> <span class="o">=</span> <span class="s1">&#39;&#39;</span>
+            <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">s</span><span class="o">-</span><span class="mi">1</span><span class="p">):</span>
+                <span class="n">wstr</span> <span class="o">+=</span> <span class="s1">&#39;&quot;</span><span class="si">%f</span><span class="s1">&quot;,&#39;</span> <span class="o">%</span> <span class="n">u</span><span class="p">[</span><span class="n">j</span><span class="p">]</span>
+            <span class="n">wstr</span> <span class="o">+=</span> <span class="s1">&#39;&quot;</span><span class="si">%f</span><span class="s1">&quot;</span><span class="se">\n</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="n">u</span><span class="p">[</span><span class="n">j</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+            <span class="n">fo</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">wstr</span><span class="p">)</span>
+            <span class="c1"># first s-dimensional point with a full period MLCG</span>
+            <span class="n">x</span> <span class="o">=</span> <span class="mf">1.0</span>
+            <span class="n">u</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="n">x</span><span class="o">/</span><span class="n">nf</span>
+            <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="n">s</span><span class="p">):</span>
+                <span class="n">x</span> <span class="o">=</span> <span class="p">(</span><span class="nb">divmod</span><span class="p">(</span><span class="n">a</span><span class="o">*</span><span class="n">x</span><span class="p">,</span><span class="n">n</span><span class="p">))[</span><span class="mi">1</span><span class="p">]</span>
+                <span class="n">u</span><span class="p">[</span><span class="n">j</span><span class="p">]</span> <span class="o">=</span> <span class="n">x</span><span class="o">/</span><span class="n">nf</span>
+            <span class="k">if</span> <span class="n">Randomized</span><span class="p">:</span>
+                <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">s</span><span class="p">):</span>
+                    <span class="n">z</span> <span class="o">=</span> <span class="n">u</span><span class="p">[</span><span class="n">j</span><span class="p">]</span> <span class="o">+</span> <span class="n">v</span><span class="p">[</span><span class="n">j</span><span class="p">]</span>
+                    <span class="n">u</span><span class="p">[</span><span class="n">j</span><span class="p">]</span> <span class="o">=</span> <span class="n">z</span> <span class="o">-</span> <span class="nb">int</span><span class="p">(</span><span class="n">z</span><span class="p">)</span>
+            <span class="n">sequence</span><span class="o">.</span><span class="n">append</span><span class="p">((</span><span class="nb">tuple</span><span class="p">(</span><span class="n">u</span><span class="p">)))</span>
+            <span class="k">if</span> <span class="n">Debug</span><span class="p">:</span>
+                <span class="nb">print</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="n">u</span><span class="p">)</span>
+            <span class="n">wstr</span> <span class="o">=</span> <span class="s1">&#39;&#39;</span>
+            <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">s</span><span class="o">-</span><span class="mi">1</span><span class="p">):</span>
+                <span class="n">wstr</span> <span class="o">+=</span> <span class="s1">&#39;&quot;</span><span class="si">%f</span><span class="s1">&quot;,&#39;</span> <span class="o">%</span> <span class="n">u</span><span class="p">[</span><span class="n">j</span><span class="p">]</span>
+            <span class="n">wstr</span> <span class="o">+=</span> <span class="s1">&#39;&quot;</span><span class="si">%f</span><span class="s1">&quot;</span><span class="se">\n</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="n">u</span><span class="p">[</span><span class="n">s</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+            <span class="n">fo</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">wstr</span><span class="p">)</span>
+            <span class="c1"># all the following points</span>
+            <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span><span class="n">n</span><span class="p">):</span>
+                <span class="c1">#shuffle(u)</span>
+                <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">s</span><span class="o">-</span><span class="mi">1</span><span class="p">):</span>
+                    <span class="n">u</span><span class="p">[</span><span class="n">j</span><span class="p">]</span> <span class="o">=</span> <span class="n">u</span><span class="p">[</span><span class="n">j</span><span class="o">+</span><span class="mi">1</span><span class="p">]</span> <span class="c1"># &lt;&lt; 1</span>
+                <span class="n">x</span> <span class="o">=</span> <span class="p">(</span><span class="nb">divmod</span><span class="p">(</span><span class="n">a</span><span class="o">*</span><span class="n">x</span><span class="p">,</span><span class="n">n</span><span class="p">))[</span><span class="mi">1</span><span class="p">]</span>
+                <span class="n">u</span><span class="p">[</span><span class="n">s</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="n">x</span><span class="o">/</span><span class="n">nf</span>
+                <span class="k">if</span> <span class="n">Randomized</span><span class="p">:</span>
+                    <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">s</span><span class="p">):</span>
+                        <span class="n">z</span> <span class="o">=</span> <span class="n">u</span><span class="p">[</span><span class="n">j</span><span class="p">]</span> <span class="o">+</span> <span class="n">v</span><span class="p">[</span><span class="n">j</span><span class="p">]</span>
+                        <span class="n">u</span><span class="p">[</span><span class="n">j</span><span class="p">]</span> <span class="o">=</span> <span class="n">z</span> <span class="o">-</span> <span class="nb">int</span><span class="p">(</span><span class="n">z</span><span class="p">)</span>
+                <span class="n">sequence</span><span class="o">.</span><span class="n">append</span><span class="p">((</span><span class="nb">tuple</span><span class="p">(</span><span class="n">u</span><span class="p">)))</span>
+                <span class="k">if</span> <span class="n">Debug</span><span class="p">:</span>
+                    <span class="nb">print</span><span class="p">(</span><span class="n">i</span><span class="p">,</span><span class="n">u</span><span class="p">)</span>
+                <span class="n">wstr</span> <span class="o">=</span> <span class="s1">&#39;&#39;</span>
+                <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">s</span><span class="o">-</span><span class="mi">1</span><span class="p">):</span>
+                    <span class="n">wstr</span> <span class="o">+=</span> <span class="s1">&#39;&quot;</span><span class="si">%f</span><span class="s1">&quot;,&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="n">u</span><span class="p">[</span><span class="n">j</span><span class="p">])</span>
+                <span class="n">wstr</span> <span class="o">+=</span> <span class="s1">&#39;&quot;</span><span class="si">%f</span><span class="s1">&quot;</span><span class="se">\n</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="n">u</span><span class="p">[</span><span class="n">s</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span>
+                <span class="n">fo</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">wstr</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">pointSet</span> <span class="o">=</span> <span class="n">sequence</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">pointSetCardinality</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">sequence</span><span class="p">)</span></div>
+
+
+
+<span class="c1">#-------</span>
+<div class="viewcode-block" id="QuasiRandomFareyPointSet">
+<a class="viewcode-back" href="../techDoc.html#randomNumbers.QuasiRandomFareyPointSet">[docs]</a>
+<span class="k">class</span> <span class="nc">QuasiRandomFareyPointSet</span><span class="p">(</span><span class="n">QuasiRandomPointSet</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Constructor for rendering a Farey point set of dimension *s* and max denominateor *n* which is *fully projection regular* in the $s$-dimensional real-valued [0,1]^s hypercube. The lattice constructor uses a randomly shuffled Farey series for the point construction. The resulting point set is stored in a self.pointSet attribute and saved by default in a CSV formatted file.</span>
+
+<span class="sd">    *Parameters*:</span>
+
+<span class="sd">        * *n* : (default=20) maximal denominator of the Farey series</span>
+<span class="sd">        * *s* : (default=3) dimension of the hypercube</span>
+<span class="sd">        * *seed* : (default = None) number for regenerating a fixed Farey point set </span>
+<span class="sd">        * *Randomized* : (default=True) On each dimension, the points are randomly shifted (mod 1) to avoid constant projections for equal dimension index distances.</span>
+<span class="sd">        * *fileName*: (default=&#39;farey&#39;) name -without the csv suffix- of the stored result file. </span>
+
+<span class="sd">    Sample Python session:</span>
+
+<span class="sd">        &gt;&gt;&gt; from randomNumbers import QuasiRandomFareyPointSet</span>
+<span class="sd">        &gt;&gt;&gt; qrfs = QuasiRandomFareyPointSet(n=20,s=5,Randomized=True,</span>
+<span class="sd">        ...                                 fileName=&#39;testFarey&#39;)</span>
+<span class="sd">        &gt;&gt;&gt; print(qrfs.__dict__.keys())</span>
+<span class="sd">        dict_keys([&#39;n&#39;, &#39;s&#39;, &#39;Randomized&#39;, &#39;seed&#39;, &#39;fileName&#39;, &#39;Debug&#39;, </span>
+<span class="sd">                   &#39;fareySeries&#39;, &#39;seriesLength&#39;, &#39;shuffledFareySeries&#39;, </span>
+<span class="sd">                   &#39;pointSet&#39;, &#39;pointSetCardinality&#39;])</span>
+<span class="sd">        &gt;&gt;&gt; print(qrfs.fareySeries)</span>
+<span class="sd">        [0.0, 0.04, 0.04166, 0.0435, 0.04545, 0.0476, 0.05, 0.05263, </span>
+<span class="sd">         0.0555, 0.058823529411764705, ...] </span>
+<span class="sd">        &gt;&gt;&gt; print(qrfs.seriesLength)</span>
+<span class="sd">        201</span>
+<span class="sd">        &gt;&gt;&gt; print(qrfs.pointSet)</span>
+<span class="sd">        [(0.0, 0.0, 0.0, 0.0, 0.0), (0.5116, 0.4660, 0.6493, 0.41757, 0.3663),</span>
+<span class="sd">         (0.9776, 0.1153, 0.0669, 0.7839, 0.5926), (0.6269, 0.5329, 0.4332, 0.0102, 0.6126),</span>
+<span class="sd">         (0.0445, 0.8992, 0.6595, 0.0302, 0.6704), ...]</span>
+<span class="sd">        &gt;&gt;&gt; print(qrfs.pointSetCardinality)</span>
+<span class="sd">        207</span>
+<span class="sd">     </span>
+<span class="sd">    The resulting point set may be inspected in an R session::</span>
+
+<span class="sd">        &gt; x = read.csv(&#39;testFarey.csv&#39;)</span>
+<span class="sd">        &gt; x[1:5,]</span>
+<span class="sd">          x1       x2       x3       x4       x5</span>
+<span class="sd">        1   0.000000 0.000000 0.000000 0.000000 0.000000</span>
+<span class="sd">        2   0.511597 0.466016 0.649321 0.417573 0.366316</span>
+<span class="sd">        3   0.977613 0.115336 0.066893 0.783889 0.592632</span>
+<span class="sd">        4   0.626933 0.532909 0.433209 0.010205 0.612632</span>
+<span class="sd">        5   0.044506 0.899225 0.659525 0.030205 0.670410</span>
+<span class="sd">       &gt; library(&#39;lattice&#39;)</span>
+<span class="sd">        &gt; cloud(x$x5 ~ x$x1 + x$x3)</span>
+<span class="sd">        &gt; plot(x$x1,x$x3) </span>
+
+<span class="sd">    .. image:: farey3D.png</span>
+<span class="sd">        :alt: Checking hypercube filling</span>
+<span class="sd">        :width: 500 px</span>
+<span class="sd">        :align: center</span>
+
+<span class="sd">    .. image:: fareyx1x3.png</span>
+<span class="sd">        :alt: Checking projection regularity</span>
+<span class="sd">        :width: 400 px</span>
+<span class="sd">        :align: center</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+    
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">n</span><span class="o">=</span><span class="mi">20</span><span class="p">,</span><span class="n">s</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span><span class="n">seed</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span><span class="n">Randomized</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+                 <span class="n">fileName</span><span class="o">=</span><span class="s1">&#39;farey&#39;</span><span class="p">,</span><span class="n">Debug</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+        <span class="c1"># imports</span>
+        <span class="kn">import</span> <span class="nn">random</span>
+        <span class="kn">from</span> <span class="nn">arithmetics</span> <span class="kn">import</span> <span class="n">computeFareySeries</span>
+        <span class="c1"># fixing random seed</span>
+        <span class="n">random</span><span class="o">.</span><span class="n">seed</span><span class="p">(</span><span class="n">seed</span><span class="p">)</span>
+        <span class="c1"># storing parameters</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">n</span> <span class="o">=</span> <span class="n">n</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">s</span> <span class="o">=</span> <span class="n">s</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">Randomized</span> <span class="o">=</span> <span class="n">Randomized</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">seed</span> <span class="o">=</span> <span class="n">seed</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">fileName</span> <span class="o">=</span> <span class="n">fileName</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">Debug</span> <span class="o">=</span> <span class="n">Debug</span>
+        <span class="c1"># randomization</span>
+        <span class="k">if</span> <span class="n">Randomized</span><span class="p">:</span>
+            <span class="n">v</span> <span class="o">=</span> <span class="p">[</span><span class="n">random</span><span class="o">.</span><span class="n">random</span><span class="p">()</span> <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">s</span><span class="p">)]</span>
+        <span class="c1"># generate Farey series</span>
+        <span class="n">fs</span> <span class="o">=</span> <span class="n">computeFareySeries</span><span class="p">(</span><span class="n">n</span><span class="o">=</span><span class="n">n</span><span class="p">,</span><span class="n">AsFloats</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">fareySeries</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">fs</span><span class="p">)</span>
+        <span class="n">nf</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">fs</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">s</span> <span class="o">&gt;</span> <span class="n">nf</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Error: s = </span><span class="si">%d</span><span class="s1"> larger than Farey series length = </span><span class="si">%d</span><span class="s1"> !!&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="n">s</span><span class="p">,</span><span class="n">nf</span><span class="p">))</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Choose a higher denominator than the actual n = </span><span class="si">%d</span><span class="s1"> !!&#39;</span> <span class="o">%</span> <span class="n">n</span><span class="p">)</span>
+            <span class="k">return</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">seriesLength</span> <span class="o">=</span> <span class="n">nf</span>
+        <span class="n">random</span><span class="o">.</span><span class="n">shuffle</span><span class="p">(</span><span class="n">fs</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">fs</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">&lt;</span> <span class="bp">self</span><span class="o">.</span><span class="n">fareySeries</span><span class="p">[</span><span class="mi">1</span><span class="p">]:</span>   <span class="c1"># if first term is zero </span>
+            <span class="n">fs</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span><span class="n">fs</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="n">fs</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span><span class="n">fs</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>     <span class="c1"># swap first and second !!!</span>
+        <span class="k">if</span> <span class="n">fs</span><span class="p">[</span><span class="n">nf</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">&gt;</span> <span class="bp">self</span><span class="o">.</span><span class="n">fareySeries</span><span class="p">[</span><span class="n">nf</span><span class="o">-</span><span class="mi">2</span><span class="p">]:</span>   <span class="c1"># if last term is one  </span>
+            <span class="n">fs</span><span class="p">[</span><span class="n">nf</span><span class="o">-</span><span class="mi">1</span><span class="p">],</span><span class="n">fs</span><span class="p">[</span><span class="n">nf</span><span class="o">-</span><span class="mi">2</span><span class="p">]</span> <span class="o">=</span> <span class="n">fs</span><span class="p">[</span><span class="n">nf</span><span class="o">-</span><span class="mi">2</span><span class="p">],</span><span class="n">fs</span><span class="p">[</span><span class="n">nf</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>     <span class="c1"># swap last and second last!!!</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">shuffledFareySeries</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">fs</span><span class="p">)</span>
+        <span class="c1"># storing the simulated point set</span>
+        <span class="k">if</span> <span class="n">fileName</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">fileName</span> <span class="o">+=</span> <span class="s1">&#39;.csv&#39;</span>
+            <span class="n">fo</span> <span class="o">=</span>  <span class="nb">open</span><span class="p">(</span><span class="n">fileName</span><span class="p">,</span><span class="s1">&#39;w&#39;</span><span class="p">)</span> 
+            <span class="c1"># csv header row</span>
+            <span class="n">wstr</span> <span class="o">=</span> <span class="s1">&#39;&#39;</span>
+            <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">s</span><span class="o">-</span><span class="mi">1</span><span class="p">):</span>
+                <span class="n">wstr</span> <span class="o">+=</span> <span class="s1">&#39;&quot;x</span><span class="si">%d</span><span class="s1">&quot;,&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="n">j</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span>
+            <span class="n">wstr</span> <span class="o">+=</span> <span class="s1">&#39;&quot;x</span><span class="si">%d</span><span class="s1">&quot;</span><span class="se">\n</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="n">s</span><span class="p">)</span>
+            <span class="n">fo</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">wstr</span><span class="p">)</span>
+        <span class="c1"># start point set at origin</span>
+        <span class="n">u</span> <span class="o">=</span> <span class="p">[</span><span class="mf">0.0</span> <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">s</span><span class="p">)]</span>
+        <span class="n">pointSet</span> <span class="o">=</span> <span class="p">[</span><span class="nb">tuple</span><span class="p">(</span><span class="n">u</span><span class="p">)]</span> 
+        <span class="k">if</span> <span class="n">fileName</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">wstr</span> <span class="o">=</span> <span class="s1">&#39;&#39;</span>
+            <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">s</span><span class="o">-</span><span class="mi">1</span><span class="p">):</span>
+                <span class="n">wstr</span> <span class="o">+=</span> <span class="s1">&#39;&quot;</span><span class="si">%f</span><span class="s1">&quot;,&#39;</span> <span class="o">%</span> <span class="n">u</span><span class="p">[</span><span class="n">j</span><span class="p">]</span>
+            <span class="n">wstr</span> <span class="o">+=</span> <span class="s1">&#39;&quot;</span><span class="si">%f</span><span class="s1">&quot;</span><span class="se">\n</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="n">u</span><span class="p">[</span><span class="n">s</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+            <span class="n">fo</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">wstr</span><span class="p">)</span>
+        <span class="c1"># first s-dimensional point</span>
+        <span class="n">u</span><span class="p">[</span><span class="n">s</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="n">fs</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+        <span class="k">if</span> <span class="n">Randomized</span><span class="p">:</span>
+            <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">s</span><span class="p">):</span>
+                <span class="n">z</span> <span class="o">=</span> <span class="n">u</span><span class="p">[</span><span class="n">j</span><span class="p">]</span> <span class="o">+</span> <span class="n">v</span><span class="p">[</span><span class="n">j</span><span class="p">]</span>
+                <span class="n">u</span><span class="p">[</span><span class="n">j</span><span class="p">]</span> <span class="o">=</span> <span class="n">z</span> <span class="o">-</span> <span class="nb">int</span><span class="p">(</span><span class="n">z</span><span class="p">)</span>
+        <span class="n">pointSet</span><span class="o">.</span><span class="n">append</span><span class="p">((</span><span class="nb">tuple</span><span class="p">(</span><span class="n">u</span><span class="p">)))</span>
+        <span class="k">if</span> <span class="n">Debug</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="n">u</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">fileName</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">wstr</span> <span class="o">=</span> <span class="s1">&#39;&#39;</span>
+            <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">s</span><span class="o">-</span><span class="mi">1</span><span class="p">):</span>
+                <span class="n">wstr</span> <span class="o">+=</span> <span class="s1">&#39;&quot;</span><span class="si">%f</span><span class="s1">&quot;,&#39;</span> <span class="o">%</span> <span class="n">u</span><span class="p">[</span><span class="n">j</span><span class="p">]</span>
+            <span class="n">wstr</span> <span class="o">+=</span> <span class="s1">&#39;&quot;</span><span class="si">%f</span><span class="s1">&quot;</span><span class="se">\n</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="n">u</span><span class="p">[</span><span class="n">s</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+            <span class="n">fo</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">wstr</span><span class="p">)</span>
+        <span class="c1"># all the following points</span>
+        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="n">nf</span><span class="p">):</span>
+            <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">s</span><span class="o">-</span><span class="mi">1</span><span class="p">):</span>
+                <span class="n">u</span><span class="p">[</span><span class="n">j</span><span class="p">]</span> <span class="o">=</span> <span class="n">u</span><span class="p">[</span><span class="n">j</span><span class="o">+</span><span class="mi">1</span><span class="p">]</span> <span class="c1"># &lt;&lt; 1</span>
+            <span class="n">u</span><span class="p">[</span><span class="n">s</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="n">fs</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
+            <span class="k">if</span> <span class="n">Randomized</span><span class="p">:</span>
+                <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">s</span><span class="p">):</span>
+                    <span class="n">z</span> <span class="o">=</span> <span class="n">u</span><span class="p">[</span><span class="n">j</span><span class="p">]</span> <span class="o">+</span> <span class="n">v</span><span class="p">[</span><span class="n">j</span><span class="p">]</span>
+                    <span class="n">u</span><span class="p">[</span><span class="n">j</span><span class="p">]</span> <span class="o">=</span> <span class="n">z</span> <span class="o">-</span> <span class="nb">int</span><span class="p">(</span><span class="n">z</span><span class="p">)</span>
+            <span class="n">pointSet</span><span class="o">.</span><span class="n">append</span><span class="p">((</span><span class="nb">tuple</span><span class="p">(</span><span class="n">u</span><span class="p">)))</span>
+            <span class="k">if</span> <span class="n">Debug</span><span class="p">:</span>
+                <span class="nb">print</span><span class="p">(</span><span class="n">i</span><span class="p">,</span><span class="n">u</span><span class="p">)</span>
+            <span class="k">if</span> <span class="n">fileName</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+                <span class="n">wstr</span> <span class="o">=</span> <span class="s1">&#39;&#39;</span>
+                <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">s</span><span class="o">-</span><span class="mi">1</span><span class="p">):</span>
+                    <span class="n">wstr</span> <span class="o">+=</span> <span class="s1">&#39;&quot;</span><span class="si">%f</span><span class="s1">&quot;,&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="n">u</span><span class="p">[</span><span class="n">j</span><span class="p">])</span>
+                <span class="n">wstr</span> <span class="o">+=</span> <span class="s1">&#39;&quot;</span><span class="si">%f</span><span class="s1">&quot;</span><span class="se">\n</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="n">u</span><span class="p">[</span><span class="n">s</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span>
+                <span class="n">fo</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">wstr</span><span class="p">)</span>
+        <span class="c1"># close with adding s ones</span>
+        <span class="k">if</span> <span class="n">Randomized</span><span class="p">:</span>
+            <span class="n">u</span> <span class="o">=</span> <span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">fareySeries</span><span class="p">[</span><span class="n">nf</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">s</span><span class="p">)]</span>
+            <span class="n">pointSet</span><span class="o">.</span><span class="n">append</span><span class="p">((</span><span class="nb">tuple</span><span class="p">(</span><span class="n">u</span><span class="p">)))</span>
+            <span class="k">if</span> <span class="n">fileName</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+                <span class="n">wstr</span> <span class="o">=</span> <span class="s1">&#39;&#39;</span>
+                <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">s</span><span class="o">-</span><span class="mi">1</span><span class="p">):</span>
+                    <span class="n">wstr</span> <span class="o">+=</span> <span class="s1">&#39;&quot;</span><span class="si">%f</span><span class="s1">&quot;,&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="n">u</span><span class="p">[</span><span class="n">j</span><span class="p">])</span>
+                <span class="n">wstr</span> <span class="o">+=</span> <span class="s1">&#39;&quot;</span><span class="si">%f</span><span class="s1">&quot;</span><span class="se">\n</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="n">u</span><span class="p">[</span><span class="n">s</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span>
+                <span class="n">fo</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">wstr</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">for</span> <span class="n">jj</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">s</span><span class="p">):</span>
+                <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">s</span><span class="o">-</span><span class="mi">1</span><span class="p">):</span>
+                    <span class="n">u</span><span class="p">[</span><span class="n">j</span><span class="p">]</span> <span class="o">=</span> <span class="n">u</span><span class="p">[</span><span class="n">j</span><span class="o">+</span><span class="mi">1</span><span class="p">]</span> <span class="c1"># &lt;&lt; 1</span>
+                <span class="n">u</span><span class="p">[</span><span class="n">s</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">fareySeries</span><span class="p">[</span><span class="n">nf</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+                <span class="n">pointSet</span><span class="o">.</span><span class="n">append</span><span class="p">((</span><span class="nb">tuple</span><span class="p">(</span><span class="n">u</span><span class="p">)))</span>
+                <span class="k">if</span> <span class="n">fileName</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+                    <span class="n">wstr</span> <span class="o">=</span> <span class="s1">&#39;&#39;</span>
+                    <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">s</span><span class="o">-</span><span class="mi">1</span><span class="p">):</span>
+                        <span class="n">wstr</span> <span class="o">+=</span> <span class="s1">&#39;&quot;</span><span class="si">%f</span><span class="s1">&quot;,&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="n">u</span><span class="p">[</span><span class="n">j</span><span class="p">])</span>
+                    <span class="n">wstr</span> <span class="o">+=</span> <span class="s1">&#39;&quot;</span><span class="si">%f</span><span class="s1">&quot;</span><span class="se">\n</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="n">u</span><span class="p">[</span><span class="n">s</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span>
+                    <span class="n">fo</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">wstr</span><span class="p">)</span>
+        <span class="c1"># close file and store point set</span>
+        <span class="n">fo</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">pointSet</span> <span class="o">=</span> <span class="n">pointSet</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">pointSetCardinality</span> <span class="o">=</span> <span class="mi">1</span> <span class="o">+</span> <span class="n">nf</span> <span class="o">+</span> <span class="n">s</span> </div>
+
+
+<span class="c1">#-------</span>
+<div class="viewcode-block" id="QuasiRandomUniformPointSet">
+<a class="viewcode-back" href="../techDoc.html#randomNumbers.QuasiRandomUniformPointSet">[docs]</a>
+<span class="k">class</span> <span class="nc">QuasiRandomUniformPointSet</span><span class="p">(</span><span class="n">QuasiRandomPointSet</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Constructor for rendering a quai random point set of dimension *s* and</span>
+<span class="sd">    max denominateor *n* which is *fully projection regular* in the *s*-dimensional</span>
+<span class="sd">    real-valued [0,1]^s hypercube. The lattice constructor uses a randomly shuffled</span>
+<span class="sd">    *uniform* series for the point construction. The resulting point set is stored</span>
+<span class="sd">    in a *self.pointSet* attribute and saved by default in a CSV formatted file.</span>
+
+<span class="sd">    *Parameters*:</span>
+
+<span class="sd">        * *n* : (default=100) denominator of the uniform series x/n with 0 &lt;= x &lt;= n,</span>
+<span class="sd">        * *s* : (default=3) dimension of the hypercube,</span>
+<span class="sd">        * *seed* : number (default = None) for regenerating the same Farey point set ,</span>
+<span class="sd">        * *Randomized* : (default=True) On each dimension, the points are randomly</span>
+<span class="sd">           shifted (mod 1) to avoid constant projections for equal dimension index distances,</span>
+<span class="sd">        * *fileName*: (default=&#39;uniform&#39;) name -without the csv suffix- of the stored result file. </span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+    
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">n</span><span class="o">=</span><span class="mi">100</span><span class="p">,</span><span class="n">s</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span><span class="n">seed</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span><span class="n">Randomized</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span><span class="n">fileName</span><span class="o">=</span><span class="s1">&#39;uniform&#39;</span><span class="p">,</span><span class="n">Debug</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+        <span class="c1"># imports</span>
+        <span class="kn">import</span> <span class="nn">random</span>
+        <span class="c1"># fixing random seed</span>
+        <span class="n">random</span><span class="o">.</span><span class="n">seed</span><span class="p">(</span><span class="n">seed</span><span class="p">)</span>
+        <span class="c1"># storing parameters</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">n</span> <span class="o">=</span> <span class="n">n</span>
+        <span class="n">nf</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">n</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">s</span> <span class="o">=</span> <span class="n">s</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">Randomized</span> <span class="o">=</span> <span class="n">Randomized</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">seed</span> <span class="o">=</span> <span class="n">seed</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">fileName</span> <span class="o">=</span> <span class="n">fileName</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">Debug</span> <span class="o">=</span> <span class="n">Debug</span>
+        <span class="c1"># randomization</span>
+        <span class="k">if</span> <span class="n">Randomized</span><span class="p">:</span>
+            <span class="n">v</span> <span class="o">=</span> <span class="p">[</span><span class="n">random</span><span class="o">.</span><span class="n">random</span><span class="p">()</span> <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">s</span><span class="p">)]</span>
+        <span class="c1"># generate uniform series</span>
+        <span class="n">us</span> <span class="o">=</span> <span class="p">[</span><span class="n">x</span><span class="o">/</span><span class="n">nf</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n</span><span class="o">+</span><span class="mi">1</span><span class="p">)]</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">uniformSeries</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">us</span><span class="p">)</span>
+        <span class="n">nu</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">us</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">s</span> <span class="o">&gt;</span> <span class="n">nu</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Error: s = </span><span class="si">%d</span><span class="s1"> larger than uniform series length = </span><span class="si">%d</span><span class="s1"> !!&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="n">s</span><span class="p">,</span><span class="n">nf</span><span class="p">))</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Choose a higher denominator than the actual n = </span><span class="si">%d</span><span class="s1"> !!&#39;</span> <span class="o">%</span> <span class="n">n</span><span class="p">)</span>
+            <span class="k">return</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">seriesLength</span> <span class="o">=</span> <span class="n">nu</span>
+        <span class="n">random</span><span class="o">.</span><span class="n">shuffle</span><span class="p">(</span><span class="n">us</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">us</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">&lt;</span> <span class="bp">self</span><span class="o">.</span><span class="n">uniformSeries</span><span class="p">[</span><span class="mi">1</span><span class="p">]:</span>   <span class="c1"># if first term is zero </span>
+            <span class="n">us</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span><span class="n">us</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="n">us</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span><span class="n">us</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>     <span class="c1"># swap first and second !!!</span>
+        <span class="k">if</span> <span class="n">us</span><span class="p">[</span><span class="n">nu</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">&gt;</span> <span class="bp">self</span><span class="o">.</span><span class="n">uniformSeries</span><span class="p">[</span><span class="n">nu</span><span class="o">-</span><span class="mi">2</span><span class="p">]:</span>   <span class="c1"># if last term is one  </span>
+            <span class="n">us</span><span class="p">[</span><span class="n">nu</span><span class="o">-</span><span class="mi">1</span><span class="p">],</span><span class="n">us</span><span class="p">[</span><span class="n">nu</span><span class="o">-</span><span class="mi">2</span><span class="p">]</span> <span class="o">=</span> <span class="n">us</span><span class="p">[</span><span class="n">nu</span><span class="o">-</span><span class="mi">2</span><span class="p">],</span><span class="n">us</span><span class="p">[</span><span class="n">nu</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>     <span class="c1"># swap last and second last!!!</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">shuffledUniformSeries</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">us</span><span class="p">)</span>
+        <span class="c1"># storing the simulated point set</span>
+        <span class="k">if</span> <span class="n">fileName</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">fileName</span> <span class="o">+=</span> <span class="s1">&#39;.csv&#39;</span>
+            <span class="n">fo</span> <span class="o">=</span>  <span class="nb">open</span><span class="p">(</span><span class="n">fileName</span><span class="p">,</span><span class="s1">&#39;w&#39;</span><span class="p">)</span> 
+            <span class="c1"># csv header row</span>
+            <span class="n">wstr</span> <span class="o">=</span> <span class="s1">&#39;&#39;</span>
+            <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">s</span><span class="o">-</span><span class="mi">1</span><span class="p">):</span>
+                <span class="n">wstr</span> <span class="o">+=</span> <span class="s1">&#39;&quot;x</span><span class="si">%d</span><span class="s1">&quot;,&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="n">j</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span>
+            <span class="n">wstr</span> <span class="o">+=</span> <span class="s1">&#39;&quot;x</span><span class="si">%d</span><span class="s1">&quot;</span><span class="se">\n</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="n">s</span><span class="p">)</span>
+            <span class="n">fo</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">wstr</span><span class="p">)</span>
+        <span class="c1"># start point set at origin</span>
+        <span class="n">u</span> <span class="o">=</span> <span class="p">[</span><span class="mf">0.0</span> <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">s</span><span class="p">)]</span>
+        <span class="n">pointSet</span> <span class="o">=</span> <span class="p">[</span><span class="nb">tuple</span><span class="p">(</span><span class="n">u</span><span class="p">)]</span> 
+        <span class="k">if</span> <span class="n">fileName</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">wstr</span> <span class="o">=</span> <span class="s1">&#39;&#39;</span>
+            <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">s</span><span class="o">-</span><span class="mi">1</span><span class="p">):</span>
+                <span class="n">wstr</span> <span class="o">+=</span> <span class="s1">&#39;&quot;</span><span class="si">%f</span><span class="s1">&quot;,&#39;</span> <span class="o">%</span> <span class="n">u</span><span class="p">[</span><span class="n">j</span><span class="p">]</span>
+            <span class="n">wstr</span> <span class="o">+=</span> <span class="s1">&#39;&quot;</span><span class="si">%f</span><span class="s1">&quot;</span><span class="se">\n</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="n">u</span><span class="p">[</span><span class="n">s</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+            <span class="n">fo</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">wstr</span><span class="p">)</span>
+        <span class="c1"># first s-dimensional point</span>
+        <span class="n">u</span><span class="p">[</span><span class="n">s</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="n">us</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+        <span class="k">if</span> <span class="n">Randomized</span><span class="p">:</span>
+            <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">s</span><span class="p">):</span>
+                <span class="n">z</span> <span class="o">=</span> <span class="n">u</span><span class="p">[</span><span class="n">j</span><span class="p">]</span> <span class="o">+</span> <span class="n">v</span><span class="p">[</span><span class="n">j</span><span class="p">]</span>
+                <span class="n">u</span><span class="p">[</span><span class="n">j</span><span class="p">]</span> <span class="o">=</span> <span class="n">z</span> <span class="o">-</span> <span class="nb">int</span><span class="p">(</span><span class="n">z</span><span class="p">)</span>
+        <span class="n">pointSet</span><span class="o">.</span><span class="n">append</span><span class="p">((</span><span class="nb">tuple</span><span class="p">(</span><span class="n">u</span><span class="p">)))</span>
+        <span class="k">if</span> <span class="n">Debug</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="n">u</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">fileName</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">wstr</span> <span class="o">=</span> <span class="s1">&#39;&#39;</span>
+            <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">s</span><span class="o">-</span><span class="mi">1</span><span class="p">):</span>
+                <span class="n">wstr</span> <span class="o">+=</span> <span class="s1">&#39;&quot;</span><span class="si">%f</span><span class="s1">&quot;,&#39;</span> <span class="o">%</span> <span class="n">u</span><span class="p">[</span><span class="n">j</span><span class="p">]</span>
+            <span class="n">wstr</span> <span class="o">+=</span> <span class="s1">&#39;&quot;</span><span class="si">%f</span><span class="s1">&quot;</span><span class="se">\n</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="n">u</span><span class="p">[</span><span class="n">s</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+            <span class="n">fo</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">wstr</span><span class="p">)</span>
+        <span class="c1"># all the following points</span>
+        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="n">nu</span><span class="p">):</span>
+            <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">s</span><span class="o">-</span><span class="mi">1</span><span class="p">):</span>
+                <span class="n">u</span><span class="p">[</span><span class="n">j</span><span class="p">]</span> <span class="o">=</span> <span class="n">u</span><span class="p">[</span><span class="n">j</span><span class="o">+</span><span class="mi">1</span><span class="p">]</span> <span class="c1"># &lt;&lt; 1</span>
+            <span class="n">u</span><span class="p">[</span><span class="n">s</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="n">us</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
+            <span class="k">if</span> <span class="n">Randomized</span><span class="p">:</span>
+                <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">s</span><span class="p">):</span>
+                    <span class="n">z</span> <span class="o">=</span> <span class="n">u</span><span class="p">[</span><span class="n">j</span><span class="p">]</span> <span class="o">+</span> <span class="n">v</span><span class="p">[</span><span class="n">j</span><span class="p">]</span>
+                    <span class="n">u</span><span class="p">[</span><span class="n">j</span><span class="p">]</span> <span class="o">=</span> <span class="n">z</span> <span class="o">-</span> <span class="nb">int</span><span class="p">(</span><span class="n">z</span><span class="p">)</span>
+            <span class="n">pointSet</span><span class="o">.</span><span class="n">append</span><span class="p">((</span><span class="nb">tuple</span><span class="p">(</span><span class="n">u</span><span class="p">)))</span>
+            <span class="k">if</span> <span class="n">Debug</span><span class="p">:</span>
+                <span class="nb">print</span><span class="p">(</span><span class="n">i</span><span class="p">,</span><span class="n">u</span><span class="p">)</span>
+            <span class="k">if</span> <span class="n">fileName</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+                <span class="n">wstr</span> <span class="o">=</span> <span class="s1">&#39;&#39;</span>
+                <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">s</span><span class="o">-</span><span class="mi">1</span><span class="p">):</span>
+                    <span class="n">wstr</span> <span class="o">+=</span> <span class="s1">&#39;&quot;</span><span class="si">%f</span><span class="s1">&quot;,&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="n">u</span><span class="p">[</span><span class="n">j</span><span class="p">])</span>
+                <span class="n">wstr</span> <span class="o">+=</span> <span class="s1">&#39;&quot;</span><span class="si">%f</span><span class="s1">&quot;</span><span class="se">\n</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="n">u</span><span class="p">[</span><span class="n">s</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span>
+                <span class="n">fo</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">wstr</span><span class="p">)</span>
+        <span class="c1"># close with adding s ones</span>
+        <span class="k">if</span> <span class="n">Randomized</span><span class="p">:</span>
+            <span class="n">u</span> <span class="o">=</span> <span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">uniformSeries</span><span class="p">[</span><span class="n">nu</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">s</span><span class="p">)]</span>
+            <span class="n">pointSet</span><span class="o">.</span><span class="n">append</span><span class="p">((</span><span class="nb">tuple</span><span class="p">(</span><span class="n">u</span><span class="p">)))</span>
+            <span class="k">if</span> <span class="n">fileName</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+                <span class="n">wstr</span> <span class="o">=</span> <span class="s1">&#39;&#39;</span>
+                <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">s</span><span class="o">-</span><span class="mi">1</span><span class="p">):</span>
+                    <span class="n">wstr</span> <span class="o">+=</span> <span class="s1">&#39;&quot;</span><span class="si">%f</span><span class="s1">&quot;,&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="n">u</span><span class="p">[</span><span class="n">j</span><span class="p">])</span>
+                <span class="n">wstr</span> <span class="o">+=</span> <span class="s1">&#39;&quot;</span><span class="si">%f</span><span class="s1">&quot;</span><span class="se">\n</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="n">u</span><span class="p">[</span><span class="n">s</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span>
+                <span class="n">fo</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">wstr</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">for</span> <span class="n">jj</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">s</span><span class="p">):</span>
+                <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">s</span><span class="o">-</span><span class="mi">1</span><span class="p">):</span>
+                    <span class="n">u</span><span class="p">[</span><span class="n">j</span><span class="p">]</span> <span class="o">=</span> <span class="n">u</span><span class="p">[</span><span class="n">j</span><span class="o">+</span><span class="mi">1</span><span class="p">]</span> <span class="c1"># &lt;&lt; 1</span>
+                <span class="n">u</span><span class="p">[</span><span class="n">s</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">uniformSeries</span><span class="p">[</span><span class="n">nu</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+                <span class="n">pointSet</span><span class="o">.</span><span class="n">append</span><span class="p">((</span><span class="nb">tuple</span><span class="p">(</span><span class="n">u</span><span class="p">)))</span>
+                <span class="k">if</span> <span class="n">fileName</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+                    <span class="n">wstr</span> <span class="o">=</span> <span class="s1">&#39;&#39;</span>
+                    <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">s</span><span class="o">-</span><span class="mi">1</span><span class="p">):</span>
+                        <span class="n">wstr</span> <span class="o">+=</span> <span class="s1">&#39;&quot;</span><span class="si">%f</span><span class="s1">&quot;,&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="n">u</span><span class="p">[</span><span class="n">j</span><span class="p">])</span>
+                    <span class="n">wstr</span> <span class="o">+=</span> <span class="s1">&#39;&quot;</span><span class="si">%f</span><span class="s1">&quot;</span><span class="se">\n</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="n">u</span><span class="p">[</span><span class="n">s</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span>
+                    <span class="n">fo</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">wstr</span><span class="p">)</span>
+        <span class="c1"># close file and store point set</span>
+        <span class="n">fo</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">pointSet</span> <span class="o">=</span> <span class="n">pointSet</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">pointSetCardinality</span> <span class="o">=</span> <span class="mi">1</span> <span class="o">+</span> <span class="n">nu</span> <span class="o">+</span> <span class="n">s</span> </div>
+
+
+<span class="c1"># --------------------------</span>
+<div class="viewcode-block" id="MontyHallGameSimulator">
+<a class="viewcode-back" href="../techDoc.html#randomNumbers.MontyHallGameSimulator">[docs]</a>
+<span class="k">class</span> <span class="nc">MontyHallGameSimulator</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Generalized Monty Hall game simulator:</span>
+<span class="sd">    https://en.wikipedia.org/wiki/Monty_Hall_problem</span>
+
+<span class="sd">    Suppose you&#39;re on a game show, and you&#39;re given the choice of *n* doors:</span>
+<span class="sd">    Behind one door is a car; behind the others, goats.</span>
+<span class="sd">    You pick a door, say No. 1, and the host, who knows what&#39;s behind the doors,</span>
+<span class="sd">    to give you some clues, opens *k* other doors which have a goat.</span>
+<span class="sd">    He then says to you, &quot;Do you want to pick another closed door?&quot;</span>
+<span class="sd">    Is it to your advantage to switch your choice?</span>
+
+<span class="sd">    ! The number *n* of doors must be at least equal to 3.</span>
+<span class="sd">   </span>
+<span class="sd">    ! The number *k* of clues cannot exceed the number of doors minus two,</span>
+<span class="sd">    namely the initially chosen and the last closed door where the car could be behind.</span>
+
+
+<span class="sd">    With *n* doors and *k* clues, the success probabilities become:</span>
+<span class="sd">    *1/n* when not switched, and *(n-1)/n(n-1-k)* when switched.</span>
+<span class="sd">    When the number of clues *k* = 0, both success probabilities remain the same,</span>
+<span class="sd">    namely *1/n* = *(n-1)/n(n-1)*. Evidently there is no reason to switch the</span>
+<span class="sd">    initial choice in this case. However, when 0 &lt; *k* &lt; *(n-1)*,</span>
+<span class="sd">    then the complement probability of *1/n*, i.e. *(n-1)/n* gets</span>
+<span class="sd">    divided by the number *(n-1-k) &gt; 0* of still closed doors.</span>
+<span class="sd">    With positive clues, it is hence the more interesting to switch</span>
+<span class="sd">    the initial choice the more clues one is given.</span>
+<span class="sd">    With a maximum of *k = n-2* clues, the success probability,</span>
+<span class="sd">    when switching, becomes: *(n-1)/n*.  </span>
+
+<span class="sd">        &gt;&gt;&gt; from randomNumbers import MontyHallGameSimulator</span>
+<span class="sd">        &gt;&gt;&gt; m = MontyHallGameSimulator(numberOfDoors=6,</span>
+<span class="sd">        ...                            numberOfClues=4)</span>
+<span class="sd">        &gt;&gt;&gt; m.simulate(numberOfTrials=1000,seed=1)</span>
+<span class="sd">         *******************************</span>
+<span class="sd">         Monty Hall game successes count</span>
+<span class="sd">         Number of doors: 6</span>
+<span class="sd">         Number of clues: 4</span>
+<span class="sd">         Sampling size  : 1000</span>
+<span class="sd">         Random seed    : 1</span>
+<span class="sd">         ----------------------------------</span>
+<span class="sd">         Switched    : 838 (0.8380); Theoretical probability: 0.8333</span>
+<span class="sd">         Not switched: 162 (0.1620); Theoretical probability: 0.1667</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">numberOfDoors</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span><span class="n">numberOfClues</span><span class="o">=</span><span class="mi">1</span><span class="p">):</span>
+        <span class="k">if</span> <span class="n">numberOfDoors</span> <span class="o">&lt;</span> <span class="mi">3</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Error: the number *n* of doors must be at least three !!!&#39;</span><span class="p">)</span>
+            <span class="k">return</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">numberOfDoors</span> <span class="o">=</span> <span class="n">numberOfDoors</span>
+        <span class="k">if</span> <span class="n">numberOfClues</span> <span class="o">&gt;</span> <span class="n">numberOfDoors</span><span class="o">-</span><span class="mi">2</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Error: the number *k* of clues  cannot exceed *(n-2)* !!!&#39;</span><span class="p">)</span>
+            <span class="k">return</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">numberOfClues</span> <span class="o">=</span> <span class="n">numberOfClues</span>
+
+    <span class="k">def</span> <span class="nf">simulate</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">numberOfTrials</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span><span class="n">seed</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span><span class="n">Comments</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
+        <span class="kn">import</span> <span class="nn">random</span>
+        <span class="kn">from</span> <span class="nn">copy</span> <span class="kn">import</span> <span class="n">copy</span>
+        <span class="n">random</span><span class="o">.</span><span class="n">seed</span><span class="p">(</span><span class="n">seed</span><span class="p">)</span>
+        <span class="n">numberOfDoors</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">numberOfDoors</span>
+        <span class="n">numberOfClues</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">numberOfClues</span>
+        <span class="n">successes</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;notSwitched&#39;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span> <span class="s1">&#39;switched&#39;</span><span class="p">:</span> <span class="mi">0</span><span class="p">}</span>
+        <span class="n">nd</span> <span class="o">=</span> <span class="n">numberOfDoors</span><span class="o">-</span><span class="mi">1</span>
+        <span class="n">doors</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;goat&#39;</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">nd</span><span class="p">)]</span>
+        <span class="n">doors</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s1">&#39;car&#39;</span><span class="p">)</span>
+        <span class="n">sampling</span> <span class="o">=</span> <span class="n">numberOfTrials</span>
+        <span class="k">for</span> <span class="n">s</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">sampling</span><span class="p">):</span>
+            <span class="n">random</span><span class="o">.</span><span class="n">shuffle</span><span class="p">(</span><span class="n">doors</span><span class="p">)</span>
+            <span class="n">choice1a</span> <span class="o">=</span> <span class="n">random</span><span class="o">.</span><span class="n">randint</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="n">nd</span><span class="p">)</span>
+            <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span>
+            <span class="n">h</span> <span class="o">=</span> <span class="mi">0</span>
+            <span class="n">clues</span><span class="o">=</span><span class="p">[]</span>
+            <span class="k">while</span> <span class="n">h</span> <span class="o">&lt;</span> <span class="n">numberOfClues</span><span class="p">:</span>
+                <span class="k">if</span> <span class="n">i</span> <span class="o">!=</span> <span class="n">choice1a</span> <span class="ow">and</span> <span class="n">doors</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">!=</span> <span class="s1">&#39;car&#39;</span> <span class="p">:</span>
+                    <span class="n">clues</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">i</span><span class="p">)</span>
+                    <span class="n">h</span> <span class="o">+=</span> <span class="mi">1</span>
+                    <span class="n">i</span> <span class="o">+=</span> <span class="mi">1</span>
+                <span class="k">else</span><span class="p">:</span>
+                    <span class="n">i</span> <span class="o">+=</span> <span class="mi">1</span>
+            <span class="n">choice1b</span> <span class="o">=</span> <span class="n">random</span><span class="o">.</span><span class="n">randint</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="n">nd</span><span class="p">)</span>
+            <span class="k">while</span> <span class="n">choice1b</span> <span class="o">==</span> <span class="n">choice1a</span> <span class="ow">or</span> <span class="n">choice1b</span> <span class="ow">in</span> <span class="n">clues</span><span class="p">:</span> 
+                <span class="n">choice1b</span> <span class="o">=</span> <span class="n">random</span><span class="o">.</span><span class="n">randint</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="n">nd</span><span class="p">)</span>
+            <span class="k">if</span> <span class="n">doors</span><span class="p">[</span><span class="n">choice1a</span><span class="p">]</span> <span class="o">==</span> <span class="s1">&#39;car&#39;</span><span class="p">:</span>
+                <span class="n">successes</span><span class="p">[</span><span class="s1">&#39;notSwitched&#39;</span><span class="p">]</span> <span class="o">+=</span> <span class="mi">1</span>
+            <span class="k">elif</span> <span class="n">doors</span><span class="p">[</span><span class="n">choice1b</span><span class="p">]</span> <span class="o">==</span> <span class="s1">&#39;car&#39;</span><span class="p">:</span>
+                <span class="n">successes</span><span class="p">[</span><span class="s1">&#39;switched&#39;</span><span class="p">]</span> <span class="o">+=</span> <span class="mi">1</span>
+        <span class="k">if</span> <span class="n">Comments</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;*******************************&#39;</span><span class="p">)</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Monty Hall game successes count&#39;</span><span class="p">)</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Number of doors: </span><span class="si">%d</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="n">numberOfDoors</span><span class="p">)</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Number of clues: </span><span class="si">%d</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="n">numberOfClues</span><span class="p">)</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Sampling size  : </span><span class="si">%d</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="n">sampling</span><span class="p">)</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Random seed    : </span><span class="si">%d</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="n">seed</span><span class="p">)</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;----------------------------------&#39;</span><span class="p">)</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Switched    : </span><span class="si">%d</span><span class="s1"> (</span><span class="si">%.4f</span><span class="s1">); Theoretical probability: </span><span class="si">%.4f</span><span class="s1">&#39;</span> <span class="o">%</span>\
+                  <span class="p">(</span> <span class="n">successes</span><span class="p">[</span><span class="s1">&#39;switched&#39;</span><span class="p">],</span>
+                  <span class="p">(</span> <span class="n">successes</span><span class="p">[</span><span class="s1">&#39;switched&#39;</span><span class="p">]</span><span class="o">/</span><span class="n">sampling</span><span class="p">),</span>
+                  <span class="p">(</span> <span class="p">(</span><span class="n">numberOfDoors</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span> <span class="o">/</span>\
+                    <span class="p">(</span><span class="n">numberOfDoors</span><span class="o">*</span><span class="p">(</span><span class="n">numberOfDoors</span><span class="o">-</span><span class="mi">1</span><span class="o">-</span><span class="n">numberOfClues</span><span class="p">))</span> <span class="p">)</span>
+                  <span class="p">)</span>
+                 <span class="p">)</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Not switched: </span><span class="si">%d</span><span class="s1"> (</span><span class="si">%.4f</span><span class="s1">); Theoretical probability: </span><span class="si">%.4f</span><span class="s1">&#39;</span> <span class="o">%</span>\
+                  <span class="p">(</span> <span class="n">successes</span><span class="p">[</span><span class="s1">&#39;notSwitched&#39;</span><span class="p">],</span>
+                    <span class="p">(</span><span class="n">successes</span><span class="p">[</span><span class="s1">&#39;notSwitched&#39;</span><span class="p">]</span><span class="o">/</span><span class="n">sampling</span><span class="p">),</span>
+                    <span class="p">(</span><span class="mi">1</span><span class="o">/</span><span class="n">numberOfDoors</span><span class="p">)</span>
+                  <span class="p">)</span>
+                 <span class="p">)</span>
+            
+        <span class="k">return</span> <span class="n">successes</span></div>
+
+
+<span class="c1">#----------testing the code ----------------</span>
+<span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s2">&quot;__main__&quot;</span><span class="p">:</span>
+
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;&quot;&quot;</span>
+<span class="s2">    ****************************************************</span>
+<span class="s2">    * Digraph3 randomNumbers module                    *</span>
+<span class="s2">    * Copyright (C) 2010-2021 Raymond Bisdorff         *</span>
+<span class="s2">    * The module comes with ABSOLUTELY NO WARRANTY     *</span>
+<span class="s2">    * to the extent permitted by the applicable law.   *</span>
+<span class="s2">    * This is free software, and you are welcome to    *</span>
+<span class="s2">    * redistribute it if it remains free software.     *</span>
+<span class="s2">    ****************************************************</span>
+<span class="s2">    &quot;&quot;&quot;</span><span class="p">)</span>
+
+    <span class="n">m</span> <span class="o">=</span> <span class="n">MontyHallGameSimulator</span><span class="p">(</span><span class="n">numberOfDoors</span><span class="o">=</span><span class="mi">6</span><span class="p">,</span><span class="n">numberOfClues</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+    <span class="n">m</span><span class="o">.</span><span class="n">simulate</span><span class="p">(</span><span class="mi">100000</span><span class="p">,</span><span class="mi">1</span><span class="p">)</span>
+    <span class="n">m</span> <span class="o">=</span> <span class="n">MontyHallGameSimulator</span><span class="p">(</span><span class="n">numberOfDoors</span><span class="o">=</span><span class="mi">6</span><span class="p">,</span><span class="n">numberOfClues</span><span class="o">=</span><span class="mi">4</span><span class="p">)</span>
+    <span class="n">m</span><span class="o">.</span><span class="n">simulate</span><span class="p">(</span><span class="n">numberOfTrials</span><span class="o">=</span><span class="mi">1000</span><span class="p">,</span><span class="n">seed</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+    
+<span class="c1">##    brg = BinomialRandomVariable()</span>
+<span class="c1">##    print(brg.random())</span>
+
+<span class="c1">##    from randomNumbers import IncrementalQuantilesEstimator</span>
+<span class="c1">##    import random</span>
+<span class="c1">##    random.seed(1)</span>
+<span class="c1">##    iqAgent = IncrementalQuantilesEstimator(nbuf=100)</span>
+<span class="c1">##    # feeding the iqAgent with standard Gaussian random numbers </span>
+<span class="c1">##    for i in range(1000):</span>
+<span class="c1">##        iqAgent.add(random.gauss(mu=0,sigma=1))</span>
+<span class="c1">##    # reporting the estimated Gaussian quartiles</span>
+<span class="c1">##    print(iqAgent.report(0.0))</span>
+<span class="c1">##    #    -2.961214270519158</span>
+<span class="c1">##    print(iqAgent.report(0.25))</span>
+<span class="c1">##    #    -0.6832621550224423</span>
+<span class="c1">##    print(iqAgent.report(0.50))</span>
+<span class="c1">##    #    -0.014392849958746522</span>
+<span class="c1">##    print(iqAgent.report(0.75))</span>
+<span class="c1">##    #    0.7029655732010196</span>
+<span class="c1">##    print(iqAgent.report(1.00))</span>
+<span class="c1">##    #    2.737259509189501</span>
+<span class="c1">##    random.seed(1)</span>
+<span class="c1">##    #iqAgent = IncrementalQuantilesEstimator(nbuf=100)</span>
+<span class="c1">##    # feeding the iqAgent with standard Gaussian random numbers</span>
+<span class="c1">##    listDatum = []</span>
+<span class="c1">##    for i in range(1000):</span>
+<span class="c1">##        listDatum.append(random.gauss(mu=0,sigma=1))</span>
+<span class="c1">##    iqAgent.addList(listDatum,historyWeight=0.0)</span>
+<span class="c1">##    # reporting the estimated Gaussian quartiles</span>
+<span class="c1">##    print(iqAgent.report(0.0))</span>
+<span class="c1">##    #    -2.961214270519158</span>
+<span class="c1">##    print(iqAgent.report(0.25))</span>
+<span class="c1">##    #    -0.6832621550224423</span>
+<span class="c1">##    print(iqAgent.report(0.50))</span>
+<span class="c1">##    #    -0.014392849958746522</span>
+<span class="c1">##    print(iqAgent.report(0.75))</span>
+<span class="c1">##    #    0.7029655732010196</span>
+<span class="c1">##    print(iqAgent.report(1.00))</span>
+<span class="c1">##    #    2.737259509189501</span>
+<span class="c1">##    listDatum = []</span>
+<span class="c1">##    for i in range(1000):</span>
+<span class="c1">##        listDatum.append(random.gauss(mu=0,sigma=1))</span>
+<span class="c1">##    iqAgent.addList(listDatum,historyWeight=0.5)</span>
+<span class="c1">##    # reporting the estimated Gaussian quartiles</span>
+<span class="c1">##    print(iqAgent.report(0.0))</span>
+<span class="c1">##    #    -2.961214270519158</span>
+<span class="c1">##    print(iqAgent.report(0.25))</span>
+<span class="c1">##    #    -0.6832621550224423</span>
+<span class="c1">##    print(iqAgent.report(0.50))</span>
+<span class="c1">##    #    -0.014392849958746522</span>
+<span class="c1">##    print(iqAgent.report(0.75))</span>
+<span class="c1">##    #    0.7029655732010196</span>
+<span class="c1">##    print(iqAgent.report(1.00))</span>
+<span class="c1">##    #    2.737259509189501</span>
+    
+    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;*------------------*&#39;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;If you see this line all tests were passed successfully :-)&#39;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Enjoy !&#39;</span><span class="p">)</span>
+<span class="c1">#####################################</span>
+</pre></div>
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2012-2023, Raymond Bisdorff.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

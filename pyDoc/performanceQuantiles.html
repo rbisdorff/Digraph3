@@ -1,0 +1,337 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html><head><title>Python: module performanceQuantiles</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+</head><body bgcolor="#f0f0f8">
+
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="heading">
+<tr bgcolor="#7799ee">
+<td valign=bottom>&nbsp;<br>
+<font color="#ffffff" face="helvetica, arial">&nbsp;<br><big><big><strong>performanceQuantiles</strong></big></big></font></td
+><td align=right valign=bottom
+><font color="#ffffff" face="helvetica, arial"><a href=".">index</a><br><a href="file:/home/bisdorff/Documents/GitHub/Digraph3/pyDoc/performanceQuantiles.py">/home/bisdorff/Documents/GitHub/Digraph3/pyDoc/performanceQuantiles.py</a></font></td></tr></table>
+    <p><tt>Digraph3&nbsp;collection&nbsp;of&nbsp;python3&nbsp;modules&nbsp;for&nbsp;<br>
+Algorithmic&nbsp;Decision&nbsp;Theory&nbsp;applications<br>
+&nbsp;<br>
+Module&nbsp;for&nbsp;incremental&nbsp;performance&nbsp;quantiles&nbsp;computation<br>
+&nbsp;<br>
+Copyright&nbsp;(C)&nbsp;2016-2022&nbsp;Raymond&nbsp;Bisdorff<br>
+&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;This&nbsp;program&nbsp;is&nbsp;free&nbsp;software;&nbsp;you&nbsp;can&nbsp;redistribute&nbsp;it&nbsp;and/or&nbsp;modify&nbsp;it&nbsp;under&nbsp;the&nbsp;terms&nbsp;of&nbsp;the&nbsp;GNU&nbsp;General&nbsp;Public&nbsp;License&nbsp;as&nbsp;published&nbsp;by&nbsp;the&nbsp;Free&nbsp;Software&nbsp;Foundation;&nbsp;either&nbsp;version&nbsp;3&nbsp;of&nbsp;the&nbsp;License,&nbsp;or&nbsp;(at&nbsp;your&nbsp;option)&nbsp;any&nbsp;later&nbsp;version.<br>
+&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;This&nbsp;program&nbsp;is&nbsp;distributed&nbsp;in&nbsp;the&nbsp;hope&nbsp;that&nbsp;it&nbsp;will&nbsp;be&nbsp;useful,&nbsp;but&nbsp;WITHOUT&nbsp;ANY&nbsp;WARRANTY;&nbsp;without&nbsp;even&nbsp;the&nbsp;implied&nbsp;warranty&nbsp;of&nbsp;MERCHANTABILITY&nbsp;or&nbsp;FITNESS&nbsp;FOR&nbsp;ANY&nbsp;PARTICULAR&nbsp;PURPOSE.&nbsp;&nbsp;See&nbsp;the&nbsp;GNU&nbsp;General&nbsp;Public&nbsp;License&nbsp;for&nbsp;more&nbsp;details.<br>
+&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;You&nbsp;should&nbsp;have&nbsp;received&nbsp;a&nbsp;copy&nbsp;of&nbsp;the&nbsp;GNU&nbsp;General&nbsp;Public&nbsp;License&nbsp;along&nbsp;with&nbsp;this&nbsp;program;&nbsp;if&nbsp;not,&nbsp;write&nbsp;to&nbsp;the&nbsp;Free&nbsp;Software&nbsp;Foundation,&nbsp;Inc.,&nbsp;51&nbsp;Franklin&nbsp;Street,&nbsp;Fifth&nbsp;Floor,&nbsp;Boston,&nbsp;MA&nbsp;02110-1301&nbsp;USA.<br>
+&nbsp;<br>
+######################################<br>
+&nbsp;<br>
+__version__&nbsp;=&nbsp;"$Revision:&nbsp;Python&nbsp;3.10"</tt></p>
+<p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#ee77aa">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#ffffff" face="helvetica, arial"><big><strong>Classes</strong></big></font></td></tr>
+    
+<tr><td bgcolor="#ee77aa"><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</tt></td><td>&nbsp;</td>
+<td width="100%"><dl>
+<dt><font face="helvetica, arial"><a href="perfTabs.html#PerformanceTableau">perfTabs.PerformanceTableau</a>(<a href="builtins.html#object">builtins.object</a>)
+</font></dt><dd>
+<dl>
+<dt><font face="helvetica, arial"><a href="performanceQuantiles.html#PerformanceQuantiles">PerformanceQuantiles</a>
+</font></dt></dl>
+</dd>
+</dl>
+ <p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#ffc8d8">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#000000" face="helvetica, arial"><a name="PerformanceQuantiles">class <strong>PerformanceQuantiles</strong></a>(<a href="perfTabs.html#PerformanceTableau">perfTabs.PerformanceTableau</a>)</font></td></tr>
+    
+<tr bgcolor="#ffc8d8"><td rowspan=2><tt>&nbsp;&nbsp;&nbsp;</tt></td>
+<td colspan=2><tt><a href="#PerformanceQuantiles">PerformanceQuantiles</a>(perfTab=None,&nbsp;numberOfBins=4,&nbsp;LowerClosed=True,&nbsp;Debug=False)<br>
+&nbsp;<br>
+Implements&nbsp;the&nbsp;incremental&nbsp;performance&nbsp;quantiles&nbsp;representation&nbsp;of&nbsp;a<br>
+given&nbsp;performance&nbsp;tableau.<br>
+&nbsp;<br>
+*Parameters*:<br>
+&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;*perfTab*:&nbsp;may&nbsp;be&nbsp;either&nbsp;a&nbsp;<a href="perfTabs.html#PerformanceTableau">PerformanceTableau</a>&nbsp;object&nbsp;or&nbsp;the&nbsp;name&nbsp;of&nbsp;a&nbsp;previously&nbsp;saved&nbsp;<a href="#PerformanceQuantiles">PerformanceQuantiles</a>&nbsp;instance<br>
+&nbsp;&nbsp;&nbsp;&nbsp;*&nbsp;*NumberOfBins*&nbsp;may&nbsp;be&nbsp;either&nbsp;'quartiles',&nbsp;'deciles',&nbsp;...&nbsp;or&nbsp;'n',&nbsp;the&nbsp;integer&nbsp;number&nbsp;of&nbsp;bins.<br>
+&nbsp;<br>
+Example&nbsp;python&nbsp;session:<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&gt;&gt;&gt;&nbsp;import&nbsp;performanceQuantiles<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&gt;&gt;&gt;&nbsp;from&nbsp;randomPerfTabs&nbsp;import&nbsp;RandomCBPerformanceTableau<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&gt;&gt;&gt;&nbsp;from&nbsp;randomPerfTabs&nbsp;import&nbsp;RandomPerformanceGenerator&nbsp;as&nbsp;PerfTabGenerator<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&gt;&gt;&gt;&nbsp;nbrActions=1000<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&gt;&gt;&gt;&nbsp;nbrCrit&nbsp;=&nbsp;7<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&gt;&gt;&gt;&nbsp;tp&nbsp;=&nbsp;RandomCBPerformanceTableau(numberOfActions=nbrActions,<br>
+&nbsp;&nbsp;&nbsp;&nbsp;...&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;numberOfCriteria=nbrCrit,seed=105)<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&gt;&gt;&gt;&nbsp;pq&nbsp;=&nbsp;performanceQuantiles.<a href="#PerformanceQuantiles">PerformanceQuantiles</a>(tp,'quartiles',<br>
+&nbsp;&nbsp;&nbsp;&nbsp;...&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;LowerClosed=True,Debug=False)<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&gt;&gt;&gt;&nbsp;pq.<a href="#PerformanceQuantiles-showLimitingQuantiles">showLimitingQuantiles</a>(ByObjectives=True)<br>
+&nbsp;&nbsp;&nbsp;&nbsp;*----&nbsp;&nbsp;performance&nbsp;quantiles&nbsp;-----*<br>
+&nbsp;&nbsp;&nbsp;&nbsp;Costs<br>
+&nbsp;&nbsp;&nbsp;&nbsp;criteria&nbsp;&nbsp;|&nbsp;weights&nbsp;|&nbsp;&nbsp;'0.0'&nbsp;&nbsp;&nbsp;'0.25'&nbsp;&nbsp;'0.5'&nbsp;&nbsp;&nbsp;'0.75'&nbsp;&nbsp;'1.0'&nbsp;&nbsp;&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;---------|--------------------------------------------------<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'c1'&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;6&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;-97.12&nbsp;&nbsp;-65.70&nbsp;&nbsp;-46.08&nbsp;&nbsp;-24.96&nbsp;&nbsp;&nbsp;-1.85&nbsp;&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;Benefits<br>
+&nbsp;&nbsp;&nbsp;&nbsp;criteria&nbsp;&nbsp;|&nbsp;weights&nbsp;|&nbsp;&nbsp;'0.0'&nbsp;&nbsp;&nbsp;'0.25'&nbsp;&nbsp;'0.5'&nbsp;&nbsp;&nbsp;'0.75'&nbsp;&nbsp;'1.0'&nbsp;&nbsp;&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;---------|--------------------------------------------------<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'b1'&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;1&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;2.11&nbsp;&nbsp;&nbsp;27.92&nbsp;&nbsp;&nbsp;48.76&nbsp;&nbsp;&nbsp;68.94&nbsp;&nbsp;&nbsp;98.69&nbsp;&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'b2'&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;1&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;0.00&nbsp;&nbsp;&nbsp;&nbsp;3.00&nbsp;&nbsp;&nbsp;&nbsp;5.00&nbsp;&nbsp;&nbsp;&nbsp;7.00&nbsp;&nbsp;&nbsp;10.00&nbsp;&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'b3'&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;1&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;1.08&nbsp;&nbsp;&nbsp;30.41&nbsp;&nbsp;&nbsp;50.57&nbsp;&nbsp;&nbsp;69.01&nbsp;&nbsp;&nbsp;97.23&nbsp;&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'b4'&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;1&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;0.00&nbsp;&nbsp;&nbsp;&nbsp;3.00&nbsp;&nbsp;&nbsp;&nbsp;5.00&nbsp;&nbsp;&nbsp;&nbsp;7.00&nbsp;&nbsp;&nbsp;10.00&nbsp;&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'b5'&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;1&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;1.84&nbsp;&nbsp;&nbsp;29.77&nbsp;&nbsp;&nbsp;50.62&nbsp;&nbsp;&nbsp;70.14&nbsp;&nbsp;&nbsp;96.40&nbsp;&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'b6'&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;1&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;0.00&nbsp;&nbsp;&nbsp;&nbsp;3.00&nbsp;&nbsp;&nbsp;&nbsp;5.00&nbsp;&nbsp;&nbsp;&nbsp;7.00&nbsp;&nbsp;&nbsp;10.00&nbsp;&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&gt;&gt;&gt;&nbsp;tpg&nbsp;=&nbsp;PerfTabGenerator(tp,seed=105)<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&gt;&gt;&gt;&nbsp;newActions&nbsp;=&nbsp;tpg.randomActions(100)<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&gt;&gt;&gt;&nbsp;pq.<a href="#PerformanceQuantiles-updateQuantiles">updateQuantiles</a>(newActions,historySize=None)&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&gt;&gt;&gt;&nbsp;pq.<a href="#PerformanceQuantiles-showHTMLLimitingQuantiles">showHTMLLimitingQuantiles</a>(Transposed=True)<br>
+&nbsp;<br>
+..&nbsp;image::&nbsp;examplePerfQuantiles.png<br>
+&nbsp;&nbsp;&nbsp;&nbsp;:alt:&nbsp;Example&nbsp;limiting&nbsp;quantiles&nbsp;html&nbsp;show&nbsp;method<br>
+&nbsp;&nbsp;&nbsp;&nbsp;:width:&nbsp;400&nbsp;px<br>
+&nbsp;&nbsp;&nbsp;&nbsp;:align:&nbsp;center<br>&nbsp;</tt></td></tr>
+<tr><td>&nbsp;</td>
+<td width="100%"><dl><dt>Method resolution order:</dt>
+<dd><a href="performanceQuantiles.html#PerformanceQuantiles">PerformanceQuantiles</a></dd>
+<dd><a href="perfTabs.html#PerformanceTableau">perfTabs.PerformanceTableau</a></dd>
+<dd><a href="builtins.html#object">builtins.object</a></dd>
+</dl>
+<hr>
+Methods defined here:<br>
+<dl><dt><a name="PerformanceQuantiles-__init__"><strong>__init__</strong></a>(self, perfTab=None, numberOfBins=4, LowerClosed=True, Debug=False)</dt><dd><tt>Initialize&nbsp;self.&nbsp;&nbsp;See&nbsp;help(type(self))&nbsp;for&nbsp;accurate&nbsp;signature.</tt></dd></dl>
+
+<dl><dt><a name="PerformanceQuantiles-__repr__"><strong>__repr__</strong></a>(self)</dt><dd><tt>Default&nbsp;presentation&nbsp;method&nbsp;for&nbsp;<a href="#PerformanceQuantiles">PerformanceQuantiles</a>&nbsp;instances</tt></dd></dl>
+
+<dl><dt><a name="PerformanceQuantiles-computeQuantileProfile"><strong>computeQuantileProfile</strong></a>(self, p, qFreq=None, Debug=False)</dt><dd><tt>Renders&nbsp;the&nbsp;quantile&nbsp;*q(p)*&nbsp;on&nbsp;all&nbsp;the&nbsp;criteria.</tt></dd></dl>
+
+<dl><dt><a name="PerformanceQuantiles-save"><strong>save</strong></a>(self, fileName='tempPerfQuant', valueDigits=2)</dt><dd><tt>Persistant&nbsp;storage&nbsp;of&nbsp;a&nbsp;<a href="#PerformanceQuantiles">PerformanceQuantiles</a>&nbsp;instance.</tt></dd></dl>
+
+<dl><dt><a name="PerformanceQuantiles-showActions"><strong>showActions</strong></a>(self)</dt><dd><tt>presentation&nbsp;methods&nbsp;for&nbsp;decision&nbsp;actions&nbsp;or&nbsp;alternatives</tt></dd></dl>
+
+<dl><dt><a name="PerformanceQuantiles-showCriteria"><strong>showCriteria</strong></a>(self, IntegerWeights=False, Alphabetic=False, ByObjectives=True, Debug=False)</dt><dd><tt>print&nbsp;Criteria&nbsp;with&nbsp;thresholds&nbsp;and&nbsp;weights.</tt></dd></dl>
+
+<dl><dt><a name="PerformanceQuantiles-showCriterionStatistics"><strong>showCriterionStatistics</strong></a>(self, g, Debug=False)</dt><dd><tt>show&nbsp;statistics&nbsp;concerning&nbsp;the&nbsp;evaluation&nbsp;distributions<br>
+on&nbsp;each&nbsp;criteria.</tt></dd></dl>
+
+<dl><dt><a name="PerformanceQuantiles-showHTMLLimitingQuantiles"><strong>showHTMLLimitingQuantiles</strong></a>(self, Sorted=True, Transposed=False, ndigits=2, ContentCentered=True, title=None, htmlFileName=None)</dt><dd><tt>shows&nbsp;the&nbsp;html&nbsp;version&nbsp;of&nbsp;the&nbsp;limiting&nbsp;quantiles&nbsp;in&nbsp;a&nbsp;browser&nbsp;window.</tt></dd></dl>
+
+<dl><dt><a name="PerformanceQuantiles-showLimitingQuantiles"><strong>showLimitingQuantiles</strong></a>(self, ByObjectives=False, Sorted=False, ndigits=2)</dt><dd><tt>Prints&nbsp;the&nbsp;performance&nbsp;quantile&nbsp;limits&nbsp;in&nbsp;table&nbsp;format:&nbsp;criteria&nbsp;x&nbsp;limits.</tt></dd></dl>
+
+<dl><dt><a name="PerformanceQuantiles-updateQuantiles"><strong>updateQuantiles</strong></a>(self, newData, historySize=None, Debug=False)</dt><dd><tt>Update&nbsp;the&nbsp;<a href="#PerformanceQuantiles">PerformanceQuantiles</a>&nbsp;with&nbsp;a&nbsp;set&nbsp;of&nbsp;new&nbsp;random&nbsp;decision&nbsp;actions.<br>
+Parameter&nbsp;*historysize*&nbsp;allows&nbsp;to&nbsp;take&nbsp;more&nbsp;or&nbsp;less&nbsp;into&nbsp;account&nbsp;the&nbsp;historical&nbsp;situation.<br>
+For&nbsp;instance,&nbsp;*historySize=0*&nbsp;does&nbsp;not&nbsp;take&nbsp;into&nbsp;account&nbsp;at&nbsp;all&nbsp;any&nbsp;past&nbsp;observations.<br>
+Otherwise,&nbsp;if&nbsp;*historySize=None*&nbsp;(the&nbsp;default&nbsp;setting),&nbsp;the&nbsp;new&nbsp;observations&nbsp;become&nbsp;less&nbsp;and&nbsp;less<br>
+influential&nbsp;compared&nbsp;to&nbsp;the&nbsp;historical&nbsp;data.</tt></dd></dl>
+
+<hr>
+Methods inherited from <a href="perfTabs.html#PerformanceTableau">perfTabs.PerformanceTableau</a>:<br>
+<dl><dt><a name="PerformanceQuantiles-computeActionCriterionPerformanceDifferences"><strong>computeActionCriterionPerformanceDifferences</strong></a>(self, refAction, refCriterion, comments=False, Debug=False)</dt><dd><tt>computes&nbsp;the&nbsp;performances&nbsp;differences&nbsp;observed&nbsp;between&nbsp;the&nbsp;reference&nbsp;action&nbsp;and&nbsp;the&nbsp;others&nbsp;on&nbsp;the&nbsp;given&nbsp;criterion</tt></dd></dl>
+
+<dl><dt><a name="PerformanceQuantiles-computeActionCriterionQuantile"><strong>computeActionCriterionQuantile</strong></a>(self, action, criterion, strategy='average', Debug=False)</dt><dd><tt>renders&nbsp;the&nbsp;quantile&nbsp;of&nbsp;the&nbsp;performance&nbsp;of&nbsp;action&nbsp;on&nbsp;criterion</tt></dd></dl>
+
+<dl><dt><a name="PerformanceQuantiles-computeActionQuantile"><strong>computeActionQuantile</strong></a>(self, action, Debug=False)</dt><dd><tt>renders&nbsp;the&nbsp;overall&nbsp;performance&nbsp;quantile&nbsp;of&nbsp;action</tt></dd></dl>
+
+<dl><dt><a name="PerformanceQuantiles-computeAllQuantiles"><strong>computeAllQuantiles</strong></a>(self, Sorted=True, Comments=False)</dt><dd><tt>renders&nbsp;a&nbsp;html&nbsp;string&nbsp;showing&nbsp;the&nbsp;table&nbsp;of<br>
+the&nbsp;quantiles&nbsp;matrix&nbsp;action&nbsp;x&nbsp;criterion</tt></dd></dl>
+
+<dl><dt><a name="PerformanceQuantiles-computeCriterionPerformanceDifferences"><strong>computeCriterionPerformanceDifferences</strong></a>(self, c, Comments=False, Debug=False)</dt><dd><tt>Renders&nbsp;the&nbsp;ordered&nbsp;list&nbsp;of&nbsp;all&nbsp;observed&nbsp;performance&nbsp;differences&nbsp;on&nbsp;the&nbsp;given&nbsp;criterion.</tt></dd></dl>
+
+<dl><dt><a name="PerformanceQuantiles-computeDefaultDiscriminationThresholds"><strong>computeDefaultDiscriminationThresholds</strong></a>(self, criteriaList=None, quantile={'ind': 10, 'pref': 20, 'weakVeto': 60, 'veto': 80}, Debug=False, Comments=False)</dt><dd><tt>updates&nbsp;the&nbsp;discrimination&nbsp;thresholds&nbsp;with&nbsp;the&nbsp;percentiles<br>
+from&nbsp;the&nbsp;performance&nbsp;differences.<br>
+Parameters:&nbsp;quantile&nbsp;=&nbsp;{'ind':&nbsp;10,&nbsp;'pref':&nbsp;20,&nbsp;'weakVeto':&nbsp;60,&nbsp;'veto:&nbsp;80}.</tt></dd></dl>
+
+<dl><dt><a name="PerformanceQuantiles-computeMinMaxEvaluations"><strong>computeMinMaxEvaluations</strong></a>(self, criteria=None, actions=None)</dt><dd><tt>renders&nbsp;minimum&nbsp;and&nbsp;maximum&nbsp;performances&nbsp;on&nbsp;each&nbsp;criterion<br>
+in&nbsp;dictionary&nbsp;form:&nbsp;{'g':&nbsp;{'minimum':&nbsp;x,&nbsp;'maximum':&nbsp;x}}</tt></dd></dl>
+
+<dl><dt><a name="PerformanceQuantiles-computeMissingDataProportion"><strong>computeMissingDataProportion</strong></a>(self, InPercents=False, Comments=False)</dt><dd><tt>Renders&nbsp;the&nbsp;proportion&nbsp;of&nbsp;missing&nbsp;data,&nbsp;<br>
+i.e.&nbsp;NA&nbsp;==&nbsp;Decimal('-999')&nbsp;entries&nbsp;in&nbsp;self.<strong>evaluation</strong>.</tt></dd></dl>
+
+<dl><dt><a name="PerformanceQuantiles-computeNormalizedDiffEvaluations"><strong>computeNormalizedDiffEvaluations</strong></a>(self, lowValue=0.0, highValue=100.0, withOutput=False, Debug=False)</dt><dd><tt>renders&nbsp;and&nbsp;csv&nbsp;stores&nbsp;(withOutput=True)&nbsp;the<br>
+list&nbsp;of&nbsp;normalized&nbsp;evaluation&nbsp;differences&nbsp;observed&nbsp;on&nbsp;the&nbsp;family&nbsp;of&nbsp;criteria<br>
+Is&nbsp;only&nbsp;adequate&nbsp;if&nbsp;all&nbsp;criteria&nbsp;have&nbsp;the&nbsp;same<br>
+evaluation&nbsp;scale.&nbsp;Therefore&nbsp;the&nbsp;performance&nbsp;tableau&nbsp;is&nbsp;normalized&nbsp;to&nbsp;0.0-100.0&nbsp;scales.</tt></dd></dl>
+
+<dl><dt><a name="PerformanceQuantiles-computePerformanceDifferences"><strong>computePerformanceDifferences</strong></a>(self, Comments=False, Debug=False, NotPermanentDiffs=True, WithMaxMin=False)</dt><dd><tt>Adds&nbsp;to&nbsp;the&nbsp;criteria&nbsp;dictionary&nbsp;the&nbsp;ordered&nbsp;list&nbsp;of&nbsp;all&nbsp;observed&nbsp;performance&nbsp;differences.</tt></dd></dl>
+
+<dl><dt><a name="PerformanceQuantiles-computeQuantileOrder"><strong>computeQuantileOrder</strong></a>(self, q0=3, q1=0, Threading=False, nbrOfCPUs=1, Comments=False)</dt><dd><tt>Renders&nbsp;a&nbsp;linear&nbsp;ordering&nbsp;of&nbsp;the&nbsp;decision&nbsp;actions&nbsp;from&nbsp;a&nbsp;simulation&nbsp;of&nbsp;pre-ranked&nbsp;outranking&nbsp;digraphs.<br>
+&nbsp;<br>
+The&nbsp;pre-ranking&nbsp;simulations&nbsp;range&nbsp;by&nbsp;default&nbsp;from<br>
+quantiles=q0&nbsp;to&nbsp;quantiles=min(&nbsp;100,&nbsp;max(10,len(self.<strong>actions</strong>)/10])&nbsp;).<br>
+&nbsp;<br>
+The&nbsp;actions&nbsp;are&nbsp;ordered&nbsp;along&nbsp;a&nbsp;decreasing&nbsp;Borda&nbsp;score&nbsp;of&nbsp;their&nbsp;ranking&nbsp;results.</tt></dd></dl>
+
+<dl><dt><a name="PerformanceQuantiles-computeQuantilePreorder"><strong>computeQuantilePreorder</strong></a>(self, Comments=True, Debug=False)</dt><dd><tt>computes&nbsp;the&nbsp;preorder&nbsp;of&nbsp;the&nbsp;actions&nbsp;obtained&nbsp;from&nbsp;decreasing&nbsp;majority&nbsp;quantiles.&nbsp;The&nbsp;quantiles&nbsp;are&nbsp;recomputed&nbsp;with&nbsp;a&nbsp;call&nbsp;to&nbsp;the&nbsp;self.<a href="#PerformanceQuantiles-computeQuantileSort">computeQuantileSort</a>()&nbsp;method.</tt></dd></dl>
+
+<dl><dt><a name="PerformanceQuantiles-computeQuantileRanking"><strong>computeQuantileRanking</strong></a>(self, q0=3, q1=0, Threading=False, nbrOfCPUs=1, Comments=False)</dt><dd><tt>Renders&nbsp;a&nbsp;linear&nbsp;ranking&nbsp;of&nbsp;the&nbsp;decision&nbsp;actions&nbsp;from&nbsp;a&nbsp;simulation&nbsp;of&nbsp;pre-ranked&nbsp;outranking&nbsp;digraphs.<br>
+&nbsp;<br>
+The&nbsp;pre-ranking&nbsp;simulations&nbsp;range&nbsp;by&nbsp;default&nbsp;from<br>
+quantiles=q0&nbsp;to&nbsp;qantiles=min(&nbsp;100,&nbsp;max(10,len(self.<strong>actions</strong>)/10)&nbsp;).<br>
+&nbsp;<br>
+The&nbsp;actions&nbsp;are&nbsp;ordered&nbsp;along&nbsp;an&nbsp;increasing&nbsp;Borda&nbsp;score&nbsp;of&nbsp;their&nbsp;ranking&nbsp;results.</tt></dd></dl>
+
+<dl><dt><a name="PerformanceQuantiles-computeQuantileSort"><strong>computeQuantileSort</strong></a>(self)</dt><dd><tt>shows&nbsp;a&nbsp;sorting&nbsp;of&nbsp;the&nbsp;actions&nbsp;from&nbsp;decreasing&nbsp;majority&nbsp;quantiles</tt></dd></dl>
+
+<dl><dt><a name="PerformanceQuantiles-computeQuantiles"><strong>computeQuantiles</strong></a>(self, Debug=False)</dt><dd><tt>renders&nbsp;a&nbsp;quantiles&nbsp;matrix&nbsp;action&nbsp;x&nbsp;criterion&nbsp;with&nbsp;the&nbsp;performance&nbsp;quantile&nbsp;of&nbsp;action&nbsp;on&nbsp;criterion</tt></dd></dl>
+
+<dl><dt><a name="PerformanceQuantiles-computeRankingConsensusQuality"><strong>computeRankingConsensusQuality</strong></a>(self, ranking, Comments=False, Threading=False, nbrOfCPUs=1)</dt><dd><tt>Renders&nbsp;the&nbsp;marginal&nbsp;criteria&nbsp;correlations&nbsp;with&nbsp;a&nbsp;given&nbsp;ranking&nbsp;with&nbsp;summary.</tt></dd></dl>
+
+<dl><dt><a name="PerformanceQuantiles-computeThresholdPercentile"><strong>computeThresholdPercentile</strong></a>(self, criterion, threshold, Debug=False)</dt><dd><tt>computes&nbsp;for&nbsp;a&nbsp;given&nbsp;criterion&nbsp;the&nbsp;quantile<br>
+of&nbsp;the&nbsp;performance&nbsp;differences&nbsp;of&nbsp;a&nbsp;given&nbsp;constant&nbsp;threshold.</tt></dd></dl>
+
+<dl><dt><a name="PerformanceQuantiles-computeVariableThresholdPercentile"><strong>computeVariableThresholdPercentile</strong></a>(self, criterion, threshold, Debug=False)</dt><dd><tt>computes&nbsp;for&nbsp;a&nbsp;given&nbsp;criterion&nbsp;the&nbsp;quantile<br>
+of&nbsp;the&nbsp;performance&nbsp;differences&nbsp;of&nbsp;a&nbsp;given&nbsp;threshold.</tt></dd></dl>
+
+<dl><dt><a name="PerformanceQuantiles-computeWeightPreorder"><strong>computeWeightPreorder</strong></a>(self)</dt><dd><tt>renders&nbsp;the&nbsp;weight&nbsp;preorder&nbsp;following&nbsp;from&nbsp;the&nbsp;given<br>
+criteria&nbsp;weights&nbsp;in&nbsp;a&nbsp;list&nbsp;of&nbsp;increasing&nbsp;equivalence<br>
+lists&nbsp;of&nbsp;criteria.</tt></dd></dl>
+
+<dl><dt><a name="PerformanceQuantiles-computeWeightedAveragePerformances"><strong>computeWeightedAveragePerformances</strong></a>(self, isNormalized=False, lowValue=0.0, highValue=100.0, isListRanked=False)</dt><dd><tt>Compute&nbsp;normalized&nbsp;weighted&nbsp;average&nbsp;scores&nbsp;by&nbsp;ignoring&nbsp;missing&nbsp;data.<br>
+When&nbsp;*isNormalized*&nbsp;==&nbsp;True&nbsp;(False&nbsp;by&nbsp;default),&nbsp;<br>
+transforms&nbsp;all&nbsp;the&nbsp;scores&nbsp;into&nbsp;a&nbsp;common&nbsp;0-100&nbsp;scale.&nbsp;<br>
+A&nbsp;lowValue&nbsp;and&nbsp;highValue&nbsp;parameter<br>
+can&nbsp;be&nbsp;provided&nbsp;for&nbsp;a&nbsp;specific&nbsp;normalisation.</tt></dd></dl>
+
+<dl><dt><a name="PerformanceQuantiles-convert2BigData"><strong>convert2BigData</strong></a>(self)</dt><dd><tt>Renders&nbsp;a&nbsp;cPerformanceTableau&nbsp;instance,&nbsp;by&nbsp;converting&nbsp;the&nbsp;action&nbsp;keys&nbsp;to&nbsp;integers&nbsp;and&nbsp;evaluations&nbsp;to&nbsp;floats,&nbsp;including&nbsp;the&nbsp;discrimination&nbsp;thresholds,&nbsp;the&nbsp;case&nbsp;given.</tt></dd></dl>
+
+<dl><dt><a name="PerformanceQuantiles-convertDiscriminationThresholds2Decimal"><strong>convertDiscriminationThresholds2Decimal</strong></a>(self)</dt></dl>
+
+<dl><dt><a name="PerformanceQuantiles-convertDiscriminationThresholds2Float"><strong>convertDiscriminationThresholds2Float</strong></a>(self)</dt></dl>
+
+<dl><dt><a name="PerformanceQuantiles-convertEvaluation2Decimal"><strong>convertEvaluation2Decimal</strong></a>(self)</dt><dd><tt>Convert&nbsp;evaluations&nbsp;from&nbsp;obsolete&nbsp;float&nbsp;format&nbsp;to&nbsp;decimal&nbsp;format</tt></dd></dl>
+
+<dl><dt><a name="PerformanceQuantiles-convertEvaluation2Float"><strong>convertEvaluation2Float</strong></a>(self)</dt><dd><tt>Convert&nbsp;evaluations&nbsp;from&nbsp;decimal&nbsp;format&nbsp;to&nbsp;float</tt></dd></dl>
+
+<dl><dt><a name="PerformanceQuantiles-convertInsite2BigData"><strong>convertInsite2BigData</strong></a>(self)</dt><dd><tt>Convert&nbsp;in&nbsp;site&nbsp;a&nbsp;standard&nbsp;formated&nbsp;Performance&nbsp;tableau&nbsp;into&nbsp;a&nbsp;bigData&nbsp;formated&nbsp;instance.</tt></dd></dl>
+
+<dl><dt><a name="PerformanceQuantiles-convertInsite2Standard"><strong>convertInsite2Standard</strong></a>(self)</dt><dd><tt>Convert&nbsp;in&nbsp;site&nbsp;a&nbsp;bigData&nbsp;formated&nbsp;Performance&nbsp;tableau&nbsp;back&nbsp;into&nbsp;a&nbsp;standard&nbsp;formated&nbsp;<a href="perfTabs.html#PerformanceTableau">PerformanceTableau</a>&nbsp;instance.</tt></dd></dl>
+
+<dl><dt><a name="PerformanceQuantiles-convertWeight2Decimal"><strong>convertWeight2Decimal</strong></a>(self)</dt><dd><tt>Convert&nbsp;significance&nbsp;weights&nbsp;from&nbsp;obsolete&nbsp;float&nbsp;format<br>
+to&nbsp;decimal&nbsp;format.</tt></dd></dl>
+
+<dl><dt><a name="PerformanceQuantiles-convertWeight2Integer"><strong>convertWeight2Integer</strong></a>(self)</dt><dd><tt>Convert&nbsp;significance&nbsp;weights&nbsp;from&nbsp;Decimal&nbsp;format<br>
+to&nbsp;int&nbsp;format.</tt></dd></dl>
+
+<dl><dt><a name="PerformanceQuantiles-convertWeights2Negative"><strong>convertWeights2Negative</strong></a>(self)</dt><dd><tt>Negates&nbsp;the&nbsp;weights&nbsp;of&nbsp;criteria&nbsp;to&nbsp;be&nbsp;minimzed.</tt></dd></dl>
+
+<dl><dt><a name="PerformanceQuantiles-convertWeights2Positive"><strong>convertWeights2Positive</strong></a>(self)</dt><dd><tt>Sets&nbsp;negative&nbsp;weights&nbsp;back&nbsp;to&nbsp;positive&nbsp;weights&nbsp;and&nbsp;negates&nbsp;corresponding&nbsp;evaluation&nbsp;grades.</tt></dd></dl>
+
+<dl><dt><a name="PerformanceQuantiles-csvAllQuantiles"><strong>csvAllQuantiles</strong></a>(self, fileName='quantiles')</dt><dd><tt>save&nbsp;quantiles&nbsp;matrix&nbsp;criterionxaction&nbsp;in&nbsp;CSV&nbsp;format</tt></dd></dl>
+
+<dl><dt><a name="PerformanceQuantiles-hasOddWeightAlgebra"><strong>hasOddWeightAlgebra</strong></a>(self, Debug=False)</dt><dd><tt>Verify&nbsp;if&nbsp;the&nbsp;given&nbsp;criteria[self]['weight']&nbsp;are&nbsp;odd&nbsp;or&nbsp;not.<br>
+Return&nbsp;a&nbsp;Boolen&nbsp;value.</tt></dd></dl>
+
+<dl><dt><a name="PerformanceQuantiles-mpComputePerformanceDifferences"><strong>mpComputePerformanceDifferences</strong></a>(self, NotPermanentDiffs=True, nbrCores=None, Debug=False)</dt><dd><tt>Adds&nbsp;to&nbsp;the&nbsp;criteria&nbsp;dictionary&nbsp;the&nbsp;ordered&nbsp;list&nbsp;of&nbsp;all&nbsp;observed&nbsp;performance&nbsp;differences.</tt></dd></dl>
+
+<dl><dt><a name="PerformanceQuantiles-normalizeEvaluations"><strong>normalizeEvaluations</strong></a>(self, lowValue=0.0, highValue=100.0, Debug=False)</dt><dd><tt>recode&nbsp;the&nbsp;evaluations&nbsp;between&nbsp;lowValue&nbsp;and&nbsp;highValue&nbsp;on&nbsp;all&nbsp;criteria</tt></dd></dl>
+
+<dl><dt><a name="PerformanceQuantiles-quantizeCriterionEvaluations"><strong>quantizeCriterionEvaluations</strong></a>(self, g, q, ndigits=2, Debug=True)</dt><dd><tt>q-tile&nbsp;evaluation&nbsp;of&nbsp;criterion&nbsp;q</tt></dd></dl>
+
+<dl><dt><a name="PerformanceQuantiles-replaceNA"><strong>replaceNA</strong></a>(self, newNA=None, Comments=False)</dt><dd><tt>Replaces&nbsp;the&nbsp;current&nbsp;self.<strong>NA</strong>&nbsp;symbol&nbsp;with&nbsp;the&nbsp;*newNA*&nbsp;symbol&nbsp;of&nbsp;type&nbsp;&lt;Decimal&gt;.&nbsp;If&nbsp;newNA&nbsp;is&nbsp;None,&nbsp;the&nbsp;defauklt&nbsp;value&nbsp;Decimal('-999')&nbsp;is&nbsp;used.</tt></dd></dl>
+
+<dl><dt><a name="PerformanceQuantiles-restoreOriginalEvaluations"><strong>restoreOriginalEvaluations</strong></a>(self, lowValue=0.0, highValue=100.0, Debug=False)</dt><dd><tt>recode&nbsp;the&nbsp;evaluations&nbsp;to&nbsp;their&nbsp;original&nbsp;values&nbsp;on&nbsp;all&nbsp;criteria</tt></dd></dl>
+
+<dl><dt><a name="PerformanceQuantiles-saveCSV"><strong>saveCSV</strong></a>(self, fileName='tempPerfTab', Sorted=True, criteriaList=None, actionsList=None, ndigits=2, Debug=False)</dt><dd><tt>1<br>
+Store&nbsp;the&nbsp;performance&nbsp;Tableau&nbsp;self&nbsp;Actions&nbsp;x&nbsp;Criteria&nbsp;in&nbsp;CSV&nbsp;format.</tt></dd></dl>
+
+<dl><dt><a name="PerformanceQuantiles-saveXMCDA2"><strong>saveXMCDA2</strong></a>(self, fileName='temp', category='XMCDA 2.0 Extended format', user='digraphs Module (RB)', version='saved from Python session', title='Performance Tableau in XMCDA-2.0 format.', variant='Rubis', valuationType='bipolar', servingD3=False, isStringIO=False, stringNA='NA', comment='produced by saveXMCDA2()', hasVeto=True)</dt><dd><tt>save&nbsp;performance&nbsp;tableau&nbsp;object&nbsp;self&nbsp;in&nbsp;XMCDA&nbsp;2.0&nbsp;format&nbsp;including&nbsp;decision&nbsp;objectives,&nbsp;the&nbsp;case&nbsp;given.</tt></dd></dl>
+
+<dl><dt><a name="PerformanceQuantiles-saveXMCDA2String"><strong>saveXMCDA2String</strong></a>(self, fileName='temp', category='XMCDA 2.0 format', user='digraphs Module (RB)', version='saved from Python session', title='Performance Tableau in XMCDA-2.0 format.', variant='Rubis', valuationType='bipolar', servingD3=True, comment='produced by stringIO()', stringNA='NA')</dt><dd><tt>save&nbsp;performance&nbsp;tableau&nbsp;object&nbsp;self&nbsp;in&nbsp;XMCDA&nbsp;2.0&nbsp;format.<br>
+!!!&nbsp;obsolete:&nbsp;replaced&nbsp;by&nbsp;the&nbsp;isStringIO&nbsp;in&nbsp;the&nbsp;saveXMCDA2&nbsp;method&nbsp;!!!</tt></dd></dl>
+
+<dl><dt><a name="PerformanceQuantiles-setObjectiveWeights"><strong>setObjectiveWeights</strong></a>(self, Debug=False)</dt><dd><tt>Set&nbsp;the&nbsp;objective&nbsp;weights&nbsp;to&nbsp;the&nbsp;sum&nbsp;of&nbsp;the&nbsp;corresponding&nbsp;criteria&nbsp;significance&nbsp;weights.</tt></dd></dl>
+
+<dl><dt><a name="PerformanceQuantiles-showAll"><strong>showAll</strong></a>(self)</dt><dd><tt>Show&nbsp;fonction&nbsp;for&nbsp;performance&nbsp;tableau</tt></dd></dl>
+
+<dl><dt><a name="PerformanceQuantiles-showAllQuantiles"><strong>showAllQuantiles</strong></a>(self, Sorted=True)</dt><dd><tt>prints&nbsp;the&nbsp;performance&nbsp;quantiles&nbsp;tableau&nbsp;in&nbsp;the&nbsp;session&nbsp;console.</tt></dd></dl>
+
+<dl><dt><a name="PerformanceQuantiles-showEvaluationStatistics"><strong>showEvaluationStatistics</strong></a>(self)</dt><dd><tt>renders&nbsp;the&nbsp;variance&nbsp;and&nbsp;standard&nbsp;deviation&nbsp;of<br>
+the&nbsp;values&nbsp;observed&nbsp;in&nbsp;the&nbsp;performance&nbsp;Tableau.</tt></dd></dl>
+
+<dl><dt><a name="PerformanceQuantiles-showHTMLCriteria"><strong>showHTMLCriteria</strong></a>(self, criteriaSubset=None, Sorted=True, ndigits=2, title=None, htmlFileName=None)</dt><dd><tt>shows&nbsp;the&nbsp;criteria&nbsp;in&nbsp;the&nbsp;system&nbsp;browser&nbsp;view.</tt></dd></dl>
+
+<dl><dt><a name="PerformanceQuantiles-showHTMLPerformanceHeatmap"><strong>showHTMLPerformanceHeatmap</strong></a>(self, actionsList=None, WithActionNames=False, fromIndex=None, toIndex=None, Transposed=False, criteriaList=None, colorLevels=7, pageTitle=None, ndigits=2, SparseModel=False, outrankingModel='standard', minimalComponentSize=1, rankingRule='NetFlows', StoreRanking=True, quantiles=None, strategy='average', Correlations=False, htmlFileName=None, Threading=False, nbrOfCPUs=None, Debug=False)</dt><dd><tt>shows&nbsp;the&nbsp;html&nbsp;heatmap&nbsp;version&nbsp;of&nbsp;the&nbsp;performance&nbsp;tableau&nbsp;in&nbsp;a&nbsp;browser&nbsp;window<br>
+(see&nbsp;perfTabs.htmlPerformanceHeatMap()&nbsp;method&nbsp;).<br>
+&nbsp;<br>
+**Parameters**:<br>
+&nbsp;<br>
+*&nbsp;*actionsList*&nbsp;and&nbsp;*criteriaList*,&nbsp;if&nbsp;provided,&nbsp;&nbsp;give&nbsp;the&nbsp;possibility&nbsp;to&nbsp;show<br>
+&nbsp;&nbsp;the&nbsp;decision&nbsp;alternatives,&nbsp;resp.&nbsp;criteria,&nbsp;in&nbsp;a&nbsp;given&nbsp;ordering.<br>
+*&nbsp;*WithActionNames*&nbsp;=&nbsp;True&nbsp;(default&nbsp;False)&nbsp;will&nbsp;show&nbsp;the&nbsp;action&nbsp;names&nbsp;instead&nbsp;of&nbsp;the&nbsp;short&nbsp;names&nbsp;or&nbsp;the&nbsp;identifyers.<br>
+*&nbsp;*ndigits*&nbsp;=&nbsp;0&nbsp;may&nbsp;be&nbsp;used&nbsp;to&nbsp;show&nbsp;integer&nbsp;evaluation&nbsp;values.<br>
+*&nbsp;*colorLevels*&nbsp;may&nbsp;be&nbsp;3,&nbsp;5,&nbsp;7,&nbsp;or&nbsp;9.&nbsp;<br>
+*&nbsp;When&nbsp;no&nbsp;*actionsList*&nbsp;is&nbsp;provided,&nbsp;the&nbsp;decision&nbsp;actions&nbsp;are&nbsp;ordered&nbsp;from&nbsp;the&nbsp;best&nbsp;to&nbsp;the&nbsp;worst.&nbsp;This<br>
+&nbsp;&nbsp;ranking&nbsp;is&nbsp;obtained&nbsp;by&nbsp;default&nbsp;with&nbsp;the&nbsp;Copeland&nbsp;rule&nbsp;applied&nbsp;on&nbsp;a&nbsp;standard&nbsp;*BipolarOutrankingDigraph*.<br>
+*&nbsp;When&nbsp;the&nbsp;*SparseModel*&nbsp;flag&nbsp;is&nbsp;put&nbsp;to&nbsp;*True*,&nbsp;a&nbsp;sparse&nbsp;*PreRankedOutrankingDigraph*&nbsp;construction&nbsp;is&nbsp;used&nbsp;instead.<br>
+*&nbsp;the&nbsp;*outrankingModel*&nbsp;parameter&nbsp;(default&nbsp;=&nbsp;'standard')&nbsp;allows&nbsp;to&nbsp;switch&nbsp;to&nbsp;alternative&nbsp;BipolarOutrankingDigraph&nbsp;constructors,&nbsp;like&nbsp;the&nbsp;'confident'&nbsp;or&nbsp;'robust'&nbsp;models.&nbsp;When&nbsp;called&nbsp;from&nbsp;a&nbsp;bipolar-valued&nbsp;outrankingDigraph&nbsp;instance,&nbsp;*outrankingModel*&nbsp;=&nbsp;'this'&nbsp;keeps&nbsp;the&nbsp;current&nbsp;outranking&nbsp;model&nbsp;without&nbsp;recomputing&nbsp;by&nbsp;default&nbsp;the&nbsp;standard&nbsp;outranking&nbsp;model.&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<br>
+*&nbsp;The&nbsp;*minimalComponentSize*&nbsp;allows&nbsp;to&nbsp;control&nbsp;the&nbsp;fill&nbsp;rate&nbsp;of&nbsp;the&nbsp;pre-ranked&nbsp;model.<br>
+&nbsp;&nbsp;When&nbsp;*minimalComponentSize*&nbsp;=&nbsp;*n*&nbsp;(the&nbsp;number&nbsp;of&nbsp;decision&nbsp;actions)&nbsp;both&nbsp;the&nbsp;pre-ranked&nbsp;model&nbsp;will&nbsp;be<br>
+&nbsp;&nbsp;in&nbsp;fact&nbsp;equivalent&nbsp;to&nbsp;the&nbsp;standard&nbsp;model.<br>
+*&nbsp;*rankingRule*&nbsp;=&nbsp;'NetFlows'&nbsp;(default)&nbsp;|&nbsp;'Copeland'&nbsp;|&nbsp;'Kohler'&nbsp;|&nbsp;'RankedPairs'&nbsp;|&nbsp;'ArrowRaymond'<br>
+&nbsp;&nbsp;|&nbsp;'IteratedNetFlows'&nbsp;|&nbsp;'IteraredCopeland'.&nbsp;See&nbsp;tutorial&nbsp;on&nbsp;ranking&nbsp;mith&nbsp;multiple&nbsp;incommensurable&nbsp;criteria.<br>
+*&nbsp;when&nbsp;the&nbsp;*StoreRanking*&nbsp;flag&nbsp;is&nbsp;set&nbsp;to&nbsp;*True*,&nbsp;the&nbsp;ranking&nbsp;result&nbsp;is&nbsp;storted&nbsp;in&nbsp;*self*.<br>
+*&nbsp;Quantiles&nbsp;used&nbsp;for&nbsp;the&nbsp;pre-ranked&nbsp;decomposition&nbsp;are&nbsp;put&nbsp;by&nbsp;default&nbsp;to&nbsp;*n*<br>
+&nbsp;&nbsp;(the&nbsp;number&nbsp;of&nbsp;decision&nbsp;alternatives)&nbsp;for&nbsp;*n*&nbsp;&lt;&nbsp;50.&nbsp;For&nbsp;larger&nbsp;cardinalities&nbsp;up&nbsp;to&nbsp;1000,&nbsp;quantiles&nbsp;=&nbsp;*n*&nbsp;/10.<br>
+&nbsp;&nbsp;For&nbsp;bigger&nbsp;performance&nbsp;tableaux&nbsp;the&nbsp;*quantiles*&nbsp;parameter&nbsp;may&nbsp;be&nbsp;set&nbsp;to&nbsp;a&nbsp;much&nbsp;lower&nbsp;value<br>
+&nbsp;&nbsp;not&nbsp;exceeding&nbsp;usually&nbsp;10.<br>
+*&nbsp;The&nbsp;pre-ranking&nbsp;may&nbsp;be&nbsp;obtained&nbsp;with&nbsp;three&nbsp;ordering&nbsp;strategies&nbsp;for&nbsp;the<br>
+&nbsp;&nbsp;quantiles&nbsp;equivalence&nbsp;classes:&nbsp;'average'&nbsp;(default),&nbsp;'optimistic'&nbsp;or&nbsp;&nbsp;'pessimistic'.<br>
+*&nbsp;With&nbsp;*Correlations*&nbsp;=&nbsp;*True*&nbsp;and&nbsp;*criteriaList*&nbsp;=&nbsp;*None*,&nbsp;the&nbsp;criteria&nbsp;will&nbsp;be&nbsp;presented&nbsp;from&nbsp;left&nbsp;to&nbsp;right&nbsp;in&nbsp;decreasing<br>
+&nbsp;&nbsp;order&nbsp;of&nbsp;the&nbsp;correlations&nbsp;between&nbsp;the&nbsp;marginal&nbsp;criterion&nbsp;based&nbsp;ranking&nbsp;and&nbsp;the&nbsp;global&nbsp;ranking&nbsp;used&nbsp;for<br>
+&nbsp;&nbsp;presenting&nbsp;the&nbsp;decision&nbsp;alternatives.<br>
+*&nbsp;For&nbsp;large&nbsp;performance&nbsp;Tableaux,&nbsp;*multiprocessing*&nbsp;techniques&nbsp;may&nbsp;be&nbsp;used&nbsp;by&nbsp;setting<br>
+&nbsp;&nbsp;*Threading*&nbsp;=&nbsp;*True*&nbsp;in&nbsp;order&nbsp;to&nbsp;speed&nbsp;up&nbsp;the&nbsp;computations;&nbsp;especially&nbsp;when&nbsp;*Correlations*&nbsp;=&nbsp;*True*.<br>
+*&nbsp;By&nbsp;default,&nbsp;the&nbsp;number&nbsp;of&nbsp;cores&nbsp;available,&nbsp;will&nbsp;be&nbsp;detected.&nbsp;It&nbsp;may&nbsp;be&nbsp;efficient&nbsp;in&nbsp;a&nbsp;HPC&nbsp;context<br>
+&nbsp;&nbsp;to&nbsp;indicate&nbsp;the&nbsp;exact&nbsp;number&nbsp;of&nbsp;singled&nbsp;threaded&nbsp;cores&nbsp;in&nbsp;fact&nbsp;allocated&nbsp;to&nbsp;the&nbsp;job.<br>
+&nbsp;<br>
+&nbsp;<br>
+&gt;&gt;&gt;&nbsp;from&nbsp;randomPerfTabs&nbsp;import&nbsp;RandomPerformanceTableau<br>
+&gt;&gt;&gt;&nbsp;rt&nbsp;=&nbsp;RandomPerformanceTableau(seed=100)<br>
+&gt;&gt;&gt;&nbsp;rt.<a href="#PerformanceQuantiles-showHTMLPerformanceHeatmap">showHTMLPerformanceHeatmap</a>(colorLevels=5,Correlations=True)<br>
+&nbsp;<br>
+..&nbsp;image::&nbsp;perfTabsExample.png<br>
+&nbsp;&nbsp;&nbsp;:alt:&nbsp;HTML&nbsp;heat&nbsp;map&nbsp;of&nbsp;the&nbsp;performance&nbsp;tableau<br>
+&nbsp;&nbsp;&nbsp;:width:&nbsp;600&nbsp;px<br>
+&nbsp;&nbsp;&nbsp;:align:&nbsp;center</tt></dd></dl>
+
+<dl><dt><a name="PerformanceQuantiles-showHTMLPerformanceQuantiles"><strong>showHTMLPerformanceQuantiles</strong></a>(self, Sorted=True, htmlFileName=None)</dt><dd><tt>shows&nbsp;the&nbsp;performance&nbsp;quantiles&nbsp;tableau&nbsp;in&nbsp;a&nbsp;browser&nbsp;window.</tt></dd></dl>
+
+<dl><dt><a name="PerformanceQuantiles-showHTMLPerformanceTableau"><strong>showHTMLPerformanceTableau</strong></a>(self, actionsSubset=None, fromIndex=None, toIndex=None, isSorted=False, Transposed=False, ndigits=2, ContentCentered=True, title=None, htmlFileName=None)</dt><dd><tt>shows&nbsp;the&nbsp;html&nbsp;version&nbsp;of&nbsp;the&nbsp;performance&nbsp;tableau&nbsp;in&nbsp;a&nbsp;browser&nbsp;window.</tt></dd></dl>
+
+<dl><dt><a name="PerformanceQuantiles-showObjectives"><strong>showObjectives</strong></a>(self)</dt></dl>
+
+<dl><dt><a name="PerformanceQuantiles-showPairwiseComparison"><strong>showPairwiseComparison</strong></a>(self, a, b, hasSymetricThresholds=True, Debug=False, isReturningHTML=False, hasSymmetricThresholds=True)</dt><dd><tt>renders&nbsp;the&nbsp;pairwise&nbsp;comprison&nbsp;parameters&nbsp;on&nbsp;all&nbsp;criteria<br>
+in&nbsp;html&nbsp;format</tt></dd></dl>
+
+<dl><dt><a name="PerformanceQuantiles-showPerformanceTableau"><strong>showPerformanceTableau</strong></a>(self, Transposed=False, actionsSubset=None, fromIndex=None, toIndex=None, Sorted=True, ndigits=2)</dt><dd><tt>Print&nbsp;the&nbsp;performance&nbsp;Tableau.</tt></dd></dl>
+
+<dl><dt><a name="PerformanceQuantiles-showQuantileSort"><strong>showQuantileSort</strong></a>(self, Debug=False)</dt><dd><tt>Wrapper&nbsp;of&nbsp;<a href="#PerformanceQuantiles-computeQuantilePreorder">computeQuantilePreorder</a>()&nbsp;for&nbsp;the&nbsp;obsolete&nbsp;<a href="#PerformanceQuantiles-showQuantileSort">showQuantileSort</a>()&nbsp;method.</tt></dd></dl>
+
+<dl><dt><a name="PerformanceQuantiles-showRankingConsensusQuality"><strong>showRankingConsensusQuality</strong></a>(self, ranking)</dt><dd><tt>shows&nbsp;the&nbsp;marginal&nbsp;criteria&nbsp;correlations&nbsp;with&nbsp;a&nbsp;given&nbsp;ranking&nbsp;with&nbsp;summary.</tt></dd></dl>
+
+<dl><dt><a name="PerformanceQuantiles-showStatistics"><strong>showStatistics</strong></a>(self, Debug=False)</dt><dd><tt>show&nbsp;statistics&nbsp;concerning&nbsp;the&nbsp;evaluation&nbsp;distributions<br>
+on&nbsp;each&nbsp;criteria.</tt></dd></dl>
+
+<dl><dt><a name="PerformanceQuantiles-showWeightPreorder"><strong>showWeightPreorder</strong></a>(self)</dt><dd><tt>Renders&nbsp;a&nbsp;preordering&nbsp;of&nbsp;the&nbsp;the&nbsp;criteria&nbsp;signficance&nbsp;weights.</tt></dd></dl>
+
+<hr>
+Data descriptors inherited from <a href="perfTabs.html#PerformanceTableau">perfTabs.PerformanceTableau</a>:<br>
+<dl><dt><strong>__dict__</strong></dt>
+<dd><tt>dictionary&nbsp;for&nbsp;instance&nbsp;variables&nbsp;(if&nbsp;defined)</tt></dd>
+</dl>
+<dl><dt><strong>__weakref__</strong></dt>
+<dd><tt>list&nbsp;of&nbsp;weak&nbsp;references&nbsp;to&nbsp;the&nbsp;object&nbsp;(if&nbsp;defined)</tt></dd>
+</dl>
+</td></tr></table></td></tr></table><p>
+<table width="100%" cellspacing=0 cellpadding=2 border=0 summary="section">
+<tr bgcolor="#eeaa77">
+<td colspan=3 valign=bottom>&nbsp;<br>
+<font color="#ffffff" face="helvetica, arial"><big><strong>Functions</strong></big></font></td></tr>
+    
+<tr><td bgcolor="#eeaa77"><tt>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</tt></td><td>&nbsp;</td>
+<td width="100%"><dl><dt><a name="-time"><strong>time</strong></a>(...)</dt><dd><tt><a href="#-time">time</a>()&nbsp;-&gt;&nbsp;floating&nbsp;point&nbsp;number<br>
+&nbsp;<br>
+Return&nbsp;the&nbsp;current&nbsp;time&nbsp;in&nbsp;seconds&nbsp;since&nbsp;the&nbsp;Epoch.<br>
+Fractions&nbsp;of&nbsp;a&nbsp;second&nbsp;may&nbsp;be&nbsp;present&nbsp;if&nbsp;the&nbsp;system&nbsp;clock&nbsp;provides&nbsp;them.</tt></dd></dl>
+</td></tr></table>
+</body></html>

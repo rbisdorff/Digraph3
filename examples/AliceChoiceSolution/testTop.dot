@@ -1,0 +1,22 @@
+digraph G {
+graph [ bgcolor = cornsilk, ordering = out, fontname = "Helvetica-Oblique",
+ fontsize = 12,
+ label = "\nDigraph3 (graphviz)\n R. Bisdorff, 2020", size="7,7",fontsize=10];
+T_UD [shape = "circle", label = "T_UD", fontsize=10];
+T_FHK [shape = "circle", label = "T_FHK", fontsize=10];
+T_FHM [shape = "circle", label = "T_FHM", fontsize=10];
+I_FHK [shape = "circle", label = "I_FHK", fontsize=10];
+T_USB [shape = "circle", label = "T_USB", fontsize=10];
+I_USB [shape = "circle", label = "I_USB", fontsize=10];
+T_UHB [shape = "circle", label = "T_UHB", fontsize=10];
+I_UHB [shape = "circle", label = "I_UHB", fontsize=10];
+S_HKK [shape = "circle", label = "S_HKK", fontsize=10];
+C_HKK [shape = "circle", label = "C_HKK", fontsize=10];
+{ rank = 1 ; I_FHK; I_USB; I_UHB; }
+{ rank = 2 ; T_FHK; T_UHB; }
+{ rank = 3 ; T_UD; T_FHM; T_USB; S_HKK; C_HKK; }
+I_UHB-> T_FHK [style="setlinewidth(1)",color=black] ;
+T_FHK-> T_UD [style="setlinewidth(1)",color=black] ;
+T_UHB-> T_FHM [style="setlinewidth(1)",color=black] ;
+}
+ 
