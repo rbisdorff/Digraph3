@@ -1276,23 +1276,23 @@
 <p><strong>Dowloading the Digraph3 resources</strong></p>
 <p>Three download options are given:</p>
 <ol class="arabic">
-<li><p>Either (easiest under Linux or Mac OS-X), by using a git client and cloning from github.com:</p>
+<li><p>With a browser access,  download and extract the latest distribution zip archive either, from the <a class="reference external" href="https://github.com/rbisdorff/Digraph3">github link above</a>  or, from the <a class="reference external" href="https://sourceforge.net/projects/digraph3/">sourceforge page</a> .</p></li>
+<li><p>By using a git client and cloning (easiest under Linux or Mac OS-X) either from github.com:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span>...$ git clone https://github.com/rbisdorff/Digraph3
 </pre></div>
 </div>
 </li>
-<li><p>Or from sourceforge.net:</p>
+<li><p>Or, from sourceforge.net:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span>...$ git clone https://git.code.sf.net/p/digraph3/code Digraph3
 </pre></div>
 </div>
 </li>
-<li><p>Or, with a browser access,  download and extract the latest distribution zip archive either, from the <a class="reference external" href="https://github.com/rbisdorff/Digraph3">github link above</a>  or, from the <a class="reference external" href="https://sourceforge.net/projects/digraph3/">sourceforge page</a> .</p></li>
 </ol>
 <p>On Linux or Mac OS, ..$ <em>cd</em> to the extracted &lt;Digraph3&gt; directory:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span>../Digraph3$ make installVenv
 </pre></div>
 </div>
-<p>installs the Digraph3 modules in an activated virtual Python environment (the official Python recommended option), or in the user’s local python3 <em>site-packages</em>. As of Python 3.11, it is necessary to previously install the <em>wheel</em> package ( …$ python3.11 -m pip install wheel).</p>
+<p>installs the Digraph3 modules in an activated virtual Python environment (the Python recommended option), or in the user’s local python3 <em>site-packages</em>. As of Python 3.11, it is necessary to previously install the <em>wheel</em> package ( …$ python3.11 -m pip install wheel).</p>
 <p>Whereas:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span>../Digraph3$ make install
 </pre></div>
@@ -1303,7 +1303,7 @@
 </pre></div>
 </div>
 <p>This <em>make</em> command  launches in fact a <em>${PYTHON} -m pip -v install –upgrade –scr = .</em> command that installs the Digraph3 modules in the running virtual environment (recommended option) or the user’s local <em>site-packages</em> directory. A system wide installation is possible with prefixing the <em>make installPip</em> commad with <em>sudo</em>.</p>
-<p>If the <strong>cython</strong> (<a class="reference external" href="https://cython.org/">https://cython.org/</a>) C-compiled modules for Big Data applications are required, it is necessary to previously install the <em>cython</em>  and the <em>wheel</em> packages in the running Python environment:</p>
+<p>If the <strong>cython</strong> (<a class="reference external" href="https://cython.org/">https://cython.org/</a>) C-compiled modules for Big Data applications are required, it is necessary to previously install the <em>cython</em> package and, if not yeat installed, the <em>wheel</em>  package in the running Python environment:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span>...$ python3 -m pip install cython wheel
 </pre></div>
 </div>
@@ -1328,14 +1328,9 @@
 </pre></div>
 </div>
 <p><strong>Dependencies</strong></p>
-<ul>
+<ul class="simple">
 <li><p>To be fully functional, the Digraph3 resources mainly need the <a class="reference external" href="https://graphviz.org">graphviz</a> tools and the <a class="reference external" href="https://www.r-project.org">R statistics resources</a> to be installed.</p></li>
 <li><p>When exploring digraph isomorphisms, the <a class="reference external" href="https://www.cs.sunysb.edu/~algorith/implement/nauty/implement.shtml">nauty</a> isomorphism testing program is required.</p></li>
-<li><p>A specific actions clustering method of the <a class="reference external" href="techDoc.html#outrankingDigraphs.OutrankingDigraph">OutrankingDigraph</a> class furthermore requires the <em>calmat</em> matrix computing resource to be installed (see the calmat directory in Digraph3 resources):</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>../Digraph3/calmat$ less README
-</pre></div>
-</div>
-</li>
 </ul>
 </section>
 <section id="organisation-of-the-digraph3-modules">
@@ -1345,14 +1340,14 @@
 <h3><span class="section-number">2.2.1. </span>Basic modules<a class="headerlink" href="#basic-modules" title="Link to this heading"></a></h3>
 <ul>
 <li><dl>
-<dt><a class="reference internal" href="#digraphs-label"><span class="std std-ref">digraphs module</span></a></dt><dd><p>Main part of the Digraph3 source code with the root <a class="reference external" href="techDoc.html#digraphs.Digraph">Digraph</a> class.</p>
+<dt><a class="reference internal" href="#digraphs-label"><span class="std std-ref">digraphs module</span></a></dt><dd><p>Main part of the Digraph3 source code with the generic root <a class="reference external" href="techDoc.html#digraphs.Digraph">Digraph</a> class.</p>
 <div class="graphviz"><object data="_images/inheritance-a1e5dd75c4b297a11ceab688be680279d984d678.svg" type="image/svg+xml" class="inheritance graphviz">
 <p class="warning">Inheritance diagram of digraphs</p></object></div>
 </dd>
 </dl>
 </li>
 <li><dl>
-<dt><a class="reference internal" href="#graphs-label"><span class="std std-ref">graphs module</span></a></dt><dd><p>Resources for handling undirected graphs with the root <a class="reference external" href="techDoc.html#graphs.Graph">Graph</a> class and a brigde to the
+<dt><a class="reference internal" href="#graphs-label"><span class="std std-ref">graphs module</span></a></dt><dd><p>Resources for handling undirected graphs with the generic root <a class="reference external" href="techDoc.html#graphs.Graph">Graph</a> class and a brigde to the
 <a class="reference internal" href="#module-digraphs" title="digraphs"><code class="xref py py-mod docutils literal notranslate"><span class="pre">digraphs</span></code></a> module resources.</p>
 <div class="graphviz"><object data="_images/inheritance-7176b2b6a08a74c2f00eab77758fe402617803a4.svg" type="image/svg+xml" class="inheritance graphviz">
 <p class="warning">Inheritance diagram of graphs</p></object></div>
@@ -1360,7 +1355,7 @@
 </dl>
 </li>
 <li><dl>
-<dt><a class="reference internal" href="#perftabs-label"><span class="std std-ref">perfTabs module</span></a></dt><dd><p>Tools for handling multiple criteria performance tableaux with
+<dt><a class="reference internal" href="#perftabs-label"><span class="std std-ref">perfTabs module</span></a></dt><dd><p>Tools for handling multiple criteria performance tableaux with the generic
 root <a class="reference external" href="techDoc.html#perfTabs.PerformanceTableau">PerformanceTableau</a> class.</p>
 <div class="graphviz"><object data="_images/inheritance-e9ff44c54b25e765b389901c2984d73d0905bffd.svg" type="image/svg+xml" class="inheritance graphviz">
 <p class="warning">Inheritance diagram of perfTabs</p></object></div>
@@ -1368,7 +1363,7 @@ root <a class="reference external" href="techDoc.html#perfTabs.PerformanceTablea
 </dl>
 </li>
 <li><dl>
-<dt><a class="reference internal" href="#outrankingdigraphs-label"><span class="std std-ref">outrankingDigraphs module</span></a></dt><dd><p>Root module for handling outranking digraphs with the abstract root <a class="reference internal" href="#outrankingDigraphs.OutrankingDigraph" title="outrankingDigraphs.OutrankingDigraph"><code class="xref py py-class docutils literal notranslate"><span class="pre">OutrankingDigraph</span></code></a> classs and the main
+<dt><a class="reference internal" href="#outrankingdigraphs-label"><span class="std std-ref">outrankingDigraphs module</span></a></dt><dd><p>Root module for handling outranking digraphs with the abstract generic root <a class="reference internal" href="#outrankingDigraphs.OutrankingDigraph" title="outrankingDigraphs.OutrankingDigraph"><code class="xref py py-class docutils literal notranslate"><span class="pre">OutrankingDigraph</span></code></a> classs and the main
 <a class="reference external" href="techDoc.html#outrankingDigraphs.BipolarOutrankingDigraph">BipolarOutrankingDigraph</a>
 class. Notice that the outrankingDigraph class defines a hybrid object type, inheriting conjointly from the <a class="reference internal" href="#digraphs.Digraph" title="digraphs.Digraph"><code class="xref py py-class docutils literal notranslate"><span class="pre">Digraph</span></code></a> class <em>and</em> the <a class="reference internal" href="#perfTabs.PerformanceTableau" title="perfTabs.PerformanceTableau"><code class="xref py py-class docutils literal notranslate"><span class="pre">PerformanceTableau</span></code></a> class.</p>
 <div class="graphviz"><object data="_images/inheritance-aebaf1c707c4761e386afef9455db8765becf054.svg" type="image/svg+xml" class="inheritance graphviz">
@@ -1386,7 +1381,7 @@ with main <a class="reference external" href="techDoc.html#votingProfiles.Linear
 </li>
 <li><dl>
 <dt><a class="reference internal" href="#pairings-label"><span class="std std-ref">pairings module</span></a></dt><dd><p>Classes and methods for computing fair pairings solutions
-with abstract root <code class="xref py py-class docutils literal notranslate"><span class="pre">Pairing</span></code> class.</p>
+with abstract generic root <code class="xref py py-class docutils literal notranslate"><span class="pre">Pairing</span></code> class.</p>
 <div class="graphviz"><object data="_images/inheritance-a11b60bb403c13c23e63ad329367b3b95e573a4c.svg" type="image/svg+xml" class="inheritance graphviz">
 <p class="warning">Inheritance diagram of pairings</p></object></div>
 </dd>
@@ -1394,7 +1389,7 @@ with abstract root <code class="xref py py-class docutils literal notranslate"><
 </li>
 <li><dl>
 <dt><a class="reference internal" href="#dynamicprogramming-label"><span class="std std-ref">dynamicProgramming module</span></a></dt><dd><p>Classes and methods for solving dynamic programming problems
-with root <a class="reference internal" href="#dynamicProgramming.DynamicProgrammingDigraph" title="dynamicProgramming.DynamicProgrammingDigraph"><code class="xref py py-class docutils literal notranslate"><span class="pre">DynamicProgrammingDigraph</span></code></a> class.</p>
+with generic root <a class="reference internal" href="#dynamicProgramming.DynamicProgrammingDigraph" title="dynamicProgramming.DynamicProgrammingDigraph"><code class="xref py py-class docutils literal notranslate"><span class="pre">DynamicProgrammingDigraph</span></code></a> class.</p>
 <div class="graphviz"><object data="_images/inheritance-b32e2902a36b95632afd8e90da050eb2fbd05cdb.svg" type="image/svg+xml" class="inheritance graphviz">
 <p class="warning">Inheritance diagram of dynamicProgramming</p></object></div>
 </dd>
@@ -1467,14 +1462,14 @@ and bipolar outranking digraphs (order
 <h3><span class="section-number">2.2.5. </span>Sorting, rating and ranking tools<a class="headerlink" href="#sorting-rating-and-ranking-tools" title="Link to this heading"></a></h3>
 <ul>
 <li><dl>
-<dt><a class="reference internal" href="#ratingdigraphs-label"><span class="std std-ref">ratingDigraphs module</span></a></dt><dd><p>Tools for solving relative and absolute rating problems with the abstract root <a class="reference internal" href="#ratingDigraphs.RatingDigraph" title="ratingDigraphs.RatingDigraph"><code class="xref py py-class docutils literal notranslate"><span class="pre">RatingDigraph</span></code></a> class;</p>
+<dt><a class="reference internal" href="#ratingdigraphs-label"><span class="std std-ref">ratingDigraphs module</span></a></dt><dd><p>Tools for solving relative and absolute rating problems with the abstract generic root <a class="reference internal" href="#ratingDigraphs.RatingDigraph" title="ratingDigraphs.RatingDigraph"><code class="xref py py-class docutils literal notranslate"><span class="pre">RatingDigraph</span></code></a> class;</p>
 <div class="graphviz"><object data="_images/inheritance-7be2e43d453d96ffe4a49f536855d061e1b19d23.svg" type="image/svg+xml" class="inheritance graphviz">
 <p class="warning">Inheritance diagram of ratingDigraphs</p></object></div>
 </dd>
 </dl>
 </li>
 <li><dl>
-<dt><a class="reference internal" href="#sortingdigraphs-label"><span class="std std-ref">sortingDigraphs module</span></a></dt><dd><p>Additional tools for solving sorting problems with the root <a class="reference internal" href="#sortingDigraphs.SortingDigraph" title="sortingDigraphs.SortingDigraph"><code class="xref py py-class docutils literal notranslate"><span class="pre">SortingDigraph</span></code></a> class and the main
+<dt><a class="reference internal" href="#sortingdigraphs-label"><span class="std std-ref">sortingDigraphs module</span></a></dt><dd><p>Additional tools for solving sorting problems with the generic root <a class="reference internal" href="#sortingDigraphs.SortingDigraph" title="sortingDigraphs.SortingDigraph"><code class="xref py py-class docutils literal notranslate"><span class="pre">SortingDigraph</span></code></a> class and the main
 <a class="reference external" href="techDoc.html#sortingDigraphs.QuantilesSortingDigraph">QuantilesSortingDigraph</a>
 class;</p>
 <div class="graphviz"><object data="_images/inheritance-399ac9a2eeb05eec7855db331eb3fef99f5dabe2.svg" type="image/svg+xml" class="inheritance graphviz">
@@ -1484,7 +1479,7 @@ class;</p>
 </li>
 <li><dl>
 <dt><a class="reference internal" href="#linearorders-label"><span class="std std-ref">linearOrders module</span></a></dt><dd><p>Additional tools for solving linearly ranking problems with the
-abstract root <a class="reference external" href="techDoc.html#linearOrders.LinearOrder">LinearOrder</a>
+abstract generic root <a class="reference external" href="techDoc.html#linearOrders.LinearOrder">LinearOrder</a>
 class;</p>
 <div class="graphviz"><object data="_images/inheritance-34c8b7ca13f0092128e7e4fd6c6b3e4930b24c1c.svg" type="image/svg+xml" class="inheritance graphviz">
 <p class="warning">Inheritance diagram of linearOrders</p></object></div>
@@ -1493,7 +1488,7 @@ class;</p>
 </li>
 <li><dl>
 <dt><a class="reference internal" href="#transitivedigraphs-label"><span class="std std-ref">transitiveDigraphs module</span></a></dt><dd><p>Additional tools for solving pre-ranking problems with abstract
-root <a class="reference external" href="techDoc.html#transitiveDigraphs.TransitiveDigraph">TransitiveDigraph</a> class.</p>
+generic root <a class="reference external" href="techDoc.html#transitiveDigraphs.TransitiveDigraph">TransitiveDigraph</a> class.</p>
 <div class="graphviz"><object data="_images/inheritance-3a027376e3d12bcf78a3570c9981b8bd0bd4fe6f.svg" type="image/svg+xml" class="inheritance graphviz">
 <p class="warning">Inheritance diagram of transitiveDigraphs</p></object></div>
 </dd>

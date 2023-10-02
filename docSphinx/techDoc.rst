@@ -50,21 +50,22 @@ Installation
 
 Three download options are given:
 
-1. Either (easiest under Linux or Mac OS-X), by using a git client and cloning from github.com::
+1. With a browser access,  download and extract the latest distribution zip archive either, from the `github link above <https://github.com/rbisdorff/Digraph3>`_  or, from the `sourceforge page <https://sourceforge.net/projects/digraph3/>`_ .
+
+2. By using a git client and cloning (easiest under Linux or Mac OS-X) either from github.com::
 
      ...$ git clone https://github.com/rbisdorff/Digraph3
 
-2. Or from sourceforge.net::
+3. Or, from sourceforge.net::
   
      ...$ git clone https://git.code.sf.net/p/digraph3/code Digraph3
      
-3. Or, with a browser access,  download and extract the latest distribution zip archive either, from the `github link above <https://github.com/rbisdorff/Digraph3>`_  or, from the `sourceforge page <https://sourceforge.net/projects/digraph3/>`_ .
 
 On Linux or Mac OS, ..$ *cd* to the extracted <Digraph3> directory::
 
      ../Digraph3$ make installVenv
           
-installs the Digraph3 modules in an activated virtual Python environment (the official Python recommended option), or in the user's local python3 *site-packages*. As of Python 3.11, it is necessary to previously install the *wheel* package ( ...$ python3.11 -m pip install wheel).
+installs the Digraph3 modules in an activated virtual Python environment (the Python recommended option), or in the user's local python3 *site-packages*. As of Python 3.11, it is necessary to previously install the *wheel* package ( ...$ python3.11 -m pip install wheel).
 
 Whereas::
 
@@ -78,7 +79,7 @@ From Python3.10.4 on, the *distutils* package and the direct usage of *setup.py*
 
 This *make* command  launches in fact a *${PYTHON} -m pip -v install --upgrade --scr = .* command that installs the Digraph3 modules in the running virtual environment (recommended option) or the user's local *site-packages* directory. A system wide installation is possible with prefixing the *make installPip* commad with *sudo*.
 
-If the **cython** (https://cython.org/) C-compiled modules for Big Data applications are required, it is necessary to previously install the *cython*  and the *wheel* packages in the running Python environment::
+If the **cython** (https://cython.org/) C-compiled modules for Big Data applications are required, it is necessary to previously install the *cython* package and, if not yeat installed, the *wheel*  package in the running Python environment::
 
      ...$ python3 -m pip install cython wheel
 
@@ -106,9 +107,6 @@ Individual module *pytest* suites are also provided (see the makefile), like the
 
 * To be fully functional, the Digraph3 resources mainly need the `graphviz <https://graphviz.org>`_ tools and the `R statistics resources <https://www.r-project.org>`_ to be installed.
 * When exploring digraph isomorphisms, the `nauty <https://www.cs.sunysb.edu/~algorith/implement/nauty/implement.shtml>`_ isomorphism testing program is required.
-* A specific actions clustering method of the `OutrankingDigraph <techDoc.html#outrankingDigraphs.OutrankingDigraph>`_ class furthermore requires the *calmat* matrix computing resource to be installed (see the calmat directory in Digraph3 resources)::
-
-     ../Digraph3/calmat$ less README
 
 .. _Modules-organisation-label:
 
@@ -121,14 +119,14 @@ Basic modules
 .............
 
 * :ref:`digraphs-label`  
-     Main part of the Digraph3 source code with the root `Digraph
+     Main part of the Digraph3 source code with the generic root `Digraph
      <techDoc.html#digraphs.Digraph>`_ class.
 
      .. inheritance-diagram:: digraphs
 	:parts: 1
      
 * :ref:`graphs-label`
-     Resources for handling undirected graphs with the root `Graph
+     Resources for handling undirected graphs with the generic root `Graph
      <techDoc.html#graphs.Graph>`_ class and a brigde to the
      :py:mod:`digraphs` module resources.
 
@@ -136,7 +134,7 @@ Basic modules
 	:parts: 1
      
 * :ref:`perfTabs-label`
-     Tools for handling multiple criteria performance tableaux with
+     Tools for handling multiple criteria performance tableaux with the generic 
      root `PerformanceTableau
      <techDoc.html#perfTabs.PerformanceTableau>`_ class.
 
@@ -144,7 +142,7 @@ Basic modules
 	:parts: 1
      
 * :ref:`outrankingDigraphs-label`
-     Root module for handling outranking digraphs with the abstract root :py:class:`~outrankingDigraphs.OutrankingDigraph` classs and the main
+     Root module for handling outranking digraphs with the abstract generic root :py:class:`~outrankingDigraphs.OutrankingDigraph` classs and the main
      `BipolarOutrankingDigraph
      <techDoc.html#outrankingDigraphs.BipolarOutrankingDigraph>`_
      class. Notice that the outrankingDigraph class defines a hybrid object type, inheriting conjointly from the :py:class:`~digraphs.Digraph` class *and* the :py:class:`~perfTabs.PerformanceTableau` class.
@@ -164,7 +162,7 @@ Basic modules
      
 * :ref:`pairings-label` 
      Classes and methods for computing fair pairings solutions
-     with abstract root :py:class:`~pairings.Pairing` class.
+     with abstract generic root :py:class:`~pairings.Pairing` class.
 
      .. inheritance-diagram:: pairings
 	:top-classes: pairings.Pairing
@@ -172,7 +170,7 @@ Basic modules
 
 * :ref:`dynamicProgramming-label` 
      Classes and methods for solving dynamic programming problems
-     with root :py:class:`~dynamicProgramming.DynamicProgrammingDigraph` class.
+     with generic root :py:class:`~dynamicProgramming.DynamicProgrammingDigraph` class.
 
      .. inheritance-diagram:: dynamicProgramming
 	:parts: 1
@@ -230,14 +228,14 @@ Sorting, rating and ranking tools
 .................................
 
 * :ref:`ratingDigraphs-label`
-     Tools for solving relative and absolute rating problems with the abstract root :py:class:`~ratingDigraphs.RatingDigraph` class;
+     Tools for solving relative and absolute rating problems with the abstract generic root :py:class:`~ratingDigraphs.RatingDigraph` class;
 
      .. inheritance-diagram:: ratingDigraphs
 	:top-classes: ratingDigraphs.RatingDigraph
 	:parts: 1
 
 * :ref:`sortingDigraphs-label`
-     Additional tools for solving sorting problems with the root :py:class:`~sortingDigraphs.SortingDigraph` class and the main
+     Additional tools for solving sorting problems with the generic root :py:class:`~sortingDigraphs.SortingDigraph` class and the main
      `QuantilesSortingDigraph <techDoc.html#sortingDigraphs.QuantilesSortingDigraph>`_
      class;
 
@@ -247,7 +245,7 @@ Sorting, rating and ranking tools
      
 * :ref:`linearOrders-label` 
      Additional tools for solving linearly ranking problems with the
-     abstract root `LinearOrder <techDoc.html#linearOrders.LinearOrder>`_
+     abstract generic root `LinearOrder <techDoc.html#linearOrders.LinearOrder>`_
      class;
 
      .. inheritance-diagram:: linearOrders
@@ -256,7 +254,7 @@ Sorting, rating and ranking tools
      
 * :ref:`transitiveDigraphs-label` 
      Additional tools for solving pre-ranking problems with abstract
-     root `TransitiveDigraph <techDoc.html#transitiveDigraphs.TransitiveDigraph>`_ class.
+     generic root `TransitiveDigraph <techDoc.html#transitiveDigraphs.TransitiveDigraph>`_ class.
 
      .. inheritance-diagram:: transitiveDigraphs
         :top-classes: transitiveDigraphs.TransitiveDigraph
