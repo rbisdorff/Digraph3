@@ -144,19 +144,24 @@ Using the Digraph3 modules is easy. You only need to have installed on your syst
 
 Several download options (easiest under Linux or Mac OS-X) are given.
 
-1. Either, by using a git client either, from github
+1. (*Recommended*) With a browser access, download and extract the latest distribution zip archive from
+
+   https://github.com/rbisdorff/Digraph3  or, from
+
+   https://sourceforge.net/projects/digraph3
+
+2. By using a git client either, cloning from github --*mind the huge commit history*
 
 .. code-block:: bash
    
     ...$ git clone https://github.com/rbisdorff/Digraph3 
 
-2. Or, from sourceforge.net
+3. Or, from sourceforge.net
 
 .. code-block:: bash    
 
     ...$ git clone https://git.code.sf.net/p/digraph3/code Digraph3 
 
-3. Or, with a browser access, download and extract the latest distribution zip archive either, from the `github link above <https://github.com/rbisdorff/Digraph3>`_  or, from the `sourceforge page <https://sourceforge.net/projects/digraph3/>`_ .
 
 .. only:: html
 

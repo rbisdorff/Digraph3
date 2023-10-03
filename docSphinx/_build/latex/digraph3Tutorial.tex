@@ -64,8 +64,8 @@
 
 
 \title{Tutorials for the Digraph3 Python software resources}
-\date{May 23, 2023}
-\release{3.11.3}
+\date{October 03, 2023}
+\release{3.11.5}
 \author{Raymond Bisdorff}
 \newcommand{\sphinxlogo}{\sphinxincludegraphics{introDoc3.png}\par}
 \renewcommand{\releasename}{Release}
@@ -207,7 +207,7 @@ The Python development of these computing resources offers the advantage of an e
 \subsubsection{Downloading of the Digraph3 resources}
 \label{\detokenize{tutorial:downloading-of-the-digraph3-resources}}
 \sphinxAtStartPar
-Using the Digraph3 modules is easy. You only need to have installed on your system the \sphinxhref{https://www.python.org/doc/}{Python} (https://www.python.org/doc/) programming language of version 3.+ (readily available under Linux and Mac OS). Notice that, from Version 3.3 on, the Python standard decimal module implements very efficiently its decimal.Decimal class in C. Now, Decimal objects are mainly used in the Digraph3 characteristic r\sphinxhyphen{}valuation functions, which makes the recent python\sphinxhyphen{}3.7+ versions much faster (more than twice as fast) when extensive digraph operations are performed.
+Using the Digraph3 modules is easy. You only need to have installed on your system the \sphinxhref{https://www.python.org/doc/}{Python} (https://www.python.org/doc/) programming language of version 3.+ (readily available under Linux and Mac OS).
 
 \sphinxAtStartPar
 Several download options (easiest under Linux or Mac OS\sphinxhyphen{}X) are given.
@@ -215,7 +215,17 @@ Several download options (easiest under Linux or Mac OS\sphinxhyphen{}X) are giv
 \sphinxsetlistlabels{\arabic}{enumi}{enumii}{}{.}%
 \item {} 
 \sphinxAtStartPar
-Either, by using a git client either, from github
+(\sphinxstyleemphasis{Recommended}) With a browser access, download and extract the latest distribution zip archive from
+
+\sphinxAtStartPar
+\sphinxurl{https://github.com/rbisdorff/Digraph3}  or, from
+
+\sphinxAtStartPar
+\sphinxurl{https://sourceforge.net/projects/digraph3}
+
+\item {} 
+\sphinxAtStartPar
+By using a git client either, cloning from github \textendash{}\sphinxstyleemphasis{mind the huge commit history}
 
 \end{enumerate}
 
@@ -224,7 +234,7 @@ Either, by using a git client either, from github
 \end{sphinxVerbatim}
 \begin{enumerate}
 \sphinxsetlistlabels{\arabic}{enumi}{enumii}{}{.}%
-\setcounter{enumi}{1}
+\setcounter{enumi}{2}
 \item {} 
 \sphinxAtStartPar
 Or, from sourceforge.net
@@ -234,14 +244,6 @@ Or, from sourceforge.net
 \begin{sphinxVerbatim}[commandchars=\\\{\}]
 ...\PYGZdl{} git clone https://git.code.sf.net/p/digraph3/code Digraph3
 \end{sphinxVerbatim}
-\begin{enumerate}
-\sphinxsetlistlabels{\arabic}{enumi}{enumii}{}{.}%
-\setcounter{enumi}{2}
-\item {} 
-\sphinxAtStartPar
-Or, with a browser access, download and extract the latest distribution zip archive either, from the \sphinxhref{https://github.com/rbisdorff/Digraph3}{github link above} (https://github.com/rbisdorff/Digraph3)  or, from the \sphinxhref{https://sourceforge.net/projects/digraph3/}{sourceforge page} (https://sourceforge.net/projects/digraph3/) .
-
-\end{enumerate}
 
 
 \subsubsection{Starting a Python3 terminal session}
@@ -258,7 +260,7 @@ Python \PYG{l+m}{3}.10.0 \PYG{o}{(}default, Oct \PYG{l+m}{21} \PYG{l+m}{2021}, \
 \end{sphinxVerbatim}
 
 \sphinxAtStartPar
-For exploring the classes and methods provided by the \sphinxstyleemphasis{Digraph3} modules (see the \sphinxhref{techDoc.html}{Reference manual}) enter the \sphinxstyleemphasis{Python3} commands following the session prompts marked with \sphinxcode{\sphinxupquote{\textgreater{}\textgreater{}\textgreater{}}} or \sphinxcode{\sphinxupquote{...}} . The lines without the prompt are output from the Python3 interpreter.
+For exploring the classes and methods provided by the \sphinxstyleemphasis{Digraph3} modules (see the \sphinxhref{techDoc.html}{Reference manual}) enter the \sphinxstyleemphasis{Python3} commands following the session prompts marked with \sphinxcode{\sphinxupquote{\textgreater{}\textgreater{}\textgreater{}}} or \sphinxcode{\sphinxupquote{...}} . The lines without the prompt are console output from the Python3 interpreter.
 \sphinxSetupCaptionForVerbatim{Generating a random digraph instance}
 \def\sphinxLiteralBlockLabel{\label{\detokenize{tutorial:digraphs}}}
 \fvset{hllines={, 3, 11, 12,}}%
@@ -10988,7 +10990,7 @@ In order to guide the matching decisions, each person of group \sphinxstyleempha
 The set of all potential matching decisions corresponds to the set of maximal matchings of the complete bipartite graph formed by the two groups \sphinxstyleemphasis{A} and \sphinxstyleemphasis{B}. Its cardinality is factorial \sphinxstyleemphasis{k}.
 
 \sphinxAtStartPar
-How to choose now in this possibly huge set the one maximal matching that makes a fair balance of the given individual pairing preferences? To help make this decision we will compute for all maximal matchings a fitness score consisting of its average ordinal correlation with the given marginal pairing preferences. Eventually we will choose a maximal matching that results in the highest possible fitness score.
+How to choose now in this possibly huge set the one maximal matching that makes a fair balance of the given individual pairing preferences? To help make this decision we will compute for all maximal matchings a fitness score consisting of their average ordinal correlation index with the given marginal pairing preferences. Eventually we will choose a maximal matching that results in the highest possible fitness score.
 
 \sphinxAtStartPar
 Let us consider for instance a set of four persons divided into group A, \{\sphinxstyleemphasis{a1}, \sphinxstyleemphasis{a2}\}, and group \sphinxstyleemphasis{B}, \{\sphinxstyleemphasis{b1}, \sphinxstyleemphasis{b2}\}. Person \sphinxstyleemphasis{a1} prefers as partner Person \sphinxstyleemphasis{b2}, and Person \sphinxstyleemphasis{a2} prefers as partner Person \sphinxstyleemphasis{b1}. Reciprocally, Person \sphinxstyleemphasis{b1} prefers Person \sphinxstyleemphasis{a2} over \sphinxstyleemphasis{a1} and Person \sphinxstyleemphasis{b2} finally prefers \sphinxstyleemphasis{a1} over \sphinxstyleemphasis{a2}. There exist only two possible maximal matchings,
@@ -11024,12 +11026,12 @@ Let us consider two groups of size \sphinxstyleemphasis{k} = 5. Individual pairi
 \PYG{g+gp}{... }        \PYG{n}{numberOfVoters}\PYG{o}{=}\PYG{n}{k}\PYG{p}{,}\PYG{n}{numberOfCandidates}\PYG{o}{=}\PYG{n}{k}\PYG{p}{,}
 \PYG{g+gp}{... }        \PYG{n}{votersIdPrefix}\PYG{o}{=}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{a}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{,}
 \PYG{g+gp}{... }        \PYG{n}{candidatesIdPrefix}\PYG{o}{=}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{b}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{,}\PYG{n}{seed}\PYG{o}{=}\PYG{l+m+mi}{1}\PYG{p}{)}
-\PYG{g+gp}{... }\PYG{n}{lvA1}\PYG{o}{.}\PYG{n}{save}\PYG{p}{(}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{lvA1}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{)}
+\PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{lvA1}\PYG{o}{.}\PYG{n}{save}\PYG{p}{(}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{lvA1}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{)}
 \PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{lvB1} \PYG{o}{=} \PYG{n}{RandomLinearVotingProfile}\PYG{p}{(}
 \PYG{g+gp}{... }        \PYG{n}{numberOfVoters}\PYG{o}{=}\PYG{n}{k}\PYG{p}{,}\PYG{n}{numberOfCandidates}\PYG{o}{=}\PYG{n}{k}\PYG{p}{,}
 \PYG{g+gp}{... }        \PYG{n}{votersIdPrefix}\PYG{o}{=}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{b}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{,}
 \PYG{g+gp}{... }        \PYG{n}{candidatesIdPrefix}\PYG{o}{=}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{a}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{,}\PYG{n}{seed}\PYG{o}{=}\PYG{l+m+mi}{2}\PYG{p}{)}
-\PYG{g+gp}{... }\PYG{n}{lvB1}\PYG{o}{.}\PYG{n}{save}\PYG{p}{(}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{lvB1}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{)}
+\PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{lvB1}\PYG{o}{.}\PYG{n}{save}\PYG{p}{(}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{lvB1}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{)}
 \end{sphinxVerbatim}
 \sphinxresetverbatimhllines
 
@@ -11210,7 +11212,7 @@ The \sphinxcode{\sphinxupquote{pairings}} module provides the \sphinxcode{\sphin
 \sphinxresetverbatimhllines
 
 \sphinxAtStartPar
-The class takes as input two reciprocal \sphinxcode{\sphinxupquote{VotingProfile}} objects describing the individual pairing preferences of the two groups \sphinxstyleemphasis{A} and \sphinxstyleemphasis{B}  of persons. The class constructor delivers the attributes shown above. \sphinxstyleemphasis{vpA} and \sphinxstyleemphasis{vpB} contain the pairing preferences. The \sphinxstyleemphasis{pairings} attribute gathers all the potential maximal matchings \textendash{}the decision actions\textendash{} ordered by decreasing average ordinal correlation with the individual pairing preferences, whereas the \sphinxstyleemphasis{matching} attribute delivers directly the first\sphinxhyphen{}ranked maximal matching \textendash{}\sphinxstyleemphasis{pairings{[}0{]}{[}0{]}}\textendash{} and may be consulted as shown in the Listing below. The resulting \sphinxstyleemphasis{fp} object models in fact a \sphinxcode{\sphinxupquote{BipartiteGraph}} object where the \sphinxstyleemphasis{vertices} correspond to the set of persons in both groups and the bipartite \sphinxstyleemphasis{edges} model the fairest maximal matching. The \sphinxcode{\sphinxupquote{showFairestPairing()}} method prints out the fairest matching.
+The class takes as input two reciprocal \sphinxcode{\sphinxupquote{VotingProfile}} objects describing the individual pairing preferences of the two groups \sphinxstyleemphasis{A} and \sphinxstyleemphasis{B}  of persons. The class constructor delivers the attributes shown above. \sphinxstyleemphasis{vpA} and \sphinxstyleemphasis{vpB} contain the pairing preferences. The \sphinxstyleemphasis{pairings} attribute gathers all maximal matchings \textendash{}the potential decision actions\textendash{} ordered by decreasing average ordinal correlation with the individual pairing preferences, whereas the \sphinxstyleemphasis{matching} attribute delivers directly the first\sphinxhyphen{}ranked maximal matching \textendash{}\sphinxstyleemphasis{pairings{[}0{]}{[}0{]}}\textendash{} and may be consulted as shown in the Listing below. The resulting \sphinxstyleemphasis{fp} object models in fact a \sphinxcode{\sphinxupquote{BipartiteGraph}} object where the \sphinxstyleemphasis{vertices} correspond to the set of persons in both groups and the bipartite \sphinxstyleemphasis{edges} model the fairest maximal matching. The \sphinxcode{\sphinxupquote{showFairestPairing()}} method prints out the fairest matching.
 
 \fvset{hllines={, 11, 12, 14, 15, 20, 21, 23,}}%
 \begin{sphinxVerbatim}[commandchars=\\\{\},numbers=left,firstnumber=1,stepnumber=1]

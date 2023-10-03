@@ -64,8 +64,8 @@
 
 
 \title{Digraph3 Advanced Topics}
-\date{May 23, 2023}
-\release{3.11.3}
+\date{October 03, 2023}
+\release{3.11.5}
 \author{Raymond Bisdorff}
 \newcommand{\sphinxlogo}{\sphinxincludegraphics{introDoc3.png}\par}
 \renewcommand{\releasename}{Release}
@@ -2037,7 +2037,7 @@ The linear voting profile shown in \hyperref[\detokenize{pearls:condorcet3}]{Lis
 \sphinxresetverbatimhllines
 
 \sphinxAtStartPar
-In ordinary elections, only the votes for first\sphinxhyphen{}ranked candidates are communicated and counted, so that candidate \sphinxstyleemphasis{A} with a plurality of 23 votes would actually win the election. As \sphinxstyleemphasis{A} does not obtain an absolute majority of votes (23/60 38.3\%), it is often common practice to organise an instant runoff voting. In this case, candidate \sphinxstyleemphasis{C} with the lowest uninominal votes will be eliminated in the first stage (see Line 24). If the voters do not change their preferences in between the election stages, candidate \sphinxstyleemphasis{B} eventually wins against \sphinxstyleemphasis{A} with a  58.3\% (35/60) majority of votes (see Line 31). Is candidate \sphinxstyleemphasis{B} now a more convincing winner than candidate \sphinxstyleemphasis{A} ?
+In ordinary elections, only the votes for first\sphinxhyphen{}ranked candidates are communicated and counted, so that candidate \sphinxstyleemphasis{A} with a plurality of 23 votes would actually win the election. As \sphinxstyleemphasis{A} does not obtain an absolute majority of votes (23/60 38.3\%), it is often common practice to organise a runoff voting. In this case, candidate \sphinxstyleemphasis{C} with the lowest uninominal votes will be eliminated in the first stage (see Line 24). If the voters do not change their preferences in between the election stages, candidate \sphinxstyleemphasis{B} eventually wins against \sphinxstyleemphasis{A} with a  58.3\% (35/60) majority of votes (see Line 31). Is candidate \sphinxstyleemphasis{B} now a more convincing winner than candidate \sphinxstyleemphasis{A} ?
 
 \sphinxAtStartPar
 Disposing supposedly here of a complete linear voting profile, \sphinxstyleemphasis{Condorcet}, in order to answer this question, recommends to compute an election result for all 6 pairwise comparisons of the candidates. This may be done with the \sphinxcode{\sphinxupquote{MajorityMarginsDigraph}} class constructor as shown in \hyperref[\detokenize{pearls:condorcet5}]{Listing \ref{\detokenize{pearls:condorcet5}}}.
