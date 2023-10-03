@@ -50,9 +50,14 @@ Installation
 
 Three download options are given:
 
-1. With a browser access,  download and extract the latest distribution zip archive either, from the `github link above <https://github.com/rbisdorff/Digraph3>`_  or, from the `sourceforge page <https://sourceforge.net/projects/digraph3/>`_ .
+1. With a browser access, download and extract the latest distribution zip archive either, from
 
-2. By using a git client and cloning (easiest under Linux or Mac OS-X) either from github.com::
+   https://github.com/rbisdorff/Digraph3  or, from
+
+   https://sourceforge.net/projects/digraph3/
+
+
+2. By using a git client and cloning (mind the poential huge commit history) either from github.com::
 
      ...$ git clone https://github.com/rbisdorff/Digraph3
 
