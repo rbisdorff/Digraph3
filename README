@@ -23,26 +23,31 @@ This Python3 software resources implement decision aid algorithms useful in the 
 Algorithmic Decision Theory and more specifically 
 in outranking based Multiple Criteria Decision Aid (MCDA).
 
-Installation instructions:
+**Downloading options**
 
-On a (Unix, Mac OSX) command line using a git client and either, cloning from github.com:
+1. You may download and extract a zip archive eithre, from the github link:
 
-...$ git clone https://github.com/rbisdorff/Digraph3
+    https://github.com/rbisdorff/Digraph3
+
+or, from the sourceforge link:
+
+    https://sourceforge.net/projects/digraph3/
+
+2. On a (Unix, Mac OSX) you may also use a git client and either, cloning from github.com:
+
+    ...$ git clone https://github.com/rbisdorff/Digraph3
 
 or, from sourceforge.net:
 
-...$ git clone https://git.code.sf.net/p/digraph3/code Digraph3
+    ...$ git clone https://git.code.sf.net/p/digraph3/code Digraph3
 
-You may also download and extract a zip archive fom the github link above, or a 
- zip archive (not always the latest) from 
-
-https://sourceforge.net/projects/digraph3/.
+**Installation instructon**
 
 On Linux or Mac OS, ..$ *cd* to the extracted <Digraph3> directory::
 
      ../Digraph3$ make installVenv
           
-installs the Digraph3 modules in an activated virtual Python environment (the official python recommended option), or in the user's local python3 *site-packages*. Whereas::
+installs the Digraph3 modules in an activated virtual Python environment (*the official python recommended option*), or in the user's local python3 *site-packages*. Whereas::
 
      ../Digraph3$ make install
 
@@ -52,9 +57,11 @@ From Python3.10.4 on, the *distutils* package and the direct usage of *setup.py*
 
      ../Digraph3$ make installPip
 
-This *make* command  launches in fact a *${PYTHON} -m pip -v install --upgrade --scr = .* command that installs the Digraph3 modules in the running virtual environment (recommended option) or the user's local *site-packages* directory. A system wide installation is possible with prefixing the *make installPip* commad with *sudo*.
+This *make* command  launches in fact a *${PYTHON} -m pip -v install --upgrade --scr = .* command that installs the Digraph3 modules in the running virtual environment (recommended option) or the user's local *site-packages* directory. A system wide installation is possible with prefixing the *make installPip* command with *sudo*.
 
-If the cython C-compiled modules for Big Data are required, the Cython package must previously be installed in the running Python environment (...$ python3 -m pip install cython).
+If the cython C-compiled modules for Big Data are required, the Cython package must previously be installed in the running Python environment (...$ python3 -m pip install cython, wheel).
+
+**Testing the installation**
 
 .. /Digraph3$ make tests
 

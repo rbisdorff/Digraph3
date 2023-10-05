@@ -57,7 +57,7 @@ Three download options are given:
    https://sourceforge.net/projects/digraph3/
 
 
-2. By using a git client and cloning (mind the possible huge commit history) either from github.com::
+2. By using a git client and cloning (*mind the huge commit history*) either from github.com::
 
      ...$ git clone https://github.com/rbisdorff/Digraph3
 
