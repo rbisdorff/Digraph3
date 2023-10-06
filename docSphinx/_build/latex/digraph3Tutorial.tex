@@ -9,6 +9,9 @@
 \fi
 %% let collapsible pdf bookmarks panel have high depth per default
 \PassOptionsToPackage{bookmarksdepth=5}{hyperref}
+
+\PassOptionsToPackage{booktabs}{sphinx}
+\PassOptionsToPackage{colorrows}{sphinx}
 \PassOptionsToPackage{svgnames}{xcolor}
 \PassOptionsToPackage{warn}{textcomp}
 \usepackage[utf8]{inputenc}
@@ -64,7 +67,7 @@
 
 
 \title{Tutorials for the Digraph3 Python software resources}
-\date{October 03, 2023}
+\date{October 06, 2023}
 \release{3.11.5}
 \author{Raymond Bisdorff}
 \newcommand{\sphinxlogo}{\sphinxincludegraphics{introDoc3.png}\par}
@@ -225,12 +228,12 @@ Several download options (easiest under Linux or Mac OS\sphinxhyphen{}X) are giv
 
 \item {} 
 \sphinxAtStartPar
-By using a git client either, cloning from github \textendash{}\sphinxstyleemphasis{mind the huge commit history}
+By using a git client either, cloning from github
 
 \end{enumerate}
 
 \begin{sphinxVerbatim}[commandchars=\\\{\}]
-...\PYGZdl{} git clone https://github.com/rbisdorff/Digraph3
+...\PYGZdl{}\PYG{+w}{ }git\PYG{+w}{ }clone\PYG{+w}{ }https://github.com/rbisdorff/Digraph3
 \end{sphinxVerbatim}
 \begin{enumerate}
 \sphinxsetlistlabels{\arabic}{enumi}{enumii}{}{.}%
@@ -242,7 +245,7 @@ Or, from sourceforge.net
 \end{enumerate}
 
 \begin{sphinxVerbatim}[commandchars=\\\{\}]
-...\PYGZdl{} git clone https://git.code.sf.net/p/digraph3/code Digraph3
+...\PYGZdl{}\PYG{+w}{ }git\PYG{+w}{ }clone\PYG{+w}{ }https://git.code.sf.net/p/digraph3/code\PYG{+w}{ }Digraph3
 \end{sphinxVerbatim}
 
 
@@ -252,10 +255,10 @@ Or, from sourceforge.net
 You may start an interactive Python3 terminal session in the \sphinxstyleemphasis{Digraph3} directory.
 
 \begin{sphinxVerbatim}[commandchars=\\\{\},numbers=left,firstnumber=1,stepnumber=1]
-\PYG{n+nv}{\PYGZdl{}HOME}/.../Digraph3\PYGZdl{} python3
-Python \PYG{l+m}{3}.10.0 \PYG{o}{(}default, Oct \PYG{l+m}{21} \PYG{l+m}{2021}, \PYG{l+m}{10}:53:53\PYG{o}{)}
-\PYG{o}{[}GCC \PYG{l+m}{11}.2.0\PYG{o}{]} on linux Type \PYG{l+s+s2}{\PYGZdq{}help\PYGZdq{}}, \PYG{l+s+s2}{\PYGZdq{}copyright\PYGZdq{}},
-\PYG{l+s+s2}{\PYGZdq{}credits\PYGZdq{}} or \PYG{l+s+s2}{\PYGZdq{}license\PYGZdq{}} \PYG{k}{for} more information.
+\PYG{n+nv}{\PYGZdl{}HOME}/.../Digraph3\PYGZdl{}\PYG{+w}{ }python3
+Python\PYG{+w}{ }\PYG{l+m}{3}.10.0\PYG{+w}{ }\PYG{o}{(}default,\PYG{+w}{ }Oct\PYG{+w}{ }\PYG{l+m}{21}\PYG{+w}{ }\PYG{l+m}{2021},\PYG{+w}{ }\PYG{l+m}{10}:53:53\PYG{o}{)}
+\PYG{o}{[}GCC\PYG{+w}{ }\PYG{l+m}{11}.2.0\PYG{o}{]}\PYG{+w}{ }on\PYG{+w}{ }linux\PYG{+w}{ }Type\PYG{+w}{ }\PYG{l+s+s2}{\PYGZdq{}help\PYGZdq{}},\PYG{+w}{ }\PYG{l+s+s2}{\PYGZdq{}copyright\PYGZdq{}},
+\PYG{l+s+s2}{\PYGZdq{}credits\PYGZdq{}}\PYG{+w}{ }or\PYG{+w}{ }\PYG{l+s+s2}{\PYGZdq{}license\PYGZdq{}}\PYG{+w}{ }\PYG{k}{for}\PYG{+w}{ }more\PYG{+w}{ }information.
 \PYGZgt{}\PYGZgt{}\PYGZgt{}
 \end{sphinxVerbatim}
 
@@ -1855,15 +1858,15 @@ If needed for instance in an R session, a CSV version of the performance tableau
 \end{sphinxVerbatim}
 
 \begin{sphinxVerbatim}[commandchars=\\\{\},numbers=left,firstnumber=1,stepnumber=1]
-...\PYGZdl{} less temp.csv
- \PYG{l+s+s2}{\PYGZdq{}actions\PYGZdq{}},\PYG{l+s+s2}{\PYGZdq{}g1\PYGZdq{}},\PYG{l+s+s2}{\PYGZdq{}g2\PYGZdq{}},\PYG{l+s+s2}{\PYGZdq{}g3\PYGZdq{}},\PYG{l+s+s2}{\PYGZdq{}g4\PYGZdq{}},\PYG{l+s+s2}{\PYGZdq{}g5\PYGZdq{}}
- \PYG{l+s+s2}{\PYGZdq{}a1\PYGZdq{}},1.00,\PYGZhy{}17.92,\PYGZhy{}33.99,26.68,3.00
- \PYG{l+s+s2}{\PYGZdq{}a2\PYGZdq{}},8.00,\PYGZhy{}30.71,\PYGZhy{}77.77,66.35,6.00
- \PYG{l+s+s2}{\PYGZdq{}a3\PYGZdq{}},8.00,\PYGZhy{}41.65,\PYGZhy{}69.84,53.43,8.00
- \PYG{l+s+s2}{\PYGZdq{}a4\PYGZdq{}},2.00,\PYGZhy{}39.49,\PYGZhy{}16.99,18.62,2.00
- \PYG{l+s+s2}{\PYGZdq{}a5\PYGZdq{}},6.00,\PYGZhy{}91.87,\PYGZhy{}74.85,83.09,7.00
- \PYG{l+s+s2}{\PYGZdq{}a6\PYGZdq{}},7.00,\PYGZhy{}32.47,\PYGZhy{}24.91,79.24,9.00
- \PYG{l+s+s2}{\PYGZdq{}a7\PYGZdq{}},4.00,\PYGZhy{}91.11,\PYGZhy{}7.44,48.22,7.00
+...\PYGZdl{}\PYG{+w}{ }less\PYG{+w}{ }temp.csv
+\PYG{+w}{ }\PYG{l+s+s2}{\PYGZdq{}actions\PYGZdq{}},\PYG{l+s+s2}{\PYGZdq{}g1\PYGZdq{}},\PYG{l+s+s2}{\PYGZdq{}g2\PYGZdq{}},\PYG{l+s+s2}{\PYGZdq{}g3\PYGZdq{}},\PYG{l+s+s2}{\PYGZdq{}g4\PYGZdq{}},\PYG{l+s+s2}{\PYGZdq{}g5\PYGZdq{}}
+\PYG{+w}{ }\PYG{l+s+s2}{\PYGZdq{}a1\PYGZdq{}},1.00,\PYGZhy{}17.92,\PYGZhy{}33.99,26.68,3.00
+\PYG{+w}{ }\PYG{l+s+s2}{\PYGZdq{}a2\PYGZdq{}},8.00,\PYGZhy{}30.71,\PYGZhy{}77.77,66.35,6.00
+\PYG{+w}{ }\PYG{l+s+s2}{\PYGZdq{}a3\PYGZdq{}},8.00,\PYGZhy{}41.65,\PYGZhy{}69.84,53.43,8.00
+\PYG{+w}{ }\PYG{l+s+s2}{\PYGZdq{}a4\PYGZdq{}},2.00,\PYGZhy{}39.49,\PYGZhy{}16.99,18.62,2.00
+\PYG{+w}{ }\PYG{l+s+s2}{\PYGZdq{}a5\PYGZdq{}},6.00,\PYGZhy{}91.87,\PYGZhy{}74.85,83.09,7.00
+\PYG{+w}{ }\PYG{l+s+s2}{\PYGZdq{}a6\PYGZdq{}},7.00,\PYGZhy{}32.47,\PYGZhy{}24.91,79.24,9.00
+\PYG{+w}{ }\PYG{l+s+s2}{\PYGZdq{}a7\PYGZdq{}},4.00,\PYGZhy{}91.11,\PYGZhy{}7.44,48.22,7.00
 \end{sphinxVerbatim}
 
 \sphinxAtStartPar
@@ -4019,13 +4022,13 @@ Back to {\hyperref[\detokenize{tutorial:tutorial-label}]{\sphinxcrossref{\DUrole
 \end{sphinxShadowBox}
 
 
-\sphinxstrong{See also:}
-\nopagebreak
-
+\begin{sphinxseealso}{See also:}
 
 \sphinxAtStartPar
 Lecture 7 notes from the MICS Algorithmic Decision Theory course: \sphinxcite{tutorial:adt-l7}.
 
+
+\end{sphinxseealso}
 
 
 
@@ -4036,13 +4039,14 @@ A SME, specialized in printing and copy services, has to move into new offices, 
 
 
 \begin{savenotes}\sphinxattablestart
+\sphinxthistablewithglobalstyle
 \centering
 \sphinxcapstartof{table}
 \sphinxthecaptionisattop
 \sphinxcaption{The potential new office sites}\label{\detokenize{tutorial:newoffsites}}
 \sphinxaftertopcaption
-\begin{tabulary}{\linewidth}[t]{|T|T|T|T|}
-\hline
+\begin{tabulary}{\linewidth}[t]{TTTT}
+\sphinxtoprule
 \sphinxstyletheadfamily 
 \sphinxAtStartPar
 ID
@@ -4056,7 +4060,8 @@ Address
 \sphinxAtStartPar
 Comment
 \\
-\hline
+\sphinxmidrule
+\sphinxtableatstartofbodyhook
 \sphinxAtStartPar
 A
 &
@@ -4069,7 +4074,7 @@ Avenue de la liberté
 \sphinxAtStartPar
 High standing city center
 \\
-\hline
+\sphinxhline
 \sphinxAtStartPar
 B
 &
@@ -4082,7 +4087,7 @@ Bonnevoie
 \sphinxAtStartPar
 Industrial environment
 \\
-\hline
+\sphinxhline
 \sphinxAtStartPar
 C
 &
@@ -4095,7 +4100,7 @@ Cessange
 \sphinxAtStartPar
 Residential suburb location
 \\
-\hline
+\sphinxhline
 \sphinxAtStartPar
 D
 &
@@ -4108,7 +4113,7 @@ Dommeldange
 \sphinxAtStartPar
 Industrial suburb environment
 \\
-\hline
+\sphinxhline
 \sphinxAtStartPar
 E
 &
@@ -4121,7 +4126,7 @@ Esch\sphinxhyphen{}Belval
 \sphinxAtStartPar
 New and ambitious urbanization far from the city
 \\
-\hline
+\sphinxhline
 \sphinxAtStartPar
 F
 &
@@ -4134,7 +4139,7 @@ Fentange
 \sphinxAtStartPar
 Out in the countryside
 \\
-\hline
+\sphinxhline
 \sphinxAtStartPar
 G
 &
@@ -4147,9 +4152,9 @@ Avenue de la Gare
 \sphinxAtStartPar
 Main city shopping street
 \\
-\hline
+\sphinxbottomrule
 \end{tabulary}
-\par
+\sphinxtableafterendhook\par
 \sphinxattableend\end{savenotes}
 
 \sphinxAtStartPar
@@ -4179,13 +4184,14 @@ A \sphinxstyleemphasis{coherent family} of performance criteria verifies: a) \sp
 
 
 \begin{savenotes}\sphinxattablestart
+\sphinxthistablewithglobalstyle
 \centering
 \sphinxcapstartof{table}
 \sphinxthecaptionisattop
 \sphinxcaption{The coherent family of performance criteria}\label{\detokenize{tutorial:offcrit}}
 \sphinxaftertopcaption
-\begin{tabulary}{\linewidth}[t]{|T|T|T|T|}
-\hline
+\begin{tabulary}{\linewidth}[t]{TTTT}
+\sphinxtoprule
 \sphinxstyletheadfamily 
 \sphinxAtStartPar
 Objective
@@ -4199,7 +4205,8 @@ Name
 \sphinxAtStartPar
 Comment
 \\
-\hline
+\sphinxmidrule
+\sphinxtableatstartofbodyhook
 \sphinxAtStartPar
 Yearly costs
 &
@@ -4212,7 +4219,7 @@ Costs
 \sphinxAtStartPar
 Annual rent, charges, and cleaning
 \\
-\hline
+\sphinxhline
 \sphinxAtStartPar
 
 &
@@ -4225,7 +4232,7 @@ Annual rent, charges, and cleaning
 \sphinxAtStartPar
 
 \\
-\hline
+\sphinxhline
 \sphinxAtStartPar
 Future turnover
 &
@@ -4238,7 +4245,7 @@ Standing
 \sphinxAtStartPar
 Image and presentation
 \\
-\hline
+\sphinxhline
 \sphinxAtStartPar
 Future turnover
 &
@@ -4251,7 +4258,7 @@ Visibility
 \sphinxAtStartPar
 Circulation of potential customers
 \\
-\hline
+\sphinxhline
 \sphinxAtStartPar
 Future turnover
 &
@@ -4264,7 +4271,7 @@ Proximity
 \sphinxAtStartPar
 Distance from town center
 \\
-\hline
+\sphinxhline
 \sphinxAtStartPar
 
 &
@@ -4277,7 +4284,7 @@ Distance from town center
 \sphinxAtStartPar
 
 \\
-\hline
+\sphinxhline
 \sphinxAtStartPar
 Working conditions
 &
@@ -4290,7 +4297,7 @@ Space
 \sphinxAtStartPar
 Working space
 \\
-\hline
+\sphinxhline
 \sphinxAtStartPar
 Working conditions
 &
@@ -4303,7 +4310,7 @@ Comfort
 \sphinxAtStartPar
 Quality of office equipment
 \\
-\hline
+\sphinxhline
 \sphinxAtStartPar
 Working conditions
 &
@@ -4316,9 +4323,9 @@ Parking
 \sphinxAtStartPar
 Available parking facilities
 \\
-\hline
+\sphinxbottomrule
 \end{tabulary}
-\par
+\sphinxtableafterendhook\par
 \sphinxattableend\end{savenotes}
 
 \sphinxAtStartPar
@@ -4326,13 +4333,14 @@ The evaluation of the seven potential sites on each criterion are gathered in th
 
 
 \begin{savenotes}\sphinxattablestart
+\sphinxthistablewithglobalstyle
 \centering
 \sphinxcapstartof{table}
 \sphinxthecaptionisattop
 \sphinxcaption{Performance evaluations of the potential office sites}\label{\detokenize{tutorial:offperftab}}
 \sphinxaftertopcaption
-\begin{tabulary}{\linewidth}[t]{|T|T|T|T|T|T|T|T|T|}
-\hline
+\begin{tabulary}{\linewidth}[t]{TTTTTTTTT}
+\sphinxtoprule
 \sphinxstyletheadfamily 
 \sphinxAtStartPar
 Criterion
@@ -4361,7 +4369,8 @@ F
 \sphinxAtStartPar
 G
 \\
-\hline
+\sphinxmidrule
+\sphinxtableatstartofbodyhook
 \sphinxAtStartPar
 Costs
 &
@@ -4389,7 +4398,7 @@ Costs
 \sphinxAtStartPar
 12.0K\texteuro{}
 \\
-\hline
+\sphinxhline
 \sphinxAtStartPar
 
 &
@@ -4417,7 +4426,7 @@ Costs
 \sphinxAtStartPar
 
 \\
-\hline
+\sphinxhline
 \sphinxAtStartPar
 Prox
 &
@@ -4445,7 +4454,7 @@ Prox
 \sphinxAtStartPar
 60
 \\
-\hline
+\sphinxhline
 \sphinxAtStartPar
 Visi
 &
@@ -4473,7 +4482,7 @@ Visi
 \sphinxAtStartPar
 100
 \\
-\hline
+\sphinxhline
 \sphinxAtStartPar
 Stan
 &
@@ -4501,7 +4510,7 @@ Stan
 \sphinxAtStartPar
 20
 \\
-\hline
+\sphinxhline
 \sphinxAtStartPar
 
 &
@@ -4529,7 +4538,7 @@ Stan
 \sphinxAtStartPar
 
 \\
-\hline
+\sphinxhline
 \sphinxAtStartPar
 Wksp
 &
@@ -4557,7 +4566,7 @@ Wksp
 \sphinxAtStartPar
 50
 \\
-\hline
+\sphinxhline
 \sphinxAtStartPar
 Wkcf
 &
@@ -4585,7 +4594,7 @@ Wkcf
 \sphinxAtStartPar
 50
 \\
-\hline
+\sphinxhline
 \sphinxAtStartPar
 Park
 &
@@ -4613,9 +4622,9 @@ Park
 \sphinxAtStartPar
 80
 \\
-\hline
+\sphinxbottomrule
 \end{tabulary}
-\par
+\sphinxtableafterendhook\par
 \sphinxattableend\end{savenotes}
 
 \sphinxAtStartPar
@@ -5048,13 +5057,13 @@ all three decision objectives are considered \sphinxstyleemphasis{equally import
 What will become the best choice recommendation under this working hypothesis?
 
 
-\sphinxstrong{See also:}
-\nopagebreak
-
+\begin{sphinxseealso}{See also:}
 
 \sphinxAtStartPar
 Lecture 7 notes from the MICS Algorithmic Decision Theory course: \sphinxcite{tutorial:adt-l7}.
 
+
+\end{sphinxseealso}
 
 
 \sphinxAtStartPar
@@ -5403,9 +5412,10 @@ To illustrate the decision problem we face, consider for a moment that, in a giv
 
 
 \begin{savenotes}\sphinxattablestart
+\sphinxthistablewithglobalstyle
 \centering
-\begin{tabulary}{\linewidth}[t]{|T|T|T|T|T|T|T|T|}
-\hline
+\begin{tabulary}{\linewidth}[t]{TTTTTTTT}
+\sphinxtoprule
 \sphinxstyletheadfamily 
 \sphinxAtStartPar
 Criterion
@@ -5431,7 +5441,8 @@ c1
 \sphinxAtStartPar
 c2
 \\
-\hline
+\sphinxmidrule
+\sphinxtableatstartofbodyhook
 \sphinxAtStartPar
 weight
 &
@@ -5456,7 +5467,7 @@ weight
 \sphinxAtStartPar
 5
 \\
-\hline
+\sphinxhline
 \sphinxAtStartPar
 \sphinxstyleemphasis{a1001}
 &
@@ -5481,7 +5492,7 @@ weight
 \sphinxAtStartPar
 \sphinxhyphen{}40.0
 \\
-\hline
+\sphinxhline
 \sphinxAtStartPar
 \sphinxstyleemphasis{a1010}
 &
@@ -5506,9 +5517,9 @@ weight
 \sphinxAtStartPar
 \sphinxhyphen{}35.0
 \\
-\hline
+\sphinxbottomrule
 \end{tabulary}
-\par
+\sphinxtableafterendhook\par
 \sphinxattableend\end{savenotes}
 \end{quote}
 
@@ -5827,9 +5838,10 @@ We may now answer the \sphinxstylestrong{absolute rating decision problem} state
 
 
 \begin{savenotes}\sphinxattablestart
+\sphinxthistablewithglobalstyle
 \centering
-\begin{tabulary}{\linewidth}[t]{|T|T|T|T|T|T|T|T|}
-\hline
+\begin{tabulary}{\linewidth}[t]{TTTTTTTT}
+\sphinxtoprule
 \sphinxstyletheadfamily 
 \sphinxAtStartPar
 Criterion
@@ -5855,7 +5867,8 @@ c1
 \sphinxAtStartPar
 c2
 \\
-\hline
+\sphinxmidrule
+\sphinxtableatstartofbodyhook
 \sphinxAtStartPar
 weight
 &
@@ -5880,7 +5893,7 @@ weight
 \sphinxAtStartPar
 5
 \\
-\hline
+\sphinxhline
 \sphinxAtStartPar
 \sphinxstyleemphasis{a1001}
 &
@@ -5905,7 +5918,7 @@ weight
 \sphinxAtStartPar
 \sphinxhyphen{}40.0
 \\
-\hline
+\sphinxhline
 \sphinxAtStartPar
 \sphinxstyleemphasis{a1010}
 &
@@ -5930,9 +5943,9 @@ weight
 \sphinxAtStartPar
 \sphinxhyphen{}35.0
 \\
-\hline
+\sphinxbottomrule
 \end{tabulary}
-\par
+\sphinxtableafterendhook\par
 \sphinxattableend\end{savenotes}
 \end{quote}
 
@@ -6109,7 +6122,7 @@ It is worthwhile noticing in \hyperref[\detokenize{tutorial:prerankedoutrankingd
 
 \begin{sphinxVerbatim}[commandchars=\\\{\},numbers=left,firstnumber=1,stepnumber=1]
 \PYG{k}{def} \PYG{n+nf}{relation}\PYG{p}{(}\PYG{n+nb+bp}{self}\PYG{p}{,}\PYG{n}{x}\PYG{p}{,}\PYG{n}{y}\PYG{p}{)}\PYG{p}{:}
-    \PYG{l+s+sd}{\PYGZdq{}\PYGZdq{}\PYGZdq{}}
+\PYG{+w}{    }\PYG{l+s+sd}{\PYGZdq{}\PYGZdq{}\PYGZdq{}}
 \PYG{l+s+sd}{    Dynamic construction of the global}
 \PYG{l+s+sd}{    outranking characteristic function r(x,y).}
 \PYG{l+s+sd}{    \PYGZdq{}\PYGZdq{}\PYGZdq{}}
@@ -6494,7 +6507,7 @@ For sparse outranking digraphs, the adjacency table is implemented as a dynamic 
 
 \begin{sphinxVerbatim}[commandchars=\\\{\},numbers=left,firstnumber=1,stepnumber=1]
  \PYG{k}{def} \PYG{n+nf}{relation}\PYG{p}{(}\PYG{n+nb+bp}{self}\PYG{p}{,} \PYG{n+nb}{int} \PYG{n}{x}\PYG{p}{,} \PYG{n+nb}{int} \PYG{n}{y}\PYG{p}{)}\PYG{p}{:}
-     \PYG{l+s+sd}{\PYGZdq{}\PYGZdq{}\PYGZdq{}}
+\PYG{+w}{     }\PYG{l+s+sd}{\PYGZdq{}\PYGZdq{}\PYGZdq{}}
 \PYG{l+s+sd}{     *Parameters*:}
 \PYG{l+s+sd}{         * x (int action key),}
 \PYG{l+s+sd}{         * y (int action key).}
@@ -6698,11 +6711,11 @@ by running the cythonized python modules in an Intel compiled virtual Python 3.6
 Example python session on the HPC\sphinxhyphen{}UL Iris\sphinxhyphen{}126 \sphinxhyphen{}skylake node \sphinxfootnotemark[7]
 
 \begin{sphinxVerbatim}[commandchars=\\\{\},numbers=left,firstnumber=1,stepnumber=1]
-     \PYG{o}{(}myPy365ICC\PYG{o}{)} \PYG{o}{[}rbisdorff@iris\PYGZhy{}126 Test\PYG{o}{]}\PYGZdl{} python
-     Python \PYG{l+m}{3}.6.5 \PYG{o}{(}default, May  \PYG{l+m}{9} \PYG{l+m}{2018}, \PYG{l+m}{09}:54:28\PYG{o}{)}
-     \PYG{o}{[}GCC Intel\PYG{o}{(}R\PYG{o}{)} C++ gcc \PYG{l+m}{6}.3 mode\PYG{o}{]} on linux
-     Type \PYG{l+s+s2}{\PYGZdq{}help\PYGZdq{}}, \PYG{l+s+s2}{\PYGZdq{}copyright\PYGZdq{}}, \PYG{l+s+s2}{\PYGZdq{}credits\PYGZdq{}} or \PYG{l+s+s2}{\PYGZdq{}license\PYGZdq{}} \PYG{k}{for} more information.
-     \PYGZgt{}\PYGZgt{}\PYGZgt{}
+\PYG{+w}{     }\PYG{o}{(}myPy365ICC\PYG{o}{)}\PYG{+w}{ }\PYG{o}{[}rbisdorff@iris\PYGZhy{}126\PYG{+w}{ }Test\PYG{o}{]}\PYGZdl{}\PYG{+w}{ }python
+\PYG{+w}{     }Python\PYG{+w}{ }\PYG{l+m}{3}.6.5\PYG{+w}{ }\PYG{o}{(}default,\PYG{+w}{ }May\PYG{+w}{  }\PYG{l+m}{9}\PYG{+w}{ }\PYG{l+m}{2018},\PYG{+w}{ }\PYG{l+m}{09}:54:28\PYG{o}{)}
+\PYG{+w}{     }\PYG{o}{[}GCC\PYG{+w}{ }Intel\PYG{o}{(}R\PYG{o}{)}\PYG{+w}{ }C++\PYG{+w}{ }gcc\PYG{+w}{ }\PYG{l+m}{6}.3\PYG{+w}{ }mode\PYG{o}{]}\PYG{+w}{ }on\PYG{+w}{ }linux
+\PYG{+w}{     }Type\PYG{+w}{ }\PYG{l+s+s2}{\PYGZdq{}help\PYGZdq{}},\PYG{+w}{ }\PYG{l+s+s2}{\PYGZdq{}copyright\PYGZdq{}},\PYG{+w}{ }\PYG{l+s+s2}{\PYGZdq{}credits\PYGZdq{}}\PYG{+w}{ }or\PYG{+w}{ }\PYG{l+s+s2}{\PYGZdq{}license\PYGZdq{}}\PYG{+w}{ }\PYG{k}{for}\PYG{+w}{ }more\PYG{+w}{ }information.
+\PYG{+w}{     }\PYGZgt{}\PYGZgt{}\PYGZgt{}
 \end{sphinxVerbatim}
 
 \begin{sphinxVerbatim}[commandchars=\\\{\},numbers=left,firstnumber=1,stepnumber=1]
@@ -6931,13 +6944,14 @@ Alice has already identified 10 \sphinxstylestrong{potential study programs}.
 
 
 \begin{savenotes}\sphinxattablestart
+\sphinxthistablewithglobalstyle
 \centering
 \sphinxcapstartof{table}
 \sphinxthecaptionisattop
 \sphinxcaption{Alice’s potential study programs}\label{\detokenize{tutorial:studprogs}}
 \sphinxaftertopcaption
-\begin{tabulary}{\linewidth}[t]{|T|T|T|T|}
-\hline
+\begin{tabulary}{\linewidth}[t]{TTTT}
+\sphinxtoprule
 \sphinxstyletheadfamily 
 \sphinxAtStartPar
 ID
@@ -6951,7 +6965,8 @@ Institution
 \sphinxAtStartPar
 City
 \\
-\hline
+\sphinxmidrule
+\sphinxtableatstartofbodyhook
 \sphinxAtStartPar
 T\sphinxhyphen{}UD
 &
@@ -6964,7 +6979,7 @@ University (UD)
 \sphinxAtStartPar
 Düsseldorf
 \\
-\hline
+\sphinxhline
 \sphinxAtStartPar
 T\sphinxhyphen{}FHK
 &
@@ -6977,7 +6992,7 @@ Higher Technical School (FHK)
 \sphinxAtStartPar
 Köln
 \\
-\hline
+\sphinxhline
 \sphinxAtStartPar
 T\sphinxhyphen{}FHM
 &
@@ -6990,7 +7005,7 @@ Higher Technical School (FHM)
 \sphinxAtStartPar
 München
 \\
-\hline
+\sphinxhline
 \sphinxAtStartPar
 I\sphinxhyphen{}FHK
 &
@@ -7003,7 +7018,7 @@ Higher Technical School (FHK)
 \sphinxAtStartPar
 Köln
 \\
-\hline
+\sphinxhline
 \sphinxAtStartPar
 T\sphinxhyphen{}USB
 &
@@ -7016,7 +7031,7 @@ University (USB)
 \sphinxAtStartPar
 Saarbrücken
 \\
-\hline
+\sphinxhline
 \sphinxAtStartPar
 I\sphinxhyphen{}USB
 &
@@ -7029,7 +7044,7 @@ University (USB)
 \sphinxAtStartPar
 Saarbrücken
 \\
-\hline
+\sphinxhline
 \sphinxAtStartPar
 T\sphinxhyphen{}UHB
 &
@@ -7042,7 +7057,7 @@ University (UHB)
 \sphinxAtStartPar
 Heidelberg
 \\
-\hline
+\sphinxhline
 \sphinxAtStartPar
 I\sphinxhyphen{}UHB
 &
@@ -7055,7 +7070,7 @@ University (UHB)
 \sphinxAtStartPar
 Heidelberg
 \\
-\hline
+\sphinxhline
 \sphinxAtStartPar
 S\sphinxhyphen{}HKK
 &
@@ -7068,7 +7083,7 @@ Chamber of Commerce (HKK)
 \sphinxAtStartPar
 Köln
 \\
-\hline
+\sphinxhline
 \sphinxAtStartPar
 C\sphinxhyphen{}HKK
 &
@@ -7081,9 +7096,9 @@ Chamber of Commerce (HKK)
 \sphinxAtStartPar
 Köln
 \\
-\hline
+\sphinxbottomrule
 \end{tabulary}
-\par
+\sphinxtableafterendhook\par
 \sphinxattableend\end{savenotes}
 
 \sphinxAtStartPar
@@ -7116,13 +7131,14 @@ The decision consequences Alice wishes to take into account for evaluating the p
 
 
 \begin{savenotes}\sphinxattablestart
+\sphinxthistablewithglobalstyle
 \centering
 \sphinxcapstartof{table}
 \sphinxthecaptionisattop
 \sphinxcaption{Alice’s family of performance criteria}\label{\detokenize{tutorial:famcrit}}
 \sphinxaftertopcaption
-\begin{tabulary}{\linewidth}[t]{|T|T|T|T|T|}
-\hline
+\begin{tabulary}{\linewidth}[t]{TTTTT}
+\sphinxtoprule
 \sphinxstyletheadfamily 
 \sphinxAtStartPar
 ID
@@ -7139,7 +7155,8 @@ Objective
 \sphinxAtStartPar
 Weight
 \\
-\hline
+\sphinxmidrule
+\sphinxtableatstartofbodyhook
 \sphinxAtStartPar
 DH
 &
@@ -7155,7 +7172,7 @@ GEO
 \sphinxAtStartPar
 3
 \\
-\hline
+\sphinxhline
 \sphinxAtStartPar
 BC
 &
@@ -7171,7 +7188,7 @@ GEO
 \sphinxAtStartPar
 3
 \\
-\hline
+\sphinxhline
 \sphinxAtStartPar
 
 &
@@ -7187,7 +7204,7 @@ GEO
 \sphinxAtStartPar
 
 \\
-\hline
+\sphinxhline
 \sphinxAtStartPar
 AS
 &
@@ -7203,7 +7220,7 @@ LEA
 \sphinxAtStartPar
 6
 \\
-\hline
+\sphinxhline
 \sphinxAtStartPar
 
 &
@@ -7219,7 +7236,7 @@ LEA
 \sphinxAtStartPar
 
 \\
-\hline
+\sphinxhline
 \sphinxAtStartPar
 SF
 &
@@ -7235,7 +7252,7 @@ FIN
 \sphinxAtStartPar
 2
 \\
-\hline
+\sphinxhline
 \sphinxAtStartPar
 LC
 &
@@ -7251,7 +7268,7 @@ FIN
 \sphinxAtStartPar
 2
 \\
-\hline
+\sphinxhline
 \sphinxAtStartPar
 SL
 &
@@ -7267,7 +7284,7 @@ FIN
 \sphinxAtStartPar
 2
 \\
-\hline
+\sphinxhline
 \sphinxAtStartPar
 
 &
@@ -7283,7 +7300,7 @@ FIN
 \sphinxAtStartPar
 
 \\
-\hline
+\sphinxhline
 \sphinxAtStartPar
 AP
 &
@@ -7299,7 +7316,7 @@ PRA
 \sphinxAtStartPar
 2
 \\
-\hline
+\sphinxhline
 \sphinxAtStartPar
 AI
 &
@@ -7315,7 +7332,7 @@ PRA
 \sphinxAtStartPar
 2
 \\
-\hline
+\sphinxhline
 \sphinxAtStartPar
 PR
 &
@@ -7331,9 +7348,9 @@ PRA
 \sphinxAtStartPar
 2
 \\
-\hline
+\sphinxbottomrule
 \end{tabulary}
-\par
+\sphinxtableafterendhook\par
 \sphinxattableend\end{savenotes}
 
 \sphinxAtStartPar
@@ -9085,13 +9102,14 @@ Below in \hyperref[\detokenize{tutorial:gradesex1}]{Table \ref{\detokenize{tutor
 
 
 \begin{savenotes}\sphinxattablestart
+\sphinxthistablewithglobalstyle
 \centering
 \sphinxcapstartof{table}
 \sphinxthecaptionisattop
 \sphinxcaption{Grades obtained by the students}\label{\detokenize{tutorial:gradesex1}}
 \sphinxaftertopcaption
-\begin{tabulary}{\linewidth}[t]{|T|T|T|T|T|T|}
-\hline
+\begin{tabulary}{\linewidth}[t]{TTTTTT}
+\sphinxtoprule
 \sphinxstyletheadfamily 
 \sphinxAtStartPar
 Course
@@ -9111,7 +9129,7 @@ C4
 \sphinxAtStartPar
 C5
 \\
-\hline\sphinxstyletheadfamily 
+\sphinxhline\sphinxstyletheadfamily 
 \sphinxAtStartPar
 ECTS
 &\sphinxstyletheadfamily 
@@ -9130,7 +9148,8 @@ ECTS
 \sphinxAtStartPar
 4
 \\
-\hline
+\sphinxmidrule
+\sphinxtableatstartofbodyhook
 \sphinxAtStartPar
 Ariana (A)
 &
@@ -9149,7 +9168,7 @@ Ariana (A)
 \sphinxAtStartPar
 11
 \\
-\hline
+\sphinxhline
 \sphinxAtStartPar
 Bruce (B)
 &
@@ -9168,7 +9187,7 @@ Bruce (B)
 \sphinxAtStartPar
 13
 \\
-\hline
+\sphinxhline
 \sphinxAtStartPar
 Clare (C)
 &
@@ -9187,7 +9206,7 @@ Clare (C)
 \sphinxAtStartPar
 14
 \\
-\hline
+\sphinxhline
 \sphinxAtStartPar
 Daniel (D)
 &
@@ -9206,9 +9225,9 @@ Daniel (D)
 \sphinxAtStartPar
 13
 \\
-\hline
+\sphinxbottomrule
 \end{tabulary}
-\par
+\sphinxtableafterendhook\par
 \sphinxattableend\end{savenotes}
 
 \sphinxAtStartPar
@@ -9310,13 +9329,14 @@ The actual evaluation data are gathered in \hyperref[\detokenize{tutorial:perfor
 
 
 \begin{savenotes}\sphinxattablestart
+\sphinxthistablewithglobalstyle
 \centering
 \sphinxcapstartof{table}
 \sphinxthecaptionisattop
 \sphinxcaption{Performance evaluations of the potential TV sets}\label{\detokenize{tutorial:performancesex2}}
 \sphinxaftertopcaption
-\begin{tabulary}{\linewidth}[t]{|T|T|T|T|T|}
-\hline
+\begin{tabulary}{\linewidth}[t]{TTTTT}
+\sphinxtoprule
 \sphinxstyletheadfamily 
 \sphinxAtStartPar
 Criteria
@@ -9333,7 +9353,7 @@ Sq
 \sphinxAtStartPar
 Mq
 \\
-\hline\sphinxstyletheadfamily 
+\sphinxhline\sphinxstyletheadfamily 
 \sphinxAtStartPar
 Significance
 &\sphinxstyletheadfamily 
@@ -9349,7 +9369,8 @@ Significance
 \sphinxAtStartPar
 2
 \\
-\hline
+\sphinxmidrule
+\sphinxtableatstartofbodyhook
 \sphinxAtStartPar
 Model T1
 &
@@ -9365,7 +9386,7 @@ Model T1
 \sphinxAtStartPar
 0
 \\
-\hline
+\sphinxhline
 \sphinxAtStartPar
 Model T2
 &
@@ -9381,7 +9402,7 @@ Model T2
 \sphinxAtStartPar
 1
 \\
-\hline
+\sphinxhline
 \sphinxAtStartPar
 Model T3
 &
@@ -9397,7 +9418,7 @@ Model T3
 \sphinxAtStartPar
 1
 \\
-\hline
+\sphinxhline
 \sphinxAtStartPar
 Model T4
 &
@@ -9413,7 +9434,7 @@ Model T4
 \sphinxAtStartPar
 \sphinxhyphen{}1
 \\
-\hline
+\sphinxhline
 \sphinxAtStartPar
 Model T5
 &
@@ -9429,7 +9450,7 @@ Model T5
 \sphinxAtStartPar
 0
 \\
-\hline
+\sphinxhline
 \sphinxAtStartPar
 Model T6
 &
@@ -9445,7 +9466,7 @@ Model T6
 \sphinxAtStartPar
 \sphinxhyphen{}1
 \\
-\hline
+\sphinxhline
 \sphinxAtStartPar
 Model T7
 &
@@ -9461,7 +9482,7 @@ Model T7
 \sphinxAtStartPar
 \sphinxhyphen{}1
 \\
-\hline
+\sphinxhline
 \sphinxAtStartPar
 Model T8
 &
@@ -9477,9 +9498,9 @@ Model T8
 \sphinxAtStartPar
 0
 \\
-\hline
+\sphinxbottomrule
 \end{tabulary}
-\par
+\sphinxtableafterendhook\par
 \sphinxattableend\end{savenotes}
 
 \sphinxAtStartPar
@@ -10190,41 +10211,41 @@ The \sphinxcode{\sphinxupquote{perrinMIS}} shell command may be installed system
 \end{footnote}  along with all the Digraphs3 python modules for computing the set of MISs observed in the graph.
 
 \begin{sphinxVerbatim}[commandchars=\\\{\},numbers=left,firstnumber=1,stepnumber=1]
- ...\PYGZdl{} \PYG{n+nb}{echo} \PYG{l+m}{12} \PYG{p}{|} /usr/local/bin/perrinMIS
- \PYG{c+c1}{\PYGZsh{} \PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{} \PYGZsh{}}
- \PYG{c+c1}{\PYGZsh{} Generating MIS set of Cn with the      \PYGZsh{}}
- \PYG{c+c1}{\PYGZsh{} Perrin sequence algorithm.             \PYGZsh{}}
- \PYG{c+c1}{\PYGZsh{} Temporary files used.                  \PYGZsh{}}
- \PYG{c+c1}{\PYGZsh{} even versus odd order optimised.       \PYGZsh{}}
- \PYG{c+c1}{\PYGZsh{} RB December 2006                       \PYGZsh{}}
- \PYG{c+c1}{\PYGZsh{} Current revision Dec 2018              \PYGZsh{}}
- \PYG{c+c1}{\PYGZsh{} \PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{} \PYGZsh{}}
- Input cycle order ? \PYGZlt{}\PYGZhy{}\PYGZhy{} \PYG{l+m}{12}
- mis \PYG{l+m}{1} : \PYG{l+m}{100100100100}
- mis \PYG{l+m}{2} : \PYG{l+m}{010010010010}
- mis \PYG{l+m}{3} : \PYG{l+m}{001001001001}
- ...
- ...
- ...
- mis \PYG{l+m}{27} : \PYG{l+m}{001001010101}
- mis \PYG{l+m}{28} : \PYG{l+m}{101010101010}
- mis \PYG{l+m}{29} : \PYG{l+m}{010101010101}
- Cardinalities:
- \PYG{l+m}{0} : \PYG{l+m}{0}
- \PYG{l+m}{1} : \PYG{l+m}{0}
- \PYG{l+m}{2} : \PYG{l+m}{0}
- \PYG{l+m}{3} : \PYG{l+m}{0}
- \PYG{l+m}{4} : \PYG{l+m}{3}
- \PYG{l+m}{5} : \PYG{l+m}{24}
- \PYG{l+m}{6} : \PYG{l+m}{2}
- \PYG{l+m}{7} : \PYG{l+m}{0}
- \PYG{l+m}{8} : \PYG{l+m}{0}
- \PYG{l+m}{9} : \PYG{l+m}{0}
- \PYG{l+m}{10} : \PYG{l+m}{0}
- \PYG{l+m}{11} : \PYG{l+m}{0}
- \PYG{l+m}{12} : \PYG{l+m}{0}
- Total: \PYG{l+m}{29}
- execution time: \PYG{l+m}{0} sec. and \PYG{l+m}{2} millisec.
+\PYG{+w}{ }...\PYGZdl{}\PYG{+w}{ }\PYG{n+nb}{echo}\PYG{+w}{ }\PYG{l+m}{12}\PYG{+w}{ }\PYG{p}{|}\PYG{+w}{ }/usr/local/bin/perrinMIS
+\PYG{+w}{ }\PYG{c+c1}{\PYGZsh{} \PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{} \PYGZsh{}}
+\PYG{+w}{ }\PYG{c+c1}{\PYGZsh{} Generating MIS set of Cn with the      \PYGZsh{}}
+\PYG{+w}{ }\PYG{c+c1}{\PYGZsh{} Perrin sequence algorithm.             \PYGZsh{}}
+\PYG{+w}{ }\PYG{c+c1}{\PYGZsh{} Temporary files used.                  \PYGZsh{}}
+\PYG{+w}{ }\PYG{c+c1}{\PYGZsh{} even versus odd order optimised.       \PYGZsh{}}
+\PYG{+w}{ }\PYG{c+c1}{\PYGZsh{} RB December 2006                       \PYGZsh{}}
+\PYG{+w}{ }\PYG{c+c1}{\PYGZsh{} Current revision Dec 2018              \PYGZsh{}}
+\PYG{+w}{ }\PYG{c+c1}{\PYGZsh{} \PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{} \PYGZsh{}}
+\PYG{+w}{ }Input\PYG{+w}{ }cycle\PYG{+w}{ }order\PYG{+w}{ }?\PYG{+w}{ }\PYGZlt{}\PYGZhy{}\PYGZhy{}\PYG{+w}{ }\PYG{l+m}{12}
+\PYG{+w}{ }mis\PYG{+w}{ }\PYG{l+m}{1}\PYG{+w}{ }:\PYG{+w}{ }\PYG{l+m}{100100100100}
+\PYG{+w}{ }mis\PYG{+w}{ }\PYG{l+m}{2}\PYG{+w}{ }:\PYG{+w}{ }\PYG{l+m}{010010010010}
+\PYG{+w}{ }mis\PYG{+w}{ }\PYG{l+m}{3}\PYG{+w}{ }:\PYG{+w}{ }\PYG{l+m}{001001001001}
+\PYG{+w}{ }...
+\PYG{+w}{ }...
+\PYG{+w}{ }...
+\PYG{+w}{ }mis\PYG{+w}{ }\PYG{l+m}{27}\PYG{+w}{ }:\PYG{+w}{ }\PYG{l+m}{001001010101}
+\PYG{+w}{ }mis\PYG{+w}{ }\PYG{l+m}{28}\PYG{+w}{ }:\PYG{+w}{ }\PYG{l+m}{101010101010}
+\PYG{+w}{ }mis\PYG{+w}{ }\PYG{l+m}{29}\PYG{+w}{ }:\PYG{+w}{ }\PYG{l+m}{010101010101}
+\PYG{+w}{ }Cardinalities:
+\PYG{+w}{ }\PYG{l+m}{0}\PYG{+w}{ }:\PYG{+w}{ }\PYG{l+m}{0}
+\PYG{+w}{ }\PYG{l+m}{1}\PYG{+w}{ }:\PYG{+w}{ }\PYG{l+m}{0}
+\PYG{+w}{ }\PYG{l+m}{2}\PYG{+w}{ }:\PYG{+w}{ }\PYG{l+m}{0}
+\PYG{+w}{ }\PYG{l+m}{3}\PYG{+w}{ }:\PYG{+w}{ }\PYG{l+m}{0}
+\PYG{+w}{ }\PYG{l+m}{4}\PYG{+w}{ }:\PYG{+w}{ }\PYG{l+m}{3}
+\PYG{+w}{ }\PYG{l+m}{5}\PYG{+w}{ }:\PYG{+w}{ }\PYG{l+m}{24}
+\PYG{+w}{ }\PYG{l+m}{6}\PYG{+w}{ }:\PYG{+w}{ }\PYG{l+m}{2}
+\PYG{+w}{ }\PYG{l+m}{7}\PYG{+w}{ }:\PYG{+w}{ }\PYG{l+m}{0}
+\PYG{+w}{ }\PYG{l+m}{8}\PYG{+w}{ }:\PYG{+w}{ }\PYG{l+m}{0}
+\PYG{+w}{ }\PYG{l+m}{9}\PYG{+w}{ }:\PYG{+w}{ }\PYG{l+m}{0}
+\PYG{+w}{ }\PYG{l+m}{10}\PYG{+w}{ }:\PYG{+w}{ }\PYG{l+m}{0}
+\PYG{+w}{ }\PYG{l+m}{11}\PYG{+w}{ }:\PYG{+w}{ }\PYG{l+m}{0}
+\PYG{+w}{ }\PYG{l+m}{12}\PYG{+w}{ }:\PYG{+w}{ }\PYG{l+m}{0}
+\PYG{+w}{ }Total:\PYG{+w}{ }\PYG{l+m}{29}
+\PYG{+w}{ }execution\PYG{+w}{ }time:\PYG{+w}{ }\PYG{l+m}{0}\PYG{+w}{ }sec.\PYG{+w}{ }and\PYG{+w}{ }\PYG{l+m}{2}\PYG{+w}{ }millisec.
 \end{sphinxVerbatim}
 
 \sphinxAtStartPar
@@ -12158,9 +12179,10 @@ For intergroup pairing problems of higher order, it appears however that the bes
 
 
 \begin{savenotes}\sphinxattablestart
+\sphinxthistablewithglobalstyle
 \centering
-\begin{tabulary}{\linewidth}[t]{|T|T|T|T|T|T|}
-\hline
+\begin{tabulary}{\linewidth}[t]{TTTTTT}
+\sphinxtoprule
 \sphinxstyletheadfamily 
 \sphinxAtStartPar
 Variables
@@ -12180,7 +12202,8 @@ Min
 \sphinxAtStartPar
 Max
 \\
-\hline
+\sphinxmidrule
+\sphinxtableatstartofbodyhook
 \sphinxAtStartPar
 Correlation
 &
@@ -12199,7 +12222,7 @@ Correlation
 \sphinxAtStartPar
 +0.923
 \\
-\hline
+\sphinxhline
 \sphinxAtStartPar
 Unfairness
 &
@@ -12218,7 +12241,7 @@ Unfairness
 \sphinxAtStartPar
 0.144
 \\
-\hline
+\sphinxhline
 \sphinxAtStartPar
 Run time (sec.)
 &
@@ -12237,9 +12260,9 @@ Run time (sec.)
 \sphinxAtStartPar
 2.142
 \\
-\hline
+\sphinxbottomrule
 \end{tabulary}
-\par
+\sphinxtableafterendhook\par
 \sphinxattableend\end{savenotes}
 \end{quote}
 
@@ -12680,9 +12703,10 @@ With the best determined \sphinxstyleemphasis{Copeland} matching we actually rea
 
 
 \begin{savenotes}\sphinxattablestart
+\sphinxthistablewithglobalstyle
 \centering
-\begin{tabulary}{\linewidth}[t]{|T|T|T|T|T|T|}
-\hline
+\begin{tabulary}{\linewidth}[t]{TTTTTT}
+\sphinxtoprule
 \sphinxstyletheadfamily 
 \sphinxAtStartPar
 Variables
@@ -12702,7 +12726,8 @@ Min
 \sphinxAtStartPar
 Max
 \\
-\hline
+\sphinxmidrule
+\sphinxtableatstartofbodyhook
 \sphinxAtStartPar
 Correlation
 &
@@ -12721,7 +12746,7 @@ Correlation
 \sphinxAtStartPar
 +0.948
 \\
-\hline
+\sphinxhline
 \sphinxAtStartPar
 Std deviation
 &
@@ -12740,7 +12765,7 @@ Std deviation
 \sphinxAtStartPar
 0.575
 \\
-\hline
+\sphinxhline
 \sphinxAtStartPar
 Iterations
 &
@@ -12759,7 +12784,7 @@ Iterations
 \sphinxAtStartPar
 36.00
 \\
-\hline
+\sphinxhline
 \sphinxAtStartPar
 Run time
 &
@@ -12778,9 +12803,9 @@ Run time
 \sphinxAtStartPar
 6.930
 \\
-\hline
+\sphinxbottomrule
 \end{tabulary}
-\par
+\sphinxtableafterendhook\par
 \sphinxattableend\end{savenotes}
 \end{quote}
 

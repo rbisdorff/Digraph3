@@ -29,7 +29,7 @@ Advanced Topics
    :Author: Raymond Bisdorff, Emeritus Professor of Applied Mathematics and Computer Science, https://rbisdorff.github.io/
    :Version: |version| (release: |release|)
    :PDF version: http://hdl.handle.net/10993/42390
-   :Copyright: `R. Bisdorff <_static/digraph3_copyright.html>`_ 2013-2022
+   :Copyright: `R. Bisdorff <_static/digraph3_copyright.html>`_ 2013-2023
 
 .. _Pearls-label:	   
 

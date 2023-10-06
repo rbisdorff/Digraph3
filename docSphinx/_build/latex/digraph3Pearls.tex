@@ -9,6 +9,9 @@
 \fi
 %% let collapsible pdf bookmarks panel have high depth per default
 \PassOptionsToPackage{bookmarksdepth=5}{hyperref}
+
+\PassOptionsToPackage{booktabs}{sphinx}
+\PassOptionsToPackage{colorrows}{sphinx}
 \PassOptionsToPackage{svgnames}{xcolor}
 \PassOptionsToPackage{warn}{textcomp}
 \usepackage[utf8]{inputenc}
@@ -64,7 +67,7 @@
 
 
 \title{Digraph3 Advanced Topics}
-\date{October 03, 2023}
+\date{October 06, 2023}
 \release{3.11.5}
 \author{Raymond Bisdorff}
 \newcommand{\sphinxlogo}{\sphinxincludegraphics{introDoc3.png}\par}
@@ -1077,9 +1080,10 @@ In the comparison of alternatives \sphinxstyleemphasis{a2} and \sphinxstyleempha
 
 
 \begin{savenotes}\sphinxattablestart
+\sphinxthistablewithglobalstyle
 \centering
-\begin{tabulary}{\linewidth}[t]{|T|T|T|T|T|T|T|T|}
-\hline
+\begin{tabulary}{\linewidth}[t]{TTTTTTTT}
+\sphinxtoprule
 \sphinxstyletheadfamily 
 \sphinxAtStartPar
 \sphinxstyleemphasis{W{[}i{]}}
@@ -1105,7 +1109,8 @@ In the comparison of alternatives \sphinxstyleemphasis{a2} and \sphinxstyleempha
 \sphinxAtStartPar
 12
 \\
-\hline
+\sphinxmidrule
+\sphinxtableatstartofbodyhook
 \sphinxAtStartPar
 \sphinxstyleemphasis{q{[}i{]}}
 &
@@ -1130,7 +1135,7 @@ In the comparison of alternatives \sphinxstyleemphasis{a2} and \sphinxstyleempha
 \sphinxAtStartPar
 2
 \\
-\hline
+\sphinxhline
 \sphinxAtStartPar
 \sphinxstyleemphasis{Q{[}i{]}}
 &
@@ -1155,9 +1160,9 @@ In the comparison of alternatives \sphinxstyleemphasis{a2} and \sphinxstyleempha
 \sphinxAtStartPar
 9
 \\
-\hline
+\sphinxbottomrule
 \end{tabulary}
-\par
+\sphinxtableafterendhook\par
 \sphinxattableend\end{savenotes}
 
 \sphinxAtStartPar
@@ -1165,9 +1170,10 @@ Let use denote \sphinxstyleemphasis{\sphinxhyphen{}q} and \sphinxstyleemphasis{\
 
 
 \begin{savenotes}\sphinxattablestart
+\sphinxthistablewithglobalstyle
 \centering
-\begin{tabulary}{\linewidth}[t]{|T|T|T|T|T|T|T|T|}
-\hline
+\begin{tabulary}{\linewidth}[t]{TTTTTTTT}
+\sphinxtoprule
 \sphinxstyletheadfamily 
 \sphinxAtStartPar
 \sphinxstyleemphasis{W{[}i{]}}
@@ -1193,7 +1199,8 @@ Let use denote \sphinxstyleemphasis{\sphinxhyphen{}q} and \sphinxstyleemphasis{\
 \sphinxAtStartPar
 12
 \\
-\hline
+\sphinxmidrule
+\sphinxtableatstartofbodyhook
 \sphinxAtStartPar
 \sphinxstyleemphasis{\sphinxhyphen{}q{[}i{]}}
 &
@@ -1218,7 +1225,7 @@ Let use denote \sphinxstyleemphasis{\sphinxhyphen{}q} and \sphinxstyleemphasis{\
 \sphinxAtStartPar
 0
 \\
-\hline
+\sphinxhline
 \sphinxAtStartPar
 \sphinxstyleemphasis{\sphinxhyphen{}Q{[}i{]}}
 &
@@ -1243,9 +1250,9 @@ Let use denote \sphinxstyleemphasis{\sphinxhyphen{}q} and \sphinxstyleemphasis{\
 \sphinxAtStartPar
 9
 \\
-\hline
+\sphinxbottomrule
 \end{tabulary}
-\par
+\sphinxtableafterendhook\par
 \sphinxattableend\end{savenotes}
 
 \sphinxAtStartPar
@@ -1256,9 +1263,10 @@ We may verify, for instance, that the outranking situation observed between \sph
 
 
 \begin{savenotes}\sphinxattablestart
+\sphinxthistablewithglobalstyle
 \centering
-\begin{tabulary}{\linewidth}[t]{|T|T|T|T|T|T|T|T|}
-\hline
+\begin{tabulary}{\linewidth}[t]{TTTTTTTT}
+\sphinxtoprule
 \sphinxstyletheadfamily 
 \sphinxAtStartPar
 \sphinxstyleemphasis{W{[}i{]}}
@@ -1284,7 +1292,8 @@ We may verify, for instance, that the outranking situation observed between \sph
 \sphinxAtStartPar
 12
 \\
-\hline
+\sphinxmidrule
+\sphinxtableatstartofbodyhook
 \sphinxAtStartPar
 \sphinxstyleemphasis{Q{[}i{]}}
 &
@@ -1309,7 +1318,7 @@ We may verify, for instance, that the outranking situation observed between \sph
 \sphinxAtStartPar
 9
 \\
-\hline
+\sphinxhline
 \sphinxAtStartPar
 \sphinxstyleemphasis{\sphinxhyphen{}Q{[}i{]}}
 &
@@ -1334,9 +1343,9 @@ We may verify, for instance, that the outranking situation observed between \sph
 \sphinxAtStartPar
 9
 \\
-\hline
+\sphinxbottomrule
 \end{tabulary}
-\par
+\sphinxtableafterendhook\par
 \sphinxattableend\end{savenotes}
 
 \sphinxAtStartPar
@@ -1344,9 +1353,10 @@ Notice that outranking situations qualified at stability levels 4 and 3, evident
 
 
 \begin{savenotes}\sphinxattablestart
+\sphinxthistablewithglobalstyle
 \centering
-\begin{tabulary}{\linewidth}[t]{|T|T|T|T|T|T|T|T|}
-\hline
+\begin{tabulary}{\linewidth}[t]{TTTTTTTT}
+\sphinxtoprule
 \sphinxstyletheadfamily 
 \sphinxAtStartPar
 \sphinxstyleemphasis{W{[}i{]}}
@@ -1372,7 +1382,8 @@ Notice that outranking situations qualified at stability levels 4 and 3, evident
 \sphinxAtStartPar
 12
 \\
-\hline
+\sphinxmidrule
+\sphinxtableatstartofbodyhook
 \sphinxAtStartPar
 \sphinxstyleemphasis{q{[}i{]}}
 &
@@ -1397,7 +1408,7 @@ Notice that outranking situations qualified at stability levels 4 and 3, evident
 \sphinxAtStartPar
 2
 \\
-\hline
+\sphinxhline
 \sphinxAtStartPar
 \sphinxstyleemphasis{Q{[}i{]}}
 &
@@ -1422,7 +1433,7 @@ Notice that outranking situations qualified at stability levels 4 and 3, evident
 \sphinxAtStartPar
 9
 \\
-\hline
+\sphinxhline
 \sphinxAtStartPar
 \sphinxstyleemphasis{\sphinxhyphen{}Q{[}i{]}}
 &
@@ -1447,9 +1458,9 @@ Notice that outranking situations qualified at stability levels 4 and 3, evident
 \sphinxAtStartPar
 9
 \\
-\hline
+\sphinxbottomrule
 \end{tabulary}
-\par
+\sphinxtableafterendhook\par
 \sphinxattableend\end{savenotes}
 
 \sphinxAtStartPar
@@ -3341,13 +3352,14 @@ From January 27 to 30 2022, 392 738 voters participated eventually in a primary 
 
 
 \begin{savenotes}\sphinxattablestart
+\sphinxthistablewithglobalstyle
 \centering
 \sphinxcapstartof{table}
 \sphinxthecaptionisattop
 \sphinxcaption{The popular primary election results (in \%)}\label{\detokenize{pearls:primpoprestable}}
 \sphinxaftertopcaption
-\begin{tabulary}{\linewidth}[t]{|T|T|T|T|T|T|}
-\hline
+\begin{tabulary}{\linewidth}[t]{TTTTTT}
+\sphinxtoprule
 \sphinxstyletheadfamily 
 \sphinxAtStartPar
 Personality
@@ -3367,7 +3379,8 @@ Fair
 \sphinxAtStartPar
 Insufficient
 \\
-\hline
+\sphinxmidrule
+\sphinxtableatstartofbodyhook
 \sphinxAtStartPar
 A Agueb\sphinxhyphen{}Porterie
 &
@@ -3386,7 +3399,7 @@ A Agueb\sphinxhyphen{}Porterie
 \sphinxAtStartPar
 50.56
 \\
-\hline
+\sphinxhline
 \sphinxAtStartPar
 A Hidalgo
 &
@@ -3405,7 +3418,7 @@ A Hidalgo
 \sphinxAtStartPar
 35.81
 \\
-\hline
+\sphinxhline
 \sphinxAtStartPar
 Y Jadot
 &
@@ -3424,7 +3437,7 @@ Y Jadot
 \sphinxAtStartPar
 19.21
 \\
-\hline
+\sphinxhline
 \sphinxAtStartPar
 P Larrouturou
 &
@@ -3443,7 +3456,7 @@ P Larrouturou
 \sphinxAtStartPar
 34.58
 \\
-\hline
+\sphinxhline
 \sphinxAtStartPar
 Ch Marchandise
 &
@@ -3462,7 +3475,7 @@ Ch Marchandise
 \sphinxAtStartPar
 46.20
 \\
-\hline
+\sphinxhline
 \sphinxAtStartPar
 J\sphinxhyphen{}L Mélenchon
 &
@@ -3481,7 +3494,7 @@ J\sphinxhyphen{}L Mélenchon
 \sphinxAtStartPar
 29.16
 \\
-\hline
+\sphinxhline
 \sphinxAtStartPar
 Ch Taubira
 &
@@ -3500,9 +3513,9 @@ Ch Taubira
 \sphinxAtStartPar
 12.99
 \\
-\hline
+\sphinxbottomrule
 \end{tabulary}
-\par
+\sphinxtableafterendhook\par
 \sphinxattableend\end{savenotes}
 
 \sphinxAtStartPar
@@ -3545,13 +3558,14 @@ The best suited multipartisan presidential candidate should as a consequence pre
 
 
 \begin{savenotes}\sphinxattablestart
+\sphinxthistablewithglobalstyle
 \centering
 \sphinxcapstartof{table}
 \sphinxthecaptionisattop
 \sphinxcaption{The bipolar approval\sphinxhyphen{}disapproval results (in \%)}\label{\detokenize{pearls:approvaldisapprovaltable}}
 \sphinxaftertopcaption
-\begin{tabulary}{\linewidth}[t]{|T|T|T|T|T|}
-\hline
+\begin{tabulary}{\linewidth}[t]{TTTTT}
+\sphinxtoprule
 \sphinxstyletheadfamily 
 \sphinxAtStartPar
 Personality
@@ -3568,7 +3582,8 @@ Disapproval
 \sphinxAtStartPar
 Abstention
 \\
-\hline
+\sphinxmidrule
+\sphinxtableatstartofbodyhook
 \sphinxAtStartPar
 Ch Taubira
 &
@@ -3584,7 +3599,7 @@ Ch Taubira
 \sphinxAtStartPar
 07.91
 \\
-\hline
+\sphinxhline
 \sphinxAtStartPar
 Y Jadot
 &
@@ -3600,7 +3615,7 @@ Y Jadot
 \sphinxAtStartPar
 15.54
 \\
-\hline
+\sphinxhline
 \sphinxAtStartPar
 J\sphinxhyphen{}L Mélenchon
 &
@@ -3616,7 +3631,7 @@ J\sphinxhyphen{}L Mélenchon
 \sphinxAtStartPar
 18.29
 \\
-\hline
+\sphinxhline
 \sphinxAtStartPar
 P Larrouturou
 &
@@ -3632,7 +3647,7 @@ P Larrouturou
 \sphinxAtStartPar
 18.11
 \\
-\hline
+\sphinxhline
 \sphinxAtStartPar
 A Hidalgo
 &
@@ -3648,7 +3663,7 @@ A Hidalgo
 \sphinxAtStartPar
 23.80
 \\
-\hline
+\sphinxhline
 \sphinxAtStartPar
 Ch Marchandise
 &
@@ -3664,7 +3679,7 @@ Ch Marchandise
 \sphinxAtStartPar
 21.87
 \\
-\hline
+\sphinxhline
 \sphinxAtStartPar
 A Agueb\sphinxhyphen{}Porterie
 &
@@ -3680,9 +3695,9 @@ A Agueb\sphinxhyphen{}Porterie
 \sphinxAtStartPar
 21.05
 \\
-\hline
+\sphinxbottomrule
 \end{tabulary}
-\par
+\sphinxtableafterendhook\par
 \sphinxattableend\end{savenotes}
 
 \sphinxAtStartPar
@@ -4886,7 +4901,7 @@ For more or less dense strict outranking digraphs of modest order, as facing usu
 
 \begin{sphinxVerbatim}[commandchars=\\\{\},numbers=left,firstnumber=1,stepnumber=1]
  \PYG{k}{def} \PYG{n+nf}{independentChoices}\PYG{p}{(}\PYG{n+nb+bp}{self}\PYG{p}{,}\PYG{n}{U}\PYG{p}{)}\PYG{p}{:}
-     \PYG{l+s+sd}{\PYGZdq{}\PYGZdq{}\PYGZdq{}}
+\PYG{+w}{     }\PYG{l+s+sd}{\PYGZdq{}\PYGZdq{}\PYGZdq{}}
 \PYG{l+s+sd}{     Generator for all independent choices with associated}
 \PYG{l+s+sd}{     dominated, absorbed and independent neighborhoods}
 \PYG{l+s+sd}{     of digraph instance self.}
@@ -4913,7 +4928,7 @@ And, checking maximality of independent choices via the external stability condi
 
 \begin{sphinxVerbatim}[commandchars=\\\{\},numbers=left,firstnumber=1,stepnumber=1]
  \PYG{k}{def} \PYG{n+nf}{computePreKernels}\PYG{p}{(}\PYG{n+nb+bp}{self}\PYG{p}{)}\PYG{p}{:}
-     \PYG{l+s+sd}{\PYGZdq{}\PYGZdq{}\PYGZdq{}}
+\PYG{+w}{     }\PYG{l+s+sd}{\PYGZdq{}\PYGZdq{}\PYGZdq{}}
 \PYG{l+s+sd}{     computing dominant and absorbent preKernels:}
 \PYG{l+s+sd}{     Result in self.dompreKernels and self.abspreKernels}
 \PYG{l+s+sd}{     \PYGZdq{}\PYGZdq{}\PYGZdq{}}
@@ -6042,11 +6057,11 @@ Let us conclude by showing in \hyperref[\detokenize{pearls:r-session}]{Listing \
 \sphinxSetupCaptionForVerbatim{R session for drawing a hierarchical dendogram}
 \def\sphinxLiteralBlockLabel{\label{\detokenize{pearls:r-session}}}
 \begin{sphinxVerbatim}[commandchars=\\\{\},numbers=left,firstnumber=1,stepnumber=1]
-\PYG{o}{\PYGZgt{}} \PYG{n}{x} \PYG{o}{=} \PYG{n+nf}{read.csv}\PYG{p}{(}\PYG{l+s}{\PYGZsq{}}\PYG{l+s}{critCorrTable.csv\PYGZsq{}}\PYG{p}{,}\PYG{n}{row.names}\PYG{o}{=}\PYG{l+m}{1}\PYG{p}{)}
-\PYG{o}{\PYGZgt{}} \PYG{n}{X} \PYG{o}{=} \PYG{n+nf}{as.matrix}\PYG{p}{(}\PYG{n}{x}\PYG{p}{)}
-\PYG{o}{\PYGZgt{}} \PYG{n}{dd} \PYG{o}{=} \PYG{n+nf}{dist}\PYG{p}{(}\PYG{n}{X}\PYG{p}{,}\PYG{n}{method}\PYG{o}{=}\PYG{l+s}{\PYGZsq{}}\PYG{l+s}{euclidian\PYGZsq{}}\PYG{p}{)}
-\PYG{o}{\PYGZgt{}} \PYG{n}{hc} \PYG{o}{=} \PYG{n+nf}{hclust}\PYG{p}{(}\PYG{n}{dd}\PYG{p}{)}
-\PYG{o}{\PYGZgt{}} \PYG{n+nf}{plot}\PYG{p}{(}\PYG{n}{hc}\PYG{p}{)}
+\PYG{o}{\PYGZgt{}}\PYG{+w}{ }\PYG{n}{x}\PYG{+w}{ }\PYG{o}{=}\PYG{+w}{ }\PYG{n+nf}{read.csv}\PYG{p}{(}\PYG{l+s}{\PYGZsq{}}\PYG{l+s}{critCorrTable.csv\PYGZsq{}}\PYG{p}{,}\PYG{n}{row.names}\PYG{o}{=}\PYG{l+m}{1}\PYG{p}{)}
+\PYG{o}{\PYGZgt{}}\PYG{+w}{ }\PYG{n}{X}\PYG{+w}{ }\PYG{o}{=}\PYG{+w}{ }\PYG{n+nf}{as.matrix}\PYG{p}{(}\PYG{n}{x}\PYG{p}{)}
+\PYG{o}{\PYGZgt{}}\PYG{+w}{ }\PYG{n}{dd}\PYG{+w}{ }\PYG{o}{=}\PYG{+w}{ }\PYG{n+nf}{dist}\PYG{p}{(}\PYG{n}{X}\PYG{p}{,}\PYG{n}{method}\PYG{o}{=}\PYG{l+s}{\PYGZsq{}}\PYG{l+s}{euclidian\PYGZsq{}}\PYG{p}{)}
+\PYG{o}{\PYGZgt{}}\PYG{+w}{ }\PYG{n}{hc}\PYG{+w}{ }\PYG{o}{=}\PYG{+w}{ }\PYG{n+nf}{hclust}\PYG{p}{(}\PYG{n}{dd}\PYG{p}{)}
+\PYG{o}{\PYGZgt{}}\PYG{+w}{ }\PYG{n+nf}{plot}\PYG{p}{(}\PYG{n}{hc}\PYG{p}{)}
 \end{sphinxVerbatim}
 
 \begin{figure}[H]

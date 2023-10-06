@@ -34,7 +34,7 @@
    :Author: Raymond Bisdorff, Emeritus Professor of Applied Mathematics and Computer Science, https://rbisdorff.github.io/ 
    :Version: |version| (release: |release|)
    :PDF version: http://hdl.handle.net/10993/37886
-   :Copyright: `R. Bisdorff <_static/digraph3_copyright.html>`_ 2013-2022
+   :Copyright: `R. Bisdorff <_static/digraph3_copyright.html>`_ 2013-2023
 
 .. _Tutorial-label:
 
@@ -150,7 +150,7 @@ Several download options (easiest under Linux or Mac OS-X) are given.
 
    https://sourceforge.net/projects/digraph3
 
-2. By using a git client either, cloning from github --*mind the huge commit history*
+2. By using a git client either, cloning from github
 
 .. code-block:: bash
    

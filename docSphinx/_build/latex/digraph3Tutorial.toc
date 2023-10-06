@@ -88,8 +88,8 @@
 \contentsline {subsubsection}{Robustness analysis}{152}{subsubsection*.158}%
 \contentsline {subsection}{\numberline {3.2}The best academic \sphinxstyleemphasis {Computer Science} Depts: a \sphinxstyleemphasis {ranking} case study}{156}{subsection.3.2}%
 \contentsline {subsubsection}{The THE performance tableau}{156}{subsubsection*.165}%
-\contentsline {subsubsection}{Ranking with multiple incommensurable criteria of ordinal significance}{163}{subsubsection*.170}%
-\contentsline {subsubsection}{How to judge the quality of a ranking result?}{171}{subsubsection*.173}%
+\contentsline {subsubsection}{Ranking with multiple incommensurable criteria of ordinal significance}{162}{subsubsection*.170}%
+\contentsline {subsubsection}{How to judge the quality of a ranking result?}{170}{subsubsection*.173}%
 \contentsline {subsection}{\numberline {3.3}The best students, where do they study? A \sphinxstyleemphasis {rating} case study}{178}{subsection.3.3}%
 \contentsline {subsubsection}{The performance tableau}{178}{subsubsection*.181}%
 \contentsline {subsubsection}{Rating\sphinxhyphen {}by\sphinxhyphen {}ranking with lower\sphinxhyphen {}closed quantile limits}{182}{subsubsection*.183}%
@@ -119,13 +119,13 @@
 \contentsline {subsubsection}{A multiply \sphinxstyleemphasis {perfect} graph}{214}{subsubsection*.223}%
 \contentsline {subsubsection}{Who is the liar ?}{216}{subsubsection*.224}%
 \contentsline {subsubsection}{Generating permutation graphs}{219}{subsubsection*.226}%
-\contentsline {subsubsection}{Recognizing permutation graphs}{223}{subsubsection*.227}%
+\contentsline {subsubsection}{Recognizing permutation graphs}{222}{subsubsection*.227}%
 \contentsline {subsection}{\numberline {4.4}On computing fair intergroup pairings}{228}{subsection.4.4}%
-\contentsline {subsubsection}{The fair intergroup pairing problem}{229}{subsubsection*.236}%
-\contentsline {subsubsection}{Generating the set of potential maximal matchings}{231}{subsubsection*.238}%
-\contentsline {subsubsection}{Measuring the fitness of a matching from a personal perspective}{232}{subsubsection*.239}%
-\contentsline {subsubsection}{Computing the fairest intergroup pairing}{233}{subsubsection*.240}%
-\contentsline {subsubsection}{Fair versus stable pairings}{237}{subsubsection*.242}%
+\contentsline {subsubsection}{The fair intergroup pairing problem}{228}{subsubsection*.236}%
+\contentsline {subsubsection}{Generating the set of potential maximal matchings}{230}{subsubsection*.238}%
+\contentsline {subsubsection}{Measuring the fitness of a matching from a personal perspective}{231}{subsubsection*.239}%
+\contentsline {subsubsection}{Computing the fairest intergroup pairing}{232}{subsubsection*.240}%
+\contentsline {subsubsection}{Fair versus stable pairings}{236}{subsubsection*.242}%
 \contentsline {subsubsection}{Relaxing the requirement for complete linear voting profiles}{249}{subsubsection*.245}%
 \contentsline {subsubsection}{Using Copeland scores for guiding the fairness enhancement}{252}{subsubsection*.246}%
 \contentsline {subsubsection}{Starting the fairness enhancement from a best determined Copeland matching}{254}{subsubsection*.247}%
