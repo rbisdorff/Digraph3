@@ -7693,7 +7693,7 @@ A multiply *perfect* graph
 A graph *g* is called:
 
     * *Berge* or **perfect**  when *g* and its dual *-g* both don’t contain any chordless odd cycles of length greater than 3 ([BER-1963]_, [CHU-2006]_),
-    * **Triangulated** when *g* does not contain any chordless cycle of length 4.
+    * **Triangulated** when *g* does not contain any chordless cycle of length 4 and more.
 
 Following Martin Golumbic (see [GOL-2004]_ p. 149), we call a given graph *g* :
 
