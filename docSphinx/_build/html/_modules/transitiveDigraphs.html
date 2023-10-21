@@ -21,16 +21,16 @@
     <script src="../_static/js/html5shiv.min.js"></script>
   <![endif]-->
   
-        <script src="../_static/jquery.js?v=5d32c60e"></script>
-        <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-        <script src="../_static/documentation_options.js?v=d10c4a4b"></script>
-        <script src="../_static/doctools.js?v=888ff710"></script>
-        <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
-        <script src="../_static/clipboard.min.js?v=a7894cd8"></script>
-        <script src="../_static/copybutton.js?v=15d7cbb8"></script>
-        <script src="../_static/js/hoverxref.js?v=82c55261"></script>
-        <script src="../_static/js/tooltipster.bundle.min.js?v=18bf091b"></script>
-        <script src="../_static/js/micromodal.min.js?v=04d6302d"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+        <script src="../_static/doctools.js"></script>
+        <script src="../_static/sphinx_highlight.js"></script>
+        <script src="../_static/clipboard.min.js"></script>
+        <script src="../_static/copybutton.js"></script>
+        <script src="../_static/js/hoverxref.js"></script>
+        <script src="../_static/js/tooltipster.bundle.min.js"></script>
+        <script src="../_static/js/micromodal.min.js"></script>
     <script src="../_static/js/theme.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" /> 
@@ -121,27 +121,20 @@
 <span class="n">cpu_count</span> <span class="o">=</span> <span class="n">mpctx</span><span class="o">.</span><span class="n">cpu_count</span>
 
 
-<div class="viewcode-block" id="TransitiveDigraph">
-<a class="viewcode-back" href="../techDoc.html#transitiveDigraphs.TransitiveDigraph">[docs]</a>
-<span class="k">class</span> <span class="nc">TransitiveDigraph</span><span class="p">(</span><span class="n">Digraph</span><span class="p">):</span>
+<div class="viewcode-block" id="TransitiveDigraph"><a class="viewcode-back" href="../techDoc.html#transitiveDigraphs.TransitiveDigraph">[docs]</a><span class="k">class</span> <span class="nc">TransitiveDigraph</span><span class="p">(</span><span class="n">Digraph</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Abstract class for specialized methods addressing transitive digraphs.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;abstract root class&#39;</span><span class="p">)</span>
         
-<div class="viewcode-block" id="TransitiveDigraph.showWeakOrder">
-<a class="viewcode-back" href="../techDoc.html#transitiveDigraphs.TransitiveDigraph.showWeakOrder">[docs]</a>
-    <span class="k">def</span> <span class="nf">showWeakOrder</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">rankingByChoosing</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+<div class="viewcode-block" id="TransitiveDigraph.showWeakOrder"><a class="viewcode-back" href="../techDoc.html#transitiveDigraphs.TransitiveDigraph.showWeakOrder">[docs]</a>    <span class="k">def</span> <span class="nf">showWeakOrder</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">rankingByChoosing</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        A dummy for the showTransitiveDigraph() method.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">showTransitiveDigraph</span><span class="p">()</span></div>
-
         
-<div class="viewcode-block" id="TransitiveDigraph.showTransitiveDigraph">
-<a class="viewcode-back" href="../techDoc.html#transitiveDigraphs.TransitiveDigraph.showTransitiveDigraph">[docs]</a>
-    <span class="k">def</span> <span class="nf">showTransitiveDigraph</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">rankingByChoosing</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span><span class="n">WithCoverCredibility</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+<div class="viewcode-block" id="TransitiveDigraph.showTransitiveDigraph"><a class="viewcode-back" href="../techDoc.html#transitiveDigraphs.TransitiveDigraph.showTransitiveDigraph">[docs]</a>    <span class="k">def</span> <span class="nf">showTransitiveDigraph</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">rankingByChoosing</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span><span class="n">WithCoverCredibility</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        A show method for self.rankinByChoosing result.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
@@ -211,22 +204,16 @@
                 <span class="nb">print</span><span class="p">(</span><span class="s1">&#39; </span><span class="si">%s%s%s</span><span class="s1"> last ranked </span><span class="si">%s</span><span class="s1"> (</span><span class="si">%.2f</span><span class="s1">)&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="n">space</span><span class="p">,</span><span class="n">n</span><span class="o">-</span><span class="n">i</span><span class="p">,</span><span class="n">nstr</span><span class="p">,</span><span class="n">ch</span><span class="p">,</span><span class="n">rankingByChoosing</span><span class="p">[</span><span class="n">n</span><span class="o">-</span><span class="n">i</span><span class="o">-</span><span class="mi">1</span><span class="p">][</span><span class="mi">1</span><span class="p">][</span><span class="mi">0</span><span class="p">]))</span>
             <span class="k">else</span><span class="p">:</span>
                 <span class="nb">print</span><span class="p">(</span><span class="s1">&#39; </span><span class="si">%s%s%s</span><span class="s1"> last ranked </span><span class="si">%s</span><span class="s1">)&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="n">space</span><span class="p">,</span><span class="n">n</span><span class="o">-</span><span class="n">i</span><span class="p">,</span><span class="n">nstr</span><span class="p">,</span><span class="n">ch</span><span class="p">)</span> <span class="p">)</span></div>
-
                 
 
-<div class="viewcode-block" id="TransitiveDigraph.showRankingByChoosing">
-<a class="viewcode-back" href="../techDoc.html#transitiveDigraphs.TransitiveDigraph.showRankingByChoosing">[docs]</a>
-    <span class="k">def</span> <span class="nf">showRankingByChoosing</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">actionsList</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span><span class="n">rankingByChoosing</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span><span class="n">WithCoverCredibility</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+<div class="viewcode-block" id="TransitiveDigraph.showRankingByChoosing"><a class="viewcode-back" href="../techDoc.html#transitiveDigraphs.TransitiveDigraph.showRankingByChoosing">[docs]</a>    <span class="k">def</span> <span class="nf">showRankingByChoosing</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">actionsList</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span><span class="n">rankingByChoosing</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span><span class="n">WithCoverCredibility</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Dummy name for showTransitiveDigraph() method</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">showTransitiveDigraph</span><span class="p">(</span><span class="n">rankingByChoosing</span><span class="o">=</span><span class="n">rankingByChoosing</span><span class="p">,</span>
                                    <span class="n">WithCoverCredibility</span><span class="o">=</span><span class="n">WithCoverCredibility</span><span class="p">)</span></div>
-
     
-<div class="viewcode-block" id="TransitiveDigraph.showOrderedRelationTable">
-<a class="viewcode-back" href="../techDoc.html#transitiveDigraphs.TransitiveDigraph.showOrderedRelationTable">[docs]</a>
-    <span class="k">def</span> <span class="nf">showOrderedRelationTable</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">direction</span><span class="o">=</span><span class="s2">&quot;decreasing&quot;</span><span class="p">,</span><span class="n">originalRelation</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+<div class="viewcode-block" id="TransitiveDigraph.showOrderedRelationTable"><a class="viewcode-back" href="../techDoc.html#transitiveDigraphs.TransitiveDigraph.showOrderedRelationTable">[docs]</a>    <span class="k">def</span> <span class="nf">showOrderedRelationTable</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">direction</span><span class="o">=</span><span class="s2">&quot;decreasing&quot;</span><span class="p">,</span><span class="n">originalRelation</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Showing the relation table in decreasing (default) or increasing order.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
@@ -268,10 +255,7 @@
                                 <span class="n">Sorted</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
                                 <span class="n">ReflexiveTerms</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span></div>
 
-
-<div class="viewcode-block" id="TransitiveDigraph.exportDigraphGraphViz">
-<a class="viewcode-back" href="../techDoc.html#transitiveDigraphs.TransitiveDigraph.exportDigraphGraphViz">[docs]</a>
-    <span class="k">def</span> <span class="nf">exportDigraphGraphViz</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">fileName</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">bestChoice</span><span class="o">=</span><span class="nb">set</span><span class="p">(),</span><span class="n">worstChoice</span><span class="o">=</span><span class="nb">set</span><span class="p">(),</span><span class="n">Comments</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span><span class="n">graphType</span><span class="o">=</span><span class="s1">&#39;png&#39;</span><span class="p">,</span><span class="n">graphSize</span><span class="o">=</span><span class="s1">&#39;7,7&#39;</span><span class="p">):</span>
+<div class="viewcode-block" id="TransitiveDigraph.exportDigraphGraphViz"><a class="viewcode-back" href="../techDoc.html#transitiveDigraphs.TransitiveDigraph.exportDigraphGraphViz">[docs]</a>    <span class="k">def</span> <span class="nf">exportDigraphGraphViz</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">fileName</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">bestChoice</span><span class="o">=</span><span class="nb">set</span><span class="p">(),</span><span class="n">worstChoice</span><span class="o">=</span><span class="nb">set</span><span class="p">(),</span><span class="n">Comments</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span><span class="n">graphType</span><span class="o">=</span><span class="s1">&#39;png&#39;</span><span class="p">,</span><span class="n">graphSize</span><span class="o">=</span><span class="s1">&#39;7,7&#39;</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        export GraphViz dot file for digraph drawing filtering.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
@@ -282,10 +266,7 @@
                                <span class="n">graphType</span><span class="o">=</span><span class="n">graphType</span><span class="p">,</span>
                                <span class="n">graphSize</span><span class="o">=</span><span class="n">graphSize</span><span class="p">)</span></div>
 
-
-<div class="viewcode-block" id="TransitiveDigraph.exportTopologicalGraphViz">
-<a class="viewcode-back" href="../techDoc.html#transitiveDigraphs.TransitiveDigraph.exportTopologicalGraphViz">[docs]</a>
-    <span class="k">def</span> <span class="nf">exportTopologicalGraphViz</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">fileName</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+<div class="viewcode-block" id="TransitiveDigraph.exportTopologicalGraphViz"><a class="viewcode-back" href="../techDoc.html#transitiveDigraphs.TransitiveDigraph.exportTopologicalGraphViz">[docs]</a>    <span class="k">def</span> <span class="nf">exportTopologicalGraphViz</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">fileName</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
                                   <span class="n">relation</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span><span class="n">direction</span><span class="o">=</span><span class="s1">&#39;best&#39;</span><span class="p">,</span>
                                   <span class="n">Comments</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span><span class="n">graphType</span><span class="o">=</span><span class="s1">&#39;png&#39;</span><span class="p">,</span>
                                   <span class="n">graphSize</span><span class="o">=</span><span class="s1">&#39;7,7&#39;</span><span class="p">,</span>
@@ -412,10 +393,7 @@
             <span class="k">if</span> <span class="n">Comments</span><span class="p">:</span>
                 <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;graphViz tools not avalaible! Please check installation.&#39;</span><span class="p">)</span></div>
 
-
-<div class="viewcode-block" id="TransitiveDigraph.exportGraphViz">
-<a class="viewcode-back" href="../techDoc.html#transitiveDigraphs.TransitiveDigraph.exportGraphViz">[docs]</a>
-    <span class="k">def</span> <span class="nf">exportGraphViz</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">fileName</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span><span class="n">direction</span><span class="o">=</span><span class="s1">&#39;best&#39;</span><span class="p">,</span>
+<div class="viewcode-block" id="TransitiveDigraph.exportGraphViz"><a class="viewcode-back" href="../techDoc.html#transitiveDigraphs.TransitiveDigraph.exportGraphViz">[docs]</a>    <span class="k">def</span> <span class="nf">exportGraphViz</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">fileName</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span><span class="n">direction</span><span class="o">=</span><span class="s1">&#39;best&#39;</span><span class="p">,</span>
                        <span class="n">WithBestPathDecoration</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
                        <span class="n">WithRatingDecoration</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
                        <span class="n">Comments</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span><span class="n">graphType</span><span class="o">=</span><span class="s1">&#39;png&#39;</span><span class="p">,</span>
@@ -591,14 +569,10 @@
             <span class="n">os</span><span class="o">.</span><span class="n">system</span><span class="p">(</span><span class="n">commandString</span><span class="p">)</span>
         <span class="k">except</span><span class="p">:</span>
             <span class="k">if</span> <span class="n">Comments</span><span class="p">:</span>
-                <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;graphViz tools not avalaible! Please check installation.&#39;</span><span class="p">)</span></div>
-</div>
+                <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;graphViz tools not avalaible! Please check installation.&#39;</span><span class="p">)</span></div></div>
 
 
-
-<div class="viewcode-block" id="RankingsFusionDigraph">
-<a class="viewcode-back" href="../techDoc.html#transitiveDigraphs.RankingsFusionDigraph">[docs]</a>
-<span class="k">class</span> <span class="nc">RankingsFusionDigraph</span><span class="p">(</span><span class="n">TransitiveDigraph</span><span class="p">):</span>
+<div class="viewcode-block" id="RankingsFusionDigraph"><a class="viewcode-back" href="../techDoc.html#transitiveDigraphs.RankingsFusionDigraph">[docs]</a><span class="k">class</span> <span class="nc">RankingsFusionDigraph</span><span class="p">(</span><span class="n">TransitiveDigraph</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Specialization of the abstract TransitiveDigraph class for </span>
 <span class="sd">    digraphs resulting from the epistemic</span>
@@ -672,18 +646,12 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">gamma</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">gammaSets</span><span class="p">()</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">notGamma</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">notGammaSets</span><span class="p">()</span></div>
 
-
-<div class="viewcode-block" id="RankingsFusion">
-<a class="viewcode-back" href="../techDoc.html#transitiveDigraphs.RankingsFusion">[docs]</a>
-<span class="k">class</span> <span class="nc">RankingsFusion</span><span class="p">(</span><span class="n">RankingsFusionDigraph</span><span class="p">):</span>
+<div class="viewcode-block" id="RankingsFusion"><a class="viewcode-back" href="../techDoc.html#transitiveDigraphs.RankingsFusion">[docs]</a><span class="k">class</span> <span class="nc">RankingsFusion</span><span class="p">(</span><span class="n">RankingsFusionDigraph</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Obsolete dummy for the RankingsFusionDigraph class</span>
 <span class="sd">    &quot;&quot;&quot;</span></div>
 
-
-<div class="viewcode-block" id="KemenyOrdersFusion">
-<a class="viewcode-back" href="../techDoc.html#transitiveDigraphs.KemenyOrdersFusion">[docs]</a>
-<span class="k">class</span> <span class="nc">KemenyOrdersFusion</span><span class="p">(</span><span class="n">TransitiveDigraph</span><span class="p">):</span>
+<div class="viewcode-block" id="KemenyOrdersFusion"><a class="viewcode-back" href="../techDoc.html#transitiveDigraphs.KemenyOrdersFusion">[docs]</a><span class="k">class</span> <span class="nc">KemenyOrdersFusion</span><span class="p">(</span><span class="n">TransitiveDigraph</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Specialization of the abstract TransitiveDigraph class for </span>
 <span class="sd">    transitive digraphs resulting from the epistemic</span>
@@ -749,7 +717,6 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">gamma</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">gammaSets</span><span class="p">()</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">notGamma</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">notGammaSets</span><span class="p">()</span></div>
 
-
 <span class="c1"># myThread for KohlerArrawRaynaudFusion</span>
 <span class="c1">##        if Threading:</span>
 <span class="c1">##            from multiprocessing import Process, Lock, active_children, cpu_count</span>
@@ -787,9 +754,7 @@
 
 
 
-<div class="viewcode-block" id="KohlerArrowRaynaudFusion">
-<a class="viewcode-back" href="../techDoc.html#transitiveDigraphs.KohlerArrowRaynaudFusion">[docs]</a>
-<span class="k">class</span> <span class="nc">KohlerArrowRaynaudFusion</span><span class="p">(</span><span class="n">TransitiveDigraph</span><span class="p">):</span>
+<div class="viewcode-block" id="KohlerArrowRaynaudFusion"><a class="viewcode-back" href="../techDoc.html#transitiveDigraphs.KohlerArrowRaynaudFusion">[docs]</a><span class="k">class</span> <span class="nc">KohlerArrowRaynaudFusion</span><span class="p">(</span><span class="n">TransitiveDigraph</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Specialization of the abstract TransitiveDigraph class for </span>
 <span class="sd">    ranking-by-choosing orderings resulting from the epistemic</span>
@@ -875,7 +840,6 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">gamma</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">gammaSets</span><span class="p">()</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">notGamma</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">notGammaSets</span><span class="p">()</span></div>
 
-
 <span class="c1">#---------------------</span>
 <span class="c1"># my Thread for the RankingByChoosing class</span>
 <span class="k">class</span> <span class="nc">_myRBCThread</span><span class="p">(</span><span class="n">Process</span><span class="p">):</span>
@@ -911,9 +875,7 @@
             <span class="n">fo</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">dumps</span><span class="p">(</span><span class="n">rbwc</span><span class="p">,</span><span class="o">-</span><span class="mi">1</span><span class="p">))</span>
         <span class="n">fo</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
 
-<div class="viewcode-block" id="RankingByChoosingDigraph">
-<a class="viewcode-back" href="../techDoc.html#transitiveDigraphs.RankingByChoosingDigraph">[docs]</a>
-<span class="k">class</span> <span class="nc">RankingByChoosingDigraph</span><span class="p">(</span><span class="n">TransitiveDigraph</span><span class="p">):</span>
+<div class="viewcode-block" id="RankingByChoosingDigraph"><a class="viewcode-back" href="../techDoc.html#transitiveDigraphs.RankingByChoosingDigraph">[docs]</a><span class="k">class</span> <span class="nc">RankingByChoosingDigraph</span><span class="p">(</span><span class="n">TransitiveDigraph</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Specialization of the abstract TransitiveDigraph class for </span>
 <span class="sd">    ranking-by-Rubis-choosing orderings.</span>
@@ -1102,9 +1064,7 @@
         <span class="n">runTimes</span><span class="p">[</span><span class="s1">&#39;totalTime&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">time</span><span class="p">()</span> <span class="o">-</span> <span class="n">t0</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">runTimes</span> <span class="o">=</span> <span class="n">runTimes</span>
 
-<div class="viewcode-block" id="RankingByChoosingDigraph.showTransitiveDigraph">
-<a class="viewcode-back" href="../techDoc.html#transitiveDigraphs.RankingByChoosingDigraph.showTransitiveDigraph">[docs]</a>
-    <span class="k">def</span> <span class="nf">showTransitiveDigraph</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">rankingByChoosing</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span><span class="n">rankingStrategy</span><span class="o">=</span><span class="s1">&#39;optimistic&#39;</span><span class="p">,</span><span class="n">WithCoverCredibility</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+<div class="viewcode-block" id="RankingByChoosingDigraph.showTransitiveDigraph"><a class="viewcode-back" href="../techDoc.html#transitiveDigraphs.RankingByChoosingDigraph.showTransitiveDigraph">[docs]</a>    <span class="k">def</span> <span class="nf">showTransitiveDigraph</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">rankingByChoosing</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span><span class="n">rankingStrategy</span><span class="o">=</span><span class="s1">&#39;optimistic&#39;</span><span class="p">,</span><span class="n">WithCoverCredibility</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Specialization of generic method.</span>
 <span class="sd">        Without argument, a weak ordering is recomputed from the</span>
@@ -1122,10 +1082,7 @@
 
 
 
-
-<div class="viewcode-block" id="RankingByChoosingDigraph.showRankingByChoosing">
-<a class="viewcode-back" href="../techDoc.html#transitiveDigraphs.RankingByChoosingDigraph.showRankingByChoosing">[docs]</a>
-    <span class="k">def</span> <span class="nf">showRankingByChoosing</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">rankingByChoosing</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span><span class="n">rankingStrategy</span><span class="o">=</span><span class="s1">&#39;optimistic&#39;</span><span class="p">,</span><span class="n">WithCoverCredibility</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+<div class="viewcode-block" id="RankingByChoosingDigraph.showRankingByChoosing"><a class="viewcode-back" href="../techDoc.html#transitiveDigraphs.RankingByChoosingDigraph.showRankingByChoosing">[docs]</a>    <span class="k">def</span> <span class="nf">showRankingByChoosing</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">rankingByChoosing</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span><span class="n">rankingStrategy</span><span class="o">=</span><span class="s1">&#39;optimistic&#39;</span><span class="p">,</span><span class="n">WithCoverCredibility</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Dummy for showTransitiveDigraph method</span>
 <span class="sd">        &quot;&quot;&quot;</span>
@@ -1133,32 +1090,22 @@
                                    <span class="n">rankingStrategy</span><span class="o">=</span><span class="n">rankingStrategy</span><span class="p">,</span>
                                    <span class="n">WithCoverCredibility</span><span class="o">=</span><span class="n">WithCoverCredibility</span><span class="p">)</span></div>
 
-
-<div class="viewcode-block" id="RankingByChoosingDigraph.computeRankingByBestChoosing">
-<a class="viewcode-back" href="../techDoc.html#transitiveDigraphs.RankingByChoosingDigraph.computeRankingByBestChoosing">[docs]</a>
-    <span class="k">def</span> <span class="nf">computeRankingByBestChoosing</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">Forced</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+<div class="viewcode-block" id="RankingByChoosingDigraph.computeRankingByBestChoosing"><a class="viewcode-back" href="../techDoc.html#transitiveDigraphs.RankingByChoosingDigraph.computeRankingByBestChoosing">[docs]</a>    <span class="k">def</span> <span class="nf">computeRankingByBestChoosing</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">Forced</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Dummy for blocking recomputing without forcing. </span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">if</span> <span class="n">Forced</span><span class="p">:</span>
             <span class="n">TransitiveDigraph</span><span class="o">.</span><span class="n">computeRankingByBestChoosing</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">CoDual</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">CoDual</span><span class="p">,</span><span class="n">CppAgrum</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">CppAgrum</span><span class="p">)</span></div>
 
-
-<div class="viewcode-block" id="RankingByChoosingDigraph.computeRankingByLastChoosing">
-<a class="viewcode-back" href="../techDoc.html#transitiveDigraphs.RankingByChoosingDigraph.computeRankingByLastChoosing">[docs]</a>
-    <span class="k">def</span> <span class="nf">computeRankingByLastChoosing</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">Forced</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+<div class="viewcode-block" id="RankingByChoosingDigraph.computeRankingByLastChoosing"><a class="viewcode-back" href="../techDoc.html#transitiveDigraphs.RankingByChoosingDigraph.computeRankingByLastChoosing">[docs]</a>    <span class="k">def</span> <span class="nf">computeRankingByLastChoosing</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">Forced</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Dummy for blocking recomputing without forcing. </span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">if</span> <span class="n">Forced</span><span class="p">:</span>
-            <span class="n">TransitiveDigraph</span><span class="o">.</span><span class="n">computeRankingByLastChoosing</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">CoDual</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">CoDual</span><span class="p">,</span><span class="n">CppAgrum</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">CppAgrum</span><span class="p">)</span></div>
-</div>
-
+            <span class="n">TransitiveDigraph</span><span class="o">.</span><span class="n">computeRankingByLastChoosing</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">CoDual</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">CoDual</span><span class="p">,</span><span class="n">CppAgrum</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">CppAgrum</span><span class="p">)</span></div></div>
 
 <span class="c1">#--------------------</span>
-<div class="viewcode-block" id="RankingByBestChoosingDigraph">
-<a class="viewcode-back" href="../techDoc.html#transitiveDigraphs.RankingByBestChoosingDigraph">[docs]</a>
-<span class="k">class</span> <span class="nc">RankingByBestChoosingDigraph</span><span class="p">(</span><span class="n">RankingByChoosingDigraph</span><span class="p">):</span>
+<div class="viewcode-block" id="RankingByBestChoosingDigraph"><a class="viewcode-back" href="../techDoc.html#transitiveDigraphs.RankingByBestChoosingDigraph">[docs]</a><span class="k">class</span> <span class="nc">RankingByBestChoosingDigraph</span><span class="p">(</span><span class="n">RankingByChoosingDigraph</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Specialization of abstract TransitiveDigraph class for computing a ranking by best-choosing.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
@@ -1178,20 +1125,14 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">notGamma</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">notGammaSets</span><span class="p">()</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">rankingByBestChoosing</span> <span class="o">=</span> <span class="n">digraph</span><span class="o">.</span><span class="n">rankingByBestChoosing</span>
         
-<div class="viewcode-block" id="RankingByBestChoosingDigraph.showTransitiveDigraph">
-<a class="viewcode-back" href="../techDoc.html#transitiveDigraphs.RankingByBestChoosingDigraph.showTransitiveDigraph">[docs]</a>
-    <span class="k">def</span> <span class="nf">showTransitiveDigraph</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<div class="viewcode-block" id="RankingByBestChoosingDigraph.showTransitiveDigraph"><a class="viewcode-back" href="../techDoc.html#transitiveDigraphs.RankingByBestChoosingDigraph.showTransitiveDigraph">[docs]</a>    <span class="k">def</span> <span class="nf">showTransitiveDigraph</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Specialisation of showTransitiveDigraph() for ranking-by-best-choosing results.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">showRankingByBestChoosing</span><span class="p">()</span></div>
-</div>
+        <span class="bp">self</span><span class="o">.</span><span class="n">showRankingByBestChoosing</span><span class="p">()</span></div></div>
 
 
-
-<div class="viewcode-block" id="RankingByLastChoosingDigraph">
-<a class="viewcode-back" href="../techDoc.html#transitiveDigraphs.RankingByLastChoosingDigraph">[docs]</a>
-<span class="k">class</span> <span class="nc">RankingByLastChoosingDigraph</span><span class="p">(</span><span class="n">RankingByChoosingDigraph</span><span class="p">):</span>
+<div class="viewcode-block" id="RankingByLastChoosingDigraph"><a class="viewcode-back" href="../techDoc.html#transitiveDigraphs.RankingByLastChoosingDigraph">[docs]</a><span class="k">class</span> <span class="nc">RankingByLastChoosingDigraph</span><span class="p">(</span><span class="n">RankingByChoosingDigraph</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Specialization of abstract TransitiveDigraph class for computing a ranking by rejecting.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
@@ -1211,20 +1152,14 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">notGamma</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">notGammaSets</span><span class="p">()</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">rankingByLastChoosing</span> <span class="o">=</span> <span class="n">digraph</span><span class="o">.</span><span class="n">rankingByLastChoosing</span>
     
-<div class="viewcode-block" id="RankingByLastChoosingDigraph.showTransitiveDigraph">
-<a class="viewcode-back" href="../techDoc.html#transitiveDigraphs.RankingByLastChoosingDigraph.showTransitiveDigraph">[docs]</a>
-    <span class="k">def</span> <span class="nf">showTransitiveDigraph</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<div class="viewcode-block" id="RankingByLastChoosingDigraph.showTransitiveDigraph"><a class="viewcode-back" href="../techDoc.html#transitiveDigraphs.RankingByLastChoosingDigraph.showTransitiveDigraph">[docs]</a>    <span class="k">def</span> <span class="nf">showTransitiveDigraph</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Specialisation of showTransitiveDigraph() for ranking-by-last-choosing results.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">showRankingByLastChoosing</span><span class="p">()</span></div>
-</div>
+        <span class="bp">self</span><span class="o">.</span><span class="n">showRankingByLastChoosing</span><span class="p">()</span></div></div>
 
 
-
-<div class="viewcode-block" id="RankingByPrudentChoosingDigraph">
-<a class="viewcode-back" href="../techDoc.html#transitiveDigraphs.RankingByPrudentChoosingDigraph">[docs]</a>
-<span class="k">class</span> <span class="nc">RankingByPrudentChoosingDigraph</span><span class="p">(</span><span class="n">RankingByChoosingDigraph</span><span class="p">):</span>
+<div class="viewcode-block" id="RankingByPrudentChoosingDigraph"><a class="viewcode-back" href="../techDoc.html#transitiveDigraphs.RankingByPrudentChoosingDigraph">[docs]</a><span class="k">class</span> <span class="nc">RankingByPrudentChoosingDigraph</span><span class="p">(</span><span class="n">RankingByChoosingDigraph</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Specialization for ranking-by-rejecting results with prudent single elimination of chordless circuits. By default, the cut level for circuits elimination is set to 20% of the valuation domain maximum (1.0).</span>
 <span class="sd">    &quot;&quot;&quot;</span>
@@ -1298,7 +1233,6 @@
             <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Determinateness : </span><span class="si">%.3f</span><span class="s1"> (</span><span class="si">%.3f</span><span class="s1">)&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="n">corr</span><span class="p">[</span><span class="s1">&#39;determination&#39;</span><span class="p">],</span><span class="n">gdeter</span><span class="p">))</span>
             <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Execution time  : </span><span class="si">%.4f</span><span class="s1"> sec.&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="n">t1</span><span class="o">-</span><span class="n">t0</span><span class="p">))</span></div>
 
-
 <span class="c1"># multiprocessing thread for the principal fusion class</span>
 <span class="c1">#from multiprocessing import Process, Lock, active_children, cpu_count</span>
 <span class="k">class</span> <span class="nc">_myPRIODThread</span><span class="p">(</span><span class="n">Process</span><span class="p">):</span>
@@ -1340,9 +1274,7 @@
             <span class="n">fo</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">dumps</span><span class="p">(</span><span class="n">pl</span><span class="p">,</span><span class="o">-</span><span class="mi">1</span><span class="p">))</span>
         <span class="n">fo</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
 
-<div class="viewcode-block" id="PrincipalInOutDegreesOrderingFusion">
-<a class="viewcode-back" href="../techDoc.html#transitiveDigraphs.PrincipalInOutDegreesOrderingFusion">[docs]</a>
-<span class="k">class</span> <span class="nc">PrincipalInOutDegreesOrderingFusion</span><span class="p">(</span><span class="n">TransitiveDigraph</span><span class="p">):</span>
+<div class="viewcode-block" id="PrincipalInOutDegreesOrderingFusion"><a class="viewcode-back" href="../techDoc.html#transitiveDigraphs.PrincipalInOutDegreesOrderingFusion">[docs]</a><span class="k">class</span> <span class="nc">PrincipalInOutDegreesOrderingFusion</span><span class="p">(</span><span class="n">TransitiveDigraph</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Specialization of abstract TransitiveDigraph class for ranking by fusion</span>
 <span class="sd">    of the principal orders of the variance-covariance of in- </span>
@@ -1483,9 +1415,7 @@
         <span class="k">if</span> <span class="n">Debug</span><span class="p">:</span>
             <span class="nb">print</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">computeOrdinalCorrelation</span><span class="p">(</span><span class="n">digraph</span><span class="p">))</span>
 
-<div class="viewcode-block" id="PrincipalInOutDegreesOrderingFusion.showPrincipalScores">
-<a class="viewcode-back" href="../techDoc.html#transitiveDigraphs.PrincipalInOutDegreesOrderingFusion.showPrincipalScores">[docs]</a>
-    <span class="k">def</span> <span class="nf">showPrincipalScores</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">ColwiseOrder</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">RowwiseOrder</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+<div class="viewcode-block" id="PrincipalInOutDegreesOrderingFusion.showPrincipalScores"><a class="viewcode-back" href="../techDoc.html#transitiveDigraphs.PrincipalInOutDegreesOrderingFusion.showPrincipalScores">[docs]</a>    <span class="k">def</span> <span class="nf">showPrincipalScores</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">ColwiseOrder</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">RowwiseOrder</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        showing the principal in- (Colwise) and out-degrees (Rowwise) scores.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
@@ -1511,10 +1441,7 @@
                       <span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="bp">self</span><span class="o">.</span><span class="n">actions</span><span class="p">[</span><span class="n">x</span><span class="p">][</span><span class="s1">&#39;principalColwiseScore&#39;</span><span class="p">],</span>
                        <span class="bp">self</span><span class="o">.</span><span class="n">actions</span><span class="p">[</span><span class="n">x</span><span class="p">][</span><span class="s1">&#39;principalRowwiseScore&#39;</span><span class="p">]))</span></div>
 
-
-<div class="viewcode-block" id="PrincipalInOutDegreesOrderingFusion.computeTransitiveDigraph">
-<a class="viewcode-back" href="../techDoc.html#transitiveDigraphs.PrincipalInOutDegreesOrderingFusion.computeTransitiveDigraph">[docs]</a>
-    <span class="k">def</span> <span class="nf">computeTransitiveDigraph</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">ColwiseOrder</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+<div class="viewcode-block" id="PrincipalInOutDegreesOrderingFusion.computeTransitiveDigraph"><a class="viewcode-back" href="../techDoc.html#transitiveDigraphs.PrincipalInOutDegreesOrderingFusion.computeTransitiveDigraph">[docs]</a>    <span class="k">def</span> <span class="nf">computeTransitiveDigraph</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">ColwiseOrder</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Specialisation for PrincipalInOutDegreesOrderings.</span>
 <span class="sd">        &quot;&quot;&quot;</span>        
@@ -1536,11 +1463,8 @@
 
         <span class="n">TransitiveDigraphing</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;result&#39;</span><span class="p">:</span><span class="n">ordering</span><span class="p">}</span>
         <span class="k">return</span> <span class="n">TransitiveDigraphing</span></div>
-
                 
-<div class="viewcode-block" id="PrincipalInOutDegreesOrderingFusion.showTransitiveDigraph">
-<a class="viewcode-back" href="../techDoc.html#transitiveDigraphs.PrincipalInOutDegreesOrderingFusion.showTransitiveDigraph">[docs]</a>
-    <span class="k">def</span> <span class="nf">showTransitiveDigraph</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">ColwiseOrder</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+<div class="viewcode-block" id="PrincipalInOutDegreesOrderingFusion.showTransitiveDigraph"><a class="viewcode-back" href="../techDoc.html#transitiveDigraphs.PrincipalInOutDegreesOrderingFusion.showTransitiveDigraph">[docs]</a>    <span class="k">def</span> <span class="nf">showTransitiveDigraph</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">ColwiseOrder</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Specialisation for PrincipalInOutDegreesOrderings.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
@@ -1570,12 +1494,9 @@
         <span class="c1">#print(TransitiveDigraphing)</span>
 
         <span class="n">TransitiveDigraph</span><span class="o">.</span><span class="n">showTransitiveDigraph</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">TransitiveDigraphing</span><span class="p">)</span></div>
-
             
 
-<div class="viewcode-block" id="PrincipalInOutDegreesOrderingFusion.exportGraphViz">
-<a class="viewcode-back" href="../techDoc.html#transitiveDigraphs.PrincipalInOutDegreesOrderingFusion.exportGraphViz">[docs]</a>
-    <span class="k">def</span> <span class="nf">exportGraphViz</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">fileName</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span><span class="n">direction</span><span class="o">=</span><span class="s1">&#39;ColwiseOrder&#39;</span><span class="p">,</span>
+<div class="viewcode-block" id="PrincipalInOutDegreesOrderingFusion.exportGraphViz"><a class="viewcode-back" href="../techDoc.html#transitiveDigraphs.PrincipalInOutDegreesOrderingFusion.exportGraphViz">[docs]</a>    <span class="k">def</span> <span class="nf">exportGraphViz</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">fileName</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span><span class="n">direction</span><span class="o">=</span><span class="s1">&#39;ColwiseOrder&#39;</span><span class="p">,</span>
                        <span class="n">Comments</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span><span class="n">graphType</span><span class="o">=</span><span class="s1">&#39;png&#39;</span><span class="p">,</span>
                        <span class="n">graphSize</span><span class="o">=</span><span class="s1">&#39;7,7&#39;</span><span class="p">,</span>
                        <span class="n">fontSize</span><span class="o">=</span><span class="mi">10</span><span class="p">):</span>
@@ -1593,9 +1514,7 @@
                             <span class="n">Comments</span><span class="o">=</span><span class="n">Comments</span><span class="p">,</span>
                             <span class="n">graphType</span><span class="o">=</span><span class="n">graphType</span><span class="p">,</span>
                             <span class="n">graphSize</span><span class="o">=</span><span class="n">graphSize</span><span class="p">,</span>
-                            <span class="n">fontSize</span><span class="o">=</span><span class="n">fontSize</span><span class="p">)</span></div>
-</div>
-
+                            <span class="n">fontSize</span><span class="o">=</span><span class="n">fontSize</span><span class="p">)</span></div></div>
 
 <span class="c1">##################</span>
 
@@ -1752,9 +1671,7 @@
 
 <span class="c1">#####</span>
 
-<div class="viewcode-block" id="WeakCopelandOrder">
-<a class="viewcode-back" href="../techDoc.html#transitiveDigraphs.WeakCopelandOrder">[docs]</a>
-<span class="k">class</span> <span class="nc">WeakCopelandOrder</span><span class="p">(</span><span class="n">TransitiveDigraph</span><span class="p">):</span>
+<div class="viewcode-block" id="WeakCopelandOrder"><a class="viewcode-back" href="../techDoc.html#transitiveDigraphs.WeakCopelandOrder">[docs]</a><span class="k">class</span> <span class="nc">WeakCopelandOrder</span><span class="p">(</span><span class="n">TransitiveDigraph</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    instantiates the Weak Copeland Order from</span>
 <span class="sd">    a given bipolar-valued Digraph instance</span>
@@ -1893,10 +1810,7 @@
             <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="nb">reversed</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">copelandScores</span><span class="p">):</span>
                 <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;</span><span class="si">%s</span><span class="s1"> </span><span class="se">\t</span><span class="s1"> </span><span class="si">%.2f</span><span class="s1">&#39;</span> <span class="o">%</span><span class="p">(</span><span class="n">x</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span><span class="o">-</span><span class="n">x</span><span class="p">[</span><span class="mi">0</span><span class="p">]))</span></div>
 
-
-<div class="viewcode-block" id="WeakNetFlowsOrder">
-<a class="viewcode-back" href="../techDoc.html#transitiveDigraphs.WeakNetFlowsOrder">[docs]</a>
-<span class="k">class</span> <span class="nc">WeakNetFlowsOrder</span><span class="p">(</span><span class="n">TransitiveDigraph</span><span class="p">):</span>
+<div class="viewcode-block" id="WeakNetFlowsOrder"><a class="viewcode-back" href="../techDoc.html#transitiveDigraphs.WeakNetFlowsOrder">[docs]</a><span class="k">class</span> <span class="nc">WeakNetFlowsOrder</span><span class="p">(</span><span class="n">TransitiveDigraph</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Instantiates the Weak NetFlows Order from</span>
 <span class="sd">    a given bipolar-valued Digraph instance.</span>
@@ -1998,42 +1912,29 @@
             <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="nb">reversed</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">netFlowScores</span><span class="p">):</span>
                 <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;</span><span class="si">%s</span><span class="s1"> </span><span class="se">\t</span><span class="s1"> </span><span class="si">%.2f</span><span class="s1">&#39;</span> <span class="o">%</span><span class="p">(</span><span class="n">x</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span><span class="n">x</span><span class="p">[</span><span class="mi">0</span><span class="p">]))</span></div>
 
-
 <span class="c1">#########</span>
 <span class="c1"># compatibility with obsolete weakOrders module</span>
 <span class="c1">#######################</span>
 
-<div class="viewcode-block" id="PartialRanking">
-<a class="viewcode-back" href="../techDoc.html#transitiveDigraphs.PartialRanking">[docs]</a>
-<span class="k">class</span> <span class="nc">PartialRanking</span><span class="p">(</span><span class="n">RankingsFusion</span><span class="p">):</span>
+<div class="viewcode-block" id="PartialRanking"><a class="viewcode-back" href="../techDoc.html#transitiveDigraphs.PartialRanking">[docs]</a><span class="k">class</span> <span class="nc">PartialRanking</span><span class="p">(</span><span class="n">RankingsFusion</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    dummy class for backward compatibility.</span>
 <span class="sd">    &quot;&quot;&quot;</span></div>
 
-
-<div class="viewcode-block" id="KemenyWeakOrder">
-<a class="viewcode-back" href="../techDoc.html#transitiveDigraphs.KemenyWeakOrder">[docs]</a>
-<span class="k">class</span> <span class="nc">KemenyWeakOrder</span><span class="p">(</span><span class="n">KemenyOrdersFusion</span><span class="p">):</span>
+<div class="viewcode-block" id="KemenyWeakOrder"><a class="viewcode-back" href="../techDoc.html#transitiveDigraphs.KemenyWeakOrder">[docs]</a><span class="k">class</span> <span class="nc">KemenyWeakOrder</span><span class="p">(</span><span class="n">KemenyOrdersFusion</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    dummy class for backward compatibility.</span>
 <span class="sd">    &quot;&quot;&quot;</span></div>
 
-
-<div class="viewcode-block" id="PrincipalInOutDegreesOrdering">
-<a class="viewcode-back" href="../techDoc.html#transitiveDigraphs.PrincipalInOutDegreesOrdering">[docs]</a>
-<span class="k">class</span> <span class="nc">PrincipalInOutDegreesOrdering</span><span class="p">(</span><span class="n">PrincipalInOutDegreesOrderingFusion</span><span class="p">):</span>
+<div class="viewcode-block" id="PrincipalInOutDegreesOrdering"><a class="viewcode-back" href="../techDoc.html#transitiveDigraphs.PrincipalInOutDegreesOrdering">[docs]</a><span class="k">class</span> <span class="nc">PrincipalInOutDegreesOrdering</span><span class="p">(</span><span class="n">PrincipalInOutDegreesOrderingFusion</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    dummy class for backward compatibility.</span>
 <span class="sd">    &quot;&quot;&quot;</span></div>
 
-
-<div class="viewcode-block" id="WeakOrder">
-<a class="viewcode-back" href="../techDoc.html#transitiveDigraphs.WeakOrder">[docs]</a>
-<span class="k">class</span> <span class="nc">WeakOrder</span><span class="p">(</span><span class="n">TransitiveDigraph</span><span class="p">):</span>
+<div class="viewcode-block" id="WeakOrder"><a class="viewcode-back" href="../techDoc.html#transitiveDigraphs.WeakOrder">[docs]</a><span class="k">class</span> <span class="nc">WeakOrder</span><span class="p">(</span><span class="n">TransitiveDigraph</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    dummy class for backward compatibility.</span>
 <span class="sd">    &quot;&quot;&quot;</span></div>
-
 
 <span class="c1">####################</span>
 

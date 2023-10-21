@@ -9357,7 +9357,7 @@ On computing fair intragroup pairings
 The fair intragroup pairing problem
 ```````````````````````````````````
 
-A very similar decision problem to the intergroup pairing one appears when, instead of pairing two different set of persons, we are asked to pair an even-sized set of persons by fairly balancing again the individual pairing preferences of each person.
+A very similar decision problem to the intergroup pairing one appears when, instead of pairing two different sets of persons, we are asked to pair an even-sized set of persons by fairly balancing again the individual pairing preferences of each person.
 
 Let us consider a set of four persons {*p1*, *p2*, *p3*, *p4*} to be paired. We may propose three potential pairing decisions :
 
