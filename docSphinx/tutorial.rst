@@ -31,15 +31,15 @@
 
 .. only:: html
 
-   :Author: Raymond Bisdorff, Emeritus Professor of Applied Mathematics and Computer Science, https://rbisdorff.github.io/ 
+   :Author: Raymond Bisdorff, Emeritus Professor of Applied Mathematics and Computer Science 
    :Version: |version| (release: |release|)
-   :PDF version: http://hdl.handle.net/10993/37886
+   :PDF version: `5.9 MB <_static/digraph3Tutorial.pdf>`_ 
    :Copyright: `R. Bisdorff <_static/digraph3_copyright.html>`_ 2013-2023
 
 .. _Tutorial-label:
 
 .. only:: html
-
+	  
    :New: Two tutorials on computing :ref:`fair intergroup<Fair-InterGroup-Pairings-label>` and :ref:`fair intragroup<Fair-IntraGroup-Pairings-label>` pairing solutions	      
 
    Contents
