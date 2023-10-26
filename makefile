@@ -37,10 +37,12 @@ sphinx:
 
 sphinxLatexPDF:
 		(cd docSphinx; \
-		${SPHINX} -b latex -d _build/doctrees   . $(BUILDDIR)/latex; \
+		${SPHINX} -b latex -d _build/doctrees   . ${BUILDDIR}/latex; \
 		echo "Running LaTeX files through pdflatex..."; \
-		$(MAKE) -C $(BUILDDIR)/latex all-pdf; \
-		echo "The PDF files are in /docSphinx/_build/latex.")
+		${MAKE} -C ${BUILDDIR}/latex all-pdf; \
+		cp ${BUILDDIR}/latex/digraph3*.pdf ${BUILDDIR}/html/_static; \
+		echo "The PDF files are in /docSphinx/_build/latex";\
+		echo "              and in /docSphinx/_build/html/_static")
 
 # make sphinx ebook
 # sphinxEpub:
