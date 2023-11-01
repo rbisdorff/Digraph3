@@ -12,6 +12,8 @@ Digraph3 Book Errata List
     | P55 L11 *for* 'Sect. 20.4' *read* 'Sect.17.4'
     | P91 L3: *for* 'BORDA ranked candidate *c1*' *read* 'BORDA ranked candidate *c4*'
     | P112 Alg. 8.5 L1: *for* :math:`G(X, \succnsim )` *read* :math:`G(X, \succsim )`
+    | P163 L2: *for* 'to each of' *read* 'to each one of'
+    | P163 L11 *for* 'draws the corresponding' *read* 'draws in Fig.12.7 on previous page the corresponding'
     | P168 L5: *for* 'each one of performance criteria' *read* 'each one of the performance criteria'
     | P182 L2: *for* 'on the preceding page). Due perhaps to' *read* 'above). Due to'
     | P188 Tab.14.1 caption: *for* 'per academic scores' *read* 'per academic subject'
