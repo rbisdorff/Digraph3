@@ -2947,77 +2947,92 @@ class RandomCBPerformanceTableau(PerformanceTableau):
     .. note::
 
         Minimal number required of criteria is 2, and minimal number
-        required of decision actions is 3 !
+        required of decision actions is 6!
     
     >>> from randomPerfTabs import RandomCBPerformanceTableau
-    >>> t = RandomCBPerformanceTableau(numberOfActions=5,numberOfCriteria=3,seed=1)
-    >>> t
-    *------- PerformanceTableau instance description ------*
-    Instance class   : RandomCBPerformanceTableau
-    Seed             : 1
-    Instance name    : randomCBperftab
-    # Actions        : 5
-    # Objectives     : 2
-    # Criteria       : 3
-    Attributes       : ['randomSeed', 'name', 'digits', 'BigData',
-                        'missingDataProbability', 'commonPercentiles',
-                        'samplingSize', 'Debug', 'actionsTypesList',
-                        'sumWeights', 'valuationPrecision', 'actions',
-                        'objectives', 'criteriaWeightMode', 'criteria',
-                        'evaluation', 'weightPreorder']
-    >>> t.showObjectives()
-    *------ show objectives -------"
-    C: Costs
-       c1 random ordinal cost criterion 2
-      Total weight: 2.00 (1 criteria)
-    B: Benefits
-       b1 random ordinal benefit criterion 1
-       b2 random cardinal benefit criterion 1
-      Total weight: 2.00 (2 criteria)
-    >>> t.showCriteria()
-    *----  criteria -----*
-    c1 'Costs/random ordinal cost criterion'
-      Scale = (0, 10)
-      Weight = 2
-    b1 'Benefits/random ordinal benefit criterion'
-      Scale = (0, 10)
-      Weight = 1 
-    b2 'Benefits/random cardinal benefit criterion'
-      Scale = (0.0, 100.0)
-      Weight = 1 
-      Threshold ind : 4.70 + 0.00x ; percentile:  0.1
-      Threshold pref : 4.70 + 0.00x ; percentile:  0.1
-      Threshold veto : 30.84 + 0.00x ; percentile:  1.0
-    >>> t.showActions()
-    *----- show decision action --------------*
-    key:  a1
-      short name: a1c
-      name:       random cheap decision action
-      comment:    Cost-Benefit
-    key:  a2
-      short name: a2a
-      name:       random advantageous decision action
-      comment:    Cost-Benefit
-    key:  a3
-      short name: a3c
-      name:       random cheap decision action
-      comment:    Cost-Benefit
-    key:  a4
-      short name: a4n
-      name:       random neutral decision action
-      comment:    Cost-Benefit
-    key:  a5
-      short name: a5c
-      name:       random cheap decision action
-      comment:    Cost-Benefit
-    >>> t.showPerformanceTableau()
-    *----  performance tableau -----*
-    criteria | weights |   'a1'   'a2'   'a3'   'a4'   'a5'   
-    ---------|-----------------------------------------
-       'b1'  |    1    |   4.00   8.00   5.00   4.00   6.00  
-       'b2'  |    1    |  36.70  31.65  23.90  10.56  41.40  
-       'c1'  |    2    |    NA   -5.00  -3.00  -8.00  -3.00  
-    >>> ...  
+    >>> pt = RandomCBPerformanceTableau(numberOfActions=6,numberOfCriteria=3,seed=2)
+    >>> pt
+         *------- PerformanceTableau instance description ------*
+          Instance class     : RandomCBPerformanceTableau
+          Seed               : 1
+          Instance name      : randomCBperftab
+          Actions            : 6
+          Objectives         : 2
+          Criteria           : 3
+          NaN proportion (%) : 0.0
+          Attributes         : ['randomSeed', 'name', 'digits',
+                     'BigData', 'missingDataProbability', 'NA',
+                     'commonPercentiles', 'samplingSize', 'Debug',
+                     'actionsTypesList', 'sumWeights',
+                     'valuationPrecision', 'actions', 'objectives',
+                     'criteriaWeightMode', 'criteria', 'evaluation',
+                     'weightPreorder']
+    >>> pt.showObjetives()
+        *------ decision objectives -------"
+         C: Costs
+          c1 random cardinal cost criterion 1
+          c2 random cardinal cost criterion 1
+          Total weight: 2.00 (2 criteria)
+         B: Benefits
+          b1 random ordinal benefit criterion 2
+          Total weight: 2.00 (1 criteria)
+    >>> pt.showCriteria()
+        *----  criteria -----*
+         c1 random cardinal cost criterion
+          Preference direction: min
+          Scale = (0.00, 100.00)
+          Weight = 0.250 
+          Threshold ind : 1.98 + 0.00x ; percentile: 6.67
+          Threshold pref : 8.48 + 0.00x ; percentile: 13.33
+          Threshold veto : 60.79 + 0.00x ; percentile: 100.00
+         b1 random ordinal benefit criterion
+          Preference direction: max
+          Scale = (0.00, 10.00)
+          Weight = 0.500 
+         c2 random cardinal cost criterion
+          Preference direction: min
+          Scale = (0.00, 100.00)
+          Weight = 0.250 
+          Threshold ind : 3.34 + 0.00x ; percentile: 6.67
+          Threshold pref : 4.99 + 0.00x ; percentile: 13.33
+          Threshold veto : 63.75 + 0.00x ; percentile: 100.00
+    >>> pt.showActions
+        *----- show decision action --------------*
+        key:  a1
+          short name: a1c
+          name:       action a1
+          comment:    Cost-Benefit
+        key:  a2
+          short name: a2c
+          name:       action a2
+          comment:    Cost-Benefit
+        key:  a3
+          short name: a3c
+          name:       action a3
+          comment:    Cost-Benefit
+        key:  a4
+          short name: a4n
+          name:       action a4
+          comment:    Cost-Benefit
+        key:  a5
+          short name: a5c
+          name:       action a5
+          comment:    Cost-Benefit
+        key:  a6
+          short name: a6a
+          name:       action a6
+          comment:    Cost-Benefit
+    >>> pt.showPerformanceTableau()
+        *----  performance tableau -----*
+        Criteria |  'b1'   'c1'   'c2'   
+        Actions  |    2      1      1    
+        ---------|-----------------------------------------
+         'a1c'   |  9.00  -37.92  -7.03  
+         'a2c'   |  8.00  -35.94  -28.93  
+         'a3c'   |  3.00  -16.88  -23.94  
+         'a4n'   |  5.00  -46.40  -43.59  
+         'a5c'   |  2.00  -26.61  -67.44  
+         'a6a'   |  2.00  -77.67  -70.78  
 
     """
 
@@ -3037,8 +3052,6 @@ class RandomCBPerformanceTableau(PerformanceTableau):
                  NA = -999,
                  BigData=False,
                  seed = None,
-                 Threading = False,
-                 nbrCores = None,
                  Debug=False,Comments=False):
         """
         Constructor for RadomCBPerformanceTableau instances.
@@ -3065,6 +3078,9 @@ class RandomCBPerformanceTableau(PerformanceTableau):
         # generate actions
         if numberOfActions is None:
             numberOfActions = random.randint(10,31)
+        if numberOfActions < 6:
+            print('!!! Error: the number of decision actions must be greater than 5')
+            return
         nd = len(str(numberOfActions))
         self.actionsTypesList = ['cheap','neutral','advantageous']        
         actions = OrderedDict()
@@ -3210,6 +3226,7 @@ class RandomCBPerformanceTableau(PerformanceTableau):
         # store sum of weights and valuation precision
         self.sumWeights = sumWeights
         self.valuationPrecision = Decimal('0.1')/sumWeights
+
 
         for i,g in enumerate(criteria):
             ## if Debug:
@@ -3758,16 +3775,22 @@ if __name__ == "__main__":
     from digraphs import *
     from outrankingDigraphs import BipolarOutrankingDigraph
     from randomPerfTabs import *
+    pt = RandomCBPerformanceTableau(numberOfActions=6,numberOfCriteria=3,seed=1)
+    print(pt)
+    pt.showObjectives()
+    pt.showCriteria()
+    pt.showActions()
+    pt.showPerformanceTableau()
 ##    t = RandomAcademicPerformanceTableau(numberOfStudents=10,numberOfCourses=5,
 ##                                         commonMode=('uniform',None,None),
 ##                                         missingDataProbability=0.01)
-    t = RandomAcademicPerformanceTableau(numberOfStudents=10,numberOfCourses=10,
-                                commonMode=('triangular',14,0.4),
-                                missingDataProbability=0.01,
-                                WithTypes=True,
-                                seed=1)
-    t.showStudents()
-    t.showCourses()
+##    t = RandomAcademicPerformanceTableau(numberOfStudents=10,numberOfCourses=10,
+##                                commonMode=('triangular',14,0.4),
+##                                missingDataProbability=0.01,
+##                                WithTypes=True,
+##                                seed=1)
+##    t.showStudents()
+##    t.showCourses()
      
     print('*------------------*')
     print('If you see this line all tests were passed successfully :-)')

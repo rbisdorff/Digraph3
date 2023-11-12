@@ -1378,94 +1378,94 @@ class CopelandOrder(CopelandRanking):
 
 ########  instantiates optimal linear orderings
 
-class MedianRanking(LinearOrder):
-    """
-    instantiates the ranking of highest mean marginal correlation and lowest amplitude from
-    a given bipolar-valued Digraph instance of small order 
-    """
-    def __init__(self,other,orderLimit=7,
-                 Threading=False,nbrOfCPUs=1,
-                 Comments=False,Debug=False):
-        """
-        constructor for generating a linear order
-        from a given other digraph by exact enumeration
-        of all permutations of actions.
-        """
-        if other.order > orderLimit:
-            print('Digraph order %d to high. The default limit (7) may be changed with the oderLimit argument.' % (other.order) )
-            return
+# class MedianRanking(LinearOrder):
+#     """
+#     instantiates the ranking of highest mean marginal correlation and lowest amplitude from
+#     a given bipolar-valued Digraph instance of small order 
+#     """
+#     def __init__(self,other,orderLimit=7,
+#                  Threading=False,nbrOfCPUs=1,
+#                  Comments=False,Debug=False):
+#         """
+#         constructor for generating a linear order
+#         from a given other digraph by exact enumeration
+#         of all permutations of actions.
+#         """
+#         if other.order > orderLimit:
+#             print('Digraph order %d to high. The default limit (7) may be changed with the oderLimit argument.' % (other.order) )
+#             return
                   
-        from digraphs import all_perms
-        from copy import copy,deepcopy
-        from decimal import Decimal
+#         from digraphs import all_perms
+#         from copy import copy,deepcopy
+#         from decimal import Decimal
         
-        Min = other.valuationdomain['min']
-        Max = other.valuationdomain['max']
-        Med = other.valuationdomain['med']
-        #relation = copy(other.relation)
-        medianRankings = other.computeMedianRanking(orderLimit=orderLimit,
-                                                    Threading=Threading,
-                                                    nbrOfCPUs=nbrOfCPUs,
-                                                    Comments=Comments,
-                                                    Debug=Debug)
-        # [0] = ordered actions list, [1] = maximal marginal corrleation index,
-        # [2] = minimal marginal correlation amplitude,
+#         Min = other.valuationdomain['min']
+#         Max = other.valuationdomain['max']
+#         Med = other.valuationdomain['med']
+#         #relation = copy(other.relation)
+#         medianRankings = other.computeMedianRanking(orderLimit=orderLimit,
+#                                                     Threading=Threading,
+#                                                     nbrOfCPUs=nbrOfCPUs,
+#                                                     Comments=Comments,
+#                                                     Debug=Debug)
+#         # [0] = ordered actions list, [1] = maximal marginal corrleation index,
+#         # [2] = minimal marginal correlation amplitude,
         
-        medianRanking = medianRankings[0]
-        maxMarginalCorrelation = medianRankings[1]
-        minMarginalCorrelationAmplitude = medianRanking[2]
-        maximalRankings = deepcopy(other.maximalRankings)
+#         medianRanking = medianRankings[0]
+#         maxMarginalCorrelation = medianRankings[1]
+#         minMarginalCorrelationAmplitude = medianRanking[2]
+#         maximalRankings = deepcopy(other.maximalRankings)
         
-        if medianRankings is None:
-            print('Intantiation error: unable to compute a median ranking !!!')
-            print('Digraph order %d is required to be lower than 8!' % n)
-            return
-        if Debug:
-            print(medianRankings,other.maximalRankings)
+#         if medianRankings is None:
+#             print('Intantiation error: unable to compute a median ranking !!!')
+#             print('Digraph order %d is required to be lower than 8!' % n)
+#             return
+#         if Debug:
+#             print(medianRankings,other.maximalRankings)
         
-        # instatiates a Digraph template
-        actions = deepcopy(other.actions)
-        Min = Decimal('-1.0')
-        Max = Decimal('1.0')
-        Med = Decimal('0.0')
-        valuationdomain = {'min': Min, 'med': Med, 'max': Max}
-        relation = {}
-        n = len(actions)
-        self.order = n
-        for i in range(n):
-            x = medianRanking[i]
-            relation[x] = {}
-            for j in range(n):
-                y = medianRanking[j]
-                relation[x][y] = Med
-                if i < j:
-                    relation[x][y] = Max
-                    try:
-                        relation[y][x] = Min
-                    except:
-                        relation[y] = {x: Min}
-                elif i > j:
-                    relation[x][y] = Min
-                    try:
-                        relation[y][x] = Max
-                    except:
-                        relation[y] = {y: Max}
+#         # instatiates a Digraph template
+#         actions = deepcopy(other.actions)
+#         Min = Decimal('-1.0')
+#         Max = Decimal('1.0')
+#         Med = Decimal('0.0')
+#         valuationdomain = {'min': Min, 'med': Med, 'max': Max}
+#         relation = {}
+#         n = len(actions)
+#         self.order = n
+#         for i in range(n):
+#             x = medianRanking[i]
+#             relation[x] = {}
+#             for j in range(n):
+#                 y = medianRanking[j]
+#                 relation[x][y] = Med
+#                 if i < j:
+#                     relation[x][y] = Max
+#                     try:
+#                         relation[y][x] = Min
+#                     except:
+#                         relation[y] = {x: Min}
+#                 elif i > j:
+#                     relation[x][y] = Min
+#                     try:
+#                         relation[y][x] = Max
+#                     except:
+#                         relation[y] = {y: Max}
 
-        self.name = other.name + '_ranked'        
-        self.actions = actions
-        self.order = n
-        self.valuationdomain = valuationdomain
-        self.relation = relation
-        self.gamma = self.gammaSets()
-        self.notGamma = self.notGammaSets()
-        self.medianRanking = medianRanking
-        self.maxMarginalCorrelation = maxMarginalCorrelation
-        self.minMarginalCorrelationAmplitude = minMarginalCorrelationAmplitude
-        self.maximalRankings = maximalRankings
-        self.medianOrder = list(reversed(list(medianRanking)))
-        if Debug:
-            self.showRelationTable()
-            print('Median Ranking = ', self.medianRanking)
+#         self.name = other.name + '_ranked'        
+#         self.actions = actions
+#         self.order = n
+#         self.valuationdomain = valuationdomain
+#         self.relation = relation
+#         self.gamma = self.gammaSets()
+#         self.notGamma = self.notGammaSets()
+#         self.medianRanking = medianRanking
+#         self.maxMarginalCorrelation = maxMarginalCorrelation
+#         self.minMarginalCorrelationAmplitude = minMarginalCorrelationAmplitude
+#         self.maximalRankings = maximalRankings
+#         self.medianOrder = list(reversed(list(medianRanking)))
+#         if Debug:
+#             self.showRelationTable()
+#             print('Median Ranking = ', self.medianRanking)
 
 class KemenyRanking(LinearOrder):
     """

@@ -12,6 +12,7 @@ SPHINX=${PYTHON} -m sphinx
 INSTALLDIR=/usr/local/bin
 BUILDDIR=_build
 TESTDIR=test/results
+JOBS=""
 
 CC=gcc
 CFLAGS=-Wall -O3
@@ -64,7 +65,7 @@ tests:
 		for md in ${modules}; do \
 		    cp $$md ${TESTDIR}/; \
 		done
-		(cd test/results; ${PYTEST} -v ../pytests*)
+		(cd test/results; ${PYTEST} ${JOBS} -v ../pytests*)
 
 verboseTests:
 		for md in ${modules}; do \

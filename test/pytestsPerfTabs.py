@@ -78,32 +78,6 @@ def testhasOddWeightsAlgebra():
                                    commonMode=["normal",50.0,25.0],Debug=False)
     print(t.hasOddWeightAlgebra(Debug=True))
 
-# def testRandomS3PerformanceTableau():
-#     print('*==>> various tests for random performance tableaux -----*')
-#     t = RandomS3PerformanceTableau(numberOfActions=20,numberOfCriteria=13,commonThresholds=[(2.5,0.0),(5.0,0.0),(30.0,0.0)])
-#     t.saveXMCDA()
-#     #t = XMCDAPerformanceTableau('temp')
-#     g = Electre3OutrankingDigraph(t)
-#     #g = BipolarOutrankingDigraph(t)
-#     g.showVetos()
-#     print(g.showVetos(cutLevel=60.0,realVetosOnly=True))
-#     #g.showEvaluationStatistics()
-#     print(g.computeVetoesStatistics())
-#     g.showCriteria()
-#     gini = g.computeConcentrationIndex(list(range(len(g.actions))),g.outDegreesDistribution())
-#     print('gini: %2.4f' % (gini))
-#     ## g.showStatistics()
-#     percentages = [0,20,33,40,50,60,66,75,80,100]
-#     percentiles = g.computeValuationPercentiles(g.actions,percentages)
-#     print('Percentiles:')
-#     for p in percentages:
-#         print('%d : %.2f ' % (p,percentiles[p]))
-#     percentiles = [20,33,40,50,60,66,75,80]
-#     percentages = g.computeValuationPercentages(g.actions,percentiles)
-#     print('Percentages: ')
-#     for p in percentiles:
-#         print('%d : %.3f ' % (p,percentages[p]))
-
 def testPerformanceTableauStatistics():
     print('*==>> performanceTableau statistics ---------*')
     t = FullRandomPerformanceTableau(commonScale=(0.0,100.0),numberOfCriteria=10,numberOfActions=10,commonMode=('triangular',30.0,0.7))
@@ -158,29 +132,6 @@ def testCoalitionsPerformanceTableau():
     prg = PrincipalInOutDegreesOrdering(g,imageType="pdf")
     prg.showWeakOrder()
     print(g.computeOrdinalCorrelation(prg))
-
-# def testRandomS3PerformanceTableau():
-#     print('*==>> random S3 Performance Tableaux ------------*')
-#     t = RandomS3PerformanceTableau(numberOfActions=10,numberOfCriteria=7,\
-#                                    VariableGenerators=True,\
-#                                    commonThresholds=[(5.0,0.0),(10.0,0.0),(65.0,0.0)],\
-#                                    Debug=False,\
-#                                    OrdinalScales=False,\
-#                                    Coalitions=False,\
-#                                    RandomCoalitions=True)
-#     t.saveXMCDA2(fileName='randomS3PerformanceTableau',servingD3=False)
-#     for g in t.criteria:
-#         print('==>>', g, t.computeThresholdPercentile(g,'ind'))
-#         for a in t.actions:
-#             print(t.actions[a]['generators'][g])
-#     t = XMCDA2PerformanceTableau('randomS3PerformanceTableau')
-#     g = Electre3OutrankingDigraph(t)
-#     #g.defaultDiscriminationThresholds()
-#     g.showCriteria()
-#     g.showCriteriaCorrelationTable()
-#     t.showPerformanceTableau()
-#     g.showRelationTable()
-#     g.showRubyChoice()
 
 def testPercentilesOfThresholds():
     print('*---------- test percentiles of variable thresholds --------*') 
@@ -296,7 +247,7 @@ def testComputeQuantileOrder():
                                    IntegerWeights=True,
                                    Debug=False,
                                    missingDataProbability=0.1,
-                                   seed=100,Threading=True,nbrCores=4)
+                                   seed=100)
     res = t.computeQuantileOrder(Comments=True,Threading=True,nbrOfCPUs=4)
 ##    assert res == ['a22', 'a20', 'a28', 'a01', 'a12', 'a24', 'a26', 'a19',
 ##                       'a14', 'a30', 'a27', 'a17', 'a08', 'a29', 'a16',

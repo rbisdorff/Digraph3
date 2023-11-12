@@ -46,7 +46,7 @@ def testMinimalComponentSize():
     print('==>> Testing PreRankedOutrankingDigraph with minimal Component Size instantiation')
     MP = True
     t0 = time()
-    tp = RandomCBPerformanceTableau(numberOfActions=200,BigData=True,Threading=MP)
+    tp = RandomCBPerformanceTableau(numberOfActions=200,BigData=True)
     print(time()-t0)
     print(total_size(tp.evaluation))
     bg1 = PreRankedOutrankingDigraph(tp,quantiles=5,
@@ -58,7 +58,6 @@ def testMinimalComponentSize():
     bg1.showDecomposition()
     print(bg1)
     bg1.showRelationTable()
-    #tp = RandomCBPerformanceTableau(numberOfActions=200,BigData=True,Threading=MP)
     bg2 = PreRankedOutrankingDigraph(tp,quantiles=50,quantilesOrderingStrategy='average',
                                 LowerClosed=True,
                                minimalComponentSize=1,
@@ -75,7 +74,7 @@ def testMPComments():
     print('==>> Testing commented PreRankedOutrankingDigraph construction')
     MP = True
     t0 = time()
-    tp = RandomCBPerformanceTableau(numberOfActions=300,Threading=MP)
+    tp = RandomCBPerformanceTableau(numberOfActions=300)
     print(time()-t0)
     print(total_size(tp.evaluation))
     bg1 = PreRankedOutrankingDigraph(tp,quantiles=20,quantilesOrderingStrategy='average',
@@ -90,7 +89,7 @@ def testRelationMap():
     print('==>> Testing relation map construction')
     MP = True
     t0 = time()
-    tp = RandomCBPerformanceTableau(numberOfActions=300,Threading=MP)
+    tp = RandomCBPerformanceTableau(numberOfActions=300)
     bg1 = PreRankedOutrankingDigraph(tp,quantiles=20,quantilesOrderingStrategy='average',
                                  LowerClosed=False,
                                  minimalComponentSize=5,
@@ -105,7 +104,7 @@ def testRelationMap():
 def testActionRankOrder():
     print('==>> Testing action rank and order methods')
     MP = True
-    tp = RandomCBPerformanceTableau(numberOfActions=100,Threading=MP)
+    tp = RandomCBPerformanceTableau(numberOfActions=100)
     bg1 = PreRankedOutrankingDigraph(tp,quantiles=10,quantilesOrderingStrategy='average',
                                  LowerClosed=False,
                                  minimalComponentSize=10,
@@ -120,7 +119,7 @@ def testexportSortingGraphViz():
     print('==>> Testing graph viz export of sorting Hasse diagram')
     MP  = True
     nbrActions=100
-    tp = RandomCBPerformanceTableau(numberOfActions=nbrActions,Threading=MP,
+    tp = RandomCBPerformanceTableau(numberOfActions=nbrActions,
                                       seed=100)
     bg1 = PreRankedOutrankingDigraph(tp,CopyPerfTab=True,quantiles=20,
                                  quantilesOrderingStrategy='average',
@@ -141,8 +140,6 @@ def testPreRankedConfidentOutrankingDigraph():
     MP  = True
     nbrActions=100
     tp = Random3ObjectivesPerformanceTableau(numberOfActions=nbrActions)
-##    tp = RandomCBPerformanceTableau(numberOfActions=nbrActions,Threading=MP)
-##                                      seed=100)
     bg1 = PreRankedConfidentOutrankingDigraph(tp,CopyPerfTab=True,quantiles=5,
                                  quantilesOrderingStrategy='average',
                                  componentRankingRule='Copeland',
@@ -162,8 +159,6 @@ def testConfidentVersusStdPreRankedOutrankingDigraph():
     MP  = True
     nbrActions=100
     tp = Random3ObjectivesPerformanceTableau(numberOfActions=nbrActions)
-##    tp = RandomCBPerformanceTableau(numberOfActions=nbrActions,Threading=MP)
-##                                      seed=100)
     bg1 = PreRankedConfidentOutrankingDigraph(tp,CopyPerfTab=True,quantiles=5,
                                  quantilesOrderingStrategy='average',
                                  componentRankingRule='Copeland',

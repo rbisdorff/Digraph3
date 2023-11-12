@@ -110,8 +110,7 @@ def testmpCBPerformanceTableau():
                                    NegativeWeights=True,\
                                    commonMode=["normal",50.0,25.0],
                                    missingDataProbability=0.5,
-                                   seed=100,Debug=True,
-                                   Threading=True)
+                                   seed=100,Debug=True)
     t.showCriteria(Debug=False)
     t.showStatistics(Debug=True)
 

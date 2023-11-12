@@ -21,16 +21,16 @@
     <script src="../_static/js/html5shiv.min.js"></script>
   <![endif]-->
   
-        <script src="../_static/jquery.js"></script>
-        <script src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
-        <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
-        <script src="../_static/doctools.js"></script>
-        <script src="../_static/sphinx_highlight.js"></script>
-        <script src="../_static/clipboard.min.js"></script>
-        <script src="../_static/copybutton.js"></script>
-        <script src="../_static/js/hoverxref.js"></script>
-        <script src="../_static/js/tooltipster.bundle.min.js"></script>
-        <script src="../_static/js/micromodal.min.js"></script>
+        <script src="../_static/jquery.js?v=5d32c60e"></script>
+        <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script src="../_static/documentation_options.js?v=d10c4a4b"></script>
+        <script src="../_static/doctools.js?v=888ff710"></script>
+        <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+        <script src="../_static/clipboard.min.js?v=a7894cd8"></script>
+        <script src="../_static/copybutton.js?v=15d7cbb8"></script>
+        <script src="../_static/js/hoverxref.js?v=82c55261"></script>
+        <script src="../_static/js/tooltipster.bundle.min.js?v=18bf091b"></script>
+        <script src="../_static/js/micromodal.min.js?v=04d6302d"></script>
     <script src="../_static/js/theme.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" /> 
@@ -118,7 +118,9 @@
 <span class="c1">#########################################</span>
 <span class="c1"># generators for random PerformanceTableaux</span>
 
-<div class="viewcode-block" id="RandomPerformanceTableau"><a class="viewcode-back" href="../techDoc.html#randomPerfTabs.RandomPerformanceTableau">[docs]</a><span class="k">class</span> <span class="nc">RandomPerformanceTableau</span><span class="p">(</span><span class="n">PerformanceTableau</span><span class="p">):</span>
+<div class="viewcode-block" id="RandomPerformanceTableau">
+<a class="viewcode-back" href="../techDoc.html#randomPerfTabs.RandomPerformanceTableau">[docs]</a>
+<span class="k">class</span> <span class="nc">RandomPerformanceTableau</span><span class="p">(</span><span class="n">PerformanceTableau</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    For generating a random standard performance tableau.</span>
 
@@ -427,7 +429,10 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">weightPreorder</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">computeWeightPreorder</span><span class="p">()</span></div>
 
 
-<div class="viewcode-block" id="RandomPerformanceGenerator"><a class="viewcode-back" href="../techDoc.html#randomPerfTabs.RandomPerformanceGenerator">[docs]</a><span class="k">class</span> <span class="nc">RandomPerformanceGenerator</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+
+<div class="viewcode-block" id="RandomPerformanceGenerator">
+<a class="viewcode-back" href="../techDoc.html#randomPerfTabs.RandomPerformanceGenerator">[docs]</a>
+<span class="k">class</span> <span class="nc">RandomPerformanceGenerator</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Generic wrapper for generating new decision actions or performance tableaux</span>
 <span class="sd">    with random evaluations generated with a given performance tableau model of type:</span>
@@ -521,7 +526,9 @@
                                 <span class="n">instanceCounter</span><span class="o">=</span><span class="n">instanceCounter</span><span class="p">,</span><span class="n">seed</span><span class="o">=</span><span class="n">seed</span><span class="p">)</span>
             
 
-<div class="viewcode-block" id="RandomPerformanceGenerator.randomActions"><a class="viewcode-back" href="../techDoc.html#randomPerfTabs.RandomPerformanceGenerator.randomActions">[docs]</a>    <span class="k">def</span> <span class="nf">randomActions</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">nbrOfRandomActions</span><span class="o">=</span><span class="mi">1</span><span class="p">):</span>
+<div class="viewcode-block" id="RandomPerformanceGenerator.randomActions">
+<a class="viewcode-back" href="../techDoc.html#randomPerfTabs.RandomPerformanceGenerator.randomActions">[docs]</a>
+    <span class="k">def</span> <span class="nf">randomActions</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">nbrOfRandomActions</span><span class="o">=</span><span class="mi">1</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Generates nbrOfRandomActions.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
@@ -541,7 +548,10 @@
                 <span class="n">newEvaluation</span><span class="p">[</span><span class="n">g</span><span class="p">][</span><span class="n">newKey</span><span class="p">]</span> <span class="o">=</span> <span class="n">newAction</span><span class="p">[</span><span class="s1">&#39;evaluation&#39;</span><span class="p">][</span><span class="n">g</span><span class="p">]</span>
         <span class="k">return</span> <span class="p">{</span><span class="s1">&#39;actions&#39;</span><span class="p">:</span> <span class="n">newActions</span><span class="p">,</span> <span class="s1">&#39;evaluation&#39;</span><span class="p">:</span> <span class="n">newEvaluation</span><span class="p">}</span></div>
 
-<div class="viewcode-block" id="RandomPerformanceGenerator.randomPerformanceTableau"><a class="viewcode-back" href="../techDoc.html#randomPerfTabs.RandomPerformanceGenerator.randomPerformanceTableau">[docs]</a>    <span class="k">def</span> <span class="nf">randomPerformanceTableau</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">nbrOfRandomActions</span><span class="o">=</span><span class="mi">1</span><span class="p">):</span>
+
+<div class="viewcode-block" id="RandomPerformanceGenerator.randomPerformanceTableau">
+<a class="viewcode-back" href="../techDoc.html#randomPerfTabs.RandomPerformanceGenerator.randomPerformanceTableau">[docs]</a>
+    <span class="k">def</span> <span class="nf">randomPerformanceTableau</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">nbrOfRandomActions</span><span class="o">=</span><span class="mi">1</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Generates nbrOfRandomActions.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
@@ -586,7 +596,9 @@
                 <span class="n">newEvaluation</span><span class="p">[</span><span class="n">g</span><span class="p">][</span><span class="n">newKey</span><span class="p">]</span> <span class="o">=</span> <span class="n">newAction</span><span class="p">[</span><span class="s1">&#39;evaluation&#39;</span><span class="p">][</span><span class="n">g</span><span class="p">]</span>
         <span class="n">newPerfTab</span><span class="o">.</span><span class="n">actions</span> <span class="o">=</span> <span class="n">newActions</span>
         <span class="n">newPerfTab</span><span class="o">.</span><span class="n">evaluation</span> <span class="o">=</span> <span class="n">newEvaluation</span>
-        <span class="k">return</span> <span class="n">newPerfTab</span></div></div>
+        <span class="k">return</span> <span class="n">newPerfTab</span></div>
+</div>
+
 
 
 <span class="k">class</span> <span class="nc">_RandomStdPerformanceGenerator</span><span class="p">(</span><span class="n">RandomPerformanceGenerator</span><span class="p">):</span>
@@ -729,7 +741,9 @@
                 
 <span class="c1">##################</span>
 <span class="c1">#-----------------</span>
-<div class="viewcode-block" id="RandomAcademicPerformanceTableau"><a class="viewcode-back" href="../techDoc.html#randomPerfTabs.RandomAcademicPerformanceTableau">[docs]</a><span class="k">class</span> <span class="nc">RandomAcademicPerformanceTableau</span><span class="p">(</span><span class="n">PerformanceTableau</span><span class="p">):</span>
+<div class="viewcode-block" id="RandomAcademicPerformanceTableau">
+<a class="viewcode-back" href="../techDoc.html#randomPerfTabs.RandomAcademicPerformanceTableau">[docs]</a>
+<span class="k">class</span> <span class="nc">RandomAcademicPerformanceTableau</span><span class="p">(</span><span class="n">PerformanceTableau</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    For generating a temporary academic performance tableau with random grading results performances</span>
 <span class="sd">    of a number of students in different academic courses (see Lecture 4: Grading</span>
@@ -1052,7 +1066,9 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">NA</span> <span class="o">=</span> <span class="n">NA</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">weightPreorder</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">computeWeightPreorder</span><span class="p">()</span>
 
-<div class="viewcode-block" id="RandomAcademicPerformanceTableau.showStudents"><a class="viewcode-back" href="../techDoc.html#randomPerfTabs.RandomAcademicPerformanceTableau.showStudents">[docs]</a>    <span class="k">def</span> <span class="nf">showStudents</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">WithComments</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+<div class="viewcode-block" id="RandomAcademicPerformanceTableau.showStudents">
+<a class="viewcode-back" href="../techDoc.html#randomPerfTabs.RandomAcademicPerformanceTableau.showStudents">[docs]</a>
+    <span class="k">def</span> <span class="nf">showStudents</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">WithComments</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Print a list of the students.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
@@ -1069,15 +1085,21 @@
                 <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;</span><span class="si">%s</span><span class="s1">: </span><span class="se">\t</span><span class="s1"> </span><span class="si">%s</span><span class="s1"> </span><span class="se">\t</span><span class="s1"> </span><span class="si">%s</span><span class="s1">&#39;</span> <span class="o">%</span>\
                       <span class="p">(</span><span class="n">st</span><span class="p">,</span><span class="n">x</span><span class="p">[</span><span class="s1">&#39;name&#39;</span><span class="p">],</span><span class="n">x</span><span class="p">[</span><span class="s1">&#39;type&#39;</span><span class="p">])</span> <span class="p">)</span></div>
 
-<div class="viewcode-block" id="RandomAcademicPerformanceTableau.showCourses"><a class="viewcode-back" href="../techDoc.html#randomPerfTabs.RandomAcademicPerformanceTableau.showCourses">[docs]</a>    <span class="k">def</span> <span class="nf">showCourses</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">coursesSubset</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span><span class="n">ndigits</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span>
+
+<div class="viewcode-block" id="RandomAcademicPerformanceTableau.showCourses">
+<a class="viewcode-back" href="../techDoc.html#randomPerfTabs.RandomAcademicPerformanceTableau.showCourses">[docs]</a>
+    <span class="k">def</span> <span class="nf">showCourses</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">coursesSubset</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span><span class="n">ndigits</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span>
                     <span class="n">pageTitle</span><span class="o">=</span><span class="s1">&#39;List of Courses&#39;</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Print a list of the courses.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">showHTMLCriteria</span><span class="p">(</span><span class="n">criteriaSubset</span><span class="o">=</span><span class="n">coursesSubset</span><span class="p">,</span><span class="n">ndigits</span><span class="o">=</span><span class="n">ndigits</span><span class="p">,</span>
                               <span class="n">title</span><span class="o">=</span><span class="n">pageTitle</span><span class="p">)</span></div>
+
         
-<div class="viewcode-block" id="RandomAcademicPerformanceTableau.showPerformanceTableau"><a class="viewcode-back" href="../techDoc.html#randomPerfTabs.RandomAcademicPerformanceTableau.showPerformanceTableau">[docs]</a>    <span class="k">def</span> <span class="nf">showPerformanceTableau</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">Transposed</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span><span class="n">studentsSubset</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+<div class="viewcode-block" id="RandomAcademicPerformanceTableau.showPerformanceTableau">
+<a class="viewcode-back" href="../techDoc.html#randomPerfTabs.RandomAcademicPerformanceTableau.showPerformanceTableau">[docs]</a>
+    <span class="k">def</span> <span class="nf">showPerformanceTableau</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">Transposed</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span><span class="n">studentsSubset</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
                                <span class="n">fromIndex</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span><span class="n">toIndex</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span><span class="n">Sorted</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span><span class="n">ndigits</span><span class="o">=</span><span class="mi">0</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Print the performance Tableau.</span>
@@ -1141,7 +1163,10 @@
                 <span class="nb">print</span><span class="p">()</span></div>
 
 
-<div class="viewcode-block" id="RandomAcademicPerformanceTableau.showHTMLPerformanceTableau"><a class="viewcode-back" href="../techDoc.html#randomPerfTabs.RandomAcademicPerformanceTableau.showHTMLPerformanceTableau">[docs]</a>    <span class="k">def</span> <span class="nf">showHTMLPerformanceTableau</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">studentsSubset</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span><span class="n">isSorted</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+
+<div class="viewcode-block" id="RandomAcademicPerformanceTableau.showHTMLPerformanceTableau">
+<a class="viewcode-back" href="../techDoc.html#randomPerfTabs.RandomAcademicPerformanceTableau.showHTMLPerformanceTableau">[docs]</a>
+    <span class="k">def</span> <span class="nf">showHTMLPerformanceTableau</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">studentsSubset</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span><span class="n">isSorted</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
                                    <span class="n">Transposed</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span><span class="n">ndigits</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span>
                                    <span class="n">ContentCentered</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span><span class="n">title</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
                                    <span class="n">fromIndex</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span><span class="n">toIndex</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
@@ -1166,6 +1191,7 @@
         <span class="n">fo</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
         <span class="n">url</span> <span class="o">=</span> <span class="s1">&#39;file://&#39;</span><span class="o">+</span><span class="n">fileName</span>
         <span class="n">webbrowser</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="n">url</span><span class="p">,</span><span class="n">new</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span></div>
+
            
             
     <span class="k">def</span> <span class="nf">_htmlPerformanceTable</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">actions</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span><span class="n">criteria</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span><span class="n">isSorted</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
@@ -1286,7 +1312,9 @@
             
         <span class="k">return</span> <span class="n">html</span>
 
-<div class="viewcode-block" id="RandomAcademicPerformanceTableau.showCourseStatistics"><a class="viewcode-back" href="../techDoc.html#randomPerfTabs.RandomAcademicPerformanceTableau.showCourseStatistics">[docs]</a>    <span class="k">def</span> <span class="nf">showCourseStatistics</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">courseID</span><span class="p">,</span><span class="n">Debug</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+<div class="viewcode-block" id="RandomAcademicPerformanceTableau.showCourseStatistics">
+<a class="viewcode-back" href="../techDoc.html#randomPerfTabs.RandomAcademicPerformanceTableau.showCourseStatistics">[docs]</a>
+    <span class="k">def</span> <span class="nf">showCourseStatistics</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">courseID</span><span class="p">,</span><span class="n">Debug</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        show statistics concerning the grades&#39; distributions in the given course.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
@@ -1381,14 +1409,21 @@
         <span class="k">else</span><span class="p">:</span>
             <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;  !! not enough evaluations !!&#39;</span><span class="p">)</span></div>
 
-<div class="viewcode-block" id="RandomAcademicPerformanceTableau.showStatistics"><a class="viewcode-back" href="../techDoc.html#randomPerfTabs.RandomAcademicPerformanceTableau.showStatistics">[docs]</a>    <span class="k">def</span> <span class="nf">showStatistics</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+
+<div class="viewcode-block" id="RandomAcademicPerformanceTableau.showStatistics">
+<a class="viewcode-back" href="../techDoc.html#randomPerfTabs.RandomAcademicPerformanceTableau.showStatistics">[docs]</a>
+    <span class="k">def</span> <span class="nf">showStatistics</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Obsolete</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Obsolete ! use instaed self.showCourseStatistics(courseID)&#39;</span><span class="p">)</span></div></div>
+        <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Obsolete ! use instaed self.showCourseStatistics(courseID)&#39;</span><span class="p">)</span></div>
+</div>
+
         
 <span class="c1">#-----------------</span>
-<div class="viewcode-block" id="RandomRankPerformanceTableau"><a class="viewcode-back" href="../techDoc.html#randomPerfTabs.RandomRankPerformanceTableau">[docs]</a><span class="k">class</span> <span class="nc">RandomRankPerformanceTableau</span><span class="p">(</span><span class="n">PerformanceTableau</span><span class="p">):</span>
+<div class="viewcode-block" id="RandomRankPerformanceTableau">
+<a class="viewcode-back" href="../techDoc.html#randomPerfTabs.RandomRankPerformanceTableau">[docs]</a>
+<span class="k">class</span> <span class="nc">RandomRankPerformanceTableau</span><span class="p">(</span><span class="n">PerformanceTableau</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    For generating multiple-criteria ranked (without ties) performances of a given number of decision actions.</span>
 <span class="sd">    On each criterion, all decision actions are hence lineraly ordered.</span>
@@ -1555,6 +1590,7 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">NA</span> <span class="o">=</span> <span class="n">Decimal</span><span class="p">(</span><span class="s1">&#39;-999&#39;</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">sumWeights</span> <span class="o">=</span> <span class="n">sumWeights</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">weightPreorder</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">computeWeightPreorder</span><span class="p">()</span></div>
+
 
 <span class="c1"># ------------------------------</span>
 
@@ -2256,7 +2292,9 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">NA</span> <span class="o">=</span> <span class="n">Decimal</span><span class="p">(</span><span class="s1">&#39;-999&#39;</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">weightPreorder</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">computeWeightPreorder</span><span class="p">()</span>
 
-<div class="viewcode-block" id="Random3ObjectivesPerformanceTableau"><a class="viewcode-back" href="../techDoc.html#randomPerfTabs.Random3ObjectivesPerformanceTableau">[docs]</a><span class="k">class</span> <span class="nc">Random3ObjectivesPerformanceTableau</span><span class="p">(</span><span class="n">PerformanceTableau</span><span class="p">):</span>
+<div class="viewcode-block" id="Random3ObjectivesPerformanceTableau">
+<a class="viewcode-back" href="../techDoc.html#randomPerfTabs.Random3ObjectivesPerformanceTableau">[docs]</a>
+<span class="k">class</span> <span class="nc">Random3ObjectivesPerformanceTableau</span><span class="p">(</span><span class="n">PerformanceTableau</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    For geneating random 3 objectives: *Eco*, *Soc* and *Env* multile-criteria performance records. Each decision action is qualified randomly as weak (-), fair (~) or good (+) on each of the three objectives.</span>
 <span class="sd">    </span>
@@ -2774,7 +2812,9 @@
                   <span class="o">%</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">objectives</span><span class="p">[</span><span class="n">obj</span><span class="p">][</span><span class="s1">&#39;weight&#39;</span><span class="p">],</span>
                      <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">objectives</span><span class="p">[</span><span class="n">obj</span><span class="p">][</span><span class="s1">&#39;criteria&#39;</span><span class="p">])))</span>
 
-<div class="viewcode-block" id="Random3ObjectivesPerformanceTableau.showActions"><a class="viewcode-back" href="../techDoc.html#randomPerfTabs.Random3ObjectivesPerformanceTableau.showActions">[docs]</a>    <span class="k">def</span> <span class="nf">showActions</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">Alphabetic</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+<div class="viewcode-block" id="Random3ObjectivesPerformanceTableau.showActions">
+<a class="viewcode-back" href="../techDoc.html#randomPerfTabs.Random3ObjectivesPerformanceTableau.showActions">[docs]</a>
+    <span class="k">def</span> <span class="nf">showActions</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">Alphabetic</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
         <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;*----- show decision action --------------*&#39;</span><span class="p">)</span>
         <span class="n">actions</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">actions</span>
         <span class="k">if</span> <span class="n">Alphabetic</span><span class="p">:</span>
@@ -2796,7 +2836,9 @@
                 <span class="k">except</span><span class="p">:</span>
                     <span class="k">pass</span>
                 <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;  name:      &#39;</span><span class="p">,</span><span class="n">actions</span><span class="p">[</span><span class="n">x</span><span class="p">][</span><span class="s1">&#39;name&#39;</span><span class="p">])</span>
-                <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;  profile:   &#39;</span><span class="p">,</span><span class="n">actions</span><span class="p">[</span><span class="n">x</span><span class="p">][</span><span class="s1">&#39;profile&#39;</span><span class="p">])</span></div></div>
+                <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;  profile:   &#39;</span><span class="p">,</span><span class="n">actions</span><span class="p">[</span><span class="n">x</span><span class="p">][</span><span class="s1">&#39;profile&#39;</span><span class="p">])</span></div>
+</div>
+
 
 <span class="k">class</span> <span class="nc">_Random3ObjectivesPerformanceGenerator</span><span class="p">(</span><span class="n">RandomPerformanceGenerator</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
@@ -3022,7 +3064,9 @@
         <span class="k">return</span> <span class="p">{</span><span class="s1">&#39;action&#39;</span><span class="p">:</span> <span class="n">action</span><span class="p">,</span><span class="s1">&#39;evaluation&#39;</span><span class="p">:</span><span class="n">evaluation</span><span class="p">}</span>
         
 <span class="c1">#---------------</span>
-<div class="viewcode-block" id="RandomCBPerformanceTableau"><a class="viewcode-back" href="../techDoc.html#randomPerfTabs.RandomCBPerformanceTableau">[docs]</a><span class="k">class</span> <span class="nc">RandomCBPerformanceTableau</span><span class="p">(</span><span class="n">PerformanceTableau</span><span class="p">):</span>
+<div class="viewcode-block" id="RandomCBPerformanceTableau">
+<a class="viewcode-back" href="../techDoc.html#randomPerfTabs.RandomCBPerformanceTableau">[docs]</a>
+<span class="k">class</span> <span class="nc">RandomCBPerformanceTableau</span><span class="p">(</span><span class="n">PerformanceTableau</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Full automatic generation of random multiple-criteria Cost-Benefit performance tableaux.</span>
 
@@ -3042,77 +3086,92 @@
 <span class="sd">    .. note::</span>
 
 <span class="sd">        Minimal number required of criteria is 2, and minimal number</span>
-<span class="sd">        required of decision actions is 3 !</span>
+<span class="sd">        required of decision actions is 6!</span>
 <span class="sd">    </span>
 <span class="sd">    &gt;&gt;&gt; from randomPerfTabs import RandomCBPerformanceTableau</span>
-<span class="sd">    &gt;&gt;&gt; t = RandomCBPerformanceTableau(numberOfActions=5,numberOfCriteria=3,seed=1)</span>
-<span class="sd">    &gt;&gt;&gt; t</span>
-<span class="sd">    *------- PerformanceTableau instance description ------*</span>
-<span class="sd">    Instance class   : RandomCBPerformanceTableau</span>
-<span class="sd">    Seed             : 1</span>
-<span class="sd">    Instance name    : randomCBperftab</span>
-<span class="sd">    # Actions        : 5</span>
-<span class="sd">    # Objectives     : 2</span>
-<span class="sd">    # Criteria       : 3</span>
-<span class="sd">    Attributes       : [&#39;randomSeed&#39;, &#39;name&#39;, &#39;digits&#39;, &#39;BigData&#39;,</span>
-<span class="sd">                        &#39;missingDataProbability&#39;, &#39;commonPercentiles&#39;,</span>
-<span class="sd">                        &#39;samplingSize&#39;, &#39;Debug&#39;, &#39;actionsTypesList&#39;,</span>
-<span class="sd">                        &#39;sumWeights&#39;, &#39;valuationPrecision&#39;, &#39;actions&#39;,</span>
-<span class="sd">                        &#39;objectives&#39;, &#39;criteriaWeightMode&#39;, &#39;criteria&#39;,</span>
-<span class="sd">                        &#39;evaluation&#39;, &#39;weightPreorder&#39;]</span>
-<span class="sd">    &gt;&gt;&gt; t.showObjectives()</span>
-<span class="sd">    *------ show objectives -------&quot;</span>
-<span class="sd">    C: Costs</span>
-<span class="sd">       c1 random ordinal cost criterion 2</span>
-<span class="sd">      Total weight: 2.00 (1 criteria)</span>
-<span class="sd">    B: Benefits</span>
-<span class="sd">       b1 random ordinal benefit criterion 1</span>
-<span class="sd">       b2 random cardinal benefit criterion 1</span>
-<span class="sd">      Total weight: 2.00 (2 criteria)</span>
-<span class="sd">    &gt;&gt;&gt; t.showCriteria()</span>
-<span class="sd">    *----  criteria -----*</span>
-<span class="sd">    c1 &#39;Costs/random ordinal cost criterion&#39;</span>
-<span class="sd">      Scale = (0, 10)</span>
-<span class="sd">      Weight = 2</span>
-<span class="sd">    b1 &#39;Benefits/random ordinal benefit criterion&#39;</span>
-<span class="sd">      Scale = (0, 10)</span>
-<span class="sd">      Weight = 1 </span>
-<span class="sd">    b2 &#39;Benefits/random cardinal benefit criterion&#39;</span>
-<span class="sd">      Scale = (0.0, 100.0)</span>
-<span class="sd">      Weight = 1 </span>
-<span class="sd">      Threshold ind : 4.70 + 0.00x ; percentile:  0.1</span>
-<span class="sd">      Threshold pref : 4.70 + 0.00x ; percentile:  0.1</span>
-<span class="sd">      Threshold veto : 30.84 + 0.00x ; percentile:  1.0</span>
-<span class="sd">    &gt;&gt;&gt; t.showActions()</span>
-<span class="sd">    *----- show decision action --------------*</span>
-<span class="sd">    key:  a1</span>
-<span class="sd">      short name: a1c</span>
-<span class="sd">      name:       random cheap decision action</span>
-<span class="sd">      comment:    Cost-Benefit</span>
-<span class="sd">    key:  a2</span>
-<span class="sd">      short name: a2a</span>
-<span class="sd">      name:       random advantageous decision action</span>
-<span class="sd">      comment:    Cost-Benefit</span>
-<span class="sd">    key:  a3</span>
-<span class="sd">      short name: a3c</span>
-<span class="sd">      name:       random cheap decision action</span>
-<span class="sd">      comment:    Cost-Benefit</span>
-<span class="sd">    key:  a4</span>
-<span class="sd">      short name: a4n</span>
-<span class="sd">      name:       random neutral decision action</span>
-<span class="sd">      comment:    Cost-Benefit</span>
-<span class="sd">    key:  a5</span>
-<span class="sd">      short name: a5c</span>
-<span class="sd">      name:       random cheap decision action</span>
-<span class="sd">      comment:    Cost-Benefit</span>
-<span class="sd">    &gt;&gt;&gt; t.showPerformanceTableau()</span>
-<span class="sd">    *----  performance tableau -----*</span>
-<span class="sd">    criteria | weights |   &#39;a1&#39;   &#39;a2&#39;   &#39;a3&#39;   &#39;a4&#39;   &#39;a5&#39;   </span>
-<span class="sd">    ---------|-----------------------------------------</span>
-<span class="sd">       &#39;b1&#39;  |    1    |   4.00   8.00   5.00   4.00   6.00  </span>
-<span class="sd">       &#39;b2&#39;  |    1    |  36.70  31.65  23.90  10.56  41.40  </span>
-<span class="sd">       &#39;c1&#39;  |    2    |    NA   -5.00  -3.00  -8.00  -3.00  </span>
-<span class="sd">    &gt;&gt;&gt; ...  </span>
+<span class="sd">    &gt;&gt;&gt; pt = RandomCBPerformanceTableau(numberOfActions=6,numberOfCriteria=3,seed=2)</span>
+<span class="sd">    &gt;&gt;&gt; pt</span>
+<span class="sd">         *------- PerformanceTableau instance description ------*</span>
+<span class="sd">          Instance class     : RandomCBPerformanceTableau</span>
+<span class="sd">          Seed               : 1</span>
+<span class="sd">          Instance name      : randomCBperftab</span>
+<span class="sd">          Actions            : 6</span>
+<span class="sd">          Objectives         : 2</span>
+<span class="sd">          Criteria           : 3</span>
+<span class="sd">          NaN proportion (%) : 0.0</span>
+<span class="sd">          Attributes         : [&#39;randomSeed&#39;, &#39;name&#39;, &#39;digits&#39;,</span>
+<span class="sd">                     &#39;BigData&#39;, &#39;missingDataProbability&#39;, &#39;NA&#39;,</span>
+<span class="sd">                     &#39;commonPercentiles&#39;, &#39;samplingSize&#39;, &#39;Debug&#39;,</span>
+<span class="sd">                     &#39;actionsTypesList&#39;, &#39;sumWeights&#39;,</span>
+<span class="sd">                     &#39;valuationPrecision&#39;, &#39;actions&#39;, &#39;objectives&#39;,</span>
+<span class="sd">                     &#39;criteriaWeightMode&#39;, &#39;criteria&#39;, &#39;evaluation&#39;,</span>
+<span class="sd">                     &#39;weightPreorder&#39;]</span>
+<span class="sd">    &gt;&gt;&gt; pt.showObjetives()</span>
+<span class="sd">        *------ decision objectives -------&quot;</span>
+<span class="sd">         C: Costs</span>
+<span class="sd">          c1 random cardinal cost criterion 1</span>
+<span class="sd">          c2 random cardinal cost criterion 1</span>
+<span class="sd">          Total weight: 2.00 (2 criteria)</span>
+<span class="sd">         B: Benefits</span>
+<span class="sd">          b1 random ordinal benefit criterion 2</span>
+<span class="sd">          Total weight: 2.00 (1 criteria)</span>
+<span class="sd">    &gt;&gt;&gt; pt.showCriteria()</span>
+<span class="sd">        *----  criteria -----*</span>
+<span class="sd">         c1 random cardinal cost criterion</span>
+<span class="sd">          Preference direction: min</span>
+<span class="sd">          Scale = (0.00, 100.00)</span>
+<span class="sd">          Weight = 0.250 </span>
+<span class="sd">          Threshold ind : 1.98 + 0.00x ; percentile: 6.67</span>
+<span class="sd">          Threshold pref : 8.48 + 0.00x ; percentile: 13.33</span>
+<span class="sd">          Threshold veto : 60.79 + 0.00x ; percentile: 100.00</span>
+<span class="sd">         b1 random ordinal benefit criterion</span>
+<span class="sd">          Preference direction: max</span>
+<span class="sd">          Scale = (0.00, 10.00)</span>
+<span class="sd">          Weight = 0.500 </span>
+<span class="sd">         c2 random cardinal cost criterion</span>
+<span class="sd">          Preference direction: min</span>
+<span class="sd">          Scale = (0.00, 100.00)</span>
+<span class="sd">          Weight = 0.250 </span>
+<span class="sd">          Threshold ind : 3.34 + 0.00x ; percentile: 6.67</span>
+<span class="sd">          Threshold pref : 4.99 + 0.00x ; percentile: 13.33</span>
+<span class="sd">          Threshold veto : 63.75 + 0.00x ; percentile: 100.00</span>
+<span class="sd">    &gt;&gt;&gt; pt.showActions</span>
+<span class="sd">        *----- show decision action --------------*</span>
+<span class="sd">        key:  a1</span>
+<span class="sd">          short name: a1c</span>
+<span class="sd">          name:       action a1</span>
+<span class="sd">          comment:    Cost-Benefit</span>
+<span class="sd">        key:  a2</span>
+<span class="sd">          short name: a2c</span>
+<span class="sd">          name:       action a2</span>
+<span class="sd">          comment:    Cost-Benefit</span>
+<span class="sd">        key:  a3</span>
+<span class="sd">          short name: a3c</span>
+<span class="sd">          name:       action a3</span>
+<span class="sd">          comment:    Cost-Benefit</span>
+<span class="sd">        key:  a4</span>
+<span class="sd">          short name: a4n</span>
+<span class="sd">          name:       action a4</span>
+<span class="sd">          comment:    Cost-Benefit</span>
+<span class="sd">        key:  a5</span>
+<span class="sd">          short name: a5c</span>
+<span class="sd">          name:       action a5</span>
+<span class="sd">          comment:    Cost-Benefit</span>
+<span class="sd">        key:  a6</span>
+<span class="sd">          short name: a6a</span>
+<span class="sd">          name:       action a6</span>
+<span class="sd">          comment:    Cost-Benefit</span>
+<span class="sd">    &gt;&gt;&gt; pt.showPerformanceTableau()</span>
+<span class="sd">        *----  performance tableau -----*</span>
+<span class="sd">        Criteria |  &#39;b1&#39;   &#39;c1&#39;   &#39;c2&#39;   </span>
+<span class="sd">        Actions  |    2      1      1    </span>
+<span class="sd">        ---------|-----------------------------------------</span>
+<span class="sd">         &#39;a1c&#39;   |  9.00  -37.92  -7.03  </span>
+<span class="sd">         &#39;a2c&#39;   |  8.00  -35.94  -28.93  </span>
+<span class="sd">         &#39;a3c&#39;   |  3.00  -16.88  -23.94  </span>
+<span class="sd">         &#39;a4n&#39;   |  5.00  -46.40  -43.59  </span>
+<span class="sd">         &#39;a5c&#39;   |  2.00  -26.61  -67.44  </span>
+<span class="sd">         &#39;a6a&#39;   |  2.00  -77.67  -70.78  </span>
 
 <span class="sd">    &quot;&quot;&quot;</span>
 
@@ -3132,8 +3191,6 @@
                  <span class="n">NA</span> <span class="o">=</span> <span class="o">-</span><span class="mi">999</span><span class="p">,</span>
                  <span class="n">BigData</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
                  <span class="n">seed</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
-                 <span class="n">Threading</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
-                 <span class="n">nbrCores</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
                  <span class="n">Debug</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span><span class="n">Comments</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Constructor for RadomCBPerformanceTableau instances.</span>
@@ -3160,6 +3217,9 @@
         <span class="c1"># generate actions</span>
         <span class="k">if</span> <span class="n">numberOfActions</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
             <span class="n">numberOfActions</span> <span class="o">=</span> <span class="n">random</span><span class="o">.</span><span class="n">randint</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span><span class="mi">31</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">numberOfActions</span> <span class="o">&lt;</span> <span class="mi">6</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;!!! Error: the number of decision actions must be greater than 5&#39;</span><span class="p">)</span>
+            <span class="k">return</span>
         <span class="n">nd</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">numberOfActions</span><span class="p">))</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">actionsTypesList</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;cheap&#39;</span><span class="p">,</span><span class="s1">&#39;neutral&#39;</span><span class="p">,</span><span class="s1">&#39;advantageous&#39;</span><span class="p">]</span>        
         <span class="n">actions</span> <span class="o">=</span> <span class="n">OrderedDict</span><span class="p">()</span>
@@ -3305,6 +3365,7 @@
         <span class="c1"># store sum of weights and valuation precision</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">sumWeights</span> <span class="o">=</span> <span class="n">sumWeights</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">valuationPrecision</span> <span class="o">=</span> <span class="n">Decimal</span><span class="p">(</span><span class="s1">&#39;0.1&#39;</span><span class="p">)</span><span class="o">/</span><span class="n">sumWeights</span>
+
 
         <span class="k">for</span> <span class="n">i</span><span class="p">,</span><span class="n">g</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">criteria</span><span class="p">):</span>
             <span class="c1">## if Debug:</span>
@@ -3559,7 +3620,9 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">criteria</span> <span class="o">=</span> <span class="n">criteria</span>
 
 
-<div class="viewcode-block" id="RandomCBPerformanceTableau.updateDiscriminationThresholds"><a class="viewcode-back" href="../techDoc.html#randomPerfTabs.RandomCBPerformanceTableau.updateDiscriminationThresholds">[docs]</a>    <span class="k">def</span> <span class="nf">updateDiscriminationThresholds</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">Comments</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span><span class="n">Debug</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+<div class="viewcode-block" id="RandomCBPerformanceTableau.updateDiscriminationThresholds">
+<a class="viewcode-back" href="../techDoc.html#randomPerfTabs.RandomCBPerformanceTableau.updateDiscriminationThresholds">[docs]</a>
+    <span class="k">def</span> <span class="nf">updateDiscriminationThresholds</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">Comments</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span><span class="n">Debug</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Recomputes performance discrimination thresholds from commonPercentiles.</span>
 
@@ -3613,7 +3676,9 @@
             
             <span class="k">if</span> <span class="n">Comments</span><span class="p">:</span>
                 <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;criteria&#39;</span><span class="p">,</span><span class="n">g</span><span class="p">,</span><span class="s1">&#39; default thresholds:&#39;</span><span class="p">)</span>
-                <span class="nb">print</span><span class="p">(</span><span class="n">criteria</span><span class="p">[</span><span class="n">g</span><span class="p">][</span><span class="s1">&#39;thresholds&#39;</span><span class="p">])</span></div></div>
+                <span class="nb">print</span><span class="p">(</span><span class="n">criteria</span><span class="p">[</span><span class="n">g</span><span class="p">][</span><span class="s1">&#39;thresholds&#39;</span><span class="p">])</span></div>
+</div>
+
 
 <span class="k">class</span> <span class="nc">_RandomCBPerformanceGenerator</span><span class="p">(</span><span class="n">RandomPerformanceGenerator</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
@@ -3853,16 +3918,22 @@
     <span class="kn">from</span> <span class="nn">digraphs</span> <span class="kn">import</span> <span class="o">*</span>
     <span class="kn">from</span> <span class="nn">outrankingDigraphs</span> <span class="kn">import</span> <span class="n">BipolarOutrankingDigraph</span>
     <span class="kn">from</span> <span class="nn">randomPerfTabs</span> <span class="kn">import</span> <span class="o">*</span>
+    <span class="n">pt</span> <span class="o">=</span> <span class="n">RandomCBPerformanceTableau</span><span class="p">(</span><span class="n">numberOfActions</span><span class="o">=</span><span class="mi">6</span><span class="p">,</span><span class="n">numberOfCriteria</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span><span class="n">seed</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">pt</span><span class="p">)</span>
+    <span class="n">pt</span><span class="o">.</span><span class="n">showObjectives</span><span class="p">()</span>
+    <span class="n">pt</span><span class="o">.</span><span class="n">showCriteria</span><span class="p">()</span>
+    <span class="n">pt</span><span class="o">.</span><span class="n">showActions</span><span class="p">()</span>
+    <span class="n">pt</span><span class="o">.</span><span class="n">showPerformanceTableau</span><span class="p">()</span>
 <span class="c1">##    t = RandomAcademicPerformanceTableau(numberOfStudents=10,numberOfCourses=5,</span>
 <span class="c1">##                                         commonMode=(&#39;uniform&#39;,None,None),</span>
 <span class="c1">##                                         missingDataProbability=0.01)</span>
-    <span class="n">t</span> <span class="o">=</span> <span class="n">RandomAcademicPerformanceTableau</span><span class="p">(</span><span class="n">numberOfStudents</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span><span class="n">numberOfCourses</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span>
-                                <span class="n">commonMode</span><span class="o">=</span><span class="p">(</span><span class="s1">&#39;triangular&#39;</span><span class="p">,</span><span class="mi">14</span><span class="p">,</span><span class="mf">0.4</span><span class="p">),</span>
-                                <span class="n">missingDataProbability</span><span class="o">=</span><span class="mf">0.01</span><span class="p">,</span>
-                                <span class="n">WithTypes</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
-                                <span class="n">seed</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
-    <span class="n">t</span><span class="o">.</span><span class="n">showStudents</span><span class="p">()</span>
-    <span class="n">t</span><span class="o">.</span><span class="n">showCourses</span><span class="p">()</span>
+<span class="c1">##    t = RandomAcademicPerformanceTableau(numberOfStudents=10,numberOfCourses=10,</span>
+<span class="c1">##                                commonMode=(&#39;triangular&#39;,14,0.4),</span>
+<span class="c1">##                                missingDataProbability=0.01,</span>
+<span class="c1">##                                WithTypes=True,</span>
+<span class="c1">##                                seed=1)</span>
+<span class="c1">##    t.showStudents()</span>
+<span class="c1">##    t.showCourses()</span>
      
     <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;*------------------*&#39;</span><span class="p">)</span>
     <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;If you see this line all tests were passed successfully :-)&#39;</span><span class="p">)</span>
