@@ -2736,11 +2736,13 @@ The performance evaluations of each decision alternative on each criterion are g
         stddev = math.sqrt(variance)
         print('std deviation: %2.2f ' % (stddev))      
 
-    def save(self,fileName='tempperftab',isDecimal=True,valueDigits=2):
+    def save(self,fileName='tempperftab',isDecimal=True,
+             valueDigits=2,Comments=False):
         """
         Persistant storage of Performance Tableaux.
         """
-        print('*--- Saving performance tableau in file: <' \
+        if Comments:
+            print('*--- Saving performance tableau in file: <' \
               + str(fileName) + '.py> ---*')
         actions = self.actions
         try:
