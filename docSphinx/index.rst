@@ -46,6 +46,8 @@ Parts of the documentation
 ..........................
 :New:
 
+   - A newly refactored multiprocessing :py:class:`mpOutrankingDigraphs.MPOutrankingDigraph` constructor of bipolar-valued outranking digraphs based on the safer *forkserver* start-method. Comaptible with Linux and MacOS.
+     
    - A :py:mod:`pairings` module for solving pairing problems illustrated with two tutorials on computing **fair** :ref:`intergroup<Fair-InterGroup-Pairings-label>` and :ref:`intragroup<Fair-IntraGroup-Pairings-label>` pairing solutions
 
    - A :py:mod:`dynamicProgramming` module for solving dynamic programming problems including a :py:class:`~dynamicProgramming.RandomDynamicProgrammingDigraph` constructor

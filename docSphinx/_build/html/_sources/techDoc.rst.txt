@@ -17,7 +17,9 @@ Technical Reference of the Digraph3 modules
 
    :New:
 
-        - the :py:meth:`digraphsTools.kmpMatch` method implements the *Knuth* *Morris* *Pratt* string matching algorithm
+        - A :py:mod:`mpOutrankingDigraphs` for a *forkserver* based multiprocessing construction of bipolar-valued outranking digraphs with main :py:class:`mpOutrankingDigraphs~.MPOutrankingDigraph` constructor
+	  
+        - The :py:meth:`digraphsTools.kmpMatch` method implements the *Knuth* *Morris* *Pratt* string matching algorithm
 
         - The :py:meth:`digraphsTools.computeSequenceAlignment` method implements the *Needlemann* % *Wunsch* dynamic programming algorithm for computing DNA *sequence alignments*
 
@@ -221,6 +223,14 @@ Handling big data
 	:top-classes: sparseOutrankingDigraphs.SparseOutrankingDigraph
 	:parts: 1
 
+* :ref:`mpOutrankingDigraphs-label`
+     New forkserver based multiprocessing construction of genuine bipolar-valued outranking digraphs.
+
+     .. inheritance-diagram:: mpOutrankingDigraphs
+	:top-classes: outrankingDigraphs.BipolarOutrankingDigraph
+	:parts: 1
+
+
 Cythonized modules
 ..................
 
@@ -382,6 +392,24 @@ A tutorial with coding examples is available here: :ref:`OutrankingDigraphs-Tuto
    :members:
 
 Back to the :ref:`Table of Contents <Contents-Table-label>`
+
+-------------
+
+.. _mpOutrankingDigraphs-label:
+
+mpOutrankingDigraphs module
+---------------------------
+
+**Inheritance Diagram**
+
+.. inheritance-diagram:: mpOutrankingDigraphs
+   :top-classes: outrankingDigraphs.BipolarOutrankingDigraph
+   :parts: 1
+
+.. automodule:: mpOutrankingDigraphs
+   :member-order: alphabetical
+   :no-inherited-members:
+   :members:
 
 -------------
 
