@@ -17,7 +17,7 @@ Technical Reference of the Digraph3 modules
 
    :New:
 
-        - A :py:mod:`mpOutrankingDigraphs` for a *forkserver* based multiprocessing construction of bipolar-valued outranking digraphs with main :py:class:`mpOutrankingDigraphs~.MPOutrankingDigraph` constructor
+        - A :py:mod:`mpOutrankingDigraphs` for a *forkserver* based multiprocessing construction of bipolar-valued outranking digraphs with main :py:class:`~mpOutrankingDigraphs.MPOutrankingDigraph` constructor
 	  
         - The :py:meth:`digraphsTools.kmpMatch` method implements the *Knuth* *Morris* *Pratt* string matching algorithm
 

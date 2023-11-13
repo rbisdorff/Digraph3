@@ -40,7 +40,7 @@ import os
 if not os.path.exists('./sharedPerfTab.py'):
     from randomPerfTabs import RandomPerformanceTableau
     pt = RandomPerformanceTableau(numberOfActions=1,numberOfCriteria=1)
-    pt.save('sharedPerfTab')
+    pt.save('sharedPerfTab',Comments=False)
 else:
     from sharedPerfTab import *
 
@@ -131,21 +131,21 @@ class MPOutrankingDigraph(BipolarOutrankingDigraph):
 
     >>> from randomPerfTabs import *
     >>> pt1 = RandomCBPerformanceTableau(
-    ...         numberOfActions=100,numberOfCriteria=7,
+    ...         numberOfActions=1000,numberOfCriteria=13,
     ...         seed=10)
     >>> from mpOutrankingDigraphs import MPOutrankingDigraph
-    >>> bg = MPOutrankingDigraph(pt1,Normalized=False,nbrCores=10)
+    >>> bg = MPOutrankingDigraph(pt1,Normalized=False,nbrCores=12)
     >>> bg
      *--- Saving performance tableau in file: <sharedPerfTab.py> ---*
       saved actual poolData.py module
      *------- Object instance description ------*
       Instance class       : MPOutrankingDigraph
       Instance name        : rel_randomCBperftab
-      Actions              : 100
-      Criteria             : 7
-      Size                 : 5558
-      Determinateness (%)  : 66.79
-      Valuation domain     : [-20.00;20.00]
+      Actions              : 1000
+      Criteria             : 13
+      Size                 : 550012
+      Determinateness (%)  : 71.12
+      Valuation domain     : [-60.00;60.00]
       Attributes           : ['name', 'actions', 'order',
                               'criteria', 'objectives',
                               'NA', 'evaluation', 'nbrThreads',
@@ -153,11 +153,11 @@ class MPOutrankingDigraph(BipolarOutrankingDigraph):
                               'valuationdomain', 'gamma',
                               'notGamma', 'runTimes']
       ----  Constructor run times (in sec.) ----
-      Total time       : 0.09971
-      Data input       : 0.00070
-      Compute relation : 0.09901
-      Gamma sets       : 0.00349
-      Threads          : 10
+      Total time       : 4.64133
+      Data input       : 0.01220
+      Compute relation : 3.95451
+      Gamma sets       : 0.67462
+      Threads          : 12
     
     """
     def __repr__(self):
@@ -203,9 +203,10 @@ class MPOutrankingDigraph(BipolarOutrankingDigraph):
     def __init__(self,perfTab,Normalized=False,ndigits=4,nbrCores=None):
         from decimal import Decimal
         from time import time, sleep
+        from perfTabs import PerformanceTableau
         runTimes = {}
         t0 = time()
-        perfTab.save('sharedPerfTab')
+        PerformanceTableau.save(perfTab,'sharedPerfTab')
         while not os.path.exists('./sharedPerfTab.py'):
             sleep(1)
         # # code snippet for alternate module importing    

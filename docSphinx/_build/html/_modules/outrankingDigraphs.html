@@ -10522,26 +10522,26 @@
                                     <span class="n">vetoProbability</span><span class="o">=</span><span class="mf">0.2</span><span class="p">,</span>\
                                     <span class="n">seed</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
     <span class="n">g</span> <span class="o">=</span> <span class="n">BipolarOutrankingDigraph</span><span class="p">(</span><span class="n">t</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">g</span><span class="o">.</span><span class="n">vetos</span><span class="p">)</span>
     <span class="c1">#g.showObjectives()</span>
-    <span class="n">ranking</span> <span class="o">=</span> <span class="n">g</span><span class="o">.</span><span class="n">computeNetFlowsRanking</span><span class="p">()</span>
-    <span class="n">sizeOfDiagonal</span> <span class="o">=</span> <span class="mi">5</span>
-    <span class="n">quasiRelation</span> <span class="o">=</span> <span class="p">{}</span>
-    <span class="n">Med</span> <span class="o">=</span> <span class="n">g</span><span class="o">.</span><span class="n">valuationdomain</span><span class="p">[</span><span class="s1">&#39;med&#39;</span><span class="p">]</span>
-    <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">g</span><span class="o">.</span><span class="n">actions</span><span class="p">:</span>
-        <span class="n">quasiRelation</span><span class="p">[</span><span class="n">x</span><span class="p">]</span> <span class="o">=</span> <span class="p">{}</span>
-        <span class="n">xi</span> <span class="o">=</span> <span class="n">ranking</span><span class="o">.</span><span class="n">index</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
-        <span class="k">for</span> <span class="n">y</span> <span class="ow">in</span> <span class="n">g</span><span class="o">.</span><span class="n">actions</span><span class="p">:</span>
-            <span class="n">yj</span> <span class="o">=</span> <span class="n">ranking</span><span class="o">.</span><span class="n">index</span><span class="p">(</span><span class="n">y</span><span class="p">)</span>
-            <span class="c1">#if abs(xi-yj) &gt; sizeOfDiagonal:</span>
-            <span class="c1">#    quasiRelation[x][y] = g.relation[x][y]</span>
-            <span class="k">if</span> <span class="n">xi</span> <span class="o">&gt;=</span> <span class="n">yj</span><span class="p">:</span>
-                <span class="n">quasiRelation</span><span class="p">[</span><span class="n">x</span><span class="p">][</span><span class="n">y</span><span class="p">]</span> <span class="o">=</span> <span class="nb">min</span><span class="p">(</span><span class="n">Med</span><span class="p">,</span> <span class="n">g</span><span class="o">.</span><span class="n">relation</span><span class="p">[</span><span class="n">x</span><span class="p">][</span><span class="n">y</span><span class="p">])</span>
-            <span class="k">else</span><span class="p">:</span>
-                <span class="n">quasiRelation</span><span class="p">[</span><span class="n">x</span><span class="p">][</span><span class="n">y</span><span class="p">]</span> <span class="o">=</span> <span class="nb">max</span><span class="p">(</span><span class="n">Med</span><span class="p">,</span> <span class="n">g</span><span class="o">.</span><span class="n">relation</span><span class="p">[</span><span class="n">x</span><span class="p">][</span><span class="n">y</span><span class="p">])</span>
-    <span class="n">g</span><span class="o">.</span><span class="n">relation</span> <span class="o">=</span> <span class="n">quasiRelation</span>
-    <span class="n">gcd</span> <span class="o">=</span> <span class="o">~</span><span class="p">(</span><span class="o">-</span><span class="n">g</span><span class="p">)</span>
-    <span class="n">gcd</span><span class="o">.</span><span class="n">showHTMLRelationHeatmap</span><span class="p">(</span><span class="n">actionsList</span><span class="o">=</span><span class="n">ranking</span><span class="p">,</span><span class="n">colorLevels</span><span class="o">=</span><span class="mi">9</span><span class="p">)</span>    
-
+    <span class="c1"># ranking = g.computeNetFlowsRanking()</span>
+    <span class="c1"># sizeOfDiagonal = 5</span>
+    <span class="c1"># quasiRelation = {}</span>
+    <span class="c1"># Med = g.valuationdomain[&#39;med&#39;]</span>
+    <span class="c1"># for x in g.actions:</span>
+    <span class="c1">#     quasiRelation[x] = {}</span>
+    <span class="c1">#     xi = ranking.index(x)</span>
+    <span class="c1">#     for y in g.actions:</span>
+    <span class="c1">#         yj = ranking.index(y)</span>
+    <span class="c1">#         #if abs(xi-yj) &gt; sizeOfDiagonal:</span>
+    <span class="c1">#         #    quasiRelation[x][y] = g.relation[x][y]</span>
+    <span class="c1">#         if xi &gt;= yj:</span>
+    <span class="c1">#             quasiRelation[x][y] = min(Med, g.relation[x][y])</span>
+    <span class="c1">#         else:</span>
+    <span class="c1">#             quasiRelation[x][y] = max(Med, g.relation[x][y])</span>
+    <span class="c1"># g.relation = quasiRelation</span>
+    <span class="c1"># gcd = ~(-g)</span>
+    <span class="c1"># gcd.showHTMLRelationHeatmap(actionsList=ranking,colorLevels=9)</span>
   
 <span class="c1">#############################</span>
 <span class="c1">############################</span>

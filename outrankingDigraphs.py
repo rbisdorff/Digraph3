@@ -10184,26 +10184,26 @@ if __name__ == "__main__":
                                     vetoProbability=0.2,\
                                     seed=1)
     g = BipolarOutrankingDigraph(t)
+    print(g.vetos)
     #g.showObjectives()
-    ranking = g.computeNetFlowsRanking()
-    sizeOfDiagonal = 5
-    quasiRelation = {}
-    Med = g.valuationdomain['med']
-    for x in g.actions:
-        quasiRelation[x] = {}
-        xi = ranking.index(x)
-        for y in g.actions:
-            yj = ranking.index(y)
-            #if abs(xi-yj) > sizeOfDiagonal:
-            #    quasiRelation[x][y] = g.relation[x][y]
-            if xi >= yj:
-                quasiRelation[x][y] = min(Med, g.relation[x][y])
-            else:
-                quasiRelation[x][y] = max(Med, g.relation[x][y])
-    g.relation = quasiRelation
-    gcd = ~(-g)
-    gcd.showHTMLRelationHeatmap(actionsList=ranking,colorLevels=9)    
-
+    # ranking = g.computeNetFlowsRanking()
+    # sizeOfDiagonal = 5
+    # quasiRelation = {}
+    # Med = g.valuationdomain['med']
+    # for x in g.actions:
+    #     quasiRelation[x] = {}
+    #     xi = ranking.index(x)
+    #     for y in g.actions:
+    #         yj = ranking.index(y)
+    #         #if abs(xi-yj) > sizeOfDiagonal:
+    #         #    quasiRelation[x][y] = g.relation[x][y]
+    #         if xi >= yj:
+    #             quasiRelation[x][y] = min(Med, g.relation[x][y])
+    #         else:
+    #             quasiRelation[x][y] = max(Med, g.relation[x][y])
+    # g.relation = quasiRelation
+    # gcd = ~(-g)
+    # gcd.showHTMLRelationHeatmap(actionsList=ranking,colorLevels=9)
   
 #############################
 ############################

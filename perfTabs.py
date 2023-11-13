@@ -2737,7 +2737,7 @@ The performance evaluations of each decision alternative on each criterion are g
         print('std deviation: %2.2f ' % (stddev))      
 
     def save(self,fileName='tempperftab',isDecimal=True,
-             valueDigits=2,Comments=False):
+             valueDigits=2,Comments=True):
         """
         Persistant storage of Performance Tableaux.
         """
