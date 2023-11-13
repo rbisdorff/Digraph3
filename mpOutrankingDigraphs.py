@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-New Python3.12+ compatible multiprocessing implementation of bipolarvalued outranking digraphs for Linux and MacOS.
+New Python3.12+ compatible multiprocessing implementation of bipolar-valued outranking digraphs for Linux and MacOS.
 
 The unsafe *fork* multiprocessing start-method is replaced with the safer *forkserver* method.
 
@@ -92,26 +92,26 @@ def worker_func(keys):
                             considerableDiffs[x][y]['positive'] += 1
                         elif (xval - yval) <= -(veto[0] + max(xval*veto[1],yval*veto[1])):
                             considerableDiffs[x][y]['negative'] -= 1
-                if considerableDiffs[x][y]['positive'] > 0 and considerableDiffs[x][y]['negative'] < 0:
-                    relation[x][y] = Decimal('0')
-                elif relation[x][y] > Decimal('0'):
-                    if considerableDiffs[x][y]['positive'] > 0:
-                        relation[x][y] = sumWeights
-                    elif considerableDiffs[x][y]['negative'] < 0:
-                        relation[x][y] = Decimal('0')
-                elif relation[x][y] < Decimal('0'):
-                    if considerableDiffs[x][y]['positive'] > 0:
-                        relation[x][y] = Decimal('0')
-                    elif considerableDiffs[x][y]['negative'] < 0:
-                        relation[x][y] = -sumWeights
-                elif relation[x][y] == Decimal('0'):
-                    if considerableDiffs[x][y]['positive'] > 0:
-                        relation[x][y] = sumWeights
-                    elif considerableDiffs[x][y]['negative'] < 0:
-                        relation[x][y] = -sumWeights
-                # print(g,x,y,xval,yval,(xval-yval),relation[x][y])
-                  
-
+                    # if x == 'a09' and y == 'a11':
+                    #     print(g,criteria[g]['weight'],x,y,xval,yval,(xval-yval),relation[x][y])
+    for y in actionKeys:
+        if considerableDiffs[x][y]['positive'] > 0 and considerableDiffs[x][y]['negative'] < 0:
+            relation[x][y] = Decimal('0')
+        elif relation[x][y] > Decimal('0'):
+            if considerableDiffs[x][y]['positive'] > 0:
+                relation[x][y] = sumWeights
+            elif considerableDiffs[x][y]['negative'] < 0:
+                relation[x][y] = Decimal('0')
+        elif relation[x][y] < Decimal('0'):
+            if considerableDiffs[x][y]['positive'] > 0:
+                relation[x][y] = Decimal('0')
+            elif considerableDiffs[x][y]['negative'] < 0:
+                relation[x][y] = -sumWeights
+        elif relation[x][y] == Decimal('0'):
+            if considerableDiffs[x][y]['positive'] > 0:
+                relation[x][y] = sumWeights
+            elif considerableDiffs[x][y]['negative'] < 0:
+                relation[x][y] = -sumWeights
 
     return [relation, considerableDiffs]
 
@@ -121,10 +121,10 @@ class MPOutrankingDigraph(BipolarOutrankingDigraph):
     New *forkserver* start-method based MP implementation of the BipolarOutrankingDigraph class.
 
     *Parameters*:
-        * perfTab: in memory instance of PerformanceTableau class.
-        * Normalized: the valuation domain is set by default to the sum of the criteria weights. If True, the valuation domain is recoded to [-1.0,+1.0].
-        * ndigits: number of decimal digits of the chracteristic valuation, by default set to 4.
-        * nbrCores: controls the maximal number of cores that will be used in the multiprocessing phases. If None is given, the os.cpu_count method is used in order to determine the number of available cores on the SMP machine.
+        * *perfTab*: in memory instance of PerformanceTableau class.
+        * *Normalized*: the valuation domain is set by default to the sum of the criteria weights. If True, the valuation domain is recoded to [-1.0,+1.0].
+        * *ndigits*: number of decimal digits of the chracteristic valuation, by default set to 4.
+        * *nbrCores*: controls the maximal number of cores that will be used in the multiprocessing phases. If *None* is given, the *os.cpu_count* method is used in order to determine the number of available cores on the SMP machine.
     
     *Usage example*
          (11th Gen Intel® Core™ i5-11400 × 12, 16.0 GiB, Python3.12.0):
@@ -300,26 +300,91 @@ class MPOutrankingDigraph(BipolarOutrankingDigraph):
         runTimes['gammaSets'] = time() - t2
         runTimes['totalTime'] = time() - t0
         self.runTimes = runTimes
-        #print(runTimes)
         
+#-------------  class methods
+
+    def showPolarisations(self,cutLevel=None,realVetosOnly = False):       
+        """
+        prints all negative and positive polarised situations observed in the OutrankingDigraph instance.
+        """
+        Max = self.valuationdomain['max']
+        Med = self.valuationdomain['med']
+        Min = self.valuationdomain['min']
+        lpdCount = self.largePerformanceDifferencesCount
+        relation = self.relation
+        try:
+            vetos = self.vetos
+        except:
+            vetos = []
+        print('*----  Polarisations ----*')
+        actionKeys = [a for a in self.actions]
+        n = len(actionKeys)
+        print('Considerable positive and negative performance differences')
+        print('Outranking situationa polarised to indeterminate')
+        print(' -----------------------------------------------')
+        count = 0
+        for i in range(n):
+            x = actionKeys[i]
+            for j in range(i+1,n):
+                y = actionKeys[j]
+                if lpdCount[x][y]['positive'] > 0 and \
+                   lpdCount[x][y]['negative'] < 0:
+                    count += 1
+                    print( 'relation[%s][%s] = %.2f' % (x,y,relation[x][y]),
+                           end= '; ' )
+                    print( 'relation[%s][%s] = %.2f' % (y,x,relation[y][x]) )
+        print('%d polarisations\n' % count)
+        print('Considerable positive performance differences')
+        print('Outranking situationa polarised')
+        print('*----------------------------------------------------*')
+        count = 0
+        for i in range(n):
+            x = actionKeys[i]
+            for j in range(i+1,n):
+                y = actionKeys[j]
+                if lpdCount[x][y]['positive'] > 0 and \
+                   lpdCount[x][y]['negative'] == 0:
+                    count += 1
+                    print( 'relation[%s][%s] = %.2f' % (x,y,relation[x][y]),
+                           end= '; ' )
+                    print( 'relation[%s][%s] = %.2f' % (y,x,relation[y][x]) )
+        print('%d polarisations\n' % count)
+        print('Considerable negative performance differences')
+        print('Outranking situations polarised')
+        print('*----------------------------------------------------*')
+        count = 0
+        for i in range(n):
+            x = actionKeys[i]
+            for j in range(i+1,n):
+                y = actionKeys[j]
+                if lpdCount[x][y]['positive'] == 0 and \
+                   lpdCount[x][y]['negative'] < 0:
+                    count += 1
+                    print( 'relation[%s][%s] = %.2f' % (x,y,relation[x][y]),
+                           end='; ' )
+                    print( 'relation[%s][%s] = %.2f' % (y,x,relation[y][x]) )
+        print('%d polarisations\n' % count)
+
 ###################################
 # testing the module
 if __name__ == '__main__':
     from perfTabs import PerformanceTableau
     from randomPerfTabs import *
     from time import time,sleep
-    pt1 = RandomCBPerformanceTableau(numberOfActions=300,
-                                     numberOfCriteria=13,
+    pt1 = RandomCBPerformanceTableau(numberOfActions=20,
+                                     numberOfCriteria=7,
                                      IntegerWeights=True,
                                      seed=10)
     #pt1.showCriteria()
     #pt1 = PerformanceTableau('sharedPerfTab')
     #pt1.showPerformanceTableau()
     from mpOutrankingDigraphs import MPOutrankingDigraph
-    bg = MPOutrankingDigraph(pt1,ndigits=4,Normalized=False,nbrCores=12)
-    #bg.showRelationTable(hasLPDDenotation=True)
+    bg = MPOutrankingDigraph(pt1,ndigits=4,Normalized=True,nbrCores=12)
+    bg.showRelationTable(hasLPDDenotation=True)
     print(bg)
-    #bg.showPairwiseOutrankings('a4','a7')
+    bg.showPolarisations()
+    bg.showPairwiseOutrankings('a09','a11')
+    #bg.showPairwiseOutrankings('a02','a18')
     #from outrankingDigraphs import BipolarOutrankingDigraph
     #bg1 = BipolarOutrankingDigraph(pt1,Threading=False)
     #bg1.showRelationTable(hasLPDDenotation=True)

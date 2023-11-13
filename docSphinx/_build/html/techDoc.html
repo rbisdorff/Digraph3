@@ -601,7 +601,10 @@
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="#mpoutrankingdigraphs-module">2.8. mpOutrankingDigraphs module</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="#mpOutrankingDigraphs.MPOutrankingDigraph"><code class="docutils literal notranslate"><span class="pre">MPOutrankingDigraph</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#mpOutrankingDigraphs.MPOutrankingDigraph"><code class="docutils literal notranslate"><span class="pre">MPOutrankingDigraph</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#mpOutrankingDigraphs.MPOutrankingDigraph.showPolarisations"><code class="docutils literal notranslate"><span class="pre">MPOutrankingDigraph.showPolarisations()</span></code></a></li>
+</ul>
+</li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="#ratingdigraphs-module">2.9. ratingDigraphs module</a><ul>
@@ -6516,7 +6519,7 @@ temporary unanimous outranking digraphs</p>
 <p><strong>Inheritance Diagram</strong></p>
 <div class="graphviz"><object data="_images/inheritance-a5e9bcc36740155d5fa31589cd18a141c40ae37f.svg" type="image/svg+xml" class="inheritance graphviz">
 <p class="warning">Inheritance diagram of mpOutrankingDigraphs</p></object></div>
-<p id="module-mpOutrankingDigraphs">New Python3.12+ compatible multiprocessing implementation of bipolarvalued outranking digraphs for Linux and MacOS.</p>
+<p id="module-mpOutrankingDigraphs">New Python3.12+ compatible multiprocessing implementation of bipolar-valued outranking digraphs for Linux and MacOS.</p>
 <p>The unsafe <em>fork</em> multiprocessing start-method is replaced with the safer <em>forkserver</em> method.</p>
 <p>Shared pool data and given performance tableau are preloaded by the <em>forkserver</em>.</p>
 <p>Copyright (C) 2023  Raymond Bisdorff</p>
@@ -6539,10 +6542,10 @@ with this program; if not, write to the Free Software Foundation, Inc.,
 <dd><p>New <em>forkserver</em> start-method based MP implementation of the BipolarOutrankingDigraph class.</p>
 <dl class="simple">
 <dt><em>Parameters</em>:</dt><dd><ul class="simple">
-<li><p>perfTab: in memory instance of PerformanceTableau class.</p></li>
-<li><p>Normalized: the valuation domain is set by default to the sum of the criteria weights. If True, the valuation domain is recoded to [-1.0,+1.0].</p></li>
-<li><p>ndigits: number of decimal digits of the chracteristic valuation, by default set to 4.</p></li>
-<li><p>nbrCores: controls the maximal number of cores that will be used in the multiprocessing phases. If None is given, the os.cpu_count method is used in order to determine the number of available cores on the SMP machine.</p></li>
+<li><p><em>perfTab</em>: in memory instance of PerformanceTableau class.</p></li>
+<li><p><em>Normalized</em>: the valuation domain is set by default to the sum of the criteria weights. If True, the valuation domain is recoded to [-1.0,+1.0].</p></li>
+<li><p><em>ndigits</em>: number of decimal digits of the chracteristic valuation, by default set to 4.</p></li>
+<li><p><em>nbrCores</em>: controls the maximal number of cores that will be used in the multiprocessing phases. If <em>None</em> is given, the <em>os.cpu_count</em> method is used in order to determine the number of available cores on the SMP machine.</p></li>
 </ul>
 </dd>
 <dt><em>Usage example</em></dt><dd><p>(11th Gen Intel® Core™ i5-11400 × 12, 16.0 GiB, Python3.12.0):</p>
@@ -6579,6 +6582,12 @@ with this program; if not, write to the Free Software Foundation, Inc.,
 <span class="go">  Threads          : 12</span>
 </pre></div>
 </div>
+<dl class="py method">
+<dt class="sig sig-object py" id="mpOutrankingDigraphs.MPOutrankingDigraph.showPolarisations">
+<span class="sig-name descname"><span class="pre">showPolarisations</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">cutLevel</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">realVetosOnly</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/mpOutrankingDigraphs.html#MPOutrankingDigraph.showPolarisations"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#mpOutrankingDigraphs.MPOutrankingDigraph.showPolarisations" title="Link to this definition"></a></dt>
+<dd><p>prints all negative and positive polarised situations observed in the OutrankingDigraph instance.</p>
+</dd></dl>
+
 </dd></dl>
 
 <hr class="docutils" />

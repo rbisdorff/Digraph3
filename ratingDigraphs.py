@@ -2267,7 +2267,7 @@ if __name__ == "__main__":
     pt = RandomCBPerformanceTableau(numberOfActions=100,seed=3)
     rrq = RatingByRelativeQuantilesDigraph(pt,quantiles=7,
                                          LowerClosed=False,
-                                         outrankingModel='standard',
+                                         outrankingModel='mp',
                                          Threading=MP,
                                          nbrCores=nbrCores,
                                          Debug=False)
