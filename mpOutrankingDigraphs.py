@@ -31,12 +31,11 @@ __version__ = "Revision: Py3.12"
 import multiprocessing
 import os
 
-# # init poolData.py module with  forkserver preload example variables
-# if not os.path.exists('./poolData.py'):
-#      Normalized = False
-#      ndigits = 4
-# else:
-#     from poolData import *
+# init poolData.py module with forkserver preloades terminal Nodes
+if not os.path.exists('./poolData.py'):
+    terminalNodes = [str(x) for x in range(10)]
+else:
+    from poolData import *
 if not os.path.exists('./sharedPerfTab.py'):
     from randomPerfTabs import RandomPerformanceTableau
     pt = RandomPerformanceTableau(numberOfActions=1,numberOfCriteria=1)
@@ -51,10 +50,10 @@ def worker_func(keys):
     ks = keys.split('_')
     i = ks[0]
     x = ks[1]
-    actionKeys = [a for a in actions]
+    #actionKeys = [a for a in actions]
     relation[x] = {}
     considerableDiffs[x] = {}
-    for y in actionKeys:
+    for y in terminalNodes:
         relation[x].update({y : Decimal('0')})
         considerableDiffs[x].update({y: {'positive':0, 'negative': 0}})
     sumWeights = Decimal('0')
@@ -74,7 +73,7 @@ def worker_func(keys):
             veto = NA
         xval = evaluation[g][x]
         if xval != NA:
-            for y in actionKeys:
+            for y in terminalNodes:
                 yval = evaluation[g][y]
                 if yval != NA:
                     if ind != NA and pref != NA:
@@ -94,7 +93,7 @@ def worker_func(keys):
                             considerableDiffs[x][y]['negative'] -= 1
                     # if x == 'a09' and y == 'a11':
                     #     print(g,criteria[g]['weight'],x,y,xval,yval,(xval-yval),relation[x][y])
-    for y in actionKeys:
+    for y in terminalNodes:
         if considerableDiffs[x][y]['positive'] > 0 and considerableDiffs[x][y]['negative'] < 0:
             relation[x][y] = Decimal('0')
         elif relation[x][y] > Decimal('0'):
@@ -241,45 +240,13 @@ class MPOutrankingDigraph(BipolarOutrankingDigraph):
         self.NA = perfTab.NA
         self.evaluation = perfTab.evaluation
         runTimes['dataInput'] = time() - t0
+        # compute Relation
         t1 = time()
-        # construct relation
-        actionKeys = [x for x in self.actions]
-        pargs = {}
-        n = self.order
-        # # sharing parameters with a prelodable poolData.py module
-        # fo = open('./poolData.py','w')
-        # fo.write( 'Normalized = %s\n' % str(Normalized) )
-        # fo.write( 'ndigits = %d\n' % ndigits )
-        # fo.close()
-        # while not os.path.exists('./poolData.py'):
-        #      sleep(1)
-        # print('saved actual poolData.py module')
-        ctx_mp = multiprocessing.get_context('forkserver')
-        # ctx_mp.set_forkserver_preload(['poolData','sharedPerfTab'])
-        ctx_mp.set_forkserver_preload(['sharedPerfTab'])
-        if nbrCores is None:
-            cores = ctx_mp.cpu_count()
-        else:
-            cores = nbrCores
-        self.nbrThreads = cores
-        with ctx_mp.Pool(processes=cores) as pool:
-            relation = {}
-            considerableDiffs = {}
-            for x in self.actions:
-                relation[x] = {}
-                considerableDiffs[x] = {}
-            tasks = []
-            for i in range(n):
-                keys = '%s_%s' % (str(i),str(actionKeys[i]))
-                tasks.append(keys)
-            #print(tasks)
-            for result in pool.imap(worker_func, tasks):
-                #print(result[0])
-                relation.update(result[0])
-                considerableDiffs.update(result[1])
-        
-        while multiprocessing.active_children() != []:
-            pass
+        initialNodes = [a for a in self.actions]
+        terminalNodes = [a for a in self.actions]
+        relation,considerableDiffs = self._computeMPRelation(nbrCores,
+                                                           initialNodes,
+                                                           terminalNodes)
         self.relation = relation
         self.largePerformanceDifferencesCount = considerableDiffs
         # valuationdamain
@@ -302,7 +269,51 @@ class MPOutrankingDigraph(BipolarOutrankingDigraph):
         self.runTimes = runTimes
         
 #-------------  class methods
-
+    def _computeMPRelation(self,nbrCores,initialNodes,terminalNodes):
+        ctx_mp = multiprocessing.get_context('forkserver')
+        #if terminalNodes is not None:
+        # sharing parameters with a prelodable poolData.py module
+        fo = open('./poolData.py','w')
+        nt = len(terminalNodes)
+        #print(nt,terminalNodes)
+        fo.write( 'terminalNodes = [\n')
+        for i in range(nt):
+            fo.write( "\'%s\',\n" % terminalNodes[i] )
+        fo.write(']\n')
+        fo.close()
+        while not os.path.exists('./poolData.py'):
+            sleep(1)
+        #print('saved actual poolData.py module')
+        ctx_mp.set_forkserver_preload(['poolData','sharedPerfTab'])
+        # else:
+        #     ctx_mp.set_forkserver_preload(['sharedPerfTab'])
+        if nbrCores is None:
+            cores = ctx_mp.cpu_count()
+        else:
+            cores = nbrCores
+        self.nbrThreads = cores
+        ni = len(initialNodes)
+        #actionKeys = [a for a in self.actions]
+        with ctx_mp.Pool(processes=cores) as pool:
+            relation = {}
+            considerableDiffs = {}
+            for x in initialNodes:
+                relation[x] = {}
+                considerableDiffs[x] = {}
+            tasks = []
+            for i in range(ni):
+                keys = '%s_%s' % (str(i),initialNodes[i])
+                tasks.append(keys)
+            #print(tasks)
+            for result in pool.imap(worker_func, tasks):
+                #print(result[0])
+                relation.update(result[0])
+                considerableDiffs.update(result[1])
+        
+        while multiprocessing.active_children() != []:
+            pass
+        return relation,considerableDiffs
+        
     def showPolarisations(self,cutLevel=None,realVetosOnly = False):       
         """
         prints all negative and positive polarised situations observed in the OutrankingDigraph instance.
@@ -365,36 +376,84 @@ class MPOutrankingDigraph(BipolarOutrankingDigraph):
                     print( 'relation[%s][%s] = %.2f' % (y,x,relation[y][x]) )
         print('%d polarisations\n' % count)
 
+#------------------
+class RandomMPOutrankingDigraph(MPOutrankingDigraph):
+    """
+    Specialization of the MPOutrankingDigraph class for generating temporary Digraphs from RandomPerformanceTableau instances.
+
+    *Parameters*:
+       See :py:class:`randomPerfTabs.RandomPerformanceTableau` class.
+
+    """
+    def __init__(self,numberOfActions=100,
+                 numberOfCriteria=7,
+                 weightDistribution='random',
+                 weightScale = [1,10],
+                 commonScale=[0.0,100.0],
+                 commonThresholds = [(5.0,0.0),(10.0,0.0),(1000.0,0.0),(1000,0.0)],
+                 commonMode=('uniform',None,None),
+                 Normalized=True,
+                 seed=None,
+                 nbrCores=None):
+        # generate random performance tableau
+        from copy import deepcopy
+        from randomPerfTabs import RandomPerformanceTableau
+        tb = RandomPerformanceTableau(numberOfActions=numberOfActions,\
+                                      numberOfCriteria=numberOfCriteria,\
+                                      weightDistribution=weightDistribution,\
+                                      weightScale=weightScale,\
+                                      commonScale=commonScale,\
+                                      commonThresholds = commonThresholds,\
+                                      commonMode=commonMode,\
+                                      seed=seed)
+        g = MPOutrankingDigraph(tb,Normalized=Normalized,nbrCores=nbrCores)
+        self.name = g.name
+        self.actions = g.actions
+        self.criteria = g.criteria
+        self.evaluation = g.evaluation
+        self.relation = g.relation
+        self.largePerformanceDifferencesCount = g.largePerformanceDifferencesCount
+        self.valuationdomain = g.valuationdomain
+        self.NA = g.NA
+        self.order = g.order
+        self.gamma = g.gamma
+        self.notGamma = g.notGamma
+        self.runTimes = g.runTimes
+
 ###################################
 # testing the module
 if __name__ == '__main__':
-    from perfTabs import PerformanceTableau
-    from randomPerfTabs import *
-    from time import time,sleep
-    pt1 = RandomCBPerformanceTableau(numberOfActions=20,
-                                     numberOfCriteria=7,
-                                     IntegerWeights=True,
-                                     seed=10)
-    #pt1.showCriteria()
-    #pt1 = PerformanceTableau('sharedPerfTab')
-    #pt1.showPerformanceTableau()
-    from mpOutrankingDigraphs import MPOutrankingDigraph
-    bg = MPOutrankingDigraph(pt1,ndigits=4,Normalized=True,nbrCores=12)
-    bg.showRelationTable(hasLPDDenotation=True)
+
+    bg = RandomMPOutrankingDigraph()
     print(bg)
+    
+    # from perfTabs import PerformanceTableau
+    # from randomPerfTabs import *
+    # from time import time,sleep
+    # pt1 = RandomCBPerformanceTableau(numberOfActions=3000,
+    #                                  numberOfCriteria=7,
+    #                                  IntegerWeights=True,
+    #                                  seed=10)
+    # pt1.showCriteria()
+    # pt1 = PerformanceTableau('sharedPerfTab')
+    # pt1.showPerformanceTableau()
+    # from mpOutrankingDigraphs import MPOutrankingDigraph
+    # bg = MPOutrankingDigraph(pt1,ndigits=4,Normalized=True,nbrCores=12)
+    bg.showRelationTable(hasLPDDenotation=True)
+    # print(bg)
     bg.showPolarisations()
-    bg.showPairwiseOutrankings('a09','a11')
-    #bg.showPairwiseOutrankings('a02','a18')
-    #from outrankingDigraphs import BipolarOutrankingDigraph
-    #bg1 = BipolarOutrankingDigraph(pt1,Threading=False)
-    #bg1.showRelationTable(hasLPDDenotation=True)
-    #print(bg1)
-    #bg1.showPairwiseOutrankings('a1','a5')
-    #bg.showRelationTable()
-    #bg.recodeValuation()
-    #from linearOrders import *
-    #nf = NetFlowsRanking(bg)
-    #print(nf)
-    #bg.showHTMLPerformanceHeatmap(toIndex=20,Correlations=True,
-    #                              colorLevels=5,outrankingModel='this')
+    # bg.showPairwiseOutrankings('a09','a11')
+    # bg.showPairwiseOutrankings('a02','a18')
+    # from outrankingDigraphs import BipolarOutrankingDigraph
+    # bg1 = BipolarOutrankingDigraph(pt1,Threading=True,nbrCores=12)
+    # bg1.showRelationTable(hasLPDDenotation=True)
+    # print(bg1)
+    # bg1.showPairwiseOutrankings('a1','a5')
+    # bg.showRelationTable()
+    # bg.recodeValuation()
+    # from linearOrders import *
+    # nf = NetFlowsRanking(bg)
+    # print(nf)
+    bg.showHTMLPerformanceHeatmap(toIndex=20,Correlations=True,
+                                   colorLevels=5,outrankingModel='this')
     

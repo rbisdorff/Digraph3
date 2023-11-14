@@ -605,6 +605,7 @@
 <li class="toctree-l4"><a class="reference internal" href="#mpOutrankingDigraphs.MPOutrankingDigraph.showPolarisations"><code class="docutils literal notranslate"><span class="pre">MPOutrankingDigraph.showPolarisations()</span></code></a></li>
 </ul>
 </li>
+<li class="toctree-l3"><a class="reference internal" href="#mpOutrankingDigraphs.RandomMPOutrankingDigraph"><code class="docutils literal notranslate"><span class="pre">RandomMPOutrankingDigraph</span></code></a></li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="#ratingdigraphs-module">2.9. ratingDigraphs module</a><ul>
@@ -1457,7 +1458,7 @@ binned cumulated density functions per criteria. Depends on the
 </li>
 <li><dl>
 <dt><a class="reference internal" href="#mpoutrankingdigraphs-label"><span class="std std-ref">mpOutrankingDigraphs module</span></a></dt><dd><p>New forkserver based multiprocessing construction of genuine bipolar-valued outranking digraphs.</p>
-<div class="graphviz"><object data="_images/inheritance-a5e9bcc36740155d5fa31589cd18a141c40ae37f.svg" type="image/svg+xml" class="inheritance graphviz">
+<div class="graphviz"><object data="_images/inheritance-1e6ae37b40deb3c28c23077699a9853edced5160.svg" type="image/svg+xml" class="inheritance graphviz">
 <p class="warning">Inheritance diagram of mpOutrankingDigraphs</p></object></div>
 </dd>
 </dl>
@@ -6517,7 +6518,7 @@ temporary unanimous outranking digraphs</p>
 <section id="mpoutrankingdigraphs-module">
 <span id="mpoutrankingdigraphs-label"></span><h2><a class="toc-backref" href="#id10" role="doc-backlink"><span class="section-number">2.8. </span>mpOutrankingDigraphs module</a><a class="headerlink" href="#mpoutrankingdigraphs-module" title="Link to this heading"></a></h2>
 <p><strong>Inheritance Diagram</strong></p>
-<div class="graphviz"><object data="_images/inheritance-a5e9bcc36740155d5fa31589cd18a141c40ae37f.svg" type="image/svg+xml" class="inheritance graphviz">
+<div class="graphviz"><object data="_images/inheritance-1e6ae37b40deb3c28c23077699a9853edced5160.svg" type="image/svg+xml" class="inheritance graphviz">
 <p class="warning">Inheritance diagram of mpOutrankingDigraphs</p></object></div>
 <p id="module-mpOutrankingDigraphs">New Python3.12+ compatible multiprocessing implementation of bipolar-valued outranking digraphs for Linux and MacOS.</p>
 <p>The unsafe <em>fork</em> multiprocessing start-method is replaced with the safer <em>forkserver</em> method.</p>
@@ -6588,6 +6589,16 @@ with this program; if not, write to the Free Software Foundation, Inc.,
 <dd><p>prints all negative and positive polarised situations observed in the OutrankingDigraph instance.</p>
 </dd></dl>
 
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="mpOutrankingDigraphs.RandomMPOutrankingDigraph">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">mpOutrankingDigraphs.</span></span><span class="sig-name descname"><span class="pre">RandomMPOutrankingDigraph</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">numberOfActions</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">100</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">numberOfCriteria</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">7</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">weightDistribution</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'random'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">weightScale</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">[1,</span> <span class="pre">10]</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">commonScale</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">[0.0,</span> <span class="pre">100.0]</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">commonThresholds</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">[(5.0,</span> <span class="pre">0.0),</span> <span class="pre">(10.0,</span> <span class="pre">0.0),</span> <span class="pre">(1000.0,</span> <span class="pre">0.0),</span> <span class="pre">(1000,</span> <span class="pre">0.0)]</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">commonMode</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">('uniform',</span> <span class="pre">None,</span> <span class="pre">None)</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">Normalized</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">seed</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">nbrCores</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/mpOutrankingDigraphs.html#RandomMPOutrankingDigraph"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#mpOutrankingDigraphs.RandomMPOutrankingDigraph" title="Link to this definition"></a></dt>
+<dd><p>Specialization of the MPOutrankingDigraph class for generating temporary Digraphs from RandomPerformanceTableau instances.</p>
+<dl class="simple">
+<dt><em>Parameters</em>:</dt><dd><p>See <a class="reference internal" href="#randomPerfTabs.RandomPerformanceTableau" title="randomPerfTabs.RandomPerformanceTableau"><code class="xref py py-class docutils literal notranslate"><span class="pre">randomPerfTabs.RandomPerformanceTableau</span></code></a> class.</p>
+</dd>
+</dl>
 </dd></dl>
 
 <hr class="docutils" />
