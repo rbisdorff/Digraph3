@@ -378,7 +378,7 @@ class MPBipolarOutrankingDigraph(BipolarOutrankingDigraph):
 #------------------
 class RandomMPBipolarOutrankingDigraph(MPBipolarOutrankingDigraph):
     """
-    Specialization of the MPOutrankingDigraph class for generating temporary Digraphs from RandomPerformanceTableau instances.
+    Specialization of the MPBipolarOutrankingDigraph class for generating temporary Digraphs from RandomPerformanceTableau instances.
 
     *Parameters*:
        See :py:class:`randomPerfTabs.RandomPerformanceTableau` class.
