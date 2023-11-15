@@ -1671,8 +1671,8 @@ class RatingByRelativeQuantilesDigraph(RatingDigraph,PerformanceTableau):
 ##        else:
 ##            self.nbrThreads = nbrCores
         if outrankingModel == 'mp':
-            from mpOutrankingDigraphs import MPOutrankingDigraph
-            g = MPOutrankingDigraph(self,Normalized=True,nbrCores=None)
+            from mpOutrankingDigraphs import MPBipolarOutrankingDigraph
+            g = MPBipolarOutrankingDigraph(self,Normalized=True,nbrCores=None)
             self.nbrThreads = copy2self(g.nbrThreads)
             self.relation = copy2self(g.relation)
             self.valuationdomain = copy2self(g.valuationdomain)

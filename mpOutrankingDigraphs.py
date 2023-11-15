@@ -47,9 +47,10 @@ def worker_func(keys):
     from decimal import Decimal
     relation = {}
     considerableDiffs = {}
-    ks = keys.split('_')
-    i = ks[0]
-    x = ks[1]
+    #ks = keys.split('_')
+    #i = ks[0]
+    #x = ks[1]
+    x = keys
     #actionKeys = [a for a in actions]
     relation[x] = {}
     considerableDiffs[x] = {}
@@ -115,7 +116,7 @@ def worker_func(keys):
     return [relation, considerableDiffs]
 
 from outrankingDigraphs import BipolarOutrankingDigraph
-class MPOutrankingDigraph(BipolarOutrankingDigraph):
+class MPBipolarOutrankingDigraph(BipolarOutrankingDigraph):
     """
     New *forkserver* start-method based MP implementation of the BipolarOutrankingDigraph class.
 
@@ -302,7 +303,8 @@ class MPOutrankingDigraph(BipolarOutrankingDigraph):
                 considerableDiffs[x] = {}
             tasks = []
             for i in range(ni):
-                keys = '%s_%s' % (str(i),initialNodes[i])
+                keys = '%s' % (initialNodes[i])
+                #keys = '%s_%s' % (str(i),initialNodes[i])
                 tasks.append(keys)
             #print(tasks)
             for result in pool.imap(worker_func, tasks):
@@ -377,7 +379,7 @@ class MPOutrankingDigraph(BipolarOutrankingDigraph):
         print('%d polarisations\n' % count)
 
 #------------------
-class RandomMPOutrankingDigraph(MPOutrankingDigraph):
+class RandomMPBipolarOutrankingDigraph(MPBipolarOutrankingDigraph):
     """
     Specialization of the MPOutrankingDigraph class for generating temporary Digraphs from RandomPerformanceTableau instances.
 
@@ -390,7 +392,7 @@ class RandomMPOutrankingDigraph(MPOutrankingDigraph):
                  weightDistribution='random',
                  weightScale = [1,10],
                  commonScale=[0.0,100.0],
-                 commonThresholds = [(5.0,0.0),(10.0,0.0),(1000.0,0.0),(1000,0.0)],
+                 commonThresholds = [(5.0,0.0),(10.0,0.0),(97.0,0.0),(97.0,0.0)],
                  commonMode=('uniform',None,None),
                  Normalized=True,
                  seed=None,
@@ -406,7 +408,7 @@ class RandomMPOutrankingDigraph(MPOutrankingDigraph):
                                       commonThresholds = commonThresholds,\
                                       commonMode=commonMode,\
                                       seed=seed)
-        g = MPOutrankingDigraph(tb,Normalized=Normalized,nbrCores=nbrCores)
+        g = MPBipolarOutrankingDigraph(tb,Normalized=Normalized,nbrCores=nbrCores)
         self.name = g.name
         self.actions = g.actions
         self.criteria = g.criteria
@@ -424,7 +426,7 @@ class RandomMPOutrankingDigraph(MPOutrankingDigraph):
 # testing the module
 if __name__ == '__main__':
 
-    bg = RandomMPOutrankingDigraph()
+    bg = RandomMPBipolarOutrankingDigraph()
     print(bg)
     
     # from perfTabs import PerformanceTableau
@@ -439,7 +441,7 @@ if __name__ == '__main__':
     # pt1.showPerformanceTableau()
     # from mpOutrankingDigraphs import MPOutrankingDigraph
     # bg = MPOutrankingDigraph(pt1,ndigits=4,Normalized=True,nbrCores=12)
-    bg.showRelationTable(hasLPDDenotation=True)
+    # bg.showRelationTable(hasLPDDenotation=True)
     # print(bg)
     bg.showPolarisations()
     # bg.showPairwiseOutrankings('a09','a11')
