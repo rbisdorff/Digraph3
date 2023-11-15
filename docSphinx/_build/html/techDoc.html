@@ -6549,38 +6549,34 @@ with this program; if not, write to the Free Software Foundation, Inc.,
 <li><p><em>nbrCores</em>: controls the maximal number of cores that will be used in the multiprocessing phases. If <em>None</em> is given, the <em>os.cpu_count</em> method is used in order to determine the number of available cores on the SMP machine.</p></li>
 </ul>
 </dd>
-<dt><em>Usage example</em></dt><dd><p>(11th Gen Intel® Core™ i5-11400 × 12, 16.0 GiB, Python3.12.0):</p>
-</dd>
 </dl>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">randomPerfTabs</span> <span class="kn">import</span> <span class="o">*</span>
+<p><em>Usage example</em></p>
+<p>(11th Gen Intel® Core™ i5-11400 × 12, 16.0 GiB memory, Python3.12.0):</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">perfTabs</span> <span class="kn">import</span> <span class="n">RandomCBPerformanceTableau</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">pt1</span> <span class="o">=</span> <span class="n">RandomCBPerformanceTableau</span><span class="p">(</span>
 <span class="gp">... </span>        <span class="n">numberOfActions</span><span class="o">=</span><span class="mi">1000</span><span class="p">,</span><span class="n">numberOfCriteria</span><span class="o">=</span><span class="mi">13</span><span class="p">,</span>
 <span class="gp">... </span>        <span class="n">seed</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">mpOutrankingDigraphs</span> <span class="kn">import</span> <span class="n">MPOutrankingDigraph</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">bg</span> <span class="o">=</span> <span class="n">MPOutrankingDigraph</span><span class="p">(</span><span class="n">pt1</span><span class="p">,</span><span class="n">Normalized</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span><span class="n">nbrCores</span><span class="o">=</span><span class="mi">12</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">bg</span> <span class="o">=</span> <span class="n">MPBipolarOutrankingDigraph</span><span class="p">(</span><span class="n">pt1</span><span class="p">,</span><span class="n">Normalized</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span><span class="n">nbrCores</span><span class="o">=</span><span class="mi">12</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">bg</span>
-<span class="go"> *--- Saving performance tableau in file: &lt;sharedPerfTab.py&gt; ---*</span>
-<span class="go">  saved actual poolData.py module</span>
-<span class="go"> *------- Object instance description ------*</span>
-<span class="go">  Instance class       : MPOutrankingDigraph</span>
-<span class="go">  Instance name        : rel_randomCBperftab</span>
-<span class="go">  Actions              : 1000</span>
-<span class="go">  Criteria             : 13</span>
-<span class="go">  Size                 : 550012</span>
-<span class="go">  Determinateness (%)  : 71.12</span>
-<span class="go">  Valuation domain     : [-60.00;60.00]</span>
-<span class="go">  Attributes           : [&#39;name&#39;, &#39;actions&#39;, &#39;order&#39;,</span>
-<span class="go">                          &#39;criteria&#39;, &#39;objectives&#39;,</span>
-<span class="go">                          &#39;NA&#39;, &#39;evaluation&#39;, &#39;nbrThreads&#39;,</span>
-<span class="go">                          &#39;relation&#39;, &#39;considerableDiffsCount&#39;,</span>
-<span class="go">                          &#39;valuationdomain&#39;, &#39;gamma&#39;,</span>
-<span class="go">                          &#39;notGamma&#39;, &#39;runTimes&#39;]</span>
-<span class="go">  ----  Constructor run times (in sec.) ----</span>
-<span class="go">  Total time       : 4.64133</span>
-<span class="go">  Data input       : 0.01220</span>
-<span class="go">  Compute relation : 3.95451</span>
-<span class="go">  Gamma sets       : 0.67462</span>
-<span class="go">  Threads          : 12</span>
+<span class="go">*------- Object instance description ------*</span>
+<span class="go">Instance class       : MPBipolarOutrankingDigraph</span>
+<span class="go">Instance name        : rel_randomCBperftab</span>
+<span class="go">Actions              : 1000</span>
+<span class="go">Criteria             : 13</span>
+<span class="go">Size                 : 517128</span>
+<span class="go">Determinateness (%)  : 66.82</span>
+<span class="go">Valuation domain     : [-60.00;60.00]</span>
+<span class="go">Attributes           : [&#39;name&#39;, &#39;actions&#39;, &#39;order&#39;, &#39;criteria&#39;,</span>
+<span class="go">                &#39;objectives&#39;, &#39;NA&#39;, &#39;evaluation&#39;, &#39;nbrThreads&#39;,</span>
+<span class="go">                &#39;relation&#39;, &#39;largePerformanceDifferencesCount&#39;,</span>
+<span class="go">                &#39;valuationdomain&#39;, &#39;gamma&#39;, &#39;notGamma&#39;,</span>
+<span class="go">                &#39;runTimes&#39;]</span>
+<span class="go">----  Constructor run times (in sec.) ----</span>
+<span class="go">Total time         : 3.91750</span>
+<span class="go">Data input         : 0.01212</span>
+<span class="go">Compute relation   : 3.22806</span>
+<span class="go">Gamma sets         : 0.67732</span>
+<span class="go">Threads            : 12</span>
 </pre></div>
 </div>
 <dl class="py method">

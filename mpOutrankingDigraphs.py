@@ -127,38 +127,35 @@ class MPBipolarOutrankingDigraph(BipolarOutrankingDigraph):
         * *nbrCores*: controls the maximal number of cores that will be used in the multiprocessing phases. If *None* is given, the *os.cpu_count* method is used in order to determine the number of available cores on the SMP machine.
     
     *Usage example*
-         (11th Gen Intel® Core™ i5-11400 × 12, 16.0 GiB, Python3.12.0):
 
-    >>> from randomPerfTabs import *
+    (11th Gen Intel® Core™ i5-11400 × 12, 16.0 GiB memory, Python3.12.0):
+
+    >>> from perfTabs import RandomCBPerformanceTableau
     >>> pt1 = RandomCBPerformanceTableau(
     ...         numberOfActions=1000,numberOfCriteria=13,
     ...         seed=10)
-    >>> from mpOutrankingDigraphs import MPOutrankingDigraph
-    >>> bg = MPOutrankingDigraph(pt1,Normalized=False,nbrCores=12)
+    >>> bg = MPBipolarOutrankingDigraph(pt1,Normalized=False,nbrCores=12)
     >>> bg
-     *--- Saving performance tableau in file: <sharedPerfTab.py> ---*
-      saved actual poolData.py module
-     *------- Object instance description ------*
-      Instance class       : MPOutrankingDigraph
-      Instance name        : rel_randomCBperftab
-      Actions              : 1000
-      Criteria             : 13
-      Size                 : 550012
-      Determinateness (%)  : 71.12
-      Valuation domain     : [-60.00;60.00]
-      Attributes           : ['name', 'actions', 'order',
-                              'criteria', 'objectives',
-                              'NA', 'evaluation', 'nbrThreads',
-                              'relation', 'considerableDiffsCount',
-                              'valuationdomain', 'gamma',
-                              'notGamma', 'runTimes']
-      ----  Constructor run times (in sec.) ----
-      Total time       : 4.64133
-      Data input       : 0.01220
-      Compute relation : 3.95451
-      Gamma sets       : 0.67462
-      Threads          : 12
-    
+    *------- Object instance description ------*
+    Instance class       : MPBipolarOutrankingDigraph
+    Instance name        : rel_randomCBperftab
+    Actions              : 1000
+    Criteria             : 13
+    Size                 : 517128
+    Determinateness (%)  : 66.82
+    Valuation domain     : [-60.00;60.00]
+    Attributes           : ['name', 'actions', 'order', 'criteria',
+                    'objectives', 'NA', 'evaluation', 'nbrThreads',
+                    'relation', 'largePerformanceDifferencesCount',
+                    'valuationdomain', 'gamma', 'notGamma',
+                    'runTimes']
+    ----  Constructor run times (in sec.) ----
+    Total time         : 3.91750
+    Data input         : 0.01212
+    Compute relation   : 3.22806
+    Gamma sets         : 0.67732
+    Threads            : 12
+
     """
     def __repr__(self):
         """
