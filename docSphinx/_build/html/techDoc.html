@@ -6,7 +6,7 @@
 <meta content="Algorithmic Decision Theory, Outranking Digraphs, MIS and kernels, Multiple Criteria Decision Aid" name="keywords" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>2. Technical Reference of the Digraph3 modules &mdash; Digraph3 3.11.5 documentation</title>
+  <title>2. Technical Reference of the Digraph3 modules &mdash; Digraph3 3.11.6 documentation</title>
       <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
       <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
       <link rel="stylesheet" href="_static/graphviz.css" type="text/css" />
@@ -26,7 +26,7 @@
   
         <script src="_static/jquery.js?v=5d32c60e"></script>
         <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-        <script src="_static/documentation_options.js?v=d10c4a4b"></script>
+        <script src="_static/documentation_options.js?v=e6f4c021"></script>
         <script src="_static/doctools.js?v=888ff710"></script>
         <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
         <script src="_static/clipboard.min.js?v=a7894cd8"></script>
@@ -1227,7 +1227,7 @@
 <dd class="field-even"><p><a class="reference external" href="https://rbisdorff.github.io/">https://rbisdorff.github.io/</a></p>
 </dd>
 <dt class="field-odd">Version<span class="colon">:</span></dt>
-<dd class="field-odd"><p>Python 3.11 (release: 3.11.5)</p>
+<dd class="field-odd"><p>Python 3.11 (release: 3.11.6)</p>
 </dd>
 <dt class="field-even">Copyright<span class="colon">:</span></dt>
 <dd class="field-even"><p><a class="reference external" href="_static/digraph3_copyright.html">R. Bisdorff</a> 2013-2023</p>
@@ -1458,7 +1458,7 @@ binned cumulated density functions per criteria. Depends on the
 </li>
 <li><dl>
 <dt><a class="reference internal" href="#mpoutrankingdigraphs-label"><span class="std std-ref">mpOutrankingDigraphs module</span></a></dt><dd><p>New forkserver based multiprocessing construction of genuine bipolar-valued outranking digraphs.</p>
-<div class="graphviz"><object data="_images/inheritance-d71c330db5121425ecd9df7a95cb309e2af0566d.svg" type="image/svg+xml" class="inheritance graphviz">
+<div class="graphviz"><object data="_images/inheritance-b2d6af2f8a350c816eed159c019a252704fe2f9f.svg" type="image/svg+xml" class="inheritance graphviz">
 <p class="warning">Inheritance diagram of mpOutrankingDigraphs</p></object></div>
 </dd>
 </dl>
@@ -6518,7 +6518,7 @@ temporary unanimous outranking digraphs</p>
 <section id="mpoutrankingdigraphs-module">
 <span id="mpoutrankingdigraphs-label"></span><h2><a class="toc-backref" href="#id10" role="doc-backlink"><span class="section-number">2.8. </span>mpOutrankingDigraphs module</a><a class="headerlink" href="#mpoutrankingdigraphs-module" title="Link to this heading"></a></h2>
 <p><strong>Inheritance Diagram</strong></p>
-<div class="graphviz"><object data="_images/inheritance-d71c330db5121425ecd9df7a95cb309e2af0566d.svg" type="image/svg+xml" class="inheritance graphviz">
+<div class="graphviz"><object data="_images/inheritance-b2d6af2f8a350c816eed159c019a252704fe2f9f.svg" type="image/svg+xml" class="inheritance graphviz">
 <p class="warning">Inheritance diagram of mpOutrankingDigraphs</p></object></div>
 <p id="module-mpOutrankingDigraphs">New Python3.12+ compatible multiprocessing implementation of bipolar-valued outranking digraphs for Linux and MacOS.</p>
 <p>The unsafe <em>fork</em> multiprocessing start-method is replaced with the safer <em>forkserver</em> method.</p>
@@ -6590,7 +6590,7 @@ with this program; if not, write to the Free Software Foundation, Inc.,
 <dl class="py class">
 <dt class="sig sig-object py" id="mpOutrankingDigraphs.RandomMPBipolarOutrankingDigraph">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">mpOutrankingDigraphs.</span></span><span class="sig-name descname"><span class="pre">RandomMPBipolarOutrankingDigraph</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">numberOfActions</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">100</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">numberOfCriteria</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">7</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">weightDistribution</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'random'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">weightScale</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">[1,</span> <span class="pre">10]</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">commonScale</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">[0.0,</span> <span class="pre">100.0]</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">commonThresholds</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">[(5.0,</span> <span class="pre">0.0),</span> <span class="pre">(10.0,</span> <span class="pre">0.0),</span> <span class="pre">(97.0,</span> <span class="pre">0.0),</span> <span class="pre">(97.0,</span> <span class="pre">0.0)]</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">commonMode</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">('uniform',</span> <span class="pre">None,</span> <span class="pre">None)</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">Normalized</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">seed</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">nbrCores</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/mpOutrankingDigraphs.html#RandomMPBipolarOutrankingDigraph"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#mpOutrankingDigraphs.RandomMPBipolarOutrankingDigraph" title="Link to this definition"></a></dt>
-<dd><p>Specialization of the MPOutrankingDigraph class for generating temporary Digraphs from RandomPerformanceTableau instances.</p>
+<dd><p>Specialization of the MPBipolarOutrankingDigraph class for generating temporary Digraphs from RandomPerformanceTableau instances.</p>
 <dl class="simple">
 <dt><em>Parameters</em>:</dt><dd><p>See <a class="reference internal" href="#randomPerfTabs.RandomPerformanceTableau" title="randomPerfTabs.RandomPerformanceTableau"><code class="xref py py-class docutils literal notranslate"><span class="pre">randomPerfTabs.RandomPerformanceTableau</span></code></a> class.</p>
 </dd>
