@@ -6,12 +6,8 @@
 
 from digraphs import *
 from outrankingDigraphs import *
-from randomPerfTabs import _RandomS3PerformanceTableau\
-     as RandomS3PerformanceTableau
 from randomPerfTabs import _FullRandomPerformanceTableau as\
-     FullRandomPerformanceTableau
-from randomPerfTabs import _RandomCoalitionsPerformanceTableau as\
-     RandomCoalitionsPerformanceTableau
+                           FullRandomPerformanceTableau
 
 def testShowMethods():
 
@@ -193,18 +189,18 @@ def testRandomFixedDegreeSequenceDigraph():
     g.showAll()
     g.showStatistics()
 
-def testFullRandomOutrankingDigraph():
-    print('*==>> testing full random outranking Digraphs ----*')
-    t = FullRandomPerformanceTableau()
-    #t = RandomCBPerformanceTableau()
-    t.showAll()
-    g = BipolarOutrankingDigraph(t)
-    g.showCriteria()
-    g.showPerformanceTableau()
-    g.showEvaluationStatistics()
-    ## g.showStatistics()
-    g.showVetos(realVetosOnly=True)
-    print('criteria significance concentration: ', g.computeWeightsConcentrationIndex())
+# def testFullRandomOutrankingDigraph():
+#     print('*==>> testing full random outranking Digraphs ----*')
+#     t = FullRandomPerformanceTableau()
+#     #t = RandomCBPerformanceTableau()
+#     t.showAll()
+#     g = BipolarOutrankingDigraph(t)
+#     g.showCriteria()
+#     g.showPerformanceTableau()
+#     g.showEvaluationStatistics()
+#     ## g.showStatistics()
+#     g.showVetos(realVetosOnly=True)
+#     print('criteria significance concentration: ', g.computeWeightsConcentrationIndex())
 
 def testKChoicesDigraph():
     print('*==>> testing k-choices digraph ----*')
@@ -310,7 +306,7 @@ def testDigraphDecomposition():
 
 def testPerformanceTableauStatistics():
     print('*==>> performanceTableau statistics ---------*')
-    t = FullRandomPerformanceTableau(commonScale=(0.0,100.0),numberOfCriteria=10,numberOfActions=10,commonMode=('triangular',30.0,0.7))
+    t = RandomPerformanceTableau(commonScale=(0.0,100.0),numberOfCriteria=10,numberOfActions=10,commonMode=('triangular',30.0,0.7))
     t.showStatistics()
     print(t.computeNormalizedDiffEvaluations(lowValue=0.0,highValue=100.0,withOutput=True,Debug=True))
     t = RandomCBPerformanceTableau()
@@ -454,7 +450,7 @@ def testXMCDA2SaveReadPerformanceTableau():
     print('*==>> save and read XMCDA-2.0 PerformanceTableau instances ----*')
     #t = RandomS3PerformanceTableau(numberOfActions=5,numberOfCriteria=15,weightDistribution="random",weightScale=(1,13),IntegerWeights=True,commonThresholds=[(5.0,0.0),(10.0,0.0),(50.0,0.0),(60.0,0.0)],RandomCoalitions=True,commonMode=['beta',0.5,None])
     #t.showAll()
-    t = RandomCBPerformanceTableau(numberOfActions=5,numberOfCriteria=7,weightDistribution="random",weightScale=(1,7),IntegerWeights=True)
+    t = RandomCBPerformanceTableau(numberOfActions=15,numberOfCriteria=7,weightDistribution="random",weightScale=(1,7),IntegerWeights=True)
     t.saveXMCDA2('test')
     g = BipolarOutrankingDigraph(t)
     g.showRelationTable()

@@ -43,7 +43,7 @@ def testPrincipalInOutDegreesRanking():
 def testRBCThreadingOptions():
     print('===>>> test threading option')
     t = RandomCBPerformanceTableau(weightDistribution="equiobjectives",
-                                 numberOfActions=5)
+                                   numberOfActions=6)
     t.saveXMCDA2('test')
     t = XMCDA2PerformanceTableau('test')
     g = BipolarOutrankingDigraph(t,Normalized=True)

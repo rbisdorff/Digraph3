@@ -4,15 +4,7 @@
 # ..$python3 -m pip install pytest  # installing the pytest package
 ########################
 
-from digraphs import *
 from outrankingDigraphs import *
-from time import time
-from randomPerfTabs import _RandomS3PerformanceTableau\
-     as RandomS3PerformanceTableau
-from randomPerfTabs import _FullRandomPerformanceTableau as\
-     FullRandomPerformanceTableau
-from randomPerfTabs import _RandomCoalitionsPerformanceTableau as\
-     RandomCoalitionsPerformanceTableau
 
 def testOrdinalOutrankingDigraph():
 
@@ -50,29 +42,16 @@ def testRobustOutrankingDigraph():
 
 def testPolarisedOutrankingDigraph():
     print('==>> Testing PolarisedOutrankingDigraph instantiation')
-    t = FullRandomPerformanceTableau()
+    t = RandomPerformanceTableau()
     g = BipolarOutrankingDigraph(t)
     print(g.valuationdomain)
     ch = PolarisedOutrankingDigraph(g,level=50,AlphaCut=False,KeepValues=True)
     ch.showAll()
     ch.showStatistics()
 
-def testFullRandomOutrankingDigraph():
-    print('*==>> testing full random outranking Digraphs ----*')
-    t = FullRandomPerformanceTableau()
-    #t = RandomCBPerformanceTableau()
-    t.showAll()
-    g = BipolarOutrankingDigraph(t)
-    g.showCriteria()
-    g.showPerformanceTableau()
-    g.showEvaluationStatistics()
-    ## g.showStatistics()
-    g.showVetos(realVetosOnly=True)
-    print('criteria significance concentration: ', g.computeWeightsConcentrationIndex())
-
 def testForcedBestSingleChoice():
     print('*==>> testing forced best single choice  ----*')
-    t = FullRandomPerformanceTableau(numberOfActions=15)
+    t = RandomCBPerformanceTableau(numberOfActions=15)
     g = BipolarOutrankingDigraph(t)
     g.showRubyChoice()
     print(g.forcedBestSingleChoice())
@@ -115,7 +94,7 @@ def testMoreOrlessRelatedPairs():
 
 def testRobustoutranking():
     print('*==>> robust outranking ------------------*')
-    t0 = FullRandomPerformanceTableau(numberOfActions=7,numberOfCriteria=5)
+    t0 = RandomPerformanceTableau(numberOfActions=7,numberOfCriteria=5)
     t0.saveXMCDA2('testXMLRubis')
     t = XMCDA2PerformanceTableau('testXMLRubis')
     g = BipolarOutrankingDigraph(t)
@@ -198,10 +177,9 @@ def testRubisRanking():
     g.computeSingletonRanking(Comments = True)
     print(g.valuationdomain)
 
-
 def testGlobalOutrankingCorrelation():
     print('*----- test global outranking correlation -----*')
-    t = RandomCBPerformanceTableau(numberOfActions=5,numberOfCriteria=3)
+    t = RandomCBPerformanceTableau(numberOfActions=15,numberOfCriteria=3)
     g = BipolarOutrankingDigraph(t)
     g.showRelationTable()
     g.showCriteriaCorrelationTable()
@@ -215,26 +193,15 @@ def testGlobalOutrankingCorrelation():
         medianKCorrelation[x] = g.bipolarKDistance(gx) 
     print('median K-Correlation:', medianKCorrelation)
 
-##def testsaveXMCDA2RubisChoiceRecommendation():
-##    print('*----- test saveXMCDA2RubisChoiceRecommendation -----*')
+##def testXMCDA2RobustChoiceRecommendation():
+##    print('*----- test XMCDA2 Robust Choice Recommendation -----*')
 ##    t = Random3ObjectivesPerformanceTableau(numberOfActions=5,numberOfCriteria=7,
-##                                   weightDistribution="random",weightScale=(1,1),
-##                                   IntegerWeights=True,
-##                                   commonThresholds=[(5.0,0.0),(10.0,0.0),(50.0,0.0),(60.0,0.0)],
-##                                   commonMode=['beta',0.5,None])
-##    g1 = BipolarOutrankingDigraph(t)
-##    g1.showRelationTable()
-##    g1.saveXMCDA2RubisChoiceRecommendation('testRubisChoiceRecommendation')
-
-def testXMCDA2RobustChoiceRecommendation():
-    print('*----- test XMCDA2 Robust Choice Recommendation -----*')
-    t = Random3ObjectivesPerformanceTableau(numberOfActions=5,numberOfCriteria=7,
-                                            weightDistribution="random",weightScale=(1,1),
-                                            IntegerWeights=True,
-                                            commonThresholds=[(5.0,0.0),(10.0,0.0),(50.0,0.0),(60.0,0.0)],
-                                            commonMode=['beta',0.5,None])
-    g = OldRobustOutrankingDigraph(t)
-    g.saveXMCDA2RubisChoiceRecommendation()
+##                                            weightDistribution="random",weightScale=(1,1),
+##                                            IntegerWeights=True,
+##                                            commonThresholds=[(5.0,0.0),(10.0,0.0),(50.0,0.0),(60.0,0.0)],
+##                                            commonMode=['beta',0.5,None])
+##    g = OldRobustOutrankingDigraph(t)
+##    g.saveXMCDA2RubisChoiceRecommendation()
 
 def testBipolarVetos():
     print('*----- test bipolar vetos -----*')
@@ -268,7 +235,7 @@ def testGridDigraphs():
 
 def testEquiSignificanceMajorityOutrankingDigraph():
     print('*---- test equi-significance majority outranking digraphs ---*')
-    t = FullRandomPerformanceTableau(numberOfActions=7,numberOfCriteria=13)
+    t = RandomPerformanceTableau(numberOfActions=7,numberOfCriteria=13)
     g = EquiSignificanceMajorityOutrankingDigraph(t)
     print(g.computeWeightPreorder())
     g.showRelationTable()
@@ -412,7 +379,7 @@ def testStochasticOutrankingDigraphs():
 
 def testRandomWeightsLaws():
     print('*------- test random laws for stochastic outranking ------*')
-    t = RandomCBPerformanceTableau(numberOfActions=5,\
+    t = RandomCBPerformanceTableau(numberOfActions=15,\
                                    numberOfCriteria=7,\
                                    weightDistribution='equiobjectives',
                                    )

@@ -5,14 +5,14 @@
 ########################
 
 from digraphs import *
-#from perfTabs import *
+from perfTabs import *
 from outrankingDigraphs import *
 from linearOrders import *
 from decimal import Decimal
 
 def testKemenyOrdering():
     print('*-------- Testing KemenyOrder class -------')
-    t = RandomCBPerformanceTableau(numberOfActions=5)
+    t = RandomCBPerformanceTableau(numberOfActions=6)
     t.save('testKemeny')
     g = BipolarOutrankingDigraph(t)
     ke = KemenyOrder(g,Debug=True)
@@ -20,14 +20,14 @@ def testKemenyOrdering():
 
 def testSlaterOrdering():
     print('*-------- Testing KemenyOrder class -------')
-    t = RandomCBPerformanceTableau(numberOfActions=5)
+    t = RandomCBPerformanceTableau(numberOfActions=6)
     t.save('testKemeny')
     g = BipolarOutrankingDigraph(t)
     sl = SlaterOrder(g,Debug=True)
 
 def testRankedPairsOrdering():
     print('*-------- Testing RankedPairsOrder class -------')
-    t = RandomPerformanceTableau(numberOfActions=5)
+    t = RandomPerformanceTableau(numberOfActions=15)
     t.save()
     t.showPerformanceTableau()
     g = BipolarOutrankingDigraph(t)
@@ -40,7 +40,7 @@ def testRankedPairsOrdering():
 
 def testKohlerOrdering():
     print("*==>> testing KohlerOrder Class ----*")
-    t = RandomCBPerformanceTableau(numberOfActions=5)
+    t = RandomCBPerformanceTableau(numberOfActions=15)
     t.saveXMCDA2('testkohler')
     g = BipolarOutrankingDigraph(t)
     #g.showRelationTable()
@@ -49,7 +49,7 @@ def testKohlerOrdering():
 
 def testNetFlowsOrdering():
     print("*==>> testing NetFlowsOrder Class ----*")
-    t = RandomCBPerformanceTableau(numberOfActions=5)
+    t = RandomCBPerformanceTableau(numberOfActions=15)
     t.saveXMCDA2('testnf')
     g = BipolarOutrankingDigraph(t)
     #g.showRelationTable()
@@ -58,31 +58,13 @@ def testNetFlowsOrdering():
 
 def testIteratedNetFlowsOrdering():
     print("*==>> testing iterated NetFlowsOrder Class ----*")
-    t = RandomCBPerformanceTableau(numberOfActions=5)
+    t = RandomCBPerformanceTableau(numberOfActions=15)
     t.saveXMCDA2('testnf')
     g = BipolarOutrankingDigraph(t)
     #g.showRelationTable()
     info = IteratedNetFlowsRanking(g,CoDual=False,Debug=True)
     print(info.computeOrder())
 
-# def testMedianRanking():
-#     print("*==>> testing MedianRanking Class ----*")
-#     t = RandomCBPerformanceTableau(numberOfActions=5)
-#     t.saveXMCDA2('testnf')
-#     g = BipolarOutrankingDigraph(t)
-#     #g.showRelationTable()
-#     mr = MedianRanking(g,Threading=False,nbrOfCPUs=8,Debug=False)
-#     print(mr.medianRanking)
-
-##def testOutFlowsOrdering():
-##    print("*==>> testing OutFlowsOrder Class ----*")
-##    from linearOrders import _OutFlowsOrder
-##    t = RandomCBPerformanceTableau(numberOfActions=5)
-##    t.saveXMCDA2('testof')
-##    g = BipolarOutrankingDigraph(t)
-##    #g.showRelationTable()
-##    ofo = _OutFlowsOrder(g,coDual=False,Debug=True)
-##    print(ofo.computeOrder())
 
 def testRandomLinearOrders():
     print("*==>> testing RandomLinearOrder Class ----*")
