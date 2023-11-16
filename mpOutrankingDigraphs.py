@@ -419,6 +419,8 @@ class RandomMPBipolarOutrankingDigraph(MPBipolarOutrankingDigraph):
         self.notGamma = g.notGamma
         self.runTimes = g.runTimes
 
+#-----------------
+
 ###################################
 # testing the module
 if __name__ == '__main__':
@@ -429,18 +431,30 @@ if __name__ == '__main__':
     # from perfTabs import PerformanceTableau
     # from randomPerfTabs import *
     # from time import time,sleep
-    # pt1 = RandomCBPerformanceTableau(numberOfActions=3000,
+    # pt1 = RandomCBPerformanceTableau(numberOfActions=10,
     #                                  numberOfCriteria=7,
     #                                  IntegerWeights=True,
     #                                  seed=10)
+    # from mpOutrankingDigraphs import MPQuantilesSortingDigraph
+    # qs = MPQuantilesSortingDigraph(argPerfTab=pt1,
+    #                              limitingQuantiles=None,
+    #                              LowerClosed=False,
+    #                              PrefThresholds=True,
+    #                              WithSortingRelation=True,
+    #                              CompleteOutranking = True,
+    #                              CopyPerfTab=False,
+    #                              nbrCores=None,
+    #                              Comments=False,
+    #                                Debug=True)
+
     # pt1.showCriteria()
     # pt1 = PerformanceTableau('sharedPerfTab')
     # pt1.showPerformanceTableau()
-    # from mpOutrankingDigraphs import MPOutrankingDigraph
-    # bg = MPOutrankingDigraph(pt1,ndigits=4,Normalized=True,nbrCores=12)
+    # from mpOutrankingDigraphs import MPBipolarOutrankingDigraph
+    # bg = MPBipolarOutrankingDigraph(pt1,ndigits=4,Normalized=True,nbrCores=12)
     # bg.showRelationTable(hasLPDDenotation=True)
-    # print(bg)
-    bg.showPolarisations()
+    print(bg)
+    # bg.showPolarisations()
     # bg.showPairwiseOutrankings('a09','a11')
     # bg.showPairwiseOutrankings('a02','a18')
     # from outrankingDigraphs import BipolarOutrankingDigraph
@@ -453,6 +467,6 @@ if __name__ == '__main__':
     # from linearOrders import *
     # nf = NetFlowsRanking(bg)
     # print(nf)
-    bg.showHTMLPerformanceHeatmap(toIndex=20,Correlations=True,
+    bg.showHTMLPerformanceHeatmap(toIndex=None,Correlations=True,
                                    colorLevels=5,outrankingModel='this')
     
