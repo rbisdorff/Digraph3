@@ -41,7 +41,7 @@ Copyright (C) 2016-2023  Raymond Bisdorff.
 from outrankingDigraphs import BipolarOutrankingDigraph
 class RatingDigraph(BipolarOutrankingDigraph):
     """
-    Abstrcat root class with generic private and public methods
+    Abstract root class with generic private and public methods
     """
     
     def __init__(self):

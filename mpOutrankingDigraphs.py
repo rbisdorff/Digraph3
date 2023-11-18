@@ -34,14 +34,30 @@ import os
 # init poolData.py module with forkserver preloades terminal Nodes
 if not os.path.exists('./poolData.py'):
     terminalNodes = [str(x) for x in range(10)]
+    print('poolData iniialized')
 else:
-    from poolData import *
+    fileName = './poolData.py'
+    poolDataDict = {}
+    exec(compile(open(fileName).read(), fileName, 'exec'),poolDataDict)
+    terminalNodes = poolDataDict['terminalNodes']
+    #from poolData import *
+    #print('poolData imported')
 if not os.path.exists('./sharedPerfTab.py'):
     from randomPerfTabs import RandomPerformanceTableau
     pt = RandomPerformanceTableau(numberOfActions=1,numberOfCriteria=1)
-    pt.save('sharedPerfTab',Comments=False)
+    pt.save('sharedPerfTab',Comments=True)
+    criteria = pt.criteria
+    evaluation = pt.evaluation
+    NA = pt.NA
 else:
-    from sharedPerfTab import *
+    fileName = 'sharedPerfTab.py'
+    perfTabDict = {}
+    exec(compile(open(fileName).read(), fileName, 'exec'),perfTabDict)
+    criteria = perfTabDict['criteria']
+    evaluation = perfTabDict['evaluation']
+    NA = perfTabDict['NA']
+    #from sharedPerfTab import *
+    #print('sharedPerfTab imported')
 
 def worker_func(keys):
     from decimal import Decimal
@@ -198,12 +214,13 @@ class MPBipolarOutrankingDigraph(BipolarOutrankingDigraph):
         return reprString
 
     def __init__(self,perfTab,Normalized=False,ndigits=4,nbrCores=None):
+        ctx_mp = multiprocessing.get_context('forkserver')
         from decimal import Decimal
         from time import time, sleep
         from perfTabs import PerformanceTableau
         runTimes = {}
         t0 = time()
-        PerformanceTableau.save(perfTab,'sharedPerfTab')
+        PerformanceTableau.save(perfTab,'sharedPerfTab',Comments=False)
         while not os.path.exists('./sharedPerfTab.py'):
             sleep(1)
         # # code snippet for alternate module importing    
@@ -242,7 +259,7 @@ class MPBipolarOutrankingDigraph(BipolarOutrankingDigraph):
         t1 = time()
         initialNodes = [a for a in self.actions]
         terminalNodes = [a for a in self.actions]
-        relation,considerableDiffs = self._computeMPRelation(nbrCores,
+        relation,considerableDiffs = self._computeMPRelation(ctx_mp,nbrCores,
                                                            initialNodes,
                                                            terminalNodes)
         self.relation = relation
@@ -267,8 +284,7 @@ class MPBipolarOutrankingDigraph(BipolarOutrankingDigraph):
         self.runTimes = runTimes
         
 #-------------  class methods
-    def _computeMPRelation(self,nbrCores,initialNodes,terminalNodes):
-        ctx_mp = multiprocessing.get_context('forkserver')
+    def _computeMPRelation(self,ctx_mp,nbrCores,initialNodes,terminalNodes):
         #if terminalNodes is not None:
         # sharing parameters with a prelodable poolData.py module
         fo = open('./poolData.py','w')
@@ -424,7 +440,7 @@ class RandomMPBipolarOutrankingDigraph(MPBipolarOutrankingDigraph):
 ###################################
 # testing the module
 if __name__ == '__main__':
-
+    #freeze_support()
     bg = RandomMPBipolarOutrankingDigraph()
     print(bg)
     
