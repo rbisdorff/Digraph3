@@ -6520,9 +6520,13 @@ temporary unanimous outranking digraphs</p>
 <p><strong>Inheritance Diagram</strong></p>
 <div class="graphviz"><object data="_images/inheritance-b2d6af2f8a350c816eed159c019a252704fe2f9f.svg" type="image/svg+xml" class="inheritance graphviz">
 <p class="warning">Inheritance diagram of mpOutrankingDigraphs</p></object></div>
-<p id="module-mpOutrankingDigraphs">New Python3.12+ compatible multiprocessing implementation of bipolar-valued outranking digraphs for Linux and MacOS.</p>
+<p id="module-mpOutrankingDigraphs">New Python3.12+ compatible multiprocessing implementation of bipolar-valued outranking digraphs for Linux and Ma</p>
 <p>The unsafe <em>fork</em> multiprocessing start-method is replaced with the safer <em>forkserver</em> method.</p>
 <p>Shared pool data and given performance tableau are preloaded by the <em>forkserver</em>.</p>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>As the <em>forkserver</em> reloads for every thread the main program code, it is necessary to prevent this code with the <em>if __name__ == ‘__main__’:</em> condition from being recursively called.</p>
+</div>
 <p>Copyright (C) 2023  Raymond Bisdorff</p>
 <blockquote>
 <div><p>This program is free software; you can redistribute it and/or modify

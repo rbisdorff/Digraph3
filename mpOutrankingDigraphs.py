@@ -1,10 +1,12 @@
 #!/usr/bin/env python3
 """
-New Python3.12+ compatible multiprocessing implementation of bipolar-valued outranking digraphs for Linux and MacOS.
+New Python3.12+ compatible multiprocessing implementation of bipolar-valued outranking digraphs for Linux and Ma
 
 The unsafe *fork* multiprocessing start-method is replaced with the safer *forkserver* method.
 
-Shared pool data and given performance tableau are preloaded by the *forkserver*. 
+Shared pool data and given performance tableau are preloaded by the *forkserver*.
+
+.. warning:: As the *forkserver* reloads for every thread the main program code, it is necessary to prevent this code with the *if __name__ == '__main__':* condition from being recursively called. 
 
 Copyright (C) 2023  Raymond Bisdorff
 
