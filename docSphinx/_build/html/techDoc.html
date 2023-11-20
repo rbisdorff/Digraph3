@@ -6545,7 +6545,7 @@ with this program; if not, write to the Free Software Foundation, Inc.,
 <li><p><em>perfTab</em>: in memory instance of PerformanceTableau class.</p></li>
 <li><p><em>Normalized</em>: the valuation domain is set by default to the sum of the criteria weights. If <em>True</em>, the valuation domain is recoded to [-1.0,+1.0].</p></li>
 <li><p><em>ndigits</em>: number of decimal digits of the chracteristic valuation, by default set to 4.</p></li>
-<li><p><em>nbrCores</em>: controls the maximal number of cores that will be used in the multiprocessing phases. If <em>None</em> is given, the <em>os.cpu_count</em> method is used in order to determine the number of available cores on the SMP machine.</p></li>
+<li><p><em>nbrCores</em>: controls the maximal number of cores that will be used in the multiprocessing phases. If <em>None</em> is given, the <em>os.cpu_count()</em> method is used in order to determine the number of available cores on the SMP machine.</p></li>
 </ul>
 </dd>
 </dl>
@@ -6582,7 +6582,7 @@ with this program; if not, write to the Free Software Foundation, Inc.,
 </div></blockquote>
 <div class="admonition warning">
 <p class="admonition-title">Warning</p>
-<p>When using the <em>forkserver</em> start-method in a python script file, mind that the <em>forkserver</em> multiprocessing <em>start-method</em> reimports into every multiprocessing thread the submitted program file. In order to avoid hence the main program script from being recursively executed and producing loads of zombie threads before being killed by the OS, it is necessary to always explicitely run the program code under the <em>if __name__ == ‘__main__’:</em> condition. A weakness of the <em>Posix fork start-method</em> implementation on MacOS, the alternative <em>forkserver</em> multiprocessing start-method is actuallly supposed to protect against.</p>
+<p>When using the <em>forkserver</em> or the <em>spawn</em> multiprocessing start-methods in a python script file, mind that these start-methods re-import into every multiprocessing thread the submitted program file. In order to avoid hence the program script from being recursively executed and producing loads of zombie threads before being killed by the OS, it is necessary to always explicitely protect the entry point of the main program code with the <em>if __name__ == ‘__main__’:</em> condition. This is not necessary when using instead the classical Unix <em>fork</em> start-method where multiprocessing threads continue in fact the main program code from the point on where they were launched.</p>
 </div>
 <dl class="py method">
 <dt class="sig sig-object py" id="mpOutrankingDigraphs.MPBipolarOutrankingDigraph.showPolarisations">

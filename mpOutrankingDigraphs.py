@@ -138,7 +138,7 @@ class MPBipolarOutrankingDigraph(BipolarOutrankingDigraph):
         * *perfTab*: in memory instance of PerformanceTableau class.
         * *Normalized*: the valuation domain is set by default to the sum of the criteria weights. If *True*, the valuation domain is recoded to [-1.0,+1.0].
         * *ndigits*: number of decimal digits of the chracteristic valuation, by default set to 4.
-        * *nbrCores*: controls the maximal number of cores that will be used in the multiprocessing phases. If *None* is given, the *os.cpu_count* method is used in order to determine the number of available cores on the SMP machine.
+        * *nbrCores*: controls the maximal number of cores that will be used in the multiprocessing phases. If *None* is given, the *os.cpu_count()* method is used in order to determine the number of available cores on the SMP machine.
     
     *Usage example*
 
@@ -171,7 +171,7 @@ class MPBipolarOutrankingDigraph(BipolarOutrankingDigraph):
     Gamma sets         : 0.67732
     Threads            : 12
 
-.. warning:: When using the *forkserver* start-method in a python script file, mind that the *forkserver* multiprocessing *start-method* reimports into every multiprocessing thread the submitted program file. In order to avoid hence the main program script from being recursively executed and producing loads of zombie threads before being killed by the OS, it is necessary to always explicitely run the program code under the *if __name__ == '__main__':* condition. A weakness of the *Posix fork start-method* implementation on MacOS, the alternative *forkserver* multiprocessing start-method is actuallly supposed to protect against. 
+.. warning:: When using the *forkserver* or the *spawn* multiprocessing start-methods in a python script file, mind that these start-methods re-import into every multiprocessing thread the submitted program file. In order to avoid hence the program script from being recursively executed and producing loads of zombie threads before being killed by the OS, it is necessary to always explicitely protect the entry point of the main program code with the *if __name__ == '__main__':* condition. This is not necessary when using instead the classical Unix *fork* start-method where multiprocessing threads continue in fact the main program code from the point on where they were launched. 
 
     """
     def __repr__(self):
