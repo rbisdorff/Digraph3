@@ -1,12 +1,8 @@
 #!/usr/bin/env python3
 """
-New Python3.12+ compatible multiprocessing implementation of bipolar-valued outranking digraphs for Linux and Ma
+Digraph3 collection of python3 modules for Algorithmic Decision Theory applications.
 
-The unsafe *fork* multiprocessing start-method is replaced with the safer *forkserver* method.
-
-Shared pool data and given performance tableau are preloaded by the *forkserver*.
-
-.. warning:: As the *forkserver* reloads for every thread the main program code, it is necessary to prevent this code with the *if __name__ == '__main__':* condition from being recursively called. 
+New Python3.12+ compatible multiprocessing implementation of bipolar-valued outranking digraphs for Linux and MacOS. The unsafe *fork* multiprocessing start-method is replaced with the safer *forkserver* method. Shared pool data and given performance tableau are preloaded by the *forkserver*.
 
 Copyright (C) 2023  Raymond Bisdorff
 
@@ -140,18 +136,19 @@ class MPBipolarOutrankingDigraph(BipolarOutrankingDigraph):
 
     *Parameters*:
         * *perfTab*: in memory instance of PerformanceTableau class.
-        * *Normalized*: the valuation domain is set by default to the sum of the criteria weights. If True, the valuation domain is recoded to [-1.0,+1.0].
+        * *Normalized*: the valuation domain is set by default to the sum of the criteria weights. If *True*, the valuation domain is recoded to [-1.0,+1.0].
         * *ndigits*: number of decimal digits of the chracteristic valuation, by default set to 4.
         * *nbrCores*: controls the maximal number of cores that will be used in the multiprocessing phases. If *None* is given, the *os.cpu_count* method is used in order to determine the number of available cores on the SMP machine.
     
     *Usage example*
 
-    (11th Gen Intel® Core™ i5-11400 × 12, 16.0 GiB memory, Python3.12.0):
+    (11th Gen Intel® Core™ i5-11400 × 12, 16.0 GiB memory, Ubuntu 23.10, Python3.12.0):
 
-    >>> from perfTabs import RandomCBPerformanceTableau
+    >>> from randomPerfTabs import RandomCBPerformanceTableau
     >>> pt1 = RandomCBPerformanceTableau(
     ...         numberOfActions=1000,numberOfCriteria=13,
     ...         seed=10)
+    >>> from mpOutrankingDigraph import *
     >>> bg = MPBipolarOutrankingDigraph(pt1,Normalized=False,nbrCores=12)
     >>> bg
     *------- Object instance description ------*
@@ -173,6 +170,8 @@ class MPBipolarOutrankingDigraph(BipolarOutrankingDigraph):
     Compute relation   : 3.22806
     Gamma sets         : 0.67732
     Threads            : 12
+
+.. warning:: When using the *forkserver* start-method in a python script, mind that the *forkserver* start-method reimports into every multiprocessing thread the given program script. In order to avoid hence the main program from being recursively executed and producing loads of zombie threads before being killed by the OS, it is necessary to always explicitely run the program code under the *if __name__ == '__main__':* condition. A potential weakness of the *fork* start-method, the *forkserver* start-method is ironically supposed to protect against. 
 
     """
     def __repr__(self):
@@ -333,7 +332,7 @@ class MPBipolarOutrankingDigraph(BipolarOutrankingDigraph):
         
     def showPolarisations(self,cutLevel=None,realVetosOnly = False):       
         """
-        prints all negative and positive polarised situations observed in the OutrankingDigraph instance.
+        Prints out all negative and positive polarised outranking situations observed in the *MPBipolarOutrankingDigraph* instance.
         """
         Max = self.valuationdomain['max']
         Med = self.valuationdomain['med']

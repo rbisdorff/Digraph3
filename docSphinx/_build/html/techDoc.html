@@ -6520,13 +6520,8 @@ temporary unanimous outranking digraphs</p>
 <p><strong>Inheritance Diagram</strong></p>
 <div class="graphviz"><object data="_images/inheritance-b2d6af2f8a350c816eed159c019a252704fe2f9f.svg" type="image/svg+xml" class="inheritance graphviz">
 <p class="warning">Inheritance diagram of mpOutrankingDigraphs</p></object></div>
-<p id="module-mpOutrankingDigraphs">New Python3.12+ compatible multiprocessing implementation of bipolar-valued outranking digraphs for Linux and Ma</p>
-<p>The unsafe <em>fork</em> multiprocessing start-method is replaced with the safer <em>forkserver</em> method.</p>
-<p>Shared pool data and given performance tableau are preloaded by the <em>forkserver</em>.</p>
-<div class="admonition warning">
-<p class="admonition-title">Warning</p>
-<p>As the <em>forkserver</em> reloads for every thread the main program code, it is necessary to prevent this code with the <em>if __name__ == ‘__main__’:</em> condition from being recursively called.</p>
-</div>
+<p id="module-mpOutrankingDigraphs">Digraph3 collection of python3 modules for Algorithmic Decision Theory applications.</p>
+<p>New Python3.12+ compatible multiprocessing implementation of bipolar-valued outranking digraphs for Linux and MacOS. The unsafe <em>fork</em> multiprocessing start-method is replaced with the safer <em>forkserver</em> method. Shared pool data and given performance tableau are preloaded by the <em>forkserver</em>.</p>
 <p>Copyright (C) 2023  Raymond Bisdorff</p>
 <blockquote>
 <div><p>This program is free software; you can redistribute it and/or modify
@@ -6544,22 +6539,24 @@ with this program; if not, write to the Free Software Foundation, Inc.,
 <dl class="py class">
 <dt class="sig sig-object py" id="mpOutrankingDigraphs.MPBipolarOutrankingDigraph">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">mpOutrankingDigraphs.</span></span><span class="sig-name descname"><span class="pre">MPBipolarOutrankingDigraph</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">perfTab</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">Normalized</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ndigits</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">4</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">nbrCores</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/mpOutrankingDigraphs.html#MPBipolarOutrankingDigraph"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#mpOutrankingDigraphs.MPBipolarOutrankingDigraph" title="Link to this definition"></a></dt>
-<dd><p>New <em>forkserver</em> start-method based MP implementation of the BipolarOutrankingDigraph class.</p>
+<dd><blockquote>
+<div><p>New <em>forkserver</em> start-method based MP implementation of the BipolarOutrankingDigraph class.</p>
 <dl class="simple">
 <dt><em>Parameters</em>:</dt><dd><ul class="simple">
 <li><p><em>perfTab</em>: in memory instance of PerformanceTableau class.</p></li>
-<li><p><em>Normalized</em>: the valuation domain is set by default to the sum of the criteria weights. If True, the valuation domain is recoded to [-1.0,+1.0].</p></li>
+<li><p><em>Normalized</em>: the valuation domain is set by default to the sum of the criteria weights. If <em>True</em>, the valuation domain is recoded to [-1.0,+1.0].</p></li>
 <li><p><em>ndigits</em>: number of decimal digits of the chracteristic valuation, by default set to 4.</p></li>
 <li><p><em>nbrCores</em>: controls the maximal number of cores that will be used in the multiprocessing phases. If <em>None</em> is given, the <em>os.cpu_count</em> method is used in order to determine the number of available cores on the SMP machine.</p></li>
 </ul>
 </dd>
 </dl>
 <p><em>Usage example</em></p>
-<p>(11th Gen Intel® Core™ i5-11400 × 12, 16.0 GiB memory, Python3.12.0):</p>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">perfTabs</span> <span class="kn">import</span> <span class="n">RandomCBPerformanceTableau</span>
+<p>(11th Gen Intel® Core™ i5-11400 × 12, 16.0 GiB memory, Ubuntu 23.10, Python3.12.0):</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">randomPerfTabs</span> <span class="kn">import</span> <span class="n">RandomCBPerformanceTableau</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">pt1</span> <span class="o">=</span> <span class="n">RandomCBPerformanceTableau</span><span class="p">(</span>
 <span class="gp">... </span>        <span class="n">numberOfActions</span><span class="o">=</span><span class="mi">1000</span><span class="p">,</span><span class="n">numberOfCriteria</span><span class="o">=</span><span class="mi">13</span><span class="p">,</span>
 <span class="gp">... </span>        <span class="n">seed</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">mpOutrankingDigraph</span> <span class="kn">import</span> <span class="o">*</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">bg</span> <span class="o">=</span> <span class="n">MPBipolarOutrankingDigraph</span><span class="p">(</span><span class="n">pt1</span><span class="p">,</span><span class="n">Normalized</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span><span class="n">nbrCores</span><span class="o">=</span><span class="mi">12</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">bg</span>
 <span class="go">*------- Object instance description ------*</span>
@@ -6583,10 +6580,15 @@ with this program; if not, write to the Free Software Foundation, Inc.,
 <span class="go">Threads            : 12</span>
 </pre></div>
 </div>
+</div></blockquote>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>When using the <em>forkserver</em> start-method in a python script, mind that the <em>forkserver</em> start-method reimports into every multiprocessing thread the given program script. In order to avoid hence the main program from being recursively executed and producing loads of zombie threads before being killed by the OS, it is necessary to always explicitely run the program code under the <em>if __name__ == ‘__main__’:</em> condition. A potential weakness of the <em>fork</em> start-method, the <em>forkserver</em> start-method is ironically supposed to protect against.</p>
+</div>
 <dl class="py method">
 <dt class="sig sig-object py" id="mpOutrankingDigraphs.MPBipolarOutrankingDigraph.showPolarisations">
 <span class="sig-name descname"><span class="pre">showPolarisations</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">cutLevel</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">realVetosOnly</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/mpOutrankingDigraphs.html#MPBipolarOutrankingDigraph.showPolarisations"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#mpOutrankingDigraphs.MPBipolarOutrankingDigraph.showPolarisations" title="Link to this definition"></a></dt>
-<dd><p>prints all negative and positive polarised situations observed in the OutrankingDigraph instance.</p>
+<dd><p>Prints out all negative and positive polarised outranking situations observed in the <em>MPBipolarOutrankingDigraph</em> instance.</p>
 </dd></dl>
 
 </dd></dl>
