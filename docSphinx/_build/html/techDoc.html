@@ -4939,7 +4939,7 @@ the decision alternatives, resp. criteria, in a given ordering.</p></li>
 <li><p>When no <em>actionsList</em> is provided, the decision actions are ordered from the best to the worst. This
 ranking is obtained by default with the Copeland rule applied on a standard <em>BipolarOutrankingDigraph</em>.</p></li>
 <li><p>When the <em>SparseModel</em> flag is put to <em>True</em>, a sparse <em>PreRankedOutrankingDigraph</em> construction is used instead.</p></li>
-<li><p>the <em>outrankingModel</em> parameter (default = ‘standard’) allows to switch to alternative BipolarOutrankingDigraph constructors, like the ‘confident’ or ‘robust’ models. When called from a bipolar-valued outrankingDigraph instance, <em>outrankingModel</em> = ‘this’ keeps the current outranking model without recomputing by default the standard outranking model.</p></li>
+<li><p>the <em>outrankingModel</em> parameter (default = ‘standard’) allows to switch to alternative BipolarOutrankingDigraph constructors, like ‘confident’ or ‘robust’ models. When called from a bipolar-valued outrankingDigraph instance, <em>outrankingModel</em> = ‘this’ keeps the current outranking model without recomputing by default the standard outranking model.</p></li>
 <li><p>The <em>minimalComponentSize</em> allows to control the fill rate of the pre-ranked model.
 When <em>minimalComponentSize</em> = <em>n</em> (the number of decision actions) both the pre-ranked model will be
 in fact equivalent to the standard model.</p></li>
@@ -4957,8 +4957,7 @@ order of the correlations between the marginal criterion based ranking and the g
 presenting the decision alternatives.</p></li>
 <li><p>For large performance Tableaux, <em>multiprocessing</em> techniques may be used by setting
 <em>Threading</em> = <em>True</em> in order to speed up the computations; especially when <em>Correlations</em> = <em>True</em>.</p></li>
-<li><p>By default, the number of cores available, will be detected. It may be efficient in a HPC context
-to indicate the exact number of singled threaded cores in fact allocated to the job.</p></li>
+<li><p>By default, the number of cores available, will be detected. It may be necessary in a HPC context to indicate the exact number of singled threaded cores in fact allocated to the multiprocessing job.</p></li>
 </ul>
 <div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">randomPerfTabs</span> <span class="kn">import</span> <span class="n">RandomPerformanceTableau</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">rt</span> <span class="o">=</span> <span class="n">RandomPerformanceTableau</span><span class="p">(</span><span class="n">seed</span><span class="o">=</span><span class="mi">100</span><span class="p">)</span>
@@ -6583,7 +6582,7 @@ with this program; if not, write to the Free Software Foundation, Inc.,
 </div></blockquote>
 <div class="admonition warning">
 <p class="admonition-title">Warning</p>
-<p>When using the <em>forkserver</em> start-method in a python script, mind that the <em>forkserver</em> start-method reimports into every multiprocessing thread the given program script. In order to avoid hence the main program from being recursively executed and producing loads of zombie threads before being killed by the OS, it is necessary to always explicitely run the program code under the <em>if __name__ == ‘__main__’:</em> condition. A potential weakness of the <em>fork</em> start-method, the <em>forkserver</em> start-method is ironically supposed to protect against.</p>
+<p>When using the <em>forkserver</em> start-method in a python script file, mind that the <em>forkserver</em> multiprocessing <em>start-method</em> reimports into every multiprocessing thread the submitted program file. In order to avoid hence the main program script from being recursively executed and producing loads of zombie threads before being killed by the OS, it is necessary to always explicitely run the program code under the <em>if __name__ == ‘__main__’:</em> condition. A weakness of the <em>Posix fork start-method</em> implementation on MacOS, the alternative <em>forkserver</em> multiprocessing start-method is actuallly supposed to protect against.</p>
 </div>
 <dl class="py method">
 <dt class="sig sig-object py" id="mpOutrankingDigraphs.MPBipolarOutrankingDigraph.showPolarisations">
@@ -6797,7 +6796,7 @@ the decision alternatives, resp. criteria, in a given ordering.</p></li>
 <li><p>When no <em>actionsList</em> is provided, the decision actions are ordered from the best to the worst. This
 ranking is obtained by default with the Copeland rule applied on a standard <em>BipolarOutrankingDigraph</em>.</p></li>
 <li><p>When the <em>SparseModel</em> flag is put to <em>True</em>, a sparse <em>PreRankedOutrankingDigraph</em> construction is used instead.</p></li>
-<li><p>the <em>outrankingModel</em> parameter (default = ‘standard’) allows to switch to alternative BipolarOutrankingDigraph constructors, like the ‘confident’ or ‘robust’ models. When called from a bipolar-valued outrankingDigraph instance, <em>outrankingModel</em> = ‘this’ keeps the current outranking model without recomputing by default the standard outranking model.</p></li>
+<li><p>the <em>outrankingModel</em> parameter (default = ‘standard’) allows to switch to alternative BipolarOutrankingDigraph constructors, like ‘confident’ or ‘robust’ models. When called from a bipolar-valued outrankingDigraph instance, <em>outrankingModel</em> = ‘this’ keeps the current outranking model without recomputing by default the standard outranking model.</p></li>
 <li><p>The <em>minimalComponentSize</em> allows to control the fill rate of the pre-ranked model.
 When <em>minimalComponentSize</em> = <em>n</em> (the number of decision actions) both the pre-ranked model will be
 in fact equivalent to the standard model.</p></li>
@@ -6815,8 +6814,7 @@ order of the correlations between the marginal criterion based ranking and the g
 presenting the decision alternatives.</p></li>
 <li><p>For large performance Tableaux, <em>multiprocessing</em> techniques may be used by setting
 <em>Threading</em> = <em>True</em> in order to speed up the computations; especially when <em>Correlations</em> = <em>True</em>.</p></li>
-<li><p>By default, the number of cores available, will be detected. It may be efficient in a HPC context
-to indicate the exact number of singled threaded cores in fact allocated to the job.</p></li>
+<li><p>By default, the number of cores available, will be detected. It may be necessary in a HPC context to indicate the exact number of singled threaded cores in fact allocated to the multiprocessing job.</p></li>
 </ul>
 <div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">randomPerfTabs</span> <span class="kn">import</span> <span class="n">RandomPerformanceTableau</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">rt</span> <span class="o">=</span> <span class="n">RandomPerformanceTableau</span><span class="p">(</span><span class="n">seed</span><span class="o">=</span><span class="mi">100</span><span class="p">)</span>
@@ -7091,7 +7089,7 @@ the decision alternatives, resp. criteria, in a given ordering.</p></li>
 <li><p>When no <em>actionsList</em> is provided, the decision actions are ordered from the best to the worst. This
 ranking is obtained by default with the Copeland rule applied on a standard <em>BipolarOutrankingDigraph</em>.</p></li>
 <li><p>When the <em>SparseModel</em> flag is put to <em>True</em>, a sparse <em>PreRankedOutrankingDigraph</em> construction is used instead.</p></li>
-<li><p>the <em>outrankingModel</em> parameter (default = ‘standard’) allows to switch to alternative BipolarOutrankingDigraph constructors, like the ‘confident’ or ‘robust’ models. When called from a bipolar-valued outrankingDigraph instance, <em>outrankingModel</em> = ‘this’ keeps the current outranking model without recomputing by default the standard outranking model.</p></li>
+<li><p>the <em>outrankingModel</em> parameter (default = ‘standard’) allows to switch to alternative BipolarOutrankingDigraph constructors, like ‘confident’ or ‘robust’ models. When called from a bipolar-valued outrankingDigraph instance, <em>outrankingModel</em> = ‘this’ keeps the current outranking model without recomputing by default the standard outranking model.</p></li>
 <li><p>The <em>minimalComponentSize</em> allows to control the fill rate of the pre-ranked model.
 When <em>minimalComponentSize</em> = <em>n</em> (the number of decision actions) both the pre-ranked model will be
 in fact equivalent to the standard model.</p></li>
@@ -7109,8 +7107,7 @@ order of the correlations between the marginal criterion based ranking and the g
 presenting the decision alternatives.</p></li>
 <li><p>For large performance Tableaux, <em>multiprocessing</em> techniques may be used by setting
 <em>Threading</em> = <em>True</em> in order to speed up the computations; especially when <em>Correlations</em> = <em>True</em>.</p></li>
-<li><p>By default, the number of cores available, will be detected. It may be efficient in a HPC context
-to indicate the exact number of singled threaded cores in fact allocated to the job.</p></li>
+<li><p>By default, the number of cores available, will be detected. It may be necessary in a HPC context to indicate the exact number of singled threaded cores in fact allocated to the multiprocessing job.</p></li>
 </ul>
 <div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">randomPerfTabs</span> <span class="kn">import</span> <span class="n">RandomPerformanceTableau</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">rt</span> <span class="o">=</span> <span class="n">RandomPerformanceTableau</span><span class="p">(</span><span class="n">seed</span><span class="o">=</span><span class="mi">100</span><span class="p">)</span>

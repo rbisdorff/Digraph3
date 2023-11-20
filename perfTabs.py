@@ -2103,7 +2103,7 @@ The performance evaluations of each decision alternative on each criterion are g
         * When no *actionsList* is provided, the decision actions are ordered from the best to the worst. This
           ranking is obtained by default with the Copeland rule applied on a standard *BipolarOutrankingDigraph*.
         * When the *SparseModel* flag is put to *True*, a sparse *PreRankedOutrankingDigraph* construction is used instead.
-        * the *outrankingModel* parameter (default = 'standard') allows to switch to alternative BipolarOutrankingDigraph constructors, like the 'confident' or 'robust' models. When called from a bipolar-valued outrankingDigraph instance, *outrankingModel* = 'this' keeps the current outranking model without recomputing by default the standard outranking model.            
+        * the *outrankingModel* parameter (default = 'standard') allows to switch to alternative BipolarOutrankingDigraph constructors, like 'confident' or 'robust' models. When called from a bipolar-valued outrankingDigraph instance, *outrankingModel* = 'this' keeps the current outranking model without recomputing by default the standard outranking model.            
         * The *minimalComponentSize* allows to control the fill rate of the pre-ranked model.
           When *minimalComponentSize* = *n* (the number of decision actions) both the pre-ranked model will be
           in fact equivalent to the standard model.
@@ -2121,8 +2121,7 @@ The performance evaluations of each decision alternative on each criterion are g
           presenting the decision alternatives.
         * For large performance Tableaux, *multiprocessing* techniques may be used by setting
           *Threading* = *True* in order to speed up the computations; especially when *Correlations* = *True*.
-        * By default, the number of cores available, will be detected. It may be efficient in a HPC context
-          to indicate the exact number of singled threaded cores in fact allocated to the job.
+        * By default, the number of cores available, will be detected. It may be necessary in a HPC context to indicate the exact number of singled threaded cores in fact allocated to the multiprocessing job.
 
 
         >>> from randomPerfTabs import RandomPerformanceTableau

@@ -2328,7 +2328,7 @@
 <span class="sd">        * When no *actionsList* is provided, the decision actions are ordered from the best to the worst. This</span>
 <span class="sd">          ranking is obtained by default with the Copeland rule applied on a standard *BipolarOutrankingDigraph*.</span>
 <span class="sd">        * When the *SparseModel* flag is put to *True*, a sparse *PreRankedOutrankingDigraph* construction is used instead.</span>
-<span class="sd">        * the *outrankingModel* parameter (default = &#39;standard&#39;) allows to switch to alternative BipolarOutrankingDigraph constructors, like the &#39;confident&#39; or &#39;robust&#39; models. When called from a bipolar-valued outrankingDigraph instance, *outrankingModel* = &#39;this&#39; keeps the current outranking model without recomputing by default the standard outranking model.            </span>
+<span class="sd">        * the *outrankingModel* parameter (default = &#39;standard&#39;) allows to switch to alternative BipolarOutrankingDigraph constructors, like &#39;confident&#39; or &#39;robust&#39; models. When called from a bipolar-valued outrankingDigraph instance, *outrankingModel* = &#39;this&#39; keeps the current outranking model without recomputing by default the standard outranking model.            </span>
 <span class="sd">        * The *minimalComponentSize* allows to control the fill rate of the pre-ranked model.</span>
 <span class="sd">          When *minimalComponentSize* = *n* (the number of decision actions) both the pre-ranked model will be</span>
 <span class="sd">          in fact equivalent to the standard model.</span>
@@ -2346,8 +2346,7 @@
 <span class="sd">          presenting the decision alternatives.</span>
 <span class="sd">        * For large performance Tableaux, *multiprocessing* techniques may be used by setting</span>
 <span class="sd">          *Threading* = *True* in order to speed up the computations; especially when *Correlations* = *True*.</span>
-<span class="sd">        * By default, the number of cores available, will be detected. It may be efficient in a HPC context</span>
-<span class="sd">          to indicate the exact number of singled threaded cores in fact allocated to the job.</span>
+<span class="sd">        * By default, the number of cores available, will be detected. It may be necessary in a HPC context to indicate the exact number of singled threaded cores in fact allocated to the multiprocessing job.</span>
 
 
 <span class="sd">        &gt;&gt;&gt; from randomPerfTabs import RandomPerformanceTableau</span>

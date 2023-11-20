@@ -171,7 +171,7 @@ class MPBipolarOutrankingDigraph(BipolarOutrankingDigraph):
     Gamma sets         : 0.67732
     Threads            : 12
 
-.. warning:: When using the *forkserver* start-method in a python script, mind that the *forkserver* start-method reimports into every multiprocessing thread the given program script. In order to avoid hence the main program from being recursively executed and producing loads of zombie threads before being killed by the OS, it is necessary to always explicitely run the program code under the *if __name__ == '__main__':* condition. A potential weakness of the *fork* start-method, the *forkserver* start-method is ironically supposed to protect against. 
+.. warning:: When using the *forkserver* start-method in a python script file, mind that the *forkserver* multiprocessing *start-method* reimports into every multiprocessing thread the submitted program file. In order to avoid hence the main program script from being recursively executed and producing loads of zombie threads before being killed by the OS, it is necessary to always explicitely run the program code under the *if __name__ == '__main__':* condition. A weakness of the *Posix fork start-method* implementation on MacOS, the alternative *forkserver* multiprocessing start-method is actuallly supposed to protect against. 
 
     """
     def __repr__(self):
