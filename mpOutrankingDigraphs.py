@@ -330,7 +330,7 @@ class MPBipolarOutrankingDigraph(BipolarOutrankingDigraph):
             pass
         return relation,considerableDiffs
         
-    def showPolarisations(self,cutLevel=None,realVetosOnly = False):       
+    def showPolarisations(self):       
         """
         Prints out all negative and positive polarised outranking situations observed in the *MPBipolarOutrankingDigraph* instance.
         """
@@ -441,9 +441,9 @@ class RandomMPBipolarOutrankingDigraph(MPBipolarOutrankingDigraph):
 ###################################
 # testing the module
 if __name__ == '__main__':
-    #freeze_support()
     bg = RandomMPBipolarOutrankingDigraph()
     print(bg)
+    bg.showPolarisations()
     
     # from perfTabs import PerformanceTableau
     # from randomPerfTabs import *
