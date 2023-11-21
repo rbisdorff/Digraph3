@@ -46,7 +46,7 @@ Parts of the documentation
 ..........................
 :New:
 
-   - A newly refactored multiprocessing :py:class:`mpOutrankingDigraphs.MPBipolarOutrankingDigraph` constructor of bipolar-valued outranking digraphs based on the safer *forkserver* start-method compatible with Linux and MacOS.
+   - A refactored multiprocessing :py:class:`mpOutrankingDigraphs.MPBipolarOutrankingDigraph` constructor of genuine bipolar-valued outranking digraphs based on the *forkserver* start-method compatible with Linux and MacOS.
      
    - A :py:mod:`pairings` module for solving pairing problems illustrated with two tutorials on computing **fair** :ref:`intergroup<Fair-InterGroup-Pairings-label>` and :ref:`intragroup<Fair-IntraGroup-Pairings-label>` pairing solutions
 
