@@ -1453,7 +1453,7 @@ class RatingByRelativeQuantilesDigraph(RatingDigraph,PerformanceTableau):
         
     *rankingRule*: 'NetFlows' (default).
 
-    *outrankingModel*: {'standard' (default) | 'confident' | 'robust' | 'mp'},
+    *outrankingModel*: {'standard' (default) | 'confident' | 'robust' },
 
         Parameters for the *confident* outranking model: 
 
@@ -1670,13 +1670,6 @@ class RatingByRelativeQuantilesDigraph(RatingDigraph,PerformanceTableau):
 ##            self.nbrThreads = 1
 ##        else:
 ##            self.nbrThreads = nbrCores
-        if outrankingModel == 'mp':
-            from mpOutrankingDigraphs import MPBipolarOutrankingDigraph
-            g = MPBipolarOutrankingDigraph(self,Normalized=True,nbrCores=None)
-            self.nbrThreads = copy2self(g.nbrThreads)
-            self.relation = copy2self(g.relation)
-            self.valuationdomain = copy2self(g.valuationdomain)
-            self.nbrThreads = copy2self(g.nbrThreads)
         if outrankingModel == 'standard':
             from outrankingDigraphs import BipolarOutrankingDigraph
             g = BipolarOutrankingDigraph(self,
@@ -2267,7 +2260,7 @@ if __name__ == "__main__":
     pt = RandomCBPerformanceTableau(numberOfActions=100,seed=3)
     rrq = RatingByRelativeQuantilesDigraph(pt,quantiles=7,
                                          LowerClosed=False,
-                                         outrankingModel='mp',
+                                         outrankingModel='standard',
                                          Threading=MP,
                                          nbrCores=nbrCores,
                                          Debug=False)

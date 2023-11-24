@@ -601,11 +601,7 @@
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="#mpoutrankingdigraphs-module">2.8. mpOutrankingDigraphs module</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="#mpOutrankingDigraphs.MPBipolarOutrankingDigraph"><code class="docutils literal notranslate"><span class="pre">MPBipolarOutrankingDigraph</span></code></a><ul>
-<li class="toctree-l4"><a class="reference internal" href="#mpOutrankingDigraphs.MPBipolarOutrankingDigraph.showPolarisations"><code class="docutils literal notranslate"><span class="pre">MPBipolarOutrankingDigraph.showPolarisations()</span></code></a></li>
-</ul>
-</li>
-<li class="toctree-l3"><a class="reference internal" href="#mpOutrankingDigraphs.RandomMPBipolarOutrankingDigraph"><code class="docutils literal notranslate"><span class="pre">RandomMPBipolarOutrankingDigraph</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#mpOutrankingDigraphs.MPBipolarOutrankingDigraph"><code class="docutils literal notranslate"><span class="pre">MPBipolarOutrankingDigraph</span></code></a></li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="#ratingdigraphs-module">2.9. ratingDigraphs module</a><ul>
@@ -1236,7 +1232,7 @@
 <dl class="field-list simple">
 <dt class="field-odd">New<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
-<li><p>A <a class="reference internal" href="#module-mpOutrankingDigraphs" title="mpOutrankingDigraphs"><code class="xref py py-mod docutils literal notranslate"><span class="pre">mpOutrankingDigraphs</span></code></a> for a <em>forkserver</em> based multiprocessing construction of bipolar-valued outranking digraphs with main <code class="xref py py-class docutils literal notranslate"><span class="pre">MPOutrankingDigraph</span></code> constructor</p></li>
+<li><p>A <a class="reference internal" href="#module-mpOutrankingDigraphs" title="mpOutrankingDigraphs"><code class="xref py py-mod docutils literal notranslate"><span class="pre">mpOutrankingDigraphs</span></code></a> for a variable start-method  based multiprocessing construction of bipolar-valued outranking digraphs with main <code class="xref py py-class docutils literal notranslate"><span class="pre">MPOutrankingDigraph</span></code> constructor</p></li>
 <li><p>The <a class="reference internal" href="#digraphsTools.kmpMatch" title="digraphsTools.kmpMatch"><code class="xref py py-meth docutils literal notranslate"><span class="pre">digraphsTools.kmpMatch()</span></code></a> method implements the <em>Knuth</em> <em>Morris</em> <em>Pratt</em> string matching algorithm</p></li>
 <li><p>The <a class="reference internal" href="#digraphsTools.computeSequenceAlignment" title="digraphsTools.computeSequenceAlignment"><code class="xref py py-meth docutils literal notranslate"><span class="pre">digraphsTools.computeSequenceAlignment()</span></code></a> method implements the <em>Needlemann</em> % <em>Wunsch</em> dynamic programming algorithm for computing DNA <em>sequence alignments</em></p></li>
 <li><p>A <a class="reference internal" href="#module-dynamicProgramming" title="dynamicProgramming"><code class="xref py py-mod docutils literal notranslate"><span class="pre">dynamicProgramming</span></code></a> module for solving <strong>dynamic programming</strong> problems</p></li>
@@ -1458,7 +1454,7 @@ binned cumulated density functions per criteria. Depends on the
 </li>
 <li><dl>
 <dt><a class="reference internal" href="#mpoutrankingdigraphs-label"><span class="std std-ref">mpOutrankingDigraphs module</span></a></dt><dd><p>New forkserver based multiprocessing construction of genuine bipolar-valued outranking digraphs.</p>
-<div class="graphviz"><object data="_images/inheritance-b2d6af2f8a350c816eed159c019a252704fe2f9f.svg" type="image/svg+xml" class="inheritance graphviz">
+<div class="graphviz"><object data="_images/inheritance-3ee863b80de94fc2e17d597580ca59eee28fa10a.svg" type="image/svg+xml" class="inheritance graphviz">
 <p class="warning">Inheritance diagram of mpOutrankingDigraphs</p></object></div>
 </dd>
 </dl>
@@ -6517,10 +6513,10 @@ temporary unanimous outranking digraphs</p>
 <section id="mpoutrankingdigraphs-module">
 <span id="mpoutrankingdigraphs-label"></span><h2><a class="toc-backref" href="#id10" role="doc-backlink"><span class="section-number">2.8. </span>mpOutrankingDigraphs module</a><a class="headerlink" href="#mpoutrankingdigraphs-module" title="Link to this heading"></a></h2>
 <p><strong>Inheritance Diagram</strong></p>
-<div class="graphviz"><object data="_images/inheritance-b2d6af2f8a350c816eed159c019a252704fe2f9f.svg" type="image/svg+xml" class="inheritance graphviz">
+<div class="graphviz"><object data="_images/inheritance-3ee863b80de94fc2e17d597580ca59eee28fa10a.svg" type="image/svg+xml" class="inheritance graphviz">
 <p class="warning">Inheritance diagram of mpOutrankingDigraphs</p></object></div>
 <p id="module-mpOutrankingDigraphs">Digraph3 collection of python3 modules for Algorithmic Decision Theory applications.</p>
-<p>New Python3.12+ compatible multiprocessing implementation of bipolar-valued outranking digraphs for Linux and MacOS. The unsafe <em>fork</em> multiprocessing start-method is replaced with the safer <em>forkserver</em> method. Shared pool data and given performance tableau are preloaded by the <em>forkserver</em>.</p>
+<p>New Python3.12+ compatible multiprocessing implementation of bipolar-valued outranking digraphs for Linux and MacOS. The potentially unsafe default <em>fork</em> multiprocessing start-method may be either set to ‘spawn’ (default) or to ‘forkserver’. Shared pool given performance tableau must be first saved in the current working directory in a file named ‘sharedPerfTab’.</p>
 <p>Copyright (C) 2023  Raymond Bisdorff</p>
 <blockquote>
 <div><p>This program is free software; you can redistribute it and/or modify
@@ -6537,69 +6533,62 @@ with this program; if not, write to the Free Software Foundation, Inc.,
 </div></blockquote>
 <dl class="py class">
 <dt class="sig sig-object py" id="mpOutrankingDigraphs.MPBipolarOutrankingDigraph">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">mpOutrankingDigraphs.</span></span><span class="sig-name descname"><span class="pre">MPBipolarOutrankingDigraph</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">perfTab</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">Normalized</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ndigits</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">4</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">nbrCores</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/mpOutrankingDigraphs.html#MPBipolarOutrankingDigraph"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#mpOutrankingDigraphs.MPBipolarOutrankingDigraph" title="Link to this definition"></a></dt>
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">mpOutrankingDigraphs.</span></span><span class="sig-name descname"><span class="pre">MPBipolarOutrankingDigraph</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">WithGammaSets</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">Normalized</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ndigits</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">4</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">startMeth</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'spawn'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">nbrCores</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/mpOutrankingDigraphs.html#MPBipolarOutrankingDigraph"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#mpOutrankingDigraphs.MPBipolarOutrankingDigraph" title="Link to this definition"></a></dt>
 <dd><blockquote>
-<div><p>New <em>forkserver</em> start-method based MP implementation of the BipolarOutrankingDigraph class.</p>
+<div><p>New variable start-method based MP implementation of the BipolarOutrankingDigraph class.</p>
 <dl class="simple">
 <dt><em>Parameters</em>:</dt><dd><ul class="simple">
-<li><p><em>perfTab</em>: in memory instance of PerformanceTableau class.</p></li>
 <li><p><em>Normalized</em>: the valuation domain is set by default to the sum of the criteria weights. If <em>True</em>, the valuation domain is recoded to [-1.0,+1.0].</p></li>
 <li><p><em>ndigits</em>: number of decimal digits of the chracteristic valuation, by default set to 4.</p></li>
 <li><p><em>nbrCores</em>: controls the maximal number of cores that will be used in the multiprocessing phases. If <em>None</em> is given, the <em>os.cpu_count()</em> method is used in order to determine the number of available cores on the SMP machine.</p></li>
+<li><p><em>startMethod</em>: ‘spawn’ (default) | ‘forkserver’ | ‘fork’</p></li>
+<li><p>The given <em>PerformanceTableau</em> object is shared with the multiprocessing threads via importing a <em>sharedPerfTab.py</em> module stored in the current working directory and containing a saved <em>PerformanceTableau</em> object.</p></li>
 </ul>
 </dd>
 </dl>
+</div></blockquote>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>The given <em>PerformanceTableau</em> must be previously saved in the working directory under the name ‘sharedPerfTab’.</p>
 <p><em>Usage example</em></p>
 <p>(11th Gen Intel® Core™ i5-11400 × 12, 16.0 GiB memory, Ubuntu 23.10, Python3.12.0):</p>
 <div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">randomPerfTabs</span> <span class="kn">import</span> <span class="n">RandomCBPerformanceTableau</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">pt1</span> <span class="o">=</span> <span class="n">RandomCBPerformanceTableau</span><span class="p">(</span>
 <span class="gp">... </span>        <span class="n">numberOfActions</span><span class="o">=</span><span class="mi">1000</span><span class="p">,</span><span class="n">numberOfCriteria</span><span class="o">=</span><span class="mi">13</span><span class="p">,</span>
 <span class="gp">... </span>        <span class="n">seed</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">mpOutrankingDigraph</span> <span class="kn">import</span> <span class="o">*</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">bg</span> <span class="o">=</span> <span class="n">MPBipolarOutrankingDigraph</span><span class="p">(</span><span class="n">pt1</span><span class="p">,</span><span class="n">Normalized</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span><span class="n">nbrCores</span><span class="o">=</span><span class="mi">12</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">pt1</span><span class="o">.</span><span class="n">save</span><span class="p">(</span><span class="s1">&#39;sharedPerfTab&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">mpOutrankingDigraphs</span> <span class="kn">import</span> <span class="o">*</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">bg</span> <span class="o">=</span> <span class="n">MPBipolarOutrankingDigraph</span><span class="p">(</span><span class="n">Normalized</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span><span class="n">ndigits</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span>
+<span class="gp">... </span>                                <span class="n">nbrCores</span><span class="o">=</span><span class="mi">8</span><span class="p">,</span><span class="n">startMeth</span><span class="o">=</span><span class="s1">&#39;spawn&#39;</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">bg</span>
-<span class="go">*------- Object instance description ------*</span>
-<span class="go">Instance class       : MPBipolarOutrankingDigraph</span>
-<span class="go">Instance name        : rel_randomCBperftab</span>
-<span class="go">Actions              : 1000</span>
-<span class="go">Criteria             : 13</span>
-<span class="go">Size                 : 517128</span>
-<span class="go">Determinateness (%)  : 66.82</span>
-<span class="go">Valuation domain     : [-60.00;60.00]</span>
-<span class="go">Attributes           : [&#39;name&#39;, &#39;actions&#39;, &#39;order&#39;, &#39;criteria&#39;,</span>
-<span class="go">                &#39;objectives&#39;, &#39;NA&#39;, &#39;evaluation&#39;, &#39;nbrThreads&#39;,</span>
-<span class="go">                &#39;relation&#39;, &#39;largePerformanceDifferencesCount&#39;,</span>
-<span class="go">                &#39;valuationdomain&#39;, &#39;gamma&#39;, &#39;notGamma&#39;,</span>
-<span class="go">                &#39;runTimes&#39;]</span>
-<span class="go">----  Constructor run times (in sec.) ----</span>
-<span class="go">Total time         : 3.91750</span>
-<span class="go">Data input         : 0.01212</span>
-<span class="go">Compute relation   : 3.22806</span>
-<span class="go">Gamma sets         : 0.67732</span>
-<span class="go">Threads            : 12</span>
+<span class="go"> *------- Object instance description ------*</span>
+<span class="go"> Instance class       : MPBipolarOutrankingDigraph</span>
+<span class="go"> Instance name        : rel_sharedPerfTab</span>
+<span class="go"> Actions              : 1000</span>
+<span class="go"> Criteria             : 13</span>
+<span class="go"> Size                 : 517128</span>
+<span class="go"> Determinateness (%)  : 66.83</span>
+<span class="go"> Valuation domain     : [-1.00;1.00]</span>
+<span class="go"> Attributes           : [&#39;name&#39;, &#39;actions&#39;, &#39;order&#39;, &#39;criteria&#39;,</span>
+<span class="go">                 &#39;objectives&#39;, &#39;NA&#39;, &#39;evaluation&#39;, &#39;nbrThreads&#39;,</span>
+<span class="go">                 &#39;relation&#39;, &#39;largePerformanceDifferencesCount&#39;,</span>
+<span class="go">                 &#39;valuationdomain&#39;, &#39;gamma&#39;, &#39;notGamma&#39;,</span>
+<span class="go">                 &#39;runTimes&#39;, &#39;startMeth&#39;]</span>
+<span class="go"> ----  Constructor run times (in sec.) ----</span>
+<span class="go"> Threads            : 12</span>
+<span class="go"> Start method       : &#39;spawn&#39;</span>
+<span class="go"> Total time         : 4.09587</span>
+<span class="go"> Data input         : 0.00002</span>
+<span class="go"> Compute relation   : 3.61151</span>
+<span class="go"> Normalize relation : 0.72305</span>
+<span class="go"> Gamma sets         : 0.48434</span>
 </pre></div>
 </div>
-</div></blockquote>
+</div>
 <div class="admonition warning">
 <p class="admonition-title">Warning</p>
-<p>When using the <em>forkserver</em> or the <em>spawn</em> multiprocessing start-methods in a python script file, mind that these start-methods re-import into every multiprocessing thread the submitted program file. In order to avoid hence the program script from being recursively executed and producing loads of zombie threads before being killed by the OS, it is necessary to always explicitely protect the entry point of the main program code with the <em>if __name__ == ‘__main__’:</em> condition. This is not necessary when using instead the classical Unix <em>fork</em> start-method where multiprocessing threads continue in fact the main program code from the point on where they were launched.</p>
+<p>When using the <em>forkserver</em> or the <em>spawn</em> multiprocessing start-methods in a python script file, mind that both start-methods re-import into every multiprocessing thread the submitted program file. In order to avoid hence the program script from being recursively executed and producing loads of zombie threads before being killed by the OS, it is compulsory necessary to always explicitely protect the entry point of the main program code with the <em>if __name__ == ‘__main__’:</em> condition. This is not necessary when using instead the classical Unix <em>fork</em> start-method where multiprocessing threads continue in fact the main program code from the point on where they were launched.</p>
 </div>
-<dl class="py method">
-<dt class="sig sig-object py" id="mpOutrankingDigraphs.MPBipolarOutrankingDigraph.showPolarisations">
-<span class="sig-name descname"><span class="pre">showPolarisations</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/mpOutrankingDigraphs.html#MPBipolarOutrankingDigraph.showPolarisations"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#mpOutrankingDigraphs.MPBipolarOutrankingDigraph.showPolarisations" title="Link to this definition"></a></dt>
-<dd><p>Prints out all negative and positive polarised outranking situations observed in the <em>MPBipolarOutrankingDigraph</em> instance.</p>
-</dd></dl>
-
-</dd></dl>
-
-<dl class="py class">
-<dt class="sig sig-object py" id="mpOutrankingDigraphs.RandomMPBipolarOutrankingDigraph">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">mpOutrankingDigraphs.</span></span><span class="sig-name descname"><span class="pre">RandomMPBipolarOutrankingDigraph</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">numberOfActions</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">100</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">numberOfCriteria</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">7</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">weightDistribution</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'random'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">weightScale</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">[1,</span> <span class="pre">10]</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">commonScale</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">[0.0,</span> <span class="pre">100.0]</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">commonThresholds</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">[(5.0,</span> <span class="pre">0.0),</span> <span class="pre">(10.0,</span> <span class="pre">0.0),</span> <span class="pre">(97.0,</span> <span class="pre">0.0),</span> <span class="pre">(97.0,</span> <span class="pre">0.0)]</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">commonMode</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">('uniform',</span> <span class="pre">None,</span> <span class="pre">None)</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">Normalized</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">seed</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">nbrCores</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/mpOutrankingDigraphs.html#RandomMPBipolarOutrankingDigraph"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#mpOutrankingDigraphs.RandomMPBipolarOutrankingDigraph" title="Link to this definition"></a></dt>
-<dd><p>Specialization of the MPBipolarOutrankingDigraph class for generating temporary Digraphs from RandomPerformanceTableau instances.</p>
-<dl class="simple">
-<dt><em>Parameters</em>:</dt><dd><p>See <a class="reference internal" href="#randomPerfTabs.RandomPerformanceTableau" title="randomPerfTabs.RandomPerformanceTableau"><code class="xref py py-class docutils literal notranslate"><span class="pre">randomPerfTabs.RandomPerformanceTableau</span></code></a> class.</p>
-</dd>
-</dl>
 </dd></dl>
 
 <hr class="docutils" />
@@ -6704,7 +6693,7 @@ See the <a class="reference internal" href="#sortingDigraphs.QuantilesSortingDig
 <p><em>quantiles</em>: integer number of quantile classes,</p>
 <p><em>LowerClosed</em>:  {True | False (default upper closed quantiles)},</p>
 <p><em>rankingRule</em>: ‘NetFlows’ (default).</p>
-<p><em>outrankingModel</em>: {‘standard’ (default) | ‘confident’ | ‘robust’ | ‘mp’},</p>
+<p><em>outrankingModel</em>: {‘standard’ (default) | ‘confident’ | ‘robust’ },</p>
 <blockquote>
 <div><p>Parameters for the <em>confident</em> outranking model:</p>
 <p><em>distribution</em>: {‘triangular’ (default)| ‘uniform’ | ‘beta’},</p>
