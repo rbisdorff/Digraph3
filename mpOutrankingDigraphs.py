@@ -149,13 +149,13 @@ class MPBipolarOutrankingDigraph(BipolarOutrankingDigraph):
                      'valuationdomain', 'gamma', 'notGamma',
                      'runTimes', 'startMeth']
      ----  Constructor run times (in sec.) ----
-     Threads            : 12
+     Threads            : 8
      Start method       : 'spawn'
-     Total time         : 4.09587
-     Data input         : 0.00002
-     Compute relation   : 3.61151
-     Normalize relation : 0.72305
-     Gamma sets         : 0.48434
+     Total time         : 4.06436
+     Data input         : 0.00000
+     Compute relation   : 2.79447
+     Normalize relation : 0.72327
+     Gamma sets         : 0.54659
     
 
 .. warning:: When using the *forkserver* or the *spawn* multiprocessing start-methods in a python script file, mind that both start-methods re-import into every multiprocessing thread the submitted program file. In order to avoid hence the program script from being recursively executed and producing loads of zombie threads before being killed by the OS, it is compulsory necessary to always explicitely protect the entry point of the main program code with the *if __name__ == '__main__':* condition. This is not necessary when using instead the classical Unix *fork* start-method where multiprocessing threads continue in fact the main program code from the point on where they were launched. 
@@ -257,7 +257,6 @@ class MPBipolarOutrankingDigraph(BipolarOutrankingDigraph):
             tn = time()
             self.recodeValuation(ndigits=ndigits)
             runTimes['normalizeRelation'] = time() - tn
-        runTimes['computeRelation'] = time() - t1
         t2 = time()
         if WithGammaSets:
             self.gamma = self.gammaSets()
