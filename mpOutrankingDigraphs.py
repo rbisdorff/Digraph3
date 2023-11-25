@@ -115,7 +115,7 @@ class MPBipolarOutrankingDigraph(BipolarOutrankingDigraph):
 
     *Parameters*:
         * *Normalized*: the valuation domain is set by default to the sum of the criteria weights. If *True*, the valuation domain is recoded to [-1.0,+1.0].
-        * *ndigits*: number of decimal digits of the chracteristic valuation, by default set to 4.
+        * *ndigits*: number of decimal digits of the characteristic valuation, by default set to 4.
         * *nbrCores*: controls the maximal number of cores that will be used in the multiprocessing phases. If *None* is given, the *os.cpu_count()* method is used in order to determine the number of available cores on the SMP machine.
         * *startMethod*: 'spawn' (default) | 'forkserver' | 'fork'
         * The given *PerformanceTableau* object is shared with the multiprocessing threads via importing a *sharedPerfTab.py* module stored in the current working directory and containing a saved *PerformanceTableau* object.

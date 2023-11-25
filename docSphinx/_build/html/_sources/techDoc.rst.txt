@@ -224,7 +224,7 @@ Handling big data
 	:parts: 1
 
 * :ref:`mpOutrankingDigraphs-label`
-     New forkserver based multiprocessing construction of genuine bipolar-valued outranking digraphs.
+     New variable start-methods based multiprocessing construction of genuine bipolar-valued outranking digraphs.
 
      .. inheritance-diagram:: mpOutrankingDigraphs
 	:top-classes: outrankingDigraphs.BipolarOutrankingDigraph
