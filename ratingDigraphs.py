@@ -1453,7 +1453,7 @@ class RatingByRelativeQuantilesDigraph(RatingDigraph,PerformanceTableau):
         
     *rankingRule*: 'NetFlows' (default).
 
-    *outrankingModel*: {'standard' (default) | 'confident' | 'robust' },
+    *outrankingModel*: {'standard' (default) | 'confident' | 'robust' | 'mp' },
 
         Parameters for the *confident* outranking model: 
 
@@ -1670,11 +1670,20 @@ class RatingByRelativeQuantilesDigraph(RatingDigraph,PerformanceTableau):
 ##            self.nbrThreads = 1
 ##        else:
 ##            self.nbrThreads = nbrCores
+        if outrankingModel == 'mp':
+            from perfTabs import PerformanceTableau
+            PerformanceTableau.save(self,'sharedPerfTab')
+            from mpOutrankingDigraphs import MPBipolarOutrankingDigraph
+            g = MPBipolarOutrankingDigraph(self,Normalized=True,
+                                           nbrCores=nbrCores)
+            self.nbrThreads = copy2self(g.nbrThreads)
+            self.relation = copy2self(g.relation)
+            self.valuationdomain = copy2self(g.valuationdomain)
         if outrankingModel == 'standard':
             from outrankingDigraphs import BipolarOutrankingDigraph
             g = BipolarOutrankingDigraph(self,
                                      Threading=Threading,nbrCores=nbrCores)
-            self.nbrThreads = copy2self(g.nbrThreads)
+            #self.nbrThreads = copy2self(g.nbrThreads)
             self.relation = copy2self(g.relation)
             self.valuationdomain = copy2self(g.valuationdomain)
             self.nbrThreads = copy2self(g.nbrThreads)
@@ -2257,21 +2266,22 @@ if __name__ == "__main__":
     nbrCores = 12
 
     # relative quantiles rating
-    pt = RandomCBPerformanceTableau(numberOfActions=100,seed=3)
+    pt = RandomCBPerformanceTableau(numberOfActions=1000,seed=3)
     rrq = RatingByRelativeQuantilesDigraph(pt,quantiles=7,
                                          LowerClosed=False,
-                                         outrankingModel='standard',
+                                         outrankingModel='mp',
                                          Threading=MP,
                                          nbrCores=nbrCores,
                                          Debug=False)
     print(rrq)
-    rrq.showRatingByQuantilesSorting(strategy='average')
-    rrq.showRatingByQuantilesRanking()
+    rrq.showHTMLRatingHeatmap()
+    #rrq.showRatingByQuantilesSorting(strategy='average')
+    #rrq.showRatingByQuantilesRanking()
 
-    corr = rrq.computeRatingByRankingCorrelation(Debug=False)
-    print('*-----Global Relative-Rating-By-Ranking Quality')
-    rrq.showCorrelation(corr)
-    rrq.showRatingConsensusQuality()
+    #corr = rrq.computeRatingByRankingCorrelation(Debug=False)
+    #print('*-----Global Relative-Rating-By-Ranking Quality')
+    #rrq.showCorrelation(corr)
+    #rrq.showRatingConsensusQuality()
 
     # absolute quantiles rating from randomPerfTabs import
 #   Random3ObjectivesPerformanceTableau
