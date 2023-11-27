@@ -2998,6 +2998,8 @@
         <span class="n">fo</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s1">&#39;# Saved performance Tableau: </span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)</span>
         <span class="n">fo</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s1">&#39;from decimal import Decimal</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)</span>
         <span class="n">fo</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s1">&#39;from collections import OrderedDict</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)</span>
+        <span class="c1"># name</span>
+        <span class="n">fo</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s2">&quot;name = </span><span class="se">\&#39;</span><span class="si">%s</span><span class="se">\&#39;\n</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="n">fileName</span><span class="p">)</span>
         <span class="c1"># actions</span>
         <span class="n">fo</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s1">&#39;actions = OrderedDict([</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)</span>
         <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">actions</span><span class="p">:</span>
@@ -5400,24 +5402,18 @@
 <span class="s2">    &quot;&quot;&quot;</span><span class="p">)</span>
     
     <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;*-------- Testing classes and methods -------&#39;</span><span class="p">)</span>
-
-    <span class="n">t</span> <span class="o">=</span> <span class="n">PerformanceTableau</span><span class="p">(</span><span class="s1">&#39;pmax3&#39;</span><span class="p">)</span>
-    <span class="n">t</span><span class="o">.</span><span class="n">quantizeCriterionEvaluations</span><span class="p">(</span><span class="s1">&#39;sn&#39;</span><span class="p">,</span><span class="mi">7</span><span class="p">)</span>
-    <span class="n">t</span><span class="o">.</span><span class="n">quantizeCriterionEvaluations</span><span class="p">(</span><span class="s1">&#39;de17&#39;</span><span class="p">,</span><span class="mi">7</span><span class="p">)</span>
-    <span class="n">t</span><span class="o">.</span><span class="n">quantizeCriterionEvaluations</span><span class="p">(</span><span class="s1">&#39;df17&#39;</span><span class="p">,</span><span class="mi">7</span><span class="p">)</span>
-    <span class="n">t</span><span class="o">.</span><span class="n">quantizeCriterionEvaluations</span><span class="p">(</span><span class="s1">&#39;dimc&#39;</span><span class="p">,</span><span class="mi">7</span><span class="p">)</span>
     
-<span class="c1">##    randomSeed = random.randint(1,1000)</span>
+    <span class="n">randomSeed</span> <span class="o">=</span> <span class="n">random</span><span class="o">.</span><span class="n">randint</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">1000</span><span class="p">)</span>
 <span class="c1">##    t = CircularPerformanceTableau(order=7)</span>
 <span class="c1">##    t.showPerformanceTableau()</span>
-    <span class="c1"># t = RandomCBPerformanceTableau(numberOfCriteria=21,</span>
-    <span class="c1">#                                numberOfActions=13,</span>
-    <span class="c1">#                                weightDistribution=&#39;equiobjectives&#39;,</span>
-    <span class="c1">#                                IntegerWeights=True,</span>
-    <span class="c1">#                                NegativeWeights=False,</span>
-    <span class="c1">#                                missingDataProbability=0.05,</span>
-    <span class="c1">#                                seed=randomSeed,</span>
-    <span class="c1">#                                Debug=False)</span>
+    <span class="n">t</span> <span class="o">=</span> <span class="n">RandomCBPerformanceTableau</span><span class="p">(</span><span class="n">numberOfCriteria</span><span class="o">=</span><span class="mi">21</span><span class="p">,</span>
+                                   <span class="n">numberOfActions</span><span class="o">=</span><span class="mi">13</span><span class="p">,</span>
+                                   <span class="n">weightDistribution</span><span class="o">=</span><span class="s1">&#39;equiobjectives&#39;</span><span class="p">,</span>
+                                   <span class="n">IntegerWeights</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+                                   <span class="n">NegativeWeights</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+                                   <span class="n">missingDataProbability</span><span class="o">=</span><span class="mf">0.05</span><span class="p">,</span>
+                                   <span class="n">seed</span><span class="o">=</span><span class="n">randomSeed</span><span class="p">,</span>
+                                   <span class="n">Debug</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
     <span class="c1"># t.computeOutrankingConsensusQuality()</span>
 <span class="c1">#     t.showPerformanceTableau()</span>
 <span class="c1">#     t.computeMissingDataProportion(InPercents=False,Comments=True)</span>

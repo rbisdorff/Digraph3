@@ -2755,6 +2755,8 @@ The performance evaluations of each decision alternative on each criterion are g
         fo.write('# Saved performance Tableau: \n')
         fo.write('from decimal import Decimal\n')
         fo.write('from collections import OrderedDict\n')
+        # name
+        fo.write("name = \'%s\'\n" % fileName)
         # actions
         fo.write('actions = OrderedDict([\n')
         for x in actions:
@@ -5113,24 +5115,18 @@ if __name__ == "__main__":
     """)
     
     print('*-------- Testing classes and methods -------')
-
-    t = PerformanceTableau('pmax3')
-    t.quantizeCriterionEvaluations('sn',7)
-    t.quantizeCriterionEvaluations('de17',7)
-    t.quantizeCriterionEvaluations('df17',7)
-    t.quantizeCriterionEvaluations('dimc',7)
     
-##    randomSeed = random.randint(1,1000)
+    randomSeed = random.randint(1,1000)
 ##    t = CircularPerformanceTableau(order=7)
 ##    t.showPerformanceTableau()
-    # t = RandomCBPerformanceTableau(numberOfCriteria=21,
-    #                                numberOfActions=13,
-    #                                weightDistribution='equiobjectives',
-    #                                IntegerWeights=True,
-    #                                NegativeWeights=False,
-    #                                missingDataProbability=0.05,
-    #                                seed=randomSeed,
-    #                                Debug=False)
+    t = RandomCBPerformanceTableau(numberOfCriteria=21,
+                                   numberOfActions=13,
+                                   weightDistribution='equiobjectives',
+                                   IntegerWeights=True,
+                                   NegativeWeights=False,
+                                   missingDataProbability=0.05,
+                                   seed=randomSeed,
+                                   Debug=False)
     # t.computeOutrankingConsensusQuality()
 #     t.showPerformanceTableau()
 #     t.computeMissingDataProportion(InPercents=False,Comments=True)

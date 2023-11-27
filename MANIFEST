@@ -6,6 +6,8 @@ digraphs.py
 perfTabs.py
 performanceQuantiles.py
 outrankingDigraphs.py
+mpOutrankingDigraphs.py
+sharedPerfTab.py
 sortingDigraphs.py
 ratingDigraphs.py
 votingProfiles.py

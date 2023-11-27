@@ -1060,7 +1060,7 @@ class SparseIntegerOutrankingDigraph(SparseIntegerDigraph,cPerformanceTableau):
     
     For other parameters settings, see the corresponding :py:class:`sortingDigraphs.QuantilesSortingDigraph` class.
 
-    Example python3.6 session:
+    Example python3.11 session:
 
     >>> from cRandPerfTabs import *
     >>> tp = cRandomCBPerformanceTableau(numberOfActions=1000,
@@ -2080,7 +2080,7 @@ class cQuantilesRankingDigraph(SparseIntegerOutrankingDigraph):
     
     For other parameters settings, see the corresponding :py:class:`sparseOutrankingDigraphs.PreRankedOutrankingDigraph` class.
 
-    Example python3.6 session:
+    Example python3.12 session:
 
     >>> from cRandPerfTabs import *
     >>> tp = cRandomCBPerformanceTableau(numberOfActions=1000,

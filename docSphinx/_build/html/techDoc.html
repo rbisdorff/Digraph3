@@ -6539,7 +6539,7 @@ with this program; if not, write to the Free Software Foundation, Inc.,
 <dl class="simple">
 <dt><em>Parameters</em>:</dt><dd><ul class="simple">
 <li><p><em>Normalized</em>: the valuation domain is set by default to the sum of the criteria weights. If <em>True</em>, the valuation domain is recoded to [-1.0,+1.0].</p></li>
-<li><p><em>ndigits</em>: number of decimal digits of the chracteristic valuation, by default set to 4.</p></li>
+<li><p><em>ndigits</em>: number of decimal digits of the characteristic valuation, by default set to 4.</p></li>
 <li><p><em>nbrCores</em>: controls the maximal number of cores that will be used in the multiprocessing phases. If <em>None</em> is given, the <em>os.cpu_count()</em> method is used in order to determine the number of available cores on the SMP machine.</p></li>
 <li><p><em>startMethod</em>: ‘spawn’ (default) | ‘forkserver’ | ‘fork’</p></li>
 <li><p>The given <em>PerformanceTableau</em> object is shared with the multiprocessing threads via importing a <em>sharedPerfTab.py</em> module stored in the current working directory and containing a saved <em>PerformanceTableau</em> object.</p></li>
@@ -13228,7 +13228,7 @@ of quantile equivalence classes which are linearly ordered by average quantile l
 which is restricted to the decision actions gathered in this quantile equivalence class.</p>
 <p>By default, the number of quantiles q is set to quartiles. However, the ranking quality and the best choice results get better with a finer grained quantiles decomposition.</p>
 <p>For other parameters settings, see the corresponding <a class="reference internal" href="#sortingDigraphs.QuantilesSortingDigraph" title="sortingDigraphs.QuantilesSortingDigraph"><code class="xref py py-class docutils literal notranslate"><span class="pre">sortingDigraphs.QuantilesSortingDigraph</span></code></a> class.</p>
-<p>Example python3.6 session:</p>
+<p>Example python3.11 session:</p>
 <div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">cRandPerfTabs</span> <span class="kn">import</span> <span class="o">*</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">tp</span> <span class="o">=</span> <span class="n">cRandomCBPerformanceTableau</span><span class="p">(</span><span class="n">numberOfActions</span><span class="o">=</span><span class="mi">1000</span><span class="p">,</span>
 <span class="gp">... </span>                          <span class="n">Threading</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span><span class="n">seed</span><span class="o">=</span><span class="mi">100</span><span class="p">)</span>
@@ -13528,7 +13528,7 @@ Components are stored in an ordered dictionary.</p>
 </dl>
 <p>By default, the number of quantiles q is set to quartiles. However, the ranking quality gets better with a finer grained quantiles decomposition.</p>
 <p>For other parameters settings, see the corresponding <a class="reference internal" href="#sparseOutrankingDigraphs.PreRankedOutrankingDigraph" title="sparseOutrankingDigraphs.PreRankedOutrankingDigraph"><code class="xref py py-class docutils literal notranslate"><span class="pre">sparseOutrankingDigraphs.PreRankedOutrankingDigraph</span></code></a> class.</p>
-<p>Example python3.6 session:</p>
+<p>Example python3.12 session:</p>
 <div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">cRandPerfTabs</span> <span class="kn">import</span> <span class="o">*</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">tp</span> <span class="o">=</span> <span class="n">cRandomCBPerformanceTableau</span><span class="p">(</span><span class="n">numberOfActions</span><span class="o">=</span><span class="mi">1000</span><span class="p">,</span>
 <span class="gp">... </span>                    <span class="n">Threading</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span><span class="n">seed</span><span class="o">=</span><span class="mi">100</span><span class="p">)</span>

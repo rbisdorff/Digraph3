@@ -243,6 +243,8 @@ arithmeticsTests:
 verboseArithmeticsTests:
 		cp arithmetics.py ${TESTDIR}/
 		(cd ${TESTDIR}; ${PYTEST} -vs ../pytestsArithmetics.py)
+mpTests:
+		(cd ${TESTDIR}; ${PYTHON} ../../mpOutrankingDigraphs.py) 
 
 cythonTests:
 		(cd cython; make tests)
