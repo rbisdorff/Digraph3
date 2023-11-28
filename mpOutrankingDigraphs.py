@@ -266,6 +266,68 @@ class MPBipolarOutrankingDigraph(BipolarOutrankingDigraph):
         runTimes['totalTime'] = time() - t0
         self.runTimes = runTimes
         self.startMeth = startMeth
+
+    def showPolarisations(self):       
+        """
+        Prints out all negative and positive polarised outranking situations observed in the *MPBipolarOutrankingDigraph* instance.
+        """
+        Max = self.valuationdomain['max']
+        Med = self.valuationdomain['med']
+        Min = self.valuationdomain['min']
+        lpdCount = self.largePerformanceDifferencesCount
+        relation = self.relation
+        try:
+            vetos = self.vetos
+        except:
+            vetos = []
+        print('*----  Polarisations ----*')
+        actionKeys = [a for a in self.actions]
+        n = len(actionKeys)
+        print('Considerable positive and negative performance differences')
+        print('Outranking situationa polarised to indeterminate')
+        print(' -----------------------------------------------')
+        count = 0
+        for i in range(n):
+            x = actionKeys[i]
+            for j in range(i+1,n):
+                y = actionKeys[j]
+                if lpdCount[x][y]['positive'] > 0 and \
+                   lpdCount[x][y]['negative'] < 0:
+                    count += 1
+                    print( 'relation[%s][%s] = %.2f' % (x,y,relation[x][y]),
+                           end= '; ' )
+                    print( 'relation[%s][%s] = %.2f' % (y,x,relation[y][x]) )
+        print('%d polarisations\n' % count)
+        print('Considerable positive performance differences')
+        print('Outranking situationa polarised')
+        print('*----------------------------------------------------*')
+        count = 0
+        for i in range(n):
+            x = actionKeys[i]
+            for j in range(i+1,n):
+                y = actionKeys[j]
+                if lpdCount[x][y]['positive'] > 0 and \
+                   lpdCount[x][y]['negative'] == 0:
+                    count += 1
+                    print( 'relation[%s][%s] = %.2f' % (x,y,relation[x][y]),
+                           end= '; ' )
+                    print( 'relation[%s][%s] = %.2f' % (y,x,relation[y][x]) )
+        print('%d polarisations\n' % count)
+        print('Considerable negative performance differences')
+        print('Outranking situations polarised')
+        print('*----------------------------------------------------*')
+        count = 0
+        for i in range(n):
+            x = actionKeys[i]
+            for j in range(i+1,n):
+                y = actionKeys[j]
+                if lpdCount[x][y]['positive'] == 0 and \
+                   lpdCount[x][y]['negative'] < 0:
+                    count += 1
+                    print( 'relation[%s][%s] = %.2f' % (x,y,relation[x][y]),
+                           end='; ' )
+                    print( 'relation[%s][%s] = %.2f' % (y,x,relation[y][x]) )
+        print('%d polarisations\n' % count)
         
 #-----------------
 
@@ -280,7 +342,7 @@ if __name__ == '__main__':
     print(pt)
     bg = MPBipolarOutrankingDigraph(Normalized=True,startMeth='spawn')
     print(bg)
-
+    bg.showPolarisations()
     print('*------------------*')
     print('If you see this line all tests were passed successfully :-)')
     print('Enjoy !')

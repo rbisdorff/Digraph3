@@ -601,7 +601,10 @@
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="#mpoutrankingdigraphs-module">2.8. mpOutrankingDigraphs module</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="#mpOutrankingDigraphs.MPBipolarOutrankingDigraph"><code class="docutils literal notranslate"><span class="pre">MPBipolarOutrankingDigraph</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#mpOutrankingDigraphs.MPBipolarOutrankingDigraph"><code class="docutils literal notranslate"><span class="pre">MPBipolarOutrankingDigraph</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#mpOutrankingDigraphs.MPBipolarOutrankingDigraph.showPolarisations"><code class="docutils literal notranslate"><span class="pre">MPBipolarOutrankingDigraph.showPolarisations()</span></code></a></li>
+</ul>
+</li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="#ratingdigraphs-module">2.9. ratingDigraphs module</a><ul>
@@ -6589,6 +6592,12 @@ with this program; if not, write to the Free Software Foundation, Inc.,
 <p class="admonition-title">Warning</p>
 <p>When using the <em>forkserver</em> or the <em>spawn</em> multiprocessing start-methods in a python script file, mind that both start-methods re-import into every multiprocessing thread the submitted program file. In order to avoid hence the program script from being recursively executed and producing loads of zombie threads before being killed by the OS, it is compulsory necessary to always explicitely protect the entry point of the main program code with the <em>if __name__ == ‘__main__’:</em> condition. This is not necessary when using instead the classical Unix <em>fork</em> start-method where multiprocessing threads continue in fact the main program code from the point on where they were launched.</p>
 </div>
+<dl class="py method">
+<dt class="sig sig-object py" id="mpOutrankingDigraphs.MPBipolarOutrankingDigraph.showPolarisations">
+<span class="sig-name descname"><span class="pre">showPolarisations</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/mpOutrankingDigraphs.html#MPBipolarOutrankingDigraph.showPolarisations"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#mpOutrankingDigraphs.MPBipolarOutrankingDigraph.showPolarisations" title="Link to this definition"></a></dt>
+<dd><p>Prints out all negative and positive polarised outranking situations observed in the <em>MPBipolarOutrankingDigraph</em> instance.</p>
+</dd></dl>
+
 </dd></dl>
 
 <hr class="docutils" />
