@@ -26,6 +26,7 @@ Copyright (C) 2023  Raymond Bisdorff
 __version__ = "Revision: Py3.12"
 
 import multiprocessing
+import os
 from time import time
 
 from sharedPerfTab import *

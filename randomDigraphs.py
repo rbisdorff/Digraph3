@@ -16,7 +16,7 @@ Copyright (C) 2015-2023  Raymond Bisdorff
 __version__ = "$Revision: 3.10 $"
 
 
-from digraphsTools import *
+#from digraphsTools import *
 from decimal import Decimal
 from collections import OrderedDict
 

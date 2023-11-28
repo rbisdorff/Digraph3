@@ -16,7 +16,7 @@ Copyright (C) 2011-2023  Raymond Bisdorff
 __version__ = "$Revision: Python 3.10 $"
 
 
-from digraphsTools import *
+# from digraphsTools import *
 from digraphs import *
 from linearOrders import *
 

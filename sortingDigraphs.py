@@ -26,8 +26,8 @@ Copyright (C) 2016-2023  Raymond Bisdorff.
 
 __version__ = "$Revision: Python 3.10"
 
-from digraphsTools import *
-from digraphs import *
+#from digraphsTools import *
+#from digraphs import *
 from outrankingDigraphs import *
 from sortingDigraphs import *
 #from multiprocessing import Process, active_children

@@ -19,7 +19,7 @@ __version__ = "$Revision: Python 3.10"
 from perfTabs import *
 import json
 import decimal
-from digraphsTools import *
+# from digraphsTools import *
 from decimal import Decimal
 from collections import OrderedDict
 from ast import literal_eval
@@ -293,7 +293,7 @@ The performance evaluations of each decision alternative on each criterion are g
         Verify if the given criteria[self]['weight'] are odd or not.
         Return a Boolen value.
         """
-        from digraphs import powerset
+        from digraphsTools import powerset
         criteria = self.criteria
         w = []
         for g in criteria:

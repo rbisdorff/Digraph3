@@ -3,7 +3,6 @@
 # pytest functions for the sortingDigraphs module
 # ..$python3 -m pip install pytest  # installing the pytest package
 ########################
-
 from digraphs import *
 from time import time
 

@@ -25,7 +25,7 @@ Copyright (C) 2006-2023  Raymond Bisdorff
 __version__ = "Branch: Python3.10 $"
 
 from digraphsTools import *
-from digraphs import *
+#from digraphs import *
 from perfTabs import *
 from randomPerfTabs import *
 
@@ -14976,10 +14976,10 @@ if __name__ == "__main__":
     print('*-------- Testing classes and methods -------')
 
     from time import time
-    from digraphsTools import *
+    #from digraphsTools import *
     from outrankingDigraphs import *
     from randomDigraphs import *
-    from decimal import *
+    from decimal import Decimal
     t = RandomPerformanceTableau(weightDistribution="equiobjectives",
                                  numberOfActions=10,numberOfCriteria=7,
                                              missingDataProbability=0.05,seed=2)
