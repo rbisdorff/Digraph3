@@ -433,12 +433,13 @@ class RandomWeakTournament(Digraph):
 class RandomPartialTournament(Digraph):
     """
     Specialization of the general Digraph class for generating
-    temporary partial tournaments.
+    temporary partial bipolar-valued tournaments.
 
     *Parameter*:
-       * order = n > 0
-       * If valuationDomain = None, valuation is normalized (in [-1.0,1.0])
-       * If is Crips = True, valuation is polarized to min and max values
+       * *order* := integer > 0 (default = 10)
+       * *ndigits* := integer (default = 2
+       * If *Crisp* = *True*, valuation domain is polarized to min (-1) and max (+1) values
+       * *missingRelationProbability* := 0 < float < 1 (default 0.3)
 
     """
 
@@ -476,8 +477,6 @@ class RandomPartialTournament(Digraph):
             rx = relation[x]
             for y in actions:
                 rx[y] = Med
-##        if seed is not None:
-##            random.seed(seed)
         actionsList = list(actions.keys())
         if Debug:
             print(actionsList)
@@ -530,9 +529,9 @@ class RandomTournament(Digraph):
     temporary complete tournaments.
 
     *Parameter*:
-       * order = n > 0
-       * If valuationDomain = None, valuation is normalized (in [-1.0,1.0])
-       * If is Crips = True, valuation is polarized to min and max values
+       * *order* := integer > 0
+       * If *valuationDomain* = *None*, valuation is normalized (in [-1.0,1.0])
+       * If is *Crisp* = True, valuation is polarized to min and max values
 
     """
 
@@ -845,7 +844,7 @@ class RandomGridDigraph(GridDigraph):
 
     Parameters:
         * n,m > 0;
-        * valuationdomain ={'min':-1 (default),'max': 1 (default)}.
+        * valuationdomain = {'min':-1 (default),'max': 1 (default)}.
 
     """
 

@@ -21,16 +21,16 @@
     <script src="../_static/js/html5shiv.min.js"></script>
   <![endif]-->
   
-        <script src="../_static/jquery.js?v=5d32c60e"></script>
-        <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-        <script src="../_static/documentation_options.js?v=e6f4c021"></script>
-        <script src="../_static/doctools.js?v=888ff710"></script>
-        <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
-        <script src="../_static/clipboard.min.js?v=a7894cd8"></script>
-        <script src="../_static/copybutton.js?v=15d7cbb8"></script>
-        <script src="../_static/js/hoverxref.js?v=82c55261"></script>
-        <script src="../_static/js/tooltipster.bundle.min.js?v=18bf091b"></script>
-        <script src="../_static/js/micromodal.min.js?v=04d6302d"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
+        <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+        <script src="../_static/doctools.js"></script>
+        <script src="../_static/sphinx_highlight.js"></script>
+        <script src="../_static/clipboard.min.js"></script>
+        <script src="../_static/copybutton.js"></script>
+        <script src="../_static/js/hoverxref.js"></script>
+        <script src="../_static/js/tooltipster.bundle.min.js"></script>
+        <script src="../_static/js/micromodal.min.js"></script>
     <script src="../_static/js/theme.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" /> 
@@ -182,9 +182,7 @@
 <span class="c1">#---------- general methods -----------------</span>
 
 <span class="c1"># sorting list of scored tuples</span>
-<div class="viewcode-block" id="scoredTuplesSort">
-<a class="viewcode-back" href="../techDoc.html#digraphsTools.scoredTuplesSort">[docs]</a>
-<span class="k">def</span> <span class="nf">scoredTuplesSort</span><span class="p">(</span><span class="n">tuples</span><span class="p">,</span><span class="n">reverse</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span><span class="n">InSite</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
+<div class="viewcode-block" id="scoredTuplesSort"><a class="viewcode-back" href="../techDoc.html#digraphsTools.scoredTuplesSort">[docs]</a><span class="k">def</span> <span class="nf">scoredTuplesSort</span><span class="p">(</span><span class="n">tuples</span><span class="p">,</span><span class="n">reverse</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span><span class="n">InSite</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot; </span>
 <span class="sd">    Sorting a list of scored tuples only on the scores with *key=itemgetter(0)*:</span>
 
@@ -203,12 +201,9 @@
         <span class="n">newTuples</span> <span class="o">=</span> <span class="n">deepcopy</span><span class="p">(</span><span class="n">tuples</span><span class="p">)</span>
         <span class="n">newTuples</span><span class="o">.</span><span class="n">sort</span><span class="p">(</span><span class="n">reverse</span><span class="o">=</span><span class="n">reverse</span><span class="p">,</span><span class="n">key</span><span class="o">=</span><span class="n">itemgetter</span><span class="p">(</span><span class="mi">0</span><span class="p">))</span>
         <span class="k">return</span> <span class="n">newTuples</span></div>
-
         
 <span class="c1"># Degfault quantile function from R</span>
-<div class="viewcode-block" id="quantile">
-<a class="viewcode-back" href="../techDoc.html#digraphsTools.quantile">[docs]</a>
-<span class="k">def</span> <span class="nf">quantile</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="n">p</span><span class="p">):</span>
+<div class="viewcode-block" id="quantile"><a class="viewcode-back" href="../techDoc.html#digraphsTools.quantile">[docs]</a><span class="k">def</span> <span class="nf">quantile</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="n">p</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    R type=7 (default) quantile function.</span>
 
@@ -227,14 +222,11 @@
     <span class="n">qp</span> <span class="o">=</span> <span class="n">x</span><span class="p">[</span><span class="n">j0</span><span class="p">]</span> <span class="o">+</span> <span class="n">jf</span><span class="o">*</span><span class="p">(</span><span class="n">x</span><span class="p">[</span><span class="n">j1</span><span class="p">]</span><span class="o">-</span><span class="n">x</span><span class="p">[</span><span class="n">j0</span><span class="p">])</span>
     <span class="k">return</span> <span class="n">qp</span></div>
 
-
 <span class="c1"># from High Performance Python M Gorelick &amp; I Ozswald</span>
 <span class="c1"># O&#39;Reilly 2014 p.27</span>
 <span class="kn">from</span> <span class="nn">functools</span> <span class="kn">import</span> <span class="n">wraps</span>
 <span class="kn">from</span> <span class="nn">time</span> <span class="kn">import</span> <span class="n">time</span>
-<div class="viewcode-block" id="timefn">
-<a class="viewcode-back" href="../techDoc.html#digraphsTools.timefn">[docs]</a>
-<span class="k">def</span> <span class="nf">timefn</span><span class="p">(</span><span class="n">fn</span><span class="p">):</span>
+<div class="viewcode-block" id="timefn"><a class="viewcode-back" href="../techDoc.html#digraphsTools.timefn">[docs]</a><span class="k">def</span> <span class="nf">timefn</span><span class="p">(</span><span class="n">fn</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    A decorator for automate run time measurements</span>
 <span class="sd">    from &quot;High Performance Python&quot; by  M Gorelick &amp; I Ozswald</span>
@@ -249,7 +241,6 @@
         <span class="k">return</span> <span class="n">result</span>
     <span class="k">return</span> <span class="n">measure_time</span></div>
 
-
 <span class="c1"># generate all permutations from a string or a list</span>
 <span class="c1"># From Michael Davies&#39;s recipe:</span>
 <span class="c1"># http://snippets.dzone.com/posts/show/753</span>
@@ -263,9 +254,7 @@
 
 <span class="c1"># generate all permutations from a weak linear order, i.e. a list of lists</span>
 <span class="c1"># recursive use of all_perms() on each equivalence class </span>
-<div class="viewcode-block" id="all_partial_perms">
-<a class="viewcode-back" href="../techDoc.html#digraphsTools.all_partial_perms">[docs]</a>
-<span class="k">def</span> <span class="nf">all_partial_perms</span><span class="p">(</span><span class="n">px</span><span class="p">):</span>
+<div class="viewcode-block" id="all_partial_perms"><a class="viewcode-back" href="../techDoc.html#digraphsTools.all_partial_perms">[docs]</a><span class="k">def</span> <span class="nf">all_partial_perms</span><span class="p">(</span><span class="n">px</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Yields all permutations obtained from a list of lists.</span>
 
@@ -287,12 +276,9 @@
         <span class="k">for</span> <span class="n">perm</span> <span class="ow">in</span> <span class="n">all_perms</span><span class="p">(</span><span class="n">px</span><span class="p">[</span><span class="mi">0</span><span class="p">]):</span>
             <span class="k">for</span> <span class="n">partperm</span> <span class="ow">in</span> <span class="n">all_partial_perms</span><span class="p">(</span><span class="n">px</span><span class="p">[</span><span class="mi">1</span><span class="p">:]):</span>
                 <span class="k">yield</span> <span class="n">perm</span> <span class="o">+</span> <span class="n">partperm</span></div>
-
                 
 <span class="c1">#symmetric average fusion operator</span>
-<div class="viewcode-block" id="symmetricAverage">
-<a class="viewcode-back" href="../techDoc.html#digraphsTools.symmetricAverage">[docs]</a>
-<span class="k">def</span> <span class="nf">symmetricAverage</span><span class="p">(</span><span class="n">Med</span><span class="p">,</span><span class="n">L</span><span class="p">,</span><span class="n">weights</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span><span class="n">Debug</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+<div class="viewcode-block" id="symmetricAverage"><a class="viewcode-back" href="../techDoc.html#digraphsTools.symmetricAverage">[docs]</a><span class="k">def</span> <span class="nf">symmetricAverage</span><span class="p">(</span><span class="n">Med</span><span class="p">,</span><span class="n">L</span><span class="p">,</span><span class="n">weights</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span><span class="n">Debug</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    [Weighted] symmetric average data fusion for bipolar outranking characteristics</span>
 <span class="sd">    computation: Med is the valuation domain median and L is a list of</span>
@@ -341,11 +327,8 @@
     <span class="k">else</span><span class="p">:</span>
         <span class="k">return</span> <span class="n">Med</span></div>
 
-
 <span class="c1">#epistemic or symmetric disjunction operator</span>
-<div class="viewcode-block" id="omax">
-<a class="viewcode-back" href="../techDoc.html#digraphsTools.omax">[docs]</a>
-<span class="k">def</span> <span class="nf">omax</span><span class="p">(</span><span class="n">Med</span><span class="p">,</span><span class="n">L</span><span class="p">,</span> <span class="n">Debug</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+<div class="viewcode-block" id="omax"><a class="viewcode-back" href="../techDoc.html#digraphsTools.omax">[docs]</a><span class="k">def</span> <span class="nf">omax</span><span class="p">(</span><span class="n">Med</span><span class="p">,</span><span class="n">L</span><span class="p">,</span> <span class="n">Debug</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Epistemic **disjunction** for bipolar outranking characteristics</span>
 <span class="sd">    computation: Med is the valuation domain median and L is a list of</span>
@@ -383,11 +366,8 @@
     <span class="k">else</span><span class="p">:</span>
         <span class="k">return</span> <span class="n">Med</span></div>
 
-
 <span class="c1"># epistemic or symmetric conjunction operator</span>
-<div class="viewcode-block" id="omin">
-<a class="viewcode-back" href="../techDoc.html#digraphsTools.omin">[docs]</a>
-<span class="k">def</span> <span class="nf">omin</span><span class="p">(</span><span class="n">Med</span><span class="p">,</span><span class="n">L</span><span class="p">,</span> <span class="n">Debug</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+<div class="viewcode-block" id="omin"><a class="viewcode-back" href="../techDoc.html#digraphsTools.omin">[docs]</a><span class="k">def</span> <span class="nf">omin</span><span class="p">(</span><span class="n">Med</span><span class="p">,</span><span class="n">L</span><span class="p">,</span> <span class="n">Debug</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Epistemic **conjunction** of a list L of bipolar outranking characteristics.</span>
 <span class="sd">    Med is the given valuation domain median.</span>
@@ -424,13 +404,10 @@
     <span class="k">else</span><span class="p">:</span>
         <span class="k">return</span> <span class="n">Med</span></div>
 
-
 <span class="c1"># generate all subsets of a given set E</span>
 <span class="c1"># Discrete Mathematics BINFO 1 course Lesson 2-sets</span>
 <span class="c1"># RB October 2009 (recursive version)</span>
-<div class="viewcode-block" id="powerset">
-<a class="viewcode-back" href="../techDoc.html#digraphsTools.powerset">[docs]</a>
-<span class="k">def</span> <span class="nf">powerset</span><span class="p">(</span><span class="n">S</span><span class="p">):</span>
+<div class="viewcode-block" id="powerset"><a class="viewcode-back" href="../techDoc.html#digraphsTools.powerset">[docs]</a><span class="k">def</span> <span class="nf">powerset</span><span class="p">(</span><span class="n">S</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Power set generator iterator.</span>
 
@@ -445,7 +422,6 @@
         <span class="k">for</span> <span class="n">X</span> <span class="ow">in</span> <span class="n">powerset</span><span class="p">(</span><span class="n">E</span><span class="p">):</span>
             <span class="k">yield</span> <span class="nb">set</span><span class="p">([</span><span class="n">e</span><span class="p">])</span> <span class="o">|</span> <span class="n">X</span>
             <span class="k">yield</span> <span class="n">X</span></div>
-
 
 <span class="c1"># generate the Gray code of length n by middle reflection</span>
 <span class="c1"># RB Feb 2017</span>
@@ -467,9 +443,7 @@
     <span class="k">return</span> <span class="n">G</span>
 
 <span class="c1">#@timefn</span>
-<div class="viewcode-block" id="generateGrayCode">
-<a class="viewcode-back" href="../techDoc.html#digraphsTools.generateGrayCode">[docs]</a>
-<span class="k">def</span> <span class="nf">generateGrayCode</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
+<div class="viewcode-block" id="generateGrayCode"><a class="viewcode-back" href="../techDoc.html#digraphsTools.generateGrayCode">[docs]</a><span class="k">def</span> <span class="nf">generateGrayCode</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Knuth ACP (4) 7.2.1.1. p.6</span>
 <span class="sd">    Algorithm G</span>
@@ -494,11 +468,8 @@
         <span class="k">else</span><span class="p">:</span>
             <span class="k">break</span></div>
 
-
 <span class="c1">#@timefn</span>
-<div class="viewcode-block" id="generateLooplessGrayCode">
-<a class="viewcode-back" href="../techDoc.html#digraphsTools.generateLooplessGrayCode">[docs]</a>
-<span class="k">def</span> <span class="nf">generateLooplessGrayCode</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
+<div class="viewcode-block" id="generateLooplessGrayCode"><a class="viewcode-back" href="../techDoc.html#digraphsTools.generateLooplessGrayCode">[docs]</a><span class="k">def</span> <span class="nf">generateLooplessGrayCode</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Knuth ACP (4) 7.2.1.1. p.7</span>
 <span class="sd">    Algorithm L</span>
@@ -518,10 +489,7 @@
             <span class="n">f</span><span class="p">[</span><span class="n">j</span><span class="o">+</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="n">j</span><span class="o">+</span><span class="mi">1</span>
         <span class="n">a</span><span class="p">[</span><span class="n">j</span><span class="p">]</span> <span class="o">=</span> <span class="mi">1</span> <span class="o">-</span> <span class="n">a</span><span class="p">[</span><span class="n">j</span><span class="p">]</span></div>
 
-
-<div class="viewcode-block" id="generateBipolarGrayCode">
-<a class="viewcode-back" href="../techDoc.html#digraphsTools.generateBipolarGrayCode">[docs]</a>
-<span class="k">def</span> <span class="nf">generateBipolarGrayCode</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
+<div class="viewcode-block" id="generateBipolarGrayCode"><a class="viewcode-back" href="../techDoc.html#digraphsTools.generateBipolarGrayCode">[docs]</a><span class="k">def</span> <span class="nf">generateBipolarGrayCode</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Bipolar version of generateGrayCode.</span>
 <span class="sd">    X is a partially determined -1 vector.</span>
@@ -545,11 +513,8 @@
         <span class="k">else</span><span class="p">:</span>
             <span class="k">break</span></div>
 
-
 <span class="c1"># generate random samples of DNA sequences</span>
-<div class="viewcode-block" id="generateRandomSequence">
-<a class="viewcode-back" href="../techDoc.html#digraphsTools.generateRandomSequence">[docs]</a>
-<span class="k">def</span> <span class="nf">generateRandomSequence</span><span class="p">(</span><span class="n">length</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span><span class="n">alphabet</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;A&#39;</span><span class="p">,</span><span class="s1">&#39;C&#39;</span><span class="p">,</span><span class="s1">&#39;G&#39;</span><span class="p">,</span><span class="s1">&#39;T&#39;</span><span class="p">]):</span>
+<div class="viewcode-block" id="generateRandomSequence"><a class="viewcode-back" href="../techDoc.html#digraphsTools.generateRandomSequence">[docs]</a><span class="k">def</span> <span class="nf">generateRandomSequence</span><span class="p">(</span><span class="n">length</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span><span class="n">alphabet</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;A&#39;</span><span class="p">,</span><span class="s1">&#39;C&#39;</span><span class="p">,</span><span class="s1">&#39;G&#39;</span><span class="p">,</span><span class="s1">&#39;T&#39;</span><span class="p">]):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    A generator for random samples of sequences</span>
 <span class="sd">    given a certain alphabet (DNA by default).</span>
@@ -560,11 +525,8 @@
     <span class="n">seq</span> <span class="o">=</span> <span class="n">sample</span><span class="p">(</span><span class="n">alphabet</span><span class="p">,</span><span class="n">counts</span><span class="o">=</span><span class="n">counts</span><span class="p">,</span><span class="n">k</span><span class="o">=</span><span class="n">length</span><span class="p">)</span>
     <span class="k">return</span> <span class="n">seq</span></div>
 
-
 <span class="c1"># compute DNA sequences alignment with the Needleman-Wunsch algorithm</span>
-<div class="viewcode-block" id="computeSequenceAlignment">
-<a class="viewcode-back" href="../techDoc.html#digraphsTools.computeSequenceAlignment">[docs]</a>
-<span class="k">def</span> <span class="nf">computeSequenceAlignment</span><span class="p">(</span><span class="n">seqA</span><span class="p">,</span><span class="n">seqB</span><span class="p">,</span><span class="n">match</span><span class="o">=-</span><span class="mi">1</span><span class="p">,</span><span class="n">mispen</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span>
+<div class="viewcode-block" id="computeSequenceAlignment"><a class="viewcode-back" href="../techDoc.html#digraphsTools.computeSequenceAlignment">[docs]</a><span class="k">def</span> <span class="nf">computeSequenceAlignment</span><span class="p">(</span><span class="n">seqA</span><span class="p">,</span><span class="n">seqB</span><span class="p">,</span><span class="n">match</span><span class="o">=-</span><span class="mi">1</span><span class="p">,</span><span class="n">mispen</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span>
                              <span class="n">gappen</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span><span class="n">skwpen</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span>
                              <span class="n">Comments</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span><span class="n">Debug</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
@@ -726,12 +688,9 @@
     <span class="k">return</span> <span class="p">{</span><span class="s1">&#39;aout&#39;</span><span class="p">:</span> <span class="n">aout</span><span class="p">,</span> <span class="s1">&#39;bout&#39;</span><span class="p">:</span><span class="n">bout</span><span class="p">,</span>
             <span class="s1">&#39;summary&#39;</span><span class="p">:</span> <span class="n">summary</span><span class="p">,</span> <span class="s1">&#39;sumCosts&#39;</span><span class="p">:</span> <span class="n">sumCosts</span><span class="p">}</span></div>
 
-
 <span class="c1"># KMP pattern matching algorithm</span>
 
-<div class="viewcode-block" id="kmpMatch">
-<a class="viewcode-back" href="../techDoc.html#digraphsTools.kmpMatch">[docs]</a>
-<span class="k">def</span> <span class="nf">kmpMatch</span><span class="p">(</span><span class="n">haystack</span><span class="p">,</span><span class="n">needle</span><span class="p">,</span><span class="n">Comments</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span><span class="n">Debug</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+<div class="viewcode-block" id="kmpMatch"><a class="viewcode-back" href="../techDoc.html#digraphsTools.kmpMatch">[docs]</a><span class="k">def</span> <span class="nf">kmpMatch</span><span class="p">(</span><span class="n">haystack</span><span class="p">,</span><span class="n">needle</span><span class="p">,</span><span class="n">Comments</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span><span class="n">Debug</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Knuth Morris Pratt string matching algorithm</span>
 <span class="sd">    https://en.wikipedia.org/wiki/Knuth%E2%80%93Morris%E2%80%93Pratt_algorithm</span>
@@ -811,12 +770,9 @@
     <span class="k">if</span> <span class="n">Comments</span><span class="p">:</span>
         <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;needle starting index positions in haystack:&#39;</span><span class="p">,</span><span class="n">P</span><span class="p">)</span>
     <span class="k">return</span> <span class="n">P</span></div>
-
       
 <span class="c1"># transforms a ranking into a list of singletons</span>
-<div class="viewcode-block" id="ranking2preorder">
-<a class="viewcode-back" href="../techDoc.html#digraphsTools.ranking2preorder">[docs]</a>
-<span class="k">def</span> <span class="nf">ranking2preorder</span><span class="p">(</span><span class="n">R</span><span class="p">):</span>
+<div class="viewcode-block" id="ranking2preorder"><a class="viewcode-back" href="../techDoc.html#digraphsTools.ranking2preorder">[docs]</a><span class="k">def</span> <span class="nf">ranking2preorder</span><span class="p">(</span><span class="n">R</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Transforms a ranking (list from best to worst) into</span>
 <span class="sd">    a preorder (a list of lists from worst to best)</span>
@@ -831,14 +787,11 @@
     <span class="n">preorder</span> <span class="o">=</span> <span class="p">[[</span><span class="n">x</span><span class="p">]</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="nb">reversed</span><span class="p">(</span><span class="n">R</span><span class="p">)]</span>
     <span class="k">return</span> <span class="n">preorder</span></div>
 
-
 <span class="c1"># flattens a list of lists into a flat list</span>
 <span class="kn">import</span> <span class="nn">itertools</span> <span class="k">as</span> <span class="nn">IT</span>
 <span class="kn">from</span> <span class="nn">collections</span> <span class="kn">import</span> <span class="n">abc</span>
 
-<div class="viewcode-block" id="flatten">
-<a class="viewcode-back" href="../techDoc.html#digraphsTools.flatten">[docs]</a>
-<span class="k">def</span> <span class="nf">flatten</span><span class="p">(</span><span class="n">iterable</span><span class="p">,</span> <span class="n">ltypes</span><span class="o">=</span><span class="n">abc</span><span class="o">.</span><span class="n">Iterable</span><span class="p">):</span>
+<div class="viewcode-block" id="flatten"><a class="viewcode-back" href="../techDoc.html#digraphsTools.flatten">[docs]</a><span class="k">def</span> <span class="nf">flatten</span><span class="p">(</span><span class="n">iterable</span><span class="p">,</span> <span class="n">ltypes</span><span class="o">=</span><span class="n">abc</span><span class="o">.</span><span class="n">Iterable</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Flattens a list of lists into a flat list.</span>
 
@@ -861,10 +814,7 @@
         <span class="k">except</span><span class="p">:</span>
             <span class="k">break</span></div>
 
-
-<div class="viewcode-block" id="total_size">
-<a class="viewcode-back" href="../techDoc.html#digraphsTools.total_size">[docs]</a>
-<span class="k">def</span> <span class="nf">total_size</span><span class="p">(</span><span class="n">o</span><span class="p">,</span> <span class="n">handlers</span><span class="o">=</span><span class="p">{},</span> <span class="n">verbose</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+<div class="viewcode-block" id="total_size"><a class="viewcode-back" href="../techDoc.html#digraphsTools.total_size">[docs]</a><span class="k">def</span> <span class="nf">total_size</span><span class="p">(</span><span class="n">o</span><span class="p">,</span> <span class="n">handlers</span><span class="o">=</span><span class="p">{},</span> <span class="n">verbose</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot; Returns the approximate memory footprint of an object and all of its contents.</span>
 
 <span class="sd">    Automatically finds the contents of the following containers and</span>
@@ -926,7 +876,6 @@
         <span class="k">return</span> <span class="n">s</span>
 
     <span class="k">return</span> <span class="n">sizeof</span><span class="p">(</span><span class="n">o</span><span class="p">)</span></div>
-
 
     
 
