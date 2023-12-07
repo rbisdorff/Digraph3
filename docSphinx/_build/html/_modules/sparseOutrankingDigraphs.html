@@ -21,16 +21,16 @@
     <script src="../_static/js/html5shiv.min.js"></script>
   <![endif]-->
   
-        <script src="../_static/jquery.js"></script>
-        <script src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
-        <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
-        <script src="../_static/doctools.js"></script>
-        <script src="../_static/sphinx_highlight.js"></script>
-        <script src="../_static/clipboard.min.js"></script>
-        <script src="../_static/copybutton.js"></script>
-        <script src="../_static/js/hoverxref.js"></script>
-        <script src="../_static/js/tooltipster.bundle.min.js"></script>
-        <script src="../_static/js/micromodal.min.js"></script>
+        <script src="../_static/jquery.js?v=5d32c60e"></script>
+        <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script src="../_static/documentation_options.js?v=e6f4c021"></script>
+        <script src="../_static/doctools.js?v=888ff710"></script>
+        <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+        <script src="../_static/clipboard.min.js?v=a7894cd8"></script>
+        <script src="../_static/copybutton.js?v=15d7cbb8"></script>
+        <script src="../_static/js/hoverxref.js?v=82c55261"></script>
+        <script src="../_static/js/tooltipster.bundle.min.js?v=18bf091b"></script>
+        <script src="../_static/js/micromodal.min.js?v=04d6302d"></script>
     <script src="../_static/js/theme.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" /> 
@@ -126,7 +126,9 @@
 <span class="kn">from</span> <span class="nn">decimal</span> <span class="kn">import</span> <span class="n">Decimal</span>
 <span class="kn">from</span> <span class="nn">sparseOutrankingDigraphs</span> <span class="kn">import</span> <span class="o">*</span>
 
-<div class="viewcode-block" id="SparseOutrankingDigraph"><a class="viewcode-back" href="../techDoc.html#sparseOutrankingDigraphs.SparseOutrankingDigraph">[docs]</a><span class="k">class</span> <span class="nc">SparseOutrankingDigraph</span><span class="p">(</span><span class="n">BipolarOutrankingDigraph</span><span class="p">):</span>
+<div class="viewcode-block" id="SparseOutrankingDigraph">
+<a class="viewcode-back" href="../techDoc.html#sparseOutrankingDigraphs.SparseOutrankingDigraph">[docs]</a>
+<span class="k">class</span> <span class="nc">SparseOutrankingDigraph</span><span class="p">(</span><span class="n">BipolarOutrankingDigraph</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Abstract root class for linearly decomposed sparse digraphs.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
@@ -174,7 +176,9 @@
             <span class="k">pass</span>
         <span class="k">return</span> <span class="n">reprString</span>
 
-<div class="viewcode-block" id="SparseOutrankingDigraph.relation"><a class="viewcode-back" href="../techDoc.html#sparseOutrankingDigraphs.SparseOutrankingDigraph.relation">[docs]</a>    <span class="k">def</span> <span class="nf">relation</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">x</span><span class="p">,</span><span class="n">y</span><span class="p">,</span><span class="n">Debug</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+<div class="viewcode-block" id="SparseOutrankingDigraph.relation">
+<a class="viewcode-back" href="../techDoc.html#sparseOutrankingDigraphs.SparseOutrankingDigraph.relation">[docs]</a>
+    <span class="k">def</span> <span class="nf">relation</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">x</span><span class="p">,</span><span class="n">y</span><span class="p">,</span><span class="n">Debug</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Dynamic construction of the global outranking characteristic function *r(x S y)*.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
@@ -194,7 +198,10 @@
         <span class="k">else</span><span class="p">:</span>
             <span class="k">return</span> <span class="n">Max</span></div>
 
-<div class="viewcode-block" id="SparseOutrankingDigraph.computeDeterminateness"><a class="viewcode-back" href="../techDoc.html#sparseOutrankingDigraphs.SparseOutrankingDigraph.computeDeterminateness">[docs]</a>    <span class="k">def</span> <span class="nf">computeDeterminateness</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+
+<div class="viewcode-block" id="SparseOutrankingDigraph.computeDeterminateness">
+<a class="viewcode-back" href="../techDoc.html#sparseOutrankingDigraphs.SparseOutrankingDigraph.computeDeterminateness">[docs]</a>
+    <span class="k">def</span> <span class="nf">computeDeterminateness</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Computes the Kendalll distance in % of self</span>
 <span class="sd">        with the all median valued (indeterminate) digraph.</span>
@@ -212,7 +219,10 @@
         <span class="n">deter</span> <span class="o">=</span> <span class="p">(</span> <span class="n">Decimal</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">deter</span><span class="p">))</span> <span class="o">/</span> <span class="n">Decimal</span><span class="p">(</span><span class="nb">str</span><span class="p">((</span><span class="n">order</span> <span class="o">*</span> <span class="p">(</span><span class="n">order</span><span class="o">-</span><span class="mi">1</span><span class="p">))))</span> <span class="p">)</span>
         <span class="k">return</span> <span class="n">deter</span><span class="o">/</span><span class="p">(</span><span class="n">Decimal</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">Max</span><span class="o">-</span><span class="n">Med</span><span class="p">)))</span><span class="o">*</span><span class="n">Decimal</span><span class="p">(</span><span class="s1">&#39;100&#39;</span><span class="p">)</span></div>
 
-<div class="viewcode-block" id="SparseOutrankingDigraph.computeOrderCorrelation"><a class="viewcode-back" href="../techDoc.html#sparseOutrankingDigraphs.SparseOutrankingDigraph.computeOrderCorrelation">[docs]</a>    <span class="k">def</span> <span class="nf">computeOrderCorrelation</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">order</span><span class="p">,</span> <span class="n">Debug</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+
+<div class="viewcode-block" id="SparseOutrankingDigraph.computeOrderCorrelation">
+<a class="viewcode-back" href="../techDoc.html#sparseOutrankingDigraphs.SparseOutrankingDigraph.computeOrderCorrelation">[docs]</a>
+    <span class="k">def</span> <span class="nf">computeOrderCorrelation</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">order</span><span class="p">,</span> <span class="n">Debug</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Renders the ordinal correlation K of a sparse digraph instance</span>
 <span class="sd">        when compared with a given linear order (from worst to best) of its actions</span>
@@ -278,6 +288,7 @@
             <span class="k">return</span> <span class="p">{</span> <span class="s1">&#39;correlation&#39;</span><span class="p">:</span> <span class="mf">0.0</span><span class="p">,</span>\
                      <span class="s1">&#39;determination&#39;</span><span class="p">:</span> <span class="mf">0.0</span> <span class="p">}</span></div>
 
+
     <span class="k">def</span> <span class="nf">estimateRankingCorrelation</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">sampleSize</span><span class="o">=</span><span class="mi">100</span><span class="p">,</span><span class="n">seed</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span><span class="n">Debug</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
         <span class="kn">import</span> <span class="nn">random</span>
         <span class="n">random</span><span class="o">.</span><span class="n">seed</span><span class="p">(</span><span class="n">seed</span><span class="p">)</span>
@@ -297,7 +308,9 @@
         <span class="n">corr</span> <span class="o">=</span> <span class="n">pg</span><span class="o">.</span><span class="n">computeRankingCorrelation</span><span class="p">(</span><span class="n">preRankedSample</span><span class="p">)</span>
         <span class="k">return</span> <span class="n">corr</span>
 
-<div class="viewcode-block" id="SparseOutrankingDigraph.sortingRelation"><a class="viewcode-back" href="../techDoc.html#sparseOutrankingDigraphs.SparseOutrankingDigraph.sortingRelation">[docs]</a>    <span class="k">def</span> <span class="nf">sortingRelation</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">x</span><span class="p">,</span><span class="n">y</span><span class="p">,</span><span class="n">Debug</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+<div class="viewcode-block" id="SparseOutrankingDigraph.sortingRelation">
+<a class="viewcode-back" href="../techDoc.html#sparseOutrankingDigraphs.SparseOutrankingDigraph.sortingRelation">[docs]</a>
+    <span class="k">def</span> <span class="nf">sortingRelation</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">x</span><span class="p">,</span><span class="n">y</span><span class="p">,</span><span class="n">Debug</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Dynamic construction of the quantiles sorting characteristic function *r(x QS y)*.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
@@ -317,7 +330,10 @@
         <span class="k">else</span><span class="p">:</span>
             <span class="k">return</span> <span class="n">Max</span></div>
 
-<div class="viewcode-block" id="SparseOutrankingDigraph.showRelationMap"><a class="viewcode-back" href="../techDoc.html#sparseOutrankingDigraphs.SparseOutrankingDigraph.showRelationMap">[docs]</a>    <span class="k">def</span> <span class="nf">showRelationMap</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">fromIndex</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span><span class="n">toIndex</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+
+<div class="viewcode-block" id="SparseOutrankingDigraph.showRelationMap">
+<a class="viewcode-back" href="../techDoc.html#sparseOutrankingDigraphs.SparseOutrankingDigraph.showRelationMap">[docs]</a>
+    <span class="k">def</span> <span class="nf">showRelationMap</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">fromIndex</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span><span class="n">toIndex</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
                         <span class="n">symbols</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span><span class="n">actionsList</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Prints on the console, in text map format, the location of</span>
@@ -438,7 +454,10 @@
         <span class="k">else</span><span class="p">:</span>
             <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;List of actions provided.&#39;</span><span class="p">)</span></div>
 
-<div class="viewcode-block" id="SparseOutrankingDigraph.showHTMLMarginalQuantileLimits"><a class="viewcode-back" href="../techDoc.html#sparseOutrankingDigraphs.SparseOutrankingDigraph.showHTMLMarginalQuantileLimits">[docs]</a>    <span class="k">def</span> <span class="nf">showHTMLMarginalQuantileLimits</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">htmlFileName</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+
+<div class="viewcode-block" id="SparseOutrankingDigraph.showHTMLMarginalQuantileLimits">
+<a class="viewcode-back" href="../techDoc.html#sparseOutrankingDigraphs.SparseOutrankingDigraph.showHTMLMarginalQuantileLimits">[docs]</a>
+    <span class="k">def</span> <span class="nf">showHTMLMarginalQuantileLimits</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">htmlFileName</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        shows the marginal quantiles limits.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
@@ -450,7 +469,10 @@
                                         <span class="n">title</span><span class="o">=</span><span class="s1">&#39;Marginal performance quantiles&#39;</span><span class="p">,</span>
                                         <span class="n">htmlFileName</span><span class="o">=</span><span class="n">htmlFileName</span><span class="p">)</span></div>
 
-<div class="viewcode-block" id="SparseOutrankingDigraph.showHTMLRelationMap"><a class="viewcode-back" href="../techDoc.html#sparseOutrankingDigraphs.SparseOutrankingDigraph.showHTMLRelationMap">[docs]</a>    <span class="k">def</span> <span class="nf">showHTMLRelationMap</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">actionsSubset</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+
+<div class="viewcode-block" id="SparseOutrankingDigraph.showHTMLRelationMap">
+<a class="viewcode-back" href="../techDoc.html#sparseOutrankingDigraphs.SparseOutrankingDigraph.showHTMLRelationMap">[docs]</a>
+    <span class="k">def</span> <span class="nf">showHTMLRelationMap</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">actionsSubset</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
                             <span class="n">Colored</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
                             <span class="n">tableTitle</span><span class="o">=</span><span class="s1">&#39;Relation Map&#39;</span><span class="p">,</span>
                             <span class="n">relationName</span><span class="o">=</span><span class="s1">&#39;r(x S y)&#39;</span><span class="p">,</span>
@@ -479,6 +501,7 @@
         <span class="n">url</span> <span class="o">=</span> <span class="s1">&#39;file://&#39;</span><span class="o">+</span><span class="n">fileName</span>
         <span class="n">webbrowser</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="n">url</span><span class="p">,</span><span class="n">new</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span></div>
 
+
     <span class="k">def</span> <span class="nf">_showHTMLRelationTable</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Not yet availbale !</span>
@@ -487,7 +510,9 @@
         <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Try instead: self.showRelationTable()&#39;</span><span class="p">)</span>
 
 
-<div class="viewcode-block" id="SparseOutrankingDigraph.showHTMLRelationTable"><a class="viewcode-back" href="../techDoc.html#sparseOutrankingDigraphs.SparseOutrankingDigraph.showHTMLRelationTable">[docs]</a>    <span class="k">def</span> <span class="nf">showHTMLRelationTable</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">actionsList</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+<div class="viewcode-block" id="SparseOutrankingDigraph.showHTMLRelationTable">
+<a class="viewcode-back" href="../techDoc.html#sparseOutrankingDigraphs.SparseOutrankingDigraph.showHTMLRelationTable">[docs]</a>
+    <span class="k">def</span> <span class="nf">showHTMLRelationTable</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">actionsList</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
                               <span class="c1">#relation=None,</span>
                               <span class="n">IntegerValues</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
                               <span class="n">ndigits</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span>
@@ -523,6 +548,7 @@
         <span class="n">fo</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
         <span class="n">url</span> <span class="o">=</span> <span class="s1">&#39;file://&#39;</span><span class="o">+</span><span class="n">fileName</span>
         <span class="n">webbrowser</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="n">url</span><span class="p">,</span><span class="n">new</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>     </div>
+
         
     <span class="k">def</span> <span class="nf">_htmlRelationTable</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">tableTitle</span><span class="o">=</span><span class="s1">&#39;Valued Sparse Relation Table&#39;</span><span class="p">,</span>
                            <span class="c1">#relation=None,</span>
@@ -687,7 +713,9 @@
         <span class="k">return</span> <span class="n">s</span>
 
         
-<div class="viewcode-block" id="SparseOutrankingDigraph.htmlRelationMap"><a class="viewcode-back" href="../techDoc.html#sparseOutrankingDigraphs.SparseOutrankingDigraph.htmlRelationMap">[docs]</a>    <span class="k">def</span> <span class="nf">htmlRelationMap</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">actionsSubset</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+<div class="viewcode-block" id="SparseOutrankingDigraph.htmlRelationMap">
+<a class="viewcode-back" href="../techDoc.html#sparseOutrankingDigraphs.SparseOutrankingDigraph.htmlRelationMap">[docs]</a>
+    <span class="k">def</span> <span class="nf">htmlRelationMap</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">actionsSubset</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
                           <span class="n">tableTitle</span><span class="o">=</span><span class="s1">&#39;Relation Map&#39;</span><span class="p">,</span>
                           <span class="n">relationName</span><span class="o">=</span><span class="s1">&#39;r(x R y)&#39;</span><span class="p">,</span>
                           <span class="n">symbols</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;+&#39;</span><span class="p">,</span><span class="s1">&#39;&amp;middot;&#39;</span><span class="p">,</span><span class="s1">&#39;&amp;nbsp;&#39;</span><span class="p">,</span><span class="s1">&#39;-&#39;</span><span class="p">,</span><span class="s1">&#39;_&#39;</span><span class="p">],</span>
@@ -789,7 +817,10 @@
         <span class="n">s</span> <span class="o">+=</span> <span class="s1">&#39;&lt;/html&gt;</span><span class="se">\n</span><span class="s1">&#39;</span>
         <span class="k">return</span> <span class="n">s</span></div>
 
-<div class="viewcode-block" id="SparseOutrankingDigraph.computeOrdinalCorrelation"><a class="viewcode-back" href="../techDoc.html#sparseOutrankingDigraphs.SparseOutrankingDigraph.computeOrdinalCorrelation">[docs]</a>    <span class="k">def</span> <span class="nf">computeOrdinalCorrelation</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">other</span><span class="p">,</span> <span class="n">Debug</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+
+<div class="viewcode-block" id="SparseOutrankingDigraph.computeOrdinalCorrelation">
+<a class="viewcode-back" href="../techDoc.html#sparseOutrankingDigraphs.SparseOutrankingDigraph.computeOrdinalCorrelation">[docs]</a>
+    <span class="k">def</span> <span class="nf">computeOrdinalCorrelation</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">other</span><span class="p">,</span> <span class="n">Debug</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Renders the ordinal correlation K of a SpareOutrakingDigraph instance</span>
 <span class="sd">        when compared with a given compatible (same actions set) other Digraph instance.</span>
@@ -861,7 +892,10 @@
             <span class="k">return</span> <span class="p">{</span><span class="s1">&#39;correlation&#39;</span><span class="p">:</span> <span class="n">Decimal</span><span class="p">(</span><span class="s1">&#39;0.0&#39;</span><span class="p">),</span>\
                     <span class="s1">&#39;determination&#39;</span><span class="p">:</span> <span class="n">determination</span><span class="p">}</span></div>
 
-<div class="viewcode-block" id="SparseOutrankingDigraph.showDecomposition"><a class="viewcode-back" href="../techDoc.html#sparseOutrankingDigraphs.SparseOutrankingDigraph.showDecomposition">[docs]</a>    <span class="k">def</span> <span class="nf">showDecomposition</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">direction</span><span class="o">=</span><span class="s1">&#39;decreasing&#39;</span><span class="p">):</span>
+
+<div class="viewcode-block" id="SparseOutrankingDigraph.showDecomposition">
+<a class="viewcode-back" href="../techDoc.html#sparseOutrankingDigraphs.SparseOutrankingDigraph.showDecomposition">[docs]</a>
+    <span class="k">def</span> <span class="nf">showDecomposition</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">direction</span><span class="o">=</span><span class="s1">&#39;decreasing&#39;</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Prints on the console the decomposition structure of the sparse outranking digraph instance</span>
 <span class="sd">        in *decreasing* (default) or *increasing* preference direction.</span>
@@ -881,7 +915,10 @@
             <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;</span><span class="si">%s</span><span class="s1">: </span><span class="si">%s</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="n">compKey</span><span class="p">,</span><span class="n">actions</span><span class="p">))</span></div>
 
 
-<div class="viewcode-block" id="SparseOutrankingDigraph.computeDecompositionSummaryStatistics"><a class="viewcode-back" href="../techDoc.html#sparseOutrankingDigraphs.SparseOutrankingDigraph.computeDecompositionSummaryStatistics">[docs]</a>    <span class="k">def</span> <span class="nf">computeDecompositionSummaryStatistics</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+
+<div class="viewcode-block" id="SparseOutrankingDigraph.computeDecompositionSummaryStatistics">
+<a class="viewcode-back" href="../techDoc.html#sparseOutrankingDigraphs.SparseOutrankingDigraph.computeDecompositionSummaryStatistics">[docs]</a>
+    <span class="k">def</span> <span class="nf">computeDecompositionSummaryStatistics</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Returns the summary of the distribution of the length of</span>
 <span class="sd">        the components as follows::</span>
@@ -913,7 +950,10 @@
                    <span class="s1">&#39;fillrate&#39;</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">fillRate</span><span class="p">}</span>
         <span class="k">return</span> <span class="n">summary</span></div>
 
-<div class="viewcode-block" id="SparseOutrankingDigraph.recodeValuation"><a class="viewcode-back" href="../techDoc.html#sparseOutrankingDigraphs.SparseOutrankingDigraph.recodeValuation">[docs]</a>    <span class="k">def</span> <span class="nf">recodeValuation</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">newMin</span><span class="o">=-</span><span class="mi">1</span><span class="p">,</span><span class="n">newMax</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span><span class="n">Debug</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+
+<div class="viewcode-block" id="SparseOutrankingDigraph.recodeValuation">
+<a class="viewcode-back" href="../techDoc.html#sparseOutrankingDigraphs.SparseOutrankingDigraph.recodeValuation">[docs]</a>
+    <span class="k">def</span> <span class="nf">recodeValuation</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">newMin</span><span class="o">=-</span><span class="mi">1</span><span class="p">,</span><span class="n">newMax</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span><span class="n">Debug</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Specialization for recoding the valuation of all the partial digraphs and the component relation.</span>
 <span class="sd">        By default the valuation domain is normalized to [-1;1]</span>
@@ -941,7 +981,10 @@
         <span class="n">Med</span> <span class="o">=</span> <span class="p">(</span><span class="n">Min</span><span class="o">+</span><span class="n">Max</span><span class="p">)</span><span class="o">/</span><span class="n">Decimal</span><span class="p">(</span><span class="s1">&#39;2&#39;</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">valuationdomain</span> <span class="o">=</span> <span class="p">{</span> <span class="s1">&#39;min&#39;</span><span class="p">:</span><span class="n">Min</span><span class="p">,</span> <span class="s1">&#39;max&#39;</span><span class="p">:</span><span class="n">Max</span><span class="p">,</span> <span class="s1">&#39;med&#39;</span><span class="p">:</span><span class="n">Med</span> <span class="p">}</span></div>
 
-<div class="viewcode-block" id="SparseOutrankingDigraph.ranking2Preorder"><a class="viewcode-back" href="../techDoc.html#sparseOutrankingDigraphs.SparseOutrankingDigraph.ranking2Preorder">[docs]</a>    <span class="k">def</span> <span class="nf">ranking2Preorder</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">ranking</span><span class="p">):</span>
+
+<div class="viewcode-block" id="SparseOutrankingDigraph.ranking2Preorder">
+<a class="viewcode-back" href="../techDoc.html#sparseOutrankingDigraphs.SparseOutrankingDigraph.ranking2Preorder">[docs]</a>
+    <span class="k">def</span> <span class="nf">ranking2Preorder</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">ranking</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Renders a preordering (a list of list) of a ranking (best to worst) of decision actions in increasing preference direction.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
@@ -950,14 +993,20 @@
         <span class="n">preordering</span> <span class="o">=</span> <span class="p">[[</span><span class="n">x</span><span class="p">]</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="nb">reversed</span><span class="p">(</span><span class="n">ranking</span><span class="p">)]</span>
         <span class="k">return</span> <span class="n">preordering</span></div>
 
-<div class="viewcode-block" id="SparseOutrankingDigraph.ordering2Preorder"><a class="viewcode-back" href="../techDoc.html#sparseOutrankingDigraphs.SparseOutrankingDigraph.ordering2Preorder">[docs]</a>    <span class="k">def</span> <span class="nf">ordering2Preorder</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">ordering</span><span class="p">):</span>
+
+<div class="viewcode-block" id="SparseOutrankingDigraph.ordering2Preorder">
+<a class="viewcode-back" href="../techDoc.html#sparseOutrankingDigraphs.SparseOutrankingDigraph.ordering2Preorder">[docs]</a>
+    <span class="k">def</span> <span class="nf">ordering2Preorder</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">ordering</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Renders a preordering (a list of list) of a linar order (worst to best) of decision actions in increasing preference direction.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">preordering</span> <span class="o">=</span> <span class="p">[[</span><span class="n">x</span><span class="p">]</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">ordering</span><span class="p">]</span>
         <span class="k">return</span> <span class="n">preordering</span></div>
 
-<div class="viewcode-block" id="SparseOutrankingDigraph.computeFillRate"><a class="viewcode-back" href="../techDoc.html#sparseOutrankingDigraphs.SparseOutrankingDigraph.computeFillRate">[docs]</a>    <span class="k">def</span> <span class="nf">computeFillRate</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+
+<div class="viewcode-block" id="SparseOutrankingDigraph.computeFillRate">
+<a class="viewcode-back" href="../techDoc.html#sparseOutrankingDigraphs.SparseOutrankingDigraph.computeFillRate">[docs]</a>
+    <span class="k">def</span> <span class="nf">computeFillRate</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Renders the sum of the squares (without diagonal) of the orders of the component&#39;s subgraphs</span>
 <span class="sd">        over the square (without diagonal) of the big digraph order.</span>
@@ -966,7 +1015,10 @@
                         <span class="k">for</span> <span class="n">comp</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">components</span><span class="o">.</span><span class="n">values</span><span class="p">())</span>
         <span class="k">return</span> <span class="n">fillRate</span><span class="o">/</span><span class="p">(</span> <span class="bp">self</span><span class="o">.</span><span class="n">order</span><span class="o">*</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">order</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span> <span class="p">)</span></div>
 
-<div class="viewcode-block" id="SparseOutrankingDigraph.exportGraphViz"><a class="viewcode-back" href="../techDoc.html#sparseOutrankingDigraphs.SparseOutrankingDigraph.exportGraphViz">[docs]</a>    <span class="k">def</span> <span class="nf">exportGraphViz</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">fileName</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+
+<div class="viewcode-block" id="SparseOutrankingDigraph.exportGraphViz">
+<a class="viewcode-back" href="../techDoc.html#sparseOutrankingDigraphs.SparseOutrankingDigraph.exportGraphViz">[docs]</a>
+    <span class="k">def</span> <span class="nf">exportGraphViz</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">fileName</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
                         <span class="n">actionsSubset</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
                         <span class="n">direction</span><span class="o">=</span><span class="s1">&#39;decreasing&#39;</span><span class="p">,</span>
                        <span class="n">Comments</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span><span class="n">graphType</span><span class="o">=</span><span class="s1">&#39;pdf&#39;</span><span class="p">,</span>
@@ -989,7 +1041,10 @@
                                    <span class="n">Debug</span><span class="o">=</span><span class="n">Debug</span><span class="p">)</span></div>
 
 
-<div class="viewcode-block" id="SparseOutrankingDigraph.exportSortingGraphViz"><a class="viewcode-back" href="../techDoc.html#sparseOutrankingDigraphs.SparseOutrankingDigraph.exportSortingGraphViz">[docs]</a>    <span class="k">def</span> <span class="nf">exportSortingGraphViz</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">fileName</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+
+<div class="viewcode-block" id="SparseOutrankingDigraph.exportSortingGraphViz">
+<a class="viewcode-back" href="../techDoc.html#sparseOutrankingDigraphs.SparseOutrankingDigraph.exportSortingGraphViz">[docs]</a>
+    <span class="k">def</span> <span class="nf">exportSortingGraphViz</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">fileName</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
                               <span class="n">actionsSubset</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
                               <span class="n">direction</span><span class="o">=</span><span class="s1">&#39;decreasing&#39;</span><span class="p">,</span>
                               <span class="n">Comments</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span><span class="n">graphType</span><span class="o">=</span><span class="s1">&#39;pdf&#39;</span><span class="p">,</span>
@@ -1191,7 +1246,10 @@
                 <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;graphViz tools not avalaible! Please check installation.&#39;</span><span class="p">)</span></div>
 
 
-<div class="viewcode-block" id="SparseOutrankingDigraph.showRubisBestChoiceRecommendation"><a class="viewcode-back" href="../techDoc.html#sparseOutrankingDigraphs.SparseOutrankingDigraph.showRubisBestChoiceRecommendation">[docs]</a>    <span class="k">def</span> <span class="nf">showRubisBestChoiceRecommendation</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">Comments</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+
+<div class="viewcode-block" id="SparseOutrankingDigraph.showRubisBestChoiceRecommendation">
+<a class="viewcode-back" href="../techDoc.html#sparseOutrankingDigraphs.SparseOutrankingDigraph.showRubisBestChoiceRecommendation">[docs]</a>
+    <span class="k">def</span> <span class="nf">showRubisBestChoiceRecommendation</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">Comments</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
                                      <span class="n">ChoiceVector</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
                                      <span class="n">Debug</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
@@ -1201,7 +1259,10 @@
                                      <span class="n">ChoiceVector</span><span class="o">=</span><span class="n">ChoiceVector</span><span class="p">,</span>
                                      <span class="n">Debug</span><span class="o">=</span><span class="n">Debug</span><span class="p">)</span></div>
 
-<div class="viewcode-block" id="SparseOutrankingDigraph.showBestChoiceRecommendation"><a class="viewcode-back" href="../techDoc.html#sparseOutrankingDigraphs.SparseOutrankingDigraph.showBestChoiceRecommendation">[docs]</a>    <span class="k">def</span> <span class="nf">showBestChoiceRecommendation</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">Comments</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+
+<div class="viewcode-block" id="SparseOutrankingDigraph.showBestChoiceRecommendation">
+<a class="viewcode-back" href="../techDoc.html#sparseOutrankingDigraphs.SparseOutrankingDigraph.showBestChoiceRecommendation">[docs]</a>
+    <span class="k">def</span> <span class="nf">showBestChoiceRecommendation</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">Comments</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
                                      <span class="n">ChoiceVector</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
                                      <span class="n">Debug</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
@@ -1240,6 +1301,7 @@
             <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;***********************&#39;</span><span class="p">)</span>
             <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Worst choice recommendation:&#39;</span><span class="p">)</span>
             <span class="nb">print</span><span class="p">(</span><span class="s1">&#39; * Choice:  </span><span class="se">\&#39;</span><span class="si">%s</span><span class="se">\&#39;</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="n">actionsNames</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span> <span class="p">)</span></div>
+
 
 
     <span class="k">def</span> <span class="nf">_showRubisBestChoiceRecommendation</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">g0</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
@@ -1479,6 +1541,7 @@
             <span class="n">gn</span><span class="o">.</span><span class="n">notGamma</span> <span class="o">=</span> <span class="n">gn</span><span class="o">.</span><span class="n">notGammaSets</span><span class="p">()</span></div>
 
 
+
 <span class="c1">########################</span>
 <span class="c1"># multiprocessing workers</span>
 <span class="k">def</span> <span class="nf">_worker</span><span class="p">(</span><span class="nb">input</span><span class="p">):</span>
@@ -1527,7 +1590,9 @@
 
 
 
-<div class="viewcode-block" id="PreRankedOutrankingDigraph"><a class="viewcode-back" href="../techDoc.html#sparseOutrankingDigraphs.PreRankedOutrankingDigraph">[docs]</a><span class="k">class</span> <span class="nc">PreRankedOutrankingDigraph</span><span class="p">(</span><span class="n">SparseOutrankingDigraph</span><span class="p">,</span><span class="n">PerformanceTableau</span><span class="p">):</span>
+<div class="viewcode-block" id="PreRankedOutrankingDigraph">
+<a class="viewcode-back" href="../techDoc.html#sparseOutrankingDigraphs.PreRankedOutrankingDigraph">[docs]</a>
+<span class="k">class</span> <span class="nc">PreRankedOutrankingDigraph</span><span class="p">(</span><span class="n">SparseOutrankingDigraph</span><span class="p">,</span><span class="n">PerformanceTableau</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Main class for the multiprocessing implementation of sparse outranking digraphs.</span>
 
@@ -1910,7 +1975,9 @@
             <span class="nb">print</span><span class="p">(</span><span class="n">componentsIntervals</span><span class="p">)</span>
         <span class="k">return</span> <span class="n">componentsIntervals</span>
 
-<div class="viewcode-block" id="PreRankedOutrankingDigraph.computeActionCategories"><a class="viewcode-back" href="../techDoc.html#sparseOutrankingDigraphs.PreRankedOutrankingDigraph.computeActionCategories">[docs]</a>    <span class="k">def</span> <span class="nf">computeActionCategories</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">action</span><span class="p">,</span><span class="n">Show</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+<div class="viewcode-block" id="PreRankedOutrankingDigraph.computeActionCategories">
+<a class="viewcode-back" href="../techDoc.html#sparseOutrankingDigraphs.PreRankedOutrankingDigraph.computeActionCategories">[docs]</a>
+    <span class="k">def</span> <span class="nf">computeActionCategories</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">action</span><span class="p">,</span><span class="n">Show</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
                                 <span class="n">Debug</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span><span class="n">Comments</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
                                 <span class="n">Threading</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span><span class="n">nbrOfCPUs</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
@@ -1986,7 +2053,10 @@
 
 
 
-<div class="viewcode-block" id="PreRankedOutrankingDigraph.computeCriterion2RankingCorrelation"><a class="viewcode-back" href="../techDoc.html#sparseOutrankingDigraphs.PreRankedOutrankingDigraph.computeCriterion2RankingCorrelation">[docs]</a>    <span class="k">def</span> <span class="nf">computeCriterion2RankingCorrelation</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">criterion</span><span class="p">,</span><span class="n">Threading</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+
+<div class="viewcode-block" id="PreRankedOutrankingDigraph.computeCriterion2RankingCorrelation">
+<a class="viewcode-back" href="../techDoc.html#sparseOutrankingDigraphs.PreRankedOutrankingDigraph.computeCriterion2RankingCorrelation">[docs]</a>
+    <span class="k">def</span> <span class="nf">computeCriterion2RankingCorrelation</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">criterion</span><span class="p">,</span><span class="n">Threading</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
                                     <span class="n">nbrOfCPUs</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span><span class="n">Debug</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
                                     <span class="n">Comments</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
@@ -2006,7 +2076,10 @@
             <span class="nb">print</span><span class="p">(</span><span class="n">corr</span><span class="p">)</span>
         <span class="k">return</span> <span class="n">corr</span></div>
 
-<div class="viewcode-block" id="PreRankedOutrankingDigraph.computeMarginalVersusGlobalRankingCorrelations"><a class="viewcode-back" href="../techDoc.html#sparseOutrankingDigraphs.PreRankedOutrankingDigraph.computeMarginalVersusGlobalRankingCorrelations">[docs]</a>    <span class="k">def</span> <span class="nf">computeMarginalVersusGlobalRankingCorrelations</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">Sorted</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+
+<div class="viewcode-block" id="PreRankedOutrankingDigraph.computeMarginalVersusGlobalRankingCorrelations">
+<a class="viewcode-back" href="../techDoc.html#sparseOutrankingDigraphs.PreRankedOutrankingDigraph.computeMarginalVersusGlobalRankingCorrelations">[docs]</a>
+    <span class="k">def</span> <span class="nf">computeMarginalVersusGlobalRankingCorrelations</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">Sorted</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
                                                        <span class="n">ValuedCorrelation</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
                                                        <span class="n">Threading</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span><span class="n">nbrCores</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
                                                        <span class="n">Comments</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
@@ -2060,7 +2133,10 @@
             <span class="n">criteriaCorrelation</span><span class="o">.</span><span class="n">sort</span><span class="p">(</span><span class="n">reverse</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span><span class="n">key</span><span class="o">=</span><span class="n">itemgetter</span><span class="p">(</span><span class="mi">0</span><span class="p">))</span>
         <span class="k">return</span> <span class="n">criteriaCorrelation</span></div>
 
-<div class="viewcode-block" id="PreRankedOutrankingDigraph.showMarginalVersusGlobalRankingCorrelation"><a class="viewcode-back" href="../techDoc.html#sparseOutrankingDigraphs.PreRankedOutrankingDigraph.showMarginalVersusGlobalRankingCorrelation">[docs]</a>    <span class="k">def</span> <span class="nf">showMarginalVersusGlobalRankingCorrelation</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">Sorted</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+
+<div class="viewcode-block" id="PreRankedOutrankingDigraph.showMarginalVersusGlobalRankingCorrelation">
+<a class="viewcode-back" href="../techDoc.html#sparseOutrankingDigraphs.PreRankedOutrankingDigraph.showMarginalVersusGlobalRankingCorrelation">[docs]</a>
+    <span class="k">def</span> <span class="nf">showMarginalVersusGlobalRankingCorrelation</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">Sorted</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
                                                       <span class="n">Threading</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
                                                       <span class="n">nbrOfCPUs</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span><span class="n">Comments</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
@@ -2085,7 +2161,10 @@
                 <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;</span><span class="si">%9s</span><span class="s1"> |  </span><span class="si">%.2f</span><span class="s1"> </span><span class="se">\t</span><span class="s1"> </span><span class="si">%.3f</span><span class="s1"> </span><span class="se">\t</span><span class="s1"> </span><span class="si">%.3f</span><span class="s1"> </span><span class="se">\t</span><span class="s1"> </span><span class="si">%.3f</span><span class="s1">&#39;</span> \
                       <span class="o">%</span> <span class="p">(</span><span class="n">c</span><span class="p">,</span><span class="n">criteria</span><span class="p">[</span><span class="n">c</span><span class="p">][</span><span class="s1">&#39;weight&#39;</span><span class="p">],</span><span class="n">x</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span><span class="n">x</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span><span class="n">x</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">*</span><span class="n">x</span><span class="p">[</span><span class="mi">1</span><span class="p">]))</span></div>
 
-<div class="viewcode-block" id="PreRankedOutrankingDigraph.showActionSortingResult"><a class="viewcode-back" href="../techDoc.html#sparseOutrankingDigraphs.PreRankedOutrankingDigraph.showActionSortingResult">[docs]</a>    <span class="k">def</span> <span class="nf">showActionSortingResult</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">action</span><span class="p">):</span>
+
+<div class="viewcode-block" id="PreRankedOutrankingDigraph.showActionSortingResult">
+<a class="viewcode-back" href="../techDoc.html#sparseOutrankingDigraphs.PreRankedOutrankingDigraph.showActionSortingResult">[docs]</a>
+    <span class="k">def</span> <span class="nf">showActionSortingResult</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">action</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        shows the quantiles sorting result all (default) of a subset of the decision actions.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
@@ -2099,6 +2178,7 @@
                                                 <span class="n">res</span><span class="p">[</span><span class="n">categ</span><span class="p">][</span><span class="s1">&#39;lowLimit&#39;</span><span class="p">],</span>
                                                 <span class="n">res</span><span class="p">[</span><span class="n">categ</span><span class="p">][</span><span class="s1">&#39;notHighLimit&#39;</span><span class="p">]</span> <span class="p">)</span> <span class="p">)</span></div>
 
+
 <span class="c1">##    def showActionsSortingResult(self,actionsSubset=None):</span>
 <span class="c1">##        &quot;&quot;&quot;</span>
 <span class="c1">##        shows the quantiles sorting result all (default) of a subset of the decision actions.</span>
@@ -2111,7 +2191,9 @@
 <span class="c1">##            for x in actionsSubset:</span>
 <span class="c1">##                self.computeActionCategories(x,Show=True)</span>
 
-<div class="viewcode-block" id="PreRankedOutrankingDigraph.showShort"><a class="viewcode-back" href="../techDoc.html#sparseOutrankingDigraphs.PreRankedOutrankingDigraph.showShort">[docs]</a>    <span class="k">def</span> <span class="nf">showShort</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">fileName</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span><span class="n">WithFileSize</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
+<div class="viewcode-block" id="PreRankedOutrankingDigraph.showShort">
+<a class="viewcode-back" href="../techDoc.html#sparseOutrankingDigraphs.PreRankedOutrankingDigraph.showShort">[docs]</a>
+    <span class="k">def</span> <span class="nf">showShort</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">fileName</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span><span class="n">WithFileSize</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Default (__repr__) presentation method for big outranking digraphs instances:</span>
 
@@ -2190,7 +2272,10 @@
                 <span class="k">pass</span>
             <span class="n">fo</span><span class="o">.</span><span class="n">close</span><span class="p">()</span></div>
 
-<div class="viewcode-block" id="PreRankedOutrankingDigraph.showActions"><a class="viewcode-back" href="../techDoc.html#sparseOutrankingDigraphs.PreRankedOutrankingDigraph.showActions">[docs]</a>    <span class="k">def</span> <span class="nf">showActions</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+
+<div class="viewcode-block" id="PreRankedOutrankingDigraph.showActions">
+<a class="viewcode-back" href="../techDoc.html#sparseOutrankingDigraphs.PreRankedOutrankingDigraph.showActions">[docs]</a>
+    <span class="k">def</span> <span class="nf">showActions</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Prints out the actions disctionary.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
@@ -2212,7 +2297,10 @@
             <span class="k">except</span><span class="p">:</span>
                 <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;</span><span class="si">%s</span><span class="s1">: </span><span class="si">%s</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="n">ax</span><span class="p">)</span></div>
 
-<div class="viewcode-block" id="PreRankedOutrankingDigraph.showCriteria"><a class="viewcode-back" href="../techDoc.html#sparseOutrankingDigraphs.PreRankedOutrankingDigraph.showCriteria">[docs]</a>    <span class="k">def</span> <span class="nf">showCriteria</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">IntegerWeights</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span><span class="n">Debug</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+
+<div class="viewcode-block" id="PreRankedOutrankingDigraph.showCriteria">
+<a class="viewcode-back" href="../techDoc.html#sparseOutrankingDigraphs.PreRankedOutrankingDigraph.showCriteria">[docs]</a>
+    <span class="k">def</span> <span class="nf">showCriteria</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">IntegerWeights</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span><span class="n">Debug</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        print Criteria with thresholds and weights.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
@@ -2247,13 +2335,19 @@
                 <span class="k">pass</span>
             <span class="nb">print</span><span class="p">()</span></div>
 
+
     <span class="k">def</span> <span class="nf">showCriteriaQuantiles</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">showPerformanceTableau</span><span class="p">(</span><span class="n">actionsSubset</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">profiles</span><span class="p">)</span>
 
-<div class="viewcode-block" id="PreRankedOutrankingDigraph.showComponents"><a class="viewcode-back" href="../techDoc.html#sparseOutrankingDigraphs.PreRankedOutrankingDigraph.showComponents">[docs]</a>    <span class="k">def</span> <span class="nf">showComponents</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">direction</span><span class="o">=</span><span class="s1">&#39;increasing&#39;</span><span class="p">):</span>
+<div class="viewcode-block" id="PreRankedOutrankingDigraph.showComponents">
+<a class="viewcode-back" href="../techDoc.html#sparseOutrankingDigraphs.PreRankedOutrankingDigraph.showComponents">[docs]</a>
+    <span class="k">def</span> <span class="nf">showComponents</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">direction</span><span class="o">=</span><span class="s1">&#39;increasing&#39;</span><span class="p">):</span>
         <span class="n">SparseOutrankingDigraph</span><span class="o">.</span><span class="n">showDecomposition</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">direction</span><span class="o">=</span><span class="n">direction</span><span class="p">)</span></div>
 
-<div class="viewcode-block" id="PreRankedOutrankingDigraph.showDecomposition"><a class="viewcode-back" href="../techDoc.html#sparseOutrankingDigraphs.PreRankedOutrankingDigraph.showDecomposition">[docs]</a>    <span class="k">def</span> <span class="nf">showDecomposition</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">direction</span><span class="o">=</span><span class="s1">&#39;decreasing&#39;</span><span class="p">):</span>
+
+<div class="viewcode-block" id="PreRankedOutrankingDigraph.showDecomposition">
+<a class="viewcode-back" href="../techDoc.html#sparseOutrankingDigraphs.PreRankedOutrankingDigraph.showDecomposition">[docs]</a>
+    <span class="k">def</span> <span class="nf">showDecomposition</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">direction</span><span class="o">=</span><span class="s1">&#39;decreasing&#39;</span><span class="p">):</span>
 
         <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;*--- quantiles decomposition in </span><span class="si">%s</span><span class="s1"> order---*&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="n">direction</span><span class="p">)</span> <span class="p">)</span>
         <span class="c1">#compKeys = [compKey for compKey in self.components.keys()]</span>
@@ -2271,7 +2365,10 @@
                   <span class="o">%</span> <span class="p">(</span><span class="n">compKey</span><span class="p">,</span><span class="n">comp</span><span class="p">[</span><span class="s1">&#39;lowQtileLimit&#39;</span><span class="p">],</span>
                      <span class="n">comp</span><span class="p">[</span><span class="s1">&#39;highQtileLimit&#39;</span><span class="p">],</span><span class="n">actions</span><span class="p">))</span></div>
 
-<div class="viewcode-block" id="PreRankedOutrankingDigraph.computeCategoryContents"><a class="viewcode-back" href="../techDoc.html#sparseOutrankingDigraphs.PreRankedOutrankingDigraph.computeCategoryContents">[docs]</a>    <span class="k">def</span> <span class="nf">computeCategoryContents</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">Reverse</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span><span class="n">Comments</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+
+<div class="viewcode-block" id="PreRankedOutrankingDigraph.computeCategoryContents">
+<a class="viewcode-back" href="../techDoc.html#sparseOutrankingDigraphs.PreRankedOutrankingDigraph.computeCategoryContents">[docs]</a>
+    <span class="k">def</span> <span class="nf">computeCategoryContents</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">Reverse</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span><span class="n">Comments</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
                                 <span class="n">StoreSorting</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
                                 <span class="n">Threading</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span><span class="n">nbrOfCPUs</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
@@ -2295,7 +2392,10 @@
 
         <span class="k">return</span> <span class="n">categoryContent</span></div>
 
-<div class="viewcode-block" id="PreRankedOutrankingDigraph.showSorting"><a class="viewcode-back" href="../techDoc.html#sparseOutrankingDigraphs.PreRankedOutrankingDigraph.showSorting">[docs]</a>    <span class="k">def</span> <span class="nf">showSorting</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">Descending</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+
+<div class="viewcode-block" id="PreRankedOutrankingDigraph.showSorting">
+<a class="viewcode-back" href="../techDoc.html#sparseOutrankingDigraphs.PreRankedOutrankingDigraph.showSorting">[docs]</a>
+    <span class="k">def</span> <span class="nf">showSorting</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">Descending</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
                     <span class="n">isReturningHTML</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span><span class="n">Debug</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Shows sorting results in decreasing or increasing (Reverse=False)</span>
@@ -2343,6 +2443,7 @@
             <span class="n">html</span> <span class="o">+=</span> <span class="s1">&#39;&lt;/table&gt;&#39;</span>
             <span class="k">return</span> <span class="n">html</span></div>
 
+
 <span class="c1">##    def showHTMLRelationTable(self):</span>
 <span class="c1">##        &quot;&quot;&quot;</span>
 <span class="c1">##        Not yet availbale !</span>
@@ -2350,7 +2451,9 @@
 <span class="c1">##        print(&#39;Method not yet implemented for This class of digraphs!&#39;)</span>
 <span class="c1">##        print(&#39;Try instead: self.showRelationTable()&#39;)</span>
 
-<div class="viewcode-block" id="PreRankedOutrankingDigraph.showRelationTable"><a class="viewcode-back" href="../techDoc.html#sparseOutrankingDigraphs.PreRankedOutrankingDigraph.showRelationTable">[docs]</a>    <span class="k">def</span> <span class="nf">showRelationTable</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">compKeys</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+<div class="viewcode-block" id="PreRankedOutrankingDigraph.showRelationTable">
+<a class="viewcode-back" href="../techDoc.html#sparseOutrankingDigraphs.PreRankedOutrankingDigraph.showRelationTable">[docs]</a>
+    <span class="k">def</span> <span class="nf">showRelationTable</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">compKeys</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Specialized for showing the quantiles decomposed relation table.</span>
 <span class="sd">        Components are stored in an ordered dictionary.</span>
@@ -2379,7 +2482,10 @@
                     <span class="n">pg</span><span class="o">.</span><span class="n">showRelationTable</span><span class="p">()</span></div>
 
 
-<div class="viewcode-block" id="PreRankedOutrankingDigraph.computeBoostedRanking"><a class="viewcode-back" href="../techDoc.html#sparseOutrankingDigraphs.PreRankedOutrankingDigraph.computeBoostedRanking">[docs]</a>    <span class="k">def</span> <span class="nf">computeBoostedRanking</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">rankingRule</span><span class="o">=</span><span class="s1">&#39;Copeland&#39;</span><span class="p">):</span>
+
+<div class="viewcode-block" id="PreRankedOutrankingDigraph.computeBoostedRanking">
+<a class="viewcode-back" href="../techDoc.html#sparseOutrankingDigraphs.PreRankedOutrankingDigraph.computeBoostedRanking">[docs]</a>
+    <span class="k">def</span> <span class="nf">computeBoostedRanking</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">rankingRule</span><span class="o">=</span><span class="s1">&#39;Copeland&#39;</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Renders an ordred list of decision actions ranked in</span>
 <span class="sd">        decreasing preference direction following the rankingRule</span>
@@ -2403,7 +2509,10 @@
                 <span class="n">ranking</span> <span class="o">+=</span> <span class="n">opg</span><span class="o">.</span><span class="n">kohlerRanking</span>
         <span class="k">return</span> <span class="n">ranking</span></div>
 
-<div class="viewcode-block" id="PreRankedOutrankingDigraph.computeBoostedOrdering"><a class="viewcode-back" href="../techDoc.html#sparseOutrankingDigraphs.PreRankedOutrankingDigraph.computeBoostedOrdering">[docs]</a>    <span class="k">def</span> <span class="nf">computeBoostedOrdering</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">orderingRule</span><span class="o">=</span><span class="s1">&#39;Copeland&#39;</span><span class="p">):</span>
+
+<div class="viewcode-block" id="PreRankedOutrankingDigraph.computeBoostedOrdering">
+<a class="viewcode-back" href="../techDoc.html#sparseOutrankingDigraphs.PreRankedOutrankingDigraph.computeBoostedOrdering">[docs]</a>
+    <span class="k">def</span> <span class="nf">computeBoostedOrdering</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">orderingRule</span><span class="o">=</span><span class="s1">&#39;Copeland&#39;</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Renders an ordred list of decision actions ranked in</span>
 <span class="sd">        increasing preference direction following the orderingRule</span>
@@ -2413,7 +2522,10 @@
         <span class="n">ranking</span><span class="o">.</span><span class="n">reverse</span><span class="p">()</span>
         <span class="k">return</span> <span class="n">ranking</span></div>
 
-<div class="viewcode-block" id="PreRankedOutrankingDigraph.actionRank"><a class="viewcode-back" href="../techDoc.html#sparseOutrankingDigraphs.PreRankedOutrankingDigraph.actionRank">[docs]</a>    <span class="k">def</span> <span class="nf">actionRank</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">action</span><span class="p">,</span><span class="n">ranking</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+
+<div class="viewcode-block" id="PreRankedOutrankingDigraph.actionRank">
+<a class="viewcode-back" href="../techDoc.html#sparseOutrankingDigraphs.PreRankedOutrankingDigraph.actionRank">[docs]</a>
+    <span class="k">def</span> <span class="nf">actionRank</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">action</span><span class="p">,</span><span class="n">ranking</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Renders the rank of a decision action in a given ranking</span>
 
@@ -2423,7 +2535,10 @@
             <span class="n">ranking</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">boostedRanking</span>
         <span class="k">return</span> <span class="n">ranking</span><span class="o">.</span><span class="n">index</span><span class="p">(</span><span class="n">action</span><span class="p">)</span> <span class="o">+</span><span class="mi">1</span></div>
 
-<div class="viewcode-block" id="PreRankedOutrankingDigraph.actionOrder"><a class="viewcode-back" href="../techDoc.html#sparseOutrankingDigraphs.PreRankedOutrankingDigraph.actionOrder">[docs]</a>    <span class="k">def</span> <span class="nf">actionOrder</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">action</span><span class="p">,</span><span class="n">ordering</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+
+<div class="viewcode-block" id="PreRankedOutrankingDigraph.actionOrder">
+<a class="viewcode-back" href="../techDoc.html#sparseOutrankingDigraphs.PreRankedOutrankingDigraph.actionOrder">[docs]</a>
+    <span class="k">def</span> <span class="nf">actionOrder</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">action</span><span class="p">,</span><span class="n">ordering</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Renders the order of a decision action in a given ordering</span>
 
@@ -2433,7 +2548,10 @@
             <span class="n">ordering</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">boostedOrder</span>
         <span class="k">return</span> <span class="n">ordering</span><span class="o">.</span><span class="n">index</span><span class="p">(</span><span class="n">action</span><span class="p">)</span> <span class="o">+</span><span class="mi">1</span></div>
 
-<div class="viewcode-block" id="PreRankedOutrankingDigraph.computeNewSortingCharacteristics"><a class="viewcode-back" href="../techDoc.html#sparseOutrankingDigraphs.PreRankedOutrankingDigraph.computeNewSortingCharacteristics">[docs]</a>    <span class="k">def</span> <span class="nf">computeNewSortingCharacteristics</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">actions</span><span class="p">,</span> <span class="n">relation</span><span class="p">,</span> <span class="n">Comments</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+
+<div class="viewcode-block" id="PreRankedOutrankingDigraph.computeNewSortingCharacteristics">
+<a class="viewcode-back" href="../techDoc.html#sparseOutrankingDigraphs.PreRankedOutrankingDigraph.computeNewSortingCharacteristics">[docs]</a>
+    <span class="k">def</span> <span class="nf">computeNewSortingCharacteristics</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">actions</span><span class="p">,</span> <span class="n">relation</span><span class="p">,</span> <span class="n">Comments</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Renders a bipolar-valued bi-dictionary relation</span>
 <span class="sd">        representing the degree of credibility of the</span>
@@ -2500,7 +2618,10 @@
 
         <span class="k">return</span> <span class="n">sorting</span></div>
 
-<div class="viewcode-block" id="PreRankedOutrankingDigraph.computeNewActionCategories"><a class="viewcode-back" href="../techDoc.html#sparseOutrankingDigraphs.PreRankedOutrankingDigraph.computeNewActionCategories">[docs]</a>    <span class="k">def</span> <span class="nf">computeNewActionCategories</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">action</span><span class="p">,</span><span class="n">sorting</span><span class="p">,</span><span class="n">Debug</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span><span class="n">Comments</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+
+<div class="viewcode-block" id="PreRankedOutrankingDigraph.computeNewActionCategories">
+<a class="viewcode-back" href="../techDoc.html#sparseOutrankingDigraphs.PreRankedOutrankingDigraph.computeNewActionCategories">[docs]</a>
+    <span class="k">def</span> <span class="nf">computeNewActionCategories</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">action</span><span class="p">,</span><span class="n">sorting</span><span class="p">,</span><span class="n">Debug</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span><span class="n">Comments</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Renders the union of categories in which the given action is sorted positively or null into.</span>
 <span class="sd">        Returns a tuple : action, lowest category key, highest category key, membership credibility !</span>
@@ -2546,23 +2667,33 @@
                     <span class="n">keys</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">],</span>\
                     <span class="n">credibility</span></div>
 
-<div class="viewcode-block" id="PreRankedOutrankingDigraph.showNewActionCategories"><a class="viewcode-back" href="../techDoc.html#sparseOutrankingDigraphs.PreRankedOutrankingDigraph.showNewActionCategories">[docs]</a>    <span class="k">def</span> <span class="nf">showNewActionCategories</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">action</span><span class="p">,</span><span class="n">sorting</span><span class="p">):</span>
+
+<div class="viewcode-block" id="PreRankedOutrankingDigraph.showNewActionCategories">
+<a class="viewcode-back" href="../techDoc.html#sparseOutrankingDigraphs.PreRankedOutrankingDigraph.showNewActionCategories">[docs]</a>
+    <span class="k">def</span> <span class="nf">showNewActionCategories</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">action</span><span class="p">,</span><span class="n">sorting</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Prints the union of categories in which the given action is sorted positively or null into.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">computeNewActionCategories</span><span class="p">(</span><span class="n">action</span><span class="p">,</span><span class="n">sorting</span><span class="p">,</span><span class="n">Comments</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span></div>
 
 
-<div class="viewcode-block" id="PreRankedOutrankingDigraph.showNewActionsSortingResult"><a class="viewcode-back" href="../techDoc.html#sparseOutrankingDigraphs.PreRankedOutrankingDigraph.showNewActionsSortingResult">[docs]</a>    <span class="k">def</span> <span class="nf">showNewActionsSortingResult</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">actions</span><span class="p">,</span><span class="n">sorting</span><span class="p">,</span><span class="n">Debug</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+
+<div class="viewcode-block" id="PreRankedOutrankingDigraph.showNewActionsSortingResult">
+<a class="viewcode-back" href="../techDoc.html#sparseOutrankingDigraphs.PreRankedOutrankingDigraph.showNewActionsSortingResult">[docs]</a>
+    <span class="k">def</span> <span class="nf">showNewActionsSortingResult</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">actions</span><span class="p">,</span><span class="n">sorting</span><span class="p">,</span><span class="n">Debug</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        shows the quantiles sorting result all (default) of a subset of the decision actions.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Quantiles sorting result per decision action&#39;</span><span class="p">)</span>
         <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">actions</span><span class="p">:</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">showNewActionCategories</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="n">sorting</span><span class="p">,</span><span class="n">Debug</span><span class="o">=</span><span class="n">Debug</span><span class="p">)</span></div></div>
+            <span class="bp">self</span><span class="o">.</span><span class="n">showNewActionCategories</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="n">sorting</span><span class="p">,</span><span class="n">Debug</span><span class="o">=</span><span class="n">Debug</span><span class="p">)</span></div>
+</div>
+
 
 <span class="c1">##############</span>
-<div class="viewcode-block" id="PreRankedConfidentOutrankingDigraph"><a class="viewcode-back" href="../techDoc.html#sparseOutrankingDigraphs.PreRankedConfidentOutrankingDigraph">[docs]</a><span class="k">class</span> <span class="nc">PreRankedConfidentOutrankingDigraph</span><span class="p">(</span><span class="n">PreRankedOutrankingDigraph</span><span class="p">):</span>
+<div class="viewcode-block" id="PreRankedConfidentOutrankingDigraph">
+<a class="viewcode-back" href="../techDoc.html#sparseOutrankingDigraphs.PreRankedConfidentOutrankingDigraph">[docs]</a>
+<span class="k">class</span> <span class="nc">PreRankedConfidentOutrankingDigraph</span><span class="p">(</span><span class="n">PreRankedOutrankingDigraph</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Main class for the implementation of sparse confident outranking digraphs.</span>
 
@@ -2885,7 +3016,9 @@
     <span class="c1"># ----- class methods ------------</span>
 
 
-<div class="viewcode-block" id="PreRankedConfidentOutrankingDigraph.computeCLTLikelihoods"><a class="viewcode-back" href="../techDoc.html#sparseOutrankingDigraphs.PreRankedConfidentOutrankingDigraph.computeCLTLikelihoods">[docs]</a>    <span class="k">def</span> <span class="nf">computeCLTLikelihoods</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">distribution</span><span class="o">=</span><span class="s2">&quot;triangular&quot;</span><span class="p">,</span>
+<div class="viewcode-block" id="PreRankedConfidentOutrankingDigraph.computeCLTLikelihoods">
+<a class="viewcode-back" href="../techDoc.html#sparseOutrankingDigraphs.PreRankedConfidentOutrankingDigraph.computeCLTLikelihoods">[docs]</a>
+    <span class="k">def</span> <span class="nf">computeCLTLikelihoods</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">distribution</span><span class="o">=</span><span class="s2">&quot;triangular&quot;</span><span class="p">,</span>
                               <span class="n">betaParameter</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
                               <span class="n">Debug</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
@@ -2943,6 +3076,7 @@
                 <span class="k">if</span> <span class="n">Debug</span><span class="p">:</span>
                     <span class="nb">print</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="n">y</span><span class="p">,</span><span class="n">lh</span><span class="p">[</span><span class="n">x</span><span class="p">][</span><span class="n">y</span><span class="p">])</span>
         <span class="k">return</span> <span class="n">lh</span></div>
+
 
     <span class="k">def</span> <span class="nf">_computeConfidentRelation</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span>
                                <span class="n">sortingRelation</span><span class="p">,</span>
@@ -3045,7 +3179,9 @@
         <span class="k">else</span><span class="p">:</span>
             <span class="k">return</span> <span class="mf">0.5</span> <span class="o">+</span> <span class="mf">0.5</span><span class="o">*</span><span class="n">erf</span><span class="p">(</span><span class="n">z</span><span class="p">)</span>
 
-<div class="viewcode-block" id="PreRankedConfidentOutrankingDigraph.showRelationTable"><a class="viewcode-back" href="../techDoc.html#sparseOutrankingDigraphs.PreRankedConfidentOutrankingDigraph.showRelationTable">[docs]</a>    <span class="k">def</span> <span class="nf">showRelationTable</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">IntegerValues</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+<div class="viewcode-block" id="PreRankedConfidentOutrankingDigraph.showRelationTable">
+<a class="viewcode-back" href="../techDoc.html#sparseOutrankingDigraphs.PreRankedConfidentOutrankingDigraph.showRelationTable">[docs]</a>
+    <span class="k">def</span> <span class="nf">showRelationTable</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">IntegerValues</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
                           <span class="n">actionsSubset</span><span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
                           <span class="n">Sorted</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
                           <span class="n">LikelihoodDenotation</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
@@ -3141,7 +3277,9 @@
                  <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">bipolarConfidenceLevel</span><span class="o">+</span><span class="mf">1.0</span><span class="p">)</span><span class="o">/</span><span class="mf">2.0</span><span class="p">))</span>
 
         <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Determinateness  : </span><span class="si">%.3f</span><span class="s1"> &#39;</span> <span class="o">%</span> <span class="bp">self</span><span class="o">.</span><span class="n">computeDeterminateness</span><span class="p">()</span> <span class="p">)</span>
-        <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)</span></div></div>
+        <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)</span></div>
+</div>
+
 
 <span class="c1">#######################################################################</span>
 <span class="c1">#######################################################################</span>

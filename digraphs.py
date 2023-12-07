@@ -7525,7 +7525,7 @@ class Digraph(object):
         
         Returns a boolean value
         
-        .. warning:: Deprecated !!! The python vesion is more efficient
+        .. warning:: Deprecated !!! The pure python version is more efficient
         """
         import os
         from tempfile import mkstemp
@@ -7577,7 +7577,7 @@ class Digraph(object):
 
         Result in *self.circuitsList*.
 
-        .. warning:: Deprecated !!! The python vesion is more efficient
+        .. warning:: Deprecated !!! The pure python version is more efficient
         """
         import os
         from subprocess import Popen,PIPE
@@ -7642,7 +7642,7 @@ class Digraph(object):
 
         Result in *self.circuitsList*.
 
-        .. warning:: Deprecated !!! The python vesion is more efficient
+        .. warning:: Deprecated !!! The pure python version is more efficient
         """
         import os
         from tempfile import mkstemp

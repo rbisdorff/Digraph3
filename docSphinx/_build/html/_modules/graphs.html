@@ -21,16 +21,16 @@
     <script src="../_static/js/html5shiv.min.js"></script>
   <![endif]-->
   
-        <script src="../_static/jquery.js"></script>
-        <script src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
-        <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
-        <script src="../_static/doctools.js"></script>
-        <script src="../_static/sphinx_highlight.js"></script>
-        <script src="../_static/clipboard.min.js"></script>
-        <script src="../_static/copybutton.js"></script>
-        <script src="../_static/js/hoverxref.js"></script>
-        <script src="../_static/js/tooltipster.bundle.min.js"></script>
-        <script src="../_static/js/micromodal.min.js"></script>
+        <script src="../_static/jquery.js?v=5d32c60e"></script>
+        <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script src="../_static/documentation_options.js?v=e6f4c021"></script>
+        <script src="../_static/doctools.js?v=888ff710"></script>
+        <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+        <script src="../_static/clipboard.min.js?v=a7894cd8"></script>
+        <script src="../_static/copybutton.js?v=15d7cbb8"></script>
+        <script src="../_static/js/hoverxref.js?v=82c55261"></script>
+        <script src="../_static/js/tooltipster.bundle.min.js?v=18bf091b"></script>
+        <script src="../_static/js/micromodal.min.js?v=04d6302d"></script>
     <script src="../_static/js/theme.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" /> 
@@ -120,7 +120,9 @@
 
 <span class="kn">from</span> <span class="nn">decimal</span> <span class="kn">import</span> <span class="n">Decimal</span>
 
-<div class="viewcode-block" id="Graph"><a class="viewcode-back" href="../techDoc.html#graphs.Graph">[docs]</a><span class="k">class</span> <span class="nc">Graph</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+<div class="viewcode-block" id="Graph">
+<a class="viewcode-back" href="../techDoc.html#graphs.Graph">[docs]</a>
+<span class="k">class</span> <span class="nc">Graph</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    In the `graphs` module, the root :py:class:`graphs.Graph` class provides a generic graph model. A given object consists in:</span>
 <span class="sd">    </span>
@@ -234,13 +236,16 @@
 
 <span class="c1">#-----------Dias/Castonguay/Longo/Jradi--------*</span>
 
-<div class="viewcode-block" id="Graph.computeGraphCentres"><a class="viewcode-back" href="../techDoc.html#graphs.Graph.computeGraphCentres">[docs]</a>    <span class="k">def</span> <span class="nf">computeGraphCentres</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<div class="viewcode-block" id="Graph.computeGraphCentres">
+<a class="viewcode-back" href="../techDoc.html#graphs.Graph.computeGraphCentres">[docs]</a>
+    <span class="k">def</span> <span class="nf">computeGraphCentres</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Renders the vertices of minimal Neighborhood depth.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">dg</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">graph2Digraph</span><span class="p">()</span>
         <span class="n">centres</span> <span class="o">=</span> <span class="n">dg</span><span class="o">.</span><span class="n">computeDigraphCentres</span><span class="p">()</span>
         <span class="k">return</span> <span class="n">centres</span></div>
+
         
     <span class="k">def</span> <span class="nf">_degreeLabelling</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
@@ -302,7 +307,9 @@
         <span class="c1">#self.cycles = cycles</span>
         <span class="k">return</span> <span class="n">tG</span><span class="p">,</span><span class="n">cycles</span>
 
-<div class="viewcode-block" id="Graph.computeChordlessCycles"><a class="viewcode-back" href="../techDoc.html#graphs.Graph.computeChordlessCycles">[docs]</a>    <span class="k">def</span> <span class="nf">computeChordlessCycles</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">Cycle3</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span><span class="n">Comments</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span><span class="n">Debug</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+<div class="viewcode-block" id="Graph.computeChordlessCycles">
+<a class="viewcode-back" href="../techDoc.html#graphs.Graph.computeChordlessCycles">[docs]</a>
+    <span class="k">def</span> <span class="nf">computeChordlessCycles</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">Cycle3</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span><span class="n">Comments</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span><span class="n">Debug</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Renders the set of all chordless cycles observed in a Graph</span>
 <span class="sd">        intance. Inspired from Dias, Castonguay, Longo &amp; Jradi,</span>
@@ -344,6 +351,7 @@
                 <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">blocked</span><span class="p">[</span><span class="n">x</span><span class="p">]</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
                     <span class="bp">self</span><span class="o">.</span><span class="n">blocked</span><span class="p">[</span><span class="n">x</span><span class="p">]</span> <span class="o">-=</span> <span class="mi">1</span>
         <span class="k">return</span> <span class="n">cycles</span></div>
+
 
     <span class="k">def</span> <span class="nf">_ccVisit</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">p</span><span class="p">,</span><span class="n">cycles</span><span class="p">,</span><span class="n">u</span><span class="p">,</span><span class="n">Comments</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot; p.15 &quot;&quot;&quot;</span>
@@ -541,7 +549,9 @@
                 <span class="nb">print</span><span class="p">(</span><span class="n">cc</span><span class="p">)</span>
         <span class="k">return</span> <span class="n">chordlessCyclesList</span>
 
-<div class="viewcode-block" id="Graph.computeCliques"><a class="viewcode-back" href="../techDoc.html#graphs.Graph.computeCliques">[docs]</a>    <span class="k">def</span> <span class="nf">computeCliques</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">Comments</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+<div class="viewcode-block" id="Graph.computeCliques">
+<a class="viewcode-back" href="../techDoc.html#graphs.Graph.computeCliques">[docs]</a>
+    <span class="k">def</span> <span class="nf">computeCliques</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">Comments</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Computes all cliques, ie maximal complete subgraphs in self:</span>
 
@@ -580,7 +590,10 @@
             <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;execution time: </span><span class="si">%.5f</span><span class="s1"> sec.&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="n">t1</span><span class="o">-</span><span class="n">t0</span><span class="p">))</span>
             <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Results in self.cliques&#39;</span><span class="p">)</span></div>
 
-<div class="viewcode-block" id="Graph.computeComponents"><a class="viewcode-back" href="../techDoc.html#graphs.Graph.computeComponents">[docs]</a>    <span class="k">def</span> <span class="nf">computeComponents</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+
+<div class="viewcode-block" id="Graph.computeComponents">
+<a class="viewcode-back" href="../techDoc.html#graphs.Graph.computeComponents">[docs]</a>
+    <span class="k">def</span> <span class="nf">computeComponents</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Computes the connected components of a graph instance.</span>
 <span class="sd">        Returns a partition of the vertices as a list</span>
@@ -590,8 +603,11 @@
         <span class="k">for</span> <span class="n">tree</span> <span class="ow">in</span> <span class="n">dfs</span><span class="p">:</span>
             <span class="n">components</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="nb">set</span><span class="p">(</span><span class="n">tree</span><span class="p">))</span>
         <span class="k">return</span> <span class="n">components</span></div>
+
     
-<div class="viewcode-block" id="Graph.computeDegreeDistribution"><a class="viewcode-back" href="../techDoc.html#graphs.Graph.computeDegreeDistribution">[docs]</a>    <span class="k">def</span> <span class="nf">computeDegreeDistribution</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">Comments</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+<div class="viewcode-block" id="Graph.computeDegreeDistribution">
+<a class="viewcode-back" href="../techDoc.html#graphs.Graph.computeDegreeDistribution">[docs]</a>
+    <span class="k">def</span> <span class="nf">computeDegreeDistribution</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">Comments</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Renders the distribution of vertex degrees.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
@@ -604,7 +620,10 @@
             <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;distribution : &#39;</span><span class="p">,</span> <span class="n">degreeDistribution</span><span class="p">)</span>
         <span class="k">return</span> <span class="n">degreeDistribution</span></div>
 
-<div class="viewcode-block" id="Graph.computeDiameter"><a class="viewcode-back" href="../techDoc.html#graphs.Graph.computeDiameter">[docs]</a>    <span class="k">def</span> <span class="nf">computeDiameter</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">Oriented</span> <span class="o">=</span> <span class="kc">False</span><span class="p">):</span>
+
+<div class="viewcode-block" id="Graph.computeDiameter">
+<a class="viewcode-back" href="../techDoc.html#graphs.Graph.computeDiameter">[docs]</a>
+    <span class="k">def</span> <span class="nf">computeDiameter</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">Oriented</span> <span class="o">=</span> <span class="kc">False</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Renders the diameter (maximal neighbourhood depth) of the digraph instance.</span>
 
@@ -627,7 +646,10 @@
                     <span class="k">break</span>
         <span class="k">return</span> <span class="n">diameter</span>                       </div>
 
-<div class="viewcode-block" id="Graph.computeGirth"><a class="viewcode-back" href="../techDoc.html#graphs.Graph.computeGirth">[docs]</a>    <span class="k">def</span> <span class="nf">computeGirth</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">girthType</span><span class="o">=</span><span class="s2">&quot;any&quot;</span><span class="p">,</span><span class="n">Comments</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+
+<div class="viewcode-block" id="Graph.computeGirth">
+<a class="viewcode-back" href="../techDoc.html#graphs.Graph.computeGirth">[docs]</a>
+    <span class="k">def</span> <span class="nf">computeGirth</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">girthType</span><span class="o">=</span><span class="s2">&quot;any&quot;</span><span class="p">,</span><span class="n">Comments</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Renders the *girth* of self, i.e. the length of the shortest chordless cycle in the graph.</span>
 
@@ -672,8 +694,11 @@
             <span class="k">if</span> <span class="n">Comments</span><span class="p">:</span>
                 <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;girth = </span><span class="si">%d</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="n">girth</span><span class="p">)</span>
         <span class="k">return</span> <span class="n">girth</span></div>
+
                 
-<div class="viewcode-block" id="Graph.computeMaximumMatching"><a class="viewcode-back" href="../techDoc.html#graphs.Graph.computeMaximumMatching">[docs]</a>    <span class="k">def</span> <span class="nf">computeMaximumMatching</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">Comments</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+<div class="viewcode-block" id="Graph.computeMaximumMatching">
+<a class="viewcode-back" href="../techDoc.html#graphs.Graph.computeMaximumMatching">[docs]</a>
+    <span class="k">def</span> <span class="nf">computeMaximumMatching</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">Comments</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Renders a maximum matching in *self* by computing</span>
 <span class="sd">        a maximum MIS of the line graph of *self*.</span>
@@ -688,7 +713,10 @@
                 <span class="nb">print</span><span class="p">(</span><span class="n">mis</span><span class="p">)</span>
         <span class="k">return</span> <span class="n">ms</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">1</span><span class="p">]</span> <span class="c1"># skipping the length argument</span></div>
 
-<div class="viewcode-block" id="Graph.computeMIS"><a class="viewcode-back" href="../techDoc.html#graphs.Graph.computeMIS">[docs]</a>    <span class="k">def</span> <span class="nf">computeMIS</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">Comments</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+
+<div class="viewcode-block" id="Graph.computeMIS">
+<a class="viewcode-back" href="../techDoc.html#graphs.Graph.computeMIS">[docs]</a>
+    <span class="k">def</span> <span class="nf">computeMIS</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">Comments</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Prints all maximal independent vertex sets:</span>
 
@@ -726,7 +754,10 @@
             <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;execution time: </span><span class="si">%.5f</span><span class="s1"> sec.&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="n">t1</span><span class="o">-</span><span class="n">t0</span><span class="p">))</span>
             <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Results in self.misset&#39;</span><span class="p">)</span></div>
 
-<div class="viewcode-block" id="Graph.computeNeighbourhoodDepth"><a class="viewcode-back" href="../techDoc.html#graphs.Graph.computeNeighbourhoodDepth">[docs]</a>    <span class="k">def</span> <span class="nf">computeNeighbourhoodDepth</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">vertex</span><span class="p">,</span><span class="n">Debug</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+
+<div class="viewcode-block" id="Graph.computeNeighbourhoodDepth">
+<a class="viewcode-back" href="../techDoc.html#graphs.Graph.computeNeighbourhoodDepth">[docs]</a>
+    <span class="k">def</span> <span class="nf">computeNeighbourhoodDepth</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">vertex</span><span class="p">,</span><span class="n">Debug</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Renders the distribtion of neighbourhood depths.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
@@ -755,7 +786,10 @@
         <span class="k">else</span><span class="p">:</span>
             <span class="k">return</span> <span class="n">nbx</span></div>
 
-<div class="viewcode-block" id="Graph.computeNeighbourhoodDepthDistribution"><a class="viewcode-back" href="../techDoc.html#graphs.Graph.computeNeighbourhoodDepthDistribution">[docs]</a>    <span class="k">def</span> <span class="nf">computeNeighbourhoodDepthDistribution</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">Comments</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span><span class="n">Debug</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+
+<div class="viewcode-block" id="Graph.computeNeighbourhoodDepthDistribution">
+<a class="viewcode-back" href="../techDoc.html#graphs.Graph.computeNeighbourhoodDepthDistribution">[docs]</a>
+    <span class="k">def</span> <span class="nf">computeNeighbourhoodDepthDistribution</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">Comments</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span><span class="n">Debug</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Renders the distribtion of neighbourhood depths.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
@@ -793,7 +827,10 @@
 
         <span class="k">return</span> <span class="n">vecNeighbourhoodDepth</span></div>
 
-<div class="viewcode-block" id="Graph.computeOrientedDigraph"><a class="viewcode-back" href="../techDoc.html#graphs.Graph.computeOrientedDigraph">[docs]</a>    <span class="k">def</span> <span class="nf">computeOrientedDigraph</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">PartiallyDetermined</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+
+<div class="viewcode-block" id="Graph.computeOrientedDigraph">
+<a class="viewcode-back" href="../techDoc.html#graphs.Graph.computeOrientedDigraph">[docs]</a>
+    <span class="k">def</span> <span class="nf">computeOrientedDigraph</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">PartiallyDetermined</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Renders a digraph where each edge of the permutation graph *self*</span>
 <span class="sd">        is converted into an arc oriented in increasing order of the adjacent vertices&#39; numbers.</span>
@@ -869,7 +906,10 @@
         <span class="n">g</span><span class="o">.</span><span class="n">transitivityDegree</span> <span class="o">=</span> <span class="n">g</span><span class="o">.</span><span class="n">computeTransitivityDegree</span><span class="p">()</span>
         <span class="k">return</span> <span class="n">g</span></div>
 
-<div class="viewcode-block" id="Graph.computeTransitivelyOrientedDigraph"><a class="viewcode-back" href="../techDoc.html#graphs.Graph.computeTransitivelyOrientedDigraph">[docs]</a>    <span class="k">def</span> <span class="nf">computeTransitivelyOrientedDigraph</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">PartiallyDetermined</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span><span class="n">Debug</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+
+<div class="viewcode-block" id="Graph.computeTransitivelyOrientedDigraph">
+<a class="viewcode-back" href="../techDoc.html#graphs.Graph.computeTransitivelyOrientedDigraph">[docs]</a>
+    <span class="k">def</span> <span class="nf">computeTransitivelyOrientedDigraph</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">PartiallyDetermined</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span><span class="n">Debug</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Renders a digraph where each edge of the permutation graph *self*</span>
 <span class="sd">        is converted into an arc oriented in increasing order of the ranks of implication classes</span>
@@ -972,7 +1012,10 @@
             <span class="k">return</span> <span class="n">g</span></div>
 
 
-<div class="viewcode-block" id="Graph.computePermutation"><a class="viewcode-back" href="../techDoc.html#graphs.Graph.computePermutation">[docs]</a>    <span class="k">def</span> <span class="nf">computePermutation</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">seq1</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span><span class="n">seq2</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span><span class="n">Comments</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
+
+<div class="viewcode-block" id="Graph.computePermutation">
+<a class="viewcode-back" href="../techDoc.html#graphs.Graph.computePermutation">[docs]</a>
+    <span class="k">def</span> <span class="nf">computePermutation</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">seq1</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span><span class="n">seq2</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span><span class="n">Comments</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Tests whether the graph instance *self* is a permutation graph</span>
 <span class="sd">        and renders, in case the test is positive,</span>
@@ -1009,7 +1052,10 @@
             <span class="n">permutation</span><span class="p">[</span><span class="n">seq2</span><span class="o">.</span><span class="n">index</span><span class="p">(</span><span class="n">seq1</span><span class="p">[</span><span class="n">j</span><span class="p">])]</span> <span class="o">=</span> <span class="n">j</span><span class="o">+</span><span class="mi">1</span>
         <span class="k">return</span> <span class="n">permutation</span></div>
 
-<div class="viewcode-block" id="Graph.computeSize"><a class="viewcode-back" href="../techDoc.html#graphs.Graph.computeSize">[docs]</a>    <span class="k">def</span> <span class="nf">computeSize</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+
+<div class="viewcode-block" id="Graph.computeSize">
+<a class="viewcode-back" href="../techDoc.html#graphs.Graph.computeSize">[docs]</a>
+    <span class="k">def</span> <span class="nf">computeSize</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Renders the number of positively characterised edges of this graph instance</span>
 <span class="sd">        (result is stored in self.size).</span>
@@ -1022,7 +1068,10 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">size</span> <span class="o">=</span> <span class="n">size</span>
         <span class="k">return</span> <span class="n">size</span></div>
 
-<div class="viewcode-block" id="Graph.breadthFirstSearch"><a class="viewcode-back" href="../techDoc.html#graphs.Graph.breadthFirstSearch">[docs]</a>    <span class="k">def</span> <span class="nf">breadthFirstSearch</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">s</span><span class="p">,</span><span class="n">alphabeticOrder</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span><span class="n">Warnings</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span><span class="n">Debug</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+
+<div class="viewcode-block" id="Graph.breadthFirstSearch">
+<a class="viewcode-back" href="../techDoc.html#graphs.Graph.breadthFirstSearch">[docs]</a>
+    <span class="k">def</span> <span class="nf">breadthFirstSearch</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">s</span><span class="p">,</span><span class="n">alphabeticOrder</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span><span class="n">Warnings</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span><span class="n">Debug</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Breadth first search through a graph in lexicographical order</span>
 <span class="sd">        of the vertex keys.</span>
@@ -1084,8 +1133,11 @@
                 <span class="k">if</span> <span class="n">Warnings</span><span class="p">:</span>
                     <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Warning: graph </span><span class="si">%s</span><span class="s1"> is not connected!&#39;</span> <span class="o">%</span> <span class="bp">self</span><span class="o">.</span><span class="n">name</span><span class="p">)</span>
                     <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Not with </span><span class="si">%s</span><span class="s1"> connected vertices: </span><span class="si">%s</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="n">s</span><span class="p">,</span><span class="nb">str</span><span class="p">(</span><span class="n">comp</span><span class="p">))</span> <span class="p">)</span></div>
+
                                 
-<div class="viewcode-block" id="Graph.depthFirstSearch"><a class="viewcode-back" href="../techDoc.html#graphs.Graph.depthFirstSearch">[docs]</a>    <span class="k">def</span> <span class="nf">depthFirstSearch</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">Debug</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+<div class="viewcode-block" id="Graph.depthFirstSearch">
+<a class="viewcode-back" href="../techDoc.html#graphs.Graph.depthFirstSearch">[docs]</a>
+    <span class="k">def</span> <span class="nf">depthFirstSearch</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">Debug</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Depth first search through a graph in lexicographical order</span>
 <span class="sd">        of the vertex keys.</span>
@@ -1144,7 +1196,10 @@
         <span class="n">_visitAllVertices</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">Debug</span><span class="o">=</span><span class="n">Debug</span><span class="p">)</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">dfs</span></div>
 
-<div class="viewcode-block" id="Graph.exportGraphViz"><a class="viewcode-back" href="../techDoc.html#graphs.Graph.exportGraphViz">[docs]</a>    <span class="k">def</span> <span class="nf">exportGraphViz</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">fileName</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span><span class="n">verticesSubset</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+
+<div class="viewcode-block" id="Graph.exportGraphViz">
+<a class="viewcode-back" href="../techDoc.html#graphs.Graph.exportGraphViz">[docs]</a>
+    <span class="k">def</span> <span class="nf">exportGraphViz</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">fileName</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span><span class="n">verticesSubset</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
                        <span class="n">Comments</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
                        <span class="n">graphType</span><span class="o">=</span><span class="s1">&#39;png&#39;</span><span class="p">,</span><span class="n">graphSize</span><span class="o">=</span><span class="s1">&#39;7,7&#39;</span><span class="p">,</span>
                        <span class="n">WithSpanningTree</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
@@ -1282,7 +1337,10 @@
                 <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;graphViz tools not avalaible! Please check installation.&#39;</span><span class="p">)</span>
                 <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;On Ubuntu: ..$ sudo apt-get install graphviz&#39;</span><span class="p">)</span></div>
 
-<div class="viewcode-block" id="Graph.exportEdgeOrientationsGraphViz"><a class="viewcode-back" href="../techDoc.html#graphs.Graph.exportEdgeOrientationsGraphViz">[docs]</a>    <span class="k">def</span> <span class="nf">exportEdgeOrientationsGraphViz</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">fileName</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span><span class="n">verticesSubset</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+
+<div class="viewcode-block" id="Graph.exportEdgeOrientationsGraphViz">
+<a class="viewcode-back" href="../techDoc.html#graphs.Graph.exportEdgeOrientationsGraphViz">[docs]</a>
+    <span class="k">def</span> <span class="nf">exportEdgeOrientationsGraphViz</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">fileName</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span><span class="n">verticesSubset</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
                        <span class="n">Comments</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
                        <span class="n">graphType</span><span class="o">=</span><span class="s1">&#39;png&#39;</span><span class="p">,</span><span class="n">graphSize</span><span class="o">=</span><span class="s1">&#39;7,7&#39;</span><span class="p">,</span>
                        <span class="n">layout</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
@@ -1440,7 +1498,10 @@
                 <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;On Ubuntu: ..$ sudo apt-get install graphviz&#39;</span><span class="p">)</span></div>
 
 
-<div class="viewcode-block" id="Graph.exportPermutationGraphViz"><a class="viewcode-back" href="../techDoc.html#graphs.Graph.exportPermutationGraphViz">[docs]</a>    <span class="k">def</span> <span class="nf">exportPermutationGraphViz</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">fileName</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+
+<div class="viewcode-block" id="Graph.exportPermutationGraphViz">
+<a class="viewcode-back" href="../techDoc.html#graphs.Graph.exportPermutationGraphViz">[docs]</a>
+    <span class="k">def</span> <span class="nf">exportPermutationGraphViz</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">fileName</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
                        <span class="n">permutation</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
                        <span class="n">Comments</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
                        <span class="n">WithEdgeColoring</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
@@ -1575,7 +1636,10 @@
                 <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;graphViz tools not avalaible! Please check installation.&#39;</span><span class="p">)</span>
                 <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;On Ubuntu: ..$ sudo apt-get install graphviz&#39;</span><span class="p">)</span></div>
 
-<div class="viewcode-block" id="Graph.gammaSets"><a class="viewcode-back" href="../techDoc.html#graphs.Graph.gammaSets">[docs]</a>    <span class="k">def</span> <span class="nf">gammaSets</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">Debug</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+
+<div class="viewcode-block" id="Graph.gammaSets">
+<a class="viewcode-back" href="../techDoc.html#graphs.Graph.gammaSets">[docs]</a>
+    <span class="k">def</span> <span class="nf">gammaSets</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">Debug</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        renders the gamma function as dictionary</span>
 <span class="sd">        &quot;&quot;&quot;</span>
@@ -1597,7 +1661,10 @@
                 <span class="n">gamma</span><span class="p">[</span><span class="n">e2</span><span class="p">]</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">e1</span><span class="p">)</span>
         <span class="k">return</span> <span class="n">gamma</span></div>
 
-<div class="viewcode-block" id="Graph.generateIndependent"><a class="viewcode-back" href="../techDoc.html#graphs.Graph.generateIndependent">[docs]</a>    <span class="k">def</span> <span class="nf">generateIndependent</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">U</span><span class="p">):</span>
+
+<div class="viewcode-block" id="Graph.generateIndependent">
+<a class="viewcode-back" href="../techDoc.html#graphs.Graph.generateIndependent">[docs]</a>
+    <span class="k">def</span> <span class="nf">generateIndependent</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">U</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Generator for all independent vertices sets</span>
 <span class="sd">        with neighborhoods of a graph instance:</span>
@@ -1624,8 +1691,11 @@
                     <span class="k">yield</span> <span class="n">Sx</span></div>
 
 
+
                  
-<div class="viewcode-block" id="Graph.graph2Digraph"><a class="viewcode-back" href="../techDoc.html#graphs.Graph.graph2Digraph">[docs]</a>    <span class="k">def</span> <span class="nf">graph2Digraph</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<div class="viewcode-block" id="Graph.graph2Digraph">
+<a class="viewcode-back" href="../techDoc.html#graphs.Graph.graph2Digraph">[docs]</a>
+    <span class="k">def</span> <span class="nf">graph2Digraph</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Converts a Graph object into a symmetric Digraph object.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
@@ -1654,7 +1724,10 @@
         <span class="k">return</span> <span class="n">dg</span></div>
 
 
-<div class="viewcode-block" id="Graph.isComparabilityGraph"><a class="viewcode-back" href="../techDoc.html#graphs.Graph.isComparabilityGraph">[docs]</a>    <span class="k">def</span> <span class="nf">isComparabilityGraph</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">Debug</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+
+<div class="viewcode-block" id="Graph.isComparabilityGraph">
+<a class="viewcode-back" href="../techDoc.html#graphs.Graph.isComparabilityGraph">[docs]</a>
+    <span class="k">def</span> <span class="nf">isComparabilityGraph</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">Debug</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Verifies if the graph instance is a comparability graph.</span>
 <span class="sd">        If yes, a tranditive orientation of the edges is stored </span>
@@ -1744,7 +1817,10 @@
 
         <span class="k">return</span> <span class="n">IsComparabilityGraph</span></div>
 
-<div class="viewcode-block" id="Graph.isConnected"><a class="viewcode-back" href="../techDoc.html#graphs.Graph.isConnected">[docs]</a>    <span class="k">def</span> <span class="nf">isConnected</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+
+<div class="viewcode-block" id="Graph.isConnected">
+<a class="viewcode-back" href="../techDoc.html#graphs.Graph.isConnected">[docs]</a>
+    <span class="k">def</span> <span class="nf">isConnected</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Cheks if self is a connected graph instance.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
@@ -1754,7 +1830,10 @@
         <span class="k">else</span><span class="p">:</span>
             <span class="k">return</span> <span class="kc">False</span></div>
 
-<div class="viewcode-block" id="Graph.isIntervalGraph"><a class="viewcode-back" href="../techDoc.html#graphs.Graph.isIntervalGraph">[docs]</a>    <span class="k">def</span> <span class="nf">isIntervalGraph</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">Comments</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+
+<div class="viewcode-block" id="Graph.isIntervalGraph">
+<a class="viewcode-back" href="../techDoc.html#graphs.Graph.isIntervalGraph">[docs]</a>
+    <span class="k">def</span> <span class="nf">isIntervalGraph</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">Comments</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Checks whether the graph self is triangulated and</span>
 <span class="sd">        its dual is a comparability graph.</span>
@@ -1781,7 +1860,10 @@
                 <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Graph </span><span class="se">\&#39;</span><span class="si">%s</span><span class="se">\&#39;</span><span class="s1"> is not triangulated&#39;</span> <span class="o">%</span> <span class="bp">self</span><span class="o">.</span><span class="n">name</span><span class="p">)</span>
             <span class="k">return</span> <span class="kc">False</span></div>
 
-<div class="viewcode-block" id="Graph.isPermutationGraph"><a class="viewcode-back" href="../techDoc.html#graphs.Graph.isPermutationGraph">[docs]</a>    <span class="k">def</span> <span class="nf">isPermutationGraph</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">Comments</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+
+<div class="viewcode-block" id="Graph.isPermutationGraph">
+<a class="viewcode-back" href="../techDoc.html#graphs.Graph.isPermutationGraph">[docs]</a>
+    <span class="k">def</span> <span class="nf">isPermutationGraph</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">Comments</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Checks whether the graph self and</span>
 <span class="sd">        its dual are comparability graphs.</span>
@@ -1807,8 +1889,11 @@
             <span class="k">if</span> <span class="n">Comments</span><span class="p">:</span>
                 <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Graph </span><span class="se">\&#39;</span><span class="si">%s</span><span class="se">\&#39;</span><span class="s1"> is not transitively orientable&#39;</span> <span class="o">%</span> <span class="bp">self</span><span class="o">.</span><span class="n">name</span><span class="p">)</span>
             <span class="k">return</span> <span class="kc">False</span></div>
+
          
-<div class="viewcode-block" id="Graph.isTree"><a class="viewcode-back" href="../techDoc.html#graphs.Graph.isTree">[docs]</a>    <span class="k">def</span> <span class="nf">isTree</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<div class="viewcode-block" id="Graph.isTree">
+<a class="viewcode-back" href="../techDoc.html#graphs.Graph.isTree">[docs]</a>
+    <span class="k">def</span> <span class="nf">isTree</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Checks if self is a tree by verifing the required number of</span>
 <span class="sd">        edges: order-1; and the existence of leaves.</span>
@@ -1832,7 +1917,10 @@
             <span class="k">else</span><span class="p">:</span>
                 <span class="k">return</span> <span class="kc">True</span></div>
 
-<div class="viewcode-block" id="Graph.isTriangulated"><a class="viewcode-back" href="../techDoc.html#graphs.Graph.isTriangulated">[docs]</a>    <span class="k">def</span> <span class="nf">isTriangulated</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+
+<div class="viewcode-block" id="Graph.isTriangulated">
+<a class="viewcode-back" href="../techDoc.html#graphs.Graph.isTriangulated">[docs]</a>
+    <span class="k">def</span> <span class="nf">isTriangulated</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Checks if a graph contains no chordless cycle of</span>
 <span class="sd">        length greater or equal to 4.</span>
@@ -1842,7 +1930,10 @@
         <span class="k">else</span><span class="p">:</span>
             <span class="k">return</span> <span class="kc">False</span></div>
 
-<div class="viewcode-block" id="Graph.isSplitGraph"><a class="viewcode-back" href="../techDoc.html#graphs.Graph.isSplitGraph">[docs]</a>    <span class="k">def</span> <span class="nf">isSplitGraph</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">Comments</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+
+<div class="viewcode-block" id="Graph.isSplitGraph">
+<a class="viewcode-back" href="../techDoc.html#graphs.Graph.isSplitGraph">[docs]</a>
+    <span class="k">def</span> <span class="nf">isSplitGraph</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">Comments</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Checks whether the graph &#39; *self* &#39; and its dual &#39; *-self* &#39; are</span>
 <span class="sd">        triangulated graphs</span>
@@ -1865,7 +1956,10 @@
                 <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Graph </span><span class="se">\&#39;</span><span class="si">%s</span><span class="se">\&#39;</span><span class="s1"> is not triangulated&#39;</span> <span class="o">%</span> <span class="bp">self</span><span class="o">.</span><span class="n">name</span><span class="p">)</span>
             <span class="k">return</span> <span class="kc">False</span></div>
 
-<div class="viewcode-block" id="Graph.isPerfectGraph"><a class="viewcode-back" href="../techDoc.html#graphs.Graph.isPerfectGraph">[docs]</a>    <span class="k">def</span> <span class="nf">isPerfectGraph</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">Comments</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span><span class="n">Debug</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+
+<div class="viewcode-block" id="Graph.isPerfectGraph">
+<a class="viewcode-back" href="../techDoc.html#graphs.Graph.isPerfectGraph">[docs]</a>
+    <span class="k">def</span> <span class="nf">isPerfectGraph</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">Comments</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span><span class="n">Debug</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        A graph *g* is perfect when neither *g*, nor *-g*, contain any chordless</span>
 <span class="sd">        cycle of odd length.</span>
@@ -1888,9 +1982,12 @@
             <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Graph </span><span class="si">%s</span><span class="s1"> is perfect !&#39;</span> <span class="o">%</span> <span class="bp">self</span><span class="o">.</span><span class="n">name</span><span class="p">)</span>
        
         <span class="k">return</span> <span class="kc">True</span></div>
+
     
                   
-<div class="viewcode-block" id="Graph.randomDepthFirstSearch"><a class="viewcode-back" href="../techDoc.html#graphs.Graph.randomDepthFirstSearch">[docs]</a>    <span class="k">def</span> <span class="nf">randomDepthFirstSearch</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">seed</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span><span class="n">Debug</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+<div class="viewcode-block" id="Graph.randomDepthFirstSearch">
+<a class="viewcode-back" href="../techDoc.html#graphs.Graph.randomDepthFirstSearch">[docs]</a>
+    <span class="k">def</span> <span class="nf">randomDepthFirstSearch</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">seed</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span><span class="n">Debug</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Depth first search through a graph in random order of the vertex keys.</span>
 
@@ -1957,7 +2054,10 @@
         <span class="n">visitAllVertices</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">Debug</span><span class="o">=</span><span class="n">Debug</span><span class="p">)</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">dfs</span></div>
 
-<div class="viewcode-block" id="Graph.recodeValuation"><a class="viewcode-back" href="../techDoc.html#graphs.Graph.recodeValuation">[docs]</a>    <span class="k">def</span> <span class="nf">recodeValuation</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">newMin</span><span class="o">=-</span><span class="mi">1</span><span class="p">,</span><span class="n">newMax</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span><span class="n">ndigits</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span><span class="n">Debug</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+
+<div class="viewcode-block" id="Graph.recodeValuation">
+<a class="viewcode-back" href="../techDoc.html#graphs.Graph.recodeValuation">[docs]</a>
+    <span class="k">def</span> <span class="nf">recodeValuation</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">newMin</span><span class="o">=-</span><span class="mi">1</span><span class="p">,</span><span class="n">newMax</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span><span class="n">ndigits</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span><span class="n">Debug</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Recodes the characteristic valuation domain according</span>
 <span class="sd">        to the parameters given.</span>
@@ -2015,7 +2115,10 @@
             
         <span class="bp">self</span><span class="o">.</span><span class="n">edges</span> <span class="o">=</span> <span class="n">deepcopy</span><span class="p">(</span><span class="n">newEdges</span><span class="p">)</span></div>
 
-<div class="viewcode-block" id="Graph.save"><a class="viewcode-back" href="../techDoc.html#graphs.Graph.save">[docs]</a>    <span class="k">def</span> <span class="nf">save</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">fileName</span><span class="o">=</span><span class="s1">&#39;tempGraph&#39;</span><span class="p">,</span><span class="n">Debug</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+
+<div class="viewcode-block" id="Graph.save">
+<a class="viewcode-back" href="../techDoc.html#graphs.Graph.save">[docs]</a>
+    <span class="k">def</span> <span class="nf">save</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">fileName</span><span class="o">=</span><span class="s1">&#39;tempGraph&#39;</span><span class="p">,</span><span class="n">Debug</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Persistent storage of a Graph class instance in the form of a python source code file.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
@@ -2045,7 +2148,10 @@
         <span class="n">fo</span><span class="o">.</span><span class="n">write</span><span class="p">(</span> <span class="s1">&#39;}</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)</span>
         <span class="n">fo</span><span class="o">.</span><span class="n">close</span><span class="p">()</span></div>
 
-<div class="viewcode-block" id="Graph.setEdgeValue"><a class="viewcode-back" href="../techDoc.html#graphs.Graph.setEdgeValue">[docs]</a>    <span class="k">def</span> <span class="nf">setEdgeValue</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">edge</span><span class="p">,</span><span class="n">value</span><span class="p">,</span><span class="n">Comments</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+
+<div class="viewcode-block" id="Graph.setEdgeValue">
+<a class="viewcode-back" href="../techDoc.html#graphs.Graph.setEdgeValue">[docs]</a>
+    <span class="k">def</span> <span class="nf">setEdgeValue</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">edge</span><span class="p">,</span><span class="n">value</span><span class="p">,</span><span class="n">Comments</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Wrapper for updating the characteristic valuation of a Graph instance.</span>
 <span class="sd">        The egde parameter consists in a pair of vertices;</span>
@@ -2073,10 +2179,13 @@
         <span class="k">if</span> <span class="n">Comments</span><span class="p">:</span>
             <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;edge </span><span class="si">%s</span><span class="s1"> put to value </span><span class="si">%s</span><span class="s1">.&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="n">edge</span><span class="p">,</span><span class="nb">str</span><span class="p">(</span><span class="n">value</span><span class="p">)))</span></div>
 
+
     <span class="k">def</span> <span class="nf">showCliques</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">computeCliques</span><span class="p">(</span><span class="n">Comments</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 
-<div class="viewcode-block" id="Graph.showEdgesCharacteristicValues"><a class="viewcode-back" href="../techDoc.html#graphs.Graph.showEdgesCharacteristicValues">[docs]</a>    <span class="k">def</span> <span class="nf">showEdgesCharacteristicValues</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">ndigits</span><span class="o">=</span><span class="mi">2</span><span class="p">):</span>
+<div class="viewcode-block" id="Graph.showEdgesCharacteristicValues">
+<a class="viewcode-back" href="../techDoc.html#graphs.Graph.showEdgesCharacteristicValues">[docs]</a>
+    <span class="k">def</span> <span class="nf">showEdgesCharacteristicValues</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">ndigits</span><span class="o">=</span><span class="mi">2</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Prints the edge links of the bipartite graph instance</span>
 <span class="sd">        &quot;&quot;&quot;</span>
@@ -2118,10 +2227,13 @@
                                    <span class="bp">self</span><span class="o">.</span><span class="n">valuationDomain</span><span class="p">[</span><span class="s1">&#39;max&#39;</span><span class="p">]))</span></div>
 
 
+
     <span class="k">def</span> <span class="nf">showMIS</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">computeMIS</span><span class="p">(</span><span class="n">Comments</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 
-<div class="viewcode-block" id="Graph.showMore"><a class="viewcode-back" href="../techDoc.html#graphs.Graph.showMore">[docs]</a>    <span class="k">def</span> <span class="nf">showMore</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<div class="viewcode-block" id="Graph.showMore">
+<a class="viewcode-back" href="../techDoc.html#graphs.Graph.showMore">[docs]</a>
+    <span class="k">def</span> <span class="nf">showMore</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Generic show method for Graph instances.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
@@ -2134,7 +2246,10 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">showMIS</span><span class="p">()</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">showCliques</span><span class="p">()</span></div>
 
-<div class="viewcode-block" id="Graph.showShort"><a class="viewcode-back" href="../techDoc.html#graphs.Graph.showShort">[docs]</a>    <span class="k">def</span> <span class="nf">showShort</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+
+<div class="viewcode-block" id="Graph.showShort">
+<a class="viewcode-back" href="../techDoc.html#graphs.Graph.showShort">[docs]</a>
+    <span class="k">def</span> <span class="nf">showShort</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Generic show method for Graph instances.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
@@ -2148,11 +2263,15 @@
         <span class="k">for</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">vKeys</span><span class="p">:</span>
             <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;</span><span class="si">%s</span><span class="s1"> -&gt; </span><span class="si">%s</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="n">v</span><span class="p">,</span> <span class="nb">list</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">gamma</span><span class="p">[</span><span class="n">v</span><span class="p">])))</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">computeDegreeDistribution</span><span class="p">(</span><span class="n">Comments</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">computeNeighbourhoodDepthDistribution</span><span class="p">(</span><span class="n">Comments</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span></div></div>
+        <span class="bp">self</span><span class="o">.</span><span class="n">computeNeighbourhoodDepthDistribution</span><span class="p">(</span><span class="n">Comments</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span></div>
+</div>
+
 
 <span class="c1">#----------------</span>
 
-<div class="viewcode-block" id="EmptyGraph"><a class="viewcode-back" href="../techDoc.html#graphs.EmptyGraph">[docs]</a><span class="k">class</span> <span class="nc">EmptyGraph</span><span class="p">(</span><span class="n">Graph</span><span class="p">):</span>
+<div class="viewcode-block" id="EmptyGraph">
+<a class="viewcode-back" href="../techDoc.html#graphs.EmptyGraph">[docs]</a>
+<span class="k">class</span> <span class="nc">EmptyGraph</span><span class="p">(</span><span class="n">Graph</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Intantiates graph of given order without any positively valued edge.</span>
 
@@ -2183,7 +2302,10 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">size</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">computeSize</span><span class="p">()</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">gamma</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">gammaSets</span><span class="p">()</span></div>
 
-<div class="viewcode-block" id="CompleteGraph"><a class="viewcode-back" href="../techDoc.html#graphs.CompleteGraph">[docs]</a><span class="k">class</span> <span class="nc">CompleteGraph</span><span class="p">(</span><span class="n">Graph</span><span class="p">):</span>
+
+<div class="viewcode-block" id="CompleteGraph">
+<a class="viewcode-back" href="../techDoc.html#graphs.CompleteGraph">[docs]</a>
+<span class="k">class</span> <span class="nc">CompleteGraph</span><span class="p">(</span><span class="n">Graph</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Instances of complete graphs bipolarly valuated in {-1,0,+1}.</span>
 <span class="sd">    Each vertex x is positively linked to</span>
@@ -2230,9 +2352,12 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">size</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">computeSize</span><span class="p">()</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">gamma</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">gammaSets</span><span class="p">()</span></div>
 
+
 <span class="c1">#-----------</span>
 
-<div class="viewcode-block" id="BipartiteGraph"><a class="viewcode-back" href="../techDoc.html#graphs.BipartiteGraph">[docs]</a><span class="k">class</span> <span class="nc">BipartiteGraph</span><span class="p">(</span><span class="n">Graph</span><span class="p">):</span>
+<div class="viewcode-block" id="BipartiteGraph">
+<a class="viewcode-back" href="../techDoc.html#graphs.BipartiteGraph">[docs]</a>
+<span class="k">class</span> <span class="nc">BipartiteGraph</span><span class="p">(</span><span class="n">Graph</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Abstract root class for bipartite graph instances</span>
 <span class="sd">    &quot;&quot;&quot;</span>
@@ -2256,7 +2381,9 @@
         <span class="n">reprString</span> <span class="o">+=</span> <span class="s1">&#39;Attributes     : </span><span class="si">%s</span><span class="se">\n</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="nb">list</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="vm">__dict__</span><span class="o">.</span><span class="n">keys</span><span class="p">())</span>
         <span class="k">return</span> <span class="n">reprString</span>
 
-<div class="viewcode-block" id="BipartiteGraph.computeBestDeterminedMaximalMatching"><a class="viewcode-back" href="../techDoc.html#graphs.BipartiteGraph.computeBestDeterminedMaximalMatching">[docs]</a>    <span class="k">def</span> <span class="nf">computeBestDeterminedMaximalMatching</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">Comments</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span><span class="n">Debug</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
+<div class="viewcode-block" id="BipartiteGraph.computeBestDeterminedMaximalMatching">
+<a class="viewcode-back" href="../techDoc.html#graphs.BipartiteGraph.computeBestDeterminedMaximalMatching">[docs]</a>
+    <span class="k">def</span> <span class="nf">computeBestDeterminedMaximalMatching</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">Comments</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span><span class="n">Debug</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Using the ranked pairs rule for assembling a best determined maximal matching</span>
 <span class="sd">        &quot;&quot;&quot;</span>
@@ -2306,8 +2433,11 @@
         <span class="k">if</span> <span class="n">Debug</span><span class="p">:</span>
             <span class="nb">print</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">lmatching</span><span class="p">),</span><span class="n">lmatching</span><span class="p">)</span>
         <span class="k">return</span> <span class="nb">frozenset</span><span class="p">(</span><span class="n">lmatching</span><span class="p">)</span></div>
+
         
-<div class="viewcode-block" id="BipartiteGraph.showEdgesCharacteristicValues"><a class="viewcode-back" href="../techDoc.html#graphs.BipartiteGraph.showEdgesCharacteristicValues">[docs]</a>    <span class="k">def</span> <span class="nf">showEdgesCharacteristicValues</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">ndigits</span><span class="o">=</span><span class="mi">2</span><span class="p">):</span>
+<div class="viewcode-block" id="BipartiteGraph.showEdgesCharacteristicValues">
+<a class="viewcode-back" href="../techDoc.html#graphs.BipartiteGraph.showEdgesCharacteristicValues">[docs]</a>
+    <span class="k">def</span> <span class="nf">showEdgesCharacteristicValues</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">ndigits</span><span class="o">=</span><span class="mi">2</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Prints the edge links of the bipartite graph instance</span>
 <span class="sd">        &quot;&quot;&quot;</span>
@@ -2342,9 +2472,12 @@
             <span class="nb">print</span><span class="p">(</span> <span class="n">formatString</span> <span class="o">%</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">valuationDomain</span><span class="p">[</span><span class="s1">&#39;min&#39;</span><span class="p">],</span>
                                    <span class="bp">self</span><span class="o">.</span><span class="n">valuationDomain</span><span class="p">[</span><span class="s1">&#39;max&#39;</span><span class="p">]))</span></div>
 
+
         
         
-<div class="viewcode-block" id="BipartiteGraph.exportGraphViz"><a class="viewcode-back" href="../techDoc.html#graphs.BipartiteGraph.exportGraphViz">[docs]</a>    <span class="k">def</span> <span class="nf">exportGraphViz</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">fileName</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+<div class="viewcode-block" id="BipartiteGraph.exportGraphViz">
+<a class="viewcode-back" href="../techDoc.html#graphs.BipartiteGraph.exportGraphViz">[docs]</a>
+    <span class="k">def</span> <span class="nf">exportGraphViz</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">fileName</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
                               <span class="n">Comments</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
                               <span class="n">graphType</span><span class="o">=</span><span class="s1">&#39;png&#39;</span><span class="p">,</span><span class="n">graphSize</span><span class="o">=</span><span class="s1">&#39;7,7&#39;</span><span class="p">,</span>
                               <span class="n">edgeColor</span><span class="o">=</span><span class="s1">&#39;blue&#39;</span><span class="p">,</span>
@@ -2427,10 +2560,14 @@
         <span class="k">except</span><span class="p">:</span>
             <span class="k">if</span> <span class="n">Comments</span><span class="p">:</span>
                 <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;graphViz tools not avalaible! Please check installation.&#39;</span><span class="p">)</span>
-                <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;On Ubuntu: ..$ sudo apt-get install graphviz&#39;</span><span class="p">)</span></div></div>
+                <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;On Ubuntu: ..$ sudo apt-get install graphviz&#39;</span><span class="p">)</span></div>
+</div>
+
     
 
-<div class="viewcode-block" id="CompleteBipartiteGraph"><a class="viewcode-back" href="../techDoc.html#graphs.CompleteBipartiteGraph">[docs]</a><span class="k">class</span> <span class="nc">CompleteBipartiteGraph</span><span class="p">(</span><span class="n">BipartiteGraph</span><span class="p">):</span>
+<div class="viewcode-block" id="CompleteBipartiteGraph">
+<a class="viewcode-back" href="../techDoc.html#graphs.CompleteBipartiteGraph">[docs]</a>
+<span class="k">class</span> <span class="nc">CompleteBipartiteGraph</span><span class="p">(</span><span class="n">BipartiteGraph</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Instances of complete bipartite graphs bipolarly valuated in {-1,0,+1}.</span>
 <span class="sd">    Each vertex x in part *A* is positively linked to each vertex y in part *B*,</span>
@@ -2480,6 +2617,7 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">edges</span> <span class="o">=</span> <span class="n">edges</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">size</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">computeSize</span><span class="p">()</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">gamma</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">gammaSets</span><span class="p">()</span></div>
+
 
 <span class="c1">##    def exportPairingGraphViz(self,fileName=None,</span>
 <span class="c1">##                              Comments=True,</span>
@@ -2567,7 +2705,9 @@
 <span class="c1">##                print(&#39;On Ubuntu: ..$ sudo apt-get install graphviz&#39;)</span>
 
 
-<div class="viewcode-block" id="DualGraph"><a class="viewcode-back" href="../techDoc.html#graphs.DualGraph">[docs]</a><span class="k">class</span> <span class="nc">DualGraph</span><span class="p">(</span><span class="n">Graph</span><span class="p">):</span>
+<div class="viewcode-block" id="DualGraph">
+<a class="viewcode-back" href="../techDoc.html#graphs.DualGraph">[docs]</a>
+<span class="k">class</span> <span class="nc">DualGraph</span><span class="p">(</span><span class="n">Graph</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Instantiates the dual Graph object of a given other Graph instance.</span>
 
@@ -2602,7 +2742,10 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">size</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">computeSize</span><span class="p">()</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">gamma</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">gammaSets</span><span class="p">()</span></div>
 
-<div class="viewcode-block" id="CycleGraph"><a class="viewcode-back" href="../techDoc.html#graphs.CycleGraph">[docs]</a><span class="k">class</span> <span class="nc">CycleGraph</span><span class="p">(</span><span class="n">Graph</span><span class="p">):</span>
+
+<div class="viewcode-block" id="CycleGraph">
+<a class="viewcode-back" href="../techDoc.html#graphs.CycleGraph">[docs]</a>
+<span class="k">class</span> <span class="nc">CycleGraph</span><span class="p">(</span><span class="n">Graph</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Instances of cycle graph characterized in [-1,1].</span>
 
@@ -2655,7 +2798,10 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">size</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">computeSize</span><span class="p">()</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">gamma</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">gammaSets</span><span class="p">()</span></div>
 
-<div class="viewcode-block" id="IntervalIntersectionsGraph"><a class="viewcode-back" href="../techDoc.html#graphs.IntervalIntersectionsGraph">[docs]</a><span class="k">class</span> <span class="nc">IntervalIntersectionsGraph</span><span class="p">(</span><span class="n">Graph</span><span class="p">):</span>
+
+<div class="viewcode-block" id="IntervalIntersectionsGraph">
+<a class="viewcode-back" href="../techDoc.html#graphs.IntervalIntersectionsGraph">[docs]</a>
+<span class="k">class</span> <span class="nc">IntervalIntersectionsGraph</span><span class="p">(</span><span class="n">Graph</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Inveral graph constructed from a list of *n*</span>
 <span class="sd">    intervals, ie pairs (a,b) of integer numbers where a &lt; b.</span>
@@ -2717,7 +2863,10 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">size</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">computeSize</span><span class="p">()</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">gamma</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">gammaSets</span><span class="p">()</span></div>
 
-<div class="viewcode-block" id="RandomIntervalIntersectionsGraph"><a class="viewcode-back" href="../techDoc.html#graphs.RandomIntervalIntersectionsGraph">[docs]</a><span class="k">class</span> <span class="nc">RandomIntervalIntersectionsGraph</span><span class="p">(</span><span class="n">IntervalIntersectionsGraph</span><span class="p">):</span>
+
+<div class="viewcode-block" id="RandomIntervalIntersectionsGraph">
+<a class="viewcode-back" href="../techDoc.html#graphs.RandomIntervalIntersectionsGraph">[docs]</a>
+<span class="k">class</span> <span class="nc">RandomIntervalIntersectionsGraph</span><span class="p">(</span><span class="n">IntervalIntersectionsGraph</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot; Random generator for IntervalIntersectionsGraph intances.&quot;&quot;&quot;</span>
     <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">order</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span><span class="n">seed</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span><span class="n">m</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span><span class="n">M</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span><span class="n">Debug</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
         <span class="kn">import</span> <span class="nn">random</span>
@@ -2742,8 +2891,11 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">edges</span> <span class="o">=</span> <span class="n">lis</span><span class="o">.</span><span class="n">edges</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">size</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">computeSize</span><span class="p">()</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">gamma</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">gammaSets</span><span class="p">()</span></div>
+
         
-<div class="viewcode-block" id="RandomGraph"><a class="viewcode-back" href="../techDoc.html#graphs.RandomGraph">[docs]</a><span class="k">class</span> <span class="nc">RandomGraph</span><span class="p">(</span><span class="n">Graph</span><span class="p">):</span>
+<div class="viewcode-block" id="RandomGraph">
+<a class="viewcode-back" href="../techDoc.html#graphs.RandomGraph">[docs]</a>
+<span class="k">class</span> <span class="nc">RandomGraph</span><span class="p">(</span><span class="n">Graph</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Random instances of the Graph class</span>
 
@@ -2784,7 +2936,10 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">size</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">computeSize</span><span class="p">()</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">gamma</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">gammaSets</span><span class="p">()</span></div>
 
-<div class="viewcode-block" id="RandomValuationGraph"><a class="viewcode-back" href="../techDoc.html#graphs.RandomValuationGraph">[docs]</a><span class="k">class</span> <span class="nc">RandomValuationGraph</span><span class="p">(</span><span class="n">Graph</span><span class="p">):</span>
+
+<div class="viewcode-block" id="RandomValuationGraph">
+<a class="viewcode-back" href="../techDoc.html#graphs.RandomValuationGraph">[docs]</a>
+<span class="k">class</span> <span class="nc">RandomValuationGraph</span><span class="p">(</span><span class="n">Graph</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Specialization of the genuine Graph class for generating temporary</span>
 <span class="sd">    randomly valuated graphs in the range [-1.0;1.0].</span>
@@ -2822,7 +2977,10 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">size</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">computeSize</span><span class="p">()</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">gamma</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">gammaSets</span><span class="p">()</span></div>
 
-<div class="viewcode-block" id="RandomRegularGraph"><a class="viewcode-back" href="../techDoc.html#graphs.RandomRegularGraph">[docs]</a><span class="k">class</span> <span class="nc">RandomRegularGraph</span><span class="p">(</span><span class="n">Graph</span><span class="p">):</span>
+
+<div class="viewcode-block" id="RandomRegularGraph">
+<a class="viewcode-back" href="../techDoc.html#graphs.RandomRegularGraph">[docs]</a>
+<span class="k">class</span> <span class="nc">RandomRegularGraph</span><span class="p">(</span><span class="n">Graph</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Specialization of the general Graph class for generating</span>
 <span class="sd">    temporary random regular graphs of fixed degrees.</span>
@@ -2841,7 +2999,10 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">size</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">computeSize</span><span class="p">()</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">gamma</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">gammaSets</span><span class="p">()</span></div>
 
-<div class="viewcode-block" id="RandomFixedSizeGraph"><a class="viewcode-back" href="../techDoc.html#graphs.RandomFixedSizeGraph">[docs]</a><span class="k">class</span> <span class="nc">RandomFixedSizeGraph</span><span class="p">(</span><span class="n">Graph</span><span class="p">):</span>
+
+<div class="viewcode-block" id="RandomFixedSizeGraph">
+<a class="viewcode-back" href="../techDoc.html#graphs.RandomFixedSizeGraph">[docs]</a>
+<span class="k">class</span> <span class="nc">RandomFixedSizeGraph</span><span class="p">(</span><span class="n">Graph</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Generates a random graph with a fixed size (number of edges), by instantiating a fixed numbers of arcs</span>
 <span class="sd">    from random choices in the set of potential pairs of vertices numbered from 1 to order. </span>
@@ -2892,7 +3053,10 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">size</span> <span class="o">=</span> <span class="n">size</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">gamma</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">gammaSets</span><span class="p">()</span></div>
 
-<div class="viewcode-block" id="RandomFixedDegreeSequenceGraph"><a class="viewcode-back" href="../techDoc.html#graphs.RandomFixedDegreeSequenceGraph">[docs]</a><span class="k">class</span> <span class="nc">RandomFixedDegreeSequenceGraph</span><span class="p">(</span><span class="n">Graph</span><span class="p">):</span>
+
+<div class="viewcode-block" id="RandomFixedDegreeSequenceGraph">
+<a class="viewcode-back" href="../techDoc.html#graphs.RandomFixedDegreeSequenceGraph">[docs]</a>
+<span class="k">class</span> <span class="nc">RandomFixedDegreeSequenceGraph</span><span class="p">(</span><span class="n">Graph</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Specialization of the general Graph class for generating</span>
 <span class="sd">    temporary random graphs with a fixed sequence of degrees.</span>
@@ -2917,7 +3081,10 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="s1">&#39;randomFixedDegreeSequenceGraph&#39;</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">gamma</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">gammaSets</span><span class="p">()</span></div>
 
-<div class="viewcode-block" id="GridGraph"><a class="viewcode-back" href="../techDoc.html#graphs.GridGraph">[docs]</a><span class="k">class</span> <span class="nc">GridGraph</span><span class="p">(</span><span class="n">Graph</span><span class="p">):</span>
+
+<div class="viewcode-block" id="GridGraph">
+<a class="viewcode-back" href="../techDoc.html#graphs.GridGraph">[docs]</a>
+<span class="k">class</span> <span class="nc">GridGraph</span><span class="p">(</span><span class="n">Graph</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Specialization of the general Graph class for generating</span>
 <span class="sd">    temporary Grid graphs of dimension n times m.</span>
@@ -2990,16 +3157,22 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">size</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">computeSize</span><span class="p">()</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">gamma</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">gammaSets</span><span class="p">()</span>
 
-<div class="viewcode-block" id="GridGraph.showShort"><a class="viewcode-back" href="../techDoc.html#graphs.GridGraph.showShort">[docs]</a>    <span class="k">def</span> <span class="nf">showShort</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<div class="viewcode-block" id="GridGraph.showShort">
+<a class="viewcode-back" href="../techDoc.html#graphs.GridGraph.showShort">[docs]</a>
+    <span class="k">def</span> <span class="nf">showShort</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;*----- show short --------------*&#39;</span><span class="p">)</span>
         <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Grid graph    : &#39;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">name</span><span class="p">)</span>
         <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;n             : &#39;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">n</span><span class="p">)</span>
         <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;m             : &#39;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">m</span><span class="p">)</span>
         <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;order         : &#39;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">order</span><span class="p">)</span>
-        <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;size          : &#39;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">size</span><span class="p">)</span></div></div>
+        <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;size          : &#39;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">size</span><span class="p">)</span></div>
+</div>
+
 
 <span class="c1">#--------------------------</span>
-<div class="viewcode-block" id="SnakeGraph"><a class="viewcode-back" href="../techDoc.html#graphs.SnakeGraph">[docs]</a><span class="k">class</span> <span class="nc">SnakeGraph</span><span class="p">(</span><span class="n">GridGraph</span><span class="p">):</span>
+<div class="viewcode-block" id="SnakeGraph">
+<a class="viewcode-back" href="../techDoc.html#graphs.SnakeGraph">[docs]</a>
+<span class="k">class</span> <span class="nc">SnakeGraph</span><span class="p">(</span><span class="n">GridGraph</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Snake graphs S(p/q) are made up of all the integer grid squares between</span>
 <span class="sd">    the lower and upper Christofel paths of the rational number p/q, </span>
@@ -3132,7 +3305,9 @@
                 <span class="n">ucw</span> <span class="o">+=</span> <span class="s1">&#39;B&#39;</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">cw</span> <span class="o">=</span> <span class="p">(</span><span class="n">lcw</span><span class="p">,</span><span class="n">ucw</span><span class="p">)</span>
 
-<div class="viewcode-block" id="SnakeGraph.showShort"><a class="viewcode-back" href="../techDoc.html#graphs.SnakeGraph.showShort">[docs]</a>    <span class="k">def</span> <span class="nf">showShort</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">WithVertices</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+<div class="viewcode-block" id="SnakeGraph.showShort">
+<a class="viewcode-back" href="../techDoc.html#graphs.SnakeGraph.showShort">[docs]</a>
+    <span class="k">def</span> <span class="nf">showShort</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">WithVertices</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Show method for SnakeGraph instances.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
@@ -3152,6 +3327,7 @@
                 <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">gamma</span><span class="p">[</span><span class="n">v</span><span class="p">]</span> <span class="o">!=</span> <span class="nb">set</span><span class="p">():</span>
                     <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;</span><span class="si">%s</span><span class="s1"> -&gt; </span><span class="si">%s</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="n">v</span><span class="p">,</span> <span class="nb">list</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">gamma</span><span class="p">[</span><span class="n">v</span><span class="p">])))</span></div>
 
+
     <span class="k">def</span> <span class="fm">__repr__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Show method for SnakeGraph instances.</span>
@@ -3164,9 +3340,12 @@
         <span class="n">reprString</span> <span class="o">+=</span> <span class="s1">&#39;Upper word       : </span><span class="si">%s</span><span class="se">\n</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="bp">self</span><span class="o">.</span><span class="n">cw</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
         <span class="n">reprString</span> <span class="o">+=</span> <span class="s1">&#39;Lower word       : </span><span class="si">%s</span><span class="se">\n</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="bp">self</span><span class="o">.</span><span class="n">cw</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
         <span class="k">return</span> <span class="n">reprString</span></div>
+
         
 <span class="c1">#---------------------</span>
-<div class="viewcode-block" id="TriangulatedGrid"><a class="viewcode-back" href="../techDoc.html#graphs.TriangulatedGrid">[docs]</a><span class="k">class</span> <span class="nc">TriangulatedGrid</span><span class="p">(</span><span class="n">Graph</span><span class="p">):</span>
+<div class="viewcode-block" id="TriangulatedGrid">
+<a class="viewcode-back" href="../techDoc.html#graphs.TriangulatedGrid">[docs]</a>
+<span class="k">class</span> <span class="nc">TriangulatedGrid</span><span class="p">(</span><span class="n">Graph</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Specialization of the general Graph class for generating</span>
 <span class="sd">    temporary triangulated grids of dimension n times m.</span>
@@ -3244,16 +3423,22 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">size</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">computeSize</span><span class="p">()</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">gamma</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">gammaSets</span><span class="p">()</span>
 
-<div class="viewcode-block" id="TriangulatedGrid.showShort"><a class="viewcode-back" href="../techDoc.html#graphs.TriangulatedGrid.showShort">[docs]</a>    <span class="k">def</span> <span class="nf">showShort</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<div class="viewcode-block" id="TriangulatedGrid.showShort">
+<a class="viewcode-back" href="../techDoc.html#graphs.TriangulatedGrid.showShort">[docs]</a>
+    <span class="k">def</span> <span class="nf">showShort</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;*----- show summary --------------*&#39;</span><span class="p">)</span>
         <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Triangular graph : &#39;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">name</span><span class="p">)</span>
         <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;n x m            : &#39;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">n</span><span class="p">,</span> <span class="s1">&#39;x&#39;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">m</span><span class="p">)</span>
         <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;order            : &#39;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">order</span><span class="p">)</span>
-        <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;size             : &#39;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">size</span><span class="p">)</span></div></div>
+        <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;size             : &#39;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">size</span><span class="p">)</span></div>
+</div>
+
 
 <span class="c1"># --------------------</span>
 
-<div class="viewcode-block" id="TreeGraph"><a class="viewcode-back" href="../techDoc.html#graphs.TreeGraph">[docs]</a><span class="k">class</span> <span class="nc">TreeGraph</span><span class="p">(</span><span class="n">Graph</span><span class="p">):</span>
+<div class="viewcode-block" id="TreeGraph">
+<a class="viewcode-back" href="../techDoc.html#graphs.TreeGraph">[docs]</a>
+<span class="k">class</span> <span class="nc">TreeGraph</span><span class="p">(</span><span class="n">Graph</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Tree graphs generated from a given Prüfer code</span>
 <span class="sd">    &quot;&quot;&quot;</span>
@@ -3292,7 +3477,9 @@
         <span class="k">else</span><span class="p">:</span>
             <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Error: the provided graph instance is not a tree!&#39;</span><span class="p">)</span>
          
-<div class="viewcode-block" id="TreeGraph.tree2Pruefer"><a class="viewcode-back" href="../techDoc.html#graphs.TreeGraph.tree2Pruefer">[docs]</a>    <span class="k">def</span> <span class="nf">tree2Pruefer</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">vertices</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span><span class="n">Debug</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+<div class="viewcode-block" id="TreeGraph.tree2Pruefer">
+<a class="viewcode-back" href="../techDoc.html#graphs.TreeGraph.tree2Pruefer">[docs]</a>
+    <span class="k">def</span> <span class="nf">tree2Pruefer</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">vertices</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span><span class="n">Debug</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Renders the Pruefer code of a given tree.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
@@ -3322,7 +3509,10 @@
             <span class="n">edges</span><span class="o">.</span><span class="n">remove</span><span class="p">(</span><span class="n">leavesEdges</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
         <span class="k">return</span> <span class="n">prueferCode</span></div>
 
-<div class="viewcode-block" id="TreeGraph.computeTreeCenters"><a class="viewcode-back" href="../techDoc.html#graphs.TreeGraph.computeTreeCenters">[docs]</a>    <span class="k">def</span> <span class="nf">computeTreeCenters</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+
+<div class="viewcode-block" id="TreeGraph.computeTreeCenters">
+<a class="viewcode-back" href="../techDoc.html#graphs.TreeGraph.computeTreeCenters">[docs]</a>
+    <span class="k">def</span> <span class="nf">computeTreeCenters</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Renders the centre(s) of the tree, i.e. the vertices with minimal maximal neighbourhood depths.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
@@ -3330,7 +3520,10 @@
         <span class="n">centers</span> <span class="o">=</span> <span class="n">dg</span><span class="o">.</span><span class="n">computeDigraphCentres</span><span class="p">()</span>
         <span class="k">return</span> <span class="n">centers</span></div>
 
-<div class="viewcode-block" id="TreeGraph.tree2OrientedTree"><a class="viewcode-back" href="../techDoc.html#graphs.TreeGraph.tree2OrientedTree">[docs]</a>    <span class="k">def</span> <span class="nf">tree2OrientedTree</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">root</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span><span class="n">Debug</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+
+<div class="viewcode-block" id="TreeGraph.tree2OrientedTree">
+<a class="viewcode-back" href="../techDoc.html#graphs.TreeGraph.tree2OrientedTree">[docs]</a>
+    <span class="k">def</span> <span class="nf">tree2OrientedTree</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">root</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span><span class="n">Debug</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Converts a TreeGraph object into a rooted and oriented tree digraph.</span>
 
@@ -3369,7 +3562,10 @@
             <span class="n">dg</span><span class="o">.</span><span class="n">showRelationTable</span><span class="p">()</span>
         <span class="k">return</span> <span class="n">dg</span> </div>
 
-<div class="viewcode-block" id="TreeGraph.exportOrientedTreeGraphViz"><a class="viewcode-back" href="../techDoc.html#graphs.TreeGraph.exportOrientedTreeGraphViz">[docs]</a>    <span class="k">def</span> <span class="nf">exportOrientedTreeGraphViz</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">root</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+
+<div class="viewcode-block" id="TreeGraph.exportOrientedTreeGraphViz">
+<a class="viewcode-back" href="../techDoc.html#graphs.TreeGraph.exportOrientedTreeGraphViz">[docs]</a>
+    <span class="k">def</span> <span class="nf">exportOrientedTreeGraphViz</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">root</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
                                    <span class="n">direction</span><span class="o">=</span><span class="s1">&#39;downward&#39;</span><span class="p">,</span>
                                    <span class="n">fileName</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
                                    <span class="n">graphType</span><span class="o">=</span><span class="s1">&#39;png&#39;</span><span class="p">,</span>
@@ -3391,9 +3587,13 @@
                                          <span class="n">graphType</span><span class="o">=</span><span class="n">graphType</span><span class="p">,</span>
                                          <span class="n">graphSize</span><span class="o">=</span><span class="n">graphSize</span><span class="p">,</span>
                                          <span class="n">fontSize</span><span class="o">=</span><span class="n">fontSize</span><span class="p">,</span>
-                                         <span class="n">Comments</span><span class="o">=</span><span class="n">Comments</span><span class="p">)</span></div></div>
+                                         <span class="n">Comments</span><span class="o">=</span><span class="n">Comments</span><span class="p">)</span></div>
+</div>
+
 <span class="c1"># -------------------</span>
-<div class="viewcode-block" id="RandomTree"><a class="viewcode-back" href="../techDoc.html#graphs.RandomTree">[docs]</a><span class="k">class</span> <span class="nc">RandomTree</span><span class="p">(</span><span class="n">TreeGraph</span><span class="p">):</span>
+<div class="viewcode-block" id="RandomTree">
+<a class="viewcode-back" href="../techDoc.html#graphs.RandomTree">[docs]</a>
+<span class="k">class</span> <span class="nc">RandomTree</span><span class="p">(</span><span class="n">TreeGraph</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Instance of a tree generated from a random Prüfer code.</span>
 
@@ -3494,10 +3694,13 @@
         <span class="k">if</span> <span class="n">Debug</span><span class="p">:</span>
             <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;gamma = &#39;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">gamma</span><span class="p">)</span></div>
 
+
  
 <span class="c1">#------------------------</span>
 
-<div class="viewcode-block" id="RandomSpanningForest"><a class="viewcode-back" href="../techDoc.html#graphs.RandomSpanningForest">[docs]</a><span class="k">class</span> <span class="nc">RandomSpanningForest</span><span class="p">(</span><span class="n">RandomTree</span><span class="p">):</span>
+<div class="viewcode-block" id="RandomSpanningForest">
+<a class="viewcode-back" href="../techDoc.html#graphs.RandomSpanningForest">[docs]</a>
+<span class="k">class</span> <span class="nc">RandomSpanningForest</span><span class="p">(</span><span class="n">RandomTree</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Random instance of a spanning forest (one or more trees)</span>
 <span class="sd">    generated from a random depth first search graph g traversal.</span>
@@ -3574,7 +3777,9 @@
                 
         <span class="bp">self</span><span class="o">.</span><span class="n">prueferCodes</span> <span class="o">=</span> <span class="n">prueferCodes</span>
 
-<div class="viewcode-block" id="RandomSpanningForest.computeAverageTreeDetermination"><a class="viewcode-back" href="../techDoc.html#graphs.RandomSpanningForest.computeAverageTreeDetermination">[docs]</a>    <span class="k">def</span> <span class="nf">computeAverageTreeDetermination</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">dfs</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+<div class="viewcode-block" id="RandomSpanningForest.computeAverageTreeDetermination">
+<a class="viewcode-back" href="../techDoc.html#graphs.RandomSpanningForest.computeAverageTreeDetermination">[docs]</a>
+    <span class="k">def</span> <span class="nf">computeAverageTreeDetermination</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">dfs</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Renders the mean average determinations of the spanning trees.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
@@ -3595,9 +3800,13 @@
             <span class="k">else</span><span class="p">:</span>
                 <span class="n">maxWeights</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">valuationDomain</span><span class="p">[</span><span class="s1">&#39;max&#39;</span><span class="p">])</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">averageTreeDetermination</span> <span class="o">=</span> <span class="n">maxWeights</span> 
-        <span class="k">return</span>  </div></div>
+        <span class="k">return</span>  </div>
+</div>
+
         
-<div class="viewcode-block" id="RandomSpanningTree"><a class="viewcode-back" href="../techDoc.html#graphs.RandomSpanningTree">[docs]</a><span class="k">class</span> <span class="nc">RandomSpanningTree</span><span class="p">(</span><span class="n">RandomTree</span><span class="p">):</span>
+<div class="viewcode-block" id="RandomSpanningTree">
+<a class="viewcode-back" href="../techDoc.html#graphs.RandomSpanningTree">[docs]</a>
+<span class="k">class</span> <span class="nc">RandomSpanningTree</span><span class="p">(</span><span class="n">RandomTree</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Uniform random instance of a spanning tree</span>
 <span class="sd">    generated with Wilson&#39;s algorithm from a connected Graph g instance.</span>
@@ -3711,9 +3920,12 @@
                 <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;reducedWalk&#39;</span><span class="p">,</span> <span class="n">reducedWalk</span><span class="p">)</span>
             <span class="n">t</span> <span class="o">=</span> <span class="n">k</span>
         <span class="k">return</span> <span class="n">reducedWalk</span></div>
+
                       
 <span class="c1">#----------</span>
-<div class="viewcode-block" id="BestDeterminedSpanningForest"><a class="viewcode-back" href="../techDoc.html#graphs.BestDeterminedSpanningForest">[docs]</a><span class="k">class</span> <span class="nc">BestDeterminedSpanningForest</span><span class="p">(</span><span class="n">RandomSpanningForest</span><span class="p">):</span>
+<div class="viewcode-block" id="BestDeterminedSpanningForest">
+<a class="viewcode-back" href="../techDoc.html#graphs.BestDeterminedSpanningForest">[docs]</a>
+<span class="k">class</span> <span class="nc">BestDeterminedSpanningForest</span><span class="p">(</span><span class="n">RandomSpanningForest</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Constructing the most determined spanning tree (or forest if not connected)</span>
 <span class="sd">    using Kruskal&#39;s greedy algorithm on the dual valuation.</span>
@@ -3844,7 +4056,10 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">dfs</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">depthFirstSearch</span><span class="p">()</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">computeAverageTreeDetermination</span><span class="p">()</span></div>
 
-<div class="viewcode-block" id="Q_Coloring"><a class="viewcode-back" href="../techDoc.html#graphs.Q_Coloring">[docs]</a><span class="k">class</span> <span class="nc">Q_Coloring</span><span class="p">(</span><span class="n">Graph</span><span class="p">):</span>
+
+<div class="viewcode-block" id="Q_Coloring">
+<a class="viewcode-back" href="../techDoc.html#graphs.Q_Coloring">[docs]</a>
+<span class="k">class</span> <span class="nc">Q_Coloring</span><span class="p">(</span><span class="n">Graph</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Generate a q-coloring of a Graph instance via a Gibbs MCMC sampler in</span>
 <span class="sd">    nSim simulation steps (default = len(graph.edges)).</span>
@@ -3961,7 +4176,9 @@
                       <span class="o">%</span> <span class="bp">self</span><span class="o">.</span><span class="n">nSim</span><span class="p">)</span>
         <span class="k">return</span> <span class="n">infeasibleEdges</span>              
 
-<div class="viewcode-block" id="Q_Coloring.exportGraphViz"><a class="viewcode-back" href="../techDoc.html#graphs.Q_Coloring.exportGraphViz">[docs]</a>    <span class="k">def</span> <span class="nf">exportGraphViz</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">fileName</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+<div class="viewcode-block" id="Q_Coloring.exportGraphViz">
+<a class="viewcode-back" href="../techDoc.html#graphs.Q_Coloring.exportGraphViz">[docs]</a>
+    <span class="k">def</span> <span class="nf">exportGraphViz</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">fileName</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
                        <span class="n">Comments</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
                        <span class="n">graphType</span><span class="o">=</span><span class="s1">&#39;png&#39;</span><span class="p">,</span>
                        <span class="n">graphSize</span><span class="o">=</span><span class="s1">&#39;7,7&#39;</span><span class="p">,</span>
@@ -4075,10 +4292,14 @@
             <span class="n">os</span><span class="o">.</span><span class="n">system</span><span class="p">(</span><span class="n">commandString</span><span class="p">)</span>
         <span class="k">except</span><span class="p">:</span>
             <span class="k">if</span> <span class="n">Comments</span><span class="p">:</span>
-                <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;graphViz tools not avalaible! Please check installation.&#39;</span><span class="p">)</span></div></div>
+                <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;graphViz tools not avalaible! Please check installation.&#39;</span><span class="p">)</span></div>
+</div>
 
 
-<div class="viewcode-block" id="IsingModel"><a class="viewcode-back" href="../techDoc.html#graphs.IsingModel">[docs]</a><span class="k">class</span> <span class="nc">IsingModel</span><span class="p">(</span><span class="n">Graph</span><span class="p">):</span>
+
+<div class="viewcode-block" id="IsingModel">
+<a class="viewcode-back" href="../techDoc.html#graphs.IsingModel">[docs]</a>
+<span class="k">class</span> <span class="nc">IsingModel</span><span class="p">(</span><span class="n">Graph</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Specialisation of a Gibbs Sampler for the Ising model</span>
 
@@ -4154,7 +4375,9 @@
                 <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;s,v,nPlus,nMinus,numerator,threshold,U,spin</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">,</span>\
                       <span class="n">s</span><span class="p">,</span><span class="n">v</span><span class="p">,</span><span class="n">nPlus</span><span class="p">,</span><span class="n">nMinus</span><span class="p">,</span><span class="n">numerator</span><span class="p">,</span><span class="n">threshold</span><span class="p">,</span><span class="n">U</span><span class="p">,</span><span class="bp">self</span><span class="o">.</span><span class="n">vertices</span><span class="p">[</span><span class="n">v</span><span class="p">][</span><span class="s1">&#39;spin&#39;</span><span class="p">])</span>
 
-<div class="viewcode-block" id="IsingModel.computeSpinEnergy"><a class="viewcode-back" href="../techDoc.html#graphs.IsingModel.computeSpinEnergy">[docs]</a>    <span class="k">def</span> <span class="nf">computeSpinEnergy</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<div class="viewcode-block" id="IsingModel.computeSpinEnergy">
+<a class="viewcode-back" href="../techDoc.html#graphs.IsingModel.computeSpinEnergy">[docs]</a>
+    <span class="k">def</span> <span class="nf">computeSpinEnergy</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Spin energy H(c) of a spin configuration is</span>
 <span class="sd">        H(c) = -sum_{{x,y} in self.edges}[spin_c(x)*spin_c(y)]</span>
@@ -4166,8 +4389,11 @@
             <span class="n">y</span> <span class="o">=</span> <span class="n">pair</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
             <span class="n">Hc</span> <span class="o">-=</span> <span class="bp">self</span><span class="o">.</span><span class="n">vertices</span><span class="p">[</span><span class="n">x</span><span class="p">][</span><span class="s1">&#39;spin&#39;</span><span class="p">]</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">vertices</span><span class="p">[</span><span class="n">y</span><span class="p">][</span><span class="s1">&#39;spin&#39;</span><span class="p">]</span>
         <span class="k">return</span> <span class="n">Hc</span>        </div>
+
     
-<div class="viewcode-block" id="IsingModel.exportGraphViz"><a class="viewcode-back" href="../techDoc.html#graphs.IsingModel.exportGraphViz">[docs]</a>    <span class="k">def</span> <span class="nf">exportGraphViz</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">fileName</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+<div class="viewcode-block" id="IsingModel.exportGraphViz">
+<a class="viewcode-back" href="../techDoc.html#graphs.IsingModel.exportGraphViz">[docs]</a>
+    <span class="k">def</span> <span class="nf">exportGraphViz</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">fileName</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
                        <span class="n">Comments</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
                        <span class="n">graphType</span><span class="o">=</span><span class="s1">&#39;png&#39;</span><span class="p">,</span>
                        <span class="n">graphSize</span><span class="o">=</span><span class="s1">&#39;7,7&#39;</span><span class="p">,</span>
@@ -4253,9 +4479,13 @@
             <span class="n">os</span><span class="o">.</span><span class="n">system</span><span class="p">(</span><span class="n">commandString</span><span class="p">)</span>
         <span class="k">except</span><span class="p">:</span>
             <span class="k">if</span> <span class="n">Comments</span><span class="p">:</span>
-                <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;graphViz tools not avalaible! Please check installation.&#39;</span><span class="p">)</span></div></div>
+                <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;graphViz tools not avalaible! Please check installation.&#39;</span><span class="p">)</span></div>
+</div>
 
-<div class="viewcode-block" id="MetropolisChain"><a class="viewcode-back" href="../techDoc.html#graphs.MetropolisChain">[docs]</a><span class="k">class</span> <span class="nc">MetropolisChain</span><span class="p">(</span><span class="n">Graph</span><span class="p">):</span>
+
+<div class="viewcode-block" id="MetropolisChain">
+<a class="viewcode-back" href="../techDoc.html#graphs.MetropolisChain">[docs]</a>
+<span class="k">class</span> <span class="nc">MetropolisChain</span><span class="p">(</span><span class="n">Graph</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Specialisation of the graph class for implementing a generic</span>
 <span class="sd">    Metropolis Markov Chain Monte Carlo sampler with a given probability distribution</span>
@@ -4382,7 +4612,9 @@
             <span class="n">frequency</span><span class="p">[</span><span class="n">x</span><span class="p">]</span> <span class="o">/=</span> <span class="n">nSim</span>
         <span class="k">return</span> <span class="n">frequency</span>
 
-<div class="viewcode-block" id="MetropolisChain.saveCSVTransition"><a class="viewcode-back" href="../techDoc.html#graphs.MetropolisChain.saveCSVTransition">[docs]</a>    <span class="k">def</span> <span class="nf">saveCSVTransition</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">fileName</span><span class="o">=</span><span class="s1">&#39;transition&#39;</span><span class="p">,</span><span class="n">Debug</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+<div class="viewcode-block" id="MetropolisChain.saveCSVTransition">
+<a class="viewcode-back" href="../techDoc.html#graphs.MetropolisChain.saveCSVTransition">[docs]</a>
+    <span class="k">def</span> <span class="nf">saveCSVTransition</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">fileName</span><span class="o">=</span><span class="s1">&#39;transition&#39;</span><span class="p">,</span><span class="n">Debug</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Persistent storage of the transition matrix in the form of</span>
 <span class="sd">            a csv file. &quot;&quot;&quot;</span>
         <span class="kn">import</span> <span class="nn">csv</span>
@@ -4410,7 +4642,10 @@
             <span class="n">csvfo</span><span class="o">.</span><span class="n">writerow</span><span class="p">(</span><span class="n">rowText</span><span class="p">)</span>
         <span class="n">fo</span><span class="o">.</span><span class="n">close</span><span class="p">()</span></div>
 
-<div class="viewcode-block" id="MetropolisChain.showTransitionMatrix"><a class="viewcode-back" href="../techDoc.html#graphs.MetropolisChain.showTransitionMatrix">[docs]</a>    <span class="k">def</span> <span class="nf">showTransitionMatrix</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">Sorted</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>\
+
+<div class="viewcode-block" id="MetropolisChain.showTransitionMatrix">
+<a class="viewcode-back" href="../techDoc.html#graphs.MetropolisChain.showTransitionMatrix">[docs]</a>
+    <span class="k">def</span> <span class="nf">showTransitionMatrix</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">Sorted</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>\
                           <span class="n">IntegerValues</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>\
                           <span class="n">vertices</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>\
                           <span class="n">relation</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>\
@@ -4460,9 +4695,13 @@
                         <span class="n">formatString</span> <span class="o">=</span> <span class="s1">&#39; - </span><span class="se">\t</span><span class="s1">&#39;</span>
                         <span class="nb">print</span><span class="p">(</span><span class="n">formatString</span><span class="p">,</span> <span class="n">end</span><span class="o">=</span><span class="s1">&#39; &#39;</span><span class="p">)</span>                    
             <span class="nb">print</span><span class="p">()</span>
-        <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)</span></div></div>
+        <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)</span></div>
+</div>
+
         
-<div class="viewcode-block" id="MISModel"><a class="viewcode-back" href="../techDoc.html#graphs.MISModel">[docs]</a><span class="k">class</span> <span class="nc">MISModel</span><span class="p">(</span><span class="n">Graph</span><span class="p">):</span>
+<div class="viewcode-block" id="MISModel">
+<a class="viewcode-back" href="../techDoc.html#graphs.MISModel">[docs]</a>
+<span class="k">class</span> <span class="nc">MISModel</span><span class="p">(</span><span class="n">Graph</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Specialisation of a Gibbs Sampler for the hard code model,</span>
 <span class="sd">    that is a random MIS generator.</span>
@@ -4569,7 +4808,9 @@
                       <span class="n">s</span><span class="p">,</span><span class="n">v</span><span class="p">,</span><span class="bp">self</span><span class="o">.</span><span class="n">gamma</span><span class="p">[</span><span class="n">v</span><span class="p">],</span><span class="bp">self</span><span class="o">.</span><span class="n">vertices</span><span class="p">[</span><span class="n">v</span><span class="p">][</span><span class="s1">&#39;mis&#39;</span><span class="p">])</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">mis</span><span class="p">,</span><span class="bp">self</span><span class="o">.</span><span class="n">misCover</span><span class="p">,</span><span class="bp">self</span><span class="o">.</span><span class="n">unCovered</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">checkMIS</span><span class="p">(</span><span class="n">Comments</span><span class="o">=</span><span class="n">Debug</span><span class="p">)</span>
 
-<div class="viewcode-block" id="MISModel.checkMIS"><a class="viewcode-back" href="../techDoc.html#graphs.MISModel.checkMIS">[docs]</a>    <span class="k">def</span> <span class="nf">checkMIS</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">Comments</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
+<div class="viewcode-block" id="MISModel.checkMIS">
+<a class="viewcode-back" href="../techDoc.html#graphs.MISModel.checkMIS">[docs]</a>
+    <span class="k">def</span> <span class="nf">checkMIS</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">Comments</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Verify maximality of independent set.</span>
 
@@ -4592,8 +4833,11 @@
             <span class="k">else</span><span class="p">:</span>
                 <span class="nb">print</span><span class="p">(</span><span class="n">mis</span><span class="p">,</span><span class="s1">&#39; is not maximal, uncovered = &#39;</span><span class="p">,</span><span class="n">unCovered</span><span class="p">)</span>
         <span class="k">return</span> <span class="n">mis</span><span class="p">,</span><span class="n">misCover</span><span class="p">,</span><span class="n">unCovered</span></div>
+
     
-<div class="viewcode-block" id="MISModel.exportGraphViz"><a class="viewcode-back" href="../techDoc.html#graphs.MISModel.exportGraphViz">[docs]</a>    <span class="k">def</span> <span class="nf">exportGraphViz</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">fileName</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+<div class="viewcode-block" id="MISModel.exportGraphViz">
+<a class="viewcode-back" href="../techDoc.html#graphs.MISModel.exportGraphViz">[docs]</a>
+    <span class="k">def</span> <span class="nf">exportGraphViz</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">fileName</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
                        <span class="n">Comments</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
                        <span class="n">graphType</span><span class="o">=</span><span class="s1">&#39;png&#39;</span><span class="p">,</span>
                        <span class="n">graphSize</span><span class="o">=</span><span class="s1">&#39;7,7&#39;</span><span class="p">,</span>
@@ -4674,11 +4918,15 @@
             <span class="n">os</span><span class="o">.</span><span class="n">system</span><span class="p">(</span><span class="n">commandString</span><span class="p">)</span>
         <span class="k">except</span><span class="p">:</span>
             <span class="k">if</span> <span class="n">Comments</span><span class="p">:</span>
-                <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;graphViz tools not avalaible! Please check installation.&#39;</span><span class="p">)</span></div></div>
+                <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;graphViz tools not avalaible! Please check installation.&#39;</span><span class="p">)</span></div>
+</div>
+
                 
 <span class="c1">##########################</span>
 
-<div class="viewcode-block" id="LineGraph"><a class="viewcode-back" href="../techDoc.html#graphs.LineGraph">[docs]</a><span class="k">class</span> <span class="nc">LineGraph</span><span class="p">(</span><span class="n">Graph</span><span class="p">):</span>
+<div class="viewcode-block" id="LineGraph">
+<a class="viewcode-back" href="../techDoc.html#graphs.LineGraph">[docs]</a>
+<span class="k">class</span> <span class="nc">LineGraph</span><span class="p">(</span><span class="n">Graph</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Line graphs represent the **adjacencies between edges** of a graph instance.</span>
 
@@ -4814,9 +5062,12 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">size</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">computeSize</span><span class="p">()</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">gamma</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">gammaSets</span><span class="p">()</span></div>
 
+
 <span class="c1">####################</span>
 
-<div class="viewcode-block" id="PermutationGraph"><a class="viewcode-back" href="../techDoc.html#graphs.PermutationGraph">[docs]</a><span class="k">class</span> <span class="nc">PermutationGraph</span><span class="p">(</span><span class="n">Graph</span><span class="p">):</span>
+<div class="viewcode-block" id="PermutationGraph">
+<a class="viewcode-back" href="../techDoc.html#graphs.PermutationGraph">[docs]</a>
+<span class="k">class</span> <span class="nc">PermutationGraph</span><span class="p">(</span><span class="n">Graph</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Martin Ch. Gulombic, Agorithmic Graph Theory and Perfect Graphs 2nd Ed.,</span>
 <span class="sd">    Annals of Discrete Mathematics 57, Elsevier, Chapter 7, pp 157-170.</span>
@@ -4876,7 +5127,9 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">size</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">computeSize</span><span class="p">()</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">gamma</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">gammaSets</span><span class="p">()</span>
 
-<div class="viewcode-block" id="PermutationGraph.transitiveOrientation"><a class="viewcode-back" href="../techDoc.html#graphs.PermutationGraph.transitiveOrientation">[docs]</a>    <span class="k">def</span> <span class="nf">transitiveOrientation</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<div class="viewcode-block" id="PermutationGraph.transitiveOrientation">
+<a class="viewcode-back" href="../techDoc.html#graphs.PermutationGraph.transitiveOrientation">[docs]</a>
+    <span class="k">def</span> <span class="nf">transitiveOrientation</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Renders a digraph where each edge of the permutation graph *self*</span>
 <span class="sd">        is converted into an arc oriented in increasing order of the adjacent vertices&#39; numbers.</span>
@@ -4941,7 +5194,10 @@
         <span class="n">g</span><span class="o">.</span><span class="n">notGamma</span> <span class="o">=</span> <span class="n">g</span><span class="o">.</span><span class="n">notGammaSets</span><span class="p">()</span>
         <span class="k">return</span> <span class="n">g</span></div>
 
-<div class="viewcode-block" id="PermutationGraph.computeMinimalVertexColoring"><a class="viewcode-back" href="../techDoc.html#graphs.PermutationGraph.computeMinimalVertexColoring">[docs]</a>    <span class="k">def</span> <span class="nf">computeMinimalVertexColoring</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">colors</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span><span class="n">Comments</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span><span class="n">Debug</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+
+<div class="viewcode-block" id="PermutationGraph.computeMinimalVertexColoring">
+<a class="viewcode-back" href="../techDoc.html#graphs.PermutationGraph.computeMinimalVertexColoring">[docs]</a>
+    <span class="k">def</span> <span class="nf">computeMinimalVertexColoring</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">colors</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span><span class="n">Comments</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span><span class="n">Debug</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Computes a vertex coloring by using a minimal number of color queues for sorting the</span>
 <span class="sd">        given permutation. Sets by the way the chromatic number of the graph.</span>
@@ -4984,9 +5240,13 @@
         <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">vertices</span><span class="p">[</span><span class="n">vertexKeys</span><span class="p">[</span><span class="n">i</span><span class="p">]][</span><span class="s1">&#39;color&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">vertexColor</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
             <span class="k">if</span> <span class="n">Comments</span><span class="p">:</span>
-                <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;vertex </span><span class="si">%s</span><span class="s1">: </span><span class="si">%s</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="n">vertexKeys</span><span class="p">[</span><span class="n">i</span><span class="p">],</span><span class="n">vertexColor</span><span class="p">[</span><span class="n">i</span><span class="p">]))</span></div></div>
+                <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;vertex </span><span class="si">%s</span><span class="s1">: </span><span class="si">%s</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="n">vertexKeys</span><span class="p">[</span><span class="n">i</span><span class="p">],</span><span class="n">vertexColor</span><span class="p">[</span><span class="n">i</span><span class="p">]))</span></div>
+</div>
+
     
-<div class="viewcode-block" id="RandomPermutationGraph"><a class="viewcode-back" href="../techDoc.html#graphs.RandomPermutationGraph">[docs]</a><span class="k">class</span> <span class="nc">RandomPermutationGraph</span><span class="p">(</span><span class="n">PermutationGraph</span><span class="p">):</span>
+<div class="viewcode-block" id="RandomPermutationGraph">
+<a class="viewcode-back" href="../techDoc.html#graphs.RandomPermutationGraph">[docs]</a>
+<span class="k">class</span> <span class="nc">RandomPermutationGraph</span><span class="p">(</span><span class="n">PermutationGraph</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    A generator for random permutation graphs.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
@@ -5000,6 +5260,7 @@
         <span class="k">for</span> <span class="n">a</span> <span class="ow">in</span> <span class="n">att</span><span class="p">:</span>
             <span class="bp">self</span><span class="o">.</span><span class="vm">__dict__</span><span class="p">[</span><span class="n">a</span><span class="p">]</span> <span class="o">=</span> <span class="n">g</span><span class="o">.</span><span class="vm">__dict__</span><span class="p">[</span><span class="n">a</span><span class="p">]</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="s1">&#39;randomPermGraph&#39;</span></div>
+
         
 <span class="c1"># --------------testing the module ----</span>
 <span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s1">&#39;__main__&#39;</span><span class="p">:</span>

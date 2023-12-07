@@ -21,16 +21,16 @@
     <script src="../_static/js/html5shiv.min.js"></script>
   <![endif]-->
   
-        <script src="../_static/jquery.js"></script>
-        <script src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
-        <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
-        <script src="../_static/doctools.js"></script>
-        <script src="../_static/sphinx_highlight.js"></script>
-        <script src="../_static/clipboard.min.js"></script>
-        <script src="../_static/copybutton.js"></script>
-        <script src="../_static/js/hoverxref.js"></script>
-        <script src="../_static/js/tooltipster.bundle.min.js"></script>
-        <script src="../_static/js/micromodal.min.js"></script>
+        <script src="../_static/jquery.js?v=5d32c60e"></script>
+        <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script src="../_static/documentation_options.js?v=e6f4c021"></script>
+        <script src="../_static/doctools.js?v=888ff710"></script>
+        <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+        <script src="../_static/clipboard.min.js?v=a7894cd8"></script>
+        <script src="../_static/copybutton.js?v=15d7cbb8"></script>
+        <script src="../_static/js/hoverxref.js?v=82c55261"></script>
+        <script src="../_static/js/tooltipster.bundle.min.js?v=18bf091b"></script>
+        <script src="../_static/js/micromodal.min.js?v=04d6302d"></script>
     <script src="../_static/js/theme.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" /> 
@@ -118,7 +118,9 @@
 <span class="kn">from</span> <span class="nn">decimal</span> <span class="kn">import</span> <span class="n">Decimal</span>
 <span class="kn">from</span> <span class="nn">perfTabs</span> <span class="kn">import</span> <span class="n">PerformanceTableau</span>
 
-<div class="viewcode-block" id="PerformanceQuantiles"><a class="viewcode-back" href="../techDoc.html#performanceQuantiles.PerformanceQuantiles">[docs]</a><span class="k">class</span> <span class="nc">PerformanceQuantiles</span><span class="p">(</span><span class="n">PerformanceTableau</span><span class="p">):</span>
+<div class="viewcode-block" id="PerformanceQuantiles">
+<a class="viewcode-back" href="../techDoc.html#performanceQuantiles.PerformanceQuantiles">[docs]</a>
+<span class="k">class</span> <span class="nc">PerformanceQuantiles</span><span class="p">(</span><span class="n">PerformanceTableau</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Implements the incremental performance quantiles representation of a</span>
 <span class="sd">    given performance tableau.</span>
@@ -748,7 +750,9 @@
             <span class="bp">self</span><span class="o">.</span><span class="n">historySizes</span><span class="p">[</span><span class="n">g</span><span class="p">]</span> <span class="o">=</span> <span class="n">t</span>
 
 <span class="c1">#------------- public class methods</span>
-<div class="viewcode-block" id="PerformanceQuantiles.computeQuantileProfile"><a class="viewcode-back" href="../techDoc.html#performanceQuantiles.PerformanceQuantiles.computeQuantileProfile">[docs]</a>    <span class="k">def</span> <span class="nf">computeQuantileProfile</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">p</span><span class="p">,</span><span class="n">qFreq</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span><span class="n">Debug</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+<div class="viewcode-block" id="PerformanceQuantiles.computeQuantileProfile">
+<a class="viewcode-back" href="../techDoc.html#performanceQuantiles.PerformanceQuantiles.computeQuantileProfile">[docs]</a>
+    <span class="k">def</span> <span class="nf">computeQuantileProfile</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">p</span><span class="p">,</span><span class="n">qFreq</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span><span class="n">Debug</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Renders the quantile *q(p)* on all the criteria.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
@@ -766,7 +770,10 @@
                 <span class="nb">print</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">quantiles</span><span class="p">[</span><span class="n">g</span><span class="p">],</span> <span class="n">q</span><span class="p">)</span>
         <span class="k">return</span> <span class="n">quantiles</span></div>
 
-<div class="viewcode-block" id="PerformanceQuantiles.save"><a class="viewcode-back" href="../techDoc.html#performanceQuantiles.PerformanceQuantiles.save">[docs]</a>    <span class="k">def</span> <span class="nf">save</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">fileName</span><span class="o">=</span><span class="s1">&#39;tempPerfQuant&#39;</span><span class="p">,</span><span class="n">valueDigits</span><span class="o">=</span><span class="mi">2</span><span class="p">):</span>
+
+<div class="viewcode-block" id="PerformanceQuantiles.save">
+<a class="viewcode-back" href="../techDoc.html#performanceQuantiles.PerformanceQuantiles.save">[docs]</a>
+    <span class="k">def</span> <span class="nf">save</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">fileName</span><span class="o">=</span><span class="s1">&#39;tempPerfQuant&#39;</span><span class="p">,</span><span class="n">valueDigits</span><span class="o">=</span><span class="mi">2</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Persistant storage of a PerformanceQuantiles instance.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
@@ -846,8 +853,11 @@
             <span class="n">fo</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s1">&#39;],</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)</span>
         <span class="n">fo</span><span class="o">.</span><span class="n">write</span><span class="p">(</span> <span class="s1">&#39;}</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)</span>       
         <span class="n">fo</span><span class="o">.</span><span class="n">close</span><span class="p">()</span></div>
+
         
-<div class="viewcode-block" id="PerformanceQuantiles.showActions"><a class="viewcode-back" href="../techDoc.html#performanceQuantiles.PerformanceQuantiles.showActions">[docs]</a>    <span class="k">def</span> <span class="nf">showActions</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<div class="viewcode-block" id="PerformanceQuantiles.showActions">
+<a class="viewcode-back" href="../techDoc.html#performanceQuantiles.PerformanceQuantiles.showActions">[docs]</a>
+    <span class="k">def</span> <span class="nf">showActions</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;&quot;&quot;No decision actions are actually being stored!</span>
 <span class="s2">Only the cumulated density function per criteria of so far</span>
 <span class="s2">observed performance evaluations are kept.</span>
@@ -856,7 +866,10 @@
         <span class="k">for</span> <span class="n">g</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">criteria</span><span class="p">:</span>
             <span class="nb">print</span><span class="p">(</span><span class="n">g</span><span class="p">,</span><span class="bp">self</span><span class="o">.</span><span class="n">historySizes</span><span class="p">[</span><span class="n">g</span><span class="p">])</span></div>
 
-<div class="viewcode-block" id="PerformanceQuantiles.showCriteria"><a class="viewcode-back" href="../techDoc.html#performanceQuantiles.PerformanceQuantiles.showCriteria">[docs]</a>    <span class="k">def</span> <span class="nf">showCriteria</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">IntegerWeights</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span><span class="n">Alphabetic</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span><span class="n">ByObjectives</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span><span class="n">Debug</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+
+<div class="viewcode-block" id="PerformanceQuantiles.showCriteria">
+<a class="viewcode-back" href="../techDoc.html#performanceQuantiles.PerformanceQuantiles.showCriteria">[docs]</a>
+    <span class="k">def</span> <span class="nf">showCriteria</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">IntegerWeights</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span><span class="n">Alphabetic</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span><span class="n">ByObjectives</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span><span class="n">Debug</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        print Criteria with thresholds and weights.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
@@ -987,7 +1000,10 @@
                             <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;</span><span class="si">%.2f</span><span class="s1"> : </span><span class="si">%.2f</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="n">q</span><span class="p">,</span><span class="bp">self</span><span class="o">.</span><span class="n">criteria</span><span class="p">[</span><span class="n">g</span><span class="p">][</span><span class="s1">&#39;minValue&#39;</span><span class="p">])</span>   <span class="p">)</span>                 
                 <span class="nb">print</span><span class="p">()</span></div>
 
-<div class="viewcode-block" id="PerformanceQuantiles.showHTMLLimitingQuantiles"><a class="viewcode-back" href="../techDoc.html#performanceQuantiles.PerformanceQuantiles.showHTMLLimitingQuantiles">[docs]</a>    <span class="k">def</span> <span class="nf">showHTMLLimitingQuantiles</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">Sorted</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+
+<div class="viewcode-block" id="PerformanceQuantiles.showHTMLLimitingQuantiles">
+<a class="viewcode-back" href="../techDoc.html#performanceQuantiles.PerformanceQuantiles.showHTMLLimitingQuantiles">[docs]</a>
+    <span class="k">def</span> <span class="nf">showHTMLLimitingQuantiles</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">Sorted</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
                                    <span class="n">Transposed</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span><span class="n">ndigits</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span>
                                    <span class="n">ContentCentered</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span><span class="n">title</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
                                   <span class="n">htmlFileName</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
@@ -1012,7 +1028,10 @@
         <span class="n">url</span> <span class="o">=</span> <span class="s1">&#39;file://&#39;</span><span class="o">+</span><span class="n">fileName</span>
         <span class="n">webbrowser</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="n">url</span><span class="p">,</span><span class="n">new</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span></div>
 
-<div class="viewcode-block" id="PerformanceQuantiles.showLimitingQuantiles"><a class="viewcode-back" href="../techDoc.html#performanceQuantiles.PerformanceQuantiles.showLimitingQuantiles">[docs]</a>    <span class="k">def</span> <span class="nf">showLimitingQuantiles</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">ByObjectives</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span><span class="n">Sorted</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span><span class="n">ndigits</span><span class="o">=</span><span class="mi">2</span><span class="p">):</span>
+
+<div class="viewcode-block" id="PerformanceQuantiles.showLimitingQuantiles">
+<a class="viewcode-back" href="../techDoc.html#performanceQuantiles.PerformanceQuantiles.showLimitingQuantiles">[docs]</a>
+    <span class="k">def</span> <span class="nf">showLimitingQuantiles</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">ByObjectives</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span><span class="n">Sorted</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span><span class="n">ndigits</span><span class="o">=</span><span class="mi">2</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Prints the performance quantile limits in table format: criteria x limits.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
@@ -1067,7 +1086,10 @@
                     <span class="nb">print</span><span class="p">(</span><span class="n">formatString</span> <span class="o">%</span> <span class="p">(</span><span class="n">value</span><span class="p">),</span> <span class="n">end</span><span class="o">=</span><span class="s1">&#39; &#39;</span><span class="p">)</span>
                 <span class="nb">print</span><span class="p">()</span>      </div>
 
-<div class="viewcode-block" id="PerformanceQuantiles.showCriterionStatistics"><a class="viewcode-back" href="../techDoc.html#performanceQuantiles.PerformanceQuantiles.showCriterionStatistics">[docs]</a>    <span class="k">def</span> <span class="nf">showCriterionStatistics</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">g</span><span class="p">,</span><span class="n">Debug</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+
+<div class="viewcode-block" id="PerformanceQuantiles.showCriterionStatistics">
+<a class="viewcode-back" href="../techDoc.html#performanceQuantiles.PerformanceQuantiles.showCriterionStatistics">[docs]</a>
+    <span class="k">def</span> <span class="nf">showCriterionStatistics</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">g</span><span class="p">,</span><span class="n">Debug</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        show statistics concerning the evaluation distributions</span>
 <span class="sd">        on each criteria.</span>
@@ -1096,6 +1118,7 @@
         <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;    p%</span><span class="se">\t</span><span class="s1"> q(p)&#39;</span><span class="p">)</span>  
         <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">nc</span><span class="p">):</span>
             <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;   </span><span class="si">%.0f</span><span class="se">\t</span><span class="s1"> </span><span class="si">%.2f</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="n">qFreq</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">*</span><span class="mi">100</span><span class="p">,</span> <span class="n">glimitingQuantiles</span><span class="p">[</span><span class="n">i</span><span class="p">]))</span>               </div>
+
 <span class="c1">##                print(&#39;  mean evaluation       : %.2f&#39; % (averageEvaluation))</span>
 <span class="c1">##                print(&#39;  standard deviation    : %.2f&#39; % (stdDevEvaluation))</span>
 <span class="c1">##                print(&#39;  maximal evaluation    : %.2f&#39; % (maxEvaluation))</span>
@@ -1105,7 +1128,9 @@
 <span class="c1">##                print(&#39;  minimal evaluation    : %.2f&#39; % (minEvaluation))</span>
 
         
-<div class="viewcode-block" id="PerformanceQuantiles.updateQuantiles"><a class="viewcode-back" href="../techDoc.html#performanceQuantiles.PerformanceQuantiles.updateQuantiles">[docs]</a>    <span class="k">def</span> <span class="nf">updateQuantiles</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">newData</span><span class="p">,</span><span class="n">historySize</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span><span class="n">Debug</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+<div class="viewcode-block" id="PerformanceQuantiles.updateQuantiles">
+<a class="viewcode-back" href="../techDoc.html#performanceQuantiles.PerformanceQuantiles.updateQuantiles">[docs]</a>
+    <span class="k">def</span> <span class="nf">updateQuantiles</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">newData</span><span class="p">,</span><span class="n">historySize</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span><span class="n">Debug</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Update the PerformanceQuantiles with a set of new random decision actions.</span>
 <span class="sd">        Parameter *historysize* allows to take more or less into account the historical situation.</span>
@@ -1129,7 +1154,9 @@
             <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">newActions</span><span class="p">:</span>
                 <span class="k">if</span> <span class="n">gNewEvaluation</span><span class="p">[</span><span class="n">x</span><span class="p">]</span> <span class="o">!=</span> <span class="n">NA</span><span class="p">:</span>
                     <span class="n">gNewValues</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">gNewEvaluation</span><span class="p">[</span><span class="n">x</span><span class="p">])</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">_updateCriterionQuantiles</span><span class="p">(</span><span class="n">g</span><span class="p">,</span><span class="n">gNewValues</span><span class="p">,</span><span class="n">historySize</span><span class="o">=</span><span class="n">historySize</span><span class="p">,</span><span class="n">Debug</span><span class="o">=</span><span class="n">Debug</span><span class="p">)</span></div></div>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_updateCriterionQuantiles</span><span class="p">(</span><span class="n">g</span><span class="p">,</span><span class="n">gNewValues</span><span class="p">,</span><span class="n">historySize</span><span class="o">=</span><span class="n">historySize</span><span class="p">,</span><span class="n">Debug</span><span class="o">=</span><span class="n">Debug</span><span class="p">)</span></div>
+</div>
+
 <span class="c1">##        self.T += len(newActions)  </span>
     
 

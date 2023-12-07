@@ -86,7 +86,7 @@ From Python3.10.4 on, the *distutils* package and the direct usage of *setup.py*
 
 This *make* command  launches in fact a *${PYTHON} -m pip -v install --upgrade --scr = .* command that installs the Digraph3 modules in the running virtual environment (recommended option) or the user's local *site-packages* directory. A system wide installation is possible with prefixing the *make installPip* commad with *sudo*.
 
-If the **cython** (https://cython.org/) C-compiled modules for Big Data applications are required, it is necessary to previously install the *cython* package and, if not yeat installed, the *wheel*  package in the running Python environment::
+If the **cython** (https://cython.org/) C-compiled modules for Big Data applications are required, it is necessary to previously install the *cython* package and, if not yet installed, the *wheel*  package in the running Python environment::
 
      ...$ python3 -m pip install cython wheel
 
