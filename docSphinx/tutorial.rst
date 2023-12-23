@@ -9468,7 +9468,7 @@ In order to find now the fairest pairing among this potentially huge set of intr
    
 Computing the fairest intragroup pairing
 ````````````````````````````````````````
-For a pairing problem of tiny order (*k* = 6) we may use the :py:class:`~pairings.FairestIntraGroupPairing` class for computing in a brute force approach the fairest possible pairing solution :
+For a pairing problem of tiny order (:math:`(2 \times k = 6)`) we may use the :py:class:`~pairings.FairestIntraGroupPairing` class for computing in a brute force approach the fairest possible pairing solution :
 
 .. code-block:: pycon
    :linenos:
@@ -9489,7 +9489,7 @@ For a pairing problem of tiny order (*k* = 6) we may use the :py:class:`~pairing
     Average correlation : +0.833
     Unfairness (stdev)    : 0.408
 
-As expected, we observe with a problem of order 6 a set of 1 x 3 x 5 = 15 potential pairings (see Line 4) and the fairest pairing solution  --highest correlation (+0.833) with given individual pairing preferences-- is shown in Line 7 above. All persons, except *p2* are paired with an approved partner and nobody is paired with a disapproved partner (see Lines 10-11).
+As expected, we observe with a problem of order *k* = 3 a set of 1 x 3 x 5 = 15 potential pairings (see Line 4) and the fairest pairing solution  --highest correlation (+0.833) with given individual pairing preferences-- is shown in Line 7 above. All persons, except *p2* are paired with an approved partner and nobody is paired with a disapproved partner (see Lines 10-11).
 
 In the intergroup pairing case, an indicator of the actual fairness of a pairing solution is given by the absolute difference between both group correlation values. In the intragroup case here, an indicator of the fairness is given by the standard deviation of the individual correlations (see Line 14). The lower this standard deviation with a same overall correlation result, the fairer appears to be in fact the pairing solution [50]_ . 
 
