@@ -2343,7 +2343,7 @@ class CompleteBipartiteGraph(BipartiteGraph):
 
     *Parameter*:
         * *verticesKeysA* is the list of vertex keys of part *A*
-        * *verticesKeysB* is the list of vertex keys When given, 
+        * *verticesKeysB* is the list of vertex keys of part *B* 
 
     """
     def __init__(self,verticesKeysA,verticesKeysB,Debug=True):
