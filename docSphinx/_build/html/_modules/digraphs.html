@@ -213,7 +213,10 @@
         <span class="k">else</span><span class="p">:</span>
             <span class="n">fileName</span> <span class="o">=</span> <span class="n">file</span><span class="o">+</span><span class="s1">&#39;.py&#39;</span>
             <span class="n">argDict</span> <span class="o">=</span> <span class="p">{}</span>
-            <span class="n">exec</span><span class="p">(</span><span class="nb">compile</span><span class="p">(</span><span class="nb">open</span><span class="p">(</span><span class="n">fileName</span><span class="p">)</span><span class="o">.</span><span class="n">read</span><span class="p">(),</span> <span class="n">fileName</span><span class="p">,</span> <span class="s1">&#39;exec&#39;</span><span class="p">),</span> <span class="n">argDict</span><span class="p">)</span>
+            <span class="n">fi</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="n">fileName</span><span class="p">,</span><span class="s1">&#39;r&#39;</span><span class="p">)</span>
+            <span class="n">fileText</span> <span class="o">=</span> <span class="n">fi</span><span class="o">.</span><span class="n">read</span><span class="p">()</span>
+            <span class="n">fi</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+            <span class="n">exec</span><span class="p">(</span><span class="nb">compile</span><span class="p">(</span><span class="n">fileText</span><span class="p">,</span> <span class="n">fileName</span><span class="p">,</span> <span class="s1">&#39;exec&#39;</span><span class="p">),</span> <span class="n">argDict</span><span class="p">)</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="n">file</span>
             <span class="k">try</span><span class="p">:</span>
                 <span class="bp">self</span><span class="o">.</span><span class="n">actions</span> <span class="o">=</span> <span class="n">argDict</span><span class="p">[</span><span class="s1">&#39;actions&#39;</span><span class="p">]</span>
@@ -7648,7 +7651,10 @@
         <span class="k">else</span><span class="p">:</span>
             <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Error: detectChordlessCircuits binary could not be found !!!&#39;</span><span class="p">)</span>
         <span class="n">argDict</span> <span class="o">=</span> <span class="p">{}</span>
-        <span class="n">exec</span><span class="p">(</span><span class="nb">compile</span><span class="p">(</span><span class="nb">open</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">resultFile</span><span class="p">))</span><span class="o">.</span><span class="n">read</span><span class="p">(),</span> <span class="nb">str</span><span class="p">(</span><span class="n">resultFile</span><span class="p">),</span> <span class="s1">&#39;exec&#39;</span><span class="p">),</span><span class="n">argDict</span><span class="p">)</span>
+        <span class="n">fi</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="n">resultFile</span><span class="p">,</span><span class="s1">&#39;r&#39;</span><span class="p">)</span>
+        <span class="n">fileText</span> <span class="o">=</span> <span class="n">fi</span><span class="o">.</span><span class="n">read</span><span class="p">()</span>
+        <span class="n">fi</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+        <span class="n">exec</span><span class="p">(</span><span class="nb">compile</span><span class="p">(</span><span class="n">fileText</span><span class="p">,</span> <span class="nb">str</span><span class="p">(</span><span class="n">resultFile</span><span class="p">),</span> <span class="s1">&#39;exec&#39;</span><span class="p">),</span><span class="n">argDict</span><span class="p">)</span>
         <span class="n">circuits</span> <span class="o">=</span> <span class="n">argDict</span><span class="p">[</span><span class="s1">&#39;circuitsList&#39;</span><span class="p">]</span>
         <span class="k">if</span> <span class="n">circuits</span> <span class="o">==</span> <span class="p">[]:</span>
             <span class="n">Detected</span> <span class="o">=</span> <span class="kc">False</span>
@@ -7770,7 +7776,10 @@
         <span class="k">else</span><span class="p">:</span>
             <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Error: enumChordlessCircuits binary not found !!!&#39;</span><span class="p">)</span>
         <span class="n">argDict</span> <span class="o">=</span> <span class="p">{}</span>
-        <span class="n">exec</span><span class="p">(</span><span class="nb">compile</span><span class="p">(</span><span class="nb">open</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">resultFile</span><span class="p">))</span><span class="o">.</span><span class="n">read</span><span class="p">(),</span> <span class="nb">str</span><span class="p">(</span><span class="n">resultFile</span><span class="p">),</span> <span class="s1">&#39;exec&#39;</span><span class="p">),</span><span class="n">argDict</span><span class="p">)</span>
+        <span class="n">fi</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="n">resultFile</span><span class="p">,</span><span class="s1">&#39;r&#39;</span><span class="p">)</span>
+        <span class="n">fileText</span> <span class="o">=</span> <span class="n">fi</span><span class="o">.</span><span class="n">read</span><span class="p">()</span>
+        <span class="n">fi</span><span class="o">.</span><span class="n">close</span>
+        <span class="n">exec</span><span class="p">(</span><span class="nb">compile</span><span class="p">(</span><span class="n">fileText</span><span class="p">,</span> <span class="nb">str</span><span class="p">(</span><span class="n">resultFile</span><span class="p">),</span> <span class="s1">&#39;exec&#39;</span><span class="p">),</span><span class="n">argDict</span><span class="p">)</span>
         <span class="n">circuits</span> <span class="o">=</span> <span class="n">argDict</span><span class="p">[</span><span class="s1">&#39;circuitsList&#39;</span><span class="p">]</span>
         <span class="k">if</span> <span class="n">Debug</span><span class="p">:</span>
             <span class="nb">print</span><span class="p">(</span><span class="n">resultFile</span><span class="p">)</span>
@@ -13509,7 +13518,10 @@
         <span class="k">else</span><span class="p">:</span>
             <span class="n">fileName</span> <span class="o">=</span> <span class="n">digraph</span> <span class="o">+</span> <span class="s1">&#39;py&#39;</span>
             <span class="n">argDict</span> <span class="o">=</span> <span class="p">{}</span>
-            <span class="n">exec</span><span class="p">(</span><span class="nb">compile</span><span class="p">(</span><span class="nb">open</span><span class="p">(</span><span class="n">fileName</span><span class="p">)</span><span class="o">.</span><span class="n">read</span><span class="p">(),</span> <span class="n">fileName</span><span class="p">,</span> <span class="s1">&#39;exec&#39;</span><span class="p">),</span><span class="n">argDict</span><span class="p">)</span>
+            <span class="n">fi</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="n">fileName</span><span class="p">)</span>
+            <span class="n">fileText</span> <span class="o">=</span> <span class="n">fi</span><span class="o">.</span><span class="n">read</span><span class="p">()</span>
+            <span class="n">fi</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+            <span class="n">exec</span><span class="p">(</span><span class="nb">compile</span><span class="p">(</span><span class="n">fileText</span><span class="p">,</span> <span class="n">fileName</span><span class="p">,</span> <span class="s1">&#39;exec&#39;</span><span class="p">),</span><span class="n">argDict</span><span class="p">)</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="n">digraph</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">actions</span> <span class="o">=</span> <span class="n">argDict</span><span class="p">[</span><span class="s1">&#39;actionset&#39;</span><span class="p">]</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">valuationdomain</span> <span class="o">=</span> <span class="n">argDict</span><span class="p">[</span><span class="s1">&#39;valuationdomain&#39;</span><span class="p">]</span>
@@ -13656,7 +13668,10 @@
         <span class="k">else</span><span class="p">:</span>
             <span class="n">fileName</span> <span class="o">=</span> <span class="n">digraph</span> <span class="o">+</span> <span class="s1">&#39;py&#39;</span>
             <span class="n">argDict</span> <span class="o">=</span> <span class="p">{}</span>
-            <span class="n">exec</span><span class="p">(</span><span class="nb">compile</span><span class="p">(</span><span class="nb">open</span><span class="p">(</span><span class="n">fileName</span><span class="p">)</span><span class="o">.</span><span class="n">read</span><span class="p">(),</span> <span class="n">fileName</span><span class="p">,</span> <span class="s1">&#39;exec&#39;</span><span class="p">),</span><span class="n">argDict</span><span class="p">)</span>
+            <span class="n">fi</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="n">fileName</span><span class="p">,</span><span class="s1">&#39;r&#39;</span><span class="p">)</span>
+            <span class="n">fileText</span> <span class="o">=</span> <span class="n">fi</span><span class="o">.</span><span class="n">read</span><span class="p">()</span>
+            <span class="n">fi</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+            <span class="n">exec</span><span class="p">(</span><span class="nb">compile</span><span class="p">(</span><span class="n">fileText</span><span class="p">,</span> <span class="n">fileName</span><span class="p">,</span> <span class="s1">&#39;exec&#39;</span><span class="p">),</span><span class="n">argDict</span><span class="p">)</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="n">digraph</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">actions</span> <span class="o">=</span> <span class="n">argDict</span><span class="p">[</span><span class="s1">&#39;actionset&#39;</span><span class="p">]</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">valuationdomain</span> <span class="o">=</span> <span class="n">argDict</span><span class="p">[</span><span class="s1">&#39;valuationdomain&#39;</span><span class="p">]</span>
@@ -13755,7 +13770,9 @@
         <span class="k">else</span><span class="p">:</span>
             <span class="n">fileName</span> <span class="o">=</span> <span class="n">digraph</span> <span class="o">+</span> <span class="s1">&#39;py&#39;</span>
             <span class="n">argDict</span> <span class="o">=</span> <span class="p">{}</span>
-            <span class="n">exec</span><span class="p">(</span><span class="nb">compile</span><span class="p">(</span><span class="nb">open</span><span class="p">(</span><span class="n">fileName</span><span class="p">)</span><span class="o">.</span><span class="n">read</span><span class="p">(),</span> <span class="n">fileName</span><span class="p">,</span> <span class="s1">&#39;exec&#39;</span><span class="p">),</span><span class="n">argDict</span><span class="p">)</span>
+            <span class="n">fi</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="n">fileName</span><span class="p">,</span><span class="s1">&#39;r&#39;</span><span class="p">)</span>
+            <span class="n">exec</span><span class="p">(</span><span class="nb">compile</span><span class="p">(</span><span class="n">fi</span><span class="o">.</span><span class="n">read</span><span class="p">(),</span> <span class="n">fileName</span><span class="p">,</span> <span class="s1">&#39;exec&#39;</span><span class="p">),</span><span class="n">argDict</span><span class="p">)</span>
+            <span class="n">fi</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="n">digraph</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">actions</span> <span class="o">=</span> <span class="n">argDict</span><span class="p">[</span><span class="s1">&#39;actionset&#39;</span><span class="p">]</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">valuationdomain</span> <span class="o">=</span> <span class="n">argDict</span><span class="p">[</span><span class="s1">&#39;valuationdomain&#39;</span><span class="p">]</span>
@@ -13908,7 +13925,10 @@
         <span class="k">else</span><span class="p">:</span>
             <span class="n">fileName</span> <span class="o">=</span> <span class="n">digraph</span> <span class="o">+</span> <span class="s1">&#39;py&#39;</span>
             <span class="n">argDict</span> <span class="o">=</span> <span class="p">{}</span>
-            <span class="n">exec</span><span class="p">(</span><span class="nb">compile</span><span class="p">(</span><span class="nb">open</span><span class="p">(</span><span class="n">fileName</span><span class="p">)</span><span class="o">.</span><span class="n">read</span><span class="p">(),</span> <span class="n">fileName</span><span class="p">,</span> <span class="s1">&#39;exec&#39;</span><span class="p">),</span><span class="n">argDict</span><span class="p">)</span>
+            <span class="n">fi</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="n">fileName</span><span class="p">,</span><span class="s1">&#39;r&#39;</span><span class="p">)</span>
+            <span class="n">fileText</span> <span class="o">=</span> <span class="n">fi</span><span class="o">.</span><span class="n">read</span><span class="p">()</span>
+            <span class="n">fi</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+            <span class="n">exec</span><span class="p">(</span><span class="nb">compile</span><span class="p">(</span><span class="n">fileText</span><span class="p">,</span> <span class="n">fileName</span><span class="p">,</span> <span class="s1">&#39;exec&#39;</span><span class="p">),</span><span class="n">argDict</span><span class="p">)</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="n">digraph</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">actions</span> <span class="o">=</span> <span class="n">argDict</span><span class="p">[</span><span class="s1">&#39;actionset&#39;</span><span class="p">]</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">valuationdomain</span> <span class="o">=</span> <span class="n">argDict</span><span class="p">[</span><span class="s1">&#39;valuationdomain&#39;</span><span class="p">]</span>
@@ -14063,7 +14083,10 @@
         <span class="k">else</span><span class="p">:</span>
             <span class="n">fileName</span> <span class="o">=</span> <span class="n">digraph</span> <span class="o">+</span> <span class="s1">&#39;py&#39;</span>
             <span class="n">argDict</span> <span class="o">=</span> <span class="p">{}</span>
-            <span class="n">exec</span><span class="p">(</span><span class="nb">compile</span><span class="p">(</span><span class="nb">open</span><span class="p">(</span><span class="n">fileName</span><span class="p">)</span><span class="o">.</span><span class="n">read</span><span class="p">(),</span> <span class="n">fileName</span><span class="p">,</span> <span class="s1">&#39;exec&#39;</span><span class="p">),</span><span class="n">argDict</span><span class="p">)</span>
+            <span class="n">fi</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="n">fileName</span><span class="p">,</span> <span class="s1">&#39;r&#39;</span><span class="p">)</span>
+            <span class="n">fileText</span> <span class="o">=</span> <span class="n">fi</span><span class="o">.</span><span class="n">read</span><span class="p">()</span>
+            <span class="n">fi</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+            <span class="n">exec</span><span class="p">(</span><span class="nb">compile</span><span class="p">(</span><span class="n">fileText</span><span class="p">,</span> <span class="n">fileName</span><span class="p">,</span> <span class="s1">&#39;exec&#39;</span><span class="p">),</span><span class="n">argDict</span><span class="p">)</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="n">digraph</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">actions</span> <span class="o">=</span> <span class="n">argDict</span><span class="p">[</span><span class="s1">&#39;actionset&#39;</span><span class="p">]</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">valuationdomain</span> <span class="o">=</span> <span class="n">argDict</span><span class="p">[</span><span class="s1">&#39;valuationdomain&#39;</span><span class="p">]</span>
@@ -14304,7 +14327,10 @@
         <span class="k">else</span><span class="p">:</span>
             <span class="n">fileName</span> <span class="o">=</span> <span class="n">digraph</span> <span class="o">+</span> <span class="s1">&#39;py&#39;</span>
             <span class="n">argDict</span> <span class="o">=</span> <span class="p">{}</span>
-            <span class="n">exec</span><span class="p">(</span><span class="nb">compile</span><span class="p">(</span><span class="nb">open</span><span class="p">(</span><span class="n">fileName</span><span class="p">)</span><span class="o">.</span><span class="n">read</span><span class="p">(),</span> <span class="n">fileName</span><span class="p">,</span> <span class="s1">&#39;exec&#39;</span><span class="p">),</span><span class="n">argDict</span><span class="p">)</span>
+            <span class="n">fi</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="n">fileName</span><span class="p">,</span><span class="s1">&#39;r&#39;</span><span class="p">)</span>
+            <span class="n">fileText</span> <span class="o">=</span> <span class="n">fi</span><span class="o">.</span><span class="n">read</span><span class="p">()</span>
+            <span class="n">fi</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+            <span class="n">exec</span><span class="p">(</span><span class="nb">compile</span><span class="p">(</span><span class="n">fileText</span><span class="p">,</span> <span class="n">fileName</span><span class="p">,</span> <span class="s1">&#39;exec&#39;</span><span class="p">),</span><span class="n">argDict</span><span class="p">)</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="n">digraph</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">actions</span> <span class="o">=</span> <span class="n">argDict</span><span class="p">[</span><span class="s1">&#39;actionset&#39;</span><span class="p">]</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">valuationdomain</span> <span class="o">=</span> <span class="n">argDict</span><span class="p">[</span><span class="s1">&#39;valuationdomain&#39;</span><span class="p">]</span>

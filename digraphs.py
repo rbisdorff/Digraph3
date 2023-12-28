@@ -118,7 +118,10 @@ class Digraph(object):
         else:
             fileName = file+'.py'
             argDict = {}
-            exec(compile(open(fileName).read(), fileName, 'exec'), argDict)
+            fi = open(fileName,'r')
+            fileText = fi.read()
+            fi.close()
+            exec(compile(fileText, fileName, 'exec'), argDict)
             self.name = file
             try:
                 self.actions = argDict['actions']
@@ -7553,7 +7556,10 @@ class Digraph(object):
         else:
             print('Error: detectChordlessCircuits binary could not be found !!!')
         argDict = {}
-        exec(compile(open(str(resultFile)).read(), str(resultFile), 'exec'),argDict)
+        fi = open(resultFile,'r')
+        fileText = fi.read()
+        fi.close()
+        exec(compile(fileText, str(resultFile), 'exec'),argDict)
         circuits = argDict['circuitsList']
         if circuits == []:
             Detected = False
@@ -7675,7 +7681,10 @@ class Digraph(object):
         else:
             print('Error: enumChordlessCircuits binary not found !!!')
         argDict = {}
-        exec(compile(open(str(resultFile)).read(), str(resultFile), 'exec'),argDict)
+        fi = open(resultFile,'r')
+        fileText = fi.read()
+        fi.close
+        exec(compile(fileText, str(resultFile), 'exec'),argDict)
         circuits = argDict['circuitsList']
         if Debug:
             print(resultFile)
@@ -13414,7 +13423,10 @@ class _WeakCocaDigraph(Digraph):
         else:
             fileName = digraph + 'py'
             argDict = {}
-            exec(compile(open(fileName).read(), fileName, 'exec'),argDict)
+            fi = open(fileName)
+            fileText = fi.read()
+            fi.close()
+            exec(compile(fileText, fileName, 'exec'),argDict)
             self.name = digraph
             self.actions = argDict['actionset']
             self.valuationdomain = argDict['valuationdomain']
@@ -13561,7 +13573,10 @@ class _CoceDigraph(Digraph):
         else:
             fileName = digraph + 'py'
             argDict = {}
-            exec(compile(open(fileName).read(), fileName, 'exec'),argDict)
+            fi = open(fileName,'r')
+            fileText = fi.read()
+            fi.close()
+            exec(compile(fileText, fileName, 'exec'),argDict)
             self.name = digraph
             self.actions = argDict['actionset']
             self.valuationdomain = argDict['valuationdomain']
@@ -13660,7 +13675,9 @@ class BrokenCocsDigraph(Digraph):
         else:
             fileName = digraph + 'py'
             argDict = {}
-            exec(compile(open(fileName).read(), fileName, 'exec'),argDict)
+            fi = open(fileName,'r')
+            exec(compile(fi.read(), fileName, 'exec'),argDict)
+            fi.close()
             self.name = digraph
             self.actions = argDict['actionset']
             self.valuationdomain = argDict['valuationdomain']
@@ -13813,7 +13830,10 @@ class BrokenChordlessCircuitsDigraph(Digraph):
         else:
             fileName = digraph + 'py'
             argDict = {}
-            exec(compile(open(fileName).read(), fileName, 'exec'),argDict)
+            fi = open(fileName,'r')
+            fileText = fi.read()
+            fi.close()
+            exec(compile(fileText, fileName, 'exec'),argDict)
             self.name = digraph
             self.actions = argDict['actionset']
             self.valuationdomain = argDict['valuationdomain']
@@ -13968,7 +13988,10 @@ class BreakAddCocsDigraph(Digraph):
         else:
             fileName = digraph + 'py'
             argDict = {}
-            exec(compile(open(fileName).read(), fileName, 'exec'),argDict)
+            fi = open(fileName, 'r')
+            fileText = fi.read()
+            fi.close()
+            exec(compile(fileText, fileName, 'exec'),argDict)
             self.name = digraph
             self.actions = argDict['actionset']
             self.valuationdomain = argDict['valuationdomain']
@@ -14209,7 +14232,10 @@ class CocaDigraph(Digraph):
         else:
             fileName = digraph + 'py'
             argDict = {}
-            exec(compile(open(fileName).read(), fileName, 'exec'),argDict)
+            fi = open(fileName,'r')
+            fileText = fi.read()
+            fi.close()
+            exec(compile(fileText, fileName, 'exec'),argDict)
             self.name = digraph
             self.actions = argDict['actionset']
             self.valuationdomain = argDict['valuationdomain']

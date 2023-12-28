@@ -1645,6 +1645,7 @@ class PreRankedOutrankingDigraph(SparseOutrankingDigraph,PerformanceTableau):
                     fiName = tempDirName+'/splitComponent-'+str(j)+'.py'
                     fi = open(fiName,'rb')
                     splitComponent = loads(fi.read())
+                    fi.close()
                     if Debug:
                         print('splitComponent',splitComponent)
                     components[splitComponent['compKey']] = splitComponent['compDict']

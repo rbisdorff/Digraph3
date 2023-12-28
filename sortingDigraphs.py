@@ -251,7 +251,9 @@ class SortingDigraph(BipolarOutrankingDigraph):
                 fileName = argProfile
                 fileNameExt = fileName + '.py'
                 profile = OrderedDict()
-                exec(compile(open(fileNameExt).read(), fileNameExt, 'exec'),profile)
+                fi = open(fileNameExt,'r')
+                exec(compile(fi.read(), fileNameExt, 'exec'),profile)
+                fi.close()
                 #print(profile)
                 self.name = fileName
                 self.categories = profile['categories']

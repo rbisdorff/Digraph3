@@ -46,7 +46,10 @@ class DynamicProgrammingDigraph(TransitiveDigraph):
         else:
             fileNameExt = fileName+'.py'
             argDict = {}
-            exec(compile(open(fileNameExt).read(), fileNameExt, 'exec'),argDict)
+            fi = open(fileNameExt,'r')
+            fileText = fi.read()
+            fi.close()
+            exec(compile(fileText, fileNameExt, 'exec'),argDict)
             self.name = fileName
             self.actions = argDict['actions']
             self.order = len(self.actions)

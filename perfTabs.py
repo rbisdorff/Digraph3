@@ -172,7 +172,9 @@ The performance evaluations of each decision alternative on each criterion are g
         if filePerfTab is not None:
             fileName = filePerfTab + '.py'
             argDict = {}
-            exec(compile(open(fileName).read(), fileName, 'exec'),argDict)
+            fi = open(fileName,'r')
+            exec(compile(fi.read(), fileName, 'exec'),argDict)
+            fi.close()
             self.name = str(filePerfTab)
             try:
                 self.description = argDict['description']

@@ -77,7 +77,9 @@ class VotingProfile(object):
         if fileVotingProfile is not None:
             fileName = fileVotingProfile+'.py'
             argDict = {}
-            exec(compile(open(fileName).read(), fileName, 'exec'),argDict)
+            fi = open(fileName,'r')
+            exec(compile(fi.read(), fileName, 'exec'),argDict)
+            fi.close()
             self.name = str(fileVotingProfile)
             self.candidates = argDict['candidates']
             self.voters = argDict['voters']
@@ -300,7 +302,9 @@ class PrerankedVotingProfile(VotingProfile):
         if fileVotingProfile is not None:
             fileName = fileVotingProfile+'.py'
             argDict = {}
-            exec(compile(open(fileName).read(), fileName, 'exec'),argDict)
+            fi = open(fileName,'r')
+            exec(compile(fi.read(), fileName, 'exec'),argDict)
+            fi.close()
             self.name = str(fileVotingProfile)
             self.candidates = argDict['candidates']
             self.voters = argDict['voters']
@@ -555,7 +559,9 @@ class LinearVotingProfile(VotingProfile):
         ## else:
         ##     fileName = 'testapprovalvotingprofile.py'
             argDict = {}
-            exec(compile(open(fileName).read(), fileName, 'exec'),argDict)
+            fi = open(fileName,'r')
+            exec(compile(fi.read(), fileName, 'exec'),argDict)
+            fi.close()
             self.name = str(fileVotingProfile)
             self.candidates = argDict['candidates']
             self.voters = argDict['voters']
@@ -1339,7 +1345,9 @@ class BipolarApprovalVotingProfile(VotingProfile):
         ## else:
         ##     fileName = 'testapprovalvotingprofile.py'
             argDict = {}
-            exec(compile(open(fileName).read(), fileName, 'exec'),argDict)
+            fi = open(fileName,'r')
+            exec(compile(fi.read(), fileName, 'exec'), argDict)
+            fi.close()
             self.name = str(fileVotingProfile)
             self.candidates = argDict['candidates']
             self.voters = argDict['voters']

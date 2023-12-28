@@ -119,7 +119,10 @@ class Graph(object):
         else:
             fileNameExt = fileName+'.py'
             argDict = {}
-            exec(compile(open(fileNameExt).read(), fileNameExt, 'exec'),argDict)
+            fi = open(fileNameExt,'r')
+            fileText = fi.read()
+            fi.close()
+            exec(compile(fileText, fileNameExt, 'exec'),argDict)
             self.name = fileName
             self.vertices = argDict['vertices']
             self.order = len(self.vertices)
