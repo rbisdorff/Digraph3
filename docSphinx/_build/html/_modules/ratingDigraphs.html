@@ -1766,8 +1766,11 @@
 <span class="c1">##        else:</span>
 <span class="c1">##            self.nbrThreads = nbrCores</span>
         <span class="k">if</span> <span class="n">outrankingModel</span> <span class="o">==</span> <span class="s1">&#39;mp&#39;</span><span class="p">:</span>
+            <span class="kn">import</span> <span class="nn">os</span>
             <span class="kn">from</span> <span class="nn">perfTabs</span> <span class="kn">import</span> <span class="n">PerformanceTableau</span>
             <span class="n">PerformanceTableau</span><span class="o">.</span><span class="n">save</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="s1">&#39;sharedPerfTab&#39;</span><span class="p">)</span>
+            <span class="k">while</span> <span class="ow">not</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="s1">&#39;./sharedPerfTab.py&#39;</span><span class="p">):</span>
+                <span class="k">pass</span>
             <span class="kn">from</span> <span class="nn">mpOutrankingDigraphs</span> <span class="kn">import</span> <span class="n">MPBipolarOutrankingDigraph</span>
             <span class="n">g</span> <span class="o">=</span> <span class="n">MPBipolarOutrankingDigraph</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">Normalized</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
                                            <span class="n">nbrCores</span><span class="o">=</span><span class="n">nbrCores</span><span class="p">)</span>
@@ -2361,17 +2364,17 @@
     <span class="n">nbrCores</span> <span class="o">=</span> <span class="mi">12</span>
 
     <span class="c1"># relative quantiles rating</span>
-    <span class="n">pt</span> <span class="o">=</span> <span class="n">RandomCBPerformanceTableau</span><span class="p">(</span><span class="n">numberOfActions</span><span class="o">=</span><span class="mi">1000</span><span class="p">,</span><span class="n">seed</span><span class="o">=</span><span class="mi">3</span><span class="p">)</span>
-    <span class="n">rrq</span> <span class="o">=</span> <span class="n">RatingByRelativeQuantilesDigraph</span><span class="p">(</span><span class="n">pt</span><span class="p">,</span><span class="n">quantiles</span><span class="o">=</span><span class="mi">7</span><span class="p">,</span>
+    <span class="n">pt</span> <span class="o">=</span> <span class="n">RandomCBPerformanceTableau</span><span class="p">(</span><span class="n">numberOfActions</span><span class="o">=</span><span class="mi">500</span><span class="p">,</span><span class="n">seed</span><span class="o">=</span><span class="mi">9</span><span class="p">)</span>
+    <span class="n">rrq</span> <span class="o">=</span> <span class="n">RatingByRelativeQuantilesDigraph</span><span class="p">(</span><span class="n">pt</span><span class="p">,</span><span class="n">quantiles</span><span class="o">=</span><span class="mi">11</span><span class="p">,</span>
                                          <span class="n">LowerClosed</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
                                          <span class="n">outrankingModel</span><span class="o">=</span><span class="s1">&#39;mp&#39;</span><span class="p">,</span>
                                          <span class="n">Threading</span><span class="o">=</span><span class="n">MP</span><span class="p">,</span>
                                          <span class="n">nbrCores</span><span class="o">=</span><span class="n">nbrCores</span><span class="p">,</span>
                                          <span class="n">Debug</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
     <span class="nb">print</span><span class="p">(</span><span class="n">rrq</span><span class="p">)</span>
-    <span class="n">rrq</span><span class="o">.</span><span class="n">showHTMLRatingHeatmap</span><span class="p">()</span>
+    <span class="c1">#rrq.showHTMLRatingHeatmap()</span>
     <span class="c1">#rrq.showRatingByQuantilesSorting(strategy=&#39;average&#39;)</span>
-    <span class="c1">#rrq.showRatingByQuantilesRanking()</span>
+    <span class="n">rrq</span><span class="o">.</span><span class="n">showRatingByQuantilesRanking</span><span class="p">()</span>
 
     <span class="c1">#corr = rrq.computeRatingByRankingCorrelation(Debug=False)</span>
     <span class="c1">#print(&#39;*-----Global Relative-Rating-By-Ranking Quality&#39;)</span>

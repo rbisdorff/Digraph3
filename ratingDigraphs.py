@@ -1671,8 +1671,11 @@ class RatingByRelativeQuantilesDigraph(RatingDigraph,PerformanceTableau):
 ##        else:
 ##            self.nbrThreads = nbrCores
         if outrankingModel == 'mp':
+            import os
             from perfTabs import PerformanceTableau
             PerformanceTableau.save(self,'sharedPerfTab')
+            while not os.path.exists('./sharedPerfTab.py'):
+                pass
             from mpOutrankingDigraphs import MPBipolarOutrankingDigraph
             g = MPBipolarOutrankingDigraph(self,Normalized=True,
                                            nbrCores=nbrCores)
@@ -2266,17 +2269,17 @@ if __name__ == "__main__":
     nbrCores = 12
 
     # relative quantiles rating
-    pt = RandomCBPerformanceTableau(numberOfActions=1000,seed=3)
-    rrq = RatingByRelativeQuantilesDigraph(pt,quantiles=7,
+    pt = RandomCBPerformanceTableau(numberOfActions=500,seed=9)
+    rrq = RatingByRelativeQuantilesDigraph(pt,quantiles=11,
                                          LowerClosed=False,
                                          outrankingModel='mp',
                                          Threading=MP,
                                          nbrCores=nbrCores,
                                          Debug=False)
     print(rrq)
-    rrq.showHTMLRatingHeatmap()
+    #rrq.showHTMLRatingHeatmap()
     #rrq.showRatingByQuantilesSorting(strategy='average')
-    #rrq.showRatingByQuantilesRanking()
+    rrq.showRatingByQuantilesRanking()
 
     #corr = rrq.computeRatingByRankingCorrelation(Debug=False)
     #print('*-----Global Relative-Rating-By-Ranking Quality')
