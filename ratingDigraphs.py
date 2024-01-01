@@ -1896,7 +1896,7 @@ class RatingByLearnedQuantilesDigraph(RatingDigraph,PerformanceQuantiles):
         
     *rankingRule*: 'NetFlows' (default).
 
-    *outrankingModel*: {'standard' (default) | 'confident' | 'robust'},
+    *outrankingModel*: {'standard' (default) | 'mp' | 'confident' | 'robust'},
 
         Parameters for the *confident* outranking model: 
 
@@ -2131,6 +2131,18 @@ class RatingByLearnedQuantilesDigraph(RatingDigraph,PerformanceQuantiles):
             self.relation = copy2self(g.relation)
             self.valuationdomain = copy2self(g.valuationdomain)
             self.nbrThreads = copy2self(g.nbrThreads)
+        elif outrankingModel == 'mp':
+            import os
+            from perfTabs import PerformanceTableau
+            PerformanceTableau.save(self,'sharedPerfTab')
+            while not os.path.exists('./sharedPerfTab.py'):
+                pass
+            from mpOutrankingDigraphs import MPBipolarOutrankingDigraph
+            g = MPBipolarOutrankingDigraph(Normalized=True)
+            self.nbrThreads = copy2self(g.nbrThreads)
+            self.relation = copy2self(g.relation)
+            self.valuationdomain = copy2self(g.valuationdomain)
+            self.nbrThreads = copy2self(g.nbrThreads)
         elif outrankingModel == 'confident':
             from outrankingDigraphs import ConfidentBipolarOutrankingDigraph
             g = ConfidentBipolarOutrankingDigraph(self,
@@ -2266,21 +2278,24 @@ if __name__ == "__main__":
 
     from randomPerfTabs import *
     MP = True
-    nbrCores = 12
+    nbrCores = 8
 
-    # relative quantiles rating
-    pt = RandomCBPerformanceTableau(numberOfActions=500,seed=9)
-    rrq = RatingByRelativeQuantilesDigraph(pt,quantiles=11,
-                                         LowerClosed=False,
-                                         outrankingModel='mp',
-                                         Threading=MP,
-                                         nbrCores=nbrCores,
-                                         Debug=False)
-    print(rrq)
-    #rrq.showHTMLRatingHeatmap()
-    #rrq.showRatingByQuantilesSorting(strategy='average')
-    rrq.showRatingByQuantilesRanking()
-
+##    # relative quantiles rating
+##    pt = RandomCBPerformanceTableau(numberOfActions=500,seed=9)
+##    rrq = RatingByRelativeQuantilesDigraph(pt,quantiles=11,
+##                                         LowerClosed=False,
+##                                         outrankingModel='mp',
+##                                         Threading=MP,
+##                                         nbrCores=nbrCores,
+##                                         Debug=False)
+##    print(rrq)
+##    #rrq.showHTMLRatingHeatmap()
+##    #rrq.showRatingByQuantilesSorting(strategy='average')
+##    rrq.showRatingByQuantilesRanking()
+    
+##    rlq = RatingByLearnedQuantilesDigraph(pt,quantiles=7,outrankingModel='mp')
+##    print(rlq)
+##    lrq.showRatingByQuantilesRanking()
     #corr = rrq.computeRatingByRankingCorrelation(Debug=False)
     #print('*-----Global Relative-Rating-By-Ranking Quality')
     #rrq.showCorrelation(corr)
@@ -2288,21 +2303,21 @@ if __name__ == "__main__":
 
     # absolute quantiles rating from randomPerfTabs import
 #   Random3ObjectivesPerformanceTableau
-##    hpt = Random3ObjectivesPerformanceTableau(numberOfActions=1000,seed=1)
-##    from performanceQuantiles import PerformanceQuantiles
-##    pq = PerformanceQuantiles(hpt,numberOfBins=20,LowerClosed=True,Debug=False)
-##    # new incoming decision actions of the same kind
-##    from randomPerfTabs\
-##    import RandomPerformanceGenerator as PerfTabGenerator
-##    tpg = PerfTabGenerator(hpt,instanceCounter=0,seed=1)
-##    newActions = tpg.randomActions(20)
-##    # rating the new set of decision actions after
-##    # updating the historical performance quantiles
-##    pq.updateQuantiles(newActions,historySize=1000)
-##    lqr = RatingByLearnedQuantilesDigraph(pq,newData=newActions,
-##                        quantiles=7, outrankingModel='standard',
-##                        rankingRule='best', Threading=MP,
-##                        nbrCores=nbrCores, Debug=False)
+    hpt = Random3ObjectivesPerformanceTableau(numberOfActions=1000,seed=1)
+    from performanceQuantiles import PerformanceQuantiles
+    pq = PerformanceQuantiles(hpt,numberOfBins=20,LowerClosed=True,Debug=False)
+    # new incoming decision actions of the same kind
+    from randomPerfTabs\
+    import RandomPerformanceGenerator as PerfTabGenerator
+    tpg = PerfTabGenerator(hpt,instanceCounter=0,seed=1)
+    newActions = tpg.randomActions(20)
+    # rating the new set of decision actions after
+    # updating the historical performance quantiles
+    pq.updateQuantiles(newActions,historySize=1000)
+    lqr = RatingByLearnedQuantilesDigraph(pq,newData=newActions,
+                        quantiles=7, outrankingModel='mp',
+                        rankingRule='best', Threading=MP,
+                        nbrCores=nbrCores, Debug=False)
 ##    print(lqr)
 ##    lqr.showRatingByQuantilesSorting()
 ##    lqr.showRatingByQuantilesRanking()
