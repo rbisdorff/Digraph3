@@ -132,7 +132,10 @@ class MPBipolarOutrankingDigraph(BipolarOutrankingDigraph):
     ...         numberOfActions=1000,numberOfCriteria=13,
     ...         seed=10)
     >>> pt1.save('sharedPerfTab')
-    >>> from mpOutrankingDigraphs import *
+    >>> import os
+    >>> while not os.path.exists('./sharedPerfTab.py'):
+    ...     pass
+    >>> from mpOutrankingDigraphs import MPBipolarOutrankingDigraph
     >>> bg = MPBipolarOutrankingDigraph(Normalized=True,ndigits=2,
     ...                                 nbrCores=8,startMeth='spawn')
     >>> bg
@@ -226,7 +229,7 @@ class MPBipolarOutrankingDigraph(BipolarOutrankingDigraph):
 
         # compute relation
         t1 = time()
-        ctx_in_main = multiprocessing.get_context('spawn')
+        ctx_in_main = multiprocessing.get_context(startMeth)
         relation = {}
         considerableDiffs = {}
         for x in actions:
@@ -265,7 +268,7 @@ class MPBipolarOutrankingDigraph(BipolarOutrankingDigraph):
         runTimes['gammaSets'] = time() - t2
         runTimes['totalTime'] = time() - t0
         self.runTimes = runTimes
-        self.startMeth = startMeth
+        self.startMeth = '%s' % ctx_in_main.get_start_method()
 
     def showPolarisations(self):       
         """
