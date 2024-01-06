@@ -32,7 +32,7 @@ from outrankingDigraphs import *
 from sortingDigraphs import *
 #from multiprocessing import Process, active_children
 import multiprocessing as mp
-mpctx = mp.get_context('fork')
+mpctx = mp.get_context('spawn')
 Process = mpctx.Process
 active_children = mpctx.active_children
 cpu_count = mpctx.cpu_count
@@ -2751,7 +2751,7 @@ class QuantilesSortingDigraph(SortingDigraph):
         if Threading and action==None:
             #from multiprocessing import Process, active_children
             import multiprocessing as mp
-            mpctx = mp.get_context('fork')
+            mpctx = mp.get_context('spawn')
             Process = mpctx.Process
             active_children = mpctx.active_children
             cpu_count = mpctx.cpu_count
@@ -4960,13 +4960,13 @@ if __name__ == "__main__":
     print('*-------- Testing class and methods -------')
 
 
-    MP = False
+    MP = True
     seed = 1001
     nbrOfCPUs = 6
 
     from randomPerfTabs import RandomPerformanceTableau
     from randomPerfTabs import RandomPerformanceGenerator as PerfTabGenerator
-    nbrActions=100
+    nbrActions=1000
     nbrCrit = 13
     tp1 = RandomCBPerformanceTableau(numberOfActions=nbrActions,
                 numberOfCriteria=nbrCrit,seed=seed,NA=-1,missingDataProbability=0.1)

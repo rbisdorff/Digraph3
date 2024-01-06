@@ -1038,36 +1038,36 @@
         <span class="k">if</span> <span class="n">NotPermanentDiffs</span><span class="p">:</span>
             <span class="k">return</span> <span class="n">performanceDifferences</span></div>
         
-<div class="viewcode-block" id="PerformanceTableau.mpComputePerformanceDifferences"><a class="viewcode-back" href="../techDoc.html#perfTabs.PerformanceTableau.mpComputePerformanceDifferences">[docs]</a>    <span class="k">def</span> <span class="nf">mpComputePerformanceDifferences</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">NotPermanentDiffs</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span><span class="n">nbrCores</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span><span class="n">Debug</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        Adds to the criteria dictionary the ordered list of all observed performance differences.</span>
-<span class="sd">        &quot;&quot;&quot;</span>
-        <span class="n">criteria</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">criteria</span>
-        <span class="c1">#from multiprocessing import Pool</span>
-        <span class="c1">#from os import cpu_count</span>
-        <span class="kn">import</span> <span class="nn">multiprocessing</span> <span class="k">as</span> <span class="nn">mp</span>
-        <span class="n">mpctx</span> <span class="o">=</span> <span class="n">mp</span><span class="o">.</span><span class="n">get_context</span><span class="p">(</span><span class="s1">&#39;fork&#39;</span><span class="p">)</span>
-        <span class="n">Pool</span> <span class="o">=</span> <span class="n">mpctx</span><span class="o">.</span><span class="n">Pool</span>
-        <span class="n">cpu_count</span> <span class="o">=</span> <span class="n">mpctx</span><span class="o">.</span><span class="n">cpu_count</span>
-
-        <span class="k">if</span> <span class="n">Debug</span><span class="p">:</span>
-            <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Compute performance differences on each criterion in parallel&#39;</span><span class="p">)</span>
-       
-        <span class="c1">#criteriaList = [x for x in self.criteria]</span>
-        <span class="c1">#criteriaList.sort()</span>
-
-        <span class="k">with</span> <span class="n">Pool</span><span class="p">(</span><span class="n">nbrCores</span><span class="p">)</span> <span class="k">as</span> <span class="n">proc</span><span class="p">:</span>
-            <span class="n">performanceDifferences</span> <span class="o">=</span> <span class="n">proc</span><span class="o">.</span><span class="n">map</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">computeCriterionPerformanceDifferences</span><span class="p">,</span><span class="n">criteriaList</span><span class="p">)</span>
-        
-        <span class="c1">#for i in range(len(criteriaList)):</span>
-        <span class="c1">#    c = criteriaList[i]</span>
-        <span class="k">for</span> <span class="n">c</span> <span class="ow">in</span> <span class="n">criteria</span><span class="o">.</span><span class="n">keys</span><span class="p">():</span>
-            <span class="k">if</span> <span class="ow">not</span> <span class="n">NotPermanentDiffs</span><span class="p">:</span>
-                <span class="n">criteria</span><span class="p">[</span><span class="n">c</span><span class="p">][</span><span class="s1">&#39;performanceDifferences&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">performanceDifferences</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span>
-            <span class="n">criteria</span><span class="p">[</span><span class="n">c</span><span class="p">][</span><span class="s1">&#39;minimalPerformanceDifference&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">performanceDifferences</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="mi">1</span><span class="p">]</span>
-            <span class="n">criteria</span><span class="p">[</span><span class="n">c</span><span class="p">][</span><span class="s1">&#39;maximalPerformanceDifference&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">performanceDifferences</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="mi">2</span><span class="p">]</span>
-
-        <span class="k">return</span> <span class="n">performanceDifferences</span></div>
+<span class="c1">##    def mpComputePerformanceDifferences(self,NotPermanentDiffs=True,nbrCores=None,Debug=False):</span>
+<span class="c1">##        &quot;&quot;&quot;</span>
+<span class="c1">##        Adds to the criteria dictionary the ordered list of all observed performance differences.</span>
+<span class="c1">##        &quot;&quot;&quot;</span>
+<span class="c1">##        criteria = self.criteria</span>
+<span class="c1">##        #from multiprocessing import Pool</span>
+<span class="c1">##        #from os import cpu_count</span>
+<span class="c1">##        import multiprocessing as mp</span>
+<span class="c1">##        mpctx = mp.get_context(&#39;fork&#39;)</span>
+<span class="c1">##        Pool = mpctx.Pool</span>
+<span class="c1">##        cpu_count = mpctx.cpu_count</span>
+<span class="c1">##</span>
+<span class="c1">##        if Debug:</span>
+<span class="c1">##            print(&#39;Compute performance differences on each criterion in parallel&#39;)</span>
+<span class="c1">##       </span>
+<span class="c1">##        criteriaList = [x for x in self.criteria]</span>
+<span class="c1">##        #criteriaList.sort()</span>
+<span class="c1">##</span>
+<span class="c1">##        with Pool(nbrCores) as proc:</span>
+<span class="c1">##            performanceDifferences = proc.map(self.computeCriterionPerformanceDifferences,criteriaList)</span>
+<span class="c1">##        </span>
+<span class="c1">##        #for i in range(len(criteriaList)):</span>
+<span class="c1">##        #    c = criteriaList[i]</span>
+<span class="c1">##        for c in criteria.keys():</span>
+<span class="c1">##            if not NotPermanentDiffs:</span>
+<span class="c1">##                criteria[c][&#39;performanceDifferences&#39;] = performanceDifferences[i][0]</span>
+<span class="c1">##            criteria[c][&#39;minimalPerformanceDifference&#39;] = performanceDifferences[i][1]</span>
+<span class="c1">##            criteria[c][&#39;maximalPerformanceDifference&#39;] = performanceDifferences[i][2]</span>
+<span class="c1">##</span>
+<span class="c1">##        return performanceDifferences</span>
 
 
 <div class="viewcode-block" id="PerformanceTableau.computeCriterionPerformanceDifferences"><a class="viewcode-back" href="../techDoc.html#perfTabs.PerformanceTableau.computeCriterionPerformanceDifferences">[docs]</a>    <span class="k">def</span> <span class="nf">computeCriterionPerformanceDifferences</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">c</span><span class="p">,</span> <span class="n">Comments</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>

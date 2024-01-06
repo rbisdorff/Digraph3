@@ -127,7 +127,7 @@
 <span class="kn">from</span> <span class="nn">sortingDigraphs</span> <span class="kn">import</span> <span class="o">*</span>
 <span class="c1">#from multiprocessing import Process, active_children</span>
 <span class="kn">import</span> <span class="nn">multiprocessing</span> <span class="k">as</span> <span class="nn">mp</span>
-<span class="n">mpctx</span> <span class="o">=</span> <span class="n">mp</span><span class="o">.</span><span class="n">get_context</span><span class="p">(</span><span class="s1">&#39;fork&#39;</span><span class="p">)</span>
+<span class="n">mpctx</span> <span class="o">=</span> <span class="n">mp</span><span class="o">.</span><span class="n">get_context</span><span class="p">(</span><span class="s1">&#39;spawn&#39;</span><span class="p">)</span>
 <span class="n">Process</span> <span class="o">=</span> <span class="n">mpctx</span><span class="o">.</span><span class="n">Process</span>
 <span class="n">active_children</span> <span class="o">=</span> <span class="n">mpctx</span><span class="o">.</span><span class="n">active_children</span>
 <span class="n">cpu_count</span> <span class="o">=</span> <span class="n">mpctx</span><span class="o">.</span><span class="n">cpu_count</span>
@@ -2846,7 +2846,7 @@
         <span class="k">if</span> <span class="n">Threading</span> <span class="ow">and</span> <span class="n">action</span><span class="o">==</span><span class="kc">None</span><span class="p">:</span>
             <span class="c1">#from multiprocessing import Process, active_children</span>
             <span class="kn">import</span> <span class="nn">multiprocessing</span> <span class="k">as</span> <span class="nn">mp</span>
-            <span class="n">mpctx</span> <span class="o">=</span> <span class="n">mp</span><span class="o">.</span><span class="n">get_context</span><span class="p">(</span><span class="s1">&#39;fork&#39;</span><span class="p">)</span>
+            <span class="n">mpctx</span> <span class="o">=</span> <span class="n">mp</span><span class="o">.</span><span class="n">get_context</span><span class="p">(</span><span class="s1">&#39;spawn&#39;</span><span class="p">)</span>
             <span class="n">Process</span> <span class="o">=</span> <span class="n">mpctx</span><span class="o">.</span><span class="n">Process</span>
             <span class="n">active_children</span> <span class="o">=</span> <span class="n">mpctx</span><span class="o">.</span><span class="n">active_children</span>
             <span class="n">cpu_count</span> <span class="o">=</span> <span class="n">mpctx</span><span class="o">.</span><span class="n">cpu_count</span>
@@ -5055,13 +5055,13 @@
     <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;*-------- Testing class and methods -------&#39;</span><span class="p">)</span>
 
 
-    <span class="n">MP</span> <span class="o">=</span> <span class="kc">False</span>
+    <span class="n">MP</span> <span class="o">=</span> <span class="kc">True</span>
     <span class="n">seed</span> <span class="o">=</span> <span class="mi">1001</span>
     <span class="n">nbrOfCPUs</span> <span class="o">=</span> <span class="mi">6</span>
 
     <span class="kn">from</span> <span class="nn">randomPerfTabs</span> <span class="kn">import</span> <span class="n">RandomPerformanceTableau</span>
     <span class="kn">from</span> <span class="nn">randomPerfTabs</span> <span class="kn">import</span> <span class="n">RandomPerformanceGenerator</span> <span class="k">as</span> <span class="n">PerfTabGenerator</span>
-    <span class="n">nbrActions</span><span class="o">=</span><span class="mi">100</span>
+    <span class="n">nbrActions</span><span class="o">=</span><span class="mi">1000</span>
     <span class="n">nbrCrit</span> <span class="o">=</span> <span class="mi">13</span>
     <span class="n">tp1</span> <span class="o">=</span> <span class="n">RandomCBPerformanceTableau</span><span class="p">(</span><span class="n">numberOfActions</span><span class="o">=</span><span class="n">nbrActions</span><span class="p">,</span>
                 <span class="n">numberOfCriteria</span><span class="o">=</span><span class="n">nbrCrit</span><span class="p">,</span><span class="n">seed</span><span class="o">=</span><span class="n">seed</span><span class="p">,</span><span class="n">NA</span><span class="o">=-</span><span class="mi">1</span><span class="p">,</span><span class="n">missingDataProbability</span><span class="o">=</span><span class="mf">0.1</span><span class="p">)</span>

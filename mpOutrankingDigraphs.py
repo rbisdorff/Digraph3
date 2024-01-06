@@ -230,6 +230,7 @@ class MPBipolarOutrankingDigraph(BipolarOutrankingDigraph):
         # compute relation
         t1 = time()
         ctx_in_main = multiprocessing.get_context(startMeth)
+        self.startMeth = '%s' % ctx_in_main.get_start_method()
         relation = {}
         considerableDiffs = {}
         for x in actions:
@@ -268,7 +269,6 @@ class MPBipolarOutrankingDigraph(BipolarOutrankingDigraph):
         runTimes['gammaSets'] = time() - t2
         runTimes['totalTime'] = time() - t0
         self.runTimes = runTimes
-        self.startMeth = '%s' % ctx_in_main.get_start_method()
 
     def showPolarisations(self):       
         """
@@ -340,12 +340,16 @@ class MPBipolarOutrankingDigraph(BipolarOutrankingDigraph):
 if __name__ == '__main__':
     from randomPerfTabs import Random3ObjectivesPerformanceTableau
     pt = Random3ObjectivesPerformanceTableau(
-                              numberOfActions=1000,seed=1)
+                              numberOfActions=500,seed=2)
     pt.save('sharedPerfTab')
     print(pt)
-    bg = MPBipolarOutrankingDigraph(Normalized=True,startMeth='spawn')
+    import os
+    while not os.path.exists('./sharedPerfTab.py'):
+        pass
+    bg = MPBipolarOutrankingDigraph(Normalized=True,
+                                    startMeth='forkserver',
+                                    nbrCores=6)
     print(bg)
-    bg.showPolarisations()
     print('*------------------*')
     print('If you see this line all tests were passed successfully :-)')
     print('Enjoy !')

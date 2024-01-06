@@ -31,7 +31,7 @@ from pickle import Pickler, dumps, loads, load
 #from multiprocessing import Process, Lock,\
 #                        active_children, cpu_count
 import multiprocessing as mp
-mpctx = mp.get_context('fork')
+mpctx = mp.get_context('spawn')
 Process = mpctx.Process
 active_children = mpctx.active_children
 cpu_count = mpctx.cpu_count
@@ -251,7 +251,7 @@ class OutrankingDigraph(Digraph,PerformanceTableau):
             #from multiprocessing import Pool
             #from os import cpu_count
             import multiprocessing as mp
-            mpctx = mp.get_context('fork')
+            mpctx = mp.get_context('spawn')
             Pool = mpctx.Pool
             cpu_count = mpctx.cpu_count
 
@@ -377,7 +377,7 @@ class OutrankingDigraph(Digraph,PerformanceTableau):
             #from multiprocessing import Pool
             #from os import cpu_count
             import multiprocessing as mp
-            mpctx = mp.get_context('fork')
+            mpctx = mp.get_context('spawn')
             Pool = mpctx.Pool
             cpu_count = mpctx.cpu_count
 
@@ -462,7 +462,7 @@ class OutrankingDigraph(Digraph,PerformanceTableau):
             #from multiprocessing import Pool
             #from os import cpu_count
             import multiprocessing as mp
-            mpctx = mp.get_context('fork')
+            mpctx = mp.get_context('spawn')
             Pool = mpctx.Pool
             cpu_count = mpctx.cpu_count
 
@@ -5202,7 +5202,7 @@ class _BipolarOutrankingDigraph(OutrankingDigraph):
             #from multiprocessing import Process, Lock,\
             #                            active_children, cpu_count
             import multiprocessing as mp
-            mpctx = mp.get_context('fork')
+            mpctx = mp.get_context('spawn')
             Process = mpctx.Process
             active_children = mpctx.active_children
             cpu_count = mpctx.cpu_count

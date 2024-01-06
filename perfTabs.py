@@ -943,36 +943,36 @@ The performance evaluations of each decision alternative on each criterion are g
         if NotPermanentDiffs:
             return performanceDifferences
         
-    def mpComputePerformanceDifferences(self,NotPermanentDiffs=True,nbrCores=None,Debug=False):
-        """
-        Adds to the criteria dictionary the ordered list of all observed performance differences.
-        """
-        criteria = self.criteria
-        #from multiprocessing import Pool
-        #from os import cpu_count
-        import multiprocessing as mp
-        mpctx = mp.get_context('fork')
-        Pool = mpctx.Pool
-        cpu_count = mpctx.cpu_count
-
-        if Debug:
-            print('Compute performance differences on each criterion in parallel')
-       
-        #criteriaList = [x for x in self.criteria]
-        #criteriaList.sort()
-
-        with Pool(nbrCores) as proc:
-            performanceDifferences = proc.map(self.computeCriterionPerformanceDifferences,criteriaList)
-        
-        #for i in range(len(criteriaList)):
-        #    c = criteriaList[i]
-        for c in criteria.keys():
-            if not NotPermanentDiffs:
-                criteria[c]['performanceDifferences'] = performanceDifferences[i][0]
-            criteria[c]['minimalPerformanceDifference'] = performanceDifferences[i][1]
-            criteria[c]['maximalPerformanceDifference'] = performanceDifferences[i][2]
-
-        return performanceDifferences
+##    def mpComputePerformanceDifferences(self,NotPermanentDiffs=True,nbrCores=None,Debug=False):
+##        """
+##        Adds to the criteria dictionary the ordered list of all observed performance differences.
+##        """
+##        criteria = self.criteria
+##        #from multiprocessing import Pool
+##        #from os import cpu_count
+##        import multiprocessing as mp
+##        mpctx = mp.get_context('fork')
+##        Pool = mpctx.Pool
+##        cpu_count = mpctx.cpu_count
+##
+##        if Debug:
+##            print('Compute performance differences on each criterion in parallel')
+##       
+##        criteriaList = [x for x in self.criteria]
+##        #criteriaList.sort()
+##
+##        with Pool(nbrCores) as proc:
+##            performanceDifferences = proc.map(self.computeCriterionPerformanceDifferences,criteriaList)
+##        
+##        #for i in range(len(criteriaList)):
+##        #    c = criteriaList[i]
+##        for c in criteria.keys():
+##            if not NotPermanentDiffs:
+##                criteria[c]['performanceDifferences'] = performanceDifferences[i][0]
+##            criteria[c]['minimalPerformanceDifference'] = performanceDifferences[i][1]
+##            criteria[c]['maximalPerformanceDifference'] = performanceDifferences[i][2]
+##
+##        return performanceDifferences
 
 
     def computeCriterionPerformanceDifferences(self,c, Comments = False,

@@ -18,9 +18,9 @@ from digraphsTools import *
 from digraphs import *
 from outrankingDigraphs import *
 from transitiveDigraphs import *
-#from multiprocessing import Process, Lock, active_children, cpu_count
+#from multiprocessing import Process, active_children, cpu_count
 import multiprocessing as mp
-mpctx = mp.get_context('fork')
+mpctx = mp.get_context('spawn')
 Process = mpctx.Process
 active_children = mpctx.active_children
 cpu_count = mpctx.cpu_count

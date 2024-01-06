@@ -53,7 +53,7 @@ Advanced Topics
        * :ref:`Tempering plurality tyranny effects with bipolar approval voting <Tempering-Plurality-label>`
        * :ref:`Selecting the winner of a primary election: a critical commentary <PopularPrimary-Tutorial-label>`
 
-   :ref:`Theoretical advancements <Theoretical-Enhancements-label>`
+   :ref:`Theoretical and computational advancements <Theoretical-Enhancements-label>`
        * :ref:`Ordinal correlation equals bipolar-valued relational equivalence <OrdinalCorrelation-Tutorial-label>`
        * :ref:`On computing graph and digraph kernels <Kernel-Tutorial-label>`
        * :ref:`Computing bipolar-valued kernel membership characteristic vectors <Bipolar-Valued-Kernels-Tutorial-label>`
@@ -4686,9 +4686,6 @@ Let us conclude by showing in :numref:`R-session` how to draw with the *R* stati
 Back to :ref:`Content Table <Pearls-label>`
 
 -------------------
-
-
-
 
 
 Appendix
