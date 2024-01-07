@@ -28,8 +28,65 @@ from digraphsTools import *
 #from digraphs import *
 from perfTabs import *
 from randomPerfTabs import *
+from multiprocessing import Process
 
 #----------Digraph classes -----------------
+class myThread(Process):
+    def __init__(self, threadID,TempDirName,Debug):
+        Process.__init__(self)
+        self.threadID = threadID
+        self.workingDirectory = tempDirName
+        self.Debug = Debug
+    def run(self):
+        from pickle import dumps, loads
+        from os import chdir
+        from decimal import Decimal
+        chdir(self.workingDirectory)
+        #Debug=False
+        #if Debug:
+        #    print("Starting working in %s on %s" % (self.workingDirectory, self.name))
+        fi = open('dumpActions.py','rb')
+        actionsList = loads(fi.read())
+        fi.close()
+        #if Debug:
+        #    print(self.threadID,actionsList)
+        fi = open('dumpRelation.py','rb')
+        relation = loads(fi.read())
+        fi.close()
+        #if Debug:
+        #    print(self.threadID,relation)
+        fi = open('dumpOtherRelation.py','rb')
+        otherRelation = loads(fi.read())
+        fi.close()
+        #if Debug:
+        #    print(self.threadID,relation)
+        fiName = 'splitActions-'+str(self.threadID)+'.py'
+        fi = open(fiName,'rb')
+        splitActions = loads(fi.read())
+        fi.close()
+        #if Debug:
+        #    print(self.threadID,splitActions)
+        # compute partial correlation
+        correlation = Decimal('0')
+        determination = Decimal('0')
+        for x in splitActions:
+            grx = g.relation[x]
+            orx = otherRelation[x]
+            for y in actionsList:
+                if x != y:
+                    correlation += min( max(-grx[y],orx[y]),\
+                                max(grx[y],-orx[y]) )
+                    determination += min( abs(grx[y]),\
+                                          abs(orx[y]) )
+                    #if Debug:
+                    #    print(x,y,g.relation[x][y],otherRelation[x][y],correlation,determination)
+        splitCorrelation = {'correlation': correlation,
+                            'determination': determination}
+        # write partial correlation relation 
+        foName = 'splitCorrelation-'+str(self.threadID)+'.py'
+        fo = open(foName,'wb')
+        fo.write(dumps(splitCorrelation,-1))
+        fo.close()
 
 class Digraph(object):
     
@@ -222,7 +279,7 @@ class Digraph(object):
             #from multiprocessing import Pool
             #from os import cpu_count
             import multiprocessing as mp
-            mpctx = mp.get_context('fork')
+            mpctx = mp.get_context('spawn')
             Pool = mpctx.Pool
             cpu_count = mpctx.cpu_count
             if nbrOfCPUs is None:
@@ -1961,7 +2018,7 @@ class Digraph(object):
             #from multiprocessing import Process, Lock,\
             #                            active_children, cpu_count
             import multiprocessing as mp
-            mpctx = mp.get_context('fork')
+            mpctx = mp.get_context('spawn')
             Process = mpctx.Process
             active_children = mpctx.active_children
             cpu_count = mpctx.cpu_count
@@ -15009,7 +15066,7 @@ if __name__ == "__main__":
     #from digraphsTools import *
     from outrankingDigraphs import *
     from randomDigraphs import *
-    from decimal import Decimal
+    from decimal import Decimal, getcontext
     t = RandomPerformanceTableau(weightDistribution="equiobjectives",
                                  numberOfActions=10,numberOfCriteria=7,
                                              missingDataProbability=0.05,seed=2)
