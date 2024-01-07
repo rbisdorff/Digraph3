@@ -5028,9 +5028,8 @@ class XMCDA2PerformanceTableau(PerformanceTableau):
                 else:
                     evaluation[g][a] = evaluationAP[a][g]
         self.evaluation = evaluation
+        fo.close()
         # compute weigth preoder
-
-        
         self.weightPreorder = self.computeWeightPreorder()
 
 ###########
@@ -5091,6 +5090,9 @@ class CSVPerformanceTableau(PerformanceTableau):
                 evaluation[csvText[j][0]][csvText[0][i]] = Decimal(csvText[j][i])
         self.evaluation = evaluation
         self.NA = Decimal('-999')
+
+        # close input file
+        fi.close()
 
 #----------test Digraph class ----------------
 if __name__ == "__main__":

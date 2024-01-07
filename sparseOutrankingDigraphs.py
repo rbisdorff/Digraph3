@@ -1466,15 +1466,15 @@ class PreRankedOutrankingDigraph(SparseOutrankingDigraph,PerformanceTableau):
         """
         Constructor
         """
-        global perfTab
-        global _decomposition
+        #global perfTab
+        #global _decomposition
 
         from collections import OrderedDict
         from time import time
         #from os import cpu_count
         #from multiprocessing import Pool
         import multiprocessing as mp
-        mpctx = mp.get_context('fork')
+        mpctx = mp.get_context('spawn')
         Pool = mpctx.Pool
         cpu_count = mpctx.cpu_count
 
@@ -1490,16 +1490,16 @@ class PreRankedOutrankingDigraph(SparseOutrankingDigraph,PerformanceTableau):
         perfTab = argPerfTab
         # setting quantiles sorting parameters
         if CopyPerfTab:
-##            self.__dict__ = deepcopy(perfTab.__dict__)
             self.actions = deepcopy(perfTab.actions)
             self.criteria = deepcopy(perfTab.criteria)
             self.evaluation = deepcopy(perfTab.evaluation)
             self.NA = deepcopy(perfTab.NA)
         else:
             self.__dict__.update(perfTab.__dict__)
-##            self.actions = perfTab.actions
-##            self.criteria = perfTab.criteria
-##            self.evaluation = perfTab.evaluation
+            # self.actions = perfTab.actions
+            # self.criteria = perfTab.criteria
+            # self.evaluation = perfTab.evaluation
+            # self.NA = perfTab.NA
         self.name = perfTab.name + '_pr'
         na = len(self.actions)
         self.order = na
@@ -1602,7 +1602,7 @@ class PreRankedOutrankingDigraph(SparseOutrankingDigraph,PerformanceTableau):
             from pickle import dumps, loads, load, dump
             #from multiprocessing import Process, Queue,active_children, cpu_count
             import multiprocessing as mp
-            mpctx = mp.get_context('fork')
+            mpctx = mp.get_context('spawn')
             Process = mpctx.Process
             Queue = mpctx.Queue
             active_children = mpctx.active_children
@@ -1932,7 +1932,7 @@ class PreRankedOutrankingDigraph(SparseOutrankingDigraph,PerformanceTableau):
             #from multiprocessing import Pool
             #from os import cpu_count
             import multiprocessing as mp
-            mpctx = mp.get_context('fork')
+            mpctx = mp.get_context('spawn')
             Pool = mpctx.Pool
             cpu_count = mpctx.cpu_count
 
@@ -2509,7 +2509,7 @@ class PreRankedConfidentOutrankingDigraph(PreRankedOutrankingDigraph):
         #from os import cpu_count
         #from multiprocessing import Pool
         import multiprocessing as mp
-        mpctx = mp.get_context('fork')
+        mpctx = mp.get_context('spawn')
         Pool = mpctx.Pool
         cpu_count = mpctx.cpu_count
 
@@ -2696,7 +2696,7 @@ class PreRankedConfidentOutrankingDigraph(PreRankedOutrankingDigraph):
                 from pickle import dumps, loads, load, dump
                 #from multiprocessing import Process, Queue,active_children, cpu_count
                 import multiprocessing as mp
-                mpctx = mp.get_context('fork')
+                mpctx = mp.get_context('spawn')
                 Process = mpctx.Process
                 Queue = mpctx.Queue
                 active_children = mpctx.active_children

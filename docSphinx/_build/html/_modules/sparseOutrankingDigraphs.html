@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>sparseOutrankingDigraphs &mdash; Digraph3 3.11.6 documentation</title>
+  <title>sparseOutrankingDigraphs &mdash; Digraph3 3.12.1 documentation</title>
       <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
       <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
       <link rel="stylesheet" href="../_static/graphviz.css" type="text/css" />
@@ -49,7 +49,7 @@
               <img src="../_static/htmlLogo.png" class="logo" alt="Logo"/>
           </a>
               <div class="version">
-                Python 3.11
+                Python 3.12
               </div>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
@@ -1561,15 +1561,15 @@
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Constructor</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="k">global</span> <span class="n">perfTab</span>
-        <span class="k">global</span> <span class="n">_decomposition</span>
+        <span class="c1">#global perfTab</span>
+        <span class="c1">#global _decomposition</span>
 
         <span class="kn">from</span> <span class="nn">collections</span> <span class="kn">import</span> <span class="n">OrderedDict</span>
         <span class="kn">from</span> <span class="nn">time</span> <span class="kn">import</span> <span class="n">time</span>
         <span class="c1">#from os import cpu_count</span>
         <span class="c1">#from multiprocessing import Pool</span>
         <span class="kn">import</span> <span class="nn">multiprocessing</span> <span class="k">as</span> <span class="nn">mp</span>
-        <span class="n">mpctx</span> <span class="o">=</span> <span class="n">mp</span><span class="o">.</span><span class="n">get_context</span><span class="p">(</span><span class="s1">&#39;fork&#39;</span><span class="p">)</span>
+        <span class="n">mpctx</span> <span class="o">=</span> <span class="n">mp</span><span class="o">.</span><span class="n">get_context</span><span class="p">(</span><span class="s1">&#39;spawn&#39;</span><span class="p">)</span>
         <span class="n">Pool</span> <span class="o">=</span> <span class="n">mpctx</span><span class="o">.</span><span class="n">Pool</span>
         <span class="n">cpu_count</span> <span class="o">=</span> <span class="n">mpctx</span><span class="o">.</span><span class="n">cpu_count</span>
 
@@ -1585,16 +1585,16 @@
         <span class="n">perfTab</span> <span class="o">=</span> <span class="n">argPerfTab</span>
         <span class="c1"># setting quantiles sorting parameters</span>
         <span class="k">if</span> <span class="n">CopyPerfTab</span><span class="p">:</span>
-<span class="c1">##            self.__dict__ = deepcopy(perfTab.__dict__)</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">actions</span> <span class="o">=</span> <span class="n">deepcopy</span><span class="p">(</span><span class="n">perfTab</span><span class="o">.</span><span class="n">actions</span><span class="p">)</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">criteria</span> <span class="o">=</span> <span class="n">deepcopy</span><span class="p">(</span><span class="n">perfTab</span><span class="o">.</span><span class="n">criteria</span><span class="p">)</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">evaluation</span> <span class="o">=</span> <span class="n">deepcopy</span><span class="p">(</span><span class="n">perfTab</span><span class="o">.</span><span class="n">evaluation</span><span class="p">)</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">NA</span> <span class="o">=</span> <span class="n">deepcopy</span><span class="p">(</span><span class="n">perfTab</span><span class="o">.</span><span class="n">NA</span><span class="p">)</span>
         <span class="k">else</span><span class="p">:</span>
             <span class="bp">self</span><span class="o">.</span><span class="vm">__dict__</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="n">perfTab</span><span class="o">.</span><span class="vm">__dict__</span><span class="p">)</span>
-<span class="c1">##            self.actions = perfTab.actions</span>
-<span class="c1">##            self.criteria = perfTab.criteria</span>
-<span class="c1">##            self.evaluation = perfTab.evaluation</span>
+            <span class="c1"># self.actions = perfTab.actions</span>
+            <span class="c1"># self.criteria = perfTab.criteria</span>
+            <span class="c1"># self.evaluation = perfTab.evaluation</span>
+            <span class="c1"># self.NA = perfTab.NA</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="n">perfTab</span><span class="o">.</span><span class="n">name</span> <span class="o">+</span> <span class="s1">&#39;_pr&#39;</span>
         <span class="n">na</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">actions</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">order</span> <span class="o">=</span> <span class="n">na</span>
@@ -1697,7 +1697,7 @@
             <span class="kn">from</span> <span class="nn">pickle</span> <span class="kn">import</span> <span class="n">dumps</span><span class="p">,</span> <span class="n">loads</span><span class="p">,</span> <span class="n">load</span><span class="p">,</span> <span class="n">dump</span>
             <span class="c1">#from multiprocessing import Process, Queue,active_children, cpu_count</span>
             <span class="kn">import</span> <span class="nn">multiprocessing</span> <span class="k">as</span> <span class="nn">mp</span>
-            <span class="n">mpctx</span> <span class="o">=</span> <span class="n">mp</span><span class="o">.</span><span class="n">get_context</span><span class="p">(</span><span class="s1">&#39;fork&#39;</span><span class="p">)</span>
+            <span class="n">mpctx</span> <span class="o">=</span> <span class="n">mp</span><span class="o">.</span><span class="n">get_context</span><span class="p">(</span><span class="s1">&#39;spawn&#39;</span><span class="p">)</span>
             <span class="n">Process</span> <span class="o">=</span> <span class="n">mpctx</span><span class="o">.</span><span class="n">Process</span>
             <span class="n">Queue</span> <span class="o">=</span> <span class="n">mpctx</span><span class="o">.</span><span class="n">Queue</span>
             <span class="n">active_children</span> <span class="o">=</span> <span class="n">mpctx</span><span class="o">.</span><span class="n">active_children</span>
@@ -2027,7 +2027,7 @@
             <span class="c1">#from multiprocessing import Pool</span>
             <span class="c1">#from os import cpu_count</span>
             <span class="kn">import</span> <span class="nn">multiprocessing</span> <span class="k">as</span> <span class="nn">mp</span>
-            <span class="n">mpctx</span> <span class="o">=</span> <span class="n">mp</span><span class="o">.</span><span class="n">get_context</span><span class="p">(</span><span class="s1">&#39;fork&#39;</span><span class="p">)</span>
+            <span class="n">mpctx</span> <span class="o">=</span> <span class="n">mp</span><span class="o">.</span><span class="n">get_context</span><span class="p">(</span><span class="s1">&#39;spawn&#39;</span><span class="p">)</span>
             <span class="n">Pool</span> <span class="o">=</span> <span class="n">mpctx</span><span class="o">.</span><span class="n">Pool</span>
             <span class="n">cpu_count</span> <span class="o">=</span> <span class="n">mpctx</span><span class="o">.</span><span class="n">cpu_count</span>
 
@@ -2604,7 +2604,7 @@
         <span class="c1">#from os import cpu_count</span>
         <span class="c1">#from multiprocessing import Pool</span>
         <span class="kn">import</span> <span class="nn">multiprocessing</span> <span class="k">as</span> <span class="nn">mp</span>
-        <span class="n">mpctx</span> <span class="o">=</span> <span class="n">mp</span><span class="o">.</span><span class="n">get_context</span><span class="p">(</span><span class="s1">&#39;fork&#39;</span><span class="p">)</span>
+        <span class="n">mpctx</span> <span class="o">=</span> <span class="n">mp</span><span class="o">.</span><span class="n">get_context</span><span class="p">(</span><span class="s1">&#39;spawn&#39;</span><span class="p">)</span>
         <span class="n">Pool</span> <span class="o">=</span> <span class="n">mpctx</span><span class="o">.</span><span class="n">Pool</span>
         <span class="n">cpu_count</span> <span class="o">=</span> <span class="n">mpctx</span><span class="o">.</span><span class="n">cpu_count</span>
 
@@ -2791,7 +2791,7 @@
                 <span class="kn">from</span> <span class="nn">pickle</span> <span class="kn">import</span> <span class="n">dumps</span><span class="p">,</span> <span class="n">loads</span><span class="p">,</span> <span class="n">load</span><span class="p">,</span> <span class="n">dump</span>
                 <span class="c1">#from multiprocessing import Process, Queue,active_children, cpu_count</span>
                 <span class="kn">import</span> <span class="nn">multiprocessing</span> <span class="k">as</span> <span class="nn">mp</span>
-                <span class="n">mpctx</span> <span class="o">=</span> <span class="n">mp</span><span class="o">.</span><span class="n">get_context</span><span class="p">(</span><span class="s1">&#39;fork&#39;</span><span class="p">)</span>
+                <span class="n">mpctx</span> <span class="o">=</span> <span class="n">mp</span><span class="o">.</span><span class="n">get_context</span><span class="p">(</span><span class="s1">&#39;spawn&#39;</span><span class="p">)</span>
                 <span class="n">Process</span> <span class="o">=</span> <span class="n">mpctx</span><span class="o">.</span><span class="n">Process</span>
                 <span class="n">Queue</span> <span class="o">=</span> <span class="n">mpctx</span><span class="o">.</span><span class="n">Queue</span>
                 <span class="n">active_children</span> <span class="o">=</span> <span class="n">mpctx</span><span class="o">.</span><span class="n">active_children</span>
@@ -3197,7 +3197,7 @@
   <hr/>
 
   <div role="contentinfo">
-    <p>&#169; Copyright 2012-2023, Raymond Bisdorff.</p>
+    <p>&#169; Copyright 2012-2024, Raymond Bisdorff.</p>
   </div>
 
   Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a

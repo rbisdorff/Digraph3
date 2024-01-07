@@ -2608,7 +2608,11 @@ class OutrankingDigraph(Digraph,PerformanceTableau):
         Max = self.valuationdomain['max']
         Med = self.valuationdomain['med']
         Min = self.valuationdomain['min']
-        lpdCount = self.largePerformanceDifferencesCount
+        try:
+            lpdCount = self.largePerformanceDifferencesCount
+        except:
+            print('No large performance differences count has been stored')
+            return
         try:
             vetos = self.vetos
         except:
@@ -3942,10 +3946,10 @@ class BipolarOutrankingDigraph(OutrankingDigraph):
             reprString += 'Compute relation : %.5f\n' % val3
             reprString += 'Gamma sets       : %.5f\n' % val4
             try:
-                reprString += 'Threads           : %d\n' % self.nbrThreads
+                reprString += 'Threads          : %d\n' % self.nbrThreads
             except:
                 self.nbrThreads = 1
-                reprString += 'Threads           : %d\n' % self.nbrThreads
+                reprString += 'Threads          : %d\n' % self.nbrThreads
         except:
             pass
         return reprString
@@ -10179,12 +10183,13 @@ if __name__ == "__main__":
 
     from randomPerfTabs import Random3ObjectivesPerformanceTableau
     t = Random3ObjectivesPerformanceTableau(
-                                    numberOfActions=21,\
+                                    numberOfActions=500,\
                                     numberOfCriteria=7,\
                                     vetoProbability=0.2,\
                                     seed=1)
-    g = BipolarOutrankingDigraph(t)
-    print(g.vetos)
+    g = BipolarOutrankingDigraph(t,Threading=True)
+    print(g)
+    #g.showPolarisations()
     #g.showObjectives()
     # ranking = g.computeNetFlowsRanking()
     # sizeOfDiagonal = 5

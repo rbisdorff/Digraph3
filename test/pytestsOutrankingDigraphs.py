@@ -43,9 +43,9 @@ def testRobustOutrankingDigraph():
 def testPolarisedOutrankingDigraph():
     print('==>> Testing PolarisedOutrankingDigraph instantiation')
     t = RandomPerformanceTableau()
-    g = BipolarOutrankingDigraph(t)
+    g = BipolarOutrankingDigraph(t,Threading=True)
     print(g.valuationdomain)
-    ch = PolarisedOutrankingDigraph(g,level=50,AlphaCut=False,KeepValues=True)
+    ch = PolarisedOutrankingDigraph(g,level=0.50,AlphaCut=False,KeepValues=True)
     ch.showAll()
     ch.showStatistics()
 

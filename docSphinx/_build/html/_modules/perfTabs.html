@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>perfTabs &mdash; Digraph3 3.11.6 documentation</title>
+  <title>perfTabs &mdash; Digraph3 3.12.1 documentation</title>
       <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
       <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
       <link rel="stylesheet" href="../_static/graphviz.css" type="text/css" />
@@ -49,7 +49,7 @@
               <img src="../_static/htmlLogo.png" class="logo" alt="Logo"/>
           </a>
               <div class="version">
-                Python 3.11
+                Python 3.12
               </div>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
@@ -5123,9 +5123,8 @@
                 <span class="k">else</span><span class="p">:</span>
                     <span class="n">evaluation</span><span class="p">[</span><span class="n">g</span><span class="p">][</span><span class="n">a</span><span class="p">]</span> <span class="o">=</span> <span class="n">evaluationAP</span><span class="p">[</span><span class="n">a</span><span class="p">][</span><span class="n">g</span><span class="p">]</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">evaluation</span> <span class="o">=</span> <span class="n">evaluation</span>
+        <span class="n">fo</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
         <span class="c1"># compute weigth preoder</span>
-
-        
         <span class="bp">self</span><span class="o">.</span><span class="n">weightPreorder</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">computeWeightPreorder</span><span class="p">()</span></div>
 
 <span class="c1">###########</span>
@@ -5185,7 +5184,10 @@
             <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">6</span><span class="p">,</span><span class="n">na</span><span class="o">+</span><span class="mi">1</span><span class="p">):</span>
                 <span class="n">evaluation</span><span class="p">[</span><span class="n">csvText</span><span class="p">[</span><span class="n">j</span><span class="p">][</span><span class="mi">0</span><span class="p">]][</span><span class="n">csvText</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="n">i</span><span class="p">]]</span> <span class="o">=</span> <span class="n">Decimal</span><span class="p">(</span><span class="n">csvText</span><span class="p">[</span><span class="n">j</span><span class="p">][</span><span class="n">i</span><span class="p">])</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">evaluation</span> <span class="o">=</span> <span class="n">evaluation</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">NA</span> <span class="o">=</span> <span class="n">Decimal</span><span class="p">(</span><span class="s1">&#39;-999&#39;</span><span class="p">)</span></div>
+        <span class="bp">self</span><span class="o">.</span><span class="n">NA</span> <span class="o">=</span> <span class="n">Decimal</span><span class="p">(</span><span class="s1">&#39;-999&#39;</span><span class="p">)</span>
+
+        <span class="c1"># close input file</span>
+        <span class="n">fi</span><span class="o">.</span><span class="n">close</span><span class="p">()</span></div>
 
 <span class="c1">#----------test Digraph class ----------------</span>
 <span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s2">&quot;__main__&quot;</span><span class="p">:</span>
@@ -5274,7 +5276,7 @@
   <hr/>
 
   <div role="contentinfo">
-    <p>&#169; Copyright 2012-2023, Raymond Bisdorff.</p>
+    <p>&#169; Copyright 2012-2024, Raymond Bisdorff.</p>
   </div>
 
   Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a

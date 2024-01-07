@@ -2035,12 +2035,14 @@ class QuantilesSortingDigraph(SortingDigraph):
                     fiName = tempDirName+'/splitCategoryContent-'+str(j)+'.py'
                     fi = open(fiName,'rb')
                     splitCategoryContent = loads(fi.read())
+                    fi.close()
                     categoryContent.update(splitCategoryContent)
                     # update sorting result
                     if StoreSorting:
                         fiName = tempDirName+'/splitSorting-'+str(j)+'.py'
                         fi = open(fiName,'rb')
                         splitSorting = loads(fi.read())
+                        fi.close()
                         sorting.update(splitSorting)
                     # update complete sorting relation
                     if WithSortingRelation:

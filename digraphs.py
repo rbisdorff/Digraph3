@@ -3392,7 +3392,7 @@ class Digraph(object):
             print('Run self.automorphismGenerators()')
             return
         try:
-            f1 = open(InFile,'r')
+            fi = open(InFile,'r')
         except:
             print('File %s not found ?' % InFile)
             return
@@ -3403,7 +3403,7 @@ class Digraph(object):
         misset = set()
         v = [0 for i in range(1,self.order + 1)]
         while 1:
-            line = f1.readline()
+            line = fi.readline()
             if not line: break
             sCur = set()
             for i in range(len(line)):
@@ -3448,6 +3448,7 @@ class Digraph(object):
                 print('Number of choices before : ', len(misset) + 1)
                 misset = misset | Isos
                 print('Number of choices after  : ', len(misset))
+        fi.close()
         print()
         print('*---- Global result ----')
         print('Labelled representatives:')
@@ -3493,7 +3494,7 @@ class Digraph(object):
         read method for 0-1-char-coded MISs by default from the perrinMIS.c curd.dat result file.
         """
         try:
-            f1 = open(file,'r')
+            fi = open(file,'r')
             noError = True
         except:
             noError = False
@@ -3503,7 +3504,7 @@ class Digraph(object):
             actions = [x for x in self.actions]
             nl = 0
             misset = set()
-            for line in f1.readlines():
+            for line in fi.readlines():
                 if not line: break
                 nl += 1
                 mis = set()
@@ -3512,9 +3513,9 @@ class Digraph(object):
                         mis.add(actions[i])
                 #print mis
                 misset = misset | set([frozenset(mis)])
+            fi.close()
             #print 'Reading ' + str(nl) + ' MISs.'
             self.misset = misset
-
 
     def computeOrbit(self,choice,withListing=False):
         """
@@ -11142,6 +11143,8 @@ class Digraph(object):
 
         csvReader = reader(fi)
         R = [x for x in csvReader]
+        fi.close()
+
         listActions = [x for x in self.actions]
         listActions.sort()
         principalScores = [(Decimal(R[i+1][0]),listActions[i])\
@@ -11152,7 +11155,7 @@ class Digraph(object):
         else:
             tempd.cleanup()
         return principalScores
-
+ 
     def computePrincipalRanking(self,Colwise=False,Comments=False):
         """
         Rendesr a ranking from best to worst of the decision actions.
@@ -14967,6 +14970,7 @@ class XMCDA2Digraph(Digraph):
         self.relation = relation
         self.gamma = self.gammaSets()
         self.notGamma = self.notGammaSets()
+        fo.close()
 
     def showAll(self):
         try:
