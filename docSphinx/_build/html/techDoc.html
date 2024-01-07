@@ -1228,7 +1228,7 @@
 <dd class="field-odd"><p>Python 3.12 (release: 3.12.1)</p>
 </dd>
 <dt class="field-even">Copyright<span class="colon">:</span></dt>
-<dd class="field-even"><p><a class="reference external" href="_static/digraph3_copyright.html">R. Bisdorff</a> 2013-2023</p>
+<dd class="field-even"><p><a class="reference external" href="_static/digraph3_copyright.html">R. Bisdorff</a> 2013-2024</p>
 </dd>
 </dl>
 <dl class="field-list simple">
@@ -5698,7 +5698,8 @@ with this program; if not, write to the Free Software Foundation, Inc.,
 <dl class="py class">
 <dt class="sig sig-object py" id="outrankingDigraphs.BipolarOutrankingDigraph">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">outrankingDigraphs.</span></span><span class="sig-name descname"><span class="pre">BipolarOutrankingDigraph</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">argPerfTab</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">objectivesSubset</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">criteriaSubset</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">coalition</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">actionsSubset</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">hasNoVeto</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">hasBipolarVeto</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">Normalized</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ndigits</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">4</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">CopyPerfTab</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">BigData</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">Threading</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">tempDir</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">WithConcordanceRelation</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">WithVetoCounts</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">nbrCores</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">Debug</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">Comments</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/outrankingDigraphs.html#BipolarOutrankingDigraph"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#outrankingDigraphs.BipolarOutrankingDigraph" title="Permalink to this definition"></a></dt>
-<dd><p>Specialization of the abstract OutrankingDigraph root class for generating
+<dd><blockquote>
+<div><p>Specialization of the abstract OutrankingDigraph root class for generating
 bipolarly-valued outranking digraphs.</p>
 <dl class="simple">
 <dt>Parameters:</dt><dd><ul class="simple">
@@ -5721,8 +5722,13 @@ If None is given, the os.cpu_count method is used in order to determine the numb
 </ul>
 </dd>
 </dl>
+</div></blockquote>
 <div class="admonition warning">
 <p class="admonition-title">Warning</p>
+<p>The multiprocessing <a class="reference internal" href="#outrankingDigraphs.BipolarOutrankingDigraph" title="outrankingDigraphs.BipolarOutrankingDigraph"><code class="xref py py-class docutils literal notranslate"><span class="pre">BipolarOutrankingDigraph</span></code></a> constructor uses
+the spwan start-mathod for threading. In a python script,
+the main entry code must hence be protected with the __name__==’__main__’ test
+(see the documentation of the <a class="reference external" href="https://docs.python.org/3/library/multiprocessing.html#module-multiprocessing" title="(in Python v3.12)"><code class="xref py py-mod docutils literal notranslate"><span class="pre">multiprocessing</span></code></a> module.</p>
 <p>If Threading is True, WithConcordanceRelation and WithVetoCounts flags are automatically set both to False.</p>
 </div>
 <dl class="py method">
@@ -7219,6 +7225,13 @@ By default upper closed limits of categories are supposed to be used in the sort
 </pre></div>
 </div>
 <a class="reference internal image-reference" href="_images/quantilesSorting.png"><img alt="Example of quantiles sorting digraph" class="align-center" src="_images/quantilesSorting.png" style="width: 400px;" /></a>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>The multiprocessing <a class="reference internal" href="#sortingDigraphs.QuantilesSortingDigraph" title="sortingDigraphs.QuantilesSortingDigraph"><code class="xref py py-class docutils literal notranslate"><span class="pre">QuantilesSortingDigraph</span></code></a> constructor uses
+the spwan start-mathod for threading. In a python script,
+the main entry code must hence be protected with the __name__==’__main__’ test
+(see the documentation of the <a class="reference external" href="https://docs.python.org/3/library/multiprocessing.html#module-multiprocessing" title="(in Python v3.12)"><code class="xref py py-mod docutils literal notranslate"><span class="pre">multiprocessing</span></code></a> module.</p>
+</div>
 <dl class="py method">
 <dt class="sig sig-object py" id="sortingDigraphs.QuantilesSortingDigraph.computeCategoryContents">
 <span class="sig-name descname"><span class="pre">computeCategoryContents</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">Reverse</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">Comments</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">StoreSorting</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">Threading</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">nbrOfCPUs</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/sortingDigraphs.html#QuantilesSortingDigraph.computeCategoryContents"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#sortingDigraphs.QuantilesSortingDigraph.computeCategoryContents" title="Permalink to this definition"></a></dt>

@@ -34,7 +34,7 @@
    :Author: Raymond Bisdorff, Emeritus Professor of Applied Mathematics and Computer Science 
    :Version: |version| (release: |release|)
    :PDF version: `5.9 MB <_static/digraph3Tutorial.pdf>`_ 
-   :Copyright: `R. Bisdorff <_static/digraph3_copyright.html>`_ 2013-2023
+   :Copyright: `R. Bisdorff <_static/digraph3_copyright.html>`_ 2013-2024
 
 .. _Tutorial-label:
 
@@ -447,7 +447,11 @@ Some constructors for universal digraph instances, like the :py:class:`~digraphs
 
 .. only:: html
 
-    For more information about its resources, see the :ref:`technical documentation of the digraphs module <Modules-organisation-label>`. 
+   For more information about its resources, see the :ref:`technical documentation of the digraphs module <Modules-organisation-label>`. 
+
+.. warning::
+
+   When running python from script files with *Threading==True** constructors, mind that the multiprocessing start method is set by default to *spawn*, which requires the main code entry to be protected with a *__name__=='__main__'* test (see the documentation of the :py:mod:`multiprocessing` module).
 
 Back to :ref:`Content Table <Tutorial-label>`
 

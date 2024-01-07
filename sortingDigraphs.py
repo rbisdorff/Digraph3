@@ -1582,6 +1582,11 @@ class QuantilesSortingDigraph(SortingDigraph):
        :alt: Example of quantiles sorting digraph
        :width: 400 px
        :align: center
+
+    .. warning:: The multiprocessing :py:class:`~sortingDigraphs.QuantilesSortingDigraph` constructor uses
+        the spwan start-mathod for threading. In a python script,
+        the main entry code must hence be protected with the __name__=='__main__' test
+        (see the documentation of the :py:mod:`multiprocessing` module.
     """
     def __init__(self,argPerfTab=None,
                  limitingQuantiles=None,

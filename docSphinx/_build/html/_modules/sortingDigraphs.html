@@ -1677,6 +1677,11 @@
 <span class="sd">       :alt: Example of quantiles sorting digraph</span>
 <span class="sd">       :width: 400 px</span>
 <span class="sd">       :align: center</span>
+
+<span class="sd">    .. warning:: The multiprocessing :py:class:`~sortingDigraphs.QuantilesSortingDigraph` constructor uses</span>
+<span class="sd">        the spwan start-mathod for threading. In a python script,</span>
+<span class="sd">        the main entry code must hence be protected with the __name__==&#39;__main__&#39; test</span>
+<span class="sd">        (see the documentation of the :py:mod:`multiprocessing` module.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">argPerfTab</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
                  <span class="n">limitingQuantiles</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>

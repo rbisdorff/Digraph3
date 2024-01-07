@@ -3893,7 +3893,10 @@ class BipolarOutrankingDigraph(OutrankingDigraph):
         * nbrCores: controls the maximal number of cores that will be used in the multiprocessing phases.
           If None is given, the os.cpu_count method is used in order to determine the number of availble cores on the SMP machine.
 
-    .. warning::
+   .. warning:: The multiprocessing :py:class:`~outrankingDigraphs.BipolarOutrankingDigraph` constructor uses
+        the spwan start-mathod for threading. In a python script,
+        the main entry code must hence be protected with the __name__=='__main__' test
+        (see the documentation of the :py:mod:`multiprocessing` module.
 
         If Threading is True, WithConcordanceRelation and WithVetoCounts flags are automatically set both to False.
     
