@@ -1558,8 +1558,9 @@
 <span class="sd">        </span>
 <span class="sd">          *confidence*: alpha% confidence level (in percents, 90.0 default).</span>
 <span class="sd"> </span>
-<span class="sd">       * *Threading*: If set to *True*, or using the *mp* outrankingModel, mind that when running from a script file,</span>
-<span class="sd">               the main program entry must start with a __name__==&#39;__main__&#39; test.</span>
+<span class="sd">       * If *Threading* is set to *True*, or *outrankingModel* is set to &#39;mp&#39;,</span>
+<span class="sd">         mind that when running from a script file, the main program code entry</span>
+<span class="sd">         must start with a __name__==&#39;__main__&#39; test.</span>
 <span class="sd">        </span>
 <span class="sd"> </span>
 <span class="sd">    Example usage:</span>
@@ -2034,6 +2035,10 @@
 <span class="sd">        [0.43 - 0.57[ [&#39;a07&#39;, &#39;a04&#39;, &#39;a05&#39;, &#39;a09&#39;]</span>
 <span class="sd">        [0.29 - 0.43[ [&#39;a08&#39;, &#39;a03&#39;, &#39;a02&#39;, &#39;a01&#39;]</span>
 <span class="sd">        [0.14 - 0.29[ [&#39;a10&#39;]</span>
+
+<span class="sd">.. note:: Mind that when setting *Threading* to *True* in a Python script file,</span>
+<span class="sd">   the main program code entry must start with a *__name__==&#39;__main__&#39;* test</span>
+<span class="sd">   in order to avoid recursive execution of the submitted script.</span>
 
 <span class="sd">    &quot;&quot;&quot;</span>
 

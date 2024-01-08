@@ -1463,8 +1463,9 @@ class RatingByRelativeQuantilesDigraph(RatingDigraph,PerformanceTableau):
         
           *confidence*: alpha% confidence level (in percents, 90.0 default).
  
-       * *Threading*: If set to *True*, or using the *mp* outrankingModel, mind that when running from a script file,
-               the main program entry must start with a __name__=='__main__' test.
+       * If *Threading* is set to *True*, or *outrankingModel* is set to 'mp',
+         mind that when running from a script file, the main program code entry
+         must start with a __name__=='__main__' test.
         
  
     Example usage:
@@ -1939,6 +1940,10 @@ class RatingByLearnedQuantilesDigraph(RatingDigraph,PerformanceQuantiles):
         [0.43 - 0.57[ ['a07', 'a04', 'a05', 'a09']
         [0.29 - 0.43[ ['a08', 'a03', 'a02', 'a01']
         [0.14 - 0.29[ ['a10']
+
+.. note:: Mind that when setting *Threading* to *True* in a Python script file,
+   the main program code entry must start with a *__name__=='__main__'* test
+   in order to avoid recursive execution of the submitted script.
 
     """
 
