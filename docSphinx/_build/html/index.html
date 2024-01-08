@@ -109,7 +109,7 @@
 </dd>
 <dt class="field-odd">Copyright<span class="colon">:</span></dt>
 <dd class="field-odd"><ol class="upperalpha simple" start="18">
-<li><p>Bisdorff <a href="_static/digraph3_copyright.html" target="_blank">&copy;</a> 2013-2023</p></li>
+<li><p>Bisdorff <a href="_static/digraph3_copyright.html" target="_blank">&copy;</a> 2013-2024</p></li>
 </ol>
 </dd>
 </dl>
@@ -121,7 +121,7 @@
 <dl class="field-list simple">
 <dt class="field-odd">New<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
-<li><p>Following a Python 3.12 recommendation, all multiprocessing resources have been refactored to use, instead of the traditional <em>fork</em>, the safer <em>spawn</em> threading start method. As a consequence, main program parts of Digraph3 python scripts must now start with a <em>__name__==’__main__’</em> test in order to avoid its recursive execution (see the <a class="reference external" href="https://docs.python.org/3/library/multiprocessing.html#module-multiprocessing" title="(in Python v3.12)"><code class="xref py py-mod docutils literal notranslate"><span class="pre">multiprocessing</span></code></a> module) in each started thread.</p></li>
+<li><p>Following a Python 3.12 recommendation, all multiprocessing resources have been refactored to use, instead of the traditional <em>fork</em>, the safer <em>spawn</em> threading start method. As a consequence, main program code of Digraph3 Python scripts must now start with a <em>__name__==’__main__’</em> test in order to avoid its recursive execution in each started thread (see the <a class="reference external" href="https://docs.python.org/3/library/multiprocessing.html#module-multiprocessing" title="(in Python v3.12)"><code class="xref py py-mod docutils literal notranslate"><span class="pre">multiprocessing</span></code></a> module).</p></li>
 <li><p>A refactored multiprocessing <a class="reference internal" href="techDoc.html#mpOutrankingDigraphs.MPBipolarOutrankingDigraph" title="mpOutrankingDigraphs.MPBipolarOutrankingDigraph"><code class="xref py py-class docutils literal notranslate"><span class="pre">MPBipolarOutrankingDigraph</span></code></a> constructor of genuine bipolar-valued outranking digraphs with a configurable threading start method: <em>spawn</em> (by default), <em>forkserver</em> or <em>fork</em>.</p></li>
 <li><p>A <a class="reference internal" href="techDoc.html#module-pairings" title="pairings"><code class="xref py py-mod docutils literal notranslate"><span class="pre">pairings</span></code></a> module for solving pairing problems illustrated with two tutorials on computing <strong>fair</strong> <a class="reference internal" href="tutorial.html#fair-intergroup-pairings-label"><span class="std std-ref">intergroup</span></a> and <a class="reference internal" href="tutorial.html#fair-intragroup-pairings-label"><span class="std std-ref">intragroup</span></a> pairing solutions.</p></li>
 <li><p>A <a class="reference internal" href="techDoc.html#module-dynamicProgramming" title="dynamicProgramming"><code class="xref py py-mod docutils literal notranslate"><span class="pre">dynamicProgramming</span></code></a> module for solving dynamic programming problems including a <a class="reference internal" href="techDoc.html#dynamicProgramming.RandomDynamicProgrammingDigraph" title="dynamicProgramming.RandomDynamicProgrammingDigraph"><code class="xref py py-class docutils literal notranslate"><span class="pre">RandomDynamicProgrammingDigraph</span></code></a> constructor.</p></li>

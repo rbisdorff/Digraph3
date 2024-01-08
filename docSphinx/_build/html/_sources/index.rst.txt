@@ -21,7 +21,7 @@ Wecome! This is the documentation for the **Digraph3** *Python* programming reso
 
 :Author: Raymond Bisdorff, Emeritus Professor of Applied Mathematics and Computer Science, https://rbisdorff.github.io/
 :Version: |version| (release: |release|)
-:Copyright: R. Bisdorff |location_link3| 2013-2023
+:Copyright: R. Bisdorff |location_link3| 2013-2024
 
 .. image:: introDoc2.png
     :width: 500pt
@@ -46,7 +46,7 @@ Parts of the documentation
 ..........................
 :New:
 
-   - Following a Python 3.12 recommendation, all multiprocessing resources have been refactored to use, instead of the traditional *fork*, the safer *spawn* threading start method. As a consequence, main program parts of Digraph3 python scripts must now start with a *__name__=='__main__'* test in order to avoid its recursive execution (see the :py:mod:`multiprocessing` module) in each started thread.
+   - Following a Python 3.12 recommendation, all multiprocessing resources have been refactored to use, instead of the traditional *fork*, the safer *spawn* threading start method. As a consequence, main program code of Digraph3 Python scripts must now start with a *__name__=='__main__'* test in order to avoid its recursive execution in each started thread (see the :py:mod:`multiprocessing` module).
 
    - A refactored multiprocessing :py:class:`~mpOutrankingDigraphs.MPBipolarOutrankingDigraph` constructor of genuine bipolar-valued outranking digraphs with a configurable threading start method: *spawn* (by default), *forkserver* or *fork*.
      
