@@ -5731,7 +5731,9 @@ without the large performance difference polarization.</p></li>
 <li><p>WithVetoCounts: True by default when not threading. All vetos and countervetos
 are stored in self.vetos and self.negativeVetos slots,
 as well the counts of large performance differences in self.largePerformanceDifferencesCount slot.</p></li>
-<li><p>Threading: False by default. Allows to profit from SMP machines via the Python multiprocessing module.</p></li>
+<li><p>Threading: False by default. Allows to profit from SMP machines via the Python multiprocessing module.
+Mind that when using this option when running python from script files, the main program entry has to be protected
+with the <em>__name__==’__main__’</em> test.</p></li>
 <li><p>nbrCores: controls the maximal number of cores that will be used in the multiprocessing phases.
 If None is given, the os.cpu_count method is used in order to determine the number of availble cores on the SMP machine.</p></li>
 </ul>
@@ -6564,10 +6566,10 @@ with this program; if not, write to the Free Software Foundation, Inc.,
 </ul>
 </dd>
 </dl>
-</div></blockquote>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
 <p>The given <em>PerformanceTableau</em> must be previously saved in the working directory under the name ‘sharedPerfTab’.</p>
+</div>
 <p><em>Usage example</em></p>
 <p>(11th Gen Intel® Core™ i5-11400 × 12, 16.0 GiB memory, Ubuntu 23.10, Python3.12.0):</p>
 <div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">randomPerfTabs</span> <span class="kn">import</span> <span class="n">RandomCBPerformanceTableau</span>
@@ -6605,10 +6607,36 @@ with this program; if not, write to the Free Software Foundation, Inc.,
 <span class="go"> Gamma sets         : 0.54659</span>
 </pre></div>
 </div>
-</div>
+</div></blockquote>
 <div class="admonition warning">
 <p class="admonition-title">Warning</p>
-<p>When using the <em>forkserver</em> or the <em>spawn</em> multiprocessing start-methods in a python script file, mind that both start-methods re-import into every multiprocessing thread the submitted program file. In order to avoid hence the program script from being recursively executed and producing loads of zombie threads before being killed by the OS, it is compulsory necessary to always explicitely protect the entry point of the main program code with the <em>if __name__ == ‘__main__’:</em> condition. This is not necessary when using instead the classical Unix <em>fork</em> start-method where multiprocessing threads continue in fact the main program code from the point on where they were launched.</p>
+<p>When using the <em>forkserver</em> or the <em>spawn</em> multiprocessing start-methods
+in a python script file, mind that both start-methods re-import
+into every multiprocessing thread the submitted program file.
+In order to avoid hence the program script from being recursively
+executed and producing loads of zombie threads before being killed by the OS,
+it is compulsory necessary to always explicitely protect the entry point
+of the main program code with the <em>if __name__ == ‘__main__’:</em> test.
+This is not necessary when using instead the classical Unix <em>fork</em>
+start-method where multiprocessing threads continue in fact
+the main program code from the point on where they were launched.</p>
+<p><em>Example Python script</em>:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s1">&#39;__main__&#39;</span><span class="p">:</span>
+    <span class="kn">from</span> <span class="nn">randomPerfTabs</span> <span class="kn">import</span> <span class="n">Random3ObjectivesPerformanceTableau</span>
+    <span class="n">pt</span> <span class="o">=</span> <span class="n">Random3ObjectivesPerformanceTableau</span><span class="p">(</span>
+                  <span class="n">numberOfActions</span><span class="o">=</span><span class="mi">500</span><span class="p">,</span><span class="n">seed</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+    <span class="n">pt</span><span class="o">.</span><span class="n">save</span><span class="p">(</span><span class="s1">&#39;sharedPerfTab&#39;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">pt</span><span class="p">)</span>
+    <span class="kn">import</span> <span class="nn">os</span>
+    <span class="k">while</span> <span class="ow">not</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="s1">&#39;./sharedPerfTab.py&#39;</span><span class="p">):</span>
+        <span class="k">pass</span>
+    <span class="kn">from</span> <span class="nn">mpOutrankingDigraphs</span> <span class="kn">import</span> <span class="n">MPBipolarOutrankingDigraph</span>
+    <span class="n">bg</span> <span class="o">=</span> <span class="n">MPBipolarOutrankingDigraph</span><span class="p">(</span><span class="n">Normalized</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+                        <span class="n">startMeth</span><span class="o">=</span><span class="s1">&#39;forkserver&#39;</span><span class="p">,</span>
+                        <span class="n">nbrCores</span><span class="o">=</span><span class="mi">6</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">bg</span><span class="p">)</span>
+</pre></div>
+</div>
 </div>
 <dl class="py method">
 <dt class="sig sig-object py" id="mpOutrankingDigraphs.MPBipolarOutrankingDigraph.showPolarisations">
@@ -6716,16 +6744,26 @@ generated with the <a class="reference internal" href="#randomPerfTabs.RandomPer
 <dd><p>Constructor for a relative quantiles rating-by sorting and rating-by-ranking digraph.
 See the <a class="reference internal" href="#sortingDigraphs.QuantilesSortingDigraph" title="sortingDigraphs.QuantilesSortingDigraph"><code class="xref py py-class docutils literal notranslate"><span class="pre">sortingDigraphs.QuantilesSortingDigraph</span></code></a> class.</p>
 <p><strong>Parameters</strong></p>
-<p><em>argPerfTab</em>: valid stored PerformanceTableau instance,</p>
-<p><em>quantiles</em>: integer number of quantile classes,</p>
-<p><em>LowerClosed</em>:  {True | False (default upper closed quantiles)},</p>
-<p><em>rankingRule</em>: ‘NetFlows’ (default).</p>
-<p><em>outrankingModel</em>: {‘standard’ (default) | ‘confident’ | ‘robust’ | ‘mp’ },</p>
+<blockquote>
+<div><ul>
+<li><p><em>argPerfTab</em>: valid stored PerformanceTableau instance,</p></li>
+<li><p><em>quantiles</em>: integer number of quantile classes,</p></li>
+<li><p><em>LowerClosed</em>:  {True | False (default upper closed quantiles)},</p></li>
+<li><p><em>rankingRule</em>: ‘NetFlows’ (default).</p></li>
+<li><p><em>outrankingModel</em>: {‘standard’ (default) | ‘confident’ | ‘robust’ | ‘mp’ },</p>
 <blockquote>
 <div><p>Parameters for the <em>confident</em> outranking model:</p>
 <p><em>distribution</em>: {‘triangular’ (default)| ‘uniform’ | ‘beta’},</p>
 <p><em>betaParameter</em> : 2 (default),</p>
 <p><em>confidence</em>: alpha% confidence level (in percents, 90.0 default).</p>
+</div></blockquote>
+</li>
+<li><dl class="simple">
+<dt><em>Threading</em>: If set to <em>True</em>, or using the <em>mp</em> outrankingModel, mind that when running from a script file,</dt><dd><p>the main program entry must start with a __name__==’__main__’ test.</p>
+</dd>
+</dl>
+</li>
+</ul>
 </div></blockquote>
 <p>Example usage:</p>
 <div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="c1"># generating random multicriteria performance records</span>
@@ -6982,6 +7020,8 @@ normed performance quantiles gathered from historical data.</p>
 <p class="admonition-title">Note</p>
 <p>The constructor requires a valid
 <a class="reference internal" href="#performanceQuantiles.PerformanceQuantiles" title="performanceQuantiles.PerformanceQuantiles"><code class="xref py py-class docutils literal notranslate"><span class="pre">performanceQuantiles.PerformanceQuantiles</span></code></a> instance.</p>
+<p>Mind that setting <em>Threading</em> to <em>True when running from a python script file
+the main program entry must be started with a *__name__==’__main__’</em> test.</p>
 </div>
 <dl>
 <dt>Example Python session:</dt><dd><div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">sortingDigraphs</span> <span class="kn">import</span> <span class="o">*</span>
@@ -7214,6 +7254,8 @@ quantiles delimited ordered classes.</p>
 <p>The constructor requires a valid PerformanceTableau instance.
 If no number of limiting quantiles is given, then a default profile with the limiting quartiles Q0,Q1,Q2, Q3 and Q4 is used on each criteria.
 By default upper closed limits of categories are supposed to be used in the sorting.</p>
+<p>Mind that setting <em>Threading</em> to <em>True when running from a python script file
+the main program entry must be started with a *__name__==’__main__’</em> test.</p>
 </div>
 <p>Example Python3 session:</p>
 <div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">sortingDigraphs</span> <span class="kn">import</span> <span class="n">QuantilesSortingDigraph</span>

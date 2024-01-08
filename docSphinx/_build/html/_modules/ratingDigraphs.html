@@ -1540,23 +1540,26 @@
 
 <span class="sd">    **Parameters**</span>
 
-<span class="sd">    *argPerfTab*: valid stored PerformanceTableau instance,</span>
+<span class="sd">       * *argPerfTab*: valid stored PerformanceTableau instance,</span>
 <span class="sd">        </span>
-<span class="sd">    *quantiles*: integer number of quantile classes,</span>
+<span class="sd">       * *quantiles*: integer number of quantile classes,</span>
 <span class="sd">        </span>
-<span class="sd">    *LowerClosed*:  {True | False (default upper closed quantiles)},</span>
+<span class="sd">       * *LowerClosed*:  {True | False (default upper closed quantiles)},</span>
 <span class="sd">        </span>
-<span class="sd">    *rankingRule*: &#39;NetFlows&#39; (default).</span>
+<span class="sd">       * *rankingRule*: &#39;NetFlows&#39; (default).</span>
 
-<span class="sd">    *outrankingModel*: {&#39;standard&#39; (default) | &#39;confident&#39; | &#39;robust&#39; | &#39;mp&#39; },</span>
+<span class="sd">       * *outrankingModel*: {&#39;standard&#39; (default) | &#39;confident&#39; | &#39;robust&#39; | &#39;mp&#39; },</span>
 
-<span class="sd">        Parameters for the *confident* outranking model: </span>
+<span class="sd">          Parameters for the *confident* outranking model: </span>
 
-<span class="sd">        *distribution*: {&#39;triangular&#39; (default)| &#39;uniform&#39; | &#39;beta&#39;},</span>
+<span class="sd">          *distribution*: {&#39;triangular&#39; (default)| &#39;uniform&#39; | &#39;beta&#39;},</span>
 <span class="sd">        </span>
-<span class="sd">        *betaParameter* : 2 (default), </span>
+<span class="sd">          *betaParameter* : 2 (default), </span>
 <span class="sd">        </span>
-<span class="sd">        *confidence*: alpha% confidence level (in percents, 90.0 default).  </span>
+<span class="sd">          *confidence*: alpha% confidence level (in percents, 90.0 default).</span>
+<span class="sd"> </span>
+<span class="sd">       * *Threading*: If set to *True*, or using the *mp* outrankingModel, mind that when running from a script file,</span>
+<span class="sd">               the main program entry must start with a __name__==&#39;__main__&#39; test.</span>
 <span class="sd">        </span>
 <span class="sd"> </span>
 <span class="sd">    Example usage:</span>

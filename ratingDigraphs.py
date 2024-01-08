@@ -1445,23 +1445,26 @@ class RatingByRelativeQuantilesDigraph(RatingDigraph,PerformanceTableau):
 
     **Parameters**
 
-    *argPerfTab*: valid stored PerformanceTableau instance,
+       * *argPerfTab*: valid stored PerformanceTableau instance,
         
-    *quantiles*: integer number of quantile classes,
+       * *quantiles*: integer number of quantile classes,
         
-    *LowerClosed*:  {True | False (default upper closed quantiles)},
+       * *LowerClosed*:  {True | False (default upper closed quantiles)},
         
-    *rankingRule*: 'NetFlows' (default).
+       * *rankingRule*: 'NetFlows' (default).
 
-    *outrankingModel*: {'standard' (default) | 'confident' | 'robust' | 'mp' },
+       * *outrankingModel*: {'standard' (default) | 'confident' | 'robust' | 'mp' },
 
-        Parameters for the *confident* outranking model: 
+          Parameters for the *confident* outranking model: 
 
-        *distribution*: {'triangular' (default)| 'uniform' | 'beta'},
+          *distribution*: {'triangular' (default)| 'uniform' | 'beta'},
         
-        *betaParameter* : 2 (default), 
+          *betaParameter* : 2 (default), 
         
-        *confidence*: alpha% confidence level (in percents, 90.0 default).  
+          *confidence*: alpha% confidence level (in percents, 90.0 default).
+ 
+       * *Threading*: If set to *True*, or using the *mp* outrankingModel, mind that when running from a script file,
+               the main program entry must start with a __name__=='__main__' test.
         
  
     Example usage:

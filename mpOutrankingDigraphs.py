@@ -121,7 +121,7 @@ class MPBipolarOutrankingDigraph(BipolarOutrankingDigraph):
         * *startMethod*: 'spawn' (default) | 'forkserver' | 'fork'
         * The given *PerformanceTableau* object is shared with the multiprocessing threads via importing a *sharedPerfTab.py* module stored in the current working directory and containing a saved *PerformanceTableau* object.
 
-.. note:: The given *PerformanceTableau* must be previously saved in the working directory under the name 'sharedPerfTab'.
+    .. note:: The given *PerformanceTableau* must be previously saved in the working directory under the name 'sharedPerfTab'.
     
     *Usage example*
 
@@ -162,7 +162,34 @@ class MPBipolarOutrankingDigraph(BipolarOutrankingDigraph):
      Gamma sets         : 0.54659
     
 
-.. warning:: When using the *forkserver* or the *spawn* multiprocessing start-methods in a python script file, mind that both start-methods re-import into every multiprocessing thread the submitted program file. In order to avoid hence the program script from being recursively executed and producing loads of zombie threads before being killed by the OS, it is compulsory necessary to always explicitely protect the entry point of the main program code with the *if __name__ == '__main__':* condition. This is not necessary when using instead the classical Unix *fork* start-method where multiprocessing threads continue in fact the main program code from the point on where they were launched. 
+.. warning:: When using the *forkserver* or the *spawn* multiprocessing start-methods
+    in a python script file, mind that both start-methods re-import
+    into every multiprocessing thread the submitted program file.
+    In order to avoid hence the program script from being recursively
+    executed and producing loads of zombie threads before being killed by the OS,
+    it is compulsory necessary to always explicitely protect the entry point
+    of the main program code with the *if __name__ == '__main__':* test.
+    This is not necessary when using instead the classical Unix *fork*
+    start-method where multiprocessing threads continue in fact
+    the main program code from the point on where they were launched.
+
+    *Example Python script*::
+    
+        if __name__ == '__main__':
+            from randomPerfTabs import Random3ObjectivesPerformanceTableau
+            pt = Random3ObjectivesPerformanceTableau(
+                          numberOfActions=500,seed=2)
+            pt.save('sharedPerfTab')
+            print(pt)
+            import os
+            while not os.path.exists('./sharedPerfTab.py'):
+                pass
+            from mpOutrankingDigraphs import MPBipolarOutrankingDigraph
+            bg = MPBipolarOutrankingDigraph(Normalized=True,
+                                startMeth='forkserver',
+                                nbrCores=6)
+            print(bg)
+      
 
     """
     def __repr__(self):

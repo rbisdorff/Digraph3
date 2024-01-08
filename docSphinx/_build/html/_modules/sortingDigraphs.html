@@ -1649,6 +1649,9 @@
 <span class="sd">        If no number of limiting quantiles is given, then a default profile with the limiting quartiles Q0,Q1,Q2, Q3 and Q4 is used on each criteria.</span>
 <span class="sd">        By default upper closed limits of categories are supposed to be used in the sorting.</span>
 
+<span class="sd">        Mind that setting *Threading* to *True when running from a python script file</span>
+<span class="sd">        the main program entry must be started with a *__name__==&#39;__main__&#39;* test.</span>
+
 <span class="sd">    Example Python3 session:</span>
 
 <span class="sd">    &gt;&gt;&gt; from sortingDigraphs import QuantilesSortingDigraph</span>
@@ -3590,6 +3593,10 @@
 
 <span class="sd">        The constructor requires a valid</span>
 <span class="sd">        :py:class:`performanceQuantiles.PerformanceQuantiles` instance.</span>
+
+<span class="sd">        Mind that setting *Threading* to *True when running from a python script file</span>
+<span class="sd">        the main program entry must be started with a *__name__==&#39;__main__&#39;* test.</span>
+
 
 <span class="sd">    Example Python session:</span>
 <span class="sd">        &gt;&gt;&gt; from sortingDigraphs import *</span>

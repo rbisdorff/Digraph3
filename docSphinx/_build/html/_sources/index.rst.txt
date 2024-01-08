@@ -46,13 +46,15 @@ Parts of the documentation
 ..........................
 :New:
 
-   - A refactored multiprocessing :py:class:`mpOutrankingDigraphs.MPBipolarOutrankingDigraph` constructor of genuine bipolar-valued outranking digraphs based by default on the *spawn* start-method compatible with Linux and MacOS.
-     
-   - A :py:mod:`pairings` module for solving pairing problems illustrated with two tutorials on computing **fair** :ref:`intergroup<Fair-InterGroup-Pairings-label>` and :ref:`intragroup<Fair-IntraGroup-Pairings-label>` pairing solutions
+   - Following a Python 3.12 recommendation, all multiprocessing resources have been refactored to use, instead of the traditional *fork*, the safer *spawn* threading start method. As a consequence, main program parts of Digraph3 python scripts must now start with a *__name__=='__main__'* test in order to avoid its recursive execution (see the :py:mod:`multiprocessing` module) in each started thread.
 
-   - A :py:mod:`dynamicProgramming` module for solving dynamic programming problems including a :py:class:`~dynamicProgramming.RandomDynamicProgrammingDigraph` constructor
+   - A refactored multiprocessing :py:class:`~mpOutrankingDigraphs.MPBipolarOutrankingDigraph` constructor of genuine bipolar-valued outranking digraphs with a configurable threading start method: *spawn* (by default), *forkserver* or *fork*.
      
-   - A special example of dynamic programming algorithms is the *Needleman* \& *Wunsch* algorithm for computing DNA sequence alignments: see the :py:meth:`digraphsTools.computeSequenceAlignment` method
+   - A :py:mod:`pairings` module for solving pairing problems illustrated with two tutorials on computing **fair** :ref:`intergroup<Fair-InterGroup-Pairings-label>` and :ref:`intragroup<Fair-IntraGroup-Pairings-label>` pairing solutions.
+
+   - A :py:mod:`dynamicProgramming` module for solving dynamic programming problems including a :py:class:`~dynamicProgramming.RandomDynamicProgrammingDigraph` constructor.
+     
+   - A special example of dynamic programming algorithms is the *Needleman* \& *Wunsch* algorithm for computing DNA sequence alignments: see the :py:meth:`digraphsTools.computeSequenceAlignment` method.
        
 #. `Tutorials <tutorial.html>`_
 

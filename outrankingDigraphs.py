@@ -3890,6 +3890,8 @@ class BipolarOutrankingDigraph(OutrankingDigraph):
           are stored in self.vetos and self.negativeVetos slots,
           as well the counts of large performance differences in self.largePerformanceDifferencesCount slot.
         * Threading: False by default. Allows to profit from SMP machines via the Python multiprocessing module.
+          Mind that when using this option when running python from script files, the main program entry has to be protected
+          with the *__name__=='__main__'* test.
         * nbrCores: controls the maximal number of cores that will be used in the multiprocessing phases.
           If None is given, the os.cpu_count method is used in order to determine the number of availble cores on the SMP machine.
 
