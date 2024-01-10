@@ -7,7 +7,7 @@
 #from distutils.core import setup # deprecated since Python3.10
 from setuptools import setup
 CythonInstalled = True
-VERSION = '3.11'
+VERSION = '3.12'
 
 try:
     from Cython.Build import cythonize

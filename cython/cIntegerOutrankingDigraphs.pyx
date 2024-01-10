@@ -23,6 +23,150 @@ from digraphs import *
 from cIntegerOutrankingDigraphs import *
 from cRandPerfTabs import *
 
+# threaded classes
+class myThread1(Process):
+    def __init__(self, int threadID,digraph,\
+                 InitialSplit, tempDirName,\
+                 splitActions,\
+                 bint hasNoVeto, bint hasBipolarVeto,\
+                 bint hasSymmetricThresholds, bint Debug):
+        Process.__init__(self)
+        self.threadID = threadID
+        self.digraph = digraph
+        self.InitialSplit = InitialSplit
+        self.workingDirectory = tempDirName
+        self.splitActions = splitActions
+        self.hasNoVeto = hasNoVeto
+        self.hasBipolarVeto = hasBipolarVeto,
+        self.hasSymmetricThresholds = hasSymmetricThresholds,
+        self.Debug = Debug
+    def run(self):
+        from io import BytesIO
+        from pickle import Pickler, dumps, loads
+        from os import chdir
+        from array import array
+
+        digraph = self.digraph
+        
+        chdir(self.workingDirectory)
+##                    if Debug:
+##                        print("Starting working in %s on thread %s" % (self.workingDirectory, str(self.threadId)))
+        #fi = open('dumpSelf.py','rb')
+        #digraph = loads(fi.read())
+        #fi.close()
+        splitActions = self.splitActions
+##                    fiName = 'splitActions-'+str(self.threadID)+'.py'
+##                    fi = open(fiName,'rb')
+##                    splitActions = loads(fi.read())
+##                    fi.close()
+        # compute partiel relation
+        ## if (not hasBipolarVeto) or WithConcordanceRelation or WithVetoCounts:
+        ##     constructRelation = IntegerBipolarOutrankingDigraph._constructRelation
+        ## else:
+        #constructRelation = IntegerBipolarOutrankingDigraph._constructRelationSimple
+        if self.InitialSplit:
+            initialIn = splitActions
+            terminalIn = None
+        else:
+            initialIn = None
+            terminalIn = splitActions
+            #splitRelation = BipolarOutrankingDigraph._constructRelation(
+        splitRelation = digraph._constructRelationSimple(
+                                digraph.criteria,\
+                                digraph.evaluation,
+                                initial=initialIn,
+                                terminal=terminalIn,
+                                hasNoVeto=self.hasNoVeto,
+                                hasBipolarVeto=self.hasBipolarVeto,
+                                #WithConcordanceRelation=False,
+                                #WithVetoCounts=False,
+                                Debug=False,
+                                hasSymmetricThresholds=self.hasSymmetricThresholds)
+        ## else:
+        ##     #splitRelation = BipolarOutrankingDigraph._constructRelation(
+        ##     splitRelation = constructRelation(
+        ##                         digraph,digraph.criteria,\
+        ##                         digraph.evaluation,
+        ##                         #initial=initial,
+        ##                         terminal=splitActions,
+        ##                         hasNoVeto=hasNoVeto,
+        ##                         hasBipolarVeto=hasBipolarVeto,
+        ##                         WithConcordanceRelation=False,
+        ##                         WithVetoCounts=False,
+        ##                         Debug=False,
+        ##                         hasSymmetricThresholds=hasSymmetricThresholds)
+        # store partial relation
+        foName = 'splitRelation-'+str(self.threadID)+'.py'
+        fo = open(foName,'wb')
+        fo.write(dumps(splitRelation,-1))
+        fo.close()
+    # .......
+class myThread2(Process):
+    def __init__(self, threadID,TempDirName, int selfMultiple,
+                     int otherMultiple, bint Debug):
+        Process.__init__(self)
+        self.threadID = threadID
+        self.workingDirectory = tempDirName
+        self.Debug = Debug
+        self.selfMultiple = selfMultiple
+        self.otherMultiple = otherMultiple
+    def run(self):
+        cdef int x, y,selfRelation, otherRelation
+        cdef long corr, determ, n2
+        cdef long corrSum=0, determSum=0
+        cdef double correlation=0.0, determination=0.0
+
+        from pickle import dumps, loads
+        from os import chdir
+        from decimal import Decimal
+        chdir(self.workingDirectory)
+
+        #fi = open('dumpActions.py','rb')
+        #actionsList = loads(fi.read())
+        #fi.close()
+
+        fi = open('dumpRelation.py','rb')
+        selfRel = loads(fi.read())
+        fi.close()
+
+        fi = open('dumpOtherRelation.py','rb')
+        otherRel = loads(fi.read())
+        fi.close()
+
+        fiName = 'splitActions-'+str(self.threadID)+'.py'
+        fi = open(fiName,'rb')
+        splitActions = loads(fi.read())
+        fi.close()
+        #n = len(splitActions
+        #n2 = len(splitActions)**2 
+        correlation = Decimal('0')
+        determination = Decimal('0')
+        for x in splitActions:
+            grx = selfRel[x]
+            orx = otherRel[x]
+            for y in actionsList:
+                if x != y:
+                    selfRelation = grx[y] * otherMultiple
+                    otherRelation = orx[y] * selfMultiple
+                    corr = min( max(-selfRelation,otherRelation),\
+                                    max(selfRelation,-otherRelation) )
+                    corrSum += corr
+                    determSum += min( absInt(selfRelation),\
+                                          absInt(otherRelation) )
+        # if determSum > 0:
+        #     correlation = float(corrSum) / float(determSum)
+        #     n2 = (self.order*self.order) - self.order
+        #     determination = (float(determSum) / n2)
+        #     determination /= (sMax * selfMultiple)
+        
+        splitCorrelation = {'correlation': corrSum,
+                            'determination': determSum}
+        # write partial correlation relation 
+        foName = 'splitCorrelation-'+str(self.threadID)+'.py'
+        fo = open(foName,'wb')
+        fo.write(dumps(splitCorrelation,-1))
+        fo.close()
+
 #-------------------------------------------
         
 #############  cython
@@ -550,90 +694,90 @@ class IntegerBipolarOutrankingDigraph(BipolarOutrankingDigraph,cPerformanceTable
             from io import BytesIO
             from pickle import Pickler, dumps, loads, load
             import multiprocessing as mp
-            mpctx = mp.get_context('fork')
+            mpctx = mp.get_context('spawn')
             Process = mpctx.Process
             active_children = mpctx.active_children
             cpu_count = mpctx.cpu_count
             #from mpctx import Process, Lock,\
             # active_children, cpu_count
             #Debug=True
-            class myThread(Process):
-                def __init__(self, int threadID,digraph,\
-                             InitialSplit, tempDirName,\
-                             splitActions,\
-                             bint hasNoVeto, bint hasBipolarVeto,\
-                             bint hasSymmetricThresholds, bint Debug):
-                    Process.__init__(self)
-                    self.threadID = threadID
-                    self.digraph = digraph
-                    self.InitialSplit = InitialSplit
-                    self.workingDirectory = tempDirName
-                    self.splitActions = splitActions
-                    self.hasNoVeto = hasNoVeto
-                    self.hasBipolarVeto = hasBipolarVeto,
-                    self.hasSymmetricThresholds = hasSymmetricThresholds,
-                    self.Debug = Debug
-                def run(self):
-                    from io import BytesIO
-                    from pickle import Pickler, dumps, loads
-                    from os import chdir
-                    from array import array
-
-                    digraph = self.digraph
-                    
-                    chdir(self.workingDirectory)
-##                    if Debug:
-##                        print("Starting working in %s on thread %s" % (self.workingDirectory, str(self.threadId)))
-                    #fi = open('dumpSelf.py','rb')
-                    #digraph = loads(fi.read())
-                    #fi.close()
-                    splitActions = self.splitActions
-##                    fiName = 'splitActions-'+str(self.threadID)+'.py'
-##                    fi = open(fiName,'rb')
-##                    splitActions = loads(fi.read())
-##                    fi.close()
-                    # compute partiel relation
-                    ## if (not hasBipolarVeto) or WithConcordanceRelation or WithVetoCounts:
-                    ##     constructRelation = IntegerBipolarOutrankingDigraph._constructRelation
-                    ## else:
-                    #constructRelation = IntegerBipolarOutrankingDigraph._constructRelationSimple
-                    if self.InitialSplit:
-                        initialIn = splitActions
-                        terminalIn = None
-                    else:
-                        initialIn = None
-                        terminalIn = splitActions
-                        #splitRelation = BipolarOutrankingDigraph._constructRelation(
-                    splitRelation = digraph._constructRelationSimple(
-                                            digraph.criteria,\
-                                            digraph.evaluation,
-                                            initial=initialIn,
-                                            terminal=terminalIn,
-                                            hasNoVeto=self.hasNoVeto,
-                                            hasBipolarVeto=self.hasBipolarVeto,
-                                            #WithConcordanceRelation=False,
-                                            #WithVetoCounts=False,
-                                            Debug=False,
-                                            hasSymmetricThresholds=self.hasSymmetricThresholds)
-                    ## else:
-                    ##     #splitRelation = BipolarOutrankingDigraph._constructRelation(
-                    ##     splitRelation = constructRelation(
-                    ##                         digraph,digraph.criteria,\
-                    ##                         digraph.evaluation,
-                    ##                         #initial=initial,
-                    ##                         terminal=splitActions,
-                    ##                         hasNoVeto=hasNoVeto,
-                    ##                         hasBipolarVeto=hasBipolarVeto,
-                    ##                         WithConcordanceRelation=False,
-                    ##                         WithVetoCounts=False,
-                    ##                         Debug=False,
-                    ##                         hasSymmetricThresholds=hasSymmetricThresholds)
-                    # store partial relation
-                    foName = 'splitRelation-'+str(self.threadID)+'.py'
-                    fo = open(foName,'wb')
-                    fo.write(dumps(splitRelation,-1))
-                    fo.close()
-                # .......
+##            class myThread(Process):
+##                def __init__(self, int threadID,digraph,\
+##                             InitialSplit, tempDirName,\
+##                             splitActions,\
+##                             bint hasNoVeto, bint hasBipolarVeto,\
+##                             bint hasSymmetricThresholds, bint Debug):
+##                    Process.__init__(self)
+##                    self.threadID = threadID
+##                    self.digraph = digraph
+##                    self.InitialSplit = InitialSplit
+##                    self.workingDirectory = tempDirName
+##                    self.splitActions = splitActions
+##                    self.hasNoVeto = hasNoVeto
+##                    self.hasBipolarVeto = hasBipolarVeto,
+##                    self.hasSymmetricThresholds = hasSymmetricThresholds,
+##                    self.Debug = Debug
+##                def run(self):
+##                    from io import BytesIO
+##                    from pickle import Pickler, dumps, loads
+##                    from os import chdir
+##                    from array import array
+##
+##                    digraph = self.digraph
+##                    
+##                    chdir(self.workingDirectory)
+####                    if Debug:
+####                        print("Starting working in %s on thread %s" % (self.workingDirectory, str(self.threadId)))
+##                    #fi = open('dumpSelf.py','rb')
+##                    #digraph = loads(fi.read())
+##                    #fi.close()
+##                    splitActions = self.splitActions
+####                    fiName = 'splitActions-'+str(self.threadID)+'.py'
+####                    fi = open(fiName,'rb')
+####                    splitActions = loads(fi.read())
+####                    fi.close()
+##                    # compute partiel relation
+##                    ## if (not hasBipolarVeto) or WithConcordanceRelation or WithVetoCounts:
+##                    ##     constructRelation = IntegerBipolarOutrankingDigraph._constructRelation
+##                    ## else:
+##                    #constructRelation = IntegerBipolarOutrankingDigraph._constructRelationSimple
+##                    if self.InitialSplit:
+##                        initialIn = splitActions
+##                        terminalIn = None
+##                    else:
+##                        initialIn = None
+##                        terminalIn = splitActions
+##                        #splitRelation = BipolarOutrankingDigraph._constructRelation(
+##                    splitRelation = digraph._constructRelationSimple(
+##                                            digraph.criteria,\
+##                                            digraph.evaluation,
+##                                            initial=initialIn,
+##                                            terminal=terminalIn,
+##                                            hasNoVeto=self.hasNoVeto,
+##                                            hasBipolarVeto=self.hasBipolarVeto,
+##                                            #WithConcordanceRelation=False,
+##                                            #WithVetoCounts=False,
+##                                            Debug=False,
+##                                            hasSymmetricThresholds=self.hasSymmetricThresholds)
+##                    ## else:
+##                    ##     #splitRelation = BipolarOutrankingDigraph._constructRelation(
+##                    ##     splitRelation = constructRelation(
+##                    ##                         digraph,digraph.criteria,\
+##                    ##                         digraph.evaluation,
+##                    ##                         #initial=initial,
+##                    ##                         terminal=splitActions,
+##                    ##                         hasNoVeto=hasNoVeto,
+##                    ##                         hasBipolarVeto=hasBipolarVeto,
+##                    ##                         WithConcordanceRelation=False,
+##                    ##                         WithVetoCounts=False,
+##                    ##                         Debug=False,
+##                    ##                         hasSymmetricThresholds=hasSymmetricThresholds)
+##                    # store partial relation
+##                    foName = 'splitRelation-'+str(self.threadID)+'.py'
+##                    fo = open(foName,'wb')
+##                    fo.write(dumps(splitRelation,-1))
+##                    fo.close()
+##                # .......
              
             if Comments:
                 print('Threading ...')
@@ -712,7 +856,7 @@ class IntegerBipolarOutrankingDigraph(BipolarOutrankingDigraph,cPerformanceTable
 ##                    spa = dumps(splitActions,-1)
 ##                    fo.write(spa)
 ##                    fo.close()
-                    splitThread = myThread(j,self,InitialSplit,
+                    splitThread = myThread1(j,self,InitialSplit,
                                            tempDirName,splitActions,
                                            hasNoVeto,hasBipolarVeto,
                                            hasSymmetricThresholds,Debug)
@@ -1131,77 +1275,77 @@ class IntegerBipolarOutrankingDigraph(BipolarOutrankingDigraph,cPerformanceTable
             from pickle import Pickler,dumps, loads, load
             #from io import BytesIO
             import multiprocessing as mp
-            mpctx = mp.get_context('fork')
+            mpctx = mp.get_context('spawn')
             Process = mpctx.Process
             actice_children = mbpctx.active_children
             cpu_count = mpctx.cpu_count
             #from mpctx import Process, Lock,\
             #                            active_children, cpu_count
-            class myThread(Process):
-                def __init__(self, threadID,TempDirName, int selfMultiple,
-                                 int otherMultiple, bint Debug):
-                    Process.__init__(self)
-                    self.threadID = threadID
-                    self.workingDirectory = tempDirName
-                    self.Debug = Debug
-                    self.selfMultiple = selfMultiple
-                    self.otherMultiple = otherMultiple
-                def run(self):
-                    cdef int x, y,selfRelation, otherRelation
-                    cdef long corr, determ, n2
-                    cdef long corrSum=0, determSum=0
-                    cdef double correlation=0.0, determination=0.0
-
-                    from pickle import dumps, loads
-                    from os import chdir
-                    from decimal import Decimal
-                    chdir(self.workingDirectory)
-
-                    #fi = open('dumpActions.py','rb')
-                    #actionsList = loads(fi.read())
-                    #fi.close()
-
-                    fi = open('dumpRelation.py','rb')
-                    selfRel = loads(fi.read())
-                    fi.close()
-
-                    fi = open('dumpOtherRelation.py','rb')
-                    otherRel = loads(fi.read())
-                    fi.close()
-
-                    fiName = 'splitActions-'+str(self.threadID)+'.py'
-                    fi = open(fiName,'rb')
-                    splitActions = loads(fi.read())
-                    fi.close()
-                    #n = len(splitActions
-                    #n2 = len(splitActions)**2 
-                    correlation = Decimal('0')
-                    determination = Decimal('0')
-                    for x in splitActions:
-                        grx = selfRel[x]
-                        orx = otherRel[x]
-                        for y in actionsList:
-                            if x != y:
-                                selfRelation = grx[y] * otherMultiple
-                                otherRelation = orx[y] * selfMultiple
-                                corr = min( max(-selfRelation,otherRelation),\
-                                                max(selfRelation,-otherRelation) )
-                                corrSum += corr
-                                determSum += min( absInt(selfRelation),\
-                                                      absInt(otherRelation) )
-                    # if determSum > 0:
-                    #     correlation = float(corrSum) / float(determSum)
-                    #     n2 = (self.order*self.order) - self.order
-                    #     determination = (float(determSum) / n2)
-                    #     determination /= (sMax * selfMultiple)
-                    
-                    splitCorrelation = {'correlation': corrSum,
-                                        'determination': determSum}
-                    # write partial correlation relation 
-                    foName = 'splitCorrelation-'+str(self.threadID)+'.py'
-                    fo = open(foName,'wb')
-                    fo.write(dumps(splitCorrelation,-1))
-                    fo.close()
+##            class myThread(Process):
+##                def __init__(self, threadID,TempDirName, int selfMultiple,
+##                                 int otherMultiple, bint Debug):
+##                    Process.__init__(self)
+##                    self.threadID = threadID
+##                    self.workingDirectory = tempDirName
+##                    self.Debug = Debug
+##                    self.selfMultiple = selfMultiple
+##                    self.otherMultiple = otherMultiple
+##                def run(self):
+##                    cdef int x, y,selfRelation, otherRelation
+##                    cdef long corr, determ, n2
+##                    cdef long corrSum=0, determSum=0
+##                    cdef double correlation=0.0, determination=0.0
+##
+##                    from pickle import dumps, loads
+##                    from os import chdir
+##                    from decimal import Decimal
+##                    chdir(self.workingDirectory)
+##
+##                    #fi = open('dumpActions.py','rb')
+##                    #actionsList = loads(fi.read())
+##                    #fi.close()
+##
+##                    fi = open('dumpRelation.py','rb')
+##                    selfRel = loads(fi.read())
+##                    fi.close()
+##
+##                    fi = open('dumpOtherRelation.py','rb')
+##                    otherRel = loads(fi.read())
+##                    fi.close()
+##
+##                    fiName = 'splitActions-'+str(self.threadID)+'.py'
+##                    fi = open(fiName,'rb')
+##                    splitActions = loads(fi.read())
+##                    fi.close()
+##                    #n = len(splitActions
+##                    #n2 = len(splitActions)**2 
+##                    correlation = Decimal('0')
+##                    determination = Decimal('0')
+##                    for x in splitActions:
+##                        grx = selfRel[x]
+##                        orx = otherRel[x]
+##                        for y in actionsList:
+##                            if x != y:
+##                                selfRelation = grx[y] * otherMultiple
+##                                otherRelation = orx[y] * selfMultiple
+##                                corr = min( max(-selfRelation,otherRelation),\
+##                                                max(selfRelation,-otherRelation) )
+##                                corrSum += corr
+##                                determSum += min( absInt(selfRelation),\
+##                                                      absInt(otherRelation) )
+##                    # if determSum > 0:
+##                    #     correlation = float(corrSum) / float(determSum)
+##                    #     n2 = (self.order*self.order) - self.order
+##                    #     determination = (float(determSum) / n2)
+##                    #     determination /= (sMax * selfMultiple)
+##                    
+##                    splitCorrelation = {'correlation': corrSum,
+##                                        'determination': determSum}
+##                    # write partial correlation relation 
+##                    foName = 'splitCorrelation-'+str(self.threadID)+'.py'
+##                    fo = open(foName,'wb')
+##                    fo.write(dumps(splitCorrelation,-1))
+##                    fo.close()
 
             # pre-threading operations
             if nbrOfCPUs == 0:
@@ -1272,7 +1416,7 @@ class IntegerBipolarOutrankingDigraph(BipolarOutrankingDigraph,cPerformanceTable
                     spa = dumps(splitActions,-1)
                     fo.write(spa)
                     fo.close()
-                    splitThread = myThread(jb,tempDirName,\
+                    splitThread = myThread2(jb,tempDirName,\
                                     selfMultiple,otherMultiple,Debug)
                     splitThread.start()
                     

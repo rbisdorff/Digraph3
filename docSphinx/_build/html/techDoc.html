@@ -1170,6 +1170,8 @@
 </li>
 <li class="toctree-l3"><a class="reference internal" href="#module-cIntegerOutrankingDigraphs">2.23.2. cIntegerOutrankingDigraphs module</a><ul>
 <li class="toctree-l4"><a class="reference internal" href="#cIntegerOutrankingDigraphs.IntegerBipolarOutrankingDigraph"><code class="docutils literal notranslate"><span class="pre">IntegerBipolarOutrankingDigraph</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#cIntegerOutrankingDigraphs.myThread1"><code class="docutils literal notranslate"><span class="pre">myThread1</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#cIntegerOutrankingDigraphs.myThread2"><code class="docutils literal notranslate"><span class="pre">myThread2</span></code></a></li>
 </ul>
 </li>
 <li class="toctree-l3"><a class="reference internal" href="#module-cIntegerSortingDigraphs">2.23.3. cIntegerSortingDigraphs module</a><ul>
@@ -12668,6 +12670,28 @@ is by convention 0.0 at determination level 0.0 .</p>
 </dd>
 </dl>
 <p>Presentation methods for decision actions or alternatives.</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="cIntegerOutrankingDigraphs.myThread1">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">cIntegerOutrankingDigraphs.</span></span><span class="sig-name descname"><span class="pre">myThread1</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">threadID</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">digraph</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">InitialSplit</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">tempDirName</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">splitActions</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">hasNoVeto</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">hasBipolarVeto</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">hasSymmetricThresholds</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">Debug</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cIntegerOutrankingDigraphs.myThread1" title="Permalink to this definition"></a></dt>
+<dd><dl class="py method">
+<dt class="sig sig-object py" id="cIntegerOutrankingDigraphs.myThread1.run">
+<span class="sig-name descname"><span class="pre">run</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#cIntegerOutrankingDigraphs.myThread1.run" title="Permalink to this definition"></a></dt>
+<dd><p>Method to be run in sub-process; can be overridden in sub-class</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="cIntegerOutrankingDigraphs.myThread2">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">cIntegerOutrankingDigraphs.</span></span><span class="sig-name descname"><span class="pre">myThread2</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">threadID</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">TempDirName</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">selfMultiple</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">otherMultiple</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">Debug</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cIntegerOutrankingDigraphs.myThread2" title="Permalink to this definition"></a></dt>
+<dd><dl class="py method">
+<dt class="sig sig-object py" id="cIntegerOutrankingDigraphs.myThread2.run">
+<span class="sig-name descname"><span class="pre">run</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#cIntegerOutrankingDigraphs.myThread2.run" title="Permalink to this definition"></a></dt>
+<dd><p>Method to be run in sub-process; can be overridden in sub-class</p>
 </dd></dl>
 
 </dd></dl>
