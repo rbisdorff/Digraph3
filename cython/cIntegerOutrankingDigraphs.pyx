@@ -24,7 +24,7 @@ from cIntegerOutrankingDigraphs import *
 from cRandPerfTabs import *
 
 # threaded classes
-class myThread1(Process):
+class _myThread1(Process):
     def __init__(self, int threadID,digraph,\
                  InitialSplit, tempDirName,\
                  splitActions,\
@@ -101,7 +101,7 @@ class myThread1(Process):
         fo.write(dumps(splitRelation,-1))
         fo.close()
     # .......
-class myThread2(Process):
+class _myThread2(Process):
     def __init__(self, threadID,TempDirName, int selfMultiple,
                      int otherMultiple, bint Debug):
         Process.__init__(self)
@@ -299,77 +299,74 @@ class IntegerBipolarOutrankingDigraph(BipolarOutrankingDigraph,cPerformanceTable
         * hasNoVeto: veto desactivation flag (False by default).
         * hasBipolarVeto: bipolar versus electre veto activation (true by default).
         * Threading: False by default. Allows to profit from SMP machines via the Python multiprocessing module.
-        * nbrCores: controls the maximal number of cores that will be used in the multiprocessing phases. If None is given, the os.cpu_count method is used in order to determine the number of availble cores on the SMP machine.
+        * nbrCores: controls the maximal number of cores that will be used in the multiprocessing phases. If None is given, the os.cpu_count method is used in order to determine the number of available cores on the SMP machine.
 
-    Example Python session:
-        >>> from cRandPerfTabs import *
-        >>> tc = cRandomPerformanceTableau(numberOfActions=9,seed=100)
-        >>> tc
-        *------- PerformanceTableau instance description ------*
-        Instance class   : cRandomPerformanceTableau
-        Instance name    : cRandomperftab
-        # Actions        : 9
-        # Criteria       : 7
-        Attributes       : ['name', 'actions', 'criteria', 'evaluation', 'weightPreorder']
-        >>> from cIntegerOutrankingDigraphs import *
-        >>> idg = IntegerBipolarOutrankingDigraph(tc)
-        >>> idg
-        *------- Object instance description ------*
-        Instance class   : IntegerBipolarOutrankingDigraph
-        Instance name    : rel_cRandomperftab
-        # Actions        : 9
-        # Criteria       : 7
-        Size             : 57
-        Determinateness  : 37.302
-        Valuation domain : {'min': -7, 'med': 0, 'max': 7, 
-                            'hasIntegerValuation': True}
-        ----  Constructor run times (in sec.) ----
-        Total time       : 0.00243
-        Data input       : 0.00034
-        Compute relation : 0.00202
-        Gamma sets       : 0.00006
-        #Threads         : 1
-        >>> idg.showRelationTable()
-        * ---- Relation Table -----
-         R  |   '0' '1' '2' '3' '4' '5' '6' '7' '8'   
-        ----|--------------------------------------
-        '0' |   +0  +0  -1  -1  +2  +1  -3  +0  +1  
-        '1' |   +3  +0  -7  -7  +1  +2  -1  +1  +1  
-        '2' |   +3  +7  +0  +4  +3  +3  +4  +1  +3  
-        '3' |   +2  +7  +4  +0  +1  +3  +5  +2  +0  
-        '4' |   +5  +2  +2  +1  +0  +3  +1  +1  +3  
-        '5' |   +1  +2  -1  -1  +1  +0  -1  +0  +3  
-        '6' |   +3  +5  +5  +4  +3  +2  +0  +1  +3  
-        '7' |   +5  +5  +3  +4  +3  +7  +1  +0  +5  
-        '8' |   +1  +3  +2  +7  +0  +2  +2  +0  +0  
-        >>> idg.showRubisBestChoiceRecommendation()
-        ***********************
-        Rubis best choice recommendation(s) (BCR)
-         (in decreasing order of determinateness)   
-        Credibility domain: [-7.00,7.00]
-         === >> potential best choice(s)
-        * choice              : [2, 3, 4, 6, 7, 8]
-          +-irredundancy      : 0.00
-          independence        : 0.00
-          dominance           : 1.00
-          absorbency          : -2.00
-          covering (%)        : 50.00
-          determinateness (%) : 55.56
-          - most credible action(s) = { '7': 1.00, '6': 1.00, '4': 1.00, '2': 1.00, }
-         === >> potential worst choice(s) 
-        * choice              : [0, 1, 4, 5, 7, 8]
-          +-irredundancy      : 0.00
-          independence        : 0.00
-          dominance           : -1.00
-          absorbency          : 3.00
-          covering (%)        : 0.00
-          determinateness (%) : 54.76
-          - most credible action(s) = { '8': 1.00, '5': 1.00, '0': 1.00, }
-        Execution time: 0.005 seconds
-        *****************************
-        >>> ig.computeCopelandRanking()
-        [2, 6, 7, 3, 4, 8, 1, 5, 0]
-      
+Example Python session:
+    
+>>> from cRandPerfTabs import *
+>>> pt = cRandomPerformanceTableau(numberOfActions=1000,seed=1)
+>>> from cIntegerOutrankingDigraphs import *
+>>> bg = IntegerBipolarOutrankingDigraph(pt,Threading=True,
+...           nbrCores=12,Comments=True,startMethod='spawn')
+    #-----------
+    Computing the relation
+    Threading ...
+    Start method: 'spawn'
+    Nbr of cpus =  12
+    nbr of actions to split 1000
+    nbr of jobs =  12
+    nbr of splitActions =  84
+    Thread = 1/12 84
+    Thread = 2/12 84
+    Thread = 3/12 84
+    Thread = 4/12 84
+    Thread = 5/12 84
+    Thread = 6/12 84
+    Thread = 7/12 84
+    Thread = 8/12 84
+    Thread = 9/12 84
+    Thread = 10/12 84
+    Thread = 11/12 84
+    Thread = 12/12 76
+    Exiting computing threads
+    *------- Object instance description ------*
+    Instance class   : IntegerBipolarOutrankingDigraph
+    Instance name    : rel_cRandomperftab
+    # Actions        : 1000
+    # Criteria       : 7
+    Size             : 665552
+    Determinateness  : 43.747
+    Valuation domain : {'min': -7, 'med': 0, 'max': 7,
+                        'hasIntegerValuation': True}
+    ----  Constructor run times (in sec.) ----
+    Total time       : 2.09552
+    Data input       : 0.00820
+    Compute relation : 1.80797
+    Gamma sets       : 0.27934
+    # Threads        : 12
+    Start method     : spawn
+    Attributes       : ['name', 'actions', 'criteria',
+                        'totalWeight', 'valuationdomain',
+                        'methodData', 'NA', 'evaluation',
+                        'order', 'runTimes', 'startMethod',
+                        'nbrThreads', 'relation',
+                        'gamma', 'notGamma']
+>>> from time import time
+>>> t0=time();bg.computeNetFlowsRanking();t1=time()
+  [416, 948, 54, 923, 362, 853, 433, 507, 202, 290,
+   449, 232, 207, 253, 875, 383, 462, 119, 908, 643,
+   233, 411, 294, 992, 663, 95, 642, 579, 999, 635,
+   ...
+   ...
+   327, 374, 915, 983, 73, 977, 824, 373, 115, 322,
+   995, 818, 199, 48, 104, 216, 137, 242, 205, 841,
+   460, 491, 645, 268, 630, 690, 235, 939, 364, 742,
+   656, 264, 405, 17, 667, 828, 151, 562, 546, 158,
+   473, 453, 522, 512, 679, 686]
+>>> print('Ranking run time: %.5f sec.' % (t1-t0) )
+   Ranking run time: 0.00042 sec.
+
+    
     """
     
     def __init__(self,argPerfTab=None,\
@@ -380,10 +377,11 @@ class IntegerBipolarOutrankingDigraph(BipolarOutrankingDigraph,cPerformanceTable
                  bint CopyPerfTab=True,\
                  bint BigData=False,\
                  bint Threading=False,\
+                 startMethod=None,\
                  tempDir=None,\
                  bint WithConcordanceRelation=False,\
                  bint WithVetoCounts=False,\
-                 nbrCores=None,\
+                 nbrCores=1,\
                  Debug=False,Comments=False):
                  
         cdef int n, nt, totalWeight=0, Min, Max, Med
@@ -511,6 +509,9 @@ class IntegerBipolarOutrankingDigraph(BipolarOutrankingDigraph,cPerformanceTable
         criteria = self.criteria
         evaluation = self.evaluation
         actionsKeys = list(dict.keys(actions))
+        self.startMethod = startMethod
+        if Comments:
+            print('Computing the relation')
         self.relation = self._constructRelationWithThreading(criteria,\
                                                 evaluation,\
                                                 initial=actionsKeys,\
@@ -519,9 +520,8 @@ class IntegerBipolarOutrankingDigraph(BipolarOutrankingDigraph,cPerformanceTable
                                                 hasBipolarVeto=hasBipolarVeto,\
                                                 hasSymmetricThresholds=True,\
                                                 Threading=Threading,\
+                                                startMethod=startMethod,\
                                                 tempDir=tempDir,\
-                                                ## WithConcordanceRelation=WithConcordanceRelation,\
-                                                ## WithVetoCounts=WithVetoCounts,\
                                                 nbrCores=nbrCores,\
                                                 Debug=Debug,Comments=Comments)
         # finished relation computing time stamp
@@ -564,8 +564,9 @@ class IntegerBipolarOutrankingDigraph(BipolarOutrankingDigraph,cPerformanceTable
             reprString += 'Gamma sets       : %.5f\n' % val4
             try:
                 reprString += '# Threads        : %d\n' % self.nbrThreads
+                reprString += 'Start method     : %s\n' % self.startMethod
             except:
-                self.nbrThreads = 1
+                self.nbrThreads = 0
                 reprString += '# Threads        : %d\n' % self.nbrThreads
         except:
             pass
@@ -651,7 +652,8 @@ class IntegerBipolarOutrankingDigraph(BipolarOutrankingDigraph,cPerformanceTable
                            bint hasBipolarVeto=True,\
                            bint Debug=False,\
                            bint hasSymmetricThresholds=True,\
-                           bint Threading=False,
+                           bint Threading=False,\
+                           startMethod=None,\
                            tempDir=None,\
                            bint WithConcordanceRelation=False,\
                            bint WithVetoCounts=False,\
@@ -670,8 +672,8 @@ class IntegerBipolarOutrankingDigraph(BipolarOutrankingDigraph,cPerformanceTable
         
         if not Threading or cpu_count() < 2:
             # set threading parameter
-            self.nbrThreads = 1
-
+            self.nbrThreads = 0
+            self.startMethod = None
             # !! concordance relation and veto counts need a complex constructor
             ## if (not hasBipolarVeto) or WithConcordanceRelation or WithVetoCounts:
             ##     constructRelation = self._constructRelation
@@ -690,14 +692,20 @@ class IntegerBipolarOutrankingDigraph(BipolarOutrankingDigraph,cPerformanceTable
                                     hasSymmetricThresholds=hasSymmetricThresholds)
         ##
         else:  # parallel computation
+            if Comments:
+                print('Threading ...')
+                print("Start method: \'%s\'" % startMethod)
             from copy import copy, deepcopy
             from io import BytesIO
             from pickle import Pickler, dumps, loads, load
             import multiprocessing as mp
-            mpctx = mp.get_context('spawn')
+            if self.startMethod is None:
+                mpctx = mp.get_context('spawn')
+            else:
+                mpctx = mp.get_context(startMethod)
+            self.startMethod = mp.get_start_method()
             Process = mpctx.Process
             active_children = mpctx.active_children
-            cpu_count = mpctx.cpu_count
             #from mpctx import Process, Lock,\
             # active_children, cpu_count
             #Debug=True
@@ -779,8 +787,6 @@ class IntegerBipolarOutrankingDigraph(BipolarOutrankingDigraph,cPerformanceTable
 ##                    fo.close()
 ##                # .......
              
-            if Comments:
-                print('Threading ...')
             
             from tempfile import TemporaryDirectory
             with TemporaryDirectory(dir=tempDir) as tempDirName:
@@ -856,7 +862,7 @@ class IntegerBipolarOutrankingDigraph(BipolarOutrankingDigraph,cPerformanceTable
 ##                    spa = dumps(splitActions,-1)
 ##                    fo.write(spa)
 ##                    fo.close()
-                    splitThread = myThread1(j,self,InitialSplit,
+                    splitThread = _myThread1(j,self,InitialSplit,
                                            tempDirName,splitActions,
                                            hasNoVeto,hasBipolarVeto,
                                            hasSymmetricThresholds,Debug)
@@ -1416,7 +1422,7 @@ class IntegerBipolarOutrankingDigraph(BipolarOutrankingDigraph,cPerformanceTable
                     spa = dumps(splitActions,-1)
                     fo.write(spa)
                     fo.close()
-                    splitThread = myThread2(jb,tempDirName,\
+                    splitThread = _myThread2(jb,tempDirName,\
                                     selfMultiple,otherMultiple,Debug)
                     splitThread.start()
                     
