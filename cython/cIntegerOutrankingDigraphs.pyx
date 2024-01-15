@@ -363,8 +363,8 @@ Example Python session:
    460, 491, 645, 268, 630, 690, 235, 939, 364, 742,
    656, 264, 405, 17, 667, 828, 151, 562, 546, 158,
    473, 453, 522, 512, 679, 686]
->>> print('Ranking run time: %.5f sec.' % (t1-t0) )
-   Ranking run time: 0.00042 sec.
+>>> print('Ranking run time: %.2f sec.' % (t1-t0) )
+   Ranking run time: 0.12 sec.
 
     
     """
@@ -381,7 +381,7 @@ Example Python session:
                  tempDir=None,\
                  bint WithConcordanceRelation=False,\
                  bint WithVetoCounts=False,\
-                 nbrCores=1,\
+                 nbrCores=None,\
                  Debug=False,Comments=False):
                  
         cdef int n, nt, totalWeight=0, Min, Max, Med
@@ -547,30 +547,23 @@ Example Python session:
         reprString = '*------- Object instance description ------*\n'
         reprString += 'Instance class   : %s\n' % self.__class__.__name__
         reprString += 'Instance name    : %s\n' % self.name
-        reprString += '# Actions        : %d\n' % self.order
-        reprString += '# Criteria       : %d\n' % len(self.criteria)
+        reprString += 'Actions          : %d\n' % self.order
+        reprString += 'Criteria         : %d\n' % len(self.criteria)
         reprString += 'Size             : %d\n' % self.computeSize()
         reprString += 'Determinateness  : %.3f\n' % self.computeDeterminateness()
         reprString += 'Valuation domain : %s\n' % str(self.valuationdomain)
-        try:
-            val1 = self.runTimes['totalTime']
-            val2 = self.runTimes['dataInput']
-            val3 = self.runTimes['computeRelation']
-            val4 = self.runTimes['gammaSets']
-            reprString += '----  Constructor run times (in sec.) ----\n'
-            reprString += 'Total time       : %.5f\n' % val1
-            reprString += 'Data input       : %.5f\n' % val2
-            reprString += 'Compute relation : %.5f\n' % val3
-            reprString += 'Gamma sets       : %.5f\n' % val4
-            try:
-                reprString += '# Threads        : %d\n' % self.nbrThreads
-                reprString += 'Start method     : %s\n' % self.startMethod
-            except:
-                self.nbrThreads = 0
-                reprString += '# Threads        : %d\n' % self.nbrThreads
-        except:
-            pass
-        reprString += 'Attributes       : %s\n' % list(self.__dict__.keys())     
+        reprString += 'Attributes       : %s\n' % list(self.__dict__.keys())
+        val1 = self.runTimes['totalTime']
+        val2 = self.runTimes['dataInput']
+        val3 = self.runTimes['computeRelation']
+        val4 = self.runTimes['gammaSets']
+        reprString += '----  Constructor run times (in sec.) ----\n'
+        reprString += 'Total time       : %.5f\n' % val1
+        reprString += 'Data input       : %.5f\n' % val2
+        reprString += 'Compute relation : %.5f\n' % val3
+        reprString += 'Gamma sets       : %.5f\n' % val4
+        reprString += 'Threads          : %d\n' % self.nbrThreads
+        reprString += 'Start method     : %s\n' % self.startMethod
         return reprString
         
     def computeCriterionRelation(self,c, a,b,hasSymmetricThresholds=True):
@@ -704,7 +697,6 @@ Example Python session:
             else:
                 mpctx = mp.get_context(startMethod)
             self.startMethod = mpctx.get_start_method()
-            print('==>>', self.startMethod)
             Process = mpctx.Process
             active_children = mpctx.active_children
             #from mpctx import Process, Lock,\

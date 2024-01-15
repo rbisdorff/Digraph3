@@ -36,19 +36,20 @@ class SparseIntegerDigraph(object):
         reprString = '*----- Object instance description --------------*\n'
         reprString += 'Instance class    : %s\n' % self.__class__.__name__
         reprString += 'Instance name     : %s\n' % self.name
-        reprString += '# Actions         : %d\n' % self.order
-        reprString += '# Criteria        : %d\n' % self.dimension
+        reprString += 'Actions           : %d\n' % self.order
+        reprString += 'Criteria          : %d\n' % self.dimension
         reprString += 'Sorting by        : %d-Tiling\n' % self.sortingParameters['limitingQuantiles']
         reprString += 'Ordering strategy : %s\n' % self.sortingParameters['strategy']
         reprString += 'Ranking rule      : %s\n' % self.componentRankingRule
-        reprString += '# Components      : %d\n' % self.nbrComponents
+        reprString += 'Components        : %d\n' % self.nbrComponents
         reprString += 'Minimal order     : %d\n' % self.minimalComponentSize
         reprString += 'Maximal order     : %d\n' % self.maximalComponentSize
         reprString += 'Average order     : %.1f\n' % (self.order/self.nbrComponents)
         reprString += 'fill rate         : %.3f%%\n' % (self.fillRate*100.0)    
+        reprString += 'Attributes       : %s\n' % list(self.__dict__.keys())
         reprString += '----  Constructor run times (in sec.) ----\n'
-        reprString += '# Threads         : %d\n' % self.nbrOfCPUs
-        reprString += 'StartMethod       : %s\n' % self.sortingParameters['StartMethod']
+        reprString += 'Threads           : %d\n' % self.nbrThreads
+        reprString += 'StartMethod       : %s\n' % self.startMethod
         reprString += 'Total time        : %.5f\n' % self.runTimes['totalTime']
         reprString += 'QuantilesSorting  : %.5f\n' % self.runTimes['sorting']
         reprString += 'Preordering       : %.5f\n' % self.runTimes['preordering']
@@ -57,7 +58,7 @@ class SparseIntegerDigraph(object):
             reprString += 'Ordering          : %.5f\n' % self.runTimes['ordering']
         except:
             pass
-        reprString += 'Attributes       : %s\n' % list(self.__dict__.keys())     
+ 
 
         return reprString
 
@@ -1041,6 +1042,7 @@ class SparseIntegerOutrankingDigraph(SparseIntegerDigraph,cPerformanceTableau):
         * componentRankingRule="Copeland",
         * minimalComponentSize=1,
         * Threading=False,
+        * startMethod='spawn'
         * tempDir=None,
         * componentThreadingThreshold=1000,\
         * nbrOfCPUs=1,
@@ -1082,7 +1084,8 @@ class SparseIntegerOutrankingDigraph(SparseIntegerDigraph,cPerformanceTableau):
     ...                       quantilesOrderingStrategy='average',
     ...                       LowerClosed=False,
     ...                       minimalComponentSize=10,
-    ...                       Threading=True,nbrOfCPUs=8,
+    ...                       Threading=True,nbrOfCPUs=12,
+    ...                       startMethod='spwan', 
     ...                       Debug=False)
     >>> bg
      *----- Object instance description --------------*
@@ -1098,13 +1101,6 @@ class SparseIntegerOutrankingDigraph(SparseIntegerDigraph,cPerformanceTableau):
       Maximal order     : 438
       Average order     : 100.0
       fill rate         : 26.541%
-     ----  Constructor run times (in sec.) ----
-      # Threads         : 8
-      Total time        : 4.48622
-      QuantilesSorting  : 0.07092
-      Preordering       : 0.00159
-      Decomposing       : 4.41365
-      Ordering          : 0.00001
       Attributes       : ['runTimes', 'name', 'actions', 'criteria', 
                           'evaluation', 'order', 'dimension', 
                           'sortingParameters', 'nbrOfCPUs', 'valuationdomain', 
@@ -1113,6 +1109,14 @@ class SparseIntegerOutrankingDigraph(SparseIntegerDigraph,cPerformanceTableau):
                           'nbrComponents', 'nd', 'components', 'fillRate', 
                           'maximalComponentSize', 'componentRankingRule', 
                           'boostedRanking']
+     ----  Constructor run times (in sec.) ----
+      Threads           : 12
+      StartMethod       : spawn
+      Total time        : 2.33468
+      QuantilesSorting  : 0.02812
+      Preordering       : 0.00126
+      Decomposing       : 2.30525
+      Ordering          : 0.00001
     >>> bg.showBestChoiceRecommendation()
       ***********************
       * --- Best choice recommendation(s) ---*
@@ -1155,9 +1159,9 @@ class SparseIntegerOutrankingDigraph(SparseIntegerDigraph,cPerformanceTableau):
                  int minimalComponentSize=1,\
                  bint Threading=False,\
                  startMethod='spawn',\
+                 int nbrOfCPUs=1,\
                  tempDir=None,\
                  int componentThreadingThreshold=50,\
-                 int nbrOfCPUs=12,\
                  save2File=None,\
                  bint CopyPerfTab=False,\
                  bint Comments=False,\
@@ -1279,7 +1283,9 @@ class SparseIntegerOutrankingDigraph(SparseIntegerDigraph,cPerformanceTableau):
         nd = len(str(nc))
         self.nd = nd
         if not self.sortingParameters['Threading']:
-            self.nbrOfCPUs = 1
+            #self.nbrOfCPUs = 1
+            self.nbrThreads = 0
+            self.startMethod = None
             components = OrderedDict()
             boostedRanking = []
             for i in range(1,nc+1):
@@ -1305,11 +1311,15 @@ class SparseIntegerOutrankingDigraph(SparseIntegerDigraph,cPerformanceTableau):
             from pickle import dumps, loads, load, dump
             import multiprocessing as mp
             mpctx = mp.get_context(startMethod)
+            self.startMethod = mpctx.get_start_method()
             #from multiprocessing import Process, Queue,active_children, cpu_count
             Process = mpctx.Process
             Queue = mpctx.Queue
             active_children = mpctx.active_children
-            cpu_count = mpctx.cpu_count
+            nbrCores = mpctx.cpu_count()
+            if nbrOfCPUs < nbrCores:
+                nbrCores = nbrOfCPUs
+            self.nbrThreads = nbrCores
             if Comments:
                 print('Processing the %d components' % nc )
                 print('Threading ...')
@@ -1317,7 +1327,7 @@ class SparseIntegerOutrankingDigraph(SparseIntegerDigraph,cPerformanceTableau):
             from tempfile import TemporaryDirectory,mkdtemp
             with TemporaryDirectory(dir=tempDir) as tempDirName:
                 ## tasks queue and workers launching
-                NUMBER_OF_WORKERS = nbrOfCPUs
+                NUMBER_OF_WORKERS = nbrCores
                 tasksIndex = [(i,len(decomposition[i][1])) for i in range(nc)]
                 tasksIndex.sort(key=lambda pos: pos[1],reverse=True)
                 TASKS = [(Comments,(pos[0],nc,tempDirName,perfTab,decomposition)) for pos in tasksIndex]
@@ -2115,21 +2125,29 @@ class cQuantilesRankingDigraph(SparseIntegerOutrankingDigraph):
       Sorting by        : 5-Tiling
       Ordering strategy : average
       Ranking rule      : Copeland
-      # Components      : 82
+      # Components      : 80
       Minimal order     : 10
-      Maximal order     : 25
-      Average order     : 12.2
-      fill rate         : 1.201%
+      Maximal order     : 24
+      Average order     : 12.5
+      fill rate         : 1.230%
+      Attributes       : ['runTimes', 'name', 'actions', 'order',
+                          'dimension', 'sortingParameters', 'nbrOfCPUs',
+                          'valuationdomain', 'profiles', 'categories',
+                          'sorting', 'minimalComponentSize', 'decomposition',
+                          'nbrComponents', 'nd', 'startMethod', 'nbrThreads',
+                          'components', 'fillRate', 'maximalComponentSize',
+                          'componentRankingRule', 'boostedRanking']
       ----  Constructor run times (in sec.) ----
       Nbr of threads    : 8
-      Total time        : 0.17159
-      QuantilesSorting  : 0.07006
-      Preordering       : 0.00214
-      Decomposing       : 0.09931
+      StartMethod       : spawn
+      Total time        : 0.17755
+      QuantilesSorting  : 0.03014
+      Preordering       : 0.00157
+      Decomposing       : 0.14579
     >>> print(bg.boostedRanking[:10],' ... ',bg.boostedRanking[-10:] )
-      [388, 131, 151, 275, 679, 406, 741, 623, 579, 894]  ... 
-      [278, 886, 202, 473, 841, 878, 713, 62, 17, 312]
-    >>>
+       [680, 389, 742, 152, 132, 717, 276, 604, 624, 181]
+          ...
+       [203, 879, 33, 681, 63, 550, 860, 770, 925, 313]  
     
     """
     
@@ -2218,6 +2236,9 @@ class cQuantilesRankingDigraph(SparseIntegerOutrankingDigraph):
         t0 = time()
         if Comments:        
             print('Computing the %d-quantiles sorting digraph of order %d ...' % (quantiles,na))
+        if Threading:
+            from multiprocessing import cpu_count
+            nbrCores = cpu_count()
         qs = IntegerQuantilesSortingDigraph(argPerfTab=perfTab,
                                      limitingQuantiles=quantiles,
                                      LowerClosed=LowerClosed,
@@ -2227,7 +2248,7 @@ class cQuantilesRankingDigraph(SparseIntegerOutrankingDigraph):
                                      Threading=self.sortingParameters['Threading'],
                                      startMethod=self.sortingParameters['StartMethod'],
                                      tempDir=tempDir,
-                                     nbrCores=nbrOfCPUs,
+                                     nbrCores=nbrCores,
                                      Comments=Comments,
                                      Debug=Debug)
         self.runTimes['sorting'] = time() - t0
@@ -2304,7 +2325,10 @@ class cQuantilesRankingDigraph(SparseIntegerOutrankingDigraph):
             Process = mpctx.Process
             Queue = mpctx.Queue
             active_children = mpctx.active_children
-            cpu_count = mpctx.cpu_count
+            nbrCores = mpctx.cpu_count()
+            if nbrOfCPUs < nbrCores:
+                nbrCores = nbrOfCPUs
+            self.nbrThreads = nbrCores
             #from multiprocessing import Process, Queue,active_children, cpu_count                 
             if Comments:
                 print('Processing the %d components' % nc )
@@ -2314,7 +2338,7 @@ class cQuantilesRankingDigraph(SparseIntegerOutrankingDigraph):
             maximalComponentSize = 0
             with TemporaryDirectory(dir=tempDir) as tempDirName:
                 ## tasks queue and workers launching
-                NUMBER_OF_WORKERS = nbrOfCPUs
+                NUMBER_OF_WORKERS = nbrCores
                 tasksIndex = [(i,len(decomposition[i][1])) for i in range(nc)]
                 tasksIndex.sort(key=lambda pos: pos[1],reverse=True)
                 maximalComponentSize += tasksIndex[0][1]
