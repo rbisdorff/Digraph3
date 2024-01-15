@@ -1085,7 +1085,7 @@ class SparseIntegerOutrankingDigraph(SparseIntegerDigraph,cPerformanceTableau):
     ...                       LowerClosed=False,
     ...                       minimalComponentSize=10,
     ...                       Threading=True,nbrOfCPUs=12,
-    ...                       startMethod='spwan', 
+    ...                       startMethod='spawn', 
     ...                       Debug=False)
     >>> bg
      *----- Object instance description --------------*
