@@ -36,7 +36,10 @@ class cPerformanceTableau(PerformanceTableau):
         if filePerfTab != None:
             fileName = filePerfTab + '.py'
             argDict = {}
-            exec(compile(open(fileName).read(), fileName, 'exec'),argDict)
+            fi = open(fileName,'r')
+            fileText = fi.read()
+            fi.close()
+            exec(compile(fileText, fileName, 'exec'),argDict)
             self.name = str(filePerfTab)
             try:
                 self.actions = argDict['actions']

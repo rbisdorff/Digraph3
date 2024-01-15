@@ -6,14 +6,14 @@
 # # Current $Revision: 1.8 $
 ########################
 
-if __name__ == '__main__':
-    from sys import platform
-    if platform == 'darwin':
-        print('start_method set to fork')
-        from multiprocessing import set_start_method, get_start_method, freeze_support
-        set_start_method('fork')
-        print(get_start_method())
-        freeze_support()
+# if __name__ == '__main__':
+#     from sys import platform
+#     if platform == 'darwin':
+#         print('start_method set to fork')
+#         from multiprocessing import set_start_method, get_start_method, freeze_support
+#         set_start_method('fork')
+#         print(get_start_method())
+#         freeze_support()
 
 
 from cIntegerOutrankingDigraphs import *

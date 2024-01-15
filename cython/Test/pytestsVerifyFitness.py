@@ -6,14 +6,14 @@
 # ..$ pytest -vs pytestsVerifyFitness.py
 # # Current $Revision: 1.8 $
 ########################
-if __name__ == '__main__':
-    from sys import platform
-    if platform == 'darwin':
-        print('start_method set to fork')
-        from multiprocessing import set_start_method, get_start_method, freeze_support
-        set_start_method('fork')
-        print(get_start_method())
-        freeze_support()
+# if __name__ == '__main__':
+#     from sys import platform
+#     if platform == 'darwin':
+#         print('start_method set to fork')
+#         from multiprocessing import set_start_method, get_start_method, freeze_support
+#         set_start_method('fork')
+#         print(get_start_method())
+#         freeze_support()
 
 from cIntegerOutrankingDigraphs import *
 from cSparseIntegerOutrankingDigraphs import *
@@ -65,7 +65,9 @@ def testCQRModelFitness():
                                 LowerClosed=False,
                                 CopyPerfTab=True,
                                minimalComponentSize=minimalComponentSize,
-                                    Threading=MP,Debug=False)
+                                    Threading=MP,
+                                       startMethod='spawn',
+                                       Comments=True,Debug=False)
         
         bg1.showDecomposition()
         #bg1Ordering = list(reversed(bg1.boostedRanking))
@@ -96,7 +98,8 @@ def testEstimateCorrelation():
                                 LowerClosed=False,
                                 CopyPerfTab=True,
                                minimalComponentSize=minimalComponentSize,
-                                    Threading=MP,Debug=False)
+                                       Threading=MP,startMethod='spawn',
+                                       Debug=False)
         
         corr = bg1.estimateRankingCorrelation(sampleSize,s)
         statistics['correlation'] += corr['correlation']

@@ -1346,6 +1346,7 @@ class SparseIntegerOutrankingDigraph(SparseIntegerDigraph,cPerformanceTableau):
                     fiName = tempDirName+'/splitComponent-'+str(j)+'.py'
                     fi = open(fiName,'rb')
                     splitComponent = loads(fi.read())
+                    fi.close()
                     if Debug:
                         print('splitComponent',splitComponent)
                     components[splitComponent['compKey']] = splitComponent['compDict']
@@ -2298,7 +2299,8 @@ class cQuantilesRankingDigraph(SparseIntegerOutrankingDigraph):
             from copy import copy, deepcopy
             from pickle import dumps, loads, load, dump
             import multiprocessing as mp
-            mpctx = mp.get_context('fork')
+            mpctx = mp.get_context(startMethod)
+            self.startMethod = mpctx.get_start_method()
             Process = mpctx.Process
             Queue = mpctx.Queue
             active_children = mpctx.active_children
@@ -2343,6 +2345,7 @@ class cQuantilesRankingDigraph(SparseIntegerOutrankingDigraph):
                     fiName = tempDirName+'/splitComponent-'+str(j)+'.py'
                     fi = open(fiName,'rb')
                     splitComponent = loads(fi.read())
+                    fi.close()
                     if Debug:
                         print('splitComponent',j,splitComponent)
                     components[splitComponent['compKey']] = splitComponent['compDict']
