@@ -377,7 +377,7 @@ Example Python session:
                  bint CopyPerfTab=True,\
                  bint BigData=False,\
                  bint Threading=False,\
-                 startMethod=None,\
+                 startMethod='spawn',\
                  tempDir=None,\
                  bint WithConcordanceRelation=False,\
                  bint WithVetoCounts=False,\
@@ -653,7 +653,7 @@ Example Python session:
                            bint Debug=False,\
                            bint hasSymmetricThresholds=True,\
                            bint Threading=False,\
-                           startMethod=None,\
+                           startMethod='spawn',\
                            tempDir=None,\
                            bint WithConcordanceRelation=False,\
                            bint WithVetoCounts=False,\
@@ -699,11 +699,12 @@ Example Python session:
             from io import BytesIO
             from pickle import Pickler, dumps, loads, load
             import multiprocessing as mp
-            if self.startMethod is None:
+            if startMethod is None:
                 mpctx = mp.get_context('spawn')
             else:
                 mpctx = mp.get_context(startMethod)
-            self.startMethod = mp.get_start_method()
+            self.startMethod = mpctx.get_start_method()
+            print('==>>', self.startMethod)
             Process = mpctx.Process
             active_children = mpctx.active_children
             #from mpctx import Process, Lock,\
