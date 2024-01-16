@@ -3940,23 +3940,21 @@ class BipolarOutrankingDigraph(OutrankingDigraph):
             % (self.valuationdomain['min'],self.valuationdomain['max'])
         #reprString += 'Valuation domain : %s\n' % str(self.valuationdomain)
         reprString += 'Attributes           : %s\n' % list(self.__dict__.keys())
+        val1 = self.runTimes['totalTime']
+        val2 = self.runTimes['dataInput']
+        val3 = self.runTimes['computeRelation']
+        val4 = self.runTimes['gammaSets']
+        reprString += '----  Constructor run times (in sec.) ----\n'
         try:
-            val1 = self.runTimes['totalTime']
-            val2 = self.runTimes['dataInput']
-            val3 = self.runTimes['computeRelation']
-            val4 = self.runTimes['gammaSets']
-            reprString += '----  Constructor run times (in sec.) ----\n'
-            reprString += 'Total time       : %.5f\n' % val1
-            reprString += 'Data input       : %.5f\n' % val2
-            reprString += 'Compute relation : %.5f\n' % val3
-            reprString += 'Gamma sets       : %.5f\n' % val4
-            try:
+            if self.nbrThreads > 1:
                 reprString += 'Threads          : %d\n' % self.nbrThreads
-            except:
-                self.nbrThreads = 1
-                reprString += 'Threads          : %d\n' % self.nbrThreads
+                reprString += 'Start method     : %s\n' % 'spawn'
         except:
             pass
+        reprString += 'Total time       : %.5f\n' % val1
+        reprString += 'Data input       : %.5f\n' % val2
+        reprString += 'Compute relation : %.5f\n' % val3
+        reprString += 'Gamma sets       : %.5f\n' % val4
         return reprString
     
     def __init__(self,argPerfTab=None,
