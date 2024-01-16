@@ -27587,7 +27587,7 @@ PyObject *__pyx_args, PyObject *__pyx_kwds
 
     /* "cSparseIntegerOutrankingDigraphs.pyx":1163
  *                  startMethod='spawn',\
- *                  int nbrOfCPUs=1,\
+ *                  int nbrOfCPUs=4,\
  *                  tempDir=None,\             # <<<<<<<<<<<<<<
  *                  int componentThreadingThreshold=50,\
  *                  save2File=None,\
@@ -27824,11 +27824,11 @@ PyObject *__pyx_args, PyObject *__pyx_kwds
       /* "cSparseIntegerOutrankingDigraphs.pyx":1156
  *                  int quantiles=4,\
  *                  quantilesOrderingStrategy="average",\
- *                  bint OptimalQuantileOrdering=False,\             # <<<<<<<<<<<<<<
+ *                  bint OptimalQuantileOrdering=True,\             # <<<<<<<<<<<<<<
  *                  bint LowerClosed=False,\
  *                  componentRankingRule="Copeland",\
  */
-      __pyx_v_OptimalQuantileOrdering = ((int)((int)0));
+      __pyx_v_OptimalQuantileOrdering = ((int)((int)1));
     }
     if (values[5]) {
       __pyx_v_LowerClosed = __Pyx_PyObject_IsTrue(values[5]); if (unlikely((__pyx_v_LowerClosed == (int)-1) && PyErr_Occurred())) __PYX_ERR(0, 1157, __pyx_L3_error)
@@ -27836,7 +27836,7 @@ PyObject *__pyx_args, PyObject *__pyx_kwds
 
       /* "cSparseIntegerOutrankingDigraphs.pyx":1157
  *                  quantilesOrderingStrategy="average",\
- *                  bint OptimalQuantileOrdering=False,\
+ *                  bint OptimalQuantileOrdering=True,\
  *                  bint LowerClosed=False,\             # <<<<<<<<<<<<<<
  *                  componentRankingRule="Copeland",\
  *                  int minimalComponentSize=1,\
@@ -27858,7 +27858,7 @@ PyObject *__pyx_args, PyObject *__pyx_kwds
  *                  int minimalComponentSize=1,\
  *                  bint Threading=False,\             # <<<<<<<<<<<<<<
  *                  startMethod='spawn',\
- *                  int nbrOfCPUs=1,\
+ *                  int nbrOfCPUs=4,\
  */
       __pyx_v_Threading = ((int)((int)0));
     }
@@ -27866,7 +27866,7 @@ PyObject *__pyx_args, PyObject *__pyx_kwds
     if (values[10]) {
       __pyx_v_nbrOfCPUs = __Pyx_PyInt_As_int(values[10]); if (unlikely((__pyx_v_nbrOfCPUs == (int)-1) && PyErr_Occurred())) __PYX_ERR(0, 1162, __pyx_L3_error)
     } else {
-      __pyx_v_nbrOfCPUs = ((int)((int)1));
+      __pyx_v_nbrOfCPUs = ((int)((int)4));
     }
     __pyx_v_tempDir = values[11];
     if (values[12]) {
@@ -65079,7 +65079,7 @@ if (!__Pyx_RefNanny) {
  *     def __init__(self,argPerfTab,\
  *                  int quantiles=4,\             # <<<<<<<<<<<<<<
  *                  quantilesOrderingStrategy="average",\
- *                  bint OptimalQuantileOrdering=False,\
+ *                  bint OptimalQuantileOrdering=True,\
  */
   __pyx_t_4 = __Pyx_PyInt_From_int(((int)4)); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 1154, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_4);
@@ -65087,16 +65087,16 @@ if (!__Pyx_RefNanny) {
   /* "cSparseIntegerOutrankingDigraphs.pyx":1156
  *                  int quantiles=4,\
  *                  quantilesOrderingStrategy="average",\
- *                  bint OptimalQuantileOrdering=False,\             # <<<<<<<<<<<<<<
+ *                  bint OptimalQuantileOrdering=True,\             # <<<<<<<<<<<<<<
  *                  bint LowerClosed=False,\
  *                  componentRankingRule="Copeland",\
  */
-  __pyx_t_5 = __Pyx_PyBool_FromLong(((int)0)); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 1156, __pyx_L1_error)
+  __pyx_t_5 = __Pyx_PyBool_FromLong(((int)1)); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 1156, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_5);
 
   /* "cSparseIntegerOutrankingDigraphs.pyx":1157
  *                  quantilesOrderingStrategy="average",\
- *                  bint OptimalQuantileOrdering=False,\
+ *                  bint OptimalQuantileOrdering=True,\
  *                  bint LowerClosed=False,\             # <<<<<<<<<<<<<<
  *                  componentRankingRule="Copeland",\
  *                  int minimalComponentSize=1,\
@@ -65119,7 +65119,7 @@ if (!__Pyx_RefNanny) {
  *                  int minimalComponentSize=1,\
  *                  bint Threading=False,\             # <<<<<<<<<<<<<<
  *                  startMethod='spawn',\
- *                  int nbrOfCPUs=1,\
+ *                  int nbrOfCPUs=4,\
  */
   __pyx_t_10 = __Pyx_PyBool_FromLong(((int)0)); if (unlikely(!__pyx_t_10)) __PYX_ERR(0, 1160, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_10);
@@ -65127,15 +65127,15 @@ if (!__Pyx_RefNanny) {
   /* "cSparseIntegerOutrankingDigraphs.pyx":1162
  *                  bint Threading=False,\
  *                  startMethod='spawn',\
- *                  int nbrOfCPUs=1,\             # <<<<<<<<<<<<<<
+ *                  int nbrOfCPUs=4,\             # <<<<<<<<<<<<<<
  *                  tempDir=None,\
  *                  int componentThreadingThreshold=50,\
  */
-  __pyx_t_9 = __Pyx_PyInt_From_int(((int)1)); if (unlikely(!__pyx_t_9)) __PYX_ERR(0, 1162, __pyx_L1_error)
+  __pyx_t_9 = __Pyx_PyInt_From_int(((int)4)); if (unlikely(!__pyx_t_9)) __PYX_ERR(0, 1162, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_9);
 
   /* "cSparseIntegerOutrankingDigraphs.pyx":1164
- *                  int nbrOfCPUs=1,\
+ *                  int nbrOfCPUs=4,\
  *                  tempDir=None,\
  *                  int componentThreadingThreshold=50,\             # <<<<<<<<<<<<<<
  *                  save2File=None,\

@@ -1153,13 +1153,13 @@ class SparseIntegerOutrankingDigraph(SparseIntegerDigraph,cPerformanceTableau):
     def __init__(self,argPerfTab,\
                  int quantiles=4,\
                  quantilesOrderingStrategy="average",\
-                 bint OptimalQuantileOrdering=False,\
+                 bint OptimalQuantileOrdering=True,\
                  bint LowerClosed=False,\
                  componentRankingRule="Copeland",\
                  int minimalComponentSize=1,\
                  bint Threading=False,\
                  startMethod='spawn',\
-                 int nbrOfCPUs=1,\
+                 int nbrOfCPUs=4,\
                  tempDir=None,\
                  int componentThreadingThreshold=50,\
                  save2File=None,\
