@@ -17,7 +17,7 @@ Technical Reference of the Digraph3 modules
 
    :New:
       
-        - Following a Python 3.12 recommendation, all multiprocessing resources have been refactored to use, instead of the traditional *fork*, the safer *spawn* threading start method. As a consequence, main program code of Digraph3 Python scripts must now start with a *__name__=='__main__'* test in order to avoid its recursive execution in each started thread (see the :py:mod:`multiprocessing` module).
+        - Following a Python 3.12 recommendation, all multiprocessing resources have been refactored to use by default, instead of the traditional *fork*, the safer *spawn* threading start method. As a consequence, main program code of multiprocessing Digraph3 Python scripts must now start with a *__name__=='__main__'* test in order to avoid its recursive execution in each started thread (see the :py:mod:`multiprocessing` module).
 
         - A refactored multiprocessing :py:class:`~mpOutrankingDigraphs.MPBipolarOutrankingDigraph` constructor of genuine bipolar-valued outranking digraphs with a configurable threading start method: *spawn* (by default), *forkserver* or *fork*.
 
