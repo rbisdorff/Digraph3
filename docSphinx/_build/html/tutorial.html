@@ -667,10 +667,6 @@ the current working directory a ‘tutorialDigraph.dot’ file and a
 </figcaption>
 </figure>
 <p>For more information about its resources, see the <a class="reference internal" href="techDoc.html#modules-organisation-label"><span class="std std-ref">technical documentation of the digraphs module</span></a>.</p>
-<div class="admonition warning">
-<p class="admonition-title">Warning</p>
-<p>When running python from script files with <em>Threading==True*</em> constructors, mind that the multiprocessing start method is set by default to <em>spawn</em>, which requires the main code entry to be protected with a <em>__name__==’__main__’</em> test (see the documentation of the <a class="reference external" href="https://docs.python.org/3/library/multiprocessing.html#module-multiprocessing" title="(in Python v3.12)"><code class="xref py py-mod docutils literal notranslate"><span class="pre">multiprocessing</span></code></a> module).</p>
-</div>
 <p>Back to <a class="reference internal" href="#tutorial-label"><span class="std std-ref">Content Table</span></a></p>
 <hr class="docutils" />
 </section>
@@ -1057,62 +1053,60 @@ the current working directory a ‘tutorialDigraph.dot’ file and a
 <p>Let us finally mention some special universal classes of digraphs that are readily available in the <a class="reference internal" href="techDoc.html#module-digraphs" title="digraphs"><code class="xref py py-mod docutils literal notranslate"><span class="pre">digraphs</span></code></a> module, like the <a class="reference internal" href="techDoc.html#digraphs.CompleteDigraph" title="digraphs.CompleteDigraph"><code class="xref py py-class docutils literal notranslate"><span class="pre">CompleteDigraph</span></code></a>, the <a class="reference internal" href="techDoc.html#digraphs.EmptyDigraph" title="digraphs.EmptyDigraph"><code class="xref py py-class docutils literal notranslate"><span class="pre">EmptyDigraph</span></code></a> and the <a class="reference internal" href="techDoc.html#digraphs.IndeterminateDigraph" title="digraphs.IndeterminateDigraph"><code class="xref py py-class docutils literal notranslate"><span class="pre">IndeterminateDigraph</span></code></a> classes, which put all characteristic values respectively to the <em>maximum</em>, the <em>minimum</em> or the median <em>indeterminate</em> characteristic value.</p>
 <div class="literal-block-wrapper docutils container" id="completeempty">
 <div class="code-block-caption"><span class="caption-number">Listing 1.10 </span><span class="caption-text">Complete, empty and indeterminate digraphs</span><a class="headerlink" href="#completeempty" title="Link to this code"></a></div>
-<div class="highlight-pycon notranslate"><div class="highlight"><pre><span></span><span class="linenos"> 1</span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">digraphs</span> <span class="kn">import</span> <span class="n">CompleteDigraph</span><span class="p">,</span><span class="n">EmptyDigraph</span><span class="p">,</span>
-<span class="linenos"> 2</span><span class="gp">... </span>                          <span class="n">IndeterminateDigraph</span>
-<span class="linenos"> 3</span>
-<span class="linenos"> 4</span><span class="gp">&gt;&gt;&gt; </span><span class="n">e</span> <span class="o">=</span> <span class="n">EmptyDigraph</span><span class="p">(</span><span class="n">order</span><span class="o">=</span><span class="mi">5</span><span class="p">)</span>
-<span class="linenos"> 5</span><span class="gp">&gt;&gt;&gt; </span><span class="n">e</span><span class="o">.</span><span class="n">showRelationTable</span><span class="p">()</span>
-<span class="linenos"> 6</span><span class="go"> * ---- Relation Table -----</span>
-<span class="linenos"> 7</span><span class="go">   S   |    &#39;1&#39;    &#39;2&#39;    &#39;3&#39;    &#39;4&#39;    &#39;5&#39;</span>
-<span class="linenos"> 8</span><span class="go"> ---- -|-----------------------------------</span>
-<span class="linenos"> 9</span><span class="go"> &#39;1&#39;   |  -1.00  -1.00  -1.00  -1.00  -1.00</span>
-<span class="linenos">10</span><span class="go"> &#39;2&#39;   |  -1.00  -1.00  -1.00  -1.00  -1.00</span>
-<span class="linenos">11</span><span class="go"> &#39;3&#39;   |  -1.00  -1.00  -1.00  -1.00  -1.00</span>
-<span class="linenos">12</span><span class="go"> &#39;4&#39;   |  -1.00  -1.00  -1.00  -1.00  -1.00</span>
-<span class="linenos">13</span><span class="go"> &#39;5&#39;   |  -1.00  -1.00  -1.00  -1.00  -1.00</span>
-<span class="linenos">14</span><span class="go"> &gt;&gt;&gt; e.showNeighborhoods()</span>
-<span class="linenos">15</span><span class="go"> Neighborhoods:</span>
-<span class="linenos">16</span><span class="go">   Gamma     :</span>
-<span class="linenos">17</span><span class="go"> &#39;1&#39;: in =&gt; set(), out =&gt; set()</span>
-<span class="linenos">18</span><span class="go"> &#39;2&#39;: in =&gt; set(), out =&gt; set()</span>
-<span class="linenos">19</span><span class="go"> &#39;5&#39;: in =&gt; set(), out =&gt; set()</span>
-<span class="linenos">20</span><span class="go"> &#39;3&#39;: in =&gt; set(), out =&gt; set()</span>
-<span class="linenos">21</span><span class="go"> &#39;4&#39;: in =&gt; set(), out =&gt; set()</span>
-<span class="hll"><span class="linenos">22</span><span class="go">   Not Gamma :</span>
-</span><span class="hll"><span class="linenos">23</span><span class="go"> &#39;1&#39;: in =&gt; {&#39;2&#39;, &#39;4&#39;, &#39;5&#39;, &#39;3&#39;}, out =&gt; {&#39;2&#39;, &#39;4&#39;, &#39;5&#39;, &#39;3&#39;}</span>
-</span><span class="hll"><span class="linenos">24</span><span class="go"> &#39;2&#39;: in =&gt; {&#39;1&#39;, &#39;4&#39;, &#39;5&#39;, &#39;3&#39;}, out =&gt; {&#39;1&#39;, &#39;4&#39;, &#39;5&#39;, &#39;3&#39;}</span>
-</span><span class="hll"><span class="linenos">25</span><span class="go"> &#39;5&#39;: in =&gt; {&#39;1&#39;, &#39;2&#39;, &#39;4&#39;, &#39;3&#39;}, out =&gt; {&#39;1&#39;, &#39;2&#39;, &#39;4&#39;, &#39;3&#39;}</span>
-</span><span class="hll"><span class="linenos">26</span><span class="go"> &#39;3&#39;: in =&gt; {&#39;1&#39;, &#39;2&#39;, &#39;4&#39;, &#39;5&#39;}, out =&gt; {&#39;1&#39;, &#39;2&#39;, &#39;4&#39;, &#39;5&#39;}</span>
-</span><span class="hll"><span class="linenos">27</span><span class="go"> &#39;4&#39;: in =&gt; {&#39;1&#39;, &#39;2&#39;, &#39;5&#39;, &#39;3&#39;}, out =&gt; {&#39;1&#39;, &#39;2&#39;, &#39;5&#39;, &#39;3&#39;}</span>
-</span><span class="linenos">28</span><span class="gp">&gt;&gt;&gt; </span><span class="n">i</span> <span class="o">=</span> <span class="n">IndeterminateDigraph</span><span class="p">()</span>
-<span class="linenos">29</span><span class="go"> * ---- Relation Table -----</span>
-<span class="linenos">30</span><span class="go">   S   |   &#39;1&#39;   &#39;2&#39;   &#39;3&#39;   &#39;4&#39;   &#39;5&#39;</span>
-<span class="linenos">31</span><span class="go"> ------|------------------------------</span>
-<span class="linenos">32</span><span class="go"> &#39;1&#39;   |  0.00  0.00  0.00  0.00  0.00</span>
-<span class="linenos">33</span><span class="go"> &#39;2&#39;   |  0.00  0.00  0.00  0.00  0.00</span>
-<span class="linenos">34</span><span class="go"> &#39;3&#39;   |  0.00  0.00  0.00  0.00  0.00</span>
-<span class="linenos">35</span><span class="go"> &#39;4&#39;   |  0.00  0.00  0.00  0.00  0.00</span>
-<span class="linenos">36</span><span class="go"> &#39;5&#39;   |  0.00  0.00  0.00  0.00  0.00</span>
-<span class="linenos">37</span><span class="gp">&gt;&gt;&gt; </span><span class="n">i</span><span class="o">.</span><span class="n">showNeighborhoods</span><span class="p">()</span>
-<span class="linenos">38</span><span class="go"> Neighborhoods:</span>
-<span class="linenos">39</span><span class="go">   Gamma     :</span>
-<span class="linenos">40</span><span class="go"> &#39;1&#39;: in =&gt; set(), out =&gt; set()</span>
-<span class="linenos">41</span><span class="go"> &#39;2&#39;: in =&gt; set(), out =&gt; set()</span>
-<span class="linenos">42</span><span class="go"> &#39;5&#39;: in =&gt; set(), out =&gt; set()</span>
-<span class="linenos">43</span><span class="go"> &#39;3&#39;: in =&gt; set(), out =&gt; set()</span>
-<span class="linenos">44</span><span class="go"> &#39;4&#39;: in =&gt; set(), out =&gt; set()</span>
-<span class="hll"><span class="linenos">45</span><span class="go">   Not Gamma :</span>
-</span><span class="hll"><span class="linenos">46</span><span class="go"> &#39;1&#39;: in =&gt; set(), out =&gt; set()</span>
-</span><span class="hll"><span class="linenos">47</span><span class="go"> &#39;2&#39;: in =&gt; set(), out =&gt; set()</span>
-</span><span class="hll"><span class="linenos">48</span><span class="go"> &#39;5&#39;: in =&gt; set(), out =&gt; set()</span>
-</span><span class="hll"><span class="linenos">49</span><span class="go"> &#39;3&#39;: in =&gt; set(), out =&gt; set()</span>
-</span><span class="hll"><span class="linenos">50</span><span class="go"> &#39;4&#39;: in =&gt; set(), out =&gt; set()</span>
+<div class="highlight-pycon notranslate"><div class="highlight"><pre><span></span><span class="linenos"> 1</span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">digraphs</span> <span class="kn">import</span> <span class="n">CompleteDigraph</span><span class="p">,</span><span class="n">EmptyDigraph</span><span class="p">,</span><span class="n">IndeterminateDigraph</span>
+<span class="linenos"> 2</span><span class="gp">&gt;&gt;&gt; </span><span class="n">e</span> <span class="o">=</span> <span class="n">EmptyDigraph</span><span class="p">(</span><span class="n">order</span><span class="o">=</span><span class="mi">5</span><span class="p">)</span>
+<span class="linenos"> 3</span><span class="gp">&gt;&gt;&gt; </span><span class="n">e</span><span class="o">.</span><span class="n">showRelationTable</span><span class="p">()</span>
+<span class="linenos"> 4</span><span class="go"> * ---- Relation Table -----</span>
+<span class="linenos"> 5</span><span class="go">   S   |    &#39;1&#39;    &#39;2&#39;    &#39;3&#39;    &#39;4&#39;    &#39;5&#39;</span>
+<span class="linenos"> 6</span><span class="go"> ---- -|-----------------------------------</span>
+<span class="linenos"> 7</span><span class="go"> &#39;1&#39;   |  -1.00  -1.00  -1.00  -1.00  -1.00</span>
+<span class="linenos"> 8</span><span class="go"> &#39;2&#39;   |  -1.00  -1.00  -1.00  -1.00  -1.00</span>
+<span class="linenos"> 9</span><span class="go"> &#39;3&#39;   |  -1.00  -1.00  -1.00  -1.00  -1.00</span>
+<span class="linenos">10</span><span class="go"> &#39;4&#39;   |  -1.00  -1.00  -1.00  -1.00  -1.00</span>
+<span class="linenos">11</span><span class="go"> &#39;5&#39;   |  -1.00  -1.00  -1.00  -1.00  -1.00</span>
+<span class="linenos">12</span><span class="go"> &gt;&gt;&gt; e.showNeighborhoods()</span>
+<span class="linenos">13</span><span class="go"> Neighborhoods:</span>
+<span class="linenos">14</span><span class="go">   Gamma     :</span>
+<span class="linenos">15</span><span class="go"> &#39;1&#39;: in =&gt; set(), out =&gt; set()</span>
+<span class="linenos">16</span><span class="go"> &#39;2&#39;: in =&gt; set(), out =&gt; set()</span>
+<span class="linenos">17</span><span class="go"> &#39;5&#39;: in =&gt; set(), out =&gt; set()</span>
+<span class="linenos">18</span><span class="go"> &#39;3&#39;: in =&gt; set(), out =&gt; set()</span>
+<span class="linenos">19</span><span class="go"> &#39;4&#39;: in =&gt; set(), out =&gt; set()</span>
+<span class="hll"><span class="linenos">20</span><span class="go">   Not Gamma :</span>
+</span><span class="hll"><span class="linenos">21</span><span class="go"> &#39;1&#39;: in =&gt; {&#39;2&#39;, &#39;4&#39;, &#39;5&#39;, &#39;3&#39;}, out =&gt; {&#39;2&#39;, &#39;4&#39;, &#39;5&#39;, &#39;3&#39;}</span>
+</span><span class="hll"><span class="linenos">22</span><span class="go"> &#39;2&#39;: in =&gt; {&#39;1&#39;, &#39;4&#39;, &#39;5&#39;, &#39;3&#39;}, out =&gt; {&#39;1&#39;, &#39;4&#39;, &#39;5&#39;, &#39;3&#39;}</span>
+</span><span class="hll"><span class="linenos">23</span><span class="go"> &#39;5&#39;: in =&gt; {&#39;1&#39;, &#39;2&#39;, &#39;4&#39;, &#39;3&#39;}, out =&gt; {&#39;1&#39;, &#39;2&#39;, &#39;4&#39;, &#39;3&#39;}</span>
+</span><span class="hll"><span class="linenos">24</span><span class="go"> &#39;3&#39;: in =&gt; {&#39;1&#39;, &#39;2&#39;, &#39;4&#39;, &#39;5&#39;}, out =&gt; {&#39;1&#39;, &#39;2&#39;, &#39;4&#39;, &#39;5&#39;}</span>
+</span><span class="hll"><span class="linenos">25</span><span class="go"> &#39;4&#39;: in =&gt; {&#39;1&#39;, &#39;2&#39;, &#39;5&#39;, &#39;3&#39;}, out =&gt; {&#39;1&#39;, &#39;2&#39;, &#39;5&#39;, &#39;3&#39;}</span>
+</span><span class="linenos">26</span><span class="gp">&gt;&gt;&gt; </span><span class="n">i</span> <span class="o">=</span> <span class="n">IndeterminateDigraph</span><span class="p">()</span>
+<span class="linenos">27</span><span class="go"> * ---- Relation Table -----</span>
+<span class="linenos">28</span><span class="go">   S   |   &#39;1&#39;   &#39;2&#39;   &#39;3&#39;   &#39;4&#39;   &#39;5&#39;</span>
+<span class="linenos">29</span><span class="go"> ------|------------------------------</span>
+<span class="linenos">30</span><span class="go"> &#39;1&#39;   |  0.00  0.00  0.00  0.00  0.00</span>
+<span class="linenos">31</span><span class="go"> &#39;2&#39;   |  0.00  0.00  0.00  0.00  0.00</span>
+<span class="linenos">32</span><span class="go"> &#39;3&#39;   |  0.00  0.00  0.00  0.00  0.00</span>
+<span class="linenos">33</span><span class="go"> &#39;4&#39;   |  0.00  0.00  0.00  0.00  0.00</span>
+<span class="linenos">34</span><span class="go"> &#39;5&#39;   |  0.00  0.00  0.00  0.00  0.00</span>
+<span class="linenos">35</span><span class="gp">&gt;&gt;&gt; </span><span class="n">i</span><span class="o">.</span><span class="n">showNeighborhoods</span><span class="p">()</span>
+<span class="linenos">36</span><span class="go"> Neighborhoods:</span>
+<span class="linenos">37</span><span class="go">   Gamma     :</span>
+<span class="linenos">38</span><span class="go"> &#39;1&#39;: in =&gt; set(), out =&gt; set()</span>
+<span class="linenos">39</span><span class="go"> &#39;2&#39;: in =&gt; set(), out =&gt; set()</span>
+<span class="linenos">40</span><span class="go"> &#39;5&#39;: in =&gt; set(), out =&gt; set()</span>
+<span class="linenos">41</span><span class="go"> &#39;3&#39;: in =&gt; set(), out =&gt; set()</span>
+<span class="linenos">42</span><span class="go"> &#39;4&#39;: in =&gt; set(), out =&gt; set()</span>
+<span class="hll"><span class="linenos">43</span><span class="go">   Not Gamma :</span>
+</span><span class="hll"><span class="linenos">44</span><span class="go"> &#39;1&#39;: in =&gt; set(), out =&gt; set()</span>
+</span><span class="hll"><span class="linenos">45</span><span class="go"> &#39;2&#39;: in =&gt; set(), out =&gt; set()</span>
+</span><span class="hll"><span class="linenos">46</span><span class="go"> &#39;5&#39;: in =&gt; set(), out =&gt; set()</span>
+</span><span class="hll"><span class="linenos">47</span><span class="go"> &#39;3&#39;: in =&gt; set(), out =&gt; set()</span>
+</span><span class="hll"><span class="linenos">48</span><span class="go"> &#39;4&#39;: in =&gt; set(), out =&gt; set()</span>
 </span></pre></div>
 </div>
 </div>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
-<p>Mind the subtle difference between the neighborhoods of an <strong>empty</strong> and the neighborhoods of an <strong>indeterminate</strong> digraph instance. In the first kind, the neighborhoods are known to be completely <em>empty</em>  (see <a class="hxr-hoverxref hxr-tooltip reference internal" href="#completeempty"><span class="std std-numref">Listing 1.10</span></a> Lines 22-27) whereas, in the latter, <em>nothing is known</em> about the actual neighborhoods of the nodes  (see <a class="hxr-hoverxref hxr-tooltip reference internal" href="#completeempty"><span class="std std-numref">Listing 1.10</span></a> Lines 45-50). These two cases illustrate why in the case of <strong>bipolar-valued</strong> digraphs, we may need both a <em>gamma</em> <strong>and</strong> a <em>notGamma</em> attribute.</p>
+<p>Mind the subtle difference between the neighborhoods of an <strong>empty</strong> and the neighborhoods of an <strong>indeterminate</strong> digraph instance. In the first kind, the neighborhoods are known to be completely <em>empty</em>  (see <a class="hxr-hoverxref hxr-tooltip reference internal" href="#completeempty"><span class="std std-numref">Listing 1.10</span></a> Lines 20-25) whereas, in the latter, <em>nothing is known</em> about the actual neighborhoods of the nodes  (see <a class="hxr-hoverxref hxr-tooltip reference internal" href="#completeempty"><span class="std std-numref">Listing 1.10</span></a> Lines 43-48). These two cases illustrate why in the case of <strong>bipolar-valued</strong> digraphs, we may need both a <em>gamma</em> <strong>and</strong> a <em>notGamma</em> attribute.</p>
 </div>
 <p>Back to <a class="reference internal" href="#tutorial-label"><span class="std std-ref">Content Table</span></a></p>
 <hr class="docutils" />

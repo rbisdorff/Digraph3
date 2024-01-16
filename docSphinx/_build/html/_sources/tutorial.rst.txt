@@ -449,10 +449,6 @@ Some constructors for universal digraph instances, like the :py:class:`~digraphs
 
    For more information about its resources, see the :ref:`technical documentation of the digraphs module <Modules-organisation-label>`. 
 
-.. warning::
-
-   When running python from script files with *Threading==True** constructors, mind that the multiprocessing start method is set by default to *spawn*, which requires the main code entry to be protected with a *__name__=='__main__'* test (see the documentation of the :py:mod:`multiprocessing` module).
-
 Back to :ref:`Content Table <Tutorial-label>`
 
 ----------------
@@ -897,11 +893,9 @@ Let us finally mention some special universal classes of digraphs that are readi
    :linenos:
    :name: completeEmpty
    :caption: Complete, empty and indeterminate digraphs
-   :emphasize-lines: 22-27,45-50
+   :emphasize-lines: 20-25,43-48
 
-   >>> from digraphs import CompleteDigraph,EmptyDigraph,
-   ...   			 IndeterminateDigraph
-   
+   >>> from digraphs import CompleteDigraph,EmptyDigraph,IndeterminateDigraph  
    >>> e = EmptyDigraph(order=5)
    >>> e.showRelationTable()
     * ---- Relation Table -----
@@ -952,7 +946,7 @@ Let us finally mention some special universal classes of digraphs that are readi
 
 .. note::
 
-   Mind the subtle difference between the neighborhoods of an **empty** and the neighborhoods of an **indeterminate** digraph instance. In the first kind, the neighborhoods are known to be completely *empty*  (see :numref:`completeEmpty` Lines 22-27) whereas, in the latter, *nothing is known* about the actual neighborhoods of the nodes  (see :numref:`completeEmpty` Lines 45-50). These two cases illustrate why in the case of **bipolar-valued** digraphs, we may need both a *gamma* **and** a *notGamma* attribute.
+   Mind the subtle difference between the neighborhoods of an **empty** and the neighborhoods of an **indeterminate** digraph instance. In the first kind, the neighborhoods are known to be completely *empty*  (see :numref:`completeEmpty` Lines 20-25) whereas, in the latter, *nothing is known* about the actual neighborhoods of the nodes  (see :numref:`completeEmpty` Lines 43-48). These two cases illustrate why in the case of **bipolar-valued** digraphs, we may need both a *gamma* **and** a *notGamma* attribute.
 
 Back to :ref:`Content Table <Tutorial-label>`
 
