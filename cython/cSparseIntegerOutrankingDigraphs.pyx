@@ -2248,7 +2248,7 @@ class cQuantilesRankingDigraph(SparseIntegerOutrankingDigraph):
                                      Threading=self.sortingParameters['Threading'],
                                      startMethod=self.sortingParameters['StartMethod'],
                                      tempDir=tempDir,
-                                     nbrCores=nbrCores,
+                                     nbrCores=nbrOfCPUs,
                                      Comments=Comments,
                                      Debug=Debug)
         self.runTimes['sorting'] = time() - t0
@@ -2267,11 +2267,10 @@ class cQuantilesRankingDigraph(SparseIntegerOutrankingDigraph):
         quantilesOrderingStrategy = self.sortingParameters['strategy']
         ##if quantilesOrderingStrategy == 'average':
         decomposition = [[(item[0][0],item[0][1]),item[1]]\
-                for item in self._computeQuantileOrdering(\
-                    strategy=quantilesOrderingStrategy,\
-                    #OptimalQuantileOrdering=True,\                                      
+                for item in self._computeQuantileOrdering(
+                    strategy=quantilesOrderingStrategy,     
                     Descending=True,
-                    Threading=Threading,
+                        Threading=Threading,
                     nbrOfCPUs=nbrOfCPUs)]
         if Debug:
             print(decomposition)

@@ -4625,10 +4625,6 @@ Four cythonized Digraph3 modules, prefixed with the letter *c* and taking a *pyx
 
 Their automatic compilation and installation, alongside the standard Digraph3 python3 modules, requires the *cython* compiler [6]_ ( ...$ pip3 install cython ) and a C compiler (...$ sudo apt install gcc on Ubuntu).
 
-.. warning::
-
-   These cythonized modules, specifically designed for being run on HPC clusters (see https://hpc.uni.lu), require the Unix *forking* start method of subprocesses (see start methods of the `multiprocessing module <https://docs.python.org/3/library/multiprocessing.html#contexts-and-start-methods>`_)  and therefore, due to forking problems on Mac OS platforms, may only operate safely on Linux platforms. 
-
 Big Data performance tableaux
 `````````````````````````````
 
@@ -4716,24 +4712,26 @@ The C compiled version of the bipolar-valued digraph models takes integer relati
       *------- Object instance description ------*
       Instance class   : IntegerBipolarOutrankingDigraph
       Instance name    : rel_cRandomperftab
-      # Actions        : 1000
-      # Criteria       : 2
+      Actions          : 1000
+      Criteria         : 2
       Size             : 465024
       Determinateness  : 56.877
       Valuation domain : {'min': -2, 'med': 0, 'max': 2,
                           'hasIntegerValuation': True}
-      ----  Constructor run times (in sec.) ----
-      Total time       : 4.23880
-      Data input       : 0.01203
-      Compute relation : 3.60788
-      Gamma sets       : 0.61889
-      #Threads         : 4
       Attributes       : ['name', 'actions', 'criteria', 'totalWeight',
                           'valuationdomain', 'methodData', 'evaluation',
-                          'order', 'runTimes', 'nbrThreads', 'relation',
+                          'order', 'runTimes', 'startMethod',
+			  'nbrThreads', 'relation',
                           'gamma', 'notGamma']
-
-On a classic intel-i7 equipped PC with four single threaded cores, the :py:class:`~cIntegerOutrankingDigraphs.IntegerBipolarOutrankingDigraph` constructor takes about four seconds for computing a **million** pairwise outranking characteristic values. In a similar setting, the standard :py:class:`~outrankingDigraphs.BipolarOutrankingDigraph` class constructor operates more than two times slower.
+      ----  Constructor run times (in sec.) ----
+      Total time       : 1.19811
+      Data input       : 0.00183
+      Compute relation : 0.91961
+      Gamma sets       : 0.27664
+      Threads          : 4
+      Start method     : spawn
+      
+On a classic intel-i5-11400x12 equipped PC, the :py:class:`~cIntegerOutrankingDigraphs.IntegerBipolarOutrankingDigraph` constructor takes with four multiprocessing threads about one seconds for computing a **million** pairwise outranking characteristic values. In a similar setting, the standard :py:class:`~outrankingDigraphs.BipolarOutrankingDigraph` class constructor operates about four times slower.
 
 .. code-block:: pycon
    :linenos:
@@ -4745,8 +4743,8 @@ On a classic intel-i7 equipped PC with four single threaded cores, the :py:class
       *------- Object instance description ------*
       Instance class   : BipolarOutrankingDigraph
       Instance name    : rel_std_cRandomperftab
-      # Actions        : 1000
-      # Criteria       : 2
+      Actions          : 1000
+      Criteria         : 2
       Size             : 465024
       Determinateness  : 56.817
       Valuation domain : {'min': Decimal('-1.0'),
@@ -4754,11 +4752,12 @@ On a classic intel-i7 equipped PC with four single threaded cores, the :py:class
 			  'max': Decimal('1.0'),
 			  'precision': Decimal('0')}
       ----  Constructor run times (in sec.) ----
-      Total time       : 8.63340
-      Data input       : 0.01564
-      Compute relation : 7.52787
-      Gamma sets       : 1.08987
-      #Threads         : 4
+      Threads          : 4
+      Start method     : spawn
+      Total time       : 3.81307
+      Data input       : 0.00305
+      Compute relation : 3.41648
+      Gamma sets       : 0.39353
 
 By far, most of the run time is in each case needed for computing the individual pairwise outranking characteristic values. Notice also below the memory occupations of both outranking digraph instances. 
 
@@ -4769,13 +4768,13 @@ By far, most of the run time is in each case needed for computing the individual
    >>> total_size(g)
     108662777
    >>> total_size(g1)
-    212679272
+    113564067
    >>> total_size(g.relation)/total_size(g)
     0.34
    >>> total_size(g.gamma)/total_size(g)
     0.45
 
-About 103MB for *g* and 202MB for *g1*. The standard *Decimal* valued :py:class:`~outrankingDigraphs.BipolarOutrankingDigraph` instance *g1* thus nearly doubles the memory occupation of the corresponding :py:class:`~cIntegerOutrankingDigraphs.IntegerBipolarOutrankingDigraph` *g* instance (see Line 3 and 5 above). 3/4 of this memory occupation is due to the *g.relation* (34%) and the *g.gamma* (45%) dictionaries. And these ratios quadratically grow with the digraph order. To limit the object sizes for really big outranking digraphs, we need to abandon the complete implementation of adjacency tables and gamma functions.
+About 109MB for *g* and 114MB for *g1*. The standard *Decimal* valued :py:class:`~outrankingDigraphs.BipolarOutrankingDigraph` instance *g1* thus adds nearly 10% to the memory occupation of the corresponding :py:class:`~cIntegerOutrankingDigraphs.IntegerBipolarOutrankingDigraph` *g* instance (see Line 3 and 5 above). 3/4 of this memory occupation is due to the *g.relation* (34%) and the *g.gamma* (45%) dictionaries. And these ratios quadratically grow with the digraph order. To limit the object sizes for really big outranking digraphs, we need to abandon the complete implementation of adjacency tables and gamma functions.
 
 The sparse outranking digraph implementation
 ````````````````````````````````````````````
@@ -4795,7 +4794,8 @@ We sort the 100 decision alternatives into overlapping quartile classes and rank
    :linenos:
 
    >>> from cSparseIntegerOutrankingDigraphs import *
-   >>> sg = SparseIntegerOutrankingDigraph(t,quantiles=4)
+   >>> sg = SparseIntegerOutrankingDigraph(t,quantiles=4,
+   ...                      OptimalQuantileOrdering=False)
    >>> sg
     *----- Object instance description --------------*
     Instance class    : SparseIntegerOutrankingDigraph
@@ -4810,14 +4810,7 @@ We sort the 100 decision alternatives into overlapping quartile classes and rank
     Maximal order     : 35
     Average order     : 16.7
     fill rate         : 24.970%
-    *----  Constructor run times (in sec.) ----
-    Nbr of threads    : 1
-    Total time        : 0.08212
-    QuantilesSorting  : 0.01481
-    Preordering       : 0.00022
-    Decomposing       : 0.06707
-    Ordering          : 0.00000
-    Attributes       : ['runTimes', 'name', 'actions', 'criteria',
+    Attributes        : ['runTimes', 'name', 'actions', 'criteria',
                         'evaluation', 'order', 'dimension',
                         'sortingParameters', 'nbrOfCPUs',
                         'valuationdomain', 'profiles', 'categories',
@@ -4826,6 +4819,14 @@ We sort the 100 decision alternatives into overlapping quartile classes and rank
                         'components', 'fillRate',
                         'maximalComponentSize', 'componentRankingRule',
                         'boostedRanking']
+    *----  Constructor run times (in sec.) ----
+    Threads           : 0
+    StartMethod       : None
+    Total time        : 0.02336
+    QuantilesSorting  : 0.01150
+    Preordering       : 0.00047
+    Decomposing       : 0.01135
+    Ordering          : 0.00001
 
 We obtain in this example here a decomposition into 6 linearly ordered components with a maximal component size of 35 for component *c3*.
 

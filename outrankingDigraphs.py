@@ -6845,16 +6845,17 @@ class RandomBipolarOutrankingDigraph(BipolarOutrankingDigraph):
                                       seed=seed)
         g = BipolarOutrankingDigraph(tb,Normalized=Normalized,\
                                      hasBipolarVeto=hasBipolarVeto)
-        self.name = deepcopy(g.name)
-        self.actions = deepcopy(g.actions)
-        self.criteria = deepcopy(g.criteria)
-        self.evaluation = deepcopy(g.evaluation)
-        self.relation = deepcopy(g.relation)
-        self.valuationdomain = deepcopy(g.valuationdomain)
-        self.NA = deepcopy(g.NA)
-        self.order = len(self.actions)
-        self.gamma = self.gammaSets()
-        self.notGamma = self.notGammaSets()
+        self.__dict__ = deepcopy(g.__dict__)
+        # self.name = deepcopy(g.name)
+        # self.actions = deepcopy(g.actions)
+        # self.criteria = deepcopy(g.criteria)
+        # self.evaluation = deepcopy(g.evaluation)
+        # self.relation = deepcopy(g.relation)
+        # self.valuationdomain = deepcopy(g.valuationdomain)
+        # self.NA = deepcopy(g.NA)
+        # self.order = len(self.actions)
+        # self.gamma = self.gammaSets()
+        # self.notGamma = self.notGammaSets()
 
 class RandomOutrankingDigraph(RandomBipolarOutrankingDigraph):
     """
