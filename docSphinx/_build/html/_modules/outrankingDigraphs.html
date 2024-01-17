@@ -7104,17 +7104,18 @@
                                       <span class="n">seed</span><span class="o">=</span><span class="n">seed</span><span class="p">)</span>
         <span class="n">g</span> <span class="o">=</span> <span class="n">BipolarOutrankingDigraph</span><span class="p">(</span><span class="n">tb</span><span class="p">,</span><span class="n">Normalized</span><span class="o">=</span><span class="n">Normalized</span><span class="p">,</span>\
                                      <span class="n">hasBipolarVeto</span><span class="o">=</span><span class="n">hasBipolarVeto</span><span class="p">)</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="n">deepcopy</span><span class="p">(</span><span class="n">g</span><span class="o">.</span><span class="n">name</span><span class="p">)</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">actions</span> <span class="o">=</span> <span class="n">deepcopy</span><span class="p">(</span><span class="n">g</span><span class="o">.</span><span class="n">actions</span><span class="p">)</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">criteria</span> <span class="o">=</span> <span class="n">deepcopy</span><span class="p">(</span><span class="n">g</span><span class="o">.</span><span class="n">criteria</span><span class="p">)</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">evaluation</span> <span class="o">=</span> <span class="n">deepcopy</span><span class="p">(</span><span class="n">g</span><span class="o">.</span><span class="n">evaluation</span><span class="p">)</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">relation</span> <span class="o">=</span> <span class="n">deepcopy</span><span class="p">(</span><span class="n">g</span><span class="o">.</span><span class="n">relation</span><span class="p">)</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">valuationdomain</span> <span class="o">=</span> <span class="n">deepcopy</span><span class="p">(</span><span class="n">g</span><span class="o">.</span><span class="n">valuationdomain</span><span class="p">)</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">NA</span> <span class="o">=</span> <span class="n">deepcopy</span><span class="p">(</span><span class="n">g</span><span class="o">.</span><span class="n">NA</span><span class="p">)</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">order</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">actions</span><span class="p">)</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">gamma</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">gammaSets</span><span class="p">()</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">notGamma</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">notGammaSets</span><span class="p">()</span></div>
+        <span class="bp">self</span><span class="o">.</span><span class="vm">__dict__</span> <span class="o">=</span> <span class="n">deepcopy</span><span class="p">(</span><span class="n">g</span><span class="o">.</span><span class="vm">__dict__</span><span class="p">)</span></div>
 
+        <span class="c1"># self.name = deepcopy(g.name)</span>
+        <span class="c1"># self.actions = deepcopy(g.actions)</span>
+        <span class="c1"># self.criteria = deepcopy(g.criteria)</span>
+        <span class="c1"># self.evaluation = deepcopy(g.evaluation)</span>
+        <span class="c1"># self.relation = deepcopy(g.relation)</span>
+        <span class="c1"># self.valuationdomain = deepcopy(g.valuationdomain)</span>
+        <span class="c1"># self.NA = deepcopy(g.NA)</span>
+        <span class="c1"># self.order = len(self.actions)</span>
+        <span class="c1"># self.gamma = self.gammaSets()</span>
+        <span class="c1"># self.notGamma = self.notGammaSets()</span>
 
 <div class="viewcode-block" id="RandomOutrankingDigraph">
 <a class="viewcode-back" href="../techDoc.html#outrankingDigraphs.RandomOutrankingDigraph">[docs]</a>
