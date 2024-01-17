@@ -14,7 +14,7 @@ from digraphs import *
 from cIntegerOutrankingDigraphs import *
 from cIntegerSortingDigraphs import *
 
-class myThread(Process):
+class _myThread(Process):
     def __init__(self, int threadID,digraph,\
                  bint InitialSplit, tempDirName,\
                  splitActions,\
@@ -718,7 +718,7 @@ class IntegerQuantilesSortingDigraph(IntegerBipolarOutrankingDigraph):
 ##                    spa = dumps(splitActions,-1)
 ##                    fo.write(spa)
 ##                    fo.close()
-                    splitThread = myThread(j,self,InitialSplit,
+                    splitThread = _myThread(j,self,InitialSplit,
                                            tempDirName,splitActions,
                                            hasNoVeto,hasBipolarVeto,
                                            hasSymmetricThresholds,

@@ -2204,7 +2204,8 @@ class cQuantilesRankingDigraph(SparseIntegerOutrankingDigraph):
             criteria = self.criteria
             self.evaluation = deepcopy(perfTab.evaluation)
             evaluation = self.evaluation
-            NA = deepcopy(perfTab.NA)
+            self.NA = deepcopy(perfTab.NA)
+            NA = self.NA
             
         else:
             self.actions = perfTab.actions

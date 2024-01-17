@@ -2831,7 +2831,7 @@ static const char __pyx_k_interval[] = "interval";
 static const char __pyx_k_lowCateg[] = "lowCateg";
 static const char __pyx_k_lowLimit[] = "lowLimit";
 static const char __pyx_k_lowValue[] = "lowValue";
-static const char __pyx_k_myThread[] = "myThread";
+static const char __pyx_k_myThread[] = "_myThread";
 static const char __pyx_k_nbrCores[] = "nbrCores";
 static const char __pyx_k_open_new[] = "open_new";
 static const char __pyx_k_ordering[] = "ordering";
@@ -2883,6 +2883,7 @@ static const char __pyx_k_evaluation[] = "evaluation";
 static const char __pyx_k_gQuantiles[] = "gQuantiles";
 static const char __pyx_k_ibch_ribch[] = "ibch,ribch";
 static const char __pyx_k_initialArg[] = "initialArg";
+static const char __pyx_k_myThread_2[] = "myThread";
 static const char __pyx_k_nbrThreads[] = "nbrThreads";
 static const char __pyx_k_optimistic[] = "optimistic";
 static const char __pyx_k_td_s_td_tr[] = "<td>%s</td></tr>";
@@ -2921,7 +2922,7 @@ static const char __pyx_k_actionSubset[] = "actionSubset";
 static const char __pyx_k_categoryKeys[] = "categoryKeys";
 static const char __pyx_k_initializing[] = "_initializing";
 static const char __pyx_k_is_coroutine[] = "_is_coroutine";
-static const char __pyx_k_myThread_run[] = "myThread.run";
+static const char __pyx_k_myThread_run[] = "_myThread.run";
 static const char __pyx_k_nbrOfThreads[] = "nbrOfThreads";
 static const char __pyx_k_notHighLimit[] = "notHighLimit";
 static const char __pyx_k_orderingList[] = "orderingList";
@@ -2968,7 +2969,7 @@ static const char __pyx_k_computeRelation[] = "computeRelation";
 static const char __pyx_k_i_x_y_setx_sety[] = "i,x,y,setx,sety";
 static const char __pyx_k_isReturningHTML[] = "isReturningHTML";
 static const char __pyx_k_multiprocessing[] = "multiprocessing";
-static const char __pyx_k_myThread___init[] = "myThread.__init__";
+static const char __pyx_k_myThread___init[] = "_myThread.__init__";
 static const char __pyx_k_showHTMLSorting[] = "showHTMLSorting";
 static const char __pyx_k_sortingRelation[] = "sortingRelation";
 static const char __pyx_k_splitRelation_2[] = "splitRelation";
@@ -3101,8 +3102,8 @@ static const char __pyx_k_IntegerQuantilesSortingDigraph_s_7[] = "IntegerQuantil
 static const char __pyx_k_IntegerQuantilesSortingDigraph_s_8[] = "IntegerQuantilesSortingDigraph.showHTMLSorting";
 static const char __pyx_k_IntegerQuantilesSortingDigraph_s_9[] = "IntegerQuantilesSortingDigraph.showSorting";
 /* #### Code section: decls ### */
-static PyObject *__pyx_pf_23cIntegerSortingDigraphs_8myThread___init__(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_self, int __pyx_v_threadID, PyObject *__pyx_v_digraph, int __pyx_v_InitialSplit, PyObject *__pyx_v_tempDirName, PyObject *__pyx_v_splitActions, int __pyx_v_hasNoVeto, int __pyx_v_hasBipolarVeto, int __pyx_v_hasSymmetricThresholds, int __pyx_v_StoreSorting, int __pyx_v_Debug); /* proto */
-static PyObject *__pyx_pf_23cIntegerSortingDigraphs_8myThread_2run(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_self); /* proto */
+static PyObject *__pyx_pf_23cIntegerSortingDigraphs_9_myThread___init__(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_self, int __pyx_v_threadID, PyObject *__pyx_v_digraph, int __pyx_v_InitialSplit, PyObject *__pyx_v_tempDirName, PyObject *__pyx_v_splitActions, int __pyx_v_hasNoVeto, int __pyx_v_hasBipolarVeto, int __pyx_v_hasSymmetricThresholds, int __pyx_v_StoreSorting, int __pyx_v_Debug); /* proto */
+static PyObject *__pyx_pf_23cIntegerSortingDigraphs_9_myThread_2run(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_self); /* proto */
 static PyObject *__pyx_pf_23cIntegerSortingDigraphs_30IntegerQuantilesSortingDigraph___init__(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_self, PyObject *__pyx_v_argPerfTab, PyObject *__pyx_v_limitingQuantiles, int __pyx_v_LowerClosed, int __pyx_v_PrefThresholds, int __pyx_v_hasNoVeto, CYTHON_UNUSED PyObject *__pyx_v_outrankingType, CYTHON_UNUSED int __pyx_v_CompleteOutranking, CYTHON_UNUSED int __pyx_v_StoreSorting, int __pyx_v_CopyPerfTab, int __pyx_v_AddProfiles2Actions, int __pyx_v_Threading, PyObject *__pyx_v_startMethod, PyObject *__pyx_v_tempDir, PyObject *__pyx_v_nbrCores, int __pyx_v_Comments, int __pyx_v_Debug); /* proto */
 static PyObject *__pyx_pf_23cIntegerSortingDigraphs_30IntegerQuantilesSortingDigraph_2__repr__(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_self); /* proto */
 static PyObject *__pyx_pf_23cIntegerSortingDigraphs_30IntegerQuantilesSortingDigraph_4_constructRelationWithThreading(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_self, PyObject *__pyx_v_initial, PyObject *__pyx_v_terminal, int __pyx_v_hasNoVeto, int __pyx_v_hasBipolarVeto, int __pyx_v_Debug, int __pyx_v_hasSymmetricThresholds, int __pyx_v_Threading, PyObject *__pyx_v_startMethod, PyObject *__pyx_v_tempDir, CYTHON_UNUSED int __pyx_v_WithConcordanceRelation, CYTHON_UNUSED int __pyx_v_WithVetoCounts, int __pyx_v_StoreSorting, PyObject *__pyx_v_nbrCores, PyObject *__pyx_v_Comments); /* proto */
@@ -3477,6 +3478,7 @@ typedef struct {
   PyObject *__pyx_n_s_mro_entries;
   PyObject *__pyx_n_s_multiprocessing;
   PyObject *__pyx_n_s_myThread;
+  PyObject *__pyx_n_s_myThread_2;
   PyObject *__pyx_n_s_myThread___init;
   PyObject *__pyx_n_s_myThread_run;
   PyObject *__pyx_n_s_n;
@@ -4103,6 +4105,7 @@ static int __pyx_m_clear(PyObject *m) {
   Py_CLEAR(clear_module_state->__pyx_n_s_mro_entries);
   Py_CLEAR(clear_module_state->__pyx_n_s_multiprocessing);
   Py_CLEAR(clear_module_state->__pyx_n_s_myThread);
+  Py_CLEAR(clear_module_state->__pyx_n_s_myThread_2);
   Py_CLEAR(clear_module_state->__pyx_n_s_myThread___init);
   Py_CLEAR(clear_module_state->__pyx_n_s_myThread_run);
   Py_CLEAR(clear_module_state->__pyx_n_s_n);
@@ -4707,6 +4710,7 @@ static int __pyx_m_traverse(PyObject *m, visitproc visit, void *arg) {
   Py_VISIT(traverse_module_state->__pyx_n_s_mro_entries);
   Py_VISIT(traverse_module_state->__pyx_n_s_multiprocessing);
   Py_VISIT(traverse_module_state->__pyx_n_s_myThread);
+  Py_VISIT(traverse_module_state->__pyx_n_s_myThread_2);
   Py_VISIT(traverse_module_state->__pyx_n_s_myThread___init);
   Py_VISIT(traverse_module_state->__pyx_n_s_myThread_run);
   Py_VISIT(traverse_module_state->__pyx_n_s_n);
@@ -5321,6 +5325,7 @@ static int __pyx_m_traverse(PyObject *m, visitproc visit, void *arg) {
 #define __pyx_n_s_mro_entries __pyx_mstate_global->__pyx_n_s_mro_entries
 #define __pyx_n_s_multiprocessing __pyx_mstate_global->__pyx_n_s_multiprocessing
 #define __pyx_n_s_myThread __pyx_mstate_global->__pyx_n_s_myThread
+#define __pyx_n_s_myThread_2 __pyx_mstate_global->__pyx_n_s_myThread_2
 #define __pyx_n_s_myThread___init __pyx_mstate_global->__pyx_n_s_myThread___init
 #define __pyx_n_s_myThread_run __pyx_mstate_global->__pyx_n_s_myThread_run
 #define __pyx_n_s_n __pyx_mstate_global->__pyx_n_s_n
@@ -5591,22 +5596,22 @@ static int __pyx_m_traverse(PyObject *m, visitproc visit, void *arg) {
 
 /* "cIntegerSortingDigraphs.pyx":18
  * 
- * class myThread(Process):
+ * class _myThread(Process):
  *     def __init__(self, int threadID,digraph,\             # <<<<<<<<<<<<<<
  *                  bint InitialSplit, tempDirName,\
  *                  splitActions,\
  */
 
 /* Python wrapper */
-static PyObject *__pyx_pw_23cIntegerSortingDigraphs_8myThread_1__init__(PyObject *__pyx_self, 
+static PyObject *__pyx_pw_23cIntegerSortingDigraphs_9_myThread_1__init__(PyObject *__pyx_self, 
 #if CYTHON_METH_FASTCALL
 PyObject *const *__pyx_args, Py_ssize_t __pyx_nargs, PyObject *__pyx_kwds
 #else
 PyObject *__pyx_args, PyObject *__pyx_kwds
 #endif
 ); /*proto*/
-static PyMethodDef __pyx_mdef_23cIntegerSortingDigraphs_8myThread_1__init__ = {"__init__", (PyCFunction)(void*)(__Pyx_PyCFunction_FastCallWithKeywords)__pyx_pw_23cIntegerSortingDigraphs_8myThread_1__init__, __Pyx_METH_FASTCALL|METH_KEYWORDS, 0};
-static PyObject *__pyx_pw_23cIntegerSortingDigraphs_8myThread_1__init__(PyObject *__pyx_self, 
+static PyMethodDef __pyx_mdef_23cIntegerSortingDigraphs_9_myThread_1__init__ = {"__init__", (PyCFunction)(void*)(__Pyx_PyCFunction_FastCallWithKeywords)__pyx_pw_23cIntegerSortingDigraphs_9_myThread_1__init__, __Pyx_METH_FASTCALL|METH_KEYWORDS, 0};
+static PyObject *__pyx_pw_23cIntegerSortingDigraphs_9_myThread_1__init__(PyObject *__pyx_self, 
 #if CYTHON_METH_FASTCALL
 PyObject *const *__pyx_args, Py_ssize_t __pyx_nargs, PyObject *__pyx_kwds
 #else
@@ -5878,15 +5883,15 @@ PyObject *__pyx_args, PyObject *__pyx_kwds
       __Pyx_Arg_XDECREF_FASTCALL(values[__pyx_temp]);
     }
   }
-  __Pyx_AddTraceback("cIntegerSortingDigraphs.myThread.__init__", __pyx_clineno, __pyx_lineno, __pyx_filename);
+  __Pyx_AddTraceback("cIntegerSortingDigraphs._myThread.__init__", __pyx_clineno, __pyx_lineno, __pyx_filename);
   __Pyx_RefNannyFinishContext();
   return NULL;
   __pyx_L4_argument_unpacking_done:;
-  __pyx_r = __pyx_pf_23cIntegerSortingDigraphs_8myThread___init__(__pyx_self, __pyx_v_self, __pyx_v_threadID, __pyx_v_digraph, __pyx_v_InitialSplit, __pyx_v_tempDirName, __pyx_v_splitActions, __pyx_v_hasNoVeto, __pyx_v_hasBipolarVeto, __pyx_v_hasSymmetricThresholds, __pyx_v_StoreSorting, __pyx_v_Debug);
+  __pyx_r = __pyx_pf_23cIntegerSortingDigraphs_9_myThread___init__(__pyx_self, __pyx_v_self, __pyx_v_threadID, __pyx_v_digraph, __pyx_v_InitialSplit, __pyx_v_tempDirName, __pyx_v_splitActions, __pyx_v_hasNoVeto, __pyx_v_hasBipolarVeto, __pyx_v_hasSymmetricThresholds, __pyx_v_StoreSorting, __pyx_v_Debug);
 
   /* "cIntegerSortingDigraphs.pyx":18
  * 
- * class myThread(Process):
+ * class _myThread(Process):
  *     def __init__(self, int threadID,digraph,\             # <<<<<<<<<<<<<<
  *                  bint InitialSplit, tempDirName,\
  *                  splitActions,\
@@ -5903,7 +5908,7 @@ PyObject *__pyx_args, PyObject *__pyx_kwds
   return __pyx_r;
 }
 
-static PyObject *__pyx_pf_23cIntegerSortingDigraphs_8myThread___init__(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_self, int __pyx_v_threadID, PyObject *__pyx_v_digraph, int __pyx_v_InitialSplit, PyObject *__pyx_v_tempDirName, PyObject *__pyx_v_splitActions, int __pyx_v_hasNoVeto, int __pyx_v_hasBipolarVeto, int __pyx_v_hasSymmetricThresholds, int __pyx_v_StoreSorting, int __pyx_v_Debug) {
+static PyObject *__pyx_pf_23cIntegerSortingDigraphs_9_myThread___init__(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_self, int __pyx_v_threadID, PyObject *__pyx_v_digraph, int __pyx_v_InitialSplit, PyObject *__pyx_v_tempDirName, PyObject *__pyx_v_splitActions, int __pyx_v_hasNoVeto, int __pyx_v_hasBipolarVeto, int __pyx_v_hasSymmetricThresholds, int __pyx_v_StoreSorting, int __pyx_v_Debug) {
   PyObject *__pyx_r = NULL;
   __Pyx_RefNannyDeclarations
   PyObject *__pyx_t_1 = NULL;
@@ -6064,7 +6069,7 @@ static PyObject *__pyx_pf_23cIntegerSortingDigraphs_8myThread___init__(CYTHON_UN
 
   /* "cIntegerSortingDigraphs.pyx":18
  * 
- * class myThread(Process):
+ * class _myThread(Process):
  *     def __init__(self, int threadID,digraph,\             # <<<<<<<<<<<<<<
  *                  bint InitialSplit, tempDirName,\
  *                  splitActions,\
@@ -6077,7 +6082,7 @@ static PyObject *__pyx_pf_23cIntegerSortingDigraphs_8myThread___init__(CYTHON_UN
   __Pyx_XDECREF(__pyx_t_1);
   __Pyx_XDECREF(__pyx_t_2);
   __Pyx_XDECREF(__pyx_t_3);
-  __Pyx_AddTraceback("cIntegerSortingDigraphs.myThread.__init__", __pyx_clineno, __pyx_lineno, __pyx_filename);
+  __Pyx_AddTraceback("cIntegerSortingDigraphs._myThread.__init__", __pyx_clineno, __pyx_lineno, __pyx_filename);
   __pyx_r = NULL;
   __pyx_L0:;
   __Pyx_XGIVEREF(__pyx_r);
@@ -6094,15 +6099,15 @@ static PyObject *__pyx_pf_23cIntegerSortingDigraphs_8myThread___init__(CYTHON_UN
  */
 
 /* Python wrapper */
-static PyObject *__pyx_pw_23cIntegerSortingDigraphs_8myThread_3run(PyObject *__pyx_self, 
+static PyObject *__pyx_pw_23cIntegerSortingDigraphs_9_myThread_3run(PyObject *__pyx_self, 
 #if CYTHON_METH_FASTCALL
 PyObject *const *__pyx_args, Py_ssize_t __pyx_nargs, PyObject *__pyx_kwds
 #else
 PyObject *__pyx_args, PyObject *__pyx_kwds
 #endif
 ); /*proto*/
-static PyMethodDef __pyx_mdef_23cIntegerSortingDigraphs_8myThread_3run = {"run", (PyCFunction)(void*)(__Pyx_PyCFunction_FastCallWithKeywords)__pyx_pw_23cIntegerSortingDigraphs_8myThread_3run, __Pyx_METH_FASTCALL|METH_KEYWORDS, 0};
-static PyObject *__pyx_pw_23cIntegerSortingDigraphs_8myThread_3run(PyObject *__pyx_self, 
+static PyMethodDef __pyx_mdef_23cIntegerSortingDigraphs_9_myThread_3run = {"run", (PyCFunction)(void*)(__Pyx_PyCFunction_FastCallWithKeywords)__pyx_pw_23cIntegerSortingDigraphs_9_myThread_3run, __Pyx_METH_FASTCALL|METH_KEYWORDS, 0};
+static PyObject *__pyx_pw_23cIntegerSortingDigraphs_9_myThread_3run(PyObject *__pyx_self, 
 #if CYTHON_METH_FASTCALL
 PyObject *const *__pyx_args, Py_ssize_t __pyx_nargs, PyObject *__pyx_kwds
 #else
@@ -6172,11 +6177,11 @@ PyObject *__pyx_args, PyObject *__pyx_kwds
       __Pyx_Arg_XDECREF_FASTCALL(values[__pyx_temp]);
     }
   }
-  __Pyx_AddTraceback("cIntegerSortingDigraphs.myThread.run", __pyx_clineno, __pyx_lineno, __pyx_filename);
+  __Pyx_AddTraceback("cIntegerSortingDigraphs._myThread.run", __pyx_clineno, __pyx_lineno, __pyx_filename);
   __Pyx_RefNannyFinishContext();
   return NULL;
   __pyx_L4_argument_unpacking_done:;
-  __pyx_r = __pyx_pf_23cIntegerSortingDigraphs_8myThread_2run(__pyx_self, __pyx_v_self);
+  __pyx_r = __pyx_pf_23cIntegerSortingDigraphs_9_myThread_2run(__pyx_self, __pyx_v_self);
 
   /* function exit code */
   {
@@ -6189,7 +6194,7 @@ PyObject *__pyx_args, PyObject *__pyx_kwds
   return __pyx_r;
 }
 
-static PyObject *__pyx_pf_23cIntegerSortingDigraphs_8myThread_2run(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_self) {
+static PyObject *__pyx_pf_23cIntegerSortingDigraphs_9_myThread_2run(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_self) {
   int __pyx_v_x;
   int __pyx_v_nq;
   int __pyx_v_Min;
@@ -8082,7 +8087,7 @@ static PyObject *__pyx_pf_23cIntegerSortingDigraphs_8myThread_2run(CYTHON_UNUSED
   __Pyx_XDECREF(__pyx_t_3);
   __Pyx_XDECREF(__pyx_t_4);
   __Pyx_XDECREF(__pyx_t_7);
-  __Pyx_AddTraceback("cIntegerSortingDigraphs.myThread.run", __pyx_clineno, __pyx_lineno, __pyx_filename);
+  __Pyx_AddTraceback("cIntegerSortingDigraphs._myThread.run", __pyx_clineno, __pyx_lineno, __pyx_filename);
   __pyx_r = NULL;
   __pyx_L0:;
   __Pyx_XDECREF(__pyx_v_actions);
@@ -15379,7 +15384,7 @@ static PyObject *__pyx_pf_23cIntegerSortingDigraphs_30IntegerQuantilesSortingDig
               /* "cIntegerSortingDigraphs.pyx":721
  * ##                    fo.write(spa)
  * ##                    fo.close()
- *                     splitThread = myThread(j,self,InitialSplit,             # <<<<<<<<<<<<<<
+ *                     splitThread = _myThread(j,self,InitialSplit,             # <<<<<<<<<<<<<<
  *                                            tempDirName,splitActions,
  *                                            hasNoVeto,hasBipolarVeto,
  */
@@ -15391,7 +15396,7 @@ static PyObject *__pyx_pf_23cIntegerSortingDigraphs_30IntegerQuantilesSortingDig
               __Pyx_GOTREF(__pyx_t_5);
 
               /* "cIntegerSortingDigraphs.pyx":723
- *                     splitThread = myThread(j,self,InitialSplit,
+ *                     splitThread = _myThread(j,self,InitialSplit,
  *                                            tempDirName,splitActions,
  *                                            hasNoVeto,hasBipolarVeto,             # <<<<<<<<<<<<<<
  *                                            hasSymmetricThresholds,
@@ -32550,7 +32555,7 @@ static PyObject *__pyx_pf_23cIntegerSortingDigraphs_30IntegerQuantilesSortingDig
     __Pyx_GOTREF(__pyx_t_2);
     __pyx_t_1 = __Pyx_CalculateMetaclass(NULL, __pyx_t_2); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 1425, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_1);
-    __pyx_t_11 = __Pyx_Py3MetaclassPrepare(__pyx_t_1, __pyx_t_2, __pyx_n_s_myThread, __pyx_n_s_IntegerQuantilesSortingDigraph_c, (PyObject *) NULL, __pyx_n_s_cIntegerSortingDigraphs, (PyObject *) NULL); if (unlikely(!__pyx_t_11)) __PYX_ERR(0, 1425, __pyx_L1_error)
+    __pyx_t_11 = __Pyx_Py3MetaclassPrepare(__pyx_t_1, __pyx_t_2, __pyx_n_s_myThread_2, __pyx_n_s_IntegerQuantilesSortingDigraph_c, (PyObject *) NULL, __pyx_n_s_cIntegerSortingDigraphs, (PyObject *) NULL); if (unlikely(!__pyx_t_11)) __PYX_ERR(0, 1425, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_11);
     if (__pyx_t_2 != __pyx_t_8) {
       if (unlikely((PyDict_SetItemString(__pyx_t_11, "__orig_bases__", __pyx_t_8) < 0))) __PYX_ERR(0, 1425, __pyx_L1_error)
@@ -32588,7 +32593,7 @@ static PyObject *__pyx_pf_23cIntegerSortingDigraphs_30IntegerQuantilesSortingDig
  *                 def __init__(self, int threadID, tempDirName,
  *                              int nq, int Min, int Max, bint LowerClosed, bint Debug):
  */
-    __pyx_t_8 = __Pyx_Py3ClassCreate(__pyx_t_1, __pyx_n_s_myThread, __pyx_t_2, __pyx_t_11, NULL, 0, 0); if (unlikely(!__pyx_t_8)) __PYX_ERR(0, 1425, __pyx_L1_error)
+    __pyx_t_8 = __Pyx_Py3ClassCreate(__pyx_t_1, __pyx_n_s_myThread_2, __pyx_t_2, __pyx_t_11, NULL, 0, 0); if (unlikely(!__pyx_t_8)) __PYX_ERR(0, 1425, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_8);
     __pyx_v_myThread = __pyx_t_8;
     __pyx_t_8 = 0;
@@ -38780,6 +38785,7 @@ static int __Pyx_CreateStringTabAndInitStrings(void) {
     {&__pyx_n_s_mro_entries, __pyx_k_mro_entries, sizeof(__pyx_k_mro_entries), 0, 0, 1, 1},
     {&__pyx_n_s_multiprocessing, __pyx_k_multiprocessing, sizeof(__pyx_k_multiprocessing), 0, 0, 1, 1},
     {&__pyx_n_s_myThread, __pyx_k_myThread, sizeof(__pyx_k_myThread), 0, 0, 1, 1},
+    {&__pyx_n_s_myThread_2, __pyx_k_myThread_2, sizeof(__pyx_k_myThread_2), 0, 0, 1, 1},
     {&__pyx_n_s_myThread___init, __pyx_k_myThread___init, sizeof(__pyx_k_myThread___init), 0, 0, 1, 1},
     {&__pyx_n_s_myThread_run, __pyx_k_myThread_run, sizeof(__pyx_k_myThread_run), 0, 0, 1, 1},
     {&__pyx_n_s_n, __pyx_k_n, sizeof(__pyx_k_n), 0, 0, 1, 1},
@@ -39176,7 +39182,7 @@ static CYTHON_SMALL_CODE int __Pyx_InitCachedConstants(void) {
 
   /* "cIntegerSortingDigraphs.pyx":18
  * 
- * class myThread(Process):
+ * class _myThread(Process):
  *     def __init__(self, int threadID,digraph,\             # <<<<<<<<<<<<<<
  *                  bint InitialSplit, tempDirName,\
  *                  splitActions,\
@@ -39415,7 +39421,7 @@ static CYTHON_SMALL_CODE int __Pyx_InitCachedConstants(void) {
  *                                       bint StoreSorting=False,bint Debug=False,\
  *                                         bint Threading=False, int nbrOfCPUs=1):
  */
-  __pyx_tuple__81 = PyTuple_Pack(54, __pyx_n_s_self, __pyx_n_s_action, __pyx_n_s_Comments, __pyx_n_s_StoreSorting, __pyx_n_s_Debug, __pyx_n_s_Threading, __pyx_n_s_nbrOfCPUs, __pyx_n_s_Min, __pyx_n_s_Max, __pyx_n_s_Med, __pyx_n_s_nbrOfThreads, __pyx_n_s_na, __pyx_n_s_LowerClosed, __pyx_n_s_storeSorting, __pyx_n_s_actions, __pyx_n_s_categories, __pyx_n_s_selfRelation, __pyx_n_s_mp, __pyx_n_s_mpctx, __pyx_n_s_Process, __pyx_n_s_active_children, __pyx_n_s_dumps, __pyx_n_s_loads, __pyx_n_s_load, __pyx_n_s_cpu_count, __pyx_n_s_time, __pyx_n_s_myThread, __pyx_n_s_TemporaryDirectory, __pyx_n_s_mkdtemp, __pyx_n_s_tempDirName, __pyx_n_s_td_2, __pyx_n_s_selfFileName, __pyx_n_s_fo, __pyx_n_s_pd, __pyx_n_s_nbrOfJobs, __pyx_n_s_nq, __pyx_n_s_j, __pyx_n_s_start, __pyx_n_s_stop, __pyx_n_s_thActions, __pyx_n_s_process, __pyx_n_s_sorting, __pyx_n_s_th, __pyx_n_s_fiName, __pyx_n_s_fi, __pyx_n_s_sortingThread, __pyx_n_s_x, __pyx_n_s_c, __pyx_n_s_cKey, __pyx_n_s_lowLimit, __pyx_n_s_cMaxKey, __pyx_n_s_notHighLimit, __pyx_n_s_cMinKey, __pyx_n_s_categoryMembership); if (unlikely(!__pyx_tuple__81)) __PYX_ERR(0, 1371, __pyx_L1_error)
+  __pyx_tuple__81 = PyTuple_Pack(54, __pyx_n_s_self, __pyx_n_s_action, __pyx_n_s_Comments, __pyx_n_s_StoreSorting, __pyx_n_s_Debug, __pyx_n_s_Threading, __pyx_n_s_nbrOfCPUs, __pyx_n_s_Min, __pyx_n_s_Max, __pyx_n_s_Med, __pyx_n_s_nbrOfThreads, __pyx_n_s_na, __pyx_n_s_LowerClosed, __pyx_n_s_storeSorting, __pyx_n_s_actions, __pyx_n_s_categories, __pyx_n_s_selfRelation, __pyx_n_s_mp, __pyx_n_s_mpctx, __pyx_n_s_Process, __pyx_n_s_active_children, __pyx_n_s_dumps, __pyx_n_s_loads, __pyx_n_s_load, __pyx_n_s_cpu_count, __pyx_n_s_time, __pyx_n_s_myThread_2, __pyx_n_s_TemporaryDirectory, __pyx_n_s_mkdtemp, __pyx_n_s_tempDirName, __pyx_n_s_td_2, __pyx_n_s_selfFileName, __pyx_n_s_fo, __pyx_n_s_pd, __pyx_n_s_nbrOfJobs, __pyx_n_s_nq, __pyx_n_s_j, __pyx_n_s_start, __pyx_n_s_stop, __pyx_n_s_thActions, __pyx_n_s_process, __pyx_n_s_sorting, __pyx_n_s_th, __pyx_n_s_fiName, __pyx_n_s_fi, __pyx_n_s_sortingThread, __pyx_n_s_x, __pyx_n_s_c, __pyx_n_s_cKey, __pyx_n_s_lowLimit, __pyx_n_s_cMaxKey, __pyx_n_s_notHighLimit, __pyx_n_s_cMinKey, __pyx_n_s_categoryMembership); if (unlikely(!__pyx_tuple__81)) __PYX_ERR(0, 1371, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_tuple__81);
   __Pyx_GIVEREF(__pyx_tuple__81);
   __pyx_codeobj__82 = (PyObject*)__Pyx_PyCode_New(7, 0, 0, 54, 0, CO_OPTIMIZED|CO_NEWLOCALS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__81, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_cython_cIntegerSortingDigraphs_p, __pyx_n_s_computeSortingCharacteristics, 1371, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__82)) __PYX_ERR(0, 1371, __pyx_L1_error)
@@ -39943,7 +39949,7 @@ if (!__Pyx_RefNanny) {
  * from cIntegerOutrankingDigraphs import *
  * from cIntegerSortingDigraphs import *             # <<<<<<<<<<<<<<
  * 
- * class myThread(Process):
+ * class _myThread(Process):
  */
   __pyx_t_2 = PyList_New(1); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 15, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
@@ -39959,7 +39965,7 @@ if (!__Pyx_RefNanny) {
   /* "cIntegerSortingDigraphs.pyx":17
  * from cIntegerSortingDigraphs import *
  * 
- * class myThread(Process):             # <<<<<<<<<<<<<<
+ * class _myThread(Process):             # <<<<<<<<<<<<<<
  *     def __init__(self, int threadID,digraph,\
  *                  bint InitialSplit, tempDirName,\
  */
@@ -40033,7 +40039,7 @@ if (!__Pyx_RefNanny) {
 
   /* "cIntegerSortingDigraphs.pyx":18
  * 
- * class myThread(Process):
+ * class _myThread(Process):
  *     def __init__(self, int threadID,digraph,\             # <<<<<<<<<<<<<<
  *                  bint InitialSplit, tempDirName,\
  *                  splitActions,\
@@ -40055,7 +40061,7 @@ if (!__Pyx_RefNanny) {
   __pyx_t_7 = 0;
   __pyx_t_8 = 0;
   __pyx_t_9 = 0;
-  __pyx_t_9 = __Pyx_CyFunction_New(&__pyx_mdef_23cIntegerSortingDigraphs_8myThread_1__init__, 0, __pyx_n_s_myThread___init, NULL, __pyx_n_s_cIntegerSortingDigraphs, __pyx_d, ((PyObject *)__pyx_codeobj__40)); if (unlikely(!__pyx_t_9)) __PYX_ERR(0, 18, __pyx_L1_error)
+  __pyx_t_9 = __Pyx_CyFunction_New(&__pyx_mdef_23cIntegerSortingDigraphs_9_myThread_1__init__, 0, __pyx_n_s_myThread___init, NULL, __pyx_n_s_cIntegerSortingDigraphs, __pyx_d, ((PyObject *)__pyx_codeobj__40)); if (unlikely(!__pyx_t_9)) __PYX_ERR(0, 18, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_9);
   __Pyx_CyFunction_SetDefaultsTuple(__pyx_t_9, __pyx_t_10);
   __Pyx_DECREF(__pyx_t_10); __pyx_t_10 = 0;
@@ -40069,7 +40075,7 @@ if (!__Pyx_RefNanny) {
  * 
  *         cdef int x, nq, Min, Med, Max, lowLimit, notHighLimit
  */
-  __pyx_t_9 = __Pyx_CyFunction_New(&__pyx_mdef_23cIntegerSortingDigraphs_8myThread_3run, 0, __pyx_n_s_myThread_run, NULL, __pyx_n_s_cIntegerSortingDigraphs, __pyx_d, ((PyObject *)__pyx_codeobj__42)); if (unlikely(!__pyx_t_9)) __PYX_ERR(0, 39, __pyx_L1_error)
+  __pyx_t_9 = __Pyx_CyFunction_New(&__pyx_mdef_23cIntegerSortingDigraphs_9_myThread_3run, 0, __pyx_n_s_myThread_run, NULL, __pyx_n_s_cIntegerSortingDigraphs, __pyx_d, ((PyObject *)__pyx_codeobj__42)); if (unlikely(!__pyx_t_9)) __PYX_ERR(0, 39, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_9);
   if (__Pyx_SetNameInClass(__pyx_t_5, __pyx_n_s_run, __pyx_t_9) < 0) __PYX_ERR(0, 39, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_9); __pyx_t_9 = 0;
@@ -40077,7 +40083,7 @@ if (!__Pyx_RefNanny) {
   /* "cIntegerSortingDigraphs.pyx":17
  * from cIntegerSortingDigraphs import *
  * 
- * class myThread(Process):             # <<<<<<<<<<<<<<
+ * class _myThread(Process):             # <<<<<<<<<<<<<<
  *     def __init__(self, int threadID,digraph,\
  *                  bint InitialSplit, tempDirName,\
  */
