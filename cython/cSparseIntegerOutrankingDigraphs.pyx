@@ -48,8 +48,9 @@ class SparseIntegerDigraph(object):
         reprString += 'fill rate         : %.3f%%\n' % (self.fillRate*100.0)    
         reprString += 'Attributes       : %s\n' % list(self.__dict__.keys())
         reprString += '----  Constructor run times (in sec.) ----\n'
-        reprString += 'Threads           : %d\n' % self.nbrThreads
-        reprString += 'StartMethod       : %s\n' % self.startMethod
+        if self.nbrThreads > 0:
+            reprString += 'Threads           : %d\n' % self.nbrThreads
+            reprString += 'StartMethod       : %s\n' % self.startMethod
         reprString += 'Total time        : %.5f\n' % self.runTimes['totalTime']
         reprString += 'QuantilesSorting  : %.5f\n' % self.runTimes['sorting']
         reprString += 'Preordering       : %.5f\n' % self.runTimes['preordering']
@@ -1159,7 +1160,7 @@ class SparseIntegerOutrankingDigraph(SparseIntegerDigraph,cPerformanceTableau):
                  int minimalComponentSize=1,\
                  bint Threading=False,\
                  startMethod='spawn',\
-                 int nbrOfCPUs=4,\
+                 int nbrOfCPUs=1,\
                  tempDir=None,\
                  int componentThreadingThreshold=50,\
                  save2File=None,\
@@ -1225,7 +1226,10 @@ class SparseIntegerOutrankingDigraph(SparseIntegerDigraph,cPerformanceTableau):
         self.sortingParameters['strategy'] = quantilesOrderingStrategy
         self.sortingParameters['LowerClosed'] = LowerClosed
         self.sortingParameters['Threading'] = Threading
-        self.sortingParameters['StartMethod'] = startMethod
+        if Threading:
+            self.sortingParameters['StartMethod'] = startMethod
+        else:
+            self.sortingParameters['StartMethod'] = None
         self.sortingParameters['PrefThresholds'] = False
         self.sortingParameters['hasNoVeto'] = False
         self.nbrOfCPUs = nbrOfCPUs
@@ -1283,7 +1287,7 @@ class SparseIntegerOutrankingDigraph(SparseIntegerDigraph,cPerformanceTableau):
         nd = len(str(nc))
         self.nd = nd
         if not self.sortingParameters['Threading']:
-            #self.nbrOfCPUs = 1
+            self.nbrOfCPUs = 1
             self.nbrThreads = 0
             self.startMethod = None
             components = OrderedDict()
@@ -1317,7 +1321,7 @@ class SparseIntegerOutrankingDigraph(SparseIntegerDigraph,cPerformanceTableau):
             Queue = mpctx.Queue
             active_children = mpctx.active_children
             nbrCores = mpctx.cpu_count()
-            if nbrOfCPUs < nbrCores:
+            if nbrOfCPUs > 1 and nbrOfCPUs < nbrCores:
                 nbrCores = nbrOfCPUs
             self.nbrThreads = nbrCores
             if Comments:

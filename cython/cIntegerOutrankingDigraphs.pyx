@@ -558,12 +558,12 @@ Example Python session:
         val3 = self.runTimes['computeRelation']
         val4 = self.runTimes['gammaSets']
         reprString += '----  Constructor run times (in sec.) ----\n'
+        reprString += 'Threads          : %d\n' % self.nbrThreads
+        reprString += 'Start method     : %s\n' % self.startMethod
         reprString += 'Total time       : %.5f\n' % val1
         reprString += 'Data input       : %.5f\n' % val2
         reprString += 'Compute relation : %.5f\n' % val3
         reprString += 'Gamma sets       : %.5f\n' % val4
-        reprString += 'Threads          : %d\n' % self.nbrThreads
-        reprString += 'Start method     : %s\n' % self.startMethod
         return reprString
         
     def computeCriterionRelation(self,c, a,b,hasSymmetricThresholds=True):

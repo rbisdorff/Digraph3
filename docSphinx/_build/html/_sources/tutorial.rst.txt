@@ -4724,14 +4724,14 @@ The C compiled version of the bipolar-valued digraph models takes integer relati
 			  'nbrThreads', 'relation',
                           'gamma', 'notGamma']
       ----  Constructor run times (in sec.) ----
+      Threads          : 4
+      Start method     : spawn
       Total time       : 1.19811
       Data input       : 0.00183
       Compute relation : 0.91961
       Gamma sets       : 0.27664
-      Threads          : 4
-      Start method     : spawn
       
-On a classic intel-i5-11400x12 equipped PC, the :py:class:`~cIntegerOutrankingDigraphs.IntegerBipolarOutrankingDigraph` constructor takes with four multiprocessing threads about one seconds for computing a **million** pairwise outranking characteristic values. In a similar setting, the standard :py:class:`~outrankingDigraphs.BipolarOutrankingDigraph` class constructor operates about four times slower.
+On a classic intel-i5-11400x12 equipped PC, the :py:class:`~cIntegerOutrankingDigraphs.IntegerBipolarOutrankingDigraph` constructor takes with four multiprocessing threads about one seconds for computing a **million** pairwise outranking characteristic values. In a similar multiprocessing setting, the standard :py:class:`~outrankingDigraphs.BipolarOutrankingDigraph` class constructor operates about four times slower.
 
 .. code-block:: pycon
    :linenos:
@@ -4795,7 +4795,8 @@ We sort the 100 decision alternatives into overlapping quartile classes and rank
 
    >>> from cSparseIntegerOutrankingDigraphs import *
    >>> sg = SparseIntegerOutrankingDigraph(t,quantiles=4,
-   ...                      OptimalQuantileOrdering=False)
+   ...                      OptimalQuantileOrdering=False,
+   ...                      Threading=False)
    >>> sg
     *----- Object instance description --------------*
     Instance class    : SparseIntegerOutrankingDigraph
@@ -4820,8 +4821,6 @@ We sort the 100 decision alternatives into overlapping quartile classes and rank
                         'maximalComponentSize', 'componentRankingRule',
                         'boostedRanking']
     *----  Constructor run times (in sec.) ----
-    Threads           : 0
-    StartMethod       : None
     Total time        : 0.02336
     QuantilesSorting  : 0.01150
     Preordering       : 0.00047

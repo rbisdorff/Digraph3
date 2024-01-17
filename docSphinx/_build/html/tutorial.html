@@ -4666,15 +4666,15 @@ pairwise perspective (see below), we notice that, with the given preference disc
 <span class="linenos">17</span><span class="go">                       &#39;nbrThreads&#39;, &#39;relation&#39;,</span>
 <span class="linenos">18</span><span class="go">                       &#39;gamma&#39;, &#39;notGamma&#39;]</span>
 <span class="linenos">19</span><span class="go">   ----  Constructor run times (in sec.) ----</span>
-<span class="linenos">20</span><span class="go">   Total time       : 1.19811</span>
-<span class="linenos">21</span><span class="go">   Data input       : 0.00183</span>
-<span class="linenos">22</span><span class="go">   Compute relation : 0.91961</span>
-<span class="linenos">23</span><span class="go">   Gamma sets       : 0.27664</span>
-<span class="linenos">24</span><span class="go">   Threads          : 4</span>
-<span class="linenos">25</span><span class="go">   Start method     : spawn</span>
+<span class="linenos">20</span><span class="go">   Threads          : 4</span>
+<span class="linenos">21</span><span class="go">   Start method     : spawn</span>
+<span class="linenos">22</span><span class="go">   Total time       : 1.19811</span>
+<span class="linenos">23</span><span class="go">   Data input       : 0.00183</span>
+<span class="linenos">24</span><span class="go">   Compute relation : 0.91961</span>
+<span class="linenos">25</span><span class="go">   Gamma sets       : 0.27664</span>
 </pre></div>
 </div>
-<p>On a classic intel-i5-11400x12 equipped PC, the <a class="reference internal" href="techDoc.html#cIntegerOutrankingDigraphs.IntegerBipolarOutrankingDigraph" title="cIntegerOutrankingDigraphs.IntegerBipolarOutrankingDigraph"><code class="xref py py-class docutils literal notranslate"><span class="pre">IntegerBipolarOutrankingDigraph</span></code></a> constructor takes with four multiprocessing threads about one seconds for computing a <strong>million</strong> pairwise outranking characteristic values. In a similar setting, the standard <a class="reference internal" href="techDoc.html#outrankingDigraphs.BipolarOutrankingDigraph" title="outrankingDigraphs.BipolarOutrankingDigraph"><code class="xref py py-class docutils literal notranslate"><span class="pre">BipolarOutrankingDigraph</span></code></a> class constructor operates about four times slower.</p>
+<p>On a classic intel-i5-11400x12 equipped PC, the <a class="reference internal" href="techDoc.html#cIntegerOutrankingDigraphs.IntegerBipolarOutrankingDigraph" title="cIntegerOutrankingDigraphs.IntegerBipolarOutrankingDigraph"><code class="xref py py-class docutils literal notranslate"><span class="pre">IntegerBipolarOutrankingDigraph</span></code></a> constructor takes with four multiprocessing threads about one seconds for computing a <strong>million</strong> pairwise outranking characteristic values. In a similar multiprocessing setting, the standard <a class="reference internal" href="techDoc.html#outrankingDigraphs.BipolarOutrankingDigraph" title="outrankingDigraphs.BipolarOutrankingDigraph"><code class="xref py py-class docutils literal notranslate"><span class="pre">BipolarOutrankingDigraph</span></code></a> class constructor operates about four times slower.</p>
 <div class="highlight-pycon notranslate"><div class="highlight"><pre><span></span><span class="linenos"> 1</span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">outrankingDigraphs</span> <span class="kn">import</span> <span class="n">BipolarOutrankingDigraph</span>
 <span class="linenos"> 2</span><span class="gp">&gt;&gt;&gt; </span><span class="n">t1</span> <span class="o">=</span> <span class="n">t</span><span class="o">.</span><span class="n">convert2Standard</span><span class="p">()</span>
 <span class="linenos"> 3</span><span class="gp">&gt;&gt;&gt; </span><span class="n">g1</span> <span class="o">=</span> <span class="n">BipolarOutrankingDigraph</span><span class="p">(</span><span class="n">t1</span><span class="p">,</span><span class="n">Threading</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span><span class="n">nbrCores</span><span class="o">=</span><span class="mi">4</span><span class="p">)</span>
@@ -4724,38 +4724,37 @@ pairwise perspective (see below), we notice that, with the given preference disc
 <p>We sort the 100 decision alternatives into overlapping quartile classes and rank with respect to the average quantile limits.</p>
 <div class="highlight-pycon notranslate"><div class="highlight"><pre><span></span><span class="linenos"> 1</span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">cSparseIntegerOutrankingDigraphs</span> <span class="kn">import</span> <span class="o">*</span>
 <span class="linenos"> 2</span><span class="gp">&gt;&gt;&gt; </span><span class="n">sg</span> <span class="o">=</span> <span class="n">SparseIntegerOutrankingDigraph</span><span class="p">(</span><span class="n">t</span><span class="p">,</span><span class="n">quantiles</span><span class="o">=</span><span class="mi">4</span><span class="p">,</span>
-<span class="linenos"> 3</span><span class="gp">... </span>                     <span class="n">OptimalQuantileOrdering</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
-<span class="linenos"> 4</span><span class="gp">&gt;&gt;&gt; </span><span class="n">sg</span>
-<span class="linenos"> 5</span><span class="go"> *----- Object instance description --------------*</span>
-<span class="linenos"> 6</span><span class="go"> Instance class    : SparseIntegerOutrankingDigraph</span>
-<span class="linenos"> 7</span><span class="go"> Instance name     : cRandomperftab_mp</span>
-<span class="linenos"> 8</span><span class="go"> # Actions         : 100</span>
-<span class="linenos"> 9</span><span class="go"> # Criteria        : 7</span>
-<span class="linenos">10</span><span class="go"> Sorting by        : 4-Tiling</span>
-<span class="linenos">11</span><span class="go"> Ordering strategy : average</span>
-<span class="linenos">12</span><span class="go"> Ranking rule      : Copeland</span>
-<span class="linenos">13</span><span class="go"> # Components      : 6</span>
-<span class="linenos">14</span><span class="go"> Minimal order     : 1</span>
-<span class="linenos">15</span><span class="go"> Maximal order     : 35</span>
-<span class="linenos">16</span><span class="go"> Average order     : 16.7</span>
-<span class="linenos">17</span><span class="go"> fill rate         : 24.970%</span>
-<span class="linenos">18</span><span class="go"> Attributes        : [&#39;runTimes&#39;, &#39;name&#39;, &#39;actions&#39;, &#39;criteria&#39;,</span>
-<span class="linenos">19</span><span class="go">                     &#39;evaluation&#39;, &#39;order&#39;, &#39;dimension&#39;,</span>
-<span class="linenos">20</span><span class="go">                     &#39;sortingParameters&#39;, &#39;nbrOfCPUs&#39;,</span>
-<span class="linenos">21</span><span class="go">                     &#39;valuationdomain&#39;, &#39;profiles&#39;, &#39;categories&#39;,</span>
-<span class="linenos">22</span><span class="go">                     &#39;sorting&#39;, &#39;minimalComponentSize&#39;,</span>
-<span class="linenos">23</span><span class="go">                     &#39;decomposition&#39;, &#39;nbrComponents&#39;, &#39;nd&#39;,</span>
-<span class="linenos">24</span><span class="go">                     &#39;components&#39;, &#39;fillRate&#39;,</span>
-<span class="linenos">25</span><span class="go">                     &#39;maximalComponentSize&#39;, &#39;componentRankingRule&#39;,</span>
-<span class="linenos">26</span><span class="go">                     &#39;boostedRanking&#39;]</span>
-<span class="linenos">27</span><span class="go"> *----  Constructor run times (in sec.) ----</span>
-<span class="linenos">28</span><span class="go"> Threads           : 0</span>
-<span class="linenos">29</span><span class="go"> StartMethod       : None</span>
-<span class="linenos">30</span><span class="go"> Total time        : 0.02336</span>
-<span class="linenos">31</span><span class="go"> QuantilesSorting  : 0.01150</span>
-<span class="linenos">32</span><span class="go"> Preordering       : 0.00047</span>
-<span class="linenos">33</span><span class="go"> Decomposing       : 0.01135</span>
-<span class="linenos">34</span><span class="go"> Ordering          : 0.00001</span>
+<span class="linenos"> 3</span><span class="gp">... </span>                     <span class="n">OptimalQuantileOrdering</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+<span class="linenos"> 4</span><span class="gp">... </span>                     <span class="n">Threading</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+<span class="linenos"> 5</span><span class="gp">&gt;&gt;&gt; </span><span class="n">sg</span>
+<span class="linenos"> 6</span><span class="go"> *----- Object instance description --------------*</span>
+<span class="linenos"> 7</span><span class="go"> Instance class    : SparseIntegerOutrankingDigraph</span>
+<span class="linenos"> 8</span><span class="go"> Instance name     : cRandomperftab_mp</span>
+<span class="linenos"> 9</span><span class="go"> # Actions         : 100</span>
+<span class="linenos">10</span><span class="go"> # Criteria        : 7</span>
+<span class="linenos">11</span><span class="go"> Sorting by        : 4-Tiling</span>
+<span class="linenos">12</span><span class="go"> Ordering strategy : average</span>
+<span class="linenos">13</span><span class="go"> Ranking rule      : Copeland</span>
+<span class="linenos">14</span><span class="go"> # Components      : 6</span>
+<span class="linenos">15</span><span class="go"> Minimal order     : 1</span>
+<span class="linenos">16</span><span class="go"> Maximal order     : 35</span>
+<span class="linenos">17</span><span class="go"> Average order     : 16.7</span>
+<span class="linenos">18</span><span class="go"> fill rate         : 24.970%</span>
+<span class="linenos">19</span><span class="go"> Attributes        : [&#39;runTimes&#39;, &#39;name&#39;, &#39;actions&#39;, &#39;criteria&#39;,</span>
+<span class="linenos">20</span><span class="go">                     &#39;evaluation&#39;, &#39;order&#39;, &#39;dimension&#39;,</span>
+<span class="linenos">21</span><span class="go">                     &#39;sortingParameters&#39;, &#39;nbrOfCPUs&#39;,</span>
+<span class="linenos">22</span><span class="go">                     &#39;valuationdomain&#39;, &#39;profiles&#39;, &#39;categories&#39;,</span>
+<span class="linenos">23</span><span class="go">                     &#39;sorting&#39;, &#39;minimalComponentSize&#39;,</span>
+<span class="linenos">24</span><span class="go">                     &#39;decomposition&#39;, &#39;nbrComponents&#39;, &#39;nd&#39;,</span>
+<span class="linenos">25</span><span class="go">                     &#39;components&#39;, &#39;fillRate&#39;,</span>
+<span class="linenos">26</span><span class="go">                     &#39;maximalComponentSize&#39;, &#39;componentRankingRule&#39;,</span>
+<span class="linenos">27</span><span class="go">                     &#39;boostedRanking&#39;]</span>
+<span class="linenos">28</span><span class="go"> *----  Constructor run times (in sec.) ----</span>
+<span class="linenos">29</span><span class="go"> Total time        : 0.02336</span>
+<span class="linenos">30</span><span class="go"> QuantilesSorting  : 0.01150</span>
+<span class="linenos">31</span><span class="go"> Preordering       : 0.00047</span>
+<span class="linenos">32</span><span class="go"> Decomposing       : 0.01135</span>
+<span class="linenos">33</span><span class="go"> Ordering          : 0.00001</span>
 </pre></div>
 </div>
 <p>We obtain in this example here a decomposition into 6 linearly ordered components with a maximal component size of 35 for component <em>c3</em>.</p>

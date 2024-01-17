@@ -14,7 +14,7 @@ from digraphs import *
 from cIntegerOutrankingDigraphs import *
 from cIntegerSortingDigraphs import *
 
-class _myThread(Process):
+class _myThread1(Process):
     def __init__(self, int threadID,digraph,\
                  bint InitialSplit, tempDirName,\
                  splitActions,\
@@ -134,6 +134,77 @@ class _myThread(Process):
         fo.write(dumps(categoryContent,-1))
         fo.close()
                     
+class _myThread2(Process):
+    def __init__(self, int threadID, tempDirName,
+                 int nq, int Min, int Max, bint LowerClosed, bint Debug):
+        Process.__init__(self)
+        self.threadID = threadID
+        self.workingDirectory = tempDirName
+        #self.actions = actions
+        self.nq = nq
+        self.Min = Min
+        self.Max = Max
+        self.LowerClosed = LowerClosed
+        self.Debug = Debug
+    def run(self):
+        from pickle import dumps, loads
+        from os import chdir
+        chdir(self.workingDirectory)
+        fi = open('dumpSelfRelation.py','rb')
+        #context = loads(fi.read())
+        relation = loads(fi.read())
+        fi.close()
+        fi = open('dumpCategories.py','rb')
+        #context = loads(fi.read())
+        catKeys = loads(fi.read())
+        fi.close()
+        fi = open('dumpActions%d.py' % self.threadID,'rb')
+        #context = loads(fi.read())
+        actions = loads(fi.read())
+        fi.close()
+        Min = self.Min
+        Max = self.Max
+        LowerClosed = self.LowerClosed
+        sorting = {}
+        nq = self.nq
+        #nq = len(context.limitingQuantiles) - 1
+        #actions = self.actions
+        #catKeys = self.catKeys
+        #relation = context.relation
+        for x in actions:
+            sorting[x] = {}
+            sorx = sorting[x]
+            for c in catKeys:
+                sorx[c] = {}
+                if LowerClosed:
+                    cKey= c+'-m'
+                else:
+                    cKey= c+'-M'
+                if LowerClosed:
+                    lowLimit = relation[x][cKey]
+                    if int(c) < nq:
+                        cMaxKey = str(int(c)+1)+'-m'
+                        notHighLimit = Max - relation[x][cMaxKey] + Min
+                    else:
+                        notHighLimit = Max
+                else:
+                    if int(c) > 1:
+                        cMinKey = str(int(c)-1)+'-M'
+                        lowLimit = Max - relation[cMinKey][x] + Min
+                    else:
+                        lowLimit = Max
+                    notHighLimit = relation[cKey][x]
+                if Debug:
+                    print('%s in %s: low = %.2f, high = %.2f' % \
+                          (x, c,lowLimit,notHighLimit), end=' ')
+                categoryMembership = min(lowLimit,notHighLimit)
+                sorx[c]['lowLimit'] = lowLimit
+                sorx[c]['notHighLimit'] = notHighLimit
+                sorx[c]['categoryMembership'] = categoryMembership
+        foName = 'sorting-'+str(self.threadID)+'.py'
+        fo = open(foName,'wb')
+        fo.write(dumps(sorting,-1))
+        fo.close()
 
       
 class IntegerQuantilesSortingDigraph(IntegerBipolarOutrankingDigraph):
@@ -718,7 +789,7 @@ class IntegerQuantilesSortingDigraph(IntegerBipolarOutrankingDigraph):
 ##                    spa = dumps(splitActions,-1)
 ##                    fo.write(spa)
 ##                    fo.close()
-                    splitThread = _myThread(j,self,InitialSplit,
+                    splitThread = _myThread1(j,self,InitialSplit,
                                            tempDirName,splitActions,
                                            hasNoVeto,hasBipolarVeto,
                                            hasSymmetricThresholds,
@@ -1422,95 +1493,95 @@ class IntegerQuantilesSortingDigraph(IntegerBipolarOutrankingDigraph):
             from time import time
 ##            if Comments:
 ##                self.Debug = True
-            class myThread(Process):
-                def __init__(self, int threadID, tempDirName,
-                             int nq, int Min, int Max, bint LowerClosed, bint Debug):
-                    Process.__init__(self)
-                    self.threadID = threadID
-                    self.workingDirectory = tempDirName
-                    #self.actions = actions
-                    self.nq = nq
-                    self.Min = Min
-                    self.Max = Max
-                    self.LowerClosed = LowerClosed
-                    self.Debug = Debug
-                def run(self):
-                    from pickle import dumps, loads
-                    from os import chdir
-                    chdir(self.workingDirectory)
-##                    if self.Debug:
-##                        print("Starting working in %s on %s" % (self.workingDirectory, str(self.threadID)))
-##                        print('actions,catKeys',self.actions,self.catKeys)
-                    fi = open('dumpSelfRelation.py','rb')
-                    #context = loads(fi.read())
-                    relation = loads(fi.read())
-                    fi.close()
-                    fi = open('dumpCategories.py','rb')
-                    #context = loads(fi.read())
-                    catKeys = loads(fi.read())
-                    fi.close()
-                    fi = open('dumpActions%d.py' % self.threadID,'rb')
-                    #context = loads(fi.read())
-                    actions = loads(fi.read())
-                    fi.close()
-##                    Min = context.valuationdomain['min']
-##                    Max = context.valuationdomain['max']
-                    Min = self.Min
-                    Max = self.Max
-                    LowerClosed = self.LowerClosed
-                    sorting = {}
-                    nq = self.nq
-                    #nq = len(context.limitingQuantiles) - 1
-                    #actions = self.actions
-                    #catKeys = self.catKeys
-                    #relation = context.relation
-                    for x in actions:
-                        sorting[x] = {}
-                        sorx = sorting[x]
-                        for c in catKeys:
-                            sorx[c] = {}
-                            if LowerClosed:
-                                cKey= c+'-m'
-                            else:
-                                cKey= c+'-M'
-                            if LowerClosed:
-                                lowLimit = relation[x][cKey]
-                                if int(c) < nq:
-                                    cMaxKey = str(int(c)+1)+'-m'
-                                    notHighLimit = Max - relation[x][cMaxKey] + Min
-                                else:
-                                    notHighLimit = Max
-                            else:
-                                if int(c) > 1:
-                                    cMinKey = str(int(c)-1)+'-M'
-                                    lowLimit = Max - relation[cMinKey][x] + Min
-                                else:
-                                    lowLimit = Max
-                                notHighLimit = relation[cKey][x]
-##                            cMinKey= c+'-m'
-##                            cMaxKey= c+'-M'
-##                            if LowerClosed:
-##                                lowLimit = context.relation[x][cMinKey]
-##                                notHighLimit = Max - context.relation[x][cMaxKey] + Min
-##                            else:
-##                                lowLimit = Max - context.relation[cMinKey][x] + Min
-##                                notHighLimit = context.relation[cMaxKey][x]
-                            if Debug:
-                                print('%s in %s: low = %.2f, high = %.2f' % \
-                                      (x, c,lowLimit,notHighLimit), end=' ')
-                            categoryMembership = min(lowLimit,notHighLimit)
-                            sorx[c]['lowLimit'] = lowLimit
-                            sorx[c]['notHighLimit'] = notHighLimit
-                            sorx[c]['categoryMembership'] = categoryMembership
-##                            if self.Debug:
-##                                print('\t %.2f \t %.2f \t %.2f\n' % (sorting[x][c]['lowLimit'],\
-##                                   sorting[x][c]['notHighLimit'], sorting[x][c]['categoryMembership']))
-##                        if self.Debug:
-##                            print(sorting[x])
-                    foName = 'sorting-'+str(self.threadID)+'.py'
-                    fo = open(foName,'wb')
-                    fo.write(dumps(sorting,-1))
-                    fo.close()
+#             class myThread(Process):
+#                 def __init__(self, int threadID, tempDirName,
+#                              int nq, int Min, int Max, bint LowerClosed, bint Debug):
+#                     Process.__init__(self)
+#                     self.threadID = threadID
+#                     self.workingDirectory = tempDirName
+#                     #self.actions = actions
+#                     self.nq = nq
+#                     self.Min = Min
+#                     self.Max = Max
+#                     self.LowerClosed = LowerClosed
+#                     self.Debug = Debug
+#                 def run(self):
+#                     from pickle import dumps, loads
+#                     from os import chdir
+#                     chdir(self.workingDirectory)
+# ##                    if self.Debug:
+# ##                        print("Starting working in %s on %s" % (self.workingDirectory, str(self.threadID)))
+# ##                        print('actions,catKeys',self.actions,self.catKeys)
+#                     fi = open('dumpSelfRelation.py','rb')
+#                     #context = loads(fi.read())
+#                     relation = loads(fi.read())
+#                     fi.close()
+#                     fi = open('dumpCategories.py','rb')
+#                     #context = loads(fi.read())
+#                     catKeys = loads(fi.read())
+#                     fi.close()
+#                     fi = open('dumpActions%d.py' % self.threadID,'rb')
+#                     #context = loads(fi.read())
+#                     actions = loads(fi.read())
+#                     fi.close()
+# ##                    Min = context.valuationdomain['min']
+# ##                    Max = context.valuationdomain['max']
+#                     Min = self.Min
+#                     Max = self.Max
+#                     LowerClosed = self.LowerClosed
+#                     sorting = {}
+#                     nq = self.nq
+#                     #nq = len(context.limitingQuantiles) - 1
+#                     #actions = self.actions
+#                     #catKeys = self.catKeys
+#                     #relation = context.relation
+#                     for x in actions:
+#                         sorting[x] = {}
+#                         sorx = sorting[x]
+#                         for c in catKeys:
+#                             sorx[c] = {}
+#                             if LowerClosed:
+#                                 cKey= c+'-m'
+#                             else:
+#                                 cKey= c+'-M'
+#                             if LowerClosed:
+#                                 lowLimit = relation[x][cKey]
+#                                 if int(c) < nq:
+#                                     cMaxKey = str(int(c)+1)+'-m'
+#                                     notHighLimit = Max - relation[x][cMaxKey] + Min
+#                                 else:
+#                                     notHighLimit = Max
+#                             else:
+#                                 if int(c) > 1:
+#                                     cMinKey = str(int(c)-1)+'-M'
+#                                     lowLimit = Max - relation[cMinKey][x] + Min
+#                                 else:
+#                                     lowLimit = Max
+#                                 notHighLimit = relation[cKey][x]
+# ##                            cMinKey= c+'-m'
+# ##                            cMaxKey= c+'-M'
+# ##                            if LowerClosed:
+# ##                                lowLimit = context.relation[x][cMinKey]
+# ##                                notHighLimit = Max - context.relation[x][cMaxKey] + Min
+# ##                            else:
+# ##                                lowLimit = Max - context.relation[cMinKey][x] + Min
+# ##                                notHighLimit = context.relation[cMaxKey][x]
+#                             if Debug:
+#                                 print('%s in %s: low = %.2f, high = %.2f' % \
+#                                       (x, c,lowLimit,notHighLimit), end=' ')
+#                             categoryMembership = min(lowLimit,notHighLimit)
+#                             sorx[c]['lowLimit'] = lowLimit
+#                             sorx[c]['notHighLimit'] = notHighLimit
+#                             sorx[c]['categoryMembership'] = categoryMembership
+# ##                            if self.Debug:
+# ##                                print('\t %.2f \t %.2f \t %.2f\n' % (sorting[x][c]['lowLimit'],\
+# ##                                   sorting[x][c]['notHighLimit'], sorting[x][c]['categoryMembership']))
+# ##                        if self.Debug:
+# ##                            print(sorting[x])
+#                     foName = 'sorting-'+str(self.threadID)+'.py'
+#                     fo = open(foName,'wb')
+#                     fo.write(dumps(sorting,-1))
+#                     fo.close()
             if Comments:
                 print('Threaded computing of sorting characteristics ...')        
             from tempfile import TemporaryDirectory,mkdtemp
@@ -1564,7 +1635,7 @@ class IntegerQuantilesSortingDigraph(IntegerBipolarOutrankingDigraph):
                     pd = dumps(thActions,-1)
                     fo.write(pd)
                     fo.close()            
-                    process = myThread(j,tempDirName,nq,Min,Max,
+                    process = _myThread2(j,tempDirName,nq,Min,Max,
                                        LowerClosed,Debug)
                     process.start()
                     nbrOfThreads += 1
