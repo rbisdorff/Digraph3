@@ -241,6 +241,21 @@ Cythonized modules
      and bipolar outranking digraphs (order
      > 1000).
 
+     :ref:`cRandPerfTabs-label`
+	  C version of the :py:mod:`randomPerfTabs` module
+
+     :ref:`cIntegerOutrankingDigraphs-label`
+	  Integer and float valued C implementation of the
+	  :py:class:`~outrankingDigraphs.BipolarOutrankingDigraph` class
+
+     :ref:`cIntegerSortingDigraphs-label`
+	  Integer and float valued C version of the :py:class:`~sortingDigraphs.QuantilesSortingDigraph` class
+
+     :ref:`cSparseIntegerOutrankingDigraphs-label`
+	  Integer and float valued C version of sparse outranking digraphs.
+
+
+
 Sorting, rating and ranking tools
 .................................
 
@@ -688,21 +703,6 @@ Cythonized modules for big digraphs
 
 The following modules are compiled C-extensions using the Cython pre-compiler. No Python code source is provided for inspection. To distinguish them from the corresponding pure Python modules, a c- prefix is used. A tutorial with coding examples is available here: :ref:`HPC-Tutorial-label`.
 
-.. inheritance-diagram:: cIntegerOutrankingDigraphs
-   :top-classes: cIntegerOutrankingDigraphs.IntegerBipolarOutrankingDigraph
-   :parts: 1
-
-.. inheritance-diagram:: cIntegerSortingDigraphs
-   :top-classes: cIntegerSortingDigraphs.IntegerQuantilesSortingDigraph
-   :parts: 1
-
-.. inheritance-diagram:: cRandPerfTabs
-   :top-classes: cRandPerfTabs.cPerformanceTableau
-   :parts: 1
-
-.. inheritance-diagram:: cSparseIntegerOutrankingDigraphs
-   :top-classes: cSparseIntegerOutrankingDigraphs.SparseIntegeroutrankingDigraph
-   :parts: 1
 
 .. note::
 
