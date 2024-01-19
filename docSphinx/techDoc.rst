@@ -688,9 +688,25 @@ Cythonized modules for big digraphs
 
 The following modules are compiled C-extensions using the Cython pre-compiler. No Python code source is provided for inspection. To distinguish them from the corresponding pure Python modules, a c- prefix is used. A tutorial with coding examples is available here: :ref:`HPC-Tutorial-label`.
 
-.. warning::
+.. inheritance-diagram:: cIntegerOutrankingDigraphs
+   :top-classes: cIntegerOutrankingDigraphs.IntegerBipolarOutrankingDigraph
+   :parts: 1
 
-   These cythonized modules, specifically designed for being run on HPC clusters (see https://hpc.uni.lu), require the Unix *forking* start method of subprocesses (see start methods of the `multiprocessing module <https://docs.python.org/3/library/multiprocessing.html#contexts-and-start-methods>`_)  and therefore, due to forking problems on Mac OS platforms, may only operate safely on Linux platforms. 
+.. inheritance-diagram:: cIntegerSortingDigraphs
+   :top-classes: cIntegerSortingDigraphs.IntegerQuantilesSortingDigraph
+   :parts: 1
+
+.. inheritance-diagram:: cRandPerfTabs
+   :top-classes: cRandPerfTabs.cPerformanceTableau
+   :parts: 1
+
+.. inheritance-diagram:: cSparseIntegerOutrankingDigraphs
+   :top-classes: cSparseIntegerOutrankingDigraphs.SparseIntegeroutrankingDigraph
+   :parts: 1
+
+.. note::
+
+   These cythonized modules, specifically designed for being run on HPC clusters (see https://hpc.uni.lu), are starting with *Threading=True* their multiprocessing threads by default with the *spawn* start method. The main program code of Python scripts using these modules must therefore be protected with the *__name__=="__main__"* test from recursive re-execution. The threading start method is actually configurable with the *StartMethod* parameter: *spawn*, *forkserver* or *fork*. The latter is not safe --especially on not Linux systems-- and may result in dead locks and hence return partial or false results. 
 
 .. _cRandPerfTabs-label:
 
@@ -716,6 +732,10 @@ Back to the :ref:`Table of Contents <Contents-Table-label>`
 cIntegerOutrankingDigraphs module
 .................................
 
+.. inheritance-diagram:: cIntegerOutrankingDigraphs
+   :top-classes: cRandPerfTabs.cPerformanceTableau, 
+   :parts: 1
+
 .. automodule:: cIntegerOutrankingDigraphs
    :member-order: alphabetical
    :no-inherited-members:
@@ -729,6 +749,10 @@ Back to the :ref:`Table of Contents <Contents-Table-label>`
 
 cIntegerSortingDigraphs module
 ..............................
+
+.. inheritance-diagram:: cIntegerSortingDigraphs
+   :top-classes: cRandPerfTabs.cPerformanceTableau
+   :parts: 1
 
 .. automodule:: cIntegerSortingDigraphs
    :member-order: alphabetical
@@ -747,7 +771,7 @@ cSparseIntegerOutrankingDigraphs module
 **Inheritance Diagram**
 
 .. inheritance-diagram:: cSparseIntegerOutrankingDigraphs
-   :top-classes: cSparseIntegerOutrankingDigraphs.SparseIntegerOutrankingDigraph
+   :top-classes: cSparseIntegerOutrankingDigraphs.SparseIntegerDigraph
    :parts: 1
 
 .. automodule:: cSparseIntegerOutrankingDigraphs
