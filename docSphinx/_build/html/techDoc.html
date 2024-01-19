@@ -72,9 +72,8 @@
 <li class="toctree-l3"><a class="reference internal" href="#basic-modules">2.2.1. Basic modules</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#various-random-generators">2.2.2. Various Random generators</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#handling-big-data">2.2.3. Handling big data</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#cythonized-modules">2.2.4. Cythonized modules</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#sorting-rating-and-ranking-tools">2.2.5. Sorting, rating and ranking tools</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#miscellaneous-tools">2.2.6. Miscellaneous tools</a><ul class="simple">
+<li class="toctree-l3"><a class="reference internal" href="#sorting-rating-and-ranking-tools">2.2.4. Sorting, rating and ranking tools</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#miscellaneous-tools">2.2.5. Miscellaneous tools</a><ul class="simple">
 </ul>
 </li>
 </ul>
@@ -1466,17 +1465,11 @@ binned cumulated density functions per criteria. Depends on the
 </dd>
 </dl>
 </li>
-</ul>
-</section>
-<section id="cythonized-modules">
-<h3><span class="section-number">2.2.4. </span>Cythonized modules<a class="headerlink" href="#cythonized-modules" title="Permalink to this heading"></a></h3>
-<ul>
 <li><dl>
 <dt><a class="reference internal" href="#cythonized-label"><span class="std std-ref">Cythonized modules for big digraphs</span></a></dt><dd><p>Cythonized C implementation for handling big performance tableaux
-and bipolar outranking digraphs (order
-&gt; 1000).</p>
+and bipolar outranking digraphs (order &gt; 1000).</p>
 <dl class="simple">
-<dt><a class="reference internal" href="#crandperftabs-label"><span class="std std-ref">cRandPerfTabs module</span></a></dt><dd><p>C version of the <code class="xref py py-mod docutils literal notranslate"><span class="pre">RandomPerfTabs</span></code> module</p>
+<dt><a class="reference internal" href="#crandperftabs-label"><span class="std std-ref">cRandPerfTabs module</span></a></dt><dd><p>Integer and float valued C version of the <a class="reference internal" href="#module-randomPerfTabs" title="randomPerfTabs"><code class="xref py py-mod docutils literal notranslate"><span class="pre">randomPerfTabs</span></code></a> module</p>
 </dd>
 <dt><a class="reference internal" href="#cintegeroutrankingdigraphs-label"><span class="std std-ref">cIntegerOutrankingDigraphs module</span></a></dt><dd><p>Integer and float valued C implementation of the
 <a class="reference internal" href="#outrankingDigraphs.BipolarOutrankingDigraph" title="outrankingDigraphs.BipolarOutrankingDigraph"><code class="xref py py-class docutils literal notranslate"><span class="pre">BipolarOutrankingDigraph</span></code></a> class</p>
@@ -1492,7 +1485,7 @@ and bipolar outranking digraphs (order
 </ul>
 </section>
 <section id="sorting-rating-and-ranking-tools">
-<h3><span class="section-number">2.2.5. </span>Sorting, rating and ranking tools<a class="headerlink" href="#sorting-rating-and-ranking-tools" title="Permalink to this heading"></a></h3>
+<h3><span class="section-number">2.2.4. </span>Sorting, rating and ranking tools<a class="headerlink" href="#sorting-rating-and-ranking-tools" title="Permalink to this heading"></a></h3>
 <ul>
 <li><dl>
 <dt><a class="reference internal" href="#ratingdigraphs-label"><span class="std std-ref">ratingDigraphs module</span></a></dt><dd><p>Tools for solving relative and absolute rating problems with the abstract generic root <a class="reference internal" href="#ratingDigraphs.RatingDigraph" title="ratingDigraphs.RatingDigraph"><code class="xref py py-class docutils literal notranslate"><span class="pre">RatingDigraph</span></code></a> class;</p>
@@ -1530,7 +1523,7 @@ generic root <a class="reference external" href="techDoc.html#transitiveDigraphs
 </ul>
 </section>
 <section id="miscellaneous-tools">
-<h3><span class="section-number">2.2.6. </span>Miscellaneous tools<a class="headerlink" href="#miscellaneous-tools" title="Permalink to this heading"></a></h3>
+<h3><span class="section-number">2.2.5. </span>Miscellaneous tools<a class="headerlink" href="#miscellaneous-tools" title="Permalink to this heading"></a></h3>
 <ul class="simple">
 <li><dl class="simple">
 <dt><a class="reference internal" href="#digraphstools-label"><span class="std std-ref">digraphsTools module</span></a></dt><dd><p>Various generic methods and tools for handling digraphs.</p>
@@ -12046,7 +12039,7 @@ Module cRandPerfTabs.py is a c-compiled version of the
 ie with integer action keys and float performance evaluations.</p>
 <p>Conversions methods are provided
 to switch from the standard to the BigData format and back.</p>
-<p>Copyright (C) 2018  Raymond Bisdorff</p>
+<p>Copyright (C) 2018-2024  Raymond Bisdorff</p>
 <dl class="py class">
 <dt class="sig sig-object py" id="cRandPerfTabs.cNormalizedPerformanceTableau">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">cRandPerfTabs.</span></span><span class="sig-name descname"><span class="pre">cNormalizedPerformanceTableau</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">argPerfTab</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">lowValue</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0.0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">highValue</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">100.0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">coalition</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">Debug</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cRandPerfTabs.cNormalizedPerformanceTableau" title="Permalink to this definition"></a></dt>
@@ -12448,7 +12441,7 @@ matching the RandomLinearVotingProfiles class (see the votingDigraphs module)</p
 Module cIntegerOutrankingDigraphs.py is a c-compiled part of the
 <a class="reference internal" href="#module-outrankingDigraphs" title="outrankingDigraphs"><code class="xref py py-mod docutils literal notranslate"><span class="pre">outrankingDigraphs</span></code></a> module for handling random performance tableaux of Big Data type,
 ie with integer action keys and float performance evaluations.</p>
-<p>Copyright (C) 2018  Raymond Bisdorff</p>
+<p>Copyright (C) 2018-2024  Raymond Bisdorff</p>
 <dl class="py class">
 <dt class="sig sig-object py" id="cIntegerOutrankingDigraphs.IntegerBipolarOutrankingDigraph">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">cIntegerOutrankingDigraphs.</span></span><span class="sig-name descname"><span class="pre">IntegerBipolarOutrankingDigraph</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">argPerfTab</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">coalition</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">actionsSubset</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">hasNoVeto</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">hasBipolarVeto</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">CopyPerfTab</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">BigData</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">Threading</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">startMethod</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'spawn'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">tempDir</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">WithConcordanceRelation</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">WithVetoCounts</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">nbrCores</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">Debug</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">Comments</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cIntegerOutrankingDigraphs.IntegerBipolarOutrankingDigraph" title="Permalink to this definition"></a></dt>
@@ -12693,7 +12686,7 @@ is by convention 0.0 at determination level 0.0 .</p>
 <span class="target" id="module-cIntegerSortingDigraphs"></span><p>c-Extension for the Digraph3 collection.
 Module cIntegerSortingDigraphs.py is a c-compiled part of the
 <a class="reference internal" href="#module-sortingDigraphs" title="sortingDigraphs"><code class="xref py py-mod docutils literal notranslate"><span class="pre">sortingDigraphs</span></code></a> module for sorting with cIntegerOutrankingDigraphs ressources.</p>
-<p>Copyright (C) 2018  Raymond Bisdorff</p>
+<p>Copyright (C) 2018-2024  Raymond Bisdorff</p>
 <dl class="py class">
 <dt class="sig sig-object py" id="cIntegerSortingDigraphs.IntegerQuantilesSortingDigraph">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">cIntegerSortingDigraphs.</span></span><span class="sig-name descname"><span class="pre">IntegerQuantilesSortingDigraph</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">argPerfTab</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">limitingQuantiles</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">4</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">LowerClosed</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">PrefThresholds</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">hasNoVeto</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">outrankingType</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'bipolar'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">CompleteOutranking</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">StoreSorting</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">CopyPerfTab</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">AddProfiles2Actions</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">Threading</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">startMethod</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">tempDir</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">nbrCores</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">Comments</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">Debug</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cIntegerSortingDigraphs.IntegerQuantilesSortingDigraph" title="Permalink to this definition"></a></dt>
@@ -13043,7 +13036,7 @@ the high category limit.</p>
 <p class="warning">Inheritance diagram of cSparseIntegerOutrankingDigraphs</p></object></div>
 <span class="target" id="module-cSparseIntegerOutrankingDigraphs"></span><p>c-Extension for the Digraph3 collection.
 Module cSparseIntegerOutrankingDigraphs.py is a c-compiled partial version of the corresponding <a class="reference internal" href="#module-sparseOutrankingDigraphs" title="sparseOutrankingDigraphs"><code class="xref py py-mod docutils literal notranslate"><span class="pre">sparseOutrankingDigraphs</span></code></a> module for handling integer outranking digraphs of very large order.</p>
-<p>Copyright (C) 2018  Raymond Bisdorff</p>
+<p>Copyright (C) 2018-2024  Raymond Bisdorff</p>
 <dl class="py class">
 <dt class="sig sig-object py" id="cSparseIntegerOutrankingDigraphs.SparseIntegerDigraph">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">cSparseIntegerOutrankingDigraphs.</span></span><span class="sig-name descname"><span class="pre">SparseIntegerDigraph</span></span><a class="headerlink" href="#cSparseIntegerOutrankingDigraphs.SparseIntegerDigraph" title="Permalink to this definition"></a></dt>

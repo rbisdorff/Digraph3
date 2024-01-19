@@ -10,7 +10,7 @@ Conversions methods are provided
 to switch from the standard to the BigData format and back.  
 
 
-Copyright (C) 2018  Raymond Bisdorff
+Copyright (C) 2018-2024  Raymond Bisdorff
 
 """
 __version__ = "cython 0.27.3"

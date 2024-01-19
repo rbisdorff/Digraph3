@@ -232,17 +232,12 @@ Handling big data
 	:top-classes: outrankingDigraphs.BipolarOutrankingDigraph
 	:parts: 1
 
-
-Cythonized modules
-..................
-
 * :ref:`cythonized-label` 
      Cythonized C implementation for handling big performance tableaux
-     and bipolar outranking digraphs (order
-     > 1000).
+     and bipolar outranking digraphs (order > 1000).
 
      :ref:`cRandPerfTabs-label`
-	  C version of the :py:mod:`RandomPerfTabs` module
+	  Integer and float valued C version of the :py:mod:`randomPerfTabs` module
 
      :ref:`cIntegerOutrankingDigraphs-label`
 	  Integer and float valued C implementation of the
@@ -253,8 +248,6 @@ Cythonized modules
 
      :ref:`cSparseIntegerOutrankingDigraphs-label`
 	  Integer and float valued C version of sparse outranking digraphs.
-
-
 
 Sorting, rating and ranking tools
 .................................

@@ -5,7 +5,7 @@ Module cIntegerOutrankingDigraphs.py is a c-compiled part of the
 :py:mod:`outrankingDigraphs` module for handling random performance tableaux of Big Data type,
 ie with integer action keys and float performance evaluations.  
 
-Copyright (C) 2018  Raymond Bisdorff
+Copyright (C) 2018-2024  Raymond Bisdorff
 """
 #######################
 cimport cython
