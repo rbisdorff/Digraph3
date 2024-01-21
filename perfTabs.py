@@ -401,7 +401,7 @@ The performance evaluations of each decision alternative on each criterion are g
                 print()
 
     def showPairwiseComparison(self,a,b,
-                               hasSymetricThresholds=True,
+                               #hasSymetricThresholds=True,
                                Debug=False,
                                isReturningHTML=False,
                                hasSymmetricThresholds=True):
