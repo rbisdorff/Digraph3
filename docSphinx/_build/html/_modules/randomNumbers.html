@@ -21,16 +21,16 @@
     <script src="../_static/js/html5shiv.min.js"></script>
   <![endif]-->
   
-        <script src="../_static/jquery.js"></script>
-        <script src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
-        <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
-        <script src="../_static/doctools.js"></script>
-        <script src="../_static/sphinx_highlight.js"></script>
-        <script src="../_static/clipboard.min.js"></script>
-        <script src="../_static/copybutton.js"></script>
-        <script src="../_static/js/hoverxref.js"></script>
-        <script src="../_static/js/tooltipster.bundle.min.js"></script>
-        <script src="../_static/js/micromodal.min.js"></script>
+        <script src="../_static/jquery.js?v=5d32c60e"></script>
+        <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script src="../_static/documentation_options.js?v=bf028e07"></script>
+        <script src="../_static/doctools.js?v=888ff710"></script>
+        <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+        <script src="../_static/clipboard.min.js?v=a7894cd8"></script>
+        <script src="../_static/copybutton.js?v=15d7cbb8"></script>
+        <script src="../_static/js/hoverxref.js?v=d4da329d"></script>
+        <script src="../_static/js/tooltipster.bundle.min.js?v=18bf091b"></script>
+        <script src="../_static/js/micromodal.min.js?v=04d6302d"></script>
     <script src="../_static/js/theme.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" /> 
@@ -117,7 +117,9 @@
 
 <span class="n">__version__</span> <span class="o">=</span> <span class="s2">&quot;$Revision: Python 3.10&quot;</span>
 
-<div class="viewcode-block" id="IncrementalQuantilesEstimator"><a class="viewcode-back" href="../techDoc.html#randomNumbers.IncrementalQuantilesEstimator">[docs]</a><span class="k">class</span> <span class="nc">IncrementalQuantilesEstimator</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+<div class="viewcode-block" id="IncrementalQuantilesEstimator">
+<a class="viewcode-back" href="../techDoc.html#randomNumbers.IncrementalQuantilesEstimator">[docs]</a>
+<span class="k">class</span> <span class="nc">IncrementalQuantilesEstimator</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    *References*: </span>
 <span class="sd">       - John M. Chambers (et al.), Monitoring Networked Applications </span>
@@ -184,7 +186,9 @@
         <span class="k">if</span> <span class="n">Debug</span><span class="p">:</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">saveState</span><span class="p">(</span><span class="s1">&#39;initState.csv&#39;</span><span class="p">)</span>
 
-<div class="viewcode-block" id="IncrementalQuantilesEstimator.reset"><a class="viewcode-back" href="../techDoc.html#randomNumbers.IncrementalQuantilesEstimator.reset">[docs]</a>    <span class="k">def</span> <span class="nf">reset</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<div class="viewcode-block" id="IncrementalQuantilesEstimator.reset">
+<a class="viewcode-back" href="../techDoc.html#randomNumbers.IncrementalQuantilesEstimator.reset">[docs]</a>
+    <span class="k">def</span> <span class="nf">reset</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Reset the content of the estimator to the initial state.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
@@ -193,7 +197,10 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">nt</span> <span class="o">=</span> <span class="mi">0</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">dbuf</span> <span class="o">=</span> <span class="p">[]</span></div>
 
-<div class="viewcode-block" id="IncrementalQuantilesEstimator.add"><a class="viewcode-back" href="../techDoc.html#randomNumbers.IncrementalQuantilesEstimator.add">[docs]</a>    <span class="k">def</span> <span class="nf">add</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">datum</span><span class="p">):</span>
+
+<div class="viewcode-block" id="IncrementalQuantilesEstimator.add">
+<a class="viewcode-back" href="../techDoc.html#randomNumbers.IncrementalQuantilesEstimator.add">[docs]</a>
+    <span class="k">def</span> <span class="nf">add</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">datum</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Assimilate a new value from the stream</span>
 <span class="sd">        &quot;&quot;&quot;</span>
@@ -206,7 +213,10 @@
         <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">dbuf</span><span class="p">)</span> <span class="o">==</span> <span class="bp">self</span><span class="o">.</span><span class="n">nbuf</span><span class="p">:</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">_update</span><span class="p">()</span></div>
 
-<div class="viewcode-block" id="IncrementalQuantilesEstimator.addList"><a class="viewcode-back" href="../techDoc.html#randomNumbers.IncrementalQuantilesEstimator.addList">[docs]</a>    <span class="k">def</span> <span class="nf">addList</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">listDatum</span><span class="p">,</span><span class="n">historyWeight</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+
+<div class="viewcode-block" id="IncrementalQuantilesEstimator.addList">
+<a class="viewcode-back" href="../techDoc.html#randomNumbers.IncrementalQuantilesEstimator.addList">[docs]</a>
+    <span class="k">def</span> <span class="nf">addList</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">listDatum</span><span class="p">,</span><span class="n">historyWeight</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Assimilate a list of new values.</span>
 
@@ -231,6 +241,7 @@
             <span class="bp">self</span><span class="o">.</span><span class="n">_update</span><span class="p">()</span> <span class="c1"># clearing the income buffer</span>
         <span class="k">for</span> <span class="n">datum</span> <span class="ow">in</span> <span class="n">listDatum</span><span class="p">:</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">datum</span><span class="p">)</span></div>
+
 
     <span class="k">def</span> <span class="nf">_update</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
@@ -335,7 +346,9 @@
             <span class="n">fileName</span> <span class="o">=</span> <span class="s1">&#39;saveState-</span><span class="si">%d</span><span class="s1">.csv&#39;</span> <span class="o">%</span> <span class="bp">self</span><span class="o">.</span><span class="n">nbrupd</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">saveState</span><span class="p">(</span><span class="n">fileName</span><span class="p">)</span>
         
-<div class="viewcode-block" id="IncrementalQuantilesEstimator.report"><a class="viewcode-back" href="../techDoc.html#randomNumbers.IncrementalQuantilesEstimator.report">[docs]</a>    <span class="k">def</span> <span class="nf">report</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">p</span> <span class="o">=</span> <span class="mf">0.5</span><span class="p">):</span>
+<div class="viewcode-block" id="IncrementalQuantilesEstimator.report">
+<a class="viewcode-back" href="../techDoc.html#randomNumbers.IncrementalQuantilesEstimator.report">[docs]</a>
+    <span class="k">def</span> <span class="nf">report</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">p</span> <span class="o">=</span> <span class="mf">0.5</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Return estimated *p*-quantile (default = median)</span>
 <span class="sd">        for the data seen so far </span>
@@ -362,7 +375,10 @@
             
         <span class="k">return</span> <span class="nb">max</span><span class="p">(</span><span class="n">qile</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span><span class="nb">min</span><span class="p">(</span><span class="n">qile</span><span class="p">[</span><span class="n">nq</span><span class="o">-</span><span class="mi">1</span><span class="p">],</span><span class="n">q</span><span class="p">))</span></div>
 
-<div class="viewcode-block" id="IncrementalQuantilesEstimator.cdf"><a class="viewcode-back" href="../techDoc.html#randomNumbers.IncrementalQuantilesEstimator.cdf">[docs]</a>    <span class="k">def</span> <span class="nf">cdf</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">x</span><span class="o">=</span><span class="mi">0</span><span class="p">):</span>
+
+<div class="viewcode-block" id="IncrementalQuantilesEstimator.cdf">
+<a class="viewcode-back" href="../techDoc.html#randomNumbers.IncrementalQuantilesEstimator.cdf">[docs]</a>
+    <span class="k">def</span> <span class="nf">cdf</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">x</span><span class="o">=</span><span class="mi">0</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        return proportion of data lower or equal to value x</span>
 <span class="sd">        &quot;&quot;&quot;</span>
@@ -386,8 +402,11 @@
             <span class="n">p</span> <span class="o">=</span> <span class="n">pval</span><span class="p">[</span><span class="n">j</span><span class="p">]</span>
         <span class="k">return</span> <span class="nb">max</span><span class="p">(</span><span class="n">pval</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="nb">min</span><span class="p">(</span><span class="n">pval</span><span class="p">[</span><span class="n">nq</span><span class="o">-</span><span class="mi">1</span><span class="p">],</span><span class="n">p</span><span class="p">))</span></div>
 
+
         
-<div class="viewcode-block" id="IncrementalQuantilesEstimator.saveState"><a class="viewcode-back" href="../techDoc.html#randomNumbers.IncrementalQuantilesEstimator.saveState">[docs]</a>    <span class="k">def</span> <span class="nf">saveState</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">fileName</span><span class="o">=</span><span class="s1">&#39;state.csv&#39;</span><span class="p">):</span>
+<div class="viewcode-block" id="IncrementalQuantilesEstimator.saveState">
+<a class="viewcode-back" href="../techDoc.html#randomNumbers.IncrementalQuantilesEstimator.saveState">[docs]</a>
+    <span class="k">def</span> <span class="nf">saveState</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">fileName</span><span class="o">=</span><span class="s1">&#39;state.csv&#39;</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Save the state of the IncrementalQuantileEstimator self instance</span>
 <span class="sd">        &quot;&quot;&quot;</span>
@@ -399,7 +418,10 @@
             <span class="n">fo</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s1">&#39;</span><span class="si">%.7f</span><span class="s1">, </span><span class="si">%.5f</span><span class="se">\n</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">pval</span><span class="p">[</span><span class="n">iq</span><span class="p">],</span><span class="bp">self</span><span class="o">.</span><span class="n">qile</span><span class="p">[</span><span class="n">iq</span><span class="p">]))</span>
         <span class="n">fo</span><span class="o">.</span><span class="n">close</span><span class="p">()</span></div>
 
-<div class="viewcode-block" id="IncrementalQuantilesEstimator.loadState"><a class="viewcode-back" href="../techDoc.html#randomNumbers.IncrementalQuantilesEstimator.loadState">[docs]</a>    <span class="k">def</span> <span class="nf">loadState</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">FileName</span><span class="o">=</span><span class="s1">&#39;state.csv&#39;</span><span class="p">):</span>
+
+<div class="viewcode-block" id="IncrementalQuantilesEstimator.loadState">
+<a class="viewcode-back" href="../techDoc.html#randomNumbers.IncrementalQuantilesEstimator.loadState">[docs]</a>
+    <span class="k">def</span> <span class="nf">loadState</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">FileName</span><span class="o">=</span><span class="s1">&#39;state.csv&#39;</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Load a previously saved state of the estimator</span>
 <span class="sd">        &quot;&quot;&quot;</span>
@@ -409,10 +431,14 @@
         <span class="k">for</span> <span class="n">i</span><span class="p">,</span><span class="n">row</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">csvDict</span><span class="p">):</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">pval</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">row</span><span class="p">[</span><span class="s1">&#39;p-value&#39;</span><span class="p">])</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">qile</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">row</span><span class="p">[</span><span class="s1">&#39;quantile&#39;</span><span class="p">])</span>
-        <span class="n">fo</span><span class="o">.</span><span class="n">close</span><span class="p">()</span></div></div>
+        <span class="n">fo</span><span class="o">.</span><span class="n">close</span><span class="p">()</span></div>
+</div>
 
 
-<div class="viewcode-block" id="DiscreteRandomVariable"><a class="viewcode-back" href="../techDoc.html#randomNumbers.DiscreteRandomVariable">[docs]</a><span class="k">class</span> <span class="nc">DiscreteRandomVariable</span><span class="p">():</span>
+
+<div class="viewcode-block" id="DiscreteRandomVariable">
+<a class="viewcode-back" href="../techDoc.html#randomNumbers.DiscreteRandomVariable">[docs]</a>
+<span class="k">class</span> <span class="nc">DiscreteRandomVariable</span><span class="p">():</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Discrete random variable generator</span>
 
@@ -507,7 +533,9 @@
         <span class="k">return</span> <span class="n">F</span>
     
 
-<div class="viewcode-block" id="DiscreteRandomVariable.random"><a class="viewcode-back" href="../techDoc.html#randomNumbers.DiscreteRandomVariable.random">[docs]</a>    <span class="k">def</span> <span class="nf">random</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<div class="viewcode-block" id="DiscreteRandomVariable.random">
+<a class="viewcode-back" href="../techDoc.html#randomNumbers.DiscreteRandomVariable.random">[docs]</a>
+    <span class="k">def</span> <span class="nf">random</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Generates discrete random values from a discrete random variable.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
@@ -519,11 +547,15 @@
             <span class="k">if</span> <span class="n">u</span> <span class="o">&lt;</span> <span class="bp">self</span><span class="o">.</span><span class="n">F</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="mi">1</span><span class="p">]:</span>
                 <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">F</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span>
 
-        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">F</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span></div></div>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">F</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span></div>
+</div>
+
         
 <span class="c1">######################################</span>
 
-<div class="viewcode-block" id="ExtendedTriangularRandomVariable"><a class="viewcode-back" href="../techDoc.html#randomNumbers.ExtendedTriangularRandomVariable">[docs]</a><span class="k">class</span> <span class="nc">ExtendedTriangularRandomVariable</span><span class="p">():</span>
+<div class="viewcode-block" id="ExtendedTriangularRandomVariable">
+<a class="viewcode-back" href="../techDoc.html#randomNumbers.ExtendedTriangularRandomVariable">[docs]</a>
+<span class="k">class</span> <span class="nc">ExtendedTriangularRandomVariable</span><span class="p">():</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Extended triangular random variable generator</span>
 
@@ -574,7 +606,9 @@
                 <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;!!! Error: probility repartition out of value range !!&#39;</span><span class="p">)</span>
             
         
-<div class="viewcode-block" id="ExtendedTriangularRandomVariable.random"><a class="viewcode-back" href="../techDoc.html#randomNumbers.ExtendedTriangularRandomVariable.random">[docs]</a>    <span class="k">def</span> <span class="nf">random</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<div class="viewcode-block" id="ExtendedTriangularRandomVariable.random">
+<a class="viewcode-back" href="../techDoc.html#randomNumbers.ExtendedTriangularRandomVariable.random">[docs]</a>
+    <span class="k">def</span> <span class="nf">random</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Generates an extended triangular random number.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
@@ -587,11 +621,15 @@
         <span class="k">else</span><span class="p">:</span>
             <span class="n">randeval</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">M</span> <span class="o">-</span> <span class="n">sqrt</span><span class="p">((</span><span class="mi">1</span><span class="o">-</span><span class="n">u</span><span class="p">)</span><span class="o">/</span><span class="p">(</span><span class="mi">1</span><span class="o">-</span><span class="bp">self</span><span class="o">.</span><span class="n">r</span><span class="p">))</span><span class="o">*</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">M</span><span class="o">-</span><span class="bp">self</span><span class="o">.</span><span class="n">xm</span><span class="p">)</span>
 
-        <span class="k">return</span> <span class="n">randeval</span></div></div>
+        <span class="k">return</span> <span class="n">randeval</span></div>
+</div>
+
 
 <span class="c1">#-------------------</span>
                   
-<div class="viewcode-block" id="BinomialRandomVariable"><a class="viewcode-back" href="../techDoc.html#randomNumbers.BinomialRandomVariable">[docs]</a><span class="k">class</span> <span class="nc">BinomialRandomVariable</span><span class="p">():</span>
+<div class="viewcode-block" id="BinomialRandomVariable">
+<a class="viewcode-back" href="../techDoc.html#randomNumbers.BinomialRandomVariable">[docs]</a>
+<span class="k">class</span> <span class="nc">BinomialRandomVariable</span><span class="p">():</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Binomial random variable generator</span>
 
@@ -620,7 +658,9 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">size</span> <span class="o">=</span> <span class="n">size</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">prob</span> <span class="o">=</span> <span class="n">prob</span>            
         
-<div class="viewcode-block" id="BinomialRandomVariable.random"><a class="viewcode-back" href="../techDoc.html#randomNumbers.BinomialRandomVariable.random">[docs]</a>    <span class="k">def</span> <span class="nf">random</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<div class="viewcode-block" id="BinomialRandomVariable.random">
+<a class="viewcode-back" href="../techDoc.html#randomNumbers.BinomialRandomVariable.random">[docs]</a>
+    <span class="k">def</span> <span class="nf">random</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Generates a binomial random number by</span>
 <span class="sd">        repeating *self.size* Bernouilli trials.</span>
@@ -631,11 +671,15 @@
         <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">size</span><span class="p">):</span>
             <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">_random</span><span class="o">.</span><span class="n">random</span><span class="p">()</span> <span class="o">&lt;</span> <span class="n">prob</span><span class="p">:</span>
                 <span class="n">successCount</span> <span class="o">+=</span> <span class="mi">1</span>                  
-        <span class="k">return</span> <span class="n">successCount</span></div></div>
+        <span class="k">return</span> <span class="n">successCount</span></div>
+</div>
+
 
 <span class="c1">#-------------------</span>
                   
-<div class="viewcode-block" id="CauchyRandomVariable"><a class="viewcode-back" href="../techDoc.html#randomNumbers.CauchyRandomVariable">[docs]</a><span class="k">class</span> <span class="nc">CauchyRandomVariable</span><span class="p">():</span>
+<div class="viewcode-block" id="CauchyRandomVariable">
+<a class="viewcode-back" href="../techDoc.html#randomNumbers.CauchyRandomVariable">[docs]</a>
+<span class="k">class</span> <span class="nc">CauchyRandomVariable</span><span class="p">():</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Cauchy random variable generator.</span>
 
@@ -673,7 +717,9 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">position</span> <span class="o">=</span> <span class="n">position</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">scale</span> <span class="o">=</span> <span class="n">scale</span>            
         
-<div class="viewcode-block" id="CauchyRandomVariable.random"><a class="viewcode-back" href="../techDoc.html#randomNumbers.CauchyRandomVariable.random">[docs]</a>    <span class="k">def</span> <span class="nf">random</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<div class="viewcode-block" id="CauchyRandomVariable.random">
+<a class="viewcode-back" href="../techDoc.html#randomNumbers.CauchyRandomVariable.random">[docs]</a>
+    <span class="k">def</span> <span class="nf">random</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Generates a Cauchy random number.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
@@ -684,14 +730,20 @@
 
         <span class="n">randeval</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">position</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">scale</span><span class="o">*</span><span class="p">(</span> <span class="n">tan</span><span class="p">(</span> <span class="n">pi</span><span class="o">*</span><span class="p">(</span><span class="n">prob</span> <span class="o">-</span> <span class="mf">0.5</span><span class="p">)</span> <span class="p">)</span> <span class="p">)</span>                  
 
-        <span class="k">return</span> <span class="n">randeval</span></div></div>
+        <span class="k">return</span> <span class="n">randeval</span></div>
+</div>
+
 
 <span class="c1">#---------</span>
-<div class="viewcode-block" id="QuasiRandomPointSet"><a class="viewcode-back" href="../techDoc.html#randomNumbers.QuasiRandomPointSet">[docs]</a><span class="k">class</span> <span class="nc">QuasiRandomPointSet</span><span class="p">():</span>
+<div class="viewcode-block" id="QuasiRandomPointSet">
+<a class="viewcode-back" href="../techDoc.html#randomNumbers.QuasiRandomPointSet">[docs]</a>
+<span class="k">class</span> <span class="nc">QuasiRandomPointSet</span><span class="p">():</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Abstract class for generic quasi random point set methods and tools.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
-<div class="viewcode-block" id="QuasiRandomPointSet.testFct"><a class="viewcode-back" href="../techDoc.html#randomNumbers.QuasiRandomPointSet.testFct">[docs]</a>    <span class="k">def</span> <span class="nf">testFct</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">seq</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span><span class="n">buggyRegionLimits</span><span class="o">=</span><span class="p">(</span><span class="mf">0.45</span><span class="p">,</span><span class="mf">0.55</span><span class="p">)):</span>
+<div class="viewcode-block" id="QuasiRandomPointSet.testFct">
+<a class="viewcode-back" href="../techDoc.html#randomNumbers.QuasiRandomPointSet.testFct">[docs]</a>
+    <span class="k">def</span> <span class="nf">testFct</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">seq</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span><span class="n">buggyRegionLimits</span><span class="o">=</span><span class="p">(</span><span class="mf">0.45</span><span class="p">,</span><span class="mf">0.55</span><span class="p">)):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Tiny buggy hypercube for testing a quasi random Korobov 3D sequence.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
@@ -717,7 +769,10 @@
         <span class="k">else</span><span class="p">:</span>
             <span class="k">return</span> <span class="s1">&#39;No bugs detected&#39;</span></div>
 
-<div class="viewcode-block" id="QuasiRandomPointSet.countHits"><a class="viewcode-back" href="../techDoc.html#randomNumbers.QuasiRandomPointSet.countHits">[docs]</a>    <span class="k">def</span> <span class="nf">countHits</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">regionLimits</span><span class="p">,</span><span class="n">pointSet</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+
+<div class="viewcode-block" id="QuasiRandomPointSet.countHits">
+<a class="viewcode-back" href="../techDoc.html#randomNumbers.QuasiRandomPointSet.countHits">[docs]</a>
+    <span class="k">def</span> <span class="nf">countHits</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">regionLimits</span><span class="p">,</span><span class="n">pointSet</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Counts *hits* of a quasi random point set in given regionLimits.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
@@ -736,8 +791,11 @@
                 <span class="c1">#print(&#39;Hit:&#39;, x, regionLimits)</span>
                 <span class="n">hits</span> <span class="o">+=</span> <span class="mi">1</span>
         <span class="k">return</span> <span class="n">hits</span></div>
+
     
-<div class="viewcode-block" id="QuasiRandomPointSet.testUniformityDiscrepancy"><a class="viewcode-back" href="../techDoc.html#randomNumbers.QuasiRandomPointSet.testUniformityDiscrepancy">[docs]</a>    <span class="k">def</span> <span class="nf">testUniformityDiscrepancy</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">k</span><span class="o">=</span><span class="mi">4</span><span class="p">,</span><span class="n">pointSet</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span><span class="n">fileName</span><span class="o">=</span><span class="s1">&#39;testUniformity&#39;</span><span class="p">,</span><span class="n">Debug</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
+<div class="viewcode-block" id="QuasiRandomPointSet.testUniformityDiscrepancy">
+<a class="viewcode-back" href="../techDoc.html#randomNumbers.QuasiRandomPointSet.testUniformityDiscrepancy">[docs]</a>
+    <span class="k">def</span> <span class="nf">testUniformityDiscrepancy</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">k</span><span class="o">=</span><span class="mi">4</span><span class="p">,</span><span class="n">pointSet</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span><span class="n">fileName</span><span class="o">=</span><span class="s1">&#39;testUniformity&#39;</span><span class="p">,</span><span class="n">Debug</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Counts the number of point in each partial hypercube [(x-1)/k,x/k]^d</span>
 <span class="sd">        where x integer ands 0 &lt; x &lt;= k.</span>
@@ -763,12 +821,16 @@
             <span class="n">cardPtSet</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">pointSetCardinality</span>
         <span class="n">thProb</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">cardPtSet</span><span class="p">)</span><span class="o">/</span><span class="n">r</span>
         <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Theoretical distribution: </span><span class="si">%d</span><span class="s1"> / </span><span class="si">%d</span><span class="s1"> = </span><span class="si">%.3f</span><span class="s1">&#39;</span>\
-              <span class="o">%</span> <span class="p">(</span><span class="n">cardPtSet</span><span class="p">,</span><span class="n">r</span><span class="p">,</span><span class="n">thProb</span><span class="p">)</span> <span class="p">)</span></div></div>
+              <span class="o">%</span> <span class="p">(</span><span class="n">cardPtSet</span><span class="p">,</span><span class="n">r</span><span class="p">,</span><span class="n">thProb</span><span class="p">)</span> <span class="p">)</span></div>
+</div>
+
         
             
     
 <span class="c1">#----------</span>
-<div class="viewcode-block" id="QuasiRandomKorobovPointSet"><a class="viewcode-back" href="../techDoc.html#randomNumbers.QuasiRandomKorobovPointSet">[docs]</a><span class="k">class</span> <span class="nc">QuasiRandomKorobovPointSet</span><span class="p">(</span><span class="n">QuasiRandomPointSet</span><span class="p">):</span>
+<div class="viewcode-block" id="QuasiRandomKorobovPointSet">
+<a class="viewcode-back" href="../techDoc.html#randomNumbers.QuasiRandomKorobovPointSet">[docs]</a>
+<span class="k">class</span> <span class="nc">QuasiRandomKorobovPointSet</span><span class="p">(</span><span class="n">QuasiRandomPointSet</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Constructor for rendering a Korobov point set of dimension *n* which is *fully projection regular* in the $s$-dimensional real-valued [0,1)^s hypercube. The constructor uses a MLCG generator with potentially a full period. The point set is stored in a self.sequence attribute and saved in a CSV formatted file.</span>
 
@@ -904,8 +966,11 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">pointSetCardinality</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">sequence</span><span class="p">)</span></div>
 
 
+
 <span class="c1">#-------</span>
-<div class="viewcode-block" id="QuasiRandomFareyPointSet"><a class="viewcode-back" href="../techDoc.html#randomNumbers.QuasiRandomFareyPointSet">[docs]</a><span class="k">class</span> <span class="nc">QuasiRandomFareyPointSet</span><span class="p">(</span><span class="n">QuasiRandomPointSet</span><span class="p">):</span>
+<div class="viewcode-block" id="QuasiRandomFareyPointSet">
+<a class="viewcode-back" href="../techDoc.html#randomNumbers.QuasiRandomFareyPointSet">[docs]</a>
+<span class="k">class</span> <span class="nc">QuasiRandomFareyPointSet</span><span class="p">(</span><span class="n">QuasiRandomPointSet</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Constructor for rendering a Farey point set of dimension *s* and max denominateor *n* which is *fully projection regular* in the $s$-dimensional real-valued [0,1]^s hypercube. The lattice constructor uses a randomly shuffled Farey series for the point construction. The resulting point set is stored in a self.pointSet attribute and saved by default in a CSV formatted file.</span>
 
@@ -1075,8 +1140,11 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">pointSet</span> <span class="o">=</span> <span class="n">pointSet</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">pointSetCardinality</span> <span class="o">=</span> <span class="mi">1</span> <span class="o">+</span> <span class="n">nf</span> <span class="o">+</span> <span class="n">s</span> </div>
 
+
 <span class="c1">#-------</span>
-<div class="viewcode-block" id="QuasiRandomUniformPointSet"><a class="viewcode-back" href="../techDoc.html#randomNumbers.QuasiRandomUniformPointSet">[docs]</a><span class="k">class</span> <span class="nc">QuasiRandomUniformPointSet</span><span class="p">(</span><span class="n">QuasiRandomPointSet</span><span class="p">):</span>
+<div class="viewcode-block" id="QuasiRandomUniformPointSet">
+<a class="viewcode-back" href="../techDoc.html#randomNumbers.QuasiRandomUniformPointSet">[docs]</a>
+<span class="k">class</span> <span class="nc">QuasiRandomUniformPointSet</span><span class="p">(</span><span class="n">QuasiRandomPointSet</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Constructor for rendering a quai random point set of dimension *s* and</span>
 <span class="sd">    max denominateor *n* which is *fully projection regular* in the *s*-dimensional</span>
@@ -1205,8 +1273,11 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">pointSet</span> <span class="o">=</span> <span class="n">pointSet</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">pointSetCardinality</span> <span class="o">=</span> <span class="mi">1</span> <span class="o">+</span> <span class="n">nu</span> <span class="o">+</span> <span class="n">s</span> </div>
 
+
 <span class="c1"># --------------------------</span>
-<div class="viewcode-block" id="MontyHallGameSimulator"><a class="viewcode-back" href="../techDoc.html#randomNumbers.MontyHallGameSimulator">[docs]</a><span class="k">class</span> <span class="nc">MontyHallGameSimulator</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+<div class="viewcode-block" id="MontyHallGameSimulator">
+<a class="viewcode-back" href="../techDoc.html#randomNumbers.MontyHallGameSimulator">[docs]</a>
+<span class="k">class</span> <span class="nc">MontyHallGameSimulator</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Generalized Monty Hall game simulator:</span>
 <span class="sd">    https://en.wikipedia.org/wiki/Monty_Hall_problem</span>
@@ -1315,6 +1386,7 @@
                  <span class="p">)</span>
             
         <span class="k">return</span> <span class="n">successes</span></div>
+
 
 <span class="c1">#----------testing the code ----------------</span>
 <span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s2">&quot;__main__&quot;</span><span class="p">:</span>

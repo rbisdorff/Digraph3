@@ -854,7 +854,7 @@ class SparseIntegerDigraph(object):
     def estimateRankingCorrelation(self,int sampleSize=100,\
                                    seed=None, \
                                    bint Threading=False,
-                                   int nbrCores=1,
+                                   nbrCores=4,
                                    Debug=False):
         """
         The correlation between *self* and *self.boostedRanking* is estimated by sampling the given performance tableau.
@@ -1017,7 +1017,10 @@ def _decompose(int i, int nc,tempDirName,perfTab,decomposition):
                     WithConcordanceRelation=False,
                     WithVetoCounts=False,
                     CopyPerfTab=False,
-                    Threading=False)
+                                         Threading=False,
+                                         startMethod='spawn',
+                                         nbrCores=4,
+                                         )
     pg.computeCopelandRanking()
     pg.__dict__.pop('criteria')
     pg.__dict__.pop('evaluation')
@@ -1046,7 +1049,7 @@ class SparseIntegerOutrankingDigraph(SparseIntegerDigraph,cPerformanceTableau):
         * startMethod='spawn'
         * tempDir=None,
         * componentThreadingThreshold=1000,\
-        * nbrOfCPUs=1,
+        * nbrOfCPUs=4,
         * save2File=None,
         * CopyPerfTab=False,
         * Comments=False,
@@ -1159,8 +1162,8 @@ class SparseIntegerOutrankingDigraph(SparseIntegerDigraph,cPerformanceTableau):
                  componentRankingRule="Copeland",\
                  int minimalComponentSize=1,\
                  bint Threading=False,\
-                 startMethod='spawn',\
-                 int nbrOfCPUs=1,\
+                 startMethod=None,\
+                 nbrOfCPUs=None,\
                  tempDir=None,\
                  int componentThreadingThreshold=50,\
                  save2File=None,\
@@ -1237,6 +1240,11 @@ class SparseIntegerOutrankingDigraph(SparseIntegerDigraph,cPerformanceTableau):
         t0 = time()
         if Comments:        
             print('Computing the %d-quantiles sorting digraph of order %d ...' % (quantiles,na))
+        if Threading:
+            if nbrOfCPUs is None:
+                nbrOfCPUs = mp.cpu_count()
+            if startMethod is None:
+                startMethod  = 'spawn'
         qs = IntegerQuantilesSortingDigraph(argPerfTab=perfTab,
                                 limitingQuantiles=quantiles,
                                 LowerClosed=LowerClosed,
@@ -1245,8 +1253,8 @@ class SparseIntegerOutrankingDigraph(SparseIntegerDigraph,cPerformanceTableau):
                                 StoreSorting=True,
                                 #WithSortingRelation=False,
                                 CopyPerfTab=CopyPerfTab,
-                                Threading=self.sortingParameters['Threading'],
-                                startMethod=self.sortingParameters['StartMethod'],
+                                Threading=Threading,
+                                startMethod=startMethod,
                                 tempDir=tempDir,
                                 nbrCores=nbrOfCPUs,
                                 #nbrOfProcesses=nbrOfCPUs,
@@ -1259,6 +1267,7 @@ class SparseIntegerOutrankingDigraph(SparseIntegerDigraph,cPerformanceTableau):
         self.categories = qs.categories
         self.sorting = qs.sorting
         if Comments:
+            print(qs)
             print('execution time: %.4f' % (self.runTimes['sorting']))
         # preordering
 ##        if minimalComponentSize == None:
@@ -1273,6 +1282,7 @@ class SparseIntegerOutrankingDigraph(SparseIntegerDigraph,cPerformanceTableau):
                     Optimal=OptimalQuantileOrdering,\
                     Descending=True,
                     Threading=Threading,
+                    startMethod=startMethod,                                      
                     nbrOfCPUs=nbrOfCPUs)]
         if Debug:
             print(decomposition)
@@ -1313,6 +1323,8 @@ class SparseIntegerOutrankingDigraph(SparseIntegerDigraph,cPerformanceTableau):
         else:   # if self.sortingParameters['Threading'] == True:
             from copy import copy, deepcopy
             from pickle import dumps, loads, load, dump
+            if startMethod is None:
+                startMethod = 'spawn'
             import multiprocessing as mp
             mpctx = mp.get_context(startMethod)
             self.startMethod = mpctx.get_start_method()
@@ -1321,7 +1333,7 @@ class SparseIntegerOutrankingDigraph(SparseIntegerDigraph,cPerformanceTableau):
             Queue = mpctx.Queue
             active_children = mpctx.active_children
             nbrCores = mpctx.cpu_count()
-            if nbrOfCPUs > 1 and nbrOfCPUs < nbrCores:
+            if nbrOfCPUs is None:
                 nbrCores = nbrOfCPUs
             self.nbrThreads = nbrCores
             if Comments:
@@ -1415,7 +1427,8 @@ class SparseIntegerOutrankingDigraph(SparseIntegerDigraph,cPerformanceTableau):
                                  bint Optimal=False,
                                 bint Descending=True,
                                 bint  Threading=False,
-                                int nbrOfCPUs=1,
+                                 startMethod=None,
+                                nbrOfCPUs=None,
                                 bint Debug=False,
                                 bint Comments=False):
         """
@@ -1440,7 +1453,8 @@ class SparseIntegerOutrankingDigraph(SparseIntegerDigraph,cPerformanceTableau):
             a,lowCateg,highCateg,credibility,lowLimit,notHighLimit =\
                      self.computeActionCategories(x,Comments=Comments,Debug=False,\
                                                Threading=Threading,\
-                                               nbrOfCPUs = nbrOfCPUs)
+                                               startMethod=startMethod,\
+                                               nbrOfCPUs=nbrOfCPUs)
             lowQtileValue = self.categories[lowCateg]['lowLimitValue']
             highQtileValue = self.categories[highCateg]['highLimitValue']
             lowQtileLimit = self.categories[lowCateg]['lowLimit']
@@ -1551,15 +1565,18 @@ class SparseIntegerOutrankingDigraph(SparseIntegerDigraph,cPerformanceTableau):
                                     bint Show=False,
                                     bint Debug=False,
                                     bint Comments=False,\
-                             bint Threading=False,int nbrOfCPUs=1):
+                             bint Threading=False,\
+                                startMethod=None,\
+                                nbrOfCPUs=None):
         """
         *Parameters*:
-            * action (int key),
-            * Show=False,
-            * Debug=False,
-            * Comments=False,
-            * Threading=False,
-            * nbrOfCPUs=1.
+            * action (int key)
+            * Show=False
+            * Debug=False
+            * Comments=False
+            * Threading=False
+            * startMethod=None
+            * nbrOfCPUs=None
 
         Renders the union of categories in which the given action is sorted positively or null into.
         Returns a tuple : action, lowest category key, highest category key, membership credibility !
@@ -1575,6 +1592,7 @@ class SparseIntegerOutrankingDigraph(SparseIntegerDigraph,cPerformanceTableau):
         except:
             sorting = self.computeSortingCharacteristics(action=action,Comments=Comments,\
                                                    Threading=Threading,\
+                                                         startMethod=startMethod,\
                                                    nbrOfCPUs=nbrOfCPUs)
             sortinga = sorting[action]
             
@@ -1640,10 +1658,11 @@ class SparseIntegerOutrankingDigraph(SparseIntegerDigraph,cPerformanceTableau):
             #         notHighLimit
 
     def computeCriterion2RankingCorrelation(self,criterion,
-                                            bint Threading=False,\
-                                    int nbrOfCPUs=1,
-                                    bint Debug=False,
-                                    bint Comments=False):
+                                            bint Threading=False,
+                                            nbrOfCPUs=None,\
+                                            startMethod=None,
+                                            bint Debug=False,
+                                            bint Comments=False):
         """
         *Parameters*:
             * criterion,
@@ -1658,7 +1677,9 @@ class SparseIntegerOutrankingDigraph(SparseIntegerDigraph,cPerformanceTableau):
         """
         gc = BipolarOutrankingDigraph(self,coalition=[criterion],
                                       Normalized=True,CopyPerfTab=False,
-                                      Threading=Threading,nbrCores=nbrOfCPUs,
+                                      Threading=Threading,
+                                      startMethod=startMethod,
+                                      nbrCores=nbrOfCPUs,
                                       Comments=Comments)
         globalOrdering = self.ranking2Preorder(self.boostedRanking)
         globalRelation = gc.computePreorderRelation(globalOrdering)
@@ -1670,7 +1691,9 @@ class SparseIntegerOutrankingDigraph(SparseIntegerDigraph,cPerformanceTableau):
     def computeMarginalVersusGlobalOutrankingCorrelations(self,
                                 bint Sorted=True,
                                 bint ValuedCorrelation=False,
-                                bint Threading=False,nbrCores=None,\
+                                bint Threading=False,
+                                startMethod=None,
+                                nbrCores=None,\
                                 bint Comments=False):
         """
         *Parameters*:
@@ -1722,7 +1745,8 @@ class SparseIntegerOutrankingDigraph(SparseIntegerDigraph,cPerformanceTableau):
     def showMarginalVersusGlobalOutrankingCorrelation(self,
                                                       bint Sorted=True,\
                                                       bint Threading=False,\
-                                                      int nbrOfCPUs=1,\
+                                                      nbrOfCPUs=None,\
+                                                      startMethod=None,\
                                                       bint Comments=True):
         """
         *Parameters*:
@@ -2087,8 +2111,9 @@ class cQuantilesRankingDigraph(SparseIntegerOutrankingDigraph):
         * componentRankingRule="Copeland",
         * minimalComponentSize=1,
         * Threading=False,
+        * startMethod='spawn',
         * tempDir=None,
-        * nbrOfCPUs=1,
+        * nbrOfCPUs=4,
         * save2File=None,
         * CopyPerfTab=False,
         * Comments=False,
@@ -2164,7 +2189,7 @@ class cQuantilesRankingDigraph(SparseIntegerOutrankingDigraph):
                  bint Threading=False,\
                  startMethod='spawn',\
                  tempDir=None,\
-                 int nbrOfCPUs=1,\
+                 nbrOfCPUs=4,\
                  save2File=None,\
                  bint CopyPerfTab=False,\
                  bint Comments=False,\
@@ -2251,7 +2276,7 @@ class cQuantilesRankingDigraph(SparseIntegerOutrankingDigraph):
                                      StoreSorting=True,
                                      CopyPerfTab=CopyPerfTab,
                                      Threading=self.sortingParameters['Threading'],
-                                     startMethod=self.sortingParameters['StartMethod'],
+                                     startMethod=startMethod,
                                      tempDir=tempDir,
                                      nbrCores=nbrOfCPUs,
                                      Comments=Comments,
@@ -2276,6 +2301,7 @@ class cQuantilesRankingDigraph(SparseIntegerOutrankingDigraph):
                     strategy=quantilesOrderingStrategy,     
                     Descending=True,
                         Threading=Threading,
+                        startMethod=startMethod,
                     nbrOfCPUs=nbrOfCPUs)]
         if Debug:
             print(decomposition)
@@ -2429,8 +2455,8 @@ class cQuantilesRankingDigraph(SparseIntegerOutrankingDigraph):
     def _computeQuantileOrdering(self,strategy=None,
                                 bint Descending=True,
                                 bint  Threading=False,
-                                 startMethod='spawn',
-                                int nbrOfCPUs=0,
+                                 startMethod=None,
+                                nbrOfCPUs=4,
                                 bint Debug=False,
                                 bint Comments=False):
         """
@@ -2565,7 +2591,7 @@ class cQuantilesRankingDigraph(SparseIntegerOutrankingDigraph):
                                     bint Comments=False,
                                 bint Threading=False,
                                 startMethod='spawn',
-                                int nbrOfCPUs=1):
+                                nbrOfCPUs=1):
         """
         *Parameters*:
             * action (int key),
@@ -2590,7 +2616,8 @@ class cQuantilesRankingDigraph(SparseIntegerOutrankingDigraph):
         except:
             sorting = self.computeSortingCharacteristics(action=action,Comments=Comments,\
                                                    Threading=Threading,\
-                                                   nbrOfCPUs=nbrOfCPUs)
+                                                         nbrOfCPUs=nbrOfCPUs,
+                                                         startMethod=startMethod)
             sortinga = sorting[action]
             
         keys = []
@@ -2656,7 +2683,8 @@ class cQuantilesRankingDigraph(SparseIntegerOutrankingDigraph):
 
     def computeCriterion2RankingCorrelation(self,criterion,
                                             bint Threading=False,\
-                                    int nbrOfCPUs=1,
+                                    nbrOfCPUs=1,
+                                            startMethod='spawn',
                                     bint Debug=False,
                                     bint Comments=False):
         """
@@ -2685,7 +2713,9 @@ class cQuantilesRankingDigraph(SparseIntegerOutrankingDigraph):
     def computeMarginalVersusGlobalOutrankingCorrelations(self,
                                 bint Sorted=True,
                                 bint ValuedCorrelation=False,
-                                bint Threading=False,nbrCores=None,\
+                                bint Threading=False,
+                                startMethod='spawn',
+                                nbrCores=None,\
                                 bint Comments=False):
         """
         *Parameters*:
@@ -2767,7 +2797,8 @@ class cQuantilesRankingDigraph(SparseIntegerOutrankingDigraph):
     def showMarginalVersusGlobalOutrankingCorrelation(self,
                                                       bint Sorted=True,\
                                                       bint Threading=False,\
-                                                      int nbrOfCPUs=1,\
+                                                      nbrOfCPUs=1,
+                                                      startMethod='spawn',\
                                                       bint Comments=True):
         """
         *Parameters*:

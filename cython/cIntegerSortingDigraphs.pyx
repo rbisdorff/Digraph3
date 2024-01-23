@@ -1441,15 +1441,17 @@ class IntegerQuantilesSortingDigraph(IntegerBipolarOutrankingDigraph):
 
     def computeSortingCharacteristics(self, action=None,bint Comments=False,\
                                       bint StoreSorting=False,bint Debug=False,\
-                                        bint Threading=False, int nbrOfCPUs=1):
+                                        bint Threading=False, nbrOfCPUs=None,
+                                      startMethod=None):
         """
         *Parameters*:
-            * action=None,
-            * Comments=False,
-            * StoreSorting=False,
-            * Debug=False,
-            * Threading=False,
-            * nbrOfCPUs=None.
+            * action=None
+            * Comments=False
+            * StoreSorting=False
+            * Debug=False
+            * Threading=Fals,
+            * nbrOfCPUs=None
+            * startMethod=None
 
         Renders a bipolar-valued bi-dictionary relation
         representing the degree of credibility of the
@@ -1484,6 +1486,8 @@ class IntegerQuantilesSortingDigraph(IntegerBipolarOutrankingDigraph):
             LowerClosed = True
         if Threading and action==None:
             import multiprocessing as mp
+            if startMethod is None:
+                startMethod = 'spawn'
             mpctx = mp.get_context(self.startMethod)
             Process = mpctx.Process
             active_children = mpctx.active_children

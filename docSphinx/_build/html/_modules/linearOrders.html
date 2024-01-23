@@ -21,16 +21,16 @@
     <script src="../_static/js/html5shiv.min.js"></script>
   <![endif]-->
   
-        <script src="../_static/jquery.js"></script>
-        <script src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
-        <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
-        <script src="../_static/doctools.js"></script>
-        <script src="../_static/sphinx_highlight.js"></script>
-        <script src="../_static/clipboard.min.js"></script>
-        <script src="../_static/copybutton.js"></script>
-        <script src="../_static/js/hoverxref.js"></script>
-        <script src="../_static/js/tooltipster.bundle.min.js"></script>
-        <script src="../_static/js/micromodal.min.js"></script>
+        <script src="../_static/jquery.js?v=5d32c60e"></script>
+        <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script src="../_static/documentation_options.js?v=bf028e07"></script>
+        <script src="../_static/doctools.js?v=888ff710"></script>
+        <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+        <script src="../_static/clipboard.min.js?v=a7894cd8"></script>
+        <script src="../_static/copybutton.js?v=15d7cbb8"></script>
+        <script src="../_static/js/hoverxref.js?v=d4da329d"></script>
+        <script src="../_static/js/tooltipster.bundle.min.js?v=18bf091b"></script>
+        <script src="../_static/js/micromodal.min.js?v=04d6302d"></script>
     <script src="../_static/js/theme.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" /> 
@@ -197,7 +197,9 @@
 
 <span class="c1"># ------- Abstract Linear Order class</span>
 
-<div class="viewcode-block" id="LinearOrder"><a class="viewcode-back" href="../techDoc.html#linearOrders.LinearOrder">[docs]</a><span class="k">class</span> <span class="nc">LinearOrder</span><span class="p">(</span><span class="n">Digraph</span><span class="p">):</span>
+<div class="viewcode-block" id="LinearOrder">
+<a class="viewcode-back" href="../techDoc.html#linearOrders.LinearOrder">[docs]</a>
+<span class="k">class</span> <span class="nc">LinearOrder</span><span class="p">(</span><span class="n">Digraph</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    abstract class for digraphs which represent</span>
 <span class="sd">    linear orders.</span>
@@ -205,7 +207,9 @@
     <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Abstract root class&#39;</span><span class="p">)</span>
         
-<div class="viewcode-block" id="LinearOrder.computeRanking"><a class="viewcode-back" href="../techDoc.html#linearOrders.LinearOrder.computeRanking">[docs]</a>    <span class="k">def</span> <span class="nf">computeRanking</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<div class="viewcode-block" id="LinearOrder.computeRanking">
+<a class="viewcode-back" href="../techDoc.html#linearOrders.LinearOrder.computeRanking">[docs]</a>
+    <span class="k">def</span> <span class="nf">computeRanking</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        computes the linear ordering from lowest (best, rank = 1) to highest (worst rank=n)</span>
 <span class="sd">        of an instance of the LinearOrcer class by sorting by outdegrees (gamma[x][0]).</span>
@@ -220,7 +224,10 @@
             <span class="n">ranking</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">x</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
         <span class="k">return</span> <span class="n">ranking</span></div>
 
-<div class="viewcode-block" id="LinearOrder.computeOrder"><a class="viewcode-back" href="../techDoc.html#linearOrders.LinearOrder.computeOrder">[docs]</a>    <span class="k">def</span> <span class="nf">computeOrder</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+
+<div class="viewcode-block" id="LinearOrder.computeOrder">
+<a class="viewcode-back" href="../techDoc.html#linearOrders.LinearOrder.computeOrder">[docs]</a>
+    <span class="k">def</span> <span class="nf">computeOrder</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        computes the linear ordering from lowest (worst) to highest (best)</span>
 <span class="sd">        of an instance of the LinearOrcer class by sorting by indegrees (gamma[x][1]).</span>
@@ -235,20 +242,29 @@
             <span class="n">ordering</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">x</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
         <span class="k">return</span> <span class="n">ordering</span></div>
 
-<div class="viewcode-block" id="LinearOrder.showOrdering"><a class="viewcode-back" href="../techDoc.html#linearOrders.LinearOrder.showOrdering">[docs]</a>    <span class="k">def</span> <span class="nf">showOrdering</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+
+<div class="viewcode-block" id="LinearOrder.showOrdering">
+<a class="viewcode-back" href="../techDoc.html#linearOrders.LinearOrder.showOrdering">[docs]</a>
+    <span class="k">def</span> <span class="nf">showOrdering</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        shows the linearly ordered actions in list format.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="nb">print</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">computeOrder</span><span class="p">())</span></div>
 
-<div class="viewcode-block" id="LinearOrder.showRanking"><a class="viewcode-back" href="../techDoc.html#linearOrders.LinearOrder.showRanking">[docs]</a>    <span class="k">def</span> <span class="nf">showRanking</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+
+<div class="viewcode-block" id="LinearOrder.showRanking">
+<a class="viewcode-back" href="../techDoc.html#linearOrders.LinearOrder.showRanking">[docs]</a>
+    <span class="k">def</span> <span class="nf">showRanking</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        shows the linearly ordered actions in list format.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="nb">print</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">computeRanking</span><span class="p">())</span></div>
+
         
         
-<div class="viewcode-block" id="LinearOrder.htmlOrder"><a class="viewcode-back" href="../techDoc.html#linearOrders.LinearOrder.htmlOrder">[docs]</a>    <span class="k">def</span> <span class="nf">htmlOrder</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<div class="viewcode-block" id="LinearOrder.htmlOrder">
+<a class="viewcode-back" href="../techDoc.html#linearOrders.LinearOrder.htmlOrder">[docs]</a>
+    <span class="k">def</span> <span class="nf">htmlOrder</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        returns the html encoded presentation of a linear order</span>
 <span class="sd">        &quot;&quot;&quot;</span>
@@ -266,7 +282,10 @@
         <span class="n">html</span> <span class="o">+=</span> <span class="s1">&#39;&lt;/table&gt;&#39;</span>
         <span class="k">return</span> <span class="n">html</span></div>
 
-<div class="viewcode-block" id="LinearOrder.htmlRanking"><a class="viewcode-back" href="../techDoc.html#linearOrders.LinearOrder.htmlRanking">[docs]</a>    <span class="k">def</span> <span class="nf">htmlRanking</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+
+<div class="viewcode-block" id="LinearOrder.htmlRanking">
+<a class="viewcode-back" href="../techDoc.html#linearOrders.LinearOrder.htmlRanking">[docs]</a>
+    <span class="k">def</span> <span class="nf">htmlRanking</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        returns the html encoded presentation of a linear order</span>
 <span class="sd">        &quot;&quot;&quot;</span>
@@ -283,8 +302,11 @@
                                               <span class="o">%</span> <span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="n">name</span><span class="p">)</span>
         <span class="n">html</span> <span class="o">+=</span> <span class="s1">&#39;&lt;/table&gt;&#39;</span>
         <span class="k">return</span> <span class="n">html</span></div>
+
     
-<div class="viewcode-block" id="LinearOrder.exportDigraphGraphViz"><a class="viewcode-back" href="../techDoc.html#linearOrders.LinearOrder.exportDigraphGraphViz">[docs]</a>    <span class="k">def</span> <span class="nf">exportDigraphGraphViz</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">fileName</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">firstChoice</span><span class="o">=</span><span class="nb">set</span><span class="p">(),</span>
+<div class="viewcode-block" id="LinearOrder.exportDigraphGraphViz">
+<a class="viewcode-back" href="../techDoc.html#linearOrders.LinearOrder.exportDigraphGraphViz">[docs]</a>
+    <span class="k">def</span> <span class="nf">exportDigraphGraphViz</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">fileName</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">firstChoice</span><span class="o">=</span><span class="nb">set</span><span class="p">(),</span>
                               <span class="n">bestChoice</span><span class="o">=</span><span class="nb">set</span><span class="p">(),</span><span class="n">lastChoice</span><span class="o">=</span><span class="nb">set</span><span class="p">(),</span>
                               <span class="n">worstChoice</span><span class="o">=</span><span class="nb">set</span><span class="p">(),</span><span class="n">Comments</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
                               <span class="n">graphType</span><span class="o">=</span><span class="s1">&#39;png&#39;</span><span class="p">,</span><span class="n">graphSize</span><span class="o">=</span><span class="s1">&#39;7,7&#39;</span><span class="p">):</span>
@@ -297,7 +319,10 @@
                                <span class="n">Comments</span><span class="o">=</span><span class="n">Comments</span><span class="p">,</span><span class="n">graphType</span><span class="o">=</span><span class="n">graphType</span><span class="p">,</span>
                                <span class="n">graphSize</span><span class="o">=</span><span class="n">graphSize</span><span class="p">)</span></div>
 
-<div class="viewcode-block" id="LinearOrder.exportGraphViz"><a class="viewcode-back" href="../techDoc.html#linearOrders.LinearOrder.exportGraphViz">[docs]</a>    <span class="k">def</span> <span class="nf">exportGraphViz</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">fileName</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">isValued</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+
+<div class="viewcode-block" id="LinearOrder.exportGraphViz">
+<a class="viewcode-back" href="../techDoc.html#linearOrders.LinearOrder.exportGraphViz">[docs]</a>
+    <span class="k">def</span> <span class="nf">exportGraphViz</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">fileName</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">isValued</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
                        <span class="n">firstChoice</span><span class="o">=</span><span class="nb">set</span><span class="p">(),</span><span class="n">lastChoice</span><span class="o">=</span><span class="nb">set</span><span class="p">(),</span>
                        <span class="n">bestChoice</span><span class="o">=</span><span class="nb">set</span><span class="p">(),</span><span class="n">worstChoice</span><span class="o">=</span><span class="nb">set</span><span class="p">(),</span>
                        <span class="n">Comments</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span><span class="n">graphType</span><span class="o">=</span><span class="s1">&#39;png&#39;</span><span class="p">,</span>
@@ -368,8 +393,11 @@
         <span class="k">except</span><span class="p">:</span>
             <span class="k">if</span> <span class="n">Comments</span><span class="p">:</span>
                 <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;graphViz tools not avalaible! Please check installation.&#39;</span><span class="p">)</span></div>
+
     
-<div class="viewcode-block" id="LinearOrder.computeKemenyIndex"><a class="viewcode-back" href="../techDoc.html#linearOrders.LinearOrder.computeKemenyIndex">[docs]</a>    <span class="k">def</span> <span class="nf">computeKemenyIndex</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">other</span><span class="p">):</span>
+<div class="viewcode-block" id="LinearOrder.computeKemenyIndex">
+<a class="viewcode-back" href="../techDoc.html#linearOrders.LinearOrder.computeKemenyIndex">[docs]</a>
+    <span class="k">def</span> <span class="nf">computeKemenyIndex</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">other</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        renders the Kemeny index of the self.relation (linear order)</span>
 <span class="sd">        compared with a given bipolar-valued relation of a compatible</span>
@@ -393,14 +421,18 @@
                             <span class="n">KemenyIndex</span> <span class="o">+=</span> <span class="nb">float</span><span class="p">(</span><span class="n">other</span><span class="o">.</span><span class="n">relation</span><span class="p">[</span><span class="n">x</span><span class="p">][</span><span class="n">y</span><span class="p">])</span>
                         <span class="k">elif</span> <span class="bp">self</span><span class="o">.</span><span class="n">relation</span><span class="p">[</span><span class="n">x</span><span class="p">][</span><span class="n">y</span><span class="p">]</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">:</span>
                             <span class="n">KemenyIndex</span> <span class="o">-=</span> <span class="nb">float</span><span class="p">(</span><span class="n">other</span><span class="o">.</span><span class="n">relation</span><span class="p">[</span><span class="n">x</span><span class="p">][</span><span class="n">y</span><span class="p">])</span>
-        <span class="k">return</span> <span class="n">KemenyIndex</span> </div></div>
+        <span class="k">return</span> <span class="n">KemenyIndex</span> </div>
+</div>
+
             
 
 <span class="c1">######   instantiable class of linear orders</span>
 
 <span class="c1"># ------- Random linear orders</span>
 
-<div class="viewcode-block" id="RandomLinearOrder"><a class="viewcode-back" href="../techDoc.html#linearOrders.RandomLinearOrder">[docs]</a><span class="k">class</span> <span class="nc">RandomLinearOrder</span><span class="p">(</span><span class="n">LinearOrder</span><span class="p">):</span>
+<div class="viewcode-block" id="RandomLinearOrder">
+<a class="viewcode-back" href="../techDoc.html#linearOrders.RandomLinearOrder">[docs]</a>
+<span class="k">class</span> <span class="nc">RandomLinearOrder</span><span class="p">(</span><span class="n">LinearOrder</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Instantiates random linear orders</span>
 <span class="sd">    &quot;&quot;&quot;</span>
@@ -443,9 +475,12 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">notgamma</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">notGammaSets</span><span class="p">()</span>
         <span class="k">if</span> <span class="n">Debug</span><span class="p">:</span>
             <span class="nb">print</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">computeOrder</span><span class="p">())</span></div>
+
         
 <span class="c1">######   instantiable class of linear orders</span>
-<div class="viewcode-block" id="RankedPairsRanking"><a class="viewcode-back" href="../techDoc.html#linearOrders.RankedPairsRanking">[docs]</a><span class="k">class</span> <span class="nc">RankedPairsRanking</span><span class="p">(</span><span class="n">LinearOrder</span><span class="p">):</span>
+<div class="viewcode-block" id="RankedPairsRanking">
+<a class="viewcode-back" href="../techDoc.html#linearOrders.RankedPairsRanking">[docs]</a>
+<span class="k">class</span> <span class="nc">RankedPairsRanking</span><span class="p">(</span><span class="n">LinearOrder</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    instantiates the Ranked Pairs Ranking from</span>
 <span class="sd">    a given bipolar-valued Digraph instance</span>
@@ -585,12 +620,18 @@
         <span class="k">if</span> <span class="n">Debug</span><span class="p">:</span>
             <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Ranked Pairs Ranking = &#39;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">rankedPairsRanking</span><span class="p">)</span></div>
 
-<div class="viewcode-block" id="RankedPairsOrder"><a class="viewcode-back" href="../techDoc.html#linearOrders.RankedPairsOrder">[docs]</a><span class="k">class</span> <span class="nc">RankedPairsOrder</span><span class="p">(</span><span class="n">RankedPairsRanking</span><span class="p">):</span>
+
+<div class="viewcode-block" id="RankedPairsOrder">
+<a class="viewcode-back" href="../techDoc.html#linearOrders.RankedPairsOrder">[docs]</a>
+<span class="k">class</span> <span class="nc">RankedPairsOrder</span><span class="p">(</span><span class="n">RankedPairsRanking</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Dummy for RankedPairsRanking class</span>
 <span class="sd">    &quot;&quot;&quot;</span></div>
+
 <span class="c1">#----------------  </span>
-<div class="viewcode-block" id="KohlerRanking"><a class="viewcode-back" href="../techDoc.html#linearOrders.KohlerRanking">[docs]</a><span class="k">class</span> <span class="nc">KohlerRanking</span><span class="p">(</span><span class="n">LinearOrder</span><span class="p">):</span>
+<div class="viewcode-block" id="KohlerRanking">
+<a class="viewcode-back" href="../techDoc.html#linearOrders.KohlerRanking">[docs]</a>
+<span class="k">class</span> <span class="nc">KohlerRanking</span><span class="p">(</span><span class="n">LinearOrder</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    instantiates the Kohler Order from</span>
 <span class="sd">    a given bipolar-valued Digraph instance.</span>
@@ -728,12 +769,18 @@
             <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Kohler ranking: &#39;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">kohlerRanking</span><span class="p">)</span>
             <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Kohler ordering: &#39;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">kohlerOrder</span><span class="p">)</span></div>
 
-<div class="viewcode-block" id="KohlerOrder"><a class="viewcode-back" href="../techDoc.html#linearOrders.KohlerOrder">[docs]</a><span class="k">class</span> <span class="nc">KohlerOrder</span><span class="p">(</span><span class="n">KohlerRanking</span><span class="p">):</span>
+
+<div class="viewcode-block" id="KohlerOrder">
+<a class="viewcode-back" href="../techDoc.html#linearOrders.KohlerOrder">[docs]</a>
+<span class="k">class</span> <span class="nc">KohlerOrder</span><span class="p">(</span><span class="n">KohlerRanking</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Dummy for KohlerRanking class</span>
 <span class="sd">    &quot;&quot;&quot;</span></div>
 
-<div class="viewcode-block" id="NetFlowsRanking"><a class="viewcode-back" href="../techDoc.html#linearOrders.NetFlowsRanking">[docs]</a><span class="k">class</span> <span class="nc">NetFlowsRanking</span><span class="p">(</span><span class="n">LinearOrder</span><span class="p">):</span>
+
+<div class="viewcode-block" id="NetFlowsRanking">
+<a class="viewcode-back" href="../techDoc.html#linearOrders.NetFlowsRanking">[docs]</a>
+<span class="k">class</span> <span class="nc">NetFlowsRanking</span><span class="p">(</span><span class="n">LinearOrder</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    instantiates the *NetFlows* ranking  and ordering from</span>
 <span class="sd">    a given bipolar-valued Digraph instance *other*.</span>
@@ -899,12 +946,18 @@
             <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">incnetFlowScores</span><span class="p">:</span>
                 <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;</span><span class="si">%s</span><span class="s1"> </span><span class="se">\t</span><span class="s1"> </span><span class="si">%.2f</span><span class="s1">&#39;</span> <span class="o">%</span><span class="p">(</span><span class="n">x</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span><span class="n">x</span><span class="p">[</span><span class="mi">0</span><span class="p">]))</span></div>
 
-<div class="viewcode-block" id="NetFlowsOrder"><a class="viewcode-back" href="../techDoc.html#linearOrders.NetFlowsOrder">[docs]</a><span class="k">class</span> <span class="nc">NetFlowsOrder</span><span class="p">(</span><span class="n">NetFlowsRanking</span><span class="p">):</span>
+
+<div class="viewcode-block" id="NetFlowsOrder">
+<a class="viewcode-back" href="../techDoc.html#linearOrders.NetFlowsOrder">[docs]</a>
+<span class="k">class</span> <span class="nc">NetFlowsOrder</span><span class="p">(</span><span class="n">NetFlowsRanking</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Dummy for NetFlowsRanking class</span>
 <span class="sd">    &quot;&quot;&quot;</span></div>
 
-<div class="viewcode-block" id="IteratedNetFlowsRanking"><a class="viewcode-back" href="../techDoc.html#linearOrders.IteratedNetFlowsRanking">[docs]</a><span class="k">class</span> <span class="nc">IteratedNetFlowsRanking</span><span class="p">(</span><span class="n">LinearOrder</span><span class="p">):</span>
+
+<div class="viewcode-block" id="IteratedNetFlowsRanking">
+<a class="viewcode-back" href="../techDoc.html#linearOrders.IteratedNetFlowsRanking">[docs]</a>
+<span class="k">class</span> <span class="nc">IteratedNetFlowsRanking</span><span class="p">(</span><span class="n">LinearOrder</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    instantiates the iterated NetFlows order from</span>
 <span class="sd">    a given bipolar-valued Digraph instance</span>
@@ -1056,7 +1109,10 @@
             <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Iterated NetFlows ranking : &#39;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">iteratedNetFlowsRanking</span><span class="p">)</span>
             <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Iterated NetFlows ordering: &#39;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">iteratedNetFlowsOrdering</span><span class="p">)</span></div>
 
-<div class="viewcode-block" id="IteratedCopelandRanking"><a class="viewcode-back" href="../techDoc.html#linearOrders.IteratedCopelandRanking">[docs]</a><span class="k">class</span> <span class="nc">IteratedCopelandRanking</span><span class="p">(</span><span class="n">LinearOrder</span><span class="p">):</span>
+
+<div class="viewcode-block" id="IteratedCopelandRanking">
+<a class="viewcode-back" href="../techDoc.html#linearOrders.IteratedCopelandRanking">[docs]</a>
+<span class="k">class</span> <span class="nc">IteratedCopelandRanking</span><span class="p">(</span><span class="n">LinearOrder</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    instantiates the iterated Copeland ranking from</span>
 <span class="sd">    a given bipolar-valued Digraph instance</span>
@@ -1208,6 +1264,7 @@
             <span class="bp">self</span><span class="o">.</span><span class="n">showRelationTable</span><span class="p">()</span>
             <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Iterated Copelans ranking: &#39;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">iteratedCopelandRanking</span><span class="p">)</span></div>
 
+
 <span class="k">class</span> <span class="nc">_OutFlowsOrder</span><span class="p">(</span><span class="n">LinearOrder</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    instantiates the out flows Order from</span>
@@ -1318,7 +1375,9 @@
             <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="nb">reversed</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">outFlows</span><span class="p">):</span>
                 <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;</span><span class="si">%s</span><span class="s1"> </span><span class="se">\t</span><span class="s1"> </span><span class="si">%.2f</span><span class="s1">&#39;</span> <span class="o">%</span><span class="p">(</span><span class="n">x</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span><span class="n">x</span><span class="p">[</span><span class="mi">0</span><span class="p">]))</span>
 
-<div class="viewcode-block" id="CopelandRanking"><a class="viewcode-back" href="../techDoc.html#linearOrders.CopelandRanking">[docs]</a><span class="k">class</span> <span class="nc">CopelandRanking</span><span class="p">(</span><span class="n">LinearOrder</span><span class="p">):</span>
+<div class="viewcode-block" id="CopelandRanking">
+<a class="viewcode-back" href="../techDoc.html#linearOrders.CopelandRanking">[docs]</a>
+<span class="k">class</span> <span class="nc">CopelandRanking</span><span class="p">(</span><span class="n">LinearOrder</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    instantiates the Copeland Ranking and Order from</span>
 <span class="sd">    a given bipolar-valued Digraph instance *other*.</span>
@@ -1465,11 +1524,15 @@
         <span class="k">else</span><span class="p">:</span>
             <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">incCopelandScores</span><span class="p">:</span>
                 <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;</span><span class="si">%s</span><span class="s1"> </span><span class="se">\t</span><span class="s1"> </span><span class="si">%.2f</span><span class="s1">&#39;</span> <span class="o">%</span><span class="p">(</span><span class="n">x</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span><span class="n">x</span><span class="p">[</span><span class="mi">0</span><span class="p">]))</span></div>
+
          
-<div class="viewcode-block" id="CopelandOrder"><a class="viewcode-back" href="../techDoc.html#linearOrders.CopelandOrder">[docs]</a><span class="k">class</span> <span class="nc">CopelandOrder</span><span class="p">(</span><span class="n">CopelandRanking</span><span class="p">):</span>
+<div class="viewcode-block" id="CopelandOrder">
+<a class="viewcode-back" href="../techDoc.html#linearOrders.CopelandOrder">[docs]</a>
+<span class="k">class</span> <span class="nc">CopelandOrder</span><span class="p">(</span><span class="n">CopelandRanking</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Dummy for CopelandRanking class</span>
 <span class="sd">    &quot;&quot;&quot;</span></div>
+
 
 <span class="c1">########  instantiates optimal linear orderings</span>
 
@@ -1562,7 +1625,9 @@
 <span class="c1">#             self.showRelationTable()</span>
 <span class="c1">#             print(&#39;Median Ranking = &#39;, self.medianRanking)</span>
 
-<div class="viewcode-block" id="KemenyRanking"><a class="viewcode-back" href="../techDoc.html#linearOrders.KemenyRanking">[docs]</a><span class="k">class</span> <span class="nc">KemenyRanking</span><span class="p">(</span><span class="n">LinearOrder</span><span class="p">):</span>
+<div class="viewcode-block" id="KemenyRanking">
+<a class="viewcode-back" href="../techDoc.html#linearOrders.KemenyRanking">[docs]</a>
+<span class="k">class</span> <span class="nc">KemenyRanking</span><span class="p">(</span><span class="n">LinearOrder</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Instantiates the Kemeny Ranking wrt the outranking relation from</span>
 <span class="sd">    a given bipolar-valued Digraph instance of small order.</span>
@@ -1676,12 +1741,18 @@
             <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Kemeny Ranking = &#39;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">kemenyRanking</span><span class="p">)</span></div>
 
 
-<div class="viewcode-block" id="KemenyOrder"><a class="viewcode-back" href="../techDoc.html#linearOrders.KemenyOrder">[docs]</a><span class="k">class</span> <span class="nc">KemenyOrder</span><span class="p">(</span><span class="n">KemenyRanking</span><span class="p">):</span>
+
+<div class="viewcode-block" id="KemenyOrder">
+<a class="viewcode-back" href="../techDoc.html#linearOrders.KemenyOrder">[docs]</a>
+<span class="k">class</span> <span class="nc">KemenyOrder</span><span class="p">(</span><span class="n">KemenyRanking</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Dummy class</span>
 <span class="sd">    &quot;&quot;&quot;</span></div>
 
-<div class="viewcode-block" id="SlaterRanking"><a class="viewcode-back" href="../techDoc.html#linearOrders.SlaterRanking">[docs]</a><span class="k">class</span> <span class="nc">SlaterRanking</span><span class="p">(</span><span class="n">KemenyRanking</span><span class="p">):</span>
+
+<div class="viewcode-block" id="SlaterRanking">
+<a class="viewcode-back" href="../techDoc.html#linearOrders.SlaterRanking">[docs]</a>
+<span class="k">class</span> <span class="nc">SlaterRanking</span><span class="p">(</span><span class="n">KemenyRanking</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Instantiates a Slater ranking by instantiating a *KemenyRanking* from the Condorcet Digraph -the median cut polarised digraph- of a given bipolar-valued Digraph instance. </span>
 <span class="sd">    &quot;&quot;&quot;</span>
@@ -1706,14 +1777,20 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">gamma</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">gammaSets</span><span class="p">()</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">notGamma</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">notGammaSets</span><span class="p">()</span></div>
 
-<div class="viewcode-block" id="SlaterOrder"><a class="viewcode-back" href="../techDoc.html#linearOrders.SlaterOrder">[docs]</a><span class="k">class</span> <span class="nc">SlaterOrder</span><span class="p">(</span><span class="n">SlaterRanking</span><span class="p">):</span>
+
+<div class="viewcode-block" id="SlaterOrder">
+<a class="viewcode-back" href="../techDoc.html#linearOrders.SlaterOrder">[docs]</a>
+<span class="k">class</span> <span class="nc">SlaterOrder</span><span class="p">(</span><span class="n">SlaterRanking</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Dummy class</span>
 <span class="sd">    &quot;&quot;&quot;</span></div>
+
         
 <span class="c1">########  instantiates principal scores&#39; ordering</span>
 
-<div class="viewcode-block" id="PrincipalOrder"><a class="viewcode-back" href="../techDoc.html#linearOrders.PrincipalOrder">[docs]</a><span class="k">class</span> <span class="nc">PrincipalOrder</span><span class="p">(</span><span class="n">LinearOrder</span><span class="p">):</span>
+<div class="viewcode-block" id="PrincipalOrder">
+<a class="viewcode-back" href="../techDoc.html#linearOrders.PrincipalOrder">[docs]</a>
+<span class="k">class</span> <span class="nc">PrincipalOrder</span><span class="p">(</span><span class="n">LinearOrder</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    instantiates the order from the scores obtained by the first</span>
 <span class="sd">    princiapl axis of the eigen deomposition of the covariance of the</span>
@@ -1829,6 +1906,7 @@
             <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Principal Order = &#39;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">computeOrder</span><span class="p">())</span>
             <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;principal ordered relation table:&#39;</span><span class="p">)</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">showRelationTable</span><span class="p">()</span></div>
+
 
 <span class="c1">##################################################### </span>
 <span class="c1">#----------test  linearOrders module classes  ----------------</span>
