@@ -126,10 +126,10 @@
 <span class="c1">#from multiprocessing import Process, Lock,\</span>
 <span class="c1">#                        active_children, cpu_count</span>
 <span class="kn">import</span> <span class="nn">multiprocessing</span> <span class="k">as</span> <span class="nn">mp</span>
-<span class="n">mpctx</span> <span class="o">=</span> <span class="n">mp</span><span class="o">.</span><span class="n">get_context</span><span class="p">(</span><span class="s1">&#39;spawn&#39;</span><span class="p">)</span>
-<span class="n">Process</span> <span class="o">=</span> <span class="n">mpctx</span><span class="o">.</span><span class="n">Process</span>
-<span class="n">active_children</span> <span class="o">=</span> <span class="n">mpctx</span><span class="o">.</span><span class="n">active_children</span>
-<span class="n">cpu_count</span> <span class="o">=</span> <span class="n">mpctx</span><span class="o">.</span><span class="n">cpu_count</span>
+<span class="c1"># mpctx = mp.get_context(&#39;spawn&#39;)</span>
+<span class="c1"># Process = mpctx.Process</span>
+<span class="c1"># active_children = mpctx.active_children</span>
+<span class="c1"># cpu_count = mpctx.cpu_count</span>
 
 <span class="c1">#-------------------------------------------</span>
         
@@ -311,6 +311,7 @@
     <span class="k">def</span> <span class="nf">computeMarginalObjectivesVersusGlobalRankingCorrelations</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">ranking</span><span class="p">,</span>
                                                            <span class="n">Sorted</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span><span class="n">ValuedCorrelation</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
                                                           <span class="n">Threading</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span><span class="n">nbrCores</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+                                                                 <span class="n">startMethod</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
                                                           <span class="n">Comments</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Method for computing correlations between each individual objective&#39;s outranking relation and the given global ranking relation.</span>
@@ -365,7 +366,9 @@
             <span class="c1">#from multiprocessing import Pool</span>
             <span class="c1">#from os import cpu_count</span>
             <span class="kn">import</span> <span class="nn">multiprocessing</span> <span class="k">as</span> <span class="nn">mp</span>
-            <span class="n">mpctx</span> <span class="o">=</span> <span class="n">mp</span><span class="o">.</span><span class="n">get_context</span><span class="p">(</span><span class="s1">&#39;spawn&#39;</span><span class="p">)</span>
+            <span class="k">if</span> <span class="n">startMethod</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+                <span class="n">startMethod</span> <span class="o">=</span> <span class="s1">&#39;spawn&#39;</span>
+            <span class="n">mpctx</span> <span class="o">=</span> <span class="n">mp</span><span class="o">.</span><span class="n">get_context</span><span class="p">(</span><span class="n">startMethod</span><span class="p">)</span>
             <span class="n">Pool</span> <span class="o">=</span> <span class="n">mpctx</span><span class="o">.</span><span class="n">Pool</span>
             <span class="n">cpu_count</span> <span class="o">=</span> <span class="n">mpctx</span><span class="o">.</span><span class="n">cpu_count</span>
 
@@ -469,6 +472,7 @@
                     <span class="n">ranking</span><span class="p">,</span>
                     <span class="n">Sorted</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span><span class="n">ValuedCorrelation</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
                     <span class="n">Threading</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span><span class="n">nbrCores</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+                    <span class="n">startMethod</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
                     <span class="n">Comments</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Method for computing correlations between each individual criterion relation with the corresponding global ranking relation.</span>
@@ -494,7 +498,9 @@
             <span class="c1">#from multiprocessing import Pool</span>
             <span class="c1">#from os import cpu_count</span>
             <span class="kn">import</span> <span class="nn">multiprocessing</span> <span class="k">as</span> <span class="nn">mp</span>
-            <span class="n">mpctx</span> <span class="o">=</span> <span class="n">mp</span><span class="o">.</span><span class="n">get_context</span><span class="p">(</span><span class="s1">&#39;spawn&#39;</span><span class="p">)</span>
+            <span class="k">if</span> <span class="n">startMethod</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+                <span class="n">startMethod</span> <span class="o">=</span> <span class="s1">&#39;spawn&#39;</span>
+            <span class="n">mpctx</span> <span class="o">=</span> <span class="n">mp</span><span class="o">.</span><span class="n">get_context</span><span class="p">(</span><span class="n">startMethod</span><span class="p">)</span>
             <span class="n">Pool</span> <span class="o">=</span> <span class="n">mpctx</span><span class="o">.</span><span class="n">Pool</span>
             <span class="n">cpu_count</span> <span class="o">=</span> <span class="n">mpctx</span><span class="o">.</span><span class="n">cpu_count</span>
 
@@ -560,6 +566,7 @@
 <a class="viewcode-back" href="../techDoc.html#outrankingDigraphs.OutrankingDigraph.computeMarginalVersusGlobalOutrankingCorrelations">[docs]</a>
     <span class="k">def</span> <span class="nf">computeMarginalVersusGlobalOutrankingCorrelations</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">Sorted</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span><span class="n">ValuedCorrelation</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
                                                           <span class="n">Threading</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span><span class="n">nbrCores</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+                                                          <span class="n">startMethod</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
                                                           <span class="n">Comments</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Method for computing correlations between each individual criterion relation with the corresponding</span>
@@ -585,7 +592,9 @@
             <span class="c1">#from multiprocessing import Pool</span>
             <span class="c1">#from os import cpu_count</span>
             <span class="kn">import</span> <span class="nn">multiprocessing</span> <span class="k">as</span> <span class="nn">mp</span>
-            <span class="n">mpctx</span> <span class="o">=</span> <span class="n">mp</span><span class="o">.</span><span class="n">get_context</span><span class="p">(</span><span class="s1">&#39;spawn&#39;</span><span class="p">)</span>
+            <span class="k">if</span> <span class="n">startMethod</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+                <span class="n">startMethod</span> <span class="o">=</span> <span class="s1">&#39;spawn&#39;</span>
+            <span class="n">mpctx</span> <span class="o">=</span> <span class="n">mp</span><span class="o">.</span><span class="n">get_context</span><span class="p">(</span><span class="n">startMethod</span><span class="p">)</span>
             <span class="n">Pool</span> <span class="o">=</span> <span class="n">mpctx</span><span class="o">.</span><span class="n">Pool</span>
             <span class="n">cpu_count</span> <span class="o">=</span> <span class="n">mpctx</span><span class="o">.</span><span class="n">cpu_count</span>
 
@@ -4134,17 +4143,19 @@
 <span class="sd">          are stored in self.vetos and self.negativeVetos slots,</span>
 <span class="sd">          as well the counts of large performance differences in self.largePerformanceDifferencesCount slot.</span>
 <span class="sd">        * Threading: False by default. Allows to profit from SMP machines via the Python multiprocessing module.</span>
-<span class="sd">          Mind that when using this option when running python from script files, the main program entry has to be protected</span>
-<span class="sd">          with the *__name__==&#39;__main__&#39;* test.</span>
+<span class="sd">        * startMethod: &#39;spawn&#39; (default), &#39;forkserver&#39; or &#39;fork&#39; (not safe against dead locks)</span>
 <span class="sd">        * nbrCores: controls the maximal number of cores that will be used in the multiprocessing phases.</span>
-<span class="sd">          If None is given, the os.cpu_count method is used in order to determine the number of availble cores on the SMP machine.</span>
+<span class="sd">          If None is given, the os.cpu_count method is used in order to determine the number of available CPU cores on the SMP machine.</span>
 
 <span class="sd">   .. warning:: The multiprocessing :py:class:`~outrankingDigraphs.BipolarOutrankingDigraph` constructor uses</span>
-<span class="sd">        the spwan start-mathod for threading. In a python script,</span>
+<span class="sd">        by default the &#39;spawn&#39; start-mathod for threading.</span>
+<span class="sd">        When not using the &#39;fork&#39; start method in a python script file,</span>
 <span class="sd">        the main entry code must hence be protected with the __name__==&#39;__main__&#39; test</span>
+<span class="sd">        in order to avoid a recursive re-execution of the whole script.</span>
 <span class="sd">        (see the documentation of the :py:mod:`multiprocessing` module.</span>
 
-<span class="sd">        If Threading is True, WithConcordanceRelation and WithVetoCounts flags are automatically set both to False.</span>
+<span class="sd">        If Threading is *True*, *WithConcordanceRelation* and *WithVetoCounts* flags</span>
+<span class="sd">        are automatically set both to False.</span>
 <span class="sd">    </span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="k">def</span> <span class="fm">__repr__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
@@ -4192,7 +4203,7 @@
         <span class="k">try</span><span class="p">:</span>
             <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">nbrThreads</span> <span class="o">&gt;</span> <span class="mi">1</span><span class="p">:</span>
                 <span class="n">reprString</span> <span class="o">+=</span> <span class="s1">&#39;Threads          : </span><span class="si">%d</span><span class="se">\n</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="bp">self</span><span class="o">.</span><span class="n">nbrThreads</span>
-                <span class="n">reprString</span> <span class="o">+=</span> <span class="s1">&#39;Start method     : </span><span class="si">%s</span><span class="se">\n</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="s1">&#39;spawn&#39;</span>
+                <span class="n">reprString</span> <span class="o">+=</span> <span class="s1">&#39;Start method     : </span><span class="si">%s</span><span class="se">\n</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="bp">self</span><span class="o">.</span><span class="n">startMethod</span>
         <span class="k">except</span><span class="p">:</span>
             <span class="k">pass</span>
         <span class="n">reprString</span> <span class="o">+=</span> <span class="s1">&#39;Total time       : </span><span class="si">%.5f</span><span class="se">\n</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="n">val1</span>
@@ -4213,6 +4224,7 @@
                  <span class="n">CopyPerfTab</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
                  <span class="n">BigData</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
                  <span class="n">Threading</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+                 <span class="n">startMethod</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
                  <span class="n">tempDir</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
                  <span class="n">WithConcordanceRelation</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
                  <span class="n">WithVetoCounts</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
@@ -4238,6 +4250,7 @@
         <span class="k">if</span> <span class="n">Threading</span><span class="p">:</span>
             <span class="n">WithConcordanceRelation</span> <span class="o">=</span> <span class="kc">False</span>
             <span class="n">WithVetoCounts</span> <span class="o">=</span> <span class="kc">False</span>
+
             
         <span class="c1"># transfering the performance tableau data to self</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="s1">&#39;rel_&#39;</span> <span class="o">+</span> <span class="n">perfTab</span><span class="o">.</span><span class="n">name</span>
@@ -4413,6 +4426,7 @@
                                                 <span class="n">hasBipolarVeto</span><span class="o">=</span><span class="n">hasBipolarVeto</span><span class="p">,</span>\
                                                 <span class="n">hasSymmetricThresholds</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>\
                                                 <span class="n">Threading</span><span class="o">=</span><span class="n">Threading</span><span class="p">,</span>\
+                                                <span class="n">startMethod</span><span class="o">=</span><span class="n">startMethod</span><span class="p">,</span>\
                                                 <span class="n">tempDir</span><span class="o">=</span><span class="n">tempDir</span><span class="p">,</span>\
                                                 <span class="n">WithConcordanceRelation</span><span class="o">=</span><span class="n">WithConcordanceRelation</span><span class="p">,</span>\
                                                 <span class="n">WithVetoCounts</span><span class="o">=</span><span class="n">WithVetoCounts</span><span class="p">,</span>\
@@ -4499,6 +4513,7 @@
                            <span class="n">Debug</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
                            <span class="n">hasSymmetricThresholds</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
                            <span class="n">Threading</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+                            <span class="n">startMethod</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
                            <span class="n">tempDir</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
                            <span class="n">WithConcordanceRelation</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
                            <span class="n">WithVetoCounts</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
@@ -4537,12 +4552,18 @@
             <span class="kn">from</span> <span class="nn">copy</span> <span class="kn">import</span> <span class="n">copy</span><span class="p">,</span> <span class="n">deepcopy</span>
             <span class="kn">from</span> <span class="nn">io</span> <span class="kn">import</span> <span class="n">BytesIO</span>
             <span class="kn">from</span> <span class="nn">pickle</span> <span class="kn">import</span> <span class="n">Pickler</span><span class="p">,</span> <span class="n">dumps</span><span class="p">,</span> <span class="n">loads</span><span class="p">,</span> <span class="n">load</span>
-            <span class="c1">#from multiprocessing import Process, Lock,\</span>
-            <span class="c1">#                            active_children, cpu_count</span>
-            <span class="c1">#Debug=True</span>
-             
+            <span class="c1"># setting default start method</span>
+            <span class="k">if</span> <span class="n">startMethod</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+                <span class="n">startMethod</span> <span class="o">=</span> <span class="s1">&#39;spawn&#39;</span>
+            <span class="n">mpctx</span> <span class="o">=</span> <span class="n">mp</span><span class="o">.</span><span class="n">get_context</span><span class="p">(</span><span class="n">startMethod</span><span class="p">)</span>
+            <span class="n">Process</span> <span class="o">=</span> <span class="n">mpctx</span><span class="o">.</span><span class="n">Process</span>
+            <span class="n">active_children</span> <span class="o">=</span> <span class="n">mpctx</span><span class="o">.</span><span class="n">active_children</span>
+            <span class="n">cpu_count</span> <span class="o">=</span> <span class="n">mpctx</span><span class="o">.</span><span class="n">cpu_count</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">startMethod</span> <span class="o">=</span> <span class="n">mpctx</span><span class="o">.</span><span class="n">get_start_method</span><span class="p">()</span>
+ 
             <span class="k">if</span> <span class="n">Comments</span><span class="p">:</span>
                 <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Threading ...&#39;</span><span class="p">)</span>
+                <span class="nb">print</span><span class="p">(</span><span class="n">startMethod</span><span class="p">)</span>
             <span class="kn">from</span> <span class="nn">tempfile</span> <span class="kn">import</span> <span class="n">TemporaryDirectory</span>
             <span class="k">with</span> <span class="n">TemporaryDirectory</span><span class="p">(</span><span class="nb">dir</span><span class="o">=</span><span class="n">tempDir</span><span class="p">)</span> <span class="k">as</span> <span class="n">tempDirName</span><span class="p">:</span>
                 <span class="kn">from</span> <span class="nn">copy</span> <span class="kn">import</span> <span class="n">copy</span><span class="p">,</span> <span class="n">deepcopy</span>
@@ -5466,7 +5487,9 @@
             <span class="c1">#from multiprocessing import Process, Lock,\</span>
             <span class="c1">#                            active_children, cpu_count</span>
             <span class="kn">import</span> <span class="nn">multiprocessing</span> <span class="k">as</span> <span class="nn">mp</span>
-            <span class="n">mpctx</span> <span class="o">=</span> <span class="n">mp</span><span class="o">.</span><span class="n">get_context</span><span class="p">(</span><span class="s1">&#39;spawn&#39;</span><span class="p">)</span>
+            <span class="k">if</span> <span class="n">startMethod</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+                <span class="n">startMethod</span> <span class="o">=</span> <span class="s1">&#39;spawn&#39;</span>
+            <span class="n">mpctx</span> <span class="o">=</span> <span class="n">mp</span><span class="o">.</span><span class="n">get_context</span><span class="p">(</span><span class="n">startMethod</span><span class="p">)</span>
             <span class="n">Process</span> <span class="o">=</span> <span class="n">mpctx</span><span class="o">.</span><span class="n">Process</span>
             <span class="n">active_children</span> <span class="o">=</span> <span class="n">mpctx</span><span class="o">.</span><span class="n">active_children</span>
             <span class="n">cpu_count</span> <span class="o">=</span> <span class="n">mpctx</span><span class="o">.</span><span class="n">cpu_count</span>
@@ -10529,7 +10552,9 @@
                                     <span class="n">numberOfCriteria</span><span class="o">=</span><span class="mi">7</span><span class="p">,</span>\
                                     <span class="n">vetoProbability</span><span class="o">=</span><span class="mf">0.2</span><span class="p">,</span>\
                                     <span class="n">seed</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
-    <span class="n">g</span> <span class="o">=</span> <span class="n">BipolarOutrankingDigraph</span><span class="p">(</span><span class="n">t</span><span class="p">,</span><span class="n">Threading</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+    <span class="n">g</span> <span class="o">=</span> <span class="n">BipolarOutrankingDigraph</span><span class="p">(</span><span class="n">t</span><span class="p">,</span><span class="n">Threading</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+                                 <span class="n">startMethod</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+                                 <span class="n">nbrCores</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span><span class="n">Comments</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
     <span class="nb">print</span><span class="p">(</span><span class="n">g</span><span class="p">)</span>
     <span class="c1">#g.showPolarisations()</span>
     <span class="c1">#g.showObjectives()</span>

@@ -2089,6 +2089,7 @@ The performance evaluations of each decision alternative on each criterion are g
                                    Correlations=False,
                                    htmlFileName=None,
                                    Threading=False,
+                                   startMethod=None,
                                    nbrOfCPUs=None,
                                    Debug=False):
         """
@@ -2165,7 +2166,7 @@ The performance evaluations of each decision alternative on each criterion are g
                                              colorLevels=colorLevels,
                                              pageTitle=pageTitle,
                                              Correlations=Correlations,
-                                             Threading=Threading,
+                                             Threading=Threading, 
                                              nbrOfCPUs=nbrOfCPUs,
                                              Debug=Debug))
         fo.close()
@@ -2291,7 +2292,8 @@ The performance evaluations of each decision alternative on each criterion are g
             else: # standard outranking model
                 if outrankingModel == 'standard':
                     from outrankingDigraphs import BipolarOutrankingDigraph
-                    g = BipolarOutrankingDigraph(self,actionsSubset=argActionsList,Normalized=True)
+                    g = BipolarOutrankingDigraph(self,actionsSubset=argActionsList,Normalized=True,
+                                                 Threading=Threading,nbrCores=nbrOfCPUs)
                 elif outrankingModel == 'confident':
                     from outrankingDigraphs import ConfidentBipolarOutrankingDigraph
                     g = ConfidentBipolarOutrankingDigraph(self,Normalized=True)
@@ -5123,22 +5125,19 @@ if __name__ == "__main__":
     randomSeed = random.randint(1,1000)
 ##    t = CircularPerformanceTableau(order=7)
 ##    t.showPerformanceTableau()
-    t = RandomCBPerformanceTableau(numberOfCriteria=21,
-                                   numberOfActions=13,
+    t = RandomCBPerformanceTableau(numberOfCriteria=13,
+                                   numberOfActions=100,
                                    weightDistribution='equiobjectives',
                                    IntegerWeights=True,
                                    NegativeWeights=False,
                                    missingDataProbability=0.05,
-                                   seed=randomSeed,
+                                   seed=1,
                                    Debug=False)
-    # t.computeOutrankingConsensusQuality()
-#     t.showPerformanceTableau()
-#     t.computeMissingDataProportion(InPercents=False,Comments=True)
-#     t.replaceNA(Decimal('-999'),Comments=True)
-#     t.computeMissingDataProportion(InPercents=False,Comments=True)
-                    
-#     t.showHTMLPerformanceHeatmap(Correlations=True,colorLevels=5,
-#                                  rankingRule='NetFlows',Transposed=False)
+
+    t.showHTMLPerformanceHeatmap(Correlations=True,colorLevels=5,SparseModel=False,
+                                  rankingRule='NetFlows',Transposed=False,
+                                 outrankingModel='standard',
+                                 Threading=False,nbrOfCPUs=4)
 # ##    t.showHTMLPerformanceHeatmap(outrankingModel='this',
 # ##                                   Correlations=True,colorLevels=5,
 # ##                                rankingRule='NetFlows',Transposed=False)

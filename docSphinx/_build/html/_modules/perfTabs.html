@@ -2311,6 +2311,7 @@
                                    <span class="n">Correlations</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
                                    <span class="n">htmlFileName</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
                                    <span class="n">Threading</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+                                   <span class="n">startMethod</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
                                    <span class="n">nbrOfCPUs</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
                                    <span class="n">Debug</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
@@ -2387,7 +2388,7 @@
                                              <span class="n">colorLevels</span><span class="o">=</span><span class="n">colorLevels</span><span class="p">,</span>
                                              <span class="n">pageTitle</span><span class="o">=</span><span class="n">pageTitle</span><span class="p">,</span>
                                              <span class="n">Correlations</span><span class="o">=</span><span class="n">Correlations</span><span class="p">,</span>
-                                             <span class="n">Threading</span><span class="o">=</span><span class="n">Threading</span><span class="p">,</span>
+                                             <span class="n">Threading</span><span class="o">=</span><span class="n">Threading</span><span class="p">,</span> 
                                              <span class="n">nbrOfCPUs</span><span class="o">=</span><span class="n">nbrOfCPUs</span><span class="p">,</span>
                                              <span class="n">Debug</span><span class="o">=</span><span class="n">Debug</span><span class="p">))</span>
         <span class="n">fo</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
@@ -2514,7 +2515,8 @@
             <span class="k">else</span><span class="p">:</span> <span class="c1"># standard outranking model</span>
                 <span class="k">if</span> <span class="n">outrankingModel</span> <span class="o">==</span> <span class="s1">&#39;standard&#39;</span><span class="p">:</span>
                     <span class="kn">from</span> <span class="nn">outrankingDigraphs</span> <span class="kn">import</span> <span class="n">BipolarOutrankingDigraph</span>
-                    <span class="n">g</span> <span class="o">=</span> <span class="n">BipolarOutrankingDigraph</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">actionsSubset</span><span class="o">=</span><span class="n">argActionsList</span><span class="p">,</span><span class="n">Normalized</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+                    <span class="n">g</span> <span class="o">=</span> <span class="n">BipolarOutrankingDigraph</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">actionsSubset</span><span class="o">=</span><span class="n">argActionsList</span><span class="p">,</span><span class="n">Normalized</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+                                                 <span class="n">Threading</span><span class="o">=</span><span class="n">Threading</span><span class="p">,</span><span class="n">nbrCores</span><span class="o">=</span><span class="n">nbrOfCPUs</span><span class="p">)</span>
                 <span class="k">elif</span> <span class="n">outrankingModel</span> <span class="o">==</span> <span class="s1">&#39;confident&#39;</span><span class="p">:</span>
                     <span class="kn">from</span> <span class="nn">outrankingDigraphs</span> <span class="kn">import</span> <span class="n">ConfidentBipolarOutrankingDigraph</span>
                     <span class="n">g</span> <span class="o">=</span> <span class="n">ConfidentBipolarOutrankingDigraph</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">Normalized</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
@@ -5407,22 +5409,19 @@
     <span class="n">randomSeed</span> <span class="o">=</span> <span class="n">random</span><span class="o">.</span><span class="n">randint</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">1000</span><span class="p">)</span>
 <span class="c1">##    t = CircularPerformanceTableau(order=7)</span>
 <span class="c1">##    t.showPerformanceTableau()</span>
-    <span class="n">t</span> <span class="o">=</span> <span class="n">RandomCBPerformanceTableau</span><span class="p">(</span><span class="n">numberOfCriteria</span><span class="o">=</span><span class="mi">21</span><span class="p">,</span>
-                                   <span class="n">numberOfActions</span><span class="o">=</span><span class="mi">13</span><span class="p">,</span>
+    <span class="n">t</span> <span class="o">=</span> <span class="n">RandomCBPerformanceTableau</span><span class="p">(</span><span class="n">numberOfCriteria</span><span class="o">=</span><span class="mi">13</span><span class="p">,</span>
+                                   <span class="n">numberOfActions</span><span class="o">=</span><span class="mi">100</span><span class="p">,</span>
                                    <span class="n">weightDistribution</span><span class="o">=</span><span class="s1">&#39;equiobjectives&#39;</span><span class="p">,</span>
                                    <span class="n">IntegerWeights</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
                                    <span class="n">NegativeWeights</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
                                    <span class="n">missingDataProbability</span><span class="o">=</span><span class="mf">0.05</span><span class="p">,</span>
-                                   <span class="n">seed</span><span class="o">=</span><span class="n">randomSeed</span><span class="p">,</span>
+                                   <span class="n">seed</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span>
                                    <span class="n">Debug</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
-    <span class="c1"># t.computeOutrankingConsensusQuality()</span>
-<span class="c1">#     t.showPerformanceTableau()</span>
-<span class="c1">#     t.computeMissingDataProportion(InPercents=False,Comments=True)</span>
-<span class="c1">#     t.replaceNA(Decimal(&#39;-999&#39;),Comments=True)</span>
-<span class="c1">#     t.computeMissingDataProportion(InPercents=False,Comments=True)</span>
-                    
-<span class="c1">#     t.showHTMLPerformanceHeatmap(Correlations=True,colorLevels=5,</span>
-<span class="c1">#                                  rankingRule=&#39;NetFlows&#39;,Transposed=False)</span>
+
+    <span class="n">t</span><span class="o">.</span><span class="n">showHTMLPerformanceHeatmap</span><span class="p">(</span><span class="n">Correlations</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span><span class="n">colorLevels</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span><span class="n">SparseModel</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+                                  <span class="n">rankingRule</span><span class="o">=</span><span class="s1">&#39;NetFlows&#39;</span><span class="p">,</span><span class="n">Transposed</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+                                 <span class="n">outrankingModel</span><span class="o">=</span><span class="s1">&#39;standard&#39;</span><span class="p">,</span>
+                                 <span class="n">Threading</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span><span class="n">nbrOfCPUs</span><span class="o">=</span><span class="mi">4</span><span class="p">)</span>
 <span class="c1"># ##    t.showHTMLPerformanceHeatmap(outrankingModel=&#39;this&#39;,</span>
 <span class="c1"># ##                                   Correlations=True,colorLevels=5,</span>
 <span class="c1"># ##                                rankingRule=&#39;NetFlows&#39;,Transposed=False)</span>

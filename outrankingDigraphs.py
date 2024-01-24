@@ -31,10 +31,10 @@ from pickle import Pickler, dumps, loads, load
 #from multiprocessing import Process, Lock,\
 #                        active_children, cpu_count
 import multiprocessing as mp
-mpctx = mp.get_context('spawn')
-Process = mpctx.Process
-active_children = mpctx.active_children
-cpu_count = mpctx.cpu_count
+# mpctx = mp.get_context('spawn')
+# Process = mpctx.Process
+# active_children = mpctx.active_children
+# cpu_count = mpctx.cpu_count
 
 #-------------------------------------------
         
@@ -197,6 +197,7 @@ class OutrankingDigraph(Digraph,PerformanceTableau):
     def computeMarginalObjectivesVersusGlobalRankingCorrelations(self,ranking,
                                                            Sorted=True,ValuedCorrelation=False,
                                                           Threading=False,nbrCores=None,
+                                                                 startMethod=None,
                                                           Comments=False):
         """
         Method for computing correlations between each individual objective's outranking relation and the given global ranking relation.
@@ -251,7 +252,9 @@ class OutrankingDigraph(Digraph,PerformanceTableau):
             #from multiprocessing import Pool
             #from os import cpu_count
             import multiprocessing as mp
-            mpctx = mp.get_context('spawn')
+            if startMethod is None:
+                startMethod = 'spawn'
+            mpctx = mp.get_context(startMethod)
             Pool = mpctx.Pool
             cpu_count = mpctx.cpu_count
 
@@ -352,6 +355,7 @@ class OutrankingDigraph(Digraph,PerformanceTableau):
                     ranking,
                     Sorted=True,ValuedCorrelation=False,
                     Threading=False,nbrCores=None,
+                    startMethod=None,
                     Comments=False):
         """
         Method for computing correlations between each individual criterion relation with the corresponding global ranking relation.
@@ -377,7 +381,9 @@ class OutrankingDigraph(Digraph,PerformanceTableau):
             #from multiprocessing import Pool
             #from os import cpu_count
             import multiprocessing as mp
-            mpctx = mp.get_context('spawn')
+            if startMethod is None:
+                startMethod = 'spawn'
+            mpctx = mp.get_context(startMethod)
             Pool = mpctx.Pool
             cpu_count = mpctx.cpu_count
 
@@ -437,6 +443,7 @@ class OutrankingDigraph(Digraph,PerformanceTableau):
 
     def computeMarginalVersusGlobalOutrankingCorrelations(self,Sorted=True,ValuedCorrelation=False,
                                                           Threading=False,nbrCores=None,
+                                                          startMethod=None,
                                                           Comments=False):
         """
         Method for computing correlations between each individual criterion relation with the corresponding
@@ -462,7 +469,9 @@ class OutrankingDigraph(Digraph,PerformanceTableau):
             #from multiprocessing import Pool
             #from os import cpu_count
             import multiprocessing as mp
-            mpctx = mp.get_context('spawn')
+            if startMethod is None:
+                startMethod = 'spawn'
+            mpctx = mp.get_context(startMethod)
             Pool = mpctx.Pool
             cpu_count = mpctx.cpu_count
 
@@ -3890,17 +3899,19 @@ class BipolarOutrankingDigraph(OutrankingDigraph):
           are stored in self.vetos and self.negativeVetos slots,
           as well the counts of large performance differences in self.largePerformanceDifferencesCount slot.
         * Threading: False by default. Allows to profit from SMP machines via the Python multiprocessing module.
-          Mind that when using this option when running python from script files, the main program entry has to be protected
-          with the *__name__=='__main__'* test.
+        * startMethod: 'spawn' (default), 'forkserver' or 'fork' (not safe against dead locks)
         * nbrCores: controls the maximal number of cores that will be used in the multiprocessing phases.
-          If None is given, the os.cpu_count method is used in order to determine the number of availble cores on the SMP machine.
+          If None is given, the os.cpu_count method is used in order to determine the number of available CPU cores on the SMP machine.
 
    .. warning:: The multiprocessing :py:class:`~outrankingDigraphs.BipolarOutrankingDigraph` constructor uses
-        the spwan start-mathod for threading. In a python script,
+        by default the 'spawn' start-mathod for threading.
+        When not using the 'fork' start method in a python script file,
         the main entry code must hence be protected with the __name__=='__main__' test
+        in order to avoid a recursive re-execution of the whole script.
         (see the documentation of the :py:mod:`multiprocessing` module.
 
-        If Threading is True, WithConcordanceRelation and WithVetoCounts flags are automatically set both to False.
+        If Threading is *True*, *WithConcordanceRelation* and *WithVetoCounts* flags
+        are automatically set both to False.
     
     """
     def __repr__(self):
@@ -3948,7 +3959,7 @@ class BipolarOutrankingDigraph(OutrankingDigraph):
         try:
             if self.nbrThreads > 1:
                 reprString += 'Threads          : %d\n' % self.nbrThreads
-                reprString += 'Start method     : %s\n' % 'spawn'
+                reprString += 'Start method     : %s\n' % self.startMethod
         except:
             pass
         reprString += 'Total time       : %.5f\n' % val1
@@ -3969,6 +3980,7 @@ class BipolarOutrankingDigraph(OutrankingDigraph):
                  CopyPerfTab=True,
                  BigData=False,
                  Threading=False,
+                 startMethod=None,
                  tempDir=None,
                  WithConcordanceRelation=True,
                  WithVetoCounts=True,
@@ -3994,6 +4006,7 @@ class BipolarOutrankingDigraph(OutrankingDigraph):
         if Threading:
             WithConcordanceRelation = False
             WithVetoCounts = False
+
             
         # transfering the performance tableau data to self
         self.name = 'rel_' + perfTab.name
@@ -4169,6 +4182,7 @@ class BipolarOutrankingDigraph(OutrankingDigraph):
                                                 hasBipolarVeto=hasBipolarVeto,\
                                                 hasSymmetricThresholds=True,\
                                                 Threading=Threading,\
+                                                startMethod=startMethod,\
                                                 tempDir=tempDir,\
                                                 WithConcordanceRelation=WithConcordanceRelation,\
                                                 WithVetoCounts=WithVetoCounts,\
@@ -4252,6 +4266,7 @@ class BipolarOutrankingDigraph(OutrankingDigraph):
                            Debug=False,
                            hasSymmetricThresholds=True,
                            Threading=False,
+                            startMethod=None,
                            tempDir=None,
                            WithConcordanceRelation=True,
                            WithVetoCounts=True,
@@ -4290,12 +4305,18 @@ class BipolarOutrankingDigraph(OutrankingDigraph):
             from copy import copy, deepcopy
             from io import BytesIO
             from pickle import Pickler, dumps, loads, load
-            #from multiprocessing import Process, Lock,\
-            #                            active_children, cpu_count
-            #Debug=True
-             
+            # setting default start method
+            if startMethod is None:
+                startMethod = 'spawn'
+            mpctx = mp.get_context(startMethod)
+            Process = mpctx.Process
+            active_children = mpctx.active_children
+            cpu_count = mpctx.cpu_count
+            self.startMethod = mpctx.get_start_method()
+ 
             if Comments:
                 print('Threading ...')
+                print(startMethod)
             from tempfile import TemporaryDirectory
             with TemporaryDirectory(dir=tempDir) as tempDirName:
                 from copy import copy, deepcopy
@@ -5209,7 +5230,9 @@ class _BipolarOutrankingDigraph(OutrankingDigraph):
             #from multiprocessing import Process, Lock,\
             #                            active_children, cpu_count
             import multiprocessing as mp
-            mpctx = mp.get_context('spawn')
+            if startMethod is None:
+                startMethod = 'spawn'
+            mpctx = mp.get_context(startMethod)
             Process = mpctx.Process
             active_children = mpctx.active_children
             cpu_count = mpctx.cpu_count
@@ -10191,8 +10214,13 @@ if __name__ == "__main__":
                                     numberOfCriteria=7,\
                                     vetoProbability=0.2,\
                                     seed=1)
-    g = BipolarOutrankingDigraph(t,Threading=True)
+    g = BipolarOutrankingDigraph(t,Threading=True,
+                                 startMethod=None,
+                                 nbrCores=10,Comments=True)
     print(g)
+    t0 = time()
+    g.showHTMLPerformanceHeatmap(Correlations=True,Threading=False)
+    print(time()-t0)
     #g.showPolarisations()
     #g.showObjectives()
     # ranking = g.computeNetFlowsRanking()
