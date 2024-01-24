@@ -590,7 +590,7 @@ class IntegerQuantilesSortingDigraph(IntegerBipolarOutrankingDigraph):
                            bint Debug=False,\
                            bint hasSymmetricThresholds=True,\
                            bint Threading=False,\
-                           startMethod='spawn',\
+                           startMethod=None,\
                            tempDir=None,\
                            bint WithConcordanceRelation=False,\
                            bint WithVetoCounts=False,\
@@ -699,6 +699,8 @@ class IntegerQuantilesSortingDigraph(IntegerBipolarOutrankingDigraph):
             from io import BytesIO
             from pickle import Pickler, dumps, loads, load
             import multiprocessing as mp
+            if startMethod is None:
+                startMethod = 'spawn'
             mpctx = mp.get_context(startMethod)
             self.startMethod = mpctx.get_start_method()
             #print("Start method: \'%s\'" % self.startMethod)
@@ -723,10 +725,11 @@ class IntegerQuantilesSortingDigraph(IntegerBipolarOutrankingDigraph):
                 # fo.write(dumps(self,-1))
                 # fo.close()
 
-                if nbrCores == None:
+                if nbrCores is None:
                     nbrCores = cpu_count()
                 if Comments:
                     print('Nbr of cores = ',nbrCores)
+                
                 # set number of threads
                 self.nbrThreads = nbrCores
                 actions2Split = array('i')
