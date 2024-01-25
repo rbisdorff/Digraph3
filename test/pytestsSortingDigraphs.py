@@ -12,7 +12,8 @@ from transitiveDigraphs import *
 
 def testDefaultSortingDigraph():
     print('*---- testing default instantiation of the SortingDigraph Class ---*')
-    s = SortingDigraph(isRobust=False)
+    s = SortingDigraph(isRobust=False,Threading=True,startMethod='forkserver',nbrCores=8)
+    print(s)
     s.showCriteriaCategoryLimits()
     s.showActionsSortingResult()
     actions = list(s.getActionsKeys())

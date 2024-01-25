@@ -10545,19 +10545,32 @@
     
     <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;*-------- Testing classes and methods -------&#39;</span><span class="p">)</span>
 
-    <span class="kn">from</span> <span class="nn">randomPerfTabs</span> <span class="kn">import</span> <span class="n">Random3ObjectivesPerformanceTableau</span>
-    <span class="n">t</span> <span class="o">=</span> <span class="n">Random3ObjectivesPerformanceTableau</span><span class="p">(</span>
-                                    <span class="n">numberOfActions</span><span class="o">=</span><span class="mi">500</span><span class="p">,</span>\
-                                    <span class="n">numberOfCriteria</span><span class="o">=</span><span class="mi">7</span><span class="p">,</span>\
-                                    <span class="n">vetoProbability</span><span class="o">=</span><span class="mf">0.2</span><span class="p">,</span>\
-                                    <span class="n">seed</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
-    <span class="n">g</span> <span class="o">=</span> <span class="n">BipolarOutrankingDigraph</span><span class="p">(</span><span class="n">t</span><span class="p">,</span><span class="n">Threading</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
-                                 <span class="n">startMethod</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
-                                 <span class="n">nbrCores</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span><span class="n">Comments</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+    <span class="n">t</span> <span class="o">=</span> <span class="n">RandomCBPerformanceTableau</span><span class="p">(</span><span class="n">numberOfActions</span><span class="o">=</span><span class="mi">50</span><span class="p">,</span>\
+                                   <span class="n">numberOfCriteria</span><span class="o">=</span><span class="mi">21</span><span class="p">,</span>\
+                                   <span class="n">weightDistribution</span><span class="o">=</span><span class="s1">&#39;equiobjectives&#39;</span><span class="p">,</span>
+                                   <span class="n">seed</span><span class="o">=</span><span class="mi">100</span><span class="p">)</span> 
+    <span class="n">g</span> <span class="o">=</span> <span class="n">BipolarOutrankingDigraph</span><span class="p">(</span><span class="n">t</span><span class="p">,</span><span class="n">Normalized</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span><span class="n">Threading</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span><span class="n">startMethod</span><span class="o">=</span><span class="s1">&#39;spawn&#39;</span><span class="p">)</span>
     <span class="nb">print</span><span class="p">(</span><span class="n">g</span><span class="p">)</span>
+    <span class="n">Threading</span> <span class="o">=</span> <span class="kc">True</span>
     <span class="n">t0</span> <span class="o">=</span> <span class="n">time</span><span class="p">()</span>
-    <span class="n">g</span><span class="o">.</span><span class="n">showHTMLPerformanceHeatmap</span><span class="p">(</span><span class="n">Correlations</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span><span class="n">Threading</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+    <span class="n">criteriaCorrelations</span> <span class="o">=</span> <span class="n">g</span><span class="o">.</span><span class="n">computeMarginalVersusGlobalOutrankingCorrelations</span><span class="p">(</span><span class="n">Threading</span><span class="o">=</span><span class="n">Threading</span><span class="p">,</span><span class="n">startMethod</span><span class="o">=</span><span class="s1">&#39;spawn&#39;</span><span class="p">)</span>
     <span class="nb">print</span><span class="p">(</span><span class="n">time</span><span class="p">()</span><span class="o">-</span><span class="n">t0</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">criteriaCorrelations</span><span class="p">)</span>
+    
+    <span class="c1"># from randomPerfTabs import Random3ObjectivesPerformanceTableau</span>
+    <span class="c1"># t = Random3ObjectivesPerformanceTableau(</span>
+    <span class="c1">#                                 numberOfActions=500,\</span>
+    <span class="c1">#                                 numberOfCriteria=7,\</span>
+    <span class="c1">#                                 vetoProbability=0.2,\</span>
+    <span class="c1">#                                 seed=1)</span>
+    <span class="c1"># g = BipolarOutrankingDigraph(t,Threading=True,</span>
+    <span class="c1">#                              startMethod=None,</span>
+    <span class="c1">#                              nbrCores=10,Comments=True)</span>
+    <span class="c1"># print(g)</span>
+    <span class="c1"># t0 = time()</span>
+    <span class="c1"># g.showHTMLPerformanceHeatmap(Correlations=True,Threading=False)</span>
+    <span class="c1"># print(time()-t0)</span>
+
     <span class="c1">#g.showPolarisations()</span>
     <span class="c1">#g.showObjectives()</span>
     <span class="c1"># ranking = g.computeNetFlowsRanking()</span>

@@ -32,10 +32,10 @@ from outrankingDigraphs import *
 from sortingDigraphs import *
 #from multiprocessing import Process, active_children
 import multiprocessing as mp
-mpctx = mp.get_context('spawn')
-Process = mpctx.Process
-active_children = mpctx.active_children
-cpu_count = mpctx.cpu_count
+#mpctx = mp.get_context('spawn')
+#Process = mpctx.Process
+#active_children = mpctx.active_children
+#cpu_count = mpctx.cpu_count
 
 # multiprocessing thread for SortingDigraph class
 
@@ -184,6 +184,7 @@ class SortingDigraph(BipolarOutrankingDigraph):
                  LowerClosed=True,
                  StoreSorting=True,
                  Threading=False,
+                 startMethod=None,
                  tempDir=None,
                  nbrCores=None,
                  Debug=False):
@@ -379,29 +380,38 @@ class SortingDigraph(BipolarOutrankingDigraph):
             Med = (Max + Min)/Decimal('2.0')
             self.valuationdomain = {'min': Min, 'med':Med ,'max':Max }
             if LowerClosed:
-                relation = BipolarOutrankingDigraph._constructRelationWithThreading(self,criteria,
-                                                       self.evaluation,
-                                                       initial=actionsOrig,
-                                                       terminal=profileLimits,
-                                                       hasNoVeto=hasNoVeto,
-                                                       hasBipolarVeto=True,
-                                                        Threading=Threading,
-                                                        tempDir=tempDir,
-                                                        WithConcordanceRelation=False,
-                                                        WithVetoCounts=False,
-                                                        Debug=Debug)
+                relation = \
+                    BipolarOutrankingDigraph._constructRelationWithThreading(
+                        self,criteria,
+                        self.evaluation,
+                        initial=actionsOrig,
+                        terminal=profileLimits,
+                        hasNoVeto=hasNoVeto,
+                        hasBipolarVeto=True,
+                        Threading=Threading,
+                        startMethod=startMethod,
+                        nbrCores=nbrCores,
+                        tempDir=tempDir,
+                        WithConcordanceRelation=False,
+                        WithVetoCounts=False,
+                        Comments=False,
+                        Debug=Debug)
             else:
-                relation = BipolarOutrankingDigraph._constructRelationWithThreading(self,criteria,
-                                                       self.evaluation,
-                                                       terminal=actionsOrig,
-                                                       initial=profileLimits,
-                                                       hasNoVeto=hasNoVeto,
-                                                        hasBipolarVeto=True,
-                                                        Threading=Threading,
-                                                        tempDir=tempDir,
-                                                        WithConcordanceRelation=False,
-                                                        WithVetoCounts=False,
-                                                        Debug=Debug)
+                relation = \
+                    BipolarOutrankingDigraph._constructRelationWithThreading(
+                        self,criteria,
+                        self.evaluation,
+                        terminal=actionsOrig,
+                        initial=profileLimits,
+                        hasNoVeto=hasNoVeto,
+                        hasBipolarVeto=True,
+                        Threading=Threading,
+                        startMethod=startMethod,
+                        nbrCores=nbrCores,
+                        tempDir=tempDir,
+                        WithConcordanceRelation=False,
+                        WithVetoCounts=False,
+                        Debug=Debug)
             if LowerClosed:
                 for x in actionsOrig.keys():
                     rx = relation[x]
@@ -469,8 +479,12 @@ class SortingDigraph(BipolarOutrankingDigraph):
         try:
             String += 'Threads             : %d\n' % self.nbrThreads
         except:
-            self.nbrThreads = 1
+            self.nbrThreads = 0
             String += 'Threads             : %d\n' % self.nbrThreads
+        try:
+            String += 'Start method        : %s\n' % self.startMethod
+        except:
+            pass
         String += 'Total time          : %.5f\n' % self.runTimes['totalTime']
         String += 'Data input          : %.5f\n' % self.runTimes['dataInput']
         String += 'Compute profiles    : %.5f\n' % self.runTimes['computeProfiles']
@@ -1602,6 +1616,7 @@ class QuantilesSortingDigraph(SortingDigraph):
                  StoreSorting=False,
                  CopyPerfTab=False,
                  Threading=False,
+                 startMethod=None,
                  tempDir=None,
                  nbrCores=None,
                  nbrOfProcesses=None,
@@ -1761,7 +1776,7 @@ class QuantilesSortingDigraph(SortingDigraph):
         maxValuation = 1.0
         if CompleteOutranking:
             g = BipolarOutrankingDigraph(normPerfTab,hasNoVeto=hasNoVeto,
-                                         Threading=Threading,nbrCores=nbrCores)
+                Threading=Threading,startMethod=startMethod,nbrCores=nbrCores)
             #g.recodeValuation(minValuation,maxValuation)
             self.relationOrig = g.relation
             Min = g.valuationdomain['min']
@@ -1787,6 +1802,7 @@ class QuantilesSortingDigraph(SortingDigraph):
                                                    WithConcordanceRelation=False,
                                                    WithVetoCounts=False,       
                                                    Threading=Threading,
+                                                        startMethod=startMethod,
                                                     tempDir=tempDir,
                                                     nbrCores=nbrCores,
                                                     Comments=Comments,
@@ -1851,6 +1867,7 @@ class QuantilesSortingDigraph(SortingDigraph):
                            Debug=False,
                            hasSymmetricThresholds=True,
                            Threading=False,
+                                        startMethod=None,
                            tempDir=None,
                            WithConcordanceRelation=True,
                            WithVetoCounts=True,
@@ -1866,7 +1883,8 @@ class QuantilesSortingDigraph(SortingDigraph):
 
         if not Threading or cpu_count() < 2:
             # set parameters for non threading
-            self.nbrThreads = 1
+            self.nbrThreads = 0
+            self.startMethod = None
             Min = self.valuationdomain['min']
             Med = self.valuationdomain['med']
             Max = self.valuationdomain['max']
@@ -1946,10 +1964,14 @@ class QuantilesSortingDigraph(SortingDigraph):
             from copy import copy, deepcopy
             from io import BytesIO
             from pickle import Pickler, dumps, loads, load
-            #from multiprocessing import Process, Lock,\
-            #                            active_children, cpu_count
-            #Debug=True
-             
+            if startMethod is None:
+                startMethod = 'spawn'
+            mpctx = mp.get_context(startMethod)
+            Process = mpctx.Process
+            active_children = mpctx.active_children
+            cpu_count = mpctx.cpu_count
+            self.startMethod = mpctx.get_start_method()
+            
             if Comments:
                 print('Threading ...')
             from tempfile import TemporaryDirectory
@@ -1965,7 +1987,7 @@ class QuantilesSortingDigraph(SortingDigraph):
                 fo.close()
 
                 if nbrCores is None:
-                    nbrCores = cpu_count()
+                    nbrCores = mpctx.cpu_count()
                 if Comments:
                     print('Nbr of cpus = ',nbrCores)
                 # set number of threads
@@ -3877,8 +3899,13 @@ class LearnedQuantilesRatingDigraph(QuantilesSortingDigraph,PerformanceQuantiles
         try:
             String += 'Threads          : %d\n' % self.nbrThreads
         except:
-            self.nbrThreads = 1
+            self.nbrThreads = 0
             String += 'Threads          : %d\n' % self.nbrThreads
+        try:
+            String += 'Start method         : %s\n' % self.startMethod
+        except:
+            pass
+            
         String += 'Total time       : %.5f\n' % self.runTimes['totalTime']
         String += 'Data input       : %.5f\n' % self.runTimes['dataInput']
         String += 'Quantile classes : %.5f\n' % self.runTimes['categories']
@@ -4976,23 +5003,25 @@ if __name__ == "__main__":
 
     MP = True
     seed = 1001
-    nbrOfCPUs = 6
+    nbrOfCPUs = 12
 
-    from randomPerfTabs import RandomPerformanceTableau
-    from randomPerfTabs import RandomPerformanceGenerator as PerfTabGenerator
-    nbrActions=1000
-    nbrCrit = 13
-    tp1 = RandomCBPerformanceTableau(numberOfActions=nbrActions,
-                numberOfCriteria=nbrCrit,seed=seed,NA=-1,missingDataProbability=0.1)
-    print(tp1.NA)
-    pq1 = PerformanceQuantiles(tp1,5,LowerClosed=False,Debug=False)
-    tpg1 = PerfTabGenerator(tp1,instanceCounter=0,seed=seed)
-    newActions = tpg1.randomActions(20)
-    pq1.updateQuantiles(newActions,historySize=None)
-    nqr = LearnedQuantilesRatingDigraph(pq1,newActions,
-                                rankingRule='Copeland',
-                                WithSorting=True,Debug=False,
-                                Threading=MP,nbrOfCPUs=nbrOfCPUs)
+
+    # from randomPerfTabs import RandomPerformanceTableau
+    # from randomPerfTabs import RandomPerformanceGenerator as PerfTabGenerator
+    # nbrActions=1000
+    # nbrCrit = 13
+    # tp1 = RandomCBPerformanceTableau(numberOfActions=nbrActions,
+    #             numberOfCriteria=nbrCrit,seed=seed,NA=-1,missingDataProbability=0.1)
+    # print(tp1.NA)
+    # pq1 = PerformanceQuantiles(tp1,5,LowerClosed=False,Debug=False)
+    # tpg1 = PerfTabGenerator(tp1,instanceCounter=0,seed=seed)
+    # newActions = tpg1.randomActions(20)
+    # pq1.updateQuantiles(newActions,historySize=None)
+    # nqr = LearnedQuantilesRatingDigraph(pq1,newActions,
+    #                             rankingRule='Copeland',
+    #                                     WithSorting=True,Debug=False,Comments=True,
+    #                             Threading=MP,nbrOfCPUs=nbrOfCPUs)
+    # print(nqr)
 ##    qs = QuantilesSortingDigraph(tp1,5)
 ##    print(qs)
 ##    qs.showWeakOrder()

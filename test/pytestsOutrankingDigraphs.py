@@ -43,7 +43,7 @@ def testRobustOutrankingDigraph():
 def testPolarisedOutrankingDigraph():
     print('==>> Testing PolarisedOutrankingDigraph instantiation')
     t = RandomPerformanceTableau()
-    g = BipolarOutrankingDigraph(t,Threading=True)
+    g = BipolarOutrankingDigraph(t,Threading=True,startMethod='spawn')
     print(g.valuationdomain)
     ch = PolarisedOutrankingDigraph(g,level=0.50,AlphaCut=False,KeepValues=True)
     ch.showAll()
@@ -192,16 +192,6 @@ def testGlobalOutrankingCorrelation():
         gx.showRelationTable()
         medianKCorrelation[x] = g.bipolarKDistance(gx) 
     print('median K-Correlation:', medianKCorrelation)
-
-##def testXMCDA2RobustChoiceRecommendation():
-##    print('*----- test XMCDA2 Robust Choice Recommendation -----*')
-##    t = Random3ObjectivesPerformanceTableau(numberOfActions=5,numberOfCriteria=7,
-##                                            weightDistribution="random",weightScale=(1,1),
-##                                            IntegerWeights=True,
-##                                            commonThresholds=[(5.0,0.0),(10.0,0.0),(50.0,0.0),(60.0,0.0)],
-##                                            commonMode=['beta',0.5,None])
-##    g = OldRobustOutrankingDigraph(t)
-##    g.saveXMCDA2RubisChoiceRecommendation()
 
 def testBipolarVetos():
     print('*----- test bipolar vetos -----*')
@@ -469,10 +459,10 @@ def testComputeMarginalVersusGlobalOutrankingCorrelations():
                                    numberOfCriteria=21,\
                                    weightDistribution='equiobjectives',
                                    seed=100) 
-    g = BipolarOutrankingDigraph(t,Normalized=True,Threading=True)    
+    g = BipolarOutrankingDigraph(t,Normalized=True,Threading=True,startMethod='spawn')
     Threading = True
     t0 = time()
-    criteriaCorrelations = g.computeMarginalVersusGlobalOutrankingCorrelations(Threading=Threading)
+    criteriaCorrelations = g.computeMarginalVersusGlobalOutrankingCorrelations(Threading=Threading,startMethod='spawn')
     print(time()-t0)
     print(criteriaCorrelations)
     Threading = False

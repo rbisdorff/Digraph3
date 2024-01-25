@@ -10207,19 +10207,32 @@ if __name__ == "__main__":
     
     print('*-------- Testing classes and methods -------')
 
-    from randomPerfTabs import Random3ObjectivesPerformanceTableau
-    t = Random3ObjectivesPerformanceTableau(
-                                    numberOfActions=500,\
-                                    numberOfCriteria=7,\
-                                    vetoProbability=0.2,\
-                                    seed=1)
-    g = BipolarOutrankingDigraph(t,Threading=True,
-                                 startMethod=None,
-                                 nbrCores=10,Comments=True)
+    t = RandomCBPerformanceTableau(numberOfActions=50,\
+                                   numberOfCriteria=21,\
+                                   weightDistribution='equiobjectives',
+                                   seed=100) 
+    g = BipolarOutrankingDigraph(t,Normalized=True,Threading=True,startMethod='spawn')
     print(g)
+    Threading = True
     t0 = time()
-    g.showHTMLPerformanceHeatmap(Correlations=True,Threading=False)
+    criteriaCorrelations = g.computeMarginalVersusGlobalOutrankingCorrelations(Threading=Threading,startMethod='spawn')
     print(time()-t0)
+    print(criteriaCorrelations)
+    
+    # from randomPerfTabs import Random3ObjectivesPerformanceTableau
+    # t = Random3ObjectivesPerformanceTableau(
+    #                                 numberOfActions=500,\
+    #                                 numberOfCriteria=7,\
+    #                                 vetoProbability=0.2,\
+    #                                 seed=1)
+    # g = BipolarOutrankingDigraph(t,Threading=True,
+    #                              startMethod=None,
+    #                              nbrCores=10,Comments=True)
+    # print(g)
+    # t0 = time()
+    # g.showHTMLPerformanceHeatmap(Correlations=True,Threading=False)
+    # print(time()-t0)
+
     #g.showPolarisations()
     #g.showObjectives()
     # ranking = g.computeNetFlowsRanking()
