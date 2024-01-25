@@ -3809,28 +3809,25 @@ class _Electre3OutrankingDigraph(OutrankingDigraph):
 
 # multiprocessing thread for BipolarOutrankingDigraph class
 class _myBODGThread(Process):
-    def __init__(self, threadID,digraph,
-                 InitialSplit, tempDirName,
-                 splitActions,
-                 hasNoVeto, hasBipolarVeto,
-                 hasSymmetricThresholds, Debug):
+    def __init__(self, target,args):
         Process.__init__(self)
-        self.threadID = threadID
-        self.digraph = digraph
-        self.InitialSplit = InitialSplit
-        self.workingDirectory = tempDirName
-        self.splitActions = splitActions
-        self.hasNoVeto = hasNoVeto
-        self.hasBipolarVeto = hasBipolarVeto,
-        self.hasSymmetricThresholds = hasSymmetricThresholds,
-        self.Debug = Debug
+        self.threadID = target
+        self.digraph = args[0]
+        self.InitialSplit = args[1]
+        self.workingDirectory = args[2]
+        self.splitActions = args[3]
+        self.hasNoVeto = args[4]
+        self.hasBipolarVeto = args[5]
+        self.hasSymmetricThresholds = args[6]
+        self.Debug = args[7]
     def run(self):
         from io import BytesIO
         from pickle import Pickler, dumps, loads
         from os import chdir
         chdir(self.workingDirectory)
-##                    if Debug:
-##                        print("Starting working in %s on thread %s" % (self.workingDirectory, str(self.threadId)))
+        Debug = self.Debug
+        if Debug:
+            print("Starting working in %s on thread %s" % (self.workingDirectory, str(self.threadId)))
 ##                    fi = open('dumpSelf.py','rb')
 ##                    digraph = loads(fi.read())
 ##                    fi.close()
@@ -4391,10 +4388,12 @@ class BipolarOutrankingDigraph(OutrankingDigraph):
 ##                    spa = dumps(splitActions,-1)
 ##                    fo.write(spa)
 ##                    fo.close()
-                    splitThread = _myBODGThread(j,self,InitialSplit,
-                                           tempDirName,splitActions,
-                                           hasNoVeto,hasBipolarVeto,
-                                           hasSymmetricThresholds,Debug)
+                    splitThread = _myBODGThread(target=j,
+                                            args=(self,
+                                                  InitialSplit,
+                                                  tempDirName,splitActions,
+                                                  hasNoVeto,hasBipolarVeto,
+                                                  hasSymmetricThresholds,Debug))
                     splitThread.start()
                     
                 while active_children() != []:

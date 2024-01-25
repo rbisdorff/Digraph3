@@ -30,47 +30,48 @@ from perfTabs import *
 from randomPerfTabs import *
 from multiprocessing import Process
 
-#----------Digraph classes -----------------
-class myThread(Process):
-    def __init__(self, threadID,TempDirName,Debug):
+#-----------
+class _myThread2(Process):
+    def __init__(self, target,args):
         Process.__init__(self)
-        self.threadID = threadID
-        self.workingDirectory = tempDirName
-        self.Debug = Debug
+        self.threadID = target
+        self.workingDirectory = args[0]
+        self.Debug = args[1]
     def run(self):
         from pickle import dumps, loads
         from os import chdir
         from decimal import Decimal
         chdir(self.workingDirectory)
+        Debug = self.Debug
         #Debug=False
-        #if Debug:
-        #    print("Starting working in %s on %s" % (self.workingDirectory, self.name))
+        if Debug:
+            print("Starting working in %s on %s" % (self.workingDirectory, self.name))
         fi = open('dumpActions.py','rb')
         actionsList = loads(fi.read())
         fi.close()
-        #if Debug:
-        #    print(self.threadID,actionsList)
+        if Debug:
+            print(self.threadID,actionsList)
         fi = open('dumpRelation.py','rb')
         relation = loads(fi.read())
         fi.close()
-        #if Debug:
-        #    print(self.threadID,relation)
+        if Debug:
+            print(self.threadID,relation)
         fi = open('dumpOtherRelation.py','rb')
         otherRelation = loads(fi.read())
         fi.close()
-        #if Debug:
-        #    print(self.threadID,relation)
+        if Debug:
+            print(self.threadID,relation)
         fiName = 'splitActions-'+str(self.threadID)+'.py'
         fi = open(fiName,'rb')
         splitActions = loads(fi.read())
         fi.close()
-        #if Debug:
-        #    print(self.threadID,splitActions)
+        if Debug:
+            print(self.threadID,splitActions)
         # compute partial correlation
         correlation = Decimal('0')
         determination = Decimal('0')
         for x in splitActions:
-            grx = g.relation[x]
+            grx = relation[x]
             orx = otherRelation[x]
             for y in actionsList:
                 if x != y:
@@ -87,7 +88,7 @@ class myThread(Process):
         fo = open(foName,'wb')
         fo.write(dumps(splitCorrelation,-1))
         fo.close()
-
+ 
 class Digraph(object):
     
     """
@@ -249,6 +250,7 @@ class Digraph(object):
     #@timefn
     def computeChordlessCircuitsMP(self,Odd=False,
                                    Threading=False,nbrOfCPUs=None,
+                                   startMethod=None,
                                    Comments=False,Debug=False):
         """ 
         Multiprocessing version of computeChordlessCircuits().
@@ -279,7 +281,9 @@ class Digraph(object):
             #from multiprocessing import Pool
             #from os import cpu_count
             import multiprocessing as mp
-            mpctx = mp.get_context('spawn')
+            if startMethod is None:
+                startMethod = 'spawn'
+            mpctx = mp.get_context(startMethod)
             Pool = mpctx.Pool
             cpu_count = mpctx.cpu_count
             if nbrOfCPUs is None:
@@ -1974,6 +1978,7 @@ class Digraph(object):
 
     def computeOrdinalCorrelationMP(self, other, MedianCut=False,
                                     Threading=True,nbrOfCPUs=None,
+                                    startMethod=None,
                                     Comments=False,Debug=False):
         """
         Multi processing version of the digraphs.computeOrdinalCorrelation() method.
@@ -2018,66 +2023,68 @@ class Digraph(object):
             #from multiprocessing import Process, Lock,\
             #                            active_children, cpu_count
             import multiprocessing as mp
-            mpctx = mp.get_context('spawn')
+            if startMethod is None:
+                startMethod = 'spawn'
+            mpctx = mp.get_context(startMethod)
             Process = mpctx.Process
             active_children = mpctx.active_children
             cpu_count = mpctx.cpu_count
-            class myThread(Process):
-                def __init__(self, threadID,TempDirName,Debug):
-                    Process.__init__(self)
-                    self.threadID = threadID
-                    self.workingDirectory = tempDirName
-                    self.Debug = Debug
-                def run(self):
-                    from pickle import dumps, loads
-                    from os import chdir
-                    from decimal import Decimal
-                    chdir(self.workingDirectory)
-                    #Debug=False
-                    #if Debug:
-                    #    print("Starting working in %s on %s" % (self.workingDirectory, self.name))
-                    fi = open('dumpActions.py','rb')
-                    actionsList = loads(fi.read())
-                    fi.close()
-                    #if Debug:
-                    #    print(self.threadID,actionsList)
-                    fi = open('dumpRelation.py','rb')
-                    relation = loads(fi.read())
-                    fi.close()
-                    #if Debug:
-                    #    print(self.threadID,relation)
-                    fi = open('dumpOtherRelation.py','rb')
-                    otherRelation = loads(fi.read())
-                    fi.close()
-                    #if Debug:
-                    #    print(self.threadID,relation)
-                    fiName = 'splitActions-'+str(self.threadID)+'.py'
-                    fi = open(fiName,'rb')
-                    splitActions = loads(fi.read())
-                    fi.close()
-                    #if Debug:
-                    #    print(self.threadID,splitActions)
-                    # compute partial correlation
-                    correlation = Decimal('0')
-                    determination = Decimal('0')
-                    for x in splitActions:
-                        grx = g.relation[x]
-                        orx = otherRelation[x]
-                        for y in actionsList:
-                            if x != y:
-                                correlation += min( max(-grx[y],orx[y]),\
-                                            max(grx[y],-orx[y]) )
-                                determination += min( abs(grx[y]),\
-                                                      abs(orx[y]) )
-                                #if Debug:
-                                #    print(x,y,g.relation[x][y],otherRelation[x][y],correlation,determination)
-                    splitCorrelation = {'correlation': correlation,
-                                        'determination': determination}
-                    # write partial correlation relation 
-                    foName = 'splitCorrelation-'+str(self.threadID)+'.py'
-                    fo = open(foName,'wb')
-                    fo.write(dumps(splitCorrelation,-1))
-                    fo.close()
+            # class myThread(Process):
+            #     def __init__(self, threadID,TempDirName,Debug):
+            #         Process.__init__(self)
+            #         self.threadID = threadID
+            #         self.workingDirectory = tempDirName
+            #         self.Debug = Debug
+            #     def run(self):
+            #         from pickle import dumps, loads
+            #         from os import chdir
+            #         from decimal import Decimal
+            #         chdir(self.workingDirectory)
+            #         #Debug=False
+            #         #if Debug:
+            #         #    print("Starting working in %s on %s" % (self.workingDirectory, self.name))
+            #         fi = open('dumpActions.py','rb')
+            #         actionsList = loads(fi.read())
+            #         fi.close()
+            #         #if Debug:
+            #         #    print(self.threadID,actionsList)
+            #         fi = open('dumpRelation.py','rb')
+            #         relation = loads(fi.read())
+            #         fi.close()
+            #         #if Debug:
+            #         #    print(self.threadID,relation)
+            #         fi = open('dumpOtherRelation.py','rb')
+            #         otherRelation = loads(fi.read())
+            #         fi.close()
+            #         #if Debug:
+            #         #    print(self.threadID,relation)
+            #         fiName = 'splitActions-'+str(self.threadID)+'.py'
+            #         fi = open(fiName,'rb')
+            #         splitActions = loads(fi.read())
+            #         fi.close()
+            #         #if Debug:
+            #         #    print(self.threadID,splitActions)
+            #         # compute partial correlation
+            #         correlation = Decimal('0')
+            #         determination = Decimal('0')
+            #         for x in splitActions:
+            #             grx = g.relation[x]
+            #             orx = otherRelation[x]
+            #             for y in actionsList:
+            #                 if x != y:
+            #                     correlation += min( max(-grx[y],orx[y]),\
+            #                                 max(grx[y],-orx[y]) )
+            #                     determination += min( abs(grx[y]),\
+            #                                           abs(orx[y]) )
+            #                     #if Debug:
+            #                     #    print(x,y,g.relation[x][y],otherRelation[x][y],correlation,determination)
+            #         splitCorrelation = {'correlation': correlation,
+            #                             'determination': determination}
+            #         # write partial correlation relation 
+            #         foName = 'splitCorrelation-'+str(self.threadID)+'.py'
+            #         fo = open(foName,'wb')
+            #         fo.write(dumps(splitCorrelation,-1))
+            #         fo.close()
 
             # pre-threading operations
             if nbrOfCPUs is None:
@@ -2087,86 +2094,88 @@ class Digraph(object):
             if Comments:
                 print('Starting correlation computation with %d threads ...' % nbrOfCPUs)
             from tempfile import TemporaryDirectory
-            with TemporaryDirectory() as tempDirName:
-                selfFileName = tempDirName +'/dumpActions.py'
-                #if Debug:
-                #    print('temDirName, selfFileName', tempDirName,selfFileName)
-                fo = open(selfFileName,'wb')
-                pd = dumps(actionsList,-1)
-                fo.write(pd)
-                fo.close()
-                selfFileName = tempDirName +'/dumpRelation.py'
-                #if Debug:
-                #    print('temDirName, selfFileName', tempDirName,selfFileName)
-                fo = open(selfFileName,'wb')
-                pd = dumps(self.relation,-1)
-                fo.write(pd)
-                fo.close()
-                selfFileName = tempDirName +'/dumpOtherRelation.py'
-                #if Debug:
-                #    print('temDirName, selfFileName', tempDirName,selfFileName)
-                fo = open(selfFileName,'wb')
-                pd = dumps(otherRelation,-1)
-                fo.write(pd)
-                fo.close()
+            #with TemporaryDirectory() as tempDirName:
+            tempDir = TemporaryDirectory()
+            tempDirName = tempDir.name
+            selfFileName = tempDirName +'/dumpActions.py'
+            #if Debug:
+            #    print('temDirName, selfFileName', tempDirName,selfFileName)
+            fo = open(selfFileName,'wb')
+            pd = dumps(actionsList,-1)
+            fo.write(pd)
+            fo.close()
+            selfFileName = tempDirName +'/dumpRelation.py'
+            #if Debug:
+            #    print('temDirName, selfFileName', tempDirName,selfFileName)
+            fo = open(selfFileName,'wb')
+            pd = dumps(self.relation,-1)
+            fo.write(pd)
+            fo.close()
+            selfFileName = tempDirName +'/dumpOtherRelation.py'
+            #if Debug:
+            #    print('temDirName, selfFileName', tempDirName,selfFileName)
+            fo = open(selfFileName,'wb')
+            pd = dumps(otherRelation,-1)
+            fo.write(pd)
+            fo.close()
 
             
-                nit = n//nbrOfCPUs
-                nbrOfJobs = nbrOfCPUs
-                if nit*nbrOfCPUs < n:
-                    nit += 1
-                while nit*(nbrOfJobs-1) >= n:
-                    nbrOfJobs -= 1
+            nit = n//nbrOfCPUs
+            nbrOfJobs = nbrOfCPUs
+            if nit*nbrOfCPUs < n:
+                nit += 1
+            while nit*(nbrOfJobs-1) >= n:
+                nbrOfJobs -= 1
+            if Comments:
+                print('nbr of actions to split',n)
+                print('nbr of jobs = ',nbrOfJobs)    
+                print('nbr of splitActions = ',nit)
+
+            i = 0
+            actions2Split = actionsList
+            actionsRemain = set(actions2Split)
+            for jb in range(nbrOfJobs):
                 if Comments:
-                    print('nbr of actions to split',n)
-                    print('nbr of jobs = ',nbrOfJobs)    
-                    print('nbr of splitActions = ',nit)
-                    
-                i = 0
-                actions2Split = actionsList
-                actionsRemain = set(actions2Split)
-                for jb in range(nbrOfJobs):
-                    if Comments:
-                        print('Thread = %d/%d' % (jb+1,nbrOfJobs),end=" ")
-                    splitActions=[]
-                    for k in range(nit):
-                        if jb < (nbrOfJobs -1) and i < n:
-                            splitActions.append(actions2Split[i])
-                        else:
-                            splitActions = list(actionsRemain)
-                        i += 1
-                    #if Debug:
-                    #    print(len(splitActions))
-                    #    print(splitActions)
-                    actionsRemain = actionsRemain - set(splitActions)
-                    #if Debug:
-                    #    print(actionsRemain)
-                    foName = tempDirName+'/splitActions-'+str(jb)+'.py'
-                    fo = open(foName,'wb')
-                    spa = dumps(splitActions,-1)
-                    fo.write(spa)
-                    fo.close()
-                    splitThread = myThread(jb,tempDirName,Debug)
-                    splitThread.start()
-                    
-                while active_children() != []:
-                    pass
-                
-                # post threading operations
-                if Comments:    
-                    print('Exiting computing threads')
-                for jb in range(nbrOfJobs):
-                    #if Debug:
-                    #    print('Post job-%d/%d processing' % (jb+1,nbrOfJobs))
-                    #    print('job',jb)
-                    fiName = tempDirName+'/splitCorrelation-'+str(jb)+'.py'
-                    fi = open(fiName,'rb')
-                    splitCorrelation = loads(fi.read())
-                    #if Debug:
-                    #    print('splitCorrelation',splitCorrelation)
-                    fi.close()
-                    correlation += splitCorrelation['correlation']
-                    determination += splitCorrelation['determination']          
+                    print('Thread = %d/%d' % (jb+1,nbrOfJobs),end=" ")
+                splitActions=[]
+                for k in range(nit):
+                    if jb < (nbrOfJobs -1) and i < n:
+                        splitActions.append(actions2Split[i])
+                    else:
+                        splitActions = list(actionsRemain)
+                    i += 1
+                #if Debug:
+                #    print(len(splitActions))
+                #    print(splitActions)
+                actionsRemain = actionsRemain - set(splitActions)
+                #if Debug:
+                #    print(actionsRemain)
+                foName = tempDirName+'/splitActions-'+str(jb)+'.py'
+                fo = open(foName,'wb')
+                spa = dumps(splitActions,-1)
+                fo.write(spa)
+                fo.close()
+                splitThread = _myThread2(target=jb,args=(tempDirName,Debug))
+                splitThread.start()
+
+            while active_children() != []:
+                pass
+
+            # post threading operations
+            if Comments:    
+                print('Exiting computing threads')
+            for jb in range(nbrOfJobs):
+                #if Debug:
+                #    print('Post job-%d/%d processing' % (jb+1,nbrOfJobs))
+                #    print('job',jb)
+                fiName = tempDirName+'/splitCorrelation-'+str(jb)+'.py'
+                fi = open(fiName,'rb')
+                splitCorrelation = loads(fi.read())
+                #if Debug:
+                #    print('splitCorrelation',splitCorrelation)
+                fi.close()
+                correlation += splitCorrelation['correlation']
+                determination += splitCorrelation['determination']          
                                             
         else: #  no Threading
             
@@ -15068,25 +15077,27 @@ if __name__ == "__main__":
     from randomDigraphs import *
     from decimal import Decimal, getcontext
     t = RandomPerformanceTableau(weightDistribution="equiobjectives",
-                                 numberOfActions=10,numberOfCriteria=7,
+                                 numberOfActions=1000,numberOfCriteria=7,
                                              missingDataProbability=0.05,seed=2)
                           
     #t = CircularPerformanceTableau()
     print(getcontext().prec)
-    g = BipolarOutrankingDigraph(t)
+    g = BipolarOutrankingDigraph(t,Threading=True,startMethod='spawn')
+    print(g)
+    print(g.computeOrdinalCorrelationMP(g,Threading=True))
     #g = RandomBipolarOutrankingDigraph(10)
     #g.showRelationTable()
     #g.showRelationMap()
     #g.showHTMLRelationHeatmap(colorLevels=3,ndigits=1)
     #g.showHTMLRelationHeatmap(colorLevels=5,ndigits=2)
-    g.showHTMLRelationHeatmap(colorLevels=7,ndigits=3)
+    #g.showHTMLRelationHeatmap(colorLevels=7,ndigits=3)
     #g.showHTMLRelationHeatmap(colorLevels=9,ndigits=4)
-    ranking = g.computeNetFlowsRanking()
-    vr = g.computeValuedRankingRelation(ranking)
-    g.relation = vr
-    g.showHTMLRelationTable(ndigits=3)
-    g.showHTMLRelationHeatmap(actionsList=ranking,rankingRule=None,
-                              colorLevels=7,ndigits=3)                   
+    #ranking = g.computeNetFlowsRanking()
+    #vr = g.computeValuedRankingRelation(ranking)
+    #g.relation = vr
+    #g.showHTMLRelationTable(ndigits=3)
+    #g.showHTMLRelationHeatmap(actionsList=ranking,rankingRule=None,
+    #                          colorLevels=7,ndigits=3)                   
                           
     # partA = ['a1','a2']
     # partB = ['a3','a4','a5']
@@ -15120,7 +15131,8 @@ if __name__ == "__main__":
     #g.showObjectives()
     #g.showHTMLPerformanceTableau(Transposed=True)
     #g.recodeValuation(0.0,1.0)
-    #cc = CriteriaCorrelationDigraph(g,ValuedCorrelation=True,WithMedian=True)
+    #cc = CriteriaCorrelation
+    #Digraph(g,ValuedCorrelation=True,WithMedian=True)
     #g = ConfidentBipolarOutrankingDigraph(t)
 ##    cc = g.computeCriteriaCorrelationDigraph(ValuedCorrelation=True,WithMedian=True)
     #cc.exportPrincipalImage('test',pictureFormat='pdf',fontsize='0.75',Comments=True)

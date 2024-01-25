@@ -125,51 +125,48 @@
 <span class="kn">from</span> <span class="nn">randomPerfTabs</span> <span class="kn">import</span> <span class="o">*</span>
 <span class="kn">from</span> <span class="nn">multiprocessing</span> <span class="kn">import</span> <span class="n">Process</span>
 
-<span class="c1">#----------Digraph classes -----------------</span>
-<div class="viewcode-block" id="myThread">
-<a class="viewcode-back" href="../techDoc.html#digraphs.myThread">[docs]</a>
-<span class="k">class</span> <span class="nc">myThread</span><span class="p">(</span><span class="n">Process</span><span class="p">):</span>
-    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">threadID</span><span class="p">,</span><span class="n">TempDirName</span><span class="p">,</span><span class="n">Debug</span><span class="p">):</span>
+<span class="c1">#-----------</span>
+<span class="k">class</span> <span class="nc">_myThread2</span><span class="p">(</span><span class="n">Process</span><span class="p">):</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">target</span><span class="p">,</span><span class="n">args</span><span class="p">):</span>
         <span class="n">Process</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">threadID</span> <span class="o">=</span> <span class="n">threadID</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">workingDirectory</span> <span class="o">=</span> <span class="n">tempDirName</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">Debug</span> <span class="o">=</span> <span class="n">Debug</span>
-<div class="viewcode-block" id="myThread.run">
-<a class="viewcode-back" href="../techDoc.html#digraphs.myThread.run">[docs]</a>
+        <span class="bp">self</span><span class="o">.</span><span class="n">threadID</span> <span class="o">=</span> <span class="n">target</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">workingDirectory</span> <span class="o">=</span> <span class="n">args</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">Debug</span> <span class="o">=</span> <span class="n">args</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
     <span class="k">def</span> <span class="nf">run</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="kn">from</span> <span class="nn">pickle</span> <span class="kn">import</span> <span class="n">dumps</span><span class="p">,</span> <span class="n">loads</span>
         <span class="kn">from</span> <span class="nn">os</span> <span class="kn">import</span> <span class="n">chdir</span>
         <span class="kn">from</span> <span class="nn">decimal</span> <span class="kn">import</span> <span class="n">Decimal</span>
         <span class="n">chdir</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">workingDirectory</span><span class="p">)</span>
+        <span class="n">Debug</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">Debug</span>
         <span class="c1">#Debug=False</span>
-        <span class="c1">#if Debug:</span>
-        <span class="c1">#    print(&quot;Starting working in %s on %s&quot; % (self.workingDirectory, self.name))</span>
+        <span class="k">if</span> <span class="n">Debug</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Starting working in </span><span class="si">%s</span><span class="s2"> on </span><span class="si">%s</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">workingDirectory</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">name</span><span class="p">))</span>
         <span class="n">fi</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="s1">&#39;dumpActions.py&#39;</span><span class="p">,</span><span class="s1">&#39;rb&#39;</span><span class="p">)</span>
         <span class="n">actionsList</span> <span class="o">=</span> <span class="n">loads</span><span class="p">(</span><span class="n">fi</span><span class="o">.</span><span class="n">read</span><span class="p">())</span>
         <span class="n">fi</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
-        <span class="c1">#if Debug:</span>
-        <span class="c1">#    print(self.threadID,actionsList)</span>
+        <span class="k">if</span> <span class="n">Debug</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">threadID</span><span class="p">,</span><span class="n">actionsList</span><span class="p">)</span>
         <span class="n">fi</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="s1">&#39;dumpRelation.py&#39;</span><span class="p">,</span><span class="s1">&#39;rb&#39;</span><span class="p">)</span>
         <span class="n">relation</span> <span class="o">=</span> <span class="n">loads</span><span class="p">(</span><span class="n">fi</span><span class="o">.</span><span class="n">read</span><span class="p">())</span>
         <span class="n">fi</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
-        <span class="c1">#if Debug:</span>
-        <span class="c1">#    print(self.threadID,relation)</span>
+        <span class="k">if</span> <span class="n">Debug</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">threadID</span><span class="p">,</span><span class="n">relation</span><span class="p">)</span>
         <span class="n">fi</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="s1">&#39;dumpOtherRelation.py&#39;</span><span class="p">,</span><span class="s1">&#39;rb&#39;</span><span class="p">)</span>
         <span class="n">otherRelation</span> <span class="o">=</span> <span class="n">loads</span><span class="p">(</span><span class="n">fi</span><span class="o">.</span><span class="n">read</span><span class="p">())</span>
         <span class="n">fi</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
-        <span class="c1">#if Debug:</span>
-        <span class="c1">#    print(self.threadID,relation)</span>
+        <span class="k">if</span> <span class="n">Debug</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">threadID</span><span class="p">,</span><span class="n">relation</span><span class="p">)</span>
         <span class="n">fiName</span> <span class="o">=</span> <span class="s1">&#39;splitActions-&#39;</span><span class="o">+</span><span class="nb">str</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">threadID</span><span class="p">)</span><span class="o">+</span><span class="s1">&#39;.py&#39;</span>
         <span class="n">fi</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="n">fiName</span><span class="p">,</span><span class="s1">&#39;rb&#39;</span><span class="p">)</span>
         <span class="n">splitActions</span> <span class="o">=</span> <span class="n">loads</span><span class="p">(</span><span class="n">fi</span><span class="o">.</span><span class="n">read</span><span class="p">())</span>
         <span class="n">fi</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
-        <span class="c1">#if Debug:</span>
-        <span class="c1">#    print(self.threadID,splitActions)</span>
+        <span class="k">if</span> <span class="n">Debug</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">threadID</span><span class="p">,</span><span class="n">splitActions</span><span class="p">)</span>
         <span class="c1"># compute partial correlation</span>
         <span class="n">correlation</span> <span class="o">=</span> <span class="n">Decimal</span><span class="p">(</span><span class="s1">&#39;0&#39;</span><span class="p">)</span>
         <span class="n">determination</span> <span class="o">=</span> <span class="n">Decimal</span><span class="p">(</span><span class="s1">&#39;0&#39;</span><span class="p">)</span>
         <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">splitActions</span><span class="p">:</span>
-            <span class="n">grx</span> <span class="o">=</span> <span class="n">g</span><span class="o">.</span><span class="n">relation</span><span class="p">[</span><span class="n">x</span><span class="p">]</span>
+            <span class="n">grx</span> <span class="o">=</span> <span class="n">relation</span><span class="p">[</span><span class="n">x</span><span class="p">]</span>
             <span class="n">orx</span> <span class="o">=</span> <span class="n">otherRelation</span><span class="p">[</span><span class="n">x</span><span class="p">]</span>
             <span class="k">for</span> <span class="n">y</span> <span class="ow">in</span> <span class="n">actionsList</span><span class="p">:</span>
                 <span class="k">if</span> <span class="n">x</span> <span class="o">!=</span> <span class="n">y</span><span class="p">:</span>
@@ -185,10 +182,8 @@
         <span class="n">foName</span> <span class="o">=</span> <span class="s1">&#39;splitCorrelation-&#39;</span><span class="o">+</span><span class="nb">str</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">threadID</span><span class="p">)</span><span class="o">+</span><span class="s1">&#39;.py&#39;</span>
         <span class="n">fo</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="n">foName</span><span class="p">,</span><span class="s1">&#39;wb&#39;</span><span class="p">)</span>
         <span class="n">fo</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">dumps</span><span class="p">(</span><span class="n">splitCorrelation</span><span class="p">,</span><span class="o">-</span><span class="mi">1</span><span class="p">))</span>
-        <span class="n">fo</span><span class="o">.</span><span class="n">close</span><span class="p">()</span></div>
-</div>
-
-
+        <span class="n">fo</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+ 
 <div class="viewcode-block" id="Digraph">
 <a class="viewcode-back" href="../techDoc.html#digraphs.Digraph">[docs]</a>
 <span class="k">class</span> <span class="nc">Digraph</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
@@ -357,6 +352,7 @@
 <a class="viewcode-back" href="../techDoc.html#digraphs.Digraph.computeChordlessCircuitsMP">[docs]</a>
     <span class="k">def</span> <span class="nf">computeChordlessCircuitsMP</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">Odd</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
                                    <span class="n">Threading</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span><span class="n">nbrOfCPUs</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+                                   <span class="n">startMethod</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
                                    <span class="n">Comments</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span><span class="n">Debug</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot; </span>
 <span class="sd">        Multiprocessing version of computeChordlessCircuits().</span>
@@ -387,7 +383,9 @@
             <span class="c1">#from multiprocessing import Pool</span>
             <span class="c1">#from os import cpu_count</span>
             <span class="kn">import</span> <span class="nn">multiprocessing</span> <span class="k">as</span> <span class="nn">mp</span>
-            <span class="n">mpctx</span> <span class="o">=</span> <span class="n">mp</span><span class="o">.</span><span class="n">get_context</span><span class="p">(</span><span class="s1">&#39;spawn&#39;</span><span class="p">)</span>
+            <span class="k">if</span> <span class="n">startMethod</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+                <span class="n">startMethod</span> <span class="o">=</span> <span class="s1">&#39;spawn&#39;</span>
+            <span class="n">mpctx</span> <span class="o">=</span> <span class="n">mp</span><span class="o">.</span><span class="n">get_context</span><span class="p">(</span><span class="n">startMethod</span><span class="p">)</span>
             <span class="n">Pool</span> <span class="o">=</span> <span class="n">mpctx</span><span class="o">.</span><span class="n">Pool</span>
             <span class="n">cpu_count</span> <span class="o">=</span> <span class="n">mpctx</span><span class="o">.</span><span class="n">cpu_count</span>
             <span class="k">if</span> <span class="n">nbrOfCPUs</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
@@ -2148,6 +2146,7 @@
 <a class="viewcode-back" href="../techDoc.html#digraphs.Digraph.computeOrdinalCorrelationMP">[docs]</a>
     <span class="k">def</span> <span class="nf">computeOrdinalCorrelationMP</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">other</span><span class="p">,</span> <span class="n">MedianCut</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
                                     <span class="n">Threading</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span><span class="n">nbrOfCPUs</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+                                    <span class="n">startMethod</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
                                     <span class="n">Comments</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span><span class="n">Debug</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Multi processing version of the digraphs.computeOrdinalCorrelation() method.</span>
@@ -2192,66 +2191,68 @@
             <span class="c1">#from multiprocessing import Process, Lock,\</span>
             <span class="c1">#                            active_children, cpu_count</span>
             <span class="kn">import</span> <span class="nn">multiprocessing</span> <span class="k">as</span> <span class="nn">mp</span>
-            <span class="n">mpctx</span> <span class="o">=</span> <span class="n">mp</span><span class="o">.</span><span class="n">get_context</span><span class="p">(</span><span class="s1">&#39;spawn&#39;</span><span class="p">)</span>
+            <span class="k">if</span> <span class="n">startMethod</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+                <span class="n">startMethod</span> <span class="o">=</span> <span class="s1">&#39;spawn&#39;</span>
+            <span class="n">mpctx</span> <span class="o">=</span> <span class="n">mp</span><span class="o">.</span><span class="n">get_context</span><span class="p">(</span><span class="n">startMethod</span><span class="p">)</span>
             <span class="n">Process</span> <span class="o">=</span> <span class="n">mpctx</span><span class="o">.</span><span class="n">Process</span>
             <span class="n">active_children</span> <span class="o">=</span> <span class="n">mpctx</span><span class="o">.</span><span class="n">active_children</span>
             <span class="n">cpu_count</span> <span class="o">=</span> <span class="n">mpctx</span><span class="o">.</span><span class="n">cpu_count</span>
-            <span class="k">class</span> <span class="nc">myThread</span><span class="p">(</span><span class="n">Process</span><span class="p">):</span>
-                <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">threadID</span><span class="p">,</span><span class="n">TempDirName</span><span class="p">,</span><span class="n">Debug</span><span class="p">):</span>
-                    <span class="n">Process</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
-                    <span class="bp">self</span><span class="o">.</span><span class="n">threadID</span> <span class="o">=</span> <span class="n">threadID</span>
-                    <span class="bp">self</span><span class="o">.</span><span class="n">workingDirectory</span> <span class="o">=</span> <span class="n">tempDirName</span>
-                    <span class="bp">self</span><span class="o">.</span><span class="n">Debug</span> <span class="o">=</span> <span class="n">Debug</span>
-                <span class="k">def</span> <span class="nf">run</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-                    <span class="kn">from</span> <span class="nn">pickle</span> <span class="kn">import</span> <span class="n">dumps</span><span class="p">,</span> <span class="n">loads</span>
-                    <span class="kn">from</span> <span class="nn">os</span> <span class="kn">import</span> <span class="n">chdir</span>
-                    <span class="kn">from</span> <span class="nn">decimal</span> <span class="kn">import</span> <span class="n">Decimal</span>
-                    <span class="n">chdir</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">workingDirectory</span><span class="p">)</span>
-                    <span class="c1">#Debug=False</span>
-                    <span class="c1">#if Debug:</span>
-                    <span class="c1">#    print(&quot;Starting working in %s on %s&quot; % (self.workingDirectory, self.name))</span>
-                    <span class="n">fi</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="s1">&#39;dumpActions.py&#39;</span><span class="p">,</span><span class="s1">&#39;rb&#39;</span><span class="p">)</span>
-                    <span class="n">actionsList</span> <span class="o">=</span> <span class="n">loads</span><span class="p">(</span><span class="n">fi</span><span class="o">.</span><span class="n">read</span><span class="p">())</span>
-                    <span class="n">fi</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
-                    <span class="c1">#if Debug:</span>
-                    <span class="c1">#    print(self.threadID,actionsList)</span>
-                    <span class="n">fi</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="s1">&#39;dumpRelation.py&#39;</span><span class="p">,</span><span class="s1">&#39;rb&#39;</span><span class="p">)</span>
-                    <span class="n">relation</span> <span class="o">=</span> <span class="n">loads</span><span class="p">(</span><span class="n">fi</span><span class="o">.</span><span class="n">read</span><span class="p">())</span>
-                    <span class="n">fi</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
-                    <span class="c1">#if Debug:</span>
-                    <span class="c1">#    print(self.threadID,relation)</span>
-                    <span class="n">fi</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="s1">&#39;dumpOtherRelation.py&#39;</span><span class="p">,</span><span class="s1">&#39;rb&#39;</span><span class="p">)</span>
-                    <span class="n">otherRelation</span> <span class="o">=</span> <span class="n">loads</span><span class="p">(</span><span class="n">fi</span><span class="o">.</span><span class="n">read</span><span class="p">())</span>
-                    <span class="n">fi</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
-                    <span class="c1">#if Debug:</span>
-                    <span class="c1">#    print(self.threadID,relation)</span>
-                    <span class="n">fiName</span> <span class="o">=</span> <span class="s1">&#39;splitActions-&#39;</span><span class="o">+</span><span class="nb">str</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">threadID</span><span class="p">)</span><span class="o">+</span><span class="s1">&#39;.py&#39;</span>
-                    <span class="n">fi</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="n">fiName</span><span class="p">,</span><span class="s1">&#39;rb&#39;</span><span class="p">)</span>
-                    <span class="n">splitActions</span> <span class="o">=</span> <span class="n">loads</span><span class="p">(</span><span class="n">fi</span><span class="o">.</span><span class="n">read</span><span class="p">())</span>
-                    <span class="n">fi</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
-                    <span class="c1">#if Debug:</span>
-                    <span class="c1">#    print(self.threadID,splitActions)</span>
-                    <span class="c1"># compute partial correlation</span>
-                    <span class="n">correlation</span> <span class="o">=</span> <span class="n">Decimal</span><span class="p">(</span><span class="s1">&#39;0&#39;</span><span class="p">)</span>
-                    <span class="n">determination</span> <span class="o">=</span> <span class="n">Decimal</span><span class="p">(</span><span class="s1">&#39;0&#39;</span><span class="p">)</span>
-                    <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">splitActions</span><span class="p">:</span>
-                        <span class="n">grx</span> <span class="o">=</span> <span class="n">g</span><span class="o">.</span><span class="n">relation</span><span class="p">[</span><span class="n">x</span><span class="p">]</span>
-                        <span class="n">orx</span> <span class="o">=</span> <span class="n">otherRelation</span><span class="p">[</span><span class="n">x</span><span class="p">]</span>
-                        <span class="k">for</span> <span class="n">y</span> <span class="ow">in</span> <span class="n">actionsList</span><span class="p">:</span>
-                            <span class="k">if</span> <span class="n">x</span> <span class="o">!=</span> <span class="n">y</span><span class="p">:</span>
-                                <span class="n">correlation</span> <span class="o">+=</span> <span class="nb">min</span><span class="p">(</span> <span class="nb">max</span><span class="p">(</span><span class="o">-</span><span class="n">grx</span><span class="p">[</span><span class="n">y</span><span class="p">],</span><span class="n">orx</span><span class="p">[</span><span class="n">y</span><span class="p">]),</span>\
-                                            <span class="nb">max</span><span class="p">(</span><span class="n">grx</span><span class="p">[</span><span class="n">y</span><span class="p">],</span><span class="o">-</span><span class="n">orx</span><span class="p">[</span><span class="n">y</span><span class="p">])</span> <span class="p">)</span>
-                                <span class="n">determination</span> <span class="o">+=</span> <span class="nb">min</span><span class="p">(</span> <span class="nb">abs</span><span class="p">(</span><span class="n">grx</span><span class="p">[</span><span class="n">y</span><span class="p">]),</span>\
-                                                      <span class="nb">abs</span><span class="p">(</span><span class="n">orx</span><span class="p">[</span><span class="n">y</span><span class="p">])</span> <span class="p">)</span>
-                                <span class="c1">#if Debug:</span>
-                                <span class="c1">#    print(x,y,g.relation[x][y],otherRelation[x][y],correlation,determination)</span>
-                    <span class="n">splitCorrelation</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;correlation&#39;</span><span class="p">:</span> <span class="n">correlation</span><span class="p">,</span>
-                                        <span class="s1">&#39;determination&#39;</span><span class="p">:</span> <span class="n">determination</span><span class="p">}</span>
-                    <span class="c1"># write partial correlation relation </span>
-                    <span class="n">foName</span> <span class="o">=</span> <span class="s1">&#39;splitCorrelation-&#39;</span><span class="o">+</span><span class="nb">str</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">threadID</span><span class="p">)</span><span class="o">+</span><span class="s1">&#39;.py&#39;</span>
-                    <span class="n">fo</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="n">foName</span><span class="p">,</span><span class="s1">&#39;wb&#39;</span><span class="p">)</span>
-                    <span class="n">fo</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">dumps</span><span class="p">(</span><span class="n">splitCorrelation</span><span class="p">,</span><span class="o">-</span><span class="mi">1</span><span class="p">))</span>
-                    <span class="n">fo</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+            <span class="c1"># class myThread(Process):</span>
+            <span class="c1">#     def __init__(self, threadID,TempDirName,Debug):</span>
+            <span class="c1">#         Process.__init__(self)</span>
+            <span class="c1">#         self.threadID = threadID</span>
+            <span class="c1">#         self.workingDirectory = tempDirName</span>
+            <span class="c1">#         self.Debug = Debug</span>
+            <span class="c1">#     def run(self):</span>
+            <span class="c1">#         from pickle import dumps, loads</span>
+            <span class="c1">#         from os import chdir</span>
+            <span class="c1">#         from decimal import Decimal</span>
+            <span class="c1">#         chdir(self.workingDirectory)</span>
+            <span class="c1">#         #Debug=False</span>
+            <span class="c1">#         #if Debug:</span>
+            <span class="c1">#         #    print(&quot;Starting working in %s on %s&quot; % (self.workingDirectory, self.name))</span>
+            <span class="c1">#         fi = open(&#39;dumpActions.py&#39;,&#39;rb&#39;)</span>
+            <span class="c1">#         actionsList = loads(fi.read())</span>
+            <span class="c1">#         fi.close()</span>
+            <span class="c1">#         #if Debug:</span>
+            <span class="c1">#         #    print(self.threadID,actionsList)</span>
+            <span class="c1">#         fi = open(&#39;dumpRelation.py&#39;,&#39;rb&#39;)</span>
+            <span class="c1">#         relation = loads(fi.read())</span>
+            <span class="c1">#         fi.close()</span>
+            <span class="c1">#         #if Debug:</span>
+            <span class="c1">#         #    print(self.threadID,relation)</span>
+            <span class="c1">#         fi = open(&#39;dumpOtherRelation.py&#39;,&#39;rb&#39;)</span>
+            <span class="c1">#         otherRelation = loads(fi.read())</span>
+            <span class="c1">#         fi.close()</span>
+            <span class="c1">#         #if Debug:</span>
+            <span class="c1">#         #    print(self.threadID,relation)</span>
+            <span class="c1">#         fiName = &#39;splitActions-&#39;+str(self.threadID)+&#39;.py&#39;</span>
+            <span class="c1">#         fi = open(fiName,&#39;rb&#39;)</span>
+            <span class="c1">#         splitActions = loads(fi.read())</span>
+            <span class="c1">#         fi.close()</span>
+            <span class="c1">#         #if Debug:</span>
+            <span class="c1">#         #    print(self.threadID,splitActions)</span>
+            <span class="c1">#         # compute partial correlation</span>
+            <span class="c1">#         correlation = Decimal(&#39;0&#39;)</span>
+            <span class="c1">#         determination = Decimal(&#39;0&#39;)</span>
+            <span class="c1">#         for x in splitActions:</span>
+            <span class="c1">#             grx = g.relation[x]</span>
+            <span class="c1">#             orx = otherRelation[x]</span>
+            <span class="c1">#             for y in actionsList:</span>
+            <span class="c1">#                 if x != y:</span>
+            <span class="c1">#                     correlation += min( max(-grx[y],orx[y]),\</span>
+            <span class="c1">#                                 max(grx[y],-orx[y]) )</span>
+            <span class="c1">#                     determination += min( abs(grx[y]),\</span>
+            <span class="c1">#                                           abs(orx[y]) )</span>
+            <span class="c1">#                     #if Debug:</span>
+            <span class="c1">#                     #    print(x,y,g.relation[x][y],otherRelation[x][y],correlation,determination)</span>
+            <span class="c1">#         splitCorrelation = {&#39;correlation&#39;: correlation,</span>
+            <span class="c1">#                             &#39;determination&#39;: determination}</span>
+            <span class="c1">#         # write partial correlation relation </span>
+            <span class="c1">#         foName = &#39;splitCorrelation-&#39;+str(self.threadID)+&#39;.py&#39;</span>
+            <span class="c1">#         fo = open(foName,&#39;wb&#39;)</span>
+            <span class="c1">#         fo.write(dumps(splitCorrelation,-1))</span>
+            <span class="c1">#         fo.close()</span>
 
             <span class="c1"># pre-threading operations</span>
             <span class="k">if</span> <span class="n">nbrOfCPUs</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
@@ -2261,86 +2262,88 @@
             <span class="k">if</span> <span class="n">Comments</span><span class="p">:</span>
                 <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Starting correlation computation with </span><span class="si">%d</span><span class="s1"> threads ...&#39;</span> <span class="o">%</span> <span class="n">nbrOfCPUs</span><span class="p">)</span>
             <span class="kn">from</span> <span class="nn">tempfile</span> <span class="kn">import</span> <span class="n">TemporaryDirectory</span>
-            <span class="k">with</span> <span class="n">TemporaryDirectory</span><span class="p">()</span> <span class="k">as</span> <span class="n">tempDirName</span><span class="p">:</span>
-                <span class="n">selfFileName</span> <span class="o">=</span> <span class="n">tempDirName</span> <span class="o">+</span><span class="s1">&#39;/dumpActions.py&#39;</span>
-                <span class="c1">#if Debug:</span>
-                <span class="c1">#    print(&#39;temDirName, selfFileName&#39;, tempDirName,selfFileName)</span>
-                <span class="n">fo</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="n">selfFileName</span><span class="p">,</span><span class="s1">&#39;wb&#39;</span><span class="p">)</span>
-                <span class="n">pd</span> <span class="o">=</span> <span class="n">dumps</span><span class="p">(</span><span class="n">actionsList</span><span class="p">,</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span>
-                <span class="n">fo</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">pd</span><span class="p">)</span>
-                <span class="n">fo</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
-                <span class="n">selfFileName</span> <span class="o">=</span> <span class="n">tempDirName</span> <span class="o">+</span><span class="s1">&#39;/dumpRelation.py&#39;</span>
-                <span class="c1">#if Debug:</span>
-                <span class="c1">#    print(&#39;temDirName, selfFileName&#39;, tempDirName,selfFileName)</span>
-                <span class="n">fo</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="n">selfFileName</span><span class="p">,</span><span class="s1">&#39;wb&#39;</span><span class="p">)</span>
-                <span class="n">pd</span> <span class="o">=</span> <span class="n">dumps</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">relation</span><span class="p">,</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span>
-                <span class="n">fo</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">pd</span><span class="p">)</span>
-                <span class="n">fo</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
-                <span class="n">selfFileName</span> <span class="o">=</span> <span class="n">tempDirName</span> <span class="o">+</span><span class="s1">&#39;/dumpOtherRelation.py&#39;</span>
-                <span class="c1">#if Debug:</span>
-                <span class="c1">#    print(&#39;temDirName, selfFileName&#39;, tempDirName,selfFileName)</span>
-                <span class="n">fo</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="n">selfFileName</span><span class="p">,</span><span class="s1">&#39;wb&#39;</span><span class="p">)</span>
-                <span class="n">pd</span> <span class="o">=</span> <span class="n">dumps</span><span class="p">(</span><span class="n">otherRelation</span><span class="p">,</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span>
-                <span class="n">fo</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">pd</span><span class="p">)</span>
-                <span class="n">fo</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+            <span class="c1">#with TemporaryDirectory() as tempDirName:</span>
+            <span class="n">tempDir</span> <span class="o">=</span> <span class="n">TemporaryDirectory</span><span class="p">()</span>
+            <span class="n">tempDirName</span> <span class="o">=</span> <span class="n">tempDir</span><span class="o">.</span><span class="n">name</span>
+            <span class="n">selfFileName</span> <span class="o">=</span> <span class="n">tempDirName</span> <span class="o">+</span><span class="s1">&#39;/dumpActions.py&#39;</span>
+            <span class="c1">#if Debug:</span>
+            <span class="c1">#    print(&#39;temDirName, selfFileName&#39;, tempDirName,selfFileName)</span>
+            <span class="n">fo</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="n">selfFileName</span><span class="p">,</span><span class="s1">&#39;wb&#39;</span><span class="p">)</span>
+            <span class="n">pd</span> <span class="o">=</span> <span class="n">dumps</span><span class="p">(</span><span class="n">actionsList</span><span class="p">,</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span>
+            <span class="n">fo</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">pd</span><span class="p">)</span>
+            <span class="n">fo</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+            <span class="n">selfFileName</span> <span class="o">=</span> <span class="n">tempDirName</span> <span class="o">+</span><span class="s1">&#39;/dumpRelation.py&#39;</span>
+            <span class="c1">#if Debug:</span>
+            <span class="c1">#    print(&#39;temDirName, selfFileName&#39;, tempDirName,selfFileName)</span>
+            <span class="n">fo</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="n">selfFileName</span><span class="p">,</span><span class="s1">&#39;wb&#39;</span><span class="p">)</span>
+            <span class="n">pd</span> <span class="o">=</span> <span class="n">dumps</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">relation</span><span class="p">,</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span>
+            <span class="n">fo</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">pd</span><span class="p">)</span>
+            <span class="n">fo</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+            <span class="n">selfFileName</span> <span class="o">=</span> <span class="n">tempDirName</span> <span class="o">+</span><span class="s1">&#39;/dumpOtherRelation.py&#39;</span>
+            <span class="c1">#if Debug:</span>
+            <span class="c1">#    print(&#39;temDirName, selfFileName&#39;, tempDirName,selfFileName)</span>
+            <span class="n">fo</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="n">selfFileName</span><span class="p">,</span><span class="s1">&#39;wb&#39;</span><span class="p">)</span>
+            <span class="n">pd</span> <span class="o">=</span> <span class="n">dumps</span><span class="p">(</span><span class="n">otherRelation</span><span class="p">,</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span>
+            <span class="n">fo</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">pd</span><span class="p">)</span>
+            <span class="n">fo</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
 
             
-                <span class="n">nit</span> <span class="o">=</span> <span class="n">n</span><span class="o">//</span><span class="n">nbrOfCPUs</span>
-                <span class="n">nbrOfJobs</span> <span class="o">=</span> <span class="n">nbrOfCPUs</span>
-                <span class="k">if</span> <span class="n">nit</span><span class="o">*</span><span class="n">nbrOfCPUs</span> <span class="o">&lt;</span> <span class="n">n</span><span class="p">:</span>
-                    <span class="n">nit</span> <span class="o">+=</span> <span class="mi">1</span>
-                <span class="k">while</span> <span class="n">nit</span><span class="o">*</span><span class="p">(</span><span class="n">nbrOfJobs</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span> <span class="o">&gt;=</span> <span class="n">n</span><span class="p">:</span>
-                    <span class="n">nbrOfJobs</span> <span class="o">-=</span> <span class="mi">1</span>
+            <span class="n">nit</span> <span class="o">=</span> <span class="n">n</span><span class="o">//</span><span class="n">nbrOfCPUs</span>
+            <span class="n">nbrOfJobs</span> <span class="o">=</span> <span class="n">nbrOfCPUs</span>
+            <span class="k">if</span> <span class="n">nit</span><span class="o">*</span><span class="n">nbrOfCPUs</span> <span class="o">&lt;</span> <span class="n">n</span><span class="p">:</span>
+                <span class="n">nit</span> <span class="o">+=</span> <span class="mi">1</span>
+            <span class="k">while</span> <span class="n">nit</span><span class="o">*</span><span class="p">(</span><span class="n">nbrOfJobs</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span> <span class="o">&gt;=</span> <span class="n">n</span><span class="p">:</span>
+                <span class="n">nbrOfJobs</span> <span class="o">-=</span> <span class="mi">1</span>
+            <span class="k">if</span> <span class="n">Comments</span><span class="p">:</span>
+                <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;nbr of actions to split&#39;</span><span class="p">,</span><span class="n">n</span><span class="p">)</span>
+                <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;nbr of jobs = &#39;</span><span class="p">,</span><span class="n">nbrOfJobs</span><span class="p">)</span>    
+                <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;nbr of splitActions = &#39;</span><span class="p">,</span><span class="n">nit</span><span class="p">)</span>
+
+            <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span>
+            <span class="n">actions2Split</span> <span class="o">=</span> <span class="n">actionsList</span>
+            <span class="n">actionsRemain</span> <span class="o">=</span> <span class="nb">set</span><span class="p">(</span><span class="n">actions2Split</span><span class="p">)</span>
+            <span class="k">for</span> <span class="n">jb</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">nbrOfJobs</span><span class="p">):</span>
                 <span class="k">if</span> <span class="n">Comments</span><span class="p">:</span>
-                    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;nbr of actions to split&#39;</span><span class="p">,</span><span class="n">n</span><span class="p">)</span>
-                    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;nbr of jobs = &#39;</span><span class="p">,</span><span class="n">nbrOfJobs</span><span class="p">)</span>    
-                    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;nbr of splitActions = &#39;</span><span class="p">,</span><span class="n">nit</span><span class="p">)</span>
-                    
-                <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span>
-                <span class="n">actions2Split</span> <span class="o">=</span> <span class="n">actionsList</span>
-                <span class="n">actionsRemain</span> <span class="o">=</span> <span class="nb">set</span><span class="p">(</span><span class="n">actions2Split</span><span class="p">)</span>
-                <span class="k">for</span> <span class="n">jb</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">nbrOfJobs</span><span class="p">):</span>
-                    <span class="k">if</span> <span class="n">Comments</span><span class="p">:</span>
-                        <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Thread = </span><span class="si">%d</span><span class="s1">/</span><span class="si">%d</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="n">jb</span><span class="o">+</span><span class="mi">1</span><span class="p">,</span><span class="n">nbrOfJobs</span><span class="p">),</span><span class="n">end</span><span class="o">=</span><span class="s2">&quot; &quot;</span><span class="p">)</span>
-                    <span class="n">splitActions</span><span class="o">=</span><span class="p">[]</span>
-                    <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">nit</span><span class="p">):</span>
-                        <span class="k">if</span> <span class="n">jb</span> <span class="o">&lt;</span> <span class="p">(</span><span class="n">nbrOfJobs</span> <span class="o">-</span><span class="mi">1</span><span class="p">)</span> <span class="ow">and</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">n</span><span class="p">:</span>
-                            <span class="n">splitActions</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">actions2Split</span><span class="p">[</span><span class="n">i</span><span class="p">])</span>
-                        <span class="k">else</span><span class="p">:</span>
-                            <span class="n">splitActions</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">actionsRemain</span><span class="p">)</span>
-                        <span class="n">i</span> <span class="o">+=</span> <span class="mi">1</span>
-                    <span class="c1">#if Debug:</span>
-                    <span class="c1">#    print(len(splitActions))</span>
-                    <span class="c1">#    print(splitActions)</span>
-                    <span class="n">actionsRemain</span> <span class="o">=</span> <span class="n">actionsRemain</span> <span class="o">-</span> <span class="nb">set</span><span class="p">(</span><span class="n">splitActions</span><span class="p">)</span>
-                    <span class="c1">#if Debug:</span>
-                    <span class="c1">#    print(actionsRemain)</span>
-                    <span class="n">foName</span> <span class="o">=</span> <span class="n">tempDirName</span><span class="o">+</span><span class="s1">&#39;/splitActions-&#39;</span><span class="o">+</span><span class="nb">str</span><span class="p">(</span><span class="n">jb</span><span class="p">)</span><span class="o">+</span><span class="s1">&#39;.py&#39;</span>
-                    <span class="n">fo</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="n">foName</span><span class="p">,</span><span class="s1">&#39;wb&#39;</span><span class="p">)</span>
-                    <span class="n">spa</span> <span class="o">=</span> <span class="n">dumps</span><span class="p">(</span><span class="n">splitActions</span><span class="p">,</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span>
-                    <span class="n">fo</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">spa</span><span class="p">)</span>
-                    <span class="n">fo</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
-                    <span class="n">splitThread</span> <span class="o">=</span> <span class="n">myThread</span><span class="p">(</span><span class="n">jb</span><span class="p">,</span><span class="n">tempDirName</span><span class="p">,</span><span class="n">Debug</span><span class="p">)</span>
-                    <span class="n">splitThread</span><span class="o">.</span><span class="n">start</span><span class="p">()</span>
-                    
-                <span class="k">while</span> <span class="n">active_children</span><span class="p">()</span> <span class="o">!=</span> <span class="p">[]:</span>
-                    <span class="k">pass</span>
-                
-                <span class="c1"># post threading operations</span>
-                <span class="k">if</span> <span class="n">Comments</span><span class="p">:</span>    
-                    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Exiting computing threads&#39;</span><span class="p">)</span>
-                <span class="k">for</span> <span class="n">jb</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">nbrOfJobs</span><span class="p">):</span>
-                    <span class="c1">#if Debug:</span>
-                    <span class="c1">#    print(&#39;Post job-%d/%d processing&#39; % (jb+1,nbrOfJobs))</span>
-                    <span class="c1">#    print(&#39;job&#39;,jb)</span>
-                    <span class="n">fiName</span> <span class="o">=</span> <span class="n">tempDirName</span><span class="o">+</span><span class="s1">&#39;/splitCorrelation-&#39;</span><span class="o">+</span><span class="nb">str</span><span class="p">(</span><span class="n">jb</span><span class="p">)</span><span class="o">+</span><span class="s1">&#39;.py&#39;</span>
-                    <span class="n">fi</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="n">fiName</span><span class="p">,</span><span class="s1">&#39;rb&#39;</span><span class="p">)</span>
-                    <span class="n">splitCorrelation</span> <span class="o">=</span> <span class="n">loads</span><span class="p">(</span><span class="n">fi</span><span class="o">.</span><span class="n">read</span><span class="p">())</span>
-                    <span class="c1">#if Debug:</span>
-                    <span class="c1">#    print(&#39;splitCorrelation&#39;,splitCorrelation)</span>
-                    <span class="n">fi</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
-                    <span class="n">correlation</span> <span class="o">+=</span> <span class="n">splitCorrelation</span><span class="p">[</span><span class="s1">&#39;correlation&#39;</span><span class="p">]</span>
-                    <span class="n">determination</span> <span class="o">+=</span> <span class="n">splitCorrelation</span><span class="p">[</span><span class="s1">&#39;determination&#39;</span><span class="p">]</span>          
+                    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Thread = </span><span class="si">%d</span><span class="s1">/</span><span class="si">%d</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="n">jb</span><span class="o">+</span><span class="mi">1</span><span class="p">,</span><span class="n">nbrOfJobs</span><span class="p">),</span><span class="n">end</span><span class="o">=</span><span class="s2">&quot; &quot;</span><span class="p">)</span>
+                <span class="n">splitActions</span><span class="o">=</span><span class="p">[]</span>
+                <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">nit</span><span class="p">):</span>
+                    <span class="k">if</span> <span class="n">jb</span> <span class="o">&lt;</span> <span class="p">(</span><span class="n">nbrOfJobs</span> <span class="o">-</span><span class="mi">1</span><span class="p">)</span> <span class="ow">and</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">n</span><span class="p">:</span>
+                        <span class="n">splitActions</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">actions2Split</span><span class="p">[</span><span class="n">i</span><span class="p">])</span>
+                    <span class="k">else</span><span class="p">:</span>
+                        <span class="n">splitActions</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">actionsRemain</span><span class="p">)</span>
+                    <span class="n">i</span> <span class="o">+=</span> <span class="mi">1</span>
+                <span class="c1">#if Debug:</span>
+                <span class="c1">#    print(len(splitActions))</span>
+                <span class="c1">#    print(splitActions)</span>
+                <span class="n">actionsRemain</span> <span class="o">=</span> <span class="n">actionsRemain</span> <span class="o">-</span> <span class="nb">set</span><span class="p">(</span><span class="n">splitActions</span><span class="p">)</span>
+                <span class="c1">#if Debug:</span>
+                <span class="c1">#    print(actionsRemain)</span>
+                <span class="n">foName</span> <span class="o">=</span> <span class="n">tempDirName</span><span class="o">+</span><span class="s1">&#39;/splitActions-&#39;</span><span class="o">+</span><span class="nb">str</span><span class="p">(</span><span class="n">jb</span><span class="p">)</span><span class="o">+</span><span class="s1">&#39;.py&#39;</span>
+                <span class="n">fo</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="n">foName</span><span class="p">,</span><span class="s1">&#39;wb&#39;</span><span class="p">)</span>
+                <span class="n">spa</span> <span class="o">=</span> <span class="n">dumps</span><span class="p">(</span><span class="n">splitActions</span><span class="p">,</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span>
+                <span class="n">fo</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">spa</span><span class="p">)</span>
+                <span class="n">fo</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+                <span class="n">splitThread</span> <span class="o">=</span> <span class="n">_myThread2</span><span class="p">(</span><span class="n">target</span><span class="o">=</span><span class="n">jb</span><span class="p">,</span><span class="n">args</span><span class="o">=</span><span class="p">(</span><span class="n">tempDirName</span><span class="p">,</span><span class="n">Debug</span><span class="p">))</span>
+                <span class="n">splitThread</span><span class="o">.</span><span class="n">start</span><span class="p">()</span>
+
+            <span class="k">while</span> <span class="n">active_children</span><span class="p">()</span> <span class="o">!=</span> <span class="p">[]:</span>
+                <span class="k">pass</span>
+
+            <span class="c1"># post threading operations</span>
+            <span class="k">if</span> <span class="n">Comments</span><span class="p">:</span>    
+                <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Exiting computing threads&#39;</span><span class="p">)</span>
+            <span class="k">for</span> <span class="n">jb</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">nbrOfJobs</span><span class="p">):</span>
+                <span class="c1">#if Debug:</span>
+                <span class="c1">#    print(&#39;Post job-%d/%d processing&#39; % (jb+1,nbrOfJobs))</span>
+                <span class="c1">#    print(&#39;job&#39;,jb)</span>
+                <span class="n">fiName</span> <span class="o">=</span> <span class="n">tempDirName</span><span class="o">+</span><span class="s1">&#39;/splitCorrelation-&#39;</span><span class="o">+</span><span class="nb">str</span><span class="p">(</span><span class="n">jb</span><span class="p">)</span><span class="o">+</span><span class="s1">&#39;.py&#39;</span>
+                <span class="n">fi</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="n">fiName</span><span class="p">,</span><span class="s1">&#39;rb&#39;</span><span class="p">)</span>
+                <span class="n">splitCorrelation</span> <span class="o">=</span> <span class="n">loads</span><span class="p">(</span><span class="n">fi</span><span class="o">.</span><span class="n">read</span><span class="p">())</span>
+                <span class="c1">#if Debug:</span>
+                <span class="c1">#    print(&#39;splitCorrelation&#39;,splitCorrelation)</span>
+                <span class="n">fi</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+                <span class="n">correlation</span> <span class="o">+=</span> <span class="n">splitCorrelation</span><span class="p">[</span><span class="s1">&#39;correlation&#39;</span><span class="p">]</span>
+                <span class="n">determination</span> <span class="o">+=</span> <span class="n">splitCorrelation</span><span class="p">[</span><span class="s1">&#39;determination&#39;</span><span class="p">]</span>          
                                             
         <span class="k">else</span><span class="p">:</span> <span class="c1">#  no Threading</span>
             
@@ -16018,25 +16021,27 @@
     <span class="kn">from</span> <span class="nn">randomDigraphs</span> <span class="kn">import</span> <span class="o">*</span>
     <span class="kn">from</span> <span class="nn">decimal</span> <span class="kn">import</span> <span class="n">Decimal</span><span class="p">,</span> <span class="n">getcontext</span>
     <span class="n">t</span> <span class="o">=</span> <span class="n">RandomPerformanceTableau</span><span class="p">(</span><span class="n">weightDistribution</span><span class="o">=</span><span class="s2">&quot;equiobjectives&quot;</span><span class="p">,</span>
-                                 <span class="n">numberOfActions</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span><span class="n">numberOfCriteria</span><span class="o">=</span><span class="mi">7</span><span class="p">,</span>
+                                 <span class="n">numberOfActions</span><span class="o">=</span><span class="mi">1000</span><span class="p">,</span><span class="n">numberOfCriteria</span><span class="o">=</span><span class="mi">7</span><span class="p">,</span>
                                              <span class="n">missingDataProbability</span><span class="o">=</span><span class="mf">0.05</span><span class="p">,</span><span class="n">seed</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
                           
     <span class="c1">#t = CircularPerformanceTableau()</span>
     <span class="nb">print</span><span class="p">(</span><span class="n">getcontext</span><span class="p">()</span><span class="o">.</span><span class="n">prec</span><span class="p">)</span>
-    <span class="n">g</span> <span class="o">=</span> <span class="n">BipolarOutrankingDigraph</span><span class="p">(</span><span class="n">t</span><span class="p">)</span>
+    <span class="n">g</span> <span class="o">=</span> <span class="n">BipolarOutrankingDigraph</span><span class="p">(</span><span class="n">t</span><span class="p">,</span><span class="n">Threading</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span><span class="n">startMethod</span><span class="o">=</span><span class="s1">&#39;spawn&#39;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">g</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">g</span><span class="o">.</span><span class="n">computeOrdinalCorrelationMP</span><span class="p">(</span><span class="n">g</span><span class="p">,</span><span class="n">Threading</span><span class="o">=</span><span class="kc">True</span><span class="p">))</span>
     <span class="c1">#g = RandomBipolarOutrankingDigraph(10)</span>
     <span class="c1">#g.showRelationTable()</span>
     <span class="c1">#g.showRelationMap()</span>
     <span class="c1">#g.showHTMLRelationHeatmap(colorLevels=3,ndigits=1)</span>
     <span class="c1">#g.showHTMLRelationHeatmap(colorLevels=5,ndigits=2)</span>
-    <span class="n">g</span><span class="o">.</span><span class="n">showHTMLRelationHeatmap</span><span class="p">(</span><span class="n">colorLevels</span><span class="o">=</span><span class="mi">7</span><span class="p">,</span><span class="n">ndigits</span><span class="o">=</span><span class="mi">3</span><span class="p">)</span>
+    <span class="c1">#g.showHTMLRelationHeatmap(colorLevels=7,ndigits=3)</span>
     <span class="c1">#g.showHTMLRelationHeatmap(colorLevels=9,ndigits=4)</span>
-    <span class="n">ranking</span> <span class="o">=</span> <span class="n">g</span><span class="o">.</span><span class="n">computeNetFlowsRanking</span><span class="p">()</span>
-    <span class="n">vr</span> <span class="o">=</span> <span class="n">g</span><span class="o">.</span><span class="n">computeValuedRankingRelation</span><span class="p">(</span><span class="n">ranking</span><span class="p">)</span>
-    <span class="n">g</span><span class="o">.</span><span class="n">relation</span> <span class="o">=</span> <span class="n">vr</span>
-    <span class="n">g</span><span class="o">.</span><span class="n">showHTMLRelationTable</span><span class="p">(</span><span class="n">ndigits</span><span class="o">=</span><span class="mi">3</span><span class="p">)</span>
-    <span class="n">g</span><span class="o">.</span><span class="n">showHTMLRelationHeatmap</span><span class="p">(</span><span class="n">actionsList</span><span class="o">=</span><span class="n">ranking</span><span class="p">,</span><span class="n">rankingRule</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
-                              <span class="n">colorLevels</span><span class="o">=</span><span class="mi">7</span><span class="p">,</span><span class="n">ndigits</span><span class="o">=</span><span class="mi">3</span><span class="p">)</span>                   
+    <span class="c1">#ranking = g.computeNetFlowsRanking()</span>
+    <span class="c1">#vr = g.computeValuedRankingRelation(ranking)</span>
+    <span class="c1">#g.relation = vr</span>
+    <span class="c1">#g.showHTMLRelationTable(ndigits=3)</span>
+    <span class="c1">#g.showHTMLRelationHeatmap(actionsList=ranking,rankingRule=None,</span>
+    <span class="c1">#                          colorLevels=7,ndigits=3)                   </span>
                           
     <span class="c1"># partA = [&#39;a1&#39;,&#39;a2&#39;]</span>
     <span class="c1"># partB = [&#39;a3&#39;,&#39;a4&#39;,&#39;a5&#39;]</span>
@@ -16070,7 +16075,8 @@
     <span class="c1">#g.showObjectives()</span>
     <span class="c1">#g.showHTMLPerformanceTableau(Transposed=True)</span>
     <span class="c1">#g.recodeValuation(0.0,1.0)</span>
-    <span class="c1">#cc = CriteriaCorrelationDigraph(g,ValuedCorrelation=True,WithMedian=True)</span>
+    <span class="c1">#cc = CriteriaCorrelation</span>
+    <span class="c1">#Digraph(g,ValuedCorrelation=True,WithMedian=True)</span>
     <span class="c1">#g = ConfidentBipolarOutrankingDigraph(t)</span>
 <span class="c1">##    cc = g.computeCriteriaCorrelationDigraph(ValuedCorrelation=True,WithMedian=True)</span>
     <span class="c1">#cc.exportPrincipalImage(&#39;test&#39;,pictureFormat=&#39;pdf&#39;,fontsize=&#39;0.75&#39;,Comments=True)</span>

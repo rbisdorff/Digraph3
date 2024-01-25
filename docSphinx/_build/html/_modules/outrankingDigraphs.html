@@ -4051,28 +4051,25 @@
 
 <span class="c1"># multiprocessing thread for BipolarOutrankingDigraph class</span>
 <span class="k">class</span> <span class="nc">_myBODGThread</span><span class="p">(</span><span class="n">Process</span><span class="p">):</span>
-    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">threadID</span><span class="p">,</span><span class="n">digraph</span><span class="p">,</span>
-                 <span class="n">InitialSplit</span><span class="p">,</span> <span class="n">tempDirName</span><span class="p">,</span>
-                 <span class="n">splitActions</span><span class="p">,</span>
-                 <span class="n">hasNoVeto</span><span class="p">,</span> <span class="n">hasBipolarVeto</span><span class="p">,</span>
-                 <span class="n">hasSymmetricThresholds</span><span class="p">,</span> <span class="n">Debug</span><span class="p">):</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">target</span><span class="p">,</span><span class="n">args</span><span class="p">):</span>
         <span class="n">Process</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">threadID</span> <span class="o">=</span> <span class="n">threadID</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">digraph</span> <span class="o">=</span> <span class="n">digraph</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">InitialSplit</span> <span class="o">=</span> <span class="n">InitialSplit</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">workingDirectory</span> <span class="o">=</span> <span class="n">tempDirName</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">splitActions</span> <span class="o">=</span> <span class="n">splitActions</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">hasNoVeto</span> <span class="o">=</span> <span class="n">hasNoVeto</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">hasBipolarVeto</span> <span class="o">=</span> <span class="n">hasBipolarVeto</span><span class="p">,</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">hasSymmetricThresholds</span> <span class="o">=</span> <span class="n">hasSymmetricThresholds</span><span class="p">,</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">Debug</span> <span class="o">=</span> <span class="n">Debug</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">threadID</span> <span class="o">=</span> <span class="n">target</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">digraph</span> <span class="o">=</span> <span class="n">args</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">InitialSplit</span> <span class="o">=</span> <span class="n">args</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">workingDirectory</span> <span class="o">=</span> <span class="n">args</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">splitActions</span> <span class="o">=</span> <span class="n">args</span><span class="p">[</span><span class="mi">3</span><span class="p">]</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">hasNoVeto</span> <span class="o">=</span> <span class="n">args</span><span class="p">[</span><span class="mi">4</span><span class="p">]</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">hasBipolarVeto</span> <span class="o">=</span> <span class="n">args</span><span class="p">[</span><span class="mi">5</span><span class="p">]</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">hasSymmetricThresholds</span> <span class="o">=</span> <span class="n">args</span><span class="p">[</span><span class="mi">6</span><span class="p">]</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">Debug</span> <span class="o">=</span> <span class="n">args</span><span class="p">[</span><span class="mi">7</span><span class="p">]</span>
     <span class="k">def</span> <span class="nf">run</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="kn">from</span> <span class="nn">io</span> <span class="kn">import</span> <span class="n">BytesIO</span>
         <span class="kn">from</span> <span class="nn">pickle</span> <span class="kn">import</span> <span class="n">Pickler</span><span class="p">,</span> <span class="n">dumps</span><span class="p">,</span> <span class="n">loads</span>
         <span class="kn">from</span> <span class="nn">os</span> <span class="kn">import</span> <span class="n">chdir</span>
         <span class="n">chdir</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">workingDirectory</span><span class="p">)</span>
-<span class="c1">##                    if Debug:</span>
-<span class="c1">##                        print(&quot;Starting working in %s on thread %s&quot; % (self.workingDirectory, str(self.threadId)))</span>
+        <span class="n">Debug</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">Debug</span>
+        <span class="k">if</span> <span class="n">Debug</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Starting working in </span><span class="si">%s</span><span class="s2"> on thread </span><span class="si">%s</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">workingDirectory</span><span class="p">,</span> <span class="nb">str</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">threadId</span><span class="p">)))</span>
 <span class="c1">##                    fi = open(&#39;dumpSelf.py&#39;,&#39;rb&#39;)</span>
 <span class="c1">##                    digraph = loads(fi.read())</span>
 <span class="c1">##                    fi.close()</span>
@@ -4638,10 +4635,12 @@
 <span class="c1">##                    spa = dumps(splitActions,-1)</span>
 <span class="c1">##                    fo.write(spa)</span>
 <span class="c1">##                    fo.close()</span>
-                    <span class="n">splitThread</span> <span class="o">=</span> <span class="n">_myBODGThread</span><span class="p">(</span><span class="n">j</span><span class="p">,</span><span class="bp">self</span><span class="p">,</span><span class="n">InitialSplit</span><span class="p">,</span>
-                                           <span class="n">tempDirName</span><span class="p">,</span><span class="n">splitActions</span><span class="p">,</span>
-                                           <span class="n">hasNoVeto</span><span class="p">,</span><span class="n">hasBipolarVeto</span><span class="p">,</span>
-                                           <span class="n">hasSymmetricThresholds</span><span class="p">,</span><span class="n">Debug</span><span class="p">)</span>
+                    <span class="n">splitThread</span> <span class="o">=</span> <span class="n">_myBODGThread</span><span class="p">(</span><span class="n">target</span><span class="o">=</span><span class="n">j</span><span class="p">,</span>
+                                            <span class="n">args</span><span class="o">=</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span>
+                                                  <span class="n">InitialSplit</span><span class="p">,</span>
+                                                  <span class="n">tempDirName</span><span class="p">,</span><span class="n">splitActions</span><span class="p">,</span>
+                                                  <span class="n">hasNoVeto</span><span class="p">,</span><span class="n">hasBipolarVeto</span><span class="p">,</span>
+                                                  <span class="n">hasSymmetricThresholds</span><span class="p">,</span><span class="n">Debug</span><span class="p">))</span>
                     <span class="n">splitThread</span><span class="o">.</span><span class="n">start</span><span class="p">()</span>
                     
                 <span class="k">while</span> <span class="n">active_children</span><span class="p">()</span> <span class="o">!=</span> <span class="p">[]:</span>
@@ -10556,6 +10555,9 @@
                                  <span class="n">startMethod</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
                                  <span class="n">nbrCores</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span><span class="n">Comments</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
     <span class="nb">print</span><span class="p">(</span><span class="n">g</span><span class="p">)</span>
+    <span class="n">t0</span> <span class="o">=</span> <span class="n">time</span><span class="p">()</span>
+    <span class="n">g</span><span class="o">.</span><span class="n">showHTMLPerformanceHeatmap</span><span class="p">(</span><span class="n">Correlations</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span><span class="n">Threading</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">time</span><span class="p">()</span><span class="o">-</span><span class="n">t0</span><span class="p">)</span>
     <span class="c1">#g.showPolarisations()</span>
     <span class="c1">#g.showObjectives()</span>
     <span class="c1"># ranking = g.computeNetFlowsRanking()</span>

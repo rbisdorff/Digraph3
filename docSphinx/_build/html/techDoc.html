@@ -388,10 +388,6 @@
 </li>
 <li class="toctree-l3"><a class="reference internal" href="#digraphs.XORDigraph"><code class="docutils literal notranslate"><span class="pre">XORDigraph</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="#digraphs.kChoicesDigraph"><code class="docutils literal notranslate"><span class="pre">kChoicesDigraph</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="#digraphs.myThread"><code class="docutils literal notranslate"><span class="pre">myThread</span></code></a><ul>
-<li class="toctree-l4"><a class="reference internal" href="#digraphs.myThread.run"><code class="docutils literal notranslate"><span class="pre">myThread.run()</span></code></a></li>
-</ul>
-</li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="#randomdigraphs-module">2.4. randomDigraphs module</a><ul>
@@ -1355,7 +1351,7 @@
 <ul>
 <li><dl>
 <dt><a class="reference internal" href="#digraphs-label"><span class="std std-ref">digraphs module</span></a></dt><dd><p>Main part of the Digraph3 source code with the generic root <a class="reference external" href="techDoc.html#digraphs.Digraph">Digraph</a> class.</p>
-<div class="graphviz"><object data="_images/inheritance-662c7260846fafd6f56a10f3b7297970fea8920c.svg" type="image/svg+xml" class="inheritance graphviz">
+<div class="graphviz"><object data="_images/inheritance-a1e5dd75c4b297a11ceab688be680279d984d678.svg" type="image/svg+xml" class="inheritance graphviz">
 <p class="warning">Inheritance diagram of digraphs</p></object></div>
 </dd>
 </dl>
@@ -1545,7 +1541,7 @@ generic root <a class="reference external" href="techDoc.html#transitiveDigraphs
 <span id="digraphs-label"></span><h2><a class="toc-backref" href="#id5" role="doc-backlink"><span class="section-number">2.3. </span>digraphs module</a><a class="headerlink" href="#digraphs-module" title="Link to this heading"></a></h2>
 <p>A tutorial with coding examples is available here: <a class="reference internal" href="tutorial.html#digraphs-tutorial-label"><span class="std std-ref">Working with the Digraph3 software resources</span></a></p>
 <p><strong>Inheritance Diagram</strong></p>
-<div class="graphviz"><object data="_images/inheritance-662c7260846fafd6f56a10f3b7297970fea8920c.svg" type="image/svg+xml" class="inheritance graphviz">
+<div class="graphviz"><object data="_images/inheritance-a1e5dd75c4b297a11ceab688be680279d984d678.svg" type="image/svg+xml" class="inheritance graphviz">
 <p class="warning">Inheritance diagram of digraphs</p></object></div>
 <p id="module-digraphs">Python3+ implementation of the digraphs module, root module of the Digraph3 resources.</p>
 <p>Copyright (C) 2006-2023  Raymond Bisdorff</p>
@@ -2195,7 +2191,7 @@ are collected.</p>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="digraphs.Digraph.computeChordlessCircuitsMP">
-<span class="sig-name descname"><span class="pre">computeChordlessCircuitsMP</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">Odd</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">Threading</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">nbrOfCPUs</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">Comments</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">Debug</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/digraphs.html#Digraph.computeChordlessCircuitsMP"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#digraphs.Digraph.computeChordlessCircuitsMP" title="Link to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">computeChordlessCircuitsMP</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">Odd</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">Threading</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">nbrOfCPUs</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">startMethod</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">Comments</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">Debug</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/digraphs.html#Digraph.computeChordlessCircuitsMP"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#digraphs.Digraph.computeChordlessCircuitsMP" title="Link to this definition"></a></dt>
 <dd><p>Multiprocessing version of computeChordlessCircuits().</p>
 <p>Renders the set of all chordless odd circuits detected in a digraph.
 Result (possible empty list) stored in &lt;self.circuitsList&gt;
@@ -2575,7 +2571,7 @@ is by convention 0.0 at determination level 0.0 .</p>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="digraphs.Digraph.computeOrdinalCorrelationMP">
-<span class="sig-name descname"><span class="pre">computeOrdinalCorrelationMP</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">other</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">MedianCut</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">Threading</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">nbrOfCPUs</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">Comments</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">Debug</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/digraphs.html#Digraph.computeOrdinalCorrelationMP"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#digraphs.Digraph.computeOrdinalCorrelationMP" title="Link to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">computeOrdinalCorrelationMP</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">other</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">MedianCut</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">Threading</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">nbrOfCPUs</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">startMethod</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">Comments</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">Debug</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/digraphs.html#Digraph.computeOrdinalCorrelationMP"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#digraphs.Digraph.computeOrdinalCorrelationMP" title="Link to this definition"></a></dt>
 <dd><p>Multi processing version of the digraphs.computeOrdinalCorrelation() method.</p>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
@@ -4220,17 +4216,6 @@ a digraph of all k-choices collapsed actions.</p>
 </div>
 </dd>
 </dl>
-</dd></dl>
-
-<dl class="py class">
-<dt class="sig sig-object py" id="digraphs.myThread">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">digraphs.</span></span><span class="sig-name descname"><span class="pre">myThread</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">threadID</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">TempDirName</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">Debug</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/digraphs.html#myThread"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#digraphs.myThread" title="Link to this definition"></a></dt>
-<dd><dl class="py method">
-<dt class="sig sig-object py" id="digraphs.myThread.run">
-<span class="sig-name descname"><span class="pre">run</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/digraphs.html#myThread.run"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#digraphs.myThread.run" title="Link to this definition"></a></dt>
-<dd><p>Method to be run in sub-process; can be overridden in sub-class</p>
-</dd></dl>
-
 </dd></dl>
 
 <p>Back to the <a class="reference internal" href="#contents-table-label"><span class="std std-ref">Table of Contents</span></a></p>
