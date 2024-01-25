@@ -470,10 +470,16 @@ class SortingDigraph(BipolarOutrankingDigraph):
         String += 'Criteria            : %d\n' % len(self.criteria)
         String += 'Categories          : %d\n' % len(self.categories)
         String += 'Lowerclosed         : %s\n' % str(self.criteriaCategoryLimits['LowerClosed'])
-        String += 'Size                : %d\n' % self.computeSize()
+        try:
+            String += 'Size                : %d\n' % self.computeSize()
+        except:   # not for quantiles sorted digraphs
+            pass
         String += 'Valuation domain    : [%.2f;%.2f]\n'\
                       % (self.valuationdomain['min'],self.valuationdomain['max'])
-        String += 'Determinateness (%%): %.2f\n' % self.computeDeterminateness(InPercents=True)
+        try:
+            String += 'Determinateness (%%): %.2f\n' % self.computeDeterminateness(InPercents=True)
+        except:  # not for quantiles sorted digraphs
+            pass
         String += 'Attributes          : %s\n' % list(self.__dict__.keys())
         String += '*------  Constructor run times (in sec.) ------*\n'
         try:
@@ -1651,6 +1657,7 @@ class QuantilesSortingDigraph(SortingDigraph):
             actions = copy2self(perfTab.actions)
         actions = actions
         self.actions = actions
+        self.order = len(actions)
 
         # keep a copy of the original actions set before adding the profiles
         actionsOrig = OrderedDict(actions)

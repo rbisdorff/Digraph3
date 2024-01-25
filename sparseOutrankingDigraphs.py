@@ -63,8 +63,13 @@ class SparseOutrankingDigraph(BipolarOutrankingDigraph):
         try:
             reprString += 'Threads           : %d\n' % self.nbrThreads
         except:
-            self.nbrThreads = 1
+            self.nbrThreads = 0
             reprString += 'Threads           : %d\n' % self.nbrThreads
+        try:
+            reprString += 'Start method      : %s\n' % self.startMethod
+        except:
+            self.startMethod = None
+            reprString += 'Start method      : %s\n' % self.startMethod
         reprString += 'Total time        : %.5f\n' % self.runTimes['totalTime']
         reprString += 'Data imput        : %.5f\n' % self.runTimes['dataInput']
         reprString += 'QuantilesSorting  : %.5f\n' % self.runTimes['sorting']
@@ -1455,10 +1460,11 @@ class PreRankedOutrankingDigraph(SparseOutrankingDigraph,PerformanceTableau):
                  componentRankingRule='Copeland',
                  minimalComponentSize=1,
                  Threading=False,
+                 startMethod=None,
                  tempDir=None,
                  #componentThreadingThreshold=50,
-                 nbrOfCPUs=1,
-                 nbrOfThreads=1,
+                 nbrOfCPUs=None,
+                 nbrOfThreads=0,
                  save2File=None,
                  CopyPerfTab=True,
                  Comments=False,
@@ -1473,10 +1479,12 @@ class PreRankedOutrankingDigraph(SparseOutrankingDigraph,PerformanceTableau):
         from time import time
         #from os import cpu_count
         #from multiprocessing import Pool
-        import multiprocessing as mp
-        mpctx = mp.get_context('spawn')
-        Pool = mpctx.Pool
-        cpu_count = mpctx.cpu_count
+        # import multiprocessing as mp
+        # if startMethod is None:
+        #     startMethod = 'spawn'
+        # mpctx = mp.get_context(startMethod)
+        # Pool = mpctx.Pool
+        # cpu_count = mpctx.cpu_count
 
         from copy import copy, deepcopy
 
@@ -1526,6 +1534,7 @@ class PreRankedOutrankingDigraph(SparseOutrankingDigraph,PerformanceTableau):
         self.sortingParameters['PrefThresholds'] = False
         self.sortingParameters['hasNoVeto'] = False
         self.nbrOfCPUs = nbrOfCPUs
+        # self.startMethod = startMethod
         # quantiles sorting
         t0 = time()
         if Comments:
@@ -1538,11 +1547,14 @@ class PreRankedOutrankingDigraph(SparseOutrankingDigraph,PerformanceTableau):
                                      WithSortingRelation=False,
                                      CopyPerfTab=CopyPerfTab,
                                      Threading=Threading,
+                                     startMethod=startMethod,
                                      tempDir=tempDir,
                                      nbrCores=nbrOfCPUs,
                                      nbrOfProcesses=nbrOfThreads,
                                      Comments=Comments,
                                      Debug=Debug)
+        if Comments:
+            print(qs)
         self.valuationdomain = qs.valuationdomain
         self.profiles = qs.profiles
         self.categories = qs.categories
@@ -1564,7 +1576,8 @@ class PreRankedOutrankingDigraph(SparseOutrankingDigraph,PerformanceTableau):
         _decomposition = [[(item[0][0],item[0][1]),item[1],item[2],item[3],item[4]]\
                 for item in self._computeQuantileOrdering(
                     strategy=quantilesOrderingStrategy,
-                    Descending=True,Threading=Threading,nbrOfCPUs=nbrOfCPUs)]
+                        Descending=True,Threading=Threading,
+                        startMethod=startMethod,nbrOfCPUs=nbrOfCPUs)]
         if Debug:
             print(_decomposition)
         self._decomposition = _decomposition
@@ -1576,8 +1589,9 @@ class PreRankedOutrankingDigraph(SparseOutrankingDigraph,PerformanceTableau):
         nc = len(_decomposition)
         self.nbrComponents = nc
         self.nd = len(str(nc))
-        if not self.sortingParameters['Threading']:
-            self.nbrThreads = 1
+        if not Threading:
+            self.nbrThreads = 0
+            self.startMethod = None,
             components = OrderedDict()
             for i in range(1,nc+1):
                 comp = _decomposition[i-1]
@@ -1602,13 +1616,19 @@ class PreRankedOutrankingDigraph(SparseOutrankingDigraph,PerformanceTableau):
             from pickle import dumps, loads, load, dump
             #from multiprocessing import Process, Queue,active_children, cpu_count
             import multiprocessing as mp
-            mpctx = mp.get_context('spawn')
+            if startMethod is None:
+                startMethod = 'spawn'
+            mpctx = mp.get_context(startMethod)
+            self.startMethod = mpctx.get_start_method()
             Process = mpctx.Process
             Queue = mpctx.Queue
             active_children = mpctx.active_children
             cpu_count = mpctx.cpu_count
 
-            self.nbrThreads = nbrOfCPUs
+            if nbrOfCPUs is None:
+                self.nbrThread = cpu_count()
+            else:
+                self.nbrThreads = nbrOfCPUs
             if Comments:
                 print('Processing the %d components' % nc )
                 print('with %d cores' % self.nbrThreads)
@@ -1704,6 +1724,7 @@ class PreRankedOutrankingDigraph(SparseOutrankingDigraph,PerformanceTableau):
                                  Descending=True,
                                  Threading=False,
                                  nbrOfCPUs=None,
+                                 startMethod=None,
                                  Debug=False,
                                  Comments=False):
         """
@@ -1725,6 +1746,7 @@ class PreRankedOutrankingDigraph(SparseOutrankingDigraph,PerformanceTableau):
                 = self.computeActionCategories(x,Comments=Comments,
                                                Debug=Debug,
                                                Threading=Threading,
+                                               startMethod=startMethod,
                                                nbrOfCPUs = nbrOfCPUs)
             lowQtileLimit = self.categories[lowCateg]['lowLimit']
             highQtileLimit = self.categories[highCateg]['highLimit']
@@ -1818,7 +1840,9 @@ class PreRankedOutrankingDigraph(SparseOutrankingDigraph,PerformanceTableau):
 
     def computeActionCategories(self,action,Show=False,
                                 Debug=False,Comments=False,
-                                Threading=False,nbrOfCPUs=None):
+                                Threading=False,
+                                nbrOfCPUs=None,
+                                startMethod=None):
         """
         Renders the union of categories in which the given action is sorted positively or null into.
         Returns a tuple : action, lowest category key, highest category key, membership credibility !
@@ -1831,10 +1855,12 @@ class PreRankedOutrankingDigraph(SparseOutrankingDigraph,PerformanceTableau):
         try:
             sortinga = self.sorting[action]
         except:
-            sorting = self.computeSortingCharacteristics(action=action,
-                                                         Comments=Comments,
-                                                         Threading=Threading,
-                                                         nbrOfCPUs=nbrOfCPUs)
+            sorting = self.computeSortingCharacteristics(
+                action=action,
+                Comments=Comments,
+                Threading=Threading,
+                startMethod=startMethod,
+                nbrOfCPUs=nbrOfCPUs)
             sortinga = sorting[action]
 
         keys = []
@@ -1892,8 +1918,11 @@ class PreRankedOutrankingDigraph(SparseOutrankingDigraph,PerformanceTableau):
 
 
 
-    def computeCriterion2RankingCorrelation(self,criterion,Threading=False,
-                                    nbrOfCPUs=None,Debug=False,
+    def computeCriterion2RankingCorrelation(self,
+                                            criterion,Threading=False,
+                                            nbrOfCPUs=None,
+                                            startMethod=None,
+                                            Debug=False,
                                     Comments=False):
         """
         Renders the ordinal correlation coefficient between
@@ -1904,6 +1933,7 @@ class PreRankedOutrankingDigraph(SparseOutrankingDigraph,PerformanceTableau):
         gc = BipolarOutrankingDigraph(self,coalition=[criterion],
                                       Normalized=True,CopyPerfTab=False,
                                       Threading=Threading,nbrCores=nbrOfCPUs,
+                                      startMethod=startMethod,
                                       Comments=Comments)
         globalOrdering = self.ranking2Preorder(self.boostedRanking)
         globalRelation = gc.computePreorderRelation(globalOrdering)
@@ -1914,7 +1944,9 @@ class PreRankedOutrankingDigraph(SparseOutrankingDigraph,PerformanceTableau):
 
     def computeMarginalVersusGlobalRankingCorrelations(self,Sorted=True,
                                                        ValuedCorrelation=False,
-                                                       Threading=False,nbrCores=None,
+                                                       Threading=False,
+                                                       nbrCores=None,
+                                                       startMethod=None,
                                                        Comments=False):
         """
         Method for computing correlations between each individual criterion relation with the corresponding global ranking relation.
@@ -1932,12 +1964,16 @@ class PreRankedOutrankingDigraph(SparseOutrankingDigraph,PerformanceTableau):
             #from multiprocessing import Pool
             #from os import cpu_count
             import multiprocessing as mp
-            mpctx = mp.get_context('spawn')
+            if startMethod is None:
+                startMethod = 'spawn'
+            mpctx = mp.get_context(startMethod)
+            self.startMethod = mp.get_start_method()
             Pool = mpctx.Pool
             cpu_count = mpctx.cpu_count
 
             if nbrCores is None:
                 nbrCores= cpu_count()
+            self.nbrThread = nbrCores
             criteriaList = [x for x in self.criteria]
             with Pool(nbrCores) as proc:
                 correlations = proc.map(self.computeCriterion2RankingCorrelation,
@@ -1968,7 +2004,8 @@ class PreRankedOutrankingDigraph(SparseOutrankingDigraph,PerformanceTableau):
 
     def showMarginalVersusGlobalRankingCorrelation(self,Sorted=True,
                                                       Threading=False,
-                                                      nbrOfCPUs=None,Comments=True):
+                                                      nbrOfCPUs=None,
+                                                   startMehod=None,Comments=True):
         """
         Show method for computeCriterionCorrelation results.
         """
@@ -1978,7 +2015,8 @@ class PreRankedOutrankingDigraph(SparseOutrankingDigraph,PerformanceTableau):
         for c in criteria:
             corr = self.computeCriterion2RankingCorrelation(c,
                                                             Threading=Threading,
-                                                            nbrOfCPUs=nbrOfCPUs)
+                                                            nbrOfCPUs=nbrOfCPUs,
+                                                            startMethod=startMethod)
             criteriaCorrelation.append((corr['correlation'],corr['determination'],c))
         if Sorted:
             criteriaCorrelation.sort(reverse=True,key=itemgetter(0))
@@ -2179,7 +2217,8 @@ class PreRankedOutrankingDigraph(SparseOutrankingDigraph,PerformanceTableau):
 
     def computeCategoryContents(self,Reverse=False,Comments=False,
                                 StoreSorting=True,
-                                Threading=False,nbrOfCPUs=None):
+                                Threading=False,nbrOfCPUs=None,
+                                startMethod=None):
         """
         Computes the sorting results per category.
         """
@@ -2189,7 +2228,8 @@ class PreRankedOutrankingDigraph(SparseOutrankingDigraph,PerformanceTableau):
             sorting = self.computeSortingCharacteristics(Comments=Comments,
                                                      StoreSorting=StoreSorting,
                                                      Threading=Threading,
-                                                     nbrOfCPUs=nbrOfCPUs)
+                                                         nbrOfCPUs=nbrOfCPUs,
+                                                         startMethod=startMethod)
 
         categoryContent = {}
         for c in self.categories:
@@ -2492,10 +2532,11 @@ class PreRankedConfidentOutrankingDigraph(PreRankedOutrankingDigraph):
                  betaParameter = 2,
                  confidence = 90.0,
                  Threading=False,
+                 startMethod=None,
                  tempDir=None,
                  #componentThreadingThreshold=50,
-                 nbrOfCPUs=1,
-                 nbrOfThreads=1,
+                 nbrOfCPUs=None,
+                 nbrOfThreads=0,
                  save2File=None,
                  CopyPerfTab=True,
                  Comments=False,
@@ -2508,10 +2549,10 @@ class PreRankedConfidentOutrankingDigraph(PreRankedOutrankingDigraph):
         from time import time
         #from os import cpu_count
         #from multiprocessing import Pool
-        import multiprocessing as mp
-        mpctx = mp.get_context('spawn')
-        Pool = mpctx.Pool
-        cpu_count = mpctx.cpu_count
+        #import multiprocessing as mp
+        #mpctx = mp.get_context('spawn')
+        #Pool = mpctx.Pool
+        #cpu_count = mpctx.cpu_count
 
         from copy import copy, deepcopy
 
@@ -2569,6 +2610,7 @@ class PreRankedConfidentOutrankingDigraph(PreRankedOutrankingDigraph):
                                      hasNoVeto=True,
                                      CopyPerfTab=CopyPerfTab,
                                      Threading=Threading,
+                                     startMethod=startMethod,
                                      tempDir=tempDir,
                                      nbrCores=nbrOfCPUs,
                                      nbrOfProcesses=nbrOfThreads,
@@ -2659,6 +2701,7 @@ class PreRankedConfidentOutrankingDigraph(PreRankedOutrankingDigraph):
                           for item in self._computeQuantileOrdering(
                                   strategy=quantilesOrderingStrategy,
                                   Descending=True,Threading=Threading,
+                                  startMethod=startMethod,
                                   nbrOfCPUs=nbrOfCPUs)]
         if Debug:
             print(_decomposition)
@@ -2696,7 +2739,10 @@ class PreRankedConfidentOutrankingDigraph(PreRankedOutrankingDigraph):
                 from pickle import dumps, loads, load, dump
                 #from multiprocessing import Process, Queue,active_children, cpu_count
                 import multiprocessing as mp
-                mpctx = mp.get_context('spawn')
+                if startMethod is None:
+                    startMethod = 'spawn',
+                mpctx = mp.get_context(startMethod)
+                self.startMethod = mp.get_start_method()
                 Process = mpctx.Process
                 Queue = mpctx.Queue
                 active_children = mpctx.active_children
@@ -2709,7 +2755,10 @@ class PreRankedConfidentOutrankingDigraph(PreRankedOutrankingDigraph):
                 from tempfile import TemporaryDirectory,mkdtemp
                 with TemporaryDirectory(dir=tempDir) as tempDirName:
                     ## tasks queue and workers launching
+                    if nbrOfCPUs is NOne:
+                        nbrOfCPUs = cpu_count()
                     NUMBER_OF_WORKERS = nbrOfCPUs
+                    self.nbrThread=nbrCPUs
                     tasksIndex = [(i,len(_decomposition[i][1])) for i in range(nc)]
                     tasksIndex.sort(key=lambda pos: pos[1],reverse=True)
                     TASKS = [(Comments,(pos[0],nc,tempDirName,componentRankingRule)) for pos in tasksIndex]
@@ -3068,20 +3117,22 @@ if __name__ == "__main__":
     print('*-------- Testing classes and methods -------')
 
     from time import time
-    MP  = False
-    nbrActions = 50
-    tp = RandomCBPerformanceTableau(numberOfActions=nbrActions,Threading=MP,
+    MP  = True
+    nbrActions = 500
+    tp = RandomCBPerformanceTableau(numberOfActions=nbrActions,
                                     BigData=False,seed=100)
     bg1 = PreRankedOutrankingDigraph(tp,CopyPerfTab=True,quantiles=5,
                                  quantilesOrderingStrategy='average',
                                  componentRankingRule='Copeland',
                                  LowerClosed=True,
                                  minimalComponentSize=1,
-                                 Threading=MP,nbrOfCPUs=8,
+                                 Threading=MP,nbrOfCPUs=12,
                                  #tempDir='.',
+                                 startMethod='spawn',
                                  nbrOfThreads=8,
                                  Comments=True,Debug=False,
                                  save2File='testbgMP')
+    print(bg1,bg1.startMethod)
     bg1.showDecomposition(direction='increasing')
     bg1.showHTMLRelationTable()
 
