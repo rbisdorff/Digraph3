@@ -3954,11 +3954,14 @@ class BipolarOutrankingDigraph(OutrankingDigraph):
         val4 = self.runTimes['gammaSets']
         reprString += '----  Constructor run times (in sec.) ----\n'
         try:
-            if self.nbrThreads > 1:
+            if self.nbrThreads > 0:
                 reprString += 'Threads          : %d\n' % self.nbrThreads
-                reprString += 'Start method     : %s\n' % self.startMethod
         except:
-            pass
+            reprString += 'Threads          : %d\n' % 0
+        try:
+            reprString += 'Start method     : %s\n' % self.startMethod
+        except:
+            reprString += 'Start method     : %s\n' % None
         reprString += 'Total time       : %.5f\n' % val1
         reprString += 'Data input       : %.5f\n' % val2
         reprString += 'Compute relation : %.5f\n' % val3
@@ -4279,7 +4282,8 @@ class BipolarOutrankingDigraph(OutrankingDigraph):
             # set threading parameter
             if Comments:
                 print('Computing without threading ...')
-            self.nbrThreads = 1
+            self.nbrThreads = 0
+            self.startMethod = None
 
             # !! concordance relation and veto counts need a complex constructor
             if (not hasBipolarVeto) or WithConcordanceRelation or WithVetoCounts:

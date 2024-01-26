@@ -1626,9 +1626,8 @@ class PreRankedOutrankingDigraph(SparseOutrankingDigraph,PerformanceTableau):
             cpu_count = mpctx.cpu_count
 
             if nbrOfCPUs is None:
-                self.nbrThread = cpu_count()
-            else:
-                self.nbrThreads = nbrOfCPUs
+                nbrOfCPUs = cpu_count()
+            self.nbrThreads = nbrOfCPUs
             if Comments:
                 print('Processing the %d components' % nc )
                 print('with %d cores' % self.nbrThreads)

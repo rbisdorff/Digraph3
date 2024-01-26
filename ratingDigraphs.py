@@ -87,8 +87,13 @@ class RatingDigraph(BipolarOutrankingDigraph):
         try:
             repString += 'Threads             : %d\n' % self.nbrThreads
         except:
-            self.nbrThreads = 1
+            self.nbrThreads = 0
             repString += 'Threads             : %d\n' % self.nbrThreads
+        try:
+            repString += 'StartMethod         : %s\n' % self.startMethod
+        except:
+            self.startMethod = None
+            repString += 'StartMethod         : %s\n' % self.startMethod
         repString += 'Total time          : %.5f\n' % self.runTimes['totalTime']
         repString += 'Data input          : %.5f\n' % self.runTimes['dataInput']
         repString += 'Compute quantiles   : %.5f\n' % self.runTimes['computeProfiles']
@@ -478,6 +483,7 @@ class RatingDigraph(BipolarOutrankingDigraph):
                                    Correlations=False,
                                    Threading=False,
                                    nbrOfCPUs=None,
+                                   startMethod=None,
                                    Debug=False,
                               htmlFileName=None):
         """
@@ -1175,7 +1181,8 @@ class RatingDigraph(BipolarOutrankingDigraph):
                                rankingRule=None,
                                Correlations=False,
                                Threading=False,
-                               nbrOfCPUs=1,
+                               startMethod=None,
+                               nbrOfCPUs=None,
                                Debug=False):
         """       
         Renders the Brewer RdYlGn 5,7, or 9 levels colored heatmap of the performance table
@@ -1276,9 +1283,10 @@ class RatingDigraph(BipolarOutrankingDigraph):
         if criteriaList is None:
             if Correlations:
                 criteriaCorrelation =\
-                        self.computeMarginalVersusGlobalRankingCorrelations(\
-                                actionsList,ValuedCorrelation=True,Threading=Threading,
-                                nbrCores=nbrOfCPUs)
+                        self.computeMarginalVersusGlobalRankingCorrelations(
+                            actionsList,ValuedCorrelation=True,
+                            Threading=Threading,startMethod=startMethod,
+                            nbrCores=nbrOfCPUs)
                 criteriaList = [c[1] for c in criteriaCorrelation]
             else:
                 criteriaList = list(criteria.keys())
@@ -1291,9 +1299,11 @@ class RatingDigraph(BipolarOutrankingDigraph):
             criteriaList = list(criteria.keys())
             if Correlations:
                 criteriaCorrelation =\
-                        self.computeMarginalVersusGlobalRankingCorrelations(\
-                                actionsList,ValuedCorrelation=True,Threading=Threading,
-                                nbrCores=nbrOfCPUs)
+                        self.computeMarginalVersusGlobalRankingCorrelations(
+                            actionsList,ValuedCorrelation=True,
+                            Threading=Threading,
+                            startMethod=startMethod,    
+                            nbrCores=nbrOfCPUs)
             else:
                 criteriaCorrelation = None
             
@@ -1518,6 +1528,7 @@ class RatingByRelativeQuantilesDigraph(RatingDigraph,PerformanceTableau):
                  confidence=90.0,
                  rankingRule='NetFlows',
                  Threading=False,
+                 startMethod=None,
                  nbrCores=None,
                  CopyPerfTab=True,
                  Debug=False):
@@ -1682,6 +1693,7 @@ class RatingByRelativeQuantilesDigraph(RatingDigraph,PerformanceTableau):
                 pass
             from mpOutrankingDigraphs import MPBipolarOutrankingDigraph
             g = MPBipolarOutrankingDigraph(self,Normalized=True,
+                                           startMethod=startMethod,
                                            nbrCores=nbrCores)
             self.nbrThreads = copy2self(g.nbrThreads)
             self.relation = copy2self(g.relation)
@@ -1689,7 +1701,9 @@ class RatingByRelativeQuantilesDigraph(RatingDigraph,PerformanceTableau):
         if outrankingModel == 'standard':
             from outrankingDigraphs import BipolarOutrankingDigraph
             g = BipolarOutrankingDigraph(self,
-                                     Threading=Threading,nbrCores=nbrCores)
+                                    Threading=Threading,
+                                    startMethod=startMethod,
+                                    nbrCores=nbrCores)
             #self.nbrThreads = copy2self(g.nbrThreads)
             self.relation = copy2self(g.relation)
             self.valuationdomain = copy2self(g.valuationdomain)
@@ -1701,7 +1715,8 @@ class RatingByRelativeQuantilesDigraph(RatingDigraph,PerformanceTableau):
                                 betaParameter=betaParameter,
                                 confidence=confidence,
                                 )
-            self.nbrThreads = 1
+            self.nbrThreads = 0
+            self.startMethod = None
             self.relation = copy2self(g.relation)
             self.valuationdomain = copy2self(g.valuationdomain)
             self.bipolarConfidenceLevel = copy2self(g.bipolarConfidenceLevel)
@@ -1712,7 +1727,8 @@ class RatingByRelativeQuantilesDigraph(RatingDigraph,PerformanceTableau):
         elif outrankingModel == 'robust':
             from outrankingDigraphs import RobustOutrankingDigraph
             g = RobustOutrankingDigraph(self)
-            self.nbrThreads = 1
+            self.nbrThreads = 0
+            self.startMethod = None,
             self.relation = copy2self(g.relation)
             self.valuationdomain = copy2self(g.valuationdomain)
             self.stability = copy2self(g.stability)
@@ -1957,6 +1973,7 @@ class RatingByLearnedQuantilesDigraph(RatingDigraph,PerformanceQuantiles):
                  betaParameter=2,
                  confidence=90.0,
                  Threading=False,
+                 startMethod=None,
                  nbrCores=None,
                  CopyPerfTab=True,
                  Debug=False):
@@ -2134,8 +2151,11 @@ class RatingByLearnedQuantilesDigraph(RatingDigraph,PerformanceQuantiles):
         if outrankingModel == 'standard':
             from outrankingDigraphs import BipolarOutrankingDigraph
             g = BipolarOutrankingDigraph(self,
-                                     Threading=Threading,nbrCores=nbrCores)
+                                     Threading=Threading,
+                                         startMethod=startMethod,
+                                         nbrCores=nbrCores)
             self.nbrThreads = copy2self(g.nbrThreads)
+            self.startMethod = copy2self(g.startMethod)
             self.relation = copy2self(g.relation)
             self.valuationdomain = copy2self(g.valuationdomain)
             self.nbrThreads = copy2self(g.nbrThreads)
@@ -2148,6 +2168,7 @@ class RatingByLearnedQuantilesDigraph(RatingDigraph,PerformanceQuantiles):
             from mpOutrankingDigraphs import MPBipolarOutrankingDigraph
             g = MPBipolarOutrankingDigraph(Normalized=True)
             self.nbrThreads = copy2self(g.nbrThreads)
+            self.startMethod = copy2self(g.startMethod)
             self.relation = copy2self(g.relation)
             self.valuationdomain = copy2self(g.valuationdomain)
             self.nbrThreads = copy2self(g.nbrThreads)
@@ -2158,7 +2179,8 @@ class RatingByLearnedQuantilesDigraph(RatingDigraph,PerformanceQuantiles):
                                 betaParameter=betaParameter,
                                 confidence=confidence,
                                 )
-            self.nbrThreads = 1
+            self.nbrThreads = 0
+            self.startMethod = None
             self.relation = copy2self(g.relation)
             self.valuationdomain = copy2self(g.valuationdomain)       
             self.bipolarConfidenceLevel = copy2self(g.bipolarConfidenceLevel)
@@ -2169,7 +2191,8 @@ class RatingByLearnedQuantilesDigraph(RatingDigraph,PerformanceQuantiles):
         elif outrankingModel == 'robust':
             from outrankingDigraphs import RobustOutrankingDigraph
             g = RobustOutrankingDigraph(self)
-            self.nbrThreads = 1
+            self.nbrThreads = 0
+            self.startMethod = None
             self.relation = copy2self(g.relation)
             self.valuationdomain = copy2self(g.valuationdomain)       
             self.stability = copy2self(g.stability)
@@ -2325,8 +2348,10 @@ if __name__ == "__main__":
     lqr = RatingByLearnedQuantilesDigraph(pq,newData=newActions,
                         quantiles=7, outrankingModel='mp',
                         rankingRule='best', Threading=MP,
+                        startMethod=None,
                         nbrCores=nbrCores, Debug=False)
-##    print(lqr)
+    print(lqr)
+
 ##    lqr.showRatingByQuantilesSorting()
 ##    lqr.showRatingByQuantilesRanking()
 ##    print(lqr.computeRatingByRankingCorrelation(Debug=True))

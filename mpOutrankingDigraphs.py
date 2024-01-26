@@ -137,7 +137,7 @@ class MPBipolarOutrankingDigraph(BipolarOutrankingDigraph):
     ...     pass
     >>> from mpOutrankingDigraphs import MPBipolarOutrankingDigraph
     >>> bg = MPBipolarOutrankingDigraph(Normalized=True,ndigits=2,
-    ...                                 nbrCores=8,startMeth='spawn')
+    ...                                 nbrCores=8,startMethod='spawn')
     >>> bg
      *------- Object instance description ------*
      Instance class       : MPBipolarOutrankingDigraph
@@ -151,7 +151,7 @@ class MPBipolarOutrankingDigraph(BipolarOutrankingDigraph):
                      'objectives', 'NA', 'evaluation', 'nbrThreads',
                      'relation', 'largePerformanceDifferencesCount',
                      'valuationdomain', 'gamma', 'notGamma',
-                     'runTimes', 'startMeth']
+                     'runTimes', 'startMethod']
      ----  Constructor run times (in sec.) ----
      Threads            : 8
      Start method       : 'spawn'
@@ -186,7 +186,7 @@ class MPBipolarOutrankingDigraph(BipolarOutrankingDigraph):
                 pass
             from mpOutrankingDigraphs import MPBipolarOutrankingDigraph
             bg = MPBipolarOutrankingDigraph(Normalized=True,
-                                startMeth='forkserver',
+                                startMethod='forkserver',
                                 nbrCores=6)
             print(bg)
       
@@ -220,7 +220,7 @@ class MPBipolarOutrankingDigraph(BipolarOutrankingDigraph):
             self.nbrThreads = 1
             reprString += 'Threads            : %d\n' % self.nbrThreads
         try:
-            reprString += "Start method       : \'%s\'\n" % self.startMeth
+            reprString += "Start method       : \'%s\'\n" % self.startMethod
         except:
             pass
         reprString += 'Total time         : %.5f\n' % val1
@@ -236,7 +236,7 @@ class MPBipolarOutrankingDigraph(BipolarOutrankingDigraph):
 
     def __init__(self,WithGammaSets=True,
                  Normalized=False,ndigits=4,
-                 startMeth='spawn',nbrCores=None):
+                 startMethod=None,nbrCores=None):
         from decimal import Decimal
         from time import time
         runTimes = {}
@@ -256,8 +256,10 @@ class MPBipolarOutrankingDigraph(BipolarOutrankingDigraph):
 
         # compute relation
         t1 = time()
-        ctx_in_main = multiprocessing.get_context(startMeth)
-        self.startMeth = '%s' % ctx_in_main.get_start_method()
+        if startMethod is None:
+            startMethod = 'spawn'
+        ctx_in_main = multiprocessing.get_context(startMethod)
+        self.startMethod = '%s' % ctx_in_main.get_start_method()
         relation = {}
         considerableDiffs = {}
         for x in actions:
@@ -374,7 +376,7 @@ if __name__ == '__main__':
     while not os.path.exists('./sharedPerfTab.py'):
         pass
     bg = MPBipolarOutrankingDigraph(Normalized=True,
-                                    startMeth='forkserver',
+                                    startMethod='forkserver',
                                     nbrCores=6)
     print(bg)
     print('*------------------*')

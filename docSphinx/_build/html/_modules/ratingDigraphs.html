@@ -184,8 +184,13 @@
         <span class="k">try</span><span class="p">:</span>
             <span class="n">repString</span> <span class="o">+=</span> <span class="s1">&#39;Threads             : </span><span class="si">%d</span><span class="se">\n</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="bp">self</span><span class="o">.</span><span class="n">nbrThreads</span>
         <span class="k">except</span><span class="p">:</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">nbrThreads</span> <span class="o">=</span> <span class="mi">1</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">nbrThreads</span> <span class="o">=</span> <span class="mi">0</span>
             <span class="n">repString</span> <span class="o">+=</span> <span class="s1">&#39;Threads             : </span><span class="si">%d</span><span class="se">\n</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="bp">self</span><span class="o">.</span><span class="n">nbrThreads</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="n">repString</span> <span class="o">+=</span> <span class="s1">&#39;StartMethod         : </span><span class="si">%s</span><span class="se">\n</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="bp">self</span><span class="o">.</span><span class="n">startMethod</span>
+        <span class="k">except</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">startMethod</span> <span class="o">=</span> <span class="kc">None</span>
+            <span class="n">repString</span> <span class="o">+=</span> <span class="s1">&#39;StartMethod         : </span><span class="si">%s</span><span class="se">\n</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="bp">self</span><span class="o">.</span><span class="n">startMethod</span>
         <span class="n">repString</span> <span class="o">+=</span> <span class="s1">&#39;Total time          : </span><span class="si">%.5f</span><span class="se">\n</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="bp">self</span><span class="o">.</span><span class="n">runTimes</span><span class="p">[</span><span class="s1">&#39;totalTime&#39;</span><span class="p">]</span>
         <span class="n">repString</span> <span class="o">+=</span> <span class="s1">&#39;Data input          : </span><span class="si">%.5f</span><span class="se">\n</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="bp">self</span><span class="o">.</span><span class="n">runTimes</span><span class="p">[</span><span class="s1">&#39;dataInput&#39;</span><span class="p">]</span>
         <span class="n">repString</span> <span class="o">+=</span> <span class="s1">&#39;Compute quantiles   : </span><span class="si">%.5f</span><span class="se">\n</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="bp">self</span><span class="o">.</span><span class="n">runTimes</span><span class="p">[</span><span class="s1">&#39;computeProfiles&#39;</span><span class="p">]</span>
@@ -604,6 +609,7 @@
                                    <span class="n">Correlations</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
                                    <span class="n">Threading</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
                                    <span class="n">nbrOfCPUs</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+                                   <span class="n">startMethod</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
                                    <span class="n">Debug</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
                               <span class="n">htmlFileName</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
@@ -1308,7 +1314,8 @@
                                <span class="n">rankingRule</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
                                <span class="n">Correlations</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
                                <span class="n">Threading</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
-                               <span class="n">nbrOfCPUs</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span>
+                               <span class="n">startMethod</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+                               <span class="n">nbrOfCPUs</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
                                <span class="n">Debug</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;       </span>
 <span class="sd">        Renders the Brewer RdYlGn 5,7, or 9 levels colored heatmap of the performance table</span>
@@ -1409,9 +1416,10 @@
         <span class="k">if</span> <span class="n">criteriaList</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
             <span class="k">if</span> <span class="n">Correlations</span><span class="p">:</span>
                 <span class="n">criteriaCorrelation</span> <span class="o">=</span>\
-                        <span class="bp">self</span><span class="o">.</span><span class="n">computeMarginalVersusGlobalRankingCorrelations</span><span class="p">(</span>\
-                                <span class="n">actionsList</span><span class="p">,</span><span class="n">ValuedCorrelation</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span><span class="n">Threading</span><span class="o">=</span><span class="n">Threading</span><span class="p">,</span>
-                                <span class="n">nbrCores</span><span class="o">=</span><span class="n">nbrOfCPUs</span><span class="p">)</span>
+                        <span class="bp">self</span><span class="o">.</span><span class="n">computeMarginalVersusGlobalRankingCorrelations</span><span class="p">(</span>
+                            <span class="n">actionsList</span><span class="p">,</span><span class="n">ValuedCorrelation</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+                            <span class="n">Threading</span><span class="o">=</span><span class="n">Threading</span><span class="p">,</span><span class="n">startMethod</span><span class="o">=</span><span class="n">startMethod</span><span class="p">,</span>
+                            <span class="n">nbrCores</span><span class="o">=</span><span class="n">nbrOfCPUs</span><span class="p">)</span>
                 <span class="n">criteriaList</span> <span class="o">=</span> <span class="p">[</span><span class="n">c</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="k">for</span> <span class="n">c</span> <span class="ow">in</span> <span class="n">criteriaCorrelation</span><span class="p">]</span>
             <span class="k">else</span><span class="p">:</span>
                 <span class="n">criteriaList</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">criteria</span><span class="o">.</span><span class="n">keys</span><span class="p">())</span>
@@ -1424,9 +1432,11 @@
             <span class="n">criteriaList</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">criteria</span><span class="o">.</span><span class="n">keys</span><span class="p">())</span>
             <span class="k">if</span> <span class="n">Correlations</span><span class="p">:</span>
                 <span class="n">criteriaCorrelation</span> <span class="o">=</span>\
-                        <span class="bp">self</span><span class="o">.</span><span class="n">computeMarginalVersusGlobalRankingCorrelations</span><span class="p">(</span>\
-                                <span class="n">actionsList</span><span class="p">,</span><span class="n">ValuedCorrelation</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span><span class="n">Threading</span><span class="o">=</span><span class="n">Threading</span><span class="p">,</span>
-                                <span class="n">nbrCores</span><span class="o">=</span><span class="n">nbrOfCPUs</span><span class="p">)</span>
+                        <span class="bp">self</span><span class="o">.</span><span class="n">computeMarginalVersusGlobalRankingCorrelations</span><span class="p">(</span>
+                            <span class="n">actionsList</span><span class="p">,</span><span class="n">ValuedCorrelation</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+                            <span class="n">Threading</span><span class="o">=</span><span class="n">Threading</span><span class="p">,</span>
+                            <span class="n">startMethod</span><span class="o">=</span><span class="n">startMethod</span><span class="p">,</span>    
+                            <span class="n">nbrCores</span><span class="o">=</span><span class="n">nbrOfCPUs</span><span class="p">)</span>
             <span class="k">else</span><span class="p">:</span>
                 <span class="n">criteriaCorrelation</span> <span class="o">=</span> <span class="kc">None</span>
             
@@ -1654,6 +1664,7 @@
                  <span class="n">confidence</span><span class="o">=</span><span class="mf">90.0</span><span class="p">,</span>
                  <span class="n">rankingRule</span><span class="o">=</span><span class="s1">&#39;NetFlows&#39;</span><span class="p">,</span>
                  <span class="n">Threading</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+                 <span class="n">startMethod</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
                  <span class="n">nbrCores</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
                  <span class="n">CopyPerfTab</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
                  <span class="n">Debug</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
@@ -1818,6 +1829,7 @@
                 <span class="k">pass</span>
             <span class="kn">from</span> <span class="nn">mpOutrankingDigraphs</span> <span class="kn">import</span> <span class="n">MPBipolarOutrankingDigraph</span>
             <span class="n">g</span> <span class="o">=</span> <span class="n">MPBipolarOutrankingDigraph</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">Normalized</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+                                           <span class="n">startMethod</span><span class="o">=</span><span class="n">startMethod</span><span class="p">,</span>
                                            <span class="n">nbrCores</span><span class="o">=</span><span class="n">nbrCores</span><span class="p">)</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">nbrThreads</span> <span class="o">=</span> <span class="n">copy2self</span><span class="p">(</span><span class="n">g</span><span class="o">.</span><span class="n">nbrThreads</span><span class="p">)</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">relation</span> <span class="o">=</span> <span class="n">copy2self</span><span class="p">(</span><span class="n">g</span><span class="o">.</span><span class="n">relation</span><span class="p">)</span>
@@ -1825,7 +1837,9 @@
         <span class="k">if</span> <span class="n">outrankingModel</span> <span class="o">==</span> <span class="s1">&#39;standard&#39;</span><span class="p">:</span>
             <span class="kn">from</span> <span class="nn">outrankingDigraphs</span> <span class="kn">import</span> <span class="n">BipolarOutrankingDigraph</span>
             <span class="n">g</span> <span class="o">=</span> <span class="n">BipolarOutrankingDigraph</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span>
-                                     <span class="n">Threading</span><span class="o">=</span><span class="n">Threading</span><span class="p">,</span><span class="n">nbrCores</span><span class="o">=</span><span class="n">nbrCores</span><span class="p">)</span>
+                                    <span class="n">Threading</span><span class="o">=</span><span class="n">Threading</span><span class="p">,</span>
+                                    <span class="n">startMethod</span><span class="o">=</span><span class="n">startMethod</span><span class="p">,</span>
+                                    <span class="n">nbrCores</span><span class="o">=</span><span class="n">nbrCores</span><span class="p">)</span>
             <span class="c1">#self.nbrThreads = copy2self(g.nbrThreads)</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">relation</span> <span class="o">=</span> <span class="n">copy2self</span><span class="p">(</span><span class="n">g</span><span class="o">.</span><span class="n">relation</span><span class="p">)</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">valuationdomain</span> <span class="o">=</span> <span class="n">copy2self</span><span class="p">(</span><span class="n">g</span><span class="o">.</span><span class="n">valuationdomain</span><span class="p">)</span>
@@ -1837,7 +1851,8 @@
                                 <span class="n">betaParameter</span><span class="o">=</span><span class="n">betaParameter</span><span class="p">,</span>
                                 <span class="n">confidence</span><span class="o">=</span><span class="n">confidence</span><span class="p">,</span>
                                 <span class="p">)</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">nbrThreads</span> <span class="o">=</span> <span class="mi">1</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">nbrThreads</span> <span class="o">=</span> <span class="mi">0</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">startMethod</span> <span class="o">=</span> <span class="kc">None</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">relation</span> <span class="o">=</span> <span class="n">copy2self</span><span class="p">(</span><span class="n">g</span><span class="o">.</span><span class="n">relation</span><span class="p">)</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">valuationdomain</span> <span class="o">=</span> <span class="n">copy2self</span><span class="p">(</span><span class="n">g</span><span class="o">.</span><span class="n">valuationdomain</span><span class="p">)</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">bipolarConfidenceLevel</span> <span class="o">=</span> <span class="n">copy2self</span><span class="p">(</span><span class="n">g</span><span class="o">.</span><span class="n">bipolarConfidenceLevel</span><span class="p">)</span>
@@ -1848,7 +1863,8 @@
         <span class="k">elif</span> <span class="n">outrankingModel</span> <span class="o">==</span> <span class="s1">&#39;robust&#39;</span><span class="p">:</span>
             <span class="kn">from</span> <span class="nn">outrankingDigraphs</span> <span class="kn">import</span> <span class="n">RobustOutrankingDigraph</span>
             <span class="n">g</span> <span class="o">=</span> <span class="n">RobustOutrankingDigraph</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">nbrThreads</span> <span class="o">=</span> <span class="mi">1</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">nbrThreads</span> <span class="o">=</span> <span class="mi">0</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">startMethod</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">relation</span> <span class="o">=</span> <span class="n">copy2self</span><span class="p">(</span><span class="n">g</span><span class="o">.</span><span class="n">relation</span><span class="p">)</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">valuationdomain</span> <span class="o">=</span> <span class="n">copy2self</span><span class="p">(</span><span class="n">g</span><span class="o">.</span><span class="n">valuationdomain</span><span class="p">)</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">stability</span> <span class="o">=</span> <span class="n">copy2self</span><span class="p">(</span><span class="n">g</span><span class="o">.</span><span class="n">stability</span><span class="p">)</span>
@@ -2096,6 +2112,7 @@
                  <span class="n">betaParameter</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span>
                  <span class="n">confidence</span><span class="o">=</span><span class="mf">90.0</span><span class="p">,</span>
                  <span class="n">Threading</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+                 <span class="n">startMethod</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
                  <span class="n">nbrCores</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
                  <span class="n">CopyPerfTab</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
                  <span class="n">Debug</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
@@ -2273,8 +2290,11 @@
         <span class="k">if</span> <span class="n">outrankingModel</span> <span class="o">==</span> <span class="s1">&#39;standard&#39;</span><span class="p">:</span>
             <span class="kn">from</span> <span class="nn">outrankingDigraphs</span> <span class="kn">import</span> <span class="n">BipolarOutrankingDigraph</span>
             <span class="n">g</span> <span class="o">=</span> <span class="n">BipolarOutrankingDigraph</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span>
-                                     <span class="n">Threading</span><span class="o">=</span><span class="n">Threading</span><span class="p">,</span><span class="n">nbrCores</span><span class="o">=</span><span class="n">nbrCores</span><span class="p">)</span>
+                                     <span class="n">Threading</span><span class="o">=</span><span class="n">Threading</span><span class="p">,</span>
+                                         <span class="n">startMethod</span><span class="o">=</span><span class="n">startMethod</span><span class="p">,</span>
+                                         <span class="n">nbrCores</span><span class="o">=</span><span class="n">nbrCores</span><span class="p">)</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">nbrThreads</span> <span class="o">=</span> <span class="n">copy2self</span><span class="p">(</span><span class="n">g</span><span class="o">.</span><span class="n">nbrThreads</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">startMethod</span> <span class="o">=</span> <span class="n">copy2self</span><span class="p">(</span><span class="n">g</span><span class="o">.</span><span class="n">startMethod</span><span class="p">)</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">relation</span> <span class="o">=</span> <span class="n">copy2self</span><span class="p">(</span><span class="n">g</span><span class="o">.</span><span class="n">relation</span><span class="p">)</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">valuationdomain</span> <span class="o">=</span> <span class="n">copy2self</span><span class="p">(</span><span class="n">g</span><span class="o">.</span><span class="n">valuationdomain</span><span class="p">)</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">nbrThreads</span> <span class="o">=</span> <span class="n">copy2self</span><span class="p">(</span><span class="n">g</span><span class="o">.</span><span class="n">nbrThreads</span><span class="p">)</span>
@@ -2287,6 +2307,7 @@
             <span class="kn">from</span> <span class="nn">mpOutrankingDigraphs</span> <span class="kn">import</span> <span class="n">MPBipolarOutrankingDigraph</span>
             <span class="n">g</span> <span class="o">=</span> <span class="n">MPBipolarOutrankingDigraph</span><span class="p">(</span><span class="n">Normalized</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">nbrThreads</span> <span class="o">=</span> <span class="n">copy2self</span><span class="p">(</span><span class="n">g</span><span class="o">.</span><span class="n">nbrThreads</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">startMethod</span> <span class="o">=</span> <span class="n">copy2self</span><span class="p">(</span><span class="n">g</span><span class="o">.</span><span class="n">startMethod</span><span class="p">)</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">relation</span> <span class="o">=</span> <span class="n">copy2self</span><span class="p">(</span><span class="n">g</span><span class="o">.</span><span class="n">relation</span><span class="p">)</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">valuationdomain</span> <span class="o">=</span> <span class="n">copy2self</span><span class="p">(</span><span class="n">g</span><span class="o">.</span><span class="n">valuationdomain</span><span class="p">)</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">nbrThreads</span> <span class="o">=</span> <span class="n">copy2self</span><span class="p">(</span><span class="n">g</span><span class="o">.</span><span class="n">nbrThreads</span><span class="p">)</span>
@@ -2297,7 +2318,8 @@
                                 <span class="n">betaParameter</span><span class="o">=</span><span class="n">betaParameter</span><span class="p">,</span>
                                 <span class="n">confidence</span><span class="o">=</span><span class="n">confidence</span><span class="p">,</span>
                                 <span class="p">)</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">nbrThreads</span> <span class="o">=</span> <span class="mi">1</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">nbrThreads</span> <span class="o">=</span> <span class="mi">0</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">startMethod</span> <span class="o">=</span> <span class="kc">None</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">relation</span> <span class="o">=</span> <span class="n">copy2self</span><span class="p">(</span><span class="n">g</span><span class="o">.</span><span class="n">relation</span><span class="p">)</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">valuationdomain</span> <span class="o">=</span> <span class="n">copy2self</span><span class="p">(</span><span class="n">g</span><span class="o">.</span><span class="n">valuationdomain</span><span class="p">)</span>       
             <span class="bp">self</span><span class="o">.</span><span class="n">bipolarConfidenceLevel</span> <span class="o">=</span> <span class="n">copy2self</span><span class="p">(</span><span class="n">g</span><span class="o">.</span><span class="n">bipolarConfidenceLevel</span><span class="p">)</span>
@@ -2308,7 +2330,8 @@
         <span class="k">elif</span> <span class="n">outrankingModel</span> <span class="o">==</span> <span class="s1">&#39;robust&#39;</span><span class="p">:</span>
             <span class="kn">from</span> <span class="nn">outrankingDigraphs</span> <span class="kn">import</span> <span class="n">RobustOutrankingDigraph</span>
             <span class="n">g</span> <span class="o">=</span> <span class="n">RobustOutrankingDigraph</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">nbrThreads</span> <span class="o">=</span> <span class="mi">1</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">nbrThreads</span> <span class="o">=</span> <span class="mi">0</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">startMethod</span> <span class="o">=</span> <span class="kc">None</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">relation</span> <span class="o">=</span> <span class="n">copy2self</span><span class="p">(</span><span class="n">g</span><span class="o">.</span><span class="n">relation</span><span class="p">)</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">valuationdomain</span> <span class="o">=</span> <span class="n">copy2self</span><span class="p">(</span><span class="n">g</span><span class="o">.</span><span class="n">valuationdomain</span><span class="p">)</span>       
             <span class="bp">self</span><span class="o">.</span><span class="n">stability</span> <span class="o">=</span> <span class="n">copy2self</span><span class="p">(</span><span class="n">g</span><span class="o">.</span><span class="n">stability</span><span class="p">)</span>
@@ -2465,8 +2488,10 @@
     <span class="n">lqr</span> <span class="o">=</span> <span class="n">RatingByLearnedQuantilesDigraph</span><span class="p">(</span><span class="n">pq</span><span class="p">,</span><span class="n">newData</span><span class="o">=</span><span class="n">newActions</span><span class="p">,</span>
                         <span class="n">quantiles</span><span class="o">=</span><span class="mi">7</span><span class="p">,</span> <span class="n">outrankingModel</span><span class="o">=</span><span class="s1">&#39;mp&#39;</span><span class="p">,</span>
                         <span class="n">rankingRule</span><span class="o">=</span><span class="s1">&#39;best&#39;</span><span class="p">,</span> <span class="n">Threading</span><span class="o">=</span><span class="n">MP</span><span class="p">,</span>
+                        <span class="n">startMethod</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
                         <span class="n">nbrCores</span><span class="o">=</span><span class="n">nbrCores</span><span class="p">,</span> <span class="n">Debug</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
-<span class="c1">##    print(lqr)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">lqr</span><span class="p">)</span>
+
 <span class="c1">##    lqr.showRatingByQuantilesSorting()</span>
 <span class="c1">##    lqr.showRatingByQuantilesRanking()</span>
 <span class="c1">##    print(lqr.computeRatingByRankingCorrelation(Debug=True))</span>

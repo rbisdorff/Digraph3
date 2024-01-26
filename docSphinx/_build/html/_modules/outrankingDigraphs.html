@@ -4198,11 +4198,14 @@
         <span class="n">val4</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">runTimes</span><span class="p">[</span><span class="s1">&#39;gammaSets&#39;</span><span class="p">]</span>
         <span class="n">reprString</span> <span class="o">+=</span> <span class="s1">&#39;----  Constructor run times (in sec.) ----</span><span class="se">\n</span><span class="s1">&#39;</span>
         <span class="k">try</span><span class="p">:</span>
-            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">nbrThreads</span> <span class="o">&gt;</span> <span class="mi">1</span><span class="p">:</span>
+            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">nbrThreads</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
                 <span class="n">reprString</span> <span class="o">+=</span> <span class="s1">&#39;Threads          : </span><span class="si">%d</span><span class="se">\n</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="bp">self</span><span class="o">.</span><span class="n">nbrThreads</span>
-                <span class="n">reprString</span> <span class="o">+=</span> <span class="s1">&#39;Start method     : </span><span class="si">%s</span><span class="se">\n</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="bp">self</span><span class="o">.</span><span class="n">startMethod</span>
         <span class="k">except</span><span class="p">:</span>
-            <span class="k">pass</span>
+            <span class="n">reprString</span> <span class="o">+=</span> <span class="s1">&#39;Threads          : </span><span class="si">%d</span><span class="se">\n</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="mi">0</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="n">reprString</span> <span class="o">+=</span> <span class="s1">&#39;Start method     : </span><span class="si">%s</span><span class="se">\n</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="bp">self</span><span class="o">.</span><span class="n">startMethod</span>
+        <span class="k">except</span><span class="p">:</span>
+            <span class="n">reprString</span> <span class="o">+=</span> <span class="s1">&#39;Start method     : </span><span class="si">%s</span><span class="se">\n</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="kc">None</span>
         <span class="n">reprString</span> <span class="o">+=</span> <span class="s1">&#39;Total time       : </span><span class="si">%.5f</span><span class="se">\n</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="n">val1</span>
         <span class="n">reprString</span> <span class="o">+=</span> <span class="s1">&#39;Data input       : </span><span class="si">%.5f</span><span class="se">\n</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="n">val2</span>
         <span class="n">reprString</span> <span class="o">+=</span> <span class="s1">&#39;Compute relation : </span><span class="si">%.5f</span><span class="se">\n</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="n">val3</span>
@@ -4526,7 +4529,8 @@
             <span class="c1"># set threading parameter</span>
             <span class="k">if</span> <span class="n">Comments</span><span class="p">:</span>
                 <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Computing without threading ...&#39;</span><span class="p">)</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">nbrThreads</span> <span class="o">=</span> <span class="mi">1</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">nbrThreads</span> <span class="o">=</span> <span class="mi">0</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">startMethod</span> <span class="o">=</span> <span class="kc">None</span>
 
             <span class="c1"># !! concordance relation and veto counts need a complex constructor</span>
             <span class="k">if</span> <span class="p">(</span><span class="ow">not</span> <span class="n">hasBipolarVeto</span><span class="p">)</span> <span class="ow">or</span> <span class="n">WithConcordanceRelation</span> <span class="ow">or</span> <span class="n">WithVetoCounts</span><span class="p">:</span>
