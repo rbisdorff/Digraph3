@@ -1977,7 +1977,7 @@ class Digraph(object):
 
 
     def computeOrdinalCorrelationMP(self, other, MedianCut=False,
-                                    Threading=True,nbrOfCPUs=None,
+                                    Threading=False,nbrOfCPUs=None,
                                     startMethod=None,
                                     Comments=False,Debug=False):
         """
@@ -15081,10 +15081,12 @@ if __name__ == "__main__":
                                              missingDataProbability=0.05,seed=2)
                           
     #t = CircularPerformanceTableau()
-    print(getcontext().prec)
+    #print(getcontext().prec)
     g = BipolarOutrankingDigraph(t,Threading=True,startMethod='spawn')
     print(g)
-    print(g.computeOrdinalCorrelationMP(g,Threading=True))
+    t0 = time()
+    print(g.computeOrdinalCorrelationMP(g,Threading=True,startMethod=None,nbrOfCPUs=None))
+    print(time()-t0)
     #g = RandomBipolarOutrankingDigraph(10)
     #g.showRelationTable()
     #g.showRelationMap()

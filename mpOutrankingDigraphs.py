@@ -377,7 +377,7 @@ if __name__ == '__main__':
         pass
     bg = MPBipolarOutrankingDigraph(Normalized=True,
                                     startMethod='forkserver',
-                                    nbrCores=6)
+                                    nbrCores=12)
     print(bg)
     print('*------------------*')
     print('If you see this line all tests were passed successfully :-)')

@@ -2571,7 +2571,7 @@ is by convention 0.0 at determination level 0.0 .</p>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="digraphs.Digraph.computeOrdinalCorrelationMP">
-<span class="sig-name descname"><span class="pre">computeOrdinalCorrelationMP</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">other</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">MedianCut</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">Threading</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">nbrOfCPUs</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">startMethod</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">Comments</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">Debug</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/digraphs.html#Digraph.computeOrdinalCorrelationMP"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#digraphs.Digraph.computeOrdinalCorrelationMP" title="Link to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">computeOrdinalCorrelationMP</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">other</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">MedianCut</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">Threading</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">nbrOfCPUs</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">startMethod</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">Comments</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">Debug</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/digraphs.html#Digraph.computeOrdinalCorrelationMP"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#digraphs.Digraph.computeOrdinalCorrelationMP" title="Link to this definition"></a></dt>
 <dd><p>Multi processing version of the digraphs.computeOrdinalCorrelation() method.</p>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
@@ -6691,13 +6691,16 @@ generated with the <a class="reference internal" href="#randomPerfTabs.RandomPer
 <p><em>rankingRule</em>: ‘NetFlows’ (default).</p>
 <p><em>outrankingModel</em>: {‘standard’ (default) | ‘mp’ | ‘confident’ | ‘robust’},</p>
 <blockquote>
-<div><blockquote>
 <div><p>Parameters for the <em>confident</em> outranking model:</p>
 <p><em>distribution</em>: {‘triangular’ (default)| ‘uniform’ | ‘beta’},</p>
 <p><em>betaParameter</em> : 2 (default),</p>
 <p><em>confidence</em>: alpha% confidence level (in percents, 90.0 default).</p>
 </div></blockquote>
-<p>Example usage:</p>
+<ul class="simple">
+<li><p><em>startMethod</em>: {‘spawn’ (default) | ‘forkserver’ | ‘fork’ }</p></li>
+</ul>
+<blockquote>
+<div><p>Example usage:</p>
 </div></blockquote>
 <div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="c1"># generating random historical performance records and quantiles</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">randomPerfTabs</span> <span class="kn">import</span> <span class="n">RandomPerformanceTableau</span>
@@ -6741,7 +6744,8 @@ in order to avoid recursive execution of the submitted script.</p>
 <dl class="py class">
 <dt class="sig sig-object py" id="ratingDigraphs.RatingByRelativeQuantilesDigraph">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">ratingDigraphs.</span></span><span class="sig-name descname"><span class="pre">RatingByRelativeQuantilesDigraph</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">argPerfTab</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">quantiles</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">LowerClosed</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">outrankingModel</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'standard'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">distribution</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'triangular'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">betaParameter</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">2</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">confidence</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">90.0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">rankingRule</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'NetFlows'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">Threading</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">startMethod</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">nbrCores</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">CopyPerfTab</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">Debug</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/ratingDigraphs.html#RatingByRelativeQuantilesDigraph"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#ratingDigraphs.RatingByRelativeQuantilesDigraph" title="Link to this definition"></a></dt>
-<dd><p>Constructor for a relative quantiles rating-by sorting and rating-by-ranking digraph.
+<dd><blockquote>
+<div><p>Constructor for a relative quantiles rating-by sorting and rating-by-ranking digraph.
 See the <a class="reference internal" href="#sortingDigraphs.QuantilesSortingDigraph" title="sortingDigraphs.QuantilesSortingDigraph"><code class="xref py py-class docutils literal notranslate"><span class="pre">sortingDigraphs.QuantilesSortingDigraph</span></code></a> class.</p>
 <p><strong>Parameters</strong></p>
 <blockquote>
@@ -6758,9 +6762,7 @@ See the <a class="reference internal" href="#sortingDigraphs.QuantilesSortingDig
 <p><em>confidence</em>: alpha% confidence level (in percents, 90.0 default).</p>
 </div></blockquote>
 </li>
-<li><p>If <em>Threading</em> is set to <em>True</em>, or <em>outrankingModel</em> is set to ‘mp’,
-mind that when running from a script file, the main program code entry
-must start with a __name__==’__main__’ test.</p></li>
+<li><p><em>startMethod</em>: {‘spawn’ (default) | ‘forkserver’ | ‘fork’ }</p></li>
 </ul>
 </div></blockquote>
 <p>Example usage:</p>
@@ -6801,6 +6803,11 @@ must start with a __name__==’__main__’ test.</p></li>
 <span class="go">                   &#39;a44&#39;, &#39;a34&#39;, &#39;a25&#39;, &#39;a24&#39;, &#39;a35&#39;, &#39;a14&#39;,</span>
 <span class="go">                   &#39;a15&#39;]</span>
 </pre></div>
+</div>
+</div></blockquote>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>Mind that when executing a multiprocessing (Threading = True) Python script file and not using the ‘fork’ threading start method, the main program code entry must be protected with a __name__==’__main__’ test in order to avoid the recursive re-execution of the script in every started thread.</p>
 </div>
 </dd></dl>
 

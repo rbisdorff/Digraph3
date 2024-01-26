@@ -2145,7 +2145,7 @@
 <div class="viewcode-block" id="Digraph.computeOrdinalCorrelationMP">
 <a class="viewcode-back" href="../techDoc.html#digraphs.Digraph.computeOrdinalCorrelationMP">[docs]</a>
     <span class="k">def</span> <span class="nf">computeOrdinalCorrelationMP</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">other</span><span class="p">,</span> <span class="n">MedianCut</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
-                                    <span class="n">Threading</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span><span class="n">nbrOfCPUs</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+                                    <span class="n">Threading</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span><span class="n">nbrOfCPUs</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
                                     <span class="n">startMethod</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
                                     <span class="n">Comments</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span><span class="n">Debug</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
@@ -16025,10 +16025,12 @@
                                              <span class="n">missingDataProbability</span><span class="o">=</span><span class="mf">0.05</span><span class="p">,</span><span class="n">seed</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
                           
     <span class="c1">#t = CircularPerformanceTableau()</span>
-    <span class="nb">print</span><span class="p">(</span><span class="n">getcontext</span><span class="p">()</span><span class="o">.</span><span class="n">prec</span><span class="p">)</span>
+    <span class="c1">#print(getcontext().prec)</span>
     <span class="n">g</span> <span class="o">=</span> <span class="n">BipolarOutrankingDigraph</span><span class="p">(</span><span class="n">t</span><span class="p">,</span><span class="n">Threading</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span><span class="n">startMethod</span><span class="o">=</span><span class="s1">&#39;spawn&#39;</span><span class="p">)</span>
     <span class="nb">print</span><span class="p">(</span><span class="n">g</span><span class="p">)</span>
-    <span class="nb">print</span><span class="p">(</span><span class="n">g</span><span class="o">.</span><span class="n">computeOrdinalCorrelationMP</span><span class="p">(</span><span class="n">g</span><span class="p">,</span><span class="n">Threading</span><span class="o">=</span><span class="kc">True</span><span class="p">))</span>
+    <span class="n">t0</span> <span class="o">=</span> <span class="n">time</span><span class="p">()</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">g</span><span class="o">.</span><span class="n">computeOrdinalCorrelationMP</span><span class="p">(</span><span class="n">g</span><span class="p">,</span><span class="n">Threading</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span><span class="n">startMethod</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span><span class="n">nbrOfCPUs</span><span class="o">=</span><span class="kc">None</span><span class="p">))</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">time</span><span class="p">()</span><span class="o">-</span><span class="n">t0</span><span class="p">)</span>
     <span class="c1">#g = RandomBipolarOutrankingDigraph(10)</span>
     <span class="c1">#g.showRelationTable()</span>
     <span class="c1">#g.showRelationMap()</span>

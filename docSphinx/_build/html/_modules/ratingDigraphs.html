@@ -1608,12 +1608,10 @@
 <span class="sd">          *betaParameter* : 2 (default), </span>
 <span class="sd">        </span>
 <span class="sd">          *confidence*: alpha% confidence level (in percents, 90.0 default).</span>
-<span class="sd"> </span>
-<span class="sd">       * If *Threading* is set to *True*, or *outrankingModel* is set to &#39;mp&#39;,</span>
-<span class="sd">         mind that when running from a script file, the main program code entry</span>
-<span class="sd">         must start with a __name__==&#39;__main__&#39; test.</span>
+<span class="sd">    </span>
+
+<span class="sd">       * *startMethod*: {&#39;spawn&#39; (default) | &#39;forkserver&#39; | &#39;fork&#39; }</span>
 <span class="sd">        </span>
-<span class="sd"> </span>
 <span class="sd">    Example usage:</span>
 
 <span class="sd">    &gt;&gt;&gt; # generating random multicriteria performance records</span>
@@ -1652,6 +1650,8 @@
 <span class="sd">        [0.14 - 0.29[ [&#39;a03&#39;, &#39;a42&#39;, &#39;a28&#39;, &#39;a10&#39;, &#39;a36&#39;, &#39;a45&#39;,</span>
 <span class="sd">                       &#39;a44&#39;, &#39;a34&#39;, &#39;a25&#39;, &#39;a24&#39;, &#39;a35&#39;, &#39;a14&#39;,</span>
 <span class="sd">                       &#39;a15&#39;]</span>
+
+<span class="sd">.. warning::  Mind that when executing a multiprocessing (Threading = True) Python script file and not using the &#39;fork&#39; threading start method, the main program code entry must be protected with a __name__==&#39;__main__&#39; test in order to avoid the recursive re-execution of the script in every started thread.</span>
 
 <span class="sd">    &quot;&quot;&quot;</span>
 
@@ -2065,6 +2065,8 @@
 <span class="sd">        </span>
 <span class="sd">        *confidence*: alpha% confidence level (in percents, 90.0 default).</span>
 
+<span class="sd">    * *startMethod*: {&#39;spawn&#39; (default) | &#39;forkserver&#39; | &#39;fork&#39; }</span>
+<span class="sd">        </span>
 <span class="sd">     Example usage:</span>
 
 <span class="sd">    &gt;&gt;&gt; # generating random historical performance records and quantiles</span>

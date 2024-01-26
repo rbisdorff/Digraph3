@@ -1472,12 +1472,10 @@ class RatingByRelativeQuantilesDigraph(RatingDigraph,PerformanceTableau):
           *betaParameter* : 2 (default), 
         
           *confidence*: alpha% confidence level (in percents, 90.0 default).
- 
-       * If *Threading* is set to *True*, or *outrankingModel* is set to 'mp',
-         mind that when running from a script file, the main program code entry
-         must start with a __name__=='__main__' test.
+    
+
+       * *startMethod*: {'spawn' (default) | 'forkserver' | 'fork' }
         
- 
     Example usage:
 
     >>> # generating random multicriteria performance records
@@ -1516,6 +1514,8 @@ class RatingByRelativeQuantilesDigraph(RatingDigraph,PerformanceTableau):
         [0.14 - 0.29[ ['a03', 'a42', 'a28', 'a10', 'a36', 'a45',
                        'a44', 'a34', 'a25', 'a24', 'a35', 'a14',
                        'a15']
+
+.. warning::  Mind that when executing a multiprocessing (Threading = True) Python script file and not using the 'fork' threading start method, the main program code entry must be protected with a __name__=='__main__' test in order to avoid the recursive re-execution of the script in every started thread.
 
     """
 
@@ -1926,6 +1926,8 @@ class RatingByLearnedQuantilesDigraph(RatingDigraph,PerformanceQuantiles):
         
         *confidence*: alpha% confidence level (in percents, 90.0 default).
 
+    * *startMethod*: {'spawn' (default) | 'forkserver' | 'fork' }
+        
      Example usage:
 
     >>> # generating random historical performance records and quantiles
