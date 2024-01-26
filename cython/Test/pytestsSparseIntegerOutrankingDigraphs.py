@@ -159,10 +159,12 @@ def testcQuantilesRankingFitness():
                                 CopyPerfTab=True,
                                minimalComponentSize=minimalComponentSize,
                                     Threading=MP,Debug=False)
+        print(bg1)
         bg2 = cQuantilesRankingDigraph(tp,quantiles=qTiles,quantilesOrderingStrategy='average',
                                 LowerClosed=False,
                                minimalComponentSize=nbrOfActions,
                                     Threading=MP,Comments=False,Debug=False)
+        print(bg2)
         corr = bg1.computeOrdinalCorrelation(bg2,Debug=False)
         fo = open(fileName,'a')
         fo.write('%.3f,%.3f\n' %(corr['correlation'],corr['determination']))

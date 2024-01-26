@@ -1046,17 +1046,17 @@ On criteria function *g1* (see Lines 6-8 above) we observe, for instance, about 
 .. code-block:: pycon
    :linenos:
 
-   >>> pt.showPerformanceTableau()
+   >>> pt.showPerformanceTableau(Transposed=True,ndigits=1)
     *----  performance tableau -----*
-     criteria |  'a1'  'a2'  'a3'  'a4'  'a5'  'a6'  'a7'   
-     ---------|------------------------------------------
-      'g1'    |  15.2  44.5  57.9  58.0  24.2  29.1  96.6  
-      'g2'    |  82.3  43.9   NA   35.8  29.1  34.8  62.2  
-      'g3'    |  44.2  19.1  27.7  41.5  22.4  21.5  56.9  
-      'g4'    |  46.4  16.2  21.5  51.2  77.0  39.4  32.1  
-      'g5'    |  47.7  14.8  79.7  67.5   NA   90.7  80.2  
-      'g6'    |  69.6  45.5  22.0  33.8  31.8   NA   48.8  
-      'g7'    |  82.9  41.7  12.8  21.9  75.7  15.4   6.0  
+     criteria |  weights | 'a1'  'a2'  'a3'  'a4'  'a5'  'a6'  'a7'   
+     ---------|----------|-----------------------------------------
+      'g1'    |    1     | 15.2  44.5  57.9  58.0  24.2  29.1  96.6  
+      'g2'    |    1     | 82.3  43.9   NA   35.8  29.1  34.8  62.2  
+      'g3'    |    1     | 44.2  19.1  27.7  41.5  22.4  21.5  56.9  
+      'g4'    |    1     | 46.4  16.2  21.5  51.2  77.0  39.4  32.1  
+      'g5'    |    1     | 47.7  14.8  79.7  67.5   NA   90.7  80.2  
+      'g6'    |    1     | 69.6  45.5  22.0  33.8  31.8   NA   48.8  
+      'g7'    |    1     | 82.9  41.7  12.8  21.9  75.7  15.4   6.0  
 
 It is noteworthy to mention the three **missing data** (*NA*) cases: action *a3* is missing, for instance, a grade on criterion *g2* (see Line 6 above).
     
@@ -1164,7 +1164,7 @@ All outranking digraphs, being of root type :py:class:`~digraphs.Digraph`, inher
 .. code-block:: pycon
    :linenos:
 
-   >>> odg.recodeValuation(-37,+37)
+   >>> odg.recodeValuation(-7,+7)
    >>> odg.valuationdomain['hasIntegerValuation'] = True
    >>> Digraph.showRelationTable(odg,ReflexiveTerms=False)
     * ---- Relation Table -----

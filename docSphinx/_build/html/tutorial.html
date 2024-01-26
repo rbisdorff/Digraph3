@@ -1198,17 +1198,17 @@ the current working directory a ‘tutorialDigraph.dot’ file and a
 </pre></div>
 </div>
 <p>On criteria function <em>g1</em> (see Lines 6-8 above) we observe, for instance, about 5% of <strong>indifference</strong>, about 90% of <strong>preference</strong> and about 5% of <strong>considerable</strong> performance difference situations. The individual performance evaluation of all decision alternative on each criterion are gathered in a <em>performance tableau</em>.</p>
-<div class="highlight-pycon notranslate"><div class="highlight"><pre><span></span><span class="linenos"> 1</span><span class="gp">&gt;&gt;&gt; </span><span class="n">pt</span><span class="o">.</span><span class="n">showPerformanceTableau</span><span class="p">()</span>
+<div class="highlight-pycon notranslate"><div class="highlight"><pre><span></span><span class="linenos"> 1</span><span class="gp">&gt;&gt;&gt; </span><span class="n">pt</span><span class="o">.</span><span class="n">showPerformanceTableau</span><span class="p">(</span><span class="n">Transposed</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span><span class="n">ndigits</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
 <span class="linenos"> 2</span><span class="go"> *----  performance tableau -----*</span>
-<span class="linenos"> 3</span><span class="go">  criteria |  &#39;a1&#39;  &#39;a2&#39;  &#39;a3&#39;  &#39;a4&#39;  &#39;a5&#39;  &#39;a6&#39;  &#39;a7&#39;</span>
-<span class="linenos"> 4</span><span class="go">  ---------|------------------------------------------</span>
-<span class="linenos"> 5</span><span class="go">   &#39;g1&#39;    |  15.2  44.5  57.9  58.0  24.2  29.1  96.6</span>
-<span class="linenos"> 6</span><span class="go">   &#39;g2&#39;    |  82.3  43.9   NA   35.8  29.1  34.8  62.2</span>
-<span class="linenos"> 7</span><span class="go">   &#39;g3&#39;    |  44.2  19.1  27.7  41.5  22.4  21.5  56.9</span>
-<span class="linenos"> 8</span><span class="go">   &#39;g4&#39;    |  46.4  16.2  21.5  51.2  77.0  39.4  32.1</span>
-<span class="linenos"> 9</span><span class="go">   &#39;g5&#39;    |  47.7  14.8  79.7  67.5   NA   90.7  80.2</span>
-<span class="linenos">10</span><span class="go">   &#39;g6&#39;    |  69.6  45.5  22.0  33.8  31.8   NA   48.8</span>
-<span class="linenos">11</span><span class="go">   &#39;g7&#39;    |  82.9  41.7  12.8  21.9  75.7  15.4   6.0</span>
+<span class="linenos"> 3</span><span class="go">  criteria |  weights | &#39;a1&#39;  &#39;a2&#39;  &#39;a3&#39;  &#39;a4&#39;  &#39;a5&#39;  &#39;a6&#39;  &#39;a7&#39;</span>
+<span class="linenos"> 4</span><span class="go">  ---------|----------|-----------------------------------------</span>
+<span class="linenos"> 5</span><span class="go">   &#39;g1&#39;    |    1     | 15.2  44.5  57.9  58.0  24.2  29.1  96.6</span>
+<span class="linenos"> 6</span><span class="go">   &#39;g2&#39;    |    1     | 82.3  43.9   NA   35.8  29.1  34.8  62.2</span>
+<span class="linenos"> 7</span><span class="go">   &#39;g3&#39;    |    1     | 44.2  19.1  27.7  41.5  22.4  21.5  56.9</span>
+<span class="linenos"> 8</span><span class="go">   &#39;g4&#39;    |    1     | 46.4  16.2  21.5  51.2  77.0  39.4  32.1</span>
+<span class="linenos"> 9</span><span class="go">   &#39;g5&#39;    |    1     | 47.7  14.8  79.7  67.5   NA   90.7  80.2</span>
+<span class="linenos">10</span><span class="go">   &#39;g6&#39;    |    1     | 69.6  45.5  22.0  33.8  31.8   NA   48.8</span>
+<span class="linenos">11</span><span class="go">   &#39;g7&#39;    |    1     | 82.9  41.7  12.8  21.9  75.7  15.4   6.0</span>
 </pre></div>
 </div>
 <p>It is noteworthy to mention the three <strong>missing data</strong> (<em>NA</em>) cases: action <em>a3</em> is missing, for instance, a grade on criterion <em>g2</em> (see Line 6 above).</p>
@@ -1302,7 +1302,7 @@ the current working directory a ‘tutorialDigraph.dot’ file and a
 <section id="recoding-the-digraph-valuation">
 <h4><a class="toc-backref" href="#id244" role="doc-backlink"><span class="section-number">1.2.3.4. </span>Recoding the digraph valuation</a><a class="headerlink" href="#recoding-the-digraph-valuation" title="Link to this heading"></a></h4>
 <p>All outranking digraphs, being of root type <a class="reference internal" href="techDoc.html#digraphs.Digraph" title="digraphs.Digraph"><code class="xref py py-class docutils literal notranslate"><span class="pre">Digraph</span></code></a>, inherit the methods available under this latter class. The characteristic valuation domain of a digraph may, for instance,  be recoded with the <code class="xref py py-func docutils literal notranslate"><span class="pre">recodeValutaion()</span></code> method below to the <em>integer</em> range [-7,+7], i.e. plus or minus the global significance of the family of criteria considered in this example instance.</p>
-<div class="highlight-pycon notranslate"><div class="highlight"><pre><span></span><span class="linenos"> 1</span><span class="gp">&gt;&gt;&gt; </span><span class="n">odg</span><span class="o">.</span><span class="n">recodeValuation</span><span class="p">(</span><span class="o">-</span><span class="mi">37</span><span class="p">,</span><span class="o">+</span><span class="mi">37</span><span class="p">)</span>
+<div class="highlight-pycon notranslate"><div class="highlight"><pre><span></span><span class="linenos"> 1</span><span class="gp">&gt;&gt;&gt; </span><span class="n">odg</span><span class="o">.</span><span class="n">recodeValuation</span><span class="p">(</span><span class="o">-</span><span class="mi">7</span><span class="p">,</span><span class="o">+</span><span class="mi">7</span><span class="p">)</span>
 <span class="linenos"> 2</span><span class="gp">&gt;&gt;&gt; </span><span class="n">odg</span><span class="o">.</span><span class="n">valuationdomain</span><span class="p">[</span><span class="s1">&#39;hasIntegerValuation&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="kc">True</span>
 <span class="linenos"> 3</span><span class="gp">&gt;&gt;&gt; </span><span class="n">Digraph</span><span class="o">.</span><span class="n">showRelationTable</span><span class="p">(</span><span class="n">odg</span><span class="p">,</span><span class="n">ReflexiveTerms</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
 <span class="linenos"> 4</span><span class="go"> * ---- Relation Table -----</span>
