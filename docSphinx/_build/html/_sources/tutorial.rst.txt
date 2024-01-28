@@ -4614,10 +4614,11 @@ Using Digraph3 multiprocessing resources
 Computing with multiple threads in parallel
 ```````````````````````````````````````````
 
-Modern desktop and laptop computers usually provide a multithreaded CPU which allows to run several threads in parallel. In the Digraph3 resources we offer this usage with a *Threading*, a *nbrCores* or *nbrOfCPUs* and a *startMethod* parameter.  
+Modern desktop and laptop computers usually provide a multithreaded CPU which allows to run several threads in parallel. In the Digraph3 resources we offer this usage with a *Threading*, a *nbrCores* or *nbrOfCPUs* and a *startMethod* parameter (see below Lines 6-7)  
 
 .. code-block:: pycon
    :linenos:
+   :emphasize-lines: 6,7,24
       
    ...$ python3
     Python 3.11.6 (main, Oct  8 2023, 05:06:43) [GCC 13.2.0] on linux
@@ -4647,7 +4648,7 @@ Modern desktop and laptop computers usually provide a multithreaded CPU which al
    Compute relation : 3.20870
    Gamma sets       : 0.12471
    
-The same computation without threading takes about four times more total run time (see Line 17 below).
+The same computation without threading takes about four times more total run time (see above Line 24 and below Line 20).
 
 .. code-block:: pycon
    :linenos:
@@ -4683,7 +4684,7 @@ Setting threading parameters
 
 Without specifying the number of cores (*nbrCores=None*) or the threading start method (*startMethod=None*), the *cpu_count* method from the :py:mod:`multiprocessing` module will be used to detect the number of available cores and the default start method will be *spawn*.
 
-It is possible to use instead the *forkserver* or the more traditional Posix *fork* start method (default on Linux).
+It is possible to use instead the *forkserver* or the more traditional Posix *fork* start method (default on Linux). [52]_
 
 Mind that the latter method, due to the very architecture of the Python interpreter C code, cannot be safe against specific dead locks leading to  hanging or freezing applications and zombie processes. [51]_
 
@@ -10311,6 +10312,8 @@ Appendices
 .. [50] The inter- and intragroup pairing solvers solely maximise the overall correlation with the individual pairing preferences. It may happen that a slightly lesser overall correlation result comes with a considerable lower standard deviation. Is this pairing solution than fairer than the one with a higher overall correlation? Asked more generally: is a society with highest global welfare but uneven wealth distribution a fairer society than the one showing less global welfare but with a considerable less uneven wealth distribution?
 
 .. [51] See https://britishgeologicalsurvey.github.io/science/python-forking-vs-spawn/
+
+.. [52] See the documentation of the :py:mod:`multiprocessing` module
 
 ..  LocalWords:  randomDigraph Determinateness valuationdomain py png
 ..  LocalWords:  notGamma tutorialDigraph shortName func irreflexive

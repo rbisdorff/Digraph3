@@ -1823,10 +1823,10 @@
 <span class="c1">##            self.nbrThreads = nbrCores</span>
         <span class="k">if</span> <span class="n">outrankingModel</span> <span class="o">==</span> <span class="s1">&#39;mp&#39;</span><span class="p">:</span>
             <span class="kn">import</span> <span class="nn">os</span>
-            <span class="kn">from</span> <span class="nn">perfTabs</span> <span class="kn">import</span> <span class="n">PerformanceTableau</span>
-            <span class="n">PerformanceTableau</span><span class="o">.</span><span class="n">save</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="s1">&#39;sharedPerfTab&#39;</span><span class="p">)</span>
-            <span class="k">while</span> <span class="ow">not</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="s1">&#39;./sharedPerfTab.py&#39;</span><span class="p">):</span>
-                <span class="k">pass</span>
+            <span class="c1"># from perfTabs import PerformanceTableau</span>
+            <span class="c1"># PerformanceTableau.save(self,&#39;sharedPerfTab&#39;)</span>
+            <span class="c1"># while not os.path.exists(&#39;./sharedPerfTab.py&#39;):</span>
+            <span class="c1">#     pass</span>
             <span class="kn">from</span> <span class="nn">mpOutrankingDigraphs</span> <span class="kn">import</span> <span class="n">MPBipolarOutrankingDigraph</span>
             <span class="n">g</span> <span class="o">=</span> <span class="n">MPBipolarOutrankingDigraph</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">Normalized</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
                                            <span class="n">startMethod</span><span class="o">=</span><span class="n">startMethod</span><span class="p">,</span>
@@ -2302,12 +2302,8 @@
             <span class="bp">self</span><span class="o">.</span><span class="n">nbrThreads</span> <span class="o">=</span> <span class="n">copy2self</span><span class="p">(</span><span class="n">g</span><span class="o">.</span><span class="n">nbrThreads</span><span class="p">)</span>
         <span class="k">elif</span> <span class="n">outrankingModel</span> <span class="o">==</span> <span class="s1">&#39;mp&#39;</span><span class="p">:</span>
             <span class="kn">import</span> <span class="nn">os</span>
-            <span class="kn">from</span> <span class="nn">perfTabs</span> <span class="kn">import</span> <span class="n">PerformanceTableau</span>
-            <span class="n">PerformanceTableau</span><span class="o">.</span><span class="n">save</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="s1">&#39;sharedPerfTab&#39;</span><span class="p">)</span>
-            <span class="k">while</span> <span class="ow">not</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="s1">&#39;./sharedPerfTab.py&#39;</span><span class="p">):</span>
-                <span class="k">pass</span>
             <span class="kn">from</span> <span class="nn">mpOutrankingDigraphs</span> <span class="kn">import</span> <span class="n">MPBipolarOutrankingDigraph</span>
-            <span class="n">g</span> <span class="o">=</span> <span class="n">MPBipolarOutrankingDigraph</span><span class="p">(</span><span class="n">Normalized</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+            <span class="n">g</span> <span class="o">=</span> <span class="n">MPBipolarOutrankingDigraph</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">Normalized</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">nbrThreads</span> <span class="o">=</span> <span class="n">copy2self</span><span class="p">(</span><span class="n">g</span><span class="o">.</span><span class="n">nbrThreads</span><span class="p">)</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">startMethod</span> <span class="o">=</span> <span class="n">copy2self</span><span class="p">(</span><span class="n">g</span><span class="o">.</span><span class="n">startMethod</span><span class="p">)</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">relation</span> <span class="o">=</span> <span class="n">copy2self</span><span class="p">(</span><span class="n">g</span><span class="o">.</span><span class="n">relation</span><span class="p">)</span>

@@ -2,8 +2,7 @@
 """
 Digraph3 collection of python3 modules for Algorithmic Decision Theory applications.
 
-New Python3.12+ compatible multiprocessing implementation of bipolar-valued outranking digraphs for Linux and MacOS. The potentially unsafe default *fork* multiprocessing start-method may be either set to 'spawn' (default) or to 'forkserver'. Shared pool given performance tableau must be first saved in the current working directory in a file named 'sharedPerfTab'.
-
+New Python3.12+ compatible multiprocessing implementation of bipolar-valued outranking digraphs for Linux and MacOS. The potentially unsafe default *fork* multiprocessing start-method may be either set to 'spawn' (default) or to 'forkserver'. 
 Copyright (C) 2023  Raymond Bisdorff
 
     This program is free software; you can redistribute it and/or modify
@@ -28,17 +27,26 @@ __version__ = "Revision: Py3.12"
 import multiprocessing
 import os
 from time import time
+from decimal import Decimal
 
-from sharedPerfTab import *
-
-def worker_func(actionKey):
+def worker_func(args):
     # computing the genuine bipolar-valued outranking situations
     # with considerable performance differences counts between
     # the given *actionKey* performance record and the complete set of
     # performance records
-    # in: actionKey, out: relation, considerableDiffs
+    # in: args=(actionKey,perfTab);
+    # out: relation, considerableDiffs
 
-    # init the varia o be returned
+    # in variables
+    actionKey = args[0]
+    perfTab = args[1]
+    actions = perfTab.actions
+    objectives = perfTab.objectives
+    criteria = perfTab.criteria
+    evaluation = perfTab.evaluation
+    NA = perfTab.NA
+    
+    # init the variables tobe returned
     relation = {}
     considerableDiffs = {}
     x = actionKey
@@ -115,14 +123,12 @@ class MPBipolarOutrankingDigraph(BipolarOutrankingDigraph):
     New variable start-method based MP implementation of the BipolarOutrankingDigraph class.
 
     *Parameters*:
+        * *argPerfTab*: may be eithet the name of a PerformanceTableau object or the file name without extension of a previously saved PerformanceTableau instance 
         * *Normalized*: the valuation domain is set by default to the sum of the criteria weights. If *True*, the valuation domain is recoded to [-1.0,+1.0].
         * *ndigits*: number of decimal digits of the characteristic valuation, by default set to 4.
         * *nbrCores*: controls the maximal number of cores that will be used in the multiprocessing phases. If *None* is given, the *os.cpu_count()* method is used in order to determine the number of available cores on the SMP machine.
         * *startMethod*: 'spawn' (default) | 'forkserver' | 'fork'
-        * The given *PerformanceTableau* object is shared with the multiprocessing threads via importing a *sharedPerfTab.py* module stored in the current working directory and containing a saved *PerformanceTableau* object.
 
-    .. note:: The given *PerformanceTableau* must be previously saved in the working directory under the name 'sharedPerfTab'.
-    
     *Usage example*
 
     (11th Gen Intel® Core™ i5-11400 × 12, 16.0 GiB memory, Ubuntu 23.10, Python3.12.0):
@@ -131,12 +137,8 @@ class MPBipolarOutrankingDigraph(BipolarOutrankingDigraph):
     >>> pt1 = RandomCBPerformanceTableau(
     ...         numberOfActions=1000,numberOfCriteria=13,
     ...         seed=10)
-    >>> pt1.save('sharedPerfTab')
-    >>> import os
-    >>> while not os.path.exists('./sharedPerfTab.py'):
-    ...     pass
     >>> from mpOutrankingDigraphs import MPBipolarOutrankingDigraph
-    >>> bg = MPBipolarOutrankingDigraph(Normalized=True,ndigits=2,
+    >>> bg = MPBipolarOutrankingDigraph(pt,Normalized=True,ndigits=2,
     ...                                 nbrCores=8,startMethod='spawn')
     >>> bg
      *------- Object instance description ------*
@@ -175,19 +177,14 @@ class MPBipolarOutrankingDigraph(BipolarOutrankingDigraph):
 
     *Example Python script*::
     
+        from randomPerfTabs import Random3ObjectivesPerformanceTableau
+        from mpOutrankingDigraphs import MPBipolarOutrankingDigraph
         if __name__ == '__main__':
-            from randomPerfTabs import Random3ObjectivesPerformanceTableau
             pt = Random3ObjectivesPerformanceTableau(
                           numberOfActions=500,seed=2)
-            pt.save('sharedPerfTab')
-            print(pt)
-            import os
-            while not os.path.exists('./sharedPerfTab.py'):
-                pass
-            from mpOutrankingDigraphs import MPBipolarOutrankingDigraph
-            bg = MPBipolarOutrankingDigraph(Normalized=True,
-                                startMethod='forkserver',
-                                nbrCores=6)
+            bg = MPBipolarOutrankingDigraph(pt,Normalized=True,
+                                startMethod='spawn',
+                                nbrCores=8)
             print(bg)
       
 
@@ -234,15 +231,19 @@ class MPBipolarOutrankingDigraph(BipolarOutrankingDigraph):
         reprString += 'Gamma sets         : %.5f\n' % val4
         return reprString
 
-    def __init__(self,WithGammaSets=True,
+    def __init__(self,argPerfTab,WithGammaSets=True,
                  Normalized=False,ndigits=4,
                  startMethod=None,nbrCores=None):
         from decimal import Decimal
         from time import time
         runTimes = {}
         t0 = time()
-        import sharedPerfTab as perfTab
-        self.name = 'rel_sharedPerfTab'
+        if type(argPerfTab) == str:
+            from perfTabs import PerformanceTableau
+            perfTab = PerformanceTableau(argPerfTab)
+        else:
+            perfTab = argPerfTab
+        self.name = 'rel_mpPerfTab'
         self.actions = perfTab.actions
         self.order = len(self.actions)
         self.criteria = perfTab.criteria
@@ -255,6 +256,7 @@ class MPBipolarOutrankingDigraph(BipolarOutrankingDigraph):
         runTimes['dataInput'] = time() - t0
 
         # compute relation
+        actions = self.actions
         t1 = time()
         if startMethod is None:
             startMethod = 'spawn'
@@ -270,7 +272,7 @@ class MPBipolarOutrankingDigraph(BipolarOutrankingDigraph):
         else:
             cores = nbrCores
         self.nbrThreads = cores
-        tasks = [x for x in actions]
+        tasks = [(x,perfTab) for x in actions]
         with ctx_in_main.Pool(processes=cores) as pool:
             #print(tasks)
             for result in pool.imap(worker_func, tasks):
@@ -369,15 +371,10 @@ class MPBipolarOutrankingDigraph(BipolarOutrankingDigraph):
 if __name__ == '__main__':
     from randomPerfTabs import Random3ObjectivesPerformanceTableau
     pt = Random3ObjectivesPerformanceTableau(
-                              numberOfActions=500,seed=2)
-    pt.save('sharedPerfTab')
-    print(pt)
-    import os
-    while not os.path.exists('./sharedPerfTab.py'):
-        pass
-    bg = MPBipolarOutrankingDigraph(Normalized=True,
-                                    startMethod='forkserver',
-                                    nbrCores=12)
+                              numberOfActions=1500,seed=2)
+    bg = MPBipolarOutrankingDigraph(argPerfTab=pt,Normalized=True,
+                                    startMethod='spawn',
+                                    nbrCores=None)
     print(bg)
     print('*------------------*')
     print('If you see this line all tests were passed successfully :-)')

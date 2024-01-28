@@ -1687,10 +1687,10 @@ class RatingByRelativeQuantilesDigraph(RatingDigraph,PerformanceTableau):
 ##            self.nbrThreads = nbrCores
         if outrankingModel == 'mp':
             import os
-            from perfTabs import PerformanceTableau
-            PerformanceTableau.save(self,'sharedPerfTab')
-            while not os.path.exists('./sharedPerfTab.py'):
-                pass
+            # from perfTabs import PerformanceTableau
+            # PerformanceTableau.save(self,'sharedPerfTab')
+            # while not os.path.exists('./sharedPerfTab.py'):
+            #     pass
             from mpOutrankingDigraphs import MPBipolarOutrankingDigraph
             g = MPBipolarOutrankingDigraph(self,Normalized=True,
                                            startMethod=startMethod,
@@ -2163,12 +2163,8 @@ class RatingByLearnedQuantilesDigraph(RatingDigraph,PerformanceQuantiles):
             self.nbrThreads = copy2self(g.nbrThreads)
         elif outrankingModel == 'mp':
             import os
-            from perfTabs import PerformanceTableau
-            PerformanceTableau.save(self,'sharedPerfTab')
-            while not os.path.exists('./sharedPerfTab.py'):
-                pass
             from mpOutrankingDigraphs import MPBipolarOutrankingDigraph
-            g = MPBipolarOutrankingDigraph(Normalized=True)
+            g = MPBipolarOutrankingDigraph(self,Normalized=True)
             self.nbrThreads = copy2self(g.nbrThreads)
             self.startMethod = copy2self(g.startMethod)
             self.relation = copy2self(g.relation)

@@ -6528,8 +6528,8 @@ temporary unanimous outranking digraphs</p>
 <div class="graphviz"><object data="_images/inheritance-3ee863b80de94fc2e17d597580ca59eee28fa10a.svg" type="image/svg+xml" class="inheritance graphviz">
 <p class="warning">Inheritance diagram of mpOutrankingDigraphs</p></object></div>
 <p id="module-mpOutrankingDigraphs">Digraph3 collection of python3 modules for Algorithmic Decision Theory applications.</p>
-<p>New Python3.12+ compatible multiprocessing implementation of bipolar-valued outranking digraphs for Linux and MacOS. The potentially unsafe default <em>fork</em> multiprocessing start-method may be either set to ‘spawn’ (default) or to ‘forkserver’. Shared pool given performance tableau must be first saved in the current working directory in a file named ‘sharedPerfTab’.</p>
-<p>Copyright (C) 2023  Raymond Bisdorff</p>
+<p>New Python3.12+ compatible multiprocessing implementation of bipolar-valued outranking digraphs for Linux and MacOS. The potentially unsafe default <em>fork</em> multiprocessing start-method may be either set to ‘spawn’ (default) or to ‘forkserver’. 
+Copyright (C) 2023  Raymond Bisdorff</p>
 <blockquote>
 <div><p>This program is free software; you can redistribute it and/or modify
 it under the terms of the GNU General Public License as published by
@@ -6545,35 +6545,27 @@ with this program; if not, write to the Free Software Foundation, Inc.,
 </div></blockquote>
 <dl class="py class">
 <dt class="sig sig-object py" id="mpOutrankingDigraphs.MPBipolarOutrankingDigraph">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">mpOutrankingDigraphs.</span></span><span class="sig-name descname"><span class="pre">MPBipolarOutrankingDigraph</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">WithGammaSets</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">Normalized</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ndigits</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">4</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">startMethod</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">nbrCores</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/mpOutrankingDigraphs.html#MPBipolarOutrankingDigraph"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#mpOutrankingDigraphs.MPBipolarOutrankingDigraph" title="Link to this definition"></a></dt>
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">mpOutrankingDigraphs.</span></span><span class="sig-name descname"><span class="pre">MPBipolarOutrankingDigraph</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">argPerfTab</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">WithGammaSets</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">Normalized</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ndigits</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">4</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">startMethod</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">nbrCores</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/mpOutrankingDigraphs.html#MPBipolarOutrankingDigraph"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#mpOutrankingDigraphs.MPBipolarOutrankingDigraph" title="Link to this definition"></a></dt>
 <dd><blockquote>
 <div><p>New variable start-method based MP implementation of the BipolarOutrankingDigraph class.</p>
 <dl class="simple">
 <dt><em>Parameters</em>:</dt><dd><ul class="simple">
+<li><p><em>argPerfTab</em>: may be eithet the name of a PerformanceTableau object or the file name without extension of a previously saved PerformanceTableau instance</p></li>
 <li><p><em>Normalized</em>: the valuation domain is set by default to the sum of the criteria weights. If <em>True</em>, the valuation domain is recoded to [-1.0,+1.0].</p></li>
 <li><p><em>ndigits</em>: number of decimal digits of the characteristic valuation, by default set to 4.</p></li>
 <li><p><em>nbrCores</em>: controls the maximal number of cores that will be used in the multiprocessing phases. If <em>None</em> is given, the <em>os.cpu_count()</em> method is used in order to determine the number of available cores on the SMP machine.</p></li>
 <li><p><em>startMethod</em>: ‘spawn’ (default) | ‘forkserver’ | ‘fork’</p></li>
-<li><p>The given <em>PerformanceTableau</em> object is shared with the multiprocessing threads via importing a <em>sharedPerfTab.py</em> module stored in the current working directory and containing a saved <em>PerformanceTableau</em> object.</p></li>
 </ul>
 </dd>
 </dl>
-<div class="admonition note">
-<p class="admonition-title">Note</p>
-<p>The given <em>PerformanceTableau</em> must be previously saved in the working directory under the name ‘sharedPerfTab’.</p>
-</div>
 <p><em>Usage example</em></p>
 <p>(11th Gen Intel® Core™ i5-11400 × 12, 16.0 GiB memory, Ubuntu 23.10, Python3.12.0):</p>
 <div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">randomPerfTabs</span> <span class="kn">import</span> <span class="n">RandomCBPerformanceTableau</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">pt1</span> <span class="o">=</span> <span class="n">RandomCBPerformanceTableau</span><span class="p">(</span>
 <span class="gp">... </span>        <span class="n">numberOfActions</span><span class="o">=</span><span class="mi">1000</span><span class="p">,</span><span class="n">numberOfCriteria</span><span class="o">=</span><span class="mi">13</span><span class="p">,</span>
 <span class="gp">... </span>        <span class="n">seed</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">pt1</span><span class="o">.</span><span class="n">save</span><span class="p">(</span><span class="s1">&#39;sharedPerfTab&#39;</span><span class="p">)</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">os</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="k">while</span> <span class="ow">not</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="s1">&#39;./sharedPerfTab.py&#39;</span><span class="p">):</span>
-<span class="gp">... </span>    <span class="k">pass</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">mpOutrankingDigraphs</span> <span class="kn">import</span> <span class="n">MPBipolarOutrankingDigraph</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">bg</span> <span class="o">=</span> <span class="n">MPBipolarOutrankingDigraph</span><span class="p">(</span><span class="n">Normalized</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span><span class="n">ndigits</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">bg</span> <span class="o">=</span> <span class="n">MPBipolarOutrankingDigraph</span><span class="p">(</span><span class="n">pt</span><span class="p">,</span><span class="n">Normalized</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span><span class="n">ndigits</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span>
 <span class="gp">... </span>                                <span class="n">nbrCores</span><span class="o">=</span><span class="mi">8</span><span class="p">,</span><span class="n">startMethod</span><span class="o">=</span><span class="s1">&#39;spawn&#39;</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">bg</span>
 <span class="go"> *------- Object instance description ------*</span>
@@ -6613,19 +6605,14 @@ This is not necessary when using instead the classical Unix <em>fork</em>
 start-method where multiprocessing threads continue in fact
 the main program code from the point on where they were launched.</p>
 <p><em>Example Python script</em>:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s1">&#39;__main__&#39;</span><span class="p">:</span>
-    <span class="kn">from</span> <span class="nn">randomPerfTabs</span> <span class="kn">import</span> <span class="n">Random3ObjectivesPerformanceTableau</span>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">randomPerfTabs</span> <span class="kn">import</span> <span class="n">Random3ObjectivesPerformanceTableau</span>
+<span class="kn">from</span> <span class="nn">mpOutrankingDigraphs</span> <span class="kn">import</span> <span class="n">MPBipolarOutrankingDigraph</span>
+<span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s1">&#39;__main__&#39;</span><span class="p">:</span>
     <span class="n">pt</span> <span class="o">=</span> <span class="n">Random3ObjectivesPerformanceTableau</span><span class="p">(</span>
                   <span class="n">numberOfActions</span><span class="o">=</span><span class="mi">500</span><span class="p">,</span><span class="n">seed</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
-    <span class="n">pt</span><span class="o">.</span><span class="n">save</span><span class="p">(</span><span class="s1">&#39;sharedPerfTab&#39;</span><span class="p">)</span>
-    <span class="nb">print</span><span class="p">(</span><span class="n">pt</span><span class="p">)</span>
-    <span class="kn">import</span> <span class="nn">os</span>
-    <span class="k">while</span> <span class="ow">not</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="s1">&#39;./sharedPerfTab.py&#39;</span><span class="p">):</span>
-        <span class="k">pass</span>
-    <span class="kn">from</span> <span class="nn">mpOutrankingDigraphs</span> <span class="kn">import</span> <span class="n">MPBipolarOutrankingDigraph</span>
-    <span class="n">bg</span> <span class="o">=</span> <span class="n">MPBipolarOutrankingDigraph</span><span class="p">(</span><span class="n">Normalized</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
-                        <span class="n">startMethod</span><span class="o">=</span><span class="s1">&#39;forkserver&#39;</span><span class="p">,</span>
-                        <span class="n">nbrCores</span><span class="o">=</span><span class="mi">6</span><span class="p">)</span>
+    <span class="n">bg</span> <span class="o">=</span> <span class="n">MPBipolarOutrankingDigraph</span><span class="p">(</span><span class="n">pt</span><span class="p">,</span><span class="n">Normalized</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+                        <span class="n">startMethod</span><span class="o">=</span><span class="s1">&#39;spawn&#39;</span><span class="p">,</span>
+                        <span class="n">nbrCores</span><span class="o">=</span><span class="mi">8</span><span class="p">)</span>
     <span class="nb">print</span><span class="p">(</span><span class="n">bg</span><span class="p">)</span>
 </pre></div>
 </div>
