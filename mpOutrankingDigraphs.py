@@ -41,7 +41,6 @@ def worker_func(args):
     actionKey = args[0]
     perfTab = args[1]
     actions = perfTab.actions
-    objectives = perfTab.objectives
     criteria = perfTab.criteria
     evaluation = perfTab.evaluation
     NA = perfTab.NA

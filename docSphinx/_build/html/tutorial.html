@@ -4620,8 +4620,8 @@ pairwise perspective (see below), we notice that, with the given preference disc
 <span class="linenos">17</span><span class="go">                          &#39;relation&#39;, &#39;gamma&#39;, &#39;notGamma&#39;]</span>
 <span class="linenos">18</span><span class="go">   ----  Constructor run times (in sec.) ----</span>
 <span class="linenos">19</span><span class="go">   Start method     : None</span>
-<span class="linenos">20</span><span class="go">   Total time       : 12.84823</span>
-<span class="linenos">21</span><span class="go">   Data input       : 0.00941</span>
+<span class="hll"><span class="linenos">20</span><span class="go">   Total time       : 12.84823</span>
+</span><span class="linenos">21</span><span class="go">   Data input       : 0.00941</span>
 <span class="linenos">22</span><span class="go">   Compute relation : 12.73070</span>
 <span class="linenos">23</span><span class="go">   Gamma sets       : 0.10812</span>
 </pre></div>
@@ -4633,6 +4633,54 @@ pairwise perspective (see below), we notice that, with the given preference disc
 <p>Without specifying the number of cores (<em>nbrCores=None</em>) or the threading start method (<em>startMethod=None</em>), the <em>cpu_count</em> method from the <a class="reference external" href="https://docs.python.org/3/library/multiprocessing.html#module-multiprocessing" title="(in Python v3.12)"><code class="xref py py-mod docutils literal notranslate"><span class="pre">multiprocessing</span></code></a> module will be used to detect the number of available cores and the default start method will be <em>spawn</em>.</p>
 <p>It is possible to use instead the <em>forkserver</em> or the more traditional Posix <em>fork</em> start method (default on Linux). <a class="footnote-reference brackets" href="#id206" id="id61" role="doc-noteref"><span class="fn-bracket">[</span>52<span class="fn-bracket">]</span></a></p>
 <p>Mind that the latter method, due to the very architecture of the Python interpreter C code, cannot be safe against specific dead locks leading to  hanging or freezing applications and zombie processes. <a class="footnote-reference brackets" href="#id205" id="id62" role="doc-noteref"><span class="fn-bracket">[</span>51<span class="fn-bracket">]</span></a></p>
+<p>A refactored and streamlined multiprocessing <a class="reference internal" href="techDoc.html#module-mpOutrankingDigraphs" title="mpOutrankingDigraphs"><code class="xref py py-mod docutils literal notranslate"><span class="pre">mpOutrankingDigraphs</span></code></a> module for even faster computing bipolar outranking digraphs with up to several thousands of decision actions has been recently added to the Digraph3 resources (see Line 21 below).</p>
+<div class="highlight-pycon notranslate"><div class="highlight"><pre><span></span><span class="linenos"> 1</span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">mpOutrankingDigraphs</span> <span class="kn">import</span> <span class="n">MPBipolarOutrankingDigraph</span>
+<span class="linenos"> 2</span><span class="gp">&gt;&gt;&gt; </span><span class="n">mpg</span> <span class="o">=</span> <span class="n">MPBipolarOutrankingDigraph</span><span class="p">(</span><span class="n">t</span><span class="p">,</span><span class="n">nbrCores</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span>
+<span class="linenos"> 3</span><span class="gp">... </span>                                 <span class="n">startMthod</span><span class="o">=</span><span class="s1">&#39;spawn&#39;</span><span class="p">)</span>
+<span class="linenos"> 4</span><span class="gp">&gt;&gt;&gt; </span><span class="n">mpg</span>
+<span class="linenos"> 5</span><span class="go"> *------- Object instance description ------*</span>
+<span class="linenos"> 6</span><span class="go"> Instance class       : MPBipolarOutrankingDigraph</span>
+<span class="linenos"> 7</span><span class="go"> Instance name        : rel_sharedPerfTab</span>
+<span class="linenos"> 8</span><span class="go"> Actions              : 500</span>
+<span class="linenos"> 9</span><span class="go"> Criteria             : 13</span>
+<span class="linenos">10</span><span class="go"> Size                 : 142091</span>
+<span class="linenos">11</span><span class="go"> Determinateness (%)  : 62.08</span>
+<span class="linenos">12</span><span class="go"> Valuation domain     : [-13.00;13.00]</span>
+<span class="linenos">13</span><span class="go"> Attributes           : [&#39;name&#39;, &#39;actions&#39;, &#39;order&#39;, &#39;criteria&#39;,</span>
+<span class="linenos">14</span><span class="go">                         &#39;objectives&#39;, &#39;NA&#39;, &#39;evaluation&#39;, &#39;startMethod&#39;,</span>
+<span class="hll"><span class="linenos">15</span><span class="go">                         &#39;nbrThreads&#39;, &#39;relation&#39;,</span>
+</span><span class="linenos">16</span><span class="go">                         &#39;largePerformanceDifferencesCount&#39;,</span>
+<span class="linenos">17</span><span class="go">                         &#39;valuationdomain&#39;, &#39;gamma&#39;, &#39;notGamma&#39;,</span>
+<span class="linenos">18</span><span class="go">                         &#39;runTimes&#39;]</span>
+<span class="linenos">19</span><span class="go"> ----  Constructor run times (in sec.) ----</span>
+<span class="linenos">20</span><span class="go"> Threads            : 10</span>
+<span class="hll"><span class="linenos">21</span><span class="go"> Start method       : &#39;spawn&#39;</span>
+</span><span class="linenos">22</span><span class="go"> Total time         : 2.64477</span>
+<span class="linenos">23</span><span class="go"> Data input         : 0.00003</span>
+<span class="linenos">24</span><span class="go"> Compute relation   : 2.48847</span>
+<span class="linenos">25</span><span class="go"> Gamma sets         : 0.15624</span>
+</pre></div>
+</div>
+<p>Notice also in Line 15 above, that this computation includes the <em>largePerformanceDifferencesCount</em> attribute containing the results of the considerable performance differences counts. Setting parameter <em>WithVetoCounts</em> to <em>True</em> for the <code class="xref py py-class docutils literal notranslate"><span class="pre">”outrankingDigraphs.BipolarOutrankingDigraph</span></code> constructor gives the same attribute, but adds about a second to the total run time of 13 seconds.</p>
+<p>This allows to print out the relation table with the considerable performance differences counts.</p>
+<div class="highlight-pycon notranslate"><div class="highlight"><pre><span></span><span class="linenos"> 1</span><span class="gp">&gt;&gt;&gt; </span><span class="n">mpg</span><span class="o">.</span><span class="n">showRelationTable</span><span class="p">(</span><span class="n">hasLPDDenotation</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span><span class="n">toIndex</span><span class="o">=</span><span class="mi">5</span><span class="p">)</span>
+<span class="linenos"> 2</span><span class="go">* ---- Relation Table -----</span>
+<span class="linenos"> 3</span><span class="go"> r/(lh)|  &#39;a001&#39;   &#39;a002&#39;   &#39;a003&#39;   &#39;a004&#39;   &#39;a005&#39;</span>
+<span class="linenos"> 4</span><span class="go">-------|------------------------------------------------------------</span>
+<span class="linenos"> 5</span><span class="go">&#39;a001&#39; |  +13.00   -1.00    +1.00    +3.00    -1.00</span>
+<span class="linenos"> 6</span><span class="go">       |  (+0,+0) (+0,+0)  (+0,+0)  (+0,+0)  (+0,+0)</span>
+<span class="hll"><span class="linenos"> 7</span><span class="go">&#39;a002&#39; |   +3.00   +13.00   +2.00   +13.00    +4.00</span>
+</span><span class="hll"><span class="linenos"> 8</span><span class="go">       |  (+0,+0) (+0,+0)  (+0,+0)  (+1,+0)  (+0,+0)</span>
+</span><span class="linenos"> 9</span><span class="go">&#39;a003&#39; |   +1.00   +3.00   +13.00    -1.00    +4.00</span>
+<span class="linenos">10</span><span class="go">       |  (+0,+0) (+0,+0)  (+0,+0)  (+0,+0)  (+0,+0)</span>
+<span class="hll"><span class="linenos">11</span><span class="go">&#39;a004&#39; |   +2.00  -13.00    +4.00   +13.00    +0.00</span>
+</span><span class="hll"><span class="linenos">12</span><span class="go">       |  (+0,+0) (+0,-1)  (+0,+0)  (+0,+0)  (+0,-1)</span>
+</span><span class="linenos">13</span><span class="go">&#39;a005&#39; |   +4.00   +0.00    -3.00   +13.00   +13.00</span>
+<span class="linenos">14</span><span class="go">       |  (+0,+0) (+0,+0)  (+0,+0)  (+1,+0)  (+0,+0)</span>
+<span class="linenos">15</span><span class="go"> Valuation domain: [-13.000; 13.000]</span>
+</pre></div>
+</div>
+<p>In Lines 7-8 above, we may for instance notice a considerable positive performance difference when comparing alternatives ‘a002’ and ‘a004’ which results in a polarised for certain valid outranking situation: <img class="math" src="_images/math/a4a3e22647b37f88122f34450e585223989d23ed.png" alt="r(a_{002} \succsim a_{004}) = +13.00"/>. The converse situation is observed in Lines 11-12 where we may notice the corresponding considerable negative performance differnce leading this time polarise for certain invalid outranking situation: <img class="math" src="_images/math/786722952e014ff77e96a786a90fb4994257f2b9.png" alt="r(a_{004} \succsim a_{002}) = -13.00"/>.</p>
 </section>
 <section id="submitting-multiprocessing-python-scripts">
 <h4><a class="toc-backref" href="#id290" role="doc-backlink"><span class="section-number">1.3.9.3. </span>Submitting multiprocessing Python scripts</a><a class="headerlink" href="#submitting-multiprocessing-python-scripts" title="Link to this heading"></a></h4>

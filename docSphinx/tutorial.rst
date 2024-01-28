@@ -4652,6 +4652,7 @@ The same computation without threading takes about four times more total run tim
 
 .. code-block:: pycon
    :linenos:
+   :emphasize-lines: 20
 
    >>> g = BipolarOutrankingDigraph(t,Threading=False,
    ...                nbrCores=10,startMethod='spawn',
@@ -4687,6 +4688,64 @@ Without specifying the number of cores (*nbrCores=None*) or the threading start 
 It is possible to use instead the *forkserver* or the more traditional Posix *fork* start method (default on Linux). [52]_
 
 Mind that the latter method, due to the very architecture of the Python interpreter C code, cannot be safe against specific dead locks leading to  hanging or freezing applications and zombie processes. [51]_
+
+A refactored and streamlined multiprocessing :py:mod:`mpOutrankingDigraphs` module for even faster computing bipolar outranking digraphs with up to several thousands of decision actions has been recently added to the Digraph3 resources (see Line 21 below).
+
+.. code-block:: pycon
+   :linenos:
+   :emphasize-lines: 15,21
+
+   >>> from mpOutrankingDigraphs import MPBipolarOutrankingDigraph
+   >>> mpg = MPBipolarOutrankingDigraph(t,nbrCores=10,
+   ...                                  startMthod='spawn')
+   >>> mpg
+    *------- Object instance description ------*
+    Instance class       : MPBipolarOutrankingDigraph
+    Instance name        : rel_sharedPerfTab
+    Actions              : 500
+    Criteria             : 13
+    Size                 : 142091
+    Determinateness (%)  : 62.08
+    Valuation domain     : [-13.00;13.00]
+    Attributes           : ['name', 'actions', 'order', 'criteria',
+                            'objectives', 'NA', 'evaluation', 'startMethod',
+			    'nbrThreads', 'relation',
+			    'largePerformanceDifferencesCount',
+			    'valuationdomain', 'gamma', 'notGamma',
+			    'runTimes']
+    ----  Constructor run times (in sec.) ----
+    Threads            : 10
+    Start method       : 'spawn'
+    Total time         : 2.64477
+    Data input         : 0.00003
+    Compute relation   : 2.48847
+    Gamma sets         : 0.15624
+
+Notice also in Line 15 above, that this computation includes the *largePerformanceDifferencesCount* attribute containing the results of the considerable performance differences counts. Setting parameter *WithVetoCounts* to *True* for the :py:class:`”outrankingDigraphs.BipolarOutrankingDigraph` constructor gives the same attribute, but adds about a second to the total run time of 13 seconds.
+
+This allows to print out the relation table with the considerable performance differences counts.
+
+.. code-block:: pycon
+   :linenos:
+   :emphasize-lines: 7-8,11-12
+
+   >>> mpg.showRelationTable(hasLPDDenotation=True,toIndex=5)
+   * ---- Relation Table -----
+    r/(lh)|  'a001'   'a002'   'a003'   'a004'   'a005'   
+   -------|------------------------------------------------------------
+   'a001' |  +13.00   -1.00    +1.00    +3.00    -1.00  
+          |  (+0,+0) (+0,+0)  (+0,+0)  (+0,+0)  (+0,+0) 
+   'a002' |   +3.00   +13.00   +2.00   +13.00    +4.00  
+          |  (+0,+0) (+0,+0)  (+0,+0)  (+1,+0)  (+0,+0) 
+   'a003' |   +1.00   +3.00   +13.00    -1.00    +4.00  
+          |  (+0,+0) (+0,+0)  (+0,+0)  (+0,+0)  (+0,+0) 
+   'a004' |   +2.00  -13.00    +4.00   +13.00    +0.00  
+          |  (+0,+0) (+0,-1)  (+0,+0)  (+0,+0)  (+0,-1) 
+   'a005' |   +4.00   +0.00    -3.00   +13.00   +13.00  
+          |  (+0,+0) (+0,+0)  (+0,+0)  (+1,+0)  (+0,+0) 
+    Valuation domain: [-13.000; 13.000]
+
+In Lines 7-8 above, we may for instance notice a considerable positive performance difference when comparing alternatives 'a002' and 'a004' which results in a polarised for certain valid outranking situation: :math:`r(a_{002} \succsim a_{004}) = +13.00`. The converse situation is observed in Lines 11-12 where we may notice the corresponding considerable negative performance differnce leading this time polarise for certain invalid outranking situation: :math:`r(a_{004} \succsim a_{002}) = -13.00`.
 
 Submitting multiprocessing Python scripts
 `````````````````````````````````````````
