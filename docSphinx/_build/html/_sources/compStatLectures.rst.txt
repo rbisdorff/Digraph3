@@ -4,7 +4,7 @@
 
 Computational Statistics Lectures
 =================================
-:Author: Raymond Bisdorff, Emeritus Professor of Applied Mathematics and Computer Science
+:Author: Raymond Bisdorff, Retired Professor of Applied Mathematics and Computer Science
 :Copyright: R. Bisdorff |location_link3| 2013-2023
 
 Introduction

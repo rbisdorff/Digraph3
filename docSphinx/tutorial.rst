@@ -31,7 +31,7 @@
 
 .. only:: html
 
-   :Author: Raymond Bisdorff, Emeritus Professor of Applied Mathematics and Computer Science 
+   :Author: Raymond Bisdorff, Retired Professor of Applied Mathematics and Computer Science 
    :Version: |version| (release: |release|)
    :PDF version: `5.9 MB <_static/digraph3Tutorial.pdf>`_ 
    :Copyright: `R. Bisdorff <_static/digraph3_copyright.html>`_ 2013-2024

@@ -26,7 +26,7 @@ Advanced Topics
 
 .. only:: html
 
-   :Author: Raymond Bisdorff, Emeritus Professor of Applied Mathematics and Computer Science, https://rbisdorff.github.io/
+   :Author: Raymond Bisdorff, Retired Professor of Applied Mathematics and Computer Science, https://rbisdorff.github.io/
    :Version: |version| (release: |release|)
    :PDF version: `3.3 MB <_static/digraph3Pearls.pdf>`_
    :Copyright: `R. Bisdorff <_static/digraph3_copyright.html>`_ 2013-2024
