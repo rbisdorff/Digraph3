@@ -61,6 +61,7 @@
        * :ref:`Rating into relative performance quantiles <QuantilesRating-Tutorial-label>`
        * :ref:`Rating by ranking with learned performance quantile limits <LearnedRating-Tutorial-label>`
        * :ref:`Sparse bipolar-valued outranking digraphs <SparseOutranking-Tutorial-label>`
+       * :ref:`Using the Digraph3 multiprocessing resources <Multiprocessing-Tutorial-label>`
        * :ref:`HPC ranking of big performance tableaux <HPC-Tutorial-label>`
 
    * :ref:`Evaluation and decision case studies <Case-Studies-label>`
@@ -4596,6 +4597,117 @@ We may also verify below that the *Copeland* ranking obtained from the standard 
     {'correlation': 0.822, 'determination': 1.0}
 
 Noticing the computational efficiency of the quantiles sorting construction, coupled with the separability property of the quantile class membership characteristics computation, we will make usage of the :py:class:`~sparseOutrankingDigraphs.PreRankedOutrankingDigraph` constructor in the :ref:`cythonized Digraph3 modules <HPC-Tutorial-label>` for HPC ranking big and even huge performance tableaux.
+
+Back to :ref:`Content Table <Tutorial-label>`
+
+-----------
+
+.. _Multiprocessing-Tutorial-label:
+
+Using Digraph3 multiprocessing resources
+----------------------------------------
+
+.. contents:: 
+	:depth: 1
+	:local:
+
+Computing with multiple threads in parallel
+```````````````````````````````````````````
+
+Modern desktop and laptop computers usually provide a multithreaded CPU which allows to run several threads in parallel. In the Digraph3 resources we offer this usage with a *Threading*, a *nbrCores* or *nbrOfCPUs* and a *startMethod* parameter.  
+
+.. code-block:: pycon
+   :linenos:
+      
+   ...$ python3
+    Python 3.11.6 (main, Oct  8 2023, 05:06:43) [GCC 13.2.0] on linux
+   >>> from outrankingDigraphs import *
+   >>> t = RandomPerformanceTableau(numberOfActions=500,
+   ...                        numberOfCriteria=13,seed=1)
+   >>> g = BipolarOutrankingDigraph(t,Threading=True,
+   ...                              nbrCores=10,startMethod='spawn')
+   >>> g
+   *------- Object instance description ------*
+   Instance class       : BipolarOutrankingDigraph
+   Instance name        : rel_randomperftab
+   Actions              : 500
+   Criteria             : 13
+   Size                 : 142091
+   Determinateness (%)  : 62.08
+   Valuation domain     : [-1.00;1.00]
+   Attributes           : ['name', 'actions', 'ndigits', 'valuationdomain',
+                           'criteria', 'methodData', 'evaluation', 'NA',
+			   'order', 'runTimes', 'startMethod', 'nbrThreads',
+			   'relation', 'gamma', 'notGamma']
+   ----  Constructor run times (in sec.) ----
+   Threads          : 10
+   Start method     : spawn
+   Total time       : 3.34283
+   Data input       : 0.00941
+   Compute relation : 3.20870
+   Gamma sets       : 0.12471
+   
+The same computation without threading takes about four times more total run time (see Line 17 below).
+
+.. code-block:: pycon
+   :linenos:
+
+   >>> g = BipolarOutrankingDigraph(t,Threading=False,
+   ...                nbrCores=10,startMethod='spawn',
+   ...                WithConcordanceRelation=False,
+   ...                WithVetoCounts=False)
+   >>> g
+    *------- Object instance description ------*
+     Instance class       : BipolarOutrankingDigraph
+     Instance name        : rel_randomperftab
+     Actions              : 500
+     Criteria             : 13
+     Size                 : 142091
+     Determinateness (%)  : 62.08
+     Valuation domain     : [-1.00;1.00]
+     Attributes           : ['name', 'actions', 'ndigits', 'valuationdomain',
+                             'criteria', 'methodData', 'evaluation', 'NA',
+			     'order', 'runTimes', 'nbrThreads', 'startMethod',
+			     'relation', 'gamma', 'notGamma']
+      ----  Constructor run times (in sec.) ----
+      Start method     : None
+      Total time       : 12.84823
+      Data input       : 0.00941
+      Compute relation : 12.73070
+      Gamma sets       : 0.10812
+
+These run times were obtained on a genuine desktop computer equipped with an 11th Gen Intel® Core™ i5-11400 × 12 processor and 16.0 BG of CPU memory.
+
+Setting threading parameters
+````````````````````````````
+
+Without specifying the number of cores (*nbrCores=None*) or the threading start method (*startMethod=None*), the *cpu_count* method from the :py:mod:`multiprocessing` module will be used to detect the number of available cores and the default start method will be *spawn*.
+
+It is possible to use instead the *forkserver* or the more traditional Posix *fork* start method (default on Linux).
+
+Mind that the latter method, due to the very architecture of the Python interpreter C code, cannot be safe against specific dead locks leading to  hanging or freezing applications and zombie processes. [51]_
+
+Submitting multiprocessing Python scripts
+`````````````````````````````````````````
+When writing Python scripts not using the default *fork* start method it is essential to protect the main program code with a *__name__=='__main__'* test against recursive re-excution  (see below)
+
+.. code-block:: python
+   :linenos:
+
+   from outrankingDigraphs import BipolarOutrankingDigraph
+   from randomPerfTabs import RandomPerformanceTableau
+   # main program code
+   if __name__ == '__main__':
+      t = RandomPerformanceTableau(numberOfActions=1000,
+                                   numberOfCriteria=13,seed=1)
+      print(t)
+      g = BipolarOutrankingDigraph(t,
+                                   Threading=True,
+				   nbrCores=10,
+				   startMethod='spawn',
+				   Comments=True)
+      print(g)
+
 
 Back to :ref:`Content Table <Tutorial-label>`
 
@@ -10196,7 +10308,9 @@ Appendices
 
 .. [49] The stored versions *lvAx.py*, *lvBx.py*, *apA1.py* and *apB1.py* of the examples of reciprocal randdom voting profiles discussed in the intergroup pairing tutorial may be found in the *examples* directory of the *Digraph3* resources.
 
-.. [50] The inter- and intragroup pairing solvers solely maximise the overall correlation with the individual pairing preferences. It may happen that a slightly lesser overall correlation result comes with a considerable lower standard deviation. Is this pairing solution than fairer than the one with a higher overall correlation? Asked more generally: is a society with highest global welfare but uneven wealth distribution a fairer society than the one showing less global welfare but with a considerable less uneven wealth distribution? 
+.. [50] The inter- and intragroup pairing solvers solely maximise the overall correlation with the individual pairing preferences. It may happen that a slightly lesser overall correlation result comes with a considerable lower standard deviation. Is this pairing solution than fairer than the one with a higher overall correlation? Asked more generally: is a society with highest global welfare but uneven wealth distribution a fairer society than the one showing less global welfare but with a considerable less uneven wealth distribution?
+
+.. [51] See https://britishgeologicalsurvey.github.io/science/python-forking-vs-spawn/
 
 ..  LocalWords:  randomDigraph Determinateness valuationdomain py png
 ..  LocalWords:  notGamma tutorialDigraph shortName func irreflexive
