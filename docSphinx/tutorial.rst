@@ -494,7 +494,7 @@ We are starting this tutorial with generating a uniformly random [-1.0; +1.0]-va
                            'valuationdomain', 'relation',
                            'gamma', 'notGamma']
    
-With the :py:func:`~digraphs.Digraph.save` method (see :numref:`tutRandValDigraph` Line 3) we may keep a backup version for future use of *rdg* which will be stored in a file called *tutRandValDigraph.py* in the current working directory. The genuine :py:class:`~digraphs.Digraph` class constructor may restore the *rdg* object from the stored file (Line 4). We may easily inspect the content of *rdg* (Lines 5). The digraph size 22 indicates the number of positively valued arcs. The valuation domain is uniformly distributed in the interval :math:`[-1.0; 1.0]` and the mean absolute arc valuation is :math:`(0.7524 \times 2)\, -\, 1.0 \;=\; 0.5048` (Line 12) .
+With the :py:func:`~digraphs.Digraph.save` method (see :numref:`tutRandValDigraph` Line 3) we may keep a backup version for future use of *rdg* which will be stored in a file called *tutRandValDigraph.py* in the current working directory. The genric :py:class:`~digraphs.Digraph` class constructor may restore the *rdg* object from the stored file (Line 4). We may easily inspect the content of *rdg* (Lines 5). The digraph size 22 indicates the number of positively valued arcs. The valuation domain is uniformly distributed in the interval :math:`[-1.0; 1.0]` and the mean absolute arc valuation is :math:`(0.7524 \times 2)\, -\, 1.0 \;=\; 0.5048` (Line 12) .
 
 All :py:class:`~digraphs.Digraph` objects contain at least the list of attributes shown here: a **name** (string), a dictionary of **actions** (digraph nodes), an **order** (integer) attribute containing the number of actions, a **valuationdomain** dictionary, a double dictionary **relation** representing the adjency table of the digraph relation, a **gamma** and a **notGamma** dictionary containing the direct neighbourhood of each action.
 
@@ -1267,7 +1267,7 @@ called **Random3ObjectivesPerformanceTableau**.
 
 Deciding which students, based on the grades obtained in a
 number of examinations, validate or not their academic studies,
-is the genuine decision practice of universities and academies.
+is the common decision practice of universities and academies.
 To thouroughly study these kind of decision problems,
 we provide a corresponding performance tableau model, called
 **RandomAcademicPerformanceTableau**, which gathers grades
@@ -4681,7 +4681,7 @@ The same computation without threading takes about four times more total run tim
       Compute relation : 12.73070
       Gamma sets       : 0.10812
 
-These run times were obtained on a genuine desktop computer equipped with an 11th Gen Intel® Core™ i5-11400 × 12 processor and 16.0 BG of CPU memory.
+These run times were obtained on a common desktop computer equipped with an 11th Gen Intel® Core™ i5-11400 × 12 processor and 16.0 BG of CPU memory.
 
 Setting threading parameters
 ````````````````````````````
