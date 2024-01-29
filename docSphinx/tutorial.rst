@@ -41,7 +41,7 @@
 .. only:: html
 	  
    :New:
-      - A tutorial on :ref:`using multiprocessing resources <Multiprocessing-Tutorial-label>` when tackling large performance tableaux with several handreds of decision alternatives.
+      - A tutorial on :ref:`using multiprocessing resources <Multiprocessing-Tutorial-label>` when tackling large performance tableaux with several hundreds of decision alternatives.
 
       - Two tutorials on computing :ref:`fair intergroup<Fair-InterGroup-Pairings-label>` and :ref:`fair intragroup<Fair-IntraGroup-Pairings-label>` pairing solutions	      
 
