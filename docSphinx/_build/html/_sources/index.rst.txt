@@ -45,7 +45,9 @@ Wecome! This is the documentation for the **Digraph3** *Python* programming reso
 Parts of the documentation
 ..........................
 :New:
-   
+
+   - A tutorial on :ref:`using multiprocessing resources <Multiprocessing-Tutorial-label>` when tackling large performance tableaux with several handreds of decision alternatives.
+     
    - A :py:mod:`pairings` module for solving pairing problems illustrated with two tutorials on computing **fair** :ref:`intergroup<Fair-InterGroup-Pairings-label>` and :ref:`intragroup<Fair-IntraGroup-Pairings-label>` pairing solutions.
 
    - A :py:mod:`dynamicProgramming` module for solving dynamic programming problems including a :py:class:`~dynamicProgramming.RandomDynamicProgrammingDigraph` constructor.

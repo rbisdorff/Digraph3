@@ -324,7 +324,10 @@
 </dl>
 <dl class="field-list simple" id="tutorial-label">
 <dt class="field-odd">New<span class="colon">:</span></dt>
-<dd class="field-odd"><p>Two tutorials on computing <a class="reference internal" href="#fair-intergroup-pairings-label"><span class="std std-ref">fair intergroup</span></a> and <a class="reference internal" href="#fair-intragroup-pairings-label"><span class="std std-ref">fair intragroup</span></a> pairing solutions</p>
+<dd class="field-odd"><ul class="simple">
+<li><p>A tutorial on <a class="reference internal" href="#multiprocessing-tutorial-label"><span class="std std-ref">using multiprocessing resources</span></a> when tackling large performance tableaux with several handreds of decision alternatives.</p></li>
+<li><p>Two tutorials on computing <a class="reference internal" href="#fair-intergroup-pairings-label"><span class="std std-ref">fair intergroup</span></a> and <a class="reference internal" href="#fair-intragroup-pairings-label"><span class="std std-ref">fair intragroup</span></a> pairing solutions</p></li>
+</ul>
 </dd>
 </dl>
 <section id="contents">
@@ -4684,20 +4687,19 @@ pairwise perspective (see below), we notice that, with the given preference disc
 </section>
 <section id="submitting-multiprocessing-python-scripts">
 <h4><a class="toc-backref" href="#id290" role="doc-backlink"><span class="section-number">1.3.9.3. </span>Submitting multiprocessing Python scripts</a><a class="headerlink" href="#submitting-multiprocessing-python-scripts" title="Link to this heading"></a></h4>
-<p>When writing Python scripts not using the default <em>fork</em> start method it is essential to protect the main program code with a <em>__name__==’__main__’</em> test against recursive re-excution  (see below)</p>
+<p>When writing multiprocessing Digraph3 Python scripts not using the Posix <em>fork</em> start method, it is essential to protect the main program code with a <em>__name__==’__main__’</em> test against recursive re-excution (see below).</p>
 <div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="linenos"> 1</span><span class="kn">from</span> <span class="nn">outrankingDigraphs</span> <span class="kn">import</span> <span class="n">BipolarOutrankingDigraph</span>
 <span class="linenos"> 2</span><span class="kn">from</span> <span class="nn">randomPerfTabs</span> <span class="kn">import</span> <span class="n">RandomPerformanceTableau</span>
 <span class="linenos"> 3</span><span class="c1"># main program code</span>
 <span class="linenos"> 4</span><span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s1">&#39;__main__&#39;</span><span class="p">:</span>
 <span class="linenos"> 5</span>   <span class="n">t</span> <span class="o">=</span> <span class="n">RandomPerformanceTableau</span><span class="p">(</span><span class="n">numberOfActions</span><span class="o">=</span><span class="mi">1000</span><span class="p">,</span>
 <span class="linenos"> 6</span>                                <span class="n">numberOfCriteria</span><span class="o">=</span><span class="mi">13</span><span class="p">,</span><span class="n">seed</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
-<span class="linenos"> 7</span>   <span class="nb">print</span><span class="p">(</span><span class="n">t</span><span class="p">)</span>
-<span class="linenos"> 8</span>   <span class="n">g</span> <span class="o">=</span> <span class="n">BipolarOutrankingDigraph</span><span class="p">(</span><span class="n">t</span><span class="p">,</span>
-<span class="linenos"> 9</span>                                <span class="n">Threading</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
-<span class="linenos">10</span>                                <span class="n">nbrCores</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span>
-<span class="linenos">11</span>                                <span class="n">startMethod</span><span class="o">=</span><span class="s1">&#39;spawn&#39;</span><span class="p">,</span>
-<span class="linenos">12</span>                                <span class="n">Comments</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
-<span class="linenos">13</span>   <span class="nb">print</span><span class="p">(</span><span class="n">g</span><span class="p">)</span>
+<span class="linenos"> 7</span>   <span class="n">g</span> <span class="o">=</span> <span class="n">BipolarOutrankingDigraph</span><span class="p">(</span><span class="n">t</span><span class="p">,</span>
+<span class="linenos"> 8</span>                                <span class="n">Threading</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+<span class="linenos"> 9</span>                                <span class="n">nbrCores</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span>
+<span class="linenos">10</span>                                <span class="n">startMethod</span><span class="o">=</span><span class="s1">&#39;spawn&#39;</span><span class="p">,</span>
+<span class="linenos">11</span>                                <span class="n">Comments</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="linenos">12</span>   <span class="nb">print</span><span class="p">(</span><span class="n">g</span><span class="p">)</span>
 </pre></div>
 </div>
 <p>Back to <a class="reference internal" href="#tutorial-label"><span class="std std-ref">Content Table</span></a></p>

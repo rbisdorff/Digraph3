@@ -40,7 +40,10 @@
 
 .. only:: html
 	  
-   :New: Two tutorials on computing :ref:`fair intergroup<Fair-InterGroup-Pairings-label>` and :ref:`fair intragroup<Fair-IntraGroup-Pairings-label>` pairing solutions	      
+   :New:
+      - A tutorial on :ref:`using multiprocessing resources <Multiprocessing-Tutorial-label>` when tackling large performance tableaux with several handreds of decision alternatives.
+
+      - Two tutorials on computing :ref:`fair intergroup<Fair-InterGroup-Pairings-label>` and :ref:`fair intragroup<Fair-IntraGroup-Pairings-label>` pairing solutions	      
 
    Contents
    --------
@@ -4749,7 +4752,7 @@ In Lines 7-8 above, we may for instance notice a considerable positive performan
 
 Submitting multiprocessing Python scripts
 `````````````````````````````````````````
-When writing Python scripts not using the default *fork* start method it is essential to protect the main program code with a *__name__=='__main__'* test against recursive re-excution  (see below)
+When writing multiprocessing Digraph3 Python scripts not using the Posix *fork* start method, it is essential to protect the main program code with a *__name__=='__main__'* test against recursive re-excution (see below).
 
 .. code-block:: python
    :linenos:
@@ -4760,7 +4763,6 @@ When writing Python scripts not using the default *fork* start method it is esse
    if __name__ == '__main__':
       t = RandomPerformanceTableau(numberOfActions=1000,
                                    numberOfCriteria=13,seed=1)
-      print(t)
       g = BipolarOutrankingDigraph(t,
                                    Threading=True,
 				   nbrCores=10,
