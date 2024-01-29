@@ -3073,7 +3073,6 @@ static const char __pyx_k_dict[] = "__dict__";
 static const char __pyx_k_dump[] = "dump";
 static const char __pyx_k_exit[] = "__exit__";
 static const char __pyx_k_file[] = "file://";
-static const char __pyx_k_fork[] = "fork";
 static const char __pyx_k_html[] = ".html";
 static const char __pyx_k_init[] = "__init__";
 static const char __pyx_k_item[] = "item";
@@ -3187,6 +3186,7 @@ static const char __pyx_k_disable[] = "disable";
 static const char __pyx_k_genexpr[] = "genexpr";
 static const char __pyx_k_h1_s_h1[] = "<h1>%s</h1>";
 static const char __pyx_k_mkdtemp[] = "mkdtemp";
+static const char __pyx_k_nbrCPUs[] = "nbrCPUs";
 static const char __pyx_k_optimal[] = "optimal";
 static const char __pyx_k_perfTab[] = "perfTab";
 static const char __pyx_k_pictStr[] = "pictStr";
@@ -3267,6 +3267,7 @@ static const char __pyx_k_highLimit[] = "highLimit";
 static const char __pyx_k_isenabled[] = "isenabled";
 static const char __pyx_k_metaclass[] = "__metaclass__";
 static const char __pyx_k_nbrOfCPUs[] = "nbrOfCPUs";
+static const char __pyx_k_nbrThread[] = "nbrThread";
 static const char __pyx_k_quantiles[] = "quantiles";
 static const char __pyx_k_rLowLimit[] = "rLowLimit";
 static const char __pyx_k_save2File[] = "save2File";
@@ -3297,6 +3298,7 @@ static const char __pyx_k_optimistic[] = "optimistic";
 static const char __pyx_k_reprString[] = "reprString";
 static const char __pyx_k_sampleSize[] = "sampleSize";
 static const char __pyx_k_show_short[] = "*----- show short --------------*";
+static const char __pyx_k_startMehod[] = "startMehod";
 static const char __pyx_k_statistics[] = "statistics";
 static const char __pyx_k_sumWeights[] = "sumWeights";
 static const char __pyx_k_tableTitle[] = "tableTitle";
@@ -3309,6 +3311,7 @@ static const char __pyx_k_tr_th_s_th[] = "<tr><th>%s</th>";
 static const char __pyx_k_webbrowser[] = "webbrowser";
 static const char __pyx_k_Actions_d_2[] = "# Actions         : %d";
 static const char __pyx_k_Actions_d_3[] = "# Actions          : %d\n";
+static const char __pyx_k_Actions_d_4[] = "Actions           : %d";
 static const char __pyx_k_CocaDigraph[] = "CocaDigraph";
 static const char __pyx_k_Component_s[] = "Component : %s";
 static const char __pyx_k_CopyPerfTab[] = "CopyPerfTab";
@@ -3320,6 +3323,7 @@ static const char __pyx_k_Ordering_5f[] = "Ordering          : %.5f\n";
 static const char __pyx_k_StartMethod[] = "StartMethod";
 static const char __pyx_k_Threading_2[] = "Threading ...";
 static const char __pyx_k_Threads_d_2[] = "# Threads          : %d\n";
+static const char __pyx_k_Threads_d_3[] = "Threads           : %d";
 static const char __pyx_k_actionsList[] = "actionsList";
 static const char __pyx_k_collections[] = "collections";
 static const char __pyx_k_compActions[] = "compActions";
@@ -3349,6 +3353,7 @@ static const char __pyx_k_ChoiceVector[] = "ChoiceVector";
 static const char __pyx_k_Components_d[] = "Components        : %d\n";
 static const char __pyx_k_Criteria_d_2[] = "# Criteria        : %d";
 static const char __pyx_k_Criteria_d_3[] = "# Criteria         : %d\n";
+static const char __pyx_k_Criteria_d_4[] = "Criteria          : %d";
 static const char __pyx_k_Fill_rate_3f[] = "Fill rate         : %.3f%%";
 static const char __pyx_k_StoreSorting[] = "StoreSorting";
 static const char __pyx_k_WithFileSize[] = "WithFileSize";
@@ -3376,6 +3381,7 @@ static const char __pyx_k_NetFlowsOrder[] = "NetFlowsOrder";
 static const char __pyx_k_Ordering_5f_2[] = "Ordering          : %.5f";
 static const char __pyx_k_Ordering_5f_3[] = "Ordering           : %.5f\n";
 static const char __pyx_k_StartMethod_s[] = "StartMethod       : %s\n";
+static const char __pyx_k_Start_mthod_s[] = "Start mthod       : %s";
 static const char __pyx_k_Total_time_5f[] = "Total time        : %.5f\n";
 static const char __pyx_k_actionsSubset[] = "actionsSubset";
 static const char __pyx_k_cRandPerfTabs[] = "cRandPerfTabs";
@@ -3727,7 +3733,7 @@ static PyObject *__pyx_pf_32cSparseIntegerOutrankingDigraphs_24cQuantilesRanking
 static PyObject *__pyx_pf_32cSparseIntegerOutrankingDigraphs_24cQuantilesRankingDigraph_2_computeQuantileOrdering(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_self, PyObject *__pyx_v_strategy, int __pyx_v_Descending, int __pyx_v_Threading, PyObject *__pyx_v_startMethod, PyObject *__pyx_v_nbrOfCPUs, int __pyx_v_Debug, int __pyx_v_Comments); /* proto */
 static PyObject *__pyx_pf_32cSparseIntegerOutrankingDigraphs_24cQuantilesRankingDigraph_4computeActionCategories(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_self, int __pyx_v_action, int __pyx_v_Show, int __pyx_v_Debug, int __pyx_v_Comments, int __pyx_v_Threading, PyObject *__pyx_v_startMethod, PyObject *__pyx_v_nbrOfCPUs); /* proto */
 static PyObject *__pyx_pf_32cSparseIntegerOutrankingDigraphs_24cQuantilesRankingDigraph_6computeCriterion2RankingCorrelation(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_self, PyObject *__pyx_v_criterion, int __pyx_v_Threading, PyObject *__pyx_v_nbrOfCPUs, CYTHON_UNUSED PyObject *__pyx_v_startMethod, int __pyx_v_Debug, int __pyx_v_Comments); /* proto */
-static PyObject *__pyx_pf_32cSparseIntegerOutrankingDigraphs_24cQuantilesRankingDigraph_8computeMarginalVersusGlobalOutrankingCorrelations(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_self, int __pyx_v_Sorted, int __pyx_v_ValuedCorrelation, int __pyx_v_Threading, CYTHON_UNUSED PyObject *__pyx_v_startMethod, PyObject *__pyx_v_nbrCores, CYTHON_UNUSED int __pyx_v_Comments); /* proto */
+static PyObject *__pyx_pf_32cSparseIntegerOutrankingDigraphs_24cQuantilesRankingDigraph_8computeMarginalVersusGlobalOutrankingCorrelations(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_self, int __pyx_v_Sorted, int __pyx_v_ValuedCorrelation, int __pyx_v_Threading, PyObject *__pyx_v_startMethod, PyObject *__pyx_v_nbrCores, CYTHON_UNUSED int __pyx_v_Comments); /* proto */
 static PyObject *__pyx_pf_32cSparseIntegerOutrankingDigraphs_24cQuantilesRankingDigraph_10relation(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_self, int __pyx_v_x, int __pyx_v_y); /* proto */
 static PyObject *__pyx_pf_32cSparseIntegerOutrankingDigraphs_24cQuantilesRankingDigraph_12showMarginalVersusGlobalOutrankingCorrelation(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_self, int __pyx_v_Sorted, int __pyx_v_Threading, PyObject *__pyx_v_nbrOfCPUs, CYTHON_UNUSED PyObject *__pyx_v_startMethod, int __pyx_v_Comments); /* proto */
 static PyObject *__pyx_pf_32cSparseIntegerOutrankingDigraphs_24cQuantilesRankingDigraph_14showActionsSortingResult(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_self, PyObject *__pyx_v_actionsSubset); /* proto */
@@ -3876,6 +3882,7 @@ typedef struct {
   PyObject *__pyx_kp_u_Actions_d;
   PyObject *__pyx_kp_u_Actions_d_2;
   PyObject *__pyx_kp_u_Actions_d_3;
+  PyObject *__pyx_kp_u_Actions_d_4;
   PyObject *__pyx_kp_u_All_comments;
   PyObject *__pyx_n_s_AttributeError;
   PyObject *__pyx_kp_u_Attributes_s;
@@ -3910,6 +3917,7 @@ typedef struct {
   PyObject *__pyx_kp_u_Criteria_d;
   PyObject *__pyx_kp_u_Criteria_d_2;
   PyObject *__pyx_kp_u_Criteria_d_3;
+  PyObject *__pyx_kp_u_Criteria_d_4;
   PyObject *__pyx_kp_u_Cythonized_SparseIntegerOutranki;
   PyObject *__pyx_kp_u_Cythonized_cQuantilesRankingDigr;
   PyObject *__pyx_kp_s_Cythonized_version_of_the_py_cl;
@@ -4047,6 +4055,7 @@ typedef struct {
   PyObject *__pyx_kp_u_Sparse_Relation_Map;
   PyObject *__pyx_n_u_StartMethod;
   PyObject *__pyx_kp_u_StartMethod_s;
+  PyObject *__pyx_kp_u_Start_mthod_s;
   PyObject *__pyx_n_s_StoreSorting;
   PyObject *__pyx_n_s_TASKS;
   PyObject *__pyx_n_s_TemporaryDirectory;
@@ -4056,6 +4065,7 @@ typedef struct {
   PyObject *__pyx_kp_u_Threading_2;
   PyObject *__pyx_kp_u_Threads_d;
   PyObject *__pyx_kp_u_Threads_d_2;
+  PyObject *__pyx_kp_u_Threads_d_3;
   PyObject *__pyx_kp_u_Threshold;
   PyObject *__pyx_kp_u_Total_time_5f;
   PyObject *__pyx_kp_u_Total_time_5f_2;
@@ -4275,7 +4285,6 @@ typedef struct {
   PyObject *__pyx_n_u_fillrate;
   PyObject *__pyx_n_s_fo;
   PyObject *__pyx_n_s_foName;
-  PyObject *__pyx_n_u_fork;
   PyObject *__pyx_n_s_fromIndex;
   PyObject *__pyx_n_s_g;
   PyObject *__pyx_n_s_g0;
@@ -4377,11 +4386,13 @@ typedef struct {
   PyObject *__pyx_n_s_name;
   PyObject *__pyx_n_s_name_2;
   PyObject *__pyx_n_u_name_2;
+  PyObject *__pyx_n_s_nbrCPUs;
   PyObject *__pyx_n_s_nbrComponents;
   PyObject *__pyx_n_s_nbrCores;
   PyObject *__pyx_n_s_nbrOfCPUs;
   PyObject *__pyx_n_s_nbrOfLocals;
   PyObject *__pyx_n_s_nbrOfThreadsUsed;
+  PyObject *__pyx_n_s_nbrThread;
   PyObject *__pyx_n_s_nbrThreads;
   PyObject *__pyx_kp_u_nbsp;
   PyObject *__pyx_n_s_nc;
@@ -4523,6 +4534,7 @@ typedef struct {
   PyObject *__pyx_n_s_splitComponent_2;
   PyObject *__pyx_n_u_splitComponent_2;
   PyObject *__pyx_n_s_start;
+  PyObject *__pyx_n_s_startMehod;
   PyObject *__pyx_n_s_startMethod;
   PyObject *__pyx_n_u_started;
   PyObject *__pyx_n_s_statistics;
@@ -4830,6 +4842,7 @@ static int __pyx_m_clear(PyObject *m) {
   Py_CLEAR(clear_module_state->__pyx_kp_u_Actions_d);
   Py_CLEAR(clear_module_state->__pyx_kp_u_Actions_d_2);
   Py_CLEAR(clear_module_state->__pyx_kp_u_Actions_d_3);
+  Py_CLEAR(clear_module_state->__pyx_kp_u_Actions_d_4);
   Py_CLEAR(clear_module_state->__pyx_kp_u_All_comments);
   Py_CLEAR(clear_module_state->__pyx_n_s_AttributeError);
   Py_CLEAR(clear_module_state->__pyx_kp_u_Attributes_s);
@@ -4864,6 +4877,7 @@ static int __pyx_m_clear(PyObject *m) {
   Py_CLEAR(clear_module_state->__pyx_kp_u_Criteria_d);
   Py_CLEAR(clear_module_state->__pyx_kp_u_Criteria_d_2);
   Py_CLEAR(clear_module_state->__pyx_kp_u_Criteria_d_3);
+  Py_CLEAR(clear_module_state->__pyx_kp_u_Criteria_d_4);
   Py_CLEAR(clear_module_state->__pyx_kp_u_Cythonized_SparseIntegerOutranki);
   Py_CLEAR(clear_module_state->__pyx_kp_u_Cythonized_cQuantilesRankingDigr);
   Py_CLEAR(clear_module_state->__pyx_kp_s_Cythonized_version_of_the_py_cl);
@@ -5001,6 +5015,7 @@ static int __pyx_m_clear(PyObject *m) {
   Py_CLEAR(clear_module_state->__pyx_kp_u_Sparse_Relation_Map);
   Py_CLEAR(clear_module_state->__pyx_n_u_StartMethod);
   Py_CLEAR(clear_module_state->__pyx_kp_u_StartMethod_s);
+  Py_CLEAR(clear_module_state->__pyx_kp_u_Start_mthod_s);
   Py_CLEAR(clear_module_state->__pyx_n_s_StoreSorting);
   Py_CLEAR(clear_module_state->__pyx_n_s_TASKS);
   Py_CLEAR(clear_module_state->__pyx_n_s_TemporaryDirectory);
@@ -5010,6 +5025,7 @@ static int __pyx_m_clear(PyObject *m) {
   Py_CLEAR(clear_module_state->__pyx_kp_u_Threading_2);
   Py_CLEAR(clear_module_state->__pyx_kp_u_Threads_d);
   Py_CLEAR(clear_module_state->__pyx_kp_u_Threads_d_2);
+  Py_CLEAR(clear_module_state->__pyx_kp_u_Threads_d_3);
   Py_CLEAR(clear_module_state->__pyx_kp_u_Threshold);
   Py_CLEAR(clear_module_state->__pyx_kp_u_Total_time_5f);
   Py_CLEAR(clear_module_state->__pyx_kp_u_Total_time_5f_2);
@@ -5229,7 +5245,6 @@ static int __pyx_m_clear(PyObject *m) {
   Py_CLEAR(clear_module_state->__pyx_n_u_fillrate);
   Py_CLEAR(clear_module_state->__pyx_n_s_fo);
   Py_CLEAR(clear_module_state->__pyx_n_s_foName);
-  Py_CLEAR(clear_module_state->__pyx_n_u_fork);
   Py_CLEAR(clear_module_state->__pyx_n_s_fromIndex);
   Py_CLEAR(clear_module_state->__pyx_n_s_g);
   Py_CLEAR(clear_module_state->__pyx_n_s_g0);
@@ -5331,11 +5346,13 @@ static int __pyx_m_clear(PyObject *m) {
   Py_CLEAR(clear_module_state->__pyx_n_s_name);
   Py_CLEAR(clear_module_state->__pyx_n_s_name_2);
   Py_CLEAR(clear_module_state->__pyx_n_u_name_2);
+  Py_CLEAR(clear_module_state->__pyx_n_s_nbrCPUs);
   Py_CLEAR(clear_module_state->__pyx_n_s_nbrComponents);
   Py_CLEAR(clear_module_state->__pyx_n_s_nbrCores);
   Py_CLEAR(clear_module_state->__pyx_n_s_nbrOfCPUs);
   Py_CLEAR(clear_module_state->__pyx_n_s_nbrOfLocals);
   Py_CLEAR(clear_module_state->__pyx_n_s_nbrOfThreadsUsed);
+  Py_CLEAR(clear_module_state->__pyx_n_s_nbrThread);
   Py_CLEAR(clear_module_state->__pyx_n_s_nbrThreads);
   Py_CLEAR(clear_module_state->__pyx_kp_u_nbsp);
   Py_CLEAR(clear_module_state->__pyx_n_s_nc);
@@ -5477,6 +5494,7 @@ static int __pyx_m_clear(PyObject *m) {
   Py_CLEAR(clear_module_state->__pyx_n_s_splitComponent_2);
   Py_CLEAR(clear_module_state->__pyx_n_u_splitComponent_2);
   Py_CLEAR(clear_module_state->__pyx_n_s_start);
+  Py_CLEAR(clear_module_state->__pyx_n_s_startMehod);
   Py_CLEAR(clear_module_state->__pyx_n_s_startMethod);
   Py_CLEAR(clear_module_state->__pyx_n_u_started);
   Py_CLEAR(clear_module_state->__pyx_n_s_statistics);
@@ -5762,6 +5780,7 @@ static int __pyx_m_traverse(PyObject *m, visitproc visit, void *arg) {
   Py_VISIT(traverse_module_state->__pyx_kp_u_Actions_d);
   Py_VISIT(traverse_module_state->__pyx_kp_u_Actions_d_2);
   Py_VISIT(traverse_module_state->__pyx_kp_u_Actions_d_3);
+  Py_VISIT(traverse_module_state->__pyx_kp_u_Actions_d_4);
   Py_VISIT(traverse_module_state->__pyx_kp_u_All_comments);
   Py_VISIT(traverse_module_state->__pyx_n_s_AttributeError);
   Py_VISIT(traverse_module_state->__pyx_kp_u_Attributes_s);
@@ -5796,6 +5815,7 @@ static int __pyx_m_traverse(PyObject *m, visitproc visit, void *arg) {
   Py_VISIT(traverse_module_state->__pyx_kp_u_Criteria_d);
   Py_VISIT(traverse_module_state->__pyx_kp_u_Criteria_d_2);
   Py_VISIT(traverse_module_state->__pyx_kp_u_Criteria_d_3);
+  Py_VISIT(traverse_module_state->__pyx_kp_u_Criteria_d_4);
   Py_VISIT(traverse_module_state->__pyx_kp_u_Cythonized_SparseIntegerOutranki);
   Py_VISIT(traverse_module_state->__pyx_kp_u_Cythonized_cQuantilesRankingDigr);
   Py_VISIT(traverse_module_state->__pyx_kp_s_Cythonized_version_of_the_py_cl);
@@ -5933,6 +5953,7 @@ static int __pyx_m_traverse(PyObject *m, visitproc visit, void *arg) {
   Py_VISIT(traverse_module_state->__pyx_kp_u_Sparse_Relation_Map);
   Py_VISIT(traverse_module_state->__pyx_n_u_StartMethod);
   Py_VISIT(traverse_module_state->__pyx_kp_u_StartMethod_s);
+  Py_VISIT(traverse_module_state->__pyx_kp_u_Start_mthod_s);
   Py_VISIT(traverse_module_state->__pyx_n_s_StoreSorting);
   Py_VISIT(traverse_module_state->__pyx_n_s_TASKS);
   Py_VISIT(traverse_module_state->__pyx_n_s_TemporaryDirectory);
@@ -5942,6 +5963,7 @@ static int __pyx_m_traverse(PyObject *m, visitproc visit, void *arg) {
   Py_VISIT(traverse_module_state->__pyx_kp_u_Threading_2);
   Py_VISIT(traverse_module_state->__pyx_kp_u_Threads_d);
   Py_VISIT(traverse_module_state->__pyx_kp_u_Threads_d_2);
+  Py_VISIT(traverse_module_state->__pyx_kp_u_Threads_d_3);
   Py_VISIT(traverse_module_state->__pyx_kp_u_Threshold);
   Py_VISIT(traverse_module_state->__pyx_kp_u_Total_time_5f);
   Py_VISIT(traverse_module_state->__pyx_kp_u_Total_time_5f_2);
@@ -6161,7 +6183,6 @@ static int __pyx_m_traverse(PyObject *m, visitproc visit, void *arg) {
   Py_VISIT(traverse_module_state->__pyx_n_u_fillrate);
   Py_VISIT(traverse_module_state->__pyx_n_s_fo);
   Py_VISIT(traverse_module_state->__pyx_n_s_foName);
-  Py_VISIT(traverse_module_state->__pyx_n_u_fork);
   Py_VISIT(traverse_module_state->__pyx_n_s_fromIndex);
   Py_VISIT(traverse_module_state->__pyx_n_s_g);
   Py_VISIT(traverse_module_state->__pyx_n_s_g0);
@@ -6263,11 +6284,13 @@ static int __pyx_m_traverse(PyObject *m, visitproc visit, void *arg) {
   Py_VISIT(traverse_module_state->__pyx_n_s_name);
   Py_VISIT(traverse_module_state->__pyx_n_s_name_2);
   Py_VISIT(traverse_module_state->__pyx_n_u_name_2);
+  Py_VISIT(traverse_module_state->__pyx_n_s_nbrCPUs);
   Py_VISIT(traverse_module_state->__pyx_n_s_nbrComponents);
   Py_VISIT(traverse_module_state->__pyx_n_s_nbrCores);
   Py_VISIT(traverse_module_state->__pyx_n_s_nbrOfCPUs);
   Py_VISIT(traverse_module_state->__pyx_n_s_nbrOfLocals);
   Py_VISIT(traverse_module_state->__pyx_n_s_nbrOfThreadsUsed);
+  Py_VISIT(traverse_module_state->__pyx_n_s_nbrThread);
   Py_VISIT(traverse_module_state->__pyx_n_s_nbrThreads);
   Py_VISIT(traverse_module_state->__pyx_kp_u_nbsp);
   Py_VISIT(traverse_module_state->__pyx_n_s_nc);
@@ -6409,6 +6432,7 @@ static int __pyx_m_traverse(PyObject *m, visitproc visit, void *arg) {
   Py_VISIT(traverse_module_state->__pyx_n_s_splitComponent_2);
   Py_VISIT(traverse_module_state->__pyx_n_u_splitComponent_2);
   Py_VISIT(traverse_module_state->__pyx_n_s_start);
+  Py_VISIT(traverse_module_state->__pyx_n_s_startMehod);
   Py_VISIT(traverse_module_state->__pyx_n_s_startMethod);
   Py_VISIT(traverse_module_state->__pyx_n_u_started);
   Py_VISIT(traverse_module_state->__pyx_n_s_statistics);
@@ -6794,6 +6818,7 @@ static int __pyx_m_traverse(PyObject *m, visitproc visit, void *arg) {
 #define __pyx_kp_u_Actions_d __pyx_mstate_global->__pyx_kp_u_Actions_d
 #define __pyx_kp_u_Actions_d_2 __pyx_mstate_global->__pyx_kp_u_Actions_d_2
 #define __pyx_kp_u_Actions_d_3 __pyx_mstate_global->__pyx_kp_u_Actions_d_3
+#define __pyx_kp_u_Actions_d_4 __pyx_mstate_global->__pyx_kp_u_Actions_d_4
 #define __pyx_kp_u_All_comments __pyx_mstate_global->__pyx_kp_u_All_comments
 #define __pyx_n_s_AttributeError __pyx_mstate_global->__pyx_n_s_AttributeError
 #define __pyx_kp_u_Attributes_s __pyx_mstate_global->__pyx_kp_u_Attributes_s
@@ -6828,6 +6853,7 @@ static int __pyx_m_traverse(PyObject *m, visitproc visit, void *arg) {
 #define __pyx_kp_u_Criteria_d __pyx_mstate_global->__pyx_kp_u_Criteria_d
 #define __pyx_kp_u_Criteria_d_2 __pyx_mstate_global->__pyx_kp_u_Criteria_d_2
 #define __pyx_kp_u_Criteria_d_3 __pyx_mstate_global->__pyx_kp_u_Criteria_d_3
+#define __pyx_kp_u_Criteria_d_4 __pyx_mstate_global->__pyx_kp_u_Criteria_d_4
 #define __pyx_kp_u_Cythonized_SparseIntegerOutranki __pyx_mstate_global->__pyx_kp_u_Cythonized_SparseIntegerOutranki
 #define __pyx_kp_u_Cythonized_cQuantilesRankingDigr __pyx_mstate_global->__pyx_kp_u_Cythonized_cQuantilesRankingDigr
 #define __pyx_kp_s_Cythonized_version_of_the_py_cl __pyx_mstate_global->__pyx_kp_s_Cythonized_version_of_the_py_cl
@@ -6965,6 +6991,7 @@ static int __pyx_m_traverse(PyObject *m, visitproc visit, void *arg) {
 #define __pyx_kp_u_Sparse_Relation_Map __pyx_mstate_global->__pyx_kp_u_Sparse_Relation_Map
 #define __pyx_n_u_StartMethod __pyx_mstate_global->__pyx_n_u_StartMethod
 #define __pyx_kp_u_StartMethod_s __pyx_mstate_global->__pyx_kp_u_StartMethod_s
+#define __pyx_kp_u_Start_mthod_s __pyx_mstate_global->__pyx_kp_u_Start_mthod_s
 #define __pyx_n_s_StoreSorting __pyx_mstate_global->__pyx_n_s_StoreSorting
 #define __pyx_n_s_TASKS __pyx_mstate_global->__pyx_n_s_TASKS
 #define __pyx_n_s_TemporaryDirectory __pyx_mstate_global->__pyx_n_s_TemporaryDirectory
@@ -6974,6 +7001,7 @@ static int __pyx_m_traverse(PyObject *m, visitproc visit, void *arg) {
 #define __pyx_kp_u_Threading_2 __pyx_mstate_global->__pyx_kp_u_Threading_2
 #define __pyx_kp_u_Threads_d __pyx_mstate_global->__pyx_kp_u_Threads_d
 #define __pyx_kp_u_Threads_d_2 __pyx_mstate_global->__pyx_kp_u_Threads_d_2
+#define __pyx_kp_u_Threads_d_3 __pyx_mstate_global->__pyx_kp_u_Threads_d_3
 #define __pyx_kp_u_Threshold __pyx_mstate_global->__pyx_kp_u_Threshold
 #define __pyx_kp_u_Total_time_5f __pyx_mstate_global->__pyx_kp_u_Total_time_5f
 #define __pyx_kp_u_Total_time_5f_2 __pyx_mstate_global->__pyx_kp_u_Total_time_5f_2
@@ -7193,7 +7221,6 @@ static int __pyx_m_traverse(PyObject *m, visitproc visit, void *arg) {
 #define __pyx_n_u_fillrate __pyx_mstate_global->__pyx_n_u_fillrate
 #define __pyx_n_s_fo __pyx_mstate_global->__pyx_n_s_fo
 #define __pyx_n_s_foName __pyx_mstate_global->__pyx_n_s_foName
-#define __pyx_n_u_fork __pyx_mstate_global->__pyx_n_u_fork
 #define __pyx_n_s_fromIndex __pyx_mstate_global->__pyx_n_s_fromIndex
 #define __pyx_n_s_g __pyx_mstate_global->__pyx_n_s_g
 #define __pyx_n_s_g0 __pyx_mstate_global->__pyx_n_s_g0
@@ -7295,11 +7322,13 @@ static int __pyx_m_traverse(PyObject *m, visitproc visit, void *arg) {
 #define __pyx_n_s_name __pyx_mstate_global->__pyx_n_s_name
 #define __pyx_n_s_name_2 __pyx_mstate_global->__pyx_n_s_name_2
 #define __pyx_n_u_name_2 __pyx_mstate_global->__pyx_n_u_name_2
+#define __pyx_n_s_nbrCPUs __pyx_mstate_global->__pyx_n_s_nbrCPUs
 #define __pyx_n_s_nbrComponents __pyx_mstate_global->__pyx_n_s_nbrComponents
 #define __pyx_n_s_nbrCores __pyx_mstate_global->__pyx_n_s_nbrCores
 #define __pyx_n_s_nbrOfCPUs __pyx_mstate_global->__pyx_n_s_nbrOfCPUs
 #define __pyx_n_s_nbrOfLocals __pyx_mstate_global->__pyx_n_s_nbrOfLocals
 #define __pyx_n_s_nbrOfThreadsUsed __pyx_mstate_global->__pyx_n_s_nbrOfThreadsUsed
+#define __pyx_n_s_nbrThread __pyx_mstate_global->__pyx_n_s_nbrThread
 #define __pyx_n_s_nbrThreads __pyx_mstate_global->__pyx_n_s_nbrThreads
 #define __pyx_kp_u_nbsp __pyx_mstate_global->__pyx_kp_u_nbsp
 #define __pyx_n_s_nc __pyx_mstate_global->__pyx_n_s_nc
@@ -7441,6 +7470,7 @@ static int __pyx_m_traverse(PyObject *m, visitproc visit, void *arg) {
 #define __pyx_n_s_splitComponent_2 __pyx_mstate_global->__pyx_n_s_splitComponent_2
 #define __pyx_n_u_splitComponent_2 __pyx_mstate_global->__pyx_n_u_splitComponent_2
 #define __pyx_n_s_start __pyx_mstate_global->__pyx_n_s_start
+#define __pyx_n_s_startMehod __pyx_mstate_global->__pyx_n_s_startMehod
 #define __pyx_n_s_startMethod __pyx_mstate_global->__pyx_n_s_startMethod
 #define __pyx_n_u_started __pyx_mstate_global->__pyx_n_u_started
 #define __pyx_n_s_statistics __pyx_mstate_global->__pyx_n_s_statistics
@@ -46101,21 +46131,37 @@ PyObject *__pyx_args, PyObject *__pyx_kwds
     PyObject **__pyx_pyargnames[] = {&__pyx_n_s_self,&__pyx_n_s_argPerfTab,&__pyx_n_s_quantiles,&__pyx_n_s_quantilesOrderingStrategy,&__pyx_n_s_LowerClosed,&__pyx_n_s_componentRankingRule,&__pyx_n_s_minimalComponentSize,&__pyx_n_s_Threading,&__pyx_n_s_startMethod,&__pyx_n_s_tempDir,&__pyx_n_s_nbrOfCPUs,&__pyx_n_s_save2File,&__pyx_n_s_CopyPerfTab,&__pyx_n_s_Comments,&__pyx_n_s_Debug,0};
     values[3] = __Pyx_Arg_NewRef_FASTCALL(((PyObject *)((PyObject*)__pyx_n_u_optimal)));
     values[5] = __Pyx_Arg_NewRef_FASTCALL(((PyObject *)((PyObject*)__pyx_n_u_Copeland)));
-    values[8] = __Pyx_Arg_NewRef_FASTCALL(((PyObject *)((PyObject*)__pyx_n_u_spawn)));
+
+    /* "cSparseIntegerOutrankingDigraphs.pyx":2190
+ *                  int minimalComponentSize=1,\
+ *                  bint Threading=False,\
+ *                  startMethod=None,\             # <<<<<<<<<<<<<<
+ *                  tempDir=None,\
+ *                  nbrOfCPUs=None,\
+ */
+    values[8] = __Pyx_Arg_NewRef_FASTCALL(((PyObject *)Py_None));
 
     /* "cSparseIntegerOutrankingDigraphs.pyx":2191
  *                  bint Threading=False,\
- *                  startMethod='spawn',\
+ *                  startMethod=None,\
  *                  tempDir=None,\             # <<<<<<<<<<<<<<
- *                  nbrOfCPUs=4,\
+ *                  nbrOfCPUs=None,\
  *                  save2File=None,\
  */
     values[9] = __Pyx_Arg_NewRef_FASTCALL(((PyObject *)Py_None));
-    values[10] = __Pyx_Arg_NewRef_FASTCALL(((PyObject *)((PyObject *)__pyx_int_4)));
+
+    /* "cSparseIntegerOutrankingDigraphs.pyx":2192
+ *                  startMethod=None,\
+ *                  tempDir=None,\
+ *                  nbrOfCPUs=None,\             # <<<<<<<<<<<<<<
+ *                  save2File=None,\
+ *                  bint CopyPerfTab=False,\
+ */
+    values[10] = __Pyx_Arg_NewRef_FASTCALL(((PyObject *)Py_None));
 
     /* "cSparseIntegerOutrankingDigraphs.pyx":2193
  *                  tempDir=None,\
- *                  nbrOfCPUs=4,\
+ *                  nbrOfCPUs=None,\
  *                  save2File=None,\             # <<<<<<<<<<<<<<
  *                  bint CopyPerfTab=False,\
  *                  bint Comments=False,\
@@ -46341,7 +46387,7 @@ PyObject *__pyx_args, PyObject *__pyx_kwds
  *                  componentRankingRule="Copeland",\
  *                  int minimalComponentSize=1,\
  *                  bint Threading=False,\             # <<<<<<<<<<<<<<
- *                  startMethod='spawn',\
+ *                  startMethod=None,\
  *                  tempDir=None,\
  */
       __pyx_v_Threading = ((int)((int)0));
@@ -46355,7 +46401,7 @@ PyObject *__pyx_args, PyObject *__pyx_kwds
     } else {
 
       /* "cSparseIntegerOutrankingDigraphs.pyx":2194
- *                  nbrOfCPUs=4,\
+ *                  nbrOfCPUs=None,\
  *                  save2File=None,\
  *                  bint CopyPerfTab=False,\             # <<<<<<<<<<<<<<
  *                  bint Comments=False,\
@@ -46427,8 +46473,8 @@ PyObject *__pyx_args, PyObject *__pyx_kwds
   return __pyx_r;
 }
 
-/* "cSparseIntegerOutrankingDigraphs.pyx":2373
- *                 NUMBER_OF_WORKERS = nbrCores
+/* "cSparseIntegerOutrankingDigraphs.pyx":2381
+ *                 NUMBER_OF_WORKERS = nbrOfCPUs
  *                 tasksIndex = [(i,len(decomposition[i][1])) for i in range(nc)]
  *                 tasksIndex.sort(key=lambda pos: pos[1],reverse=True)             # <<<<<<<<<<<<<<
  *                 maximalComponentSize += tasksIndex[0][1]
@@ -46488,12 +46534,12 @@ PyObject *__pyx_args, PyObject *__pyx_kwds
           (void)__Pyx_Arg_NewRef_FASTCALL(values[0]);
           kw_args--;
         }
-        else if (unlikely(PyErr_Occurred())) __PYX_ERR(0, 2373, __pyx_L3_error)
+        else if (unlikely(PyErr_Occurred())) __PYX_ERR(0, 2381, __pyx_L3_error)
         else goto __pyx_L5_argtuple_error;
       }
       if (unlikely(kw_args > 0)) {
         const Py_ssize_t kwd_pos_args = __pyx_nargs;
-        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_kwvalues, __pyx_pyargnames, 0, values + 0, kwd_pos_args, "lambda2") < 0)) __PYX_ERR(0, 2373, __pyx_L3_error)
+        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_kwvalues, __pyx_pyargnames, 0, values + 0, kwd_pos_args, "lambda2") < 0)) __PYX_ERR(0, 2381, __pyx_L3_error)
       }
     } else if (unlikely(__pyx_nargs != 1)) {
       goto __pyx_L5_argtuple_error;
@@ -46504,7 +46550,7 @@ PyObject *__pyx_args, PyObject *__pyx_kwds
   }
   goto __pyx_L6_skip;
   __pyx_L5_argtuple_error:;
-  __Pyx_RaiseArgtupleInvalid("lambda2", 1, 1, 1, __pyx_nargs); __PYX_ERR(0, 2373, __pyx_L3_error)
+  __Pyx_RaiseArgtupleInvalid("lambda2", 1, 1, 1, __pyx_nargs); __PYX_ERR(0, 2381, __pyx_L3_error)
   __pyx_L6_skip:;
   goto __pyx_L4_argument_unpacking_done;
   __pyx_L3_error:;
@@ -46540,7 +46586,7 @@ static PyObject *__pyx_lambda_funcdef_lambda2(CYTHON_UNUSED PyObject *__pyx_self
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("lambda2", 1);
   __Pyx_XDECREF(__pyx_r);
-  __pyx_t_1 = __Pyx_GetItemInt(__pyx_v_pos, 1, long, 1, __Pyx_PyInt_From_long, 0, 0, 1); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 2373, __pyx_L1_error)
+  __pyx_t_1 = __Pyx_GetItemInt(__pyx_v_pos, 1, long, 1, __Pyx_PyInt_From_long, 0, 0, 1); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 2381, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __pyx_r = __pyx_t_1;
   __pyx_t_1 = 0;
@@ -46579,7 +46625,7 @@ static PyObject *__pyx_pf_32cSparseIntegerOutrankingDigraphs_24cQuantilesRanking
   PyObject *__pyx_v_IntegerQuantilesSortingDigraph = NULL;
   PyObject *__pyx_v_OrderedDict = NULL;
   PyObject *__pyx_v_time = NULL;
-  PyObject *__pyx_v_cpu_count = NULL;
+  CYTHON_UNUSED PyObject *__pyx_v_cpu_count = NULL;
   PyObject *__pyx_v_mp = NULL;
   PyObject *__pyx_v_mpctx = NULL;
   CYTHON_UNUSED PyObject *__pyx_v_Pool = NULL;
@@ -46591,7 +46637,8 @@ static PyObject *__pyx_pf_32cSparseIntegerOutrankingDigraphs_24cQuantilesRanking
   Py_ssize_t __pyx_v_na;
   Py_ssize_t __pyx_v_dimension;
   PyObject *__pyx_v_g = NULL;
-  PyObject *__pyx_v_nbrCores = NULL;
+  CYTHON_UNUSED PyObject *__pyx_v_nbrCPUs = NULL;
+  CYTHON_UNUSED PyObject *__pyx_v_startMehod = NULL;
   PyObject *__pyx_v_qs = NULL;
   PyObject *__pyx_v_nc = NULL;
   Py_ssize_t __pyx_v_nd;
@@ -46639,20 +46686,20 @@ static PyObject *__pyx_pf_32cSparseIntegerOutrankingDigraphs_24cQuantilesRanking
   Py_ssize_t __pyx_t_7;
   PyObject *(*__pyx_t_8)(PyObject *);
   Py_UCS4 __pyx_t_9;
-  PyObject *__pyx_t_10 = NULL;
-  int __pyx_t_11;
-  int __pyx_t_12;
+  int __pyx_t_10;
+  PyObject *__pyx_t_11 = NULL;
+  long __pyx_t_12;
   long __pyx_t_13;
   long __pyx_t_14;
-  long __pyx_t_15;
-  int __pyx_t_16;
+  int __pyx_t_15;
+  PyObject *__pyx_t_16 = NULL;
   PyObject *__pyx_t_17 = NULL;
   PyObject *__pyx_t_18 = NULL;
   PyObject *__pyx_t_19 = NULL;
   PyObject *__pyx_t_20 = NULL;
   PyObject *__pyx_t_21 = NULL;
   PyObject *__pyx_t_22 = NULL;
-  PyObject *__pyx_t_23 = NULL;
+  int __pyx_t_23;
   Py_ssize_t __pyx_t_24;
   Py_ssize_t __pyx_t_25;
   int __pyx_lineno = 0;
@@ -46660,6 +46707,7 @@ static PyObject *__pyx_pf_32cSparseIntegerOutrankingDigraphs_24cQuantilesRanking
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("__init__", 0);
   __Pyx_INCREF(__pyx_v_quantilesOrderingStrategy);
+  __Pyx_INCREF(__pyx_v_nbrOfCPUs);
 
   /* "cSparseIntegerOutrankingDigraphs.pyx":2198
  *                  bint Debug=False):
@@ -47604,7 +47652,7 @@ static PyObject *__pyx_pf_32cSparseIntegerOutrankingDigraphs_24cQuantilesRanking
  *         self.sortingParameters['StartMethod'] = startMethod
  *         self.sortingParameters['PrefThresholds'] = False             # <<<<<<<<<<<<<<
  *         self.sortingParameters['hasNoVeto'] = False
- *         self.nbrOfCPUs = nbrOfCPUs
+ *         #self.nbrOfCPUs = nbrOfCPUs
  */
   __pyx_t_6 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_n_s_sortingParameters); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 2262, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_6);
@@ -47615,7 +47663,7 @@ static PyObject *__pyx_pf_32cSparseIntegerOutrankingDigraphs_24cQuantilesRanking
  *         self.sortingParameters['StartMethod'] = startMethod
  *         self.sortingParameters['PrefThresholds'] = False
  *         self.sortingParameters['hasNoVeto'] = False             # <<<<<<<<<<<<<<
- *         self.nbrOfCPUs = nbrOfCPUs
+ *         #self.nbrOfCPUs = nbrOfCPUs
  *         # quantiles sorting
  */
   __pyx_t_6 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_n_s_sortingParameters); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 2263, __pyx_L1_error)
@@ -47623,17 +47671,8 @@ static PyObject *__pyx_pf_32cSparseIntegerOutrankingDigraphs_24cQuantilesRanking
   if (unlikely((PyObject_SetItem(__pyx_t_6, __pyx_n_u_hasNoVeto, Py_False) < 0))) __PYX_ERR(0, 2263, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
 
-  /* "cSparseIntegerOutrankingDigraphs.pyx":2264
- *         self.sortingParameters['PrefThresholds'] = False
- *         self.sortingParameters['hasNoVeto'] = False
- *         self.nbrOfCPUs = nbrOfCPUs             # <<<<<<<<<<<<<<
- *         # quantiles sorting
- *         t0 = time()
- */
-  if (__Pyx_PyObject_SetAttrStr(__pyx_v_self, __pyx_n_s_nbrOfCPUs, __pyx_v_nbrOfCPUs) < 0) __PYX_ERR(0, 2264, __pyx_L1_error)
-
   /* "cSparseIntegerOutrankingDigraphs.pyx":2266
- *         self.nbrOfCPUs = nbrOfCPUs
+ *         #self.nbrOfCPUs = nbrOfCPUs
  *         # quantiles sorting
  *         t0 = time()             # <<<<<<<<<<<<<<
  *         if Comments:
@@ -47680,7 +47719,7 @@ static PyObject *__pyx_pf_32cSparseIntegerOutrankingDigraphs_24cQuantilesRanking
  *         if Comments:
  *             print('Computing the %d-quantiles sorting digraph of order %d ...' % (quantiles,na))             # <<<<<<<<<<<<<<
  *         if Threading:
- *             from multiprocessing import cpu_count
+ *             import multiprocessing as mp
  */
     __pyx_t_6 = PyTuple_New(5); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 2268, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_6);
@@ -47731,379 +47770,304 @@ static PyObject *__pyx_pf_32cSparseIntegerOutrankingDigraphs_24cQuantilesRanking
  *         if Comments:
  *             print('Computing the %d-quantiles sorting digraph of order %d ...' % (quantiles,na))
  *         if Threading:             # <<<<<<<<<<<<<<
- *             from multiprocessing import cpu_count
- *             nbrCores = cpu_count()
+ *             import multiprocessing as mp
+ *             if nbrOfCPUs is None:
  */
   if (__pyx_v_Threading) {
 
     /* "cSparseIntegerOutrankingDigraphs.pyx":2270
  *             print('Computing the %d-quantiles sorting digraph of order %d ...' % (quantiles,na))
  *         if Threading:
- *             from multiprocessing import cpu_count             # <<<<<<<<<<<<<<
- *             nbrCores = cpu_count()
- *         qs = IntegerQuantilesSortingDigraph(argPerfTab=perfTab,
+ *             import multiprocessing as mp             # <<<<<<<<<<<<<<
+ *             if nbrOfCPUs is None:
+ *                 nbrCPUs = mp.cpu_count()
  */
-    __pyx_t_6 = PyList_New(1); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 2270, __pyx_L1_error)
+    __pyx_t_6 = __Pyx_ImportDottedModule(__pyx_n_s_multiprocessing, NULL); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 2270, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_6);
-    __Pyx_INCREF(__pyx_n_s_cpu_count);
-    __Pyx_GIVEREF(__pyx_n_s_cpu_count);
-    if (__Pyx_PyList_SET_ITEM(__pyx_t_6, 0, __pyx_n_s_cpu_count)) __PYX_ERR(0, 2270, __pyx_L1_error);
-    __pyx_t_3 = __Pyx_Import(__pyx_n_s_multiprocessing, __pyx_t_6, 0); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 2270, __pyx_L1_error)
-    __Pyx_GOTREF(__pyx_t_3);
-    __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
-    __pyx_t_6 = __Pyx_ImportFrom(__pyx_t_3, __pyx_n_s_cpu_count); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 2270, __pyx_L1_error)
-    __Pyx_GOTREF(__pyx_t_6);
-    __Pyx_INCREF(__pyx_t_6);
-    __Pyx_DECREF_SET(__pyx_v_cpu_count, __pyx_t_6);
-    __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
-    __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
+    __Pyx_DECREF_SET(__pyx_v_mp, __pyx_t_6);
+    __pyx_t_6 = 0;
 
     /* "cSparseIntegerOutrankingDigraphs.pyx":2271
  *         if Threading:
- *             from multiprocessing import cpu_count
- *             nbrCores = cpu_count()             # <<<<<<<<<<<<<<
- *         qs = IntegerQuantilesSortingDigraph(argPerfTab=perfTab,
- *                                      limitingQuantiles=quantiles,
+ *             import multiprocessing as mp
+ *             if nbrOfCPUs is None:             # <<<<<<<<<<<<<<
+ *                 nbrCPUs = mp.cpu_count()
+ *             if startMethod is None:
  */
-    __Pyx_INCREF(__pyx_v_cpu_count);
-    __pyx_t_6 = __pyx_v_cpu_count; __pyx_t_2 = NULL;
-    __pyx_t_4 = 0;
-    #if CYTHON_UNPACK_METHODS
-    if (unlikely(PyMethod_Check(__pyx_t_6))) {
-      __pyx_t_2 = PyMethod_GET_SELF(__pyx_t_6);
-      if (likely(__pyx_t_2)) {
-        PyObject* function = PyMethod_GET_FUNCTION(__pyx_t_6);
-        __Pyx_INCREF(__pyx_t_2);
-        __Pyx_INCREF(function);
-        __Pyx_DECREF_SET(__pyx_t_6, function);
-        __pyx_t_4 = 1;
-      }
-    }
-    #endif
-    {
-      PyObject *__pyx_callargs[2] = {__pyx_t_2, NULL};
-      __pyx_t_3 = __Pyx_PyObject_FastCall(__pyx_t_6, __pyx_callargs+1-__pyx_t_4, 0+__pyx_t_4);
-      __Pyx_XDECREF(__pyx_t_2); __pyx_t_2 = 0;
-      if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 2271, __pyx_L1_error)
+    __pyx_t_10 = (__pyx_v_nbrOfCPUs == Py_None);
+    if (__pyx_t_10) {
+
+      /* "cSparseIntegerOutrankingDigraphs.pyx":2272
+ *             import multiprocessing as mp
+ *             if nbrOfCPUs is None:
+ *                 nbrCPUs = mp.cpu_count()             # <<<<<<<<<<<<<<
+ *             if startMethod is None:
+ *                 startMehod = 'spawn'
+ */
+      __pyx_t_3 = __Pyx_PyObject_GetAttrStr(__pyx_v_mp, __pyx_n_s_cpu_count); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 2272, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_3);
-      __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
+      __pyx_t_2 = NULL;
+      __pyx_t_4 = 0;
+      #if CYTHON_UNPACK_METHODS
+      if (likely(PyMethod_Check(__pyx_t_3))) {
+        __pyx_t_2 = PyMethod_GET_SELF(__pyx_t_3);
+        if (likely(__pyx_t_2)) {
+          PyObject* function = PyMethod_GET_FUNCTION(__pyx_t_3);
+          __Pyx_INCREF(__pyx_t_2);
+          __Pyx_INCREF(function);
+          __Pyx_DECREF_SET(__pyx_t_3, function);
+          __pyx_t_4 = 1;
+        }
+      }
+      #endif
+      {
+        PyObject *__pyx_callargs[2] = {__pyx_t_2, NULL};
+        __pyx_t_6 = __Pyx_PyObject_FastCall(__pyx_t_3, __pyx_callargs+1-__pyx_t_4, 0+__pyx_t_4);
+        __Pyx_XDECREF(__pyx_t_2); __pyx_t_2 = 0;
+        if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 2272, __pyx_L1_error)
+        __Pyx_GOTREF(__pyx_t_6);
+        __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
+      }
+      __pyx_v_nbrCPUs = __pyx_t_6;
+      __pyx_t_6 = 0;
+
+      /* "cSparseIntegerOutrankingDigraphs.pyx":2271
+ *         if Threading:
+ *             import multiprocessing as mp
+ *             if nbrOfCPUs is None:             # <<<<<<<<<<<<<<
+ *                 nbrCPUs = mp.cpu_count()
+ *             if startMethod is None:
+ */
     }
-    __pyx_v_nbrCores = __pyx_t_3;
-    __pyx_t_3 = 0;
+
+    /* "cSparseIntegerOutrankingDigraphs.pyx":2273
+ *             if nbrOfCPUs is None:
+ *                 nbrCPUs = mp.cpu_count()
+ *             if startMethod is None:             # <<<<<<<<<<<<<<
+ *                 startMehod = 'spawn'
+ *             self.nbrThread = nbrOfCPUs
+ */
+    __pyx_t_10 = (__pyx_v_startMethod == Py_None);
+    if (__pyx_t_10) {
+
+      /* "cSparseIntegerOutrankingDigraphs.pyx":2274
+ *                 nbrCPUs = mp.cpu_count()
+ *             if startMethod is None:
+ *                 startMehod = 'spawn'             # <<<<<<<<<<<<<<
+ *             self.nbrThread = nbrOfCPUs
+ *             self.startMethod = startMethod
+ */
+      __Pyx_INCREF(__pyx_n_u_spawn);
+      __pyx_v_startMehod = __pyx_n_u_spawn;
+
+      /* "cSparseIntegerOutrankingDigraphs.pyx":2273
+ *             if nbrOfCPUs is None:
+ *                 nbrCPUs = mp.cpu_count()
+ *             if startMethod is None:             # <<<<<<<<<<<<<<
+ *                 startMehod = 'spawn'
+ *             self.nbrThread = nbrOfCPUs
+ */
+    }
+
+    /* "cSparseIntegerOutrankingDigraphs.pyx":2275
+ *             if startMethod is None:
+ *                 startMehod = 'spawn'
+ *             self.nbrThread = nbrOfCPUs             # <<<<<<<<<<<<<<
+ *             self.startMethod = startMethod
+ *         else:
+ */
+    if (__Pyx_PyObject_SetAttrStr(__pyx_v_self, __pyx_n_s_nbrThread, __pyx_v_nbrOfCPUs) < 0) __PYX_ERR(0, 2275, __pyx_L1_error)
+
+    /* "cSparseIntegerOutrankingDigraphs.pyx":2276
+ *                 startMehod = 'spawn'
+ *             self.nbrThread = nbrOfCPUs
+ *             self.startMethod = startMethod             # <<<<<<<<<<<<<<
+ *         else:
+ *             self.nbrThreads = 0
+ */
+    if (__Pyx_PyObject_SetAttrStr(__pyx_v_self, __pyx_n_s_startMethod, __pyx_v_startMethod) < 0) __PYX_ERR(0, 2276, __pyx_L1_error)
 
     /* "cSparseIntegerOutrankingDigraphs.pyx":2269
  *         if Comments:
  *             print('Computing the %d-quantiles sorting digraph of order %d ...' % (quantiles,na))
  *         if Threading:             # <<<<<<<<<<<<<<
- *             from multiprocessing import cpu_count
- *             nbrCores = cpu_count()
+ *             import multiprocessing as mp
+ *             if nbrOfCPUs is None:
  */
+    goto __pyx_L9;
   }
 
-  /* "cSparseIntegerOutrankingDigraphs.pyx":2272
- *             from multiprocessing import cpu_count
- *             nbrCores = cpu_count()
+  /* "cSparseIntegerOutrankingDigraphs.pyx":2278
+ *             self.startMethod = startMethod
+ *         else:
+ *             self.nbrThreads = 0             # <<<<<<<<<<<<<<
+ *             self.startMethod = None
+ * 
+ */
+  /*else*/ {
+    if (__Pyx_PyObject_SetAttrStr(__pyx_v_self, __pyx_n_s_nbrThreads, __pyx_int_0) < 0) __PYX_ERR(0, 2278, __pyx_L1_error)
+
+    /* "cSparseIntegerOutrankingDigraphs.pyx":2279
+ *         else:
+ *             self.nbrThreads = 0
+ *             self.startMethod = None             # <<<<<<<<<<<<<<
+ * 
+ *         qs = IntegerQuantilesSortingDigraph(argPerfTab=perfTab,
+ */
+    if (__Pyx_PyObject_SetAttrStr(__pyx_v_self, __pyx_n_s_startMethod, Py_None) < 0) __PYX_ERR(0, 2279, __pyx_L1_error)
+  }
+  __pyx_L9:;
+
+  /* "cSparseIntegerOutrankingDigraphs.pyx":2281
+ *             self.startMethod = None
+ * 
  *         qs = IntegerQuantilesSortingDigraph(argPerfTab=perfTab,             # <<<<<<<<<<<<<<
  *                                      limitingQuantiles=quantiles,
  *                                      LowerClosed=LowerClosed,
  */
-  __pyx_t_3 = __Pyx_PyDict_NewPresized(12); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 2272, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_t_3);
-  __Pyx_GetModuleGlobalName(__pyx_t_6, __pyx_n_s_perfTab); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 2272, __pyx_L1_error)
+  __pyx_t_6 = __Pyx_PyDict_NewPresized(12); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 2281, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_6);
-  if (PyDict_SetItem(__pyx_t_3, __pyx_n_s_argPerfTab, __pyx_t_6) < 0) __PYX_ERR(0, 2272, __pyx_L1_error)
-  __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
+  __Pyx_GetModuleGlobalName(__pyx_t_3, __pyx_n_s_perfTab); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 2281, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_3);
+  if (PyDict_SetItem(__pyx_t_6, __pyx_n_s_argPerfTab, __pyx_t_3) < 0) __PYX_ERR(0, 2281, __pyx_L1_error)
+  __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
 
-  /* "cSparseIntegerOutrankingDigraphs.pyx":2273
- *             nbrCores = cpu_count()
+  /* "cSparseIntegerOutrankingDigraphs.pyx":2282
+ * 
  *         qs = IntegerQuantilesSortingDigraph(argPerfTab=perfTab,
  *                                      limitingQuantiles=quantiles,             # <<<<<<<<<<<<<<
  *                                      LowerClosed=LowerClosed,
  *                                      CompleteOutranking=False,
  */
-  __pyx_t_6 = __Pyx_PyInt_From_int(__pyx_v_quantiles); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 2273, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_t_6);
-  if (PyDict_SetItem(__pyx_t_3, __pyx_n_s_limitingQuantiles, __pyx_t_6) < 0) __PYX_ERR(0, 2272, __pyx_L1_error)
-  __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
+  __pyx_t_3 = __Pyx_PyInt_From_int(__pyx_v_quantiles); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 2282, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_3);
+  if (PyDict_SetItem(__pyx_t_6, __pyx_n_s_limitingQuantiles, __pyx_t_3) < 0) __PYX_ERR(0, 2281, __pyx_L1_error)
+  __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
 
-  /* "cSparseIntegerOutrankingDigraphs.pyx":2274
+  /* "cSparseIntegerOutrankingDigraphs.pyx":2283
  *         qs = IntegerQuantilesSortingDigraph(argPerfTab=perfTab,
  *                                      limitingQuantiles=quantiles,
  *                                      LowerClosed=LowerClosed,             # <<<<<<<<<<<<<<
  *                                      CompleteOutranking=False,
  *                                      StoreSorting=True,
  */
-  __pyx_t_6 = __Pyx_PyBool_FromLong(__pyx_v_LowerClosed); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 2274, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_t_6);
-  if (PyDict_SetItem(__pyx_t_3, __pyx_n_s_LowerClosed, __pyx_t_6) < 0) __PYX_ERR(0, 2272, __pyx_L1_error)
-  __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
+  __pyx_t_3 = __Pyx_PyBool_FromLong(__pyx_v_LowerClosed); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 2283, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_3);
+  if (PyDict_SetItem(__pyx_t_6, __pyx_n_s_LowerClosed, __pyx_t_3) < 0) __PYX_ERR(0, 2281, __pyx_L1_error)
+  __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
 
-  /* "cSparseIntegerOutrankingDigraphs.pyx":2275
+  /* "cSparseIntegerOutrankingDigraphs.pyx":2284
  *                                      limitingQuantiles=quantiles,
  *                                      LowerClosed=LowerClosed,
  *                                      CompleteOutranking=False,             # <<<<<<<<<<<<<<
  *                                      StoreSorting=True,
  *                                      CopyPerfTab=CopyPerfTab,
  */
-  if (PyDict_SetItem(__pyx_t_3, __pyx_n_s_CompleteOutranking, Py_False) < 0) __PYX_ERR(0, 2272, __pyx_L1_error)
+  if (PyDict_SetItem(__pyx_t_6, __pyx_n_s_CompleteOutranking, Py_False) < 0) __PYX_ERR(0, 2281, __pyx_L1_error)
 
-  /* "cSparseIntegerOutrankingDigraphs.pyx":2276
+  /* "cSparseIntegerOutrankingDigraphs.pyx":2285
  *                                      LowerClosed=LowerClosed,
  *                                      CompleteOutranking=False,
  *                                      StoreSorting=True,             # <<<<<<<<<<<<<<
  *                                      CopyPerfTab=CopyPerfTab,
- *                                      Threading=self.sortingParameters['Threading'],
+ *                                      Threading=Threading,
  */
-  if (PyDict_SetItem(__pyx_t_3, __pyx_n_s_StoreSorting, Py_True) < 0) __PYX_ERR(0, 2272, __pyx_L1_error)
+  if (PyDict_SetItem(__pyx_t_6, __pyx_n_s_StoreSorting, Py_True) < 0) __PYX_ERR(0, 2281, __pyx_L1_error)
 
-  /* "cSparseIntegerOutrankingDigraphs.pyx":2277
+  /* "cSparseIntegerOutrankingDigraphs.pyx":2286
  *                                      CompleteOutranking=False,
  *                                      StoreSorting=True,
  *                                      CopyPerfTab=CopyPerfTab,             # <<<<<<<<<<<<<<
- *                                      Threading=self.sortingParameters['Threading'],
+ *                                      Threading=Threading,
  *                                      startMethod=startMethod,
  */
-  __pyx_t_6 = __Pyx_PyBool_FromLong(__pyx_v_CopyPerfTab); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 2277, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_t_6);
-  if (PyDict_SetItem(__pyx_t_3, __pyx_n_s_CopyPerfTab, __pyx_t_6) < 0) __PYX_ERR(0, 2272, __pyx_L1_error)
-  __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
+  __pyx_t_3 = __Pyx_PyBool_FromLong(__pyx_v_CopyPerfTab); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 2286, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_3);
+  if (PyDict_SetItem(__pyx_t_6, __pyx_n_s_CopyPerfTab, __pyx_t_3) < 0) __PYX_ERR(0, 2281, __pyx_L1_error)
+  __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
 
-  /* "cSparseIntegerOutrankingDigraphs.pyx":2278
+  /* "cSparseIntegerOutrankingDigraphs.pyx":2287
  *                                      StoreSorting=True,
  *                                      CopyPerfTab=CopyPerfTab,
- *                                      Threading=self.sortingParameters['Threading'],             # <<<<<<<<<<<<<<
+ *                                      Threading=Threading,             # <<<<<<<<<<<<<<
  *                                      startMethod=startMethod,
  *                                      tempDir=tempDir,
  */
-  __pyx_t_6 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_n_s_sortingParameters); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 2278, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_t_6);
-  __pyx_t_2 = __Pyx_PyObject_Dict_GetItem(__pyx_t_6, __pyx_n_u_Threading); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 2278, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_t_2);
-  __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
-  if (PyDict_SetItem(__pyx_t_3, __pyx_n_s_Threading, __pyx_t_2) < 0) __PYX_ERR(0, 2272, __pyx_L1_error)
-  __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
+  __pyx_t_3 = __Pyx_PyBool_FromLong(__pyx_v_Threading); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 2287, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_3);
+  if (PyDict_SetItem(__pyx_t_6, __pyx_n_s_Threading, __pyx_t_3) < 0) __PYX_ERR(0, 2281, __pyx_L1_error)
+  __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
 
-  /* "cSparseIntegerOutrankingDigraphs.pyx":2279
+  /* "cSparseIntegerOutrankingDigraphs.pyx":2288
  *                                      CopyPerfTab=CopyPerfTab,
- *                                      Threading=self.sortingParameters['Threading'],
+ *                                      Threading=Threading,
  *                                      startMethod=startMethod,             # <<<<<<<<<<<<<<
  *                                      tempDir=tempDir,
  *                                      nbrCores=nbrOfCPUs,
  */
-  if (PyDict_SetItem(__pyx_t_3, __pyx_n_s_startMethod, __pyx_v_startMethod) < 0) __PYX_ERR(0, 2272, __pyx_L1_error)
+  if (PyDict_SetItem(__pyx_t_6, __pyx_n_s_startMethod, __pyx_v_startMethod) < 0) __PYX_ERR(0, 2281, __pyx_L1_error)
 
-  /* "cSparseIntegerOutrankingDigraphs.pyx":2280
- *                                      Threading=self.sortingParameters['Threading'],
+  /* "cSparseIntegerOutrankingDigraphs.pyx":2289
+ *                                      Threading=Threading,
  *                                      startMethod=startMethod,
  *                                      tempDir=tempDir,             # <<<<<<<<<<<<<<
  *                                      nbrCores=nbrOfCPUs,
  *                                      Comments=Comments,
  */
-  if (PyDict_SetItem(__pyx_t_3, __pyx_n_s_tempDir, __pyx_v_tempDir) < 0) __PYX_ERR(0, 2272, __pyx_L1_error)
+  if (PyDict_SetItem(__pyx_t_6, __pyx_n_s_tempDir, __pyx_v_tempDir) < 0) __PYX_ERR(0, 2281, __pyx_L1_error)
 
-  /* "cSparseIntegerOutrankingDigraphs.pyx":2281
+  /* "cSparseIntegerOutrankingDigraphs.pyx":2290
  *                                      startMethod=startMethod,
  *                                      tempDir=tempDir,
  *                                      nbrCores=nbrOfCPUs,             # <<<<<<<<<<<<<<
  *                                      Comments=Comments,
  *                                      Debug=Debug)
  */
-  if (PyDict_SetItem(__pyx_t_3, __pyx_n_s_nbrCores, __pyx_v_nbrOfCPUs) < 0) __PYX_ERR(0, 2272, __pyx_L1_error)
+  if (PyDict_SetItem(__pyx_t_6, __pyx_n_s_nbrCores, __pyx_v_nbrOfCPUs) < 0) __PYX_ERR(0, 2281, __pyx_L1_error)
 
-  /* "cSparseIntegerOutrankingDigraphs.pyx":2282
+  /* "cSparseIntegerOutrankingDigraphs.pyx":2291
  *                                      tempDir=tempDir,
  *                                      nbrCores=nbrOfCPUs,
  *                                      Comments=Comments,             # <<<<<<<<<<<<<<
  *                                      Debug=Debug)
  *         self.runTimes['sorting'] = time() - t0
  */
-  __pyx_t_2 = __Pyx_PyBool_FromLong(__pyx_v_Comments); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 2282, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_t_2);
-  if (PyDict_SetItem(__pyx_t_3, __pyx_n_s_Comments, __pyx_t_2) < 0) __PYX_ERR(0, 2272, __pyx_L1_error)
-  __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
+  __pyx_t_3 = __Pyx_PyBool_FromLong(__pyx_v_Comments); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 2291, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_3);
+  if (PyDict_SetItem(__pyx_t_6, __pyx_n_s_Comments, __pyx_t_3) < 0) __PYX_ERR(0, 2281, __pyx_L1_error)
+  __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
 
-  /* "cSparseIntegerOutrankingDigraphs.pyx":2283
+  /* "cSparseIntegerOutrankingDigraphs.pyx":2292
  *                                      nbrCores=nbrOfCPUs,
  *                                      Comments=Comments,
  *                                      Debug=Debug)             # <<<<<<<<<<<<<<
  *         self.runTimes['sorting'] = time() - t0
  *         self.valuationdomain = qs.valuationdomain
  */
-  __pyx_t_2 = __Pyx_PyBool_FromLong(__pyx_v_Debug); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 2283, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_t_2);
-  if (PyDict_SetItem(__pyx_t_3, __pyx_n_s_Debug, __pyx_t_2) < 0) __PYX_ERR(0, 2272, __pyx_L1_error)
-  __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
+  __pyx_t_3 = __Pyx_PyBool_FromLong(__pyx_v_Debug); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 2292, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_3);
+  if (PyDict_SetItem(__pyx_t_6, __pyx_n_s_Debug, __pyx_t_3) < 0) __PYX_ERR(0, 2281, __pyx_L1_error)
+  __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
 
-  /* "cSparseIntegerOutrankingDigraphs.pyx":2272
- *             from multiprocessing import cpu_count
- *             nbrCores = cpu_count()
+  /* "cSparseIntegerOutrankingDigraphs.pyx":2281
+ *             self.startMethod = None
+ * 
  *         qs = IntegerQuantilesSortingDigraph(argPerfTab=perfTab,             # <<<<<<<<<<<<<<
  *                                      limitingQuantiles=quantiles,
  *                                      LowerClosed=LowerClosed,
  */
-  __pyx_t_2 = __Pyx_PyObject_Call(__pyx_v_IntegerQuantilesSortingDigraph, __pyx_empty_tuple, __pyx_t_3); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 2272, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_t_2);
-  __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
-  __pyx_v_qs = __pyx_t_2;
-  __pyx_t_2 = 0;
+  __pyx_t_3 = __Pyx_PyObject_Call(__pyx_v_IntegerQuantilesSortingDigraph, __pyx_empty_tuple, __pyx_t_6); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 2281, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_3);
+  __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
+  __pyx_v_qs = __pyx_t_3;
+  __pyx_t_3 = 0;
 
-  /* "cSparseIntegerOutrankingDigraphs.pyx":2284
+  /* "cSparseIntegerOutrankingDigraphs.pyx":2293
  *                                      Comments=Comments,
  *                                      Debug=Debug)
  *         self.runTimes['sorting'] = time() - t0             # <<<<<<<<<<<<<<
  *         self.valuationdomain = qs.valuationdomain
  *         self.profiles = qs.profiles
- */
-  __Pyx_INCREF(__pyx_v_time);
-  __pyx_t_3 = __pyx_v_time; __pyx_t_6 = NULL;
-  __pyx_t_4 = 0;
-  #if CYTHON_UNPACK_METHODS
-  if (unlikely(PyMethod_Check(__pyx_t_3))) {
-    __pyx_t_6 = PyMethod_GET_SELF(__pyx_t_3);
-    if (likely(__pyx_t_6)) {
-      PyObject* function = PyMethod_GET_FUNCTION(__pyx_t_3);
-      __Pyx_INCREF(__pyx_t_6);
-      __Pyx_INCREF(function);
-      __Pyx_DECREF_SET(__pyx_t_3, function);
-      __pyx_t_4 = 1;
-    }
-  }
-  #endif
-  {
-    PyObject *__pyx_callargs[2] = {__pyx_t_6, NULL};
-    __pyx_t_2 = __Pyx_PyObject_FastCall(__pyx_t_3, __pyx_callargs+1-__pyx_t_4, 0+__pyx_t_4);
-    __Pyx_XDECREF(__pyx_t_6); __pyx_t_6 = 0;
-    if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 2284, __pyx_L1_error)
-    __Pyx_GOTREF(__pyx_t_2);
-    __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
-  }
-  __pyx_t_3 = PyFloat_FromDouble(__pyx_v_t0); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 2284, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_t_3);
-  __pyx_t_6 = PyNumber_Subtract(__pyx_t_2, __pyx_t_3); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 2284, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_t_6);
-  __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
-  __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
-  __pyx_t_3 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_n_s_runTimes); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 2284, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_t_3);
-  if (unlikely((PyObject_SetItem(__pyx_t_3, __pyx_n_u_sorting, __pyx_t_6) < 0))) __PYX_ERR(0, 2284, __pyx_L1_error)
-  __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
-  __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
-
-  /* "cSparseIntegerOutrankingDigraphs.pyx":2285
- *                                      Debug=Debug)
- *         self.runTimes['sorting'] = time() - t0
- *         self.valuationdomain = qs.valuationdomain             # <<<<<<<<<<<<<<
- *         self.profiles = qs.profiles
- *         self.categories = qs.categories
- */
-  __pyx_t_6 = __Pyx_PyObject_GetAttrStr(__pyx_v_qs, __pyx_n_s_valuationdomain); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 2285, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_t_6);
-  if (__Pyx_PyObject_SetAttrStr(__pyx_v_self, __pyx_n_s_valuationdomain, __pyx_t_6) < 0) __PYX_ERR(0, 2285, __pyx_L1_error)
-  __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
-
-  /* "cSparseIntegerOutrankingDigraphs.pyx":2286
- *         self.runTimes['sorting'] = time() - t0
- *         self.valuationdomain = qs.valuationdomain
- *         self.profiles = qs.profiles             # <<<<<<<<<<<<<<
- *         self.categories = qs.categories
- *         self.sorting = qs.sorting
- */
-  __pyx_t_6 = __Pyx_PyObject_GetAttrStr(__pyx_v_qs, __pyx_n_s_profiles); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 2286, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_t_6);
-  if (__Pyx_PyObject_SetAttrStr(__pyx_v_self, __pyx_n_s_profiles, __pyx_t_6) < 0) __PYX_ERR(0, 2286, __pyx_L1_error)
-  __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
-
-  /* "cSparseIntegerOutrankingDigraphs.pyx":2287
- *         self.valuationdomain = qs.valuationdomain
- *         self.profiles = qs.profiles
- *         self.categories = qs.categories             # <<<<<<<<<<<<<<
- *         self.sorting = qs.sorting
- *         if Comments:
- */
-  __pyx_t_6 = __Pyx_PyObject_GetAttrStr(__pyx_v_qs, __pyx_n_s_categories); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 2287, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_t_6);
-  if (__Pyx_PyObject_SetAttrStr(__pyx_v_self, __pyx_n_s_categories, __pyx_t_6) < 0) __PYX_ERR(0, 2287, __pyx_L1_error)
-  __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
-
-  /* "cSparseIntegerOutrankingDigraphs.pyx":2288
- *         self.profiles = qs.profiles
- *         self.categories = qs.categories
- *         self.sorting = qs.sorting             # <<<<<<<<<<<<<<
- *         if Comments:
- *             print(qs)
- */
-  __pyx_t_6 = __Pyx_PyObject_GetAttrStr(__pyx_v_qs, __pyx_n_s_sorting); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 2288, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_t_6);
-  if (__Pyx_PyObject_SetAttrStr(__pyx_v_self, __pyx_n_s_sorting, __pyx_t_6) < 0) __PYX_ERR(0, 2288, __pyx_L1_error)
-  __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
-
-  /* "cSparseIntegerOutrankingDigraphs.pyx":2289
- *         self.categories = qs.categories
- *         self.sorting = qs.sorting
- *         if Comments:             # <<<<<<<<<<<<<<
- *             print(qs)
- *             print('execution time: %.4f' % (self.runTimes['sorting']))
- */
-  if (__pyx_v_Comments) {
-
-    /* "cSparseIntegerOutrankingDigraphs.pyx":2290
- *         self.sorting = qs.sorting
- *         if Comments:
- *             print(qs)             # <<<<<<<<<<<<<<
- *             print('execution time: %.4f' % (self.runTimes['sorting']))
- *         # preordering
- */
-    __pyx_t_6 = __Pyx_PyObject_CallOneArg(__pyx_builtin_print, __pyx_v_qs); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 2290, __pyx_L1_error)
-    __Pyx_GOTREF(__pyx_t_6);
-    __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
-
-    /* "cSparseIntegerOutrankingDigraphs.pyx":2291
- *         if Comments:
- *             print(qs)
- *             print('execution time: %.4f' % (self.runTimes['sorting']))             # <<<<<<<<<<<<<<
- *         # preordering
- * ##        if minimalComponentSize == None:
- */
-    __pyx_t_6 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_n_s_runTimes); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 2291, __pyx_L1_error)
-    __Pyx_GOTREF(__pyx_t_6);
-    __pyx_t_3 = __Pyx_PyObject_Dict_GetItem(__pyx_t_6, __pyx_n_u_sorting); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 2291, __pyx_L1_error)
-    __Pyx_GOTREF(__pyx_t_3);
-    __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
-    __pyx_t_6 = __Pyx_PyUnicode_FormatSafe(__pyx_kp_u_execution_time_4f, __pyx_t_3); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 2291, __pyx_L1_error)
-    __Pyx_GOTREF(__pyx_t_6);
-    __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
-    __pyx_t_3 = __Pyx_PyObject_CallOneArg(__pyx_builtin_print, __pyx_t_6); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 2291, __pyx_L1_error)
-    __Pyx_GOTREF(__pyx_t_3);
-    __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
-    __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
-
-    /* "cSparseIntegerOutrankingDigraphs.pyx":2289
- *         self.categories = qs.categories
- *         self.sorting = qs.sorting
- *         if Comments:             # <<<<<<<<<<<<<<
- *             print(qs)
- *             print('execution time: %.4f' % (self.runTimes['sorting']))
- */
-  }
-
-  /* "cSparseIntegerOutrankingDigraphs.pyx":2295
- * ##        if minimalComponentSize == None:
- * ##            minimalComponentSize = 1
- *         self.minimalComponentSize = minimalComponentSize             # <<<<<<<<<<<<<<
- *         tw = time()
- *         quantilesOrderingStrategy = self.sortingParameters['strategy']
- */
-  __pyx_t_3 = __Pyx_PyInt_From_int(__pyx_v_minimalComponentSize); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 2295, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_t_3);
-  if (__Pyx_PyObject_SetAttrStr(__pyx_v_self, __pyx_n_s_minimalComponentSize, __pyx_t_3) < 0) __PYX_ERR(0, 2295, __pyx_L1_error)
-  __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
-
-  /* "cSparseIntegerOutrankingDigraphs.pyx":2296
- * ##            minimalComponentSize = 1
- *         self.minimalComponentSize = minimalComponentSize
- *         tw = time()             # <<<<<<<<<<<<<<
- *         quantilesOrderingStrategy = self.sortingParameters['strategy']
- *         ##if quantilesOrderingStrategy == 'average':
  */
   __Pyx_INCREF(__pyx_v_time);
   __pyx_t_6 = __pyx_v_time; __pyx_t_2 = NULL;
@@ -48124,30 +48088,181 @@ static PyObject *__pyx_pf_32cSparseIntegerOutrankingDigraphs_24cQuantilesRanking
     PyObject *__pyx_callargs[2] = {__pyx_t_2, NULL};
     __pyx_t_3 = __Pyx_PyObject_FastCall(__pyx_t_6, __pyx_callargs+1-__pyx_t_4, 0+__pyx_t_4);
     __Pyx_XDECREF(__pyx_t_2); __pyx_t_2 = 0;
-    if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 2296, __pyx_L1_error)
+    if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 2293, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_3);
     __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
   }
-  __pyx_t_5 = __pyx_PyFloat_AsDouble(__pyx_t_3); if (unlikely((__pyx_t_5 == (double)-1) && PyErr_Occurred())) __PYX_ERR(0, 2296, __pyx_L1_error)
+  __pyx_t_6 = PyFloat_FromDouble(__pyx_v_t0); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 2293, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_6);
+  __pyx_t_2 = PyNumber_Subtract(__pyx_t_3, __pyx_t_6); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 2293, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_2);
   __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
-  __pyx_v_tw = __pyx_t_5;
+  __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
+  __pyx_t_6 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_n_s_runTimes); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 2293, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_6);
+  if (unlikely((PyObject_SetItem(__pyx_t_6, __pyx_n_u_sorting, __pyx_t_2) < 0))) __PYX_ERR(0, 2293, __pyx_L1_error)
+  __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
+  __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
+
+  /* "cSparseIntegerOutrankingDigraphs.pyx":2294
+ *                                      Debug=Debug)
+ *         self.runTimes['sorting'] = time() - t0
+ *         self.valuationdomain = qs.valuationdomain             # <<<<<<<<<<<<<<
+ *         self.profiles = qs.profiles
+ *         self.categories = qs.categories
+ */
+  __pyx_t_2 = __Pyx_PyObject_GetAttrStr(__pyx_v_qs, __pyx_n_s_valuationdomain); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 2294, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_2);
+  if (__Pyx_PyObject_SetAttrStr(__pyx_v_self, __pyx_n_s_valuationdomain, __pyx_t_2) < 0) __PYX_ERR(0, 2294, __pyx_L1_error)
+  __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
+
+  /* "cSparseIntegerOutrankingDigraphs.pyx":2295
+ *         self.runTimes['sorting'] = time() - t0
+ *         self.valuationdomain = qs.valuationdomain
+ *         self.profiles = qs.profiles             # <<<<<<<<<<<<<<
+ *         self.categories = qs.categories
+ *         self.sorting = qs.sorting
+ */
+  __pyx_t_2 = __Pyx_PyObject_GetAttrStr(__pyx_v_qs, __pyx_n_s_profiles); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 2295, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_2);
+  if (__Pyx_PyObject_SetAttrStr(__pyx_v_self, __pyx_n_s_profiles, __pyx_t_2) < 0) __PYX_ERR(0, 2295, __pyx_L1_error)
+  __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
+
+  /* "cSparseIntegerOutrankingDigraphs.pyx":2296
+ *         self.valuationdomain = qs.valuationdomain
+ *         self.profiles = qs.profiles
+ *         self.categories = qs.categories             # <<<<<<<<<<<<<<
+ *         self.sorting = qs.sorting
+ *         if Comments:
+ */
+  __pyx_t_2 = __Pyx_PyObject_GetAttrStr(__pyx_v_qs, __pyx_n_s_categories); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 2296, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_2);
+  if (__Pyx_PyObject_SetAttrStr(__pyx_v_self, __pyx_n_s_categories, __pyx_t_2) < 0) __PYX_ERR(0, 2296, __pyx_L1_error)
+  __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
 
   /* "cSparseIntegerOutrankingDigraphs.pyx":2297
+ *         self.profiles = qs.profiles
+ *         self.categories = qs.categories
+ *         self.sorting = qs.sorting             # <<<<<<<<<<<<<<
+ *         if Comments:
+ *             print(qs)
+ */
+  __pyx_t_2 = __Pyx_PyObject_GetAttrStr(__pyx_v_qs, __pyx_n_s_sorting); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 2297, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_2);
+  if (__Pyx_PyObject_SetAttrStr(__pyx_v_self, __pyx_n_s_sorting, __pyx_t_2) < 0) __PYX_ERR(0, 2297, __pyx_L1_error)
+  __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
+
+  /* "cSparseIntegerOutrankingDigraphs.pyx":2298
+ *         self.categories = qs.categories
+ *         self.sorting = qs.sorting
+ *         if Comments:             # <<<<<<<<<<<<<<
+ *             print(qs)
+ *             print('execution time: %.4f' % (self.runTimes['sorting']))
+ */
+  if (__pyx_v_Comments) {
+
+    /* "cSparseIntegerOutrankingDigraphs.pyx":2299
+ *         self.sorting = qs.sorting
+ *         if Comments:
+ *             print(qs)             # <<<<<<<<<<<<<<
+ *             print('execution time: %.4f' % (self.runTimes['sorting']))
+ *         # preordering
+ */
+    __pyx_t_2 = __Pyx_PyObject_CallOneArg(__pyx_builtin_print, __pyx_v_qs); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 2299, __pyx_L1_error)
+    __Pyx_GOTREF(__pyx_t_2);
+    __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
+
+    /* "cSparseIntegerOutrankingDigraphs.pyx":2300
+ *         if Comments:
+ *             print(qs)
+ *             print('execution time: %.4f' % (self.runTimes['sorting']))             # <<<<<<<<<<<<<<
+ *         # preordering
+ * ##        if minimalComponentSize == None:
+ */
+    __pyx_t_2 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_n_s_runTimes); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 2300, __pyx_L1_error)
+    __Pyx_GOTREF(__pyx_t_2);
+    __pyx_t_6 = __Pyx_PyObject_Dict_GetItem(__pyx_t_2, __pyx_n_u_sorting); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 2300, __pyx_L1_error)
+    __Pyx_GOTREF(__pyx_t_6);
+    __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
+    __pyx_t_2 = __Pyx_PyUnicode_FormatSafe(__pyx_kp_u_execution_time_4f, __pyx_t_6); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 2300, __pyx_L1_error)
+    __Pyx_GOTREF(__pyx_t_2);
+    __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
+    __pyx_t_6 = __Pyx_PyObject_CallOneArg(__pyx_builtin_print, __pyx_t_2); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 2300, __pyx_L1_error)
+    __Pyx_GOTREF(__pyx_t_6);
+    __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
+    __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
+
+    /* "cSparseIntegerOutrankingDigraphs.pyx":2298
+ *         self.categories = qs.categories
+ *         self.sorting = qs.sorting
+ *         if Comments:             # <<<<<<<<<<<<<<
+ *             print(qs)
+ *             print('execution time: %.4f' % (self.runTimes['sorting']))
+ */
+  }
+
+  /* "cSparseIntegerOutrankingDigraphs.pyx":2304
+ * ##        if minimalComponentSize == None:
+ * ##            minimalComponentSize = 1
+ *         self.minimalComponentSize = minimalComponentSize             # <<<<<<<<<<<<<<
+ *         tw = time()
+ *         quantilesOrderingStrategy = self.sortingParameters['strategy']
+ */
+  __pyx_t_6 = __Pyx_PyInt_From_int(__pyx_v_minimalComponentSize); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 2304, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_6);
+  if (__Pyx_PyObject_SetAttrStr(__pyx_v_self, __pyx_n_s_minimalComponentSize, __pyx_t_6) < 0) __PYX_ERR(0, 2304, __pyx_L1_error)
+  __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
+
+  /* "cSparseIntegerOutrankingDigraphs.pyx":2305
+ * ##            minimalComponentSize = 1
+ *         self.minimalComponentSize = minimalComponentSize
+ *         tw = time()             # <<<<<<<<<<<<<<
+ *         quantilesOrderingStrategy = self.sortingParameters['strategy']
+ *         ##if quantilesOrderingStrategy == 'average':
+ */
+  __Pyx_INCREF(__pyx_v_time);
+  __pyx_t_2 = __pyx_v_time; __pyx_t_3 = NULL;
+  __pyx_t_4 = 0;
+  #if CYTHON_UNPACK_METHODS
+  if (unlikely(PyMethod_Check(__pyx_t_2))) {
+    __pyx_t_3 = PyMethod_GET_SELF(__pyx_t_2);
+    if (likely(__pyx_t_3)) {
+      PyObject* function = PyMethod_GET_FUNCTION(__pyx_t_2);
+      __Pyx_INCREF(__pyx_t_3);
+      __Pyx_INCREF(function);
+      __Pyx_DECREF_SET(__pyx_t_2, function);
+      __pyx_t_4 = 1;
+    }
+  }
+  #endif
+  {
+    PyObject *__pyx_callargs[2] = {__pyx_t_3, NULL};
+    __pyx_t_6 = __Pyx_PyObject_FastCall(__pyx_t_2, __pyx_callargs+1-__pyx_t_4, 0+__pyx_t_4);
+    __Pyx_XDECREF(__pyx_t_3); __pyx_t_3 = 0;
+    if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 2305, __pyx_L1_error)
+    __Pyx_GOTREF(__pyx_t_6);
+    __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
+  }
+  __pyx_t_5 = __pyx_PyFloat_AsDouble(__pyx_t_6); if (unlikely((__pyx_t_5 == (double)-1) && PyErr_Occurred())) __PYX_ERR(0, 2305, __pyx_L1_error)
+  __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
+  __pyx_v_tw = __pyx_t_5;
+
+  /* "cSparseIntegerOutrankingDigraphs.pyx":2306
  *         self.minimalComponentSize = minimalComponentSize
  *         tw = time()
  *         quantilesOrderingStrategy = self.sortingParameters['strategy']             # <<<<<<<<<<<<<<
  *         ##if quantilesOrderingStrategy == 'average':
  *         decomposition = [[(item[0][0],item[0][1]),item[1]]\
  */
-  __pyx_t_3 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_n_s_sortingParameters); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 2297, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_t_3);
-  __pyx_t_6 = __Pyx_PyObject_Dict_GetItem(__pyx_t_3, __pyx_n_u_strategy); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 2297, __pyx_L1_error)
+  __pyx_t_6 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_n_s_sortingParameters); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 2306, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_6);
-  __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
-  __Pyx_DECREF_SET(__pyx_v_quantilesOrderingStrategy, __pyx_t_6);
-  __pyx_t_6 = 0;
+  __pyx_t_2 = __Pyx_PyObject_Dict_GetItem(__pyx_t_6, __pyx_n_u_strategy); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 2306, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_2);
+  __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
+  __Pyx_DECREF_SET(__pyx_v_quantilesOrderingStrategy, __pyx_t_2);
+  __pyx_t_2 = 0;
 
-  /* "cSparseIntegerOutrankingDigraphs.pyx":2299
+  /* "cSparseIntegerOutrankingDigraphs.pyx":2308
  *         quantilesOrderingStrategy = self.sortingParameters['strategy']
  *         ##if quantilesOrderingStrategy == 'average':
  *         decomposition = [[(item[0][0],item[0][1]),item[1]]\             # <<<<<<<<<<<<<<
@@ -48155,128 +48270,128 @@ static PyObject *__pyx_pf_32cSparseIntegerOutrankingDigraphs_24cQuantilesRanking
  *                     strategy=quantilesOrderingStrategy,
  */
   { /* enter inner scope */
-    __pyx_t_6 = PyList_New(0); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 2299, __pyx_L13_error)
-    __Pyx_GOTREF(__pyx_t_6);
+    __pyx_t_2 = PyList_New(0); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 2308, __pyx_L15_error)
+    __Pyx_GOTREF(__pyx_t_2);
 
-    /* "cSparseIntegerOutrankingDigraphs.pyx":2300
+    /* "cSparseIntegerOutrankingDigraphs.pyx":2309
  *         ##if quantilesOrderingStrategy == 'average':
  *         decomposition = [[(item[0][0],item[0][1]),item[1]]\
  *                 for item in self._computeQuantileOrdering(             # <<<<<<<<<<<<<<
  *                     strategy=quantilesOrderingStrategy,
  *                     Descending=True,
  */
-    __pyx_t_3 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_n_s_computeQuantileOrdering); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 2300, __pyx_L13_error)
-    __Pyx_GOTREF(__pyx_t_3);
+    __pyx_t_6 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_n_s_computeQuantileOrdering); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 2309, __pyx_L15_error)
+    __Pyx_GOTREF(__pyx_t_6);
 
-    /* "cSparseIntegerOutrankingDigraphs.pyx":2301
+    /* "cSparseIntegerOutrankingDigraphs.pyx":2310
  *         decomposition = [[(item[0][0],item[0][1]),item[1]]\
  *                 for item in self._computeQuantileOrdering(
  *                     strategy=quantilesOrderingStrategy,             # <<<<<<<<<<<<<<
  *                     Descending=True,
- *                         Threading=Threading,
+ *                     Threading=Threading,
  */
-    __pyx_t_2 = __Pyx_PyDict_NewPresized(5); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 2301, __pyx_L13_error)
-    __Pyx_GOTREF(__pyx_t_2);
-    if (PyDict_SetItem(__pyx_t_2, __pyx_n_s_strategy, __pyx_v_quantilesOrderingStrategy) < 0) __PYX_ERR(0, 2301, __pyx_L13_error)
+    __pyx_t_3 = __Pyx_PyDict_NewPresized(5); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 2310, __pyx_L15_error)
+    __Pyx_GOTREF(__pyx_t_3);
+    if (PyDict_SetItem(__pyx_t_3, __pyx_n_s_strategy, __pyx_v_quantilesOrderingStrategy) < 0) __PYX_ERR(0, 2310, __pyx_L15_error)
 
-    /* "cSparseIntegerOutrankingDigraphs.pyx":2302
+    /* "cSparseIntegerOutrankingDigraphs.pyx":2311
  *                 for item in self._computeQuantileOrdering(
  *                     strategy=quantilesOrderingStrategy,
  *                     Descending=True,             # <<<<<<<<<<<<<<
- *                         Threading=Threading,
- *                         startMethod=startMethod,
+ *                     Threading=Threading,
+ *                     startMethod=startMethod,
  */
-    if (PyDict_SetItem(__pyx_t_2, __pyx_n_s_Descending, Py_True) < 0) __PYX_ERR(0, 2301, __pyx_L13_error)
+    if (PyDict_SetItem(__pyx_t_3, __pyx_n_s_Descending, Py_True) < 0) __PYX_ERR(0, 2310, __pyx_L15_error)
 
-    /* "cSparseIntegerOutrankingDigraphs.pyx":2303
+    /* "cSparseIntegerOutrankingDigraphs.pyx":2312
  *                     strategy=quantilesOrderingStrategy,
  *                     Descending=True,
- *                         Threading=Threading,             # <<<<<<<<<<<<<<
- *                         startMethod=startMethod,
+ *                     Threading=Threading,             # <<<<<<<<<<<<<<
+ *                     startMethod=startMethod,
  *                     nbrOfCPUs=nbrOfCPUs)]
  */
-    __pyx_t_1 = __Pyx_PyBool_FromLong(__pyx_v_Threading); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 2303, __pyx_L13_error)
+    __pyx_t_1 = __Pyx_PyBool_FromLong(__pyx_v_Threading); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 2312, __pyx_L15_error)
     __Pyx_GOTREF(__pyx_t_1);
-    if (PyDict_SetItem(__pyx_t_2, __pyx_n_s_Threading, __pyx_t_1) < 0) __PYX_ERR(0, 2301, __pyx_L13_error)
+    if (PyDict_SetItem(__pyx_t_3, __pyx_n_s_Threading, __pyx_t_1) < 0) __PYX_ERR(0, 2310, __pyx_L15_error)
     __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
 
-    /* "cSparseIntegerOutrankingDigraphs.pyx":2304
+    /* "cSparseIntegerOutrankingDigraphs.pyx":2313
  *                     Descending=True,
- *                         Threading=Threading,
- *                         startMethod=startMethod,             # <<<<<<<<<<<<<<
+ *                     Threading=Threading,
+ *                     startMethod=startMethod,             # <<<<<<<<<<<<<<
  *                     nbrOfCPUs=nbrOfCPUs)]
  *         if Debug:
  */
-    if (PyDict_SetItem(__pyx_t_2, __pyx_n_s_startMethod, __pyx_v_startMethod) < 0) __PYX_ERR(0, 2301, __pyx_L13_error)
+    if (PyDict_SetItem(__pyx_t_3, __pyx_n_s_startMethod, __pyx_v_startMethod) < 0) __PYX_ERR(0, 2310, __pyx_L15_error)
 
-    /* "cSparseIntegerOutrankingDigraphs.pyx":2305
- *                         Threading=Threading,
- *                         startMethod=startMethod,
+    /* "cSparseIntegerOutrankingDigraphs.pyx":2314
+ *                     Threading=Threading,
+ *                     startMethod=startMethod,
  *                     nbrOfCPUs=nbrOfCPUs)]             # <<<<<<<<<<<<<<
  *         if Debug:
  *             print(decomposition)
  */
-    if (PyDict_SetItem(__pyx_t_2, __pyx_n_s_nbrOfCPUs, __pyx_v_nbrOfCPUs) < 0) __PYX_ERR(0, 2301, __pyx_L13_error)
+    if (PyDict_SetItem(__pyx_t_3, __pyx_n_s_nbrOfCPUs, __pyx_v_nbrOfCPUs) < 0) __PYX_ERR(0, 2310, __pyx_L15_error)
 
-    /* "cSparseIntegerOutrankingDigraphs.pyx":2300
+    /* "cSparseIntegerOutrankingDigraphs.pyx":2309
  *         ##if quantilesOrderingStrategy == 'average':
  *         decomposition = [[(item[0][0],item[0][1]),item[1]]\
  *                 for item in self._computeQuantileOrdering(             # <<<<<<<<<<<<<<
  *                     strategy=quantilesOrderingStrategy,
  *                     Descending=True,
  */
-    __pyx_t_1 = __Pyx_PyObject_Call(__pyx_t_3, __pyx_empty_tuple, __pyx_t_2); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 2300, __pyx_L13_error)
+    __pyx_t_1 = __Pyx_PyObject_Call(__pyx_t_6, __pyx_empty_tuple, __pyx_t_3); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 2309, __pyx_L15_error)
     __Pyx_GOTREF(__pyx_t_1);
+    __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
     __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
-    __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
     if (likely(PyList_CheckExact(__pyx_t_1)) || PyTuple_CheckExact(__pyx_t_1)) {
-      __pyx_t_2 = __pyx_t_1; __Pyx_INCREF(__pyx_t_2);
+      __pyx_t_3 = __pyx_t_1; __Pyx_INCREF(__pyx_t_3);
       __pyx_t_7 = 0;
       __pyx_t_8 = NULL;
     } else {
-      __pyx_t_7 = -1; __pyx_t_2 = PyObject_GetIter(__pyx_t_1); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 2300, __pyx_L13_error)
-      __Pyx_GOTREF(__pyx_t_2);
-      __pyx_t_8 = __Pyx_PyObject_GetIterNextFunc(__pyx_t_2); if (unlikely(!__pyx_t_8)) __PYX_ERR(0, 2300, __pyx_L13_error)
+      __pyx_t_7 = -1; __pyx_t_3 = PyObject_GetIter(__pyx_t_1); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 2309, __pyx_L15_error)
+      __Pyx_GOTREF(__pyx_t_3);
+      __pyx_t_8 = __Pyx_PyObject_GetIterNextFunc(__pyx_t_3); if (unlikely(!__pyx_t_8)) __PYX_ERR(0, 2309, __pyx_L15_error)
     }
     __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
     for (;;) {
       if (likely(!__pyx_t_8)) {
-        if (likely(PyList_CheckExact(__pyx_t_2))) {
+        if (likely(PyList_CheckExact(__pyx_t_3))) {
           {
-            Py_ssize_t __pyx_temp = __Pyx_PyList_GET_SIZE(__pyx_t_2);
+            Py_ssize_t __pyx_temp = __Pyx_PyList_GET_SIZE(__pyx_t_3);
             #if !CYTHON_ASSUME_SAFE_MACROS
-            if (unlikely((__pyx_temp < 0))) __PYX_ERR(0, 2300, __pyx_L13_error)
+            if (unlikely((__pyx_temp < 0))) __PYX_ERR(0, 2309, __pyx_L15_error)
             #endif
             if (__pyx_t_7 >= __pyx_temp) break;
           }
           #if CYTHON_ASSUME_SAFE_MACROS && !CYTHON_AVOID_BORROWED_REFS
-          __pyx_t_1 = PyList_GET_ITEM(__pyx_t_2, __pyx_t_7); __Pyx_INCREF(__pyx_t_1); __pyx_t_7++; if (unlikely((0 < 0))) __PYX_ERR(0, 2300, __pyx_L13_error)
+          __pyx_t_1 = PyList_GET_ITEM(__pyx_t_3, __pyx_t_7); __Pyx_INCREF(__pyx_t_1); __pyx_t_7++; if (unlikely((0 < 0))) __PYX_ERR(0, 2309, __pyx_L15_error)
           #else
-          __pyx_t_1 = __Pyx_PySequence_ITEM(__pyx_t_2, __pyx_t_7); __pyx_t_7++; if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 2300, __pyx_L13_error)
+          __pyx_t_1 = __Pyx_PySequence_ITEM(__pyx_t_3, __pyx_t_7); __pyx_t_7++; if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 2309, __pyx_L15_error)
           __Pyx_GOTREF(__pyx_t_1);
           #endif
         } else {
           {
-            Py_ssize_t __pyx_temp = __Pyx_PyTuple_GET_SIZE(__pyx_t_2);
+            Py_ssize_t __pyx_temp = __Pyx_PyTuple_GET_SIZE(__pyx_t_3);
             #if !CYTHON_ASSUME_SAFE_MACROS
-            if (unlikely((__pyx_temp < 0))) __PYX_ERR(0, 2300, __pyx_L13_error)
+            if (unlikely((__pyx_temp < 0))) __PYX_ERR(0, 2309, __pyx_L15_error)
             #endif
             if (__pyx_t_7 >= __pyx_temp) break;
           }
           #if CYTHON_ASSUME_SAFE_MACROS && !CYTHON_AVOID_BORROWED_REFS
-          __pyx_t_1 = PyTuple_GET_ITEM(__pyx_t_2, __pyx_t_7); __Pyx_INCREF(__pyx_t_1); __pyx_t_7++; if (unlikely((0 < 0))) __PYX_ERR(0, 2300, __pyx_L13_error)
+          __pyx_t_1 = PyTuple_GET_ITEM(__pyx_t_3, __pyx_t_7); __Pyx_INCREF(__pyx_t_1); __pyx_t_7++; if (unlikely((0 < 0))) __PYX_ERR(0, 2309, __pyx_L15_error)
           #else
-          __pyx_t_1 = __Pyx_PySequence_ITEM(__pyx_t_2, __pyx_t_7); __pyx_t_7++; if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 2300, __pyx_L13_error)
+          __pyx_t_1 = __Pyx_PySequence_ITEM(__pyx_t_3, __pyx_t_7); __pyx_t_7++; if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 2309, __pyx_L15_error)
           __Pyx_GOTREF(__pyx_t_1);
           #endif
         }
       } else {
-        __pyx_t_1 = __pyx_t_8(__pyx_t_2);
+        __pyx_t_1 = __pyx_t_8(__pyx_t_3);
         if (unlikely(!__pyx_t_1)) {
           PyObject* exc_type = PyErr_Occurred();
           if (exc_type) {
             if (likely(__Pyx_PyErr_GivenExceptionMatches(exc_type, PyExc_StopIteration))) PyErr_Clear();
-            else __PYX_ERR(0, 2300, __pyx_L13_error)
+            else __PYX_ERR(0, 2309, __pyx_L15_error)
           }
           break;
         }
@@ -48285,45 +48400,45 @@ static PyObject *__pyx_pf_32cSparseIntegerOutrankingDigraphs_24cQuantilesRanking
       __Pyx_XDECREF_SET(__pyx_9genexpr32__pyx_v_item, __pyx_t_1);
       __pyx_t_1 = 0;
 
-      /* "cSparseIntegerOutrankingDigraphs.pyx":2299
+      /* "cSparseIntegerOutrankingDigraphs.pyx":2308
  *         quantilesOrderingStrategy = self.sortingParameters['strategy']
  *         ##if quantilesOrderingStrategy == 'average':
  *         decomposition = [[(item[0][0],item[0][1]),item[1]]\             # <<<<<<<<<<<<<<
  *                 for item in self._computeQuantileOrdering(
  *                     strategy=quantilesOrderingStrategy,
  */
-      __pyx_t_1 = __Pyx_GetItemInt(__pyx_9genexpr32__pyx_v_item, 0, long, 1, __Pyx_PyInt_From_long, 0, 0, 1); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 2299, __pyx_L13_error)
+      __pyx_t_1 = __Pyx_GetItemInt(__pyx_9genexpr32__pyx_v_item, 0, long, 1, __Pyx_PyInt_From_long, 0, 0, 1); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 2308, __pyx_L15_error)
       __Pyx_GOTREF(__pyx_t_1);
-      __pyx_t_3 = __Pyx_GetItemInt(__pyx_t_1, 0, long, 1, __Pyx_PyInt_From_long, 0, 0, 1); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 2299, __pyx_L13_error)
-      __Pyx_GOTREF(__pyx_t_3);
+      __pyx_t_6 = __Pyx_GetItemInt(__pyx_t_1, 0, long, 1, __Pyx_PyInt_From_long, 0, 0, 1); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 2308, __pyx_L15_error)
+      __Pyx_GOTREF(__pyx_t_6);
       __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
-      __pyx_t_1 = __Pyx_GetItemInt(__pyx_9genexpr32__pyx_v_item, 0, long, 1, __Pyx_PyInt_From_long, 0, 0, 1); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 2299, __pyx_L13_error)
+      __pyx_t_1 = __Pyx_GetItemInt(__pyx_9genexpr32__pyx_v_item, 0, long, 1, __Pyx_PyInt_From_long, 0, 0, 1); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 2308, __pyx_L15_error)
       __Pyx_GOTREF(__pyx_t_1);
-      __pyx_t_10 = __Pyx_GetItemInt(__pyx_t_1, 1, long, 1, __Pyx_PyInt_From_long, 0, 0, 1); if (unlikely(!__pyx_t_10)) __PYX_ERR(0, 2299, __pyx_L13_error)
-      __Pyx_GOTREF(__pyx_t_10);
+      __pyx_t_11 = __Pyx_GetItemInt(__pyx_t_1, 1, long, 1, __Pyx_PyInt_From_long, 0, 0, 1); if (unlikely(!__pyx_t_11)) __PYX_ERR(0, 2308, __pyx_L15_error)
+      __Pyx_GOTREF(__pyx_t_11);
       __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
-      __pyx_t_1 = PyTuple_New(2); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 2299, __pyx_L13_error)
+      __pyx_t_1 = PyTuple_New(2); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 2308, __pyx_L15_error)
       __Pyx_GOTREF(__pyx_t_1);
-      __Pyx_GIVEREF(__pyx_t_3);
-      if (__Pyx_PyTuple_SET_ITEM(__pyx_t_1, 0, __pyx_t_3)) __PYX_ERR(0, 2299, __pyx_L13_error);
-      __Pyx_GIVEREF(__pyx_t_10);
-      if (__Pyx_PyTuple_SET_ITEM(__pyx_t_1, 1, __pyx_t_10)) __PYX_ERR(0, 2299, __pyx_L13_error);
-      __pyx_t_3 = 0;
-      __pyx_t_10 = 0;
-      __pyx_t_10 = __Pyx_GetItemInt(__pyx_9genexpr32__pyx_v_item, 1, long, 1, __Pyx_PyInt_From_long, 0, 0, 1); if (unlikely(!__pyx_t_10)) __PYX_ERR(0, 2299, __pyx_L13_error)
-      __Pyx_GOTREF(__pyx_t_10);
-      __pyx_t_3 = PyList_New(2); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 2299, __pyx_L13_error)
-      __Pyx_GOTREF(__pyx_t_3);
+      __Pyx_GIVEREF(__pyx_t_6);
+      if (__Pyx_PyTuple_SET_ITEM(__pyx_t_1, 0, __pyx_t_6)) __PYX_ERR(0, 2308, __pyx_L15_error);
+      __Pyx_GIVEREF(__pyx_t_11);
+      if (__Pyx_PyTuple_SET_ITEM(__pyx_t_1, 1, __pyx_t_11)) __PYX_ERR(0, 2308, __pyx_L15_error);
+      __pyx_t_6 = 0;
+      __pyx_t_11 = 0;
+      __pyx_t_11 = __Pyx_GetItemInt(__pyx_9genexpr32__pyx_v_item, 1, long, 1, __Pyx_PyInt_From_long, 0, 0, 1); if (unlikely(!__pyx_t_11)) __PYX_ERR(0, 2308, __pyx_L15_error)
+      __Pyx_GOTREF(__pyx_t_11);
+      __pyx_t_6 = PyList_New(2); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 2308, __pyx_L15_error)
+      __Pyx_GOTREF(__pyx_t_6);
       __Pyx_GIVEREF(__pyx_t_1);
-      if (__Pyx_PyList_SET_ITEM(__pyx_t_3, 0, __pyx_t_1)) __PYX_ERR(0, 2299, __pyx_L13_error);
-      __Pyx_GIVEREF(__pyx_t_10);
-      if (__Pyx_PyList_SET_ITEM(__pyx_t_3, 1, __pyx_t_10)) __PYX_ERR(0, 2299, __pyx_L13_error);
+      if (__Pyx_PyList_SET_ITEM(__pyx_t_6, 0, __pyx_t_1)) __PYX_ERR(0, 2308, __pyx_L15_error);
+      __Pyx_GIVEREF(__pyx_t_11);
+      if (__Pyx_PyList_SET_ITEM(__pyx_t_6, 1, __pyx_t_11)) __PYX_ERR(0, 2308, __pyx_L15_error);
       __pyx_t_1 = 0;
-      __pyx_t_10 = 0;
-      if (unlikely(__Pyx_ListComp_Append(__pyx_t_6, (PyObject*)__pyx_t_3))) __PYX_ERR(0, 2299, __pyx_L13_error)
-      __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
+      __pyx_t_11 = 0;
+      if (unlikely(__Pyx_ListComp_Append(__pyx_t_2, (PyObject*)__pyx_t_6))) __PYX_ERR(0, 2308, __pyx_L15_error)
+      __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
 
-      /* "cSparseIntegerOutrankingDigraphs.pyx":2300
+      /* "cSparseIntegerOutrankingDigraphs.pyx":2309
  *         ##if quantilesOrderingStrategy == 'average':
  *         decomposition = [[(item[0][0],item[0][1]),item[1]]\
  *                 for item in self._computeQuantileOrdering(             # <<<<<<<<<<<<<<
@@ -48331,19 +48446,19 @@ static PyObject *__pyx_pf_32cSparseIntegerOutrankingDigraphs_24cQuantilesRanking
  *                     Descending=True,
  */
     }
-    __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
+    __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
     __Pyx_XDECREF(__pyx_9genexpr32__pyx_v_item); __pyx_9genexpr32__pyx_v_item = 0;
-    goto __pyx_L17_exit_scope;
-    __pyx_L13_error:;
+    goto __pyx_L19_exit_scope;
+    __pyx_L15_error:;
     __Pyx_XDECREF(__pyx_9genexpr32__pyx_v_item); __pyx_9genexpr32__pyx_v_item = 0;
     goto __pyx_L1_error;
-    __pyx_L17_exit_scope:;
+    __pyx_L19_exit_scope:;
   } /* exit inner scope */
-  if (PyDict_SetItem(__pyx_d, __pyx_n_s_decomposition, __pyx_t_6) < 0) __PYX_ERR(0, 2299, __pyx_L1_error)
-  __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
+  if (PyDict_SetItem(__pyx_d, __pyx_n_s_decomposition, __pyx_t_2) < 0) __PYX_ERR(0, 2308, __pyx_L1_error)
+  __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
 
-  /* "cSparseIntegerOutrankingDigraphs.pyx":2306
- *                         startMethod=startMethod,
+  /* "cSparseIntegerOutrankingDigraphs.pyx":2315
+ *                     startMethod=startMethod,
  *                     nbrOfCPUs=nbrOfCPUs)]
  *         if Debug:             # <<<<<<<<<<<<<<
  *             print(decomposition)
@@ -48351,22 +48466,22 @@ static PyObject *__pyx_pf_32cSparseIntegerOutrankingDigraphs_24cQuantilesRanking
  */
   if (__pyx_v_Debug) {
 
-    /* "cSparseIntegerOutrankingDigraphs.pyx":2307
+    /* "cSparseIntegerOutrankingDigraphs.pyx":2316
  *                     nbrOfCPUs=nbrOfCPUs)]
  *         if Debug:
  *             print(decomposition)             # <<<<<<<<<<<<<<
  *         self.decomposition = decomposition
  *         self.runTimes['preordering'] = time() - tw
  */
-    __Pyx_GetModuleGlobalName(__pyx_t_6, __pyx_n_s_decomposition); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 2307, __pyx_L1_error)
-    __Pyx_GOTREF(__pyx_t_6);
-    __pyx_t_2 = __Pyx_PyObject_CallOneArg(__pyx_builtin_print, __pyx_t_6); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 2307, __pyx_L1_error)
+    __Pyx_GetModuleGlobalName(__pyx_t_2, __pyx_n_s_decomposition); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 2316, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_2);
-    __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
+    __pyx_t_3 = __Pyx_PyObject_CallOneArg(__pyx_builtin_print, __pyx_t_2); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 2316, __pyx_L1_error)
+    __Pyx_GOTREF(__pyx_t_3);
     __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
+    __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
 
-    /* "cSparseIntegerOutrankingDigraphs.pyx":2306
- *                         startMethod=startMethod,
+    /* "cSparseIntegerOutrankingDigraphs.pyx":2315
+ *                     startMethod=startMethod,
  *                     nbrOfCPUs=nbrOfCPUs)]
  *         if Debug:             # <<<<<<<<<<<<<<
  *             print(decomposition)
@@ -48374,24 +48489,104 @@ static PyObject *__pyx_pf_32cSparseIntegerOutrankingDigraphs_24cQuantilesRanking
  */
   }
 
-  /* "cSparseIntegerOutrankingDigraphs.pyx":2308
+  /* "cSparseIntegerOutrankingDigraphs.pyx":2317
  *         if Debug:
  *             print(decomposition)
  *         self.decomposition = decomposition             # <<<<<<<<<<<<<<
  *         self.runTimes['preordering'] = time() - tw
  *         if Comments:
  */
-  __Pyx_GetModuleGlobalName(__pyx_t_2, __pyx_n_s_decomposition); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 2308, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_t_2);
-  if (__Pyx_PyObject_SetAttrStr(__pyx_v_self, __pyx_n_s_decomposition, __pyx_t_2) < 0) __PYX_ERR(0, 2308, __pyx_L1_error)
-  __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
+  __Pyx_GetModuleGlobalName(__pyx_t_3, __pyx_n_s_decomposition); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 2317, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_3);
+  if (__Pyx_PyObject_SetAttrStr(__pyx_v_self, __pyx_n_s_decomposition, __pyx_t_3) < 0) __PYX_ERR(0, 2317, __pyx_L1_error)
+  __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
 
-  /* "cSparseIntegerOutrankingDigraphs.pyx":2309
+  /* "cSparseIntegerOutrankingDigraphs.pyx":2318
  *             print(decomposition)
  *         self.decomposition = decomposition
  *         self.runTimes['preordering'] = time() - tw             # <<<<<<<<<<<<<<
  *         if Comments:
  *             print('weak ordering execution time: %.4f' % self.runTimes['preordering']  )
+ */
+  __Pyx_INCREF(__pyx_v_time);
+  __pyx_t_2 = __pyx_v_time; __pyx_t_6 = NULL;
+  __pyx_t_4 = 0;
+  #if CYTHON_UNPACK_METHODS
+  if (unlikely(PyMethod_Check(__pyx_t_2))) {
+    __pyx_t_6 = PyMethod_GET_SELF(__pyx_t_2);
+    if (likely(__pyx_t_6)) {
+      PyObject* function = PyMethod_GET_FUNCTION(__pyx_t_2);
+      __Pyx_INCREF(__pyx_t_6);
+      __Pyx_INCREF(function);
+      __Pyx_DECREF_SET(__pyx_t_2, function);
+      __pyx_t_4 = 1;
+    }
+  }
+  #endif
+  {
+    PyObject *__pyx_callargs[2] = {__pyx_t_6, NULL};
+    __pyx_t_3 = __Pyx_PyObject_FastCall(__pyx_t_2, __pyx_callargs+1-__pyx_t_4, 0+__pyx_t_4);
+    __Pyx_XDECREF(__pyx_t_6); __pyx_t_6 = 0;
+    if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 2318, __pyx_L1_error)
+    __Pyx_GOTREF(__pyx_t_3);
+    __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
+  }
+  __pyx_t_2 = PyFloat_FromDouble(__pyx_v_tw); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 2318, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_2);
+  __pyx_t_6 = PyNumber_Subtract(__pyx_t_3, __pyx_t_2); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 2318, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_6);
+  __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
+  __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
+  __pyx_t_2 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_n_s_runTimes); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 2318, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_2);
+  if (unlikely((PyObject_SetItem(__pyx_t_2, __pyx_n_u_preordering, __pyx_t_6) < 0))) __PYX_ERR(0, 2318, __pyx_L1_error)
+  __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
+  __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
+
+  /* "cSparseIntegerOutrankingDigraphs.pyx":2319
+ *         self.decomposition = decomposition
+ *         self.runTimes['preordering'] = time() - tw
+ *         if Comments:             # <<<<<<<<<<<<<<
+ *             print('weak ordering execution time: %.4f' % self.runTimes['preordering']  )
+ *         # setting components
+ */
+  if (__pyx_v_Comments) {
+
+    /* "cSparseIntegerOutrankingDigraphs.pyx":2320
+ *         self.runTimes['preordering'] = time() - tw
+ *         if Comments:
+ *             print('weak ordering execution time: %.4f' % self.runTimes['preordering']  )             # <<<<<<<<<<<<<<
+ *         # setting components
+ *         t0 = time()
+ */
+    __pyx_t_6 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_n_s_runTimes); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 2320, __pyx_L1_error)
+    __Pyx_GOTREF(__pyx_t_6);
+    __pyx_t_2 = __Pyx_PyObject_Dict_GetItem(__pyx_t_6, __pyx_n_u_preordering); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 2320, __pyx_L1_error)
+    __Pyx_GOTREF(__pyx_t_2);
+    __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
+    __pyx_t_6 = __Pyx_PyUnicode_FormatSafe(__pyx_kp_u_weak_ordering_execution_time_4f, __pyx_t_2); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 2320, __pyx_L1_error)
+    __Pyx_GOTREF(__pyx_t_6);
+    __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
+    __pyx_t_2 = __Pyx_PyObject_CallOneArg(__pyx_builtin_print, __pyx_t_6); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 2320, __pyx_L1_error)
+    __Pyx_GOTREF(__pyx_t_2);
+    __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
+    __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
+
+    /* "cSparseIntegerOutrankingDigraphs.pyx":2319
+ *         self.decomposition = decomposition
+ *         self.runTimes['preordering'] = time() - tw
+ *         if Comments:             # <<<<<<<<<<<<<<
+ *             print('weak ordering execution time: %.4f' % self.runTimes['preordering']  )
+ *         # setting components
+ */
+  }
+
+  /* "cSparseIntegerOutrankingDigraphs.pyx":2322
+ *             print('weak ordering execution time: %.4f' % self.runTimes['preordering']  )
+ *         # setting components
+ *         t0 = time()             # <<<<<<<<<<<<<<
+ *         nc = len(decomposition)
+ *         self.nbrComponents = nc
  */
   __Pyx_INCREF(__pyx_v_time);
   __pyx_t_6 = __pyx_v_time; __pyx_t_3 = NULL;
@@ -48412,195 +48607,99 @@ static PyObject *__pyx_pf_32cSparseIntegerOutrankingDigraphs_24cQuantilesRanking
     PyObject *__pyx_callargs[2] = {__pyx_t_3, NULL};
     __pyx_t_2 = __Pyx_PyObject_FastCall(__pyx_t_6, __pyx_callargs+1-__pyx_t_4, 0+__pyx_t_4);
     __Pyx_XDECREF(__pyx_t_3); __pyx_t_3 = 0;
-    if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 2309, __pyx_L1_error)
+    if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 2322, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_2);
     __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
   }
-  __pyx_t_6 = PyFloat_FromDouble(__pyx_v_tw); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 2309, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_t_6);
-  __pyx_t_3 = PyNumber_Subtract(__pyx_t_2, __pyx_t_6); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 2309, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_t_3);
+  __pyx_t_5 = __pyx_PyFloat_AsDouble(__pyx_t_2); if (unlikely((__pyx_t_5 == (double)-1) && PyErr_Occurred())) __PYX_ERR(0, 2322, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
-  __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
-  __pyx_t_6 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_n_s_runTimes); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 2309, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_t_6);
-  if (unlikely((PyObject_SetItem(__pyx_t_6, __pyx_n_u_preordering, __pyx_t_3) < 0))) __PYX_ERR(0, 2309, __pyx_L1_error)
-  __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
-  __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
-
-  /* "cSparseIntegerOutrankingDigraphs.pyx":2310
- *         self.decomposition = decomposition
- *         self.runTimes['preordering'] = time() - tw
- *         if Comments:             # <<<<<<<<<<<<<<
- *             print('weak ordering execution time: %.4f' % self.runTimes['preordering']  )
- *         # setting components
- */
-  if (__pyx_v_Comments) {
-
-    /* "cSparseIntegerOutrankingDigraphs.pyx":2311
- *         self.runTimes['preordering'] = time() - tw
- *         if Comments:
- *             print('weak ordering execution time: %.4f' % self.runTimes['preordering']  )             # <<<<<<<<<<<<<<
- *         # setting components
- *         t0 = time()
- */
-    __pyx_t_3 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_n_s_runTimes); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 2311, __pyx_L1_error)
-    __Pyx_GOTREF(__pyx_t_3);
-    __pyx_t_6 = __Pyx_PyObject_Dict_GetItem(__pyx_t_3, __pyx_n_u_preordering); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 2311, __pyx_L1_error)
-    __Pyx_GOTREF(__pyx_t_6);
-    __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
-    __pyx_t_3 = __Pyx_PyUnicode_FormatSafe(__pyx_kp_u_weak_ordering_execution_time_4f, __pyx_t_6); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 2311, __pyx_L1_error)
-    __Pyx_GOTREF(__pyx_t_3);
-    __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
-    __pyx_t_6 = __Pyx_PyObject_CallOneArg(__pyx_builtin_print, __pyx_t_3); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 2311, __pyx_L1_error)
-    __Pyx_GOTREF(__pyx_t_6);
-    __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
-    __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
-
-    /* "cSparseIntegerOutrankingDigraphs.pyx":2310
- *         self.decomposition = decomposition
- *         self.runTimes['preordering'] = time() - tw
- *         if Comments:             # <<<<<<<<<<<<<<
- *             print('weak ordering execution time: %.4f' % self.runTimes['preordering']  )
- *         # setting components
- */
-  }
-
-  /* "cSparseIntegerOutrankingDigraphs.pyx":2313
- *             print('weak ordering execution time: %.4f' % self.runTimes['preordering']  )
- *         # setting components
- *         t0 = time()             # <<<<<<<<<<<<<<
- *         nc = len(decomposition)
- *         self.nbrComponents = nc
- */
-  __Pyx_INCREF(__pyx_v_time);
-  __pyx_t_3 = __pyx_v_time; __pyx_t_2 = NULL;
-  __pyx_t_4 = 0;
-  #if CYTHON_UNPACK_METHODS
-  if (unlikely(PyMethod_Check(__pyx_t_3))) {
-    __pyx_t_2 = PyMethod_GET_SELF(__pyx_t_3);
-    if (likely(__pyx_t_2)) {
-      PyObject* function = PyMethod_GET_FUNCTION(__pyx_t_3);
-      __Pyx_INCREF(__pyx_t_2);
-      __Pyx_INCREF(function);
-      __Pyx_DECREF_SET(__pyx_t_3, function);
-      __pyx_t_4 = 1;
-    }
-  }
-  #endif
-  {
-    PyObject *__pyx_callargs[2] = {__pyx_t_2, NULL};
-    __pyx_t_6 = __Pyx_PyObject_FastCall(__pyx_t_3, __pyx_callargs+1-__pyx_t_4, 0+__pyx_t_4);
-    __Pyx_XDECREF(__pyx_t_2); __pyx_t_2 = 0;
-    if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 2313, __pyx_L1_error)
-    __Pyx_GOTREF(__pyx_t_6);
-    __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
-  }
-  __pyx_t_5 = __pyx_PyFloat_AsDouble(__pyx_t_6); if (unlikely((__pyx_t_5 == (double)-1) && PyErr_Occurred())) __PYX_ERR(0, 2313, __pyx_L1_error)
-  __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
   __pyx_v_t0 = __pyx_t_5;
 
-  /* "cSparseIntegerOutrankingDigraphs.pyx":2314
+  /* "cSparseIntegerOutrankingDigraphs.pyx":2323
  *         # setting components
  *         t0 = time()
  *         nc = len(decomposition)             # <<<<<<<<<<<<<<
  *         self.nbrComponents = nc
  *         nd = len(str(nc))
  */
-  __Pyx_GetModuleGlobalName(__pyx_t_6, __pyx_n_s_decomposition); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 2314, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_t_6);
-  __pyx_t_7 = PyObject_Length(__pyx_t_6); if (unlikely(__pyx_t_7 == ((Py_ssize_t)-1))) __PYX_ERR(0, 2314, __pyx_L1_error)
-  __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
-  __pyx_t_6 = PyInt_FromSsize_t(__pyx_t_7); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 2314, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_t_6);
-  __pyx_v_nc = __pyx_t_6;
-  __pyx_t_6 = 0;
+  __Pyx_GetModuleGlobalName(__pyx_t_2, __pyx_n_s_decomposition); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 2323, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_2);
+  __pyx_t_7 = PyObject_Length(__pyx_t_2); if (unlikely(__pyx_t_7 == ((Py_ssize_t)-1))) __PYX_ERR(0, 2323, __pyx_L1_error)
+  __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
+  __pyx_t_2 = PyInt_FromSsize_t(__pyx_t_7); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 2323, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_2);
+  __pyx_v_nc = __pyx_t_2;
+  __pyx_t_2 = 0;
 
-  /* "cSparseIntegerOutrankingDigraphs.pyx":2315
+  /* "cSparseIntegerOutrankingDigraphs.pyx":2324
  *         t0 = time()
  *         nc = len(decomposition)
  *         self.nbrComponents = nc             # <<<<<<<<<<<<<<
  *         nd = len(str(nc))
  *         self.nd = nd
  */
-  if (__Pyx_PyObject_SetAttrStr(__pyx_v_self, __pyx_n_s_nbrComponents, __pyx_v_nc) < 0) __PYX_ERR(0, 2315, __pyx_L1_error)
+  if (__Pyx_PyObject_SetAttrStr(__pyx_v_self, __pyx_n_s_nbrComponents, __pyx_v_nc) < 0) __PYX_ERR(0, 2324, __pyx_L1_error)
 
-  /* "cSparseIntegerOutrankingDigraphs.pyx":2316
+  /* "cSparseIntegerOutrankingDigraphs.pyx":2325
  *         nc = len(decomposition)
  *         self.nbrComponents = nc
  *         nd = len(str(nc))             # <<<<<<<<<<<<<<
  *         self.nd = nd
  *         ### not threding
  */
-  __pyx_t_6 = __Pyx_PyObject_Str(__pyx_v_nc); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 2316, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_t_6);
-  __pyx_t_7 = PyObject_Length(__pyx_t_6); if (unlikely(__pyx_t_7 == ((Py_ssize_t)-1))) __PYX_ERR(0, 2316, __pyx_L1_error)
-  __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
+  __pyx_t_2 = __Pyx_PyObject_Str(__pyx_v_nc); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 2325, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_2);
+  __pyx_t_7 = PyObject_Length(__pyx_t_2); if (unlikely(__pyx_t_7 == ((Py_ssize_t)-1))) __PYX_ERR(0, 2325, __pyx_L1_error)
+  __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
   __pyx_v_nd = __pyx_t_7;
 
-  /* "cSparseIntegerOutrankingDigraphs.pyx":2317
+  /* "cSparseIntegerOutrankingDigraphs.pyx":2326
  *         self.nbrComponents = nc
  *         nd = len(str(nc))
  *         self.nd = nd             # <<<<<<<<<<<<<<
  *         ### not threding
- *         if not self.sortingParameters['Threading']:
+ *         if not Threading:
  */
-  __pyx_t_6 = PyInt_FromSsize_t(__pyx_v_nd); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 2317, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_t_6);
-  if (__Pyx_PyObject_SetAttrStr(__pyx_v_self, __pyx_n_s_nd, __pyx_t_6) < 0) __PYX_ERR(0, 2317, __pyx_L1_error)
-  __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
+  __pyx_t_2 = PyInt_FromSsize_t(__pyx_v_nd); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 2326, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_2);
+  if (__Pyx_PyObject_SetAttrStr(__pyx_v_self, __pyx_n_s_nd, __pyx_t_2) < 0) __PYX_ERR(0, 2326, __pyx_L1_error)
+  __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
 
-  /* "cSparseIntegerOutrankingDigraphs.pyx":2319
+  /* "cSparseIntegerOutrankingDigraphs.pyx":2328
  *         self.nd = nd
  *         ### not threding
- *         if not self.sortingParameters['Threading']:             # <<<<<<<<<<<<<<
- *             self.nbrOfCPUs = 1
- *             maximalComponentSize = 0
- */
-  __pyx_t_6 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_n_s_sortingParameters); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 2319, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_t_6);
-  __pyx_t_3 = __Pyx_PyObject_Dict_GetItem(__pyx_t_6, __pyx_n_u_Threading); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 2319, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_t_3);
-  __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
-  __pyx_t_11 = __Pyx_PyObject_IsTrue(__pyx_t_3); if (unlikely((__pyx_t_11 < 0))) __PYX_ERR(0, 2319, __pyx_L1_error)
-  __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
-  __pyx_t_12 = (!__pyx_t_11);
-  if (__pyx_t_12) {
-
-    /* "cSparseIntegerOutrankingDigraphs.pyx":2320
- *         ### not threding
- *         if not self.sortingParameters['Threading']:
- *             self.nbrOfCPUs = 1             # <<<<<<<<<<<<<<
+ *         if not Threading:             # <<<<<<<<<<<<<<
  *             maximalComponentSize = 0
  *             components = OrderedDict()
  */
-    if (__Pyx_PyObject_SetAttrStr(__pyx_v_self, __pyx_n_s_nbrOfCPUs, __pyx_int_1) < 0) __PYX_ERR(0, 2320, __pyx_L1_error)
+  __pyx_t_10 = (!__pyx_v_Threading);
+  if (__pyx_t_10) {
 
-    /* "cSparseIntegerOutrankingDigraphs.pyx":2321
- *         if not self.sortingParameters['Threading']:
- *             self.nbrOfCPUs = 1
+    /* "cSparseIntegerOutrankingDigraphs.pyx":2329
+ *         ### not threding
+ *         if not Threading:
  *             maximalComponentSize = 0             # <<<<<<<<<<<<<<
  *             components = OrderedDict()
  *             boostedRanking = []
  */
     __pyx_v_maximalComponentSize = 0;
 
-    /* "cSparseIntegerOutrankingDigraphs.pyx":2322
- *             self.nbrOfCPUs = 1
+    /* "cSparseIntegerOutrankingDigraphs.pyx":2330
+ *         if not Threading:
  *             maximalComponentSize = 0
  *             components = OrderedDict()             # <<<<<<<<<<<<<<
  *             boostedRanking = []
  *             for i in range(1,nc+1):
  */
     __Pyx_INCREF(__pyx_v_OrderedDict);
-    __pyx_t_6 = __pyx_v_OrderedDict; __pyx_t_2 = NULL;
+    __pyx_t_6 = __pyx_v_OrderedDict; __pyx_t_3 = NULL;
     __pyx_t_4 = 0;
     #if CYTHON_UNPACK_METHODS
     if (unlikely(PyMethod_Check(__pyx_t_6))) {
-      __pyx_t_2 = PyMethod_GET_SELF(__pyx_t_6);
-      if (likely(__pyx_t_2)) {
+      __pyx_t_3 = PyMethod_GET_SELF(__pyx_t_6);
+      if (likely(__pyx_t_3)) {
         PyObject* function = PyMethod_GET_FUNCTION(__pyx_t_6);
-        __Pyx_INCREF(__pyx_t_2);
+        __Pyx_INCREF(__pyx_t_3);
         __Pyx_INCREF(function);
         __Pyx_DECREF_SET(__pyx_t_6, function);
         __pyx_t_4 = 1;
@@ -48608,129 +48707,129 @@ static PyObject *__pyx_pf_32cSparseIntegerOutrankingDigraphs_24cQuantilesRanking
     }
     #endif
     {
-      PyObject *__pyx_callargs[2] = {__pyx_t_2, NULL};
-      __pyx_t_3 = __Pyx_PyObject_FastCall(__pyx_t_6, __pyx_callargs+1-__pyx_t_4, 0+__pyx_t_4);
-      __Pyx_XDECREF(__pyx_t_2); __pyx_t_2 = 0;
-      if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 2322, __pyx_L1_error)
-      __Pyx_GOTREF(__pyx_t_3);
+      PyObject *__pyx_callargs[2] = {__pyx_t_3, NULL};
+      __pyx_t_2 = __Pyx_PyObject_FastCall(__pyx_t_6, __pyx_callargs+1-__pyx_t_4, 0+__pyx_t_4);
+      __Pyx_XDECREF(__pyx_t_3); __pyx_t_3 = 0;
+      if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 2330, __pyx_L1_error)
+      __Pyx_GOTREF(__pyx_t_2);
       __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
     }
-    __pyx_v_components = __pyx_t_3;
-    __pyx_t_3 = 0;
+    __pyx_v_components = __pyx_t_2;
+    __pyx_t_2 = 0;
 
-    /* "cSparseIntegerOutrankingDigraphs.pyx":2323
+    /* "cSparseIntegerOutrankingDigraphs.pyx":2331
  *             maximalComponentSize = 0
  *             components = OrderedDict()
  *             boostedRanking = []             # <<<<<<<<<<<<<<
  *             for i in range(1,nc+1):
  *                 comp = decomposition[i-1]
  */
-    __pyx_t_3 = PyList_New(0); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 2323, __pyx_L1_error)
-    __Pyx_GOTREF(__pyx_t_3);
-    __pyx_v_boostedRanking = __pyx_t_3;
-    __pyx_t_3 = 0;
+    __pyx_t_2 = PyList_New(0); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 2331, __pyx_L1_error)
+    __Pyx_GOTREF(__pyx_t_2);
+    __pyx_v_boostedRanking = __pyx_t_2;
+    __pyx_t_2 = 0;
 
-    /* "cSparseIntegerOutrankingDigraphs.pyx":2324
+    /* "cSparseIntegerOutrankingDigraphs.pyx":2332
  *             components = OrderedDict()
  *             boostedRanking = []
  *             for i in range(1,nc+1):             # <<<<<<<<<<<<<<
  *                 comp = decomposition[i-1]
  *                 compKey = ('c%%0%dd' % (self.nd)) % (i)
  */
-    __pyx_t_3 = __Pyx_PyInt_AddObjC(__pyx_v_nc, __pyx_int_1, 1, 0, 0); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 2324, __pyx_L1_error)
-    __Pyx_GOTREF(__pyx_t_3);
-    __pyx_t_13 = __Pyx_PyInt_As_long(__pyx_t_3); if (unlikely((__pyx_t_13 == (long)-1) && PyErr_Occurred())) __PYX_ERR(0, 2324, __pyx_L1_error)
-    __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
-    __pyx_t_14 = __pyx_t_13;
-    for (__pyx_t_4 = 1; __pyx_t_4 < __pyx_t_14; __pyx_t_4+=1) {
+    __pyx_t_2 = __Pyx_PyInt_AddObjC(__pyx_v_nc, __pyx_int_1, 1, 0, 0); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 2332, __pyx_L1_error)
+    __Pyx_GOTREF(__pyx_t_2);
+    __pyx_t_12 = __Pyx_PyInt_As_long(__pyx_t_2); if (unlikely((__pyx_t_12 == (long)-1) && PyErr_Occurred())) __PYX_ERR(0, 2332, __pyx_L1_error)
+    __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
+    __pyx_t_13 = __pyx_t_12;
+    for (__pyx_t_4 = 1; __pyx_t_4 < __pyx_t_13; __pyx_t_4+=1) {
       __pyx_v_i = __pyx_t_4;
 
-      /* "cSparseIntegerOutrankingDigraphs.pyx":2325
+      /* "cSparseIntegerOutrankingDigraphs.pyx":2333
  *             boostedRanking = []
  *             for i in range(1,nc+1):
  *                 comp = decomposition[i-1]             # <<<<<<<<<<<<<<
  *                 compKey = ('c%%0%dd' % (self.nd)) % (i)
  *                 components[compKey] = {'rank':i}
  */
-      __Pyx_GetModuleGlobalName(__pyx_t_3, __pyx_n_s_decomposition); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 2325, __pyx_L1_error)
-      __Pyx_GOTREF(__pyx_t_3);
-      __pyx_t_15 = (__pyx_v_i - 1);
-      __pyx_t_6 = __Pyx_GetItemInt(__pyx_t_3, __pyx_t_15, long, 1, __Pyx_PyInt_From_long, 0, 1, 1); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 2325, __pyx_L1_error)
+      __Pyx_GetModuleGlobalName(__pyx_t_2, __pyx_n_s_decomposition); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 2333, __pyx_L1_error)
+      __Pyx_GOTREF(__pyx_t_2);
+      __pyx_t_14 = (__pyx_v_i - 1);
+      __pyx_t_6 = __Pyx_GetItemInt(__pyx_t_2, __pyx_t_14, long, 1, __Pyx_PyInt_From_long, 0, 1, 1); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 2333, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_6);
-      __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
+      __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
       __Pyx_XDECREF_SET(__pyx_v_comp, __pyx_t_6);
       __pyx_t_6 = 0;
 
-      /* "cSparseIntegerOutrankingDigraphs.pyx":2326
+      /* "cSparseIntegerOutrankingDigraphs.pyx":2334
  *             for i in range(1,nc+1):
  *                 comp = decomposition[i-1]
  *                 compKey = ('c%%0%dd' % (self.nd)) % (i)             # <<<<<<<<<<<<<<
  *                 components[compKey] = {'rank':i}
  *                 compActions = comp[1]
  */
-      __pyx_t_6 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_n_s_nd); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 2326, __pyx_L1_error)
+      __pyx_t_6 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_n_s_nd); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 2334, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_6);
-      __pyx_t_3 = __Pyx_PyUnicode_FormatSafe(__pyx_kp_u_c_0_dd, __pyx_t_6); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 2326, __pyx_L1_error)
-      __Pyx_GOTREF(__pyx_t_3);
-      __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
-      __pyx_t_6 = __Pyx_PyInt_From_int(__pyx_v_i); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 2326, __pyx_L1_error)
-      __Pyx_GOTREF(__pyx_t_6);
-      __pyx_t_2 = PyUnicode_Format(__pyx_t_3, __pyx_t_6); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 2326, __pyx_L1_error)
+      __pyx_t_2 = __Pyx_PyUnicode_FormatSafe(__pyx_kp_u_c_0_dd, __pyx_t_6); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 2334, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_2);
-      __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
       __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
-      __Pyx_XDECREF_SET(__pyx_v_compKey, __pyx_t_2);
-      __pyx_t_2 = 0;
+      __pyx_t_6 = __Pyx_PyInt_From_int(__pyx_v_i); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 2334, __pyx_L1_error)
+      __Pyx_GOTREF(__pyx_t_6);
+      __pyx_t_3 = PyUnicode_Format(__pyx_t_2, __pyx_t_6); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 2334, __pyx_L1_error)
+      __Pyx_GOTREF(__pyx_t_3);
+      __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
+      __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
+      __Pyx_XDECREF_SET(__pyx_v_compKey, __pyx_t_3);
+      __pyx_t_3 = 0;
 
-      /* "cSparseIntegerOutrankingDigraphs.pyx":2327
+      /* "cSparseIntegerOutrankingDigraphs.pyx":2335
  *                 comp = decomposition[i-1]
  *                 compKey = ('c%%0%dd' % (self.nd)) % (i)
  *                 components[compKey] = {'rank':i}             # <<<<<<<<<<<<<<
  *                 compActions = comp[1]
  *                 nca = len(compActions)
  */
-      __pyx_t_2 = __Pyx_PyDict_NewPresized(1); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 2327, __pyx_L1_error)
-      __Pyx_GOTREF(__pyx_t_2);
-      __pyx_t_6 = __Pyx_PyInt_From_int(__pyx_v_i); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 2327, __pyx_L1_error)
+      __pyx_t_3 = __Pyx_PyDict_NewPresized(1); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 2335, __pyx_L1_error)
+      __Pyx_GOTREF(__pyx_t_3);
+      __pyx_t_6 = __Pyx_PyInt_From_int(__pyx_v_i); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 2335, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_6);
-      if (PyDict_SetItem(__pyx_t_2, __pyx_n_u_rank, __pyx_t_6) < 0) __PYX_ERR(0, 2327, __pyx_L1_error)
+      if (PyDict_SetItem(__pyx_t_3, __pyx_n_u_rank, __pyx_t_6) < 0) __PYX_ERR(0, 2335, __pyx_L1_error)
       __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
-      if (unlikely((PyObject_SetItem(__pyx_v_components, __pyx_v_compKey, __pyx_t_2) < 0))) __PYX_ERR(0, 2327, __pyx_L1_error)
-      __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
+      if (unlikely((PyObject_SetItem(__pyx_v_components, __pyx_v_compKey, __pyx_t_3) < 0))) __PYX_ERR(0, 2335, __pyx_L1_error)
+      __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
 
-      /* "cSparseIntegerOutrankingDigraphs.pyx":2328
+      /* "cSparseIntegerOutrankingDigraphs.pyx":2336
  *                 compKey = ('c%%0%dd' % (self.nd)) % (i)
  *                 components[compKey] = {'rank':i}
  *                 compActions = comp[1]             # <<<<<<<<<<<<<<
  *                 nca = len(compActions)
  *                 if nca > maximalComponentSize:
  */
-      __pyx_t_2 = __Pyx_GetItemInt(__pyx_v_comp, 1, long, 1, __Pyx_PyInt_From_long, 0, 0, 1); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 2328, __pyx_L1_error)
-      __Pyx_GOTREF(__pyx_t_2);
-      __Pyx_XDECREF_SET(__pyx_v_compActions, __pyx_t_2);
-      __pyx_t_2 = 0;
+      __pyx_t_3 = __Pyx_GetItemInt(__pyx_v_comp, 1, long, 1, __Pyx_PyInt_From_long, 0, 0, 1); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 2336, __pyx_L1_error)
+      __Pyx_GOTREF(__pyx_t_3);
+      __Pyx_XDECREF_SET(__pyx_v_compActions, __pyx_t_3);
+      __pyx_t_3 = 0;
 
-      /* "cSparseIntegerOutrankingDigraphs.pyx":2329
+      /* "cSparseIntegerOutrankingDigraphs.pyx":2337
  *                 components[compKey] = {'rank':i}
  *                 compActions = comp[1]
  *                 nca = len(compActions)             # <<<<<<<<<<<<<<
  *                 if nca > maximalComponentSize:
  *                     maximalComponentSize = nca
  */
-      __pyx_t_7 = PyObject_Length(__pyx_v_compActions); if (unlikely(__pyx_t_7 == ((Py_ssize_t)-1))) __PYX_ERR(0, 2329, __pyx_L1_error)
+      __pyx_t_7 = PyObject_Length(__pyx_v_compActions); if (unlikely(__pyx_t_7 == ((Py_ssize_t)-1))) __PYX_ERR(0, 2337, __pyx_L1_error)
       __pyx_v_nca = __pyx_t_7;
 
-      /* "cSparseIntegerOutrankingDigraphs.pyx":2330
+      /* "cSparseIntegerOutrankingDigraphs.pyx":2338
  *                 compActions = comp[1]
  *                 nca = len(compActions)
  *                 if nca > maximalComponentSize:             # <<<<<<<<<<<<<<
  *                     maximalComponentSize = nca
  *                 pt = PartialPerformanceTableau(perfTab,actionsSubset=compActions)
  */
-      __pyx_t_12 = (__pyx_v_nca > __pyx_v_maximalComponentSize);
-      if (__pyx_t_12) {
+      __pyx_t_10 = (__pyx_v_nca > __pyx_v_maximalComponentSize);
+      if (__pyx_t_10) {
 
-        /* "cSparseIntegerOutrankingDigraphs.pyx":2331
+        /* "cSparseIntegerOutrankingDigraphs.pyx":2339
  *                 nca = len(compActions)
  *                 if nca > maximalComponentSize:
  *                     maximalComponentSize = nca             # <<<<<<<<<<<<<<
@@ -48739,7 +48838,7 @@ static PyObject *__pyx_pf_32cSparseIntegerOutrankingDigraphs_24cQuantilesRanking
  */
         __pyx_v_maximalComponentSize = __pyx_v_nca;
 
-        /* "cSparseIntegerOutrankingDigraphs.pyx":2330
+        /* "cSparseIntegerOutrankingDigraphs.pyx":2338
  *                 compActions = comp[1]
  *                 nca = len(compActions)
  *                 if nca > maximalComponentSize:             # <<<<<<<<<<<<<<
@@ -48748,180 +48847,180 @@ static PyObject *__pyx_pf_32cSparseIntegerOutrankingDigraphs_24cQuantilesRanking
  */
       }
 
-      /* "cSparseIntegerOutrankingDigraphs.pyx":2332
+      /* "cSparseIntegerOutrankingDigraphs.pyx":2340
  *                 if nca > maximalComponentSize:
  *                     maximalComponentSize = nca
  *                 pt = PartialPerformanceTableau(perfTab,actionsSubset=compActions)             # <<<<<<<<<<<<<<
  *                 components[compKey]['lowQtileLimit'] = comp[0][1]
  *                 components[compKey]['highQtileLimit'] = comp[0][0]
  */
-      __Pyx_GetModuleGlobalName(__pyx_t_2, __pyx_n_s_PartialPerformanceTableau); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 2332, __pyx_L1_error)
-      __Pyx_GOTREF(__pyx_t_2);
-      __Pyx_GetModuleGlobalName(__pyx_t_6, __pyx_n_s_perfTab); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 2332, __pyx_L1_error)
-      __Pyx_GOTREF(__pyx_t_6);
-      __pyx_t_3 = PyTuple_New(1); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 2332, __pyx_L1_error)
+      __Pyx_GetModuleGlobalName(__pyx_t_3, __pyx_n_s_PartialPerformanceTableau); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 2340, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_3);
-      __Pyx_GIVEREF(__pyx_t_6);
-      if (__Pyx_PyTuple_SET_ITEM(__pyx_t_3, 0, __pyx_t_6)) __PYX_ERR(0, 2332, __pyx_L1_error);
-      __pyx_t_6 = 0;
-      __pyx_t_6 = __Pyx_PyDict_NewPresized(1); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 2332, __pyx_L1_error)
+      __Pyx_GetModuleGlobalName(__pyx_t_6, __pyx_n_s_perfTab); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 2340, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_6);
-      if (PyDict_SetItem(__pyx_t_6, __pyx_n_s_actionsSubset, __pyx_v_compActions) < 0) __PYX_ERR(0, 2332, __pyx_L1_error)
-      __pyx_t_10 = __Pyx_PyObject_Call(__pyx_t_2, __pyx_t_3, __pyx_t_6); if (unlikely(!__pyx_t_10)) __PYX_ERR(0, 2332, __pyx_L1_error)
-      __Pyx_GOTREF(__pyx_t_10);
-      __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
+      __pyx_t_2 = PyTuple_New(1); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 2340, __pyx_L1_error)
+      __Pyx_GOTREF(__pyx_t_2);
+      __Pyx_GIVEREF(__pyx_t_6);
+      if (__Pyx_PyTuple_SET_ITEM(__pyx_t_2, 0, __pyx_t_6)) __PYX_ERR(0, 2340, __pyx_L1_error);
+      __pyx_t_6 = 0;
+      __pyx_t_6 = __Pyx_PyDict_NewPresized(1); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 2340, __pyx_L1_error)
+      __Pyx_GOTREF(__pyx_t_6);
+      if (PyDict_SetItem(__pyx_t_6, __pyx_n_s_actionsSubset, __pyx_v_compActions) < 0) __PYX_ERR(0, 2340, __pyx_L1_error)
+      __pyx_t_11 = __Pyx_PyObject_Call(__pyx_t_3, __pyx_t_2, __pyx_t_6); if (unlikely(!__pyx_t_11)) __PYX_ERR(0, 2340, __pyx_L1_error)
+      __Pyx_GOTREF(__pyx_t_11);
       __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
+      __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
       __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
-      __Pyx_XDECREF_SET(__pyx_v_pt, __pyx_t_10);
-      __pyx_t_10 = 0;
+      __Pyx_XDECREF_SET(__pyx_v_pt, __pyx_t_11);
+      __pyx_t_11 = 0;
 
-      /* "cSparseIntegerOutrankingDigraphs.pyx":2333
+      /* "cSparseIntegerOutrankingDigraphs.pyx":2341
  *                     maximalComponentSize = nca
  *                 pt = PartialPerformanceTableau(perfTab,actionsSubset=compActions)
  *                 components[compKey]['lowQtileLimit'] = comp[0][1]             # <<<<<<<<<<<<<<
  *                 components[compKey]['highQtileLimit'] = comp[0][0]
  *                 pg = IntegerBipolarOutrankingDigraph(pt,
  */
-      __pyx_t_10 = __Pyx_GetItemInt(__pyx_v_comp, 0, long, 1, __Pyx_PyInt_From_long, 0, 0, 1); if (unlikely(!__pyx_t_10)) __PYX_ERR(0, 2333, __pyx_L1_error)
-      __Pyx_GOTREF(__pyx_t_10);
-      __pyx_t_6 = __Pyx_GetItemInt(__pyx_t_10, 1, long, 1, __Pyx_PyInt_From_long, 0, 0, 1); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 2333, __pyx_L1_error)
+      __pyx_t_11 = __Pyx_GetItemInt(__pyx_v_comp, 0, long, 1, __Pyx_PyInt_From_long, 0, 0, 1); if (unlikely(!__pyx_t_11)) __PYX_ERR(0, 2341, __pyx_L1_error)
+      __Pyx_GOTREF(__pyx_t_11);
+      __pyx_t_6 = __Pyx_GetItemInt(__pyx_t_11, 1, long, 1, __Pyx_PyInt_From_long, 0, 0, 1); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 2341, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_6);
-      __Pyx_DECREF(__pyx_t_10); __pyx_t_10 = 0;
-      __pyx_t_10 = __Pyx_PyObject_GetItem(__pyx_v_components, __pyx_v_compKey); if (unlikely(!__pyx_t_10)) __PYX_ERR(0, 2333, __pyx_L1_error)
-      __Pyx_GOTREF(__pyx_t_10);
-      if (unlikely((PyObject_SetItem(__pyx_t_10, __pyx_n_u_lowQtileLimit, __pyx_t_6) < 0))) __PYX_ERR(0, 2333, __pyx_L1_error)
-      __Pyx_DECREF(__pyx_t_10); __pyx_t_10 = 0;
+      __Pyx_DECREF(__pyx_t_11); __pyx_t_11 = 0;
+      __pyx_t_11 = __Pyx_PyObject_GetItem(__pyx_v_components, __pyx_v_compKey); if (unlikely(!__pyx_t_11)) __PYX_ERR(0, 2341, __pyx_L1_error)
+      __Pyx_GOTREF(__pyx_t_11);
+      if (unlikely((PyObject_SetItem(__pyx_t_11, __pyx_n_u_lowQtileLimit, __pyx_t_6) < 0))) __PYX_ERR(0, 2341, __pyx_L1_error)
+      __Pyx_DECREF(__pyx_t_11); __pyx_t_11 = 0;
       __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
 
-      /* "cSparseIntegerOutrankingDigraphs.pyx":2334
+      /* "cSparseIntegerOutrankingDigraphs.pyx":2342
  *                 pt = PartialPerformanceTableau(perfTab,actionsSubset=compActions)
  *                 components[compKey]['lowQtileLimit'] = comp[0][1]
  *                 components[compKey]['highQtileLimit'] = comp[0][0]             # <<<<<<<<<<<<<<
  *                 pg = IntegerBipolarOutrankingDigraph(pt,
  *                                           WithConcordanceRelation=False,
  */
-      __pyx_t_6 = __Pyx_GetItemInt(__pyx_v_comp, 0, long, 1, __Pyx_PyInt_From_long, 0, 0, 1); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 2334, __pyx_L1_error)
+      __pyx_t_6 = __Pyx_GetItemInt(__pyx_v_comp, 0, long, 1, __Pyx_PyInt_From_long, 0, 0, 1); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 2342, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_6);
-      __pyx_t_10 = __Pyx_GetItemInt(__pyx_t_6, 0, long, 1, __Pyx_PyInt_From_long, 0, 0, 1); if (unlikely(!__pyx_t_10)) __PYX_ERR(0, 2334, __pyx_L1_error)
-      __Pyx_GOTREF(__pyx_t_10);
+      __pyx_t_11 = __Pyx_GetItemInt(__pyx_t_6, 0, long, 1, __Pyx_PyInt_From_long, 0, 0, 1); if (unlikely(!__pyx_t_11)) __PYX_ERR(0, 2342, __pyx_L1_error)
+      __Pyx_GOTREF(__pyx_t_11);
       __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
-      __pyx_t_6 = __Pyx_PyObject_GetItem(__pyx_v_components, __pyx_v_compKey); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 2334, __pyx_L1_error)
+      __pyx_t_6 = __Pyx_PyObject_GetItem(__pyx_v_components, __pyx_v_compKey); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 2342, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_6);
-      if (unlikely((PyObject_SetItem(__pyx_t_6, __pyx_n_u_highQtileLimit, __pyx_t_10) < 0))) __PYX_ERR(0, 2334, __pyx_L1_error)
+      if (unlikely((PyObject_SetItem(__pyx_t_6, __pyx_n_u_highQtileLimit, __pyx_t_11) < 0))) __PYX_ERR(0, 2342, __pyx_L1_error)
       __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
-      __Pyx_DECREF(__pyx_t_10); __pyx_t_10 = 0;
+      __Pyx_DECREF(__pyx_t_11); __pyx_t_11 = 0;
 
-      /* "cSparseIntegerOutrankingDigraphs.pyx":2335
+      /* "cSparseIntegerOutrankingDigraphs.pyx":2343
  *                 components[compKey]['lowQtileLimit'] = comp[0][1]
  *                 components[compKey]['highQtileLimit'] = comp[0][0]
  *                 pg = IntegerBipolarOutrankingDigraph(pt,             # <<<<<<<<<<<<<<
  *                                           WithConcordanceRelation=False,
  *                                           WithVetoCounts=False,
  */
-      __pyx_t_10 = PyTuple_New(1); if (unlikely(!__pyx_t_10)) __PYX_ERR(0, 2335, __pyx_L1_error)
-      __Pyx_GOTREF(__pyx_t_10);
+      __pyx_t_11 = PyTuple_New(1); if (unlikely(!__pyx_t_11)) __PYX_ERR(0, 2343, __pyx_L1_error)
+      __Pyx_GOTREF(__pyx_t_11);
       __Pyx_INCREF(__pyx_v_pt);
       __Pyx_GIVEREF(__pyx_v_pt);
-      if (__Pyx_PyTuple_SET_ITEM(__pyx_t_10, 0, __pyx_v_pt)) __PYX_ERR(0, 2335, __pyx_L1_error);
+      if (__Pyx_PyTuple_SET_ITEM(__pyx_t_11, 0, __pyx_v_pt)) __PYX_ERR(0, 2343, __pyx_L1_error);
 
-      /* "cSparseIntegerOutrankingDigraphs.pyx":2336
+      /* "cSparseIntegerOutrankingDigraphs.pyx":2344
  *                 components[compKey]['highQtileLimit'] = comp[0][0]
  *                 pg = IntegerBipolarOutrankingDigraph(pt,
  *                                           WithConcordanceRelation=False,             # <<<<<<<<<<<<<<
  *                                           WithVetoCounts=False,
  *                                           #Normalized=True,
  */
-      __pyx_t_6 = __Pyx_PyDict_NewPresized(3); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 2336, __pyx_L1_error)
+      __pyx_t_6 = __Pyx_PyDict_NewPresized(3); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 2344, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_6);
-      if (PyDict_SetItem(__pyx_t_6, __pyx_n_s_WithConcordanceRelation, Py_False) < 0) __PYX_ERR(0, 2336, __pyx_L1_error)
+      if (PyDict_SetItem(__pyx_t_6, __pyx_n_s_WithConcordanceRelation, Py_False) < 0) __PYX_ERR(0, 2344, __pyx_L1_error)
 
-      /* "cSparseIntegerOutrankingDigraphs.pyx":2337
+      /* "cSparseIntegerOutrankingDigraphs.pyx":2345
  *                 pg = IntegerBipolarOutrankingDigraph(pt,
  *                                           WithConcordanceRelation=False,
  *                                           WithVetoCounts=False,             # <<<<<<<<<<<<<<
  *                                           #Normalized=True,
  *                                           CopyPerfTab=False)
  */
-      if (PyDict_SetItem(__pyx_t_6, __pyx_n_s_WithVetoCounts, Py_False) < 0) __PYX_ERR(0, 2336, __pyx_L1_error)
+      if (PyDict_SetItem(__pyx_t_6, __pyx_n_s_WithVetoCounts, Py_False) < 0) __PYX_ERR(0, 2344, __pyx_L1_error)
 
-      /* "cSparseIntegerOutrankingDigraphs.pyx":2339
+      /* "cSparseIntegerOutrankingDigraphs.pyx":2347
  *                                           WithVetoCounts=False,
  *                                           #Normalized=True,
  *                                           CopyPerfTab=False)             # <<<<<<<<<<<<<<
  *                 if quantilesOrderingStrategy == 'Copeland':
  *                     componentRanking = pg.computeCopelandRanking()
  */
-      if (PyDict_SetItem(__pyx_t_6, __pyx_n_s_CopyPerfTab, Py_False) < 0) __PYX_ERR(0, 2336, __pyx_L1_error)
+      if (PyDict_SetItem(__pyx_t_6, __pyx_n_s_CopyPerfTab, Py_False) < 0) __PYX_ERR(0, 2344, __pyx_L1_error)
 
-      /* "cSparseIntegerOutrankingDigraphs.pyx":2335
+      /* "cSparseIntegerOutrankingDigraphs.pyx":2343
  *                 components[compKey]['lowQtileLimit'] = comp[0][1]
  *                 components[compKey]['highQtileLimit'] = comp[0][0]
  *                 pg = IntegerBipolarOutrankingDigraph(pt,             # <<<<<<<<<<<<<<
  *                                           WithConcordanceRelation=False,
  *                                           WithVetoCounts=False,
  */
-      __pyx_t_3 = __Pyx_PyObject_Call(__pyx_v_IntegerBipolarOutrankingDigraph, __pyx_t_10, __pyx_t_6); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 2335, __pyx_L1_error)
-      __Pyx_GOTREF(__pyx_t_3);
-      __Pyx_DECREF(__pyx_t_10); __pyx_t_10 = 0;
+      __pyx_t_2 = __Pyx_PyObject_Call(__pyx_v_IntegerBipolarOutrankingDigraph, __pyx_t_11, __pyx_t_6); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 2343, __pyx_L1_error)
+      __Pyx_GOTREF(__pyx_t_2);
+      __Pyx_DECREF(__pyx_t_11); __pyx_t_11 = 0;
       __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
-      __Pyx_XDECREF_SET(__pyx_v_pg, __pyx_t_3);
-      __pyx_t_3 = 0;
+      __Pyx_XDECREF_SET(__pyx_v_pg, __pyx_t_2);
+      __pyx_t_2 = 0;
 
-      /* "cSparseIntegerOutrankingDigraphs.pyx":2340
+      /* "cSparseIntegerOutrankingDigraphs.pyx":2348
  *                                           #Normalized=True,
  *                                           CopyPerfTab=False)
  *                 if quantilesOrderingStrategy == 'Copeland':             # <<<<<<<<<<<<<<
  *                     componentRanking = pg.computeCopelandRanking()
  *                 else:
  */
-      __pyx_t_12 = (__Pyx_PyUnicode_Equals(__pyx_v_quantilesOrderingStrategy, __pyx_n_u_Copeland, Py_EQ)); if (unlikely((__pyx_t_12 < 0))) __PYX_ERR(0, 2340, __pyx_L1_error)
-      if (__pyx_t_12) {
+      __pyx_t_10 = (__Pyx_PyUnicode_Equals(__pyx_v_quantilesOrderingStrategy, __pyx_n_u_Copeland, Py_EQ)); if (unlikely((__pyx_t_10 < 0))) __PYX_ERR(0, 2348, __pyx_L1_error)
+      if (__pyx_t_10) {
 
-        /* "cSparseIntegerOutrankingDigraphs.pyx":2341
+        /* "cSparseIntegerOutrankingDigraphs.pyx":2349
  *                                           CopyPerfTab=False)
  *                 if quantilesOrderingStrategy == 'Copeland':
  *                     componentRanking = pg.computeCopelandRanking()             # <<<<<<<<<<<<<<
  *                 else:
  *                     componentRanking = pg.computeNetFlowsRanking()
  */
-        __pyx_t_6 = __Pyx_PyObject_GetAttrStr(__pyx_v_pg, __pyx_n_s_computeCopelandRanking_2); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 2341, __pyx_L1_error)
+        __pyx_t_6 = __Pyx_PyObject_GetAttrStr(__pyx_v_pg, __pyx_n_s_computeCopelandRanking_2); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 2349, __pyx_L1_error)
         __Pyx_GOTREF(__pyx_t_6);
-        __pyx_t_10 = NULL;
-        __pyx_t_16 = 0;
+        __pyx_t_11 = NULL;
+        __pyx_t_15 = 0;
         #if CYTHON_UNPACK_METHODS
         if (likely(PyMethod_Check(__pyx_t_6))) {
-          __pyx_t_10 = PyMethod_GET_SELF(__pyx_t_6);
-          if (likely(__pyx_t_10)) {
+          __pyx_t_11 = PyMethod_GET_SELF(__pyx_t_6);
+          if (likely(__pyx_t_11)) {
             PyObject* function = PyMethod_GET_FUNCTION(__pyx_t_6);
-            __Pyx_INCREF(__pyx_t_10);
+            __Pyx_INCREF(__pyx_t_11);
             __Pyx_INCREF(function);
             __Pyx_DECREF_SET(__pyx_t_6, function);
-            __pyx_t_16 = 1;
+            __pyx_t_15 = 1;
           }
         }
         #endif
         {
-          PyObject *__pyx_callargs[2] = {__pyx_t_10, NULL};
-          __pyx_t_3 = __Pyx_PyObject_FastCall(__pyx_t_6, __pyx_callargs+1-__pyx_t_16, 0+__pyx_t_16);
-          __Pyx_XDECREF(__pyx_t_10); __pyx_t_10 = 0;
-          if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 2341, __pyx_L1_error)
-          __Pyx_GOTREF(__pyx_t_3);
+          PyObject *__pyx_callargs[2] = {__pyx_t_11, NULL};
+          __pyx_t_2 = __Pyx_PyObject_FastCall(__pyx_t_6, __pyx_callargs+1-__pyx_t_15, 0+__pyx_t_15);
+          __Pyx_XDECREF(__pyx_t_11); __pyx_t_11 = 0;
+          if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 2349, __pyx_L1_error)
+          __Pyx_GOTREF(__pyx_t_2);
           __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
         }
-        __Pyx_XDECREF_SET(__pyx_v_componentRanking, __pyx_t_3);
-        __pyx_t_3 = 0;
+        __Pyx_XDECREF_SET(__pyx_v_componentRanking, __pyx_t_2);
+        __pyx_t_2 = 0;
 
-        /* "cSparseIntegerOutrankingDigraphs.pyx":2340
+        /* "cSparseIntegerOutrankingDigraphs.pyx":2348
  *                                           #Normalized=True,
  *                                           CopyPerfTab=False)
  *                 if quantilesOrderingStrategy == 'Copeland':             # <<<<<<<<<<<<<<
  *                     componentRanking = pg.computeCopelandRanking()
  *                 else:
  */
-        goto __pyx_L24;
+        goto __pyx_L26;
       }
 
-      /* "cSparseIntegerOutrankingDigraphs.pyx":2343
+      /* "cSparseIntegerOutrankingDigraphs.pyx":2351
  *                     componentRanking = pg.computeCopelandRanking()
  *                 else:
  *                     componentRanking = pg.computeNetFlowsRanking()             # <<<<<<<<<<<<<<
@@ -48929,71 +49028,71 @@ static PyObject *__pyx_pf_32cSparseIntegerOutrankingDigraphs_24cQuantilesRanking
  *                 #pg.__dict__.pop('evaluation')
  */
       /*else*/ {
-        __pyx_t_6 = __Pyx_PyObject_GetAttrStr(__pyx_v_pg, __pyx_n_s_computeNetFlowsRanking_2); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 2343, __pyx_L1_error)
+        __pyx_t_6 = __Pyx_PyObject_GetAttrStr(__pyx_v_pg, __pyx_n_s_computeNetFlowsRanking_2); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 2351, __pyx_L1_error)
         __Pyx_GOTREF(__pyx_t_6);
-        __pyx_t_10 = NULL;
-        __pyx_t_16 = 0;
+        __pyx_t_11 = NULL;
+        __pyx_t_15 = 0;
         #if CYTHON_UNPACK_METHODS
         if (likely(PyMethod_Check(__pyx_t_6))) {
-          __pyx_t_10 = PyMethod_GET_SELF(__pyx_t_6);
-          if (likely(__pyx_t_10)) {
+          __pyx_t_11 = PyMethod_GET_SELF(__pyx_t_6);
+          if (likely(__pyx_t_11)) {
             PyObject* function = PyMethod_GET_FUNCTION(__pyx_t_6);
-            __Pyx_INCREF(__pyx_t_10);
+            __Pyx_INCREF(__pyx_t_11);
             __Pyx_INCREF(function);
             __Pyx_DECREF_SET(__pyx_t_6, function);
-            __pyx_t_16 = 1;
+            __pyx_t_15 = 1;
           }
         }
         #endif
         {
-          PyObject *__pyx_callargs[2] = {__pyx_t_10, NULL};
-          __pyx_t_3 = __Pyx_PyObject_FastCall(__pyx_t_6, __pyx_callargs+1-__pyx_t_16, 0+__pyx_t_16);
-          __Pyx_XDECREF(__pyx_t_10); __pyx_t_10 = 0;
-          if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 2343, __pyx_L1_error)
-          __Pyx_GOTREF(__pyx_t_3);
+          PyObject *__pyx_callargs[2] = {__pyx_t_11, NULL};
+          __pyx_t_2 = __Pyx_PyObject_FastCall(__pyx_t_6, __pyx_callargs+1-__pyx_t_15, 0+__pyx_t_15);
+          __Pyx_XDECREF(__pyx_t_11); __pyx_t_11 = 0;
+          if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 2351, __pyx_L1_error)
+          __Pyx_GOTREF(__pyx_t_2);
           __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
         }
-        __Pyx_XDECREF_SET(__pyx_v_componentRanking, __pyx_t_3);
-        __pyx_t_3 = 0;
+        __Pyx_XDECREF_SET(__pyx_v_componentRanking, __pyx_t_2);
+        __pyx_t_2 = 0;
       }
-      __pyx_L24:;
+      __pyx_L26:;
 
-      /* "cSparseIntegerOutrankingDigraphs.pyx":2347
+      /* "cSparseIntegerOutrankingDigraphs.pyx":2355
  *                 #pg.__dict__.pop('evaluation')
  *                 #pg.__class__ = IntegerDigraph
  *                 components[compKey]['componentRanking'] = componentRanking             # <<<<<<<<<<<<<<
  *                 boostedRanking += componentRanking
  *         else:   # if self.sortingParameters['Threading'] == True:
  */
-      __pyx_t_3 = __Pyx_PyObject_GetItem(__pyx_v_components, __pyx_v_compKey); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 2347, __pyx_L1_error)
-      __Pyx_GOTREF(__pyx_t_3);
-      if (unlikely((PyObject_SetItem(__pyx_t_3, __pyx_n_u_componentRanking, __pyx_v_componentRanking) < 0))) __PYX_ERR(0, 2347, __pyx_L1_error)
-      __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
+      __pyx_t_2 = __Pyx_PyObject_GetItem(__pyx_v_components, __pyx_v_compKey); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 2355, __pyx_L1_error)
+      __Pyx_GOTREF(__pyx_t_2);
+      if (unlikely((PyObject_SetItem(__pyx_t_2, __pyx_n_u_componentRanking, __pyx_v_componentRanking) < 0))) __PYX_ERR(0, 2355, __pyx_L1_error)
+      __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
 
-      /* "cSparseIntegerOutrankingDigraphs.pyx":2348
+      /* "cSparseIntegerOutrankingDigraphs.pyx":2356
  *                 #pg.__class__ = IntegerDigraph
  *                 components[compKey]['componentRanking'] = componentRanking
  *                 boostedRanking += componentRanking             # <<<<<<<<<<<<<<
  *         else:   # if self.sortingParameters['Threading'] == True:
  *             from copy import copy, deepcopy
  */
-      __pyx_t_3 = PyNumber_InPlaceAdd(__pyx_v_boostedRanking, __pyx_v_componentRanking); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 2348, __pyx_L1_error)
-      __Pyx_GOTREF(__pyx_t_3);
-      __Pyx_DECREF_SET(__pyx_v_boostedRanking, __pyx_t_3);
-      __pyx_t_3 = 0;
+      __pyx_t_2 = PyNumber_InPlaceAdd(__pyx_v_boostedRanking, __pyx_v_componentRanking); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 2356, __pyx_L1_error)
+      __Pyx_GOTREF(__pyx_t_2);
+      __Pyx_DECREF_SET(__pyx_v_boostedRanking, __pyx_t_2);
+      __pyx_t_2 = 0;
     }
 
-    /* "cSparseIntegerOutrankingDigraphs.pyx":2319
+    /* "cSparseIntegerOutrankingDigraphs.pyx":2328
  *         self.nd = nd
  *         ### not threding
- *         if not self.sortingParameters['Threading']:             # <<<<<<<<<<<<<<
- *             self.nbrOfCPUs = 1
+ *         if not Threading:             # <<<<<<<<<<<<<<
  *             maximalComponentSize = 0
+ *             components = OrderedDict()
  */
-    goto __pyx_L20;
+    goto __pyx_L22;
   }
 
-  /* "cSparseIntegerOutrankingDigraphs.pyx":2350
+  /* "cSparseIntegerOutrankingDigraphs.pyx":2358
  *                 boostedRanking += componentRanking
  *         else:   # if self.sortingParameters['Threading'] == True:
  *             from copy import copy, deepcopy             # <<<<<<<<<<<<<<
@@ -49001,104 +49100,104 @@ static PyObject *__pyx_pf_32cSparseIntegerOutrankingDigraphs_24cQuantilesRanking
  *             import multiprocessing as mp
  */
   /*else*/ {
-    __pyx_t_3 = PyList_New(2); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 2350, __pyx_L1_error)
-    __Pyx_GOTREF(__pyx_t_3);
+    __pyx_t_2 = PyList_New(2); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 2358, __pyx_L1_error)
+    __Pyx_GOTREF(__pyx_t_2);
     __Pyx_INCREF(__pyx_n_s_copy);
     __Pyx_GIVEREF(__pyx_n_s_copy);
-    if (__Pyx_PyList_SET_ITEM(__pyx_t_3, 0, __pyx_n_s_copy)) __PYX_ERR(0, 2350, __pyx_L1_error);
+    if (__Pyx_PyList_SET_ITEM(__pyx_t_2, 0, __pyx_n_s_copy)) __PYX_ERR(0, 2358, __pyx_L1_error);
     __Pyx_INCREF(__pyx_n_s_deepcopy);
     __Pyx_GIVEREF(__pyx_n_s_deepcopy);
-    if (__Pyx_PyList_SET_ITEM(__pyx_t_3, 1, __pyx_n_s_deepcopy)) __PYX_ERR(0, 2350, __pyx_L1_error);
-    __pyx_t_6 = __Pyx_Import(__pyx_n_s_copy, __pyx_t_3, 0); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 2350, __pyx_L1_error)
+    if (__Pyx_PyList_SET_ITEM(__pyx_t_2, 1, __pyx_n_s_deepcopy)) __PYX_ERR(0, 2358, __pyx_L1_error);
+    __pyx_t_6 = __Pyx_Import(__pyx_n_s_copy, __pyx_t_2, 0); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 2358, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_6);
-    __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
-    __pyx_t_3 = __Pyx_ImportFrom(__pyx_t_6, __pyx_n_s_copy); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 2350, __pyx_L1_error)
-    __Pyx_GOTREF(__pyx_t_3);
-    __Pyx_INCREF(__pyx_t_3);
-    __Pyx_DECREF_SET(__pyx_v_copy, __pyx_t_3);
-    __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
-    __pyx_t_3 = __Pyx_ImportFrom(__pyx_t_6, __pyx_n_s_deepcopy); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 2350, __pyx_L1_error)
-    __Pyx_GOTREF(__pyx_t_3);
-    __Pyx_INCREF(__pyx_t_3);
-    __Pyx_DECREF_SET(__pyx_v_deepcopy, __pyx_t_3);
-    __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
+    __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
+    __pyx_t_2 = __Pyx_ImportFrom(__pyx_t_6, __pyx_n_s_copy); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 2358, __pyx_L1_error)
+    __Pyx_GOTREF(__pyx_t_2);
+    __Pyx_INCREF(__pyx_t_2);
+    __Pyx_DECREF_SET(__pyx_v_copy, __pyx_t_2);
+    __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
+    __pyx_t_2 = __Pyx_ImportFrom(__pyx_t_6, __pyx_n_s_deepcopy); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 2358, __pyx_L1_error)
+    __Pyx_GOTREF(__pyx_t_2);
+    __Pyx_INCREF(__pyx_t_2);
+    __Pyx_DECREF_SET(__pyx_v_deepcopy, __pyx_t_2);
+    __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
     __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
 
-    /* "cSparseIntegerOutrankingDigraphs.pyx":2351
+    /* "cSparseIntegerOutrankingDigraphs.pyx":2359
  *         else:   # if self.sortingParameters['Threading'] == True:
  *             from copy import copy, deepcopy
  *             from pickle import dumps, loads, load, dump             # <<<<<<<<<<<<<<
  *             import multiprocessing as mp
  *             mpctx = mp.get_context(startMethod)
  */
-    __pyx_t_6 = PyList_New(4); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 2351, __pyx_L1_error)
+    __pyx_t_6 = PyList_New(4); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 2359, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_6);
     __Pyx_INCREF(__pyx_n_s_dumps);
     __Pyx_GIVEREF(__pyx_n_s_dumps);
-    if (__Pyx_PyList_SET_ITEM(__pyx_t_6, 0, __pyx_n_s_dumps)) __PYX_ERR(0, 2351, __pyx_L1_error);
+    if (__Pyx_PyList_SET_ITEM(__pyx_t_6, 0, __pyx_n_s_dumps)) __PYX_ERR(0, 2359, __pyx_L1_error);
     __Pyx_INCREF(__pyx_n_s_loads);
     __Pyx_GIVEREF(__pyx_n_s_loads);
-    if (__Pyx_PyList_SET_ITEM(__pyx_t_6, 1, __pyx_n_s_loads)) __PYX_ERR(0, 2351, __pyx_L1_error);
+    if (__Pyx_PyList_SET_ITEM(__pyx_t_6, 1, __pyx_n_s_loads)) __PYX_ERR(0, 2359, __pyx_L1_error);
     __Pyx_INCREF(__pyx_n_s_load);
     __Pyx_GIVEREF(__pyx_n_s_load);
-    if (__Pyx_PyList_SET_ITEM(__pyx_t_6, 2, __pyx_n_s_load)) __PYX_ERR(0, 2351, __pyx_L1_error);
+    if (__Pyx_PyList_SET_ITEM(__pyx_t_6, 2, __pyx_n_s_load)) __PYX_ERR(0, 2359, __pyx_L1_error);
     __Pyx_INCREF(__pyx_n_s_dump);
     __Pyx_GIVEREF(__pyx_n_s_dump);
-    if (__Pyx_PyList_SET_ITEM(__pyx_t_6, 3, __pyx_n_s_dump)) __PYX_ERR(0, 2351, __pyx_L1_error);
-    __pyx_t_3 = __Pyx_Import(__pyx_n_s_pickle, __pyx_t_6, 0); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 2351, __pyx_L1_error)
-    __Pyx_GOTREF(__pyx_t_3);
+    if (__Pyx_PyList_SET_ITEM(__pyx_t_6, 3, __pyx_n_s_dump)) __PYX_ERR(0, 2359, __pyx_L1_error);
+    __pyx_t_2 = __Pyx_Import(__pyx_n_s_pickle, __pyx_t_6, 0); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 2359, __pyx_L1_error)
+    __Pyx_GOTREF(__pyx_t_2);
     __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
-    __pyx_t_6 = __Pyx_ImportFrom(__pyx_t_3, __pyx_n_s_dumps); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 2351, __pyx_L1_error)
+    __pyx_t_6 = __Pyx_ImportFrom(__pyx_t_2, __pyx_n_s_dumps); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 2359, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_6);
     __Pyx_INCREF(__pyx_t_6);
     __pyx_v_dumps = __pyx_t_6;
     __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
-    __pyx_t_6 = __Pyx_ImportFrom(__pyx_t_3, __pyx_n_s_loads); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 2351, __pyx_L1_error)
+    __pyx_t_6 = __Pyx_ImportFrom(__pyx_t_2, __pyx_n_s_loads); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 2359, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_6);
     __Pyx_INCREF(__pyx_t_6);
     __pyx_v_loads = __pyx_t_6;
     __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
-    __pyx_t_6 = __Pyx_ImportFrom(__pyx_t_3, __pyx_n_s_load); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 2351, __pyx_L1_error)
+    __pyx_t_6 = __Pyx_ImportFrom(__pyx_t_2, __pyx_n_s_load); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 2359, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_6);
     __Pyx_INCREF(__pyx_t_6);
     __pyx_v_load = __pyx_t_6;
     __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
-    __pyx_t_6 = __Pyx_ImportFrom(__pyx_t_3, __pyx_n_s_dump); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 2351, __pyx_L1_error)
+    __pyx_t_6 = __Pyx_ImportFrom(__pyx_t_2, __pyx_n_s_dump); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 2359, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_6);
     __Pyx_INCREF(__pyx_t_6);
     __pyx_v_dump = __pyx_t_6;
     __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
-    __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
+    __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
 
-    /* "cSparseIntegerOutrankingDigraphs.pyx":2352
+    /* "cSparseIntegerOutrankingDigraphs.pyx":2360
  *             from copy import copy, deepcopy
  *             from pickle import dumps, loads, load, dump
  *             import multiprocessing as mp             # <<<<<<<<<<<<<<
  *             mpctx = mp.get_context(startMethod)
- *             self.startMethod = mpctx.get_start_method()
+ *             #self.startMethod = mpctx.get_start_method()
  */
-    __pyx_t_3 = __Pyx_ImportDottedModule(__pyx_n_s_multiprocessing, NULL); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 2352, __pyx_L1_error)
-    __Pyx_GOTREF(__pyx_t_3);
-    __Pyx_DECREF_SET(__pyx_v_mp, __pyx_t_3);
-    __pyx_t_3 = 0;
+    __pyx_t_2 = __Pyx_ImportDottedModule(__pyx_n_s_multiprocessing, NULL); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 2360, __pyx_L1_error)
+    __Pyx_GOTREF(__pyx_t_2);
+    __Pyx_DECREF_SET(__pyx_v_mp, __pyx_t_2);
+    __pyx_t_2 = 0;
 
-    /* "cSparseIntegerOutrankingDigraphs.pyx":2353
+    /* "cSparseIntegerOutrankingDigraphs.pyx":2361
  *             from pickle import dumps, loads, load, dump
  *             import multiprocessing as mp
  *             mpctx = mp.get_context(startMethod)             # <<<<<<<<<<<<<<
- *             self.startMethod = mpctx.get_start_method()
+ *             #self.startMethod = mpctx.get_start_method()
  *             Process = mpctx.Process
  */
-    __pyx_t_6 = __Pyx_PyObject_GetAttrStr(__pyx_v_mp, __pyx_n_s_get_context); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 2353, __pyx_L1_error)
+    __pyx_t_6 = __Pyx_PyObject_GetAttrStr(__pyx_v_mp, __pyx_n_s_get_context); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 2361, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_6);
-    __pyx_t_10 = NULL;
+    __pyx_t_11 = NULL;
     __pyx_t_4 = 0;
     #if CYTHON_UNPACK_METHODS
     if (likely(PyMethod_Check(__pyx_t_6))) {
-      __pyx_t_10 = PyMethod_GET_SELF(__pyx_t_6);
-      if (likely(__pyx_t_10)) {
+      __pyx_t_11 = PyMethod_GET_SELF(__pyx_t_6);
+      if (likely(__pyx_t_11)) {
         PyObject* function = PyMethod_GET_FUNCTION(__pyx_t_6);
-        __Pyx_INCREF(__pyx_t_10);
+        __Pyx_INCREF(__pyx_t_11);
         __Pyx_INCREF(function);
         __Pyx_DECREF_SET(__pyx_t_6, function);
         __pyx_t_4 = 1;
@@ -49106,162 +49205,116 @@ static PyObject *__pyx_pf_32cSparseIntegerOutrankingDigraphs_24cQuantilesRanking
     }
     #endif
     {
-      PyObject *__pyx_callargs[2] = {__pyx_t_10, __pyx_v_startMethod};
-      __pyx_t_3 = __Pyx_PyObject_FastCall(__pyx_t_6, __pyx_callargs+1-__pyx_t_4, 1+__pyx_t_4);
-      __Pyx_XDECREF(__pyx_t_10); __pyx_t_10 = 0;
-      if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 2353, __pyx_L1_error)
-      __Pyx_GOTREF(__pyx_t_3);
+      PyObject *__pyx_callargs[2] = {__pyx_t_11, __pyx_v_startMethod};
+      __pyx_t_2 = __Pyx_PyObject_FastCall(__pyx_t_6, __pyx_callargs+1-__pyx_t_4, 1+__pyx_t_4);
+      __Pyx_XDECREF(__pyx_t_11); __pyx_t_11 = 0;
+      if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 2361, __pyx_L1_error)
+      __Pyx_GOTREF(__pyx_t_2);
       __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
     }
-    __Pyx_DECREF_SET(__pyx_v_mpctx, __pyx_t_3);
-    __pyx_t_3 = 0;
+    __Pyx_DECREF_SET(__pyx_v_mpctx, __pyx_t_2);
+    __pyx_t_2 = 0;
 
-    /* "cSparseIntegerOutrankingDigraphs.pyx":2354
- *             import multiprocessing as mp
+    /* "cSparseIntegerOutrankingDigraphs.pyx":2363
  *             mpctx = mp.get_context(startMethod)
- *             self.startMethod = mpctx.get_start_method()             # <<<<<<<<<<<<<<
- *             Process = mpctx.Process
- *             Queue = mpctx.Queue
- */
-    __pyx_t_6 = __Pyx_PyObject_GetAttrStr(__pyx_v_mpctx, __pyx_n_s_get_start_method); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 2354, __pyx_L1_error)
-    __Pyx_GOTREF(__pyx_t_6);
-    __pyx_t_10 = NULL;
-    __pyx_t_4 = 0;
-    #if CYTHON_UNPACK_METHODS
-    if (likely(PyMethod_Check(__pyx_t_6))) {
-      __pyx_t_10 = PyMethod_GET_SELF(__pyx_t_6);
-      if (likely(__pyx_t_10)) {
-        PyObject* function = PyMethod_GET_FUNCTION(__pyx_t_6);
-        __Pyx_INCREF(__pyx_t_10);
-        __Pyx_INCREF(function);
-        __Pyx_DECREF_SET(__pyx_t_6, function);
-        __pyx_t_4 = 1;
-      }
-    }
-    #endif
-    {
-      PyObject *__pyx_callargs[2] = {__pyx_t_10, NULL};
-      __pyx_t_3 = __Pyx_PyObject_FastCall(__pyx_t_6, __pyx_callargs+1-__pyx_t_4, 0+__pyx_t_4);
-      __Pyx_XDECREF(__pyx_t_10); __pyx_t_10 = 0;
-      if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 2354, __pyx_L1_error)
-      __Pyx_GOTREF(__pyx_t_3);
-      __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
-    }
-    if (__Pyx_PyObject_SetAttrStr(__pyx_v_self, __pyx_n_s_startMethod, __pyx_t_3) < 0) __PYX_ERR(0, 2354, __pyx_L1_error)
-    __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
-
-    /* "cSparseIntegerOutrankingDigraphs.pyx":2355
- *             mpctx = mp.get_context(startMethod)
- *             self.startMethod = mpctx.get_start_method()
+ *             #self.startMethod = mpctx.get_start_method()
  *             Process = mpctx.Process             # <<<<<<<<<<<<<<
  *             Queue = mpctx.Queue
  *             active_children = mpctx.active_children
  */
-    __pyx_t_3 = __Pyx_PyObject_GetAttrStr(__pyx_v_mpctx, __pyx_n_s_Process); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 2355, __pyx_L1_error)
-    __Pyx_GOTREF(__pyx_t_3);
-    __pyx_v_Process = __pyx_t_3;
-    __pyx_t_3 = 0;
+    __pyx_t_2 = __Pyx_PyObject_GetAttrStr(__pyx_v_mpctx, __pyx_n_s_Process); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 2363, __pyx_L1_error)
+    __Pyx_GOTREF(__pyx_t_2);
+    __pyx_v_Process = __pyx_t_2;
+    __pyx_t_2 = 0;
 
-    /* "cSparseIntegerOutrankingDigraphs.pyx":2356
- *             self.startMethod = mpctx.get_start_method()
+    /* "cSparseIntegerOutrankingDigraphs.pyx":2364
+ *             #self.startMethod = mpctx.get_start_method()
  *             Process = mpctx.Process
  *             Queue = mpctx.Queue             # <<<<<<<<<<<<<<
  *             active_children = mpctx.active_children
- *             nbrCores = mpctx.cpu_count()
+ *             #nbrCores = mpctx.cpu_count()
  */
-    __pyx_t_3 = __Pyx_PyObject_GetAttrStr(__pyx_v_mpctx, __pyx_n_s_Queue); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 2356, __pyx_L1_error)
-    __Pyx_GOTREF(__pyx_t_3);
-    __pyx_v_Queue = __pyx_t_3;
-    __pyx_t_3 = 0;
+    __pyx_t_2 = __Pyx_PyObject_GetAttrStr(__pyx_v_mpctx, __pyx_n_s_Queue); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 2364, __pyx_L1_error)
+    __Pyx_GOTREF(__pyx_t_2);
+    __pyx_v_Queue = __pyx_t_2;
+    __pyx_t_2 = 0;
 
-    /* "cSparseIntegerOutrankingDigraphs.pyx":2357
+    /* "cSparseIntegerOutrankingDigraphs.pyx":2365
  *             Process = mpctx.Process
  *             Queue = mpctx.Queue
  *             active_children = mpctx.active_children             # <<<<<<<<<<<<<<
- *             nbrCores = mpctx.cpu_count()
- *             if nbrOfCPUs < nbrCores:
+ *             #nbrCores = mpctx.cpu_count()
+ *             if nbrOfCPUs is None:
  */
-    __pyx_t_3 = __Pyx_PyObject_GetAttrStr(__pyx_v_mpctx, __pyx_n_s_active_children); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 2357, __pyx_L1_error)
-    __Pyx_GOTREF(__pyx_t_3);
-    __pyx_v_active_children = __pyx_t_3;
-    __pyx_t_3 = 0;
+    __pyx_t_2 = __Pyx_PyObject_GetAttrStr(__pyx_v_mpctx, __pyx_n_s_active_children); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 2365, __pyx_L1_error)
+    __Pyx_GOTREF(__pyx_t_2);
+    __pyx_v_active_children = __pyx_t_2;
+    __pyx_t_2 = 0;
 
-    /* "cSparseIntegerOutrankingDigraphs.pyx":2358
- *             Queue = mpctx.Queue
+    /* "cSparseIntegerOutrankingDigraphs.pyx":2367
  *             active_children = mpctx.active_children
- *             nbrCores = mpctx.cpu_count()             # <<<<<<<<<<<<<<
- *             if nbrOfCPUs < nbrCores:
- *                 nbrCores = nbrOfCPUs
+ *             #nbrCores = mpctx.cpu_count()
+ *             if nbrOfCPUs is None:             # <<<<<<<<<<<<<<
+ *                 nbrOfCPUs = mpctx.cpu_count()
+ *             self.nbrThreads = nbrOfCPUs
  */
-    __pyx_t_6 = __Pyx_PyObject_GetAttrStr(__pyx_v_mpctx, __pyx_n_s_cpu_count); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 2358, __pyx_L1_error)
-    __Pyx_GOTREF(__pyx_t_6);
-    __pyx_t_10 = NULL;
-    __pyx_t_4 = 0;
-    #if CYTHON_UNPACK_METHODS
-    if (likely(PyMethod_Check(__pyx_t_6))) {
-      __pyx_t_10 = PyMethod_GET_SELF(__pyx_t_6);
-      if (likely(__pyx_t_10)) {
-        PyObject* function = PyMethod_GET_FUNCTION(__pyx_t_6);
-        __Pyx_INCREF(__pyx_t_10);
-        __Pyx_INCREF(function);
-        __Pyx_DECREF_SET(__pyx_t_6, function);
-        __pyx_t_4 = 1;
-      }
-    }
-    #endif
-    {
-      PyObject *__pyx_callargs[2] = {__pyx_t_10, NULL};
-      __pyx_t_3 = __Pyx_PyObject_FastCall(__pyx_t_6, __pyx_callargs+1-__pyx_t_4, 0+__pyx_t_4);
-      __Pyx_XDECREF(__pyx_t_10); __pyx_t_10 = 0;
-      if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 2358, __pyx_L1_error)
-      __Pyx_GOTREF(__pyx_t_3);
-      __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
-    }
-    __Pyx_XDECREF_SET(__pyx_v_nbrCores, __pyx_t_3);
-    __pyx_t_3 = 0;
+    __pyx_t_10 = (__pyx_v_nbrOfCPUs == Py_None);
+    if (__pyx_t_10) {
 
-    /* "cSparseIntegerOutrankingDigraphs.pyx":2359
- *             active_children = mpctx.active_children
- *             nbrCores = mpctx.cpu_count()
- *             if nbrOfCPUs < nbrCores:             # <<<<<<<<<<<<<<
- *                 nbrCores = nbrOfCPUs
- *             self.nbrThreads = nbrCores
- */
-    __pyx_t_3 = PyObject_RichCompare(__pyx_v_nbrOfCPUs, __pyx_v_nbrCores, Py_LT); __Pyx_XGOTREF(__pyx_t_3); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 2359, __pyx_L1_error)
-    __pyx_t_12 = __Pyx_PyObject_IsTrue(__pyx_t_3); if (unlikely((__pyx_t_12 < 0))) __PYX_ERR(0, 2359, __pyx_L1_error)
-    __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
-    if (__pyx_t_12) {
-
-      /* "cSparseIntegerOutrankingDigraphs.pyx":2360
- *             nbrCores = mpctx.cpu_count()
- *             if nbrOfCPUs < nbrCores:
- *                 nbrCores = nbrOfCPUs             # <<<<<<<<<<<<<<
- *             self.nbrThreads = nbrCores
+      /* "cSparseIntegerOutrankingDigraphs.pyx":2368
+ *             #nbrCores = mpctx.cpu_count()
+ *             if nbrOfCPUs is None:
+ *                 nbrOfCPUs = mpctx.cpu_count()             # <<<<<<<<<<<<<<
+ *             self.nbrThreads = nbrOfCPUs
  *             #from multiprocessing import Process, Queue,active_children, cpu_count
  */
-      __Pyx_INCREF(__pyx_v_nbrOfCPUs);
-      __Pyx_DECREF_SET(__pyx_v_nbrCores, __pyx_v_nbrOfCPUs);
+      __pyx_t_6 = __Pyx_PyObject_GetAttrStr(__pyx_v_mpctx, __pyx_n_s_cpu_count); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 2368, __pyx_L1_error)
+      __Pyx_GOTREF(__pyx_t_6);
+      __pyx_t_11 = NULL;
+      __pyx_t_4 = 0;
+      #if CYTHON_UNPACK_METHODS
+      if (likely(PyMethod_Check(__pyx_t_6))) {
+        __pyx_t_11 = PyMethod_GET_SELF(__pyx_t_6);
+        if (likely(__pyx_t_11)) {
+          PyObject* function = PyMethod_GET_FUNCTION(__pyx_t_6);
+          __Pyx_INCREF(__pyx_t_11);
+          __Pyx_INCREF(function);
+          __Pyx_DECREF_SET(__pyx_t_6, function);
+          __pyx_t_4 = 1;
+        }
+      }
+      #endif
+      {
+        PyObject *__pyx_callargs[2] = {__pyx_t_11, NULL};
+        __pyx_t_2 = __Pyx_PyObject_FastCall(__pyx_t_6, __pyx_callargs+1-__pyx_t_4, 0+__pyx_t_4);
+        __Pyx_XDECREF(__pyx_t_11); __pyx_t_11 = 0;
+        if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 2368, __pyx_L1_error)
+        __Pyx_GOTREF(__pyx_t_2);
+        __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
+      }
+      __Pyx_DECREF_SET(__pyx_v_nbrOfCPUs, __pyx_t_2);
+      __pyx_t_2 = 0;
 
-      /* "cSparseIntegerOutrankingDigraphs.pyx":2359
+      /* "cSparseIntegerOutrankingDigraphs.pyx":2367
  *             active_children = mpctx.active_children
- *             nbrCores = mpctx.cpu_count()
- *             if nbrOfCPUs < nbrCores:             # <<<<<<<<<<<<<<
- *                 nbrCores = nbrOfCPUs
- *             self.nbrThreads = nbrCores
+ *             #nbrCores = mpctx.cpu_count()
+ *             if nbrOfCPUs is None:             # <<<<<<<<<<<<<<
+ *                 nbrOfCPUs = mpctx.cpu_count()
+ *             self.nbrThreads = nbrOfCPUs
  */
     }
 
-    /* "cSparseIntegerOutrankingDigraphs.pyx":2361
- *             if nbrOfCPUs < nbrCores:
- *                 nbrCores = nbrOfCPUs
- *             self.nbrThreads = nbrCores             # <<<<<<<<<<<<<<
+    /* "cSparseIntegerOutrankingDigraphs.pyx":2369
+ *             if nbrOfCPUs is None:
+ *                 nbrOfCPUs = mpctx.cpu_count()
+ *             self.nbrThreads = nbrOfCPUs             # <<<<<<<<<<<<<<
  *             #from multiprocessing import Process, Queue,active_children, cpu_count
  *             if Comments:
  */
-    if (__Pyx_PyObject_SetAttrStr(__pyx_v_self, __pyx_n_s_nbrThreads, __pyx_v_nbrCores) < 0) __PYX_ERR(0, 2361, __pyx_L1_error)
+    if (__Pyx_PyObject_SetAttrStr(__pyx_v_self, __pyx_n_s_nbrThreads, __pyx_v_nbrOfCPUs) < 0) __PYX_ERR(0, 2369, __pyx_L1_error)
 
-    /* "cSparseIntegerOutrankingDigraphs.pyx":2363
- *             self.nbrThreads = nbrCores
+    /* "cSparseIntegerOutrankingDigraphs.pyx":2371
+ *             self.nbrThreads = nbrOfCPUs
  *             #from multiprocessing import Process, Queue,active_children, cpu_count
  *             if Comments:             # <<<<<<<<<<<<<<
  *                 print('Processing the %d components' % nc )
@@ -49269,33 +49322,33 @@ static PyObject *__pyx_pf_32cSparseIntegerOutrankingDigraphs_24cQuantilesRanking
  */
     if (__pyx_v_Comments) {
 
-      /* "cSparseIntegerOutrankingDigraphs.pyx":2364
+      /* "cSparseIntegerOutrankingDigraphs.pyx":2372
  *             #from multiprocessing import Process, Queue,active_children, cpu_count
  *             if Comments:
  *                 print('Processing the %d components' % nc )             # <<<<<<<<<<<<<<
  *                 print('Threading ...')
  *             #tdump = time()
  */
-      __pyx_t_3 = __Pyx_PyUnicode_FormatSafe(__pyx_kp_u_Processing_the_d_components, __pyx_v_nc); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 2364, __pyx_L1_error)
-      __Pyx_GOTREF(__pyx_t_3);
-      __pyx_t_6 = __Pyx_PyObject_CallOneArg(__pyx_builtin_print, __pyx_t_3); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 2364, __pyx_L1_error)
+      __pyx_t_2 = __Pyx_PyUnicode_FormatSafe(__pyx_kp_u_Processing_the_d_components, __pyx_v_nc); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 2372, __pyx_L1_error)
+      __Pyx_GOTREF(__pyx_t_2);
+      __pyx_t_6 = __Pyx_PyObject_CallOneArg(__pyx_builtin_print, __pyx_t_2); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 2372, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_6);
-      __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
+      __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
       __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
 
-      /* "cSparseIntegerOutrankingDigraphs.pyx":2365
+      /* "cSparseIntegerOutrankingDigraphs.pyx":2373
  *             if Comments:
  *                 print('Processing the %d components' % nc )
  *                 print('Threading ...')             # <<<<<<<<<<<<<<
  *             #tdump = time()
  *             from tempfile import TemporaryDirectory,mkdtemp
  */
-      __pyx_t_6 = __Pyx_PyObject_Call(__pyx_builtin_print, __pyx_tuple__42, NULL); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 2365, __pyx_L1_error)
+      __pyx_t_6 = __Pyx_PyObject_Call(__pyx_builtin_print, __pyx_tuple__42, NULL); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 2373, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_6);
       __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
 
-      /* "cSparseIntegerOutrankingDigraphs.pyx":2363
- *             self.nbrThreads = nbrCores
+      /* "cSparseIntegerOutrankingDigraphs.pyx":2371
+ *             self.nbrThreads = nbrOfCPUs
  *             #from multiprocessing import Process, Queue,active_children, cpu_count
  *             if Comments:             # <<<<<<<<<<<<<<
  *                 print('Processing the %d components' % nc )
@@ -49303,37 +49356,37 @@ static PyObject *__pyx_pf_32cSparseIntegerOutrankingDigraphs_24cQuantilesRanking
  */
     }
 
-    /* "cSparseIntegerOutrankingDigraphs.pyx":2367
+    /* "cSparseIntegerOutrankingDigraphs.pyx":2375
  *                 print('Threading ...')
  *             #tdump = time()
  *             from tempfile import TemporaryDirectory,mkdtemp             # <<<<<<<<<<<<<<
  *             maximalComponentSize = 0
  *             with TemporaryDirectory(dir=tempDir) as tempDirName:
  */
-    __pyx_t_6 = PyList_New(2); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 2367, __pyx_L1_error)
+    __pyx_t_6 = PyList_New(2); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 2375, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_6);
     __Pyx_INCREF(__pyx_n_s_TemporaryDirectory);
     __Pyx_GIVEREF(__pyx_n_s_TemporaryDirectory);
-    if (__Pyx_PyList_SET_ITEM(__pyx_t_6, 0, __pyx_n_s_TemporaryDirectory)) __PYX_ERR(0, 2367, __pyx_L1_error);
+    if (__Pyx_PyList_SET_ITEM(__pyx_t_6, 0, __pyx_n_s_TemporaryDirectory)) __PYX_ERR(0, 2375, __pyx_L1_error);
     __Pyx_INCREF(__pyx_n_s_mkdtemp);
     __Pyx_GIVEREF(__pyx_n_s_mkdtemp);
-    if (__Pyx_PyList_SET_ITEM(__pyx_t_6, 1, __pyx_n_s_mkdtemp)) __PYX_ERR(0, 2367, __pyx_L1_error);
-    __pyx_t_3 = __Pyx_Import(__pyx_n_s_tempfile, __pyx_t_6, 0); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 2367, __pyx_L1_error)
-    __Pyx_GOTREF(__pyx_t_3);
+    if (__Pyx_PyList_SET_ITEM(__pyx_t_6, 1, __pyx_n_s_mkdtemp)) __PYX_ERR(0, 2375, __pyx_L1_error);
+    __pyx_t_2 = __Pyx_Import(__pyx_n_s_tempfile, __pyx_t_6, 0); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 2375, __pyx_L1_error)
+    __Pyx_GOTREF(__pyx_t_2);
     __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
-    __pyx_t_6 = __Pyx_ImportFrom(__pyx_t_3, __pyx_n_s_TemporaryDirectory); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 2367, __pyx_L1_error)
+    __pyx_t_6 = __Pyx_ImportFrom(__pyx_t_2, __pyx_n_s_TemporaryDirectory); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 2375, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_6);
     __Pyx_INCREF(__pyx_t_6);
     __pyx_v_TemporaryDirectory = __pyx_t_6;
     __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
-    __pyx_t_6 = __Pyx_ImportFrom(__pyx_t_3, __pyx_n_s_mkdtemp); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 2367, __pyx_L1_error)
+    __pyx_t_6 = __Pyx_ImportFrom(__pyx_t_2, __pyx_n_s_mkdtemp); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 2375, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_6);
     __Pyx_INCREF(__pyx_t_6);
     __pyx_v_mkdtemp = __pyx_t_6;
     __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
-    __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
+    __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
 
-    /* "cSparseIntegerOutrankingDigraphs.pyx":2368
+    /* "cSparseIntegerOutrankingDigraphs.pyx":2376
  *             #tdump = time()
  *             from tempfile import TemporaryDirectory,mkdtemp
  *             maximalComponentSize = 0             # <<<<<<<<<<<<<<
@@ -49342,159 +49395,159 @@ static PyObject *__pyx_pf_32cSparseIntegerOutrankingDigraphs_24cQuantilesRanking
  */
     __pyx_v_maximalComponentSize = 0;
 
-    /* "cSparseIntegerOutrankingDigraphs.pyx":2369
+    /* "cSparseIntegerOutrankingDigraphs.pyx":2377
  *             from tempfile import TemporaryDirectory,mkdtemp
  *             maximalComponentSize = 0
  *             with TemporaryDirectory(dir=tempDir) as tempDirName:             # <<<<<<<<<<<<<<
  *                 ## tasks queue and workers launching
- *                 NUMBER_OF_WORKERS = nbrCores
+ *                 NUMBER_OF_WORKERS = nbrOfCPUs
  */
     /*with:*/ {
-      __pyx_t_3 = __Pyx_PyDict_NewPresized(1); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 2369, __pyx_L1_error)
-      __Pyx_GOTREF(__pyx_t_3);
-      if (PyDict_SetItem(__pyx_t_3, __pyx_n_s_dir, __pyx_v_tempDir) < 0) __PYX_ERR(0, 2369, __pyx_L1_error)
-      __pyx_t_6 = __Pyx_PyObject_Call(__pyx_v_TemporaryDirectory, __pyx_empty_tuple, __pyx_t_3); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 2369, __pyx_L1_error)
+      __pyx_t_2 = __Pyx_PyDict_NewPresized(1); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 2377, __pyx_L1_error)
+      __Pyx_GOTREF(__pyx_t_2);
+      if (PyDict_SetItem(__pyx_t_2, __pyx_n_s_dir, __pyx_v_tempDir) < 0) __PYX_ERR(0, 2377, __pyx_L1_error)
+      __pyx_t_6 = __Pyx_PyObject_Call(__pyx_v_TemporaryDirectory, __pyx_empty_tuple, __pyx_t_2); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 2377, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_6);
-      __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
-      __pyx_t_17 = __Pyx_PyObject_LookupSpecial(__pyx_t_6, __pyx_n_s_exit); if (unlikely(!__pyx_t_17)) __PYX_ERR(0, 2369, __pyx_L1_error)
-      __Pyx_GOTREF(__pyx_t_17);
-      __pyx_t_10 = __Pyx_PyObject_LookupSpecial(__pyx_t_6, __pyx_n_s_enter); if (unlikely(!__pyx_t_10)) __PYX_ERR(0, 2369, __pyx_L27_error)
-      __Pyx_GOTREF(__pyx_t_10);
-      __pyx_t_2 = NULL;
+      __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
+      __pyx_t_16 = __Pyx_PyObject_LookupSpecial(__pyx_t_6, __pyx_n_s_exit); if (unlikely(!__pyx_t_16)) __PYX_ERR(0, 2377, __pyx_L1_error)
+      __Pyx_GOTREF(__pyx_t_16);
+      __pyx_t_11 = __Pyx_PyObject_LookupSpecial(__pyx_t_6, __pyx_n_s_enter); if (unlikely(!__pyx_t_11)) __PYX_ERR(0, 2377, __pyx_L29_error)
+      __Pyx_GOTREF(__pyx_t_11);
+      __pyx_t_3 = NULL;
       __pyx_t_4 = 0;
       #if CYTHON_UNPACK_METHODS
-      if (likely(PyMethod_Check(__pyx_t_10))) {
-        __pyx_t_2 = PyMethod_GET_SELF(__pyx_t_10);
-        if (likely(__pyx_t_2)) {
-          PyObject* function = PyMethod_GET_FUNCTION(__pyx_t_10);
-          __Pyx_INCREF(__pyx_t_2);
+      if (likely(PyMethod_Check(__pyx_t_11))) {
+        __pyx_t_3 = PyMethod_GET_SELF(__pyx_t_11);
+        if (likely(__pyx_t_3)) {
+          PyObject* function = PyMethod_GET_FUNCTION(__pyx_t_11);
+          __Pyx_INCREF(__pyx_t_3);
           __Pyx_INCREF(function);
-          __Pyx_DECREF_SET(__pyx_t_10, function);
+          __Pyx_DECREF_SET(__pyx_t_11, function);
           __pyx_t_4 = 1;
         }
       }
       #endif
       {
-        PyObject *__pyx_callargs[2] = {__pyx_t_2, NULL};
-        __pyx_t_3 = __Pyx_PyObject_FastCall(__pyx_t_10, __pyx_callargs+1-__pyx_t_4, 0+__pyx_t_4);
-        __Pyx_XDECREF(__pyx_t_2); __pyx_t_2 = 0;
-        if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 2369, __pyx_L27_error)
-        __Pyx_GOTREF(__pyx_t_3);
-        __Pyx_DECREF(__pyx_t_10); __pyx_t_10 = 0;
+        PyObject *__pyx_callargs[2] = {__pyx_t_3, NULL};
+        __pyx_t_2 = __Pyx_PyObject_FastCall(__pyx_t_11, __pyx_callargs+1-__pyx_t_4, 0+__pyx_t_4);
+        __Pyx_XDECREF(__pyx_t_3); __pyx_t_3 = 0;
+        if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 2377, __pyx_L29_error)
+        __Pyx_GOTREF(__pyx_t_2);
+        __Pyx_DECREF(__pyx_t_11); __pyx_t_11 = 0;
       }
-      __pyx_t_10 = __pyx_t_3;
-      __pyx_t_3 = 0;
+      __pyx_t_11 = __pyx_t_2;
+      __pyx_t_2 = 0;
       __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
       /*try:*/ {
         {
           __Pyx_PyThreadState_declare
           __Pyx_PyThreadState_assign
-          __Pyx_ExceptionSave(&__pyx_t_18, &__pyx_t_19, &__pyx_t_20);
+          __Pyx_ExceptionSave(&__pyx_t_17, &__pyx_t_18, &__pyx_t_19);
+          __Pyx_XGOTREF(__pyx_t_17);
           __Pyx_XGOTREF(__pyx_t_18);
           __Pyx_XGOTREF(__pyx_t_19);
-          __Pyx_XGOTREF(__pyx_t_20);
           /*try:*/ {
-            __pyx_v_tempDirName = __pyx_t_10;
-            __pyx_t_10 = 0;
+            __pyx_v_tempDirName = __pyx_t_11;
+            __pyx_t_11 = 0;
 
-            /* "cSparseIntegerOutrankingDigraphs.pyx":2371
+            /* "cSparseIntegerOutrankingDigraphs.pyx":2379
  *             with TemporaryDirectory(dir=tempDir) as tempDirName:
  *                 ## tasks queue and workers launching
- *                 NUMBER_OF_WORKERS = nbrCores             # <<<<<<<<<<<<<<
+ *                 NUMBER_OF_WORKERS = nbrOfCPUs             # <<<<<<<<<<<<<<
  *                 tasksIndex = [(i,len(decomposition[i][1])) for i in range(nc)]
  *                 tasksIndex.sort(key=lambda pos: pos[1],reverse=True)
  */
-            __Pyx_INCREF(__pyx_v_nbrCores);
-            __pyx_v_NUMBER_OF_WORKERS = __pyx_v_nbrCores;
+            __Pyx_INCREF(__pyx_v_nbrOfCPUs);
+            __pyx_v_NUMBER_OF_WORKERS = __pyx_v_nbrOfCPUs;
 
-            /* "cSparseIntegerOutrankingDigraphs.pyx":2372
+            /* "cSparseIntegerOutrankingDigraphs.pyx":2380
  *                 ## tasks queue and workers launching
- *                 NUMBER_OF_WORKERS = nbrCores
+ *                 NUMBER_OF_WORKERS = nbrOfCPUs
  *                 tasksIndex = [(i,len(decomposition[i][1])) for i in range(nc)]             # <<<<<<<<<<<<<<
  *                 tasksIndex.sort(key=lambda pos: pos[1],reverse=True)
  *                 maximalComponentSize += tasksIndex[0][1]
  */
             { /* enter inner scope */
-              __pyx_t_10 = PyList_New(0); if (unlikely(!__pyx_t_10)) __PYX_ERR(0, 2372, __pyx_L31_error)
-              __Pyx_GOTREF(__pyx_t_10);
-              __pyx_t_13 = __Pyx_PyInt_As_long(__pyx_v_nc); if (unlikely((__pyx_t_13 == (long)-1) && PyErr_Occurred())) __PYX_ERR(0, 2372, __pyx_L31_error)
-              __pyx_t_14 = __pyx_t_13;
-              for (__pyx_t_4 = 0; __pyx_t_4 < __pyx_t_14; __pyx_t_4+=1) {
+              __pyx_t_11 = PyList_New(0); if (unlikely(!__pyx_t_11)) __PYX_ERR(0, 2380, __pyx_L33_error)
+              __Pyx_GOTREF(__pyx_t_11);
+              __pyx_t_12 = __Pyx_PyInt_As_long(__pyx_v_nc); if (unlikely((__pyx_t_12 == (long)-1) && PyErr_Occurred())) __PYX_ERR(0, 2380, __pyx_L33_error)
+              __pyx_t_13 = __pyx_t_12;
+              for (__pyx_t_4 = 0; __pyx_t_4 < __pyx_t_13; __pyx_t_4+=1) {
                 __pyx_9genexpr33__pyx_v_i = __pyx_t_4;
-                __pyx_t_6 = __Pyx_PyInt_From_int(__pyx_9genexpr33__pyx_v_i); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 2372, __pyx_L31_error)
+                __pyx_t_6 = __Pyx_PyInt_From_int(__pyx_9genexpr33__pyx_v_i); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 2380, __pyx_L33_error)
                 __Pyx_GOTREF(__pyx_t_6);
-                __Pyx_GetModuleGlobalName(__pyx_t_3, __pyx_n_s_decomposition); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 2372, __pyx_L31_error)
-                __Pyx_GOTREF(__pyx_t_3);
-                __pyx_t_2 = __Pyx_GetItemInt(__pyx_t_3, __pyx_9genexpr33__pyx_v_i, int, 1, __Pyx_PyInt_From_int, 0, 1, 1); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 2372, __pyx_L31_error)
+                __Pyx_GetModuleGlobalName(__pyx_t_2, __pyx_n_s_decomposition); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 2380, __pyx_L33_error)
                 __Pyx_GOTREF(__pyx_t_2);
-                __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
-                __pyx_t_3 = __Pyx_GetItemInt(__pyx_t_2, 1, long, 1, __Pyx_PyInt_From_long, 0, 0, 1); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 2372, __pyx_L31_error)
+                __pyx_t_3 = __Pyx_GetItemInt(__pyx_t_2, __pyx_9genexpr33__pyx_v_i, int, 1, __Pyx_PyInt_From_int, 0, 1, 1); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 2380, __pyx_L33_error)
                 __Pyx_GOTREF(__pyx_t_3);
                 __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
-                __pyx_t_7 = PyObject_Length(__pyx_t_3); if (unlikely(__pyx_t_7 == ((Py_ssize_t)-1))) __PYX_ERR(0, 2372, __pyx_L31_error)
-                __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
-                __pyx_t_3 = PyInt_FromSsize_t(__pyx_t_7); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 2372, __pyx_L31_error)
-                __Pyx_GOTREF(__pyx_t_3);
-                __pyx_t_2 = PyTuple_New(2); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 2372, __pyx_L31_error)
+                __pyx_t_2 = __Pyx_GetItemInt(__pyx_t_3, 1, long, 1, __Pyx_PyInt_From_long, 0, 0, 1); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 2380, __pyx_L33_error)
                 __Pyx_GOTREF(__pyx_t_2);
+                __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
+                __pyx_t_7 = PyObject_Length(__pyx_t_2); if (unlikely(__pyx_t_7 == ((Py_ssize_t)-1))) __PYX_ERR(0, 2380, __pyx_L33_error)
+                __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
+                __pyx_t_2 = PyInt_FromSsize_t(__pyx_t_7); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 2380, __pyx_L33_error)
+                __Pyx_GOTREF(__pyx_t_2);
+                __pyx_t_3 = PyTuple_New(2); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 2380, __pyx_L33_error)
+                __Pyx_GOTREF(__pyx_t_3);
                 __Pyx_GIVEREF(__pyx_t_6);
-                if (__Pyx_PyTuple_SET_ITEM(__pyx_t_2, 0, __pyx_t_6)) __PYX_ERR(0, 2372, __pyx_L31_error);
-                __Pyx_GIVEREF(__pyx_t_3);
-                if (__Pyx_PyTuple_SET_ITEM(__pyx_t_2, 1, __pyx_t_3)) __PYX_ERR(0, 2372, __pyx_L31_error);
+                if (__Pyx_PyTuple_SET_ITEM(__pyx_t_3, 0, __pyx_t_6)) __PYX_ERR(0, 2380, __pyx_L33_error);
+                __Pyx_GIVEREF(__pyx_t_2);
+                if (__Pyx_PyTuple_SET_ITEM(__pyx_t_3, 1, __pyx_t_2)) __PYX_ERR(0, 2380, __pyx_L33_error);
                 __pyx_t_6 = 0;
-                __pyx_t_3 = 0;
-                if (unlikely(__Pyx_ListComp_Append(__pyx_t_10, (PyObject*)__pyx_t_2))) __PYX_ERR(0, 2372, __pyx_L31_error)
-                __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
+                __pyx_t_2 = 0;
+                if (unlikely(__Pyx_ListComp_Append(__pyx_t_11, (PyObject*)__pyx_t_3))) __PYX_ERR(0, 2380, __pyx_L33_error)
+                __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
               }
             } /* exit inner scope */
-            __pyx_v_tasksIndex = ((PyObject*)__pyx_t_10);
-            __pyx_t_10 = 0;
+            __pyx_v_tasksIndex = ((PyObject*)__pyx_t_11);
+            __pyx_t_11 = 0;
 
-            /* "cSparseIntegerOutrankingDigraphs.pyx":2373
- *                 NUMBER_OF_WORKERS = nbrCores
+            /* "cSparseIntegerOutrankingDigraphs.pyx":2381
+ *                 NUMBER_OF_WORKERS = nbrOfCPUs
  *                 tasksIndex = [(i,len(decomposition[i][1])) for i in range(nc)]
  *                 tasksIndex.sort(key=lambda pos: pos[1],reverse=True)             # <<<<<<<<<<<<<<
  *                 maximalComponentSize += tasksIndex[0][1]
  *                 if Comments:
  */
-            __pyx_t_10 = __Pyx_PyObject_GetAttrStr(__pyx_v_tasksIndex, __pyx_n_s_sort); if (unlikely(!__pyx_t_10)) __PYX_ERR(0, 2373, __pyx_L31_error)
-            __Pyx_GOTREF(__pyx_t_10);
-            __pyx_t_2 = __Pyx_PyDict_NewPresized(2); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 2373, __pyx_L31_error)
+            __pyx_t_11 = __Pyx_PyObject_GetAttrStr(__pyx_v_tasksIndex, __pyx_n_s_sort); if (unlikely(!__pyx_t_11)) __PYX_ERR(0, 2381, __pyx_L33_error)
+            __Pyx_GOTREF(__pyx_t_11);
+            __pyx_t_3 = __Pyx_PyDict_NewPresized(2); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 2381, __pyx_L33_error)
+            __Pyx_GOTREF(__pyx_t_3);
+            __pyx_t_2 = __Pyx_CyFunction_New(&__pyx_mdef_32cSparseIntegerOutrankingDigraphs_24cQuantilesRankingDigraph_8__init___lambda2, 0, __pyx_n_s_cQuantilesRankingDigraph___init, NULL, __pyx_n_s_cSparseIntegerOutrankingDigraphs, __pyx_d, NULL); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 2381, __pyx_L33_error)
             __Pyx_GOTREF(__pyx_t_2);
-            __pyx_t_3 = __Pyx_CyFunction_New(&__pyx_mdef_32cSparseIntegerOutrankingDigraphs_24cQuantilesRankingDigraph_8__init___lambda2, 0, __pyx_n_s_cQuantilesRankingDigraph___init, NULL, __pyx_n_s_cSparseIntegerOutrankingDigraphs, __pyx_d, NULL); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 2373, __pyx_L31_error)
-            __Pyx_GOTREF(__pyx_t_3);
-            if (PyDict_SetItem(__pyx_t_2, __pyx_n_s_key, __pyx_t_3) < 0) __PYX_ERR(0, 2373, __pyx_L31_error)
-            __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
-            if (PyDict_SetItem(__pyx_t_2, __pyx_n_s_reverse, Py_True) < 0) __PYX_ERR(0, 2373, __pyx_L31_error)
-            __pyx_t_3 = __Pyx_PyObject_Call(__pyx_t_10, __pyx_empty_tuple, __pyx_t_2); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 2373, __pyx_L31_error)
-            __Pyx_GOTREF(__pyx_t_3);
-            __Pyx_DECREF(__pyx_t_10); __pyx_t_10 = 0;
+            if (PyDict_SetItem(__pyx_t_3, __pyx_n_s_key, __pyx_t_2) < 0) __PYX_ERR(0, 2381, __pyx_L33_error)
             __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
+            if (PyDict_SetItem(__pyx_t_3, __pyx_n_s_reverse, Py_True) < 0) __PYX_ERR(0, 2381, __pyx_L33_error)
+            __pyx_t_2 = __Pyx_PyObject_Call(__pyx_t_11, __pyx_empty_tuple, __pyx_t_3); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 2381, __pyx_L33_error)
+            __Pyx_GOTREF(__pyx_t_2);
+            __Pyx_DECREF(__pyx_t_11); __pyx_t_11 = 0;
             __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
+            __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
 
-            /* "cSparseIntegerOutrankingDigraphs.pyx":2374
+            /* "cSparseIntegerOutrankingDigraphs.pyx":2382
  *                 tasksIndex = [(i,len(decomposition[i][1])) for i in range(nc)]
  *                 tasksIndex.sort(key=lambda pos: pos[1],reverse=True)
  *                 maximalComponentSize += tasksIndex[0][1]             # <<<<<<<<<<<<<<
  *                 if Comments:
  *                     print('Maximal component size: %d' % maximalComponentSize)
  */
-            __pyx_t_3 = __Pyx_PyInt_From_int(__pyx_v_maximalComponentSize); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 2374, __pyx_L31_error)
+            __pyx_t_2 = __Pyx_PyInt_From_int(__pyx_v_maximalComponentSize); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 2382, __pyx_L33_error)
+            __Pyx_GOTREF(__pyx_t_2);
+            __pyx_t_3 = __Pyx_GetItemInt_List(__pyx_v_tasksIndex, 0, long, 1, __Pyx_PyInt_From_long, 1, 0, 1); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 2382, __pyx_L33_error)
             __Pyx_GOTREF(__pyx_t_3);
-            __pyx_t_2 = __Pyx_GetItemInt_List(__pyx_v_tasksIndex, 0, long, 1, __Pyx_PyInt_From_long, 1, 0, 1); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 2374, __pyx_L31_error)
-            __Pyx_GOTREF(__pyx_t_2);
-            __pyx_t_10 = __Pyx_GetItemInt(__pyx_t_2, 1, long, 1, __Pyx_PyInt_From_long, 0, 0, 1); if (unlikely(!__pyx_t_10)) __PYX_ERR(0, 2374, __pyx_L31_error)
-            __Pyx_GOTREF(__pyx_t_10);
-            __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
-            __pyx_t_2 = PyNumber_InPlaceAdd(__pyx_t_3, __pyx_t_10); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 2374, __pyx_L31_error)
-            __Pyx_GOTREF(__pyx_t_2);
+            __pyx_t_11 = __Pyx_GetItemInt(__pyx_t_3, 1, long, 1, __Pyx_PyInt_From_long, 0, 0, 1); if (unlikely(!__pyx_t_11)) __PYX_ERR(0, 2382, __pyx_L33_error)
+            __Pyx_GOTREF(__pyx_t_11);
             __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
-            __Pyx_DECREF(__pyx_t_10); __pyx_t_10 = 0;
-            __pyx_t_4 = __Pyx_PyInt_As_int(__pyx_t_2); if (unlikely((__pyx_t_4 == (int)-1) && PyErr_Occurred())) __PYX_ERR(0, 2374, __pyx_L31_error)
+            __pyx_t_3 = PyNumber_InPlaceAdd(__pyx_t_2, __pyx_t_11); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 2382, __pyx_L33_error)
+            __Pyx_GOTREF(__pyx_t_3);
             __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
+            __Pyx_DECREF(__pyx_t_11); __pyx_t_11 = 0;
+            __pyx_t_4 = __Pyx_PyInt_As_int(__pyx_t_3); if (unlikely((__pyx_t_4 == (int)-1) && PyErr_Occurred())) __PYX_ERR(0, 2382, __pyx_L33_error)
+            __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
             __pyx_v_maximalComponentSize = __pyx_t_4;
 
-            /* "cSparseIntegerOutrankingDigraphs.pyx":2375
+            /* "cSparseIntegerOutrankingDigraphs.pyx":2383
  *                 tasksIndex.sort(key=lambda pos: pos[1],reverse=True)
  *                 maximalComponentSize += tasksIndex[0][1]
  *                 if Comments:             # <<<<<<<<<<<<<<
@@ -49503,24 +49556,24 @@ static PyObject *__pyx_pf_32cSparseIntegerOutrankingDigraphs_24cQuantilesRanking
  */
             if (__pyx_v_Comments) {
 
-              /* "cSparseIntegerOutrankingDigraphs.pyx":2376
+              /* "cSparseIntegerOutrankingDigraphs.pyx":2384
  *                 maximalComponentSize += tasksIndex[0][1]
  *                 if Comments:
  *                     print('Maximal component size: %d' % maximalComponentSize)             # <<<<<<<<<<<<<<
  *                 TASKS = [(Comments,(pos[0],nc,tempDirName,perfTab,decomposition)) for pos in tasksIndex]
  *                 task_queue = Queue()
  */
-              __pyx_t_2 = __Pyx_PyInt_From_int(__pyx_v_maximalComponentSize); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 2376, __pyx_L31_error)
-              __Pyx_GOTREF(__pyx_t_2);
-              __pyx_t_10 = PyUnicode_Format(__pyx_kp_u_Maximal_component_size_d, __pyx_t_2); if (unlikely(!__pyx_t_10)) __PYX_ERR(0, 2376, __pyx_L31_error)
-              __Pyx_GOTREF(__pyx_t_10);
-              __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
-              __pyx_t_2 = __Pyx_PyObject_CallOneArg(__pyx_builtin_print, __pyx_t_10); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 2376, __pyx_L31_error)
-              __Pyx_GOTREF(__pyx_t_2);
-              __Pyx_DECREF(__pyx_t_10); __pyx_t_10 = 0;
-              __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
+              __pyx_t_3 = __Pyx_PyInt_From_int(__pyx_v_maximalComponentSize); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 2384, __pyx_L33_error)
+              __Pyx_GOTREF(__pyx_t_3);
+              __pyx_t_11 = PyUnicode_Format(__pyx_kp_u_Maximal_component_size_d, __pyx_t_3); if (unlikely(!__pyx_t_11)) __PYX_ERR(0, 2384, __pyx_L33_error)
+              __Pyx_GOTREF(__pyx_t_11);
+              __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
+              __pyx_t_3 = __Pyx_PyObject_CallOneArg(__pyx_builtin_print, __pyx_t_11); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 2384, __pyx_L33_error)
+              __Pyx_GOTREF(__pyx_t_3);
+              __Pyx_DECREF(__pyx_t_11); __pyx_t_11 = 0;
+              __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
 
-              /* "cSparseIntegerOutrankingDigraphs.pyx":2375
+              /* "cSparseIntegerOutrankingDigraphs.pyx":2383
  *                 tasksIndex.sort(key=lambda pos: pos[1],reverse=True)
  *                 maximalComponentSize += tasksIndex[0][1]
  *                 if Comments:             # <<<<<<<<<<<<<<
@@ -49529,7 +49582,7 @@ static PyObject *__pyx_pf_32cSparseIntegerOutrankingDigraphs_24cQuantilesRanking
  */
             }
 
-            /* "cSparseIntegerOutrankingDigraphs.pyx":2377
+            /* "cSparseIntegerOutrankingDigraphs.pyx":2385
  *                 if Comments:
  *                     print('Maximal component size: %d' % maximalComponentSize)
  *                 TASKS = [(Comments,(pos[0],nc,tempDirName,perfTab,decomposition)) for pos in tasksIndex]             # <<<<<<<<<<<<<<
@@ -49537,74 +49590,74 @@ static PyObject *__pyx_pf_32cSparseIntegerOutrankingDigraphs_24cQuantilesRanking
  *                 for task in TASKS:
  */
             { /* enter inner scope */
-              __pyx_t_2 = PyList_New(0); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 2377, __pyx_L42_error)
-              __Pyx_GOTREF(__pyx_t_2);
-              __pyx_t_10 = __pyx_v_tasksIndex; __Pyx_INCREF(__pyx_t_10);
+              __pyx_t_3 = PyList_New(0); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 2385, __pyx_L44_error)
+              __Pyx_GOTREF(__pyx_t_3);
+              __pyx_t_11 = __pyx_v_tasksIndex; __Pyx_INCREF(__pyx_t_11);
               __pyx_t_7 = 0;
               for (;;) {
                 {
-                  Py_ssize_t __pyx_temp = __Pyx_PyList_GET_SIZE(__pyx_t_10);
+                  Py_ssize_t __pyx_temp = __Pyx_PyList_GET_SIZE(__pyx_t_11);
                   #if !CYTHON_ASSUME_SAFE_MACROS
-                  if (unlikely((__pyx_temp < 0))) __PYX_ERR(0, 2377, __pyx_L42_error)
+                  if (unlikely((__pyx_temp < 0))) __PYX_ERR(0, 2385, __pyx_L44_error)
                   #endif
                   if (__pyx_t_7 >= __pyx_temp) break;
                 }
                 #if CYTHON_ASSUME_SAFE_MACROS && !CYTHON_AVOID_BORROWED_REFS
-                __pyx_t_3 = PyList_GET_ITEM(__pyx_t_10, __pyx_t_7); __Pyx_INCREF(__pyx_t_3); __pyx_t_7++; if (unlikely((0 < 0))) __PYX_ERR(0, 2377, __pyx_L42_error)
+                __pyx_t_2 = PyList_GET_ITEM(__pyx_t_11, __pyx_t_7); __Pyx_INCREF(__pyx_t_2); __pyx_t_7++; if (unlikely((0 < 0))) __PYX_ERR(0, 2385, __pyx_L44_error)
                 #else
-                __pyx_t_3 = __Pyx_PySequence_ITEM(__pyx_t_10, __pyx_t_7); __pyx_t_7++; if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 2377, __pyx_L42_error)
-                __Pyx_GOTREF(__pyx_t_3);
+                __pyx_t_2 = __Pyx_PySequence_ITEM(__pyx_t_11, __pyx_t_7); __pyx_t_7++; if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 2385, __pyx_L44_error)
+                __Pyx_GOTREF(__pyx_t_2);
                 #endif
-                __Pyx_XDECREF_SET(__pyx_9genexpr34__pyx_v_pos, __pyx_t_3);
-                __pyx_t_3 = 0;
-                __pyx_t_3 = __Pyx_PyBool_FromLong(__pyx_v_Comments); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 2377, __pyx_L42_error)
-                __Pyx_GOTREF(__pyx_t_3);
-                __pyx_t_6 = __Pyx_GetItemInt(__pyx_9genexpr34__pyx_v_pos, 0, long, 1, __Pyx_PyInt_From_long, 0, 0, 1); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 2377, __pyx_L42_error)
+                __Pyx_XDECREF_SET(__pyx_9genexpr34__pyx_v_pos, __pyx_t_2);
+                __pyx_t_2 = 0;
+                __pyx_t_2 = __Pyx_PyBool_FromLong(__pyx_v_Comments); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 2385, __pyx_L44_error)
+                __Pyx_GOTREF(__pyx_t_2);
+                __pyx_t_6 = __Pyx_GetItemInt(__pyx_9genexpr34__pyx_v_pos, 0, long, 1, __Pyx_PyInt_From_long, 0, 0, 1); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 2385, __pyx_L44_error)
                 __Pyx_GOTREF(__pyx_t_6);
-                __Pyx_GetModuleGlobalName(__pyx_t_1, __pyx_n_s_perfTab); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 2377, __pyx_L42_error)
+                __Pyx_GetModuleGlobalName(__pyx_t_1, __pyx_n_s_perfTab); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 2385, __pyx_L44_error)
                 __Pyx_GOTREF(__pyx_t_1);
-                __Pyx_GetModuleGlobalName(__pyx_t_21, __pyx_n_s_decomposition); if (unlikely(!__pyx_t_21)) __PYX_ERR(0, 2377, __pyx_L42_error)
+                __Pyx_GetModuleGlobalName(__pyx_t_20, __pyx_n_s_decomposition); if (unlikely(!__pyx_t_20)) __PYX_ERR(0, 2385, __pyx_L44_error)
+                __Pyx_GOTREF(__pyx_t_20);
+                __pyx_t_21 = PyTuple_New(5); if (unlikely(!__pyx_t_21)) __PYX_ERR(0, 2385, __pyx_L44_error)
                 __Pyx_GOTREF(__pyx_t_21);
-                __pyx_t_22 = PyTuple_New(5); if (unlikely(!__pyx_t_22)) __PYX_ERR(0, 2377, __pyx_L42_error)
-                __Pyx_GOTREF(__pyx_t_22);
                 __Pyx_GIVEREF(__pyx_t_6);
-                if (__Pyx_PyTuple_SET_ITEM(__pyx_t_22, 0, __pyx_t_6)) __PYX_ERR(0, 2377, __pyx_L42_error);
+                if (__Pyx_PyTuple_SET_ITEM(__pyx_t_21, 0, __pyx_t_6)) __PYX_ERR(0, 2385, __pyx_L44_error);
                 __Pyx_INCREF(__pyx_v_nc);
                 __Pyx_GIVEREF(__pyx_v_nc);
-                if (__Pyx_PyTuple_SET_ITEM(__pyx_t_22, 1, __pyx_v_nc)) __PYX_ERR(0, 2377, __pyx_L42_error);
+                if (__Pyx_PyTuple_SET_ITEM(__pyx_t_21, 1, __pyx_v_nc)) __PYX_ERR(0, 2385, __pyx_L44_error);
                 __Pyx_INCREF(__pyx_v_tempDirName);
                 __Pyx_GIVEREF(__pyx_v_tempDirName);
-                if (__Pyx_PyTuple_SET_ITEM(__pyx_t_22, 2, __pyx_v_tempDirName)) __PYX_ERR(0, 2377, __pyx_L42_error);
+                if (__Pyx_PyTuple_SET_ITEM(__pyx_t_21, 2, __pyx_v_tempDirName)) __PYX_ERR(0, 2385, __pyx_L44_error);
                 __Pyx_GIVEREF(__pyx_t_1);
-                if (__Pyx_PyTuple_SET_ITEM(__pyx_t_22, 3, __pyx_t_1)) __PYX_ERR(0, 2377, __pyx_L42_error);
-                __Pyx_GIVEREF(__pyx_t_21);
-                if (__Pyx_PyTuple_SET_ITEM(__pyx_t_22, 4, __pyx_t_21)) __PYX_ERR(0, 2377, __pyx_L42_error);
+                if (__Pyx_PyTuple_SET_ITEM(__pyx_t_21, 3, __pyx_t_1)) __PYX_ERR(0, 2385, __pyx_L44_error);
+                __Pyx_GIVEREF(__pyx_t_20);
+                if (__Pyx_PyTuple_SET_ITEM(__pyx_t_21, 4, __pyx_t_20)) __PYX_ERR(0, 2385, __pyx_L44_error);
                 __pyx_t_6 = 0;
                 __pyx_t_1 = 0;
+                __pyx_t_20 = 0;
+                __pyx_t_20 = PyTuple_New(2); if (unlikely(!__pyx_t_20)) __PYX_ERR(0, 2385, __pyx_L44_error)
+                __Pyx_GOTREF(__pyx_t_20);
+                __Pyx_GIVEREF(__pyx_t_2);
+                if (__Pyx_PyTuple_SET_ITEM(__pyx_t_20, 0, __pyx_t_2)) __PYX_ERR(0, 2385, __pyx_L44_error);
+                __Pyx_GIVEREF(__pyx_t_21);
+                if (__Pyx_PyTuple_SET_ITEM(__pyx_t_20, 1, __pyx_t_21)) __PYX_ERR(0, 2385, __pyx_L44_error);
+                __pyx_t_2 = 0;
                 __pyx_t_21 = 0;
-                __pyx_t_21 = PyTuple_New(2); if (unlikely(!__pyx_t_21)) __PYX_ERR(0, 2377, __pyx_L42_error)
-                __Pyx_GOTREF(__pyx_t_21);
-                __Pyx_GIVEREF(__pyx_t_3);
-                if (__Pyx_PyTuple_SET_ITEM(__pyx_t_21, 0, __pyx_t_3)) __PYX_ERR(0, 2377, __pyx_L42_error);
-                __Pyx_GIVEREF(__pyx_t_22);
-                if (__Pyx_PyTuple_SET_ITEM(__pyx_t_21, 1, __pyx_t_22)) __PYX_ERR(0, 2377, __pyx_L42_error);
-                __pyx_t_3 = 0;
-                __pyx_t_22 = 0;
-                if (unlikely(__Pyx_ListComp_Append(__pyx_t_2, (PyObject*)__pyx_t_21))) __PYX_ERR(0, 2377, __pyx_L42_error)
-                __Pyx_DECREF(__pyx_t_21); __pyx_t_21 = 0;
+                if (unlikely(__Pyx_ListComp_Append(__pyx_t_3, (PyObject*)__pyx_t_20))) __PYX_ERR(0, 2385, __pyx_L44_error)
+                __Pyx_DECREF(__pyx_t_20); __pyx_t_20 = 0;
               }
-              __Pyx_DECREF(__pyx_t_10); __pyx_t_10 = 0;
+              __Pyx_DECREF(__pyx_t_11); __pyx_t_11 = 0;
               __Pyx_XDECREF(__pyx_9genexpr34__pyx_v_pos); __pyx_9genexpr34__pyx_v_pos = 0;
-              goto __pyx_L46_exit_scope;
-              __pyx_L42_error:;
+              goto __pyx_L48_exit_scope;
+              __pyx_L44_error:;
               __Pyx_XDECREF(__pyx_9genexpr34__pyx_v_pos); __pyx_9genexpr34__pyx_v_pos = 0;
-              goto __pyx_L31_error;
-              __pyx_L46_exit_scope:;
+              goto __pyx_L33_error;
+              __pyx_L48_exit_scope:;
             } /* exit inner scope */
-            __pyx_v_TASKS = ((PyObject*)__pyx_t_2);
-            __pyx_t_2 = 0;
+            __pyx_v_TASKS = ((PyObject*)__pyx_t_3);
+            __pyx_t_3 = 0;
 
-            /* "cSparseIntegerOutrankingDigraphs.pyx":2378
+            /* "cSparseIntegerOutrankingDigraphs.pyx":2386
  *                     print('Maximal component size: %d' % maximalComponentSize)
  *                 TASKS = [(Comments,(pos[0],nc,tempDirName,perfTab,decomposition)) for pos in tasksIndex]
  *                 task_queue = Queue()             # <<<<<<<<<<<<<<
@@ -49612,91 +49665,91 @@ static PyObject *__pyx_pf_32cSparseIntegerOutrankingDigraphs_24cQuantilesRanking
  *                     task_queue.put(task)
  */
             __Pyx_INCREF(__pyx_v_Queue);
-            __pyx_t_10 = __pyx_v_Queue; __pyx_t_21 = NULL;
+            __pyx_t_11 = __pyx_v_Queue; __pyx_t_20 = NULL;
             __pyx_t_4 = 0;
             #if CYTHON_UNPACK_METHODS
-            if (likely(PyMethod_Check(__pyx_t_10))) {
-              __pyx_t_21 = PyMethod_GET_SELF(__pyx_t_10);
-              if (likely(__pyx_t_21)) {
-                PyObject* function = PyMethod_GET_FUNCTION(__pyx_t_10);
-                __Pyx_INCREF(__pyx_t_21);
+            if (likely(PyMethod_Check(__pyx_t_11))) {
+              __pyx_t_20 = PyMethod_GET_SELF(__pyx_t_11);
+              if (likely(__pyx_t_20)) {
+                PyObject* function = PyMethod_GET_FUNCTION(__pyx_t_11);
+                __Pyx_INCREF(__pyx_t_20);
                 __Pyx_INCREF(function);
-                __Pyx_DECREF_SET(__pyx_t_10, function);
+                __Pyx_DECREF_SET(__pyx_t_11, function);
                 __pyx_t_4 = 1;
               }
             }
             #endif
             {
-              PyObject *__pyx_callargs[2] = {__pyx_t_21, NULL};
-              __pyx_t_2 = __Pyx_PyObject_FastCall(__pyx_t_10, __pyx_callargs+1-__pyx_t_4, 0+__pyx_t_4);
-              __Pyx_XDECREF(__pyx_t_21); __pyx_t_21 = 0;
-              if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 2378, __pyx_L31_error)
-              __Pyx_GOTREF(__pyx_t_2);
-              __Pyx_DECREF(__pyx_t_10); __pyx_t_10 = 0;
+              PyObject *__pyx_callargs[2] = {__pyx_t_20, NULL};
+              __pyx_t_3 = __Pyx_PyObject_FastCall(__pyx_t_11, __pyx_callargs+1-__pyx_t_4, 0+__pyx_t_4);
+              __Pyx_XDECREF(__pyx_t_20); __pyx_t_20 = 0;
+              if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 2386, __pyx_L33_error)
+              __Pyx_GOTREF(__pyx_t_3);
+              __Pyx_DECREF(__pyx_t_11); __pyx_t_11 = 0;
             }
-            __pyx_v_task_queue = __pyx_t_2;
-            __pyx_t_2 = 0;
+            __pyx_v_task_queue = __pyx_t_3;
+            __pyx_t_3 = 0;
 
-            /* "cSparseIntegerOutrankingDigraphs.pyx":2379
+            /* "cSparseIntegerOutrankingDigraphs.pyx":2387
  *                 TASKS = [(Comments,(pos[0],nc,tempDirName,perfTab,decomposition)) for pos in tasksIndex]
  *                 task_queue = Queue()
  *                 for task in TASKS:             # <<<<<<<<<<<<<<
  *                     task_queue.put(task)
  *                 for i in range(NUMBER_OF_WORKERS):
  */
-            __pyx_t_2 = __pyx_v_TASKS; __Pyx_INCREF(__pyx_t_2);
+            __pyx_t_3 = __pyx_v_TASKS; __Pyx_INCREF(__pyx_t_3);
             __pyx_t_7 = 0;
             for (;;) {
               {
-                Py_ssize_t __pyx_temp = __Pyx_PyList_GET_SIZE(__pyx_t_2);
+                Py_ssize_t __pyx_temp = __Pyx_PyList_GET_SIZE(__pyx_t_3);
                 #if !CYTHON_ASSUME_SAFE_MACROS
-                if (unlikely((__pyx_temp < 0))) __PYX_ERR(0, 2379, __pyx_L31_error)
+                if (unlikely((__pyx_temp < 0))) __PYX_ERR(0, 2387, __pyx_L33_error)
                 #endif
                 if (__pyx_t_7 >= __pyx_temp) break;
               }
               #if CYTHON_ASSUME_SAFE_MACROS && !CYTHON_AVOID_BORROWED_REFS
-              __pyx_t_10 = PyList_GET_ITEM(__pyx_t_2, __pyx_t_7); __Pyx_INCREF(__pyx_t_10); __pyx_t_7++; if (unlikely((0 < 0))) __PYX_ERR(0, 2379, __pyx_L31_error)
+              __pyx_t_11 = PyList_GET_ITEM(__pyx_t_3, __pyx_t_7); __Pyx_INCREF(__pyx_t_11); __pyx_t_7++; if (unlikely((0 < 0))) __PYX_ERR(0, 2387, __pyx_L33_error)
               #else
-              __pyx_t_10 = __Pyx_PySequence_ITEM(__pyx_t_2, __pyx_t_7); __pyx_t_7++; if (unlikely(!__pyx_t_10)) __PYX_ERR(0, 2379, __pyx_L31_error)
-              __Pyx_GOTREF(__pyx_t_10);
+              __pyx_t_11 = __Pyx_PySequence_ITEM(__pyx_t_3, __pyx_t_7); __pyx_t_7++; if (unlikely(!__pyx_t_11)) __PYX_ERR(0, 2387, __pyx_L33_error)
+              __Pyx_GOTREF(__pyx_t_11);
               #endif
-              __Pyx_XDECREF_SET(__pyx_v_task, __pyx_t_10);
-              __pyx_t_10 = 0;
+              __Pyx_XDECREF_SET(__pyx_v_task, __pyx_t_11);
+              __pyx_t_11 = 0;
 
-              /* "cSparseIntegerOutrankingDigraphs.pyx":2380
+              /* "cSparseIntegerOutrankingDigraphs.pyx":2388
  *                 task_queue = Queue()
  *                 for task in TASKS:
  *                     task_queue.put(task)             # <<<<<<<<<<<<<<
  *                 for i in range(NUMBER_OF_WORKERS):
  *                     Process(target=_worker1,args=(task_queue,)).start()
  */
-              __pyx_t_21 = __Pyx_PyObject_GetAttrStr(__pyx_v_task_queue, __pyx_n_s_put); if (unlikely(!__pyx_t_21)) __PYX_ERR(0, 2380, __pyx_L31_error)
-              __Pyx_GOTREF(__pyx_t_21);
-              __pyx_t_22 = NULL;
+              __pyx_t_20 = __Pyx_PyObject_GetAttrStr(__pyx_v_task_queue, __pyx_n_s_put); if (unlikely(!__pyx_t_20)) __PYX_ERR(0, 2388, __pyx_L33_error)
+              __Pyx_GOTREF(__pyx_t_20);
+              __pyx_t_21 = NULL;
               __pyx_t_4 = 0;
               #if CYTHON_UNPACK_METHODS
-              if (likely(PyMethod_Check(__pyx_t_21))) {
-                __pyx_t_22 = PyMethod_GET_SELF(__pyx_t_21);
-                if (likely(__pyx_t_22)) {
-                  PyObject* function = PyMethod_GET_FUNCTION(__pyx_t_21);
-                  __Pyx_INCREF(__pyx_t_22);
+              if (likely(PyMethod_Check(__pyx_t_20))) {
+                __pyx_t_21 = PyMethod_GET_SELF(__pyx_t_20);
+                if (likely(__pyx_t_21)) {
+                  PyObject* function = PyMethod_GET_FUNCTION(__pyx_t_20);
+                  __Pyx_INCREF(__pyx_t_21);
                   __Pyx_INCREF(function);
-                  __Pyx_DECREF_SET(__pyx_t_21, function);
+                  __Pyx_DECREF_SET(__pyx_t_20, function);
                   __pyx_t_4 = 1;
                 }
               }
               #endif
               {
-                PyObject *__pyx_callargs[2] = {__pyx_t_22, __pyx_v_task};
-                __pyx_t_10 = __Pyx_PyObject_FastCall(__pyx_t_21, __pyx_callargs+1-__pyx_t_4, 1+__pyx_t_4);
-                __Pyx_XDECREF(__pyx_t_22); __pyx_t_22 = 0;
-                if (unlikely(!__pyx_t_10)) __PYX_ERR(0, 2380, __pyx_L31_error)
-                __Pyx_GOTREF(__pyx_t_10);
-                __Pyx_DECREF(__pyx_t_21); __pyx_t_21 = 0;
+                PyObject *__pyx_callargs[2] = {__pyx_t_21, __pyx_v_task};
+                __pyx_t_11 = __Pyx_PyObject_FastCall(__pyx_t_20, __pyx_callargs+1-__pyx_t_4, 1+__pyx_t_4);
+                __Pyx_XDECREF(__pyx_t_21); __pyx_t_21 = 0;
+                if (unlikely(!__pyx_t_11)) __PYX_ERR(0, 2388, __pyx_L33_error)
+                __Pyx_GOTREF(__pyx_t_11);
+                __Pyx_DECREF(__pyx_t_20); __pyx_t_20 = 0;
               }
-              __Pyx_DECREF(__pyx_t_10); __pyx_t_10 = 0;
+              __Pyx_DECREF(__pyx_t_11); __pyx_t_11 = 0;
 
-              /* "cSparseIntegerOutrankingDigraphs.pyx":2379
+              /* "cSparseIntegerOutrankingDigraphs.pyx":2387
  *                 TASKS = [(Comments,(pos[0],nc,tempDirName,perfTab,decomposition)) for pos in tasksIndex]
  *                 task_queue = Queue()
  *                 for task in TASKS:             # <<<<<<<<<<<<<<
@@ -49704,72 +49757,72 @@ static PyObject *__pyx_pf_32cSparseIntegerOutrankingDigraphs_24cQuantilesRanking
  *                 for i in range(NUMBER_OF_WORKERS):
  */
             }
-            __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
+            __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
 
-            /* "cSparseIntegerOutrankingDigraphs.pyx":2381
+            /* "cSparseIntegerOutrankingDigraphs.pyx":2389
  *                 for task in TASKS:
  *                     task_queue.put(task)
  *                 for i in range(NUMBER_OF_WORKERS):             # <<<<<<<<<<<<<<
  *                     Process(target=_worker1,args=(task_queue,)).start()
  *                 if Comments:
  */
-            __pyx_t_13 = __Pyx_PyInt_As_long(__pyx_v_NUMBER_OF_WORKERS); if (unlikely((__pyx_t_13 == (long)-1) && PyErr_Occurred())) __PYX_ERR(0, 2381, __pyx_L31_error)
-            __pyx_t_14 = __pyx_t_13;
-            for (__pyx_t_4 = 0; __pyx_t_4 < __pyx_t_14; __pyx_t_4+=1) {
+            __pyx_t_12 = __Pyx_PyInt_As_long(__pyx_v_NUMBER_OF_WORKERS); if (unlikely((__pyx_t_12 == (long)-1) && PyErr_Occurred())) __PYX_ERR(0, 2389, __pyx_L33_error)
+            __pyx_t_13 = __pyx_t_12;
+            for (__pyx_t_4 = 0; __pyx_t_4 < __pyx_t_13; __pyx_t_4+=1) {
               __pyx_v_i = __pyx_t_4;
 
-              /* "cSparseIntegerOutrankingDigraphs.pyx":2382
+              /* "cSparseIntegerOutrankingDigraphs.pyx":2390
  *                     task_queue.put(task)
  *                 for i in range(NUMBER_OF_WORKERS):
  *                     Process(target=_worker1,args=(task_queue,)).start()             # <<<<<<<<<<<<<<
  *                 if Comments:
  *                     print('started')
  */
-              __pyx_t_10 = __Pyx_PyDict_NewPresized(2); if (unlikely(!__pyx_t_10)) __PYX_ERR(0, 2382, __pyx_L31_error)
-              __Pyx_GOTREF(__pyx_t_10);
-              __Pyx_GetModuleGlobalName(__pyx_t_21, __pyx_n_s_worker1); if (unlikely(!__pyx_t_21)) __PYX_ERR(0, 2382, __pyx_L31_error)
-              __Pyx_GOTREF(__pyx_t_21);
-              if (PyDict_SetItem(__pyx_t_10, __pyx_n_s_target, __pyx_t_21) < 0) __PYX_ERR(0, 2382, __pyx_L31_error)
-              __Pyx_DECREF(__pyx_t_21); __pyx_t_21 = 0;
-              __pyx_t_21 = PyTuple_New(1); if (unlikely(!__pyx_t_21)) __PYX_ERR(0, 2382, __pyx_L31_error)
-              __Pyx_GOTREF(__pyx_t_21);
+              __pyx_t_11 = __Pyx_PyDict_NewPresized(2); if (unlikely(!__pyx_t_11)) __PYX_ERR(0, 2390, __pyx_L33_error)
+              __Pyx_GOTREF(__pyx_t_11);
+              __Pyx_GetModuleGlobalName(__pyx_t_20, __pyx_n_s_worker1); if (unlikely(!__pyx_t_20)) __PYX_ERR(0, 2390, __pyx_L33_error)
+              __Pyx_GOTREF(__pyx_t_20);
+              if (PyDict_SetItem(__pyx_t_11, __pyx_n_s_target, __pyx_t_20) < 0) __PYX_ERR(0, 2390, __pyx_L33_error)
+              __Pyx_DECREF(__pyx_t_20); __pyx_t_20 = 0;
+              __pyx_t_20 = PyTuple_New(1); if (unlikely(!__pyx_t_20)) __PYX_ERR(0, 2390, __pyx_L33_error)
+              __Pyx_GOTREF(__pyx_t_20);
               __Pyx_INCREF(__pyx_v_task_queue);
               __Pyx_GIVEREF(__pyx_v_task_queue);
-              if (__Pyx_PyTuple_SET_ITEM(__pyx_t_21, 0, __pyx_v_task_queue)) __PYX_ERR(0, 2382, __pyx_L31_error);
-              if (PyDict_SetItem(__pyx_t_10, __pyx_n_s_args, __pyx_t_21) < 0) __PYX_ERR(0, 2382, __pyx_L31_error)
-              __Pyx_DECREF(__pyx_t_21); __pyx_t_21 = 0;
-              __pyx_t_21 = __Pyx_PyObject_Call(__pyx_v_Process, __pyx_empty_tuple, __pyx_t_10); if (unlikely(!__pyx_t_21)) __PYX_ERR(0, 2382, __pyx_L31_error)
-              __Pyx_GOTREF(__pyx_t_21);
-              __Pyx_DECREF(__pyx_t_10); __pyx_t_10 = 0;
-              __pyx_t_10 = __Pyx_PyObject_GetAttrStr(__pyx_t_21, __pyx_n_s_start); if (unlikely(!__pyx_t_10)) __PYX_ERR(0, 2382, __pyx_L31_error)
-              __Pyx_GOTREF(__pyx_t_10);
-              __Pyx_DECREF(__pyx_t_21); __pyx_t_21 = 0;
-              __pyx_t_21 = NULL;
-              __pyx_t_16 = 0;
+              if (__Pyx_PyTuple_SET_ITEM(__pyx_t_20, 0, __pyx_v_task_queue)) __PYX_ERR(0, 2390, __pyx_L33_error);
+              if (PyDict_SetItem(__pyx_t_11, __pyx_n_s_args, __pyx_t_20) < 0) __PYX_ERR(0, 2390, __pyx_L33_error)
+              __Pyx_DECREF(__pyx_t_20); __pyx_t_20 = 0;
+              __pyx_t_20 = __Pyx_PyObject_Call(__pyx_v_Process, __pyx_empty_tuple, __pyx_t_11); if (unlikely(!__pyx_t_20)) __PYX_ERR(0, 2390, __pyx_L33_error)
+              __Pyx_GOTREF(__pyx_t_20);
+              __Pyx_DECREF(__pyx_t_11); __pyx_t_11 = 0;
+              __pyx_t_11 = __Pyx_PyObject_GetAttrStr(__pyx_t_20, __pyx_n_s_start); if (unlikely(!__pyx_t_11)) __PYX_ERR(0, 2390, __pyx_L33_error)
+              __Pyx_GOTREF(__pyx_t_11);
+              __Pyx_DECREF(__pyx_t_20); __pyx_t_20 = 0;
+              __pyx_t_20 = NULL;
+              __pyx_t_15 = 0;
               #if CYTHON_UNPACK_METHODS
-              if (likely(PyMethod_Check(__pyx_t_10))) {
-                __pyx_t_21 = PyMethod_GET_SELF(__pyx_t_10);
-                if (likely(__pyx_t_21)) {
-                  PyObject* function = PyMethod_GET_FUNCTION(__pyx_t_10);
-                  __Pyx_INCREF(__pyx_t_21);
+              if (likely(PyMethod_Check(__pyx_t_11))) {
+                __pyx_t_20 = PyMethod_GET_SELF(__pyx_t_11);
+                if (likely(__pyx_t_20)) {
+                  PyObject* function = PyMethod_GET_FUNCTION(__pyx_t_11);
+                  __Pyx_INCREF(__pyx_t_20);
                   __Pyx_INCREF(function);
-                  __Pyx_DECREF_SET(__pyx_t_10, function);
-                  __pyx_t_16 = 1;
+                  __Pyx_DECREF_SET(__pyx_t_11, function);
+                  __pyx_t_15 = 1;
                 }
               }
               #endif
               {
-                PyObject *__pyx_callargs[2] = {__pyx_t_21, NULL};
-                __pyx_t_2 = __Pyx_PyObject_FastCall(__pyx_t_10, __pyx_callargs+1-__pyx_t_16, 0+__pyx_t_16);
-                __Pyx_XDECREF(__pyx_t_21); __pyx_t_21 = 0;
-                if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 2382, __pyx_L31_error)
-                __Pyx_GOTREF(__pyx_t_2);
-                __Pyx_DECREF(__pyx_t_10); __pyx_t_10 = 0;
+                PyObject *__pyx_callargs[2] = {__pyx_t_20, NULL};
+                __pyx_t_3 = __Pyx_PyObject_FastCall(__pyx_t_11, __pyx_callargs+1-__pyx_t_15, 0+__pyx_t_15);
+                __Pyx_XDECREF(__pyx_t_20); __pyx_t_20 = 0;
+                if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 2390, __pyx_L33_error)
+                __Pyx_GOTREF(__pyx_t_3);
+                __Pyx_DECREF(__pyx_t_11); __pyx_t_11 = 0;
               }
-              __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
+              __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
             }
 
-            /* "cSparseIntegerOutrankingDigraphs.pyx":2383
+            /* "cSparseIntegerOutrankingDigraphs.pyx":2391
  *                 for i in range(NUMBER_OF_WORKERS):
  *                     Process(target=_worker1,args=(task_queue,)).start()
  *                 if Comments:             # <<<<<<<<<<<<<<
@@ -49778,18 +49831,18 @@ static PyObject *__pyx_pf_32cSparseIntegerOutrankingDigraphs_24cQuantilesRanking
  */
             if (__pyx_v_Comments) {
 
-              /* "cSparseIntegerOutrankingDigraphs.pyx":2384
+              /* "cSparseIntegerOutrankingDigraphs.pyx":2392
  *                     Process(target=_worker1,args=(task_queue,)).start()
  *                 if Comments:
  *                     print('started')             # <<<<<<<<<<<<<<
  *                 for i in range(NUMBER_OF_WORKERS):
  *                     task_queue.put('STOP')
  */
-              __pyx_t_2 = __Pyx_PyObject_Call(__pyx_builtin_print, __pyx_tuple__43, NULL); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 2384, __pyx_L31_error)
-              __Pyx_GOTREF(__pyx_t_2);
-              __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
+              __pyx_t_3 = __Pyx_PyObject_Call(__pyx_builtin_print, __pyx_tuple__43, NULL); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 2392, __pyx_L33_error)
+              __Pyx_GOTREF(__pyx_t_3);
+              __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
 
-              /* "cSparseIntegerOutrankingDigraphs.pyx":2383
+              /* "cSparseIntegerOutrankingDigraphs.pyx":2391
  *                 for i in range(NUMBER_OF_WORKERS):
  *                     Process(target=_worker1,args=(task_queue,)).start()
  *                 if Comments:             # <<<<<<<<<<<<<<
@@ -49798,53 +49851,53 @@ static PyObject *__pyx_pf_32cSparseIntegerOutrankingDigraphs_24cQuantilesRanking
  */
             }
 
-            /* "cSparseIntegerOutrankingDigraphs.pyx":2385
+            /* "cSparseIntegerOutrankingDigraphs.pyx":2393
  *                 if Comments:
  *                     print('started')
  *                 for i in range(NUMBER_OF_WORKERS):             # <<<<<<<<<<<<<<
  *                     task_queue.put('STOP')
  * 
  */
-            __pyx_t_13 = __Pyx_PyInt_As_long(__pyx_v_NUMBER_OF_WORKERS); if (unlikely((__pyx_t_13 == (long)-1) && PyErr_Occurred())) __PYX_ERR(0, 2385, __pyx_L31_error)
-            __pyx_t_14 = __pyx_t_13;
-            for (__pyx_t_4 = 0; __pyx_t_4 < __pyx_t_14; __pyx_t_4+=1) {
+            __pyx_t_12 = __Pyx_PyInt_As_long(__pyx_v_NUMBER_OF_WORKERS); if (unlikely((__pyx_t_12 == (long)-1) && PyErr_Occurred())) __PYX_ERR(0, 2393, __pyx_L33_error)
+            __pyx_t_13 = __pyx_t_12;
+            for (__pyx_t_4 = 0; __pyx_t_4 < __pyx_t_13; __pyx_t_4+=1) {
               __pyx_v_i = __pyx_t_4;
 
-              /* "cSparseIntegerOutrankingDigraphs.pyx":2386
+              /* "cSparseIntegerOutrankingDigraphs.pyx":2394
  *                     print('started')
  *                 for i in range(NUMBER_OF_WORKERS):
  *                     task_queue.put('STOP')             # <<<<<<<<<<<<<<
  * 
  *                 while active_children() != []:
  */
-              __pyx_t_10 = __Pyx_PyObject_GetAttrStr(__pyx_v_task_queue, __pyx_n_s_put); if (unlikely(!__pyx_t_10)) __PYX_ERR(0, 2386, __pyx_L31_error)
-              __Pyx_GOTREF(__pyx_t_10);
-              __pyx_t_21 = NULL;
-              __pyx_t_16 = 0;
+              __pyx_t_11 = __Pyx_PyObject_GetAttrStr(__pyx_v_task_queue, __pyx_n_s_put); if (unlikely(!__pyx_t_11)) __PYX_ERR(0, 2394, __pyx_L33_error)
+              __Pyx_GOTREF(__pyx_t_11);
+              __pyx_t_20 = NULL;
+              __pyx_t_15 = 0;
               #if CYTHON_UNPACK_METHODS
-              if (likely(PyMethod_Check(__pyx_t_10))) {
-                __pyx_t_21 = PyMethod_GET_SELF(__pyx_t_10);
-                if (likely(__pyx_t_21)) {
-                  PyObject* function = PyMethod_GET_FUNCTION(__pyx_t_10);
-                  __Pyx_INCREF(__pyx_t_21);
+              if (likely(PyMethod_Check(__pyx_t_11))) {
+                __pyx_t_20 = PyMethod_GET_SELF(__pyx_t_11);
+                if (likely(__pyx_t_20)) {
+                  PyObject* function = PyMethod_GET_FUNCTION(__pyx_t_11);
+                  __Pyx_INCREF(__pyx_t_20);
                   __Pyx_INCREF(function);
-                  __Pyx_DECREF_SET(__pyx_t_10, function);
-                  __pyx_t_16 = 1;
+                  __Pyx_DECREF_SET(__pyx_t_11, function);
+                  __pyx_t_15 = 1;
                 }
               }
               #endif
               {
-                PyObject *__pyx_callargs[2] = {__pyx_t_21, __pyx_n_u_STOP};
-                __pyx_t_2 = __Pyx_PyObject_FastCall(__pyx_t_10, __pyx_callargs+1-__pyx_t_16, 1+__pyx_t_16);
-                __Pyx_XDECREF(__pyx_t_21); __pyx_t_21 = 0;
-                if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 2386, __pyx_L31_error)
-                __Pyx_GOTREF(__pyx_t_2);
-                __Pyx_DECREF(__pyx_t_10); __pyx_t_10 = 0;
+                PyObject *__pyx_callargs[2] = {__pyx_t_20, __pyx_n_u_STOP};
+                __pyx_t_3 = __Pyx_PyObject_FastCall(__pyx_t_11, __pyx_callargs+1-__pyx_t_15, 1+__pyx_t_15);
+                __Pyx_XDECREF(__pyx_t_20); __pyx_t_20 = 0;
+                if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 2394, __pyx_L33_error)
+                __Pyx_GOTREF(__pyx_t_3);
+                __Pyx_DECREF(__pyx_t_11); __pyx_t_11 = 0;
               }
-              __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
+              __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
             }
 
-            /* "cSparseIntegerOutrankingDigraphs.pyx":2388
+            /* "cSparseIntegerOutrankingDigraphs.pyx":2396
  *                     task_queue.put('STOP')
  * 
  *                 while active_children() != []:             # <<<<<<<<<<<<<<
@@ -49853,39 +49906,39 @@ static PyObject *__pyx_pf_32cSparseIntegerOutrankingDigraphs_24cQuantilesRanking
  */
             while (1) {
               __Pyx_INCREF(__pyx_v_active_children);
-              __pyx_t_10 = __pyx_v_active_children; __pyx_t_21 = NULL;
+              __pyx_t_11 = __pyx_v_active_children; __pyx_t_20 = NULL;
               __pyx_t_4 = 0;
               #if CYTHON_UNPACK_METHODS
-              if (likely(PyMethod_Check(__pyx_t_10))) {
-                __pyx_t_21 = PyMethod_GET_SELF(__pyx_t_10);
-                if (likely(__pyx_t_21)) {
-                  PyObject* function = PyMethod_GET_FUNCTION(__pyx_t_10);
-                  __Pyx_INCREF(__pyx_t_21);
+              if (likely(PyMethod_Check(__pyx_t_11))) {
+                __pyx_t_20 = PyMethod_GET_SELF(__pyx_t_11);
+                if (likely(__pyx_t_20)) {
+                  PyObject* function = PyMethod_GET_FUNCTION(__pyx_t_11);
+                  __Pyx_INCREF(__pyx_t_20);
                   __Pyx_INCREF(function);
-                  __Pyx_DECREF_SET(__pyx_t_10, function);
+                  __Pyx_DECREF_SET(__pyx_t_11, function);
                   __pyx_t_4 = 1;
                 }
               }
               #endif
               {
-                PyObject *__pyx_callargs[2] = {__pyx_t_21, NULL};
-                __pyx_t_2 = __Pyx_PyObject_FastCall(__pyx_t_10, __pyx_callargs+1-__pyx_t_4, 0+__pyx_t_4);
-                __Pyx_XDECREF(__pyx_t_21); __pyx_t_21 = 0;
-                if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 2388, __pyx_L31_error)
-                __Pyx_GOTREF(__pyx_t_2);
-                __Pyx_DECREF(__pyx_t_10); __pyx_t_10 = 0;
+                PyObject *__pyx_callargs[2] = {__pyx_t_20, NULL};
+                __pyx_t_3 = __Pyx_PyObject_FastCall(__pyx_t_11, __pyx_callargs+1-__pyx_t_4, 0+__pyx_t_4);
+                __Pyx_XDECREF(__pyx_t_20); __pyx_t_20 = 0;
+                if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 2396, __pyx_L33_error)
+                __Pyx_GOTREF(__pyx_t_3);
+                __Pyx_DECREF(__pyx_t_11); __pyx_t_11 = 0;
               }
-              __pyx_t_10 = PyList_New(0); if (unlikely(!__pyx_t_10)) __PYX_ERR(0, 2388, __pyx_L31_error)
-              __Pyx_GOTREF(__pyx_t_10);
-              __pyx_t_21 = PyObject_RichCompare(__pyx_t_2, __pyx_t_10, Py_NE); __Pyx_XGOTREF(__pyx_t_21); if (unlikely(!__pyx_t_21)) __PYX_ERR(0, 2388, __pyx_L31_error)
-              __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
-              __Pyx_DECREF(__pyx_t_10); __pyx_t_10 = 0;
-              __pyx_t_12 = __Pyx_PyObject_IsTrue(__pyx_t_21); if (unlikely((__pyx_t_12 < 0))) __PYX_ERR(0, 2388, __pyx_L31_error)
-              __Pyx_DECREF(__pyx_t_21); __pyx_t_21 = 0;
-              if (!__pyx_t_12) break;
+              __pyx_t_11 = PyList_New(0); if (unlikely(!__pyx_t_11)) __PYX_ERR(0, 2396, __pyx_L33_error)
+              __Pyx_GOTREF(__pyx_t_11);
+              __pyx_t_20 = PyObject_RichCompare(__pyx_t_3, __pyx_t_11, Py_NE); __Pyx_XGOTREF(__pyx_t_20); if (unlikely(!__pyx_t_20)) __PYX_ERR(0, 2396, __pyx_L33_error)
+              __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
+              __Pyx_DECREF(__pyx_t_11); __pyx_t_11 = 0;
+              __pyx_t_10 = __Pyx_PyObject_IsTrue(__pyx_t_20); if (unlikely((__pyx_t_10 < 0))) __PYX_ERR(0, 2396, __pyx_L33_error)
+              __Pyx_DECREF(__pyx_t_20); __pyx_t_20 = 0;
+              if (!__pyx_t_10) break;
             }
 
-            /* "cSparseIntegerOutrankingDigraphs.pyx":2390
+            /* "cSparseIntegerOutrankingDigraphs.pyx":2398
  *                 while active_children() != []:
  *                     pass
  *                 if Comments:             # <<<<<<<<<<<<<<
@@ -49894,21 +49947,21 @@ static PyObject *__pyx_pf_32cSparseIntegerOutrankingDigraphs_24cQuantilesRanking
  */
             if (__pyx_v_Comments) {
 
-              /* "cSparseIntegerOutrankingDigraphs.pyx":2391
+              /* "cSparseIntegerOutrankingDigraphs.pyx":2399
  *                     pass
  *                 if Comments:
  *                     print('Exit %d threads' % NUMBER_OF_WORKERS)             # <<<<<<<<<<<<<<
  *                 ####  post-threading operations
  *                 components = OrderedDict()
  */
-              __pyx_t_21 = __Pyx_PyUnicode_FormatSafe(__pyx_kp_u_Exit_d_threads, __pyx_v_NUMBER_OF_WORKERS); if (unlikely(!__pyx_t_21)) __PYX_ERR(0, 2391, __pyx_L31_error)
-              __Pyx_GOTREF(__pyx_t_21);
-              __pyx_t_10 = __Pyx_PyObject_CallOneArg(__pyx_builtin_print, __pyx_t_21); if (unlikely(!__pyx_t_10)) __PYX_ERR(0, 2391, __pyx_L31_error)
-              __Pyx_GOTREF(__pyx_t_10);
-              __Pyx_DECREF(__pyx_t_21); __pyx_t_21 = 0;
-              __Pyx_DECREF(__pyx_t_10); __pyx_t_10 = 0;
+              __pyx_t_20 = __Pyx_PyUnicode_FormatSafe(__pyx_kp_u_Exit_d_threads, __pyx_v_NUMBER_OF_WORKERS); if (unlikely(!__pyx_t_20)) __PYX_ERR(0, 2399, __pyx_L33_error)
+              __Pyx_GOTREF(__pyx_t_20);
+              __pyx_t_11 = __Pyx_PyObject_CallOneArg(__pyx_builtin_print, __pyx_t_20); if (unlikely(!__pyx_t_11)) __PYX_ERR(0, 2399, __pyx_L33_error)
+              __Pyx_GOTREF(__pyx_t_11);
+              __Pyx_DECREF(__pyx_t_20); __pyx_t_20 = 0;
+              __Pyx_DECREF(__pyx_t_11); __pyx_t_11 = 0;
 
-              /* "cSparseIntegerOutrankingDigraphs.pyx":2390
+              /* "cSparseIntegerOutrankingDigraphs.pyx":2398
  *                 while active_children() != []:
  *                     pass
  *                 if Comments:             # <<<<<<<<<<<<<<
@@ -49917,7 +49970,7 @@ static PyObject *__pyx_pf_32cSparseIntegerOutrankingDigraphs_24cQuantilesRanking
  */
             }
 
-            /* "cSparseIntegerOutrankingDigraphs.pyx":2393
+            /* "cSparseIntegerOutrankingDigraphs.pyx":2401
  *                     print('Exit %d threads' % NUMBER_OF_WORKERS)
  *                 ####  post-threading operations
  *                 components = OrderedDict()             # <<<<<<<<<<<<<<
@@ -49925,56 +49978,56 @@ static PyObject *__pyx_pf_32cSparseIntegerOutrankingDigraphs_24cQuantilesRanking
  *                 boostedRanking = []
  */
             __Pyx_INCREF(__pyx_v_OrderedDict);
-            __pyx_t_21 = __pyx_v_OrderedDict; __pyx_t_2 = NULL;
+            __pyx_t_20 = __pyx_v_OrderedDict; __pyx_t_3 = NULL;
             __pyx_t_4 = 0;
             #if CYTHON_UNPACK_METHODS
-            if (unlikely(PyMethod_Check(__pyx_t_21))) {
-              __pyx_t_2 = PyMethod_GET_SELF(__pyx_t_21);
-              if (likely(__pyx_t_2)) {
-                PyObject* function = PyMethod_GET_FUNCTION(__pyx_t_21);
-                __Pyx_INCREF(__pyx_t_2);
+            if (unlikely(PyMethod_Check(__pyx_t_20))) {
+              __pyx_t_3 = PyMethod_GET_SELF(__pyx_t_20);
+              if (likely(__pyx_t_3)) {
+                PyObject* function = PyMethod_GET_FUNCTION(__pyx_t_20);
+                __Pyx_INCREF(__pyx_t_3);
                 __Pyx_INCREF(function);
-                __Pyx_DECREF_SET(__pyx_t_21, function);
+                __Pyx_DECREF_SET(__pyx_t_20, function);
                 __pyx_t_4 = 1;
               }
             }
             #endif
             {
-              PyObject *__pyx_callargs[2] = {__pyx_t_2, NULL};
-              __pyx_t_10 = __Pyx_PyObject_FastCall(__pyx_t_21, __pyx_callargs+1-__pyx_t_4, 0+__pyx_t_4);
-              __Pyx_XDECREF(__pyx_t_2); __pyx_t_2 = 0;
-              if (unlikely(!__pyx_t_10)) __PYX_ERR(0, 2393, __pyx_L31_error)
-              __Pyx_GOTREF(__pyx_t_10);
-              __Pyx_DECREF(__pyx_t_21); __pyx_t_21 = 0;
+              PyObject *__pyx_callargs[2] = {__pyx_t_3, NULL};
+              __pyx_t_11 = __Pyx_PyObject_FastCall(__pyx_t_20, __pyx_callargs+1-__pyx_t_4, 0+__pyx_t_4);
+              __Pyx_XDECREF(__pyx_t_3); __pyx_t_3 = 0;
+              if (unlikely(!__pyx_t_11)) __PYX_ERR(0, 2401, __pyx_L33_error)
+              __Pyx_GOTREF(__pyx_t_11);
+              __Pyx_DECREF(__pyx_t_20); __pyx_t_20 = 0;
             }
-            __pyx_v_components = __pyx_t_10;
-            __pyx_t_10 = 0;
+            __pyx_v_components = __pyx_t_11;
+            __pyx_t_11 = 0;
 
-            /* "cSparseIntegerOutrankingDigraphs.pyx":2395
+            /* "cSparseIntegerOutrankingDigraphs.pyx":2403
  *                 components = OrderedDict()
  *                 #componentsList = []
  *                 boostedRanking = []             # <<<<<<<<<<<<<<
  *                 for j in range(nc):
  *                     if Debug:
  */
-            __pyx_t_10 = PyList_New(0); if (unlikely(!__pyx_t_10)) __PYX_ERR(0, 2395, __pyx_L31_error)
-            __Pyx_GOTREF(__pyx_t_10);
-            __pyx_v_boostedRanking = __pyx_t_10;
-            __pyx_t_10 = 0;
+            __pyx_t_11 = PyList_New(0); if (unlikely(!__pyx_t_11)) __PYX_ERR(0, 2403, __pyx_L33_error)
+            __Pyx_GOTREF(__pyx_t_11);
+            __pyx_v_boostedRanking = __pyx_t_11;
+            __pyx_t_11 = 0;
 
-            /* "cSparseIntegerOutrankingDigraphs.pyx":2396
+            /* "cSparseIntegerOutrankingDigraphs.pyx":2404
  *                 #componentsList = []
  *                 boostedRanking = []
  *                 for j in range(nc):             # <<<<<<<<<<<<<<
  *                     if Debug:
  *                         print('job',j)
  */
-            __pyx_t_13 = __Pyx_PyInt_As_long(__pyx_v_nc); if (unlikely((__pyx_t_13 == (long)-1) && PyErr_Occurred())) __PYX_ERR(0, 2396, __pyx_L31_error)
-            __pyx_t_14 = __pyx_t_13;
-            for (__pyx_t_4 = 0; __pyx_t_4 < __pyx_t_14; __pyx_t_4+=1) {
+            __pyx_t_12 = __Pyx_PyInt_As_long(__pyx_v_nc); if (unlikely((__pyx_t_12 == (long)-1) && PyErr_Occurred())) __PYX_ERR(0, 2404, __pyx_L33_error)
+            __pyx_t_13 = __pyx_t_12;
+            for (__pyx_t_4 = 0; __pyx_t_4 < __pyx_t_13; __pyx_t_4+=1) {
               __pyx_v_j = __pyx_t_4;
 
-              /* "cSparseIntegerOutrankingDigraphs.pyx":2397
+              /* "cSparseIntegerOutrankingDigraphs.pyx":2405
  *                 boostedRanking = []
  *                 for j in range(nc):
  *                     if Debug:             # <<<<<<<<<<<<<<
@@ -49983,29 +50036,29 @@ static PyObject *__pyx_pf_32cSparseIntegerOutrankingDigraphs_24cQuantilesRanking
  */
               if (__pyx_v_Debug) {
 
-                /* "cSparseIntegerOutrankingDigraphs.pyx":2398
+                /* "cSparseIntegerOutrankingDigraphs.pyx":2406
  *                 for j in range(nc):
  *                     if Debug:
  *                         print('job',j)             # <<<<<<<<<<<<<<
  *                     fiName = tempDirName+'/splitComponent-'+str(j)+'.py'
  *                     fi = open(fiName,'rb')
  */
-                __pyx_t_10 = __Pyx_PyInt_From_int(__pyx_v_j); if (unlikely(!__pyx_t_10)) __PYX_ERR(0, 2398, __pyx_L31_error)
-                __Pyx_GOTREF(__pyx_t_10);
-                __pyx_t_21 = PyTuple_New(2); if (unlikely(!__pyx_t_21)) __PYX_ERR(0, 2398, __pyx_L31_error)
-                __Pyx_GOTREF(__pyx_t_21);
+                __pyx_t_11 = __Pyx_PyInt_From_int(__pyx_v_j); if (unlikely(!__pyx_t_11)) __PYX_ERR(0, 2406, __pyx_L33_error)
+                __Pyx_GOTREF(__pyx_t_11);
+                __pyx_t_20 = PyTuple_New(2); if (unlikely(!__pyx_t_20)) __PYX_ERR(0, 2406, __pyx_L33_error)
+                __Pyx_GOTREF(__pyx_t_20);
                 __Pyx_INCREF(__pyx_n_u_job);
                 __Pyx_GIVEREF(__pyx_n_u_job);
-                if (__Pyx_PyTuple_SET_ITEM(__pyx_t_21, 0, __pyx_n_u_job)) __PYX_ERR(0, 2398, __pyx_L31_error);
-                __Pyx_GIVEREF(__pyx_t_10);
-                if (__Pyx_PyTuple_SET_ITEM(__pyx_t_21, 1, __pyx_t_10)) __PYX_ERR(0, 2398, __pyx_L31_error);
-                __pyx_t_10 = 0;
-                __pyx_t_10 = __Pyx_PyObject_Call(__pyx_builtin_print, __pyx_t_21, NULL); if (unlikely(!__pyx_t_10)) __PYX_ERR(0, 2398, __pyx_L31_error)
-                __Pyx_GOTREF(__pyx_t_10);
-                __Pyx_DECREF(__pyx_t_21); __pyx_t_21 = 0;
-                __Pyx_DECREF(__pyx_t_10); __pyx_t_10 = 0;
+                if (__Pyx_PyTuple_SET_ITEM(__pyx_t_20, 0, __pyx_n_u_job)) __PYX_ERR(0, 2406, __pyx_L33_error);
+                __Pyx_GIVEREF(__pyx_t_11);
+                if (__Pyx_PyTuple_SET_ITEM(__pyx_t_20, 1, __pyx_t_11)) __PYX_ERR(0, 2406, __pyx_L33_error);
+                __pyx_t_11 = 0;
+                __pyx_t_11 = __Pyx_PyObject_Call(__pyx_builtin_print, __pyx_t_20, NULL); if (unlikely(!__pyx_t_11)) __PYX_ERR(0, 2406, __pyx_L33_error)
+                __Pyx_GOTREF(__pyx_t_11);
+                __Pyx_DECREF(__pyx_t_20); __pyx_t_20 = 0;
+                __Pyx_DECREF(__pyx_t_11); __pyx_t_11 = 0;
 
-                /* "cSparseIntegerOutrankingDigraphs.pyx":2397
+                /* "cSparseIntegerOutrankingDigraphs.pyx":2405
  *                 boostedRanking = []
  *                 for j in range(nc):
  *                     if Debug:             # <<<<<<<<<<<<<<
@@ -50014,143 +50067,143 @@ static PyObject *__pyx_pf_32cSparseIntegerOutrankingDigraphs_24cQuantilesRanking
  */
               }
 
-              /* "cSparseIntegerOutrankingDigraphs.pyx":2399
+              /* "cSparseIntegerOutrankingDigraphs.pyx":2407
  *                     if Debug:
  *                         print('job',j)
  *                     fiName = tempDirName+'/splitComponent-'+str(j)+'.py'             # <<<<<<<<<<<<<<
  *                     fi = open(fiName,'rb')
  *                     splitComponent = loads(fi.read())
  */
-              __pyx_t_10 = PyNumber_Add(__pyx_v_tempDirName, __pyx_kp_u_splitComponent); if (unlikely(!__pyx_t_10)) __PYX_ERR(0, 2399, __pyx_L31_error)
-              __Pyx_GOTREF(__pyx_t_10);
-              __pyx_t_21 = __Pyx_PyInt_From_int(__pyx_v_j); if (unlikely(!__pyx_t_21)) __PYX_ERR(0, 2399, __pyx_L31_error)
-              __Pyx_GOTREF(__pyx_t_21);
-              __pyx_t_2 = __Pyx_PyObject_Str(__pyx_t_21); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 2399, __pyx_L31_error)
-              __Pyx_GOTREF(__pyx_t_2);
-              __Pyx_DECREF(__pyx_t_21); __pyx_t_21 = 0;
-              __pyx_t_21 = PyNumber_Add(__pyx_t_10, __pyx_t_2); if (unlikely(!__pyx_t_21)) __PYX_ERR(0, 2399, __pyx_L31_error)
-              __Pyx_GOTREF(__pyx_t_21);
-              __Pyx_DECREF(__pyx_t_10); __pyx_t_10 = 0;
-              __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
-              __pyx_t_2 = PyNumber_Add(__pyx_t_21, __pyx_kp_u_py); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 2399, __pyx_L31_error)
-              __Pyx_GOTREF(__pyx_t_2);
-              __Pyx_DECREF(__pyx_t_21); __pyx_t_21 = 0;
-              __Pyx_XDECREF_SET(__pyx_v_fiName, __pyx_t_2);
-              __pyx_t_2 = 0;
+              __pyx_t_11 = PyNumber_Add(__pyx_v_tempDirName, __pyx_kp_u_splitComponent); if (unlikely(!__pyx_t_11)) __PYX_ERR(0, 2407, __pyx_L33_error)
+              __Pyx_GOTREF(__pyx_t_11);
+              __pyx_t_20 = __Pyx_PyInt_From_int(__pyx_v_j); if (unlikely(!__pyx_t_20)) __PYX_ERR(0, 2407, __pyx_L33_error)
+              __Pyx_GOTREF(__pyx_t_20);
+              __pyx_t_3 = __Pyx_PyObject_Str(__pyx_t_20); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 2407, __pyx_L33_error)
+              __Pyx_GOTREF(__pyx_t_3);
+              __Pyx_DECREF(__pyx_t_20); __pyx_t_20 = 0;
+              __pyx_t_20 = PyNumber_Add(__pyx_t_11, __pyx_t_3); if (unlikely(!__pyx_t_20)) __PYX_ERR(0, 2407, __pyx_L33_error)
+              __Pyx_GOTREF(__pyx_t_20);
+              __Pyx_DECREF(__pyx_t_11); __pyx_t_11 = 0;
+              __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
+              __pyx_t_3 = PyNumber_Add(__pyx_t_20, __pyx_kp_u_py); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 2407, __pyx_L33_error)
+              __Pyx_GOTREF(__pyx_t_3);
+              __Pyx_DECREF(__pyx_t_20); __pyx_t_20 = 0;
+              __Pyx_XDECREF_SET(__pyx_v_fiName, __pyx_t_3);
+              __pyx_t_3 = 0;
 
-              /* "cSparseIntegerOutrankingDigraphs.pyx":2400
+              /* "cSparseIntegerOutrankingDigraphs.pyx":2408
  *                         print('job',j)
  *                     fiName = tempDirName+'/splitComponent-'+str(j)+'.py'
  *                     fi = open(fiName,'rb')             # <<<<<<<<<<<<<<
  *                     splitComponent = loads(fi.read())
  *                     fi.close()
  */
-              __pyx_t_2 = PyTuple_New(2); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 2400, __pyx_L31_error)
-              __Pyx_GOTREF(__pyx_t_2);
+              __pyx_t_3 = PyTuple_New(2); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 2408, __pyx_L33_error)
+              __Pyx_GOTREF(__pyx_t_3);
               __Pyx_INCREF(__pyx_v_fiName);
               __Pyx_GIVEREF(__pyx_v_fiName);
-              if (__Pyx_PyTuple_SET_ITEM(__pyx_t_2, 0, __pyx_v_fiName)) __PYX_ERR(0, 2400, __pyx_L31_error);
+              if (__Pyx_PyTuple_SET_ITEM(__pyx_t_3, 0, __pyx_v_fiName)) __PYX_ERR(0, 2408, __pyx_L33_error);
               __Pyx_INCREF(__pyx_n_u_rb);
               __Pyx_GIVEREF(__pyx_n_u_rb);
-              if (__Pyx_PyTuple_SET_ITEM(__pyx_t_2, 1, __pyx_n_u_rb)) __PYX_ERR(0, 2400, __pyx_L31_error);
-              __pyx_t_21 = __Pyx_PyObject_Call(__pyx_builtin_open, __pyx_t_2, NULL); if (unlikely(!__pyx_t_21)) __PYX_ERR(0, 2400, __pyx_L31_error)
-              __Pyx_GOTREF(__pyx_t_21);
-              __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
-              __Pyx_XDECREF_SET(__pyx_v_fi, __pyx_t_21);
-              __pyx_t_21 = 0;
+              if (__Pyx_PyTuple_SET_ITEM(__pyx_t_3, 1, __pyx_n_u_rb)) __PYX_ERR(0, 2408, __pyx_L33_error);
+              __pyx_t_20 = __Pyx_PyObject_Call(__pyx_builtin_open, __pyx_t_3, NULL); if (unlikely(!__pyx_t_20)) __PYX_ERR(0, 2408, __pyx_L33_error)
+              __Pyx_GOTREF(__pyx_t_20);
+              __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
+              __Pyx_XDECREF_SET(__pyx_v_fi, __pyx_t_20);
+              __pyx_t_20 = 0;
 
-              /* "cSparseIntegerOutrankingDigraphs.pyx":2401
+              /* "cSparseIntegerOutrankingDigraphs.pyx":2409
  *                     fiName = tempDirName+'/splitComponent-'+str(j)+'.py'
  *                     fi = open(fiName,'rb')
  *                     splitComponent = loads(fi.read())             # <<<<<<<<<<<<<<
  *                     fi.close()
  *                     if Debug:
  */
-              __pyx_t_10 = __Pyx_PyObject_GetAttrStr(__pyx_v_fi, __pyx_n_s_read); if (unlikely(!__pyx_t_10)) __PYX_ERR(0, 2401, __pyx_L31_error)
-              __Pyx_GOTREF(__pyx_t_10);
-              __pyx_t_22 = NULL;
-              __pyx_t_16 = 0;
+              __pyx_t_11 = __Pyx_PyObject_GetAttrStr(__pyx_v_fi, __pyx_n_s_read); if (unlikely(!__pyx_t_11)) __PYX_ERR(0, 2409, __pyx_L33_error)
+              __Pyx_GOTREF(__pyx_t_11);
+              __pyx_t_21 = NULL;
+              __pyx_t_15 = 0;
               #if CYTHON_UNPACK_METHODS
-              if (likely(PyMethod_Check(__pyx_t_10))) {
-                __pyx_t_22 = PyMethod_GET_SELF(__pyx_t_10);
-                if (likely(__pyx_t_22)) {
-                  PyObject* function = PyMethod_GET_FUNCTION(__pyx_t_10);
-                  __Pyx_INCREF(__pyx_t_22);
+              if (likely(PyMethod_Check(__pyx_t_11))) {
+                __pyx_t_21 = PyMethod_GET_SELF(__pyx_t_11);
+                if (likely(__pyx_t_21)) {
+                  PyObject* function = PyMethod_GET_FUNCTION(__pyx_t_11);
+                  __Pyx_INCREF(__pyx_t_21);
                   __Pyx_INCREF(function);
-                  __Pyx_DECREF_SET(__pyx_t_10, function);
-                  __pyx_t_16 = 1;
+                  __Pyx_DECREF_SET(__pyx_t_11, function);
+                  __pyx_t_15 = 1;
                 }
               }
               #endif
               {
-                PyObject *__pyx_callargs[2] = {__pyx_t_22, NULL};
-                __pyx_t_2 = __Pyx_PyObject_FastCall(__pyx_t_10, __pyx_callargs+1-__pyx_t_16, 0+__pyx_t_16);
-                __Pyx_XDECREF(__pyx_t_22); __pyx_t_22 = 0;
-                if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 2401, __pyx_L31_error)
-                __Pyx_GOTREF(__pyx_t_2);
-                __Pyx_DECREF(__pyx_t_10); __pyx_t_10 = 0;
+                PyObject *__pyx_callargs[2] = {__pyx_t_21, NULL};
+                __pyx_t_3 = __Pyx_PyObject_FastCall(__pyx_t_11, __pyx_callargs+1-__pyx_t_15, 0+__pyx_t_15);
+                __Pyx_XDECREF(__pyx_t_21); __pyx_t_21 = 0;
+                if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 2409, __pyx_L33_error)
+                __Pyx_GOTREF(__pyx_t_3);
+                __Pyx_DECREF(__pyx_t_11); __pyx_t_11 = 0;
               }
               __Pyx_INCREF(__pyx_v_loads);
-              __pyx_t_10 = __pyx_v_loads; __pyx_t_22 = NULL;
-              __pyx_t_16 = 0;
+              __pyx_t_11 = __pyx_v_loads; __pyx_t_21 = NULL;
+              __pyx_t_15 = 0;
               #if CYTHON_UNPACK_METHODS
-              if (unlikely(PyMethod_Check(__pyx_t_10))) {
-                __pyx_t_22 = PyMethod_GET_SELF(__pyx_t_10);
-                if (likely(__pyx_t_22)) {
-                  PyObject* function = PyMethod_GET_FUNCTION(__pyx_t_10);
-                  __Pyx_INCREF(__pyx_t_22);
+              if (unlikely(PyMethod_Check(__pyx_t_11))) {
+                __pyx_t_21 = PyMethod_GET_SELF(__pyx_t_11);
+                if (likely(__pyx_t_21)) {
+                  PyObject* function = PyMethod_GET_FUNCTION(__pyx_t_11);
+                  __Pyx_INCREF(__pyx_t_21);
                   __Pyx_INCREF(function);
-                  __Pyx_DECREF_SET(__pyx_t_10, function);
-                  __pyx_t_16 = 1;
+                  __Pyx_DECREF_SET(__pyx_t_11, function);
+                  __pyx_t_15 = 1;
                 }
               }
               #endif
               {
-                PyObject *__pyx_callargs[2] = {__pyx_t_22, __pyx_t_2};
-                __pyx_t_21 = __Pyx_PyObject_FastCall(__pyx_t_10, __pyx_callargs+1-__pyx_t_16, 1+__pyx_t_16);
-                __Pyx_XDECREF(__pyx_t_22); __pyx_t_22 = 0;
-                __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
-                if (unlikely(!__pyx_t_21)) __PYX_ERR(0, 2401, __pyx_L31_error)
-                __Pyx_GOTREF(__pyx_t_21);
-                __Pyx_DECREF(__pyx_t_10); __pyx_t_10 = 0;
+                PyObject *__pyx_callargs[2] = {__pyx_t_21, __pyx_t_3};
+                __pyx_t_20 = __Pyx_PyObject_FastCall(__pyx_t_11, __pyx_callargs+1-__pyx_t_15, 1+__pyx_t_15);
+                __Pyx_XDECREF(__pyx_t_21); __pyx_t_21 = 0;
+                __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
+                if (unlikely(!__pyx_t_20)) __PYX_ERR(0, 2409, __pyx_L33_error)
+                __Pyx_GOTREF(__pyx_t_20);
+                __Pyx_DECREF(__pyx_t_11); __pyx_t_11 = 0;
               }
-              __Pyx_XDECREF_SET(__pyx_v_splitComponent, __pyx_t_21);
-              __pyx_t_21 = 0;
+              __Pyx_XDECREF_SET(__pyx_v_splitComponent, __pyx_t_20);
+              __pyx_t_20 = 0;
 
-              /* "cSparseIntegerOutrankingDigraphs.pyx":2402
+              /* "cSparseIntegerOutrankingDigraphs.pyx":2410
  *                     fi = open(fiName,'rb')
  *                     splitComponent = loads(fi.read())
  *                     fi.close()             # <<<<<<<<<<<<<<
  *                     if Debug:
  *                         print('splitComponent',j,splitComponent)
  */
-              __pyx_t_10 = __Pyx_PyObject_GetAttrStr(__pyx_v_fi, __pyx_n_s_close); if (unlikely(!__pyx_t_10)) __PYX_ERR(0, 2402, __pyx_L31_error)
-              __Pyx_GOTREF(__pyx_t_10);
-              __pyx_t_2 = NULL;
-              __pyx_t_16 = 0;
+              __pyx_t_11 = __Pyx_PyObject_GetAttrStr(__pyx_v_fi, __pyx_n_s_close); if (unlikely(!__pyx_t_11)) __PYX_ERR(0, 2410, __pyx_L33_error)
+              __Pyx_GOTREF(__pyx_t_11);
+              __pyx_t_3 = NULL;
+              __pyx_t_15 = 0;
               #if CYTHON_UNPACK_METHODS
-              if (likely(PyMethod_Check(__pyx_t_10))) {
-                __pyx_t_2 = PyMethod_GET_SELF(__pyx_t_10);
-                if (likely(__pyx_t_2)) {
-                  PyObject* function = PyMethod_GET_FUNCTION(__pyx_t_10);
-                  __Pyx_INCREF(__pyx_t_2);
+              if (likely(PyMethod_Check(__pyx_t_11))) {
+                __pyx_t_3 = PyMethod_GET_SELF(__pyx_t_11);
+                if (likely(__pyx_t_3)) {
+                  PyObject* function = PyMethod_GET_FUNCTION(__pyx_t_11);
+                  __Pyx_INCREF(__pyx_t_3);
                   __Pyx_INCREF(function);
-                  __Pyx_DECREF_SET(__pyx_t_10, function);
-                  __pyx_t_16 = 1;
+                  __Pyx_DECREF_SET(__pyx_t_11, function);
+                  __pyx_t_15 = 1;
                 }
               }
               #endif
               {
-                PyObject *__pyx_callargs[2] = {__pyx_t_2, NULL};
-                __pyx_t_21 = __Pyx_PyObject_FastCall(__pyx_t_10, __pyx_callargs+1-__pyx_t_16, 0+__pyx_t_16);
-                __Pyx_XDECREF(__pyx_t_2); __pyx_t_2 = 0;
-                if (unlikely(!__pyx_t_21)) __PYX_ERR(0, 2402, __pyx_L31_error)
-                __Pyx_GOTREF(__pyx_t_21);
-                __Pyx_DECREF(__pyx_t_10); __pyx_t_10 = 0;
+                PyObject *__pyx_callargs[2] = {__pyx_t_3, NULL};
+                __pyx_t_20 = __Pyx_PyObject_FastCall(__pyx_t_11, __pyx_callargs+1-__pyx_t_15, 0+__pyx_t_15);
+                __Pyx_XDECREF(__pyx_t_3); __pyx_t_3 = 0;
+                if (unlikely(!__pyx_t_20)) __PYX_ERR(0, 2410, __pyx_L33_error)
+                __Pyx_GOTREF(__pyx_t_20);
+                __Pyx_DECREF(__pyx_t_11); __pyx_t_11 = 0;
               }
-              __Pyx_DECREF(__pyx_t_21); __pyx_t_21 = 0;
+              __Pyx_DECREF(__pyx_t_20); __pyx_t_20 = 0;
 
-              /* "cSparseIntegerOutrankingDigraphs.pyx":2403
+              /* "cSparseIntegerOutrankingDigraphs.pyx":2411
  *                     splitComponent = loads(fi.read())
  *                     fi.close()
  *                     if Debug:             # <<<<<<<<<<<<<<
@@ -50159,32 +50212,32 @@ static PyObject *__pyx_pf_32cSparseIntegerOutrankingDigraphs_24cQuantilesRanking
  */
               if (__pyx_v_Debug) {
 
-                /* "cSparseIntegerOutrankingDigraphs.pyx":2404
+                /* "cSparseIntegerOutrankingDigraphs.pyx":2412
  *                     fi.close()
  *                     if Debug:
  *                         print('splitComponent',j,splitComponent)             # <<<<<<<<<<<<<<
  *                     components[splitComponent['compKey']] = splitComponent['compDict']
  *                     boostedRanking += splitComponent['compDict']['componentRanking']
  */
-                __pyx_t_21 = __Pyx_PyInt_From_int(__pyx_v_j); if (unlikely(!__pyx_t_21)) __PYX_ERR(0, 2404, __pyx_L31_error)
-                __Pyx_GOTREF(__pyx_t_21);
-                __pyx_t_10 = PyTuple_New(3); if (unlikely(!__pyx_t_10)) __PYX_ERR(0, 2404, __pyx_L31_error)
-                __Pyx_GOTREF(__pyx_t_10);
+                __pyx_t_20 = __Pyx_PyInt_From_int(__pyx_v_j); if (unlikely(!__pyx_t_20)) __PYX_ERR(0, 2412, __pyx_L33_error)
+                __Pyx_GOTREF(__pyx_t_20);
+                __pyx_t_11 = PyTuple_New(3); if (unlikely(!__pyx_t_11)) __PYX_ERR(0, 2412, __pyx_L33_error)
+                __Pyx_GOTREF(__pyx_t_11);
                 __Pyx_INCREF(__pyx_n_u_splitComponent_2);
                 __Pyx_GIVEREF(__pyx_n_u_splitComponent_2);
-                if (__Pyx_PyTuple_SET_ITEM(__pyx_t_10, 0, __pyx_n_u_splitComponent_2)) __PYX_ERR(0, 2404, __pyx_L31_error);
-                __Pyx_GIVEREF(__pyx_t_21);
-                if (__Pyx_PyTuple_SET_ITEM(__pyx_t_10, 1, __pyx_t_21)) __PYX_ERR(0, 2404, __pyx_L31_error);
+                if (__Pyx_PyTuple_SET_ITEM(__pyx_t_11, 0, __pyx_n_u_splitComponent_2)) __PYX_ERR(0, 2412, __pyx_L33_error);
+                __Pyx_GIVEREF(__pyx_t_20);
+                if (__Pyx_PyTuple_SET_ITEM(__pyx_t_11, 1, __pyx_t_20)) __PYX_ERR(0, 2412, __pyx_L33_error);
                 __Pyx_INCREF(__pyx_v_splitComponent);
                 __Pyx_GIVEREF(__pyx_v_splitComponent);
-                if (__Pyx_PyTuple_SET_ITEM(__pyx_t_10, 2, __pyx_v_splitComponent)) __PYX_ERR(0, 2404, __pyx_L31_error);
-                __pyx_t_21 = 0;
-                __pyx_t_21 = __Pyx_PyObject_Call(__pyx_builtin_print, __pyx_t_10, NULL); if (unlikely(!__pyx_t_21)) __PYX_ERR(0, 2404, __pyx_L31_error)
-                __Pyx_GOTREF(__pyx_t_21);
-                __Pyx_DECREF(__pyx_t_10); __pyx_t_10 = 0;
-                __Pyx_DECREF(__pyx_t_21); __pyx_t_21 = 0;
+                if (__Pyx_PyTuple_SET_ITEM(__pyx_t_11, 2, __pyx_v_splitComponent)) __PYX_ERR(0, 2412, __pyx_L33_error);
+                __pyx_t_20 = 0;
+                __pyx_t_20 = __Pyx_PyObject_Call(__pyx_builtin_print, __pyx_t_11, NULL); if (unlikely(!__pyx_t_20)) __PYX_ERR(0, 2412, __pyx_L33_error)
+                __Pyx_GOTREF(__pyx_t_20);
+                __Pyx_DECREF(__pyx_t_11); __pyx_t_11 = 0;
+                __Pyx_DECREF(__pyx_t_20); __pyx_t_20 = 0;
 
-                /* "cSparseIntegerOutrankingDigraphs.pyx":2403
+                /* "cSparseIntegerOutrankingDigraphs.pyx":2411
  *                     splitComponent = loads(fi.read())
  *                     fi.close()
  *                     if Debug:             # <<<<<<<<<<<<<<
@@ -50193,137 +50246,137 @@ static PyObject *__pyx_pf_32cSparseIntegerOutrankingDigraphs_24cQuantilesRanking
  */
               }
 
-              /* "cSparseIntegerOutrankingDigraphs.pyx":2405
+              /* "cSparseIntegerOutrankingDigraphs.pyx":2413
  *                     if Debug:
  *                         print('splitComponent',j,splitComponent)
  *                     components[splitComponent['compKey']] = splitComponent['compDict']             # <<<<<<<<<<<<<<
  *                     boostedRanking += splitComponent['compDict']['componentRanking']
  * 
  */
-              __pyx_t_21 = __Pyx_PyObject_Dict_GetItem(__pyx_v_splitComponent, __pyx_n_u_compDict); if (unlikely(!__pyx_t_21)) __PYX_ERR(0, 2405, __pyx_L31_error)
-              __Pyx_GOTREF(__pyx_t_21);
-              __pyx_t_10 = __Pyx_PyObject_Dict_GetItem(__pyx_v_splitComponent, __pyx_n_u_compKey); if (unlikely(!__pyx_t_10)) __PYX_ERR(0, 2405, __pyx_L31_error)
-              __Pyx_GOTREF(__pyx_t_10);
-              if (unlikely((PyObject_SetItem(__pyx_v_components, __pyx_t_10, __pyx_t_21) < 0))) __PYX_ERR(0, 2405, __pyx_L31_error)
-              __Pyx_DECREF(__pyx_t_10); __pyx_t_10 = 0;
-              __Pyx_DECREF(__pyx_t_21); __pyx_t_21 = 0;
+              __pyx_t_20 = __Pyx_PyObject_Dict_GetItem(__pyx_v_splitComponent, __pyx_n_u_compDict); if (unlikely(!__pyx_t_20)) __PYX_ERR(0, 2413, __pyx_L33_error)
+              __Pyx_GOTREF(__pyx_t_20);
+              __pyx_t_11 = __Pyx_PyObject_Dict_GetItem(__pyx_v_splitComponent, __pyx_n_u_compKey); if (unlikely(!__pyx_t_11)) __PYX_ERR(0, 2413, __pyx_L33_error)
+              __Pyx_GOTREF(__pyx_t_11);
+              if (unlikely((PyObject_SetItem(__pyx_v_components, __pyx_t_11, __pyx_t_20) < 0))) __PYX_ERR(0, 2413, __pyx_L33_error)
+              __Pyx_DECREF(__pyx_t_11); __pyx_t_11 = 0;
+              __Pyx_DECREF(__pyx_t_20); __pyx_t_20 = 0;
 
-              /* "cSparseIntegerOutrankingDigraphs.pyx":2406
+              /* "cSparseIntegerOutrankingDigraphs.pyx":2414
  *                         print('splitComponent',j,splitComponent)
  *                     components[splitComponent['compKey']] = splitComponent['compDict']
  *                     boostedRanking += splitComponent['compDict']['componentRanking']             # <<<<<<<<<<<<<<
  * 
  *         # storing components, fillRate and maximalComponentSize
  */
-              __pyx_t_21 = __Pyx_PyObject_Dict_GetItem(__pyx_v_splitComponent, __pyx_n_u_compDict); if (unlikely(!__pyx_t_21)) __PYX_ERR(0, 2406, __pyx_L31_error)
-              __Pyx_GOTREF(__pyx_t_21);
-              __pyx_t_10 = __Pyx_PyObject_Dict_GetItem(__pyx_t_21, __pyx_n_u_componentRanking); if (unlikely(!__pyx_t_10)) __PYX_ERR(0, 2406, __pyx_L31_error)
-              __Pyx_GOTREF(__pyx_t_10);
-              __Pyx_DECREF(__pyx_t_21); __pyx_t_21 = 0;
-              __pyx_t_21 = PyNumber_InPlaceAdd(__pyx_v_boostedRanking, __pyx_t_10); if (unlikely(!__pyx_t_21)) __PYX_ERR(0, 2406, __pyx_L31_error)
-              __Pyx_GOTREF(__pyx_t_21);
-              __Pyx_DECREF(__pyx_t_10); __pyx_t_10 = 0;
-              __Pyx_DECREF_SET(__pyx_v_boostedRanking, __pyx_t_21);
-              __pyx_t_21 = 0;
+              __pyx_t_20 = __Pyx_PyObject_Dict_GetItem(__pyx_v_splitComponent, __pyx_n_u_compDict); if (unlikely(!__pyx_t_20)) __PYX_ERR(0, 2414, __pyx_L33_error)
+              __Pyx_GOTREF(__pyx_t_20);
+              __pyx_t_11 = __Pyx_PyObject_Dict_GetItem(__pyx_t_20, __pyx_n_u_componentRanking); if (unlikely(!__pyx_t_11)) __PYX_ERR(0, 2414, __pyx_L33_error)
+              __Pyx_GOTREF(__pyx_t_11);
+              __Pyx_DECREF(__pyx_t_20); __pyx_t_20 = 0;
+              __pyx_t_20 = PyNumber_InPlaceAdd(__pyx_v_boostedRanking, __pyx_t_11); if (unlikely(!__pyx_t_20)) __PYX_ERR(0, 2414, __pyx_L33_error)
+              __Pyx_GOTREF(__pyx_t_20);
+              __Pyx_DECREF(__pyx_t_11); __pyx_t_11 = 0;
+              __Pyx_DECREF_SET(__pyx_v_boostedRanking, __pyx_t_20);
+              __pyx_t_20 = 0;
             }
 
-            /* "cSparseIntegerOutrankingDigraphs.pyx":2369
+            /* "cSparseIntegerOutrankingDigraphs.pyx":2377
  *             from tempfile import TemporaryDirectory,mkdtemp
  *             maximalComponentSize = 0
  *             with TemporaryDirectory(dir=tempDir) as tempDirName:             # <<<<<<<<<<<<<<
  *                 ## tasks queue and workers launching
- *                 NUMBER_OF_WORKERS = nbrCores
+ *                 NUMBER_OF_WORKERS = nbrOfCPUs
  */
           }
+          __Pyx_XDECREF(__pyx_t_17); __pyx_t_17 = 0;
           __Pyx_XDECREF(__pyx_t_18); __pyx_t_18 = 0;
           __Pyx_XDECREF(__pyx_t_19); __pyx_t_19 = 0;
-          __Pyx_XDECREF(__pyx_t_20); __pyx_t_20 = 0;
-          goto __pyx_L36_try_end;
-          __pyx_L31_error:;
+          goto __pyx_L38_try_end;
+          __pyx_L33_error:;
           __Pyx_XDECREF(__pyx_t_1); __pyx_t_1 = 0;
-          __Pyx_XDECREF(__pyx_t_10); __pyx_t_10 = 0;
+          __Pyx_XDECREF(__pyx_t_11); __pyx_t_11 = 0;
           __Pyx_XDECREF(__pyx_t_2); __pyx_t_2 = 0;
+          __Pyx_XDECREF(__pyx_t_20); __pyx_t_20 = 0;
           __Pyx_XDECREF(__pyx_t_21); __pyx_t_21 = 0;
-          __Pyx_XDECREF(__pyx_t_22); __pyx_t_22 = 0;
           __Pyx_XDECREF(__pyx_t_3); __pyx_t_3 = 0;
           __Pyx_XDECREF(__pyx_t_6); __pyx_t_6 = 0;
           /*except:*/ {
             __Pyx_AddTraceback("cSparseIntegerOutrankingDigraphs.cQuantilesRankingDigraph.__init__", __pyx_clineno, __pyx_lineno, __pyx_filename);
-            if (__Pyx_GetException(&__pyx_t_21, &__pyx_t_10, &__pyx_t_2) < 0) __PYX_ERR(0, 2369, __pyx_L33_except_error)
-            __Pyx_XGOTREF(__pyx_t_21);
-            __Pyx_XGOTREF(__pyx_t_10);
-            __Pyx_XGOTREF(__pyx_t_2);
-            __pyx_t_22 = PyTuple_Pack(3, __pyx_t_21, __pyx_t_10, __pyx_t_2); if (unlikely(!__pyx_t_22)) __PYX_ERR(0, 2369, __pyx_L33_except_error)
+            if (__Pyx_GetException(&__pyx_t_20, &__pyx_t_11, &__pyx_t_3) < 0) __PYX_ERR(0, 2377, __pyx_L35_except_error)
+            __Pyx_XGOTREF(__pyx_t_20);
+            __Pyx_XGOTREF(__pyx_t_11);
+            __Pyx_XGOTREF(__pyx_t_3);
+            __pyx_t_21 = PyTuple_Pack(3, __pyx_t_20, __pyx_t_11, __pyx_t_3); if (unlikely(!__pyx_t_21)) __PYX_ERR(0, 2377, __pyx_L35_except_error)
+            __Pyx_GOTREF(__pyx_t_21);
+            __pyx_t_22 = __Pyx_PyObject_Call(__pyx_t_16, __pyx_t_21, NULL);
+            __Pyx_DECREF(__pyx_t_16); __pyx_t_16 = 0;
+            __Pyx_DECREF(__pyx_t_21); __pyx_t_21 = 0;
+            if (unlikely(!__pyx_t_22)) __PYX_ERR(0, 2377, __pyx_L35_except_error)
             __Pyx_GOTREF(__pyx_t_22);
-            __pyx_t_23 = __Pyx_PyObject_Call(__pyx_t_17, __pyx_t_22, NULL);
-            __Pyx_DECREF(__pyx_t_17); __pyx_t_17 = 0;
+            __pyx_t_10 = __Pyx_PyObject_IsTrue(__pyx_t_22);
             __Pyx_DECREF(__pyx_t_22); __pyx_t_22 = 0;
-            if (unlikely(!__pyx_t_23)) __PYX_ERR(0, 2369, __pyx_L33_except_error)
-            __Pyx_GOTREF(__pyx_t_23);
-            __pyx_t_12 = __Pyx_PyObject_IsTrue(__pyx_t_23);
-            __Pyx_DECREF(__pyx_t_23); __pyx_t_23 = 0;
-            if (__pyx_t_12 < 0) __PYX_ERR(0, 2369, __pyx_L33_except_error)
-            __pyx_t_11 = (!__pyx_t_12);
-            if (unlikely(__pyx_t_11)) {
-              __Pyx_GIVEREF(__pyx_t_21);
-              __Pyx_GIVEREF(__pyx_t_10);
-              __Pyx_XGIVEREF(__pyx_t_2);
-              __Pyx_ErrRestoreWithState(__pyx_t_21, __pyx_t_10, __pyx_t_2);
-              __pyx_t_21 = 0; __pyx_t_10 = 0; __pyx_t_2 = 0; 
-              __PYX_ERR(0, 2369, __pyx_L33_except_error)
+            if (__pyx_t_10 < 0) __PYX_ERR(0, 2377, __pyx_L35_except_error)
+            __pyx_t_23 = (!__pyx_t_10);
+            if (unlikely(__pyx_t_23)) {
+              __Pyx_GIVEREF(__pyx_t_20);
+              __Pyx_GIVEREF(__pyx_t_11);
+              __Pyx_XGIVEREF(__pyx_t_3);
+              __Pyx_ErrRestoreWithState(__pyx_t_20, __pyx_t_11, __pyx_t_3);
+              __pyx_t_20 = 0; __pyx_t_11 = 0; __pyx_t_3 = 0; 
+              __PYX_ERR(0, 2377, __pyx_L35_except_error)
             }
-            __Pyx_XDECREF(__pyx_t_21); __pyx_t_21 = 0;
-            __Pyx_XDECREF(__pyx_t_10); __pyx_t_10 = 0;
-            __Pyx_XDECREF(__pyx_t_2); __pyx_t_2 = 0;
-            goto __pyx_L32_exception_handled;
+            __Pyx_XDECREF(__pyx_t_20); __pyx_t_20 = 0;
+            __Pyx_XDECREF(__pyx_t_11); __pyx_t_11 = 0;
+            __Pyx_XDECREF(__pyx_t_3); __pyx_t_3 = 0;
+            goto __pyx_L34_exception_handled;
           }
-          __pyx_L33_except_error:;
+          __pyx_L35_except_error:;
+          __Pyx_XGIVEREF(__pyx_t_17);
           __Pyx_XGIVEREF(__pyx_t_18);
           __Pyx_XGIVEREF(__pyx_t_19);
-          __Pyx_XGIVEREF(__pyx_t_20);
-          __Pyx_ExceptionReset(__pyx_t_18, __pyx_t_19, __pyx_t_20);
+          __Pyx_ExceptionReset(__pyx_t_17, __pyx_t_18, __pyx_t_19);
           goto __pyx_L1_error;
-          __pyx_L32_exception_handled:;
+          __pyx_L34_exception_handled:;
+          __Pyx_XGIVEREF(__pyx_t_17);
           __Pyx_XGIVEREF(__pyx_t_18);
           __Pyx_XGIVEREF(__pyx_t_19);
-          __Pyx_XGIVEREF(__pyx_t_20);
-          __Pyx_ExceptionReset(__pyx_t_18, __pyx_t_19, __pyx_t_20);
-          __pyx_L36_try_end:;
+          __Pyx_ExceptionReset(__pyx_t_17, __pyx_t_18, __pyx_t_19);
+          __pyx_L38_try_end:;
         }
       }
       /*finally:*/ {
         /*normal exit:*/{
-          if (__pyx_t_17) {
-            __pyx_t_20 = __Pyx_PyObject_Call(__pyx_t_17, __pyx_tuple__44, NULL);
-            __Pyx_DECREF(__pyx_t_17); __pyx_t_17 = 0;
-            if (unlikely(!__pyx_t_20)) __PYX_ERR(0, 2369, __pyx_L1_error)
-            __Pyx_GOTREF(__pyx_t_20);
-            __Pyx_DECREF(__pyx_t_20); __pyx_t_20 = 0;
+          if (__pyx_t_16) {
+            __pyx_t_19 = __Pyx_PyObject_Call(__pyx_t_16, __pyx_tuple__44, NULL);
+            __Pyx_DECREF(__pyx_t_16); __pyx_t_16 = 0;
+            if (unlikely(!__pyx_t_19)) __PYX_ERR(0, 2377, __pyx_L1_error)
+            __Pyx_GOTREF(__pyx_t_19);
+            __Pyx_DECREF(__pyx_t_19); __pyx_t_19 = 0;
           }
-          goto __pyx_L30;
+          goto __pyx_L32;
         }
-        __pyx_L30:;
+        __pyx_L32:;
       }
-      goto __pyx_L65;
-      __pyx_L27_error:;
-      __Pyx_DECREF(__pyx_t_17); __pyx_t_17 = 0;
+      goto __pyx_L67;
+      __pyx_L29_error:;
+      __Pyx_DECREF(__pyx_t_16); __pyx_t_16 = 0;
       goto __pyx_L1_error;
-      __pyx_L65:;
+      __pyx_L67:;
     }
   }
-  __pyx_L20:;
+  __pyx_L22:;
 
-  /* "cSparseIntegerOutrankingDigraphs.pyx":2410
+  /* "cSparseIntegerOutrankingDigraphs.pyx":2418
  *         # storing components, fillRate and maximalComponentSize
  * 
  *         self.components = components             # <<<<<<<<<<<<<<
  *         fillRate = 0
  *         #maximalComponentSize = 0
  */
-  if (unlikely(!__pyx_v_components)) { __Pyx_RaiseUnboundLocalError("components"); __PYX_ERR(0, 2410, __pyx_L1_error) }
-  if (__Pyx_PyObject_SetAttrStr(__pyx_v_self, __pyx_n_s_components, __pyx_v_components) < 0) __PYX_ERR(0, 2410, __pyx_L1_error)
+  if (unlikely(!__pyx_v_components)) { __Pyx_RaiseUnboundLocalError("components"); __PYX_ERR(0, 2418, __pyx_L1_error) }
+  if (__Pyx_PyObject_SetAttrStr(__pyx_v_self, __pyx_n_s_components, __pyx_v_components) < 0) __PYX_ERR(0, 2418, __pyx_L1_error)
 
-  /* "cSparseIntegerOutrankingDigraphs.pyx":2411
+  /* "cSparseIntegerOutrankingDigraphs.pyx":2419
  * 
  *         self.components = components
  *         fillRate = 0             # <<<<<<<<<<<<<<
@@ -50333,7 +50386,7 @@ static PyObject *__pyx_pf_32cSparseIntegerOutrankingDigraphs_24cQuantilesRanking
   __Pyx_INCREF(__pyx_int_0);
   __pyx_v_fillRate = __pyx_int_0;
 
-  /* "cSparseIntegerOutrankingDigraphs.pyx":2413
+  /* "cSparseIntegerOutrankingDigraphs.pyx":2421
  *         fillRate = 0
  *         #maximalComponentSize = 0
  *         for compKey,comp in components.items():             # <<<<<<<<<<<<<<
@@ -50341,75 +50394,75 @@ static PyObject *__pyx_pf_32cSparseIntegerOutrankingDigraphs_24cQuantilesRanking
  *             componentRanking = components[compKey]['componentRanking']
  */
   __pyx_t_7 = 0;
-  if (unlikely(!__pyx_v_components)) { __Pyx_RaiseUnboundLocalError("components"); __PYX_ERR(0, 2413, __pyx_L1_error) }
+  if (unlikely(!__pyx_v_components)) { __Pyx_RaiseUnboundLocalError("components"); __PYX_ERR(0, 2421, __pyx_L1_error) }
   if (unlikely(__pyx_v_components == Py_None)) {
     PyErr_Format(PyExc_AttributeError, "'NoneType' object has no attribute '%.30s'", "items");
-    __PYX_ERR(0, 2413, __pyx_L1_error)
+    __PYX_ERR(0, 2421, __pyx_L1_error)
   }
-  __pyx_t_10 = __Pyx_dict_iterator(__pyx_v_components, 0, __pyx_n_s_items, (&__pyx_t_24), (&__pyx_t_4)); if (unlikely(!__pyx_t_10)) __PYX_ERR(0, 2413, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_t_10);
-  __Pyx_XDECREF(__pyx_t_2);
-  __pyx_t_2 = __pyx_t_10;
-  __pyx_t_10 = 0;
+  __pyx_t_11 = __Pyx_dict_iterator(__pyx_v_components, 0, __pyx_n_s_items, (&__pyx_t_24), (&__pyx_t_4)); if (unlikely(!__pyx_t_11)) __PYX_ERR(0, 2421, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_11);
+  __Pyx_XDECREF(__pyx_t_3);
+  __pyx_t_3 = __pyx_t_11;
+  __pyx_t_11 = 0;
   while (1) {
-    __pyx_t_16 = __Pyx_dict_iter_next(__pyx_t_2, __pyx_t_24, &__pyx_t_7, &__pyx_t_10, &__pyx_t_21, NULL, __pyx_t_4);
-    if (unlikely(__pyx_t_16 == 0)) break;
-    if (unlikely(__pyx_t_16 == -1)) __PYX_ERR(0, 2413, __pyx_L1_error)
-    __Pyx_GOTREF(__pyx_t_10);
-    __Pyx_GOTREF(__pyx_t_21);
-    __Pyx_XDECREF_SET(__pyx_v_compKey, __pyx_t_10);
-    __pyx_t_10 = 0;
-    __Pyx_XDECREF_SET(__pyx_v_comp, __pyx_t_21);
-    __pyx_t_21 = 0;
+    __pyx_t_15 = __Pyx_dict_iter_next(__pyx_t_3, __pyx_t_24, &__pyx_t_7, &__pyx_t_11, &__pyx_t_20, NULL, __pyx_t_4);
+    if (unlikely(__pyx_t_15 == 0)) break;
+    if (unlikely(__pyx_t_15 == -1)) __PYX_ERR(0, 2421, __pyx_L1_error)
+    __Pyx_GOTREF(__pyx_t_11);
+    __Pyx_GOTREF(__pyx_t_20);
+    __Pyx_XDECREF_SET(__pyx_v_compKey, __pyx_t_11);
+    __pyx_t_11 = 0;
+    __Pyx_XDECREF_SET(__pyx_v_comp, __pyx_t_20);
+    __pyx_t_20 = 0;
 
-    /* "cSparseIntegerOutrankingDigraphs.pyx":2415
+    /* "cSparseIntegerOutrankingDigraphs.pyx":2423
  *         for compKey,comp in components.items():
  *             #pg = comp['subGraph']
  *             componentRanking = components[compKey]['componentRanking']             # <<<<<<<<<<<<<<
  *             npg = len(componentRanking)
  *             #if npg > maximalComponentSize:
  */
-    if (unlikely(!__pyx_v_components)) { __Pyx_RaiseUnboundLocalError("components"); __PYX_ERR(0, 2415, __pyx_L1_error) }
-    __pyx_t_21 = __Pyx_PyObject_GetItem(__pyx_v_components, __pyx_v_compKey); if (unlikely(!__pyx_t_21)) __PYX_ERR(0, 2415, __pyx_L1_error)
-    __Pyx_GOTREF(__pyx_t_21);
-    __pyx_t_10 = __Pyx_PyObject_Dict_GetItem(__pyx_t_21, __pyx_n_u_componentRanking); if (unlikely(!__pyx_t_10)) __PYX_ERR(0, 2415, __pyx_L1_error)
-    __Pyx_GOTREF(__pyx_t_10);
-    __Pyx_DECREF(__pyx_t_21); __pyx_t_21 = 0;
-    __Pyx_XDECREF_SET(__pyx_v_componentRanking, __pyx_t_10);
-    __pyx_t_10 = 0;
+    if (unlikely(!__pyx_v_components)) { __Pyx_RaiseUnboundLocalError("components"); __PYX_ERR(0, 2423, __pyx_L1_error) }
+    __pyx_t_20 = __Pyx_PyObject_GetItem(__pyx_v_components, __pyx_v_compKey); if (unlikely(!__pyx_t_20)) __PYX_ERR(0, 2423, __pyx_L1_error)
+    __Pyx_GOTREF(__pyx_t_20);
+    __pyx_t_11 = __Pyx_PyObject_Dict_GetItem(__pyx_t_20, __pyx_n_u_componentRanking); if (unlikely(!__pyx_t_11)) __PYX_ERR(0, 2423, __pyx_L1_error)
+    __Pyx_GOTREF(__pyx_t_11);
+    __Pyx_DECREF(__pyx_t_20); __pyx_t_20 = 0;
+    __Pyx_XDECREF_SET(__pyx_v_componentRanking, __pyx_t_11);
+    __pyx_t_11 = 0;
 
-    /* "cSparseIntegerOutrankingDigraphs.pyx":2416
+    /* "cSparseIntegerOutrankingDigraphs.pyx":2424
  *             #pg = comp['subGraph']
  *             componentRanking = components[compKey]['componentRanking']
  *             npg = len(componentRanking)             # <<<<<<<<<<<<<<
  *             #if npg > maximalComponentSize:
  *             #    maximalComponentSize = npg
  */
-    __pyx_t_25 = PyObject_Length(__pyx_v_componentRanking); if (unlikely(__pyx_t_25 == ((Py_ssize_t)-1))) __PYX_ERR(0, 2416, __pyx_L1_error)
-    __pyx_t_10 = PyInt_FromSsize_t(__pyx_t_25); if (unlikely(!__pyx_t_10)) __PYX_ERR(0, 2416, __pyx_L1_error)
-    __Pyx_GOTREF(__pyx_t_10);
-    __Pyx_XDECREF_SET(__pyx_v_npg, __pyx_t_10);
-    __pyx_t_10 = 0;
+    __pyx_t_25 = PyObject_Length(__pyx_v_componentRanking); if (unlikely(__pyx_t_25 == ((Py_ssize_t)-1))) __PYX_ERR(0, 2424, __pyx_L1_error)
+    __pyx_t_11 = PyInt_FromSsize_t(__pyx_t_25); if (unlikely(!__pyx_t_11)) __PYX_ERR(0, 2424, __pyx_L1_error)
+    __Pyx_GOTREF(__pyx_t_11);
+    __Pyx_XDECREF_SET(__pyx_v_npg, __pyx_t_11);
+    __pyx_t_11 = 0;
 
-    /* "cSparseIntegerOutrankingDigraphs.pyx":2419
+    /* "cSparseIntegerOutrankingDigraphs.pyx":2427
  *             #if npg > maximalComponentSize:
  *             #    maximalComponentSize = npg
  *             fillRate += npg*(npg-1)             # <<<<<<<<<<<<<<
  *             for x in componentRanking:
  *                 self.actions[x]['component'] = compKey
  */
-    __pyx_t_10 = __Pyx_PyInt_SubtractObjC(__pyx_v_npg, __pyx_int_1, 1, 0, 0); if (unlikely(!__pyx_t_10)) __PYX_ERR(0, 2419, __pyx_L1_error)
-    __Pyx_GOTREF(__pyx_t_10);
-    __pyx_t_21 = PyNumber_Multiply(__pyx_v_npg, __pyx_t_10); if (unlikely(!__pyx_t_21)) __PYX_ERR(0, 2419, __pyx_L1_error)
-    __Pyx_GOTREF(__pyx_t_21);
-    __Pyx_DECREF(__pyx_t_10); __pyx_t_10 = 0;
-    __pyx_t_10 = PyNumber_InPlaceAdd(__pyx_v_fillRate, __pyx_t_21); if (unlikely(!__pyx_t_10)) __PYX_ERR(0, 2419, __pyx_L1_error)
-    __Pyx_GOTREF(__pyx_t_10);
-    __Pyx_DECREF(__pyx_t_21); __pyx_t_21 = 0;
-    __Pyx_DECREF_SET(__pyx_v_fillRate, __pyx_t_10);
-    __pyx_t_10 = 0;
+    __pyx_t_11 = __Pyx_PyInt_SubtractObjC(__pyx_v_npg, __pyx_int_1, 1, 0, 0); if (unlikely(!__pyx_t_11)) __PYX_ERR(0, 2427, __pyx_L1_error)
+    __Pyx_GOTREF(__pyx_t_11);
+    __pyx_t_20 = PyNumber_Multiply(__pyx_v_npg, __pyx_t_11); if (unlikely(!__pyx_t_20)) __PYX_ERR(0, 2427, __pyx_L1_error)
+    __Pyx_GOTREF(__pyx_t_20);
+    __Pyx_DECREF(__pyx_t_11); __pyx_t_11 = 0;
+    __pyx_t_11 = PyNumber_InPlaceAdd(__pyx_v_fillRate, __pyx_t_20); if (unlikely(!__pyx_t_11)) __PYX_ERR(0, 2427, __pyx_L1_error)
+    __Pyx_GOTREF(__pyx_t_11);
+    __Pyx_DECREF(__pyx_t_20); __pyx_t_20 = 0;
+    __Pyx_DECREF_SET(__pyx_v_fillRate, __pyx_t_11);
+    __pyx_t_11 = 0;
 
-    /* "cSparseIntegerOutrankingDigraphs.pyx":2420
+    /* "cSparseIntegerOutrankingDigraphs.pyx":2428
  *             #    maximalComponentSize = npg
  *             fillRate += npg*(npg-1)
  *             for x in componentRanking:             # <<<<<<<<<<<<<<
@@ -50417,76 +50470,76 @@ static PyObject *__pyx_pf_32cSparseIntegerOutrankingDigraphs_24cQuantilesRanking
  *         self.fillRate = fillRate/(self.order * (self.order-1))
  */
     if (likely(PyList_CheckExact(__pyx_v_componentRanking)) || PyTuple_CheckExact(__pyx_v_componentRanking)) {
-      __pyx_t_10 = __pyx_v_componentRanking; __Pyx_INCREF(__pyx_t_10);
+      __pyx_t_11 = __pyx_v_componentRanking; __Pyx_INCREF(__pyx_t_11);
       __pyx_t_25 = 0;
       __pyx_t_8 = NULL;
     } else {
-      __pyx_t_25 = -1; __pyx_t_10 = PyObject_GetIter(__pyx_v_componentRanking); if (unlikely(!__pyx_t_10)) __PYX_ERR(0, 2420, __pyx_L1_error)
-      __Pyx_GOTREF(__pyx_t_10);
-      __pyx_t_8 = __Pyx_PyObject_GetIterNextFunc(__pyx_t_10); if (unlikely(!__pyx_t_8)) __PYX_ERR(0, 2420, __pyx_L1_error)
+      __pyx_t_25 = -1; __pyx_t_11 = PyObject_GetIter(__pyx_v_componentRanking); if (unlikely(!__pyx_t_11)) __PYX_ERR(0, 2428, __pyx_L1_error)
+      __Pyx_GOTREF(__pyx_t_11);
+      __pyx_t_8 = __Pyx_PyObject_GetIterNextFunc(__pyx_t_11); if (unlikely(!__pyx_t_8)) __PYX_ERR(0, 2428, __pyx_L1_error)
     }
     for (;;) {
       if (likely(!__pyx_t_8)) {
-        if (likely(PyList_CheckExact(__pyx_t_10))) {
+        if (likely(PyList_CheckExact(__pyx_t_11))) {
           {
-            Py_ssize_t __pyx_temp = __Pyx_PyList_GET_SIZE(__pyx_t_10);
+            Py_ssize_t __pyx_temp = __Pyx_PyList_GET_SIZE(__pyx_t_11);
             #if !CYTHON_ASSUME_SAFE_MACROS
-            if (unlikely((__pyx_temp < 0))) __PYX_ERR(0, 2420, __pyx_L1_error)
+            if (unlikely((__pyx_temp < 0))) __PYX_ERR(0, 2428, __pyx_L1_error)
             #endif
             if (__pyx_t_25 >= __pyx_temp) break;
           }
           #if CYTHON_ASSUME_SAFE_MACROS && !CYTHON_AVOID_BORROWED_REFS
-          __pyx_t_21 = PyList_GET_ITEM(__pyx_t_10, __pyx_t_25); __Pyx_INCREF(__pyx_t_21); __pyx_t_25++; if (unlikely((0 < 0))) __PYX_ERR(0, 2420, __pyx_L1_error)
+          __pyx_t_20 = PyList_GET_ITEM(__pyx_t_11, __pyx_t_25); __Pyx_INCREF(__pyx_t_20); __pyx_t_25++; if (unlikely((0 < 0))) __PYX_ERR(0, 2428, __pyx_L1_error)
           #else
-          __pyx_t_21 = __Pyx_PySequence_ITEM(__pyx_t_10, __pyx_t_25); __pyx_t_25++; if (unlikely(!__pyx_t_21)) __PYX_ERR(0, 2420, __pyx_L1_error)
-          __Pyx_GOTREF(__pyx_t_21);
+          __pyx_t_20 = __Pyx_PySequence_ITEM(__pyx_t_11, __pyx_t_25); __pyx_t_25++; if (unlikely(!__pyx_t_20)) __PYX_ERR(0, 2428, __pyx_L1_error)
+          __Pyx_GOTREF(__pyx_t_20);
           #endif
         } else {
           {
-            Py_ssize_t __pyx_temp = __Pyx_PyTuple_GET_SIZE(__pyx_t_10);
+            Py_ssize_t __pyx_temp = __Pyx_PyTuple_GET_SIZE(__pyx_t_11);
             #if !CYTHON_ASSUME_SAFE_MACROS
-            if (unlikely((__pyx_temp < 0))) __PYX_ERR(0, 2420, __pyx_L1_error)
+            if (unlikely((__pyx_temp < 0))) __PYX_ERR(0, 2428, __pyx_L1_error)
             #endif
             if (__pyx_t_25 >= __pyx_temp) break;
           }
           #if CYTHON_ASSUME_SAFE_MACROS && !CYTHON_AVOID_BORROWED_REFS
-          __pyx_t_21 = PyTuple_GET_ITEM(__pyx_t_10, __pyx_t_25); __Pyx_INCREF(__pyx_t_21); __pyx_t_25++; if (unlikely((0 < 0))) __PYX_ERR(0, 2420, __pyx_L1_error)
+          __pyx_t_20 = PyTuple_GET_ITEM(__pyx_t_11, __pyx_t_25); __Pyx_INCREF(__pyx_t_20); __pyx_t_25++; if (unlikely((0 < 0))) __PYX_ERR(0, 2428, __pyx_L1_error)
           #else
-          __pyx_t_21 = __Pyx_PySequence_ITEM(__pyx_t_10, __pyx_t_25); __pyx_t_25++; if (unlikely(!__pyx_t_21)) __PYX_ERR(0, 2420, __pyx_L1_error)
-          __Pyx_GOTREF(__pyx_t_21);
+          __pyx_t_20 = __Pyx_PySequence_ITEM(__pyx_t_11, __pyx_t_25); __pyx_t_25++; if (unlikely(!__pyx_t_20)) __PYX_ERR(0, 2428, __pyx_L1_error)
+          __Pyx_GOTREF(__pyx_t_20);
           #endif
         }
       } else {
-        __pyx_t_21 = __pyx_t_8(__pyx_t_10);
-        if (unlikely(!__pyx_t_21)) {
+        __pyx_t_20 = __pyx_t_8(__pyx_t_11);
+        if (unlikely(!__pyx_t_20)) {
           PyObject* exc_type = PyErr_Occurred();
           if (exc_type) {
             if (likely(__Pyx_PyErr_GivenExceptionMatches(exc_type, PyExc_StopIteration))) PyErr_Clear();
-            else __PYX_ERR(0, 2420, __pyx_L1_error)
+            else __PYX_ERR(0, 2428, __pyx_L1_error)
           }
           break;
         }
-        __Pyx_GOTREF(__pyx_t_21);
+        __Pyx_GOTREF(__pyx_t_20);
       }
-      __Pyx_XDECREF_SET(__pyx_v_x, __pyx_t_21);
-      __pyx_t_21 = 0;
+      __Pyx_XDECREF_SET(__pyx_v_x, __pyx_t_20);
+      __pyx_t_20 = 0;
 
-      /* "cSparseIntegerOutrankingDigraphs.pyx":2421
+      /* "cSparseIntegerOutrankingDigraphs.pyx":2429
  *             fillRate += npg*(npg-1)
  *             for x in componentRanking:
  *                 self.actions[x]['component'] = compKey             # <<<<<<<<<<<<<<
  *         self.fillRate = fillRate/(self.order * (self.order-1))
  *         self.maximalComponentSize = maximalComponentSize
  */
-      __pyx_t_21 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_n_s_actions); if (unlikely(!__pyx_t_21)) __PYX_ERR(0, 2421, __pyx_L1_error)
+      __pyx_t_20 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_n_s_actions); if (unlikely(!__pyx_t_20)) __PYX_ERR(0, 2429, __pyx_L1_error)
+      __Pyx_GOTREF(__pyx_t_20);
+      __pyx_t_21 = __Pyx_PyObject_GetItem(__pyx_t_20, __pyx_v_x); if (unlikely(!__pyx_t_21)) __PYX_ERR(0, 2429, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_21);
-      __pyx_t_22 = __Pyx_PyObject_GetItem(__pyx_t_21, __pyx_v_x); if (unlikely(!__pyx_t_22)) __PYX_ERR(0, 2421, __pyx_L1_error)
-      __Pyx_GOTREF(__pyx_t_22);
+      __Pyx_DECREF(__pyx_t_20); __pyx_t_20 = 0;
+      if (unlikely((PyObject_SetItem(__pyx_t_21, __pyx_n_u_component, __pyx_v_compKey) < 0))) __PYX_ERR(0, 2429, __pyx_L1_error)
       __Pyx_DECREF(__pyx_t_21); __pyx_t_21 = 0;
-      if (unlikely((PyObject_SetItem(__pyx_t_22, __pyx_n_u_component, __pyx_v_compKey) < 0))) __PYX_ERR(0, 2421, __pyx_L1_error)
-      __Pyx_DECREF(__pyx_t_22); __pyx_t_22 = 0;
 
-      /* "cSparseIntegerOutrankingDigraphs.pyx":2420
+      /* "cSparseIntegerOutrankingDigraphs.pyx":2428
  *             #    maximalComponentSize = npg
  *             fillRate += npg*(npg-1)
  *             for x in componentRanking:             # <<<<<<<<<<<<<<
@@ -50494,84 +50547,84 @@ static PyObject *__pyx_pf_32cSparseIntegerOutrankingDigraphs_24cQuantilesRanking
  *         self.fillRate = fillRate/(self.order * (self.order-1))
  */
     }
-    __Pyx_DECREF(__pyx_t_10); __pyx_t_10 = 0;
+    __Pyx_DECREF(__pyx_t_11); __pyx_t_11 = 0;
   }
-  __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
+  __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
 
-  /* "cSparseIntegerOutrankingDigraphs.pyx":2422
+  /* "cSparseIntegerOutrankingDigraphs.pyx":2430
  *             for x in componentRanking:
  *                 self.actions[x]['component'] = compKey
  *         self.fillRate = fillRate/(self.order * (self.order-1))             # <<<<<<<<<<<<<<
  *         self.maximalComponentSize = maximalComponentSize
  * 
  */
-  __pyx_t_2 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_n_s_order); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 2422, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_t_2);
-  __pyx_t_10 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_n_s_order); if (unlikely(!__pyx_t_10)) __PYX_ERR(0, 2422, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_t_10);
-  __pyx_t_22 = __Pyx_PyInt_SubtractObjC(__pyx_t_10, __pyx_int_1, 1, 0, 0); if (unlikely(!__pyx_t_22)) __PYX_ERR(0, 2422, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_t_22);
-  __Pyx_DECREF(__pyx_t_10); __pyx_t_10 = 0;
-  __pyx_t_10 = PyNumber_Multiply(__pyx_t_2, __pyx_t_22); if (unlikely(!__pyx_t_10)) __PYX_ERR(0, 2422, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_t_10);
-  __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
-  __Pyx_DECREF(__pyx_t_22); __pyx_t_22 = 0;
-  __pyx_t_22 = __Pyx_PyNumber_Divide(__pyx_v_fillRate, __pyx_t_10); if (unlikely(!__pyx_t_22)) __PYX_ERR(0, 2422, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_t_22);
-  __Pyx_DECREF(__pyx_t_10); __pyx_t_10 = 0;
-  if (__Pyx_PyObject_SetAttrStr(__pyx_v_self, __pyx_n_s_fillRate, __pyx_t_22) < 0) __PYX_ERR(0, 2422, __pyx_L1_error)
-  __Pyx_DECREF(__pyx_t_22); __pyx_t_22 = 0;
+  __pyx_t_3 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_n_s_order); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 2430, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_3);
+  __pyx_t_11 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_n_s_order); if (unlikely(!__pyx_t_11)) __PYX_ERR(0, 2430, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_11);
+  __pyx_t_21 = __Pyx_PyInt_SubtractObjC(__pyx_t_11, __pyx_int_1, 1, 0, 0); if (unlikely(!__pyx_t_21)) __PYX_ERR(0, 2430, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_21);
+  __Pyx_DECREF(__pyx_t_11); __pyx_t_11 = 0;
+  __pyx_t_11 = PyNumber_Multiply(__pyx_t_3, __pyx_t_21); if (unlikely(!__pyx_t_11)) __PYX_ERR(0, 2430, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_11);
+  __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
+  __Pyx_DECREF(__pyx_t_21); __pyx_t_21 = 0;
+  __pyx_t_21 = __Pyx_PyNumber_Divide(__pyx_v_fillRate, __pyx_t_11); if (unlikely(!__pyx_t_21)) __PYX_ERR(0, 2430, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_21);
+  __Pyx_DECREF(__pyx_t_11); __pyx_t_11 = 0;
+  if (__Pyx_PyObject_SetAttrStr(__pyx_v_self, __pyx_n_s_fillRate, __pyx_t_21) < 0) __PYX_ERR(0, 2430, __pyx_L1_error)
+  __Pyx_DECREF(__pyx_t_21); __pyx_t_21 = 0;
 
-  /* "cSparseIntegerOutrankingDigraphs.pyx":2423
+  /* "cSparseIntegerOutrankingDigraphs.pyx":2431
  *                 self.actions[x]['component'] = compKey
  *         self.fillRate = fillRate/(self.order * (self.order-1))
  *         self.maximalComponentSize = maximalComponentSize             # <<<<<<<<<<<<<<
  * 
  *         # setting the boosted ranking
  */
-  __pyx_t_22 = __Pyx_PyInt_From_int(__pyx_v_maximalComponentSize); if (unlikely(!__pyx_t_22)) __PYX_ERR(0, 2423, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_t_22);
-  if (__Pyx_PyObject_SetAttrStr(__pyx_v_self, __pyx_n_s_maximalComponentSize, __pyx_t_22) < 0) __PYX_ERR(0, 2423, __pyx_L1_error)
-  __Pyx_DECREF(__pyx_t_22); __pyx_t_22 = 0;
+  __pyx_t_21 = __Pyx_PyInt_From_int(__pyx_v_maximalComponentSize); if (unlikely(!__pyx_t_21)) __PYX_ERR(0, 2431, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_21);
+  if (__Pyx_PyObject_SetAttrStr(__pyx_v_self, __pyx_n_s_maximalComponentSize, __pyx_t_21) < 0) __PYX_ERR(0, 2431, __pyx_L1_error)
+  __Pyx_DECREF(__pyx_t_21); __pyx_t_21 = 0;
 
-  /* "cSparseIntegerOutrankingDigraphs.pyx":2427
+  /* "cSparseIntegerOutrankingDigraphs.pyx":2435
  *         # setting the boosted ranking
  * 
  *         self.valuationdomain = {'min': -totalWeight,             # <<<<<<<<<<<<<<
  *                                 'med': 0,
  *                                 'max': totalWeight}
  */
-  __pyx_t_22 = __Pyx_PyDict_NewPresized(3); if (unlikely(!__pyx_t_22)) __PYX_ERR(0, 2427, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_t_22);
-  __pyx_t_10 = __Pyx_PyInt_From_int((-__pyx_v_totalWeight)); if (unlikely(!__pyx_t_10)) __PYX_ERR(0, 2427, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_t_10);
-  if (PyDict_SetItem(__pyx_t_22, __pyx_n_u_min, __pyx_t_10) < 0) __PYX_ERR(0, 2427, __pyx_L1_error)
-  __Pyx_DECREF(__pyx_t_10); __pyx_t_10 = 0;
-  if (PyDict_SetItem(__pyx_t_22, __pyx_n_u_med, __pyx_int_0) < 0) __PYX_ERR(0, 2427, __pyx_L1_error)
+  __pyx_t_21 = __Pyx_PyDict_NewPresized(3); if (unlikely(!__pyx_t_21)) __PYX_ERR(0, 2435, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_21);
+  __pyx_t_11 = __Pyx_PyInt_From_int((-__pyx_v_totalWeight)); if (unlikely(!__pyx_t_11)) __PYX_ERR(0, 2435, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_11);
+  if (PyDict_SetItem(__pyx_t_21, __pyx_n_u_min, __pyx_t_11) < 0) __PYX_ERR(0, 2435, __pyx_L1_error)
+  __Pyx_DECREF(__pyx_t_11); __pyx_t_11 = 0;
+  if (PyDict_SetItem(__pyx_t_21, __pyx_n_u_med, __pyx_int_0) < 0) __PYX_ERR(0, 2435, __pyx_L1_error)
 
-  /* "cSparseIntegerOutrankingDigraphs.pyx":2429
+  /* "cSparseIntegerOutrankingDigraphs.pyx":2437
  *         self.valuationdomain = {'min': -totalWeight,
  *                                 'med': 0,
  *                                 'max': totalWeight}             # <<<<<<<<<<<<<<
  * 
  *         self.runTimes['decomposing'] = time() - t0
  */
-  __pyx_t_10 = __Pyx_PyInt_From_int(__pyx_v_totalWeight); if (unlikely(!__pyx_t_10)) __PYX_ERR(0, 2429, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_t_10);
-  if (PyDict_SetItem(__pyx_t_22, __pyx_n_u_max, __pyx_t_10) < 0) __PYX_ERR(0, 2427, __pyx_L1_error)
-  __Pyx_DECREF(__pyx_t_10); __pyx_t_10 = 0;
+  __pyx_t_11 = __Pyx_PyInt_From_int(__pyx_v_totalWeight); if (unlikely(!__pyx_t_11)) __PYX_ERR(0, 2437, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_11);
+  if (PyDict_SetItem(__pyx_t_21, __pyx_n_u_max, __pyx_t_11) < 0) __PYX_ERR(0, 2435, __pyx_L1_error)
+  __Pyx_DECREF(__pyx_t_11); __pyx_t_11 = 0;
 
-  /* "cSparseIntegerOutrankingDigraphs.pyx":2427
+  /* "cSparseIntegerOutrankingDigraphs.pyx":2435
  *         # setting the boosted ranking
  * 
  *         self.valuationdomain = {'min': -totalWeight,             # <<<<<<<<<<<<<<
  *                                 'med': 0,
  *                                 'max': totalWeight}
  */
-  if (__Pyx_PyObject_SetAttrStr(__pyx_v_self, __pyx_n_s_valuationdomain, __pyx_t_22) < 0) __PYX_ERR(0, 2427, __pyx_L1_error)
-  __Pyx_DECREF(__pyx_t_22); __pyx_t_22 = 0;
+  if (__Pyx_PyObject_SetAttrStr(__pyx_v_self, __pyx_n_s_valuationdomain, __pyx_t_21) < 0) __PYX_ERR(0, 2435, __pyx_L1_error)
+  __Pyx_DECREF(__pyx_t_21); __pyx_t_21 = 0;
 
-  /* "cSparseIntegerOutrankingDigraphs.pyx":2431
+  /* "cSparseIntegerOutrankingDigraphs.pyx":2439
  *                                 'max': totalWeight}
  * 
  *         self.runTimes['decomposing'] = time() - t0             # <<<<<<<<<<<<<<
@@ -50579,41 +50632,41 @@ static PyObject *__pyx_pf_32cSparseIntegerOutrankingDigraphs_24cQuantilesRanking
  *             print('decomposing time: %.4f' % self.runTimes['decomposing']  )
  */
   __Pyx_INCREF(__pyx_v_time);
-  __pyx_t_10 = __pyx_v_time; __pyx_t_2 = NULL;
+  __pyx_t_11 = __pyx_v_time; __pyx_t_3 = NULL;
   __pyx_t_4 = 0;
   #if CYTHON_UNPACK_METHODS
-  if (unlikely(PyMethod_Check(__pyx_t_10))) {
-    __pyx_t_2 = PyMethod_GET_SELF(__pyx_t_10);
-    if (likely(__pyx_t_2)) {
-      PyObject* function = PyMethod_GET_FUNCTION(__pyx_t_10);
-      __Pyx_INCREF(__pyx_t_2);
+  if (unlikely(PyMethod_Check(__pyx_t_11))) {
+    __pyx_t_3 = PyMethod_GET_SELF(__pyx_t_11);
+    if (likely(__pyx_t_3)) {
+      PyObject* function = PyMethod_GET_FUNCTION(__pyx_t_11);
+      __Pyx_INCREF(__pyx_t_3);
       __Pyx_INCREF(function);
-      __Pyx_DECREF_SET(__pyx_t_10, function);
+      __Pyx_DECREF_SET(__pyx_t_11, function);
       __pyx_t_4 = 1;
     }
   }
   #endif
   {
-    PyObject *__pyx_callargs[2] = {__pyx_t_2, NULL};
-    __pyx_t_22 = __Pyx_PyObject_FastCall(__pyx_t_10, __pyx_callargs+1-__pyx_t_4, 0+__pyx_t_4);
-    __Pyx_XDECREF(__pyx_t_2); __pyx_t_2 = 0;
-    if (unlikely(!__pyx_t_22)) __PYX_ERR(0, 2431, __pyx_L1_error)
-    __Pyx_GOTREF(__pyx_t_22);
-    __Pyx_DECREF(__pyx_t_10); __pyx_t_10 = 0;
+    PyObject *__pyx_callargs[2] = {__pyx_t_3, NULL};
+    __pyx_t_21 = __Pyx_PyObject_FastCall(__pyx_t_11, __pyx_callargs+1-__pyx_t_4, 0+__pyx_t_4);
+    __Pyx_XDECREF(__pyx_t_3); __pyx_t_3 = 0;
+    if (unlikely(!__pyx_t_21)) __PYX_ERR(0, 2439, __pyx_L1_error)
+    __Pyx_GOTREF(__pyx_t_21);
+    __Pyx_DECREF(__pyx_t_11); __pyx_t_11 = 0;
   }
-  __pyx_t_10 = PyFloat_FromDouble(__pyx_v_t0); if (unlikely(!__pyx_t_10)) __PYX_ERR(0, 2431, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_t_10);
-  __pyx_t_2 = PyNumber_Subtract(__pyx_t_22, __pyx_t_10); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 2431, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_t_2);
-  __Pyx_DECREF(__pyx_t_22); __pyx_t_22 = 0;
-  __Pyx_DECREF(__pyx_t_10); __pyx_t_10 = 0;
-  __pyx_t_10 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_n_s_runTimes); if (unlikely(!__pyx_t_10)) __PYX_ERR(0, 2431, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_t_10);
-  if (unlikely((PyObject_SetItem(__pyx_t_10, __pyx_n_u_decomposing, __pyx_t_2) < 0))) __PYX_ERR(0, 2431, __pyx_L1_error)
-  __Pyx_DECREF(__pyx_t_10); __pyx_t_10 = 0;
-  __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
+  __pyx_t_11 = PyFloat_FromDouble(__pyx_v_t0); if (unlikely(!__pyx_t_11)) __PYX_ERR(0, 2439, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_11);
+  __pyx_t_3 = PyNumber_Subtract(__pyx_t_21, __pyx_t_11); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 2439, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_3);
+  __Pyx_DECREF(__pyx_t_21); __pyx_t_21 = 0;
+  __Pyx_DECREF(__pyx_t_11); __pyx_t_11 = 0;
+  __pyx_t_11 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_n_s_runTimes); if (unlikely(!__pyx_t_11)) __PYX_ERR(0, 2439, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_11);
+  if (unlikely((PyObject_SetItem(__pyx_t_11, __pyx_n_u_decomposing, __pyx_t_3) < 0))) __PYX_ERR(0, 2439, __pyx_L1_error)
+  __Pyx_DECREF(__pyx_t_11); __pyx_t_11 = 0;
+  __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
 
-  /* "cSparseIntegerOutrankingDigraphs.pyx":2432
+  /* "cSparseIntegerOutrankingDigraphs.pyx":2440
  * 
  *         self.runTimes['decomposing'] = time() - t0
  *         if Comments:             # <<<<<<<<<<<<<<
@@ -50622,27 +50675,27 @@ static PyObject *__pyx_pf_32cSparseIntegerOutrankingDigraphs_24cQuantilesRanking
  */
   if (__pyx_v_Comments) {
 
-    /* "cSparseIntegerOutrankingDigraphs.pyx":2433
+    /* "cSparseIntegerOutrankingDigraphs.pyx":2441
  *         self.runTimes['decomposing'] = time() - t0
  *         if Comments:
  *             print('decomposing time: %.4f' % self.runTimes['decomposing']  )             # <<<<<<<<<<<<<<
  *         # Kohler ranking-by-choosing all components
  *         self.componentRankingRule = componentRankingRule
  */
-    __pyx_t_2 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_n_s_runTimes); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 2433, __pyx_L1_error)
-    __Pyx_GOTREF(__pyx_t_2);
-    __pyx_t_10 = __Pyx_PyObject_Dict_GetItem(__pyx_t_2, __pyx_n_u_decomposing); if (unlikely(!__pyx_t_10)) __PYX_ERR(0, 2433, __pyx_L1_error)
-    __Pyx_GOTREF(__pyx_t_10);
-    __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
-    __pyx_t_2 = __Pyx_PyUnicode_FormatSafe(__pyx_kp_u_decomposing_time_4f, __pyx_t_10); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 2433, __pyx_L1_error)
-    __Pyx_GOTREF(__pyx_t_2);
-    __Pyx_DECREF(__pyx_t_10); __pyx_t_10 = 0;
-    __pyx_t_10 = __Pyx_PyObject_CallOneArg(__pyx_builtin_print, __pyx_t_2); if (unlikely(!__pyx_t_10)) __PYX_ERR(0, 2433, __pyx_L1_error)
-    __Pyx_GOTREF(__pyx_t_10);
-    __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
-    __Pyx_DECREF(__pyx_t_10); __pyx_t_10 = 0;
+    __pyx_t_3 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_n_s_runTimes); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 2441, __pyx_L1_error)
+    __Pyx_GOTREF(__pyx_t_3);
+    __pyx_t_11 = __Pyx_PyObject_Dict_GetItem(__pyx_t_3, __pyx_n_u_decomposing); if (unlikely(!__pyx_t_11)) __PYX_ERR(0, 2441, __pyx_L1_error)
+    __Pyx_GOTREF(__pyx_t_11);
+    __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
+    __pyx_t_3 = __Pyx_PyUnicode_FormatSafe(__pyx_kp_u_decomposing_time_4f, __pyx_t_11); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 2441, __pyx_L1_error)
+    __Pyx_GOTREF(__pyx_t_3);
+    __Pyx_DECREF(__pyx_t_11); __pyx_t_11 = 0;
+    __pyx_t_11 = __Pyx_PyObject_CallOneArg(__pyx_builtin_print, __pyx_t_3); if (unlikely(!__pyx_t_11)) __PYX_ERR(0, 2441, __pyx_L1_error)
+    __Pyx_GOTREF(__pyx_t_11);
+    __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
+    __Pyx_DECREF(__pyx_t_11); __pyx_t_11 = 0;
 
-    /* "cSparseIntegerOutrankingDigraphs.pyx":2432
+    /* "cSparseIntegerOutrankingDigraphs.pyx":2440
  * 
  *         self.runTimes['decomposing'] = time() - t0
  *         if Comments:             # <<<<<<<<<<<<<<
@@ -50651,16 +50704,16 @@ static PyObject *__pyx_pf_32cSparseIntegerOutrankingDigraphs_24cQuantilesRanking
  */
   }
 
-  /* "cSparseIntegerOutrankingDigraphs.pyx":2435
+  /* "cSparseIntegerOutrankingDigraphs.pyx":2443
  *             print('decomposing time: %.4f' % self.runTimes['decomposing']  )
  *         # Kohler ranking-by-choosing all components
  *         self.componentRankingRule = componentRankingRule             # <<<<<<<<<<<<<<
  *         t0 = time()
  *         #self.boostedRanking = self.computeBoostedRanking(rankingRule=componentRankingRule)
  */
-  if (__Pyx_PyObject_SetAttrStr(__pyx_v_self, __pyx_n_s_componentRankingRule, __pyx_v_componentRankingRule) < 0) __PYX_ERR(0, 2435, __pyx_L1_error)
+  if (__Pyx_PyObject_SetAttrStr(__pyx_v_self, __pyx_n_s_componentRankingRule, __pyx_v_componentRankingRule) < 0) __PYX_ERR(0, 2443, __pyx_L1_error)
 
-  /* "cSparseIntegerOutrankingDigraphs.pyx":2436
+  /* "cSparseIntegerOutrankingDigraphs.pyx":2444
  *         # Kohler ranking-by-choosing all components
  *         self.componentRankingRule = componentRankingRule
  *         t0 = time()             # <<<<<<<<<<<<<<
@@ -50668,43 +50721,43 @@ static PyObject *__pyx_pf_32cSparseIntegerOutrankingDigraphs_24cQuantilesRanking
  *         #self.boostedOrder = list(reversed(self.boostedRanking))
  */
   __Pyx_INCREF(__pyx_v_time);
-  __pyx_t_2 = __pyx_v_time; __pyx_t_22 = NULL;
+  __pyx_t_3 = __pyx_v_time; __pyx_t_21 = NULL;
   __pyx_t_4 = 0;
   #if CYTHON_UNPACK_METHODS
-  if (unlikely(PyMethod_Check(__pyx_t_2))) {
-    __pyx_t_22 = PyMethod_GET_SELF(__pyx_t_2);
-    if (likely(__pyx_t_22)) {
-      PyObject* function = PyMethod_GET_FUNCTION(__pyx_t_2);
-      __Pyx_INCREF(__pyx_t_22);
+  if (unlikely(PyMethod_Check(__pyx_t_3))) {
+    __pyx_t_21 = PyMethod_GET_SELF(__pyx_t_3);
+    if (likely(__pyx_t_21)) {
+      PyObject* function = PyMethod_GET_FUNCTION(__pyx_t_3);
+      __Pyx_INCREF(__pyx_t_21);
       __Pyx_INCREF(function);
-      __Pyx_DECREF_SET(__pyx_t_2, function);
+      __Pyx_DECREF_SET(__pyx_t_3, function);
       __pyx_t_4 = 1;
     }
   }
   #endif
   {
-    PyObject *__pyx_callargs[2] = {__pyx_t_22, NULL};
-    __pyx_t_10 = __Pyx_PyObject_FastCall(__pyx_t_2, __pyx_callargs+1-__pyx_t_4, 0+__pyx_t_4);
-    __Pyx_XDECREF(__pyx_t_22); __pyx_t_22 = 0;
-    if (unlikely(!__pyx_t_10)) __PYX_ERR(0, 2436, __pyx_L1_error)
-    __Pyx_GOTREF(__pyx_t_10);
-    __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
+    PyObject *__pyx_callargs[2] = {__pyx_t_21, NULL};
+    __pyx_t_11 = __Pyx_PyObject_FastCall(__pyx_t_3, __pyx_callargs+1-__pyx_t_4, 0+__pyx_t_4);
+    __Pyx_XDECREF(__pyx_t_21); __pyx_t_21 = 0;
+    if (unlikely(!__pyx_t_11)) __PYX_ERR(0, 2444, __pyx_L1_error)
+    __Pyx_GOTREF(__pyx_t_11);
+    __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
   }
-  __pyx_t_5 = __pyx_PyFloat_AsDouble(__pyx_t_10); if (unlikely((__pyx_t_5 == (double)-1) && PyErr_Occurred())) __PYX_ERR(0, 2436, __pyx_L1_error)
-  __Pyx_DECREF(__pyx_t_10); __pyx_t_10 = 0;
+  __pyx_t_5 = __pyx_PyFloat_AsDouble(__pyx_t_11); if (unlikely((__pyx_t_5 == (double)-1) && PyErr_Occurred())) __PYX_ERR(0, 2444, __pyx_L1_error)
+  __Pyx_DECREF(__pyx_t_11); __pyx_t_11 = 0;
   __pyx_v_t0 = __pyx_t_5;
 
-  /* "cSparseIntegerOutrankingDigraphs.pyx":2439
+  /* "cSparseIntegerOutrankingDigraphs.pyx":2447
  *         #self.boostedRanking = self.computeBoostedRanking(rankingRule=componentRankingRule)
  *         #self.boostedOrder = list(reversed(self.boostedRanking))
  *         self.boostedRanking = boostedRanking             # <<<<<<<<<<<<<<
  *         self.runTimes['ordering'] = time() - t0
  * 
  */
-  if (unlikely(!__pyx_v_boostedRanking)) { __Pyx_RaiseUnboundLocalError("boostedRanking"); __PYX_ERR(0, 2439, __pyx_L1_error) }
-  if (__Pyx_PyObject_SetAttrStr(__pyx_v_self, __pyx_n_s_boostedRanking, __pyx_v_boostedRanking) < 0) __PYX_ERR(0, 2439, __pyx_L1_error)
+  if (unlikely(!__pyx_v_boostedRanking)) { __Pyx_RaiseUnboundLocalError("boostedRanking"); __PYX_ERR(0, 2447, __pyx_L1_error) }
+  if (__Pyx_PyObject_SetAttrStr(__pyx_v_self, __pyx_n_s_boostedRanking, __pyx_v_boostedRanking) < 0) __PYX_ERR(0, 2447, __pyx_L1_error)
 
-  /* "cSparseIntegerOutrankingDigraphs.pyx":2440
+  /* "cSparseIntegerOutrankingDigraphs.pyx":2448
  *         #self.boostedOrder = list(reversed(self.boostedRanking))
  *         self.boostedRanking = boostedRanking
  *         self.runTimes['ordering'] = time() - t0             # <<<<<<<<<<<<<<
@@ -50712,41 +50765,41 @@ static PyObject *__pyx_pf_32cSparseIntegerOutrankingDigraphs_24cQuantilesRanking
  *         if Comments:
  */
   __Pyx_INCREF(__pyx_v_time);
-  __pyx_t_2 = __pyx_v_time; __pyx_t_22 = NULL;
+  __pyx_t_3 = __pyx_v_time; __pyx_t_21 = NULL;
   __pyx_t_4 = 0;
   #if CYTHON_UNPACK_METHODS
-  if (unlikely(PyMethod_Check(__pyx_t_2))) {
-    __pyx_t_22 = PyMethod_GET_SELF(__pyx_t_2);
-    if (likely(__pyx_t_22)) {
-      PyObject* function = PyMethod_GET_FUNCTION(__pyx_t_2);
-      __Pyx_INCREF(__pyx_t_22);
+  if (unlikely(PyMethod_Check(__pyx_t_3))) {
+    __pyx_t_21 = PyMethod_GET_SELF(__pyx_t_3);
+    if (likely(__pyx_t_21)) {
+      PyObject* function = PyMethod_GET_FUNCTION(__pyx_t_3);
+      __Pyx_INCREF(__pyx_t_21);
       __Pyx_INCREF(function);
-      __Pyx_DECREF_SET(__pyx_t_2, function);
+      __Pyx_DECREF_SET(__pyx_t_3, function);
       __pyx_t_4 = 1;
     }
   }
   #endif
   {
-    PyObject *__pyx_callargs[2] = {__pyx_t_22, NULL};
-    __pyx_t_10 = __Pyx_PyObject_FastCall(__pyx_t_2, __pyx_callargs+1-__pyx_t_4, 0+__pyx_t_4);
-    __Pyx_XDECREF(__pyx_t_22); __pyx_t_22 = 0;
-    if (unlikely(!__pyx_t_10)) __PYX_ERR(0, 2440, __pyx_L1_error)
-    __Pyx_GOTREF(__pyx_t_10);
-    __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
+    PyObject *__pyx_callargs[2] = {__pyx_t_21, NULL};
+    __pyx_t_11 = __Pyx_PyObject_FastCall(__pyx_t_3, __pyx_callargs+1-__pyx_t_4, 0+__pyx_t_4);
+    __Pyx_XDECREF(__pyx_t_21); __pyx_t_21 = 0;
+    if (unlikely(!__pyx_t_11)) __PYX_ERR(0, 2448, __pyx_L1_error)
+    __Pyx_GOTREF(__pyx_t_11);
+    __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
   }
-  __pyx_t_2 = PyFloat_FromDouble(__pyx_v_t0); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 2440, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_t_2);
-  __pyx_t_22 = PyNumber_Subtract(__pyx_t_10, __pyx_t_2); if (unlikely(!__pyx_t_22)) __PYX_ERR(0, 2440, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_t_22);
-  __Pyx_DECREF(__pyx_t_10); __pyx_t_10 = 0;
-  __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
-  __pyx_t_2 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_n_s_runTimes); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 2440, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_t_2);
-  if (unlikely((PyObject_SetItem(__pyx_t_2, __pyx_n_u_ordering, __pyx_t_22) < 0))) __PYX_ERR(0, 2440, __pyx_L1_error)
-  __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
-  __Pyx_DECREF(__pyx_t_22); __pyx_t_22 = 0;
+  __pyx_t_3 = PyFloat_FromDouble(__pyx_v_t0); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 2448, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_3);
+  __pyx_t_21 = PyNumber_Subtract(__pyx_t_11, __pyx_t_3); if (unlikely(!__pyx_t_21)) __PYX_ERR(0, 2448, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_21);
+  __Pyx_DECREF(__pyx_t_11); __pyx_t_11 = 0;
+  __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
+  __pyx_t_3 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_n_s_runTimes); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 2448, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_3);
+  if (unlikely((PyObject_SetItem(__pyx_t_3, __pyx_n_u_ordering, __pyx_t_21) < 0))) __PYX_ERR(0, 2448, __pyx_L1_error)
+  __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
+  __Pyx_DECREF(__pyx_t_21); __pyx_t_21 = 0;
 
-  /* "cSparseIntegerOutrankingDigraphs.pyx":2442
+  /* "cSparseIntegerOutrankingDigraphs.pyx":2450
  *         self.runTimes['ordering'] = time() - t0
  * 
  *         if Comments:             # <<<<<<<<<<<<<<
@@ -50755,27 +50808,27 @@ static PyObject *__pyx_pf_32cSparseIntegerOutrankingDigraphs_24cQuantilesRanking
  */
   if (__pyx_v_Comments) {
 
-    /* "cSparseIntegerOutrankingDigraphs.pyx":2443
+    /* "cSparseIntegerOutrankingDigraphs.pyx":2451
  * 
  *         if Comments:
  *             print('ordering time: %.4f' % self.runTimes['ordering']  )             # <<<<<<<<<<<<<<
  * 
  *         self.runTimes['totalTime'] = time() - ttot
  */
-    __pyx_t_22 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_n_s_runTimes); if (unlikely(!__pyx_t_22)) __PYX_ERR(0, 2443, __pyx_L1_error)
-    __Pyx_GOTREF(__pyx_t_22);
-    __pyx_t_2 = __Pyx_PyObject_Dict_GetItem(__pyx_t_22, __pyx_n_u_ordering); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 2443, __pyx_L1_error)
-    __Pyx_GOTREF(__pyx_t_2);
-    __Pyx_DECREF(__pyx_t_22); __pyx_t_22 = 0;
-    __pyx_t_22 = __Pyx_PyUnicode_FormatSafe(__pyx_kp_u_ordering_time_4f, __pyx_t_2); if (unlikely(!__pyx_t_22)) __PYX_ERR(0, 2443, __pyx_L1_error)
-    __Pyx_GOTREF(__pyx_t_22);
-    __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
-    __pyx_t_2 = __Pyx_PyObject_CallOneArg(__pyx_builtin_print, __pyx_t_22); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 2443, __pyx_L1_error)
-    __Pyx_GOTREF(__pyx_t_2);
-    __Pyx_DECREF(__pyx_t_22); __pyx_t_22 = 0;
-    __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
+    __pyx_t_21 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_n_s_runTimes); if (unlikely(!__pyx_t_21)) __PYX_ERR(0, 2451, __pyx_L1_error)
+    __Pyx_GOTREF(__pyx_t_21);
+    __pyx_t_3 = __Pyx_PyObject_Dict_GetItem(__pyx_t_21, __pyx_n_u_ordering); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 2451, __pyx_L1_error)
+    __Pyx_GOTREF(__pyx_t_3);
+    __Pyx_DECREF(__pyx_t_21); __pyx_t_21 = 0;
+    __pyx_t_21 = __Pyx_PyUnicode_FormatSafe(__pyx_kp_u_ordering_time_4f, __pyx_t_3); if (unlikely(!__pyx_t_21)) __PYX_ERR(0, 2451, __pyx_L1_error)
+    __Pyx_GOTREF(__pyx_t_21);
+    __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
+    __pyx_t_3 = __Pyx_PyObject_CallOneArg(__pyx_builtin_print, __pyx_t_21); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 2451, __pyx_L1_error)
+    __Pyx_GOTREF(__pyx_t_3);
+    __Pyx_DECREF(__pyx_t_21); __pyx_t_21 = 0;
+    __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
 
-    /* "cSparseIntegerOutrankingDigraphs.pyx":2442
+    /* "cSparseIntegerOutrankingDigraphs.pyx":2450
  *         self.runTimes['ordering'] = time() - t0
  * 
  *         if Comments:             # <<<<<<<<<<<<<<
@@ -50784,7 +50837,7 @@ static PyObject *__pyx_pf_32cSparseIntegerOutrankingDigraphs_24cQuantilesRanking
  */
   }
 
-  /* "cSparseIntegerOutrankingDigraphs.pyx":2445
+  /* "cSparseIntegerOutrankingDigraphs.pyx":2453
  *             print('ordering time: %.4f' % self.runTimes['ordering']  )
  * 
  *         self.runTimes['totalTime'] = time() - ttot             # <<<<<<<<<<<<<<
@@ -50792,41 +50845,41 @@ static PyObject *__pyx_pf_32cSparseIntegerOutrankingDigraphs_24cQuantilesRanking
  *             print(self.runTimes)
  */
   __Pyx_INCREF(__pyx_v_time);
-  __pyx_t_22 = __pyx_v_time; __pyx_t_10 = NULL;
+  __pyx_t_21 = __pyx_v_time; __pyx_t_11 = NULL;
   __pyx_t_4 = 0;
   #if CYTHON_UNPACK_METHODS
-  if (unlikely(PyMethod_Check(__pyx_t_22))) {
-    __pyx_t_10 = PyMethod_GET_SELF(__pyx_t_22);
-    if (likely(__pyx_t_10)) {
-      PyObject* function = PyMethod_GET_FUNCTION(__pyx_t_22);
-      __Pyx_INCREF(__pyx_t_10);
+  if (unlikely(PyMethod_Check(__pyx_t_21))) {
+    __pyx_t_11 = PyMethod_GET_SELF(__pyx_t_21);
+    if (likely(__pyx_t_11)) {
+      PyObject* function = PyMethod_GET_FUNCTION(__pyx_t_21);
+      __Pyx_INCREF(__pyx_t_11);
       __Pyx_INCREF(function);
-      __Pyx_DECREF_SET(__pyx_t_22, function);
+      __Pyx_DECREF_SET(__pyx_t_21, function);
       __pyx_t_4 = 1;
     }
   }
   #endif
   {
-    PyObject *__pyx_callargs[2] = {__pyx_t_10, NULL};
-    __pyx_t_2 = __Pyx_PyObject_FastCall(__pyx_t_22, __pyx_callargs+1-__pyx_t_4, 0+__pyx_t_4);
-    __Pyx_XDECREF(__pyx_t_10); __pyx_t_10 = 0;
-    if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 2445, __pyx_L1_error)
-    __Pyx_GOTREF(__pyx_t_2);
-    __Pyx_DECREF(__pyx_t_22); __pyx_t_22 = 0;
+    PyObject *__pyx_callargs[2] = {__pyx_t_11, NULL};
+    __pyx_t_3 = __Pyx_PyObject_FastCall(__pyx_t_21, __pyx_callargs+1-__pyx_t_4, 0+__pyx_t_4);
+    __Pyx_XDECREF(__pyx_t_11); __pyx_t_11 = 0;
+    if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 2453, __pyx_L1_error)
+    __Pyx_GOTREF(__pyx_t_3);
+    __Pyx_DECREF(__pyx_t_21); __pyx_t_21 = 0;
   }
-  __pyx_t_22 = PyFloat_FromDouble(__pyx_v_ttot); if (unlikely(!__pyx_t_22)) __PYX_ERR(0, 2445, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_t_22);
-  __pyx_t_10 = PyNumber_Subtract(__pyx_t_2, __pyx_t_22); if (unlikely(!__pyx_t_10)) __PYX_ERR(0, 2445, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_t_10);
-  __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
-  __Pyx_DECREF(__pyx_t_22); __pyx_t_22 = 0;
-  __pyx_t_22 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_n_s_runTimes); if (unlikely(!__pyx_t_22)) __PYX_ERR(0, 2445, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_t_22);
-  if (unlikely((PyObject_SetItem(__pyx_t_22, __pyx_n_u_totalTime, __pyx_t_10) < 0))) __PYX_ERR(0, 2445, __pyx_L1_error)
-  __Pyx_DECREF(__pyx_t_22); __pyx_t_22 = 0;
-  __Pyx_DECREF(__pyx_t_10); __pyx_t_10 = 0;
+  __pyx_t_21 = PyFloat_FromDouble(__pyx_v_ttot); if (unlikely(!__pyx_t_21)) __PYX_ERR(0, 2453, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_21);
+  __pyx_t_11 = PyNumber_Subtract(__pyx_t_3, __pyx_t_21); if (unlikely(!__pyx_t_11)) __PYX_ERR(0, 2453, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_11);
+  __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
+  __Pyx_DECREF(__pyx_t_21); __pyx_t_21 = 0;
+  __pyx_t_21 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_n_s_runTimes); if (unlikely(!__pyx_t_21)) __PYX_ERR(0, 2453, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_t_21);
+  if (unlikely((PyObject_SetItem(__pyx_t_21, __pyx_n_u_totalTime, __pyx_t_11) < 0))) __PYX_ERR(0, 2453, __pyx_L1_error)
+  __Pyx_DECREF(__pyx_t_21); __pyx_t_21 = 0;
+  __Pyx_DECREF(__pyx_t_11); __pyx_t_11 = 0;
 
-  /* "cSparseIntegerOutrankingDigraphs.pyx":2446
+  /* "cSparseIntegerOutrankingDigraphs.pyx":2454
  * 
  *         self.runTimes['totalTime'] = time() - ttot
  *         if Comments:             # <<<<<<<<<<<<<<
@@ -50835,21 +50888,21 @@ static PyObject *__pyx_pf_32cSparseIntegerOutrankingDigraphs_24cQuantilesRanking
  */
   if (__pyx_v_Comments) {
 
-    /* "cSparseIntegerOutrankingDigraphs.pyx":2447
+    /* "cSparseIntegerOutrankingDigraphs.pyx":2455
  *         self.runTimes['totalTime'] = time() - ttot
  *         if Comments:
  *             print(self.runTimes)             # <<<<<<<<<<<<<<
  *         if save2File != None:
  *             self.showShort(fileName=save2File,WithFileSize=False)
  */
-    __pyx_t_10 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_n_s_runTimes); if (unlikely(!__pyx_t_10)) __PYX_ERR(0, 2447, __pyx_L1_error)
-    __Pyx_GOTREF(__pyx_t_10);
-    __pyx_t_22 = __Pyx_PyObject_CallOneArg(__pyx_builtin_print, __pyx_t_10); if (unlikely(!__pyx_t_22)) __PYX_ERR(0, 2447, __pyx_L1_error)
-    __Pyx_GOTREF(__pyx_t_22);
-    __Pyx_DECREF(__pyx_t_10); __pyx_t_10 = 0;
-    __Pyx_DECREF(__pyx_t_22); __pyx_t_22 = 0;
+    __pyx_t_11 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_n_s_runTimes); if (unlikely(!__pyx_t_11)) __PYX_ERR(0, 2455, __pyx_L1_error)
+    __Pyx_GOTREF(__pyx_t_11);
+    __pyx_t_21 = __Pyx_PyObject_CallOneArg(__pyx_builtin_print, __pyx_t_11); if (unlikely(!__pyx_t_21)) __PYX_ERR(0, 2455, __pyx_L1_error)
+    __Pyx_GOTREF(__pyx_t_21);
+    __Pyx_DECREF(__pyx_t_11); __pyx_t_11 = 0;
+    __Pyx_DECREF(__pyx_t_21); __pyx_t_21 = 0;
 
-    /* "cSparseIntegerOutrankingDigraphs.pyx":2446
+    /* "cSparseIntegerOutrankingDigraphs.pyx":2454
  * 
  *         self.runTimes['totalTime'] = time() - ttot
  *         if Comments:             # <<<<<<<<<<<<<<
@@ -50858,38 +50911,38 @@ static PyObject *__pyx_pf_32cSparseIntegerOutrankingDigraphs_24cQuantilesRanking
  */
   }
 
-  /* "cSparseIntegerOutrankingDigraphs.pyx":2448
+  /* "cSparseIntegerOutrankingDigraphs.pyx":2456
  *         if Comments:
  *             print(self.runTimes)
  *         if save2File != None:             # <<<<<<<<<<<<<<
  *             self.showShort(fileName=save2File,WithFileSize=False)
  * 
  */
-  __pyx_t_22 = PyObject_RichCompare(__pyx_v_save2File, Py_None, Py_NE); __Pyx_XGOTREF(__pyx_t_22); if (unlikely(!__pyx_t_22)) __PYX_ERR(0, 2448, __pyx_L1_error)
-  __pyx_t_11 = __Pyx_PyObject_IsTrue(__pyx_t_22); if (unlikely((__pyx_t_11 < 0))) __PYX_ERR(0, 2448, __pyx_L1_error)
-  __Pyx_DECREF(__pyx_t_22); __pyx_t_22 = 0;
-  if (__pyx_t_11) {
+  __pyx_t_21 = PyObject_RichCompare(__pyx_v_save2File, Py_None, Py_NE); __Pyx_XGOTREF(__pyx_t_21); if (unlikely(!__pyx_t_21)) __PYX_ERR(0, 2456, __pyx_L1_error)
+  __pyx_t_23 = __Pyx_PyObject_IsTrue(__pyx_t_21); if (unlikely((__pyx_t_23 < 0))) __PYX_ERR(0, 2456, __pyx_L1_error)
+  __Pyx_DECREF(__pyx_t_21); __pyx_t_21 = 0;
+  if (__pyx_t_23) {
 
-    /* "cSparseIntegerOutrankingDigraphs.pyx":2449
+    /* "cSparseIntegerOutrankingDigraphs.pyx":2457
  *             print(self.runTimes)
  *         if save2File != None:
  *             self.showShort(fileName=save2File,WithFileSize=False)             # <<<<<<<<<<<<<<
  * 
  * 
  */
-    __pyx_t_22 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_n_s_showShort); if (unlikely(!__pyx_t_22)) __PYX_ERR(0, 2449, __pyx_L1_error)
-    __Pyx_GOTREF(__pyx_t_22);
-    __pyx_t_10 = __Pyx_PyDict_NewPresized(2); if (unlikely(!__pyx_t_10)) __PYX_ERR(0, 2449, __pyx_L1_error)
-    __Pyx_GOTREF(__pyx_t_10);
-    if (PyDict_SetItem(__pyx_t_10, __pyx_n_s_fileName, __pyx_v_save2File) < 0) __PYX_ERR(0, 2449, __pyx_L1_error)
-    if (PyDict_SetItem(__pyx_t_10, __pyx_n_s_WithFileSize, Py_False) < 0) __PYX_ERR(0, 2449, __pyx_L1_error)
-    __pyx_t_2 = __Pyx_PyObject_Call(__pyx_t_22, __pyx_empty_tuple, __pyx_t_10); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 2449, __pyx_L1_error)
-    __Pyx_GOTREF(__pyx_t_2);
-    __Pyx_DECREF(__pyx_t_22); __pyx_t_22 = 0;
-    __Pyx_DECREF(__pyx_t_10); __pyx_t_10 = 0;
-    __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
+    __pyx_t_21 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_n_s_showShort); if (unlikely(!__pyx_t_21)) __PYX_ERR(0, 2457, __pyx_L1_error)
+    __Pyx_GOTREF(__pyx_t_21);
+    __pyx_t_11 = __Pyx_PyDict_NewPresized(2); if (unlikely(!__pyx_t_11)) __PYX_ERR(0, 2457, __pyx_L1_error)
+    __Pyx_GOTREF(__pyx_t_11);
+    if (PyDict_SetItem(__pyx_t_11, __pyx_n_s_fileName, __pyx_v_save2File) < 0) __PYX_ERR(0, 2457, __pyx_L1_error)
+    if (PyDict_SetItem(__pyx_t_11, __pyx_n_s_WithFileSize, Py_False) < 0) __PYX_ERR(0, 2457, __pyx_L1_error)
+    __pyx_t_3 = __Pyx_PyObject_Call(__pyx_t_21, __pyx_empty_tuple, __pyx_t_11); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 2457, __pyx_L1_error)
+    __Pyx_GOTREF(__pyx_t_3);
+    __Pyx_DECREF(__pyx_t_21); __pyx_t_21 = 0;
+    __Pyx_DECREF(__pyx_t_11); __pyx_t_11 = 0;
+    __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
 
-    /* "cSparseIntegerOutrankingDigraphs.pyx":2448
+    /* "cSparseIntegerOutrankingDigraphs.pyx":2456
  *         if Comments:
  *             print(self.runTimes)
  *         if save2File != None:             # <<<<<<<<<<<<<<
@@ -50914,9 +50967,9 @@ static PyObject *__pyx_pf_32cSparseIntegerOutrankingDigraphs_24cQuantilesRanking
   __Pyx_XDECREF(__pyx_t_2);
   __Pyx_XDECREF(__pyx_t_3);
   __Pyx_XDECREF(__pyx_t_6);
-  __Pyx_XDECREF(__pyx_t_10);
+  __Pyx_XDECREF(__pyx_t_11);
+  __Pyx_XDECREF(__pyx_t_20);
   __Pyx_XDECREF(__pyx_t_21);
-  __Pyx_XDECREF(__pyx_t_22);
   __Pyx_AddTraceback("cSparseIntegerOutrankingDigraphs.cQuantilesRankingDigraph.__init__", __pyx_clineno, __pyx_lineno, __pyx_filename);
   __pyx_r = NULL;
   __pyx_L0:;
@@ -50935,7 +50988,8 @@ static PyObject *__pyx_pf_32cSparseIntegerOutrankingDigraphs_24cQuantilesRanking
   __Pyx_XDECREF(__pyx_v_criteria);
   __Pyx_XDECREF(__pyx_v_evaluation);
   __Pyx_XDECREF(__pyx_v_g);
-  __Pyx_XDECREF(__pyx_v_nbrCores);
+  __Pyx_XDECREF(__pyx_v_nbrCPUs);
+  __Pyx_XDECREF(__pyx_v_startMehod);
   __Pyx_XDECREF(__pyx_v_qs);
   __Pyx_XDECREF(__pyx_v_nc);
   __Pyx_XDECREF(__pyx_v_components);
@@ -50970,12 +51024,13 @@ static PyObject *__pyx_pf_32cSparseIntegerOutrankingDigraphs_24cQuantilesRanking
   __Pyx_XDECREF(__pyx_9genexpr32__pyx_v_item);
   __Pyx_XDECREF(__pyx_9genexpr34__pyx_v_pos);
   __Pyx_XDECREF(__pyx_v_quantilesOrderingStrategy);
+  __Pyx_XDECREF(__pyx_v_nbrOfCPUs);
   __Pyx_XGIVEREF(__pyx_r);
   __Pyx_RefNannyFinishContext();
   return __pyx_r;
 }
 
-/* "cSparseIntegerOutrankingDigraphs.pyx":2455
+/* "cSparseIntegerOutrankingDigraphs.pyx":2463
  * 
  * 
  *     def _computeQuantileOrdering(self,strategy=None,             # <<<<<<<<<<<<<<
@@ -51031,15 +51086,23 @@ PyObject *__pyx_args, PyObject *__pyx_kwds
     PyObject **__pyx_pyargnames[] = {&__pyx_n_s_self,&__pyx_n_s_strategy,&__pyx_n_s_Descending,&__pyx_n_s_Threading,&__pyx_n_s_startMethod,&__pyx_n_s_nbrOfCPUs,&__pyx_n_s_Debug,&__pyx_n_s_Comments,0};
     values[1] = __Pyx_Arg_NewRef_FASTCALL(((PyObject *)Py_None));
 
-    /* "cSparseIntegerOutrankingDigraphs.pyx":2458
+    /* "cSparseIntegerOutrankingDigraphs.pyx":2466
  *                                 bint Descending=True,
  *                                 bint  Threading=False,
  *                                  startMethod=None,             # <<<<<<<<<<<<<<
- *                                 nbrOfCPUs=4,
+ *                                 nbrOfCPUs=None,
  *                                 bint Debug=False,
  */
     values[4] = __Pyx_Arg_NewRef_FASTCALL(((PyObject *)Py_None));
-    values[5] = __Pyx_Arg_NewRef_FASTCALL(((PyObject *)((PyObject *)__pyx_int_4)));
+
+    /* "cSparseIntegerOutrankingDigraphs.pyx":2467
+ *                                 bint  Threading=False,
+ *                                  startMethod=None,
+ *                                 nbrOfCPUs=None,             # <<<<<<<<<<<<<<
+ *                                 bint Debug=False,
+ *                                 bint Comments=False):
+ */
+    values[5] = __Pyx_Arg_NewRef_FASTCALL(((PyObject *)Py_None));
     if (__pyx_kwds) {
       Py_ssize_t kw_args;
       switch (__pyx_nargs) {
@@ -51069,61 +51132,61 @@ PyObject *__pyx_args, PyObject *__pyx_kwds
           (void)__Pyx_Arg_NewRef_FASTCALL(values[0]);
           kw_args--;
         }
-        else if (unlikely(PyErr_Occurred())) __PYX_ERR(0, 2455, __pyx_L3_error)
+        else if (unlikely(PyErr_Occurred())) __PYX_ERR(0, 2463, __pyx_L3_error)
         else goto __pyx_L5_argtuple_error;
         CYTHON_FALLTHROUGH;
         case  1:
         if (kw_args > 0) {
           PyObject* value = __Pyx_GetKwValue_FASTCALL(__pyx_kwds, __pyx_kwvalues, __pyx_n_s_strategy);
           if (value) { values[1] = __Pyx_Arg_NewRef_FASTCALL(value); kw_args--; }
-          else if (unlikely(PyErr_Occurred())) __PYX_ERR(0, 2455, __pyx_L3_error)
+          else if (unlikely(PyErr_Occurred())) __PYX_ERR(0, 2463, __pyx_L3_error)
         }
         CYTHON_FALLTHROUGH;
         case  2:
         if (kw_args > 0) {
           PyObject* value = __Pyx_GetKwValue_FASTCALL(__pyx_kwds, __pyx_kwvalues, __pyx_n_s_Descending);
           if (value) { values[2] = __Pyx_Arg_NewRef_FASTCALL(value); kw_args--; }
-          else if (unlikely(PyErr_Occurred())) __PYX_ERR(0, 2455, __pyx_L3_error)
+          else if (unlikely(PyErr_Occurred())) __PYX_ERR(0, 2463, __pyx_L3_error)
         }
         CYTHON_FALLTHROUGH;
         case  3:
         if (kw_args > 0) {
           PyObject* value = __Pyx_GetKwValue_FASTCALL(__pyx_kwds, __pyx_kwvalues, __pyx_n_s_Threading);
           if (value) { values[3] = __Pyx_Arg_NewRef_FASTCALL(value); kw_args--; }
-          else if (unlikely(PyErr_Occurred())) __PYX_ERR(0, 2455, __pyx_L3_error)
+          else if (unlikely(PyErr_Occurred())) __PYX_ERR(0, 2463, __pyx_L3_error)
         }
         CYTHON_FALLTHROUGH;
         case  4:
         if (kw_args > 0) {
           PyObject* value = __Pyx_GetKwValue_FASTCALL(__pyx_kwds, __pyx_kwvalues, __pyx_n_s_startMethod);
           if (value) { values[4] = __Pyx_Arg_NewRef_FASTCALL(value); kw_args--; }
-          else if (unlikely(PyErr_Occurred())) __PYX_ERR(0, 2455, __pyx_L3_error)
+          else if (unlikely(PyErr_Occurred())) __PYX_ERR(0, 2463, __pyx_L3_error)
         }
         CYTHON_FALLTHROUGH;
         case  5:
         if (kw_args > 0) {
           PyObject* value = __Pyx_GetKwValue_FASTCALL(__pyx_kwds, __pyx_kwvalues, __pyx_n_s_nbrOfCPUs);
           if (value) { values[5] = __Pyx_Arg_NewRef_FASTCALL(value); kw_args--; }
-          else if (unlikely(PyErr_Occurred())) __PYX_ERR(0, 2455, __pyx_L3_error)
+          else if (unlikely(PyErr_Occurred())) __PYX_ERR(0, 2463, __pyx_L3_error)
         }
         CYTHON_FALLTHROUGH;
         case  6:
         if (kw_args > 0) {
           PyObject* value = __Pyx_GetKwValue_FASTCALL(__pyx_kwds, __pyx_kwvalues, __pyx_n_s_Debug);
           if (value) { values[6] = __Pyx_Arg_NewRef_FASTCALL(value); kw_args--; }
-          else if (unlikely(PyErr_Occurred())) __PYX_ERR(0, 2455, __pyx_L3_error)
+          else if (unlikely(PyErr_Occurred())) __PYX_ERR(0, 2463, __pyx_L3_error)
         }
         CYTHON_FALLTHROUGH;
         case  7:
         if (kw_args > 0) {
           PyObject* value = __Pyx_GetKwValue_FASTCALL(__pyx_kwds, __pyx_kwvalues, __pyx_n_s_Comments);
           if (value) { values[7] = __Pyx_Arg_NewRef_FASTCALL(value); kw_args--; }
-          else if (unlikely(PyErr_Occurred())) __PYX_ERR(0, 2455, __pyx_L3_error)
+          else if (unlikely(PyErr_Occurred())) __PYX_ERR(0, 2463, __pyx_L3_error)
         }
       }
       if (unlikely(kw_args > 0)) {
         const Py_ssize_t kwd_pos_args = __pyx_nargs;
-        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_kwvalues, __pyx_pyargnames, 0, values + 0, kwd_pos_args, "_computeQuantileOrdering") < 0)) __PYX_ERR(0, 2455, __pyx_L3_error)
+        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_kwvalues, __pyx_pyargnames, 0, values + 0, kwd_pos_args, "_computeQuantileOrdering") < 0)) __PYX_ERR(0, 2463, __pyx_L3_error)
       }
     } else {
       switch (__pyx_nargs) {
@@ -51149,10 +51212,10 @@ PyObject *__pyx_args, PyObject *__pyx_kwds
     __pyx_v_self = values[0];
     __pyx_v_strategy = values[1];
     if (values[2]) {
-      __pyx_v_Descending = __Pyx_PyObject_IsTrue(values[2]); if (unlikely((__pyx_v_Descending == (int)-1) && PyErr_Occurred())) __PYX_ERR(0, 2456, __pyx_L3_error)
+      __pyx_v_Descending = __Pyx_PyObject_IsTrue(values[2]); if (unlikely((__pyx_v_Descending == (int)-1) && PyErr_Occurred())) __PYX_ERR(0, 2464, __pyx_L3_error)
     } else {
 
-      /* "cSparseIntegerOutrankingDigraphs.pyx":2456
+      /* "cSparseIntegerOutrankingDigraphs.pyx":2464
  * 
  *     def _computeQuantileOrdering(self,strategy=None,
  *                                 bint Descending=True,             # <<<<<<<<<<<<<<
@@ -51162,27 +51225,27 @@ PyObject *__pyx_args, PyObject *__pyx_kwds
       __pyx_v_Descending = ((int)((int)1));
     }
     if (values[3]) {
-      __pyx_v_Threading = __Pyx_PyObject_IsTrue(values[3]); if (unlikely((__pyx_v_Threading == (int)-1) && PyErr_Occurred())) __PYX_ERR(0, 2457, __pyx_L3_error)
+      __pyx_v_Threading = __Pyx_PyObject_IsTrue(values[3]); if (unlikely((__pyx_v_Threading == (int)-1) && PyErr_Occurred())) __PYX_ERR(0, 2465, __pyx_L3_error)
     } else {
 
-      /* "cSparseIntegerOutrankingDigraphs.pyx":2457
+      /* "cSparseIntegerOutrankingDigraphs.pyx":2465
  *     def _computeQuantileOrdering(self,strategy=None,
  *                                 bint Descending=True,
  *                                 bint  Threading=False,             # <<<<<<<<<<<<<<
  *                                  startMethod=None,
- *                                 nbrOfCPUs=4,
+ *                                 nbrOfCPUs=None,
  */
       __pyx_v_Threading = ((int)((int)0));
     }
     __pyx_v_startMethod = values[4];
     __pyx_v_nbrOfCPUs = values[5];
     if (values[6]) {
-      __pyx_v_Debug = __Pyx_PyObject_IsTrue(values[6]); if (unlikely((__pyx_v_Debug == (int)-1) && PyErr_Occurred())) __PYX_ERR(0, 2460, __pyx_L3_error)
+      __pyx_v_Debug = __Pyx_PyObject_IsTrue(values[6]); if (unlikely((__pyx_v_Debug == (int)-1) && PyErr_Occurred())) __PYX_ERR(0, 2468, __pyx_L3_error)
     } else {
 
-      /* "cSparseIntegerOutrankingDigraphs.pyx":2460
+      /* "cSparseIntegerOutrankingDigraphs.pyx":2468
  *                                  startMethod=None,
- *                                 nbrOfCPUs=4,
+ *                                 nbrOfCPUs=None,
  *                                 bint Debug=False,             # <<<<<<<<<<<<<<
  *                                 bint Comments=False):
  *         """
@@ -51190,11 +51253,11 @@ PyObject *__pyx_args, PyObject *__pyx_kwds
       __pyx_v_Debug = ((int)((int)0));
     }
     if (values[7]) {
-      __pyx_v_Comments = __Pyx_PyObject_IsTrue(values[7]); if (unlikely((__pyx_v_Comments == (int)-1) && PyErr_Occurred())) __PYX_ERR(0, 2461, __pyx_L3_error)
+      __pyx_v_Comments = __Pyx_PyObject_IsTrue(values[7]); if (unlikely((__pyx_v_Comments == (int)-1) && PyErr_Occurred())) __PYX_ERR(0, 2469, __pyx_L3_error)
     } else {
 
-      /* "cSparseIntegerOutrankingDigraphs.pyx":2461
- *                                 nbrOfCPUs=4,
+      /* "cSparseIntegerOutrankingDigraphs.pyx":2469
+ *                                 nbrOfCPUs=None,
  *                                 bint Debug=False,
  *                                 bint Comments=False):             # <<<<<<<<<<<<<<
  *         """
@@ -51205,7 +51268,7 @@ PyObject *__pyx_args, PyObject *__pyx_kwds
   }
   goto __pyx_L6_skip;
   __pyx_L5_argtuple_error:;
-  __Pyx_RaiseArgtupleInvalid("_computeQuantileOrdering", 0, 1, 8, __pyx_nargs); __PYX_ERR(0, 2455, __pyx_L3_error)
+  __Pyx_RaiseArgtupleInvalid("_computeQuantileOrdering", 0, 1, 8, __pyx_nargs); __PYX_ERR(0, 2463, __pyx_L3_error)
   __pyx_L6_skip:;
   goto __pyx_L4_argument_unpacking_done;
   __pyx_L3_error:;
@@ -51221,7 +51284,7 @@ PyObject *__pyx_args, PyObject *__pyx_kwds
   __pyx_L4_argument_unpacking_done:;
   __pyx_r = __pyx_pf_32cSparseIntegerOutrankingDigraphs_24cQuantilesRankingDigraph_2_computeQuantileOrdering(__pyx_self, __pyx_v_self, __pyx_v_strategy, __pyx_v_Descending, __pyx_v_Threading, __pyx_v_startMethod, __pyx_v_nbrOfCPUs, __pyx_v_Debug, __pyx_v_Comments);
 
-  /* "cSparseIntegerOutrankingDigraphs.pyx":2455
+  /* "cSparseIntegerOutrankingDigraphs.pyx":2463
  * 
  * 
  *     def _computeQuantileOrdering(self,strategy=None,             # <<<<<<<<<<<<<<
@@ -51302,56 +51365,56 @@ static PyObject *__pyx_pf_32cSparseIntegerOutrankingDigraphs_24cQuantilesRanking
   __Pyx_RefNannySetupContext("_computeQuantileOrdering", 0);
   __Pyx_INCREF(__pyx_v_strategy);
 
-  /* "cSparseIntegerOutrankingDigraphs.pyx":2476
+  /* "cSparseIntegerOutrankingDigraphs.pyx":2484
  * 
  *         #print('===>')
  *         from operator import itemgetter             # <<<<<<<<<<<<<<
  * 
  *         if strategy == None:
  */
-  __pyx_t_1 = PyList_New(1); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 2476, __pyx_L1_error)
+  __pyx_t_1 = PyList_New(1); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 2484, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __Pyx_INCREF(__pyx_n_s_itemgetter);
   __Pyx_GIVEREF(__pyx_n_s_itemgetter);
-  if (__Pyx_PyList_SET_ITEM(__pyx_t_1, 0, __pyx_n_s_itemgetter)) __PYX_ERR(0, 2476, __pyx_L1_error);
-  __pyx_t_2 = __Pyx_Import(__pyx_n_s_operator, __pyx_t_1, 0); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 2476, __pyx_L1_error)
+  if (__Pyx_PyList_SET_ITEM(__pyx_t_1, 0, __pyx_n_s_itemgetter)) __PYX_ERR(0, 2484, __pyx_L1_error);
+  __pyx_t_2 = __Pyx_Import(__pyx_n_s_operator, __pyx_t_1, 0); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 2484, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
-  __pyx_t_1 = __Pyx_ImportFrom(__pyx_t_2, __pyx_n_s_itemgetter); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 2476, __pyx_L1_error)
+  __pyx_t_1 = __Pyx_ImportFrom(__pyx_t_2, __pyx_n_s_itemgetter); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 2484, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __Pyx_INCREF(__pyx_t_1);
   __pyx_v_itemgetter = __pyx_t_1;
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
 
-  /* "cSparseIntegerOutrankingDigraphs.pyx":2478
+  /* "cSparseIntegerOutrankingDigraphs.pyx":2486
  *         from operator import itemgetter
  * 
  *         if strategy == None:             # <<<<<<<<<<<<<<
  *             strategy = self.sortingParameters['strategy']
  *         #actions = [key for key in self.actions if key not in self.profiles]
  */
-  __pyx_t_2 = PyObject_RichCompare(__pyx_v_strategy, Py_None, Py_EQ); __Pyx_XGOTREF(__pyx_t_2); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 2478, __pyx_L1_error)
-  __pyx_t_3 = __Pyx_PyObject_IsTrue(__pyx_t_2); if (unlikely((__pyx_t_3 < 0))) __PYX_ERR(0, 2478, __pyx_L1_error)
+  __pyx_t_2 = PyObject_RichCompare(__pyx_v_strategy, Py_None, Py_EQ); __Pyx_XGOTREF(__pyx_t_2); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 2486, __pyx_L1_error)
+  __pyx_t_3 = __Pyx_PyObject_IsTrue(__pyx_t_2); if (unlikely((__pyx_t_3 < 0))) __PYX_ERR(0, 2486, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
   if (__pyx_t_3) {
 
-    /* "cSparseIntegerOutrankingDigraphs.pyx":2479
+    /* "cSparseIntegerOutrankingDigraphs.pyx":2487
  * 
  *         if strategy == None:
  *             strategy = self.sortingParameters['strategy']             # <<<<<<<<<<<<<<
  *         #actions = [key for key in self.actions if key not in self.profiles]
  *         actionsCategories = {}
  */
-    __pyx_t_2 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_n_s_sortingParameters); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 2479, __pyx_L1_error)
+    __pyx_t_2 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_n_s_sortingParameters); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 2487, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_2);
-    __pyx_t_1 = __Pyx_PyObject_Dict_GetItem(__pyx_t_2, __pyx_n_u_strategy); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 2479, __pyx_L1_error)
+    __pyx_t_1 = __Pyx_PyObject_Dict_GetItem(__pyx_t_2, __pyx_n_u_strategy); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 2487, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_1);
     __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
     __Pyx_DECREF_SET(__pyx_v_strategy, __pyx_t_1);
     __pyx_t_1 = 0;
 
-    /* "cSparseIntegerOutrankingDigraphs.pyx":2478
+    /* "cSparseIntegerOutrankingDigraphs.pyx":2486
  *         from operator import itemgetter
  * 
  *         if strategy == None:             # <<<<<<<<<<<<<<
@@ -51360,35 +51423,35 @@ static PyObject *__pyx_pf_32cSparseIntegerOutrankingDigraphs_24cQuantilesRanking
  */
   }
 
-  /* "cSparseIntegerOutrankingDigraphs.pyx":2481
+  /* "cSparseIntegerOutrankingDigraphs.pyx":2489
  *             strategy = self.sortingParameters['strategy']
  *         #actions = [key for key in self.actions if key not in self.profiles]
  *         actionsCategories = {}             # <<<<<<<<<<<<<<
  *         for x in self.actions:
  *             #print(x)
  */
-  __pyx_t_1 = __Pyx_PyDict_NewPresized(0); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 2481, __pyx_L1_error)
+  __pyx_t_1 = __Pyx_PyDict_NewPresized(0); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 2489, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __pyx_v_actionsCategories = ((PyObject*)__pyx_t_1);
   __pyx_t_1 = 0;
 
-  /* "cSparseIntegerOutrankingDigraphs.pyx":2482
+  /* "cSparseIntegerOutrankingDigraphs.pyx":2490
  *         #actions = [key for key in self.actions if key not in self.profiles]
  *         actionsCategories = {}
  *         for x in self.actions:             # <<<<<<<<<<<<<<
  *             #print(x)
  *             a,lowCateg,highCateg,credibility,rLowLimit,rNotHighLimit =\
  */
-  __pyx_t_1 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_n_s_actions); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 2482, __pyx_L1_error)
+  __pyx_t_1 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_n_s_actions); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 2490, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   if (likely(PyList_CheckExact(__pyx_t_1)) || PyTuple_CheckExact(__pyx_t_1)) {
     __pyx_t_2 = __pyx_t_1; __Pyx_INCREF(__pyx_t_2);
     __pyx_t_4 = 0;
     __pyx_t_5 = NULL;
   } else {
-    __pyx_t_4 = -1; __pyx_t_2 = PyObject_GetIter(__pyx_t_1); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 2482, __pyx_L1_error)
+    __pyx_t_4 = -1; __pyx_t_2 = PyObject_GetIter(__pyx_t_1); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 2490, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_2);
-    __pyx_t_5 = __Pyx_PyObject_GetIterNextFunc(__pyx_t_2); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 2482, __pyx_L1_error)
+    __pyx_t_5 = __Pyx_PyObject_GetIterNextFunc(__pyx_t_2); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 2490, __pyx_L1_error)
   }
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
   for (;;) {
@@ -51397,28 +51460,28 @@ static PyObject *__pyx_pf_32cSparseIntegerOutrankingDigraphs_24cQuantilesRanking
         {
           Py_ssize_t __pyx_temp = __Pyx_PyList_GET_SIZE(__pyx_t_2);
           #if !CYTHON_ASSUME_SAFE_MACROS
-          if (unlikely((__pyx_temp < 0))) __PYX_ERR(0, 2482, __pyx_L1_error)
+          if (unlikely((__pyx_temp < 0))) __PYX_ERR(0, 2490, __pyx_L1_error)
           #endif
           if (__pyx_t_4 >= __pyx_temp) break;
         }
         #if CYTHON_ASSUME_SAFE_MACROS && !CYTHON_AVOID_BORROWED_REFS
-        __pyx_t_1 = PyList_GET_ITEM(__pyx_t_2, __pyx_t_4); __Pyx_INCREF(__pyx_t_1); __pyx_t_4++; if (unlikely((0 < 0))) __PYX_ERR(0, 2482, __pyx_L1_error)
+        __pyx_t_1 = PyList_GET_ITEM(__pyx_t_2, __pyx_t_4); __Pyx_INCREF(__pyx_t_1); __pyx_t_4++; if (unlikely((0 < 0))) __PYX_ERR(0, 2490, __pyx_L1_error)
         #else
-        __pyx_t_1 = __Pyx_PySequence_ITEM(__pyx_t_2, __pyx_t_4); __pyx_t_4++; if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 2482, __pyx_L1_error)
+        __pyx_t_1 = __Pyx_PySequence_ITEM(__pyx_t_2, __pyx_t_4); __pyx_t_4++; if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 2490, __pyx_L1_error)
         __Pyx_GOTREF(__pyx_t_1);
         #endif
       } else {
         {
           Py_ssize_t __pyx_temp = __Pyx_PyTuple_GET_SIZE(__pyx_t_2);
           #if !CYTHON_ASSUME_SAFE_MACROS
-          if (unlikely((__pyx_temp < 0))) __PYX_ERR(0, 2482, __pyx_L1_error)
+          if (unlikely((__pyx_temp < 0))) __PYX_ERR(0, 2490, __pyx_L1_error)
           #endif
           if (__pyx_t_4 >= __pyx_temp) break;
         }
         #if CYTHON_ASSUME_SAFE_MACROS && !CYTHON_AVOID_BORROWED_REFS
-        __pyx_t_1 = PyTuple_GET_ITEM(__pyx_t_2, __pyx_t_4); __Pyx_INCREF(__pyx_t_1); __pyx_t_4++; if (unlikely((0 < 0))) __PYX_ERR(0, 2482, __pyx_L1_error)
+        __pyx_t_1 = PyTuple_GET_ITEM(__pyx_t_2, __pyx_t_4); __Pyx_INCREF(__pyx_t_1); __pyx_t_4++; if (unlikely((0 < 0))) __PYX_ERR(0, 2490, __pyx_L1_error)
         #else
-        __pyx_t_1 = __Pyx_PySequence_ITEM(__pyx_t_2, __pyx_t_4); __pyx_t_4++; if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 2482, __pyx_L1_error)
+        __pyx_t_1 = __Pyx_PySequence_ITEM(__pyx_t_2, __pyx_t_4); __pyx_t_4++; if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 2490, __pyx_L1_error)
         __Pyx_GOTREF(__pyx_t_1);
         #endif
       }
@@ -51428,78 +51491,78 @@ static PyObject *__pyx_pf_32cSparseIntegerOutrankingDigraphs_24cQuantilesRanking
         PyObject* exc_type = PyErr_Occurred();
         if (exc_type) {
           if (likely(__Pyx_PyErr_GivenExceptionMatches(exc_type, PyExc_StopIteration))) PyErr_Clear();
-          else __PYX_ERR(0, 2482, __pyx_L1_error)
+          else __PYX_ERR(0, 2490, __pyx_L1_error)
         }
         break;
       }
       __Pyx_GOTREF(__pyx_t_1);
     }
-    __pyx_t_6 = __Pyx_PyInt_As_int(__pyx_t_1); if (unlikely((__pyx_t_6 == (int)-1) && PyErr_Occurred())) __PYX_ERR(0, 2482, __pyx_L1_error)
+    __pyx_t_6 = __Pyx_PyInt_As_int(__pyx_t_1); if (unlikely((__pyx_t_6 == (int)-1) && PyErr_Occurred())) __PYX_ERR(0, 2490, __pyx_L1_error)
     __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
     __pyx_v_x = __pyx_t_6;
 
-    /* "cSparseIntegerOutrankingDigraphs.pyx":2485
+    /* "cSparseIntegerOutrankingDigraphs.pyx":2493
  *             #print(x)
  *             a,lowCateg,highCateg,credibility,rLowLimit,rNotHighLimit =\
  *                      self.computeActionCategories(x,Comments=Comments,Debug=False,\             # <<<<<<<<<<<<<<
  *                                                Threading=Threading,\
  *                                                   startMethod=startMethod,\
  */
-    __pyx_t_1 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_n_s_computeActionCategories); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 2485, __pyx_L1_error)
+    __pyx_t_1 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_n_s_computeActionCategories); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 2493, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_1);
-    __pyx_t_7 = __Pyx_PyInt_From_int(__pyx_v_x); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 2485, __pyx_L1_error)
+    __pyx_t_7 = __Pyx_PyInt_From_int(__pyx_v_x); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 2493, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_7);
-    __pyx_t_8 = PyTuple_New(1); if (unlikely(!__pyx_t_8)) __PYX_ERR(0, 2485, __pyx_L1_error)
+    __pyx_t_8 = PyTuple_New(1); if (unlikely(!__pyx_t_8)) __PYX_ERR(0, 2493, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_8);
     __Pyx_GIVEREF(__pyx_t_7);
-    if (__Pyx_PyTuple_SET_ITEM(__pyx_t_8, 0, __pyx_t_7)) __PYX_ERR(0, 2485, __pyx_L1_error);
+    if (__Pyx_PyTuple_SET_ITEM(__pyx_t_8, 0, __pyx_t_7)) __PYX_ERR(0, 2493, __pyx_L1_error);
     __pyx_t_7 = 0;
-    __pyx_t_7 = __Pyx_PyDict_NewPresized(5); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 2485, __pyx_L1_error)
+    __pyx_t_7 = __Pyx_PyDict_NewPresized(5); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 2493, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_7);
-    __pyx_t_9 = __Pyx_PyBool_FromLong(__pyx_v_Comments); if (unlikely(!__pyx_t_9)) __PYX_ERR(0, 2485, __pyx_L1_error)
+    __pyx_t_9 = __Pyx_PyBool_FromLong(__pyx_v_Comments); if (unlikely(!__pyx_t_9)) __PYX_ERR(0, 2493, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_9);
-    if (PyDict_SetItem(__pyx_t_7, __pyx_n_s_Comments, __pyx_t_9) < 0) __PYX_ERR(0, 2485, __pyx_L1_error)
+    if (PyDict_SetItem(__pyx_t_7, __pyx_n_s_Comments, __pyx_t_9) < 0) __PYX_ERR(0, 2493, __pyx_L1_error)
     __Pyx_DECREF(__pyx_t_9); __pyx_t_9 = 0;
-    if (PyDict_SetItem(__pyx_t_7, __pyx_n_s_Debug, Py_False) < 0) __PYX_ERR(0, 2485, __pyx_L1_error)
+    if (PyDict_SetItem(__pyx_t_7, __pyx_n_s_Debug, Py_False) < 0) __PYX_ERR(0, 2493, __pyx_L1_error)
 
-    /* "cSparseIntegerOutrankingDigraphs.pyx":2486
+    /* "cSparseIntegerOutrankingDigraphs.pyx":2494
  *             a,lowCateg,highCateg,credibility,rLowLimit,rNotHighLimit =\
  *                      self.computeActionCategories(x,Comments=Comments,Debug=False,\
  *                                                Threading=Threading,\             # <<<<<<<<<<<<<<
  *                                                   startMethod=startMethod,\
  *                                                nbrOfCPUs = nbrOfCPUs)
  */
-    __pyx_t_9 = __Pyx_PyBool_FromLong(__pyx_v_Threading); if (unlikely(!__pyx_t_9)) __PYX_ERR(0, 2486, __pyx_L1_error)
+    __pyx_t_9 = __Pyx_PyBool_FromLong(__pyx_v_Threading); if (unlikely(!__pyx_t_9)) __PYX_ERR(0, 2494, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_9);
-    if (PyDict_SetItem(__pyx_t_7, __pyx_n_s_Threading, __pyx_t_9) < 0) __PYX_ERR(0, 2485, __pyx_L1_error)
+    if (PyDict_SetItem(__pyx_t_7, __pyx_n_s_Threading, __pyx_t_9) < 0) __PYX_ERR(0, 2493, __pyx_L1_error)
     __Pyx_DECREF(__pyx_t_9); __pyx_t_9 = 0;
 
-    /* "cSparseIntegerOutrankingDigraphs.pyx":2487
+    /* "cSparseIntegerOutrankingDigraphs.pyx":2495
  *                      self.computeActionCategories(x,Comments=Comments,Debug=False,\
  *                                                Threading=Threading,\
  *                                                   startMethod=startMethod,\             # <<<<<<<<<<<<<<
  *                                                nbrOfCPUs = nbrOfCPUs)
  *             #print(a,lowCateg,highCateg,credibility,lowLimit,notHighLimit)
  */
-    if (PyDict_SetItem(__pyx_t_7, __pyx_n_s_startMethod, __pyx_v_startMethod) < 0) __PYX_ERR(0, 2485, __pyx_L1_error)
+    if (PyDict_SetItem(__pyx_t_7, __pyx_n_s_startMethod, __pyx_v_startMethod) < 0) __PYX_ERR(0, 2493, __pyx_L1_error)
 
-    /* "cSparseIntegerOutrankingDigraphs.pyx":2488
+    /* "cSparseIntegerOutrankingDigraphs.pyx":2496
  *                                                Threading=Threading,\
  *                                                   startMethod=startMethod,\
  *                                                nbrOfCPUs = nbrOfCPUs)             # <<<<<<<<<<<<<<
  *             #print(a,lowCateg,highCateg,credibility,lowLimit,notHighLimit)
  *             lowQtileValue = self.categories[lowCateg]['lowLimitValue']
  */
-    if (PyDict_SetItem(__pyx_t_7, __pyx_n_s_nbrOfCPUs, __pyx_v_nbrOfCPUs) < 0) __PYX_ERR(0, 2485, __pyx_L1_error)
+    if (PyDict_SetItem(__pyx_t_7, __pyx_n_s_nbrOfCPUs, __pyx_v_nbrOfCPUs) < 0) __PYX_ERR(0, 2493, __pyx_L1_error)
 
-    /* "cSparseIntegerOutrankingDigraphs.pyx":2485
+    /* "cSparseIntegerOutrankingDigraphs.pyx":2493
  *             #print(x)
  *             a,lowCateg,highCateg,credibility,rLowLimit,rNotHighLimit =\
  *                      self.computeActionCategories(x,Comments=Comments,Debug=False,\             # <<<<<<<<<<<<<<
  *                                                Threading=Threading,\
  *                                                   startMethod=startMethod,\
  */
-    __pyx_t_9 = __Pyx_PyObject_Call(__pyx_t_1, __pyx_t_8, __pyx_t_7); if (unlikely(!__pyx_t_9)) __PYX_ERR(0, 2485, __pyx_L1_error)
+    __pyx_t_9 = __Pyx_PyObject_Call(__pyx_t_1, __pyx_t_8, __pyx_t_7); if (unlikely(!__pyx_t_9)) __PYX_ERR(0, 2493, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_9);
     __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
     __Pyx_DECREF(__pyx_t_8); __pyx_t_8 = 0;
@@ -51510,7 +51573,7 @@ static PyObject *__pyx_pf_32cSparseIntegerOutrankingDigraphs_24cQuantilesRanking
       if (unlikely(size != 6)) {
         if (size > 6) __Pyx_RaiseTooManyValuesError(6);
         else if (size >= 0) __Pyx_RaiseNeedMoreValuesError(size);
-        __PYX_ERR(0, 2484, __pyx_L1_error)
+        __PYX_ERR(0, 2492, __pyx_L1_error)
       }
       #if CYTHON_ASSUME_SAFE_MACROS && !CYTHON_AVOID_BORROWED_REFS
       if (likely(PyTuple_CheckExact(sequence))) {
@@ -51539,7 +51602,7 @@ static PyObject *__pyx_pf_32cSparseIntegerOutrankingDigraphs_24cQuantilesRanking
         Py_ssize_t i;
         PyObject** temps[6] = {&__pyx_t_7,&__pyx_t_8,&__pyx_t_1,&__pyx_t_10,&__pyx_t_11,&__pyx_t_12};
         for (i=0; i < 6; i++) {
-          PyObject* item = PySequence_ITEM(sequence, i); if (unlikely(!item)) __PYX_ERR(0, 2484, __pyx_L1_error)
+          PyObject* item = PySequence_ITEM(sequence, i); if (unlikely(!item)) __PYX_ERR(0, 2492, __pyx_L1_error)
           __Pyx_GOTREF(item);
           *(temps[i]) = item;
         }
@@ -51549,7 +51612,7 @@ static PyObject *__pyx_pf_32cSparseIntegerOutrankingDigraphs_24cQuantilesRanking
     } else {
       Py_ssize_t index = -1;
       PyObject** temps[6] = {&__pyx_t_7,&__pyx_t_8,&__pyx_t_1,&__pyx_t_10,&__pyx_t_11,&__pyx_t_12};
-      __pyx_t_13 = PyObject_GetIter(__pyx_t_9); if (unlikely(!__pyx_t_13)) __PYX_ERR(0, 2484, __pyx_L1_error)
+      __pyx_t_13 = PyObject_GetIter(__pyx_t_9); if (unlikely(!__pyx_t_13)) __PYX_ERR(0, 2492, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_13);
       __Pyx_DECREF(__pyx_t_9); __pyx_t_9 = 0;
       __pyx_t_14 = __Pyx_PyObject_GetIterNextFunc(__pyx_t_13);
@@ -51558,7 +51621,7 @@ static PyObject *__pyx_pf_32cSparseIntegerOutrankingDigraphs_24cQuantilesRanking
         __Pyx_GOTREF(item);
         *(temps[index]) = item;
       }
-      if (__Pyx_IternextUnpackEndCheck(__pyx_t_14(__pyx_t_13), 6) < 0) __PYX_ERR(0, 2484, __pyx_L1_error)
+      if (__Pyx_IternextUnpackEndCheck(__pyx_t_14(__pyx_t_13), 6) < 0) __PYX_ERR(0, 2492, __pyx_L1_error)
       __pyx_t_14 = NULL;
       __Pyx_DECREF(__pyx_t_13); __pyx_t_13 = 0;
       goto __pyx_L7_unpacking_done;
@@ -51566,11 +51629,11 @@ static PyObject *__pyx_pf_32cSparseIntegerOutrankingDigraphs_24cQuantilesRanking
       __Pyx_DECREF(__pyx_t_13); __pyx_t_13 = 0;
       __pyx_t_14 = NULL;
       if (__Pyx_IterFinish() == 0) __Pyx_RaiseNeedMoreValuesError(index);
-      __PYX_ERR(0, 2484, __pyx_L1_error)
+      __PYX_ERR(0, 2492, __pyx_L1_error)
       __pyx_L7_unpacking_done:;
     }
 
-    /* "cSparseIntegerOutrankingDigraphs.pyx":2484
+    /* "cSparseIntegerOutrankingDigraphs.pyx":2492
  *         for x in self.actions:
  *             #print(x)
  *             a,lowCateg,highCateg,credibility,rLowLimit,rNotHighLimit =\             # <<<<<<<<<<<<<<
@@ -51590,115 +51653,115 @@ static PyObject *__pyx_pf_32cSparseIntegerOutrankingDigraphs_24cQuantilesRanking
     __Pyx_XDECREF_SET(__pyx_v_rNotHighLimit, __pyx_t_12);
     __pyx_t_12 = 0;
 
-    /* "cSparseIntegerOutrankingDigraphs.pyx":2490
+    /* "cSparseIntegerOutrankingDigraphs.pyx":2498
  *                                                nbrOfCPUs = nbrOfCPUs)
  *             #print(a,lowCateg,highCateg,credibility,lowLimit,notHighLimit)
  *             lowQtileValue = self.categories[lowCateg]['lowLimitValue']             # <<<<<<<<<<<<<<
  *             highQtileValue = self.categories[highCateg]['highLimitValue']
  *             lowQtileLimit = self.categories[lowCateg]['lowLimit']
  */
-    __pyx_t_9 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_n_s_categories); if (unlikely(!__pyx_t_9)) __PYX_ERR(0, 2490, __pyx_L1_error)
+    __pyx_t_9 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_n_s_categories); if (unlikely(!__pyx_t_9)) __PYX_ERR(0, 2498, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_9);
-    __pyx_t_12 = __Pyx_PyObject_GetItem(__pyx_t_9, __pyx_v_lowCateg); if (unlikely(!__pyx_t_12)) __PYX_ERR(0, 2490, __pyx_L1_error)
+    __pyx_t_12 = __Pyx_PyObject_GetItem(__pyx_t_9, __pyx_v_lowCateg); if (unlikely(!__pyx_t_12)) __PYX_ERR(0, 2498, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_12);
     __Pyx_DECREF(__pyx_t_9); __pyx_t_9 = 0;
-    __pyx_t_9 = __Pyx_PyObject_Dict_GetItem(__pyx_t_12, __pyx_n_u_lowLimitValue); if (unlikely(!__pyx_t_9)) __PYX_ERR(0, 2490, __pyx_L1_error)
+    __pyx_t_9 = __Pyx_PyObject_Dict_GetItem(__pyx_t_12, __pyx_n_u_lowLimitValue); if (unlikely(!__pyx_t_9)) __PYX_ERR(0, 2498, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_9);
     __Pyx_DECREF(__pyx_t_12); __pyx_t_12 = 0;
     __Pyx_XDECREF_SET(__pyx_v_lowQtileValue, __pyx_t_9);
     __pyx_t_9 = 0;
 
-    /* "cSparseIntegerOutrankingDigraphs.pyx":2491
+    /* "cSparseIntegerOutrankingDigraphs.pyx":2499
  *             #print(a,lowCateg,highCateg,credibility,lowLimit,notHighLimit)
  *             lowQtileValue = self.categories[lowCateg]['lowLimitValue']
  *             highQtileValue = self.categories[highCateg]['highLimitValue']             # <<<<<<<<<<<<<<
  *             lowQtileLimit = self.categories[lowCateg]['lowLimit']
  *             highQtileLimit = self.categories[highCateg]['highLimit']
  */
-    __pyx_t_9 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_n_s_categories); if (unlikely(!__pyx_t_9)) __PYX_ERR(0, 2491, __pyx_L1_error)
+    __pyx_t_9 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_n_s_categories); if (unlikely(!__pyx_t_9)) __PYX_ERR(0, 2499, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_9);
-    __pyx_t_12 = __Pyx_PyObject_GetItem(__pyx_t_9, __pyx_v_highCateg); if (unlikely(!__pyx_t_12)) __PYX_ERR(0, 2491, __pyx_L1_error)
+    __pyx_t_12 = __Pyx_PyObject_GetItem(__pyx_t_9, __pyx_v_highCateg); if (unlikely(!__pyx_t_12)) __PYX_ERR(0, 2499, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_12);
     __Pyx_DECREF(__pyx_t_9); __pyx_t_9 = 0;
-    __pyx_t_9 = __Pyx_PyObject_Dict_GetItem(__pyx_t_12, __pyx_n_u_highLimitValue); if (unlikely(!__pyx_t_9)) __PYX_ERR(0, 2491, __pyx_L1_error)
+    __pyx_t_9 = __Pyx_PyObject_Dict_GetItem(__pyx_t_12, __pyx_n_u_highLimitValue); if (unlikely(!__pyx_t_9)) __PYX_ERR(0, 2499, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_9);
     __Pyx_DECREF(__pyx_t_12); __pyx_t_12 = 0;
     __Pyx_XDECREF_SET(__pyx_v_highQtileValue, __pyx_t_9);
     __pyx_t_9 = 0;
 
-    /* "cSparseIntegerOutrankingDigraphs.pyx":2492
+    /* "cSparseIntegerOutrankingDigraphs.pyx":2500
  *             lowQtileValue = self.categories[lowCateg]['lowLimitValue']
  *             highQtileValue = self.categories[highCateg]['highLimitValue']
  *             lowQtileLimit = self.categories[lowCateg]['lowLimit']             # <<<<<<<<<<<<<<
  *             highQtileLimit = self.categories[highCateg]['highLimit']
  *             if strategy == "optimal":  # default
  */
-    __pyx_t_9 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_n_s_categories); if (unlikely(!__pyx_t_9)) __PYX_ERR(0, 2492, __pyx_L1_error)
+    __pyx_t_9 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_n_s_categories); if (unlikely(!__pyx_t_9)) __PYX_ERR(0, 2500, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_9);
-    __pyx_t_12 = __Pyx_PyObject_GetItem(__pyx_t_9, __pyx_v_lowCateg); if (unlikely(!__pyx_t_12)) __PYX_ERR(0, 2492, __pyx_L1_error)
+    __pyx_t_12 = __Pyx_PyObject_GetItem(__pyx_t_9, __pyx_v_lowCateg); if (unlikely(!__pyx_t_12)) __PYX_ERR(0, 2500, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_12);
     __Pyx_DECREF(__pyx_t_9); __pyx_t_9 = 0;
-    __pyx_t_9 = __Pyx_PyObject_Dict_GetItem(__pyx_t_12, __pyx_n_u_lowLimit); if (unlikely(!__pyx_t_9)) __PYX_ERR(0, 2492, __pyx_L1_error)
+    __pyx_t_9 = __Pyx_PyObject_Dict_GetItem(__pyx_t_12, __pyx_n_u_lowLimit); if (unlikely(!__pyx_t_9)) __PYX_ERR(0, 2500, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_9);
     __Pyx_DECREF(__pyx_t_12); __pyx_t_12 = 0;
     __Pyx_XDECREF_SET(__pyx_v_lowQtileLimit, __pyx_t_9);
     __pyx_t_9 = 0;
 
-    /* "cSparseIntegerOutrankingDigraphs.pyx":2493
+    /* "cSparseIntegerOutrankingDigraphs.pyx":2501
  *             highQtileValue = self.categories[highCateg]['highLimitValue']
  *             lowQtileLimit = self.categories[lowCateg]['lowLimit']
  *             highQtileLimit = self.categories[highCateg]['highLimit']             # <<<<<<<<<<<<<<
  *             if strategy == "optimal":  # default
  *                 lc = int(lowCateg)
  */
-    __pyx_t_9 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_n_s_categories); if (unlikely(!__pyx_t_9)) __PYX_ERR(0, 2493, __pyx_L1_error)
+    __pyx_t_9 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_n_s_categories); if (unlikely(!__pyx_t_9)) __PYX_ERR(0, 2501, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_9);
-    __pyx_t_12 = __Pyx_PyObject_GetItem(__pyx_t_9, __pyx_v_highCateg); if (unlikely(!__pyx_t_12)) __PYX_ERR(0, 2493, __pyx_L1_error)
+    __pyx_t_12 = __Pyx_PyObject_GetItem(__pyx_t_9, __pyx_v_highCateg); if (unlikely(!__pyx_t_12)) __PYX_ERR(0, 2501, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_12);
     __Pyx_DECREF(__pyx_t_9); __pyx_t_9 = 0;
-    __pyx_t_9 = __Pyx_PyObject_Dict_GetItem(__pyx_t_12, __pyx_n_u_highLimit); if (unlikely(!__pyx_t_9)) __PYX_ERR(0, 2493, __pyx_L1_error)
+    __pyx_t_9 = __Pyx_PyObject_Dict_GetItem(__pyx_t_12, __pyx_n_u_highLimit); if (unlikely(!__pyx_t_9)) __PYX_ERR(0, 2501, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_9);
     __Pyx_DECREF(__pyx_t_12); __pyx_t_12 = 0;
     __Pyx_XDECREF_SET(__pyx_v_highQtileLimit, __pyx_t_9);
     __pyx_t_9 = 0;
 
-    /* "cSparseIntegerOutrankingDigraphs.pyx":2494
+    /* "cSparseIntegerOutrankingDigraphs.pyx":2502
  *             lowQtileLimit = self.categories[lowCateg]['lowLimit']
  *             highQtileLimit = self.categories[highCateg]['highLimit']
  *             if strategy == "optimal":  # default             # <<<<<<<<<<<<<<
  *                 lc = int(lowCateg)
  *                 hc = int(highCateg)
  */
-    __pyx_t_3 = (__Pyx_PyUnicode_Equals(__pyx_v_strategy, __pyx_n_u_optimal, Py_EQ)); if (unlikely((__pyx_t_3 < 0))) __PYX_ERR(0, 2494, __pyx_L1_error)
+    __pyx_t_3 = (__Pyx_PyUnicode_Equals(__pyx_v_strategy, __pyx_n_u_optimal, Py_EQ)); if (unlikely((__pyx_t_3 < 0))) __PYX_ERR(0, 2502, __pyx_L1_error)
     if (__pyx_t_3) {
 
-      /* "cSparseIntegerOutrankingDigraphs.pyx":2495
+      /* "cSparseIntegerOutrankingDigraphs.pyx":2503
  *             highQtileLimit = self.categories[highCateg]['highLimit']
  *             if strategy == "optimal":  # default
  *                 lc = int(lowCateg)             # <<<<<<<<<<<<<<
  *                 hc = int(highCateg)
  *                 score1 = lc + hc
  */
-      __pyx_t_9 = __Pyx_PyNumber_Int(__pyx_v_lowCateg); if (unlikely(!__pyx_t_9)) __PYX_ERR(0, 2495, __pyx_L1_error)
+      __pyx_t_9 = __Pyx_PyNumber_Int(__pyx_v_lowCateg); if (unlikely(!__pyx_t_9)) __PYX_ERR(0, 2503, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_9);
-      __pyx_t_6 = __Pyx_PyInt_As_int(__pyx_t_9); if (unlikely((__pyx_t_6 == (int)-1) && PyErr_Occurred())) __PYX_ERR(0, 2495, __pyx_L1_error)
+      __pyx_t_6 = __Pyx_PyInt_As_int(__pyx_t_9); if (unlikely((__pyx_t_6 == (int)-1) && PyErr_Occurred())) __PYX_ERR(0, 2503, __pyx_L1_error)
       __Pyx_DECREF(__pyx_t_9); __pyx_t_9 = 0;
       __pyx_v_lc = __pyx_t_6;
 
-      /* "cSparseIntegerOutrankingDigraphs.pyx":2496
+      /* "cSparseIntegerOutrankingDigraphs.pyx":2504
  *             if strategy == "optimal":  # default
  *                 lc = int(lowCateg)
  *                 hc = int(highCateg)             # <<<<<<<<<<<<<<
  *                 score1 = lc + hc
  *                 score2 = hc
  */
-      __pyx_t_9 = __Pyx_PyNumber_Int(__pyx_v_highCateg); if (unlikely(!__pyx_t_9)) __PYX_ERR(0, 2496, __pyx_L1_error)
+      __pyx_t_9 = __Pyx_PyNumber_Int(__pyx_v_highCateg); if (unlikely(!__pyx_t_9)) __PYX_ERR(0, 2504, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_9);
-      __pyx_t_6 = __Pyx_PyInt_As_int(__pyx_t_9); if (unlikely((__pyx_t_6 == (int)-1) && PyErr_Occurred())) __PYX_ERR(0, 2496, __pyx_L1_error)
+      __pyx_t_6 = __Pyx_PyInt_As_int(__pyx_t_9); if (unlikely((__pyx_t_6 == (int)-1) && PyErr_Occurred())) __PYX_ERR(0, 2504, __pyx_L1_error)
       __Pyx_DECREF(__pyx_t_9); __pyx_t_9 = 0;
       __pyx_v_hc = __pyx_t_6;
 
-      /* "cSparseIntegerOutrankingDigraphs.pyx":2497
+      /* "cSparseIntegerOutrankingDigraphs.pyx":2505
  *                 lc = int(lowCateg)
  *                 hc = int(highCateg)
  *                 score1 = lc + hc             # <<<<<<<<<<<<<<
@@ -51707,7 +51770,7 @@ static PyObject *__pyx_pf_32cSparseIntegerOutrankingDigraphs_24cQuantilesRanking
  */
       __pyx_v_score1 = (__pyx_v_lc + __pyx_v_hc);
 
-      /* "cSparseIntegerOutrankingDigraphs.pyx":2498
+      /* "cSparseIntegerOutrankingDigraphs.pyx":2506
  *                 hc = int(highCateg)
  *                 score1 = lc + hc
  *                 score2 = hc             # <<<<<<<<<<<<<<
@@ -51716,33 +51779,33 @@ static PyObject *__pyx_pf_32cSparseIntegerOutrankingDigraphs_24cQuantilesRanking
  */
       __pyx_v_score2 = __pyx_v_hc;
 
-      /* "cSparseIntegerOutrankingDigraphs.pyx":2499
+      /* "cSparseIntegerOutrankingDigraphs.pyx":2507
  *                 score1 = lc + hc
  *                 score2 = hc
  *                 score3 = rLowLimit - rNotHighLimit             # <<<<<<<<<<<<<<
  *                 score4 = -rNotHighLimit
  *             elif strategy == "average":
  */
-      __pyx_t_9 = PyNumber_Subtract(__pyx_v_rLowLimit, __pyx_v_rNotHighLimit); if (unlikely(!__pyx_t_9)) __PYX_ERR(0, 2499, __pyx_L1_error)
+      __pyx_t_9 = PyNumber_Subtract(__pyx_v_rLowLimit, __pyx_v_rNotHighLimit); if (unlikely(!__pyx_t_9)) __PYX_ERR(0, 2507, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_9);
-      __pyx_t_6 = __Pyx_PyInt_As_int(__pyx_t_9); if (unlikely((__pyx_t_6 == (int)-1) && PyErr_Occurred())) __PYX_ERR(0, 2499, __pyx_L1_error)
+      __pyx_t_6 = __Pyx_PyInt_As_int(__pyx_t_9); if (unlikely((__pyx_t_6 == (int)-1) && PyErr_Occurred())) __PYX_ERR(0, 2507, __pyx_L1_error)
       __Pyx_DECREF(__pyx_t_9); __pyx_t_9 = 0;
       __pyx_v_score3 = __pyx_t_6;
 
-      /* "cSparseIntegerOutrankingDigraphs.pyx":2500
+      /* "cSparseIntegerOutrankingDigraphs.pyx":2508
  *                 score2 = hc
  *                 score3 = rLowLimit - rNotHighLimit
  *                 score4 = -rNotHighLimit             # <<<<<<<<<<<<<<
  *             elif strategy == "average":
  *                 lc = int(lowCateg)
  */
-      __pyx_t_9 = PyNumber_Negative(__pyx_v_rNotHighLimit); if (unlikely(!__pyx_t_9)) __PYX_ERR(0, 2500, __pyx_L1_error)
+      __pyx_t_9 = PyNumber_Negative(__pyx_v_rNotHighLimit); if (unlikely(!__pyx_t_9)) __PYX_ERR(0, 2508, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_9);
-      __pyx_t_6 = __Pyx_PyInt_As_int(__pyx_t_9); if (unlikely((__pyx_t_6 == (int)-1) && PyErr_Occurred())) __PYX_ERR(0, 2500, __pyx_L1_error)
+      __pyx_t_6 = __Pyx_PyInt_As_int(__pyx_t_9); if (unlikely((__pyx_t_6 == (int)-1) && PyErr_Occurred())) __PYX_ERR(0, 2508, __pyx_L1_error)
       __Pyx_DECREF(__pyx_t_9); __pyx_t_9 = 0;
       __pyx_v_score4 = __pyx_t_6;
 
-      /* "cSparseIntegerOutrankingDigraphs.pyx":2494
+      /* "cSparseIntegerOutrankingDigraphs.pyx":2502
  *             lowQtileLimit = self.categories[lowCateg]['lowLimit']
  *             highQtileLimit = self.categories[highCateg]['highLimit']
  *             if strategy == "optimal":  # default             # <<<<<<<<<<<<<<
@@ -51752,43 +51815,43 @@ static PyObject *__pyx_pf_32cSparseIntegerOutrankingDigraphs_24cQuantilesRanking
       goto __pyx_L8;
     }
 
-    /* "cSparseIntegerOutrankingDigraphs.pyx":2501
+    /* "cSparseIntegerOutrankingDigraphs.pyx":2509
  *                 score3 = rLowLimit - rNotHighLimit
  *                 score4 = -rNotHighLimit
  *             elif strategy == "average":             # <<<<<<<<<<<<<<
  *                 lc = int(lowCateg)
  *                 hc = int(highCateg)
  */
-    __pyx_t_3 = (__Pyx_PyUnicode_Equals(__pyx_v_strategy, __pyx_n_u_average, Py_EQ)); if (unlikely((__pyx_t_3 < 0))) __PYX_ERR(0, 2501, __pyx_L1_error)
+    __pyx_t_3 = (__Pyx_PyUnicode_Equals(__pyx_v_strategy, __pyx_n_u_average, Py_EQ)); if (unlikely((__pyx_t_3 < 0))) __PYX_ERR(0, 2509, __pyx_L1_error)
     if (__pyx_t_3) {
 
-      /* "cSparseIntegerOutrankingDigraphs.pyx":2502
+      /* "cSparseIntegerOutrankingDigraphs.pyx":2510
  *                 score4 = -rNotHighLimit
  *             elif strategy == "average":
  *                 lc = int(lowCateg)             # <<<<<<<<<<<<<<
  *                 hc = int(highCateg)
  *                 score1 = lc + hc
  */
-      __pyx_t_9 = __Pyx_PyNumber_Int(__pyx_v_lowCateg); if (unlikely(!__pyx_t_9)) __PYX_ERR(0, 2502, __pyx_L1_error)
+      __pyx_t_9 = __Pyx_PyNumber_Int(__pyx_v_lowCateg); if (unlikely(!__pyx_t_9)) __PYX_ERR(0, 2510, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_9);
-      __pyx_t_6 = __Pyx_PyInt_As_int(__pyx_t_9); if (unlikely((__pyx_t_6 == (int)-1) && PyErr_Occurred())) __PYX_ERR(0, 2502, __pyx_L1_error)
+      __pyx_t_6 = __Pyx_PyInt_As_int(__pyx_t_9); if (unlikely((__pyx_t_6 == (int)-1) && PyErr_Occurred())) __PYX_ERR(0, 2510, __pyx_L1_error)
       __Pyx_DECREF(__pyx_t_9); __pyx_t_9 = 0;
       __pyx_v_lc = __pyx_t_6;
 
-      /* "cSparseIntegerOutrankingDigraphs.pyx":2503
+      /* "cSparseIntegerOutrankingDigraphs.pyx":2511
  *             elif strategy == "average":
  *                 lc = int(lowCateg)
  *                 hc = int(highCateg)             # <<<<<<<<<<<<<<
  *                 score1 = lc + hc
  *                 score2 = rLowLimit - rNotHighLimit
  */
-      __pyx_t_9 = __Pyx_PyNumber_Int(__pyx_v_highCateg); if (unlikely(!__pyx_t_9)) __PYX_ERR(0, 2503, __pyx_L1_error)
+      __pyx_t_9 = __Pyx_PyNumber_Int(__pyx_v_highCateg); if (unlikely(!__pyx_t_9)) __PYX_ERR(0, 2511, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_9);
-      __pyx_t_6 = __Pyx_PyInt_As_int(__pyx_t_9); if (unlikely((__pyx_t_6 == (int)-1) && PyErr_Occurred())) __PYX_ERR(0, 2503, __pyx_L1_error)
+      __pyx_t_6 = __Pyx_PyInt_As_int(__pyx_t_9); if (unlikely((__pyx_t_6 == (int)-1) && PyErr_Occurred())) __PYX_ERR(0, 2511, __pyx_L1_error)
       __Pyx_DECREF(__pyx_t_9); __pyx_t_9 = 0;
       __pyx_v_hc = __pyx_t_6;
 
-      /* "cSparseIntegerOutrankingDigraphs.pyx":2504
+      /* "cSparseIntegerOutrankingDigraphs.pyx":2512
  *                 lc = int(lowCateg)
  *                 hc = int(highCateg)
  *                 score1 = lc + hc             # <<<<<<<<<<<<<<
@@ -51797,20 +51860,20 @@ static PyObject *__pyx_pf_32cSparseIntegerOutrankingDigraphs_24cQuantilesRanking
  */
       __pyx_v_score1 = (__pyx_v_lc + __pyx_v_hc);
 
-      /* "cSparseIntegerOutrankingDigraphs.pyx":2505
+      /* "cSparseIntegerOutrankingDigraphs.pyx":2513
  *                 hc = int(highCateg)
  *                 score1 = lc + hc
  *                 score2 = rLowLimit - rNotHighLimit             # <<<<<<<<<<<<<<
  *                 score3 = lc + hc
  *                 score4 = rLowLimit - rNotHighLimit
  */
-      __pyx_t_9 = PyNumber_Subtract(__pyx_v_rLowLimit, __pyx_v_rNotHighLimit); if (unlikely(!__pyx_t_9)) __PYX_ERR(0, 2505, __pyx_L1_error)
+      __pyx_t_9 = PyNumber_Subtract(__pyx_v_rLowLimit, __pyx_v_rNotHighLimit); if (unlikely(!__pyx_t_9)) __PYX_ERR(0, 2513, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_9);
-      __pyx_t_6 = __Pyx_PyInt_As_int(__pyx_t_9); if (unlikely((__pyx_t_6 == (int)-1) && PyErr_Occurred())) __PYX_ERR(0, 2505, __pyx_L1_error)
+      __pyx_t_6 = __Pyx_PyInt_As_int(__pyx_t_9); if (unlikely((__pyx_t_6 == (int)-1) && PyErr_Occurred())) __PYX_ERR(0, 2513, __pyx_L1_error)
       __Pyx_DECREF(__pyx_t_9); __pyx_t_9 = 0;
       __pyx_v_score2 = __pyx_t_6;
 
-      /* "cSparseIntegerOutrankingDigraphs.pyx":2506
+      /* "cSparseIntegerOutrankingDigraphs.pyx":2514
  *                 score1 = lc + hc
  *                 score2 = rLowLimit - rNotHighLimit
  *                 score3 = lc + hc             # <<<<<<<<<<<<<<
@@ -51819,20 +51882,20 @@ static PyObject *__pyx_pf_32cSparseIntegerOutrankingDigraphs_24cQuantilesRanking
  */
       __pyx_v_score3 = (__pyx_v_lc + __pyx_v_hc);
 
-      /* "cSparseIntegerOutrankingDigraphs.pyx":2507
+      /* "cSparseIntegerOutrankingDigraphs.pyx":2515
  *                 score2 = rLowLimit - rNotHighLimit
  *                 score3 = lc + hc
  *                 score4 = rLowLimit - rNotHighLimit             # <<<<<<<<<<<<<<
  *             elif strategy == "optimistic":
  *                 score1 = int(highCateg)
  */
-      __pyx_t_9 = PyNumber_Subtract(__pyx_v_rLowLimit, __pyx_v_rNotHighLimit); if (unlikely(!__pyx_t_9)) __PYX_ERR(0, 2507, __pyx_L1_error)
+      __pyx_t_9 = PyNumber_Subtract(__pyx_v_rLowLimit, __pyx_v_rNotHighLimit); if (unlikely(!__pyx_t_9)) __PYX_ERR(0, 2515, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_9);
-      __pyx_t_6 = __Pyx_PyInt_As_int(__pyx_t_9); if (unlikely((__pyx_t_6 == (int)-1) && PyErr_Occurred())) __PYX_ERR(0, 2507, __pyx_L1_error)
+      __pyx_t_6 = __Pyx_PyInt_As_int(__pyx_t_9); if (unlikely((__pyx_t_6 == (int)-1) && PyErr_Occurred())) __PYX_ERR(0, 2515, __pyx_L1_error)
       __Pyx_DECREF(__pyx_t_9); __pyx_t_9 = 0;
       __pyx_v_score4 = __pyx_t_6;
 
-      /* "cSparseIntegerOutrankingDigraphs.pyx":2501
+      /* "cSparseIntegerOutrankingDigraphs.pyx":2509
  *                 score3 = rLowLimit - rNotHighLimit
  *                 score4 = -rNotHighLimit
  *             elif strategy == "average":             # <<<<<<<<<<<<<<
@@ -51842,66 +51905,66 @@ static PyObject *__pyx_pf_32cSparseIntegerOutrankingDigraphs_24cQuantilesRanking
       goto __pyx_L8;
     }
 
-    /* "cSparseIntegerOutrankingDigraphs.pyx":2508
+    /* "cSparseIntegerOutrankingDigraphs.pyx":2516
  *                 score3 = lc + hc
  *                 score4 = rLowLimit - rNotHighLimit
  *             elif strategy == "optimistic":             # <<<<<<<<<<<<<<
  *                 score1 = int(highCateg)
  *                 score2 = -rNotHighLimit
  */
-    __pyx_t_3 = (__Pyx_PyUnicode_Equals(__pyx_v_strategy, __pyx_n_u_optimistic, Py_EQ)); if (unlikely((__pyx_t_3 < 0))) __PYX_ERR(0, 2508, __pyx_L1_error)
+    __pyx_t_3 = (__Pyx_PyUnicode_Equals(__pyx_v_strategy, __pyx_n_u_optimistic, Py_EQ)); if (unlikely((__pyx_t_3 < 0))) __PYX_ERR(0, 2516, __pyx_L1_error)
     if (__pyx_t_3) {
 
-      /* "cSparseIntegerOutrankingDigraphs.pyx":2509
+      /* "cSparseIntegerOutrankingDigraphs.pyx":2517
  *                 score4 = rLowLimit - rNotHighLimit
  *             elif strategy == "optimistic":
  *                 score1 = int(highCateg)             # <<<<<<<<<<<<<<
  *                 score2 = -rNotHighLimit
  *                 score3 = int(lowCateg)
  */
-      __pyx_t_9 = __Pyx_PyNumber_Int(__pyx_v_highCateg); if (unlikely(!__pyx_t_9)) __PYX_ERR(0, 2509, __pyx_L1_error)
+      __pyx_t_9 = __Pyx_PyNumber_Int(__pyx_v_highCateg); if (unlikely(!__pyx_t_9)) __PYX_ERR(0, 2517, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_9);
-      __pyx_t_6 = __Pyx_PyInt_As_int(__pyx_t_9); if (unlikely((__pyx_t_6 == (int)-1) && PyErr_Occurred())) __PYX_ERR(0, 2509, __pyx_L1_error)
+      __pyx_t_6 = __Pyx_PyInt_As_int(__pyx_t_9); if (unlikely((__pyx_t_6 == (int)-1) && PyErr_Occurred())) __PYX_ERR(0, 2517, __pyx_L1_error)
       __Pyx_DECREF(__pyx_t_9); __pyx_t_9 = 0;
       __pyx_v_score1 = __pyx_t_6;
 
-      /* "cSparseIntegerOutrankingDigraphs.pyx":2510
+      /* "cSparseIntegerOutrankingDigraphs.pyx":2518
  *             elif strategy == "optimistic":
  *                 score1 = int(highCateg)
  *                 score2 = -rNotHighLimit             # <<<<<<<<<<<<<<
  *                 score3 = int(lowCateg)
  *                 score4 = rLowLimit
  */
-      __pyx_t_9 = PyNumber_Negative(__pyx_v_rNotHighLimit); if (unlikely(!__pyx_t_9)) __PYX_ERR(0, 2510, __pyx_L1_error)
+      __pyx_t_9 = PyNumber_Negative(__pyx_v_rNotHighLimit); if (unlikely(!__pyx_t_9)) __PYX_ERR(0, 2518, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_9);
-      __pyx_t_6 = __Pyx_PyInt_As_int(__pyx_t_9); if (unlikely((__pyx_t_6 == (int)-1) && PyErr_Occurred())) __PYX_ERR(0, 2510, __pyx_L1_error)
+      __pyx_t_6 = __Pyx_PyInt_As_int(__pyx_t_9); if (unlikely((__pyx_t_6 == (int)-1) && PyErr_Occurred())) __PYX_ERR(0, 2518, __pyx_L1_error)
       __Pyx_DECREF(__pyx_t_9); __pyx_t_9 = 0;
       __pyx_v_score2 = __pyx_t_6;
 
-      /* "cSparseIntegerOutrankingDigraphs.pyx":2511
+      /* "cSparseIntegerOutrankingDigraphs.pyx":2519
  *                 score1 = int(highCateg)
  *                 score2 = -rNotHighLimit
  *                 score3 = int(lowCateg)             # <<<<<<<<<<<<<<
  *                 score4 = rLowLimit
  *             else:    # strategy == "pessimistic":
  */
-      __pyx_t_9 = __Pyx_PyNumber_Int(__pyx_v_lowCateg); if (unlikely(!__pyx_t_9)) __PYX_ERR(0, 2511, __pyx_L1_error)
+      __pyx_t_9 = __Pyx_PyNumber_Int(__pyx_v_lowCateg); if (unlikely(!__pyx_t_9)) __PYX_ERR(0, 2519, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_9);
-      __pyx_t_6 = __Pyx_PyInt_As_int(__pyx_t_9); if (unlikely((__pyx_t_6 == (int)-1) && PyErr_Occurred())) __PYX_ERR(0, 2511, __pyx_L1_error)
+      __pyx_t_6 = __Pyx_PyInt_As_int(__pyx_t_9); if (unlikely((__pyx_t_6 == (int)-1) && PyErr_Occurred())) __PYX_ERR(0, 2519, __pyx_L1_error)
       __Pyx_DECREF(__pyx_t_9); __pyx_t_9 = 0;
       __pyx_v_score3 = __pyx_t_6;
 
-      /* "cSparseIntegerOutrankingDigraphs.pyx":2512
+      /* "cSparseIntegerOutrankingDigraphs.pyx":2520
  *                 score2 = -rNotHighLimit
  *                 score3 = int(lowCateg)
  *                 score4 = rLowLimit             # <<<<<<<<<<<<<<
  *             else:    # strategy == "pessimistic":
  *                 score1 = int(lowCateg)
  */
-      __pyx_t_6 = __Pyx_PyInt_As_int(__pyx_v_rLowLimit); if (unlikely((__pyx_t_6 == (int)-1) && PyErr_Occurred())) __PYX_ERR(0, 2512, __pyx_L1_error)
+      __pyx_t_6 = __Pyx_PyInt_As_int(__pyx_v_rLowLimit); if (unlikely((__pyx_t_6 == (int)-1) && PyErr_Occurred())) __PYX_ERR(0, 2520, __pyx_L1_error)
       __pyx_v_score4 = __pyx_t_6;
 
-      /* "cSparseIntegerOutrankingDigraphs.pyx":2508
+      /* "cSparseIntegerOutrankingDigraphs.pyx":2516
  *                 score3 = lc + hc
  *                 score4 = rLowLimit - rNotHighLimit
  *             elif strategy == "optimistic":             # <<<<<<<<<<<<<<
@@ -51911,7 +51974,7 @@ static PyObject *__pyx_pf_32cSparseIntegerOutrankingDigraphs_24cQuantilesRanking
       goto __pyx_L8;
     }
 
-    /* "cSparseIntegerOutrankingDigraphs.pyx":2514
+    /* "cSparseIntegerOutrankingDigraphs.pyx":2522
  *                 score4 = rLowLimit
  *             else:    # strategy == "pessimistic":
  *                 score1 = int(lowCateg)             # <<<<<<<<<<<<<<
@@ -51919,51 +51982,51 @@ static PyObject *__pyx_pf_32cSparseIntegerOutrankingDigraphs_24cQuantilesRanking
  *                 score3 = int(highCateg)
  */
     /*else*/ {
-      __pyx_t_9 = __Pyx_PyNumber_Int(__pyx_v_lowCateg); if (unlikely(!__pyx_t_9)) __PYX_ERR(0, 2514, __pyx_L1_error)
+      __pyx_t_9 = __Pyx_PyNumber_Int(__pyx_v_lowCateg); if (unlikely(!__pyx_t_9)) __PYX_ERR(0, 2522, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_9);
-      __pyx_t_6 = __Pyx_PyInt_As_int(__pyx_t_9); if (unlikely((__pyx_t_6 == (int)-1) && PyErr_Occurred())) __PYX_ERR(0, 2514, __pyx_L1_error)
+      __pyx_t_6 = __Pyx_PyInt_As_int(__pyx_t_9); if (unlikely((__pyx_t_6 == (int)-1) && PyErr_Occurred())) __PYX_ERR(0, 2522, __pyx_L1_error)
       __Pyx_DECREF(__pyx_t_9); __pyx_t_9 = 0;
       __pyx_v_score1 = __pyx_t_6;
 
-      /* "cSparseIntegerOutrankingDigraphs.pyx":2515
+      /* "cSparseIntegerOutrankingDigraphs.pyx":2523
  *             else:    # strategy == "pessimistic":
  *                 score1 = int(lowCateg)
  *                 score2 = rLowLimit             # <<<<<<<<<<<<<<
  *                 score3 = int(highCateg)
  *                 score4 = -rNotHighLimit
  */
-      __pyx_t_6 = __Pyx_PyInt_As_int(__pyx_v_rLowLimit); if (unlikely((__pyx_t_6 == (int)-1) && PyErr_Occurred())) __PYX_ERR(0, 2515, __pyx_L1_error)
+      __pyx_t_6 = __Pyx_PyInt_As_int(__pyx_v_rLowLimit); if (unlikely((__pyx_t_6 == (int)-1) && PyErr_Occurred())) __PYX_ERR(0, 2523, __pyx_L1_error)
       __pyx_v_score2 = __pyx_t_6;
 
-      /* "cSparseIntegerOutrankingDigraphs.pyx":2516
+      /* "cSparseIntegerOutrankingDigraphs.pyx":2524
  *                 score1 = int(lowCateg)
  *                 score2 = rLowLimit
  *                 score3 = int(highCateg)             # <<<<<<<<<<<<<<
  *                 score4 = -rNotHighLimit
  *             #print(x,a,score1,highQtileValue,lowQtileValue,lowCateg,highCateg,\
  */
-      __pyx_t_9 = __Pyx_PyNumber_Int(__pyx_v_highCateg); if (unlikely(!__pyx_t_9)) __PYX_ERR(0, 2516, __pyx_L1_error)
+      __pyx_t_9 = __Pyx_PyNumber_Int(__pyx_v_highCateg); if (unlikely(!__pyx_t_9)) __PYX_ERR(0, 2524, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_9);
-      __pyx_t_6 = __Pyx_PyInt_As_int(__pyx_t_9); if (unlikely((__pyx_t_6 == (int)-1) && PyErr_Occurred())) __PYX_ERR(0, 2516, __pyx_L1_error)
+      __pyx_t_6 = __Pyx_PyInt_As_int(__pyx_t_9); if (unlikely((__pyx_t_6 == (int)-1) && PyErr_Occurred())) __PYX_ERR(0, 2524, __pyx_L1_error)
       __Pyx_DECREF(__pyx_t_9); __pyx_t_9 = 0;
       __pyx_v_score3 = __pyx_t_6;
 
-      /* "cSparseIntegerOutrankingDigraphs.pyx":2517
+      /* "cSparseIntegerOutrankingDigraphs.pyx":2525
  *                 score2 = rLowLimit
  *                 score3 = int(highCateg)
  *                 score4 = -rNotHighLimit             # <<<<<<<<<<<<<<
  *             #print(x,a,score1,highQtileValue,lowQtileValue,lowCateg,highCateg,\
  *             #     score2, score3, score4,highQtileLimit,lowQtileLimit)
  */
-      __pyx_t_9 = PyNumber_Negative(__pyx_v_rNotHighLimit); if (unlikely(!__pyx_t_9)) __PYX_ERR(0, 2517, __pyx_L1_error)
+      __pyx_t_9 = PyNumber_Negative(__pyx_v_rNotHighLimit); if (unlikely(!__pyx_t_9)) __PYX_ERR(0, 2525, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_9);
-      __pyx_t_6 = __Pyx_PyInt_As_int(__pyx_t_9); if (unlikely((__pyx_t_6 == (int)-1) && PyErr_Occurred())) __PYX_ERR(0, 2517, __pyx_L1_error)
+      __pyx_t_6 = __Pyx_PyInt_As_int(__pyx_t_9); if (unlikely((__pyx_t_6 == (int)-1) && PyErr_Occurred())) __PYX_ERR(0, 2525, __pyx_L1_error)
       __Pyx_DECREF(__pyx_t_9); __pyx_t_9 = 0;
       __pyx_v_score4 = __pyx_t_6;
     }
     __pyx_L8:;
 
-    /* "cSparseIntegerOutrankingDigraphs.pyx":2520
+    /* "cSparseIntegerOutrankingDigraphs.pyx":2528
  *             #print(x,a,score1,highQtileValue,lowQtileValue,lowCateg,highCateg,\
  *             #     score2, score3, score4,highQtileLimit,lowQtileLimit)
  *             try:             # <<<<<<<<<<<<<<
@@ -51979,84 +52042,84 @@ static PyObject *__pyx_pf_32cSparseIntegerOutrankingDigraphs_24cQuantilesRanking
       __Pyx_XGOTREF(__pyx_t_17);
       /*try:*/ {
 
-        /* "cSparseIntegerOutrankingDigraphs.pyx":2521
+        /* "cSparseIntegerOutrankingDigraphs.pyx":2529
  *             #     score2, score3, score4,highQtileLimit,lowQtileLimit)
  *             try:
  *                 actionsCategories[(score1,score2,score3,score4,\             # <<<<<<<<<<<<<<
  *                                    highQtileValue,lowQtileValue,\
  *                                    lowCateg,highCateg,\
  */
-        __pyx_t_9 = __Pyx_PyInt_From_int(__pyx_v_score1); if (unlikely(!__pyx_t_9)) __PYX_ERR(0, 2521, __pyx_L9_error)
+        __pyx_t_9 = __Pyx_PyInt_From_int(__pyx_v_score1); if (unlikely(!__pyx_t_9)) __PYX_ERR(0, 2529, __pyx_L9_error)
         __Pyx_GOTREF(__pyx_t_9);
-        __pyx_t_12 = __Pyx_PyInt_From_int(__pyx_v_score2); if (unlikely(!__pyx_t_12)) __PYX_ERR(0, 2521, __pyx_L9_error)
+        __pyx_t_12 = __Pyx_PyInt_From_int(__pyx_v_score2); if (unlikely(!__pyx_t_12)) __PYX_ERR(0, 2529, __pyx_L9_error)
         __Pyx_GOTREF(__pyx_t_12);
-        __pyx_t_11 = __Pyx_PyInt_From_int(__pyx_v_score3); if (unlikely(!__pyx_t_11)) __PYX_ERR(0, 2521, __pyx_L9_error)
+        __pyx_t_11 = __Pyx_PyInt_From_int(__pyx_v_score3); if (unlikely(!__pyx_t_11)) __PYX_ERR(0, 2529, __pyx_L9_error)
         __Pyx_GOTREF(__pyx_t_11);
-        __pyx_t_10 = __Pyx_PyInt_From_int(__pyx_v_score4); if (unlikely(!__pyx_t_10)) __PYX_ERR(0, 2521, __pyx_L9_error)
+        __pyx_t_10 = __Pyx_PyInt_From_int(__pyx_v_score4); if (unlikely(!__pyx_t_10)) __PYX_ERR(0, 2529, __pyx_L9_error)
         __Pyx_GOTREF(__pyx_t_10);
 
-        /* "cSparseIntegerOutrankingDigraphs.pyx":2524
+        /* "cSparseIntegerOutrankingDigraphs.pyx":2532
  *                                    highQtileValue,lowQtileValue,\
  *                                    lowCateg,highCateg,\
  *                                    highQtileLimit,lowQtileLimit)].append(a)             # <<<<<<<<<<<<<<
  *             except:
  *                 actionsCategories[(score1,score2,score3,score4,\
  */
-        __pyx_t_1 = PyTuple_New(10); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 2521, __pyx_L9_error)
+        __pyx_t_1 = PyTuple_New(10); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 2529, __pyx_L9_error)
         __Pyx_GOTREF(__pyx_t_1);
         __Pyx_GIVEREF(__pyx_t_9);
-        if (__Pyx_PyTuple_SET_ITEM(__pyx_t_1, 0, __pyx_t_9)) __PYX_ERR(0, 2521, __pyx_L9_error);
+        if (__Pyx_PyTuple_SET_ITEM(__pyx_t_1, 0, __pyx_t_9)) __PYX_ERR(0, 2529, __pyx_L9_error);
         __Pyx_GIVEREF(__pyx_t_12);
-        if (__Pyx_PyTuple_SET_ITEM(__pyx_t_1, 1, __pyx_t_12)) __PYX_ERR(0, 2521, __pyx_L9_error);
+        if (__Pyx_PyTuple_SET_ITEM(__pyx_t_1, 1, __pyx_t_12)) __PYX_ERR(0, 2529, __pyx_L9_error);
         __Pyx_GIVEREF(__pyx_t_11);
-        if (__Pyx_PyTuple_SET_ITEM(__pyx_t_1, 2, __pyx_t_11)) __PYX_ERR(0, 2521, __pyx_L9_error);
+        if (__Pyx_PyTuple_SET_ITEM(__pyx_t_1, 2, __pyx_t_11)) __PYX_ERR(0, 2529, __pyx_L9_error);
         __Pyx_GIVEREF(__pyx_t_10);
-        if (__Pyx_PyTuple_SET_ITEM(__pyx_t_1, 3, __pyx_t_10)) __PYX_ERR(0, 2521, __pyx_L9_error);
+        if (__Pyx_PyTuple_SET_ITEM(__pyx_t_1, 3, __pyx_t_10)) __PYX_ERR(0, 2529, __pyx_L9_error);
         __Pyx_INCREF(__pyx_v_highQtileValue);
         __Pyx_GIVEREF(__pyx_v_highQtileValue);
-        if (__Pyx_PyTuple_SET_ITEM(__pyx_t_1, 4, __pyx_v_highQtileValue)) __PYX_ERR(0, 2521, __pyx_L9_error);
+        if (__Pyx_PyTuple_SET_ITEM(__pyx_t_1, 4, __pyx_v_highQtileValue)) __PYX_ERR(0, 2529, __pyx_L9_error);
         __Pyx_INCREF(__pyx_v_lowQtileValue);
         __Pyx_GIVEREF(__pyx_v_lowQtileValue);
-        if (__Pyx_PyTuple_SET_ITEM(__pyx_t_1, 5, __pyx_v_lowQtileValue)) __PYX_ERR(0, 2521, __pyx_L9_error);
+        if (__Pyx_PyTuple_SET_ITEM(__pyx_t_1, 5, __pyx_v_lowQtileValue)) __PYX_ERR(0, 2529, __pyx_L9_error);
         __Pyx_INCREF(__pyx_v_lowCateg);
         __Pyx_GIVEREF(__pyx_v_lowCateg);
-        if (__Pyx_PyTuple_SET_ITEM(__pyx_t_1, 6, __pyx_v_lowCateg)) __PYX_ERR(0, 2521, __pyx_L9_error);
+        if (__Pyx_PyTuple_SET_ITEM(__pyx_t_1, 6, __pyx_v_lowCateg)) __PYX_ERR(0, 2529, __pyx_L9_error);
         __Pyx_INCREF(__pyx_v_highCateg);
         __Pyx_GIVEREF(__pyx_v_highCateg);
-        if (__Pyx_PyTuple_SET_ITEM(__pyx_t_1, 7, __pyx_v_highCateg)) __PYX_ERR(0, 2521, __pyx_L9_error);
+        if (__Pyx_PyTuple_SET_ITEM(__pyx_t_1, 7, __pyx_v_highCateg)) __PYX_ERR(0, 2529, __pyx_L9_error);
         __Pyx_INCREF(__pyx_v_highQtileLimit);
         __Pyx_GIVEREF(__pyx_v_highQtileLimit);
-        if (__Pyx_PyTuple_SET_ITEM(__pyx_t_1, 8, __pyx_v_highQtileLimit)) __PYX_ERR(0, 2521, __pyx_L9_error);
+        if (__Pyx_PyTuple_SET_ITEM(__pyx_t_1, 8, __pyx_v_highQtileLimit)) __PYX_ERR(0, 2529, __pyx_L9_error);
         __Pyx_INCREF(__pyx_v_lowQtileLimit);
         __Pyx_GIVEREF(__pyx_v_lowQtileLimit);
-        if (__Pyx_PyTuple_SET_ITEM(__pyx_t_1, 9, __pyx_v_lowQtileLimit)) __PYX_ERR(0, 2521, __pyx_L9_error);
+        if (__Pyx_PyTuple_SET_ITEM(__pyx_t_1, 9, __pyx_v_lowQtileLimit)) __PYX_ERR(0, 2529, __pyx_L9_error);
         __pyx_t_9 = 0;
         __pyx_t_12 = 0;
         __pyx_t_11 = 0;
         __pyx_t_10 = 0;
 
-        /* "cSparseIntegerOutrankingDigraphs.pyx":2521
+        /* "cSparseIntegerOutrankingDigraphs.pyx":2529
  *             #     score2, score3, score4,highQtileLimit,lowQtileLimit)
  *             try:
  *                 actionsCategories[(score1,score2,score3,score4,\             # <<<<<<<<<<<<<<
  *                                    highQtileValue,lowQtileValue,\
  *                                    lowCateg,highCateg,\
  */
-        __pyx_t_10 = __Pyx_PyDict_GetItem(__pyx_v_actionsCategories, __pyx_t_1); if (unlikely(!__pyx_t_10)) __PYX_ERR(0, 2521, __pyx_L9_error)
+        __pyx_t_10 = __Pyx_PyDict_GetItem(__pyx_v_actionsCategories, __pyx_t_1); if (unlikely(!__pyx_t_10)) __PYX_ERR(0, 2529, __pyx_L9_error)
         __Pyx_GOTREF(__pyx_t_10);
         __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
 
-        /* "cSparseIntegerOutrankingDigraphs.pyx":2524
+        /* "cSparseIntegerOutrankingDigraphs.pyx":2532
  *                                    highQtileValue,lowQtileValue,\
  *                                    lowCateg,highCateg,\
  *                                    highQtileLimit,lowQtileLimit)].append(a)             # <<<<<<<<<<<<<<
  *             except:
  *                 actionsCategories[(score1,score2,score3,score4,\
  */
-        __pyx_t_18 = __Pyx_PyObject_Append(__pyx_t_10, __pyx_v_a); if (unlikely(__pyx_t_18 == ((int)-1))) __PYX_ERR(0, 2524, __pyx_L9_error)
+        __pyx_t_18 = __Pyx_PyObject_Append(__pyx_t_10, __pyx_v_a); if (unlikely(__pyx_t_18 == ((int)-1))) __PYX_ERR(0, 2532, __pyx_L9_error)
         __Pyx_DECREF(__pyx_t_10); __pyx_t_10 = 0;
 
-        /* "cSparseIntegerOutrankingDigraphs.pyx":2520
+        /* "cSparseIntegerOutrankingDigraphs.pyx":2528
  *             #print(x,a,score1,highQtileValue,lowQtileValue,lowCateg,highCateg,\
  *             #     score2, score3, score4,highQtileLimit,lowQtileLimit)
  *             try:             # <<<<<<<<<<<<<<
@@ -52078,7 +52141,7 @@ static PyObject *__pyx_pf_32cSparseIntegerOutrankingDigraphs_24cQuantilesRanking
       __Pyx_XDECREF(__pyx_t_8); __pyx_t_8 = 0;
       __Pyx_XDECREF(__pyx_t_9); __pyx_t_9 = 0;
 
-      /* "cSparseIntegerOutrankingDigraphs.pyx":2525
+      /* "cSparseIntegerOutrankingDigraphs.pyx":2533
  *                                    lowCateg,highCateg,\
  *                                    highQtileLimit,lowQtileLimit)].append(a)
  *             except:             # <<<<<<<<<<<<<<
@@ -52087,80 +52150,80 @@ static PyObject *__pyx_pf_32cSparseIntegerOutrankingDigraphs_24cQuantilesRanking
  */
       /*except:*/ {
         __Pyx_AddTraceback("cSparseIntegerOutrankingDigraphs.cQuantilesRankingDigraph._computeQuantileOrdering", __pyx_clineno, __pyx_lineno, __pyx_filename);
-        if (__Pyx_GetException(&__pyx_t_10, &__pyx_t_1, &__pyx_t_11) < 0) __PYX_ERR(0, 2525, __pyx_L11_except_error)
+        if (__Pyx_GetException(&__pyx_t_10, &__pyx_t_1, &__pyx_t_11) < 0) __PYX_ERR(0, 2533, __pyx_L11_except_error)
         __Pyx_XGOTREF(__pyx_t_10);
         __Pyx_XGOTREF(__pyx_t_1);
         __Pyx_XGOTREF(__pyx_t_11);
 
-        /* "cSparseIntegerOutrankingDigraphs.pyx":2529
+        /* "cSparseIntegerOutrankingDigraphs.pyx":2537
  *                                    highQtileValue,lowQtileValue,\
  *                                    lowCateg,highCateg,\
  *                                    highQtileLimit,lowQtileLimit)] = [a]             # <<<<<<<<<<<<<<
  *             # try:
  *             #     actionsCategories[(score1,\
  */
-        __pyx_t_12 = PyList_New(1); if (unlikely(!__pyx_t_12)) __PYX_ERR(0, 2529, __pyx_L11_except_error)
+        __pyx_t_12 = PyList_New(1); if (unlikely(!__pyx_t_12)) __PYX_ERR(0, 2537, __pyx_L11_except_error)
         __Pyx_GOTREF(__pyx_t_12);
         __Pyx_INCREF(__pyx_v_a);
         __Pyx_GIVEREF(__pyx_v_a);
-        if (__Pyx_PyList_SET_ITEM(__pyx_t_12, 0, __pyx_v_a)) __PYX_ERR(0, 2529, __pyx_L11_except_error);
+        if (__Pyx_PyList_SET_ITEM(__pyx_t_12, 0, __pyx_v_a)) __PYX_ERR(0, 2537, __pyx_L11_except_error);
 
-        /* "cSparseIntegerOutrankingDigraphs.pyx":2526
+        /* "cSparseIntegerOutrankingDigraphs.pyx":2534
  *                                    highQtileLimit,lowQtileLimit)].append(a)
  *             except:
  *                 actionsCategories[(score1,score2,score3,score4,\             # <<<<<<<<<<<<<<
  *                                    highQtileValue,lowQtileValue,\
  *                                    lowCateg,highCateg,\
  */
-        __pyx_t_9 = __Pyx_PyInt_From_int(__pyx_v_score1); if (unlikely(!__pyx_t_9)) __PYX_ERR(0, 2526, __pyx_L11_except_error)
+        __pyx_t_9 = __Pyx_PyInt_From_int(__pyx_v_score1); if (unlikely(!__pyx_t_9)) __PYX_ERR(0, 2534, __pyx_L11_except_error)
         __Pyx_GOTREF(__pyx_t_9);
-        __pyx_t_8 = __Pyx_PyInt_From_int(__pyx_v_score2); if (unlikely(!__pyx_t_8)) __PYX_ERR(0, 2526, __pyx_L11_except_error)
+        __pyx_t_8 = __Pyx_PyInt_From_int(__pyx_v_score2); if (unlikely(!__pyx_t_8)) __PYX_ERR(0, 2534, __pyx_L11_except_error)
         __Pyx_GOTREF(__pyx_t_8);
-        __pyx_t_7 = __Pyx_PyInt_From_int(__pyx_v_score3); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 2526, __pyx_L11_except_error)
+        __pyx_t_7 = __Pyx_PyInt_From_int(__pyx_v_score3); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 2534, __pyx_L11_except_error)
         __Pyx_GOTREF(__pyx_t_7);
-        __pyx_t_13 = __Pyx_PyInt_From_int(__pyx_v_score4); if (unlikely(!__pyx_t_13)) __PYX_ERR(0, 2526, __pyx_L11_except_error)
+        __pyx_t_13 = __Pyx_PyInt_From_int(__pyx_v_score4); if (unlikely(!__pyx_t_13)) __PYX_ERR(0, 2534, __pyx_L11_except_error)
         __Pyx_GOTREF(__pyx_t_13);
 
-        /* "cSparseIntegerOutrankingDigraphs.pyx":2529
+        /* "cSparseIntegerOutrankingDigraphs.pyx":2537
  *                                    highQtileValue,lowQtileValue,\
  *                                    lowCateg,highCateg,\
  *                                    highQtileLimit,lowQtileLimit)] = [a]             # <<<<<<<<<<<<<<
  *             # try:
  *             #     actionsCategories[(score1,\
  */
-        __pyx_t_19 = PyTuple_New(10); if (unlikely(!__pyx_t_19)) __PYX_ERR(0, 2526, __pyx_L11_except_error)
+        __pyx_t_19 = PyTuple_New(10); if (unlikely(!__pyx_t_19)) __PYX_ERR(0, 2534, __pyx_L11_except_error)
         __Pyx_GOTREF(__pyx_t_19);
         __Pyx_GIVEREF(__pyx_t_9);
-        if (__Pyx_PyTuple_SET_ITEM(__pyx_t_19, 0, __pyx_t_9)) __PYX_ERR(0, 2526, __pyx_L11_except_error);
+        if (__Pyx_PyTuple_SET_ITEM(__pyx_t_19, 0, __pyx_t_9)) __PYX_ERR(0, 2534, __pyx_L11_except_error);
         __Pyx_GIVEREF(__pyx_t_8);
-        if (__Pyx_PyTuple_SET_ITEM(__pyx_t_19, 1, __pyx_t_8)) __PYX_ERR(0, 2526, __pyx_L11_except_error);
+        if (__Pyx_PyTuple_SET_ITEM(__pyx_t_19, 1, __pyx_t_8)) __PYX_ERR(0, 2534, __pyx_L11_except_error);
         __Pyx_GIVEREF(__pyx_t_7);
-        if (__Pyx_PyTuple_SET_ITEM(__pyx_t_19, 2, __pyx_t_7)) __PYX_ERR(0, 2526, __pyx_L11_except_error);
+        if (__Pyx_PyTuple_SET_ITEM(__pyx_t_19, 2, __pyx_t_7)) __PYX_ERR(0, 2534, __pyx_L11_except_error);
         __Pyx_GIVEREF(__pyx_t_13);
-        if (__Pyx_PyTuple_SET_ITEM(__pyx_t_19, 3, __pyx_t_13)) __PYX_ERR(0, 2526, __pyx_L11_except_error);
+        if (__Pyx_PyTuple_SET_ITEM(__pyx_t_19, 3, __pyx_t_13)) __PYX_ERR(0, 2534, __pyx_L11_except_error);
         __Pyx_INCREF(__pyx_v_highQtileValue);
         __Pyx_GIVEREF(__pyx_v_highQtileValue);
-        if (__Pyx_PyTuple_SET_ITEM(__pyx_t_19, 4, __pyx_v_highQtileValue)) __PYX_ERR(0, 2526, __pyx_L11_except_error);
+        if (__Pyx_PyTuple_SET_ITEM(__pyx_t_19, 4, __pyx_v_highQtileValue)) __PYX_ERR(0, 2534, __pyx_L11_except_error);
         __Pyx_INCREF(__pyx_v_lowQtileValue);
         __Pyx_GIVEREF(__pyx_v_lowQtileValue);
-        if (__Pyx_PyTuple_SET_ITEM(__pyx_t_19, 5, __pyx_v_lowQtileValue)) __PYX_ERR(0, 2526, __pyx_L11_except_error);
+        if (__Pyx_PyTuple_SET_ITEM(__pyx_t_19, 5, __pyx_v_lowQtileValue)) __PYX_ERR(0, 2534, __pyx_L11_except_error);
         __Pyx_INCREF(__pyx_v_lowCateg);
         __Pyx_GIVEREF(__pyx_v_lowCateg);
-        if (__Pyx_PyTuple_SET_ITEM(__pyx_t_19, 6, __pyx_v_lowCateg)) __PYX_ERR(0, 2526, __pyx_L11_except_error);
+        if (__Pyx_PyTuple_SET_ITEM(__pyx_t_19, 6, __pyx_v_lowCateg)) __PYX_ERR(0, 2534, __pyx_L11_except_error);
         __Pyx_INCREF(__pyx_v_highCateg);
         __Pyx_GIVEREF(__pyx_v_highCateg);
-        if (__Pyx_PyTuple_SET_ITEM(__pyx_t_19, 7, __pyx_v_highCateg)) __PYX_ERR(0, 2526, __pyx_L11_except_error);
+        if (__Pyx_PyTuple_SET_ITEM(__pyx_t_19, 7, __pyx_v_highCateg)) __PYX_ERR(0, 2534, __pyx_L11_except_error);
         __Pyx_INCREF(__pyx_v_highQtileLimit);
         __Pyx_GIVEREF(__pyx_v_highQtileLimit);
-        if (__Pyx_PyTuple_SET_ITEM(__pyx_t_19, 8, __pyx_v_highQtileLimit)) __PYX_ERR(0, 2526, __pyx_L11_except_error);
+        if (__Pyx_PyTuple_SET_ITEM(__pyx_t_19, 8, __pyx_v_highQtileLimit)) __PYX_ERR(0, 2534, __pyx_L11_except_error);
         __Pyx_INCREF(__pyx_v_lowQtileLimit);
         __Pyx_GIVEREF(__pyx_v_lowQtileLimit);
-        if (__Pyx_PyTuple_SET_ITEM(__pyx_t_19, 9, __pyx_v_lowQtileLimit)) __PYX_ERR(0, 2526, __pyx_L11_except_error);
+        if (__Pyx_PyTuple_SET_ITEM(__pyx_t_19, 9, __pyx_v_lowQtileLimit)) __PYX_ERR(0, 2534, __pyx_L11_except_error);
         __pyx_t_9 = 0;
         __pyx_t_8 = 0;
         __pyx_t_7 = 0;
         __pyx_t_13 = 0;
-        if (unlikely((PyDict_SetItem(__pyx_v_actionsCategories, __pyx_t_19, __pyx_t_12) < 0))) __PYX_ERR(0, 2526, __pyx_L11_except_error)
+        if (unlikely((PyDict_SetItem(__pyx_v_actionsCategories, __pyx_t_19, __pyx_t_12) < 0))) __PYX_ERR(0, 2534, __pyx_L11_except_error)
         __Pyx_DECREF(__pyx_t_19); __pyx_t_19 = 0;
         __Pyx_DECREF(__pyx_t_12); __pyx_t_12 = 0;
         __Pyx_XDECREF(__pyx_t_10); __pyx_t_10 = 0;
@@ -52169,7 +52232,7 @@ static PyObject *__pyx_pf_32cSparseIntegerOutrankingDigraphs_24cQuantilesRanking
         goto __pyx_L10_exception_handled;
       }
 
-      /* "cSparseIntegerOutrankingDigraphs.pyx":2520
+      /* "cSparseIntegerOutrankingDigraphs.pyx":2528
  *             #print(x,a,score1,highQtileValue,lowQtileValue,lowCateg,highCateg,\
  *             #     score2, score3, score4,highQtileLimit,lowQtileLimit)
  *             try:             # <<<<<<<<<<<<<<
@@ -52190,7 +52253,7 @@ static PyObject *__pyx_pf_32cSparseIntegerOutrankingDigraphs_24cQuantilesRanking
       __pyx_L16_try_end:;
     }
 
-    /* "cSparseIntegerOutrankingDigraphs.pyx":2482
+    /* "cSparseIntegerOutrankingDigraphs.pyx":2490
  *         #actions = [key for key in self.actions if key not in self.profiles]
  *         actionsCategories = {}
  *         for x in self.actions:             # <<<<<<<<<<<<<<
@@ -52200,48 +52263,48 @@ static PyObject *__pyx_pf_32cSparseIntegerOutrankingDigraphs_24cQuantilesRanking
   }
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
 
-  /* "cSparseIntegerOutrankingDigraphs.pyx":2545
+  /* "cSparseIntegerOutrankingDigraphs.pyx":2553
  *         #    print(actionsCategories)
  * 
  *         actionsCategKeys = list(actionsCategories.keys())             # <<<<<<<<<<<<<<
  *         actionsCategIntervals = sorted(actionsCategKeys,key=itemgetter(0,1,2,3), reverse=True)
  * #        actionsCategIntervals = sorted(actionsCategKeys,key=itemgetter(0,5,6,7), reverse=True)
  */
-  __pyx_t_2 = __Pyx_PyDict_Keys(__pyx_v_actionsCategories); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 2545, __pyx_L1_error)
+  __pyx_t_2 = __Pyx_PyDict_Keys(__pyx_v_actionsCategories); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 2553, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
-  __pyx_t_11 = __Pyx_PySequence_ListKeepNew(__pyx_t_2); if (unlikely(!__pyx_t_11)) __PYX_ERR(0, 2545, __pyx_L1_error)
+  __pyx_t_11 = __Pyx_PySequence_ListKeepNew(__pyx_t_2); if (unlikely(!__pyx_t_11)) __PYX_ERR(0, 2553, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_11);
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
   __pyx_v_actionsCategKeys = ((PyObject*)__pyx_t_11);
   __pyx_t_11 = 0;
 
-  /* "cSparseIntegerOutrankingDigraphs.pyx":2546
+  /* "cSparseIntegerOutrankingDigraphs.pyx":2554
  * 
  *         actionsCategKeys = list(actionsCategories.keys())
  *         actionsCategIntervals = sorted(actionsCategKeys,key=itemgetter(0,1,2,3), reverse=True)             # <<<<<<<<<<<<<<
  * #        actionsCategIntervals = sorted(actionsCategKeys,key=itemgetter(0,5,6,7), reverse=True)
  * 
  */
-  __pyx_t_11 = PyTuple_New(1); if (unlikely(!__pyx_t_11)) __PYX_ERR(0, 2546, __pyx_L1_error)
+  __pyx_t_11 = PyTuple_New(1); if (unlikely(!__pyx_t_11)) __PYX_ERR(0, 2554, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_11);
   __Pyx_INCREF(__pyx_v_actionsCategKeys);
   __Pyx_GIVEREF(__pyx_v_actionsCategKeys);
-  if (__Pyx_PyTuple_SET_ITEM(__pyx_t_11, 0, __pyx_v_actionsCategKeys)) __PYX_ERR(0, 2546, __pyx_L1_error);
-  __pyx_t_2 = __Pyx_PyDict_NewPresized(2); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 2546, __pyx_L1_error)
+  if (__Pyx_PyTuple_SET_ITEM(__pyx_t_11, 0, __pyx_v_actionsCategKeys)) __PYX_ERR(0, 2554, __pyx_L1_error);
+  __pyx_t_2 = __Pyx_PyDict_NewPresized(2); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 2554, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
-  __pyx_t_1 = __Pyx_PyObject_Call(__pyx_v_itemgetter, __pyx_tuple__64, NULL); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 2546, __pyx_L1_error)
+  __pyx_t_1 = __Pyx_PyObject_Call(__pyx_v_itemgetter, __pyx_tuple__64, NULL); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 2554, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
-  if (PyDict_SetItem(__pyx_t_2, __pyx_n_s_key, __pyx_t_1) < 0) __PYX_ERR(0, 2546, __pyx_L1_error)
+  if (PyDict_SetItem(__pyx_t_2, __pyx_n_s_key, __pyx_t_1) < 0) __PYX_ERR(0, 2554, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
-  if (PyDict_SetItem(__pyx_t_2, __pyx_n_s_reverse, Py_True) < 0) __PYX_ERR(0, 2546, __pyx_L1_error)
-  __pyx_t_1 = __Pyx_PyObject_Call(__pyx_builtin_sorted, __pyx_t_11, __pyx_t_2); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 2546, __pyx_L1_error)
+  if (PyDict_SetItem(__pyx_t_2, __pyx_n_s_reverse, Py_True) < 0) __PYX_ERR(0, 2554, __pyx_L1_error)
+  __pyx_t_1 = __Pyx_PyObject_Call(__pyx_builtin_sorted, __pyx_t_11, __pyx_t_2); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 2554, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __Pyx_DECREF(__pyx_t_11); __pyx_t_11 = 0;
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
   __pyx_v_actionsCategIntervals = __pyx_t_1;
   __pyx_t_1 = 0;
 
-  /* "cSparseIntegerOutrankingDigraphs.pyx":2549
+  /* "cSparseIntegerOutrankingDigraphs.pyx":2557
  * #        actionsCategIntervals = sorted(actionsCategKeys,key=itemgetter(0,5,6,7), reverse=True)
  * 
  *         if Debug:             # <<<<<<<<<<<<<<
@@ -52250,18 +52313,18 @@ static PyObject *__pyx_pf_32cSparseIntegerOutrankingDigraphs_24cQuantilesRanking
  */
   if (__pyx_v_Debug) {
 
-    /* "cSparseIntegerOutrankingDigraphs.pyx":2550
+    /* "cSparseIntegerOutrankingDigraphs.pyx":2558
  * 
  *         if Debug:
  *             print(actionsCategIntervals)             # <<<<<<<<<<<<<<
  *         compSize = self.minimalComponentSize
  * 
  */
-    __pyx_t_1 = __Pyx_PyObject_CallOneArg(__pyx_builtin_print, __pyx_v_actionsCategIntervals); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 2550, __pyx_L1_error)
+    __pyx_t_1 = __Pyx_PyObject_CallOneArg(__pyx_builtin_print, __pyx_v_actionsCategIntervals); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 2558, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_1);
     __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
 
-    /* "cSparseIntegerOutrankingDigraphs.pyx":2549
+    /* "cSparseIntegerOutrankingDigraphs.pyx":2557
  * #        actionsCategIntervals = sorted(actionsCategKeys,key=itemgetter(0,5,6,7), reverse=True)
  * 
  *         if Debug:             # <<<<<<<<<<<<<<
@@ -52270,29 +52333,29 @@ static PyObject *__pyx_pf_32cSparseIntegerOutrankingDigraphs_24cQuantilesRanking
  */
   }
 
-  /* "cSparseIntegerOutrankingDigraphs.pyx":2551
+  /* "cSparseIntegerOutrankingDigraphs.pyx":2559
  *         if Debug:
  *             print(actionsCategIntervals)
  *         compSize = self.minimalComponentSize             # <<<<<<<<<<<<<<
  * 
  *         if compSize == 1:
  */
-  __pyx_t_1 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_n_s_minimalComponentSize); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 2551, __pyx_L1_error)
+  __pyx_t_1 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_n_s_minimalComponentSize); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 2559, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __pyx_v_compSize = __pyx_t_1;
   __pyx_t_1 = 0;
 
-  /* "cSparseIntegerOutrankingDigraphs.pyx":2553
+  /* "cSparseIntegerOutrankingDigraphs.pyx":2561
  *         compSize = self.minimalComponentSize
  * 
  *         if compSize == 1:             # <<<<<<<<<<<<<<
  *             if Descending:
  *                 componentsIntervals = [[(item[8],item[9]),actionsCategories[item],item[0],item[3],item[4]]\
  */
-  __pyx_t_3 = (__Pyx_PyInt_BoolEqObjC(__pyx_v_compSize, __pyx_int_1, 1, 0)); if (unlikely((__pyx_t_3 < 0))) __PYX_ERR(0, 2553, __pyx_L1_error)
+  __pyx_t_3 = (__Pyx_PyInt_BoolEqObjC(__pyx_v_compSize, __pyx_int_1, 1, 0)); if (unlikely((__pyx_t_3 < 0))) __PYX_ERR(0, 2561, __pyx_L1_error)
   if (__pyx_t_3) {
 
-    /* "cSparseIntegerOutrankingDigraphs.pyx":2554
+    /* "cSparseIntegerOutrankingDigraphs.pyx":2562
  * 
  *         if compSize == 1:
  *             if Descending:             # <<<<<<<<<<<<<<
@@ -52301,7 +52364,7 @@ static PyObject *__pyx_pf_32cSparseIntegerOutrankingDigraphs_24cQuantilesRanking
  */
     if (__pyx_v_Descending) {
 
-      /* "cSparseIntegerOutrankingDigraphs.pyx":2555
+      /* "cSparseIntegerOutrankingDigraphs.pyx":2563
  *         if compSize == 1:
  *             if Descending:
  *                 componentsIntervals = [[(item[8],item[9]),actionsCategories[item],item[0],item[3],item[4]]\             # <<<<<<<<<<<<<<
@@ -52309,10 +52372,10 @@ static PyObject *__pyx_pf_32cSparseIntegerOutrankingDigraphs_24cQuantilesRanking
  *             else:
  */
       { /* enter inner scope */
-        __pyx_t_1 = PyList_New(0); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 2555, __pyx_L25_error)
+        __pyx_t_1 = PyList_New(0); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 2563, __pyx_L25_error)
         __Pyx_GOTREF(__pyx_t_1);
 
-        /* "cSparseIntegerOutrankingDigraphs.pyx":2556
+        /* "cSparseIntegerOutrankingDigraphs.pyx":2564
  *             if Descending:
  *                 componentsIntervals = [[(item[8],item[9]),actionsCategories[item],item[0],item[3],item[4]]\
  *                                    for item in actionsCategIntervals]             # <<<<<<<<<<<<<<
@@ -52324,9 +52387,9 @@ static PyObject *__pyx_pf_32cSparseIntegerOutrankingDigraphs_24cQuantilesRanking
           __pyx_t_4 = 0;
           __pyx_t_5 = NULL;
         } else {
-          __pyx_t_4 = -1; __pyx_t_2 = PyObject_GetIter(__pyx_v_actionsCategIntervals); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 2556, __pyx_L25_error)
+          __pyx_t_4 = -1; __pyx_t_2 = PyObject_GetIter(__pyx_v_actionsCategIntervals); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 2564, __pyx_L25_error)
           __Pyx_GOTREF(__pyx_t_2);
-          __pyx_t_5 = __Pyx_PyObject_GetIterNextFunc(__pyx_t_2); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 2556, __pyx_L25_error)
+          __pyx_t_5 = __Pyx_PyObject_GetIterNextFunc(__pyx_t_2); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 2564, __pyx_L25_error)
         }
         for (;;) {
           if (likely(!__pyx_t_5)) {
@@ -52334,28 +52397,28 @@ static PyObject *__pyx_pf_32cSparseIntegerOutrankingDigraphs_24cQuantilesRanking
               {
                 Py_ssize_t __pyx_temp = __Pyx_PyList_GET_SIZE(__pyx_t_2);
                 #if !CYTHON_ASSUME_SAFE_MACROS
-                if (unlikely((__pyx_temp < 0))) __PYX_ERR(0, 2556, __pyx_L25_error)
+                if (unlikely((__pyx_temp < 0))) __PYX_ERR(0, 2564, __pyx_L25_error)
                 #endif
                 if (__pyx_t_4 >= __pyx_temp) break;
               }
               #if CYTHON_ASSUME_SAFE_MACROS && !CYTHON_AVOID_BORROWED_REFS
-              __pyx_t_11 = PyList_GET_ITEM(__pyx_t_2, __pyx_t_4); __Pyx_INCREF(__pyx_t_11); __pyx_t_4++; if (unlikely((0 < 0))) __PYX_ERR(0, 2556, __pyx_L25_error)
+              __pyx_t_11 = PyList_GET_ITEM(__pyx_t_2, __pyx_t_4); __Pyx_INCREF(__pyx_t_11); __pyx_t_4++; if (unlikely((0 < 0))) __PYX_ERR(0, 2564, __pyx_L25_error)
               #else
-              __pyx_t_11 = __Pyx_PySequence_ITEM(__pyx_t_2, __pyx_t_4); __pyx_t_4++; if (unlikely(!__pyx_t_11)) __PYX_ERR(0, 2556, __pyx_L25_error)
+              __pyx_t_11 = __Pyx_PySequence_ITEM(__pyx_t_2, __pyx_t_4); __pyx_t_4++; if (unlikely(!__pyx_t_11)) __PYX_ERR(0, 2564, __pyx_L25_error)
               __Pyx_GOTREF(__pyx_t_11);
               #endif
             } else {
               {
                 Py_ssize_t __pyx_temp = __Pyx_PyTuple_GET_SIZE(__pyx_t_2);
                 #if !CYTHON_ASSUME_SAFE_MACROS
-                if (unlikely((__pyx_temp < 0))) __PYX_ERR(0, 2556, __pyx_L25_error)
+                if (unlikely((__pyx_temp < 0))) __PYX_ERR(0, 2564, __pyx_L25_error)
                 #endif
                 if (__pyx_t_4 >= __pyx_temp) break;
               }
               #if CYTHON_ASSUME_SAFE_MACROS && !CYTHON_AVOID_BORROWED_REFS
-              __pyx_t_11 = PyTuple_GET_ITEM(__pyx_t_2, __pyx_t_4); __Pyx_INCREF(__pyx_t_11); __pyx_t_4++; if (unlikely((0 < 0))) __PYX_ERR(0, 2556, __pyx_L25_error)
+              __pyx_t_11 = PyTuple_GET_ITEM(__pyx_t_2, __pyx_t_4); __Pyx_INCREF(__pyx_t_11); __pyx_t_4++; if (unlikely((0 < 0))) __PYX_ERR(0, 2564, __pyx_L25_error)
               #else
-              __pyx_t_11 = __Pyx_PySequence_ITEM(__pyx_t_2, __pyx_t_4); __pyx_t_4++; if (unlikely(!__pyx_t_11)) __PYX_ERR(0, 2556, __pyx_L25_error)
+              __pyx_t_11 = __Pyx_PySequence_ITEM(__pyx_t_2, __pyx_t_4); __pyx_t_4++; if (unlikely(!__pyx_t_11)) __PYX_ERR(0, 2564, __pyx_L25_error)
               __Pyx_GOTREF(__pyx_t_11);
               #endif
             }
@@ -52365,7 +52428,7 @@ static PyObject *__pyx_pf_32cSparseIntegerOutrankingDigraphs_24cQuantilesRanking
               PyObject* exc_type = PyErr_Occurred();
               if (exc_type) {
                 if (likely(__Pyx_PyErr_GivenExceptionMatches(exc_type, PyExc_StopIteration))) PyErr_Clear();
-                else __PYX_ERR(0, 2556, __pyx_L25_error)
+                else __PYX_ERR(0, 2564, __pyx_L25_error)
               }
               break;
             }
@@ -52374,54 +52437,54 @@ static PyObject *__pyx_pf_32cSparseIntegerOutrankingDigraphs_24cQuantilesRanking
           __Pyx_XDECREF_SET(__pyx_9genexpr35__pyx_v_item, __pyx_t_11);
           __pyx_t_11 = 0;
 
-          /* "cSparseIntegerOutrankingDigraphs.pyx":2555
+          /* "cSparseIntegerOutrankingDigraphs.pyx":2563
  *         if compSize == 1:
  *             if Descending:
  *                 componentsIntervals = [[(item[8],item[9]),actionsCategories[item],item[0],item[3],item[4]]\             # <<<<<<<<<<<<<<
  *                                    for item in actionsCategIntervals]
  *             else:
  */
-          __pyx_t_11 = __Pyx_GetItemInt(__pyx_9genexpr35__pyx_v_item, 8, long, 1, __Pyx_PyInt_From_long, 0, 0, 1); if (unlikely(!__pyx_t_11)) __PYX_ERR(0, 2555, __pyx_L25_error)
+          __pyx_t_11 = __Pyx_GetItemInt(__pyx_9genexpr35__pyx_v_item, 8, long, 1, __Pyx_PyInt_From_long, 0, 0, 1); if (unlikely(!__pyx_t_11)) __PYX_ERR(0, 2563, __pyx_L25_error)
           __Pyx_GOTREF(__pyx_t_11);
-          __pyx_t_10 = __Pyx_GetItemInt(__pyx_9genexpr35__pyx_v_item, 9, long, 1, __Pyx_PyInt_From_long, 0, 0, 1); if (unlikely(!__pyx_t_10)) __PYX_ERR(0, 2555, __pyx_L25_error)
+          __pyx_t_10 = __Pyx_GetItemInt(__pyx_9genexpr35__pyx_v_item, 9, long, 1, __Pyx_PyInt_From_long, 0, 0, 1); if (unlikely(!__pyx_t_10)) __PYX_ERR(0, 2563, __pyx_L25_error)
           __Pyx_GOTREF(__pyx_t_10);
-          __pyx_t_12 = PyTuple_New(2); if (unlikely(!__pyx_t_12)) __PYX_ERR(0, 2555, __pyx_L25_error)
+          __pyx_t_12 = PyTuple_New(2); if (unlikely(!__pyx_t_12)) __PYX_ERR(0, 2563, __pyx_L25_error)
           __Pyx_GOTREF(__pyx_t_12);
           __Pyx_GIVEREF(__pyx_t_11);
-          if (__Pyx_PyTuple_SET_ITEM(__pyx_t_12, 0, __pyx_t_11)) __PYX_ERR(0, 2555, __pyx_L25_error);
+          if (__Pyx_PyTuple_SET_ITEM(__pyx_t_12, 0, __pyx_t_11)) __PYX_ERR(0, 2563, __pyx_L25_error);
           __Pyx_GIVEREF(__pyx_t_10);
-          if (__Pyx_PyTuple_SET_ITEM(__pyx_t_12, 1, __pyx_t_10)) __PYX_ERR(0, 2555, __pyx_L25_error);
+          if (__Pyx_PyTuple_SET_ITEM(__pyx_t_12, 1, __pyx_t_10)) __PYX_ERR(0, 2563, __pyx_L25_error);
           __pyx_t_11 = 0;
           __pyx_t_10 = 0;
-          __pyx_t_10 = __Pyx_PyDict_GetItem(__pyx_v_actionsCategories, __pyx_9genexpr35__pyx_v_item); if (unlikely(!__pyx_t_10)) __PYX_ERR(0, 2555, __pyx_L25_error)
+          __pyx_t_10 = __Pyx_PyDict_GetItem(__pyx_v_actionsCategories, __pyx_9genexpr35__pyx_v_item); if (unlikely(!__pyx_t_10)) __PYX_ERR(0, 2563, __pyx_L25_error)
           __Pyx_GOTREF(__pyx_t_10);
-          __pyx_t_11 = __Pyx_GetItemInt(__pyx_9genexpr35__pyx_v_item, 0, long, 1, __Pyx_PyInt_From_long, 0, 0, 1); if (unlikely(!__pyx_t_11)) __PYX_ERR(0, 2555, __pyx_L25_error)
+          __pyx_t_11 = __Pyx_GetItemInt(__pyx_9genexpr35__pyx_v_item, 0, long, 1, __Pyx_PyInt_From_long, 0, 0, 1); if (unlikely(!__pyx_t_11)) __PYX_ERR(0, 2563, __pyx_L25_error)
           __Pyx_GOTREF(__pyx_t_11);
-          __pyx_t_19 = __Pyx_GetItemInt(__pyx_9genexpr35__pyx_v_item, 3, long, 1, __Pyx_PyInt_From_long, 0, 0, 1); if (unlikely(!__pyx_t_19)) __PYX_ERR(0, 2555, __pyx_L25_error)
+          __pyx_t_19 = __Pyx_GetItemInt(__pyx_9genexpr35__pyx_v_item, 3, long, 1, __Pyx_PyInt_From_long, 0, 0, 1); if (unlikely(!__pyx_t_19)) __PYX_ERR(0, 2563, __pyx_L25_error)
           __Pyx_GOTREF(__pyx_t_19);
-          __pyx_t_13 = __Pyx_GetItemInt(__pyx_9genexpr35__pyx_v_item, 4, long, 1, __Pyx_PyInt_From_long, 0, 0, 1); if (unlikely(!__pyx_t_13)) __PYX_ERR(0, 2555, __pyx_L25_error)
+          __pyx_t_13 = __Pyx_GetItemInt(__pyx_9genexpr35__pyx_v_item, 4, long, 1, __Pyx_PyInt_From_long, 0, 0, 1); if (unlikely(!__pyx_t_13)) __PYX_ERR(0, 2563, __pyx_L25_error)
           __Pyx_GOTREF(__pyx_t_13);
-          __pyx_t_7 = PyList_New(5); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 2555, __pyx_L25_error)
+          __pyx_t_7 = PyList_New(5); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 2563, __pyx_L25_error)
           __Pyx_GOTREF(__pyx_t_7);
           __Pyx_GIVEREF(__pyx_t_12);
-          if (__Pyx_PyList_SET_ITEM(__pyx_t_7, 0, __pyx_t_12)) __PYX_ERR(0, 2555, __pyx_L25_error);
+          if (__Pyx_PyList_SET_ITEM(__pyx_t_7, 0, __pyx_t_12)) __PYX_ERR(0, 2563, __pyx_L25_error);
           __Pyx_GIVEREF(__pyx_t_10);
-          if (__Pyx_PyList_SET_ITEM(__pyx_t_7, 1, __pyx_t_10)) __PYX_ERR(0, 2555, __pyx_L25_error);
+          if (__Pyx_PyList_SET_ITEM(__pyx_t_7, 1, __pyx_t_10)) __PYX_ERR(0, 2563, __pyx_L25_error);
           __Pyx_GIVEREF(__pyx_t_11);
-          if (__Pyx_PyList_SET_ITEM(__pyx_t_7, 2, __pyx_t_11)) __PYX_ERR(0, 2555, __pyx_L25_error);
+          if (__Pyx_PyList_SET_ITEM(__pyx_t_7, 2, __pyx_t_11)) __PYX_ERR(0, 2563, __pyx_L25_error);
           __Pyx_GIVEREF(__pyx_t_19);
-          if (__Pyx_PyList_SET_ITEM(__pyx_t_7, 3, __pyx_t_19)) __PYX_ERR(0, 2555, __pyx_L25_error);
+          if (__Pyx_PyList_SET_ITEM(__pyx_t_7, 3, __pyx_t_19)) __PYX_ERR(0, 2563, __pyx_L25_error);
           __Pyx_GIVEREF(__pyx_t_13);
-          if (__Pyx_PyList_SET_ITEM(__pyx_t_7, 4, __pyx_t_13)) __PYX_ERR(0, 2555, __pyx_L25_error);
+          if (__Pyx_PyList_SET_ITEM(__pyx_t_7, 4, __pyx_t_13)) __PYX_ERR(0, 2563, __pyx_L25_error);
           __pyx_t_12 = 0;
           __pyx_t_10 = 0;
           __pyx_t_11 = 0;
           __pyx_t_19 = 0;
           __pyx_t_13 = 0;
-          if (unlikely(__Pyx_ListComp_Append(__pyx_t_1, (PyObject*)__pyx_t_7))) __PYX_ERR(0, 2555, __pyx_L25_error)
+          if (unlikely(__Pyx_ListComp_Append(__pyx_t_1, (PyObject*)__pyx_t_7))) __PYX_ERR(0, 2563, __pyx_L25_error)
           __Pyx_DECREF(__pyx_t_7); __pyx_t_7 = 0;
 
-          /* "cSparseIntegerOutrankingDigraphs.pyx":2556
+          /* "cSparseIntegerOutrankingDigraphs.pyx":2564
  *             if Descending:
  *                 componentsIntervals = [[(item[8],item[9]),actionsCategories[item],item[0],item[3],item[4]]\
  *                                    for item in actionsCategIntervals]             # <<<<<<<<<<<<<<
@@ -52440,7 +52503,7 @@ static PyObject *__pyx_pf_32cSparseIntegerOutrankingDigraphs_24cQuantilesRanking
       __pyx_v_componentsIntervals = ((PyObject*)__pyx_t_1);
       __pyx_t_1 = 0;
 
-      /* "cSparseIntegerOutrankingDigraphs.pyx":2554
+      /* "cSparseIntegerOutrankingDigraphs.pyx":2562
  * 
  *         if compSize == 1:
  *             if Descending:             # <<<<<<<<<<<<<<
@@ -52450,7 +52513,7 @@ static PyObject *__pyx_pf_32cSparseIntegerOutrankingDigraphs_24cQuantilesRanking
       goto __pyx_L22;
     }
 
-    /* "cSparseIntegerOutrankingDigraphs.pyx":2558
+    /* "cSparseIntegerOutrankingDigraphs.pyx":2566
  *                                    for item in actionsCategIntervals]
  *             else:
  *                 componentsIntervals = [[(item[9],item[8]),actionsCategories[item],item[0],item[3],item[4]]\             # <<<<<<<<<<<<<<
@@ -52459,10 +52522,10 @@ static PyObject *__pyx_pf_32cSparseIntegerOutrankingDigraphs_24cQuantilesRanking
  */
     /*else*/ {
       { /* enter inner scope */
-        __pyx_t_1 = PyList_New(0); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 2558, __pyx_L32_error)
+        __pyx_t_1 = PyList_New(0); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 2566, __pyx_L32_error)
         __Pyx_GOTREF(__pyx_t_1);
 
-        /* "cSparseIntegerOutrankingDigraphs.pyx":2559
+        /* "cSparseIntegerOutrankingDigraphs.pyx":2567
  *             else:
  *                 componentsIntervals = [[(item[9],item[8]),actionsCategories[item],item[0],item[3],item[4]]\
  *                                    for item in actionsCategIntervals]             # <<<<<<<<<<<<<<
@@ -52474,9 +52537,9 @@ static PyObject *__pyx_pf_32cSparseIntegerOutrankingDigraphs_24cQuantilesRanking
           __pyx_t_4 = 0;
           __pyx_t_5 = NULL;
         } else {
-          __pyx_t_4 = -1; __pyx_t_2 = PyObject_GetIter(__pyx_v_actionsCategIntervals); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 2559, __pyx_L32_error)
+          __pyx_t_4 = -1; __pyx_t_2 = PyObject_GetIter(__pyx_v_actionsCategIntervals); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 2567, __pyx_L32_error)
           __Pyx_GOTREF(__pyx_t_2);
-          __pyx_t_5 = __Pyx_PyObject_GetIterNextFunc(__pyx_t_2); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 2559, __pyx_L32_error)
+          __pyx_t_5 = __Pyx_PyObject_GetIterNextFunc(__pyx_t_2); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 2567, __pyx_L32_error)
         }
         for (;;) {
           if (likely(!__pyx_t_5)) {
@@ -52484,28 +52547,28 @@ static PyObject *__pyx_pf_32cSparseIntegerOutrankingDigraphs_24cQuantilesRanking
               {
                 Py_ssize_t __pyx_temp = __Pyx_PyList_GET_SIZE(__pyx_t_2);
                 #if !CYTHON_ASSUME_SAFE_MACROS
-                if (unlikely((__pyx_temp < 0))) __PYX_ERR(0, 2559, __pyx_L32_error)
+                if (unlikely((__pyx_temp < 0))) __PYX_ERR(0, 2567, __pyx_L32_error)
                 #endif
                 if (__pyx_t_4 >= __pyx_temp) break;
               }
               #if CYTHON_ASSUME_SAFE_MACROS && !CYTHON_AVOID_BORROWED_REFS
-              __pyx_t_7 = PyList_GET_ITEM(__pyx_t_2, __pyx_t_4); __Pyx_INCREF(__pyx_t_7); __pyx_t_4++; if (unlikely((0 < 0))) __PYX_ERR(0, 2559, __pyx_L32_error)
+              __pyx_t_7 = PyList_GET_ITEM(__pyx_t_2, __pyx_t_4); __Pyx_INCREF(__pyx_t_7); __pyx_t_4++; if (unlikely((0 < 0))) __PYX_ERR(0, 2567, __pyx_L32_error)
               #else
-              __pyx_t_7 = __Pyx_PySequence_ITEM(__pyx_t_2, __pyx_t_4); __pyx_t_4++; if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 2559, __pyx_L32_error)
+              __pyx_t_7 = __Pyx_PySequence_ITEM(__pyx_t_2, __pyx_t_4); __pyx_t_4++; if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 2567, __pyx_L32_error)
               __Pyx_GOTREF(__pyx_t_7);
               #endif
             } else {
               {
                 Py_ssize_t __pyx_temp = __Pyx_PyTuple_GET_SIZE(__pyx_t_2);
                 #if !CYTHON_ASSUME_SAFE_MACROS
-                if (unlikely((__pyx_temp < 0))) __PYX_ERR(0, 2559, __pyx_L32_error)
+                if (unlikely((__pyx_temp < 0))) __PYX_ERR(0, 2567, __pyx_L32_error)
                 #endif
                 if (__pyx_t_4 >= __pyx_temp) break;
               }
               #if CYTHON_ASSUME_SAFE_MACROS && !CYTHON_AVOID_BORROWED_REFS
-              __pyx_t_7 = PyTuple_GET_ITEM(__pyx_t_2, __pyx_t_4); __Pyx_INCREF(__pyx_t_7); __pyx_t_4++; if (unlikely((0 < 0))) __PYX_ERR(0, 2559, __pyx_L32_error)
+              __pyx_t_7 = PyTuple_GET_ITEM(__pyx_t_2, __pyx_t_4); __Pyx_INCREF(__pyx_t_7); __pyx_t_4++; if (unlikely((0 < 0))) __PYX_ERR(0, 2567, __pyx_L32_error)
               #else
-              __pyx_t_7 = __Pyx_PySequence_ITEM(__pyx_t_2, __pyx_t_4); __pyx_t_4++; if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 2559, __pyx_L32_error)
+              __pyx_t_7 = __Pyx_PySequence_ITEM(__pyx_t_2, __pyx_t_4); __pyx_t_4++; if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 2567, __pyx_L32_error)
               __Pyx_GOTREF(__pyx_t_7);
               #endif
             }
@@ -52515,7 +52578,7 @@ static PyObject *__pyx_pf_32cSparseIntegerOutrankingDigraphs_24cQuantilesRanking
               PyObject* exc_type = PyErr_Occurred();
               if (exc_type) {
                 if (likely(__Pyx_PyErr_GivenExceptionMatches(exc_type, PyExc_StopIteration))) PyErr_Clear();
-                else __PYX_ERR(0, 2559, __pyx_L32_error)
+                else __PYX_ERR(0, 2567, __pyx_L32_error)
               }
               break;
             }
@@ -52524,54 +52587,54 @@ static PyObject *__pyx_pf_32cSparseIntegerOutrankingDigraphs_24cQuantilesRanking
           __Pyx_XDECREF_SET(__pyx_9genexpr36__pyx_v_item, __pyx_t_7);
           __pyx_t_7 = 0;
 
-          /* "cSparseIntegerOutrankingDigraphs.pyx":2558
+          /* "cSparseIntegerOutrankingDigraphs.pyx":2566
  *                                    for item in actionsCategIntervals]
  *             else:
  *                 componentsIntervals = [[(item[9],item[8]),actionsCategories[item],item[0],item[3],item[4]]\             # <<<<<<<<<<<<<<
  *                                    for item in actionsCategIntervals]
  * 
  */
-          __pyx_t_7 = __Pyx_GetItemInt(__pyx_9genexpr36__pyx_v_item, 9, long, 1, __Pyx_PyInt_From_long, 0, 0, 1); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 2558, __pyx_L32_error)
+          __pyx_t_7 = __Pyx_GetItemInt(__pyx_9genexpr36__pyx_v_item, 9, long, 1, __Pyx_PyInt_From_long, 0, 0, 1); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 2566, __pyx_L32_error)
           __Pyx_GOTREF(__pyx_t_7);
-          __pyx_t_13 = __Pyx_GetItemInt(__pyx_9genexpr36__pyx_v_item, 8, long, 1, __Pyx_PyInt_From_long, 0, 0, 1); if (unlikely(!__pyx_t_13)) __PYX_ERR(0, 2558, __pyx_L32_error)
+          __pyx_t_13 = __Pyx_GetItemInt(__pyx_9genexpr36__pyx_v_item, 8, long, 1, __Pyx_PyInt_From_long, 0, 0, 1); if (unlikely(!__pyx_t_13)) __PYX_ERR(0, 2566, __pyx_L32_error)
           __Pyx_GOTREF(__pyx_t_13);
-          __pyx_t_19 = PyTuple_New(2); if (unlikely(!__pyx_t_19)) __PYX_ERR(0, 2558, __pyx_L32_error)
+          __pyx_t_19 = PyTuple_New(2); if (unlikely(!__pyx_t_19)) __PYX_ERR(0, 2566, __pyx_L32_error)
           __Pyx_GOTREF(__pyx_t_19);
           __Pyx_GIVEREF(__pyx_t_7);
-          if (__Pyx_PyTuple_SET_ITEM(__pyx_t_19, 0, __pyx_t_7)) __PYX_ERR(0, 2558, __pyx_L32_error);
+          if (__Pyx_PyTuple_SET_ITEM(__pyx_t_19, 0, __pyx_t_7)) __PYX_ERR(0, 2566, __pyx_L32_error);
           __Pyx_GIVEREF(__pyx_t_13);
-          if (__Pyx_PyTuple_SET_ITEM(__pyx_t_19, 1, __pyx_t_13)) __PYX_ERR(0, 2558, __pyx_L32_error);
+          if (__Pyx_PyTuple_SET_ITEM(__pyx_t_19, 1, __pyx_t_13)) __PYX_ERR(0, 2566, __pyx_L32_error);
           __pyx_t_7 = 0;
           __pyx_t_13 = 0;
-          __pyx_t_13 = __Pyx_PyDict_GetItem(__pyx_v_actionsCategories, __pyx_9genexpr36__pyx_v_item); if (unlikely(!__pyx_t_13)) __PYX_ERR(0, 2558, __pyx_L32_error)
+          __pyx_t_13 = __Pyx_PyDict_GetItem(__pyx_v_actionsCategories, __pyx_9genexpr36__pyx_v_item); if (unlikely(!__pyx_t_13)) __PYX_ERR(0, 2566, __pyx_L32_error)
           __Pyx_GOTREF(__pyx_t_13);
-          __pyx_t_7 = __Pyx_GetItemInt(__pyx_9genexpr36__pyx_v_item, 0, long, 1, __Pyx_PyInt_From_long, 0, 0, 1); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 2558, __pyx_L32_error)
+          __pyx_t_7 = __Pyx_GetItemInt(__pyx_9genexpr36__pyx_v_item, 0, long, 1, __Pyx_PyInt_From_long, 0, 0, 1); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 2566, __pyx_L32_error)
           __Pyx_GOTREF(__pyx_t_7);
-          __pyx_t_11 = __Pyx_GetItemInt(__pyx_9genexpr36__pyx_v_item, 3, long, 1, __Pyx_PyInt_From_long, 0, 0, 1); if (unlikely(!__pyx_t_11)) __PYX_ERR(0, 2558, __pyx_L32_error)
+          __pyx_t_11 = __Pyx_GetItemInt(__pyx_9genexpr36__pyx_v_item, 3, long, 1, __Pyx_PyInt_From_long, 0, 0, 1); if (unlikely(!__pyx_t_11)) __PYX_ERR(0, 2566, __pyx_L32_error)
           __Pyx_GOTREF(__pyx_t_11);
-          __pyx_t_10 = __Pyx_GetItemInt(__pyx_9genexpr36__pyx_v_item, 4, long, 1, __Pyx_PyInt_From_long, 0, 0, 1); if (unlikely(!__pyx_t_10)) __PYX_ERR(0, 2558, __pyx_L32_error)
+          __pyx_t_10 = __Pyx_GetItemInt(__pyx_9genexpr36__pyx_v_item, 4, long, 1, __Pyx_PyInt_From_long, 0, 0, 1); if (unlikely(!__pyx_t_10)) __PYX_ERR(0, 2566, __pyx_L32_error)
           __Pyx_GOTREF(__pyx_t_10);
-          __pyx_t_12 = PyList_New(5); if (unlikely(!__pyx_t_12)) __PYX_ERR(0, 2558, __pyx_L32_error)
+          __pyx_t_12 = PyList_New(5); if (unlikely(!__pyx_t_12)) __PYX_ERR(0, 2566, __pyx_L32_error)
           __Pyx_GOTREF(__pyx_t_12);
           __Pyx_GIVEREF(__pyx_t_19);
-          if (__Pyx_PyList_SET_ITEM(__pyx_t_12, 0, __pyx_t_19)) __PYX_ERR(0, 2558, __pyx_L32_error);
+          if (__Pyx_PyList_SET_ITEM(__pyx_t_12, 0, __pyx_t_19)) __PYX_ERR(0, 2566, __pyx_L32_error);
           __Pyx_GIVEREF(__pyx_t_13);
-          if (__Pyx_PyList_SET_ITEM(__pyx_t_12, 1, __pyx_t_13)) __PYX_ERR(0, 2558, __pyx_L32_error);
+          if (__Pyx_PyList_SET_ITEM(__pyx_t_12, 1, __pyx_t_13)) __PYX_ERR(0, 2566, __pyx_L32_error);
           __Pyx_GIVEREF(__pyx_t_7);
-          if (__Pyx_PyList_SET_ITEM(__pyx_t_12, 2, __pyx_t_7)) __PYX_ERR(0, 2558, __pyx_L32_error);
+          if (__Pyx_PyList_SET_ITEM(__pyx_t_12, 2, __pyx_t_7)) __PYX_ERR(0, 2566, __pyx_L32_error);
           __Pyx_GIVEREF(__pyx_t_11);
-          if (__Pyx_PyList_SET_ITEM(__pyx_t_12, 3, __pyx_t_11)) __PYX_ERR(0, 2558, __pyx_L32_error);
+          if (__Pyx_PyList_SET_ITEM(__pyx_t_12, 3, __pyx_t_11)) __PYX_ERR(0, 2566, __pyx_L32_error);
           __Pyx_GIVEREF(__pyx_t_10);
-          if (__Pyx_PyList_SET_ITEM(__pyx_t_12, 4, __pyx_t_10)) __PYX_ERR(0, 2558, __pyx_L32_error);
+          if (__Pyx_PyList_SET_ITEM(__pyx_t_12, 4, __pyx_t_10)) __PYX_ERR(0, 2566, __pyx_L32_error);
           __pyx_t_19 = 0;
           __pyx_t_13 = 0;
           __pyx_t_7 = 0;
           __pyx_t_11 = 0;
           __pyx_t_10 = 0;
-          if (unlikely(__Pyx_ListComp_Append(__pyx_t_1, (PyObject*)__pyx_t_12))) __PYX_ERR(0, 2558, __pyx_L32_error)
+          if (unlikely(__Pyx_ListComp_Append(__pyx_t_1, (PyObject*)__pyx_t_12))) __PYX_ERR(0, 2566, __pyx_L32_error)
           __Pyx_DECREF(__pyx_t_12); __pyx_t_12 = 0;
 
-          /* "cSparseIntegerOutrankingDigraphs.pyx":2559
+          /* "cSparseIntegerOutrankingDigraphs.pyx":2567
  *             else:
  *                 componentsIntervals = [[(item[9],item[8]),actionsCategories[item],item[0],item[3],item[4]]\
  *                                    for item in actionsCategIntervals]             # <<<<<<<<<<<<<<
@@ -52592,7 +52655,7 @@ static PyObject *__pyx_pf_32cSparseIntegerOutrankingDigraphs_24cQuantilesRanking
     }
     __pyx_L22:;
 
-    /* "cSparseIntegerOutrankingDigraphs.pyx":2553
+    /* "cSparseIntegerOutrankingDigraphs.pyx":2561
  *         compSize = self.minimalComponentSize
  * 
  *         if compSize == 1:             # <<<<<<<<<<<<<<
@@ -52602,7 +52665,7 @@ static PyObject *__pyx_pf_32cSparseIntegerOutrankingDigraphs_24cQuantilesRanking
     goto __pyx_L21;
   }
 
-  /* "cSparseIntegerOutrankingDigraphs.pyx":2562
+  /* "cSparseIntegerOutrankingDigraphs.pyx":2570
  * 
  *         else:
  *             componentsIntervals = []             # <<<<<<<<<<<<<<
@@ -52610,34 +52673,34 @@ static PyObject *__pyx_pf_32cSparseIntegerOutrankingDigraphs_24cQuantilesRanking
  *             compContent = []
  */
   /*else*/ {
-    __pyx_t_1 = PyList_New(0); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 2562, __pyx_L1_error)
+    __pyx_t_1 = PyList_New(0); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 2570, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_1);
     __pyx_v_componentsIntervals = ((PyObject*)__pyx_t_1);
     __pyx_t_1 = 0;
 
-    /* "cSparseIntegerOutrankingDigraphs.pyx":2563
+    /* "cSparseIntegerOutrankingDigraphs.pyx":2571
  *         else:
  *             componentsIntervals = []
  *             nc = len(actionsCategIntervals)             # <<<<<<<<<<<<<<
  *             compContent = []
  *             for i in range(nc):
  */
-    __pyx_t_4 = PyObject_Length(__pyx_v_actionsCategIntervals); if (unlikely(__pyx_t_4 == ((Py_ssize_t)-1))) __PYX_ERR(0, 2563, __pyx_L1_error)
+    __pyx_t_4 = PyObject_Length(__pyx_v_actionsCategIntervals); if (unlikely(__pyx_t_4 == ((Py_ssize_t)-1))) __PYX_ERR(0, 2571, __pyx_L1_error)
     __pyx_v_nc = __pyx_t_4;
 
-    /* "cSparseIntegerOutrankingDigraphs.pyx":2564
+    /* "cSparseIntegerOutrankingDigraphs.pyx":2572
  *             componentsIntervals = []
  *             nc = len(actionsCategIntervals)
  *             compContent = []             # <<<<<<<<<<<<<<
  *             for i in range(nc):
  *                 currContLength = len(compContent)
  */
-    __pyx_t_1 = PyList_New(0); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 2564, __pyx_L1_error)
+    __pyx_t_1 = PyList_New(0); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 2572, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_1);
     __pyx_v_compContent = __pyx_t_1;
     __pyx_t_1 = 0;
 
-    /* "cSparseIntegerOutrankingDigraphs.pyx":2565
+    /* "cSparseIntegerOutrankingDigraphs.pyx":2573
  *             nc = len(actionsCategIntervals)
  *             compContent = []
  *             for i in range(nc):             # <<<<<<<<<<<<<<
@@ -52649,29 +52712,29 @@ static PyObject *__pyx_pf_32cSparseIntegerOutrankingDigraphs_24cQuantilesRanking
     for (__pyx_t_21 = 0; __pyx_t_21 < __pyx_t_20; __pyx_t_21+=1) {
       __pyx_v_i = __pyx_t_21;
 
-      /* "cSparseIntegerOutrankingDigraphs.pyx":2566
+      /* "cSparseIntegerOutrankingDigraphs.pyx":2574
  *             compContent = []
  *             for i in range(nc):
  *                 currContLength = len(compContent)             # <<<<<<<<<<<<<<
  *                 comp = actionsCategIntervals[i]
  *                 #print(comp)
  */
-      __pyx_t_4 = PyObject_Length(__pyx_v_compContent); if (unlikely(__pyx_t_4 == ((Py_ssize_t)-1))) __PYX_ERR(0, 2566, __pyx_L1_error)
+      __pyx_t_4 = PyObject_Length(__pyx_v_compContent); if (unlikely(__pyx_t_4 == ((Py_ssize_t)-1))) __PYX_ERR(0, 2574, __pyx_L1_error)
       __pyx_v_currContLength = __pyx_t_4;
 
-      /* "cSparseIntegerOutrankingDigraphs.pyx":2567
+      /* "cSparseIntegerOutrankingDigraphs.pyx":2575
  *             for i in range(nc):
  *                 currContLength = len(compContent)
  *                 comp = actionsCategIntervals[i]             # <<<<<<<<<<<<<<
  *                 #print(comp)
  *                 if currContLength == 0:
  */
-      __pyx_t_1 = __Pyx_GetItemInt(__pyx_v_actionsCategIntervals, __pyx_v_i, int, 1, __Pyx_PyInt_From_int, 0, 1, 1); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 2567, __pyx_L1_error)
+      __pyx_t_1 = __Pyx_GetItemInt(__pyx_v_actionsCategIntervals, __pyx_v_i, int, 1, __Pyx_PyInt_From_int, 0, 1, 1); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 2575, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_1);
       __Pyx_XDECREF_SET(__pyx_v_comp, __pyx_t_1);
       __pyx_t_1 = 0;
 
-      /* "cSparseIntegerOutrankingDigraphs.pyx":2569
+      /* "cSparseIntegerOutrankingDigraphs.pyx":2577
  *                 comp = actionsCategIntervals[i]
  *                 #print(comp)
  *                 if currContLength == 0:             # <<<<<<<<<<<<<<
@@ -52681,19 +52744,19 @@ static PyObject *__pyx_pf_32cSparseIntegerOutrankingDigraphs_24cQuantilesRanking
       __pyx_t_3 = (__pyx_v_currContLength == 0);
       if (__pyx_t_3) {
 
-        /* "cSparseIntegerOutrankingDigraphs.pyx":2570
+        /* "cSparseIntegerOutrankingDigraphs.pyx":2578
  *                 #print(comp)
  *                 if currContLength == 0:
  *                     lowQtileLimit = comp[9]             # <<<<<<<<<<<<<<
  *                 highQtileLimit = comp[8]
  *                 compContent += actionsCategories[comp]
  */
-        __pyx_t_1 = __Pyx_GetItemInt(__pyx_v_comp, 9, long, 1, __Pyx_PyInt_From_long, 0, 0, 1); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 2570, __pyx_L1_error)
+        __pyx_t_1 = __Pyx_GetItemInt(__pyx_v_comp, 9, long, 1, __Pyx_PyInt_From_long, 0, 0, 1); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 2578, __pyx_L1_error)
         __Pyx_GOTREF(__pyx_t_1);
         __Pyx_XDECREF_SET(__pyx_v_lowQtileLimit, __pyx_t_1);
         __pyx_t_1 = 0;
 
-        /* "cSparseIntegerOutrankingDigraphs.pyx":2569
+        /* "cSparseIntegerOutrankingDigraphs.pyx":2577
  *                 comp = actionsCategIntervals[i]
  *                 #print(comp)
  *                 if currContLength == 0:             # <<<<<<<<<<<<<<
@@ -52702,46 +52765,46 @@ static PyObject *__pyx_pf_32cSparseIntegerOutrankingDigraphs_24cQuantilesRanking
  */
       }
 
-      /* "cSparseIntegerOutrankingDigraphs.pyx":2571
+      /* "cSparseIntegerOutrankingDigraphs.pyx":2579
  *                 if currContLength == 0:
  *                     lowQtileLimit = comp[9]
  *                 highQtileLimit = comp[8]             # <<<<<<<<<<<<<<
  *                 compContent += actionsCategories[comp]
  *                 if len(compContent) >= compSize or i == nc-1:
  */
-      __pyx_t_1 = __Pyx_GetItemInt(__pyx_v_comp, 8, long, 1, __Pyx_PyInt_From_long, 0, 0, 1); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 2571, __pyx_L1_error)
+      __pyx_t_1 = __Pyx_GetItemInt(__pyx_v_comp, 8, long, 1, __Pyx_PyInt_From_long, 0, 0, 1); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 2579, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_1);
       __Pyx_XDECREF_SET(__pyx_v_highQtileLimit, __pyx_t_1);
       __pyx_t_1 = 0;
 
-      /* "cSparseIntegerOutrankingDigraphs.pyx":2572
+      /* "cSparseIntegerOutrankingDigraphs.pyx":2580
  *                     lowQtileLimit = comp[9]
  *                 highQtileLimit = comp[8]
  *                 compContent += actionsCategories[comp]             # <<<<<<<<<<<<<<
  *                 if len(compContent) >= compSize or i == nc-1:
  *                     score = comp[0]
  */
-      __pyx_t_1 = __Pyx_PyDict_GetItem(__pyx_v_actionsCategories, __pyx_v_comp); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 2572, __pyx_L1_error)
+      __pyx_t_1 = __Pyx_PyDict_GetItem(__pyx_v_actionsCategories, __pyx_v_comp); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 2580, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_1);
-      __pyx_t_2 = PyNumber_InPlaceAdd(__pyx_v_compContent, __pyx_t_1); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 2572, __pyx_L1_error)
+      __pyx_t_2 = PyNumber_InPlaceAdd(__pyx_v_compContent, __pyx_t_1); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 2580, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_2);
       __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
       __Pyx_DECREF_SET(__pyx_v_compContent, __pyx_t_2);
       __pyx_t_2 = 0;
 
-      /* "cSparseIntegerOutrankingDigraphs.pyx":2573
+      /* "cSparseIntegerOutrankingDigraphs.pyx":2581
  *                 highQtileLimit = comp[8]
  *                 compContent += actionsCategories[comp]
  *                 if len(compContent) >= compSize or i == nc-1:             # <<<<<<<<<<<<<<
  *                     score = comp[0]
  *                     lowCateg = comp[3]
  */
-      __pyx_t_4 = PyObject_Length(__pyx_v_compContent); if (unlikely(__pyx_t_4 == ((Py_ssize_t)-1))) __PYX_ERR(0, 2573, __pyx_L1_error)
-      __pyx_t_2 = PyInt_FromSsize_t(__pyx_t_4); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 2573, __pyx_L1_error)
+      __pyx_t_4 = PyObject_Length(__pyx_v_compContent); if (unlikely(__pyx_t_4 == ((Py_ssize_t)-1))) __PYX_ERR(0, 2581, __pyx_L1_error)
+      __pyx_t_2 = PyInt_FromSsize_t(__pyx_t_4); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 2581, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_2);
-      __pyx_t_1 = PyObject_RichCompare(__pyx_t_2, __pyx_v_compSize, Py_GE); __Pyx_XGOTREF(__pyx_t_1); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 2573, __pyx_L1_error)
+      __pyx_t_1 = PyObject_RichCompare(__pyx_t_2, __pyx_v_compSize, Py_GE); __Pyx_XGOTREF(__pyx_t_1); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 2581, __pyx_L1_error)
       __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
-      __pyx_t_22 = __Pyx_PyObject_IsTrue(__pyx_t_1); if (unlikely((__pyx_t_22 < 0))) __PYX_ERR(0, 2573, __pyx_L1_error)
+      __pyx_t_22 = __Pyx_PyObject_IsTrue(__pyx_t_1); if (unlikely((__pyx_t_22 < 0))) __PYX_ERR(0, 2581, __pyx_L1_error)
       __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
       if (!__pyx_t_22) {
       } else {
@@ -52753,43 +52816,43 @@ static PyObject *__pyx_pf_32cSparseIntegerOutrankingDigraphs_24cQuantilesRanking
       __pyx_L41_bool_binop_done:;
       if (__pyx_t_3) {
 
-        /* "cSparseIntegerOutrankingDigraphs.pyx":2574
+        /* "cSparseIntegerOutrankingDigraphs.pyx":2582
  *                 compContent += actionsCategories[comp]
  *                 if len(compContent) >= compSize or i == nc-1:
  *                     score = comp[0]             # <<<<<<<<<<<<<<
  *                     lowCateg = comp[3]
  *                     highCateg = comp[4]
  */
-        __pyx_t_1 = __Pyx_GetItemInt(__pyx_v_comp, 0, long, 1, __Pyx_PyInt_From_long, 0, 0, 1); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 2574, __pyx_L1_error)
+        __pyx_t_1 = __Pyx_GetItemInt(__pyx_v_comp, 0, long, 1, __Pyx_PyInt_From_long, 0, 0, 1); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 2582, __pyx_L1_error)
         __Pyx_GOTREF(__pyx_t_1);
         __Pyx_XDECREF_SET(__pyx_v_score, __pyx_t_1);
         __pyx_t_1 = 0;
 
-        /* "cSparseIntegerOutrankingDigraphs.pyx":2575
+        /* "cSparseIntegerOutrankingDigraphs.pyx":2583
  *                 if len(compContent) >= compSize or i == nc-1:
  *                     score = comp[0]
  *                     lowCateg = comp[3]             # <<<<<<<<<<<<<<
  *                     highCateg = comp[4]
  *                     if Descending:
  */
-        __pyx_t_1 = __Pyx_GetItemInt(__pyx_v_comp, 3, long, 1, __Pyx_PyInt_From_long, 0, 0, 1); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 2575, __pyx_L1_error)
+        __pyx_t_1 = __Pyx_GetItemInt(__pyx_v_comp, 3, long, 1, __Pyx_PyInt_From_long, 0, 0, 1); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 2583, __pyx_L1_error)
         __Pyx_GOTREF(__pyx_t_1);
         __Pyx_XDECREF_SET(__pyx_v_lowCateg, __pyx_t_1);
         __pyx_t_1 = 0;
 
-        /* "cSparseIntegerOutrankingDigraphs.pyx":2576
+        /* "cSparseIntegerOutrankingDigraphs.pyx":2584
  *                     score = comp[0]
  *                     lowCateg = comp[3]
  *                     highCateg = comp[4]             # <<<<<<<<<<<<<<
  *                     if Descending:
  *                         componentsIntervals.append([(highQtileLimit,lowQtileLimit),compContent,\
  */
-        __pyx_t_1 = __Pyx_GetItemInt(__pyx_v_comp, 4, long, 1, __Pyx_PyInt_From_long, 0, 0, 1); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 2576, __pyx_L1_error)
+        __pyx_t_1 = __Pyx_GetItemInt(__pyx_v_comp, 4, long, 1, __Pyx_PyInt_From_long, 0, 0, 1); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 2584, __pyx_L1_error)
         __Pyx_GOTREF(__pyx_t_1);
         __Pyx_XDECREF_SET(__pyx_v_highCateg, __pyx_t_1);
         __pyx_t_1 = 0;
 
-        /* "cSparseIntegerOutrankingDigraphs.pyx":2577
+        /* "cSparseIntegerOutrankingDigraphs.pyx":2585
  *                     lowCateg = comp[3]
  *                     highCateg = comp[4]
  *                     if Descending:             # <<<<<<<<<<<<<<
@@ -52798,59 +52861,59 @@ static PyObject *__pyx_pf_32cSparseIntegerOutrankingDigraphs_24cQuantilesRanking
  */
         if (__pyx_v_Descending) {
 
-          /* "cSparseIntegerOutrankingDigraphs.pyx":2578
+          /* "cSparseIntegerOutrankingDigraphs.pyx":2586
  *                     highCateg = comp[4]
  *                     if Descending:
  *                         componentsIntervals.append([(highQtileLimit,lowQtileLimit),compContent,\             # <<<<<<<<<<<<<<
  *                                                     score,lowCateg,highCateg])
  *                     else:
  */
-          if (unlikely(!__pyx_v_lowQtileLimit)) { __Pyx_RaiseUnboundLocalError("lowQtileLimit"); __PYX_ERR(0, 2578, __pyx_L1_error) }
-          __pyx_t_1 = PyTuple_New(2); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 2578, __pyx_L1_error)
+          if (unlikely(!__pyx_v_lowQtileLimit)) { __Pyx_RaiseUnboundLocalError("lowQtileLimit"); __PYX_ERR(0, 2586, __pyx_L1_error) }
+          __pyx_t_1 = PyTuple_New(2); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 2586, __pyx_L1_error)
           __Pyx_GOTREF(__pyx_t_1);
           __Pyx_INCREF(__pyx_v_highQtileLimit);
           __Pyx_GIVEREF(__pyx_v_highQtileLimit);
-          if (__Pyx_PyTuple_SET_ITEM(__pyx_t_1, 0, __pyx_v_highQtileLimit)) __PYX_ERR(0, 2578, __pyx_L1_error);
+          if (__Pyx_PyTuple_SET_ITEM(__pyx_t_1, 0, __pyx_v_highQtileLimit)) __PYX_ERR(0, 2586, __pyx_L1_error);
           __Pyx_INCREF(__pyx_v_lowQtileLimit);
           __Pyx_GIVEREF(__pyx_v_lowQtileLimit);
-          if (__Pyx_PyTuple_SET_ITEM(__pyx_t_1, 1, __pyx_v_lowQtileLimit)) __PYX_ERR(0, 2578, __pyx_L1_error);
+          if (__Pyx_PyTuple_SET_ITEM(__pyx_t_1, 1, __pyx_v_lowQtileLimit)) __PYX_ERR(0, 2586, __pyx_L1_error);
 
-          /* "cSparseIntegerOutrankingDigraphs.pyx":2579
+          /* "cSparseIntegerOutrankingDigraphs.pyx":2587
  *                     if Descending:
  *                         componentsIntervals.append([(highQtileLimit,lowQtileLimit),compContent,\
  *                                                     score,lowCateg,highCateg])             # <<<<<<<<<<<<<<
  *                     else:
  *                         componentsIntervals.append([(lowQtileLimit,highQtileLimit),compContent,\
  */
-          __pyx_t_2 = PyList_New(5); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 2578, __pyx_L1_error)
+          __pyx_t_2 = PyList_New(5); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 2586, __pyx_L1_error)
           __Pyx_GOTREF(__pyx_t_2);
           __Pyx_GIVEREF(__pyx_t_1);
-          if (__Pyx_PyList_SET_ITEM(__pyx_t_2, 0, __pyx_t_1)) __PYX_ERR(0, 2578, __pyx_L1_error);
+          if (__Pyx_PyList_SET_ITEM(__pyx_t_2, 0, __pyx_t_1)) __PYX_ERR(0, 2586, __pyx_L1_error);
           __Pyx_INCREF(__pyx_v_compContent);
           __Pyx_GIVEREF(__pyx_v_compContent);
-          if (__Pyx_PyList_SET_ITEM(__pyx_t_2, 1, __pyx_v_compContent)) __PYX_ERR(0, 2578, __pyx_L1_error);
+          if (__Pyx_PyList_SET_ITEM(__pyx_t_2, 1, __pyx_v_compContent)) __PYX_ERR(0, 2586, __pyx_L1_error);
           __Pyx_INCREF(__pyx_v_score);
           __Pyx_GIVEREF(__pyx_v_score);
-          if (__Pyx_PyList_SET_ITEM(__pyx_t_2, 2, __pyx_v_score)) __PYX_ERR(0, 2578, __pyx_L1_error);
+          if (__Pyx_PyList_SET_ITEM(__pyx_t_2, 2, __pyx_v_score)) __PYX_ERR(0, 2586, __pyx_L1_error);
           __Pyx_INCREF(__pyx_v_lowCateg);
           __Pyx_GIVEREF(__pyx_v_lowCateg);
-          if (__Pyx_PyList_SET_ITEM(__pyx_t_2, 3, __pyx_v_lowCateg)) __PYX_ERR(0, 2578, __pyx_L1_error);
+          if (__Pyx_PyList_SET_ITEM(__pyx_t_2, 3, __pyx_v_lowCateg)) __PYX_ERR(0, 2586, __pyx_L1_error);
           __Pyx_INCREF(__pyx_v_highCateg);
           __Pyx_GIVEREF(__pyx_v_highCateg);
-          if (__Pyx_PyList_SET_ITEM(__pyx_t_2, 4, __pyx_v_highCateg)) __PYX_ERR(0, 2578, __pyx_L1_error);
+          if (__Pyx_PyList_SET_ITEM(__pyx_t_2, 4, __pyx_v_highCateg)) __PYX_ERR(0, 2586, __pyx_L1_error);
           __pyx_t_1 = 0;
 
-          /* "cSparseIntegerOutrankingDigraphs.pyx":2578
+          /* "cSparseIntegerOutrankingDigraphs.pyx":2586
  *                     highCateg = comp[4]
  *                     if Descending:
  *                         componentsIntervals.append([(highQtileLimit,lowQtileLimit),compContent,\             # <<<<<<<<<<<<<<
  *                                                     score,lowCateg,highCateg])
  *                     else:
  */
-          __pyx_t_18 = __Pyx_PyList_Append(__pyx_v_componentsIntervals, __pyx_t_2); if (unlikely(__pyx_t_18 == ((int)-1))) __PYX_ERR(0, 2578, __pyx_L1_error)
+          __pyx_t_18 = __Pyx_PyList_Append(__pyx_v_componentsIntervals, __pyx_t_2); if (unlikely(__pyx_t_18 == ((int)-1))) __PYX_ERR(0, 2586, __pyx_L1_error)
           __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
 
-          /* "cSparseIntegerOutrankingDigraphs.pyx":2577
+          /* "cSparseIntegerOutrankingDigraphs.pyx":2585
  *                     lowCateg = comp[3]
  *                     highCateg = comp[4]
  *                     if Descending:             # <<<<<<<<<<<<<<
@@ -52860,7 +52923,7 @@ static PyObject *__pyx_pf_32cSparseIntegerOutrankingDigraphs_24cQuantilesRanking
           goto __pyx_L43;
         }
 
-        /* "cSparseIntegerOutrankingDigraphs.pyx":2581
+        /* "cSparseIntegerOutrankingDigraphs.pyx":2589
  *                                                     score,lowCateg,highCateg])
  *                     else:
  *                         componentsIntervals.append([(lowQtileLimit,highQtileLimit),compContent,\             # <<<<<<<<<<<<<<
@@ -52868,66 +52931,66 @@ static PyObject *__pyx_pf_32cSparseIntegerOutrankingDigraphs_24cQuantilesRanking
  *                     compContent = []
  */
         /*else*/ {
-          if (unlikely(!__pyx_v_lowQtileLimit)) { __Pyx_RaiseUnboundLocalError("lowQtileLimit"); __PYX_ERR(0, 2581, __pyx_L1_error) }
-          __pyx_t_2 = PyTuple_New(2); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 2581, __pyx_L1_error)
+          if (unlikely(!__pyx_v_lowQtileLimit)) { __Pyx_RaiseUnboundLocalError("lowQtileLimit"); __PYX_ERR(0, 2589, __pyx_L1_error) }
+          __pyx_t_2 = PyTuple_New(2); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 2589, __pyx_L1_error)
           __Pyx_GOTREF(__pyx_t_2);
           __Pyx_INCREF(__pyx_v_lowQtileLimit);
           __Pyx_GIVEREF(__pyx_v_lowQtileLimit);
-          if (__Pyx_PyTuple_SET_ITEM(__pyx_t_2, 0, __pyx_v_lowQtileLimit)) __PYX_ERR(0, 2581, __pyx_L1_error);
+          if (__Pyx_PyTuple_SET_ITEM(__pyx_t_2, 0, __pyx_v_lowQtileLimit)) __PYX_ERR(0, 2589, __pyx_L1_error);
           __Pyx_INCREF(__pyx_v_highQtileLimit);
           __Pyx_GIVEREF(__pyx_v_highQtileLimit);
-          if (__Pyx_PyTuple_SET_ITEM(__pyx_t_2, 1, __pyx_v_highQtileLimit)) __PYX_ERR(0, 2581, __pyx_L1_error);
+          if (__Pyx_PyTuple_SET_ITEM(__pyx_t_2, 1, __pyx_v_highQtileLimit)) __PYX_ERR(0, 2589, __pyx_L1_error);
 
-          /* "cSparseIntegerOutrankingDigraphs.pyx":2582
+          /* "cSparseIntegerOutrankingDigraphs.pyx":2590
  *                     else:
  *                         componentsIntervals.append([(lowQtileLimit,highQtileLimit),compContent,\
  *                                                     score,lowCateg,highCateg])             # <<<<<<<<<<<<<<
  *                     compContent = []
  *         #if Debug:
  */
-          __pyx_t_1 = PyList_New(5); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 2581, __pyx_L1_error)
+          __pyx_t_1 = PyList_New(5); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 2589, __pyx_L1_error)
           __Pyx_GOTREF(__pyx_t_1);
           __Pyx_GIVEREF(__pyx_t_2);
-          if (__Pyx_PyList_SET_ITEM(__pyx_t_1, 0, __pyx_t_2)) __PYX_ERR(0, 2581, __pyx_L1_error);
+          if (__Pyx_PyList_SET_ITEM(__pyx_t_1, 0, __pyx_t_2)) __PYX_ERR(0, 2589, __pyx_L1_error);
           __Pyx_INCREF(__pyx_v_compContent);
           __Pyx_GIVEREF(__pyx_v_compContent);
-          if (__Pyx_PyList_SET_ITEM(__pyx_t_1, 1, __pyx_v_compContent)) __PYX_ERR(0, 2581, __pyx_L1_error);
+          if (__Pyx_PyList_SET_ITEM(__pyx_t_1, 1, __pyx_v_compContent)) __PYX_ERR(0, 2589, __pyx_L1_error);
           __Pyx_INCREF(__pyx_v_score);
           __Pyx_GIVEREF(__pyx_v_score);
-          if (__Pyx_PyList_SET_ITEM(__pyx_t_1, 2, __pyx_v_score)) __PYX_ERR(0, 2581, __pyx_L1_error);
+          if (__Pyx_PyList_SET_ITEM(__pyx_t_1, 2, __pyx_v_score)) __PYX_ERR(0, 2589, __pyx_L1_error);
           __Pyx_INCREF(__pyx_v_lowCateg);
           __Pyx_GIVEREF(__pyx_v_lowCateg);
-          if (__Pyx_PyList_SET_ITEM(__pyx_t_1, 3, __pyx_v_lowCateg)) __PYX_ERR(0, 2581, __pyx_L1_error);
+          if (__Pyx_PyList_SET_ITEM(__pyx_t_1, 3, __pyx_v_lowCateg)) __PYX_ERR(0, 2589, __pyx_L1_error);
           __Pyx_INCREF(__pyx_v_highCateg);
           __Pyx_GIVEREF(__pyx_v_highCateg);
-          if (__Pyx_PyList_SET_ITEM(__pyx_t_1, 4, __pyx_v_highCateg)) __PYX_ERR(0, 2581, __pyx_L1_error);
+          if (__Pyx_PyList_SET_ITEM(__pyx_t_1, 4, __pyx_v_highCateg)) __PYX_ERR(0, 2589, __pyx_L1_error);
           __pyx_t_2 = 0;
 
-          /* "cSparseIntegerOutrankingDigraphs.pyx":2581
+          /* "cSparseIntegerOutrankingDigraphs.pyx":2589
  *                                                     score,lowCateg,highCateg])
  *                     else:
  *                         componentsIntervals.append([(lowQtileLimit,highQtileLimit),compContent,\             # <<<<<<<<<<<<<<
  *                                                     score,lowCateg,highCateg])
  *                     compContent = []
  */
-          __pyx_t_18 = __Pyx_PyList_Append(__pyx_v_componentsIntervals, __pyx_t_1); if (unlikely(__pyx_t_18 == ((int)-1))) __PYX_ERR(0, 2581, __pyx_L1_error)
+          __pyx_t_18 = __Pyx_PyList_Append(__pyx_v_componentsIntervals, __pyx_t_1); if (unlikely(__pyx_t_18 == ((int)-1))) __PYX_ERR(0, 2589, __pyx_L1_error)
           __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
         }
         __pyx_L43:;
 
-        /* "cSparseIntegerOutrankingDigraphs.pyx":2583
+        /* "cSparseIntegerOutrankingDigraphs.pyx":2591
  *                         componentsIntervals.append([(lowQtileLimit,highQtileLimit),compContent,\
  *                                                     score,lowCateg,highCateg])
  *                     compContent = []             # <<<<<<<<<<<<<<
  *         #if Debug:
  *         #    print(componentsIntervals)
  */
-        __pyx_t_1 = PyList_New(0); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 2583, __pyx_L1_error)
+        __pyx_t_1 = PyList_New(0); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 2591, __pyx_L1_error)
         __Pyx_GOTREF(__pyx_t_1);
         __Pyx_DECREF_SET(__pyx_v_compContent, __pyx_t_1);
         __pyx_t_1 = 0;
 
-        /* "cSparseIntegerOutrankingDigraphs.pyx":2573
+        /* "cSparseIntegerOutrankingDigraphs.pyx":2581
  *                 highQtileLimit = comp[8]
  *                 compContent += actionsCategories[comp]
  *                 if len(compContent) >= compSize or i == nc-1:             # <<<<<<<<<<<<<<
@@ -52939,7 +53002,7 @@ static PyObject *__pyx_pf_32cSparseIntegerOutrankingDigraphs_24cQuantilesRanking
   }
   __pyx_L21:;
 
-  /* "cSparseIntegerOutrankingDigraphs.pyx":2586
+  /* "cSparseIntegerOutrankingDigraphs.pyx":2594
  *         #if Debug:
  *         #    print(componentsIntervals)
  *         return componentsIntervals             # <<<<<<<<<<<<<<
@@ -52951,7 +53014,7 @@ static PyObject *__pyx_pf_32cSparseIntegerOutrankingDigraphs_24cQuantilesRanking
   __pyx_r = __pyx_v_componentsIntervals;
   goto __pyx_L0;
 
-  /* "cSparseIntegerOutrankingDigraphs.pyx":2455
+  /* "cSparseIntegerOutrankingDigraphs.pyx":2463
  * 
  * 
  *     def _computeQuantileOrdering(self,strategy=None,             # <<<<<<<<<<<<<<
@@ -53001,7 +53064,7 @@ static PyObject *__pyx_pf_32cSparseIntegerOutrankingDigraphs_24cQuantilesRanking
   return __pyx_r;
 }
 
-/* "cSparseIntegerOutrankingDigraphs.pyx":2588
+/* "cSparseIntegerOutrankingDigraphs.pyx":2596
  *         return componentsIntervals
  * 
  *     def computeActionCategories(self,int action,             # <<<<<<<<<<<<<<
@@ -53055,8 +53118,24 @@ PyObject *__pyx_args, PyObject *__pyx_kwds
   __pyx_kwvalues = __Pyx_KwValues_FASTCALL(__pyx_args, __pyx_nargs);
   {
     PyObject **__pyx_pyargnames[] = {&__pyx_n_s_self,&__pyx_n_s_action,&__pyx_n_s_Show,&__pyx_n_s_Debug,&__pyx_n_s_Comments,&__pyx_n_s_Threading,&__pyx_n_s_startMethod,&__pyx_n_s_nbrOfCPUs,0};
-    values[6] = __Pyx_Arg_NewRef_FASTCALL(((PyObject *)((PyObject*)__pyx_n_u_spawn)));
-    values[7] = __Pyx_Arg_NewRef_FASTCALL(((PyObject *)((PyObject *)__pyx_int_1)));
+
+    /* "cSparseIntegerOutrankingDigraphs.pyx":2601
+ *                                     bint Comments=False,
+ *                                 bint Threading=False,
+ *                                 startMethod=None,             # <<<<<<<<<<<<<<
+ *                                 nbrOfCPUs=None):
+ *         """
+ */
+    values[6] = __Pyx_Arg_NewRef_FASTCALL(((PyObject *)Py_None));
+
+    /* "cSparseIntegerOutrankingDigraphs.pyx":2602
+ *                                 bint Threading=False,
+ *                                 startMethod=None,
+ *                                 nbrOfCPUs=None):             # <<<<<<<<<<<<<<
+ *         """
+ *         *Parameters*:
+ */
+    values[7] = __Pyx_Arg_NewRef_FASTCALL(((PyObject *)Py_None));
     if (__pyx_kwds) {
       Py_ssize_t kw_args;
       switch (__pyx_nargs) {
@@ -53086,7 +53165,7 @@ PyObject *__pyx_args, PyObject *__pyx_kwds
           (void)__Pyx_Arg_NewRef_FASTCALL(values[0]);
           kw_args--;
         }
-        else if (unlikely(PyErr_Occurred())) __PYX_ERR(0, 2588, __pyx_L3_error)
+        else if (unlikely(PyErr_Occurred())) __PYX_ERR(0, 2596, __pyx_L3_error)
         else goto __pyx_L5_argtuple_error;
         CYTHON_FALLTHROUGH;
         case  1:
@@ -53094,56 +53173,56 @@ PyObject *__pyx_args, PyObject *__pyx_kwds
           (void)__Pyx_Arg_NewRef_FASTCALL(values[1]);
           kw_args--;
         }
-        else if (unlikely(PyErr_Occurred())) __PYX_ERR(0, 2588, __pyx_L3_error)
+        else if (unlikely(PyErr_Occurred())) __PYX_ERR(0, 2596, __pyx_L3_error)
         else {
-          __Pyx_RaiseArgtupleInvalid("computeActionCategories", 0, 2, 8, 1); __PYX_ERR(0, 2588, __pyx_L3_error)
+          __Pyx_RaiseArgtupleInvalid("computeActionCategories", 0, 2, 8, 1); __PYX_ERR(0, 2596, __pyx_L3_error)
         }
         CYTHON_FALLTHROUGH;
         case  2:
         if (kw_args > 0) {
           PyObject* value = __Pyx_GetKwValue_FASTCALL(__pyx_kwds, __pyx_kwvalues, __pyx_n_s_Show);
           if (value) { values[2] = __Pyx_Arg_NewRef_FASTCALL(value); kw_args--; }
-          else if (unlikely(PyErr_Occurred())) __PYX_ERR(0, 2588, __pyx_L3_error)
+          else if (unlikely(PyErr_Occurred())) __PYX_ERR(0, 2596, __pyx_L3_error)
         }
         CYTHON_FALLTHROUGH;
         case  3:
         if (kw_args > 0) {
           PyObject* value = __Pyx_GetKwValue_FASTCALL(__pyx_kwds, __pyx_kwvalues, __pyx_n_s_Debug);
           if (value) { values[3] = __Pyx_Arg_NewRef_FASTCALL(value); kw_args--; }
-          else if (unlikely(PyErr_Occurred())) __PYX_ERR(0, 2588, __pyx_L3_error)
+          else if (unlikely(PyErr_Occurred())) __PYX_ERR(0, 2596, __pyx_L3_error)
         }
         CYTHON_FALLTHROUGH;
         case  4:
         if (kw_args > 0) {
           PyObject* value = __Pyx_GetKwValue_FASTCALL(__pyx_kwds, __pyx_kwvalues, __pyx_n_s_Comments);
           if (value) { values[4] = __Pyx_Arg_NewRef_FASTCALL(value); kw_args--; }
-          else if (unlikely(PyErr_Occurred())) __PYX_ERR(0, 2588, __pyx_L3_error)
+          else if (unlikely(PyErr_Occurred())) __PYX_ERR(0, 2596, __pyx_L3_error)
         }
         CYTHON_FALLTHROUGH;
         case  5:
         if (kw_args > 0) {
           PyObject* value = __Pyx_GetKwValue_FASTCALL(__pyx_kwds, __pyx_kwvalues, __pyx_n_s_Threading);
           if (value) { values[5] = __Pyx_Arg_NewRef_FASTCALL(value); kw_args--; }
-          else if (unlikely(PyErr_Occurred())) __PYX_ERR(0, 2588, __pyx_L3_error)
+          else if (unlikely(PyErr_Occurred())) __PYX_ERR(0, 2596, __pyx_L3_error)
         }
         CYTHON_FALLTHROUGH;
         case  6:
         if (kw_args > 0) {
           PyObject* value = __Pyx_GetKwValue_FASTCALL(__pyx_kwds, __pyx_kwvalues, __pyx_n_s_startMethod);
           if (value) { values[6] = __Pyx_Arg_NewRef_FASTCALL(value); kw_args--; }
-          else if (unlikely(PyErr_Occurred())) __PYX_ERR(0, 2588, __pyx_L3_error)
+          else if (unlikely(PyErr_Occurred())) __PYX_ERR(0, 2596, __pyx_L3_error)
         }
         CYTHON_FALLTHROUGH;
         case  7:
         if (kw_args > 0) {
           PyObject* value = __Pyx_GetKwValue_FASTCALL(__pyx_kwds, __pyx_kwvalues, __pyx_n_s_nbrOfCPUs);
           if (value) { values[7] = __Pyx_Arg_NewRef_FASTCALL(value); kw_args--; }
-          else if (unlikely(PyErr_Occurred())) __PYX_ERR(0, 2588, __pyx_L3_error)
+          else if (unlikely(PyErr_Occurred())) __PYX_ERR(0, 2596, __pyx_L3_error)
         }
       }
       if (unlikely(kw_args > 0)) {
         const Py_ssize_t kwd_pos_args = __pyx_nargs;
-        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_kwvalues, __pyx_pyargnames, 0, values + 0, kwd_pos_args, "computeActionCategories") < 0)) __PYX_ERR(0, 2588, __pyx_L3_error)
+        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_kwvalues, __pyx_pyargnames, 0, values + 0, kwd_pos_args, "computeActionCategories") < 0)) __PYX_ERR(0, 2596, __pyx_L3_error)
       }
     } else {
       switch (__pyx_nargs) {
@@ -53166,12 +53245,12 @@ PyObject *__pyx_args, PyObject *__pyx_kwds
       }
     }
     __pyx_v_self = values[0];
-    __pyx_v_action = __Pyx_PyInt_As_int(values[1]); if (unlikely((__pyx_v_action == (int)-1) && PyErr_Occurred())) __PYX_ERR(0, 2588, __pyx_L3_error)
+    __pyx_v_action = __Pyx_PyInt_As_int(values[1]); if (unlikely((__pyx_v_action == (int)-1) && PyErr_Occurred())) __PYX_ERR(0, 2596, __pyx_L3_error)
     if (values[2]) {
-      __pyx_v_Show = __Pyx_PyObject_IsTrue(values[2]); if (unlikely((__pyx_v_Show == (int)-1) && PyErr_Occurred())) __PYX_ERR(0, 2589, __pyx_L3_error)
+      __pyx_v_Show = __Pyx_PyObject_IsTrue(values[2]); if (unlikely((__pyx_v_Show == (int)-1) && PyErr_Occurred())) __PYX_ERR(0, 2597, __pyx_L3_error)
     } else {
 
-      /* "cSparseIntegerOutrankingDigraphs.pyx":2589
+      /* "cSparseIntegerOutrankingDigraphs.pyx":2597
  * 
  *     def computeActionCategories(self,int action,
  *                                     bint Show=False,             # <<<<<<<<<<<<<<
@@ -53181,10 +53260,10 @@ PyObject *__pyx_args, PyObject *__pyx_kwds
       __pyx_v_Show = ((int)((int)0));
     }
     if (values[3]) {
-      __pyx_v_Debug = __Pyx_PyObject_IsTrue(values[3]); if (unlikely((__pyx_v_Debug == (int)-1) && PyErr_Occurred())) __PYX_ERR(0, 2590, __pyx_L3_error)
+      __pyx_v_Debug = __Pyx_PyObject_IsTrue(values[3]); if (unlikely((__pyx_v_Debug == (int)-1) && PyErr_Occurred())) __PYX_ERR(0, 2598, __pyx_L3_error)
     } else {
 
-      /* "cSparseIntegerOutrankingDigraphs.pyx":2590
+      /* "cSparseIntegerOutrankingDigraphs.pyx":2598
  *     def computeActionCategories(self,int action,
  *                                     bint Show=False,
  *                                     bint Debug=False,             # <<<<<<<<<<<<<<
@@ -53194,28 +53273,28 @@ PyObject *__pyx_args, PyObject *__pyx_kwds
       __pyx_v_Debug = ((int)((int)0));
     }
     if (values[4]) {
-      __pyx_v_Comments = __Pyx_PyObject_IsTrue(values[4]); if (unlikely((__pyx_v_Comments == (int)-1) && PyErr_Occurred())) __PYX_ERR(0, 2591, __pyx_L3_error)
+      __pyx_v_Comments = __Pyx_PyObject_IsTrue(values[4]); if (unlikely((__pyx_v_Comments == (int)-1) && PyErr_Occurred())) __PYX_ERR(0, 2599, __pyx_L3_error)
     } else {
 
-      /* "cSparseIntegerOutrankingDigraphs.pyx":2591
+      /* "cSparseIntegerOutrankingDigraphs.pyx":2599
  *                                     bint Show=False,
  *                                     bint Debug=False,
  *                                     bint Comments=False,             # <<<<<<<<<<<<<<
  *                                 bint Threading=False,
- *                                 startMethod='spawn',
+ *                                 startMethod=None,
  */
       __pyx_v_Comments = ((int)((int)0));
     }
     if (values[5]) {
-      __pyx_v_Threading = __Pyx_PyObject_IsTrue(values[5]); if (unlikely((__pyx_v_Threading == (int)-1) && PyErr_Occurred())) __PYX_ERR(0, 2592, __pyx_L3_error)
+      __pyx_v_Threading = __Pyx_PyObject_IsTrue(values[5]); if (unlikely((__pyx_v_Threading == (int)-1) && PyErr_Occurred())) __PYX_ERR(0, 2600, __pyx_L3_error)
     } else {
 
-      /* "cSparseIntegerOutrankingDigraphs.pyx":2592
+      /* "cSparseIntegerOutrankingDigraphs.pyx":2600
  *                                     bint Debug=False,
  *                                     bint Comments=False,
  *                                 bint Threading=False,             # <<<<<<<<<<<<<<
- *                                 startMethod='spawn',
- *                                 nbrOfCPUs=1):
+ *                                 startMethod=None,
+ *                                 nbrOfCPUs=None):
  */
       __pyx_v_Threading = ((int)((int)0));
     }
@@ -53224,7 +53303,7 @@ PyObject *__pyx_args, PyObject *__pyx_kwds
   }
   goto __pyx_L6_skip;
   __pyx_L5_argtuple_error:;
-  __Pyx_RaiseArgtupleInvalid("computeActionCategories", 0, 2, 8, __pyx_nargs); __PYX_ERR(0, 2588, __pyx_L3_error)
+  __Pyx_RaiseArgtupleInvalid("computeActionCategories", 0, 2, 8, __pyx_nargs); __PYX_ERR(0, 2596, __pyx_L3_error)
   __pyx_L6_skip:;
   goto __pyx_L4_argument_unpacking_done;
   __pyx_L3_error:;
@@ -53240,7 +53319,7 @@ PyObject *__pyx_args, PyObject *__pyx_kwds
   __pyx_L4_argument_unpacking_done:;
   __pyx_r = __pyx_pf_32cSparseIntegerOutrankingDigraphs_24cQuantilesRankingDigraph_4computeActionCategories(__pyx_self, __pyx_v_self, __pyx_v_action, __pyx_v_Show, __pyx_v_Debug, __pyx_v_Comments, __pyx_v_Threading, __pyx_v_startMethod, __pyx_v_nbrOfCPUs);
 
-  /* "cSparseIntegerOutrankingDigraphs.pyx":2588
+  /* "cSparseIntegerOutrankingDigraphs.pyx":2596
  *         return componentsIntervals
  * 
  *     def computeActionCategories(self,int action,             # <<<<<<<<<<<<<<
@@ -53296,7 +53375,7 @@ static PyObject *__pyx_pf_32cSparseIntegerOutrankingDigraphs_24cQuantilesRanking
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("computeActionCategories", 1);
 
-  /* "cSparseIntegerOutrankingDigraphs.pyx":2608
+  /* "cSparseIntegerOutrankingDigraphs.pyx":2616
  *         Returns a tuple : action, lowest category key, highest category key, membership credibility !
  *         """
  *         cdef int n,Med,lowLimit=0,notHighLimit=0,credibility             # <<<<<<<<<<<<<<
@@ -53306,35 +53385,35 @@ static PyObject *__pyx_pf_32cSparseIntegerOutrankingDigraphs_24cQuantilesRanking
   __pyx_v_lowLimit = 0;
   __pyx_v_notHighLimit = 0;
 
-  /* "cSparseIntegerOutrankingDigraphs.pyx":2611
+  /* "cSparseIntegerOutrankingDigraphs.pyx":2619
  *         #qs = self.qs
  *         #qs = self
  *         Med = self.valuationdomain['med']             # <<<<<<<<<<<<<<
  *         categories = self.categories
  * 
  */
-  __pyx_t_1 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_n_s_valuationdomain); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 2611, __pyx_L1_error)
+  __pyx_t_1 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_n_s_valuationdomain); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 2619, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
-  __pyx_t_2 = __Pyx_PyObject_Dict_GetItem(__pyx_t_1, __pyx_n_u_med); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 2611, __pyx_L1_error)
+  __pyx_t_2 = __Pyx_PyObject_Dict_GetItem(__pyx_t_1, __pyx_n_u_med); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 2619, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
-  __pyx_t_3 = __Pyx_PyInt_As_int(__pyx_t_2); if (unlikely((__pyx_t_3 == (int)-1) && PyErr_Occurred())) __PYX_ERR(0, 2611, __pyx_L1_error)
+  __pyx_t_3 = __Pyx_PyInt_As_int(__pyx_t_2); if (unlikely((__pyx_t_3 == (int)-1) && PyErr_Occurred())) __PYX_ERR(0, 2619, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
   __pyx_v_Med = __pyx_t_3;
 
-  /* "cSparseIntegerOutrankingDigraphs.pyx":2612
+  /* "cSparseIntegerOutrankingDigraphs.pyx":2620
  *         #qs = self
  *         Med = self.valuationdomain['med']
  *         categories = self.categories             # <<<<<<<<<<<<<<
  * 
  *         try:
  */
-  __pyx_t_2 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_n_s_categories); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 2612, __pyx_L1_error)
+  __pyx_t_2 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_n_s_categories); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 2620, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
   __pyx_v_categories = __pyx_t_2;
   __pyx_t_2 = 0;
 
-  /* "cSparseIntegerOutrankingDigraphs.pyx":2614
+  /* "cSparseIntegerOutrankingDigraphs.pyx":2622
  *         categories = self.categories
  * 
  *         try:             # <<<<<<<<<<<<<<
@@ -53350,22 +53429,22 @@ static PyObject *__pyx_pf_32cSparseIntegerOutrankingDigraphs_24cQuantilesRanking
     __Pyx_XGOTREF(__pyx_t_6);
     /*try:*/ {
 
-      /* "cSparseIntegerOutrankingDigraphs.pyx":2615
+      /* "cSparseIntegerOutrankingDigraphs.pyx":2623
  * 
  *         try:
  *             sortinga = self.sorting[action]             # <<<<<<<<<<<<<<
  *         except:
  *             sorting = self.computeSortingCharacteristics(action=action,Comments=Comments,\
  */
-      __pyx_t_2 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_n_s_sorting); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 2615, __pyx_L3_error)
+      __pyx_t_2 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_n_s_sorting); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 2623, __pyx_L3_error)
       __Pyx_GOTREF(__pyx_t_2);
-      __pyx_t_1 = __Pyx_GetItemInt(__pyx_t_2, __pyx_v_action, int, 1, __Pyx_PyInt_From_int, 0, 1, 1); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 2615, __pyx_L3_error)
+      __pyx_t_1 = __Pyx_GetItemInt(__pyx_t_2, __pyx_v_action, int, 1, __Pyx_PyInt_From_int, 0, 1, 1); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 2623, __pyx_L3_error)
       __Pyx_GOTREF(__pyx_t_1);
       __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
       __pyx_v_sortinga = __pyx_t_1;
       __pyx_t_1 = 0;
 
-      /* "cSparseIntegerOutrankingDigraphs.pyx":2614
+      /* "cSparseIntegerOutrankingDigraphs.pyx":2622
  *         categories = self.categories
  * 
  *         try:             # <<<<<<<<<<<<<<
@@ -53381,7 +53460,7 @@ static PyObject *__pyx_pf_32cSparseIntegerOutrankingDigraphs_24cQuantilesRanking
     __Pyx_XDECREF(__pyx_t_1); __pyx_t_1 = 0;
     __Pyx_XDECREF(__pyx_t_2); __pyx_t_2 = 0;
 
-    /* "cSparseIntegerOutrankingDigraphs.pyx":2616
+    /* "cSparseIntegerOutrankingDigraphs.pyx":2624
  *         try:
  *             sortinga = self.sorting[action]
  *         except:             # <<<<<<<<<<<<<<
@@ -53390,83 +53469,83 @@ static PyObject *__pyx_pf_32cSparseIntegerOutrankingDigraphs_24cQuantilesRanking
  */
     /*except:*/ {
       __Pyx_AddTraceback("cSparseIntegerOutrankingDigraphs.cQuantilesRankingDigraph.computeActionCategories", __pyx_clineno, __pyx_lineno, __pyx_filename);
-      if (__Pyx_GetException(&__pyx_t_1, &__pyx_t_2, &__pyx_t_7) < 0) __PYX_ERR(0, 2616, __pyx_L5_except_error)
+      if (__Pyx_GetException(&__pyx_t_1, &__pyx_t_2, &__pyx_t_7) < 0) __PYX_ERR(0, 2624, __pyx_L5_except_error)
       __Pyx_XGOTREF(__pyx_t_1);
       __Pyx_XGOTREF(__pyx_t_2);
       __Pyx_XGOTREF(__pyx_t_7);
 
-      /* "cSparseIntegerOutrankingDigraphs.pyx":2617
+      /* "cSparseIntegerOutrankingDigraphs.pyx":2625
  *             sortinga = self.sorting[action]
  *         except:
  *             sorting = self.computeSortingCharacteristics(action=action,Comments=Comments,\             # <<<<<<<<<<<<<<
  *                                                    Threading=Threading,\
  *                                                          nbrOfCPUs=nbrOfCPUs,
  */
-      __pyx_t_8 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_n_s_computeSortingCharacteristics); if (unlikely(!__pyx_t_8)) __PYX_ERR(0, 2617, __pyx_L5_except_error)
+      __pyx_t_8 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_n_s_computeSortingCharacteristics); if (unlikely(!__pyx_t_8)) __PYX_ERR(0, 2625, __pyx_L5_except_error)
       __Pyx_GOTREF(__pyx_t_8);
-      __pyx_t_9 = __Pyx_PyDict_NewPresized(5); if (unlikely(!__pyx_t_9)) __PYX_ERR(0, 2617, __pyx_L5_except_error)
+      __pyx_t_9 = __Pyx_PyDict_NewPresized(5); if (unlikely(!__pyx_t_9)) __PYX_ERR(0, 2625, __pyx_L5_except_error)
       __Pyx_GOTREF(__pyx_t_9);
-      __pyx_t_10 = __Pyx_PyInt_From_int(__pyx_v_action); if (unlikely(!__pyx_t_10)) __PYX_ERR(0, 2617, __pyx_L5_except_error)
+      __pyx_t_10 = __Pyx_PyInt_From_int(__pyx_v_action); if (unlikely(!__pyx_t_10)) __PYX_ERR(0, 2625, __pyx_L5_except_error)
       __Pyx_GOTREF(__pyx_t_10);
-      if (PyDict_SetItem(__pyx_t_9, __pyx_n_s_action, __pyx_t_10) < 0) __PYX_ERR(0, 2617, __pyx_L5_except_error)
+      if (PyDict_SetItem(__pyx_t_9, __pyx_n_s_action, __pyx_t_10) < 0) __PYX_ERR(0, 2625, __pyx_L5_except_error)
       __Pyx_DECREF(__pyx_t_10); __pyx_t_10 = 0;
-      __pyx_t_10 = __Pyx_PyBool_FromLong(__pyx_v_Comments); if (unlikely(!__pyx_t_10)) __PYX_ERR(0, 2617, __pyx_L5_except_error)
+      __pyx_t_10 = __Pyx_PyBool_FromLong(__pyx_v_Comments); if (unlikely(!__pyx_t_10)) __PYX_ERR(0, 2625, __pyx_L5_except_error)
       __Pyx_GOTREF(__pyx_t_10);
-      if (PyDict_SetItem(__pyx_t_9, __pyx_n_s_Comments, __pyx_t_10) < 0) __PYX_ERR(0, 2617, __pyx_L5_except_error)
+      if (PyDict_SetItem(__pyx_t_9, __pyx_n_s_Comments, __pyx_t_10) < 0) __PYX_ERR(0, 2625, __pyx_L5_except_error)
       __Pyx_DECREF(__pyx_t_10); __pyx_t_10 = 0;
 
-      /* "cSparseIntegerOutrankingDigraphs.pyx":2618
+      /* "cSparseIntegerOutrankingDigraphs.pyx":2626
  *         except:
  *             sorting = self.computeSortingCharacteristics(action=action,Comments=Comments,\
  *                                                    Threading=Threading,\             # <<<<<<<<<<<<<<
  *                                                          nbrOfCPUs=nbrOfCPUs,
  *                                                          startMethod=startMethod)
  */
-      __pyx_t_10 = __Pyx_PyBool_FromLong(__pyx_v_Threading); if (unlikely(!__pyx_t_10)) __PYX_ERR(0, 2618, __pyx_L5_except_error)
+      __pyx_t_10 = __Pyx_PyBool_FromLong(__pyx_v_Threading); if (unlikely(!__pyx_t_10)) __PYX_ERR(0, 2626, __pyx_L5_except_error)
       __Pyx_GOTREF(__pyx_t_10);
-      if (PyDict_SetItem(__pyx_t_9, __pyx_n_s_Threading, __pyx_t_10) < 0) __PYX_ERR(0, 2617, __pyx_L5_except_error)
+      if (PyDict_SetItem(__pyx_t_9, __pyx_n_s_Threading, __pyx_t_10) < 0) __PYX_ERR(0, 2625, __pyx_L5_except_error)
       __Pyx_DECREF(__pyx_t_10); __pyx_t_10 = 0;
 
-      /* "cSparseIntegerOutrankingDigraphs.pyx":2619
+      /* "cSparseIntegerOutrankingDigraphs.pyx":2627
  *             sorting = self.computeSortingCharacteristics(action=action,Comments=Comments,\
  *                                                    Threading=Threading,\
  *                                                          nbrOfCPUs=nbrOfCPUs,             # <<<<<<<<<<<<<<
  *                                                          startMethod=startMethod)
  *             sortinga = sorting[action]
  */
-      if (PyDict_SetItem(__pyx_t_9, __pyx_n_s_nbrOfCPUs, __pyx_v_nbrOfCPUs) < 0) __PYX_ERR(0, 2617, __pyx_L5_except_error)
+      if (PyDict_SetItem(__pyx_t_9, __pyx_n_s_nbrOfCPUs, __pyx_v_nbrOfCPUs) < 0) __PYX_ERR(0, 2625, __pyx_L5_except_error)
 
-      /* "cSparseIntegerOutrankingDigraphs.pyx":2620
+      /* "cSparseIntegerOutrankingDigraphs.pyx":2628
  *                                                    Threading=Threading,\
  *                                                          nbrOfCPUs=nbrOfCPUs,
  *                                                          startMethod=startMethod)             # <<<<<<<<<<<<<<
  *             sortinga = sorting[action]
  * 
  */
-      if (PyDict_SetItem(__pyx_t_9, __pyx_n_s_startMethod, __pyx_v_startMethod) < 0) __PYX_ERR(0, 2617, __pyx_L5_except_error)
+      if (PyDict_SetItem(__pyx_t_9, __pyx_n_s_startMethod, __pyx_v_startMethod) < 0) __PYX_ERR(0, 2625, __pyx_L5_except_error)
 
-      /* "cSparseIntegerOutrankingDigraphs.pyx":2617
+      /* "cSparseIntegerOutrankingDigraphs.pyx":2625
  *             sortinga = self.sorting[action]
  *         except:
  *             sorting = self.computeSortingCharacteristics(action=action,Comments=Comments,\             # <<<<<<<<<<<<<<
  *                                                    Threading=Threading,\
  *                                                          nbrOfCPUs=nbrOfCPUs,
  */
-      __pyx_t_10 = __Pyx_PyObject_Call(__pyx_t_8, __pyx_empty_tuple, __pyx_t_9); if (unlikely(!__pyx_t_10)) __PYX_ERR(0, 2617, __pyx_L5_except_error)
+      __pyx_t_10 = __Pyx_PyObject_Call(__pyx_t_8, __pyx_empty_tuple, __pyx_t_9); if (unlikely(!__pyx_t_10)) __PYX_ERR(0, 2625, __pyx_L5_except_error)
       __Pyx_GOTREF(__pyx_t_10);
       __Pyx_DECREF(__pyx_t_8); __pyx_t_8 = 0;
       __Pyx_DECREF(__pyx_t_9); __pyx_t_9 = 0;
       __pyx_v_sorting = __pyx_t_10;
       __pyx_t_10 = 0;
 
-      /* "cSparseIntegerOutrankingDigraphs.pyx":2621
+      /* "cSparseIntegerOutrankingDigraphs.pyx":2629
  *                                                          nbrOfCPUs=nbrOfCPUs,
  *                                                          startMethod=startMethod)
  *             sortinga = sorting[action]             # <<<<<<<<<<<<<<
  * 
  *         keys = []
  */
-      __pyx_t_10 = __Pyx_GetItemInt(__pyx_v_sorting, __pyx_v_action, int, 1, __Pyx_PyInt_From_int, 0, 1, 1); if (unlikely(!__pyx_t_10)) __PYX_ERR(0, 2621, __pyx_L5_except_error)
+      __pyx_t_10 = __Pyx_GetItemInt(__pyx_v_sorting, __pyx_v_action, int, 1, __Pyx_PyInt_From_int, 0, 1, 1); if (unlikely(!__pyx_t_10)) __PYX_ERR(0, 2629, __pyx_L5_except_error)
       __Pyx_GOTREF(__pyx_t_10);
       __Pyx_XDECREF_SET(__pyx_v_sortinga, __pyx_t_10);
       __pyx_t_10 = 0;
@@ -53476,7 +53555,7 @@ static PyObject *__pyx_pf_32cSparseIntegerOutrankingDigraphs_24cQuantilesRanking
       goto __pyx_L4_exception_handled;
     }
 
-    /* "cSparseIntegerOutrankingDigraphs.pyx":2614
+    /* "cSparseIntegerOutrankingDigraphs.pyx":2622
  *         categories = self.categories
  * 
  *         try:             # <<<<<<<<<<<<<<
@@ -53497,19 +53576,19 @@ static PyObject *__pyx_pf_32cSparseIntegerOutrankingDigraphs_24cQuantilesRanking
     __pyx_L8_try_end:;
   }
 
-  /* "cSparseIntegerOutrankingDigraphs.pyx":2623
+  /* "cSparseIntegerOutrankingDigraphs.pyx":2631
  *             sortinga = sorting[action]
  * 
  *         keys = []             # <<<<<<<<<<<<<<
  *         for c in categories.keys():
  *         #for c in self.orderedCategoryKeys():
  */
-  __pyx_t_7 = PyList_New(0); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 2623, __pyx_L1_error)
+  __pyx_t_7 = PyList_New(0); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 2631, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_7);
   __pyx_v_keys = ((PyObject*)__pyx_t_7);
   __pyx_t_7 = 0;
 
-  /* "cSparseIntegerOutrankingDigraphs.pyx":2624
+  /* "cSparseIntegerOutrankingDigraphs.pyx":2632
  * 
  *         keys = []
  *         for c in categories.keys():             # <<<<<<<<<<<<<<
@@ -53519,9 +53598,9 @@ static PyObject *__pyx_pf_32cSparseIntegerOutrankingDigraphs_24cQuantilesRanking
   __pyx_t_11 = 0;
   if (unlikely(__pyx_v_categories == Py_None)) {
     PyErr_Format(PyExc_AttributeError, "'NoneType' object has no attribute '%.30s'", "keys");
-    __PYX_ERR(0, 2624, __pyx_L1_error)
+    __PYX_ERR(0, 2632, __pyx_L1_error)
   }
-  __pyx_t_2 = __Pyx_dict_iterator(__pyx_v_categories, 0, __pyx_n_s_keys, (&__pyx_t_12), (&__pyx_t_3)); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 2624, __pyx_L1_error)
+  __pyx_t_2 = __Pyx_dict_iterator(__pyx_v_categories, 0, __pyx_n_s_keys, (&__pyx_t_12), (&__pyx_t_3)); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 2632, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
   __Pyx_XDECREF(__pyx_t_7);
   __pyx_t_7 = __pyx_t_2;
@@ -53529,12 +53608,12 @@ static PyObject *__pyx_pf_32cSparseIntegerOutrankingDigraphs_24cQuantilesRanking
   while (1) {
     __pyx_t_13 = __Pyx_dict_iter_next(__pyx_t_7, __pyx_t_12, &__pyx_t_11, &__pyx_t_2, NULL, NULL, __pyx_t_3);
     if (unlikely(__pyx_t_13 == 0)) break;
-    if (unlikely(__pyx_t_13 == -1)) __PYX_ERR(0, 2624, __pyx_L1_error)
+    if (unlikely(__pyx_t_13 == -1)) __PYX_ERR(0, 2632, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_2);
     __Pyx_XDECREF_SET(__pyx_v_c, __pyx_t_2);
     __pyx_t_2 = 0;
 
-    /* "cSparseIntegerOutrankingDigraphs.pyx":2626
+    /* "cSparseIntegerOutrankingDigraphs.pyx":2634
  *         for c in categories.keys():
  *         #for c in self.orderedCategoryKeys():
  *             Above = False             # <<<<<<<<<<<<<<
@@ -53543,28 +53622,28 @@ static PyObject *__pyx_pf_32cSparseIntegerOutrankingDigraphs_24cQuantilesRanking
  */
     __pyx_v_Above = 0;
 
-    /* "cSparseIntegerOutrankingDigraphs.pyx":2627
+    /* "cSparseIntegerOutrankingDigraphs.pyx":2635
  *         #for c in self.orderedCategoryKeys():
  *             Above = False
  *             if sortinga[c]['categoryMembership'] >= Med:             # <<<<<<<<<<<<<<
  *                 Above = True
  *                 if sortinga[c]['lowLimit'] > Med:
  */
-    __pyx_t_2 = __Pyx_PyObject_GetItem(__pyx_v_sortinga, __pyx_v_c); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 2627, __pyx_L1_error)
+    __pyx_t_2 = __Pyx_PyObject_GetItem(__pyx_v_sortinga, __pyx_v_c); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 2635, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_2);
-    __pyx_t_1 = __Pyx_PyObject_Dict_GetItem(__pyx_t_2, __pyx_n_u_categoryMembership); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 2627, __pyx_L1_error)
+    __pyx_t_1 = __Pyx_PyObject_Dict_GetItem(__pyx_t_2, __pyx_n_u_categoryMembership); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 2635, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_1);
     __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
-    __pyx_t_2 = __Pyx_PyInt_From_int(__pyx_v_Med); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 2627, __pyx_L1_error)
+    __pyx_t_2 = __Pyx_PyInt_From_int(__pyx_v_Med); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 2635, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_2);
-    __pyx_t_10 = PyObject_RichCompare(__pyx_t_1, __pyx_t_2, Py_GE); __Pyx_XGOTREF(__pyx_t_10); if (unlikely(!__pyx_t_10)) __PYX_ERR(0, 2627, __pyx_L1_error)
+    __pyx_t_10 = PyObject_RichCompare(__pyx_t_1, __pyx_t_2, Py_GE); __Pyx_XGOTREF(__pyx_t_10); if (unlikely(!__pyx_t_10)) __PYX_ERR(0, 2635, __pyx_L1_error)
     __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
     __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
-    __pyx_t_14 = __Pyx_PyObject_IsTrue(__pyx_t_10); if (unlikely((__pyx_t_14 < 0))) __PYX_ERR(0, 2627, __pyx_L1_error)
+    __pyx_t_14 = __Pyx_PyObject_IsTrue(__pyx_t_10); if (unlikely((__pyx_t_14 < 0))) __PYX_ERR(0, 2635, __pyx_L1_error)
     __Pyx_DECREF(__pyx_t_10); __pyx_t_10 = 0;
     if (__pyx_t_14) {
 
-      /* "cSparseIntegerOutrankingDigraphs.pyx":2628
+      /* "cSparseIntegerOutrankingDigraphs.pyx":2636
  *             Above = False
  *             if sortinga[c]['categoryMembership'] >= Med:
  *                 Above = True             # <<<<<<<<<<<<<<
@@ -53573,44 +53652,44 @@ static PyObject *__pyx_pf_32cSparseIntegerOutrankingDigraphs_24cQuantilesRanking
  */
       __pyx_v_Above = 1;
 
-      /* "cSparseIntegerOutrankingDigraphs.pyx":2629
+      /* "cSparseIntegerOutrankingDigraphs.pyx":2637
  *             if sortinga[c]['categoryMembership'] >= Med:
  *                 Above = True
  *                 if sortinga[c]['lowLimit'] > Med:             # <<<<<<<<<<<<<<
  *                     lowLimit = sortinga[c]['lowLimit']
  *                 if sortinga[c]['notHighLimit'] > Med:
  */
-      __pyx_t_10 = __Pyx_PyObject_GetItem(__pyx_v_sortinga, __pyx_v_c); if (unlikely(!__pyx_t_10)) __PYX_ERR(0, 2629, __pyx_L1_error)
+      __pyx_t_10 = __Pyx_PyObject_GetItem(__pyx_v_sortinga, __pyx_v_c); if (unlikely(!__pyx_t_10)) __PYX_ERR(0, 2637, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_10);
-      __pyx_t_2 = __Pyx_PyObject_Dict_GetItem(__pyx_t_10, __pyx_n_u_lowLimit); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 2629, __pyx_L1_error)
+      __pyx_t_2 = __Pyx_PyObject_Dict_GetItem(__pyx_t_10, __pyx_n_u_lowLimit); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 2637, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_2);
       __Pyx_DECREF(__pyx_t_10); __pyx_t_10 = 0;
-      __pyx_t_10 = __Pyx_PyInt_From_int(__pyx_v_Med); if (unlikely(!__pyx_t_10)) __PYX_ERR(0, 2629, __pyx_L1_error)
+      __pyx_t_10 = __Pyx_PyInt_From_int(__pyx_v_Med); if (unlikely(!__pyx_t_10)) __PYX_ERR(0, 2637, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_10);
-      __pyx_t_1 = PyObject_RichCompare(__pyx_t_2, __pyx_t_10, Py_GT); __Pyx_XGOTREF(__pyx_t_1); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 2629, __pyx_L1_error)
+      __pyx_t_1 = PyObject_RichCompare(__pyx_t_2, __pyx_t_10, Py_GT); __Pyx_XGOTREF(__pyx_t_1); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 2637, __pyx_L1_error)
       __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
       __Pyx_DECREF(__pyx_t_10); __pyx_t_10 = 0;
-      __pyx_t_14 = __Pyx_PyObject_IsTrue(__pyx_t_1); if (unlikely((__pyx_t_14 < 0))) __PYX_ERR(0, 2629, __pyx_L1_error)
+      __pyx_t_14 = __Pyx_PyObject_IsTrue(__pyx_t_1); if (unlikely((__pyx_t_14 < 0))) __PYX_ERR(0, 2637, __pyx_L1_error)
       __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
       if (__pyx_t_14) {
 
-        /* "cSparseIntegerOutrankingDigraphs.pyx":2630
+        /* "cSparseIntegerOutrankingDigraphs.pyx":2638
  *                 Above = True
  *                 if sortinga[c]['lowLimit'] > Med:
  *                     lowLimit = sortinga[c]['lowLimit']             # <<<<<<<<<<<<<<
  *                 if sortinga[c]['notHighLimit'] > Med:
  *                     notHighLimit = sortinga[c]['notHighLimit']
  */
-        __pyx_t_1 = __Pyx_PyObject_GetItem(__pyx_v_sortinga, __pyx_v_c); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 2630, __pyx_L1_error)
+        __pyx_t_1 = __Pyx_PyObject_GetItem(__pyx_v_sortinga, __pyx_v_c); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 2638, __pyx_L1_error)
         __Pyx_GOTREF(__pyx_t_1);
-        __pyx_t_10 = __Pyx_PyObject_Dict_GetItem(__pyx_t_1, __pyx_n_u_lowLimit); if (unlikely(!__pyx_t_10)) __PYX_ERR(0, 2630, __pyx_L1_error)
+        __pyx_t_10 = __Pyx_PyObject_Dict_GetItem(__pyx_t_1, __pyx_n_u_lowLimit); if (unlikely(!__pyx_t_10)) __PYX_ERR(0, 2638, __pyx_L1_error)
         __Pyx_GOTREF(__pyx_t_10);
         __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
-        __pyx_t_13 = __Pyx_PyInt_As_int(__pyx_t_10); if (unlikely((__pyx_t_13 == (int)-1) && PyErr_Occurred())) __PYX_ERR(0, 2630, __pyx_L1_error)
+        __pyx_t_13 = __Pyx_PyInt_As_int(__pyx_t_10); if (unlikely((__pyx_t_13 == (int)-1) && PyErr_Occurred())) __PYX_ERR(0, 2638, __pyx_L1_error)
         __Pyx_DECREF(__pyx_t_10); __pyx_t_10 = 0;
         __pyx_v_lowLimit = __pyx_t_13;
 
-        /* "cSparseIntegerOutrankingDigraphs.pyx":2629
+        /* "cSparseIntegerOutrankingDigraphs.pyx":2637
  *             if sortinga[c]['categoryMembership'] >= Med:
  *                 Above = True
  *                 if sortinga[c]['lowLimit'] > Med:             # <<<<<<<<<<<<<<
@@ -53619,44 +53698,44 @@ static PyObject *__pyx_pf_32cSparseIntegerOutrankingDigraphs_24cQuantilesRanking
  */
       }
 
-      /* "cSparseIntegerOutrankingDigraphs.pyx":2631
+      /* "cSparseIntegerOutrankingDigraphs.pyx":2639
  *                 if sortinga[c]['lowLimit'] > Med:
  *                     lowLimit = sortinga[c]['lowLimit']
  *                 if sortinga[c]['notHighLimit'] > Med:             # <<<<<<<<<<<<<<
  *                     notHighLimit = sortinga[c]['notHighLimit']
  *                 keys.append(c)
  */
-      __pyx_t_10 = __Pyx_PyObject_GetItem(__pyx_v_sortinga, __pyx_v_c); if (unlikely(!__pyx_t_10)) __PYX_ERR(0, 2631, __pyx_L1_error)
+      __pyx_t_10 = __Pyx_PyObject_GetItem(__pyx_v_sortinga, __pyx_v_c); if (unlikely(!__pyx_t_10)) __PYX_ERR(0, 2639, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_10);
-      __pyx_t_1 = __Pyx_PyObject_Dict_GetItem(__pyx_t_10, __pyx_n_u_notHighLimit); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 2631, __pyx_L1_error)
+      __pyx_t_1 = __Pyx_PyObject_Dict_GetItem(__pyx_t_10, __pyx_n_u_notHighLimit); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 2639, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_1);
       __Pyx_DECREF(__pyx_t_10); __pyx_t_10 = 0;
-      __pyx_t_10 = __Pyx_PyInt_From_int(__pyx_v_Med); if (unlikely(!__pyx_t_10)) __PYX_ERR(0, 2631, __pyx_L1_error)
+      __pyx_t_10 = __Pyx_PyInt_From_int(__pyx_v_Med); if (unlikely(!__pyx_t_10)) __PYX_ERR(0, 2639, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_10);
-      __pyx_t_2 = PyObject_RichCompare(__pyx_t_1, __pyx_t_10, Py_GT); __Pyx_XGOTREF(__pyx_t_2); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 2631, __pyx_L1_error)
+      __pyx_t_2 = PyObject_RichCompare(__pyx_t_1, __pyx_t_10, Py_GT); __Pyx_XGOTREF(__pyx_t_2); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 2639, __pyx_L1_error)
       __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
       __Pyx_DECREF(__pyx_t_10); __pyx_t_10 = 0;
-      __pyx_t_14 = __Pyx_PyObject_IsTrue(__pyx_t_2); if (unlikely((__pyx_t_14 < 0))) __PYX_ERR(0, 2631, __pyx_L1_error)
+      __pyx_t_14 = __Pyx_PyObject_IsTrue(__pyx_t_2); if (unlikely((__pyx_t_14 < 0))) __PYX_ERR(0, 2639, __pyx_L1_error)
       __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
       if (__pyx_t_14) {
 
-        /* "cSparseIntegerOutrankingDigraphs.pyx":2632
+        /* "cSparseIntegerOutrankingDigraphs.pyx":2640
  *                     lowLimit = sortinga[c]['lowLimit']
  *                 if sortinga[c]['notHighLimit'] > Med:
  *                     notHighLimit = sortinga[c]['notHighLimit']             # <<<<<<<<<<<<<<
  *                 keys.append(c)
  *                 if Debug:
  */
-        __pyx_t_2 = __Pyx_PyObject_GetItem(__pyx_v_sortinga, __pyx_v_c); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 2632, __pyx_L1_error)
+        __pyx_t_2 = __Pyx_PyObject_GetItem(__pyx_v_sortinga, __pyx_v_c); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 2640, __pyx_L1_error)
         __Pyx_GOTREF(__pyx_t_2);
-        __pyx_t_10 = __Pyx_PyObject_Dict_GetItem(__pyx_t_2, __pyx_n_u_notHighLimit); if (unlikely(!__pyx_t_10)) __PYX_ERR(0, 2632, __pyx_L1_error)
+        __pyx_t_10 = __Pyx_PyObject_Dict_GetItem(__pyx_t_2, __pyx_n_u_notHighLimit); if (unlikely(!__pyx_t_10)) __PYX_ERR(0, 2640, __pyx_L1_error)
         __Pyx_GOTREF(__pyx_t_10);
         __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
-        __pyx_t_13 = __Pyx_PyInt_As_int(__pyx_t_10); if (unlikely((__pyx_t_13 == (int)-1) && PyErr_Occurred())) __PYX_ERR(0, 2632, __pyx_L1_error)
+        __pyx_t_13 = __Pyx_PyInt_As_int(__pyx_t_10); if (unlikely((__pyx_t_13 == (int)-1) && PyErr_Occurred())) __PYX_ERR(0, 2640, __pyx_L1_error)
         __Pyx_DECREF(__pyx_t_10); __pyx_t_10 = 0;
         __pyx_v_notHighLimit = __pyx_t_13;
 
-        /* "cSparseIntegerOutrankingDigraphs.pyx":2631
+        /* "cSparseIntegerOutrankingDigraphs.pyx":2639
  *                 if sortinga[c]['lowLimit'] > Med:
  *                     lowLimit = sortinga[c]['lowLimit']
  *                 if sortinga[c]['notHighLimit'] > Med:             # <<<<<<<<<<<<<<
@@ -53665,16 +53744,16 @@ static PyObject *__pyx_pf_32cSparseIntegerOutrankingDigraphs_24cQuantilesRanking
  */
       }
 
-      /* "cSparseIntegerOutrankingDigraphs.pyx":2633
+      /* "cSparseIntegerOutrankingDigraphs.pyx":2641
  *                 if sortinga[c]['notHighLimit'] > Med:
  *                     notHighLimit = sortinga[c]['notHighLimit']
  *                 keys.append(c)             # <<<<<<<<<<<<<<
  *                 if Debug:
  *                     print(action, c, sortinga[c])
  */
-      __pyx_t_15 = __Pyx_PyList_Append(__pyx_v_keys, __pyx_v_c); if (unlikely(__pyx_t_15 == ((int)-1))) __PYX_ERR(0, 2633, __pyx_L1_error)
+      __pyx_t_15 = __Pyx_PyList_Append(__pyx_v_keys, __pyx_v_c); if (unlikely(__pyx_t_15 == ((int)-1))) __PYX_ERR(0, 2641, __pyx_L1_error)
 
-      /* "cSparseIntegerOutrankingDigraphs.pyx":2634
+      /* "cSparseIntegerOutrankingDigraphs.pyx":2642
  *                     notHighLimit = sortinga[c]['notHighLimit']
  *                 keys.append(c)
  *                 if Debug:             # <<<<<<<<<<<<<<
@@ -53683,34 +53762,34 @@ static PyObject *__pyx_pf_32cSparseIntegerOutrankingDigraphs_24cQuantilesRanking
  */
       if (__pyx_v_Debug) {
 
-        /* "cSparseIntegerOutrankingDigraphs.pyx":2635
+        /* "cSparseIntegerOutrankingDigraphs.pyx":2643
  *                 keys.append(c)
  *                 if Debug:
  *                     print(action, c, sortinga[c])             # <<<<<<<<<<<<<<
  *             elif Above:
  *                 break
  */
-        __pyx_t_10 = __Pyx_PyInt_From_int(__pyx_v_action); if (unlikely(!__pyx_t_10)) __PYX_ERR(0, 2635, __pyx_L1_error)
+        __pyx_t_10 = __Pyx_PyInt_From_int(__pyx_v_action); if (unlikely(!__pyx_t_10)) __PYX_ERR(0, 2643, __pyx_L1_error)
         __Pyx_GOTREF(__pyx_t_10);
-        __pyx_t_2 = __Pyx_PyObject_GetItem(__pyx_v_sortinga, __pyx_v_c); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 2635, __pyx_L1_error)
+        __pyx_t_2 = __Pyx_PyObject_GetItem(__pyx_v_sortinga, __pyx_v_c); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 2643, __pyx_L1_error)
         __Pyx_GOTREF(__pyx_t_2);
-        __pyx_t_1 = PyTuple_New(3); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 2635, __pyx_L1_error)
+        __pyx_t_1 = PyTuple_New(3); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 2643, __pyx_L1_error)
         __Pyx_GOTREF(__pyx_t_1);
         __Pyx_GIVEREF(__pyx_t_10);
-        if (__Pyx_PyTuple_SET_ITEM(__pyx_t_1, 0, __pyx_t_10)) __PYX_ERR(0, 2635, __pyx_L1_error);
+        if (__Pyx_PyTuple_SET_ITEM(__pyx_t_1, 0, __pyx_t_10)) __PYX_ERR(0, 2643, __pyx_L1_error);
         __Pyx_INCREF(__pyx_v_c);
         __Pyx_GIVEREF(__pyx_v_c);
-        if (__Pyx_PyTuple_SET_ITEM(__pyx_t_1, 1, __pyx_v_c)) __PYX_ERR(0, 2635, __pyx_L1_error);
+        if (__Pyx_PyTuple_SET_ITEM(__pyx_t_1, 1, __pyx_v_c)) __PYX_ERR(0, 2643, __pyx_L1_error);
         __Pyx_GIVEREF(__pyx_t_2);
-        if (__Pyx_PyTuple_SET_ITEM(__pyx_t_1, 2, __pyx_t_2)) __PYX_ERR(0, 2635, __pyx_L1_error);
+        if (__Pyx_PyTuple_SET_ITEM(__pyx_t_1, 2, __pyx_t_2)) __PYX_ERR(0, 2643, __pyx_L1_error);
         __pyx_t_10 = 0;
         __pyx_t_2 = 0;
-        __pyx_t_2 = __Pyx_PyObject_Call(__pyx_builtin_print, __pyx_t_1, NULL); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 2635, __pyx_L1_error)
+        __pyx_t_2 = __Pyx_PyObject_Call(__pyx_builtin_print, __pyx_t_1, NULL); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 2643, __pyx_L1_error)
         __Pyx_GOTREF(__pyx_t_2);
         __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
         __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
 
-        /* "cSparseIntegerOutrankingDigraphs.pyx":2634
+        /* "cSparseIntegerOutrankingDigraphs.pyx":2642
  *                     notHighLimit = sortinga[c]['notHighLimit']
  *                 keys.append(c)
  *                 if Debug:             # <<<<<<<<<<<<<<
@@ -53719,7 +53798,7 @@ static PyObject *__pyx_pf_32cSparseIntegerOutrankingDigraphs_24cQuantilesRanking
  */
       }
 
-      /* "cSparseIntegerOutrankingDigraphs.pyx":2627
+      /* "cSparseIntegerOutrankingDigraphs.pyx":2635
  *         #for c in self.orderedCategoryKeys():
  *             Above = False
  *             if sortinga[c]['categoryMembership'] >= Med:             # <<<<<<<<<<<<<<
@@ -53729,7 +53808,7 @@ static PyObject *__pyx_pf_32cSparseIntegerOutrankingDigraphs_24cQuantilesRanking
       goto __pyx_L13;
     }
 
-    /* "cSparseIntegerOutrankingDigraphs.pyx":2636
+    /* "cSparseIntegerOutrankingDigraphs.pyx":2644
  *                 if Debug:
  *                     print(action, c, sortinga[c])
  *             elif Above:             # <<<<<<<<<<<<<<
@@ -53738,7 +53817,7 @@ static PyObject *__pyx_pf_32cSparseIntegerOutrankingDigraphs_24cQuantilesRanking
  */
     if (__pyx_v_Above) {
 
-      /* "cSparseIntegerOutrankingDigraphs.pyx":2637
+      /* "cSparseIntegerOutrankingDigraphs.pyx":2645
  *                     print(action, c, sortinga[c])
  *             elif Above:
  *                 break             # <<<<<<<<<<<<<<
@@ -53747,7 +53826,7 @@ static PyObject *__pyx_pf_32cSparseIntegerOutrankingDigraphs_24cQuantilesRanking
  */
       goto __pyx_L12_break;
 
-      /* "cSparseIntegerOutrankingDigraphs.pyx":2636
+      /* "cSparseIntegerOutrankingDigraphs.pyx":2644
  *                 if Debug:
  *                     print(action, c, sortinga[c])
  *             elif Above:             # <<<<<<<<<<<<<<
@@ -53760,17 +53839,17 @@ static PyObject *__pyx_pf_32cSparseIntegerOutrankingDigraphs_24cQuantilesRanking
   __pyx_L12_break:;
   __Pyx_DECREF(__pyx_t_7); __pyx_t_7 = 0;
 
-  /* "cSparseIntegerOutrankingDigraphs.pyx":2638
+  /* "cSparseIntegerOutrankingDigraphs.pyx":2646
  *             elif Above:
  *                 break
  *         n = len(keys)             # <<<<<<<<<<<<<<
  *         try:
  *             credibility = min(lowLimit,notHighLimit)
  */
-  __pyx_t_12 = __Pyx_PyList_GET_SIZE(__pyx_v_keys); if (unlikely(__pyx_t_12 == ((Py_ssize_t)-1))) __PYX_ERR(0, 2638, __pyx_L1_error)
+  __pyx_t_12 = __Pyx_PyList_GET_SIZE(__pyx_v_keys); if (unlikely(__pyx_t_12 == ((Py_ssize_t)-1))) __PYX_ERR(0, 2646, __pyx_L1_error)
   __pyx_v_n = __pyx_t_12;
 
-  /* "cSparseIntegerOutrankingDigraphs.pyx":2639
+  /* "cSparseIntegerOutrankingDigraphs.pyx":2647
  *                 break
  *         n = len(keys)
  *         try:             # <<<<<<<<<<<<<<
@@ -53781,7 +53860,7 @@ static PyObject *__pyx_pf_32cSparseIntegerOutrankingDigraphs_24cQuantilesRanking
     (void)__pyx_t_6; (void)__pyx_t_5; (void)__pyx_t_4; /* mark used */
     /*try:*/ {
 
-      /* "cSparseIntegerOutrankingDigraphs.pyx":2640
+      /* "cSparseIntegerOutrankingDigraphs.pyx":2648
  *         n = len(keys)
  *         try:
  *             credibility = min(lowLimit,notHighLimit)             # <<<<<<<<<<<<<<
@@ -53798,7 +53877,7 @@ static PyObject *__pyx_pf_32cSparseIntegerOutrankingDigraphs_24cQuantilesRanking
       }
       __pyx_v_credibility = __pyx_t_16;
 
-      /* "cSparseIntegerOutrankingDigraphs.pyx":2639
+      /* "cSparseIntegerOutrankingDigraphs.pyx":2647
  *                 break
  *         n = len(keys)
  *         try:             # <<<<<<<<<<<<<<
@@ -53808,7 +53887,7 @@ static PyObject *__pyx_pf_32cSparseIntegerOutrankingDigraphs_24cQuantilesRanking
     }
   }
 
-  /* "cSparseIntegerOutrankingDigraphs.pyx":2643
+  /* "cSparseIntegerOutrankingDigraphs.pyx":2651
  *         except:
  *             credibility = Med
  *         if n == 0:             # <<<<<<<<<<<<<<
@@ -53818,7 +53897,7 @@ static PyObject *__pyx_pf_32cSparseIntegerOutrankingDigraphs_24cQuantilesRanking
   switch (__pyx_v_n) {
     case 0:
 
-    /* "cSparseIntegerOutrankingDigraphs.pyx":2644
+    /* "cSparseIntegerOutrankingDigraphs.pyx":2652
  *             credibility = Med
  *         if n == 0:
  *             return None             # <<<<<<<<<<<<<<
@@ -53829,7 +53908,7 @@ static PyObject *__pyx_pf_32cSparseIntegerOutrankingDigraphs_24cQuantilesRanking
     __pyx_r = Py_None; __Pyx_INCREF(Py_None);
     goto __pyx_L0;
 
-    /* "cSparseIntegerOutrankingDigraphs.pyx":2643
+    /* "cSparseIntegerOutrankingDigraphs.pyx":2651
  *         except:
  *             credibility = Med
  *         if n == 0:             # <<<<<<<<<<<<<<
@@ -53839,7 +53918,7 @@ static PyObject *__pyx_pf_32cSparseIntegerOutrankingDigraphs_24cQuantilesRanking
     break;
     case 1:
 
-    /* "cSparseIntegerOutrankingDigraphs.pyx":2646
+    /* "cSparseIntegerOutrankingDigraphs.pyx":2654
  *             return None
  *         elif n == 1:
  *             if Show:             # <<<<<<<<<<<<<<
@@ -53848,34 +53927,34 @@ static PyObject *__pyx_pf_32cSparseIntegerOutrankingDigraphs_24cQuantilesRanking
  */
     if (__pyx_v_Show) {
 
-      /* "cSparseIntegerOutrankingDigraphs.pyx":2647
+      /* "cSparseIntegerOutrankingDigraphs.pyx":2655
  *         elif n == 1:
  *             if Show:
  *                 print('%s - %s: %s with credibility: %.2f = min(%.2f,%.2f)' % (\             # <<<<<<<<<<<<<<
  *                                      categories[keys[0]]['lowLimit'],\
  *                                      categories[keys[0]]['highLimit'],\
  */
-      __pyx_t_7 = PyTuple_New(12); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 2647, __pyx_L1_error)
+      __pyx_t_7 = PyTuple_New(12); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 2655, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_7);
       __pyx_t_12 = 0;
       __pyx_t_17 = 127;
 
-      /* "cSparseIntegerOutrankingDigraphs.pyx":2648
+      /* "cSparseIntegerOutrankingDigraphs.pyx":2656
  *             if Show:
  *                 print('%s - %s: %s with credibility: %.2f = min(%.2f,%.2f)' % (\
  *                                      categories[keys[0]]['lowLimit'],\             # <<<<<<<<<<<<<<
  *                                      categories[keys[0]]['highLimit'],\
  *                                      action,\
  */
-      __pyx_t_2 = __Pyx_GetItemInt_List(__pyx_v_keys, 0, long, 1, __Pyx_PyInt_From_long, 1, 0, 1); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 2648, __pyx_L1_error)
+      __pyx_t_2 = __Pyx_GetItemInt_List(__pyx_v_keys, 0, long, 1, __Pyx_PyInt_From_long, 1, 0, 1); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 2656, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_2);
-      __pyx_t_1 = __Pyx_PyObject_GetItem(__pyx_v_categories, __pyx_t_2); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 2648, __pyx_L1_error)
+      __pyx_t_1 = __Pyx_PyObject_GetItem(__pyx_v_categories, __pyx_t_2); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 2656, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_1);
       __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
-      __pyx_t_2 = __Pyx_PyObject_Dict_GetItem(__pyx_t_1, __pyx_n_u_lowLimit); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 2648, __pyx_L1_error)
+      __pyx_t_2 = __Pyx_PyObject_Dict_GetItem(__pyx_t_1, __pyx_n_u_lowLimit); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 2656, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_2);
       __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
-      __pyx_t_1 = __Pyx_PyObject_FormatSimpleAndDecref(PyObject_Unicode(__pyx_t_2), __pyx_empty_unicode); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 2648, __pyx_L1_error)
+      __pyx_t_1 = __Pyx_PyObject_FormatSimpleAndDecref(PyObject_Unicode(__pyx_t_2), __pyx_empty_unicode); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 2656, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_1);
       __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
       __pyx_t_17 = (__Pyx_PyUnicode_MAX_CHAR_VALUE(__pyx_t_1) > __pyx_t_17) ? __Pyx_PyUnicode_MAX_CHAR_VALUE(__pyx_t_1) : __pyx_t_17;
@@ -53888,22 +53967,22 @@ static PyObject *__pyx_pf_32cSparseIntegerOutrankingDigraphs_24cQuantilesRanking
       __Pyx_GIVEREF(__pyx_kp_u__46);
       PyTuple_SET_ITEM(__pyx_t_7, 1, __pyx_kp_u__46);
 
-      /* "cSparseIntegerOutrankingDigraphs.pyx":2649
+      /* "cSparseIntegerOutrankingDigraphs.pyx":2657
  *                 print('%s - %s: %s with credibility: %.2f = min(%.2f,%.2f)' % (\
  *                                      categories[keys[0]]['lowLimit'],\
  *                                      categories[keys[0]]['highLimit'],\             # <<<<<<<<<<<<<<
  *                                      action,\
  *                                      credibility,lowLimit,notHighLimit) )
  */
-      __pyx_t_1 = __Pyx_GetItemInt_List(__pyx_v_keys, 0, long, 1, __Pyx_PyInt_From_long, 1, 0, 1); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 2649, __pyx_L1_error)
+      __pyx_t_1 = __Pyx_GetItemInt_List(__pyx_v_keys, 0, long, 1, __Pyx_PyInt_From_long, 1, 0, 1); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 2657, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_1);
-      __pyx_t_2 = __Pyx_PyObject_GetItem(__pyx_v_categories, __pyx_t_1); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 2649, __pyx_L1_error)
+      __pyx_t_2 = __Pyx_PyObject_GetItem(__pyx_v_categories, __pyx_t_1); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 2657, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_2);
       __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
-      __pyx_t_1 = __Pyx_PyObject_Dict_GetItem(__pyx_t_2, __pyx_n_u_highLimit); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 2649, __pyx_L1_error)
+      __pyx_t_1 = __Pyx_PyObject_Dict_GetItem(__pyx_t_2, __pyx_n_u_highLimit); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 2657, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_1);
       __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
-      __pyx_t_2 = __Pyx_PyObject_FormatSimpleAndDecref(PyObject_Unicode(__pyx_t_1), __pyx_empty_unicode); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 2649, __pyx_L1_error)
+      __pyx_t_2 = __Pyx_PyObject_FormatSimpleAndDecref(PyObject_Unicode(__pyx_t_1), __pyx_empty_unicode); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 2657, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_2);
       __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
       __pyx_t_17 = (__Pyx_PyUnicode_MAX_CHAR_VALUE(__pyx_t_2) > __pyx_t_17) ? __Pyx_PyUnicode_MAX_CHAR_VALUE(__pyx_t_2) : __pyx_t_17;
@@ -53916,14 +53995,14 @@ static PyObject *__pyx_pf_32cSparseIntegerOutrankingDigraphs_24cQuantilesRanking
       __Pyx_GIVEREF(__pyx_kp_u__32);
       PyTuple_SET_ITEM(__pyx_t_7, 3, __pyx_kp_u__32);
 
-      /* "cSparseIntegerOutrankingDigraphs.pyx":2650
+      /* "cSparseIntegerOutrankingDigraphs.pyx":2658
  *                                      categories[keys[0]]['lowLimit'],\
  *                                      categories[keys[0]]['highLimit'],\
  *                                      action,\             # <<<<<<<<<<<<<<
  *                                      credibility,lowLimit,notHighLimit) )
  *             return action,\
  */
-      __pyx_t_2 = __Pyx_PyUnicode_From_int(__pyx_v_action, 0, ' ', 'd'); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 2650, __pyx_L1_error)
+      __pyx_t_2 = __Pyx_PyUnicode_From_int(__pyx_v_action, 0, ' ', 'd'); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 2658, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_2);
       __pyx_t_12 += __Pyx_PyUnicode_GET_LENGTH(__pyx_t_2);
       __Pyx_GIVEREF(__pyx_t_2);
@@ -53934,16 +54013,16 @@ static PyObject *__pyx_pf_32cSparseIntegerOutrankingDigraphs_24cQuantilesRanking
       __Pyx_GIVEREF(__pyx_kp_u_with_credibility);
       PyTuple_SET_ITEM(__pyx_t_7, 5, __pyx_kp_u_with_credibility);
 
-      /* "cSparseIntegerOutrankingDigraphs.pyx":2651
+      /* "cSparseIntegerOutrankingDigraphs.pyx":2659
  *                                      categories[keys[0]]['highLimit'],\
  *                                      action,\
  *                                      credibility,lowLimit,notHighLimit) )             # <<<<<<<<<<<<<<
  *             return action,\
  *                     keys[0],\
  */
-      __pyx_t_2 = __Pyx_PyInt_From_int(__pyx_v_credibility); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 2651, __pyx_L1_error)
+      __pyx_t_2 = __Pyx_PyInt_From_int(__pyx_v_credibility); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 2659, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_2);
-      __pyx_t_1 = __Pyx_PyObject_Format(__pyx_t_2, __pyx_kp_u_2f); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 2651, __pyx_L1_error)
+      __pyx_t_1 = __Pyx_PyObject_Format(__pyx_t_2, __pyx_kp_u_2f); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 2659, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_1);
       __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
       __pyx_t_17 = (__Pyx_PyUnicode_MAX_CHAR_VALUE(__pyx_t_1) > __pyx_t_17) ? __Pyx_PyUnicode_MAX_CHAR_VALUE(__pyx_t_1) : __pyx_t_17;
@@ -53955,9 +54034,9 @@ static PyObject *__pyx_pf_32cSparseIntegerOutrankingDigraphs_24cQuantilesRanking
       __pyx_t_12 += 7;
       __Pyx_GIVEREF(__pyx_kp_u_min_2);
       PyTuple_SET_ITEM(__pyx_t_7, 7, __pyx_kp_u_min_2);
-      __pyx_t_1 = __Pyx_PyInt_From_int(__pyx_v_lowLimit); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 2651, __pyx_L1_error)
+      __pyx_t_1 = __Pyx_PyInt_From_int(__pyx_v_lowLimit); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 2659, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_1);
-      __pyx_t_2 = __Pyx_PyObject_Format(__pyx_t_1, __pyx_kp_u_2f); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 2651, __pyx_L1_error)
+      __pyx_t_2 = __Pyx_PyObject_Format(__pyx_t_1, __pyx_kp_u_2f); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 2659, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_2);
       __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
       __pyx_t_17 = (__Pyx_PyUnicode_MAX_CHAR_VALUE(__pyx_t_2) > __pyx_t_17) ? __Pyx_PyUnicode_MAX_CHAR_VALUE(__pyx_t_2) : __pyx_t_17;
@@ -53969,9 +54048,9 @@ static PyObject *__pyx_pf_32cSparseIntegerOutrankingDigraphs_24cQuantilesRanking
       __pyx_t_12 += 1;
       __Pyx_GIVEREF(__pyx_kp_u__47);
       PyTuple_SET_ITEM(__pyx_t_7, 9, __pyx_kp_u__47);
-      __pyx_t_2 = __Pyx_PyInt_From_int(__pyx_v_notHighLimit); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 2651, __pyx_L1_error)
+      __pyx_t_2 = __Pyx_PyInt_From_int(__pyx_v_notHighLimit); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 2659, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_2);
-      __pyx_t_1 = __Pyx_PyObject_Format(__pyx_t_2, __pyx_kp_u_2f); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 2651, __pyx_L1_error)
+      __pyx_t_1 = __Pyx_PyObject_Format(__pyx_t_2, __pyx_kp_u_2f); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 2659, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_1);
       __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
       __pyx_t_17 = (__Pyx_PyUnicode_MAX_CHAR_VALUE(__pyx_t_1) > __pyx_t_17) ? __Pyx_PyUnicode_MAX_CHAR_VALUE(__pyx_t_1) : __pyx_t_17;
@@ -53984,22 +54063,22 @@ static PyObject *__pyx_pf_32cSparseIntegerOutrankingDigraphs_24cQuantilesRanking
       __Pyx_GIVEREF(__pyx_kp_u__38);
       PyTuple_SET_ITEM(__pyx_t_7, 11, __pyx_kp_u__38);
 
-      /* "cSparseIntegerOutrankingDigraphs.pyx":2647
+      /* "cSparseIntegerOutrankingDigraphs.pyx":2655
  *         elif n == 1:
  *             if Show:
  *                 print('%s - %s: %s with credibility: %.2f = min(%.2f,%.2f)' % (\             # <<<<<<<<<<<<<<
  *                                      categories[keys[0]]['lowLimit'],\
  *                                      categories[keys[0]]['highLimit'],\
  */
-      __pyx_t_1 = __Pyx_PyUnicode_Join(__pyx_t_7, 12, __pyx_t_12, __pyx_t_17); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 2647, __pyx_L1_error)
+      __pyx_t_1 = __Pyx_PyUnicode_Join(__pyx_t_7, 12, __pyx_t_12, __pyx_t_17); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 2655, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_1);
       __Pyx_DECREF(__pyx_t_7); __pyx_t_7 = 0;
-      __pyx_t_7 = __Pyx_PyObject_CallOneArg(__pyx_builtin_print, __pyx_t_1); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 2647, __pyx_L1_error)
+      __pyx_t_7 = __Pyx_PyObject_CallOneArg(__pyx_builtin_print, __pyx_t_1); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 2655, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_7);
       __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
       __Pyx_DECREF(__pyx_t_7); __pyx_t_7 = 0;
 
-      /* "cSparseIntegerOutrankingDigraphs.pyx":2646
+      /* "cSparseIntegerOutrankingDigraphs.pyx":2654
  *             return None
  *         elif n == 1:
  *             if Show:             # <<<<<<<<<<<<<<
@@ -54008,7 +54087,7 @@ static PyObject *__pyx_pf_32cSparseIntegerOutrankingDigraphs_24cQuantilesRanking
  */
     }
 
-    /* "cSparseIntegerOutrankingDigraphs.pyx":2652
+    /* "cSparseIntegerOutrankingDigraphs.pyx":2660
  *                                      action,\
  *                                      credibility,lowLimit,notHighLimit) )
  *             return action,\             # <<<<<<<<<<<<<<
@@ -54016,80 +54095,80 @@ static PyObject *__pyx_pf_32cSparseIntegerOutrankingDigraphs_24cQuantilesRanking
  *                     keys[0],\
  */
     __Pyx_XDECREF(__pyx_r);
-    __pyx_t_7 = __Pyx_PyInt_From_int(__pyx_v_action); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 2652, __pyx_L1_error)
+    __pyx_t_7 = __Pyx_PyInt_From_int(__pyx_v_action); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 2660, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_7);
 
-    /* "cSparseIntegerOutrankingDigraphs.pyx":2653
+    /* "cSparseIntegerOutrankingDigraphs.pyx":2661
  *                                      credibility,lowLimit,notHighLimit) )
  *             return action,\
  *                     keys[0],\             # <<<<<<<<<<<<<<
  *                     keys[0],\
  *                     credibility,\
  */
-    __pyx_t_1 = __Pyx_GetItemInt_List(__pyx_v_keys, 0, long, 1, __Pyx_PyInt_From_long, 1, 0, 1); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 2653, __pyx_L1_error)
+    __pyx_t_1 = __Pyx_GetItemInt_List(__pyx_v_keys, 0, long, 1, __Pyx_PyInt_From_long, 1, 0, 1); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 2661, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_1);
 
-    /* "cSparseIntegerOutrankingDigraphs.pyx":2654
+    /* "cSparseIntegerOutrankingDigraphs.pyx":2662
  *             return action,\
  *                     keys[0],\
  *                     keys[0],\             # <<<<<<<<<<<<<<
  *                     credibility,\
  *                     lowLimit,\
  */
-    __pyx_t_2 = __Pyx_GetItemInt_List(__pyx_v_keys, 0, long, 1, __Pyx_PyInt_From_long, 1, 0, 1); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 2654, __pyx_L1_error)
+    __pyx_t_2 = __Pyx_GetItemInt_List(__pyx_v_keys, 0, long, 1, __Pyx_PyInt_From_long, 1, 0, 1); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 2662, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_2);
 
-    /* "cSparseIntegerOutrankingDigraphs.pyx":2655
+    /* "cSparseIntegerOutrankingDigraphs.pyx":2663
  *                     keys[0],\
  *                     keys[0],\
  *                     credibility,\             # <<<<<<<<<<<<<<
  *                     lowLimit,\
  *                     notHighLimit
  */
-    __pyx_t_10 = __Pyx_PyInt_From_int(__pyx_v_credibility); if (unlikely(!__pyx_t_10)) __PYX_ERR(0, 2655, __pyx_L1_error)
+    __pyx_t_10 = __Pyx_PyInt_From_int(__pyx_v_credibility); if (unlikely(!__pyx_t_10)) __PYX_ERR(0, 2663, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_10);
 
-    /* "cSparseIntegerOutrankingDigraphs.pyx":2656
+    /* "cSparseIntegerOutrankingDigraphs.pyx":2664
  *                     keys[0],\
  *                     credibility,\
  *                     lowLimit,\             # <<<<<<<<<<<<<<
  *                     notHighLimit
  *             # return action,\
  */
-    __pyx_t_9 = __Pyx_PyInt_From_int(__pyx_v_lowLimit); if (unlikely(!__pyx_t_9)) __PYX_ERR(0, 2656, __pyx_L1_error)
+    __pyx_t_9 = __Pyx_PyInt_From_int(__pyx_v_lowLimit); if (unlikely(!__pyx_t_9)) __PYX_ERR(0, 2664, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_9);
 
-    /* "cSparseIntegerOutrankingDigraphs.pyx":2657
+    /* "cSparseIntegerOutrankingDigraphs.pyx":2665
  *                     credibility,\
  *                     lowLimit,\
  *                     notHighLimit             # <<<<<<<<<<<<<<
  *             # return action,\
  *             #         keys[0],\
  */
-    __pyx_t_8 = __Pyx_PyInt_From_int(__pyx_v_notHighLimit); if (unlikely(!__pyx_t_8)) __PYX_ERR(0, 2657, __pyx_L1_error)
+    __pyx_t_8 = __Pyx_PyInt_From_int(__pyx_v_notHighLimit); if (unlikely(!__pyx_t_8)) __PYX_ERR(0, 2665, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_8);
 
-    /* "cSparseIntegerOutrankingDigraphs.pyx":2652
+    /* "cSparseIntegerOutrankingDigraphs.pyx":2660
  *                                      action,\
  *                                      credibility,lowLimit,notHighLimit) )
  *             return action,\             # <<<<<<<<<<<<<<
  *                     keys[0],\
  *                     keys[0],\
  */
-    __pyx_t_18 = PyTuple_New(6); if (unlikely(!__pyx_t_18)) __PYX_ERR(0, 2652, __pyx_L1_error)
+    __pyx_t_18 = PyTuple_New(6); if (unlikely(!__pyx_t_18)) __PYX_ERR(0, 2660, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_18);
     __Pyx_GIVEREF(__pyx_t_7);
-    if (__Pyx_PyTuple_SET_ITEM(__pyx_t_18, 0, __pyx_t_7)) __PYX_ERR(0, 2652, __pyx_L1_error);
+    if (__Pyx_PyTuple_SET_ITEM(__pyx_t_18, 0, __pyx_t_7)) __PYX_ERR(0, 2660, __pyx_L1_error);
     __Pyx_GIVEREF(__pyx_t_1);
-    if (__Pyx_PyTuple_SET_ITEM(__pyx_t_18, 1, __pyx_t_1)) __PYX_ERR(0, 2652, __pyx_L1_error);
+    if (__Pyx_PyTuple_SET_ITEM(__pyx_t_18, 1, __pyx_t_1)) __PYX_ERR(0, 2660, __pyx_L1_error);
     __Pyx_GIVEREF(__pyx_t_2);
-    if (__Pyx_PyTuple_SET_ITEM(__pyx_t_18, 2, __pyx_t_2)) __PYX_ERR(0, 2652, __pyx_L1_error);
+    if (__Pyx_PyTuple_SET_ITEM(__pyx_t_18, 2, __pyx_t_2)) __PYX_ERR(0, 2660, __pyx_L1_error);
     __Pyx_GIVEREF(__pyx_t_10);
-    if (__Pyx_PyTuple_SET_ITEM(__pyx_t_18, 3, __pyx_t_10)) __PYX_ERR(0, 2652, __pyx_L1_error);
+    if (__Pyx_PyTuple_SET_ITEM(__pyx_t_18, 3, __pyx_t_10)) __PYX_ERR(0, 2660, __pyx_L1_error);
     __Pyx_GIVEREF(__pyx_t_9);
-    if (__Pyx_PyTuple_SET_ITEM(__pyx_t_18, 4, __pyx_t_9)) __PYX_ERR(0, 2652, __pyx_L1_error);
+    if (__Pyx_PyTuple_SET_ITEM(__pyx_t_18, 4, __pyx_t_9)) __PYX_ERR(0, 2660, __pyx_L1_error);
     __Pyx_GIVEREF(__pyx_t_8);
-    if (__Pyx_PyTuple_SET_ITEM(__pyx_t_18, 5, __pyx_t_8)) __PYX_ERR(0, 2652, __pyx_L1_error);
+    if (__Pyx_PyTuple_SET_ITEM(__pyx_t_18, 5, __pyx_t_8)) __PYX_ERR(0, 2660, __pyx_L1_error);
     __pyx_t_7 = 0;
     __pyx_t_1 = 0;
     __pyx_t_2 = 0;
@@ -54100,7 +54179,7 @@ static PyObject *__pyx_pf_32cSparseIntegerOutrankingDigraphs_24cQuantilesRanking
     __pyx_t_18 = 0;
     goto __pyx_L0;
 
-    /* "cSparseIntegerOutrankingDigraphs.pyx":2645
+    /* "cSparseIntegerOutrankingDigraphs.pyx":2653
  *         if n == 0:
  *             return None
  *         elif n == 1:             # <<<<<<<<<<<<<<
@@ -54110,7 +54189,7 @@ static PyObject *__pyx_pf_32cSparseIntegerOutrankingDigraphs_24cQuantilesRanking
     break;
     default:
 
-    /* "cSparseIntegerOutrankingDigraphs.pyx":2665
+    /* "cSparseIntegerOutrankingDigraphs.pyx":2673
  *             #         notHighLimit
  *         else:
  *             if Show:             # <<<<<<<<<<<<<<
@@ -54119,34 +54198,34 @@ static PyObject *__pyx_pf_32cSparseIntegerOutrankingDigraphs_24cQuantilesRanking
  */
     if (__pyx_v_Show) {
 
-      /* "cSparseIntegerOutrankingDigraphs.pyx":2666
+      /* "cSparseIntegerOutrankingDigraphs.pyx":2674
  *         else:
  *             if Show:
  *                 print('%s - %s: %s with credibility: %.2f = min(%.2f,%.2f)' % (\             # <<<<<<<<<<<<<<
  *                                      categories[keys[0]]['lowLimit'],\
  *                                      categories[keys[-1]]['highLimit'],\
  */
-      __pyx_t_18 = PyTuple_New(12); if (unlikely(!__pyx_t_18)) __PYX_ERR(0, 2666, __pyx_L1_error)
+      __pyx_t_18 = PyTuple_New(12); if (unlikely(!__pyx_t_18)) __PYX_ERR(0, 2674, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_18);
       __pyx_t_12 = 0;
       __pyx_t_17 = 127;
 
-      /* "cSparseIntegerOutrankingDigraphs.pyx":2667
+      /* "cSparseIntegerOutrankingDigraphs.pyx":2675
  *             if Show:
  *                 print('%s - %s: %s with credibility: %.2f = min(%.2f,%.2f)' % (\
  *                                      categories[keys[0]]['lowLimit'],\             # <<<<<<<<<<<<<<
  *                                      categories[keys[-1]]['highLimit'],\
  *                                      action,\
  */
-      __pyx_t_8 = __Pyx_GetItemInt_List(__pyx_v_keys, 0, long, 1, __Pyx_PyInt_From_long, 1, 0, 1); if (unlikely(!__pyx_t_8)) __PYX_ERR(0, 2667, __pyx_L1_error)
+      __pyx_t_8 = __Pyx_GetItemInt_List(__pyx_v_keys, 0, long, 1, __Pyx_PyInt_From_long, 1, 0, 1); if (unlikely(!__pyx_t_8)) __PYX_ERR(0, 2675, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_8);
-      __pyx_t_9 = __Pyx_PyObject_GetItem(__pyx_v_categories, __pyx_t_8); if (unlikely(!__pyx_t_9)) __PYX_ERR(0, 2667, __pyx_L1_error)
+      __pyx_t_9 = __Pyx_PyObject_GetItem(__pyx_v_categories, __pyx_t_8); if (unlikely(!__pyx_t_9)) __PYX_ERR(0, 2675, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_9);
       __Pyx_DECREF(__pyx_t_8); __pyx_t_8 = 0;
-      __pyx_t_8 = __Pyx_PyObject_Dict_GetItem(__pyx_t_9, __pyx_n_u_lowLimit); if (unlikely(!__pyx_t_8)) __PYX_ERR(0, 2667, __pyx_L1_error)
+      __pyx_t_8 = __Pyx_PyObject_Dict_GetItem(__pyx_t_9, __pyx_n_u_lowLimit); if (unlikely(!__pyx_t_8)) __PYX_ERR(0, 2675, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_8);
       __Pyx_DECREF(__pyx_t_9); __pyx_t_9 = 0;
-      __pyx_t_9 = __Pyx_PyObject_FormatSimpleAndDecref(PyObject_Unicode(__pyx_t_8), __pyx_empty_unicode); if (unlikely(!__pyx_t_9)) __PYX_ERR(0, 2667, __pyx_L1_error)
+      __pyx_t_9 = __Pyx_PyObject_FormatSimpleAndDecref(PyObject_Unicode(__pyx_t_8), __pyx_empty_unicode); if (unlikely(!__pyx_t_9)) __PYX_ERR(0, 2675, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_9);
       __Pyx_DECREF(__pyx_t_8); __pyx_t_8 = 0;
       __pyx_t_17 = (__Pyx_PyUnicode_MAX_CHAR_VALUE(__pyx_t_9) > __pyx_t_17) ? __Pyx_PyUnicode_MAX_CHAR_VALUE(__pyx_t_9) : __pyx_t_17;
@@ -54159,22 +54238,22 @@ static PyObject *__pyx_pf_32cSparseIntegerOutrankingDigraphs_24cQuantilesRanking
       __Pyx_GIVEREF(__pyx_kp_u__46);
       PyTuple_SET_ITEM(__pyx_t_18, 1, __pyx_kp_u__46);
 
-      /* "cSparseIntegerOutrankingDigraphs.pyx":2668
+      /* "cSparseIntegerOutrankingDigraphs.pyx":2676
  *                 print('%s - %s: %s with credibility: %.2f = min(%.2f,%.2f)' % (\
  *                                      categories[keys[0]]['lowLimit'],\
  *                                      categories[keys[-1]]['highLimit'],\             # <<<<<<<<<<<<<<
  *                                      action,\
  *                                      credibility,lowLimit,notHighLimit) )
  */
-      __pyx_t_9 = __Pyx_GetItemInt_List(__pyx_v_keys, -1L, long, 1, __Pyx_PyInt_From_long, 1, 1, 1); if (unlikely(!__pyx_t_9)) __PYX_ERR(0, 2668, __pyx_L1_error)
+      __pyx_t_9 = __Pyx_GetItemInt_List(__pyx_v_keys, -1L, long, 1, __Pyx_PyInt_From_long, 1, 1, 1); if (unlikely(!__pyx_t_9)) __PYX_ERR(0, 2676, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_9);
-      __pyx_t_8 = __Pyx_PyObject_GetItem(__pyx_v_categories, __pyx_t_9); if (unlikely(!__pyx_t_8)) __PYX_ERR(0, 2668, __pyx_L1_error)
+      __pyx_t_8 = __Pyx_PyObject_GetItem(__pyx_v_categories, __pyx_t_9); if (unlikely(!__pyx_t_8)) __PYX_ERR(0, 2676, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_8);
       __Pyx_DECREF(__pyx_t_9); __pyx_t_9 = 0;
-      __pyx_t_9 = __Pyx_PyObject_Dict_GetItem(__pyx_t_8, __pyx_n_u_highLimit); if (unlikely(!__pyx_t_9)) __PYX_ERR(0, 2668, __pyx_L1_error)
+      __pyx_t_9 = __Pyx_PyObject_Dict_GetItem(__pyx_t_8, __pyx_n_u_highLimit); if (unlikely(!__pyx_t_9)) __PYX_ERR(0, 2676, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_9);
       __Pyx_DECREF(__pyx_t_8); __pyx_t_8 = 0;
-      __pyx_t_8 = __Pyx_PyObject_FormatSimpleAndDecref(PyObject_Unicode(__pyx_t_9), __pyx_empty_unicode); if (unlikely(!__pyx_t_8)) __PYX_ERR(0, 2668, __pyx_L1_error)
+      __pyx_t_8 = __Pyx_PyObject_FormatSimpleAndDecref(PyObject_Unicode(__pyx_t_9), __pyx_empty_unicode); if (unlikely(!__pyx_t_8)) __PYX_ERR(0, 2676, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_8);
       __Pyx_DECREF(__pyx_t_9); __pyx_t_9 = 0;
       __pyx_t_17 = (__Pyx_PyUnicode_MAX_CHAR_VALUE(__pyx_t_8) > __pyx_t_17) ? __Pyx_PyUnicode_MAX_CHAR_VALUE(__pyx_t_8) : __pyx_t_17;
@@ -54187,14 +54266,14 @@ static PyObject *__pyx_pf_32cSparseIntegerOutrankingDigraphs_24cQuantilesRanking
       __Pyx_GIVEREF(__pyx_kp_u__32);
       PyTuple_SET_ITEM(__pyx_t_18, 3, __pyx_kp_u__32);
 
-      /* "cSparseIntegerOutrankingDigraphs.pyx":2669
+      /* "cSparseIntegerOutrankingDigraphs.pyx":2677
  *                                      categories[keys[0]]['lowLimit'],\
  *                                      categories[keys[-1]]['highLimit'],\
  *                                      action,\             # <<<<<<<<<<<<<<
  *                                      credibility,lowLimit,notHighLimit) )
  *             return action,\
  */
-      __pyx_t_8 = __Pyx_PyUnicode_From_int(__pyx_v_action, 0, ' ', 'd'); if (unlikely(!__pyx_t_8)) __PYX_ERR(0, 2669, __pyx_L1_error)
+      __pyx_t_8 = __Pyx_PyUnicode_From_int(__pyx_v_action, 0, ' ', 'd'); if (unlikely(!__pyx_t_8)) __PYX_ERR(0, 2677, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_8);
       __pyx_t_12 += __Pyx_PyUnicode_GET_LENGTH(__pyx_t_8);
       __Pyx_GIVEREF(__pyx_t_8);
@@ -54205,16 +54284,16 @@ static PyObject *__pyx_pf_32cSparseIntegerOutrankingDigraphs_24cQuantilesRanking
       __Pyx_GIVEREF(__pyx_kp_u_with_credibility);
       PyTuple_SET_ITEM(__pyx_t_18, 5, __pyx_kp_u_with_credibility);
 
-      /* "cSparseIntegerOutrankingDigraphs.pyx":2670
+      /* "cSparseIntegerOutrankingDigraphs.pyx":2678
  *                                      categories[keys[-1]]['highLimit'],\
  *                                      action,\
  *                                      credibility,lowLimit,notHighLimit) )             # <<<<<<<<<<<<<<
  *             return action,\
  *                     keys[0],\
  */
-      __pyx_t_8 = __Pyx_PyInt_From_int(__pyx_v_credibility); if (unlikely(!__pyx_t_8)) __PYX_ERR(0, 2670, __pyx_L1_error)
+      __pyx_t_8 = __Pyx_PyInt_From_int(__pyx_v_credibility); if (unlikely(!__pyx_t_8)) __PYX_ERR(0, 2678, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_8);
-      __pyx_t_9 = __Pyx_PyObject_Format(__pyx_t_8, __pyx_kp_u_2f); if (unlikely(!__pyx_t_9)) __PYX_ERR(0, 2670, __pyx_L1_error)
+      __pyx_t_9 = __Pyx_PyObject_Format(__pyx_t_8, __pyx_kp_u_2f); if (unlikely(!__pyx_t_9)) __PYX_ERR(0, 2678, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_9);
       __Pyx_DECREF(__pyx_t_8); __pyx_t_8 = 0;
       __pyx_t_17 = (__Pyx_PyUnicode_MAX_CHAR_VALUE(__pyx_t_9) > __pyx_t_17) ? __Pyx_PyUnicode_MAX_CHAR_VALUE(__pyx_t_9) : __pyx_t_17;
@@ -54226,9 +54305,9 @@ static PyObject *__pyx_pf_32cSparseIntegerOutrankingDigraphs_24cQuantilesRanking
       __pyx_t_12 += 7;
       __Pyx_GIVEREF(__pyx_kp_u_min_2);
       PyTuple_SET_ITEM(__pyx_t_18, 7, __pyx_kp_u_min_2);
-      __pyx_t_9 = __Pyx_PyInt_From_int(__pyx_v_lowLimit); if (unlikely(!__pyx_t_9)) __PYX_ERR(0, 2670, __pyx_L1_error)
+      __pyx_t_9 = __Pyx_PyInt_From_int(__pyx_v_lowLimit); if (unlikely(!__pyx_t_9)) __PYX_ERR(0, 2678, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_9);
-      __pyx_t_8 = __Pyx_PyObject_Format(__pyx_t_9, __pyx_kp_u_2f); if (unlikely(!__pyx_t_8)) __PYX_ERR(0, 2670, __pyx_L1_error)
+      __pyx_t_8 = __Pyx_PyObject_Format(__pyx_t_9, __pyx_kp_u_2f); if (unlikely(!__pyx_t_8)) __PYX_ERR(0, 2678, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_8);
       __Pyx_DECREF(__pyx_t_9); __pyx_t_9 = 0;
       __pyx_t_17 = (__Pyx_PyUnicode_MAX_CHAR_VALUE(__pyx_t_8) > __pyx_t_17) ? __Pyx_PyUnicode_MAX_CHAR_VALUE(__pyx_t_8) : __pyx_t_17;
@@ -54240,9 +54319,9 @@ static PyObject *__pyx_pf_32cSparseIntegerOutrankingDigraphs_24cQuantilesRanking
       __pyx_t_12 += 1;
       __Pyx_GIVEREF(__pyx_kp_u__47);
       PyTuple_SET_ITEM(__pyx_t_18, 9, __pyx_kp_u__47);
-      __pyx_t_8 = __Pyx_PyInt_From_int(__pyx_v_notHighLimit); if (unlikely(!__pyx_t_8)) __PYX_ERR(0, 2670, __pyx_L1_error)
+      __pyx_t_8 = __Pyx_PyInt_From_int(__pyx_v_notHighLimit); if (unlikely(!__pyx_t_8)) __PYX_ERR(0, 2678, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_8);
-      __pyx_t_9 = __Pyx_PyObject_Format(__pyx_t_8, __pyx_kp_u_2f); if (unlikely(!__pyx_t_9)) __PYX_ERR(0, 2670, __pyx_L1_error)
+      __pyx_t_9 = __Pyx_PyObject_Format(__pyx_t_8, __pyx_kp_u_2f); if (unlikely(!__pyx_t_9)) __PYX_ERR(0, 2678, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_9);
       __Pyx_DECREF(__pyx_t_8); __pyx_t_8 = 0;
       __pyx_t_17 = (__Pyx_PyUnicode_MAX_CHAR_VALUE(__pyx_t_9) > __pyx_t_17) ? __Pyx_PyUnicode_MAX_CHAR_VALUE(__pyx_t_9) : __pyx_t_17;
@@ -54255,22 +54334,22 @@ static PyObject *__pyx_pf_32cSparseIntegerOutrankingDigraphs_24cQuantilesRanking
       __Pyx_GIVEREF(__pyx_kp_u__38);
       PyTuple_SET_ITEM(__pyx_t_18, 11, __pyx_kp_u__38);
 
-      /* "cSparseIntegerOutrankingDigraphs.pyx":2666
+      /* "cSparseIntegerOutrankingDigraphs.pyx":2674
  *         else:
  *             if Show:
  *                 print('%s - %s: %s with credibility: %.2f = min(%.2f,%.2f)' % (\             # <<<<<<<<<<<<<<
  *                                      categories[keys[0]]['lowLimit'],\
  *                                      categories[keys[-1]]['highLimit'],\
  */
-      __pyx_t_9 = __Pyx_PyUnicode_Join(__pyx_t_18, 12, __pyx_t_12, __pyx_t_17); if (unlikely(!__pyx_t_9)) __PYX_ERR(0, 2666, __pyx_L1_error)
+      __pyx_t_9 = __Pyx_PyUnicode_Join(__pyx_t_18, 12, __pyx_t_12, __pyx_t_17); if (unlikely(!__pyx_t_9)) __PYX_ERR(0, 2674, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_9);
       __Pyx_DECREF(__pyx_t_18); __pyx_t_18 = 0;
-      __pyx_t_18 = __Pyx_PyObject_CallOneArg(__pyx_builtin_print, __pyx_t_9); if (unlikely(!__pyx_t_18)) __PYX_ERR(0, 2666, __pyx_L1_error)
+      __pyx_t_18 = __Pyx_PyObject_CallOneArg(__pyx_builtin_print, __pyx_t_9); if (unlikely(!__pyx_t_18)) __PYX_ERR(0, 2674, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_18);
       __Pyx_DECREF(__pyx_t_9); __pyx_t_9 = 0;
       __Pyx_DECREF(__pyx_t_18); __pyx_t_18 = 0;
 
-      /* "cSparseIntegerOutrankingDigraphs.pyx":2665
+      /* "cSparseIntegerOutrankingDigraphs.pyx":2673
  *             #         notHighLimit
  *         else:
  *             if Show:             # <<<<<<<<<<<<<<
@@ -54279,7 +54358,7 @@ static PyObject *__pyx_pf_32cSparseIntegerOutrankingDigraphs_24cQuantilesRanking
  */
     }
 
-    /* "cSparseIntegerOutrankingDigraphs.pyx":2671
+    /* "cSparseIntegerOutrankingDigraphs.pyx":2679
  *                                      action,\
  *                                      credibility,lowLimit,notHighLimit) )
  *             return action,\             # <<<<<<<<<<<<<<
@@ -54287,80 +54366,80 @@ static PyObject *__pyx_pf_32cSparseIntegerOutrankingDigraphs_24cQuantilesRanking
  *                     keys[-1],\
  */
     __Pyx_XDECREF(__pyx_r);
-    __pyx_t_18 = __Pyx_PyInt_From_int(__pyx_v_action); if (unlikely(!__pyx_t_18)) __PYX_ERR(0, 2671, __pyx_L1_error)
+    __pyx_t_18 = __Pyx_PyInt_From_int(__pyx_v_action); if (unlikely(!__pyx_t_18)) __PYX_ERR(0, 2679, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_18);
 
-    /* "cSparseIntegerOutrankingDigraphs.pyx":2672
+    /* "cSparseIntegerOutrankingDigraphs.pyx":2680
  *                                      credibility,lowLimit,notHighLimit) )
  *             return action,\
  *                     keys[0],\             # <<<<<<<<<<<<<<
  *                     keys[-1],\
  *                     credibility,\
  */
-    __pyx_t_9 = __Pyx_GetItemInt_List(__pyx_v_keys, 0, long, 1, __Pyx_PyInt_From_long, 1, 0, 1); if (unlikely(!__pyx_t_9)) __PYX_ERR(0, 2672, __pyx_L1_error)
+    __pyx_t_9 = __Pyx_GetItemInt_List(__pyx_v_keys, 0, long, 1, __Pyx_PyInt_From_long, 1, 0, 1); if (unlikely(!__pyx_t_9)) __PYX_ERR(0, 2680, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_9);
 
-    /* "cSparseIntegerOutrankingDigraphs.pyx":2673
+    /* "cSparseIntegerOutrankingDigraphs.pyx":2681
  *             return action,\
  *                     keys[0],\
  *                     keys[-1],\             # <<<<<<<<<<<<<<
  *                     credibility,\
  *                     lowLimit,\
  */
-    __pyx_t_8 = __Pyx_GetItemInt_List(__pyx_v_keys, -1L, long, 1, __Pyx_PyInt_From_long, 1, 1, 1); if (unlikely(!__pyx_t_8)) __PYX_ERR(0, 2673, __pyx_L1_error)
+    __pyx_t_8 = __Pyx_GetItemInt_List(__pyx_v_keys, -1L, long, 1, __Pyx_PyInt_From_long, 1, 1, 1); if (unlikely(!__pyx_t_8)) __PYX_ERR(0, 2681, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_8);
 
-    /* "cSparseIntegerOutrankingDigraphs.pyx":2674
+    /* "cSparseIntegerOutrankingDigraphs.pyx":2682
  *                     keys[0],\
  *                     keys[-1],\
  *                     credibility,\             # <<<<<<<<<<<<<<
  *                     lowLimit,\
  *                     notHighLimit
  */
-    __pyx_t_10 = __Pyx_PyInt_From_int(__pyx_v_credibility); if (unlikely(!__pyx_t_10)) __PYX_ERR(0, 2674, __pyx_L1_error)
+    __pyx_t_10 = __Pyx_PyInt_From_int(__pyx_v_credibility); if (unlikely(!__pyx_t_10)) __PYX_ERR(0, 2682, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_10);
 
-    /* "cSparseIntegerOutrankingDigraphs.pyx":2675
+    /* "cSparseIntegerOutrankingDigraphs.pyx":2683
  *                     keys[-1],\
  *                     credibility,\
  *                     lowLimit,\             # <<<<<<<<<<<<<<
  *                     notHighLimit
  *             # return action,\
  */
-    __pyx_t_2 = __Pyx_PyInt_From_int(__pyx_v_lowLimit); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 2675, __pyx_L1_error)
+    __pyx_t_2 = __Pyx_PyInt_From_int(__pyx_v_lowLimit); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 2683, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_2);
 
-    /* "cSparseIntegerOutrankingDigraphs.pyx":2676
+    /* "cSparseIntegerOutrankingDigraphs.pyx":2684
  *                     credibility,\
  *                     lowLimit,\
  *                     notHighLimit             # <<<<<<<<<<<<<<
  *             # return action,\
  *             #         keys[0],\
  */
-    __pyx_t_1 = __Pyx_PyInt_From_int(__pyx_v_notHighLimit); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 2676, __pyx_L1_error)
+    __pyx_t_1 = __Pyx_PyInt_From_int(__pyx_v_notHighLimit); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 2684, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_1);
 
-    /* "cSparseIntegerOutrankingDigraphs.pyx":2671
+    /* "cSparseIntegerOutrankingDigraphs.pyx":2679
  *                                      action,\
  *                                      credibility,lowLimit,notHighLimit) )
  *             return action,\             # <<<<<<<<<<<<<<
  *                     keys[0],\
  *                     keys[-1],\
  */
-    __pyx_t_7 = PyTuple_New(6); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 2671, __pyx_L1_error)
+    __pyx_t_7 = PyTuple_New(6); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 2679, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_7);
     __Pyx_GIVEREF(__pyx_t_18);
-    if (__Pyx_PyTuple_SET_ITEM(__pyx_t_7, 0, __pyx_t_18)) __PYX_ERR(0, 2671, __pyx_L1_error);
+    if (__Pyx_PyTuple_SET_ITEM(__pyx_t_7, 0, __pyx_t_18)) __PYX_ERR(0, 2679, __pyx_L1_error);
     __Pyx_GIVEREF(__pyx_t_9);
-    if (__Pyx_PyTuple_SET_ITEM(__pyx_t_7, 1, __pyx_t_9)) __PYX_ERR(0, 2671, __pyx_L1_error);
+    if (__Pyx_PyTuple_SET_ITEM(__pyx_t_7, 1, __pyx_t_9)) __PYX_ERR(0, 2679, __pyx_L1_error);
     __Pyx_GIVEREF(__pyx_t_8);
-    if (__Pyx_PyTuple_SET_ITEM(__pyx_t_7, 2, __pyx_t_8)) __PYX_ERR(0, 2671, __pyx_L1_error);
+    if (__Pyx_PyTuple_SET_ITEM(__pyx_t_7, 2, __pyx_t_8)) __PYX_ERR(0, 2679, __pyx_L1_error);
     __Pyx_GIVEREF(__pyx_t_10);
-    if (__Pyx_PyTuple_SET_ITEM(__pyx_t_7, 3, __pyx_t_10)) __PYX_ERR(0, 2671, __pyx_L1_error);
+    if (__Pyx_PyTuple_SET_ITEM(__pyx_t_7, 3, __pyx_t_10)) __PYX_ERR(0, 2679, __pyx_L1_error);
     __Pyx_GIVEREF(__pyx_t_2);
-    if (__Pyx_PyTuple_SET_ITEM(__pyx_t_7, 4, __pyx_t_2)) __PYX_ERR(0, 2671, __pyx_L1_error);
+    if (__Pyx_PyTuple_SET_ITEM(__pyx_t_7, 4, __pyx_t_2)) __PYX_ERR(0, 2679, __pyx_L1_error);
     __Pyx_GIVEREF(__pyx_t_1);
-    if (__Pyx_PyTuple_SET_ITEM(__pyx_t_7, 5, __pyx_t_1)) __PYX_ERR(0, 2671, __pyx_L1_error);
+    if (__Pyx_PyTuple_SET_ITEM(__pyx_t_7, 5, __pyx_t_1)) __PYX_ERR(0, 2679, __pyx_L1_error);
     __pyx_t_18 = 0;
     __pyx_t_9 = 0;
     __pyx_t_8 = 0;
@@ -54373,7 +54452,7 @@ static PyObject *__pyx_pf_32cSparseIntegerOutrankingDigraphs_24cQuantilesRanking
     break;
   }
 
-  /* "cSparseIntegerOutrankingDigraphs.pyx":2588
+  /* "cSparseIntegerOutrankingDigraphs.pyx":2596
  *         return componentsIntervals
  * 
  *     def computeActionCategories(self,int action,             # <<<<<<<<<<<<<<
@@ -54403,12 +54482,12 @@ static PyObject *__pyx_pf_32cSparseIntegerOutrankingDigraphs_24cQuantilesRanking
   return __pyx_r;
 }
 
-/* "cSparseIntegerOutrankingDigraphs.pyx":2684
+/* "cSparseIntegerOutrankingDigraphs.pyx":2692
  *             #         notHighLimit
  * 
  *     def computeCriterion2RankingCorrelation(self,criterion,             # <<<<<<<<<<<<<<
  *                                             bint Threading=False,\
- *                                     nbrOfCPUs=1,
+ *                                     nbrOfCPUs=None,
  */
 
 /* Python wrapper */
@@ -54456,8 +54535,24 @@ PyObject *__pyx_args, PyObject *__pyx_kwds
   __pyx_kwvalues = __Pyx_KwValues_FASTCALL(__pyx_args, __pyx_nargs);
   {
     PyObject **__pyx_pyargnames[] = {&__pyx_n_s_self,&__pyx_n_s_criterion,&__pyx_n_s_Threading,&__pyx_n_s_nbrOfCPUs,&__pyx_n_s_startMethod,&__pyx_n_s_Debug,&__pyx_n_s_Comments,0};
-    values[3] = __Pyx_Arg_NewRef_FASTCALL(((PyObject *)((PyObject *)__pyx_int_1)));
-    values[4] = __Pyx_Arg_NewRef_FASTCALL(((PyObject *)((PyObject*)__pyx_n_u_spawn)));
+
+    /* "cSparseIntegerOutrankingDigraphs.pyx":2694
+ *     def computeCriterion2RankingCorrelation(self,criterion,
+ *                                             bint Threading=False,\
+ *                                     nbrOfCPUs=None,             # <<<<<<<<<<<<<<
+ *                                             startMethod=None,
+ *                                     bint Debug=False,
+ */
+    values[3] = __Pyx_Arg_NewRef_FASTCALL(((PyObject *)Py_None));
+
+    /* "cSparseIntegerOutrankingDigraphs.pyx":2695
+ *                                             bint Threading=False,\
+ *                                     nbrOfCPUs=None,
+ *                                             startMethod=None,             # <<<<<<<<<<<<<<
+ *                                     bint Debug=False,
+ *                                     bint Comments=False):
+ */
+    values[4] = __Pyx_Arg_NewRef_FASTCALL(((PyObject *)Py_None));
     if (__pyx_kwds) {
       Py_ssize_t kw_args;
       switch (__pyx_nargs) {
@@ -54485,7 +54580,7 @@ PyObject *__pyx_args, PyObject *__pyx_kwds
           (void)__Pyx_Arg_NewRef_FASTCALL(values[0]);
           kw_args--;
         }
-        else if (unlikely(PyErr_Occurred())) __PYX_ERR(0, 2684, __pyx_L3_error)
+        else if (unlikely(PyErr_Occurred())) __PYX_ERR(0, 2692, __pyx_L3_error)
         else goto __pyx_L5_argtuple_error;
         CYTHON_FALLTHROUGH;
         case  1:
@@ -54493,49 +54588,49 @@ PyObject *__pyx_args, PyObject *__pyx_kwds
           (void)__Pyx_Arg_NewRef_FASTCALL(values[1]);
           kw_args--;
         }
-        else if (unlikely(PyErr_Occurred())) __PYX_ERR(0, 2684, __pyx_L3_error)
+        else if (unlikely(PyErr_Occurred())) __PYX_ERR(0, 2692, __pyx_L3_error)
         else {
-          __Pyx_RaiseArgtupleInvalid("computeCriterion2RankingCorrelation", 0, 2, 7, 1); __PYX_ERR(0, 2684, __pyx_L3_error)
+          __Pyx_RaiseArgtupleInvalid("computeCriterion2RankingCorrelation", 0, 2, 7, 1); __PYX_ERR(0, 2692, __pyx_L3_error)
         }
         CYTHON_FALLTHROUGH;
         case  2:
         if (kw_args > 0) {
           PyObject* value = __Pyx_GetKwValue_FASTCALL(__pyx_kwds, __pyx_kwvalues, __pyx_n_s_Threading);
           if (value) { values[2] = __Pyx_Arg_NewRef_FASTCALL(value); kw_args--; }
-          else if (unlikely(PyErr_Occurred())) __PYX_ERR(0, 2684, __pyx_L3_error)
+          else if (unlikely(PyErr_Occurred())) __PYX_ERR(0, 2692, __pyx_L3_error)
         }
         CYTHON_FALLTHROUGH;
         case  3:
         if (kw_args > 0) {
           PyObject* value = __Pyx_GetKwValue_FASTCALL(__pyx_kwds, __pyx_kwvalues, __pyx_n_s_nbrOfCPUs);
           if (value) { values[3] = __Pyx_Arg_NewRef_FASTCALL(value); kw_args--; }
-          else if (unlikely(PyErr_Occurred())) __PYX_ERR(0, 2684, __pyx_L3_error)
+          else if (unlikely(PyErr_Occurred())) __PYX_ERR(0, 2692, __pyx_L3_error)
         }
         CYTHON_FALLTHROUGH;
         case  4:
         if (kw_args > 0) {
           PyObject* value = __Pyx_GetKwValue_FASTCALL(__pyx_kwds, __pyx_kwvalues, __pyx_n_s_startMethod);
           if (value) { values[4] = __Pyx_Arg_NewRef_FASTCALL(value); kw_args--; }
-          else if (unlikely(PyErr_Occurred())) __PYX_ERR(0, 2684, __pyx_L3_error)
+          else if (unlikely(PyErr_Occurred())) __PYX_ERR(0, 2692, __pyx_L3_error)
         }
         CYTHON_FALLTHROUGH;
         case  5:
         if (kw_args > 0) {
           PyObject* value = __Pyx_GetKwValue_FASTCALL(__pyx_kwds, __pyx_kwvalues, __pyx_n_s_Debug);
           if (value) { values[5] = __Pyx_Arg_NewRef_FASTCALL(value); kw_args--; }
-          else if (unlikely(PyErr_Occurred())) __PYX_ERR(0, 2684, __pyx_L3_error)
+          else if (unlikely(PyErr_Occurred())) __PYX_ERR(0, 2692, __pyx_L3_error)
         }
         CYTHON_FALLTHROUGH;
         case  6:
         if (kw_args > 0) {
           PyObject* value = __Pyx_GetKwValue_FASTCALL(__pyx_kwds, __pyx_kwvalues, __pyx_n_s_Comments);
           if (value) { values[6] = __Pyx_Arg_NewRef_FASTCALL(value); kw_args--; }
-          else if (unlikely(PyErr_Occurred())) __PYX_ERR(0, 2684, __pyx_L3_error)
+          else if (unlikely(PyErr_Occurred())) __PYX_ERR(0, 2692, __pyx_L3_error)
         }
       }
       if (unlikely(kw_args > 0)) {
         const Py_ssize_t kwd_pos_args = __pyx_nargs;
-        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_kwvalues, __pyx_pyargnames, 0, values + 0, kwd_pos_args, "computeCriterion2RankingCorrelation") < 0)) __PYX_ERR(0, 2684, __pyx_L3_error)
+        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_kwvalues, __pyx_pyargnames, 0, values + 0, kwd_pos_args, "computeCriterion2RankingCorrelation") < 0)) __PYX_ERR(0, 2692, __pyx_L3_error)
       }
     } else {
       switch (__pyx_nargs) {
@@ -54558,27 +54653,27 @@ PyObject *__pyx_args, PyObject *__pyx_kwds
     __pyx_v_self = values[0];
     __pyx_v_criterion = values[1];
     if (values[2]) {
-      __pyx_v_Threading = __Pyx_PyObject_IsTrue(values[2]); if (unlikely((__pyx_v_Threading == (int)-1) && PyErr_Occurred())) __PYX_ERR(0, 2685, __pyx_L3_error)
+      __pyx_v_Threading = __Pyx_PyObject_IsTrue(values[2]); if (unlikely((__pyx_v_Threading == (int)-1) && PyErr_Occurred())) __PYX_ERR(0, 2693, __pyx_L3_error)
     } else {
 
-      /* "cSparseIntegerOutrankingDigraphs.pyx":2685
+      /* "cSparseIntegerOutrankingDigraphs.pyx":2693
  * 
  *     def computeCriterion2RankingCorrelation(self,criterion,
  *                                             bint Threading=False,\             # <<<<<<<<<<<<<<
- *                                     nbrOfCPUs=1,
- *                                             startMethod='spawn',
+ *                                     nbrOfCPUs=None,
+ *                                             startMethod=None,
  */
       __pyx_v_Threading = ((int)((int)0));
     }
     __pyx_v_nbrOfCPUs = values[3];
     __pyx_v_startMethod = values[4];
     if (values[5]) {
-      __pyx_v_Debug = __Pyx_PyObject_IsTrue(values[5]); if (unlikely((__pyx_v_Debug == (int)-1) && PyErr_Occurred())) __PYX_ERR(0, 2688, __pyx_L3_error)
+      __pyx_v_Debug = __Pyx_PyObject_IsTrue(values[5]); if (unlikely((__pyx_v_Debug == (int)-1) && PyErr_Occurred())) __PYX_ERR(0, 2696, __pyx_L3_error)
     } else {
 
-      /* "cSparseIntegerOutrankingDigraphs.pyx":2688
- *                                     nbrOfCPUs=1,
- *                                             startMethod='spawn',
+      /* "cSparseIntegerOutrankingDigraphs.pyx":2696
+ *                                     nbrOfCPUs=None,
+ *                                             startMethod=None,
  *                                     bint Debug=False,             # <<<<<<<<<<<<<<
  *                                     bint Comments=False):
  *         """
@@ -54586,11 +54681,11 @@ PyObject *__pyx_args, PyObject *__pyx_kwds
       __pyx_v_Debug = ((int)((int)0));
     }
     if (values[6]) {
-      __pyx_v_Comments = __Pyx_PyObject_IsTrue(values[6]); if (unlikely((__pyx_v_Comments == (int)-1) && PyErr_Occurred())) __PYX_ERR(0, 2689, __pyx_L3_error)
+      __pyx_v_Comments = __Pyx_PyObject_IsTrue(values[6]); if (unlikely((__pyx_v_Comments == (int)-1) && PyErr_Occurred())) __PYX_ERR(0, 2697, __pyx_L3_error)
     } else {
 
-      /* "cSparseIntegerOutrankingDigraphs.pyx":2689
- *                                             startMethod='spawn',
+      /* "cSparseIntegerOutrankingDigraphs.pyx":2697
+ *                                             startMethod=None,
  *                                     bint Debug=False,
  *                                     bint Comments=False):             # <<<<<<<<<<<<<<
  *         """
@@ -54601,7 +54696,7 @@ PyObject *__pyx_args, PyObject *__pyx_kwds
   }
   goto __pyx_L6_skip;
   __pyx_L5_argtuple_error:;
-  __Pyx_RaiseArgtupleInvalid("computeCriterion2RankingCorrelation", 0, 2, 7, __pyx_nargs); __PYX_ERR(0, 2684, __pyx_L3_error)
+  __Pyx_RaiseArgtupleInvalid("computeCriterion2RankingCorrelation", 0, 2, 7, __pyx_nargs); __PYX_ERR(0, 2692, __pyx_L3_error)
   __pyx_L6_skip:;
   goto __pyx_L4_argument_unpacking_done;
   __pyx_L3_error:;
@@ -54617,12 +54712,12 @@ PyObject *__pyx_args, PyObject *__pyx_kwds
   __pyx_L4_argument_unpacking_done:;
   __pyx_r = __pyx_pf_32cSparseIntegerOutrankingDigraphs_24cQuantilesRankingDigraph_6computeCriterion2RankingCorrelation(__pyx_self, __pyx_v_self, __pyx_v_criterion, __pyx_v_Threading, __pyx_v_nbrOfCPUs, __pyx_v_startMethod, __pyx_v_Debug, __pyx_v_Comments);
 
-  /* "cSparseIntegerOutrankingDigraphs.pyx":2684
+  /* "cSparseIntegerOutrankingDigraphs.pyx":2692
  *             #         notHighLimit
  * 
  *     def computeCriterion2RankingCorrelation(self,criterion,             # <<<<<<<<<<<<<<
  *                                             bint Threading=False,\
- *                                     nbrOfCPUs=1,
+ *                                     nbrOfCPUs=None,
  */
 
   /* function exit code */
@@ -54653,73 +54748,73 @@ static PyObject *__pyx_pf_32cSparseIntegerOutrankingDigraphs_24cQuantilesRanking
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("computeCriterion2RankingCorrelation", 1);
 
-  /* "cSparseIntegerOutrankingDigraphs.pyx":2702
+  /* "cSparseIntegerOutrankingDigraphs.pyx":2710
  * 
  *         """
  *         gc = BipolarOutrankingDigraph(self,coalition=[criterion],             # <<<<<<<<<<<<<<
  *                                       Normalized=True,CopyPerfTab=False,
  *                                       Threading=Threading,nbrCores=nbrOfCPUs,
  */
-  __Pyx_GetModuleGlobalName(__pyx_t_1, __pyx_n_s_BipolarOutrankingDigraph); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 2702, __pyx_L1_error)
+  __Pyx_GetModuleGlobalName(__pyx_t_1, __pyx_n_s_BipolarOutrankingDigraph); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 2710, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
-  __pyx_t_2 = PyTuple_New(1); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 2702, __pyx_L1_error)
+  __pyx_t_2 = PyTuple_New(1); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 2710, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
   __Pyx_INCREF(__pyx_v_self);
   __Pyx_GIVEREF(__pyx_v_self);
-  if (__Pyx_PyTuple_SET_ITEM(__pyx_t_2, 0, __pyx_v_self)) __PYX_ERR(0, 2702, __pyx_L1_error);
-  __pyx_t_3 = __Pyx_PyDict_NewPresized(6); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 2702, __pyx_L1_error)
+  if (__Pyx_PyTuple_SET_ITEM(__pyx_t_2, 0, __pyx_v_self)) __PYX_ERR(0, 2710, __pyx_L1_error);
+  __pyx_t_3 = __Pyx_PyDict_NewPresized(6); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 2710, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_3);
-  __pyx_t_4 = PyList_New(1); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 2702, __pyx_L1_error)
+  __pyx_t_4 = PyList_New(1); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 2710, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_4);
   __Pyx_INCREF(__pyx_v_criterion);
   __Pyx_GIVEREF(__pyx_v_criterion);
-  if (__Pyx_PyList_SET_ITEM(__pyx_t_4, 0, __pyx_v_criterion)) __PYX_ERR(0, 2702, __pyx_L1_error);
-  if (PyDict_SetItem(__pyx_t_3, __pyx_n_s_coalition, __pyx_t_4) < 0) __PYX_ERR(0, 2702, __pyx_L1_error)
+  if (__Pyx_PyList_SET_ITEM(__pyx_t_4, 0, __pyx_v_criterion)) __PYX_ERR(0, 2710, __pyx_L1_error);
+  if (PyDict_SetItem(__pyx_t_3, __pyx_n_s_coalition, __pyx_t_4) < 0) __PYX_ERR(0, 2710, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
 
-  /* "cSparseIntegerOutrankingDigraphs.pyx":2703
+  /* "cSparseIntegerOutrankingDigraphs.pyx":2711
  *         """
  *         gc = BipolarOutrankingDigraph(self,coalition=[criterion],
  *                                       Normalized=True,CopyPerfTab=False,             # <<<<<<<<<<<<<<
  *                                       Threading=Threading,nbrCores=nbrOfCPUs,
  *                                       Comments=Comments)
  */
-  if (PyDict_SetItem(__pyx_t_3, __pyx_n_s_Normalized, Py_True) < 0) __PYX_ERR(0, 2702, __pyx_L1_error)
-  if (PyDict_SetItem(__pyx_t_3, __pyx_n_s_CopyPerfTab, Py_False) < 0) __PYX_ERR(0, 2702, __pyx_L1_error)
+  if (PyDict_SetItem(__pyx_t_3, __pyx_n_s_Normalized, Py_True) < 0) __PYX_ERR(0, 2710, __pyx_L1_error)
+  if (PyDict_SetItem(__pyx_t_3, __pyx_n_s_CopyPerfTab, Py_False) < 0) __PYX_ERR(0, 2710, __pyx_L1_error)
 
-  /* "cSparseIntegerOutrankingDigraphs.pyx":2704
+  /* "cSparseIntegerOutrankingDigraphs.pyx":2712
  *         gc = BipolarOutrankingDigraph(self,coalition=[criterion],
  *                                       Normalized=True,CopyPerfTab=False,
  *                                       Threading=Threading,nbrCores=nbrOfCPUs,             # <<<<<<<<<<<<<<
  *                                       Comments=Comments)
  *         globalOrdering = self.ranking2Preorder(self.boostedRanking)
  */
-  __pyx_t_4 = __Pyx_PyBool_FromLong(__pyx_v_Threading); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 2704, __pyx_L1_error)
+  __pyx_t_4 = __Pyx_PyBool_FromLong(__pyx_v_Threading); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 2712, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_4);
-  if (PyDict_SetItem(__pyx_t_3, __pyx_n_s_Threading, __pyx_t_4) < 0) __PYX_ERR(0, 2702, __pyx_L1_error)
+  if (PyDict_SetItem(__pyx_t_3, __pyx_n_s_Threading, __pyx_t_4) < 0) __PYX_ERR(0, 2710, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
-  if (PyDict_SetItem(__pyx_t_3, __pyx_n_s_nbrCores, __pyx_v_nbrOfCPUs) < 0) __PYX_ERR(0, 2702, __pyx_L1_error)
+  if (PyDict_SetItem(__pyx_t_3, __pyx_n_s_nbrCores, __pyx_v_nbrOfCPUs) < 0) __PYX_ERR(0, 2710, __pyx_L1_error)
 
-  /* "cSparseIntegerOutrankingDigraphs.pyx":2705
+  /* "cSparseIntegerOutrankingDigraphs.pyx":2713
  *                                       Normalized=True,CopyPerfTab=False,
  *                                       Threading=Threading,nbrCores=nbrOfCPUs,
  *                                       Comments=Comments)             # <<<<<<<<<<<<<<
  *         globalOrdering = self.ranking2Preorder(self.boostedRanking)
  *         globalRelation = gc.computePreorderRelation(globalOrdering)
  */
-  __pyx_t_4 = __Pyx_PyBool_FromLong(__pyx_v_Comments); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 2705, __pyx_L1_error)
+  __pyx_t_4 = __Pyx_PyBool_FromLong(__pyx_v_Comments); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 2713, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_4);
-  if (PyDict_SetItem(__pyx_t_3, __pyx_n_s_Comments, __pyx_t_4) < 0) __PYX_ERR(0, 2702, __pyx_L1_error)
+  if (PyDict_SetItem(__pyx_t_3, __pyx_n_s_Comments, __pyx_t_4) < 0) __PYX_ERR(0, 2710, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
 
-  /* "cSparseIntegerOutrankingDigraphs.pyx":2702
+  /* "cSparseIntegerOutrankingDigraphs.pyx":2710
  * 
  *         """
  *         gc = BipolarOutrankingDigraph(self,coalition=[criterion],             # <<<<<<<<<<<<<<
  *                                       Normalized=True,CopyPerfTab=False,
  *                                       Threading=Threading,nbrCores=nbrOfCPUs,
  */
-  __pyx_t_4 = __Pyx_PyObject_Call(__pyx_t_1, __pyx_t_2, __pyx_t_3); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 2702, __pyx_L1_error)
+  __pyx_t_4 = __Pyx_PyObject_Call(__pyx_t_1, __pyx_t_2, __pyx_t_3); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 2710, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_4);
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
@@ -54727,16 +54822,16 @@ static PyObject *__pyx_pf_32cSparseIntegerOutrankingDigraphs_24cQuantilesRanking
   __pyx_v_gc = __pyx_t_4;
   __pyx_t_4 = 0;
 
-  /* "cSparseIntegerOutrankingDigraphs.pyx":2706
+  /* "cSparseIntegerOutrankingDigraphs.pyx":2714
  *                                       Threading=Threading,nbrCores=nbrOfCPUs,
  *                                       Comments=Comments)
  *         globalOrdering = self.ranking2Preorder(self.boostedRanking)             # <<<<<<<<<<<<<<
  *         globalRelation = gc.computePreorderRelation(globalOrdering)
  *         corr = gc.computeOrdinalCorrelation(globalRelation)
  */
-  __pyx_t_3 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_n_s_ranking2Preorder); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 2706, __pyx_L1_error)
+  __pyx_t_3 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_n_s_ranking2Preorder); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 2714, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_3);
-  __pyx_t_2 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_n_s_boostedRanking); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 2706, __pyx_L1_error)
+  __pyx_t_2 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_n_s_boostedRanking); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 2714, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
   __pyx_t_1 = NULL;
   __pyx_t_5 = 0;
@@ -54757,21 +54852,21 @@ static PyObject *__pyx_pf_32cSparseIntegerOutrankingDigraphs_24cQuantilesRanking
     __pyx_t_4 = __Pyx_PyObject_FastCall(__pyx_t_3, __pyx_callargs+1-__pyx_t_5, 1+__pyx_t_5);
     __Pyx_XDECREF(__pyx_t_1); __pyx_t_1 = 0;
     __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
-    if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 2706, __pyx_L1_error)
+    if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 2714, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_4);
     __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
   }
   __pyx_v_globalOrdering = __pyx_t_4;
   __pyx_t_4 = 0;
 
-  /* "cSparseIntegerOutrankingDigraphs.pyx":2707
+  /* "cSparseIntegerOutrankingDigraphs.pyx":2715
  *                                       Comments=Comments)
  *         globalOrdering = self.ranking2Preorder(self.boostedRanking)
  *         globalRelation = gc.computePreorderRelation(globalOrdering)             # <<<<<<<<<<<<<<
  *         corr = gc.computeOrdinalCorrelation(globalRelation)
  *         if Debug:
  */
-  __pyx_t_3 = __Pyx_PyObject_GetAttrStr(__pyx_v_gc, __pyx_n_s_computePreorderRelation); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 2707, __pyx_L1_error)
+  __pyx_t_3 = __Pyx_PyObject_GetAttrStr(__pyx_v_gc, __pyx_n_s_computePreorderRelation); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 2715, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_3);
   __pyx_t_2 = NULL;
   __pyx_t_5 = 0;
@@ -54791,21 +54886,21 @@ static PyObject *__pyx_pf_32cSparseIntegerOutrankingDigraphs_24cQuantilesRanking
     PyObject *__pyx_callargs[2] = {__pyx_t_2, __pyx_v_globalOrdering};
     __pyx_t_4 = __Pyx_PyObject_FastCall(__pyx_t_3, __pyx_callargs+1-__pyx_t_5, 1+__pyx_t_5);
     __Pyx_XDECREF(__pyx_t_2); __pyx_t_2 = 0;
-    if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 2707, __pyx_L1_error)
+    if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 2715, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_4);
     __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
   }
   __pyx_v_globalRelation = __pyx_t_4;
   __pyx_t_4 = 0;
 
-  /* "cSparseIntegerOutrankingDigraphs.pyx":2708
+  /* "cSparseIntegerOutrankingDigraphs.pyx":2716
  *         globalOrdering = self.ranking2Preorder(self.boostedRanking)
  *         globalRelation = gc.computePreorderRelation(globalOrdering)
  *         corr = gc.computeOrdinalCorrelation(globalRelation)             # <<<<<<<<<<<<<<
  *         if Debug:
  *             print(corr)
  */
-  __pyx_t_3 = __Pyx_PyObject_GetAttrStr(__pyx_v_gc, __pyx_n_s_computeOrdinalCorrelation); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 2708, __pyx_L1_error)
+  __pyx_t_3 = __Pyx_PyObject_GetAttrStr(__pyx_v_gc, __pyx_n_s_computeOrdinalCorrelation); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 2716, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_3);
   __pyx_t_2 = NULL;
   __pyx_t_5 = 0;
@@ -54825,14 +54920,14 @@ static PyObject *__pyx_pf_32cSparseIntegerOutrankingDigraphs_24cQuantilesRanking
     PyObject *__pyx_callargs[2] = {__pyx_t_2, __pyx_v_globalRelation};
     __pyx_t_4 = __Pyx_PyObject_FastCall(__pyx_t_3, __pyx_callargs+1-__pyx_t_5, 1+__pyx_t_5);
     __Pyx_XDECREF(__pyx_t_2); __pyx_t_2 = 0;
-    if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 2708, __pyx_L1_error)
+    if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 2716, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_4);
     __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
   }
   __pyx_v_corr = __pyx_t_4;
   __pyx_t_4 = 0;
 
-  /* "cSparseIntegerOutrankingDigraphs.pyx":2709
+  /* "cSparseIntegerOutrankingDigraphs.pyx":2717
  *         globalRelation = gc.computePreorderRelation(globalOrdering)
  *         corr = gc.computeOrdinalCorrelation(globalRelation)
  *         if Debug:             # <<<<<<<<<<<<<<
@@ -54841,18 +54936,18 @@ static PyObject *__pyx_pf_32cSparseIntegerOutrankingDigraphs_24cQuantilesRanking
  */
   if (__pyx_v_Debug) {
 
-    /* "cSparseIntegerOutrankingDigraphs.pyx":2710
+    /* "cSparseIntegerOutrankingDigraphs.pyx":2718
  *         corr = gc.computeOrdinalCorrelation(globalRelation)
  *         if Debug:
  *             print(corr)             # <<<<<<<<<<<<<<
  *         return corr
  * 
  */
-    __pyx_t_4 = __Pyx_PyObject_CallOneArg(__pyx_builtin_print, __pyx_v_corr); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 2710, __pyx_L1_error)
+    __pyx_t_4 = __Pyx_PyObject_CallOneArg(__pyx_builtin_print, __pyx_v_corr); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 2718, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_4);
     __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
 
-    /* "cSparseIntegerOutrankingDigraphs.pyx":2709
+    /* "cSparseIntegerOutrankingDigraphs.pyx":2717
  *         globalRelation = gc.computePreorderRelation(globalOrdering)
  *         corr = gc.computeOrdinalCorrelation(globalRelation)
  *         if Debug:             # <<<<<<<<<<<<<<
@@ -54861,7 +54956,7 @@ static PyObject *__pyx_pf_32cSparseIntegerOutrankingDigraphs_24cQuantilesRanking
  */
   }
 
-  /* "cSparseIntegerOutrankingDigraphs.pyx":2711
+  /* "cSparseIntegerOutrankingDigraphs.pyx":2719
  *         if Debug:
  *             print(corr)
  *         return corr             # <<<<<<<<<<<<<<
@@ -54873,12 +54968,12 @@ static PyObject *__pyx_pf_32cSparseIntegerOutrankingDigraphs_24cQuantilesRanking
   __pyx_r = __pyx_v_corr;
   goto __pyx_L0;
 
-  /* "cSparseIntegerOutrankingDigraphs.pyx":2684
+  /* "cSparseIntegerOutrankingDigraphs.pyx":2692
  *             #         notHighLimit
  * 
  *     def computeCriterion2RankingCorrelation(self,criterion,             # <<<<<<<<<<<<<<
  *                                             bint Threading=False,\
- *                                     nbrOfCPUs=1,
+ *                                     nbrOfCPUs=None,
  */
 
   /* function exit code */
@@ -54899,7 +54994,7 @@ static PyObject *__pyx_pf_32cSparseIntegerOutrankingDigraphs_24cQuantilesRanking
   return __pyx_r;
 }
 
-/* "cSparseIntegerOutrankingDigraphs.pyx":2713
+/* "cSparseIntegerOutrankingDigraphs.pyx":2721
  *         return corr
  * 
  *     def computeMarginalVersusGlobalOutrankingCorrelations(self,             # <<<<<<<<<<<<<<
@@ -54928,7 +55023,7 @@ PyObject *__pyx_args, PyObject *__pyx_kwds
   int __pyx_v_Sorted;
   int __pyx_v_ValuedCorrelation;
   int __pyx_v_Threading;
-  CYTHON_UNUSED PyObject *__pyx_v_startMethod = 0;
+  PyObject *__pyx_v_startMethod = 0;
   PyObject *__pyx_v_nbrCores = 0;
   CYTHON_UNUSED int __pyx_v_Comments;
   #if !CYTHON_METH_FASTCALL
@@ -54952,11 +55047,19 @@ PyObject *__pyx_args, PyObject *__pyx_kwds
   __pyx_kwvalues = __Pyx_KwValues_FASTCALL(__pyx_args, __pyx_nargs);
   {
     PyObject **__pyx_pyargnames[] = {&__pyx_n_s_self,&__pyx_n_s_Sorted,&__pyx_n_s_ValuedCorrelation,&__pyx_n_s_Threading,&__pyx_n_s_startMethod,&__pyx_n_s_nbrCores,&__pyx_n_s_Comments,0};
-    values[4] = __Pyx_Arg_NewRef_FASTCALL(((PyObject *)((PyObject*)__pyx_n_u_spawn)));
 
-    /* "cSparseIntegerOutrankingDigraphs.pyx":2718
+    /* "cSparseIntegerOutrankingDigraphs.pyx":2725
+ *                                 bint ValuedCorrelation=False,
  *                                 bint Threading=False,
- *                                 startMethod='spawn',
+ *                                 startMethod=None,             # <<<<<<<<<<<<<<
+ *                                 nbrCores=None,\
+ *                                 bint Comments=False):
+ */
+    values[4] = __Pyx_Arg_NewRef_FASTCALL(((PyObject *)Py_None));
+
+    /* "cSparseIntegerOutrankingDigraphs.pyx":2726
+ *                                 bint Threading=False,
+ *                                 startMethod=None,
  *                                 nbrCores=None,\             # <<<<<<<<<<<<<<
  *                                 bint Comments=False):
  *         """
@@ -54989,54 +55092,54 @@ PyObject *__pyx_args, PyObject *__pyx_kwds
           (void)__Pyx_Arg_NewRef_FASTCALL(values[0]);
           kw_args--;
         }
-        else if (unlikely(PyErr_Occurred())) __PYX_ERR(0, 2713, __pyx_L3_error)
+        else if (unlikely(PyErr_Occurred())) __PYX_ERR(0, 2721, __pyx_L3_error)
         else goto __pyx_L5_argtuple_error;
         CYTHON_FALLTHROUGH;
         case  1:
         if (kw_args > 0) {
           PyObject* value = __Pyx_GetKwValue_FASTCALL(__pyx_kwds, __pyx_kwvalues, __pyx_n_s_Sorted);
           if (value) { values[1] = __Pyx_Arg_NewRef_FASTCALL(value); kw_args--; }
-          else if (unlikely(PyErr_Occurred())) __PYX_ERR(0, 2713, __pyx_L3_error)
+          else if (unlikely(PyErr_Occurred())) __PYX_ERR(0, 2721, __pyx_L3_error)
         }
         CYTHON_FALLTHROUGH;
         case  2:
         if (kw_args > 0) {
           PyObject* value = __Pyx_GetKwValue_FASTCALL(__pyx_kwds, __pyx_kwvalues, __pyx_n_s_ValuedCorrelation);
           if (value) { values[2] = __Pyx_Arg_NewRef_FASTCALL(value); kw_args--; }
-          else if (unlikely(PyErr_Occurred())) __PYX_ERR(0, 2713, __pyx_L3_error)
+          else if (unlikely(PyErr_Occurred())) __PYX_ERR(0, 2721, __pyx_L3_error)
         }
         CYTHON_FALLTHROUGH;
         case  3:
         if (kw_args > 0) {
           PyObject* value = __Pyx_GetKwValue_FASTCALL(__pyx_kwds, __pyx_kwvalues, __pyx_n_s_Threading);
           if (value) { values[3] = __Pyx_Arg_NewRef_FASTCALL(value); kw_args--; }
-          else if (unlikely(PyErr_Occurred())) __PYX_ERR(0, 2713, __pyx_L3_error)
+          else if (unlikely(PyErr_Occurred())) __PYX_ERR(0, 2721, __pyx_L3_error)
         }
         CYTHON_FALLTHROUGH;
         case  4:
         if (kw_args > 0) {
           PyObject* value = __Pyx_GetKwValue_FASTCALL(__pyx_kwds, __pyx_kwvalues, __pyx_n_s_startMethod);
           if (value) { values[4] = __Pyx_Arg_NewRef_FASTCALL(value); kw_args--; }
-          else if (unlikely(PyErr_Occurred())) __PYX_ERR(0, 2713, __pyx_L3_error)
+          else if (unlikely(PyErr_Occurred())) __PYX_ERR(0, 2721, __pyx_L3_error)
         }
         CYTHON_FALLTHROUGH;
         case  5:
         if (kw_args > 0) {
           PyObject* value = __Pyx_GetKwValue_FASTCALL(__pyx_kwds, __pyx_kwvalues, __pyx_n_s_nbrCores);
           if (value) { values[5] = __Pyx_Arg_NewRef_FASTCALL(value); kw_args--; }
-          else if (unlikely(PyErr_Occurred())) __PYX_ERR(0, 2713, __pyx_L3_error)
+          else if (unlikely(PyErr_Occurred())) __PYX_ERR(0, 2721, __pyx_L3_error)
         }
         CYTHON_FALLTHROUGH;
         case  6:
         if (kw_args > 0) {
           PyObject* value = __Pyx_GetKwValue_FASTCALL(__pyx_kwds, __pyx_kwvalues, __pyx_n_s_Comments);
           if (value) { values[6] = __Pyx_Arg_NewRef_FASTCALL(value); kw_args--; }
-          else if (unlikely(PyErr_Occurred())) __PYX_ERR(0, 2713, __pyx_L3_error)
+          else if (unlikely(PyErr_Occurred())) __PYX_ERR(0, 2721, __pyx_L3_error)
         }
       }
       if (unlikely(kw_args > 0)) {
         const Py_ssize_t kwd_pos_args = __pyx_nargs;
-        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_kwvalues, __pyx_pyargnames, 0, values + 0, kwd_pos_args, "computeMarginalVersusGlobalOutrankingCorrelations") < 0)) __PYX_ERR(0, 2713, __pyx_L3_error)
+        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_kwvalues, __pyx_pyargnames, 0, values + 0, kwd_pos_args, "computeMarginalVersusGlobalOutrankingCorrelations") < 0)) __PYX_ERR(0, 2721, __pyx_L3_error)
       }
     } else {
       switch (__pyx_nargs) {
@@ -55059,10 +55162,10 @@ PyObject *__pyx_args, PyObject *__pyx_kwds
     }
     __pyx_v_self = values[0];
     if (values[1]) {
-      __pyx_v_Sorted = __Pyx_PyObject_IsTrue(values[1]); if (unlikely((__pyx_v_Sorted == (int)-1) && PyErr_Occurred())) __PYX_ERR(0, 2714, __pyx_L3_error)
+      __pyx_v_Sorted = __Pyx_PyObject_IsTrue(values[1]); if (unlikely((__pyx_v_Sorted == (int)-1) && PyErr_Occurred())) __PYX_ERR(0, 2722, __pyx_L3_error)
     } else {
 
-      /* "cSparseIntegerOutrankingDigraphs.pyx":2714
+      /* "cSparseIntegerOutrankingDigraphs.pyx":2722
  * 
  *     def computeMarginalVersusGlobalOutrankingCorrelations(self,
  *                                 bint Sorted=True,             # <<<<<<<<<<<<<<
@@ -55072,27 +55175,27 @@ PyObject *__pyx_args, PyObject *__pyx_kwds
       __pyx_v_Sorted = ((int)((int)1));
     }
     if (values[2]) {
-      __pyx_v_ValuedCorrelation = __Pyx_PyObject_IsTrue(values[2]); if (unlikely((__pyx_v_ValuedCorrelation == (int)-1) && PyErr_Occurred())) __PYX_ERR(0, 2715, __pyx_L3_error)
+      __pyx_v_ValuedCorrelation = __Pyx_PyObject_IsTrue(values[2]); if (unlikely((__pyx_v_ValuedCorrelation == (int)-1) && PyErr_Occurred())) __PYX_ERR(0, 2723, __pyx_L3_error)
     } else {
 
-      /* "cSparseIntegerOutrankingDigraphs.pyx":2715
+      /* "cSparseIntegerOutrankingDigraphs.pyx":2723
  *     def computeMarginalVersusGlobalOutrankingCorrelations(self,
  *                                 bint Sorted=True,
  *                                 bint ValuedCorrelation=False,             # <<<<<<<<<<<<<<
  *                                 bint Threading=False,
- *                                 startMethod='spawn',
+ *                                 startMethod=None,
  */
       __pyx_v_ValuedCorrelation = ((int)((int)0));
     }
     if (values[3]) {
-      __pyx_v_Threading = __Pyx_PyObject_IsTrue(values[3]); if (unlikely((__pyx_v_Threading == (int)-1) && PyErr_Occurred())) __PYX_ERR(0, 2716, __pyx_L3_error)
+      __pyx_v_Threading = __Pyx_PyObject_IsTrue(values[3]); if (unlikely((__pyx_v_Threading == (int)-1) && PyErr_Occurred())) __PYX_ERR(0, 2724, __pyx_L3_error)
     } else {
 
-      /* "cSparseIntegerOutrankingDigraphs.pyx":2716
+      /* "cSparseIntegerOutrankingDigraphs.pyx":2724
  *                                 bint Sorted=True,
  *                                 bint ValuedCorrelation=False,
  *                                 bint Threading=False,             # <<<<<<<<<<<<<<
- *                                 startMethod='spawn',
+ *                                 startMethod=None,
  *                                 nbrCores=None,\
  */
       __pyx_v_Threading = ((int)((int)0));
@@ -55100,11 +55203,11 @@ PyObject *__pyx_args, PyObject *__pyx_kwds
     __pyx_v_startMethod = values[4];
     __pyx_v_nbrCores = values[5];
     if (values[6]) {
-      __pyx_v_Comments = __Pyx_PyObject_IsTrue(values[6]); if (unlikely((__pyx_v_Comments == (int)-1) && PyErr_Occurred())) __PYX_ERR(0, 2719, __pyx_L3_error)
+      __pyx_v_Comments = __Pyx_PyObject_IsTrue(values[6]); if (unlikely((__pyx_v_Comments == (int)-1) && PyErr_Occurred())) __PYX_ERR(0, 2727, __pyx_L3_error)
     } else {
 
-      /* "cSparseIntegerOutrankingDigraphs.pyx":2719
- *                                 startMethod='spawn',
+      /* "cSparseIntegerOutrankingDigraphs.pyx":2727
+ *                                 startMethod=None,
  *                                 nbrCores=None,\
  *                                 bint Comments=False):             # <<<<<<<<<<<<<<
  *         """
@@ -55115,7 +55218,7 @@ PyObject *__pyx_args, PyObject *__pyx_kwds
   }
   goto __pyx_L6_skip;
   __pyx_L5_argtuple_error:;
-  __Pyx_RaiseArgtupleInvalid("computeMarginalVersusGlobalOutrankingCorrelations", 0, 1, 7, __pyx_nargs); __PYX_ERR(0, 2713, __pyx_L3_error)
+  __Pyx_RaiseArgtupleInvalid("computeMarginalVersusGlobalOutrankingCorrelations", 0, 1, 7, __pyx_nargs); __PYX_ERR(0, 2721, __pyx_L3_error)
   __pyx_L6_skip:;
   goto __pyx_L4_argument_unpacking_done;
   __pyx_L3_error:;
@@ -55131,7 +55234,7 @@ PyObject *__pyx_args, PyObject *__pyx_kwds
   __pyx_L4_argument_unpacking_done:;
   __pyx_r = __pyx_pf_32cSparseIntegerOutrankingDigraphs_24cQuantilesRankingDigraph_8computeMarginalVersusGlobalOutrankingCorrelations(__pyx_self, __pyx_v_self, __pyx_v_Sorted, __pyx_v_ValuedCorrelation, __pyx_v_Threading, __pyx_v_startMethod, __pyx_v_nbrCores, __pyx_v_Comments);
 
-  /* "cSparseIntegerOutrankingDigraphs.pyx":2713
+  /* "cSparseIntegerOutrankingDigraphs.pyx":2721
  *         return corr
  * 
  *     def computeMarginalVersusGlobalOutrankingCorrelations(self,             # <<<<<<<<<<<<<<
@@ -55150,7 +55253,7 @@ PyObject *__pyx_args, PyObject *__pyx_kwds
   return __pyx_r;
 }
 
-static PyObject *__pyx_pf_32cSparseIntegerOutrankingDigraphs_24cQuantilesRankingDigraph_8computeMarginalVersusGlobalOutrankingCorrelations(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_self, int __pyx_v_Sorted, int __pyx_v_ValuedCorrelation, int __pyx_v_Threading, CYTHON_UNUSED PyObject *__pyx_v_startMethod, PyObject *__pyx_v_nbrCores, CYTHON_UNUSED int __pyx_v_Comments) {
+static PyObject *__pyx_pf_32cSparseIntegerOutrankingDigraphs_24cQuantilesRankingDigraph_8computeMarginalVersusGlobalOutrankingCorrelations(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_self, int __pyx_v_Sorted, int __pyx_v_ValuedCorrelation, int __pyx_v_Threading, PyObject *__pyx_v_startMethod, PyObject *__pyx_v_nbrCores, CYTHON_UNUSED int __pyx_v_Comments) {
   PyObject *__pyx_v_mp = NULL;
   PyObject *__pyx_v_mpctx = NULL;
   PyObject *__pyx_v_Pool = NULL;
@@ -55190,35 +55293,35 @@ static PyObject *__pyx_pf_32cSparseIntegerOutrankingDigraphs_24cQuantilesRanking
   __Pyx_RefNannySetupContext("computeMarginalVersusGlobalOutrankingCorrelations", 0);
   __Pyx_INCREF(__pyx_v_nbrCores);
 
-  /* "cSparseIntegerOutrankingDigraphs.pyx":2739
+  /* "cSparseIntegerOutrankingDigraphs.pyx":2747
  *         """
  *         cdef int i
  *         if Threading:             # <<<<<<<<<<<<<<
  *             import multiprocessing as mp
- *             mpctx = mp.get_context('fork')
+ *             mpctx = mp.get_context(startMethod)
  */
   if (__pyx_v_Threading) {
 
-    /* "cSparseIntegerOutrankingDigraphs.pyx":2740
+    /* "cSparseIntegerOutrankingDigraphs.pyx":2748
  *         cdef int i
  *         if Threading:
  *             import multiprocessing as mp             # <<<<<<<<<<<<<<
- *             mpctx = mp.get_context('fork')
+ *             mpctx = mp.get_context(startMethod)
  *             Pool = mpctx.Pool
  */
-    __pyx_t_1 = __Pyx_ImportDottedModule(__pyx_n_s_multiprocessing, NULL); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 2740, __pyx_L1_error)
+    __pyx_t_1 = __Pyx_ImportDottedModule(__pyx_n_s_multiprocessing, NULL); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 2748, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_1);
     __pyx_v_mp = __pyx_t_1;
     __pyx_t_1 = 0;
 
-    /* "cSparseIntegerOutrankingDigraphs.pyx":2741
+    /* "cSparseIntegerOutrankingDigraphs.pyx":2749
  *         if Threading:
  *             import multiprocessing as mp
- *             mpctx = mp.get_context('fork')             # <<<<<<<<<<<<<<
+ *             mpctx = mp.get_context(startMethod)             # <<<<<<<<<<<<<<
  *             Pool = mpctx.Pool
  *             #from multiprocessing import Pool
  */
-    __pyx_t_2 = __Pyx_PyObject_GetAttrStr(__pyx_v_mp, __pyx_n_s_get_context); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 2741, __pyx_L1_error)
+    __pyx_t_2 = __Pyx_PyObject_GetAttrStr(__pyx_v_mp, __pyx_n_s_get_context); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 2749, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_2);
     __pyx_t_3 = NULL;
     __pyx_t_4 = 0;
@@ -55235,63 +55338,63 @@ static PyObject *__pyx_pf_32cSparseIntegerOutrankingDigraphs_24cQuantilesRanking
     }
     #endif
     {
-      PyObject *__pyx_callargs[2] = {__pyx_t_3, __pyx_n_u_fork};
+      PyObject *__pyx_callargs[2] = {__pyx_t_3, __pyx_v_startMethod};
       __pyx_t_1 = __Pyx_PyObject_FastCall(__pyx_t_2, __pyx_callargs+1-__pyx_t_4, 1+__pyx_t_4);
       __Pyx_XDECREF(__pyx_t_3); __pyx_t_3 = 0;
-      if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 2741, __pyx_L1_error)
+      if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 2749, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_1);
       __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
     }
     __pyx_v_mpctx = __pyx_t_1;
     __pyx_t_1 = 0;
 
-    /* "cSparseIntegerOutrankingDigraphs.pyx":2742
+    /* "cSparseIntegerOutrankingDigraphs.pyx":2750
  *             import multiprocessing as mp
- *             mpctx = mp.get_context('fork')
+ *             mpctx = mp.get_context(startMethod)
  *             Pool = mpctx.Pool             # <<<<<<<<<<<<<<
  *             #from multiprocessing import Pool
  *             from os import cpu_count
  */
-    __pyx_t_1 = __Pyx_PyObject_GetAttrStr(__pyx_v_mpctx, __pyx_n_s_Pool); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 2742, __pyx_L1_error)
+    __pyx_t_1 = __Pyx_PyObject_GetAttrStr(__pyx_v_mpctx, __pyx_n_s_Pool); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 2750, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_1);
     __pyx_v_Pool = __pyx_t_1;
     __pyx_t_1 = 0;
 
-    /* "cSparseIntegerOutrankingDigraphs.pyx":2744
+    /* "cSparseIntegerOutrankingDigraphs.pyx":2752
  *             Pool = mpctx.Pool
  *             #from multiprocessing import Pool
  *             from os import cpu_count             # <<<<<<<<<<<<<<
  *             if nbrCores == None:
  *                 nbrCores= cpu_count()
  */
-    __pyx_t_1 = PyList_New(1); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 2744, __pyx_L1_error)
+    __pyx_t_1 = PyList_New(1); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 2752, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_1);
     __Pyx_INCREF(__pyx_n_s_cpu_count);
     __Pyx_GIVEREF(__pyx_n_s_cpu_count);
-    if (__Pyx_PyList_SET_ITEM(__pyx_t_1, 0, __pyx_n_s_cpu_count)) __PYX_ERR(0, 2744, __pyx_L1_error);
-    __pyx_t_2 = __Pyx_Import(__pyx_n_s_os, __pyx_t_1, 0); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 2744, __pyx_L1_error)
+    if (__Pyx_PyList_SET_ITEM(__pyx_t_1, 0, __pyx_n_s_cpu_count)) __PYX_ERR(0, 2752, __pyx_L1_error);
+    __pyx_t_2 = __Pyx_Import(__pyx_n_s_os, __pyx_t_1, 0); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 2752, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_2);
     __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
-    __pyx_t_1 = __Pyx_ImportFrom(__pyx_t_2, __pyx_n_s_cpu_count); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 2744, __pyx_L1_error)
+    __pyx_t_1 = __Pyx_ImportFrom(__pyx_t_2, __pyx_n_s_cpu_count); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 2752, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_1);
     __Pyx_INCREF(__pyx_t_1);
     __pyx_v_cpu_count = __pyx_t_1;
     __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
     __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
 
-    /* "cSparseIntegerOutrankingDigraphs.pyx":2745
+    /* "cSparseIntegerOutrankingDigraphs.pyx":2753
  *             #from multiprocessing import Pool
  *             from os import cpu_count
  *             if nbrCores == None:             # <<<<<<<<<<<<<<
  *                 nbrCores= cpu_count()
  *             criteriaList = [x for x in self.criteria]
  */
-    __pyx_t_2 = PyObject_RichCompare(__pyx_v_nbrCores, Py_None, Py_EQ); __Pyx_XGOTREF(__pyx_t_2); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 2745, __pyx_L1_error)
-    __pyx_t_5 = __Pyx_PyObject_IsTrue(__pyx_t_2); if (unlikely((__pyx_t_5 < 0))) __PYX_ERR(0, 2745, __pyx_L1_error)
+    __pyx_t_2 = PyObject_RichCompare(__pyx_v_nbrCores, Py_None, Py_EQ); __Pyx_XGOTREF(__pyx_t_2); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 2753, __pyx_L1_error)
+    __pyx_t_5 = __Pyx_PyObject_IsTrue(__pyx_t_2); if (unlikely((__pyx_t_5 < 0))) __PYX_ERR(0, 2753, __pyx_L1_error)
     __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
     if (__pyx_t_5) {
 
-      /* "cSparseIntegerOutrankingDigraphs.pyx":2746
+      /* "cSparseIntegerOutrankingDigraphs.pyx":2754
  *             from os import cpu_count
  *             if nbrCores == None:
  *                 nbrCores= cpu_count()             # <<<<<<<<<<<<<<
@@ -55317,14 +55420,14 @@ static PyObject *__pyx_pf_32cSparseIntegerOutrankingDigraphs_24cQuantilesRanking
         PyObject *__pyx_callargs[2] = {__pyx_t_3, NULL};
         __pyx_t_2 = __Pyx_PyObject_FastCall(__pyx_t_1, __pyx_callargs+1-__pyx_t_4, 0+__pyx_t_4);
         __Pyx_XDECREF(__pyx_t_3); __pyx_t_3 = 0;
-        if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 2746, __pyx_L1_error)
+        if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 2754, __pyx_L1_error)
         __Pyx_GOTREF(__pyx_t_2);
         __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
       }
       __Pyx_DECREF_SET(__pyx_v_nbrCores, __pyx_t_2);
       __pyx_t_2 = 0;
 
-      /* "cSparseIntegerOutrankingDigraphs.pyx":2745
+      /* "cSparseIntegerOutrankingDigraphs.pyx":2753
  *             #from multiprocessing import Pool
  *             from os import cpu_count
  *             if nbrCores == None:             # <<<<<<<<<<<<<<
@@ -55333,7 +55436,7 @@ static PyObject *__pyx_pf_32cSparseIntegerOutrankingDigraphs_24cQuantilesRanking
  */
     }
 
-    /* "cSparseIntegerOutrankingDigraphs.pyx":2747
+    /* "cSparseIntegerOutrankingDigraphs.pyx":2755
  *             if nbrCores == None:
  *                 nbrCores= cpu_count()
  *             criteriaList = [x for x in self.criteria]             # <<<<<<<<<<<<<<
@@ -55341,18 +55444,18 @@ static PyObject *__pyx_pf_32cSparseIntegerOutrankingDigraphs_24cQuantilesRanking
  *                 correlations = proc.map(self.computeCriterion2RankingCorrelation,criteriaList)
  */
     { /* enter inner scope */
-      __pyx_t_2 = PyList_New(0); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 2747, __pyx_L7_error)
+      __pyx_t_2 = PyList_New(0); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 2755, __pyx_L7_error)
       __Pyx_GOTREF(__pyx_t_2);
-      __pyx_t_1 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_n_s_criteria); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 2747, __pyx_L7_error)
+      __pyx_t_1 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_n_s_criteria); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 2755, __pyx_L7_error)
       __Pyx_GOTREF(__pyx_t_1);
       if (likely(PyList_CheckExact(__pyx_t_1)) || PyTuple_CheckExact(__pyx_t_1)) {
         __pyx_t_3 = __pyx_t_1; __Pyx_INCREF(__pyx_t_3);
         __pyx_t_6 = 0;
         __pyx_t_7 = NULL;
       } else {
-        __pyx_t_6 = -1; __pyx_t_3 = PyObject_GetIter(__pyx_t_1); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 2747, __pyx_L7_error)
+        __pyx_t_6 = -1; __pyx_t_3 = PyObject_GetIter(__pyx_t_1); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 2755, __pyx_L7_error)
         __Pyx_GOTREF(__pyx_t_3);
-        __pyx_t_7 = __Pyx_PyObject_GetIterNextFunc(__pyx_t_3); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 2747, __pyx_L7_error)
+        __pyx_t_7 = __Pyx_PyObject_GetIterNextFunc(__pyx_t_3); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 2755, __pyx_L7_error)
       }
       __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
       for (;;) {
@@ -55361,28 +55464,28 @@ static PyObject *__pyx_pf_32cSparseIntegerOutrankingDigraphs_24cQuantilesRanking
             {
               Py_ssize_t __pyx_temp = __Pyx_PyList_GET_SIZE(__pyx_t_3);
               #if !CYTHON_ASSUME_SAFE_MACROS
-              if (unlikely((__pyx_temp < 0))) __PYX_ERR(0, 2747, __pyx_L7_error)
+              if (unlikely((__pyx_temp < 0))) __PYX_ERR(0, 2755, __pyx_L7_error)
               #endif
               if (__pyx_t_6 >= __pyx_temp) break;
             }
             #if CYTHON_ASSUME_SAFE_MACROS && !CYTHON_AVOID_BORROWED_REFS
-            __pyx_t_1 = PyList_GET_ITEM(__pyx_t_3, __pyx_t_6); __Pyx_INCREF(__pyx_t_1); __pyx_t_6++; if (unlikely((0 < 0))) __PYX_ERR(0, 2747, __pyx_L7_error)
+            __pyx_t_1 = PyList_GET_ITEM(__pyx_t_3, __pyx_t_6); __Pyx_INCREF(__pyx_t_1); __pyx_t_6++; if (unlikely((0 < 0))) __PYX_ERR(0, 2755, __pyx_L7_error)
             #else
-            __pyx_t_1 = __Pyx_PySequence_ITEM(__pyx_t_3, __pyx_t_6); __pyx_t_6++; if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 2747, __pyx_L7_error)
+            __pyx_t_1 = __Pyx_PySequence_ITEM(__pyx_t_3, __pyx_t_6); __pyx_t_6++; if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 2755, __pyx_L7_error)
             __Pyx_GOTREF(__pyx_t_1);
             #endif
           } else {
             {
               Py_ssize_t __pyx_temp = __Pyx_PyTuple_GET_SIZE(__pyx_t_3);
               #if !CYTHON_ASSUME_SAFE_MACROS
-              if (unlikely((__pyx_temp < 0))) __PYX_ERR(0, 2747, __pyx_L7_error)
+              if (unlikely((__pyx_temp < 0))) __PYX_ERR(0, 2755, __pyx_L7_error)
               #endif
               if (__pyx_t_6 >= __pyx_temp) break;
             }
             #if CYTHON_ASSUME_SAFE_MACROS && !CYTHON_AVOID_BORROWED_REFS
-            __pyx_t_1 = PyTuple_GET_ITEM(__pyx_t_3, __pyx_t_6); __Pyx_INCREF(__pyx_t_1); __pyx_t_6++; if (unlikely((0 < 0))) __PYX_ERR(0, 2747, __pyx_L7_error)
+            __pyx_t_1 = PyTuple_GET_ITEM(__pyx_t_3, __pyx_t_6); __Pyx_INCREF(__pyx_t_1); __pyx_t_6++; if (unlikely((0 < 0))) __PYX_ERR(0, 2755, __pyx_L7_error)
             #else
-            __pyx_t_1 = __Pyx_PySequence_ITEM(__pyx_t_3, __pyx_t_6); __pyx_t_6++; if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 2747, __pyx_L7_error)
+            __pyx_t_1 = __Pyx_PySequence_ITEM(__pyx_t_3, __pyx_t_6); __pyx_t_6++; if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 2755, __pyx_L7_error)
             __Pyx_GOTREF(__pyx_t_1);
             #endif
           }
@@ -55392,7 +55495,7 @@ static PyObject *__pyx_pf_32cSparseIntegerOutrankingDigraphs_24cQuantilesRanking
             PyObject* exc_type = PyErr_Occurred();
             if (exc_type) {
               if (likely(__Pyx_PyErr_GivenExceptionMatches(exc_type, PyExc_StopIteration))) PyErr_Clear();
-              else __PYX_ERR(0, 2747, __pyx_L7_error)
+              else __PYX_ERR(0, 2755, __pyx_L7_error)
             }
             break;
           }
@@ -55400,7 +55503,7 @@ static PyObject *__pyx_pf_32cSparseIntegerOutrankingDigraphs_24cQuantilesRanking
         }
         __Pyx_XDECREF_SET(__pyx_9genexpr37__pyx_v_x, __pyx_t_1);
         __pyx_t_1 = 0;
-        if (unlikely(__Pyx_ListComp_Append(__pyx_t_2, (PyObject*)__pyx_9genexpr37__pyx_v_x))) __PYX_ERR(0, 2747, __pyx_L7_error)
+        if (unlikely(__Pyx_ListComp_Append(__pyx_t_2, (PyObject*)__pyx_9genexpr37__pyx_v_x))) __PYX_ERR(0, 2755, __pyx_L7_error)
       }
       __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
       __Pyx_XDECREF(__pyx_9genexpr37__pyx_v_x); __pyx_9genexpr37__pyx_v_x = 0;
@@ -55413,7 +55516,7 @@ static PyObject *__pyx_pf_32cSparseIntegerOutrankingDigraphs_24cQuantilesRanking
     __pyx_v_criteriaList = ((PyObject*)__pyx_t_2);
     __pyx_t_2 = 0;
 
-    /* "cSparseIntegerOutrankingDigraphs.pyx":2748
+    /* "cSparseIntegerOutrankingDigraphs.pyx":2756
  *                 nbrCores= cpu_count()
  *             criteriaList = [x for x in self.criteria]
  *             with Pool(nbrCores) as proc:             # <<<<<<<<<<<<<<
@@ -55440,13 +55543,13 @@ static PyObject *__pyx_pf_32cSparseIntegerOutrankingDigraphs_24cQuantilesRanking
         PyObject *__pyx_callargs[2] = {__pyx_t_1, __pyx_v_nbrCores};
         __pyx_t_2 = __Pyx_PyObject_FastCall(__pyx_t_3, __pyx_callargs+1-__pyx_t_4, 1+__pyx_t_4);
         __Pyx_XDECREF(__pyx_t_1); __pyx_t_1 = 0;
-        if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 2748, __pyx_L1_error)
+        if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 2756, __pyx_L1_error)
         __Pyx_GOTREF(__pyx_t_2);
         __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
       }
-      __pyx_t_8 = __Pyx_PyObject_LookupSpecial(__pyx_t_2, __pyx_n_s_exit); if (unlikely(!__pyx_t_8)) __PYX_ERR(0, 2748, __pyx_L1_error)
+      __pyx_t_8 = __Pyx_PyObject_LookupSpecial(__pyx_t_2, __pyx_n_s_exit); if (unlikely(!__pyx_t_8)) __PYX_ERR(0, 2756, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_8);
-      __pyx_t_1 = __Pyx_PyObject_LookupSpecial(__pyx_t_2, __pyx_n_s_enter); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 2748, __pyx_L12_error)
+      __pyx_t_1 = __Pyx_PyObject_LookupSpecial(__pyx_t_2, __pyx_n_s_enter); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 2756, __pyx_L12_error)
       __Pyx_GOTREF(__pyx_t_1);
       __pyx_t_9 = NULL;
       __pyx_t_4 = 0;
@@ -55466,7 +55569,7 @@ static PyObject *__pyx_pf_32cSparseIntegerOutrankingDigraphs_24cQuantilesRanking
         PyObject *__pyx_callargs[2] = {__pyx_t_9, NULL};
         __pyx_t_3 = __Pyx_PyObject_FastCall(__pyx_t_1, __pyx_callargs+1-__pyx_t_4, 0+__pyx_t_4);
         __Pyx_XDECREF(__pyx_t_9); __pyx_t_9 = 0;
-        if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 2748, __pyx_L12_error)
+        if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 2756, __pyx_L12_error)
         __Pyx_GOTREF(__pyx_t_3);
         __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
       }
@@ -55485,16 +55588,16 @@ static PyObject *__pyx_pf_32cSparseIntegerOutrankingDigraphs_24cQuantilesRanking
             __pyx_v_proc = __pyx_t_1;
             __pyx_t_1 = 0;
 
-            /* "cSparseIntegerOutrankingDigraphs.pyx":2749
+            /* "cSparseIntegerOutrankingDigraphs.pyx":2757
  *             criteriaList = [x for x in self.criteria]
  *             with Pool(nbrCores) as proc:
  *                 correlations = proc.map(self.computeCriterion2RankingCorrelation,criteriaList)             # <<<<<<<<<<<<<<
  *             if ValuedCorrelation:
  *                 criteriaCorrelation = [(correlations[i]['correlation']*\
  */
-            __pyx_t_2 = __Pyx_PyObject_GetAttrStr(__pyx_v_proc, __pyx_n_s_map); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 2749, __pyx_L16_error)
+            __pyx_t_2 = __Pyx_PyObject_GetAttrStr(__pyx_v_proc, __pyx_n_s_map); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 2757, __pyx_L16_error)
             __Pyx_GOTREF(__pyx_t_2);
-            __pyx_t_3 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_n_s_computeCriterion2RankingCorrelat); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 2749, __pyx_L16_error)
+            __pyx_t_3 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_n_s_computeCriterion2RankingCorrelat); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 2757, __pyx_L16_error)
             __Pyx_GOTREF(__pyx_t_3);
             __pyx_t_9 = NULL;
             __pyx_t_4 = 0;
@@ -55515,14 +55618,14 @@ static PyObject *__pyx_pf_32cSparseIntegerOutrankingDigraphs_24cQuantilesRanking
               __pyx_t_1 = __Pyx_PyObject_FastCall(__pyx_t_2, __pyx_callargs+1-__pyx_t_4, 2+__pyx_t_4);
               __Pyx_XDECREF(__pyx_t_9); __pyx_t_9 = 0;
               __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
-              if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 2749, __pyx_L16_error)
+              if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 2757, __pyx_L16_error)
               __Pyx_GOTREF(__pyx_t_1);
               __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
             }
             __pyx_v_correlations = __pyx_t_1;
             __pyx_t_1 = 0;
 
-            /* "cSparseIntegerOutrankingDigraphs.pyx":2748
+            /* "cSparseIntegerOutrankingDigraphs.pyx":2756
  *                 nbrCores= cpu_count()
  *             criteriaList = [x for x in self.criteria]
  *             with Pool(nbrCores) as proc:             # <<<<<<<<<<<<<<
@@ -55541,20 +55644,20 @@ static PyObject *__pyx_pf_32cSparseIntegerOutrankingDigraphs_24cQuantilesRanking
           __Pyx_XDECREF(__pyx_t_9); __pyx_t_9 = 0;
           /*except:*/ {
             __Pyx_AddTraceback("cSparseIntegerOutrankingDigraphs.cQuantilesRankingDigraph.computeMarginalVersusGlobalOutrankingCorrelations", __pyx_clineno, __pyx_lineno, __pyx_filename);
-            if (__Pyx_GetException(&__pyx_t_1, &__pyx_t_2, &__pyx_t_3) < 0) __PYX_ERR(0, 2748, __pyx_L18_except_error)
+            if (__Pyx_GetException(&__pyx_t_1, &__pyx_t_2, &__pyx_t_3) < 0) __PYX_ERR(0, 2756, __pyx_L18_except_error)
             __Pyx_XGOTREF(__pyx_t_1);
             __Pyx_XGOTREF(__pyx_t_2);
             __Pyx_XGOTREF(__pyx_t_3);
-            __pyx_t_9 = PyTuple_Pack(3, __pyx_t_1, __pyx_t_2, __pyx_t_3); if (unlikely(!__pyx_t_9)) __PYX_ERR(0, 2748, __pyx_L18_except_error)
+            __pyx_t_9 = PyTuple_Pack(3, __pyx_t_1, __pyx_t_2, __pyx_t_3); if (unlikely(!__pyx_t_9)) __PYX_ERR(0, 2756, __pyx_L18_except_error)
             __Pyx_GOTREF(__pyx_t_9);
             __pyx_t_13 = __Pyx_PyObject_Call(__pyx_t_8, __pyx_t_9, NULL);
             __Pyx_DECREF(__pyx_t_8); __pyx_t_8 = 0;
             __Pyx_DECREF(__pyx_t_9); __pyx_t_9 = 0;
-            if (unlikely(!__pyx_t_13)) __PYX_ERR(0, 2748, __pyx_L18_except_error)
+            if (unlikely(!__pyx_t_13)) __PYX_ERR(0, 2756, __pyx_L18_except_error)
             __Pyx_GOTREF(__pyx_t_13);
             __pyx_t_5 = __Pyx_PyObject_IsTrue(__pyx_t_13);
             __Pyx_DECREF(__pyx_t_13); __pyx_t_13 = 0;
-            if (__pyx_t_5 < 0) __PYX_ERR(0, 2748, __pyx_L18_except_error)
+            if (__pyx_t_5 < 0) __PYX_ERR(0, 2756, __pyx_L18_except_error)
             __pyx_t_14 = (!__pyx_t_5);
             if (unlikely(__pyx_t_14)) {
               __Pyx_GIVEREF(__pyx_t_1);
@@ -55562,7 +55665,7 @@ static PyObject *__pyx_pf_32cSparseIntegerOutrankingDigraphs_24cQuantilesRanking
               __Pyx_XGIVEREF(__pyx_t_3);
               __Pyx_ErrRestoreWithState(__pyx_t_1, __pyx_t_2, __pyx_t_3);
               __pyx_t_1 = 0; __pyx_t_2 = 0; __pyx_t_3 = 0; 
-              __PYX_ERR(0, 2748, __pyx_L18_except_error)
+              __PYX_ERR(0, 2756, __pyx_L18_except_error)
             }
             __Pyx_XDECREF(__pyx_t_1); __pyx_t_1 = 0;
             __Pyx_XDECREF(__pyx_t_2); __pyx_t_2 = 0;
@@ -55588,7 +55691,7 @@ static PyObject *__pyx_pf_32cSparseIntegerOutrankingDigraphs_24cQuantilesRanking
           if (__pyx_t_8) {
             __pyx_t_12 = __Pyx_PyObject_Call(__pyx_t_8, __pyx_tuple__44, NULL);
             __Pyx_DECREF(__pyx_t_8); __pyx_t_8 = 0;
-            if (unlikely(!__pyx_t_12)) __PYX_ERR(0, 2748, __pyx_L1_error)
+            if (unlikely(!__pyx_t_12)) __PYX_ERR(0, 2756, __pyx_L1_error)
             __Pyx_GOTREF(__pyx_t_12);
             __Pyx_DECREF(__pyx_t_12); __pyx_t_12 = 0;
           }
@@ -55603,7 +55706,7 @@ static PyObject *__pyx_pf_32cSparseIntegerOutrankingDigraphs_24cQuantilesRanking
       __pyx_L25:;
     }
 
-    /* "cSparseIntegerOutrankingDigraphs.pyx":2750
+    /* "cSparseIntegerOutrankingDigraphs.pyx":2758
  *             with Pool(nbrCores) as proc:
  *                 correlations = proc.map(self.computeCriterion2RankingCorrelation,criteriaList)
  *             if ValuedCorrelation:             # <<<<<<<<<<<<<<
@@ -55612,7 +55715,7 @@ static PyObject *__pyx_pf_32cSparseIntegerOutrankingDigraphs_24cQuantilesRanking
  */
     if (__pyx_v_ValuedCorrelation) {
 
-      /* "cSparseIntegerOutrankingDigraphs.pyx":2751
+      /* "cSparseIntegerOutrankingDigraphs.pyx":2759
  *                 correlations = proc.map(self.computeCriterion2RankingCorrelation,criteriaList)
  *             if ValuedCorrelation:
  *                 criteriaCorrelation = [(correlations[i]['correlation']*\             # <<<<<<<<<<<<<<
@@ -55620,94 +55723,94 @@ static PyObject *__pyx_pf_32cSparseIntegerOutrankingDigraphs_24cQuantilesRanking
  *             else:
  */
       { /* enter inner scope */
-        __pyx_t_3 = PyList_New(0); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 2751, __pyx_L1_error)
+        __pyx_t_3 = PyList_New(0); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 2759, __pyx_L1_error)
         __Pyx_GOTREF(__pyx_t_3);
 
-        /* "cSparseIntegerOutrankingDigraphs.pyx":2752
+        /* "cSparseIntegerOutrankingDigraphs.pyx":2760
  *             if ValuedCorrelation:
  *                 criteriaCorrelation = [(correlations[i]['correlation']*\
  *                                         correlations[i]['determination'],criteriaList[i]) for i in range(len(criteriaList))]             # <<<<<<<<<<<<<<
  *             else:
  *                 criteriaCorrelation = [(correlations[i]['correlation'],criteriaList[i]) for i in range(len(criteriaList))]
  */
-        __pyx_t_6 = __Pyx_PyList_GET_SIZE(__pyx_v_criteriaList); if (unlikely(__pyx_t_6 == ((Py_ssize_t)-1))) __PYX_ERR(0, 2752, __pyx_L1_error)
+        __pyx_t_6 = __Pyx_PyList_GET_SIZE(__pyx_v_criteriaList); if (unlikely(__pyx_t_6 == ((Py_ssize_t)-1))) __PYX_ERR(0, 2760, __pyx_L1_error)
         __pyx_t_15 = __pyx_t_6;
         for (__pyx_t_4 = 0; __pyx_t_4 < __pyx_t_15; __pyx_t_4+=1) {
           __pyx_9genexpr38__pyx_v_i = __pyx_t_4;
 
-          /* "cSparseIntegerOutrankingDigraphs.pyx":2751
+          /* "cSparseIntegerOutrankingDigraphs.pyx":2759
  *                 correlations = proc.map(self.computeCriterion2RankingCorrelation,criteriaList)
  *             if ValuedCorrelation:
  *                 criteriaCorrelation = [(correlations[i]['correlation']*\             # <<<<<<<<<<<<<<
  *                                         correlations[i]['determination'],criteriaList[i]) for i in range(len(criteriaList))]
  *             else:
  */
-          if (unlikely(!__pyx_v_correlations)) { __Pyx_RaiseUnboundLocalError("correlations"); __PYX_ERR(0, 2751, __pyx_L1_error) }
-          __pyx_t_2 = __Pyx_GetItemInt(__pyx_v_correlations, __pyx_9genexpr38__pyx_v_i, int, 1, __Pyx_PyInt_From_int, 0, 1, 1); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 2751, __pyx_L1_error)
+          if (unlikely(!__pyx_v_correlations)) { __Pyx_RaiseUnboundLocalError("correlations"); __PYX_ERR(0, 2759, __pyx_L1_error) }
+          __pyx_t_2 = __Pyx_GetItemInt(__pyx_v_correlations, __pyx_9genexpr38__pyx_v_i, int, 1, __Pyx_PyInt_From_int, 0, 1, 1); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 2759, __pyx_L1_error)
           __Pyx_GOTREF(__pyx_t_2);
-          __pyx_t_1 = __Pyx_PyObject_Dict_GetItem(__pyx_t_2, __pyx_n_u_correlation); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 2751, __pyx_L1_error)
+          __pyx_t_1 = __Pyx_PyObject_Dict_GetItem(__pyx_t_2, __pyx_n_u_correlation); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 2759, __pyx_L1_error)
           __Pyx_GOTREF(__pyx_t_1);
           __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
 
-          /* "cSparseIntegerOutrankingDigraphs.pyx":2752
+          /* "cSparseIntegerOutrankingDigraphs.pyx":2760
  *             if ValuedCorrelation:
  *                 criteriaCorrelation = [(correlations[i]['correlation']*\
  *                                         correlations[i]['determination'],criteriaList[i]) for i in range(len(criteriaList))]             # <<<<<<<<<<<<<<
  *             else:
  *                 criteriaCorrelation = [(correlations[i]['correlation'],criteriaList[i]) for i in range(len(criteriaList))]
  */
-          if (unlikely(!__pyx_v_correlations)) { __Pyx_RaiseUnboundLocalError("correlations"); __PYX_ERR(0, 2752, __pyx_L1_error) }
-          __pyx_t_2 = __Pyx_GetItemInt(__pyx_v_correlations, __pyx_9genexpr38__pyx_v_i, int, 1, __Pyx_PyInt_From_int, 0, 1, 1); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 2752, __pyx_L1_error)
+          if (unlikely(!__pyx_v_correlations)) { __Pyx_RaiseUnboundLocalError("correlations"); __PYX_ERR(0, 2760, __pyx_L1_error) }
+          __pyx_t_2 = __Pyx_GetItemInt(__pyx_v_correlations, __pyx_9genexpr38__pyx_v_i, int, 1, __Pyx_PyInt_From_int, 0, 1, 1); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 2760, __pyx_L1_error)
           __Pyx_GOTREF(__pyx_t_2);
-          __pyx_t_9 = __Pyx_PyObject_Dict_GetItem(__pyx_t_2, __pyx_n_u_determination); if (unlikely(!__pyx_t_9)) __PYX_ERR(0, 2752, __pyx_L1_error)
+          __pyx_t_9 = __Pyx_PyObject_Dict_GetItem(__pyx_t_2, __pyx_n_u_determination); if (unlikely(!__pyx_t_9)) __PYX_ERR(0, 2760, __pyx_L1_error)
           __Pyx_GOTREF(__pyx_t_9);
           __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
 
-          /* "cSparseIntegerOutrankingDigraphs.pyx":2751
+          /* "cSparseIntegerOutrankingDigraphs.pyx":2759
  *                 correlations = proc.map(self.computeCriterion2RankingCorrelation,criteriaList)
  *             if ValuedCorrelation:
  *                 criteriaCorrelation = [(correlations[i]['correlation']*\             # <<<<<<<<<<<<<<
  *                                         correlations[i]['determination'],criteriaList[i]) for i in range(len(criteriaList))]
  *             else:
  */
-          __pyx_t_2 = PyNumber_Multiply(__pyx_t_1, __pyx_t_9); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 2751, __pyx_L1_error)
+          __pyx_t_2 = PyNumber_Multiply(__pyx_t_1, __pyx_t_9); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 2759, __pyx_L1_error)
           __Pyx_GOTREF(__pyx_t_2);
           __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
           __Pyx_DECREF(__pyx_t_9); __pyx_t_9 = 0;
 
-          /* "cSparseIntegerOutrankingDigraphs.pyx":2752
+          /* "cSparseIntegerOutrankingDigraphs.pyx":2760
  *             if ValuedCorrelation:
  *                 criteriaCorrelation = [(correlations[i]['correlation']*\
  *                                         correlations[i]['determination'],criteriaList[i]) for i in range(len(criteriaList))]             # <<<<<<<<<<<<<<
  *             else:
  *                 criteriaCorrelation = [(correlations[i]['correlation'],criteriaList[i]) for i in range(len(criteriaList))]
  */
-          __pyx_t_9 = __Pyx_GetItemInt_List(__pyx_v_criteriaList, __pyx_9genexpr38__pyx_v_i, int, 1, __Pyx_PyInt_From_int, 1, 1, 1); if (unlikely(!__pyx_t_9)) __PYX_ERR(0, 2752, __pyx_L1_error)
+          __pyx_t_9 = __Pyx_GetItemInt_List(__pyx_v_criteriaList, __pyx_9genexpr38__pyx_v_i, int, 1, __Pyx_PyInt_From_int, 1, 1, 1); if (unlikely(!__pyx_t_9)) __PYX_ERR(0, 2760, __pyx_L1_error)
           __Pyx_GOTREF(__pyx_t_9);
 
-          /* "cSparseIntegerOutrankingDigraphs.pyx":2751
+          /* "cSparseIntegerOutrankingDigraphs.pyx":2759
  *                 correlations = proc.map(self.computeCriterion2RankingCorrelation,criteriaList)
  *             if ValuedCorrelation:
  *                 criteriaCorrelation = [(correlations[i]['correlation']*\             # <<<<<<<<<<<<<<
  *                                         correlations[i]['determination'],criteriaList[i]) for i in range(len(criteriaList))]
  *             else:
  */
-          __pyx_t_1 = PyTuple_New(2); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 2751, __pyx_L1_error)
+          __pyx_t_1 = PyTuple_New(2); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 2759, __pyx_L1_error)
           __Pyx_GOTREF(__pyx_t_1);
           __Pyx_GIVEREF(__pyx_t_2);
-          if (__Pyx_PyTuple_SET_ITEM(__pyx_t_1, 0, __pyx_t_2)) __PYX_ERR(0, 2751, __pyx_L1_error);
+          if (__Pyx_PyTuple_SET_ITEM(__pyx_t_1, 0, __pyx_t_2)) __PYX_ERR(0, 2759, __pyx_L1_error);
           __Pyx_GIVEREF(__pyx_t_9);
-          if (__Pyx_PyTuple_SET_ITEM(__pyx_t_1, 1, __pyx_t_9)) __PYX_ERR(0, 2751, __pyx_L1_error);
+          if (__Pyx_PyTuple_SET_ITEM(__pyx_t_1, 1, __pyx_t_9)) __PYX_ERR(0, 2759, __pyx_L1_error);
           __pyx_t_2 = 0;
           __pyx_t_9 = 0;
-          if (unlikely(__Pyx_ListComp_Append(__pyx_t_3, (PyObject*)__pyx_t_1))) __PYX_ERR(0, 2751, __pyx_L1_error)
+          if (unlikely(__Pyx_ListComp_Append(__pyx_t_3, (PyObject*)__pyx_t_1))) __PYX_ERR(0, 2759, __pyx_L1_error)
           __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
         }
       } /* exit inner scope */
       __pyx_v_criteriaCorrelation = ((PyObject*)__pyx_t_3);
       __pyx_t_3 = 0;
 
-      /* "cSparseIntegerOutrankingDigraphs.pyx":2750
+      /* "cSparseIntegerOutrankingDigraphs.pyx":2758
  *             with Pool(nbrCores) as proc:
  *                 correlations = proc.map(self.computeCriterion2RankingCorrelation,criteriaList)
  *             if ValuedCorrelation:             # <<<<<<<<<<<<<<
@@ -55717,7 +55820,7 @@ static PyObject *__pyx_pf_32cSparseIntegerOutrankingDigraphs_24cQuantilesRanking
       goto __pyx_L26;
     }
 
-    /* "cSparseIntegerOutrankingDigraphs.pyx":2754
+    /* "cSparseIntegerOutrankingDigraphs.pyx":2762
  *                                         correlations[i]['determination'],criteriaList[i]) for i in range(len(criteriaList))]
  *             else:
  *                 criteriaCorrelation = [(correlations[i]['correlation'],criteriaList[i]) for i in range(len(criteriaList))]             # <<<<<<<<<<<<<<
@@ -55726,29 +55829,29 @@ static PyObject *__pyx_pf_32cSparseIntegerOutrankingDigraphs_24cQuantilesRanking
  */
     /*else*/ {
       { /* enter inner scope */
-        __pyx_t_3 = PyList_New(0); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 2754, __pyx_L1_error)
+        __pyx_t_3 = PyList_New(0); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 2762, __pyx_L1_error)
         __Pyx_GOTREF(__pyx_t_3);
-        __pyx_t_6 = __Pyx_PyList_GET_SIZE(__pyx_v_criteriaList); if (unlikely(__pyx_t_6 == ((Py_ssize_t)-1))) __PYX_ERR(0, 2754, __pyx_L1_error)
+        __pyx_t_6 = __Pyx_PyList_GET_SIZE(__pyx_v_criteriaList); if (unlikely(__pyx_t_6 == ((Py_ssize_t)-1))) __PYX_ERR(0, 2762, __pyx_L1_error)
         __pyx_t_15 = __pyx_t_6;
         for (__pyx_t_4 = 0; __pyx_t_4 < __pyx_t_15; __pyx_t_4+=1) {
           __pyx_9genexpr39__pyx_v_i = __pyx_t_4;
-          if (unlikely(!__pyx_v_correlations)) { __Pyx_RaiseUnboundLocalError("correlations"); __PYX_ERR(0, 2754, __pyx_L1_error) }
-          __pyx_t_1 = __Pyx_GetItemInt(__pyx_v_correlations, __pyx_9genexpr39__pyx_v_i, int, 1, __Pyx_PyInt_From_int, 0, 1, 1); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 2754, __pyx_L1_error)
+          if (unlikely(!__pyx_v_correlations)) { __Pyx_RaiseUnboundLocalError("correlations"); __PYX_ERR(0, 2762, __pyx_L1_error) }
+          __pyx_t_1 = __Pyx_GetItemInt(__pyx_v_correlations, __pyx_9genexpr39__pyx_v_i, int, 1, __Pyx_PyInt_From_int, 0, 1, 1); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 2762, __pyx_L1_error)
           __Pyx_GOTREF(__pyx_t_1);
-          __pyx_t_9 = __Pyx_PyObject_Dict_GetItem(__pyx_t_1, __pyx_n_u_correlation); if (unlikely(!__pyx_t_9)) __PYX_ERR(0, 2754, __pyx_L1_error)
+          __pyx_t_9 = __Pyx_PyObject_Dict_GetItem(__pyx_t_1, __pyx_n_u_correlation); if (unlikely(!__pyx_t_9)) __PYX_ERR(0, 2762, __pyx_L1_error)
           __Pyx_GOTREF(__pyx_t_9);
           __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
-          __pyx_t_1 = __Pyx_GetItemInt_List(__pyx_v_criteriaList, __pyx_9genexpr39__pyx_v_i, int, 1, __Pyx_PyInt_From_int, 1, 1, 1); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 2754, __pyx_L1_error)
+          __pyx_t_1 = __Pyx_GetItemInt_List(__pyx_v_criteriaList, __pyx_9genexpr39__pyx_v_i, int, 1, __Pyx_PyInt_From_int, 1, 1, 1); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 2762, __pyx_L1_error)
           __Pyx_GOTREF(__pyx_t_1);
-          __pyx_t_2 = PyTuple_New(2); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 2754, __pyx_L1_error)
+          __pyx_t_2 = PyTuple_New(2); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 2762, __pyx_L1_error)
           __Pyx_GOTREF(__pyx_t_2);
           __Pyx_GIVEREF(__pyx_t_9);
-          if (__Pyx_PyTuple_SET_ITEM(__pyx_t_2, 0, __pyx_t_9)) __PYX_ERR(0, 2754, __pyx_L1_error);
+          if (__Pyx_PyTuple_SET_ITEM(__pyx_t_2, 0, __pyx_t_9)) __PYX_ERR(0, 2762, __pyx_L1_error);
           __Pyx_GIVEREF(__pyx_t_1);
-          if (__Pyx_PyTuple_SET_ITEM(__pyx_t_2, 1, __pyx_t_1)) __PYX_ERR(0, 2754, __pyx_L1_error);
+          if (__Pyx_PyTuple_SET_ITEM(__pyx_t_2, 1, __pyx_t_1)) __PYX_ERR(0, 2762, __pyx_L1_error);
           __pyx_t_9 = 0;
           __pyx_t_1 = 0;
-          if (unlikely(__Pyx_ListComp_Append(__pyx_t_3, (PyObject*)__pyx_t_2))) __PYX_ERR(0, 2754, __pyx_L1_error)
+          if (unlikely(__Pyx_ListComp_Append(__pyx_t_3, (PyObject*)__pyx_t_2))) __PYX_ERR(0, 2762, __pyx_L1_error)
           __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
         }
       } /* exit inner scope */
@@ -55757,17 +55860,17 @@ static PyObject *__pyx_pf_32cSparseIntegerOutrankingDigraphs_24cQuantilesRanking
     }
     __pyx_L26:;
 
-    /* "cSparseIntegerOutrankingDigraphs.pyx":2739
+    /* "cSparseIntegerOutrankingDigraphs.pyx":2747
  *         """
  *         cdef int i
  *         if Threading:             # <<<<<<<<<<<<<<
  *             import multiprocessing as mp
- *             mpctx = mp.get_context('fork')
+ *             mpctx = mp.get_context(startMethod)
  */
     goto __pyx_L3;
   }
 
-  /* "cSparseIntegerOutrankingDigraphs.pyx":2757
+  /* "cSparseIntegerOutrankingDigraphs.pyx":2765
  *         else:
  *             #criteriaList = [x for x in self.criteria]
  *             criteria = self.criteria             # <<<<<<<<<<<<<<
@@ -55775,24 +55878,24 @@ static PyObject *__pyx_pf_32cSparseIntegerOutrankingDigraphs_24cQuantilesRanking
  *             for c in dict.keys(criteria):
  */
   /*else*/ {
-    __pyx_t_3 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_n_s_criteria); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 2757, __pyx_L1_error)
+    __pyx_t_3 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_n_s_criteria); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 2765, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_3);
     __pyx_v_criteria = __pyx_t_3;
     __pyx_t_3 = 0;
 
-    /* "cSparseIntegerOutrankingDigraphs.pyx":2758
+    /* "cSparseIntegerOutrankingDigraphs.pyx":2766
  *             #criteriaList = [x for x in self.criteria]
  *             criteria = self.criteria
  *             criteriaCorrelation = []             # <<<<<<<<<<<<<<
  *             for c in dict.keys(criteria):
  *                 corr = self.computeCriterion2RankingCorrelation(c,Threading=False)
  */
-    __pyx_t_3 = PyList_New(0); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 2758, __pyx_L1_error)
+    __pyx_t_3 = PyList_New(0); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 2766, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_3);
     __pyx_v_criteriaCorrelation = ((PyObject*)__pyx_t_3);
     __pyx_t_3 = 0;
 
-    /* "cSparseIntegerOutrankingDigraphs.pyx":2759
+    /* "cSparseIntegerOutrankingDigraphs.pyx":2767
  *             criteria = self.criteria
  *             criteriaCorrelation = []
  *             for c in dict.keys(criteria):             # <<<<<<<<<<<<<<
@@ -55801,19 +55904,19 @@ static PyObject *__pyx_pf_32cSparseIntegerOutrankingDigraphs_24cQuantilesRanking
  */
     if (unlikely(__pyx_v_criteria == Py_None)) {
       PyErr_Format(PyExc_TypeError, "descriptor '%s' requires a '%s' object but received a 'NoneType'", "keys", "dict");
-      __PYX_ERR(0, 2759, __pyx_L1_error)
+      __PYX_ERR(0, 2767, __pyx_L1_error)
     }
-    if (!(likely(PyDict_Check(__pyx_v_criteria)) || __Pyx_RaiseUnexpectedTypeError("dict", __pyx_v_criteria))) __PYX_ERR(0, 2759, __pyx_L1_error)
-    __pyx_t_3 = __Pyx_PyDict_Keys(((PyObject*)__pyx_v_criteria)); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 2759, __pyx_L1_error)
+    if (!(likely(PyDict_Check(__pyx_v_criteria)) || __Pyx_RaiseUnexpectedTypeError("dict", __pyx_v_criteria))) __PYX_ERR(0, 2767, __pyx_L1_error)
+    __pyx_t_3 = __Pyx_PyDict_Keys(((PyObject*)__pyx_v_criteria)); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 2767, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_3);
     if (likely(PyList_CheckExact(__pyx_t_3)) || PyTuple_CheckExact(__pyx_t_3)) {
       __pyx_t_2 = __pyx_t_3; __Pyx_INCREF(__pyx_t_2);
       __pyx_t_6 = 0;
       __pyx_t_7 = NULL;
     } else {
-      __pyx_t_6 = -1; __pyx_t_2 = PyObject_GetIter(__pyx_t_3); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 2759, __pyx_L1_error)
+      __pyx_t_6 = -1; __pyx_t_2 = PyObject_GetIter(__pyx_t_3); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 2767, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_2);
-      __pyx_t_7 = __Pyx_PyObject_GetIterNextFunc(__pyx_t_2); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 2759, __pyx_L1_error)
+      __pyx_t_7 = __Pyx_PyObject_GetIterNextFunc(__pyx_t_2); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 2767, __pyx_L1_error)
     }
     __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
     for (;;) {
@@ -55822,28 +55925,28 @@ static PyObject *__pyx_pf_32cSparseIntegerOutrankingDigraphs_24cQuantilesRanking
           {
             Py_ssize_t __pyx_temp = __Pyx_PyList_GET_SIZE(__pyx_t_2);
             #if !CYTHON_ASSUME_SAFE_MACROS
-            if (unlikely((__pyx_temp < 0))) __PYX_ERR(0, 2759, __pyx_L1_error)
+            if (unlikely((__pyx_temp < 0))) __PYX_ERR(0, 2767, __pyx_L1_error)
             #endif
             if (__pyx_t_6 >= __pyx_temp) break;
           }
           #if CYTHON_ASSUME_SAFE_MACROS && !CYTHON_AVOID_BORROWED_REFS
-          __pyx_t_3 = PyList_GET_ITEM(__pyx_t_2, __pyx_t_6); __Pyx_INCREF(__pyx_t_3); __pyx_t_6++; if (unlikely((0 < 0))) __PYX_ERR(0, 2759, __pyx_L1_error)
+          __pyx_t_3 = PyList_GET_ITEM(__pyx_t_2, __pyx_t_6); __Pyx_INCREF(__pyx_t_3); __pyx_t_6++; if (unlikely((0 < 0))) __PYX_ERR(0, 2767, __pyx_L1_error)
           #else
-          __pyx_t_3 = __Pyx_PySequence_ITEM(__pyx_t_2, __pyx_t_6); __pyx_t_6++; if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 2759, __pyx_L1_error)
+          __pyx_t_3 = __Pyx_PySequence_ITEM(__pyx_t_2, __pyx_t_6); __pyx_t_6++; if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 2767, __pyx_L1_error)
           __Pyx_GOTREF(__pyx_t_3);
           #endif
         } else {
           {
             Py_ssize_t __pyx_temp = __Pyx_PyTuple_GET_SIZE(__pyx_t_2);
             #if !CYTHON_ASSUME_SAFE_MACROS
-            if (unlikely((__pyx_temp < 0))) __PYX_ERR(0, 2759, __pyx_L1_error)
+            if (unlikely((__pyx_temp < 0))) __PYX_ERR(0, 2767, __pyx_L1_error)
             #endif
             if (__pyx_t_6 >= __pyx_temp) break;
           }
           #if CYTHON_ASSUME_SAFE_MACROS && !CYTHON_AVOID_BORROWED_REFS
-          __pyx_t_3 = PyTuple_GET_ITEM(__pyx_t_2, __pyx_t_6); __Pyx_INCREF(__pyx_t_3); __pyx_t_6++; if (unlikely((0 < 0))) __PYX_ERR(0, 2759, __pyx_L1_error)
+          __pyx_t_3 = PyTuple_GET_ITEM(__pyx_t_2, __pyx_t_6); __Pyx_INCREF(__pyx_t_3); __pyx_t_6++; if (unlikely((0 < 0))) __PYX_ERR(0, 2767, __pyx_L1_error)
           #else
-          __pyx_t_3 = __Pyx_PySequence_ITEM(__pyx_t_2, __pyx_t_6); __pyx_t_6++; if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 2759, __pyx_L1_error)
+          __pyx_t_3 = __Pyx_PySequence_ITEM(__pyx_t_2, __pyx_t_6); __pyx_t_6++; if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 2767, __pyx_L1_error)
           __Pyx_GOTREF(__pyx_t_3);
           #endif
         }
@@ -55853,7 +55956,7 @@ static PyObject *__pyx_pf_32cSparseIntegerOutrankingDigraphs_24cQuantilesRanking
           PyObject* exc_type = PyErr_Occurred();
           if (exc_type) {
             if (likely(__Pyx_PyErr_GivenExceptionMatches(exc_type, PyExc_StopIteration))) PyErr_Clear();
-            else __PYX_ERR(0, 2759, __pyx_L1_error)
+            else __PYX_ERR(0, 2767, __pyx_L1_error)
           }
           break;
         }
@@ -55862,24 +55965,24 @@ static PyObject *__pyx_pf_32cSparseIntegerOutrankingDigraphs_24cQuantilesRanking
       __Pyx_XDECREF_SET(__pyx_v_c, __pyx_t_3);
       __pyx_t_3 = 0;
 
-      /* "cSparseIntegerOutrankingDigraphs.pyx":2760
+      /* "cSparseIntegerOutrankingDigraphs.pyx":2768
  *             criteriaCorrelation = []
  *             for c in dict.keys(criteria):
  *                 corr = self.computeCriterion2RankingCorrelation(c,Threading=False)             # <<<<<<<<<<<<<<
  *                 if ValuedCorrelation:
  *                     criteriaCorrelation.append((corr['correlation']*corr['determination'],c))
  */
-      __pyx_t_3 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_n_s_computeCriterion2RankingCorrelat); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 2760, __pyx_L1_error)
+      __pyx_t_3 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_n_s_computeCriterion2RankingCorrelat); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 2768, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_3);
-      __pyx_t_1 = PyTuple_New(1); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 2760, __pyx_L1_error)
+      __pyx_t_1 = PyTuple_New(1); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 2768, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_1);
       __Pyx_INCREF(__pyx_v_c);
       __Pyx_GIVEREF(__pyx_v_c);
-      if (__Pyx_PyTuple_SET_ITEM(__pyx_t_1, 0, __pyx_v_c)) __PYX_ERR(0, 2760, __pyx_L1_error);
-      __pyx_t_9 = __Pyx_PyDict_NewPresized(1); if (unlikely(!__pyx_t_9)) __PYX_ERR(0, 2760, __pyx_L1_error)
+      if (__Pyx_PyTuple_SET_ITEM(__pyx_t_1, 0, __pyx_v_c)) __PYX_ERR(0, 2768, __pyx_L1_error);
+      __pyx_t_9 = __Pyx_PyDict_NewPresized(1); if (unlikely(!__pyx_t_9)) __PYX_ERR(0, 2768, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_9);
-      if (PyDict_SetItem(__pyx_t_9, __pyx_n_s_Threading, Py_False) < 0) __PYX_ERR(0, 2760, __pyx_L1_error)
-      __pyx_t_16 = __Pyx_PyObject_Call(__pyx_t_3, __pyx_t_1, __pyx_t_9); if (unlikely(!__pyx_t_16)) __PYX_ERR(0, 2760, __pyx_L1_error)
+      if (PyDict_SetItem(__pyx_t_9, __pyx_n_s_Threading, Py_False) < 0) __PYX_ERR(0, 2768, __pyx_L1_error)
+      __pyx_t_16 = __Pyx_PyObject_Call(__pyx_t_3, __pyx_t_1, __pyx_t_9); if (unlikely(!__pyx_t_16)) __PYX_ERR(0, 2768, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_16);
       __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
       __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
@@ -55887,7 +55990,7 @@ static PyObject *__pyx_pf_32cSparseIntegerOutrankingDigraphs_24cQuantilesRanking
       __Pyx_XDECREF_SET(__pyx_v_corr, __pyx_t_16);
       __pyx_t_16 = 0;
 
-      /* "cSparseIntegerOutrankingDigraphs.pyx":2761
+      /* "cSparseIntegerOutrankingDigraphs.pyx":2769
  *             for c in dict.keys(criteria):
  *                 corr = self.computeCriterion2RankingCorrelation(c,Threading=False)
  *                 if ValuedCorrelation:             # <<<<<<<<<<<<<<
@@ -55896,33 +55999,33 @@ static PyObject *__pyx_pf_32cSparseIntegerOutrankingDigraphs_24cQuantilesRanking
  */
       if (__pyx_v_ValuedCorrelation) {
 
-        /* "cSparseIntegerOutrankingDigraphs.pyx":2762
+        /* "cSparseIntegerOutrankingDigraphs.pyx":2770
  *                 corr = self.computeCriterion2RankingCorrelation(c,Threading=False)
  *                 if ValuedCorrelation:
  *                     criteriaCorrelation.append((corr['correlation']*corr['determination'],c))             # <<<<<<<<<<<<<<
  *                 else:
  *                     criteriaCorrelation.append((corr['correlation'],c))
  */
-        __pyx_t_16 = __Pyx_PyObject_Dict_GetItem(__pyx_v_corr, __pyx_n_u_correlation); if (unlikely(!__pyx_t_16)) __PYX_ERR(0, 2762, __pyx_L1_error)
+        __pyx_t_16 = __Pyx_PyObject_Dict_GetItem(__pyx_v_corr, __pyx_n_u_correlation); if (unlikely(!__pyx_t_16)) __PYX_ERR(0, 2770, __pyx_L1_error)
         __Pyx_GOTREF(__pyx_t_16);
-        __pyx_t_9 = __Pyx_PyObject_Dict_GetItem(__pyx_v_corr, __pyx_n_u_determination); if (unlikely(!__pyx_t_9)) __PYX_ERR(0, 2762, __pyx_L1_error)
+        __pyx_t_9 = __Pyx_PyObject_Dict_GetItem(__pyx_v_corr, __pyx_n_u_determination); if (unlikely(!__pyx_t_9)) __PYX_ERR(0, 2770, __pyx_L1_error)
         __Pyx_GOTREF(__pyx_t_9);
-        __pyx_t_1 = PyNumber_Multiply(__pyx_t_16, __pyx_t_9); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 2762, __pyx_L1_error)
+        __pyx_t_1 = PyNumber_Multiply(__pyx_t_16, __pyx_t_9); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 2770, __pyx_L1_error)
         __Pyx_GOTREF(__pyx_t_1);
         __Pyx_DECREF(__pyx_t_16); __pyx_t_16 = 0;
         __Pyx_DECREF(__pyx_t_9); __pyx_t_9 = 0;
-        __pyx_t_9 = PyTuple_New(2); if (unlikely(!__pyx_t_9)) __PYX_ERR(0, 2762, __pyx_L1_error)
+        __pyx_t_9 = PyTuple_New(2); if (unlikely(!__pyx_t_9)) __PYX_ERR(0, 2770, __pyx_L1_error)
         __Pyx_GOTREF(__pyx_t_9);
         __Pyx_GIVEREF(__pyx_t_1);
-        if (__Pyx_PyTuple_SET_ITEM(__pyx_t_9, 0, __pyx_t_1)) __PYX_ERR(0, 2762, __pyx_L1_error);
+        if (__Pyx_PyTuple_SET_ITEM(__pyx_t_9, 0, __pyx_t_1)) __PYX_ERR(0, 2770, __pyx_L1_error);
         __Pyx_INCREF(__pyx_v_c);
         __Pyx_GIVEREF(__pyx_v_c);
-        if (__Pyx_PyTuple_SET_ITEM(__pyx_t_9, 1, __pyx_v_c)) __PYX_ERR(0, 2762, __pyx_L1_error);
+        if (__Pyx_PyTuple_SET_ITEM(__pyx_t_9, 1, __pyx_v_c)) __PYX_ERR(0, 2770, __pyx_L1_error);
         __pyx_t_1 = 0;
-        __pyx_t_17 = __Pyx_PyList_Append(__pyx_v_criteriaCorrelation, __pyx_t_9); if (unlikely(__pyx_t_17 == ((int)-1))) __PYX_ERR(0, 2762, __pyx_L1_error)
+        __pyx_t_17 = __Pyx_PyList_Append(__pyx_v_criteriaCorrelation, __pyx_t_9); if (unlikely(__pyx_t_17 == ((int)-1))) __PYX_ERR(0, 2770, __pyx_L1_error)
         __Pyx_DECREF(__pyx_t_9); __pyx_t_9 = 0;
 
-        /* "cSparseIntegerOutrankingDigraphs.pyx":2761
+        /* "cSparseIntegerOutrankingDigraphs.pyx":2769
  *             for c in dict.keys(criteria):
  *                 corr = self.computeCriterion2RankingCorrelation(c,Threading=False)
  *                 if ValuedCorrelation:             # <<<<<<<<<<<<<<
@@ -55932,7 +56035,7 @@ static PyObject *__pyx_pf_32cSparseIntegerOutrankingDigraphs_24cQuantilesRanking
         goto __pyx_L33;
       }
 
-      /* "cSparseIntegerOutrankingDigraphs.pyx":2764
+      /* "cSparseIntegerOutrankingDigraphs.pyx":2772
  *                     criteriaCorrelation.append((corr['correlation']*corr['determination'],c))
  *                 else:
  *                     criteriaCorrelation.append((corr['correlation'],c))             # <<<<<<<<<<<<<<
@@ -55940,22 +56043,22 @@ static PyObject *__pyx_pf_32cSparseIntegerOutrankingDigraphs_24cQuantilesRanking
  *             criteriaCorrelation.sort(reverse=True)
  */
       /*else*/ {
-        __pyx_t_9 = __Pyx_PyObject_Dict_GetItem(__pyx_v_corr, __pyx_n_u_correlation); if (unlikely(!__pyx_t_9)) __PYX_ERR(0, 2764, __pyx_L1_error)
+        __pyx_t_9 = __Pyx_PyObject_Dict_GetItem(__pyx_v_corr, __pyx_n_u_correlation); if (unlikely(!__pyx_t_9)) __PYX_ERR(0, 2772, __pyx_L1_error)
         __Pyx_GOTREF(__pyx_t_9);
-        __pyx_t_1 = PyTuple_New(2); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 2764, __pyx_L1_error)
+        __pyx_t_1 = PyTuple_New(2); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 2772, __pyx_L1_error)
         __Pyx_GOTREF(__pyx_t_1);
         __Pyx_GIVEREF(__pyx_t_9);
-        if (__Pyx_PyTuple_SET_ITEM(__pyx_t_1, 0, __pyx_t_9)) __PYX_ERR(0, 2764, __pyx_L1_error);
+        if (__Pyx_PyTuple_SET_ITEM(__pyx_t_1, 0, __pyx_t_9)) __PYX_ERR(0, 2772, __pyx_L1_error);
         __Pyx_INCREF(__pyx_v_c);
         __Pyx_GIVEREF(__pyx_v_c);
-        if (__Pyx_PyTuple_SET_ITEM(__pyx_t_1, 1, __pyx_v_c)) __PYX_ERR(0, 2764, __pyx_L1_error);
+        if (__Pyx_PyTuple_SET_ITEM(__pyx_t_1, 1, __pyx_v_c)) __PYX_ERR(0, 2772, __pyx_L1_error);
         __pyx_t_9 = 0;
-        __pyx_t_17 = __Pyx_PyList_Append(__pyx_v_criteriaCorrelation, __pyx_t_1); if (unlikely(__pyx_t_17 == ((int)-1))) __PYX_ERR(0, 2764, __pyx_L1_error)
+        __pyx_t_17 = __Pyx_PyList_Append(__pyx_v_criteriaCorrelation, __pyx_t_1); if (unlikely(__pyx_t_17 == ((int)-1))) __PYX_ERR(0, 2772, __pyx_L1_error)
         __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
       }
       __pyx_L33:;
 
-      /* "cSparseIntegerOutrankingDigraphs.pyx":2759
+      /* "cSparseIntegerOutrankingDigraphs.pyx":2767
  *             criteria = self.criteria
  *             criteriaCorrelation = []
  *             for c in dict.keys(criteria):             # <<<<<<<<<<<<<<
@@ -55967,7 +56070,7 @@ static PyObject *__pyx_pf_32cSparseIntegerOutrankingDigraphs_24cQuantilesRanking
   }
   __pyx_L3:;
 
-  /* "cSparseIntegerOutrankingDigraphs.pyx":2765
+  /* "cSparseIntegerOutrankingDigraphs.pyx":2773
  *                 else:
  *                     criteriaCorrelation.append((corr['correlation'],c))
  *         if Sorted:             # <<<<<<<<<<<<<<
@@ -55976,25 +56079,25 @@ static PyObject *__pyx_pf_32cSparseIntegerOutrankingDigraphs_24cQuantilesRanking
  */
   if (__pyx_v_Sorted) {
 
-    /* "cSparseIntegerOutrankingDigraphs.pyx":2766
+    /* "cSparseIntegerOutrankingDigraphs.pyx":2774
  *                     criteriaCorrelation.append((corr['correlation'],c))
  *         if Sorted:
  *             criteriaCorrelation.sort(reverse=True)             # <<<<<<<<<<<<<<
  *         return criteriaCorrelation
  * 
  */
-    __pyx_t_2 = __Pyx_PyObject_GetAttrStr(__pyx_v_criteriaCorrelation, __pyx_n_s_sort); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 2766, __pyx_L1_error)
+    __pyx_t_2 = __Pyx_PyObject_GetAttrStr(__pyx_v_criteriaCorrelation, __pyx_n_s_sort); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 2774, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_2);
-    __pyx_t_1 = __Pyx_PyDict_NewPresized(1); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 2766, __pyx_L1_error)
+    __pyx_t_1 = __Pyx_PyDict_NewPresized(1); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 2774, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_1);
-    if (PyDict_SetItem(__pyx_t_1, __pyx_n_s_reverse, Py_True) < 0) __PYX_ERR(0, 2766, __pyx_L1_error)
-    __pyx_t_9 = __Pyx_PyObject_Call(__pyx_t_2, __pyx_empty_tuple, __pyx_t_1); if (unlikely(!__pyx_t_9)) __PYX_ERR(0, 2766, __pyx_L1_error)
+    if (PyDict_SetItem(__pyx_t_1, __pyx_n_s_reverse, Py_True) < 0) __PYX_ERR(0, 2774, __pyx_L1_error)
+    __pyx_t_9 = __Pyx_PyObject_Call(__pyx_t_2, __pyx_empty_tuple, __pyx_t_1); if (unlikely(!__pyx_t_9)) __PYX_ERR(0, 2774, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_9);
     __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
     __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
     __Pyx_DECREF(__pyx_t_9); __pyx_t_9 = 0;
 
-    /* "cSparseIntegerOutrankingDigraphs.pyx":2765
+    /* "cSparseIntegerOutrankingDigraphs.pyx":2773
  *                 else:
  *                     criteriaCorrelation.append((corr['correlation'],c))
  *         if Sorted:             # <<<<<<<<<<<<<<
@@ -56003,7 +56106,7 @@ static PyObject *__pyx_pf_32cSparseIntegerOutrankingDigraphs_24cQuantilesRanking
  */
   }
 
-  /* "cSparseIntegerOutrankingDigraphs.pyx":2767
+  /* "cSparseIntegerOutrankingDigraphs.pyx":2775
  *         if Sorted:
  *             criteriaCorrelation.sort(reverse=True)
  *         return criteriaCorrelation             # <<<<<<<<<<<<<<
@@ -56015,7 +56118,7 @@ static PyObject *__pyx_pf_32cSparseIntegerOutrankingDigraphs_24cQuantilesRanking
   __pyx_r = __pyx_v_criteriaCorrelation;
   goto __pyx_L0;
 
-  /* "cSparseIntegerOutrankingDigraphs.pyx":2713
+  /* "cSparseIntegerOutrankingDigraphs.pyx":2721
  *         return corr
  * 
  *     def computeMarginalVersusGlobalOutrankingCorrelations(self,             # <<<<<<<<<<<<<<
@@ -56051,7 +56154,7 @@ static PyObject *__pyx_pf_32cSparseIntegerOutrankingDigraphs_24cQuantilesRanking
   return __pyx_r;
 }
 
-/* "cSparseIntegerOutrankingDigraphs.pyx":2769
+/* "cSparseIntegerOutrankingDigraphs.pyx":2777
  *         return criteriaCorrelation
  * 
  *     def relation(self, int x, int y):             # <<<<<<<<<<<<<<
@@ -56119,7 +56222,7 @@ PyObject *__pyx_args, PyObject *__pyx_kwds
           (void)__Pyx_Arg_NewRef_FASTCALL(values[0]);
           kw_args--;
         }
-        else if (unlikely(PyErr_Occurred())) __PYX_ERR(0, 2769, __pyx_L3_error)
+        else if (unlikely(PyErr_Occurred())) __PYX_ERR(0, 2777, __pyx_L3_error)
         else goto __pyx_L5_argtuple_error;
         CYTHON_FALLTHROUGH;
         case  1:
@@ -56127,9 +56230,9 @@ PyObject *__pyx_args, PyObject *__pyx_kwds
           (void)__Pyx_Arg_NewRef_FASTCALL(values[1]);
           kw_args--;
         }
-        else if (unlikely(PyErr_Occurred())) __PYX_ERR(0, 2769, __pyx_L3_error)
+        else if (unlikely(PyErr_Occurred())) __PYX_ERR(0, 2777, __pyx_L3_error)
         else {
-          __Pyx_RaiseArgtupleInvalid("relation", 1, 3, 3, 1); __PYX_ERR(0, 2769, __pyx_L3_error)
+          __Pyx_RaiseArgtupleInvalid("relation", 1, 3, 3, 1); __PYX_ERR(0, 2777, __pyx_L3_error)
         }
         CYTHON_FALLTHROUGH;
         case  2:
@@ -56137,14 +56240,14 @@ PyObject *__pyx_args, PyObject *__pyx_kwds
           (void)__Pyx_Arg_NewRef_FASTCALL(values[2]);
           kw_args--;
         }
-        else if (unlikely(PyErr_Occurred())) __PYX_ERR(0, 2769, __pyx_L3_error)
+        else if (unlikely(PyErr_Occurred())) __PYX_ERR(0, 2777, __pyx_L3_error)
         else {
-          __Pyx_RaiseArgtupleInvalid("relation", 1, 3, 3, 2); __PYX_ERR(0, 2769, __pyx_L3_error)
+          __Pyx_RaiseArgtupleInvalid("relation", 1, 3, 3, 2); __PYX_ERR(0, 2777, __pyx_L3_error)
         }
       }
       if (unlikely(kw_args > 0)) {
         const Py_ssize_t kwd_pos_args = __pyx_nargs;
-        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_kwvalues, __pyx_pyargnames, 0, values + 0, kwd_pos_args, "relation") < 0)) __PYX_ERR(0, 2769, __pyx_L3_error)
+        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_kwvalues, __pyx_pyargnames, 0, values + 0, kwd_pos_args, "relation") < 0)) __PYX_ERR(0, 2777, __pyx_L3_error)
       }
     } else if (unlikely(__pyx_nargs != 3)) {
       goto __pyx_L5_argtuple_error;
@@ -56154,12 +56257,12 @@ PyObject *__pyx_args, PyObject *__pyx_kwds
       values[2] = __Pyx_Arg_FASTCALL(__pyx_args, 2);
     }
     __pyx_v_self = values[0];
-    __pyx_v_x = __Pyx_PyInt_As_int(values[1]); if (unlikely((__pyx_v_x == (int)-1) && PyErr_Occurred())) __PYX_ERR(0, 2769, __pyx_L3_error)
-    __pyx_v_y = __Pyx_PyInt_As_int(values[2]); if (unlikely((__pyx_v_y == (int)-1) && PyErr_Occurred())) __PYX_ERR(0, 2769, __pyx_L3_error)
+    __pyx_v_x = __Pyx_PyInt_As_int(values[1]); if (unlikely((__pyx_v_x == (int)-1) && PyErr_Occurred())) __PYX_ERR(0, 2777, __pyx_L3_error)
+    __pyx_v_y = __Pyx_PyInt_As_int(values[2]); if (unlikely((__pyx_v_y == (int)-1) && PyErr_Occurred())) __PYX_ERR(0, 2777, __pyx_L3_error)
   }
   goto __pyx_L6_skip;
   __pyx_L5_argtuple_error:;
-  __Pyx_RaiseArgtupleInvalid("relation", 1, 3, 3, __pyx_nargs); __PYX_ERR(0, 2769, __pyx_L3_error)
+  __Pyx_RaiseArgtupleInvalid("relation", 1, 3, 3, __pyx_nargs); __PYX_ERR(0, 2777, __pyx_L3_error)
   __pyx_L6_skip:;
   goto __pyx_L4_argument_unpacking_done;
   __pyx_L3_error:;
@@ -56206,55 +56309,55 @@ static PyObject *__pyx_pf_32cSparseIntegerOutrankingDigraphs_24cQuantilesRanking
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("relation", 1);
 
-  /* "cSparseIntegerOutrankingDigraphs.pyx":2779
+  /* "cSparseIntegerOutrankingDigraphs.pyx":2787
  *         cdef int Min, Med, Max, rx, ry
  * 
  *         Min = self.valuationdomain['min']             # <<<<<<<<<<<<<<
  *         Med = self.valuationdomain['med']
  *         Max = self.valuationdomain['max']
  */
-  __pyx_t_1 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_n_s_valuationdomain); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 2779, __pyx_L1_error)
+  __pyx_t_1 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_n_s_valuationdomain); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 2787, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
-  __pyx_t_2 = __Pyx_PyObject_Dict_GetItem(__pyx_t_1, __pyx_n_u_min); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 2779, __pyx_L1_error)
+  __pyx_t_2 = __Pyx_PyObject_Dict_GetItem(__pyx_t_1, __pyx_n_u_min); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 2787, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
-  __pyx_t_3 = __Pyx_PyInt_As_int(__pyx_t_2); if (unlikely((__pyx_t_3 == (int)-1) && PyErr_Occurred())) __PYX_ERR(0, 2779, __pyx_L1_error)
+  __pyx_t_3 = __Pyx_PyInt_As_int(__pyx_t_2); if (unlikely((__pyx_t_3 == (int)-1) && PyErr_Occurred())) __PYX_ERR(0, 2787, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
   __pyx_v_Min = __pyx_t_3;
 
-  /* "cSparseIntegerOutrankingDigraphs.pyx":2780
+  /* "cSparseIntegerOutrankingDigraphs.pyx":2788
  * 
  *         Min = self.valuationdomain['min']
  *         Med = self.valuationdomain['med']             # <<<<<<<<<<<<<<
  *         Max = self.valuationdomain['max']
  * 
  */
-  __pyx_t_2 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_n_s_valuationdomain); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 2780, __pyx_L1_error)
+  __pyx_t_2 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_n_s_valuationdomain); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 2788, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
-  __pyx_t_1 = __Pyx_PyObject_Dict_GetItem(__pyx_t_2, __pyx_n_u_med); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 2780, __pyx_L1_error)
+  __pyx_t_1 = __Pyx_PyObject_Dict_GetItem(__pyx_t_2, __pyx_n_u_med); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 2788, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
-  __pyx_t_3 = __Pyx_PyInt_As_int(__pyx_t_1); if (unlikely((__pyx_t_3 == (int)-1) && PyErr_Occurred())) __PYX_ERR(0, 2780, __pyx_L1_error)
+  __pyx_t_3 = __Pyx_PyInt_As_int(__pyx_t_1); if (unlikely((__pyx_t_3 == (int)-1) && PyErr_Occurred())) __PYX_ERR(0, 2788, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
   __pyx_v_Med = __pyx_t_3;
 
-  /* "cSparseIntegerOutrankingDigraphs.pyx":2781
+  /* "cSparseIntegerOutrankingDigraphs.pyx":2789
  *         Min = self.valuationdomain['min']
  *         Med = self.valuationdomain['med']
  *         Max = self.valuationdomain['max']             # <<<<<<<<<<<<<<
  * 
  *         if x == y:
  */
-  __pyx_t_1 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_n_s_valuationdomain); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 2781, __pyx_L1_error)
+  __pyx_t_1 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_n_s_valuationdomain); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 2789, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
-  __pyx_t_2 = __Pyx_PyObject_Dict_GetItem(__pyx_t_1, __pyx_n_u_max); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 2781, __pyx_L1_error)
+  __pyx_t_2 = __Pyx_PyObject_Dict_GetItem(__pyx_t_1, __pyx_n_u_max); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 2789, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
-  __pyx_t_3 = __Pyx_PyInt_As_int(__pyx_t_2); if (unlikely((__pyx_t_3 == (int)-1) && PyErr_Occurred())) __PYX_ERR(0, 2781, __pyx_L1_error)
+  __pyx_t_3 = __Pyx_PyInt_As_int(__pyx_t_2); if (unlikely((__pyx_t_3 == (int)-1) && PyErr_Occurred())) __PYX_ERR(0, 2789, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
   __pyx_v_Max = __pyx_t_3;
 
-  /* "cSparseIntegerOutrankingDigraphs.pyx":2783
+  /* "cSparseIntegerOutrankingDigraphs.pyx":2791
  *         Max = self.valuationdomain['max']
  * 
  *         if x == y:             # <<<<<<<<<<<<<<
@@ -56264,7 +56367,7 @@ static PyObject *__pyx_pf_32cSparseIntegerOutrankingDigraphs_24cQuantilesRanking
   __pyx_t_4 = (__pyx_v_x == __pyx_v_y);
   if (__pyx_t_4) {
 
-    /* "cSparseIntegerOutrankingDigraphs.pyx":2784
+    /* "cSparseIntegerOutrankingDigraphs.pyx":2792
  * 
  *         if x == y:
  *             return Med             # <<<<<<<<<<<<<<
@@ -56272,13 +56375,13 @@ static PyObject *__pyx_pf_32cSparseIntegerOutrankingDigraphs_24cQuantilesRanking
  *         boostedRanking = self.boostedRanking
  */
     __Pyx_XDECREF(__pyx_r);
-    __pyx_t_2 = __Pyx_PyInt_From_int(__pyx_v_Med); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 2784, __pyx_L1_error)
+    __pyx_t_2 = __Pyx_PyInt_From_int(__pyx_v_Med); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 2792, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_2);
     __pyx_r = __pyx_t_2;
     __pyx_t_2 = 0;
     goto __pyx_L0;
 
-    /* "cSparseIntegerOutrankingDigraphs.pyx":2783
+    /* "cSparseIntegerOutrankingDigraphs.pyx":2791
  *         Max = self.valuationdomain['max']
  * 
  *         if x == y:             # <<<<<<<<<<<<<<
@@ -56287,28 +56390,28 @@ static PyObject *__pyx_pf_32cSparseIntegerOutrankingDigraphs_24cQuantilesRanking
  */
   }
 
-  /* "cSparseIntegerOutrankingDigraphs.pyx":2786
+  /* "cSparseIntegerOutrankingDigraphs.pyx":2794
  *             return Med
  * 
  *         boostedRanking = self.boostedRanking             # <<<<<<<<<<<<<<
  *         rx = boostedRanking.index(x)
  *         ry = boostedRanking.index(y)
  */
-  __pyx_t_2 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_n_s_boostedRanking); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 2786, __pyx_L1_error)
+  __pyx_t_2 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_n_s_boostedRanking); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 2794, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
   __pyx_v_boostedRanking = __pyx_t_2;
   __pyx_t_2 = 0;
 
-  /* "cSparseIntegerOutrankingDigraphs.pyx":2787
+  /* "cSparseIntegerOutrankingDigraphs.pyx":2795
  * 
  *         boostedRanking = self.boostedRanking
  *         rx = boostedRanking.index(x)             # <<<<<<<<<<<<<<
  *         ry = boostedRanking.index(y)
  * 
  */
-  __pyx_t_1 = __Pyx_PyObject_GetAttrStr(__pyx_v_boostedRanking, __pyx_n_s_index); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 2787, __pyx_L1_error)
+  __pyx_t_1 = __Pyx_PyObject_GetAttrStr(__pyx_v_boostedRanking, __pyx_n_s_index); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 2795, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
-  __pyx_t_5 = __Pyx_PyInt_From_int(__pyx_v_x); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 2787, __pyx_L1_error)
+  __pyx_t_5 = __Pyx_PyInt_From_int(__pyx_v_x); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 2795, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_5);
   __pyx_t_6 = NULL;
   __pyx_t_3 = 0;
@@ -56329,24 +56432,24 @@ static PyObject *__pyx_pf_32cSparseIntegerOutrankingDigraphs_24cQuantilesRanking
     __pyx_t_2 = __Pyx_PyObject_FastCall(__pyx_t_1, __pyx_callargs+1-__pyx_t_3, 1+__pyx_t_3);
     __Pyx_XDECREF(__pyx_t_6); __pyx_t_6 = 0;
     __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
-    if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 2787, __pyx_L1_error)
+    if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 2795, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_2);
     __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
   }
-  __pyx_t_3 = __Pyx_PyInt_As_int(__pyx_t_2); if (unlikely((__pyx_t_3 == (int)-1) && PyErr_Occurred())) __PYX_ERR(0, 2787, __pyx_L1_error)
+  __pyx_t_3 = __Pyx_PyInt_As_int(__pyx_t_2); if (unlikely((__pyx_t_3 == (int)-1) && PyErr_Occurred())) __PYX_ERR(0, 2795, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
   __pyx_v_rx = __pyx_t_3;
 
-  /* "cSparseIntegerOutrankingDigraphs.pyx":2788
+  /* "cSparseIntegerOutrankingDigraphs.pyx":2796
  *         boostedRanking = self.boostedRanking
  *         rx = boostedRanking.index(x)
  *         ry = boostedRanking.index(y)             # <<<<<<<<<<<<<<
  * 
  *         if rx > ry:
  */
-  __pyx_t_1 = __Pyx_PyObject_GetAttrStr(__pyx_v_boostedRanking, __pyx_n_s_index); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 2788, __pyx_L1_error)
+  __pyx_t_1 = __Pyx_PyObject_GetAttrStr(__pyx_v_boostedRanking, __pyx_n_s_index); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 2796, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
-  __pyx_t_5 = __Pyx_PyInt_From_int(__pyx_v_y); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 2788, __pyx_L1_error)
+  __pyx_t_5 = __Pyx_PyInt_From_int(__pyx_v_y); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 2796, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_5);
   __pyx_t_6 = NULL;
   __pyx_t_3 = 0;
@@ -56367,15 +56470,15 @@ static PyObject *__pyx_pf_32cSparseIntegerOutrankingDigraphs_24cQuantilesRanking
     __pyx_t_2 = __Pyx_PyObject_FastCall(__pyx_t_1, __pyx_callargs+1-__pyx_t_3, 1+__pyx_t_3);
     __Pyx_XDECREF(__pyx_t_6); __pyx_t_6 = 0;
     __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
-    if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 2788, __pyx_L1_error)
+    if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 2796, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_2);
     __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
   }
-  __pyx_t_3 = __Pyx_PyInt_As_int(__pyx_t_2); if (unlikely((__pyx_t_3 == (int)-1) && PyErr_Occurred())) __PYX_ERR(0, 2788, __pyx_L1_error)
+  __pyx_t_3 = __Pyx_PyInt_As_int(__pyx_t_2); if (unlikely((__pyx_t_3 == (int)-1) && PyErr_Occurred())) __PYX_ERR(0, 2796, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
   __pyx_v_ry = __pyx_t_3;
 
-  /* "cSparseIntegerOutrankingDigraphs.pyx":2790
+  /* "cSparseIntegerOutrankingDigraphs.pyx":2798
  *         ry = boostedRanking.index(y)
  * 
  *         if rx > ry:             # <<<<<<<<<<<<<<
@@ -56385,7 +56488,7 @@ static PyObject *__pyx_pf_32cSparseIntegerOutrankingDigraphs_24cQuantilesRanking
   __pyx_t_4 = (__pyx_v_rx > __pyx_v_ry);
   if (__pyx_t_4) {
 
-    /* "cSparseIntegerOutrankingDigraphs.pyx":2791
+    /* "cSparseIntegerOutrankingDigraphs.pyx":2799
  * 
  *         if rx > ry:
  *             return Min             # <<<<<<<<<<<<<<
@@ -56393,13 +56496,13 @@ static PyObject *__pyx_pf_32cSparseIntegerOutrankingDigraphs_24cQuantilesRanking
  *             return Max
  */
     __Pyx_XDECREF(__pyx_r);
-    __pyx_t_2 = __Pyx_PyInt_From_int(__pyx_v_Min); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 2791, __pyx_L1_error)
+    __pyx_t_2 = __Pyx_PyInt_From_int(__pyx_v_Min); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 2799, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_2);
     __pyx_r = __pyx_t_2;
     __pyx_t_2 = 0;
     goto __pyx_L0;
 
-    /* "cSparseIntegerOutrankingDigraphs.pyx":2790
+    /* "cSparseIntegerOutrankingDigraphs.pyx":2798
  *         ry = boostedRanking.index(y)
  * 
  *         if rx > ry:             # <<<<<<<<<<<<<<
@@ -56408,7 +56511,7 @@ static PyObject *__pyx_pf_32cSparseIntegerOutrankingDigraphs_24cQuantilesRanking
  */
   }
 
-  /* "cSparseIntegerOutrankingDigraphs.pyx":2792
+  /* "cSparseIntegerOutrankingDigraphs.pyx":2800
  *         if rx > ry:
  *             return Min
  *         elif ry > rx:             # <<<<<<<<<<<<<<
@@ -56418,7 +56521,7 @@ static PyObject *__pyx_pf_32cSparseIntegerOutrankingDigraphs_24cQuantilesRanking
   __pyx_t_4 = (__pyx_v_ry > __pyx_v_rx);
   if (__pyx_t_4) {
 
-    /* "cSparseIntegerOutrankingDigraphs.pyx":2793
+    /* "cSparseIntegerOutrankingDigraphs.pyx":2801
  *             return Min
  *         elif ry > rx:
  *             return Max             # <<<<<<<<<<<<<<
@@ -56426,13 +56529,13 @@ static PyObject *__pyx_pf_32cSparseIntegerOutrankingDigraphs_24cQuantilesRanking
  *             return Med
  */
     __Pyx_XDECREF(__pyx_r);
-    __pyx_t_2 = __Pyx_PyInt_From_int(__pyx_v_Max); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 2793, __pyx_L1_error)
+    __pyx_t_2 = __Pyx_PyInt_From_int(__pyx_v_Max); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 2801, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_2);
     __pyx_r = __pyx_t_2;
     __pyx_t_2 = 0;
     goto __pyx_L0;
 
-    /* "cSparseIntegerOutrankingDigraphs.pyx":2792
+    /* "cSparseIntegerOutrankingDigraphs.pyx":2800
  *         if rx > ry:
  *             return Min
  *         elif ry > rx:             # <<<<<<<<<<<<<<
@@ -56441,7 +56544,7 @@ static PyObject *__pyx_pf_32cSparseIntegerOutrankingDigraphs_24cQuantilesRanking
  */
   }
 
-  /* "cSparseIntegerOutrankingDigraphs.pyx":2795
+  /* "cSparseIntegerOutrankingDigraphs.pyx":2803
  *             return Max
  *         else:
  *             return Med             # <<<<<<<<<<<<<<
@@ -56450,14 +56553,14 @@ static PyObject *__pyx_pf_32cSparseIntegerOutrankingDigraphs_24cQuantilesRanking
  */
   /*else*/ {
     __Pyx_XDECREF(__pyx_r);
-    __pyx_t_2 = __Pyx_PyInt_From_int(__pyx_v_Med); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 2795, __pyx_L1_error)
+    __pyx_t_2 = __Pyx_PyInt_From_int(__pyx_v_Med); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 2803, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_2);
     __pyx_r = __pyx_t_2;
     __pyx_t_2 = 0;
     goto __pyx_L0;
   }
 
-  /* "cSparseIntegerOutrankingDigraphs.pyx":2769
+  /* "cSparseIntegerOutrankingDigraphs.pyx":2777
  *         return criteriaCorrelation
  * 
  *     def relation(self, int x, int y):             # <<<<<<<<<<<<<<
@@ -56480,7 +56583,7 @@ static PyObject *__pyx_pf_32cSparseIntegerOutrankingDigraphs_24cQuantilesRanking
   return __pyx_r;
 }
 
-/* "cSparseIntegerOutrankingDigraphs.pyx":2797
+/* "cSparseIntegerOutrankingDigraphs.pyx":2805
  *             return Med
  * 
  *     def showMarginalVersusGlobalOutrankingCorrelation(self,             # <<<<<<<<<<<<<<
@@ -56532,8 +56635,24 @@ PyObject *__pyx_args, PyObject *__pyx_kwds
   __pyx_kwvalues = __Pyx_KwValues_FASTCALL(__pyx_args, __pyx_nargs);
   {
     PyObject **__pyx_pyargnames[] = {&__pyx_n_s_self,&__pyx_n_s_Sorted,&__pyx_n_s_Threading,&__pyx_n_s_nbrOfCPUs,&__pyx_n_s_startMethod,&__pyx_n_s_Comments,0};
-    values[3] = __Pyx_Arg_NewRef_FASTCALL(((PyObject *)((PyObject *)__pyx_int_1)));
-    values[4] = __Pyx_Arg_NewRef_FASTCALL(((PyObject *)((PyObject*)__pyx_n_u_spawn)));
+
+    /* "cSparseIntegerOutrankingDigraphs.pyx":2808
+ *                                                       bint Sorted=True,\
+ *                                                       bint Threading=False,\
+ *                                                       nbrOfCPUs=None,             # <<<<<<<<<<<<<<
+ *                                                       startMethod=None,\
+ *                                                       bint Comments=True):
+ */
+    values[3] = __Pyx_Arg_NewRef_FASTCALL(((PyObject *)Py_None));
+
+    /* "cSparseIntegerOutrankingDigraphs.pyx":2809
+ *                                                       bint Threading=False,\
+ *                                                       nbrOfCPUs=None,
+ *                                                       startMethod=None,\             # <<<<<<<<<<<<<<
+ *                                                       bint Comments=True):
+ *         """
+ */
+    values[4] = __Pyx_Arg_NewRef_FASTCALL(((PyObject *)Py_None));
     if (__pyx_kwds) {
       Py_ssize_t kw_args;
       switch (__pyx_nargs) {
@@ -56559,47 +56678,47 @@ PyObject *__pyx_args, PyObject *__pyx_kwds
           (void)__Pyx_Arg_NewRef_FASTCALL(values[0]);
           kw_args--;
         }
-        else if (unlikely(PyErr_Occurred())) __PYX_ERR(0, 2797, __pyx_L3_error)
+        else if (unlikely(PyErr_Occurred())) __PYX_ERR(0, 2805, __pyx_L3_error)
         else goto __pyx_L5_argtuple_error;
         CYTHON_FALLTHROUGH;
         case  1:
         if (kw_args > 0) {
           PyObject* value = __Pyx_GetKwValue_FASTCALL(__pyx_kwds, __pyx_kwvalues, __pyx_n_s_Sorted);
           if (value) { values[1] = __Pyx_Arg_NewRef_FASTCALL(value); kw_args--; }
-          else if (unlikely(PyErr_Occurred())) __PYX_ERR(0, 2797, __pyx_L3_error)
+          else if (unlikely(PyErr_Occurred())) __PYX_ERR(0, 2805, __pyx_L3_error)
         }
         CYTHON_FALLTHROUGH;
         case  2:
         if (kw_args > 0) {
           PyObject* value = __Pyx_GetKwValue_FASTCALL(__pyx_kwds, __pyx_kwvalues, __pyx_n_s_Threading);
           if (value) { values[2] = __Pyx_Arg_NewRef_FASTCALL(value); kw_args--; }
-          else if (unlikely(PyErr_Occurred())) __PYX_ERR(0, 2797, __pyx_L3_error)
+          else if (unlikely(PyErr_Occurred())) __PYX_ERR(0, 2805, __pyx_L3_error)
         }
         CYTHON_FALLTHROUGH;
         case  3:
         if (kw_args > 0) {
           PyObject* value = __Pyx_GetKwValue_FASTCALL(__pyx_kwds, __pyx_kwvalues, __pyx_n_s_nbrOfCPUs);
           if (value) { values[3] = __Pyx_Arg_NewRef_FASTCALL(value); kw_args--; }
-          else if (unlikely(PyErr_Occurred())) __PYX_ERR(0, 2797, __pyx_L3_error)
+          else if (unlikely(PyErr_Occurred())) __PYX_ERR(0, 2805, __pyx_L3_error)
         }
         CYTHON_FALLTHROUGH;
         case  4:
         if (kw_args > 0) {
           PyObject* value = __Pyx_GetKwValue_FASTCALL(__pyx_kwds, __pyx_kwvalues, __pyx_n_s_startMethod);
           if (value) { values[4] = __Pyx_Arg_NewRef_FASTCALL(value); kw_args--; }
-          else if (unlikely(PyErr_Occurred())) __PYX_ERR(0, 2797, __pyx_L3_error)
+          else if (unlikely(PyErr_Occurred())) __PYX_ERR(0, 2805, __pyx_L3_error)
         }
         CYTHON_FALLTHROUGH;
         case  5:
         if (kw_args > 0) {
           PyObject* value = __Pyx_GetKwValue_FASTCALL(__pyx_kwds, __pyx_kwvalues, __pyx_n_s_Comments);
           if (value) { values[5] = __Pyx_Arg_NewRef_FASTCALL(value); kw_args--; }
-          else if (unlikely(PyErr_Occurred())) __PYX_ERR(0, 2797, __pyx_L3_error)
+          else if (unlikely(PyErr_Occurred())) __PYX_ERR(0, 2805, __pyx_L3_error)
         }
       }
       if (unlikely(kw_args > 0)) {
         const Py_ssize_t kwd_pos_args = __pyx_nargs;
-        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_kwvalues, __pyx_pyargnames, 0, values + 0, kwd_pos_args, "showMarginalVersusGlobalOutrankingCorrelation") < 0)) __PYX_ERR(0, 2797, __pyx_L3_error)
+        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_kwvalues, __pyx_pyargnames, 0, values + 0, kwd_pos_args, "showMarginalVersusGlobalOutrankingCorrelation") < 0)) __PYX_ERR(0, 2805, __pyx_L3_error)
       }
     } else {
       switch (__pyx_nargs) {
@@ -56620,40 +56739,40 @@ PyObject *__pyx_args, PyObject *__pyx_kwds
     }
     __pyx_v_self = values[0];
     if (values[1]) {
-      __pyx_v_Sorted = __Pyx_PyObject_IsTrue(values[1]); if (unlikely((__pyx_v_Sorted == (int)-1) && PyErr_Occurred())) __PYX_ERR(0, 2798, __pyx_L3_error)
+      __pyx_v_Sorted = __Pyx_PyObject_IsTrue(values[1]); if (unlikely((__pyx_v_Sorted == (int)-1) && PyErr_Occurred())) __PYX_ERR(0, 2806, __pyx_L3_error)
     } else {
 
-      /* "cSparseIntegerOutrankingDigraphs.pyx":2798
+      /* "cSparseIntegerOutrankingDigraphs.pyx":2806
  * 
  *     def showMarginalVersusGlobalOutrankingCorrelation(self,
  *                                                       bint Sorted=True,\             # <<<<<<<<<<<<<<
  *                                                       bint Threading=False,\
- *                                                       nbrOfCPUs=1,
+ *                                                       nbrOfCPUs=None,
  */
       __pyx_v_Sorted = ((int)((int)1));
     }
     if (values[2]) {
-      __pyx_v_Threading = __Pyx_PyObject_IsTrue(values[2]); if (unlikely((__pyx_v_Threading == (int)-1) && PyErr_Occurred())) __PYX_ERR(0, 2799, __pyx_L3_error)
+      __pyx_v_Threading = __Pyx_PyObject_IsTrue(values[2]); if (unlikely((__pyx_v_Threading == (int)-1) && PyErr_Occurred())) __PYX_ERR(0, 2807, __pyx_L3_error)
     } else {
 
-      /* "cSparseIntegerOutrankingDigraphs.pyx":2799
+      /* "cSparseIntegerOutrankingDigraphs.pyx":2807
  *     def showMarginalVersusGlobalOutrankingCorrelation(self,
  *                                                       bint Sorted=True,\
  *                                                       bint Threading=False,\             # <<<<<<<<<<<<<<
- *                                                       nbrOfCPUs=1,
- *                                                       startMethod='spawn',\
+ *                                                       nbrOfCPUs=None,
+ *                                                       startMethod=None,\
  */
       __pyx_v_Threading = ((int)((int)0));
     }
     __pyx_v_nbrOfCPUs = values[3];
     __pyx_v_startMethod = values[4];
     if (values[5]) {
-      __pyx_v_Comments = __Pyx_PyObject_IsTrue(values[5]); if (unlikely((__pyx_v_Comments == (int)-1) && PyErr_Occurred())) __PYX_ERR(0, 2802, __pyx_L3_error)
+      __pyx_v_Comments = __Pyx_PyObject_IsTrue(values[5]); if (unlikely((__pyx_v_Comments == (int)-1) && PyErr_Occurred())) __PYX_ERR(0, 2810, __pyx_L3_error)
     } else {
 
-      /* "cSparseIntegerOutrankingDigraphs.pyx":2802
- *                                                       nbrOfCPUs=1,
- *                                                       startMethod='spawn',\
+      /* "cSparseIntegerOutrankingDigraphs.pyx":2810
+ *                                                       nbrOfCPUs=None,
+ *                                                       startMethod=None,\
  *                                                       bint Comments=True):             # <<<<<<<<<<<<<<
  *         """
  *         *Parameters*:
@@ -56663,7 +56782,7 @@ PyObject *__pyx_args, PyObject *__pyx_kwds
   }
   goto __pyx_L6_skip;
   __pyx_L5_argtuple_error:;
-  __Pyx_RaiseArgtupleInvalid("showMarginalVersusGlobalOutrankingCorrelation", 0, 1, 6, __pyx_nargs); __PYX_ERR(0, 2797, __pyx_L3_error)
+  __Pyx_RaiseArgtupleInvalid("showMarginalVersusGlobalOutrankingCorrelation", 0, 1, 6, __pyx_nargs); __PYX_ERR(0, 2805, __pyx_L3_error)
   __pyx_L6_skip:;
   goto __pyx_L4_argument_unpacking_done;
   __pyx_L3_error:;
@@ -56679,7 +56798,7 @@ PyObject *__pyx_args, PyObject *__pyx_kwds
   __pyx_L4_argument_unpacking_done:;
   __pyx_r = __pyx_pf_32cSparseIntegerOutrankingDigraphs_24cQuantilesRankingDigraph_12showMarginalVersusGlobalOutrankingCorrelation(__pyx_self, __pyx_v_self, __pyx_v_Sorted, __pyx_v_Threading, __pyx_v_nbrOfCPUs, __pyx_v_startMethod, __pyx_v_Comments);
 
-  /* "cSparseIntegerOutrankingDigraphs.pyx":2797
+  /* "cSparseIntegerOutrankingDigraphs.pyx":2805
  *             return Med
  * 
  *     def showMarginalVersusGlobalOutrankingCorrelation(self,             # <<<<<<<<<<<<<<
@@ -56721,31 +56840,31 @@ static PyObject *__pyx_pf_32cSparseIntegerOutrankingDigraphs_24cQuantilesRanking
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("showMarginalVersusGlobalOutrankingCorrelation", 1);
 
-  /* "cSparseIntegerOutrankingDigraphs.pyx":2812
+  /* "cSparseIntegerOutrankingDigraphs.pyx":2820
  *         Show method for computeCriterionCorrelation results.
  *         """
  *         criteria = self.criteria             # <<<<<<<<<<<<<<
  *         criteriaCorrelation = []
  *         for c in criteria:
  */
-  __pyx_t_1 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_n_s_criteria); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 2812, __pyx_L1_error)
+  __pyx_t_1 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_n_s_criteria); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 2820, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __pyx_v_criteria = __pyx_t_1;
   __pyx_t_1 = 0;
 
-  /* "cSparseIntegerOutrankingDigraphs.pyx":2813
+  /* "cSparseIntegerOutrankingDigraphs.pyx":2821
  *         """
  *         criteria = self.criteria
  *         criteriaCorrelation = []             # <<<<<<<<<<<<<<
  *         for c in criteria:
  *             corr = self.computeCriterion2RankingCorrelation(c,Threading=Threading,nbrOfCPUs=nbrOfCPUs)
  */
-  __pyx_t_1 = PyList_New(0); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 2813, __pyx_L1_error)
+  __pyx_t_1 = PyList_New(0); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 2821, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __pyx_v_criteriaCorrelation = ((PyObject*)__pyx_t_1);
   __pyx_t_1 = 0;
 
-  /* "cSparseIntegerOutrankingDigraphs.pyx":2814
+  /* "cSparseIntegerOutrankingDigraphs.pyx":2822
  *         criteria = self.criteria
  *         criteriaCorrelation = []
  *         for c in criteria:             # <<<<<<<<<<<<<<
@@ -56757,9 +56876,9 @@ static PyObject *__pyx_pf_32cSparseIntegerOutrankingDigraphs_24cQuantilesRanking
     __pyx_t_2 = 0;
     __pyx_t_3 = NULL;
   } else {
-    __pyx_t_2 = -1; __pyx_t_1 = PyObject_GetIter(__pyx_v_criteria); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 2814, __pyx_L1_error)
+    __pyx_t_2 = -1; __pyx_t_1 = PyObject_GetIter(__pyx_v_criteria); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 2822, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_1);
-    __pyx_t_3 = __Pyx_PyObject_GetIterNextFunc(__pyx_t_1); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 2814, __pyx_L1_error)
+    __pyx_t_3 = __Pyx_PyObject_GetIterNextFunc(__pyx_t_1); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 2822, __pyx_L1_error)
   }
   for (;;) {
     if (likely(!__pyx_t_3)) {
@@ -56767,28 +56886,28 @@ static PyObject *__pyx_pf_32cSparseIntegerOutrankingDigraphs_24cQuantilesRanking
         {
           Py_ssize_t __pyx_temp = __Pyx_PyList_GET_SIZE(__pyx_t_1);
           #if !CYTHON_ASSUME_SAFE_MACROS
-          if (unlikely((__pyx_temp < 0))) __PYX_ERR(0, 2814, __pyx_L1_error)
+          if (unlikely((__pyx_temp < 0))) __PYX_ERR(0, 2822, __pyx_L1_error)
           #endif
           if (__pyx_t_2 >= __pyx_temp) break;
         }
         #if CYTHON_ASSUME_SAFE_MACROS && !CYTHON_AVOID_BORROWED_REFS
-        __pyx_t_4 = PyList_GET_ITEM(__pyx_t_1, __pyx_t_2); __Pyx_INCREF(__pyx_t_4); __pyx_t_2++; if (unlikely((0 < 0))) __PYX_ERR(0, 2814, __pyx_L1_error)
+        __pyx_t_4 = PyList_GET_ITEM(__pyx_t_1, __pyx_t_2); __Pyx_INCREF(__pyx_t_4); __pyx_t_2++; if (unlikely((0 < 0))) __PYX_ERR(0, 2822, __pyx_L1_error)
         #else
-        __pyx_t_4 = __Pyx_PySequence_ITEM(__pyx_t_1, __pyx_t_2); __pyx_t_2++; if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 2814, __pyx_L1_error)
+        __pyx_t_4 = __Pyx_PySequence_ITEM(__pyx_t_1, __pyx_t_2); __pyx_t_2++; if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 2822, __pyx_L1_error)
         __Pyx_GOTREF(__pyx_t_4);
         #endif
       } else {
         {
           Py_ssize_t __pyx_temp = __Pyx_PyTuple_GET_SIZE(__pyx_t_1);
           #if !CYTHON_ASSUME_SAFE_MACROS
-          if (unlikely((__pyx_temp < 0))) __PYX_ERR(0, 2814, __pyx_L1_error)
+          if (unlikely((__pyx_temp < 0))) __PYX_ERR(0, 2822, __pyx_L1_error)
           #endif
           if (__pyx_t_2 >= __pyx_temp) break;
         }
         #if CYTHON_ASSUME_SAFE_MACROS && !CYTHON_AVOID_BORROWED_REFS
-        __pyx_t_4 = PyTuple_GET_ITEM(__pyx_t_1, __pyx_t_2); __Pyx_INCREF(__pyx_t_4); __pyx_t_2++; if (unlikely((0 < 0))) __PYX_ERR(0, 2814, __pyx_L1_error)
+        __pyx_t_4 = PyTuple_GET_ITEM(__pyx_t_1, __pyx_t_2); __Pyx_INCREF(__pyx_t_4); __pyx_t_2++; if (unlikely((0 < 0))) __PYX_ERR(0, 2822, __pyx_L1_error)
         #else
-        __pyx_t_4 = __Pyx_PySequence_ITEM(__pyx_t_1, __pyx_t_2); __pyx_t_2++; if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 2814, __pyx_L1_error)
+        __pyx_t_4 = __Pyx_PySequence_ITEM(__pyx_t_1, __pyx_t_2); __pyx_t_2++; if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 2822, __pyx_L1_error)
         __Pyx_GOTREF(__pyx_t_4);
         #endif
       }
@@ -56798,7 +56917,7 @@ static PyObject *__pyx_pf_32cSparseIntegerOutrankingDigraphs_24cQuantilesRanking
         PyObject* exc_type = PyErr_Occurred();
         if (exc_type) {
           if (likely(__Pyx_PyErr_GivenExceptionMatches(exc_type, PyExc_StopIteration))) PyErr_Clear();
-          else __PYX_ERR(0, 2814, __pyx_L1_error)
+          else __PYX_ERR(0, 2822, __pyx_L1_error)
         }
         break;
       }
@@ -56807,28 +56926,28 @@ static PyObject *__pyx_pf_32cSparseIntegerOutrankingDigraphs_24cQuantilesRanking
     __Pyx_XDECREF_SET(__pyx_v_c, __pyx_t_4);
     __pyx_t_4 = 0;
 
-    /* "cSparseIntegerOutrankingDigraphs.pyx":2815
+    /* "cSparseIntegerOutrankingDigraphs.pyx":2823
  *         criteriaCorrelation = []
  *         for c in criteria:
  *             corr = self.computeCriterion2RankingCorrelation(c,Threading=Threading,nbrOfCPUs=nbrOfCPUs)             # <<<<<<<<<<<<<<
  *             criteriaCorrelation.append((corr['correlation'],corr['determination'],c))
  *         if Sorted:
  */
-    __pyx_t_4 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_n_s_computeCriterion2RankingCorrelat); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 2815, __pyx_L1_error)
+    __pyx_t_4 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_n_s_computeCriterion2RankingCorrelat); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 2823, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_4);
-    __pyx_t_5 = PyTuple_New(1); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 2815, __pyx_L1_error)
+    __pyx_t_5 = PyTuple_New(1); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 2823, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_5);
     __Pyx_INCREF(__pyx_v_c);
     __Pyx_GIVEREF(__pyx_v_c);
-    if (__Pyx_PyTuple_SET_ITEM(__pyx_t_5, 0, __pyx_v_c)) __PYX_ERR(0, 2815, __pyx_L1_error);
-    __pyx_t_6 = __Pyx_PyDict_NewPresized(2); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 2815, __pyx_L1_error)
+    if (__Pyx_PyTuple_SET_ITEM(__pyx_t_5, 0, __pyx_v_c)) __PYX_ERR(0, 2823, __pyx_L1_error);
+    __pyx_t_6 = __Pyx_PyDict_NewPresized(2); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 2823, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_6);
-    __pyx_t_7 = __Pyx_PyBool_FromLong(__pyx_v_Threading); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 2815, __pyx_L1_error)
+    __pyx_t_7 = __Pyx_PyBool_FromLong(__pyx_v_Threading); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 2823, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_7);
-    if (PyDict_SetItem(__pyx_t_6, __pyx_n_s_Threading, __pyx_t_7) < 0) __PYX_ERR(0, 2815, __pyx_L1_error)
+    if (PyDict_SetItem(__pyx_t_6, __pyx_n_s_Threading, __pyx_t_7) < 0) __PYX_ERR(0, 2823, __pyx_L1_error)
     __Pyx_DECREF(__pyx_t_7); __pyx_t_7 = 0;
-    if (PyDict_SetItem(__pyx_t_6, __pyx_n_s_nbrOfCPUs, __pyx_v_nbrOfCPUs) < 0) __PYX_ERR(0, 2815, __pyx_L1_error)
-    __pyx_t_7 = __Pyx_PyObject_Call(__pyx_t_4, __pyx_t_5, __pyx_t_6); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 2815, __pyx_L1_error)
+    if (PyDict_SetItem(__pyx_t_6, __pyx_n_s_nbrOfCPUs, __pyx_v_nbrOfCPUs) < 0) __PYX_ERR(0, 2823, __pyx_L1_error)
+    __pyx_t_7 = __Pyx_PyObject_Call(__pyx_t_4, __pyx_t_5, __pyx_t_6); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 2823, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_7);
     __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
     __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
@@ -56836,32 +56955,32 @@ static PyObject *__pyx_pf_32cSparseIntegerOutrankingDigraphs_24cQuantilesRanking
     __Pyx_XDECREF_SET(__pyx_v_corr, __pyx_t_7);
     __pyx_t_7 = 0;
 
-    /* "cSparseIntegerOutrankingDigraphs.pyx":2816
+    /* "cSparseIntegerOutrankingDigraphs.pyx":2824
  *         for c in criteria:
  *             corr = self.computeCriterion2RankingCorrelation(c,Threading=Threading,nbrOfCPUs=nbrOfCPUs)
  *             criteriaCorrelation.append((corr['correlation'],corr['determination'],c))             # <<<<<<<<<<<<<<
  *         if Sorted:
  *             criteriaCorrelation.sort(reverse=True)
  */
-    __pyx_t_7 = __Pyx_PyObject_Dict_GetItem(__pyx_v_corr, __pyx_n_u_correlation); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 2816, __pyx_L1_error)
+    __pyx_t_7 = __Pyx_PyObject_Dict_GetItem(__pyx_v_corr, __pyx_n_u_correlation); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 2824, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_7);
-    __pyx_t_6 = __Pyx_PyObject_Dict_GetItem(__pyx_v_corr, __pyx_n_u_determination); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 2816, __pyx_L1_error)
+    __pyx_t_6 = __Pyx_PyObject_Dict_GetItem(__pyx_v_corr, __pyx_n_u_determination); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 2824, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_6);
-    __pyx_t_5 = PyTuple_New(3); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 2816, __pyx_L1_error)
+    __pyx_t_5 = PyTuple_New(3); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 2824, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_5);
     __Pyx_GIVEREF(__pyx_t_7);
-    if (__Pyx_PyTuple_SET_ITEM(__pyx_t_5, 0, __pyx_t_7)) __PYX_ERR(0, 2816, __pyx_L1_error);
+    if (__Pyx_PyTuple_SET_ITEM(__pyx_t_5, 0, __pyx_t_7)) __PYX_ERR(0, 2824, __pyx_L1_error);
     __Pyx_GIVEREF(__pyx_t_6);
-    if (__Pyx_PyTuple_SET_ITEM(__pyx_t_5, 1, __pyx_t_6)) __PYX_ERR(0, 2816, __pyx_L1_error);
+    if (__Pyx_PyTuple_SET_ITEM(__pyx_t_5, 1, __pyx_t_6)) __PYX_ERR(0, 2824, __pyx_L1_error);
     __Pyx_INCREF(__pyx_v_c);
     __Pyx_GIVEREF(__pyx_v_c);
-    if (__Pyx_PyTuple_SET_ITEM(__pyx_t_5, 2, __pyx_v_c)) __PYX_ERR(0, 2816, __pyx_L1_error);
+    if (__Pyx_PyTuple_SET_ITEM(__pyx_t_5, 2, __pyx_v_c)) __PYX_ERR(0, 2824, __pyx_L1_error);
     __pyx_t_7 = 0;
     __pyx_t_6 = 0;
-    __pyx_t_8 = __Pyx_PyList_Append(__pyx_v_criteriaCorrelation, __pyx_t_5); if (unlikely(__pyx_t_8 == ((int)-1))) __PYX_ERR(0, 2816, __pyx_L1_error)
+    __pyx_t_8 = __Pyx_PyList_Append(__pyx_v_criteriaCorrelation, __pyx_t_5); if (unlikely(__pyx_t_8 == ((int)-1))) __PYX_ERR(0, 2824, __pyx_L1_error)
     __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
 
-    /* "cSparseIntegerOutrankingDigraphs.pyx":2814
+    /* "cSparseIntegerOutrankingDigraphs.pyx":2822
  *         criteria = self.criteria
  *         criteriaCorrelation = []
  *         for c in criteria:             # <<<<<<<<<<<<<<
@@ -56871,7 +56990,7 @@ static PyObject *__pyx_pf_32cSparseIntegerOutrankingDigraphs_24cQuantilesRanking
   }
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
 
-  /* "cSparseIntegerOutrankingDigraphs.pyx":2817
+  /* "cSparseIntegerOutrankingDigraphs.pyx":2825
  *             corr = self.computeCriterion2RankingCorrelation(c,Threading=Threading,nbrOfCPUs=nbrOfCPUs)
  *             criteriaCorrelation.append((corr['correlation'],corr['determination'],c))
  *         if Sorted:             # <<<<<<<<<<<<<<
@@ -56880,25 +56999,25 @@ static PyObject *__pyx_pf_32cSparseIntegerOutrankingDigraphs_24cQuantilesRanking
  */
   if (__pyx_v_Sorted) {
 
-    /* "cSparseIntegerOutrankingDigraphs.pyx":2818
+    /* "cSparseIntegerOutrankingDigraphs.pyx":2826
  *             criteriaCorrelation.append((corr['correlation'],corr['determination'],c))
  *         if Sorted:
  *             criteriaCorrelation.sort(reverse=True)             # <<<<<<<<<<<<<<
  *         if Comments:
  *             print('Marginal versus global outranking correlation')
  */
-    __pyx_t_1 = __Pyx_PyObject_GetAttrStr(__pyx_v_criteriaCorrelation, __pyx_n_s_sort); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 2818, __pyx_L1_error)
+    __pyx_t_1 = __Pyx_PyObject_GetAttrStr(__pyx_v_criteriaCorrelation, __pyx_n_s_sort); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 2826, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_1);
-    __pyx_t_5 = __Pyx_PyDict_NewPresized(1); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 2818, __pyx_L1_error)
+    __pyx_t_5 = __Pyx_PyDict_NewPresized(1); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 2826, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_5);
-    if (PyDict_SetItem(__pyx_t_5, __pyx_n_s_reverse, Py_True) < 0) __PYX_ERR(0, 2818, __pyx_L1_error)
-    __pyx_t_6 = __Pyx_PyObject_Call(__pyx_t_1, __pyx_empty_tuple, __pyx_t_5); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 2818, __pyx_L1_error)
+    if (PyDict_SetItem(__pyx_t_5, __pyx_n_s_reverse, Py_True) < 0) __PYX_ERR(0, 2826, __pyx_L1_error)
+    __pyx_t_6 = __Pyx_PyObject_Call(__pyx_t_1, __pyx_empty_tuple, __pyx_t_5); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 2826, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_6);
     __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
     __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
     __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
 
-    /* "cSparseIntegerOutrankingDigraphs.pyx":2817
+    /* "cSparseIntegerOutrankingDigraphs.pyx":2825
  *             corr = self.computeCriterion2RankingCorrelation(c,Threading=Threading,nbrOfCPUs=nbrOfCPUs)
  *             criteriaCorrelation.append((corr['correlation'],corr['determination'],c))
  *         if Sorted:             # <<<<<<<<<<<<<<
@@ -56907,7 +57026,7 @@ static PyObject *__pyx_pf_32cSparseIntegerOutrankingDigraphs_24cQuantilesRanking
  */
   }
 
-  /* "cSparseIntegerOutrankingDigraphs.pyx":2819
+  /* "cSparseIntegerOutrankingDigraphs.pyx":2827
  *         if Sorted:
  *             criteriaCorrelation.sort(reverse=True)
  *         if Comments:             # <<<<<<<<<<<<<<
@@ -56916,40 +57035,40 @@ static PyObject *__pyx_pf_32cSparseIntegerOutrankingDigraphs_24cQuantilesRanking
  */
   if (__pyx_v_Comments) {
 
-    /* "cSparseIntegerOutrankingDigraphs.pyx":2820
+    /* "cSparseIntegerOutrankingDigraphs.pyx":2828
  *             criteriaCorrelation.sort(reverse=True)
  *         if Comments:
  *             print('Marginal versus global outranking correlation')             # <<<<<<<<<<<<<<
  *             print('criterion | weight\t corr\t deter\t corr*deter')
  *             print('----------|------------------------------------------')
  */
-    __pyx_t_6 = __Pyx_PyObject_Call(__pyx_builtin_print, __pyx_tuple__48, NULL); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 2820, __pyx_L1_error)
+    __pyx_t_6 = __Pyx_PyObject_Call(__pyx_builtin_print, __pyx_tuple__48, NULL); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 2828, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_6);
     __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
 
-    /* "cSparseIntegerOutrankingDigraphs.pyx":2821
+    /* "cSparseIntegerOutrankingDigraphs.pyx":2829
  *         if Comments:
  *             print('Marginal versus global outranking correlation')
  *             print('criterion | weight\t corr\t deter\t corr*deter')             # <<<<<<<<<<<<<<
  *             print('----------|------------------------------------------')
  *             for x in criteriaCorrelation:
  */
-    __pyx_t_6 = __Pyx_PyObject_Call(__pyx_builtin_print, __pyx_tuple__49, NULL); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 2821, __pyx_L1_error)
+    __pyx_t_6 = __Pyx_PyObject_Call(__pyx_builtin_print, __pyx_tuple__49, NULL); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 2829, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_6);
     __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
 
-    /* "cSparseIntegerOutrankingDigraphs.pyx":2822
+    /* "cSparseIntegerOutrankingDigraphs.pyx":2830
  *             print('Marginal versus global outranking correlation')
  *             print('criterion | weight\t corr\t deter\t corr*deter')
  *             print('----------|------------------------------------------')             # <<<<<<<<<<<<<<
  *             for x in criteriaCorrelation:
  *                 c = x[2]
  */
-    __pyx_t_6 = __Pyx_PyObject_Call(__pyx_builtin_print, __pyx_tuple__51, NULL); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 2822, __pyx_L1_error)
+    __pyx_t_6 = __Pyx_PyObject_Call(__pyx_builtin_print, __pyx_tuple__51, NULL); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 2830, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_6);
     __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
 
-    /* "cSparseIntegerOutrankingDigraphs.pyx":2823
+    /* "cSparseIntegerOutrankingDigraphs.pyx":2831
  *             print('criterion | weight\t corr\t deter\t corr*deter')
  *             print('----------|------------------------------------------')
  *             for x in criteriaCorrelation:             # <<<<<<<<<<<<<<
@@ -56962,43 +57081,43 @@ static PyObject *__pyx_pf_32cSparseIntegerOutrankingDigraphs_24cQuantilesRanking
       {
         Py_ssize_t __pyx_temp = __Pyx_PyList_GET_SIZE(__pyx_t_6);
         #if !CYTHON_ASSUME_SAFE_MACROS
-        if (unlikely((__pyx_temp < 0))) __PYX_ERR(0, 2823, __pyx_L1_error)
+        if (unlikely((__pyx_temp < 0))) __PYX_ERR(0, 2831, __pyx_L1_error)
         #endif
         if (__pyx_t_2 >= __pyx_temp) break;
       }
       #if CYTHON_ASSUME_SAFE_MACROS && !CYTHON_AVOID_BORROWED_REFS
-      __pyx_t_5 = PyList_GET_ITEM(__pyx_t_6, __pyx_t_2); __Pyx_INCREF(__pyx_t_5); __pyx_t_2++; if (unlikely((0 < 0))) __PYX_ERR(0, 2823, __pyx_L1_error)
+      __pyx_t_5 = PyList_GET_ITEM(__pyx_t_6, __pyx_t_2); __Pyx_INCREF(__pyx_t_5); __pyx_t_2++; if (unlikely((0 < 0))) __PYX_ERR(0, 2831, __pyx_L1_error)
       #else
-      __pyx_t_5 = __Pyx_PySequence_ITEM(__pyx_t_6, __pyx_t_2); __pyx_t_2++; if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 2823, __pyx_L1_error)
+      __pyx_t_5 = __Pyx_PySequence_ITEM(__pyx_t_6, __pyx_t_2); __pyx_t_2++; if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 2831, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_5);
       #endif
       __Pyx_XDECREF_SET(__pyx_v_x, __pyx_t_5);
       __pyx_t_5 = 0;
 
-      /* "cSparseIntegerOutrankingDigraphs.pyx":2824
+      /* "cSparseIntegerOutrankingDigraphs.pyx":2832
  *             print('----------|------------------------------------------')
  *             for x in criteriaCorrelation:
  *                 c = x[2]             # <<<<<<<<<<<<<<
  *                 print('%9s |  %.2f \t %.3f \t %.3f \t %.3f' % (c,criteria[c]['weight'],x[0],x[1],x[0]*x[1]))
  * 
  */
-      __pyx_t_5 = __Pyx_GetItemInt(__pyx_v_x, 2, long, 1, __Pyx_PyInt_From_long, 0, 0, 1); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 2824, __pyx_L1_error)
+      __pyx_t_5 = __Pyx_GetItemInt(__pyx_v_x, 2, long, 1, __Pyx_PyInt_From_long, 0, 0, 1); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 2832, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_5);
       __Pyx_XDECREF_SET(__pyx_v_c, __pyx_t_5);
       __pyx_t_5 = 0;
 
-      /* "cSparseIntegerOutrankingDigraphs.pyx":2825
+      /* "cSparseIntegerOutrankingDigraphs.pyx":2833
  *             for x in criteriaCorrelation:
  *                 c = x[2]
  *                 print('%9s |  %.2f \t %.3f \t %.3f \t %.3f' % (c,criteria[c]['weight'],x[0],x[1],x[0]*x[1]))             # <<<<<<<<<<<<<<
  * 
  *     def showActionsSortingResult(self,actionsSubset=None):
  */
-      __pyx_t_5 = PyTuple_New(9); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 2825, __pyx_L1_error)
+      __pyx_t_5 = PyTuple_New(9); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 2833, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_5);
       __pyx_t_9 = 0;
       __pyx_t_10 = 127;
-      __pyx_t_1 = __Pyx_PyObject_FormatAndDecref(PyObject_Unicode(__pyx_v_c), __pyx_kp_u_9); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 2825, __pyx_L1_error)
+      __pyx_t_1 = __Pyx_PyObject_FormatAndDecref(PyObject_Unicode(__pyx_v_c), __pyx_kp_u_9); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 2833, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_1);
       __pyx_t_10 = (__Pyx_PyUnicode_MAX_CHAR_VALUE(__pyx_t_1) > __pyx_t_10) ? __Pyx_PyUnicode_MAX_CHAR_VALUE(__pyx_t_1) : __pyx_t_10;
       __pyx_t_9 += __Pyx_PyUnicode_GET_LENGTH(__pyx_t_1);
@@ -57009,12 +57128,12 @@ static PyObject *__pyx_pf_32cSparseIntegerOutrankingDigraphs_24cQuantilesRanking
       __pyx_t_9 += 4;
       __Pyx_GIVEREF(__pyx_kp_u__52);
       PyTuple_SET_ITEM(__pyx_t_5, 1, __pyx_kp_u__52);
-      __pyx_t_1 = __Pyx_PyObject_GetItem(__pyx_v_criteria, __pyx_v_c); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 2825, __pyx_L1_error)
+      __pyx_t_1 = __Pyx_PyObject_GetItem(__pyx_v_criteria, __pyx_v_c); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 2833, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_1);
-      __pyx_t_7 = __Pyx_PyObject_Dict_GetItem(__pyx_t_1, __pyx_n_u_weight); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 2825, __pyx_L1_error)
+      __pyx_t_7 = __Pyx_PyObject_Dict_GetItem(__pyx_t_1, __pyx_n_u_weight); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 2833, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_7);
       __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
-      __pyx_t_1 = __Pyx_PyObject_Format(__pyx_t_7, __pyx_kp_u_2f); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 2825, __pyx_L1_error)
+      __pyx_t_1 = __Pyx_PyObject_Format(__pyx_t_7, __pyx_kp_u_2f); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 2833, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_1);
       __Pyx_DECREF(__pyx_t_7); __pyx_t_7 = 0;
       __pyx_t_10 = (__Pyx_PyUnicode_MAX_CHAR_VALUE(__pyx_t_1) > __pyx_t_10) ? __Pyx_PyUnicode_MAX_CHAR_VALUE(__pyx_t_1) : __pyx_t_10;
@@ -57026,9 +57145,9 @@ static PyObject *__pyx_pf_32cSparseIntegerOutrankingDigraphs_24cQuantilesRanking
       __pyx_t_9 += 3;
       __Pyx_GIVEREF(__pyx_kp_u__53);
       PyTuple_SET_ITEM(__pyx_t_5, 3, __pyx_kp_u__53);
-      __pyx_t_1 = __Pyx_GetItemInt(__pyx_v_x, 0, long, 1, __Pyx_PyInt_From_long, 0, 0, 1); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 2825, __pyx_L1_error)
+      __pyx_t_1 = __Pyx_GetItemInt(__pyx_v_x, 0, long, 1, __Pyx_PyInt_From_long, 0, 0, 1); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 2833, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_1);
-      __pyx_t_7 = __Pyx_PyObject_Format(__pyx_t_1, __pyx_kp_u_3f); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 2825, __pyx_L1_error)
+      __pyx_t_7 = __Pyx_PyObject_Format(__pyx_t_1, __pyx_kp_u_3f); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 2833, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_7);
       __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
       __pyx_t_10 = (__Pyx_PyUnicode_MAX_CHAR_VALUE(__pyx_t_7) > __pyx_t_10) ? __Pyx_PyUnicode_MAX_CHAR_VALUE(__pyx_t_7) : __pyx_t_10;
@@ -57040,9 +57159,9 @@ static PyObject *__pyx_pf_32cSparseIntegerOutrankingDigraphs_24cQuantilesRanking
       __pyx_t_9 += 3;
       __Pyx_GIVEREF(__pyx_kp_u__53);
       PyTuple_SET_ITEM(__pyx_t_5, 5, __pyx_kp_u__53);
-      __pyx_t_7 = __Pyx_GetItemInt(__pyx_v_x, 1, long, 1, __Pyx_PyInt_From_long, 0, 0, 1); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 2825, __pyx_L1_error)
+      __pyx_t_7 = __Pyx_GetItemInt(__pyx_v_x, 1, long, 1, __Pyx_PyInt_From_long, 0, 0, 1); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 2833, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_7);
-      __pyx_t_1 = __Pyx_PyObject_Format(__pyx_t_7, __pyx_kp_u_3f); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 2825, __pyx_L1_error)
+      __pyx_t_1 = __Pyx_PyObject_Format(__pyx_t_7, __pyx_kp_u_3f); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 2833, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_1);
       __Pyx_DECREF(__pyx_t_7); __pyx_t_7 = 0;
       __pyx_t_10 = (__Pyx_PyUnicode_MAX_CHAR_VALUE(__pyx_t_1) > __pyx_t_10) ? __Pyx_PyUnicode_MAX_CHAR_VALUE(__pyx_t_1) : __pyx_t_10;
@@ -57054,15 +57173,15 @@ static PyObject *__pyx_pf_32cSparseIntegerOutrankingDigraphs_24cQuantilesRanking
       __pyx_t_9 += 3;
       __Pyx_GIVEREF(__pyx_kp_u__53);
       PyTuple_SET_ITEM(__pyx_t_5, 7, __pyx_kp_u__53);
-      __pyx_t_1 = __Pyx_GetItemInt(__pyx_v_x, 0, long, 1, __Pyx_PyInt_From_long, 0, 0, 1); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 2825, __pyx_L1_error)
+      __pyx_t_1 = __Pyx_GetItemInt(__pyx_v_x, 0, long, 1, __Pyx_PyInt_From_long, 0, 0, 1); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 2833, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_1);
-      __pyx_t_7 = __Pyx_GetItemInt(__pyx_v_x, 1, long, 1, __Pyx_PyInt_From_long, 0, 0, 1); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 2825, __pyx_L1_error)
+      __pyx_t_7 = __Pyx_GetItemInt(__pyx_v_x, 1, long, 1, __Pyx_PyInt_From_long, 0, 0, 1); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 2833, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_7);
-      __pyx_t_4 = PyNumber_Multiply(__pyx_t_1, __pyx_t_7); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 2825, __pyx_L1_error)
+      __pyx_t_4 = PyNumber_Multiply(__pyx_t_1, __pyx_t_7); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 2833, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_4);
       __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
       __Pyx_DECREF(__pyx_t_7); __pyx_t_7 = 0;
-      __pyx_t_7 = __Pyx_PyObject_Format(__pyx_t_4, __pyx_kp_u_3f); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 2825, __pyx_L1_error)
+      __pyx_t_7 = __Pyx_PyObject_Format(__pyx_t_4, __pyx_kp_u_3f); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 2833, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_7);
       __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
       __pyx_t_10 = (__Pyx_PyUnicode_MAX_CHAR_VALUE(__pyx_t_7) > __pyx_t_10) ? __Pyx_PyUnicode_MAX_CHAR_VALUE(__pyx_t_7) : __pyx_t_10;
@@ -57070,15 +57189,15 @@ static PyObject *__pyx_pf_32cSparseIntegerOutrankingDigraphs_24cQuantilesRanking
       __Pyx_GIVEREF(__pyx_t_7);
       PyTuple_SET_ITEM(__pyx_t_5, 8, __pyx_t_7);
       __pyx_t_7 = 0;
-      __pyx_t_7 = __Pyx_PyUnicode_Join(__pyx_t_5, 9, __pyx_t_9, __pyx_t_10); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 2825, __pyx_L1_error)
+      __pyx_t_7 = __Pyx_PyUnicode_Join(__pyx_t_5, 9, __pyx_t_9, __pyx_t_10); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 2833, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_7);
       __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
-      __pyx_t_5 = __Pyx_PyObject_CallOneArg(__pyx_builtin_print, __pyx_t_7); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 2825, __pyx_L1_error)
+      __pyx_t_5 = __Pyx_PyObject_CallOneArg(__pyx_builtin_print, __pyx_t_7); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 2833, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_5);
       __Pyx_DECREF(__pyx_t_7); __pyx_t_7 = 0;
       __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
 
-      /* "cSparseIntegerOutrankingDigraphs.pyx":2823
+      /* "cSparseIntegerOutrankingDigraphs.pyx":2831
  *             print('criterion | weight\t corr\t deter\t corr*deter')
  *             print('----------|------------------------------------------')
  *             for x in criteriaCorrelation:             # <<<<<<<<<<<<<<
@@ -57088,7 +57207,7 @@ static PyObject *__pyx_pf_32cSparseIntegerOutrankingDigraphs_24cQuantilesRanking
     }
     __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
 
-    /* "cSparseIntegerOutrankingDigraphs.pyx":2819
+    /* "cSparseIntegerOutrankingDigraphs.pyx":2827
  *         if Sorted:
  *             criteriaCorrelation.sort(reverse=True)
  *         if Comments:             # <<<<<<<<<<<<<<
@@ -57097,7 +57216,7 @@ static PyObject *__pyx_pf_32cSparseIntegerOutrankingDigraphs_24cQuantilesRanking
  */
   }
 
-  /* "cSparseIntegerOutrankingDigraphs.pyx":2797
+  /* "cSparseIntegerOutrankingDigraphs.pyx":2805
  *             return Med
  * 
  *     def showMarginalVersusGlobalOutrankingCorrelation(self,             # <<<<<<<<<<<<<<
@@ -57127,7 +57246,7 @@ static PyObject *__pyx_pf_32cSparseIntegerOutrankingDigraphs_24cQuantilesRanking
   return __pyx_r;
 }
 
-/* "cSparseIntegerOutrankingDigraphs.pyx":2827
+/* "cSparseIntegerOutrankingDigraphs.pyx":2835
  *                 print('%9s |  %.2f \t %.3f \t %.3f \t %.3f' % (c,criteria[c]['weight'],x[0],x[1],x[0]*x[1]))
  * 
  *     def showActionsSortingResult(self,actionsSubset=None):             # <<<<<<<<<<<<<<
@@ -57193,19 +57312,19 @@ PyObject *__pyx_args, PyObject *__pyx_kwds
           (void)__Pyx_Arg_NewRef_FASTCALL(values[0]);
           kw_args--;
         }
-        else if (unlikely(PyErr_Occurred())) __PYX_ERR(0, 2827, __pyx_L3_error)
+        else if (unlikely(PyErr_Occurred())) __PYX_ERR(0, 2835, __pyx_L3_error)
         else goto __pyx_L5_argtuple_error;
         CYTHON_FALLTHROUGH;
         case  1:
         if (kw_args > 0) {
           PyObject* value = __Pyx_GetKwValue_FASTCALL(__pyx_kwds, __pyx_kwvalues, __pyx_n_s_actionsSubset);
           if (value) { values[1] = __Pyx_Arg_NewRef_FASTCALL(value); kw_args--; }
-          else if (unlikely(PyErr_Occurred())) __PYX_ERR(0, 2827, __pyx_L3_error)
+          else if (unlikely(PyErr_Occurred())) __PYX_ERR(0, 2835, __pyx_L3_error)
         }
       }
       if (unlikely(kw_args > 0)) {
         const Py_ssize_t kwd_pos_args = __pyx_nargs;
-        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_kwvalues, __pyx_pyargnames, 0, values + 0, kwd_pos_args, "showActionsSortingResult") < 0)) __PYX_ERR(0, 2827, __pyx_L3_error)
+        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_kwvalues, __pyx_pyargnames, 0, values + 0, kwd_pos_args, "showActionsSortingResult") < 0)) __PYX_ERR(0, 2835, __pyx_L3_error)
       }
     } else {
       switch (__pyx_nargs) {
@@ -57221,7 +57340,7 @@ PyObject *__pyx_args, PyObject *__pyx_kwds
   }
   goto __pyx_L6_skip;
   __pyx_L5_argtuple_error:;
-  __Pyx_RaiseArgtupleInvalid("showActionsSortingResult", 0, 1, 2, __pyx_nargs); __PYX_ERR(0, 2827, __pyx_L3_error)
+  __Pyx_RaiseArgtupleInvalid("showActionsSortingResult", 0, 1, 2, __pyx_nargs); __PYX_ERR(0, 2835, __pyx_L3_error)
   __pyx_L6_skip:;
   goto __pyx_L4_argument_unpacking_done;
   __pyx_L3_error:;
@@ -57265,46 +57384,46 @@ static PyObject *__pyx_pf_32cSparseIntegerOutrankingDigraphs_24cQuantilesRanking
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("showActionsSortingResult", 1);
 
-  /* "cSparseIntegerOutrankingDigraphs.pyx":2834
+  /* "cSparseIntegerOutrankingDigraphs.pyx":2842
  *         Shows the quantiles sorting result all (default) of a subset of the decision actions.
  *         """
  *         print('Quantiles sorting result per decision action')             # <<<<<<<<<<<<<<
  *         if actionsSubset==None:
  *             for x in self.actions:
  */
-  __pyx_t_1 = __Pyx_PyObject_Call(__pyx_builtin_print, __pyx_tuple__54, NULL); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 2834, __pyx_L1_error)
+  __pyx_t_1 = __Pyx_PyObject_Call(__pyx_builtin_print, __pyx_tuple__54, NULL); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 2842, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
 
-  /* "cSparseIntegerOutrankingDigraphs.pyx":2835
+  /* "cSparseIntegerOutrankingDigraphs.pyx":2843
  *         """
  *         print('Quantiles sorting result per decision action')
  *         if actionsSubset==None:             # <<<<<<<<<<<<<<
  *             for x in self.actions:
  *                 self.computeActionCategories(x,Show=True)
  */
-  __pyx_t_1 = PyObject_RichCompare(__pyx_v_actionsSubset, Py_None, Py_EQ); __Pyx_XGOTREF(__pyx_t_1); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 2835, __pyx_L1_error)
-  __pyx_t_2 = __Pyx_PyObject_IsTrue(__pyx_t_1); if (unlikely((__pyx_t_2 < 0))) __PYX_ERR(0, 2835, __pyx_L1_error)
+  __pyx_t_1 = PyObject_RichCompare(__pyx_v_actionsSubset, Py_None, Py_EQ); __Pyx_XGOTREF(__pyx_t_1); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 2843, __pyx_L1_error)
+  __pyx_t_2 = __Pyx_PyObject_IsTrue(__pyx_t_1); if (unlikely((__pyx_t_2 < 0))) __PYX_ERR(0, 2843, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
   if (__pyx_t_2) {
 
-    /* "cSparseIntegerOutrankingDigraphs.pyx":2836
+    /* "cSparseIntegerOutrankingDigraphs.pyx":2844
  *         print('Quantiles sorting result per decision action')
  *         if actionsSubset==None:
  *             for x in self.actions:             # <<<<<<<<<<<<<<
  *                 self.computeActionCategories(x,Show=True)
  *         else:
  */
-    __pyx_t_1 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_n_s_actions); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 2836, __pyx_L1_error)
+    __pyx_t_1 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_n_s_actions); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 2844, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_1);
     if (likely(PyList_CheckExact(__pyx_t_1)) || PyTuple_CheckExact(__pyx_t_1)) {
       __pyx_t_3 = __pyx_t_1; __Pyx_INCREF(__pyx_t_3);
       __pyx_t_4 = 0;
       __pyx_t_5 = NULL;
     } else {
-      __pyx_t_4 = -1; __pyx_t_3 = PyObject_GetIter(__pyx_t_1); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 2836, __pyx_L1_error)
+      __pyx_t_4 = -1; __pyx_t_3 = PyObject_GetIter(__pyx_t_1); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 2844, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_3);
-      __pyx_t_5 = __Pyx_PyObject_GetIterNextFunc(__pyx_t_3); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 2836, __pyx_L1_error)
+      __pyx_t_5 = __Pyx_PyObject_GetIterNextFunc(__pyx_t_3); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 2844, __pyx_L1_error)
     }
     __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
     for (;;) {
@@ -57313,28 +57432,28 @@ static PyObject *__pyx_pf_32cSparseIntegerOutrankingDigraphs_24cQuantilesRanking
           {
             Py_ssize_t __pyx_temp = __Pyx_PyList_GET_SIZE(__pyx_t_3);
             #if !CYTHON_ASSUME_SAFE_MACROS
-            if (unlikely((__pyx_temp < 0))) __PYX_ERR(0, 2836, __pyx_L1_error)
+            if (unlikely((__pyx_temp < 0))) __PYX_ERR(0, 2844, __pyx_L1_error)
             #endif
             if (__pyx_t_4 >= __pyx_temp) break;
           }
           #if CYTHON_ASSUME_SAFE_MACROS && !CYTHON_AVOID_BORROWED_REFS
-          __pyx_t_1 = PyList_GET_ITEM(__pyx_t_3, __pyx_t_4); __Pyx_INCREF(__pyx_t_1); __pyx_t_4++; if (unlikely((0 < 0))) __PYX_ERR(0, 2836, __pyx_L1_error)
+          __pyx_t_1 = PyList_GET_ITEM(__pyx_t_3, __pyx_t_4); __Pyx_INCREF(__pyx_t_1); __pyx_t_4++; if (unlikely((0 < 0))) __PYX_ERR(0, 2844, __pyx_L1_error)
           #else
-          __pyx_t_1 = __Pyx_PySequence_ITEM(__pyx_t_3, __pyx_t_4); __pyx_t_4++; if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 2836, __pyx_L1_error)
+          __pyx_t_1 = __Pyx_PySequence_ITEM(__pyx_t_3, __pyx_t_4); __pyx_t_4++; if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 2844, __pyx_L1_error)
           __Pyx_GOTREF(__pyx_t_1);
           #endif
         } else {
           {
             Py_ssize_t __pyx_temp = __Pyx_PyTuple_GET_SIZE(__pyx_t_3);
             #if !CYTHON_ASSUME_SAFE_MACROS
-            if (unlikely((__pyx_temp < 0))) __PYX_ERR(0, 2836, __pyx_L1_error)
+            if (unlikely((__pyx_temp < 0))) __PYX_ERR(0, 2844, __pyx_L1_error)
             #endif
             if (__pyx_t_4 >= __pyx_temp) break;
           }
           #if CYTHON_ASSUME_SAFE_MACROS && !CYTHON_AVOID_BORROWED_REFS
-          __pyx_t_1 = PyTuple_GET_ITEM(__pyx_t_3, __pyx_t_4); __Pyx_INCREF(__pyx_t_1); __pyx_t_4++; if (unlikely((0 < 0))) __PYX_ERR(0, 2836, __pyx_L1_error)
+          __pyx_t_1 = PyTuple_GET_ITEM(__pyx_t_3, __pyx_t_4); __Pyx_INCREF(__pyx_t_1); __pyx_t_4++; if (unlikely((0 < 0))) __PYX_ERR(0, 2844, __pyx_L1_error)
           #else
-          __pyx_t_1 = __Pyx_PySequence_ITEM(__pyx_t_3, __pyx_t_4); __pyx_t_4++; if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 2836, __pyx_L1_error)
+          __pyx_t_1 = __Pyx_PySequence_ITEM(__pyx_t_3, __pyx_t_4); __pyx_t_4++; if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 2844, __pyx_L1_error)
           __Pyx_GOTREF(__pyx_t_1);
           #endif
         }
@@ -57344,7 +57463,7 @@ static PyObject *__pyx_pf_32cSparseIntegerOutrankingDigraphs_24cQuantilesRanking
           PyObject* exc_type = PyErr_Occurred();
           if (exc_type) {
             if (likely(__Pyx_PyErr_GivenExceptionMatches(exc_type, PyExc_StopIteration))) PyErr_Clear();
-            else __PYX_ERR(0, 2836, __pyx_L1_error)
+            else __PYX_ERR(0, 2844, __pyx_L1_error)
           }
           break;
         }
@@ -57353,31 +57472,31 @@ static PyObject *__pyx_pf_32cSparseIntegerOutrankingDigraphs_24cQuantilesRanking
       __Pyx_XDECREF_SET(__pyx_v_x, __pyx_t_1);
       __pyx_t_1 = 0;
 
-      /* "cSparseIntegerOutrankingDigraphs.pyx":2837
+      /* "cSparseIntegerOutrankingDigraphs.pyx":2845
  *         if actionsSubset==None:
  *             for x in self.actions:
  *                 self.computeActionCategories(x,Show=True)             # <<<<<<<<<<<<<<
  *         else:
  *             for x in actionsSubset:
  */
-      __pyx_t_1 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_n_s_computeActionCategories); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 2837, __pyx_L1_error)
+      __pyx_t_1 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_n_s_computeActionCategories); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 2845, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_1);
-      __pyx_t_6 = PyTuple_New(1); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 2837, __pyx_L1_error)
+      __pyx_t_6 = PyTuple_New(1); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 2845, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_6);
       __Pyx_INCREF(__pyx_v_x);
       __Pyx_GIVEREF(__pyx_v_x);
-      if (__Pyx_PyTuple_SET_ITEM(__pyx_t_6, 0, __pyx_v_x)) __PYX_ERR(0, 2837, __pyx_L1_error);
-      __pyx_t_7 = __Pyx_PyDict_NewPresized(1); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 2837, __pyx_L1_error)
+      if (__Pyx_PyTuple_SET_ITEM(__pyx_t_6, 0, __pyx_v_x)) __PYX_ERR(0, 2845, __pyx_L1_error);
+      __pyx_t_7 = __Pyx_PyDict_NewPresized(1); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 2845, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_7);
-      if (PyDict_SetItem(__pyx_t_7, __pyx_n_s_Show, Py_True) < 0) __PYX_ERR(0, 2837, __pyx_L1_error)
-      __pyx_t_8 = __Pyx_PyObject_Call(__pyx_t_1, __pyx_t_6, __pyx_t_7); if (unlikely(!__pyx_t_8)) __PYX_ERR(0, 2837, __pyx_L1_error)
+      if (PyDict_SetItem(__pyx_t_7, __pyx_n_s_Show, Py_True) < 0) __PYX_ERR(0, 2845, __pyx_L1_error)
+      __pyx_t_8 = __Pyx_PyObject_Call(__pyx_t_1, __pyx_t_6, __pyx_t_7); if (unlikely(!__pyx_t_8)) __PYX_ERR(0, 2845, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_8);
       __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
       __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
       __Pyx_DECREF(__pyx_t_7); __pyx_t_7 = 0;
       __Pyx_DECREF(__pyx_t_8); __pyx_t_8 = 0;
 
-      /* "cSparseIntegerOutrankingDigraphs.pyx":2836
+      /* "cSparseIntegerOutrankingDigraphs.pyx":2844
  *         print('Quantiles sorting result per decision action')
  *         if actionsSubset==None:
  *             for x in self.actions:             # <<<<<<<<<<<<<<
@@ -57387,7 +57506,7 @@ static PyObject *__pyx_pf_32cSparseIntegerOutrankingDigraphs_24cQuantilesRanking
     }
     __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
 
-    /* "cSparseIntegerOutrankingDigraphs.pyx":2835
+    /* "cSparseIntegerOutrankingDigraphs.pyx":2843
  *         """
  *         print('Quantiles sorting result per decision action')
  *         if actionsSubset==None:             # <<<<<<<<<<<<<<
@@ -57397,7 +57516,7 @@ static PyObject *__pyx_pf_32cSparseIntegerOutrankingDigraphs_24cQuantilesRanking
     goto __pyx_L3;
   }
 
-  /* "cSparseIntegerOutrankingDigraphs.pyx":2839
+  /* "cSparseIntegerOutrankingDigraphs.pyx":2847
  *                 self.computeActionCategories(x,Show=True)
  *         else:
  *             for x in actionsSubset:             # <<<<<<<<<<<<<<
@@ -57410,9 +57529,9 @@ static PyObject *__pyx_pf_32cSparseIntegerOutrankingDigraphs_24cQuantilesRanking
       __pyx_t_4 = 0;
       __pyx_t_5 = NULL;
     } else {
-      __pyx_t_4 = -1; __pyx_t_3 = PyObject_GetIter(__pyx_v_actionsSubset); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 2839, __pyx_L1_error)
+      __pyx_t_4 = -1; __pyx_t_3 = PyObject_GetIter(__pyx_v_actionsSubset); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 2847, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_3);
-      __pyx_t_5 = __Pyx_PyObject_GetIterNextFunc(__pyx_t_3); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 2839, __pyx_L1_error)
+      __pyx_t_5 = __Pyx_PyObject_GetIterNextFunc(__pyx_t_3); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 2847, __pyx_L1_error)
     }
     for (;;) {
       if (likely(!__pyx_t_5)) {
@@ -57420,28 +57539,28 @@ static PyObject *__pyx_pf_32cSparseIntegerOutrankingDigraphs_24cQuantilesRanking
           {
             Py_ssize_t __pyx_temp = __Pyx_PyList_GET_SIZE(__pyx_t_3);
             #if !CYTHON_ASSUME_SAFE_MACROS
-            if (unlikely((__pyx_temp < 0))) __PYX_ERR(0, 2839, __pyx_L1_error)
+            if (unlikely((__pyx_temp < 0))) __PYX_ERR(0, 2847, __pyx_L1_error)
             #endif
             if (__pyx_t_4 >= __pyx_temp) break;
           }
           #if CYTHON_ASSUME_SAFE_MACROS && !CYTHON_AVOID_BORROWED_REFS
-          __pyx_t_8 = PyList_GET_ITEM(__pyx_t_3, __pyx_t_4); __Pyx_INCREF(__pyx_t_8); __pyx_t_4++; if (unlikely((0 < 0))) __PYX_ERR(0, 2839, __pyx_L1_error)
+          __pyx_t_8 = PyList_GET_ITEM(__pyx_t_3, __pyx_t_4); __Pyx_INCREF(__pyx_t_8); __pyx_t_4++; if (unlikely((0 < 0))) __PYX_ERR(0, 2847, __pyx_L1_error)
           #else
-          __pyx_t_8 = __Pyx_PySequence_ITEM(__pyx_t_3, __pyx_t_4); __pyx_t_4++; if (unlikely(!__pyx_t_8)) __PYX_ERR(0, 2839, __pyx_L1_error)
+          __pyx_t_8 = __Pyx_PySequence_ITEM(__pyx_t_3, __pyx_t_4); __pyx_t_4++; if (unlikely(!__pyx_t_8)) __PYX_ERR(0, 2847, __pyx_L1_error)
           __Pyx_GOTREF(__pyx_t_8);
           #endif
         } else {
           {
             Py_ssize_t __pyx_temp = __Pyx_PyTuple_GET_SIZE(__pyx_t_3);
             #if !CYTHON_ASSUME_SAFE_MACROS
-            if (unlikely((__pyx_temp < 0))) __PYX_ERR(0, 2839, __pyx_L1_error)
+            if (unlikely((__pyx_temp < 0))) __PYX_ERR(0, 2847, __pyx_L1_error)
             #endif
             if (__pyx_t_4 >= __pyx_temp) break;
           }
           #if CYTHON_ASSUME_SAFE_MACROS && !CYTHON_AVOID_BORROWED_REFS
-          __pyx_t_8 = PyTuple_GET_ITEM(__pyx_t_3, __pyx_t_4); __Pyx_INCREF(__pyx_t_8); __pyx_t_4++; if (unlikely((0 < 0))) __PYX_ERR(0, 2839, __pyx_L1_error)
+          __pyx_t_8 = PyTuple_GET_ITEM(__pyx_t_3, __pyx_t_4); __Pyx_INCREF(__pyx_t_8); __pyx_t_4++; if (unlikely((0 < 0))) __PYX_ERR(0, 2847, __pyx_L1_error)
           #else
-          __pyx_t_8 = __Pyx_PySequence_ITEM(__pyx_t_3, __pyx_t_4); __pyx_t_4++; if (unlikely(!__pyx_t_8)) __PYX_ERR(0, 2839, __pyx_L1_error)
+          __pyx_t_8 = __Pyx_PySequence_ITEM(__pyx_t_3, __pyx_t_4); __pyx_t_4++; if (unlikely(!__pyx_t_8)) __PYX_ERR(0, 2847, __pyx_L1_error)
           __Pyx_GOTREF(__pyx_t_8);
           #endif
         }
@@ -57451,7 +57570,7 @@ static PyObject *__pyx_pf_32cSparseIntegerOutrankingDigraphs_24cQuantilesRanking
           PyObject* exc_type = PyErr_Occurred();
           if (exc_type) {
             if (likely(__Pyx_PyErr_GivenExceptionMatches(exc_type, PyExc_StopIteration))) PyErr_Clear();
-            else __PYX_ERR(0, 2839, __pyx_L1_error)
+            else __PYX_ERR(0, 2847, __pyx_L1_error)
           }
           break;
         }
@@ -57460,31 +57579,31 @@ static PyObject *__pyx_pf_32cSparseIntegerOutrankingDigraphs_24cQuantilesRanking
       __Pyx_XDECREF_SET(__pyx_v_x, __pyx_t_8);
       __pyx_t_8 = 0;
 
-      /* "cSparseIntegerOutrankingDigraphs.pyx":2840
+      /* "cSparseIntegerOutrankingDigraphs.pyx":2848
  *         else:
  *             for x in actionsSubset:
  *                 self.computeActionCategories(x,Show=True)             # <<<<<<<<<<<<<<
  * 
  *     def showShort(self,fileName=None,bint WithFileSize=False):
  */
-      __pyx_t_8 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_n_s_computeActionCategories); if (unlikely(!__pyx_t_8)) __PYX_ERR(0, 2840, __pyx_L1_error)
+      __pyx_t_8 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_n_s_computeActionCategories); if (unlikely(!__pyx_t_8)) __PYX_ERR(0, 2848, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_8);
-      __pyx_t_7 = PyTuple_New(1); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 2840, __pyx_L1_error)
+      __pyx_t_7 = PyTuple_New(1); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 2848, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_7);
       __Pyx_INCREF(__pyx_v_x);
       __Pyx_GIVEREF(__pyx_v_x);
-      if (__Pyx_PyTuple_SET_ITEM(__pyx_t_7, 0, __pyx_v_x)) __PYX_ERR(0, 2840, __pyx_L1_error);
-      __pyx_t_6 = __Pyx_PyDict_NewPresized(1); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 2840, __pyx_L1_error)
+      if (__Pyx_PyTuple_SET_ITEM(__pyx_t_7, 0, __pyx_v_x)) __PYX_ERR(0, 2848, __pyx_L1_error);
+      __pyx_t_6 = __Pyx_PyDict_NewPresized(1); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 2848, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_6);
-      if (PyDict_SetItem(__pyx_t_6, __pyx_n_s_Show, Py_True) < 0) __PYX_ERR(0, 2840, __pyx_L1_error)
-      __pyx_t_1 = __Pyx_PyObject_Call(__pyx_t_8, __pyx_t_7, __pyx_t_6); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 2840, __pyx_L1_error)
+      if (PyDict_SetItem(__pyx_t_6, __pyx_n_s_Show, Py_True) < 0) __PYX_ERR(0, 2848, __pyx_L1_error)
+      __pyx_t_1 = __Pyx_PyObject_Call(__pyx_t_8, __pyx_t_7, __pyx_t_6); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 2848, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_1);
       __Pyx_DECREF(__pyx_t_8); __pyx_t_8 = 0;
       __Pyx_DECREF(__pyx_t_7); __pyx_t_7 = 0;
       __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
       __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
 
-      /* "cSparseIntegerOutrankingDigraphs.pyx":2839
+      /* "cSparseIntegerOutrankingDigraphs.pyx":2847
  *                 self.computeActionCategories(x,Show=True)
  *         else:
  *             for x in actionsSubset:             # <<<<<<<<<<<<<<
@@ -57496,7 +57615,7 @@ static PyObject *__pyx_pf_32cSparseIntegerOutrankingDigraphs_24cQuantilesRanking
   }
   __pyx_L3:;
 
-  /* "cSparseIntegerOutrankingDigraphs.pyx":2827
+  /* "cSparseIntegerOutrankingDigraphs.pyx":2835
  *                 print('%9s |  %.2f \t %.3f \t %.3f \t %.3f' % (c,criteria[c]['weight'],x[0],x[1],x[0]*x[1]))
  * 
  *     def showActionsSortingResult(self,actionsSubset=None):             # <<<<<<<<<<<<<<
@@ -57522,7 +57641,7 @@ static PyObject *__pyx_pf_32cSparseIntegerOutrankingDigraphs_24cQuantilesRanking
   return __pyx_r;
 }
 
-/* "cSparseIntegerOutrankingDigraphs.pyx":2842
+/* "cSparseIntegerOutrankingDigraphs.pyx":2850
  *                 self.computeActionCategories(x,Show=True)
  * 
  *     def showShort(self,fileName=None,bint WithFileSize=False):             # <<<<<<<<<<<<<<
@@ -57591,26 +57710,26 @@ PyObject *__pyx_args, PyObject *__pyx_kwds
           (void)__Pyx_Arg_NewRef_FASTCALL(values[0]);
           kw_args--;
         }
-        else if (unlikely(PyErr_Occurred())) __PYX_ERR(0, 2842, __pyx_L3_error)
+        else if (unlikely(PyErr_Occurred())) __PYX_ERR(0, 2850, __pyx_L3_error)
         else goto __pyx_L5_argtuple_error;
         CYTHON_FALLTHROUGH;
         case  1:
         if (kw_args > 0) {
           PyObject* value = __Pyx_GetKwValue_FASTCALL(__pyx_kwds, __pyx_kwvalues, __pyx_n_s_fileName);
           if (value) { values[1] = __Pyx_Arg_NewRef_FASTCALL(value); kw_args--; }
-          else if (unlikely(PyErr_Occurred())) __PYX_ERR(0, 2842, __pyx_L3_error)
+          else if (unlikely(PyErr_Occurred())) __PYX_ERR(0, 2850, __pyx_L3_error)
         }
         CYTHON_FALLTHROUGH;
         case  2:
         if (kw_args > 0) {
           PyObject* value = __Pyx_GetKwValue_FASTCALL(__pyx_kwds, __pyx_kwvalues, __pyx_n_s_WithFileSize);
           if (value) { values[2] = __Pyx_Arg_NewRef_FASTCALL(value); kw_args--; }
-          else if (unlikely(PyErr_Occurred())) __PYX_ERR(0, 2842, __pyx_L3_error)
+          else if (unlikely(PyErr_Occurred())) __PYX_ERR(0, 2850, __pyx_L3_error)
         }
       }
       if (unlikely(kw_args > 0)) {
         const Py_ssize_t kwd_pos_args = __pyx_nargs;
-        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_kwvalues, __pyx_pyargnames, 0, values + 0, kwd_pos_args, "showShort") < 0)) __PYX_ERR(0, 2842, __pyx_L3_error)
+        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_kwvalues, __pyx_pyargnames, 0, values + 0, kwd_pos_args, "showShort") < 0)) __PYX_ERR(0, 2850, __pyx_L3_error)
       }
     } else {
       switch (__pyx_nargs) {
@@ -57626,14 +57745,14 @@ PyObject *__pyx_args, PyObject *__pyx_kwds
     __pyx_v_self = values[0];
     __pyx_v_fileName = values[1];
     if (values[2]) {
-      __pyx_v_WithFileSize = __Pyx_PyObject_IsTrue(values[2]); if (unlikely((__pyx_v_WithFileSize == (int)-1) && PyErr_Occurred())) __PYX_ERR(0, 2842, __pyx_L3_error)
+      __pyx_v_WithFileSize = __Pyx_PyObject_IsTrue(values[2]); if (unlikely((__pyx_v_WithFileSize == (int)-1) && PyErr_Occurred())) __PYX_ERR(0, 2850, __pyx_L3_error)
     } else {
       __pyx_v_WithFileSize = ((int)((int)0));
     }
   }
   goto __pyx_L6_skip;
   __pyx_L5_argtuple_error:;
-  __Pyx_RaiseArgtupleInvalid("showShort", 0, 1, 3, __pyx_nargs); __PYX_ERR(0, 2842, __pyx_L3_error)
+  __Pyx_RaiseArgtupleInvalid("showShort", 0, 1, 3, __pyx_nargs); __PYX_ERR(0, 2850, __pyx_L3_error)
   __pyx_L6_skip:;
   goto __pyx_L4_argument_unpacking_done;
   __pyx_L3_error:;
@@ -57680,203 +57799,61 @@ static PyObject *__pyx_pf_32cSparseIntegerOutrankingDigraphs_24cQuantilesRanking
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("showShort", 1);
 
-  /* "cSparseIntegerOutrankingDigraphs.pyx":2850
+  /* "cSparseIntegerOutrankingDigraphs.pyx":2858
  *         """
  *         #summaryStats = self.computeDecompositionSummaryStatistics()
  *         from digraphs import total_size             # <<<<<<<<<<<<<<
  *         if fileName == None:
  *             print('*----- show short --------------*')
  */
-  __pyx_t_1 = PyList_New(1); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 2850, __pyx_L1_error)
+  __pyx_t_1 = PyList_New(1); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 2858, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __Pyx_INCREF(__pyx_n_s_total_size);
   __Pyx_GIVEREF(__pyx_n_s_total_size);
-  if (__Pyx_PyList_SET_ITEM(__pyx_t_1, 0, __pyx_n_s_total_size)) __PYX_ERR(0, 2850, __pyx_L1_error);
-  __pyx_t_2 = __Pyx_Import(__pyx_n_s_digraphs, __pyx_t_1, 0); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 2850, __pyx_L1_error)
+  if (__Pyx_PyList_SET_ITEM(__pyx_t_1, 0, __pyx_n_s_total_size)) __PYX_ERR(0, 2858, __pyx_L1_error);
+  __pyx_t_2 = __Pyx_Import(__pyx_n_s_digraphs, __pyx_t_1, 0); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 2858, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
-  __pyx_t_1 = __Pyx_ImportFrom(__pyx_t_2, __pyx_n_s_total_size); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 2850, __pyx_L1_error)
+  __pyx_t_1 = __Pyx_ImportFrom(__pyx_t_2, __pyx_n_s_total_size); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 2858, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __Pyx_INCREF(__pyx_t_1);
   __pyx_v_total_size = __pyx_t_1;
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
 
-  /* "cSparseIntegerOutrankingDigraphs.pyx":2851
+  /* "cSparseIntegerOutrankingDigraphs.pyx":2859
  *         #summaryStats = self.computeDecompositionSummaryStatistics()
  *         from digraphs import total_size
  *         if fileName == None:             # <<<<<<<<<<<<<<
  *             print('*----- show short --------------*')
  *             print('Instance name     : %s' % self.name)
  */
-  __pyx_t_2 = PyObject_RichCompare(__pyx_v_fileName, Py_None, Py_EQ); __Pyx_XGOTREF(__pyx_t_2); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 2851, __pyx_L1_error)
-  __pyx_t_3 = __Pyx_PyObject_IsTrue(__pyx_t_2); if (unlikely((__pyx_t_3 < 0))) __PYX_ERR(0, 2851, __pyx_L1_error)
+  __pyx_t_2 = PyObject_RichCompare(__pyx_v_fileName, Py_None, Py_EQ); __Pyx_XGOTREF(__pyx_t_2); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 2859, __pyx_L1_error)
+  __pyx_t_3 = __Pyx_PyObject_IsTrue(__pyx_t_2); if (unlikely((__pyx_t_3 < 0))) __PYX_ERR(0, 2859, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
   if (__pyx_t_3) {
 
-    /* "cSparseIntegerOutrankingDigraphs.pyx":2852
+    /* "cSparseIntegerOutrankingDigraphs.pyx":2860
  *         from digraphs import total_size
  *         if fileName == None:
  *             print('*----- show short --------------*')             # <<<<<<<<<<<<<<
  *             print('Instance name     : %s' % self.name)
- *             print('# Actions         : %d' % self.order)
+ *             print('Actions           : %d' % self.order)
  */
-    __pyx_t_2 = __Pyx_PyObject_Call(__pyx_builtin_print, __pyx_tuple__55, NULL); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 2852, __pyx_L1_error)
+    __pyx_t_2 = __Pyx_PyObject_Call(__pyx_builtin_print, __pyx_tuple__55, NULL); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 2860, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_2);
-    __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
-
-    /* "cSparseIntegerOutrankingDigraphs.pyx":2853
- *         if fileName == None:
- *             print('*----- show short --------------*')
- *             print('Instance name     : %s' % self.name)             # <<<<<<<<<<<<<<
- *             print('# Actions         : %d' % self.order)
- *             print('# Criteria        : %d' % self.dimension)
- */
-    __pyx_t_2 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_n_s_name_2); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 2853, __pyx_L1_error)
-    __Pyx_GOTREF(__pyx_t_2);
-    __pyx_t_1 = __Pyx_PyUnicode_FormatSafe(__pyx_kp_u_Instance_name_s_2, __pyx_t_2); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 2853, __pyx_L1_error)
-    __Pyx_GOTREF(__pyx_t_1);
-    __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
-    __pyx_t_2 = __Pyx_PyObject_CallOneArg(__pyx_builtin_print, __pyx_t_1); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 2853, __pyx_L1_error)
-    __Pyx_GOTREF(__pyx_t_2);
-    __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
-    __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
-
-    /* "cSparseIntegerOutrankingDigraphs.pyx":2854
- *             print('*----- show short --------------*')
- *             print('Instance name     : %s' % self.name)
- *             print('# Actions         : %d' % self.order)             # <<<<<<<<<<<<<<
- *             print('# Criteria        : %d' % self.dimension)
- *             print('Sorting by        : %d-Tiling' % self.sortingParameters['limitingQuantiles'])
- */
-    __pyx_t_2 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_n_s_order); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 2854, __pyx_L1_error)
-    __Pyx_GOTREF(__pyx_t_2);
-    __pyx_t_1 = __Pyx_PyUnicode_FormatSafe(__pyx_kp_u_Actions_d_2, __pyx_t_2); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 2854, __pyx_L1_error)
-    __Pyx_GOTREF(__pyx_t_1);
-    __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
-    __pyx_t_2 = __Pyx_PyObject_CallOneArg(__pyx_builtin_print, __pyx_t_1); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 2854, __pyx_L1_error)
-    __Pyx_GOTREF(__pyx_t_2);
-    __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
-    __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
-
-    /* "cSparseIntegerOutrankingDigraphs.pyx":2855
- *             print('Instance name     : %s' % self.name)
- *             print('# Actions         : %d' % self.order)
- *             print('# Criteria        : %d' % self.dimension)             # <<<<<<<<<<<<<<
- *             print('Sorting by        : %d-Tiling' % self.sortingParameters['limitingQuantiles'])
- *             print('Ordering strategy : %s' % self.sortingParameters['strategy'])
- */
-    __pyx_t_2 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_n_s_dimension); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 2855, __pyx_L1_error)
-    __Pyx_GOTREF(__pyx_t_2);
-    __pyx_t_1 = __Pyx_PyUnicode_FormatSafe(__pyx_kp_u_Criteria_d_2, __pyx_t_2); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 2855, __pyx_L1_error)
-    __Pyx_GOTREF(__pyx_t_1);
-    __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
-    __pyx_t_2 = __Pyx_PyObject_CallOneArg(__pyx_builtin_print, __pyx_t_1); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 2855, __pyx_L1_error)
-    __Pyx_GOTREF(__pyx_t_2);
-    __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
-    __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
-
-    /* "cSparseIntegerOutrankingDigraphs.pyx":2856
- *             print('# Actions         : %d' % self.order)
- *             print('# Criteria        : %d' % self.dimension)
- *             print('Sorting by        : %d-Tiling' % self.sortingParameters['limitingQuantiles'])             # <<<<<<<<<<<<<<
- *             print('Ordering strategy : %s' % self.sortingParameters['strategy'])
- *             print('Ranking rule      : %s' % self.componentRankingRule)
- */
-    __pyx_t_2 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_n_s_sortingParameters); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 2856, __pyx_L1_error)
-    __Pyx_GOTREF(__pyx_t_2);
-    __pyx_t_1 = __Pyx_PyObject_Dict_GetItem(__pyx_t_2, __pyx_n_u_limitingQuantiles); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 2856, __pyx_L1_error)
-    __Pyx_GOTREF(__pyx_t_1);
-    __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
-    __pyx_t_2 = __Pyx_PyUnicode_FormatSafe(__pyx_kp_u_Sorting_by_d_Tiling_2, __pyx_t_1); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 2856, __pyx_L1_error)
-    __Pyx_GOTREF(__pyx_t_2);
-    __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
-    __pyx_t_1 = __Pyx_PyObject_CallOneArg(__pyx_builtin_print, __pyx_t_2); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 2856, __pyx_L1_error)
-    __Pyx_GOTREF(__pyx_t_1);
-    __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
-    __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
-
-    /* "cSparseIntegerOutrankingDigraphs.pyx":2857
- *             print('# Criteria        : %d' % self.dimension)
- *             print('Sorting by        : %d-Tiling' % self.sortingParameters['limitingQuantiles'])
- *             print('Ordering strategy : %s' % self.sortingParameters['strategy'])             # <<<<<<<<<<<<<<
- *             print('Ranking rule      : %s' % self.componentRankingRule)
- *             print('# Components      : %d' % self.nbrComponents)
- */
-    __pyx_t_1 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_n_s_sortingParameters); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 2857, __pyx_L1_error)
-    __Pyx_GOTREF(__pyx_t_1);
-    __pyx_t_2 = __Pyx_PyObject_Dict_GetItem(__pyx_t_1, __pyx_n_u_strategy); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 2857, __pyx_L1_error)
-    __Pyx_GOTREF(__pyx_t_2);
-    __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
-    __pyx_t_1 = __Pyx_PyUnicode_FormatSafe(__pyx_kp_u_Ordering_strategy_s_2, __pyx_t_2); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 2857, __pyx_L1_error)
-    __Pyx_GOTREF(__pyx_t_1);
-    __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
-    __pyx_t_2 = __Pyx_PyObject_CallOneArg(__pyx_builtin_print, __pyx_t_1); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 2857, __pyx_L1_error)
-    __Pyx_GOTREF(__pyx_t_2);
-    __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
-    __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
-
-    /* "cSparseIntegerOutrankingDigraphs.pyx":2858
- *             print('Sorting by        : %d-Tiling' % self.sortingParameters['limitingQuantiles'])
- *             print('Ordering strategy : %s' % self.sortingParameters['strategy'])
- *             print('Ranking rule      : %s' % self.componentRankingRule)             # <<<<<<<<<<<<<<
- *             print('# Components      : %d' % self.nbrComponents)
- *             print('Minimal order     : %d' % self.minimalComponentSize)
- */
-    __pyx_t_2 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_n_s_componentRankingRule); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 2858, __pyx_L1_error)
-    __Pyx_GOTREF(__pyx_t_2);
-    __pyx_t_1 = __Pyx_PyUnicode_FormatSafe(__pyx_kp_u_Ranking_rule_s_2, __pyx_t_2); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 2858, __pyx_L1_error)
-    __Pyx_GOTREF(__pyx_t_1);
-    __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
-    __pyx_t_2 = __Pyx_PyObject_CallOneArg(__pyx_builtin_print, __pyx_t_1); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 2858, __pyx_L1_error)
-    __Pyx_GOTREF(__pyx_t_2);
-    __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
-    __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
-
-    /* "cSparseIntegerOutrankingDigraphs.pyx":2859
- *             print('Ordering strategy : %s' % self.sortingParameters['strategy'])
- *             print('Ranking rule      : %s' % self.componentRankingRule)
- *             print('# Components      : %d' % self.nbrComponents)             # <<<<<<<<<<<<<<
- *             print('Minimal order     : %d' % self.minimalComponentSize)
- *             print('Maximal order     : %d' % self.maximalComponentSize)
- */
-    __pyx_t_2 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_n_s_nbrComponents); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 2859, __pyx_L1_error)
-    __Pyx_GOTREF(__pyx_t_2);
-    __pyx_t_1 = __Pyx_PyUnicode_FormatSafe(__pyx_kp_u_Components_d_2, __pyx_t_2); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 2859, __pyx_L1_error)
-    __Pyx_GOTREF(__pyx_t_1);
-    __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
-    __pyx_t_2 = __Pyx_PyObject_CallOneArg(__pyx_builtin_print, __pyx_t_1); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 2859, __pyx_L1_error)
-    __Pyx_GOTREF(__pyx_t_2);
-    __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
-    __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
-
-    /* "cSparseIntegerOutrankingDigraphs.pyx":2860
- *             print('Ranking rule      : %s' % self.componentRankingRule)
- *             print('# Components      : %d' % self.nbrComponents)
- *             print('Minimal order     : %d' % self.minimalComponentSize)             # <<<<<<<<<<<<<<
- *             print('Maximal order     : %d' % self.maximalComponentSize)
- *             print('Average order     : %.1f' % (self.order/self.nbrComponents))
- */
-    __pyx_t_2 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_n_s_minimalComponentSize); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 2860, __pyx_L1_error)
-    __Pyx_GOTREF(__pyx_t_2);
-    __pyx_t_1 = __Pyx_PyUnicode_FormatSafe(__pyx_kp_u_Minimal_order_d_2, __pyx_t_2); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 2860, __pyx_L1_error)
-    __Pyx_GOTREF(__pyx_t_1);
-    __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
-    __pyx_t_2 = __Pyx_PyObject_CallOneArg(__pyx_builtin_print, __pyx_t_1); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 2860, __pyx_L1_error)
-    __Pyx_GOTREF(__pyx_t_2);
-    __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
     __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
 
     /* "cSparseIntegerOutrankingDigraphs.pyx":2861
- *             print('# Components      : %d' % self.nbrComponents)
- *             print('Minimal order     : %d' % self.minimalComponentSize)
- *             print('Maximal order     : %d' % self.maximalComponentSize)             # <<<<<<<<<<<<<<
- *             print('Average order     : %.1f' % (self.order/self.nbrComponents))
- *             print('Fill rate         : %.3f%%' % (self.fillRate*100.0))
+ *         if fileName == None:
+ *             print('*----- show short --------------*')
+ *             print('Instance name     : %s' % self.name)             # <<<<<<<<<<<<<<
+ *             print('Actions           : %d' % self.order)
+ *             print('Criteria          : %d' % self.dimension)
  */
-    __pyx_t_2 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_n_s_maximalComponentSize); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 2861, __pyx_L1_error)
+    __pyx_t_2 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_n_s_name_2); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 2861, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_2);
-    __pyx_t_1 = __Pyx_PyUnicode_FormatSafe(__pyx_kp_u_Maximal_order_d_2, __pyx_t_2); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 2861, __pyx_L1_error)
+    __pyx_t_1 = __Pyx_PyUnicode_FormatSafe(__pyx_kp_u_Instance_name_s_2, __pyx_t_2); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 2861, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_1);
     __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
     __pyx_t_2 = __Pyx_PyObject_CallOneArg(__pyx_builtin_print, __pyx_t_1); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 2861, __pyx_L1_error)
@@ -57885,157 +57862,316 @@ static PyObject *__pyx_pf_32cSparseIntegerOutrankingDigraphs_24cQuantilesRanking
     __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
 
     /* "cSparseIntegerOutrankingDigraphs.pyx":2862
+ *             print('*----- show short --------------*')
+ *             print('Instance name     : %s' % self.name)
+ *             print('Actions           : %d' % self.order)             # <<<<<<<<<<<<<<
+ *             print('Criteria          : %d' % self.dimension)
+ *             print('Sorting by        : %d-Tiling' % self.sortingParameters['limitingQuantiles'])
+ */
+    __pyx_t_2 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_n_s_order); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 2862, __pyx_L1_error)
+    __Pyx_GOTREF(__pyx_t_2);
+    __pyx_t_1 = __Pyx_PyUnicode_FormatSafe(__pyx_kp_u_Actions_d_4, __pyx_t_2); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 2862, __pyx_L1_error)
+    __Pyx_GOTREF(__pyx_t_1);
+    __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
+    __pyx_t_2 = __Pyx_PyObject_CallOneArg(__pyx_builtin_print, __pyx_t_1); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 2862, __pyx_L1_error)
+    __Pyx_GOTREF(__pyx_t_2);
+    __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
+    __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
+
+    /* "cSparseIntegerOutrankingDigraphs.pyx":2863
+ *             print('Instance name     : %s' % self.name)
+ *             print('Actions           : %d' % self.order)
+ *             print('Criteria          : %d' % self.dimension)             # <<<<<<<<<<<<<<
+ *             print('Sorting by        : %d-Tiling' % self.sortingParameters['limitingQuantiles'])
+ *             print('Ordering strategy : %s' % self.sortingParameters['strategy'])
+ */
+    __pyx_t_2 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_n_s_dimension); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 2863, __pyx_L1_error)
+    __Pyx_GOTREF(__pyx_t_2);
+    __pyx_t_1 = __Pyx_PyUnicode_FormatSafe(__pyx_kp_u_Criteria_d_4, __pyx_t_2); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 2863, __pyx_L1_error)
+    __Pyx_GOTREF(__pyx_t_1);
+    __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
+    __pyx_t_2 = __Pyx_PyObject_CallOneArg(__pyx_builtin_print, __pyx_t_1); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 2863, __pyx_L1_error)
+    __Pyx_GOTREF(__pyx_t_2);
+    __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
+    __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
+
+    /* "cSparseIntegerOutrankingDigraphs.pyx":2864
+ *             print('Actions           : %d' % self.order)
+ *             print('Criteria          : %d' % self.dimension)
+ *             print('Sorting by        : %d-Tiling' % self.sortingParameters['limitingQuantiles'])             # <<<<<<<<<<<<<<
+ *             print('Ordering strategy : %s' % self.sortingParameters['strategy'])
+ *             print('Ranking rule      : %s' % self.componentRankingRule)
+ */
+    __pyx_t_2 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_n_s_sortingParameters); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 2864, __pyx_L1_error)
+    __Pyx_GOTREF(__pyx_t_2);
+    __pyx_t_1 = __Pyx_PyObject_Dict_GetItem(__pyx_t_2, __pyx_n_u_limitingQuantiles); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 2864, __pyx_L1_error)
+    __Pyx_GOTREF(__pyx_t_1);
+    __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
+    __pyx_t_2 = __Pyx_PyUnicode_FormatSafe(__pyx_kp_u_Sorting_by_d_Tiling_2, __pyx_t_1); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 2864, __pyx_L1_error)
+    __Pyx_GOTREF(__pyx_t_2);
+    __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
+    __pyx_t_1 = __Pyx_PyObject_CallOneArg(__pyx_builtin_print, __pyx_t_2); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 2864, __pyx_L1_error)
+    __Pyx_GOTREF(__pyx_t_1);
+    __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
+    __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
+
+    /* "cSparseIntegerOutrankingDigraphs.pyx":2865
+ *             print('Criteria          : %d' % self.dimension)
+ *             print('Sorting by        : %d-Tiling' % self.sortingParameters['limitingQuantiles'])
+ *             print('Ordering strategy : %s' % self.sortingParameters['strategy'])             # <<<<<<<<<<<<<<
+ *             print('Ranking rule      : %s' % self.componentRankingRule)
+ *             print('# Components      : %d' % self.nbrComponents)
+ */
+    __pyx_t_1 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_n_s_sortingParameters); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 2865, __pyx_L1_error)
+    __Pyx_GOTREF(__pyx_t_1);
+    __pyx_t_2 = __Pyx_PyObject_Dict_GetItem(__pyx_t_1, __pyx_n_u_strategy); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 2865, __pyx_L1_error)
+    __Pyx_GOTREF(__pyx_t_2);
+    __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
+    __pyx_t_1 = __Pyx_PyUnicode_FormatSafe(__pyx_kp_u_Ordering_strategy_s_2, __pyx_t_2); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 2865, __pyx_L1_error)
+    __Pyx_GOTREF(__pyx_t_1);
+    __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
+    __pyx_t_2 = __Pyx_PyObject_CallOneArg(__pyx_builtin_print, __pyx_t_1); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 2865, __pyx_L1_error)
+    __Pyx_GOTREF(__pyx_t_2);
+    __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
+    __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
+
+    /* "cSparseIntegerOutrankingDigraphs.pyx":2866
+ *             print('Sorting by        : %d-Tiling' % self.sortingParameters['limitingQuantiles'])
+ *             print('Ordering strategy : %s' % self.sortingParameters['strategy'])
+ *             print('Ranking rule      : %s' % self.componentRankingRule)             # <<<<<<<<<<<<<<
+ *             print('# Components      : %d' % self.nbrComponents)
+ *             print('Minimal order     : %d' % self.minimalComponentSize)
+ */
+    __pyx_t_2 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_n_s_componentRankingRule); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 2866, __pyx_L1_error)
+    __Pyx_GOTREF(__pyx_t_2);
+    __pyx_t_1 = __Pyx_PyUnicode_FormatSafe(__pyx_kp_u_Ranking_rule_s_2, __pyx_t_2); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 2866, __pyx_L1_error)
+    __Pyx_GOTREF(__pyx_t_1);
+    __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
+    __pyx_t_2 = __Pyx_PyObject_CallOneArg(__pyx_builtin_print, __pyx_t_1); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 2866, __pyx_L1_error)
+    __Pyx_GOTREF(__pyx_t_2);
+    __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
+    __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
+
+    /* "cSparseIntegerOutrankingDigraphs.pyx":2867
+ *             print('Ordering strategy : %s' % self.sortingParameters['strategy'])
+ *             print('Ranking rule      : %s' % self.componentRankingRule)
+ *             print('# Components      : %d' % self.nbrComponents)             # <<<<<<<<<<<<<<
+ *             print('Minimal order     : %d' % self.minimalComponentSize)
+ *             print('Maximal order     : %d' % self.maximalComponentSize)
+ */
+    __pyx_t_2 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_n_s_nbrComponents); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 2867, __pyx_L1_error)
+    __Pyx_GOTREF(__pyx_t_2);
+    __pyx_t_1 = __Pyx_PyUnicode_FormatSafe(__pyx_kp_u_Components_d_2, __pyx_t_2); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 2867, __pyx_L1_error)
+    __Pyx_GOTREF(__pyx_t_1);
+    __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
+    __pyx_t_2 = __Pyx_PyObject_CallOneArg(__pyx_builtin_print, __pyx_t_1); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 2867, __pyx_L1_error)
+    __Pyx_GOTREF(__pyx_t_2);
+    __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
+    __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
+
+    /* "cSparseIntegerOutrankingDigraphs.pyx":2868
+ *             print('Ranking rule      : %s' % self.componentRankingRule)
+ *             print('# Components      : %d' % self.nbrComponents)
+ *             print('Minimal order     : %d' % self.minimalComponentSize)             # <<<<<<<<<<<<<<
+ *             print('Maximal order     : %d' % self.maximalComponentSize)
+ *             print('Average order     : %.1f' % (self.order/self.nbrComponents))
+ */
+    __pyx_t_2 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_n_s_minimalComponentSize); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 2868, __pyx_L1_error)
+    __Pyx_GOTREF(__pyx_t_2);
+    __pyx_t_1 = __Pyx_PyUnicode_FormatSafe(__pyx_kp_u_Minimal_order_d_2, __pyx_t_2); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 2868, __pyx_L1_error)
+    __Pyx_GOTREF(__pyx_t_1);
+    __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
+    __pyx_t_2 = __Pyx_PyObject_CallOneArg(__pyx_builtin_print, __pyx_t_1); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 2868, __pyx_L1_error)
+    __Pyx_GOTREF(__pyx_t_2);
+    __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
+    __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
+
+    /* "cSparseIntegerOutrankingDigraphs.pyx":2869
+ *             print('# Components      : %d' % self.nbrComponents)
+ *             print('Minimal order     : %d' % self.minimalComponentSize)
+ *             print('Maximal order     : %d' % self.maximalComponentSize)             # <<<<<<<<<<<<<<
+ *             print('Average order     : %.1f' % (self.order/self.nbrComponents))
+ *             print('Fill rate         : %.3f%%' % (self.fillRate*100.0))
+ */
+    __pyx_t_2 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_n_s_maximalComponentSize); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 2869, __pyx_L1_error)
+    __Pyx_GOTREF(__pyx_t_2);
+    __pyx_t_1 = __Pyx_PyUnicode_FormatSafe(__pyx_kp_u_Maximal_order_d_2, __pyx_t_2); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 2869, __pyx_L1_error)
+    __Pyx_GOTREF(__pyx_t_1);
+    __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
+    __pyx_t_2 = __Pyx_PyObject_CallOneArg(__pyx_builtin_print, __pyx_t_1); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 2869, __pyx_L1_error)
+    __Pyx_GOTREF(__pyx_t_2);
+    __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
+    __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
+
+    /* "cSparseIntegerOutrankingDigraphs.pyx":2870
  *             print('Minimal order     : %d' % self.minimalComponentSize)
  *             print('Maximal order     : %d' % self.maximalComponentSize)
  *             print('Average order     : %.1f' % (self.order/self.nbrComponents))             # <<<<<<<<<<<<<<
  *             print('Fill rate         : %.3f%%' % (self.fillRate*100.0))
  *             print('----  Constructor run times (in sec.) ----')
  */
-    __pyx_t_2 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_n_s_order); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 2862, __pyx_L1_error)
+    __pyx_t_2 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_n_s_order); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 2870, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_2);
-    __pyx_t_1 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_n_s_nbrComponents); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 2862, __pyx_L1_error)
+    __pyx_t_1 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_n_s_nbrComponents); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 2870, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_1);
-    __pyx_t_4 = __Pyx_PyNumber_Divide(__pyx_t_2, __pyx_t_1); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 2862, __pyx_L1_error)
+    __pyx_t_4 = __Pyx_PyNumber_Divide(__pyx_t_2, __pyx_t_1); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 2870, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_4);
     __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
     __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
-    __pyx_t_1 = __Pyx_PyUnicode_FormatSafe(__pyx_kp_u_Average_order_1f_2, __pyx_t_4); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 2862, __pyx_L1_error)
+    __pyx_t_1 = __Pyx_PyUnicode_FormatSafe(__pyx_kp_u_Average_order_1f_2, __pyx_t_4); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 2870, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_1);
     __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
-    __pyx_t_4 = __Pyx_PyObject_CallOneArg(__pyx_builtin_print, __pyx_t_1); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 2862, __pyx_L1_error)
+    __pyx_t_4 = __Pyx_PyObject_CallOneArg(__pyx_builtin_print, __pyx_t_1); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 2870, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_4);
     __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
     __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
 
-    /* "cSparseIntegerOutrankingDigraphs.pyx":2863
+    /* "cSparseIntegerOutrankingDigraphs.pyx":2871
  *             print('Maximal order     : %d' % self.maximalComponentSize)
  *             print('Average order     : %.1f' % (self.order/self.nbrComponents))
  *             print('Fill rate         : %.3f%%' % (self.fillRate*100.0))             # <<<<<<<<<<<<<<
  *             print('----  Constructor run times (in sec.) ----')
- *             print('Nbr of thread     : %d' % self.nbrOfCPUs)
+ *             print('Threads           : %d' % self.nbrThreads)
  */
-    __pyx_t_4 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_n_s_fillRate); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 2863, __pyx_L1_error)
+    __pyx_t_4 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_n_s_fillRate); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 2871, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_4);
-    __pyx_t_1 = PyNumber_Multiply(__pyx_t_4, __pyx_float_100_0); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 2863, __pyx_L1_error)
+    __pyx_t_1 = PyNumber_Multiply(__pyx_t_4, __pyx_float_100_0); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 2871, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_1);
     __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
-    __pyx_t_4 = __Pyx_PyUnicode_FormatSafe(__pyx_kp_u_Fill_rate_3f, __pyx_t_1); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 2863, __pyx_L1_error)
+    __pyx_t_4 = __Pyx_PyUnicode_FormatSafe(__pyx_kp_u_Fill_rate_3f, __pyx_t_1); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 2871, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_4);
     __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
-    __pyx_t_1 = __Pyx_PyObject_CallOneArg(__pyx_builtin_print, __pyx_t_4); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 2863, __pyx_L1_error)
+    __pyx_t_1 = __Pyx_PyObject_CallOneArg(__pyx_builtin_print, __pyx_t_4); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 2871, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_1);
     __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
     __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
 
-    /* "cSparseIntegerOutrankingDigraphs.pyx":2864
+    /* "cSparseIntegerOutrankingDigraphs.pyx":2872
  *             print('Average order     : %.1f' % (self.order/self.nbrComponents))
  *             print('Fill rate         : %.3f%%' % (self.fillRate*100.0))
  *             print('----  Constructor run times (in sec.) ----')             # <<<<<<<<<<<<<<
- *             print('Nbr of thread     : %d' % self.nbrOfCPUs)
- *             print('Total time        : %.5f' % self.runTimes['totalTime'])
+ *             print('Threads           : %d' % self.nbrThreads)
+ *             print('Start mthod       : %s' % self.startMethod)
  */
-    __pyx_t_1 = __Pyx_PyObject_Call(__pyx_builtin_print, __pyx_tuple__56, NULL); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 2864, __pyx_L1_error)
+    __pyx_t_1 = __Pyx_PyObject_Call(__pyx_builtin_print, __pyx_tuple__56, NULL); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 2872, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_1);
     __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
 
-    /* "cSparseIntegerOutrankingDigraphs.pyx":2865
+    /* "cSparseIntegerOutrankingDigraphs.pyx":2873
  *             print('Fill rate         : %.3f%%' % (self.fillRate*100.0))
  *             print('----  Constructor run times (in sec.) ----')
- *             print('Nbr of thread     : %d' % self.nbrOfCPUs)             # <<<<<<<<<<<<<<
+ *             print('Threads           : %d' % self.nbrThreads)             # <<<<<<<<<<<<<<
+ *             print('Start mthod       : %s' % self.startMethod)
  *             print('Total time        : %.5f' % self.runTimes['totalTime'])
- *             print('QuantilesSorting  : %.5f' % self.runTimes['sorting'])
  */
-    __pyx_t_1 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_n_s_nbrOfCPUs); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 2865, __pyx_L1_error)
+    __pyx_t_1 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_n_s_nbrThreads); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 2873, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_1);
-    __pyx_t_4 = __Pyx_PyUnicode_FormatSafe(__pyx_kp_u_Nbr_of_thread_d, __pyx_t_1); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 2865, __pyx_L1_error)
+    __pyx_t_4 = __Pyx_PyUnicode_FormatSafe(__pyx_kp_u_Threads_d_3, __pyx_t_1); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 2873, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_4);
     __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
-    __pyx_t_1 = __Pyx_PyObject_CallOneArg(__pyx_builtin_print, __pyx_t_4); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 2865, __pyx_L1_error)
+    __pyx_t_1 = __Pyx_PyObject_CallOneArg(__pyx_builtin_print, __pyx_t_4); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 2873, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_1);
     __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
     __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
 
-    /* "cSparseIntegerOutrankingDigraphs.pyx":2866
+    /* "cSparseIntegerOutrankingDigraphs.pyx":2874
  *             print('----  Constructor run times (in sec.) ----')
- *             print('Nbr of thread     : %d' % self.nbrOfCPUs)
+ *             print('Threads           : %d' % self.nbrThreads)
+ *             print('Start mthod       : %s' % self.startMethod)             # <<<<<<<<<<<<<<
+ *             print('Total time        : %.5f' % self.runTimes['totalTime'])
+ *             print('QuantilesSorting  : %.5f' % self.runTimes['sorting'])
+ */
+    __pyx_t_1 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_n_s_startMethod); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 2874, __pyx_L1_error)
+    __Pyx_GOTREF(__pyx_t_1);
+    __pyx_t_4 = __Pyx_PyUnicode_FormatSafe(__pyx_kp_u_Start_mthod_s, __pyx_t_1); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 2874, __pyx_L1_error)
+    __Pyx_GOTREF(__pyx_t_4);
+    __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
+    __pyx_t_1 = __Pyx_PyObject_CallOneArg(__pyx_builtin_print, __pyx_t_4); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 2874, __pyx_L1_error)
+    __Pyx_GOTREF(__pyx_t_1);
+    __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
+    __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
+
+    /* "cSparseIntegerOutrankingDigraphs.pyx":2875
+ *             print('Threads           : %d' % self.nbrThreads)
+ *             print('Start mthod       : %s' % self.startMethod)
  *             print('Total time        : %.5f' % self.runTimes['totalTime'])             # <<<<<<<<<<<<<<
  *             print('QuantilesSorting  : %.5f' % self.runTimes['sorting'])
  *             print('Preordering       : %.5f' % self.runTimes['preordering'])
  */
-    __pyx_t_1 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_n_s_runTimes); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 2866, __pyx_L1_error)
+    __pyx_t_1 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_n_s_runTimes); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 2875, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_1);
-    __pyx_t_4 = __Pyx_PyObject_Dict_GetItem(__pyx_t_1, __pyx_n_u_totalTime); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 2866, __pyx_L1_error)
+    __pyx_t_4 = __Pyx_PyObject_Dict_GetItem(__pyx_t_1, __pyx_n_u_totalTime); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 2875, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_4);
     __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
-    __pyx_t_1 = __Pyx_PyUnicode_FormatSafe(__pyx_kp_u_Total_time_5f_2, __pyx_t_4); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 2866, __pyx_L1_error)
+    __pyx_t_1 = __Pyx_PyUnicode_FormatSafe(__pyx_kp_u_Total_time_5f_2, __pyx_t_4); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 2875, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_1);
     __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
-    __pyx_t_4 = __Pyx_PyObject_CallOneArg(__pyx_builtin_print, __pyx_t_1); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 2866, __pyx_L1_error)
+    __pyx_t_4 = __Pyx_PyObject_CallOneArg(__pyx_builtin_print, __pyx_t_1); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 2875, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_4);
     __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
     __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
 
-    /* "cSparseIntegerOutrankingDigraphs.pyx":2867
- *             print('Nbr of thread     : %d' % self.nbrOfCPUs)
+    /* "cSparseIntegerOutrankingDigraphs.pyx":2876
+ *             print('Start mthod       : %s' % self.startMethod)
  *             print('Total time        : %.5f' % self.runTimes['totalTime'])
  *             print('QuantilesSorting  : %.5f' % self.runTimes['sorting'])             # <<<<<<<<<<<<<<
  *             print('Preordering       : %.5f' % self.runTimes['preordering'])
  *             print('Decomposing       : %.5f' % self.runTimes['decomposing'])
  */
-    __pyx_t_4 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_n_s_runTimes); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 2867, __pyx_L1_error)
+    __pyx_t_4 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_n_s_runTimes); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 2876, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_4);
-    __pyx_t_1 = __Pyx_PyObject_Dict_GetItem(__pyx_t_4, __pyx_n_u_sorting); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 2867, __pyx_L1_error)
+    __pyx_t_1 = __Pyx_PyObject_Dict_GetItem(__pyx_t_4, __pyx_n_u_sorting); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 2876, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_1);
     __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
-    __pyx_t_4 = __Pyx_PyUnicode_FormatSafe(__pyx_kp_u_QuantilesSorting_5f_2, __pyx_t_1); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 2867, __pyx_L1_error)
+    __pyx_t_4 = __Pyx_PyUnicode_FormatSafe(__pyx_kp_u_QuantilesSorting_5f_2, __pyx_t_1); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 2876, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_4);
     __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
-    __pyx_t_1 = __Pyx_PyObject_CallOneArg(__pyx_builtin_print, __pyx_t_4); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 2867, __pyx_L1_error)
+    __pyx_t_1 = __Pyx_PyObject_CallOneArg(__pyx_builtin_print, __pyx_t_4); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 2876, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_1);
     __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
     __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
 
-    /* "cSparseIntegerOutrankingDigraphs.pyx":2868
+    /* "cSparseIntegerOutrankingDigraphs.pyx":2877
  *             print('Total time        : %.5f' % self.runTimes['totalTime'])
  *             print('QuantilesSorting  : %.5f' % self.runTimes['sorting'])
  *             print('Preordering       : %.5f' % self.runTimes['preordering'])             # <<<<<<<<<<<<<<
  *             print('Decomposing       : %.5f' % self.runTimes['decomposing'])
  *             try:
  */
-    __pyx_t_1 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_n_s_runTimes); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 2868, __pyx_L1_error)
+    __pyx_t_1 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_n_s_runTimes); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 2877, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_1);
-    __pyx_t_4 = __Pyx_PyObject_Dict_GetItem(__pyx_t_1, __pyx_n_u_preordering); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 2868, __pyx_L1_error)
+    __pyx_t_4 = __Pyx_PyObject_Dict_GetItem(__pyx_t_1, __pyx_n_u_preordering); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 2877, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_4);
     __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
-    __pyx_t_1 = __Pyx_PyUnicode_FormatSafe(__pyx_kp_u_Preordering_5f_2, __pyx_t_4); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 2868, __pyx_L1_error)
+    __pyx_t_1 = __Pyx_PyUnicode_FormatSafe(__pyx_kp_u_Preordering_5f_2, __pyx_t_4); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 2877, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_1);
     __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
-    __pyx_t_4 = __Pyx_PyObject_CallOneArg(__pyx_builtin_print, __pyx_t_1); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 2868, __pyx_L1_error)
+    __pyx_t_4 = __Pyx_PyObject_CallOneArg(__pyx_builtin_print, __pyx_t_1); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 2877, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_4);
     __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
     __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
 
-    /* "cSparseIntegerOutrankingDigraphs.pyx":2869
+    /* "cSparseIntegerOutrankingDigraphs.pyx":2878
  *             print('QuantilesSorting  : %.5f' % self.runTimes['sorting'])
  *             print('Preordering       : %.5f' % self.runTimes['preordering'])
  *             print('Decomposing       : %.5f' % self.runTimes['decomposing'])             # <<<<<<<<<<<<<<
  *             try:
  *                 print('Ordering          : %.5f' % self.runTimes['ordering'])
  */
-    __pyx_t_4 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_n_s_runTimes); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 2869, __pyx_L1_error)
+    __pyx_t_4 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_n_s_runTimes); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 2878, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_4);
-    __pyx_t_1 = __Pyx_PyObject_Dict_GetItem(__pyx_t_4, __pyx_n_u_decomposing); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 2869, __pyx_L1_error)
+    __pyx_t_1 = __Pyx_PyObject_Dict_GetItem(__pyx_t_4, __pyx_n_u_decomposing); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 2878, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_1);
     __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
-    __pyx_t_4 = __Pyx_PyUnicode_FormatSafe(__pyx_kp_u_Decomposing_5f_2, __pyx_t_1); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 2869, __pyx_L1_error)
+    __pyx_t_4 = __Pyx_PyUnicode_FormatSafe(__pyx_kp_u_Decomposing_5f_2, __pyx_t_1); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 2878, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_4);
     __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
-    __pyx_t_1 = __Pyx_PyObject_CallOneArg(__pyx_builtin_print, __pyx_t_4); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 2869, __pyx_L1_error)
+    __pyx_t_1 = __Pyx_PyObject_CallOneArg(__pyx_builtin_print, __pyx_t_4); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 2878, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_1);
     __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
     __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
 
-    /* "cSparseIntegerOutrankingDigraphs.pyx":2870
+    /* "cSparseIntegerOutrankingDigraphs.pyx":2879
  *             print('Preordering       : %.5f' % self.runTimes['preordering'])
  *             print('Decomposing       : %.5f' % self.runTimes['decomposing'])
  *             try:             # <<<<<<<<<<<<<<
@@ -58051,27 +58187,27 @@ static PyObject *__pyx_pf_32cSparseIntegerOutrankingDigraphs_24cQuantilesRanking
       __Pyx_XGOTREF(__pyx_t_7);
       /*try:*/ {
 
-        /* "cSparseIntegerOutrankingDigraphs.pyx":2871
+        /* "cSparseIntegerOutrankingDigraphs.pyx":2880
  *             print('Decomposing       : %.5f' % self.runTimes['decomposing'])
  *             try:
  *                 print('Ordering          : %.5f' % self.runTimes['ordering'])             # <<<<<<<<<<<<<<
  *             except:
  *                 pass
  */
-        __pyx_t_1 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_n_s_runTimes); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 2871, __pyx_L4_error)
+        __pyx_t_1 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_n_s_runTimes); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 2880, __pyx_L4_error)
         __Pyx_GOTREF(__pyx_t_1);
-        __pyx_t_4 = __Pyx_PyObject_Dict_GetItem(__pyx_t_1, __pyx_n_u_ordering); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 2871, __pyx_L4_error)
+        __pyx_t_4 = __Pyx_PyObject_Dict_GetItem(__pyx_t_1, __pyx_n_u_ordering); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 2880, __pyx_L4_error)
         __Pyx_GOTREF(__pyx_t_4);
         __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
-        __pyx_t_1 = __Pyx_PyUnicode_FormatSafe(__pyx_kp_u_Ordering_5f_2, __pyx_t_4); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 2871, __pyx_L4_error)
+        __pyx_t_1 = __Pyx_PyUnicode_FormatSafe(__pyx_kp_u_Ordering_5f_2, __pyx_t_4); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 2880, __pyx_L4_error)
         __Pyx_GOTREF(__pyx_t_1);
         __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
-        __pyx_t_4 = __Pyx_PyObject_CallOneArg(__pyx_builtin_print, __pyx_t_1); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 2871, __pyx_L4_error)
+        __pyx_t_4 = __Pyx_PyObject_CallOneArg(__pyx_builtin_print, __pyx_t_1); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 2880, __pyx_L4_error)
         __Pyx_GOTREF(__pyx_t_4);
         __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
         __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
 
-        /* "cSparseIntegerOutrankingDigraphs.pyx":2870
+        /* "cSparseIntegerOutrankingDigraphs.pyx":2879
  *             print('Preordering       : %.5f' % self.runTimes['preordering'])
  *             print('Decomposing       : %.5f' % self.runTimes['decomposing'])
  *             try:             # <<<<<<<<<<<<<<
@@ -58088,7 +58224,7 @@ static PyObject *__pyx_pf_32cSparseIntegerOutrankingDigraphs_24cQuantilesRanking
       __Pyx_XDECREF(__pyx_t_2); __pyx_t_2 = 0;
       __Pyx_XDECREF(__pyx_t_4); __pyx_t_4 = 0;
 
-      /* "cSparseIntegerOutrankingDigraphs.pyx":2872
+      /* "cSparseIntegerOutrankingDigraphs.pyx":2881
  *             try:
  *                 print('Ordering          : %.5f' % self.runTimes['ordering'])
  *             except:             # <<<<<<<<<<<<<<
@@ -58107,7 +58243,7 @@ static PyObject *__pyx_pf_32cSparseIntegerOutrankingDigraphs_24cQuantilesRanking
       __pyx_L9_try_end:;
     }
 
-    /* "cSparseIntegerOutrankingDigraphs.pyx":2851
+    /* "cSparseIntegerOutrankingDigraphs.pyx":2859
  *         #summaryStats = self.computeDecompositionSummaryStatistics()
  *         from digraphs import total_size
  *         if fileName == None:             # <<<<<<<<<<<<<<
@@ -58117,7 +58253,7 @@ static PyObject *__pyx_pf_32cSparseIntegerOutrankingDigraphs_24cQuantilesRanking
     goto __pyx_L3;
   }
 
-  /* "cSparseIntegerOutrankingDigraphs.pyx":2875
+  /* "cSparseIntegerOutrankingDigraphs.pyx":2884
  *                 pass
  *         else:
  *             fo = open(fileName,'a')             # <<<<<<<<<<<<<<
@@ -58125,28 +58261,28 @@ static PyObject *__pyx_pf_32cSparseIntegerOutrankingDigraphs_24cQuantilesRanking
  *             fo.write('Instance name      : %s\n' % self.name)
  */
   /*else*/ {
-    __pyx_t_4 = PyTuple_New(2); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 2875, __pyx_L1_error)
+    __pyx_t_4 = PyTuple_New(2); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 2884, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_4);
     __Pyx_INCREF(__pyx_v_fileName);
     __Pyx_GIVEREF(__pyx_v_fileName);
-    if (__Pyx_PyTuple_SET_ITEM(__pyx_t_4, 0, __pyx_v_fileName)) __PYX_ERR(0, 2875, __pyx_L1_error);
+    if (__Pyx_PyTuple_SET_ITEM(__pyx_t_4, 0, __pyx_v_fileName)) __PYX_ERR(0, 2884, __pyx_L1_error);
     __Pyx_INCREF(__pyx_n_u_a);
     __Pyx_GIVEREF(__pyx_n_u_a);
-    if (__Pyx_PyTuple_SET_ITEM(__pyx_t_4, 1, __pyx_n_u_a)) __PYX_ERR(0, 2875, __pyx_L1_error);
-    __pyx_t_1 = __Pyx_PyObject_Call(__pyx_builtin_open, __pyx_t_4, NULL); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 2875, __pyx_L1_error)
+    if (__Pyx_PyTuple_SET_ITEM(__pyx_t_4, 1, __pyx_n_u_a)) __PYX_ERR(0, 2884, __pyx_L1_error);
+    __pyx_t_1 = __Pyx_PyObject_Call(__pyx_builtin_open, __pyx_t_4, NULL); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 2884, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_1);
     __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
     __pyx_v_fo = __pyx_t_1;
     __pyx_t_1 = 0;
 
-    /* "cSparseIntegerOutrankingDigraphs.pyx":2876
+    /* "cSparseIntegerOutrankingDigraphs.pyx":2885
  *         else:
  *             fo = open(fileName,'a')
  *             fo.write('*----- show short --------------*\n')             # <<<<<<<<<<<<<<
  *             fo.write('Instance name      : %s\n' % self.name)
  *             if WithFileSize:
  */
-    __pyx_t_4 = __Pyx_PyObject_GetAttrStr(__pyx_v_fo, __pyx_n_s_write); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 2876, __pyx_L1_error)
+    __pyx_t_4 = __Pyx_PyObject_GetAttrStr(__pyx_v_fo, __pyx_n_s_write); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 2885, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_4);
     __pyx_t_2 = NULL;
     __pyx_t_8 = 0;
@@ -58166,363 +58302,6 @@ static PyObject *__pyx_pf_32cSparseIntegerOutrankingDigraphs_24cQuantilesRanking
       PyObject *__pyx_callargs[2] = {__pyx_t_2, __pyx_kp_u_show_short_2};
       __pyx_t_1 = __Pyx_PyObject_FastCall(__pyx_t_4, __pyx_callargs+1-__pyx_t_8, 1+__pyx_t_8);
       __Pyx_XDECREF(__pyx_t_2); __pyx_t_2 = 0;
-      if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 2876, __pyx_L1_error)
-      __Pyx_GOTREF(__pyx_t_1);
-      __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
-    }
-    __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
-
-    /* "cSparseIntegerOutrankingDigraphs.pyx":2877
- *             fo = open(fileName,'a')
- *             fo.write('*----- show short --------------*\n')
- *             fo.write('Instance name      : %s\n' % self.name)             # <<<<<<<<<<<<<<
- *             if WithFileSize:
- *                 fo.write('Size (in bytes)    : %d\n' % total_size(self))
- */
-    __pyx_t_4 = __Pyx_PyObject_GetAttrStr(__pyx_v_fo, __pyx_n_s_write); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 2877, __pyx_L1_error)
-    __Pyx_GOTREF(__pyx_t_4);
-    __pyx_t_2 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_n_s_name_2); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 2877, __pyx_L1_error)
-    __Pyx_GOTREF(__pyx_t_2);
-    __pyx_t_9 = __Pyx_PyUnicode_FormatSafe(__pyx_kp_u_Instance_name_s_3, __pyx_t_2); if (unlikely(!__pyx_t_9)) __PYX_ERR(0, 2877, __pyx_L1_error)
-    __Pyx_GOTREF(__pyx_t_9);
-    __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
-    __pyx_t_2 = NULL;
-    __pyx_t_8 = 0;
-    #if CYTHON_UNPACK_METHODS
-    if (likely(PyMethod_Check(__pyx_t_4))) {
-      __pyx_t_2 = PyMethod_GET_SELF(__pyx_t_4);
-      if (likely(__pyx_t_2)) {
-        PyObject* function = PyMethod_GET_FUNCTION(__pyx_t_4);
-        __Pyx_INCREF(__pyx_t_2);
-        __Pyx_INCREF(function);
-        __Pyx_DECREF_SET(__pyx_t_4, function);
-        __pyx_t_8 = 1;
-      }
-    }
-    #endif
-    {
-      PyObject *__pyx_callargs[2] = {__pyx_t_2, __pyx_t_9};
-      __pyx_t_1 = __Pyx_PyObject_FastCall(__pyx_t_4, __pyx_callargs+1-__pyx_t_8, 1+__pyx_t_8);
-      __Pyx_XDECREF(__pyx_t_2); __pyx_t_2 = 0;
-      __Pyx_DECREF(__pyx_t_9); __pyx_t_9 = 0;
-      if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 2877, __pyx_L1_error)
-      __Pyx_GOTREF(__pyx_t_1);
-      __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
-    }
-    __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
-
-    /* "cSparseIntegerOutrankingDigraphs.pyx":2878
- *             fo.write('*----- show short --------------*\n')
- *             fo.write('Instance name      : %s\n' % self.name)
- *             if WithFileSize:             # <<<<<<<<<<<<<<
- *                 fo.write('Size (in bytes)    : %d\n' % total_size(self))
- *             fo.write('# Actions          : %d\n' % self.order)
- */
-    if (__pyx_v_WithFileSize) {
-
-      /* "cSparseIntegerOutrankingDigraphs.pyx":2879
- *             fo.write('Instance name      : %s\n' % self.name)
- *             if WithFileSize:
- *                 fo.write('Size (in bytes)    : %d\n' % total_size(self))             # <<<<<<<<<<<<<<
- *             fo.write('# Actions          : %d\n' % self.order)
- *             fo.write('# Criteria         : %d\n' % self.dimension)
- */
-      __pyx_t_4 = __Pyx_PyObject_GetAttrStr(__pyx_v_fo, __pyx_n_s_write); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 2879, __pyx_L1_error)
-      __Pyx_GOTREF(__pyx_t_4);
-      __Pyx_INCREF(__pyx_v_total_size);
-      __pyx_t_2 = __pyx_v_total_size; __pyx_t_10 = NULL;
-      __pyx_t_8 = 0;
-      #if CYTHON_UNPACK_METHODS
-      if (unlikely(PyMethod_Check(__pyx_t_2))) {
-        __pyx_t_10 = PyMethod_GET_SELF(__pyx_t_2);
-        if (likely(__pyx_t_10)) {
-          PyObject* function = PyMethod_GET_FUNCTION(__pyx_t_2);
-          __Pyx_INCREF(__pyx_t_10);
-          __Pyx_INCREF(function);
-          __Pyx_DECREF_SET(__pyx_t_2, function);
-          __pyx_t_8 = 1;
-        }
-      }
-      #endif
-      {
-        PyObject *__pyx_callargs[2] = {__pyx_t_10, __pyx_v_self};
-        __pyx_t_9 = __Pyx_PyObject_FastCall(__pyx_t_2, __pyx_callargs+1-__pyx_t_8, 1+__pyx_t_8);
-        __Pyx_XDECREF(__pyx_t_10); __pyx_t_10 = 0;
-        if (unlikely(!__pyx_t_9)) __PYX_ERR(0, 2879, __pyx_L1_error)
-        __Pyx_GOTREF(__pyx_t_9);
-        __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
-      }
-      __pyx_t_2 = __Pyx_PyUnicode_FormatSafe(__pyx_kp_u_Size_in_bytes_d, __pyx_t_9); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 2879, __pyx_L1_error)
-      __Pyx_GOTREF(__pyx_t_2);
-      __Pyx_DECREF(__pyx_t_9); __pyx_t_9 = 0;
-      __pyx_t_9 = NULL;
-      __pyx_t_8 = 0;
-      #if CYTHON_UNPACK_METHODS
-      if (likely(PyMethod_Check(__pyx_t_4))) {
-        __pyx_t_9 = PyMethod_GET_SELF(__pyx_t_4);
-        if (likely(__pyx_t_9)) {
-          PyObject* function = PyMethod_GET_FUNCTION(__pyx_t_4);
-          __Pyx_INCREF(__pyx_t_9);
-          __Pyx_INCREF(function);
-          __Pyx_DECREF_SET(__pyx_t_4, function);
-          __pyx_t_8 = 1;
-        }
-      }
-      #endif
-      {
-        PyObject *__pyx_callargs[2] = {__pyx_t_9, __pyx_t_2};
-        __pyx_t_1 = __Pyx_PyObject_FastCall(__pyx_t_4, __pyx_callargs+1-__pyx_t_8, 1+__pyx_t_8);
-        __Pyx_XDECREF(__pyx_t_9); __pyx_t_9 = 0;
-        __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
-        if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 2879, __pyx_L1_error)
-        __Pyx_GOTREF(__pyx_t_1);
-        __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
-      }
-      __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
-
-      /* "cSparseIntegerOutrankingDigraphs.pyx":2878
- *             fo.write('*----- show short --------------*\n')
- *             fo.write('Instance name      : %s\n' % self.name)
- *             if WithFileSize:             # <<<<<<<<<<<<<<
- *                 fo.write('Size (in bytes)    : %d\n' % total_size(self))
- *             fo.write('# Actions          : %d\n' % self.order)
- */
-    }
-
-    /* "cSparseIntegerOutrankingDigraphs.pyx":2880
- *             if WithFileSize:
- *                 fo.write('Size (in bytes)    : %d\n' % total_size(self))
- *             fo.write('# Actions          : %d\n' % self.order)             # <<<<<<<<<<<<<<
- *             fo.write('# Criteria         : %d\n' % self.dimension)
- *             fo.write('Sorting by         : %d-Tiling\n' % self.sortingParameters['limitingQuantiles'])
- */
-    __pyx_t_4 = __Pyx_PyObject_GetAttrStr(__pyx_v_fo, __pyx_n_s_write); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 2880, __pyx_L1_error)
-    __Pyx_GOTREF(__pyx_t_4);
-    __pyx_t_2 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_n_s_order); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 2880, __pyx_L1_error)
-    __Pyx_GOTREF(__pyx_t_2);
-    __pyx_t_9 = __Pyx_PyUnicode_FormatSafe(__pyx_kp_u_Actions_d_3, __pyx_t_2); if (unlikely(!__pyx_t_9)) __PYX_ERR(0, 2880, __pyx_L1_error)
-    __Pyx_GOTREF(__pyx_t_9);
-    __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
-    __pyx_t_2 = NULL;
-    __pyx_t_8 = 0;
-    #if CYTHON_UNPACK_METHODS
-    if (likely(PyMethod_Check(__pyx_t_4))) {
-      __pyx_t_2 = PyMethod_GET_SELF(__pyx_t_4);
-      if (likely(__pyx_t_2)) {
-        PyObject* function = PyMethod_GET_FUNCTION(__pyx_t_4);
-        __Pyx_INCREF(__pyx_t_2);
-        __Pyx_INCREF(function);
-        __Pyx_DECREF_SET(__pyx_t_4, function);
-        __pyx_t_8 = 1;
-      }
-    }
-    #endif
-    {
-      PyObject *__pyx_callargs[2] = {__pyx_t_2, __pyx_t_9};
-      __pyx_t_1 = __Pyx_PyObject_FastCall(__pyx_t_4, __pyx_callargs+1-__pyx_t_8, 1+__pyx_t_8);
-      __Pyx_XDECREF(__pyx_t_2); __pyx_t_2 = 0;
-      __Pyx_DECREF(__pyx_t_9); __pyx_t_9 = 0;
-      if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 2880, __pyx_L1_error)
-      __Pyx_GOTREF(__pyx_t_1);
-      __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
-    }
-    __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
-
-    /* "cSparseIntegerOutrankingDigraphs.pyx":2881
- *                 fo.write('Size (in bytes)    : %d\n' % total_size(self))
- *             fo.write('# Actions          : %d\n' % self.order)
- *             fo.write('# Criteria         : %d\n' % self.dimension)             # <<<<<<<<<<<<<<
- *             fo.write('Sorting by         : %d-Tiling\n' % self.sortingParameters['limitingQuantiles'])
- *             fo.write('Ordering strategy  : %s\n' % self.sortingParameters['strategy'])
- */
-    __pyx_t_4 = __Pyx_PyObject_GetAttrStr(__pyx_v_fo, __pyx_n_s_write); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 2881, __pyx_L1_error)
-    __Pyx_GOTREF(__pyx_t_4);
-    __pyx_t_9 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_n_s_dimension); if (unlikely(!__pyx_t_9)) __PYX_ERR(0, 2881, __pyx_L1_error)
-    __Pyx_GOTREF(__pyx_t_9);
-    __pyx_t_2 = __Pyx_PyUnicode_FormatSafe(__pyx_kp_u_Criteria_d_3, __pyx_t_9); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 2881, __pyx_L1_error)
-    __Pyx_GOTREF(__pyx_t_2);
-    __Pyx_DECREF(__pyx_t_9); __pyx_t_9 = 0;
-    __pyx_t_9 = NULL;
-    __pyx_t_8 = 0;
-    #if CYTHON_UNPACK_METHODS
-    if (likely(PyMethod_Check(__pyx_t_4))) {
-      __pyx_t_9 = PyMethod_GET_SELF(__pyx_t_4);
-      if (likely(__pyx_t_9)) {
-        PyObject* function = PyMethod_GET_FUNCTION(__pyx_t_4);
-        __Pyx_INCREF(__pyx_t_9);
-        __Pyx_INCREF(function);
-        __Pyx_DECREF_SET(__pyx_t_4, function);
-        __pyx_t_8 = 1;
-      }
-    }
-    #endif
-    {
-      PyObject *__pyx_callargs[2] = {__pyx_t_9, __pyx_t_2};
-      __pyx_t_1 = __Pyx_PyObject_FastCall(__pyx_t_4, __pyx_callargs+1-__pyx_t_8, 1+__pyx_t_8);
-      __Pyx_XDECREF(__pyx_t_9); __pyx_t_9 = 0;
-      __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
-      if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 2881, __pyx_L1_error)
-      __Pyx_GOTREF(__pyx_t_1);
-      __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
-    }
-    __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
-
-    /* "cSparseIntegerOutrankingDigraphs.pyx":2882
- *             fo.write('# Actions          : %d\n' % self.order)
- *             fo.write('# Criteria         : %d\n' % self.dimension)
- *             fo.write('Sorting by         : %d-Tiling\n' % self.sortingParameters['limitingQuantiles'])             # <<<<<<<<<<<<<<
- *             fo.write('Ordering strategy  : %s\n' % self.sortingParameters['strategy'])
- *             fo.write('Local ranking rule : %s\n' % self.componentRankingRule)
- */
-    __pyx_t_4 = __Pyx_PyObject_GetAttrStr(__pyx_v_fo, __pyx_n_s_write); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 2882, __pyx_L1_error)
-    __Pyx_GOTREF(__pyx_t_4);
-    __pyx_t_2 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_n_s_sortingParameters); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 2882, __pyx_L1_error)
-    __Pyx_GOTREF(__pyx_t_2);
-    __pyx_t_9 = __Pyx_PyObject_Dict_GetItem(__pyx_t_2, __pyx_n_u_limitingQuantiles); if (unlikely(!__pyx_t_9)) __PYX_ERR(0, 2882, __pyx_L1_error)
-    __Pyx_GOTREF(__pyx_t_9);
-    __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
-    __pyx_t_2 = __Pyx_PyUnicode_FormatSafe(__pyx_kp_u_Sorting_by_d_Tiling_3, __pyx_t_9); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 2882, __pyx_L1_error)
-    __Pyx_GOTREF(__pyx_t_2);
-    __Pyx_DECREF(__pyx_t_9); __pyx_t_9 = 0;
-    __pyx_t_9 = NULL;
-    __pyx_t_8 = 0;
-    #if CYTHON_UNPACK_METHODS
-    if (likely(PyMethod_Check(__pyx_t_4))) {
-      __pyx_t_9 = PyMethod_GET_SELF(__pyx_t_4);
-      if (likely(__pyx_t_9)) {
-        PyObject* function = PyMethod_GET_FUNCTION(__pyx_t_4);
-        __Pyx_INCREF(__pyx_t_9);
-        __Pyx_INCREF(function);
-        __Pyx_DECREF_SET(__pyx_t_4, function);
-        __pyx_t_8 = 1;
-      }
-    }
-    #endif
-    {
-      PyObject *__pyx_callargs[2] = {__pyx_t_9, __pyx_t_2};
-      __pyx_t_1 = __Pyx_PyObject_FastCall(__pyx_t_4, __pyx_callargs+1-__pyx_t_8, 1+__pyx_t_8);
-      __Pyx_XDECREF(__pyx_t_9); __pyx_t_9 = 0;
-      __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
-      if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 2882, __pyx_L1_error)
-      __Pyx_GOTREF(__pyx_t_1);
-      __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
-    }
-    __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
-
-    /* "cSparseIntegerOutrankingDigraphs.pyx":2883
- *             fo.write('# Criteria         : %d\n' % self.dimension)
- *             fo.write('Sorting by         : %d-Tiling\n' % self.sortingParameters['limitingQuantiles'])
- *             fo.write('Ordering strategy  : %s\n' % self.sortingParameters['strategy'])             # <<<<<<<<<<<<<<
- *             fo.write('Local ranking rule : %s\n' % self.componentRankingRule)
- *             fo.write('# Components       : %d\n' % self.nbrComponents)
- */
-    __pyx_t_4 = __Pyx_PyObject_GetAttrStr(__pyx_v_fo, __pyx_n_s_write); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 2883, __pyx_L1_error)
-    __Pyx_GOTREF(__pyx_t_4);
-    __pyx_t_2 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_n_s_sortingParameters); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 2883, __pyx_L1_error)
-    __Pyx_GOTREF(__pyx_t_2);
-    __pyx_t_9 = __Pyx_PyObject_Dict_GetItem(__pyx_t_2, __pyx_n_u_strategy); if (unlikely(!__pyx_t_9)) __PYX_ERR(0, 2883, __pyx_L1_error)
-    __Pyx_GOTREF(__pyx_t_9);
-    __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
-    __pyx_t_2 = __Pyx_PyUnicode_FormatSafe(__pyx_kp_u_Ordering_strategy_s_3, __pyx_t_9); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 2883, __pyx_L1_error)
-    __Pyx_GOTREF(__pyx_t_2);
-    __Pyx_DECREF(__pyx_t_9); __pyx_t_9 = 0;
-    __pyx_t_9 = NULL;
-    __pyx_t_8 = 0;
-    #if CYTHON_UNPACK_METHODS
-    if (likely(PyMethod_Check(__pyx_t_4))) {
-      __pyx_t_9 = PyMethod_GET_SELF(__pyx_t_4);
-      if (likely(__pyx_t_9)) {
-        PyObject* function = PyMethod_GET_FUNCTION(__pyx_t_4);
-        __Pyx_INCREF(__pyx_t_9);
-        __Pyx_INCREF(function);
-        __Pyx_DECREF_SET(__pyx_t_4, function);
-        __pyx_t_8 = 1;
-      }
-    }
-    #endif
-    {
-      PyObject *__pyx_callargs[2] = {__pyx_t_9, __pyx_t_2};
-      __pyx_t_1 = __Pyx_PyObject_FastCall(__pyx_t_4, __pyx_callargs+1-__pyx_t_8, 1+__pyx_t_8);
-      __Pyx_XDECREF(__pyx_t_9); __pyx_t_9 = 0;
-      __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
-      if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 2883, __pyx_L1_error)
-      __Pyx_GOTREF(__pyx_t_1);
-      __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
-    }
-    __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
-
-    /* "cSparseIntegerOutrankingDigraphs.pyx":2884
- *             fo.write('Sorting by         : %d-Tiling\n' % self.sortingParameters['limitingQuantiles'])
- *             fo.write('Ordering strategy  : %s\n' % self.sortingParameters['strategy'])
- *             fo.write('Local ranking rule : %s\n' % self.componentRankingRule)             # <<<<<<<<<<<<<<
- *             fo.write('# Components       : %d\n' % self.nbrComponents)
- *             fo.write('Minimal size       : %d\n' % self.minimalComponentSize)
- */
-    __pyx_t_4 = __Pyx_PyObject_GetAttrStr(__pyx_v_fo, __pyx_n_s_write); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 2884, __pyx_L1_error)
-    __Pyx_GOTREF(__pyx_t_4);
-    __pyx_t_2 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_n_s_componentRankingRule); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 2884, __pyx_L1_error)
-    __Pyx_GOTREF(__pyx_t_2);
-    __pyx_t_9 = __Pyx_PyUnicode_FormatSafe(__pyx_kp_u_Local_ranking_rule_s, __pyx_t_2); if (unlikely(!__pyx_t_9)) __PYX_ERR(0, 2884, __pyx_L1_error)
-    __Pyx_GOTREF(__pyx_t_9);
-    __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
-    __pyx_t_2 = NULL;
-    __pyx_t_8 = 0;
-    #if CYTHON_UNPACK_METHODS
-    if (likely(PyMethod_Check(__pyx_t_4))) {
-      __pyx_t_2 = PyMethod_GET_SELF(__pyx_t_4);
-      if (likely(__pyx_t_2)) {
-        PyObject* function = PyMethod_GET_FUNCTION(__pyx_t_4);
-        __Pyx_INCREF(__pyx_t_2);
-        __Pyx_INCREF(function);
-        __Pyx_DECREF_SET(__pyx_t_4, function);
-        __pyx_t_8 = 1;
-      }
-    }
-    #endif
-    {
-      PyObject *__pyx_callargs[2] = {__pyx_t_2, __pyx_t_9};
-      __pyx_t_1 = __Pyx_PyObject_FastCall(__pyx_t_4, __pyx_callargs+1-__pyx_t_8, 1+__pyx_t_8);
-      __Pyx_XDECREF(__pyx_t_2); __pyx_t_2 = 0;
-      __Pyx_DECREF(__pyx_t_9); __pyx_t_9 = 0;
-      if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 2884, __pyx_L1_error)
-      __Pyx_GOTREF(__pyx_t_1);
-      __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
-    }
-    __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
-
-    /* "cSparseIntegerOutrankingDigraphs.pyx":2885
- *             fo.write('Ordering strategy  : %s\n' % self.sortingParameters['strategy'])
- *             fo.write('Local ranking rule : %s\n' % self.componentRankingRule)
- *             fo.write('# Components       : %d\n' % self.nbrComponents)             # <<<<<<<<<<<<<<
- *             fo.write('Minimal size       : %d\n' % self.minimalComponentSize)
- *             fo.write('Maximal order      : %d\n' % self.maximalComponentSize)
- */
-    __pyx_t_4 = __Pyx_PyObject_GetAttrStr(__pyx_v_fo, __pyx_n_s_write); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 2885, __pyx_L1_error)
-    __Pyx_GOTREF(__pyx_t_4);
-    __pyx_t_9 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_n_s_nbrComponents); if (unlikely(!__pyx_t_9)) __PYX_ERR(0, 2885, __pyx_L1_error)
-    __Pyx_GOTREF(__pyx_t_9);
-    __pyx_t_2 = __Pyx_PyUnicode_FormatSafe(__pyx_kp_u_Components_d_3, __pyx_t_9); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 2885, __pyx_L1_error)
-    __Pyx_GOTREF(__pyx_t_2);
-    __Pyx_DECREF(__pyx_t_9); __pyx_t_9 = 0;
-    __pyx_t_9 = NULL;
-    __pyx_t_8 = 0;
-    #if CYTHON_UNPACK_METHODS
-    if (likely(PyMethod_Check(__pyx_t_4))) {
-      __pyx_t_9 = PyMethod_GET_SELF(__pyx_t_4);
-      if (likely(__pyx_t_9)) {
-        PyObject* function = PyMethod_GET_FUNCTION(__pyx_t_4);
-        __Pyx_INCREF(__pyx_t_9);
-        __Pyx_INCREF(function);
-        __Pyx_DECREF_SET(__pyx_t_4, function);
-        __pyx_t_8 = 1;
-      }
-    }
-    #endif
-    {
-      PyObject *__pyx_callargs[2] = {__pyx_t_9, __pyx_t_2};
-      __pyx_t_1 = __Pyx_PyObject_FastCall(__pyx_t_4, __pyx_callargs+1-__pyx_t_8, 1+__pyx_t_8);
-      __Pyx_XDECREF(__pyx_t_9); __pyx_t_9 = 0;
-      __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
       if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 2885, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_1);
       __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
@@ -58530,17 +58309,17 @@ static PyObject *__pyx_pf_32cSparseIntegerOutrankingDigraphs_24cQuantilesRanking
     __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
 
     /* "cSparseIntegerOutrankingDigraphs.pyx":2886
- *             fo.write('Local ranking rule : %s\n' % self.componentRankingRule)
- *             fo.write('# Components       : %d\n' % self.nbrComponents)
- *             fo.write('Minimal size       : %d\n' % self.minimalComponentSize)             # <<<<<<<<<<<<<<
- *             fo.write('Maximal order      : %d\n' % self.maximalComponentSize)
- *             fo.write('Average order      : %.1f\n' % (self.order/self.nbrComponents))
+ *             fo = open(fileName,'a')
+ *             fo.write('*----- show short --------------*\n')
+ *             fo.write('Instance name      : %s\n' % self.name)             # <<<<<<<<<<<<<<
+ *             if WithFileSize:
+ *                 fo.write('Size (in bytes)    : %d\n' % total_size(self))
  */
     __pyx_t_4 = __Pyx_PyObject_GetAttrStr(__pyx_v_fo, __pyx_n_s_write); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 2886, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_4);
-    __pyx_t_2 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_n_s_minimalComponentSize); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 2886, __pyx_L1_error)
+    __pyx_t_2 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_n_s_name_2); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 2886, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_2);
-    __pyx_t_9 = __Pyx_PyUnicode_FormatSafe(__pyx_kp_u_Minimal_size_d, __pyx_t_2); if (unlikely(!__pyx_t_9)) __PYX_ERR(0, 2886, __pyx_L1_error)
+    __pyx_t_9 = __Pyx_PyUnicode_FormatSafe(__pyx_kp_u_Instance_name_s_3, __pyx_t_2); if (unlikely(!__pyx_t_9)) __PYX_ERR(0, 2886, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_9);
     __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
     __pyx_t_2 = NULL;
@@ -58569,17 +58348,134 @@ static PyObject *__pyx_pf_32cSparseIntegerOutrankingDigraphs_24cQuantilesRanking
     __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
 
     /* "cSparseIntegerOutrankingDigraphs.pyx":2887
- *             fo.write('# Components       : %d\n' % self.nbrComponents)
- *             fo.write('Minimal size       : %d\n' % self.minimalComponentSize)
- *             fo.write('Maximal order      : %d\n' % self.maximalComponentSize)             # <<<<<<<<<<<<<<
- *             fo.write('Average order      : %.1f\n' % (self.order/self.nbrComponents))
- *             fo.write('Fill rate          : %.3f%%\n' % (self.fillRate*100.0))
+ *             fo.write('*----- show short --------------*\n')
+ *             fo.write('Instance name      : %s\n' % self.name)
+ *             if WithFileSize:             # <<<<<<<<<<<<<<
+ *                 fo.write('Size (in bytes)    : %d\n' % total_size(self))
+ *             fo.write('# Actions          : %d\n' % self.order)
  */
-    __pyx_t_4 = __Pyx_PyObject_GetAttrStr(__pyx_v_fo, __pyx_n_s_write); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 2887, __pyx_L1_error)
+    if (__pyx_v_WithFileSize) {
+
+      /* "cSparseIntegerOutrankingDigraphs.pyx":2888
+ *             fo.write('Instance name      : %s\n' % self.name)
+ *             if WithFileSize:
+ *                 fo.write('Size (in bytes)    : %d\n' % total_size(self))             # <<<<<<<<<<<<<<
+ *             fo.write('# Actions          : %d\n' % self.order)
+ *             fo.write('# Criteria         : %d\n' % self.dimension)
+ */
+      __pyx_t_4 = __Pyx_PyObject_GetAttrStr(__pyx_v_fo, __pyx_n_s_write); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 2888, __pyx_L1_error)
+      __Pyx_GOTREF(__pyx_t_4);
+      __Pyx_INCREF(__pyx_v_total_size);
+      __pyx_t_2 = __pyx_v_total_size; __pyx_t_10 = NULL;
+      __pyx_t_8 = 0;
+      #if CYTHON_UNPACK_METHODS
+      if (unlikely(PyMethod_Check(__pyx_t_2))) {
+        __pyx_t_10 = PyMethod_GET_SELF(__pyx_t_2);
+        if (likely(__pyx_t_10)) {
+          PyObject* function = PyMethod_GET_FUNCTION(__pyx_t_2);
+          __Pyx_INCREF(__pyx_t_10);
+          __Pyx_INCREF(function);
+          __Pyx_DECREF_SET(__pyx_t_2, function);
+          __pyx_t_8 = 1;
+        }
+      }
+      #endif
+      {
+        PyObject *__pyx_callargs[2] = {__pyx_t_10, __pyx_v_self};
+        __pyx_t_9 = __Pyx_PyObject_FastCall(__pyx_t_2, __pyx_callargs+1-__pyx_t_8, 1+__pyx_t_8);
+        __Pyx_XDECREF(__pyx_t_10); __pyx_t_10 = 0;
+        if (unlikely(!__pyx_t_9)) __PYX_ERR(0, 2888, __pyx_L1_error)
+        __Pyx_GOTREF(__pyx_t_9);
+        __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
+      }
+      __pyx_t_2 = __Pyx_PyUnicode_FormatSafe(__pyx_kp_u_Size_in_bytes_d, __pyx_t_9); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 2888, __pyx_L1_error)
+      __Pyx_GOTREF(__pyx_t_2);
+      __Pyx_DECREF(__pyx_t_9); __pyx_t_9 = 0;
+      __pyx_t_9 = NULL;
+      __pyx_t_8 = 0;
+      #if CYTHON_UNPACK_METHODS
+      if (likely(PyMethod_Check(__pyx_t_4))) {
+        __pyx_t_9 = PyMethod_GET_SELF(__pyx_t_4);
+        if (likely(__pyx_t_9)) {
+          PyObject* function = PyMethod_GET_FUNCTION(__pyx_t_4);
+          __Pyx_INCREF(__pyx_t_9);
+          __Pyx_INCREF(function);
+          __Pyx_DECREF_SET(__pyx_t_4, function);
+          __pyx_t_8 = 1;
+        }
+      }
+      #endif
+      {
+        PyObject *__pyx_callargs[2] = {__pyx_t_9, __pyx_t_2};
+        __pyx_t_1 = __Pyx_PyObject_FastCall(__pyx_t_4, __pyx_callargs+1-__pyx_t_8, 1+__pyx_t_8);
+        __Pyx_XDECREF(__pyx_t_9); __pyx_t_9 = 0;
+        __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
+        if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 2888, __pyx_L1_error)
+        __Pyx_GOTREF(__pyx_t_1);
+        __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
+      }
+      __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
+
+      /* "cSparseIntegerOutrankingDigraphs.pyx":2887
+ *             fo.write('*----- show short --------------*\n')
+ *             fo.write('Instance name      : %s\n' % self.name)
+ *             if WithFileSize:             # <<<<<<<<<<<<<<
+ *                 fo.write('Size (in bytes)    : %d\n' % total_size(self))
+ *             fo.write('# Actions          : %d\n' % self.order)
+ */
+    }
+
+    /* "cSparseIntegerOutrankingDigraphs.pyx":2889
+ *             if WithFileSize:
+ *                 fo.write('Size (in bytes)    : %d\n' % total_size(self))
+ *             fo.write('# Actions          : %d\n' % self.order)             # <<<<<<<<<<<<<<
+ *             fo.write('# Criteria         : %d\n' % self.dimension)
+ *             fo.write('Sorting by         : %d-Tiling\n' % self.sortingParameters['limitingQuantiles'])
+ */
+    __pyx_t_4 = __Pyx_PyObject_GetAttrStr(__pyx_v_fo, __pyx_n_s_write); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 2889, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_4);
-    __pyx_t_9 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_n_s_maximalComponentSize); if (unlikely(!__pyx_t_9)) __PYX_ERR(0, 2887, __pyx_L1_error)
+    __pyx_t_2 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_n_s_order); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 2889, __pyx_L1_error)
+    __Pyx_GOTREF(__pyx_t_2);
+    __pyx_t_9 = __Pyx_PyUnicode_FormatSafe(__pyx_kp_u_Actions_d_3, __pyx_t_2); if (unlikely(!__pyx_t_9)) __PYX_ERR(0, 2889, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_9);
-    __pyx_t_2 = __Pyx_PyUnicode_FormatSafe(__pyx_kp_u_Maximal_order_d_3, __pyx_t_9); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 2887, __pyx_L1_error)
+    __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
+    __pyx_t_2 = NULL;
+    __pyx_t_8 = 0;
+    #if CYTHON_UNPACK_METHODS
+    if (likely(PyMethod_Check(__pyx_t_4))) {
+      __pyx_t_2 = PyMethod_GET_SELF(__pyx_t_4);
+      if (likely(__pyx_t_2)) {
+        PyObject* function = PyMethod_GET_FUNCTION(__pyx_t_4);
+        __Pyx_INCREF(__pyx_t_2);
+        __Pyx_INCREF(function);
+        __Pyx_DECREF_SET(__pyx_t_4, function);
+        __pyx_t_8 = 1;
+      }
+    }
+    #endif
+    {
+      PyObject *__pyx_callargs[2] = {__pyx_t_2, __pyx_t_9};
+      __pyx_t_1 = __Pyx_PyObject_FastCall(__pyx_t_4, __pyx_callargs+1-__pyx_t_8, 1+__pyx_t_8);
+      __Pyx_XDECREF(__pyx_t_2); __pyx_t_2 = 0;
+      __Pyx_DECREF(__pyx_t_9); __pyx_t_9 = 0;
+      if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 2889, __pyx_L1_error)
+      __Pyx_GOTREF(__pyx_t_1);
+      __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
+    }
+    __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
+
+    /* "cSparseIntegerOutrankingDigraphs.pyx":2890
+ *                 fo.write('Size (in bytes)    : %d\n' % total_size(self))
+ *             fo.write('# Actions          : %d\n' % self.order)
+ *             fo.write('# Criteria         : %d\n' % self.dimension)             # <<<<<<<<<<<<<<
+ *             fo.write('Sorting by         : %d-Tiling\n' % self.sortingParameters['limitingQuantiles'])
+ *             fo.write('Ordering strategy  : %s\n' % self.sortingParameters['strategy'])
+ */
+    __pyx_t_4 = __Pyx_PyObject_GetAttrStr(__pyx_v_fo, __pyx_n_s_write); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 2890, __pyx_L1_error)
+    __Pyx_GOTREF(__pyx_t_4);
+    __pyx_t_9 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_n_s_dimension); if (unlikely(!__pyx_t_9)) __PYX_ERR(0, 2890, __pyx_L1_error)
+    __Pyx_GOTREF(__pyx_t_9);
+    __pyx_t_2 = __Pyx_PyUnicode_FormatSafe(__pyx_kp_u_Criteria_d_3, __pyx_t_9); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 2890, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_2);
     __Pyx_DECREF(__pyx_t_9); __pyx_t_9 = 0;
     __pyx_t_9 = NULL;
@@ -58601,30 +58497,270 @@ static PyObject *__pyx_pf_32cSparseIntegerOutrankingDigraphs_24cQuantilesRanking
       __pyx_t_1 = __Pyx_PyObject_FastCall(__pyx_t_4, __pyx_callargs+1-__pyx_t_8, 1+__pyx_t_8);
       __Pyx_XDECREF(__pyx_t_9); __pyx_t_9 = 0;
       __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
-      if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 2887, __pyx_L1_error)
+      if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 2890, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_1);
       __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
     }
     __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
 
-    /* "cSparseIntegerOutrankingDigraphs.pyx":2888
+    /* "cSparseIntegerOutrankingDigraphs.pyx":2891
+ *             fo.write('# Actions          : %d\n' % self.order)
+ *             fo.write('# Criteria         : %d\n' % self.dimension)
+ *             fo.write('Sorting by         : %d-Tiling\n' % self.sortingParameters['limitingQuantiles'])             # <<<<<<<<<<<<<<
+ *             fo.write('Ordering strategy  : %s\n' % self.sortingParameters['strategy'])
+ *             fo.write('Local ranking rule : %s\n' % self.componentRankingRule)
+ */
+    __pyx_t_4 = __Pyx_PyObject_GetAttrStr(__pyx_v_fo, __pyx_n_s_write); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 2891, __pyx_L1_error)
+    __Pyx_GOTREF(__pyx_t_4);
+    __pyx_t_2 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_n_s_sortingParameters); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 2891, __pyx_L1_error)
+    __Pyx_GOTREF(__pyx_t_2);
+    __pyx_t_9 = __Pyx_PyObject_Dict_GetItem(__pyx_t_2, __pyx_n_u_limitingQuantiles); if (unlikely(!__pyx_t_9)) __PYX_ERR(0, 2891, __pyx_L1_error)
+    __Pyx_GOTREF(__pyx_t_9);
+    __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
+    __pyx_t_2 = __Pyx_PyUnicode_FormatSafe(__pyx_kp_u_Sorting_by_d_Tiling_3, __pyx_t_9); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 2891, __pyx_L1_error)
+    __Pyx_GOTREF(__pyx_t_2);
+    __Pyx_DECREF(__pyx_t_9); __pyx_t_9 = 0;
+    __pyx_t_9 = NULL;
+    __pyx_t_8 = 0;
+    #if CYTHON_UNPACK_METHODS
+    if (likely(PyMethod_Check(__pyx_t_4))) {
+      __pyx_t_9 = PyMethod_GET_SELF(__pyx_t_4);
+      if (likely(__pyx_t_9)) {
+        PyObject* function = PyMethod_GET_FUNCTION(__pyx_t_4);
+        __Pyx_INCREF(__pyx_t_9);
+        __Pyx_INCREF(function);
+        __Pyx_DECREF_SET(__pyx_t_4, function);
+        __pyx_t_8 = 1;
+      }
+    }
+    #endif
+    {
+      PyObject *__pyx_callargs[2] = {__pyx_t_9, __pyx_t_2};
+      __pyx_t_1 = __Pyx_PyObject_FastCall(__pyx_t_4, __pyx_callargs+1-__pyx_t_8, 1+__pyx_t_8);
+      __Pyx_XDECREF(__pyx_t_9); __pyx_t_9 = 0;
+      __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
+      if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 2891, __pyx_L1_error)
+      __Pyx_GOTREF(__pyx_t_1);
+      __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
+    }
+    __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
+
+    /* "cSparseIntegerOutrankingDigraphs.pyx":2892
+ *             fo.write('# Criteria         : %d\n' % self.dimension)
+ *             fo.write('Sorting by         : %d-Tiling\n' % self.sortingParameters['limitingQuantiles'])
+ *             fo.write('Ordering strategy  : %s\n' % self.sortingParameters['strategy'])             # <<<<<<<<<<<<<<
+ *             fo.write('Local ranking rule : %s\n' % self.componentRankingRule)
+ *             fo.write('# Components       : %d\n' % self.nbrComponents)
+ */
+    __pyx_t_4 = __Pyx_PyObject_GetAttrStr(__pyx_v_fo, __pyx_n_s_write); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 2892, __pyx_L1_error)
+    __Pyx_GOTREF(__pyx_t_4);
+    __pyx_t_2 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_n_s_sortingParameters); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 2892, __pyx_L1_error)
+    __Pyx_GOTREF(__pyx_t_2);
+    __pyx_t_9 = __Pyx_PyObject_Dict_GetItem(__pyx_t_2, __pyx_n_u_strategy); if (unlikely(!__pyx_t_9)) __PYX_ERR(0, 2892, __pyx_L1_error)
+    __Pyx_GOTREF(__pyx_t_9);
+    __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
+    __pyx_t_2 = __Pyx_PyUnicode_FormatSafe(__pyx_kp_u_Ordering_strategy_s_3, __pyx_t_9); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 2892, __pyx_L1_error)
+    __Pyx_GOTREF(__pyx_t_2);
+    __Pyx_DECREF(__pyx_t_9); __pyx_t_9 = 0;
+    __pyx_t_9 = NULL;
+    __pyx_t_8 = 0;
+    #if CYTHON_UNPACK_METHODS
+    if (likely(PyMethod_Check(__pyx_t_4))) {
+      __pyx_t_9 = PyMethod_GET_SELF(__pyx_t_4);
+      if (likely(__pyx_t_9)) {
+        PyObject* function = PyMethod_GET_FUNCTION(__pyx_t_4);
+        __Pyx_INCREF(__pyx_t_9);
+        __Pyx_INCREF(function);
+        __Pyx_DECREF_SET(__pyx_t_4, function);
+        __pyx_t_8 = 1;
+      }
+    }
+    #endif
+    {
+      PyObject *__pyx_callargs[2] = {__pyx_t_9, __pyx_t_2};
+      __pyx_t_1 = __Pyx_PyObject_FastCall(__pyx_t_4, __pyx_callargs+1-__pyx_t_8, 1+__pyx_t_8);
+      __Pyx_XDECREF(__pyx_t_9); __pyx_t_9 = 0;
+      __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
+      if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 2892, __pyx_L1_error)
+      __Pyx_GOTREF(__pyx_t_1);
+      __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
+    }
+    __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
+
+    /* "cSparseIntegerOutrankingDigraphs.pyx":2893
+ *             fo.write('Sorting by         : %d-Tiling\n' % self.sortingParameters['limitingQuantiles'])
+ *             fo.write('Ordering strategy  : %s\n' % self.sortingParameters['strategy'])
+ *             fo.write('Local ranking rule : %s\n' % self.componentRankingRule)             # <<<<<<<<<<<<<<
+ *             fo.write('# Components       : %d\n' % self.nbrComponents)
+ *             fo.write('Minimal size       : %d\n' % self.minimalComponentSize)
+ */
+    __pyx_t_4 = __Pyx_PyObject_GetAttrStr(__pyx_v_fo, __pyx_n_s_write); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 2893, __pyx_L1_error)
+    __Pyx_GOTREF(__pyx_t_4);
+    __pyx_t_2 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_n_s_componentRankingRule); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 2893, __pyx_L1_error)
+    __Pyx_GOTREF(__pyx_t_2);
+    __pyx_t_9 = __Pyx_PyUnicode_FormatSafe(__pyx_kp_u_Local_ranking_rule_s, __pyx_t_2); if (unlikely(!__pyx_t_9)) __PYX_ERR(0, 2893, __pyx_L1_error)
+    __Pyx_GOTREF(__pyx_t_9);
+    __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
+    __pyx_t_2 = NULL;
+    __pyx_t_8 = 0;
+    #if CYTHON_UNPACK_METHODS
+    if (likely(PyMethod_Check(__pyx_t_4))) {
+      __pyx_t_2 = PyMethod_GET_SELF(__pyx_t_4);
+      if (likely(__pyx_t_2)) {
+        PyObject* function = PyMethod_GET_FUNCTION(__pyx_t_4);
+        __Pyx_INCREF(__pyx_t_2);
+        __Pyx_INCREF(function);
+        __Pyx_DECREF_SET(__pyx_t_4, function);
+        __pyx_t_8 = 1;
+      }
+    }
+    #endif
+    {
+      PyObject *__pyx_callargs[2] = {__pyx_t_2, __pyx_t_9};
+      __pyx_t_1 = __Pyx_PyObject_FastCall(__pyx_t_4, __pyx_callargs+1-__pyx_t_8, 1+__pyx_t_8);
+      __Pyx_XDECREF(__pyx_t_2); __pyx_t_2 = 0;
+      __Pyx_DECREF(__pyx_t_9); __pyx_t_9 = 0;
+      if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 2893, __pyx_L1_error)
+      __Pyx_GOTREF(__pyx_t_1);
+      __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
+    }
+    __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
+
+    /* "cSparseIntegerOutrankingDigraphs.pyx":2894
+ *             fo.write('Ordering strategy  : %s\n' % self.sortingParameters['strategy'])
+ *             fo.write('Local ranking rule : %s\n' % self.componentRankingRule)
+ *             fo.write('# Components       : %d\n' % self.nbrComponents)             # <<<<<<<<<<<<<<
+ *             fo.write('Minimal size       : %d\n' % self.minimalComponentSize)
+ *             fo.write('Maximal order      : %d\n' % self.maximalComponentSize)
+ */
+    __pyx_t_4 = __Pyx_PyObject_GetAttrStr(__pyx_v_fo, __pyx_n_s_write); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 2894, __pyx_L1_error)
+    __Pyx_GOTREF(__pyx_t_4);
+    __pyx_t_9 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_n_s_nbrComponents); if (unlikely(!__pyx_t_9)) __PYX_ERR(0, 2894, __pyx_L1_error)
+    __Pyx_GOTREF(__pyx_t_9);
+    __pyx_t_2 = __Pyx_PyUnicode_FormatSafe(__pyx_kp_u_Components_d_3, __pyx_t_9); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 2894, __pyx_L1_error)
+    __Pyx_GOTREF(__pyx_t_2);
+    __Pyx_DECREF(__pyx_t_9); __pyx_t_9 = 0;
+    __pyx_t_9 = NULL;
+    __pyx_t_8 = 0;
+    #if CYTHON_UNPACK_METHODS
+    if (likely(PyMethod_Check(__pyx_t_4))) {
+      __pyx_t_9 = PyMethod_GET_SELF(__pyx_t_4);
+      if (likely(__pyx_t_9)) {
+        PyObject* function = PyMethod_GET_FUNCTION(__pyx_t_4);
+        __Pyx_INCREF(__pyx_t_9);
+        __Pyx_INCREF(function);
+        __Pyx_DECREF_SET(__pyx_t_4, function);
+        __pyx_t_8 = 1;
+      }
+    }
+    #endif
+    {
+      PyObject *__pyx_callargs[2] = {__pyx_t_9, __pyx_t_2};
+      __pyx_t_1 = __Pyx_PyObject_FastCall(__pyx_t_4, __pyx_callargs+1-__pyx_t_8, 1+__pyx_t_8);
+      __Pyx_XDECREF(__pyx_t_9); __pyx_t_9 = 0;
+      __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
+      if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 2894, __pyx_L1_error)
+      __Pyx_GOTREF(__pyx_t_1);
+      __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
+    }
+    __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
+
+    /* "cSparseIntegerOutrankingDigraphs.pyx":2895
+ *             fo.write('Local ranking rule : %s\n' % self.componentRankingRule)
+ *             fo.write('# Components       : %d\n' % self.nbrComponents)
+ *             fo.write('Minimal size       : %d\n' % self.minimalComponentSize)             # <<<<<<<<<<<<<<
+ *             fo.write('Maximal order      : %d\n' % self.maximalComponentSize)
+ *             fo.write('Average order      : %.1f\n' % (self.order/self.nbrComponents))
+ */
+    __pyx_t_4 = __Pyx_PyObject_GetAttrStr(__pyx_v_fo, __pyx_n_s_write); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 2895, __pyx_L1_error)
+    __Pyx_GOTREF(__pyx_t_4);
+    __pyx_t_2 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_n_s_minimalComponentSize); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 2895, __pyx_L1_error)
+    __Pyx_GOTREF(__pyx_t_2);
+    __pyx_t_9 = __Pyx_PyUnicode_FormatSafe(__pyx_kp_u_Minimal_size_d, __pyx_t_2); if (unlikely(!__pyx_t_9)) __PYX_ERR(0, 2895, __pyx_L1_error)
+    __Pyx_GOTREF(__pyx_t_9);
+    __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
+    __pyx_t_2 = NULL;
+    __pyx_t_8 = 0;
+    #if CYTHON_UNPACK_METHODS
+    if (likely(PyMethod_Check(__pyx_t_4))) {
+      __pyx_t_2 = PyMethod_GET_SELF(__pyx_t_4);
+      if (likely(__pyx_t_2)) {
+        PyObject* function = PyMethod_GET_FUNCTION(__pyx_t_4);
+        __Pyx_INCREF(__pyx_t_2);
+        __Pyx_INCREF(function);
+        __Pyx_DECREF_SET(__pyx_t_4, function);
+        __pyx_t_8 = 1;
+      }
+    }
+    #endif
+    {
+      PyObject *__pyx_callargs[2] = {__pyx_t_2, __pyx_t_9};
+      __pyx_t_1 = __Pyx_PyObject_FastCall(__pyx_t_4, __pyx_callargs+1-__pyx_t_8, 1+__pyx_t_8);
+      __Pyx_XDECREF(__pyx_t_2); __pyx_t_2 = 0;
+      __Pyx_DECREF(__pyx_t_9); __pyx_t_9 = 0;
+      if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 2895, __pyx_L1_error)
+      __Pyx_GOTREF(__pyx_t_1);
+      __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
+    }
+    __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
+
+    /* "cSparseIntegerOutrankingDigraphs.pyx":2896
+ *             fo.write('# Components       : %d\n' % self.nbrComponents)
+ *             fo.write('Minimal size       : %d\n' % self.minimalComponentSize)
+ *             fo.write('Maximal order      : %d\n' % self.maximalComponentSize)             # <<<<<<<<<<<<<<
+ *             fo.write('Average order      : %.1f\n' % (self.order/self.nbrComponents))
+ *             fo.write('Fill rate          : %.3f%%\n' % (self.fillRate*100.0))
+ */
+    __pyx_t_4 = __Pyx_PyObject_GetAttrStr(__pyx_v_fo, __pyx_n_s_write); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 2896, __pyx_L1_error)
+    __Pyx_GOTREF(__pyx_t_4);
+    __pyx_t_9 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_n_s_maximalComponentSize); if (unlikely(!__pyx_t_9)) __PYX_ERR(0, 2896, __pyx_L1_error)
+    __Pyx_GOTREF(__pyx_t_9);
+    __pyx_t_2 = __Pyx_PyUnicode_FormatSafe(__pyx_kp_u_Maximal_order_d_3, __pyx_t_9); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 2896, __pyx_L1_error)
+    __Pyx_GOTREF(__pyx_t_2);
+    __Pyx_DECREF(__pyx_t_9); __pyx_t_9 = 0;
+    __pyx_t_9 = NULL;
+    __pyx_t_8 = 0;
+    #if CYTHON_UNPACK_METHODS
+    if (likely(PyMethod_Check(__pyx_t_4))) {
+      __pyx_t_9 = PyMethod_GET_SELF(__pyx_t_4);
+      if (likely(__pyx_t_9)) {
+        PyObject* function = PyMethod_GET_FUNCTION(__pyx_t_4);
+        __Pyx_INCREF(__pyx_t_9);
+        __Pyx_INCREF(function);
+        __Pyx_DECREF_SET(__pyx_t_4, function);
+        __pyx_t_8 = 1;
+      }
+    }
+    #endif
+    {
+      PyObject *__pyx_callargs[2] = {__pyx_t_9, __pyx_t_2};
+      __pyx_t_1 = __Pyx_PyObject_FastCall(__pyx_t_4, __pyx_callargs+1-__pyx_t_8, 1+__pyx_t_8);
+      __Pyx_XDECREF(__pyx_t_9); __pyx_t_9 = 0;
+      __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
+      if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 2896, __pyx_L1_error)
+      __Pyx_GOTREF(__pyx_t_1);
+      __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
+    }
+    __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
+
+    /* "cSparseIntegerOutrankingDigraphs.pyx":2897
  *             fo.write('Minimal size       : %d\n' % self.minimalComponentSize)
  *             fo.write('Maximal order      : %d\n' % self.maximalComponentSize)
  *             fo.write('Average order      : %.1f\n' % (self.order/self.nbrComponents))             # <<<<<<<<<<<<<<
  *             fo.write('Fill rate          : %.3f%%\n' % (self.fillRate*100.0))
  *             fo.write('*-- Constructor run times (in sec.) --*\n')
  */
-    __pyx_t_4 = __Pyx_PyObject_GetAttrStr(__pyx_v_fo, __pyx_n_s_write); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 2888, __pyx_L1_error)
+    __pyx_t_4 = __Pyx_PyObject_GetAttrStr(__pyx_v_fo, __pyx_n_s_write); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 2897, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_4);
-    __pyx_t_2 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_n_s_order); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 2888, __pyx_L1_error)
+    __pyx_t_2 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_n_s_order); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 2897, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_2);
-    __pyx_t_9 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_n_s_nbrComponents); if (unlikely(!__pyx_t_9)) __PYX_ERR(0, 2888, __pyx_L1_error)
+    __pyx_t_9 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_n_s_nbrComponents); if (unlikely(!__pyx_t_9)) __PYX_ERR(0, 2897, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_9);
-    __pyx_t_10 = __Pyx_PyNumber_Divide(__pyx_t_2, __pyx_t_9); if (unlikely(!__pyx_t_10)) __PYX_ERR(0, 2888, __pyx_L1_error)
+    __pyx_t_10 = __Pyx_PyNumber_Divide(__pyx_t_2, __pyx_t_9); if (unlikely(!__pyx_t_10)) __PYX_ERR(0, 2897, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_10);
     __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
     __Pyx_DECREF(__pyx_t_9); __pyx_t_9 = 0;
-    __pyx_t_9 = __Pyx_PyUnicode_FormatSafe(__pyx_kp_u_Average_order_1f_3, __pyx_t_10); if (unlikely(!__pyx_t_9)) __PYX_ERR(0, 2888, __pyx_L1_error)
+    __pyx_t_9 = __Pyx_PyUnicode_FormatSafe(__pyx_kp_u_Average_order_1f_3, __pyx_t_10); if (unlikely(!__pyx_t_9)) __PYX_ERR(0, 2897, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_9);
     __Pyx_DECREF(__pyx_t_10); __pyx_t_10 = 0;
     __pyx_t_10 = NULL;
@@ -58646,27 +58782,27 @@ static PyObject *__pyx_pf_32cSparseIntegerOutrankingDigraphs_24cQuantilesRanking
       __pyx_t_1 = __Pyx_PyObject_FastCall(__pyx_t_4, __pyx_callargs+1-__pyx_t_8, 1+__pyx_t_8);
       __Pyx_XDECREF(__pyx_t_10); __pyx_t_10 = 0;
       __Pyx_DECREF(__pyx_t_9); __pyx_t_9 = 0;
-      if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 2888, __pyx_L1_error)
+      if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 2897, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_1);
       __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
     }
     __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
 
-    /* "cSparseIntegerOutrankingDigraphs.pyx":2889
+    /* "cSparseIntegerOutrankingDigraphs.pyx":2898
  *             fo.write('Maximal order      : %d\n' % self.maximalComponentSize)
  *             fo.write('Average order      : %.1f\n' % (self.order/self.nbrComponents))
  *             fo.write('Fill rate          : %.3f%%\n' % (self.fillRate*100.0))             # <<<<<<<<<<<<<<
  *             fo.write('*-- Constructor run times (in sec.) --*\n')
  *             fo.write('# Threads          : %d\n' % self.nbrOfCPUs)
  */
-    __pyx_t_4 = __Pyx_PyObject_GetAttrStr(__pyx_v_fo, __pyx_n_s_write); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 2889, __pyx_L1_error)
+    __pyx_t_4 = __Pyx_PyObject_GetAttrStr(__pyx_v_fo, __pyx_n_s_write); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 2898, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_4);
-    __pyx_t_9 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_n_s_fillRate); if (unlikely(!__pyx_t_9)) __PYX_ERR(0, 2889, __pyx_L1_error)
+    __pyx_t_9 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_n_s_fillRate); if (unlikely(!__pyx_t_9)) __PYX_ERR(0, 2898, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_9);
-    __pyx_t_10 = PyNumber_Multiply(__pyx_t_9, __pyx_float_100_0); if (unlikely(!__pyx_t_10)) __PYX_ERR(0, 2889, __pyx_L1_error)
+    __pyx_t_10 = PyNumber_Multiply(__pyx_t_9, __pyx_float_100_0); if (unlikely(!__pyx_t_10)) __PYX_ERR(0, 2898, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_10);
     __Pyx_DECREF(__pyx_t_9); __pyx_t_9 = 0;
-    __pyx_t_9 = __Pyx_PyUnicode_FormatSafe(__pyx_kp_u_Fill_rate_3f_2, __pyx_t_10); if (unlikely(!__pyx_t_9)) __PYX_ERR(0, 2889, __pyx_L1_error)
+    __pyx_t_9 = __Pyx_PyUnicode_FormatSafe(__pyx_kp_u_Fill_rate_3f_2, __pyx_t_10); if (unlikely(!__pyx_t_9)) __PYX_ERR(0, 2898, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_9);
     __Pyx_DECREF(__pyx_t_10); __pyx_t_10 = 0;
     __pyx_t_10 = NULL;
@@ -58688,20 +58824,20 @@ static PyObject *__pyx_pf_32cSparseIntegerOutrankingDigraphs_24cQuantilesRanking
       __pyx_t_1 = __Pyx_PyObject_FastCall(__pyx_t_4, __pyx_callargs+1-__pyx_t_8, 1+__pyx_t_8);
       __Pyx_XDECREF(__pyx_t_10); __pyx_t_10 = 0;
       __Pyx_DECREF(__pyx_t_9); __pyx_t_9 = 0;
-      if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 2889, __pyx_L1_error)
+      if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 2898, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_1);
       __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
     }
     __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
 
-    /* "cSparseIntegerOutrankingDigraphs.pyx":2890
+    /* "cSparseIntegerOutrankingDigraphs.pyx":2899
  *             fo.write('Average order      : %.1f\n' % (self.order/self.nbrComponents))
  *             fo.write('Fill rate          : %.3f%%\n' % (self.fillRate*100.0))
  *             fo.write('*-- Constructor run times (in sec.) --*\n')             # <<<<<<<<<<<<<<
  *             fo.write('# Threads          : %d\n' % self.nbrOfCPUs)
  *             fo.write('Total time         : %.5f\n' % self.runTimes['totalTime'])
  */
-    __pyx_t_4 = __Pyx_PyObject_GetAttrStr(__pyx_v_fo, __pyx_n_s_write); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 2890, __pyx_L1_error)
+    __pyx_t_4 = __Pyx_PyObject_GetAttrStr(__pyx_v_fo, __pyx_n_s_write); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 2899, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_4);
     __pyx_t_9 = NULL;
     __pyx_t_8 = 0;
@@ -58721,24 +58857,24 @@ static PyObject *__pyx_pf_32cSparseIntegerOutrankingDigraphs_24cQuantilesRanking
       PyObject *__pyx_callargs[2] = {__pyx_t_9, __pyx_kp_u_Constructor_run_times_in_sec_3};
       __pyx_t_1 = __Pyx_PyObject_FastCall(__pyx_t_4, __pyx_callargs+1-__pyx_t_8, 1+__pyx_t_8);
       __Pyx_XDECREF(__pyx_t_9); __pyx_t_9 = 0;
-      if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 2890, __pyx_L1_error)
+      if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 2899, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_1);
       __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
     }
     __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
 
-    /* "cSparseIntegerOutrankingDigraphs.pyx":2891
+    /* "cSparseIntegerOutrankingDigraphs.pyx":2900
  *             fo.write('Fill rate          : %.3f%%\n' % (self.fillRate*100.0))
  *             fo.write('*-- Constructor run times (in sec.) --*\n')
  *             fo.write('# Threads          : %d\n' % self.nbrOfCPUs)             # <<<<<<<<<<<<<<
  *             fo.write('Total time         : %.5f\n' % self.runTimes['totalTime'])
  *             fo.write('QuantilesSorting   : %.5f\n' % self.runTimes['sorting'])
  */
-    __pyx_t_4 = __Pyx_PyObject_GetAttrStr(__pyx_v_fo, __pyx_n_s_write); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 2891, __pyx_L1_error)
+    __pyx_t_4 = __Pyx_PyObject_GetAttrStr(__pyx_v_fo, __pyx_n_s_write); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 2900, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_4);
-    __pyx_t_9 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_n_s_nbrOfCPUs); if (unlikely(!__pyx_t_9)) __PYX_ERR(0, 2891, __pyx_L1_error)
+    __pyx_t_9 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_n_s_nbrOfCPUs); if (unlikely(!__pyx_t_9)) __PYX_ERR(0, 2900, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_9);
-    __pyx_t_10 = __Pyx_PyUnicode_FormatSafe(__pyx_kp_u_Threads_d_2, __pyx_t_9); if (unlikely(!__pyx_t_10)) __PYX_ERR(0, 2891, __pyx_L1_error)
+    __pyx_t_10 = __Pyx_PyUnicode_FormatSafe(__pyx_kp_u_Threads_d_2, __pyx_t_9); if (unlikely(!__pyx_t_10)) __PYX_ERR(0, 2900, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_10);
     __Pyx_DECREF(__pyx_t_9); __pyx_t_9 = 0;
     __pyx_t_9 = NULL;
@@ -58760,27 +58896,27 @@ static PyObject *__pyx_pf_32cSparseIntegerOutrankingDigraphs_24cQuantilesRanking
       __pyx_t_1 = __Pyx_PyObject_FastCall(__pyx_t_4, __pyx_callargs+1-__pyx_t_8, 1+__pyx_t_8);
       __Pyx_XDECREF(__pyx_t_9); __pyx_t_9 = 0;
       __Pyx_DECREF(__pyx_t_10); __pyx_t_10 = 0;
-      if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 2891, __pyx_L1_error)
+      if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 2900, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_1);
       __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
     }
     __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
 
-    /* "cSparseIntegerOutrankingDigraphs.pyx":2892
+    /* "cSparseIntegerOutrankingDigraphs.pyx":2901
  *             fo.write('*-- Constructor run times (in sec.) --*\n')
  *             fo.write('# Threads          : %d\n' % self.nbrOfCPUs)
  *             fo.write('Total time         : %.5f\n' % self.runTimes['totalTime'])             # <<<<<<<<<<<<<<
  *             fo.write('QuantilesSorting   : %.5f\n' % self.runTimes['sorting'])
  *             fo.write('Preordering        : %.5f\n' % self.runTimes['preordering'])
  */
-    __pyx_t_4 = __Pyx_PyObject_GetAttrStr(__pyx_v_fo, __pyx_n_s_write); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 2892, __pyx_L1_error)
+    __pyx_t_4 = __Pyx_PyObject_GetAttrStr(__pyx_v_fo, __pyx_n_s_write); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 2901, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_4);
-    __pyx_t_10 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_n_s_runTimes); if (unlikely(!__pyx_t_10)) __PYX_ERR(0, 2892, __pyx_L1_error)
+    __pyx_t_10 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_n_s_runTimes); if (unlikely(!__pyx_t_10)) __PYX_ERR(0, 2901, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_10);
-    __pyx_t_9 = __Pyx_PyObject_Dict_GetItem(__pyx_t_10, __pyx_n_u_totalTime); if (unlikely(!__pyx_t_9)) __PYX_ERR(0, 2892, __pyx_L1_error)
+    __pyx_t_9 = __Pyx_PyObject_Dict_GetItem(__pyx_t_10, __pyx_n_u_totalTime); if (unlikely(!__pyx_t_9)) __PYX_ERR(0, 2901, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_9);
     __Pyx_DECREF(__pyx_t_10); __pyx_t_10 = 0;
-    __pyx_t_10 = __Pyx_PyUnicode_FormatSafe(__pyx_kp_u_Total_time_5f_3, __pyx_t_9); if (unlikely(!__pyx_t_10)) __PYX_ERR(0, 2892, __pyx_L1_error)
+    __pyx_t_10 = __Pyx_PyUnicode_FormatSafe(__pyx_kp_u_Total_time_5f_3, __pyx_t_9); if (unlikely(!__pyx_t_10)) __PYX_ERR(0, 2901, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_10);
     __Pyx_DECREF(__pyx_t_9); __pyx_t_9 = 0;
     __pyx_t_9 = NULL;
@@ -58802,27 +58938,27 @@ static PyObject *__pyx_pf_32cSparseIntegerOutrankingDigraphs_24cQuantilesRanking
       __pyx_t_1 = __Pyx_PyObject_FastCall(__pyx_t_4, __pyx_callargs+1-__pyx_t_8, 1+__pyx_t_8);
       __Pyx_XDECREF(__pyx_t_9); __pyx_t_9 = 0;
       __Pyx_DECREF(__pyx_t_10); __pyx_t_10 = 0;
-      if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 2892, __pyx_L1_error)
+      if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 2901, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_1);
       __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
     }
     __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
 
-    /* "cSparseIntegerOutrankingDigraphs.pyx":2893
+    /* "cSparseIntegerOutrankingDigraphs.pyx":2902
  *             fo.write('# Threads          : %d\n' % self.nbrOfCPUs)
  *             fo.write('Total time         : %.5f\n' % self.runTimes['totalTime'])
  *             fo.write('QuantilesSorting   : %.5f\n' % self.runTimes['sorting'])             # <<<<<<<<<<<<<<
  *             fo.write('Preordering        : %.5f\n' % self.runTimes['preordering'])
  *             fo.write('Decomposing        : %.5f\n' % self.runTimes['decomposing'])
  */
-    __pyx_t_4 = __Pyx_PyObject_GetAttrStr(__pyx_v_fo, __pyx_n_s_write); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 2893, __pyx_L1_error)
+    __pyx_t_4 = __Pyx_PyObject_GetAttrStr(__pyx_v_fo, __pyx_n_s_write); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 2902, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_4);
-    __pyx_t_10 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_n_s_runTimes); if (unlikely(!__pyx_t_10)) __PYX_ERR(0, 2893, __pyx_L1_error)
+    __pyx_t_10 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_n_s_runTimes); if (unlikely(!__pyx_t_10)) __PYX_ERR(0, 2902, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_10);
-    __pyx_t_9 = __Pyx_PyObject_Dict_GetItem(__pyx_t_10, __pyx_n_u_sorting); if (unlikely(!__pyx_t_9)) __PYX_ERR(0, 2893, __pyx_L1_error)
+    __pyx_t_9 = __Pyx_PyObject_Dict_GetItem(__pyx_t_10, __pyx_n_u_sorting); if (unlikely(!__pyx_t_9)) __PYX_ERR(0, 2902, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_9);
     __Pyx_DECREF(__pyx_t_10); __pyx_t_10 = 0;
-    __pyx_t_10 = __Pyx_PyUnicode_FormatSafe(__pyx_kp_u_QuantilesSorting_5f_3, __pyx_t_9); if (unlikely(!__pyx_t_10)) __PYX_ERR(0, 2893, __pyx_L1_error)
+    __pyx_t_10 = __Pyx_PyUnicode_FormatSafe(__pyx_kp_u_QuantilesSorting_5f_3, __pyx_t_9); if (unlikely(!__pyx_t_10)) __PYX_ERR(0, 2902, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_10);
     __Pyx_DECREF(__pyx_t_9); __pyx_t_9 = 0;
     __pyx_t_9 = NULL;
@@ -58844,27 +58980,27 @@ static PyObject *__pyx_pf_32cSparseIntegerOutrankingDigraphs_24cQuantilesRanking
       __pyx_t_1 = __Pyx_PyObject_FastCall(__pyx_t_4, __pyx_callargs+1-__pyx_t_8, 1+__pyx_t_8);
       __Pyx_XDECREF(__pyx_t_9); __pyx_t_9 = 0;
       __Pyx_DECREF(__pyx_t_10); __pyx_t_10 = 0;
-      if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 2893, __pyx_L1_error)
+      if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 2902, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_1);
       __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
     }
     __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
 
-    /* "cSparseIntegerOutrankingDigraphs.pyx":2894
+    /* "cSparseIntegerOutrankingDigraphs.pyx":2903
  *             fo.write('Total time         : %.5f\n' % self.runTimes['totalTime'])
  *             fo.write('QuantilesSorting   : %.5f\n' % self.runTimes['sorting'])
  *             fo.write('Preordering        : %.5f\n' % self.runTimes['preordering'])             # <<<<<<<<<<<<<<
  *             fo.write('Decomposing        : %.5f\n' % self.runTimes['decomposing'])
  *             try:
  */
-    __pyx_t_4 = __Pyx_PyObject_GetAttrStr(__pyx_v_fo, __pyx_n_s_write); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 2894, __pyx_L1_error)
+    __pyx_t_4 = __Pyx_PyObject_GetAttrStr(__pyx_v_fo, __pyx_n_s_write); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 2903, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_4);
-    __pyx_t_10 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_n_s_runTimes); if (unlikely(!__pyx_t_10)) __PYX_ERR(0, 2894, __pyx_L1_error)
+    __pyx_t_10 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_n_s_runTimes); if (unlikely(!__pyx_t_10)) __PYX_ERR(0, 2903, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_10);
-    __pyx_t_9 = __Pyx_PyObject_Dict_GetItem(__pyx_t_10, __pyx_n_u_preordering); if (unlikely(!__pyx_t_9)) __PYX_ERR(0, 2894, __pyx_L1_error)
+    __pyx_t_9 = __Pyx_PyObject_Dict_GetItem(__pyx_t_10, __pyx_n_u_preordering); if (unlikely(!__pyx_t_9)) __PYX_ERR(0, 2903, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_9);
     __Pyx_DECREF(__pyx_t_10); __pyx_t_10 = 0;
-    __pyx_t_10 = __Pyx_PyUnicode_FormatSafe(__pyx_kp_u_Preordering_5f_3, __pyx_t_9); if (unlikely(!__pyx_t_10)) __PYX_ERR(0, 2894, __pyx_L1_error)
+    __pyx_t_10 = __Pyx_PyUnicode_FormatSafe(__pyx_kp_u_Preordering_5f_3, __pyx_t_9); if (unlikely(!__pyx_t_10)) __PYX_ERR(0, 2903, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_10);
     __Pyx_DECREF(__pyx_t_9); __pyx_t_9 = 0;
     __pyx_t_9 = NULL;
@@ -58886,27 +59022,27 @@ static PyObject *__pyx_pf_32cSparseIntegerOutrankingDigraphs_24cQuantilesRanking
       __pyx_t_1 = __Pyx_PyObject_FastCall(__pyx_t_4, __pyx_callargs+1-__pyx_t_8, 1+__pyx_t_8);
       __Pyx_XDECREF(__pyx_t_9); __pyx_t_9 = 0;
       __Pyx_DECREF(__pyx_t_10); __pyx_t_10 = 0;
-      if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 2894, __pyx_L1_error)
+      if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 2903, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_1);
       __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
     }
     __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
 
-    /* "cSparseIntegerOutrankingDigraphs.pyx":2895
+    /* "cSparseIntegerOutrankingDigraphs.pyx":2904
  *             fo.write('QuantilesSorting   : %.5f\n' % self.runTimes['sorting'])
  *             fo.write('Preordering        : %.5f\n' % self.runTimes['preordering'])
  *             fo.write('Decomposing        : %.5f\n' % self.runTimes['decomposing'])             # <<<<<<<<<<<<<<
  *             try:
  *                 fo.write('Ordering           : %.5f\n' % self.runTimes['ordering'])
  */
-    __pyx_t_4 = __Pyx_PyObject_GetAttrStr(__pyx_v_fo, __pyx_n_s_write); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 2895, __pyx_L1_error)
+    __pyx_t_4 = __Pyx_PyObject_GetAttrStr(__pyx_v_fo, __pyx_n_s_write); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 2904, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_4);
-    __pyx_t_10 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_n_s_runTimes); if (unlikely(!__pyx_t_10)) __PYX_ERR(0, 2895, __pyx_L1_error)
+    __pyx_t_10 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_n_s_runTimes); if (unlikely(!__pyx_t_10)) __PYX_ERR(0, 2904, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_10);
-    __pyx_t_9 = __Pyx_PyObject_Dict_GetItem(__pyx_t_10, __pyx_n_u_decomposing); if (unlikely(!__pyx_t_9)) __PYX_ERR(0, 2895, __pyx_L1_error)
+    __pyx_t_9 = __Pyx_PyObject_Dict_GetItem(__pyx_t_10, __pyx_n_u_decomposing); if (unlikely(!__pyx_t_9)) __PYX_ERR(0, 2904, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_9);
     __Pyx_DECREF(__pyx_t_10); __pyx_t_10 = 0;
-    __pyx_t_10 = __Pyx_PyUnicode_FormatSafe(__pyx_kp_u_Decomposing_5f_3, __pyx_t_9); if (unlikely(!__pyx_t_10)) __PYX_ERR(0, 2895, __pyx_L1_error)
+    __pyx_t_10 = __Pyx_PyUnicode_FormatSafe(__pyx_kp_u_Decomposing_5f_3, __pyx_t_9); if (unlikely(!__pyx_t_10)) __PYX_ERR(0, 2904, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_10);
     __Pyx_DECREF(__pyx_t_9); __pyx_t_9 = 0;
     __pyx_t_9 = NULL;
@@ -58928,13 +59064,13 @@ static PyObject *__pyx_pf_32cSparseIntegerOutrankingDigraphs_24cQuantilesRanking
       __pyx_t_1 = __Pyx_PyObject_FastCall(__pyx_t_4, __pyx_callargs+1-__pyx_t_8, 1+__pyx_t_8);
       __Pyx_XDECREF(__pyx_t_9); __pyx_t_9 = 0;
       __Pyx_DECREF(__pyx_t_10); __pyx_t_10 = 0;
-      if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 2895, __pyx_L1_error)
+      if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 2904, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_1);
       __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
     }
     __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
 
-    /* "cSparseIntegerOutrankingDigraphs.pyx":2896
+    /* "cSparseIntegerOutrankingDigraphs.pyx":2905
  *             fo.write('Preordering        : %.5f\n' % self.runTimes['preordering'])
  *             fo.write('Decomposing        : %.5f\n' % self.runTimes['decomposing'])
  *             try:             # <<<<<<<<<<<<<<
@@ -58950,21 +59086,21 @@ static PyObject *__pyx_pf_32cSparseIntegerOutrankingDigraphs_24cQuantilesRanking
       __Pyx_XGOTREF(__pyx_t_5);
       /*try:*/ {
 
-        /* "cSparseIntegerOutrankingDigraphs.pyx":2897
+        /* "cSparseIntegerOutrankingDigraphs.pyx":2906
  *             fo.write('Decomposing        : %.5f\n' % self.runTimes['decomposing'])
  *             try:
  *                 fo.write('Ordering           : %.5f\n' % self.runTimes['ordering'])             # <<<<<<<<<<<<<<
  *             except:
  *                 pass
  */
-        __pyx_t_4 = __Pyx_PyObject_GetAttrStr(__pyx_v_fo, __pyx_n_s_write); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 2897, __pyx_L11_error)
+        __pyx_t_4 = __Pyx_PyObject_GetAttrStr(__pyx_v_fo, __pyx_n_s_write); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 2906, __pyx_L11_error)
         __Pyx_GOTREF(__pyx_t_4);
-        __pyx_t_10 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_n_s_runTimes); if (unlikely(!__pyx_t_10)) __PYX_ERR(0, 2897, __pyx_L11_error)
+        __pyx_t_10 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_n_s_runTimes); if (unlikely(!__pyx_t_10)) __PYX_ERR(0, 2906, __pyx_L11_error)
         __Pyx_GOTREF(__pyx_t_10);
-        __pyx_t_9 = __Pyx_PyObject_Dict_GetItem(__pyx_t_10, __pyx_n_u_ordering); if (unlikely(!__pyx_t_9)) __PYX_ERR(0, 2897, __pyx_L11_error)
+        __pyx_t_9 = __Pyx_PyObject_Dict_GetItem(__pyx_t_10, __pyx_n_u_ordering); if (unlikely(!__pyx_t_9)) __PYX_ERR(0, 2906, __pyx_L11_error)
         __Pyx_GOTREF(__pyx_t_9);
         __Pyx_DECREF(__pyx_t_10); __pyx_t_10 = 0;
-        __pyx_t_10 = __Pyx_PyUnicode_FormatSafe(__pyx_kp_u_Ordering_5f_3, __pyx_t_9); if (unlikely(!__pyx_t_10)) __PYX_ERR(0, 2897, __pyx_L11_error)
+        __pyx_t_10 = __Pyx_PyUnicode_FormatSafe(__pyx_kp_u_Ordering_5f_3, __pyx_t_9); if (unlikely(!__pyx_t_10)) __PYX_ERR(0, 2906, __pyx_L11_error)
         __Pyx_GOTREF(__pyx_t_10);
         __Pyx_DECREF(__pyx_t_9); __pyx_t_9 = 0;
         __pyx_t_9 = NULL;
@@ -58986,13 +59122,13 @@ static PyObject *__pyx_pf_32cSparseIntegerOutrankingDigraphs_24cQuantilesRanking
           __pyx_t_1 = __Pyx_PyObject_FastCall(__pyx_t_4, __pyx_callargs+1-__pyx_t_8, 1+__pyx_t_8);
           __Pyx_XDECREF(__pyx_t_9); __pyx_t_9 = 0;
           __Pyx_DECREF(__pyx_t_10); __pyx_t_10 = 0;
-          if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 2897, __pyx_L11_error)
+          if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 2906, __pyx_L11_error)
           __Pyx_GOTREF(__pyx_t_1);
           __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
         }
         __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
 
-        /* "cSparseIntegerOutrankingDigraphs.pyx":2896
+        /* "cSparseIntegerOutrankingDigraphs.pyx":2905
  *             fo.write('Preordering        : %.5f\n' % self.runTimes['preordering'])
  *             fo.write('Decomposing        : %.5f\n' % self.runTimes['decomposing'])
  *             try:             # <<<<<<<<<<<<<<
@@ -59011,7 +59147,7 @@ static PyObject *__pyx_pf_32cSparseIntegerOutrankingDigraphs_24cQuantilesRanking
       __Pyx_XDECREF(__pyx_t_4); __pyx_t_4 = 0;
       __Pyx_XDECREF(__pyx_t_9); __pyx_t_9 = 0;
 
-      /* "cSparseIntegerOutrankingDigraphs.pyx":2898
+      /* "cSparseIntegerOutrankingDigraphs.pyx":2907
  *             try:
  *                 fo.write('Ordering           : %.5f\n' % self.runTimes['ordering'])
  *             except:             # <<<<<<<<<<<<<<
@@ -59030,14 +59166,14 @@ static PyObject *__pyx_pf_32cSparseIntegerOutrankingDigraphs_24cQuantilesRanking
       __pyx_L16_try_end:;
     }
 
-    /* "cSparseIntegerOutrankingDigraphs.pyx":2900
+    /* "cSparseIntegerOutrankingDigraphs.pyx":2909
  *             except:
  *                 pass
  *             fo.close()             # <<<<<<<<<<<<<<
  * 
  *     def showActions(self):
  */
-    __pyx_t_4 = __Pyx_PyObject_GetAttrStr(__pyx_v_fo, __pyx_n_s_close); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 2900, __pyx_L1_error)
+    __pyx_t_4 = __Pyx_PyObject_GetAttrStr(__pyx_v_fo, __pyx_n_s_close); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 2909, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_4);
     __pyx_t_10 = NULL;
     __pyx_t_8 = 0;
@@ -59057,7 +59193,7 @@ static PyObject *__pyx_pf_32cSparseIntegerOutrankingDigraphs_24cQuantilesRanking
       PyObject *__pyx_callargs[2] = {__pyx_t_10, NULL};
       __pyx_t_1 = __Pyx_PyObject_FastCall(__pyx_t_4, __pyx_callargs+1-__pyx_t_8, 0+__pyx_t_8);
       __Pyx_XDECREF(__pyx_t_10); __pyx_t_10 = 0;
-      if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 2900, __pyx_L1_error)
+      if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 2909, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_1);
       __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
     }
@@ -59065,7 +59201,7 @@ static PyObject *__pyx_pf_32cSparseIntegerOutrankingDigraphs_24cQuantilesRanking
   }
   __pyx_L3:;
 
-  /* "cSparseIntegerOutrankingDigraphs.pyx":2842
+  /* "cSparseIntegerOutrankingDigraphs.pyx":2850
  *                 self.computeActionCategories(x,Show=True)
  * 
  *     def showShort(self,fileName=None,bint WithFileSize=False):             # <<<<<<<<<<<<<<
@@ -59092,7 +59228,7 @@ static PyObject *__pyx_pf_32cSparseIntegerOutrankingDigraphs_24cQuantilesRanking
   return __pyx_r;
 }
 
-/* "cSparseIntegerOutrankingDigraphs.pyx":2902
+/* "cSparseIntegerOutrankingDigraphs.pyx":2911
  *             fo.close()
  * 
  *     def showActions(self):             # <<<<<<<<<<<<<<
@@ -59154,12 +59290,12 @@ PyObject *__pyx_args, PyObject *__pyx_kwds
           (void)__Pyx_Arg_NewRef_FASTCALL(values[0]);
           kw_args--;
         }
-        else if (unlikely(PyErr_Occurred())) __PYX_ERR(0, 2902, __pyx_L3_error)
+        else if (unlikely(PyErr_Occurred())) __PYX_ERR(0, 2911, __pyx_L3_error)
         else goto __pyx_L5_argtuple_error;
       }
       if (unlikely(kw_args > 0)) {
         const Py_ssize_t kwd_pos_args = __pyx_nargs;
-        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_kwvalues, __pyx_pyargnames, 0, values + 0, kwd_pos_args, "showActions") < 0)) __PYX_ERR(0, 2902, __pyx_L3_error)
+        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_kwvalues, __pyx_pyargnames, 0, values + 0, kwd_pos_args, "showActions") < 0)) __PYX_ERR(0, 2911, __pyx_L3_error)
       }
     } else if (unlikely(__pyx_nargs != 1)) {
       goto __pyx_L5_argtuple_error;
@@ -59170,7 +59306,7 @@ PyObject *__pyx_args, PyObject *__pyx_kwds
   }
   goto __pyx_L6_skip;
   __pyx_L5_argtuple_error:;
-  __Pyx_RaiseArgtupleInvalid("showActions", 1, 1, 1, __pyx_nargs); __PYX_ERR(0, 2902, __pyx_L3_error)
+  __Pyx_RaiseArgtupleInvalid("showActions", 1, 1, 1, __pyx_nargs); __PYX_ERR(0, 2911, __pyx_L3_error)
   __pyx_L6_skip:;
   goto __pyx_L4_argument_unpacking_done;
   __pyx_L3_error:;
@@ -59215,34 +59351,34 @@ static PyObject *__pyx_pf_32cSparseIntegerOutrankingDigraphs_24cQuantilesRanking
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("showActions", 1);
 
-  /* "cSparseIntegerOutrankingDigraphs.pyx":2907
+  /* "cSparseIntegerOutrankingDigraphs.pyx":2916
  *         """
  *         cdef int x
  *         print('List of decision actions')             # <<<<<<<<<<<<<<
  *         for x in self.actions:
  *             print('%d: %s' % (x,self.actions[x]['name']) )
  */
-  __pyx_t_1 = __Pyx_PyObject_Call(__pyx_builtin_print, __pyx_tuple__57, NULL); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 2907, __pyx_L1_error)
+  __pyx_t_1 = __Pyx_PyObject_Call(__pyx_builtin_print, __pyx_tuple__57, NULL); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 2916, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
 
-  /* "cSparseIntegerOutrankingDigraphs.pyx":2908
+  /* "cSparseIntegerOutrankingDigraphs.pyx":2917
  *         cdef int x
  *         print('List of decision actions')
  *         for x in self.actions:             # <<<<<<<<<<<<<<
  *             print('%d: %s' % (x,self.actions[x]['name']) )
  * 
  */
-  __pyx_t_1 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_n_s_actions); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 2908, __pyx_L1_error)
+  __pyx_t_1 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_n_s_actions); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 2917, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   if (likely(PyList_CheckExact(__pyx_t_1)) || PyTuple_CheckExact(__pyx_t_1)) {
     __pyx_t_2 = __pyx_t_1; __Pyx_INCREF(__pyx_t_2);
     __pyx_t_3 = 0;
     __pyx_t_4 = NULL;
   } else {
-    __pyx_t_3 = -1; __pyx_t_2 = PyObject_GetIter(__pyx_t_1); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 2908, __pyx_L1_error)
+    __pyx_t_3 = -1; __pyx_t_2 = PyObject_GetIter(__pyx_t_1); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 2917, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_2);
-    __pyx_t_4 = __Pyx_PyObject_GetIterNextFunc(__pyx_t_2); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 2908, __pyx_L1_error)
+    __pyx_t_4 = __Pyx_PyObject_GetIterNextFunc(__pyx_t_2); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 2917, __pyx_L1_error)
   }
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
   for (;;) {
@@ -59251,28 +59387,28 @@ static PyObject *__pyx_pf_32cSparseIntegerOutrankingDigraphs_24cQuantilesRanking
         {
           Py_ssize_t __pyx_temp = __Pyx_PyList_GET_SIZE(__pyx_t_2);
           #if !CYTHON_ASSUME_SAFE_MACROS
-          if (unlikely((__pyx_temp < 0))) __PYX_ERR(0, 2908, __pyx_L1_error)
+          if (unlikely((__pyx_temp < 0))) __PYX_ERR(0, 2917, __pyx_L1_error)
           #endif
           if (__pyx_t_3 >= __pyx_temp) break;
         }
         #if CYTHON_ASSUME_SAFE_MACROS && !CYTHON_AVOID_BORROWED_REFS
-        __pyx_t_1 = PyList_GET_ITEM(__pyx_t_2, __pyx_t_3); __Pyx_INCREF(__pyx_t_1); __pyx_t_3++; if (unlikely((0 < 0))) __PYX_ERR(0, 2908, __pyx_L1_error)
+        __pyx_t_1 = PyList_GET_ITEM(__pyx_t_2, __pyx_t_3); __Pyx_INCREF(__pyx_t_1); __pyx_t_3++; if (unlikely((0 < 0))) __PYX_ERR(0, 2917, __pyx_L1_error)
         #else
-        __pyx_t_1 = __Pyx_PySequence_ITEM(__pyx_t_2, __pyx_t_3); __pyx_t_3++; if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 2908, __pyx_L1_error)
+        __pyx_t_1 = __Pyx_PySequence_ITEM(__pyx_t_2, __pyx_t_3); __pyx_t_3++; if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 2917, __pyx_L1_error)
         __Pyx_GOTREF(__pyx_t_1);
         #endif
       } else {
         {
           Py_ssize_t __pyx_temp = __Pyx_PyTuple_GET_SIZE(__pyx_t_2);
           #if !CYTHON_ASSUME_SAFE_MACROS
-          if (unlikely((__pyx_temp < 0))) __PYX_ERR(0, 2908, __pyx_L1_error)
+          if (unlikely((__pyx_temp < 0))) __PYX_ERR(0, 2917, __pyx_L1_error)
           #endif
           if (__pyx_t_3 >= __pyx_temp) break;
         }
         #if CYTHON_ASSUME_SAFE_MACROS && !CYTHON_AVOID_BORROWED_REFS
-        __pyx_t_1 = PyTuple_GET_ITEM(__pyx_t_2, __pyx_t_3); __Pyx_INCREF(__pyx_t_1); __pyx_t_3++; if (unlikely((0 < 0))) __PYX_ERR(0, 2908, __pyx_L1_error)
+        __pyx_t_1 = PyTuple_GET_ITEM(__pyx_t_2, __pyx_t_3); __Pyx_INCREF(__pyx_t_1); __pyx_t_3++; if (unlikely((0 < 0))) __PYX_ERR(0, 2917, __pyx_L1_error)
         #else
-        __pyx_t_1 = __Pyx_PySequence_ITEM(__pyx_t_2, __pyx_t_3); __pyx_t_3++; if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 2908, __pyx_L1_error)
+        __pyx_t_1 = __Pyx_PySequence_ITEM(__pyx_t_2, __pyx_t_3); __pyx_t_3++; if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 2917, __pyx_L1_error)
         __Pyx_GOTREF(__pyx_t_1);
         #endif
       }
@@ -59282,28 +59418,28 @@ static PyObject *__pyx_pf_32cSparseIntegerOutrankingDigraphs_24cQuantilesRanking
         PyObject* exc_type = PyErr_Occurred();
         if (exc_type) {
           if (likely(__Pyx_PyErr_GivenExceptionMatches(exc_type, PyExc_StopIteration))) PyErr_Clear();
-          else __PYX_ERR(0, 2908, __pyx_L1_error)
+          else __PYX_ERR(0, 2917, __pyx_L1_error)
         }
         break;
       }
       __Pyx_GOTREF(__pyx_t_1);
     }
-    __pyx_t_5 = __Pyx_PyInt_As_int(__pyx_t_1); if (unlikely((__pyx_t_5 == (int)-1) && PyErr_Occurred())) __PYX_ERR(0, 2908, __pyx_L1_error)
+    __pyx_t_5 = __Pyx_PyInt_As_int(__pyx_t_1); if (unlikely((__pyx_t_5 == (int)-1) && PyErr_Occurred())) __PYX_ERR(0, 2917, __pyx_L1_error)
     __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
     __pyx_v_x = __pyx_t_5;
 
-    /* "cSparseIntegerOutrankingDigraphs.pyx":2909
+    /* "cSparseIntegerOutrankingDigraphs.pyx":2918
  *         print('List of decision actions')
  *         for x in self.actions:
  *             print('%d: %s' % (x,self.actions[x]['name']) )             # <<<<<<<<<<<<<<
  * 
  *     def showCriteria(self, bint IntegerWeights=False, bint Debug=False):
  */
-    __pyx_t_1 = PyTuple_New(3); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 2909, __pyx_L1_error)
+    __pyx_t_1 = PyTuple_New(3); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 2918, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_1);
     __pyx_t_6 = 0;
     __pyx_t_7 = 127;
-    __pyx_t_8 = __Pyx_PyUnicode_From_int(__pyx_v_x, 0, ' ', 'd'); if (unlikely(!__pyx_t_8)) __PYX_ERR(0, 2909, __pyx_L1_error)
+    __pyx_t_8 = __Pyx_PyUnicode_From_int(__pyx_v_x, 0, ' ', 'd'); if (unlikely(!__pyx_t_8)) __PYX_ERR(0, 2918, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_8);
     __pyx_t_6 += __Pyx_PyUnicode_GET_LENGTH(__pyx_t_8);
     __Pyx_GIVEREF(__pyx_t_8);
@@ -59313,15 +59449,15 @@ static PyObject *__pyx_pf_32cSparseIntegerOutrankingDigraphs_24cQuantilesRanking
     __pyx_t_6 += 2;
     __Pyx_GIVEREF(__pyx_kp_u__32);
     PyTuple_SET_ITEM(__pyx_t_1, 1, __pyx_kp_u__32);
-    __pyx_t_8 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_n_s_actions); if (unlikely(!__pyx_t_8)) __PYX_ERR(0, 2909, __pyx_L1_error)
+    __pyx_t_8 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_n_s_actions); if (unlikely(!__pyx_t_8)) __PYX_ERR(0, 2918, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_8);
-    __pyx_t_9 = __Pyx_GetItemInt(__pyx_t_8, __pyx_v_x, int, 1, __Pyx_PyInt_From_int, 0, 1, 1); if (unlikely(!__pyx_t_9)) __PYX_ERR(0, 2909, __pyx_L1_error)
+    __pyx_t_9 = __Pyx_GetItemInt(__pyx_t_8, __pyx_v_x, int, 1, __Pyx_PyInt_From_int, 0, 1, 1); if (unlikely(!__pyx_t_9)) __PYX_ERR(0, 2918, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_9);
     __Pyx_DECREF(__pyx_t_8); __pyx_t_8 = 0;
-    __pyx_t_8 = __Pyx_PyObject_Dict_GetItem(__pyx_t_9, __pyx_n_u_name_2); if (unlikely(!__pyx_t_8)) __PYX_ERR(0, 2909, __pyx_L1_error)
+    __pyx_t_8 = __Pyx_PyObject_Dict_GetItem(__pyx_t_9, __pyx_n_u_name_2); if (unlikely(!__pyx_t_8)) __PYX_ERR(0, 2918, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_8);
     __Pyx_DECREF(__pyx_t_9); __pyx_t_9 = 0;
-    __pyx_t_9 = __Pyx_PyObject_FormatSimpleAndDecref(PyObject_Unicode(__pyx_t_8), __pyx_empty_unicode); if (unlikely(!__pyx_t_9)) __PYX_ERR(0, 2909, __pyx_L1_error)
+    __pyx_t_9 = __Pyx_PyObject_FormatSimpleAndDecref(PyObject_Unicode(__pyx_t_8), __pyx_empty_unicode); if (unlikely(!__pyx_t_9)) __PYX_ERR(0, 2918, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_9);
     __Pyx_DECREF(__pyx_t_8); __pyx_t_8 = 0;
     __pyx_t_7 = (__Pyx_PyUnicode_MAX_CHAR_VALUE(__pyx_t_9) > __pyx_t_7) ? __Pyx_PyUnicode_MAX_CHAR_VALUE(__pyx_t_9) : __pyx_t_7;
@@ -59329,15 +59465,15 @@ static PyObject *__pyx_pf_32cSparseIntegerOutrankingDigraphs_24cQuantilesRanking
     __Pyx_GIVEREF(__pyx_t_9);
     PyTuple_SET_ITEM(__pyx_t_1, 2, __pyx_t_9);
     __pyx_t_9 = 0;
-    __pyx_t_9 = __Pyx_PyUnicode_Join(__pyx_t_1, 3, __pyx_t_6, __pyx_t_7); if (unlikely(!__pyx_t_9)) __PYX_ERR(0, 2909, __pyx_L1_error)
+    __pyx_t_9 = __Pyx_PyUnicode_Join(__pyx_t_1, 3, __pyx_t_6, __pyx_t_7); if (unlikely(!__pyx_t_9)) __PYX_ERR(0, 2918, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_9);
     __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
-    __pyx_t_1 = __Pyx_PyObject_CallOneArg(__pyx_builtin_print, __pyx_t_9); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 2909, __pyx_L1_error)
+    __pyx_t_1 = __Pyx_PyObject_CallOneArg(__pyx_builtin_print, __pyx_t_9); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 2918, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_1);
     __Pyx_DECREF(__pyx_t_9); __pyx_t_9 = 0;
     __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
 
-    /* "cSparseIntegerOutrankingDigraphs.pyx":2908
+    /* "cSparseIntegerOutrankingDigraphs.pyx":2917
  *         cdef int x
  *         print('List of decision actions')
  *         for x in self.actions:             # <<<<<<<<<<<<<<
@@ -59347,7 +59483,7 @@ static PyObject *__pyx_pf_32cSparseIntegerOutrankingDigraphs_24cQuantilesRanking
   }
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
 
-  /* "cSparseIntegerOutrankingDigraphs.pyx":2902
+  /* "cSparseIntegerOutrankingDigraphs.pyx":2911
  *             fo.close()
  * 
  *     def showActions(self):             # <<<<<<<<<<<<<<
@@ -59371,7 +59507,7 @@ static PyObject *__pyx_pf_32cSparseIntegerOutrankingDigraphs_24cQuantilesRanking
   return __pyx_r;
 }
 
-/* "cSparseIntegerOutrankingDigraphs.pyx":2911
+/* "cSparseIntegerOutrankingDigraphs.pyx":2920
  *             print('%d: %s' % (x,self.actions[x]['name']) )
  * 
  *     def showCriteria(self, bint IntegerWeights=False, bint Debug=False):             # <<<<<<<<<<<<<<
@@ -59439,26 +59575,26 @@ PyObject *__pyx_args, PyObject *__pyx_kwds
           (void)__Pyx_Arg_NewRef_FASTCALL(values[0]);
           kw_args--;
         }
-        else if (unlikely(PyErr_Occurred())) __PYX_ERR(0, 2911, __pyx_L3_error)
+        else if (unlikely(PyErr_Occurred())) __PYX_ERR(0, 2920, __pyx_L3_error)
         else goto __pyx_L5_argtuple_error;
         CYTHON_FALLTHROUGH;
         case  1:
         if (kw_args > 0) {
           PyObject* value = __Pyx_GetKwValue_FASTCALL(__pyx_kwds, __pyx_kwvalues, __pyx_n_s_IntegerWeights);
           if (value) { values[1] = __Pyx_Arg_NewRef_FASTCALL(value); kw_args--; }
-          else if (unlikely(PyErr_Occurred())) __PYX_ERR(0, 2911, __pyx_L3_error)
+          else if (unlikely(PyErr_Occurred())) __PYX_ERR(0, 2920, __pyx_L3_error)
         }
         CYTHON_FALLTHROUGH;
         case  2:
         if (kw_args > 0) {
           PyObject* value = __Pyx_GetKwValue_FASTCALL(__pyx_kwds, __pyx_kwvalues, __pyx_n_s_Debug);
           if (value) { values[2] = __Pyx_Arg_NewRef_FASTCALL(value); kw_args--; }
-          else if (unlikely(PyErr_Occurred())) __PYX_ERR(0, 2911, __pyx_L3_error)
+          else if (unlikely(PyErr_Occurred())) __PYX_ERR(0, 2920, __pyx_L3_error)
         }
       }
       if (unlikely(kw_args > 0)) {
         const Py_ssize_t kwd_pos_args = __pyx_nargs;
-        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_kwvalues, __pyx_pyargnames, 0, values + 0, kwd_pos_args, "showCriteria") < 0)) __PYX_ERR(0, 2911, __pyx_L3_error)
+        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_kwvalues, __pyx_pyargnames, 0, values + 0, kwd_pos_args, "showCriteria") < 0)) __PYX_ERR(0, 2920, __pyx_L3_error)
       }
     } else {
       switch (__pyx_nargs) {
@@ -59473,19 +59609,19 @@ PyObject *__pyx_args, PyObject *__pyx_kwds
     }
     __pyx_v_self = values[0];
     if (values[1]) {
-      __pyx_v_IntegerWeights = __Pyx_PyObject_IsTrue(values[1]); if (unlikely((__pyx_v_IntegerWeights == (int)-1) && PyErr_Occurred())) __PYX_ERR(0, 2911, __pyx_L3_error)
+      __pyx_v_IntegerWeights = __Pyx_PyObject_IsTrue(values[1]); if (unlikely((__pyx_v_IntegerWeights == (int)-1) && PyErr_Occurred())) __PYX_ERR(0, 2920, __pyx_L3_error)
     } else {
       __pyx_v_IntegerWeights = ((int)((int)0));
     }
     if (values[2]) {
-      __pyx_v_Debug = __Pyx_PyObject_IsTrue(values[2]); if (unlikely((__pyx_v_Debug == (int)-1) && PyErr_Occurred())) __PYX_ERR(0, 2911, __pyx_L3_error)
+      __pyx_v_Debug = __Pyx_PyObject_IsTrue(values[2]); if (unlikely((__pyx_v_Debug == (int)-1) && PyErr_Occurred())) __PYX_ERR(0, 2920, __pyx_L3_error)
     } else {
       __pyx_v_Debug = ((int)((int)0));
     }
   }
   goto __pyx_L6_skip;
   __pyx_L5_argtuple_error:;
-  __Pyx_RaiseArgtupleInvalid("showCriteria", 0, 1, 3, __pyx_nargs); __PYX_ERR(0, 2911, __pyx_L3_error)
+  __Pyx_RaiseArgtupleInvalid("showCriteria", 0, 1, 3, __pyx_nargs); __PYX_ERR(0, 2920, __pyx_L3_error)
   __pyx_L6_skip:;
   goto __pyx_L4_argument_unpacking_done;
   __pyx_L3_error:;
@@ -59544,7 +59680,7 @@ static PyObject *__pyx_pf_32cSparseIntegerOutrankingDigraphs_24cQuantilesRanking
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("showCriteria", 1);
 
-  /* "cSparseIntegerOutrankingDigraphs.pyx":2919
+  /* "cSparseIntegerOutrankingDigraphs.pyx":2928
  *         print Criteria with thresholds and weights.
  *         """
  *         cdef int sumWeights = 0             # <<<<<<<<<<<<<<
@@ -59553,34 +59689,34 @@ static PyObject *__pyx_pf_32cSparseIntegerOutrankingDigraphs_24cQuantilesRanking
  */
   __pyx_v_sumWeights = 0;
 
-  /* "cSparseIntegerOutrankingDigraphs.pyx":2920
+  /* "cSparseIntegerOutrankingDigraphs.pyx":2929
  *         """
  *         cdef int sumWeights = 0
  *         print('*----  criteria -----*')             # <<<<<<<<<<<<<<
  *         #sumWeights = 0
  *         for g in self.criteria:
  */
-  __pyx_t_1 = __Pyx_PyObject_Call(__pyx_builtin_print, __pyx_tuple__58, NULL); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 2920, __pyx_L1_error)
+  __pyx_t_1 = __Pyx_PyObject_Call(__pyx_builtin_print, __pyx_tuple__58, NULL); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 2929, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
 
-  /* "cSparseIntegerOutrankingDigraphs.pyx":2922
+  /* "cSparseIntegerOutrankingDigraphs.pyx":2931
  *         print('*----  criteria -----*')
  *         #sumWeights = 0
  *         for g in self.criteria:             # <<<<<<<<<<<<<<
  *             sumWeights += self.criteria[g]['weight']
  *         criteriaList = [c for c in self.criteria]
  */
-  __pyx_t_1 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_n_s_criteria); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 2922, __pyx_L1_error)
+  __pyx_t_1 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_n_s_criteria); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 2931, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   if (likely(PyList_CheckExact(__pyx_t_1)) || PyTuple_CheckExact(__pyx_t_1)) {
     __pyx_t_2 = __pyx_t_1; __Pyx_INCREF(__pyx_t_2);
     __pyx_t_3 = 0;
     __pyx_t_4 = NULL;
   } else {
-    __pyx_t_3 = -1; __pyx_t_2 = PyObject_GetIter(__pyx_t_1); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 2922, __pyx_L1_error)
+    __pyx_t_3 = -1; __pyx_t_2 = PyObject_GetIter(__pyx_t_1); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 2931, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_2);
-    __pyx_t_4 = __Pyx_PyObject_GetIterNextFunc(__pyx_t_2); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 2922, __pyx_L1_error)
+    __pyx_t_4 = __Pyx_PyObject_GetIterNextFunc(__pyx_t_2); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 2931, __pyx_L1_error)
   }
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
   for (;;) {
@@ -59589,28 +59725,28 @@ static PyObject *__pyx_pf_32cSparseIntegerOutrankingDigraphs_24cQuantilesRanking
         {
           Py_ssize_t __pyx_temp = __Pyx_PyList_GET_SIZE(__pyx_t_2);
           #if !CYTHON_ASSUME_SAFE_MACROS
-          if (unlikely((__pyx_temp < 0))) __PYX_ERR(0, 2922, __pyx_L1_error)
+          if (unlikely((__pyx_temp < 0))) __PYX_ERR(0, 2931, __pyx_L1_error)
           #endif
           if (__pyx_t_3 >= __pyx_temp) break;
         }
         #if CYTHON_ASSUME_SAFE_MACROS && !CYTHON_AVOID_BORROWED_REFS
-        __pyx_t_1 = PyList_GET_ITEM(__pyx_t_2, __pyx_t_3); __Pyx_INCREF(__pyx_t_1); __pyx_t_3++; if (unlikely((0 < 0))) __PYX_ERR(0, 2922, __pyx_L1_error)
+        __pyx_t_1 = PyList_GET_ITEM(__pyx_t_2, __pyx_t_3); __Pyx_INCREF(__pyx_t_1); __pyx_t_3++; if (unlikely((0 < 0))) __PYX_ERR(0, 2931, __pyx_L1_error)
         #else
-        __pyx_t_1 = __Pyx_PySequence_ITEM(__pyx_t_2, __pyx_t_3); __pyx_t_3++; if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 2922, __pyx_L1_error)
+        __pyx_t_1 = __Pyx_PySequence_ITEM(__pyx_t_2, __pyx_t_3); __pyx_t_3++; if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 2931, __pyx_L1_error)
         __Pyx_GOTREF(__pyx_t_1);
         #endif
       } else {
         {
           Py_ssize_t __pyx_temp = __Pyx_PyTuple_GET_SIZE(__pyx_t_2);
           #if !CYTHON_ASSUME_SAFE_MACROS
-          if (unlikely((__pyx_temp < 0))) __PYX_ERR(0, 2922, __pyx_L1_error)
+          if (unlikely((__pyx_temp < 0))) __PYX_ERR(0, 2931, __pyx_L1_error)
           #endif
           if (__pyx_t_3 >= __pyx_temp) break;
         }
         #if CYTHON_ASSUME_SAFE_MACROS && !CYTHON_AVOID_BORROWED_REFS
-        __pyx_t_1 = PyTuple_GET_ITEM(__pyx_t_2, __pyx_t_3); __Pyx_INCREF(__pyx_t_1); __pyx_t_3++; if (unlikely((0 < 0))) __PYX_ERR(0, 2922, __pyx_L1_error)
+        __pyx_t_1 = PyTuple_GET_ITEM(__pyx_t_2, __pyx_t_3); __Pyx_INCREF(__pyx_t_1); __pyx_t_3++; if (unlikely((0 < 0))) __PYX_ERR(0, 2931, __pyx_L1_error)
         #else
-        __pyx_t_1 = __Pyx_PySequence_ITEM(__pyx_t_2, __pyx_t_3); __pyx_t_3++; if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 2922, __pyx_L1_error)
+        __pyx_t_1 = __Pyx_PySequence_ITEM(__pyx_t_2, __pyx_t_3); __pyx_t_3++; if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 2931, __pyx_L1_error)
         __Pyx_GOTREF(__pyx_t_1);
         #endif
       }
@@ -59620,7 +59756,7 @@ static PyObject *__pyx_pf_32cSparseIntegerOutrankingDigraphs_24cQuantilesRanking
         PyObject* exc_type = PyErr_Occurred();
         if (exc_type) {
           if (likely(__Pyx_PyErr_GivenExceptionMatches(exc_type, PyExc_StopIteration))) PyErr_Clear();
-          else __PYX_ERR(0, 2922, __pyx_L1_error)
+          else __PYX_ERR(0, 2931, __pyx_L1_error)
         }
         break;
       }
@@ -59629,32 +59765,32 @@ static PyObject *__pyx_pf_32cSparseIntegerOutrankingDigraphs_24cQuantilesRanking
     __Pyx_XDECREF_SET(__pyx_v_g, __pyx_t_1);
     __pyx_t_1 = 0;
 
-    /* "cSparseIntegerOutrankingDigraphs.pyx":2923
+    /* "cSparseIntegerOutrankingDigraphs.pyx":2932
  *         #sumWeights = 0
  *         for g in self.criteria:
  *             sumWeights += self.criteria[g]['weight']             # <<<<<<<<<<<<<<
  *         criteriaList = [c for c in self.criteria]
  *         criteriaList.sort()
  */
-    __pyx_t_1 = __Pyx_PyInt_From_int(__pyx_v_sumWeights); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 2923, __pyx_L1_error)
+    __pyx_t_1 = __Pyx_PyInt_From_int(__pyx_v_sumWeights); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 2932, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_1);
-    __pyx_t_5 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_n_s_criteria); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 2923, __pyx_L1_error)
+    __pyx_t_5 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_n_s_criteria); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 2932, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_5);
-    __pyx_t_6 = __Pyx_PyObject_GetItem(__pyx_t_5, __pyx_v_g); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 2923, __pyx_L1_error)
+    __pyx_t_6 = __Pyx_PyObject_GetItem(__pyx_t_5, __pyx_v_g); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 2932, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_6);
     __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
-    __pyx_t_5 = __Pyx_PyObject_Dict_GetItem(__pyx_t_6, __pyx_n_u_weight); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 2923, __pyx_L1_error)
+    __pyx_t_5 = __Pyx_PyObject_Dict_GetItem(__pyx_t_6, __pyx_n_u_weight); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 2932, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_5);
     __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
-    __pyx_t_6 = PyNumber_InPlaceAdd(__pyx_t_1, __pyx_t_5); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 2923, __pyx_L1_error)
+    __pyx_t_6 = PyNumber_InPlaceAdd(__pyx_t_1, __pyx_t_5); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 2932, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_6);
     __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
     __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
-    __pyx_t_7 = __Pyx_PyInt_As_int(__pyx_t_6); if (unlikely((__pyx_t_7 == (int)-1) && PyErr_Occurred())) __PYX_ERR(0, 2923, __pyx_L1_error)
+    __pyx_t_7 = __Pyx_PyInt_As_int(__pyx_t_6); if (unlikely((__pyx_t_7 == (int)-1) && PyErr_Occurred())) __PYX_ERR(0, 2932, __pyx_L1_error)
     __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
     __pyx_v_sumWeights = __pyx_t_7;
 
-    /* "cSparseIntegerOutrankingDigraphs.pyx":2922
+    /* "cSparseIntegerOutrankingDigraphs.pyx":2931
  *         print('*----  criteria -----*')
  *         #sumWeights = 0
  *         for g in self.criteria:             # <<<<<<<<<<<<<<
@@ -59664,7 +59800,7 @@ static PyObject *__pyx_pf_32cSparseIntegerOutrankingDigraphs_24cQuantilesRanking
   }
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
 
-  /* "cSparseIntegerOutrankingDigraphs.pyx":2924
+  /* "cSparseIntegerOutrankingDigraphs.pyx":2933
  *         for g in self.criteria:
  *             sumWeights += self.criteria[g]['weight']
  *         criteriaList = [c for c in self.criteria]             # <<<<<<<<<<<<<<
@@ -59672,18 +59808,18 @@ static PyObject *__pyx_pf_32cSparseIntegerOutrankingDigraphs_24cQuantilesRanking
  *         for c in criteriaList:
  */
   { /* enter inner scope */
-    __pyx_t_2 = PyList_New(0); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 2924, __pyx_L8_error)
+    __pyx_t_2 = PyList_New(0); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 2933, __pyx_L8_error)
     __Pyx_GOTREF(__pyx_t_2);
-    __pyx_t_6 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_n_s_criteria); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 2924, __pyx_L8_error)
+    __pyx_t_6 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_n_s_criteria); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 2933, __pyx_L8_error)
     __Pyx_GOTREF(__pyx_t_6);
     if (likely(PyList_CheckExact(__pyx_t_6)) || PyTuple_CheckExact(__pyx_t_6)) {
       __pyx_t_5 = __pyx_t_6; __Pyx_INCREF(__pyx_t_5);
       __pyx_t_3 = 0;
       __pyx_t_4 = NULL;
     } else {
-      __pyx_t_3 = -1; __pyx_t_5 = PyObject_GetIter(__pyx_t_6); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 2924, __pyx_L8_error)
+      __pyx_t_3 = -1; __pyx_t_5 = PyObject_GetIter(__pyx_t_6); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 2933, __pyx_L8_error)
       __Pyx_GOTREF(__pyx_t_5);
-      __pyx_t_4 = __Pyx_PyObject_GetIterNextFunc(__pyx_t_5); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 2924, __pyx_L8_error)
+      __pyx_t_4 = __Pyx_PyObject_GetIterNextFunc(__pyx_t_5); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 2933, __pyx_L8_error)
     }
     __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
     for (;;) {
@@ -59692,28 +59828,28 @@ static PyObject *__pyx_pf_32cSparseIntegerOutrankingDigraphs_24cQuantilesRanking
           {
             Py_ssize_t __pyx_temp = __Pyx_PyList_GET_SIZE(__pyx_t_5);
             #if !CYTHON_ASSUME_SAFE_MACROS
-            if (unlikely((__pyx_temp < 0))) __PYX_ERR(0, 2924, __pyx_L8_error)
+            if (unlikely((__pyx_temp < 0))) __PYX_ERR(0, 2933, __pyx_L8_error)
             #endif
             if (__pyx_t_3 >= __pyx_temp) break;
           }
           #if CYTHON_ASSUME_SAFE_MACROS && !CYTHON_AVOID_BORROWED_REFS
-          __pyx_t_6 = PyList_GET_ITEM(__pyx_t_5, __pyx_t_3); __Pyx_INCREF(__pyx_t_6); __pyx_t_3++; if (unlikely((0 < 0))) __PYX_ERR(0, 2924, __pyx_L8_error)
+          __pyx_t_6 = PyList_GET_ITEM(__pyx_t_5, __pyx_t_3); __Pyx_INCREF(__pyx_t_6); __pyx_t_3++; if (unlikely((0 < 0))) __PYX_ERR(0, 2933, __pyx_L8_error)
           #else
-          __pyx_t_6 = __Pyx_PySequence_ITEM(__pyx_t_5, __pyx_t_3); __pyx_t_3++; if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 2924, __pyx_L8_error)
+          __pyx_t_6 = __Pyx_PySequence_ITEM(__pyx_t_5, __pyx_t_3); __pyx_t_3++; if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 2933, __pyx_L8_error)
           __Pyx_GOTREF(__pyx_t_6);
           #endif
         } else {
           {
             Py_ssize_t __pyx_temp = __Pyx_PyTuple_GET_SIZE(__pyx_t_5);
             #if !CYTHON_ASSUME_SAFE_MACROS
-            if (unlikely((__pyx_temp < 0))) __PYX_ERR(0, 2924, __pyx_L8_error)
+            if (unlikely((__pyx_temp < 0))) __PYX_ERR(0, 2933, __pyx_L8_error)
             #endif
             if (__pyx_t_3 >= __pyx_temp) break;
           }
           #if CYTHON_ASSUME_SAFE_MACROS && !CYTHON_AVOID_BORROWED_REFS
-          __pyx_t_6 = PyTuple_GET_ITEM(__pyx_t_5, __pyx_t_3); __Pyx_INCREF(__pyx_t_6); __pyx_t_3++; if (unlikely((0 < 0))) __PYX_ERR(0, 2924, __pyx_L8_error)
+          __pyx_t_6 = PyTuple_GET_ITEM(__pyx_t_5, __pyx_t_3); __Pyx_INCREF(__pyx_t_6); __pyx_t_3++; if (unlikely((0 < 0))) __PYX_ERR(0, 2933, __pyx_L8_error)
           #else
-          __pyx_t_6 = __Pyx_PySequence_ITEM(__pyx_t_5, __pyx_t_3); __pyx_t_3++; if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 2924, __pyx_L8_error)
+          __pyx_t_6 = __Pyx_PySequence_ITEM(__pyx_t_5, __pyx_t_3); __pyx_t_3++; if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 2933, __pyx_L8_error)
           __Pyx_GOTREF(__pyx_t_6);
           #endif
         }
@@ -59723,7 +59859,7 @@ static PyObject *__pyx_pf_32cSparseIntegerOutrankingDigraphs_24cQuantilesRanking
           PyObject* exc_type = PyErr_Occurred();
           if (exc_type) {
             if (likely(__Pyx_PyErr_GivenExceptionMatches(exc_type, PyExc_StopIteration))) PyErr_Clear();
-            else __PYX_ERR(0, 2924, __pyx_L8_error)
+            else __PYX_ERR(0, 2933, __pyx_L8_error)
           }
           break;
         }
@@ -59731,7 +59867,7 @@ static PyObject *__pyx_pf_32cSparseIntegerOutrankingDigraphs_24cQuantilesRanking
       }
       __Pyx_XDECREF_SET(__pyx_9genexpr40__pyx_v_c, __pyx_t_6);
       __pyx_t_6 = 0;
-      if (unlikely(__Pyx_ListComp_Append(__pyx_t_2, (PyObject*)__pyx_9genexpr40__pyx_v_c))) __PYX_ERR(0, 2924, __pyx_L8_error)
+      if (unlikely(__Pyx_ListComp_Append(__pyx_t_2, (PyObject*)__pyx_9genexpr40__pyx_v_c))) __PYX_ERR(0, 2933, __pyx_L8_error)
     }
     __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
     __Pyx_XDECREF(__pyx_9genexpr40__pyx_v_c); __pyx_9genexpr40__pyx_v_c = 0;
@@ -59744,16 +59880,16 @@ static PyObject *__pyx_pf_32cSparseIntegerOutrankingDigraphs_24cQuantilesRanking
   __pyx_v_criteriaList = ((PyObject*)__pyx_t_2);
   __pyx_t_2 = 0;
 
-  /* "cSparseIntegerOutrankingDigraphs.pyx":2925
+  /* "cSparseIntegerOutrankingDigraphs.pyx":2934
  *             sumWeights += self.criteria[g]['weight']
  *         criteriaList = [c for c in self.criteria]
  *         criteriaList.sort()             # <<<<<<<<<<<<<<
  *         for c in criteriaList:
  *             critc = self.criteria[c]
  */
-  __pyx_t_8 = PyList_Sort(__pyx_v_criteriaList); if (unlikely(__pyx_t_8 == ((int)-1))) __PYX_ERR(0, 2925, __pyx_L1_error)
+  __pyx_t_8 = PyList_Sort(__pyx_v_criteriaList); if (unlikely(__pyx_t_8 == ((int)-1))) __PYX_ERR(0, 2934, __pyx_L1_error)
 
-  /* "cSparseIntegerOutrankingDigraphs.pyx":2926
+  /* "cSparseIntegerOutrankingDigraphs.pyx":2935
  *         criteriaList = [c for c in self.criteria]
  *         criteriaList.sort()
  *         for c in criteriaList:             # <<<<<<<<<<<<<<
@@ -59766,35 +59902,35 @@ static PyObject *__pyx_pf_32cSparseIntegerOutrankingDigraphs_24cQuantilesRanking
     {
       Py_ssize_t __pyx_temp = __Pyx_PyList_GET_SIZE(__pyx_t_2);
       #if !CYTHON_ASSUME_SAFE_MACROS
-      if (unlikely((__pyx_temp < 0))) __PYX_ERR(0, 2926, __pyx_L1_error)
+      if (unlikely((__pyx_temp < 0))) __PYX_ERR(0, 2935, __pyx_L1_error)
       #endif
       if (__pyx_t_3 >= __pyx_temp) break;
     }
     #if CYTHON_ASSUME_SAFE_MACROS && !CYTHON_AVOID_BORROWED_REFS
-    __pyx_t_5 = PyList_GET_ITEM(__pyx_t_2, __pyx_t_3); __Pyx_INCREF(__pyx_t_5); __pyx_t_3++; if (unlikely((0 < 0))) __PYX_ERR(0, 2926, __pyx_L1_error)
+    __pyx_t_5 = PyList_GET_ITEM(__pyx_t_2, __pyx_t_3); __Pyx_INCREF(__pyx_t_5); __pyx_t_3++; if (unlikely((0 < 0))) __PYX_ERR(0, 2935, __pyx_L1_error)
     #else
-    __pyx_t_5 = __Pyx_PySequence_ITEM(__pyx_t_2, __pyx_t_3); __pyx_t_3++; if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 2926, __pyx_L1_error)
+    __pyx_t_5 = __Pyx_PySequence_ITEM(__pyx_t_2, __pyx_t_3); __pyx_t_3++; if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 2935, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_5);
     #endif
     __Pyx_XDECREF_SET(__pyx_v_c, __pyx_t_5);
     __pyx_t_5 = 0;
 
-    /* "cSparseIntegerOutrankingDigraphs.pyx":2927
+    /* "cSparseIntegerOutrankingDigraphs.pyx":2936
  *         criteriaList.sort()
  *         for c in criteriaList:
  *             critc = self.criteria[c]             # <<<<<<<<<<<<<<
  *             try:
  *                 criterionName = critc['name']
  */
-    __pyx_t_5 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_n_s_criteria); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 2927, __pyx_L1_error)
+    __pyx_t_5 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_n_s_criteria); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 2936, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_5);
-    __pyx_t_6 = __Pyx_PyObject_GetItem(__pyx_t_5, __pyx_v_c); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 2927, __pyx_L1_error)
+    __pyx_t_6 = __Pyx_PyObject_GetItem(__pyx_t_5, __pyx_v_c); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 2936, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_6);
     __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
     __Pyx_XDECREF_SET(__pyx_v_critc, __pyx_t_6);
     __pyx_t_6 = 0;
 
-    /* "cSparseIntegerOutrankingDigraphs.pyx":2928
+    /* "cSparseIntegerOutrankingDigraphs.pyx":2937
  *         for c in criteriaList:
  *             critc = self.criteria[c]
  *             try:             # <<<<<<<<<<<<<<
@@ -59810,19 +59946,19 @@ static PyObject *__pyx_pf_32cSparseIntegerOutrankingDigraphs_24cQuantilesRanking
       __Pyx_XGOTREF(__pyx_t_11);
       /*try:*/ {
 
-        /* "cSparseIntegerOutrankingDigraphs.pyx":2929
+        /* "cSparseIntegerOutrankingDigraphs.pyx":2938
  *             critc = self.criteria[c]
  *             try:
  *                 criterionName = critc['name']             # <<<<<<<<<<<<<<
  *             except:
  *                 criterionName = ''
  */
-        __pyx_t_6 = __Pyx_PyObject_Dict_GetItem(__pyx_v_critc, __pyx_n_u_name_2); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 2929, __pyx_L15_error)
+        __pyx_t_6 = __Pyx_PyObject_Dict_GetItem(__pyx_v_critc, __pyx_n_u_name_2); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 2938, __pyx_L15_error)
         __Pyx_GOTREF(__pyx_t_6);
         __Pyx_XDECREF_SET(__pyx_v_criterionName, __pyx_t_6);
         __pyx_t_6 = 0;
 
-        /* "cSparseIntegerOutrankingDigraphs.pyx":2928
+        /* "cSparseIntegerOutrankingDigraphs.pyx":2937
  *         for c in criteriaList:
  *             critc = self.criteria[c]
  *             try:             # <<<<<<<<<<<<<<
@@ -59839,7 +59975,7 @@ static PyObject *__pyx_pf_32cSparseIntegerOutrankingDigraphs_24cQuantilesRanking
       __Pyx_XDECREF(__pyx_t_5); __pyx_t_5 = 0;
       __Pyx_XDECREF(__pyx_t_6); __pyx_t_6 = 0;
 
-      /* "cSparseIntegerOutrankingDigraphs.pyx":2930
+      /* "cSparseIntegerOutrankingDigraphs.pyx":2939
  *             try:
  *                 criterionName = critc['name']
  *             except:             # <<<<<<<<<<<<<<
@@ -59848,12 +59984,12 @@ static PyObject *__pyx_pf_32cSparseIntegerOutrankingDigraphs_24cQuantilesRanking
  */
       /*except:*/ {
         __Pyx_AddTraceback("cSparseIntegerOutrankingDigraphs.cQuantilesRankingDigraph.showCriteria", __pyx_clineno, __pyx_lineno, __pyx_filename);
-        if (__Pyx_GetException(&__pyx_t_6, &__pyx_t_5, &__pyx_t_1) < 0) __PYX_ERR(0, 2930, __pyx_L17_except_error)
+        if (__Pyx_GetException(&__pyx_t_6, &__pyx_t_5, &__pyx_t_1) < 0) __PYX_ERR(0, 2939, __pyx_L17_except_error)
         __Pyx_XGOTREF(__pyx_t_6);
         __Pyx_XGOTREF(__pyx_t_5);
         __Pyx_XGOTREF(__pyx_t_1);
 
-        /* "cSparseIntegerOutrankingDigraphs.pyx":2931
+        /* "cSparseIntegerOutrankingDigraphs.pyx":2940
  *                 criterionName = critc['name']
  *             except:
  *                 criterionName = ''             # <<<<<<<<<<<<<<
@@ -59868,7 +60004,7 @@ static PyObject *__pyx_pf_32cSparseIntegerOutrankingDigraphs_24cQuantilesRanking
         goto __pyx_L16_exception_handled;
       }
 
-      /* "cSparseIntegerOutrankingDigraphs.pyx":2928
+      /* "cSparseIntegerOutrankingDigraphs.pyx":2937
  *         for c in criteriaList:
  *             critc = self.criteria[c]
  *             try:             # <<<<<<<<<<<<<<
@@ -59889,51 +60025,51 @@ static PyObject *__pyx_pf_32cSparseIntegerOutrankingDigraphs_24cQuantilesRanking
       __pyx_L22_try_end:;
     }
 
-    /* "cSparseIntegerOutrankingDigraphs.pyx":2932
+    /* "cSparseIntegerOutrankingDigraphs.pyx":2941
  *             except:
  *                 criterionName = ''
  *             print(c, repr(criterionName))             # <<<<<<<<<<<<<<
  *             print('  Scale =', critc['scale'])
  *             if IntegerWeights:
  */
-    __pyx_t_1 = PyObject_Repr(__pyx_v_criterionName); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 2932, __pyx_L1_error)
+    __pyx_t_1 = PyObject_Repr(__pyx_v_criterionName); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 2941, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_1);
-    __pyx_t_5 = PyTuple_New(2); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 2932, __pyx_L1_error)
+    __pyx_t_5 = PyTuple_New(2); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 2941, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_5);
     __Pyx_INCREF(__pyx_v_c);
     __Pyx_GIVEREF(__pyx_v_c);
-    if (__Pyx_PyTuple_SET_ITEM(__pyx_t_5, 0, __pyx_v_c)) __PYX_ERR(0, 2932, __pyx_L1_error);
+    if (__Pyx_PyTuple_SET_ITEM(__pyx_t_5, 0, __pyx_v_c)) __PYX_ERR(0, 2941, __pyx_L1_error);
     __Pyx_GIVEREF(__pyx_t_1);
-    if (__Pyx_PyTuple_SET_ITEM(__pyx_t_5, 1, __pyx_t_1)) __PYX_ERR(0, 2932, __pyx_L1_error);
+    if (__Pyx_PyTuple_SET_ITEM(__pyx_t_5, 1, __pyx_t_1)) __PYX_ERR(0, 2941, __pyx_L1_error);
     __pyx_t_1 = 0;
-    __pyx_t_1 = __Pyx_PyObject_Call(__pyx_builtin_print, __pyx_t_5, NULL); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 2932, __pyx_L1_error)
+    __pyx_t_1 = __Pyx_PyObject_Call(__pyx_builtin_print, __pyx_t_5, NULL); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 2941, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_1);
     __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
     __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
 
-    /* "cSparseIntegerOutrankingDigraphs.pyx":2933
+    /* "cSparseIntegerOutrankingDigraphs.pyx":2942
  *                 criterionName = ''
  *             print(c, repr(criterionName))
  *             print('  Scale =', critc['scale'])             # <<<<<<<<<<<<<<
  *             if IntegerWeights:
  *                 print('  Weight = %d ' % (critc['weight']))
  */
-    __pyx_t_1 = __Pyx_PyObject_Dict_GetItem(__pyx_v_critc, __pyx_n_u_scale); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 2933, __pyx_L1_error)
+    __pyx_t_1 = __Pyx_PyObject_Dict_GetItem(__pyx_v_critc, __pyx_n_u_scale); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 2942, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_1);
-    __pyx_t_5 = PyTuple_New(2); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 2933, __pyx_L1_error)
+    __pyx_t_5 = PyTuple_New(2); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 2942, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_5);
     __Pyx_INCREF(__pyx_kp_u_Scale);
     __Pyx_GIVEREF(__pyx_kp_u_Scale);
-    if (__Pyx_PyTuple_SET_ITEM(__pyx_t_5, 0, __pyx_kp_u_Scale)) __PYX_ERR(0, 2933, __pyx_L1_error);
+    if (__Pyx_PyTuple_SET_ITEM(__pyx_t_5, 0, __pyx_kp_u_Scale)) __PYX_ERR(0, 2942, __pyx_L1_error);
     __Pyx_GIVEREF(__pyx_t_1);
-    if (__Pyx_PyTuple_SET_ITEM(__pyx_t_5, 1, __pyx_t_1)) __PYX_ERR(0, 2933, __pyx_L1_error);
+    if (__Pyx_PyTuple_SET_ITEM(__pyx_t_5, 1, __pyx_t_1)) __PYX_ERR(0, 2942, __pyx_L1_error);
     __pyx_t_1 = 0;
-    __pyx_t_1 = __Pyx_PyObject_Call(__pyx_builtin_print, __pyx_t_5, NULL); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 2933, __pyx_L1_error)
+    __pyx_t_1 = __Pyx_PyObject_Call(__pyx_builtin_print, __pyx_t_5, NULL); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 2942, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_1);
     __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
     __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
 
-    /* "cSparseIntegerOutrankingDigraphs.pyx":2934
+    /* "cSparseIntegerOutrankingDigraphs.pyx":2943
  *             print(c, repr(criterionName))
  *             print('  Scale =', critc['scale'])
  *             if IntegerWeights:             # <<<<<<<<<<<<<<
@@ -59942,24 +60078,24 @@ static PyObject *__pyx_pf_32cSparseIntegerOutrankingDigraphs_24cQuantilesRanking
  */
     if (__pyx_v_IntegerWeights) {
 
-      /* "cSparseIntegerOutrankingDigraphs.pyx":2935
+      /* "cSparseIntegerOutrankingDigraphs.pyx":2944
  *             print('  Scale =', critc['scale'])
  *             if IntegerWeights:
  *                 print('  Weight = %d ' % (critc['weight']))             # <<<<<<<<<<<<<<
  *             else:
  *                 weightg = critc['weight']/sumWeights
  */
-      __pyx_t_1 = __Pyx_PyObject_Dict_GetItem(__pyx_v_critc, __pyx_n_u_weight); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 2935, __pyx_L1_error)
+      __pyx_t_1 = __Pyx_PyObject_Dict_GetItem(__pyx_v_critc, __pyx_n_u_weight); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 2944, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_1);
-      __pyx_t_5 = __Pyx_PyUnicode_FormatSafe(__pyx_kp_u_Weight_d, __pyx_t_1); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 2935, __pyx_L1_error)
+      __pyx_t_5 = __Pyx_PyUnicode_FormatSafe(__pyx_kp_u_Weight_d, __pyx_t_1); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 2944, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_5);
       __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
-      __pyx_t_1 = __Pyx_PyObject_CallOneArg(__pyx_builtin_print, __pyx_t_5); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 2935, __pyx_L1_error)
+      __pyx_t_1 = __Pyx_PyObject_CallOneArg(__pyx_builtin_print, __pyx_t_5); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 2944, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_1);
       __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
       __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
 
-      /* "cSparseIntegerOutrankingDigraphs.pyx":2934
+      /* "cSparseIntegerOutrankingDigraphs.pyx":2943
  *             print(c, repr(criterionName))
  *             print('  Scale =', critc['scale'])
  *             if IntegerWeights:             # <<<<<<<<<<<<<<
@@ -59969,7 +60105,7 @@ static PyObject *__pyx_pf_32cSparseIntegerOutrankingDigraphs_24cQuantilesRanking
       goto __pyx_L25;
     }
 
-    /* "cSparseIntegerOutrankingDigraphs.pyx":2937
+    /* "cSparseIntegerOutrankingDigraphs.pyx":2946
  *                 print('  Weight = %d ' % (critc['weight']))
  *             else:
  *                 weightg = critc['weight']/sumWeights             # <<<<<<<<<<<<<<
@@ -59977,34 +60113,34 @@ static PyObject *__pyx_pf_32cSparseIntegerOutrankingDigraphs_24cQuantilesRanking
  *             try:
  */
     /*else*/ {
-      __pyx_t_1 = __Pyx_PyObject_Dict_GetItem(__pyx_v_critc, __pyx_n_u_weight); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 2937, __pyx_L1_error)
+      __pyx_t_1 = __Pyx_PyObject_Dict_GetItem(__pyx_v_critc, __pyx_n_u_weight); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 2946, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_1);
-      __pyx_t_5 = __Pyx_PyInt_From_int(__pyx_v_sumWeights); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 2937, __pyx_L1_error)
+      __pyx_t_5 = __Pyx_PyInt_From_int(__pyx_v_sumWeights); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 2946, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_5);
-      __pyx_t_6 = __Pyx_PyNumber_Divide(__pyx_t_1, __pyx_t_5); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 2937, __pyx_L1_error)
+      __pyx_t_6 = __Pyx_PyNumber_Divide(__pyx_t_1, __pyx_t_5); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 2946, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_6);
       __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
       __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
       __Pyx_XDECREF_SET(__pyx_v_weightg, __pyx_t_6);
       __pyx_t_6 = 0;
 
-      /* "cSparseIntegerOutrankingDigraphs.pyx":2938
+      /* "cSparseIntegerOutrankingDigraphs.pyx":2947
  *             else:
  *                 weightg = critc['weight']/sumWeights
  *                 print('  Weight = %.3f ' % (weightg))             # <<<<<<<<<<<<<<
  *             try:
  *                 for th in critc['thresholds']:
  */
-      __pyx_t_6 = __Pyx_PyUnicode_FormatSafe(__pyx_kp_u_Weight_3f, __pyx_v_weightg); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 2938, __pyx_L1_error)
+      __pyx_t_6 = __Pyx_PyUnicode_FormatSafe(__pyx_kp_u_Weight_3f, __pyx_v_weightg); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 2947, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_6);
-      __pyx_t_5 = __Pyx_PyObject_CallOneArg(__pyx_builtin_print, __pyx_t_6); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 2938, __pyx_L1_error)
+      __pyx_t_5 = __Pyx_PyObject_CallOneArg(__pyx_builtin_print, __pyx_t_6); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 2947, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_5);
       __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
       __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
     }
     __pyx_L25:;
 
-    /* "cSparseIntegerOutrankingDigraphs.pyx":2939
+    /* "cSparseIntegerOutrankingDigraphs.pyx":2948
  *                 weightg = critc['weight']/sumWeights
  *                 print('  Weight = %.3f ' % (weightg))
  *             try:             # <<<<<<<<<<<<<<
@@ -60020,23 +60156,23 @@ static PyObject *__pyx_pf_32cSparseIntegerOutrankingDigraphs_24cQuantilesRanking
       __Pyx_XGOTREF(__pyx_t_9);
       /*try:*/ {
 
-        /* "cSparseIntegerOutrankingDigraphs.pyx":2940
+        /* "cSparseIntegerOutrankingDigraphs.pyx":2949
  *                 print('  Weight = %.3f ' % (weightg))
  *             try:
  *                 for th in critc['thresholds']:             # <<<<<<<<<<<<<<
  *                     if Debug:
  *                         print('-->>>', th,critc['thresholds'][th][0],
  */
-        __pyx_t_5 = __Pyx_PyObject_Dict_GetItem(__pyx_v_critc, __pyx_n_u_thresholds); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 2940, __pyx_L26_error)
+        __pyx_t_5 = __Pyx_PyObject_Dict_GetItem(__pyx_v_critc, __pyx_n_u_thresholds); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 2949, __pyx_L26_error)
         __Pyx_GOTREF(__pyx_t_5);
         if (likely(PyList_CheckExact(__pyx_t_5)) || PyTuple_CheckExact(__pyx_t_5)) {
           __pyx_t_6 = __pyx_t_5; __Pyx_INCREF(__pyx_t_6);
           __pyx_t_12 = 0;
           __pyx_t_4 = NULL;
         } else {
-          __pyx_t_12 = -1; __pyx_t_6 = PyObject_GetIter(__pyx_t_5); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 2940, __pyx_L26_error)
+          __pyx_t_12 = -1; __pyx_t_6 = PyObject_GetIter(__pyx_t_5); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 2949, __pyx_L26_error)
           __Pyx_GOTREF(__pyx_t_6);
-          __pyx_t_4 = __Pyx_PyObject_GetIterNextFunc(__pyx_t_6); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 2940, __pyx_L26_error)
+          __pyx_t_4 = __Pyx_PyObject_GetIterNextFunc(__pyx_t_6); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 2949, __pyx_L26_error)
         }
         __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
         for (;;) {
@@ -60045,28 +60181,28 @@ static PyObject *__pyx_pf_32cSparseIntegerOutrankingDigraphs_24cQuantilesRanking
               {
                 Py_ssize_t __pyx_temp = __Pyx_PyList_GET_SIZE(__pyx_t_6);
                 #if !CYTHON_ASSUME_SAFE_MACROS
-                if (unlikely((__pyx_temp < 0))) __PYX_ERR(0, 2940, __pyx_L26_error)
+                if (unlikely((__pyx_temp < 0))) __PYX_ERR(0, 2949, __pyx_L26_error)
                 #endif
                 if (__pyx_t_12 >= __pyx_temp) break;
               }
               #if CYTHON_ASSUME_SAFE_MACROS && !CYTHON_AVOID_BORROWED_REFS
-              __pyx_t_5 = PyList_GET_ITEM(__pyx_t_6, __pyx_t_12); __Pyx_INCREF(__pyx_t_5); __pyx_t_12++; if (unlikely((0 < 0))) __PYX_ERR(0, 2940, __pyx_L26_error)
+              __pyx_t_5 = PyList_GET_ITEM(__pyx_t_6, __pyx_t_12); __Pyx_INCREF(__pyx_t_5); __pyx_t_12++; if (unlikely((0 < 0))) __PYX_ERR(0, 2949, __pyx_L26_error)
               #else
-              __pyx_t_5 = __Pyx_PySequence_ITEM(__pyx_t_6, __pyx_t_12); __pyx_t_12++; if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 2940, __pyx_L26_error)
+              __pyx_t_5 = __Pyx_PySequence_ITEM(__pyx_t_6, __pyx_t_12); __pyx_t_12++; if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 2949, __pyx_L26_error)
               __Pyx_GOTREF(__pyx_t_5);
               #endif
             } else {
               {
                 Py_ssize_t __pyx_temp = __Pyx_PyTuple_GET_SIZE(__pyx_t_6);
                 #if !CYTHON_ASSUME_SAFE_MACROS
-                if (unlikely((__pyx_temp < 0))) __PYX_ERR(0, 2940, __pyx_L26_error)
+                if (unlikely((__pyx_temp < 0))) __PYX_ERR(0, 2949, __pyx_L26_error)
                 #endif
                 if (__pyx_t_12 >= __pyx_temp) break;
               }
               #if CYTHON_ASSUME_SAFE_MACROS && !CYTHON_AVOID_BORROWED_REFS
-              __pyx_t_5 = PyTuple_GET_ITEM(__pyx_t_6, __pyx_t_12); __Pyx_INCREF(__pyx_t_5); __pyx_t_12++; if (unlikely((0 < 0))) __PYX_ERR(0, 2940, __pyx_L26_error)
+              __pyx_t_5 = PyTuple_GET_ITEM(__pyx_t_6, __pyx_t_12); __Pyx_INCREF(__pyx_t_5); __pyx_t_12++; if (unlikely((0 < 0))) __PYX_ERR(0, 2949, __pyx_L26_error)
               #else
-              __pyx_t_5 = __Pyx_PySequence_ITEM(__pyx_t_6, __pyx_t_12); __pyx_t_12++; if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 2940, __pyx_L26_error)
+              __pyx_t_5 = __Pyx_PySequence_ITEM(__pyx_t_6, __pyx_t_12); __pyx_t_12++; if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 2949, __pyx_L26_error)
               __Pyx_GOTREF(__pyx_t_5);
               #endif
             }
@@ -60076,7 +60212,7 @@ static PyObject *__pyx_pf_32cSparseIntegerOutrankingDigraphs_24cQuantilesRanking
               PyObject* exc_type = PyErr_Occurred();
               if (exc_type) {
                 if (likely(__Pyx_PyErr_GivenExceptionMatches(exc_type, PyExc_StopIteration))) PyErr_Clear();
-                else __PYX_ERR(0, 2940, __pyx_L26_error)
+                else __PYX_ERR(0, 2949, __pyx_L26_error)
               }
               break;
             }
@@ -60085,7 +60221,7 @@ static PyObject *__pyx_pf_32cSparseIntegerOutrankingDigraphs_24cQuantilesRanking
           __Pyx_XDECREF_SET(__pyx_v_th, __pyx_t_5);
           __pyx_t_5 = 0;
 
-          /* "cSparseIntegerOutrankingDigraphs.pyx":2941
+          /* "cSparseIntegerOutrankingDigraphs.pyx":2950
  *             try:
  *                 for th in critc['thresholds']:
  *                     if Debug:             # <<<<<<<<<<<<<<
@@ -60094,65 +60230,65 @@ static PyObject *__pyx_pf_32cSparseIntegerOutrankingDigraphs_24cQuantilesRanking
  */
           if (__pyx_v_Debug) {
 
-            /* "cSparseIntegerOutrankingDigraphs.pyx":2942
+            /* "cSparseIntegerOutrankingDigraphs.pyx":2951
  *                 for th in critc['thresholds']:
  *                     if Debug:
  *                         print('-->>>', th,critc['thresholds'][th][0],             # <<<<<<<<<<<<<<
  *                               critc['thresholds'][th][1])
  *                     print('  Threshold %s : %.2f + %.2fx' %\
  */
-            __pyx_t_5 = __Pyx_PyObject_Dict_GetItem(__pyx_v_critc, __pyx_n_u_thresholds); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 2942, __pyx_L26_error)
+            __pyx_t_5 = __Pyx_PyObject_Dict_GetItem(__pyx_v_critc, __pyx_n_u_thresholds); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 2951, __pyx_L26_error)
             __Pyx_GOTREF(__pyx_t_5);
-            __pyx_t_1 = __Pyx_PyObject_GetItem(__pyx_t_5, __pyx_v_th); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 2942, __pyx_L26_error)
+            __pyx_t_1 = __Pyx_PyObject_GetItem(__pyx_t_5, __pyx_v_th); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 2951, __pyx_L26_error)
             __Pyx_GOTREF(__pyx_t_1);
             __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
-            __pyx_t_5 = __Pyx_GetItemInt(__pyx_t_1, 0, long, 1, __Pyx_PyInt_From_long, 0, 0, 1); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 2942, __pyx_L26_error)
+            __pyx_t_5 = __Pyx_GetItemInt(__pyx_t_1, 0, long, 1, __Pyx_PyInt_From_long, 0, 0, 1); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 2951, __pyx_L26_error)
             __Pyx_GOTREF(__pyx_t_5);
             __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
 
-            /* "cSparseIntegerOutrankingDigraphs.pyx":2943
+            /* "cSparseIntegerOutrankingDigraphs.pyx":2952
  *                     if Debug:
  *                         print('-->>>', th,critc['thresholds'][th][0],
  *                               critc['thresholds'][th][1])             # <<<<<<<<<<<<<<
  *                     print('  Threshold %s : %.2f + %.2fx' %\
  *                           (th,critc['thresholds'][th][0],
  */
-            __pyx_t_1 = __Pyx_PyObject_Dict_GetItem(__pyx_v_critc, __pyx_n_u_thresholds); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 2943, __pyx_L26_error)
+            __pyx_t_1 = __Pyx_PyObject_Dict_GetItem(__pyx_v_critc, __pyx_n_u_thresholds); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 2952, __pyx_L26_error)
             __Pyx_GOTREF(__pyx_t_1);
-            __pyx_t_13 = __Pyx_PyObject_GetItem(__pyx_t_1, __pyx_v_th); if (unlikely(!__pyx_t_13)) __PYX_ERR(0, 2943, __pyx_L26_error)
+            __pyx_t_13 = __Pyx_PyObject_GetItem(__pyx_t_1, __pyx_v_th); if (unlikely(!__pyx_t_13)) __PYX_ERR(0, 2952, __pyx_L26_error)
             __Pyx_GOTREF(__pyx_t_13);
             __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
-            __pyx_t_1 = __Pyx_GetItemInt(__pyx_t_13, 1, long, 1, __Pyx_PyInt_From_long, 0, 0, 1); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 2943, __pyx_L26_error)
+            __pyx_t_1 = __Pyx_GetItemInt(__pyx_t_13, 1, long, 1, __Pyx_PyInt_From_long, 0, 0, 1); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 2952, __pyx_L26_error)
             __Pyx_GOTREF(__pyx_t_1);
             __Pyx_DECREF(__pyx_t_13); __pyx_t_13 = 0;
 
-            /* "cSparseIntegerOutrankingDigraphs.pyx":2942
+            /* "cSparseIntegerOutrankingDigraphs.pyx":2951
  *                 for th in critc['thresholds']:
  *                     if Debug:
  *                         print('-->>>', th,critc['thresholds'][th][0],             # <<<<<<<<<<<<<<
  *                               critc['thresholds'][th][1])
  *                     print('  Threshold %s : %.2f + %.2fx' %\
  */
-            __pyx_t_13 = PyTuple_New(4); if (unlikely(!__pyx_t_13)) __PYX_ERR(0, 2942, __pyx_L26_error)
+            __pyx_t_13 = PyTuple_New(4); if (unlikely(!__pyx_t_13)) __PYX_ERR(0, 2951, __pyx_L26_error)
             __Pyx_GOTREF(__pyx_t_13);
             __Pyx_INCREF(__pyx_kp_u__59);
             __Pyx_GIVEREF(__pyx_kp_u__59);
-            if (__Pyx_PyTuple_SET_ITEM(__pyx_t_13, 0, __pyx_kp_u__59)) __PYX_ERR(0, 2942, __pyx_L26_error);
+            if (__Pyx_PyTuple_SET_ITEM(__pyx_t_13, 0, __pyx_kp_u__59)) __PYX_ERR(0, 2951, __pyx_L26_error);
             __Pyx_INCREF(__pyx_v_th);
             __Pyx_GIVEREF(__pyx_v_th);
-            if (__Pyx_PyTuple_SET_ITEM(__pyx_t_13, 1, __pyx_v_th)) __PYX_ERR(0, 2942, __pyx_L26_error);
+            if (__Pyx_PyTuple_SET_ITEM(__pyx_t_13, 1, __pyx_v_th)) __PYX_ERR(0, 2951, __pyx_L26_error);
             __Pyx_GIVEREF(__pyx_t_5);
-            if (__Pyx_PyTuple_SET_ITEM(__pyx_t_13, 2, __pyx_t_5)) __PYX_ERR(0, 2942, __pyx_L26_error);
+            if (__Pyx_PyTuple_SET_ITEM(__pyx_t_13, 2, __pyx_t_5)) __PYX_ERR(0, 2951, __pyx_L26_error);
             __Pyx_GIVEREF(__pyx_t_1);
-            if (__Pyx_PyTuple_SET_ITEM(__pyx_t_13, 3, __pyx_t_1)) __PYX_ERR(0, 2942, __pyx_L26_error);
+            if (__Pyx_PyTuple_SET_ITEM(__pyx_t_13, 3, __pyx_t_1)) __PYX_ERR(0, 2951, __pyx_L26_error);
             __pyx_t_5 = 0;
             __pyx_t_1 = 0;
-            __pyx_t_1 = __Pyx_PyObject_Call(__pyx_builtin_print, __pyx_t_13, NULL); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 2942, __pyx_L26_error)
+            __pyx_t_1 = __Pyx_PyObject_Call(__pyx_builtin_print, __pyx_t_13, NULL); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 2951, __pyx_L26_error)
             __Pyx_GOTREF(__pyx_t_1);
             __Pyx_DECREF(__pyx_t_13); __pyx_t_13 = 0;
             __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
 
-            /* "cSparseIntegerOutrankingDigraphs.pyx":2941
+            /* "cSparseIntegerOutrankingDigraphs.pyx":2950
  *             try:
  *                 for th in critc['thresholds']:
  *                     if Debug:             # <<<<<<<<<<<<<<
@@ -60161,14 +60297,14 @@ static PyObject *__pyx_pf_32cSparseIntegerOutrankingDigraphs_24cQuantilesRanking
  */
           }
 
-          /* "cSparseIntegerOutrankingDigraphs.pyx":2944
+          /* "cSparseIntegerOutrankingDigraphs.pyx":2953
  *                         print('-->>>', th,critc['thresholds'][th][0],
  *                               critc['thresholds'][th][1])
  *                     print('  Threshold %s : %.2f + %.2fx' %\             # <<<<<<<<<<<<<<
  *                           (th,critc['thresholds'][th][0],
  *                            critc['thresholds'][th][1]), end=' ')
  */
-          __pyx_t_1 = PyTuple_New(7); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 2944, __pyx_L26_error)
+          __pyx_t_1 = PyTuple_New(7); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 2953, __pyx_L26_error)
           __Pyx_GOTREF(__pyx_t_1);
           __pyx_t_14 = 0;
           __pyx_t_15 = 127;
@@ -60177,14 +60313,14 @@ static PyObject *__pyx_pf_32cSparseIntegerOutrankingDigraphs_24cQuantilesRanking
           __Pyx_GIVEREF(__pyx_kp_u_Threshold);
           PyTuple_SET_ITEM(__pyx_t_1, 0, __pyx_kp_u_Threshold);
 
-          /* "cSparseIntegerOutrankingDigraphs.pyx":2945
+          /* "cSparseIntegerOutrankingDigraphs.pyx":2954
  *                               critc['thresholds'][th][1])
  *                     print('  Threshold %s : %.2f + %.2fx' %\
  *                           (th,critc['thresholds'][th][0],             # <<<<<<<<<<<<<<
  *                            critc['thresholds'][th][1]), end=' ')
  *             except:
  */
-          __pyx_t_13 = __Pyx_PyObject_FormatSimpleAndDecref(PyObject_Unicode(__pyx_v_th), __pyx_empty_unicode); if (unlikely(!__pyx_t_13)) __PYX_ERR(0, 2945, __pyx_L26_error)
+          __pyx_t_13 = __Pyx_PyObject_FormatSimpleAndDecref(PyObject_Unicode(__pyx_v_th), __pyx_empty_unicode); if (unlikely(!__pyx_t_13)) __PYX_ERR(0, 2954, __pyx_L26_error)
           __Pyx_GOTREF(__pyx_t_13);
           __pyx_t_15 = (__Pyx_PyUnicode_MAX_CHAR_VALUE(__pyx_t_13) > __pyx_t_15) ? __Pyx_PyUnicode_MAX_CHAR_VALUE(__pyx_t_13) : __pyx_t_15;
           __pyx_t_14 += __Pyx_PyUnicode_GET_LENGTH(__pyx_t_13);
@@ -60195,15 +60331,15 @@ static PyObject *__pyx_pf_32cSparseIntegerOutrankingDigraphs_24cQuantilesRanking
           __pyx_t_14 += 3;
           __Pyx_GIVEREF(__pyx_kp_u__60);
           PyTuple_SET_ITEM(__pyx_t_1, 2, __pyx_kp_u__60);
-          __pyx_t_13 = __Pyx_PyObject_Dict_GetItem(__pyx_v_critc, __pyx_n_u_thresholds); if (unlikely(!__pyx_t_13)) __PYX_ERR(0, 2945, __pyx_L26_error)
+          __pyx_t_13 = __Pyx_PyObject_Dict_GetItem(__pyx_v_critc, __pyx_n_u_thresholds); if (unlikely(!__pyx_t_13)) __PYX_ERR(0, 2954, __pyx_L26_error)
           __Pyx_GOTREF(__pyx_t_13);
-          __pyx_t_5 = __Pyx_PyObject_GetItem(__pyx_t_13, __pyx_v_th); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 2945, __pyx_L26_error)
+          __pyx_t_5 = __Pyx_PyObject_GetItem(__pyx_t_13, __pyx_v_th); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 2954, __pyx_L26_error)
           __Pyx_GOTREF(__pyx_t_5);
           __Pyx_DECREF(__pyx_t_13); __pyx_t_13 = 0;
-          __pyx_t_13 = __Pyx_GetItemInt(__pyx_t_5, 0, long, 1, __Pyx_PyInt_From_long, 0, 0, 1); if (unlikely(!__pyx_t_13)) __PYX_ERR(0, 2945, __pyx_L26_error)
+          __pyx_t_13 = __Pyx_GetItemInt(__pyx_t_5, 0, long, 1, __Pyx_PyInt_From_long, 0, 0, 1); if (unlikely(!__pyx_t_13)) __PYX_ERR(0, 2954, __pyx_L26_error)
           __Pyx_GOTREF(__pyx_t_13);
           __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
-          __pyx_t_5 = __Pyx_PyObject_Format(__pyx_t_13, __pyx_kp_u_2f); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 2945, __pyx_L26_error)
+          __pyx_t_5 = __Pyx_PyObject_Format(__pyx_t_13, __pyx_kp_u_2f); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 2954, __pyx_L26_error)
           __Pyx_GOTREF(__pyx_t_5);
           __Pyx_DECREF(__pyx_t_13); __pyx_t_13 = 0;
           __pyx_t_15 = (__Pyx_PyUnicode_MAX_CHAR_VALUE(__pyx_t_5) > __pyx_t_15) ? __Pyx_PyUnicode_MAX_CHAR_VALUE(__pyx_t_5) : __pyx_t_15;
@@ -60216,22 +60352,22 @@ static PyObject *__pyx_pf_32cSparseIntegerOutrankingDigraphs_24cQuantilesRanking
           __Pyx_GIVEREF(__pyx_kp_u__61);
           PyTuple_SET_ITEM(__pyx_t_1, 4, __pyx_kp_u__61);
 
-          /* "cSparseIntegerOutrankingDigraphs.pyx":2946
+          /* "cSparseIntegerOutrankingDigraphs.pyx":2955
  *                     print('  Threshold %s : %.2f + %.2fx' %\
  *                           (th,critc['thresholds'][th][0],
  *                            critc['thresholds'][th][1]), end=' ')             # <<<<<<<<<<<<<<
  *             except:
  *                 pass
  */
-          __pyx_t_5 = __Pyx_PyObject_Dict_GetItem(__pyx_v_critc, __pyx_n_u_thresholds); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 2946, __pyx_L26_error)
+          __pyx_t_5 = __Pyx_PyObject_Dict_GetItem(__pyx_v_critc, __pyx_n_u_thresholds); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 2955, __pyx_L26_error)
           __Pyx_GOTREF(__pyx_t_5);
-          __pyx_t_13 = __Pyx_PyObject_GetItem(__pyx_t_5, __pyx_v_th); if (unlikely(!__pyx_t_13)) __PYX_ERR(0, 2946, __pyx_L26_error)
+          __pyx_t_13 = __Pyx_PyObject_GetItem(__pyx_t_5, __pyx_v_th); if (unlikely(!__pyx_t_13)) __PYX_ERR(0, 2955, __pyx_L26_error)
           __Pyx_GOTREF(__pyx_t_13);
           __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
-          __pyx_t_5 = __Pyx_GetItemInt(__pyx_t_13, 1, long, 1, __Pyx_PyInt_From_long, 0, 0, 1); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 2946, __pyx_L26_error)
+          __pyx_t_5 = __Pyx_GetItemInt(__pyx_t_13, 1, long, 1, __Pyx_PyInt_From_long, 0, 0, 1); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 2955, __pyx_L26_error)
           __Pyx_GOTREF(__pyx_t_5);
           __Pyx_DECREF(__pyx_t_13); __pyx_t_13 = 0;
-          __pyx_t_13 = __Pyx_PyObject_Format(__pyx_t_5, __pyx_kp_u_2f); if (unlikely(!__pyx_t_13)) __PYX_ERR(0, 2946, __pyx_L26_error)
+          __pyx_t_13 = __Pyx_PyObject_Format(__pyx_t_5, __pyx_kp_u_2f); if (unlikely(!__pyx_t_13)) __PYX_ERR(0, 2955, __pyx_L26_error)
           __Pyx_GOTREF(__pyx_t_13);
           __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
           __pyx_t_15 = (__Pyx_PyUnicode_MAX_CHAR_VALUE(__pyx_t_13) > __pyx_t_15) ? __Pyx_PyUnicode_MAX_CHAR_VALUE(__pyx_t_13) : __pyx_t_15;
@@ -60244,47 +60380,47 @@ static PyObject *__pyx_pf_32cSparseIntegerOutrankingDigraphs_24cQuantilesRanking
           __Pyx_GIVEREF(__pyx_n_u_x);
           PyTuple_SET_ITEM(__pyx_t_1, 6, __pyx_n_u_x);
 
-          /* "cSparseIntegerOutrankingDigraphs.pyx":2944
+          /* "cSparseIntegerOutrankingDigraphs.pyx":2953
  *                         print('-->>>', th,critc['thresholds'][th][0],
  *                               critc['thresholds'][th][1])
  *                     print('  Threshold %s : %.2f + %.2fx' %\             # <<<<<<<<<<<<<<
  *                           (th,critc['thresholds'][th][0],
  *                            critc['thresholds'][th][1]), end=' ')
  */
-          __pyx_t_13 = __Pyx_PyUnicode_Join(__pyx_t_1, 7, __pyx_t_14, __pyx_t_15); if (unlikely(!__pyx_t_13)) __PYX_ERR(0, 2944, __pyx_L26_error)
+          __pyx_t_13 = __Pyx_PyUnicode_Join(__pyx_t_1, 7, __pyx_t_14, __pyx_t_15); if (unlikely(!__pyx_t_13)) __PYX_ERR(0, 2953, __pyx_L26_error)
           __Pyx_GOTREF(__pyx_t_13);
           __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
-          __pyx_t_1 = PyTuple_New(1); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 2944, __pyx_L26_error)
+          __pyx_t_1 = PyTuple_New(1); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 2953, __pyx_L26_error)
           __Pyx_GOTREF(__pyx_t_1);
           __Pyx_GIVEREF(__pyx_t_13);
-          if (__Pyx_PyTuple_SET_ITEM(__pyx_t_1, 0, __pyx_t_13)) __PYX_ERR(0, 2944, __pyx_L26_error);
+          if (__Pyx_PyTuple_SET_ITEM(__pyx_t_1, 0, __pyx_t_13)) __PYX_ERR(0, 2953, __pyx_L26_error);
           __pyx_t_13 = 0;
 
-          /* "cSparseIntegerOutrankingDigraphs.pyx":2946
+          /* "cSparseIntegerOutrankingDigraphs.pyx":2955
  *                     print('  Threshold %s : %.2f + %.2fx' %\
  *                           (th,critc['thresholds'][th][0],
  *                            critc['thresholds'][th][1]), end=' ')             # <<<<<<<<<<<<<<
  *             except:
  *                 pass
  */
-          __pyx_t_13 = __Pyx_PyDict_NewPresized(1); if (unlikely(!__pyx_t_13)) __PYX_ERR(0, 2946, __pyx_L26_error)
+          __pyx_t_13 = __Pyx_PyDict_NewPresized(1); if (unlikely(!__pyx_t_13)) __PYX_ERR(0, 2955, __pyx_L26_error)
           __Pyx_GOTREF(__pyx_t_13);
-          if (PyDict_SetItem(__pyx_t_13, __pyx_n_s_end, __pyx_kp_u__28) < 0) __PYX_ERR(0, 2946, __pyx_L26_error)
+          if (PyDict_SetItem(__pyx_t_13, __pyx_n_s_end, __pyx_kp_u__28) < 0) __PYX_ERR(0, 2955, __pyx_L26_error)
 
-          /* "cSparseIntegerOutrankingDigraphs.pyx":2944
+          /* "cSparseIntegerOutrankingDigraphs.pyx":2953
  *                         print('-->>>', th,critc['thresholds'][th][0],
  *                               critc['thresholds'][th][1])
  *                     print('  Threshold %s : %.2f + %.2fx' %\             # <<<<<<<<<<<<<<
  *                           (th,critc['thresholds'][th][0],
  *                            critc['thresholds'][th][1]), end=' ')
  */
-          __pyx_t_5 = __Pyx_PyObject_Call(__pyx_builtin_print, __pyx_t_1, __pyx_t_13); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 2944, __pyx_L26_error)
+          __pyx_t_5 = __Pyx_PyObject_Call(__pyx_builtin_print, __pyx_t_1, __pyx_t_13); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 2953, __pyx_L26_error)
           __Pyx_GOTREF(__pyx_t_5);
           __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
           __Pyx_DECREF(__pyx_t_13); __pyx_t_13 = 0;
           __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
 
-          /* "cSparseIntegerOutrankingDigraphs.pyx":2940
+          /* "cSparseIntegerOutrankingDigraphs.pyx":2949
  *                 print('  Weight = %.3f ' % (weightg))
  *             try:
  *                 for th in critc['thresholds']:             # <<<<<<<<<<<<<<
@@ -60294,7 +60430,7 @@ static PyObject *__pyx_pf_32cSparseIntegerOutrankingDigraphs_24cQuantilesRanking
         }
         __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
 
-        /* "cSparseIntegerOutrankingDigraphs.pyx":2939
+        /* "cSparseIntegerOutrankingDigraphs.pyx":2948
  *                 weightg = critc['weight']/sumWeights
  *                 print('  Weight = %.3f ' % (weightg))
  *             try:             # <<<<<<<<<<<<<<
@@ -60312,7 +60448,7 @@ static PyObject *__pyx_pf_32cSparseIntegerOutrankingDigraphs_24cQuantilesRanking
       __Pyx_XDECREF(__pyx_t_5); __pyx_t_5 = 0;
       __Pyx_XDECREF(__pyx_t_6); __pyx_t_6 = 0;
 
-      /* "cSparseIntegerOutrankingDigraphs.pyx":2947
+      /* "cSparseIntegerOutrankingDigraphs.pyx":2956
  *                           (th,critc['thresholds'][th][0],
  *                            critc['thresholds'][th][1]), end=' ')
  *             except:             # <<<<<<<<<<<<<<
@@ -60331,18 +60467,18 @@ static PyObject *__pyx_pf_32cSparseIntegerOutrankingDigraphs_24cQuantilesRanking
       __pyx_L33_try_end:;
     }
 
-    /* "cSparseIntegerOutrankingDigraphs.pyx":2949
+    /* "cSparseIntegerOutrankingDigraphs.pyx":2958
  *             except:
  *                 pass
  *             print()             # <<<<<<<<<<<<<<
  * 
  *     def showComponents(self, direction='increasing'):
  */
-    __pyx_t_6 = __Pyx_PyObject_CallNoArg(__pyx_builtin_print); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 2949, __pyx_L1_error)
+    __pyx_t_6 = __Pyx_PyObject_CallNoArg(__pyx_builtin_print); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 2958, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_6);
     __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
 
-    /* "cSparseIntegerOutrankingDigraphs.pyx":2926
+    /* "cSparseIntegerOutrankingDigraphs.pyx":2935
  *         criteriaList = [c for c in self.criteria]
  *         criteriaList.sort()
  *         for c in criteriaList:             # <<<<<<<<<<<<<<
@@ -60352,7 +60488,7 @@ static PyObject *__pyx_pf_32cSparseIntegerOutrankingDigraphs_24cQuantilesRanking
   }
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
 
-  /* "cSparseIntegerOutrankingDigraphs.pyx":2911
+  /* "cSparseIntegerOutrankingDigraphs.pyx":2920
  *             print('%d: %s' % (x,self.actions[x]['name']) )
  * 
  *     def showCriteria(self, bint IntegerWeights=False, bint Debug=False):             # <<<<<<<<<<<<<<
@@ -60385,7 +60521,7 @@ static PyObject *__pyx_pf_32cSparseIntegerOutrankingDigraphs_24cQuantilesRanking
   return __pyx_r;
 }
 
-/* "cSparseIntegerOutrankingDigraphs.pyx":2951
+/* "cSparseIntegerOutrankingDigraphs.pyx":2960
  *             print()
  * 
  *     def showComponents(self, direction='increasing'):             # <<<<<<<<<<<<<<
@@ -60451,19 +60587,19 @@ PyObject *__pyx_args, PyObject *__pyx_kwds
           (void)__Pyx_Arg_NewRef_FASTCALL(values[0]);
           kw_args--;
         }
-        else if (unlikely(PyErr_Occurred())) __PYX_ERR(0, 2951, __pyx_L3_error)
+        else if (unlikely(PyErr_Occurred())) __PYX_ERR(0, 2960, __pyx_L3_error)
         else goto __pyx_L5_argtuple_error;
         CYTHON_FALLTHROUGH;
         case  1:
         if (kw_args > 0) {
           PyObject* value = __Pyx_GetKwValue_FASTCALL(__pyx_kwds, __pyx_kwvalues, __pyx_n_s_direction);
           if (value) { values[1] = __Pyx_Arg_NewRef_FASTCALL(value); kw_args--; }
-          else if (unlikely(PyErr_Occurred())) __PYX_ERR(0, 2951, __pyx_L3_error)
+          else if (unlikely(PyErr_Occurred())) __PYX_ERR(0, 2960, __pyx_L3_error)
         }
       }
       if (unlikely(kw_args > 0)) {
         const Py_ssize_t kwd_pos_args = __pyx_nargs;
-        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_kwvalues, __pyx_pyargnames, 0, values + 0, kwd_pos_args, "showComponents") < 0)) __PYX_ERR(0, 2951, __pyx_L3_error)
+        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_kwvalues, __pyx_pyargnames, 0, values + 0, kwd_pos_args, "showComponents") < 0)) __PYX_ERR(0, 2960, __pyx_L3_error)
       }
     } else {
       switch (__pyx_nargs) {
@@ -60479,7 +60615,7 @@ PyObject *__pyx_args, PyObject *__pyx_kwds
   }
   goto __pyx_L6_skip;
   __pyx_L5_argtuple_error:;
-  __Pyx_RaiseArgtupleInvalid("showComponents", 0, 1, 2, __pyx_nargs); __PYX_ERR(0, 2951, __pyx_L3_error)
+  __Pyx_RaiseArgtupleInvalid("showComponents", 0, 1, 2, __pyx_nargs); __PYX_ERR(0, 2960, __pyx_L3_error)
   __pyx_L6_skip:;
   goto __pyx_L4_argument_unpacking_done;
   __pyx_L3_error:;
@@ -60517,25 +60653,25 @@ static PyObject *__pyx_pf_32cSparseIntegerOutrankingDigraphs_24cQuantilesRanking
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("showComponents", 1);
 
-  /* "cSparseIntegerOutrankingDigraphs.pyx":2957
+  /* "cSparseIntegerOutrankingDigraphs.pyx":2966
  * 
  *         """
  *         self.showDecomposition(direction=direction)             # <<<<<<<<<<<<<<
  * 
  *     def showDecomposition(self, direction='decreasing'):
  */
-  __pyx_t_1 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_n_s_showDecomposition); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 2957, __pyx_L1_error)
+  __pyx_t_1 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_n_s_showDecomposition); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 2966, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
-  __pyx_t_2 = __Pyx_PyDict_NewPresized(1); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 2957, __pyx_L1_error)
+  __pyx_t_2 = __Pyx_PyDict_NewPresized(1); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 2966, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
-  if (PyDict_SetItem(__pyx_t_2, __pyx_n_s_direction, __pyx_v_direction) < 0) __PYX_ERR(0, 2957, __pyx_L1_error)
-  __pyx_t_3 = __Pyx_PyObject_Call(__pyx_t_1, __pyx_empty_tuple, __pyx_t_2); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 2957, __pyx_L1_error)
+  if (PyDict_SetItem(__pyx_t_2, __pyx_n_s_direction, __pyx_v_direction) < 0) __PYX_ERR(0, 2966, __pyx_L1_error)
+  __pyx_t_3 = __Pyx_PyObject_Call(__pyx_t_1, __pyx_empty_tuple, __pyx_t_2); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 2966, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_3);
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
   __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
 
-  /* "cSparseIntegerOutrankingDigraphs.pyx":2951
+  /* "cSparseIntegerOutrankingDigraphs.pyx":2960
  *             print()
  * 
  *     def showComponents(self, direction='increasing'):             # <<<<<<<<<<<<<<
@@ -60558,7 +60694,7 @@ static PyObject *__pyx_pf_32cSparseIntegerOutrankingDigraphs_24cQuantilesRanking
   return __pyx_r;
 }
 
-/* "cSparseIntegerOutrankingDigraphs.pyx":2959
+/* "cSparseIntegerOutrankingDigraphs.pyx":2968
  *         self.showDecomposition(direction=direction)
  * 
  *     def showDecomposition(self, direction='decreasing'):             # <<<<<<<<<<<<<<
@@ -60624,19 +60760,19 @@ PyObject *__pyx_args, PyObject *__pyx_kwds
           (void)__Pyx_Arg_NewRef_FASTCALL(values[0]);
           kw_args--;
         }
-        else if (unlikely(PyErr_Occurred())) __PYX_ERR(0, 2959, __pyx_L3_error)
+        else if (unlikely(PyErr_Occurred())) __PYX_ERR(0, 2968, __pyx_L3_error)
         else goto __pyx_L5_argtuple_error;
         CYTHON_FALLTHROUGH;
         case  1:
         if (kw_args > 0) {
           PyObject* value = __Pyx_GetKwValue_FASTCALL(__pyx_kwds, __pyx_kwvalues, __pyx_n_s_direction);
           if (value) { values[1] = __Pyx_Arg_NewRef_FASTCALL(value); kw_args--; }
-          else if (unlikely(PyErr_Occurred())) __PYX_ERR(0, 2959, __pyx_L3_error)
+          else if (unlikely(PyErr_Occurred())) __PYX_ERR(0, 2968, __pyx_L3_error)
         }
       }
       if (unlikely(kw_args > 0)) {
         const Py_ssize_t kwd_pos_args = __pyx_nargs;
-        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_kwvalues, __pyx_pyargnames, 0, values + 0, kwd_pos_args, "showDecomposition") < 0)) __PYX_ERR(0, 2959, __pyx_L3_error)
+        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_kwvalues, __pyx_pyargnames, 0, values + 0, kwd_pos_args, "showDecomposition") < 0)) __PYX_ERR(0, 2968, __pyx_L3_error)
       }
     } else {
       switch (__pyx_nargs) {
@@ -60652,7 +60788,7 @@ PyObject *__pyx_args, PyObject *__pyx_kwds
   }
   goto __pyx_L6_skip;
   __pyx_L5_argtuple_error:;
-  __Pyx_RaiseArgtupleInvalid("showDecomposition", 0, 1, 2, __pyx_nargs); __PYX_ERR(0, 2959, __pyx_L3_error)
+  __Pyx_RaiseArgtupleInvalid("showDecomposition", 0, 1, 2, __pyx_nargs); __PYX_ERR(0, 2968, __pyx_L3_error)
   __pyx_L6_skip:;
   goto __pyx_L4_argument_unpacking_done;
   __pyx_L3_error:;
@@ -60700,21 +60836,21 @@ static PyObject *__pyx_pf_32cSparseIntegerOutrankingDigraphs_24cQuantilesRanking
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("showDecomposition", 1);
 
-  /* "cSparseIntegerOutrankingDigraphs.pyx":2965
+  /* "cSparseIntegerOutrankingDigraphs.pyx":2974
  * 
  *         """
  *         print('*--- quantiles decomposition in %s order---*' % (direction) )             # <<<<<<<<<<<<<<
  *         #compKeys = [compKey for compKey in self.components.keys()]
  *         # the components are ordered from best (1) to worst (n)
  */
-  __pyx_t_1 = __Pyx_PyUnicode_FormatSafe(__pyx_kp_u_quantiles_decomposition_in_s_or, __pyx_v_direction); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 2965, __pyx_L1_error)
+  __pyx_t_1 = __Pyx_PyUnicode_FormatSafe(__pyx_kp_u_quantiles_decomposition_in_s_or, __pyx_v_direction); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 2974, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
-  __pyx_t_2 = __Pyx_PyObject_CallOneArg(__pyx_builtin_print, __pyx_t_1); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 2965, __pyx_L1_error)
+  __pyx_t_2 = __Pyx_PyObject_CallOneArg(__pyx_builtin_print, __pyx_t_1); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 2974, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
 
-  /* "cSparseIntegerOutrankingDigraphs.pyx":2968
+  /* "cSparseIntegerOutrankingDigraphs.pyx":2977
  *         #compKeys = [compKey for compKey in self.components.keys()]
  *         # the components are ordered from best (1) to worst (n)
  *         compKeys = [c for c in self.components]             # <<<<<<<<<<<<<<
@@ -60722,18 +60858,18 @@ static PyObject *__pyx_pf_32cSparseIntegerOutrankingDigraphs_24cQuantilesRanking
  *             compKeys.sort(reverse=True)
  */
   { /* enter inner scope */
-    __pyx_t_2 = PyList_New(0); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 2968, __pyx_L5_error)
+    __pyx_t_2 = PyList_New(0); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 2977, __pyx_L5_error)
     __Pyx_GOTREF(__pyx_t_2);
-    __pyx_t_1 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_n_s_components); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 2968, __pyx_L5_error)
+    __pyx_t_1 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_n_s_components); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 2977, __pyx_L5_error)
     __Pyx_GOTREF(__pyx_t_1);
     if (likely(PyList_CheckExact(__pyx_t_1)) || PyTuple_CheckExact(__pyx_t_1)) {
       __pyx_t_3 = __pyx_t_1; __Pyx_INCREF(__pyx_t_3);
       __pyx_t_4 = 0;
       __pyx_t_5 = NULL;
     } else {
-      __pyx_t_4 = -1; __pyx_t_3 = PyObject_GetIter(__pyx_t_1); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 2968, __pyx_L5_error)
+      __pyx_t_4 = -1; __pyx_t_3 = PyObject_GetIter(__pyx_t_1); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 2977, __pyx_L5_error)
       __Pyx_GOTREF(__pyx_t_3);
-      __pyx_t_5 = __Pyx_PyObject_GetIterNextFunc(__pyx_t_3); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 2968, __pyx_L5_error)
+      __pyx_t_5 = __Pyx_PyObject_GetIterNextFunc(__pyx_t_3); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 2977, __pyx_L5_error)
     }
     __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
     for (;;) {
@@ -60742,28 +60878,28 @@ static PyObject *__pyx_pf_32cSparseIntegerOutrankingDigraphs_24cQuantilesRanking
           {
             Py_ssize_t __pyx_temp = __Pyx_PyList_GET_SIZE(__pyx_t_3);
             #if !CYTHON_ASSUME_SAFE_MACROS
-            if (unlikely((__pyx_temp < 0))) __PYX_ERR(0, 2968, __pyx_L5_error)
+            if (unlikely((__pyx_temp < 0))) __PYX_ERR(0, 2977, __pyx_L5_error)
             #endif
             if (__pyx_t_4 >= __pyx_temp) break;
           }
           #if CYTHON_ASSUME_SAFE_MACROS && !CYTHON_AVOID_BORROWED_REFS
-          __pyx_t_1 = PyList_GET_ITEM(__pyx_t_3, __pyx_t_4); __Pyx_INCREF(__pyx_t_1); __pyx_t_4++; if (unlikely((0 < 0))) __PYX_ERR(0, 2968, __pyx_L5_error)
+          __pyx_t_1 = PyList_GET_ITEM(__pyx_t_3, __pyx_t_4); __Pyx_INCREF(__pyx_t_1); __pyx_t_4++; if (unlikely((0 < 0))) __PYX_ERR(0, 2977, __pyx_L5_error)
           #else
-          __pyx_t_1 = __Pyx_PySequence_ITEM(__pyx_t_3, __pyx_t_4); __pyx_t_4++; if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 2968, __pyx_L5_error)
+          __pyx_t_1 = __Pyx_PySequence_ITEM(__pyx_t_3, __pyx_t_4); __pyx_t_4++; if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 2977, __pyx_L5_error)
           __Pyx_GOTREF(__pyx_t_1);
           #endif
         } else {
           {
             Py_ssize_t __pyx_temp = __Pyx_PyTuple_GET_SIZE(__pyx_t_3);
             #if !CYTHON_ASSUME_SAFE_MACROS
-            if (unlikely((__pyx_temp < 0))) __PYX_ERR(0, 2968, __pyx_L5_error)
+            if (unlikely((__pyx_temp < 0))) __PYX_ERR(0, 2977, __pyx_L5_error)
             #endif
             if (__pyx_t_4 >= __pyx_temp) break;
           }
           #if CYTHON_ASSUME_SAFE_MACROS && !CYTHON_AVOID_BORROWED_REFS
-          __pyx_t_1 = PyTuple_GET_ITEM(__pyx_t_3, __pyx_t_4); __Pyx_INCREF(__pyx_t_1); __pyx_t_4++; if (unlikely((0 < 0))) __PYX_ERR(0, 2968, __pyx_L5_error)
+          __pyx_t_1 = PyTuple_GET_ITEM(__pyx_t_3, __pyx_t_4); __Pyx_INCREF(__pyx_t_1); __pyx_t_4++; if (unlikely((0 < 0))) __PYX_ERR(0, 2977, __pyx_L5_error)
           #else
-          __pyx_t_1 = __Pyx_PySequence_ITEM(__pyx_t_3, __pyx_t_4); __pyx_t_4++; if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 2968, __pyx_L5_error)
+          __pyx_t_1 = __Pyx_PySequence_ITEM(__pyx_t_3, __pyx_t_4); __pyx_t_4++; if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 2977, __pyx_L5_error)
           __Pyx_GOTREF(__pyx_t_1);
           #endif
         }
@@ -60773,7 +60909,7 @@ static PyObject *__pyx_pf_32cSparseIntegerOutrankingDigraphs_24cQuantilesRanking
           PyObject* exc_type = PyErr_Occurred();
           if (exc_type) {
             if (likely(__Pyx_PyErr_GivenExceptionMatches(exc_type, PyExc_StopIteration))) PyErr_Clear();
-            else __PYX_ERR(0, 2968, __pyx_L5_error)
+            else __PYX_ERR(0, 2977, __pyx_L5_error)
           }
           break;
         }
@@ -60781,7 +60917,7 @@ static PyObject *__pyx_pf_32cSparseIntegerOutrankingDigraphs_24cQuantilesRanking
       }
       __Pyx_XDECREF_SET(__pyx_9genexpr41__pyx_v_c, __pyx_t_1);
       __pyx_t_1 = 0;
-      if (unlikely(__Pyx_ListComp_Append(__pyx_t_2, (PyObject*)__pyx_9genexpr41__pyx_v_c))) __PYX_ERR(0, 2968, __pyx_L5_error)
+      if (unlikely(__Pyx_ListComp_Append(__pyx_t_2, (PyObject*)__pyx_9genexpr41__pyx_v_c))) __PYX_ERR(0, 2977, __pyx_L5_error)
     }
     __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
     __Pyx_XDECREF(__pyx_9genexpr41__pyx_v_c); __pyx_9genexpr41__pyx_v_c = 0;
@@ -60794,35 +60930,35 @@ static PyObject *__pyx_pf_32cSparseIntegerOutrankingDigraphs_24cQuantilesRanking
   __pyx_v_compKeys = ((PyObject*)__pyx_t_2);
   __pyx_t_2 = 0;
 
-  /* "cSparseIntegerOutrankingDigraphs.pyx":2969
+  /* "cSparseIntegerOutrankingDigraphs.pyx":2978
  *         # the components are ordered from best (1) to worst (n)
  *         compKeys = [c for c in self.components]
  *         if direction != 'decreasing':             # <<<<<<<<<<<<<<
  *             compKeys.sort(reverse=True)
  *         else:
  */
-  __pyx_t_6 = (__Pyx_PyUnicode_Equals(__pyx_v_direction, __pyx_n_u_decreasing, Py_NE)); if (unlikely((__pyx_t_6 < 0))) __PYX_ERR(0, 2969, __pyx_L1_error)
+  __pyx_t_6 = (__Pyx_PyUnicode_Equals(__pyx_v_direction, __pyx_n_u_decreasing, Py_NE)); if (unlikely((__pyx_t_6 < 0))) __PYX_ERR(0, 2978, __pyx_L1_error)
   if (__pyx_t_6) {
 
-    /* "cSparseIntegerOutrankingDigraphs.pyx":2970
+    /* "cSparseIntegerOutrankingDigraphs.pyx":2979
  *         compKeys = [c for c in self.components]
  *         if direction != 'decreasing':
  *             compKeys.sort(reverse=True)             # <<<<<<<<<<<<<<
  *         else:
  *             pass
  */
-    __pyx_t_2 = __Pyx_PyObject_GetAttrStr(__pyx_v_compKeys, __pyx_n_s_sort); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 2970, __pyx_L1_error)
+    __pyx_t_2 = __Pyx_PyObject_GetAttrStr(__pyx_v_compKeys, __pyx_n_s_sort); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 2979, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_2);
-    __pyx_t_3 = __Pyx_PyDict_NewPresized(1); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 2970, __pyx_L1_error)
+    __pyx_t_3 = __Pyx_PyDict_NewPresized(1); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 2979, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_3);
-    if (PyDict_SetItem(__pyx_t_3, __pyx_n_s_reverse, Py_True) < 0) __PYX_ERR(0, 2970, __pyx_L1_error)
-    __pyx_t_1 = __Pyx_PyObject_Call(__pyx_t_2, __pyx_empty_tuple, __pyx_t_3); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 2970, __pyx_L1_error)
+    if (PyDict_SetItem(__pyx_t_3, __pyx_n_s_reverse, Py_True) < 0) __PYX_ERR(0, 2979, __pyx_L1_error)
+    __pyx_t_1 = __Pyx_PyObject_Call(__pyx_t_2, __pyx_empty_tuple, __pyx_t_3); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 2979, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_1);
     __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
     __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
     __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
 
-    /* "cSparseIntegerOutrankingDigraphs.pyx":2969
+    /* "cSparseIntegerOutrankingDigraphs.pyx":2978
  *         # the components are ordered from best (1) to worst (n)
  *         compKeys = [c for c in self.components]
  *         if direction != 'decreasing':             # <<<<<<<<<<<<<<
@@ -60832,7 +60968,7 @@ static PyObject *__pyx_pf_32cSparseIntegerOutrankingDigraphs_24cQuantilesRanking
     goto __pyx_L10;
   }
 
-  /* "cSparseIntegerOutrankingDigraphs.pyx":2972
+  /* "cSparseIntegerOutrankingDigraphs.pyx":2981
  *             compKeys.sort(reverse=True)
  *         else:
  *             pass             # <<<<<<<<<<<<<<
@@ -60843,7 +60979,7 @@ static PyObject *__pyx_pf_32cSparseIntegerOutrankingDigraphs_24cQuantilesRanking
   }
   __pyx_L10:;
 
-  /* "cSparseIntegerOutrankingDigraphs.pyx":2973
+  /* "cSparseIntegerOutrankingDigraphs.pyx":2982
  *         else:
  *             pass
  *         for compKey in compKeys:             # <<<<<<<<<<<<<<
@@ -60856,46 +60992,46 @@ static PyObject *__pyx_pf_32cSparseIntegerOutrankingDigraphs_24cQuantilesRanking
     {
       Py_ssize_t __pyx_temp = __Pyx_PyList_GET_SIZE(__pyx_t_1);
       #if !CYTHON_ASSUME_SAFE_MACROS
-      if (unlikely((__pyx_temp < 0))) __PYX_ERR(0, 2973, __pyx_L1_error)
+      if (unlikely((__pyx_temp < 0))) __PYX_ERR(0, 2982, __pyx_L1_error)
       #endif
       if (__pyx_t_4 >= __pyx_temp) break;
     }
     #if CYTHON_ASSUME_SAFE_MACROS && !CYTHON_AVOID_BORROWED_REFS
-    __pyx_t_3 = PyList_GET_ITEM(__pyx_t_1, __pyx_t_4); __Pyx_INCREF(__pyx_t_3); __pyx_t_4++; if (unlikely((0 < 0))) __PYX_ERR(0, 2973, __pyx_L1_error)
+    __pyx_t_3 = PyList_GET_ITEM(__pyx_t_1, __pyx_t_4); __Pyx_INCREF(__pyx_t_3); __pyx_t_4++; if (unlikely((0 < 0))) __PYX_ERR(0, 2982, __pyx_L1_error)
     #else
-    __pyx_t_3 = __Pyx_PySequence_ITEM(__pyx_t_1, __pyx_t_4); __pyx_t_4++; if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 2973, __pyx_L1_error)
+    __pyx_t_3 = __Pyx_PySequence_ITEM(__pyx_t_1, __pyx_t_4); __pyx_t_4++; if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 2982, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_3);
     #endif
     __Pyx_XDECREF_SET(__pyx_v_compKey, __pyx_t_3);
     __pyx_t_3 = 0;
 
-    /* "cSparseIntegerOutrankingDigraphs.pyx":2974
+    /* "cSparseIntegerOutrankingDigraphs.pyx":2983
  *             pass
  *         for compKey in compKeys:
  *             comp = self.components[compKey]             # <<<<<<<<<<<<<<
  *             print('%s. %s-%s : %s' % (compKey,comp['lowQtileLimit'],comp['highQtileLimit'],comp['componentRanking']) )
  * 
  */
-    __pyx_t_3 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_n_s_components); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 2974, __pyx_L1_error)
+    __pyx_t_3 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_n_s_components); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 2983, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_3);
-    __pyx_t_2 = __Pyx_PyObject_GetItem(__pyx_t_3, __pyx_v_compKey); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 2974, __pyx_L1_error)
+    __pyx_t_2 = __Pyx_PyObject_GetItem(__pyx_t_3, __pyx_v_compKey); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 2983, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_2);
     __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
     __Pyx_XDECREF_SET(__pyx_v_comp, __pyx_t_2);
     __pyx_t_2 = 0;
 
-    /* "cSparseIntegerOutrankingDigraphs.pyx":2975
+    /* "cSparseIntegerOutrankingDigraphs.pyx":2984
  *         for compKey in compKeys:
  *             comp = self.components[compKey]
  *             print('%s. %s-%s : %s' % (compKey,comp['lowQtileLimit'],comp['highQtileLimit'],comp['componentRanking']) )             # <<<<<<<<<<<<<<
  * 
  * 
  */
-    __pyx_t_2 = PyTuple_New(7); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 2975, __pyx_L1_error)
+    __pyx_t_2 = PyTuple_New(7); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 2984, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_2);
     __pyx_t_7 = 0;
     __pyx_t_8 = 127;
-    __pyx_t_3 = __Pyx_PyObject_FormatSimpleAndDecref(PyObject_Unicode(__pyx_v_compKey), __pyx_empty_unicode); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 2975, __pyx_L1_error)
+    __pyx_t_3 = __Pyx_PyObject_FormatSimpleAndDecref(PyObject_Unicode(__pyx_v_compKey), __pyx_empty_unicode); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 2984, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_3);
     __pyx_t_8 = (__Pyx_PyUnicode_MAX_CHAR_VALUE(__pyx_t_3) > __pyx_t_8) ? __Pyx_PyUnicode_MAX_CHAR_VALUE(__pyx_t_3) : __pyx_t_8;
     __pyx_t_7 += __Pyx_PyUnicode_GET_LENGTH(__pyx_t_3);
@@ -60906,9 +61042,9 @@ static PyObject *__pyx_pf_32cSparseIntegerOutrankingDigraphs_24cQuantilesRanking
     __pyx_t_7 += 2;
     __Pyx_GIVEREF(__pyx_kp_u__62);
     PyTuple_SET_ITEM(__pyx_t_2, 1, __pyx_kp_u__62);
-    __pyx_t_3 = __Pyx_PyObject_Dict_GetItem(__pyx_v_comp, __pyx_n_u_lowQtileLimit); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 2975, __pyx_L1_error)
+    __pyx_t_3 = __Pyx_PyObject_Dict_GetItem(__pyx_v_comp, __pyx_n_u_lowQtileLimit); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 2984, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_3);
-    __pyx_t_9 = __Pyx_PyObject_FormatSimpleAndDecref(PyObject_Unicode(__pyx_t_3), __pyx_empty_unicode); if (unlikely(!__pyx_t_9)) __PYX_ERR(0, 2975, __pyx_L1_error)
+    __pyx_t_9 = __Pyx_PyObject_FormatSimpleAndDecref(PyObject_Unicode(__pyx_t_3), __pyx_empty_unicode); if (unlikely(!__pyx_t_9)) __PYX_ERR(0, 2984, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_9);
     __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
     __pyx_t_8 = (__Pyx_PyUnicode_MAX_CHAR_VALUE(__pyx_t_9) > __pyx_t_8) ? __Pyx_PyUnicode_MAX_CHAR_VALUE(__pyx_t_9) : __pyx_t_8;
@@ -60920,9 +61056,9 @@ static PyObject *__pyx_pf_32cSparseIntegerOutrankingDigraphs_24cQuantilesRanking
     __pyx_t_7 += 1;
     __Pyx_GIVEREF(__pyx_kp_u__29);
     PyTuple_SET_ITEM(__pyx_t_2, 3, __pyx_kp_u__29);
-    __pyx_t_9 = __Pyx_PyObject_Dict_GetItem(__pyx_v_comp, __pyx_n_u_highQtileLimit); if (unlikely(!__pyx_t_9)) __PYX_ERR(0, 2975, __pyx_L1_error)
+    __pyx_t_9 = __Pyx_PyObject_Dict_GetItem(__pyx_v_comp, __pyx_n_u_highQtileLimit); if (unlikely(!__pyx_t_9)) __PYX_ERR(0, 2984, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_9);
-    __pyx_t_3 = __Pyx_PyObject_FormatSimpleAndDecref(PyObject_Unicode(__pyx_t_9), __pyx_empty_unicode); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 2975, __pyx_L1_error)
+    __pyx_t_3 = __Pyx_PyObject_FormatSimpleAndDecref(PyObject_Unicode(__pyx_t_9), __pyx_empty_unicode); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 2984, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_3);
     __Pyx_DECREF(__pyx_t_9); __pyx_t_9 = 0;
     __pyx_t_8 = (__Pyx_PyUnicode_MAX_CHAR_VALUE(__pyx_t_3) > __pyx_t_8) ? __Pyx_PyUnicode_MAX_CHAR_VALUE(__pyx_t_3) : __pyx_t_8;
@@ -60934,9 +61070,9 @@ static PyObject *__pyx_pf_32cSparseIntegerOutrankingDigraphs_24cQuantilesRanking
     __pyx_t_7 += 3;
     __Pyx_GIVEREF(__pyx_kp_u__60);
     PyTuple_SET_ITEM(__pyx_t_2, 5, __pyx_kp_u__60);
-    __pyx_t_3 = __Pyx_PyObject_Dict_GetItem(__pyx_v_comp, __pyx_n_u_componentRanking); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 2975, __pyx_L1_error)
+    __pyx_t_3 = __Pyx_PyObject_Dict_GetItem(__pyx_v_comp, __pyx_n_u_componentRanking); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 2984, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_3);
-    __pyx_t_9 = __Pyx_PyObject_FormatSimpleAndDecref(PyObject_Unicode(__pyx_t_3), __pyx_empty_unicode); if (unlikely(!__pyx_t_9)) __PYX_ERR(0, 2975, __pyx_L1_error)
+    __pyx_t_9 = __Pyx_PyObject_FormatSimpleAndDecref(PyObject_Unicode(__pyx_t_3), __pyx_empty_unicode); if (unlikely(!__pyx_t_9)) __PYX_ERR(0, 2984, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_9);
     __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
     __pyx_t_8 = (__Pyx_PyUnicode_MAX_CHAR_VALUE(__pyx_t_9) > __pyx_t_8) ? __Pyx_PyUnicode_MAX_CHAR_VALUE(__pyx_t_9) : __pyx_t_8;
@@ -60944,15 +61080,15 @@ static PyObject *__pyx_pf_32cSparseIntegerOutrankingDigraphs_24cQuantilesRanking
     __Pyx_GIVEREF(__pyx_t_9);
     PyTuple_SET_ITEM(__pyx_t_2, 6, __pyx_t_9);
     __pyx_t_9 = 0;
-    __pyx_t_9 = __Pyx_PyUnicode_Join(__pyx_t_2, 7, __pyx_t_7, __pyx_t_8); if (unlikely(!__pyx_t_9)) __PYX_ERR(0, 2975, __pyx_L1_error)
+    __pyx_t_9 = __Pyx_PyUnicode_Join(__pyx_t_2, 7, __pyx_t_7, __pyx_t_8); if (unlikely(!__pyx_t_9)) __PYX_ERR(0, 2984, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_9);
     __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
-    __pyx_t_2 = __Pyx_PyObject_CallOneArg(__pyx_builtin_print, __pyx_t_9); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 2975, __pyx_L1_error)
+    __pyx_t_2 = __Pyx_PyObject_CallOneArg(__pyx_builtin_print, __pyx_t_9); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 2984, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_2);
     __Pyx_DECREF(__pyx_t_9); __pyx_t_9 = 0;
     __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
 
-    /* "cSparseIntegerOutrankingDigraphs.pyx":2973
+    /* "cSparseIntegerOutrankingDigraphs.pyx":2982
  *         else:
  *             pass
  *         for compKey in compKeys:             # <<<<<<<<<<<<<<
@@ -60962,7 +61098,7 @@ static PyObject *__pyx_pf_32cSparseIntegerOutrankingDigraphs_24cQuantilesRanking
   }
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
 
-  /* "cSparseIntegerOutrankingDigraphs.pyx":2959
+  /* "cSparseIntegerOutrankingDigraphs.pyx":2968
  *         self.showDecomposition(direction=direction)
  * 
  *     def showDecomposition(self, direction='decreasing'):             # <<<<<<<<<<<<<<
@@ -60990,7 +61126,7 @@ static PyObject *__pyx_pf_32cSparseIntegerOutrankingDigraphs_24cQuantilesRanking
   return __pyx_r;
 }
 
-/* "cSparseIntegerOutrankingDigraphs.pyx":2978
+/* "cSparseIntegerOutrankingDigraphs.pyx":2987
  * 
  * 
  *     def showRelationTable(self, bint IntegerValues=True, compKeys=None):             # <<<<<<<<<<<<<<
@@ -61059,26 +61195,26 @@ PyObject *__pyx_args, PyObject *__pyx_kwds
           (void)__Pyx_Arg_NewRef_FASTCALL(values[0]);
           kw_args--;
         }
-        else if (unlikely(PyErr_Occurred())) __PYX_ERR(0, 2978, __pyx_L3_error)
+        else if (unlikely(PyErr_Occurred())) __PYX_ERR(0, 2987, __pyx_L3_error)
         else goto __pyx_L5_argtuple_error;
         CYTHON_FALLTHROUGH;
         case  1:
         if (kw_args > 0) {
           PyObject* value = __Pyx_GetKwValue_FASTCALL(__pyx_kwds, __pyx_kwvalues, __pyx_n_s_IntegerValues);
           if (value) { values[1] = __Pyx_Arg_NewRef_FASTCALL(value); kw_args--; }
-          else if (unlikely(PyErr_Occurred())) __PYX_ERR(0, 2978, __pyx_L3_error)
+          else if (unlikely(PyErr_Occurred())) __PYX_ERR(0, 2987, __pyx_L3_error)
         }
         CYTHON_FALLTHROUGH;
         case  2:
         if (kw_args > 0) {
           PyObject* value = __Pyx_GetKwValue_FASTCALL(__pyx_kwds, __pyx_kwvalues, __pyx_n_s_compKeys);
           if (value) { values[2] = __Pyx_Arg_NewRef_FASTCALL(value); kw_args--; }
-          else if (unlikely(PyErr_Occurred())) __PYX_ERR(0, 2978, __pyx_L3_error)
+          else if (unlikely(PyErr_Occurred())) __PYX_ERR(0, 2987, __pyx_L3_error)
         }
       }
       if (unlikely(kw_args > 0)) {
         const Py_ssize_t kwd_pos_args = __pyx_nargs;
-        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_kwvalues, __pyx_pyargnames, 0, values + 0, kwd_pos_args, "showRelationTable") < 0)) __PYX_ERR(0, 2978, __pyx_L3_error)
+        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_kwvalues, __pyx_pyargnames, 0, values + 0, kwd_pos_args, "showRelationTable") < 0)) __PYX_ERR(0, 2987, __pyx_L3_error)
       }
     } else {
       switch (__pyx_nargs) {
@@ -61093,7 +61229,7 @@ PyObject *__pyx_args, PyObject *__pyx_kwds
     }
     __pyx_v_self = values[0];
     if (values[1]) {
-      __pyx_v_IntegerValues = __Pyx_PyObject_IsTrue(values[1]); if (unlikely((__pyx_v_IntegerValues == (int)-1) && PyErr_Occurred())) __PYX_ERR(0, 2978, __pyx_L3_error)
+      __pyx_v_IntegerValues = __Pyx_PyObject_IsTrue(values[1]); if (unlikely((__pyx_v_IntegerValues == (int)-1) && PyErr_Occurred())) __PYX_ERR(0, 2987, __pyx_L3_error)
     } else {
       __pyx_v_IntegerValues = ((int)((int)1));
     }
@@ -61101,7 +61237,7 @@ PyObject *__pyx_args, PyObject *__pyx_kwds
   }
   goto __pyx_L6_skip;
   __pyx_L5_argtuple_error:;
-  __Pyx_RaiseArgtupleInvalid("showRelationTable", 0, 1, 3, __pyx_nargs); __PYX_ERR(0, 2978, __pyx_L3_error)
+  __Pyx_RaiseArgtupleInvalid("showRelationTable", 0, 1, 3, __pyx_nargs); __PYX_ERR(0, 2987, __pyx_L3_error)
   __pyx_L6_skip:;
   goto __pyx_L4_argument_unpacking_done;
   __pyx_L3_error:;
@@ -61151,61 +61287,61 @@ static PyObject *__pyx_pf_32cSparseIntegerOutrankingDigraphs_24cQuantilesRanking
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("showRelationTable", 1);
 
-  /* "cSparseIntegerOutrankingDigraphs.pyx":2988
+  /* "cSparseIntegerOutrankingDigraphs.pyx":2997
  *         """
  *         cdef int nc
  *         components = self.components             # <<<<<<<<<<<<<<
  *         if compKeys == None:
  *             nc = self.nbrComponents
  */
-  __pyx_t_1 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_n_s_components); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 2988, __pyx_L1_error)
+  __pyx_t_1 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_n_s_components); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 2997, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __pyx_v_components = __pyx_t_1;
   __pyx_t_1 = 0;
 
-  /* "cSparseIntegerOutrankingDigraphs.pyx":2989
+  /* "cSparseIntegerOutrankingDigraphs.pyx":2998
  *         cdef int nc
  *         components = self.components
  *         if compKeys == None:             # <<<<<<<<<<<<<<
  *             nc = self.nbrComponents
  *             print('%d quantiles decomposed relation table in decreasing order' % nc)
  */
-  __pyx_t_1 = PyObject_RichCompare(__pyx_v_compKeys, Py_None, Py_EQ); __Pyx_XGOTREF(__pyx_t_1); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 2989, __pyx_L1_error)
-  __pyx_t_2 = __Pyx_PyObject_IsTrue(__pyx_t_1); if (unlikely((__pyx_t_2 < 0))) __PYX_ERR(0, 2989, __pyx_L1_error)
+  __pyx_t_1 = PyObject_RichCompare(__pyx_v_compKeys, Py_None, Py_EQ); __Pyx_XGOTREF(__pyx_t_1); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 2998, __pyx_L1_error)
+  __pyx_t_2 = __Pyx_PyObject_IsTrue(__pyx_t_1); if (unlikely((__pyx_t_2 < 0))) __PYX_ERR(0, 2998, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
   if (__pyx_t_2) {
 
-    /* "cSparseIntegerOutrankingDigraphs.pyx":2990
+    /* "cSparseIntegerOutrankingDigraphs.pyx":2999
  *         components = self.components
  *         if compKeys == None:
  *             nc = self.nbrComponents             # <<<<<<<<<<<<<<
  *             print('%d quantiles decomposed relation table in decreasing order' % nc)
  *             for compKey,comp in components.items():
  */
-    __pyx_t_1 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_n_s_nbrComponents); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 2990, __pyx_L1_error)
+    __pyx_t_1 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_n_s_nbrComponents); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 2999, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_1);
-    __pyx_t_3 = __Pyx_PyInt_As_int(__pyx_t_1); if (unlikely((__pyx_t_3 == (int)-1) && PyErr_Occurred())) __PYX_ERR(0, 2990, __pyx_L1_error)
+    __pyx_t_3 = __Pyx_PyInt_As_int(__pyx_t_1); if (unlikely((__pyx_t_3 == (int)-1) && PyErr_Occurred())) __PYX_ERR(0, 2999, __pyx_L1_error)
     __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
     __pyx_v_nc = __pyx_t_3;
 
-    /* "cSparseIntegerOutrankingDigraphs.pyx":2991
+    /* "cSparseIntegerOutrankingDigraphs.pyx":3000
  *         if compKeys == None:
  *             nc = self.nbrComponents
  *             print('%d quantiles decomposed relation table in decreasing order' % nc)             # <<<<<<<<<<<<<<
  *             for compKey,comp in components.items():
  *                 ranking = comp['componentRanking']
  */
-    __pyx_t_1 = __Pyx_PyInt_From_int(__pyx_v_nc); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 2991, __pyx_L1_error)
+    __pyx_t_1 = __Pyx_PyInt_From_int(__pyx_v_nc); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 3000, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_1);
-    __pyx_t_4 = PyUnicode_Format(__pyx_kp_u_d_quantiles_decomposed_relation, __pyx_t_1); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 2991, __pyx_L1_error)
+    __pyx_t_4 = PyUnicode_Format(__pyx_kp_u_d_quantiles_decomposed_relation, __pyx_t_1); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 3000, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_4);
     __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
-    __pyx_t_1 = __Pyx_PyObject_CallOneArg(__pyx_builtin_print, __pyx_t_4); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 2991, __pyx_L1_error)
+    __pyx_t_1 = __Pyx_PyObject_CallOneArg(__pyx_builtin_print, __pyx_t_4); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 3000, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_1);
     __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
     __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
 
-    /* "cSparseIntegerOutrankingDigraphs.pyx":2992
+    /* "cSparseIntegerOutrankingDigraphs.pyx":3001
  *             nc = self.nbrComponents
  *             print('%d quantiles decomposed relation table in decreasing order' % nc)
  *             for compKey,comp in components.items():             # <<<<<<<<<<<<<<
@@ -61215,9 +61351,9 @@ static PyObject *__pyx_pf_32cSparseIntegerOutrankingDigraphs_24cQuantilesRanking
     __pyx_t_5 = 0;
     if (unlikely(__pyx_v_components == Py_None)) {
       PyErr_Format(PyExc_AttributeError, "'NoneType' object has no attribute '%.30s'", "items");
-      __PYX_ERR(0, 2992, __pyx_L1_error)
+      __PYX_ERR(0, 3001, __pyx_L1_error)
     }
-    __pyx_t_4 = __Pyx_dict_iterator(__pyx_v_components, 0, __pyx_n_s_items, (&__pyx_t_6), (&__pyx_t_3)); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 2992, __pyx_L1_error)
+    __pyx_t_4 = __Pyx_dict_iterator(__pyx_v_components, 0, __pyx_n_s_items, (&__pyx_t_6), (&__pyx_t_3)); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 3001, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_4);
     __Pyx_XDECREF(__pyx_t_1);
     __pyx_t_1 = __pyx_t_4;
@@ -61225,7 +61361,7 @@ static PyObject *__pyx_pf_32cSparseIntegerOutrankingDigraphs_24cQuantilesRanking
     while (1) {
       __pyx_t_8 = __Pyx_dict_iter_next(__pyx_t_1, __pyx_t_6, &__pyx_t_5, &__pyx_t_4, &__pyx_t_7, NULL, __pyx_t_3);
       if (unlikely(__pyx_t_8 == 0)) break;
-      if (unlikely(__pyx_t_8 == -1)) __PYX_ERR(0, 2992, __pyx_L1_error)
+      if (unlikely(__pyx_t_8 == -1)) __PYX_ERR(0, 3001, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_4);
       __Pyx_GOTREF(__pyx_t_7);
       __Pyx_XDECREF_SET(__pyx_v_compKey, __pyx_t_4);
@@ -61233,58 +61369,58 @@ static PyObject *__pyx_pf_32cSparseIntegerOutrankingDigraphs_24cQuantilesRanking
       __Pyx_XDECREF_SET(__pyx_v_comp, __pyx_t_7);
       __pyx_t_7 = 0;
 
-      /* "cSparseIntegerOutrankingDigraphs.pyx":2993
+      /* "cSparseIntegerOutrankingDigraphs.pyx":3002
  *             print('%d quantiles decomposed relation table in decreasing order' % nc)
  *             for compKey,comp in components.items():
  *                 ranking = comp['componentRanking']             # <<<<<<<<<<<<<<
  *                 print('Component : %s' % compKey, end=' ')
  *                 print('%s' % ranking)
  */
-      __pyx_t_7 = __Pyx_PyObject_Dict_GetItem(__pyx_v_comp, __pyx_n_u_componentRanking); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 2993, __pyx_L1_error)
+      __pyx_t_7 = __Pyx_PyObject_Dict_GetItem(__pyx_v_comp, __pyx_n_u_componentRanking); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 3002, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_7);
       __Pyx_XDECREF_SET(__pyx_v_ranking, __pyx_t_7);
       __pyx_t_7 = 0;
 
-      /* "cSparseIntegerOutrankingDigraphs.pyx":2994
+      /* "cSparseIntegerOutrankingDigraphs.pyx":3003
  *             for compKey,comp in components.items():
  *                 ranking = comp['componentRanking']
  *                 print('Component : %s' % compKey, end=' ')             # <<<<<<<<<<<<<<
  *                 print('%s' % ranking)
  * 
  */
-      __pyx_t_7 = __Pyx_PyUnicode_FormatSafe(__pyx_kp_u_Component_s, __pyx_v_compKey); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 2994, __pyx_L1_error)
+      __pyx_t_7 = __Pyx_PyUnicode_FormatSafe(__pyx_kp_u_Component_s, __pyx_v_compKey); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 3003, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_7);
-      __pyx_t_4 = PyTuple_New(1); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 2994, __pyx_L1_error)
+      __pyx_t_4 = PyTuple_New(1); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 3003, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_4);
       __Pyx_GIVEREF(__pyx_t_7);
-      if (__Pyx_PyTuple_SET_ITEM(__pyx_t_4, 0, __pyx_t_7)) __PYX_ERR(0, 2994, __pyx_L1_error);
+      if (__Pyx_PyTuple_SET_ITEM(__pyx_t_4, 0, __pyx_t_7)) __PYX_ERR(0, 3003, __pyx_L1_error);
       __pyx_t_7 = 0;
-      __pyx_t_7 = __Pyx_PyDict_NewPresized(1); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 2994, __pyx_L1_error)
+      __pyx_t_7 = __Pyx_PyDict_NewPresized(1); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 3003, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_7);
-      if (PyDict_SetItem(__pyx_t_7, __pyx_n_s_end, __pyx_kp_u__28) < 0) __PYX_ERR(0, 2994, __pyx_L1_error)
-      __pyx_t_9 = __Pyx_PyObject_Call(__pyx_builtin_print, __pyx_t_4, __pyx_t_7); if (unlikely(!__pyx_t_9)) __PYX_ERR(0, 2994, __pyx_L1_error)
+      if (PyDict_SetItem(__pyx_t_7, __pyx_n_s_end, __pyx_kp_u__28) < 0) __PYX_ERR(0, 3003, __pyx_L1_error)
+      __pyx_t_9 = __Pyx_PyObject_Call(__pyx_builtin_print, __pyx_t_4, __pyx_t_7); if (unlikely(!__pyx_t_9)) __PYX_ERR(0, 3003, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_9);
       __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
       __Pyx_DECREF(__pyx_t_7); __pyx_t_7 = 0;
       __Pyx_DECREF(__pyx_t_9); __pyx_t_9 = 0;
 
-      /* "cSparseIntegerOutrankingDigraphs.pyx":2995
+      /* "cSparseIntegerOutrankingDigraphs.pyx":3004
  *                 ranking = comp['componentRanking']
  *                 print('Component : %s' % compKey, end=' ')
  *                 print('%s' % ranking)             # <<<<<<<<<<<<<<
  * 
  *         else:
  */
-      __pyx_t_9 = __Pyx_PyUnicode_FormatSafe(__pyx_kp_u_s, __pyx_v_ranking); if (unlikely(!__pyx_t_9)) __PYX_ERR(0, 2995, __pyx_L1_error)
+      __pyx_t_9 = __Pyx_PyUnicode_FormatSafe(__pyx_kp_u_s, __pyx_v_ranking); if (unlikely(!__pyx_t_9)) __PYX_ERR(0, 3004, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_9);
-      __pyx_t_7 = __Pyx_PyObject_CallOneArg(__pyx_builtin_print, __pyx_t_9); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 2995, __pyx_L1_error)
+      __pyx_t_7 = __Pyx_PyObject_CallOneArg(__pyx_builtin_print, __pyx_t_9); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 3004, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_7);
       __Pyx_DECREF(__pyx_t_9); __pyx_t_9 = 0;
       __Pyx_DECREF(__pyx_t_7); __pyx_t_7 = 0;
     }
     __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
 
-    /* "cSparseIntegerOutrankingDigraphs.pyx":2989
+    /* "cSparseIntegerOutrankingDigraphs.pyx":2998
  *         cdef int nc
  *         components = self.components
  *         if compKeys == None:             # <<<<<<<<<<<<<<
@@ -61294,7 +61430,7 @@ static PyObject *__pyx_pf_32cSparseIntegerOutrankingDigraphs_24cQuantilesRanking
     goto __pyx_L3;
   }
 
-  /* "cSparseIntegerOutrankingDigraphs.pyx":2998
+  /* "cSparseIntegerOutrankingDigraphs.pyx":3007
  * 
  *         else:
  *             for compKey in compKeys:             # <<<<<<<<<<<<<<
@@ -61307,9 +61443,9 @@ static PyObject *__pyx_pf_32cSparseIntegerOutrankingDigraphs_24cQuantilesRanking
       __pyx_t_6 = 0;
       __pyx_t_10 = NULL;
     } else {
-      __pyx_t_6 = -1; __pyx_t_1 = PyObject_GetIter(__pyx_v_compKeys); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 2998, __pyx_L1_error)
+      __pyx_t_6 = -1; __pyx_t_1 = PyObject_GetIter(__pyx_v_compKeys); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 3007, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_1);
-      __pyx_t_10 = __Pyx_PyObject_GetIterNextFunc(__pyx_t_1); if (unlikely(!__pyx_t_10)) __PYX_ERR(0, 2998, __pyx_L1_error)
+      __pyx_t_10 = __Pyx_PyObject_GetIterNextFunc(__pyx_t_1); if (unlikely(!__pyx_t_10)) __PYX_ERR(0, 3007, __pyx_L1_error)
     }
     for (;;) {
       if (likely(!__pyx_t_10)) {
@@ -61317,28 +61453,28 @@ static PyObject *__pyx_pf_32cSparseIntegerOutrankingDigraphs_24cQuantilesRanking
           {
             Py_ssize_t __pyx_temp = __Pyx_PyList_GET_SIZE(__pyx_t_1);
             #if !CYTHON_ASSUME_SAFE_MACROS
-            if (unlikely((__pyx_temp < 0))) __PYX_ERR(0, 2998, __pyx_L1_error)
+            if (unlikely((__pyx_temp < 0))) __PYX_ERR(0, 3007, __pyx_L1_error)
             #endif
             if (__pyx_t_6 >= __pyx_temp) break;
           }
           #if CYTHON_ASSUME_SAFE_MACROS && !CYTHON_AVOID_BORROWED_REFS
-          __pyx_t_7 = PyList_GET_ITEM(__pyx_t_1, __pyx_t_6); __Pyx_INCREF(__pyx_t_7); __pyx_t_6++; if (unlikely((0 < 0))) __PYX_ERR(0, 2998, __pyx_L1_error)
+          __pyx_t_7 = PyList_GET_ITEM(__pyx_t_1, __pyx_t_6); __Pyx_INCREF(__pyx_t_7); __pyx_t_6++; if (unlikely((0 < 0))) __PYX_ERR(0, 3007, __pyx_L1_error)
           #else
-          __pyx_t_7 = __Pyx_PySequence_ITEM(__pyx_t_1, __pyx_t_6); __pyx_t_6++; if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 2998, __pyx_L1_error)
+          __pyx_t_7 = __Pyx_PySequence_ITEM(__pyx_t_1, __pyx_t_6); __pyx_t_6++; if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 3007, __pyx_L1_error)
           __Pyx_GOTREF(__pyx_t_7);
           #endif
         } else {
           {
             Py_ssize_t __pyx_temp = __Pyx_PyTuple_GET_SIZE(__pyx_t_1);
             #if !CYTHON_ASSUME_SAFE_MACROS
-            if (unlikely((__pyx_temp < 0))) __PYX_ERR(0, 2998, __pyx_L1_error)
+            if (unlikely((__pyx_temp < 0))) __PYX_ERR(0, 3007, __pyx_L1_error)
             #endif
             if (__pyx_t_6 >= __pyx_temp) break;
           }
           #if CYTHON_ASSUME_SAFE_MACROS && !CYTHON_AVOID_BORROWED_REFS
-          __pyx_t_7 = PyTuple_GET_ITEM(__pyx_t_1, __pyx_t_6); __Pyx_INCREF(__pyx_t_7); __pyx_t_6++; if (unlikely((0 < 0))) __PYX_ERR(0, 2998, __pyx_L1_error)
+          __pyx_t_7 = PyTuple_GET_ITEM(__pyx_t_1, __pyx_t_6); __Pyx_INCREF(__pyx_t_7); __pyx_t_6++; if (unlikely((0 < 0))) __PYX_ERR(0, 3007, __pyx_L1_error)
           #else
-          __pyx_t_7 = __Pyx_PySequence_ITEM(__pyx_t_1, __pyx_t_6); __pyx_t_6++; if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 2998, __pyx_L1_error)
+          __pyx_t_7 = __Pyx_PySequence_ITEM(__pyx_t_1, __pyx_t_6); __pyx_t_6++; if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 3007, __pyx_L1_error)
           __Pyx_GOTREF(__pyx_t_7);
           #endif
         }
@@ -61348,7 +61484,7 @@ static PyObject *__pyx_pf_32cSparseIntegerOutrankingDigraphs_24cQuantilesRanking
           PyObject* exc_type = PyErr_Occurred();
           if (exc_type) {
             if (likely(__Pyx_PyErr_GivenExceptionMatches(exc_type, PyExc_StopIteration))) PyErr_Clear();
-            else __PYX_ERR(0, 2998, __pyx_L1_error)
+            else __PYX_ERR(0, 3007, __pyx_L1_error)
           }
           break;
         }
@@ -61357,65 +61493,65 @@ static PyObject *__pyx_pf_32cSparseIntegerOutrankingDigraphs_24cQuantilesRanking
       __Pyx_XDECREF_SET(__pyx_v_compKey, __pyx_t_7);
       __pyx_t_7 = 0;
 
-      /* "cSparseIntegerOutrankingDigraphs.pyx":2999
+      /* "cSparseIntegerOutrankingDigraphs.pyx":3008
  *         else:
  *             for compKey in compKeys:
  *                 comp = components[compkey]             # <<<<<<<<<<<<<<
  *                 ranking = comp['componentRanking']
  *                 print('Relation table of component %s' % str(compKey))
  */
-      __Pyx_GetModuleGlobalName(__pyx_t_7, __pyx_n_s_compkey); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 2999, __pyx_L1_error)
+      __Pyx_GetModuleGlobalName(__pyx_t_7, __pyx_n_s_compkey); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 3008, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_7);
-      __pyx_t_9 = __Pyx_PyObject_GetItem(__pyx_v_components, __pyx_t_7); if (unlikely(!__pyx_t_9)) __PYX_ERR(0, 2999, __pyx_L1_error)
+      __pyx_t_9 = __Pyx_PyObject_GetItem(__pyx_v_components, __pyx_t_7); if (unlikely(!__pyx_t_9)) __PYX_ERR(0, 3008, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_9);
       __Pyx_DECREF(__pyx_t_7); __pyx_t_7 = 0;
       __Pyx_XDECREF_SET(__pyx_v_comp, __pyx_t_9);
       __pyx_t_9 = 0;
 
-      /* "cSparseIntegerOutrankingDigraphs.pyx":3000
+      /* "cSparseIntegerOutrankingDigraphs.pyx":3009
  *             for compKey in compKeys:
  *                 comp = components[compkey]
  *                 ranking = comp['componentRanking']             # <<<<<<<<<<<<<<
  *                 print('Relation table of component %s' % str(compKey))
  *                 print('%s' % ranking)
  */
-      __pyx_t_9 = __Pyx_PyObject_Dict_GetItem(__pyx_v_comp, __pyx_n_u_componentRanking); if (unlikely(!__pyx_t_9)) __PYX_ERR(0, 3000, __pyx_L1_error)
+      __pyx_t_9 = __Pyx_PyObject_Dict_GetItem(__pyx_v_comp, __pyx_n_u_componentRanking); if (unlikely(!__pyx_t_9)) __PYX_ERR(0, 3009, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_9);
       __Pyx_XDECREF_SET(__pyx_v_ranking, __pyx_t_9);
       __pyx_t_9 = 0;
 
-      /* "cSparseIntegerOutrankingDigraphs.pyx":3001
+      /* "cSparseIntegerOutrankingDigraphs.pyx":3010
  *                 comp = components[compkey]
  *                 ranking = comp['componentRanking']
  *                 print('Relation table of component %s' % str(compKey))             # <<<<<<<<<<<<<<
  *                 print('%s' % ranking)
  * 
  */
-      __pyx_t_9 = __Pyx_PyObject_Str(__pyx_v_compKey); if (unlikely(!__pyx_t_9)) __PYX_ERR(0, 3001, __pyx_L1_error)
+      __pyx_t_9 = __Pyx_PyObject_Str(__pyx_v_compKey); if (unlikely(!__pyx_t_9)) __PYX_ERR(0, 3010, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_9);
-      __pyx_t_7 = __Pyx_PyUnicode_FormatSafe(__pyx_kp_u_Relation_table_of_component_s, __pyx_t_9); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 3001, __pyx_L1_error)
+      __pyx_t_7 = __Pyx_PyUnicode_FormatSafe(__pyx_kp_u_Relation_table_of_component_s, __pyx_t_9); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 3010, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_7);
       __Pyx_DECREF(__pyx_t_9); __pyx_t_9 = 0;
-      __pyx_t_9 = __Pyx_PyObject_CallOneArg(__pyx_builtin_print, __pyx_t_7); if (unlikely(!__pyx_t_9)) __PYX_ERR(0, 3001, __pyx_L1_error)
+      __pyx_t_9 = __Pyx_PyObject_CallOneArg(__pyx_builtin_print, __pyx_t_7); if (unlikely(!__pyx_t_9)) __PYX_ERR(0, 3010, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_9);
       __Pyx_DECREF(__pyx_t_7); __pyx_t_7 = 0;
       __Pyx_DECREF(__pyx_t_9); __pyx_t_9 = 0;
 
-      /* "cSparseIntegerOutrankingDigraphs.pyx":3002
+      /* "cSparseIntegerOutrankingDigraphs.pyx":3011
  *                 ranking = comp['componentRanking']
  *                 print('Relation table of component %s' % str(compKey))
  *                 print('%s' % ranking)             # <<<<<<<<<<<<<<
  * 
  *     def computeDeterminateness(self, bint InPercent=True):
  */
-      __pyx_t_9 = __Pyx_PyUnicode_FormatSafe(__pyx_kp_u_s, __pyx_v_ranking); if (unlikely(!__pyx_t_9)) __PYX_ERR(0, 3002, __pyx_L1_error)
+      __pyx_t_9 = __Pyx_PyUnicode_FormatSafe(__pyx_kp_u_s, __pyx_v_ranking); if (unlikely(!__pyx_t_9)) __PYX_ERR(0, 3011, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_9);
-      __pyx_t_7 = __Pyx_PyObject_CallOneArg(__pyx_builtin_print, __pyx_t_9); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 3002, __pyx_L1_error)
+      __pyx_t_7 = __Pyx_PyObject_CallOneArg(__pyx_builtin_print, __pyx_t_9); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 3011, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_7);
       __Pyx_DECREF(__pyx_t_9); __pyx_t_9 = 0;
       __Pyx_DECREF(__pyx_t_7); __pyx_t_7 = 0;
 
-      /* "cSparseIntegerOutrankingDigraphs.pyx":2998
+      /* "cSparseIntegerOutrankingDigraphs.pyx":3007
  * 
  *         else:
  *             for compKey in compKeys:             # <<<<<<<<<<<<<<
@@ -61427,7 +61563,7 @@ static PyObject *__pyx_pf_32cSparseIntegerOutrankingDigraphs_24cQuantilesRanking
   }
   __pyx_L3:;
 
-  /* "cSparseIntegerOutrankingDigraphs.pyx":2978
+  /* "cSparseIntegerOutrankingDigraphs.pyx":2987
  * 
  * 
  *     def showRelationTable(self, bint IntegerValues=True, compKeys=None):             # <<<<<<<<<<<<<<
@@ -61455,7 +61591,7 @@ static PyObject *__pyx_pf_32cSparseIntegerOutrankingDigraphs_24cQuantilesRanking
   return __pyx_r;
 }
 
-/* "cSparseIntegerOutrankingDigraphs.pyx":3004
+/* "cSparseIntegerOutrankingDigraphs.pyx":3013
  *                 print('%s' % ranking)
  * 
  *     def computeDeterminateness(self, bint InPercent=True):             # <<<<<<<<<<<<<<
@@ -61520,19 +61656,19 @@ PyObject *__pyx_args, PyObject *__pyx_kwds
           (void)__Pyx_Arg_NewRef_FASTCALL(values[0]);
           kw_args--;
         }
-        else if (unlikely(PyErr_Occurred())) __PYX_ERR(0, 3004, __pyx_L3_error)
+        else if (unlikely(PyErr_Occurred())) __PYX_ERR(0, 3013, __pyx_L3_error)
         else goto __pyx_L5_argtuple_error;
         CYTHON_FALLTHROUGH;
         case  1:
         if (kw_args > 0) {
           PyObject* value = __Pyx_GetKwValue_FASTCALL(__pyx_kwds, __pyx_kwvalues, __pyx_n_s_InPercent);
           if (value) { values[1] = __Pyx_Arg_NewRef_FASTCALL(value); kw_args--; }
-          else if (unlikely(PyErr_Occurred())) __PYX_ERR(0, 3004, __pyx_L3_error)
+          else if (unlikely(PyErr_Occurred())) __PYX_ERR(0, 3013, __pyx_L3_error)
         }
       }
       if (unlikely(kw_args > 0)) {
         const Py_ssize_t kwd_pos_args = __pyx_nargs;
-        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_kwvalues, __pyx_pyargnames, 0, values + 0, kwd_pos_args, "computeDeterminateness") < 0)) __PYX_ERR(0, 3004, __pyx_L3_error)
+        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_kwvalues, __pyx_pyargnames, 0, values + 0, kwd_pos_args, "computeDeterminateness") < 0)) __PYX_ERR(0, 3013, __pyx_L3_error)
       }
     } else {
       switch (__pyx_nargs) {
@@ -61545,14 +61681,14 @@ PyObject *__pyx_args, PyObject *__pyx_kwds
     }
     __pyx_v_self = values[0];
     if (values[1]) {
-      __pyx_v_InPercent = __Pyx_PyObject_IsTrue(values[1]); if (unlikely((__pyx_v_InPercent == (int)-1) && PyErr_Occurred())) __PYX_ERR(0, 3004, __pyx_L3_error)
+      __pyx_v_InPercent = __Pyx_PyObject_IsTrue(values[1]); if (unlikely((__pyx_v_InPercent == (int)-1) && PyErr_Occurred())) __PYX_ERR(0, 3013, __pyx_L3_error)
     } else {
       __pyx_v_InPercent = ((int)((int)1));
     }
   }
   goto __pyx_L6_skip;
   __pyx_L5_argtuple_error:;
-  __Pyx_RaiseArgtupleInvalid("computeDeterminateness", 0, 1, 2, __pyx_nargs); __PYX_ERR(0, 3004, __pyx_L3_error)
+  __Pyx_RaiseArgtupleInvalid("computeDeterminateness", 0, 1, 2, __pyx_nargs); __PYX_ERR(0, 3013, __pyx_L3_error)
   __pyx_L6_skip:;
   goto __pyx_L4_argument_unpacking_done;
   __pyx_L3_error:;
@@ -61609,7 +61745,7 @@ static PyObject *__pyx_pf_32cSparseIntegerOutrankingDigraphs_24cQuantilesRanking
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("computeDeterminateness", 1);
 
-  /* "cSparseIntegerOutrankingDigraphs.pyx":3016
+  /* "cSparseIntegerOutrankingDigraphs.pyx":3025
  * 
  *         cdef int Max, Med, order, x, y
  *         cdef float sumDeter=0.0             # <<<<<<<<<<<<<<
@@ -61618,76 +61754,76 @@ static PyObject *__pyx_pf_32cSparseIntegerOutrankingDigraphs_24cQuantilesRanking
  */
   __pyx_v_sumDeter = 0.0;
 
-  /* "cSparseIntegerOutrankingDigraphs.pyx":3019
+  /* "cSparseIntegerOutrankingDigraphs.pyx":3028
  *         cdef float deter
  * 
  *         Max = self.valuationdomain['max']             # <<<<<<<<<<<<<<
  *         Med = self.valuationdomain['med']
  * 
  */
-  __pyx_t_1 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_n_s_valuationdomain); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 3019, __pyx_L1_error)
+  __pyx_t_1 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_n_s_valuationdomain); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 3028, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
-  __pyx_t_2 = __Pyx_PyObject_Dict_GetItem(__pyx_t_1, __pyx_n_u_max); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 3019, __pyx_L1_error)
+  __pyx_t_2 = __Pyx_PyObject_Dict_GetItem(__pyx_t_1, __pyx_n_u_max); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 3028, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
-  __pyx_t_3 = __Pyx_PyInt_As_int(__pyx_t_2); if (unlikely((__pyx_t_3 == (int)-1) && PyErr_Occurred())) __PYX_ERR(0, 3019, __pyx_L1_error)
+  __pyx_t_3 = __Pyx_PyInt_As_int(__pyx_t_2); if (unlikely((__pyx_t_3 == (int)-1) && PyErr_Occurred())) __PYX_ERR(0, 3028, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
   __pyx_v_Max = __pyx_t_3;
 
-  /* "cSparseIntegerOutrankingDigraphs.pyx":3020
+  /* "cSparseIntegerOutrankingDigraphs.pyx":3029
  * 
  *         Max = self.valuationdomain['max']
  *         Med = self.valuationdomain['med']             # <<<<<<<<<<<<<<
  * 
  *         actions = self.actions
  */
-  __pyx_t_2 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_n_s_valuationdomain); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 3020, __pyx_L1_error)
+  __pyx_t_2 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_n_s_valuationdomain); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 3029, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
-  __pyx_t_1 = __Pyx_PyObject_Dict_GetItem(__pyx_t_2, __pyx_n_u_med); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 3020, __pyx_L1_error)
+  __pyx_t_1 = __Pyx_PyObject_Dict_GetItem(__pyx_t_2, __pyx_n_u_med); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 3029, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
-  __pyx_t_3 = __Pyx_PyInt_As_int(__pyx_t_1); if (unlikely((__pyx_t_3 == (int)-1) && PyErr_Occurred())) __PYX_ERR(0, 3020, __pyx_L1_error)
+  __pyx_t_3 = __Pyx_PyInt_As_int(__pyx_t_1); if (unlikely((__pyx_t_3 == (int)-1) && PyErr_Occurred())) __PYX_ERR(0, 3029, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
   __pyx_v_Med = __pyx_t_3;
 
-  /* "cSparseIntegerOutrankingDigraphs.pyx":3022
+  /* "cSparseIntegerOutrankingDigraphs.pyx":3031
  *         Med = self.valuationdomain['med']
  * 
  *         actions = self.actions             # <<<<<<<<<<<<<<
  *         relation = self.relation
  *         order = self.order
  */
-  __pyx_t_1 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_n_s_actions); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 3022, __pyx_L1_error)
+  __pyx_t_1 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_n_s_actions); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 3031, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __pyx_v_actions = __pyx_t_1;
   __pyx_t_1 = 0;
 
-  /* "cSparseIntegerOutrankingDigraphs.pyx":3023
+  /* "cSparseIntegerOutrankingDigraphs.pyx":3032
  * 
  *         actions = self.actions
  *         relation = self.relation             # <<<<<<<<<<<<<<
  *         order = self.order
  * 
  */
-  __pyx_t_1 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_n_s_relation); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 3023, __pyx_L1_error)
+  __pyx_t_1 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_n_s_relation); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 3032, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __pyx_v_relation = __pyx_t_1;
   __pyx_t_1 = 0;
 
-  /* "cSparseIntegerOutrankingDigraphs.pyx":3024
+  /* "cSparseIntegerOutrankingDigraphs.pyx":3033
  *         actions = self.actions
  *         relation = self.relation
  *         order = self.order             # <<<<<<<<<<<<<<
  * 
  *         for x in actions:
  */
-  __pyx_t_1 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_n_s_order); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 3024, __pyx_L1_error)
+  __pyx_t_1 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_n_s_order); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 3033, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
-  __pyx_t_3 = __Pyx_PyInt_As_int(__pyx_t_1); if (unlikely((__pyx_t_3 == (int)-1) && PyErr_Occurred())) __PYX_ERR(0, 3024, __pyx_L1_error)
+  __pyx_t_3 = __Pyx_PyInt_As_int(__pyx_t_1); if (unlikely((__pyx_t_3 == (int)-1) && PyErr_Occurred())) __PYX_ERR(0, 3033, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
   __pyx_v_order = __pyx_t_3;
 
-  /* "cSparseIntegerOutrankingDigraphs.pyx":3026
+  /* "cSparseIntegerOutrankingDigraphs.pyx":3035
  *         order = self.order
  * 
  *         for x in actions:             # <<<<<<<<<<<<<<
@@ -61699,9 +61835,9 @@ static PyObject *__pyx_pf_32cSparseIntegerOutrankingDigraphs_24cQuantilesRanking
     __pyx_t_4 = 0;
     __pyx_t_5 = NULL;
   } else {
-    __pyx_t_4 = -1; __pyx_t_1 = PyObject_GetIter(__pyx_v_actions); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 3026, __pyx_L1_error)
+    __pyx_t_4 = -1; __pyx_t_1 = PyObject_GetIter(__pyx_v_actions); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 3035, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_1);
-    __pyx_t_5 = __Pyx_PyObject_GetIterNextFunc(__pyx_t_1); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 3026, __pyx_L1_error)
+    __pyx_t_5 = __Pyx_PyObject_GetIterNextFunc(__pyx_t_1); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 3035, __pyx_L1_error)
   }
   for (;;) {
     if (likely(!__pyx_t_5)) {
@@ -61709,28 +61845,28 @@ static PyObject *__pyx_pf_32cSparseIntegerOutrankingDigraphs_24cQuantilesRanking
         {
           Py_ssize_t __pyx_temp = __Pyx_PyList_GET_SIZE(__pyx_t_1);
           #if !CYTHON_ASSUME_SAFE_MACROS
-          if (unlikely((__pyx_temp < 0))) __PYX_ERR(0, 3026, __pyx_L1_error)
+          if (unlikely((__pyx_temp < 0))) __PYX_ERR(0, 3035, __pyx_L1_error)
           #endif
           if (__pyx_t_4 >= __pyx_temp) break;
         }
         #if CYTHON_ASSUME_SAFE_MACROS && !CYTHON_AVOID_BORROWED_REFS
-        __pyx_t_2 = PyList_GET_ITEM(__pyx_t_1, __pyx_t_4); __Pyx_INCREF(__pyx_t_2); __pyx_t_4++; if (unlikely((0 < 0))) __PYX_ERR(0, 3026, __pyx_L1_error)
+        __pyx_t_2 = PyList_GET_ITEM(__pyx_t_1, __pyx_t_4); __Pyx_INCREF(__pyx_t_2); __pyx_t_4++; if (unlikely((0 < 0))) __PYX_ERR(0, 3035, __pyx_L1_error)
         #else
-        __pyx_t_2 = __Pyx_PySequence_ITEM(__pyx_t_1, __pyx_t_4); __pyx_t_4++; if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 3026, __pyx_L1_error)
+        __pyx_t_2 = __Pyx_PySequence_ITEM(__pyx_t_1, __pyx_t_4); __pyx_t_4++; if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 3035, __pyx_L1_error)
         __Pyx_GOTREF(__pyx_t_2);
         #endif
       } else {
         {
           Py_ssize_t __pyx_temp = __Pyx_PyTuple_GET_SIZE(__pyx_t_1);
           #if !CYTHON_ASSUME_SAFE_MACROS
-          if (unlikely((__pyx_temp < 0))) __PYX_ERR(0, 3026, __pyx_L1_error)
+          if (unlikely((__pyx_temp < 0))) __PYX_ERR(0, 3035, __pyx_L1_error)
           #endif
           if (__pyx_t_4 >= __pyx_temp) break;
         }
         #if CYTHON_ASSUME_SAFE_MACROS && !CYTHON_AVOID_BORROWED_REFS
-        __pyx_t_2 = PyTuple_GET_ITEM(__pyx_t_1, __pyx_t_4); __Pyx_INCREF(__pyx_t_2); __pyx_t_4++; if (unlikely((0 < 0))) __PYX_ERR(0, 3026, __pyx_L1_error)
+        __pyx_t_2 = PyTuple_GET_ITEM(__pyx_t_1, __pyx_t_4); __Pyx_INCREF(__pyx_t_2); __pyx_t_4++; if (unlikely((0 < 0))) __PYX_ERR(0, 3035, __pyx_L1_error)
         #else
-        __pyx_t_2 = __Pyx_PySequence_ITEM(__pyx_t_1, __pyx_t_4); __pyx_t_4++; if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 3026, __pyx_L1_error)
+        __pyx_t_2 = __Pyx_PySequence_ITEM(__pyx_t_1, __pyx_t_4); __pyx_t_4++; if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 3035, __pyx_L1_error)
         __Pyx_GOTREF(__pyx_t_2);
         #endif
       }
@@ -61740,17 +61876,17 @@ static PyObject *__pyx_pf_32cSparseIntegerOutrankingDigraphs_24cQuantilesRanking
         PyObject* exc_type = PyErr_Occurred();
         if (exc_type) {
           if (likely(__Pyx_PyErr_GivenExceptionMatches(exc_type, PyExc_StopIteration))) PyErr_Clear();
-          else __PYX_ERR(0, 3026, __pyx_L1_error)
+          else __PYX_ERR(0, 3035, __pyx_L1_error)
         }
         break;
       }
       __Pyx_GOTREF(__pyx_t_2);
     }
-    __pyx_t_3 = __Pyx_PyInt_As_int(__pyx_t_2); if (unlikely((__pyx_t_3 == (int)-1) && PyErr_Occurred())) __PYX_ERR(0, 3026, __pyx_L1_error)
+    __pyx_t_3 = __Pyx_PyInt_As_int(__pyx_t_2); if (unlikely((__pyx_t_3 == (int)-1) && PyErr_Occurred())) __PYX_ERR(0, 3035, __pyx_L1_error)
     __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
     __pyx_v_x = __pyx_t_3;
 
-    /* "cSparseIntegerOutrankingDigraphs.pyx":3027
+    /* "cSparseIntegerOutrankingDigraphs.pyx":3036
  * 
  *         for x in actions:
  *             for y in actions:             # <<<<<<<<<<<<<<
@@ -61762,9 +61898,9 @@ static PyObject *__pyx_pf_32cSparseIntegerOutrankingDigraphs_24cQuantilesRanking
       __pyx_t_6 = 0;
       __pyx_t_7 = NULL;
     } else {
-      __pyx_t_6 = -1; __pyx_t_2 = PyObject_GetIter(__pyx_v_actions); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 3027, __pyx_L1_error)
+      __pyx_t_6 = -1; __pyx_t_2 = PyObject_GetIter(__pyx_v_actions); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 3036, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_2);
-      __pyx_t_7 = __Pyx_PyObject_GetIterNextFunc(__pyx_t_2); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 3027, __pyx_L1_error)
+      __pyx_t_7 = __Pyx_PyObject_GetIterNextFunc(__pyx_t_2); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 3036, __pyx_L1_error)
     }
     for (;;) {
       if (likely(!__pyx_t_7)) {
@@ -61772,28 +61908,28 @@ static PyObject *__pyx_pf_32cSparseIntegerOutrankingDigraphs_24cQuantilesRanking
           {
             Py_ssize_t __pyx_temp = __Pyx_PyList_GET_SIZE(__pyx_t_2);
             #if !CYTHON_ASSUME_SAFE_MACROS
-            if (unlikely((__pyx_temp < 0))) __PYX_ERR(0, 3027, __pyx_L1_error)
+            if (unlikely((__pyx_temp < 0))) __PYX_ERR(0, 3036, __pyx_L1_error)
             #endif
             if (__pyx_t_6 >= __pyx_temp) break;
           }
           #if CYTHON_ASSUME_SAFE_MACROS && !CYTHON_AVOID_BORROWED_REFS
-          __pyx_t_8 = PyList_GET_ITEM(__pyx_t_2, __pyx_t_6); __Pyx_INCREF(__pyx_t_8); __pyx_t_6++; if (unlikely((0 < 0))) __PYX_ERR(0, 3027, __pyx_L1_error)
+          __pyx_t_8 = PyList_GET_ITEM(__pyx_t_2, __pyx_t_6); __Pyx_INCREF(__pyx_t_8); __pyx_t_6++; if (unlikely((0 < 0))) __PYX_ERR(0, 3036, __pyx_L1_error)
           #else
-          __pyx_t_8 = __Pyx_PySequence_ITEM(__pyx_t_2, __pyx_t_6); __pyx_t_6++; if (unlikely(!__pyx_t_8)) __PYX_ERR(0, 3027, __pyx_L1_error)
+          __pyx_t_8 = __Pyx_PySequence_ITEM(__pyx_t_2, __pyx_t_6); __pyx_t_6++; if (unlikely(!__pyx_t_8)) __PYX_ERR(0, 3036, __pyx_L1_error)
           __Pyx_GOTREF(__pyx_t_8);
           #endif
         } else {
           {
             Py_ssize_t __pyx_temp = __Pyx_PyTuple_GET_SIZE(__pyx_t_2);
             #if !CYTHON_ASSUME_SAFE_MACROS
-            if (unlikely((__pyx_temp < 0))) __PYX_ERR(0, 3027, __pyx_L1_error)
+            if (unlikely((__pyx_temp < 0))) __PYX_ERR(0, 3036, __pyx_L1_error)
             #endif
             if (__pyx_t_6 >= __pyx_temp) break;
           }
           #if CYTHON_ASSUME_SAFE_MACROS && !CYTHON_AVOID_BORROWED_REFS
-          __pyx_t_8 = PyTuple_GET_ITEM(__pyx_t_2, __pyx_t_6); __Pyx_INCREF(__pyx_t_8); __pyx_t_6++; if (unlikely((0 < 0))) __PYX_ERR(0, 3027, __pyx_L1_error)
+          __pyx_t_8 = PyTuple_GET_ITEM(__pyx_t_2, __pyx_t_6); __Pyx_INCREF(__pyx_t_8); __pyx_t_6++; if (unlikely((0 < 0))) __PYX_ERR(0, 3036, __pyx_L1_error)
           #else
-          __pyx_t_8 = __Pyx_PySequence_ITEM(__pyx_t_2, __pyx_t_6); __pyx_t_6++; if (unlikely(!__pyx_t_8)) __PYX_ERR(0, 3027, __pyx_L1_error)
+          __pyx_t_8 = __Pyx_PySequence_ITEM(__pyx_t_2, __pyx_t_6); __pyx_t_6++; if (unlikely(!__pyx_t_8)) __PYX_ERR(0, 3036, __pyx_L1_error)
           __Pyx_GOTREF(__pyx_t_8);
           #endif
         }
@@ -61803,17 +61939,17 @@ static PyObject *__pyx_pf_32cSparseIntegerOutrankingDigraphs_24cQuantilesRanking
           PyObject* exc_type = PyErr_Occurred();
           if (exc_type) {
             if (likely(__Pyx_PyErr_GivenExceptionMatches(exc_type, PyExc_StopIteration))) PyErr_Clear();
-            else __PYX_ERR(0, 3027, __pyx_L1_error)
+            else __PYX_ERR(0, 3036, __pyx_L1_error)
           }
           break;
         }
         __Pyx_GOTREF(__pyx_t_8);
       }
-      __pyx_t_3 = __Pyx_PyInt_As_int(__pyx_t_8); if (unlikely((__pyx_t_3 == (int)-1) && PyErr_Occurred())) __PYX_ERR(0, 3027, __pyx_L1_error)
+      __pyx_t_3 = __Pyx_PyInt_As_int(__pyx_t_8); if (unlikely((__pyx_t_3 == (int)-1) && PyErr_Occurred())) __PYX_ERR(0, 3036, __pyx_L1_error)
       __Pyx_DECREF(__pyx_t_8); __pyx_t_8 = 0;
       __pyx_v_y = __pyx_t_3;
 
-      /* "cSparseIntegerOutrankingDigraphs.pyx":3028
+      /* "cSparseIntegerOutrankingDigraphs.pyx":3037
  *         for x in actions:
  *             for y in actions:
  *                 if x != y:             # <<<<<<<<<<<<<<
@@ -61823,16 +61959,16 @@ static PyObject *__pyx_pf_32cSparseIntegerOutrankingDigraphs_24cQuantilesRanking
       __pyx_t_9 = (__pyx_v_x != __pyx_v_y);
       if (__pyx_t_9) {
 
-        /* "cSparseIntegerOutrankingDigraphs.pyx":3029
+        /* "cSparseIntegerOutrankingDigraphs.pyx":3038
  *             for y in actions:
  *                 if x != y:
  *                     sumDeter += float(ABS(relation(x,y) - Med))             # <<<<<<<<<<<<<<
  * 
  *         deter = float(sumDeter) / float((order * (order-1)))
  */
-        __pyx_t_10 = __Pyx_PyInt_From_int(__pyx_v_x); if (unlikely(!__pyx_t_10)) __PYX_ERR(0, 3029, __pyx_L1_error)
+        __pyx_t_10 = __Pyx_PyInt_From_int(__pyx_v_x); if (unlikely(!__pyx_t_10)) __PYX_ERR(0, 3038, __pyx_L1_error)
         __Pyx_GOTREF(__pyx_t_10);
-        __pyx_t_11 = __Pyx_PyInt_From_int(__pyx_v_y); if (unlikely(!__pyx_t_11)) __PYX_ERR(0, 3029, __pyx_L1_error)
+        __pyx_t_11 = __Pyx_PyInt_From_int(__pyx_v_y); if (unlikely(!__pyx_t_11)) __PYX_ERR(0, 3038, __pyx_L1_error)
         __Pyx_GOTREF(__pyx_t_11);
         __Pyx_INCREF(__pyx_v_relation);
         __pyx_t_12 = __pyx_v_relation; __pyx_t_13 = NULL;
@@ -61855,21 +61991,21 @@ static PyObject *__pyx_pf_32cSparseIntegerOutrankingDigraphs_24cQuantilesRanking
           __Pyx_XDECREF(__pyx_t_13); __pyx_t_13 = 0;
           __Pyx_DECREF(__pyx_t_10); __pyx_t_10 = 0;
           __Pyx_DECREF(__pyx_t_11); __pyx_t_11 = 0;
-          if (unlikely(!__pyx_t_8)) __PYX_ERR(0, 3029, __pyx_L1_error)
+          if (unlikely(!__pyx_t_8)) __PYX_ERR(0, 3038, __pyx_L1_error)
           __Pyx_GOTREF(__pyx_t_8);
           __Pyx_DECREF(__pyx_t_12); __pyx_t_12 = 0;
         }
-        __pyx_t_12 = __Pyx_PyInt_From_int(__pyx_v_Med); if (unlikely(!__pyx_t_12)) __PYX_ERR(0, 3029, __pyx_L1_error)
+        __pyx_t_12 = __Pyx_PyInt_From_int(__pyx_v_Med); if (unlikely(!__pyx_t_12)) __PYX_ERR(0, 3038, __pyx_L1_error)
         __Pyx_GOTREF(__pyx_t_12);
-        __pyx_t_11 = PyNumber_Subtract(__pyx_t_8, __pyx_t_12); if (unlikely(!__pyx_t_11)) __PYX_ERR(0, 3029, __pyx_L1_error)
+        __pyx_t_11 = PyNumber_Subtract(__pyx_t_8, __pyx_t_12); if (unlikely(!__pyx_t_11)) __PYX_ERR(0, 3038, __pyx_L1_error)
         __Pyx_GOTREF(__pyx_t_11);
         __Pyx_DECREF(__pyx_t_8); __pyx_t_8 = 0;
         __Pyx_DECREF(__pyx_t_12); __pyx_t_12 = 0;
-        __pyx_t_3 = __Pyx_PyInt_As_int(__pyx_t_11); if (unlikely((__pyx_t_3 == (int)-1) && PyErr_Occurred())) __PYX_ERR(0, 3029, __pyx_L1_error)
+        __pyx_t_3 = __Pyx_PyInt_As_int(__pyx_t_11); if (unlikely((__pyx_t_3 == (int)-1) && PyErr_Occurred())) __PYX_ERR(0, 3038, __pyx_L1_error)
         __Pyx_DECREF(__pyx_t_11); __pyx_t_11 = 0;
         __pyx_v_sumDeter = (__pyx_v_sumDeter + ((double)ABS(__pyx_t_3)));
 
-        /* "cSparseIntegerOutrankingDigraphs.pyx":3028
+        /* "cSparseIntegerOutrankingDigraphs.pyx":3037
  *         for x in actions:
  *             for y in actions:
  *                 if x != y:             # <<<<<<<<<<<<<<
@@ -61878,7 +62014,7 @@ static PyObject *__pyx_pf_32cSparseIntegerOutrankingDigraphs_24cQuantilesRanking
  */
       }
 
-      /* "cSparseIntegerOutrankingDigraphs.pyx":3027
+      /* "cSparseIntegerOutrankingDigraphs.pyx":3036
  * 
  *         for x in actions:
  *             for y in actions:             # <<<<<<<<<<<<<<
@@ -61888,7 +62024,7 @@ static PyObject *__pyx_pf_32cSparseIntegerOutrankingDigraphs_24cQuantilesRanking
     }
     __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
 
-    /* "cSparseIntegerOutrankingDigraphs.pyx":3026
+    /* "cSparseIntegerOutrankingDigraphs.pyx":3035
  *         order = self.order
  * 
  *         for x in actions:             # <<<<<<<<<<<<<<
@@ -61898,7 +62034,7 @@ static PyObject *__pyx_pf_32cSparseIntegerOutrankingDigraphs_24cQuantilesRanking
   }
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
 
-  /* "cSparseIntegerOutrankingDigraphs.pyx":3031
+  /* "cSparseIntegerOutrankingDigraphs.pyx":3040
  *                     sumDeter += float(ABS(relation(x,y) - Med))
  * 
  *         deter = float(sumDeter) / float((order * (order-1)))             # <<<<<<<<<<<<<<
@@ -61907,11 +62043,11 @@ static PyObject *__pyx_pf_32cSparseIntegerOutrankingDigraphs_24cQuantilesRanking
  */
   if (unlikely(((double)(__pyx_v_order * (__pyx_v_order - 1))) == 0)) {
     PyErr_SetString(PyExc_ZeroDivisionError, "float division");
-    __PYX_ERR(0, 3031, __pyx_L1_error)
+    __PYX_ERR(0, 3040, __pyx_L1_error)
   }
   __pyx_v_deter = (((double)__pyx_v_sumDeter) / ((double)(__pyx_v_order * (__pyx_v_order - 1))));
 
-  /* "cSparseIntegerOutrankingDigraphs.pyx":3032
+  /* "cSparseIntegerOutrankingDigraphs.pyx":3041
  * 
  *         deter = float(sumDeter) / float((order * (order-1)))
  *         if InPercent:             # <<<<<<<<<<<<<<
@@ -61920,7 +62056,7 @@ static PyObject *__pyx_pf_32cSparseIntegerOutrankingDigraphs_24cQuantilesRanking
  */
   if (__pyx_v_InPercent) {
 
-    /* "cSparseIntegerOutrankingDigraphs.pyx":3033
+    /* "cSparseIntegerOutrankingDigraphs.pyx":3042
  *         deter = float(sumDeter) / float((order * (order-1)))
  *         if InPercent:
  *             return deter/(Max-Med)*100.0             # <<<<<<<<<<<<<<
@@ -61931,15 +62067,15 @@ static PyObject *__pyx_pf_32cSparseIntegerOutrankingDigraphs_24cQuantilesRanking
     __pyx_t_3 = (__pyx_v_Max - __pyx_v_Med);
     if (unlikely(__pyx_t_3 == 0)) {
       PyErr_SetString(PyExc_ZeroDivisionError, "float division");
-      __PYX_ERR(0, 3033, __pyx_L1_error)
+      __PYX_ERR(0, 3042, __pyx_L1_error)
     }
-    __pyx_t_1 = PyFloat_FromDouble(((__pyx_v_deter / ((float)__pyx_t_3)) * 100.0)); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 3033, __pyx_L1_error)
+    __pyx_t_1 = PyFloat_FromDouble(((__pyx_v_deter / ((float)__pyx_t_3)) * 100.0)); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 3042, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_1);
     __pyx_r = __pyx_t_1;
     __pyx_t_1 = 0;
     goto __pyx_L0;
 
-    /* "cSparseIntegerOutrankingDigraphs.pyx":3032
+    /* "cSparseIntegerOutrankingDigraphs.pyx":3041
  * 
  *         deter = float(sumDeter) / float((order * (order-1)))
  *         if InPercent:             # <<<<<<<<<<<<<<
@@ -61948,7 +62084,7 @@ static PyObject *__pyx_pf_32cSparseIntegerOutrankingDigraphs_24cQuantilesRanking
  */
   }
 
-  /* "cSparseIntegerOutrankingDigraphs.pyx":3035
+  /* "cSparseIntegerOutrankingDigraphs.pyx":3044
  *             return deter/(Max-Med)*100.0
  *         else:
  *             return deter             # <<<<<<<<<<<<<<
@@ -61957,14 +62093,14 @@ static PyObject *__pyx_pf_32cSparseIntegerOutrankingDigraphs_24cQuantilesRanking
  */
   /*else*/ {
     __Pyx_XDECREF(__pyx_r);
-    __pyx_t_1 = PyFloat_FromDouble(__pyx_v_deter); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 3035, __pyx_L1_error)
+    __pyx_t_1 = PyFloat_FromDouble(__pyx_v_deter); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 3044, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_1);
     __pyx_r = __pyx_t_1;
     __pyx_t_1 = 0;
     goto __pyx_L0;
   }
 
-  /* "cSparseIntegerOutrankingDigraphs.pyx":3004
+  /* "cSparseIntegerOutrankingDigraphs.pyx":3013
  *                 print('%s' % ranking)
  * 
  *     def computeDeterminateness(self, bint InPercent=True):             # <<<<<<<<<<<<<<
@@ -62330,6 +62466,7 @@ static int __Pyx_CreateStringTabAndInitStrings(void) {
     {&__pyx_kp_u_Actions_d, __pyx_k_Actions_d, sizeof(__pyx_k_Actions_d), 0, 1, 0, 0},
     {&__pyx_kp_u_Actions_d_2, __pyx_k_Actions_d_2, sizeof(__pyx_k_Actions_d_2), 0, 1, 0, 0},
     {&__pyx_kp_u_Actions_d_3, __pyx_k_Actions_d_3, sizeof(__pyx_k_Actions_d_3), 0, 1, 0, 0},
+    {&__pyx_kp_u_Actions_d_4, __pyx_k_Actions_d_4, sizeof(__pyx_k_Actions_d_4), 0, 1, 0, 0},
     {&__pyx_kp_u_All_comments, __pyx_k_All_comments, sizeof(__pyx_k_All_comments), 0, 1, 0, 0},
     {&__pyx_n_s_AttributeError, __pyx_k_AttributeError, sizeof(__pyx_k_AttributeError), 0, 0, 1, 1},
     {&__pyx_kp_u_Attributes_s, __pyx_k_Attributes_s, sizeof(__pyx_k_Attributes_s), 0, 1, 0, 0},
@@ -62364,6 +62501,7 @@ static int __Pyx_CreateStringTabAndInitStrings(void) {
     {&__pyx_kp_u_Criteria_d, __pyx_k_Criteria_d, sizeof(__pyx_k_Criteria_d), 0, 1, 0, 0},
     {&__pyx_kp_u_Criteria_d_2, __pyx_k_Criteria_d_2, sizeof(__pyx_k_Criteria_d_2), 0, 1, 0, 0},
     {&__pyx_kp_u_Criteria_d_3, __pyx_k_Criteria_d_3, sizeof(__pyx_k_Criteria_d_3), 0, 1, 0, 0},
+    {&__pyx_kp_u_Criteria_d_4, __pyx_k_Criteria_d_4, sizeof(__pyx_k_Criteria_d_4), 0, 1, 0, 0},
     {&__pyx_kp_u_Cythonized_SparseIntegerOutranki, __pyx_k_Cythonized_SparseIntegerOutranki, sizeof(__pyx_k_Cythonized_SparseIntegerOutranki), 0, 1, 0, 0},
     {&__pyx_kp_u_Cythonized_cQuantilesRankingDigr, __pyx_k_Cythonized_cQuantilesRankingDigr, sizeof(__pyx_k_Cythonized_cQuantilesRankingDigr), 0, 1, 0, 0},
     {&__pyx_kp_s_Cythonized_version_of_the_py_cl, __pyx_k_Cythonized_version_of_the_py_cl, sizeof(__pyx_k_Cythonized_version_of_the_py_cl), 0, 0, 1, 0},
@@ -62501,6 +62639,7 @@ static int __Pyx_CreateStringTabAndInitStrings(void) {
     {&__pyx_kp_u_Sparse_Relation_Map, __pyx_k_Sparse_Relation_Map, sizeof(__pyx_k_Sparse_Relation_Map), 0, 1, 0, 0},
     {&__pyx_n_u_StartMethod, __pyx_k_StartMethod, sizeof(__pyx_k_StartMethod), 0, 1, 0, 1},
     {&__pyx_kp_u_StartMethod_s, __pyx_k_StartMethod_s, sizeof(__pyx_k_StartMethod_s), 0, 1, 0, 0},
+    {&__pyx_kp_u_Start_mthod_s, __pyx_k_Start_mthod_s, sizeof(__pyx_k_Start_mthod_s), 0, 1, 0, 0},
     {&__pyx_n_s_StoreSorting, __pyx_k_StoreSorting, sizeof(__pyx_k_StoreSorting), 0, 0, 1, 1},
     {&__pyx_n_s_TASKS, __pyx_k_TASKS, sizeof(__pyx_k_TASKS), 0, 0, 1, 1},
     {&__pyx_n_s_TemporaryDirectory, __pyx_k_TemporaryDirectory, sizeof(__pyx_k_TemporaryDirectory), 0, 0, 1, 1},
@@ -62510,6 +62649,7 @@ static int __Pyx_CreateStringTabAndInitStrings(void) {
     {&__pyx_kp_u_Threading_2, __pyx_k_Threading_2, sizeof(__pyx_k_Threading_2), 0, 1, 0, 0},
     {&__pyx_kp_u_Threads_d, __pyx_k_Threads_d, sizeof(__pyx_k_Threads_d), 0, 1, 0, 0},
     {&__pyx_kp_u_Threads_d_2, __pyx_k_Threads_d_2, sizeof(__pyx_k_Threads_d_2), 0, 1, 0, 0},
+    {&__pyx_kp_u_Threads_d_3, __pyx_k_Threads_d_3, sizeof(__pyx_k_Threads_d_3), 0, 1, 0, 0},
     {&__pyx_kp_u_Threshold, __pyx_k_Threshold, sizeof(__pyx_k_Threshold), 0, 1, 0, 0},
     {&__pyx_kp_u_Total_time_5f, __pyx_k_Total_time_5f, sizeof(__pyx_k_Total_time_5f), 0, 1, 0, 0},
     {&__pyx_kp_u_Total_time_5f_2, __pyx_k_Total_time_5f_2, sizeof(__pyx_k_Total_time_5f_2), 0, 1, 0, 0},
@@ -62729,7 +62869,6 @@ static int __Pyx_CreateStringTabAndInitStrings(void) {
     {&__pyx_n_u_fillrate, __pyx_k_fillrate, sizeof(__pyx_k_fillrate), 0, 1, 0, 1},
     {&__pyx_n_s_fo, __pyx_k_fo, sizeof(__pyx_k_fo), 0, 0, 1, 1},
     {&__pyx_n_s_foName, __pyx_k_foName, sizeof(__pyx_k_foName), 0, 0, 1, 1},
-    {&__pyx_n_u_fork, __pyx_k_fork, sizeof(__pyx_k_fork), 0, 1, 0, 1},
     {&__pyx_n_s_fromIndex, __pyx_k_fromIndex, sizeof(__pyx_k_fromIndex), 0, 0, 1, 1},
     {&__pyx_n_s_g, __pyx_k_g, sizeof(__pyx_k_g), 0, 0, 1, 1},
     {&__pyx_n_s_g0, __pyx_k_g0, sizeof(__pyx_k_g0), 0, 0, 1, 1},
@@ -62831,11 +62970,13 @@ static int __Pyx_CreateStringTabAndInitStrings(void) {
     {&__pyx_n_s_name, __pyx_k_name, sizeof(__pyx_k_name), 0, 0, 1, 1},
     {&__pyx_n_s_name_2, __pyx_k_name_2, sizeof(__pyx_k_name_2), 0, 0, 1, 1},
     {&__pyx_n_u_name_2, __pyx_k_name_2, sizeof(__pyx_k_name_2), 0, 1, 0, 1},
+    {&__pyx_n_s_nbrCPUs, __pyx_k_nbrCPUs, sizeof(__pyx_k_nbrCPUs), 0, 0, 1, 1},
     {&__pyx_n_s_nbrComponents, __pyx_k_nbrComponents, sizeof(__pyx_k_nbrComponents), 0, 0, 1, 1},
     {&__pyx_n_s_nbrCores, __pyx_k_nbrCores, sizeof(__pyx_k_nbrCores), 0, 0, 1, 1},
     {&__pyx_n_s_nbrOfCPUs, __pyx_k_nbrOfCPUs, sizeof(__pyx_k_nbrOfCPUs), 0, 0, 1, 1},
     {&__pyx_n_s_nbrOfLocals, __pyx_k_nbrOfLocals, sizeof(__pyx_k_nbrOfLocals), 0, 0, 1, 1},
     {&__pyx_n_s_nbrOfThreadsUsed, __pyx_k_nbrOfThreadsUsed, sizeof(__pyx_k_nbrOfThreadsUsed), 0, 0, 1, 1},
+    {&__pyx_n_s_nbrThread, __pyx_k_nbrThread, sizeof(__pyx_k_nbrThread), 0, 0, 1, 1},
     {&__pyx_n_s_nbrThreads, __pyx_k_nbrThreads, sizeof(__pyx_k_nbrThreads), 0, 0, 1, 1},
     {&__pyx_kp_u_nbsp, __pyx_k_nbsp, sizeof(__pyx_k_nbsp), 0, 1, 0, 0},
     {&__pyx_n_s_nc, __pyx_k_nc, sizeof(__pyx_k_nc), 0, 0, 1, 1},
@@ -62977,6 +63118,7 @@ static int __Pyx_CreateStringTabAndInitStrings(void) {
     {&__pyx_n_s_splitComponent_2, __pyx_k_splitComponent_2, sizeof(__pyx_k_splitComponent_2), 0, 0, 1, 1},
     {&__pyx_n_u_splitComponent_2, __pyx_k_splitComponent_2, sizeof(__pyx_k_splitComponent_2), 0, 1, 0, 1},
     {&__pyx_n_s_start, __pyx_k_start, sizeof(__pyx_k_start), 0, 0, 1, 1},
+    {&__pyx_n_s_startMehod, __pyx_k_startMehod, sizeof(__pyx_k_startMehod), 0, 0, 1, 1},
     {&__pyx_n_s_startMethod, __pyx_k_startMethod, sizeof(__pyx_k_startMethod), 0, 0, 1, 1},
     {&__pyx_n_u_started, __pyx_k_started, sizeof(__pyx_k_started), 0, 1, 0, 1},
     {&__pyx_n_s_statistics, __pyx_k_statistics, sizeof(__pyx_k_statistics), 0, 0, 1, 1},
@@ -63497,14 +63639,14 @@ static CYTHON_SMALL_CODE int __Pyx_InitCachedConstants(void) {
   __Pyx_GOTREF(__pyx_tuple__63);
   __Pyx_GIVEREF(__pyx_tuple__63);
 
-  /* "cSparseIntegerOutrankingDigraphs.pyx":2546
+  /* "cSparseIntegerOutrankingDigraphs.pyx":2554
  * 
  *         actionsCategKeys = list(actionsCategories.keys())
  *         actionsCategIntervals = sorted(actionsCategKeys,key=itemgetter(0,1,2,3), reverse=True)             # <<<<<<<<<<<<<<
  * #        actionsCategIntervals = sorted(actionsCategKeys,key=itemgetter(0,5,6,7), reverse=True)
  * 
  */
-  __pyx_tuple__64 = PyTuple_Pack(4, __pyx_int_0, __pyx_int_1, __pyx_int_2, __pyx_int_3); if (unlikely(!__pyx_tuple__64)) __PYX_ERR(0, 2546, __pyx_L1_error)
+  __pyx_tuple__64 = PyTuple_Pack(4, __pyx_int_0, __pyx_int_1, __pyx_int_2, __pyx_int_3); if (unlikely(!__pyx_tuple__64)) __PYX_ERR(0, 2554, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_tuple__64);
   __Pyx_GIVEREF(__pyx_tuple__64);
 
@@ -64048,154 +64190,154 @@ static CYTHON_SMALL_CODE int __Pyx_InitCachedConstants(void) {
  *                  int quantiles=4,\
  *                  quantilesOrderingStrategy="optimal",\
  */
-  __pyx_tuple__155 = PyTuple_Pack(81, __pyx_n_s_self, __pyx_n_s_argPerfTab, __pyx_n_s_quantiles, __pyx_n_s_quantilesOrderingStrategy, __pyx_n_s_LowerClosed, __pyx_n_s_componentRankingRule, __pyx_n_s_minimalComponentSize, __pyx_n_s_Threading, __pyx_n_s_startMethod, __pyx_n_s_tempDir, __pyx_n_s_nbrOfCPUs, __pyx_n_s_save2File, __pyx_n_s_CopyPerfTab, __pyx_n_s_Comments, __pyx_n_s_Debug, __pyx_n_s_i, __pyx_n_s_j, __pyx_n_s_totalWeight, __pyx_n_s_nbrOfLocals, __pyx_n_s_nbrOfThreadsUsed, __pyx_n_s_threadLoad, __pyx_n_s_ttot, __pyx_n_s_t0, __pyx_n_s_tw, __pyx_n_s_tdump, __pyx_n_s_maximalComponentSize, __pyx_n_s_lTest, __pyx_n_s_NA, __pyx_n_s_Digraph, __pyx_n_s_IntegerQuantilesSortingDigraph, __pyx_n_s_OrderedDict, __pyx_n_s_time, __pyx_n_s_cpu_count, __pyx_n_s_mp_2, __pyx_n_s_mpctx, __pyx_n_s_Pool, __pyx_n_s_copy, __pyx_n_s_deepcopy, __pyx_n_s_IntegerBipolarOutrankingDigraph, __pyx_n_s_criteria, __pyx_n_s_evaluation, __pyx_n_s_na, __pyx_n_s_dimension, __pyx_n_s_g, __pyx_n_s_nbrCores, __pyx_n_s_qs, __pyx_n_s_nc, __pyx_n_s_nd, __pyx_n_s_components, __pyx_n_s_boostedRanking, __pyx_n_s_comp, __pyx_n_s_compKey, __pyx_n_s_compActions, __pyx_n_s_nca, __pyx_n_s_pt, __pyx_n_s_pg, __pyx_n_s_componentRanking, __pyx_n_s_dumps, __pyx_n_s_loads, __pyx_n_s_load, __pyx_n_s_dump, __pyx_n_s_Process, __pyx_n_s_Queue, __pyx_n_s_active_children, __pyx_n_s_TemporaryDirectory, __pyx_n_s_mkdtemp, __pyx_n_s_tempDirName, __pyx_n_s_NUMBER_OF_WORKERS, __pyx_n_s_tasksIndex, __pyx_n_s_TASKS, __pyx_n_s_task_queue, __pyx_n_s_task, __pyx_n_s_fiName, __pyx_n_s_fi, __pyx_n_s_splitComponent_2, __pyx_n_s_fillRate, __pyx_n_s_npg, __pyx_n_s_x, __pyx_n_s_item, __pyx_n_s_i, __pyx_n_s_pos); if (unlikely(!__pyx_tuple__155)) __PYX_ERR(0, 2183, __pyx_L1_error)
+  __pyx_tuple__155 = PyTuple_Pack(82, __pyx_n_s_self, __pyx_n_s_argPerfTab, __pyx_n_s_quantiles, __pyx_n_s_quantilesOrderingStrategy, __pyx_n_s_LowerClosed, __pyx_n_s_componentRankingRule, __pyx_n_s_minimalComponentSize, __pyx_n_s_Threading, __pyx_n_s_startMethod, __pyx_n_s_tempDir, __pyx_n_s_nbrOfCPUs, __pyx_n_s_save2File, __pyx_n_s_CopyPerfTab, __pyx_n_s_Comments, __pyx_n_s_Debug, __pyx_n_s_i, __pyx_n_s_j, __pyx_n_s_totalWeight, __pyx_n_s_nbrOfLocals, __pyx_n_s_nbrOfThreadsUsed, __pyx_n_s_threadLoad, __pyx_n_s_ttot, __pyx_n_s_t0, __pyx_n_s_tw, __pyx_n_s_tdump, __pyx_n_s_maximalComponentSize, __pyx_n_s_lTest, __pyx_n_s_NA, __pyx_n_s_Digraph, __pyx_n_s_IntegerQuantilesSortingDigraph, __pyx_n_s_OrderedDict, __pyx_n_s_time, __pyx_n_s_cpu_count, __pyx_n_s_mp_2, __pyx_n_s_mpctx, __pyx_n_s_Pool, __pyx_n_s_copy, __pyx_n_s_deepcopy, __pyx_n_s_IntegerBipolarOutrankingDigraph, __pyx_n_s_criteria, __pyx_n_s_evaluation, __pyx_n_s_na, __pyx_n_s_dimension, __pyx_n_s_g, __pyx_n_s_nbrCPUs, __pyx_n_s_startMehod, __pyx_n_s_qs, __pyx_n_s_nc, __pyx_n_s_nd, __pyx_n_s_components, __pyx_n_s_boostedRanking, __pyx_n_s_comp, __pyx_n_s_compKey, __pyx_n_s_compActions, __pyx_n_s_nca, __pyx_n_s_pt, __pyx_n_s_pg, __pyx_n_s_componentRanking, __pyx_n_s_dumps, __pyx_n_s_loads, __pyx_n_s_load, __pyx_n_s_dump, __pyx_n_s_Process, __pyx_n_s_Queue, __pyx_n_s_active_children, __pyx_n_s_TemporaryDirectory, __pyx_n_s_mkdtemp, __pyx_n_s_tempDirName, __pyx_n_s_NUMBER_OF_WORKERS, __pyx_n_s_tasksIndex, __pyx_n_s_TASKS, __pyx_n_s_task_queue, __pyx_n_s_task, __pyx_n_s_fiName, __pyx_n_s_fi, __pyx_n_s_splitComponent_2, __pyx_n_s_fillRate, __pyx_n_s_npg, __pyx_n_s_x, __pyx_n_s_item, __pyx_n_s_i, __pyx_n_s_pos); if (unlikely(!__pyx_tuple__155)) __PYX_ERR(0, 2183, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_tuple__155);
   __Pyx_GIVEREF(__pyx_tuple__155);
-  __pyx_codeobj__156 = (PyObject*)__Pyx_PyCode_New(15, 0, 0, 81, 0, CO_OPTIMIZED|CO_NEWLOCALS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__155, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_cython_cSparseIntegerOutrankingD, __pyx_n_s_init, 2183, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__156)) __PYX_ERR(0, 2183, __pyx_L1_error)
+  __pyx_codeobj__156 = (PyObject*)__Pyx_PyCode_New(15, 0, 0, 82, 0, CO_OPTIMIZED|CO_NEWLOCALS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__155, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_cython_cSparseIntegerOutrankingD, __pyx_n_s_init, 2183, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__156)) __PYX_ERR(0, 2183, __pyx_L1_error)
 
-  /* "cSparseIntegerOutrankingDigraphs.pyx":2455
+  /* "cSparseIntegerOutrankingDigraphs.pyx":2463
  * 
  * 
  *     def _computeQuantileOrdering(self,strategy=None,             # <<<<<<<<<<<<<<
  *                                 bint Descending=True,
  *                                 bint  Threading=False,
  */
-  __pyx_tuple__157 = PyTuple_Pack(41, __pyx_n_s_self, __pyx_n_s_strategy, __pyx_n_s_Descending, __pyx_n_s_Threading, __pyx_n_s_startMethod, __pyx_n_s_nbrOfCPUs, __pyx_n_s_Debug, __pyx_n_s_Comments, __pyx_n_s_x, __pyx_n_s_i, __pyx_n_s_nc, __pyx_n_s_currentContLength, __pyx_n_s_CompSize, __pyx_n_s_lc, __pyx_n_s_hc, __pyx_n_s_score1, __pyx_n_s_score2, __pyx_n_s_score3, __pyx_n_s_score4, __pyx_n_s_itemgetter, __pyx_n_s_actionsCategories, __pyx_n_s_a, __pyx_n_s_lowCateg, __pyx_n_s_highCateg, __pyx_n_s_credibility, __pyx_n_s_rLowLimit, __pyx_n_s_rNotHighLimit, __pyx_n_s_lowQtileValue, __pyx_n_s_highQtileValue, __pyx_n_s_lowQtileLimit, __pyx_n_s_highQtileLimit, __pyx_n_s_actionsCategKeys, __pyx_n_s_actionsCategIntervals, __pyx_n_s_compSize, __pyx_n_s_componentsIntervals, __pyx_n_s_compContent, __pyx_n_s_currContLength, __pyx_n_s_comp, __pyx_n_s_score, __pyx_n_s_item, __pyx_n_s_item); if (unlikely(!__pyx_tuple__157)) __PYX_ERR(0, 2455, __pyx_L1_error)
+  __pyx_tuple__157 = PyTuple_Pack(41, __pyx_n_s_self, __pyx_n_s_strategy, __pyx_n_s_Descending, __pyx_n_s_Threading, __pyx_n_s_startMethod, __pyx_n_s_nbrOfCPUs, __pyx_n_s_Debug, __pyx_n_s_Comments, __pyx_n_s_x, __pyx_n_s_i, __pyx_n_s_nc, __pyx_n_s_currentContLength, __pyx_n_s_CompSize, __pyx_n_s_lc, __pyx_n_s_hc, __pyx_n_s_score1, __pyx_n_s_score2, __pyx_n_s_score3, __pyx_n_s_score4, __pyx_n_s_itemgetter, __pyx_n_s_actionsCategories, __pyx_n_s_a, __pyx_n_s_lowCateg, __pyx_n_s_highCateg, __pyx_n_s_credibility, __pyx_n_s_rLowLimit, __pyx_n_s_rNotHighLimit, __pyx_n_s_lowQtileValue, __pyx_n_s_highQtileValue, __pyx_n_s_lowQtileLimit, __pyx_n_s_highQtileLimit, __pyx_n_s_actionsCategKeys, __pyx_n_s_actionsCategIntervals, __pyx_n_s_compSize, __pyx_n_s_componentsIntervals, __pyx_n_s_compContent, __pyx_n_s_currContLength, __pyx_n_s_comp, __pyx_n_s_score, __pyx_n_s_item, __pyx_n_s_item); if (unlikely(!__pyx_tuple__157)) __PYX_ERR(0, 2463, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_tuple__157);
   __Pyx_GIVEREF(__pyx_tuple__157);
-  __pyx_codeobj__158 = (PyObject*)__Pyx_PyCode_New(8, 0, 0, 41, 0, CO_OPTIMIZED|CO_NEWLOCALS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__157, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_cython_cSparseIntegerOutrankingD, __pyx_n_s_computeQuantileOrdering, 2455, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__158)) __PYX_ERR(0, 2455, __pyx_L1_error)
+  __pyx_codeobj__158 = (PyObject*)__Pyx_PyCode_New(8, 0, 0, 41, 0, CO_OPTIMIZED|CO_NEWLOCALS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__157, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_cython_cSparseIntegerOutrankingD, __pyx_n_s_computeQuantileOrdering, 2463, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__158)) __PYX_ERR(0, 2463, __pyx_L1_error)
 
-  /* "cSparseIntegerOutrankingDigraphs.pyx":2588
+  /* "cSparseIntegerOutrankingDigraphs.pyx":2596
  *         return componentsIntervals
  * 
  *     def computeActionCategories(self,int action,             # <<<<<<<<<<<<<<
  *                                     bint Show=False,
  *                                     bint Debug=False,
  */
-  __pyx_codeobj__159 = (PyObject*)__Pyx_PyCode_New(8, 0, 0, 19, 0, CO_OPTIMIZED|CO_NEWLOCALS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__121, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_cython_cSparseIntegerOutrankingD, __pyx_n_s_computeActionCategories, 2588, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__159)) __PYX_ERR(0, 2588, __pyx_L1_error)
+  __pyx_codeobj__159 = (PyObject*)__Pyx_PyCode_New(8, 0, 0, 19, 0, CO_OPTIMIZED|CO_NEWLOCALS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__121, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_cython_cSparseIntegerOutrankingD, __pyx_n_s_computeActionCategories, 2596, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__159)) __PYX_ERR(0, 2596, __pyx_L1_error)
 
-  /* "cSparseIntegerOutrankingDigraphs.pyx":2684
+  /* "cSparseIntegerOutrankingDigraphs.pyx":2692
  *             #         notHighLimit
  * 
  *     def computeCriterion2RankingCorrelation(self,criterion,             # <<<<<<<<<<<<<<
  *                                             bint Threading=False,\
- *                                     nbrOfCPUs=1,
+ *                                     nbrOfCPUs=None,
  */
-  __pyx_codeobj__160 = (PyObject*)__Pyx_PyCode_New(7, 0, 0, 11, 0, CO_OPTIMIZED|CO_NEWLOCALS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__123, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_cython_cSparseIntegerOutrankingD, __pyx_n_s_computeCriterion2RankingCorrelat, 2684, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__160)) __PYX_ERR(0, 2684, __pyx_L1_error)
+  __pyx_codeobj__160 = (PyObject*)__Pyx_PyCode_New(7, 0, 0, 11, 0, CO_OPTIMIZED|CO_NEWLOCALS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__123, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_cython_cSparseIntegerOutrankingD, __pyx_n_s_computeCriterion2RankingCorrelat, 2692, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__160)) __PYX_ERR(0, 2692, __pyx_L1_error)
 
-  /* "cSparseIntegerOutrankingDigraphs.pyx":2713
+  /* "cSparseIntegerOutrankingDigraphs.pyx":2721
  *         return corr
  * 
  *     def computeMarginalVersusGlobalOutrankingCorrelations(self,             # <<<<<<<<<<<<<<
  *                                 bint Sorted=True,
  *                                 bint ValuedCorrelation=False,
  */
-  __pyx_tuple__161 = PyTuple_Pack(22, __pyx_n_s_self, __pyx_n_s_Sorted, __pyx_n_s_ValuedCorrelation, __pyx_n_s_Threading, __pyx_n_s_startMethod, __pyx_n_s_nbrCores, __pyx_n_s_Comments, __pyx_n_s_i, __pyx_n_s_mp_2, __pyx_n_s_mpctx, __pyx_n_s_Pool, __pyx_n_s_cpu_count, __pyx_n_s_criteriaList, __pyx_n_s_proc, __pyx_n_s_correlations, __pyx_n_s_criteriaCorrelation, __pyx_n_s_criteria, __pyx_n_s_c, __pyx_n_s_corr, __pyx_n_s_x, __pyx_n_s_i, __pyx_n_s_i); if (unlikely(!__pyx_tuple__161)) __PYX_ERR(0, 2713, __pyx_L1_error)
+  __pyx_tuple__161 = PyTuple_Pack(22, __pyx_n_s_self, __pyx_n_s_Sorted, __pyx_n_s_ValuedCorrelation, __pyx_n_s_Threading, __pyx_n_s_startMethod, __pyx_n_s_nbrCores, __pyx_n_s_Comments, __pyx_n_s_i, __pyx_n_s_mp_2, __pyx_n_s_mpctx, __pyx_n_s_Pool, __pyx_n_s_cpu_count, __pyx_n_s_criteriaList, __pyx_n_s_proc, __pyx_n_s_correlations, __pyx_n_s_criteriaCorrelation, __pyx_n_s_criteria, __pyx_n_s_c, __pyx_n_s_corr, __pyx_n_s_x, __pyx_n_s_i, __pyx_n_s_i); if (unlikely(!__pyx_tuple__161)) __PYX_ERR(0, 2721, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_tuple__161);
   __Pyx_GIVEREF(__pyx_tuple__161);
-  __pyx_codeobj__162 = (PyObject*)__Pyx_PyCode_New(7, 0, 0, 22, 0, CO_OPTIMIZED|CO_NEWLOCALS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__161, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_cython_cSparseIntegerOutrankingD, __pyx_n_s_computeMarginalVersusGlobalOutra, 2713, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__162)) __PYX_ERR(0, 2713, __pyx_L1_error)
+  __pyx_codeobj__162 = (PyObject*)__Pyx_PyCode_New(7, 0, 0, 22, 0, CO_OPTIMIZED|CO_NEWLOCALS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__161, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_cython_cSparseIntegerOutrankingD, __pyx_n_s_computeMarginalVersusGlobalOutra, 2721, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__162)) __PYX_ERR(0, 2721, __pyx_L1_error)
 
-  /* "cSparseIntegerOutrankingDigraphs.pyx":2769
+  /* "cSparseIntegerOutrankingDigraphs.pyx":2777
  *         return criteriaCorrelation
  * 
  *     def relation(self, int x, int y):             # <<<<<<<<<<<<<<
  *         """
  *         *Parameters*:
  */
-  __pyx_tuple__163 = PyTuple_Pack(9, __pyx_n_s_self, __pyx_n_s_x, __pyx_n_s_y, __pyx_n_s_Min, __pyx_n_s_Med, __pyx_n_s_Max, __pyx_n_s_rx, __pyx_n_s_ry, __pyx_n_s_boostedRanking); if (unlikely(!__pyx_tuple__163)) __PYX_ERR(0, 2769, __pyx_L1_error)
+  __pyx_tuple__163 = PyTuple_Pack(9, __pyx_n_s_self, __pyx_n_s_x, __pyx_n_s_y, __pyx_n_s_Min, __pyx_n_s_Med, __pyx_n_s_Max, __pyx_n_s_rx, __pyx_n_s_ry, __pyx_n_s_boostedRanking); if (unlikely(!__pyx_tuple__163)) __PYX_ERR(0, 2777, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_tuple__163);
   __Pyx_GIVEREF(__pyx_tuple__163);
-  __pyx_codeobj__164 = (PyObject*)__Pyx_PyCode_New(3, 0, 0, 9, 0, CO_OPTIMIZED|CO_NEWLOCALS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__163, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_cython_cSparseIntegerOutrankingD, __pyx_n_s_relation, 2769, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__164)) __PYX_ERR(0, 2769, __pyx_L1_error)
+  __pyx_codeobj__164 = (PyObject*)__Pyx_PyCode_New(3, 0, 0, 9, 0, CO_OPTIMIZED|CO_NEWLOCALS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__163, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_cython_cSparseIntegerOutrankingD, __pyx_n_s_relation, 2777, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__164)) __PYX_ERR(0, 2777, __pyx_L1_error)
 
-  /* "cSparseIntegerOutrankingDigraphs.pyx":2797
+  /* "cSparseIntegerOutrankingDigraphs.pyx":2805
  *             return Med
  * 
  *     def showMarginalVersusGlobalOutrankingCorrelation(self,             # <<<<<<<<<<<<<<
  *                                                       bint Sorted=True,\
  *                                                       bint Threading=False,\
  */
-  __pyx_codeobj__165 = (PyObject*)__Pyx_PyCode_New(6, 0, 0, 11, 0, CO_OPTIMIZED|CO_NEWLOCALS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__127, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_cython_cSparseIntegerOutrankingD, __pyx_n_s_showMarginalVersusGlobalOutranki, 2797, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__165)) __PYX_ERR(0, 2797, __pyx_L1_error)
+  __pyx_codeobj__165 = (PyObject*)__Pyx_PyCode_New(6, 0, 0, 11, 0, CO_OPTIMIZED|CO_NEWLOCALS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__127, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_cython_cSparseIntegerOutrankingD, __pyx_n_s_showMarginalVersusGlobalOutranki, 2805, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__165)) __PYX_ERR(0, 2805, __pyx_L1_error)
 
-  /* "cSparseIntegerOutrankingDigraphs.pyx":2827
+  /* "cSparseIntegerOutrankingDigraphs.pyx":2835
  *                 print('%9s |  %.2f \t %.3f \t %.3f \t %.3f' % (c,criteria[c]['weight'],x[0],x[1],x[0]*x[1]))
  * 
  *     def showActionsSortingResult(self,actionsSubset=None):             # <<<<<<<<<<<<<<
  *         """
  *         *Parameter*:
  */
-  __pyx_codeobj__166 = (PyObject*)__Pyx_PyCode_New(2, 0, 0, 3, 0, CO_OPTIMIZED|CO_NEWLOCALS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__129, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_cython_cSparseIntegerOutrankingD, __pyx_n_s_showActionsSortingResult, 2827, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__166)) __PYX_ERR(0, 2827, __pyx_L1_error)
+  __pyx_codeobj__166 = (PyObject*)__Pyx_PyCode_New(2, 0, 0, 3, 0, CO_OPTIMIZED|CO_NEWLOCALS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__129, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_cython_cSparseIntegerOutrankingD, __pyx_n_s_showActionsSortingResult, 2835, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__166)) __PYX_ERR(0, 2835, __pyx_L1_error)
 
-  /* "cSparseIntegerOutrankingDigraphs.pyx":2842
+  /* "cSparseIntegerOutrankingDigraphs.pyx":2850
  *                 self.computeActionCategories(x,Show=True)
  * 
  *     def showShort(self,fileName=None,bint WithFileSize=False):             # <<<<<<<<<<<<<<
  *         """
  *         *Parameter*:
  */
-  __pyx_codeobj__167 = (PyObject*)__Pyx_PyCode_New(3, 0, 0, 5, 0, CO_OPTIMIZED|CO_NEWLOCALS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__132, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_cython_cSparseIntegerOutrankingD, __pyx_n_s_showShort, 2842, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__167)) __PYX_ERR(0, 2842, __pyx_L1_error)
+  __pyx_codeobj__167 = (PyObject*)__Pyx_PyCode_New(3, 0, 0, 5, 0, CO_OPTIMIZED|CO_NEWLOCALS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__132, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_cython_cSparseIntegerOutrankingD, __pyx_n_s_showShort, 2850, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__167)) __PYX_ERR(0, 2850, __pyx_L1_error)
 
-  /* "cSparseIntegerOutrankingDigraphs.pyx":2902
+  /* "cSparseIntegerOutrankingDigraphs.pyx":2911
  *             fo.close()
  * 
  *     def showActions(self):             # <<<<<<<<<<<<<<
  *         """
  *         Prints out the actions disctionary.
  */
-  __pyx_tuple__168 = PyTuple_Pack(2, __pyx_n_s_self, __pyx_n_s_x); if (unlikely(!__pyx_tuple__168)) __PYX_ERR(0, 2902, __pyx_L1_error)
+  __pyx_tuple__168 = PyTuple_Pack(2, __pyx_n_s_self, __pyx_n_s_x); if (unlikely(!__pyx_tuple__168)) __PYX_ERR(0, 2911, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_tuple__168);
   __Pyx_GIVEREF(__pyx_tuple__168);
-  __pyx_codeobj__169 = (PyObject*)__Pyx_PyCode_New(1, 0, 0, 2, 0, CO_OPTIMIZED|CO_NEWLOCALS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__168, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_cython_cSparseIntegerOutrankingD, __pyx_n_s_showActions, 2902, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__169)) __PYX_ERR(0, 2902, __pyx_L1_error)
+  __pyx_codeobj__169 = (PyObject*)__Pyx_PyCode_New(1, 0, 0, 2, 0, CO_OPTIMIZED|CO_NEWLOCALS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__168, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_cython_cSparseIntegerOutrankingD, __pyx_n_s_showActions, 2911, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__169)) __PYX_ERR(0, 2911, __pyx_L1_error)
 
-  /* "cSparseIntegerOutrankingDigraphs.pyx":2911
+  /* "cSparseIntegerOutrankingDigraphs.pyx":2920
  *             print('%d: %s' % (x,self.actions[x]['name']) )
  * 
  *     def showCriteria(self, bint IntegerWeights=False, bint Debug=False):             # <<<<<<<<<<<<<<
  *         """
  *         *Parameters*:
  */
-  __pyx_codeobj__170 = (PyObject*)__Pyx_PyCode_New(3, 0, 0, 12, 0, CO_OPTIMIZED|CO_NEWLOCALS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__136, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_cython_cSparseIntegerOutrankingD, __pyx_n_s_showCriteria, 2911, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__170)) __PYX_ERR(0, 2911, __pyx_L1_error)
+  __pyx_codeobj__170 = (PyObject*)__Pyx_PyCode_New(3, 0, 0, 12, 0, CO_OPTIMIZED|CO_NEWLOCALS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__136, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_cython_cSparseIntegerOutrankingD, __pyx_n_s_showCriteria, 2920, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__170)) __PYX_ERR(0, 2920, __pyx_L1_error)
 
-  /* "cSparseIntegerOutrankingDigraphs.pyx":2951
+  /* "cSparseIntegerOutrankingDigraphs.pyx":2960
  *             print()
  * 
  *     def showComponents(self, direction='increasing'):             # <<<<<<<<<<<<<<
  *         """
  *         *Parameter*:
  */
-  __pyx_codeobj__171 = (PyObject*)__Pyx_PyCode_New(2, 0, 0, 2, 0, CO_OPTIMIZED|CO_NEWLOCALS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__138, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_cython_cSparseIntegerOutrankingD, __pyx_n_s_showComponents, 2951, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__171)) __PYX_ERR(0, 2951, __pyx_L1_error)
+  __pyx_codeobj__171 = (PyObject*)__Pyx_PyCode_New(2, 0, 0, 2, 0, CO_OPTIMIZED|CO_NEWLOCALS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__138, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_cython_cSparseIntegerOutrankingD, __pyx_n_s_showComponents, 2960, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__171)) __PYX_ERR(0, 2960, __pyx_L1_error)
 
-  /* "cSparseIntegerOutrankingDigraphs.pyx":2959
+  /* "cSparseIntegerOutrankingDigraphs.pyx":2968
  *         self.showDecomposition(direction=direction)
  * 
  *     def showDecomposition(self, direction='decreasing'):             # <<<<<<<<<<<<<<
  *         """
  *         *Parameter*:
  */
-  __pyx_tuple__172 = PyTuple_Pack(6, __pyx_n_s_self, __pyx_n_s_direction, __pyx_n_s_compKeys, __pyx_n_s_compKey, __pyx_n_s_comp, __pyx_n_s_c); if (unlikely(!__pyx_tuple__172)) __PYX_ERR(0, 2959, __pyx_L1_error)
+  __pyx_tuple__172 = PyTuple_Pack(6, __pyx_n_s_self, __pyx_n_s_direction, __pyx_n_s_compKeys, __pyx_n_s_compKey, __pyx_n_s_comp, __pyx_n_s_c); if (unlikely(!__pyx_tuple__172)) __PYX_ERR(0, 2968, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_tuple__172);
   __Pyx_GIVEREF(__pyx_tuple__172);
-  __pyx_codeobj__173 = (PyObject*)__Pyx_PyCode_New(2, 0, 0, 6, 0, CO_OPTIMIZED|CO_NEWLOCALS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__172, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_cython_cSparseIntegerOutrankingD, __pyx_n_s_showDecomposition, 2959, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__173)) __PYX_ERR(0, 2959, __pyx_L1_error)
+  __pyx_codeobj__173 = (PyObject*)__Pyx_PyCode_New(2, 0, 0, 6, 0, CO_OPTIMIZED|CO_NEWLOCALS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__172, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_cython_cSparseIntegerOutrankingD, __pyx_n_s_showDecomposition, 2968, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__173)) __PYX_ERR(0, 2968, __pyx_L1_error)
 
-  /* "cSparseIntegerOutrankingDigraphs.pyx":2978
+  /* "cSparseIntegerOutrankingDigraphs.pyx":2987
  * 
  * 
  *     def showRelationTable(self, bint IntegerValues=True, compKeys=None):             # <<<<<<<<<<<<<<
  *         """
  *         *Parameters*:
  */
-  __pyx_tuple__174 = PyTuple_Pack(8, __pyx_n_s_self, __pyx_n_s_IntegerValues, __pyx_n_s_compKeys, __pyx_n_s_nc, __pyx_n_s_components, __pyx_n_s_compKey, __pyx_n_s_comp, __pyx_n_s_ranking); if (unlikely(!__pyx_tuple__174)) __PYX_ERR(0, 2978, __pyx_L1_error)
+  __pyx_tuple__174 = PyTuple_Pack(8, __pyx_n_s_self, __pyx_n_s_IntegerValues, __pyx_n_s_compKeys, __pyx_n_s_nc, __pyx_n_s_components, __pyx_n_s_compKey, __pyx_n_s_comp, __pyx_n_s_ranking); if (unlikely(!__pyx_tuple__174)) __PYX_ERR(0, 2987, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_tuple__174);
   __Pyx_GIVEREF(__pyx_tuple__174);
-  __pyx_codeobj__175 = (PyObject*)__Pyx_PyCode_New(3, 0, 0, 8, 0, CO_OPTIMIZED|CO_NEWLOCALS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__174, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_cython_cSparseIntegerOutrankingD, __pyx_n_s_showRelationTable, 2978, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__175)) __PYX_ERR(0, 2978, __pyx_L1_error)
+  __pyx_codeobj__175 = (PyObject*)__Pyx_PyCode_New(3, 0, 0, 8, 0, CO_OPTIMIZED|CO_NEWLOCALS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__174, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_cython_cSparseIntegerOutrankingD, __pyx_n_s_showRelationTable, 2987, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__175)) __PYX_ERR(0, 2987, __pyx_L1_error)
 
-  /* "cSparseIntegerOutrankingDigraphs.pyx":3004
+  /* "cSparseIntegerOutrankingDigraphs.pyx":3013
  *                 print('%s' % ranking)
  * 
  *     def computeDeterminateness(self, bint InPercent=True):             # <<<<<<<<<<<<<<
  *         """
  *         *Parameter*:
  */
-  __pyx_codeobj__176 = (PyObject*)__Pyx_PyCode_New(2, 0, 0, 11, 0, CO_OPTIMIZED|CO_NEWLOCALS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__150, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_cython_cSparseIntegerOutrankingD, __pyx_n_s_computeDeterminateness, 3004, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__176)) __PYX_ERR(0, 3004, __pyx_L1_error)
+  __pyx_codeobj__176 = (PyObject*)__Pyx_PyCode_New(2, 0, 0, 11, 0, CO_OPTIMIZED|CO_NEWLOCALS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__150, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_cython_cSparseIntegerOutrankingD, __pyx_n_s_computeDeterminateness, 3013, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__176)) __PYX_ERR(0, 3013, __pyx_L1_error)
   __Pyx_RefNannyFinishContext();
   return 0;
   __pyx_L1_error:;
@@ -66222,7 +66364,7 @@ if (!__Pyx_RefNanny) {
  *                  componentRankingRule="Copeland",\
  *                  int minimalComponentSize=1,\             # <<<<<<<<<<<<<<
  *                  bint Threading=False,\
- *                  startMethod='spawn',\
+ *                  startMethod=None,\
  */
   __pyx_t_14 = __Pyx_PyInt_From_int(((int)1)); if (unlikely(!__pyx_t_14)) __PYX_ERR(0, 2188, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_14);
@@ -66231,14 +66373,14 @@ if (!__Pyx_RefNanny) {
  *                  componentRankingRule="Copeland",\
  *                  int minimalComponentSize=1,\
  *                  bint Threading=False,\             # <<<<<<<<<<<<<<
- *                  startMethod='spawn',\
+ *                  startMethod=None,\
  *                  tempDir=None,\
  */
   __pyx_t_12 = __Pyx_PyBool_FromLong(((int)0)); if (unlikely(!__pyx_t_12)) __PYX_ERR(0, 2189, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_12);
 
   /* "cSparseIntegerOutrankingDigraphs.pyx":2194
- *                  nbrOfCPUs=4,\
+ *                  nbrOfCPUs=None,\
  *                  save2File=None,\
  *                  bint CopyPerfTab=False,\             # <<<<<<<<<<<<<<
  *                  bint Comments=False,\
@@ -66290,15 +66432,15 @@ if (!__Pyx_RefNanny) {
   if (__Pyx_PyTuple_SET_ITEM(__pyx_t_7, 4, __pyx_t_14)) __PYX_ERR(0, 2183, __pyx_L1_error);
   __Pyx_GIVEREF(__pyx_t_12);
   if (__Pyx_PyTuple_SET_ITEM(__pyx_t_7, 5, __pyx_t_12)) __PYX_ERR(0, 2183, __pyx_L1_error);
-  __Pyx_INCREF(((PyObject*)__pyx_n_u_spawn));
-  __Pyx_GIVEREF(((PyObject*)__pyx_n_u_spawn));
-  if (__Pyx_PyTuple_SET_ITEM(__pyx_t_7, 6, ((PyObject*)__pyx_n_u_spawn))) __PYX_ERR(0, 2183, __pyx_L1_error);
+  __Pyx_INCREF(Py_None);
+  __Pyx_GIVEREF(Py_None);
+  if (__Pyx_PyTuple_SET_ITEM(__pyx_t_7, 6, Py_None)) __PYX_ERR(0, 2183, __pyx_L1_error);
   __Pyx_INCREF(Py_None);
   __Pyx_GIVEREF(Py_None);
   if (__Pyx_PyTuple_SET_ITEM(__pyx_t_7, 7, Py_None)) __PYX_ERR(0, 2183, __pyx_L1_error);
-  __Pyx_INCREF(((PyObject *)__pyx_int_4));
-  __Pyx_GIVEREF(((PyObject *)__pyx_int_4));
-  if (__Pyx_PyTuple_SET_ITEM(__pyx_t_7, 8, ((PyObject *)__pyx_int_4))) __PYX_ERR(0, 2183, __pyx_L1_error);
+  __Pyx_INCREF(Py_None);
+  __Pyx_GIVEREF(Py_None);
+  if (__Pyx_PyTuple_SET_ITEM(__pyx_t_7, 8, Py_None)) __PYX_ERR(0, 2183, __pyx_L1_error);
   __Pyx_INCREF(Py_None);
   __Pyx_GIVEREF(Py_None);
   if (__Pyx_PyTuple_SET_ITEM(__pyx_t_7, 9, Py_None)) __PYX_ERR(0, 2183, __pyx_L1_error);
@@ -66322,509 +66464,509 @@ if (!__Pyx_RefNanny) {
   if (__Pyx_SetNameInClass(__pyx_t_10, __pyx_n_s_init, __pyx_t_5) < 0) __PYX_ERR(0, 2183, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
 
-  /* "cSparseIntegerOutrankingDigraphs.pyx":2456
+  /* "cSparseIntegerOutrankingDigraphs.pyx":2464
  * 
  *     def _computeQuantileOrdering(self,strategy=None,
  *                                 bint Descending=True,             # <<<<<<<<<<<<<<
  *                                 bint  Threading=False,
  *                                  startMethod=None,
  */
-  __pyx_t_5 = __Pyx_PyBool_FromLong(((int)1)); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 2456, __pyx_L1_error)
+  __pyx_t_5 = __Pyx_PyBool_FromLong(((int)1)); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 2464, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_5);
 
-  /* "cSparseIntegerOutrankingDigraphs.pyx":2457
+  /* "cSparseIntegerOutrankingDigraphs.pyx":2465
  *     def _computeQuantileOrdering(self,strategy=None,
  *                                 bint Descending=True,
  *                                 bint  Threading=False,             # <<<<<<<<<<<<<<
  *                                  startMethod=None,
- *                                 nbrOfCPUs=4,
+ *                                 nbrOfCPUs=None,
  */
-  __pyx_t_7 = __Pyx_PyBool_FromLong(((int)0)); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 2457, __pyx_L1_error)
+  __pyx_t_7 = __Pyx_PyBool_FromLong(((int)0)); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 2465, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_7);
 
-  /* "cSparseIntegerOutrankingDigraphs.pyx":2460
+  /* "cSparseIntegerOutrankingDigraphs.pyx":2468
  *                                  startMethod=None,
- *                                 nbrOfCPUs=4,
+ *                                 nbrOfCPUs=None,
  *                                 bint Debug=False,             # <<<<<<<<<<<<<<
  *                                 bint Comments=False):
  *         """
  */
-  __pyx_t_13 = __Pyx_PyBool_FromLong(((int)0)); if (unlikely(!__pyx_t_13)) __PYX_ERR(0, 2460, __pyx_L1_error)
+  __pyx_t_13 = __Pyx_PyBool_FromLong(((int)0)); if (unlikely(!__pyx_t_13)) __PYX_ERR(0, 2468, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_13);
 
-  /* "cSparseIntegerOutrankingDigraphs.pyx":2461
- *                                 nbrOfCPUs=4,
+  /* "cSparseIntegerOutrankingDigraphs.pyx":2469
+ *                                 nbrOfCPUs=None,
  *                                 bint Debug=False,
  *                                 bint Comments=False):             # <<<<<<<<<<<<<<
  *         """
  *         Renders the quantile interval of the decision actions.
  */
-  __pyx_t_11 = __Pyx_PyBool_FromLong(((int)0)); if (unlikely(!__pyx_t_11)) __PYX_ERR(0, 2461, __pyx_L1_error)
+  __pyx_t_11 = __Pyx_PyBool_FromLong(((int)0)); if (unlikely(!__pyx_t_11)) __PYX_ERR(0, 2469, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_11);
 
-  /* "cSparseIntegerOutrankingDigraphs.pyx":2455
+  /* "cSparseIntegerOutrankingDigraphs.pyx":2463
  * 
  * 
  *     def _computeQuantileOrdering(self,strategy=None,             # <<<<<<<<<<<<<<
  *                                 bint Descending=True,
  *                                 bint  Threading=False,
  */
-  __pyx_t_12 = PyTuple_New(7); if (unlikely(!__pyx_t_12)) __PYX_ERR(0, 2455, __pyx_L1_error)
+  __pyx_t_12 = PyTuple_New(7); if (unlikely(!__pyx_t_12)) __PYX_ERR(0, 2463, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_12);
   __Pyx_INCREF(Py_None);
   __Pyx_GIVEREF(Py_None);
-  if (__Pyx_PyTuple_SET_ITEM(__pyx_t_12, 0, Py_None)) __PYX_ERR(0, 2455, __pyx_L1_error);
+  if (__Pyx_PyTuple_SET_ITEM(__pyx_t_12, 0, Py_None)) __PYX_ERR(0, 2463, __pyx_L1_error);
   __Pyx_GIVEREF(__pyx_t_5);
-  if (__Pyx_PyTuple_SET_ITEM(__pyx_t_12, 1, __pyx_t_5)) __PYX_ERR(0, 2455, __pyx_L1_error);
+  if (__Pyx_PyTuple_SET_ITEM(__pyx_t_12, 1, __pyx_t_5)) __PYX_ERR(0, 2463, __pyx_L1_error);
   __Pyx_GIVEREF(__pyx_t_7);
-  if (__Pyx_PyTuple_SET_ITEM(__pyx_t_12, 2, __pyx_t_7)) __PYX_ERR(0, 2455, __pyx_L1_error);
+  if (__Pyx_PyTuple_SET_ITEM(__pyx_t_12, 2, __pyx_t_7)) __PYX_ERR(0, 2463, __pyx_L1_error);
   __Pyx_INCREF(Py_None);
   __Pyx_GIVEREF(Py_None);
-  if (__Pyx_PyTuple_SET_ITEM(__pyx_t_12, 3, Py_None)) __PYX_ERR(0, 2455, __pyx_L1_error);
-  __Pyx_INCREF(((PyObject *)__pyx_int_4));
-  __Pyx_GIVEREF(((PyObject *)__pyx_int_4));
-  if (__Pyx_PyTuple_SET_ITEM(__pyx_t_12, 4, ((PyObject *)__pyx_int_4))) __PYX_ERR(0, 2455, __pyx_L1_error);
+  if (__Pyx_PyTuple_SET_ITEM(__pyx_t_12, 3, Py_None)) __PYX_ERR(0, 2463, __pyx_L1_error);
+  __Pyx_INCREF(Py_None);
+  __Pyx_GIVEREF(Py_None);
+  if (__Pyx_PyTuple_SET_ITEM(__pyx_t_12, 4, Py_None)) __PYX_ERR(0, 2463, __pyx_L1_error);
   __Pyx_GIVEREF(__pyx_t_13);
-  if (__Pyx_PyTuple_SET_ITEM(__pyx_t_12, 5, __pyx_t_13)) __PYX_ERR(0, 2455, __pyx_L1_error);
+  if (__Pyx_PyTuple_SET_ITEM(__pyx_t_12, 5, __pyx_t_13)) __PYX_ERR(0, 2463, __pyx_L1_error);
   __Pyx_GIVEREF(__pyx_t_11);
-  if (__Pyx_PyTuple_SET_ITEM(__pyx_t_12, 6, __pyx_t_11)) __PYX_ERR(0, 2455, __pyx_L1_error);
+  if (__Pyx_PyTuple_SET_ITEM(__pyx_t_12, 6, __pyx_t_11)) __PYX_ERR(0, 2463, __pyx_L1_error);
   __pyx_t_5 = 0;
   __pyx_t_7 = 0;
   __pyx_t_13 = 0;
   __pyx_t_11 = 0;
-  __pyx_t_11 = __Pyx_CyFunction_New(&__pyx_mdef_32cSparseIntegerOutrankingDigraphs_24cQuantilesRankingDigraph_3_computeQuantileOrdering, 0, __pyx_n_s_cQuantilesRankingDigraph__comput, NULL, __pyx_n_s_cSparseIntegerOutrankingDigraphs, __pyx_d, ((PyObject *)__pyx_codeobj__158)); if (unlikely(!__pyx_t_11)) __PYX_ERR(0, 2455, __pyx_L1_error)
+  __pyx_t_11 = __Pyx_CyFunction_New(&__pyx_mdef_32cSparseIntegerOutrankingDigraphs_24cQuantilesRankingDigraph_3_computeQuantileOrdering, 0, __pyx_n_s_cQuantilesRankingDigraph__comput, NULL, __pyx_n_s_cSparseIntegerOutrankingDigraphs, __pyx_d, ((PyObject *)__pyx_codeobj__158)); if (unlikely(!__pyx_t_11)) __PYX_ERR(0, 2463, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_11);
   __Pyx_CyFunction_SetDefaultsTuple(__pyx_t_11, __pyx_t_12);
   __Pyx_DECREF(__pyx_t_12); __pyx_t_12 = 0;
-  if (__Pyx_SetNameInClass(__pyx_t_10, __pyx_n_s_computeQuantileOrdering, __pyx_t_11) < 0) __PYX_ERR(0, 2455, __pyx_L1_error)
+  if (__Pyx_SetNameInClass(__pyx_t_10, __pyx_n_s_computeQuantileOrdering, __pyx_t_11) < 0) __PYX_ERR(0, 2463, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_11); __pyx_t_11 = 0;
 
-  /* "cSparseIntegerOutrankingDigraphs.pyx":2589
+  /* "cSparseIntegerOutrankingDigraphs.pyx":2597
  * 
  *     def computeActionCategories(self,int action,
  *                                     bint Show=False,             # <<<<<<<<<<<<<<
  *                                     bint Debug=False,
  *                                     bint Comments=False,
  */
-  __pyx_t_11 = __Pyx_PyBool_FromLong(((int)0)); if (unlikely(!__pyx_t_11)) __PYX_ERR(0, 2589, __pyx_L1_error)
+  __pyx_t_11 = __Pyx_PyBool_FromLong(((int)0)); if (unlikely(!__pyx_t_11)) __PYX_ERR(0, 2597, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_11);
 
-  /* "cSparseIntegerOutrankingDigraphs.pyx":2590
+  /* "cSparseIntegerOutrankingDigraphs.pyx":2598
  *     def computeActionCategories(self,int action,
  *                                     bint Show=False,
  *                                     bint Debug=False,             # <<<<<<<<<<<<<<
  *                                     bint Comments=False,
  *                                 bint Threading=False,
  */
-  __pyx_t_12 = __Pyx_PyBool_FromLong(((int)0)); if (unlikely(!__pyx_t_12)) __PYX_ERR(0, 2590, __pyx_L1_error)
+  __pyx_t_12 = __Pyx_PyBool_FromLong(((int)0)); if (unlikely(!__pyx_t_12)) __PYX_ERR(0, 2598, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_12);
 
-  /* "cSparseIntegerOutrankingDigraphs.pyx":2591
+  /* "cSparseIntegerOutrankingDigraphs.pyx":2599
  *                                     bint Show=False,
  *                                     bint Debug=False,
  *                                     bint Comments=False,             # <<<<<<<<<<<<<<
  *                                 bint Threading=False,
- *                                 startMethod='spawn',
+ *                                 startMethod=None,
  */
-  __pyx_t_13 = __Pyx_PyBool_FromLong(((int)0)); if (unlikely(!__pyx_t_13)) __PYX_ERR(0, 2591, __pyx_L1_error)
+  __pyx_t_13 = __Pyx_PyBool_FromLong(((int)0)); if (unlikely(!__pyx_t_13)) __PYX_ERR(0, 2599, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_13);
 
-  /* "cSparseIntegerOutrankingDigraphs.pyx":2592
+  /* "cSparseIntegerOutrankingDigraphs.pyx":2600
  *                                     bint Debug=False,
  *                                     bint Comments=False,
  *                                 bint Threading=False,             # <<<<<<<<<<<<<<
- *                                 startMethod='spawn',
- *                                 nbrOfCPUs=1):
+ *                                 startMethod=None,
+ *                                 nbrOfCPUs=None):
  */
-  __pyx_t_7 = __Pyx_PyBool_FromLong(((int)0)); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 2592, __pyx_L1_error)
+  __pyx_t_7 = __Pyx_PyBool_FromLong(((int)0)); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 2600, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_7);
 
-  /* "cSparseIntegerOutrankingDigraphs.pyx":2588
+  /* "cSparseIntegerOutrankingDigraphs.pyx":2596
  *         return componentsIntervals
  * 
  *     def computeActionCategories(self,int action,             # <<<<<<<<<<<<<<
  *                                     bint Show=False,
  *                                     bint Debug=False,
  */
-  __pyx_t_5 = PyTuple_New(6); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 2588, __pyx_L1_error)
+  __pyx_t_5 = PyTuple_New(6); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 2596, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_5);
   __Pyx_GIVEREF(__pyx_t_11);
-  if (__Pyx_PyTuple_SET_ITEM(__pyx_t_5, 0, __pyx_t_11)) __PYX_ERR(0, 2588, __pyx_L1_error);
+  if (__Pyx_PyTuple_SET_ITEM(__pyx_t_5, 0, __pyx_t_11)) __PYX_ERR(0, 2596, __pyx_L1_error);
   __Pyx_GIVEREF(__pyx_t_12);
-  if (__Pyx_PyTuple_SET_ITEM(__pyx_t_5, 1, __pyx_t_12)) __PYX_ERR(0, 2588, __pyx_L1_error);
+  if (__Pyx_PyTuple_SET_ITEM(__pyx_t_5, 1, __pyx_t_12)) __PYX_ERR(0, 2596, __pyx_L1_error);
   __Pyx_GIVEREF(__pyx_t_13);
-  if (__Pyx_PyTuple_SET_ITEM(__pyx_t_5, 2, __pyx_t_13)) __PYX_ERR(0, 2588, __pyx_L1_error);
+  if (__Pyx_PyTuple_SET_ITEM(__pyx_t_5, 2, __pyx_t_13)) __PYX_ERR(0, 2596, __pyx_L1_error);
   __Pyx_GIVEREF(__pyx_t_7);
-  if (__Pyx_PyTuple_SET_ITEM(__pyx_t_5, 3, __pyx_t_7)) __PYX_ERR(0, 2588, __pyx_L1_error);
-  __Pyx_INCREF(((PyObject*)__pyx_n_u_spawn));
-  __Pyx_GIVEREF(((PyObject*)__pyx_n_u_spawn));
-  if (__Pyx_PyTuple_SET_ITEM(__pyx_t_5, 4, ((PyObject*)__pyx_n_u_spawn))) __PYX_ERR(0, 2588, __pyx_L1_error);
-  __Pyx_INCREF(((PyObject *)__pyx_int_1));
-  __Pyx_GIVEREF(((PyObject *)__pyx_int_1));
-  if (__Pyx_PyTuple_SET_ITEM(__pyx_t_5, 5, ((PyObject *)__pyx_int_1))) __PYX_ERR(0, 2588, __pyx_L1_error);
+  if (__Pyx_PyTuple_SET_ITEM(__pyx_t_5, 3, __pyx_t_7)) __PYX_ERR(0, 2596, __pyx_L1_error);
+  __Pyx_INCREF(Py_None);
+  __Pyx_GIVEREF(Py_None);
+  if (__Pyx_PyTuple_SET_ITEM(__pyx_t_5, 4, Py_None)) __PYX_ERR(0, 2596, __pyx_L1_error);
+  __Pyx_INCREF(Py_None);
+  __Pyx_GIVEREF(Py_None);
+  if (__Pyx_PyTuple_SET_ITEM(__pyx_t_5, 5, Py_None)) __PYX_ERR(0, 2596, __pyx_L1_error);
   __pyx_t_11 = 0;
   __pyx_t_12 = 0;
   __pyx_t_13 = 0;
   __pyx_t_7 = 0;
-  __pyx_t_7 = __Pyx_CyFunction_New(&__pyx_mdef_32cSparseIntegerOutrankingDigraphs_24cQuantilesRankingDigraph_5computeActionCategories, 0, __pyx_n_s_cQuantilesRankingDigraph_compute, NULL, __pyx_n_s_cSparseIntegerOutrankingDigraphs, __pyx_d, ((PyObject *)__pyx_codeobj__159)); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 2588, __pyx_L1_error)
+  __pyx_t_7 = __Pyx_CyFunction_New(&__pyx_mdef_32cSparseIntegerOutrankingDigraphs_24cQuantilesRankingDigraph_5computeActionCategories, 0, __pyx_n_s_cQuantilesRankingDigraph_compute, NULL, __pyx_n_s_cSparseIntegerOutrankingDigraphs, __pyx_d, ((PyObject *)__pyx_codeobj__159)); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 2596, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_7);
   __Pyx_CyFunction_SetDefaultsTuple(__pyx_t_7, __pyx_t_5);
   __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
-  if (__Pyx_SetNameInClass(__pyx_t_10, __pyx_n_s_computeActionCategories, __pyx_t_7) < 0) __PYX_ERR(0, 2588, __pyx_L1_error)
+  if (__Pyx_SetNameInClass(__pyx_t_10, __pyx_n_s_computeActionCategories, __pyx_t_7) < 0) __PYX_ERR(0, 2596, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_7); __pyx_t_7 = 0;
 
-  /* "cSparseIntegerOutrankingDigraphs.pyx":2685
+  /* "cSparseIntegerOutrankingDigraphs.pyx":2693
  * 
  *     def computeCriterion2RankingCorrelation(self,criterion,
  *                                             bint Threading=False,\             # <<<<<<<<<<<<<<
- *                                     nbrOfCPUs=1,
- *                                             startMethod='spawn',
+ *                                     nbrOfCPUs=None,
+ *                                             startMethod=None,
  */
-  __pyx_t_7 = __Pyx_PyBool_FromLong(((int)0)); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 2685, __pyx_L1_error)
+  __pyx_t_7 = __Pyx_PyBool_FromLong(((int)0)); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 2693, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_7);
 
-  /* "cSparseIntegerOutrankingDigraphs.pyx":2688
- *                                     nbrOfCPUs=1,
- *                                             startMethod='spawn',
+  /* "cSparseIntegerOutrankingDigraphs.pyx":2696
+ *                                     nbrOfCPUs=None,
+ *                                             startMethod=None,
  *                                     bint Debug=False,             # <<<<<<<<<<<<<<
  *                                     bint Comments=False):
  *         """
  */
-  __pyx_t_5 = __Pyx_PyBool_FromLong(((int)0)); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 2688, __pyx_L1_error)
+  __pyx_t_5 = __Pyx_PyBool_FromLong(((int)0)); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 2696, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_5);
 
-  /* "cSparseIntegerOutrankingDigraphs.pyx":2689
- *                                             startMethod='spawn',
+  /* "cSparseIntegerOutrankingDigraphs.pyx":2697
+ *                                             startMethod=None,
  *                                     bint Debug=False,
  *                                     bint Comments=False):             # <<<<<<<<<<<<<<
  *         """
  *         *Parameters*:
  */
-  __pyx_t_13 = __Pyx_PyBool_FromLong(((int)0)); if (unlikely(!__pyx_t_13)) __PYX_ERR(0, 2689, __pyx_L1_error)
+  __pyx_t_13 = __Pyx_PyBool_FromLong(((int)0)); if (unlikely(!__pyx_t_13)) __PYX_ERR(0, 2697, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_13);
 
-  /* "cSparseIntegerOutrankingDigraphs.pyx":2684
+  /* "cSparseIntegerOutrankingDigraphs.pyx":2692
  *             #         notHighLimit
  * 
  *     def computeCriterion2RankingCorrelation(self,criterion,             # <<<<<<<<<<<<<<
  *                                             bint Threading=False,\
- *                                     nbrOfCPUs=1,
+ *                                     nbrOfCPUs=None,
  */
-  __pyx_t_12 = PyTuple_New(5); if (unlikely(!__pyx_t_12)) __PYX_ERR(0, 2684, __pyx_L1_error)
+  __pyx_t_12 = PyTuple_New(5); if (unlikely(!__pyx_t_12)) __PYX_ERR(0, 2692, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_12);
   __Pyx_GIVEREF(__pyx_t_7);
-  if (__Pyx_PyTuple_SET_ITEM(__pyx_t_12, 0, __pyx_t_7)) __PYX_ERR(0, 2684, __pyx_L1_error);
-  __Pyx_INCREF(((PyObject *)__pyx_int_1));
-  __Pyx_GIVEREF(((PyObject *)__pyx_int_1));
-  if (__Pyx_PyTuple_SET_ITEM(__pyx_t_12, 1, ((PyObject *)__pyx_int_1))) __PYX_ERR(0, 2684, __pyx_L1_error);
-  __Pyx_INCREF(((PyObject*)__pyx_n_u_spawn));
-  __Pyx_GIVEREF(((PyObject*)__pyx_n_u_spawn));
-  if (__Pyx_PyTuple_SET_ITEM(__pyx_t_12, 2, ((PyObject*)__pyx_n_u_spawn))) __PYX_ERR(0, 2684, __pyx_L1_error);
+  if (__Pyx_PyTuple_SET_ITEM(__pyx_t_12, 0, __pyx_t_7)) __PYX_ERR(0, 2692, __pyx_L1_error);
+  __Pyx_INCREF(Py_None);
+  __Pyx_GIVEREF(Py_None);
+  if (__Pyx_PyTuple_SET_ITEM(__pyx_t_12, 1, Py_None)) __PYX_ERR(0, 2692, __pyx_L1_error);
+  __Pyx_INCREF(Py_None);
+  __Pyx_GIVEREF(Py_None);
+  if (__Pyx_PyTuple_SET_ITEM(__pyx_t_12, 2, Py_None)) __PYX_ERR(0, 2692, __pyx_L1_error);
   __Pyx_GIVEREF(__pyx_t_5);
-  if (__Pyx_PyTuple_SET_ITEM(__pyx_t_12, 3, __pyx_t_5)) __PYX_ERR(0, 2684, __pyx_L1_error);
+  if (__Pyx_PyTuple_SET_ITEM(__pyx_t_12, 3, __pyx_t_5)) __PYX_ERR(0, 2692, __pyx_L1_error);
   __Pyx_GIVEREF(__pyx_t_13);
-  if (__Pyx_PyTuple_SET_ITEM(__pyx_t_12, 4, __pyx_t_13)) __PYX_ERR(0, 2684, __pyx_L1_error);
+  if (__Pyx_PyTuple_SET_ITEM(__pyx_t_12, 4, __pyx_t_13)) __PYX_ERR(0, 2692, __pyx_L1_error);
   __pyx_t_7 = 0;
   __pyx_t_5 = 0;
   __pyx_t_13 = 0;
-  __pyx_t_13 = __Pyx_CyFunction_New(&__pyx_mdef_32cSparseIntegerOutrankingDigraphs_24cQuantilesRankingDigraph_7computeCriterion2RankingCorrelation, 0, __pyx_n_s_cQuantilesRankingDigraph_compute_2, NULL, __pyx_n_s_cSparseIntegerOutrankingDigraphs, __pyx_d, ((PyObject *)__pyx_codeobj__160)); if (unlikely(!__pyx_t_13)) __PYX_ERR(0, 2684, __pyx_L1_error)
+  __pyx_t_13 = __Pyx_CyFunction_New(&__pyx_mdef_32cSparseIntegerOutrankingDigraphs_24cQuantilesRankingDigraph_7computeCriterion2RankingCorrelation, 0, __pyx_n_s_cQuantilesRankingDigraph_compute_2, NULL, __pyx_n_s_cSparseIntegerOutrankingDigraphs, __pyx_d, ((PyObject *)__pyx_codeobj__160)); if (unlikely(!__pyx_t_13)) __PYX_ERR(0, 2692, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_13);
   __Pyx_CyFunction_SetDefaultsTuple(__pyx_t_13, __pyx_t_12);
   __Pyx_DECREF(__pyx_t_12); __pyx_t_12 = 0;
-  if (__Pyx_SetNameInClass(__pyx_t_10, __pyx_n_s_computeCriterion2RankingCorrelat, __pyx_t_13) < 0) __PYX_ERR(0, 2684, __pyx_L1_error)
+  if (__Pyx_SetNameInClass(__pyx_t_10, __pyx_n_s_computeCriterion2RankingCorrelat, __pyx_t_13) < 0) __PYX_ERR(0, 2692, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_13); __pyx_t_13 = 0;
 
-  /* "cSparseIntegerOutrankingDigraphs.pyx":2714
+  /* "cSparseIntegerOutrankingDigraphs.pyx":2722
  * 
  *     def computeMarginalVersusGlobalOutrankingCorrelations(self,
  *                                 bint Sorted=True,             # <<<<<<<<<<<<<<
  *                                 bint ValuedCorrelation=False,
  *                                 bint Threading=False,
  */
-  __pyx_t_13 = __Pyx_PyBool_FromLong(((int)1)); if (unlikely(!__pyx_t_13)) __PYX_ERR(0, 2714, __pyx_L1_error)
+  __pyx_t_13 = __Pyx_PyBool_FromLong(((int)1)); if (unlikely(!__pyx_t_13)) __PYX_ERR(0, 2722, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_13);
 
-  /* "cSparseIntegerOutrankingDigraphs.pyx":2715
+  /* "cSparseIntegerOutrankingDigraphs.pyx":2723
  *     def computeMarginalVersusGlobalOutrankingCorrelations(self,
  *                                 bint Sorted=True,
  *                                 bint ValuedCorrelation=False,             # <<<<<<<<<<<<<<
  *                                 bint Threading=False,
- *                                 startMethod='spawn',
+ *                                 startMethod=None,
  */
-  __pyx_t_12 = __Pyx_PyBool_FromLong(((int)0)); if (unlikely(!__pyx_t_12)) __PYX_ERR(0, 2715, __pyx_L1_error)
+  __pyx_t_12 = __Pyx_PyBool_FromLong(((int)0)); if (unlikely(!__pyx_t_12)) __PYX_ERR(0, 2723, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_12);
 
-  /* "cSparseIntegerOutrankingDigraphs.pyx":2716
+  /* "cSparseIntegerOutrankingDigraphs.pyx":2724
  *                                 bint Sorted=True,
  *                                 bint ValuedCorrelation=False,
  *                                 bint Threading=False,             # <<<<<<<<<<<<<<
- *                                 startMethod='spawn',
+ *                                 startMethod=None,
  *                                 nbrCores=None,\
  */
-  __pyx_t_5 = __Pyx_PyBool_FromLong(((int)0)); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 2716, __pyx_L1_error)
+  __pyx_t_5 = __Pyx_PyBool_FromLong(((int)0)); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 2724, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_5);
 
-  /* "cSparseIntegerOutrankingDigraphs.pyx":2719
- *                                 startMethod='spawn',
+  /* "cSparseIntegerOutrankingDigraphs.pyx":2727
+ *                                 startMethod=None,
  *                                 nbrCores=None,\
  *                                 bint Comments=False):             # <<<<<<<<<<<<<<
  *         """
  *         *Parameters*:
  */
-  __pyx_t_7 = __Pyx_PyBool_FromLong(((int)0)); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 2719, __pyx_L1_error)
+  __pyx_t_7 = __Pyx_PyBool_FromLong(((int)0)); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 2727, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_7);
 
-  /* "cSparseIntegerOutrankingDigraphs.pyx":2713
+  /* "cSparseIntegerOutrankingDigraphs.pyx":2721
  *         return corr
  * 
  *     def computeMarginalVersusGlobalOutrankingCorrelations(self,             # <<<<<<<<<<<<<<
  *                                 bint Sorted=True,
  *                                 bint ValuedCorrelation=False,
  */
-  __pyx_t_11 = PyTuple_New(6); if (unlikely(!__pyx_t_11)) __PYX_ERR(0, 2713, __pyx_L1_error)
+  __pyx_t_11 = PyTuple_New(6); if (unlikely(!__pyx_t_11)) __PYX_ERR(0, 2721, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_11);
   __Pyx_GIVEREF(__pyx_t_13);
-  if (__Pyx_PyTuple_SET_ITEM(__pyx_t_11, 0, __pyx_t_13)) __PYX_ERR(0, 2713, __pyx_L1_error);
+  if (__Pyx_PyTuple_SET_ITEM(__pyx_t_11, 0, __pyx_t_13)) __PYX_ERR(0, 2721, __pyx_L1_error);
   __Pyx_GIVEREF(__pyx_t_12);
-  if (__Pyx_PyTuple_SET_ITEM(__pyx_t_11, 1, __pyx_t_12)) __PYX_ERR(0, 2713, __pyx_L1_error);
+  if (__Pyx_PyTuple_SET_ITEM(__pyx_t_11, 1, __pyx_t_12)) __PYX_ERR(0, 2721, __pyx_L1_error);
   __Pyx_GIVEREF(__pyx_t_5);
-  if (__Pyx_PyTuple_SET_ITEM(__pyx_t_11, 2, __pyx_t_5)) __PYX_ERR(0, 2713, __pyx_L1_error);
-  __Pyx_INCREF(((PyObject*)__pyx_n_u_spawn));
-  __Pyx_GIVEREF(((PyObject*)__pyx_n_u_spawn));
-  if (__Pyx_PyTuple_SET_ITEM(__pyx_t_11, 3, ((PyObject*)__pyx_n_u_spawn))) __PYX_ERR(0, 2713, __pyx_L1_error);
+  if (__Pyx_PyTuple_SET_ITEM(__pyx_t_11, 2, __pyx_t_5)) __PYX_ERR(0, 2721, __pyx_L1_error);
   __Pyx_INCREF(Py_None);
   __Pyx_GIVEREF(Py_None);
-  if (__Pyx_PyTuple_SET_ITEM(__pyx_t_11, 4, Py_None)) __PYX_ERR(0, 2713, __pyx_L1_error);
+  if (__Pyx_PyTuple_SET_ITEM(__pyx_t_11, 3, Py_None)) __PYX_ERR(0, 2721, __pyx_L1_error);
+  __Pyx_INCREF(Py_None);
+  __Pyx_GIVEREF(Py_None);
+  if (__Pyx_PyTuple_SET_ITEM(__pyx_t_11, 4, Py_None)) __PYX_ERR(0, 2721, __pyx_L1_error);
   __Pyx_GIVEREF(__pyx_t_7);
-  if (__Pyx_PyTuple_SET_ITEM(__pyx_t_11, 5, __pyx_t_7)) __PYX_ERR(0, 2713, __pyx_L1_error);
+  if (__Pyx_PyTuple_SET_ITEM(__pyx_t_11, 5, __pyx_t_7)) __PYX_ERR(0, 2721, __pyx_L1_error);
   __pyx_t_13 = 0;
   __pyx_t_12 = 0;
   __pyx_t_5 = 0;
   __pyx_t_7 = 0;
-  __pyx_t_7 = __Pyx_CyFunction_New(&__pyx_mdef_32cSparseIntegerOutrankingDigraphs_24cQuantilesRankingDigraph_9computeMarginalVersusGlobalOutrankingCorrelations, 0, __pyx_n_s_cQuantilesRankingDigraph_compute_3, NULL, __pyx_n_s_cSparseIntegerOutrankingDigraphs, __pyx_d, ((PyObject *)__pyx_codeobj__162)); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 2713, __pyx_L1_error)
+  __pyx_t_7 = __Pyx_CyFunction_New(&__pyx_mdef_32cSparseIntegerOutrankingDigraphs_24cQuantilesRankingDigraph_9computeMarginalVersusGlobalOutrankingCorrelations, 0, __pyx_n_s_cQuantilesRankingDigraph_compute_3, NULL, __pyx_n_s_cSparseIntegerOutrankingDigraphs, __pyx_d, ((PyObject *)__pyx_codeobj__162)); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 2721, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_7);
   __Pyx_CyFunction_SetDefaultsTuple(__pyx_t_7, __pyx_t_11);
   __Pyx_DECREF(__pyx_t_11); __pyx_t_11 = 0;
-  if (__Pyx_SetNameInClass(__pyx_t_10, __pyx_n_s_computeMarginalVersusGlobalOutra, __pyx_t_7) < 0) __PYX_ERR(0, 2713, __pyx_L1_error)
+  if (__Pyx_SetNameInClass(__pyx_t_10, __pyx_n_s_computeMarginalVersusGlobalOutra, __pyx_t_7) < 0) __PYX_ERR(0, 2721, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_7); __pyx_t_7 = 0;
 
-  /* "cSparseIntegerOutrankingDigraphs.pyx":2769
+  /* "cSparseIntegerOutrankingDigraphs.pyx":2777
  *         return criteriaCorrelation
  * 
  *     def relation(self, int x, int y):             # <<<<<<<<<<<<<<
  *         """
  *         *Parameters*:
  */
-  __pyx_t_7 = __Pyx_CyFunction_New(&__pyx_mdef_32cSparseIntegerOutrankingDigraphs_24cQuantilesRankingDigraph_11relation, 0, __pyx_n_s_cQuantilesRankingDigraph_relatio, NULL, __pyx_n_s_cSparseIntegerOutrankingDigraphs, __pyx_d, ((PyObject *)__pyx_codeobj__164)); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 2769, __pyx_L1_error)
+  __pyx_t_7 = __Pyx_CyFunction_New(&__pyx_mdef_32cSparseIntegerOutrankingDigraphs_24cQuantilesRankingDigraph_11relation, 0, __pyx_n_s_cQuantilesRankingDigraph_relatio, NULL, __pyx_n_s_cSparseIntegerOutrankingDigraphs, __pyx_d, ((PyObject *)__pyx_codeobj__164)); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 2777, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_7);
-  if (__Pyx_SetNameInClass(__pyx_t_10, __pyx_n_s_relation, __pyx_t_7) < 0) __PYX_ERR(0, 2769, __pyx_L1_error)
+  if (__Pyx_SetNameInClass(__pyx_t_10, __pyx_n_s_relation, __pyx_t_7) < 0) __PYX_ERR(0, 2777, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_7); __pyx_t_7 = 0;
 
-  /* "cSparseIntegerOutrankingDigraphs.pyx":2798
+  /* "cSparseIntegerOutrankingDigraphs.pyx":2806
  * 
  *     def showMarginalVersusGlobalOutrankingCorrelation(self,
  *                                                       bint Sorted=True,\             # <<<<<<<<<<<<<<
  *                                                       bint Threading=False,\
- *                                                       nbrOfCPUs=1,
+ *                                                       nbrOfCPUs=None,
  */
-  __pyx_t_7 = __Pyx_PyBool_FromLong(((int)1)); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 2798, __pyx_L1_error)
+  __pyx_t_7 = __Pyx_PyBool_FromLong(((int)1)); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 2806, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_7);
 
-  /* "cSparseIntegerOutrankingDigraphs.pyx":2799
+  /* "cSparseIntegerOutrankingDigraphs.pyx":2807
  *     def showMarginalVersusGlobalOutrankingCorrelation(self,
  *                                                       bint Sorted=True,\
  *                                                       bint Threading=False,\             # <<<<<<<<<<<<<<
- *                                                       nbrOfCPUs=1,
- *                                                       startMethod='spawn',\
+ *                                                       nbrOfCPUs=None,
+ *                                                       startMethod=None,\
  */
-  __pyx_t_11 = __Pyx_PyBool_FromLong(((int)0)); if (unlikely(!__pyx_t_11)) __PYX_ERR(0, 2799, __pyx_L1_error)
+  __pyx_t_11 = __Pyx_PyBool_FromLong(((int)0)); if (unlikely(!__pyx_t_11)) __PYX_ERR(0, 2807, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_11);
 
-  /* "cSparseIntegerOutrankingDigraphs.pyx":2802
- *                                                       nbrOfCPUs=1,
- *                                                       startMethod='spawn',\
+  /* "cSparseIntegerOutrankingDigraphs.pyx":2810
+ *                                                       nbrOfCPUs=None,
+ *                                                       startMethod=None,\
  *                                                       bint Comments=True):             # <<<<<<<<<<<<<<
  *         """
  *         *Parameters*:
  */
-  __pyx_t_5 = __Pyx_PyBool_FromLong(((int)1)); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 2802, __pyx_L1_error)
+  __pyx_t_5 = __Pyx_PyBool_FromLong(((int)1)); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 2810, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_5);
 
-  /* "cSparseIntegerOutrankingDigraphs.pyx":2797
+  /* "cSparseIntegerOutrankingDigraphs.pyx":2805
  *             return Med
  * 
  *     def showMarginalVersusGlobalOutrankingCorrelation(self,             # <<<<<<<<<<<<<<
  *                                                       bint Sorted=True,\
  *                                                       bint Threading=False,\
  */
-  __pyx_t_12 = PyTuple_New(5); if (unlikely(!__pyx_t_12)) __PYX_ERR(0, 2797, __pyx_L1_error)
+  __pyx_t_12 = PyTuple_New(5); if (unlikely(!__pyx_t_12)) __PYX_ERR(0, 2805, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_12);
   __Pyx_GIVEREF(__pyx_t_7);
-  if (__Pyx_PyTuple_SET_ITEM(__pyx_t_12, 0, __pyx_t_7)) __PYX_ERR(0, 2797, __pyx_L1_error);
+  if (__Pyx_PyTuple_SET_ITEM(__pyx_t_12, 0, __pyx_t_7)) __PYX_ERR(0, 2805, __pyx_L1_error);
   __Pyx_GIVEREF(__pyx_t_11);
-  if (__Pyx_PyTuple_SET_ITEM(__pyx_t_12, 1, __pyx_t_11)) __PYX_ERR(0, 2797, __pyx_L1_error);
-  __Pyx_INCREF(((PyObject *)__pyx_int_1));
-  __Pyx_GIVEREF(((PyObject *)__pyx_int_1));
-  if (__Pyx_PyTuple_SET_ITEM(__pyx_t_12, 2, ((PyObject *)__pyx_int_1))) __PYX_ERR(0, 2797, __pyx_L1_error);
-  __Pyx_INCREF(((PyObject*)__pyx_n_u_spawn));
-  __Pyx_GIVEREF(((PyObject*)__pyx_n_u_spawn));
-  if (__Pyx_PyTuple_SET_ITEM(__pyx_t_12, 3, ((PyObject*)__pyx_n_u_spawn))) __PYX_ERR(0, 2797, __pyx_L1_error);
+  if (__Pyx_PyTuple_SET_ITEM(__pyx_t_12, 1, __pyx_t_11)) __PYX_ERR(0, 2805, __pyx_L1_error);
+  __Pyx_INCREF(Py_None);
+  __Pyx_GIVEREF(Py_None);
+  if (__Pyx_PyTuple_SET_ITEM(__pyx_t_12, 2, Py_None)) __PYX_ERR(0, 2805, __pyx_L1_error);
+  __Pyx_INCREF(Py_None);
+  __Pyx_GIVEREF(Py_None);
+  if (__Pyx_PyTuple_SET_ITEM(__pyx_t_12, 3, Py_None)) __PYX_ERR(0, 2805, __pyx_L1_error);
   __Pyx_GIVEREF(__pyx_t_5);
-  if (__Pyx_PyTuple_SET_ITEM(__pyx_t_12, 4, __pyx_t_5)) __PYX_ERR(0, 2797, __pyx_L1_error);
+  if (__Pyx_PyTuple_SET_ITEM(__pyx_t_12, 4, __pyx_t_5)) __PYX_ERR(0, 2805, __pyx_L1_error);
   __pyx_t_7 = 0;
   __pyx_t_11 = 0;
   __pyx_t_5 = 0;
-  __pyx_t_5 = __Pyx_CyFunction_New(&__pyx_mdef_32cSparseIntegerOutrankingDigraphs_24cQuantilesRankingDigraph_13showMarginalVersusGlobalOutrankingCorrelation, 0, __pyx_n_s_cQuantilesRankingDigraph_showMar, NULL, __pyx_n_s_cSparseIntegerOutrankingDigraphs, __pyx_d, ((PyObject *)__pyx_codeobj__165)); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 2797, __pyx_L1_error)
+  __pyx_t_5 = __Pyx_CyFunction_New(&__pyx_mdef_32cSparseIntegerOutrankingDigraphs_24cQuantilesRankingDigraph_13showMarginalVersusGlobalOutrankingCorrelation, 0, __pyx_n_s_cQuantilesRankingDigraph_showMar, NULL, __pyx_n_s_cSparseIntegerOutrankingDigraphs, __pyx_d, ((PyObject *)__pyx_codeobj__165)); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 2805, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_5);
   __Pyx_CyFunction_SetDefaultsTuple(__pyx_t_5, __pyx_t_12);
   __Pyx_DECREF(__pyx_t_12); __pyx_t_12 = 0;
-  if (__Pyx_SetNameInClass(__pyx_t_10, __pyx_n_s_showMarginalVersusGlobalOutranki, __pyx_t_5) < 0) __PYX_ERR(0, 2797, __pyx_L1_error)
+  if (__Pyx_SetNameInClass(__pyx_t_10, __pyx_n_s_showMarginalVersusGlobalOutranki, __pyx_t_5) < 0) __PYX_ERR(0, 2805, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
 
-  /* "cSparseIntegerOutrankingDigraphs.pyx":2827
+  /* "cSparseIntegerOutrankingDigraphs.pyx":2835
  *                 print('%9s |  %.2f \t %.3f \t %.3f \t %.3f' % (c,criteria[c]['weight'],x[0],x[1],x[0]*x[1]))
  * 
  *     def showActionsSortingResult(self,actionsSubset=None):             # <<<<<<<<<<<<<<
  *         """
  *         *Parameter*:
  */
-  __pyx_t_5 = __Pyx_CyFunction_New(&__pyx_mdef_32cSparseIntegerOutrankingDigraphs_24cQuantilesRankingDigraph_15showActionsSortingResult, 0, __pyx_n_s_cQuantilesRankingDigraph_showAct, NULL, __pyx_n_s_cSparseIntegerOutrankingDigraphs, __pyx_d, ((PyObject *)__pyx_codeobj__166)); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 2827, __pyx_L1_error)
+  __pyx_t_5 = __Pyx_CyFunction_New(&__pyx_mdef_32cSparseIntegerOutrankingDigraphs_24cQuantilesRankingDigraph_15showActionsSortingResult, 0, __pyx_n_s_cQuantilesRankingDigraph_showAct, NULL, __pyx_n_s_cSparseIntegerOutrankingDigraphs, __pyx_d, ((PyObject *)__pyx_codeobj__166)); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 2835, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_5);
   __Pyx_CyFunction_SetDefaultsTuple(__pyx_t_5, __pyx_tuple__131);
-  if (__Pyx_SetNameInClass(__pyx_t_10, __pyx_n_s_showActionsSortingResult, __pyx_t_5) < 0) __PYX_ERR(0, 2827, __pyx_L1_error)
+  if (__Pyx_SetNameInClass(__pyx_t_10, __pyx_n_s_showActionsSortingResult, __pyx_t_5) < 0) __PYX_ERR(0, 2835, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
 
-  /* "cSparseIntegerOutrankingDigraphs.pyx":2842
+  /* "cSparseIntegerOutrankingDigraphs.pyx":2850
  *                 self.computeActionCategories(x,Show=True)
  * 
  *     def showShort(self,fileName=None,bint WithFileSize=False):             # <<<<<<<<<<<<<<
  *         """
  *         *Parameter*:
  */
-  __pyx_t_5 = __Pyx_PyBool_FromLong(((int)0)); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 2842, __pyx_L1_error)
+  __pyx_t_5 = __Pyx_PyBool_FromLong(((int)0)); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 2850, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_5);
-  __pyx_t_12 = PyTuple_New(2); if (unlikely(!__pyx_t_12)) __PYX_ERR(0, 2842, __pyx_L1_error)
+  __pyx_t_12 = PyTuple_New(2); if (unlikely(!__pyx_t_12)) __PYX_ERR(0, 2850, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_12);
   __Pyx_INCREF(Py_None);
   __Pyx_GIVEREF(Py_None);
-  if (__Pyx_PyTuple_SET_ITEM(__pyx_t_12, 0, Py_None)) __PYX_ERR(0, 2842, __pyx_L1_error);
+  if (__Pyx_PyTuple_SET_ITEM(__pyx_t_12, 0, Py_None)) __PYX_ERR(0, 2850, __pyx_L1_error);
   __Pyx_GIVEREF(__pyx_t_5);
-  if (__Pyx_PyTuple_SET_ITEM(__pyx_t_12, 1, __pyx_t_5)) __PYX_ERR(0, 2842, __pyx_L1_error);
+  if (__Pyx_PyTuple_SET_ITEM(__pyx_t_12, 1, __pyx_t_5)) __PYX_ERR(0, 2850, __pyx_L1_error);
   __pyx_t_5 = 0;
-  __pyx_t_5 = __Pyx_CyFunction_New(&__pyx_mdef_32cSparseIntegerOutrankingDigraphs_24cQuantilesRankingDigraph_17showShort, 0, __pyx_n_s_cQuantilesRankingDigraph_showSho, NULL, __pyx_n_s_cSparseIntegerOutrankingDigraphs, __pyx_d, ((PyObject *)__pyx_codeobj__167)); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 2842, __pyx_L1_error)
+  __pyx_t_5 = __Pyx_CyFunction_New(&__pyx_mdef_32cSparseIntegerOutrankingDigraphs_24cQuantilesRankingDigraph_17showShort, 0, __pyx_n_s_cQuantilesRankingDigraph_showSho, NULL, __pyx_n_s_cSparseIntegerOutrankingDigraphs, __pyx_d, ((PyObject *)__pyx_codeobj__167)); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 2850, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_5);
   __Pyx_CyFunction_SetDefaultsTuple(__pyx_t_5, __pyx_t_12);
   __Pyx_DECREF(__pyx_t_12); __pyx_t_12 = 0;
-  if (__Pyx_SetNameInClass(__pyx_t_10, __pyx_n_s_showShort, __pyx_t_5) < 0) __PYX_ERR(0, 2842, __pyx_L1_error)
+  if (__Pyx_SetNameInClass(__pyx_t_10, __pyx_n_s_showShort, __pyx_t_5) < 0) __PYX_ERR(0, 2850, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
 
-  /* "cSparseIntegerOutrankingDigraphs.pyx":2902
+  /* "cSparseIntegerOutrankingDigraphs.pyx":2911
  *             fo.close()
  * 
  *     def showActions(self):             # <<<<<<<<<<<<<<
  *         """
  *         Prints out the actions disctionary.
  */
-  __pyx_t_5 = __Pyx_CyFunction_New(&__pyx_mdef_32cSparseIntegerOutrankingDigraphs_24cQuantilesRankingDigraph_19showActions, 0, __pyx_n_s_cQuantilesRankingDigraph_showAct_2, NULL, __pyx_n_s_cSparseIntegerOutrankingDigraphs, __pyx_d, ((PyObject *)__pyx_codeobj__169)); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 2902, __pyx_L1_error)
+  __pyx_t_5 = __Pyx_CyFunction_New(&__pyx_mdef_32cSparseIntegerOutrankingDigraphs_24cQuantilesRankingDigraph_19showActions, 0, __pyx_n_s_cQuantilesRankingDigraph_showAct_2, NULL, __pyx_n_s_cSparseIntegerOutrankingDigraphs, __pyx_d, ((PyObject *)__pyx_codeobj__169)); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 2911, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_5);
-  if (__Pyx_SetNameInClass(__pyx_t_10, __pyx_n_s_showActions, __pyx_t_5) < 0) __PYX_ERR(0, 2902, __pyx_L1_error)
+  if (__Pyx_SetNameInClass(__pyx_t_10, __pyx_n_s_showActions, __pyx_t_5) < 0) __PYX_ERR(0, 2911, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
 
-  /* "cSparseIntegerOutrankingDigraphs.pyx":2911
+  /* "cSparseIntegerOutrankingDigraphs.pyx":2920
  *             print('%d: %s' % (x,self.actions[x]['name']) )
  * 
  *     def showCriteria(self, bint IntegerWeights=False, bint Debug=False):             # <<<<<<<<<<<<<<
  *         """
  *         *Parameters*:
  */
-  __pyx_t_5 = __Pyx_PyBool_FromLong(((int)0)); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 2911, __pyx_L1_error)
+  __pyx_t_5 = __Pyx_PyBool_FromLong(((int)0)); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 2920, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_5);
-  __pyx_t_12 = __Pyx_PyBool_FromLong(((int)0)); if (unlikely(!__pyx_t_12)) __PYX_ERR(0, 2911, __pyx_L1_error)
+  __pyx_t_12 = __Pyx_PyBool_FromLong(((int)0)); if (unlikely(!__pyx_t_12)) __PYX_ERR(0, 2920, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_12);
-  __pyx_t_11 = PyTuple_New(2); if (unlikely(!__pyx_t_11)) __PYX_ERR(0, 2911, __pyx_L1_error)
+  __pyx_t_11 = PyTuple_New(2); if (unlikely(!__pyx_t_11)) __PYX_ERR(0, 2920, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_11);
   __Pyx_GIVEREF(__pyx_t_5);
-  if (__Pyx_PyTuple_SET_ITEM(__pyx_t_11, 0, __pyx_t_5)) __PYX_ERR(0, 2911, __pyx_L1_error);
+  if (__Pyx_PyTuple_SET_ITEM(__pyx_t_11, 0, __pyx_t_5)) __PYX_ERR(0, 2920, __pyx_L1_error);
   __Pyx_GIVEREF(__pyx_t_12);
-  if (__Pyx_PyTuple_SET_ITEM(__pyx_t_11, 1, __pyx_t_12)) __PYX_ERR(0, 2911, __pyx_L1_error);
+  if (__Pyx_PyTuple_SET_ITEM(__pyx_t_11, 1, __pyx_t_12)) __PYX_ERR(0, 2920, __pyx_L1_error);
   __pyx_t_5 = 0;
   __pyx_t_12 = 0;
-  __pyx_t_12 = __Pyx_CyFunction_New(&__pyx_mdef_32cSparseIntegerOutrankingDigraphs_24cQuantilesRankingDigraph_21showCriteria, 0, __pyx_n_s_cQuantilesRankingDigraph_showCri, NULL, __pyx_n_s_cSparseIntegerOutrankingDigraphs, __pyx_d, ((PyObject *)__pyx_codeobj__170)); if (unlikely(!__pyx_t_12)) __PYX_ERR(0, 2911, __pyx_L1_error)
+  __pyx_t_12 = __Pyx_CyFunction_New(&__pyx_mdef_32cSparseIntegerOutrankingDigraphs_24cQuantilesRankingDigraph_21showCriteria, 0, __pyx_n_s_cQuantilesRankingDigraph_showCri, NULL, __pyx_n_s_cSparseIntegerOutrankingDigraphs, __pyx_d, ((PyObject *)__pyx_codeobj__170)); if (unlikely(!__pyx_t_12)) __PYX_ERR(0, 2920, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_12);
   __Pyx_CyFunction_SetDefaultsTuple(__pyx_t_12, __pyx_t_11);
   __Pyx_DECREF(__pyx_t_11); __pyx_t_11 = 0;
-  if (__Pyx_SetNameInClass(__pyx_t_10, __pyx_n_s_showCriteria, __pyx_t_12) < 0) __PYX_ERR(0, 2911, __pyx_L1_error)
+  if (__Pyx_SetNameInClass(__pyx_t_10, __pyx_n_s_showCriteria, __pyx_t_12) < 0) __PYX_ERR(0, 2920, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_12); __pyx_t_12 = 0;
 
-  /* "cSparseIntegerOutrankingDigraphs.pyx":2951
+  /* "cSparseIntegerOutrankingDigraphs.pyx":2960
  *             print()
  * 
  *     def showComponents(self, direction='increasing'):             # <<<<<<<<<<<<<<
  *         """
  *         *Parameter*:
  */
-  __pyx_t_12 = __Pyx_CyFunction_New(&__pyx_mdef_32cSparseIntegerOutrankingDigraphs_24cQuantilesRankingDigraph_23showComponents, 0, __pyx_n_s_cQuantilesRankingDigraph_showCom, NULL, __pyx_n_s_cSparseIntegerOutrankingDigraphs, __pyx_d, ((PyObject *)__pyx_codeobj__171)); if (unlikely(!__pyx_t_12)) __PYX_ERR(0, 2951, __pyx_L1_error)
+  __pyx_t_12 = __Pyx_CyFunction_New(&__pyx_mdef_32cSparseIntegerOutrankingDigraphs_24cQuantilesRankingDigraph_23showComponents, 0, __pyx_n_s_cQuantilesRankingDigraph_showCom, NULL, __pyx_n_s_cSparseIntegerOutrankingDigraphs, __pyx_d, ((PyObject *)__pyx_codeobj__171)); if (unlikely(!__pyx_t_12)) __PYX_ERR(0, 2960, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_12);
   __Pyx_CyFunction_SetDefaultsTuple(__pyx_t_12, __pyx_tuple__140);
-  if (__Pyx_SetNameInClass(__pyx_t_10, __pyx_n_s_showComponents, __pyx_t_12) < 0) __PYX_ERR(0, 2951, __pyx_L1_error)
+  if (__Pyx_SetNameInClass(__pyx_t_10, __pyx_n_s_showComponents, __pyx_t_12) < 0) __PYX_ERR(0, 2960, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_12); __pyx_t_12 = 0;
 
-  /* "cSparseIntegerOutrankingDigraphs.pyx":2959
+  /* "cSparseIntegerOutrankingDigraphs.pyx":2968
  *         self.showDecomposition(direction=direction)
  * 
  *     def showDecomposition(self, direction='decreasing'):             # <<<<<<<<<<<<<<
  *         """
  *         *Parameter*:
  */
-  __pyx_t_12 = __Pyx_CyFunction_New(&__pyx_mdef_32cSparseIntegerOutrankingDigraphs_24cQuantilesRankingDigraph_25showDecomposition, 0, __pyx_n_s_cQuantilesRankingDigraph_showDec, NULL, __pyx_n_s_cSparseIntegerOutrankingDigraphs, __pyx_d, ((PyObject *)__pyx_codeobj__173)); if (unlikely(!__pyx_t_12)) __PYX_ERR(0, 2959, __pyx_L1_error)
+  __pyx_t_12 = __Pyx_CyFunction_New(&__pyx_mdef_32cSparseIntegerOutrankingDigraphs_24cQuantilesRankingDigraph_25showDecomposition, 0, __pyx_n_s_cQuantilesRankingDigraph_showDec, NULL, __pyx_n_s_cSparseIntegerOutrankingDigraphs, __pyx_d, ((PyObject *)__pyx_codeobj__173)); if (unlikely(!__pyx_t_12)) __PYX_ERR(0, 2968, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_12);
   __Pyx_CyFunction_SetDefaultsTuple(__pyx_t_12, __pyx_tuple__100);
-  if (__Pyx_SetNameInClass(__pyx_t_10, __pyx_n_s_showDecomposition, __pyx_t_12) < 0) __PYX_ERR(0, 2959, __pyx_L1_error)
+  if (__Pyx_SetNameInClass(__pyx_t_10, __pyx_n_s_showDecomposition, __pyx_t_12) < 0) __PYX_ERR(0, 2968, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_12); __pyx_t_12 = 0;
 
-  /* "cSparseIntegerOutrankingDigraphs.pyx":2978
+  /* "cSparseIntegerOutrankingDigraphs.pyx":2987
  * 
  * 
  *     def showRelationTable(self, bint IntegerValues=True, compKeys=None):             # <<<<<<<<<<<<<<
  *         """
  *         *Parameters*:
  */
-  __pyx_t_12 = __Pyx_PyBool_FromLong(((int)1)); if (unlikely(!__pyx_t_12)) __PYX_ERR(0, 2978, __pyx_L1_error)
+  __pyx_t_12 = __Pyx_PyBool_FromLong(((int)1)); if (unlikely(!__pyx_t_12)) __PYX_ERR(0, 2987, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_12);
-  __pyx_t_11 = PyTuple_New(2); if (unlikely(!__pyx_t_11)) __PYX_ERR(0, 2978, __pyx_L1_error)
+  __pyx_t_11 = PyTuple_New(2); if (unlikely(!__pyx_t_11)) __PYX_ERR(0, 2987, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_11);
   __Pyx_GIVEREF(__pyx_t_12);
-  if (__Pyx_PyTuple_SET_ITEM(__pyx_t_11, 0, __pyx_t_12)) __PYX_ERR(0, 2978, __pyx_L1_error);
+  if (__Pyx_PyTuple_SET_ITEM(__pyx_t_11, 0, __pyx_t_12)) __PYX_ERR(0, 2987, __pyx_L1_error);
   __Pyx_INCREF(Py_None);
   __Pyx_GIVEREF(Py_None);
-  if (__Pyx_PyTuple_SET_ITEM(__pyx_t_11, 1, Py_None)) __PYX_ERR(0, 2978, __pyx_L1_error);
+  if (__Pyx_PyTuple_SET_ITEM(__pyx_t_11, 1, Py_None)) __PYX_ERR(0, 2987, __pyx_L1_error);
   __pyx_t_12 = 0;
-  __pyx_t_12 = __Pyx_CyFunction_New(&__pyx_mdef_32cSparseIntegerOutrankingDigraphs_24cQuantilesRankingDigraph_27showRelationTable, 0, __pyx_n_s_cQuantilesRankingDigraph_showRel, NULL, __pyx_n_s_cSparseIntegerOutrankingDigraphs, __pyx_d, ((PyObject *)__pyx_codeobj__175)); if (unlikely(!__pyx_t_12)) __PYX_ERR(0, 2978, __pyx_L1_error)
+  __pyx_t_12 = __Pyx_CyFunction_New(&__pyx_mdef_32cSparseIntegerOutrankingDigraphs_24cQuantilesRankingDigraph_27showRelationTable, 0, __pyx_n_s_cQuantilesRankingDigraph_showRel, NULL, __pyx_n_s_cSparseIntegerOutrankingDigraphs, __pyx_d, ((PyObject *)__pyx_codeobj__175)); if (unlikely(!__pyx_t_12)) __PYX_ERR(0, 2987, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_12);
   __Pyx_CyFunction_SetDefaultsTuple(__pyx_t_12, __pyx_t_11);
   __Pyx_DECREF(__pyx_t_11); __pyx_t_11 = 0;
-  if (__Pyx_SetNameInClass(__pyx_t_10, __pyx_n_s_showRelationTable, __pyx_t_12) < 0) __PYX_ERR(0, 2978, __pyx_L1_error)
+  if (__Pyx_SetNameInClass(__pyx_t_10, __pyx_n_s_showRelationTable, __pyx_t_12) < 0) __PYX_ERR(0, 2987, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_12); __pyx_t_12 = 0;
 
-  /* "cSparseIntegerOutrankingDigraphs.pyx":3004
+  /* "cSparseIntegerOutrankingDigraphs.pyx":3013
  *                 print('%s' % ranking)
  * 
  *     def computeDeterminateness(self, bint InPercent=True):             # <<<<<<<<<<<<<<
  *         """
  *         *Parameter*:
  */
-  __pyx_t_12 = __Pyx_PyBool_FromLong(((int)1)); if (unlikely(!__pyx_t_12)) __PYX_ERR(0, 3004, __pyx_L1_error)
+  __pyx_t_12 = __Pyx_PyBool_FromLong(((int)1)); if (unlikely(!__pyx_t_12)) __PYX_ERR(0, 3013, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_12);
-  __pyx_t_11 = PyTuple_New(1); if (unlikely(!__pyx_t_11)) __PYX_ERR(0, 3004, __pyx_L1_error)
+  __pyx_t_11 = PyTuple_New(1); if (unlikely(!__pyx_t_11)) __PYX_ERR(0, 3013, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_11);
   __Pyx_GIVEREF(__pyx_t_12);
-  if (__Pyx_PyTuple_SET_ITEM(__pyx_t_11, 0, __pyx_t_12)) __PYX_ERR(0, 3004, __pyx_L1_error);
+  if (__Pyx_PyTuple_SET_ITEM(__pyx_t_11, 0, __pyx_t_12)) __PYX_ERR(0, 3013, __pyx_L1_error);
   __pyx_t_12 = 0;
-  __pyx_t_12 = __Pyx_CyFunction_New(&__pyx_mdef_32cSparseIntegerOutrankingDigraphs_24cQuantilesRankingDigraph_29computeDeterminateness, 0, __pyx_n_s_cQuantilesRankingDigraph_compute_4, NULL, __pyx_n_s_cSparseIntegerOutrankingDigraphs, __pyx_d, ((PyObject *)__pyx_codeobj__176)); if (unlikely(!__pyx_t_12)) __PYX_ERR(0, 3004, __pyx_L1_error)
+  __pyx_t_12 = __Pyx_CyFunction_New(&__pyx_mdef_32cSparseIntegerOutrankingDigraphs_24cQuantilesRankingDigraph_29computeDeterminateness, 0, __pyx_n_s_cQuantilesRankingDigraph_compute_4, NULL, __pyx_n_s_cSparseIntegerOutrankingDigraphs, __pyx_d, ((PyObject *)__pyx_codeobj__176)); if (unlikely(!__pyx_t_12)) __PYX_ERR(0, 3013, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_12);
   __Pyx_CyFunction_SetDefaultsTuple(__pyx_t_12, __pyx_t_11);
   __Pyx_DECREF(__pyx_t_11); __pyx_t_11 = 0;
-  if (__Pyx_SetNameInClass(__pyx_t_10, __pyx_n_s_computeDeterminateness, __pyx_t_12) < 0) __PYX_ERR(0, 3004, __pyx_L1_error)
+  if (__Pyx_SetNameInClass(__pyx_t_10, __pyx_n_s_computeDeterminateness, __pyx_t_12) < 0) __PYX_ERR(0, 3013, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_12); __pyx_t_12 = 0;
 
   /* "cSparseIntegerOutrankingDigraphs.pyx":2102

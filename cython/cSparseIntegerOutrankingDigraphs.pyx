@@ -2187,9 +2187,9 @@ class cQuantilesRankingDigraph(SparseIntegerOutrankingDigraph):
                  componentRankingRule="Copeland",\
                  int minimalComponentSize=1,\
                  bint Threading=False,\
-                 startMethod='spawn',\
+                 startMethod=None,\
                  tempDir=None,\
-                 nbrOfCPUs=4,\
+                 nbrOfCPUs=None,\
                  save2File=None,\
                  bint CopyPerfTab=False,\
                  bint Comments=False,\
@@ -2261,21 +2261,30 @@ class cQuantilesRankingDigraph(SparseIntegerOutrankingDigraph):
         self.sortingParameters['StartMethod'] = startMethod
         self.sortingParameters['PrefThresholds'] = False
         self.sortingParameters['hasNoVeto'] = False
-        self.nbrOfCPUs = nbrOfCPUs
+        #self.nbrOfCPUs = nbrOfCPUs
         # quantiles sorting
         t0 = time()
         if Comments:        
             print('Computing the %d-quantiles sorting digraph of order %d ...' % (quantiles,na))
         if Threading:
-            from multiprocessing import cpu_count
-            nbrCores = cpu_count()
+            import multiprocessing as mp
+            if nbrOfCPUs is None:
+                nbrCPUs = mp.cpu_count()
+            if startMethod is None:
+                startMehod = 'spawn'
+            self.nbrThread = nbrOfCPUs
+            self.startMethod = startMethod
+        else:
+            self.nbrThreads = 0
+            self.startMethod = None
+    
         qs = IntegerQuantilesSortingDigraph(argPerfTab=perfTab,
                                      limitingQuantiles=quantiles,
                                      LowerClosed=LowerClosed,
                                      CompleteOutranking=False,
                                      StoreSorting=True,
                                      CopyPerfTab=CopyPerfTab,
-                                     Threading=self.sortingParameters['Threading'],
+                                     Threading=Threading,
                                      startMethod=startMethod,
                                      tempDir=tempDir,
                                      nbrCores=nbrOfCPUs,
@@ -2300,8 +2309,8 @@ class cQuantilesRankingDigraph(SparseIntegerOutrankingDigraph):
                 for item in self._computeQuantileOrdering(
                     strategy=quantilesOrderingStrategy,     
                     Descending=True,
-                        Threading=Threading,
-                        startMethod=startMethod,
+                    Threading=Threading,
+                    startMethod=startMethod,
                     nbrOfCPUs=nbrOfCPUs)]
         if Debug:
             print(decomposition)
@@ -2316,8 +2325,7 @@ class cQuantilesRankingDigraph(SparseIntegerOutrankingDigraph):
         nd = len(str(nc))
         self.nd = nd
         ### not threding
-        if not self.sortingParameters['Threading']:
-            self.nbrOfCPUs = 1
+        if not Threading:
             maximalComponentSize = 0
             components = OrderedDict()
             boostedRanking = []
@@ -2351,14 +2359,14 @@ class cQuantilesRankingDigraph(SparseIntegerOutrankingDigraph):
             from pickle import dumps, loads, load, dump
             import multiprocessing as mp
             mpctx = mp.get_context(startMethod)
-            self.startMethod = mpctx.get_start_method()
+            #self.startMethod = mpctx.get_start_method()
             Process = mpctx.Process
             Queue = mpctx.Queue
             active_children = mpctx.active_children
-            nbrCores = mpctx.cpu_count()
-            if nbrOfCPUs < nbrCores:
-                nbrCores = nbrOfCPUs
-            self.nbrThreads = nbrCores
+            #nbrCores = mpctx.cpu_count()
+            if nbrOfCPUs is None:
+                nbrOfCPUs = mpctx.cpu_count()
+            self.nbrThreads = nbrOfCPUs
             #from multiprocessing import Process, Queue,active_children, cpu_count                 
             if Comments:
                 print('Processing the %d components' % nc )
@@ -2368,7 +2376,7 @@ class cQuantilesRankingDigraph(SparseIntegerOutrankingDigraph):
             maximalComponentSize = 0
             with TemporaryDirectory(dir=tempDir) as tempDirName:
                 ## tasks queue and workers launching
-                NUMBER_OF_WORKERS = nbrCores
+                NUMBER_OF_WORKERS = nbrOfCPUs
                 tasksIndex = [(i,len(decomposition[i][1])) for i in range(nc)]
                 tasksIndex.sort(key=lambda pos: pos[1],reverse=True)
                 maximalComponentSize += tasksIndex[0][1]
@@ -2456,7 +2464,7 @@ class cQuantilesRankingDigraph(SparseIntegerOutrankingDigraph):
                                 bint Descending=True,
                                 bint  Threading=False,
                                  startMethod=None,
-                                nbrOfCPUs=4,
+                                nbrOfCPUs=None,
                                 bint Debug=False,
                                 bint Comments=False):
         """
@@ -2590,8 +2598,8 @@ class cQuantilesRankingDigraph(SparseIntegerOutrankingDigraph):
                                     bint Debug=False,
                                     bint Comments=False,
                                 bint Threading=False,
-                                startMethod='spawn',
-                                nbrOfCPUs=1):
+                                startMethod=None,
+                                nbrOfCPUs=None):
         """
         *Parameters*:
             * action (int key),
@@ -2683,8 +2691,8 @@ class cQuantilesRankingDigraph(SparseIntegerOutrankingDigraph):
 
     def computeCriterion2RankingCorrelation(self,criterion,
                                             bint Threading=False,\
-                                    nbrOfCPUs=1,
-                                            startMethod='spawn',
+                                    nbrOfCPUs=None,
+                                            startMethod=None,
                                     bint Debug=False,
                                     bint Comments=False):
         """
@@ -2714,7 +2722,7 @@ class cQuantilesRankingDigraph(SparseIntegerOutrankingDigraph):
                                 bint Sorted=True,
                                 bint ValuedCorrelation=False,
                                 bint Threading=False,
-                                startMethod='spawn',
+                                startMethod=None,
                                 nbrCores=None,\
                                 bint Comments=False):
         """
@@ -2738,7 +2746,7 @@ class cQuantilesRankingDigraph(SparseIntegerOutrankingDigraph):
         cdef int i
         if Threading:
             import multiprocessing as mp
-            mpctx = mp.get_context('fork')
+            mpctx = mp.get_context(startMethod)
             Pool = mpctx.Pool
             #from multiprocessing import Pool
             from os import cpu_count
@@ -2797,8 +2805,8 @@ class cQuantilesRankingDigraph(SparseIntegerOutrankingDigraph):
     def showMarginalVersusGlobalOutrankingCorrelation(self,
                                                       bint Sorted=True,\
                                                       bint Threading=False,\
-                                                      nbrOfCPUs=1,
-                                                      startMethod='spawn',\
+                                                      nbrOfCPUs=None,
+                                                      startMethod=None,\
                                                       bint Comments=True):
         """
         *Parameters*:
@@ -2851,8 +2859,8 @@ class cQuantilesRankingDigraph(SparseIntegerOutrankingDigraph):
         if fileName == None:
             print('*----- show short --------------*')
             print('Instance name     : %s' % self.name)
-            print('# Actions         : %d' % self.order)
-            print('# Criteria        : %d' % self.dimension)
+            print('Actions           : %d' % self.order)
+            print('Criteria          : %d' % self.dimension)
             print('Sorting by        : %d-Tiling' % self.sortingParameters['limitingQuantiles'])
             print('Ordering strategy : %s' % self.sortingParameters['strategy'])
             print('Ranking rule      : %s' % self.componentRankingRule)
@@ -2862,7 +2870,8 @@ class cQuantilesRankingDigraph(SparseIntegerOutrankingDigraph):
             print('Average order     : %.1f' % (self.order/self.nbrComponents))
             print('Fill rate         : %.3f%%' % (self.fillRate*100.0))
             print('----  Constructor run times (in sec.) ----')
-            print('Nbr of thread     : %d' % self.nbrOfCPUs)
+            print('Threads           : %d' % self.nbrThreads)
+            print('Start mthod       : %s' % self.startMethod)
             print('Total time        : %.5f' % self.runTimes['totalTime'])
             print('QuantilesSorting  : %.5f' % self.runTimes['sorting'])
             print('Preordering       : %.5f' % self.runTimes['preordering'])
