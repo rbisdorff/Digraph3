@@ -240,7 +240,7 @@ Handling big data
 	  Integer and float valued C version of the :py:mod:`randomPerfTabs` module
 
      :ref:`cIntegerOutrankingDigraphs-label`
-	  Integer and float valued C implementation of the
+	  Integer and float valued C version of the
 	  :py:class:`~outrankingDigraphs.BipolarOutrankingDigraph` class
 
      :ref:`cIntegerSortingDigraphs-label`
@@ -694,8 +694,22 @@ Back to the :ref:`Table of Contents <Contents-Table-label>`
 Cythonized modules for big digraphs
 -----------------------------------
 
-The following modules are compiled C-extensions using the Cython pre-compiler. No Python code source is provided for inspection. To distinguish them from the corresponding pure Python modules, a c- prefix is used. A tutorial with coding examples is available here: :ref:`HPC-Tutorial-label`.
+The following modules are compiled C-extensions using the Cython pre-compiler. No Python code source is provided for inspection. To distinguish them from the corresponding pure Python modules, a c- prefix is used. 
 
+     :ref:`cRandPerfTabs-label`
+	  Integer and float valued C version of the :py:mod:`randomPerfTabs` module
+
+     :ref:`cIntegerOutrankingDigraphs-label`
+	  Integer and float valued C version of the
+	  :py:class:`~outrankingDigraphs.BipolarOutrankingDigraph` class
+
+     :ref:`cIntegerSortingDigraphs-label`
+	  Integer and float valued C version of the :py:class:`~sortingDigraphs.QuantilesSortingDigraph` class
+
+     :ref:`cSparseIntegerOutrankingDigraphs-label`
+	  Integer and float valued C version of sparse outranking digraphs.
+
+A tutorial with coding examples is available here: :ref:`HPC-Tutorial-label`.
 
 .. note::
 

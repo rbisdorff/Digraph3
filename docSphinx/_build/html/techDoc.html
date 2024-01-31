@@ -1469,7 +1469,7 @@ and bipolar outranking digraphs (order &gt; 1000).</p>
 <dl class="simple">
 <dt><a class="reference internal" href="#crandperftabs-label"><span class="std std-ref">cRandPerfTabs module</span></a></dt><dd><p>Integer and float valued C version of the <a class="reference internal" href="#module-randomPerfTabs" title="randomPerfTabs"><code class="xref py py-mod docutils literal notranslate"><span class="pre">randomPerfTabs</span></code></a> module</p>
 </dd>
-<dt><a class="reference internal" href="#cintegeroutrankingdigraphs-label"><span class="std std-ref">cIntegerOutrankingDigraphs module</span></a></dt><dd><p>Integer and float valued C implementation of the
+<dt><a class="reference internal" href="#cintegeroutrankingdigraphs-label"><span class="std std-ref">cIntegerOutrankingDigraphs module</span></a></dt><dd><p>Integer and float valued C version of the
 <a class="reference internal" href="#outrankingDigraphs.BipolarOutrankingDigraph" title="outrankingDigraphs.BipolarOutrankingDigraph"><code class="xref py py-class docutils literal notranslate"><span class="pre">BipolarOutrankingDigraph</span></code></a> class</p>
 </dd>
 <dt><a class="reference internal" href="#cintegersortingdigraphs-label"><span class="std std-ref">cIntegerSortingDigraphs module</span></a></dt><dd><p>Integer and float valued C version of the <a class="reference internal" href="#sortingDigraphs.QuantilesSortingDigraph" title="sortingDigraphs.QuantilesSortingDigraph"><code class="xref py py-class docutils literal notranslate"><span class="pre">QuantilesSortingDigraph</span></code></a> class</p>
@@ -12020,7 +12020,21 @@ Rubis Solver computed from a stored XMCDA2 encoded performance tableau.</p>
 </section>
 <section id="cythonized-modules-for-big-digraphs">
 <span id="cythonized-label"></span><h2><a class="toc-backref" href="#id25" role="doc-backlink"><span class="section-number">2.23. </span>Cythonized modules for big digraphs</a><a class="headerlink" href="#cythonized-modules-for-big-digraphs" title="Link to this heading"></a></h2>
-<p>The following modules are compiled C-extensions using the Cython pre-compiler. No Python code source is provided for inspection. To distinguish them from the corresponding pure Python modules, a c- prefix is used. A tutorial with coding examples is available here: <a class="reference internal" href="tutorial.html#hpc-tutorial-label"><span class="std std-ref">HPC ranking with big outranking digraphs</span></a>.</p>
+<p>The following modules are compiled C-extensions using the Cython pre-compiler. No Python code source is provided for inspection. To distinguish them from the corresponding pure Python modules, a c- prefix is used.</p>
+<blockquote>
+<div><dl class="simple">
+<dt><a class="reference internal" href="#crandperftabs-label"><span class="std std-ref">cRandPerfTabs module</span></a></dt><dd><p>Integer and float valued C version of the <a class="reference internal" href="#module-randomPerfTabs" title="randomPerfTabs"><code class="xref py py-mod docutils literal notranslate"><span class="pre">randomPerfTabs</span></code></a> module</p>
+</dd>
+<dt><a class="reference internal" href="#cintegeroutrankingdigraphs-label"><span class="std std-ref">cIntegerOutrankingDigraphs module</span></a></dt><dd><p>Integer and float valued C version of the
+<a class="reference internal" href="#outrankingDigraphs.BipolarOutrankingDigraph" title="outrankingDigraphs.BipolarOutrankingDigraph"><code class="xref py py-class docutils literal notranslate"><span class="pre">BipolarOutrankingDigraph</span></code></a> class</p>
+</dd>
+<dt><a class="reference internal" href="#cintegersortingdigraphs-label"><span class="std std-ref">cIntegerSortingDigraphs module</span></a></dt><dd><p>Integer and float valued C version of the <a class="reference internal" href="#sortingDigraphs.QuantilesSortingDigraph" title="sortingDigraphs.QuantilesSortingDigraph"><code class="xref py py-class docutils literal notranslate"><span class="pre">QuantilesSortingDigraph</span></code></a> class</p>
+</dd>
+<dt><a class="reference internal" href="#csparseintegeroutrankingdigraphs-label"><span class="std std-ref">cSparseIntegerOutrankingDigraphs module</span></a></dt><dd><p>Integer and float valued C version of sparse outranking digraphs.</p>
+</dd>
+</dl>
+</div></blockquote>
+<p>A tutorial with coding examples is available here: <a class="reference internal" href="tutorial.html#hpc-tutorial-label"><span class="std std-ref">HPC ranking with big outranking digraphs</span></a>.</p>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
 <p>These cythonized modules, specifically designed for being run on HPC clusters (see <a class="reference external" href="https://hpc.uni.lu">https://hpc.uni.lu</a>), are starting with <em>Threading=True</em> their multiprocessing threads by default with the <em>spawn</em> start method. The main program code of Python scripts using these modules must therefore be protected with the <em>__name__==”__main__”</em> test from recursive re-execution. The threading start method is actually configurable with the <em>StartMethod</em> parameter: <em>spawn</em>, <em>forkserver</em> or <em>fork</em>. The latter is not safe –especially on not Linux systems– and may result in dead locks and hence return partial or false results.</p>
