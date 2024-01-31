@@ -1001,7 +1001,8 @@ def _worker(input):
 #     print( '%d/%d = %s' % \
 #            (args[1], args[2],result))
 
-def _decompose(int i, int nc,tempDirName,perfTab,decomposition):
+def _decompose(int i, int nc,tempDirName,perfTab,
+               decomposition,componentRankingRule):
     cdef int nd
     #global perfTab
     #global decomposition
@@ -1017,11 +1018,15 @@ def _decompose(int i, int nc,tempDirName,perfTab,decomposition):
                     WithConcordanceRelation=False,
                     WithVetoCounts=False,
                     CopyPerfTab=False,
+                                         #componentRankingRule='Copeland',
                                          Threading=False,
                                          startMethod='spawn',
                                          nbrCores=4,
                                          )
-    pg.computeCopelandRanking()
+    if componentRankingRule == 'Copeland':
+        pg.computeCopelandRanking()
+    else:
+        pg.computeNetFlowsRanking()
     pg.__dict__.pop('criteria')
     pg.__dict__.pop('evaluation')
     pg.__class__ = Digraph
@@ -1314,7 +1319,10 @@ class SparseIntegerOutrankingDigraph(SparseIntegerDigraph,cPerformanceTableau):
                                           WithVetoCounts=False,
                                           #Normalized=True,
                                           CopyPerfTab=False)
-                boostedRanking += pg.computeCopelandRanking()
+                if componentRankingRule == 'copeland':
+                    boostedRanking += pg.computeCopelandRanking()
+                else:
+                    boostedRanking += pg.computeNetFlowsRanking()
                 pg.__dict__.pop('criteria')
                 pg.__dict__.pop('evaluation')
                 pg.__dict__.pop('NA')
@@ -1346,7 +1354,9 @@ class SparseIntegerOutrankingDigraph(SparseIntegerDigraph,cPerformanceTableau):
                 NUMBER_OF_WORKERS = nbrCores
                 tasksIndex = [(i,len(decomposition[i][1])) for i in range(nc)]
                 tasksIndex.sort(key=lambda pos: pos[1],reverse=True)
-                TASKS = [(Comments,(pos[0],nc,tempDirName,perfTab,decomposition)) for pos in tasksIndex]
+                TASKS = [(Comments,(pos[0],nc,tempDirName,
+                                    perfTab,decomposition,
+                                    componentRankingRule)) for pos in tasksIndex]
                 task_queue = Queue()
                 for task in TASKS:
                     task_queue.put(task)
@@ -1376,7 +1386,11 @@ class SparseIntegerOutrankingDigraph(SparseIntegerDigraph,cPerformanceTableau):
                     if Debug:
                         print('splitComponent',splitComponent)
                     components[splitComponent['compKey']] = splitComponent['compDict']
-                    boostedRanking += splitComponent['compDict']['subGraph'].copelandRanking
+                    if componentRankingRule == 'Copeland':
+                        boostedRanking += splitComponent['compDict']['subGraph'].copelandRanking
+                    else:
+                        boostedRanking += splitComponent['compDict']['subGraph'].netFlowsRanking
+                        
 
         # storing components, fillRate and maximalComponentSize
 
@@ -2067,7 +2081,8 @@ def _worker1(input):
 #     print( '%d/%d = %s' % \
 #            (args[1], args[2],result))
 
-def _decompose1(int i, int nc,tempDirName,perfTab,decomposition):
+def _decompose1(int i, int nc,tempDirName,
+                perfTab,decomposition,componentRankingRule):
     cdef int nd
     #global perfTab
     #global decomposition
@@ -2084,7 +2099,11 @@ def _decompose1(int i, int nc,tempDirName,perfTab,decomposition):
                     WithVetoCounts=False,
                     CopyPerfTab=False,
                     Threading=False)
-    componentRanking = pg.computeCopelandRanking()
+    if componentRankingRule == 'Copeland':
+        componentRanking = pg.computeCopelandRanking()
+    else:
+        componentRanking = pg.computeNetFlowsRanking()
+        
     #pg.__dict__.pop('criteria')
     #pg.__dict__.pop('evaluation')
     #pg.__class__ = Digraph
@@ -2202,8 +2221,8 @@ class cQuantilesRankingDigraph(SparseIntegerOutrankingDigraph):
         cdef array.array lTest=array.array('i')
         cdef int NA
 
-        global perfTab
-        global decomposition
+        #global perfTab
+        #global decomposition
 
         from digraphs import Digraph
         from cIntegerSortingDigraphs import IntegerQuantilesSortingDigraph
@@ -2382,7 +2401,9 @@ class cQuantilesRankingDigraph(SparseIntegerOutrankingDigraph):
                 maximalComponentSize += tasksIndex[0][1]
                 if Comments:
                     print('Maximal component size: %d' % maximalComponentSize)
-                TASKS = [(Comments,(pos[0],nc,tempDirName,perfTab,decomposition)) for pos in tasksIndex]
+                TASKS = [(Comments,(pos[0],nc,tempDirName,
+                                    perfTab,decomposition,
+                                    componentRankingRule)) for pos in tasksIndex]
                 task_queue = Queue()
                 for task in TASKS:
                     task_queue.put(task)

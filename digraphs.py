@@ -10734,6 +10734,8 @@ class Digraph(object):
         Tenders an ordered dictionary of the actions (from best to worst)
         following the net flows ranking rule with rank and net flow attributes.
         """
+        from operator import itemgetter
+
         relation = self.relation
         actionsList = [x for x in self.actions]
         netFlows = []
@@ -10768,7 +10770,38 @@ class Digraph(object):
             self.netFlowsRankingDict = netFlowsRanking
         return netFlowsRanking
 
-    def computeNetFlowsRanking(self):
+    def _computeNetFlowsRanking(self,Stored=True,Debug=False):
+        """
+        Tenders an ordered dictionary of the actions (from best to worst)
+        following the net flows ranking rule with rank and net flow attributes.
+        """
+        from operator import itemgetter
+
+        relation = self.relation
+        actionsList = [x for x in self.actions]
+        incNetFlowsScores = []
+        decNetFlowsScores = []
+        #Med = self.valuationdomain['med']
+        #if Med == Decimal('0'):
+        for x in actionsList:
+            xnetFlows = 0
+            for y in actionsList:
+                xnetFlows += relation[x][y] - relation[y][x] 
+            incNetFlowsScores.append((xnetFlows,x))
+            decNetFlowsScores.append((xnetFlows,x))
+        if Debug:
+            print(incNetFlowsScores)
+                                     
+        incNetFlowsScores.sort(key=itemgetter(0))
+        decNetFlowsScores.sort(key=itemgetter(0),reverse=True)
+        self.incNetFlowsScores = incNetFlowsScores
+        self.decNetFlowsScores = decNetFlowsScores
+        netFlowsRanking = [x[1] for x in decNetFlowsScores]
+        netFlowsOrder = [x[1] for x in incNetFlowsScores]
+        self.netFlowsRanking = netFlowsRanking
+        self.netFlowsOrder = netFlowsOrder
+
+    def computeNetFlowsRankingDict(self):
         """
         Renders an ordered list (from best to worst) of the actions
         following the net flows ranking rule.
@@ -10779,7 +10812,39 @@ class Digraph(object):
             netFlowsRankingDict = self._computeNetFlowsRankingDict()
             return list(netFlowsRankingDict.keys())
 
+    def computeNetFlowsRanking(self):
+        """
+        Renders an ordered list (from best to worst) of the actions
+        following the net flows ranking rule.
+        """
+        try:
+            return self.netFlowsRanking
+        except:
+            self._computeNetFlowsRanking()
+            return self.netFlowsRanking
+        # try:
+        #     return list(self.netFlowsRankingDict.keys())
+        # except AttributeError:
+        #     netFlowsRankingDict = self._computeNetFlowsRankingDict()
+        #     return list(netFlowsRankingDict.keys())
+
     def computeNetFlowsOrder(self):
+        """
+        Renders an ordered list (from best to worst) of the actions
+        following the net flows ranking rule.
+        """
+        try:
+            return self.netFlowsOrder
+        except:
+            self._computeNetFlowsRanking()
+            return self.netFlowsOrder
+        # try:
+        #     return list(self.netFlowsRankingDict.keys())
+        # except AttributeError:
+        #     netFlowsRankingDict = self._computeNetFlowsRankingDict()
+        #     return list(netFlowsRankingDict.keys())
+
+    def computeNetFlowsOrderDict(self):
         """
         Renders an ordered list (from worst to best) of the actions
         following the net flows ranking rule.
@@ -10894,12 +10959,12 @@ class Digraph(object):
         from operator import itemgetter
         c = PolarisedDigraph(self)
         cRelation = c.relation
-        actions = self.actions
+        actionsList = [x for x in self.actions]
         incCopelandScores = []
         decCopelandScores = []
-        for x in actions:
+        for x in actionsList:
             copelandScore = Decimal('0')
-            for y in actions:
+            for y in actionsList:
                 copelandScore += cRelation[x][y] - cRelation[y][x]
             #actions[x]['score'] = copelandScore
             incCopelandScores.append((copelandScore,x))
