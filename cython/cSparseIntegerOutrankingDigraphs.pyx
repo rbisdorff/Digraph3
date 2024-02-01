@@ -1043,19 +1043,18 @@ from cRandPerfTabs import cPerformanceTableau
 class SparseIntegerOutrankingDigraph(SparseIntegerDigraph,cPerformanceTableau):
     """
     *Parameters*:
-        * argPerfTab,
-        * quantiles=4,
-        * quantilesOrderingStrategy="average",
-        * OptimalQuantileOrdering=False,
+        * argPerfTab, a *cPerformanceTableau* object or a file name of such a stored object,
+        * quantiles=4, higher values may give more convincing ranking results,
+        * quantilesOrderingStrategy={ "average" (default) | 'optimal' },
         * LowerClosed=False,
-        * componentRankingRule="Copeland",
-        * minimalComponentSize=1,
+        * componentRankingRule= { "Copeland" (default) | 'NetFlows' },
+        * minimalComponentSize=1, higher values my result in lower run times and better ranking results,
         * Threading=False,
-        * startMethod='spawn'
-        * tempDir=None,
-        * nbrOfCPUs=4,
-        * save2File=None,
-        * CopyPerfTab=False,
+        * startMethod= {'spawn' (default) | 'forkserver' | 'fork' }
+        * tempDir= './' by default,
+        * nbrOfCPUs= cpu_count by default,
+        * save2File=None, fileName where to permanently store a short description of the resulting *SparseIntegerOutrankingDigraph* object (for batch experiments on HPC platforms),
+        * CopyPerfTab=False, If *True* allows to print out performance heatmaps of the preranking result,
         * Comments=False,
         * Debug=False.
 
@@ -1983,11 +1982,11 @@ class SparseIntegerOutrankingDigraph(SparseIntegerDigraph,cPerformanceTableau):
     def computeBoostedRanking(self, rankingRule='Copeland'):
         """
         *Parameter*:
-            * rankingRule='Copeland'.
+            * rankingRule='Copeland' | 'NetFlows'.
 
         Renders an ordred list of decision actions ranked in
-        decreasing preference direction following the net flows rule
-        on each component.
+        decreasing preference direction following by default
+        the Copeland ranking rule on each component.
         """
         from linearOrders import NetFlowsOrder,KohlerOrder,CopelandOrder
         ranking = []
@@ -2114,26 +2113,24 @@ def _decompose1(int i, int nc,tempDirName,
     fo.close()
     return '%d/%d (%d)' % (i,nc,pg.order)
 
-#from sparseOutrankingDigraphs import PreRankedOutrankingDigraph
-#from cRandPerfTabs import PerformanceTableau
-#from cIntegerOutrankingDigraphs import IntegerBipolarOutrankingDigraph
+# ------------
 class cQuantilesRankingDigraph(SparseIntegerOutrankingDigraph):
     """
     Cythonized version of the :py:class:`sparseOutrankingDigraphs.PreRankedOutrankingDigraph` class for the multiprocessing implementation of multiple criteria quantiles ranking of very big performance tableaux - > 100000.
 
     *Parameters*:
-        * argPerfTab,
-        * quantiles=4,
-        * quantilesOrderingStrategy="optimal",
+        * argPerfTab, a cPerformanceTableau object or a file name of such a stored object,
+        * quantiles=4, higher values may give more convincing ranking results.
+        * quantilesOrderingStrategy= {"optimal" (default) | 'average'},
         * LowerClosed=False,
-        * componentRankingRule="Copeland",
-        * minimalComponentSize=1,
+        * componentRankingRule={'Copeland' (default) | 'NetFlows' },
+        * minimalComponentSize=1, higher values my result in lower run times and better ranking results,
         * Threading=False,
-        * startMethod='spawn',
-        * tempDir=None,
-        * nbrOfCPUs=4,
-        * save2File=None,
-        * CopyPerfTab=False,
+        * startMethod={ 'spawn' (default) | 'forkserver' | 'fork' },
+        * tempDir= './' by default,
+        * nbrOfCPUs= cpu_count() by default,
+        * save2File=None: allows to save a short object description,
+        * CopyPerfTab=False: If *True* allows to show coloured performance heatmaps of the ranking results,
         * Comments=False,
         * Debug=False.
 

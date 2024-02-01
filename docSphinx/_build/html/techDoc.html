@@ -13274,19 +13274,18 @@ and Tideman’s ranked pairs rule (rankingRule=”rankedPairs”).</p>
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">cSparseIntegerOutrankingDigraphs.</span></span><span class="sig-name descname"><span class="pre">SparseIntegerOutrankingDigraph</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">argPerfTab</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">quantiles</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">4</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">quantilesOrderingStrategy</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'average'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">OptimalQuantileOrdering</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">LowerClosed</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">componentRankingRule</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'Copeland'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">minimalComponentSize</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">Threading</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">startMethod</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">nbrOfCPUs</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">tempDir</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">save2File</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">CopyPerfTab</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">Comments</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">Debug</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cSparseIntegerOutrankingDigraphs.SparseIntegerOutrankingDigraph" title="Link to this definition"></a></dt>
 <dd><dl class="simple">
 <dt><em>Parameters</em>:</dt><dd><ul class="simple">
-<li><p>argPerfTab,</p></li>
-<li><p>quantiles=4,</p></li>
-<li><p>quantilesOrderingStrategy=”average”,</p></li>
-<li><p>OptimalQuantileOrdering=False,</p></li>
+<li><p>argPerfTab, a <em>cPerformanceTableau</em> object or a file name of such a stored object,</p></li>
+<li><p>quantiles=4, higher values may give more convincing ranking results,</p></li>
+<li><p>quantilesOrderingStrategy={ “average” (default) | ‘optimal’ },</p></li>
 <li><p>LowerClosed=False,</p></li>
-<li><p>componentRankingRule=”Copeland”,</p></li>
-<li><p>minimalComponentSize=1,</p></li>
+<li><p>componentRankingRule= { “Copeland” (default) | ‘NetFlows’ },</p></li>
+<li><p>minimalComponentSize=1, higher values my result in lower run times and better ranking results,</p></li>
 <li><p>Threading=False,</p></li>
-<li><p>startMethod=’spawn’</p></li>
-<li><p>tempDir=None,</p></li>
-<li><p>nbrOfCPUs=4,</p></li>
-<li><p>save2File=None,</p></li>
-<li><p>CopyPerfTab=False,</p></li>
+<li><p>startMethod= {‘spawn’ (default) | ‘forkserver’ | ‘fork’ }</p></li>
+<li><p>tempDir= ‘./’ by default,</p></li>
+<li><p>nbrOfCPUs= cpu_count by default,</p></li>
+<li><p>save2File=None, fileName where to permanently store a short description of the resulting <em>SparseIntegerOutrankingDigraph</em> object (for batch experiments on HPC platforms),</p></li>
+<li><p>CopyPerfTab=False, If <em>True</em> allows to print out performance heatmaps of the preranking result,</p></li>
 <li><p>Comments=False,</p></li>
 <li><p>Debug=False.</p></li>
 </ul>
@@ -13421,13 +13420,13 @@ on each component.</p>
 <span class="sig-name descname"><span class="pre">computeBoostedRanking</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">rankingRule</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'Copeland'</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cSparseIntegerOutrankingDigraphs.SparseIntegerOutrankingDigraph.computeBoostedRanking" title="Link to this definition"></a></dt>
 <dd><dl class="simple">
 <dt><em>Parameter</em>:</dt><dd><ul class="simple">
-<li><p>rankingRule=’Copeland’.</p></li>
+<li><p>rankingRule=’Copeland’ | ‘NetFlows’.</p></li>
 </ul>
 </dd>
 </dl>
 <p>Renders an ordred list of decision actions ranked in
-decreasing preference direction following the net flows rule
-on each component.</p>
+decreasing preference direction following by default
+the Copeland ranking rule on each component.</p>
 </dd></dl>
 
 <dl class="py method">
@@ -13584,18 +13583,18 @@ Components are stored in an ordered dictionary.</p>
 <dd><p>Cythonized version of the <a class="reference internal" href="#sparseOutrankingDigraphs.PreRankedOutrankingDigraph" title="sparseOutrankingDigraphs.PreRankedOutrankingDigraph"><code class="xref py py-class docutils literal notranslate"><span class="pre">sparseOutrankingDigraphs.PreRankedOutrankingDigraph</span></code></a> class for the multiprocessing implementation of multiple criteria quantiles ranking of very big performance tableaux - &gt; 100000.</p>
 <dl class="simple">
 <dt><em>Parameters</em>:</dt><dd><ul class="simple">
-<li><p>argPerfTab,</p></li>
-<li><p>quantiles=4,</p></li>
-<li><p>quantilesOrderingStrategy=”optimal”,</p></li>
+<li><p>argPerfTab, a cPerformanceTableau object or a file name of such a stored object,</p></li>
+<li><p>quantiles=4, higher values may give more convincing ranking results.</p></li>
+<li><p>quantilesOrderingStrategy= {“optimal” (default) | ‘average’},</p></li>
 <li><p>LowerClosed=False,</p></li>
-<li><p>componentRankingRule=”Copeland”,</p></li>
-<li><p>minimalComponentSize=1,</p></li>
+<li><p>componentRankingRule={‘Copeland’ (default) | ‘NetFlows’ },</p></li>
+<li><p>minimalComponentSize=1, higher values my result in lower run times and better ranking results,</p></li>
 <li><p>Threading=False,</p></li>
-<li><p>startMethod=’spawn’,</p></li>
-<li><p>tempDir=None,</p></li>
-<li><p>nbrOfCPUs=4,</p></li>
-<li><p>save2File=None,</p></li>
-<li><p>CopyPerfTab=False,</p></li>
+<li><p>startMethod={ ‘spawn’ (default) | ‘forkserver’ | ‘fork’ },</p></li>
+<li><p>tempDir= ‘./’ by default,</p></li>
+<li><p>nbrOfCPUs= cpu_count() by default,</p></li>
+<li><p>save2File=None: allows to save a short object description,</p></li>
+<li><p>CopyPerfTab=False: If <em>True</em> allows to show coloured performance heatmaps of the ranking results,</p></li>
 <li><p>Comments=False,</p></li>
 <li><p>Debug=False.</p></li>
 </ul>
