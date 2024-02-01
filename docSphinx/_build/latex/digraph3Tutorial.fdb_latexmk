@@ -1,11 +1,11 @@
 # Fdb version 4
-["makeindex digraph3Tutorial.idx"] 1706536078 "digraph3Tutorial.idx" "digraph3Tutorial.ind" "digraph3Tutorial" 1706536262 0
-  "digraph3Tutorial.idx" 1706536257 0 d41d8cd98f00b204e9800998ecf8427e "pdflatex"
+["makeindex digraph3Tutorial.idx"] 1706536078 "digraph3Tutorial.idx" "digraph3Tutorial.ind" "digraph3Tutorial" 1706708528 0
+  "digraph3Tutorial.idx" 1706708523 0 d41d8cd98f00b204e9800998ecf8427e "pdflatex"
   (generated)
   "digraph3Tutorial.ilg"
   "digraph3Tutorial.ind"
   (rewritten before read)
-["pdflatex"] 1706536256 "digraph3Tutorial.tex" "digraph3Tutorial.pdf" "digraph3Tutorial" 1706536262 0
+["pdflatex"] 1706708522 "digraph3Tutorial.tex" "digraph3Tutorial.pdf" "digraph3Tutorial" 1706708528 0
   "/etc/texmf/web2c/texmf.cnf" 1697638898 475 c0e671620eb5563b2130f56340a5fde8 ""
   "/home/bisdorff/.texlive2023/texmf-var/fonts/pk/ljfour/jknappen/ec/ecbi1200.600pk" 1706520347 42704 815dbeb8b1062279b7f2bd6280f2c8fa ""
   "/home/bisdorff/.texlive2023/texmf-var/fonts/pk/ljfour/jknappen/ec/ecbx1200.600pk" 1706520336 31928 219cae0d4d3156a2cb87c1cbab0a6c51 ""
@@ -231,11 +231,11 @@
   "compFemCopGS.png" 1698244263 26317 e3561699b938fa6c654013e266f88727 ""
   "converse-dual_rel_best10.png" 1698244263 65760 5d5d409f110f9914d7fe19fce26ff459 ""
   "cycles.png" 1698244263 38389 9515e841f4881dd2df51947edd07b3e9 ""
-  "digraph3Tutorial.aux" 1706536262 131890 e267fa02e07c9b4ab9fc244d91e72d79 "pdflatex"
+  "digraph3Tutorial.aux" 1706708528 131890 e267fa02e07c9b4ab9fc244d91e72d79 "pdflatex"
   "digraph3Tutorial.ind" 1706536078 0 d41d8cd98f00b204e9800998ecf8427e "makeindex digraph3Tutorial.idx"
-  "digraph3Tutorial.out" 1706536262 36711 02b74ceb494b1e78ff468a2fd7b5854a "pdflatex"
-  "digraph3Tutorial.tex" 1706536239 1074926 369fd774ee120b144bd0295ae5422abf ""
-  "digraph3Tutorial.toc" 1706536262 14834 1ccd44ed08b26fea50c0e01e698c45cf "pdflatex"
+  "digraph3Tutorial.out" 1706708528 36711 02b74ceb494b1e78ff468a2fd7b5854a "pdflatex"
+  "digraph3Tutorial.tex" 1706708506 1074926 c0d641f30f99b68fea9beeaabfe956cc ""
+  "digraph3Tutorial.toc" 1706708528 14834 1ccd44ed08b26fea50c0e01e698c45cf "pdflatex"
   "distGSFairness.png" 1698244263 24704 78fbd418381a5fa82d67302573693a91 ""
   "distStableFairness.png" 1698244263 23842 9e06dcd9f166aeaf01b3f640b6ed7b89 ""
   "enhancedFreq.png" 1698244263 24449 910cf8db479bb329d7f220a127d42ac5 ""
@@ -289,7 +289,7 @@
   "sparse75RelationMap.png" 1698244263 75230 8417e72bd2306a26da729fd398a4e039 ""
   "sparseRelationMap.png" 1698244263 13187 df51199ccfddd95f44d62a9338454774 ""
   "sphinx.sty" 1698244263 44560 f9fbf51072c954d129c9bd5284cc4ccf ""
-  "sphinxhighlight.sty" 1706536198 7490 72d023191655734567e0798eade2a1f7 ""
+  "sphinxhighlight.sty" 1706708462 7490 72d023191655734567e0798eade2a1f7 ""
   "sphinxhowto.cls" 1698244263 3256 55d5772de2f18cad818d98a3e6e8e37b ""
   "sphinxlatexadmonitions.sty" 1698244263 10989 c38302e64c2bb47779f086869b246760 ""
   "sphinxlatexcontainers.sty" 1698244263 901 d3a3a1b7b2547f47ade2499350b5c420 ""
@@ -304,7 +304,7 @@
   "sphinxlatexstylepage.sty" 1698244263 3064 abce6c3018a84afee0afb08a431944ea ""
   "sphinxlatexstyletext.sty" 1698244263 8589 a7e8f95eb4fef6c1cd2623cd417d6467 ""
   "sphinxlatextables.sty" 1698244263 57830 16f2773b765508003aec5d08680f39b9 ""
-  "sphinxmessages.sty" 1706536250 745 3f5fcd6cdd7964ed608767954a8ced6f ""
+  "sphinxmessages.sty" 1706708518 745 3f5fcd6cdd7964ed608767954a8ced6f ""
   "sphinxoptionsgeometry.sty" 1698244263 2061 47bb34b8ed8a78823eb0c886abfb9f4d ""
   "sphinxoptionshyperref.sty" 1698244263 1094 79beb8b8a3f10784f8cce804e0f9d3aa ""
   "sphinxpackageboxes.sty" 1697639904 36615 1d74c63e665ede6c648fa08c42ea70fb ""

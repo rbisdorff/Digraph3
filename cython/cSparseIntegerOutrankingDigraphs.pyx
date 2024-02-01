@@ -1053,7 +1053,6 @@ class SparseIntegerOutrankingDigraph(SparseIntegerDigraph,cPerformanceTableau):
         * Threading=False,
         * startMethod='spawn'
         * tempDir=None,
-        * componentThreadingThreshold=1000,\
         * nbrOfCPUs=4,
         * save2File=None,
         * CopyPerfTab=False,
@@ -1170,7 +1169,7 @@ class SparseIntegerOutrankingDigraph(SparseIntegerDigraph,cPerformanceTableau):
                  startMethod=None,\
                  nbrOfCPUs=None,\
                  tempDir=None,\
-                 int componentThreadingThreshold=50,\
+                 #int componentThreadingThreshold=50,\
                  save2File=None,\
                  bint CopyPerfTab=False,\
                  bint Comments=False,\
@@ -2373,12 +2372,12 @@ class cQuantilesRankingDigraph(SparseIntegerOutrankingDigraph):
                 #pg.__class__ = IntegerDigraph
                 components[compKey]['componentRanking'] = componentRanking
                 boostedRanking += componentRanking
-        else:   # if self.sortingParameters['Threading'] == True:
+        else:   # if Threading == True:
             from copy import copy, deepcopy
             from pickle import dumps, loads, load, dump
             import multiprocessing as mp
             mpctx = mp.get_context(startMethod)
-            #self.startMethod = mpctx.get_start_method()
+            self.startMethod = mpctx.get_start_method()
             Process = mpctx.Process
             Queue = mpctx.Queue
             active_children = mpctx.active_children
