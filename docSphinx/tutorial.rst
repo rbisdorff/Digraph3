@@ -1021,6 +1021,7 @@ In this example we consider furthermore a family of seven **equisignificant card
 
 .. code-block:: pycon
    :linenos:
+   :emphasize-lines: 6-8
 
    >>> pt.showCriteria()
     *----  criteria -----*
@@ -1049,6 +1050,7 @@ On criteria function *g1* (see Lines 6-8 above) we observe, for instance, about 
 
 .. code-block:: pycon
    :linenos:
+   :emphasize-lines: 6
 
    >>> pt.showPerformanceTableau(Transposed=True,ndigits=1)
     *----  performance tableau -----*
@@ -1073,6 +1075,7 @@ Given the previous random performance tableau *pt*, the :py:class:`~outrankingDi
    :caption: Example of random bipolar-valued outranking digraph
    :name: tutOutrankingDigraph
    :linenos:
+   :emphasize-lines: 8-9
 
    >>> odg = BipolarOutrankingDigraph(pt)
    >>> odg
@@ -1142,6 +1145,7 @@ The outranking characteristic value :math:`r(a_1 \succsim a_2)` represents the *
 
 .. code-block:: pycon
    :linenos:
+   :emphasize-lines: 6
 
    >>> odg.showPairwiseComparison('a1','a7')
     *------------  pairwise comparison ----*

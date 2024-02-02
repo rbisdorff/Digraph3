@@ -1188,10 +1188,10 @@ the current working directory a ‘tutorialDigraph.dot’ file and a
 <span class="linenos"> 3</span><span class="go"> g1 &#39;RandomPerformanceTableau() instance&#39;</span>
 <span class="linenos"> 4</span><span class="go">   Scale = [0.0, 100.0]</span>
 <span class="linenos"> 5</span><span class="go">   Weight = 1.0</span>
-<span class="linenos"> 6</span><span class="go">   Threshold ind : 2.50 + 0.00x ; percentile: 4.76</span>
-<span class="linenos"> 7</span><span class="go">   Threshold pref : 5.00 + 0.00x ; percentile: 9.52</span>
-<span class="linenos"> 8</span><span class="go">   Threshold veto : 80.00 + 0.00x ; percentile: 95.24</span>
-<span class="linenos"> 9</span><span class="go"> g2 &#39;RandomPerformanceTableau() instance&#39;</span>
+<span class="hll"><span class="linenos"> 6</span><span class="go">   Threshold ind : 2.50 + 0.00x ; percentile: 4.76</span>
+</span><span class="hll"><span class="linenos"> 7</span><span class="go">   Threshold pref : 5.00 + 0.00x ; percentile: 9.52</span>
+</span><span class="hll"><span class="linenos"> 8</span><span class="go">   Threshold veto : 80.00 + 0.00x ; percentile: 95.24</span>
+</span><span class="linenos"> 9</span><span class="go"> g2 &#39;RandomPerformanceTableau() instance&#39;</span>
 <span class="linenos">10</span><span class="go">   Scale = [0.0, 100.0]</span>
 <span class="linenos">11</span><span class="go">   Weight = 1.0</span>
 <span class="linenos">12</span><span class="go">   Threshold ind : 2.50 + 0.00x ; percentile: 6.67</span>
@@ -1213,8 +1213,8 @@ the current working directory a ‘tutorialDigraph.dot’ file and a
 <span class="linenos"> 3</span><span class="go">  criteria |  weights | &#39;a1&#39;  &#39;a2&#39;  &#39;a3&#39;  &#39;a4&#39;  &#39;a5&#39;  &#39;a6&#39;  &#39;a7&#39;</span>
 <span class="linenos"> 4</span><span class="go">  ---------|----------|-----------------------------------------</span>
 <span class="linenos"> 5</span><span class="go">   &#39;g1&#39;    |    1     | 15.2  44.5  57.9  58.0  24.2  29.1  96.6</span>
-<span class="linenos"> 6</span><span class="go">   &#39;g2&#39;    |    1     | 82.3  43.9   NA   35.8  29.1  34.8  62.2</span>
-<span class="linenos"> 7</span><span class="go">   &#39;g3&#39;    |    1     | 44.2  19.1  27.7  41.5  22.4  21.5  56.9</span>
+<span class="hll"><span class="linenos"> 6</span><span class="go">   &#39;g2&#39;    |    1     | 82.3  43.9   NA   35.8  29.1  34.8  62.2</span>
+</span><span class="linenos"> 7</span><span class="go">   &#39;g3&#39;    |    1     | 44.2  19.1  27.7  41.5  22.4  21.5  56.9</span>
 <span class="linenos"> 8</span><span class="go">   &#39;g4&#39;    |    1     | 46.4  16.2  21.5  51.2  77.0  39.4  32.1</span>
 <span class="linenos"> 9</span><span class="go">   &#39;g5&#39;    |    1     | 47.7  14.8  79.7  67.5   NA   90.7  80.2</span>
 <span class="linenos">10</span><span class="go">   &#39;g6&#39;    |    1     | 69.6  45.5  22.0  33.8  31.8   NA   48.8</span>
@@ -1235,9 +1235,9 @@ the current working directory a ‘tutorialDigraph.dot’ file and a
 <span class="linenos"> 5</span><span class="go">  Instance name        : rel_randomperftab</span>
 <span class="linenos"> 6</span><span class="go">  # Actions            : 7</span>
 <span class="linenos"> 7</span><span class="go">  # Criteria           : 7</span>
-<span class="linenos"> 8</span><span class="go">  Size                 : 20</span>
-<span class="linenos"> 9</span><span class="go">  Determinateness (%)  : 63.27</span>
-<span class="linenos">10</span><span class="go">  Valuation domain     : [-1.00;1.00]</span>
+<span class="hll"><span class="linenos"> 8</span><span class="go">  Size                 : 20</span>
+</span><span class="hll"><span class="linenos"> 9</span><span class="go">  Determinateness (%)  : 63.27</span>
+</span><span class="linenos">10</span><span class="go">  Valuation domain     : [-1.00;1.00]</span>
 <span class="linenos">11</span><span class="go">  Attributes           : [</span>
 <span class="linenos">12</span><span class="go">     &#39;name&#39;, &#39;actions&#39;,</span>
 <span class="linenos">13</span><span class="go">     &#39;criteria&#39;, &#39;evaluation&#39;, &#39;NA&#39;,</span>
@@ -1296,8 +1296,8 @@ the current working directory a ‘tutorialDigraph.dot’ file and a
 <span class="linenos"> 3</span><span class="go">  Comparing actions : (a1, a7)</span>
 <span class="linenos"> 4</span><span class="go">  crit. wght.  g(x)  g(y)    diff  | ind   pref    r()  |  v     veto</span>
 <span class="linenos"> 5</span><span class="go">   -------------------------------   ------------------   -----------</span>
-<span class="linenos"> 6</span><span class="go">   g1   1.00  15.17  96.58  -81.41 | 2.50  5.00   -1.00 | 80.00 -1.00</span>
-<span class="linenos"> 7</span><span class="go">   g2   1.00  82.29  62.22  +20.07 | 2.50  5.00   +1.00 |</span>
+<span class="hll"><span class="linenos"> 6</span><span class="go">   g1   1.00  15.17  96.58  -81.41 | 2.50  5.00   -1.00 | 80.00 -1.00</span>
+</span><span class="linenos"> 7</span><span class="go">   g2   1.00  82.29  62.22  +20.07 | 2.50  5.00   +1.00 |</span>
 <span class="linenos"> 8</span><span class="go">   g3   1.00  44.23  56.90  -12.67 | 2.50  5.00   -1.00 |</span>
 <span class="linenos"> 9</span><span class="go">   g4   1.00  46.37  32.06  +14.31 | 2.50  5.00   +1.00 |</span>
 <span class="linenos">10</span><span class="go">   g5   1.00  47.67  80.16  -32.49 | 2.50  5.00   -1.00 |</span>
