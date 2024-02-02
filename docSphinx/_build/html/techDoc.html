@@ -1236,7 +1236,7 @@
 <dt class="field-odd">New<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
 <li><p>Following a Python 3.12 recommendation, all multiprocessing resources have been refactored to use by default, instead of the traditional <em>fork</em>, the safer <em>spawn</em> threading start method. As a consequence, main program code of multiprocessing Digraph3 Python scripts must now start with a <em>__name__==’__main__’</em> test in order to avoid its recursive execution in each started thread (see the <a class="reference external" href="https://docs.python.org/3/library/multiprocessing.html#module-multiprocessing" title="(in Python v3.12)"><code class="xref py py-mod docutils literal notranslate"><span class="pre">multiprocessing</span></code></a> module).</p></li>
-<li><p>A refactored multiprocessing <a class="reference internal" href="#mpOutrankingDigraphs.MPBipolarOutrankingDigraph" title="mpOutrankingDigraphs.MPBipolarOutrankingDigraph"><code class="xref py py-class docutils literal notranslate"><span class="pre">MPBipolarOutrankingDigraph</span></code></a> constructor of genuine bipolar-valued outranking digraphs with a configurable threading start method: <em>spawn</em> (by default), <em>forkserver</em> or <em>fork</em>.</p></li>
+<li><p>A refactored multiprocessing <a class="reference internal" href="#mpOutrankingDigraphs.MPBipolarOutrankingDigraph" title="mpOutrankingDigraphs.MPBipolarOutrankingDigraph"><code class="xref py py-class docutils literal notranslate"><span class="pre">MPBipolarOutrankingDigraph</span></code></a> constructor of bipolar-valued outranking digraphs with a configurable threading start method: <em>spawn</em> (by default), <em>forkserver</em> or <em>fork</em>.</p></li>
 <li><p>The <a class="reference internal" href="#digraphsTools.kmpMatch" title="digraphsTools.kmpMatch"><code class="xref py py-meth docutils literal notranslate"><span class="pre">digraphsTools.kmpMatch()</span></code></a> method implements the <em>Knuth</em> <em>Morris</em> <em>Pratt</em> string matching algorithm</p></li>
 <li><p>The <a class="reference internal" href="#digraphsTools.computeSequenceAlignment" title="digraphsTools.computeSequenceAlignment"><code class="xref py py-meth docutils literal notranslate"><span class="pre">digraphsTools.computeSequenceAlignment()</span></code></a> method implements the <em>Needlemann</em> % <em>Wunsch</em> dynamic programming algorithm for computing DNA <em>sequence alignments</em></p></li>
 <li><p>A <a class="reference internal" href="#module-dynamicProgramming" title="dynamicProgramming"><code class="xref py py-mod docutils literal notranslate"><span class="pre">dynamicProgramming</span></code></a> module for solving <strong>dynamic programming</strong> problems</p></li>
@@ -1300,21 +1300,21 @@
 </div>
 </li>
 </ol>
-<p>On Linux or Mac OS, ..$ <em>cd</em> to the extracted &lt;Digraph3&gt; directory:</p>
+<p>On Linux or Mac OS, ..$ <em>cd</em> to the extracted &lt;Digraph3&gt; directory. From Python3.10.4 on, the <em>distutils</em> package and the direct usage of <em>setup.py</em> are deprecated. The instead recommended installation via the <em>pip</em> module is provided with:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>../Digraph3$ make installPip
+</pre></div>
+</div>
+<p>This <em>make</em> command  launches in fact a <em>${PYTHON} -m pip -v install –upgrade –scr = .</em> command that installs the Digraph3 modules in the running virtual environment (recommended option) or the user’s local <em>site-packages</em> directory. A system wide installation is possible with prefixing the <em>make installPip</em> commad with <em>sudo</em>. As of Python 3.11, it is necessary to previously install the <em>wheel</em> package ( …$ python3.11 -m pip install wheel).</p>
+<p>For earlier Python3 version:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span>../Digraph3$ make installVenv
 </pre></div>
 </div>
-<p>installs the Digraph3 modules in an activated virtual Python environment (the Python recommended option), or in the user’s local python3 <em>site-packages</em>. As of Python 3.11, it is necessary to previously install the <em>wheel</em> package ( …$ python3.11 -m pip install wheel).</p>
+<p>installs the Digraph3 modules in an activated virtual Python environment (the Python recommended option), or in the user’s local python3 <em>site-packages</em>.</p>
 <p>Whereas:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span>../Digraph3$ make install
 </pre></div>
 </div>
 <p>installs (with <em>sudo ${PYTHON} setup.py</em>) the Digraph3 modules system wide in the current running python environment. Python 3.8 (or later) environment is recommended (see the makefile for adapting to your <em>PYTHON</em> make constant).</p>
-<p>From Python3.10.4 on, the <em>distutils</em> package and the direct usage of <em>setup.py</em> are deprecated. The instead recommended installation via the <em>pip</em> module is provided with:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>../Digraph3$ make installPip
-</pre></div>
-</div>
-<p>This <em>make</em> command  launches in fact a <em>${PYTHON} -m pip -v install –upgrade –scr = .</em> command that installs the Digraph3 modules in the running virtual environment (recommended option) or the user’s local <em>site-packages</em> directory. A system wide installation is possible with prefixing the <em>make installPip</em> commad with <em>sudo</em>.</p>
 <p>If the <strong>cython</strong> (<a class="reference external" href="https://cython.org/">https://cython.org/</a>) C-compiled modules for Big Data applications are required, it is necessary to previously install the <em>cython</em> package and, if not yet installed, the <em>wheel</em>  package in the running Python environment:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span>...$ python3 -m pip install cython wheel
 </pre></div>
@@ -1324,19 +1324,27 @@
 </pre></div>
 </div>
 <p>Test results are stored in the &lt;Digraph3/test/results&gt; directory. Notice that the python3 <em>pytest</em> package is therefore required:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>...$ python3 -m pip install pytest
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>...$ python3 -m pip install pytest pytest-xdist
 </pre></div>
 </div>
 <p>A verbose (with stdout not captured) pytest suite may be run as follows:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span>.../Digraph3$ make verboseTests
 </pre></div>
 </div>
+<p>Individual module <em>pytest</em> suites are also provided (see the makefile), like the one for the <a class="reference internal" href="#module-outrankingDigraphs" title="outrankingDigraphs"><code class="xref py py-mod docutils literal notranslate"><span class="pre">outrankingDigraphs</span></code></a> module:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>../Digraph3$ make outrankingDigraphsTests
+</pre></div>
+</div>
 <p>When the GNU <a class="reference external" href="https://www.gnu.org/software/parallel/">parallel</a> shell tool is installed and multiple processor cores are detected, the tests may be executed in multiprocessing mode:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span>../Digraph3$ make pTests
 </pre></div>
 </div>
-<p>Individual module <em>pytest</em> suites are also provided (see the makefile), like the one for the <a class="reference internal" href="#module-outrankingDigraphs" title="outrankingDigraphs"><code class="xref py py-mod docutils literal notranslate"><span class="pre">outrankingDigraphs</span></code></a> module:</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>../Digraph3$ make outrankingDigraphsTests
+<p>If the <em>pytest-xdist</em> package is installed (see above), it is also possible to set as follws a number of pytests to be run in parallel (see the <em>makefile</em>):</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>../Digraph3$ make tests JOBS=&quot;-n 8&quot;
+</pre></div>
+</div>
+<p>The <em>pytest</em> module is by default ignoring Python run time warnings. It is possible to activate default warnings as follows (see the <em>makefile</em>):</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>../Digraph3$ make tests PYTHON=&quot;python3 -Wd&quot;
 </pre></div>
 </div>
 <p><strong>Dependencies</strong></p>

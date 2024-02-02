@@ -19,7 +19,7 @@ Technical Reference of the Digraph3 modules
       
         - Following a Python 3.12 recommendation, all multiprocessing resources have been refactored to use by default, instead of the traditional *fork*, the safer *spawn* threading start method. As a consequence, main program code of multiprocessing Digraph3 Python scripts must now start with a *__name__=='__main__'* test in order to avoid its recursive execution in each started thread (see the :py:mod:`multiprocessing` module).
 
-        - A refactored multiprocessing :py:class:`~mpOutrankingDigraphs.MPBipolarOutrankingDigraph` constructor of genuine bipolar-valued outranking digraphs with a configurable threading start method: *spawn* (by default), *forkserver* or *fork*.
+        - A refactored multiprocessing :py:class:`~mpOutrankingDigraphs.MPBipolarOutrankingDigraph` constructor of bipolar-valued outranking digraphs with a configurable threading start method: *spawn* (by default), *forkserver* or *fork*.
 
         - The :py:meth:`digraphsTools.kmpMatch` method implements the *Knuth* *Morris* *Pratt* string matching algorithm
 
@@ -70,23 +70,23 @@ Three download options are given:
      ...$ git clone https://git.code.sf.net/p/digraph3/code Digraph3
      
 
-On Linux or Mac OS, ..$ *cd* to the extracted <Digraph3> directory::
+On Linux or Mac OS, ..$ *cd* to the extracted <Digraph3> directory. From Python3.10.4 on, the *distutils* package and the direct usage of *setup.py* are deprecated. The instead recommended installation via the *pip* module is provided with::
+
+     ../Digraph3$ make installPip
+
+This *make* command  launches in fact a *${PYTHON} -m pip -v install --upgrade --scr = .* command that installs the Digraph3 modules in the running virtual environment (recommended option) or the user's local *site-packages* directory. A system wide installation is possible with prefixing the *make installPip* commad with *sudo*. As of Python 3.11, it is necessary to previously install the *wheel* package ( ...$ python3.11 -m pip install wheel).
+
+For earlier Python3 version::
 
      ../Digraph3$ make installVenv
           
-installs the Digraph3 modules in an activated virtual Python environment (the Python recommended option), or in the user's local python3 *site-packages*. As of Python 3.11, it is necessary to previously install the *wheel* package ( ...$ python3.11 -m pip install wheel).
+installs the Digraph3 modules in an activated virtual Python environment (the Python recommended option), or in the user's local python3 *site-packages*. 
 
 Whereas::
 
      ../Digraph3$ make install
 
 installs (with *sudo ${PYTHON} setup.py*) the Digraph3 modules system wide in the current running python environment. Python 3.8 (or later) environment is recommended (see the makefile for adapting to your *PYTHON* make constant). 
-
-From Python3.10.4 on, the *distutils* package and the direct usage of *setup.py* are deprecated. The instead recommended installation via the *pip* module is provided with::
-
-     ../Digraph3$ make installPip
-
-This *make* command  launches in fact a *${PYTHON} -m pip -v install --upgrade --scr = .* command that installs the Digraph3 modules in the running virtual environment (recommended option) or the user's local *site-packages* directory. A system wide installation is possible with prefixing the *make installPip* commad with *sudo*.
 
 If the **cython** (https://cython.org/) C-compiled modules for Big Data applications are required, it is necessary to previously install the *cython* package and, if not yet installed, the *wheel*  package in the running Python environment::
 
@@ -98,19 +98,27 @@ It is recommended to run a test suite::
 
 Test results are stored in the <Digraph3/test/results> directory. Notice that the python3 *pytest* package is therefore required::
 
-      ...$ python3 -m pip install pytest
+      ...$ python3 -m pip install pytest pytest-xdist
 
 A verbose (with stdout not captured) pytest suite may be run as follows::
       
       .../Digraph3$ make verboseTests
 
-When the GNU `parallel <https://www.gnu.org/software/parallel/>`_ shell tool is installed and multiple processor cores are detected, the tests may be executed in multiprocessing mode::
-
-       ../Digraph3$ make pTests 
-
 Individual module *pytest* suites are also provided (see the makefile), like the one for the :py:mod:`outrankingDigraphs` module::
 
      ../Digraph3$ make outrankingDigraphsTests
+
+When the GNU `parallel <https://www.gnu.org/software/parallel/>`_ shell tool is installed and multiple processor cores are detected, the tests may be executed in multiprocessing mode::
+
+       ../Digraph3$ make pTests
+
+If the *pytest-xdist* package is installed (see above), it is also possible to set as follws a number of pytests to be run in parallel (see the *makefile*)::
+
+       ../Digraph3$ make tests JOBS="-n 8"
+
+The *pytest* module is by default ignoring Python run time warnings. It is possible to activate default warnings as follows (see the *makefile*)::
+
+       ../Digraph3$ make tests PYTHON="python3 -Wd"
 
 **Dependencies**
 

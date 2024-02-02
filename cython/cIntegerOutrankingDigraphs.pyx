@@ -377,7 +377,7 @@ Example Python session:
                  bint CopyPerfTab=True,\
                  bint BigData=False,\
                  bint Threading=False,\
-                 startMethod='spawn',\
+                 startMethod=None,\
                  tempDir=None,\
                  bint WithConcordanceRelation=False,\
                  bint WithVetoCounts=False,\
@@ -509,6 +509,7 @@ Example Python session:
         criteria = self.criteria
         evaluation = self.evaluation
         actionsKeys = list(dict.keys(actions))
+
         self.startMethod = startMethod
         if Comments:
             print('Computing the relation')
