@@ -4734,19 +4734,19 @@ This allows to print out the relation table with the considerable performance di
 
    >>> mpg.showRelationTable(hasLPDDenotation=True,toIndex=5)
    * ---- Relation Table -----
-    r/(lh)|  'a001'   'a002'   'a003'   'a004'   'a005'   
-   -------|------------------------------------------------------------
-   'a001' |  +13.00   -1.00    +1.00    +3.00    -1.00  
-          |  (+0,+0) (+0,+0)  (+0,+0)  (+0,+0)  (+0,+0) 
-   'a002' |   +3.00   +13.00   +2.00   +13.00    +4.00  
-          |  (+0,+0) (+0,+0)  (+0,+0)  (+1,+0)  (+0,+0) 
-   'a003' |   +1.00   +3.00   +13.00    -1.00    +4.00  
-          |  (+0,+0) (+0,+0)  (+0,+0)  (+0,+0)  (+0,+0) 
-   'a004' |   +2.00  -13.00    +4.00   +13.00    +0.00  
-          |  (+0,+0) (+0,-1)  (+0,+0)  (+0,+0)  (+0,-1) 
-   'a005' |   +4.00   +0.00    -3.00   +13.00   +13.00  
-          |  (+0,+0) (+0,+0)  (+0,+0)  (+1,+0)  (+0,+0) 
-    Valuation domain: [-13.000; 13.000]
+    r/(lpd)|  'a001'   'a002'   'a003'   'a004'   'a005'   
+   --------|---------------------------------------------
+    'a001' |  +13.00    -1.00    +1.00    +3.00    -1.00  
+           |  (+0,+0)  (+0,+0)  (+0,+0)  (+0,+0)  (+0,+0) 
+    'a002' |   +3.00   +13.00    +2.00   +13.00    +4.00  
+           |  (+0,+0)  (+0,+0)  (+0,+0)  (+1,+0)  (+0,+0) 
+    'a003' |   +1.00    +3.00   +13.00    -1.00    +4.00  
+           |  (+0,+0)  (+0,+0)  (+0,+0)  (+0,+0)  (+0,+0) 
+    'a004' |   +2.00   -13.00    +4.00   +13.00    +0.00  
+           |  (+0,+0)  (+0,-1)  (+0,+0)  (+0,+0)  (+0,-1) 
+    'a005' |   +4.00    +0.00    -3.00   +13.00   +13.00  
+           |  (+0,+0)  (+0,+0)  (+0,+0)  (+1,+0)  (+0,+0) 
+     Valuation domain: [-13.000; 13.000]
 
 In Lines 7-8 above, we may for instance notice a considerable positive performance difference when comparing alternatives 'a002' and 'a004' which results in a polarised for certain valid outranking situation: :math:`r(a_{002} \succsim a_{004}) = +13.00`. The converse situation is observed in Lines 11-12 where we may notice the corresponding considerable negative performance differnce leading this time polarise for certain invalid outranking situation: :math:`r(a_{004} \succsim a_{002}) = -13.00`.
 

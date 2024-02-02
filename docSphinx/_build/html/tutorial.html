@@ -1347,7 +1347,7 @@ the current working directory a ‘tutorialDigraph.dot’ file and a
 <figure class="align-center" id="id207">
 <a class="reference internal image-reference" href="_images/codualOdg.png"><img alt="_images/codualOdg.png" src="_images/codualOdg.png" style="width: 300px;" /></a>
 <figcaption>
-<p><span class="caption-number">Fig. 1.35 </span><span class="caption-text">Codual digraph</span><a class="headerlink" href="#id207" title="Link to this image"></a></p>
+<p><span class="caption-number">Fig. 1.10 </span><span class="caption-text">Codual digraph</span><a class="headerlink" href="#id207" title="Link to this image"></a></p>
 </figcaption>
 </figure>
 <p>It becomes readily clear now from the picture above that both alternatives <em>a1</em>  and <em>a7</em> are <em>not outranked</em> by any other alternatives. Hence, <em>a1</em>  and <em>a7</em> appear as <strong>weak Condorcet winner</strong> and may be recommended as potential <em>best decision actions</em> in this illustrative preference modelling exercise.</p>
@@ -1485,7 +1485,7 @@ which provides ranks (linearly ordered performances without ties) of a given num
 <figure class="align-center" id="id208">
 <a class="reference internal image-reference" href="_images/randomPerfTab1.png"><img alt="_images/randomPerfTab1.png" src="_images/randomPerfTab1.png" style="width: 500px;" /></a>
 <figcaption>
-<p><span class="caption-number">Fig. 1.46 </span><span class="caption-text">Browser view on random performance tableau instance</span><a class="headerlink" href="#id208" title="Link to this image"></a></p>
+<p><span class="caption-number">Fig. 1.11 </span><span class="caption-text">Browser view on random performance tableau instance</span><a class="headerlink" href="#id208" title="Link to this image"></a></p>
 </figcaption>
 </figure>
 <div class="admonition note">
@@ -1602,7 +1602,7 @@ which provides ranks (linearly ordered performances without ties) of a given num
 <figure class="align-center" id="id209">
 <a class="reference internal image-reference" href="_images/randomCBHeatmap.png"><img alt="_images/randomCBHeatmap.png" src="_images/randomCBHeatmap.png" style="width: 400px;" /></a>
 <figcaption>
-<p><span class="caption-number">Fig. 1.56 </span><span class="caption-text">Unranked heatmap of a random Cost-Benefit performance tableau</span><a class="headerlink" href="#id209" title="Link to this image"></a></p>
+<p><span class="caption-number">Fig. 1.12 </span><span class="caption-text">Unranked heatmap of a random Cost-Benefit performance tableau</span><a class="headerlink" href="#id209" title="Link to this image"></a></p>
 </figcaption>
 </figure>
 <p>Such a performance tableau may be stored and re-accessed as follows.</p>
@@ -1773,7 +1773,7 @@ three modes at 0.3 (-), 0.5 (~), respectively 0.7 (+) of the common scale span a
 <figure class="align-center" id="id210">
 <a class="reference internal image-reference" href="_images/sccFusionObjectives.png"><img alt="_images/sccFusionObjectives.png" src="_images/sccFusionObjectives.png" style="width: 300px;" /></a>
 <figcaption>
-<p><span class="caption-number">Fig. 1.57 </span><span class="caption-text">Strong components digraph</span><a class="headerlink" href="#id210" title="Link to this image"></a></p>
+<p><span class="caption-number">Fig. 1.13 </span><span class="caption-text">Strong components digraph</span><a class="headerlink" href="#id210" title="Link to this image"></a></p>
 </figcaption>
 </figure>
 <p>Public policy <em>p26</em> (Eco+ Soc+ Env-) appears dominating the other policies, whereas policy <em>p30</em> (Eco- Soc- Env-) appears to be dominated by all the others.</p>
@@ -4668,19 +4668,19 @@ pairwise perspective (see below), we notice that, with the given preference disc
 <p>This allows to print out the relation table with the considerable performance differences counts.</p>
 <div class="highlight-pycon notranslate"><div class="highlight"><pre><span></span><span class="linenos"> 1</span><span class="gp">&gt;&gt;&gt; </span><span class="n">mpg</span><span class="o">.</span><span class="n">showRelationTable</span><span class="p">(</span><span class="n">hasLPDDenotation</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span><span class="n">toIndex</span><span class="o">=</span><span class="mi">5</span><span class="p">)</span>
 <span class="linenos"> 2</span><span class="go">* ---- Relation Table -----</span>
-<span class="linenos"> 3</span><span class="go"> r/(lh)|  &#39;a001&#39;   &#39;a002&#39;   &#39;a003&#39;   &#39;a004&#39;   &#39;a005&#39;</span>
-<span class="linenos"> 4</span><span class="go">-------|------------------------------------------------------------</span>
-<span class="linenos"> 5</span><span class="go">&#39;a001&#39; |  +13.00   -1.00    +1.00    +3.00    -1.00</span>
-<span class="linenos"> 6</span><span class="go">       |  (+0,+0) (+0,+0)  (+0,+0)  (+0,+0)  (+0,+0)</span>
-<span class="hll"><span class="linenos"> 7</span><span class="go">&#39;a002&#39; |   +3.00   +13.00   +2.00   +13.00    +4.00</span>
-</span><span class="hll"><span class="linenos"> 8</span><span class="go">       |  (+0,+0) (+0,+0)  (+0,+0)  (+1,+0)  (+0,+0)</span>
-</span><span class="linenos"> 9</span><span class="go">&#39;a003&#39; |   +1.00   +3.00   +13.00    -1.00    +4.00</span>
-<span class="linenos">10</span><span class="go">       |  (+0,+0) (+0,+0)  (+0,+0)  (+0,+0)  (+0,+0)</span>
-<span class="hll"><span class="linenos">11</span><span class="go">&#39;a004&#39; |   +2.00  -13.00    +4.00   +13.00    +0.00</span>
-</span><span class="hll"><span class="linenos">12</span><span class="go">       |  (+0,+0) (+0,-1)  (+0,+0)  (+0,+0)  (+0,-1)</span>
-</span><span class="linenos">13</span><span class="go">&#39;a005&#39; |   +4.00   +0.00    -3.00   +13.00   +13.00</span>
-<span class="linenos">14</span><span class="go">       |  (+0,+0) (+0,+0)  (+0,+0)  (+1,+0)  (+0,+0)</span>
-<span class="linenos">15</span><span class="go"> Valuation domain: [-13.000; 13.000]</span>
+<span class="linenos"> 3</span><span class="go"> r/(lpd)|  &#39;a001&#39;   &#39;a002&#39;   &#39;a003&#39;   &#39;a004&#39;   &#39;a005&#39;</span>
+<span class="linenos"> 4</span><span class="go">--------|---------------------------------------------</span>
+<span class="linenos"> 5</span><span class="go"> &#39;a001&#39; |  +13.00    -1.00    +1.00    +3.00    -1.00</span>
+<span class="linenos"> 6</span><span class="go">        |  (+0,+0)  (+0,+0)  (+0,+0)  (+0,+0)  (+0,+0)</span>
+<span class="hll"><span class="linenos"> 7</span><span class="go"> &#39;a002&#39; |   +3.00   +13.00    +2.00   +13.00    +4.00</span>
+</span><span class="hll"><span class="linenos"> 8</span><span class="go">        |  (+0,+0)  (+0,+0)  (+0,+0)  (+1,+0)  (+0,+0)</span>
+</span><span class="linenos"> 9</span><span class="go"> &#39;a003&#39; |   +1.00    +3.00   +13.00    -1.00    +4.00</span>
+<span class="linenos">10</span><span class="go">        |  (+0,+0)  (+0,+0)  (+0,+0)  (+0,+0)  (+0,+0)</span>
+<span class="hll"><span class="linenos">11</span><span class="go"> &#39;a004&#39; |   +2.00   -13.00    +4.00   +13.00    +0.00</span>
+</span><span class="hll"><span class="linenos">12</span><span class="go">        |  (+0,+0)  (+0,-1)  (+0,+0)  (+0,+0)  (+0,-1)</span>
+</span><span class="linenos">13</span><span class="go"> &#39;a005&#39; |   +4.00    +0.00    -3.00   +13.00   +13.00</span>
+<span class="linenos">14</span><span class="go">        |  (+0,+0)  (+0,+0)  (+0,+0)  (+1,+0)  (+0,+0)</span>
+<span class="linenos">15</span><span class="go">  Valuation domain: [-13.000; 13.000]</span>
 </pre></div>
 </div>
 <p>In Lines 7-8 above, we may for instance notice a considerable positive performance difference when comparing alternatives ‘a002’ and ‘a004’ which results in a polarised for certain valid outranking situation: <img class="math" src="_images/math/a4a3e22647b37f88122f34450e585223989d23ed.png" alt="r(a_{002} \succsim a_{004}) = +13.00"/>. The converse situation is observed in Lines 11-12 where we may notice the corresponding considerable negative performance differnce leading this time polarise for certain invalid outranking situation: <img class="math" src="_images/math/786722952e014ff77e96a786a90fb4994257f2b9.png" alt="r(a_{004} \succsim a_{002}) = -13.00"/>.</p>
@@ -4933,7 +4933,7 @@ pairwise perspective (see below), we notice that, with the given preference disc
 <figure class="align-center" id="id211">
 <a class="reference internal image-reference" href="_images/sparseRelationMap.png"><img alt="_images/sparseRelationMap.png" src="_images/sparseRelationMap.png" style="width: 450px;" /></a>
 <figcaption>
-<p><span class="caption-number">Fig. 1.58 </span><span class="caption-text">Sparse quartiles-sorting decomposed outranking relation (extract). <strong>Legend</strong>: <em>outranking</em> for certain (<img class="math" src="_images/math/e6a8aa777bba61537a83df04f5fadf4cb2ada566.png" alt="\top"/>); <em>outranked</em> for certain (<img class="math" src="_images/math/5fae947ebaf7b6e50c19837002cf26089cf5d923.png" alt="\bot"/>); more or less <em>outranking</em> (<img class="math" src="_images/math/26d77804f7b0232a53e8432702479a275a171831.png" alt="+"/>); more or less <em>outranked</em> (<img class="math" src="_images/math/181cffb4dcf81e4177e5baaa0d4f02b126a745f0.png" alt="-"/>); <em>indeterminate</em> ( ).</span><a class="headerlink" href="#id211" title="Link to this image"></a></p>
+<p><span class="caption-number">Fig. 1.34 </span><span class="caption-text">Sparse quartiles-sorting decomposed outranking relation (extract). <strong>Legend</strong>: <em>outranking</em> for certain (<img class="math" src="_images/math/e6a8aa777bba61537a83df04f5fadf4cb2ada566.png" alt="\top"/>); <em>outranked</em> for certain (<img class="math" src="_images/math/5fae947ebaf7b6e50c19837002cf26089cf5d923.png" alt="\bot"/>); more or less <em>outranking</em> (<img class="math" src="_images/math/26d77804f7b0232a53e8432702479a275a171831.png" alt="+"/>); more or less <em>outranked</em> (<img class="math" src="_images/math/181cffb4dcf81e4177e5baaa0d4f02b126a745f0.png" alt="-"/>); <em>indeterminate</em> ( ).</span><a class="headerlink" href="#id211" title="Link to this image"></a></p>
 </figcaption>
 </figure>
 <p>With a fill rate of 25%, the memory occupation of this sparse outranking digraph <em>sg</em> instance takes now only 769kB, compared to the 1.7MB required by a corresponding standard IntegerBipolarOutrankingDigraph instance.</p>
@@ -5100,7 +5100,7 @@ pairwise perspective (see below), we notice that, with the given preference disc
 <figure class="align-center" id="id212">
 <a class="reference internal image-reference" href="_images/rankingRecords.png"><img alt="_images/rankingRecords.png" src="_images/rankingRecords.png" style="width: 350px;" /></a>
 <figcaption>
-<p><span class="caption-number">Fig. 1.59 </span><span class="caption-text">HPC-UL Ranking Performance Records (Spring 2018)</span><a class="headerlink" href="#id212" title="Link to this image"></a></p>
+<p><span class="caption-number">Fig. 1.35 </span><span class="caption-text">HPC-UL Ranking Performance Records (Spring 2018)</span><a class="headerlink" href="#id212" title="Link to this image"></a></p>
 </figcaption>
 </figure>
 <p>Example python session on the HPC-UL Iris-126 -skylake node <a class="footnote-reference brackets" href="#id165" id="id69" role="doc-noteref"><span class="fn-bracket">[</span>7<span class="fn-bracket">]</span></a></p>
@@ -6452,7 +6452,7 @@ pairwise perspective (see below), we notice that, with the given preference disc
 <figure class="align-center" id="id213">
 <a class="reference internal image-reference" href="_images/theHeatmap.png"><img alt="_images/theHeatmap.png" src="_images/theHeatmap.png" style="width: 600pt;" /></a>
 <figcaption>
-<p><span class="caption-number">Fig. 1.60 </span><span class="caption-text">Extract of a heatmap browser view on the <em>NetFlows</em> ranking result</span><a class="headerlink" href="#id213" title="Link to this image"></a></p>
+<p><span class="caption-number">Fig. 1.46 </span><span class="caption-text">Extract of a heatmap browser view on the <em>NetFlows</em> ranking result</span><a class="headerlink" href="#id213" title="Link to this image"></a></p>
 </figcaption>
 </figure>
 <p>As an exercise, the reader is invited to try out other robust outranking based ranking heuristics. Notice also that we have not challenged in this tutorial the THE provided criteria significance preorder. It would be very interesting to consider the five ranking objectives as equally important and, consequently, consider the ranking criteria to be equisignificant. Curious to see the ranking results under such settings.</p>
@@ -7084,7 +7084,7 @@ pairwise perspective (see below), we notice that, with the given preference disc
 <figure class="align-center" id="id214">
 <a class="reference internal image-reference" href="_images/tutorialGraph.png"><img alt="_images/tutorialGraph.png" src="_images/tutorialGraph.png" style="width: 400px;" /></a>
 <figcaption>
-<p><span class="caption-number">Fig. 1.61 </span><span class="caption-text">Tutorial graph instance</span><a class="headerlink" href="#id214" title="Link to this image"></a></p>
+<p><span class="caption-number">Fig. 1.56 </span><span class="caption-text">Tutorial graph instance</span><a class="headerlink" href="#id214" title="Link to this image"></a></p>
 </figcaption>
 </figure>
 <p>Properties, like the gamma function and vertex degrees and neighbourhood depths may be shown with a <cite>graphs.Graph.showShort()</cite> method.</p>
@@ -7165,7 +7165,7 @@ pairwise perspective (see below), we notice that, with the given preference disc
 <figure class="align-center" id="id215">
 <a class="reference internal image-reference" href="_images/tutorial-3-coloring.png"><img alt="_images/tutorial-3-coloring.png" src="_images/tutorial-3-coloring.png" style="width: 400px;" /></a>
 <figcaption>
-<p><span class="caption-number">Fig. 1.64 </span><span class="caption-text">3-Coloring of the tutorial graph</span><a class="headerlink" href="#id215" title="Link to this image"></a></p>
+<p><span class="caption-number">Fig. 1.57 </span><span class="caption-text">3-Coloring of the tutorial graph</span><a class="headerlink" href="#id215" title="Link to this image"></a></p>
 </figcaption>
 </figure>
 <p>Actually, with the given tutorial graph instance, a 2-coloring is already feasible.</p>
@@ -7188,7 +7188,7 @@ pairwise perspective (see below), we notice that, with the given preference disc
 <figure class="align-center" id="id216">
 <a class="reference internal image-reference" href="_images/tutorial-2-coloring.png"><img alt="_images/tutorial-2-coloring.png" src="_images/tutorial-2-coloring.png" style="width: 400px;" /></a>
 <figcaption>
-<p><span class="caption-number">Fig. 1.65 </span><span class="caption-text">2-coloring of the tutorial graph</span><a class="headerlink" href="#id216" title="Link to this image"></a></p>
+<p><span class="caption-number">Fig. 1.58 </span><span class="caption-text">2-coloring of the tutorial graph</span><a class="headerlink" href="#id216" title="Link to this image"></a></p>
 </figcaption>
 </figure>
 </section>
@@ -7322,7 +7322,7 @@ pairwise perspective (see below), we notice that, with the given preference disc
 <figure class="align-center" id="id217">
 <a class="reference internal image-reference" href="_images/maxMatchingcycleGraph.png"><img alt="maximum matching colored c8" src="_images/maxMatchingcycleGraph.png" style="width: 300px;" /></a>
 <figcaption>
-<p><span class="caption-number">Fig. 1.66 </span><span class="caption-text">A perfect maximum matching of the 8-cycle graph</span><a class="headerlink" href="#id217" title="Link to this image"></a></p>
+<p><span class="caption-number">Fig. 1.59 </span><span class="caption-text">A perfect maximum matching of the 8-cycle graph</span><a class="headerlink" href="#id217" title="Link to this image"></a></p>
 </figcaption>
 </figure>
 </section>
@@ -7348,7 +7348,7 @@ pairwise perspective (see below), we notice that, with the given preference disc
 <figure class="align-center" id="id218">
 <a class="reference internal image-reference" href="_images/grid-15-15-ising.png"><img alt="_images/grid-15-15-ising.png" src="_images/grid-15-15-ising.png" style="width: 600px;" /></a>
 <figcaption>
-<p><span class="caption-number">Fig. 1.67 </span><span class="caption-text">Ising model of the 15x15 grid graph</span><a class="headerlink" href="#id218" title="Link to this image"></a></p>
+<p><span class="caption-number">Fig. 1.60 </span><span class="caption-text">Ising model of the 15x15 grid graph</span><a class="headerlink" href="#id218" title="Link to this image"></a></p>
 </figcaption>
 </figure>
 </section>
@@ -7456,7 +7456,7 @@ pairwise perspective (see below), we notice that, with the given preference disc
 <figure class="align-center" id="id219">
 <a class="reference internal image-reference" href="_images/cg12.png"><img alt="The 12-cycle graph" src="_images/cg12.png" style="width: 400px;" /></a>
 <figcaption>
-<p><span class="caption-number">Fig. 1.69 </span><span class="caption-text">The 12-cycle graph</span><a class="headerlink" href="#id219" title="Link to this image"></a></p>
+<p><span class="caption-number">Fig. 1.61 </span><span class="caption-text">The 12-cycle graph</span><a class="headerlink" href="#id219" title="Link to this image"></a></p>
 </figcaption>
 </figure>
 </section>
@@ -7727,7 +7727,7 @@ pairwise perspective (see below), we notice that, with the given preference disc
 <figure class="align-center" id="id220">
 <a class="reference internal image-reference" href="_images/berge1.png"><img alt="_images/berge1.png" src="_images/berge1.png" style="width: 400px;" /></a>
 <figcaption>
-<p><span class="caption-number">Fig. 1.87 </span><span class="caption-text">Graph representation of the testimonies of the professors</span><a class="headerlink" href="#id220" title="Link to this image"></a></p>
+<p><span class="caption-number">Fig. 1.64 </span><span class="caption-text">Graph representation of the testimonies of the professors</span><a class="headerlink" href="#id220" title="Link to this image"></a></p>
 </figcaption>
 </figure>
 <p>From graph theory we know that time interval intersections graphs must in fact be interval graphs, i.e. <em>triangulated</em> and <em>co-comparative</em> graphs. The testimonies graph should therefore not contain any chordless cycle of four and more vertices. Now, the presence or not of such chordless cycles in the testimonies graph may be checked as follows.</p>
@@ -7768,7 +7768,7 @@ pairwise perspective (see below), we notice that, with the given preference disc
 <figure class="align-center" id="id221">
 <a class="reference internal image-reference" href="_images/berge2.png"><img alt="_images/berge2.png" src="_images/berge2.png" style="width: 400px;" /></a>
 <figcaption>
-<p><span class="caption-number">Fig. 1.88 </span><span class="caption-text">The triangulated testimonies graph</span><a class="headerlink" href="#id221" title="Link to this image"></a></p>
+<p><span class="caption-number">Fig. 1.65 </span><span class="caption-text">The triangulated testimonies graph</span><a class="headerlink" href="#id221" title="Link to this image"></a></p>
 </figcaption>
 </figure>
 </section>
@@ -7798,7 +7798,7 @@ pairwise perspective (see below), we notice that, with the given preference disc
 <figure class="align-center" id="id222">
 <a class="reference internal image-reference" href="_images/permutationGraph.png"><img alt="Default permutation graph" src="_images/permutationGraph.png" style="width: 300px;" /></a>
 <figcaption>
-<p><span class="caption-number">Fig. 1.91 </span><span class="caption-text">The default permutation graph</span><a class="headerlink" href="#id222" title="Link to this image"></a></p>
+<p><span class="caption-number">Fig. 1.66 </span><span class="caption-text">The default permutation graph</span><a class="headerlink" href="#id222" title="Link to this image"></a></p>
 </figcaption>
 </figure>
 <p>By using color sorting queues, the minimal vertex coloring for a permutation graph is computable in <img class="math" src="_images/math/4fff9b56a05b785ef4d6854f7d17373a192b2c11.png" alt="O\big(n log(n)\big)"/> (see <a class="reference internal" href="#gol-2004" id="id130"><span>[GOL-2004]</span></a>).</p>
@@ -7819,7 +7819,7 @@ pairwise perspective (see below), we notice that, with the given preference disc
 <figure class="align-center" id="id223">
 <a class="reference internal image-reference" href="_images/coloredPermutationGraph.png"><img alt="minimal vertex coloring" src="_images/coloredPermutationGraph.png" style="width: 300px;" /></a>
 <figcaption>
-<p><span class="caption-number">Fig. 1.92 </span><span class="caption-text">Minimal vertex coloring of the permutation graph</span><a class="headerlink" href="#id223" title="Link to this image"></a></p>
+<p><span class="caption-number">Fig. 1.67 </span><span class="caption-text">Minimal vertex coloring of the permutation graph</span><a class="headerlink" href="#id223" title="Link to this image"></a></p>
 </figcaption>
 </figure>
 <p>The correspondingly colored <strong>matching diagram</strong> of the nine <strong>inversions</strong> -the actual <em>edges</em> of the permutation graph-, which are induced by the given permutation [4, 3, 6, 1, 5, 2], may as well be drawn with the graphviz <em>neato</em> layout and explicitly positioned horizontal lists of vertices (see <a class="hxr-hoverxref hxr-tooltip reference internal" href="#perm-permutationgraph"><span class="std std-numref">Fig. 1.68</span></a>).</p>
@@ -7861,7 +7861,7 @@ pairwise perspective (see below), we notice that, with the given preference disc
 <figure class="align-center" id="id224">
 <a class="reference internal image-reference" href="_images/oriented_permutationGraph.png"><img alt="Hasse diagram of the orientationofof a permutation graph" src="_images/oriented_permutationGraph.png" style="width: 200px;" /></a>
 <figcaption>
-<p><span class="caption-text">Hasse diagram of the transitive orientation of the permutation graph</span><a class="headerlink" href="#id224" title="Link to this image"></a></p>
+<p><span class="caption-number">Fig. 1.69 </span><span class="caption-text">Hasse diagram of the transitive orientation of the permutation graph</span><a class="headerlink" href="#id224" title="Link to this image"></a></p>
 </figcaption>
 </figure>
 <p>The dual of a permutation graph is <em>again</em> a permutation graph and as such also transitively orientable.</p>
@@ -9363,7 +9363,7 @@ fecop 75.78% success rate</p>
 <figure class="align-center" id="id225">
 <a class="reference internal image-reference" href="_images/tutRandomTree.png"><img alt="Random tree instance" src="_images/tutRandomTree.png" style="width: 300px;" /></a>
 <figcaption>
-<p><span class="caption-text">Random Tree instance of order 9</span><a class="headerlink" href="#id225" title="Link to this image"></a></p>
+<p><span class="caption-number">Fig. 1.87 </span><span class="caption-text">Random Tree instance of order 9</span><a class="headerlink" href="#id225" title="Link to this image"></a></p>
 </figcaption>
 </figure>
 <p>A tree graph of order <em>n</em> contains <em>n-1</em> edges (see Line 8 and 9) and we may distinguish vertices like <em>v1</em>, <em>v2</em>, <em>v4</em>, <em>v5</em> or <em>v9</em>  of degree 1, called the <strong>leaves</strong> of the tree, and vertices like <em>v3</em>, <em>v6</em>, <em>v7</em> or <em>v8</em> of degree 2 or more, called the <strong>nodes</strong> of the tree.</p>
@@ -9401,7 +9401,7 @@ fecop 75.78% success rate</p>
 <figure class="align-center" id="id226">
 <a class="reference internal image-reference" href="_images/tutPruefTree.png"><img alt="Tree instance from a random Prüfer code" src="_images/tutPruefTree.png" style="width: 350px;" /></a>
 <figcaption>
-<p><span class="caption-text">Tree instance from a random Prüfer code</span><a class="headerlink" href="#id226" title="Link to this image"></a></p>
+<p><span class="caption-number">Fig. 1.88 </span><span class="caption-text">Tree instance from a random Prüfer code</span><a class="headerlink" href="#id226" title="Link to this image"></a></p>
 </figcaption>
 </figure>
 <p>Following from the bijection between a labelled tree and its <em>Prüfer</em> code, we actually know that there exist <img class="math" src="_images/math/1ccae85f2d0e38d86c3612a23dfd01935cd97970.png" alt="n^{n-2}"/> different tree graphs with the same <em>n</em> vertices.</p>
@@ -9506,7 +9506,7 @@ dot -Grankdir=TB -Tpng rootedTree.dot -o rootedTree.png</p>
 <figure class="align-center" id="id227">
 <a class="reference internal image-reference" href="_images/randomSpanningTree.png"><img alt="randomSpanningTree instance" src="_images/randomSpanningTree.png" style="width: 300px;" /></a>
 <figcaption>
-<p><span class="caption-text">Random spanning tree</span><a class="headerlink" href="#id227" title="Link to this image"></a></p>
+<p><span class="caption-number">Fig. 1.91 </span><span class="caption-text">Random spanning tree</span><a class="headerlink" href="#id227" title="Link to this image"></a></p>
 </figcaption>
 </figure>
 <p>More general, and in case of a not connected graph, we may generate with the <a class="reference internal" href="techDoc.html#graphs.RandomSpanningForest" title="graphs.RandomSpanningForest"><code class="xref py py-class docutils literal notranslate"><span class="pre">RandomSpanningForest</span></code></a> class a <em>not necessarily uniform</em> random instance of a <strong>spanning forest</strong> -one or more random tree graphs- generated from a <strong>random depth first search</strong> of the graph components’ traversals.</p>
@@ -9530,7 +9530,7 @@ dot -Grankdir=TB -Tpng rootedTree.dot -o rootedTree.png</p>
 <figure class="align-center" id="id228">
 <a class="reference internal image-reference" href="_images/spanningForest.png"><img alt="Random spanning forest instance" src="_images/spanningForest.png" style="width: 350px;" /></a>
 <figcaption>
-<p><span class="caption-text">Random spanning forest instance</span><a class="headerlink" href="#id228" title="Link to this image"></a></p>
+<p><span class="caption-number">Fig. 1.92 </span><span class="caption-text">Random spanning forest instance</span><a class="headerlink" href="#id228" title="Link to this image"></a></p>
 </figcaption>
 </figure>
 </section>

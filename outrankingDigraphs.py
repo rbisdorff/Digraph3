@@ -2334,7 +2334,7 @@ class OutrankingDigraph(Digraph,PerformanceTableau):
         elif StabilityDenotation:
             print('r/(stab)| ', end=' ')
         elif hasLPDDenotation:
-            print('r/(lh)| ', end=' ')
+            print('r/(lpd)| ', end=' ')
         else:
             print('  r   | ', end=' ')
         actions = [x for x in actions]
