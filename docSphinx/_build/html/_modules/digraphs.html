@@ -781,7 +781,7 @@
 
 <div class="viewcode-block" id="Digraph.computeRankingByLastChoosing">
 <a class="viewcode-back" href="../techDoc.html#digraphs.Digraph.computeRankingByLastChoosing">[docs]</a>
-    <span class="k">def</span> <span class="nf">computeRankingByLastChoosing</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">CoDual</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span><span class="n">CppAgrum</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span><span class="n">Debug</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">computeRankingByLastChoosing</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">CoDual</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span><span class="n">Debug</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Computes a weak preordring of the self.actions by iterating</span>
 <span class="sd">        worst choice elagations.</span>
@@ -861,7 +861,7 @@
         <span class="k">return</span> <span class="p">{</span><span class="s1">&#39;CoDual&#39;</span><span class="p">:</span> <span class="n">CoDual</span><span class="p">,</span> <span class="s1">&#39;result&#39;</span><span class="p">:</span> <span class="n">rankingByLastChoosing</span><span class="p">}</span></div>
 
 
-    <span class="k">def</span> <span class="nf">_computeRankingByLastChoosing</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">CoDual</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span><span class="n">CppAgrum</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span><span class="n">Debug</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">_computeRankingByLastChoosing</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">CoDual</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span><span class="n">Debug</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Computes a weak preordring of the self.actions by iterating</span>
 <span class="sd">        worst choice elagations.</span>
@@ -888,7 +888,7 @@
                 <span class="n">currGcd</span> <span class="o">=</span> <span class="n">CoDualDigraph</span><span class="p">(</span><span class="n">currG</span><span class="p">)</span>
             <span class="k">else</span><span class="p">:</span>
                 <span class="n">currGcd</span> <span class="o">=</span> <span class="n">deepcopy</span><span class="p">(</span><span class="n">currG</span><span class="p">)</span>
-            <span class="n">currGcd</span><span class="o">.</span><span class="n">computeRubisChoice</span><span class="p">(</span><span class="n">CppAgrum</span><span class="o">=</span><span class="n">CppAgrum</span><span class="p">,</span><span class="n">Comments</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+            <span class="n">currGcd</span><span class="o">.</span><span class="n">computeRubisChoice</span><span class="p">(</span><span class="n">Comments</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
             <span class="c1">#currGcd.computeGoodChoices(Comments=Debug)</span>
 
             <span class="c1">#currGcd.computeBadChoices(Comments=Debug)</span>
@@ -951,7 +951,7 @@
 
 <div class="viewcode-block" id="Digraph.computeRankingByChoosing">
 <a class="viewcode-back" href="../techDoc.html#digraphs.Digraph.computeRankingByChoosing">[docs]</a>
-    <span class="k">def</span> <span class="nf">computeRankingByChoosing</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">actionsSubset</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span><span class="n">CppAgrum</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span><span class="n">Debug</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span><span class="n">CoDual</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">computeRankingByChoosing</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">actionsSubset</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span><span class="n">Debug</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span><span class="n">CoDual</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Computes a weak preordring of the self.actions by iterating</span>
 <span class="sd">        jointly first and last choice elagations.</span>
@@ -981,7 +981,7 @@
             <span class="n">i</span> <span class="o">+=</span> <span class="mi">1</span>
             <span class="n">currG</span><span class="o">.</span><span class="n">actions</span> <span class="o">=</span> <span class="n">remainingActions</span>
             <span class="n">currGcd</span> <span class="o">=</span> <span class="n">deepcopy</span><span class="p">(</span><span class="n">currG</span><span class="p">)</span>
-            <span class="n">currGcd</span><span class="o">.</span><span class="n">computeRubisChoice</span><span class="p">(</span><span class="n">CppAgrum</span><span class="o">=</span><span class="n">CppAgrum</span><span class="p">,</span><span class="n">Comments</span><span class="o">=</span><span class="n">Debug</span><span class="p">)</span>
+            <span class="n">currGcd</span><span class="o">.</span><span class="n">computeRubisChoice</span><span class="p">(</span><span class="n">Comments</span><span class="o">=</span><span class="n">Debug</span><span class="p">)</span>
             <span class="c1">#currGcd.computeGoodChoices(Comments=Debug)</span>
             <span class="n">bestChoiceCandidates</span> <span class="o">=</span> <span class="p">[]</span>
             <span class="n">j</span> <span class="o">=</span> <span class="mi">0</span>
@@ -1123,7 +1123,7 @@
 
 <div class="viewcode-block" id="Digraph.computeRankingByBestChoosing">
 <a class="viewcode-back" href="../techDoc.html#digraphs.Digraph.computeRankingByBestChoosing">[docs]</a>
-    <span class="k">def</span> <span class="nf">computeRankingByBestChoosing</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">CoDual</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span><span class="n">CppAgrum</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span><span class="n">Debug</span><span class="o">=</span><span class="kc">False</span><span class="p">,):</span>
+    <span class="k">def</span> <span class="nf">computeRankingByBestChoosing</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">CoDual</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span><span class="n">Debug</span><span class="o">=</span><span class="kc">False</span><span class="p">,):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Computes a weak preordering of the self.actions by recursive</span>
 <span class="sd">        best choice elagations.</span>
@@ -1154,7 +1154,7 @@
 <span class="c1">##                currGcd = CoDualDigraph(currG)</span>
 <span class="c1">##            else:</span>
             <span class="n">currGcd</span> <span class="o">=</span> <span class="n">deepcopy</span><span class="p">(</span><span class="n">currG</span><span class="p">)</span>
-            <span class="n">currGcd</span><span class="o">.</span><span class="n">computeBestChoiceRecommendation</span><span class="p">(</span><span class="n">CoDual</span><span class="o">=</span><span class="n">CoDual</span><span class="p">,</span><span class="n">Cpp</span><span class="o">=</span><span class="n">CppAgrum</span><span class="p">,</span><span class="n">Comments</span><span class="o">=</span><span class="n">Debug</span><span class="p">)</span>
+            <span class="n">currGcd</span><span class="o">.</span><span class="n">computeBestChoiceRecommendation</span><span class="p">(</span><span class="n">CoDual</span><span class="o">=</span><span class="n">CoDual</span><span class="p">,</span><span class="n">Comments</span><span class="o">=</span><span class="n">Debug</span><span class="p">)</span>
             <span class="n">k1</span> <span class="o">=</span> <span class="n">currGcd</span><span class="o">.</span><span class="n">flatChoice</span><span class="p">(</span><span class="n">currGcd</span><span class="o">.</span><span class="n">bestChoice</span><span class="p">)</span>
             <span class="k">if</span> <span class="n">Debug</span><span class="p">:</span>
                 <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;flatening the choice:&#39;</span><span class="p">,</span><span class="n">currGcd</span><span class="o">.</span><span class="n">bestChoice</span><span class="p">,</span><span class="n">k1</span><span class="p">)</span>
@@ -1207,7 +1207,7 @@
 
 
 
-    <span class="k">def</span> <span class="nf">_computeRankingByBestChoosing</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">CoDual</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span><span class="n">CppAgrum</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span><span class="n">Debug</span><span class="o">=</span><span class="kc">False</span><span class="p">,):</span>
+    <span class="k">def</span> <span class="nf">_computeRankingByBestChoosing</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">CoDual</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span><span class="n">Debug</span><span class="o">=</span><span class="kc">False</span><span class="p">,):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Computes a weak preordering of the self.actions by recursive</span>
 <span class="sd">        best choice elagations.</span>
@@ -1236,7 +1236,7 @@
                 <span class="n">currGcd</span> <span class="o">=</span> <span class="n">CoDualDigraph</span><span class="p">(</span><span class="n">currG</span><span class="p">)</span>
             <span class="k">else</span><span class="p">:</span>
                 <span class="n">currGcd</span> <span class="o">=</span> <span class="n">copy</span><span class="p">(</span><span class="n">currG</span><span class="p">)</span>
-            <span class="n">currGcd</span><span class="o">.</span><span class="n">computeRubisChoice</span><span class="p">(</span><span class="n">CppAgrum</span><span class="o">=</span><span class="n">CppAgrum</span><span class="p">,</span><span class="n">Comments</span><span class="o">=</span><span class="n">Debug</span><span class="p">)</span>
+            <span class="n">currGcd</span><span class="o">.</span><span class="n">computeRubisChoice</span><span class="p">(</span><span class="n">Comments</span><span class="o">=</span><span class="n">Debug</span><span class="p">)</span>
             <span class="c1">#currGcd.computeGoodChoices(Comments=Debug)</span>
             <span class="n">bestChoiceCandidates</span> <span class="o">=</span> <span class="p">[]</span>
             <span class="n">j</span> <span class="o">=</span> <span class="mi">0</span>
@@ -8177,211 +8177,202 @@
         <span class="k">return</span> <span class="n">Detected</span></div>
 
 
-<div class="viewcode-block" id="Digraph.detectCppChordlessCircuits">
-<a class="viewcode-back" href="../techDoc.html#digraphs.Digraph.detectCppChordlessCircuits">[docs]</a>
-    <span class="k">def</span> <span class="nf">detectCppChordlessCircuits</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">Debug</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        python wrapper for the C++/Agrum based chordless circuits detection</span>
-<span class="sd">        exchange arguments with external temporary files.</span>
-<span class="sd">        </span>
-<span class="sd">        Returns a boolean value</span>
-<span class="sd">        </span>
-<span class="sd">        .. warning:: Deprecated !!! The pure python version is more efficient</span>
-<span class="sd">        &quot;&quot;&quot;</span>
-        <span class="kn">import</span> <span class="nn">os</span>
-        <span class="kn">from</span> <span class="nn">tempfile</span> <span class="kn">import</span> <span class="n">mkstemp</span>
-        <span class="n">fd</span><span class="p">,</span> <span class="n">tempFileName</span> <span class="o">=</span> <span class="n">mkstemp</span><span class="p">()</span>
-        <span class="n">fo</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">fdopen</span><span class="p">(</span><span class="n">fd</span><span class="p">,</span><span class="s1">&#39;w&#39;</span><span class="p">)</span>
-        <span class="n">Med</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">valuationdomain</span><span class="p">[</span><span class="s1">&#39;med&#39;</span><span class="p">]</span>
-        <span class="n">actions</span> <span class="o">=</span> <span class="p">[</span><span class="n">x</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">actions</span><span class="p">]</span>
-        <span class="n">relation</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">relation</span>
-        <span class="k">for</span> <span class="n">i</span><span class="p">,</span><span class="n">x</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">actions</span><span class="p">):</span>
-            <span class="k">for</span> <span class="n">j</span><span class="p">,</span><span class="n">y</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">actions</span><span class="p">):</span>
-                <span class="k">if</span> <span class="n">i</span> <span class="o">!=</span> <span class="n">j</span><span class="p">:</span>
-                    <span class="k">if</span> <span class="n">relation</span><span class="p">[</span><span class="n">x</span><span class="p">][</span><span class="n">y</span><span class="p">]</span> <span class="o">&gt;</span> <span class="n">Med</span><span class="p">:</span>
-                        <span class="n">fo</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s1">&#39;</span><span class="si">%d</span><span class="s1"> </span><span class="si">%d</span><span class="se">\n</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">,</span><span class="n">j</span><span class="o">+</span><span class="mi">1</span><span class="p">))</span>
-        <span class="n">fo</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
-
-        <span class="n">resultFile</span> <span class="o">=</span> <span class="n">tempFileName</span><span class="o">+</span><span class="s1">&#39;.py&#39;</span>
-        <span class="k">if</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="s1">&#39;/usr/bin/detectChordlessCircuits&#39;</span><span class="p">):</span>
-            <span class="n">os</span><span class="o">.</span><span class="n">system</span><span class="p">(</span><span class="s1">&#39;/usr/bin/detectChordlessCircuits &#39;</span> <span class="o">+</span> <span class="n">tempFileName</span> <span class="o">+</span> <span class="s1">&#39; &#39;</span> <span class="o">+</span> <span class="n">resultFile</span><span class="p">)</span>
-        <span class="k">elif</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="s1">&#39;/usr/local/bin/detectChordlessCircuits&#39;</span><span class="p">):</span>
-            <span class="n">os</span><span class="o">.</span><span class="n">system</span><span class="p">(</span><span class="s1">&#39;/usr/local/bin/detectChordlessCircuits &#39;</span> <span class="o">+</span> <span class="n">tempFileName</span> <span class="o">+</span> <span class="s1">&#39; &#39;</span> <span class="o">+</span> <span class="n">resultFile</span><span class="p">)</span>
-        <span class="k">elif</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="s1">&#39;/opt/local/bin/detectChordlessCircuits&#39;</span><span class="p">):</span>
-            <span class="n">os</span><span class="o">.</span><span class="n">system</span><span class="p">(</span><span class="s1">&#39;/opt/local/bin/detectChordlessCircuits &#39;</span> <span class="o">+</span> <span class="n">tempFileName</span> <span class="o">+</span> <span class="s1">&#39; &#39;</span> <span class="o">+</span> <span class="n">resultFile</span><span class="p">)</span>
-        <span class="k">elif</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="s1">&#39;/home/users/rbisdorff/bin/detectChordlessCircuits&#39;</span><span class="p">):</span>
-            <span class="n">os</span><span class="o">.</span><span class="n">system</span><span class="p">(</span><span class="s1">&#39;/home/users/rbisdorff/bin/detectChordlessCircuits &#39;</span> <span class="o">+</span> <span class="n">tempFileName</span> <span class="o">+</span> <span class="s1">&#39; &#39;</span> <span class="o">+</span> <span class="n">resultFile</span><span class="p">)</span>
-        <span class="k">else</span><span class="p">:</span>
-            <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Error: detectChordlessCircuits binary could not be found !!!&#39;</span><span class="p">)</span>
-        <span class="n">argDict</span> <span class="o">=</span> <span class="p">{}</span>
-        <span class="n">fi</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="n">resultFile</span><span class="p">,</span><span class="s1">&#39;r&#39;</span><span class="p">)</span>
-        <span class="n">fileText</span> <span class="o">=</span> <span class="n">fi</span><span class="o">.</span><span class="n">read</span><span class="p">()</span>
-        <span class="n">fi</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
-        <span class="n">exec</span><span class="p">(</span><span class="nb">compile</span><span class="p">(</span><span class="n">fileText</span><span class="p">,</span> <span class="nb">str</span><span class="p">(</span><span class="n">resultFile</span><span class="p">),</span> <span class="s1">&#39;exec&#39;</span><span class="p">),</span><span class="n">argDict</span><span class="p">)</span>
-        <span class="n">circuits</span> <span class="o">=</span> <span class="n">argDict</span><span class="p">[</span><span class="s1">&#39;circuitsList&#39;</span><span class="p">]</span>
-        <span class="k">if</span> <span class="n">circuits</span> <span class="o">==</span> <span class="p">[]:</span>
-            <span class="n">Detected</span> <span class="o">=</span> <span class="kc">False</span>
-        <span class="k">else</span><span class="p">:</span>
-            <span class="n">Detected</span> <span class="o">=</span> <span class="kc">True</span>
-        <span class="k">if</span> <span class="n">Debug</span><span class="p">:</span>
-            <span class="nb">print</span><span class="p">(</span><span class="n">resultFile</span><span class="p">)</span>
-            <span class="nb">print</span><span class="p">(</span><span class="n">argDict</span><span class="p">[</span><span class="s1">&#39;circuitsList&#39;</span><span class="p">])</span>
-            <span class="k">if</span> <span class="n">Detected</span><span class="p">:</span>
-                <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;A chordless circuit has been detected !&#39;</span><span class="p">)</span>
-            <span class="k">else</span><span class="p">:</span>
-                <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;No chordless circuit has been detected !&#39;</span><span class="p">)</span>
-            <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;certificate: &#39;</span><span class="p">,</span> <span class="n">circuits</span><span class="p">)</span>
-
-        <span class="k">return</span> <span class="n">Detected</span></div>
-
-
-<div class="viewcode-block" id="Digraph.computeCppInOutPipingChordlessCircuits">
-<a class="viewcode-back" href="../techDoc.html#digraphs.Digraph.computeCppInOutPipingChordlessCircuits">[docs]</a>
-    <span class="k">def</span> <span class="nf">computeCppInOutPipingChordlessCircuits</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">Odd</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span><span class="n">Debug</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        python wrapper for the C++/Agrum based chordless circuits enumeration</span>
-<span class="sd">        exchange arguments with external temporary files</span>
-
-<span class="sd">        Result in *self.circuitsList*.</span>
-
-<span class="sd">        .. warning:: Deprecated !!! The pure python version is more efficient</span>
-<span class="sd">        &quot;&quot;&quot;</span>
-        <span class="kn">import</span> <span class="nn">os</span>
-        <span class="kn">from</span> <span class="nn">subprocess</span> <span class="kn">import</span> <span class="n">Popen</span><span class="p">,</span><span class="n">PIPE</span>
-
-        <span class="k">if</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="s1">&#39;/usr/bin/enumChordlessCircuitsInOutPiping&#39;</span><span class="p">):</span>
-            <span class="n">p</span> <span class="o">=</span> <span class="n">Popen</span><span class="p">(</span><span class="n">args</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;/usr/bin/enumChordlessCircuitsInOutPiping&#39;</span><span class="p">],</span><span class="n">stdin</span><span class="o">=</span><span class="n">PIPE</span><span class="p">,</span><span class="n">stdout</span><span class="o">=</span><span class="n">PIPE</span><span class="p">)</span>
-        <span class="k">elif</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="s1">&#39;/usr/local/bin/enumChordlessCircuitsInOutPiping&#39;</span><span class="p">):</span>
-            <span class="n">p</span> <span class="o">=</span> <span class="n">Popen</span><span class="p">(</span><span class="n">args</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;/usr/local/bin/enumChordlessCircuitsInOutPiping&#39;</span><span class="p">],</span><span class="n">stdin</span><span class="o">=</span><span class="n">PIPE</span><span class="p">,</span><span class="n">stdout</span><span class="o">=</span><span class="n">PIPE</span><span class="p">)</span>
-        <span class="k">elif</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="s1">&#39;/opt/local/bin/enumChordlessCircuitsInOutPiping&#39;</span><span class="p">):</span>
-            <span class="n">p</span> <span class="o">=</span> <span class="n">Popen</span><span class="p">(</span><span class="n">args</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;/opt/local/bin/enumChordlessCircuitsInOutPiping&#39;</span><span class="p">],</span><span class="n">stdin</span><span class="o">=</span><span class="n">PIPE</span><span class="p">,</span><span class="n">stdout</span><span class="o">=</span><span class="n">PIPE</span><span class="p">)</span>
-        <span class="k">elif</span>  <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="s1">&#39;/home/users/rbisdorff/bin/enumChordlessCircuitsInOutPiping&#39;</span><span class="p">):</span>
-            <span class="n">p</span> <span class="o">=</span> <span class="n">Popen</span><span class="p">(</span><span class="n">args</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;/home/users/rbisdorff/bin/enumChordlessCircuitsInOutPiping&#39;</span><span class="p">],</span><span class="n">stdin</span><span class="o">=</span><span class="n">PIPE</span><span class="p">,</span><span class="n">stdout</span><span class="o">=</span><span class="n">PIPE</span><span class="p">)</span>
-        <span class="k">else</span><span class="p">:</span>
-            <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Error: executable enumChordlessCircuitsInOutPiping not found !!!&#39;</span><span class="p">)</span>
-        <span class="n">Med</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">valuationdomain</span><span class="p">[</span><span class="s1">&#39;med&#39;</span><span class="p">]</span>
-        <span class="n">actions</span> <span class="o">=</span> <span class="p">[</span><span class="n">x</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">actions</span><span class="p">]</span>
-        <span class="n">relation</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">relation</span>
-        <span class="n">inputString</span> <span class="o">=</span> <span class="s1">&#39;&#39;</span>
-        <span class="k">for</span> <span class="n">i</span><span class="p">,</span><span class="n">x</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">actions</span><span class="p">):</span>
-            <span class="k">for</span> <span class="n">j</span><span class="p">,</span><span class="n">y</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">actions</span><span class="p">):</span>
-                <span class="k">if</span> <span class="n">i</span> <span class="o">!=</span> <span class="n">j</span><span class="p">:</span>
-                    <span class="k">if</span> <span class="n">relation</span><span class="p">[</span><span class="n">x</span><span class="p">][</span><span class="n">y</span><span class="p">]</span> <span class="o">&gt;</span> <span class="n">Med</span><span class="p">:</span>
-                        <span class="n">inputString</span> <span class="o">+=</span> <span class="s1">&#39;</span><span class="si">%d</span><span class="s1"> </span><span class="si">%d</span><span class="s1"> </span><span class="se">\n</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">,</span><span class="n">j</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span>
-        <span class="n">circuits</span> <span class="o">=</span> <span class="nb">eval</span><span class="p">(</span><span class="n">p</span><span class="o">.</span><span class="n">communicate</span><span class="p">(</span><span class="nb">input</span><span class="o">=</span><span class="n">inputString</span><span class="o">.</span><span class="n">encode</span><span class="p">(</span><span class="s1">&#39;utf-8&#39;</span><span class="p">))[</span><span class="mi">0</span><span class="p">])</span>
-        <span class="k">if</span> <span class="n">Debug</span><span class="p">:</span>
-            <span class="nb">print</span><span class="p">(</span><span class="n">circuits</span><span class="p">)</span>
-        <span class="n">result</span> <span class="o">=</span> <span class="p">[]</span>
-        <span class="n">history</span> <span class="o">=</span> <span class="nb">set</span><span class="p">()</span>
-        <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">circuits</span><span class="p">:</span>
-            <span class="c1"># !! a circuit has a length n + 1 !!</span>
-            <span class="k">if</span> <span class="n">Odd</span><span class="p">:</span>
-                <span class="n">r</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="o">%</span> <span class="mi">2</span>
-                <span class="c1">## if Debug:</span>
-                <span class="c1">##     print x, r</span>
-                <span class="k">if</span> <span class="n">r</span> <span class="o">!=</span> <span class="mi">1</span><span class="p">:</span>
-                    <span class="n">oddCircuit</span> <span class="o">=</span> <span class="p">[]</span>
-                    <span class="k">for</span> <span class="n">ino</span> <span class="ow">in</span> <span class="n">x</span><span class="p">[:</span><span class="o">-</span><span class="mi">1</span><span class="p">]:</span>
-                        <span class="n">oddCircuit</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">actions</span><span class="p">[</span><span class="n">ino</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span>
-                    <span class="n">circuitActions</span> <span class="o">=</span> <span class="p">[</span><span class="n">y</span> <span class="k">for</span> <span class="n">y</span> <span class="ow">in</span> <span class="n">flatten</span><span class="p">(</span><span class="n">oddCircuit</span><span class="p">)]</span>
-                    <span class="n">circuitSet</span> <span class="o">=</span> <span class="nb">frozenset</span><span class="p">(</span><span class="n">circuitActions</span><span class="p">)</span>
-                    <span class="k">if</span> <span class="n">circuitSet</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">history</span><span class="p">:</span>
-                        <span class="n">result</span><span class="o">.</span><span class="n">append</span><span class="p">(</span> <span class="p">(</span> <span class="n">circuitActions</span><span class="p">,</span> <span class="n">circuitSet</span> <span class="p">)</span> <span class="p">)</span>
-                        <span class="n">history</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">circuitSet</span><span class="p">)</span>
-                    <span class="c1">#result.append( ( oddCircuit, frozenset(oddCircuit) ) )</span>
-            <span class="k">else</span><span class="p">:</span>
-                <span class="n">allCircuit</span> <span class="o">=</span> <span class="p">[]</span>
-                <span class="k">for</span> <span class="n">ino</span> <span class="ow">in</span> <span class="n">x</span><span class="p">[:</span><span class="o">-</span><span class="mi">1</span><span class="p">]:</span>
-                    <span class="n">allCircuit</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">actions</span><span class="p">[</span><span class="n">ino</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span>
-                <span class="n">circuitActions</span> <span class="o">=</span> <span class="p">[</span><span class="n">y</span> <span class="k">for</span> <span class="n">y</span> <span class="ow">in</span> <span class="n">flatten</span><span class="p">(</span><span class="n">allCircuit</span><span class="p">)]</span>
-                <span class="n">circuitSet</span> <span class="o">=</span> <span class="nb">frozenset</span><span class="p">(</span><span class="n">circuitActions</span><span class="p">)</span>
-                <span class="k">if</span> <span class="n">circuitSet</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">history</span><span class="p">:</span>
-                    <span class="n">result</span><span class="o">.</span><span class="n">append</span><span class="p">(</span> <span class="p">(</span> <span class="n">circuitActions</span><span class="p">,</span> <span class="n">circuitSet</span> <span class="p">)</span> <span class="p">)</span>
-                    <span class="n">history</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">circuitSet</span><span class="p">)</span>
-                <span class="c1">#result.append( ( allCircuit, frozenset(allCircuit) ) )</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">circuitsList</span> <span class="o">=</span> <span class="n">result</span>
-        <span class="k">return</span> <span class="n">result</span></div>
-
-
-<div class="viewcode-block" id="Digraph.computeCppChordlessCircuits">
-<a class="viewcode-back" href="../techDoc.html#digraphs.Digraph.computeCppChordlessCircuits">[docs]</a>
-    <span class="k">def</span> <span class="nf">computeCppChordlessCircuits</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">Odd</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span><span class="n">Debug</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        python wrapper for the C++/Agrum based chordless circuits enumeration</span>
-<span class="sd">        exchange arguments with external temporary files</span>
-
-<span class="sd">        Result in *self.circuitsList*.</span>
-
-<span class="sd">        .. warning:: Deprecated !!! The pure python version is more efficient</span>
-<span class="sd">        &quot;&quot;&quot;</span>
-        <span class="kn">import</span> <span class="nn">os</span>
-        <span class="kn">from</span> <span class="nn">tempfile</span> <span class="kn">import</span> <span class="n">mkstemp</span>
-        <span class="kn">from</span> <span class="nn">digraphsTools</span> <span class="kn">import</span> <span class="n">flatten</span>
+    <span class="c1"># def detectCppChordlessCircuits(self,Debug=False):</span>
+    <span class="c1">#     &quot;&quot;&quot;</span>
+    <span class="c1">#     python wrapper for the C++/Agrum based chordless circuits detection</span>
+    <span class="c1">#     exchange arguments with external temporary files.</span>
         
-        <span class="n">fd</span><span class="p">,</span> <span class="n">tempFileName</span> <span class="o">=</span> <span class="n">mkstemp</span><span class="p">()</span>
-        <span class="n">fo</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">fdopen</span><span class="p">(</span><span class="n">fd</span><span class="p">,</span><span class="s1">&#39;w+b&#39;</span><span class="p">)</span>
-        <span class="n">Med</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">valuationdomain</span><span class="p">[</span><span class="s1">&#39;med&#39;</span><span class="p">]</span>
-        <span class="n">actions</span> <span class="o">=</span> <span class="p">[</span><span class="n">x</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">actions</span><span class="p">]</span>
-        <span class="n">relation</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">relation</span>
-        <span class="n">inputString</span> <span class="o">=</span> <span class="s1">&#39;&#39;</span>
-        <span class="k">for</span> <span class="n">i</span><span class="p">,</span><span class="n">x</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">actions</span><span class="p">):</span>
-            <span class="k">for</span> <span class="n">j</span><span class="p">,</span><span class="n">y</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">actions</span><span class="p">):</span>
-                <span class="k">if</span> <span class="n">i</span> <span class="o">!=</span> <span class="n">j</span><span class="p">:</span>
-                    <span class="k">if</span> <span class="n">relation</span><span class="p">[</span><span class="n">x</span><span class="p">][</span><span class="n">y</span><span class="p">]</span> <span class="o">&gt;</span> <span class="n">Med</span><span class="p">:</span>
-                        <span class="n">inputString</span> <span class="o">+=</span> <span class="s1">&#39;</span><span class="si">%d</span><span class="s1"> </span><span class="si">%d</span><span class="s1"> </span><span class="se">\n</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">,</span><span class="n">j</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span>
-        <span class="n">fo</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">inputString</span><span class="o">.</span><span class="n">encode</span><span class="p">(</span><span class="s1">&#39;utf-8&#39;</span><span class="p">))</span>
-        <span class="n">fo</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
-        <span class="c1">## if Debug:</span>
-        <span class="c1">##     print &#39;see file: &#39;, tempFileName</span>
-        <span class="n">resultFile</span> <span class="o">=</span> <span class="n">tempFileName</span><span class="o">+</span><span class="s1">&#39;.py&#39;</span>
-        <span class="k">if</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="s1">&#39;/usr/bin/enumChordlessCircuits&#39;</span><span class="p">):</span>
-            <span class="n">os</span><span class="o">.</span><span class="n">system</span><span class="p">(</span><span class="s1">&#39;/usr/bin/enumChordlessCircuits &#39;</span> <span class="o">+</span> <span class="n">tempFileName</span> <span class="o">+</span> <span class="s1">&#39; &#39;</span> <span class="o">+</span> <span class="n">resultFile</span><span class="p">)</span>
-        <span class="k">elif</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="s1">&#39;/usr/local/bin/enumChordlessCircuits&#39;</span><span class="p">):</span>
-            <span class="n">os</span><span class="o">.</span><span class="n">system</span><span class="p">(</span><span class="s1">&#39;/usr/local/bin/enumChordlessCircuits &#39;</span> <span class="o">+</span> <span class="n">tempFileName</span> <span class="o">+</span> <span class="s1">&#39; &#39;</span> <span class="o">+</span> <span class="n">resultFile</span><span class="p">)</span>
-        <span class="k">elif</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="s1">&#39;/opt/local/bin/enumChordlessCircuits&#39;</span><span class="p">):</span>
-            <span class="n">os</span><span class="o">.</span><span class="n">system</span><span class="p">(</span><span class="s1">&#39;/opt/local/bin/enumChordlessCircuits &#39;</span> <span class="o">+</span> <span class="n">tempFileName</span> <span class="o">+</span> <span class="s1">&#39; &#39;</span> <span class="o">+</span> <span class="n">resultFile</span><span class="p">)</span>
-        <span class="k">elif</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="s1">&#39;/home/users/rbisdorff/bin/enumChordlessCircuits&#39;</span><span class="p">):</span>
-            <span class="n">os</span><span class="o">.</span><span class="n">system</span><span class="p">(</span><span class="s1">&#39;/home/users/rbisdorff/bin/enumChordlessCircuits &#39;</span> <span class="o">+</span> <span class="n">tempFileName</span> <span class="o">+</span> <span class="s1">&#39; &#39;</span> <span class="o">+</span> <span class="n">resultFile</span><span class="p">)</span>
-        <span class="k">else</span><span class="p">:</span>
-            <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Error: enumChordlessCircuits binary not found !!!&#39;</span><span class="p">)</span>
-        <span class="n">argDict</span> <span class="o">=</span> <span class="p">{}</span>
-        <span class="n">fi</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="n">resultFile</span><span class="p">,</span><span class="s1">&#39;r&#39;</span><span class="p">)</span>
-        <span class="n">fileText</span> <span class="o">=</span> <span class="n">fi</span><span class="o">.</span><span class="n">read</span><span class="p">()</span>
-        <span class="n">fi</span><span class="o">.</span><span class="n">close</span>
-        <span class="n">exec</span><span class="p">(</span><span class="nb">compile</span><span class="p">(</span><span class="n">fileText</span><span class="p">,</span> <span class="nb">str</span><span class="p">(</span><span class="n">resultFile</span><span class="p">),</span> <span class="s1">&#39;exec&#39;</span><span class="p">),</span><span class="n">argDict</span><span class="p">)</span>
-        <span class="n">circuits</span> <span class="o">=</span> <span class="n">argDict</span><span class="p">[</span><span class="s1">&#39;circuitsList&#39;</span><span class="p">]</span>
-        <span class="k">if</span> <span class="n">Debug</span><span class="p">:</span>
-            <span class="nb">print</span><span class="p">(</span><span class="n">resultFile</span><span class="p">)</span>
-            <span class="nb">print</span><span class="p">(</span><span class="n">argDict</span><span class="p">[</span><span class="s1">&#39;circuitsList&#39;</span><span class="p">])</span>
-        <span class="n">result</span> <span class="o">=</span> <span class="p">[]</span>
-        <span class="n">history</span> <span class="o">=</span> <span class="nb">set</span><span class="p">()</span>
-        <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">circuits</span><span class="p">:</span>
-            <span class="c1"># !! a circuit has a length n + 1 !!</span>
-            <span class="k">if</span> <span class="n">Odd</span><span class="p">:</span>
-                <span class="n">r</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="o">%</span> <span class="mi">2</span>
-                <span class="c1">## if Debug:</span>
-                <span class="c1">##     print x, r</span>
-                <span class="k">if</span> <span class="n">r</span> <span class="o">!=</span> <span class="mi">1</span><span class="p">:</span>
-                    <span class="n">oddCircuit</span> <span class="o">=</span> <span class="p">[]</span>
-                    <span class="k">for</span> <span class="n">ino</span> <span class="ow">in</span> <span class="n">x</span><span class="p">[:</span><span class="o">-</span><span class="mi">1</span><span class="p">]:</span>
-                        <span class="n">oddCircuit</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">actions</span><span class="p">[</span><span class="n">ino</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span>
-                    <span class="n">circuitActions</span> <span class="o">=</span> <span class="p">[</span><span class="n">y</span> <span class="k">for</span> <span class="n">y</span> <span class="ow">in</span> <span class="n">flatten</span><span class="p">(</span><span class="n">oddCircuit</span><span class="p">)]</span>
-                    <span class="n">circuitSet</span> <span class="o">=</span> <span class="nb">frozenset</span><span class="p">(</span><span class="n">circuitActions</span><span class="p">)</span>
-                    <span class="k">if</span> <span class="n">circuitSet</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">history</span><span class="p">:</span>
-                        <span class="n">result</span><span class="o">.</span><span class="n">append</span><span class="p">(</span> <span class="p">(</span> <span class="n">circuitActions</span><span class="p">,</span> <span class="n">circuitSet</span> <span class="p">)</span> <span class="p">)</span>
-                        <span class="n">history</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">circuitSet</span><span class="p">)</span>
-            <span class="k">else</span><span class="p">:</span>
-                <span class="n">allCircuit</span> <span class="o">=</span> <span class="p">[]</span>
-                <span class="k">for</span> <span class="n">ino</span> <span class="ow">in</span> <span class="n">x</span><span class="p">[:</span><span class="o">-</span><span class="mi">1</span><span class="p">]:</span>
-                    <span class="n">allCircuit</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">actions</span><span class="p">[</span><span class="n">ino</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span>
-                <span class="n">circuitActions</span> <span class="o">=</span> <span class="p">[</span><span class="n">y</span> <span class="k">for</span> <span class="n">y</span> <span class="ow">in</span> <span class="n">flatten</span><span class="p">(</span><span class="n">allCircuit</span><span class="p">)]</span>
-                <span class="n">circuitSet</span> <span class="o">=</span> <span class="nb">frozenset</span><span class="p">(</span><span class="n">circuitActions</span><span class="p">)</span>
-                <span class="k">if</span> <span class="n">circuitSet</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">history</span><span class="p">:</span>
-                    <span class="n">result</span><span class="o">.</span><span class="n">append</span><span class="p">(</span> <span class="p">(</span> <span class="n">circuitActions</span><span class="p">,</span> <span class="n">circuitSet</span> <span class="p">)</span> <span class="p">)</span>
-                    <span class="n">history</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">circuitSet</span><span class="p">)</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">circuitsList</span> <span class="o">=</span> <span class="n">result</span>
-        <span class="k">return</span> <span class="n">result</span></div>
+    <span class="c1">#     Returns a boolean value</span>
+        
+    <span class="c1">#     .. warning:: Deprecated !!! The pure python version is more efficient</span>
+    <span class="c1">#     &quot;&quot;&quot;</span>
+    <span class="c1">#     import os</span>
+    <span class="c1">#     from tempfile import mkstemp</span>
+    <span class="c1">#     fd, tempFileName = mkstemp()</span>
+    <span class="c1">#     fo = os.fdopen(fd,&#39;w&#39;)</span>
+    <span class="c1">#     Med = self.valuationdomain[&#39;med&#39;]</span>
+    <span class="c1">#     actions = [x for x in self.actions]</span>
+    <span class="c1">#     relation = self.relation</span>
+    <span class="c1">#     for i,x in enumerate(actions):</span>
+    <span class="c1">#         for j,y in enumerate(actions):</span>
+    <span class="c1">#             if i != j:</span>
+    <span class="c1">#                 if relation[x][y] &gt; Med:</span>
+    <span class="c1">#                     fo.write(&#39;%d %d\n&#39; % (i+1,j+1))</span>
+    <span class="c1">#     fo.close()</span>
 
+    <span class="c1">#     resultFile = tempFileName+&#39;.py&#39;</span>
+    <span class="c1">#     if os.path.exists(&#39;/usr/bin/detectChordlessCircuits&#39;):</span>
+    <span class="c1">#         os.system(&#39;/usr/bin/detectChordlessCircuits &#39; + tempFileName + &#39; &#39; + resultFile)</span>
+    <span class="c1">#     elif os.path.exists(&#39;/usr/local/bin/detectChordlessCircuits&#39;):</span>
+    <span class="c1">#         os.system(&#39;/usr/local/bin/detectChordlessCircuits &#39; + tempFileName + &#39; &#39; + resultFile)</span>
+    <span class="c1">#     elif os.path.exists(&#39;/opt/local/bin/detectChordlessCircuits&#39;):</span>
+    <span class="c1">#         os.system(&#39;/opt/local/bin/detectChordlessCircuits &#39; + tempFileName + &#39; &#39; + resultFile)</span>
+    <span class="c1">#     elif os.path.exists(&#39;/home/users/rbisdorff/bin/detectChordlessCircuits&#39;):</span>
+    <span class="c1">#         os.system(&#39;/home/users/rbisdorff/bin/detectChordlessCircuits &#39; + tempFileName + &#39; &#39; + resultFile)</span>
+    <span class="c1">#     else:</span>
+    <span class="c1">#         print(&#39;Error: detectChordlessCircuits binary could not be found !!!&#39;)</span>
+    <span class="c1">#     argDict = {}</span>
+    <span class="c1">#     fi = open(resultFile,&#39;r&#39;)</span>
+    <span class="c1">#     fileText = fi.read()</span>
+    <span class="c1">#     fi.close()</span>
+    <span class="c1">#     exec(compile(fileText, str(resultFile), &#39;exec&#39;),argDict)</span>
+    <span class="c1">#     circuits = argDict[&#39;circuitsList&#39;]</span>
+    <span class="c1">#     if circuits == []:</span>
+    <span class="c1">#         Detected = False</span>
+    <span class="c1">#     else:</span>
+    <span class="c1">#         Detected = True</span>
+    <span class="c1">#     if Debug:</span>
+    <span class="c1">#         print(resultFile)</span>
+    <span class="c1">#         print(argDict[&#39;circuitsList&#39;])</span>
+    <span class="c1">#         if Detected:</span>
+    <span class="c1">#             print(&#39;A chordless circuit has been detected !&#39;)</span>
+    <span class="c1">#         else:</span>
+    <span class="c1">#             print(&#39;No chordless circuit has been detected !&#39;)</span>
+    <span class="c1">#         print(&#39;certificate: &#39;, circuits)</span>
+
+    <span class="c1">#     return Detected</span>
+
+    <span class="c1"># def computeCppInOutPipingChordlessCircuits(self,Odd=False,Debug=False):</span>
+    <span class="c1">#     &quot;&quot;&quot;</span>
+    <span class="c1">#     python wrapper for the C++/Agrum based chordless circuits enumeration</span>
+    <span class="c1">#     exchange arguments with external temporary files</span>
+
+    <span class="c1">#     Result in *self.circuitsList*.</span>
+
+    <span class="c1">#     .. warning:: Deprecated !!! The pure python version is more efficient</span>
+    <span class="c1">#     &quot;&quot;&quot;</span>
+    <span class="c1">#     import os</span>
+    <span class="c1">#     from subprocess import Popen,PIPE</span>
+
+    <span class="c1">#     if os.path.exists(&#39;/usr/bin/enumChordlessCircuitsInOutPiping&#39;):</span>
+    <span class="c1">#         p = Popen(args=[&#39;/usr/bin/enumChordlessCircuitsInOutPiping&#39;],stdin=PIPE,stdout=PIPE)</span>
+    <span class="c1">#     elif os.path.exists(&#39;/usr/local/bin/enumChordlessCircuitsInOutPiping&#39;):</span>
+    <span class="c1">#         p = Popen(args=[&#39;/usr/local/bin/enumChordlessCircuitsInOutPiping&#39;],stdin=PIPE,stdout=PIPE)</span>
+    <span class="c1">#     elif os.path.exists(&#39;/opt/local/bin/enumChordlessCircuitsInOutPiping&#39;):</span>
+    <span class="c1">#         p = Popen(args=[&#39;/opt/local/bin/enumChordlessCircuitsInOutPiping&#39;],stdin=PIPE,stdout=PIPE)</span>
+    <span class="c1">#     elif  os.path.exists(&#39;/home/users/rbisdorff/bin/enumChordlessCircuitsInOutPiping&#39;):</span>
+    <span class="c1">#         p = Popen(args=[&#39;/home/users/rbisdorff/bin/enumChordlessCircuitsInOutPiping&#39;],stdin=PIPE,stdout=PIPE)</span>
+    <span class="c1">#     else:</span>
+    <span class="c1">#         print(&#39;Error: executable enumChordlessCircuitsInOutPiping not found !!!&#39;)</span>
+    <span class="c1">#     Med = self.valuationdomain[&#39;med&#39;]</span>
+    <span class="c1">#     actions = [x for x in self.actions]</span>
+    <span class="c1">#     relation = self.relation</span>
+    <span class="c1">#     inputString = &#39;&#39;</span>
+    <span class="c1">#     for i,x in enumerate(actions):</span>
+    <span class="c1">#         for j,y in enumerate(actions):</span>
+    <span class="c1">#             if i != j:</span>
+    <span class="c1">#                 if relation[x][y] &gt; Med:</span>
+    <span class="c1">#                     inputString += &#39;%d %d \n&#39; % (i+1,j+1)</span>
+    <span class="c1">#     circuits = eval(p.communicate(input=inputString.encode(&#39;utf-8&#39;))[0])</span>
+    <span class="c1">#     if Debug:</span>
+    <span class="c1">#         print(circuits)</span>
+    <span class="c1">#     result = []</span>
+    <span class="c1">#     history = set()</span>
+    <span class="c1">#     for x in circuits:</span>
+    <span class="c1">#         # !! a circuit has a length n + 1 !!</span>
+    <span class="c1">#         if Odd:</span>
+    <span class="c1">#             r = len(x) % 2</span>
+    <span class="c1">#             ## if Debug:</span>
+    <span class="c1">#             ##     print x, r</span>
+    <span class="c1">#             if r != 1:</span>
+    <span class="c1">#                 oddCircuit = []</span>
+    <span class="c1">#                 for ino in x[:-1]:</span>
+    <span class="c1">#                     oddCircuit.append(actions[ino-1])</span>
+    <span class="c1">#                 circuitActions = [y for y in flatten(oddCircuit)]</span>
+    <span class="c1">#                 circuitSet = frozenset(circuitActions)</span>
+    <span class="c1">#                 if circuitSet not in history:</span>
+    <span class="c1">#                     result.append( ( circuitActions, circuitSet ) )</span>
+    <span class="c1">#                     history.add(circuitSet)</span>
+    <span class="c1">#                 #result.append( ( oddCircuit, frozenset(oddCircuit) ) )</span>
+    <span class="c1">#         else:</span>
+    <span class="c1">#             allCircuit = []</span>
+    <span class="c1">#             for ino in x[:-1]:</span>
+    <span class="c1">#                 allCircuit.append(actions[ino-1])</span>
+    <span class="c1">#             circuitActions = [y for y in flatten(allCircuit)]</span>
+    <span class="c1">#             circuitSet = frozenset(circuitActions)</span>
+    <span class="c1">#             if circuitSet not in history:</span>
+    <span class="c1">#                 result.append( ( circuitActions, circuitSet ) )</span>
+    <span class="c1">#                 history.add(circuitSet)</span>
+    <span class="c1">#             #result.append( ( allCircuit, frozenset(allCircuit) ) )</span>
+    <span class="c1">#     self.circuitsList = result</span>
+    <span class="c1">#     return result</span>
+
+    <span class="c1"># def computeCppChordlessCircuits(self,Odd=False,Debug=False):</span>
+    <span class="c1">#     &quot;&quot;&quot;</span>
+    <span class="c1">#     python wrapper for the C++/Agrum based chordless circuits enumeration</span>
+    <span class="c1">#     exchange arguments with external temporary files</span>
+
+    <span class="c1">#     Result in *self.circuitsList*.</span>
+
+    <span class="c1">#     .. warning:: Deprecated !!! The pure python version is more efficient</span>
+    <span class="c1">#     &quot;&quot;&quot;</span>
+    <span class="c1">#     import os</span>
+    <span class="c1">#     from tempfile import mkstemp</span>
+    <span class="c1">#     from digraphsTools import flatten</span>
+        
+    <span class="c1">#     fd, tempFileName = mkstemp()</span>
+    <span class="c1">#     fo = os.fdopen(fd,&#39;w+b&#39;)</span>
+    <span class="c1">#     Med = self.valuationdomain[&#39;med&#39;]</span>
+    <span class="c1">#     actions = [x for x in self.actions]</span>
+    <span class="c1">#     relation = self.relation</span>
+    <span class="c1">#     inputString = &#39;&#39;</span>
+    <span class="c1">#     for i,x in enumerate(actions):</span>
+    <span class="c1">#         for j,y in enumerate(actions):</span>
+    <span class="c1">#             if i != j:</span>
+    <span class="c1">#                 if relation[x][y] &gt; Med:</span>
+    <span class="c1">#                     inputString += &#39;%d %d \n&#39; % (i+1,j+1)</span>
+    <span class="c1">#     fo.write(inputString.encode(&#39;utf-8&#39;))</span>
+    <span class="c1">#     fo.close()</span>
+    <span class="c1">#     ## if Debug:</span>
+    <span class="c1">#     ##     print &#39;see file: &#39;, tempFileName</span>
+    <span class="c1">#     resultFile = tempFileName+&#39;.py&#39;</span>
+    <span class="c1">#     if os.path.exists(&#39;/usr/bin/enumChordlessCircuits&#39;):</span>
+    <span class="c1">#         os.system(&#39;/usr/bin/enumChordlessCircuits &#39; + tempFileName + &#39; &#39; + resultFile)</span>
+    <span class="c1">#     elif os.path.exists(&#39;/usr/local/bin/enumChordlessCircuits&#39;):</span>
+    <span class="c1">#         os.system(&#39;/usr/local/bin/enumChordlessCircuits &#39; + tempFileName + &#39; &#39; + resultFile)</span>
+    <span class="c1">#     elif os.path.exists(&#39;/opt/local/bin/enumChordlessCircuits&#39;):</span>
+    <span class="c1">#         os.system(&#39;/opt/local/bin/enumChordlessCircuits &#39; + tempFileName + &#39; &#39; + resultFile)</span>
+    <span class="c1">#     elif os.path.exists(&#39;/home/users/rbisdorff/bin/enumChordlessCircuits&#39;):</span>
+    <span class="c1">#         os.system(&#39;/home/users/rbisdorff/bin/enumChordlessCircuits &#39; + tempFileName + &#39; &#39; + resultFile)</span>
+    <span class="c1">#     else:</span>
+    <span class="c1">#         print(&#39;Error: enumChordlessCircuits binary not found !!!&#39;)</span>
+    <span class="c1">#     argDict = {}</span>
+    <span class="c1">#     fi = open(resultFile,&#39;r&#39;)</span>
+    <span class="c1">#     fileText = fi.read()</span>
+    <span class="c1">#     fi.close</span>
+    <span class="c1">#     exec(compile(fileText, str(resultFile), &#39;exec&#39;),argDict)</span>
+    <span class="c1">#     circuits = argDict[&#39;circuitsList&#39;]</span>
+    <span class="c1">#     if Debug:</span>
+    <span class="c1">#         print(resultFile)</span>
+    <span class="c1">#         print(argDict[&#39;circuitsList&#39;])</span>
+    <span class="c1">#     result = []</span>
+    <span class="c1">#     history = set()</span>
+    <span class="c1">#     for x in circuits:</span>
+    <span class="c1">#         # !! a circuit has a length n + 1 !!</span>
+    <span class="c1">#         if Odd:</span>
+    <span class="c1">#             r = len(x) % 2</span>
+    <span class="c1">#             ## if Debug:</span>
+    <span class="c1">#             ##     print x, r</span>
+    <span class="c1">#             if r != 1:</span>
+    <span class="c1">#                 oddCircuit = []</span>
+    <span class="c1">#                 for ino in x[:-1]:</span>
+    <span class="c1">#                     oddCircuit.append(actions[ino-1])</span>
+    <span class="c1">#                 circuitActions = [y for y in flatten(oddCircuit)]</span>
+    <span class="c1">#                 circuitSet = frozenset(circuitActions)</span>
+    <span class="c1">#                 if circuitSet not in history:</span>
+    <span class="c1">#                     result.append( ( circuitActions, circuitSet ) )</span>
+    <span class="c1">#                     history.add(circuitSet)</span>
+    <span class="c1">#         else:</span>
+    <span class="c1">#             allCircuit = []</span>
+    <span class="c1">#             for ino in x[:-1]:</span>
+    <span class="c1">#                 allCircuit.append(actions[ino-1])</span>
+    <span class="c1">#             circuitActions = [y for y in flatten(allCircuit)]</span>
+    <span class="c1">#             circuitSet = frozenset(circuitActions)</span>
+    <span class="c1">#             if circuitSet not in history:</span>
+    <span class="c1">#                 result.append( ( circuitActions, circuitSet ) )</span>
+    <span class="c1">#                 history.add(circuitSet)</span>
+    <span class="c1">#     self.circuitsList = result</span>
+    <span class="c1">#     return result</span>
 
     <span class="c1">#@timefn</span>
 <div class="viewcode-block" id="Digraph.computeChordlessCircuits">
@@ -8936,8 +8927,7 @@
                                           <span class="n">CoDual</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
                                           <span class="n">Debug</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
                                           <span class="n">_OldCoca</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
-                                          <span class="n">BrokenCocs</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
-                                          <span class="n">Cpp</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+                                          <span class="n">BrokenCocs</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Sets self.bestChoice, self.bestChoiceData, self.worstChoice and self.worstChoiceData</span>
 <span class="sd">        with the showBestChoiceRecommendation method.</span>
@@ -8955,8 +8945,7 @@
                                           <span class="n">CoDual</span><span class="o">=</span><span class="n">CoDual</span><span class="p">,</span>
                                           <span class="n">Debug</span><span class="o">=</span><span class="n">Debug</span><span class="p">,</span>
                                           <span class="n">_OldCoca</span><span class="o">=</span><span class="n">_OldCoca</span><span class="p">,</span>
-                                          <span class="n">BrokenCocs</span><span class="o">=</span><span class="n">BrokenCocs</span><span class="p">,</span>
-                                          <span class="n">Cpp</span><span class="o">=</span><span class="n">Cpp</span><span class="p">)</span></div>
+                                          <span class="n">BrokenCocs</span><span class="o">=</span><span class="n">BrokenCocs</span><span class="p">)</span></div>
 
 
 <div class="viewcode-block" id="Digraph.showFirstChoiceRecommendation">
@@ -8968,7 +8957,7 @@
                                           <span class="n">Debug</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
                                           <span class="n">_OldCoca</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
                                           <span class="n">BrokenCocs</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
-                                          <span class="n">Cpp</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+                                          <span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Shows the RuBis first choice recommendation.</span>
 
@@ -9032,13 +9021,13 @@
         <span class="k">else</span><span class="p">:</span>
             <span class="n">g</span> <span class="o">=</span> <span class="n">cpself</span>
         <span class="k">if</span> <span class="n">_OldCoca</span><span class="p">:</span>
-            <span class="n">_selfwcoc</span> <span class="o">=</span> <span class="n">CocaDigraph</span><span class="p">(</span><span class="n">g</span><span class="p">,</span><span class="n">Cpp</span><span class="o">=</span><span class="n">Cpp</span><span class="p">)</span>
+            <span class="n">_selfwcoc</span> <span class="o">=</span> <span class="n">CocaDigraph</span><span class="p">(</span><span class="n">g</span><span class="p">)</span>
             <span class="n">b1</span> <span class="o">=</span> <span class="mi">0</span>
         <span class="k">elif</span> <span class="n">BrokenCocs</span><span class="p">:</span>
-            <span class="n">_selfwcoc</span> <span class="o">=</span> <span class="n">BrokenCocsDigraph</span><span class="p">(</span><span class="n">g</span><span class="p">,</span><span class="n">Cpp</span><span class="o">=</span><span class="n">Cpp</span><span class="p">)</span>
+            <span class="n">_selfwcoc</span> <span class="o">=</span> <span class="n">BrokenCocsDigraph</span><span class="p">(</span><span class="n">g</span><span class="p">)</span>
             <span class="n">b1</span> <span class="o">=</span> <span class="n">_selfwcoc</span><span class="o">.</span><span class="n">breakings</span>
         <span class="k">else</span><span class="p">:</span>
-            <span class="n">_selfwcoc</span> <span class="o">=</span> <span class="n">BreakAddCocsDigraph</span><span class="p">(</span><span class="n">g</span><span class="p">,</span><span class="n">Cpp</span><span class="o">=</span><span class="n">Cpp</span><span class="p">)</span>
+            <span class="n">_selfwcoc</span> <span class="o">=</span> <span class="n">BreakAddCocsDigraph</span><span class="p">(</span><span class="n">g</span><span class="p">)</span>
             <span class="n">b1</span> <span class="o">=</span>  <span class="n">_selfwcoc</span><span class="o">.</span><span class="n">breakings</span>
         <span class="n">n1</span> <span class="o">=</span> <span class="n">_selfwcoc</span><span class="o">.</span><span class="n">order</span>
         <span class="n">nc</span> <span class="o">=</span> <span class="n">n1</span> <span class="o">-</span> <span class="n">n0</span>
@@ -9176,7 +9165,7 @@
                                           <span class="n">Debug</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
                                           <span class="n">_OldCoca</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
                                           <span class="n">BrokenCocs</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
-                                          <span class="n">Cpp</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+                                          <span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Shows the RuBis best choice recommendation.</span>
 
@@ -9240,13 +9229,13 @@
         <span class="k">else</span><span class="p">:</span>
             <span class="n">g</span> <span class="o">=</span> <span class="n">cpself</span>
         <span class="k">if</span> <span class="n">_OldCoca</span><span class="p">:</span>
-            <span class="n">_selfwcoc</span> <span class="o">=</span> <span class="n">CocaDigraph</span><span class="p">(</span><span class="n">g</span><span class="p">,</span><span class="n">Cpp</span><span class="o">=</span><span class="n">Cpp</span><span class="p">)</span>
+            <span class="n">_selfwcoc</span> <span class="o">=</span> <span class="n">CocaDigraph</span><span class="p">(</span><span class="n">g</span><span class="p">)</span>
             <span class="n">b1</span> <span class="o">=</span> <span class="mi">0</span>
         <span class="k">elif</span> <span class="n">BrokenCocs</span><span class="p">:</span>
-            <span class="n">_selfwcoc</span> <span class="o">=</span> <span class="n">BrokenCocsDigraph</span><span class="p">(</span><span class="n">g</span><span class="p">,</span><span class="n">Cpp</span><span class="o">=</span><span class="n">Cpp</span><span class="p">)</span>
+            <span class="n">_selfwcoc</span> <span class="o">=</span> <span class="n">BrokenCocsDigraph</span><span class="p">(</span><span class="n">g</span><span class="p">)</span>
             <span class="n">b1</span> <span class="o">=</span> <span class="n">_selfwcoc</span><span class="o">.</span><span class="n">breakings</span>
         <span class="k">else</span><span class="p">:</span>
-            <span class="n">_selfwcoc</span> <span class="o">=</span> <span class="n">BreakAddCocsDigraph</span><span class="p">(</span><span class="n">g</span><span class="p">,</span><span class="n">Cpp</span><span class="o">=</span><span class="n">Cpp</span><span class="p">)</span>
+            <span class="n">_selfwcoc</span> <span class="o">=</span> <span class="n">BreakAddCocsDigraph</span><span class="p">(</span><span class="n">g</span><span class="p">)</span>
             <span class="n">b1</span> <span class="o">=</span>  <span class="n">_selfwcoc</span><span class="o">.</span><span class="n">breakings</span>
         <span class="n">n1</span> <span class="o">=</span> <span class="n">_selfwcoc</span><span class="o">.</span><span class="n">order</span>
         <span class="n">nc</span> <span class="o">=</span> <span class="n">n1</span> <span class="o">-</span> <span class="n">n0</span>
@@ -9392,7 +9381,7 @@
                                       <span class="n">Debug</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
                                       <span class="n">_OldCoca</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
                                       <span class="n">BrokenCocs</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
-                                      <span class="n">Cpp</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+                                      <span class="c1">#Cpp=False,</span>
                                       <span class="n">htmlFileName</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
                                      <span class="p">):</span>
 
@@ -9410,8 +9399,7 @@
             <span class="n">CoDual</span><span class="o">=</span><span class="n">CoDual</span><span class="p">,</span>
             <span class="n">Debug</span><span class="o">=</span><span class="n">Debug</span><span class="p">,</span>
             <span class="n">_OldCoca</span><span class="o">=</span><span class="n">_OldCoca</span><span class="p">,</span>
-            <span class="n">BrokenCocs</span><span class="o">=</span><span class="n">BrokenCocs</span><span class="p">,</span>
-            <span class="n">Cpp</span><span class="o">=</span><span class="n">Cpp</span><span class="p">))</span>
+            <span class="n">BrokenCocs</span><span class="o">=</span><span class="n">BrokenCocs</span><span class="p">))</span>
         <span class="n">fo</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
         <span class="n">url</span> <span class="o">=</span> <span class="s1">&#39;file://&#39;</span><span class="o">+</span><span class="n">fileName</span>
         <span class="n">webbrowser</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="n">url</span><span class="p">,</span><span class="n">new</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
@@ -9423,7 +9411,7 @@
                                           <span class="n">Debug</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
                                           <span class="n">_OldCoca</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
                                           <span class="n">BrokenCocs</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
-                                          <span class="n">Cpp</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+                                          <span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Renders the RuBis best choice recommendation in a browser window.</span>
 
@@ -9474,14 +9462,14 @@
         <span class="k">else</span><span class="p">:</span>
             <span class="n">g</span> <span class="o">=</span> <span class="n">cpself</span>
         <span class="k">if</span> <span class="n">_OldCoca</span><span class="p">:</span>
-            <span class="n">_selfwcoc</span> <span class="o">=</span> <span class="n">CocaDigraph</span><span class="p">(</span><span class="n">g</span><span class="p">,</span><span class="n">Cpp</span><span class="o">=</span><span class="n">Cpp</span><span class="p">)</span>
+            <span class="n">_selfwcoc</span> <span class="o">=</span> <span class="n">CocaDigraph</span><span class="p">(</span><span class="n">g</span><span class="p">)</span>
             <span class="n">b1</span> <span class="o">=</span> <span class="mi">0</span>
         <span class="k">elif</span> <span class="n">BrokenCocs</span><span class="p">:</span>
             <span class="c1">#print(&#39;passed here!&#39;)</span>
-            <span class="n">_selfwcoc</span> <span class="o">=</span> <span class="n">BrokenCocsDigraph</span><span class="p">(</span><span class="n">g</span><span class="p">,</span><span class="n">Cpp</span><span class="o">=</span><span class="n">Cpp</span><span class="p">)</span>
+            <span class="n">_selfwcoc</span> <span class="o">=</span> <span class="n">BrokenCocsDigraph</span><span class="p">(</span><span class="n">g</span><span class="p">)</span>
             <span class="n">b1</span> <span class="o">=</span> <span class="n">_selfwcoc</span><span class="o">.</span><span class="n">breakings</span>
         <span class="k">else</span><span class="p">:</span>
-            <span class="n">_selfwcoc</span> <span class="o">=</span> <span class="n">BreakAddCocsDigraph</span><span class="p">(</span><span class="n">g</span><span class="p">,</span><span class="n">Cpp</span><span class="o">=</span><span class="n">Cpp</span><span class="p">)</span>
+            <span class="n">_selfwcoc</span> <span class="o">=</span> <span class="n">BreakAddCocsDigraph</span><span class="p">(</span><span class="n">g</span><span class="p">)</span>
             <span class="n">b1</span> <span class="o">=</span>  <span class="n">_selfwcoc</span><span class="o">.</span><span class="n">breakings</span>
         <span class="n">n1</span> <span class="o">=</span> <span class="n">_selfwcoc</span><span class="o">.</span><span class="n">order</span>
         <span class="n">nc</span> <span class="o">=</span> <span class="n">n1</span> <span class="o">-</span> <span class="n">n0</span>
@@ -9641,25 +9629,22 @@
 
 <div class="viewcode-block" id="Digraph.computeRubyChoice">
 <a class="viewcode-back" href="../techDoc.html#digraphs.Digraph.computeRubyChoice">[docs]</a>
-    <span class="k">def</span> <span class="nf">computeRubyChoice</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">CppAgrum</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span><span class="n">Comments</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span><span class="n">_OldCoca</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">computeRubyChoice</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">Comments</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span><span class="n">_OldCoca</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        dummy for computeRubisChoice()</span>
 <span class="sd">        old versions compatibility.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">computeRubisChoice</span><span class="p">(</span><span class="n">CppAgrum</span><span class="o">=</span><span class="n">CppAgrum</span><span class="p">,</span><span class="n">Comments</span><span class="o">=</span><span class="n">Comments</span><span class="p">,</span><span class="n">_OldCoca</span><span class="o">=</span><span class="n">_OldCoca</span><span class="p">)</span></div>
+        <span class="bp">self</span><span class="o">.</span><span class="n">computeRubisChoice</span><span class="p">(</span><span class="n">Comments</span><span class="o">=</span><span class="n">Comments</span><span class="p">,</span><span class="n">_OldCoca</span><span class="o">=</span><span class="n">_OldCoca</span><span class="p">)</span></div>
 
 
 <div class="viewcode-block" id="Digraph.computeRubisChoice">
 <a class="viewcode-back" href="../techDoc.html#digraphs.Digraph.computeRubisChoice">[docs]</a>
-    <span class="k">def</span> <span class="nf">computeRubisChoice</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">CppAgrum</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+    <span class="k">def</span> <span class="nf">computeRubisChoice</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span>
                            <span class="n">Comments</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span><span class="n">_OldCoca</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span><span class="n">BrokenCocs</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
                            <span class="n">Threading</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span><span class="n">nbrOfCPUs</span><span class="o">=</span><span class="mi">1</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Renders self.strictGoodChoices, self.nullChoices</span>
 <span class="sd">        self.strictBadChoices, self.nonRobustChoices.</span>
-
-<span class="sd">        CppgArum = False (default | true : use C++/Agrum digraph library</span>
-<span class="sd">        for computing chordless circuits in self.</span>
 
 <span class="sd">        .. warning::</span>
 <span class="sd">            Changes in site the outranking digraph by</span>
@@ -9682,14 +9667,14 @@
         <span class="k">if</span> <span class="n">Comments</span><span class="p">:</span>
             <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;*--- computing the COCA digraph --*&#39;</span><span class="p">)</span>
         <span class="k">if</span> <span class="n">_OldCoca</span><span class="p">:</span>
-            <span class="n">_selfwcoc</span> <span class="o">=</span> <span class="n">CocaDigraph</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">Cpp</span><span class="o">=</span><span class="n">CppAgrum</span><span class="p">,</span><span class="n">Comments</span><span class="o">=</span><span class="n">Comments</span><span class="p">)</span>
+            <span class="n">_selfwcoc</span> <span class="o">=</span> <span class="n">CocaDigraph</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">Comments</span><span class="o">=</span><span class="n">Comments</span><span class="p">)</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">breakings</span> <span class="o">=</span> <span class="mi">0</span>
         <span class="k">elif</span> <span class="n">BrokenCocs</span><span class="p">:</span>
-            <span class="n">_selfwcoc</span> <span class="o">=</span> <span class="n">BrokenCocsDigraph</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">Cpp</span><span class="o">=</span><span class="n">CppAgrum</span><span class="p">,</span><span class="n">Comments</span><span class="o">=</span><span class="n">Comments</span><span class="p">,</span>
+            <span class="n">_selfwcoc</span> <span class="o">=</span> <span class="n">BrokenCocsDigraph</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">Comments</span><span class="o">=</span><span class="n">Comments</span><span class="p">,</span>
                                     <span class="n">Threading</span><span class="o">=</span><span class="n">Threading</span><span class="p">,</span><span class="n">nbrOfCPUs</span><span class="o">=</span><span class="n">nbrOfCPUs</span><span class="p">)</span>            
             <span class="bp">self</span><span class="o">.</span><span class="n">breakings</span> <span class="o">=</span> <span class="n">_selfwcoc</span><span class="o">.</span><span class="n">breakings</span>
         <span class="k">else</span><span class="p">:</span>
-            <span class="n">_selfwcoc</span> <span class="o">=</span> <span class="n">BreakAddCocsDigraph</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">Cpp</span><span class="o">=</span><span class="n">CppAgrum</span><span class="p">,</span><span class="n">Comments</span><span class="o">=</span><span class="n">Comments</span><span class="p">,</span>
+            <span class="n">_selfwcoc</span> <span class="o">=</span> <span class="n">BreakAddCocsDigraph</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">Comments</span><span class="o">=</span><span class="n">Comments</span><span class="p">,</span>
                                     <span class="n">Threading</span><span class="o">=</span><span class="n">Threading</span><span class="p">,</span><span class="n">nbrOfCPUs</span><span class="o">=</span><span class="n">nbrOfCPUs</span><span class="p">)</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">breakings</span> <span class="o">=</span> <span class="n">_selfwcoc</span><span class="o">.</span><span class="n">breakings</span>
         <span class="k">if</span> <span class="n">Comments</span><span class="p">:</span>
@@ -9748,13 +9733,10 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">notGamma</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">notGammaSets</span><span class="p">()</span></div>
 
 
-    <span class="k">def</span> <span class="nf">_computeRubisChoice</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">CppAgrum</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span><span class="n">Comments</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span><span class="n">_OldCoca</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">_computeRubisChoice</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">Comments</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span><span class="n">_OldCoca</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Renders self.strictGoodChoices, self.nullChoices</span>
 <span class="sd">        self.strictBadChoices, self.nonRobustChoices.</span>
-
-<span class="sd">        CppgArum = False (default | true : use C++/Agrum digraph library</span>
-<span class="sd">        for computing chordless circuits in self.</span>
 
 <span class="sd">        .. warning::</span>
 <span class="sd">            Changes in site the outranking digraph by</span>
@@ -9768,7 +9750,7 @@
 
         <span class="n">n0</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">order</span>
         <span class="n">t0</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span>
-        <span class="n">_selfwcoc</span> <span class="o">=</span> <span class="n">CocaDigraph</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">Cpp</span><span class="o">=</span><span class="n">CppAgrum</span><span class="p">,</span><span class="n">Comments</span><span class="o">=</span><span class="n">Comments</span><span class="p">)</span>
+        <span class="n">_selfwcoc</span> <span class="o">=</span> <span class="n">CocaDigraph</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">Comments</span><span class="o">=</span><span class="n">Comments</span><span class="p">)</span>
         <span class="c1">#b1 = _selfwcoc.brakings</span>
         <span class="n">t1</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span>
         <span class="k">if</span> <span class="n">Comments</span><span class="p">:</span>
@@ -14550,11 +14532,10 @@
 <span class="sd">    Parameters:</span>
 
 <span class="sd">        - digraph: Stored or memory resident digraph instance.</span>
-<span class="sd">        - Cpp: using a C++/Agrum version of the Digraph.computeChordlessCircuits() method.</span>
 <span class="sd">        - Piping: using OS pipes for data in- and output between Python and C++.</span>
 
 <span class="sd">    &quot;&quot;&quot;</span>
-    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">digraph</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span><span class="n">Cpp</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span><span class="n">Piping</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span><span class="n">Comments</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span><span class="n">Debug</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">digraph</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span><span class="n">Piping</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span><span class="n">Comments</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span><span class="n">Debug</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
         <span class="kn">import</span> <span class="nn">random</span><span class="o">,</span><span class="nn">sys</span><span class="o">,</span><span class="nn">array</span>
         <span class="kn">from</span> <span class="nn">copy</span> <span class="kn">import</span> <span class="n">deepcopy</span>
         <span class="kn">from</span> <span class="nn">outrankingDigraphs</span> <span class="kn">import</span> <span class="n">OutrankingDigraph</span><span class="p">,</span> <span class="n">RandomOutrankingDigraph</span><span class="p">,</span> <span class="n">BipolarOutrankingDigraph</span>
@@ -14651,14 +14632,13 @@
 <span class="sd">    Parameters:</span>
 
 <span class="sd">        - digraph: stored or memory resident digraph instance.</span>
-<span class="sd">        - Cpp: using a C++/Agrum version of the Digraph.computeChordlessCircuits() method.</span>
 <span class="sd">        - Piping: using OS pipes for data in- and output between Python and C++.</span>
 
 <span class="sd">    All chordless odd circuits are broken at the weakest asymmetric link,</span>
 <span class="sd">    i.e. a link :math:`(x, y)` with minimal difference between :math:`r(x S y)` and :math:`r(y S x)`.</span>
 
 <span class="sd">    &quot;&quot;&quot;</span>
-    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">digraph</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span><span class="n">Cpp</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span><span class="n">Piping</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">digraph</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span><span class="n">Piping</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
                  <span class="n">Comments</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span><span class="n">Threading</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span><span class="n">nbrOfCPUs</span><span class="o">=</span><span class="mi">1</span><span class="p">):</span>
         <span class="kn">import</span> <span class="nn">random</span><span class="o">,</span><span class="nn">sys</span><span class="o">,</span><span class="nn">array</span><span class="o">,</span><span class="nn">copy</span>
         <span class="kn">from</span> <span class="nn">outrankingDigraphs</span> <span class="kn">import</span> <span class="n">OutrankingDigraph</span><span class="p">,</span>\
@@ -14695,12 +14675,12 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">gamma</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">gammaSets</span><span class="p">()</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">notGamma</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">notGammaSets</span><span class="p">()</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">weakGamma</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">weakGammaSets</span><span class="p">()</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">breakChordlessOddCircuits</span><span class="p">(</span><span class="n">Cpp</span><span class="o">=</span><span class="n">Cpp</span><span class="p">,</span><span class="n">Piping</span><span class="o">=</span><span class="n">Piping</span><span class="p">,</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">breakChordlessOddCircuits</span><span class="p">(</span><span class="n">Piping</span><span class="o">=</span><span class="n">Piping</span><span class="p">,</span>
             <span class="n">Comments</span><span class="o">=</span><span class="n">Comments</span><span class="p">,</span><span class="n">Threading</span><span class="o">=</span><span class="n">Threading</span><span class="p">,</span><span class="n">nbrOfCPUs</span><span class="o">=</span><span class="n">nbrOfCPUs</span><span class="p">)</span>
 
 <div class="viewcode-block" id="BrokenCocsDigraph.breakChordlessOddCircuits">
 <a class="viewcode-back" href="../techDoc.html#digraphs.BrokenCocsDigraph.breakChordlessOddCircuits">[docs]</a>
-    <span class="k">def</span> <span class="nf">breakChordlessOddCircuits</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">Cpp</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span><span class="n">Piping</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+    <span class="k">def</span> <span class="nf">breakChordlessOddCircuits</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">Piping</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
                                   <span class="n">Comments</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span><span class="n">Debug</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
                                   <span class="n">Threading</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span><span class="n">nbrOfCPUs</span><span class="o">=</span><span class="mi">1</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
@@ -14720,13 +14700,13 @@
             <span class="n">i</span> <span class="o">+=</span> <span class="mi">1</span>
             <span class="n">initialCircuits</span> <span class="o">=</span> <span class="nb">set</span><span class="p">([</span><span class="n">x</span> <span class="k">for</span> <span class="n">cl</span><span class="p">,</span><span class="n">x</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">circuitsList</span><span class="p">])</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">breakCircuits</span><span class="p">(</span><span class="n">Comments</span><span class="o">=</span><span class="n">Comments</span><span class="p">)</span>
-            <span class="k">if</span> <span class="n">Cpp</span><span class="p">:</span>
-                <span class="k">if</span> <span class="n">Piping</span><span class="p">:</span>
-                    <span class="bp">self</span><span class="o">.</span><span class="n">computeCppInOutPipingChordlessCircuits</span><span class="p">(</span><span class="n">Odd</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
-                                                                <span class="n">Debug</span><span class="o">=</span><span class="n">Debug</span><span class="p">)</span>
-                <span class="k">else</span><span class="p">:</span>
-                    <span class="bp">self</span><span class="o">.</span><span class="n">computeCppChordlessCircuits</span><span class="p">(</span><span class="n">Odd</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span><span class="n">Debug</span><span class="o">=</span><span class="n">Debug</span><span class="p">)</span>
-            <span class="k">elif</span> <span class="n">Threading</span><span class="p">:</span>
+            <span class="c1"># if Cpp:</span>
+            <span class="c1">#     if Piping:</span>
+            <span class="c1">#         self.computeCppInOutPipingChordlessCircuits(Odd=True,</span>
+            <span class="c1">#                                                     Debug=Debug)</span>
+            <span class="c1">#     else:</span>
+            <span class="c1">#         self.computeCppChordlessCircuits(Odd=True,Debug=Debug)</span>
+            <span class="k">if</span> <span class="n">Threading</span><span class="p">:</span>
                 <span class="bp">self</span><span class="o">.</span><span class="n">computeChordlessCircuitsMP</span><span class="p">(</span><span class="n">Odd</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span><span class="n">Comments</span><span class="o">=</span><span class="n">Debug</span><span class="p">,</span>
                                     <span class="n">Threading</span><span class="o">=</span><span class="n">Threading</span><span class="p">,</span><span class="n">nbrOfCPUs</span><span class="o">=</span><span class="n">nbrOfCPUs</span><span class="p">)</span>
             <span class="k">else</span><span class="p">:</span>
@@ -14817,14 +14797,13 @@
 <span class="sd">    Parameters:</span>
 
 <span class="sd">        - digraph: stored or memory resident digraph instance.</span>
-<span class="sd">        - Cpp: using a C++/Agrum version of the Digraph.computeChordlessCircuits() method.</span>
 <span class="sd">        - Piping: using OS pipes for data in- and output between Python and C++.</span>
 
 <span class="sd">    All chordless odd circuits are broken at the weakest asymmetric link,</span>
 <span class="sd">    i.e. a link :math:`(x, y)` with minimal difference between :math:`r(x S y)` and :math:`r(y S x)`.</span>
 
 <span class="sd">    &quot;&quot;&quot;</span>
-    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">digraph</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span><span class="n">Cpp</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span><span class="n">Piping</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">digraph</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span><span class="n">Piping</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
                  <span class="n">Comments</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span><span class="n">Threading</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span><span class="n">nbrOfCPUs</span><span class="o">=</span><span class="mi">1</span><span class="p">):</span>
         <span class="kn">import</span> <span class="nn">random</span><span class="o">,</span><span class="nn">sys</span><span class="o">,</span><span class="nn">array</span><span class="o">,</span><span class="nn">copy</span>
         <span class="kn">from</span> <span class="nn">outrankingDigraphs</span> <span class="kn">import</span> <span class="n">OutrankingDigraph</span><span class="p">,</span>\
@@ -14863,12 +14842,12 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">gamma</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">gammaSets</span><span class="p">()</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">notGamma</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">notGammaSets</span><span class="p">()</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">weakGamma</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">weakGammaSets</span><span class="p">()</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">breakChordlessOddCircuits</span><span class="p">(</span><span class="n">Cpp</span><span class="o">=</span><span class="n">Cpp</span><span class="p">,</span><span class="n">Piping</span><span class="o">=</span><span class="n">Piping</span><span class="p">,</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">breakChordlessOddCircuits</span><span class="p">(</span><span class="n">Piping</span><span class="o">=</span><span class="n">Piping</span><span class="p">,</span>
                 <span class="n">Comments</span><span class="o">=</span><span class="n">Comments</span><span class="p">,</span><span class="n">Threading</span><span class="o">=</span><span class="n">Threading</span><span class="p">,</span><span class="n">nbrOfCPUs</span><span class="o">=</span><span class="n">nbrOfCPUs</span><span class="p">)</span>
 
 <div class="viewcode-block" id="BrokenChordlessCircuitsDigraph.breakChordlessOddCircuits">
 <a class="viewcode-back" href="../techDoc.html#digraphs.BrokenChordlessCircuitsDigraph.breakChordlessOddCircuits">[docs]</a>
-    <span class="k">def</span> <span class="nf">breakChordlessOddCircuits</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">Cpp</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span><span class="n">Piping</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+    <span class="k">def</span> <span class="nf">breakChordlessOddCircuits</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">Piping</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
                 <span class="n">Comments</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span><span class="n">Debug</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span><span class="n">Threading</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span><span class="n">nbrOfCPUs</span><span class="o">=</span><span class="mi">1</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Breaking of chordless odd circuits extraction.</span>
@@ -14887,12 +14866,12 @@
             <span class="n">i</span> <span class="o">+=</span> <span class="mi">1</span>
             <span class="n">initialCircuits</span> <span class="o">=</span> <span class="nb">set</span><span class="p">([</span><span class="n">x</span> <span class="k">for</span> <span class="n">cl</span><span class="p">,</span><span class="n">x</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">circuitsList</span><span class="p">])</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">breakCircuits</span><span class="p">(</span><span class="n">Comments</span><span class="o">=</span><span class="n">Comments</span><span class="p">)</span>
-            <span class="k">if</span> <span class="n">Cpp</span><span class="p">:</span>
-                <span class="k">if</span> <span class="n">Piping</span><span class="p">:</span>
-                    <span class="bp">self</span><span class="o">.</span><span class="n">computeCppInOutPipingChordlessCircuits</span><span class="p">(</span><span class="n">Odd</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span><span class="n">Debug</span><span class="o">=</span><span class="n">Debug</span><span class="p">)</span>
-                <span class="k">else</span><span class="p">:</span>
-                    <span class="bp">self</span><span class="o">.</span><span class="n">computeCppChordlessCircuits</span><span class="p">(</span><span class="n">Odd</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span><span class="n">Debug</span><span class="o">=</span><span class="n">Debug</span><span class="p">)</span>
-            <span class="k">elif</span> <span class="n">Threading</span><span class="p">:</span>
+            <span class="c1"># if Cpp:</span>
+            <span class="c1">#     if Piping:</span>
+            <span class="c1">#         self.computeCppInOutPipingChordlessCircuits(Odd=True,Debug=Debug)</span>
+            <span class="c1">#     else:</span>
+            <span class="c1">#         self.computeCppChordlessCircuits(Odd=True,Debug=Debug)</span>
+            <span class="k">if</span> <span class="n">Threading</span><span class="p">:</span>
                 <span class="bp">self</span><span class="o">.</span><span class="n">computeChordlessCircuitsMP</span><span class="p">(</span><span class="n">Odd</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span><span class="n">Comments</span><span class="o">=</span><span class="n">Debug</span><span class="p">,</span>
                                 <span class="n">Threading</span><span class="o">=</span><span class="n">Threading</span><span class="p">,</span><span class="n">nbrOfCPUs</span><span class="o">=</span><span class="n">nbrOfCPUs</span><span class="p">)</span>
             <span class="k">else</span><span class="p">:</span>
@@ -14984,7 +14963,6 @@
 <span class="sd">    Parameters:</span>
 
 <span class="sd">        - digraph: Stored or memory resident digraph instance.</span>
-<span class="sd">        - Cpp: using a C++/Agrum version of the Digraph.computeChordlessCircuits() method.</span>
 <span class="sd">        - Piping: using OS pipes for data in- and output between Python and C++.</span>
 
 <span class="sd">    A chordless odd circuit is added if the cumulated credibility of the circuit supporting arcs is larger or</span>
@@ -14992,7 +14970,7 @@
 <span class="sd">    i.e. a link (*x*, *y*) with minimal difference between r(*x* S *y*) - r(*y* S *x*).</span>
 
 <span class="sd">    &quot;&quot;&quot;</span>
-    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">digraph</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span><span class="n">Cpp</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span><span class="n">Piping</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">digraph</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span><span class="n">Piping</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
                  <span class="n">Comments</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span><span class="n">Threading</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span><span class="n">nbrOfCPUs</span><span class="o">=</span><span class="mi">1</span><span class="p">):</span>
         <span class="kn">import</span> <span class="nn">random</span><span class="o">,</span><span class="nn">sys</span><span class="o">,</span><span class="nn">array</span><span class="o">,</span><span class="nn">copy</span>
         <span class="kn">from</span> <span class="nn">outrankingDigraphs</span> <span class="kn">import</span> <span class="n">OutrankingDigraph</span><span class="p">,</span> <span class="n">RandomOutrankingDigraph</span><span class="p">,</span> <span class="n">BipolarOutrankingDigraph</span>
@@ -15033,12 +15011,12 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">gamma</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">gammaSets</span><span class="p">()</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">notGamma</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">notGammaSets</span><span class="p">()</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">weakGamma</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">weakGammaSets</span><span class="p">()</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">closureChordlessOddCircuits</span><span class="p">(</span><span class="n">Cpp</span><span class="o">=</span><span class="n">Cpp</span><span class="p">,</span><span class="n">Piping</span><span class="o">=</span><span class="n">Piping</span><span class="p">,</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">closureChordlessOddCircuits</span><span class="p">(</span><span class="n">Piping</span><span class="o">=</span><span class="n">Piping</span><span class="p">,</span>
                 <span class="n">Comments</span><span class="o">=</span><span class="n">Comments</span><span class="p">,</span><span class="n">Threading</span><span class="o">=</span><span class="n">Threading</span><span class="p">,</span><span class="n">nbrOfCPUs</span><span class="o">=</span><span class="n">nbrOfCPUs</span><span class="p">)</span>
 
 <div class="viewcode-block" id="BreakAddCocsDigraph.closureChordlessOddCircuits">
 <a class="viewcode-back" href="../techDoc.html#digraphs.BreakAddCocsDigraph.closureChordlessOddCircuits">[docs]</a>
-    <span class="k">def</span> <span class="nf">closureChordlessOddCircuits</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">Cpp</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span><span class="n">Piping</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+    <span class="k">def</span> <span class="nf">closureChordlessOddCircuits</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">Piping</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
                 <span class="n">Comments</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span><span class="n">Debug</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span><span class="n">Threading</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span><span class="n">nbrOfCPUs</span><span class="o">=</span><span class="mi">1</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Closure of chordless odd circuits extraction.</span>
@@ -15054,12 +15032,12 @@
         <span class="k">while</span> <span class="n">newCircuits</span> <span class="o">!=</span> <span class="nb">set</span><span class="p">():</span>
             <span class="n">initialCircuits</span> <span class="o">=</span> <span class="nb">set</span><span class="p">([</span><span class="n">x</span> <span class="k">for</span> <span class="n">cl</span><span class="p">,</span><span class="n">x</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">circuitsList</span><span class="p">])</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">addCircuits</span><span class="p">(</span><span class="n">Comments</span><span class="o">=</span><span class="n">Comments</span><span class="p">)</span>
-            <span class="k">if</span> <span class="n">Cpp</span><span class="p">:</span>
-                <span class="k">if</span> <span class="n">Piping</span><span class="p">:</span>
-                    <span class="bp">self</span><span class="o">.</span><span class="n">computeCppInOutPipingChordlessCircuits</span><span class="p">(</span><span class="n">Odd</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span><span class="n">Debug</span><span class="o">=</span><span class="n">Debug</span><span class="p">)</span>
-                <span class="k">else</span><span class="p">:</span>
-                    <span class="bp">self</span><span class="o">.</span><span class="n">computeCppChordlessCircuits</span><span class="p">(</span><span class="n">Odd</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span><span class="n">Debug</span><span class="o">=</span><span class="n">Debug</span><span class="p">)</span>
-            <span class="k">elif</span> <span class="n">Threading</span><span class="p">:</span>
+            <span class="c1"># if Cpp:</span>
+            <span class="c1">#     if Piping:</span>
+            <span class="c1">#         self.computeCppInOutPipingChordlessCircuits(Odd=True,Debug=Debug)</span>
+            <span class="c1">#     else:</span>
+            <span class="c1">#         self.computeCppChordlessCircuits(Odd=True,Debug=Debug)</span>
+            <span class="k">if</span> <span class="n">Threading</span><span class="p">:</span>
                 <span class="bp">self</span><span class="o">.</span><span class="n">computeChordlessCircuitsMP</span><span class="p">(</span><span class="n">Odd</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span><span class="n">Comments</span><span class="o">=</span><span class="n">Debug</span><span class="p">,</span>
                                 <span class="n">Threading</span><span class="o">=</span><span class="n">Threading</span><span class="p">,</span><span class="n">nbrOfCPUs</span><span class="o">=</span><span class="n">nbrOfCPUs</span><span class="p">)</span>
             <span class="k">else</span><span class="p">:</span>
@@ -15249,14 +15227,13 @@
 <span class="sd">    Parameters:</span>
 
 <span class="sd">        - digraph: Stored or memory resident digraph instance.</span>
-<span class="sd">        - Cpp: using a C++/Agrum version of the Digraph.computeChordlessCircuits() method.</span>
 <span class="sd">        - Piping: using OS pipes for data in- and output between Python and C++.</span>
 
 <span class="sd">    Specialization of general Digraph class for instantiation</span>
 <span class="sd">    of chordless odd circuits augmented digraphs.</span>
 
 <span class="sd">    &quot;&quot;&quot;</span>
-    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">digraph</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span><span class="n">Cpp</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span><span class="n">Piping</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span><span class="n">Comments</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">digraph</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span><span class="n">Piping</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span><span class="n">Comments</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
         <span class="kn">import</span> <span class="nn">random</span><span class="o">,</span><span class="nn">sys</span><span class="o">,</span><span class="nn">array</span><span class="o">,</span><span class="nn">copy</span>
         <span class="kn">from</span> <span class="nn">outrankingDigraphs</span> <span class="kn">import</span> <span class="n">OutrankingDigraph</span><span class="p">,</span> <span class="n">RandomOutrankingDigraph</span><span class="p">,</span> <span class="n">BipolarOutrankingDigraph</span>
         <span class="c1">## if comment is None:</span>
@@ -15292,11 +15269,11 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">gamma</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">gammaSets</span><span class="p">()</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">notGamma</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">notGammaSets</span><span class="p">()</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">weakGamma</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">weakGammaSets</span><span class="p">()</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">closureChordlessOddCircuits</span><span class="p">(</span><span class="n">Cpp</span><span class="o">=</span><span class="n">Cpp</span><span class="p">,</span><span class="n">Piping</span><span class="o">=</span><span class="n">Piping</span><span class="p">,</span><span class="n">Comments</span><span class="o">=</span><span class="n">Comments</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">closureChordlessOddCircuits</span><span class="p">(</span><span class="n">Piping</span><span class="o">=</span><span class="n">Piping</span><span class="p">,</span><span class="n">Comments</span><span class="o">=</span><span class="n">Comments</span><span class="p">)</span>
 
 <div class="viewcode-block" id="CocaDigraph.closureChordlessOddCircuits">
 <a class="viewcode-back" href="../techDoc.html#digraphs.CocaDigraph.closureChordlessOddCircuits">[docs]</a>
-    <span class="k">def</span> <span class="nf">closureChordlessOddCircuits</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">Cpp</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span><span class="n">Piping</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span><span class="n">Comments</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">closureChordlessOddCircuits</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">Piping</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span><span class="n">Comments</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Closure of chordless odd circuits extraction.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
@@ -15304,13 +15281,13 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">circuitsList</span> <span class="o">=</span> <span class="p">[]</span>
         <span class="k">while</span> <span class="n">newCircuits</span> <span class="o">!=</span> <span class="nb">set</span><span class="p">():</span>
             <span class="n">initialCircuits</span> <span class="o">=</span> <span class="nb">set</span><span class="p">([</span><span class="n">x</span> <span class="k">for</span> <span class="n">cl</span><span class="p">,</span><span class="n">x</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">circuitsList</span><span class="p">])</span>
-            <span class="k">if</span> <span class="n">Cpp</span><span class="p">:</span>
-                <span class="k">if</span> <span class="n">Piping</span><span class="p">:</span>
-                    <span class="bp">self</span><span class="o">.</span><span class="n">computeCppInOutPipingChordlessCircuits</span><span class="p">(</span><span class="n">Odd</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span><span class="n">Debug</span><span class="o">=</span><span class="n">Comments</span><span class="p">)</span>
-                <span class="k">else</span><span class="p">:</span>
-                    <span class="bp">self</span><span class="o">.</span><span class="n">computeCppChordlessCircuits</span><span class="p">(</span><span class="n">Odd</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span><span class="n">Debug</span><span class="o">=</span><span class="n">Comments</span><span class="p">)</span>
-            <span class="k">else</span><span class="p">:</span>
-                <span class="bp">self</span><span class="o">.</span><span class="n">computeChordlessCircuits</span><span class="p">(</span><span class="n">Odd</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span><span class="n">Comments</span><span class="o">=</span><span class="n">Comments</span><span class="p">)</span>
+            <span class="c1"># if Cpp:</span>
+            <span class="c1">#     if Piping:</span>
+            <span class="c1">#         self.computeCppInOutPipingChordlessCircuits(Odd=True,Debug=Comments)</span>
+            <span class="c1">#     else:</span>
+            <span class="c1">#         self.computeCppChordlessCircuits(Odd=True,Debug=Comments)</span>
+            <span class="c1"># else:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">computeChordlessCircuits</span><span class="p">(</span><span class="n">Odd</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span><span class="n">Comments</span><span class="o">=</span><span class="n">Comments</span><span class="p">)</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">addCircuits</span><span class="p">(</span><span class="n">Comments</span><span class="o">=</span><span class="n">Comments</span><span class="p">)</span>
             <span class="n">currentCircuits</span> <span class="o">=</span> <span class="nb">set</span><span class="p">([</span><span class="n">x</span> <span class="k">for</span> <span class="n">cl</span><span class="p">,</span><span class="n">x</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">circuitsList</span><span class="p">])</span>
             <span class="k">if</span> <span class="n">Comments</span><span class="p">:</span>

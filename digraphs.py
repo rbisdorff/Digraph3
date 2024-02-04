@@ -658,7 +658,7 @@ class Digraph(object):
             counts['?'] = Decimal(str(counts['?']))/(nd*(nd-1))
         return counts
 
-    def computeRankingByLastChoosing(self,CoDual=False,CppAgrum=False,Debug=False):
+    def computeRankingByLastChoosing(self,CoDual=False,Debug=False):
         """
         Computes a weak preordring of the self.actions by iterating
         worst choice elagations.
@@ -737,7 +737,7 @@ class Digraph(object):
         self.rankingByLastChoosing = {'CoDual': CoDual, 'result': rankingByLastChoosing}
         return {'CoDual': CoDual, 'result': rankingByLastChoosing}
 
-    def _computeRankingByLastChoosing(self,CoDual=False,CppAgrum=False,Debug=False):
+    def _computeRankingByLastChoosing(self,CoDual=False,Debug=False):
         """
         Computes a weak preordring of the self.actions by iterating
         worst choice elagations.
@@ -764,7 +764,7 @@ class Digraph(object):
                 currGcd = CoDualDigraph(currG)
             else:
                 currGcd = deepcopy(currG)
-            currGcd.computeRubisChoice(CppAgrum=CppAgrum,Comments=False)
+            currGcd.computeRubisChoice(Comments=False)
             #currGcd.computeGoodChoices(Comments=Debug)
 
             #currGcd.computeBadChoices(Comments=Debug)
@@ -825,7 +825,7 @@ class Digraph(object):
         self.rankingByLastChoosing = {'CoDual': CoDual, 'result': rankingByLastChoosing}
         return {'CoDual': CoDual, 'result': rankingByLastChoosing}     
 
-    def computeRankingByChoosing(self,actionsSubset=None,CppAgrum=False,Debug=False,CoDual=False):
+    def computeRankingByChoosing(self,actionsSubset=None,Debug=False,CoDual=False):
         """
         Computes a weak preordring of the self.actions by iterating
         jointly first and last choice elagations.
@@ -855,7 +855,7 @@ class Digraph(object):
             i += 1
             currG.actions = remainingActions
             currGcd = deepcopy(currG)
-            currGcd.computeRubisChoice(CppAgrum=CppAgrum,Comments=Debug)
+            currGcd.computeRubisChoice(Comments=Debug)
             #currGcd.computeGoodChoices(Comments=Debug)
             bestChoiceCandidates = []
             j = 0
@@ -994,7 +994,7 @@ class Digraph(object):
         self.rankingByChoosing = {'CoDual': CoDual, 'result': rankingByChoosing}
         return {'CoDual': CoDual, 'result': rankingByChoosing}
 
-    def computeRankingByBestChoosing(self,CoDual=False,CppAgrum=False,Debug=False,):
+    def computeRankingByBestChoosing(self,CoDual=False,Debug=False,):
         """
         Computes a weak preordering of the self.actions by recursive
         best choice elagations.
@@ -1025,7 +1025,7 @@ class Digraph(object):
 ##                currGcd = CoDualDigraph(currG)
 ##            else:
             currGcd = deepcopy(currG)
-            currGcd.computeBestChoiceRecommendation(CoDual=CoDual,Cpp=CppAgrum,Comments=Debug)
+            currGcd.computeBestChoiceRecommendation(CoDual=CoDual,Comments=Debug)
             k1 = currGcd.flatChoice(currGcd.bestChoice)
             if Debug:
                 print('flatening the choice:',currGcd.bestChoice,k1)
@@ -1077,7 +1077,7 @@ class Digraph(object):
         return {'CoDual': CoDual, 'result': rankingByBestChoosing}
 
 
-    def _computeRankingByBestChoosing(self,CoDual=False,CppAgrum=False,Debug=False,):
+    def _computeRankingByBestChoosing(self,CoDual=False,Debug=False,):
         """
         Computes a weak preordering of the self.actions by recursive
         best choice elagations.
@@ -1106,7 +1106,7 @@ class Digraph(object):
                 currGcd = CoDualDigraph(currG)
             else:
                 currGcd = copy(currG)
-            currGcd.computeRubisChoice(CppAgrum=CppAgrum,Comments=Debug)
+            currGcd.computeRubisChoice(Comments=Debug)
             #currGcd.computeGoodChoices(Comments=Debug)
             bestChoiceCandidates = []
             j = 0
@@ -7588,202 +7588,202 @@ class Digraph(object):
                         break
         return Detected
 
-    def detectCppChordlessCircuits(self,Debug=False):
-        """
-        python wrapper for the C++/Agrum based chordless circuits detection
-        exchange arguments with external temporary files.
+    # def detectCppChordlessCircuits(self,Debug=False):
+    #     """
+    #     python wrapper for the C++/Agrum based chordless circuits detection
+    #     exchange arguments with external temporary files.
         
-        Returns a boolean value
+    #     Returns a boolean value
         
-        .. warning:: Deprecated !!! The pure python version is more efficient
-        """
-        import os
-        from tempfile import mkstemp
-        fd, tempFileName = mkstemp()
-        fo = os.fdopen(fd,'w')
-        Med = self.valuationdomain['med']
-        actions = [x for x in self.actions]
-        relation = self.relation
-        for i,x in enumerate(actions):
-            for j,y in enumerate(actions):
-                if i != j:
-                    if relation[x][y] > Med:
-                        fo.write('%d %d\n' % (i+1,j+1))
-        fo.close()
+    #     .. warning:: Deprecated !!! The pure python version is more efficient
+    #     """
+    #     import os
+    #     from tempfile import mkstemp
+    #     fd, tempFileName = mkstemp()
+    #     fo = os.fdopen(fd,'w')
+    #     Med = self.valuationdomain['med']
+    #     actions = [x for x in self.actions]
+    #     relation = self.relation
+    #     for i,x in enumerate(actions):
+    #         for j,y in enumerate(actions):
+    #             if i != j:
+    #                 if relation[x][y] > Med:
+    #                     fo.write('%d %d\n' % (i+1,j+1))
+    #     fo.close()
 
-        resultFile = tempFileName+'.py'
-        if os.path.exists('/usr/bin/detectChordlessCircuits'):
-            os.system('/usr/bin/detectChordlessCircuits ' + tempFileName + ' ' + resultFile)
-        elif os.path.exists('/usr/local/bin/detectChordlessCircuits'):
-            os.system('/usr/local/bin/detectChordlessCircuits ' + tempFileName + ' ' + resultFile)
-        elif os.path.exists('/opt/local/bin/detectChordlessCircuits'):
-            os.system('/opt/local/bin/detectChordlessCircuits ' + tempFileName + ' ' + resultFile)
-        elif os.path.exists('/home/users/rbisdorff/bin/detectChordlessCircuits'):
-            os.system('/home/users/rbisdorff/bin/detectChordlessCircuits ' + tempFileName + ' ' + resultFile)
-        else:
-            print('Error: detectChordlessCircuits binary could not be found !!!')
-        argDict = {}
-        fi = open(resultFile,'r')
-        fileText = fi.read()
-        fi.close()
-        exec(compile(fileText, str(resultFile), 'exec'),argDict)
-        circuits = argDict['circuitsList']
-        if circuits == []:
-            Detected = False
-        else:
-            Detected = True
-        if Debug:
-            print(resultFile)
-            print(argDict['circuitsList'])
-            if Detected:
-                print('A chordless circuit has been detected !')
-            else:
-                print('No chordless circuit has been detected !')
-            print('certificate: ', circuits)
+    #     resultFile = tempFileName+'.py'
+    #     if os.path.exists('/usr/bin/detectChordlessCircuits'):
+    #         os.system('/usr/bin/detectChordlessCircuits ' + tempFileName + ' ' + resultFile)
+    #     elif os.path.exists('/usr/local/bin/detectChordlessCircuits'):
+    #         os.system('/usr/local/bin/detectChordlessCircuits ' + tempFileName + ' ' + resultFile)
+    #     elif os.path.exists('/opt/local/bin/detectChordlessCircuits'):
+    #         os.system('/opt/local/bin/detectChordlessCircuits ' + tempFileName + ' ' + resultFile)
+    #     elif os.path.exists('/home/users/rbisdorff/bin/detectChordlessCircuits'):
+    #         os.system('/home/users/rbisdorff/bin/detectChordlessCircuits ' + tempFileName + ' ' + resultFile)
+    #     else:
+    #         print('Error: detectChordlessCircuits binary could not be found !!!')
+    #     argDict = {}
+    #     fi = open(resultFile,'r')
+    #     fileText = fi.read()
+    #     fi.close()
+    #     exec(compile(fileText, str(resultFile), 'exec'),argDict)
+    #     circuits = argDict['circuitsList']
+    #     if circuits == []:
+    #         Detected = False
+    #     else:
+    #         Detected = True
+    #     if Debug:
+    #         print(resultFile)
+    #         print(argDict['circuitsList'])
+    #         if Detected:
+    #             print('A chordless circuit has been detected !')
+    #         else:
+    #             print('No chordless circuit has been detected !')
+    #         print('certificate: ', circuits)
 
-        return Detected
+    #     return Detected
 
-    def computeCppInOutPipingChordlessCircuits(self,Odd=False,Debug=False):
-        """
-        python wrapper for the C++/Agrum based chordless circuits enumeration
-        exchange arguments with external temporary files
+    # def computeCppInOutPipingChordlessCircuits(self,Odd=False,Debug=False):
+    #     """
+    #     python wrapper for the C++/Agrum based chordless circuits enumeration
+    #     exchange arguments with external temporary files
 
-        Result in *self.circuitsList*.
+    #     Result in *self.circuitsList*.
 
-        .. warning:: Deprecated !!! The pure python version is more efficient
-        """
-        import os
-        from subprocess import Popen,PIPE
+    #     .. warning:: Deprecated !!! The pure python version is more efficient
+    #     """
+    #     import os
+    #     from subprocess import Popen,PIPE
 
-        if os.path.exists('/usr/bin/enumChordlessCircuitsInOutPiping'):
-            p = Popen(args=['/usr/bin/enumChordlessCircuitsInOutPiping'],stdin=PIPE,stdout=PIPE)
-        elif os.path.exists('/usr/local/bin/enumChordlessCircuitsInOutPiping'):
-            p = Popen(args=['/usr/local/bin/enumChordlessCircuitsInOutPiping'],stdin=PIPE,stdout=PIPE)
-        elif os.path.exists('/opt/local/bin/enumChordlessCircuitsInOutPiping'):
-            p = Popen(args=['/opt/local/bin/enumChordlessCircuitsInOutPiping'],stdin=PIPE,stdout=PIPE)
-        elif  os.path.exists('/home/users/rbisdorff/bin/enumChordlessCircuitsInOutPiping'):
-            p = Popen(args=['/home/users/rbisdorff/bin/enumChordlessCircuitsInOutPiping'],stdin=PIPE,stdout=PIPE)
-        else:
-            print('Error: executable enumChordlessCircuitsInOutPiping not found !!!')
-        Med = self.valuationdomain['med']
-        actions = [x for x in self.actions]
-        relation = self.relation
-        inputString = ''
-        for i,x in enumerate(actions):
-            for j,y in enumerate(actions):
-                if i != j:
-                    if relation[x][y] > Med:
-                        inputString += '%d %d \n' % (i+1,j+1)
-        circuits = eval(p.communicate(input=inputString.encode('utf-8'))[0])
-        if Debug:
-            print(circuits)
-        result = []
-        history = set()
-        for x in circuits:
-            # !! a circuit has a length n + 1 !!
-            if Odd:
-                r = len(x) % 2
-                ## if Debug:
-                ##     print x, r
-                if r != 1:
-                    oddCircuit = []
-                    for ino in x[:-1]:
-                        oddCircuit.append(actions[ino-1])
-                    circuitActions = [y for y in flatten(oddCircuit)]
-                    circuitSet = frozenset(circuitActions)
-                    if circuitSet not in history:
-                        result.append( ( circuitActions, circuitSet ) )
-                        history.add(circuitSet)
-                    #result.append( ( oddCircuit, frozenset(oddCircuit) ) )
-            else:
-                allCircuit = []
-                for ino in x[:-1]:
-                    allCircuit.append(actions[ino-1])
-                circuitActions = [y for y in flatten(allCircuit)]
-                circuitSet = frozenset(circuitActions)
-                if circuitSet not in history:
-                    result.append( ( circuitActions, circuitSet ) )
-                    history.add(circuitSet)
-                #result.append( ( allCircuit, frozenset(allCircuit) ) )
-        self.circuitsList = result
-        return result
+    #     if os.path.exists('/usr/bin/enumChordlessCircuitsInOutPiping'):
+    #         p = Popen(args=['/usr/bin/enumChordlessCircuitsInOutPiping'],stdin=PIPE,stdout=PIPE)
+    #     elif os.path.exists('/usr/local/bin/enumChordlessCircuitsInOutPiping'):
+    #         p = Popen(args=['/usr/local/bin/enumChordlessCircuitsInOutPiping'],stdin=PIPE,stdout=PIPE)
+    #     elif os.path.exists('/opt/local/bin/enumChordlessCircuitsInOutPiping'):
+    #         p = Popen(args=['/opt/local/bin/enumChordlessCircuitsInOutPiping'],stdin=PIPE,stdout=PIPE)
+    #     elif  os.path.exists('/home/users/rbisdorff/bin/enumChordlessCircuitsInOutPiping'):
+    #         p = Popen(args=['/home/users/rbisdorff/bin/enumChordlessCircuitsInOutPiping'],stdin=PIPE,stdout=PIPE)
+    #     else:
+    #         print('Error: executable enumChordlessCircuitsInOutPiping not found !!!')
+    #     Med = self.valuationdomain['med']
+    #     actions = [x for x in self.actions]
+    #     relation = self.relation
+    #     inputString = ''
+    #     for i,x in enumerate(actions):
+    #         for j,y in enumerate(actions):
+    #             if i != j:
+    #                 if relation[x][y] > Med:
+    #                     inputString += '%d %d \n' % (i+1,j+1)
+    #     circuits = eval(p.communicate(input=inputString.encode('utf-8'))[0])
+    #     if Debug:
+    #         print(circuits)
+    #     result = []
+    #     history = set()
+    #     for x in circuits:
+    #         # !! a circuit has a length n + 1 !!
+    #         if Odd:
+    #             r = len(x) % 2
+    #             ## if Debug:
+    #             ##     print x, r
+    #             if r != 1:
+    #                 oddCircuit = []
+    #                 for ino in x[:-1]:
+    #                     oddCircuit.append(actions[ino-1])
+    #                 circuitActions = [y for y in flatten(oddCircuit)]
+    #                 circuitSet = frozenset(circuitActions)
+    #                 if circuitSet not in history:
+    #                     result.append( ( circuitActions, circuitSet ) )
+    #                     history.add(circuitSet)
+    #                 #result.append( ( oddCircuit, frozenset(oddCircuit) ) )
+    #         else:
+    #             allCircuit = []
+    #             for ino in x[:-1]:
+    #                 allCircuit.append(actions[ino-1])
+    #             circuitActions = [y for y in flatten(allCircuit)]
+    #             circuitSet = frozenset(circuitActions)
+    #             if circuitSet not in history:
+    #                 result.append( ( circuitActions, circuitSet ) )
+    #                 history.add(circuitSet)
+    #             #result.append( ( allCircuit, frozenset(allCircuit) ) )
+    #     self.circuitsList = result
+    #     return result
 
-    def computeCppChordlessCircuits(self,Odd=False,Debug=False):
-        """
-        python wrapper for the C++/Agrum based chordless circuits enumeration
-        exchange arguments with external temporary files
+    # def computeCppChordlessCircuits(self,Odd=False,Debug=False):
+    #     """
+    #     python wrapper for the C++/Agrum based chordless circuits enumeration
+    #     exchange arguments with external temporary files
 
-        Result in *self.circuitsList*.
+    #     Result in *self.circuitsList*.
 
-        .. warning:: Deprecated !!! The pure python version is more efficient
-        """
-        import os
-        from tempfile import mkstemp
-        from digraphsTools import flatten
+    #     .. warning:: Deprecated !!! The pure python version is more efficient
+    #     """
+    #     import os
+    #     from tempfile import mkstemp
+    #     from digraphsTools import flatten
         
-        fd, tempFileName = mkstemp()
-        fo = os.fdopen(fd,'w+b')
-        Med = self.valuationdomain['med']
-        actions = [x for x in self.actions]
-        relation = self.relation
-        inputString = ''
-        for i,x in enumerate(actions):
-            for j,y in enumerate(actions):
-                if i != j:
-                    if relation[x][y] > Med:
-                        inputString += '%d %d \n' % (i+1,j+1)
-        fo.write(inputString.encode('utf-8'))
-        fo.close()
-        ## if Debug:
-        ##     print 'see file: ', tempFileName
-        resultFile = tempFileName+'.py'
-        if os.path.exists('/usr/bin/enumChordlessCircuits'):
-            os.system('/usr/bin/enumChordlessCircuits ' + tempFileName + ' ' + resultFile)
-        elif os.path.exists('/usr/local/bin/enumChordlessCircuits'):
-            os.system('/usr/local/bin/enumChordlessCircuits ' + tempFileName + ' ' + resultFile)
-        elif os.path.exists('/opt/local/bin/enumChordlessCircuits'):
-            os.system('/opt/local/bin/enumChordlessCircuits ' + tempFileName + ' ' + resultFile)
-        elif os.path.exists('/home/users/rbisdorff/bin/enumChordlessCircuits'):
-            os.system('/home/users/rbisdorff/bin/enumChordlessCircuits ' + tempFileName + ' ' + resultFile)
-        else:
-            print('Error: enumChordlessCircuits binary not found !!!')
-        argDict = {}
-        fi = open(resultFile,'r')
-        fileText = fi.read()
-        fi.close
-        exec(compile(fileText, str(resultFile), 'exec'),argDict)
-        circuits = argDict['circuitsList']
-        if Debug:
-            print(resultFile)
-            print(argDict['circuitsList'])
-        result = []
-        history = set()
-        for x in circuits:
-            # !! a circuit has a length n + 1 !!
-            if Odd:
-                r = len(x) % 2
-                ## if Debug:
-                ##     print x, r
-                if r != 1:
-                    oddCircuit = []
-                    for ino in x[:-1]:
-                        oddCircuit.append(actions[ino-1])
-                    circuitActions = [y for y in flatten(oddCircuit)]
-                    circuitSet = frozenset(circuitActions)
-                    if circuitSet not in history:
-                        result.append( ( circuitActions, circuitSet ) )
-                        history.add(circuitSet)
-            else:
-                allCircuit = []
-                for ino in x[:-1]:
-                    allCircuit.append(actions[ino-1])
-                circuitActions = [y for y in flatten(allCircuit)]
-                circuitSet = frozenset(circuitActions)
-                if circuitSet not in history:
-                    result.append( ( circuitActions, circuitSet ) )
-                    history.add(circuitSet)
-        self.circuitsList = result
-        return result
+    #     fd, tempFileName = mkstemp()
+    #     fo = os.fdopen(fd,'w+b')
+    #     Med = self.valuationdomain['med']
+    #     actions = [x for x in self.actions]
+    #     relation = self.relation
+    #     inputString = ''
+    #     for i,x in enumerate(actions):
+    #         for j,y in enumerate(actions):
+    #             if i != j:
+    #                 if relation[x][y] > Med:
+    #                     inputString += '%d %d \n' % (i+1,j+1)
+    #     fo.write(inputString.encode('utf-8'))
+    #     fo.close()
+    #     ## if Debug:
+    #     ##     print 'see file: ', tempFileName
+    #     resultFile = tempFileName+'.py'
+    #     if os.path.exists('/usr/bin/enumChordlessCircuits'):
+    #         os.system('/usr/bin/enumChordlessCircuits ' + tempFileName + ' ' + resultFile)
+    #     elif os.path.exists('/usr/local/bin/enumChordlessCircuits'):
+    #         os.system('/usr/local/bin/enumChordlessCircuits ' + tempFileName + ' ' + resultFile)
+    #     elif os.path.exists('/opt/local/bin/enumChordlessCircuits'):
+    #         os.system('/opt/local/bin/enumChordlessCircuits ' + tempFileName + ' ' + resultFile)
+    #     elif os.path.exists('/home/users/rbisdorff/bin/enumChordlessCircuits'):
+    #         os.system('/home/users/rbisdorff/bin/enumChordlessCircuits ' + tempFileName + ' ' + resultFile)
+    #     else:
+    #         print('Error: enumChordlessCircuits binary not found !!!')
+    #     argDict = {}
+    #     fi = open(resultFile,'r')
+    #     fileText = fi.read()
+    #     fi.close
+    #     exec(compile(fileText, str(resultFile), 'exec'),argDict)
+    #     circuits = argDict['circuitsList']
+    #     if Debug:
+    #         print(resultFile)
+    #         print(argDict['circuitsList'])
+    #     result = []
+    #     history = set()
+    #     for x in circuits:
+    #         # !! a circuit has a length n + 1 !!
+    #         if Odd:
+    #             r = len(x) % 2
+    #             ## if Debug:
+    #             ##     print x, r
+    #             if r != 1:
+    #                 oddCircuit = []
+    #                 for ino in x[:-1]:
+    #                     oddCircuit.append(actions[ino-1])
+    #                 circuitActions = [y for y in flatten(oddCircuit)]
+    #                 circuitSet = frozenset(circuitActions)
+    #                 if circuitSet not in history:
+    #                     result.append( ( circuitActions, circuitSet ) )
+    #                     history.add(circuitSet)
+    #         else:
+    #             allCircuit = []
+    #             for ino in x[:-1]:
+    #                 allCircuit.append(actions[ino-1])
+    #             circuitActions = [y for y in flatten(allCircuit)]
+    #             circuitSet = frozenset(circuitActions)
+    #             if circuitSet not in history:
+    #                 result.append( ( circuitActions, circuitSet ) )
+    #                 history.add(circuitSet)
+    #     self.circuitsList = result
+    #     return result
 
     #@timefn
     def computeChordlessCircuits(self,Odd=False,Comments=False,Debug=False):
@@ -8282,8 +8282,7 @@ class Digraph(object):
                                           CoDual=True,
                                           Debug=False,
                                           _OldCoca=False,
-                                          BrokenCocs=True,
-                                          Cpp=False):
+                                          BrokenCocs=True):
         """
         Sets self.bestChoice, self.bestChoiceData, self.worstChoice and self.worstChoiceData
         with the showBestChoiceRecommendation method.
@@ -8301,8 +8300,7 @@ class Digraph(object):
                                           CoDual=CoDual,
                                           Debug=Debug,
                                           _OldCoca=_OldCoca,
-                                          BrokenCocs=BrokenCocs,
-                                          Cpp=Cpp)
+                                          BrokenCocs=BrokenCocs)
 
     def showFirstChoiceRecommendation(self,Verbose=False,
                                           Comments=True,
@@ -8311,7 +8309,7 @@ class Digraph(object):
                                           Debug=False,
                                           _OldCoca=False,
                                           BrokenCocs=True,
-                                          Cpp=False):
+                                          ):
         """
         Shows the RuBis first choice recommendation.
 
@@ -8375,13 +8373,13 @@ class Digraph(object):
         else:
             g = cpself
         if _OldCoca:
-            _selfwcoc = CocaDigraph(g,Cpp=Cpp)
+            _selfwcoc = CocaDigraph(g)
             b1 = 0
         elif BrokenCocs:
-            _selfwcoc = BrokenCocsDigraph(g,Cpp=Cpp)
+            _selfwcoc = BrokenCocsDigraph(g)
             b1 = _selfwcoc.breakings
         else:
-            _selfwcoc = BreakAddCocsDigraph(g,Cpp=Cpp)
+            _selfwcoc = BreakAddCocsDigraph(g)
             b1 =  _selfwcoc.breakings
         n1 = _selfwcoc.order
         nc = n1 - n0
@@ -8516,7 +8514,7 @@ class Digraph(object):
                                           Debug=False,
                                           _OldCoca=False,
                                           BrokenCocs=True,
-                                          Cpp=False):
+                                          ):
         """
         Shows the RuBis best choice recommendation.
 
@@ -8580,13 +8578,13 @@ class Digraph(object):
         else:
             g = cpself
         if _OldCoca:
-            _selfwcoc = CocaDigraph(g,Cpp=Cpp)
+            _selfwcoc = CocaDigraph(g)
             b1 = 0
         elif BrokenCocs:
-            _selfwcoc = BrokenCocsDigraph(g,Cpp=Cpp)
+            _selfwcoc = BrokenCocsDigraph(g)
             b1 = _selfwcoc.breakings
         else:
-            _selfwcoc = BreakAddCocsDigraph(g,Cpp=Cpp)
+            _selfwcoc = BreakAddCocsDigraph(g)
             b1 =  _selfwcoc.breakings
         n1 = _selfwcoc.order
         nc = n1 - n0
@@ -8728,7 +8726,7 @@ class Digraph(object):
                                       Debug=False,
                                       _OldCoca=False,
                                       BrokenCocs=True,
-                                      Cpp=False,
+                                      #Cpp=False,
                                       htmlFileName=None,
                                      ):
 
@@ -8746,8 +8744,7 @@ class Digraph(object):
             CoDual=CoDual,
             Debug=Debug,
             _OldCoca=_OldCoca,
-            BrokenCocs=BrokenCocs,
-            Cpp=Cpp))
+            BrokenCocs=BrokenCocs))
         fo.close()
         url = 'file://'+fileName
         webbrowser.open(url,new=2)
@@ -8759,7 +8756,7 @@ class Digraph(object):
                                           Debug=False,
                                           _OldCoca=False,
                                           BrokenCocs=True,
-                                          Cpp=False):
+                                          ):
         """
         Renders the RuBis best choice recommendation in a browser window.
 
@@ -8810,14 +8807,14 @@ class Digraph(object):
         else:
             g = cpself
         if _OldCoca:
-            _selfwcoc = CocaDigraph(g,Cpp=Cpp)
+            _selfwcoc = CocaDigraph(g)
             b1 = 0
         elif BrokenCocs:
             #print('passed here!')
-            _selfwcoc = BrokenCocsDigraph(g,Cpp=Cpp)
+            _selfwcoc = BrokenCocsDigraph(g)
             b1 = _selfwcoc.breakings
         else:
-            _selfwcoc = BreakAddCocsDigraph(g,Cpp=Cpp)
+            _selfwcoc = BreakAddCocsDigraph(g)
             b1 =  _selfwcoc.breakings
         n1 = _selfwcoc.order
         nc = n1 - n0
@@ -8975,22 +8972,19 @@ class Digraph(object):
 ##        self.notGamma = self.notGammaSets()
 
 
-    def computeRubyChoice(self,CppAgrum=False,Comments=False,_OldCoca=False):
+    def computeRubyChoice(self,Comments=False,_OldCoca=False):
         """
         dummy for computeRubisChoice()
         old versions compatibility.
         """
-        self.computeRubisChoice(CppAgrum=CppAgrum,Comments=Comments,_OldCoca=_OldCoca)
+        self.computeRubisChoice(Comments=Comments,_OldCoca=_OldCoca)
 
-    def computeRubisChoice(self,CppAgrum=False,
+    def computeRubisChoice(self,
                            Comments=False,_OldCoca=False,BrokenCocs=True,
                            Threading=False,nbrOfCPUs=1):
         """
         Renders self.strictGoodChoices, self.nullChoices
         self.strictBadChoices, self.nonRobustChoices.
-
-        CppgArum = False (default | true : use C++/Agrum digraph library
-        for computing chordless circuits in self.
 
         .. warning::
             Changes in site the outranking digraph by
@@ -9013,14 +9007,14 @@ class Digraph(object):
         if Comments:
             print('*--- computing the COCA digraph --*')
         if _OldCoca:
-            _selfwcoc = CocaDigraph(self,Cpp=CppAgrum,Comments=Comments)
+            _selfwcoc = CocaDigraph(self,Comments=Comments)
             self.breakings = 0
         elif BrokenCocs:
-            _selfwcoc = BrokenCocsDigraph(self,Cpp=CppAgrum,Comments=Comments,
+            _selfwcoc = BrokenCocsDigraph(self,Comments=Comments,
                                     Threading=Threading,nbrOfCPUs=nbrOfCPUs)            
             self.breakings = _selfwcoc.breakings
         else:
-            _selfwcoc = BreakAddCocsDigraph(self,Cpp=CppAgrum,Comments=Comments,
+            _selfwcoc = BreakAddCocsDigraph(self,Comments=Comments,
                                     Threading=Threading,nbrOfCPUs=nbrOfCPUs)
             self.breakings = _selfwcoc.breakings
         if Comments:
@@ -9078,13 +9072,10 @@ class Digraph(object):
         self.gamma = self.gammaSets()
         self.notGamma = self.notGammaSets()
 
-    def _computeRubisChoice(self,CppAgrum=False,Comments=False,_OldCoca=False):
+    def _computeRubisChoice(self,Comments=False,_OldCoca=False):
         """
         Renders self.strictGoodChoices, self.nullChoices
         self.strictBadChoices, self.nonRobustChoices.
-
-        CppgArum = False (default | true : use C++/Agrum digraph library
-        for computing chordless circuits in self.
 
         .. warning::
             Changes in site the outranking digraph by
@@ -9098,7 +9089,7 @@ class Digraph(object):
 
         n0 = self.order
         t0 = time.time()
-        _selfwcoc = CocaDigraph(self,Cpp=CppAgrum,Comments=Comments)
+        _selfwcoc = CocaDigraph(self,Comments=Comments)
         #b1 = _selfwcoc.brakings
         t1 = time.time()
         if Comments:
@@ -13678,11 +13669,10 @@ class _CoceDigraph(Digraph):
     Parameters:
 
         - digraph: Stored or memory resident digraph instance.
-        - Cpp: using a C++/Agrum version of the Digraph.computeChordlessCircuits() method.
         - Piping: using OS pipes for data in- and output between Python and C++.
 
     """
-    def __init__(self,digraph=None,Cpp=False,Piping=False,Comments=False,Debug=False):
+    def __init__(self,digraph=None,Piping=False,Comments=False,Debug=False):
         import random,sys,array
         from copy import deepcopy
         from outrankingDigraphs import OutrankingDigraph, RandomOutrankingDigraph, BipolarOutrankingDigraph
@@ -13777,14 +13767,13 @@ class BrokenCocsDigraph(Digraph):
     Parameters:
 
         - digraph: stored or memory resident digraph instance.
-        - Cpp: using a C++/Agrum version of the Digraph.computeChordlessCircuits() method.
         - Piping: using OS pipes for data in- and output between Python and C++.
 
     All chordless odd circuits are broken at the weakest asymmetric link,
     i.e. a link :math:`(x, y)` with minimal difference between :math:`r(x S y)` and :math:`r(y S x)`.
 
     """
-    def __init__(self,digraph=None,Cpp=False,Piping=False,
+    def __init__(self,digraph=None,Piping=False,
                  Comments=False,Threading=False,nbrOfCPUs=1):
         import random,sys,array,copy
         from outrankingDigraphs import OutrankingDigraph,\
@@ -13821,10 +13810,10 @@ class BrokenCocsDigraph(Digraph):
         self.gamma = self.gammaSets()
         self.notGamma = self.notGammaSets()
         self.weakGamma = self.weakGammaSets()
-        self.breakChordlessOddCircuits(Cpp=Cpp,Piping=Piping,
+        self.breakChordlessOddCircuits(Piping=Piping,
             Comments=Comments,Threading=Threading,nbrOfCPUs=nbrOfCPUs)
 
-    def breakChordlessOddCircuits(self,Cpp=False,Piping=False,
+    def breakChordlessOddCircuits(self,Piping=False,
                                   Comments=True,Debug=False,
                                   Threading=False,nbrOfCPUs=1):
         """
@@ -13844,13 +13833,13 @@ class BrokenCocsDigraph(Digraph):
             i += 1
             initialCircuits = set([x for cl,x in self.circuitsList])
             self.breakCircuits(Comments=Comments)
-            if Cpp:
-                if Piping:
-                    self.computeCppInOutPipingChordlessCircuits(Odd=True,
-                                                                Debug=Debug)
-                else:
-                    self.computeCppChordlessCircuits(Odd=True,Debug=Debug)
-            elif Threading:
+            # if Cpp:
+            #     if Piping:
+            #         self.computeCppInOutPipingChordlessCircuits(Odd=True,
+            #                                                     Debug=Debug)
+            #     else:
+            #         self.computeCppChordlessCircuits(Odd=True,Debug=Debug)
+            if Threading:
                 self.computeChordlessCircuitsMP(Odd=True,Comments=Debug,
                                     Threading=Threading,nbrOfCPUs=nbrOfCPUs)
             else:
@@ -13931,14 +13920,13 @@ class BrokenChordlessCircuitsDigraph(Digraph):
     Parameters:
 
         - digraph: stored or memory resident digraph instance.
-        - Cpp: using a C++/Agrum version of the Digraph.computeChordlessCircuits() method.
         - Piping: using OS pipes for data in- and output between Python and C++.
 
     All chordless odd circuits are broken at the weakest asymmetric link,
     i.e. a link :math:`(x, y)` with minimal difference between :math:`r(x S y)` and :math:`r(y S x)`.
 
     """
-    def __init__(self,digraph=None,Cpp=False,Piping=False,
+    def __init__(self,digraph=None,Piping=False,
                  Comments=False,Threading=False,nbrOfCPUs=1):
         import random,sys,array,copy
         from outrankingDigraphs import OutrankingDigraph,\
@@ -13977,10 +13965,10 @@ class BrokenChordlessCircuitsDigraph(Digraph):
         self.gamma = self.gammaSets()
         self.notGamma = self.notGammaSets()
         self.weakGamma = self.weakGammaSets()
-        self.breakChordlessOddCircuits(Cpp=Cpp,Piping=Piping,
+        self.breakChordlessOddCircuits(Piping=Piping,
                 Comments=Comments,Threading=Threading,nbrOfCPUs=nbrOfCPUs)
 
-    def breakChordlessOddCircuits(self,Cpp=False,Piping=False,
+    def breakChordlessOddCircuits(self,Piping=False,
                 Comments=True,Debug=False,Threading=False,nbrOfCPUs=1):
         """
         Breaking of chordless odd circuits extraction.
@@ -13999,12 +13987,12 @@ class BrokenChordlessCircuitsDigraph(Digraph):
             i += 1
             initialCircuits = set([x for cl,x in self.circuitsList])
             self.breakCircuits(Comments=Comments)
-            if Cpp:
-                if Piping:
-                    self.computeCppInOutPipingChordlessCircuits(Odd=True,Debug=Debug)
-                else:
-                    self.computeCppChordlessCircuits(Odd=True,Debug=Debug)
-            elif Threading:
+            # if Cpp:
+            #     if Piping:
+            #         self.computeCppInOutPipingChordlessCircuits(Odd=True,Debug=Debug)
+            #     else:
+            #         self.computeCppChordlessCircuits(Odd=True,Debug=Debug)
+            if Threading:
                 self.computeChordlessCircuitsMP(Odd=True,Comments=Debug,
                                 Threading=Threading,nbrOfCPUs=nbrOfCPUs)
             else:
@@ -14086,7 +14074,6 @@ class BreakAddCocsDigraph(Digraph):
     Parameters:
 
         - digraph: Stored or memory resident digraph instance.
-        - Cpp: using a C++/Agrum version of the Digraph.computeChordlessCircuits() method.
         - Piping: using OS pipes for data in- and output between Python and C++.
 
     A chordless odd circuit is added if the cumulated credibility of the circuit supporting arcs is larger or
@@ -14094,7 +14081,7 @@ class BreakAddCocsDigraph(Digraph):
     i.e. a link (*x*, *y*) with minimal difference between r(*x* S *y*) - r(*y* S *x*).
 
     """
-    def __init__(self,digraph=None,Cpp=False,Piping=False,
+    def __init__(self,digraph=None,Piping=False,
                  Comments=False,Threading=False,nbrOfCPUs=1):
         import random,sys,array,copy
         from outrankingDigraphs import OutrankingDigraph, RandomOutrankingDigraph, BipolarOutrankingDigraph
@@ -14135,10 +14122,10 @@ class BreakAddCocsDigraph(Digraph):
         self.gamma = self.gammaSets()
         self.notGamma = self.notGammaSets()
         self.weakGamma = self.weakGammaSets()
-        self.closureChordlessOddCircuits(Cpp=Cpp,Piping=Piping,
+        self.closureChordlessOddCircuits(Piping=Piping,
                 Comments=Comments,Threading=Threading,nbrOfCPUs=nbrOfCPUs)
 
-    def closureChordlessOddCircuits(self,Cpp=False,Piping=False,
+    def closureChordlessOddCircuits(self,Piping=False,
                 Comments=True,Debug=False,Threading=False,nbrOfCPUs=1):
         """
         Closure of chordless odd circuits extraction.
@@ -14154,12 +14141,12 @@ class BreakAddCocsDigraph(Digraph):
         while newCircuits != set():
             initialCircuits = set([x for cl,x in self.circuitsList])
             self.addCircuits(Comments=Comments)
-            if Cpp:
-                if Piping:
-                    self.computeCppInOutPipingChordlessCircuits(Odd=True,Debug=Debug)
-                else:
-                    self.computeCppChordlessCircuits(Odd=True,Debug=Debug)
-            elif Threading:
+            # if Cpp:
+            #     if Piping:
+            #         self.computeCppInOutPipingChordlessCircuits(Odd=True,Debug=Debug)
+            #     else:
+            #         self.computeCppChordlessCircuits(Odd=True,Debug=Debug)
+            if Threading:
                 self.computeChordlessCircuitsMP(Odd=True,Comments=Debug,
                                 Threading=Threading,nbrOfCPUs=nbrOfCPUs)
             else:
@@ -14336,14 +14323,13 @@ class CocaDigraph(Digraph):
     Parameters:
 
         - digraph: Stored or memory resident digraph instance.
-        - Cpp: using a C++/Agrum version of the Digraph.computeChordlessCircuits() method.
         - Piping: using OS pipes for data in- and output between Python and C++.
 
     Specialization of general Digraph class for instantiation
     of chordless odd circuits augmented digraphs.
 
     """
-    def __init__(self,digraph=None,Cpp=False,Piping=False,Comments=False):
+    def __init__(self,digraph=None,Piping=False,Comments=False):
         import random,sys,array,copy
         from outrankingDigraphs import OutrankingDigraph, RandomOutrankingDigraph, BipolarOutrankingDigraph
         ## if comment is None:
@@ -14379,9 +14365,9 @@ class CocaDigraph(Digraph):
         self.gamma = self.gammaSets()
         self.notGamma = self.notGammaSets()
         self.weakGamma = self.weakGammaSets()
-        self.closureChordlessOddCircuits(Cpp=Cpp,Piping=Piping,Comments=Comments)
+        self.closureChordlessOddCircuits(Piping=Piping,Comments=Comments)
 
-    def closureChordlessOddCircuits(self,Cpp=False,Piping=False,Comments=False):
+    def closureChordlessOddCircuits(self,Piping=False,Comments=False):
         """
         Closure of chordless odd circuits extraction.
         """
@@ -14389,13 +14375,13 @@ class CocaDigraph(Digraph):
         self.circuitsList = []
         while newCircuits != set():
             initialCircuits = set([x for cl,x in self.circuitsList])
-            if Cpp:
-                if Piping:
-                    self.computeCppInOutPipingChordlessCircuits(Odd=True,Debug=Comments)
-                else:
-                    self.computeCppChordlessCircuits(Odd=True,Debug=Comments)
-            else:
-                self.computeChordlessCircuits(Odd=True,Comments=Comments)
+            # if Cpp:
+            #     if Piping:
+            #         self.computeCppInOutPipingChordlessCircuits(Odd=True,Debug=Comments)
+            #     else:
+            #         self.computeCppChordlessCircuits(Odd=True,Debug=Comments)
+            # else:
+            self.computeChordlessCircuits(Odd=True,Comments=Comments)
             self.addCircuits(Comments=Comments)
             currentCircuits = set([x for cl,x in self.circuitsList])
             if Comments:

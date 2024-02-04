@@ -865,7 +865,7 @@ class RankingByChoosingDigraph(TransitiveDigraph):
                  fusionOperator = "o-max",
                  CoDual=False,
                  Debug=False,
-                 CppAgrum=False,
+                 #CppAgrum=False,
                  Threading=True):
 
         from digraphsTools import ranking2preorder, omax, omin        
@@ -875,7 +875,7 @@ class RankingByChoosingDigraph(TransitiveDigraph):
 
         self.CoDual=CoDual
         self.Debug=Debug
-        self.CppAgrum = CppAgrum
+        #self.CppAgrum = CppAgrum
         self.Threading = Threading
 
         runTimes = {}
@@ -925,8 +925,8 @@ class RankingByChoosingDigraph(TransitiveDigraph):
             self.nbrThreads = 1
             from sys import setrecursionlimit
             setrecursionlimit(2**20)
-            digraph.computeRankingByBestChoosing(CppAgrum=CppAgrum,CoDual=CoDual,Debug=Debug)
-            digraph.computeRankingByLastChoosing(CppAgrum=CppAgrum,CoDual=CoDual,Debug=Debug)
+            digraph.computeRankingByBestChoosing(CoDual=CoDual,Debug=Debug)
+            digraph.computeRankingByLastChoosing(CoDual=CoDual,Debug=Debug)
             setrecursionlimit(1000)
         runTimes['bestLast'] = time() - t1
 
@@ -1000,14 +1000,14 @@ class RankingByChoosingDigraph(TransitiveDigraph):
         Dummy for blocking recomputing without forcing. 
         """
         if Forced:
-            TransitiveDigraph.computeRankingByBestChoosing(self,CoDual=self.CoDual,CppAgrum=self.CppAgrum)
+            TransitiveDigraph.computeRankingByBestChoosing(self,CoDual=self.CoDual)
 
     def computeRankingByLastChoosing(self,Forced=False):
         """
         Dummy for blocking recomputing without forcing. 
         """
         if Forced:
-            TransitiveDigraph.computeRankingByLastChoosing(self,CoDual=self.CoDual,CppAgrum=self.CppAgrum)
+            TransitiveDigraph.computeRankingByLastChoosing(self,CoDual=self.CoDual)
 
 #--------------------
 class RankingByBestChoosingDigraph(RankingByChoosingDigraph):

@@ -356,7 +356,6 @@ class RankedPairsRanking(LinearOrder):
     a given bipolar-valued Digraph instance
     """
     def __init__(self,other,Dual=False,
-                 Cpp=False,
                  Valued=False,
                  #isExtendedPrudent=False,
                  Debug=False):
@@ -440,10 +439,7 @@ class RankedPairsRanking(LinearOrder):
                 g.gamma = g.gammaSets()
                 g.notGamma = g.notGammaSets()
                 Detected = False
-                if Cpp:
-                    Detected = g.detectCppChordlessCircuits()
-                else:
-                    Detected = g.detectChordlessCircuits()
+                Detected = g.detectChordlessCircuits()
                 if Detected:
                     if Debug:
                         print('Circuit detected !!')

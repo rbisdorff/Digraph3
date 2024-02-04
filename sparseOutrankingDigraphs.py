@@ -1157,15 +1157,14 @@ class SparseOutrankingDigraph(BipolarOutrankingDigraph):
                                           ChoiceVector=True,
                                           Debug=False,
                                           _OldCoca=False,
-                                          Cpp=False):
+                                          ):
         """
         *Parameters*:
             * g0=None (first component of self by default),
             * Comments=False,
             * ChoiceVector=True,
             * Debug=False,
-            * _OldCoca=False,
-            * Cpp=False.
+            * _OldCoca=False
 
         Renders the Rubis Best choice recommendation of the first component.
         """
@@ -1185,10 +1184,10 @@ class SparseOutrankingDigraph(BipolarOutrankingDigraph):
             print(g1)
         n0 = g1.order
         if _OldCoca:
-            _selfwcoc = CocaDigraph(g1,Cpp=Cpp,Comments=Comments)
+            _selfwcoc = CocaDigraph(g1,Comments=Comments)
             b1 = 0
         else:
-            _selfwcoc = BrokenCocsDigraph(g1,Cpp=Cpp,Comments=Comments)
+            _selfwcoc = BrokenCocsDigraph(g1,Comments=Comments)
             b1 = _selfwcoc.breakings
         n1 = _selfwcoc.order
         nc = n1 - n0
@@ -1273,7 +1272,7 @@ class SparseOutrankingDigraph(BipolarOutrankingDigraph):
                                           ChoiceVector=True,
                                           Debug=False,
                                           _OldCoca=False,
-                                          Cpp=False):
+                                          ):
         """
         *Parameters*:
             * g0=None (last component of self by default),
@@ -1281,7 +1280,6 @@ class SparseOutrankingDigraph(BipolarOutrankingDigraph):
             * ChoiceVector=True,
             * Debug=False,
             * _OldCoca=False,
-            * Cpp=False.
 
         Renders the Rubis Worst choice recommendation of the first component.
         """
@@ -1301,10 +1299,10 @@ class SparseOutrankingDigraph(BipolarOutrankingDigraph):
             print(gn)
         n0 = gn.order
         if _OldCoca:
-            _selfwcoc = CocaDigraph(gn,Cpp=Cpp,Comments=Comments)
+            _selfwcoc = CocaDigraph(gn,Comments=Comments)
             b1 = 0
         else:
-            _selfwcoc = BrokenCocsDigraph(gn,Cpp=Cpp,Comments=Comments)
+            _selfwcoc = BrokenCocsDigraph(gn,Comments=Comments)
             b1 = _selfwcoc.breakings
         n1 = _selfwcoc.order
         nc = n1 - n0

@@ -998,7 +998,7 @@
                  <span class="n">fusionOperator</span> <span class="o">=</span> <span class="s2">&quot;o-max&quot;</span><span class="p">,</span>
                  <span class="n">CoDual</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
                  <span class="n">Debug</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
-                 <span class="n">CppAgrum</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+                 <span class="c1">#CppAgrum=False,</span>
                  <span class="n">Threading</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
 
         <span class="kn">from</span> <span class="nn">digraphsTools</span> <span class="kn">import</span> <span class="n">ranking2preorder</span><span class="p">,</span> <span class="n">omax</span><span class="p">,</span> <span class="n">omin</span>        
@@ -1008,7 +1008,7 @@
 
         <span class="bp">self</span><span class="o">.</span><span class="n">CoDual</span><span class="o">=</span><span class="n">CoDual</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">Debug</span><span class="o">=</span><span class="n">Debug</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">CppAgrum</span> <span class="o">=</span> <span class="n">CppAgrum</span>
+        <span class="c1">#self.CppAgrum = CppAgrum</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">Threading</span> <span class="o">=</span> <span class="n">Threading</span>
 
         <span class="n">runTimes</span> <span class="o">=</span> <span class="p">{}</span>
@@ -1058,8 +1058,8 @@
             <span class="bp">self</span><span class="o">.</span><span class="n">nbrThreads</span> <span class="o">=</span> <span class="mi">1</span>
             <span class="kn">from</span> <span class="nn">sys</span> <span class="kn">import</span> <span class="n">setrecursionlimit</span>
             <span class="n">setrecursionlimit</span><span class="p">(</span><span class="mi">2</span><span class="o">**</span><span class="mi">20</span><span class="p">)</span>
-            <span class="n">digraph</span><span class="o">.</span><span class="n">computeRankingByBestChoosing</span><span class="p">(</span><span class="n">CppAgrum</span><span class="o">=</span><span class="n">CppAgrum</span><span class="p">,</span><span class="n">CoDual</span><span class="o">=</span><span class="n">CoDual</span><span class="p">,</span><span class="n">Debug</span><span class="o">=</span><span class="n">Debug</span><span class="p">)</span>
-            <span class="n">digraph</span><span class="o">.</span><span class="n">computeRankingByLastChoosing</span><span class="p">(</span><span class="n">CppAgrum</span><span class="o">=</span><span class="n">CppAgrum</span><span class="p">,</span><span class="n">CoDual</span><span class="o">=</span><span class="n">CoDual</span><span class="p">,</span><span class="n">Debug</span><span class="o">=</span><span class="n">Debug</span><span class="p">)</span>
+            <span class="n">digraph</span><span class="o">.</span><span class="n">computeRankingByBestChoosing</span><span class="p">(</span><span class="n">CoDual</span><span class="o">=</span><span class="n">CoDual</span><span class="p">,</span><span class="n">Debug</span><span class="o">=</span><span class="n">Debug</span><span class="p">)</span>
+            <span class="n">digraph</span><span class="o">.</span><span class="n">computeRankingByLastChoosing</span><span class="p">(</span><span class="n">CoDual</span><span class="o">=</span><span class="n">CoDual</span><span class="p">,</span><span class="n">Debug</span><span class="o">=</span><span class="n">Debug</span><span class="p">)</span>
             <span class="n">setrecursionlimit</span><span class="p">(</span><span class="mi">1000</span><span class="p">)</span>
         <span class="n">runTimes</span><span class="p">[</span><span class="s1">&#39;bestLast&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">time</span><span class="p">()</span> <span class="o">-</span> <span class="n">t1</span>
 
@@ -1141,7 +1141,7 @@
 <span class="sd">        Dummy for blocking recomputing without forcing. </span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">if</span> <span class="n">Forced</span><span class="p">:</span>
-            <span class="n">TransitiveDigraph</span><span class="o">.</span><span class="n">computeRankingByBestChoosing</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">CoDual</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">CoDual</span><span class="p">,</span><span class="n">CppAgrum</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">CppAgrum</span><span class="p">)</span></div>
+            <span class="n">TransitiveDigraph</span><span class="o">.</span><span class="n">computeRankingByBestChoosing</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">CoDual</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">CoDual</span><span class="p">)</span></div>
 
 
 <div class="viewcode-block" id="RankingByChoosingDigraph.computeRankingByLastChoosing">
@@ -1151,7 +1151,7 @@
 <span class="sd">        Dummy for blocking recomputing without forcing. </span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">if</span> <span class="n">Forced</span><span class="p">:</span>
-            <span class="n">TransitiveDigraph</span><span class="o">.</span><span class="n">computeRankingByLastChoosing</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">CoDual</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">CoDual</span><span class="p">,</span><span class="n">CppAgrum</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">CppAgrum</span><span class="p">)</span></div>
+            <span class="n">TransitiveDigraph</span><span class="o">.</span><span class="n">computeRankingByLastChoosing</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">CoDual</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">CoDual</span><span class="p">)</span></div>
 </div>
 
 
