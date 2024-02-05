@@ -4435,33 +4435,34 @@ pairwise perspective (see below), we notice that, with the given preference disc
 <p>In the coding example shown in <a class="hxr-hoverxref hxr-tooltip reference internal" href="#prerankedoutrankingdigraph"><span class="std std-numref">Listing 1.70</span></a> below, we generate for instance, first (Lines 2-3), a simple performance tableau of 75 decision alternatives and, secondly (Lines 4), we construct the corresponding <a class="reference internal" href="techDoc.html#sparseOutrankingDigraphs.PreRankedOutrankingDigraph" title="sparseOutrankingDigraphs.PreRankedOutrankingDigraph"><code class="xref py py-class docutils literal notranslate"><span class="pre">PreRankedOutrankingDigraph</span></code></a> instance called <em>prg</em>. Notice by the way the <em>BigData</em> flag (Line 3) used here for generating a parsimoniously commented performance tableau.</p>
 <div class="literal-block-wrapper docutils container" id="prerankedoutrankingdigraph">
 <div class="code-block-caption"><span class="caption-number">Listing 1.70 </span><span class="caption-text">Computing a <em>pre-ranked</em> sparse outranking digraph</span><a class="headerlink" href="#prerankedoutrankingdigraph" title="Link to this code"></a></div>
-<div class="highlight-pycon notranslate"><div class="highlight"><pre><span></span><span class="linenos"> 1</span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">sparseOutrankingDigraphs</span> <span class="kn">import</span> \
-<span class="linenos"> 2</span><span class="gp">... </span>                        <span class="n">PreRankedOutrankingDigraph</span>
-<span class="linenos"> 3</span><span class="gp">&gt;&gt;&gt; </span><span class="n">tp</span> <span class="o">=</span> <span class="n">RandomPerformanceTableau</span><span class="p">(</span><span class="n">numberOfActions</span><span class="o">=</span><span class="mi">75</span><span class="p">,</span>
-<span class="linenos"> 4</span><span class="gp">... </span>                              <span class="n">BigData</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span><span class="n">seed</span><span class="o">=</span><span class="mi">100</span><span class="p">)</span>
-<span class="linenos"> 5</span><span class="gp">&gt;&gt;&gt; </span><span class="n">prg</span> <span class="o">=</span> <span class="n">PreRankedOutrankingDigraph</span><span class="p">(</span><span class="n">tp</span><span class="p">,</span><span class="n">quantiles</span><span class="o">=</span><span class="mi">5</span><span class="p">)</span>
-<span class="linenos"> 6</span><span class="gp">&gt;&gt;&gt; </span><span class="n">prg</span>
-<span class="linenos"> 7</span><span class="go"> *----- Object instance description ------*</span>
-<span class="linenos"> 8</span><span class="go">  Instance class    : PreRankedOutrankingDigraph</span>
-<span class="linenos"> 9</span><span class="go">  Instance name     : randomperftab_pr</span>
-<span class="linenos">10</span><span class="go">  # Actions         : 75</span>
-<span class="linenos">11</span><span class="go">  # Criteria        : 7</span>
-<span class="hll"><span class="linenos">12</span><span class="go">  Sorting by        : 5-Tiling</span>
-</span><span class="linenos">13</span><span class="go">  Ordering strategy : average</span>
-<span class="linenos">14</span><span class="go">  # Components      : 9</span>
-<span class="linenos">15</span><span class="go">  Minimal order     : 1</span>
-<span class="linenos">16</span><span class="go">  Maximal order     : 25</span>
-<span class="linenos">17</span><span class="go">  Average order     : 8.3</span>
-<span class="linenos">18</span><span class="go">  fill rate         : 20.432%</span>
-<span class="linenos">19</span><span class="go">  Attributes        : [&#39;actions&#39;, &#39;criteria&#39;, &#39;evaluation&#39;, &#39;NA&#39;, &#39;name&#39;,</span>
-<span class="linenos">20</span><span class="go">      &#39;order&#39;, &#39;runTimes&#39;, &#39;dimension&#39;, &#39;sortingParameters&#39;,</span>
-<span class="linenos">21</span><span class="go">      &#39;valuationdomain&#39;, &#39;profiles&#39;, &#39;categories&#39;, &#39;sorting&#39;,</span>
-<span class="linenos">22</span><span class="go">      &#39;decomposition&#39;, &#39;nbrComponents&#39;, &#39;components&#39;,</span>
-<span class="linenos">23</span><span class="go">      &#39;fillRate&#39;, &#39;minimalComponentSize&#39;, &#39;maximalComponentSize&#39;, ... ]</span>
+<div class="highlight-pycon notranslate"><div class="highlight"><pre><span></span><span class="linenos"> 1</span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">randomPerfTabs</span> <span class="kn">import</span> <span class="n">RandomPerformanceTableau</span>
+<span class="linenos"> 2</span><span class="gp">&gt;&gt;&gt; </span><span class="n">tp</span> <span class="o">=</span> <span class="n">RandomPerformanceTableau</span><span class="p">(</span><span class="n">numberOfActions</span><span class="o">=</span><span class="mi">75</span><span class="p">,</span>
+<span class="linenos"> 3</span><span class="gp">... </span>                              <span class="n">BigData</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span><span class="n">seed</span><span class="o">=</span><span class="mi">100</span><span class="p">)</span>
+<span class="linenos"> 4</span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">sparseOutrankingDigraphs</span> <span class="kn">import</span> \
+<span class="linenos"> 5</span><span class="gp">... </span>                        <span class="n">PreRankedOutrankingDigraph</span>
+<span class="linenos"> 6</span><span class="gp">&gt;&gt;&gt; </span><span class="n">prg</span> <span class="o">=</span> <span class="n">PreRankedOutrankingDigraph</span><span class="p">(</span><span class="n">tp</span><span class="p">,</span><span class="n">quantiles</span><span class="o">=</span><span class="mi">5</span><span class="p">)</span>
+<span class="linenos"> 7</span><span class="gp">&gt;&gt;&gt; </span><span class="n">prg</span>
+<span class="linenos"> 8</span><span class="go"> *----- Object instance description ------*</span>
+<span class="linenos"> 9</span><span class="go">  Instance class    : PreRankedOutrankingDigraph</span>
+<span class="linenos">10</span><span class="go">  Instance name     : randomperftab_pr</span>
+<span class="linenos">11</span><span class="go">  # Actions         : 75</span>
+<span class="linenos">12</span><span class="go">  # Criteria        : 7</span>
+<span class="linenos">13</span><span class="go">  Sorting by        : 5-Tiling</span>
+<span class="hll"><span class="linenos">14</span><span class="go">  Ordering strategy : average</span>
+</span><span class="linenos">15</span><span class="go">  # Components      : 9</span>
+<span class="hll"><span class="linenos">16</span><span class="go">  Minimal order     : 1</span>
+</span><span class="hll"><span class="linenos">17</span><span class="go">  Maximal order     : 25</span>
+</span><span class="hll"><span class="linenos">18</span><span class="go">  Average order     : 8.3</span>
+</span><span class="linenos">19</span><span class="go">  fill rate         : 20.432%</span>
+<span class="linenos">20</span><span class="go">  Attributes        : [&#39;actions&#39;, &#39;criteria&#39;, &#39;evaluation&#39;, &#39;NA&#39;, &#39;name&#39;,</span>
+<span class="linenos">21</span><span class="go">      &#39;order&#39;, &#39;runTimes&#39;, &#39;dimension&#39;, &#39;sortingParameters&#39;,</span>
+<span class="linenos">22</span><span class="go">      &#39;valuationdomain&#39;, &#39;profiles&#39;, &#39;categories&#39;, &#39;sorting&#39;,</span>
+<span class="linenos">23</span><span class="go">      &#39;decomposition&#39;, &#39;nbrComponents&#39;, &#39;components&#39;,</span>
+<span class="linenos">24</span><span class="go">      &#39;fillRate&#39;, &#39;minimalComponentSize&#39;, &#39;maximalComponentSize&#39;, ... ]</span>
 </pre></div>
 </div>
 </div>
-<p>The ordering of the 5-tiling result is following the <strong>average</strong> lower and upper quintile limits strategy (see previous section and <a class="hxr-hoverxref hxr-tooltip reference internal" href="#prerankedoutrankingdigraph"><span class="std std-numref">Listing 1.70</span></a> Line 12). We obtain here 9 ordered components of minimal order 1 and maximal order 25. The corresponding <strong>pre-ranked decomposition</strong> may be visualized as follows.</p>
+<p>The ordering of the 5-tiling result is following the <strong>average</strong> lower and upper quintile limits strategy (see previous section and <a class="hxr-hoverxref hxr-tooltip reference internal" href="#prerankedoutrankingdigraph"><span class="std std-numref">Listing 1.70</span></a> Line 14). We obtain here 9 ordered components of minimal order 1 and maximal order 25. The corresponding <strong>pre-ranked decomposition</strong> may be visualized as follows.</p>
 <div class="literal-block-wrapper docutils container" id="quantilesdecomposition">
 <div class="code-block-caption"><span class="caption-number">Listing 1.71 </span><span class="caption-text">The quantiles decomposition of a pre-ranked outranking digraph</span><a class="headerlink" href="#quantilesdecomposition" title="Link to this code"></a></div>
 <div class="highlight-pycon notranslate"><div class="highlight"><pre><span></span><span class="linenos"> 1</span><span class="gp">&gt;&gt;&gt; </span><span class="n">prg</span><span class="o">.</span><span class="n">showDecomposition</span><span class="p">()</span>
@@ -4494,13 +4495,14 @@ pairwise perspective (see below), we notice that, with the given preference disc
 </figure>
 <p>In <a class="hxr-hoverxref hxr-tooltip reference internal" href="#sparse75relationmap"><span class="std std-numref">Fig. 1.33</span></a> we easily recognize the 9 linearly ordered quantile equivalence classes. <em>Green</em> and <em>light-green</em> show positive <strong>outranking</strong> situations, whereas positive <strong>outranked</strong> situations are shown in <strong>red</strong> and <strong>light-red</strong>. Indeterminate situations appear in white. In each one of the 9 quantile equivalence classes we recover in fact the corresponding bipolar-valued outranking <em>sub-relation</em>, which leads to an actual <strong>fill-rate</strong> of 20.4% (see <a class="hxr-hoverxref hxr-tooltip reference internal" href="#prerankedoutrankingdigraph"><span class="std std-numref">Listing 1.70</span></a> Line 20).</p>
 <p>We may now check how faithful the sparse model represents the complete outranking relation.</p>
-<div class="highlight-pycon notranslate"><div class="highlight"><pre><span></span><span class="linenos">1</span><span class="gp">&gt;&gt;&gt; </span><span class="n">g</span> <span class="o">=</span> <span class="n">BipolarOutrankingDigraph</span><span class="p">(</span><span class="n">tp</span><span class="p">)</span>
-<span class="linenos">2</span><span class="gp">&gt;&gt;&gt; </span><span class="n">corr</span> <span class="o">=</span> <span class="n">prg</span><span class="o">.</span><span class="n">computeOrdinalCorrelation</span><span class="p">(</span><span class="n">g</span><span class="p">)</span>
-<span class="linenos">3</span><span class="gp">&gt;&gt;&gt; </span><span class="n">g</span><span class="o">.</span><span class="n">showCorrelation</span><span class="p">(</span><span class="n">corr</span><span class="p">)</span>
-<span class="linenos">4</span><span class="go"> Correlation indexes:</span>
-<span class="linenos">5</span><span class="go">  Crisp ordinal correlation  : +0.863</span>
-<span class="linenos">6</span><span class="go">  Epistemic determination    :  0.315</span>
-<span class="linenos">7</span><span class="go">  Bipolar-valued equivalence : +0.272</span>
+<div class="highlight-pycon notranslate"><div class="highlight"><pre><span></span><span class="linenos">1</span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">outrankingDigraphs</span> <span class="kn">import</span> <span class="n">BipolarOutrankingDigraph</span>
+<span class="linenos">2</span><span class="gp">&gt;&gt;&gt; </span><span class="n">g</span> <span class="o">=</span> <span class="n">BipolarOutrankingDigraph</span><span class="p">(</span><span class="n">tp</span><span class="p">)</span>
+<span class="linenos">3</span><span class="gp">&gt;&gt;&gt; </span><span class="n">corr</span> <span class="o">=</span> <span class="n">prg</span><span class="o">.</span><span class="n">computeOrdinalCorrelation</span><span class="p">(</span><span class="n">g</span><span class="p">)</span>
+<span class="linenos">4</span><span class="gp">&gt;&gt;&gt; </span><span class="n">g</span><span class="o">.</span><span class="n">showCorrelation</span><span class="p">(</span><span class="n">corr</span><span class="p">)</span>
+<span class="linenos">5</span><span class="go"> Correlation indexes:</span>
+<span class="linenos">6</span><span class="go">  Crisp ordinal correlation  : +0.863</span>
+<span class="linenos">7</span><span class="go">  Epistemic determination    :  0.315</span>
+<span class="linenos">8</span><span class="go">  Bipolar-valued equivalence : +0.272</span>
 </pre></div>
 </div>
 <p>The ordinal correlation index between the standard and the sparse outranking relations is quite high (+0.863) and their bipolar-valued equivalence is supported by a mean criteria significance majority of (1.0+0.272)/2 = 64%.</p>

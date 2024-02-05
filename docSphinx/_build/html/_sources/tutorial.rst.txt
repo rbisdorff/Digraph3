@@ -4460,12 +4460,13 @@ In the coding example shown in :numref:`PreRankedOutrankingDigraph` below, we ge
    :name: PreRankedOutrankingDigraph
    :caption: Computing a *pre-ranked* sparse outranking digraph 
    :linenos:
-   :emphasize-lines: 12
+   :emphasize-lines: 14,16-18
 
-   >>> from sparseOutrankingDigraphs import \
-   ...                         PreRankedOutrankingDigraph
+   >>> from randomPerfTabs import RandomPerformanceTableau
    >>> tp = RandomPerformanceTableau(numberOfActions=75,
    ...                               BigData=True,seed=100)
+   >>> from sparseOutrankingDigraphs import \
+   ...                         PreRankedOutrankingDigraph
    >>> prg = PreRankedOutrankingDigraph(tp,quantiles=5)
    >>> prg
     *----- Object instance description ------*
@@ -4486,7 +4487,7 @@ In the coding example shown in :numref:`PreRankedOutrankingDigraph` below, we ge
 	 'decomposition', 'nbrComponents', 'components',
 	 'fillRate', 'minimalComponentSize', 'maximalComponentSize', ... ]
 
-The ordering of the 5-tiling result is following the **average** lower and upper quintile limits strategy (see previous section and :numref:`PreRankedOutrankingDigraph` Line 12). We obtain here 9 ordered components of minimal order 1 and maximal order 25. The corresponding **pre-ranked decomposition** may be visualized as follows.
+The ordering of the 5-tiling result is following the **average** lower and upper quintile limits strategy (see previous section and :numref:`PreRankedOutrankingDigraph` Line 14). We obtain here 9 ordered components of minimal order 1 and maximal order 25. The corresponding **pre-ranked decomposition** may be visualized as follows.
 
 .. code-block:: pycon
    :name: quantilesDecomposition
@@ -4528,6 +4529,7 @@ We may now check how faithful the sparse model represents the complete outrankin
 .. code-block:: pycon
    :linenos:
 
+   >>> from outrankingDigraphs import BipolarOutrankingDigraph
    >>> g = BipolarOutrankingDigraph(tp)
    >>> corr = prg.computeOrdinalCorrelation(g)
    >>> g.showCorrelation(corr)
