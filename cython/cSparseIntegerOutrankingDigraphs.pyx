@@ -2371,6 +2371,8 @@ class cQuantilesRankingDigraph(SparseIntegerOutrankingDigraph):
             from copy import copy, deepcopy
             from pickle import dumps, loads, load, dump
             import multiprocessing as mp
+            if startMethod is None:
+                startMethod = 'spawn'
             mpctx = mp.get_context(startMethod)
             self.startMethod = mpctx.get_start_method()
             Process = mpctx.Process
