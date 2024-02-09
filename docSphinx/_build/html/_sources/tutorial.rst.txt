@@ -5042,7 +5042,7 @@ With a fill rate of 25%, the memory occupation of this sparse outranking digraph
 
 For sparse outranking digraphs, the adjacency table is implemented as a dynamic :py:func:`~cSparseIntegerOutrankingDigraphs.SparseIntegerOutrankingDigraph.relation` function instead of a double dictionary.
 
-.. code-block:: python
+.. code-block:: pycon
    :linenos:
 
     def relation(self, int x, int y):
@@ -5101,7 +5101,7 @@ When actually computing linear rankings of a set of alternatives, the local outr
      1. refining the ordering of the quantile classes by taking into account how well an alternative is outranking the lower limit of its quantile class, respectively the upper limit of its quantile class is *not* outranking the alternative;
      2. dropping the local outranking digraphs and keeping for each quantile class only a locally ranked list of alternatives.
 
-We provide therefore the :py:class:`~cSparseIntegerOutrankingDigraphs.cQuantilesRankingDigraph` class.
+We provide therefore the :py:class:`~cSparseIntegerOutrankingDigraphs.cQuantilesRankingDigraph` class.   
 
 .. code-block:: pycon
    :linenos:
@@ -5203,7 +5203,67 @@ HPC quantiles ranking records
 
 Following from the separability property of the *q*-tiles sorting of each action into each *q*-tiles class, the *q*-sorting algorithm may be safely split into as much threads as are multiple processing cores available in parallel. Furthermore, the ranking procedure being local to each diagonal component, these procedures may as well be safely processed in parallel threads on each component restricted outrankingdigraph.
 
-Using the HPC platform of the University of Luxembourg (https://hpc.uni.lu/), the following run times for very big ranking problems could be achieved both:
+On a 2023 common desktop computer equipped with a 11th Gen Intel® Core™ i5-11400 × 12 processor and 16.0 GiB of CPU memory working under Ubuntu 23.10 we may rank a cPerformanceTableau instance of hundred thousand performance records in about 3 minutes (see below Lines 38-).
+
+.. code-block:: bash
+
+   ../Digraph3/cython$ python3.12
+   Python 3.12.0 (main, Oct  4 2023, 06:27:34) [GCC 13.2.0] on linux
+   >>>
+    
+.. code-block:: pycon
+   :linenos:
+   :emphasize-lines: 3, 22-28, 38-
+
+   >>> from cRandPerfTabs import\
+   ...       cRandom3ObjectivesPerformanceTableau as cR3ObjPT
+   >>> pt = cR3ObjPT(numberOfActions=100000,
+   ...       numberOfCriteria=21,
+   ...       weightDistribution='equiobjectives',
+   ...       commonScale = (0.0,1000.0),seed=1)
+   >>> import cSparseIntegerOutrankingDigraphs as iBg
+   >>> qr = iBg.cQuantilesRankingDigraph(pt,quantiles=75,
+   ...                    quantilesOrderingStrategy='average',
+   ...                    minimalComponentSize=150,
+   ...                    componentRankingRule='NetFlows',
+   ...                    LowerClosed=False,
+   ...                    Threading=True,
+   ...                    tempDir='/tmp',
+   ...                    nbrOfCPUs=12)
+   >>> qr
+    *----- Object instance description --------------*
+    Instance class    : cQuantilesRankingDigraph
+    Instance name     : random3ObjectivesPerfTab_mp
+    Actions           : 100000
+    Criteria          : 21
+    Sorting by        : 75-Tiling
+    Ordering strategy : average
+    Ranking rule      : NetFlows
+    Components        : 587
+    Minimal order     : 150
+    Maximal order     : 269
+    Average order     : 170.4
+    fill rate         : 0.173%
+    Attributes       : ['runTimes', 'name', 'actions', 'order',
+                        'dimension', 'sortingParameters',
+			'startMethod', 'valuationdomain', 'profiles',
+			'categories', 'sorting', 'minimalComponentSize',
+			'decomposition', 'nbrComponents', 'nd',
+			'nbrThreads', 'components', 'fillRate',
+			'maximalComponentSize', 'componentRankingRule',
+			'boostedRanking']
+    ----  Constructor run times (in sec.) ----
+     Threads           : 12
+     StartMethod       : spawn
+     Total time        : 198.92933
+     QuantilesSorting  : 47.16732
+     Preordering       : 0.47598
+     Decomposing       : 151.28595
+     Ordering          : 0.00000
+
+When ordering the 587 components resulting from a 75-tiling sorting with the "average* quantile limits strategy, the maximal order of a component is limited to an average size of about 170 actions with a maximal size of 269 actions (see Lines 22-29). With a tasks queue of 587 components to be ranked now in parallel on only 12 cores, we need to fix a consequent minimal component size of 150 actions in order to avoid too short tasks durations (see Line 26).
+
+Even bigger performance tableaux may be ranked with a larger *cpu_count()*. We were using therefore in 2018 the HPC Platform of the University of Luxembourg (https://hpc.uni.lu/), the following run times for very big ranking problems could be achieved both:
 
     - on Iris -skylake nodes with 28 cores [7]_, and
     - on the 3TB -bigmem Gaia-183 node with 64 cores [8]_,
@@ -5275,6 +5335,7 @@ Example python session on the HPC-UL Iris-126 -skylake node [7]_
     fill rate         : 0.001%
     *----  Constructor run times (in sec.) ----*
     Nbr of threads    : 28
+    Start method      : fork
     Total time        : 177.02770
     QuantilesSorting  : 99.55377
     Preordering       : 5.17954

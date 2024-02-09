@@ -2285,7 +2285,7 @@ class cQuantilesRankingDigraph(SparseIntegerOutrankingDigraph):
                 nbrCPUs = mp.cpu_count()
             if startMethod is None:
                 startMehod = 'spawn'
-            self.nbrThread = nbrOfCPUs
+            self.nbrThreads = nbrOfCPUs
             self.startMethod = startMethod
         else:
             self.nbrThreads = 0
