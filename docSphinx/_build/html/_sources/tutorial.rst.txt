@@ -5045,39 +5045,39 @@ For sparse outranking digraphs, the adjacency table is implemented as a dynamic 
 .. code-block:: pycon
    :linenos:
 
-    def relation(self, int x, int y):
-	"""
-	*Parameters*:
+   def relation(self, int x, int y):
+      """
+      *Parameters*:
 	    * x (int action key),
 	    * y (int action key).
-	Dynamic construction of the global outranking
-        characteristic function *r(x S y)*.
-	"""
-	cdef int Min, Med, Max, rx, ry
-	Min = self.valuationdomain['min']
-	Med = self.valuationdomain['med']
-	Max = self.valuationdomain['max']
-	if x == y:
-	    return Med
-	cx = self.actions[x]['component']
-	cy = self.actions[y]['component']
-	#print(self.components)
-	rx = self.components[cx]['rank']
-	ry = self.components[cy]['rank']
-	if rx == ry:
-	    try:
-		rxpg = self.components[cx]['subGraph'].relation
-		return rxpg[x][y]
-	    except AttributeError:
-		componentRanking = self.components[cx]['componentRanking']
-		if componentRanking.index(x) < componentRanking.index(x):
-		    return Max
-		else:
-		    return Min
-	elif rx > ry:
-	    return Min
-	else:
-	    return Max
+      Dynamic construction of the global outranking
+      characteristic function *r(x S y)*.
+      """
+      cdef int Min, Med, Max, rx, ry
+      Min = self.valuationdomain['min']
+      Med = self.valuationdomain['med']
+      Max = self.valuationdomain['max']
+      if x == y:
+          return Med
+      else:
+          cx = self.actions[x]['component']
+	  cy = self.actions[y]['component']
+	  rx = self.components[cx]['rank']
+	  ry = self.components[cy]['rank']
+	  if rx == ry:
+	      try:
+		  rxpg = self.components[cx]['subGraph'].relation
+		  return rxpg[x][y]
+	      except AttributeError:
+		  componentRanking = self.components[cx]['componentRanking']
+		  if componentRanking.index(x) < componentRanking.index(x):
+		      return Max
+		  else:
+		      return Min
+          elif rx > ry:
+              return Min
+          else:
+	      return Max
 
 Ranking big sets of decision alternatives
 `````````````````````````````````````````
@@ -5203,7 +5203,7 @@ HPC quantiles ranking records
 
 Following from the separability property of the *q*-tiles sorting of each action into each *q*-tiles class, the *q*-sorting algorithm may be safely split into as much threads as are multiple processing cores available in parallel. Furthermore, the ranking procedure being local to each diagonal component, these procedures may as well be safely processed in parallel threads on each component restricted outrankingdigraph.
 
-On a 2023 common desktop computer equipped with a 11th Gen Intel® Core™ i5-11400 × 12 processor and 16.0 GiB of CPU memory working under Ubuntu 23.10 we may rank a cPerformanceTableau instance of hundred thousand performance records in about 3 minutes (see below Lines 38-).
+On a 2023 common desktop computer equipped with a 11th Gen Intel® Core™ i5-11400 × 12 processor and 16.0 GiB of CPU memory working under Ubuntu 23.10 we may rank a :py:class:`~cRandPerfTabs.cRandom3ObjectivesPerformanceTableau` instance of **hundred thousand** performance records in about 3 minutes (see below Lines 38-).
 
 .. code-block:: bash
 
@@ -5261,7 +5261,7 @@ On a 2023 common desktop computer equipped with a 11th Gen Intel® Core™ i5-11
      Decomposing       : 151.28595
      Ordering          : 0.00000
 
-When ordering the 587 components resulting from a 75-tiling sorting with the "average* quantile limits strategy, the maximal order of a component is limited to an average size of about 170 actions with a maximal size of 269 actions (see Lines 22-29). With a tasks queue of 587 components to be ranked now in parallel on only 12 cores, we need to fix a consequent minimal component size of 150 actions in order to avoid too short tasks durations (see Line 26).
+When ordering the 587 components resulting from a 75-tiling sorting with the "average* quantiles ordering strategy, the maximal order of a component is limited to an average size of about 170 actions with a maximal size of 269 actions (see Lines 22-29). With a tasks queue of 587 components to be ranked now in parallel on only 12 cores, we need to fix a consequent minimal component size of 150 actions in order to avoid too short individual task's durations (see Line 26).
 
 Even bigger performance tableaux may be ranked with a larger *cpu_count()*. We were using therefore in 2018 the HPC Platform of the University of Luxembourg (https://hpc.uni.lu/), the following run times for very big ranking problems could be achieved both:
 
@@ -5277,13 +5277,6 @@ by running the cythonized python modules in an Intel compiled virtual Python 3.6
    HPC-UL Ranking Performance Records (Spring 2018)
 
 Example python session on the HPC-UL Iris-126 -skylake node [7]_
-
-..
-   .. figure:: HPC-UniLu-Session.png
-      :width: 500 px
-      :align: center
-
-   HPC-UL Session (Spring 2018)
 
 .. code-block:: bash
    :linenos:

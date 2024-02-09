@@ -4944,39 +4944,39 @@ pairwise perspective (see below), we notice that, with the given preference disc
 </pre></div>
 </div>
 <p>For sparse outranking digraphs, the adjacency table is implemented as a dynamic <code class="xref py py-func docutils literal notranslate"><span class="pre">relation()</span></code> function instead of a double dictionary.</p>
-<div class="highlight-pycon notranslate"><div class="highlight"><pre><span></span><span class="linenos"> 1</span><span class="go"> def relation(self, int x, int y):</span>
-<span class="linenos"> 2</span><span class="go">     &quot;&quot;&quot;</span>
-<span class="linenos"> 3</span><span class="go">     *Parameters*:</span>
+<div class="highlight-pycon notranslate"><div class="highlight"><pre><span></span><span class="linenos"> 1</span><span class="go">def relation(self, int x, int y):</span>
+<span class="linenos"> 2</span><span class="go">   &quot;&quot;&quot;</span>
+<span class="linenos"> 3</span><span class="go">   *Parameters*:</span>
 <span class="linenos"> 4</span><span class="go">         * x (int action key),</span>
 <span class="linenos"> 5</span><span class="go">         * y (int action key).</span>
-<span class="linenos"> 6</span><span class="go">     Dynamic construction of the global outranking</span>
-<span class="linenos"> 7</span><span class="go">     characteristic function *r(x S y)*.</span>
-<span class="linenos"> 8</span><span class="go">     &quot;&quot;&quot;</span>
-<span class="linenos"> 9</span><span class="go">     cdef int Min, Med, Max, rx, ry</span>
-<span class="linenos">10</span><span class="go">     Min = self.valuationdomain[&#39;min&#39;]</span>
-<span class="linenos">11</span><span class="go">     Med = self.valuationdomain[&#39;med&#39;]</span>
-<span class="linenos">12</span><span class="go">     Max = self.valuationdomain[&#39;max&#39;]</span>
-<span class="linenos">13</span><span class="go">     if x == y:</span>
-<span class="linenos">14</span><span class="go">         return Med</span>
-<span class="linenos">15</span><span class="go">     cx = self.actions[x][&#39;component&#39;]</span>
-<span class="linenos">16</span><span class="go">     cy = self.actions[y][&#39;component&#39;]</span>
-<span class="linenos">17</span><span class="go">     #print(self.components)</span>
-<span class="linenos">18</span><span class="go">     rx = self.components[cx][&#39;rank&#39;]</span>
-<span class="linenos">19</span><span class="go">     ry = self.components[cy][&#39;rank&#39;]</span>
-<span class="linenos">20</span><span class="go">     if rx == ry:</span>
-<span class="linenos">21</span><span class="go">         try:</span>
-<span class="linenos">22</span><span class="go">             rxpg = self.components[cx][&#39;subGraph&#39;].relation</span>
-<span class="linenos">23</span><span class="go">             return rxpg[x][y]</span>
-<span class="linenos">24</span><span class="go">         except AttributeError:</span>
-<span class="linenos">25</span><span class="go">             componentRanking = self.components[cx][&#39;componentRanking&#39;]</span>
-<span class="linenos">26</span><span class="go">             if componentRanking.index(x) &lt; componentRanking.index(x):</span>
-<span class="linenos">27</span><span class="go">                 return Max</span>
-<span class="linenos">28</span><span class="go">             else:</span>
-<span class="linenos">29</span><span class="go">                 return Min</span>
-<span class="linenos">30</span><span class="go">     elif rx &gt; ry:</span>
-<span class="linenos">31</span><span class="go">         return Min</span>
-<span class="linenos">32</span><span class="go">     else:</span>
-<span class="linenos">33</span><span class="go">         return Max</span>
+<span class="linenos"> 6</span><span class="go">   Dynamic construction of the global outranking</span>
+<span class="linenos"> 7</span><span class="go">   characteristic function *r(x S y)*.</span>
+<span class="linenos"> 8</span><span class="go">   &quot;&quot;&quot;</span>
+<span class="linenos"> 9</span><span class="go">   cdef int Min, Med, Max, rx, ry</span>
+<span class="linenos">10</span><span class="go">   Min = self.valuationdomain[&#39;min&#39;]</span>
+<span class="linenos">11</span><span class="go">   Med = self.valuationdomain[&#39;med&#39;]</span>
+<span class="linenos">12</span><span class="go">   Max = self.valuationdomain[&#39;max&#39;]</span>
+<span class="linenos">13</span><span class="go">   if x == y:</span>
+<span class="linenos">14</span><span class="go">       return Med</span>
+<span class="linenos">15</span><span class="go">   else:</span>
+<span class="linenos">16</span><span class="go">       cx = self.actions[x][&#39;component&#39;]</span>
+<span class="linenos">17</span><span class="go">       cy = self.actions[y][&#39;component&#39;]</span>
+<span class="linenos">18</span><span class="go">       rx = self.components[cx][&#39;rank&#39;]</span>
+<span class="linenos">19</span><span class="go">       ry = self.components[cy][&#39;rank&#39;]</span>
+<span class="linenos">20</span><span class="go">       if rx == ry:</span>
+<span class="linenos">21</span><span class="go">           try:</span>
+<span class="linenos">22</span><span class="go">               rxpg = self.components[cx][&#39;subGraph&#39;].relation</span>
+<span class="linenos">23</span><span class="go">               return rxpg[x][y]</span>
+<span class="linenos">24</span><span class="go">           except AttributeError:</span>
+<span class="linenos">25</span><span class="go">               componentRanking = self.components[cx][&#39;componentRanking&#39;]</span>
+<span class="linenos">26</span><span class="go">               if componentRanking.index(x) &lt; componentRanking.index(x):</span>
+<span class="linenos">27</span><span class="go">                   return Max</span>
+<span class="linenos">28</span><span class="go">               else:</span>
+<span class="linenos">29</span><span class="go">                   return Min</span>
+<span class="linenos">30</span><span class="go">       elif rx &gt; ry:</span>
+<span class="linenos">31</span><span class="go">           return Min</span>
+<span class="linenos">32</span><span class="go">       else:</span>
+<span class="linenos">33</span><span class="go">           return Max</span>
 </pre></div>
 </div>
 </section>
@@ -5091,7 +5091,7 @@ pairwise perspective (see below), we notice that, with the given preference disc
 <section id="hpc-quantiles-ranking-records">
 <h4><a class="toc-backref" href="#id296" role="doc-backlink"><span class="section-number">1.3.10.6. </span>HPC quantiles ranking records</a><a class="headerlink" href="#hpc-quantiles-ranking-records" title="Link to this heading"></a></h4>
 <p>Following from the separability property of the <em>q</em>-tiles sorting of each action into each <em>q</em>-tiles class, the <em>q</em>-sorting algorithm may be safely split into as much threads as are multiple processing cores available in parallel. Furthermore, the ranking procedure being local to each diagonal component, these procedures may as well be safely processed in parallel threads on each component restricted outrankingdigraph.</p>
-<p>On a 2023 common desktop computer equipped with a 11th Gen Intel® Core™ i5-11400 × 12 processor and 16.0 GiB of CPU memory working under Ubuntu 23.10 we may rank a cPerformanceTableau instance of hundred thousand performance records in about 3 minutes (see below Lines 38-).</p>
+<p>On a 2023 common desktop computer equipped with a 11th Gen Intel® Core™ i5-11400 × 12 processor and 16.0 GiB of CPU memory working under Ubuntu 23.10 we may rank a <a class="reference internal" href="techDoc.html#cRandPerfTabs.cRandom3ObjectivesPerformanceTableau" title="cRandPerfTabs.cRandom3ObjectivesPerformanceTableau"><code class="xref py py-class docutils literal notranslate"><span class="pre">cRandom3ObjectivesPerformanceTableau</span></code></a> instance of <strong>hundred thousand</strong> performance records in about 3 minutes (see below Lines 38-).</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="linenos">1</span>../Digraph3/cython$<span class="w"> </span>python3.12
 <span class="linenos">2</span>Python<span class="w"> </span><span class="m">3</span>.12.0<span class="w"> </span><span class="o">(</span>main,<span class="w"> </span>Oct<span class="w">  </span><span class="m">4</span><span class="w"> </span><span class="m">2023</span>,<span class="w"> </span><span class="m">06</span>:27:34<span class="o">)</span><span class="w"> </span><span class="o">[</span>GCC<span class="w"> </span><span class="m">13</span>.2.0<span class="o">]</span><span class="w"> </span>on<span class="w"> </span>linux
 <span class="linenos">3</span>&gt;&gt;&gt;
@@ -5144,7 +5144,7 @@ pairwise perspective (see below), we notice that, with the given preference disc
 </span><span class="hll"><span class="linenos">45</span><span class="go">  Ordering          : 0.00000</span>
 </span></pre></div>
 </div>
-<p>When ordering the 587 components resulting from a 75-tiling sorting with the “average* quantile limits strategy, the maximal order of a component is limited to an average size of about 170 actions with a maximal size of 269 actions (see Lines 22-29). With a tasks queue of 587 components to be ranked now in parallel on only 12 cores, we need to fix a consequent minimal component size of 150 actions in order to avoid too short tasks durations (see Line 26).</p>
+<p>When ordering the 587 components resulting from a 75-tiling sorting with the “average* quantiles ordering strategy, the maximal order of a component is limited to an average size of about 170 actions with a maximal size of 269 actions (see Lines 22-29). With a tasks queue of 587 components to be ranked now in parallel on only 12 cores, we need to fix a consequent minimal component size of 150 actions in order to avoid too short individual task’s durations (see Line 26).</p>
 <p>Even bigger performance tableaux may be ranked with a larger <em>cpu_count()</em>. We were using therefore in 2018 the HPC Platform of the University of Luxembourg (<a class="reference external" href="https://hpc.uni.lu/">https://hpc.uni.lu/</a>), the following run times for very big ranking problems could be achieved both:</p>
 <blockquote>
 <div><ul class="simple">
