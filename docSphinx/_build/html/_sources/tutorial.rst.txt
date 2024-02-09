@@ -5261,9 +5261,9 @@ On a 2023 common desktop computer equipped with a 11th Gen Intel® Core™ i5-11
      Decomposing       : 151.28595
      Ordering          : 0.00000
 
-When ordering the 587 components resulting from a 75-tiling sorting with the "average* quantiles ordering strategy, the maximal order of a component is limited to an average size of about 170 actions with a maximal size of 269 actions (see Lines 22-29). With a tasks queue of 587 components to be ranked now in parallel on only 12 cores, we need to fix a consequent minimal component size of 150 actions in order to avoid too short individual task's durations (see Line 26).
+When ordering the 587 components resulting from a 75-tiling sorting with the *average* quantiles ordering strategy, the order of a component is limited to a maximal size of 269 actions (see Line 27). With a queue of these 587 components to be ranked now in parallel on only 12 available cores, we need to fix a consequent minimal component size of 150 actions in order to avoid too short individual tasks' durations (see Line 26).
 
-Even bigger performance tableaux may be ranked with a larger *cpu_count()*. We were using therefore in 2018 the HPC Platform of the University of Luxembourg (https://hpc.uni.lu/), the following run times for very big ranking problems could be achieved both:
+Bigger performance tableaux may definitely be ranked with a larger *cpu_count()*. We were using therefore in 2018 the HPC Platform of the University of Luxembourg (https://hpc.uni.lu/). The following run times for very big quantiles ranking problems could be achieved both:
 
     - on Iris -skylake nodes with 28 cores [7]_, and
     - on the 3TB -bigmem Gaia-183 node with 64 cores [8]_,
@@ -5281,14 +5281,15 @@ Example python session on the HPC-UL Iris-126 -skylake node [7]_
 .. code-block:: bash
    :linenos:
 
-	(myPy365ICC) [rbisdorff@iris-126 Test]$ python
-	Python 3.6.5 (default, May  9 2018, 09:54:28) 
-	[GCC Intel(R) C++ gcc 6.3 mode] on linux
-	Type "help", "copyright", "credits" or "license" for more information.
-	>>>
+   (myPy365ICC) [rbisdorff@iris-126 Test]$ python
+   Python 3.6.5 (default, May  9 2018, 09:54:28) 
+   [GCC Intel(R) C++ gcc 6.3 mode] on linux
+   Type "help", "copyright", "credits" or "license" for more information.
+   >>>
 
 .. code-block:: pycon
    :linenos:
+   :emphasize-lines: 37-42
 
    >>> from cRandPerfTabs import\
    ...    cRandom3ObjectivesPerformanceTableau as cR3ObjPT

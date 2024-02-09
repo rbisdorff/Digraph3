@@ -5144,8 +5144,8 @@ pairwise perspective (see below), we notice that, with the given preference disc
 </span><span class="hll"><span class="linenos">45</span><span class="go">  Ordering          : 0.00000</span>
 </span></pre></div>
 </div>
-<p>When ordering the 587 components resulting from a 75-tiling sorting with the “average* quantiles ordering strategy, the maximal order of a component is limited to an average size of about 170 actions with a maximal size of 269 actions (see Lines 22-29). With a tasks queue of 587 components to be ranked now in parallel on only 12 cores, we need to fix a consequent minimal component size of 150 actions in order to avoid too short individual task’s durations (see Line 26).</p>
-<p>Even bigger performance tableaux may be ranked with a larger <em>cpu_count()</em>. We were using therefore in 2018 the HPC Platform of the University of Luxembourg (<a class="reference external" href="https://hpc.uni.lu/">https://hpc.uni.lu/</a>), the following run times for very big ranking problems could be achieved both:</p>
+<p>When ordering the 587 components resulting from a 75-tiling sorting with the <em>average</em> quantiles ordering strategy, the order of a component is limited to a maximal size of 269 actions (see Line 27). With a queue of these 587 components to be ranked now in parallel on only 12 available cores, we need to fix a consequent minimal component size of 150 actions in order to avoid too short individual tasks’ durations (see Line 26).</p>
+<p>Bigger performance tableaux may definitely be ranked with a larger <em>cpu_count()</em>. We were using therefore in 2018 the HPC Platform of the University of Luxembourg (<a class="reference external" href="https://hpc.uni.lu/">https://hpc.uni.lu/</a>). The following run times for very big quantiles ranking problems could be achieved both:</p>
 <blockquote>
 <div><ul class="simple">
 <li><p>on Iris -skylake nodes with 28 cores <a class="footnote-reference brackets" href="#id165" id="id67" role="doc-noteref"><span class="fn-bracket">[</span>7<span class="fn-bracket">]</span></a>, and</p></li>
@@ -5160,11 +5160,11 @@ pairwise perspective (see below), we notice that, with the given preference disc
 </figcaption>
 </figure>
 <p>Example python session on the HPC-UL Iris-126 -skylake node <a class="footnote-reference brackets" href="#id165" id="id69" role="doc-noteref"><span class="fn-bracket">[</span>7<span class="fn-bracket">]</span></a></p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="linenos">1</span><span class="w">     </span><span class="o">(</span>myPy365ICC<span class="o">)</span><span class="w"> </span><span class="o">[</span>rbisdorff@iris-126<span class="w"> </span>Test<span class="o">]</span>$<span class="w"> </span>python
-<span class="linenos">2</span><span class="w">     </span>Python<span class="w"> </span><span class="m">3</span>.6.5<span class="w"> </span><span class="o">(</span>default,<span class="w"> </span>May<span class="w">  </span><span class="m">9</span><span class="w"> </span><span class="m">2018</span>,<span class="w"> </span><span class="m">09</span>:54:28<span class="o">)</span>
-<span class="linenos">3</span><span class="w">     </span><span class="o">[</span>GCC<span class="w"> </span>Intel<span class="o">(</span>R<span class="o">)</span><span class="w"> </span>C++<span class="w"> </span>gcc<span class="w"> </span><span class="m">6</span>.3<span class="w"> </span>mode<span class="o">]</span><span class="w"> </span>on<span class="w"> </span>linux
-<span class="linenos">4</span><span class="w">     </span>Type<span class="w"> </span><span class="s2">&quot;help&quot;</span>,<span class="w"> </span><span class="s2">&quot;copyright&quot;</span>,<span class="w"> </span><span class="s2">&quot;credits&quot;</span><span class="w"> </span>or<span class="w"> </span><span class="s2">&quot;license&quot;</span><span class="w"> </span><span class="k">for</span><span class="w"> </span>more<span class="w"> </span>information.
-<span class="linenos">5</span><span class="w">     </span>&gt;&gt;&gt;
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="linenos">1</span><span class="o">(</span>myPy365ICC<span class="o">)</span><span class="w"> </span><span class="o">[</span>rbisdorff@iris-126<span class="w"> </span>Test<span class="o">]</span>$<span class="w"> </span>python
+<span class="linenos">2</span>Python<span class="w"> </span><span class="m">3</span>.6.5<span class="w"> </span><span class="o">(</span>default,<span class="w"> </span>May<span class="w">  </span><span class="m">9</span><span class="w"> </span><span class="m">2018</span>,<span class="w"> </span><span class="m">09</span>:54:28<span class="o">)</span>
+<span class="linenos">3</span><span class="o">[</span>GCC<span class="w"> </span>Intel<span class="o">(</span>R<span class="o">)</span><span class="w"> </span>C++<span class="w"> </span>gcc<span class="w"> </span><span class="m">6</span>.3<span class="w"> </span>mode<span class="o">]</span><span class="w"> </span>on<span class="w"> </span>linux
+<span class="linenos">4</span>Type<span class="w"> </span><span class="s2">&quot;help&quot;</span>,<span class="w"> </span><span class="s2">&quot;copyright&quot;</span>,<span class="w"> </span><span class="s2">&quot;credits&quot;</span><span class="w"> </span>or<span class="w"> </span><span class="s2">&quot;license&quot;</span><span class="w"> </span><span class="k">for</span><span class="w"> </span>more<span class="w"> </span>information.
+<span class="linenos">5</span>&gt;&gt;&gt;
 </pre></div>
 </div>
 <div class="highlight-pycon notranslate"><div class="highlight"><pre><span></span><span class="linenos"> 1</span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">cRandPerfTabs</span> <span class="kn">import</span>\
@@ -5203,13 +5203,13 @@ pairwise perspective (see below), we notice that, with the given preference disc
 <span class="linenos">34</span><span class="go"> Maximal order     : 153</span>
 <span class="linenos">35</span><span class="go"> Average order     : 4.3</span>
 <span class="linenos">36</span><span class="go"> fill rate         : 0.001%</span>
-<span class="linenos">37</span><span class="go"> *----  Constructor run times (in sec.) ----*</span>
-<span class="linenos">38</span><span class="go"> Nbr of threads    : 28</span>
-<span class="linenos">39</span><span class="go"> Start method      : fork</span>
-<span class="linenos">40</span><span class="go"> Total time        : 177.02770</span>
-<span class="linenos">41</span><span class="go"> QuantilesSorting  : 99.55377</span>
-<span class="linenos">42</span><span class="go"> Preordering       : 5.17954</span>
-<span class="linenos">43</span><span class="go"> Decomposing       : 72.29356</span>
+<span class="hll"><span class="linenos">37</span><span class="go"> *----  Constructor run times (in sec.) ----*</span>
+</span><span class="hll"><span class="linenos">38</span><span class="go"> Nbr of threads    : 28</span>
+</span><span class="hll"><span class="linenos">39</span><span class="go"> Start method      : fork</span>
+</span><span class="hll"><span class="linenos">40</span><span class="go"> Total time        : 177.02770</span>
+</span><span class="hll"><span class="linenos">41</span><span class="go"> QuantilesSorting  : 99.55377</span>
+</span><span class="hll"><span class="linenos">42</span><span class="go"> Preordering       : 5.17954</span>
+</span><span class="linenos">43</span><span class="go"> Decomposing       : 72.29356</span>
 </pre></div>
 </div>
 <p>On this 2x14c Intel Xeon Gold 6132 &#64; 2.6 GHz equipped HPC node with 132GB RAM <a class="footnote-reference brackets" href="#id165" id="id70" role="doc-noteref"><span class="fn-bracket">[</span>7<span class="fn-bracket">]</span></a>, deciles sorting and locally ranking a <strong>million</strong> decision alternatives evaluated on 21 incommensurable criteria, by balancing an economic, an environmental and a societal decision objective, takes us about <strong>3 minutes</strong> (see Lines 37-42 above); with 1.5 minutes for the deciles sorting and, a bit more than one minute, for the local ranking of the individual components.</p>
