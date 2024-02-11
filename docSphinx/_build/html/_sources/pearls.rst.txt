@@ -17,7 +17,7 @@
 
 .. meta::
    :description: Documentation of the Digraph3 collection of python3 modules for algorithmic decision theory
-   :keywords: Algorithmic Decision Theory, Outranking Digraphs, MIS and kernels, Multiple Criteria Decision Aid
+   :keywords: Algorithmic Decision Theory, Outranking Digraphs, MIS and kernels, Multiple Criteria Decision Aid, Bipolar-valued Epistemic Logic
 
 .. _Advanced-Topics-label:
 
@@ -26,7 +26,8 @@ Advanced Topics
 
 .. only:: html
 
-   :Author: Raymond Bisdorff, Retired Professor of Applied Mathematics and Computer Science, https://rbisdorff.github.io/
+   :Author: Raymond Bisdorff, Emeritus Professor of Applied Mathematics and Computer Science, University of Luxembourg
+   :Url: https://rbisdorff.github.io/
    :Version: |version| (release: |release|)
    :PDF version: `3.3 MB <_static/digraph3Pearls.pdf>`_
    :Copyright: `R. Bisdorff <_static/digraph3_copyright.html>`_ 2013-2024

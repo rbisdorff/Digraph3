@@ -1,6 +1,6 @@
 .. meta::
    :description: Documentation of the Digraph3 collection of python3 modules for algorithmic decision theory
-   :keywords: Algorithmic Decision Theory, Outranking Digraphs, MIS and kernels, Multiple Criteria Decision Aid
+   :keywords: Algorithmic Decision Theory, Outranking Digraphs, MIS and kernels, Multiple Criteria Decision Aid, Bipolar-valued Epistemic Logic
 
 .. |location_link1| raw:: html
 
@@ -19,7 +19,8 @@ Python resources for Algorithmic Decision Theory
 
 Wecome! This is the documentation for the **Digraph3** *Python* programming resources.
 
-:Author: Raymond Bisdorff, Retired Professor of Applied Mathematics and Computer Science, https://rbisdorff.github.io/
+:Author: Raymond Bisdorff, Emeritus Professor of Applied Mathematics and Computer Science, University of Luxdembourg
+:Url: https://rbisdorff.github.io/
 :Version: |version| (release: |release|)
 :Copyright: R. Bisdorff |location_link3| 2013-2024
 
