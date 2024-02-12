@@ -4690,20 +4690,14 @@ The same computation without threading takes about four times more total run tim
 
 These run times were obtained on a common desktop computer equipped with an 11th Gen Intel® Core™ i5-11400 × 12 processor and 16.0 BG of CPU memory.
 
-Setting threading parameters
-````````````````````````````
+Using the mpOutrankingDigraphs module
+`````````````````````````````````````
 
-Without specifying the number of cores (*nbrCores=None*) or the threading start method (*startMethod=None*), the *cpu_count* method from the :py:mod:`multiprocessing` module will be used to detect the number of available cores and the default start method will be *spawn*.
-
-It is possible to use instead the *forkserver* or the more traditional Posix *fork* start method (default on Linux). [52]_
-
-Mind that the latter method, due to the very architecture of the Python interpreter C code, cannot be safe against specific dead locks leading to  hanging or freezing applications and zombie processes. [51]_
-
-A refactored and streamlined multiprocessing :py:mod:`mpOutrankingDigraphs` module for even faster computing bipolar outranking digraphs with up to several thousands of decision actions has been recently added to the Digraph3 resources (see Line 21 below).
+A refactored and streamlined multiprocessing :py:mod:`mpOutrankingDigraphs` module for even faster computing bipolar outranking digraphs with up to several hundreds of decision actions has been recently added to the Digraph3 resources (see Line 21 below).
 
 .. code-block:: pycon
    :linenos:
-   :emphasize-lines: 15,21
+   :emphasize-lines: 19,24
 
    >>> from mpOutrankingDigraphs import MPBipolarOutrankingDigraph
    >>> mpg = MPBipolarOutrankingDigraph(t,nbrCores=10,
@@ -4731,13 +4725,13 @@ A refactored and streamlined multiprocessing :py:mod:`mpOutrankingDigraphs` modu
     Compute relation   : 2.48847
     Gamma sets         : 0.15624
 
-Notice also in Line 15 above, that this computation includes the *largePerformanceDifferencesCount* attribute containing the results of the considerable performance differences counts. Setting parameter *WithVetoCounts* to *True* for the :py:class:`”outrankingDigraphs.BipolarOutrankingDigraph` constructor gives the same attribute, but adds about a second to the total run time of 13 seconds.
+Notice also in Line 16 above, that this computation provides the *largePerformanceDifferencesCount* attribute containing the results of the considerable performance differences counts. Setting parameter *WithVetoCounts* to *True* for the :py:class:`”outrankingDigraphs.BipolarOutrankingDigraph` constructor provides the same attribute, but adds about a second to the total run time of 13 seconds.
 
-This allows to print out the relation table with the considerable performance differences counts.
+This attribute allows to print out the relation table with the considerable performance differences counts decoration (see Line 1 below).
 
 .. code-block:: pycon
    :linenos:
-   :emphasize-lines: 7-8,11-12
+   :emphasize-lines: 1,7-8,11-12
 
    >>> mpg.showRelationTable(hasLPDDenotation=True,toIndex=5)
    * ---- Relation Table -----
@@ -4755,11 +4749,16 @@ This allows to print out the relation table with the considerable performance di
            |  (+0,+0)  (+0,+0)  (+0,+0)  (+1,+0)  (+0,+0) 
      Valuation domain: [-13.000; 13.000]
 
-In Lines 7-8 above, we may for instance notice a considerable positive performance difference when comparing alternatives 'a002' and 'a004' which results in a polarised for certain valid outranking situation: :math:`r(a_{002} \succsim a_{004}) = +13.00`. The converse situation is observed in Lines 11-12 where we may notice the corresponding considerable negative performance differnce leading this time polarise for certain invalid outranking situation: :math:`r(a_{004} \succsim a_{002}) = -13.00`.
+In Lines 7-8 above, we may for instance notice a considerably large positive performance difference when comparing alternatives 'a002' and 'a004' which results in a polarised *for certain valid* outranking situation: :math:`r(a_{002} \succsim a_{004}) = +13.00`. The converse situation is observed in Lines 11-12 where we may notice the corresponding considerably large negative performance differnce leading this time to a polarised *for certain invalid* outranking situation: :math:`r(a_{004} \succsim a_{002}) = -13.00`.
 
-Submitting multiprocessing Python scripts
-`````````````````````````````````````````
-When writing multiprocessing Digraph3 Python scripts not using the Posix *fork* start method, it is essential to protect the main program code with a *__name__=='__main__'* test against recursive re-excution (see below).
+Setting the Threading parameters
+````````````````````````````````
+
+Without specifying the number of cores (*nbrCores=None*) or the threading start method (*startMethod=None*), the :py:meth:`cpu_count` method from the :py:mod:`multiprocessing` module will be used to detect the number of available cores and the threading start method will be set by default to *spawn*.
+
+It is possible to use instead the *forkserver* or the more traditional Posix *fork* start method (default on Linux) [52]_. Mind that the latter method, due to the very architecture of the Python interpreter C code, cannot be safe against specific dead locks leading to  hanging or freezing applications and zombie processes. [51]_
+
+When writing multiprocessing Digraph3 Python scripts not using the Posix *fork* start method, it is furthermore essential to protect the main program code with a *__name__=='__main__'* test against recursive re-excution (see below).
 
 .. code-block:: python
    :linenos:
@@ -4777,11 +4776,9 @@ When writing multiprocessing Digraph3 Python scripts not using the Posix *fork* 
 				   Comments=True)
       print(g)
 
-
 Back to :ref:`Content Table <Tutorial-label>`
 
 -----------
-
 
 .. _HPC-Tutorial-label:
 
