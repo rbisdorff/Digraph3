@@ -181,6 +181,46 @@
 
 <span class="c1">#---------- general methods -----------------</span>
 
+<span class="c1"># splitting list indexes</span>
+<div class="viewcode-block" id="qtilingIndexList">
+<a class="viewcode-back" href="../techDoc.html#digraphsTools.qtilingIndexList">[docs]</a>
+<span class="k">def</span> <span class="nf">qtilingIndexList</span><span class="p">(</span><span class="n">indexList</span><span class="p">,</span><span class="n">q</span><span class="p">,</span><span class="n">Debug</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    split an index list into q parts of equal length,</span>
+<span class="sd">    except the last one when there is a rest </span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">n</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">indexList</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">Debug</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="n">indexList</span><span class="p">,</span> <span class="n">q</span><span class="p">)</span>
+
+    <span class="n">nq</span> <span class="o">=</span> <span class="n">n</span><span class="o">//</span><span class="n">q</span>
+    <span class="k">if</span> <span class="n">nq</span> <span class="o">*</span> <span class="n">q</span> <span class="o">&lt;</span> <span class="n">n</span><span class="p">:</span>
+        <span class="n">nq</span> <span class="o">=</span> <span class="n">n</span> <span class="o">//</span> <span class="p">(</span><span class="n">q</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span>
+        <span class="n">Rest</span> <span class="o">=</span> <span class="kc">True</span>
+        <span class="k">if</span> <span class="n">Debug</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="n">nq</span><span class="p">,</span> <span class="n">nq</span><span class="o">*</span><span class="p">(</span><span class="n">q</span><span class="o">-</span><span class="mi">1</span><span class="p">),</span> <span class="n">n</span> <span class="o">-</span> <span class="n">nq</span><span class="o">*</span><span class="p">(</span><span class="n">q</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span>  <span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">Rest</span> <span class="o">=</span> <span class="kc">False</span>
+        <span class="k">if</span> <span class="n">Debug</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="n">nq</span><span class="p">,</span> <span class="n">nq</span><span class="o">*</span><span class="n">q</span><span class="p">,</span> <span class="n">n</span> <span class="o">-</span> <span class="n">nq</span><span class="o">*</span><span class="n">q</span>  <span class="p">)</span>
+    <span class="n">splitIndex</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">if</span> <span class="n">Rest</span> <span class="o">==</span> <span class="kc">True</span><span class="p">:</span>
+        <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">q</span><span class="o">-</span><span class="mi">1</span><span class="p">):</span>
+            <span class="k">if</span> <span class="n">Debug</span><span class="p">:</span>
+                <span class="nb">print</span><span class="p">(</span> <span class="n">nq</span><span class="p">,</span> <span class="n">j</span><span class="o">*</span><span class="n">nq</span><span class="p">,</span> <span class="p">(</span><span class="n">j</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span><span class="o">*</span><span class="n">nq</span> <span class="p">)</span>
+            <span class="n">splitIndex</span><span class="o">.</span><span class="n">append</span><span class="p">(</span> <span class="p">(</span><span class="n">j</span><span class="o">*</span><span class="n">nq</span><span class="p">,</span> <span class="p">(</span><span class="n">j</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span><span class="o">*</span><span class="n">nq</span><span class="p">)</span> <span class="p">)</span>
+        <span class="k">if</span> <span class="n">Debug</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Rest&quot;</span><span class="p">,</span> <span class="n">n</span> <span class="o">-</span> <span class="p">((</span><span class="n">q</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span><span class="o">*</span><span class="n">nq</span><span class="p">),</span> <span class="p">(</span><span class="n">q</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span><span class="o">*</span><span class="n">nq</span><span class="p">,</span> <span class="n">n</span> <span class="p">)</span>
+        <span class="n">splitIndex</span><span class="o">.</span><span class="n">append</span><span class="p">(</span> <span class="p">((</span><span class="n">q</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span><span class="o">*</span><span class="n">nq</span><span class="p">,</span> <span class="n">n</span><span class="p">)</span> <span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">q</span><span class="p">):</span>
+            <span class="k">if</span> <span class="n">Debug</span><span class="p">:</span>
+                <span class="nb">print</span><span class="p">(</span> <span class="n">nq</span><span class="p">,</span> <span class="n">j</span><span class="o">*</span><span class="n">nq</span><span class="p">,</span> <span class="p">(</span><span class="n">j</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span><span class="o">*</span><span class="n">nq</span> <span class="p">)</span>
+            <span class="n">splitIndex</span><span class="o">.</span><span class="n">append</span><span class="p">(</span> <span class="p">(</span><span class="n">j</span><span class="o">*</span><span class="n">nq</span><span class="p">,</span> <span class="p">(</span><span class="n">j</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span><span class="o">*</span><span class="n">nq</span><span class="p">)</span> <span class="p">)</span>
+
+    <span class="k">return</span> <span class="n">splitIndex</span></div>
+
+
 <span class="c1"># sorting list of scored tuples</span>
 <div class="viewcode-block" id="scoredTuplesSort">
 <a class="viewcode-back" href="../techDoc.html#digraphsTools.scoredTuplesSort">[docs]</a>
@@ -944,15 +984,26 @@
 <span class="s2">    * redistribute it if it remains free software.     *</span>
 <span class="s2">    ****************************************************</span>
 <span class="s2">    &quot;&quot;&quot;</span><span class="p">)</span>
-    <span class="n">seqA</span> <span class="o">=</span> <span class="n">generateRandomSequence</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span>
-    <span class="n">seqB</span> <span class="o">=</span> <span class="n">generateRandomSequence</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span>
-    <span class="n">seqA</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;T&#39;</span><span class="p">,</span><span class="s1">&#39;A&#39;</span><span class="p">,</span><span class="s1">&#39;C&#39;</span><span class="p">,</span><span class="s1">&#39;G&#39;</span><span class="p">,</span><span class="s1">&#39;G&#39;</span><span class="p">,</span><span class="s1">&#39;G&#39;</span><span class="p">,</span><span class="s1">&#39;C&#39;</span><span class="p">,</span><span class="s1">&#39;C&#39;</span><span class="p">,</span><span class="s1">&#39;C&#39;</span><span class="p">,</span><span class="s1">&#39;G&#39;</span><span class="p">,</span><span class="s1">&#39;C&#39;</span><span class="p">,</span><span class="s1">&#39;T&#39;</span><span class="p">,</span><span class="s1">&#39;A&#39;</span><span class="p">,</span><span class="s1">&#39;C&#39;</span><span class="p">]</span>
-    <span class="n">seqB</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;T&#39;</span><span class="p">,</span><span class="s1">&#39;A&#39;</span><span class="p">,</span><span class="s1">&#39;G&#39;</span><span class="p">,</span><span class="s1">&#39;C&#39;</span><span class="p">,</span><span class="s1">&#39;C&#39;</span><span class="p">,</span><span class="s1">&#39;C&#39;</span><span class="p">,</span><span class="s1">&#39;T&#39;</span><span class="p">,</span><span class="s1">&#39;A&#39;</span><span class="p">,</span><span class="s1">&#39;T&#39;</span><span class="p">,</span><span class="s1">&#39;C&#39;</span><span class="p">,</span><span class="s1">&#39;G&#39;</span><span class="p">,</span><span class="s1">&#39;G&#39;</span><span class="p">,</span><span class="s1">&#39;T&#39;</span><span class="p">,</span><span class="s1">&#39;C&#39;</span><span class="p">,</span><span class="s1">&#39;A&#39;</span><span class="p">]</span>
-    <span class="n">alignnment</span> <span class="o">=</span> <span class="n">computeSequenceAlignment</span><span class="p">(</span><span class="n">seqA</span><span class="p">,</span><span class="n">seqB</span><span class="p">)</span>
-    <span class="kn">from</span> <span class="nn">digraphsTools</span> <span class="kn">import</span> <span class="n">kmpMatch</span>
-    <span class="n">haystack</span> <span class="o">=</span> <span class="s1">&#39;00110010110011001011&#39;</span>
-    <span class="n">needle</span> <span class="o">=</span> <span class="s1">&#39;0101&#39;</span>
-    <span class="n">kmpMatch</span><span class="p">(</span><span class="n">haystack</span><span class="p">,</span><span class="n">needle</span><span class="p">,</span><span class="n">Comments</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+    <span class="n">indexList</span> <span class="o">=</span> <span class="nb">range</span><span class="p">(</span><span class="mi">281</span><span class="p">)</span>
+    <span class="n">q</span> <span class="o">=</span> <span class="mi">12</span>
+    <span class="n">splitIndex</span> <span class="o">=</span> <span class="n">qtilingIndexList</span><span class="p">(</span><span class="n">indexList</span><span class="p">,</span><span class="n">q</span><span class="p">,</span><span class="n">Debug</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">splitIndex</span><span class="p">)</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">splitIndex</span><span class="p">)):</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;group&#39;</span><span class="p">,</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span>
+        <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">splitIndex</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="mi">0</span><span class="p">],</span><span class="n">splitIndex</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="mi">1</span><span class="p">]):</span>
+            <span class="nb">print</span><span class="p">(</span><span class="n">j</span><span class="p">)</span>
+
+
+<span class="c1">##    seqA = generateRandomSequence(10)</span>
+<span class="c1">##    seqB = generateRandomSequence(10)</span>
+<span class="c1">##    seqA = [&#39;T&#39;,&#39;A&#39;,&#39;C&#39;,&#39;G&#39;,&#39;G&#39;,&#39;G&#39;,&#39;C&#39;,&#39;C&#39;,&#39;C&#39;,&#39;G&#39;,&#39;C&#39;,&#39;T&#39;,&#39;A&#39;,&#39;C&#39;]</span>
+<span class="c1">##    seqB = [&#39;T&#39;,&#39;A&#39;,&#39;G&#39;,&#39;C&#39;,&#39;C&#39;,&#39;C&#39;,&#39;T&#39;,&#39;A&#39;,&#39;T&#39;,&#39;C&#39;,&#39;G&#39;,&#39;G&#39;,&#39;T&#39;,&#39;C&#39;,&#39;A&#39;]</span>
+<span class="c1">##    alignnment = computeSequenceAlignment(seqA,seqB)</span>
+<span class="c1">##    from digraphsTools import kmpMatch</span>
+<span class="c1">##    haystack = &#39;00110010110011001011&#39;</span>
+<span class="c1">##    needle = &#39;0101&#39;</span>
+<span class="c1">##    kmpMatch(haystack,needle,Comments=True)</span>
 
 
 <span class="c1">##    plist = [[1,2,3],[4],[5,6]]</span>
@@ -1001,7 +1052,7 @@
 
   <div role="contentinfo">
     <p>&#169; Copyright 2012-2024, Raymond Bisdorff.
-      <span class="lastupdated">Last updated on Feb 09, 2024.
+      <span class="lastupdated">Last updated on Feb 13, 2024.
       </span></p>
   </div>
 

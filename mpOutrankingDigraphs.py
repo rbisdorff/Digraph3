@@ -133,7 +133,7 @@ class MPBipolarOutrankingDigraph(BipolarOutrankingDigraph):
     (11th Gen Intel® Core™ i5-11400 × 12, 16.0 GiB memory, Ubuntu 23.10, Python3.12.0):
 
     >>> from randomPerfTabs import RandomCBPerformanceTableau
-    >>> pt1 = RandomCBPerformanceTableau(
+    >>> pt = RandomCBPerformanceTableau(
     ...         numberOfActions=1000,numberOfCriteria=13,
     ...         seed=10)
     >>> from mpOutrankingDigraphs import MPBipolarOutrankingDigraph

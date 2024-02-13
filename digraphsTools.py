@@ -86,6 +86,43 @@ colorPalettes = {1: _colorPalette1, 2: _colorPalette2, 3: _colorPalette0}
 
 #---------- general methods -----------------
 
+# splitting list indexes
+def qtilingIndexList(indexList,q,Debug=True):
+    """
+    split an index list into q parts of equal length,
+    except the last one when there is a rest 
+    """
+    n = len(indexList)
+    if Debug:
+        print(n, indexList, q)
+
+    nq = n//q
+    if nq * q < n:
+        nq = n // (q-1)
+        Rest = True
+        if Debug:
+            print(nq, nq*(q-1), n - nq*(q-1)  )
+    else:
+        Rest = False
+        if Debug:
+            print(nq, nq*q, n - nq*q  )
+    splitIndex = []
+    if Rest == True:
+        for j in range(q-1):
+            if Debug:
+                print( nq, j*nq, (j+1)*nq )
+            splitIndex.append( (j*nq, (j+1)*nq) )
+        if Debug:
+            print("Rest", n - ((q-1)*nq), (q-1)*nq, n )
+        splitIndex.append( ((q-1)*nq, n) )
+    else:
+        for j in range(q):
+            if Debug:
+                print( nq, j*nq, (j+1)*nq )
+            splitIndex.append( (j*nq, (j+1)*nq) )
+
+    return splitIndex
+
 # sorting list of scored tuples
 def scoredTuplesSort(tuples,reverse=False,InSite=True):
     """ 
@@ -798,15 +835,26 @@ if __name__ == '__main__':
     * redistribute it if it remains free software.     *
     ****************************************************
     """)
-    seqA = generateRandomSequence(10)
-    seqB = generateRandomSequence(10)
-    seqA = ['T','A','C','G','G','G','C','C','C','G','C','T','A','C']
-    seqB = ['T','A','G','C','C','C','T','A','T','C','G','G','T','C','A']
-    alignnment = computeSequenceAlignment(seqA,seqB)
-    from digraphsTools import kmpMatch
-    haystack = '00110010110011001011'
-    needle = '0101'
-    kmpMatch(haystack,needle,Comments=True)
+
+    indexList = range(281)
+    q = 12
+    splitIndex = qtilingIndexList(indexList,q,Debug=True)
+    print(splitIndex)
+    for i in range(len(splitIndex)):
+        print('group',i+1)
+        for j in range(splitIndex[i][0],splitIndex[i][1]):
+            print(j)
+
+
+##    seqA = generateRandomSequence(10)
+##    seqB = generateRandomSequence(10)
+##    seqA = ['T','A','C','G','G','G','C','C','C','G','C','T','A','C']
+##    seqB = ['T','A','G','C','C','C','T','A','T','C','G','G','T','C','A']
+##    alignnment = computeSequenceAlignment(seqA,seqB)
+##    from digraphsTools import kmpMatch
+##    haystack = '00110010110011001011'
+##    needle = '0101'
+##    kmpMatch(haystack,needle,Comments=True)
 
 
 ##    plist = [[1,2,3],[4],[5,6]]

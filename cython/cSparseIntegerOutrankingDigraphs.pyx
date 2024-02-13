@@ -2077,39 +2077,40 @@ def _worker1(input):
 #     print( '%d/%d = %s' % \
 #            (args[1], args[2],result))
 
-def _decompose1(int i, int nc,tempDirName,
+def _decompose1(splitIndex, int nc,tempDirName,
                 perfTab,decomposition,componentRankingRule):
     cdef int nd
     #global perfTab
     #global decomposition
     from pickle import dumps
-    comp = decomposition[i]
-    nd = len(str(nc))
-    compKey = ('c%%0%dd' % (nd)) % (i+1)
-    compDict = {'rank':i}
-    compDict['lowQtileLimit'] = comp[0][1]
-    compDict['highQtileLimit'] = comp[0][0]
-    pg = IntegerBipolarOutrankingDigraph(perfTab,
+    for i in range(splitIndex[0],splitIndex[1]):
+        try:
+            comp = decomposition[i]
+        except:
+            print('Error', i, splitIndex)
+        nd = len(str(nc))
+        compKey = ('c%%0%dd' % (nd)) % (i+1)
+        compDict = {'rank':i}
+        compDict['lowQtileLimit'] = comp[0][1]
+        compDict['highQtileLimit'] = comp[0][0]
+        pg = IntegerBipolarOutrankingDigraph(perfTab,
                     actionsSubset=comp[1],
                     WithConcordanceRelation=False,
                     WithVetoCounts=False,
                     CopyPerfTab=False,
                     Threading=False)
-    if componentRankingRule == 'Copeland':
-        componentRanking = pg.computeCopelandRanking()
-    else:
-        componentRanking = pg.computeNetFlowsRanking()
-        
-    #pg.__dict__.pop('criteria')
-    #pg.__dict__.pop('evaluation')
-    #pg.__class__ = Digraph
-    compDict['componentRanking'] = componentRanking
-    splitComponent = {'compKey':i,'compDict':compDict}
-    foName = tempDirName+'/splitComponent-'+str(i)+'.py'
-    fo = open(foName,'wb')
-    fo.write(dumps(splitComponent,-1))
-    fo.close()
-    return '%d/%d (%d)' % (i,nc,pg.order)
+        if componentRankingRule == 'Copeland':
+            componentRanking = pg.computeCopelandRanking()
+        else:
+            componentRanking = pg.computeNetFlowsRanking()
+        compDict['componentRanking'] = componentRanking
+        splitComponent = {'compKey':i,'compDict':compDict}
+        foName = tempDirName+'/splitComponent-'+str(i)+'.py'
+        fo = open(foName,'wb')
+        fo.write(dumps(splitComponent,-1))
+        fo.close()
+        #print('Saved: %s' % foName) 
+    return '(%d, %d)' % (splitIndex[0],splitIndex[1])
 
 # ------------
 class cQuantilesRankingDigraph(SparseIntegerOutrankingDigraph):
@@ -2201,7 +2202,7 @@ class cQuantilesRankingDigraph(SparseIntegerOutrankingDigraph):
                  int minimalComponentSize=1,\
                  bint Threading=False,\
                  startMethod=None,\
-                 tempDir=None,\
+                 tempDir='.',\
                  nbrOfCPUs=None,\
                  save2File=None,\
                  bint CopyPerfTab=False,\
@@ -2390,16 +2391,25 @@ class cQuantilesRankingDigraph(SparseIntegerOutrankingDigraph):
             from tempfile import TemporaryDirectory,mkdtemp
             maximalComponentSize = 0
             with TemporaryDirectory(dir=tempDir) as tempDirName:
+                #td = TemporaryDirectory(dir=tempDir,delete=False)
+                #tempDirName = td.name
                 ## tasks queue and workers launching
                 NUMBER_OF_WORKERS = nbrOfCPUs
+                from digraphsTools import qtilingIndexList
+                splitTasksIndex = qtilingIndexList(range(nc),NUMBER_OF_WORKERS)
+
+                print(splitTasksIndex)
                 tasksIndex = [(i,len(decomposition[i][1])) for i in range(nc)]
                 tasksIndex.sort(key=lambda pos: pos[1],reverse=True)
                 maximalComponentSize += tasksIndex[0][1]
                 if Comments:
                     print('Maximal component size: %d' % maximalComponentSize)
-                TASKS = [(Comments,(pos[0],nc,tempDirName,
-                                    perfTab,decomposition,
-                                    componentRankingRule)) for pos in tasksIndex]
+                # TASKS = [(Comments,(pos[0],nc,tempDirName,
+                #               perfTab,decomposition,
+                #               componentRankingRule)) for pos in tasksIndex]
+                TASKS = [(Comments,(pos,nc,tempDirName,
+                            perfTab,decomposition,
+                            componentRankingRule)) for pos in splitTasksIndex]
                 task_queue = Queue()
                 for task in TASKS:
                     task_queue.put(task)
@@ -2414,6 +2424,7 @@ class cQuantilesRankingDigraph(SparseIntegerOutrankingDigraph):
                     pass
                 if Comments:
                     print('Exit %d threads' % NUMBER_OF_WORKERS)
+
                 ####  post-threading operations    
                 components = OrderedDict()
                 #componentsList = []
@@ -2422,9 +2433,16 @@ class cQuantilesRankingDigraph(SparseIntegerOutrankingDigraph):
                     if Debug:
                         print('job',j)
                     fiName = tempDirName+'/splitComponent-'+str(j)+'.py'
-                    fi = open(fiName,'rb')
-                    splitComponent = loads(fi.read())
-                    fi.close()
+                    if Debug:
+                        print(j,fiName)
+                    try:
+                        fi = open(fiName,'rb')
+                        splitComponent = loads(fi.read())
+                        if Debug:
+                            print(j,'OK')
+                        fi.close()
+                    except:
+                        print(j, 'Error: missing component!')
                     if Debug:
                         print('splitComponent',j,splitComponent)
                     components[splitComponent['compKey']] = splitComponent['compDict']
