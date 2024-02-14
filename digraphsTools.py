@@ -87,10 +87,10 @@ colorPalettes = {1: _colorPalette1, 2: _colorPalette2, 3: _colorPalette0}
 #---------- general methods -----------------
 
 # splitting list indexes
-def qtilingIndexList(indexList,q,Debug=True):
+def qtilingIndexList(indexList,q,Debug=False):
     """
-    split an index list into q parts of equal length,
-    except the last one when there is a rest 
+    split an index list into q of equal length or, when there is a rest in len(indexList)//q, into q-1 parts of equal length plus a last shorter part.
+    
     """
     n = len(indexList)
     if Debug:
@@ -98,23 +98,24 @@ def qtilingIndexList(indexList,q,Debug=True):
 
     nq = n//q
     if nq * q < n:
-        nq = n // (q-1)
+        q -= 1
+        nq = n // q
         Rest = True
         if Debug:
-            print(nq, nq*(q-1), n - nq*(q-1)  )
+            print('with Rest', n//q, nq*q, n - nq*(q))
     else:
         Rest = False
         if Debug:
-            print(nq, nq*q, n - nq*q  )
+            print('Without Rest', q, nq*q, n - nq*q  )
     splitIndex = []
     if Rest == True:
-        for j in range(q-1):
+        for j in range(q):
             if Debug:
                 print( nq, j*nq, (j+1)*nq )
             splitIndex.append( (j*nq, (j+1)*nq) )
         if Debug:
-            print("Rest", n - ((q-1)*nq), (q-1)*nq, n )
-        splitIndex.append( ((q-1)*nq, n) )
+            print("Rest", n - ((q)*nq), (q)*nq, n )
+        splitIndex.append( ((q)*nq, n) )
     else:
         for j in range(q):
             if Debug:
@@ -837,6 +838,14 @@ if __name__ == '__main__':
     """)
 
     indexList = range(281)
+    q = 12
+    splitIndex = qtilingIndexList(indexList,q,Debug=True)
+    print(splitIndex)
+    for i in range(len(splitIndex)):
+        print('group',i+1)
+        for j in range(splitIndex[i][0],splitIndex[i][1]):
+            print(j)
+    indexList = range(120)
     q = 12
     splitIndex = qtilingIndexList(indexList,q,Debug=True)
     print(splitIndex)
