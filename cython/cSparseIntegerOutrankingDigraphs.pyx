@@ -2077,17 +2077,19 @@ def _worker1(input):
 #     print( '%d/%d = %s' % \
 #            (args[1], args[2],result))
 
-def _decompose1(splitIndex, int nc,tempDirName,
+def _decompose1(int t,splitIndex, int nc,tempDirName,
                 perfTab,decomposition,componentRankingRule):
-    cdef int nd
+    cdef int nd, i
     #global perfTab
     #global decomposition
     from pickle import dumps
+    splitComponents = {}
     for i in range(splitIndex[0],splitIndex[1]):
         try:
             comp = decomposition[i]
         except:
             print('Error', i, splitIndex)
+        
         nd = len(str(nc))
         compKey = ('c%%0%dd' % (nd)) % (i+1)
         compDict = {'rank':i}
@@ -2104,11 +2106,12 @@ def _decompose1(splitIndex, int nc,tempDirName,
         else:
             componentRanking = pg.computeNetFlowsRanking()
         compDict['componentRanking'] = componentRanking
-        splitComponent = {'compKey':i,'compDict':compDict}
-        foName = tempDirName+'/splitComponent-'+str(i)+'.py'
-        fo = open(foName,'wb')
-        fo.write(dumps(splitComponent,-1))
-        fo.close()
+        splitComponents[i] = compDict
+        #splitComponent = {'compKey':i,'compDict':compDict}
+    foName = tempDirName+'/splitComponents-'+str(t)+'.py'
+    fo = open(foName,'wb')
+    fo.write(dumps(splitComponents,-1))
+    fo.close()
         #print('Saved: %s' % foName) 
     return '(%d, %d)' % (splitIndex[0],splitIndex[1])
 
@@ -2209,7 +2212,7 @@ class cQuantilesRankingDigraph(SparseIntegerOutrankingDigraph):
                  bint Comments=False,\
                  bint Debug=False):
 
-        cdef int i, j, totalWeight = 0
+        cdef int i, j, t, totalWeight = 0
         cdef int nbrOfLocals,nbrOfThreadsUsed,threadLoad
         cdef double ttot, t0, tw, tdump
         cdef int maximalComponentSize
@@ -2407,9 +2410,9 @@ class cQuantilesRankingDigraph(SparseIntegerOutrankingDigraph):
                 # TASKS = [(Comments,(pos[0],nc,tempDirName,
                 #               perfTab,decomposition,
                 #               componentRankingRule)) for pos in tasksIndex]
-                TASKS = [(Comments,(pos,nc,tempDirName,
+                TASKS = [(Comments,(i,pos,nc,tempDirName,
                             perfTab,decomposition,
-                            componentRankingRule)) for pos in splitTasksIndex]
+                                    componentRankingRule)) for i,pos in enumerate(splitTasksIndex)]
                 task_queue = Queue()
                 for task in TASKS:
                     task_queue.put(task)
@@ -2425,28 +2428,50 @@ class cQuantilesRankingDigraph(SparseIntegerOutrankingDigraph):
                 if Comments:
                     print('Exit %d threads' % NUMBER_OF_WORKERS)
 
+                # ####  post-threading operations    
+                # components = OrderedDict()
+                # #componentsList = []
+                # boostedRanking = []
+                # for j in range(nc):
+                #     if Debug:
+                #         print('job',j)
+                #     fiName = tempDirName+'/splitComponent-'+str(j)+'.py'
+                #     if Debug:
+                #         print(j,fiName)
+                #     try:
+                #         fi = open(fiName,'rb')
+                #         splitComponent = loads(fi.read())
+                #         if Debug:
+                #             print(j,'OK')
+                #         fi.close()
+                #     except:
+                #         print(j, 'Error: missing component!')
+                #     if Debug:
+                #         print('splitComponent',j,splitComponent)
+                #     components[splitComponent['compKey']] = splitComponent['compDict']
+                #     boostedRanking += splitComponent['compDict']['componentRanking']
                 ####  post-threading operations    
                 components = OrderedDict()
-                #componentsList = []
                 boostedRanking = []
-                for j in range(nc):
+                for t in range(NUMBER_OF_WORKERS):
                     if Debug:
-                        print('job',j)
-                    fiName = tempDirName+'/splitComponent-'+str(j)+'.py'
+                        print('job',t)
+                    fiName = tempDirName+'/splitComponents-'+str(t)+'.py'
                     if Debug:
-                        print(j,fiName)
+                        print(t,fiName)
                     try:
                         fi = open(fiName,'rb')
-                        splitComponent = loads(fi.read())
+                        splitComponents = loads(fi.read())
                         if Debug:
-                            print(j,'OK')
+                            print(t,'OK')
                         fi.close()
                     except:
-                        print(j, 'Error: missing component!')
+                        print(t, 'Error: missing component!')
                     if Debug:
-                        print('splitComponent',j,splitComponent)
-                    components[splitComponent['compKey']] = splitComponent['compDict']
-                    boostedRanking += splitComponent['compDict']['componentRanking']
+                        print('splitComponents',s,splitComponents)
+                    for i in splitComponents:
+                        components[i] = splitComponents[i]
+                        boostedRanking += splitComponents[i]['componentRanking']
 
         # storing components, fillRate and maximalComponentSize
 

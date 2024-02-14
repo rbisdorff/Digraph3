@@ -5201,7 +5201,7 @@ HPC quantiles ranking records
 
 Following from the separability property of the *q*-tiles sorting of each action into each *q*-tiles class, the *q*-sorting algorithm may be safely split into as much threads as are multiple processing cores available in parallel. Furthermore, the ranking procedure being local to each diagonal component, these procedures may as well be safely processed in parallel threads on each component restricted outrankingdigraph.
 
-On a 2023 common desktop computer equipped with a 11th Gen Intel® Core™ i5-11400 × 12 processor and 16.0 GiB of CPU memory working under Ubuntu 23.10 we may rank a :py:class:`~cRandPerfTabs.cRandom3ObjectivesPerformanceTableau` instance of **hundred thousand** performance records in about 3 minutes (see below Lines 38-).
+On a 2023 common desktop computer equipped with a 11th Gen Intel® Core™ i5-11400 × 12 processor and 16.0 GiB of CPU memory working under Ubuntu 23.10 we may rank a :py:class:`~cRandPerfTabs.cRandom3ObjectivesPerformanceTableau` instance of **hundred thousand** performance records in about 14 seconds (see below Lines 38-).
 
 .. code-block:: bash
 
@@ -5220,46 +5220,46 @@ On a 2023 common desktop computer equipped with a 11th Gen Intel® Core™ i5-11
    ...       weightDistribution='equiobjectives',
    ...       commonScale = (0.0,1000.0),seed=1)
    >>> import cSparseIntegerOutrankingDigraphs as iBg
-   >>> qr = iBg.cQuantilesRankingDigraph(pt,quantiles=75,
-   ...                    quantilesOrderingStrategy='average',
-   ...                    minimalComponentSize=150,
-   ...                    componentRankingRule='NetFlows',
+   >>> qr = iBg.cQuantilesRankingDigraph(pt,quantiles=10,
+   ...                    quantilesOrderingStrategy='optimal',
+   ...                    minimalComponentSize=1,
+   ...                    componentRankingRule='Copeland',
    ...                    LowerClosed=False,
    ...                    Threading=True,
    ...                    tempDir='/tmp',
    ...                    nbrOfCPUs=12)
    >>> qr
-    *----- Object instance description --------------*
+   *----- Object instance description --------------*
     Instance class    : cQuantilesRankingDigraph
     Instance name     : random3ObjectivesPerfTab_mp
     Actions           : 100000
     Criteria          : 21
-    Sorting by        : 75-Tiling
-    Ordering strategy : average
-    Ranking rule      : NetFlows
-    Components        : 587
-    Minimal order     : 150
-    Maximal order     : 269
-    Average order     : 170.4
-    fill rate         : 0.173%
-    Attributes       : ['runTimes', 'name', 'actions', 'order',
-                        'dimension', 'sortingParameters',
-			'startMethod', 'valuationdomain', 'profiles',
-			'categories', 'sorting', 'minimalComponentSize',
-			'decomposition', 'nbrComponents', 'nd',
-			'nbrThreads', 'components', 'fillRate',
-			'maximalComponentSize', 'componentRankingRule',
-			'boostedRanking']
+    Sorting by        : 10-Tiling
+    Ordering strategy : optimal
+    Ranking rule      : Copeland
+    Components        : 47856
+    Minimal order     : 1
+    Maximal order     : 82
+    Average order     : 2.1
+    fill rate         : 0.004%
+    Attributes        : ['runTimes', 'name', 'actions', 'order',
+                         'dimension', 'sortingParameters',
+			 'nbrThreads', 'startMethod', 'valuationdomain',
+			 'profiles', 'categories', 'sorting',
+			 'minimalComponentSize', 'decomposition',
+			 'nbrComponents', 'nd', 'components',
+			 'fillRate', 'maximalComponentSize',
+			 'componentRankingRule', 'boostedRanking']
     ----  Constructor run times (in sec.) ----
-     Threads           : 12
-     StartMethod       : spawn
-     Total time        : 198.92933
-     QuantilesSorting  : 47.16732
-     Preordering       : 0.47598
-     Decomposing       : 151.28595
-     Ordering          : 0.00000
+    Threads           : 12
+    StartMethod       : spawn
+    Total time        : 13.41926
+    QuantilesSorting  : 6.77653
+    Preordering       : 0.37063
+    Decomposing       : 6.27206
+    Ordering          : 0.00000
 
-When ordering the 587 components resulting from a 75-tiling sorting with the *average* quantiles ordering strategy, the order of a component is limited to a maximal size of 269 actions (see Line 27). With a queue of these 587 components to be ranked now in parallel on only 12 available cores, we need to fix a consequent minimal component size of 150 actions in order to avoid too short individual tasks' durations (see Line 26).
+When ordering the 47856 components resulting from a 10-tiling sorting with the *optimal* quantiles ordering strategy, the order of a component is limited to a maximal size of 82 actions (see Line 27).
 
 Bigger performance tableaux may definitely be ranked with a larger *cpu_count()*. We were using therefore in 2018 the HPC Platform of the University of Luxembourg (https://hpc.uni.lu/). The following run times for very big quantiles ranking problems could be achieved both:
 
