@@ -4909,7 +4909,7 @@ The C compiled version of the bipolar-valued digraph models takes integer relati
       Compute relation : 0.91961
       Gamma sets       : 0.27664
       
-On a classic intel-i5-11400x12 equipped PC, the :py:class:`~cIntegerOutrankingDigraphs.IntegerBipolarOutrankingDigraph` constructor takes with four multiprocessing threads about one seconds for computing a **million** pairwise outranking characteristic values. In a similar multiprocessing setting, the standard :py:class:`~outrankingDigraphs.BipolarOutrankingDigraph` class constructor operates about four times slower.
+On a classic intel-i5-11400x12 equipped PC, the :py:class:`~cIntegerOutrankingDigraphs.IntegerBipolarOutrankingDigraph` constructor takes with four multiprocessing threads about one second for computing a **million** pairwise outranking characteristic values. In a similar multiprocessing setting, the standard :py:class:`~outrankingDigraphs.BipolarOutrankingDigraph` class constructor operates about four times slower.
 
 .. code-block:: pycon
    :linenos:
