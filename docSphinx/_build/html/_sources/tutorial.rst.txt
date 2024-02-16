@@ -4801,7 +4801,7 @@ Four cythonized Digraph3 modules, prefixed with the letter *c* and taking a *pyx
     - *cIntegerSortingDigraphs.pyx*
     - *cSparseIntegerOutrankingDigraphs.pyx*
 
-Their automatic compilation and installation, alongside the standard Digraph3 python3 modules, requires the *cython* compiler [6]_ ( ...$ pip3 install cython ) and a C compiler (...$ sudo apt install gcc on Ubuntu).
+Their automatic compilation and installation (*...Digraph3$ make installPip*), alongside the standard Digraph3 python3 modules, requires the *cython* compiler [6]_ ( *...$ python3 m pip install cython, wheel* ) and a C compiler ( *...$ sudo apt install gcc* ). Local *inplace* compilation and installation ( *.../Digraph3/cython$ make* ) is provided with a corresponding *makefile* in the "Digraph3/cython* directory.
 
 Big Data performance tableaux
 `````````````````````````````
@@ -5201,7 +5201,7 @@ HPC quantiles ranking records
 
 Following from the separability property of the *q*-tiles sorting of each action into each *q*-tiles class, the *q*-sorting algorithm may be safely split into as much threads as are multiple processing cores available in parallel. Furthermore, the ranking procedure being local to each diagonal component, these procedures may as well be safely processed in parallel threads on each component restricted outrankingdigraph.
 
-On a 2023 common desktop computer equipped with a 11th Gen Intel® Core™ i5-11400 × 12 processor and 16.0 GiB of CPU memory working under Ubuntu 23.10 we may rank a :py:class:`~cRandPerfTabs.cRandom3ObjectivesPerformanceTableau` instance of **hundred thousand** performance records in about 14 seconds (see below Lines 38-).
+On a common 2023 desktop computer, equipped with a 11th Gen Intel® Core™ i5-11400 × 12 processor and 16.0 GiB of CPU memory, working under Ubuntu 23.10 we may rank a :py:class:`~cRandPerfTabs.cRandom3ObjectivesPerformanceTableau` instance of **hundred thousand** performance records in about 13 seconds (see below Lines 38-).
 
 .. code-block:: bash
 
@@ -5261,12 +5261,12 @@ On a 2023 common desktop computer equipped with a 11th Gen Intel® Core™ i5-11
 
 When ordering the 47856 components resulting from a 10-tiling sorting with the *optimal* quantiles ordering strategy, the order of a component is limited to a maximal size of 82 actions (see Line 27).
 
-Bigger performance tableaux may definitely be ranked with a larger *cpu_count()*. We were using therefore in 2018 the HPC Platform of the University of Luxembourg (https://hpc.uni.lu/). The following run times for very big quantiles ranking problems could be achieved both:
+Bigger performance tableaux may definitely be ranked with a larger *cpu_count()*. We were using therefore in 2018 the HPC Platform of the University of Luxembourg (https://hpc.uni.lu/). The following run times for very big quantiles ranking problems of several millions of multicriteria performance records could be achieved both:
 
     - on Iris -skylake nodes with 28 cores [7]_, and
     - on the 3TB -bigmem Gaia-183 node with 64 cores [8]_,
 
-by running the cythonized python modules in an Intel compiled virtual Python 3.6.5 environment [GCC Intel(R) 17.0.1 –enable-optimizations c++ gcc 6.3 mode] on Debian 8 Linux.
+by running the cythonized python modules in an Intel compiled virtual Python 3.6.5 environment [GCC Intel(R) 17.0.1 –enable-optimizations c++ gcc 6.3 mode] on *Debian* 8 Linux.
 
 .. figure:: rankingRecords.png
    :width: 350 px

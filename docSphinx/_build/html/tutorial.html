@@ -4734,7 +4734,7 @@ pairwise perspective (see below), we notice that, with the given preference disc
 <li><p><em>cSparseIntegerOutrankingDigraphs.pyx</em></p></li>
 </ul>
 </div></blockquote>
-<p>Their automatic compilation and installation, alongside the standard Digraph3 python3 modules, requires the <em>cython</em> compiler <a class="footnote-reference brackets" href="#id164" id="id66" role="doc-noteref"><span class="fn-bracket">[</span>6<span class="fn-bracket">]</span></a> ( …$ pip3 install cython ) and a C compiler (…$ sudo apt install gcc on Ubuntu).</p>
+<p>Their automatic compilation and installation (<em>…Digraph3$ make installPip</em>), alongside the standard Digraph3 python3 modules, requires the <em>cython</em> compiler <a class="footnote-reference brackets" href="#id164" id="id66" role="doc-noteref"><span class="fn-bracket">[</span>6<span class="fn-bracket">]</span></a> ( <em>…$ python3 m pip install cython, wheel</em> ) and a C compiler ( <em>…$ sudo apt install gcc</em> ). Local <em>inplace</em> compilation and installation ( <em>…/Digraph3/cython$ make</em> ) is provided with a corresponding <em>makefile</em> in the “Digraph3/cython* directory.</p>
 </section>
 <section id="big-data-performance-tableaux">
 <h4><a class="toc-backref" href="#id292" role="doc-backlink"><span class="section-number">1.3.10.2. </span>Big Data performance tableaux</a><a class="headerlink" href="#big-data-performance-tableaux" title="Link to this heading"></a></h4>
@@ -5093,7 +5093,7 @@ pairwise perspective (see below), we notice that, with the given preference disc
 <section id="hpc-quantiles-ranking-records">
 <h4><a class="toc-backref" href="#id296" role="doc-backlink"><span class="section-number">1.3.10.6. </span>HPC quantiles ranking records</a><a class="headerlink" href="#hpc-quantiles-ranking-records" title="Link to this heading"></a></h4>
 <p>Following from the separability property of the <em>q</em>-tiles sorting of each action into each <em>q</em>-tiles class, the <em>q</em>-sorting algorithm may be safely split into as much threads as are multiple processing cores available in parallel. Furthermore, the ranking procedure being local to each diagonal component, these procedures may as well be safely processed in parallel threads on each component restricted outrankingdigraph.</p>
-<p>On a 2023 common desktop computer equipped with a 11th Gen Intel® Core™ i5-11400 × 12 processor and 16.0 GiB of CPU memory working under Ubuntu 23.10 we may rank a <a class="reference internal" href="techDoc.html#cRandPerfTabs.cRandom3ObjectivesPerformanceTableau" title="cRandPerfTabs.cRandom3ObjectivesPerformanceTableau"><code class="xref py py-class docutils literal notranslate"><span class="pre">cRandom3ObjectivesPerformanceTableau</span></code></a> instance of <strong>hundred thousand</strong> performance records in about 14 seconds (see below Lines 38-).</p>
+<p>On a common 2023 desktop computer, equipped with a 11th Gen Intel® Core™ i5-11400 × 12 processor and 16.0 GiB of CPU memory, working under Ubuntu 23.10 we may rank a <a class="reference internal" href="techDoc.html#cRandPerfTabs.cRandom3ObjectivesPerformanceTableau" title="cRandPerfTabs.cRandom3ObjectivesPerformanceTableau"><code class="xref py py-class docutils literal notranslate"><span class="pre">cRandom3ObjectivesPerformanceTableau</span></code></a> instance of <strong>hundred thousand</strong> performance records in about 13 seconds (see below Lines 38-).</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="linenos">1</span>../Digraph3/cython$<span class="w"> </span>python3.12
 <span class="linenos">2</span>Python<span class="w"> </span><span class="m">3</span>.12.0<span class="w"> </span><span class="o">(</span>main,<span class="w"> </span>Oct<span class="w">  </span><span class="m">4</span><span class="w"> </span><span class="m">2023</span>,<span class="w"> </span><span class="m">06</span>:27:34<span class="o">)</span><span class="w"> </span><span class="o">[</span>GCC<span class="w"> </span><span class="m">13</span>.2.0<span class="o">]</span><span class="w"> </span>on<span class="w"> </span>linux
 <span class="linenos">3</span>&gt;&gt;&gt;
@@ -5147,14 +5147,14 @@ pairwise perspective (see below), we notice that, with the given preference disc
 </span></pre></div>
 </div>
 <p>When ordering the 47856 components resulting from a 10-tiling sorting with the <em>optimal</em> quantiles ordering strategy, the order of a component is limited to a maximal size of 82 actions (see Line 27).</p>
-<p>Bigger performance tableaux may definitely be ranked with a larger <em>cpu_count()</em>. We were using therefore in 2018 the HPC Platform of the University of Luxembourg (<a class="reference external" href="https://hpc.uni.lu/">https://hpc.uni.lu/</a>). The following run times for very big quantiles ranking problems could be achieved both:</p>
+<p>Bigger performance tableaux may definitely be ranked with a larger <em>cpu_count()</em>. We were using therefore in 2018 the HPC Platform of the University of Luxembourg (<a class="reference external" href="https://hpc.uni.lu/">https://hpc.uni.lu/</a>). The following run times for very big quantiles ranking problems of several millions of multicriteria performance records could be achieved both:</p>
 <blockquote>
 <div><ul class="simple">
 <li><p>on Iris -skylake nodes with 28 cores <a class="footnote-reference brackets" href="#id165" id="id67" role="doc-noteref"><span class="fn-bracket">[</span>7<span class="fn-bracket">]</span></a>, and</p></li>
 <li><p>on the 3TB -bigmem Gaia-183 node with 64 cores <a class="footnote-reference brackets" href="#id166" id="id68" role="doc-noteref"><span class="fn-bracket">[</span>8<span class="fn-bracket">]</span></a>,</p></li>
 </ul>
 </div></blockquote>
-<p>by running the cythonized python modules in an Intel compiled virtual Python 3.6.5 environment [GCC Intel(R) 17.0.1 –enable-optimizations c++ gcc 6.3 mode] on Debian 8 Linux.</p>
+<p>by running the cythonized python modules in an Intel compiled virtual Python 3.6.5 environment [GCC Intel(R) 17.0.1 –enable-optimizations c++ gcc 6.3 mode] on <em>Debian</em> 8 Linux.</p>
 <figure class="align-center" id="id212">
 <a class="reference internal image-reference" href="_images/rankingRecords.png"><img alt="_images/rankingRecords.png" src="_images/rankingRecords.png" style="width: 350px;" /></a>
 <figcaption>
