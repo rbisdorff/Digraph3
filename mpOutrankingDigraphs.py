@@ -38,80 +38,85 @@ def worker_func(args):
     # out: relation, considerableDiffs
 
     # in variables
-    actionKey = args[0]
+    splitIndex = args[0]
     perfTab = args[1]
     actions = perfTab.actions
+    actionsList = [ x for x in actions]
     criteria = perfTab.criteria
     evaluation = perfTab.evaluation
     NA = perfTab.NA
+    Comments= args[2]
     
-    # init the variables tobe returned
+    # init the variables to be returned
+    if Comments:
+        print('starting splitIndex:',splitIndex)
     relation = {}
     considerableDiffs = {}
-    x = actionKey
-    relation[x] = {}
-    considerableDiffs[x] = {}
-    for y in actions:
-        relation[x].update({y : Decimal('0')})
-        considerableDiffs[x].update({y: {'positive':0, 'negative': 0}})
-    sumWeights = Decimal('0')
+    for i in range(splitIndex[0],splitIndex[1]):
+        x = actionsList[i]
+        relation[x] = {}
+        considerableDiffs[x] = {}
+        for y in actions:
+            relation[x].update({y : Decimal('0')})
+            considerableDiffs[x].update({y: {'positive':0, 'negative': 0}})
+        sumWeights = Decimal('0')
 
-    for g in criteria:
-        sumWeights += criteria[g]['weight']
-        try:
-            ind = criteria[g]['thresholds']['ind']
-        except:
-            ind = NA
-        try:
-            pref = criteria[g]['thresholds']['pref']
-        except:
-            pref = NA
-        try:
-            veto = criteria[g]['thresholds']['veto']
-        except:
-            veto = NA
-        xval = evaluation[g][x]
-        if xval != NA:
-            for y in actions:
-                yval = evaluation[g][y]
-                if yval != NA:
-                    if ind != NA and pref != NA:
-                        if (xval - yval) >= -(ind[0] + xval*ind[1]):
-                            relation[x][y] += criteria[g]['weight']
-                        elif (xval - yval) <= -(pref[0] + xval*pref[1]):
-                            relation[x][y] -= criteria[g]['weight']
-                    else:
-                        if (xval - yval) >= Decimal('0'):
-                            relation[x][y] += criteria[g]['weight']
-                        elif (xval - yval) < Decimal('0'):
-                            relation[x][y] -= criteria[g]['weight']
-                    if veto != NA:
-                        if (xval - yval) >= (veto[0] + max(xval*veto[1],yval*veto[1])):
-                            considerableDiffs[x][y]['positive'] += 1
-                        elif (xval - yval) <= -(veto[0] + max(xval*veto[1],yval*veto[1])):
-                            considerableDiffs[x][y]['negative'] -= 1
-                    # # for debugging
-                    # print(g,criteria[g]['weight'],x,y,xval,yval,(xval-yval),relation[x][y])
+        for g in criteria:
+            sumWeights += criteria[g]['weight']
+            try:
+                ind = criteria[g]['thresholds']['ind']
+            except:
+                ind = NA
+            try:
+                pref = criteria[g]['thresholds']['pref']
+            except:
+                pref = NA
+            try:
+                veto = criteria[g]['thresholds']['veto']
+            except:
+                veto = NA
+            xval = evaluation[g][x]
+            if xval != NA:
+                for y in actions:
+                    yval = evaluation[g][y]
+                    if yval != NA:
+                        if ind != NA and pref != NA:
+                            if (xval - yval) >= -(ind[0] + xval*ind[1]):
+                                relation[x][y] += criteria[g]['weight']
+                            elif (xval - yval) <= -(pref[0] + xval*pref[1]):
+                                relation[x][y] -= criteria[g]['weight']
+                        else:
+                            if (xval - yval) >= Decimal('0'):
+                                relation[x][y] += criteria[g]['weight']
+                            elif (xval - yval) < Decimal('0'):
+                                relation[x][y] -= criteria[g]['weight']
+                        if veto != NA:
+                            if (xval - yval) >= (veto[0] + max(xval*veto[1],yval*veto[1])):
+                                considerableDiffs[x][y]['positive'] += 1
+                            elif (xval - yval) <= -(veto[0] + max(xval*veto[1],yval*veto[1])):
+                                considerableDiffs[x][y]['negative'] -= 1
+                        # # for debugging
+                        # print(g,criteria[g]['weight'],x,y,xval,yval,(xval-yval),relation[x][y])
                     
-    # polarising the case given the outranking situation
-    for y in actions:
-        if considerableDiffs[x][y]['positive'] > 0 and considerableDiffs[x][y]['negative'] < 0:
-            relation[x][y] = Decimal('0')
-        elif relation[x][y] > Decimal('0'):
-            if considerableDiffs[x][y]['positive'] > 0:
-                relation[x][y] = sumWeights
-            elif considerableDiffs[x][y]['negative'] < 0:
+        # polarising the case given the outranking situation
+        for y in actions:
+            if considerableDiffs[x][y]['positive'] > 0 and considerableDiffs[x][y]['negative'] < 0:
                 relation[x][y] = Decimal('0')
-        elif relation[x][y] < Decimal('0'):
-            if considerableDiffs[x][y]['positive'] > 0:
-                relation[x][y] = Decimal('0')
-            elif considerableDiffs[x][y]['negative'] < 0:
-                relation[x][y] = -sumWeights
-        elif relation[x][y] == Decimal('0'):
-            if considerableDiffs[x][y]['positive'] > 0:
-                relation[x][y] = sumWeights
-            elif considerableDiffs[x][y]['negative'] < 0:
-                relation[x][y] = -sumWeights
+            elif relation[x][y] > Decimal('0'):
+                if considerableDiffs[x][y]['positive'] > 0:
+                    relation[x][y] = sumWeights
+                elif considerableDiffs[x][y]['negative'] < 0:
+                    relation[x][y] = Decimal('0')
+            elif relation[x][y] < Decimal('0'):
+                if considerableDiffs[x][y]['positive'] > 0:
+                    relation[x][y] = Decimal('0')
+                elif considerableDiffs[x][y]['negative'] < 0:
+                    relation[x][y] = -sumWeights
+            elif relation[x][y] == Decimal('0'):
+                if considerableDiffs[x][y]['positive'] > 0:
+                    relation[x][y] = sumWeights
+                elif considerableDiffs[x][y]['negative'] < 0:
+                    relation[x][y] = -sumWeights
 
     return [relation, considerableDiffs]
 
@@ -232,7 +237,7 @@ class MPBipolarOutrankingDigraph(BipolarOutrankingDigraph):
 
     def __init__(self,argPerfTab,WithGammaSets=True,
                  Normalized=False,ndigits=4,
-                 startMethod=None,nbrCores=None):
+                 startMethod=None,nbrCores=None,Comments=False):
         from decimal import Decimal
         from time import time
         runTimes = {}
@@ -256,6 +261,7 @@ class MPBipolarOutrankingDigraph(BipolarOutrankingDigraph):
 
         # compute relation
         actions = self.actions
+        actionsList = [a for a in actions]
         t1 = time()
         if startMethod is None:
             startMethod = 'spawn'
@@ -267,12 +273,14 @@ class MPBipolarOutrankingDigraph(BipolarOutrankingDigraph):
             relation[x] = {}
             considerableDiffs[x] = {}
         if nbrCores is None:
-            cores = ctx_in_main.cpu_count()
-        else:
-            cores = nbrCores
-        self.nbrThreads = cores
-        tasks = [(x,perfTab) for x in actions]
-        with ctx_in_main.Pool(processes=cores) as pool:
+            nbrCores = ctx_in_main.cpu_count()
+        self.nbrThreads = nbrCores
+        from digraphsTools import qtilingIndexList
+        splitIndex = qtilingIndexList(actionsList,nbrCores,Debug=False)
+        if Comments:
+            print(splitIndex)
+        tasks = [(splitIndex[i],perfTab,Comments) for i in range(nbrCores)]
+        with ctx_in_main.Pool(processes=nbrCores) as pool:
             #print(tasks)
             for result in pool.imap(worker_func, tasks):
                 #print(result[0])
@@ -289,11 +297,15 @@ class MPBipolarOutrankingDigraph(BipolarOutrankingDigraph):
                                 'med': Decimal('0'),
                                 'max': Decimal(str(sumWeights))}
         if Normalized:
+            if Comments:
+                print('Normalizing the relation characteristics')
             tn = time()
             self.recodeValuation(ndigits=ndigits)
             runTimes['normalizeRelation'] = time() - tn
         t2 = time()
         if WithGammaSets:
+            if Comments:
+                print('Adding the gamma sets')
             self.gamma = self.gammaSets()
             self.notGamma = self.notGammaSets()
         runTimes['gammaSets'] = time() - t2
@@ -370,11 +382,15 @@ class MPBipolarOutrankingDigraph(BipolarOutrankingDigraph):
 if __name__ == '__main__':
     from randomPerfTabs import Random3ObjectivesPerformanceTableau
     pt = Random3ObjectivesPerformanceTableau(
-                              numberOfActions=1500,seed=2)
+                              numberOfActions=2000,seed=2,
+        commonScale=(0.0,1000.0))
     bg = MPBipolarOutrankingDigraph(argPerfTab=pt,Normalized=True,
-                                    startMethod='spawn',
-                                    nbrCores=None)
+                                    startMethod="forkserver",
+                                    nbrCores=None,Comments=True)
     print(bg)
+    #bg.showRelationTable()
+    #g = BipolarOutrankingDigraph(pt)
+    #g.showRelationTable()
     print('*------------------*')
     print('If you see this line all tests were passed successfully :-)')
     print('Enjoy !')
