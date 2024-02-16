@@ -4693,7 +4693,7 @@ These run times were obtained on a common desktop computer equipped with an 11th
 Using the mpOutrankingDigraphs module
 `````````````````````````````````````
 
-A refactored and streamlined multiprocessing :py:mod:`mpOutrankingDigraphs` module for even faster computing bipolar outranking digraphs with up to several hundreds of decision actions has been recently added to the Digraph3 resources (see Line 21 below).
+A refactored and streamlined multiprocessing :py:mod:`mpOutrankingDigraphs` module for even faster computing bipolar outranking digraphs with up to several hundreds or thousands of decision actions has been recently added to the Digraph3 resources (see Line 21 below).
 
 .. code-block:: pycon
    :linenos:
@@ -4701,7 +4701,7 @@ A refactored and streamlined multiprocessing :py:mod:`mpOutrankingDigraphs` modu
 
    >>> from mpOutrankingDigraphs import MPBipolarOutrankingDigraph
    >>> mpg = MPBipolarOutrankingDigraph(t,nbrCores=10,
-   ...                                  startMthod='spawn')
+   ...                                  startMethod='spawn')
    >>> mpg
     *------- Object instance description ------*
     Instance class       : MPBipolarOutrankingDigraph
@@ -4720,10 +4720,10 @@ A refactored and streamlined multiprocessing :py:mod:`mpOutrankingDigraphs` modu
     ----  Constructor run times (in sec.) ----
     Threads            : 10
     Start method       : 'spawn'
-    Total time         : 2.64477
-    Data input         : 0.00003
-    Compute relation   : 2.48847
-    Gamma sets         : 0.15624
+    Total time         : 1.41698
+    Data input         : 0.00006
+    Compute relation   : 1.27468
+    Gamma sets         : 0.14207
 
 Notice also in Line 16 above, that this computation provides the *largePerformanceDifferencesCount* attribute containing the results of the considerable performance differences counts. Setting parameter *WithVetoCounts* to *True* for the :py:class:`”outrankingDigraphs.BipolarOutrankingDigraph` constructor provides the same attribute, but adds about a second to the total run time of 13 seconds.
 

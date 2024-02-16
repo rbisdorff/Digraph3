@@ -4638,10 +4638,10 @@ pairwise perspective (see below), we notice that, with the given preference disc
 </section>
 <section id="using-the-mpoutrankingdigraphs-module">
 <h4><a class="toc-backref" href="#id289" role="doc-backlink"><span class="section-number">1.3.9.2. </span>Using the mpOutrankingDigraphs module</a><a class="headerlink" href="#using-the-mpoutrankingdigraphs-module" title="Link to this heading"></a></h4>
-<p>A refactored and streamlined multiprocessing <a class="reference internal" href="techDoc.html#module-mpOutrankingDigraphs" title="mpOutrankingDigraphs"><code class="xref py py-mod docutils literal notranslate"><span class="pre">mpOutrankingDigraphs</span></code></a> module for even faster computing bipolar outranking digraphs with up to several hundreds of decision actions has been recently added to the Digraph3 resources (see Line 21 below).</p>
+<p>A refactored and streamlined multiprocessing <a class="reference internal" href="techDoc.html#module-mpOutrankingDigraphs" title="mpOutrankingDigraphs"><code class="xref py py-mod docutils literal notranslate"><span class="pre">mpOutrankingDigraphs</span></code></a> module for even faster computing bipolar outranking digraphs with up to several hundreds or thousands of decision actions has been recently added to the Digraph3 resources (see Line 21 below).</p>
 <div class="highlight-pycon notranslate"><div class="highlight"><pre><span></span><span class="linenos"> 1</span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">mpOutrankingDigraphs</span> <span class="kn">import</span> <span class="n">MPBipolarOutrankingDigraph</span>
 <span class="linenos"> 2</span><span class="gp">&gt;&gt;&gt; </span><span class="n">mpg</span> <span class="o">=</span> <span class="n">MPBipolarOutrankingDigraph</span><span class="p">(</span><span class="n">t</span><span class="p">,</span><span class="n">nbrCores</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span>
-<span class="linenos"> 3</span><span class="gp">... </span>                                 <span class="n">startMthod</span><span class="o">=</span><span class="s1">&#39;spawn&#39;</span><span class="p">)</span>
+<span class="linenos"> 3</span><span class="gp">... </span>                                 <span class="n">startMethod</span><span class="o">=</span><span class="s1">&#39;spawn&#39;</span><span class="p">)</span>
 <span class="linenos"> 4</span><span class="gp">&gt;&gt;&gt; </span><span class="n">mpg</span>
 <span class="linenos"> 5</span><span class="go"> *------- Object instance description ------*</span>
 <span class="linenos"> 6</span><span class="go"> Instance class       : MPBipolarOutrankingDigraph</span>
@@ -4660,10 +4660,10 @@ pairwise perspective (see below), we notice that, with the given preference disc
 <span class="hll"><span class="linenos">19</span><span class="go"> ----  Constructor run times (in sec.) ----</span>
 </span><span class="linenos">20</span><span class="go"> Threads            : 10</span>
 <span class="linenos">21</span><span class="go"> Start method       : &#39;spawn&#39;</span>
-<span class="linenos">22</span><span class="go"> Total time         : 2.64477</span>
-<span class="linenos">23</span><span class="go"> Data input         : 0.00003</span>
-<span class="hll"><span class="linenos">24</span><span class="go"> Compute relation   : 2.48847</span>
-</span><span class="linenos">25</span><span class="go"> Gamma sets         : 0.15624</span>
+<span class="linenos">22</span><span class="go"> Total time         : 1.41698</span>
+<span class="linenos">23</span><span class="go"> Data input         : 0.00006</span>
+<span class="hll"><span class="linenos">24</span><span class="go"> Compute relation   : 1.27468</span>
+</span><span class="linenos">25</span><span class="go"> Gamma sets         : 0.14207</span>
 </pre></div>
 </div>
 <p>Notice also in Line 16 above, that this computation provides the <em>largePerformanceDifferencesCount</em> attribute containing the results of the considerable performance differences counts. Setting parameter <em>WithVetoCounts</em> to <em>True</em> for the <code class="xref py py-class docutils literal notranslate"><span class="pre">”outrankingDigraphs.BipolarOutrankingDigraph</span></code> constructor provides the same attribute, but adds about a second to the total run time of 13 seconds.</p>
@@ -10010,7 +10010,7 @@ dot -Grankdir=TB -Tpng rootedTree.dot -o rootedTree.png</p>
 
   <div role="contentinfo">
     <p>&#169; Copyright 2012-2024, Raymond Bisdorff.
-      <span class="lastupdated">Last updated on Feb 14, 2024.
+      <span class="lastupdated">Last updated on Feb 16, 2024.
       </span></p>
   </div>
 
