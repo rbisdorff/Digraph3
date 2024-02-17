@@ -47,14 +47,17 @@ Parts of the documentation
 ..........................
 :New:
 
+   - The cythonized HPC Digraph3 modules have been reviewed and further optimised: see :ref:`cythonized Digraph3 modules <HPC-Tutorial-label>`.
+   
    - A tutorial on :ref:`using multiprocessing resources <Multiprocessing-Tutorial-label>` when tackling large performance tableaux with several hundreds of decision alternatives.
      
    - A :py:mod:`pairings` module for solving pairing problems illustrated with two tutorials on computing **fair** :ref:`intergroup<Fair-InterGroup-Pairings-label>` and :ref:`intragroup<Fair-IntraGroup-Pairings-label>` pairing solutions.
 
+..
    - A :py:mod:`dynamicProgramming` module for solving dynamic programming problems including a :py:class:`~dynamicProgramming.RandomDynamicProgrammingDigraph` constructor.
      
    - A special example of dynamic programming algorithms is the *Needleman* \& *Wunsch* algorithm for computing DNA sequence alignments: see the :py:meth:`digraphsTools.computeSequenceAlignment` method.
-       
+
 #. `Tutorials <tutorial.html>`_
 
     .. raw:: html
