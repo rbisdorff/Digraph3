@@ -837,7 +837,7 @@ if __name__ == '__main__':
     ****************************************************
     """)
 
-    indexList = range(281)
+    indexList = range(20)
     q = 12
     splitIndex = qtilingIndexList(indexList,q,Debug=True)
     print(splitIndex)

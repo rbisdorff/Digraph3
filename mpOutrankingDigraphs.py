@@ -28,8 +28,59 @@ import multiprocessing
 import os
 from time import time
 from decimal import Decimal
+from digraphs import qtilingIndexList
 
-def worker_func(args):
+def worker_func2(args,Debug=False):
+    #in variables
+    splitIndex = args[0]
+    if Debug:
+        print('splitIndex', splitIndex)
+    oldrelation = args[1][0]
+    oldMax = args[1][1]
+    oldMed = args[1][2]
+    oldMin = args[1][3]
+    #oldPrecision = argd[5]
+    oldAmplitude = oldMax - oldMin
+    if Debug:
+        print(oldMin, oldMed, oldMax, oldAmplitude)
+    newMax = args[1][4]
+    newMed = args[1][5]
+    newMin = args[1][6]
+    #newPrecision = args[9]
+    newAmplitude = newMax - newMin
+    if Debug:
+        print(newMin, newMed, newMax, newAmplitude)
+        #print('old and new precison', oldPrecision, newPrecision) 
+    
+    actionsList = args[1][7]
+    formatString = args[1][8]
+    Comments = args[2]
+    if Comments:
+        print('starting splitIndex', splitIndex)
+    newrelation = {}
+    for i in range(splitIndex[0],splitIndex[1]):
+        x = actionsList[i]
+        #for x in actions:
+        newrelation[x] = {}
+        nrx = newrelation[x]
+        orx = oldrelation[x]
+        for y in actionsList:
+            if orx[y] == oldMax:
+                nrx[y] = newMax
+            elif orx[y] == oldMin:
+                nrx[y] = newMin
+            elif orx[y] == oldMed:
+                nrx[y] = newMed
+            else:
+                newValue = newMin + ((orx[y] - oldMin)/oldAmplitude)*newAmplitude
+                nrx[y] = Decimal(formatString % newValue)
+                #nrx[y] = newMin + ((orx[y] - oldMin)/oldAmplitude)*newAmplitude
+                if Debug:
+                    print(x,y,orx[y],nrx[y])
+
+    return newrelation
+
+def worker_func1(args):
     # computing the genuine bipolar-valued outranking situations
     # with considerable performance differences counts between
     # the given *actionKey* performance record and the complete set of
@@ -236,7 +287,7 @@ class MPBipolarOutrankingDigraph(BipolarOutrankingDigraph):
         return reprString
 
     def __init__(self,argPerfTab,WithGammaSets=True,
-                 Normalized=False,ndigits=4,
+                 Normalized=True,ndigits=4,
                  startMethod=None,nbrCores=None,Comments=False):
         from decimal import Decimal
         from time import time
@@ -275,14 +326,14 @@ class MPBipolarOutrankingDigraph(BipolarOutrankingDigraph):
         if nbrCores is None:
             nbrCores = ctx_in_main.cpu_count()
         self.nbrThreads = nbrCores
-        from digraphsTools import qtilingIndexList
+        #from digraphsTools import qtilingIndexList
         splitIndex = qtilingIndexList(actionsList,nbrCores,Debug=False)
         if Comments:
             print(splitIndex)
         tasks = [(splitIndex[i],perfTab,Comments) for i in range(nbrCores)]
         with ctx_in_main.Pool(processes=nbrCores) as pool:
             #print(tasks)
-            for result in pool.imap(worker_func, tasks):
+            for result in pool.imap(worker_func1, tasks):
                 #print(result[0])
                 relation.update(result[0])
                 considerableDiffs.update(result[1])
@@ -297,10 +348,12 @@ class MPBipolarOutrankingDigraph(BipolarOutrankingDigraph):
                                 'med': Decimal('0'),
                                 'max': Decimal(str(sumWeights))}
         if Normalized:
+            from digraphs import Digraph
             if Comments:
                 print('Normalizing the relation characteristics')
             tn = time()
-            self.recodeValuation(ndigits=ndigits)
+            Digraph.recodeValuation(self,ndigits=ndigits)
+            #self.recodeValuation(ndigits=ndigits,Comments=Comments)
             runTimes['normalizeRelation'] = time() - tn
         t2 = time()
         if WithGammaSets:
@@ -376,17 +429,96 @@ class MPBipolarOutrankingDigraph(BipolarOutrankingDigraph):
         
 #-----------------
 
+    def recodeValuation(self,newMin=-1.0,newMax=1.0,ndigits=4,
+                        nbrCores=1,startMethod=None,
+                        Comments=False,Debug=False):
+        """
+        Recodes the characteristic valuation domain according
+        to the parameters given. 
+
+        *ndigits* indicates the number of decimal digits of the valuation. 
+
+        """
+        from decimal import Decimal
+        #if ndigits is not None:
+        formatString = '%%.%df' % ndigits
+        #else:
+        #    formatString = '%f'
+        oldMax = Decimal(formatString % self.valuationdomain['max'])
+        oldMin = Decimal(formatString % self.valuationdomain['min'])
+        oldMed = Decimal(formatString % self.valuationdomain['med'])
+        try:
+            oldPrecision = self.valuationdomain['precision']
+        except:
+            oldPrecision = Decimal(formatString % 0.0)
+
+        oldAmplitude = oldMax - oldMin
+        if Debug:
+            print(oldMin, oldMed, oldMax, oldAmplitude)
+        oldrelation = self.relation
+
+        newMin = Decimal(formatString % newMin)
+        newMax = Decimal(formatString % newMax)
+        # the normalized median is set to a strict zero value
+        if newMin == Decimal('-1.00') and newMax == Decimal('1.00'):
+            newMed = Decimal('0.0')
+        else:
+            newMed = Decimal(formatString % ((newMax + newMin)/Decimal('2.0')) )
+        newPrecision = oldPrecision/oldMax
+
+        newAmplitude = newMax - newMin
+        if Debug:
+            print(newMin, newMed, newMax, newAmplitude)
+            print('old and new precison', oldPrecision, newPrecision) 
+        actions = self.actions
+        actionsList = [x for x in actions]
+        
+        if startMethod is None:
+            startMethod = 'spawn'
+        ctx_in_main = multiprocessing.get_context(startMethod)
+        if nbrCores is None:
+            nbrCores = ctx_in_main.cpu_count()
+        splitIndex = qtilingIndexList(actionsList,nbrCores,Debug=False)
+        if Comments:
+            print(splitIndex)
+            args = [oldrelation, oldMax, oldMed, oldMin,
+                  newMax, newMed, newMin,
+                  actionsList,formatString]
+        tasks = [(splitIndex[i],args,
+                  #oldrelation, oldMax, oldMed, oldMin,
+                  #newMax, newMed, newMin,
+                  #actionsList,formatString,
+                  Comments) for i in range(nbrCores)]
+        
+        newrelation = {}
+        with ctx_in_main.Pool(processes=nbrCores) as pool:
+            #print(tasks)
+            for result in pool.imap(worker_func2, tasks):
+                #print(result[0])
+                newrelation.update(result)
+        
+        # install new values in self
+        self.valuationdomain['max'] = newMax
+        self.valuationdomain['min'] = newMin
+        self.valuationdomain['med'] = newMed
+        self.valuationdomain['precision'] = newPrecision
+        if ndigits == 0:
+            self.valuationdomain['hasIntegerValuation'] = True
+        else:
+            self.valuationdomain['hasIntegerValuation'] = False
+        self.relation = newrelation
+
 ###################################
 # testing the module
 
 if __name__ == '__main__':
     from randomPerfTabs import Random3ObjectivesPerformanceTableau
     pt = Random3ObjectivesPerformanceTableau(
-                              numberOfActions=2000,seed=2,
+                              numberOfActions=1000,seed=2,
         commonScale=(0.0,1000.0))
     bg = MPBipolarOutrankingDigraph(argPerfTab=pt,Normalized=True,
-                                    startMethod="forkserver",
-                                    nbrCores=None,Comments=True)
+                                    startMethod=None,
+                                    nbrCores=1,Comments=True)
     print(bg)
     #bg.showRelationTable()
     #g = BipolarOutrankingDigraph(pt)
