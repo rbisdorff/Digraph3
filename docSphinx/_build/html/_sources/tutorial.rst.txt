@@ -117,7 +117,13 @@
 
 Working with digraphs and outranking digraphs
 =============================================
-      
+
+.. contents:: 
+	:depth: 1
+	:local:
+
+This first part of the tutorials introduces the Digraph3 software collection of Python programming resources.
+
 .. _Digraphs-Tutorial-label:
 
 Working with the *Digraph3* software resources
@@ -1232,6 +1238,12 @@ Back to :ref:`Content Table <Tutorial-label>`
 
 Evaluation and decision methods and tools
 =========================================
+
+This is the methodological part of the tutorials.
+
+.. contents:: 
+	:depth: 1
+	:local:
 
 .. _RandomPerformanceTableau-Tutorial-label:
 
@@ -5466,6 +5478,12 @@ Back to :ref:`Content Table <Tutorial-label>`
 Evaluation and decision case studies
 ====================================
 
+.. contents:: 
+	:depth: 1
+	:local:
+
+This part of the tutorails presents three decision making case studies, followed by a set of homework and exam questions.
+
 .. _Alice-Tutorial-label:
 
 Alice's best choice: A *selection* case study [19]_
@@ -7253,6 +7271,12 @@ Back to :ref:`Content Table <Tutorial-label>`
 
 Moving on to undirected graphs
 ==============================
+
+.. contents:: 
+	:depth: 1
+	:local:
+
+This last part of the tutorials introduces Python resources for working with undirected graphs.
 
 .. _Graphs-Tutorial-label:
 

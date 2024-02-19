@@ -286,6 +286,9 @@ class MPBipolarOutrankingDigraph(BipolarOutrankingDigraph):
         reprString += 'Gamma sets         : %.5f\n' % val4
         return reprString
 
+
+    # --------- main class
+
     def __init__(self,argPerfTab,WithGammaSets=True,
                  Normalized=True,ndigits=4,
                  startMethod=None,nbrCores=None,Comments=False):
@@ -353,7 +356,9 @@ class MPBipolarOutrankingDigraph(BipolarOutrankingDigraph):
                 print('Normalizing the relation characteristics')
             tn = time()
             Digraph.recodeValuation(self,ndigits=ndigits)
-            #self.recodeValuation(ndigits=ndigits,Comments=Comments)
+            # the multiprocessing version below does not deliver
+            # convincing run times; further tests are needed !!!
+            # self.recodeValuation(ndigits=ndigits,Comments=Comments)
             runTimes['normalizeRelation'] = time() - tn
         t2 = time()
         if WithGammaSets:
