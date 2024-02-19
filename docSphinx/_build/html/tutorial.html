@@ -5116,7 +5116,7 @@ pairwise perspective (see below), we notice that, with the given preference disc
 <section id="hpc-quantiles-ranking-records">
 <h4><a class="toc-backref" href="#id313" role="doc-backlink"><span class="section-number">1.3.10.6. </span>HPC quantiles ranking records</a><a class="headerlink" href="#hpc-quantiles-ranking-records" title="Link to this heading"></a></h4>
 <p>Following from the separability property of the <em>q</em>-tiles sorting of each action into each <em>q</em>-tiles class, the <em>q</em>-sorting algorithm may be safely split into as much threads as are multiple processing cores available in parallel. Furthermore, the ranking procedure being local to each diagonal component, these procedures may as well be safely processed in parallel threads on each component restricted outrankingdigraph.</p>
-<p>On a common 2023 desktop computer, equipped with a 11th Gen Intel® Core™ i5-11400 × 12 processor and 16.0 GiB of CPU memory, working under Ubuntu 23.10 we may rank a <a class="reference internal" href="techDoc.html#cRandPerfTabs.cRandom3ObjectivesPerformanceTableau" title="cRandPerfTabs.cRandom3ObjectivesPerformanceTableau"><code class="xref py py-class docutils literal notranslate"><span class="pre">cRandom3ObjectivesPerformanceTableau</span></code></a> instance of <strong>hundred thousand</strong> performance records in about 13 seconds (see below Lines 38-).</p>
+<p>On a common 2023 desktop computer, equipped with a 11th Gen Intel® Core™ i5-11400 × 12 processor and 16.0 GiB of CPU memory, working under Ubuntu 23.10 we may rank a <a class="reference internal" href="techDoc.html#cRandPerfTabs.cRandom3ObjectivesPerformanceTableau" title="cRandPerfTabs.cRandom3ObjectivesPerformanceTableau"><code class="xref py py-class docutils literal notranslate"><span class="pre">cRandom3ObjectivesPerformanceTableau</span></code></a> instance of <strong>two hundred thousand</strong> performance records in about 30 seconds with about 15 seconds for the quantiles sorting step and 14 seconds for the local components ranking step (see below Lines 38-).</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="linenos">1</span>../Digraph3/cython$<span class="w"> </span>python3.12
 <span class="linenos">2</span>Python<span class="w"> </span><span class="m">3</span>.12.0<span class="w"> </span><span class="o">(</span>main,<span class="w"> </span>Oct<span class="w">  </span><span class="m">4</span><span class="w"> </span><span class="m">2023</span>,<span class="w"> </span><span class="m">06</span>:27:34<span class="o">)</span><span class="w"> </span><span class="o">[</span>GCC<span class="w"> </span><span class="m">13</span>.2.0<span class="o">]</span><span class="w"> </span>on<span class="w"> </span>linux
 <span class="linenos">3</span>&gt;&gt;&gt;
@@ -5124,12 +5124,12 @@ pairwise perspective (see below), we notice that, with the given preference disc
 </div>
 <div class="highlight-pycon notranslate"><div class="highlight"><pre><span></span><span class="linenos"> 1</span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">cRandPerfTabs</span> <span class="kn">import</span>\
 <span class="linenos"> 2</span><span class="gp">... </span>      <span class="n">cRandom3ObjectivesPerformanceTableau</span> <span class="k">as</span> <span class="n">cR3ObjPT</span>
-<span class="hll"><span class="linenos"> 3</span><span class="gp">&gt;&gt;&gt; </span><span class="n">pt</span> <span class="o">=</span> <span class="n">cR3ObjPT</span><span class="p">(</span><span class="n">numberOfActions</span><span class="o">=</span><span class="mi">100000</span><span class="p">,</span>
+<span class="hll"><span class="linenos"> 3</span><span class="gp">&gt;&gt;&gt; </span><span class="n">pt</span> <span class="o">=</span> <span class="n">cR3ObjPT</span><span class="p">(</span><span class="n">numberOfActions</span><span class="o">=</span><span class="mi">200000</span><span class="p">,</span>
 </span><span class="linenos"> 4</span><span class="gp">... </span>      <span class="n">numberOfCriteria</span><span class="o">=</span><span class="mi">21</span><span class="p">,</span>
 <span class="linenos"> 5</span><span class="gp">... </span>      <span class="n">weightDistribution</span><span class="o">=</span><span class="s1">&#39;equiobjectives&#39;</span><span class="p">,</span>
 <span class="linenos"> 6</span><span class="gp">... </span>      <span class="n">commonScale</span> <span class="o">=</span> <span class="p">(</span><span class="mf">0.0</span><span class="p">,</span><span class="mf">1000.0</span><span class="p">),</span><span class="n">seed</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
 <span class="linenos"> 7</span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">cSparseIntegerOutrankingDigraphs</span> <span class="k">as</span> <span class="nn">iBg</span>
-<span class="linenos"> 8</span><span class="gp">&gt;&gt;&gt; </span><span class="n">qr</span> <span class="o">=</span> <span class="n">iBg</span><span class="o">.</span><span class="n">cQuantilesRankingDigraph</span><span class="p">(</span><span class="n">pt</span><span class="p">,</span><span class="n">quantiles</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span>
+<span class="linenos"> 8</span><span class="gp">&gt;&gt;&gt; </span><span class="n">qr</span> <span class="o">=</span> <span class="n">iBg</span><span class="o">.</span><span class="n">cQuantilesRankingDigraph</span><span class="p">(</span><span class="n">pt</span><span class="p">,</span><span class="n">quantiles</span><span class="o">=</span><span class="mi">11</span><span class="p">,</span>
 <span class="linenos"> 9</span><span class="gp">... </span>                   <span class="n">quantilesOrderingStrategy</span><span class="o">=</span><span class="s1">&#39;optimal&#39;</span><span class="p">,</span>
 <span class="linenos">10</span><span class="gp">... </span>                   <span class="n">minimalComponentSize</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span>
 <span class="linenos">11</span><span class="gp">... </span>                   <span class="n">componentRankingRule</span><span class="o">=</span><span class="s1">&#39;Copeland&#39;</span><span class="p">,</span>
@@ -5141,17 +5141,17 @@ pairwise perspective (see below), we notice that, with the given preference disc
 <span class="linenos">17</span><span class="go">*----- Object instance description --------------*</span>
 <span class="linenos">18</span><span class="go"> Instance class    : cQuantilesRankingDigraph</span>
 <span class="linenos">19</span><span class="go"> Instance name     : random3ObjectivesPerfTab_mp</span>
-<span class="linenos">20</span><span class="go"> Actions           : 100000</span>
+<span class="linenos">20</span><span class="go"> Actions           : 200000</span>
 <span class="linenos">21</span><span class="go"> Criteria          : 21</span>
-<span class="hll"><span class="linenos">22</span><span class="go"> Sorting by        : 10-Tiling</span>
+<span class="hll"><span class="linenos">22</span><span class="go"> Sorting by        : 11-Tiling</span>
 </span><span class="hll"><span class="linenos">23</span><span class="go"> Ordering strategy : optimal</span>
 </span><span class="hll"><span class="linenos">24</span><span class="go"> Ranking rule      : Copeland</span>
-</span><span class="hll"><span class="linenos">25</span><span class="go"> Components        : 47856</span>
+</span><span class="hll"><span class="linenos">25</span><span class="go"> Components        : 67425</span>
 </span><span class="hll"><span class="linenos">26</span><span class="go"> Minimal order     : 1</span>
-</span><span class="hll"><span class="linenos">27</span><span class="go"> Maximal order     : 82</span>
-</span><span class="hll"><span class="linenos">28</span><span class="go"> Average order     : 2.1</span>
-</span><span class="linenos">29</span><span class="go"> fill rate         : 0.004%</span>
-<span class="linenos">30</span><span class="go"> Attributes        : [&#39;runTimes&#39;, &#39;name&#39;, &#39;actions&#39;, &#39;order&#39;,</span>
+</span><span class="hll"><span class="linenos">27</span><span class="go"> Maximal order     : 127</span>
+</span><span class="hll"><span class="linenos">28</span><span class="go"> Average order     : 3.0</span>
+</span><span class="hll"><span class="linenos">29</span><span class="go"> fill rate         : 0.005%</span>
+</span><span class="linenos">30</span><span class="go"> Attributes        : [&#39;runTimes&#39;, &#39;name&#39;, &#39;actions&#39;, &#39;order&#39;,</span>
 <span class="linenos">31</span><span class="go">                      &#39;dimension&#39;, &#39;sortingParameters&#39;,</span>
 <span class="linenos">32</span><span class="go">                      &#39;nbrThreads&#39;, &#39;startMethod&#39;, &#39;valuationdomain&#39;,</span>
 <span class="linenos">33</span><span class="go">                      &#39;profiles&#39;, &#39;categories&#39;, &#39;sorting&#39;,</span>
@@ -5162,14 +5162,13 @@ pairwise perspective (see below), we notice that, with the given preference disc
 <span class="hll"><span class="linenos">38</span><span class="go"> ----  Constructor run times (in sec.) ----</span>
 </span><span class="hll"><span class="linenos">39</span><span class="go"> Threads           : 12</span>
 </span><span class="hll"><span class="linenos">40</span><span class="go"> StartMethod       : spawn</span>
-</span><span class="hll"><span class="linenos">41</span><span class="go"> Total time        : 13.41926</span>
-</span><span class="hll"><span class="linenos">42</span><span class="go"> QuantilesSorting  : 6.77653</span>
-</span><span class="hll"><span class="linenos">43</span><span class="go"> Preordering       : 0.37063</span>
-</span><span class="hll"><span class="linenos">44</span><span class="go"> Decomposing       : 6.27206</span>
-</span><span class="hll"><span class="linenos">45</span><span class="go"> Ordering          : 0.00000</span>
+</span><span class="hll"><span class="linenos">41</span><span class="go"> Total time        : 30.3172</span>
+</span><span class="hll"><span class="linenos">42</span><span class="go"> QuantilesSorting  : 15.29988</span>
+</span><span class="hll"><span class="linenos">43</span><span class="go"> Preordering       : 0.60050</span>
+</span><span class="hll"><span class="linenos">44</span><span class="go"> Decomposing       : 14.47128</span>
 </span></pre></div>
 </div>
-<p>When ordering the 47856 components resulting from a 10-tiling sorting with the <em>optimal</em> quantiles ordering strategy, the order of a component is limited to a maximal size of 82 actions (see Line 27).</p>
+<p>When ordering the 67425 components resulting from an 11-tiling sorting with the <em>optimal</em> quantiles ordering strategy, the order of a local component is limited to a maximal size of 127 actions which results in a total pairwise adjacency table fill rate of 0.005% (see Lines 25-29).</p>
 <p>Bigger performance tableaux may definitely be ranked with a larger <em>cpu_count()</em>. We were using therefore in 2018 the HPC Platform of the University of Luxembourg (<a class="reference external" href="https://hpc.uni.lu/">https://hpc.uni.lu/</a>). The following run times for very big quantiles ranking problems of several millions of multicriteria performance records could be achieved both:</p>
 <blockquote>
 <div><ul class="simple">
@@ -5223,23 +5222,23 @@ pairwise perspective (see below), we notice that, with the given preference disc
 <span class="linenos">29</span><span class="go"> Sorting by        : 10-Tiling</span>
 <span class="linenos">30</span><span class="go"> Ordering strategy : optimal</span>
 <span class="linenos">31</span><span class="go"> Ranking rule      : NetFlows</span>
-<span class="linenos">32</span><span class="go"> # Components      : 233645</span>
-<span class="linenos">33</span><span class="go"> Minimal order     : 1</span>
-<span class="linenos">34</span><span class="go"> Maximal order     : 153</span>
-<span class="linenos">35</span><span class="go"> Average order     : 4.3</span>
-<span class="linenos">36</span><span class="go"> fill rate         : 0.001%</span>
-<span class="hll"><span class="linenos">37</span><span class="go"> *----  Constructor run times (in sec.) ----*</span>
+<span class="hll"><span class="linenos">32</span><span class="go"> # Components      : 233645</span>
+</span><span class="hll"><span class="linenos">33</span><span class="go"> Minimal order     : 1</span>
+</span><span class="hll"><span class="linenos">34</span><span class="go"> Maximal order     : 153</span>
+</span><span class="hll"><span class="linenos">35</span><span class="go"> Average order     : 4.3</span>
+</span><span class="hll"><span class="linenos">36</span><span class="go"> fill rate         : 0.001%</span>
+</span><span class="hll"><span class="linenos">37</span><span class="go"> *----  Constructor run times (in sec.) ----*</span>
 </span><span class="hll"><span class="linenos">38</span><span class="go"> Nbr of threads    : 28</span>
 </span><span class="hll"><span class="linenos">39</span><span class="go"> Start method      : fork</span>
 </span><span class="hll"><span class="linenos">40</span><span class="go"> Total time        : 177.02770</span>
 </span><span class="hll"><span class="linenos">41</span><span class="go"> QuantilesSorting  : 99.55377</span>
 </span><span class="hll"><span class="linenos">42</span><span class="go"> Preordering       : 5.17954</span>
-</span><span class="linenos">43</span><span class="go"> Decomposing       : 72.29356</span>
-</pre></div>
+</span><span class="hll"><span class="linenos">43</span><span class="go"> Decomposing       : 72.29356</span>
+</span></pre></div>
 </div>
-<p>On this 2x14c Intel Xeon Gold 6132 &#64; 2.6 GHz equipped HPC node with 132GB RAM <a class="footnote-reference brackets" href="#id169" id="id72" role="doc-noteref"><span class="fn-bracket">[</span>7<span class="fn-bracket">]</span></a>, deciles sorting and locally ranking a <strong>million</strong> decision alternatives evaluated on 21 incommensurable criteria, by balancing an economic, an environmental and a societal decision objective, takes us about <strong>3 minutes</strong> (see Lines 37-42 above); with 1.5 minutes for the deciles sorting and, a bit more than one minute, for the local ranking of the individual components.</p>
+<p>On this 2x14c Intel Xeon Gold 6132 &#64; 2.6 GHz equipped HPC node with 132GB RAM <a class="footnote-reference brackets" href="#id169" id="id72" role="doc-noteref"><span class="fn-bracket">[</span>7<span class="fn-bracket">]</span></a>, deciles sorting and locally ranking a <strong>million</strong> decision alternatives evaluated on 21 incommensurable criteria, by balancing an economic, an environmental and a societal decision objective, takes us about <strong>3 minutes</strong> (see Lines 37-42 above); with about 1.5 minutes for the deciles sorting and, a bit more than one minute, for the local ranking of the local components.</p>
 <p>The optimised deciles sorting leads to 233645 components (see Lines 32-36 above) with a maximal order of 153. The fill rate of the adjacency table is reduced to 0.001%. Of the potential trillion (10^12) pairwise outrankings, we effectively keep only 10 millions (10^7). This high number of components results from the high number of involved performance criteria (21), leading in fact to a very refined epistemic discrimination of majority outranking margins.</p>
-<p>A non-optimised deciles sorting would instead give at most 110 components with inevitably very big intractable local digraph orders. Proceeding with a more detailed quantiles sorting, for reducing the induced decomposing run times, leads however quickly to intractable quantiles sorting times. A good compromise is given when the quantiles sorting and decomposing steps show somehow equivalent run times; as is the case in our example session: 99.6 versus 77.3 seconds (see Lines 40 and 42 above).</p>
+<p>A non-optimised deciles sorting would instead give at most 110 components with inevitably very big intractable local digraph orders. Proceeding with a more detailed quantiles sorting, for reducing the induced decomposing run times, leads however quickly to intractable quantiles sorting times. A good compromise is given when the quantiles sorting and decomposing steps show somehow equivalent run times; as is the case in our two example sessions: 15 versus 14 seconds and 99.6 versus 77.3 seconds (see Listing before and Lines 41 and 43 above).</p>
 <p>Let us inspect the 21 marginal performances of the five best-ranked alternatives listed below.</p>
 <div class="highlight-pycon notranslate"><div class="highlight"><pre><span></span><span class="linenos"> 1</span><span class="gp">&gt;&gt;&gt; </span><span class="n">pt</span><span class="o">.</span><span class="n">showPerformanceTableau</span><span class="p">(</span>
 <span class="linenos"> 2</span><span class="gp">... </span>              <span class="n">actionsSubset</span><span class="o">=</span><span class="n">qr</span><span class="o">.</span><span class="n">boostedRanking</span><span class="p">[:</span><span class="mi">5</span><span class="p">],</span>
