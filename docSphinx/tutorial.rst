@@ -5213,7 +5213,7 @@ HPC quantiles ranking records
 
 Following from the separability property of the *q*-tiles sorting of each action into each *q*-tiles class, the *q*-sorting algorithm may be safely split into as much threads as are multiple processing cores available in parallel. Furthermore, the ranking procedure being local to each diagonal component, these procedures may as well be safely processed in parallel threads on each component restricted outrankingdigraph.
 
-On a common 2023 desktop computer, equipped with a 11th Gen Intel® Core™ i5-11400 × 12 processor and 16.0 GiB of CPU memory, working under Ubuntu 23.10 we may rank a :py:class:`~cRandPerfTabs.cRandom3ObjectivesPerformanceTableau` instance of **two hundred thousand** performance records in about 30 seconds with about 15 seconds for the quantiles sorting step and 14 seconds for the local components ranking step (see below Lines 38-).
+On a common 2023 Terra desktop computer, equipped with a 11th Gen Intel® Core™ i5-11400 × 12 processor and 16.0 GiB of CPU memory, working under Ubuntu 23.10 we may rank a :py:class:`~cRandPerfTabs.cRandom3ObjectivesPerformanceTableau` instance of **two hundred thousand** performance records in about 30 seconds with about 15 seconds for the quantiles sorting step and 14 seconds for the local components ranking step (see below Lines 38-).
 
 .. code-block:: bash
 
