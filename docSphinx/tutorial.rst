@@ -4813,7 +4813,7 @@ Four cythonized Digraph3 modules, prefixed with the letter *c* and taking a *pyx
     - *cIntegerSortingDigraphs.pyx*
     - *cSparseIntegerOutrankingDigraphs.pyx*
 
-Their automatic compilation and installation (*...Digraph3$ make installPip*), alongside the standard Digraph3 python3 modules, requires the *cython* compiler [6]_ ( *...$ python3 m pip install cython, wheel* ) and a C compiler ( *...$ sudo apt install gcc* ). Local *inplace* compilation and installation ( *.../Digraph3/cython$ make* ) is provided with a corresponding *makefile* in the "Digraph3/cython* directory.
+Their automatic compilation and installation (*...Digraph3$ make installPip*), alongside the standard Digraph3 python3 modules, requires the *cython* compiler [6]_ ( *...$ python3 m pip install cython wheel* ) and a C compiler ( *...$ sudo apt install gcc* ). Local *inplace* compilation and installation ( *.../Digraph3/cython$ make* ) is provided with a corresponding *makefile* in the "Digraph3/cython* directory.
 
 Big Data performance tableaux
 `````````````````````````````

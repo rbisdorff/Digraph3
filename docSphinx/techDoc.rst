@@ -19,17 +19,11 @@ Technical Reference of the Digraph3 modules
       
         - Following a Python 3.12 recommendation, all multiprocessing resources have been refactored to use by default, instead of the traditional *fork*, the safer *spawn* threading start method. As a consequence, main program code of multiprocessing Digraph3 Python scripts must now start with a *__name__=='__main__'* test in order to avoid its recursive execution in each started thread (see the :py:mod:`multiprocessing` module).
 
-        - A refactored multiprocessing :py:class:`~mpOutrankingDigraphs.MPBipolarOutrankingDigraph` constructor of bipolar-valued outranking digraphs with a configurable threading start method: *spawn* (by default), *forkserver* or *fork*.
-
-        - The :py:meth:`digraphsTools.kmpMatch` method implements the *Knuth* *Morris* *Pratt* string matching algorithm
-
-        - The :py:meth:`digraphsTools.computeSequenceAlignment` method implements the *Needlemann* % *Wunsch* dynamic programming algorithm for computing DNA *sequence alignments*
+        - A :py:mod:`pairings` module for solving **fair intergroup** and **intragroup pairing** problems
 
         - A :py:mod:`dynamicProgramming` module for solving **dynamic programming** problems
 
-        - A :py:mod:`pairings` module for solving **fair intergroup** and **intragroup pairing** problems
-
-
+        - The :py:meth:`digraphsTools.computeSequenceAlignment` method implements the *Needlemann* % *Wunsch* dynamic programming algorithm for computing DNA *sequence alignments*
 
 **Preface**
 

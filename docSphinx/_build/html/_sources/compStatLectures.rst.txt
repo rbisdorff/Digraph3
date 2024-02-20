@@ -56,7 +56,7 @@ L5. `Simulating from arbitrary empirical random distributions <_static/5-Quantil
     3. Incremental quantiles estimation with the IQ-agent: using the IQ-agent for Monte-Carlo simulations
 
 L6. `Two distributions, are they of the same kind? <_static/6-chiSquareTest-2x2.pdf>`_
-    1. Methodology: comparing statistical distributions, methodological approach and statistical tests
+    1. Comparing statistical distributions: methodological approach and statistical tests
 
     2. Comparing histograms: Chi-square test against a known distribution, comparing two binned data sets, testing uniform randomness
 

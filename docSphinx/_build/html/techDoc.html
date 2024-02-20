@@ -1235,11 +1235,9 @@
 <dt class="field-odd">New<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
 <li><p>Following a Python 3.12 recommendation, all multiprocessing resources have been refactored to use by default, instead of the traditional <em>fork</em>, the safer <em>spawn</em> threading start method. As a consequence, main program code of multiprocessing Digraph3 Python scripts must now start with a <em>__name__==’__main__’</em> test in order to avoid its recursive execution in each started thread (see the <a class="reference external" href="https://docs.python.org/3/library/multiprocessing.html#module-multiprocessing" title="(in Python v3.12)"><code class="xref py py-mod docutils literal notranslate"><span class="pre">multiprocessing</span></code></a> module).</p></li>
-<li><p>A refactored multiprocessing <a class="reference internal" href="#mpOutrankingDigraphs.MPBipolarOutrankingDigraph" title="mpOutrankingDigraphs.MPBipolarOutrankingDigraph"><code class="xref py py-class docutils literal notranslate"><span class="pre">MPBipolarOutrankingDigraph</span></code></a> constructor of bipolar-valued outranking digraphs with a configurable threading start method: <em>spawn</em> (by default), <em>forkserver</em> or <em>fork</em>.</p></li>
-<li><p>The <a class="reference internal" href="#digraphsTools.kmpMatch" title="digraphsTools.kmpMatch"><code class="xref py py-meth docutils literal notranslate"><span class="pre">digraphsTools.kmpMatch()</span></code></a> method implements the <em>Knuth</em> <em>Morris</em> <em>Pratt</em> string matching algorithm</p></li>
-<li><p>The <a class="reference internal" href="#digraphsTools.computeSequenceAlignment" title="digraphsTools.computeSequenceAlignment"><code class="xref py py-meth docutils literal notranslate"><span class="pre">digraphsTools.computeSequenceAlignment()</span></code></a> method implements the <em>Needlemann</em> % <em>Wunsch</em> dynamic programming algorithm for computing DNA <em>sequence alignments</em></p></li>
-<li><p>A <a class="reference internal" href="#module-dynamicProgramming" title="dynamicProgramming"><code class="xref py py-mod docutils literal notranslate"><span class="pre">dynamicProgramming</span></code></a> module for solving <strong>dynamic programming</strong> problems</p></li>
 <li><p>A <a class="reference internal" href="#module-pairings" title="pairings"><code class="xref py py-mod docutils literal notranslate"><span class="pre">pairings</span></code></a> module for solving <strong>fair intergroup</strong> and <strong>intragroup pairing</strong> problems</p></li>
+<li><p>A <a class="reference internal" href="#module-dynamicProgramming" title="dynamicProgramming"><code class="xref py py-mod docutils literal notranslate"><span class="pre">dynamicProgramming</span></code></a> module for solving <strong>dynamic programming</strong> problems</p></li>
+<li><p>The <a class="reference internal" href="#digraphsTools.computeSequenceAlignment" title="digraphsTools.computeSequenceAlignment"><code class="xref py py-meth docutils literal notranslate"><span class="pre">digraphsTools.computeSequenceAlignment()</span></code></a> method implements the <em>Needlemann</em> % <em>Wunsch</em> dynamic programming algorithm for computing DNA <em>sequence alignments</em></p></li>
 </ul>
 </dd>
 </dl>
@@ -13841,7 +13839,7 @@ Components are stored in an ordered dictionary.</p>
 
   <div role="contentinfo">
     <p>&#169; Copyright 2012-2024, Raymond Bisdorff.
-      <span class="lastupdated">Last updated on Feb 17, 2024.
+      <span class="lastupdated">Last updated on Feb 20, 2024.
       </span></p>
   </div>
 
