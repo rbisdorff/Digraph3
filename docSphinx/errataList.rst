@@ -4,6 +4,7 @@ Digraph3 Book Errata List
     | Pxii L29: *for* 'and the recording of' *read* 'and the recoding of'	
     | Pxiv L35: *for* 'become separate may deliver' *read* 'become separate and may deliver'
     | P12 Fig 1.3 caption: *for* 'the 3 grid digraph' *read* 'the 3x3 grid digraph'
+    | P21 Listing 2.8 Line 3: *for* '# -(~(rdg)' *read* '# -(~rdg)'
     | P39 L3: *for* 'decision alternative' *read* 'decision alternatives'
     | P41 epigraph: *for* 'Benayoun et al' *read* 'Benyaoun R, Roy B, Sussmann B'
     | P47 L3: *for* :math:`((x \succsim y) > 0.0)` *read* :math:`\big(r(x \succsim y) > 0.0\big)`

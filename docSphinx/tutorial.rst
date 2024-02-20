@@ -118,11 +118,11 @@
 Working with digraphs and outranking digraphs
 =============================================
 
+This first part of the tutorials introduces the Digraph3 software collection of Python programming resources.
+
 .. contents:: 
 	:depth: 1
 	:local:
-
-This first part of the tutorials introduces the Digraph3 software collection of Python programming resources.
 
 .. _Digraphs-Tutorial-label:
 
@@ -771,7 +771,7 @@ Computing the *dual*, respectively the *converse*, may also be done with prefixi
 
    >>> ddg = -rdg   # dual of rdg
    >>> cdg = ~rdg   # converse of rdg
-   >>> cddg = ~(-rdg) # = -(~(rdg) codual of rdg
+   >>> cddg = ~(-rdg) # = -(~rdg) codual of rdg
    >>> (-(~rdg)).showRelationTable()
     * ---- Relation Table -----
     -r(ySx) |  '1'    '2'   '3'   '4'   '5'   '6'   '7'	    
@@ -5477,11 +5477,11 @@ Back to :ref:`Content Table <Tutorial-label>`
 Evaluation and decision case studies
 ====================================
 
+This part of the tutorails presents three decision making case studies, followed by a set of homework and exam questions.
+
 .. contents:: 
 	:depth: 1
 	:local:
-
-This part of the tutorails presents three decision making case studies, followed by a set of homework and exam questions.
 
 .. _Alice-Tutorial-label:
 
@@ -7271,11 +7271,11 @@ Back to :ref:`Content Table <Tutorial-label>`
 Moving on to undirected graphs
 ==============================
 
+This last part of the tutorials introduces Python resources for working with undirected graphs.
+
 .. contents:: 
 	:depth: 1
 	:local:
-
-This last part of the tutorials introduces Python resources for working with undirected graphs.
 
 .. _Graphs-Tutorial-label:
 
