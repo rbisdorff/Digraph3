@@ -87,41 +87,80 @@ colorPalettes = {1: _colorPalette1, 2: _colorPalette2, 3: _colorPalette0}
 #---------- general methods -----------------
 
 # splitting list indexes
-def qtilingIndexList(indexList,q,Debug=False):
+# def oldqtilingIndexList(indexList,q,Debug=True):
+#     """
+#     split an index list into q of equal length or, when there is a rest in len(indexList)//q, into q-1 parts of equal length plus a last shorter part.
+    
+#     """
+#     n = len(indexList)
+#     if Debug:
+#         print(n, indexList, q)
+
+#     nq = n//q
+#     if nq * q < n:
+#         q -= 1
+#         nq = n // q
+#         Rest = True
+#         if Debug:
+#             print('with Rest', n//q, nq*q, n - nq*(q))
+#     else:
+#         Rest = False
+#         if Debug:
+#             print('Without Rest', q, nq*q, n - nq*q  )
+#     splitIndex = []
+#     if Rest == True:
+#         for j in range(q):
+#             if Debug:
+#                 print( nq, j*nq, (j+1)*nq )
+#             splitIndex.append( (j*nq, (j+1)*nq) )
+#         if Debug:
+#             print("Rest", n - ((q)*nq), (q)*nq, n )
+#         splitIndex.append( ((q)*nq, n) )
+#     else:
+#         for j in range(q):
+#             if Debug:
+#                 print( nq, j*nq, (j+1)*nq )
+#             splitIndex.append( (j*nq, (j+1)*nq) )
+
+#     return splitIndex
+
+def qtilingIndexList(indexList,q,Debug=False,Comments=False):
     """
     split an index list into q of equal length or, when there is a rest in len(indexList)//q, into q-1 parts of equal length plus a last shorter part.
     
     """
     n = len(indexList)
     if Debug:
-        print(n, indexList, q)
+        Comments = True
+        print(indexList, n, q)
 
-    nq = n//q
-    if nq * q < n:
-        q -= 1
-        nq = n // q
+    nq = n//(q)
+    if nq * (q) < n:
+        r = n - nq*(q)
         Rest = True
         if Debug:
-            print('with Rest', n//q, nq*q, n - nq*(q))
+            print('with Rest', nq, nq*(q), r)
     else:
+        r = 0
         Rest = False
         if Debug:
-            print('Without Rest', q, nq*q, n - nq*q  )
-    splitIndex = []
-    if Rest == True:
-        for j in range(q):
-            if Debug:
-                print( nq, j*nq, (j+1)*nq )
-            splitIndex.append( (j*nq, (j+1)*nq) )
-        if Debug:
-            print("Rest", n - ((q)*nq), (q)*nq, n )
-        splitIndex.append( ((q)*nq, n) )
-    else:
-        for j in range(q):
-            if Debug:
-                print( nq, j*nq, (j+1)*nq )
-            splitIndex.append( (j*nq, (j+1)*nq) )
+            print('Without Rest', q, nq*q, r  )
+            
+    card = [nq for i in range(q)]
+    for j in range(r):
+        card[j] += 1
+    if Comments:
+        print('cardinalities:', card)
 
+    splitIndex = []
+    toi = 0
+    fromi = 0
+    for j in range(q):
+        toi += card[j]
+        splitIndex.append( (fromi, toi) )
+        fromi = toi
+    if Debug:
+        print('splitIndex:', splitIndex)
     return splitIndex
 
 # sorting list of scored tuples
@@ -837,22 +876,22 @@ if __name__ == '__main__':
     ****************************************************
     """)
 
-    indexList = range(20)
+    # indexList = range(100000)
+    # q = 12
+    # splitIndex = oldqtilingIndexList(indexList,q,Debug=True)
+    # print(splitIndex)
+    # for i in range(len(splitIndex)):
+    #     print('group',i+1, splitIndex[i])
+    #     #for j in range(splitIndex[i][0],splitIndex[i][1]):
+    #     #    print(j)
+    indexList = range(100000)
     q = 12
-    splitIndex = qtilingIndexList(indexList,q,Debug=True)
+    splitIndex = qtilingIndexList(indexList,q,Comments=True)
     print(splitIndex)
     for i in range(len(splitIndex)):
-        print('group',i+1)
-        for j in range(splitIndex[i][0],splitIndex[i][1]):
-            print(j)
-    indexList = range(120)
-    q = 12
-    splitIndex = qtilingIndexList(indexList,q,Debug=True)
-    print(splitIndex)
-    for i in range(len(splitIndex)):
-        print('group',i+1)
-        for j in range(splitIndex[i][0],splitIndex[i][1]):
-            print(j)
+        print('group',i+1, splitIndex[i])
+        #for j in range(splitIndex[i][0],splitIndex[i][1]):
+        #    print(j)
 
 
 ##    seqA = generateRandomSequence(10)
