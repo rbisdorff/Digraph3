@@ -551,7 +551,7 @@ Example Python session:
         reprString += 'Actions          : %d\n' % self.order
         reprString += 'Criteria         : %d\n' % len(self.criteria)
         reprString += 'Size             : %d\n' % self.computeSize()
-        reprString += 'Determinateness  : %.3f\n' % self.computeDeterminateness()
+        #reprString += 'Determinateness  : %.3f\n' % self.computeDeterminateness()
         reprString += 'Valuation domain : %s\n' % str(self.valuationdomain)
         reprString += 'Attributes       : %s\n' % list(self.__dict__.keys())
         val1 = self.runTimes['totalTime']

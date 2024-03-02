@@ -1,0 +1,34 @@
+#--------------------------------------------------------------------------
+# Python3 CUDA implementation of the Digraph software
+# Current revision Py312
+# Copyright (C) 2024 Raymond Bisdorff
+#
+#    This resource is free software; you can redistribute it and/or modify
+#    it under the terms of the GNU General Public License as published by
+#    the Free Software Foundation; either version 2 of the License, or
+#    (at your option) any later version.
+#
+#    This software is distributed in the hope that it will be useful,
+#    but WITHOUT ANY WARRANTY; without even the implied warranty of
+#    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+#    GNU General Public License for more details.
+#
+#    You should have received a copy of the GNU General Public License along
+#    with this program; if not, write to the Free Software Foundation, Inc.,
+#    51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
+#
+#-----------------------------------------------------------------------------
+
+This Digraph3 module experiments the use of NVIDIA GPU resources for experimenting the speeding up of the elementwise computation of the codual transform for cIntegerOurankingDigraphs.IntegerBipolarOutrankingDigraph objects. 
+
+Tests of the module may be found in the scratch part at the end of the module source file.
+
+For this purpose, the relation attribute, a double dictionary, is replaced with a numpy two dimensional int32 array. 
+
+Tutorials and technical documentation of modules, classes and methods are available under the following link:
+
+https://digraph3.readthedocs.io/en/latest/
+
+Enjoy !!
+R Bisdorff
+http://rbisdorff.github.io/
