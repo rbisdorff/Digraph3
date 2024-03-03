@@ -19,7 +19,9 @@
 #
 #-----------------------------------------------------------------------------
 
-This Digraph3 module experiments the use of NVIDIA GPU resources for experimenting the speeding up of the elementwise computation of the codual transform for cIntegerOurankingDigraphs.IntegerBipolarOutrankingDigraph objects. 
+This Digraph3 module experiments the use of NVIDIA GPU resources for measuring the speeding up of the elementwise computation of the dual, converse and codual transforms for large (order >= 10000) cIntegerOurankingDigraphs.IntegerBipolarOutrankingDigraph objects. 
+
+For small (order = +-1000) such outranking digraphs a Cuda supported computation of NetFlows and Copeland rankings is provided.
 
 Tests of the module may be found in the scratch part at the end of the module source file.
 

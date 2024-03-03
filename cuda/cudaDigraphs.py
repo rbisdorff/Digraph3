@@ -30,7 +30,7 @@ from time import time
 class CudaDigraph(Digraph):
     """
     Implementation of bipolar integer-valued digraphs taking advantage of an CUDA enabled NIVIDA GPU.
-    Input parameter is a *Digraph* object. The *relation* dictionaray is replaced with an integer vaued *numpy array* called *valuation*
+    Input parameter is an *cIntegerOutrankingDigraph* object. The *relation* dictionaray is here replaced with an integer valued *numpy.array* called *valuation*
     """ 
     def __init__(self,digraph):
         from copy import deepcopy
@@ -220,8 +220,14 @@ class CudaDigraph(Digraph):
     def computeRanking(self,rankingRule='NetFlows',
                        Stored=True,Debug=False,Cuda=False):
         """
-        Tenders an ordered dictionary of the actions (from best to worst)
-        following the net flows ranking rule with rank and net flow attributes.
+        *rankingRule*: 'Netflows' (default) | 'Copeland'
+        
+        If *Stored==True* (default) adds increasing and decreasing
+        net flow scores with ranking and ordering result to *self*.
+
+        If *Stored==False*, returns {'ranking': ranking,
+                                     'ordering': ordering,
+                                     'rankingRule': rankingRule}
         """
         import numpy as np
         if Cuda:
@@ -275,16 +281,24 @@ class CudaDigraph(Digraph):
             print(incNetFlowsScores)                                     
         incNetFlowsScores.sort(key=itemgetter(0))
         decNetFlowsScores.sort(key=itemgetter(0),reverse=True)
-        if rankingRule == 'Copeland':
-            self.incCopelandScores = incNetFlowsScores
-            self.decCopelandScores = decNetFlowsScores
-            self.copelandRanking = [x[1] for x in decNetFlowsScores]
-            self.copelandOrder = [x[1] for x in incNetFlowsScores]
+        if Stored:
+            if rankingRule == 'Copeland':
+                self.incCopelandScores = incNetFlowsScores
+                self.decCopelandScores = decNetFlowsScores
+                self.copelandRanking = [x[1] for x in decNetFlowsScores]
+                self.copelandOrder = [x[1] for x in incNetFlowsScores]
+            else:
+                self.incNetFlowsScores = incNetFlowsScores
+                self.decNetFlowsScores = decNetFlowsScores
+                self.netFlowsRanking = [x[1] for x in decNetFlowsScores]
+                self.netFlowsOrder = [x[1] for x in incNetFlowsScores]
         else:
-            self.incNetFlowsScores = incNetFlowsScores
-            self.decNetFlowsScores = decNetFlowsScores
-            self.netFlowsRanking = [x[1] for x in decNetFlowsScores]
-            self.netFlowsOrder = [x[1] for x in incNetFlowsScores]
+            ranking = [x[1] for x in decNetFlowsScores]
+            ordering = [x[1] for x in incNetFlowsScores]
+            result = {'ranking': ranking,
+                      'ordering': ordering,
+                      'rankingRule': rankingRule}
+            return result
 #-----------------------
 class DualCudaDigraph(CudaDigraph):
     """
@@ -443,6 +457,75 @@ class CoDualCudaDigraph(CudaDigraph):
         self.gamma = self.gammaSets()
         self.notGamma = self.notGammaSets()
 
+class omaxFusionDigraph(CudaDigraph):
+    """
+    Instantiates the epistemic diskunctive fusion *o-max* of 
+    two given Digraph instances called dg1 and dg2.
+
+    Parameter:
+
+        * *dg1* and *dg2* are two CudaDigraphs objects
+
+    """
+
+    def __init__(self,dg1,dg2,Cuda=False):
+        import numpy as np
+        from copy import deepcopy
+        import math
+        if Cuda:
+            from numba import cuda
+
+            @cuda.jit
+            def fusion(a,b,c):
+                tx,ty = cuda.grid(2)
+                if tx < a.shape[0] and ty < a.shape[1]:
+                    if a[tx,ty] >= 0 and b[tx,ty] >= 0:
+                        c[tx,ty] = max(a[tx,ty],b[tx,ty])
+                    elif a[tx,ty] <= 0 and b[tx,ty] <= 0:
+                        c[tx,ty] = min(a[tx,ty],b[tx,ty])
+                    else:
+                        c[ty,ty] = 0
+
+        self.name = 'fusion-'+dg1.name+'-'+dg2.name
+        self.actions = deepcopy(dg1.actions)
+        actionsList = [ x for x in self.actions]
+        order = len(actionsList)
+        self.order = order
+        self.valuationdomain = deepcopy(dg1.valuationdomain)
+        #actionsList = list(self.actions)
+        #max = self.valuationdomain['max']
+        Med = self.valuationdomain['med']
+        valuation1 = dg1.valuation
+        valuation2 = dg2.valuation
+        fusionValuation = np.zeros([order,order])
+        if Cuda:
+            t0 = time()
+            ad = cuda.to_device(valuation1)
+            bd = cuda.to_device(valuation2)
+            cd = cuda.to_device(fusionValuation)
+            threadsperblock = (32, 32)
+            blockspergrid_x = math.ceil(ad.shape[0] / threadsperblock[0])
+            blockspergrid_y = math.ceil(ad.shape[1] / threadsperblock[1])
+            blockspergrid = (blockspergrid_x, blockspergrid_y)
+            fusion[blockspergrid, threadsperblock](ad,bd,cd)
+            fusionValuation = cd.copy_to_host()
+            print('Cuda time:', time()-t0)
+        else:
+            t0 = time()
+            for i in range(order):
+                for j in range(order):
+                    if valuation1[i,j] >= 0 and valuation2[i,j] >= 0:
+                        fusionValuation[i,j] =\
+                        max(valuation1[i,j],valuation2[i,j])
+                    elif valuation1[i,j] <= 0 and valuation2[i,j] <= 0:
+                        fusionValuation[i,j] =\
+                        min(valuation1[i,j],valuation2[i,j])
+                    else:
+                        fusionValuation[i,j] = 0
+            print('Numpy time:', time() - t0)
+        self.valuation = fusionValuation
+        self.gamma = self.gammaSets()
+        self.notGamma = self.notGammaSets()
 
 #############################################
 # scratch space for testing ongoing developments
@@ -463,25 +546,36 @@ if __name__ == "__main__":
     from cudaDigraphs import *
     from cRandPerfTabs import *
     from time import time
-    pt = cRandom3ObjectivesPerformanceTableau(numberOfActions=100,numberOfCriteria=21,seed=10)
+    pt1 = cRandom3ObjectivesPerformanceTableau(numberOfActions=2000,numberOfCriteria=21,seed=10)
+    pt2 = cRandom3ObjectivesPerformanceTableau(numberOfActions=2000,numberOfCriteria=21,seed=20)
+    
     from cIntegerOutrankingDigraphs import *
-    ig = IntegerBipolarOutrankingDigraph(pt,Threading=False)
-    print(ig)
+    ig1 = IntegerBipolarOutrankingDigraph(pt1,Threading=True)
+    print(ig1)
+    ig2 = IntegerBipolarOutrankingDigraph(pt2,Threading=True)
+    print(ig2)
 ##    t0 = time()
 ##    cdig = ~(-ig)
 ##    print(cdig)
 ##    print('CoDualDigraph time',time()-t0)
-    cd = CudaDigraph(ig)
-    print(cd)
-    print('NetFlows ranking times with numpy and cuda')
-    cd.computeRanking(rankingRule='NetFlows')
-    #print(cd.netFlowsOrder)
-    cd.computeRanking(rankingRule='NetFlows',Cuda=True)
-    print('Copeland ranking times with numpy and cuda')
-    cd.computeRanking(rankingRule='Copeland')
-    #print(cd.netFlowsOrder)
-    cd.computeRanking(rankingRule='Copeland',Cuda=True)
-    #print(cd.netFlowsRanking)
+    cd1 = CudaDigraph(ig1)
+    print(cd1)
+    cd2 = CudaDigraph(ig2)
+    print(cd2)
+
+    fd = omaxFusionDigraph(cd1,cd2,Cuda=False)
+    print(fd)
+    fd = omaxFusionDigraph(cd1,cd2,Cuda=True)
+    print(fd)
+##    print('NetFlows ranking times with numpy and cuda')
+##    cd.computeRanking(rankingRule='NetFlows',Stored=True)
+##    #print(cd.netFlowsOrder)
+##    cd.computeRanking(rankingRule='NetFlows',Cuda=True)
+##    print('Copeland ranking times with numpy and cuda')
+##    cd.computeRanking(rankingRule='Copeland',Stored=True)
+##    #print(cd.netFlowsOrder)
+##    cd.computeRanking(rankingRule='Copeland',Cuda=True)
+##    #print(cd.netFlowsRanking)
 ##    dg = DualCudaDigraph(cd,Cuda=False)
 ##    print(dg)
 ##    dg = DualCudaDigraph(cd,Cuda=True)
