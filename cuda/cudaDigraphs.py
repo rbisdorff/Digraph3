@@ -25,6 +25,7 @@ Copyright (C) 2006-2023  Raymond Bisdorff
 #######################
 from digraphs import Digraph 
 import numpy as np
+from time import time
 
 class CudaDigraph(Digraph):
     """
@@ -64,7 +65,7 @@ class CudaDigraph(Digraph):
         reprString += 'Digraph Size        : %d\n' % self.computeSize()
         reprString += 'Valuation domain    : [%.2f;%.2f]\n'\
                       % (self.valuationdomain['min'],self.valuationdomain['max'])
-        #reprString += 'Determinateness (%%) : %.2f\n' % self.computeDeterminateness(InPercents=True)
+        reprString += 'Determinateness (%%) : %.2f\n' % self.computeDeterminateness(InPercents=True)
         reprString += 'Attributes          : %s\n' % list(self.__dict__.keys())
        
         return reprString
@@ -186,20 +187,104 @@ class CudaDigraph(Digraph):
         valuation = self.valuation
         actionsList = [x for x in self.actions]
         order = self.order
-        D = Decimal('0.0')
+        D = 0
         for i in range(order):
             for j in range(i+1,order):
                 D += abs(valuation[i,j] - Med)
-                D += abs(valuation[j,i] -Med )
+                D += abs(valuation[j,i] - Med )
         if order > 1:
-            determination = D / Decimal(str((order * (order-1))))
+            determination = D / ( order * (order-1) )
         else:
             determination = D
         if InPercents:
-            return ( (determination / (Max-Med)) + Decimal('1.0')) / Decimal('2.0') * Decimal('100.0')
+            return ( ( ( determination / (Max-Med) ) + 1 ) / 2 ) * 100
         else:
             return determination
 
+    def addRelationAttribute(self):
+        """
+        For compatibility with the digraphs.Digraph resources
+        """
+        valuation = self.valuation
+        actionsList = [x for x in self.actions]
+        order = self.order
+        relation = {}
+        for i in range(order):
+            x = actionsList[i]
+            relation[x] = {}
+            for j in range(order):
+                y = actionsList[j]
+                relation[x][y] = valuation[i,j]
+        self.relation = relation
+
+    def computeRanking(self,rankingRule='NetFlows',
+                       Stored=True,Debug=False,Cuda=False):
+        """
+        Tenders an ordered dictionary of the actions (from best to worst)
+        following the net flows ranking rule with rank and net flow attributes.
+        """
+        import numpy as np
+        if Cuda:
+            from numba import cuda
+            import math
+            @cuda.jit
+            def scoring(a,b):
+                tx,ty = cuda.grid(2)
+                if tx < a.shape[0] and ty < a.shape[1]:
+                    b[tx] = a[tx,ty] - a[ty,tx]
+
+        from operator import itemgetter
+
+        if rankingRule == 'Copeland':
+            valuation = np.sign(self.valuation)
+        else:
+            valuation = self.valuation
+        actionsList = [x for x in self.actions]
+        order = self.order
+        incNetFlowsScores = []
+        decNetFlowsScores = []
+        Med = self.valuationdomain['med']
+        if Cuda:
+            t0 = time()
+            ad = cuda.to_device(valuation)
+            bd = cuda.to_device(np.zeros([order]))
+            threadsperblock = (32, 32)
+            blockspergrid_x = math.ceil(ad.shape[0] / threadsperblock[0])
+            blockspergrid_y = math.ceil(ad.shape[1] / threadsperblock[1])
+            blockspergrid = (blockspergrid_x, blockspergrid_y)
+            scoring[blockspergrid, threadsperblock](ad,bd)
+            netFlows = bd.copy_to_host()
+            for i in range(order):
+                incNetFlowsScores.append((netFlows[i],actionsList[i]))
+                decNetFlowsScores.append((netFlows[i],actionsList[i]))
+            print( 'Cuda %s ranking time: %.3f sec.' % ( rankingRule,time()-t0 ) )
+
+        else:
+            t0 = time()
+            for i in range(order):
+                x = actionsList[i]
+                xnetFlows = 0
+                for j in range(order):
+                    y = actionsList[j]
+                    xnetFlows += valuation[i,j] - valuation[j,i]
+                incNetFlowsScores.append((xnetFlows,x))
+                decNetFlowsScores.append((xnetFlows,x))
+            print( 'Numpy %s ranking time: %.3f sec.' % (rankingRule, time()-t0) )
+            
+        if Debug:
+            print(incNetFlowsScores)                                     
+        incNetFlowsScores.sort(key=itemgetter(0))
+        decNetFlowsScores.sort(key=itemgetter(0),reverse=True)
+        if rankingRule == 'Copeland':
+            self.incCopelandScores = incNetFlowsScores
+            self.decCopelandScores = decNetFlowsScores
+            self.copelandRanking = [x[1] for x in decNetFlowsScores]
+            self.copelandOrder = [x[1] for x in incNetFlowsScores]
+        else:
+            self.incNetFlowsScores = incNetFlowsScores
+            self.decNetFlowsScores = decNetFlowsScores
+            self.netFlowsRanking = [x[1] for x in decNetFlowsScores]
+            self.netFlowsOrder = [x[1] for x in incNetFlowsScores]
 #-----------------------
 class DualCudaDigraph(CudaDigraph):
     """
@@ -224,9 +309,8 @@ class DualCudaDigraph(CudaDigraph):
             @cuda.jit
             def negate(a,b):
                 tx,ty = cuda.grid(2)
-                size = len(b)
                 if tx < a.shape[0] and ty < a.shape[1]:
-                    b[tx,ty] = -a[tx,ty]
+                    b[tx] = -a[tx,ty]
                     
         from copy import deepcopy
         self.__class__ = other.__class__
@@ -379,33 +463,39 @@ if __name__ == "__main__":
     from cudaDigraphs import *
     from cRandPerfTabs import *
     from time import time
-    pt = cRandomPerformanceTableau(numberOfActions=3000,seed=10)
+    pt = cRandom3ObjectivesPerformanceTableau(numberOfActions=100,numberOfCriteria=21,seed=10)
     from cIntegerOutrankingDigraphs import *
-    ig = IntegerBipolarOutrankingDigraph(pt,Threading=True)
+    ig = IntegerBipolarOutrankingDigraph(pt,Threading=False)
     print(ig)
-    t0 = time()
-    cdig = ~(-ig)
-    print(cdig)
-    print('CoDualDigraph time',time()-t0)
+##    t0 = time()
+##    cdig = ~(-ig)
+##    print(cdig)
+##    print('CoDualDigraph time',time()-t0)
     cd = CudaDigraph(ig)
-    #print(cd)
-    #dg = DualCudaDigraph(cd,Cuda=False)
-    #print(dg)
-    #dg = DualCudaDigraph(cd,Cuda=True)
-    #print(dg)
-    #invd = ConverseCudaDigraph(cd,Cuda=False)
-    #print(invd)
-    #invd = ConverseCudaDigraph(cd,Cuda=True)
-    #print(invd)
-    cdd = CoDualCudaDigraph(cd,Cuda=False)
-    print(cdd)
-    cdd = CoDualCudaDigraph(cd,Cuda=True)
-    print(cdd)
+    print(cd)
+    print('NetFlows ranking times with numpy and cuda')
+    cd.computeRanking(rankingRule='NetFlows')
+    #print(cd.netFlowsOrder)
+    cd.computeRanking(rankingRule='NetFlows',Cuda=True)
+    print('Copeland ranking times with numpy and cuda')
+    cd.computeRanking(rankingRule='Copeland')
+    #print(cd.netFlowsOrder)
+    cd.computeRanking(rankingRule='Copeland',Cuda=True)
+    #print(cd.netFlowsRanking)
+##    dg = DualCudaDigraph(cd,Cuda=False)
+##    print(dg)
+##    dg = DualCudaDigraph(cd,Cuda=True)
+##    print(dg)
+##    invd = ConverseCudaDigraph(cd,Cuda=False)
+##    print(invd)
+##    invd = ConverseCudaDigraph(cd,Cuda=True)
+##    print(invd)
+##    cdd = CoDualCudaDigraph(cd,Cuda=False)
+##    print(cdd)
+##    cdd = CoDualCudaDigraph(cd,Cuda=True)
+##    print(cdd)
     
     #print(cd.computeCoSize())
     #cd.showNeighborhoods()
-##    from digraphs import *
-##    g = RandomValuationDigraph()
-##    g.save('testgDigraph')
 
     
