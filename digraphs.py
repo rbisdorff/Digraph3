@@ -494,7 +494,21 @@ class Digraph(object):
         self.maxHoleSize = maxHS
         return maxHS
                 
-#----------------------------------------
+#--------interoperability resources ----
+
+    def addValuationAttribute(self):
+        """
+        Adds the numpy valuation attribute
+        """
+        import numpy as np
+        order = self.order
+        valuation = np.zeros([order,order])
+        actionsList = [x for x in self.actions]
+        relation = self.relation
+        for i,x in enumerate(actionsList):
+            for j,y in enumerate(actionsList):
+                valuation[i,j] = relation[x][y]
+        self.valuation = valuation
 
     def relationFct(self,x,y):
         """
@@ -15128,16 +15142,16 @@ if __name__ == "__main__":
     from randomDigraphs import *
     from decimal import Decimal, getcontext
     t = RandomPerformanceTableau(weightDistribution="equiobjectives",
-                                 numberOfActions=1000,numberOfCriteria=7,
+                                 numberOfActions=100,numberOfCriteria=7,
                                              missingDataProbability=0.05,seed=2)
                           
     #t = CircularPerformanceTableau()
     #print(getcontext().prec)
-    g = BipolarOutrankingDigraph(t,Threading=True,startMethod='spawn')
+    g = BipolarOutrankingDigraph(t,Threading=False,startMethod='spawn')
     print(g)
-    t0 = time()
-    print(g.computeOrdinalCorrelationMP(g,Threading=True,startMethod=None,nbrOfCPUs=None))
-    print(time()-t0)
+    #t0 = time()
+    #print(g.computeOrdinalCorrelationMP(g,Threading=True,startMethod=None,nbrOfCPUs=None))
+    #print(time()-t0)
     #g = RandomBipolarOutrankingDigraph(10)
     #g.showRelationTable()
     #g.showRelationMap()

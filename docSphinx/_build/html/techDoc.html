@@ -132,6 +132,7 @@
 <li class="toctree-l4"><a class="reference internal" href="#digraphs.Digraph.abskernelrestrict"><code class="docutils literal notranslate"><span class="pre">Digraph.abskernelrestrict()</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="#digraphs.Digraph.absorb"><code class="docutils literal notranslate"><span class="pre">Digraph.absorb()</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="#digraphs.Digraph.absorbentChoices"><code class="docutils literal notranslate"><span class="pre">Digraph.absorbentChoices()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#digraphs.Digraph.addValuationAttribute"><code class="docutils literal notranslate"><span class="pre">Digraph.addValuationAttribute()</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="#digraphs.Digraph.agglomerationDistribution"><code class="docutils literal notranslate"><span class="pre">Digraph.agglomerationDistribution()</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="#digraphs.Digraph.aneighbors"><code class="docutils literal notranslate"><span class="pre">Digraph.aneighbors()</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="#digraphs.Digraph.automorphismGenerators"><code class="docutils literal notranslate"><span class="pre">Digraph.automorphismGenerators()</span></code></a></li>
@@ -1997,6 +1998,12 @@ Renders absorbent prekernel restricted relation.</p>
 <dt class="sig sig-object py" id="digraphs.Digraph.absorbentChoices">
 <span class="sig-name descname"><span class="pre">absorbentChoices</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">S</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/digraphs.html#Digraph.absorbentChoices"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#digraphs.Digraph.absorbentChoices" title="Link to this definition"></a></dt>
 <dd><p>Generates all minimal absorbent choices of a bipolar valued digraph.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="digraphs.Digraph.addValuationAttribute">
+<span class="sig-name descname"><span class="pre">addValuationAttribute</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/digraphs.html#Digraph.addValuationAttribute"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#digraphs.Digraph.addValuationAttribute" title="Link to this definition"></a></dt>
+<dd><p>Adds the numpy valuation attribute</p>
 </dd></dl>
 
 <dl class="py method">
@@ -11599,7 +11606,7 @@ and operate <em>omin</em> on the two assembled arguments.</p>
 
 <dl class="py function">
 <dt class="sig sig-object py" id="digraphsTools.qtilingIndexList">
-<span class="sig-prename descclassname"><span class="pre">digraphsTools.</span></span><span class="sig-name descname"><span class="pre">qtilingIndexList</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">indexList</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">q</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">Debug</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/digraphsTools.html#qtilingIndexList"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#digraphsTools.qtilingIndexList" title="Link to this definition"></a></dt>
+<span class="sig-prename descclassname"><span class="pre">digraphsTools.</span></span><span class="sig-name descname"><span class="pre">qtilingIndexList</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">indexList</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">q</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">Debug</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">Comments</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/digraphsTools.html#qtilingIndexList"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#digraphsTools.qtilingIndexList" title="Link to this definition"></a></dt>
 <dd><p>split an index list into q of equal length or, when there is a rest in len(indexList)//q, into q-1 parts of equal length plus a last shorter part.</p>
 </dd></dl>
 
@@ -13839,7 +13846,7 @@ Components are stored in an ordered dictionary.</p>
 
   <div role="contentinfo">
     <p>&#169; Copyright 2012-2024, Raymond Bisdorff.
-      <span class="lastupdated">Last updated on Feb 20, 2024.
+      <span class="lastupdated">Last updated on Mar 08, 2024.
       </span></p>
   </div>
 

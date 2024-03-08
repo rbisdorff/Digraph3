@@ -546,8 +546,8 @@ if __name__ == "__main__":
     from cudaDigraphs import *
     from cRandPerfTabs import *
     from time import time
-    pt1 = cRandom3ObjectivesPerformanceTableau(numberOfActions=2000,numberOfCriteria=21,seed=10)
-    pt2 = cRandom3ObjectivesPerformanceTableau(numberOfActions=2000,numberOfCriteria=21,seed=20)
+    pt1 = cRandom3ObjectivesPerformanceTableau(numberOfActions=1000,numberOfCriteria=21,seed=10)
+    pt2 = cRandom3ObjectivesPerformanceTableau(numberOfActions=1000,numberOfCriteria=21,seed=20)
     
     from cIntegerOutrankingDigraphs import *
     ig1 = IntegerBipolarOutrankingDigraph(pt1,Threading=True)
@@ -563,18 +563,18 @@ if __name__ == "__main__":
     cd2 = CudaDigraph(ig2)
     print(cd2)
 
-    fd = omaxFusionDigraph(cd1,cd2,Cuda=False)
-    print(fd)
-    fd = omaxFusionDigraph(cd1,cd2,Cuda=True)
-    print(fd)
-##    print('NetFlows ranking times with numpy and cuda')
-##    cd.computeRanking(rankingRule='NetFlows',Stored=True)
-##    #print(cd.netFlowsOrder)
-##    cd.computeRanking(rankingRule='NetFlows',Cuda=True)
-##    print('Copeland ranking times with numpy and cuda')
-##    cd.computeRanking(rankingRule='Copeland',Stored=True)
-##    #print(cd.netFlowsOrder)
-##    cd.computeRanking(rankingRule='Copeland',Cuda=True)
+    # fd = omaxFusionDigraph(cd1,cd2,Cuda=False)
+    # print(fd)
+    # fd = omaxFusionDigraph(cd1,cd2,Cuda=True)
+    # print(fd)
+    print('NetFlows ranking times with numpy and cuda')
+    cd1.computeRanking(rankingRule='NetFlows',Stored=True)
+    #print(cd.netFlowsOrder)
+    cd1.computeRanking(rankingRule='NetFlows',Cuda=True)
+    print('Copeland ranking times with numpy and cuda')
+    cd2.computeRanking(rankingRule='Copeland',Stored=True)
+    #print(cd.netFlowsOrder)
+    cd2.computeRanking(rankingRule='Copeland',Cuda=True)
 ##    #print(cd.netFlowsRanking)
 ##    dg = DualCudaDigraph(cd,Cuda=False)
 ##    print(dg)

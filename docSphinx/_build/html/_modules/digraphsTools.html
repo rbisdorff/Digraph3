@@ -182,43 +182,82 @@
 <span class="c1">#---------- general methods -----------------</span>
 
 <span class="c1"># splitting list indexes</span>
+<span class="c1"># def oldqtilingIndexList(indexList,q,Debug=True):</span>
+<span class="c1">#     &quot;&quot;&quot;</span>
+<span class="c1">#     split an index list into q of equal length or, when there is a rest in len(indexList)//q, into q-1 parts of equal length plus a last shorter part.</span>
+    
+<span class="c1">#     &quot;&quot;&quot;</span>
+<span class="c1">#     n = len(indexList)</span>
+<span class="c1">#     if Debug:</span>
+<span class="c1">#         print(n, indexList, q)</span>
+
+<span class="c1">#     nq = n//q</span>
+<span class="c1">#     if nq * q &lt; n:</span>
+<span class="c1">#         q -= 1</span>
+<span class="c1">#         nq = n // q</span>
+<span class="c1">#         Rest = True</span>
+<span class="c1">#         if Debug:</span>
+<span class="c1">#             print(&#39;with Rest&#39;, n//q, nq*q, n - nq*(q))</span>
+<span class="c1">#     else:</span>
+<span class="c1">#         Rest = False</span>
+<span class="c1">#         if Debug:</span>
+<span class="c1">#             print(&#39;Without Rest&#39;, q, nq*q, n - nq*q  )</span>
+<span class="c1">#     splitIndex = []</span>
+<span class="c1">#     if Rest == True:</span>
+<span class="c1">#         for j in range(q):</span>
+<span class="c1">#             if Debug:</span>
+<span class="c1">#                 print( nq, j*nq, (j+1)*nq )</span>
+<span class="c1">#             splitIndex.append( (j*nq, (j+1)*nq) )</span>
+<span class="c1">#         if Debug:</span>
+<span class="c1">#             print(&quot;Rest&quot;, n - ((q)*nq), (q)*nq, n )</span>
+<span class="c1">#         splitIndex.append( ((q)*nq, n) )</span>
+<span class="c1">#     else:</span>
+<span class="c1">#         for j in range(q):</span>
+<span class="c1">#             if Debug:</span>
+<span class="c1">#                 print( nq, j*nq, (j+1)*nq )</span>
+<span class="c1">#             splitIndex.append( (j*nq, (j+1)*nq) )</span>
+
+<span class="c1">#     return splitIndex</span>
+
 <div class="viewcode-block" id="qtilingIndexList">
 <a class="viewcode-back" href="../techDoc.html#digraphsTools.qtilingIndexList">[docs]</a>
-<span class="k">def</span> <span class="nf">qtilingIndexList</span><span class="p">(</span><span class="n">indexList</span><span class="p">,</span><span class="n">q</span><span class="p">,</span><span class="n">Debug</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+<span class="k">def</span> <span class="nf">qtilingIndexList</span><span class="p">(</span><span class="n">indexList</span><span class="p">,</span><span class="n">q</span><span class="p">,</span><span class="n">Debug</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span><span class="n">Comments</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    split an index list into q of equal length or, when there is a rest in len(indexList)//q, into q-1 parts of equal length plus a last shorter part.</span>
 <span class="sd">    </span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">n</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">indexList</span><span class="p">)</span>
     <span class="k">if</span> <span class="n">Debug</span><span class="p">:</span>
-        <span class="nb">print</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="n">indexList</span><span class="p">,</span> <span class="n">q</span><span class="p">)</span>
+        <span class="n">Comments</span> <span class="o">=</span> <span class="kc">True</span>
+        <span class="nb">print</span><span class="p">(</span><span class="n">indexList</span><span class="p">,</span> <span class="n">n</span><span class="p">,</span> <span class="n">q</span><span class="p">)</span>
 
-    <span class="n">nq</span> <span class="o">=</span> <span class="n">n</span><span class="o">//</span><span class="n">q</span>
-    <span class="k">if</span> <span class="n">nq</span> <span class="o">*</span> <span class="n">q</span> <span class="o">&lt;</span> <span class="n">n</span><span class="p">:</span>
-        <span class="n">q</span> <span class="o">-=</span> <span class="mi">1</span>
-        <span class="n">nq</span> <span class="o">=</span> <span class="n">n</span> <span class="o">//</span> <span class="n">q</span>
+    <span class="n">nq</span> <span class="o">=</span> <span class="n">n</span><span class="o">//</span><span class="p">(</span><span class="n">q</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">nq</span> <span class="o">*</span> <span class="p">(</span><span class="n">q</span><span class="p">)</span> <span class="o">&lt;</span> <span class="n">n</span><span class="p">:</span>
+        <span class="n">r</span> <span class="o">=</span> <span class="n">n</span> <span class="o">-</span> <span class="n">nq</span><span class="o">*</span><span class="p">(</span><span class="n">q</span><span class="p">)</span>
         <span class="n">Rest</span> <span class="o">=</span> <span class="kc">True</span>
         <span class="k">if</span> <span class="n">Debug</span><span class="p">:</span>
-            <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;with Rest&#39;</span><span class="p">,</span> <span class="n">n</span><span class="o">//</span><span class="n">q</span><span class="p">,</span> <span class="n">nq</span><span class="o">*</span><span class="n">q</span><span class="p">,</span> <span class="n">n</span> <span class="o">-</span> <span class="n">nq</span><span class="o">*</span><span class="p">(</span><span class="n">q</span><span class="p">))</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;with Rest&#39;</span><span class="p">,</span> <span class="n">nq</span><span class="p">,</span> <span class="n">nq</span><span class="o">*</span><span class="p">(</span><span class="n">q</span><span class="p">),</span> <span class="n">r</span><span class="p">)</span>
     <span class="k">else</span><span class="p">:</span>
+        <span class="n">r</span> <span class="o">=</span> <span class="mi">0</span>
         <span class="n">Rest</span> <span class="o">=</span> <span class="kc">False</span>
         <span class="k">if</span> <span class="n">Debug</span><span class="p">:</span>
-            <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Without Rest&#39;</span><span class="p">,</span> <span class="n">q</span><span class="p">,</span> <span class="n">nq</span><span class="o">*</span><span class="n">q</span><span class="p">,</span> <span class="n">n</span> <span class="o">-</span> <span class="n">nq</span><span class="o">*</span><span class="n">q</span>  <span class="p">)</span>
-    <span class="n">splitIndex</span> <span class="o">=</span> <span class="p">[]</span>
-    <span class="k">if</span> <span class="n">Rest</span> <span class="o">==</span> <span class="kc">True</span><span class="p">:</span>
-        <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">q</span><span class="p">):</span>
-            <span class="k">if</span> <span class="n">Debug</span><span class="p">:</span>
-                <span class="nb">print</span><span class="p">(</span> <span class="n">nq</span><span class="p">,</span> <span class="n">j</span><span class="o">*</span><span class="n">nq</span><span class="p">,</span> <span class="p">(</span><span class="n">j</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span><span class="o">*</span><span class="n">nq</span> <span class="p">)</span>
-            <span class="n">splitIndex</span><span class="o">.</span><span class="n">append</span><span class="p">(</span> <span class="p">(</span><span class="n">j</span><span class="o">*</span><span class="n">nq</span><span class="p">,</span> <span class="p">(</span><span class="n">j</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span><span class="o">*</span><span class="n">nq</span><span class="p">)</span> <span class="p">)</span>
-        <span class="k">if</span> <span class="n">Debug</span><span class="p">:</span>
-            <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Rest&quot;</span><span class="p">,</span> <span class="n">n</span> <span class="o">-</span> <span class="p">((</span><span class="n">q</span><span class="p">)</span><span class="o">*</span><span class="n">nq</span><span class="p">),</span> <span class="p">(</span><span class="n">q</span><span class="p">)</span><span class="o">*</span><span class="n">nq</span><span class="p">,</span> <span class="n">n</span> <span class="p">)</span>
-        <span class="n">splitIndex</span><span class="o">.</span><span class="n">append</span><span class="p">(</span> <span class="p">((</span><span class="n">q</span><span class="p">)</span><span class="o">*</span><span class="n">nq</span><span class="p">,</span> <span class="n">n</span><span class="p">)</span> <span class="p">)</span>
-    <span class="k">else</span><span class="p">:</span>
-        <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">q</span><span class="p">):</span>
-            <span class="k">if</span> <span class="n">Debug</span><span class="p">:</span>
-                <span class="nb">print</span><span class="p">(</span> <span class="n">nq</span><span class="p">,</span> <span class="n">j</span><span class="o">*</span><span class="n">nq</span><span class="p">,</span> <span class="p">(</span><span class="n">j</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span><span class="o">*</span><span class="n">nq</span> <span class="p">)</span>
-            <span class="n">splitIndex</span><span class="o">.</span><span class="n">append</span><span class="p">(</span> <span class="p">(</span><span class="n">j</span><span class="o">*</span><span class="n">nq</span><span class="p">,</span> <span class="p">(</span><span class="n">j</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span><span class="o">*</span><span class="n">nq</span><span class="p">)</span> <span class="p">)</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Without Rest&#39;</span><span class="p">,</span> <span class="n">q</span><span class="p">,</span> <span class="n">nq</span><span class="o">*</span><span class="n">q</span><span class="p">,</span> <span class="n">r</span>  <span class="p">)</span>
+            
+    <span class="n">card</span> <span class="o">=</span> <span class="p">[</span><span class="n">nq</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">q</span><span class="p">)]</span>
+    <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">r</span><span class="p">):</span>
+        <span class="n">card</span><span class="p">[</span><span class="n">j</span><span class="p">]</span> <span class="o">+=</span> <span class="mi">1</span>
+    <span class="k">if</span> <span class="n">Comments</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;cardinalities:&#39;</span><span class="p">,</span> <span class="n">card</span><span class="p">)</span>
 
+    <span class="n">splitIndex</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="n">toi</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="n">fromi</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">q</span><span class="p">):</span>
+        <span class="n">toi</span> <span class="o">+=</span> <span class="n">card</span><span class="p">[</span><span class="n">j</span><span class="p">]</span>
+        <span class="n">splitIndex</span><span class="o">.</span><span class="n">append</span><span class="p">(</span> <span class="p">(</span><span class="n">fromi</span><span class="p">,</span> <span class="n">toi</span><span class="p">)</span> <span class="p">)</span>
+        <span class="n">fromi</span> <span class="o">=</span> <span class="n">toi</span>
+    <span class="k">if</span> <span class="n">Debug</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;splitIndex:&#39;</span><span class="p">,</span> <span class="n">splitIndex</span><span class="p">)</span>
     <span class="k">return</span> <span class="n">splitIndex</span></div>
 
 
@@ -986,22 +1025,22 @@
 <span class="s2">    ****************************************************</span>
 <span class="s2">    &quot;&quot;&quot;</span><span class="p">)</span>
 
-    <span class="n">indexList</span> <span class="o">=</span> <span class="nb">range</span><span class="p">(</span><span class="mi">20</span><span class="p">)</span>
+    <span class="c1"># indexList = range(100000)</span>
+    <span class="c1"># q = 12</span>
+    <span class="c1"># splitIndex = oldqtilingIndexList(indexList,q,Debug=True)</span>
+    <span class="c1"># print(splitIndex)</span>
+    <span class="c1"># for i in range(len(splitIndex)):</span>
+    <span class="c1">#     print(&#39;group&#39;,i+1, splitIndex[i])</span>
+    <span class="c1">#     #for j in range(splitIndex[i][0],splitIndex[i][1]):</span>
+    <span class="c1">#     #    print(j)</span>
+    <span class="n">indexList</span> <span class="o">=</span> <span class="nb">range</span><span class="p">(</span><span class="mi">100000</span><span class="p">)</span>
     <span class="n">q</span> <span class="o">=</span> <span class="mi">12</span>
-    <span class="n">splitIndex</span> <span class="o">=</span> <span class="n">qtilingIndexList</span><span class="p">(</span><span class="n">indexList</span><span class="p">,</span><span class="n">q</span><span class="p">,</span><span class="n">Debug</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+    <span class="n">splitIndex</span> <span class="o">=</span> <span class="n">qtilingIndexList</span><span class="p">(</span><span class="n">indexList</span><span class="p">,</span><span class="n">q</span><span class="p">,</span><span class="n">Comments</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
     <span class="nb">print</span><span class="p">(</span><span class="n">splitIndex</span><span class="p">)</span>
     <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">splitIndex</span><span class="p">)):</span>
-        <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;group&#39;</span><span class="p">,</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span>
-        <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">splitIndex</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="mi">0</span><span class="p">],</span><span class="n">splitIndex</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="mi">1</span><span class="p">]):</span>
-            <span class="nb">print</span><span class="p">(</span><span class="n">j</span><span class="p">)</span>
-    <span class="n">indexList</span> <span class="o">=</span> <span class="nb">range</span><span class="p">(</span><span class="mi">120</span><span class="p">)</span>
-    <span class="n">q</span> <span class="o">=</span> <span class="mi">12</span>
-    <span class="n">splitIndex</span> <span class="o">=</span> <span class="n">qtilingIndexList</span><span class="p">(</span><span class="n">indexList</span><span class="p">,</span><span class="n">q</span><span class="p">,</span><span class="n">Debug</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
-    <span class="nb">print</span><span class="p">(</span><span class="n">splitIndex</span><span class="p">)</span>
-    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">splitIndex</span><span class="p">)):</span>
-        <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;group&#39;</span><span class="p">,</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span>
-        <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">splitIndex</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="mi">0</span><span class="p">],</span><span class="n">splitIndex</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="mi">1</span><span class="p">]):</span>
-            <span class="nb">print</span><span class="p">(</span><span class="n">j</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;group&#39;</span><span class="p">,</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">,</span> <span class="n">splitIndex</span><span class="p">[</span><span class="n">i</span><span class="p">])</span>
+        <span class="c1">#for j in range(splitIndex[i][0],splitIndex[i][1]):</span>
+        <span class="c1">#    print(j)</span>
 
 
 <span class="c1">##    seqA = generateRandomSequence(10)</span>
@@ -1061,7 +1100,7 @@
 
   <div role="contentinfo">
     <p>&#169; Copyright 2012-2024, Raymond Bisdorff.
-      <span class="lastupdated">Last updated on Feb 17, 2024.
+      <span class="lastupdated">Last updated on Mar 08, 2024.
       </span></p>
   </div>
 

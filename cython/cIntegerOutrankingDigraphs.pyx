@@ -790,9 +790,9 @@ Example Python session:
                 selfFileName = tempDirName +'/dumpSelf.py'
                 if Debug:
                     print('temDirName, selfFileName', tempDirName,selfFileName)
-                fo = open(selfFileName,'wb')
-                fo.write(dumps(self,-1))
-                fo.close()
+                #fo = open(selfFileName,'wb')
+                #fo.write(dumps(self,-1))
+                #fo.close()
 
                 if nbrCores == None:
                     nbrCores = cpu_count()

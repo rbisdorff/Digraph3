@@ -1,5 +1,5 @@
 #--------------------------------------------------------------------------
-# Python3 CUDA implementation of the Digraph software
+# Python3 CUDA test implementation of the Digraph3 cIntegerOutrankingDigrah class
 # Current revision Py312
 # Copyright (C) 2024 Raymond Bisdorff
 #
@@ -19,17 +19,16 @@
 #
 #-----------------------------------------------------------------------------
 
-This Digraph3 module experiments the use of NVIDIA GPU resources for measuring the speeding up of the elementwise computation of the dual, converse and codual transforms for large (order >= 10000) cIntegerOurankingDigraphs.IntegerBipolarOutrankingDigraph objects. 
+This Digraph3 module experiments the use of NVIDIA GPU resources for measuring the speeding up of the element wise computation of the dual, converse and codual transforms and the fusion operation for large (order >= 10000) cIntegerOurankingDigraphs.IntegerBipolarOutrankingDigraph objects. 
 
-For small (order = +-1000) such outranking digraphs a Cuda supported computation of NetFlows and Copeland rankings is provided.
+For small (order = +-1000) such outranking digraphs, a Cuda supported computation of NetFlows and Copeland rankings is provided. For this purpose, the relation attribute, a double dictionary, is replaced with a numpy two dimensional int32 array. 
 
-Tests of the module may be found in the scratch part at the end of the module source file.
+Test script of the module may be found in the scratch part at the end of the module source file. 
+These were run with a Geforce PTX1650 and Python 3.11.6 on Ubuntu 23.10. 
 
-For this purpose, the relation attribute, a double dictionary, is replaced with a numpy two dimensional int32 array. 
+Requirements: NVIDIA GPU device nvidia driver 535 enabled and pip install of numpy and numba
 
-Tutorials and technical documentation of modules, classes and methods are available under the following link:
-
-https://digraph3.readthedocs.io/en/latest/
+Note: The usual double dictionary *self.relation* attribute of the bipolar-valued digraph is replaced here with a *self.valuation* attribute, a numpy array[self.order,self.order] of dtype int64 containing the pairwise integer relation characteristic values.
 
 Enjoy !!
 R Bisdorff

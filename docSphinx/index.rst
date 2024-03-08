@@ -47,7 +47,7 @@ Parts of the documentation
 ..........................
 :New:
 
-   - The cythonized HPC Digraph3 modules have been reviewed and further optimised: see :ref:`cythonized Digraph3 modules <HPC-Tutorial-label>`.
+   - The cythonized HPC Digraph3 modules have been reviewed and further optimised: see :ref:`cythonized Digraph3 modules <HPC-Tutorial-label>`. Nvidia GPU acceleration tests for :py:mod:`cIntegerOutrankingDigraph` instances with Python Cuda *numba* may be found in the *cuda* directory of the Digraph3 resources.
    
    - A tutorial on :ref:`using multiprocessing resources <Multiprocessing-Tutorial-label>` when tackling large performance tableaux with several hundreds of decision alternatives.
      
