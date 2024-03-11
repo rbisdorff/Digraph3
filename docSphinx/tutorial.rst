@@ -5213,7 +5213,7 @@ HPC quantiles ranking records
 
 Following from the separability property of the *q*-tiles sorting of each action into each *q*-tiles class, the *q*-sorting algorithm may be safely split into as much threads as are multiple processing cores available in parallel. Furthermore, the ranking procedure being local to each diagonal component, these procedures may as well be safely processed in parallel threads on each component restricted outrankingdigraph.
 
-On a common 2023 Terra desktop computer, equipped with a 11th Gen Intel® Core™ i5-11400 × 12 processor and 16.0 GiB of CPU memory, working under Ubuntu 23.10 we may rank a :py:class:`~cRandPerfTabs.cRandom3ObjectivesPerformanceTableau` instance of **two hundred thousand** performance records in about 30 seconds with about 15 seconds for the quantiles sorting step and 14 seconds for the local components ranking step (see below Lines 38-).
+On a common 2023 Terra desktop computer, equipped with a 11th Gen Intel® Core™ i5-11400 × 12 processor and 16.0 GiB of CPU memory, working under Ubuntu 23.10 we may rank a :py:class:`~cRandPerfTabs.cRandom3ObjectivesPerformanceTableau` instance of **five hundred thousand** performance records in about 104 seconds with about 48 seconds for the quantiles sorting step and 55 seconds for the local components ranking step (see below Lines 42-).
 
 .. code-block:: bash
 
@@ -5223,16 +5223,20 @@ On a common 2023 Terra desktop computer, equipped with a 11th Gen Intel® Core�
     
 .. code-block:: pycon
    :linenos:
-   :emphasize-lines: 3, 22-29, 38-
+   :emphasize-lines: 3, 29-33, 42-
 
    >>> from cRandPerfTabs import\
    ...       cRandom3ObjectivesPerformanceTableau as cR3ObjPT
-   >>> pt = cR3ObjPT(numberOfActions=200000,
-   ...       numberOfCriteria=21,
-   ...       weightDistribution='equiobjectives',
-   ...       commonScale = (0.0,1000.0),seed=1)
+   >>> pt = cR3ObjPT(numberOfActions=500000,
+   ...              numberOfCriteria=21,
+   ...              weightDistribution='equiobjectives',
+   ...              commonScale = (0.0,1000.0),
+   ...              commonThresholds = [(1.5,0.0),(2.0,0.0),(75.0,0.0)],
+   ...              commonMode = ['beta','variable',None],
+   ...              missingDataProbability=0.05,
+   ...              seed=16)
    >>> import cSparseIntegerOutrankingDigraphs as iBg
-   >>> qr = iBg.cQuantilesRankingDigraph(pt,quantiles=11,
+   >>> qr = iBg.cQuantilesRankingDigraph(pt,quantiles=7,
    ...                    quantilesOrderingStrategy='optimal',
    ...                    minimalComponentSize=1,
    ...                    componentRankingRule='Copeland',
@@ -5244,16 +5248,16 @@ On a common 2023 Terra desktop computer, equipped with a 11th Gen Intel® Core�
    *----- Object instance description --------------*
     Instance class    : cQuantilesRankingDigraph
     Instance name     : random3ObjectivesPerfTab_mp
-    Actions           : 200000
+    Actions           : 500000
     Criteria          : 21
-    Sorting by        : 11-Tiling
+    Sorting by        : 7-Tiling
     Ordering strategy : optimal
     Ranking rule      : Copeland
-    Components        : 67425
+    Components        : 146579
     Minimal order     : 1
-    Maximal order     : 127
-    Average order     : 3.0
-    fill rate         : 0.005%
+    Maximal order     : 115
+    Average order     : 3.4
+    fill rate         : 0.002%
     Attributes        : ['runTimes', 'name', 'actions', 'order',
                          'dimension', 'sortingParameters',
 			 'nbrThreads', 'startMethod', 'valuationdomain',
@@ -5265,12 +5269,12 @@ On a common 2023 Terra desktop computer, equipped with a 11th Gen Intel® Core�
     ----  Constructor run times (in sec.) ----
     Threads           : 12
     StartMethod       : spawn
-    Total time        : 30.3172
-    QuantilesSorting  : 15.29988
-    Preordering       : 0.60050
-    Decomposing       : 14.47128
+    Total time        : 104.48654
+    QuantilesSorting  : 48.09243
+    Preordering       : 1.26480
+    Decomposing       : 55.12919
 
-When ordering the 67425 components resulting from an 11-tiling sorting with the *optimal* quantiles ordering strategy, the order of a local component is limited to a maximal size of 127 actions which results in a total pairwise adjacency table fill rate of 0.005% (see Lines 25-29).
+When ordering the 146579 components resulting from a 7-tiling sorting with the *optimal* quantiles ordering strategy, the order of a local component is limited to a maximal size of 115 actions which results in a total pairwise adjacency table fill rate of 0.002% (see Lines 29-33).
 
 Bigger performance tableaux may definitely be ranked with a larger *cpu_count()*. We were using therefore in 2018 the HPC Platform of the University of Luxembourg (https://hpc.uni.lu/). The following run times for very big quantiles ranking problems of several millions of multicriteria performance records could be achieved both:
 
