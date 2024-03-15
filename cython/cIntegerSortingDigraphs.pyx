@@ -767,8 +767,8 @@ class IntegerQuantilesSortingDigraph(IntegerBipolarOutrankingDigraph):
                 i = 0
                 actionsRemain = set(actions2Split)
                 splitActionsList = []
-                #for j in range(nbrOfJobs):
-                for j from 0 <= j < nbrOfJobs:
+                for j in range(nbrOfJobs):
+                #for j from 0 <= j < nbrOfJobs:
                     if Comments:
                         print('Thread = %d/%d' % (j+1,nbrOfJobs),end=" ")
                     splitActions=[]
@@ -807,9 +807,10 @@ class IntegerQuantilesSortingDigraph(IntegerBipolarOutrankingDigraph):
                 sorting = {}
                 categoryContent = {}
                 relation = {}
-                ns = len(splitActionsList)
+                #ns = len(splitActionsList)
                 #for j in range(len(splitActionsList)):
-                for j from 0 <= j < ns:
+                #for j from 0 <= j < ns:
+                for j in range(nbrOfJobs):
                     # update category contents
                     fiName = tempDirName+'/splitCategoryContent-'+str(j)+'.py'
                     fi = open(fiName,'rb')
@@ -823,8 +824,8 @@ class IntegerQuantilesSortingDigraph(IntegerBipolarOutrankingDigraph):
                         splitSorting = loads(fi.read())
                         fi.close()
                         sorting.update(splitSorting)
-                    ## if Comments:
-                    ##     print('Collect result ',j)
+                    if Comments:
+                        print('Collect result ',j)
                 self.categoryContent = categoryContent
                 if StoreSorting:
                     self.sorting = sorting
