@@ -26,7 +26,7 @@ from cRandPerfTabs import *
 # threaded classes
 class _myThread1(Process):
     def __init__(self, int threadID,digraph,\
-                 InitialSplit, tempDirName,\
+                 InitialSplit,\
                  splitActions, return_dict,\
                  bint hasNoVeto, bint hasBipolarVeto,\
                  bint hasSymmetricThresholds, bint Debug):
@@ -34,7 +34,7 @@ class _myThread1(Process):
         self.threadID = threadID
         self.digraph = digraph
         self.InitialSplit = InitialSplit
-        self.workingDirectory = tempDirName
+        #self.workingDirectory = tempDirName
         self.splitActions = splitActions
         self.return_dict = return_dict
         self.hasNoVeto = hasNoVeto
@@ -50,7 +50,7 @@ class _myThread1(Process):
 
         digraph = self.digraph
         
-        chdir(self.workingDirectory)
+        #chdir(self.workingDirectory)
         
         splitActions = self.splitActions
 
@@ -70,8 +70,6 @@ class _myThread1(Process):
                                 terminal=terminalIn,
                                 hasNoVeto=self.hasNoVeto,
                                 hasBipolarVeto=self.hasBipolarVeto,
-                                #WithConcordanceRelation=False,
-                                #WithVetoCounts=False,
                                 Debug=False,
                                 hasSymmetricThresholds=self.hasSymmetricThresholds)
         # updating the manager shared return_dict
@@ -617,107 +615,93 @@ Example Python session:
             manager = mp.Manager()
             return_dict = manager.dict()
             
-            from tempfile import TemporaryDirectory
-            with TemporaryDirectory(dir=tempDir) as tempDirName:
-                from copy import copy, deepcopy
+            #from tempfile import TemporaryDirectory
+            #with TemporaryDirectory(dir=tempDir) as tempDirName:
+            from copy import copy, deepcopy
 
-                #selfDp = copy(self)
-                # selfFileName = tempDirName +'/dumpSelf.py'
-                # if Debug:
-                #     print('temDirName, selfFileName', tempDirName,selfFileName)
-                # fo = open(selfFileName,'wb')
-                # fo.write(dumps(self,-1))
+            if nbrCores == None:
+                nbrCores = cpu_count()
+            if Comments:
+                print('Nbr of cpus = ',nbrCores)
+            # set number of threads
+            self.nbrThreads = nbrCores
+
+            ni = len(initial)
+            nt = len(terminal)
+            if ni < nt:
+                n = ni
+                actions2Split = array.array('i',list(initial))
+                InitialSplit = True
+            else:
+                n = nt
+                actions2Split = array.array('i',list(terminal))
+                InitialSplit = False            
+            nit = n//nbrCores
+            nbrOfJobs = nbrCores
+            if nit*nbrCores < n:
+                nit += 1
+            while nit*(nbrOfJobs-1) >= n:
+                nbrOfJobs -= 1
+            if Comments:
+                print('nbr of actions to split',n)
+                print('nbr of jobs = ',nbrOfJobs)    
+                print('nbr of splitActions = ',nit)
+
+            relation = {}
+            for x in initial:
+                relation[x] = {}
+                for y in terminal:
+                    relation[x][y] = self.valuationdomain['med']
+            i = 0
+            actionsRemain = set(actions2Split)
+            splitActionsList = []
+            for j in range(nbrOfJobs):
+                if Comments:
+                    print('Thread = %d/%d' % (j+1,nbrOfJobs),end=" ")
+                splitActions=array.array('i',[])
+                for k in range(nit):
+                    if j < (nbrOfJobs -1) and i < n:
+                        splitActions.append(actions2Split[i])
+                    else:
+                        splitActions = array.array('i',actionsRemain)
+                    i += 1
+                if Comments:
+                    print('%d' % (len(splitActions)) )
+                actionsRemain = actionsRemain - set(splitActions)
+                splitActionsList.append(splitActions)
+                # foName = tempDirName+'/splitActions-'+str(j)+'.py'
+                # fo = open(foName,'wb')
+                # spa = dumps(splitActions,-1)
+                # fo.write(spa)
                 # fo.close()
+                jobs=[]
+                splitThread = _myThread1(j,self,InitialSplit,
+                                       #tempDirName,
+                                         splitActions,
+                                         return_dict,
+                                       hasNoVeto,hasBipolarVeto,
+                                       hasSymmetricThresholds,Debug)
+                jobs.append(splitThread)
+                splitThread.start()
 
-                if nbrCores == None:
-                    nbrCores = cpu_count()
-                if Comments:
-                    print('Nbr of cpus = ',nbrCores)
-                # set number of threads
-                self.nbrThreads = nbrCores
+            for proc in jobs:
+                proc.join()
 
-                ni = len(initial)
-                nt = len(terminal)
-                if ni < nt:
-                    n = ni
-                    actions2Split = array.array('i',list(initial))
-                    InitialSplit = True
-                else:
-                    n = nt
-                    actions2Split = array.array('i',list(terminal))
-                    InitialSplit = False
-##                if Debug:
-##                    print('InitialSplit, actions2Split', InitialSplit, actions2Split)
-            
-                nit = n//nbrCores
-                nbrOfJobs = nbrCores
-                if nit*nbrCores < n:
-                    nit += 1
-                while nit*(nbrOfJobs-1) >= n:
-                    nbrOfJobs -= 1
-                if Comments:
-                    print('nbr of actions to split',n)
-                    print('nbr of jobs = ',nbrOfJobs)    
-                    print('nbr of splitActions = ',nit)
+            if Comments:    
+                print('Exiting computing threads')
+            splitRelation = deepcopy(return_dict)
+            #if Comments:
+            #    print(splitRelation)
+            for x in splitRelation:
+                if Debug:
+                    #splitActions = splitActionsList[x]
+                    print('==>>')
+                    print(splitRelation[x])
+                for y in splitRelation[x]:
+                    relation[y].update(splitRelation[x][y])
+                    #print(splitRelation[x])
 
-                relation = {}
-                for x in initial:
-                    relation[x] = {}
-                    for y in terminal:
-                        relation[x][y] = self.valuationdomain['med']
-                i = 0
-                actionsRemain = set(actions2Split)
-                splitActionsList = []
-                for j in range(nbrOfJobs):
-                    if Comments:
-                        print('Thread = %d/%d' % (j+1,nbrOfJobs),end=" ")
-                    splitActions=array.array('i',[])
-                    for k in range(nit):
-                        if j < (nbrOfJobs -1) and i < n:
-                            splitActions.append(actions2Split[i])
-                        else:
-                            splitActions = array.array('i',actionsRemain)
-                        i += 1
-                    if Comments:
-                        print('%d' % (len(splitActions)) )
-##                    if Debug:
-##                        print(splitActions)
-                    actionsRemain = actionsRemain - set(splitActions)
-##                    if Debug:
-##                        print(actionsRemain)
-                    splitActionsList.append(splitActions)
-                    # foName = tempDirName+'/splitActions-'+str(j)+'.py'
-                    # fo = open(foName,'wb')
-                    # spa = dumps(splitActions,-1)
-                    # fo.write(spa)
-                    # fo.close()
-                    jobs=[]
-                    splitThread = _myThread1(j,self,InitialSplit,
-                                           tempDirName,splitActions,
-                                             return_dict,
-                                           hasNoVeto,hasBipolarVeto,
-                                           hasSymmetricThresholds,Debug)
-                    jobs.append(splitThread)
-                    splitThread.start()
-	
-                for proc in jobs:
-                    proc.join()
-
-                if Comments:    
-                    print('Exiting computing threads')
-                splitRelation = deepcopy(return_dict)
-                #if Comments:
-                #    print(splitRelation)
-                for x in splitRelation:
-                    if Debug:
-                        #splitActions = splitActionsList[x]
-                        print('==>>')
-                        print(splitRelation[x])
-                    for y in splitRelation[x]:
-                        relation[y].update(splitRelation[x][y])
-                        #print(splitRelation[x])
-                    
-                return relation
+            return relation
 
     def _constructRelationSimple(self,criteria,\
                            evaluation,\

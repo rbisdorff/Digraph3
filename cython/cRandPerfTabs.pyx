@@ -732,7 +732,7 @@ class cRandomPerformanceTableau(cPerformanceTableau):
                  commonThresholds = ((10.0,0.0),(20.0,0.0),(80.0,0.0)),\
                  commonMode = None,\
                  int valueDigits = 2,\
-                 float missingDataProbability = 0.0,\
+                 float missingDataProbability = 0.05,\
                  int NA = -999,\
                  bint BigData=True,\
                  seed = None,\

@@ -20515,7 +20515,7 @@ PyObject *__pyx_args, PyObject *__pyx_kwds
  *                  commonThresholds = ((10.0,0.0),(20.0,0.0),(80.0,0.0)),\
  *                  commonMode = None,\             # <<<<<<<<<<<<<<
  *                  int valueDigits = 2,\
- *                  float missingDataProbability = 0.0,\
+ *                  float missingDataProbability = 0.05,\
  */
     values[7] = __Pyx_Arg_NewRef_FASTCALL(((PyObject *)Py_None));
 
@@ -20723,7 +20723,7 @@ PyObject *__pyx_args, PyObject *__pyx_kwds
     if (values[9]) {
       __pyx_v_missingDataProbability = __pyx_PyFloat_AsFloat(values[9]); if (unlikely((__pyx_v_missingDataProbability == (float)-1) && PyErr_Occurred())) __PYX_ERR(0, 735, __pyx_L3_error)
     } else {
-      __pyx_v_missingDataProbability = ((float)((double)0.0));
+      __pyx_v_missingDataProbability = ((float)((double)0.05));
     }
     if (values[10]) {
       __pyx_v_NA = __Pyx_PyInt_As_int(values[10]); if (unlikely((__pyx_v_NA == (int)-1) && PyErr_Occurred())) __PYX_ERR(0, 736, __pyx_L3_error)
@@ -20735,7 +20735,7 @@ PyObject *__pyx_args, PyObject *__pyx_kwds
     } else {
 
       /* "cRandPerfTabs.pyx":737
- *                  float missingDataProbability = 0.0,\
+ *                  float missingDataProbability = 0.05,\
  *                  int NA = -999,\
  *                  bint BigData=True,\             # <<<<<<<<<<<<<<
  *                  seed = None,\
@@ -49497,7 +49497,7 @@ if (!__Pyx_RefNanny) {
  *                  commonThresholds = ((10.0,0.0),(20.0,0.0),(80.0,0.0)),\
  *                  commonMode = None,\
  *                  int valueDigits = 2,\             # <<<<<<<<<<<<<<
- *                  float missingDataProbability = 0.0,\
+ *                  float missingDataProbability = 0.05,\
  *                  int NA = -999,\
  */
   __pyx_t_7 = __Pyx_PyInt_From_int(((int)2)); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 734, __pyx_L1_error)
@@ -49506,16 +49506,16 @@ if (!__Pyx_RefNanny) {
   /* "cRandPerfTabs.pyx":735
  *                  commonMode = None,\
  *                  int valueDigits = 2,\
- *                  float missingDataProbability = 0.0,\             # <<<<<<<<<<<<<<
+ *                  float missingDataProbability = 0.05,\             # <<<<<<<<<<<<<<
  *                  int NA = -999,\
  *                  bint BigData=True,\
  */
-  __pyx_t_6 = PyFloat_FromDouble(((double)0.0)); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 735, __pyx_L1_error)
+  __pyx_t_6 = PyFloat_FromDouble(((double)0.05)); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 735, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_6);
 
   /* "cRandPerfTabs.pyx":736
  *                  int valueDigits = 2,\
- *                  float missingDataProbability = 0.0,\
+ *                  float missingDataProbability = 0.05,\
  *                  int NA = -999,\             # <<<<<<<<<<<<<<
  *                  bint BigData=True,\
  *                  seed = None,\
@@ -49524,7 +49524,7 @@ if (!__Pyx_RefNanny) {
   __Pyx_GOTREF(__pyx_t_3);
 
   /* "cRandPerfTabs.pyx":737
- *                  float missingDataProbability = 0.0,\
+ *                  float missingDataProbability = 0.05,\
  *                  int NA = -999,\
  *                  bint BigData=True,\             # <<<<<<<<<<<<<<
  *                  seed = None,\
