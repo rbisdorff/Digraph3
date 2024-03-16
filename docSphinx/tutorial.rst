@@ -64,10 +64,7 @@
        * :ref:`Ranking with multiple incommensurable criteria <Ranking-Tutorial-label>`
        * :ref:`Rating into relative performance quantiles <QuantilesRating-Tutorial-label>`
        * :ref:`Rating by ranking with learned performance quantile limits <LearnedRating-Tutorial-label>`
-       * :ref:`Sparse bipolar-valued outranking digraphs <SparseOutranking-Tutorial-label>`
-       * :ref:`Using the Digraph3 multiprocessing resources <Multiprocessing-Tutorial-label>`
-       * :ref:`HPC ranking of big performance tableaux <HPC-Tutorial-label>`
-
+   
    * :ref:`Evaluation and decision case studies <Case-Studies-label>`
    
        * :ref:`Alice’s best choice: A selection case study <Alice-Tutorial-label>`
@@ -75,6 +72,12 @@
        * :ref:`The best students, where do they study? A rating case study <RatingUniversities-Tutorial-label>`
        * :ref:`Exercises <Exercises-label>`
 
+   * :ref:`Working with big outranking digraphs <BigDigraphs-Tutorial-label>`
+
+       * :ref:`Sparse bipolar-valued outranking digraphs <SparseOutranking-Tutorial-label>`
+       * :ref:`Using the Digraph3 multiprocessing resources <Multiprocessing-Tutorial-label>`
+       * :ref:`HPC ranking of big performance tableaux <HPC-Tutorial-label>`
+     
    * :ref:`Moving on to undirected graphs <Moving-To-Graphs-label>`
      
        * :ref:`Working with the graphs module <Graphs-Tutorial-label>`
@@ -4453,1028 +4456,6 @@ More generally, in the case of industrial production monitoring problems, for in
 
 Back to :ref:`Content Table <Tutorial-label>`   
 
----------------
-
-.. _SparseOutranking-Tutorial-label:
-
-Sparse bipolar-valued outranking digraphs
------------------------------------------
-
-The :py:class:`~ratingDigraphs.RatinbByRelativeQuantilesDigraph` constructor gives via the rating by relative quantiles a linearly ordered decomposition of the corresponding bipolar-valued outranking digraph (see :numref:`quantilesOrdering`). This decomposition leads us to a new **sparse pre-ranked** outranking digraph model.
-
-The sparse pre-ranked outranking digraph model
-``````````````````````````````````````````````
-
-We may notice that a given outranking digraph -the association of a set of decision alternatives and an outranking relation- is, following the methodological requirements of the outranking approach, necessarily associated with a corresponding performance tableau. And, we may use this underlying performance tableau for linearly decomposing the set of potential decision alternatives into **ordered quantiles equivalence classes** by using the quantiles sorting technique seen in the previous Section. 
-
-In the coding example shown in :numref:`PreRankedOutrankingDigraph` below, we generate for instance, first (Lines 2-3), a simple performance tableau of 75 decision alternatives and, secondly (Lines 4), we construct the corresponding :py:class:`~sparseOutrankingDigraphs.PreRankedOutrankingDigraph` instance called *prg*. Notice by the way the *BigData* flag (Line 3) used here for generating a parsimoniously commented performance tableau.
-
-.. code-block:: pycon
-   :name: PreRankedOutrankingDigraph
-   :caption: Computing a *pre-ranked* sparse outranking digraph 
-   :linenos:
-   :emphasize-lines: 14,16-18
-
-   >>> from randomPerfTabs import RandomPerformanceTableau
-   >>> tp = RandomPerformanceTableau(numberOfActions=75,
-   ...                               BigData=True,seed=100)
-   >>> from sparseOutrankingDigraphs import \
-   ...                         PreRankedOutrankingDigraph
-   >>> prg = PreRankedOutrankingDigraph(tp,quantiles=5)
-   >>> prg
-    *----- Object instance description ------*
-     Instance class    : PreRankedOutrankingDigraph
-     Instance name     : randomperftab_pr
-     # Actions         : 75
-     # Criteria        : 7
-     Sorting by        : 5-Tiling
-     Ordering strategy : average
-     # Components      : 9
-     Minimal order     : 1
-     Maximal order     : 25
-     Average order     : 8.3
-     fill rate         : 20.432%
-     Attributes        : ['actions', 'criteria', 'evaluation', 'NA', 'name',
-         'order', 'runTimes', 'dimension', 'sortingParameters',
-	 'valuationdomain', 'profiles', 'categories', 'sorting',
-	 'decomposition', 'nbrComponents', 'components',
-	 'fillRate', 'minimalComponentSize', 'maximalComponentSize', ... ]
-
-The ordering of the 5-tiling result is following the **average** lower and upper quintile limits strategy (see previous section and :numref:`PreRankedOutrankingDigraph` Line 14). We obtain here 9 ordered components of minimal order 1 and maximal order 25. The corresponding **pre-ranked decomposition** may be visualized as follows.
-
-.. code-block:: pycon
-   :name: quantilesDecomposition
-   :caption: The quantiles decomposition of a pre-ranked outranking digraph 
-   :linenos:
-   :emphasize-lines: 3,15
-
-   >>> prg.showDecomposition()
-    *--- quantiles decomposition in decreasing order---*
-     c1. ]0.80-1.00] : [5, 42, 43, 47]
-     c2. ]0.60-1.00] : [73]
-     c3. ]0.60-0.80] : [1, 4, 13, 14, 22, 32, 34, 35, 40,
-                        41, 45, 61, 62, 65, 68, 70, 75]
-     c4. ]0.40-0.80] : [2, 54]
-     c5. ]0.40-0.60] : [3, 6, 7, 10, 15, 18, 19, 21, 23, 24,
-                        27, 30, 36, 37, 48, 51, 52, 56, 58,
-			63, 67, 69, 71, 72, 74]
-     c6. ]0.20-0.60] : [8, 11, 25, 28, 64, 66]
-     c7. ]0.20-0.40] : [12, 16, 17, 20, 26, 31, 33, 38, 39,
-                        44, 46, 49, 50, 53, 55]
-     c8. ]   <-0.40] : [9, 29, 60]
-     c9. ]   <-0.20] : [57, 59]
-
-The highest quintile class (]80%-100%]) contains decision alternatives *5*, *42*, *43* and *47*. Lowest quintile class (]-20%]) gathers alternatives *57* and *59* (see :numref:`quantilesDecomposition` Lines 3 and 15). We may inspect the resulting sparse outranking relation map as follows in a browser view.
-
-   >>> prg.showHTMLRelationMap()
-
-.. figure:: sparse75RelationMap.png
-   :name: sparse75RelationMap
-   :width: 550 px
-   :align: center
-
-   The relation map of a sparse outranking digraph	   
-
-In :numref:`sparse75RelationMap` we easily recognize the 9 linearly ordered quantile equivalence classes. *Green* and *light-green* show positive **outranking** situations, whereas positive **outranked** situations are shown in **red** and **light-red**. Indeterminate situations appear in white. In each one of the 9 quantile equivalence classes we recover in fact the corresponding bipolar-valued outranking *sub-relation*, which leads to an actual **fill-rate** of 20.4% (see :numref:`PreRankedOutrankingDigraph` Line 20).
-
-We may now check how faithful the sparse model represents the complete outranking relation.
-
-.. code-block:: pycon
-   :linenos:
-
-   >>> from outrankingDigraphs import BipolarOutrankingDigraph
-   >>> g = BipolarOutrankingDigraph(tp)
-   >>> corr = prg.computeOrdinalCorrelation(g)
-   >>> g.showCorrelation(corr)
-    Correlation indexes:
-     Crisp ordinal correlation  : +0.863
-     Epistemic determination    :  0.315
-     Bipolar-valued equivalence : +0.272
-   
-The ordinal correlation index between the standard and the sparse outranking relations is quite high (+0.863) and their bipolar-valued equivalence is supported by a mean criteria significance majority of (1.0+0.272)/2 = 64%.
-
-It is worthwhile noticing in :numref:`PreRankedOutrankingDigraph` Line 18 that sparse pre-ranked outranking digraphs do not contain a *relation* attribute. The access to pairwise outranking characteristic values is here provided via a corresponding :py:meth:`~sparseOutrankingDigraph.relation` function.
-
-.. code-block:: python
-   :linenos:
-
-   def relation(self,x,y):
-       """
-       Dynamic construction of the global
-       outranking characteristic function r(x,y).
-       """
-       Min = self.valuationdomain['min']
-       Med = self.valuationdomain['med']
-       Max = self.valuationdomain['max']
-       if x == y:
-           return Med
-       cx = self.actions[x]['component']
-       cy = self.actions[y]['component']
-       if cx == cy:
-           return self.components[cx]['subGraph'].relation[x][y]
-       elif self.components[cx]['rank'] > self.components[cy]['rank']:
-           return Min
-       else:
-           return Max
-
-All reflexive situations are set to the *indeterminate* value. When two decision alternatives belong to a same component -quantile equivalence class- we access the relation attribute of the corresponding outranking sub-digraph. Otherwise we just check the respective ranks of the components.
-
-Ranking pre-ranked sparse outranking digraphs
-`````````````````````````````````````````````
-
-Each one of these 9 ordered components may now be locally ranked by using a suitable ranking rule. Best operational results, both in run times and quality, are more or less equally given with the *Copeland* and the *NetFlows* rules. The eventually obtained linear ordering (from the worst to best) is stored in a *prg.boostedOrder* attribute. A reversed linear ranking (from the best to the worst) is stored in a *prg.boostedRanking* attribute.
-  
-.. code-block:: pycon
-   :name: boostedRanking
-   :caption: Showing the component wise *Copeland* ranking
-   :linenos:
-
-   >>> prg.boostedRanking
-    [43, 47, 42, 5, 73, 65, 68, 32, 62, 70, 35, 22, 75, 45, 1,
-     61, 41, 34, 4, 13, 40, 14, 2, 54, 63, 37, 56, 71, 69, 36,
-     19, 72, 15, 48, 6, 30, 74, 3, 21, 58, 52, 18, 7, 24, 27,
-     23, 67, 51, 10, 25, 11, 8, 64, 28, 66, 53, 12, 31, 39, 55,
-     20, 46, 49, 16, 44, 26, 38, 33, 17, 50, 29, 60, 9, 59, 57]
-
-Alternative *43* appears *first ranked*, whereas alternative *57* is *last ranked* (see :numref:`boostedRanking` Line 2 and 6). The quality of this ranking result may be assessed by computing its ordinal correlation with the standard outranking relation.  
-
-.. code-block:: pycon
-   :linenos:
-      
-   >>> corr = g.computeRankingCorrelation(prg.boostedRanking)
-   >>> g.showCorrelation(corr)
-    Correlation indexes:
-     Crisp ordinal correlation  : +0.807
-     Epistemic determination    :  0.315
-     Bipolar-valued equivalence : +0.254
-
-We may also verify below that the *Copeland* ranking obtained from the standard outranking digraph is highly correlated (+0.822) with the one obtained from the sparse outranking digraph.
-
-.. code-block:: pycon
-   :linenos:
-
-   >>> from linearOrders import CopelandOrder
-   >>> cop = CopelandOrder(g)
-   >>> print(cop.computeRankingCorrelation(prg.boostedRanking))
-    {'correlation': 0.822, 'determination': 1.0}
-
-Noticing the computational efficiency of the quantiles sorting construction, coupled with the separability property of the quantile class membership characteristics computation, we will make usage of the :py:class:`~sparseOutrankingDigraphs.PreRankedOutrankingDigraph` constructor in the :ref:`cythonized Digraph3 modules <HPC-Tutorial-label>` for HPC ranking big and even huge performance tableaux.
-
-Back to :ref:`Content Table <Tutorial-label>`
-
------------
-
-.. _Multiprocessing-Tutorial-label:
-
-Using Digraph3 multiprocessing resources
-----------------------------------------
-
-.. contents:: 
-	:depth: 1
-	:local:
-
-Computing with multiple threads in parallel
-```````````````````````````````````````````
-
-Modern desktop and laptop computers usually provide a multithreaded CPU which allows to run several threads in parallel [53]_. In the Digraph3 resources we offer this usage with a *Threading*, a *nbrCores* or *nbrOfCPUs* and a *startMethod* parameter (see below Lines 6-7)  
-
-.. code-block:: pycon
-   :linenos:
-   :emphasize-lines: 6,7,24
-      
-   ...$ python3
-    Python 3.11.6 (main, Oct  8 2023, 05:06:43) [GCC 13.2.0] on linux
-   >>> from outrankingDigraphs import *
-   >>> t = RandomPerformanceTableau(numberOfActions=500,
-   ...                        numberOfCriteria=13,seed=1)
-   >>> g = BipolarOutrankingDigraph(t,Threading=True,
-   ...                              nbrCores=10,startMethod='spawn')
-   >>> g
-   *------- Object instance description ------*
-   Instance class       : BipolarOutrankingDigraph
-   Instance name        : rel_randomperftab
-   Actions              : 500
-   Criteria             : 13
-   Size                 : 142091
-   Determinateness (%)  : 62.08
-   Valuation domain     : [-1.00;1.00]
-   Attributes           : ['name', 'actions', 'ndigits', 'valuationdomain',
-                           'criteria', 'methodData', 'evaluation', 'NA',
-			   'order', 'runTimes', 'startMethod', 'nbrThreads',
-			   'relation', 'gamma', 'notGamma']
-   ----  Constructor run times (in sec.) ----
-   Threads          : 10
-   Start method     : spawn
-   Total time       : 3.34283
-   Data input       : 0.00941
-   Compute relation : 3.20870
-   Gamma sets       : 0.12471
-   
-The same computation without threading takes about four times more total run time (see above Line 24 and below Line 20).
-
-.. code-block:: pycon
-   :linenos:
-   :emphasize-lines: 20
-
-   >>> g = BipolarOutrankingDigraph(t,Threading=False,
-   ...                nbrCores=10,startMethod='spawn',
-   ...                WithConcordanceRelation=False,
-   ...                WithVetoCounts=False)
-   >>> g
-    *------- Object instance description ------*
-     Instance class       : BipolarOutrankingDigraph
-     Instance name        : rel_randomperftab
-     Actions              : 500
-     Criteria             : 13
-     Size                 : 142091
-     Determinateness (%)  : 62.08
-     Valuation domain     : [-1.00;1.00]
-     Attributes           : ['name', 'actions', 'ndigits', 'valuationdomain',
-                             'criteria', 'methodData', 'evaluation', 'NA',
-			     'order', 'runTimes', 'nbrThreads', 'startMethod',
-			     'relation', 'gamma', 'notGamma']
-      ----  Constructor run times (in sec.) ----
-      Start method     : None
-      Total time       : 12.84823
-      Data input       : 0.00941
-      Compute relation : 12.73070
-      Gamma sets       : 0.10812
-
-These run times were obtained on a common desktop computer equipped with an 11th Gen Intel® Core™ i5-11400 × 12 processor and 16.0 BG of CPU memory.
-
-Using the mpOutrankingDigraphs module
-`````````````````````````````````````
-
-A refactored and streamlined multiprocessing :py:mod:`mpOutrankingDigraphs` module for even faster computing bipolar outranking digraphs with up to several hundreds or thousands of decision actions has been recently added to the Digraph3 resources (see Line 21 below).
-
-.. code-block:: pycon
-   :linenos:
-   :emphasize-lines: 19,24
-
-   >>> from mpOutrankingDigraphs import MPBipolarOutrankingDigraph
-   >>> mpg = MPBipolarOutrankingDigraph(t,nbrCores=10,
-   ...                                  startMethod='spawn')
-   >>> mpg
-    *------- Object instance description ------*
-    Instance class       : MPBipolarOutrankingDigraph
-    Instance name        : rel_sharedPerfTab
-    Actions              : 500
-    Criteria             : 13
-    Size                 : 142091
-    Determinateness (%)  : 62.08
-    Valuation domain     : [-13.00;13.00]
-    Attributes           : ['name', 'actions', 'order', 'criteria',
-                            'objectives', 'NA', 'evaluation', 'startMethod',
-			    'nbrThreads', 'relation',
-			    'largePerformanceDifferencesCount',
-			    'valuationdomain', 'gamma', 'notGamma',
-			    'runTimes']
-    ----  Constructor run times (in sec.) ----
-    Threads            : 10
-    Start method       : 'spawn'
-    Total time         : 1.41698
-    Data input         : 0.00006
-    Compute relation   : 1.27468
-    Gamma sets         : 0.14207
-
-Notice also in Line 16 above, that this computation provides the *largePerformanceDifferencesCount* attribute containing the results of the considerable performance differences counts. Setting parameter *WithVetoCounts* to *True* for the :py:class:`”outrankingDigraphs.BipolarOutrankingDigraph` constructor provides the same attribute, but adds about a second to the total run time of 13 seconds.
-
-This attribute allows to print out the relation table with the considerable performance differences counts decoration (see Line 1 below).
-
-.. code-block:: pycon
-   :linenos:
-   :emphasize-lines: 1,7-8,11-12
-
-   >>> mpg.showRelationTable(hasLPDDenotation=True,toIndex=5)
-   * ---- Relation Table -----
-    r/(lpd)|  'a001'   'a002'   'a003'   'a004'   'a005'   
-   --------|---------------------------------------------
-    'a001' |  +13.00    -1.00    +1.00    +3.00    -1.00  
-           |  (+0,+0)  (+0,+0)  (+0,+0)  (+0,+0)  (+0,+0) 
-    'a002' |   +3.00   +13.00    +2.00   +13.00    +4.00  
-           |  (+0,+0)  (+0,+0)  (+0,+0)  (+1,+0)  (+0,+0) 
-    'a003' |   +1.00    +3.00   +13.00    -1.00    +4.00  
-           |  (+0,+0)  (+0,+0)  (+0,+0)  (+0,+0)  (+0,+0) 
-    'a004' |   +2.00   -13.00    +4.00   +13.00    +0.00  
-           |  (+0,+0)  (+0,-1)  (+0,+0)  (+0,+0)  (+0,-1) 
-    'a005' |   +4.00    +0.00    -3.00   +13.00   +13.00  
-           |  (+0,+0)  (+0,+0)  (+0,+0)  (+1,+0)  (+0,+0) 
-     Valuation domain: [-13.000; 13.000]
-
-In Lines 7-8 above, we may for instance notice a considerably large positive performance difference when comparing alternatives 'a002' and 'a004' which results in a polarised *for certain valid* outranking situation: :math:`r(a_{002} \succsim a_{004}) = +13.00`. The converse situation is observed in Lines 11-12 where we may notice the corresponding considerably large negative performance differnce leading this time to a polarised *for certain invalid* outranking situation: :math:`r(a_{004} \succsim a_{002}) = -13.00`.
-
-Setting the Threading parameters
-````````````````````````````````
-
-Without specifying the number of cores (*nbrCores=None*) or the threading start method (*startMethod=None*), the :py:meth:`cpu_count` method from the :py:mod:`multiprocessing` module will be used to detect the number of available cores and the threading start method will be set by default to *spawn*.
-
-It is possible to use instead the *forkserver* or the more traditional Posix *fork* start method (default on Linux) [52]_. Mind that the latter method, due to the very architecture of the Python interpreter C code, cannot be safe against specific dead locks leading to  hanging or freezing applications and zombie processes. [51]_
-
-When writing multiprocessing Digraph3 Python scripts not using the Posix *fork* start method, it is furthermore essential to protect the main program code with a *__name__=='__main__'* test against recursive re-excution (see below).
-
-.. code-block:: python
-   :linenos:
-
-   from outrankingDigraphs import BipolarOutrankingDigraph
-   from randomPerfTabs import RandomPerformanceTableau
-   # main program code
-   if __name__ == '__main__':
-      t = RandomPerformanceTableau(numberOfActions=1000,
-                                   numberOfCriteria=13,seed=1)
-      g = BipolarOutrankingDigraph(t,
-                                   Threading=True,
-				   nbrCores=10,
-				   startMethod='spawn',
-				   Comments=True)
-      print(g)
-
-Back to :ref:`Content Table <Tutorial-label>`
-
------------
-
-.. _HPC-Tutorial-label:
-
-HPC ranking with big outranking digraphs
-----------------------------------------
-
-.. contents:: 
-	:depth: 1
-	:local:
-
-C-compiled Python modules
-`````````````````````````
-
-The Digraph3 collection provides cythonized [6]_, i.e. C-compiled and optimised versions of the main python modules for tackling multiple criteria decision problems facing very large sets of decision alternatives ( > 10000 ). Such problems appear usually with a combinatorial organisation of the potential decision alternatives, as is frequently the case in bioinformatics for instance. If HPC facilities with nodes supporting numerous cores (> 20) and big RAM (> 50GB) are available, ranking up to several millions of alternatives (see [BIS-2016]_) becomes effectively tractable.
-
-Four cythonized Digraph3 modules, prefixed with the letter *c* and taking a *pyx* extension, are provided with their corresponding setup tools in the *Digraph3/cython* directory, namely
-
-    - *cRandPerfTabs.pyx*
-    - *cIntegerOutrankingDigraphs.pyx*
-    - *cIntegerSortingDigraphs.pyx*
-    - *cSparseIntegerOutrankingDigraphs.pyx*
-
-Their automatic compilation and installation (*...Digraph3$ make installPip*), alongside the standard Digraph3 python3 modules, requires the *cython* compiler [6]_ ( *...$ python3 m pip install cython wheel* ) and a C compiler ( *...$ sudo apt install gcc* ). Local *inplace* compilation and installation ( *.../Digraph3/cython$ make* ) is provided with a corresponding *makefile* in the "Digraph3/cython* directory.
-
-Big Data performance tableaux
-`````````````````````````````
-
-In order to efficiently type the C variables, the :py:mod:`cRandPerfTabs` module provides the usual random performance tableau models, but, with **integer** action keys, **float** performance evaluations, **integer** criteria weights and **float** discrimination thresholds. And, to limit as much as possible memory occupation of class instances, all the usual verbose comments are dropped from the description of the *actions* and *criteria* dictionaries. 
-
-.. code-block:: pycon
-   :linenos:
-   
-   >>> from cRandPerfTabs import *
-   >>> t = cRandomPerformanceTableau(numberOfActions=4,numberOfCriteria=2)
-   >>> t
-       *------- PerformanceTableau instance description ------*
-       Instance class   : cRandomPerformanceTableau
-       Seed             : None
-       Instance name    : cRandomperftab
-       # Actions        : 4
-       # Criteria       : 2
-       Attributes       : ['randomSeed', 'name', 'actions', 'criteria',
-			   'evaluation', 'weightPreorder']
-   >>> t.actions
-       OrderedDict([(1, {'name': '#1'}), (2, {'name': '#2'}),
-		     (3, {'name': '#3'}), (4, {'name': '#4'})])
-   >>> t.criteria
-       OrderedDict([
-       ('g1', {'name': 'RandomPerformanceTableau() instance',
-	       'comment': 'Arguments: ; weightDistribution=equisignificant;
-			    weightScale=(1, 1); commonMode=None',
-	       'thresholds': {'ind': (10.0, 0.0),
-			       'pref': (20.0, 0.0),
-			       'veto': (80.0, 0.0)},
-	       'scale': (0.0, 100.0),
-	       'weight': 1,
-	       'preferenceDirection': 'max'}),
-       ('g2', {'name': 'RandomPerformanceTableau() instance',
-	       'comment': 'Arguments: ; weightDistribution=equisignificant;
-			   weightScale=(1, 1); commonMode=None',
-	       'thresholds': {'ind': (10.0, 0.0),
-			       'pref': (20.0, 0.0),
-			       'veto': (80.0, 0.0)},
-	       'scale': (0.0, 100.0),
-	       'weight': 1,
-	       'preferenceDirection': 'max'})])
-   >>> t.evaluation
-	{'g1': {1: 35.17, 2: 56.4, 3: 1.94, 4: 5.51},
-	 'g2': {1: 95.12, 2: 90.54, 3: 51.84, 4: 15.42}}
-   >>> t.showPerformanceTableau()
-	Criteria |  'g1'    'g2'   
-	Actions  |    1       1    
-	---------|---------------
-	   '#1'  |  91.18   90.42  
-	   '#2'  |  66.82   41.31  
-	   '#3'  |  35.76   28.86  
-	   '#4'  |   7.78   37.64  
-
-Conversions from the Big Data model to the standard model and vice versa are provided.
-
-.. code-block:: pycon
-   :linenos:
-   
-   >>> t1 = t.convert2Standard()
-   >>> t1.convertWeight2Decimal()
-   >>> t1.convertEvaluation2Decimal()
-   >>> t1
-    *------- PerformanceTableau instance description ------*
-    Instance class   : PerformanceTableau
-    Seed             : None
-    Instance name    : std_cRandomperftab
-    # Actions        : 4
-    # Criteria       : 2
-    Attributes       : ['name', 'actions', 'criteria', 'weightPreorder',
-                        'evaluation', 'randomSeed']
-
-C-implemented integer-valued outranking digraphs
-````````````````````````````````````````````````
-
-The C compiled version of the bipolar-valued digraph models takes integer relation characteristic values.
-
-.. code-block:: pycon
-   :linenos:
-   
-   >>> t = cRandomPerformanceTableau(numberOfActions=1000,numberOfCriteria=2)
-   >>> from cIntegerOutrankingDigraphs import *
-   >>> g = IntegerBipolarOutrankingDigraph(t,Threading=True,nbrCores=4)
-   >>> g
-      *------- Object instance description ------*
-      Instance class   : IntegerBipolarOutrankingDigraph
-      Instance name    : rel_cRandomperftab
-      Actions          : 1000
-      Criteria         : 2
-      Size             : 465024
-      Determinateness  : 56.877
-      Valuation domain : {'min': -2, 'med': 0, 'max': 2,
-                          'hasIntegerValuation': True}
-      Attributes       : ['name', 'actions', 'criteria', 'totalWeight',
-                          'valuationdomain', 'methodData', 'evaluation',
-                          'order', 'runTimes', 'startMethod',
-			  'nbrThreads', 'relation',
-                          'gamma', 'notGamma']
-      ----  Constructor run times (in sec.) ----
-      Threads          : 4
-      Start method     : spawn
-      Total time       : 1.19811
-      Data input       : 0.00183
-      Compute relation : 0.91961
-      Gamma sets       : 0.27664
-      
-On a classic intel-i5-11400x12 equipped PC, the :py:class:`~cIntegerOutrankingDigraphs.IntegerBipolarOutrankingDigraph` constructor takes with four multiprocessing threads about one second for computing a **million** pairwise outranking characteristic values. In a similar multiprocessing setting, the standard :py:class:`~outrankingDigraphs.BipolarOutrankingDigraph` class constructor operates about four times slower.
-
-.. code-block:: pycon
-   :linenos:
-
-   >>> from outrankingDigraphs import BipolarOutrankingDigraph
-   >>> t1 = t.convert2Standard()
-   >>> g1 = BipolarOutrankingDigraph(t1,Threading=True,nbrCores=4)
-   >>> g1
-      *------- Object instance description ------*
-      Instance class   : BipolarOutrankingDigraph
-      Instance name    : rel_std_cRandomperftab
-      Actions          : 1000
-      Criteria         : 2
-      Size             : 465024
-      Determinateness  : 56.817
-      Valuation domain : {'min': Decimal('-1.0'),
-			  'med': Decimal('0.0'),
-			  'max': Decimal('1.0'),
-			  'precision': Decimal('0')}
-      ----  Constructor run times (in sec.) ----
-      Threads          : 4
-      Start method     : spawn
-      Total time       : 3.81307
-      Data input       : 0.00305
-      Compute relation : 3.41648
-      Gamma sets       : 0.39353
-
-By far, most of the run time is in each case needed for computing the individual pairwise outranking characteristic values. Notice also below the memory occupations of both outranking digraph instances. 
-
-.. code-block:: pycon
-   :linenos:
-
-   >>> from digraphsTools import total_size
-   >>> total_size(g)
-    108662777
-   >>> total_size(g1)
-    113564067
-   >>> total_size(g.relation)/total_size(g)
-    0.34
-   >>> total_size(g.gamma)/total_size(g)
-    0.45
-
-About 109MB for *g* and 114MB for *g1*. The standard *Decimal* valued :py:class:`~outrankingDigraphs.BipolarOutrankingDigraph` instance *g1* thus adds nearly 10% to the memory occupation of the corresponding :py:class:`~cIntegerOutrankingDigraphs.IntegerBipolarOutrankingDigraph` *g* instance (see Line 3 and 5 above). 3/4 of this memory occupation is due to the *g.relation* (34%) and the *g.gamma* (45%) dictionaries. And these ratios quadratically grow with the digraph order. To limit the object sizes for really big outranking digraphs, we need to abandon the complete implementation of adjacency tables and gamma functions.
-
-The sparse outranking digraph implementation
-````````````````````````````````````````````
-
-The idea is to first decompose the complete outranking relation into an ordered collection of equivalent quantile performance classes. Let us consider for this illustration a random performance tableau with 100 decision alternatives evaluated on 7 criteria.
-
-.. code-block:: pycon
-   :linenos:
-
-   >>> from cRandPerfTabs import *
-   >>> t = cRandomPerformanceTableau(numberOfActions=100,
-   ...                               numberOfCriteria=7,seed=100)
-
-We sort the 100 decision alternatives into overlapping quartile classes and rank with respect to the average quantile limits.
-
-.. code-block:: pycon
-   :linenos:
-
-   >>> from cSparseIntegerOutrankingDigraphs import *
-   >>> sg = SparseIntegerOutrankingDigraph(t,quantiles=4,
-   ...                      OptimalQuantileOrdering=False,
-   ...                      Threading=False)
-   >>> sg
-    *----- Object instance description --------------*
-    Instance class    : SparseIntegerOutrankingDigraph
-    Instance name     : cRandomperftab_mp
-    # Actions         : 100
-    # Criteria        : 7
-    Sorting by        : 4-Tiling
-    Ordering strategy : average
-    Ranking rule      : Copeland
-    # Components      : 6
-    Minimal order     : 1
-    Maximal order     : 35
-    Average order     : 16.7
-    fill rate         : 24.970%
-    Attributes        : ['runTimes', 'name', 'actions', 'criteria',
-                        'evaluation', 'order', 'dimension',
-                        'sortingParameters', 'nbrOfCPUs',
-                        'valuationdomain', 'profiles', 'categories',
-                        'sorting', 'minimalComponentSize',
-                        'decomposition', 'nbrComponents', 'nd',
-                        'components', 'fillRate',
-                        'maximalComponentSize', 'componentRankingRule',
-                        'boostedRanking']
-    *----  Constructor run times (in sec.) ----
-    Total time        : 0.02336
-    QuantilesSorting  : 0.01150
-    Preordering       : 0.00047
-    Decomposing       : 0.01135
-    Ordering          : 0.00001
-
-We obtain in this example here a decomposition into 6 linearly ordered components with a maximal component size of 35 for component *c3*.
-
-.. code-block:: pycon
-   :linenos:
-
-   >>> sg.showDecomposition()
-    *--- quantiles decomposition in decreasing order---*
-    c1. ]0.75-1.00] : [3, 22, 24, 34, 41, 44, 50, 53, 56, 62, 93]
-    c2. ]0.50-1.00] : [7, 29, 43, 58, 63, 81, 96]
-    c3. ]0.50-0.75] : [1, 2, 5, 8, 10, 11, 20, 21, 25, 28, 30, 33,
-		       35, 36, 45, 48, 57, 59, 61, 65, 66, 68, 70,
-		       71, 73, 76, 82, 85, 89, 90, 91, 92, 94, 95, 97]
-    c4. ]0.25-0.75] : [17, 19, 26, 27, 40, 46, 55, 64, 69, 87, 98, 100]
-    c5. ]0.25-0.50] : [4, 6, 9, 12, 13, 14, 15, 16, 18, 23, 31, 32,
-		       37, 38, 39, 42, 47, 49, 51, 52, 54, 60, 67, 72,
-		       74, 75, 77, 78, 80, 86, 88, 99]
-    c6. ]<-0.25] : [79, 83, 84]
-
-A restricted outranking relation is stored for each component with more than one alternative. The resulting global relation map of the first ranked 75 alternatives looks as follows.
-
-   >>> sg.showRelationMap(toIndex=75)
-
-.. figure:: sparseRelationMap.png
-   :width: 450 px
-   :align: center
-
-   Sparse quartiles-sorting decomposed outranking relation (extract). **Legend**: *outranking* for certain (:math:`\top`); *outranked* for certain (:math:`\bot`); more or less *outranking* (:math:`+`); more or less *outranked* (:math:`-`); *indeterminate* ( ).
-
-With a fill rate of 25%, the memory occupation of this sparse outranking digraph *sg* instance takes now only 769kB, compared to the 1.7MB required by a corresponding standard IntegerBipolarOutrankingDigraph instance.
-
-    >>> print('%.0fkB' % (total_size(sg)/1024) )
-    769kB
-
-For sparse outranking digraphs, the adjacency table is implemented as a dynamic :py:func:`~cSparseIntegerOutrankingDigraphs.SparseIntegerOutrankingDigraph.relation` function instead of a double dictionary.
-
-.. code-block:: pycon
-   :linenos:
-
-   def relation(self, int x, int y):
-      """
-      *Parameters*:
-	    * x (int action key),
-	    * y (int action key).
-      Dynamic construction of the global outranking
-      characteristic function *r(x S y)*.
-      """
-      cdef int Min, Med, Max, rx, ry
-      Min = self.valuationdomain['min']
-      Med = self.valuationdomain['med']
-      Max = self.valuationdomain['max']
-      if x == y:
-          return Med
-      else:
-          cx = self.actions[x]['component']
-	  cy = self.actions[y]['component']
-	  rx = self.components[cx]['rank']
-	  ry = self.components[cy]['rank']
-	  if rx == ry:
-	      try:
-		  rxpg = self.components[cx]['subGraph'].relation
-		  return rxpg[x][y]
-	      except AttributeError:
-		  componentRanking = self.components[cx]['componentRanking']
-		  if componentRanking.index(x) < componentRanking.index(x):
-		      return Max
-		  else:
-		      return Min
-          elif rx > ry:
-              return Min
-          else:
-	      return Max
-
-Ranking big sets of decision alternatives
-`````````````````````````````````````````
-
-We may now rank the complete set of 100 decision alternatives by locally ranking with the *Copeland* or the *NetFlows* rule, for instance, all these individual components.
-
-.. code-block:: pycon
-   :linenos:
-
-   >>> sg.boostedRanking
-    [22, 53, 3, 34, 56, 62, 24, 44, 50, 93, 41, 63, 29, 58,
-     96, 7, 43, 81, 91, 35, 25, 76, 66, 65, 8, 10, 1, 11, 61,
-     30, 48, 45, 68, 5, 89, 57, 59, 85, 82, 73, 33, 94, 70,
-     97, 20, 92, 71, 90, 95, 21, 28, 2, 36, 87, 40, 98, 46, 55,
-     100, 64, 17, 26, 27, 19, 69, 6, 38, 4, 37, 60, 31, 77, 78,
-     47, 99, 18, 12, 80, 54, 88, 39, 9, 72, 86, 42, 13, 23, 67,
-     52, 15, 32, 49, 51, 74, 16, 14, 75, 79, 83, 84]
-
-When actually computing linear rankings of a set of alternatives, the local outranking relations are of no practical usage, and we may furthermore reduce the memory occupation of the resulting digraph by
-
-     1. refining the ordering of the quantile classes by taking into account how well an alternative is outranking the lower limit of its quantile class, respectively the upper limit of its quantile class is *not* outranking the alternative;
-     2. dropping the local outranking digraphs and keeping for each quantile class only a locally ranked list of alternatives.
-
-We provide therefore the :py:class:`~cSparseIntegerOutrankingDigraphs.cQuantilesRankingDigraph` class.   
-
-.. code-block:: pycon
-   :linenos:
-
-   >>> qr = cQuantilesRankingDigraph(t,4)
-   >>> qr
-    *----- Object instance description --------------*
-    Instance class    : cQuantilesRankingDigraph
-    Instance name     : cRandomperftab_mp
-    # Actions         : 100
-    # Criteria        : 7
-    Sorting by        : 4-Tiling
-    Ordering strategy : optimal
-    Ranking rule      : Copeland
-    # Components      : 47
-    Minimal order     : 1
-    Maximal order     : 10
-    Average order     : 2.1
-    fill rate         : 2.566%
-    *----  Constructor run times (in sec.) ----*
-    Nbr of threads    : 1
-    Total time        : 0.03702
-    QuantilesSorting  : 0.01785
-    Preordering       : 0.00022
-    Decomposing       : 0.01892
-    Ordering          : 0.00000
-    Attributes       : ['runTimes', 'name', 'actions', 'order',
-			'dimension', 'sortingParameters', 'nbrOfCPUs',
-			'valuationdomain', 'profiles', 'categories',
-			'sorting', 'minimalComponentSize',
-			'decomposition', 'nbrComponents', 'nd',
-			'components', 'fillRate', 'maximalComponentSize',
-			'componentRankingRule', 'boostedRanking']
-
-With this *optimised* quantile ordering strategy, we obtain now 47 performance equivalence classes.
-
-.. code-block:: pycon
-   :linenos:
-
-   >>> qr.components
-    OrderedDict([
-    ('c01', {'rank': 1,
-	     'lowQtileLimit': ']0.75',
-	     'highQtileLimit': '1.00]',
-	     'componentRanking': [53]}),
-    ('c02', {'rank': 2,
-	     'lowQtileLimit': ']0.75',
-	     'highQtileLimit': '1.00]',
-	     'componentRanking': [3, 23, 63, 50]}),
-    ('c03', {'rank': 3,
-	     'lowQtileLimit': ']0.75',
-	     'highQtileLimit': '1.00]',
-	     'componentRanking': [34, 44, 56, 24, 93, 41]}), 
-    ...
-    ...
-    ...
-    ('c45', {'rank': 45,
-	     'lowQtileLimit': ']0.25',
-	     'highQtileLimit': '0.50]',
-	     'componentRanking': [49]}),
-    ('c46', {'rank': 46,
-	     'lowQtileLimit': ']0.25',
-	     'highQtileLimit': '0.50]',
-	     'componentRanking': [52, 16, 86]}),
-    ('c47', {'rank': 47,
-	     'lowQtileLimit': ']<',
-	     'highQtileLimit': '0.25]',
-	     'componentRanking': [79, 83, 84]})])
-   >>> print('%.0fkB' % (total_size(qr)/1024) )
-    208kB
-
-We observe an even more considerably less voluminous memory occupation: 208kB compared to the 769kB of the SparseIntegerOutrankingDigraph instance. It is opportune, however, to measure the loss of quality of the resulting *Copeland* ranking when working with sparse outranking digraphs.
-
-.. code-block:: pycon
-   :linenos:
-
-   >>> from cIntegerOutrankingDigraphs import *
-   >>> ig = IntegerBipolarOutrankingDigraph(t)
-   >>> print('Complete outranking : %+.4f'\
-   ...        % (ig.computeOrderCorrelation(ig.computeCopelandOrder())\
-   ...           ['correlation']))
-   
-    Complete outranking : +0.7474
-   >>> print('Sparse 4-tiling : %+.4f'\
-   ...        % (ig.computeOrderCorrelation(\
-   ...           list(reversed(sg.boostedRanking)))['correlation']))
-   
-    Sparse 4-tiling          : +0.7172
-   >>> print('Optimzed sparse 4-tiling: %+.4f'\
-   ...         % (ig.computeOrderCorrelation(\
-   ...            list(reversed(qr.boostedRanking)))['correlation']))
-   
-    Optimzed sparse 4-tiling: +0.7051
-
-The best ranking correlation with the pairwise outranking situations (+0.75) is naturally given when we apply the *Copeland* rule to the complete outranking digraph. When we apply the same rule to the sparse 4-tiled outranking digraph, we get a correlation of +0.72, and when applying the *Copeland* rule to the optimised 4-tiled digraph, we still obtain a correlation of +0.71. These results actually depend on the number of quantiles we use as well as on the given model of random performance tableau. In case of Random3ObjectivesPerformanceTableau instances, for instance, we would get in a similar setting a complete outranking correlation of +0.86, a sparse 4-tiling correlation of +0.82, and an optimzed sparse 4-tiling correlation of +0.81.
-
-HPC quantiles ranking records
-`````````````````````````````
-
-Following from the separability property of the *q*-tiles sorting of each action into each *q*-tiles class, the *q*-sorting algorithm may be safely split into as much threads as are multiple processing cores available in parallel. Furthermore, the ranking procedure being local to each diagonal component, these procedures may as well be safely processed in parallel threads on each component restricted outrankingdigraph.
-
-On a common 2023 Terra desktop computer, equipped with a 11th Gen Intel® Core™ i5-11400 × 12 processor and 16.0 GiB of CPU memory, working under Ubuntu 23.10 we may rank a :py:class:`~cRandPerfTabs.cRandom3ObjectivesPerformanceTableau` instance of **five hundred thousand** performance records in about 104 seconds with about 48 seconds for the quantiles sorting step and 55 seconds for the local components ranking step (see below Lines 42-).
-
-.. code-block:: bash
-
-   ../Digraph3/cython$ python3.12
-   Python 3.12.0 (main, Oct  4 2023, 06:27:34) [GCC 13.2.0] on linux
-   >>>
-    
-.. code-block:: pycon
-   :linenos:
-   :emphasize-lines: 3, 29-33, 42-
-
-   >>> from cRandPerfTabs import\
-   ...       cRandom3ObjectivesPerformanceTableau as cR3ObjPT
-   >>> pt = cR3ObjPT(numberOfActions=500000,
-   ...              numberOfCriteria=21,
-   ...              weightDistribution='equiobjectives',
-   ...              commonScale = (0.0,1000.0),
-   ...              commonThresholds = [(1.5,0.0),(2.0,0.0),(75.0,0.0)],
-   ...              commonMode = ['beta','variable',None],
-   ...              missingDataProbability=0.05,
-   ...              seed=16)
-   >>> import cSparseIntegerOutrankingDigraphs as iBg
-   >>> qr = iBg.cQuantilesRankingDigraph(pt,quantiles=7,
-   ...                    quantilesOrderingStrategy='optimal',
-   ...                    minimalComponentSize=1,
-   ...                    componentRankingRule='Copeland',
-   ...                    LowerClosed=False,
-   ...                    Threading=True,
-   ...                    tempDir='/tmp',
-   ...                    nbrOfCPUs=12)
-   >>> qr
-   *----- Object instance description --------------*
-    Instance class    : cQuantilesRankingDigraph
-    Instance name     : random3ObjectivesPerfTab_mp
-    Actions           : 500000
-    Criteria          : 21
-    Sorting by        : 7-Tiling
-    Ordering strategy : optimal
-    Ranking rule      : Copeland
-    Components        : 146579
-    Minimal order     : 1
-    Maximal order     : 115
-    Average order     : 3.4
-    fill rate         : 0.002%
-    Attributes        : ['runTimes', 'name', 'actions', 'order',
-                         'dimension', 'sortingParameters',
-			 'nbrThreads', 'startMethod', 'valuationdomain',
-			 'profiles', 'categories', 'sorting',
-			 'minimalComponentSize', 'decomposition',
-			 'nbrComponents', 'nd', 'components',
-			 'fillRate', 'maximalComponentSize',
-			 'componentRankingRule', 'boostedRanking']
-    ----  Constructor run times (in sec.) ----
-    Threads           : 12
-    StartMethod       : spawn
-    Total time        : 104.48654
-    QuantilesSorting  : 48.09243
-    Preordering       : 1.26480
-    Decomposing       : 55.12919
-
-When ordering the 146579 components resulting from a 7-tiling sorting with the *optimal* quantiles ordering strategy, the order of a local component is limited to a maximal size of 115 actions which results in a total pairwise adjacency table fill rate of 0.002% (see Lines 29-33).
-
-Bigger performance tableaux may definitely be ranked with a larger *cpu_count()*. We were using therefore in 2018 the HPC Platform of the University of Luxembourg (https://hpc.uni.lu/). The following run times for very big quantiles ranking problems of several millions of multicriteria performance records could be achieved both:
-
-    - on Iris -skylake nodes with 28 cores [7]_, and
-    - on the 3TB -bigmem Gaia-183 node with 64 cores [8]_,
-
-by running the cythonized python modules in an Intel compiled virtual Python 3.6.5 environment [GCC Intel(R) 17.0.1 –enable-optimizations c++ gcc 6.3 mode] on *Debian* 8 Linux.
-
-.. figure:: rankingRecords.png
-   :width: 350 px
-   :align: center
-
-   HPC-UL Ranking Performance Records (Spring 2018)
-
-Example python session on the HPC-UL Iris-126 -skylake node [7]_
-
-.. code-block:: bash
-   :linenos:
-
-   (myPy365ICC) [rbisdorff@iris-126 Test]$ python
-   Python 3.6.5 (default, May  9 2018, 09:54:28) 
-   [GCC Intel(R) C++ gcc 6.3 mode] on linux
-   Type "help", "copyright", "credits" or "license" for more information.
-   >>>
-
-.. code-block:: pycon
-   :linenos:
-   :emphasize-lines: 32-43
-
-   >>> from cRandPerfTabs import\
-   ...    cRandom3ObjectivesPerformanceTableau as cR3ObjPT
-
-   >>> pt = cR3ObjPT(numberOfActions=1000000,
-   ...             numberOfCriteria=21,
-   ...             weightDistribution='equiobjectives',
-   ...             commonScale = (0.0,1000.0),
-   ...             commonThresholds = [(2.5,0.0),(5.0,0.0),(75.0,0.0)],
-   ...             commonMode = ['beta','variable',None],
-   ...             missingDataProbability=0.05,
-   ...             seed=16)
-
-   >>> import cSparseIntegerOutrankingDigraphs as iBg
-   >>> qr = iBg.cQuantilesRankingDigraph(pt,quantiles=10,
-   ...               quantilesOrderingStrategy='optimal',
-   ...               minimalComponentSize=1,
-   ...               componentRankingRule='NetFlows',
-   ...               LowerClosed=False,
-   ...               Threading=True,
-   ...               tempDir='/tmp',
-   ...               nbrOfCPUs=28)
-
-   >>> qr
-    *----- Object instance description --------------*
-    Instance class    : cQuantilesRankingDigraph
-    Instance name     : random3ObjectivesPerfTab_mp
-    # Actions         : 1000000
-    # Criteria        : 21
-    Sorting by        : 10-Tiling
-    Ordering strategy : optimal
-    Ranking rule      : NetFlows
-    # Components      : 233645
-    Minimal order     : 1
-    Maximal order     : 153
-    Average order     : 4.3
-    fill rate         : 0.001%
-    *----  Constructor run times (in sec.) ----*
-    Nbr of threads    : 28
-    Start method      : fork
-    Total time        : 177.02770
-    QuantilesSorting  : 99.55377
-    Preordering       : 5.17954
-    Decomposing       : 72.29356
-
-On this 2x14c Intel Xeon Gold 6132 @ 2.6 GHz equipped HPC node with 132GB RAM [7]_, deciles sorting and locally ranking a **million** decision alternatives evaluated on 21 incommensurable criteria, by balancing an economic, an environmental and a societal decision objective, takes us about **3 minutes** (see Lines 37-42 above); with about 1.5 minutes for the deciles sorting and, a bit more than one minute, for the local ranking of the local components. 
-
-The optimised deciles sorting leads to 233645 components (see Lines 32-36 above) with a maximal order of 153. The fill rate of the adjacency table is reduced to 0.001%. Of the potential trillion (10^12) pairwise outrankings, we effectively keep only 10 millions (10^7). This high number of components results from the high number of involved performance criteria (21), leading in fact to a very refined epistemic discrimination of majority outranking margins. 
-
-A non-optimised deciles sorting would instead give at most 110 components with inevitably very big intractable local digraph orders. Proceeding with a more detailed quantiles sorting, for reducing the induced decomposing run times, leads however quickly to intractable quantiles sorting times. A good compromise is given when the quantiles sorting and decomposing steps show somehow equivalent run times; as is the case in our two example sessions: 15 versus 14 seconds and 99.6 versus 77.3 seconds (see Listing before and Lines 41 and 43 above).     
-
-Let us inspect the 21 marginal performances of the five best-ranked alternatives listed below. 
-
-.. code-block:: pycon
-   :linenos:
-
-   >>> pt.showPerformanceTableau(
-   ...               actionsSubset=qr.boostedRanking[:5],
-   ...               Transposed=True)
-   
-   *----  performance tableau -----*
-    criteria | weights |  #773909  #668947  #567308  #578560  #426464
-    ---------|-------------------------------------------------------
-     'Ec01'  |    42   |   969.81   844.71   917.00     NA     808.35  
-     'So02'  |    48   |     NA     891.52   836.43     NA     899.22  
-     'En03'  |    56   |   687.10     NA     503.38   873.90     NA  
-     'So04'  |    48   |   455.05   845.29   866.16   800.39   956.14  
-     'En05'  |    56   |   809.60   846.87   939.46   851.83   950.51  
-     'Ec06'  |    42   |   919.62   802.45   717.39   832.44   974.63  
-     'Ec07'  |    42   |   889.01   722.09   606.11   902.28   574.08  
-     'So08'  |    48   |   862.19   699.38   907.34   571.18   943.34  
-     'En09'  |    56   |   857.34   817.44   819.92   674.60   376.70  
-     'Ec10'  |    42   |     NA     874.86     NA     847.75   739.94  
-     'En11'  |    56   |     NA     824.24   855.76     NA     953.77  
-     'Ec12'  |    42   |   802.18   871.06   488.76   841.41   599.17  
-     'En13'  |    56   |   827.73   839.70   864.48   720.31   877.23  
-     'So14'  |    48   |   943.31   580.69   827.45   815.18   461.04  
-     'En15'  |    56   |   794.57   801.44   924.29   938.70   863.72  
-     'Ec16'  |    42   |   581.15   599.87   949.84   367.34   859.70  
-     'So17'  |    48   |   881.55   856.05     NA     796.10   655.37  
-     'Ec18'  |    42   |   863.44   520.24   919.75   865.14   914.32  
-     'So19'  |    48   |     NA       NA       NA     790.43   842.85  
-     'Ec20'  |    42   |   582.52   831.93   820.92   881.68   864.81  
-     'So21'  |    48   |   880.87     NA     628.96   746.67   863.82  
-
-The given ranking problem involves 8 criteria assessing the economic performances, 7 criteria assessing the societal performances and 6 criteria assessing the environmental performances of the decision alternatives. The sum of criteria significance weights (336) is the same for all three decision objectives. The five best-ranked alternatives are, in decreasing order: #773909, #668947, #567308, #578560 and #426464.
-
-Their random performance evaluations were obviously drawn on all criteria with a *good* (+) performance profile, i.e. a Beta(*alpha* = 5.8661, *beta* = 2.62203) law (see the tutorial :ref:`generating random performance tableaux <RandomPerformanceTableau-Tutorial-label>`). 
-
-.. code-block:: pycon
-   :linenos:
-
-   >>> for x in qr.boostedRanking[:5]:
-   ...     print(pt.actions[x]['name'],
-   ...           pt.actions[x]['profile'])
-   
-    #773909 {'Eco': '+', 'Soc': '+', 'Env': '+'}
-    #668947 {'Eco': '+', 'Soc': '+', 'Env': '+'}
-    #567308 {'Eco': '+', 'Soc': '+', 'Env': '+'}
-    #578560 {'Eco': '+', 'Soc': '+', 'Env': '+'}
-    #426464 {'Eco': '+', 'Soc': '+', 'Env': '+'}
-
-We consider now a partial performance tableau *best10*, consisting only, for instance, of the **ten best-ranked alternatives**, with which we may compute a corresponding integer outranking digraph valued in the range (-1008, +1008).  
-
-.. code-block:: pycon
-   :linenos:
-
-   >>> best10 = cPartialPerformanceTableau(pt,qr.boostedRanking[:10])
-   >>> from cIntegerOutrankingDigraphs import *   
-   >>> g = IntegerBipolarOutrankingDigraph(best10)
-   >>> g.valuationdomain
-    {'min': -1008, 'med': 0, 'max': 1008, 'hasIntegerValuation': True}
-   >>> g.showRelationTable(ReflexiveTerms=False)
-    * ---- Relation Table -----
-     r(x>y) | #773909 #668947 #567308 #578560 #426464 #298061 #155874 #815552 #279729 #928564
-    --------|-----------------------------------------------------------------------------------
-    #773909 |    -      +390     +90    +270     -50    +340    +220     +60    +116    +222
-    #668947 |    +78     -       +42    +250     -22    +218     +56    +172     +74     +64
-    #567308 |    +70    +418     -      +180    +156    +174    +266     +78    +256    +306
-    #578560 |     -4     +78     +28     -       -12    +100     -48    +154    -110     -10
-    #426464 |   +202    +258    +284    +138     -      +416    +312    +382    +534    +278
-    #298061 |    -48     +68    +172     +32     -42      -      +54     +48    +248    +374
-    #155874 |    +72    +378    +322    +174    +274    +466     -      +212    +308    +418
-    #815552 |    +78    +126    +272    +318     +54    +194    +172     -       -14     +22
-    #279729 |   +240    +230    -110    +290     +72    +140    +388     +62     -      +250
-    #928564 |    +22    +228     -14    +246     +36     +78     +56    +110    +318     -
-    r(x>y) image range := [-1008;+1008]
-   >>> g.condorcetWinners()
-    [155874, 426464, 567308]
-   >>> g.computeChordlessCircuits()
-    []
-   >>> g.computeTransitivityDegree()
-    0.78
-
-Three alternatives -#155874, #426464 and #567308- qualify as Condorcet winners, i.e. they each **positively outrank** all the other nine alternatives. No chordless outranking circuits are detected, yet the transitivity of the apparent outranking relation is not given. And, no clear ranking alignment hence appears when inspecting the *strict* outranking digraph (i.e. the codual ~(-*g*) of *g*) shown in :numref:`converse-dual_rel_best10`.
-  
-.. code-block:: pycon
-   :linenos:
-
-   >>> (~(-g)).exportGraphViz()
-   *---- exporting a dot file for GraphViz tools ---------*
-    Exporting to converse-dual_rel_best10.dot
-    dot -Tpng converse-dual_rel_best10.dot -o converse-dual_rel_best10.png
-
-.. figure:: converse-dual_rel_best10.png
-   :name: converse-dual_rel_best10
-   :width: 400 px
-   :align: center
-
-   Validated *strict* outranking situations between the ten best-ranked alternatives
-
-Restricted to these ten best-ranked alternatives, the *Copeland*, the *NetFlows* as well as the *Kemeny* ranking rule will all rank alternative #426464 first and alternative #578560 last. Otherwise the three ranking rules produce in this case more or less different rankings.
-
-.. code-block:: pycon
-   :linenos:
-
-   >>> g.computeCopelandRanking()
-    [426464, 567308, 155874, 279729, 773909, 928564, 668947, 815552, 298061, 578560]
-   >>> g.computeNetFlowsRanking()
-    [426464, 155874, 773909, 567308, 815552, 279729, 928564, 298061, 668947, 578560]
-   >>> from linearOrders import *
-   >>> ke = KemenyOrder(g,orderLimit=10)
-   >>> ke.kemenyRanking
-    [426464, 773909, 155874, 815552, 567308, 298061, 928564, 279729, 668947, 578560]
-
-.. note::
-
-   It is therefore *important* to always keep in mind that, based on pairwise outranking situations, there **does not exist** any **unique optimal ranking**; especially when we face such big data problems. Changing the number of quantiles, the component ranking rule, the optimised quantile ordering strategy, all this will indeed produce, sometimes even substantially, diverse global ranking results. 
-
-Back to :ref:`Content Table <Tutorial-label>`
-
-----------------
 
 .. _Case-Studies-label:
 
@@ -7268,6 +6249,1041 @@ Use the :py:class:`~randomPerfTabs.RandomAcademicPerformanceTableau` constructor
 Back to :ref:`Content Table <Tutorial-label>`
 
 ---------------------
+
+.. _BigDigraphs-Tutorial-label:
+
+Working with big outranking digraphs
+====================================
+
+This part introduces python resources for tackling large and big outranking digraphs. First we introduce a sparse model of large outranking digraphs (order < 1000). In a second section we show how to use multiprocessing resources for working with multiple threads in parallel (order < 10000). Finally, we introduce multiprocessing C-versions of the main Digraph3 modules for working with very big outranking digraphs (order > 10000).
+
+.. contents:: 
+	:depth: 1
+	:local:
+
+.. _SparseOutranking-Tutorial-label:
+
+Sparse bipolar-valued outranking digraphs
+-----------------------------------------
+.. contents:: 
+	:depth: 1
+	:local:
+
+The :py:class:`~ratingDigraphs.RatinbByRelativeQuantilesDigraph` constructor gives via the rating by relative quantiles a linearly ordered decomposition of the corresponding bipolar-valued outranking digraph (see :numref:`quantilesOrdering`). This decomposition leads us to a new **sparse pre-ranked** outranking digraph model.
+
+The sparse pre-ranked outranking digraph model
+``````````````````````````````````````````````
+
+We may notice that a given outranking digraph -the association of a set of decision alternatives and an outranking relation- is, following the methodological requirements of the outranking approach, necessarily associated with a corresponding performance tableau. And, we may use this underlying performance tableau for linearly decomposing the set of potential decision alternatives into **ordered quantiles equivalence classes** by using the quantiles sorting technique seen in the previous Section. 
+
+In the coding example shown in :numref:`PreRankedOutrankingDigraph` below, we generate for instance, first (Lines 2-3), a simple performance tableau of 75 decision alternatives and, secondly (Lines 4), we construct the corresponding :py:class:`~sparseOutrankingDigraphs.PreRankedOutrankingDigraph` instance called *prg*. Notice by the way the *BigData* flag (Line 3) used here for generating a parsimoniously commented performance tableau.
+
+.. code-block:: pycon
+   :name: PreRankedOutrankingDigraph
+   :caption: Computing a *pre-ranked* sparse outranking digraph 
+   :linenos:
+   :emphasize-lines: 14,16-18
+
+   >>> from randomPerfTabs import RandomPerformanceTableau
+   >>> tp = RandomPerformanceTableau(numberOfActions=75,
+   ...                               BigData=True,seed=100)
+   >>> from sparseOutrankingDigraphs import \
+   ...                         PreRankedOutrankingDigraph
+   >>> prg = PreRankedOutrankingDigraph(tp,quantiles=5)
+   >>> prg
+    *----- Object instance description ------*
+     Instance class    : PreRankedOutrankingDigraph
+     Instance name     : randomperftab_pr
+     # Actions         : 75
+     # Criteria        : 7
+     Sorting by        : 5-Tiling
+     Ordering strategy : average
+     # Components      : 9
+     Minimal order     : 1
+     Maximal order     : 25
+     Average order     : 8.3
+     fill rate         : 20.432%
+     Attributes        : ['actions', 'criteria', 'evaluation', 'NA', 'name',
+         'order', 'runTimes', 'dimension', 'sortingParameters',
+	 'valuationdomain', 'profiles', 'categories', 'sorting',
+	 'decomposition', 'nbrComponents', 'components',
+	 'fillRate', 'minimalComponentSize', 'maximalComponentSize', ... ]
+
+The ordering of the 5-tiling result is following the **average** lower and upper quintile limits strategy (see previous section and :numref:`PreRankedOutrankingDigraph` Line 14). We obtain here 9 ordered components of minimal order 1 and maximal order 25. The corresponding **pre-ranked decomposition** may be visualized as follows.
+
+.. code-block:: pycon
+   :name: quantilesDecomposition
+   :caption: The quantiles decomposition of a pre-ranked outranking digraph 
+   :linenos:
+   :emphasize-lines: 3,15
+
+   >>> prg.showDecomposition()
+    *--- quantiles decomposition in decreasing order---*
+     c1. ]0.80-1.00] : [5, 42, 43, 47]
+     c2. ]0.60-1.00] : [73]
+     c3. ]0.60-0.80] : [1, 4, 13, 14, 22, 32, 34, 35, 40,
+                        41, 45, 61, 62, 65, 68, 70, 75]
+     c4. ]0.40-0.80] : [2, 54]
+     c5. ]0.40-0.60] : [3, 6, 7, 10, 15, 18, 19, 21, 23, 24,
+                        27, 30, 36, 37, 48, 51, 52, 56, 58,
+			63, 67, 69, 71, 72, 74]
+     c6. ]0.20-0.60] : [8, 11, 25, 28, 64, 66]
+     c7. ]0.20-0.40] : [12, 16, 17, 20, 26, 31, 33, 38, 39,
+                        44, 46, 49, 50, 53, 55]
+     c8. ]   <-0.40] : [9, 29, 60]
+     c9. ]   <-0.20] : [57, 59]
+
+The highest quintile class (]80%-100%]) contains decision alternatives *5*, *42*, *43* and *47*. Lowest quintile class (]-20%]) gathers alternatives *57* and *59* (see :numref:`quantilesDecomposition` Lines 3 and 15). We may inspect the resulting sparse outranking relation map as follows in a browser view.
+
+   >>> prg.showHTMLRelationMap()
+
+.. figure:: sparse75RelationMap.png
+   :name: sparse75RelationMap
+   :width: 550 px
+   :align: center
+
+   The relation map of a sparse outranking digraph	   
+
+In :numref:`sparse75RelationMap` we easily recognize the 9 linearly ordered quantile equivalence classes. *Green* and *light-green* show positive **outranking** situations, whereas positive **outranked** situations are shown in **red** and **light-red**. Indeterminate situations appear in white. In each one of the 9 quantile equivalence classes we recover in fact the corresponding bipolar-valued outranking *sub-relation*, which leads to an actual **fill-rate** of 20.4% (see :numref:`PreRankedOutrankingDigraph` Line 20).
+
+We may now check how faithful the sparse model represents the complete outranking relation.
+
+.. code-block:: pycon
+   :linenos:
+
+   >>> from outrankingDigraphs import BipolarOutrankingDigraph
+   >>> g = BipolarOutrankingDigraph(tp)
+   >>> corr = prg.computeOrdinalCorrelation(g)
+   >>> g.showCorrelation(corr)
+    Correlation indexes:
+     Crisp ordinal correlation  : +0.863
+     Epistemic determination    :  0.315
+     Bipolar-valued equivalence : +0.272
+   
+The ordinal correlation index between the standard and the sparse outranking relations is quite high (+0.863) and their bipolar-valued equivalence is supported by a mean criteria significance majority of (1.0+0.272)/2 = 64%.
+
+It is worthwhile noticing in :numref:`PreRankedOutrankingDigraph` Line 18 that sparse pre-ranked outranking digraphs do not contain a *relation* attribute. The access to pairwise outranking characteristic values is here provided via a corresponding :py:meth:`~sparseOutrankingDigraph.relation` function.
+
+.. code-block:: python
+   :linenos:
+
+   def relation(self,x,y):
+       """
+       Dynamic construction of the global
+       outranking characteristic function r(x,y).
+       """
+       Min = self.valuationdomain['min']
+       Med = self.valuationdomain['med']
+       Max = self.valuationdomain['max']
+       if x == y:
+           return Med
+       cx = self.actions[x]['component']
+       cy = self.actions[y]['component']
+       if cx == cy:
+           return self.components[cx]['subGraph'].relation[x][y]
+       elif self.components[cx]['rank'] > self.components[cy]['rank']:
+           return Min
+       else:
+           return Max
+
+All reflexive situations are set to the *indeterminate* value. When two decision alternatives belong to a same component -quantile equivalence class- we access the relation attribute of the corresponding outranking sub-digraph. Otherwise we just check the respective ranks of the components.
+
+Ranking pre-ranked sparse outranking digraphs
+`````````````````````````````````````````````
+
+Each one of these 9 ordered components may now be locally ranked by using a suitable ranking rule. Best operational results, both in run times and quality, are more or less equally given with the *Copeland* and the *NetFlows* rules. The eventually obtained linear ordering (from the worst to best) is stored in a *prg.boostedOrder* attribute. A reversed linear ranking (from the best to the worst) is stored in a *prg.boostedRanking* attribute.
+  
+.. code-block:: pycon
+   :name: boostedRanking
+   :caption: Showing the component wise *Copeland* ranking
+   :linenos:
+
+   >>> prg.boostedRanking
+    [43, 47, 42, 5, 73, 65, 68, 32, 62, 70, 35, 22, 75, 45, 1,
+     61, 41, 34, 4, 13, 40, 14, 2, 54, 63, 37, 56, 71, 69, 36,
+     19, 72, 15, 48, 6, 30, 74, 3, 21, 58, 52, 18, 7, 24, 27,
+     23, 67, 51, 10, 25, 11, 8, 64, 28, 66, 53, 12, 31, 39, 55,
+     20, 46, 49, 16, 44, 26, 38, 33, 17, 50, 29, 60, 9, 59, 57]
+
+Alternative *43* appears *first ranked*, whereas alternative *57* is *last ranked* (see :numref:`boostedRanking` Line 2 and 6). The quality of this ranking result may be assessed by computing its ordinal correlation with the standard outranking relation.  
+
+.. code-block:: pycon
+   :linenos:
+      
+   >>> corr = g.computeRankingCorrelation(prg.boostedRanking)
+   >>> g.showCorrelation(corr)
+    Correlation indexes:
+     Crisp ordinal correlation  : +0.807
+     Epistemic determination    :  0.315
+     Bipolar-valued equivalence : +0.254
+
+We may also verify below that the *Copeland* ranking obtained from the standard outranking digraph is highly correlated (+0.822) with the one obtained from the sparse outranking digraph.
+
+.. code-block:: pycon
+   :linenos:
+
+   >>> from linearOrders import CopelandOrder
+   >>> cop = CopelandOrder(g)
+   >>> print(cop.computeRankingCorrelation(prg.boostedRanking))
+    {'correlation': 0.822, 'determination': 1.0}
+
+Noticing the computational efficiency of the quantiles sorting construction, coupled with the separability property of the quantile class membership characteristics computation, we will make usage of the :py:class:`~sparseOutrankingDigraphs.PreRankedOutrankingDigraph` constructor in the :ref:`cythonized Digraph3 modules <HPC-Tutorial-label>` for HPC ranking big and even huge performance tableaux.
+
+Back to :ref:`Content Table <Tutorial-label>`
+
+-----------
+
+.. _Multiprocessing-Tutorial-label:
+
+Using Digraph3 multiprocessing resources
+----------------------------------------
+
+.. contents:: 
+	:depth: 1
+	:local:
+
+Computing with multiple threads in parallel
+```````````````````````````````````````````
+
+Modern desktop and laptop computers usually provide a multithreaded CPU which allows to run several threads in parallel [53]_. In the Digraph3 resources we offer this usage with a *Threading*, a *nbrCores* or *nbrOfCPUs* and a *startMethod* parameter (see below Lines 6-7)  
+
+.. code-block:: pycon
+   :linenos:
+   :emphasize-lines: 6,7,24
+      
+   ...$ python3
+    Python 3.11.6 (main, Oct  8 2023, 05:06:43) [GCC 13.2.0] on linux
+   >>> from outrankingDigraphs import *
+   >>> t = RandomPerformanceTableau(numberOfActions=500,
+   ...                        numberOfCriteria=13,seed=1)
+   >>> g = BipolarOutrankingDigraph(t,Threading=True,
+   ...                              nbrCores=10,startMethod='spawn')
+   >>> g
+   *------- Object instance description ------*
+   Instance class       : BipolarOutrankingDigraph
+   Instance name        : rel_randomperftab
+   Actions              : 500
+   Criteria             : 13
+   Size                 : 142091
+   Determinateness (%)  : 62.08
+   Valuation domain     : [-1.00;1.00]
+   Attributes           : ['name', 'actions', 'ndigits', 'valuationdomain',
+                           'criteria', 'methodData', 'evaluation', 'NA',
+			   'order', 'runTimes', 'startMethod', 'nbrThreads',
+			   'relation', 'gamma', 'notGamma']
+   ----  Constructor run times (in sec.) ----
+   Threads          : 10
+   Start method     : spawn
+   Total time       : 3.34283
+   Data input       : 0.00941
+   Compute relation : 3.20870
+   Gamma sets       : 0.12471
+   
+The same computation without threading takes about four times more total run time (see above Line 24 and below Line 20).
+
+.. code-block:: pycon
+   :linenos:
+   :emphasize-lines: 20
+
+   >>> g = BipolarOutrankingDigraph(t,Threading=False,
+   ...                nbrCores=10,startMethod='spawn',
+   ...                WithConcordanceRelation=False,
+   ...                WithVetoCounts=False)
+   >>> g
+    *------- Object instance description ------*
+     Instance class       : BipolarOutrankingDigraph
+     Instance name        : rel_randomperftab
+     Actions              : 500
+     Criteria             : 13
+     Size                 : 142091
+     Determinateness (%)  : 62.08
+     Valuation domain     : [-1.00;1.00]
+     Attributes           : ['name', 'actions', 'ndigits', 'valuationdomain',
+                             'criteria', 'methodData', 'evaluation', 'NA',
+			     'order', 'runTimes', 'nbrThreads', 'startMethod',
+			     'relation', 'gamma', 'notGamma']
+      ----  Constructor run times (in sec.) ----
+      Start method     : None
+      Total time       : 12.84823
+      Data input       : 0.00941
+      Compute relation : 12.73070
+      Gamma sets       : 0.10812
+
+These run times were obtained on a common desktop computer equipped with an 11th Gen Intel® Core™ i5-11400 × 12 processor and 16.0 BG of CPU memory.
+
+Using the mpOutrankingDigraphs module
+`````````````````````````````````````
+
+A refactored and streamlined multiprocessing :py:mod:`mpOutrankingDigraphs` module for even faster computing bipolar outranking digraphs with up to several hundreds or thousands of decision actions has been recently added to the Digraph3 resources (see Line 21 below).
+
+.. code-block:: pycon
+   :linenos:
+   :emphasize-lines: 19,24
+
+   >>> from mpOutrankingDigraphs import MPBipolarOutrankingDigraph
+   >>> mpg = MPBipolarOutrankingDigraph(t,nbrCores=10,
+   ...                Normalized=False,startMethod='spawn')
+   >>> mpg
+    *------- Object instance description ------*
+    Instance class       : MPBipolarOutrankingDigraph
+    Instance name        : rel_sharedPerfTab
+    Actions              : 500
+    Criteria             : 13
+    Size                 : 142091
+    Determinateness (%)  : 62.08
+    Valuation domain     : [-13.00;13.00]
+    Attributes           : ['name', 'actions', 'order', 'criteria',
+                            'objectives', 'NA', 'evaluation', 'startMethod',
+			    'nbrThreads', 'relation',
+			    'largePerformanceDifferencesCount',
+			    'valuationdomain', 'gamma', 'notGamma',
+			    'runTimes']
+    ----  Constructor run times (in sec.) ----
+    Threads            : 10
+    Start method       : 'spawn'
+    Total time         : 1.41698
+    Data input         : 0.00006
+    Compute relation   : 1.27468
+    Gamma sets         : 0.14207
+
+Notice also in Line 16 above, that this computation provides the *largePerformanceDifferencesCount* attribute containing the results of the considerable performance differences counts. Setting parameter *WithVetoCounts* to *True* for the :py:class:`”outrankingDigraphs.BipolarOutrankingDigraph` constructor provides the same attribute, but adds about a second to the total run time of 13 seconds.
+
+This attribute allows to print out the relation table with the considerable performance differences counts decoration (see Line 1 below).
+
+.. code-block:: pycon
+   :linenos:
+   :emphasize-lines: 1,7-8,11-12
+
+   >>> mpg.showRelationTable(hasLPDDenotation=True,toIndex=5)
+   * ---- Relation Table -----
+    r/(lpd)|  'a001'   'a002'   'a003'   'a004'   'a005'   
+   --------|---------------------------------------------
+    'a001' |  +13.00    -1.00    +1.00    +3.00    -1.00  
+           |  (+0,+0)  (+0,+0)  (+0,+0)  (+0,+0)  (+0,+0) 
+    'a002' |   +3.00   +13.00    +2.00   +13.00    +4.00  
+           |  (+0,+0)  (+0,+0)  (+0,+0)  (+1,+0)  (+0,+0) 
+    'a003' |   +1.00    +3.00   +13.00    -1.00    +4.00  
+           |  (+0,+0)  (+0,+0)  (+0,+0)  (+0,+0)  (+0,+0) 
+    'a004' |   +2.00   -13.00    +4.00   +13.00    +0.00  
+           |  (+0,+0)  (+0,-1)  (+0,+0)  (+0,+0)  (+0,-1) 
+    'a005' |   +4.00    +0.00    -3.00   +13.00   +13.00  
+           |  (+0,+0)  (+0,+0)  (+0,+0)  (+1,+0)  (+0,+0) 
+     Valuation domain: [-13.000; 13.000]
+
+In Lines 7-8 above, we may for instance notice a considerably large positive performance difference when comparing alternatives 'a002' and 'a004' which results in a polarised *for certain valid* outranking situation: :math:`r(a_{002} \succsim a_{004}) = +13.00`. The converse situation is observed in Lines 11-12 where we may notice the corresponding considerably large negative performance differnce leading this time to a polarised *for certain invalid* outranking situation: :math:`r(a_{004} \succsim a_{002}) = -13.00`.
+
+Setting the Threading parameters
+````````````````````````````````
+
+Without specifying the number of cores (*nbrCores=None*) or the threading start method (*startMethod=None*), the :py:meth:`cpu_count` method from the :py:mod:`multiprocessing` module will be used to detect the number of available cores and the threading start method will be set by default to *spawn*.
+
+It is possible to use instead the *forkserver* or the more traditional Posix *fork* start method (default on Linux) [52]_. Mind that the latter method, due to the very architecture of the Python interpreter C code, cannot be safe against specific dead locks leading to  hanging or freezing applications and zombie processes. [51]_
+
+When writing multiprocessing Digraph3 Python scripts not using the Posix *fork* start method, it is furthermore essential to protect the main program code with a *__name__=='__main__'* test against recursive re-excution (see below).
+
+.. code-block:: python
+   :linenos:
+
+   from outrankingDigraphs import BipolarOutrankingDigraph
+   from randomPerfTabs import RandomPerformanceTableau
+   # main program code
+   if __name__ == '__main__':
+      t = RandomPerformanceTableau(numberOfActions=1000,
+                                   numberOfCriteria=13,seed=1)
+      g = BipolarOutrankingDigraph(t,
+                                   Threading=True,
+				   nbrCores=10,
+				   startMethod='spawn',
+				   Comments=True)
+      print(g)
+
+Back to :ref:`Content Table <Tutorial-label>`
+
+-----------
+
+.. _HPC-Tutorial-label:
+
+HPC ranking with big outranking digraphs
+----------------------------------------
+
+.. contents:: 
+	:depth: 1
+	:local:
+
+C-compiled Python modules
+`````````````````````````
+
+The Digraph3 collection provides cythonized [6]_, i.e. C-compiled and optimised versions of the main python modules for tackling multiple criteria decision problems facing very large sets of decision alternatives ( > 10000 ). Such problems appear usually with a combinatorial organisation of the potential decision alternatives, as is frequently the case in bioinformatics for instance. If HPC facilities with nodes supporting numerous cores (> 20) and big RAM (> 50GB) are available, ranking up to several millions of alternatives (see [BIS-2016]_) becomes effectively tractable.
+
+Four cythonized Digraph3 modules, prefixed with the letter *c* and taking a *pyx* extension, are provided with their corresponding setup tools in the *Digraph3/cython* directory, namely
+
+    - *cRandPerfTabs.pyx*
+    - *cIntegerOutrankingDigraphs.pyx*
+    - *cIntegerSortingDigraphs.pyx*
+    - *cSparseIntegerOutrankingDigraphs.pyx*
+
+Their automatic compilation and installation (*...Digraph3$ make installPip*), alongside the standard Digraph3 python3 modules, requires the *cython* compiler [6]_ ( *...$ python3 m pip install cython wheel* ) and a C compiler ( *...$ sudo apt install gcc* ). Local *inplace* compilation and installation ( *.../Digraph3/cython$ make* ) is provided with a corresponding *makefile* in the "Digraph3/cython* directory.
+
+Big Data performance tableaux
+`````````````````````````````
+
+In order to efficiently type the C variables, the :py:mod:`cRandPerfTabs` module provides the usual random performance tableau models, but, with **integer** action keys, **float** performance evaluations, **integer** criteria weights and **float** discrimination thresholds. And, to limit as much as possible memory occupation of class instances, all the usual verbose comments are dropped from the description of the *actions* and *criteria* dictionaries. 
+
+.. code-block:: pycon
+   :linenos:
+   
+   >>> from cRandPerfTabs import *
+   >>> t = cRandomPerformanceTableau(numberOfActions=4,numberOfCriteria=2)
+   >>> t
+       *------- PerformanceTableau instance description ------*
+       Instance class   : cRandomPerformanceTableau
+       Seed             : None
+       Instance name    : cRandomperftab
+       # Actions        : 4
+       # Criteria       : 2
+       Attributes       : ['randomSeed', 'name', 'actions', 'criteria',
+			   'evaluation', 'weightPreorder']
+   >>> t.actions
+       OrderedDict([(1, {'name': '#1'}), (2, {'name': '#2'}),
+		     (3, {'name': '#3'}), (4, {'name': '#4'})])
+   >>> t.criteria
+       OrderedDict([
+       ('g1', {'name': 'RandomPerformanceTableau() instance',
+	       'comment': 'Arguments: ; weightDistribution=equisignificant;
+			    weightScale=(1, 1); commonMode=None',
+	       'thresholds': {'ind': (10.0, 0.0),
+			       'pref': (20.0, 0.0),
+			       'veto': (80.0, 0.0)},
+	       'scale': (0.0, 100.0),
+	       'weight': 1,
+	       'preferenceDirection': 'max'}),
+       ('g2', {'name': 'RandomPerformanceTableau() instance',
+	       'comment': 'Arguments: ; weightDistribution=equisignificant;
+			   weightScale=(1, 1); commonMode=None',
+	       'thresholds': {'ind': (10.0, 0.0),
+			       'pref': (20.0, 0.0),
+			       'veto': (80.0, 0.0)},
+	       'scale': (0.0, 100.0),
+	       'weight': 1,
+	       'preferenceDirection': 'max'})])
+   >>> t.evaluation
+	{'g1': {1: 35.17, 2: 56.4, 3: 1.94, 4: 5.51},
+	 'g2': {1: 95.12, 2: 90.54, 3: 51.84, 4: 15.42}}
+   >>> t.showPerformanceTableau()
+	Criteria |  'g1'    'g2'   
+	Actions  |    1       1    
+	---------|---------------
+	   '#1'  |  91.18   90.42  
+	   '#2'  |  66.82   41.31  
+	   '#3'  |  35.76   28.86  
+	   '#4'  |   7.78   37.64  
+
+Conversions from the Big Data model to the standard model and vice versa are provided.
+
+.. code-block:: pycon
+   :linenos:
+   
+   >>> t1 = t.convert2Standard()
+   >>> t1.convertWeight2Decimal()
+   >>> t1.convertEvaluation2Decimal()
+   >>> t1
+    *------- PerformanceTableau instance description ------*
+    Instance class   : PerformanceTableau
+    Seed             : None
+    Instance name    : std_cRandomperftab
+    # Actions        : 4
+    # Criteria       : 2
+    Attributes       : ['name', 'actions', 'criteria', 'weightPreorder',
+                        'evaluation', 'randomSeed']
+
+C-implemented integer-valued outranking digraphs
+````````````````````````````````````````````````
+
+The C compiled version of the bipolar-valued digraph models takes integer relation characteristic values.
+
+.. code-block:: pycon
+   :linenos:
+   
+   >>> t = cRandomPerformanceTableau(numberOfActions=1000,numberOfCriteria=2)
+   >>> from cIntegerOutrankingDigraphs import *
+   >>> g = IntegerBipolarOutrankingDigraph(t,Threading=True,nbrCores=4)
+   >>> g
+      *------- Object instance description ------*
+      Instance class   : IntegerBipolarOutrankingDigraph
+      Instance name    : rel_cRandomperftab
+      Actions          : 1000
+      Criteria         : 2
+      Size             : 465024
+      Determinateness  : 56.877
+      Valuation domain : {'min': -2, 'med': 0, 'max': 2,
+                          'hasIntegerValuation': True}
+      Attributes       : ['name', 'actions', 'criteria', 'totalWeight',
+                          'valuationdomain', 'methodData', 'evaluation',
+                          'order', 'runTimes', 'startMethod',
+			  'nbrThreads', 'relation',
+                          'gamma', 'notGamma']
+      ----  Constructor run times (in sec.) ----
+      Threads          : 4
+      Start method     : spawn
+      Total time       : 1.19811
+      Data input       : 0.00183
+      Compute relation : 0.91961
+      Gamma sets       : 0.27664
+      
+On a classic intel-i5-11400x12 equipped PC, the :py:class:`~cIntegerOutrankingDigraphs.IntegerBipolarOutrankingDigraph` constructor takes with four multiprocessing threads about one second for computing a **million** pairwise outranking characteristic values. In a similar multiprocessing setting, the standard :py:class:`~outrankingDigraphs.BipolarOutrankingDigraph` class constructor operates about four times slower.
+
+.. code-block:: pycon
+   :linenos:
+
+   >>> from outrankingDigraphs import BipolarOutrankingDigraph
+   >>> t1 = t.convert2Standard()
+   >>> g1 = BipolarOutrankingDigraph(t1,Threading=True,nbrCores=4)
+   >>> g1
+      *------- Object instance description ------*
+      Instance class   : BipolarOutrankingDigraph
+      Instance name    : rel_std_cRandomperftab
+      Actions          : 1000
+      Criteria         : 2
+      Size             : 465024
+      Determinateness  : 56.817
+      Valuation domain : {'min': Decimal('-1.0'),
+			  'med': Decimal('0.0'),
+			  'max': Decimal('1.0'),
+			  'precision': Decimal('0')}
+      ----  Constructor run times (in sec.) ----
+      Threads          : 4
+      Start method     : spawn
+      Total time       : 3.81307
+      Data input       : 0.00305
+      Compute relation : 3.41648
+      Gamma sets       : 0.39353
+
+By far, most of the run time is in each case needed for computing the individual pairwise outranking characteristic values. Notice also below the memory occupations of both outranking digraph instances. 
+
+.. code-block:: pycon
+   :linenos:
+
+   >>> from digraphsTools import total_size
+   >>> total_size(g)
+    108662777
+   >>> total_size(g1)
+    113564067
+   >>> total_size(g.relation)/total_size(g)
+    0.34
+   >>> total_size(g.gamma)/total_size(g)
+    0.45
+
+About 109MB for *g* and 114MB for *g1*. The standard *Decimal* valued :py:class:`~outrankingDigraphs.BipolarOutrankingDigraph` instance *g1* thus adds nearly 10% to the memory occupation of the corresponding :py:class:`~cIntegerOutrankingDigraphs.IntegerBipolarOutrankingDigraph` *g* instance (see Line 3 and 5 above). 3/4 of this memory occupation is due to the *g.relation* (34%) and the *g.gamma* (45%) dictionaries. And these ratios quadratically grow with the digraph order. To limit the object sizes for really big outranking digraphs, we need to abandon the complete implementation of adjacency tables and gamma functions.
+
+The sparse outranking digraph implementation
+````````````````````````````````````````````
+
+The idea is to first decompose the complete outranking relation into an ordered collection of equivalent quantile performance classes. Let us consider for this illustration a random performance tableau with 100 decision alternatives evaluated on 7 criteria.
+
+.. code-block:: pycon
+   :linenos:
+
+   >>> from cRandPerfTabs import *
+   >>> t = cRandomPerformanceTableau(numberOfActions=100,
+   ...                               numberOfCriteria=7,seed=100)
+
+We sort the 100 decision alternatives into overlapping quartile classes and rank with respect to the average quantile limits.
+
+.. code-block:: pycon
+   :linenos:
+
+   >>> from cSparseIntegerOutrankingDigraphs import *
+   >>> sg = SparseIntegerOutrankingDigraph(t,quantiles=4,
+   ...                      OptimalQuantileOrdering=False,
+   ...                      Threading=False)
+   >>> sg
+    *----- Object instance description --------------*
+    Instance class    : SparseIntegerOutrankingDigraph
+    Instance name     : cRandomperftab_mp
+    # Actions         : 100
+    # Criteria        : 7
+    Sorting by        : 4-Tiling
+    Ordering strategy : average
+    Ranking rule      : Copeland
+    # Components      : 6
+    Minimal order     : 1
+    Maximal order     : 35
+    Average order     : 16.7
+    fill rate         : 24.970%
+    Attributes        : ['runTimes', 'name', 'actions', 'criteria',
+                        'evaluation', 'order', 'dimension',
+                        'sortingParameters', 'nbrOfCPUs',
+                        'valuationdomain', 'profiles', 'categories',
+                        'sorting', 'minimalComponentSize',
+                        'decomposition', 'nbrComponents', 'nd',
+                        'components', 'fillRate',
+                        'maximalComponentSize', 'componentRankingRule',
+                        'boostedRanking']
+    *----  Constructor run times (in sec.) ----
+    Total time        : 0.02336
+    QuantilesSorting  : 0.01150
+    Preordering       : 0.00047
+    Decomposing       : 0.01135
+    Ordering          : 0.00001
+
+We obtain in this example here a decomposition into 6 linearly ordered components with a maximal component size of 35 for component *c3*.
+
+.. code-block:: pycon
+   :linenos:
+
+   >>> sg.showDecomposition()
+    *--- quantiles decomposition in decreasing order---*
+    c1. ]0.75-1.00] : [3, 22, 24, 34, 41, 44, 50, 53, 56, 62, 93]
+    c2. ]0.50-1.00] : [7, 29, 43, 58, 63, 81, 96]
+    c3. ]0.50-0.75] : [1, 2, 5, 8, 10, 11, 20, 21, 25, 28, 30, 33,
+		       35, 36, 45, 48, 57, 59, 61, 65, 66, 68, 70,
+		       71, 73, 76, 82, 85, 89, 90, 91, 92, 94, 95, 97]
+    c4. ]0.25-0.75] : [17, 19, 26, 27, 40, 46, 55, 64, 69, 87, 98, 100]
+    c5. ]0.25-0.50] : [4, 6, 9, 12, 13, 14, 15, 16, 18, 23, 31, 32,
+		       37, 38, 39, 42, 47, 49, 51, 52, 54, 60, 67, 72,
+		       74, 75, 77, 78, 80, 86, 88, 99]
+    c6. ]<-0.25] : [79, 83, 84]
+
+A restricted outranking relation is stored for each component with more than one alternative. The resulting global relation map of the first ranked 75 alternatives looks as follows.
+
+   >>> sg.showRelationMap(toIndex=75)
+
+.. figure:: sparseRelationMap.png
+   :width: 450 px
+   :align: center
+
+   Sparse quartiles-sorting decomposed outranking relation (extract). **Legend**: *outranking* for certain (:math:`\top`); *outranked* for certain (:math:`\bot`); more or less *outranking* (:math:`+`); more or less *outranked* (:math:`-`); *indeterminate* ( ).
+
+With a fill rate of 25%, the memory occupation of this sparse outranking digraph *sg* instance takes now only 769kB, compared to the 1.7MB required by a corresponding standard IntegerBipolarOutrankingDigraph instance.
+
+    >>> print('%.0fkB' % (total_size(sg)/1024) )
+    769kB
+
+For sparse outranking digraphs, the adjacency table is implemented as a dynamic :py:func:`~cSparseIntegerOutrankingDigraphs.SparseIntegerOutrankingDigraph.relation` function instead of a double dictionary.
+
+.. code-block:: pycon
+   :linenos:
+
+   def relation(self, int x, int y):
+      """
+      *Parameters*:
+	    * x (int action key),
+	    * y (int action key).
+      Dynamic construction of the global outranking
+      characteristic function *r(x S y)*.
+      """
+      cdef int Min, Med, Max, rx, ry
+      Min = self.valuationdomain['min']
+      Med = self.valuationdomain['med']
+      Max = self.valuationdomain['max']
+      if x == y:
+          return Med
+      else:
+          cx = self.actions[x]['component']
+	  cy = self.actions[y]['component']
+	  rx = self.components[cx]['rank']
+	  ry = self.components[cy]['rank']
+	  if rx == ry:
+	      try:
+		  rxpg = self.components[cx]['subGraph'].relation
+		  return rxpg[x][y]
+	      except AttributeError:
+		  componentRanking = self.components[cx]['componentRanking']
+		  if componentRanking.index(x) < componentRanking.index(x):
+		      return Max
+		  else:
+		      return Min
+          elif rx > ry:
+              return Min
+          else:
+	      return Max
+
+Ranking big sets of decision alternatives
+`````````````````````````````````````````
+
+We may now rank the complete set of 100 decision alternatives by locally ranking with the *Copeland* or the *NetFlows* rule, for instance, all these individual components.
+
+.. code-block:: pycon
+   :linenos:
+
+   >>> sg.boostedRanking
+    [22, 53, 3, 34, 56, 62, 24, 44, 50, 93, 41, 63, 29, 58,
+     96, 7, 43, 81, 91, 35, 25, 76, 66, 65, 8, 10, 1, 11, 61,
+     30, 48, 45, 68, 5, 89, 57, 59, 85, 82, 73, 33, 94, 70,
+     97, 20, 92, 71, 90, 95, 21, 28, 2, 36, 87, 40, 98, 46, 55,
+     100, 64, 17, 26, 27, 19, 69, 6, 38, 4, 37, 60, 31, 77, 78,
+     47, 99, 18, 12, 80, 54, 88, 39, 9, 72, 86, 42, 13, 23, 67,
+     52, 15, 32, 49, 51, 74, 16, 14, 75, 79, 83, 84]
+
+When actually computing linear rankings of a set of alternatives, the local outranking relations are of no practical usage, and we may furthermore reduce the memory occupation of the resulting digraph by
+
+     1. refining the ordering of the quantile classes by taking into account how well an alternative is outranking the lower limit of its quantile class, respectively the upper limit of its quantile class is *not* outranking the alternative;
+     2. dropping the local outranking digraphs and keeping for each quantile class only a locally ranked list of alternatives.
+
+We provide therefore the :py:class:`~cSparseIntegerOutrankingDigraphs.cQuantilesRankingDigraph` class.   
+
+.. code-block:: pycon
+   :linenos:
+
+   >>> qr = cQuantilesRankingDigraph(t,4)
+   >>> qr
+    *----- Object instance description --------------*
+    Instance class    : cQuantilesRankingDigraph
+    Instance name     : cRandomperftab_mp
+    # Actions         : 100
+    # Criteria        : 7
+    Sorting by        : 4-Tiling
+    Ordering strategy : optimal
+    Ranking rule      : Copeland
+    # Components      : 47
+    Minimal order     : 1
+    Maximal order     : 10
+    Average order     : 2.1
+    fill rate         : 2.566%
+    *----  Constructor run times (in sec.) ----*
+    Nbr of threads    : 1
+    Total time        : 0.03702
+    QuantilesSorting  : 0.01785
+    Preordering       : 0.00022
+    Decomposing       : 0.01892
+    Ordering          : 0.00000
+    Attributes       : ['runTimes', 'name', 'actions', 'order',
+			'dimension', 'sortingParameters', 'nbrOfCPUs',
+			'valuationdomain', 'profiles', 'categories',
+			'sorting', 'minimalComponentSize',
+			'decomposition', 'nbrComponents', 'nd',
+			'components', 'fillRate', 'maximalComponentSize',
+			'componentRankingRule', 'boostedRanking']
+
+With this *optimised* quantile ordering strategy, we obtain now 47 performance equivalence classes.
+
+.. code-block:: pycon
+   :linenos:
+
+   >>> qr.components
+    OrderedDict([
+    ('c01', {'rank': 1,
+	     'lowQtileLimit': ']0.75',
+	     'highQtileLimit': '1.00]',
+	     'componentRanking': [53]}),
+    ('c02', {'rank': 2,
+	     'lowQtileLimit': ']0.75',
+	     'highQtileLimit': '1.00]',
+	     'componentRanking': [3, 23, 63, 50]}),
+    ('c03', {'rank': 3,
+	     'lowQtileLimit': ']0.75',
+	     'highQtileLimit': '1.00]',
+	     'componentRanking': [34, 44, 56, 24, 93, 41]}), 
+    ...
+    ...
+    ...
+    ('c45', {'rank': 45,
+	     'lowQtileLimit': ']0.25',
+	     'highQtileLimit': '0.50]',
+	     'componentRanking': [49]}),
+    ('c46', {'rank': 46,
+	     'lowQtileLimit': ']0.25',
+	     'highQtileLimit': '0.50]',
+	     'componentRanking': [52, 16, 86]}),
+    ('c47', {'rank': 47,
+	     'lowQtileLimit': ']<',
+	     'highQtileLimit': '0.25]',
+	     'componentRanking': [79, 83, 84]})])
+   >>> print('%.0fkB' % (total_size(qr)/1024) )
+    208kB
+
+We observe an even more considerably less voluminous memory occupation: 208kB compared to the 769kB of the SparseIntegerOutrankingDigraph instance. It is opportune, however, to measure the loss of quality of the resulting *Copeland* ranking when working with sparse outranking digraphs.
+
+.. code-block:: pycon
+   :linenos:
+
+   >>> from cIntegerOutrankingDigraphs import *
+   >>> ig = IntegerBipolarOutrankingDigraph(t)
+   >>> print('Complete outranking : %+.4f'\
+   ...        % (ig.computeOrderCorrelation(ig.computeCopelandOrder())\
+   ...           ['correlation']))
+   
+    Complete outranking : +0.7474
+   >>> print('Sparse 4-tiling : %+.4f'\
+   ...        % (ig.computeOrderCorrelation(\
+   ...           list(reversed(sg.boostedRanking)))['correlation']))
+   
+    Sparse 4-tiling          : +0.7172
+   >>> print('Optimzed sparse 4-tiling: %+.4f'\
+   ...         % (ig.computeOrderCorrelation(\
+   ...            list(reversed(qr.boostedRanking)))['correlation']))
+   
+    Optimzed sparse 4-tiling: +0.7051
+
+The best ranking correlation with the pairwise outranking situations (+0.75) is naturally given when we apply the *Copeland* rule to the complete outranking digraph. When we apply the same rule to the sparse 4-tiled outranking digraph, we get a correlation of +0.72, and when applying the *Copeland* rule to the optimised 4-tiled digraph, we still obtain a correlation of +0.71. These results actually depend on the number of quantiles we use as well as on the given model of random performance tableau. In case of Random3ObjectivesPerformanceTableau instances, for instance, we would get in a similar setting a complete outranking correlation of +0.86, a sparse 4-tiling correlation of +0.82, and an optimzed sparse 4-tiling correlation of +0.81.
+
+HPC quantiles ranking records
+`````````````````````````````
+
+Following from the separability property of the *q*-tiles sorting of each action into each *q*-tiles class, the *q*-sorting algorithm may be safely split into as much threads as are multiple processing cores available in parallel. Furthermore, the ranking procedure being local to each diagonal component, these procedures may as well be safely processed in parallel threads on each component restricted outrankingdigraph.
+
+On a common 2023 Terra desktop computer, equipped with a 11th Gen Intel® Core™ i5-11400 × 12 processor and 16.0 GiB of CPU memory, working under Ubuntu 23.10 we may rank a :py:class:`~cRandPerfTabs.cRandom3ObjectivesPerformanceTableau` instance of **five hundred thousand** performance records in about 104 seconds with about 48 seconds for the quantiles sorting step and 55 seconds for the local components ranking step (see below Lines 42-).
+
+.. code-block:: bash
+
+   ../Digraph3/cython$ python3.12
+   Python 3.12.0 (main, Oct  4 2023, 06:27:34) [GCC 13.2.0] on linux
+   >>>
+    
+.. code-block:: pycon
+   :linenos:
+   :emphasize-lines: 3, 29-33, 42-
+
+   >>> from cRandPerfTabs import\
+   ...       cRandom3ObjectivesPerformanceTableau as cR3ObjPT
+   >>> pt = cR3ObjPT(numberOfActions=500000,
+   ...              numberOfCriteria=21,
+   ...              weightDistribution='equiobjectives',
+   ...              commonScale = (0.0,1000.0),
+   ...              commonThresholds = [(1.5,0.0),(2.0,0.0),(75.0,0.0)],
+   ...              commonMode = ['beta','variable',None],
+   ...              missingDataProbability=0.05,
+   ...              seed=16)
+   >>> import cSparseIntegerOutrankingDigraphs as iBg
+   >>> qr = iBg.cQuantilesRankingDigraph(pt,quantiles=7,
+   ...                    quantilesOrderingStrategy='optimal',
+   ...                    minimalComponentSize=1,
+   ...                    componentRankingRule='Copeland',
+   ...                    LowerClosed=False,
+   ...                    Threading=True,
+   ...                    tempDir='/tmp',
+   ...                    nbrOfCPUs=12)
+   >>> qr
+   *----- Object instance description --------------*
+    Instance class    : cQuantilesRankingDigraph
+    Instance name     : random3ObjectivesPerfTab_mp
+    Actions           : 500000
+    Criteria          : 21
+    Sorting by        : 7-Tiling
+    Ordering strategy : optimal
+    Ranking rule      : Copeland
+    Components        : 146579
+    Minimal order     : 1
+    Maximal order     : 115
+    Average order     : 3.4
+    fill rate         : 0.002%
+    Attributes        : ['runTimes', 'name', 'actions', 'order',
+                         'dimension', 'sortingParameters',
+			 'nbrThreads', 'startMethod', 'valuationdomain',
+			 'profiles', 'categories', 'sorting',
+			 'minimalComponentSize', 'decomposition',
+			 'nbrComponents', 'nd', 'components',
+			 'fillRate', 'maximalComponentSize',
+			 'componentRankingRule', 'boostedRanking']
+    ----  Constructor run times (in sec.) ----
+    Threads           : 12
+    StartMethod       : spawn
+    Total time        : 104.48654
+    QuantilesSorting  : 48.09243
+    Preordering       : 1.26480
+    Decomposing       : 55.12919
+
+When ordering the 146579 components resulting from a 7-tiling sorting with the *optimal* quantiles ordering strategy, the order of a local component is limited to a maximal size of 115 actions which results in a total pairwise adjacency table fill rate of 0.002% (see Lines 29-33).
+
+Bigger performance tableaux may definitely be ranked with a larger *cpu_count()*. We were using therefore in 2018 the HPC Platform of the University of Luxembourg (https://hpc.uni.lu/). The following run times for very big quantiles ranking problems of several millions of multicriteria performance records could be achieved both:
+
+    - on Iris -skylake nodes with 28 cores [7]_, and
+    - on the 3TB -bigmem Gaia-183 node with 64 cores [8]_,
+
+by running the cythonized python modules in an Intel compiled virtual Python 3.6.5 environment [GCC Intel(R) 17.0.1 –enable-optimizations c++ gcc 6.3 mode] on *Debian* 8 Linux.
+
+.. figure:: rankingRecords.png
+   :width: 350 px
+   :align: center
+
+   HPC-UL Ranking Performance Records (Spring 2018)
+
+Example python session on the HPC-UL Iris-126 -skylake node [7]_
+
+.. code-block:: bash
+   :linenos:
+
+   (myPy365ICC) [rbisdorff@iris-126 Test]$ python
+   Python 3.6.5 (default, May  9 2018, 09:54:28) 
+   [GCC Intel(R) C++ gcc 6.3 mode] on linux
+   Type "help", "copyright", "credits" or "license" for more information.
+   >>>
+
+.. code-block:: pycon
+   :linenos:
+   :emphasize-lines: 32-43
+
+   >>> from cRandPerfTabs import\
+   ...    cRandom3ObjectivesPerformanceTableau as cR3ObjPT
+
+   >>> pt = cR3ObjPT(numberOfActions=1000000,
+   ...             numberOfCriteria=21,
+   ...             weightDistribution='equiobjectives',
+   ...             commonScale = (0.0,1000.0),
+   ...             commonThresholds = [(2.5,0.0),(5.0,0.0),(75.0,0.0)],
+   ...             commonMode = ['beta','variable',None],
+   ...             missingDataProbability=0.05,
+   ...             seed=16)
+
+   >>> import cSparseIntegerOutrankingDigraphs as iBg
+   >>> qr = iBg.cQuantilesRankingDigraph(pt,quantiles=10,
+   ...               quantilesOrderingStrategy='optimal',
+   ...               minimalComponentSize=1,
+   ...               componentRankingRule='NetFlows',
+   ...               LowerClosed=False,
+   ...               Threading=True,
+   ...               tempDir='/tmp',
+   ...               nbrOfCPUs=28)
+
+   >>> qr
+    *----- Object instance description --------------*
+    Instance class    : cQuantilesRankingDigraph
+    Instance name     : random3ObjectivesPerfTab_mp
+    # Actions         : 1000000
+    # Criteria        : 21
+    Sorting by        : 10-Tiling
+    Ordering strategy : optimal
+    Ranking rule      : NetFlows
+    # Components      : 233645
+    Minimal order     : 1
+    Maximal order     : 153
+    Average order     : 4.3
+    fill rate         : 0.001%
+    *----  Constructor run times (in sec.) ----*
+    Nbr of threads    : 28
+    Start method      : fork
+    Total time        : 177.02770
+    QuantilesSorting  : 99.55377
+    Preordering       : 5.17954
+    Decomposing       : 72.29356
+
+On this 2x14c Intel Xeon Gold 6132 @ 2.6 GHz equipped HPC node with 132GB RAM [7]_, deciles sorting and locally ranking a **million** decision alternatives evaluated on 21 incommensurable criteria, by balancing an economic, an environmental and a societal decision objective, takes us about **3 minutes** (see Lines 37-42 above); with about 1.5 minutes for the deciles sorting and, a bit more than one minute, for the local ranking of the local components. 
+
+The optimised deciles sorting leads to 233645 components (see Lines 32-36 above) with a maximal order of 153. The fill rate of the adjacency table is reduced to 0.001%. Of the potential trillion (10^12) pairwise outrankings, we effectively keep only 10 millions (10^7). This high number of components results from the high number of involved performance criteria (21), leading in fact to a very refined epistemic discrimination of majority outranking margins. 
+
+A non-optimised deciles sorting would instead give at most 110 components with inevitably very big intractable local digraph orders. Proceeding with a more detailed quantiles sorting, for reducing the induced decomposing run times, leads however quickly to intractable quantiles sorting times. A good compromise is given when the quantiles sorting and decomposing steps show somehow equivalent run times; as is the case in our two example sessions: 15 versus 14 seconds and 99.6 versus 77.3 seconds (see Listing before and Lines 41 and 43 above).     
+
+Let us inspect the 21 marginal performances of the five best-ranked alternatives listed below. 
+
+.. code-block:: pycon
+   :linenos:
+
+   >>> pt.showPerformanceTableau(
+   ...               actionsSubset=qr.boostedRanking[:5],
+   ...               Transposed=True)
+   
+   *----  performance tableau -----*
+    criteria | weights |  #773909  #668947  #567308  #578560  #426464
+    ---------|-------------------------------------------------------
+     'Ec01'  |    42   |   969.81   844.71   917.00     NA     808.35  
+     'So02'  |    48   |     NA     891.52   836.43     NA     899.22  
+     'En03'  |    56   |   687.10     NA     503.38   873.90     NA  
+     'So04'  |    48   |   455.05   845.29   866.16   800.39   956.14  
+     'En05'  |    56   |   809.60   846.87   939.46   851.83   950.51  
+     'Ec06'  |    42   |   919.62   802.45   717.39   832.44   974.63  
+     'Ec07'  |    42   |   889.01   722.09   606.11   902.28   574.08  
+     'So08'  |    48   |   862.19   699.38   907.34   571.18   943.34  
+     'En09'  |    56   |   857.34   817.44   819.92   674.60   376.70  
+     'Ec10'  |    42   |     NA     874.86     NA     847.75   739.94  
+     'En11'  |    56   |     NA     824.24   855.76     NA     953.77  
+     'Ec12'  |    42   |   802.18   871.06   488.76   841.41   599.17  
+     'En13'  |    56   |   827.73   839.70   864.48   720.31   877.23  
+     'So14'  |    48   |   943.31   580.69   827.45   815.18   461.04  
+     'En15'  |    56   |   794.57   801.44   924.29   938.70   863.72  
+     'Ec16'  |    42   |   581.15   599.87   949.84   367.34   859.70  
+     'So17'  |    48   |   881.55   856.05     NA     796.10   655.37  
+     'Ec18'  |    42   |   863.44   520.24   919.75   865.14   914.32  
+     'So19'  |    48   |     NA       NA       NA     790.43   842.85  
+     'Ec20'  |    42   |   582.52   831.93   820.92   881.68   864.81  
+     'So21'  |    48   |   880.87     NA     628.96   746.67   863.82  
+
+The given ranking problem involves 8 criteria assessing the economic performances, 7 criteria assessing the societal performances and 6 criteria assessing the environmental performances of the decision alternatives. The sum of criteria significance weights (336) is the same for all three decision objectives. The five best-ranked alternatives are, in decreasing order: #773909, #668947, #567308, #578560 and #426464.
+
+Their random performance evaluations were obviously drawn on all criteria with a *good* (+) performance profile, i.e. a Beta(*alpha* = 5.8661, *beta* = 2.62203) law (see the tutorial :ref:`generating random performance tableaux <RandomPerformanceTableau-Tutorial-label>`). 
+
+.. code-block:: pycon
+   :linenos:
+
+   >>> for x in qr.boostedRanking[:5]:
+   ...     print(pt.actions[x]['name'],
+   ...           pt.actions[x]['profile'])
+   
+    #773909 {'Eco': '+', 'Soc': '+', 'Env': '+'}
+    #668947 {'Eco': '+', 'Soc': '+', 'Env': '+'}
+    #567308 {'Eco': '+', 'Soc': '+', 'Env': '+'}
+    #578560 {'Eco': '+', 'Soc': '+', 'Env': '+'}
+    #426464 {'Eco': '+', 'Soc': '+', 'Env': '+'}
+
+We consider now a partial performance tableau *best10*, consisting only, for instance, of the **ten best-ranked alternatives**, with which we may compute a corresponding integer outranking digraph valued in the range (-1008, +1008).  
+
+.. code-block:: pycon
+   :linenos:
+
+   >>> best10 = cPartialPerformanceTableau(pt,qr.boostedRanking[:10])
+   >>> from cIntegerOutrankingDigraphs import *   
+   >>> g = IntegerBipolarOutrankingDigraph(best10)
+   >>> g.valuationdomain
+    {'min': -1008, 'med': 0, 'max': 1008, 'hasIntegerValuation': True}
+   >>> g.showRelationTable(ReflexiveTerms=False)
+    * ---- Relation Table -----
+     r(x>y) | #773909 #668947 #567308 #578560 #426464 #298061 #155874 #815552 #279729 #928564
+    --------|-----------------------------------------------------------------------------------
+    #773909 |    -      +390     +90    +270     -50    +340    +220     +60    +116    +222
+    #668947 |    +78     -       +42    +250     -22    +218     +56    +172     +74     +64
+    #567308 |    +70    +418     -      +180    +156    +174    +266     +78    +256    +306
+    #578560 |     -4     +78     +28     -       -12    +100     -48    +154    -110     -10
+    #426464 |   +202    +258    +284    +138     -      +416    +312    +382    +534    +278
+    #298061 |    -48     +68    +172     +32     -42      -      +54     +48    +248    +374
+    #155874 |    +72    +378    +322    +174    +274    +466     -      +212    +308    +418
+    #815552 |    +78    +126    +272    +318     +54    +194    +172     -       -14     +22
+    #279729 |   +240    +230    -110    +290     +72    +140    +388     +62     -      +250
+    #928564 |    +22    +228     -14    +246     +36     +78     +56    +110    +318     -
+    r(x>y) image range := [-1008;+1008]
+   >>> g.condorcetWinners()
+    [155874, 426464, 567308]
+   >>> g.computeChordlessCircuits()
+    []
+   >>> g.computeTransitivityDegree()
+    0.78
+
+Three alternatives -#155874, #426464 and #567308- qualify as Condorcet winners, i.e. they each **positively outrank** all the other nine alternatives. No chordless outranking circuits are detected, yet the transitivity of the apparent outranking relation is not given. And, no clear ranking alignment hence appears when inspecting the *strict* outranking digraph (i.e. the codual ~(-*g*) of *g*) shown in :numref:`converse-dual_rel_best10`.
+  
+.. code-block:: pycon
+   :linenos:
+
+   >>> (~(-g)).exportGraphViz()
+   *---- exporting a dot file for GraphViz tools ---------*
+    Exporting to converse-dual_rel_best10.dot
+    dot -Tpng converse-dual_rel_best10.dot -o converse-dual_rel_best10.png
+
+.. figure:: converse-dual_rel_best10.png
+   :name: converse-dual_rel_best10
+   :width: 400 px
+   :align: center
+
+   Validated *strict* outranking situations between the ten best-ranked alternatives
+
+Restricted to these ten best-ranked alternatives, the *Copeland*, the *NetFlows* as well as the *Kemeny* ranking rule will all rank alternative #426464 first and alternative #578560 last. Otherwise the three ranking rules produce in this case more or less different rankings.
+
+.. code-block:: pycon
+   :linenos:
+
+   >>> g.computeCopelandRanking()
+    [426464, 567308, 155874, 279729, 773909, 928564, 668947, 815552, 298061, 578560]
+   >>> g.computeNetFlowsRanking()
+    [426464, 155874, 773909, 567308, 815552, 279729, 928564, 298061, 668947, 578560]
+   >>> from linearOrders import *
+   >>> ke = KemenyOrder(g,orderLimit=10)
+   >>> ke.kemenyRanking
+    [426464, 773909, 155874, 815552, 567308, 298061, 928564, 279729, 668947, 578560]
+
+.. note::
+
+   It is therefore *important* to always keep in mind that, based on pairwise outranking situations, there **does not exist** any **unique optimal ranking**; especially when we face such big data problems. Changing the number of quantiles, the component ranking rule, the optimised quantile ordering strategy, all this will indeed produce, sometimes even substantially, diverse global ranking results. 
+
+Back to :ref:`Content Table <Tutorial-label>`
+
+----------------
 
 
 .. _Moving-To-Graphs-label:
