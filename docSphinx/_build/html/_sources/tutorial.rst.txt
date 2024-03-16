@@ -64,6 +64,8 @@
        * :ref:`Ranking with multiple incommensurable criteria <Ranking-Tutorial-label>`
        * :ref:`Rating into relative performance quantiles <QuantilesRating-Tutorial-label>`
        * :ref:`Rating by ranking with learned performance quantile limits <LearnedRating-Tutorial-label>`
+       * :ref:`On computing fair intergroup pairings <Fair-InterGroup-Pairings-label>`
+       * :ref:`On computing fair intragroup pairings <Fair-IntraGroup-Pairings-label>`
    
    * :ref:`Evaluation and decision case studies <Case-Studies-label>`
    
@@ -84,9 +86,6 @@
        * :ref:`Computing the non isomorphic MISs of the 12-cycle graph <IsomorphicMIS-Tutorial-label>`
        * :ref:`About split, interval and permutation graphs <Permutation-Tutorial-label>`
        * :ref:`On tree graphs and graph forests <Trees-Tutorial-label>`
-
-       * :ref:`On computing fair intergroup pairings <Fair-InterGroup-Pairings-label>`
-       * :ref:`On computing fair intragroup pairings <Fair-IntraGroup-Pairings-label>`
 
    **Preface**
    
@@ -4456,6 +4455,1499 @@ More generally, in the case of industrial production monitoring problems, for in
 
 Back to :ref:`Content Table <Tutorial-label>`   
 
+---------------------
+
+.. _Fair-InterGroup-Pairings-label:
+
+On computing fair intergroup pairings
+-------------------------------------
+
+.. contents:: 
+	:depth: 1
+	:local:
+			  
+The fair intergroup pairing problem
+```````````````````````````````````
+
+.. epigraph::
+     | **Fairness**: *impartial and just treatment or behaviour without favouritism or discrimination*
+     | -- Oxford Languages
+
+A set of persons consists of two groups --group *A* and group *B*-- of equal size *k*. For a social happening, it is requested to build *k* pairs of persons from each group.
+
+In order to guide the matching decisions, each person of group *A* communicates her pairing preferences with a linear ranking of the persons in group *B* and each person of group *B* communicates her pairing preferences with a linear ranking of the persons in group *A*.
+
+The set of all potential matching decisions corresponds to the set of maximal matchings of the complete bipartite graph formed by the two groups *A* and *B*. Its cardinality is factorial *k*.
+
+How to choose now in this possibly huge set the one maximal matching that makes a fair balance of the given individual pairing preferences? To help make this decision we will compute for all maximal matchings a fitness score consisting of their average ordinal correlation index with the given marginal pairing preferences. Eventually we will choose a maximal matching that results in the highest possible fitness score.
+
+Let us consider for instance a set of four persons divided into group A, {*a1*, *a2*}, and group *B*, {*b1*, *b2*}. Person *a1* prefers as partner Person *b2*, and Person *a2* prefers as partner Person *b1*. Reciprocally, Person *b1* prefers Person *a2* over *a1* and Person *b2* finally prefers *a1* over *a2*. There exist only two possible maximal matchings,
+
+     (1) *a1* with *b1* and *a2* with *b2*, or
+     (2) *a1* with *b2* and *a2* with *b1*.
+	
+Making the best matching decision in this setting here is trivial. Choosing matching (1) will result in an ordinal correlation index of -1 for all four persons, whereas matching (2) is in total ordinal concordance with everybody's preferences and will result in an average ordinal correlation index of +1.0.
+
+Can we generalise this approach to larger groups and partially determined ordinal correlation scores?
+
+**Reciprocal linear voting profiles**
+
+Let us consider two groups of size *k* = 5. Individual pairing preferences of the persons in group *A* and group *B* may be randomly generated with *reciprocal* :py:class:`~votingProfiles.RandomLinearVotingProfile` instances called *lvA1* and *lvB1* (see below).
+
+.. code-block:: pycon
+   :linenos:
+   :emphasize-lines: 5-6,10-11
+
+   >>> from votingProfiles import RandomLinearVotingProfile
+   >>> k = 5
+   >>> lvA1 = RandomLinearVotingProfile(
+   ...         numberOfVoters=k,numberOfCandidates=k,
+   ...         votersIdPrefix='a',
+   ...         candidatesIdPrefix='b',seed=1)
+   >>> lvA1.save('lvA1')
+   >>> lvB1 = RandomLinearVotingProfile(
+   ...         numberOfVoters=k,numberOfCandidates=k,
+   ...         votersIdPrefix='b',
+   ...         candidatesIdPrefix='a',seed=2)
+   >>> lvB1.save('lvB1')
+
+We may inspect the resulting stored pairing preferences for each person in group *A* and each person in group *B* with the :py:meth:`~votingProfiles.~LinearVotingProfile.showLinearBallots` method [49]_.
+
+.. code-block:: pycon
+   :linenos:
+   :emphasize-lines: 6-8,15,17-19
+
+   >>> from votingProfiles import LinearVotingProfile
+   >>> lvA1 = LinearVotingProfile('lvA1')
+   >>> lvA1.showLinearBallots()
+    voters 	      marginal     
+   (weight)	 candidates rankings
+    a1(1):	 ['b3', 'b4', 'b5', 'b1', 'b2']
+    a2(1):	 ['b3', 'b5', 'b4', 'b2', 'b1']
+    a3(1):	 ['b4', 'b2', 'b1', 'b3', 'b5']
+    a4(1):	 ['b2', 'b4', 'b1', 'b5', 'b3']
+    a5(1):	 ['b4', 'b2', 'b3', 'b1', 'b5']
+   >>> lvB1 = LinearProfile('lvB1')
+   >>> lvB1.showLinearBallots()
+    voters 	      marginal     
+   (weight)	 candidates rankings
+    b1(1):	 ['a3', 'a2', 'a4', 'a5', 'a1']
+    b2(1):	 ['a5', 'a3', 'a1', 'a4', 'a2']
+    b3(1):	 ['a3', 'a4', 'a1', 'a5', 'a2']
+    b4(1):	 ['a3', 'a4', 'a1', 'a2', 'a5']
+    b5(1):	 ['a3', 'a4', 'a1', 'a2', 'a5']
+
+With these given individual pairing preferences, there does no more exist a quick trivial matching solution to our pairing problem. Persons *a1* and *a2* prefer indeed to be matched to the same Person *b3*. Worse, Persons *b1*, *b3*, *b4* and *b5* all four want also to be preferably matched to a same Person *a3*, but Person *a3* apparently prefers as partner only Person *b4*.
+
+How to find now a maximal matching that will fairly balance the individual pairing preferences of both groups? To solve this decision problem, we first must generate the potential decision actions, i.e. all potential maximal matchings between group *A* and group *B*.
+
+Generating the set of potential maximal matchings
+`````````````````````````````````````````````````
+
+The maximal matchings correspond in fact to the maximal independent sets of edges of the complete bipartite graph linking group *A* to group *B*. To compute this set we will use the :py:class:`~graphs.CompleteBipartiteGraph` class from the :py:mod:`graphs` module (see Lines 3-4 below).
+
+.. code-block:: pycon
+   :linenos:
+   :emphasize-lines: 3-4
+
+   >>> groupA = [p for p in lvA1.voters]
+   >>> groupB = [p for p in lvB1.voters]
+   >>> from graphs import CompleteBipartiteGraph
+   >>> bpg = CompleteBipartiteGraph(groupA,groupB)
+   >>> bpg
+    *------- Graph instance description ------*
+     Instance class   : Graph
+     Instance name    : bipartitegraph
+     Graph Order      : 10
+     Graph Size       : 25
+     Valuation domain : [-1.00; 1.00]
+     Attributes       : ['name', 'vertices',
+                         'verticesKeysA', 'verticesKeysB',
+			 'order', 'valuationDomain',
+			 'edges', 'size', 'gamma']
+
+Now, the maximal matchings of the bipartte graph *bpg* correspond to the MISs of its line graph *lbpg*. Therefore we use the :py:class:`~graphs.LineGraph` class from the :py:mod:`graphs` module.
+
+.. code-block:: pycon
+   :linenos:
+   :emphasize-lines: 15
+
+   >>> from graphs import LineGraph
+   >>> lbpg = LineGraph(bpg)
+   >>> lbpg
+    *------- Graph instance description ------*
+     Instance class   : LineGraph
+     Instance name    : line-bipartite_completeGraph_graph
+     Graph Order      : 25
+     Graph Size       : 100
+   >>> lbpg.computeMIS()
+   >>> lbpg.showMIS()
+    *---  Maximal Independent Sets ---*
+     number of solutions:  120
+     cardinality distribution
+     card.:  [0, 1, 2, 3, 4,  5,  6, 7, 8, 9, 10, ....]
+     freq.:  [0, 0, 0, 0, 0, 120, 0, 0, 0, 0,  0, ....]
+     stability number :  5
+     execution time: 0.01483 sec.
+     Results in self.misset
+
+The set of maximal matchings between persons of groups *A* and *B* has cardinality *factorial* 5! = 120 (see Line 15 above) and is stored in attribute *lbpg.misset*. We may for instance print the pairing corresponding to the first maximal matching.
+
+.. code-block:: pycon
+   :linenos:
+   :emphasize-lines: 5
+
+   >>> for m in lbpg.misset[0]:
+   ...     pair = list(m)
+   ...     pair.sort()
+   ...     print(pair)
+    ['a1', 'b4']
+    ['a2', 'b3']
+    ['a3', 'b5']
+    ['a4', 'b2']
+    ['a5', 'b1']
+
+Each maximal matching delivers thus for each person a partially determined ranking. For Person *a1*, for instance, this matching ranks *b4* before all the other persons from group *B* and for Person *b4*, for instance, this matching ranks *a1* before all other persons from group *A*.
+
+How to judge now the global pairing fitness of this matching?
+
+Measuring the fitness of a matching from a personal perspective
+```````````````````````````````````````````````````````````````
+
+Below we may reinspect the actual pairing preferences of each person.
+
+.. code-block:: pycon
+   :linenos:
+   :emphasize-lines: 4,15
+
+   >>> lvA1.showLinearBallots()
+     voters 	      marginal     
+    (weight)	 candidates rankings
+     a1(1):	 ['b3', 'b4', 'b5', 'b1', 'b2']
+     a2(1):	 ['b3', 'b5', 'b4', 'b2', 'b1']
+     a3(1):	 ['b4', 'b2', 'b1', 'b3', 'b5']
+     a4(1):	 ['b2', 'b4', 'b1', 'b5', 'b3']
+     a5(1):	 ['b4', 'b2', 'b3', 'b1', 'b5']
+   >>> lvB1.showLinearBallots()
+     voters 	      marginal     
+    (weight)	 candidates rankings
+     b1(1):	 ['a3', 'a2', 'a4', 'a5', 'a1']
+     b2(1):	 ['a5', 'a3', 'a1', 'a4', 'a2']
+     b3(1):	 ['a3', 'a4', 'a1', 'a5', 'a2']
+     b4(1):	 ['a3', 'a4', 'a1', 'a2', 'a5']
+     b5(1):	 ['a3', 'a4', 'a1', 'a2', 'a5']
+
+In the first matching shown in the previous Listing, Person *a1* is for instance matched with Person *b4*, which was her second choice. Whereas for Person *b4* the match with Person *a1* is only her third choice.
+
+For a given person, we may hence compute the ordinal correlation --the relative number of correctly ranked persons minus the relative number of incorrectly ranked persons-- between the partial ranking defined by the given matching and the individual pairing preferences, just ignoring the indeterminate comparisons.
+
+For Person *a1*, for instance, the matching ranks *b4* before all the other persons from group *B* whereas *a1*'s individual preferences rank *b4* second behind *b3*. We observe hence 3 correctly ranked persons --*b5*, *b1* and *b2*-- minus 1 incorrectly ranked person --*b3*-- out of four determined comparisons. The resulting ordinal correlation index amounts to (3-1)/4 = +0.5. 
+
+For Person *b4*, similarly, we count 2 correctly ranked persons --*a2* and *a5*-- and 2 incorrectly ranked persons --*a3* and *a4*-- out of the four determined comparisons. The resulting ordinal correlation amounts hence to (2-2)/4 = 0.0
+
+For a given maximal matching we obtain thus 10 ordinal correlation indexes, one for each person in both groups. And, we may now score the global fitness of a given matching by computing the average over all the individual ordinal correlation indexes observed in group *A* and group *B*.
+
+
+Computing the fairest intergroup pairing
+````````````````````````````````````````
+The :py:mod:`pairings` module provides the :py:class:`~pairings.FairestInterGroupPairing` class for solving, following this way, a given pairing problem of tiny order 5 (see below).
+
+.. code-block:: pycon
+   :linenos:
+   :emphasize-lines: 2,8-11
+
+   >>> from pairings import FairestInterGroupPairing
+   >>> fp = FairestInterGroupPairing(lvA1,lvB1)
+   >>> fp
+    *------- FairPairing instance description ------*
+     Instance class      : FairestInterGroupPairing
+     Instance name       : pairingProblem
+     Groups A and B size : 5
+     Attributes          : ['name', 'order', 'vpA', 'vpB',
+                            'pairings', 'matching',
+		       	    'vertices', 'valuationDomain',
+			    'edges', 'gamma', 'runTimes']
+
+The class takes as input two reciprocal :py:class:`~votingProfiles.VotingProfile` objects describing the individual pairing preferences of the two groups *A* and *B*  of persons. The class constructor delivers the attributes shown above. *vpA* and *vpB* contain the pairing preferences. The *pairings* attribute gathers all maximal matchings --the potential decision actions-- ordered by decreasing average ordinal correlation with the individual pairing preferences, whereas the *matching* attribute delivers directly the first-ranked maximal matching --*pairings[0][0]*-- and may be consulted as shown in the Listing below. The resulting *fp* object models in fact a :py:class:`~graphs.BipartiteGraph` object where the *vertices* correspond to the set of persons in both groups and the bipartite *edges* model the fairest maximal matching. The :py:meth:`~pairings.FairestInterGroupPairing.showFairestPairing` method prints out the fairest matching.
+
+.. code-block:: pycon
+   :linenos:
+   :emphasize-lines: 11-12,14-15,20-21,23
+
+   >>> fp.showFairestPairing(rank=1,
+   ...   WithIndividualCorrelations=True)
+    *------------------------------*
+    Fairest pairing
+     ['a1', 'b3']
+     ['a2', 'b5']
+     ['a3', 'b1']
+     ['a4', 'b4']
+     ['a5', 'b2']
+    groupA correlations:
+     'a1': +1.000
+     'a2': +0.500
+     'a3':  0.000
+     'a4': +0.500
+     'a5': +0.500
+    group A average correlations (a) : 0.500
+    group A standard deviation       : 0.354
+    ----
+    groupB Correlations:
+     'b1': +1.000
+     'b2': +1.000
+     'b3':  0.000
+     'b4': +0.500
+     'b5': -0.500
+    group B average correlations (b) : 0.400
+    group B standard deviation       : 0.652
+    ---- 
+    Average correlation    : 0.450
+    Standard Deviation     : 0.497
+    Unfairness |(a) - (b)| : 0.100
+
+Three persons --*a1*, *b1* and *b2*-- get as partner their first choice (+1.0). Four persons --*a2*, *a4*, *a5* and *b4*-- get their second choice (+0.5). Two persons --*a3* and *b3*-- get their third choice (0.0). Person *b5* gets only her fourth choice. Both group get very similar average ordinal correlation results -- +0.500 versus +0.400-- resulting in a low unfairness score (see last Line above)
+
+In this problem we may observe a 2nd-ranked pairing, of same average correlation score +0.450, but with both a larger standard deviation (0.55 versus 0.45) and a larger unfairness score (0.300 versus 0.100). 
+
+.. code-block:: pycon
+   :linenos:
+   :emphasize-lines: 11,13,16,21,23,25,28
+
+   >>> fp.showFairestPairing(rank=2,
+   ...      WithIndividualCorrelations=True)
+    *------------------------------*
+    2nd-ranked pairing
+    ['a1', 'b3']
+    ['a2', 'b5']
+    ['a3', 'b4']
+    ['a4', 'b1']
+    ['a5', 'b2']
+    group A correlations:
+     'a1': +1.000
+     'a2': +0.500
+     'a3': +1.000
+     'a4': +0.000
+     'a5': +0.500
+    group A average correlations (a) : 0.600
+    group A standard deviation       : 0.418
+    ----
+    group B correlations:
+     'b1': +0.000
+     'b2': +1.000
+     'b3': +0.000
+     'b4': +1.000
+     'b5': -0.500
+    group B average correlations (b) : 0.300
+    group B standard deviation       : 0.671
+    ---
+    Average correlation    : 0.450
+    Standard Deviation     : 0.550
+    Unfairness |(a) - (b)| : 0.300
+
+In this second-fairest pairing solution, four persons --*a1*, *a3*, *b2* and *b4*-- get their first choice. Only two persons --*a2* and *a5*-- get their second choice, but three persons --*a4*, *b1* and *b3*-- now only get their third choice. Person *b5* gets unchanged her fourth choice. Despite a same average correlation (+0.45), the distribution of the individual correlations appears less balanced than in the previous solution, as confirmed by the higher standard deviation. In the latter pairing, group *A* shows indeed an average correlation of +3.000/5 = +0.600, whereas group *B* obtains only an average correlation of 1.500/5 = +0.300.
+
+In the previous pairing, group *A* gets a lesser average correlation of +0.500. And, group *B* obtains here a higher average correlation of 2.000/5 = +0.400. Which makes the first-ranked pairing with same average ordinal correlation yet lower standard deviation, an effectively fairer matching decision. 
+
+One may visualise a pairing result with the :py:meth:`~pairings.~InterGroupPairing.exportPairingGraphViz` method (see :numref:`fairPairing` below).
+
+>>> fp.exportPairingGraphViz(fileName='fairPairing',
+...                          matching=fp.matching)
+ dot -Tpng fairPairing.dot -o fairPairing.png
+
+.. Figure:: fairPairing.png
+   :alt: Fairest first-ranked matching
+   :name: fairPairing
+   :width: 250 px
+   :align: center
+
+   Fairest intergroup pairing decision
+
+A matching corresponds in fact to a certain permutation of the positional indexes of the persons in group *B*. We may compute this permutation and construct the corresponding permutation graph.
+
+.. code-block:: pycon
+   :linenos:
+   :emphasize-lines: 9
+
+   >>> permutation = fp.computePermutation(fp.matching)
+   >>> from graphs import PermutationGraph
+   >>> pg = PermutationGraph(permutation)
+   >>> pg
+    *------- Graph instance description ------*
+     Instance class   : PermutationGraph
+     Instance name    : matching-permutation
+     Graph Order      : 5
+     Permutation      : [3, 5, 1, 4, 2]
+     Graph Size       : 6
+     Valuation domain : [-1.00; 1.00]
+     Attributes       : ['name', 'vertices', 'order',
+                         'permutation', 'valuationDomain',
+                         'edges', 'size', 'gamma']
+   >>> pg.exportPermutationGraphViz(fileName='fairPairingPermutation')
+   *---- exporting a dot file for GraphViz tools ---------*
+   Exporting to farPairingPermutation.dot
+   neato -n -Tpng fairPairingPermutation.dot -o fairPairingPermutation.png
+
+.. Figure:: fairPairingPermutation.png
+   :alt: Fairest first-ranked matching's permutation
+   :name: fairPairingPermutation
+   :width: 250 px
+   :align: center
+
+   Fairest pairing's coloured matching diagram
+
+In :numref:`fairPairingPermutation` is shown the coloured matching diagram of the index permutation [3, 5, 1, 4, 2] modelled by the fairest pairing decision.
+
+Mind that our :py:class:`~pairings.FairestInterGroupPairing` class does not provide an efficient algorithm for computing fair pairings; far from it. Our class constructor's complexity is in :math:`O(k!)`, which makes the class totally unfit for solving any real pairing problem even of small size. The class has solely the didactic purpose of giving a first insight into this important and practically relevant decision problem. For efficiently solving this kind of pairing decision problems it is usual professional practice to concentrate the set of potential pairing decisions on *stable* matchings [45]_ .
+
+Fair versus stable pairings
+```````````````````````````
+In classical economics, where the homo economicus is supposed to ignore any idea of fairness and behave solely in exact accordance with his rational self-interest, a pairing is only considered suitable when there appear no matching *instabilities*. A matching is indeed called *stable* when there does not exist in the matching a couple of pairs such that it may be interesting for both a paired person from group *A* and a paired person from group *B* to abandon their given partners and form together a new pair. Let us consider for instance the following situation,
+
+    | Person *a3* is paired with Person *b1*.
+    | Person *b4* is paired with Person *a4*.
+    | Person *a3* would rather be with Person *b4*
+    | Person *b4* would rather be with Person *a3*
+
+Computing such a *stable* matching may be done with the famous *Gale-Shapley*  algorithm ([43]_, [45]_), available via the :py:class:`~pairings.FairestGaleShapleyMatching` class (see below Line 1).
+
+.. code-block:: pycon
+   :linenos:
+
+   >>> from pairings import FairestGaleShapleyMatching
+   >>> fgs = FairestGaleShapleyMatching(lvA1,lvB1)
+   >>> fgs.showPairing(fgs.matching)
+    *-----------*
+       Pairing
+     ['a1', 'b3']
+     ['a2', 'b5']
+     ['a3', 'b4']
+     ['a4', 'b1']
+     ['a5', 'b2']
+
+We have already seen this *Gale-Shapley* pairing solution. It is in fact the 2nd-ranked fairest pairing, discussed in the previous section. Now, is the fact of being *stable* any essential characteristic of a fair pairing solution?
+
+In a Monte Carlo simulation of solving 1000 random pairing problems of order 5, we obtain the following distribution of the actual fairness ranking indexes of the fairest stable matching. 
+
+.. Figure:: distStableFairness.png
+   :alt: Distribution of the ranks of the fairest stable matching
+   :name: distStableFairness
+   :width: 500 px
+   :align: center
+
+   Distribution of the fairness rank of the fairest stable matching
+
+In :numref:`distStableFairness` we may notice that only in a bit more than 50% of the cases, the overall fairest matching --of index 0 in the *fp.pairings* list-- is indeed stable.
+
+And the overall fairest matching in our example above is, for instance, *not* a stable matching (see Lines 2-3 below).
+
+.. code-block:: pycon
+   :linenos:
+   :emphasize-lines: 8-10
+
+   >>> fp.isStableMatching(fp.matching,Comments=True)
+    *------------------------------*
+    ['a1', 'b3']
+    ['a2', 'b5']
+    ['a3', 'b1']
+    ['a4', 'b4']
+    ['a5', 'b2']
+      is unstable!
+    a3 b4 <-- b1: rank improvement 0 --> 2
+    b4 a3 <-- a4: rank improvement 0 --> 1
+
+If we resolve its unstable pairs --[*a3*, *b1*] --> [*a3*, *b4*] , and [*a4*, *b4*] --> [*a4*, *b1*]-- we recover the previous *Gale-Shapley* solution, i.e the 2nd-fairest pairing solution (see above).
+
+**Unfairness of the Gale-Shapley solution**
+
+The *Gale-Shapley* algorithm is actually based on an asymmetric handling of the two groups of persons by distinguishing a matches proposing group. In our implementation here [44]_, it is group *A*. Now, the proposing group gets by the *Gale-Shapley* algorithm the best possible average group correlation, but of costs of the non-proposing group who gets the worst possible average group correlation in any stable matching [45]_. We may check as follows this unfair result on the previous *Gale-Shapley* solution.
+
+.. code-block:: pycon
+   :linenos:
+   :emphasize-lines: 10-13,15
+
+   >>> fgs.showMatchingFairness(fgs.matching,
+   ...        WithIndividualCorrelations=True)
+    *------------------------------*
+    ['a1', 'b3']
+    ['a2', 'b5']
+    ['a3', 'b4']
+    ['a4', 'b1']
+    ['a5', 'b2']
+    -----
+    group A correlations:
+     'a1': +1.000
+     'a2': +0.500
+     'a3': +1.000
+     'a4': +0.000
+     'a5': +0.500
+    group A average correlations (a) : 0.600
+    group A standard deviation       : 0.418
+    -----
+    group B correlations:
+     'b1': +0.000
+     'b2': +1.000
+     'b3': +0.000
+     'b4': +1.000
+     'b5': -0.500
+    group B average correlations (b) : 0.300
+    group B standard deviation       : 0.671
+    -----
+    Average correlation    : 0.450
+    Standard Deviation     : 0.550
+    Unfairness |(a) - (b)| : 0.300
+
+Four persons out of five from group *A* are matched to their first or second choices. When reversing the order of the given linear voting profiles *lvA1* and *lvB1*, we obtain a second *Gale-Shapley* solution *gs2* favouring this time the persons in group *B*.
+
+.. code-block:: pycon
+   :linenos:
+   :emphasize-lines: 21-25,29-31
+
+   >>> gs2 = fgs.computeGaleShapleyMatching(Reverse=True)
+   >>> fgs.showMatchingFairness(gs2,
+   ...     WithIndividualCorrelations=True)
+    *------------------------------*
+    ['a1', 'b3']
+    ['a2', 'b1']
+    ['a3', 'b4']
+    ['a4', 'b5']
+    ['a5', 'b2']
+    -----
+    group A correlations:
+     'a1': +1.000
+     'a2': -1.000
+     'a3': +1.000
+     'a4': -0.500
+     'a5': +0.500
+    group A average correlations (a) : 0.200
+    group A standard deviation       : 0.908
+    -----
+    group B correlations:
+     'b1': +0.500
+     'b2': +1.000
+     'b3': +0.000
+     'b4': +1.000
+     'b5': +0.500
+    group B average correlations (b) : 0.600
+    group B standard deviation       : 0.418
+    -----
+    Average correlation    : 0.400
+    Standard Deviation     : 0.699
+    Unfairness |(a) - (b)| : 0.400
+
+In this reversed *Gale-Shapley* pairing solution, it is indeed the group *B* that appears now better served. Yet, it is necessary to notice now, besides the even more unbalanced group average correlations, the lower global average correlation (+0.400 compared to +0.450) coupled with both an even higher standard deviation (0.699 compared to 0.550) and a higher unfairness score (0.400 versus 0.300).
+
+It may however also happen that both *Gale-Shapley* matchings, as well as the overall fairest one, are a same unique fairest pairing solution. This is for instance the case when considering the following example of reciprocal *lvA2* and *lvB2* profiles [49]_ .
+
+.. code-block:: pycon
+   :linenos:
+   :emphasize-lines: 5,7-8,15,17-18,21,24,26-27,36-37
+
+   >>> lvA2 = LinearVotingProfiles('lvA2')		     
+   >>> lvA2.showLinearBallots()
+    voters 	      marginal     
+    (weight)	 candidates rankings
+    a1(1):	 ['b1', 'b5', 'b2', 'b4', 'b3']
+    a2(1):	 ['b4', 'b3', 'b5', 'b2', 'b1']
+    a3(1):	 ['b3', 'b5', 'b1', 'b2', 'b4']
+    a4(1):	 ['b4', 'b2', 'b5', 'b3', 'b1']
+    a5(1):	 ['b5', 'b2', 'b3', 'b4', 'b1']
+    # voters:  5
+   >>> lvB2 = LinearVotingProfile('lvB2')
+   >>> lvB2.showLinearBallots()
+    voters 	      marginal     
+    (weight)	 candidates rankings
+    b1(1):	 ['a1', 'a2', 'a5', 'a3', 'a4']
+    b2(1):	 ['a2', 'a5', 'a3', 'a4', 'a1']
+    b3(1):	 ['a3', 'a4', 'a1', 'a5', 'a2']
+    b4(1):	 ['a4', 'a1', 'a2', 'a3', 'a5']
+    b5(1):	 ['a2', 'a1', 'a5', 'a3', 'a4']
+    # voters:  5
+   >>> fp = FairestInterGroupPairing(lvA2,lvB2,StableMatchings=True)
+   >>> fp.showMatchingFairness()
+    *------------------------------*
+    ['a1', 'b1']
+    ['a2', 'b5']
+    ['a3', 'b3']
+    ['a4', 'b4']
+    ['a5', 'b2']
+    group A average correlations (a) : 0.700
+    group A standard deviation       : 0.447
+    group B average correlations (b) : 0.900
+    group B standard deviation       : 0.224
+    Average correlation    : 0.800
+    Standard Deviation     : 0.350
+    Unfairness |(a) - (b)| : 0.200
+   >>> print('Index of stable matchings:'. fp.stableIndex)
+    Index of stable matchings: [0]
+
+In this case, the individual pairing preferences lead easily to the overall fairest pairing (see above). Indeed, three couples out of 5, namely [*a1*, *b1*], [*a3*, *b3*] and [*a4*, *b4*], do share their mutual first choices. For the remaining couples -- [*a2*, *b5*] and [*a5*, *b2*]-- the fairest matching gives them their third and first, respectively their first and second choice. Furthermore, their exists only one stable matching and it is actually the overall fairest one. When setting the *StableMatchings* flag of the :py:class:`~pairings.FairestInterGroupPairing` class to *True*, we get the *stableIndex* list with the actual index numbers of all stable maximal matchings (see Lines 19 and 34-35).
+
+But the contrary may also happen. Below we show individual pairing preferences --stored in files *lvA3.py* and *lvB3.py*-- for which the *Gale-Shapley* algorithm is not delivering a satisfactory pairing solution [49]_.
+
+.. code-block:: pycon
+   :linenos:
+   :emphasize-lines: 7,10,19,22
+
+   >>> from votingProfiles import LinearVotingProfile
+   >>> lvA3 = LinearVotingProfile('lvA3')
+   >>> lvA3.showLinearBallots()
+    voters 	      marginal     
+    (weight)	 candidates rankings
+     a1(1):  ['b5', 'b6', 'b4', 'b3', 'b1', 'b2']
+     a2(1):  ['b6', 'b1', 'b4', 'b5', 'b3', 'b2']
+     a3(1):  ['b6', 'b3', 'b4', 'b1', 'b5', 'b2']
+     a4(1):  ['b3', 'b4', 'b2', 'b6', 'b5', 'b1']
+     a5(1):  ['b3', 'b4', 'b5', 'b1', 'b6', 'b2']
+     a6(1):  ['b3', 'b5', 'b1', 'b6', 'b4', 'b2']
+      # voters:  6
+   >>> lvB3 = LinearVotingProfile('lvB3')
+   >>> lvB3.showLinearBallots()
+    voters 	      marginal     
+    (weight)	 candidates rankings
+     b1(1):  ['a3', 'a4', 'a6', 'a1', 'a5', 'a2']
+     b2(1):  ['a6', 'a4', 'a1', 'a3', 'a5', 'a2']
+     b3(1):  ['a3', 'a2', 'a4', 'a1', 'a6', 'a5']
+     b4(1):  ['a4', 'a2', 'a5', 'a6', 'a1', 'a3']
+     b5(1):  ['a4', 'a2', 'a3', 'a6', 'a1', 'a5']
+     b6(1):  ['a4', 'a3', 'a1', 'a5', 'a6', 'a2']
+      # voters:  6
+
+The individual pairing preferences are very contradictory. For instance, Person's *a2* first choice is *b6* whereas Person *b6* dislikes Person *a2* most. Similar situation is given with Persons *a5* and *b3*.
+
+In this pairing problem there does exist only one matching which is actually stable and it is a very unfair pairing. Its fairness index is 140 (see Line 3-4 below).
+
+.. code-block:: pycon
+   :linenos:
+   :emphasize-lines: 3-4,19-21,27-32
+		   
+   >>> fp = FairestInterGroupPairing(lvA3,lvB3,
+   ...                  StableMatchings=True)
+   >>> fp.stableIndex
+    [140]
+   >>> g1 = fp.computeGaleShapleyMatching()
+   >>> fp.showMatchingFairness(g1,
+   ...              WithIndividualCorrelations=True)
+   *------------------------------*
+    ['a1', 'b1']
+    ['a2', 'b4']
+    ['a3', 'b6']
+    ['a4', 'b3']
+    ['a5', 'b2']
+    ['a6', 'b5']
+   ------ 
+   group A correlations:
+    'a1': -0.600
+    'a2': +0.200
+    'a3': +1.000
+    'a4': +1.000
+    'a5': -1.000
+    'a6': +0.600
+   group A average correlation (a) : 0.200
+   group A standard deviation      : 0.839
+   -----
+   group B correlations:
+    'b1': -0.200
+    'b2': -0.600
+    'b3': +0.200
+    'b4': +0.600
+    'b5': -0.200
+    'b6': +0.600
+   group B average correlation (b) : 0.067
+   group B standard deviation      : 0.484
+   -----
+   Average correlation    : 0.133
+   Standard Deviation     : 0.657
+   Unfairness |(a) - (b)| : 0.133
+
+Indeed, both group correlations are very weak and show furthermore high standard deviations. Five out of the twelve persons obtain a negative correlation with their respective pairing preferences. Only two persons from group *A* --*a3* and *a4*-- get their first choice, whereas Person *a5* is matched with her least preferred partner (see Lines 19-21). In group *B*, no apparent attention is put on choosing interesting partners (see Lines 27-32). 
+
+The fairest matching looks definitely more convincing.
+
+.. code-block:: pycon
+   :linenos:
+   :emphasize-lines: 13,18,28
+
+   >>> fp.showMatchingFairness(fp.matching,
+   ...     WithIndividualCorrelations=True)
+   *------------------------------*
+    ['a1', 'b6']
+    ['a2', 'b5']
+    ['a3', 'b3']
+    ['a4', 'b2']
+    ['a5', 'b4']
+    ['a6', 'b1']
+    -----
+    group A correlations:
+     'a1': +0.600
+     'a2': -0.200
+     'a3': +0.600
+     'a4': +0.200
+     'a5': +0.600
+     'a6': +0.200
+    group A average correlation (a) : 0.333
+    group A standard deviation      : 0.327
+    ----- 
+    group B correlations:
+     'b1': +0.200
+     'b2': +0.600
+     'b3': +1.000
+     'b4': +0.200
+     'b5': +0.600
+     'b6': +0.200
+    group B average correlation (b) : 0.467
+    group B standard deviation      : 0.327
+    -----
+    Average correlation    : 0.400
+    Standard Deviation     : 0.319
+    Unfairness |(a) - (b)| : 0.133
+
+Despite the very contradictory individual pairing preferences and a same unfairness score, only one person, namely *a2*, obtains here a choice in negative correlation with her preferences (see Line 13). The group correlations and standard deviations are furthermore very similar (lines 18 and 28).  
+
+The fairest solution is however far from being stable. With three couples of pairs that are potentially unstable, the first and stable unique *Gale-Shapley* matching is with its fairness index 140 indeed far behind many fairer pairing solutions (see below).
+
+.. code-block:: pycon
+   :linenos:
+
+   >>> fp.isStableMatching(fp.matching,Comments=True)
+    Unstable match:  Pair(groupA='a4', groupB='b2')
+                     Pair(groupA='a5', groupB='b4')
+      a4 b2 <-- b4
+      b4 a5 <-- a4
+    Unstable match:  Pair(groupA='a2', groupB='b5')
+                     Pair(groupA='a5', groupB='b4')
+      a2 b5 <-- b4
+      b4 a5 <-- a2
+    Unstable match:  Pair(groupA='a3', groupB='b3')
+                     Pair(groupA='a1', groupB='b6')
+      a3 b3 <-- b6
+      b6 a1 <-- a3
+
+How likely is it to obtain such an unfair *Gale-Shapley* matching? With our Monte Carlo simulation of 1000 random pairing problems of order 5, we may empirically check the likely fairness index of the fairest of both *Gale-Shapley* solutions.  
+
+.. Figure:: distGSFairness.png
+   :alt: Distribution of the index of the fairest *Gale-Shapley* matching
+   :name: distGSFairness
+   :width: 500 px
+   :align: center
+
+   Distribution of the fairness index of the fairest *Gale-Shapley* matching
+
+In :numref:`distGSFairness`, we see that the fairest of both *Gale-Shapley* solutions will correspond to the overall fairest pairing (index = 0) in about *36%* out of the 1000 random cases. Yet, it is indeed the complexity in :math:`O(k^2)` of the *Gale-Shapley* algorithm that makes it an interesting alternative to our brute force approach in complexity :math:`O(k!)`.
+
+It is worthwhile noticing furthermore that the number of stable matchings is in general  very small compared to the size of the huge set of potential maximal matchings as shown in :numref:`stableFreq`.
+
+.. Figure:: stableFreq.png
+   :alt: Frequency of stable matchings
+   :name: stableFreq
+   :width: 500 px
+   :align: center
+
+   Distribution of the number of stable matchings
+
+In the simulation of 1000 random pairing problems of order 5, we observe indeed never more than seven stable matchings and the expected number of stable matchings is between one and two out of 120. It could therefore be opportune to limit our potential set of maximal matchings --the decisions actions-- to solely stable matchings, as is currently the usual professional solving approach in pairing problems of this kind. Even if we would very likely miss the overall fairest pairing solution.
+
+**Dropping the stability requirement**
+
+Dropping however the *stability* requirement opens a second way of reducing the actual complexity of the fair pairing problem. This way  goes by trying to enhance the fairness of a *Gale-Shapley* matching via a *hill-climbing* heuristic where we swap partners in couples of pairs that mostly increase the average ordinal correlation and decrease the gap between the groups' correlations.
+
+With this strategy we may hence expect to likely reach one of the fairest possible matching solutions. In a Monte Carlo simulation of 1000 random pairing problems of order 6 we may indeed notice in :numref:`enhancedFreq` that we reach in a very limited number  of swaps --less than :math:`2 \times k`-- a fairness index less than [3] in nearly 95% of the cases. The weakest fairness index found is 16. 
+
+.. Figure:: enhancedFreq.png
+   :alt: Distribution of the fairness index of enhanced Gale-Shapley solutions
+   :name: enhancedFreq
+   :width: 500 px
+   :align: center
+
+   Distribution of the fairness index of enhanced Gale-Shapley solutions
+
+In the following example of a pairing problem of order 6, we observe only one unique stable matching with fairness index [12], in fact a very unfair *Gale-Shapley* matching completely ignoring the individual pairing preferences of the persons in group *B* (see Line 15 below). 
+
+.. code-block:: pycon
+   :linenos:
+   :emphasize-lines: 15
+
+   >>> gs = FairestGaleShapleyMatching(lvA,lvB,
+   ...                  Comments=True)
+    Fairest Gale-Shapley matching
+    -----------------------------
+     ['a1', 'b3']
+     ['a2', 'b5']
+     ['a3', 'b4']
+     ['a4', 'b1']
+     ['a5', 'b6']
+     ['a6', 'b2']
+     -----
+     group A average correlation (a) : 0.867
+     group A standard deviation      : 0.327
+     -----
+     group B average correlation (b) : 0.000
+     group B standard deviation      : 0.704
+     -----
+     Average correlation    : 0.433
+     Standard Deviation     : 0.692
+     Unfairness |(a) - (b)| : 0.867
+
+Taking this *Gale-Shapley* solution --*gs.matching*--  as initial starting point, we try to swapp partners in couple of pairs in order to improve the average ordinal correlation with all the individual pairing preferences and to reduce the gap between both groups. The :py:mod:`pairings` module provides the :py:class:`~pairings.FairnessEnhancedInterGroupMatching` class for this purpose.
+
+.. code-block:: pycon
+   :linenos:
+   :emphasize-lines: 17,20,25
+
+   >>> from pairings import \
+   ...       FairnessEnhancedInterGroupMatching
+   >>> egs = FairnessEnhancedInterGroupMatching(
+   ...          lvA,lvB,initialMatching=gs.matching)
+   >>> egs.iterations
+    4
+   >>> egs.showMatchingFairness(egs.matching)
+    Fairness enhanced matching
+    --------------------------
+     ['a1', 'b3']
+     ['a2', 'b2']
+     ['a3', 'b4']
+     ['a4', 'b6']
+     ['a5', 'b5']
+     ['a6', 'b1']
+     -----
+     group A average correlation (a) : 0.533
+     group A standard deviation      : 0.468
+     -----
+     group B average correlation (b) : 0.533
+     group B standard deviation      : 0.641
+     -----
+     Average correlation    : 0.533
+     Standard Deviation     : 0.535
+     Unfairness |(a) - (b)| : 0.000
+   >>> fp = FairestInterGroupPairing(lvA,lvB)
+   >>> fp.computeMatchingFairnessIndex(egs.matching)
+    0
+
+With a slightly enhanced overall correlation (+0.533 versus +0.433), both groups obtain after four swapping iterations the same group correlation of +0.533 (Unfairness score = 0.0, see Lines 17, 20 and 25 above). And, furthermore, the fairness enhancing procedure attains the fairest possible pairing solution (see last Line).
+
+Our *hill-climbing* fairness enhancing algorithm seams hence to be quite efficient. Considering that its complexity is about :math:`O(k^3)`, we are effectively able to solve pairing problems of realistic orders.
+
+Do we really need to start the fairness enhancing strategy from a previously computed *Gale-Shapley* solution? No, we may start from any initial matching. This opens the way for taking into account more realistic versions of the individual pairing preferences than complete reciprocal linear voting profiles.   
+
+Relaxing the requirement for complete linear voting profiles
+````````````````````````````````````````````````````````````
+
+**Partial individual pairing preferences**
+
+In the classical approach to the pairing decision problem, it is indeed required that each person communicates a complete linearly ordered list of the potential partners. It seams more adequate to ask for only partially ordered lists of potential partners. With the *PartialLinearBallots* flag and the *lengthProbability* parameter the :py:class:`~pairings.RandomLinearVotingProfile` class provides a random generator for such a kind of individual pairing preferences (see Lines 5-6 below).
+
+.. code-block:: pycon
+   :linenos:
+   :emphasize-lines: 5-6,13-14
+
+   >>> from votingProfiles import RandomLinearVotingProfile
+   >>> vpA = RandomLinearVotingProfile(
+   ...            numberOfVoters=7,numberOfCandidates=7,
+   ...            votersIdPrefix='a',candidatesIdPrefix='b',
+   ...            PartialLinearBallots=True,
+   ...            lengthProbability=0.5,
+   ...            seed=1)
+   >>> vpA.showLinearBallots()
+     voters 	      marginal     
+    (weight)	 candidates rankings
+     a1(1):	 ['b4', 'b7', 'b6', 'b3', 'b1']
+     a2(1):	 ['b7', 'b5', 'b2', 'b6']
+     a3(1):	 ['b1']
+     a4(1):	 ['b2', 'b3', 'b5']
+     a5(1):	 ['b2', 'b1', 'b4']
+     a6(1):	 ['b6', 'b7', 'b2', 'b3']
+     a7(1):	 ['b7', 'b6', 'b1', 'b3', 'b5']
+    # voters:  7
+
+With length probability of 0.5, we obtain here for the seven persons in group *A* the partial lists shown above. Person *a3*, for instance, only likes to be paired with Person *b1*, whereas Person *a4* indicates three preferred partners in decreasing order of preference (see Lines 13-14 above).
+
+We may generate similar reciprocal partial linear voting profiles for the seven persons in group *B*.
+
+.. code-block:: pycon
+   :linenos:
+   :emphasize-lines: 5-6,11-12
+
+   >>> vpB = RandomLinearVotingProfile(
+   ...          numberOfVoters=7,numberOfCandidates=7,
+   ...          votersIdPrefix='b',
+   ...          candidatesIdPrefix='a',
+   ...          PartialLinearBallots=True,
+   ...          lengthProbability=0.5,    
+   ...          seed=2)
+   >>> vpB.showLinearBallots()
+     voters 	      marginal     
+    (weight)	 candidates rankings
+     b1(1):	 ['a3', 'a4']
+     b2(1):	 ['a3', 'a4']
+     b3(1):	 ['a2', 'a6', 'a3', 'a1']
+     b4(1):	 ['a2', 'a6', 'a4']
+     b5(1):	 ['a2', 'a1', 'a5']
+     b6(1):	 ['a2', 'a7']
+     b7(1):	 ['a7', 'a2', 'a1', 'a4']
+    # voters:  7
+
+This time, Persons *b1* and *b2* indicate only two preferred pairing partners, namely both times Person *a3* before Person *a4* (see Lines 11-12 above).
+
+Yet, it may be even more effective to only ask for reciprocal **approvals** and **disapprovals** of potential pairing partners.
+
+**Reciprocal bipolar approval voting profiles**
+
+Such random *bipolar approval* voting profiles may be generated with the :py:class:`~votingProfiles.RandomBipolarApprovalVotingProfile` class (see below).
+
+.. code-block:: pycon
+   :linenos:
+   :emphasize-lines: 9-10,17-18
+
+   >>> from votingProfiles import \
+   ...       RandomBipolarApprovalVotingProfile
+   >>> k = 5
+   >>> apA1 = RandomBipolarApprovalVotingProfile(
+   ...              numberOfVoters=k,
+   ...              numberOfCandidates=k,
+   ...              votersIdPrefix='a',
+   ...              candidatesIdPrefix='b',
+   ...              approvalProbability=0.5,
+   ...              disapprovalProbability=0.5,
+   ...              seed=None)
+   >>> apA1.save('apA1')
+   >>> apA1.showBipolarApprovals()
+    Bipolar approval ballots
+    ------------------------
+    a1 :
+    Approvals   : ['b1', 'b5']
+    Disapprovals: ['b2']
+    a2 :
+    Approvals   : ['b2']
+    Disapprovals: ['b1', 'b3', 'b4']
+    a3 :
+    Approvals   : []
+    Disapprovals: ['b3', 'b5']
+    a4 :
+    Approvals   : ['b1', 'b5']
+    Disapprovals: ['b2', 'b3', 'b4']
+    a5 :
+    Approvals   : ['b2', 'b3']
+    Disapprovals: ['b1', 'b5']
+    Bipolar approval ballots
+
+The *approvalProbability* and *disapprovalProbability* parameters determine the expected number of approved, respectively disapproved, potential pairing partners (see Lines 9-10). Person *a1*, for instance, approves two persons --*b1* and *b5*-- and disapproves only Person *b2* (see Lines 17-18). Whereas Person *a3* does not approve anybody from group *B*, yet, disapproves *b3* and *b5*.
+
+We may generate a similar random reciprocal bipolar approval voting profile for the persons in group *B*.  
+   
+.. code-block:: pycon
+   :linenos:
+   :emphasize-lines: 4-7,14-15
+
+   >>> apB1 = RandomBipolarApprovalVotingProfile(
+   ...           numberOfVoters=k,
+   ...           numberOfCandidates=k,
+   ...           votersIdPrefix='b',
+   ...           candidatesIdPrefix='a',
+   ...           approvalProbability=0.5,
+   ...           disapprovalProbability=0.5,
+   ...           seed=None)
+   >>> apB1.save('apB1')
+   >>> apB1.showBipolarApprovals()
+    Bipolar approval ballots
+    ------------------------
+    b1 :
+    Approvals   : ['a2', 'a3']
+    Disapprovals: ['a1', 'a4', 'a5']
+    b2 :
+    Approvals   : ['a1', 'a2']
+    Disapprovals: ['a4']
+    b3 :
+    Approvals   : ['a5']
+    Disapprovals: ['a2', 'a3']
+    b4 :
+    Approvals   : ['a2']
+    Disapprovals: ['a3', 'a5']
+    b5 :
+    Approvals   : ['a4']
+    Disapprovals: ['a1']
+
+This time, Person *b1* approves two persons --*a2* and *a3*-- and disapproves three persons --*a1*, *a4*, and *a5*-- (see Lines 14-15 above).
+
+Using Copeland scores for guiding the fairness enhancement
+``````````````````````````````````````````````````````````
+
+The partial linear voting profiles as well as the bipolar approval profiles determine for each person in both groups only a partial order on their potential pairing partners. In order to enhance the fairness of any given maximal matching, we must therefore replace the rank information of the complete linear voting profiles, as used in the *Gale-Shapley* algorithm, with the *Copeland* ranking scores obtained from the partial pairwise comparisons of potential partners. For this purpose we reuse again the :py:class:`~pairings.FairnessEnhancedInterGroupMatching` class , but without providing any initial matching (see below [49]_ ). 
+
+.. code-block:: pycon
+   :linenos:
+   :emphasize-lines: 7-8,21,23
+
+   >>> from pairings import \
+   ...         FairnessEnhancedInterGroupMatching
+   >>> from votingProfiles import BipolarApprovalVotingProfile
+   >>> apA1 = BipolarApprovalVotingProfile('apA1')
+   >>> apB1 = BipolarApprovalVotingProfile('apB1')
+   >>> fem = FairnessEnhancedInterGroupMatching(
+   ...            apA1,apB1,initialMatching=None,
+   ...            maxIterations=2*k,
+   ...            Comments=False)
+   >>> fem                           
+    *------- InterGroupPairing instance description ------*
+    Instance class     : FairnessEnhancedInterGroupMatching
+    Instance name      : fairness-enhanced-matching
+    Group sizes        : 5
+    Graph Order        : 10
+    Graph size         : 5
+    Partners swappings : 5
+    Attributes         : ['runTimes', 'vpA', 'vpB',
+                  'verticesKeysA', 'verticesKeysB', 'name',
+                  'order', 'maxIterations', 'copelandScores',
+                  'initialMatching', 'matching', 'iterations', 'history',
+                  'maxCorr', 'stDev', 'groupAScores', 'groupBScores',
+                  'vertices', 'valuationDomain', 'edges', 'size', 'gamma']
+
+When no initial matching is given --*initialMatching* = *None*, which is the default setting-- two initial matchings --the left matching (*ai*, *bi*)  and the right matching (*ai*, *b-i*) for i = 1, ... k-- are used for starting the fairness enhancing procedure (see Line 7). The best solution of both is eventually retained. When the *initialMatching* parameter is set to *'random'*, a random shuffling --with given seed-- of the persons in group *B* preceeds the construction of the right and left initial matchings. By default, the computation is limited to :math:`2 \times k` swappings of partners in order to master the potential occurrence of cycling situations. This limit may be adjusted if necessary with the *maxIterations* parameter (see Line 8). Such cycling swappings are furthermore controlled by the *history* attribute (see Line 21). The fairness enhanced *fem.matching* solution determines in fact a :py:class:`~graphs.BipartiteGraph` object (see last Line 23). 
+
+The actual pairing result obtained with the given bipolar approval ballots above is shown with the :py:meth:`~pairings.InterGroupPairing.showMatchingFairness` method (see the Listing below). The *WithIndividualCorrelations* flag allows to print out the inidividual pairing preference correlations for all persons in both groups (see Line 2). 
+
+.. code-block:: pycon
+   :linenos:
+   :emphasize-lines: 2,11,16,23,25,28
+
+   >>> fem.showMatchingFairness(
+   ...             WithIndividualCorrelations=True)
+    *------------------------------*
+    ['a1', 'b4']
+    ['a2', 'b2']
+    ['a3', 'b1']
+    ['a4', 'b5']
+    ['a5', 'b3']
+    -----
+    group A correlations:
+     'a1': -0.333
+     'a2': +1.000
+     'a3': +1.000
+     'a4': +1.000
+     'a5': +1.000
+    group A average correlation (a) : 0.733
+    group A standard deviation      : 0.596
+    -----
+    group B correlations:
+     'b1': +1.000
+     'b2': +1.000
+     'b3': +1.000
+     'b4': +0.333
+     'b5': +1.000
+    group B average correlation (b) : 0.867
+    group B standard deviation      : 0.298
+    -----
+    Average correlation    : 0.800
+    Standard Deviation     : 0.450
+    Unfairness |(a) - (b)| : 0.133
+
+In group *A* and group *B*, all persons except *a1* and *b4* get an approved partner (see Lines 11 and 23). Yet, Persons *a1* and *b4* do not actually disapprove their respective match. Hence, the resulting overall ordinal correlation is very high (+0.800, see Line 28) and both groups show quite similar marginal correlation values (+0.733 versus +0.867, see Lines 16 and 25). The fairness enhanced matching we obtain in this case corresponds actually to the very fairest among all potential maximal matchings (see Lines 2-3 below). 
+
+.. code-block:: pycon
+   :linenos:
+   :emphasize-lines: 2-3
+
+   >>> from pairings import FairestInterGroupPairing
+   >>> fp = FairestInterGroupPairing(apA1,apB1)
+   >>> fp.computeMatchingFairnessIndex(fem.matching)
+    0
+
+Mind however that our fairness enhancing algorithm does not guarantee to end always in the very fairest potential maximal matching. In :numref:`interGroupQuality_6_52` is shown the result of a Monte Carlo simulation of 1000 random intergroup pairing problems of order 6 envolving bipolar approval voting profiles with approval, resp. disapproval probalities of 50%, resp. 20%. The failure rate to obtain the fairest pairing solution amounts to 12.4% with an average failure --optimal minus fairness enhanced average ordinal correlation-- of -0.056 and a maximum failure of -0.292. 
+
+.. Figure:: interGroupQuality_6_52.png
+   :alt: Optimal versus fairness enhanced pairings
+   :name: interGroupQuality_6_52
+   :width: 500 px
+   :align: center
+
+   Optimal versus fairness enhanced ordinal correlations
+
+The proportion of failures depends evidently on the difficulty and the order of the pairing problem. We may however enhance the success rate of the fairness enhancing heuristic by choosing, like a Gale-Shapley stable in the case of linear voting profiles, a best determined *Copeland* ranking scores based initial matching. 
+
+Starting the fairness enhancement from a best determined Copeland matching
+``````````````````````````````````````````````````````````````````````````
+
+The partner swapping strategy relies on the *Copeland* ranking scores of a potential pairing candidate for all persons in bothe groups. These scores are precomputed and stored in the *copelandScores* attribute of the :py:class:`~pairings.FairnessEnhancedInterGroupMatching` object. When we add, for a pair {*ai*, *bj*} both the *Copeland* ranking score of partner *bj* from the perspective of Person *ai* to the corresponding *Copeland* ranking score of partner *ai* from the perspective of Person *bj* to two times the observed minimal *Copeland* ranking score, we obtain a weakly determined complete bipartite graph object.
+
+.. code-block:: pycon
+   :linenos:
+   :emphasize-lines: 6-10
+
+   >>> from pairings import BestCopelandInterGroupMatching 
+   >>> bcop = BestCopelandInterGroupMatching(apA1,apB1)
+   >>> bcop.showEdgesCharacteristicValues()
+	    |   'b1'    'b2'    'b3'    'b4'    'b5'	 
+    --------|---------------------------------------
+       'a1' |  +0.56   +0.44   +0.50   +0.50   +0.44	 
+       'a2' |  +0.56   +0.94   +0.19   +0.62   +0.62	 
+       'a3' |  +0.81   +0.56   +0.12   +0.44   +0.31	 
+       'a4' |  +0.56   +0.12   +0.44   +0.44   +0.94	 
+       'a5' |  +0.19   +0.62   +0.94   +0.31   +0.31	 
+     Valuation domain: [-1.00;1.00]
+   >>> bcop.showPairing()
+    *------------------------------*
+    ['a1', 'b4']
+    ['a2', 'b2']
+    ['a3', 'b1']
+    ['a4', 'b5']
+    ['a5', 'b3']
+
+By following a kind of ranked pairs rule, we may construct in this graph a best determined bipartite maximal matching. The matches [*a2*, *b2*], [*a4*, *b5*] and [*a5*, *b3*] show the highest Copeland scores (+0.94, see Lines 7,9-10), followed by [*a3*, *b1*] (+0.81 Line 6). For Person *a1*, the best eventually available partner is *b4* (+050, line 6). 
+
+We are lucky here with the given example of reciprocal bipolar approval voting profiles *apA1* and *apB1* as we recover immediately the fairest enhanced matching obtained previously. The best determined *Copeland* matching is hence very opportune to take as initial start for the fairness enhancing procedure as it may similarly drastically reduce the potential number of fairness enhancing partner swappings (see Lines 3 and last below).
+
+.. code-block:: pycon
+   :linenos:
+   :emphasize-lines: 3,7-11
+
+   >>> fecop = FairnessEnhancedInterGroupMatching(
+   ...                    apA1,apB1,
+   ...                    initialMatching='bestCopeland',
+   ...                    Comments=False)
+   >>> fecop.showPairing()                           
+    *------------------------------*
+    ['a1', 'b4']
+    ['a2', 'b2']
+    ['a3', 'b1']
+    ['a4', 'b5']
+    ['a5', 'b3']
+   >>> fecop.Iterations
+    0
+
+A Monte Carlo simulation with 1000 intergroup pairing problems of order 6 with approval and disapproval probabilities of 30% shows actually that both starting points --*initalMatching* = *None* and *initialMatching* = 'bestCopeland'-- of the fairness enhancing heuristic may diverge positively and negatively in their respective best solutions.
+
+.. Figure:: femfecopComparison.png
+   :alt: Influence of the fairness enhancing start matching
+   :name: femfecopComparison
+   :width: 500 px
+   :align: center
+
+   Influence of the starting point on the fainess enhanced pairing solution
+
+Discuss :numref:`femfecopComparison`
+fem 78.18% success rate
+fecop 75.78% success rate
+
+If we run the fairness enhancing heuristic from both the left and right initial matchings as well as from the best determined Copeland matching and retain in fact the respective fairest solution of these three, we obtain, as shown in :numref:`femfecopQuality`, a success rate of 87.39% for reaching the fairest possible pairing solution with an average failure of -0.036 and a maximum failure of -0.150.
+
+.. Figure:: femfecopQuality.png
+   :alt: Optimal versus best fairness enhanced pairing solution
+   :name: femfecopQuality
+   :width: 500 px
+   :align: center
+
+   Optimal versus best fairness enhanced pairing solution
+
+For intergroup pairing problems of higher order, it appears however that the best determined *Copeland* matching gives in general a more efficient initial starting point for the fairness enhancing heuristic than both the left and right initial ones. In a Monte Carlo simulation with 1000 random bipolar approval pairing problems of order 50 and approval-disapproval probabilities of 20%, we obtain the results shown below.
+
+  ================  ========  ========  =======  ======  =======
+    Variables         Mean     Median     S.D.     Min     Max
+  ================  ========  ========  =======  ======  =======
+   Correlation        +0.886    +0.888    0.018  +0.850  +0.923
+   Unfairness          0.053     0.044    0.037   0.000   0.144
+   Run time (sec.)     1.901     1.895    0.029   1.868   2.142
+  ================  ========  ========  =======  ======  =======
+
+The median overall average correlation with the individual pairing preferences amounts to +0.886 with a maximum at +0.923. The *Unfairness* statistic indicates the absolute difference between the average correlations obtained in group A versus group B.
+
+In order to study the potential difference in quality and fairness of the pairing solutions obtained by starting the fairness enhancing procedure from both the left and right inital matching, from the best determined *Copeland* matching as well as from the fairest *Gale-Shapley* we ran a Monte Carlo simulation with 1000 random intergroup pairing problems of order 20 and where the individual pairing preferences were given with complete linear voting profiles (see :numref:`compFemCopGs`).
+
+.. Figure:: compFemCopGS.png
+   :alt: Comapring fairness enhancing results from different initial matchings
+   :name: compFemCopGS
+   :width: 600 px
+   :align: center
+
+   Comparing pairing results from different fairnesss enhancing start points
+
+If the average ordinal correlations obtained with the three starting matchings are quite similar --means within +0.690 and +0.693-- the differences between the average correlations of group *A* and group *B* show a potential advantage for the left&right initial matchings (mean unfairness: 0.065) versus the best *Copeland* (mean unfairness: 0.078) and, even more versus the fairest *Gale-Shapley* matching (mean unfairness: 0.203, see :numref:`compFemCopGS`). The essential unfairness of stable *Gale-Shapley* matchings may in fact not being corrected with our fairness enhancing procedure.
+
+..                 Mean     Median       S.D.        Min        Max
+.. corr3          0.6895     0.6860    0.02845     0.6080     0.7610
+.. fair3          0.2029     0.2050    0.06775    0.03900     0.6140
+.. corr1          0.6911     0.6830    0.02504     0.6450     0.7610
+.. fair1         0.06471    0.08700    0.04696      0.000     0.2000
+.. corr2          0.6930     0.6760    0.02801     0.6540     0.7620
+.. fair2         0.07766    0.09700    0.03568   0.002000     0.2230
+
+
+..                   Mean     Median       S.D.        Min        Max
+.. corrFem          0.6488     0.6530    0.02907     0.6000     0.6970
+.. corrGS           0.6245     0.6180    0.04107     0.5550     0.6900
+.. corrCop          0.6174     0.6160    0.03703     0.5680     0.6950
+.. fairFem         0.08987    0.08400    0.05446      0.000     0.1840
+.. fairCop          0.1053    0.08400    0.03815    0.06300     0.1900
+.. fairGS           0.2400     0.1470     0.1648    0.05300     0.5740
+
+
+Back to :ref:`Content Table <Tutorial-label>`
+
+----------------
+
+
+.. _Fair-IntraGroup-Pairings-label:
+
+On computing fair intragroup pairings
+-------------------------------------
+
+.. contents:: 
+	:depth: 2
+	:local:
+ 
+   
+The fair intragroup pairing problem
+```````````````````````````````````
+
+A very similar decision problem to the intergroup pairing one appears when, instead of pairing two different sets of persons, we are asked to pair an even-sized set of persons by fairly balancing again the individual pairing preferences of each person.
+
+Let us consider a set of four persons {*p1*, *p2*, *p3*, *p4*} to be paired. We may propose three potential pairing decisions :
+
+    | (1) *p1* with *p2* and *p3* with *p4*,
+    | (2) *p1* with *p3* and *p2* with *p4*, and
+    | (3) *p1* with *p4* and *p2* with *p3*.
+
+The individual pairing preferences, expressed under the format of bipolar approval ballots, are shown below:
+
+.. code-block:: pycon
+   :linenos:
+   :emphasize-lines: 3-5,9-11
+
+    Bipolar approval ballots
+    ------------------------
+    p1 :
+    Approvals   : ['p3', 'p4']
+    Disapprovals: ['p2']
+    p2 :
+    Approvals   : ['p1']
+    Disapprovals: ['p3']
+    p3 :
+    Approvals   : ['p1', 'p2', 'p4']
+    Disapprovals: []
+    p4 :
+    Approvals   : ['p2']
+    Disapprovals: ['p1', 'p3']
+
+Person *p1*, for instance, approves as potential partner both Persons *p3* and *p4*, but disapproves Person *p2* (see Lines 3-5). Person *p3* approves all potential partners, i.e. disapproves none of them (see Lines 9-11).
+
+Out of the three potential pairing decision, which is the one that most fairly balances the given individual pairing preferences shown above? If we take decision (1), Person *p1* will be paired with a disapproved partner. If we take decision (3), Person *p2* will be paired with a disapproved partner. Only pairing decision (2) allocates no disapproved partner to all the persons.
+
+We will generalise this approach to larger groups of persons in a similar way as we do in the intergroup pairing case.
+
+Generating random intragroup bipolar approval voting profiles
+`````````````````````````````````````````````````````````````
+Let us consider a group of six persons. Individual intragroup pairing preferences may be randomly generated with the :py:class:`~votingProfiles.RandomBipolarApprovalVotingProfile` class by setting the *IntraGroup* parameter to *True* (see Line 6 below)
+
+.. code-block:: pycon
+   :linenos:
+   :emphasize-lines: 6,14-15,17-18
+
+   >>> from votingProfiles import\
+   ...                   RandomBipolarApprovalVotingProfile
+   >>> vpG = RandomBipolarApprovalVotingProfile(
+   ...                        numberOfVoters=6,
+   ...                        votersIdPrefix='p',
+   ...                        IntraGroup=True,
+   ...                        approvalProbability=0.5,
+   ...                        disapprovalProbability=0.2,
+   ...                        seed=1)
+   >>> vpG.showBipolarApprovals()
+    Bipolar approval ballots
+    ------------------------
+    p1 :
+    Approvals   : ['p4', 'p5']
+    Disapprovals: []
+    p2 :
+    Approvals   : ['p1']
+    Disapprovals: ['p5']
+    p3 :
+    Approvals   : []
+    Disapprovals: ['p2']
+    p4 :
+    Approvals   : ['p1', 'p2', 'p3']
+    Disapprovals: ['p5']
+    p5 :
+    Approvals   : ['p1', 'p2', 'p3', 'p6']
+    Disapprovals: ['p4']
+    p6 :
+    Approvals   : ['p1', 'p2', 'p3', 'p4']
+    Disapprovals: []
+
+With an approval probability of 50% and a disapproval probability of 20% we obtain the bipolar approvals shown above. Person *p1* approves *p4* and *p5* and disapproves nobody, whereas Person *p2* approves *p1* and disapproves *p5* (see Lines 14-15 and 17-18). To solve this intragroup pairing problem, we need to generate the set of potential matching decisions.   
+
+The set of potential ìntragroup pairing decisions
+`````````````````````````````````````````````````
+In the intergroup pairing problem, the potential pairing decisions are given by the maximal independent sets of the line graph of the bipartite graph formed between two even-sized groups of persons. Here the set of potential pairing decisions is given by the maximal independents sets --the perfect matchings [48]_-- of the line graph of the complete graph obtained from the given set of six persons (see below).
+
+.. code-block:: pycon
+   :linenos:
+   :emphasize-lines: 6,10
+
+   >>> persons = [p for p in vpG.voters]
+   >>> persons
+    ['p1', 'p2', 'p3', 'p4', 'p5', 'p6']
+   >>> from graphs import CompleteGraph, LineGraph
+   >>> cg = CompleteGraph(verticesKeys=persons)
+   >>> lcg = LineGraph(cg)
+   >>> lcg.computeMIS()
+   ... # result is stored into lcg.misset
+   >>> len(lcg.misset)
+    15
+   >>> lcg.misset[0]
+    frozenset({frozenset({'p5', 'p2'}),
+               frozenset({'p1', 'p6'}),
+	       frozenset({'p3', 'p4'})})
+
+In the intragroup case we observe 15 potential pairing decisions (see Line 10). For a set of persons of size :math:`2 \times k`, the number of potential intragroup pairing decisions is actually given by the *double factorial of odd numbers*
+[47]_ .
+
+.. math::
+   1 \times 3 \times 5 \times ... \times (2 \times k -1) \;=\; (2 \times k - 1)!!
+
+For the first pair we have indeed :math:`(2 \times k)-1` partner choices, for the second pair we have :math:`(2 \times k)-3` partner choices, etc. This double factorial of odd numbers is far larger than the simple *k!* number of potential pairing decisions in a corresponding intergroup pairing problem of order *k*.
+
+In order to find now the fairest pairing among this potentially huge set of intragroup pairing decisions, we will reuse the same strategy as for the intergroup case. For each potential pairing solution, we are computing the average ordinal correlation between each potential pairing solution and the individual pairing preferences. The fairest pairing decision is eventually determined by the highest average coupled with the lowest standard deviation of the individual ordinal correlation indexes. 
+   
+Computing the fairest intragroup pairing
+````````````````````````````````````````
+For a pairing problem of tiny order :math:`(2 \times k = 6)` we may use the :py:class:`~pairings.FairestIntraGroupPairing` class for computing in a brute force approach the fairest possible pairing solution :
+
+.. code-block:: pycon
+   :linenos:
+   :emphasize-lines: 4,7,10-11,14
+
+   >>> from pairings import FairestIntraGroupPairing
+   >>> fp = FairestIntraGroupPairing(vpG)
+   >>> fp.nbrOfMatchings
+    15
+   >>> fp.showMatchingFairness()
+    Matched pairs
+    {'p1', 'p4'}, {'p3', 'p5'}, {'p6', 'p2'}
+    ----
+    Individual correlations:
+     'p1': +1.000, 'p2': +0.000, 'p3': +1.000
+     'p4': +1.000, 'p5': +1.000, 'p6': +1.000
+    -----
+    Average correlation : +0.833
+    Unfairness (stdev)    : 0.408
+
+As expected, we observe with a problem of order 6 a set of 1 x 3 x 5 = 15 potential pairings (see Line 4) and the fairest pairing solution  --highest correlation (+0.833) with given individual pairing preferences-- is shown in Line 7 above. All persons, except *p2* are paired with an approved partner and nobody is paired with a disapproved partner (see Lines 10-11).
+
+In the intergroup pairing case, an indicator of the actual fairness of a pairing solution is given by the absolute difference between both group correlation values. In the intragroup case here, an indicator of the fairness is given by the standard deviation of the individual correlations (see Line 14). The lower this standard deviation with a same overall correlation result, the fairer appears to be in fact the pairing solution [50]_ . 
+
+The *fp* object models in fact a generic :py:class:`~graphs.Graph` object whose edges correspond to the fairest possible pairing solution (see Lines 11-12). We may hence produce in :numref:`fairestIntraGroupPairing` a drawing of the fairest pairing solution by using the standard :py:meth:`~graphs.Graph.exportGraphViz` method for undirected graphs.
+
+   >>> fp.exportGraphViz('fairestIntraGroupPairing')
+    *---- exporting a dot file for GraphViz tools ---------*
+    Exporting to fairestIntraGroupPairing.dot
+    fdp -Tpng fairestIntraGroupPairing.dot -o fairestIntraGroupPairing.png
+
+.. Figure:: fairestIntraGroupPairing.png
+    :alt: Fairest Pairing
+    :name: fairestIntraGroupPairing
+    :width: 250 px
+    :align: center
+
+    Fairest intragroup pairing solution
+
+Unfortunately, this brute force approach to find the fairest possible pairing solution fails in view of the explosive character of the double factorial of odd numbers. For a group of 20 persons, we observe indeed already more than 650 millions of potential pairing decisions. Similar to the intergroup pairing case, we may use instead a kind of hill climbing heuristic for computing a fair intragroup pairing solution. 
+
+Fairness enhancing of a given pairing decision
+``````````````````````````````````````````````
+The :py:class:`~pairings.FairnessEnhancedIntraGroupMatching` class delivers such a solution. When no initial matching is given (see Line 3 below), our hill climbing strategy will start, similar to the intergroup pairing case, from two initial maximal matchings. The *left* one matches Person *pi* with Person *pi+1* for i in range 1 to 5 by step 3 (see Line 5-6) and the right one matches Person *pi* with Person *p-i* for i in range 1 to 3  (see Line 8-9).
+
+.. code-block:: pycon
+   :linenos:
+   :emphasize-lines: 3,6,8,11,13,16-17
+
+   >>> from pairings import FairnessEnhancedIntraGroupMatching
+   >>> fem = FairnessEnhancedIntraGroupMatching(vpG,
+   ...          initialMatching=None,Comments=True)
+    ===>>> Enhancing left initial matching
+    Initial left matching
+    [['p1', 'p2'], ['p3', 'p4'], ['p5', 'p6']]
+    Fairness enhanced left matching
+    [['p1', 'p4'], ['p3', 'p5'], ['p2', 'p6']] , correlation: 0.833
+    ===>>> Enhancing right initial matching
+    Initial right matching
+    [['p1', 'p6'], ['p3', 'p4'], ['p5', 'p2']]
+    Fairness enhanced right matching
+    [['p1', 'p4'], ['p3', 'p5'], ['p6', 'p2']] , correlation: 0.833 
+    ===>>> Best fairness enhanced matching
+    Matched pairs
+    {'p1', 'p4'}, {'p2', 'p6'}, {'p3', 'p5'}
+    Average correlation: +0.833
+
+The correlation enhancing search is similar to the one used for the intergroup heuristic. For each couple of pairs [{*pi*, *pj*}, {*pr*, *ps*}] in the respective initial matchings we have in the intragroup case in fact **two** partners swapping opportunities: (1) *pj* <-> *ps* or, (2) *pj* <-> *pr*. For both ways, we assess the expected individual correlation gains with the differences of the *Copeland* scores induced by the potential swappings. And we eventually proceed with a swapping of highest expected average correlation gain among all couple of pairs.
+
+In the case of the previous bipolar approval intragroup voting profile *vpG*, both starting points for the hill climbing heuristic give the same solution, in fact the fairest possible pairing solution we have already obtained with the brute force algorithm in the preceding Section (see above).
+
+To illustrate why starting from two initial matchings may be useful, we solve below a random intragroup pairing problem of order 20 where we assume an approval probability of 30% and a disapproval probability of 20% (see Line 3 below).
+
+.. code-block:: pycon
+   :linenos:
+   :emphasize-lines: 3,14,22
+
+   >>> vpG1 = RandomBipolarApprovalVotingProfile(
+   ...           numberOfVoters=20,votersIdPrefix='p',
+   ...           IntraGroup=True,approvalProbability=0.3,
+   ...           disapprovalProbability=0.2,seed=1)
+   >>> fem1 = FairnessEnhancedIntraGroupMatching(vpG1,
+   ...           initialMatching=None,Comments=True)
+    ===>>> Enhancing left initial matching
+    Initial left matching
+    [['p01', 'p02'], ['p03', 'p04'], ['p05', 'p06'], ['p07', 'p08'], ['p09', 'p10'],
+     ['p11', 'p12'], ['p13', 'p14'], ['p15', 'p16'], ['p17', 'p18'], ['p19', 'p20']]
+    Fairness enhanced left matching
+    [['p01', 'p02'], ['p03', 'p04'], ['p05', 'p15'], ['p06', 'p11'], ['p09', 'p17'],
+     ['p07', 'p12'], ['p13', 'p14'], ['p08', 'p16'], ['p20', 'p18'], ['p19', 'p10']],
+     correlation: +0.785
+    ===>>> Enhancing right initial matching
+    Initialright matching
+    [['p01', 'p20'], ['p03', 'p18'], ['p05', 'p16'], ['p07', 'p14'], ['p09', 'p12'],
+     ['p11', 'p10'], ['p13', 'p08'], ['p15', 'p06'], ['p17', 'p04'], ['p19', 'p02']]
+    Fairness enhanced right matching
+    [['p01', 'p19'], ['p03', 'p02'], ['p05', 'p15'], ['p07', 'p18'], ['p09', 'p17'],
+     ['p14', 'p13'], ['p10', 'p04'], ['p08', 'p12'], ['p20', 'p16'], ['p06', 'p11']],
+     correlation: +0.851
+    ===>>> Best fairness enhanced matching
+    Matched pairs
+    {'p01', 'p19'}, {'p03', 'p02'}, {'p05', 'p15'}, {'p06', 'p11'},
+    {'p07', 'p18'}, {'p08', 'p12'}, {'p09', 'p17'}, {'p10', 'p04'},
+    {'p14', 'p13'}, {'p20', 'p16'}
+    Average correlation: +0.851
+
+The hill climbing from the left initial matching attains an average ordinal correlation of +0.785, whereas the one starting from the right initial matching improves this result to an average ordinal correlation of +0.851 (see Lines 14 and 22).
+
+We may below inspect with the :py:meth:`~pairings.IntraGroupPairing.showMatchingFairness` method the individual ordinal correlation indexes obtained this way.
+
+.. code-block:: pycon
+   :linenos:
+   :emphasize-lines: 9-10
+
+   >>> fem1.showMatchingFairness(WithIndividualCorrelations=True)
+    Matched pairs
+    {'p01', 'p19'}, {'p03', 'p02'}, {'p05', 'p15'},
+    {'p06', 'p11'}, {'p07', 'p18'}, {'p08', 'p12'},
+    {'p09', 'p17'}, {'p10', 'p04'}, {'p14', 'p13'},
+    {'p20', 'p16'}
+    ----
+    Individual correlations:
+     'p01': +1.000, 'p02': +1.000, 'p03': +1.000, 'p04': -0.143, 'p05': +1.000,
+     'p06': +1.000, 'p07': +0.500, 'p08': -0.333, 'p09': +1.000, 'p10': +1.000,
+     'p11': +1.000, 'p12': +1.000, 'p13': +1.000, 'p14': +1.000, 'p15': +1.000,
+     'p16': +1.000, 'p17': +1.000, 'p18': +1.000, 'p19': +1.000, 'p20': +1.000
+    -----
+    Average correlation : +0.851
+    Standard Deviation  :  0.390
+
+Only three persons --*p04*, *p07* and *p08*-- are not matched with a mutually approved partner (see Lines 9-10 above). Yet, they are all three actually matched with a partner they neither approve nor disapprove but who in return approves them as partner(see Lines 10, 19 and 27 below).
+
+.. code-block:: pycon
+   :linenos:
+   :emphasize-lines: 10,19,27
+
+   >>> vpG1.showBipolarApprovals()
+    Bipolar approval ballots
+    ------------------------
+    ...
+    ...
+    p04 :
+    Approvals   : ['p03', 'p12', 'p14', 'p19']
+    Disapprovals: ['p15', 'p18', 'p20']
+    p10 :
+    Approvals   : ['p04', 'p17', 'p20']
+    Disapprovals: ['p01', 'p02', 'p05', 'p06', 'p07', 'p08',
+                   'p09', 'p11', 'p12', 'p16', 'p18']
+    ...
+    ...
+    p07 :
+    Approvals   : ['p11']
+    Disapprovals: ['p01', 'p14', 'p19']
+    p12 :
+    Approvals   : ['p06', 'p07', 'p08', 'p10', 'p16', 'p19']
+    Disapprovals: ['p11', 'p14']
+    ...
+    ...
+    p08 :
+    Approvals   : ['p02', 'p05', 'p06', 'p14', 'p16', 'p19']
+    Disapprovals: ['p01', 'p13', 'p15']
+    p05 :
+    Approvals   : ['p01', 'p04', 'p06', 'p07', 'p08', 'p11', 'p15', 'p16', 'p18']
+    Disapprovals: ['p13', 'p19']
+    ...
+    ...
+
+As the size of the potential maximal matchings with a pairing problem of order 20 exceeds 650 million instances, computing the overall fairest pairing solution becomes intractable and we are unable to check if we reached or not this optimal pairing solution. A Monte Carlo simulation with 1000 random intragroup pairing problem of order 8, applying an approval probability of 50% and a disapproval probability of 20%, shows however in :numref:`intraGroupQuality8` the apparent operational efficiency of our hill climbing heuristic, at least for small orders.  
+
+.. Figure:: intraGroupQuality.png
+    :alt: Quality of fairness enhanced intragroup pairing solutions
+    :name: intraGroupQuality8
+    :width: 500 px
+    :align: center
+
+    Quality of fairness enhanced intragroup pairing solutions of order 8
+
+Only 43 failures to reach the optimal average correlation were counted among the 1000 computations (4.3%) with a maximal difference in between of +0.250.
+
+A similar simulation with more constrained random intragroup pairing problems of order 10, applying an approval and disapproval probability of only 30%, gives a failure rate of 19.1% to attain the optimal fairest pairing solution (see :numref:`intraGroupQuality10`).
+
+.. Figure:: intraGroupQuality10.png
+    :alt: Quality of fairness enhanced intragroup pairing solutions
+    :name: intraGroupQuality10
+    :width: 500 px
+    :align: center
+
+    Quality of fairness enhanced intragroup pairing solutions of order 10
+
+Choosing, as in the intergroup pairing case, a more efficient initial matching for the fairness enhancing procedure becomes essential. For this purpose we may rely again on the best determined *Copeland* matching obtained with the pairwise *Copeland* scores computed on the complete intragroup graph. When we add indeed, for a pair {*pi*, *pj*} both the *Copeland* ranking score of partner *pj* from the perspective of Person *pi* to the corresponding *Copeland* ranking score of partner *pi* from the perspective of Person *pj* we may obtain a complete positively valued graph object. In this graph we can, with a greedy ranked pairs rule, construct a best determined perfect matching which we may use as efficient initial start for the fairness enhancing heuristic (see below).
+
+.. code-block:: pycon
+   :linenos:
+   :emphasize-lines: 11-12,14
+
+   >>> from pairings import BestCopelandIntraGroupMatching
+   >>> cop = BestCopelandIntraGroupMatching(vpG1)
+   >>> cop.showPairing(cop.matching)
+    Matched pairs
+    {'p02', 'p15'}, {'p04', 'p03'}, {'p08', 'p05'}, {'p09', 'p20'}
+    {'p11', 'p06'}, {'p12', 'p16'}, {'p14', 'p13'}, {'p17', 'p10'}
+    {'p18', 'p07'}, {'p19', 'p01'}
+   >>> fem2 = FairnessEnhancedIntraGroupMatching(vpG1,
+   ...                  initialMatching=cop.matching,Comments=True)
+    *---- Initial matching ----*
+    [['p02', 'p15'], ['p04', 'p03'], ['p08', 'p05'], ['p09', 'p20'],
+     ['p11', 'p06'], ['p12', 'p16'], ['p14', 'p13'], ['p17', 'p10'],
+     ['p18', 'p07'], ['p19', 'p01']]
+    Enhancing iteration :  1
+    Enhancing iteration :  2
+    ===>>> Best fairness enhanced matching
+    Matched pairs
+    {'p02', 'p04'}, {'p08', 'p05'}, {'p09', 'p20'},
+    {'p11', 'p06'}, {'p12', 'p16'}, {'p14', 'p13'},
+    {'p15', 'p03'}, {'p17', 'p10'}, {'p18', 'p07'},
+    {'p19', 'p01'}
+    Average correlation: +0.872
+    Total run time: 0.193 sec.
+
+With the best determined *Copeland* matching we actually reach in two partner swappings a fairer pairing solution (+0.872) than the fairest one obtained with the default left and right initial matchings (+0.851). This is however not always the case. In order to check this issue, we ran a Monte Carlo experiment with 1000 random intragroup pairing problems of order 30 where approval and disapproval probabilities were set to 20%. Summary statistics of the results are shown in the Table below.
+
+  ===============  ========  ========  =======  ======  =======
+    Variables        Mean     Median     S.D.     Min     Max
+  ===============  ========  ========  =======  ======  =======
+    Correlation      +0.823    +0.825   0.044   +0.682   +0.948
+   Std deviation      0.361     0.362   0.051    0.186    0.575
+    Iterations        23.69    23.000   3.818    14.00    36.00
+     Run time         3.990     3.910   0.636    2.340    6.930
+  ===============  ========  ========  =======  ======  =======
+
+These statistics were obtained by trying both the left and right initial matchings as well as the best determined *Copeland* matching as starting point for the fairness enhancing procedure and keeping eventually the best average correlation result. The overall ordinal correlation hence obtained is convincingly high with a mean of +0.823, coupled with a reasonable mean standard deviation of 0.361 over the 30 personal correlations. Run times depend essentially on the number of enhancing iterations. On average, about 24 partner swappings were sufficient for computing all three variants in less than 4 seconds. In slightly more than two third only of the random pairing problems (69.4%), starting the fairness enhancing procedure from the best determined *Copeland* matching leads indeed to the best overall ordinal correlation with the individual pairing preferences.
+
+When enhancing thus the fairness solely by starting from the best determined *Copeland* matching, we may solve with the :py:class:`~pairings.FairnessEnhancedIntraGroupMatching` solver in on average about 30 seconds an intragroup pairing problem of order 100 with random bipolar approval voting profiles and approval and disapproval probabilities of 10%. The average overall ordinal correlation we may obtain is about +0.800.
+
+Mind however that the higher the order of the pairing problem, the more likely gets the fact that we actually may miss the overall fairest pairing solution. Eventually, a good expertise in metaheuristics is needed in order to effectively solve big intragroup pairing problems (*Avis aux amateurs*).
+
+Back to :ref:`Content Table <Tutorial-label>`
+
+-----------------------
+
 
 .. _Case-Studies-label:
 
@@ -8490,1497 +9982,6 @@ And, we recover indeed two *isomorphic copies* of the original random graph (com
 
 Back to :ref:`Content Table <Tutorial-label>`
 
----------------------
-
-.. _Fair-InterGroup-Pairings-label:
-
-On computing fair intergroup pairings
--------------------------------------
-
-.. contents:: 
-	:depth: 2
-	:local:
-			  
-The fair intergroup pairing problem
-```````````````````````````````````
-
-.. epigraph::
-     | **Fairness**: *impartial and just treatment or behaviour without favouritism or discrimination*
-     | -- Oxford Languages
-
-A set of persons consists of two groups --group *A* and group *B*-- of equal size *k*. For a social happening, it is requested to build *k* pairs of persons from each group.
-
-In order to guide the matching decisions, each person of group *A* communicates her pairing preferences with a linear ranking of the persons in group *B* and each person of group *B* communicates her pairing preferences with a linear ranking of the persons in group *A*.
-
-The set of all potential matching decisions corresponds to the set of maximal matchings of the complete bipartite graph formed by the two groups *A* and *B*. Its cardinality is factorial *k*.
-
-How to choose now in this possibly huge set the one maximal matching that makes a fair balance of the given individual pairing preferences? To help make this decision we will compute for all maximal matchings a fitness score consisting of their average ordinal correlation index with the given marginal pairing preferences. Eventually we will choose a maximal matching that results in the highest possible fitness score.
-
-Let us consider for instance a set of four persons divided into group A, {*a1*, *a2*}, and group *B*, {*b1*, *b2*}. Person *a1* prefers as partner Person *b2*, and Person *a2* prefers as partner Person *b1*. Reciprocally, Person *b1* prefers Person *a2* over *a1* and Person *b2* finally prefers *a1* over *a2*. There exist only two possible maximal matchings,
-
-     (1) *a1* with *b1* and *a2* with *b2*, or
-     (2) *a1* with *b2* and *a2* with *b1*.
-	
-Making the best matching decision in this setting here is trivial. Choosing matching (1) will result in an ordinal correlation index of -1 for all four persons, whereas matching (2) is in total ordinal concordance with everybody's preferences and will result in an average ordinal correlation index of +1.0.
-
-Can we generalise this approach to larger groups and partially determined ordinal correlation scores?
-
-**Reciprocal linear voting profiles**
-
-Let us consider two groups of size *k* = 5. Individual pairing preferences of the persons in group *A* and group *B* may be randomly generated with *reciprocal* :py:class:`~votingProfiles.RandomLinearVotingProfile` instances called *lvA1* and *lvB1* (see below).
-
-.. code-block:: pycon
-   :linenos:
-   :emphasize-lines: 5-6,10-11
-
-   >>> from votingProfiles import RandomLinearVotingProfile
-   >>> k = 5
-   >>> lvA1 = RandomLinearVotingProfile(
-   ...         numberOfVoters=k,numberOfCandidates=k,
-   ...         votersIdPrefix='a',
-   ...         candidatesIdPrefix='b',seed=1)
-   >>> lvA1.save('lvA1')
-   >>> lvB1 = RandomLinearVotingProfile(
-   ...         numberOfVoters=k,numberOfCandidates=k,
-   ...         votersIdPrefix='b',
-   ...         candidatesIdPrefix='a',seed=2)
-   >>> lvB1.save('lvB1')
-
-We may inspect the resulting stored pairing preferences for each person in group *A* and each person in group *B* with the :py:meth:`~votingProfiles.~LinearVotingProfile.showLinearBallots` method [49]_.
-
-.. code-block:: pycon
-   :linenos:
-   :emphasize-lines: 6-8,15,17-19
-
-   >>> from votingProfiles import LinearVotingProfile
-   >>> lvA1 = LinearVotingProfile('lvA1')
-   >>> lvA1.showLinearBallots()
-    voters 	      marginal     
-   (weight)	 candidates rankings
-    a1(1):	 ['b3', 'b4', 'b5', 'b1', 'b2']
-    a2(1):	 ['b3', 'b5', 'b4', 'b2', 'b1']
-    a3(1):	 ['b4', 'b2', 'b1', 'b3', 'b5']
-    a4(1):	 ['b2', 'b4', 'b1', 'b5', 'b3']
-    a5(1):	 ['b4', 'b2', 'b3', 'b1', 'b5']
-   >>> lvB1 = LinearProfile('lvB1')
-   >>> lvB1.showLinearBallots()
-    voters 	      marginal     
-   (weight)	 candidates rankings
-    b1(1):	 ['a3', 'a2', 'a4', 'a5', 'a1']
-    b2(1):	 ['a5', 'a3', 'a1', 'a4', 'a2']
-    b3(1):	 ['a3', 'a4', 'a1', 'a5', 'a2']
-    b4(1):	 ['a3', 'a4', 'a1', 'a2', 'a5']
-    b5(1):	 ['a3', 'a4', 'a1', 'a2', 'a5']
-
-With these given individual pairing preferences, there does no more exist a quick trivial matching solution to our pairing problem. Persons *a1* and *a2* prefer indeed to be matched to the same Person *b3*. Worse, Persons *b1*, *b3*, *b4* and *b5* all four want also to be preferably matched to a same Person *a3*, but Person *a3* apparently prefers as partner only Person *b4*.
-
-How to find now a maximal matching that will fairly balance the individual pairing preferences of both groups? To solve this decision problem, we first must generate the potential decision actions, i.e. all potential maximal matchings between group *A* and group *B*.
-
-Generating the set of potential maximal matchings
-`````````````````````````````````````````````````
-
-The maximal matchings correspond in fact to the maximal independent sets of edges of the complete bipartite graph linking group *A* to group *B*. To compute this set we will use the :py:class:`~graphs.CompleteBipartiteGraph` class from the :py:mod:`graphs` module (see Lines 3-4 below).
-
-.. code-block:: pycon
-   :linenos:
-   :emphasize-lines: 3-4
-
-   >>> groupA = [p for p in lvA1.voters]
-   >>> groupB = [p for p in lvB1.voters]
-   >>> from graphs import CompleteBipartiteGraph
-   >>> bpg = CompleteBipartiteGraph(groupA,groupB)
-   >>> bpg
-    *------- Graph instance description ------*
-     Instance class   : Graph
-     Instance name    : bipartitegraph
-     Graph Order      : 10
-     Graph Size       : 25
-     Valuation domain : [-1.00; 1.00]
-     Attributes       : ['name', 'vertices',
-                         'verticesKeysA', 'verticesKeysB',
-			 'order', 'valuationDomain',
-			 'edges', 'size', 'gamma']
-
-Now, the maximal matchings of the bipartte graph *bpg* correspond to the MISs of its line graph *lbpg*. Therefore we use the :py:class:`~graphs.LineGraph` class from the :py:mod:`graphs` module.
-
-.. code-block:: pycon
-   :linenos:
-   :emphasize-lines: 15
-
-   >>> from graphs import LineGraph
-   >>> lbpg = LineGraph(bpg)
-   >>> lbpg
-    *------- Graph instance description ------*
-     Instance class   : LineGraph
-     Instance name    : line-bipartite_completeGraph_graph
-     Graph Order      : 25
-     Graph Size       : 100
-   >>> lbpg.computeMIS()
-   >>> lbpg.showMIS()
-    *---  Maximal Independent Sets ---*
-     number of solutions:  120
-     cardinality distribution
-     card.:  [0, 1, 2, 3, 4,  5,  6, 7, 8, 9, 10, ....]
-     freq.:  [0, 0, 0, 0, 0, 120, 0, 0, 0, 0,  0, ....]
-     stability number :  5
-     execution time: 0.01483 sec.
-     Results in self.misset
-
-The set of maximal matchings between persons of groups *A* and *B* has cardinality *factorial* 5! = 120 (see Line 15 above) and is stored in attribute *lbpg.misset*. We may for instance print the pairing corresponding to the first maximal matching.
-
-.. code-block:: pycon
-   :linenos:
-   :emphasize-lines: 5
-
-   >>> for m in lbpg.misset[0]:
-   ...     pair = list(m)
-   ...     pair.sort()
-   ...     print(pair)
-    ['a1', 'b4']
-    ['a2', 'b3']
-    ['a3', 'b5']
-    ['a4', 'b2']
-    ['a5', 'b1']
-
-Each maximal matching delivers thus for each person a partially determined ranking. For Person *a1*, for instance, this matching ranks *b4* before all the other persons from group *B* and for Person *b4*, for instance, this matching ranks *a1* before all other persons from group *A*.
-
-How to judge now the global pairing fitness of this matching?
-
-Measuring the fitness of a matching from a personal perspective
-```````````````````````````````````````````````````````````````
-
-Below we may reinspect the actual pairing preferences of each person.
-
-.. code-block:: pycon
-   :linenos:
-   :emphasize-lines: 4,15
-
-   >>> lvA1.showLinearBallots()
-     voters 	      marginal     
-    (weight)	 candidates rankings
-     a1(1):	 ['b3', 'b4', 'b5', 'b1', 'b2']
-     a2(1):	 ['b3', 'b5', 'b4', 'b2', 'b1']
-     a3(1):	 ['b4', 'b2', 'b1', 'b3', 'b5']
-     a4(1):	 ['b2', 'b4', 'b1', 'b5', 'b3']
-     a5(1):	 ['b4', 'b2', 'b3', 'b1', 'b5']
-   >>> lvB1.showLinearBallots()
-     voters 	      marginal     
-    (weight)	 candidates rankings
-     b1(1):	 ['a3', 'a2', 'a4', 'a5', 'a1']
-     b2(1):	 ['a5', 'a3', 'a1', 'a4', 'a2']
-     b3(1):	 ['a3', 'a4', 'a1', 'a5', 'a2']
-     b4(1):	 ['a3', 'a4', 'a1', 'a2', 'a5']
-     b5(1):	 ['a3', 'a4', 'a1', 'a2', 'a5']
-
-In the first matching shown in the previous Listing, Person *a1* is for instance matched with Person *b4*, which was her second choice. Whereas for Person *b4* the match with Person *a1* is only her third choice.
-
-For a given person, we may hence compute the ordinal correlation --the relative number of correctly ranked persons minus the relative number of incorrectly ranked persons-- between the partial ranking defined by the given matching and the individual pairing preferences, just ignoring the indeterminate comparisons.
-
-For Person *a1*, for instance, the matching ranks *b4* before all the other persons from group *B* whereas *a1*'s individual preferences rank *b4* second behind *b3*. We observe hence 3 correctly ranked persons --*b5*, *b1* and *b2*-- minus 1 incorrectly ranked person --*b3*-- out of four determined comparisons. The resulting ordinal correlation index amounts to (3-1)/4 = +0.5. 
-
-For Person *b4*, similarly, we count 2 correctly ranked persons --*a2* and *a5*-- and 2 incorrectly ranked persons --*a3* and *a4*-- out of the four determined comparisons. The resulting ordinal correlation amounts hence to (2-2)/4 = 0.0
-
-For a given maximal matching we obtain thus 10 ordinal correlation indexes, one for each person in both groups. And, we may now score the global fitness of a given matching by computing the average over all the individual ordinal correlation indexes observed in group *A* and group *B*.
-
-
-Computing the fairest intergroup pairing
-````````````````````````````````````````
-The :py:mod:`pairings` module provides the :py:class:`~pairings.FairestInterGroupPairing` class for solving, following this way, a given pairing problem of tiny order 5 (see below).
-
-.. code-block:: pycon
-   :linenos:
-   :emphasize-lines: 2,8-11
-
-   >>> from pairings import FairestInterGroupPairing
-   >>> fp = FairestInterGroupPairing(lvA1,lvB1)
-   >>> fp
-    *------- FairPairing instance description ------*
-     Instance class      : FairestInterGroupPairing
-     Instance name       : pairingProblem
-     Groups A and B size : 5
-     Attributes          : ['name', 'order', 'vpA', 'vpB',
-                            'pairings', 'matching',
-		       	    'vertices', 'valuationDomain',
-			    'edges', 'gamma', 'runTimes']
-
-The class takes as input two reciprocal :py:class:`~votingProfiles.VotingProfile` objects describing the individual pairing preferences of the two groups *A* and *B*  of persons. The class constructor delivers the attributes shown above. *vpA* and *vpB* contain the pairing preferences. The *pairings* attribute gathers all maximal matchings --the potential decision actions-- ordered by decreasing average ordinal correlation with the individual pairing preferences, whereas the *matching* attribute delivers directly the first-ranked maximal matching --*pairings[0][0]*-- and may be consulted as shown in the Listing below. The resulting *fp* object models in fact a :py:class:`~graphs.BipartiteGraph` object where the *vertices* correspond to the set of persons in both groups and the bipartite *edges* model the fairest maximal matching. The :py:meth:`~pairings.FairestInterGroupPairing.showFairestPairing` method prints out the fairest matching.
-
-.. code-block:: pycon
-   :linenos:
-   :emphasize-lines: 11-12,14-15,20-21,23
-
-   >>> fp.showFairestPairing(rank=1,
-   ...   WithIndividualCorrelations=True)
-    *------------------------------*
-    Fairest pairing
-     ['a1', 'b3']
-     ['a2', 'b5']
-     ['a3', 'b1']
-     ['a4', 'b4']
-     ['a5', 'b2']
-    groupA correlations:
-     'a1': +1.000
-     'a2': +0.500
-     'a3':  0.000
-     'a4': +0.500
-     'a5': +0.500
-    group A average correlations (a) : 0.500
-    group A standard deviation       : 0.354
-    ----
-    groupB Correlations:
-     'b1': +1.000
-     'b2': +1.000
-     'b3':  0.000
-     'b4': +0.500
-     'b5': -0.500
-    group B average correlations (b) : 0.400
-    group B standard deviation       : 0.652
-    ---- 
-    Average correlation    : 0.450
-    Standard Deviation     : 0.497
-    Unfairness |(a) - (b)| : 0.100
-
-Three persons --*a1*, *b1* and *b2*-- get as partner their first choice (+1.0). Four persons --*a2*, *a4*, *a5* and *b4*-- get their second choice (+0.5). Two persons --*a3* and *b3*-- get their third choice (0.0). Person *b5* gets only her fourth choice. Both group get very similar average ordinal correlation results -- +0.500 versus +0.400-- resulting in a low unfairness score (see last Line above)
-
-In this problem we may observe a 2nd-ranked pairing, of same average correlation score +0.450, but with both a larger standard deviation (0.55 versus 0.45) and a larger unfairness score (0.300 versus 0.100). 
-
-.. code-block:: pycon
-   :linenos:
-   :emphasize-lines: 11,13,16,21,23,25,28
-
-   >>> fp.showFairestPairing(rank=2,
-   ...      WithIndividualCorrelations=True)
-    *------------------------------*
-    2nd-ranked pairing
-    ['a1', 'b3']
-    ['a2', 'b5']
-    ['a3', 'b4']
-    ['a4', 'b1']
-    ['a5', 'b2']
-    group A correlations:
-     'a1': +1.000
-     'a2': +0.500
-     'a3': +1.000
-     'a4': +0.000
-     'a5': +0.500
-    group A average correlations (a) : 0.600
-    group A standard deviation       : 0.418
-    ----
-    group B correlations:
-     'b1': +0.000
-     'b2': +1.000
-     'b3': +0.000
-     'b4': +1.000
-     'b5': -0.500
-    group B average correlations (b) : 0.300
-    group B standard deviation       : 0.671
-    ---
-    Average correlation    : 0.450
-    Standard Deviation     : 0.550
-    Unfairness |(a) - (b)| : 0.300
-
-In this second-fairest pairing solution, four persons --*a1*, *a3*, *b2* and *b4*-- get their first choice. Only two persons --*a2* and *a5*-- get their second choice, but three persons --*a4*, *b1* and *b3*-- now only get their third choice. Person *b5* gets unchanged her fourth choice. Despite a same average correlation (+0.45), the distribution of the individual correlations appears less balanced than in the previous solution, as confirmed by the higher standard deviation. In the latter pairing, group *A* shows indeed an average correlation of +3.000/5 = +0.600, whereas group *B* obtains only an average correlation of 1.500/5 = +0.300.
-
-In the previous pairing, group *A* gets a lesser average correlation of +0.500. And, group *B* obtains here a higher average correlation of 2.000/5 = +0.400. Which makes the first-ranked pairing with same average ordinal correlation yet lower standard deviation, an effectively fairer matching decision. 
-
-One may visualise a pairing result with the :py:meth:`~pairings.~InterGroupPairing.exportPairingGraphViz` method (see :numref:`fairPairing` below).
-
->>> fp.exportPairingGraphViz(fileName='fairPairing',
-...                          matching=fp.matching)
- dot -Tpng fairPairing.dot -o fairPairing.png
-
-.. Figure:: fairPairing.png
-   :alt: Fairest first-ranked matching
-   :name: fairPairing
-   :width: 250 px
-   :align: center
-
-   Fairest intergroup pairing decision
-
-A matching corresponds in fact to a certain permutation of the positional indexes of the persons in group *B*. We may compute this permutation and construct the corresponding permutation graph.
-
-.. code-block:: pycon
-   :linenos:
-   :emphasize-lines: 9
-
-   >>> permutation = fp.computePermutation(fp.matching)
-   >>> from graphs import PermutationGraph
-   >>> pg = PermutationGraph(permutation)
-   >>> pg
-    *------- Graph instance description ------*
-     Instance class   : PermutationGraph
-     Instance name    : matching-permutation
-     Graph Order      : 5
-     Permutation      : [3, 5, 1, 4, 2]
-     Graph Size       : 6
-     Valuation domain : [-1.00; 1.00]
-     Attributes       : ['name', 'vertices', 'order',
-                         'permutation', 'valuationDomain',
-                         'edges', 'size', 'gamma']
-   >>> pg.exportPermutationGraphViz(fileName='fairPairingPermutation')
-   *---- exporting a dot file for GraphViz tools ---------*
-   Exporting to farPairingPermutation.dot
-   neato -n -Tpng fairPairingPermutation.dot -o fairPairingPermutation.png
-
-.. Figure:: fairPairingPermutation.png
-   :alt: Fairest first-ranked matching's permutation
-   :name: fairPairingPermutation
-   :width: 250 px
-   :align: center
-
-   Fairest pairing's coloured matching diagram
-
-In :numref:`fairPairingPermutation` is shown the coloured matching diagram of the index permutation [3, 5, 1, 4, 2] modelled by the fairest pairing decision.
-
-Mind that our :py:class:`~pairings.FairestInterGroupPairing` class does not provide an efficient algorithm for computing fair pairings; far from it. Our class constructor's complexity is in :math:`O(k!)`, which makes the class totally unfit for solving any real pairing problem even of small size. The class has solely the didactic purpose of giving a first insight into this important and practically relevant decision problem. For efficiently solving this kind of pairing decision problems it is usual professional practice to concentrate the set of potential pairing decisions on *stable* matchings [45]_ .
-
-Fair versus stable pairings
-```````````````````````````
-In classical economics, where the homo economicus is supposed to ignore any idea of fairness and behave solely in exact accordance with his rational self-interest, a pairing is only considered suitable when there appear no matching *instabilities*. A matching is indeed called *stable* when there does not exist in the matching a couple of pairs such that it may be interesting for both a paired person from group *A* and a paired person from group *B* to abandon their given partners and form together a new pair. Let us consider for instance the following situation,
-
-    | Person *a3* is paired with Person *b1*.
-    | Person *b4* is paired with Person *a4*.
-    | Person *a3* would rather be with Person *b4*
-    | Person *b4* would rather be with Person *a3*
-
-Computing such a *stable* matching may be done with the famous *Gale-Shapley*  algorithm ([43]_, [45]_), available via the :py:class:`~pairings.FairestGaleShapleyMatching` class (see below Line 1).
-
-.. code-block:: pycon
-   :linenos:
-
-   >>> from pairings import FairestGaleShapleyMatching
-   >>> fgs = FairestGaleShapleyMatching(lvA1,lvB1)
-   >>> fgs.showPairing(fgs.matching)
-    *-----------*
-       Pairing
-     ['a1', 'b3']
-     ['a2', 'b5']
-     ['a3', 'b4']
-     ['a4', 'b1']
-     ['a5', 'b2']
-
-We have already seen this *Gale-Shapley* pairing solution. It is in fact the 2nd-ranked fairest pairing, discussed in the previous section. Now, is the fact of being *stable* any essential characteristic of a fair pairing solution?
-
-In a Monte Carlo simulation of solving 1000 random pairing problems of order 5, we obtain the following distribution of the actual fairness ranking indexes of the fairest stable matching. 
-
-.. Figure:: distStableFairness.png
-   :alt: Distribution of the ranks of the fairest stable matching
-   :name: distStableFairness
-   :width: 500 px
-   :align: center
-
-   Distribution of the fairness rank of the fairest stable matching
-
-In :numref:`distStableFairness` we may notice that only in a bit more than 50% of the cases, the overall fairest matching --of index 0 in the *fp.pairings* list-- is indeed stable.
-
-And the overall fairest matching in our example above is, for instance, *not* a stable matching (see Lines 2-3 below).
-
-.. code-block:: pycon
-   :linenos:
-   :emphasize-lines: 8-10
-
-   >>> fp.isStableMatching(fp.matching,Comments=True)
-    *------------------------------*
-    ['a1', 'b3']
-    ['a2', 'b5']
-    ['a3', 'b1']
-    ['a4', 'b4']
-    ['a5', 'b2']
-      is unstable!
-    a3 b4 <-- b1: rank improvement 0 --> 2
-    b4 a3 <-- a4: rank improvement 0 --> 1
-
-If we resolve its unstable pairs --[*a3*, *b1*] --> [*a3*, *b4*] , and [*a4*, *b4*] --> [*a4*, *b1*]-- we recover the previous *Gale-Shapley* solution, i.e the 2nd-fairest pairing solution (see above).
-
-**Unfairness of the Gale-Shapley solution**
-
-The *Gale-Shapley* algorithm is actually based on an asymmetric handling of the two groups of persons by distinguishing a matches proposing group. In our implementation here [44]_, it is group *A*. Now, the proposing group gets by the *Gale-Shapley* algorithm the best possible average group correlation, but of costs of the non-proposing group who gets the worst possible average group correlation in any stable matching [45]_. We may check as follows this unfair result on the previous *Gale-Shapley* solution.
-
-.. code-block:: pycon
-   :linenos:
-   :emphasize-lines: 10-13,15
-
-   >>> fgs.showMatchingFairness(fgs.matching,
-   ...        WithIndividualCorrelations=True)
-    *------------------------------*
-    ['a1', 'b3']
-    ['a2', 'b5']
-    ['a3', 'b4']
-    ['a4', 'b1']
-    ['a5', 'b2']
-    -----
-    group A correlations:
-     'a1': +1.000
-     'a2': +0.500
-     'a3': +1.000
-     'a4': +0.000
-     'a5': +0.500
-    group A average correlations (a) : 0.600
-    group A standard deviation       : 0.418
-    -----
-    group B correlations:
-     'b1': +0.000
-     'b2': +1.000
-     'b3': +0.000
-     'b4': +1.000
-     'b5': -0.500
-    group B average correlations (b) : 0.300
-    group B standard deviation       : 0.671
-    -----
-    Average correlation    : 0.450
-    Standard Deviation     : 0.550
-    Unfairness |(a) - (b)| : 0.300
-
-Four persons out of five from group *A* are matched to their first or second choices. When reversing the order of the given linear voting profiles *lvA1* and *lvB1*, we obtain a second *Gale-Shapley* solution *gs2* favouring this time the persons in group *B*.
-
-.. code-block:: pycon
-   :linenos:
-   :emphasize-lines: 21-25,29-31
-
-   >>> gs2 = fgs.computeGaleShapleyMatching(Reverse=True)
-   >>> fgs.showMatchingFairness(gs2,
-   ...     WithIndividualCorrelations=True)
-    *------------------------------*
-    ['a1', 'b3']
-    ['a2', 'b1']
-    ['a3', 'b4']
-    ['a4', 'b5']
-    ['a5', 'b2']
-    -----
-    group A correlations:
-     'a1': +1.000
-     'a2': -1.000
-     'a3': +1.000
-     'a4': -0.500
-     'a5': +0.500
-    group A average correlations (a) : 0.200
-    group A standard deviation       : 0.908
-    -----
-    group B correlations:
-     'b1': +0.500
-     'b2': +1.000
-     'b3': +0.000
-     'b4': +1.000
-     'b5': +0.500
-    group B average correlations (b) : 0.600
-    group B standard deviation       : 0.418
-    -----
-    Average correlation    : 0.400
-    Standard Deviation     : 0.699
-    Unfairness |(a) - (b)| : 0.400
-
-In this reversed *Gale-Shapley* pairing solution, it is indeed the group *B* that appears now better served. Yet, it is necessary to notice now, besides the even more unbalanced group average correlations, the lower global average correlation (+0.400 compared to +0.450) coupled with both an even higher standard deviation (0.699 compared to 0.550) and a higher unfairness score (0.400 versus 0.300).
-
-It may however also happen that both *Gale-Shapley* matchings, as well as the overall fairest one, are a same unique fairest pairing solution. This is for instance the case when considering the following example of reciprocal *lvA2* and *lvB2* profiles [49]_ .
-
-.. code-block:: pycon
-   :linenos:
-   :emphasize-lines: 5,7-8,15,17-18,21,24,26-27,36-37
-
-   >>> lvA2 = LinearVotingProfiles('lvA2')		     
-   >>> lvA2.showLinearBallots()
-    voters 	      marginal     
-    (weight)	 candidates rankings
-    a1(1):	 ['b1', 'b5', 'b2', 'b4', 'b3']
-    a2(1):	 ['b4', 'b3', 'b5', 'b2', 'b1']
-    a3(1):	 ['b3', 'b5', 'b1', 'b2', 'b4']
-    a4(1):	 ['b4', 'b2', 'b5', 'b3', 'b1']
-    a5(1):	 ['b5', 'b2', 'b3', 'b4', 'b1']
-    # voters:  5
-   >>> lvB2 = LinearVotingProfile('lvB2')
-   >>> lvB2.showLinearBallots()
-    voters 	      marginal     
-    (weight)	 candidates rankings
-    b1(1):	 ['a1', 'a2', 'a5', 'a3', 'a4']
-    b2(1):	 ['a2', 'a5', 'a3', 'a4', 'a1']
-    b3(1):	 ['a3', 'a4', 'a1', 'a5', 'a2']
-    b4(1):	 ['a4', 'a1', 'a2', 'a3', 'a5']
-    b5(1):	 ['a2', 'a1', 'a5', 'a3', 'a4']
-    # voters:  5
-   >>> fp = FairestInterGroupPairing(lvA2,lvB2,StableMatchings=True)
-   >>> fp.showMatchingFairness()
-    *------------------------------*
-    ['a1', 'b1']
-    ['a2', 'b5']
-    ['a3', 'b3']
-    ['a4', 'b4']
-    ['a5', 'b2']
-    group A average correlations (a) : 0.700
-    group A standard deviation       : 0.447
-    group B average correlations (b) : 0.900
-    group B standard deviation       : 0.224
-    Average correlation    : 0.800
-    Standard Deviation     : 0.350
-    Unfairness |(a) - (b)| : 0.200
-   >>> print('Index of stable matchings:'. fp.stableIndex)
-    Index of stable matchings: [0]
-
-In this case, the individual pairing preferences lead easily to the overall fairest pairing (see above). Indeed, three couples out of 5, namely [*a1*, *b1*], [*a3*, *b3*] and [*a4*, *b4*], do share their mutual first choices. For the remaining couples -- [*a2*, *b5*] and [*a5*, *b2*]-- the fairest matching gives them their third and first, respectively their first and second choice. Furthermore, their exists only one stable matching and it is actually the overall fairest one. When setting the *StableMatchings* flag of the :py:class:`~pairings.FairestInterGroupPairing` class to *True*, we get the *stableIndex* list with the actual index numbers of all stable maximal matchings (see Lines 19 and 34-35).
-
-But the contrary may also happen. Below we show individual pairing preferences --stored in files *lvA3.py* and *lvB3.py*-- for which the *Gale-Shapley* algorithm is not delivering a satisfactory pairing solution [49]_.
-
-.. code-block:: pycon
-   :linenos:
-   :emphasize-lines: 7,10,19,22
-
-   >>> from votingProfiles import LinearVotingProfile
-   >>> lvA3 = LinearVotingProfile('lvA3')
-   >>> lvA3.showLinearBallots()
-    voters 	      marginal     
-    (weight)	 candidates rankings
-     a1(1):  ['b5', 'b6', 'b4', 'b3', 'b1', 'b2']
-     a2(1):  ['b6', 'b1', 'b4', 'b5', 'b3', 'b2']
-     a3(1):  ['b6', 'b3', 'b4', 'b1', 'b5', 'b2']
-     a4(1):  ['b3', 'b4', 'b2', 'b6', 'b5', 'b1']
-     a5(1):  ['b3', 'b4', 'b5', 'b1', 'b6', 'b2']
-     a6(1):  ['b3', 'b5', 'b1', 'b6', 'b4', 'b2']
-      # voters:  6
-   >>> lvB3 = LinearVotingProfile('lvB3')
-   >>> lvB3.showLinearBallots()
-    voters 	      marginal     
-    (weight)	 candidates rankings
-     b1(1):  ['a3', 'a4', 'a6', 'a1', 'a5', 'a2']
-     b2(1):  ['a6', 'a4', 'a1', 'a3', 'a5', 'a2']
-     b3(1):  ['a3', 'a2', 'a4', 'a1', 'a6', 'a5']
-     b4(1):  ['a4', 'a2', 'a5', 'a6', 'a1', 'a3']
-     b5(1):  ['a4', 'a2', 'a3', 'a6', 'a1', 'a5']
-     b6(1):  ['a4', 'a3', 'a1', 'a5', 'a6', 'a2']
-      # voters:  6
-
-The individual pairing preferences are very contradictory. For instance, Person's *a2* first choice is *b6* whereas Person *b6* dislikes Person *a2* most. Similar situation is given with Persons *a5* and *b3*.
-
-In this pairing problem there does exist only one matching which is actually stable and it is a very unfair pairing. Its fairness index is 140 (see Line 3-4 below).
-
-.. code-block:: pycon
-   :linenos:
-   :emphasize-lines: 3-4,19-21,27-32
-		   
-   >>> fp = FairestInterGroupPairing(lvA3,lvB3,
-   ...                  StableMatchings=True)
-   >>> fp.stableIndex
-    [140]
-   >>> g1 = fp.computeGaleShapleyMatching()
-   >>> fp.showMatchingFairness(g1,
-   ...              WithIndividualCorrelations=True)
-   *------------------------------*
-    ['a1', 'b1']
-    ['a2', 'b4']
-    ['a3', 'b6']
-    ['a4', 'b3']
-    ['a5', 'b2']
-    ['a6', 'b5']
-   ------ 
-   group A correlations:
-    'a1': -0.600
-    'a2': +0.200
-    'a3': +1.000
-    'a4': +1.000
-    'a5': -1.000
-    'a6': +0.600
-   group A average correlation (a) : 0.200
-   group A standard deviation      : 0.839
-   -----
-   group B correlations:
-    'b1': -0.200
-    'b2': -0.600
-    'b3': +0.200
-    'b4': +0.600
-    'b5': -0.200
-    'b6': +0.600
-   group B average correlation (b) : 0.067
-   group B standard deviation      : 0.484
-   -----
-   Average correlation    : 0.133
-   Standard Deviation     : 0.657
-   Unfairness |(a) - (b)| : 0.133
-
-Indeed, both group correlations are very weak and show furthermore high standard deviations. Five out of the twelve persons obtain a negative correlation with their respective pairing preferences. Only two persons from group *A* --*a3* and *a4*-- get their first choice, whereas Person *a5* is matched with her least preferred partner (see Lines 19-21). In group *B*, no apparent attention is put on choosing interesting partners (see Lines 27-32). 
-
-The fairest matching looks definitely more convincing.
-
-.. code-block:: pycon
-   :linenos:
-   :emphasize-lines: 13,18,28
-
-   >>> fp.showMatchingFairness(fp.matching,
-   ...     WithIndividualCorrelations=True)
-   *------------------------------*
-    ['a1', 'b6']
-    ['a2', 'b5']
-    ['a3', 'b3']
-    ['a4', 'b2']
-    ['a5', 'b4']
-    ['a6', 'b1']
-    -----
-    group A correlations:
-     'a1': +0.600
-     'a2': -0.200
-     'a3': +0.600
-     'a4': +0.200
-     'a5': +0.600
-     'a6': +0.200
-    group A average correlation (a) : 0.333
-    group A standard deviation      : 0.327
-    ----- 
-    group B correlations:
-     'b1': +0.200
-     'b2': +0.600
-     'b3': +1.000
-     'b4': +0.200
-     'b5': +0.600
-     'b6': +0.200
-    group B average correlation (b) : 0.467
-    group B standard deviation      : 0.327
-    -----
-    Average correlation    : 0.400
-    Standard Deviation     : 0.319
-    Unfairness |(a) - (b)| : 0.133
-
-Despite the very contradictory individual pairing preferences and a same unfairness score, only one person, namely *a2*, obtains here a choice in negative correlation with her preferences (see Line 13). The group correlations and standard deviations are furthermore very similar (lines 18 and 28).  
-
-The fairest solution is however far from being stable. With three couples of pairs that are potentially unstable, the first and stable unique *Gale-Shapley* matching is with its fairness index 140 indeed far behind many fairer pairing solutions (see below).
-
-.. code-block:: pycon
-   :linenos:
-
-   >>> fp.isStableMatching(fp.matching,Comments=True)
-    Unstable match:  Pair(groupA='a4', groupB='b2')
-                     Pair(groupA='a5', groupB='b4')
-      a4 b2 <-- b4
-      b4 a5 <-- a4
-    Unstable match:  Pair(groupA='a2', groupB='b5')
-                     Pair(groupA='a5', groupB='b4')
-      a2 b5 <-- b4
-      b4 a5 <-- a2
-    Unstable match:  Pair(groupA='a3', groupB='b3')
-                     Pair(groupA='a1', groupB='b6')
-      a3 b3 <-- b6
-      b6 a1 <-- a3
-
-How likely is it to obtain such an unfair *Gale-Shapley* matching? With our Monte Carlo simulation of 1000 random pairing problems of order 5, we may empirically check the likely fairness index of the fairest of both *Gale-Shapley* solutions.  
-
-.. Figure:: distGSFairness.png
-   :alt: Distribution of the index of the fairest *Gale-Shapley* matching
-   :name: distGSFairness
-   :width: 500 px
-   :align: center
-
-   Distribution of the fairness index of the fairest *Gale-Shapley* matching
-
-In :numref:`distGSFairness`, we see that the fairest of both *Gale-Shapley* solutions will correspond to the overall fairest pairing (index = 0) in about *36%* out of the 1000 random cases. Yet, it is indeed the complexity in :math:`O(k^2)` of the *Gale-Shapley* algorithm that makes it an interesting alternative to our brute force approach in complexity :math:`O(k!)`.
-
-It is worthwhile noticing furthermore that the number of stable matchings is in general  very small compared to the size of the huge set of potential maximal matchings as shown in :numref:`stableFreq`.
-
-.. Figure:: stableFreq.png
-   :alt: Frequency of stable matchings
-   :name: stableFreq
-   :width: 500 px
-   :align: center
-
-   Distribution of the number of stable matchings
-
-In the simulation of 1000 random pairing problems of order 5, we observe indeed never more than seven stable matchings and the expected number of stable matchings is between one and two out of 120. It could therefore be opportune to limit our potential set of maximal matchings --the decisions actions-- to solely stable matchings, as is currently the usual professional solving approach in pairing problems of this kind. Even if we would very likely miss the overall fairest pairing solution.
-
-**Dropping the stability requirement**
-
-Dropping however the *stability* requirement opens a second way of reducing the actual complexity of the fair pairing problem. This way  goes by trying to enhance the fairness of a *Gale-Shapley* matching via a *hill-climbing* heuristic where we swap partners in couples of pairs that mostly increase the average ordinal correlation and decrease the gap between the groups' correlations.
-
-With this strategy we may hence expect to likely reach one of the fairest possible matching solutions. In a Monte Carlo simulation of 1000 random pairing problems of order 6 we may indeed notice in :numref:`enhancedFreq` that we reach in a very limited number  of swaps --less than :math:`2 \times k`-- a fairness index less than [3] in nearly 95% of the cases. The weakest fairness index found is 16. 
-
-.. Figure:: enhancedFreq.png
-   :alt: Distribution of the fairness index of enhanced Gale-Shapley solutions
-   :name: enhancedFreq
-   :width: 500 px
-   :align: center
-
-   Distribution of the fairness index of enhanced Gale-Shapley solutions
-
-In the following example of a pairing problem of order 6, we observe only one unique stable matching with fairness index [12], in fact a very unfair *Gale-Shapley* matching completely ignoring the individual pairing preferences of the persons in group *B* (see Line 15 below). 
-
-.. code-block:: pycon
-   :linenos:
-   :emphasize-lines: 15
-
-   >>> gs = FairestGaleShapleyMatching(lvA,lvB,
-   ...                  Comments=True)
-    Fairest Gale-Shapley matching
-    -----------------------------
-     ['a1', 'b3']
-     ['a2', 'b5']
-     ['a3', 'b4']
-     ['a4', 'b1']
-     ['a5', 'b6']
-     ['a6', 'b2']
-     -----
-     group A average correlation (a) : 0.867
-     group A standard deviation      : 0.327
-     -----
-     group B average correlation (b) : 0.000
-     group B standard deviation      : 0.704
-     -----
-     Average correlation    : 0.433
-     Standard Deviation     : 0.692
-     Unfairness |(a) - (b)| : 0.867
-
-Taking this *Gale-Shapley* solution --*gs.matching*--  as initial starting point, we try to swapp partners in couple of pairs in order to improve the average ordinal correlation with all the individual pairing preferences and to reduce the gap between both groups. The :py:mod:`pairings` module provides the :py:class:`~pairings.FairnessEnhancedInterGroupMatching` class for this purpose.
-
-.. code-block:: pycon
-   :linenos:
-   :emphasize-lines: 17,20,25
-
-   >>> from pairings import \
-   ...       FairnessEnhancedInterGroupMatching
-   >>> egs = FairnessEnhancedInterGroupMatching(
-   ...          lvA,lvB,initialMatching=gs.matching)
-   >>> egs.iterations
-    4
-   >>> egs.showMatchingFairness(egs.matching)
-    Fairness enhanced matching
-    --------------------------
-     ['a1', 'b3']
-     ['a2', 'b2']
-     ['a3', 'b4']
-     ['a4', 'b6']
-     ['a5', 'b5']
-     ['a6', 'b1']
-     -----
-     group A average correlation (a) : 0.533
-     group A standard deviation      : 0.468
-     -----
-     group B average correlation (b) : 0.533
-     group B standard deviation      : 0.641
-     -----
-     Average correlation    : 0.533
-     Standard Deviation     : 0.535
-     Unfairness |(a) - (b)| : 0.000
-   >>> fp = FairestInterGroupPairing(lvA,lvB)
-   >>> fp.computeMatchingFairnessIndex(egs.matching)
-    0
-
-With a slightly enhanced overall correlation (+0.533 versus +0.433), both groups obtain after four swapping iterations the same group correlation of +0.533 (Unfairness score = 0.0, see Lines 17, 20 and 25 above). And, furthermore, the fairness enhancing procedure attains the fairest possible pairing solution (see last Line).
-
-Our *hill-climbing* fairness enhancing algorithm seams hence to be quite efficient. Considering that its complexity is about :math:`O(k^3)`, we are effectively able to solve pairing problems of realistic orders.
-
-Do we really need to start the fairness enhancing strategy from a previously computed *Gale-Shapley* solution? No, we may start from any initial matching. This opens the way for taking into account more realistic versions of the individual pairing preferences than complete reciprocal linear voting profiles.   
-
-Relaxing the requirement for complete linear voting profiles
-````````````````````````````````````````````````````````````
-
-**Partial individual pairing preferences**
-
-In the classical approach to the pairing decision problem, it is indeed required that each person communicates a complete linearly ordered list of the potential partners. It seams more adequate to ask for only partially ordered lists of potential partners. With the *PartialLinearBallots* flag and the *lengthProbability* parameter the :py:class:`~pairings.RandomLinearVotingProfile` class provides a random generator for such a kind of individual pairing preferences (see Lines 5-6 below).
-
-.. code-block:: pycon
-   :linenos:
-   :emphasize-lines: 5-6,13-14
-
-   >>> from votingProfiles import RandomLinearVotingProfile
-   >>> vpA = RandomLinearVotingProfile(
-   ...            numberOfVoters=7,numberOfCandidates=7,
-   ...            votersIdPrefix='a',candidatesIdPrefix='b',
-   ...            PartialLinearBallots=True,
-   ...            lengthProbability=0.5,
-   ...            seed=1)
-   >>> vpA.showLinearBallots()
-     voters 	      marginal     
-    (weight)	 candidates rankings
-     a1(1):	 ['b4', 'b7', 'b6', 'b3', 'b1']
-     a2(1):	 ['b7', 'b5', 'b2', 'b6']
-     a3(1):	 ['b1']
-     a4(1):	 ['b2', 'b3', 'b5']
-     a5(1):	 ['b2', 'b1', 'b4']
-     a6(1):	 ['b6', 'b7', 'b2', 'b3']
-     a7(1):	 ['b7', 'b6', 'b1', 'b3', 'b5']
-    # voters:  7
-
-With length probability of 0.5, we obtain here for the seven persons in group *A* the partial lists shown above. Person *a3*, for instance, only likes to be paired with Person *b1*, whereas Person *a4* indicates three preferred partners in decreasing order of preference (see Lines 13-14 above).
-
-We may generate similar reciprocal partial linear voting profiles for the seven persons in group *B*.
-
-.. code-block:: pycon
-   :linenos:
-   :emphasize-lines: 5-6,11-12
-
-   >>> vpB = RandomLinearVotingProfile(
-   ...          numberOfVoters=7,numberOfCandidates=7,
-   ...          votersIdPrefix='b',
-   ...          candidatesIdPrefix='a',
-   ...          PartialLinearBallots=True,
-   ...          lengthProbability=0.5,    
-   ...          seed=2)
-   >>> vpB.showLinearBallots()
-     voters 	      marginal     
-    (weight)	 candidates rankings
-     b1(1):	 ['a3', 'a4']
-     b2(1):	 ['a3', 'a4']
-     b3(1):	 ['a2', 'a6', 'a3', 'a1']
-     b4(1):	 ['a2', 'a6', 'a4']
-     b5(1):	 ['a2', 'a1', 'a5']
-     b6(1):	 ['a2', 'a7']
-     b7(1):	 ['a7', 'a2', 'a1', 'a4']
-    # voters:  7
-
-This time, Persons *b1* and *b2* indicate only two preferred pairing partners, namely both times Person *a3* before Person *a4* (see Lines 11-12 above).
-
-Yet, it may be even more effective to only ask for reciprocal **approvals** and **disapprovals** of potential pairing partners.
-
-**Reciprocal bipolar approval voting profiles**
-
-Such random *bipolar approval* voting profiles may be generated with the :py:class:`~votingProfiles.RandomBipolarApprovalVotingProfile` class (see below).
-
-.. code-block:: pycon
-   :linenos:
-   :emphasize-lines: 9-10,17-18
-
-   >>> from votingProfiles import \
-   ...       RandomBipolarApprovalVotingProfile
-   >>> k = 5
-   >>> apA1 = RandomBipolarApprovalVotingProfile(
-   ...              numberOfVoters=k,
-   ...              numberOfCandidates=k,
-   ...              votersIdPrefix='a',
-   ...              candidatesIdPrefix='b',
-   ...              approvalProbability=0.5,
-   ...              disapprovalProbability=0.5,
-   ...              seed=None)
-   >>> apA1.save('apA1')
-   >>> apA1.showBipolarApprovals()
-    Bipolar approval ballots
-    ------------------------
-    a1 :
-    Approvals   : ['b1', 'b5']
-    Disapprovals: ['b2']
-    a2 :
-    Approvals   : ['b2']
-    Disapprovals: ['b1', 'b3', 'b4']
-    a3 :
-    Approvals   : []
-    Disapprovals: ['b3', 'b5']
-    a4 :
-    Approvals   : ['b1', 'b5']
-    Disapprovals: ['b2', 'b3', 'b4']
-    a5 :
-    Approvals   : ['b2', 'b3']
-    Disapprovals: ['b1', 'b5']
-    Bipolar approval ballots
-
-The *approvalProbability* and *disapprovalProbability* parameters determine the expected number of approved, respectively disapproved, potential pairing partners (see Lines 9-10). Person *a1*, for instance, approves two persons --*b1* and *b5*-- and disapproves only Person *b2* (see Lines 17-18). Whereas Person *a3* does not approve anybody from group *B*, yet, disapproves *b3* and *b5*.
-
-We may generate a similar random reciprocal bipolar approval voting profile for the persons in group *B*.  
-   
-.. code-block:: pycon
-   :linenos:
-   :emphasize-lines: 4-7,14-15
-
-   >>> apB1 = RandomBipolarApprovalVotingProfile(
-   ...           numberOfVoters=k,
-   ...           numberOfCandidates=k,
-   ...           votersIdPrefix='b',
-   ...           candidatesIdPrefix='a',
-   ...           approvalProbability=0.5,
-   ...           disapprovalProbability=0.5,
-   ...           seed=None)
-   >>> apB1.save('apB1')
-   >>> apB1.showBipolarApprovals()
-    Bipolar approval ballots
-    ------------------------
-    b1 :
-    Approvals   : ['a2', 'a3']
-    Disapprovals: ['a1', 'a4', 'a5']
-    b2 :
-    Approvals   : ['a1', 'a2']
-    Disapprovals: ['a4']
-    b3 :
-    Approvals   : ['a5']
-    Disapprovals: ['a2', 'a3']
-    b4 :
-    Approvals   : ['a2']
-    Disapprovals: ['a3', 'a5']
-    b5 :
-    Approvals   : ['a4']
-    Disapprovals: ['a1']
-
-This time, Person *b1* approves two persons --*a2* and *a3*-- and disapproves three persons --*a1*, *a4*, and *a5*-- (see Lines 14-15 above).
-
-Using Copeland scores for guiding the fairness enhancement
-``````````````````````````````````````````````````````````
-
-The partial linear voting profiles as well as the bipolar approval profiles determine for each person in both groups only a partial order on their potential pairing partners. In order to enhance the fairness of any given maximal matching, we must therefore replace the rank information of the complete linear voting profiles, as used in the *Gale-Shapley* algorithm, with the *Copeland* ranking scores obtained from the partial pairwise comparisons of potential partners. For this purpose we reuse again the :py:class:`~pairings.FairnessEnhancedInterGroupMatching` class , but without providing any initial matching (see below [49]_ ). 
-
-.. code-block:: pycon
-   :linenos:
-   :emphasize-lines: 7-8,21,23
-
-   >>> from pairings import \
-   ...         FairnessEnhancedInterGroupMatching
-   >>> from votingProfiles import BipolarApprovalVotingProfile
-   >>> apA1 = BipolarApprovalVotingProfile('apA1')
-   >>> apB1 = BipolarApprovalVotingProfile('apB1')
-   >>> fem = FairnessEnhancedInterGroupMatching(
-   ...            apA1,apB1,initialMatching=None,
-   ...            maxIterations=2*k,
-   ...            Comments=False)
-   >>> fem                           
-    *------- InterGroupPairing instance description ------*
-    Instance class     : FairnessEnhancedInterGroupMatching
-    Instance name      : fairness-enhanced-matching
-    Group sizes        : 5
-    Graph Order        : 10
-    Graph size         : 5
-    Partners swappings : 5
-    Attributes         : ['runTimes', 'vpA', 'vpB',
-                  'verticesKeysA', 'verticesKeysB', 'name',
-                  'order', 'maxIterations', 'copelandScores',
-                  'initialMatching', 'matching', 'iterations', 'history',
-                  'maxCorr', 'stDev', 'groupAScores', 'groupBScores',
-                  'vertices', 'valuationDomain', 'edges', 'size', 'gamma']
-
-When no initial matching is given --*initialMatching* = *None*, which is the default setting-- two initial matchings --the left matching (*ai*, *bi*)  and the right matching (*ai*, *b-i*) for i = 1, ... k-- are used for starting the fairness enhancing procedure (see Line 7). The best solution of both is eventually retained. When the *initialMatching* parameter is set to *'random'*, a random shuffling --with given seed-- of the persons in group *B* preceeds the construction of the right and left initial matchings. By default, the computation is limited to :math:`2 \times k` swappings of partners in order to master the potential occurrence of cycling situations. This limit may be adjusted if necessary with the *maxIterations* parameter (see Line 8). Such cycling swappings are furthermore controlled by the *history* attribute (see Line 21). The fairness enhanced *fem.matching* solution determines in fact a :py:class:`~graphs.BipartiteGraph` object (see last Line 23). 
-
-The actual pairing result obtained with the given bipolar approval ballots above is shown with the :py:meth:`~pairings.InterGroupPairing.showMatchingFairness` method (see the Listing below). The *WithIndividualCorrelations* flag allows to print out the inidividual pairing preference correlations for all persons in both groups (see Line 2). 
-
-.. code-block:: pycon
-   :linenos:
-   :emphasize-lines: 2,11,16,23,25,28
-
-   >>> fem.showMatchingFairness(
-   ...             WithIndividualCorrelations=True)
-    *------------------------------*
-    ['a1', 'b4']
-    ['a2', 'b2']
-    ['a3', 'b1']
-    ['a4', 'b5']
-    ['a5', 'b3']
-    -----
-    group A correlations:
-     'a1': -0.333
-     'a2': +1.000
-     'a3': +1.000
-     'a4': +1.000
-     'a5': +1.000
-    group A average correlation (a) : 0.733
-    group A standard deviation      : 0.596
-    -----
-    group B correlations:
-     'b1': +1.000
-     'b2': +1.000
-     'b3': +1.000
-     'b4': +0.333
-     'b5': +1.000
-    group B average correlation (b) : 0.867
-    group B standard deviation      : 0.298
-    -----
-    Average correlation    : 0.800
-    Standard Deviation     : 0.450
-    Unfairness |(a) - (b)| : 0.133
-
-In group *A* and group *B*, all persons except *a1* and *b4* get an approved partner (see Lines 11 and 23). Yet, Persons *a1* and *b4* do not actually disapprove their respective match. Hence, the resulting overall ordinal correlation is very high (+0.800, see Line 28) and both groups show quite similar marginal correlation values (+0.733 versus +0.867, see Lines 16 and 25). The fairness enhanced matching we obtain in this case corresponds actually to the very fairest among all potential maximal matchings (see Lines 2-3 below). 
-
-.. code-block:: pycon
-   :linenos:
-   :emphasize-lines: 2-3
-
-   >>> from pairings import FairestInterGroupPairing
-   >>> fp = FairestInterGroupPairing(apA1,apB1)
-   >>> fp.computeMatchingFairnessIndex(fem.matching)
-    0
-
-Mind however that our fairness enhancing algorithm does not guarantee to end always in the very fairest potential maximal matching. In :numref:`interGroupQuality_6_52` is shown the result of a Monte Carlo simulation of 1000 random intergroup pairing problems of order 6 envolving bipolar approval voting profiles with approval, resp. disapproval probalities of 50%, resp. 20%. The failure rate to obtain the fairest pairing solution amounts to 12.4% with an average failure --optimal minus fairness enhanced average ordinal correlation-- of -0.056 and a maximum failure of -0.292. 
-
-.. Figure:: interGroupQuality_6_52.png
-   :alt: Optimal versus fairness enhanced pairings
-   :name: interGroupQuality_6_52
-   :width: 500 px
-   :align: center
-
-   Optimal versus fairness enhanced ordinal correlations
-
-The proportion of failures depends evidently on the difficulty and the order of the pairing problem. We may however enhance the success rate of the fairness enhancing heuristic by choosing, like a Gale-Shapley stable in the case of linear voting profiles, a best determined *Copeland* ranking scores based initial matching. 
-
-Starting the fairness enhancement from a best determined Copeland matching
-``````````````````````````````````````````````````````````````````````````
-
-The partner swapping strategy relies on the *Copeland* ranking scores of a potential pairing candidate for all persons in bothe groups. These scores are precomputed and stored in the *copelandScores* attribute of the :py:class:`~pairings.FairnessEnhancedInterGroupMatching` object. When we add, for a pair {*ai*, *bj*} both the *Copeland* ranking score of partner *bj* from the perspective of Person *ai* to the corresponding *Copeland* ranking score of partner *ai* from the perspective of Person *bj* to two times the observed minimal *Copeland* ranking score, we obtain a weakly determined complete bipartite graph object.
-
-.. code-block:: pycon
-   :linenos:
-   :emphasize-lines: 6-10
-
-   >>> from pairings import BestCopelandInterGroupMatching 
-   >>> bcop = BestCopelandInterGroupMatching(apA1,apB1)
-   >>> bcop.showEdgesCharacteristicValues()
-	    |   'b1'    'b2'    'b3'    'b4'    'b5'	 
-    --------|---------------------------------------
-       'a1' |  +0.56   +0.44   +0.50   +0.50   +0.44	 
-       'a2' |  +0.56   +0.94   +0.19   +0.62   +0.62	 
-       'a3' |  +0.81   +0.56   +0.12   +0.44   +0.31	 
-       'a4' |  +0.56   +0.12   +0.44   +0.44   +0.94	 
-       'a5' |  +0.19   +0.62   +0.94   +0.31   +0.31	 
-     Valuation domain: [-1.00;1.00]
-   >>> bcop.showPairing()
-    *------------------------------*
-    ['a1', 'b4']
-    ['a2', 'b2']
-    ['a3', 'b1']
-    ['a4', 'b5']
-    ['a5', 'b3']
-
-By following a kind of ranked pairs rule, we may construct in this graph a best determined bipartite maximal matching. The matches [*a2*, *b2*], [*a4*, *b5*] and [*a5*, *b3*] show the highest Copeland scores (+0.94, see Lines 7,9-10), followed by [*a3*, *b1*] (+0.81 Line 6). For Person *a1*, the best eventually available partner is *b4* (+050, line 6). 
-
-We are lucky here with the given example of reciprocal bipolar approval voting profiles *apA1* and *apB1* as we recover immediately the fairest enhanced matching obtained previously. The best determined *Copeland* matching is hence very opportune to take as initial start for the fairness enhancing procedure as it may similarly drastically reduce the potential number of fairness enhancing partner swappings (see Lines 3 and last below).
-
-.. code-block:: pycon
-   :linenos:
-   :emphasize-lines: 3,7-11
-
-   >>> fecop = FairnessEnhancedInterGroupMatching(
-   ...                    apA1,apB1,
-   ...                    initialMatching='bestCopeland',
-   ...                    Comments=False)
-   >>> fecop.showPairing()                           
-    *------------------------------*
-    ['a1', 'b4']
-    ['a2', 'b2']
-    ['a3', 'b1']
-    ['a4', 'b5']
-    ['a5', 'b3']
-   >>> fecop.Iterations
-    0
-
-A Monte Carlo simulation with 1000 intergroup pairing problems of order 6 with approval and disapproval probabilities of 30% shows actually that both starting points --*initalMatching* = *None* and *initialMatching* = 'bestCopeland'-- of the fairness enhancing heuristic may diverge positively and negatively in their respective best solutions.
-
-.. Figure:: femfecopComparison.png
-   :alt: Influence of the fairness enhancing start matching
-   :name: femfecopComparison
-   :width: 500 px
-   :align: center
-
-   Influence of the starting point on the fainess enhanced pairing solution
-
-Discuss :numref:`femfecopComparison`
-fem 78.18% success rate
-fecop 75.78% success rate
-
-If we run the fairness enhancing heuristic from both the left and right initial matchings as well as from the best determined Copeland matching and retain in fact the respective fairest solution of these three, we obtain, as shown in :numref:`femfecopQuality`, a success rate of 87.39% for reaching the fairest possible pairing solution with an average failure of -0.036 and a maximum failure of -0.150.
-
-.. Figure:: femfecopQuality.png
-   :alt: Optimal versus best fairness enhanced pairing solution
-   :name: femfecopQuality
-   :width: 500 px
-   :align: center
-
-   Optimal versus best fairness enhanced pairing solution
-
-For intergroup pairing problems of higher order, it appears however that the best determined *Copeland* matching gives in general a more efficient initial starting point for the fairness enhancing heuristic than both the left and right initial ones. In a Monte Carlo simulation with 1000 random bipolar approval pairing problems of order 50 and approval-disapproval probabilities of 20%, we obtain the results shown below.
-
-  ================  ========  ========  =======  ======  =======
-    Variables         Mean     Median     S.D.     Min     Max
-  ================  ========  ========  =======  ======  =======
-   Correlation        +0.886    +0.888    0.018  +0.850  +0.923
-   Unfairness          0.053     0.044    0.037   0.000   0.144
-   Run time (sec.)     1.901     1.895    0.029   1.868   2.142
-  ================  ========  ========  =======  ======  =======
-
-The median overall average correlation with the individual pairing preferences amounts to +0.886 with a maximum at +0.923. The *Unfairness* statistic indicates the absolute difference between the average correlations obtained in group A versus group B.
-
-In order to study the potential difference in quality and fairness of the pairing solutions obtained by starting the fairness enhancing procedure from both the left and right inital matching, from the best determined *Copeland* matching as well as from the fairest *Gale-Shapley* we ran a Monte Carlo simulation with 1000 random intergroup pairing problems of order 20 and where the individual pairing preferences were given with complete linear voting profiles (see :numref:`compFemCopGs`).
-
-.. Figure:: compFemCopGS.png
-   :alt: Comapring fairness enhancing results from different initial matchings
-   :name: compFemCopGS
-   :width: 600 px
-   :align: center
-
-   Comparing pairing results from different fairnesss enhancing start points
-
-If the average ordinal correlations obtained with the three starting matchings are quite similar --means within +0.690 and +0.693-- the differences between the average correlations of group *A* and group *B* show a potential advantage for the left&right initial matchings (mean unfairness: 0.065) versus the best *Copeland* (mean unfairness: 0.078) and, even more versus the fairest *Gale-Shapley* matching (mean unfairness: 0.203, see :numref:`compFemCopGS`). The essential unfairness of stable *Gale-Shapley* matchings may in fact not being corrected with our fairness enhancing procedure.
-
-..                 Mean     Median       S.D.        Min        Max
-.. corr3          0.6895     0.6860    0.02845     0.6080     0.7610
-.. fair3          0.2029     0.2050    0.06775    0.03900     0.6140
-.. corr1          0.6911     0.6830    0.02504     0.6450     0.7610
-.. fair1         0.06471    0.08700    0.04696      0.000     0.2000
-.. corr2          0.6930     0.6760    0.02801     0.6540     0.7620
-.. fair2         0.07766    0.09700    0.03568   0.002000     0.2230
-
-
-..                   Mean     Median       S.D.        Min        Max
-.. corrFem          0.6488     0.6530    0.02907     0.6000     0.6970
-.. corrGS           0.6245     0.6180    0.04107     0.5550     0.6900
-.. corrCop          0.6174     0.6160    0.03703     0.5680     0.6950
-.. fairFem         0.08987    0.08400    0.05446      0.000     0.1840
-.. fairCop          0.1053    0.08400    0.03815    0.06300     0.1900
-.. fairGS           0.2400     0.1470     0.1648    0.05300     0.5740
-
-
-Back to :ref:`Content Table <Tutorial-label>`
-
-----------------
-
-
-.. _Fair-IntraGroup-Pairings-label:
-
-On computing fair intragroup pairings
--------------------------------------
-
-.. contents:: 
-	:depth: 2
-	:local:
- 
-   
-The fair intragroup pairing problem
-```````````````````````````````````
-
-A very similar decision problem to the intergroup pairing one appears when, instead of pairing two different sets of persons, we are asked to pair an even-sized set of persons by fairly balancing again the individual pairing preferences of each person.
-
-Let us consider a set of four persons {*p1*, *p2*, *p3*, *p4*} to be paired. We may propose three potential pairing decisions :
-
-    | (1) *p1* with *p2* and *p3* with *p4*,
-    | (2) *p1* with *p3* and *p2* with *p4*, and
-    | (3) *p1* with *p4* and *p2* with *p3*.
-
-The individual pairing preferences, expressed under the format of bipolar approval ballots, are shown below:
-
-.. code-block:: pycon
-   :linenos:
-   :emphasize-lines: 3-5,9-11
-
-    Bipolar approval ballots
-    ------------------------
-    p1 :
-    Approvals   : ['p3', 'p4']
-    Disapprovals: ['p2']
-    p2 :
-    Approvals   : ['p1']
-    Disapprovals: ['p3']
-    p3 :
-    Approvals   : ['p1', 'p2', 'p4']
-    Disapprovals: []
-    p4 :
-    Approvals   : ['p2']
-    Disapprovals: ['p1', 'p3']
-
-Person *p1*, for instance, approves as potential partner both Persons *p3* and *p4*, but disapproves Person *p2* (see Lines 3-5). Person *p3* approves all potential partners, i.e. disapproves none of them (see Lines 9-11).
-
-Out of the three potential pairing decision, which is the one that most fairly balances the given individual pairing preferences shown above? If we take decision (1), Person *p1* will be paired with a disapproved partner. If we take decision (3), Person *p2* will be paired with a disapproved partner. Only pairing decision (2) allocates no disapproved partner to all the persons.
-
-We will generalise this approach to larger groups of persons in a similar way as we do in the intergroup pairing case.
-
-Generating random intragroup bipolar approval voting profiles
-`````````````````````````````````````````````````````````````
-Let us consider a group of six persons. Individual intragroup pairing preferences may be randomly generated with the :py:class:`~votingProfiles.RandomBipolarApprovalVotingProfile` class by setting the *IntraGroup* parameter to *True* (see Line 6 below)
-
-.. code-block:: pycon
-   :linenos:
-   :emphasize-lines: 6,14-15,17-18
-
-   >>> from votingProfiles import\
-   ...                   RandomBipolarApprovalVotingProfile
-   >>> vpG = RandomBipolarApprovalVotingProfile(
-   ...                        numberOfVoters=6,
-   ...                        votersIdPrefix='p',
-   ...                        IntraGroup=True,
-   ...                        approvalProbability=0.5,
-   ...                        disapprovalProbability=0.2,
-   ...                        seed=1)
-   >>> vpG.showBipolarApprovals()
-    Bipolar approval ballots
-    ------------------------
-    p1 :
-    Approvals   : ['p4', 'p5']
-    Disapprovals: []
-    p2 :
-    Approvals   : ['p1']
-    Disapprovals: ['p5']
-    p3 :
-    Approvals   : []
-    Disapprovals: ['p2']
-    p4 :
-    Approvals   : ['p1', 'p2', 'p3']
-    Disapprovals: ['p5']
-    p5 :
-    Approvals   : ['p1', 'p2', 'p3', 'p6']
-    Disapprovals: ['p4']
-    p6 :
-    Approvals   : ['p1', 'p2', 'p3', 'p4']
-    Disapprovals: []
-
-With an approval probability of 50% and a disapproval probability of 20% we obtain the bipolar approvals shown above. Person *p1* approves *p4* and *p5* and disapproves nobody, whereas Person *p2* approves *p1* and disapproves *p5* (see Lines 14-15 and 17-18). To solve this intragroup pairing problem, we need to generate the set of potential matching decisions.   
-
-The set of potential ìntragroup pairing decisions
-`````````````````````````````````````````````````
-In the intergroup pairing problem, the potential pairing decisions are given by the maximal independent sets of the line graph of the bipartite graph formed between two even-sized groups of persons. Here the set of potential pairing decisions is given by the maximal independents sets --the perfect matchings [48]_-- of the line graph of the complete graph obtained from the given set of six persons (see below).
-
-.. code-block:: pycon
-   :linenos:
-   :emphasize-lines: 6,10
-
-   >>> persons = [p for p in vpG.voters]
-   >>> persons
-    ['p1', 'p2', 'p3', 'p4', 'p5', 'p6']
-   >>> from graphs import CompleteGraph, LineGraph
-   >>> cg = CompleteGraph(verticesKeys=persons)
-   >>> lcg = LineGraph(cg)
-   >>> lcg.computeMIS()
-   ... # result is stored into lcg.misset
-   >>> len(lcg.misset)
-    15
-   >>> lcg.misset[0]
-    frozenset({frozenset({'p5', 'p2'}),
-               frozenset({'p1', 'p6'}),
-	       frozenset({'p3', 'p4'})})
-
-In the intragroup case we observe 15 potential pairing decisions (see Line 10). For a set of persons of size :math:`2 \times k`, the number of potential intragroup pairing decisions is actually given by the *double factorial of odd numbers*
-[47]_ .
-
-.. math::
-   1 \times 3 \times 5 \times ... \times (2 \times k -1) \;=\; (2 \times k - 1)!!
-
-For the first pair we have indeed :math:`(2 \times k)-1` partner choices, for the second pair we have :math:`(2 \times k)-3` partner choices, etc. This double factorial of odd numbers is far larger than the simple *k!* number of potential pairing decisions in a corresponding intergroup pairing problem of order *k*.
-
-In order to find now the fairest pairing among this potentially huge set of intragroup pairing decisions, we will reuse the same strategy as for the intergroup case. For each potential pairing solution, we are computing the average ordinal correlation between each potential pairing solution and the individual pairing preferences. The fairest pairing decision is eventually determined by the highest average coupled with the lowest standard deviation of the individual ordinal correlation indexes. 
-   
-Computing the fairest intragroup pairing
-````````````````````````````````````````
-For a pairing problem of tiny order :math:`(2 \times k = 6)` we may use the :py:class:`~pairings.FairestIntraGroupPairing` class for computing in a brute force approach the fairest possible pairing solution :
-
-.. code-block:: pycon
-   :linenos:
-   :emphasize-lines: 4,7,10-11,14
-
-   >>> from pairings import FairestIntraGroupPairing
-   >>> fp = FairestIntraGroupPairing(vpG)
-   >>> fp.nbrOfMatchings
-    15
-   >>> fp.showMatchingFairness()
-    Matched pairs
-    {'p1', 'p4'}, {'p3', 'p5'}, {'p6', 'p2'}
-    ----
-    Individual correlations:
-     'p1': +1.000, 'p2': +0.000, 'p3': +1.000
-     'p4': +1.000, 'p5': +1.000, 'p6': +1.000
-    -----
-    Average correlation : +0.833
-    Unfairness (stdev)    : 0.408
-
-As expected, we observe with a problem of order 6 a set of 1 x 3 x 5 = 15 potential pairings (see Line 4) and the fairest pairing solution  --highest correlation (+0.833) with given individual pairing preferences-- is shown in Line 7 above. All persons, except *p2* are paired with an approved partner and nobody is paired with a disapproved partner (see Lines 10-11).
-
-In the intergroup pairing case, an indicator of the actual fairness of a pairing solution is given by the absolute difference between both group correlation values. In the intragroup case here, an indicator of the fairness is given by the standard deviation of the individual correlations (see Line 14). The lower this standard deviation with a same overall correlation result, the fairer appears to be in fact the pairing solution [50]_ . 
-
-The *fp* object models in fact a generic :py:class:`~graphs.Graph` object whose edges correspond to the fairest possible pairing solution (see Lines 11-12). We may hence produce in :numref:`fairestIntraGroupPairing` a drawing of the fairest pairing solution by using the standard :py:meth:`~graphs.Graph.exportGraphViz` method for undirected graphs.
-
-   >>> fp.exportGraphViz('fairestIntraGroupPairing')
-    *---- exporting a dot file for GraphViz tools ---------*
-    Exporting to fairestIntraGroupPairing.dot
-    fdp -Tpng fairestIntraGroupPairing.dot -o fairestIntraGroupPairing.png
-
-.. Figure:: fairestIntraGroupPairing.png
-    :alt: Fairest Pairing
-    :name: fairestIntraGroupPairing
-    :width: 250 px
-    :align: center
-
-    Fairest intragroup pairing solution
-
-Unfortunately, this brute force approach to find the fairest possible pairing solution fails in view of the explosive character of the double factorial of odd numbers. For a group of 20 persons, we observe indeed already more than 650 millions of potential pairing decisions. Similar to the intergroup pairing case, we may use instead a kind of hill climbing heuristic for computing a fair intragroup pairing solution. 
-
-Fairness enhancing of a given pairing decision
-``````````````````````````````````````````````
-The :py:class:`~pairings.FairnessEnhancedIntraGroupMatching` class delivers such a solution. When no initial matching is given (see Line 3 below), our hill climbing strategy will start, similar to the intergroup pairing case, from two initial maximal matchings. The *left* one matches Person *pi* with Person *pi+1* for i in range 1 to 5 by step 3 (see Line 5-6) and the right one matches Person *pi* with Person *p-i* for i in range 1 to 3  (see Line 8-9).
-
-.. code-block:: pycon
-   :linenos:
-   :emphasize-lines: 3,6,8,11,13,16-17
-
-   >>> from pairings import FairnessEnhancedIntraGroupMatching
-   >>> fem = FairnessEnhancedIntraGroupMatching(vpG,
-   ...          initialMatching=None,Comments=True)
-    ===>>> Enhancing left initial matching
-    Initial left matching
-    [['p1', 'p2'], ['p3', 'p4'], ['p5', 'p6']]
-    Fairness enhanced left matching
-    [['p1', 'p4'], ['p3', 'p5'], ['p2', 'p6']] , correlation: 0.833
-    ===>>> Enhancing right initial matching
-    Initial right matching
-    [['p1', 'p6'], ['p3', 'p4'], ['p5', 'p2']]
-    Fairness enhanced right matching
-    [['p1', 'p4'], ['p3', 'p5'], ['p6', 'p2']] , correlation: 0.833 
-    ===>>> Best fairness enhanced matching
-    Matched pairs
-    {'p1', 'p4'}, {'p2', 'p6'}, {'p3', 'p5'}
-    Average correlation: +0.833
-
-The correlation enhancing search is similar to the one used for the intergroup heuristic. For each couple of pairs [{*pi*, *pj*}, {*pr*, *ps*}] in the respective initial matchings we have in the intragroup case in fact **two** partners swapping opportunities: (1) *pj* <-> *ps* or, (2) *pj* <-> *pr*. For both ways, we assess the expected individual correlation gains with the differences of the *Copeland* scores induced by the potential swappings. And we eventually proceed with a swapping of highest expected average correlation gain among all couple of pairs.
-
-In the case of the previous bipolar approval intragroup voting profile *vpG*, both starting points for the hill climbing heuristic give the same solution, in fact the fairest possible pairing solution we have already obtained with the brute force algorithm in the preceding Section (see above).
-
-To illustrate why starting from two initial matchings may be useful, we solve below a random intragroup pairing problem of order 20 where we assume an approval probability of 30% and a disapproval probability of 20% (see Line 3 below).
-
-.. code-block:: pycon
-   :linenos:
-   :emphasize-lines: 3,14,22
-
-   >>> vpG1 = RandomBipolarApprovalVotingProfile(
-   ...           numberOfVoters=20,votersIdPrefix='p',
-   ...           IntraGroup=True,approvalProbability=0.3,
-   ...           disapprovalProbability=0.2,seed=1)
-   >>> fem1 = FairnessEnhancedIntraGroupMatching(vpG1,
-   ...           initialMatching=None,Comments=True)
-    ===>>> Enhancing left initial matching
-    Initial left matching
-    [['p01', 'p02'], ['p03', 'p04'], ['p05', 'p06'], ['p07', 'p08'], ['p09', 'p10'],
-     ['p11', 'p12'], ['p13', 'p14'], ['p15', 'p16'], ['p17', 'p18'], ['p19', 'p20']]
-    Fairness enhanced left matching
-    [['p01', 'p02'], ['p03', 'p04'], ['p05', 'p15'], ['p06', 'p11'], ['p09', 'p17'],
-     ['p07', 'p12'], ['p13', 'p14'], ['p08', 'p16'], ['p20', 'p18'], ['p19', 'p10']],
-     correlation: +0.785
-    ===>>> Enhancing right initial matching
-    Initialright matching
-    [['p01', 'p20'], ['p03', 'p18'], ['p05', 'p16'], ['p07', 'p14'], ['p09', 'p12'],
-     ['p11', 'p10'], ['p13', 'p08'], ['p15', 'p06'], ['p17', 'p04'], ['p19', 'p02']]
-    Fairness enhanced right matching
-    [['p01', 'p19'], ['p03', 'p02'], ['p05', 'p15'], ['p07', 'p18'], ['p09', 'p17'],
-     ['p14', 'p13'], ['p10', 'p04'], ['p08', 'p12'], ['p20', 'p16'], ['p06', 'p11']],
-     correlation: +0.851
-    ===>>> Best fairness enhanced matching
-    Matched pairs
-    {'p01', 'p19'}, {'p03', 'p02'}, {'p05', 'p15'}, {'p06', 'p11'},
-    {'p07', 'p18'}, {'p08', 'p12'}, {'p09', 'p17'}, {'p10', 'p04'},
-    {'p14', 'p13'}, {'p20', 'p16'}
-    Average correlation: +0.851
-
-The hill climbing from the left initial matching attains an average ordinal correlation of +0.785, whereas the one starting from the right initial matching improves this result to an average ordinal correlation of +0.851 (see Lines 14 and 22).
-
-We may below inspect with the :py:meth:`~pairings.IntraGroupPairing.showMatchingFairness` method the individual ordinal correlation indexes obtained this way.
-
-.. code-block:: pycon
-   :linenos:
-   :emphasize-lines: 9-10
-
-   >>> fem1.showMatchingFairness(WithIndividualCorrelations=True)
-    Matched pairs
-    {'p01', 'p19'}, {'p03', 'p02'}, {'p05', 'p15'},
-    {'p06', 'p11'}, {'p07', 'p18'}, {'p08', 'p12'},
-    {'p09', 'p17'}, {'p10', 'p04'}, {'p14', 'p13'},
-    {'p20', 'p16'}
-    ----
-    Individual correlations:
-     'p01': +1.000, 'p02': +1.000, 'p03': +1.000, 'p04': -0.143, 'p05': +1.000,
-     'p06': +1.000, 'p07': +0.500, 'p08': -0.333, 'p09': +1.000, 'p10': +1.000,
-     'p11': +1.000, 'p12': +1.000, 'p13': +1.000, 'p14': +1.000, 'p15': +1.000,
-     'p16': +1.000, 'p17': +1.000, 'p18': +1.000, 'p19': +1.000, 'p20': +1.000
-    -----
-    Average correlation : +0.851
-    Standard Deviation  :  0.390
-
-Only three persons --*p04*, *p07* and *p08*-- are not matched with a mutually approved partner (see Lines 9-10 above). Yet, they are all three actually matched with a partner they neither approve nor disapprove but who in return approves them as partner(see Lines 10, 19 and 27 below).
-
-.. code-block:: pycon
-   :linenos:
-   :emphasize-lines: 10,19,27
-
-   >>> vpG1.showBipolarApprovals()
-    Bipolar approval ballots
-    ------------------------
-    ...
-    ...
-    p04 :
-    Approvals   : ['p03', 'p12', 'p14', 'p19']
-    Disapprovals: ['p15', 'p18', 'p20']
-    p10 :
-    Approvals   : ['p04', 'p17', 'p20']
-    Disapprovals: ['p01', 'p02', 'p05', 'p06', 'p07', 'p08',
-                   'p09', 'p11', 'p12', 'p16', 'p18']
-    ...
-    ...
-    p07 :
-    Approvals   : ['p11']
-    Disapprovals: ['p01', 'p14', 'p19']
-    p12 :
-    Approvals   : ['p06', 'p07', 'p08', 'p10', 'p16', 'p19']
-    Disapprovals: ['p11', 'p14']
-    ...
-    ...
-    p08 :
-    Approvals   : ['p02', 'p05', 'p06', 'p14', 'p16', 'p19']
-    Disapprovals: ['p01', 'p13', 'p15']
-    p05 :
-    Approvals   : ['p01', 'p04', 'p06', 'p07', 'p08', 'p11', 'p15', 'p16', 'p18']
-    Disapprovals: ['p13', 'p19']
-    ...
-    ...
-
-As the size of the potential maximal matchings with a pairing problem of order 20 exceeds 650 million instances, computing the overall fairest pairing solution becomes intractable and we are unable to check if we reached or not this optimal pairing solution. A Monte Carlo simulation with 1000 random intragroup pairing problem of order 8, applying an approval probability of 50% and a disapproval probability of 20%, shows however in :numref:`intraGroupQuality8` the apparent operational efficiency of our hill climbing heuristic, at least for small orders.  
-
-.. Figure:: intraGroupQuality.png
-    :alt: Quality of fairness enhanced intragroup pairing solutions
-    :name: intraGroupQuality8
-    :width: 500 px
-    :align: center
-
-    Quality of fairness enhanced intragroup pairing solutions of order 8
-
-Only 43 failures to reach the optimal average correlation were counted among the 1000 computations (4.3%) with a maximal difference in between of +0.250.
-
-A similar simulation with more constrained random intragroup pairing problems of order 10, applying an approval and disapproval probability of only 30%, gives a failure rate of 19.1% to attain the optimal fairest pairing solution (see :numref:`intraGroupQuality10`).
-
-.. Figure:: intraGroupQuality10.png
-    :alt: Quality of fairness enhanced intragroup pairing solutions
-    :name: intraGroupQuality10
-    :width: 500 px
-    :align: center
-
-    Quality of fairness enhanced intragroup pairing solutions of order 10
-
-Choosing, as in the intergroup pairing case, a more efficient initial matching for the fairness enhancing procedure becomes essential. For this purpose we may rely again on the best determined *Copeland* matching obtained with the pairwise *Copeland* scores computed on the complete intragroup graph. When we add indeed, for a pair {*pi*, *pj*} both the *Copeland* ranking score of partner *pj* from the perspective of Person *pi* to the corresponding *Copeland* ranking score of partner *pi* from the perspective of Person *pj* we may obtain a complete positively valued graph object. In this graph we can, with a greedy ranked pairs rule, construct a best determined perfect matching which we may use as efficient initial start for the fairness enhancing heuristic (see below).
-
-.. code-block:: pycon
-   :linenos:
-   :emphasize-lines: 11-12,14
-
-   >>> from pairings import BestCopelandIntraGroupMatching
-   >>> cop = BestCopelandIntraGroupMatching(vpG1)
-   >>> cop.showPairing(cop.matching)
-    Matched pairs
-    {'p02', 'p15'}, {'p04', 'p03'}, {'p08', 'p05'}, {'p09', 'p20'}
-    {'p11', 'p06'}, {'p12', 'p16'}, {'p14', 'p13'}, {'p17', 'p10'}
-    {'p18', 'p07'}, {'p19', 'p01'}
-   >>> fem2 = FairnessEnhancedIntraGroupMatching(vpG1,
-   ...                  initialMatching=cop.matching,Comments=True)
-    *---- Initial matching ----*
-    [['p02', 'p15'], ['p04', 'p03'], ['p08', 'p05'], ['p09', 'p20'],
-     ['p11', 'p06'], ['p12', 'p16'], ['p14', 'p13'], ['p17', 'p10'],
-     ['p18', 'p07'], ['p19', 'p01']]
-    Enhancing iteration :  1
-    Enhancing iteration :  2
-    ===>>> Best fairness enhanced matching
-    Matched pairs
-    {'p02', 'p04'}, {'p08', 'p05'}, {'p09', 'p20'},
-    {'p11', 'p06'}, {'p12', 'p16'}, {'p14', 'p13'},
-    {'p15', 'p03'}, {'p17', 'p10'}, {'p18', 'p07'},
-    {'p19', 'p01'}
-    Average correlation: +0.872
-    Total run time: 0.193 sec.
-
-With the best determined *Copeland* matching we actually reach in two partner swappings a fairer pairing solution (+0.872) than the fairest one obtained with the default left and right initial matchings (+0.851). This is however not always the case. In order to check this issue, we ran a Monte Carlo experiment with 1000 random intragroup pairing problems of order 30 where approval and disapproval probabilities were set to 20%. Summary statistics of the results are shown in the Table below.
-
-  ===============  ========  ========  =======  ======  =======
-    Variables        Mean     Median     S.D.     Min     Max
-  ===============  ========  ========  =======  ======  =======
-    Correlation      +0.823    +0.825   0.044   +0.682   +0.948
-   Std deviation      0.361     0.362   0.051    0.186    0.575
-    Iterations        23.69    23.000   3.818    14.00    36.00
-     Run time         3.990     3.910   0.636    2.340    6.930
-  ===============  ========  ========  =======  ======  =======
-
-These statistics were obtained by trying both the left and right initial matchings as well as the best determined *Copeland* matching as starting point for the fairness enhancing procedure and keeping eventually the best average correlation result. The overall ordinal correlation hence obtained is convincingly high with a mean of +0.823, coupled with a reasonable mean standard deviation of 0.361 over the 30 personal correlations. Run times depend essentially on the number of enhancing iterations. On average, about 24 partner swappings were sufficient for computing all three variants in less than 4 seconds. In slightly more than two third only of the random pairing problems (69.4%), starting the fairness enhancing procedure from the best determined *Copeland* matching leads indeed to the best overall ordinal correlation with the individual pairing preferences.
-
-When enhancing thus the fairness solely by starting from the best determined *Copeland* matching, we may solve with the :py:class:`~pairings.FairnessEnhancedIntraGroupMatching` solver in on average about 30 seconds an intragroup pairing problem of order 100 with random bipolar approval voting profiles and approval and disapproval probabilities of 10%. The average overall ordinal correlation we may obtain is about +0.800.
-
-Mind however that the higher the order of the pairing problem, the more likely gets the fact that we actually may miss the overall fairest pairing solution. Eventually, a good expertise in metaheuristics is needed in order to effectively solve big intragroup pairing problems (*Avis aux amateurs*).
-
-Back to :ref:`Content Table <Tutorial-label>`
-
 --------------
 
 .. _Trees-Tutorial-label:
@@ -9989,7 +9990,7 @@ On tree graphs and graph forests
 --------------------------------
 
 .. contents:: 
-	:depth: 2
+	:depth: 1
 	:local:
 
 Generating random tree graphs
