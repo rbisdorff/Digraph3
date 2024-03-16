@@ -4636,7 +4636,7 @@ Using Digraph3 multiprocessing resources
 Computing with multiple threads in parallel
 ```````````````````````````````````````````
 
-Modern desktop and laptop computers usually provide a multithreaded CPU which allows to run several threads in parallel. In the Digraph3 resources we offer this usage with a *Threading*, a *nbrCores* or *nbrOfCPUs* and a *startMethod* parameter (see below Lines 6-7)  
+Modern desktop and laptop computers usually provide a multithreaded CPU which allows to run several threads in parallel [53]_. In the Digraph3 resources we offer this usage with a *Threading*, a *nbrCores* or *nbrOfCPUs* and a *startMethod* parameter (see below Lines 6-7)  
 
 .. code-block:: pycon
    :linenos:
@@ -10461,6 +10461,8 @@ Appendices
 .. [51] See https://britishgeologicalsurvey.github.io/science/python-forking-vs-spawn/
 
 .. [52] See the documentation of the :py:mod:`multiprocessing` module
+
+.. [53] When tackling matrix computations it may be possible to further accelerate the computations with a potential GPU. The interested reader may find in the *cuda* directory in the Digraph3 resources an experimental *cudaDigraphs.py* module which uses *numpy* and NVIDIA GPU resources for measuring the speeding up of the element wise computation of the dual, converse and codual transforms and the fusion operation for large (order >= 10000) :code:`cIntegerOurankingDigraphs.IntegerBipolarOutrankingDigraph` objects.
 
 ..  LocalWords:  randomDigraph Determinateness valuationdomain py png
 ..  LocalWords:  notGamma tutorialDigraph shortName func irreflexive
