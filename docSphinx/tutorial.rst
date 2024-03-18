@@ -1740,6 +1740,469 @@ Back to :ref:`Content Table <Tutorial-label>`
 
 --------------
 
+.. _New-PerformanceTableau-Tutorial-label:
+
+How to create a new performance tableau instance
+------------------------------------------------
+
+.. contents:: 
+	:depth: 2
+	:local:
+
+In this tutorial we illustrate a way of creating a new :py:class:`~perfTabs.PerformanceTableau` instance by editing a template with 5 decision alternatives, 3 decision objectives and 6 performance criteria. 
+
+Editing a template file
+```````````````````````
+
+For this purpose we provide the following `perfTab_Template.py <_static/perfTab_Template.py>`_ file in the *examples* directory of the **Digraph3** resources.
+
+.. code-block:: python
+   :name: perfTabTemplate
+   :caption: PerformanceTableau object template
+   :linenos:
+   :emphasize-lines: 13,27,42,61,65
+
+   #########################################################
+   # Digraph3 documentation
+   # Template for creating a new PerformanceTableau instance
+   # (C) R. Bisdorff Mar 2021
+   # Digraph3/examples/perfTab_Template.py
+   ##########################################################
+   from decimal import Decimal
+   from collections import OrderedDict
+   #####
+   # edit the decision actions
+   # avoid special characters, like '_', '/' or ':',
+   # in action identifiers and short names
+   actions = OrderedDict([
+    ('a1', {
+     'shortName': 'action1',
+     'name': 'decision alternative a1',
+     'comment': 'some specific features of this alternative',
+      }),
+     ...
+     ...
+   ])
+   #####
+   # edit the decision objectives
+   # adjust the list of performance criteria
+   # and the total weight (sum of the criteria weights)
+   # per objective
+   objectives = OrderedDict([
+    ('obj1', {
+     'name': 'decision objective obj1',
+     'comment': "some specific features of this objective",
+     'criteria': ['g1', 'g2'],
+     'weight': Decimal('6'),
+     }),
+     ...
+     ...
+    ])
+   #####
+   # edit the performance criteria
+   # adjust the objective reference
+   # Left Decimal of a threshold = constant part and
+   #  right Decimal = proportional part of the threshold 
+   criteria = OrderedDict([
+    ('g1', {
+     'shortName': 'crit1',
+     'name': "performance criteria 1",
+     'objective': 'obj1',
+     'preferenceDirection': 'max',
+     'comment': 'measurement scale type and unit',
+     'scale': (Decimal('0.0'), Decimal('100.0'),
+     'thresholds': {'ind':  (Decimal('2.50'), Decimal('0.0')),
+		    'pref': (Decimal('5.00'), Decimal('0.0')),
+		    'veto': (Decimal('60.00'), Decimal('0.0'))
+                   },
+     'weight': Decimal('3'),
+     }),
+     ...
+     ...
+    ])
+   #####
+   # default missing data symbol = -999
+   NA = Decimal('-999')
+   #####
+   # edit the performance evaluations
+   # criteria to be minimized take negative grades
+   evaluation = {
+    'g1': {
+       'a1':Decimal("41.0"),
+       'a2':Decimal("100.0"),
+       'a3':Decimal("63.0"),
+       'a4':Decimal('23.0'),
+       'a5': NA,
+      },
+    # g2 is of ordinal type and scale 0-10
+    'g2': {
+       'a1':Decimal("4"),
+       'a2':Decimal("10"),
+       'a3':Decimal("6"),
+       'a4':Decimal('2'),
+       'a5':Decimal('9'),
+      },
+    # g3 has preferenceDirection = 'min'
+    'g3': {
+       'a1':Decimal("-52.2"),
+       'a2':NA,
+       'a3':Decimal("-47.3"),
+       'a4':Decimal('-35.7'),
+       'a5':Decimal('-68.00'),
+      },
+    ...
+    ...
+    }
+   ####################
+
+The template file, shown in :numref:`perfTabTemplate`, contains first the instructions to import the required *Decimal* and *OrderedDict* classes (see Lines 7-8). Four main sections are following: the potential decision **actions**, the decision **objectives**, the performance **criteria**, and finally the performance **evaluation**.  
+
+Editing the decision alternatives
+`````````````````````````````````
+
+Decision alternatives are stored in attribute **actions** under the *OrderedDict* format (see the `OrderedDict <https://docs.python.org/3/library/collections.html>`_ description in the Python documentation).
+
+Required attributes of each decision alternative, besides the object **identifier**,  are: **shortName**, **name** and **comment** (see Lines 15-17). The *shortName* attribute is essentially used when showing the performance tableau or the performance heatmap in a browser view.
+
+.. note::
+
+   Mind that graphviz drawings require digraph actions' (nodes) identifier strings without any special characters like `_` or `/`.
+
+Decision actions descriptions are stored in the order of which they appear in the stored instance file. The `OrderedDict` object keeps this given order when iterating over the decision alternatives.
+
+The random performance tableau models presented in the previous tutorial use the *actions* attribute for storing special features of the decision alternatives. The *Cost-Benefit* model, for instance, uses a **type** attribute for distinguishing between *advantageous*, *neutral* and *cheap* alternatives. The *3-Objectives* model keeps a detailed record of the performance profile per decision objective and the corresponding random generators per performance criteria (see Lines 7- below).
+
+.. code-block:: pycon
+   :linenos:
+
+   >>> t = Random3ObjectivesPerformanceTableau()
+   >>> t.actions
+    OrderedDict([
+     ('p01', {'shortName': 'p01',
+              'name': 'action p01 Eco~ Soc- Env+',
+              'comment': 'random public policy',
+	      'Eco': 'fair',
+	      'Soc': 'weak',
+	      'Env': 'good',
+              'profile': {'Eco':'fair',
+	                  'Soc':'weak',
+			  'Env':'good'}
+              'generators': {'ec01': ('triangular', 50.0, 0.5),
+                             'so02': ('triangular', 30.0, 0.5),
+		             'en03': ('triangular', 70.0, 0.5),
+		             ...
+		             },
+              }
+         ),
+      ...
+      ])
+
+The second section of the template file concerns the decision *objectives*.
+
+Editing the decision objectives
+```````````````````````````````
+
+The minimal required attributes (see :numref:`perfTabTemplate` Lines 27-33) of the ordered decision **objectives** dictionary, besides the individual objective identifiers, are **name**, **comment**, **criteria** (the list of significant performance criteria) and **weight** (the importance of the decision objective). The latter attribute contains the sum of the *significance* weights of the objective's criteria list. 
+
+The **objectives** attribute is methodologically useful for specifying the performance criteria significance in building decision recommendations. Mostly, we assume indeed that decision objectives are all equally important and the performance criteria are equi-significant per objective. This is, for instance, the default setting in the random *3-Objectives* performance tableau model.
+
+.. code-block:: pycon
+   :caption: Example of decision objectives' description
+   :name: 3Objectives
+   :linenos:
+
+   >>> t = Random3ObjectivesPerformanceTableau()
+   >>> t.objectives
+    OrderedDict([
+     ('Eco',
+      {'name': 'Economical aspect',
+       'comment': 'Random3ObjectivesPerformanceTableau generated',
+       'criteria': ['ec01', 'ec06', 'ec09'],
+       'weight': Decimal('48')}),
+     ('Soc',
+      {'name': 'Societal aspect',
+       'comment': 'Random3ObjectivesPerformanceTableau generated',
+       'criteria': ['so02', 'so12'],
+       'weight': Decimal('48')}),
+     ('Env',
+      {'name': 'Environmental aspect',
+       'comment': 'Random3ObjectivesPerformanceTableau generated',
+       'criteria': ['en03', 'en04', 'en05', 'en07',
+                    'en08', 'en10', 'en11', 'en13'],
+       'weight': Decimal('48')})
+    ])
+
+The importance weight sums up to 48 for each one of the three example decision objectives shown in :numref:`3Objectives` (Lines 8,13 and 19), so that the significance of each one of the 3 economic criteria is set to 16, of both societal criteria is set to 24, and of each one of the 8 environmental criteria is set to 8.
+
+.. note::
+
+   Mind that the **objectives** attribute is always present in a *PerformanceTableau* object instance, even when empty. In this case, we consider that each performance criterion canonically represents in fact its own decision objective. The criterion significance equals in this case the corresponding decision objective's importance weight.
+
+The third section of the template file concerns now the *performance criteria*.
+
+Editing the family of performance criteria
+``````````````````````````````````````````
+
+In order to assess how well each potential decision alternative is satisfying a given decision objective, we need *performance criteria*, i.e. decimal-valued grading functions gathered in an ordered **criteria** dictionary. The required attributes (see :numref:`criterionDescription`), besides the criteria identifiers, are the usual **shortName**, **name** and **comment**. Specific for a criterion are furthermore the **objective** reference, the significance **weight**, the grading **scale** (minimum and  maximum performance values), the **preferenceDirection** ('max' or 'min') and the performance discrimination **thresholds**.
+
+.. code-block:: python
+   :caption: Example of performance criteria description
+   :name: criterionDescription
+   :linenos:
+
+   criteria = OrderedDict([
+    ('g1', {
+     'shortName': 'crit1',
+     'name': "performance criteria 1",
+     'comment': 'measurement scale type and unit',
+     'objective': 'obj1',
+     'weight': Decimal('3'),
+     'scale': (Decimal('0.0'), Decimal('100.0'),
+     'preferenceDirection': 'max',
+     'thresholds': {'ind':  (Decimal('2.50'), Decimal('0.0')),
+		    'pref': (Decimal('5.00'), Decimal('0.0')),
+		    'veto': (Decimal('60.00'), Decimal('0.0'))
+                   },
+     }),
+    ...
+    ...])
+
+In our bipolar-valued outranking approach, all performance criteria implement *decimal-valued* grading functions, where preferences are either *increasing* or *decreasing* with measured performances.
+
+.. note::
+
+   In order to model a **coherent** performance tableau, the decision criteria must satisfy two methodological requirements:
+
+       1. **Independance**: Each decision criterion implements a grading that is *functionally independent* of the grading of the other decision criteria, i.e. the performance measured on one of the criteria does not *constrain* the performance measured on any other criterion.
+       2. **Non redundancy**: Each performance criterion is only *significant* for a *single* decision objective.
+
+In order to take into account any, usually *unavoidable*, **imprecision** of the performance grading procedures, we may specify three performance **discrimination thresholds**: an **indifference** ('ind'), a **preference** ('pref') and a **considerable performance difference** ('veto') threshold (see :numref:`criterionDescription` Lines 10-12). The left decimal number of a threshold description tuple indicates a *constant part*, whereas the right decimal number indicates a proportional part.
+
+On the template performance criterion *g1*, shown in :numref:`criterionDescription`, we observe for instance a grading scale from 0.0 to 100.0 with a constant *indifference* threshold of 2.5, a constant *preference* threshold of 5.0, and a constant *considerable performance difference* threshold of 60.0. The latter theshold  will trigger, the case given, a *polarisation* of the outranking statement [BIS-2013]_ .
+
+In a random *Cost-Benefit* performance tableau model we may obtain by default the following content.
+
+.. code-block:: pycon
+   :caption: Example of cardinal Costs criterion
+   :name: costsCriterion
+   :linenos:
+
+   >>> tcb = RandomCBPerformanceTableau()
+   >>> tcb.showObjectives()
+    *------ decision objectives -------"
+     C: Costs
+      c1 random cardinal cost criterion 6
+     Total weight: 6.00 (1 criteria)
+    ...
+    ...
+   >>> tcb.criteria
+    OrderedDict([
+     ('c1', {'preferenceDirection': 'min',
+             'scaleType': 'cardinal',
+	     'objective': 'C',
+	     'shortName': 'c1',
+	     'name': 'random cardinal cost criterion',
+	     'scale': (0.0, 100.0),
+	     'weight': Decimal('6'),
+	     'randomMode': ['triangular', 50.0, 0.5],
+	     'comment': 'Evaluation generator: triangular law ...',
+             'thresholds':
+	      OrderedDict([
+	       ('ind', (Decimal('1.49'), Decimal('0'))),
+	       ('pref', (Decimal('3.7'), Decimal('0'))),
+	       ('veto', (Decimal('67.71'), Decimal('0')))
+	       ])
+	     }
+      ...
+      ...
+      ])
+
+Criterion *c1* appears here (see :numref:`costsCriterion`) to be a cardinal criterion to be minimized and significant for the *Costs* (*C*) decision objective. We may use the :py:meth:`~perfTabs.PerformanceTableau.showCriteria` method for printing the corresponding performance discrimination thresholds.
+
+.. code-block:: pycon
+   :linenos:
+
+   >>> tcb.showCriteria(IntegerWeights=True)
+    *----  criteria -----*
+     c1 'Costs/random cardinal cost criterion'
+      Scale = (0.0, 100.0)
+      Weight = 6 
+      Threshold ind : 1.49 + 0.00x ; percentile: 5.13
+      Threshold pref : 3.70 + 0.00x ; percentile: 10.26
+      Threshold veto : 67.71 + 0.00x ; percentile: 96.15
+
+The *indifference* threshold on this criterion amounts to a constant value of 1.49 (Line 6 above). More or less 5% of the observed performance differences on this criterion appear hence to be **insignificant**. Similarly, with a preference threshold of 3.70, about 90% of the observed performance differences are preferentially **significant** (Line 7). Furthermore, 100.0 - 96.15 = 3.85% of the observed performance differences appear to be **considerable** (Line 8) and will trigger a *polarisation* of the corresponding outranking statements.
+
+After the performance criteria description, we are ready for recording the actual *performance table*.
+
+Editing the performance table
+`````````````````````````````
+
+The individual grades of each decision alternative on each decision criterion are recorded in a double *criterion* x *action* dictionary called **evaluation** (see :numref:`evaluationDescription`). As we may encounter missing data cases, we previously define a *missing data* symbol **NA** which is set here to a value disjoint from all the measurement scales, by default *Decimal('-999')* (Line 2).
+
+.. code-block:: python
+   :caption: Editing performance grades
+   :name: evaluationDescription
+   :linenos:
+      
+   #----------
+   NA = Decimal('-999')
+   #----------
+   evaluation = {
+    'g1': {
+       'a1':Decimal("41.0"),
+       'a2':Decimal("100.0"),
+       'a3':Decimal("63.0"),
+       'a4':Decimal('23.0'),
+       'a5': NA,  # missing data
+      },
+     ...
+     ...
+    # g3 has preferenceDirection = 'min'
+    'g3': {
+       'a1':Decimal("-52.2"), # negative grades
+       'a2':NA,
+       'a3':Decimal("-47.3"),
+       'a4':Decimal('-35.7'),
+       'a5':Decimal('-68.00'),
+      },
+    ...
+    ...
+    }
+
+Notice in :numref:`evaluationDescription` (Lines 16- ) that on a criterion with *preferenceDirection* = '**min**' all performance grades are recorded as **negative** values.
+
+We may now inspect the eventually recorded complete template performance table.
+
+.. code-block:: pycon
+   :linenos:
+
+   >>> from perfTabs import PerformanceTableau   
+   >>> t = PerformanceTableau('perfTab_Template')
+   >>> t.showPerformanceTableau(ndigits=1)
+    *----  performance tableau -----*
+     Criteria  |  'g1'   'g2'  'g3'  'g4'   'g5'   'g6'   
+     Actions   |    3      3     6     2      2      2    
+      ---------|-----------------------------------------
+     'action1' |  41.0   4.0  -52.2  71.0   63.0   22.5  
+     'action2' | 100.0  10.0    NA   89.0   30.7   75.0  
+     'action3' |  63.0   6.0  -47.3  55.4   63.5    NA   
+     'action4' |  23.0   2.0  -35.7  83.5   37.5   54.9  
+     'action5' |   NA    9.0  -68.0  10.0   88.0   75.0
+
+We may furthermore compute the associated outranking digraph and check if we observe any polarised outranking situtations.
+
+.. code-block:: pycon
+   :linenos:
+
+   >>> from outrankingDigraphs import BipolarOutrankingDigraph
+   >>> g = BipolarOutrankingDigraph(t)
+   >>> g.showVetos()
+    *----  Veto situations ---
+     number of veto situations : 1 
+     1: r(a4 >= a2) = -0.44
+     criterion: g1
+     Considerable performance difference : -77.00
+     Veto discrimination threshold       : -60.00
+     Polarisation: r(a4 >= a2) = -0.44 ==> -1.00
+    *----  Counter-veto situations ---
+     number of counter-veto situations : 1 
+     1: r(a2 >= a4) = 0.56
+     criterion: g1
+     Considerable performance difference : 77.00
+     Counter-veto threshold              : 60.00
+     Polarisation: r(a2 >= a4) = 0.56 ==> +1.00
+
+Indeed, due to the considerable performance difference (77.00) oberved on performance criterion *g1*, alternative *a2* **for sure** *outranks* alternative *a4*, respectively *a4* **for sure** *does not outrank* *a2*.
+
+Inspecting the template outranking relation
+```````````````````````````````````````````
+
+Let us have a look at the outranking relation table.
+
+.. code-block:: pycon
+   :caption: The template outranking relation
+   :name: templateRelation
+   :linenos:
+
+   >>> g.showRelationTable()
+    * ---- Relation Table -----
+       r   |  'a1'   'a2'   'a3'   'a4'   'a5'   
+      -----|-----------------------------------
+      'a1' | +1.00  -0.44  -0.22  -0.11  +0.06  
+      'a2' | +0.44  +1.00  +0.33  +1.00  +0.28  
+      'a3' | +0.67  -0.33  +1.00  +0.00  +0.17  
+      'a4' | +0.11  -1.00  +0.00  +1.00  +0.06  
+      'a5' | -0.06  -0.06  -0.17  -0.06  +1.00
+
+We may notice in the outranking relation table above (see :numref:`templateRelation`) that decision alternative *a2* positively **outranks** all the other four alternatives  (Line 6). Similarly, alternative *a5* is positively **outranked** by all the other alternatives (see Line 9). We may orient this way the *graphviz* drawing of the template outranking digraph. 
+
+   >>> g.exportGraphViz(fileName= 'template',
+   ...                  firstChoice =['a2'],
+   ...                  lastChoice=['a5'])
+    *---- exporting a dot file for GraphViz tools ---------*
+     Exporting to template.dot
+     dot -Grankdir=BT -Tpng template.dot -o template.png
+
+    
+.. figure:: template.png
+   :name: templateDrawing
+   :width: 200 px
+   :align: center
+
+   The template outranking digraph
+
+
+In :numref:`templateDrawing` we may notice that the template outranking digraph models in fact a **partial order** on the five potential decision alternatives. Alternatives *action3* ('a3' ) and *action4* ('a4') appear actually **incomparable**. In :numref:`templateRelation`  their pairwise outranking chracteritics show indeed the **indeterminate** value 0.00 (Lines 7-8). We may check their pairwise comparison as follows.
+
+.. code-block:: pycon
+   :linenos:
+
+   >>> g.showPairwiseComparison('a3','a4')
+    *------------  pairwise comparison ----*
+    Comparing actions : (a3, a4)
+     crit. wght.  g(x)   g(y)   diff  	| ind   pref   r()  | 
+     -------------------------------  	 -------------------
+     g1   3.00  63.00   23.00  +40.00 	| 2.50  5.00  +3.00 | 
+     g2   3.00   6.00    2.00   +4.00 	| 0.00  1.00  +3.00 | 
+     g3   6.00 -47.30  -35.70  -11.60 	| 0.00 10.00  -6.00 | 
+     g4   2.00  55.40   83.50  -28.10 	| 2.09  4.18  -2.00 | 
+     g5   2.00  63.50   37.50  +26.00 	| 0.00 10.00  +2.00 | 
+     g6   NA    54.90
+     Outranking characteristic value:   r(a3 >= a4) = +0.00
+     Valuation in range: -18.00 to +18.00
+
+The incomparability situation between 'a3' and 'a4' results here from a perfect balancing of positive (+8) and negative (-8) criteria significance weights.
+
+Ranking the template peformance tableau
+```````````````````````````````````````
+
+We may eventually rank the five decision alternatives with a heatmap browser view following the *Copeland* ranking rule which consistently reproduces the partial outranking order shown in :numref:`templateDrawing`. 
+
+   >>> g.showHTMLPerformanceHeatmap(ndigits=1,colorLevels=5,
+   ...    Correlations=True,rankingRule='Copeland',
+   ...    pageTitle='Heatmap of the template performance tableau')
+
+.. image:: templateHeatmapCop.png
+   :width: 600 px
+   :align: center
+
+Due to a 11 against 7 **plurality tyranny** effect, the *Copeland* ranking rule, essentially based on crisp majority outranking counts, puts here alternative *action5* (*a5*) last, despite its excellent grades observed on criteria *g2*, *g5* and *g6*. A slightly **fairer** ranking result may be obtained with the *NetFlows* ranking rule.
+
+   >>> g.showHTMLPerformanceHeatmap(ndigits=1,colorLevels=5,
+   ...    Correlations=True,rankingRule='NetFlows',
+   ...    pageTitle='Heatmap of the template performance tableau')
+
+.. image:: templateHeatmapNF.png
+   :width: 600 px
+   :align: center
+
+It might be opportun to furthermore study the robustness of the apparent outranking situations when assuming only *ordinal* or *uncertain* criteria significance weights. If interested in mainly objectively *unopposed* (multipartisan) outranking situations, one might also try the :py:class:`~outrankingDigraphs.UnOpposedOutrankingDigraph` constructor. (see the :ref:`advanced topics of the Digraph3 documentation <Advanced-Topics-label>`). 
+
+Back to :ref:`Content Table <Tutorial-label>`
+
+------------------------
+
 .. _RandomPerformanceTableau-Tutorial-label:
 
 Generating random performance tableaux with the :py:mod:`randPerfTabs` module
@@ -2337,469 +2800,6 @@ This type of random performance tableau is matching the :py:class:`~votingProfil
 Back to :ref:`Content Table <Tutorial-label>`
 
 --------------
-
-.. _New-PerformanceTableau-Tutorial-label:
-
-How to create a new performance tableau instance
-------------------------------------------------
-
-.. contents:: 
-	:depth: 2
-	:local:
-
-In this tutorial we illustrate a way of creating a new :py:class:`~perfTabs.PerformanceTableau` instance by editing a template with 5 decision alternatives, 3 decision objectives and 6 performance criteria. 
-
-Editing a template file
-```````````````````````
-
-For this purpose we provide the following `perfTab_Template.py <_static/perfTab_Template.py>`_ file in the *examples* directory of the **Digraph3** resources.
-
-.. code-block:: python
-   :name: perfTabTemplate
-   :caption: PerformanceTableau object template
-   :linenos:
-   :emphasize-lines: 13,27,42,61,65
-
-   #########################################################
-   # Digraph3 documentation
-   # Template for creating a new PerformanceTableau instance
-   # (C) R. Bisdorff Mar 2021
-   # Digraph3/examples/perfTab_Template.py
-   ##########################################################
-   from decimal import Decimal
-   from collections import OrderedDict
-   #####
-   # edit the decision actions
-   # avoid special characters, like '_', '/' or ':',
-   # in action identifiers and short names
-   actions = OrderedDict([
-    ('a1', {
-     'shortName': 'action1',
-     'name': 'decision alternative a1',
-     'comment': 'some specific features of this alternative',
-      }),
-     ...
-     ...
-   ])
-   #####
-   # edit the decision objectives
-   # adjust the list of performance criteria
-   # and the total weight (sum of the criteria weights)
-   # per objective
-   objectives = OrderedDict([
-    ('obj1', {
-     'name': 'decision objective obj1',
-     'comment': "some specific features of this objective",
-     'criteria': ['g1', 'g2'],
-     'weight': Decimal('6'),
-     }),
-     ...
-     ...
-    ])
-   #####
-   # edit the performance criteria
-   # adjust the objective reference
-   # Left Decimal of a threshold = constant part and
-   #  right Decimal = proportional part of the threshold 
-   criteria = OrderedDict([
-    ('g1', {
-     'shortName': 'crit1',
-     'name': "performance criteria 1",
-     'objective': 'obj1',
-     'preferenceDirection': 'max',
-     'comment': 'measurement scale type and unit',
-     'scale': (Decimal('0.0'), Decimal('100.0'),
-     'thresholds': {'ind':  (Decimal('2.50'), Decimal('0.0')),
-		    'pref': (Decimal('5.00'), Decimal('0.0')),
-		    'veto': (Decimal('60.00'), Decimal('0.0'))
-                   },
-     'weight': Decimal('3'),
-     }),
-     ...
-     ...
-    ])
-   #####
-   # default missing data symbol = -999
-   NA = Decimal('-999')
-   #####
-   # edit the performance evaluations
-   # criteria to be minimized take negative grades
-   evaluation = {
-    'g1': {
-       'a1':Decimal("41.0"),
-       'a2':Decimal("100.0"),
-       'a3':Decimal("63.0"),
-       'a4':Decimal('23.0'),
-       'a5': NA,
-      },
-    # g2 is of ordinal type and scale 0-10
-    'g2': {
-       'a1':Decimal("4"),
-       'a2':Decimal("10"),
-       'a3':Decimal("6"),
-       'a4':Decimal('2'),
-       'a5':Decimal('9'),
-      },
-    # g3 has preferenceDirection = 'min'
-    'g3': {
-       'a1':Decimal("-52.2"),
-       'a2':NA,
-       'a3':Decimal("-47.3"),
-       'a4':Decimal('-35.7'),
-       'a5':Decimal('-68.00'),
-      },
-    ...
-    ...
-    }
-   ####################
-
-The template file, shown in :numref:`perfTabTemplate`, contains first the instructions to import the required *Decimal* and *OrderedDict* classes (see Lines 7-8). Four main sections are following: the potential decision **actions**, the decision **objectives**, the performance **criteria**, and finally the performance **evaluation**.  
-
-Editing the decision alternatives
-`````````````````````````````````
-
-Decision alternatives are stored in attribute **actions** under the *OrderedDict* format (see the `OrderedDict <https://docs.python.org/3/library/collections.html>`_ description in the Python documentation).
-
-Required attributes of each decision alternative, besides the object **identifier**,  are: **shortName**, **name** and **comment** (see Lines 15-17). The *shortName* attribute is essentially used when showing the performance tableau or the performance heatmap in a browser view.
-
-.. note::
-
-   Mind that graphviz drawings require digraph actions' (nodes) identifier strings without any special characters like `_` or `/`.
-
-Decision actions descriptions are stored in the order of which they appear in the stored instance file. The `OrderedDict` object keeps this given order when iterating over the decision alternatives.
-
-The random performance tableau models presented in the previous tutorial use the *actions* attribute for storing special features of the decision alternatives. The *Cost-Benefit* model, for instance, uses a **type** attribute for distinguishing between *advantageous*, *neutral* and *cheap* alternatives. The *3-Objectives* model keeps a detailed record of the performance profile per decision objective and the corresponding random generators per performance criteria (see Lines 7- below).
-
-.. code-block:: pycon
-   :linenos:
-
-   >>> t = Random3ObjectivesPerformanceTableau()
-   >>> t.actions
-    OrderedDict([
-     ('p01', {'shortName': 'p01',
-              'name': 'action p01 Eco~ Soc- Env+',
-              'comment': 'random public policy',
-	      'Eco': 'fair',
-	      'Soc': 'weak',
-	      'Env': 'good',
-              'profile': {'Eco':'fair',
-	                  'Soc':'weak',
-			  'Env':'good'}
-              'generators': {'ec01': ('triangular', 50.0, 0.5),
-                             'so02': ('triangular', 30.0, 0.5),
-		             'en03': ('triangular', 70.0, 0.5),
-		             ...
-		             },
-              }
-         ),
-      ...
-      ])
-
-The second section of the template file concerns the decision *objectives*.
-
-Editing the decision objectives
-```````````````````````````````
-
-The minimal required attributes (see :numref:`perfTabTemplate` Lines 27-33) of the ordered decision **objectives** dictionary, besides the individual objective identifiers, are **name**, **comment**, **criteria** (the list of significant performance criteria) and **weight** (the importance of the decision objective). The latter attribute contains the sum of the *significance* weights of the objective's criteria list. 
-
-The **objectives** attribute is methodologically useful for specifying the performance criteria significance in building decision recommendations. Mostly, we assume indeed that decision objectives are all equally important and the performance criteria are equi-significant per objective. This is, for instance, the default setting in the random *3-Objectives* performance tableau model.
-
-.. code-block:: pycon
-   :caption: Example of decision objectives' description
-   :name: 3Objectives
-   :linenos:
-
-   >>> t = Random3ObjectivesPerformanceTableau()
-   >>> t.objectives
-    OrderedDict([
-     ('Eco',
-      {'name': 'Economical aspect',
-       'comment': 'Random3ObjectivesPerformanceTableau generated',
-       'criteria': ['ec01', 'ec06', 'ec09'],
-       'weight': Decimal('48')}),
-     ('Soc',
-      {'name': 'Societal aspect',
-       'comment': 'Random3ObjectivesPerformanceTableau generated',
-       'criteria': ['so02', 'so12'],
-       'weight': Decimal('48')}),
-     ('Env',
-      {'name': 'Environmental aspect',
-       'comment': 'Random3ObjectivesPerformanceTableau generated',
-       'criteria': ['en03', 'en04', 'en05', 'en07',
-                    'en08', 'en10', 'en11', 'en13'],
-       'weight': Decimal('48')})
-    ])
-
-The importance weight sums up to 48 for each one of the three example decision objectives shown in :numref:`3Objectives` (Lines 8,13 and 19), so that the significance of each one of the 3 economic criteria is set to 16, of both societal criteria is set to 24, and of each one of the 8 environmental criteria is set to 8.
-
-.. note::
-
-   Mind that the **objectives** attribute is always present in a *PerformanceTableau* object instance, even when empty. In this case, we consider that each performance criterion canonically represents in fact its own decision objective. The criterion significance equals in this case the corresponding decision objective's importance weight.
-
-The third section of the template file concerns now the *performance criteria*.
-
-Editing the family of performance criteria
-``````````````````````````````````````````
-
-In order to assess how well each potential decision alternative is satisfying a given decision objective, we need *performance criteria*, i.e. decimal-valued grading functions gathered in an ordered **criteria** dictionary. The required attributes (see :numref:`criterionDescription`), besides the criteria identifiers, are the usual **shortName**, **name** and **comment**. Specific for a criterion are furthermore the **objective** reference, the significance **weight**, the grading **scale** (minimum and  maximum performance values), the **preferenceDirection** ('max' or 'min') and the performance discrimination **thresholds**.
-
-.. code-block:: python
-   :caption: Example of performance criteria description
-   :name: criterionDescription
-   :linenos:
-
-   criteria = OrderedDict([
-    ('g1', {
-     'shortName': 'crit1',
-     'name': "performance criteria 1",
-     'comment': 'measurement scale type and unit',
-     'objective': 'obj1',
-     'weight': Decimal('3'),
-     'scale': (Decimal('0.0'), Decimal('100.0'),
-     'preferenceDirection': 'max',
-     'thresholds': {'ind':  (Decimal('2.50'), Decimal('0.0')),
-		    'pref': (Decimal('5.00'), Decimal('0.0')),
-		    'veto': (Decimal('60.00'), Decimal('0.0'))
-                   },
-     }),
-    ...
-    ...])
-
-In our bipolar-valued outranking approach, all performance criteria implement *decimal-valued* grading functions, where preferences are either *increasing* or *decreasing* with measured performances.
-
-.. note::
-
-   In order to model a **coherent** performance tableau, the decision criteria must satisfy two methodological requirements:
-
-       1. **Independance**: Each decision criterion implements a grading that is *functionally independent* of the grading of the other decision criteria, i.e. the performance measured on one of the criteria does not *constrain* the performance measured on any other criterion.
-       2. **Non redundancy**: Each performance criterion is only *significant* for a *single* decision objective.
-
-In order to take into account any, usually *unavoidable*, **imprecision** of the performance grading procedures, we may specify three performance **discrimination thresholds**: an **indifference** ('ind'), a **preference** ('pref') and a **considerable performance difference** ('veto') threshold (see :numref:`criterionDescription` Lines 10-12). The left decimal number of a threshold description tuple indicates a *constant part*, whereas the right decimal number indicates a proportional part.
-
-On the template performance criterion *g1*, shown in :numref:`criterionDescription`, we observe for instance a grading scale from 0.0 to 100.0 with a constant *indifference* threshold of 2.5, a constant *preference* threshold of 5.0, and a constant *considerable performance difference* threshold of 60.0. The latter theshold  will trigger, the case given, a *polarisation* of the outranking statement [BIS-2013]_ .
-
-In a random *Cost-Benefit* performance tableau model we may obtain by default the following content.
-
-.. code-block:: pycon
-   :caption: Example of cardinal Costs criterion
-   :name: costsCriterion
-   :linenos:
-
-   >>> tcb = RandomCBPerformanceTableau()
-   >>> tcb.showObjectives()
-    *------ decision objectives -------"
-     C: Costs
-      c1 random cardinal cost criterion 6
-     Total weight: 6.00 (1 criteria)
-    ...
-    ...
-   >>> tcb.criteria
-    OrderedDict([
-     ('c1', {'preferenceDirection': 'min',
-             'scaleType': 'cardinal',
-	     'objective': 'C',
-	     'shortName': 'c1',
-	     'name': 'random cardinal cost criterion',
-	     'scale': (0.0, 100.0),
-	     'weight': Decimal('6'),
-	     'randomMode': ['triangular', 50.0, 0.5],
-	     'comment': 'Evaluation generator: triangular law ...',
-             'thresholds':
-	      OrderedDict([
-	       ('ind', (Decimal('1.49'), Decimal('0'))),
-	       ('pref', (Decimal('3.7'), Decimal('0'))),
-	       ('veto', (Decimal('67.71'), Decimal('0')))
-	       ])
-	     }
-      ...
-      ...
-      ])
-
-Criterion *c1* appears here (see :numref:`costsCriterion`) to be a cardinal criterion to be minimized and significant for the *Costs* (*C*) decision objective. We may use the :py:meth:`~perfTabs.PerformanceTableau.showCriteria` method for printing the corresponding performance discrimination thresholds.
-
-.. code-block:: pycon
-   :linenos:
-
-   >>> tcb.showCriteria(IntegerWeights=True)
-    *----  criteria -----*
-     c1 'Costs/random cardinal cost criterion'
-      Scale = (0.0, 100.0)
-      Weight = 6 
-      Threshold ind : 1.49 + 0.00x ; percentile: 5.13
-      Threshold pref : 3.70 + 0.00x ; percentile: 10.26
-      Threshold veto : 67.71 + 0.00x ; percentile: 96.15
-
-The *indifference* threshold on this criterion amounts to a constant value of 1.49 (Line 6 above). More or less 5% of the observed performance differences on this criterion appear hence to be **insignificant**. Similarly, with a preference threshold of 3.70, about 90% of the observed performance differences are preferentially **significant** (Line 7). Furthermore, 100.0 - 96.15 = 3.85% of the observed performance differences appear to be **considerable** (Line 8) and will trigger a *polarisation* of the corresponding outranking statements.
-
-After the performance criteria description, we are ready for recording the actual *performance table*.
-
-Editing the performance table
-`````````````````````````````
-
-The individual grades of each decision alternative on each decision criterion are recorded in a double *criterion* x *action* dictionary called **evaluation** (see :numref:`evaluationDescription`). As we may encounter missing data cases, we previously define a *missing data* symbol **NA** which is set here to a value disjoint from all the measurement scales, by default *Decimal('-999')* (Line 2).
-
-.. code-block:: python
-   :caption: Editing performance grades
-   :name: evaluationDescription
-   :linenos:
-      
-   #----------
-   NA = Decimal('-999')
-   #----------
-   evaluation = {
-    'g1': {
-       'a1':Decimal("41.0"),
-       'a2':Decimal("100.0"),
-       'a3':Decimal("63.0"),
-       'a4':Decimal('23.0'),
-       'a5': NA,  # missing data
-      },
-     ...
-     ...
-    # g3 has preferenceDirection = 'min'
-    'g3': {
-       'a1':Decimal("-52.2"), # negative grades
-       'a2':NA,
-       'a3':Decimal("-47.3"),
-       'a4':Decimal('-35.7'),
-       'a5':Decimal('-68.00'),
-      },
-    ...
-    ...
-    }
-
-Notice in :numref:`evaluationDescription` (Lines 16- ) that on a criterion with *preferenceDirection* = '**min**' all performance grades are recorded as **negative** values.
-
-We may now inspect the eventually recorded complete template performance table.
-
-.. code-block:: pycon
-   :linenos:
-
-   >>> from perfTabs import PerformanceTableau   
-   >>> t = PerformanceTableau('perfTab_Template')
-   >>> t.showPerformanceTableau(ndigits=1)
-    *----  performance tableau -----*
-     Criteria  |  'g1'   'g2'  'g3'  'g4'   'g5'   'g6'   
-     Actions   |    3      3     6     2      2      2    
-      ---------|-----------------------------------------
-     'action1' |  41.0   4.0  -52.2  71.0   63.0   22.5  
-     'action2' | 100.0  10.0    NA   89.0   30.7   75.0  
-     'action3' |  63.0   6.0  -47.3  55.4   63.5    NA   
-     'action4' |  23.0   2.0  -35.7  83.5   37.5   54.9  
-     'action5' |   NA    9.0  -68.0  10.0   88.0   75.0
-
-We may furthermore compute the associated outranking digraph and check if we observe any polarised outranking situtations.
-
-.. code-block:: pycon
-   :linenos:
-
-   >>> from outrankingDigraphs import BipolarOutrankingDigraph
-   >>> g = BipolarOutrankingDigraph(t)
-   >>> g.showVetos()
-    *----  Veto situations ---
-     number of veto situations : 1 
-     1: r(a4 >= a2) = -0.44
-     criterion: g1
-     Considerable performance difference : -77.00
-     Veto discrimination threshold       : -60.00
-     Polarisation: r(a4 >= a2) = -0.44 ==> -1.00
-    *----  Counter-veto situations ---
-     number of counter-veto situations : 1 
-     1: r(a2 >= a4) = 0.56
-     criterion: g1
-     Considerable performance difference : 77.00
-     Counter-veto threshold              : 60.00
-     Polarisation: r(a2 >= a4) = 0.56 ==> +1.00
-
-Indeed, due to the considerable performance difference (77.00) oberved on performance criterion *g1*, alternative *a2* **for sure** *outranks* alternative *a4*, respectively *a4* **for sure** *does not outrank* *a2*.
-
-Inspecting the template outranking relation
-```````````````````````````````````````````
-
-Let us have a look at the outranking relation table.
-
-.. code-block:: pycon
-   :caption: The template outranking relation
-   :name: templateRelation
-   :linenos:
-
-   >>> g.showRelationTable()
-    * ---- Relation Table -----
-       r   |  'a1'   'a2'   'a3'   'a4'   'a5'   
-      -----|-----------------------------------
-      'a1' | +1.00  -0.44  -0.22  -0.11  +0.06  
-      'a2' | +0.44  +1.00  +0.33  +1.00  +0.28  
-      'a3' | +0.67  -0.33  +1.00  +0.00  +0.17  
-      'a4' | +0.11  -1.00  +0.00  +1.00  +0.06  
-      'a5' | -0.06  -0.06  -0.17  -0.06  +1.00
-
-We may notice in the outranking relation table above (see :numref:`templateRelation`) that decision alternative *a2* positively **outranks** all the other four alternatives  (Line 6). Similarly, alternative *a5* is positively **outranked** by all the other alternatives (see Line 9). We may orient this way the *graphviz* drawing of the template outranking digraph. 
-
-   >>> g.exportGraphViz(fileName= 'template',
-   ...                  firstChoice =['a2'],
-   ...                  lastChoice=['a5'])
-    *---- exporting a dot file for GraphViz tools ---------*
-     Exporting to template.dot
-     dot -Grankdir=BT -Tpng template.dot -o template.png
-
-    
-.. figure:: template.png
-   :name: templateDrawing
-   :width: 200 px
-   :align: center
-
-   The template outranking digraph
-
-
-In :numref:`templateDrawing` we may notice that the template outranking digraph models in fact a **partial order** on the five potential decision alternatives. Alternatives *action3* ('a3' ) and *action4* ('a4') appear actually **incomparable**. In :numref:`templateRelation`  their pairwise outranking chracteritics show indeed the **indeterminate** value 0.00 (Lines 7-8). We may check their pairwise comparison as follows.
-
-.. code-block:: pycon
-   :linenos:
-
-   >>> g.showPairwiseComparison('a3','a4')
-    *------------  pairwise comparison ----*
-    Comparing actions : (a3, a4)
-     crit. wght.  g(x)   g(y)   diff  	| ind   pref   r()  | 
-     -------------------------------  	 -------------------
-     g1   3.00  63.00   23.00  +40.00 	| 2.50  5.00  +3.00 | 
-     g2   3.00   6.00    2.00   +4.00 	| 0.00  1.00  +3.00 | 
-     g3   6.00 -47.30  -35.70  -11.60 	| 0.00 10.00  -6.00 | 
-     g4   2.00  55.40   83.50  -28.10 	| 2.09  4.18  -2.00 | 
-     g5   2.00  63.50   37.50  +26.00 	| 0.00 10.00  +2.00 | 
-     g6   NA    54.90
-     Outranking characteristic value:   r(a3 >= a4) = +0.00
-     Valuation in range: -18.00 to +18.00
-
-The incomparability situation between 'a3' and 'a4' results here from a perfect balancing of positive (+8) and negative (-8) criteria significance weights.
-
-Ranking the template peformance tableau
-```````````````````````````````````````
-
-We may eventually rank the five decision alternatives with a heatmap browser view following the *Copeland* ranking rule which consistently reproduces the partial outranking order shown in :numref:`templateDrawing`. 
-
-   >>> g.showHTMLPerformanceHeatmap(ndigits=1,colorLevels=5,
-   ...    Correlations=True,rankingRule='Copeland',
-   ...    pageTitle='Heatmap of the template performance tableau')
-
-.. image:: templateHeatmapCop.png
-   :width: 600 px
-   :align: center
-
-Due to a 11 against 7 **plurality tyranny** effect, the *Copeland* ranking rule, essentially based on crisp majority outranking counts, puts here alternative *action5* (*a5*) last, despite its excellent grades observed on criteria *g2*, *g5* and *g6*. A slightly **fairer** ranking result may be obtained with the *NetFlows* ranking rule.
-
-   >>> g.showHTMLPerformanceHeatmap(ndigits=1,colorLevels=5,
-   ...    Correlations=True,rankingRule='NetFlows',
-   ...    pageTitle='Heatmap of the template performance tableau')
-
-.. image:: templateHeatmapNF.png
-   :width: 600 px
-   :align: center
-
-It might be opportun to furthermore study the robustness of the apparent outranking situations when assuming only *ordinal* or *uncertain* criteria significance weights. If interested in mainly objectively *unopposed* (multipartisan) outranking situations, one might also try the :py:class:`~outrankingDigraphs.UnOpposedOutrankingDigraph` constructor. (see the :ref:`advanced topics of the Digraph3 documentation <Advanced-Topics-label>`). 
-
-Back to :ref:`Content Table <Tutorial-label>`
-
-------------------------
 
 .. _Ranking-Tutorial-label:
 
