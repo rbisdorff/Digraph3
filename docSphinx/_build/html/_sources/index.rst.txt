@@ -49,7 +49,7 @@ Parts of the documentation
 
    - A series of tutorials for tackling large and big outranking digraphs: see :ref:`BigDigraphs-Tutorial-label`
           
-   - A :py:mod:`pairings` module for solving pairing problems illustrated with two tutorials on computing **fair** :ref:`intergroup<Fair-InterGroup-Pairings-label>` and :ref:`intragroup<Fair-IntraGroup-Pairings-label>` pairing solutions.
+   - A :py:mod:`pairings` module for solving pairing problems illustrated with two tutorials on computing **fair** :ref:`intergroup<Fair-InterGroup-Pairings-label>` and :ref:`intragroup<Fair-IntraGroup-Pairings-label>` pairing solutions
 
 #. `Tutorials <tutorial.html>`_
 

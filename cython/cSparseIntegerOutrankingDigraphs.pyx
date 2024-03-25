@@ -1000,17 +1000,18 @@ def _worker(input):
 #            (args[1], args[2],result))
 
 def _decompose(int t, splitIndex, int nc,tempDirName,perfTab,
-               decomposition,componentRankingRule):
+               decomposition,compIndex,componentRankingRule):
     cdef int nd, i
     #global perfTab
     #global decomposition
     from pickle import dumps
     splitComponents = {}
-    for i in range(splitIndex[0],splitIndex[1]):
+    for spi in range(splitIndex[0],splitIndex[1]):
+        i = compIndex[spi]
         try:
             comp = decomposition[i]
         except:
-            print('Error', i, splitIndex)
+            print('Error comp i', spi, splitIndex, compIndex[spi])
         nd = len(str(nc))
         compKey = ('c%%0%dd' % (nd)) % (i+1)
         compDict = {'rank':i}
@@ -1329,6 +1330,7 @@ class SparseIntegerOutrankingDigraph(SparseIntegerDigraph,cPerformanceTableau):
         else:   # if self.sortingParameters['Threading'] == True:
             from copy import copy, deepcopy
             from pickle import dumps, loads, load, dump
+            from digraphsTools import qtilingIndexList
             if startMethod is None:
                 startMethod = 'spawn'
             import multiprocessing as mp
@@ -1351,7 +1353,10 @@ class SparseIntegerOutrankingDigraph(SparseIntegerDigraph,cPerformanceTableau):
                 ## tasks queue and workers launching
                 NUMBER_OF_WORKERS = nbrCores
                 from digraphsTools import qtilingIndexList
-                splitTasksIndex = qtilingIndexList(range(nc),NUMBER_OF_WORKERS)
+                compIndex = [i for i in range(nc)]
+                from random import shuffle
+                shuffle(compIndex)
+                splitTasksIndex = qtilingIndexList(compIndex,NUMBER_OF_WORKERS)
 
                 if Debug:
                     print(splitTasksIndex)
@@ -1365,7 +1370,7 @@ class SparseIntegerOutrankingDigraph(SparseIntegerDigraph,cPerformanceTableau):
                 #                    perfTab,decomposition,
                 #            componentRankingRule)) for pos in tasksIndex]
                 TASKS = [(Comments,(i,pos,nc,tempDirName,
-                            perfTab,decomposition,
+                                    perfTab,decomposition,compIndex,
                                     componentRankingRule)) for i,pos in enumerate(splitTasksIndex)]
 
                 task_queue = Queue()
@@ -2119,13 +2124,14 @@ def _worker1(input):
 #            (args[1], args[2],result))
 
 def _decompose1(int t,splitIndex, int nc,tempDirName,
-                perfTab,decomposition,componentRankingRule):
+                perfTab,decomposition,compIndex,componentRankingRule):
     cdef int nd, i
     #global perfTab
     #global decomposition
     from pickle import dumps
     splitComponents = {}
-    for i in range(splitIndex[0],splitIndex[1]):
+    for spi in range(splitIndex[0],splitIndex[1]):
+        i = compIndex[spi]
         try:
             comp = decomposition[i]
         except:
@@ -2440,7 +2446,10 @@ class cQuantilesRankingDigraph(SparseIntegerOutrankingDigraph):
                 ## tasks queue and workers launching
                 NUMBER_OF_WORKERS = nbrOfCPUs
                 from digraphsTools import qtilingIndexList
-                splitTasksIndex = qtilingIndexList(range(nc),NUMBER_OF_WORKERS)
+                compIndex = [i for i in range(nc)]
+                from random import shuffle
+                shuffle(compIndex)
+                splitTasksIndex = qtilingIndexList(compIndex,NUMBER_OF_WORKERS)
 
                 if Debug:
                     print(splitTasksIndex)
@@ -2453,7 +2462,7 @@ class cQuantilesRankingDigraph(SparseIntegerOutrankingDigraph):
                 #               perfTab,decomposition,
                 #               componentRankingRule)) for pos in tasksIndex]
                 TASKS = [(Comments,(i,pos,nc,tempDirName,
-                            perfTab,decomposition,
+                                    perfTab,decomposition,compIndex,
                                     componentRankingRule)) for i,pos in enumerate(splitTasksIndex)]
                 task_queue = Queue()
                 for task in TASKS:
