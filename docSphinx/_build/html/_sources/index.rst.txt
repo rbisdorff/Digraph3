@@ -63,7 +63,7 @@ Parts of the documentation
 
        <small><i>Technical documentation and source code of all Digraph3 modules</i></small>
 
-#. `Advanced topics <pearls.html>`_
+#. `Pearls of bipolar-valued epistemic logic <pearls.html>`_
 
     .. raw:: html
 
