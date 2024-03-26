@@ -21,8 +21,8 @@
 
 .. _Advanced-Topics-label:
 
-Advanced Topics
-===============
+Pearls of bipolar-valued epistemic logic
+========================================
 
 .. only:: html
 
