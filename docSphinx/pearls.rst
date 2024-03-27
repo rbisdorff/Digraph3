@@ -1242,7 +1242,7 @@ To investigate the question, we model the given preference data in the format of
     from collections import OrderedDict
     candidates = OrderedDict([
     ('A', {'name': 'A'}),
-    ('B', {'name': 'A'}) ])
+    ('B', {'name': 'B'}) ])
     voters = OrderedDict([
     ('v1', {'weight':11}),
     ('v2', {'weight':10}),
