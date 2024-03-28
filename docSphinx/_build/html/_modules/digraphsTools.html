@@ -62,7 +62,7 @@
               <ul>
 <li class="toctree-l1"><a class="reference internal" href="../tutorial.html">1. Digraph3 Tutorials</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../techDoc.html">2. Technical Reference of the Digraph3 modules</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../pearls.html">3. Advanced Topics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../pearls.html">3. Pearls of bipolar-valued epistemic logic</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../adtLectures.html">4. Algorithmic Decision Theory Lectures</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../compStatLectures.html">5. Computational Statistics Lectures</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../digraph3Archives.html">6. Digraph3 Archives</a></li>
@@ -221,7 +221,20 @@
 
 <div class="viewcode-block" id="qtilingIndexList"><a class="viewcode-back" href="../techDoc.html#digraphsTools.qtilingIndexList">[docs]</a><span class="k">def</span> <span class="nf">qtilingIndexList</span><span class="p">(</span><span class="n">indexList</span><span class="p">,</span><span class="n">q</span><span class="p">,</span><span class="n">Debug</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span><span class="n">Comments</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">    split an index list into q of equal length or, when there is a rest in len(indexList)//q, into q-1 parts of equal length plus a last shorter part.</span>
+<span class="sd">    split an index list into q parts of equal length n.</span>
+<span class="sd">    When there is a rest r &lt; q, the r first parts are put to a length of n+1.</span>
+
+<span class="sd">    The method is used for distributing balanced sublists to q multiprocessing threads.</span>
+
+<span class="sd">    Usage example::</span>
+<span class="sd">    </span>
+<span class="sd">        &gt;&gt;&gt; from digraphsTools import qtilingIndexList</span>
+<span class="sd">        &gt;&gt;&gt; indexList = [i for i in range(10)]</span>
+<span class="sd">        &gt;&gt;&gt; indexlist</span>
+<span class="sd">         [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]</span>
+<span class="sd">        &gt;&gt;&gt; qtilingIndexList(indexList,4,Comments=True)</span>
+<span class="sd">         cardinalities: [3, 3, 2, 2]</span>
+<span class="sd">         [(0, 3), (3, 6), (6, 8), (8, 10)]</span>
 <span class="sd">    </span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">n</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">indexList</span><span class="p">)</span>
@@ -1046,7 +1059,7 @@
 
   <div role="contentinfo">
     <p>&#169; Copyright 2012-2024, Raymond Bisdorff.
-      <span class="lastupdated">Last updated on Mar 25, 2024.
+      <span class="lastupdated">Last updated on Mar 28, 2024.
       </span></p>
   </div>
 

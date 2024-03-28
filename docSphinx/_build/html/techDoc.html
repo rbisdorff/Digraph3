@@ -37,7 +37,7 @@
     <script src="_static/js/theme.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="3. Advanced Topics" href="pearls.html" />
+    <link rel="next" title="3. Pearls of bipolar-valued epistemic logic" href="pearls.html" />
     <link rel="prev" title="1. Digraph3 Tutorials" href="tutorial.html" /> 
 </head>
 
@@ -1184,7 +1184,7 @@
 <li class="toctree-l2"><a class="reference internal" href="#indices-and-tables">2.24. Indices and tables</a></li>
 </ul>
 </li>
-<li class="toctree-l1"><a class="reference internal" href="pearls.html">3. Advanced Topics</a></li>
+<li class="toctree-l1"><a class="reference internal" href="pearls.html">3. Pearls of bipolar-valued epistemic logic</a></li>
 <li class="toctree-l1"><a class="reference internal" href="adtLectures.html">4. Algorithmic Decision Theory Lectures</a></li>
 <li class="toctree-l1"><a class="reference internal" href="compStatLectures.html">5. Computational Statistics Lectures</a></li>
 <li class="toctree-l1"><a class="reference internal" href="digraph3Archives.html">6. Digraph3 Archives</a></li>
@@ -1209,7 +1209,7 @@
 
   </ul><div class="rst-breadcrumbs-buttons" role="navigation" aria-label="Sequential page navigation">
         <a href="tutorial.html" class="btn btn-neutral float-left" title="1. Digraph3 Tutorials" accesskey="p"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
-        <a href="pearls.html" class="btn btn-neutral float-right" title="3. Advanced Topics" accesskey="n">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="pearls.html" class="btn btn-neutral float-right" title="3. Pearls of bipolar-valued epistemic logic" accesskey="n">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
   </div>
   <hr/>
 </div>
@@ -11607,7 +11607,19 @@ and operate <em>omin</em> on the two assembled arguments.</p>
 <dl class="py function">
 <dt class="sig sig-object py" id="digraphsTools.qtilingIndexList">
 <span class="sig-prename descclassname"><span class="pre">digraphsTools.</span></span><span class="sig-name descname"><span class="pre">qtilingIndexList</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">indexList</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">q</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">Debug</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">Comments</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/digraphsTools.html#qtilingIndexList"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#digraphsTools.qtilingIndexList" title="Permalink to this definition"></a></dt>
-<dd><p>split an index list into q of equal length or, when there is a rest in len(indexList)//q, into q-1 parts of equal length plus a last shorter part.</p>
+<dd><p>split an index list into q parts of equal length n.
+When there is a rest r &lt; q, the r first parts are put to a length of n+1.</p>
+<p>The method is used for distributing balanced sublists to q multiprocessing threads.</p>
+<p>Usage example:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">digraphsTools</span> <span class="kn">import</span> <span class="n">qtilingIndexList</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">indexList</span> <span class="o">=</span> <span class="p">[</span><span class="n">i</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">10</span><span class="p">)]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">indexlist</span>
+<span class="go"> [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">qtilingIndexList</span><span class="p">(</span><span class="n">indexList</span><span class="p">,</span><span class="mi">4</span><span class="p">,</span><span class="n">Comments</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="go"> cardinalities: [3, 3, 2, 2]</span>
+<span class="go"> [(0, 3), (3, 6), (6, 8), (8, 10)]</span>
+</pre></div>
+</div>
 </dd></dl>
 
 <dl class="py function">
@@ -13839,14 +13851,14 @@ Components are stored in an ordered dictionary.</p>
           </div>
           <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
         <a href="tutorial.html" class="btn btn-neutral float-left" title="1. Digraph3 Tutorials" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
-        <a href="pearls.html" class="btn btn-neutral float-right" title="3. Advanced Topics" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+        <a href="pearls.html" class="btn btn-neutral float-right" title="3. Pearls of bipolar-valued epistemic logic" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
     </div>
 
   <hr/>
 
   <div role="contentinfo">
     <p>&#169; Copyright 2012-2024, Raymond Bisdorff.
-      <span class="lastupdated">Last updated on Mar 25, 2024.
+      <span class="lastupdated">Last updated on Mar 28, 2024.
       </span></p>
   </div>
 

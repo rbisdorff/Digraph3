@@ -6789,10 +6789,7 @@ class Digraph(object):
 
         """
         from decimal import Decimal
-        #if ndigits is not None:
         formatString = '%%.%df' % ndigits
-        #else:
-        #    formatString = '%f'
         oldMax = Decimal(formatString % self.valuationdomain['max'])
         oldMin = Decimal(formatString % self.valuationdomain['min'])
         oldMed = Decimal(formatString % self.valuationdomain['med'])
@@ -6836,7 +6833,6 @@ class Digraph(object):
                 else:
                     newValue = newMin + ((orx[y] - oldMin)/oldAmplitude)*newAmplitude
                     nrx[y] = Decimal(formatString % newValue)
-                    #nrx[y] = newMin + ((orx[y] - oldMin)/oldAmplitude)*newAmplitude
                     if Debug:
                         print(x,y,orx[y],nrx[y])
         # install new values in self

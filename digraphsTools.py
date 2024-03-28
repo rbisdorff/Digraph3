@@ -126,7 +126,20 @@ colorPalettes = {1: _colorPalette1, 2: _colorPalette2, 3: _colorPalette0}
 
 def qtilingIndexList(indexList,q,Debug=False,Comments=False):
     """
-    split an index list into q of equal length or, when there is a rest in len(indexList)//q, into q-1 parts of equal length plus a last shorter part.
+    split an index list into q parts of equal length n.
+    When there is a rest r < q, the r first parts are put to a length of n+1.
+
+    The method is used for distributing balanced sublists to q multiprocessing threads.
+
+    Usage example::
+    
+        >>> from digraphsTools import qtilingIndexList
+        >>> indexList = [i for i in range(10)]
+        >>> indexlist
+         [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
+        >>> qtilingIndexList(indexList,4,Comments=True)
+         cardinalities: [3, 3, 2, 2]
+         [(0, 3), (3, 6), (6, 8), (8, 10)]
     
     """
     n = len(indexList)
