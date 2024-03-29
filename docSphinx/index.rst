@@ -67,7 +67,7 @@ Parts of the documentation
 
     .. raw:: html
 
-       <small><i>Pearls of bipolar-valued epistemic logic</i></small>
+       <small><i>Advanced theoretical and computational topics</i></small>
    
 #. `Digraph3 Book <http://hdl.handle.net/10993/48296>`_
 
