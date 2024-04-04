@@ -26,6 +26,7 @@ Digraph3 Book Errata List
     | P227 List. 17.2 Lines 1,39: *for* ':math:`>>>` g.' *read* ':math:`>>>` mg.'
     | P248 Notes L4: *for* 'where in the sequel' *read* 'were in the sequel'
     | P248 Notes L17: *for* 'Eq. 17.4 on page 243' *read* 'Eq. 17.1 on page 242'
+    | P249 Ref. Bisdorff (2004) *for* http://hdl.handle.net/10993/23721 *read* http://hdl.handle.net/10993/38740
     | P255 L1: *for* 'to a global support of (0.66 + 1.0)/2 = 83% of the criteria significance weights' *read* 'to a probability of (0.66 + 1.0)/2 = 83% of being positively validated.'
     | P257 List. 18.2 L20: *for* 'triangular(a=2.0,b=2.0)' *read* 'triangular(a=0,b=2w)'
     | P329 abstract L4: *for* 'to be an interval is' *read* 'to be an interval graph is'
