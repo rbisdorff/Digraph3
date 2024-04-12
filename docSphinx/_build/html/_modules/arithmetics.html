@@ -1,36 +1,38 @@
 <!DOCTYPE html>
-<html class="writer-html5" lang="en" >
+<html class="writer-html5" lang="en" data-content_root="../">
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>arithmetics &mdash; Digraph3 3.12.1 documentation</title>
-      <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
-      <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
-      <link rel="stylesheet" href="../_static/graphviz.css" type="text/css" />
-      <link rel="stylesheet" href="../_static/copybutton.css" type="text/css" />
-      <link rel="stylesheet" href="../_static/css/tooltipster.custom.css" type="text/css" />
-      <link rel="stylesheet" href="../_static/css/tooltipster.bundle.min.css" type="text/css" />
-      <link rel="stylesheet" href="../_static/css/tooltipster-sideTip-shadow.min.css" type="text/css" />
-      <link rel="stylesheet" href="../_static/css/tooltipster-sideTip-punk.min.css" type="text/css" />
-      <link rel="stylesheet" href="../_static/css/tooltipster-sideTip-noir.min.css" type="text/css" />
-      <link rel="stylesheet" href="../_static/css/tooltipster-sideTip-light.min.css" type="text/css" />
-      <link rel="stylesheet" href="../_static/css/tooltipster-sideTip-borderless.min.css" type="text/css" />
-      <link rel="stylesheet" href="../_static/css/micromodal.css" type="text/css" />
-      <link rel="stylesheet" href="../_static/css/sphinx_rtd_theme.css" type="text/css" />
+  <title>arithmetics &mdash; Digraph3 3.12.3 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=fa44fd50" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=19f00094" />
+      <link rel="stylesheet" type="text/css" href="../_static/graphviz.css?v=eafc0fe6" />
+      <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/tooltipster.custom.css?v=7bc2f056" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/tooltipster.bundle.min.css?v=37217874" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/tooltipster-sideTip-shadow.min.css?v=6227e517" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/tooltipster-sideTip-punk.min.css?v=94669e23" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/tooltipster-sideTip-noir.min.css?v=21a39f42" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/tooltipster-sideTip-light.min.css?v=a18b2449" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/tooltipster-sideTip-borderless.min.css?v=dbff53e4" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/micromodal.css?v=d7bf34ee" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/sphinx_rtd_theme.css?v=3234e928" />
+
+  
   <!--[if lt IE 9]>
     <script src="../_static/js/html5shiv.min.js"></script>
   <![endif]-->
   
-        <script src="../_static/jquery.js"></script>
-        <script src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
-        <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
-        <script src="../_static/doctools.js"></script>
-        <script src="../_static/sphinx_highlight.js"></script>
-        <script src="../_static/clipboard.min.js"></script>
-        <script src="../_static/copybutton.js"></script>
-        <script src="../_static/js/hoverxref.js"></script>
-        <script src="../_static/js/tooltipster.bundle.min.js"></script>
-        <script src="../_static/js/micromodal.min.js"></script>
+        <script src="../_static/jquery.js?v=5d32c60e"></script>
+        <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script src="../_static/documentation_options.js?v=2c828074"></script>
+        <script src="../_static/doctools.js?v=888ff710"></script>
+        <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+        <script src="../_static/clipboard.min.js?v=a7894cd8"></script>
+        <script src="../_static/copybutton.js?v=15d7cbb8"></script>
+        <script src="../_static/js/hoverxref.js?v=3be43539"></script>
+        <script src="../_static/js/tooltipster.bundle.min.js?v=18bf091b"></script>
+        <script src="../_static/js/micromodal.min.js?v=04d6302d"></script>
     <script src="../_static/js/theme.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" /> 
@@ -121,7 +123,9 @@
 <span class="kn">from</span> <span class="nn">collections</span> <span class="kn">import</span> <span class="n">OrderedDict</span>
 
 <span class="c1">#---------------</span>
-<div class="viewcode-block" id="QuadraticResiduesDigraph"><a class="viewcode-back" href="../techDoc.html#arithmetics.QuadraticResiduesDigraph">[docs]</a><span class="k">class</span> <span class="nc">QuadraticResiduesDigraph</span><span class="p">(</span><span class="n">Digraph</span><span class="p">):</span>
+<div class="viewcode-block" id="QuadraticResiduesDigraph">
+<a class="viewcode-back" href="../techDoc.html#arithmetics.QuadraticResiduesDigraph">[docs]</a>
+<span class="k">class</span> <span class="nc">QuadraticResiduesDigraph</span><span class="p">(</span><span class="n">Digraph</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    The **Legendre** symbol *(a/p)* of any pair of non null integers *a* and *p* is:</span>
 
@@ -189,8 +193,11 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">relation</span> <span class="o">=</span> <span class="n">relation</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">gamma</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">gammaSets</span><span class="p">()</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">notGamma</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">notGammaSets</span><span class="p">()</span></div>
+
     
-<div class="viewcode-block" id="primesBelow"><a class="viewcode-back" href="../techDoc.html#arithmetics.primesBelow">[docs]</a><span class="k">def</span> <span class="nf">primesBelow</span><span class="p">(</span><span class="n">N</span><span class="p">,</span><span class="n">Odd</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+<div class="viewcode-block" id="primesBelow">
+<a class="viewcode-back" href="../techDoc.html#arithmetics.primesBelow">[docs]</a>
+<span class="k">def</span> <span class="nf">primesBelow</span><span class="p">(</span><span class="n">N</span><span class="p">,</span><span class="n">Odd</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 
 <span class="sd">    http://stackoverflow.com/questions/2068372/fastest-way-to-list-all-primes-below-n-in-python/3035188#3035188</span>
@@ -211,9 +218,12 @@
         <span class="n">primes</span><span class="o">.</span><span class="n">remove</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
     <span class="k">return</span> <span class="n">primes</span></div>
 
+
 <span class="n">_smallprimeset</span> <span class="o">=</span> <span class="nb">set</span><span class="p">(</span><span class="n">primesBelow</span><span class="p">(</span><span class="mi">100000</span><span class="p">))</span>
 <span class="n">_smallprimesetSize</span> <span class="o">=</span> <span class="mi">100000</span>
-<div class="viewcode-block" id="isprime"><a class="viewcode-back" href="../techDoc.html#arithmetics.isprime">[docs]</a><span class="k">def</span> <span class="nf">isprime</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="n">precision</span><span class="o">=</span><span class="mi">7</span><span class="p">):</span>
+<div class="viewcode-block" id="isprime">
+<a class="viewcode-back" href="../techDoc.html#arithmetics.isprime">[docs]</a>
+<span class="k">def</span> <span class="nf">isprime</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="n">precision</span><span class="o">=</span><span class="mi">7</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 
 <span class="sd">    http://en.wikipedia.org/wiki/Miller-Rabin_primality_test#Algorithm_and_running_time</span>
@@ -247,7 +257,10 @@
 
     <span class="k">return</span> <span class="kc">True</span></div>
 
-<div class="viewcode-block" id="pollard_brent"><a class="viewcode-back" href="../techDoc.html#arithmetics.pollard_brent">[docs]</a><span class="k">def</span> <span class="nf">pollard_brent</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
+
+<div class="viewcode-block" id="pollard_brent">
+<a class="viewcode-back" href="../techDoc.html#arithmetics.pollard_brent">[docs]</a>
+<span class="k">def</span> <span class="nf">pollard_brent</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 
 <span class="sd">    https://comeoncodeon.wordpress.com/2010/09/18/pollard-rho-brent-integer-factorization/</span>
@@ -280,6 +293,7 @@
                 <span class="k">break</span>
 
     <span class="k">return</span> <span class="n">g</span></div>
+
 
 <span class="n">_smallprimes</span> <span class="o">=</span> <span class="n">primesBelow</span><span class="p">(</span><span class="mi">1000</span><span class="p">)</span> <span class="c1"># might seem low, but 1000*1000 = 1000000, so this will fully factor every composite &lt; 1000000</span>
 <span class="k">def</span> <span class="nf">primeFactors</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="n">sort</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
@@ -317,7 +331,9 @@
             <span class="n">factors</span><span class="p">[</span><span class="n">p1</span><span class="p">]</span> <span class="o">=</span> <span class="mi">1</span>
     <span class="k">return</span> <span class="n">factors</span>
 
-<div class="viewcode-block" id="moebius_mu"><a class="viewcode-back" href="../techDoc.html#arithmetics.moebius_mu">[docs]</a><span class="k">def</span> <span class="nf">moebius_mu</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
+<div class="viewcode-block" id="moebius_mu">
+<a class="viewcode-back" href="../techDoc.html#arithmetics.moebius_mu">[docs]</a>
+<span class="k">def</span> <span class="nf">moebius_mu</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Implements the Moebius mu function on N based on n&#39;s prime factorization:</span>
 <span class="sd">    n = p1^e1 * ... * pk^ek with each ei &gt;= 1 for i = 1, ..., k.  </span>
@@ -340,7 +356,10 @@
     <span class="k">else</span><span class="p">:</span>
         <span class="k">return</span> <span class="mi">0</span></div>
 
-<div class="viewcode-block" id="divisors"><a class="viewcode-back" href="../techDoc.html#arithmetics.divisors">[docs]</a><span class="k">def</span> <span class="nf">divisors</span><span class="p">(</span><span class="n">n</span><span class="p">,</span><span class="n">Sorted</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
+
+<div class="viewcode-block" id="divisors">
+<a class="viewcode-back" href="../techDoc.html#arithmetics.divisors">[docs]</a>
+<span class="k">def</span> <span class="nf">divisors</span><span class="p">(</span><span class="n">n</span><span class="p">,</span><span class="n">Sorted</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Renders the list of divisors of integer n.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
@@ -356,7 +375,10 @@
         <span class="n">Dn</span><span class="o">.</span><span class="n">reverse</span><span class="p">()</span>       
     <span class="k">return</span> <span class="n">Dn</span></div>
 
-<div class="viewcode-block" id="divisorsFunction"><a class="viewcode-back" href="../techDoc.html#arithmetics.divisorsFunction">[docs]</a><span class="k">def</span> <span class="nf">divisorsFunction</span><span class="p">(</span><span class="n">k</span><span class="p">,</span><span class="n">n</span><span class="p">):</span>
+
+<div class="viewcode-block" id="divisorsFunction">
+<a class="viewcode-back" href="../techDoc.html#arithmetics.divisorsFunction">[docs]</a>
+<span class="k">def</span> <span class="nf">divisorsFunction</span><span class="p">(</span><span class="n">k</span><span class="p">,</span><span class="n">n</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    generic divisor function:</span>
 
@@ -368,8 +390,11 @@
         <span class="n">tot</span> <span class="o">+=</span> <span class="nb">pow</span><span class="p">(</span><span class="n">d</span><span class="p">,</span><span class="n">k</span><span class="p">)</span>
     <span class="k">return</span> <span class="n">tot</span></div>
 
+
 <span class="n">_totients</span> <span class="o">=</span> <span class="p">{}</span>
-<div class="viewcode-block" id="totient"><a class="viewcode-back" href="../techDoc.html#arithmetics.totient">[docs]</a><span class="k">def</span> <span class="nf">totient</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
+<div class="viewcode-block" id="totient">
+<a class="viewcode-back" href="../techDoc.html#arithmetics.totient">[docs]</a>
+<span class="k">def</span> <span class="nf">totient</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Implements the totient function rendering</span>
 <span class="sd">    Euler&#39;s number of coprime elements a in Zn.</span>
@@ -386,7 +411,10 @@
     <span class="n">_totients</span><span class="p">[</span><span class="n">n</span><span class="p">]</span> <span class="o">=</span> <span class="n">tot</span>
     <span class="k">return</span> <span class="n">tot</span></div>
 
-<div class="viewcode-block" id="continuedFraction"><a class="viewcode-back" href="../techDoc.html#arithmetics.continuedFraction">[docs]</a><span class="k">def</span> <span class="nf">continuedFraction</span><span class="p">(</span><span class="n">p</span><span class="p">,</span> <span class="n">q</span><span class="p">):</span>
+
+<div class="viewcode-block" id="continuedFraction">
+<a class="viewcode-back" href="../techDoc.html#arithmetics.continuedFraction">[docs]</a>
+<span class="k">def</span> <span class="nf">continuedFraction</span><span class="p">(</span><span class="n">p</span><span class="p">,</span> <span class="n">q</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Renders the continued fraction [a_0,a_1,a_2,...,a_n]</span>
 <span class="sd">    of the ratio of two integers p and q, q &gt; 0 and where a0 = p//q.</span>
@@ -407,7 +435,10 @@
         <span class="c1">#print(p,q0,q,res)</span>
     <span class="k">return</span> <span class="n">res</span></div>
 
-<div class="viewcode-block" id="evalContinuedFraction"><a class="viewcode-back" href="../techDoc.html#arithmetics.evalContinuedFraction">[docs]</a><span class="k">def</span> <span class="nf">evalContinuedFraction</span><span class="p">(</span><span class="n">cf</span><span class="p">):</span>
+
+<div class="viewcode-block" id="evalContinuedFraction">
+<a class="viewcode-back" href="../techDoc.html#arithmetics.evalContinuedFraction">[docs]</a>
+<span class="k">def</span> <span class="nf">evalContinuedFraction</span><span class="p">(</span><span class="n">cf</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Backwise recursive evaluation: ev_i-1 + 1/ev_i, for i = n,..,1</span>
 <span class="sd">    of the continued fraction cf = [a_0,a_1,a_2,...,a_n] and </span>
@@ -422,8 +453,11 @@
         <span class="c1">#print(i,res)</span>
     <span class="n">res</span> <span class="o">=</span> <span class="n">Decimal</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">cf</span><span class="p">[</span><span class="mi">0</span><span class="p">]))</span> <span class="o">+</span> <span class="n">Decimal</span><span class="p">(</span><span class="s1">&#39;1&#39;</span><span class="p">)</span><span class="o">/</span><span class="n">res</span>
     <span class="k">return</span> <span class="n">res</span></div>
+
         
-<div class="viewcode-block" id="gcd"><a class="viewcode-back" href="../techDoc.html#arithmetics.gcd">[docs]</a><span class="k">def</span> <span class="nf">gcd</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">):</span>
+<div class="viewcode-block" id="gcd">
+<a class="viewcode-back" href="../techDoc.html#arithmetics.gcd">[docs]</a>
+<span class="k">def</span> <span class="nf">gcd</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Renders the greatest common divisor of a and b.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
@@ -431,13 +465,19 @@
     <span class="k">while</span> <span class="n">b</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span> <span class="n">a</span><span class="p">,</span> <span class="n">b</span> <span class="o">=</span> <span class="n">b</span><span class="p">,</span> <span class="n">a</span> <span class="o">%</span> <span class="n">b</span>
     <span class="k">return</span> <span class="n">a</span></div>
 
-<div class="viewcode-block" id="lcm"><a class="viewcode-back" href="../techDoc.html#arithmetics.lcm">[docs]</a><span class="k">def</span> <span class="nf">lcm</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">):</span>
+
+<div class="viewcode-block" id="lcm">
+<a class="viewcode-back" href="../techDoc.html#arithmetics.lcm">[docs]</a>
+<span class="k">def</span> <span class="nf">lcm</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Renders the least common multiple of a and b.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="k">return</span> <span class="nb">abs</span><span class="p">(</span><span class="n">a</span> <span class="o">*</span> <span class="n">b</span><span class="p">)</span> <span class="o">//</span> <span class="n">gcd</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">)</span></div>
 
-<div class="viewcode-block" id="bezout"><a class="viewcode-back" href="../techDoc.html#arithmetics.bezout">[docs]</a><span class="k">def</span> <span class="nf">bezout</span><span class="p">(</span><span class="n">a</span><span class="p">,</span><span class="n">b</span><span class="p">):</span>
+
+<div class="viewcode-block" id="bezout">
+<a class="viewcode-back" href="../techDoc.html#arithmetics.bezout">[docs]</a>
+<span class="k">def</span> <span class="nf">bezout</span><span class="p">(</span><span class="n">a</span><span class="p">,</span><span class="n">b</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Renders d = gcd(a,b) and the</span>
 <span class="sd">    Bezout coefficients x, y such that</span>
@@ -455,7 +495,10 @@
         <span class="n">a</span><span class="p">,</span><span class="n">b</span> <span class="o">=</span> <span class="n">b</span><span class="p">,</span><span class="n">r</span>
     <span class="k">return</span> <span class="n">a</span><span class="p">,</span><span class="n">x</span><span class="p">,</span><span class="n">y</span></div>
 
-<div class="viewcode-block" id="solPartEqnDioph"><a class="viewcode-back" href="../techDoc.html#arithmetics.solPartEqnDioph">[docs]</a><span class="k">def</span> <span class="nf">solPartEqnDioph</span><span class="p">(</span><span class="n">a</span><span class="p">,</span><span class="n">b</span><span class="p">,</span><span class="n">c</span><span class="p">):</span>
+
+<div class="viewcode-block" id="solPartEqnDioph">
+<a class="viewcode-back" href="../techDoc.html#arithmetics.solPartEqnDioph">[docs]</a>
+<span class="k">def</span> <span class="nf">solPartEqnDioph</span><span class="p">(</span><span class="n">a</span><span class="p">,</span><span class="n">b</span><span class="p">,</span><span class="n">c</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    renders a particular integer solution of the Diophantian equation</span>
 <span class="sd">    ax + by = c.</span>
@@ -471,7 +514,10 @@
 
     <span class="k">return</span> <span class="n">C</span><span class="o">*</span><span class="n">x</span><span class="p">,</span> <span class="n">C</span><span class="o">*</span><span class="n">y</span> <span class="p">,</span> <span class="n">A</span><span class="p">,</span> <span class="n">B</span> <span class="c1"># solution particulière plus coefficients</span></div>
 
-<div class="viewcode-block" id="zn_squareroots"><a class="viewcode-back" href="../techDoc.html#arithmetics.zn_squareroots">[docs]</a><span class="k">def</span> <span class="nf">zn_squareroots</span><span class="p">(</span><span class="n">n</span><span class="p">,</span><span class="n">Comments</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+
+<div class="viewcode-block" id="zn_squareroots">
+<a class="viewcode-back" href="../techDoc.html#arithmetics.zn_squareroots">[docs]</a>
+<span class="k">def</span> <span class="nf">zn_squareroots</span><span class="p">(</span><span class="n">n</span><span class="p">,</span><span class="n">Comments</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Renders the quadratic residues of Zn as a dictionary.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
@@ -489,7 +535,10 @@
             <span class="n">sqrt</span><span class="p">[</span><span class="n">sqi</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span><span class="n">i</span><span class="p">]</span>
     <span class="k">return</span> <span class="n">sqrt</span></div>
 
-<div class="viewcode-block" id="zn_units"><a class="viewcode-back" href="../techDoc.html#arithmetics.zn_units">[docs]</a><span class="k">def</span> <span class="nf">zn_units</span><span class="p">(</span><span class="n">n</span><span class="p">,</span><span class="n">Comments</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+
+<div class="viewcode-block" id="zn_units">
+<a class="viewcode-back" href="../techDoc.html#arithmetics.zn_units">[docs]</a>
+<span class="k">def</span> <span class="nf">zn_units</span><span class="p">(</span><span class="n">n</span><span class="p">,</span><span class="n">Comments</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Renders the set of units of Zn.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
@@ -503,7 +552,10 @@
         <span class="nb">print</span><span class="p">(</span><span class="n">units</span><span class="p">)</span>
     <span class="k">return</span> <span class="n">units</span></div>
 
-<div class="viewcode-block" id="computePiDecimals"><a class="viewcode-back" href="../techDoc.html#arithmetics.computePiDecimals">[docs]</a><span class="k">def</span> <span class="nf">computePiDecimals</span><span class="p">(</span><span class="n">decimalWordLength</span><span class="o">=</span><span class="mi">4</span><span class="p">,</span><span class="n">nbrOfWords</span><span class="o">=</span><span class="mi">600</span><span class="p">,</span><span class="n">Comments</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+
+<div class="viewcode-block" id="computePiDecimals">
+<a class="viewcode-back" href="../techDoc.html#arithmetics.computePiDecimals">[docs]</a>
+<span class="k">def</span> <span class="nf">computePiDecimals</span><span class="p">(</span><span class="n">decimalWordLength</span><span class="o">=</span><span class="mi">4</span><span class="p">,</span><span class="n">nbrOfWords</span><span class="o">=</span><span class="mi">600</span><span class="p">,</span><span class="n">Comments</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Renders at least *decimalWordLenght* x *nbrOfWords* (default: 4x600=2400)</span>
 <span class="sd">    decimals of :math:`\\pi`.</span>
@@ -566,7 +618,10 @@
         <span class="nb">print</span><span class="p">(</span><span class="n">piDecimals</span><span class="p">[</span><span class="mi">1</span><span class="p">:])</span>
     <span class="k">return</span> <span class="n">piDecimals</span></div>
 
-<div class="viewcode-block" id="sternBrocot"><a class="viewcode-back" href="../techDoc.html#arithmetics.sternBrocot">[docs]</a><span class="k">def</span> <span class="nf">sternBrocot</span><span class="p">(</span><span class="n">m</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span><span class="n">n</span><span class="o">=</span><span class="mi">7</span><span class="p">,</span><span class="n">Debug</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+
+<div class="viewcode-block" id="sternBrocot">
+<a class="viewcode-back" href="../techDoc.html#arithmetics.sternBrocot">[docs]</a>
+<span class="k">def</span> <span class="nf">sternBrocot</span><span class="p">(</span><span class="n">m</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span><span class="n">n</span><span class="o">=</span><span class="mi">7</span><span class="p">,</span><span class="n">Debug</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Renders the Stern-Brocot representation of the rational m/n (m and n are positive integers).</span>
 <span class="sd">    For instance, sternBrocot(5,7) = [&#39;L&#39;,&#39;R&#39;,&#39;R&#39;,&#39;L&#39;].</span>
@@ -585,7 +640,10 @@
             <span class="nb">print</span><span class="p">(</span><span class="n">sb</span><span class="p">)</span>
     <span class="k">return</span> <span class="n">sb</span></div>
 
-<div class="viewcode-block" id="invSternBrocot"><a class="viewcode-back" href="../techDoc.html#arithmetics.invSternBrocot">[docs]</a><span class="k">def</span> <span class="nf">invSternBrocot</span><span class="p">(</span><span class="n">sb</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;L&#39;</span><span class="p">,</span><span class="s1">&#39;R&#39;</span><span class="p">,</span><span class="s1">&#39;R&#39;</span><span class="p">,</span><span class="s1">&#39;L&#39;</span><span class="p">],</span><span class="n">Debug</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+
+<div class="viewcode-block" id="invSternBrocot">
+<a class="viewcode-back" href="../techDoc.html#arithmetics.invSternBrocot">[docs]</a>
+<span class="k">def</span> <span class="nf">invSternBrocot</span><span class="p">(</span><span class="n">sb</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;L&#39;</span><span class="p">,</span><span class="s1">&#39;R&#39;</span><span class="p">,</span><span class="s1">&#39;R&#39;</span><span class="p">,</span><span class="s1">&#39;L&#39;</span><span class="p">],</span><span class="n">Debug</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Computing the rational which corresponds to the Stern-Brocot string sb.</span>
 
@@ -615,7 +673,10 @@
     <span class="n">n</span> <span class="o">=</span> <span class="n">S</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span><span class="o">+</span><span class="n">S</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">1</span><span class="p">]</span>
     <span class="k">return</span> <span class="n">m</span><span class="p">,</span><span class="n">n</span></div>
 
-<div class="viewcode-block" id="computeFareySeries"><a class="viewcode-back" href="../techDoc.html#arithmetics.computeFareySeries">[docs]</a><span class="k">def</span> <span class="nf">computeFareySeries</span><span class="p">(</span><span class="n">n</span><span class="o">=</span><span class="mi">7</span><span class="p">,</span><span class="n">AsFloats</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span><span class="n">Debug</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+
+<div class="viewcode-block" id="computeFareySeries">
+<a class="viewcode-back" href="../techDoc.html#arithmetics.computeFareySeries">[docs]</a>
+<span class="k">def</span> <span class="nf">computeFareySeries</span><span class="p">(</span><span class="n">n</span><span class="o">=</span><span class="mi">7</span><span class="p">,</span><span class="n">AsFloats</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span><span class="n">Debug</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Renders the Farey series, ie the ordered list of positive rational fractions with positive denominator lower or equal to n. For *n* = 1, we obtain: [[0,1],[1,1]].</span>
 
@@ -659,6 +720,7 @@
         <span class="n">f</span> <span class="o">=</span> <span class="p">[</span><span class="nb">float</span><span class="p">(</span><span class="n">x</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span><span class="o">/</span><span class="nb">float</span><span class="p">(</span><span class="n">x</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">f</span><span class="p">]</span>
     <span class="k">return</span> <span class="n">f</span></div>
 
+
 <span class="c1">###############################</span>
 <span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s1">&#39;__main__&#39;</span><span class="p">:</span>
     <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;&quot;&quot;</span>
@@ -701,7 +763,7 @@
 
   <div role="contentinfo">
     <p>&#169; Copyright 2012-2024, Raymond Bisdorff.
-      <span class="lastupdated">Last updated on Apr 04, 2024.
+      <span class="lastupdated">Last updated on Apr 12, 2024.
       </span></p>
   </div>
 
