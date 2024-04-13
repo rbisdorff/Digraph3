@@ -1355,7 +1355,7 @@ We may inspect the performance tableau data with the computing resources provide
 .. code-block:: pycon
    :linenos:
 
-   >>> from perfTabs import *
+   >>> from perfTabs import PerformanceTableau
    >>> t = PerformanceTableau('officeChoice')
    >>> t
     *------- PerformanceTableau instance description ------*
@@ -3444,7 +3444,7 @@ We may compute, for instance, a five-tiling of a given random performance tablea
    :caption: Computing a quintiles rating result 
    :linenos:
 
-   >>> from randomPerfTabs import *
+   >>> from randomPerfTabs import RandomPerformanceTableau
    >>> t = RandomPerformanceTableau(numberOfActions=50,seed=5)
    >>> from ratingDigraphs import RatingByRelativeQuantilesDigraph
    >>> rqr = RatingByRelativeQuantilesDigraph(t,quantiles=5)
@@ -7953,17 +7953,18 @@ Using Digraph3 multiprocessing resources
 Computing with multiple threads in parallel
 ```````````````````````````````````````````
 
-Modern desktop and laptop computers usually provide a multithreaded CPU which allows to run several threads in parallel [53]_. In the Digraph3 resources we offer this usage with a *Threading*, a *nbrCores* or *nbrOfCPUs* and a *startMethod* parameter (see below Lines 6-7)  
+Modern desktop and laptop computers usually provide a multithreaded CPU which allows to run several threads in parallel [53]_. In the Digraph3 resources we offer this usage with a *Threading*, a *nbrCores* or *nbrOfCPUs* and a *startMethod* parameter (see below Lines 7-8)  
 
 .. code-block:: pycon
    :linenos:
-   :emphasize-lines: 6,7,24
+   :emphasize-lines: 7-8,25
       
    ...$ python3
     Python 3.11.6 (main, Oct  8 2023, 05:06:43) [GCC 13.2.0] on linux
-   >>> from outrankingDigraphs import *
+   >>> from randomPerfTabs import RandomPerformanceTableau
    >>> t = RandomPerformanceTableau(numberOfActions=500,
    ...                        numberOfCriteria=13,seed=1)
+   >>> from outrankingDigraphs import BipolarOutrankingDigraph
    >>> g = BipolarOutrankingDigraph(t,Threading=True,
    ...                              nbrCores=10,startMethod='spawn')
    >>> g
@@ -7987,7 +7988,7 @@ Modern desktop and laptop computers usually provide a multithreaded CPU which al
    Compute relation : 3.20870
    Gamma sets       : 0.12471
    
-The same computation without threading takes about four times more total run time (see above Line 24 and below Line 20).
+The same computation without threading takes about four times more total run time (see above Line 25 and below Line 20).
 
 .. code-block:: pycon
    :linenos:
@@ -8140,7 +8141,7 @@ In order to efficiently type the C variables, the :py:mod:`cRandPerfTabs` module
 .. code-block:: pycon
    :linenos:
    
-   >>> from cRandPerfTabs import *
+   >>> from cRandPerfTabs import cRandomPerformanceTableau
    >>> t = cRandomPerformanceTableau(numberOfActions=4,numberOfCriteria=2)
    >>> t
        *------- PerformanceTableau instance description ------*
@@ -8212,8 +8213,9 @@ The C compiled version of the bipolar-valued digraph models takes integer relati
 .. code-block:: pycon
    :linenos:
    
+   >>> from cRandPerfTabs import cRandomPerformanceTableau
    >>> t = cRandomPerformanceTableau(numberOfActions=1000,numberOfCriteria=2)
-   >>> from cIntegerOutrankingDigraphs import *
+   >>> from cIntegerOutrankingDigraphs import IntegerBipolarOutrankingDigraph
    >>> g = IntegerBipolarOutrankingDigraph(t,Threading=True,nbrCores=4)
    >>> g
       *------- Object instance description ------*
@@ -8291,7 +8293,7 @@ The idea is to first decompose the complete outranking relation into an ordered 
 .. code-block:: pycon
    :linenos:
 
-   >>> from cRandPerfTabs import *
+   >>> from cRandPerfTabs import cRandomPerformanceTableau
    >>> t = cRandomPerformanceTableau(numberOfActions=100,
    ...                               numberOfCriteria=7,seed=100)
 
@@ -8300,7 +8302,8 @@ We sort the 100 decision alternatives into overlapping quartile classes and rank
 .. code-block:: pycon
    :linenos:
 
-   >>> from cSparseIntegerOutrankingDigraphs import *
+   >>> from cSparseIntegerOutrankingDigraphs import \
+   ...      SparseIntegerOutrankingDigraph
    >>> sg = SparseIntegerOutrankingDigraph(t,quantiles=4,
    ...                      OptimalQuantileOrdering=False,
    ...                      Threading=False)
@@ -8505,7 +8508,8 @@ We observe an even more considerably less voluminous memory occupation: 208kB co
 .. code-block:: pycon
    :linenos:
 
-   >>> from cIntegerOutrankingDigraphs import *
+   >>> from cIntegerOutrankingDigraphs import \
+   ...      IntegerBipolarOutrankingDigraph
    >>> ig = IntegerBipolarOutrankingDigraph(t)
    >>> print('Complete outranking : %+.4f'\
    ...        % (ig.computeOrderCorrelation(ig.computeCopelandOrder())\
@@ -8780,7 +8784,7 @@ Restricted to these ten best-ranked alternatives, the *Copeland*, the *NetFlows*
     [426464, 567308, 155874, 279729, 773909, 928564, 668947, 815552, 298061, 578560]
    >>> g.computeNetFlowsRanking()
     [426464, 155874, 773909, 567308, 815552, 279729, 928564, 298061, 668947, 578560]
-   >>> from linearOrders import *
+   >>> from linearOrders import KemenyOrder
    >>> ke = KemenyOrder(g,orderLimit=10)
    >>> ke.kemenyRanking
     [426464, 773909, 155874, 815552, 567308, 298061, 928564, 279729, 668947, 578560]
@@ -9805,7 +9809,7 @@ Let us consider, for instance, the following random graph of *order* 8 generated
 .. code-block:: pycon
    :linenos:
 
-   >>> from graphs import *
+   >>> from graphs import RandomGraph
    >>> g = RandomGraph(order=8,edgeProbability=0.4,seed=4335)
    >>> g
     *------- Graph instance description ------*
@@ -10175,7 +10179,7 @@ With the :py:class:`~graphs.RandomSpanningTree` class we may generate, from a gi
 .. code-block:: pycon
    :linenos:
 
-   >>> from graphs import *
+   >>> from graphs import RandomGraph, RandomSpanningTree
    >>> g = RandomGraph(order=9,edgeProbability=0.4,seed=100)
    >>> spt = RandomSpanningTree(g)
    >>> spt
@@ -10215,6 +10219,7 @@ More general, and in case of a not connected graph, we may generate with the :py
     [{'v12', 'v01', 'v13'}, {'v02', 'v06'},
      {'v08', 'v03', 'v07'}, {'v15', 'v11', 'v10', 'v04', 'v05'},
      {'v09', 'v14'}]
+   >>> fromgraphs import RandomSpanningForest
    >>> spf = RandomSpanningForest(g,seed=100)
    >>> spf.exportGraphViz(fileName='spanningForest',WithSpanningTree=True)
     *---- exporting a dot file for GraphViz tools ---------*
@@ -10244,7 +10249,7 @@ We consider, for instance, a randomly valued graph with five vertices and seven 
 .. code-block:: pycon
    :linenos:
 
-   >>> from graphs import *
+   >>> from graphs import RandomValuationGraph
    >>> g = RandomValuationGraph(seed=2)
    >>> print(g)
     *------- Graph instance description ------*
@@ -10278,6 +10283,7 @@ To compute the most determined spanning tree or forest, we may use the :py:class
 .. code-block:: pycon
    :linenos:
 
+   >>> from graphs import BestDeterminedSpanningForest
    >>> mt = BestDeterminedSpanningForest(g)
    >>> print(mt)
     *------- Graph instance description ------*

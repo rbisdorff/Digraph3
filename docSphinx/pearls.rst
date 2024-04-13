@@ -118,7 +118,7 @@ Let us consider such a performance tableau in file `graffiti07.py <_static/graff
 .. code-block:: pycon
    :linenos:
 
-   >>> from outrankingDigraphs import *
+   >>> from perfTabs import PerformanceTableau
    >>> t = PerformanceTableau('graffiti07')
    >>> t.showHTMLPerformanceTableau(title='Graffiti Star wars',
    ...                              ndigits=0)
@@ -159,6 +159,7 @@ Let us explicitly construct the underlying bipolar-valued outranking digraph and
 .. code-block:: pycon
    :linenos:
 
+   >>> from outrankingDigraphs import BipolarOutrankingDigraph
    >>> g = BipolarOutrankingDigraph(t)
    >>> g.recodeValuation(-19,19) # integer characteristic values
    >>> g.showHTMLPairwiseOutrankings('mv_QS','mv_RR')
@@ -1954,7 +1955,7 @@ File `bpApVotingProfile.py <_static/bpApVotingProfile.py>`_ contains such a bipo
    :linenos:
    :emphasize-lines: 10
 
-   >>> from votingProfiles import *
+   >>> from votingProfiles import BipolarApprovalVotingProfile
    >>> bavp = BipolarApprovalVotingProfile('bpApVotingProfile')
    >>> bavp
     *------- VotingProfile instance description ------*
@@ -2650,12 +2651,12 @@ Let *R1* and *R2* be two random crisp relations defined on a same set of 5 alter
    :linenos:
    :caption: Crisp Relational Equivalence Digraph
    :name: relEqui1
-   :emphasize-lines: 9-13
+   :emphasize-lines: 10-14,17
 	 
-
-   >>> from digraphs import *
+   >>> from randomDigraphs import RandomDigraph
    >>> R1 = RandomDigraph(order=5,Bipolar=True)
    >>> R2 = RandomDigraph(order=5,Bipolar=True)
+   >>> from digraphs import EquivalenceDigraph
    >>> E = EquivalenceDigraph(R1,R2)
    >>> E.showRelationTable(ReflexiveTerms=False)
     * ---- Relation Table -----
@@ -2670,7 +2671,7 @@ Let *R1* and *R2* be two random crisp relations defined on a same set of 5 alter
    >>> E.correlation
     {'correlation': -0.1, 'determination': 1.0}
 
-In the table of the equivalence relation :math:`(R_1 \Leftrightarrow R_2)` above (see :numref:`relEqui1` Lines 9-13), we observe that the normalized majority margin of equivalent versus non equivalent irreflexive pairs amounts to (9 - 11)/20 = -0.1, i.e. the value of Kendall's *tau* index in this plainly determined crisp case (see :numref:`relEqui1` Line 16).
+In the table of the equivalence relation :math:`(R_1 \Leftrightarrow R_2)` above (see :numref:`relEqui1` Lines 10-14), we observe that the normalized majority margin of equivalent versus non equivalent irreflexive pairs amounts to (9 - 11)/20 = -0.1, i.e. the value of Kendall's *tau* index in this plainly determined crisp case (see :numref:`relEqui1` Line 17).
 
 What happens now with more or less determined and even partially indeterminate relations ? May we proceed in a similar way ?
 
@@ -3467,7 +3468,7 @@ To illustrate this idea, let us finally compute good and bad choice recommendati
 .. code-block:: pycon
    :linenos:
 
-   >>> from outrankingDigraphs import *
+   >>> from outrankingDigraphs import RandomBipolarOutrankingDigraph
    >>> g = RandomBipolarOutrankingDigraph(seed=5)
    >>> g
     *------- Object instance description ------*
@@ -3602,6 +3603,7 @@ Finally, let us give some hints on the **tractability** of kernel computations. 
 .. code-block:: pycon
    :linenos:
 
+   >>> from digraphs import EmptyDigraph
    >>> e = EmptyDigraph(order=20)
    >>> e.showMIS()   # by visiting all 2^20 independent choices
     *---  Maximal independent choices ---*
@@ -3722,7 +3724,7 @@ Let us verify this result on a tiny random digraph.
 .. code-block:: pycon
    :linenos:
 
-   >>> from digraphs import *
+   >>> from digraphs import RandomDigraph
    >>> g = RandomDigraph(order=3,seed=1)
    >>> g.showRelationTable()
     * ---- Relation Table -----
@@ -3787,7 +3789,7 @@ Time for a practical illustration.
    :name: exRandBG
    :emphasize-lines: 2
 
-   >>> from outrankingDigraphs import *
+   >>> from outrankingDigraphs import RandomBipolarOutrankingDigraph
    >>> g = RandomBipolarOutrankingDigraph(Normalized=True,seed=5)
    >>> print(g)
     *------- Object instance description ------*
@@ -4043,10 +4045,11 @@ It is indeed possible to define such a performance tableau by, first, using a si
 .. code-block:: pycon
    :caption: A potential performance tableau
    :name: Bouyssou4OrigPT
-   :emphasize-lines: 8-11,17,20
+   :emphasize-lines: 9-12,18,21
    :linenos:
 
-   >>> from outrankingDigraphs import *
+   >>> from perfsTab import PerformanceTableau
+   >>> from outrankingDigraphs import BipolarOutrankingDigraph
    >>> pt = PerformanceTableau('testBouyssou')
    >>> pt.showPerformanceTableau(ndigits=0)
     *----  performance tableau ----*
@@ -4068,7 +4071,7 @@ It is indeed possible to define such a performance tableau by, first, using a si
      'd' | +0.20  -0.40  -0.40  +1.00  
     Valuation domain: [-1.000; 1.000]
 
-In :numref:`Bouyssou4OrigPT` Lines 8-11 we notice that criterion *g1* models with a majority margin of 2/5 = 0.40 the requested linear ranking and criterion *g2* warrants with a majority margin of 1/5 = 0.20 that *d* is "*at least as well evaluated as*" *d* (see Lines 17 and 20) leading to the necessary reciprocal outranking situations between *a* and *d*.
+In :numref:`Bouyssou4OrigPT` Lines 9-12 we notice that criterion *g1* models with a majority margin of 2/5 = 0.40 the requested linear ranking and criterion *g2* warrants with a majority margin of 1/5 = 0.20 that *d* is "*at least as well evaluated as*" *d* (see Lines 18 and 21) leading to the necessary reciprocal outranking situations between *a* and *d*.
 
 It becomes apparent with the partial tournament example here that, when the number of criteria is not constrained, we may model this way compatible pairwise outranking situations independently one of the other.
 
@@ -4177,18 +4180,19 @@ It remains to proof that Condition :eq:`charODG2` is (or is actually not) also s
 
    *For any given bipolar and rational valued digraph verifying* :eq:`charODG2` *it is possible to construct with an unconstrained number of criteria a valid performance tableau that results in identically valued pairwise outranking situations*.
 
-If the conjecture reveals itself to be true, and we are rather confident that this will indeed be the case, we get a method of complexity :math:`O(n^2)` for recognizing potential outranking digraph instances with view solely on their relational characteristic valuation (see :numref:`checkOutrankingDigraph` Lines 16-17) [MEY-2008]_.
+If the conjecture reveals itself to be true, and we are rather confident that this will indeed be the case, we get a method of complexity :math:`O(n^2)` for recognizing potential outranking digraph instances with view solely on their relational characteristic valuation (see :numref:`checkOutrankingDigraph` Lines 17-18) [MEY-2008]_.
 
 .. code-block:: pycon
    :caption: Recognizing a bipolar outranking valuation
    :name: checkOutrankingDigraph
-   :emphasize-lines: 16-17
+   :emphasize-lines: 17-18
    :linenos:
 
-   >>> from outrankingDigraphs import *
+   >>> from randomPerfTabs import RandomPerformanceTableau
    >>> t = RandomPerformanceTableau(weightDistribution="equiobjectives",
    ...                        numberOfActions=5,numberOfCriteria=3,
    ...                        missingDataProbability=0.05,seed=100)
+   >>> from outrankingDigraphs import BipolarOutrankingDigraph
    >>> g = BipolarOutrankingDigraph(t)
    >>> g.showRelationTable()
     * ---- Relation Table -----
@@ -4209,8 +4213,9 @@ Whereas, when we consider in :numref:`failedOutrankingCheck` a genuine randomly 
    :caption: Failing the outranking valuation check
    :name: failedOutrankingCheck
    :linenos:
-   :emphasize-lines: 6,9, 13-24
+   :emphasize-lines: 7,10, 14-25
 
+   >>> from randomDigraphs import RandomValuationDigraph
    >>> rdg = RandomValuationDigraph(order=5)
    >>> rdg.showRelationTable()
     * ---- Relation Table -----
@@ -4237,7 +4242,7 @@ Whereas, when we consider in :numref:`failedOutrankingCheck` a genuine randomly 
     Not a valid outranking valuation
     False
 
-We observe in Lines 13-24 the absence of any relation between *a1* and *a3*, between *a2* and *a4*, and between *a3* and *a5*. This violates the necessary weak completeness Condition :eq:`weakComp`. The pairs (*a1*, *a2*) and (*a2*, *a3*) furthermore violate Condition :eq:`indODG`.
+We observe in Lines 14-25 the absence of any relation between *a1* and *a3*, between *a2* and *a4*, and between *a3* and *a5*. This violates the necessary weak completeness Condition :eq:`weakComp`. The pairs (*a1*, *a2*) and (*a2*, *a3*) furthermore violate Condition :eq:`indODG`.
 
 A Monte Carlo simulation with randomly bipolar-valued digraphs of order 5 shows that an average proportion of only 0.07% of random instances verify indeed Condition :eq:`charODG2`. With randomly bipolar-valued digraphs of order 6, this proportion drops furthermore to 0.002%. Condition :eq:`charODG2` is hence a very specific characteristic of bipolar outranking valuations.
 
@@ -4419,7 +4424,7 @@ Due to the regular tournament structure, the *Copeland* scores are the same for 
    :linenos:
    :emphasize-lines: 4-8
 
-   >>> from linearOrders import *
+   >>> from linearOrders import CopelandRanking
    >>> cop = CopelandRanking(bodg,Comments=True)
     Copeland scores
      a1 : 0

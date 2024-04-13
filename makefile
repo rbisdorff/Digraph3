@@ -65,13 +65,13 @@ tests:
 		for md in ${modules}; do \
 		    cp $$md ${TESTDIR}/; \
 		done
-		(cd test/results; ${PYTEST} ${JOBS} -v ../pytests*)
+		(cd test/results; ${PYTEST} ${JOBS} -v ../pytests*; rm tmp*)
 
 verboseTests:
 		for md in ${modules}; do \
 		    cp $$md ${TESTDIR}/; \
 		done
-		(cd ${TESTDIR}; ${PYTEST} -vs ../pytests*)
+		(cd ${TESTDIR}; ${PYTEST} -vs ../pytests*; rm tmp*)
 
 digraphsTests:
 		for md in ${modules}; do \
