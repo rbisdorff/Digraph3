@@ -43,7 +43,6 @@ Pearls of bipolar-valued epistemic logic
    **Contents**
 
    :ref:`Enhancing the outranking based MCDA approach <Enhancing-outranking-label>`
-       * :ref:`Coping with missing evaluation and indeterminateness <CopingMissing-Data-label>`
        * :ref:`On confident outrankings with uncertain criteria significance weights <Bipolar-Valued-Likelihood-Tutorial-label>`
        * :ref:`On stable outrankings with ordinal criteria significance weights <Stable-Outranking-Tutorial-label>`
        * :ref:`On unopposed outrankings with multiple decision objectives <UnOpposed-Outranking-Tutorial-label>`
@@ -55,6 +54,7 @@ Pearls of bipolar-valued epistemic logic
        * :ref:`Selecting the winner of a primary election: a critical commentary <PopularPrimary-Tutorial-label>`
 
    :ref:`Theoretical and computational advancements <Theoretical-Enhancements-label>`
+       * :ref:`Coping with missing evaluation and indeterminateness <CopingMissing-Data-label>`
        * :ref:`Ordinal correlation equals bipolar-valued relational equivalence <OrdinalCorrelation-Tutorial-label>`
        * :ref:`On computing graph and digraph kernels <Kernel-Tutorial-label>`
        * :ref:`Computing bipolar-valued kernel membership characteristic vectors <Bipolar-Valued-Kernels-Tutorial-label>`
@@ -98,128 +98,6 @@ Enhancing the outranking based MCDA approach
    :depth: 1
    :local:
 
-.. _CopingMissing-Data-label:
-
-Coping with missing data and indeterminateness
-``````````````````````````````````````````````
-
-In a stubborn keeping with a two-valued logic, where every argument can only be true or false, there is no place for efficiently taking into account missing data or logical indeterminateness. These cases are seen as problematic and, at best are simply ignored. Worst, in modern data science, missing data get often replaced with *fictive* values, potentially falsifying hence all subsequent computations.
-
-In social choice problems like elections, *abstentions* are, however, frequently observed and represent a social expression that may be significant for revealing non represented social preferences.
-
-In marketing studies, interviewees will not always respond to all the submitted questions. Again, such abstentions do sometimes contain nevertheless valid information concerning consumer preferences.
-
-
-A motivating data set
-.....................
-
-Let us consider such a performance tableau in file `graffiti07.py <_static/graffiti07.py>`_ gathering a *Movie Magazine* 's rating of some movies that could actually be seen in town [1]_ (see :numref:`graffiti07_1`).
-
-.. code-block:: pycon
-   :linenos:
-
-   >>> from perfTabs import PerformanceTableau
-   >>> t = PerformanceTableau('graffiti07')
-   >>> t.showHTMLPerformanceTableau(title='Graffiti Star wars',
-   ...                              ndigits=0)
-
-.. Figure:: graffiti07_1.png
-   :name: graffiti07_1
-   :alt: Ratings of movies
-   :width: 500 px
-   :align: center
-
-   *Graffiti* magazine's movie ratings from September 2007
-
-15 journalists and movie critics provide here their rating of 25 movies: 5 stars (*masterpiece*), 4 stars (*must be seen*), 3 stars (*excellent*), 2 stars (*good*), 1 star (*could be seen*), -1 star (*I do not like*), -2 (*I hate*), NA (*not seen*).
-
-To aggregate all the critics' rating opinions, the *Graffiti* magazine provides for each movie a global score computed as an *average grade*, just ignoring the *not seen* data. These averages are thus not computed on comparable denominators; some critics do indeed use a more or less extended range of grades. The movies not seen by critic *SJ*, for instance, are favored, as this critic is more severe than others in her grading. Dropping the movies that were not seen by all the critics is here not possible either, as no one of the 25 movies was actually seen by all the critics. Providing any value for the missing data will as well always somehow falsify any global value scoring. What to do ?
-
-A better approach is to rank the movies on the basis of pairwise bipolar-valued  *at least as well rated as* opinions. Under this epistemic argumentation approach, missing data are naturally treated as opinion abstentions and hence do not falsify the logical computations. Such a ranking (see the tutorial on :ref:`Ranking with incommensurable performance criteria <Ranking-Tutorial-label>`) of the 25 movies is provided, for instance, by the **heat map** view shown in :numref:`graffiti07_2`.
-
-    >>> t.showHTMLPerformanceHeatmap(Correlations=True,
-    ...                              rankingRule='NetFlows',
-    ...                              ndigits=0)
-
-.. Figure:: graffiti07_2.png
-   :name: graffiti07_2
-   :alt: Ordered Ratings of movies
-   :width: 600 px
-   :align: center
-
-   *Graffiti* magazine's ordered movie ratings from September 2007
-
-There is no doubt that movie *mv_QS*, with 6 '*must be seen*' marks, is correctly best-ranked and the movie *mv_TV* is worst-ranked with five '*don't like*' marks.
-
-Modelling pairwise bipolar-valued rating opinions
-.................................................
-
-Let us explicitly construct the underlying bipolar-valued outranking digraph and consult in :numref:`graffiti07_45` the pairwise characteristic values we observe between the two best-ranked movies, namely *mv_QS* and *mv_RR*.
-
-.. code-block:: pycon
-   :linenos:
-
-   >>> from outrankingDigraphs import BipolarOutrankingDigraph
-   >>> g = BipolarOutrankingDigraph(t)
-   >>> g.recodeValuation(-19,19) # integer characteristic values
-   >>> g.showHTMLPairwiseOutrankings('mv_QS','mv_RR')
-
-.. Figure:: graffiti07_45.png
-   :name: graffiti07_45
-   :alt: Comparing mv_QS and mv_RR
-   :width: 600 px
-   :align: center
-
-   Pairwise comparison of the two best-ranked movies
-
-Six out of the fifteen critics have not seen one or the other of these two movies. Notice the higher significance (3) that is granted to two locally renowned movie critics, namely *JH* and *VT*. Their opinion counts for three times the opinion of the other critics. All nine critics that have seen both movies, except critic *MR*, state that *mv_QS* is rated at least as well as *mv_RR* and the balance of positive against negative opinions amounts to +11, a characteristic value which positively validates the outranking situation with a majority of (11/19 + 1.0) / 2.0 = 79%.  
-
-The complete table of pairwise majority margins of global '*at least
-as well rated as*' opinions, ranked by the same rule as shown in the
-heat map above (see :numref:`graffiti07_2`), may be shown in :numref:`graffiti07_3`. 
-
-.. code-block:: pycon
-   :linenos:
-      
-   >>> ranking = g.computeNetFlowsRanking()
-   >>> g.showHTMLRelationTable(actionsList=ranking, ndigits=0,
-   ...    tableTitle='Bipolar characteristic values of\
-   ...  "rated at least as good as" situations')
-
-.. Figure:: graffiti07_3.png
-   :name: graffiti07_3
-   :alt: Pairwise outranking characteristic values
-   :width: 650 px
-   :align: center
-
-   Pairwise majority margins of '*at least as well rated as*' rating opinions
-
-Positive characteristic values, validating a global '*at least as well rated as*' opinion are marked in light green (see :numref:`graffiti07_3`). Whereas negative characteristic values, invalidating such a global opinion, are marked in light red. We may by the way notice that the best-ranked movie *mv_QS* is indeed a *Condorcet* winner, i.e. *better rated than all the other movies* by a 65% majority of critics. This majority may be assessed from the average determinateness of the given bipolar-valued outranking digraph *g*.
-
->>> print( '%.0f%%' % g.computeDeterminateness(InPercents=True) )
-65%
-
-Notice also the *indeterminate* situation we observe, for instance, when comparing movie *mv_PE* with movie *mv_NP*.
-
->>> g.showHTMLPairwiseComparison('mv_PE','mv_NP')
-
-.. Figure:: graffiti07_6.png
-   :alt: Comparing mv_PE and mv_NP
-   :width: 400 px
-   :align: center
-
-   Indeterminate pairwise comparison example
-
-Only eight, out of the fifteen critics, have seen both movies and the positive opinions do neatly balance the negative ones. A global statement that *mv_PE* is '*at least as well rated as*' *mv_NP*  may in this case hence **neither be validated, nor invalidated**; a preferential situation that cannot be modelled with any scoring approach.
-
-It is fair, however, to eventually mention here that the *Graffiti* magazine's average scoring method is actually showing a very similar ranking. Indeed, average scores usually confirm well all evident pairwise comparisons, yet *enforce* comparability for all less evident ones.
-
-Notice finally the ordinal correlation *tau* values in
-:numref:`graffiti07_2` 3rd row. How may we compute these ordinal correlation indexes ?
-
-Back to :ref:`Content Table <Pearls-label>`
-
--------------------
 
 .. _Bipolar-Valued-Likelihood-Tutorial-label:
 
@@ -2624,6 +2502,129 @@ Theoretical advancements
 	:depth: 1
 	:local:
 
+.. _CopingMissing-Data-label:
+
+Coping with missing data and indeterminateness
+``````````````````````````````````````````````
+
+In a stubborn keeping with a two-valued logic, where every argument can only be true or false, there is no place for efficiently taking into account missing data or logical indeterminateness. These cases are seen as problematic and, at best are simply ignored. Worst, in modern data science, missing data get often replaced with *fictive* values, potentially falsifying hence all subsequent computations.
+
+In social choice problems like elections, *abstentions* are, however, frequently observed and represent a social expression that may be significant for revealing non represented social preferences.
+
+In marketing studies, interviewees will not always respond to all the submitted questions. Again, such abstentions do sometimes contain nevertheless valid information concerning consumer preferences.
+
+
+A motivating data set
+.....................
+
+Let us consider such a performance tableau in file `graffiti07.py <_static/graffiti07.py>`_ gathering a *Movie Magazine* 's rating of some movies that could actually be seen in town [1]_ (see :numref:`graffiti07_1`).
+
+.. code-block:: pycon
+   :linenos:
+
+   >>> from perfTabs import PerformanceTableau
+   >>> t = PerformanceTableau('graffiti07')
+   >>> t.showHTMLPerformanceTableau(title='Graffiti Star wars',
+   ...                              ndigits=0)
+
+.. Figure:: graffiti07_1.png
+   :name: graffiti07_1
+   :alt: Ratings of movies
+   :width: 500 px
+   :align: center
+
+   *Graffiti* magazine's movie ratings from September 2007
+
+15 journalists and movie critics provide here their rating of 25 movies: 5 stars (*masterpiece*), 4 stars (*must be seen*), 3 stars (*excellent*), 2 stars (*good*), 1 star (*could be seen*), -1 star (*I do not like*), -2 (*I hate*), NA (*not seen*).
+
+To aggregate all the critics' rating opinions, the *Graffiti* magazine provides for each movie a global score computed as an *average grade*, just ignoring the *not seen* data. These averages are thus not computed on comparable denominators; some critics do indeed use a more or less extended range of grades. The movies not seen by critic *SJ*, for instance, are favored, as this critic is more severe than others in her grading. Dropping the movies that were not seen by all the critics is here not possible either, as no one of the 25 movies was actually seen by all the critics. Providing any value for the missing data will as well always somehow falsify any global value scoring. What to do ?
+
+A better approach is to rank the movies on the basis of pairwise bipolar-valued  *at least as well rated as* opinions. Under this epistemic argumentation approach, missing data are naturally treated as opinion abstentions and hence do not falsify the logical computations. Such a ranking (see the tutorial on :ref:`Ranking with incommensurable performance criteria <Ranking-Tutorial-label>`) of the 25 movies is provided, for instance, by the **heat map** view shown in :numref:`graffiti07_2`.
+
+    >>> t.showHTMLPerformanceHeatmap(Correlations=True,
+    ...                              rankingRule='NetFlows',
+    ...                              ndigits=0)
+
+.. Figure:: graffiti07_2.png
+   :name: graffiti07_2
+   :alt: Ordered Ratings of movies
+   :width: 600 px
+   :align: center
+
+   *Graffiti* magazine's ordered movie ratings from September 2007
+
+There is no doubt that movie *mv_QS*, with 6 '*must be seen*' marks, is correctly best-ranked and the movie *mv_TV* is worst-ranked with five '*don't like*' marks.
+
+Modelling pairwise bipolar-valued rating opinions
+.................................................
+
+Let us explicitly construct the underlying bipolar-valued outranking digraph and consult in :numref:`graffiti07_45` the pairwise characteristic values we observe between the two best-ranked movies, namely *mv_QS* and *mv_RR*.
+
+.. code-block:: pycon
+   :linenos:
+
+   >>> from outrankingDigraphs import BipolarOutrankingDigraph
+   >>> g = BipolarOutrankingDigraph(t)
+   >>> g.recodeValuation(-19,19) # integer characteristic values
+   >>> g.showHTMLPairwiseOutrankings('mv_QS','mv_RR')
+
+.. Figure:: graffiti07_45.png
+   :name: graffiti07_45
+   :alt: Comparing mv_QS and mv_RR
+   :width: 600 px
+   :align: center
+
+   Pairwise comparison of the two best-ranked movies
+
+Six out of the fifteen critics have not seen one or the other of these two movies. Notice the higher significance (3) that is granted to two locally renowned movie critics, namely *JH* and *VT*. Their opinion counts for three times the opinion of the other critics. All nine critics that have seen both movies, except critic *MR*, state that *mv_QS* is rated at least as well as *mv_RR* and the balance of positive against negative opinions amounts to +11, a characteristic value which positively validates the outranking situation with a majority of (11/19 + 1.0) / 2.0 = 79%.  
+
+The complete table of pairwise majority margins of global '*at least
+as well rated as*' opinions, ranked by the same rule as shown in the
+heat map above (see :numref:`graffiti07_2`), may be shown in :numref:`graffiti07_3`. 
+
+.. code-block:: pycon
+   :linenos:
+      
+   >>> ranking = g.computeNetFlowsRanking()
+   >>> g.showHTMLRelationTable(actionsList=ranking, ndigits=0,
+   ...    tableTitle='Bipolar characteristic values of\
+   ...  "rated at least as good as" situations')
+
+.. Figure:: graffiti07_3.png
+   :name: graffiti07_3
+   :alt: Pairwise outranking characteristic values
+   :width: 650 px
+   :align: center
+
+   Pairwise majority margins of '*at least as well rated as*' rating opinions
+
+Positive characteristic values, validating a global '*at least as well rated as*' opinion are marked in light green (see :numref:`graffiti07_3`). Whereas negative characteristic values, invalidating such a global opinion, are marked in light red. We may by the way notice that the best-ranked movie *mv_QS* is indeed a *Condorcet* winner, i.e. *better rated than all the other movies* by a 65% majority of critics. This majority may be assessed from the average determinateness of the given bipolar-valued outranking digraph *g*.
+
+>>> print( '%.0f%%' % g.computeDeterminateness(InPercents=True) )
+65%
+
+Notice also the *indeterminate* situation we observe, for instance, when comparing movie *mv_PE* with movie *mv_NP*.
+
+>>> g.showHTMLPairwiseComparison('mv_PE','mv_NP')
+
+.. Figure:: graffiti07_6.png
+   :alt: Comparing mv_PE and mv_NP
+   :width: 400 px
+   :align: center
+
+   Indeterminate pairwise comparison example
+
+Only eight, out of the fifteen critics, have seen both movies and the positive opinions do neatly balance the negative ones. A global statement that *mv_PE* is '*at least as well rated as*' *mv_NP*  may in this case hence **neither be validated, nor invalidated**; a preferential situation that cannot be modelled with any scoring approach.
+
+It is fair, however, to eventually mention here that the *Graffiti* magazine's average scoring method is actually showing a very similar ranking. Indeed, average scores usually confirm well all evident pairwise comparisons, yet *enforce* comparability for all less evident ones.
+
+Notice finally the ordinal correlation *tau* values in
+:numref:`graffiti07_2` 3rd row. How may we compute these ordinal correlation indexes ?
+
+Back to :ref:`Content Table <Pearls-label>`
+
+-------------------
+
 .. _OrdinalCorrelation-Tutorial-label:
 	
 Ordinal correlation equals bipolar-valued relational equivalence
@@ -2808,14 +2809,17 @@ We may now illustrate the quality of the global ranking of the movies shown with
 Fitness of ranking heuristics
 .............................
 
-We reconsider the bipolar-valued outranking digraph *g* modelling the pairwise global '*at least as well rated as*' relation among the 25 movies seen above (see :numref:`exMoviesBG`).
+We reconsider the bipolar-valued outranking digraph *g* modelling the pairwise global '*at least as well rated as*' relation among the 25 movies seen above (see :numref:`graffiti07_2`).
 
 .. code-block:: pycon
    :linenos:
    :caption: Global Movies Outranking Digraph
    :name: exMoviesBG
-   :emphasize-lines: 7,13
+   :emphasize-lines: 10,16
 
+   >>> from perfTabs import PerformanceTableau
+   >>> t = PerformanceTableau('graffiti07')
+   >>> from outrankingDigraphs import BipolarOutrankingDigraph
    >>> g = BipolarOutrankingDigraph(t,Normalized=True)
     *------- Object instance description ------*
     Instance class   : BipolarOutrankingDigraph
