@@ -33,7 +33,7 @@
         <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
         <script src="_static/clipboard.min.js?v=a7894cd8"></script>
         <script src="_static/copybutton.js?v=15d7cbb8"></script>
-        <script src="_static/js/hoverxref.js?v=3be43539"></script>
+        <script src="_static/js/hoverxref.js?v=82c55261"></script>
         <script src="_static/js/tooltipster.bundle.min.js?v=18bf091b"></script>
         <script src="_static/js/micromodal.min.js?v=04d6302d"></script>
     <script src="_static/js/theme.js"></script>
@@ -8105,35 +8105,37 @@ fecop 75.78% success rate</p>
 </ol>
 </div></blockquote>
 <p>We provide therefore the <a class="reference internal" href="techDoc.html#cSparseIntegerOutrankingDigraphs.cQuantilesRankingDigraph" title="cSparseIntegerOutrankingDigraphs.cQuantilesRankingDigraph"><code class="xref py py-class docutils literal notranslate"><span class="pre">cQuantilesRankingDigraph</span></code></a> class.</p>
-<div class="highlight-pycon notranslate"><div class="highlight"><pre><span></span><span class="linenos"> 1</span><span class="gp">&gt;&gt;&gt; </span><span class="n">qr</span> <span class="o">=</span> <span class="n">cQuantilesRankingDigraph</span><span class="p">(</span><span class="n">t</span><span class="p">,</span><span class="mi">4</span><span class="p">)</span>
-<span class="linenos"> 2</span><span class="gp">&gt;&gt;&gt; </span><span class="n">qr</span>
-<span class="linenos"> 3</span><span class="go"> *----- Object instance description --------------*</span>
-<span class="linenos"> 4</span><span class="go"> Instance class    : cQuantilesRankingDigraph</span>
-<span class="linenos"> 5</span><span class="go"> Instance name     : cRandomperftab_mp</span>
-<span class="linenos"> 6</span><span class="go"> # Actions         : 100</span>
-<span class="linenos"> 7</span><span class="go"> # Criteria        : 7</span>
-<span class="linenos"> 8</span><span class="go"> Sorting by        : 4-Tiling</span>
-<span class="linenos"> 9</span><span class="go"> Ordering strategy : optimal</span>
-<span class="linenos">10</span><span class="go"> Ranking rule      : Copeland</span>
-<span class="linenos">11</span><span class="go"> # Components      : 47</span>
-<span class="linenos">12</span><span class="go"> Minimal order     : 1</span>
-<span class="linenos">13</span><span class="go"> Maximal order     : 10</span>
-<span class="linenos">14</span><span class="go"> Average order     : 2.1</span>
-<span class="linenos">15</span><span class="go"> fill rate         : 2.566%</span>
-<span class="linenos">16</span><span class="go"> *----  Constructor run times (in sec.) ----*</span>
-<span class="linenos">17</span><span class="go"> Nbr of threads    : 1</span>
-<span class="linenos">18</span><span class="go"> Total time        : 0.03702</span>
-<span class="linenos">19</span><span class="go"> QuantilesSorting  : 0.01785</span>
-<span class="linenos">20</span><span class="go"> Preordering       : 0.00022</span>
-<span class="linenos">21</span><span class="go"> Decomposing       : 0.01892</span>
-<span class="linenos">22</span><span class="go"> Ordering          : 0.00000</span>
-<span class="linenos">23</span><span class="go"> Attributes       : [&#39;runTimes&#39;, &#39;name&#39;, &#39;actions&#39;, &#39;order&#39;,</span>
-<span class="linenos">24</span><span class="go">                     &#39;dimension&#39;, &#39;sortingParameters&#39;, &#39;nbrOfCPUs&#39;,</span>
-<span class="linenos">25</span><span class="go">                     &#39;valuationdomain&#39;, &#39;profiles&#39;, &#39;categories&#39;,</span>
-<span class="linenos">26</span><span class="go">                     &#39;sorting&#39;, &#39;minimalComponentSize&#39;,</span>
-<span class="linenos">27</span><span class="go">                     &#39;decomposition&#39;, &#39;nbrComponents&#39;, &#39;nd&#39;,</span>
-<span class="linenos">28</span><span class="go">                     &#39;components&#39;, &#39;fillRate&#39;, &#39;maximalComponentSize&#39;,</span>
-<span class="linenos">29</span><span class="go">                     &#39;componentRankingRule&#39;, &#39;boostedRanking&#39;]</span>
+<div class="highlight-pycon notranslate"><div class="highlight"><pre><span></span><span class="linenos"> 1</span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">cSparseIntegerOutrankingDigraphs</span> <span class="kn">import</span> \
+<span class="linenos"> 2</span><span class="gp">... </span>     <span class="n">cQuantilesRankingDigraph</span>
+<span class="linenos"> 3</span><span class="gp">&gt;&gt;&gt; </span><span class="n">qr</span> <span class="o">=</span> <span class="n">cQuantilesRankingDigraph</span><span class="p">(</span><span class="n">t</span><span class="p">,</span><span class="mi">4</span><span class="p">)</span>
+<span class="linenos"> 4</span><span class="gp">&gt;&gt;&gt; </span><span class="n">qr</span>
+<span class="linenos"> 5</span><span class="go"> *----- Object instance description --------------*</span>
+<span class="linenos"> 6</span><span class="go"> Instance class    : cQuantilesRankingDigraph</span>
+<span class="linenos"> 7</span><span class="go"> Instance name     : cRandomperftab_mp</span>
+<span class="linenos"> 8</span><span class="go"> # Actions         : 100</span>
+<span class="linenos"> 9</span><span class="go"> # Criteria        : 7</span>
+<span class="linenos">10</span><span class="go"> Sorting by        : 4-Tiling</span>
+<span class="linenos">11</span><span class="go"> Ordering strategy : optimal</span>
+<span class="linenos">12</span><span class="go"> Ranking rule      : Copeland</span>
+<span class="linenos">13</span><span class="go"> # Components      : 47</span>
+<span class="linenos">14</span><span class="go"> Minimal order     : 1</span>
+<span class="linenos">15</span><span class="go"> Maximal order     : 10</span>
+<span class="linenos">16</span><span class="go"> Average order     : 2.1</span>
+<span class="linenos">17</span><span class="go"> fill rate         : 2.566%</span>
+<span class="linenos">18</span><span class="go"> *----  Constructor run times (in sec.) ----*</span>
+<span class="linenos">19</span><span class="go"> Nbr of threads    : 1</span>
+<span class="linenos">20</span><span class="go"> Total time        : 0.03702</span>
+<span class="linenos">21</span><span class="go"> QuantilesSorting  : 0.01785</span>
+<span class="linenos">22</span><span class="go"> Preordering       : 0.00022</span>
+<span class="linenos">23</span><span class="go"> Decomposing       : 0.01892</span>
+<span class="linenos">24</span><span class="go"> Ordering          : 0.00000</span>
+<span class="linenos">25</span><span class="go"> Attributes       : [&#39;runTimes&#39;, &#39;name&#39;, &#39;actions&#39;, &#39;order&#39;,</span>
+<span class="linenos">26</span><span class="go">                     &#39;dimension&#39;, &#39;sortingParameters&#39;, &#39;nbrOfCPUs&#39;,</span>
+<span class="linenos">27</span><span class="go">                     &#39;valuationdomain&#39;, &#39;profiles&#39;, &#39;categories&#39;,</span>
+<span class="linenos">28</span><span class="go">                     &#39;sorting&#39;, &#39;minimalComponentSize&#39;,</span>
+<span class="linenos">29</span><span class="go">                     &#39;decomposition&#39;, &#39;nbrComponents&#39;, &#39;nd&#39;,</span>
+<span class="linenos">30</span><span class="go">                     &#39;components&#39;, &#39;fillRate&#39;, &#39;maximalComponentSize&#39;,</span>
+<span class="linenos">31</span><span class="go">                     &#39;componentRankingRule&#39;, &#39;boostedRanking&#39;]</span>
 </pre></div>
 </div>
 <p>With this <em>optimised</em> quantile ordering strategy, we obtain now 47 performance equivalence classes.</p>
@@ -8368,32 +8370,33 @@ fecop 75.78% success rate</p>
 </pre></div>
 </div>
 <p>We consider now a partial performance tableau <em>best10</em>, consisting only, for instance, of the <strong>ten best-ranked alternatives</strong>, with which we may compute a corresponding integer outranking digraph valued in the range (-1008, +1008).</p>
-<div class="highlight-pycon notranslate"><div class="highlight"><pre><span></span><span class="linenos"> 1</span><span class="gp">&gt;&gt;&gt; </span><span class="n">best10</span> <span class="o">=</span> <span class="n">cPartialPerformanceTableau</span><span class="p">(</span><span class="n">pt</span><span class="p">,</span><span class="n">qr</span><span class="o">.</span><span class="n">boostedRanking</span><span class="p">[:</span><span class="mi">10</span><span class="p">])</span>
-<span class="linenos"> 2</span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">cIntegerOutrankingDigraphs</span> <span class="kn">import</span> <span class="o">*</span>
-<span class="linenos"> 3</span><span class="gp">&gt;&gt;&gt; </span><span class="n">g</span> <span class="o">=</span> <span class="n">IntegerBipolarOutrankingDigraph</span><span class="p">(</span><span class="n">best10</span><span class="p">)</span>
-<span class="linenos"> 4</span><span class="gp">&gt;&gt;&gt; </span><span class="n">g</span><span class="o">.</span><span class="n">valuationdomain</span>
-<span class="linenos"> 5</span><span class="go"> {&#39;min&#39;: -1008, &#39;med&#39;: 0, &#39;max&#39;: 1008, &#39;hasIntegerValuation&#39;: True}</span>
-<span class="linenos"> 6</span><span class="gp">&gt;&gt;&gt; </span><span class="n">g</span><span class="o">.</span><span class="n">showRelationTable</span><span class="p">(</span><span class="n">ReflexiveTerms</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
-<span class="linenos"> 7</span><span class="go"> * ---- Relation Table -----</span>
-<span class="linenos"> 8</span><span class="go">  r(x&gt;y) | #773909 #668947 #567308 #578560 #426464 #298061 #155874 #815552 #279729 #928564</span>
-<span class="linenos"> 9</span><span class="go"> --------|-----------------------------------------------------------------------------------</span>
-<span class="linenos">10</span><span class="go"> #773909 |    -      +390     +90    +270     -50    +340    +220     +60    +116    +222</span>
-<span class="linenos">11</span><span class="go"> #668947 |    +78     -       +42    +250     -22    +218     +56    +172     +74     +64</span>
-<span class="linenos">12</span><span class="go"> #567308 |    +70    +418     -      +180    +156    +174    +266     +78    +256    +306</span>
-<span class="linenos">13</span><span class="go"> #578560 |     -4     +78     +28     -       -12    +100     -48    +154    -110     -10</span>
-<span class="linenos">14</span><span class="go"> #426464 |   +202    +258    +284    +138     -      +416    +312    +382    +534    +278</span>
-<span class="linenos">15</span><span class="go"> #298061 |    -48     +68    +172     +32     -42      -      +54     +48    +248    +374</span>
-<span class="linenos">16</span><span class="go"> #155874 |    +72    +378    +322    +174    +274    +466     -      +212    +308    +418</span>
-<span class="linenos">17</span><span class="go"> #815552 |    +78    +126    +272    +318     +54    +194    +172     -       -14     +22</span>
-<span class="linenos">18</span><span class="go"> #279729 |   +240    +230    -110    +290     +72    +140    +388     +62     -      +250</span>
-<span class="linenos">19</span><span class="go"> #928564 |    +22    +228     -14    +246     +36     +78     +56    +110    +318     -</span>
-<span class="linenos">20</span><span class="go"> r(x&gt;y) image range := [-1008;+1008]</span>
-<span class="linenos">21</span><span class="gp">&gt;&gt;&gt; </span><span class="n">g</span><span class="o">.</span><span class="n">condorcetWinners</span><span class="p">()</span>
-<span class="linenos">22</span><span class="go"> [155874, 426464, 567308]</span>
-<span class="linenos">23</span><span class="gp">&gt;&gt;&gt; </span><span class="n">g</span><span class="o">.</span><span class="n">computeChordlessCircuits</span><span class="p">()</span>
-<span class="linenos">24</span><span class="go"> []</span>
-<span class="linenos">25</span><span class="gp">&gt;&gt;&gt; </span><span class="n">g</span><span class="o">.</span><span class="n">computeTransitivityDegree</span><span class="p">()</span>
-<span class="linenos">26</span><span class="go"> 0.78</span>
+<div class="highlight-pycon notranslate"><div class="highlight"><pre><span></span><span class="linenos"> 1</span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">cRandPerfTabs</span> <span class="kn">import</span> <span class="n">cPartialPerformanceTableau</span>
+<span class="linenos"> 2</span><span class="gp">&gt;&gt;&gt; </span><span class="n">best10</span> <span class="o">=</span> <span class="n">cPartialPerformanceTableau</span><span class="p">(</span><span class="n">pt</span><span class="p">,</span><span class="n">qr</span><span class="o">.</span><span class="n">boostedRanking</span><span class="p">[:</span><span class="mi">10</span><span class="p">])</span>
+<span class="linenos"> 3</span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">cIntegerOutrankingDigraphs</span> <span class="kn">import</span> <span class="o">*</span>
+<span class="linenos"> 4</span><span class="gp">&gt;&gt;&gt; </span><span class="n">g</span> <span class="o">=</span> <span class="n">IntegerBipolarOutrankingDigraph</span><span class="p">(</span><span class="n">best10</span><span class="p">)</span>
+<span class="linenos"> 5</span><span class="gp">&gt;&gt;&gt; </span><span class="n">g</span><span class="o">.</span><span class="n">valuationdomain</span>
+<span class="linenos"> 6</span><span class="go"> {&#39;min&#39;: -1008, &#39;med&#39;: 0, &#39;max&#39;: 1008, &#39;hasIntegerValuation&#39;: True}</span>
+<span class="linenos"> 7</span><span class="gp">&gt;&gt;&gt; </span><span class="n">g</span><span class="o">.</span><span class="n">showRelationTable</span><span class="p">(</span><span class="n">ReflexiveTerms</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+<span class="linenos"> 8</span><span class="go"> * ---- Relation Table -----</span>
+<span class="linenos"> 9</span><span class="go">  r(x&gt;y) | #773909 #668947 #567308 #578560 #426464 #298061 #155874 #815552 #279729 #928564</span>
+<span class="linenos">10</span><span class="go"> --------|-----------------------------------------------------------------------------------</span>
+<span class="linenos">11</span><span class="go"> #773909 |    -      +390     +90    +270     -50    +340    +220     +60    +116    +222</span>
+<span class="linenos">12</span><span class="go"> #668947 |    +78     -       +42    +250     -22    +218     +56    +172     +74     +64</span>
+<span class="linenos">13</span><span class="go"> #567308 |    +70    +418     -      +180    +156    +174    +266     +78    +256    +306</span>
+<span class="linenos">14</span><span class="go"> #578560 |     -4     +78     +28     -       -12    +100     -48    +154    -110     -10</span>
+<span class="linenos">15</span><span class="go"> #426464 |   +202    +258    +284    +138     -      +416    +312    +382    +534    +278</span>
+<span class="linenos">16</span><span class="go"> #298061 |    -48     +68    +172     +32     -42      -      +54     +48    +248    +374</span>
+<span class="linenos">17</span><span class="go"> #155874 |    +72    +378    +322    +174    +274    +466     -      +212    +308    +418</span>
+<span class="linenos">18</span><span class="go"> #815552 |    +78    +126    +272    +318     +54    +194    +172     -       -14     +22</span>
+<span class="linenos">19</span><span class="go"> #279729 |   +240    +230    -110    +290     +72    +140    +388     +62     -      +250</span>
+<span class="linenos">20</span><span class="go"> #928564 |    +22    +228     -14    +246     +36     +78     +56    +110    +318     -</span>
+<span class="linenos">21</span><span class="go"> r(x&gt;y) image range := [-1008;+1008]</span>
+<span class="linenos">22</span><span class="gp">&gt;&gt;&gt; </span><span class="n">g</span><span class="o">.</span><span class="n">condorcetWinners</span><span class="p">()</span>
+<span class="linenos">23</span><span class="go"> [155874, 426464, 567308]</span>
+<span class="linenos">24</span><span class="gp">&gt;&gt;&gt; </span><span class="n">g</span><span class="o">.</span><span class="n">computeChordlessCircuits</span><span class="p">()</span>
+<span class="linenos">25</span><span class="go"> []</span>
+<span class="linenos">26</span><span class="gp">&gt;&gt;&gt; </span><span class="n">g</span><span class="o">.</span><span class="n">computeTransitivityDegree</span><span class="p">()</span>
+<span class="linenos">27</span><span class="go"> 0.78</span>
 </pre></div>
 </div>
 <p>Three alternatives -#155874, #426464 and #567308- qualify as Condorcet winners, i.e. they each <strong>positively outrank</strong> all the other nine alternatives. No chordless outranking circuits are detected, yet the transitivity of the apparent outranking relation is not given. And, no clear ranking alignment hence appears when inspecting the <em>strict</em> outranking digraph (i.e. the codual ~(-<em>g</em>) of <em>g</em>) shown in <a class="hxr-hoverxref hxr-tooltip reference internal" href="#converse-dual-rel-best10"><span class="std std-numref">Fig. 1.68</span></a>.</p>

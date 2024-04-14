@@ -8436,6 +8436,8 @@ We provide therefore the :py:class:`~cSparseIntegerOutrankingDigraphs.cQuantiles
 .. code-block:: pycon
    :linenos:
 
+   >>> from cSparseIntegerOutrankingDigraphs import \
+   ...      cQuantilesRankingDigraph   
    >>> qr = cQuantilesRankingDigraph(t,4)
    >>> qr
     *----- Object instance description --------------*
@@ -8731,6 +8733,7 @@ We consider now a partial performance tableau *best10*, consisting only, for ins
 .. code-block:: pycon
    :linenos:
 
+   >>> from cRandPerfTabs import cPartialPerformanceTableau
    >>> best10 = cPartialPerformanceTableau(pt,qr.boostedRanking[:10])
    >>> from cIntegerOutrankingDigraphs import *   
    >>> g = IntegerBipolarOutrankingDigraph(best10)
