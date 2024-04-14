@@ -2809,7 +2809,7 @@ We may now illustrate the quality of the global ranking of the movies shown with
 Fitness of ranking heuristics
 .............................
 
-We reconsider the bipolar-valued outranking digraph *g* modelling the pairwise global '*at least as well rated as*' relation among the 25 movies seen above (see :numref:`graffiti07_2`).
+We reconsider the bipolar-valued outranking digraph *g* modelling the pairwise global '*at least as well rated as*' relation among the 25 movies seen in the topic before (see :numref:`graffiti07_2`).
 
 .. code-block:: pycon
    :linenos:
@@ -2930,8 +2930,9 @@ In order to furthermore study the quality of a ranking result, it may be interes
 
 Let us first have a look at the pairwise asymmetric part, namely the '*better rated than*' and '*less well rated than*' opinions of the movie critics. 
 
+   >>> from digraphs import AsymmetricPartialDigraph
    >>> ag = AsymmetricPartialDigraph(g)
-   >>> ag.showHTMLRelationTable(actionsList=g.computeNetFlowsRanking(),ndigits=0)
+   >>> ag.showHTMLRelationTable(actionsList=g.computeNetFlowsRanking(),ndigits=0) 
 
 .. figure:: asymmetricPart.png
    :alt: asymmetric part of graffiti07 digraph
@@ -2943,6 +2944,7 @@ Let us first have a look at the pairwise asymmetric part, namely the '*better ra
 
 We notice here that the *Net-Flows* ranking rule inverts in fact just three '*less well ranked than*' opinions and four '*better ranked than*' ones. A similar look at the symmetric part, the pairwise '*as well rated as*' opinions, suggests a preordered preference structure in several *equivalently rated* classes.
 
+   >>> from digraphs import SymmetricPartialDigraph
    >>> sg = SymmetricPartialDigraph(g)
    >>> sg.showHTMLRelationTable(actionsList=g.computeNetFlowsRanking(),ndigits=0)
 
@@ -2976,7 +2978,6 @@ Such a preordering of the movies may, for instance, be computed with the :py:fun
        2nd Last Choice ['mv_DF', 'mv_DJ', 'mv_FF', 'mv_GG']
      1st Last Choice ['mv_BI', 'mv_DI', 'mv_HP', 'mv_TF']
 
-.. In the tutorial on :ref:`Computing Digraph Kernels <Kernel-Tutorial-label>`, we thouroughly discuss the computation of *kernels* in bipolar-valued digraphs. Yet, we do not tackle there the problem of computing the corresponding bipolar-valued **kernel membership** characteristic vectors. This is the topic for the next pearl of bipolar-valued epistemic logic.
 
 Back to :ref:`Content Table <Pearls-label>`
 
