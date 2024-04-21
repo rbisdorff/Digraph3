@@ -999,7 +999,7 @@ In this *Digraph3* module, the :py:class:`~outrankingDigraphs.BipolarOutrankingD
     3. a dictionary of performance **criteria** describing *preferentially independent* and *non-redundant* decimal-valued functions used for measuring the performance of each potential decision action with respect to a decision objective,
     4. a double dictionary **evaluation** gathering performance grades for each decision action or alternative on each criterion function. 
     5. the digraph **valuationdomain**, a dictionary with three entries: the *minimum* (-1.0, certainly outranked), the *median* (0.0, indeterminate) and the *maximum* characteristic value (+1.0, certainly outranking),
-    6. the outranking **relation** : a double dictionary defined on the Cartesian product of the set of decision alternatives capturing the credibility of the pairwise *outranking situation* computed on the basis of the performance differences observed between couples of decision alternatives on the given family if criteria functions.   
+    6. the outranking **relation** : a double dictionary defined on the Cartesian product of the set of decision alternatives capturing the credibility of the pairwise *outranking situation* computed on the basis of the performance differences observed between couples of decision alternatives on the given family of criteria functions.   
 
 Let us construct, for instance, a random bipolar-valued outranking digraph with seven decision actions denotes *a1*, *a2*, ..., *a7*. We need therefore to first generate a corresponding random performance tableaux (see below).
 
