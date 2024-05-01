@@ -19,7 +19,7 @@ Python resources for Algorithmic Decision Theory
 
 Wecome! This is the documentation for the **Digraph3** *Python* programming resources.
 
-:Author: Raymond Bisdorff, Emeritus Professor of Applied Mathematics and Computer Science, University of Luxdembourg
+:Author: Raymond Bisdorff, Emeritus Professor of Applied Mathematics and Computer Science, University of Luxembourg
 :Url: https://rbisdorff.github.io/
 :Version: |version| (release: |release|)
 :Copyright: R. Bisdorff |location_link3| 2013-2024
