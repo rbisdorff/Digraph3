@@ -30,7 +30,7 @@
         <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
         <script src="../_static/clipboard.min.js?v=a7894cd8"></script>
         <script src="../_static/copybutton.js?v=15d7cbb8"></script>
-        <script src="../_static/js/hoverxref.js?v=82c55261"></script>
+        <script src="../_static/js/hoverxref.js?v=39f456b5"></script>
         <script src="../_static/js/tooltipster.bundle.min.js?v=18bf091b"></script>
         <script src="../_static/js/micromodal.min.js?v=04d6302d"></script>
     <script src="../_static/js/theme.js"></script>
@@ -1068,7 +1068,8 @@
 <a class="viewcode-back" href="../techDoc.html#sortingDigraphs.SortingDigraph.computeSortingCharacteristics">[docs]</a>
     <span class="k">def</span> <span class="nf">computeSortingCharacteristics</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">action</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">StoreSorting</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
                                       <span class="n">Comments</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">Debug</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
-                                        <span class="n">Threading</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">nbrOfCPUs</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+                                        <span class="n">Threading</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">nbrOfCPUs</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+                                      <span class="n">startMethod</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Renders a bipolar-valued bi-dictionary relation</span>
 <span class="sd">        representing the degree of credibility of the</span>
@@ -1093,7 +1094,13 @@
         <span class="k">if</span> <span class="n">Threading</span><span class="p">:</span>
             <span class="c1">#from multiprocessing import Process, active_children</span>
             <span class="kn">from</span> <span class="nn">pickle</span> <span class="kn">import</span> <span class="n">dumps</span><span class="p">,</span> <span class="n">loads</span><span class="p">,</span> <span class="n">load</span>
-            <span class="kn">from</span> <span class="nn">os</span> <span class="kn">import</span> <span class="n">cpu_count</span>
+            <span class="c1">#from os import cpu_count</span>
+            <span class="kn">import</span> <span class="nn">multiprocessing</span> <span class="k">as</span> <span class="nn">mp</span>
+            <span class="k">if</span> <span class="n">startMethod</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+                <span class="n">startMethod</span> <span class="o">=</span> <span class="s1">&#39;spawn&#39;</span>
+            <span class="n">mpctx</span> <span class="o">=</span> <span class="n">mp</span><span class="o">.</span><span class="n">get_context</span><span class="p">(</span><span class="n">startMethod</span><span class="p">)</span>
+            <span class="n">cpu_count</span> <span class="o">=</span> <span class="n">mpctx</span><span class="o">.</span><span class="n">cpu_count</span>
+            <span class="n">Process</span> <span class="o">=</span> <span class="n">mpctx</span><span class="o">.</span><span class="n">Process</span>
             <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Threaded computing of sorting characteristics ...&#39;</span><span class="p">)</span>        
             <span class="kn">from</span> <span class="nn">tempfile</span> <span class="kn">import</span> <span class="n">TemporaryDirectory</span><span class="p">,</span><span class="n">mkdtemp</span>
             <span class="n">tempDirName</span> <span class="o">=</span> <span class="n">mkdtemp</span><span class="p">()</span>
@@ -1129,7 +1136,7 @@
                 <span class="k">if</span> <span class="n">Debug</span><span class="p">:</span>
                     <span class="nb">print</span><span class="p">(</span><span class="n">thActions</span><span class="p">)</span>
                 <span class="k">if</span> <span class="n">thActions</span> <span class="o">!=</span> <span class="p">[]:</span>
-                    <span class="n">process</span> <span class="o">=</span> <span class="n">mySDGThread</span><span class="p">(</span><span class="n">j</span><span class="p">,</span><span class="n">tempDirName</span><span class="p">,</span><span class="n">thActions</span><span class="p">,</span><span class="n">categories</span><span class="p">,</span><span class="n">LowerClosed</span><span class="p">,</span><span class="n">Debug</span><span class="p">)</span>
+                    <span class="n">process</span> <span class="o">=</span> <span class="n">_mySDGThread</span><span class="p">(</span><span class="n">j</span><span class="p">,</span><span class="n">tempDirName</span><span class="p">,</span><span class="n">thActions</span><span class="p">,</span><span class="n">categories</span><span class="p">,</span><span class="n">LowerClosed</span><span class="p">,</span><span class="n">Debug</span><span class="p">)</span>
                     <span class="n">process</span><span class="o">.</span><span class="n">start</span><span class="p">()</span>
                     <span class="n">nbrOfThreads</span> <span class="o">+=</span> <span class="mi">1</span>
             <span class="k">while</span> <span class="n">active_children</span><span class="p">()</span> <span class="o">!=</span> <span class="p">[]:</span>
@@ -5316,7 +5323,7 @@
 
   <div role="contentinfo">
     <p>&#169; Copyright 2012-2024, Raymond Bisdorff.
-      <span class="lastupdated">Last updated on May 13, 2024.
+      <span class="lastupdated">Last updated on May 14, 2024.
       </span></p>
   </div>
 

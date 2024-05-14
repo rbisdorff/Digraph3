@@ -937,7 +937,8 @@ class SortingDigraph(BipolarOutrankingDigraph):
 
     def computeSortingCharacteristics(self, action=None, StoreSorting=True,
                                       Comments=False, Debug=False,
-                                        Threading=False, nbrOfCPUs=None):
+                                        Threading=False, nbrOfCPUs=None,
+                                      startMethod=None):
         """
         Renders a bipolar-valued bi-dictionary relation
         representing the degree of credibility of the
@@ -962,7 +963,13 @@ class SortingDigraph(BipolarOutrankingDigraph):
         if Threading:
             #from multiprocessing import Process, active_children
             from pickle import dumps, loads, load
-            from os import cpu_count
+            #from os import cpu_count
+            import multiprocessing as mp
+            if startMethod is None:
+                startMethod = 'spawn'
+            mpctx = mp.get_context(startMethod)
+            cpu_count = mpctx.cpu_count
+            Process = mpctx.Process
             print('Threaded computing of sorting characteristics ...')        
             from tempfile import TemporaryDirectory,mkdtemp
             tempDirName = mkdtemp()
@@ -998,7 +1005,7 @@ class SortingDigraph(BipolarOutrankingDigraph):
                 if Debug:
                     print(thActions)
                 if thActions != []:
-                    process = mySDGThread(j,tempDirName,thActions,categories,LowerClosed,Debug)
+                    process = _mySDGThread(j,tempDirName,thActions,categories,LowerClosed,Debug)
                     process.start()
                     nbrOfThreads += 1
             while active_children() != []:
@@ -5015,10 +5022,12 @@ if __name__ == "__main__":
 
     # from randomPerfTabs import RandomPerformanceTableau
     # from randomPerfTabs import RandomPerformanceGenerator as PerfTabGenerator
-    # nbrActions=1000
-    # nbrCrit = 13
-    # tp1 = RandomCBPerformanceTableau(numberOfActions=nbrActions,
-    #             numberOfCriteria=nbrCrit,seed=seed,NA=-1,missingDataProbability=0.1)
+    nbrActions=1000
+    nbrCrit = 13
+    tp1 = RandomCBPerformanceTableau(numberOfActions=nbrActions,
+                 numberOfCriteria=nbrCrit,seed=seed,NA=-1,missingDataProbability=0.1)
+    qs = QuantilesSortingDigraph(tp1,Threading=True,startMethod='fork')
+    print(qs)
     # print(tp1.NA)
     # pq1 = PerformanceQuantiles(tp1,5,LowerClosed=False,Debug=False)
     # tpg1 = PerfTabGenerator(tp1,instanceCounter=0,seed=seed)

@@ -1358,7 +1358,7 @@ The performance evaluations of each decision alternative on each criterion are g
         html += '</table>\n'
         return html
 
-    def computeQuantileOrder(self,q0=3,q1=0,Threading=False,nbrOfCPUs=1,Comments=False):
+    def computeQuantileOrder(self,q0=3,q1=0,Threading=False,nbrOfCPUs=None,startMethod=None,Comments=False):
         """
         Renders a linear ordering of the decision actions from a simulation of pre-ranked outranking digraphs.
 
@@ -1379,7 +1379,7 @@ The performance evaluations of each decision alternative on each criterion are g
             pr = PreRankedOutrankingDigraph(self,quantiles=q,LowerClosed=False,
                                     minimalComponentSize=1,
                                     CopyPerfTab=True,Threading=Threading,
-                                    nbrOfCPUs=nbrOfCPUs)
+                                            nbrOfCPUs=nbrOfCPUs,startMethod=startMethod)
             for r in range(n):
                 rbest = pr.boostedOrder[r]
                 kBestFrequency[rbest][r] += 1
@@ -1395,7 +1395,7 @@ The performance evaluations of each decision alternative on each criterion are g
             print(quantileOrder)
         return quantileOrder
 
-    def computeQuantileRanking(self,q0=3,q1=0,Threading=False,nbrOfCPUs=1,Comments=False):
+    def computeQuantileRanking(self,q0=3,q1=0,Threading=False,nbrOfCPUs=None,startMethod=None,Comments=False):
         """
         Renders a linear ranking of the decision actions from a simulation of pre-ranked outranking digraphs.
 
@@ -1407,6 +1407,7 @@ The performance evaluations of each decision alternative on each criterion are g
         """
         ranking = self.computeQuantileOrder(q0=q0,q1=q1,
                          Threading=Threading,nbrOfCPUs=nbrOfCPUs,
+                                            startMethod=startMethod,
                          Comments=Comments)
         ranking.reverse()
         if Comments:

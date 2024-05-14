@@ -460,14 +460,14 @@ def testComputeMarginalVersusGlobalOutrankingCorrelations():
                                    weightDistribution='equiobjectives',
                                    seed=100) 
     g = BipolarOutrankingDigraph(t,Normalized=True,Threading=True,startMethod='spawn')
-    Threading = True
+    #Threading = True
     t0 = time()
-    criteriaCorrelations = g.computeMarginalVersusGlobalOutrankingCorrelations(Threading=Threading,startMethod='spawn')
+    criteriaCorrelations = g.computeMarginalVersusGlobalOutrankingCorrelations(Threading=True,startMethod='spawn')
     print(time()-t0)
     print(criteriaCorrelations)
-    Threading = False
+    #Threading = False
     t0 = time()
-    criteriaCorrelations = g.computeMarginalVersusGlobalOutrankingCorrelations(Threading=Threading)
+    criteriaCorrelations = g.computeMarginalVersusGlobalOutrankingCorrelations()
     print(time()-t0)
     print(criteriaCorrelations)
 
@@ -481,8 +481,7 @@ def testComputeMarginalVersusGlobalRankingCorrelations():
     ranking = g.computeNetFlowsRanking()
     Threading = True
     t0 = time()
-    criteriaCorrelations = g.computeMarginalVersusGlobalRankingCorrelations(ranking,
-                            Threading=Threading)
+    criteriaCorrelations = g.computeMarginalVersusGlobalRankingCorrelations(ranking,Threading=Threading,startMethod=None)
     print(time()-t0)
     print(criteriaCorrelations)
     Threading = False
@@ -504,7 +503,8 @@ def testComputeMarginalObjectivesVersusGlobalRankingCorrelations():
     t0 = time()
     objectivesCorrelations = g.computeMarginalObjectivesVersusGlobalRankingCorrelations(
                                ranking,Comments=True,
-                               Threading=Threading)
+                               Threading=Threading,
+        startMethod=None)
     print(time()-t0)
     Threading = False
     t0 = time()
