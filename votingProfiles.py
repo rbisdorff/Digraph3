@@ -976,7 +976,7 @@ class LinearVotingProfile(VotingProfile):
                               pageTitle='Voting Heatmap', 
                               Correlations=True,
                               Threading=False,
-                              nbrOfCPUs=1,
+                              nbrOfCPUs=None,
                               Debug=False):
         """
         Show the linear voting profile as a rank performance heatmap.
@@ -1454,7 +1454,7 @@ class BipolarApprovalVotingProfile(VotingProfile):
                               pageTitle='Voting Heatmap', 
                               Correlations=True,
                               Threading=False,
-                              nbrOfCPUs=1,
+                              nbrOfCPUs=None,
                               Debug=False):
         """
         Show the linear voting profile as a rank performance heatmap.
@@ -1974,17 +1974,17 @@ if __name__ == "__main__":
 
     print('*-------- Testing classes and methods -------')
 
-    adA = RandomBipolarApprovalVotingProfile(numberOfVoters=4,
-                                             votersIdPrefix='a',
-                                             IntraGroup=True,
-                                             numberOfCandidates=5,
-                                             approvalProbability=0.3,
-                                             disapprovalProbability=0.3,
-                                             candidatesIdPrefix='b',
-                                             seed=1,Debug=True)
-    adA.showBipolarApprovals()
-    for a in adA.voters:
-        adA.showVoterBallot(a)
+    # adA = RandomBipolarApprovalVotingProfile(numberOfVoters=4,
+    #                                          votersIdPrefix='a',
+    #                                          IntraGroup=True,
+    #                                          numberOfCandidates=5,
+    #                                          approvalProbability=0.3,
+    #                                          disapprovalProbability=0.3,
+    #                                          candidatesIdPrefix='b',
+    #                                          seed=1,Debug=True)
+    # adA.showBipolarApprovals()
+    # for a in adA.voters:
+    #     adA.showVoterBallot(a)
 ##    adB = RandomBipolarApprovalVotingProfile(numberOfVoters=5,
 ##                                             votersIdPrefix='b',
 ##                                             approvalProbability=0.5,
@@ -2000,13 +2000,13 @@ if __name__ == "__main__":
 ##                                     seed=1)
 ##    pv.showPrerankedBallots()
     
-    k = 7
-    lvA = RandomLinearVotingProfile(numberOfVoters=k,numberOfCandidates=k,
-                                      votersIdPrefix='a',
-                                      candidatesIdPrefix='b',
-                                    PartialLinearBallots=True,
-                                    lengthProbability=0.5,
-                                    seed=50)
+    # k = 7
+    # lvA = RandomLinearVotingProfile(numberOfVoters=k,numberOfCandidates=k,
+    #                                   votersIdPrefix='a',
+    #                                   candidatesIdPrefix='b',
+    #                                 PartialLinearBallots=True,
+    #                                 lengthProbability=0.5,
+    #                                 seed=50)
 ##    lvB = RandomLinearVotingProfile(numberOfVoters=k,numberOfCandidates=k,
 ##                                      votersIdPrefix='b',
 ##                                    PartialLinearBallots=False,
@@ -2016,13 +2016,13 @@ if __name__ == "__main__":
 ##    lvB.showLinearBallots()
 ##    lvB.save('testpreorder')
     
-##    v = RandomBipolarApprovalVotingProfile(numberOfVoters=100,
-##                                           numberOfCandidates=10,
-##                                           approvalProbability=0.25,
-##                                           disapprovalProbability=0.25,
-##                                           seed=100,DivisivePolitics=True,
-##                                           WithPolls=True,Debug=False)
-##    print(v)
+    v = RandomBipolarApprovalVotingProfile(numberOfVoters=1000,
+                                           numberOfCandidates=10,
+                                           approvalProbability=0.25,
+                                           disapprovalProbability=0.25,
+                                           seed=100,DivisivePolitics=True,
+                                           WithPolls=True,Debug=False)
+    print(v)
 ##    v.showApprovalResults()
 ##    v.showDisapprovalResults()
 ##    v.showNetApprovalScores()
@@ -2030,7 +2030,7 @@ if __name__ == "__main__":
 ##    v = BipolarApprovalVotingProfile('testAV')
 ##    print(v)
 ##    v.save2PerfTab('testODG')
-##    #v.showHTMLVotingHeatmap(rankingRule='NetFlows',Transposed=False)
+    v.showHTMLVotingHeatmap(rankingRule='NetFlows',Transposed=False,Threading=True)
 ##    from outrankingDigraphs import BipolarOutrankingDigraph
 ##    g = BipolarOutrankingDigraph('testODG')
 ##    g.showHTMLPerformanceTableau(Transposed=True)

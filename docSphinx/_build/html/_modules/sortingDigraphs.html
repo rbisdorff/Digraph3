@@ -30,7 +30,7 @@
         <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
         <script src="../_static/clipboard.min.js?v=a7894cd8"></script>
         <script src="../_static/copybutton.js?v=15d7cbb8"></script>
-        <script src="../_static/js/hoverxref.js?v=39f456b5"></script>
+        <script src="../_static/js/hoverxref.js?v=82c55261"></script>
         <script src="../_static/js/tooltipster.bundle.min.js?v=18bf091b"></script>
         <script src="../_static/js/micromodal.min.js?v=04d6302d"></script>
     <script src="../_static/js/theme.js"></script>
@@ -4767,7 +4767,7 @@
                                <span class="n">rankingRule</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
                                <span class="n">Correlations</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
                                <span class="n">Threading</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
-                               <span class="n">nbrOfCPUs</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span>
+                               <span class="n">nbrOfCPUs</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
                                <span class="n">Debug</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;       </span>
 <span class="sd">        Renders the Brewer RdYlGn 5,7, or 9 levels colored heatmap of the performance table</span>
@@ -5114,7 +5114,7 @@
                                              <span class="n">rankingRule</span><span class="o">=</span><span class="n">rankingRule</span><span class="p">,</span>
                                              <span class="n">Correlations</span><span class="o">=</span><span class="n">Correlations</span><span class="p">,</span>
                                              <span class="n">Threading</span><span class="o">=</span><span class="n">Threading</span><span class="p">,</span>
-                                             <span class="n">nbrOfCPUs</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span>
+                                             <span class="n">nbrOfCPUs</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
                                              <span class="n">Debug</span><span class="o">=</span><span class="n">Debug</span><span class="p">))</span>
         <span class="n">fo</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
         <span class="n">url</span> <span class="o">=</span> <span class="s1">&#39;file://&#39;</span><span class="o">+</span><span class="n">fileName</span>
@@ -5284,10 +5284,12 @@
 
     <span class="c1"># from randomPerfTabs import RandomPerformanceTableau</span>
     <span class="c1"># from randomPerfTabs import RandomPerformanceGenerator as PerfTabGenerator</span>
-    <span class="c1"># nbrActions=1000</span>
-    <span class="c1"># nbrCrit = 13</span>
-    <span class="c1"># tp1 = RandomCBPerformanceTableau(numberOfActions=nbrActions,</span>
-    <span class="c1">#             numberOfCriteria=nbrCrit,seed=seed,NA=-1,missingDataProbability=0.1)</span>
+    <span class="n">nbrActions</span><span class="o">=</span><span class="mi">1000</span>
+    <span class="n">nbrCrit</span> <span class="o">=</span> <span class="mi">13</span>
+    <span class="n">tp1</span> <span class="o">=</span> <span class="n">RandomCBPerformanceTableau</span><span class="p">(</span><span class="n">numberOfActions</span><span class="o">=</span><span class="n">nbrActions</span><span class="p">,</span>
+                 <span class="n">numberOfCriteria</span><span class="o">=</span><span class="n">nbrCrit</span><span class="p">,</span><span class="n">seed</span><span class="o">=</span><span class="n">seed</span><span class="p">,</span><span class="n">NA</span><span class="o">=-</span><span class="mi">1</span><span class="p">,</span><span class="n">missingDataProbability</span><span class="o">=</span><span class="mf">0.1</span><span class="p">)</span>
+    <span class="n">qs</span> <span class="o">=</span> <span class="n">QuantilesSortingDigraph</span><span class="p">(</span><span class="n">tp1</span><span class="p">,</span><span class="n">Threading</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span><span class="n">startMethod</span><span class="o">=</span><span class="s1">&#39;fork&#39;</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">qs</span><span class="p">)</span>
     <span class="c1"># print(tp1.NA)</span>
     <span class="c1"># pq1 = PerformanceQuantiles(tp1,5,LowerClosed=False,Debug=False)</span>
     <span class="c1"># tpg1 = PerfTabGenerator(tp1,instanceCounter=0,seed=seed)</span>
@@ -5323,7 +5325,7 @@
 
   <div role="contentinfo">
     <p>&#169; Copyright 2012-2024, Raymond Bisdorff.
-      <span class="lastupdated">Last updated on May 14, 2024.
+      <span class="lastupdated">Last updated on May 16, 2024.
       </span></p>
   </div>
 

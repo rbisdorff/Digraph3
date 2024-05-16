@@ -30,7 +30,7 @@
         <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
         <script src="../_static/clipboard.min.js?v=a7894cd8"></script>
         <script src="../_static/copybutton.js?v=15d7cbb8"></script>
-        <script src="../_static/js/hoverxref.js?v=39f456b5"></script>
+        <script src="../_static/js/hoverxref.js?v=82c55261"></script>
         <script src="../_static/js/tooltipster.bundle.min.js?v=18bf091b"></script>
         <script src="../_static/js/micromodal.min.js?v=04d6302d"></script>
     <script src="../_static/js/theme.js"></script>
@@ -1146,7 +1146,7 @@
                               <span class="n">pageTitle</span><span class="o">=</span><span class="s1">&#39;Voting Heatmap&#39;</span><span class="p">,</span> 
                               <span class="n">Correlations</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
                               <span class="n">Threading</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
-                              <span class="n">nbrOfCPUs</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span>
+                              <span class="n">nbrOfCPUs</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
                               <span class="n">Debug</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Show the linear voting profile as a rank performance heatmap.</span>
@@ -1657,7 +1657,7 @@
                               <span class="n">pageTitle</span><span class="o">=</span><span class="s1">&#39;Voting Heatmap&#39;</span><span class="p">,</span> 
                               <span class="n">Correlations</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
                               <span class="n">Threading</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
-                              <span class="n">nbrOfCPUs</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span>
+                              <span class="n">nbrOfCPUs</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
                               <span class="n">Debug</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Show the linear voting profile as a rank performance heatmap.</span>
@@ -2206,17 +2206,17 @@
 
     <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;*-------- Testing classes and methods -------&#39;</span><span class="p">)</span>
 
-    <span class="n">adA</span> <span class="o">=</span> <span class="n">RandomBipolarApprovalVotingProfile</span><span class="p">(</span><span class="n">numberOfVoters</span><span class="o">=</span><span class="mi">4</span><span class="p">,</span>
-                                             <span class="n">votersIdPrefix</span><span class="o">=</span><span class="s1">&#39;a&#39;</span><span class="p">,</span>
-                                             <span class="n">IntraGroup</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
-                                             <span class="n">numberOfCandidates</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span>
-                                             <span class="n">approvalProbability</span><span class="o">=</span><span class="mf">0.3</span><span class="p">,</span>
-                                             <span class="n">disapprovalProbability</span><span class="o">=</span><span class="mf">0.3</span><span class="p">,</span>
-                                             <span class="n">candidatesIdPrefix</span><span class="o">=</span><span class="s1">&#39;b&#39;</span><span class="p">,</span>
-                                             <span class="n">seed</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span><span class="n">Debug</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
-    <span class="n">adA</span><span class="o">.</span><span class="n">showBipolarApprovals</span><span class="p">()</span>
-    <span class="k">for</span> <span class="n">a</span> <span class="ow">in</span> <span class="n">adA</span><span class="o">.</span><span class="n">voters</span><span class="p">:</span>
-        <span class="n">adA</span><span class="o">.</span><span class="n">showVoterBallot</span><span class="p">(</span><span class="n">a</span><span class="p">)</span>
+    <span class="c1"># adA = RandomBipolarApprovalVotingProfile(numberOfVoters=4,</span>
+    <span class="c1">#                                          votersIdPrefix=&#39;a&#39;,</span>
+    <span class="c1">#                                          IntraGroup=True,</span>
+    <span class="c1">#                                          numberOfCandidates=5,</span>
+    <span class="c1">#                                          approvalProbability=0.3,</span>
+    <span class="c1">#                                          disapprovalProbability=0.3,</span>
+    <span class="c1">#                                          candidatesIdPrefix=&#39;b&#39;,</span>
+    <span class="c1">#                                          seed=1,Debug=True)</span>
+    <span class="c1"># adA.showBipolarApprovals()</span>
+    <span class="c1"># for a in adA.voters:</span>
+    <span class="c1">#     adA.showVoterBallot(a)</span>
 <span class="c1">##    adB = RandomBipolarApprovalVotingProfile(numberOfVoters=5,</span>
 <span class="c1">##                                             votersIdPrefix=&#39;b&#39;,</span>
 <span class="c1">##                                             approvalProbability=0.5,</span>
@@ -2232,13 +2232,13 @@
 <span class="c1">##                                     seed=1)</span>
 <span class="c1">##    pv.showPrerankedBallots()</span>
     
-    <span class="n">k</span> <span class="o">=</span> <span class="mi">7</span>
-    <span class="n">lvA</span> <span class="o">=</span> <span class="n">RandomLinearVotingProfile</span><span class="p">(</span><span class="n">numberOfVoters</span><span class="o">=</span><span class="n">k</span><span class="p">,</span><span class="n">numberOfCandidates</span><span class="o">=</span><span class="n">k</span><span class="p">,</span>
-                                      <span class="n">votersIdPrefix</span><span class="o">=</span><span class="s1">&#39;a&#39;</span><span class="p">,</span>
-                                      <span class="n">candidatesIdPrefix</span><span class="o">=</span><span class="s1">&#39;b&#39;</span><span class="p">,</span>
-                                    <span class="n">PartialLinearBallots</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
-                                    <span class="n">lengthProbability</span><span class="o">=</span><span class="mf">0.5</span><span class="p">,</span>
-                                    <span class="n">seed</span><span class="o">=</span><span class="mi">50</span><span class="p">)</span>
+    <span class="c1"># k = 7</span>
+    <span class="c1"># lvA = RandomLinearVotingProfile(numberOfVoters=k,numberOfCandidates=k,</span>
+    <span class="c1">#                                   votersIdPrefix=&#39;a&#39;,</span>
+    <span class="c1">#                                   candidatesIdPrefix=&#39;b&#39;,</span>
+    <span class="c1">#                                 PartialLinearBallots=True,</span>
+    <span class="c1">#                                 lengthProbability=0.5,</span>
+    <span class="c1">#                                 seed=50)</span>
 <span class="c1">##    lvB = RandomLinearVotingProfile(numberOfVoters=k,numberOfCandidates=k,</span>
 <span class="c1">##                                      votersIdPrefix=&#39;b&#39;,</span>
 <span class="c1">##                                    PartialLinearBallots=False,</span>
@@ -2248,13 +2248,13 @@
 <span class="c1">##    lvB.showLinearBallots()</span>
 <span class="c1">##    lvB.save(&#39;testpreorder&#39;)</span>
     
-<span class="c1">##    v = RandomBipolarApprovalVotingProfile(numberOfVoters=100,</span>
-<span class="c1">##                                           numberOfCandidates=10,</span>
-<span class="c1">##                                           approvalProbability=0.25,</span>
-<span class="c1">##                                           disapprovalProbability=0.25,</span>
-<span class="c1">##                                           seed=100,DivisivePolitics=True,</span>
-<span class="c1">##                                           WithPolls=True,Debug=False)</span>
-<span class="c1">##    print(v)</span>
+    <span class="n">v</span> <span class="o">=</span> <span class="n">RandomBipolarApprovalVotingProfile</span><span class="p">(</span><span class="n">numberOfVoters</span><span class="o">=</span><span class="mi">1000</span><span class="p">,</span>
+                                           <span class="n">numberOfCandidates</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span>
+                                           <span class="n">approvalProbability</span><span class="o">=</span><span class="mf">0.25</span><span class="p">,</span>
+                                           <span class="n">disapprovalProbability</span><span class="o">=</span><span class="mf">0.25</span><span class="p">,</span>
+                                           <span class="n">seed</span><span class="o">=</span><span class="mi">100</span><span class="p">,</span><span class="n">DivisivePolitics</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+                                           <span class="n">WithPolls</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span><span class="n">Debug</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">v</span><span class="p">)</span>
 <span class="c1">##    v.showApprovalResults()</span>
 <span class="c1">##    v.showDisapprovalResults()</span>
 <span class="c1">##    v.showNetApprovalScores()</span>
@@ -2262,7 +2262,7 @@
 <span class="c1">##    v = BipolarApprovalVotingProfile(&#39;testAV&#39;)</span>
 <span class="c1">##    print(v)</span>
 <span class="c1">##    v.save2PerfTab(&#39;testODG&#39;)</span>
-<span class="c1">##    #v.showHTMLVotingHeatmap(rankingRule=&#39;NetFlows&#39;,Transposed=False)</span>
+    <span class="n">v</span><span class="o">.</span><span class="n">showHTMLVotingHeatmap</span><span class="p">(</span><span class="n">rankingRule</span><span class="o">=</span><span class="s1">&#39;NetFlows&#39;</span><span class="p">,</span><span class="n">Transposed</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span><span class="n">Threading</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 <span class="c1">##    from outrankingDigraphs import BipolarOutrankingDigraph</span>
 <span class="c1">##    g = BipolarOutrankingDigraph(&#39;testODG&#39;)</span>
 <span class="c1">##    g.showHTMLPerformanceTableau(Transposed=True)</span>
@@ -2295,7 +2295,7 @@
 
   <div role="contentinfo">
     <p>&#169; Copyright 2012-2024, Raymond Bisdorff.
-      <span class="lastupdated">Last updated on May 14, 2024.
+      <span class="lastupdated">Last updated on May 16, 2024.
       </span></p>
   </div>
 

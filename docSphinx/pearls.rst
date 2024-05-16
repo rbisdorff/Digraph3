@@ -3777,7 +3777,7 @@ Following the *von Neumann* fixpoint algorithm, a similar bipolar-valued extende
     | *in*  : bipolar-valued digraph *G(X,R)*,
     | *out* : set {*Y1*, *Y2*, .. } of bipolar-valued kernel membership characteristic vectors.
     
-    1. enumerate all initial and terminal crisp prekernels *K*, *K2*, ... in the given bipolar-valued digraph (see the tutorial on :ref:`Computing Digraph Kernels <Kernel-Tutorial-label>`);
+    1. enumerate all initial and terminal crisp prekernels *K1*, *K2*, ... in the given bipolar-valued digraph (see the tutorial on :ref:`Computing Digraph Kernels <Kernel-Tutorial-label>`);
        
     #. for each crisp initial kernel *Ki*:
        

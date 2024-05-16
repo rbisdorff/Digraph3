@@ -4533,7 +4533,7 @@ class LearnedQuantilesRatingDigraph(QuantilesSortingDigraph,PerformanceQuantiles
                                rankingRule=None,
                                Correlations=False,
                                Threading=False,
-                               nbrOfCPUs=1,
+                               nbrOfCPUs=None,
                                Debug=False):
         """       
         Renders the Brewer RdYlGn 5,7, or 9 levels colored heatmap of the performance table
@@ -4869,7 +4869,7 @@ class LearnedQuantilesRatingDigraph(QuantilesSortingDigraph,PerformanceQuantiles
                                              rankingRule=rankingRule,
                                              Correlations=Correlations,
                                              Threading=Threading,
-                                             nbrOfCPUs=1,
+                                             nbrOfCPUs=None,
                                              Debug=Debug))
         fo.close()
         url = 'file://'+fileName

@@ -2193,7 +2193,7 @@ The performance evaluations of each decision alternative on each criterion are g
                                 pageTitle='Performance Heatmap',
                                 Correlations=False,
                                 Threading=False,
-                                nbrOfCPUs=1,
+                                nbrOfCPUs=None,
                                 Debug=False):
         """       
         Renders the Brewer RdYlGn 3, 5, 7, or 9 levels colored heatmap of the performance table

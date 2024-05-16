@@ -520,7 +520,7 @@ class RatingDigraph(BipolarOutrankingDigraph):
                                              rankingRule=rankingRule,
                                              Correlations=Correlations,
                                              Threading=Threading,
-                                             nbrOfCPUs=1,
+                                             nbrOfCPUs=None,
                                              Debug=Debug))
         fo.close()
         url = 'file://'+fileName
