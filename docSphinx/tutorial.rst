@@ -9414,7 +9414,6 @@ For computing the corresponding non isomorphic MISs, we actually need the automo
    :linenos:
 
    >>> c12.automorphismGenerators()
-
       ...
       Permutations
       {'1': '1', '2': '12', '3': '11', '4': '10', '5': 
@@ -9435,9 +9434,9 @@ The command :py:func:`~digraphs.Digraph.showOrbits` renders now the labelled rep
 
 .. code-block:: pycon
    :linenos:
+   :emphasize-lines: 7-10,12-13
 
    >>> c12.showOrbits(c12.misset,withListing=False)
-
       ...
       *---- Global result ----
       Number of MIS:  29
@@ -9451,7 +9450,7 @@ The command :py:func:`~digraphs.Digraph.showOrbits` renders now the labelled rep
       stabilizer size: [1, 2, 3, ..., 8, 9, ..., 12, 13, ...]
       frequency      : [0, 2, 0, ..., 1, 0, ...,  1,  0, ...]
 
-The corresponding group stabilizers' sizes and frequencies -- orbit 1 with 6 symmetry axes, orbit 2 with 4 symmetry axes, and orbits 3 and 4 both with one symmetry axis (see Lines 11-13), are illustrated in the corresponding unlabelled graphs of :numref:`MISc12` below.
+The corresponding group stabilizers' sizes and frequencies -- orbit 1 with 6 symmetry axes, orbit 2 with 4 symmetry axes, and orbits 3 and 4 both with one symmetry axis (see Lines 12-13), are illustrated in the corresponding unlabelled graphs of :numref:`MISc12` below.
 
 .. figure:: c12.png
     :name: MISc12
