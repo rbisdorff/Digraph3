@@ -3838,7 +3838,7 @@ class Digraph(object):
             print('List of actions provided.')
       
 
-    def showRelationTable(self,Sorted=True,
+    def showRelationTable(self,Sorted=False,
                           rankingRule=None,
                           IntegerValues=False,
                           actionsSubset= None,
@@ -3849,7 +3849,7 @@ class Digraph(object):
                           toIndex=None):
         """
         Prints the relation valuation in actions X actions table format.
-        Copeland and NetFlows rankings my be used.
+        Copeland and NetFlows rankings may be used.
         """
         if actionsSubset is None:
             if rankingRule is None:

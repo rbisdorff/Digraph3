@@ -2738,7 +2738,7 @@ static const char __pyx_k_0_dd[] = "#%%0%dd";
 static const char __pyx_k_NA_2[] = " NA ";
 static const char __pyx_k_NA_3[] = "  NA  ";
 static const char __pyx_k_NA_d[] = "NA = %d\n";
-static const char __pyx_k__121[] = "?";
+static const char __pyx_k__120[] = "?";
 static const char __pyx_k_aobj[] = "aobj";
 static const char __pyx_k_beta[] = "beta";
 static const char __pyx_k_copy[] = "copy";
@@ -3154,18 +3154,17 @@ static PyObject *__pyx_pf_13cRandPerfTabs_19cPerformanceTableau___init__(CYTHON_
 static PyObject *__pyx_pf_13cRandPerfTabs_19cPerformanceTableau_2convertInsite2BigData(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_self); /* proto */
 static PyObject *__pyx_pf_13cRandPerfTabs_19cPerformanceTableau_4convert2Standard(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_self); /* proto */
 static PyObject *__pyx_pf_13cRandPerfTabs_19cPerformanceTableau_6convertInsite2Standard(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_self); /* proto */
-static PyObject *__pyx_pf_13cRandPerfTabs_19cPerformanceTableau_8convertInsite2BigData(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_self); /* proto */
-static PyObject *__pyx_pf_13cRandPerfTabs_19cPerformanceTableau_10convertWeight2Integer(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_self); /* proto */
-static PyObject *__pyx_pf_13cRandPerfTabs_19cPerformanceTableau_12convertWeight2Decimal(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_self); /* proto */
-static PyObject *__pyx_pf_13cRandPerfTabs_19cPerformanceTableau_14convertEvaluation2Float(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_self); /* proto */
-static PyObject *__pyx_pf_13cRandPerfTabs_19cPerformanceTableau_16convertEvaluation2Decimal(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_self, int __pyx_v_ndigits); /* proto */
-static PyObject *__pyx_pf_13cRandPerfTabs_19cPerformanceTableau_18convertDiscriminationThresholds2Float(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_self); /* proto */
-static PyObject *__pyx_pf_13cRandPerfTabs_19cPerformanceTableau_20convertDiscriminationThresholds2Decimal(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_self); /* proto */
-static PyObject *__pyx_pf_13cRandPerfTabs_19cPerformanceTableau_22showCriteria(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_self, PyObject *__pyx_v_IntegerWeights, PyObject *__pyx_v_Alphabetic, PyObject *__pyx_v_ByObjectives, PyObject *__pyx_v_Debug); /* proto */
-static PyObject *__pyx_pf_13cRandPerfTabs_19cPerformanceTableau_24showPerformanceTableau(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_self, int __pyx_v_Transposed, PyObject *__pyx_v_actionsSubset, int __pyx_v_fromIndex, int __pyx_v_toIndex, int __pyx_v_Sorted, PyObject *__pyx_v_ndigits); /* proto */
-static PyObject *__pyx_pf_13cRandPerfTabs_19cPerformanceTableau_26normalizeEvaluations(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_self, PyObject *__pyx_v_lowValue, PyObject *__pyx_v_highValue, int __pyx_v_Debug); /* proto */
-static PyObject *__pyx_pf_13cRandPerfTabs_19cPerformanceTableau_28showHTMLPerformanceHeatmap(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_self, PyObject *__pyx_v_actionsList, PyObject *__pyx_v_criteriaList, PyObject *__pyx_v_colorLevels, PyObject *__pyx_v_pageTitle, PyObject *__pyx_v_ndigits, PyObject *__pyx_v_SparseModel, PyObject *__pyx_v_minimalComponentSize, PyObject *__pyx_v_rankingRule, PyObject *__pyx_v_quantiles, PyObject *__pyx_v_strategy, PyObject *__pyx_v_Correlations, PyObject *__pyx_v_Threading, CYTHON_UNUSED PyObject *__pyx_v_nbrOfCPUs, PyObject *__pyx_v_Debug); /* proto */
-static PyObject *__pyx_pf_13cRandPerfTabs_19cPerformanceTableau_30save(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_self, PyObject *__pyx_v_fileName, PyObject *__pyx_v_valueDigits); /* proto */
+static PyObject *__pyx_pf_13cRandPerfTabs_19cPerformanceTableau_8convertWeight2Integer(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_self); /* proto */
+static PyObject *__pyx_pf_13cRandPerfTabs_19cPerformanceTableau_10convertWeight2Decimal(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_self); /* proto */
+static PyObject *__pyx_pf_13cRandPerfTabs_19cPerformanceTableau_12convertEvaluation2Float(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_self); /* proto */
+static PyObject *__pyx_pf_13cRandPerfTabs_19cPerformanceTableau_14convertEvaluation2Decimal(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_self, int __pyx_v_ndigits); /* proto */
+static PyObject *__pyx_pf_13cRandPerfTabs_19cPerformanceTableau_16convertDiscriminationThresholds2Float(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_self); /* proto */
+static PyObject *__pyx_pf_13cRandPerfTabs_19cPerformanceTableau_18convertDiscriminationThresholds2Decimal(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_self); /* proto */
+static PyObject *__pyx_pf_13cRandPerfTabs_19cPerformanceTableau_20showCriteria(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_self, PyObject *__pyx_v_IntegerWeights, PyObject *__pyx_v_Alphabetic, PyObject *__pyx_v_ByObjectives, PyObject *__pyx_v_Debug); /* proto */
+static PyObject *__pyx_pf_13cRandPerfTabs_19cPerformanceTableau_22showPerformanceTableau(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_self, int __pyx_v_Transposed, PyObject *__pyx_v_actionsSubset, int __pyx_v_fromIndex, int __pyx_v_toIndex, int __pyx_v_Sorted, PyObject *__pyx_v_ndigits); /* proto */
+static PyObject *__pyx_pf_13cRandPerfTabs_19cPerformanceTableau_24normalizeEvaluations(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_self, PyObject *__pyx_v_lowValue, PyObject *__pyx_v_highValue, int __pyx_v_Debug); /* proto */
+static PyObject *__pyx_pf_13cRandPerfTabs_19cPerformanceTableau_26showHTMLPerformanceHeatmap(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_self, PyObject *__pyx_v_actionsList, PyObject *__pyx_v_criteriaList, PyObject *__pyx_v_colorLevels, PyObject *__pyx_v_pageTitle, PyObject *__pyx_v_ndigits, PyObject *__pyx_v_SparseModel, PyObject *__pyx_v_minimalComponentSize, PyObject *__pyx_v_rankingRule, PyObject *__pyx_v_quantiles, PyObject *__pyx_v_strategy, PyObject *__pyx_v_Correlations, PyObject *__pyx_v_Threading, CYTHON_UNUSED PyObject *__pyx_v_nbrOfCPUs, PyObject *__pyx_v_Debug); /* proto */
+static PyObject *__pyx_pf_13cRandPerfTabs_19cPerformanceTableau_28save(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_self, PyObject *__pyx_v_fileName, PyObject *__pyx_v_valueDigits); /* proto */
 static PyObject *__pyx_pf_13cRandPerfTabs_26cPartialPerformanceTableau___init__(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_self, PyObject *__pyx_v_inPerfTab, PyObject *__pyx_v_actionsSubset, PyObject *__pyx_v_criteriaSubset, PyObject *__pyx_v_objectivesSubset); /* proto */
 static PyObject *__pyx_pf_13cRandPerfTabs_25cRandomPerformanceTableau___init__(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_self, long __pyx_v_numberOfActions, int __pyx_v_numberOfCriteria, PyObject *__pyx_v_weightDistribution, PyObject *__pyx_v_weightScale, PyObject *__pyx_v_commonScale, PyObject *__pyx_v_commonThresholds, PyObject *__pyx_v_commonMode, int __pyx_v_valueDigits, float __pyx_v_missingDataProbability, int __pyx_v_NA, CYTHON_UNUSED int __pyx_v_BigData, PyObject *__pyx_v_seed, int __pyx_v_Debug); /* proto */
 static PyObject *__pyx_pf_13cRandPerfTabs_29cRandomRankPerformanceTableau___init__(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_self, long __pyx_v_numberOfActions, int __pyx_v_numberOfCriteria, PyObject *__pyx_v_weightDistribution, PyObject *__pyx_v_weightScale, PyObject *__pyx_v_commonThresholds, PyObject *__pyx_v_seed, CYTHON_UNUSED int __pyx_v_Debug); /* proto */
@@ -3283,7 +3282,7 @@ typedef struct {
   PyObject *__pyx_kp_u__10;
   PyObject *__pyx_kp_u__11;
   PyObject *__pyx_kp_u__12;
-  PyObject *__pyx_n_s__121;
+  PyObject *__pyx_n_s__120;
   PyObject *__pyx_kp_u__14;
   PyObject *__pyx_kp_u__15;
   PyObject *__pyx_kp_u__16;
@@ -3807,58 +3806,57 @@ typedef struct {
   PyObject *__pyx_tuple__67;
   PyObject *__pyx_tuple__68;
   PyObject *__pyx_tuple__70;
-  PyObject *__pyx_tuple__74;
-  PyObject *__pyx_tuple__76;
-  PyObject *__pyx_tuple__78;
-  PyObject *__pyx_tuple__80;
-  PyObject *__pyx_tuple__82;
-  PyObject *__pyx_tuple__84;
-  PyObject *__pyx_tuple__86;
+  PyObject *__pyx_tuple__73;
+  PyObject *__pyx_tuple__75;
+  PyObject *__pyx_tuple__77;
+  PyObject *__pyx_tuple__79;
+  PyObject *__pyx_tuple__81;
+  PyObject *__pyx_tuple__83;
+  PyObject *__pyx_tuple__85;
+  PyObject *__pyx_tuple__87;
   PyObject *__pyx_tuple__88;
-  PyObject *__pyx_tuple__89;
-  PyObject *__pyx_tuple__91;
-  PyObject *__pyx_tuple__93;
+  PyObject *__pyx_tuple__90;
+  PyObject *__pyx_tuple__92;
+  PyObject *__pyx_tuple__94;
   PyObject *__pyx_tuple__95;
-  PyObject *__pyx_tuple__96;
+  PyObject *__pyx_tuple__97;
   PyObject *__pyx_tuple__98;
-  PyObject *__pyx_tuple__99;
+  PyObject *__pyx_tuple__100;
   PyObject *__pyx_tuple__101;
-  PyObject *__pyx_tuple__102;
-  PyObject *__pyx_tuple__104;
-  PyObject *__pyx_tuple__106;
-  PyObject *__pyx_tuple__108;
-  PyObject *__pyx_tuple__110;
-  PyObject *__pyx_tuple__112;
+  PyObject *__pyx_tuple__103;
+  PyObject *__pyx_tuple__105;
+  PyObject *__pyx_tuple__107;
+  PyObject *__pyx_tuple__109;
+  PyObject *__pyx_tuple__111;
+  PyObject *__pyx_tuple__113;
   PyObject *__pyx_tuple__114;
-  PyObject *__pyx_tuple__115;
-  PyObject *__pyx_tuple__117;
-  PyObject *__pyx_tuple__119;
+  PyObject *__pyx_tuple__116;
+  PyObject *__pyx_tuple__118;
   PyObject *__pyx_codeobj__66;
   PyObject *__pyx_codeobj__69;
   PyObject *__pyx_codeobj__71;
   PyObject *__pyx_codeobj__72;
-  PyObject *__pyx_codeobj__73;
-  PyObject *__pyx_codeobj__75;
-  PyObject *__pyx_codeobj__77;
-  PyObject *__pyx_codeobj__79;
-  PyObject *__pyx_codeobj__81;
-  PyObject *__pyx_codeobj__83;
-  PyObject *__pyx_codeobj__85;
-  PyObject *__pyx_codeobj__87;
-  PyObject *__pyx_codeobj__90;
-  PyObject *__pyx_codeobj__92;
-  PyObject *__pyx_codeobj__94;
-  PyObject *__pyx_codeobj__97;
-  PyObject *__pyx_codeobj__100;
-  PyObject *__pyx_codeobj__103;
-  PyObject *__pyx_codeobj__105;
-  PyObject *__pyx_codeobj__107;
-  PyObject *__pyx_codeobj__109;
-  PyObject *__pyx_codeobj__111;
-  PyObject *__pyx_codeobj__113;
-  PyObject *__pyx_codeobj__116;
-  PyObject *__pyx_codeobj__118;
-  PyObject *__pyx_codeobj__120;
+  PyObject *__pyx_codeobj__74;
+  PyObject *__pyx_codeobj__76;
+  PyObject *__pyx_codeobj__78;
+  PyObject *__pyx_codeobj__80;
+  PyObject *__pyx_codeobj__82;
+  PyObject *__pyx_codeobj__84;
+  PyObject *__pyx_codeobj__86;
+  PyObject *__pyx_codeobj__89;
+  PyObject *__pyx_codeobj__91;
+  PyObject *__pyx_codeobj__93;
+  PyObject *__pyx_codeobj__96;
+  PyObject *__pyx_codeobj__99;
+  PyObject *__pyx_codeobj__102;
+  PyObject *__pyx_codeobj__104;
+  PyObject *__pyx_codeobj__106;
+  PyObject *__pyx_codeobj__108;
+  PyObject *__pyx_codeobj__110;
+  PyObject *__pyx_codeobj__112;
+  PyObject *__pyx_codeobj__115;
+  PyObject *__pyx_codeobj__117;
+  PyObject *__pyx_codeobj__119;
 } __pyx_mstate;
 
 #if CYTHON_USE_MODULE_STATE
@@ -3977,7 +3975,7 @@ static int __pyx_m_clear(PyObject *m) {
   Py_CLEAR(clear_module_state->__pyx_kp_u__10);
   Py_CLEAR(clear_module_state->__pyx_kp_u__11);
   Py_CLEAR(clear_module_state->__pyx_kp_u__12);
-  Py_CLEAR(clear_module_state->__pyx_n_s__121);
+  Py_CLEAR(clear_module_state->__pyx_n_s__120);
   Py_CLEAR(clear_module_state->__pyx_kp_u__14);
   Py_CLEAR(clear_module_state->__pyx_kp_u__15);
   Py_CLEAR(clear_module_state->__pyx_kp_u__16);
@@ -4501,58 +4499,57 @@ static int __pyx_m_clear(PyObject *m) {
   Py_CLEAR(clear_module_state->__pyx_tuple__67);
   Py_CLEAR(clear_module_state->__pyx_tuple__68);
   Py_CLEAR(clear_module_state->__pyx_tuple__70);
-  Py_CLEAR(clear_module_state->__pyx_tuple__74);
-  Py_CLEAR(clear_module_state->__pyx_tuple__76);
-  Py_CLEAR(clear_module_state->__pyx_tuple__78);
-  Py_CLEAR(clear_module_state->__pyx_tuple__80);
-  Py_CLEAR(clear_module_state->__pyx_tuple__82);
-  Py_CLEAR(clear_module_state->__pyx_tuple__84);
-  Py_CLEAR(clear_module_state->__pyx_tuple__86);
+  Py_CLEAR(clear_module_state->__pyx_tuple__73);
+  Py_CLEAR(clear_module_state->__pyx_tuple__75);
+  Py_CLEAR(clear_module_state->__pyx_tuple__77);
+  Py_CLEAR(clear_module_state->__pyx_tuple__79);
+  Py_CLEAR(clear_module_state->__pyx_tuple__81);
+  Py_CLEAR(clear_module_state->__pyx_tuple__83);
+  Py_CLEAR(clear_module_state->__pyx_tuple__85);
+  Py_CLEAR(clear_module_state->__pyx_tuple__87);
   Py_CLEAR(clear_module_state->__pyx_tuple__88);
-  Py_CLEAR(clear_module_state->__pyx_tuple__89);
-  Py_CLEAR(clear_module_state->__pyx_tuple__91);
-  Py_CLEAR(clear_module_state->__pyx_tuple__93);
+  Py_CLEAR(clear_module_state->__pyx_tuple__90);
+  Py_CLEAR(clear_module_state->__pyx_tuple__92);
+  Py_CLEAR(clear_module_state->__pyx_tuple__94);
   Py_CLEAR(clear_module_state->__pyx_tuple__95);
-  Py_CLEAR(clear_module_state->__pyx_tuple__96);
+  Py_CLEAR(clear_module_state->__pyx_tuple__97);
   Py_CLEAR(clear_module_state->__pyx_tuple__98);
-  Py_CLEAR(clear_module_state->__pyx_tuple__99);
+  Py_CLEAR(clear_module_state->__pyx_tuple__100);
   Py_CLEAR(clear_module_state->__pyx_tuple__101);
-  Py_CLEAR(clear_module_state->__pyx_tuple__102);
-  Py_CLEAR(clear_module_state->__pyx_tuple__104);
-  Py_CLEAR(clear_module_state->__pyx_tuple__106);
-  Py_CLEAR(clear_module_state->__pyx_tuple__108);
-  Py_CLEAR(clear_module_state->__pyx_tuple__110);
-  Py_CLEAR(clear_module_state->__pyx_tuple__112);
+  Py_CLEAR(clear_module_state->__pyx_tuple__103);
+  Py_CLEAR(clear_module_state->__pyx_tuple__105);
+  Py_CLEAR(clear_module_state->__pyx_tuple__107);
+  Py_CLEAR(clear_module_state->__pyx_tuple__109);
+  Py_CLEAR(clear_module_state->__pyx_tuple__111);
+  Py_CLEAR(clear_module_state->__pyx_tuple__113);
   Py_CLEAR(clear_module_state->__pyx_tuple__114);
-  Py_CLEAR(clear_module_state->__pyx_tuple__115);
-  Py_CLEAR(clear_module_state->__pyx_tuple__117);
-  Py_CLEAR(clear_module_state->__pyx_tuple__119);
+  Py_CLEAR(clear_module_state->__pyx_tuple__116);
+  Py_CLEAR(clear_module_state->__pyx_tuple__118);
   Py_CLEAR(clear_module_state->__pyx_codeobj__66);
   Py_CLEAR(clear_module_state->__pyx_codeobj__69);
   Py_CLEAR(clear_module_state->__pyx_codeobj__71);
   Py_CLEAR(clear_module_state->__pyx_codeobj__72);
-  Py_CLEAR(clear_module_state->__pyx_codeobj__73);
-  Py_CLEAR(clear_module_state->__pyx_codeobj__75);
-  Py_CLEAR(clear_module_state->__pyx_codeobj__77);
-  Py_CLEAR(clear_module_state->__pyx_codeobj__79);
-  Py_CLEAR(clear_module_state->__pyx_codeobj__81);
-  Py_CLEAR(clear_module_state->__pyx_codeobj__83);
-  Py_CLEAR(clear_module_state->__pyx_codeobj__85);
-  Py_CLEAR(clear_module_state->__pyx_codeobj__87);
-  Py_CLEAR(clear_module_state->__pyx_codeobj__90);
-  Py_CLEAR(clear_module_state->__pyx_codeobj__92);
-  Py_CLEAR(clear_module_state->__pyx_codeobj__94);
-  Py_CLEAR(clear_module_state->__pyx_codeobj__97);
-  Py_CLEAR(clear_module_state->__pyx_codeobj__100);
-  Py_CLEAR(clear_module_state->__pyx_codeobj__103);
-  Py_CLEAR(clear_module_state->__pyx_codeobj__105);
-  Py_CLEAR(clear_module_state->__pyx_codeobj__107);
-  Py_CLEAR(clear_module_state->__pyx_codeobj__109);
-  Py_CLEAR(clear_module_state->__pyx_codeobj__111);
-  Py_CLEAR(clear_module_state->__pyx_codeobj__113);
-  Py_CLEAR(clear_module_state->__pyx_codeobj__116);
-  Py_CLEAR(clear_module_state->__pyx_codeobj__118);
-  Py_CLEAR(clear_module_state->__pyx_codeobj__120);
+  Py_CLEAR(clear_module_state->__pyx_codeobj__74);
+  Py_CLEAR(clear_module_state->__pyx_codeobj__76);
+  Py_CLEAR(clear_module_state->__pyx_codeobj__78);
+  Py_CLEAR(clear_module_state->__pyx_codeobj__80);
+  Py_CLEAR(clear_module_state->__pyx_codeobj__82);
+  Py_CLEAR(clear_module_state->__pyx_codeobj__84);
+  Py_CLEAR(clear_module_state->__pyx_codeobj__86);
+  Py_CLEAR(clear_module_state->__pyx_codeobj__89);
+  Py_CLEAR(clear_module_state->__pyx_codeobj__91);
+  Py_CLEAR(clear_module_state->__pyx_codeobj__93);
+  Py_CLEAR(clear_module_state->__pyx_codeobj__96);
+  Py_CLEAR(clear_module_state->__pyx_codeobj__99);
+  Py_CLEAR(clear_module_state->__pyx_codeobj__102);
+  Py_CLEAR(clear_module_state->__pyx_codeobj__104);
+  Py_CLEAR(clear_module_state->__pyx_codeobj__106);
+  Py_CLEAR(clear_module_state->__pyx_codeobj__108);
+  Py_CLEAR(clear_module_state->__pyx_codeobj__110);
+  Py_CLEAR(clear_module_state->__pyx_codeobj__112);
+  Py_CLEAR(clear_module_state->__pyx_codeobj__115);
+  Py_CLEAR(clear_module_state->__pyx_codeobj__117);
+  Py_CLEAR(clear_module_state->__pyx_codeobj__119);
   return 0;
 }
 #endif
@@ -4649,7 +4646,7 @@ static int __pyx_m_traverse(PyObject *m, visitproc visit, void *arg) {
   Py_VISIT(traverse_module_state->__pyx_kp_u__10);
   Py_VISIT(traverse_module_state->__pyx_kp_u__11);
   Py_VISIT(traverse_module_state->__pyx_kp_u__12);
-  Py_VISIT(traverse_module_state->__pyx_n_s__121);
+  Py_VISIT(traverse_module_state->__pyx_n_s__120);
   Py_VISIT(traverse_module_state->__pyx_kp_u__14);
   Py_VISIT(traverse_module_state->__pyx_kp_u__15);
   Py_VISIT(traverse_module_state->__pyx_kp_u__16);
@@ -5173,58 +5170,57 @@ static int __pyx_m_traverse(PyObject *m, visitproc visit, void *arg) {
   Py_VISIT(traverse_module_state->__pyx_tuple__67);
   Py_VISIT(traverse_module_state->__pyx_tuple__68);
   Py_VISIT(traverse_module_state->__pyx_tuple__70);
-  Py_VISIT(traverse_module_state->__pyx_tuple__74);
-  Py_VISIT(traverse_module_state->__pyx_tuple__76);
-  Py_VISIT(traverse_module_state->__pyx_tuple__78);
-  Py_VISIT(traverse_module_state->__pyx_tuple__80);
-  Py_VISIT(traverse_module_state->__pyx_tuple__82);
-  Py_VISIT(traverse_module_state->__pyx_tuple__84);
-  Py_VISIT(traverse_module_state->__pyx_tuple__86);
+  Py_VISIT(traverse_module_state->__pyx_tuple__73);
+  Py_VISIT(traverse_module_state->__pyx_tuple__75);
+  Py_VISIT(traverse_module_state->__pyx_tuple__77);
+  Py_VISIT(traverse_module_state->__pyx_tuple__79);
+  Py_VISIT(traverse_module_state->__pyx_tuple__81);
+  Py_VISIT(traverse_module_state->__pyx_tuple__83);
+  Py_VISIT(traverse_module_state->__pyx_tuple__85);
+  Py_VISIT(traverse_module_state->__pyx_tuple__87);
   Py_VISIT(traverse_module_state->__pyx_tuple__88);
-  Py_VISIT(traverse_module_state->__pyx_tuple__89);
-  Py_VISIT(traverse_module_state->__pyx_tuple__91);
-  Py_VISIT(traverse_module_state->__pyx_tuple__93);
+  Py_VISIT(traverse_module_state->__pyx_tuple__90);
+  Py_VISIT(traverse_module_state->__pyx_tuple__92);
+  Py_VISIT(traverse_module_state->__pyx_tuple__94);
   Py_VISIT(traverse_module_state->__pyx_tuple__95);
-  Py_VISIT(traverse_module_state->__pyx_tuple__96);
+  Py_VISIT(traverse_module_state->__pyx_tuple__97);
   Py_VISIT(traverse_module_state->__pyx_tuple__98);
-  Py_VISIT(traverse_module_state->__pyx_tuple__99);
+  Py_VISIT(traverse_module_state->__pyx_tuple__100);
   Py_VISIT(traverse_module_state->__pyx_tuple__101);
-  Py_VISIT(traverse_module_state->__pyx_tuple__102);
-  Py_VISIT(traverse_module_state->__pyx_tuple__104);
-  Py_VISIT(traverse_module_state->__pyx_tuple__106);
-  Py_VISIT(traverse_module_state->__pyx_tuple__108);
-  Py_VISIT(traverse_module_state->__pyx_tuple__110);
-  Py_VISIT(traverse_module_state->__pyx_tuple__112);
+  Py_VISIT(traverse_module_state->__pyx_tuple__103);
+  Py_VISIT(traverse_module_state->__pyx_tuple__105);
+  Py_VISIT(traverse_module_state->__pyx_tuple__107);
+  Py_VISIT(traverse_module_state->__pyx_tuple__109);
+  Py_VISIT(traverse_module_state->__pyx_tuple__111);
+  Py_VISIT(traverse_module_state->__pyx_tuple__113);
   Py_VISIT(traverse_module_state->__pyx_tuple__114);
-  Py_VISIT(traverse_module_state->__pyx_tuple__115);
-  Py_VISIT(traverse_module_state->__pyx_tuple__117);
-  Py_VISIT(traverse_module_state->__pyx_tuple__119);
+  Py_VISIT(traverse_module_state->__pyx_tuple__116);
+  Py_VISIT(traverse_module_state->__pyx_tuple__118);
   Py_VISIT(traverse_module_state->__pyx_codeobj__66);
   Py_VISIT(traverse_module_state->__pyx_codeobj__69);
   Py_VISIT(traverse_module_state->__pyx_codeobj__71);
   Py_VISIT(traverse_module_state->__pyx_codeobj__72);
-  Py_VISIT(traverse_module_state->__pyx_codeobj__73);
-  Py_VISIT(traverse_module_state->__pyx_codeobj__75);
-  Py_VISIT(traverse_module_state->__pyx_codeobj__77);
-  Py_VISIT(traverse_module_state->__pyx_codeobj__79);
-  Py_VISIT(traverse_module_state->__pyx_codeobj__81);
-  Py_VISIT(traverse_module_state->__pyx_codeobj__83);
-  Py_VISIT(traverse_module_state->__pyx_codeobj__85);
-  Py_VISIT(traverse_module_state->__pyx_codeobj__87);
-  Py_VISIT(traverse_module_state->__pyx_codeobj__90);
-  Py_VISIT(traverse_module_state->__pyx_codeobj__92);
-  Py_VISIT(traverse_module_state->__pyx_codeobj__94);
-  Py_VISIT(traverse_module_state->__pyx_codeobj__97);
-  Py_VISIT(traverse_module_state->__pyx_codeobj__100);
-  Py_VISIT(traverse_module_state->__pyx_codeobj__103);
-  Py_VISIT(traverse_module_state->__pyx_codeobj__105);
-  Py_VISIT(traverse_module_state->__pyx_codeobj__107);
-  Py_VISIT(traverse_module_state->__pyx_codeobj__109);
-  Py_VISIT(traverse_module_state->__pyx_codeobj__111);
-  Py_VISIT(traverse_module_state->__pyx_codeobj__113);
-  Py_VISIT(traverse_module_state->__pyx_codeobj__116);
-  Py_VISIT(traverse_module_state->__pyx_codeobj__118);
-  Py_VISIT(traverse_module_state->__pyx_codeobj__120);
+  Py_VISIT(traverse_module_state->__pyx_codeobj__74);
+  Py_VISIT(traverse_module_state->__pyx_codeobj__76);
+  Py_VISIT(traverse_module_state->__pyx_codeobj__78);
+  Py_VISIT(traverse_module_state->__pyx_codeobj__80);
+  Py_VISIT(traverse_module_state->__pyx_codeobj__82);
+  Py_VISIT(traverse_module_state->__pyx_codeobj__84);
+  Py_VISIT(traverse_module_state->__pyx_codeobj__86);
+  Py_VISIT(traverse_module_state->__pyx_codeobj__89);
+  Py_VISIT(traverse_module_state->__pyx_codeobj__91);
+  Py_VISIT(traverse_module_state->__pyx_codeobj__93);
+  Py_VISIT(traverse_module_state->__pyx_codeobj__96);
+  Py_VISIT(traverse_module_state->__pyx_codeobj__99);
+  Py_VISIT(traverse_module_state->__pyx_codeobj__102);
+  Py_VISIT(traverse_module_state->__pyx_codeobj__104);
+  Py_VISIT(traverse_module_state->__pyx_codeobj__106);
+  Py_VISIT(traverse_module_state->__pyx_codeobj__108);
+  Py_VISIT(traverse_module_state->__pyx_codeobj__110);
+  Py_VISIT(traverse_module_state->__pyx_codeobj__112);
+  Py_VISIT(traverse_module_state->__pyx_codeobj__115);
+  Py_VISIT(traverse_module_state->__pyx_codeobj__117);
+  Py_VISIT(traverse_module_state->__pyx_codeobj__119);
   return 0;
 }
 #endif
@@ -5331,7 +5327,7 @@ static int __pyx_m_traverse(PyObject *m, visitproc visit, void *arg) {
 #define __pyx_kp_u__10 __pyx_mstate_global->__pyx_kp_u__10
 #define __pyx_kp_u__11 __pyx_mstate_global->__pyx_kp_u__11
 #define __pyx_kp_u__12 __pyx_mstate_global->__pyx_kp_u__12
-#define __pyx_n_s__121 __pyx_mstate_global->__pyx_n_s__121
+#define __pyx_n_s__120 __pyx_mstate_global->__pyx_n_s__120
 #define __pyx_kp_u__14 __pyx_mstate_global->__pyx_kp_u__14
 #define __pyx_kp_u__15 __pyx_mstate_global->__pyx_kp_u__15
 #define __pyx_kp_u__16 __pyx_mstate_global->__pyx_kp_u__16
@@ -5855,58 +5851,57 @@ static int __pyx_m_traverse(PyObject *m, visitproc visit, void *arg) {
 #define __pyx_tuple__67 __pyx_mstate_global->__pyx_tuple__67
 #define __pyx_tuple__68 __pyx_mstate_global->__pyx_tuple__68
 #define __pyx_tuple__70 __pyx_mstate_global->__pyx_tuple__70
-#define __pyx_tuple__74 __pyx_mstate_global->__pyx_tuple__74
-#define __pyx_tuple__76 __pyx_mstate_global->__pyx_tuple__76
-#define __pyx_tuple__78 __pyx_mstate_global->__pyx_tuple__78
-#define __pyx_tuple__80 __pyx_mstate_global->__pyx_tuple__80
-#define __pyx_tuple__82 __pyx_mstate_global->__pyx_tuple__82
-#define __pyx_tuple__84 __pyx_mstate_global->__pyx_tuple__84
-#define __pyx_tuple__86 __pyx_mstate_global->__pyx_tuple__86
+#define __pyx_tuple__73 __pyx_mstate_global->__pyx_tuple__73
+#define __pyx_tuple__75 __pyx_mstate_global->__pyx_tuple__75
+#define __pyx_tuple__77 __pyx_mstate_global->__pyx_tuple__77
+#define __pyx_tuple__79 __pyx_mstate_global->__pyx_tuple__79
+#define __pyx_tuple__81 __pyx_mstate_global->__pyx_tuple__81
+#define __pyx_tuple__83 __pyx_mstate_global->__pyx_tuple__83
+#define __pyx_tuple__85 __pyx_mstate_global->__pyx_tuple__85
+#define __pyx_tuple__87 __pyx_mstate_global->__pyx_tuple__87
 #define __pyx_tuple__88 __pyx_mstate_global->__pyx_tuple__88
-#define __pyx_tuple__89 __pyx_mstate_global->__pyx_tuple__89
-#define __pyx_tuple__91 __pyx_mstate_global->__pyx_tuple__91
-#define __pyx_tuple__93 __pyx_mstate_global->__pyx_tuple__93
+#define __pyx_tuple__90 __pyx_mstate_global->__pyx_tuple__90
+#define __pyx_tuple__92 __pyx_mstate_global->__pyx_tuple__92
+#define __pyx_tuple__94 __pyx_mstate_global->__pyx_tuple__94
 #define __pyx_tuple__95 __pyx_mstate_global->__pyx_tuple__95
-#define __pyx_tuple__96 __pyx_mstate_global->__pyx_tuple__96
+#define __pyx_tuple__97 __pyx_mstate_global->__pyx_tuple__97
 #define __pyx_tuple__98 __pyx_mstate_global->__pyx_tuple__98
-#define __pyx_tuple__99 __pyx_mstate_global->__pyx_tuple__99
+#define __pyx_tuple__100 __pyx_mstate_global->__pyx_tuple__100
 #define __pyx_tuple__101 __pyx_mstate_global->__pyx_tuple__101
-#define __pyx_tuple__102 __pyx_mstate_global->__pyx_tuple__102
-#define __pyx_tuple__104 __pyx_mstate_global->__pyx_tuple__104
-#define __pyx_tuple__106 __pyx_mstate_global->__pyx_tuple__106
-#define __pyx_tuple__108 __pyx_mstate_global->__pyx_tuple__108
-#define __pyx_tuple__110 __pyx_mstate_global->__pyx_tuple__110
-#define __pyx_tuple__112 __pyx_mstate_global->__pyx_tuple__112
+#define __pyx_tuple__103 __pyx_mstate_global->__pyx_tuple__103
+#define __pyx_tuple__105 __pyx_mstate_global->__pyx_tuple__105
+#define __pyx_tuple__107 __pyx_mstate_global->__pyx_tuple__107
+#define __pyx_tuple__109 __pyx_mstate_global->__pyx_tuple__109
+#define __pyx_tuple__111 __pyx_mstate_global->__pyx_tuple__111
+#define __pyx_tuple__113 __pyx_mstate_global->__pyx_tuple__113
 #define __pyx_tuple__114 __pyx_mstate_global->__pyx_tuple__114
-#define __pyx_tuple__115 __pyx_mstate_global->__pyx_tuple__115
-#define __pyx_tuple__117 __pyx_mstate_global->__pyx_tuple__117
-#define __pyx_tuple__119 __pyx_mstate_global->__pyx_tuple__119
+#define __pyx_tuple__116 __pyx_mstate_global->__pyx_tuple__116
+#define __pyx_tuple__118 __pyx_mstate_global->__pyx_tuple__118
 #define __pyx_codeobj__66 __pyx_mstate_global->__pyx_codeobj__66
 #define __pyx_codeobj__69 __pyx_mstate_global->__pyx_codeobj__69
 #define __pyx_codeobj__71 __pyx_mstate_global->__pyx_codeobj__71
 #define __pyx_codeobj__72 __pyx_mstate_global->__pyx_codeobj__72
-#define __pyx_codeobj__73 __pyx_mstate_global->__pyx_codeobj__73
-#define __pyx_codeobj__75 __pyx_mstate_global->__pyx_codeobj__75
-#define __pyx_codeobj__77 __pyx_mstate_global->__pyx_codeobj__77
-#define __pyx_codeobj__79 __pyx_mstate_global->__pyx_codeobj__79
-#define __pyx_codeobj__81 __pyx_mstate_global->__pyx_codeobj__81
-#define __pyx_codeobj__83 __pyx_mstate_global->__pyx_codeobj__83
-#define __pyx_codeobj__85 __pyx_mstate_global->__pyx_codeobj__85
-#define __pyx_codeobj__87 __pyx_mstate_global->__pyx_codeobj__87
-#define __pyx_codeobj__90 __pyx_mstate_global->__pyx_codeobj__90
-#define __pyx_codeobj__92 __pyx_mstate_global->__pyx_codeobj__92
-#define __pyx_codeobj__94 __pyx_mstate_global->__pyx_codeobj__94
-#define __pyx_codeobj__97 __pyx_mstate_global->__pyx_codeobj__97
-#define __pyx_codeobj__100 __pyx_mstate_global->__pyx_codeobj__100
-#define __pyx_codeobj__103 __pyx_mstate_global->__pyx_codeobj__103
-#define __pyx_codeobj__105 __pyx_mstate_global->__pyx_codeobj__105
-#define __pyx_codeobj__107 __pyx_mstate_global->__pyx_codeobj__107
-#define __pyx_codeobj__109 __pyx_mstate_global->__pyx_codeobj__109
-#define __pyx_codeobj__111 __pyx_mstate_global->__pyx_codeobj__111
-#define __pyx_codeobj__113 __pyx_mstate_global->__pyx_codeobj__113
-#define __pyx_codeobj__116 __pyx_mstate_global->__pyx_codeobj__116
-#define __pyx_codeobj__118 __pyx_mstate_global->__pyx_codeobj__118
-#define __pyx_codeobj__120 __pyx_mstate_global->__pyx_codeobj__120
+#define __pyx_codeobj__74 __pyx_mstate_global->__pyx_codeobj__74
+#define __pyx_codeobj__76 __pyx_mstate_global->__pyx_codeobj__76
+#define __pyx_codeobj__78 __pyx_mstate_global->__pyx_codeobj__78
+#define __pyx_codeobj__80 __pyx_mstate_global->__pyx_codeobj__80
+#define __pyx_codeobj__82 __pyx_mstate_global->__pyx_codeobj__82
+#define __pyx_codeobj__84 __pyx_mstate_global->__pyx_codeobj__84
+#define __pyx_codeobj__86 __pyx_mstate_global->__pyx_codeobj__86
+#define __pyx_codeobj__89 __pyx_mstate_global->__pyx_codeobj__89
+#define __pyx_codeobj__91 __pyx_mstate_global->__pyx_codeobj__91
+#define __pyx_codeobj__93 __pyx_mstate_global->__pyx_codeobj__93
+#define __pyx_codeobj__96 __pyx_mstate_global->__pyx_codeobj__96
+#define __pyx_codeobj__99 __pyx_mstate_global->__pyx_codeobj__99
+#define __pyx_codeobj__102 __pyx_mstate_global->__pyx_codeobj__102
+#define __pyx_codeobj__104 __pyx_mstate_global->__pyx_codeobj__104
+#define __pyx_codeobj__106 __pyx_mstate_global->__pyx_codeobj__106
+#define __pyx_codeobj__108 __pyx_mstate_global->__pyx_codeobj__108
+#define __pyx_codeobj__110 __pyx_mstate_global->__pyx_codeobj__110
+#define __pyx_codeobj__112 __pyx_mstate_global->__pyx_codeobj__112
+#define __pyx_codeobj__115 __pyx_mstate_global->__pyx_codeobj__115
+#define __pyx_codeobj__117 __pyx_mstate_global->__pyx_codeobj__117
+#define __pyx_codeobj__119 __pyx_mstate_global->__pyx_codeobj__119
 /* #### Code section: module_code ### */
 
 /* "cRandPerfTabs.pyx":34
@@ -8259,7 +8254,7 @@ static PyObject *__pyx_pf_13cRandPerfTabs_19cPerformanceTableau_6convertInsite2S
  *         self.convertEvaluation2Decimal()
  *         self.convertDiscriminationThresholds2Decimal()             # <<<<<<<<<<<<<<
  * 
- *     def convertInsite2BigData(self):
+ * ##    def convertInsite2BigData(self):
  */
   __pyx_t_2 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_n_s_convertDiscriminationThresholds2_2); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 120, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
@@ -8310,247 +8305,8 @@ static PyObject *__pyx_pf_13cRandPerfTabs_19cPerformanceTableau_6convertInsite2S
   return __pyx_r;
 }
 
-/* "cRandPerfTabs.pyx":122
- *         self.convertDiscriminationThresholds2Decimal()
- * 
- *     def convertInsite2BigData(self):             # <<<<<<<<<<<<<<
- *         """
- *         Converts in site weights, evaluations and discrimination thresholds to bigData float format.
- */
-
-/* Python wrapper */
-static PyObject *__pyx_pw_13cRandPerfTabs_19cPerformanceTableau_9convertInsite2BigData(PyObject *__pyx_self, 
-#if CYTHON_METH_FASTCALL
-PyObject *const *__pyx_args, Py_ssize_t __pyx_nargs, PyObject *__pyx_kwds
-#else
-PyObject *__pyx_args, PyObject *__pyx_kwds
-#endif
-); /*proto*/
-PyDoc_STRVAR(__pyx_doc_13cRandPerfTabs_19cPerformanceTableau_8convertInsite2BigData, "\n        Converts in site weights, evaluations and discrimination thresholds to bigData float format.\n        ");
-static PyMethodDef __pyx_mdef_13cRandPerfTabs_19cPerformanceTableau_9convertInsite2BigData = {"convertInsite2BigData", (PyCFunction)(void*)(__Pyx_PyCFunction_FastCallWithKeywords)__pyx_pw_13cRandPerfTabs_19cPerformanceTableau_9convertInsite2BigData, __Pyx_METH_FASTCALL|METH_KEYWORDS, __pyx_doc_13cRandPerfTabs_19cPerformanceTableau_8convertInsite2BigData};
-static PyObject *__pyx_pw_13cRandPerfTabs_19cPerformanceTableau_9convertInsite2BigData(PyObject *__pyx_self, 
-#if CYTHON_METH_FASTCALL
-PyObject *const *__pyx_args, Py_ssize_t __pyx_nargs, PyObject *__pyx_kwds
-#else
-PyObject *__pyx_args, PyObject *__pyx_kwds
-#endif
-) {
-  PyObject *__pyx_v_self = 0;
-  #if !CYTHON_METH_FASTCALL
-  CYTHON_UNUSED Py_ssize_t __pyx_nargs;
-  #endif
-  CYTHON_UNUSED PyObject *const *__pyx_kwvalues;
-  PyObject* values[1] = {0};
-  int __pyx_lineno = 0;
-  const char *__pyx_filename = NULL;
-  int __pyx_clineno = 0;
-  PyObject *__pyx_r = 0;
-  __Pyx_RefNannyDeclarations
-  __Pyx_RefNannySetupContext("convertInsite2BigData (wrapper)", 0);
-  #if !CYTHON_METH_FASTCALL
-  #if CYTHON_ASSUME_SAFE_MACROS
-  __pyx_nargs = PyTuple_GET_SIZE(__pyx_args);
-  #else
-  __pyx_nargs = PyTuple_Size(__pyx_args); if (unlikely(__pyx_nargs < 0)) return NULL;
-  #endif
-  #endif
-  __pyx_kwvalues = __Pyx_KwValues_FASTCALL(__pyx_args, __pyx_nargs);
-  {
-    PyObject **__pyx_pyargnames[] = {&__pyx_n_s_self,0};
-    if (__pyx_kwds) {
-      Py_ssize_t kw_args;
-      switch (__pyx_nargs) {
-        case  1: values[0] = __Pyx_Arg_FASTCALL(__pyx_args, 0);
-        CYTHON_FALLTHROUGH;
-        case  0: break;
-        default: goto __pyx_L5_argtuple_error;
-      }
-      kw_args = __Pyx_NumKwargs_FASTCALL(__pyx_kwds);
-      switch (__pyx_nargs) {
-        case  0:
-        if (likely((values[0] = __Pyx_GetKwValue_FASTCALL(__pyx_kwds, __pyx_kwvalues, __pyx_n_s_self)) != 0)) {
-          (void)__Pyx_Arg_NewRef_FASTCALL(values[0]);
-          kw_args--;
-        }
-        else if (unlikely(PyErr_Occurred())) __PYX_ERR(0, 122, __pyx_L3_error)
-        else goto __pyx_L5_argtuple_error;
-      }
-      if (unlikely(kw_args > 0)) {
-        const Py_ssize_t kwd_pos_args = __pyx_nargs;
-        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_kwvalues, __pyx_pyargnames, 0, values + 0, kwd_pos_args, "convertInsite2BigData") < 0)) __PYX_ERR(0, 122, __pyx_L3_error)
-      }
-    } else if (unlikely(__pyx_nargs != 1)) {
-      goto __pyx_L5_argtuple_error;
-    } else {
-      values[0] = __Pyx_Arg_FASTCALL(__pyx_args, 0);
-    }
-    __pyx_v_self = values[0];
-  }
-  goto __pyx_L6_skip;
-  __pyx_L5_argtuple_error:;
-  __Pyx_RaiseArgtupleInvalid("convertInsite2BigData", 1, 1, 1, __pyx_nargs); __PYX_ERR(0, 122, __pyx_L3_error)
-  __pyx_L6_skip:;
-  goto __pyx_L4_argument_unpacking_done;
-  __pyx_L3_error:;
-  {
-    Py_ssize_t __pyx_temp;
-    for (__pyx_temp=0; __pyx_temp < (Py_ssize_t)(sizeof(values)/sizeof(values[0])); ++__pyx_temp) {
-      __Pyx_Arg_XDECREF_FASTCALL(values[__pyx_temp]);
-    }
-  }
-  __Pyx_AddTraceback("cRandPerfTabs.cPerformanceTableau.convertInsite2BigData", __pyx_clineno, __pyx_lineno, __pyx_filename);
-  __Pyx_RefNannyFinishContext();
-  return NULL;
-  __pyx_L4_argument_unpacking_done:;
-  __pyx_r = __pyx_pf_13cRandPerfTabs_19cPerformanceTableau_8convertInsite2BigData(__pyx_self, __pyx_v_self);
-
-  /* function exit code */
-  {
-    Py_ssize_t __pyx_temp;
-    for (__pyx_temp=0; __pyx_temp < (Py_ssize_t)(sizeof(values)/sizeof(values[0])); ++__pyx_temp) {
-      __Pyx_Arg_XDECREF_FASTCALL(values[__pyx_temp]);
-    }
-  }
-  __Pyx_RefNannyFinishContext();
-  return __pyx_r;
-}
-
-static PyObject *__pyx_pf_13cRandPerfTabs_19cPerformanceTableau_8convertInsite2BigData(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_self) {
-  PyObject *__pyx_r = NULL;
-  __Pyx_RefNannyDeclarations
-  PyObject *__pyx_t_1 = NULL;
-  PyObject *__pyx_t_2 = NULL;
-  PyObject *__pyx_t_3 = NULL;
-  int __pyx_t_4;
-  int __pyx_lineno = 0;
-  const char *__pyx_filename = NULL;
-  int __pyx_clineno = 0;
-  __Pyx_RefNannySetupContext("convertInsite2BigData", 1);
-
-  /* "cRandPerfTabs.pyx":126
- *         Converts in site weights, evaluations and discrimination thresholds to bigData float format.
- *         """
- *         self.convertWeight2Decimal()             # <<<<<<<<<<<<<<
- *         self.convertEvaluation2Decimal()
- *         self.convertDiscriminationThresholds2Decimal()
- */
-  __pyx_t_2 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_n_s_convertWeight2Decimal); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 126, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_t_2);
-  __pyx_t_3 = NULL;
-  __pyx_t_4 = 0;
-  #if CYTHON_UNPACK_METHODS
-  if (likely(PyMethod_Check(__pyx_t_2))) {
-    __pyx_t_3 = PyMethod_GET_SELF(__pyx_t_2);
-    if (likely(__pyx_t_3)) {
-      PyObject* function = PyMethod_GET_FUNCTION(__pyx_t_2);
-      __Pyx_INCREF(__pyx_t_3);
-      __Pyx_INCREF(function);
-      __Pyx_DECREF_SET(__pyx_t_2, function);
-      __pyx_t_4 = 1;
-    }
-  }
-  #endif
-  {
-    PyObject *__pyx_callargs[2] = {__pyx_t_3, NULL};
-    __pyx_t_1 = __Pyx_PyObject_FastCall(__pyx_t_2, __pyx_callargs+1-__pyx_t_4, 0+__pyx_t_4);
-    __Pyx_XDECREF(__pyx_t_3); __pyx_t_3 = 0;
-    if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 126, __pyx_L1_error)
-    __Pyx_GOTREF(__pyx_t_1);
-    __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
-  }
-  __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
-
-  /* "cRandPerfTabs.pyx":127
- *         """
- *         self.convertWeight2Decimal()
- *         self.convertEvaluation2Decimal()             # <<<<<<<<<<<<<<
- *         self.convertDiscriminationThresholds2Decimal()
- * 
- */
-  __pyx_t_2 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_n_s_convertEvaluation2Decimal); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 127, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_t_2);
-  __pyx_t_3 = NULL;
-  __pyx_t_4 = 0;
-  #if CYTHON_UNPACK_METHODS
-  if (likely(PyMethod_Check(__pyx_t_2))) {
-    __pyx_t_3 = PyMethod_GET_SELF(__pyx_t_2);
-    if (likely(__pyx_t_3)) {
-      PyObject* function = PyMethod_GET_FUNCTION(__pyx_t_2);
-      __Pyx_INCREF(__pyx_t_3);
-      __Pyx_INCREF(function);
-      __Pyx_DECREF_SET(__pyx_t_2, function);
-      __pyx_t_4 = 1;
-    }
-  }
-  #endif
-  {
-    PyObject *__pyx_callargs[2] = {__pyx_t_3, NULL};
-    __pyx_t_1 = __Pyx_PyObject_FastCall(__pyx_t_2, __pyx_callargs+1-__pyx_t_4, 0+__pyx_t_4);
-    __Pyx_XDECREF(__pyx_t_3); __pyx_t_3 = 0;
-    if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 127, __pyx_L1_error)
-    __Pyx_GOTREF(__pyx_t_1);
-    __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
-  }
-  __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
-
-  /* "cRandPerfTabs.pyx":128
- *         self.convertWeight2Decimal()
- *         self.convertEvaluation2Decimal()
- *         self.convertDiscriminationThresholds2Decimal()             # <<<<<<<<<<<<<<
- * 
- *     def convertWeight2Integer(self):
- */
-  __pyx_t_2 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_n_s_convertDiscriminationThresholds2_2); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 128, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_t_2);
-  __pyx_t_3 = NULL;
-  __pyx_t_4 = 0;
-  #if CYTHON_UNPACK_METHODS
-  if (likely(PyMethod_Check(__pyx_t_2))) {
-    __pyx_t_3 = PyMethod_GET_SELF(__pyx_t_2);
-    if (likely(__pyx_t_3)) {
-      PyObject* function = PyMethod_GET_FUNCTION(__pyx_t_2);
-      __Pyx_INCREF(__pyx_t_3);
-      __Pyx_INCREF(function);
-      __Pyx_DECREF_SET(__pyx_t_2, function);
-      __pyx_t_4 = 1;
-    }
-  }
-  #endif
-  {
-    PyObject *__pyx_callargs[2] = {__pyx_t_3, NULL};
-    __pyx_t_1 = __Pyx_PyObject_FastCall(__pyx_t_2, __pyx_callargs+1-__pyx_t_4, 0+__pyx_t_4);
-    __Pyx_XDECREF(__pyx_t_3); __pyx_t_3 = 0;
-    if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 128, __pyx_L1_error)
-    __Pyx_GOTREF(__pyx_t_1);
-    __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
-  }
-  __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
-
-  /* "cRandPerfTabs.pyx":122
- *         self.convertDiscriminationThresholds2Decimal()
- * 
- *     def convertInsite2BigData(self):             # <<<<<<<<<<<<<<
- *         """
- *         Converts in site weights, evaluations and discrimination thresholds to bigData float format.
- */
-
-  /* function exit code */
-  __pyx_r = Py_None; __Pyx_INCREF(Py_None);
-  goto __pyx_L0;
-  __pyx_L1_error:;
-  __Pyx_XDECREF(__pyx_t_1);
-  __Pyx_XDECREF(__pyx_t_2);
-  __Pyx_XDECREF(__pyx_t_3);
-  __Pyx_AddTraceback("cRandPerfTabs.cPerformanceTableau.convertInsite2BigData", __pyx_clineno, __pyx_lineno, __pyx_filename);
-  __pyx_r = NULL;
-  __pyx_L0:;
-  __Pyx_XGIVEREF(__pyx_r);
-  __Pyx_RefNannyFinishContext();
-  return __pyx_r;
-}
-
 /* "cRandPerfTabs.pyx":130
- *         self.convertDiscriminationThresholds2Decimal()
+ * ##        self.convertDiscriminationThresholds2Decimal()
  * 
  *     def convertWeight2Integer(self):             # <<<<<<<<<<<<<<
  *         """
@@ -8558,16 +8314,16 @@ static PyObject *__pyx_pf_13cRandPerfTabs_19cPerformanceTableau_8convertInsite2B
  */
 
 /* Python wrapper */
-static PyObject *__pyx_pw_13cRandPerfTabs_19cPerformanceTableau_11convertWeight2Integer(PyObject *__pyx_self, 
+static PyObject *__pyx_pw_13cRandPerfTabs_19cPerformanceTableau_9convertWeight2Integer(PyObject *__pyx_self, 
 #if CYTHON_METH_FASTCALL
 PyObject *const *__pyx_args, Py_ssize_t __pyx_nargs, PyObject *__pyx_kwds
 #else
 PyObject *__pyx_args, PyObject *__pyx_kwds
 #endif
 ); /*proto*/
-PyDoc_STRVAR(__pyx_doc_13cRandPerfTabs_19cPerformanceTableau_10convertWeight2Integer, "\n        Converts significance weights from Decimal\n        to int format.\n        ");
-static PyMethodDef __pyx_mdef_13cRandPerfTabs_19cPerformanceTableau_11convertWeight2Integer = {"convertWeight2Integer", (PyCFunction)(void*)(__Pyx_PyCFunction_FastCallWithKeywords)__pyx_pw_13cRandPerfTabs_19cPerformanceTableau_11convertWeight2Integer, __Pyx_METH_FASTCALL|METH_KEYWORDS, __pyx_doc_13cRandPerfTabs_19cPerformanceTableau_10convertWeight2Integer};
-static PyObject *__pyx_pw_13cRandPerfTabs_19cPerformanceTableau_11convertWeight2Integer(PyObject *__pyx_self, 
+PyDoc_STRVAR(__pyx_doc_13cRandPerfTabs_19cPerformanceTableau_8convertWeight2Integer, "\n        Converts significance weights from Decimal\n        to int format.\n        ");
+static PyMethodDef __pyx_mdef_13cRandPerfTabs_19cPerformanceTableau_9convertWeight2Integer = {"convertWeight2Integer", (PyCFunction)(void*)(__Pyx_PyCFunction_FastCallWithKeywords)__pyx_pw_13cRandPerfTabs_19cPerformanceTableau_9convertWeight2Integer, __Pyx_METH_FASTCALL|METH_KEYWORDS, __pyx_doc_13cRandPerfTabs_19cPerformanceTableau_8convertWeight2Integer};
+static PyObject *__pyx_pw_13cRandPerfTabs_19cPerformanceTableau_9convertWeight2Integer(PyObject *__pyx_self, 
 #if CYTHON_METH_FASTCALL
 PyObject *const *__pyx_args, Py_ssize_t __pyx_nargs, PyObject *__pyx_kwds
 #else
@@ -8641,7 +8397,7 @@ PyObject *__pyx_args, PyObject *__pyx_kwds
   __Pyx_RefNannyFinishContext();
   return NULL;
   __pyx_L4_argument_unpacking_done:;
-  __pyx_r = __pyx_pf_13cRandPerfTabs_19cPerformanceTableau_10convertWeight2Integer(__pyx_self, __pyx_v_self);
+  __pyx_r = __pyx_pf_13cRandPerfTabs_19cPerformanceTableau_8convertWeight2Integer(__pyx_self, __pyx_v_self);
 
   /* function exit code */
   {
@@ -8654,7 +8410,7 @@ PyObject *__pyx_args, PyObject *__pyx_kwds
   return __pyx_r;
 }
 
-static PyObject *__pyx_pf_13cRandPerfTabs_19cPerformanceTableau_10convertWeight2Integer(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_self) {
+static PyObject *__pyx_pf_13cRandPerfTabs_19cPerformanceTableau_8convertWeight2Integer(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_self) {
   PyObject *__pyx_v_criteria = NULL;
   PyObject *__pyx_v_g = NULL;
   PyObject *__pyx_r = NULL;
@@ -8784,7 +8540,7 @@ static PyObject *__pyx_pf_13cRandPerfTabs_19cPerformanceTableau_10convertWeight2
   if (__Pyx_PyObject_SetAttrStr(__pyx_v_self, __pyx_n_s_criteria, __pyx_v_criteria) < 0) __PYX_ERR(0, 138, __pyx_L1_error)
 
   /* "cRandPerfTabs.pyx":130
- *         self.convertDiscriminationThresholds2Decimal()
+ * ##        self.convertDiscriminationThresholds2Decimal()
  * 
  *     def convertWeight2Integer(self):             # <<<<<<<<<<<<<<
  *         """
@@ -8817,16 +8573,16 @@ static PyObject *__pyx_pf_13cRandPerfTabs_19cPerformanceTableau_10convertWeight2
  */
 
 /* Python wrapper */
-static PyObject *__pyx_pw_13cRandPerfTabs_19cPerformanceTableau_13convertWeight2Decimal(PyObject *__pyx_self, 
+static PyObject *__pyx_pw_13cRandPerfTabs_19cPerformanceTableau_11convertWeight2Decimal(PyObject *__pyx_self, 
 #if CYTHON_METH_FASTCALL
 PyObject *const *__pyx_args, Py_ssize_t __pyx_nargs, PyObject *__pyx_kwds
 #else
 PyObject *__pyx_args, PyObject *__pyx_kwds
 #endif
 ); /*proto*/
-PyDoc_STRVAR(__pyx_doc_13cRandPerfTabs_19cPerformanceTableau_12convertWeight2Decimal, "\n        Converts significance weights from int to  Decimal format.\n        ");
-static PyMethodDef __pyx_mdef_13cRandPerfTabs_19cPerformanceTableau_13convertWeight2Decimal = {"convertWeight2Decimal", (PyCFunction)(void*)(__Pyx_PyCFunction_FastCallWithKeywords)__pyx_pw_13cRandPerfTabs_19cPerformanceTableau_13convertWeight2Decimal, __Pyx_METH_FASTCALL|METH_KEYWORDS, __pyx_doc_13cRandPerfTabs_19cPerformanceTableau_12convertWeight2Decimal};
-static PyObject *__pyx_pw_13cRandPerfTabs_19cPerformanceTableau_13convertWeight2Decimal(PyObject *__pyx_self, 
+PyDoc_STRVAR(__pyx_doc_13cRandPerfTabs_19cPerformanceTableau_10convertWeight2Decimal, "\n        Converts significance weights from int to  Decimal format.\n        ");
+static PyMethodDef __pyx_mdef_13cRandPerfTabs_19cPerformanceTableau_11convertWeight2Decimal = {"convertWeight2Decimal", (PyCFunction)(void*)(__Pyx_PyCFunction_FastCallWithKeywords)__pyx_pw_13cRandPerfTabs_19cPerformanceTableau_11convertWeight2Decimal, __Pyx_METH_FASTCALL|METH_KEYWORDS, __pyx_doc_13cRandPerfTabs_19cPerformanceTableau_10convertWeight2Decimal};
+static PyObject *__pyx_pw_13cRandPerfTabs_19cPerformanceTableau_11convertWeight2Decimal(PyObject *__pyx_self, 
 #if CYTHON_METH_FASTCALL
 PyObject *const *__pyx_args, Py_ssize_t __pyx_nargs, PyObject *__pyx_kwds
 #else
@@ -8900,7 +8656,7 @@ PyObject *__pyx_args, PyObject *__pyx_kwds
   __Pyx_RefNannyFinishContext();
   return NULL;
   __pyx_L4_argument_unpacking_done:;
-  __pyx_r = __pyx_pf_13cRandPerfTabs_19cPerformanceTableau_12convertWeight2Decimal(__pyx_self, __pyx_v_self);
+  __pyx_r = __pyx_pf_13cRandPerfTabs_19cPerformanceTableau_10convertWeight2Decimal(__pyx_self, __pyx_v_self);
 
   /* function exit code */
   {
@@ -8913,7 +8669,7 @@ PyObject *__pyx_args, PyObject *__pyx_kwds
   return __pyx_r;
 }
 
-static PyObject *__pyx_pf_13cRandPerfTabs_19cPerformanceTableau_12convertWeight2Decimal(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_self) {
+static PyObject *__pyx_pf_13cRandPerfTabs_19cPerformanceTableau_10convertWeight2Decimal(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_self) {
   PyObject *__pyx_v_Decimal = NULL;
   PyObject *__pyx_v_criteria = NULL;
   PyObject *__pyx_v_g = NULL;
@@ -9129,16 +8885,16 @@ static PyObject *__pyx_pf_13cRandPerfTabs_19cPerformanceTableau_12convertWeight2
  */
 
 /* Python wrapper */
-static PyObject *__pyx_pw_13cRandPerfTabs_19cPerformanceTableau_15convertEvaluation2Float(PyObject *__pyx_self, 
+static PyObject *__pyx_pw_13cRandPerfTabs_19cPerformanceTableau_13convertEvaluation2Float(PyObject *__pyx_self, 
 #if CYTHON_METH_FASTCALL
 PyObject *const *__pyx_args, Py_ssize_t __pyx_nargs, PyObject *__pyx_kwds
 #else
 PyObject *__pyx_args, PyObject *__pyx_kwds
 #endif
 ); /*proto*/
-PyDoc_STRVAR(__pyx_doc_13cRandPerfTabs_19cPerformanceTableau_14convertEvaluation2Float, "\n        Converts evaluations from Decimal to float format.\n        ");
-static PyMethodDef __pyx_mdef_13cRandPerfTabs_19cPerformanceTableau_15convertEvaluation2Float = {"convertEvaluation2Float", (PyCFunction)(void*)(__Pyx_PyCFunction_FastCallWithKeywords)__pyx_pw_13cRandPerfTabs_19cPerformanceTableau_15convertEvaluation2Float, __Pyx_METH_FASTCALL|METH_KEYWORDS, __pyx_doc_13cRandPerfTabs_19cPerformanceTableau_14convertEvaluation2Float};
-static PyObject *__pyx_pw_13cRandPerfTabs_19cPerformanceTableau_15convertEvaluation2Float(PyObject *__pyx_self, 
+PyDoc_STRVAR(__pyx_doc_13cRandPerfTabs_19cPerformanceTableau_12convertEvaluation2Float, "\n        Converts evaluations from Decimal to float format.\n        ");
+static PyMethodDef __pyx_mdef_13cRandPerfTabs_19cPerformanceTableau_13convertEvaluation2Float = {"convertEvaluation2Float", (PyCFunction)(void*)(__Pyx_PyCFunction_FastCallWithKeywords)__pyx_pw_13cRandPerfTabs_19cPerformanceTableau_13convertEvaluation2Float, __Pyx_METH_FASTCALL|METH_KEYWORDS, __pyx_doc_13cRandPerfTabs_19cPerformanceTableau_12convertEvaluation2Float};
+static PyObject *__pyx_pw_13cRandPerfTabs_19cPerformanceTableau_13convertEvaluation2Float(PyObject *__pyx_self, 
 #if CYTHON_METH_FASTCALL
 PyObject *const *__pyx_args, Py_ssize_t __pyx_nargs, PyObject *__pyx_kwds
 #else
@@ -9212,7 +8968,7 @@ PyObject *__pyx_args, PyObject *__pyx_kwds
   __Pyx_RefNannyFinishContext();
   return NULL;
   __pyx_L4_argument_unpacking_done:;
-  __pyx_r = __pyx_pf_13cRandPerfTabs_19cPerformanceTableau_14convertEvaluation2Float(__pyx_self, __pyx_v_self);
+  __pyx_r = __pyx_pf_13cRandPerfTabs_19cPerformanceTableau_12convertEvaluation2Float(__pyx_self, __pyx_v_self);
 
   /* function exit code */
   {
@@ -9225,7 +8981,7 @@ PyObject *__pyx_args, PyObject *__pyx_kwds
   return __pyx_r;
 }
 
-static PyObject *__pyx_pf_13cRandPerfTabs_19cPerformanceTableau_14convertEvaluation2Float(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_self) {
+static PyObject *__pyx_pf_13cRandPerfTabs_19cPerformanceTableau_12convertEvaluation2Float(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_self) {
   CYTHON_UNUSED PyObject *__pyx_v_Decimal = NULL;
   PyObject *__pyx_v_evaluation = NULL;
   PyObject *__pyx_v_actions = NULL;
@@ -9560,16 +9316,16 @@ static PyObject *__pyx_pf_13cRandPerfTabs_19cPerformanceTableau_14convertEvaluat
  */
 
 /* Python wrapper */
-static PyObject *__pyx_pw_13cRandPerfTabs_19cPerformanceTableau_17convertEvaluation2Decimal(PyObject *__pyx_self, 
+static PyObject *__pyx_pw_13cRandPerfTabs_19cPerformanceTableau_15convertEvaluation2Decimal(PyObject *__pyx_self, 
 #if CYTHON_METH_FASTCALL
 PyObject *const *__pyx_args, Py_ssize_t __pyx_nargs, PyObject *__pyx_kwds
 #else
 PyObject *__pyx_args, PyObject *__pyx_kwds
 #endif
 ); /*proto*/
-PyDoc_STRVAR(__pyx_doc_13cRandPerfTabs_19cPerformanceTableau_16convertEvaluation2Decimal, "\n        Converts evaluations from float to Decimal format.\n        ");
-static PyMethodDef __pyx_mdef_13cRandPerfTabs_19cPerformanceTableau_17convertEvaluation2Decimal = {"convertEvaluation2Decimal", (PyCFunction)(void*)(__Pyx_PyCFunction_FastCallWithKeywords)__pyx_pw_13cRandPerfTabs_19cPerformanceTableau_17convertEvaluation2Decimal, __Pyx_METH_FASTCALL|METH_KEYWORDS, __pyx_doc_13cRandPerfTabs_19cPerformanceTableau_16convertEvaluation2Decimal};
-static PyObject *__pyx_pw_13cRandPerfTabs_19cPerformanceTableau_17convertEvaluation2Decimal(PyObject *__pyx_self, 
+PyDoc_STRVAR(__pyx_doc_13cRandPerfTabs_19cPerformanceTableau_14convertEvaluation2Decimal, "\n        Converts evaluations from float to Decimal format.\n        ");
+static PyMethodDef __pyx_mdef_13cRandPerfTabs_19cPerformanceTableau_15convertEvaluation2Decimal = {"convertEvaluation2Decimal", (PyCFunction)(void*)(__Pyx_PyCFunction_FastCallWithKeywords)__pyx_pw_13cRandPerfTabs_19cPerformanceTableau_15convertEvaluation2Decimal, __Pyx_METH_FASTCALL|METH_KEYWORDS, __pyx_doc_13cRandPerfTabs_19cPerformanceTableau_14convertEvaluation2Decimal};
+static PyObject *__pyx_pw_13cRandPerfTabs_19cPerformanceTableau_15convertEvaluation2Decimal(PyObject *__pyx_self, 
 #if CYTHON_METH_FASTCALL
 PyObject *const *__pyx_args, Py_ssize_t __pyx_nargs, PyObject *__pyx_kwds
 #else
@@ -9662,7 +9418,7 @@ PyObject *__pyx_args, PyObject *__pyx_kwds
   __Pyx_RefNannyFinishContext();
   return NULL;
   __pyx_L4_argument_unpacking_done:;
-  __pyx_r = __pyx_pf_13cRandPerfTabs_19cPerformanceTableau_16convertEvaluation2Decimal(__pyx_self, __pyx_v_self, __pyx_v_ndigits);
+  __pyx_r = __pyx_pf_13cRandPerfTabs_19cPerformanceTableau_14convertEvaluation2Decimal(__pyx_self, __pyx_v_self, __pyx_v_ndigits);
 
   /* function exit code */
   {
@@ -9675,7 +9431,7 @@ PyObject *__pyx_args, PyObject *__pyx_kwds
   return __pyx_r;
 }
 
-static PyObject *__pyx_pf_13cRandPerfTabs_19cPerformanceTableau_16convertEvaluation2Decimal(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_self, int __pyx_v_ndigits) {
+static PyObject *__pyx_pf_13cRandPerfTabs_19cPerformanceTableau_14convertEvaluation2Decimal(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_self, int __pyx_v_ndigits) {
   int __pyx_v_x;
   PyObject *__pyx_v_Decimal = NULL;
   PyObject *__pyx_v_evaluation = NULL;
@@ -10056,16 +9812,16 @@ static PyObject *__pyx_pf_13cRandPerfTabs_19cPerformanceTableau_16convertEvaluat
  */
 
 /* Python wrapper */
-static PyObject *__pyx_pw_13cRandPerfTabs_19cPerformanceTableau_19convertDiscriminationThresholds2Float(PyObject *__pyx_self, 
+static PyObject *__pyx_pw_13cRandPerfTabs_19cPerformanceTableau_17convertDiscriminationThresholds2Float(PyObject *__pyx_self, 
 #if CYTHON_METH_FASTCALL
 PyObject *const *__pyx_args, Py_ssize_t __pyx_nargs, PyObject *__pyx_kwds
 #else
 PyObject *__pyx_args, PyObject *__pyx_kwds
 #endif
 ); /*proto*/
-PyDoc_STRVAR(__pyx_doc_13cRandPerfTabs_19cPerformanceTableau_18convertDiscriminationThresholds2Float, "\n        Converts perrformance discrimination thresholds from Decimal to float format.\n        ");
-static PyMethodDef __pyx_mdef_13cRandPerfTabs_19cPerformanceTableau_19convertDiscriminationThresholds2Float = {"convertDiscriminationThresholds2Float", (PyCFunction)(void*)(__Pyx_PyCFunction_FastCallWithKeywords)__pyx_pw_13cRandPerfTabs_19cPerformanceTableau_19convertDiscriminationThresholds2Float, __Pyx_METH_FASTCALL|METH_KEYWORDS, __pyx_doc_13cRandPerfTabs_19cPerformanceTableau_18convertDiscriminationThresholds2Float};
-static PyObject *__pyx_pw_13cRandPerfTabs_19cPerformanceTableau_19convertDiscriminationThresholds2Float(PyObject *__pyx_self, 
+PyDoc_STRVAR(__pyx_doc_13cRandPerfTabs_19cPerformanceTableau_16convertDiscriminationThresholds2Float, "\n        Converts perrformance discrimination thresholds from Decimal to float format.\n        ");
+static PyMethodDef __pyx_mdef_13cRandPerfTabs_19cPerformanceTableau_17convertDiscriminationThresholds2Float = {"convertDiscriminationThresholds2Float", (PyCFunction)(void*)(__Pyx_PyCFunction_FastCallWithKeywords)__pyx_pw_13cRandPerfTabs_19cPerformanceTableau_17convertDiscriminationThresholds2Float, __Pyx_METH_FASTCALL|METH_KEYWORDS, __pyx_doc_13cRandPerfTabs_19cPerformanceTableau_16convertDiscriminationThresholds2Float};
+static PyObject *__pyx_pw_13cRandPerfTabs_19cPerformanceTableau_17convertDiscriminationThresholds2Float(PyObject *__pyx_self, 
 #if CYTHON_METH_FASTCALL
 PyObject *const *__pyx_args, Py_ssize_t __pyx_nargs, PyObject *__pyx_kwds
 #else
@@ -10139,7 +9895,7 @@ PyObject *__pyx_args, PyObject *__pyx_kwds
   __Pyx_RefNannyFinishContext();
   return NULL;
   __pyx_L4_argument_unpacking_done:;
-  __pyx_r = __pyx_pf_13cRandPerfTabs_19cPerformanceTableau_18convertDiscriminationThresholds2Float(__pyx_self, __pyx_v_self);
+  __pyx_r = __pyx_pf_13cRandPerfTabs_19cPerformanceTableau_16convertDiscriminationThresholds2Float(__pyx_self, __pyx_v_self);
 
   /* function exit code */
   {
@@ -10152,7 +9908,7 @@ PyObject *__pyx_args, PyObject *__pyx_kwds
   return __pyx_r;
 }
 
-static PyObject *__pyx_pf_13cRandPerfTabs_19cPerformanceTableau_18convertDiscriminationThresholds2Float(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_self) {
+static PyObject *__pyx_pf_13cRandPerfTabs_19cPerformanceTableau_16convertDiscriminationThresholds2Float(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_self) {
   PyObject *__pyx_v_criteria = NULL;
   PyObject *__pyx_v_g = NULL;
   PyObject *__pyx_v_th = NULL;
@@ -10436,16 +10192,16 @@ static PyObject *__pyx_pf_13cRandPerfTabs_19cPerformanceTableau_18convertDiscrim
  */
 
 /* Python wrapper */
-static PyObject *__pyx_pw_13cRandPerfTabs_19cPerformanceTableau_21convertDiscriminationThresholds2Decimal(PyObject *__pyx_self, 
+static PyObject *__pyx_pw_13cRandPerfTabs_19cPerformanceTableau_19convertDiscriminationThresholds2Decimal(PyObject *__pyx_self, 
 #if CYTHON_METH_FASTCALL
 PyObject *const *__pyx_args, Py_ssize_t __pyx_nargs, PyObject *__pyx_kwds
 #else
 PyObject *__pyx_args, PyObject *__pyx_kwds
 #endif
 ); /*proto*/
-PyDoc_STRVAR(__pyx_doc_13cRandPerfTabs_19cPerformanceTableau_20convertDiscriminationThresholds2Decimal, "\n        Converts perrformance discrimination thresholds from float to Decimal format.\n        ");
-static PyMethodDef __pyx_mdef_13cRandPerfTabs_19cPerformanceTableau_21convertDiscriminationThresholds2Decimal = {"convertDiscriminationThresholds2Decimal", (PyCFunction)(void*)(__Pyx_PyCFunction_FastCallWithKeywords)__pyx_pw_13cRandPerfTabs_19cPerformanceTableau_21convertDiscriminationThresholds2Decimal, __Pyx_METH_FASTCALL|METH_KEYWORDS, __pyx_doc_13cRandPerfTabs_19cPerformanceTableau_20convertDiscriminationThresholds2Decimal};
-static PyObject *__pyx_pw_13cRandPerfTabs_19cPerformanceTableau_21convertDiscriminationThresholds2Decimal(PyObject *__pyx_self, 
+PyDoc_STRVAR(__pyx_doc_13cRandPerfTabs_19cPerformanceTableau_18convertDiscriminationThresholds2Decimal, "\n        Converts perrformance discrimination thresholds from float to Decimal format.\n        ");
+static PyMethodDef __pyx_mdef_13cRandPerfTabs_19cPerformanceTableau_19convertDiscriminationThresholds2Decimal = {"convertDiscriminationThresholds2Decimal", (PyCFunction)(void*)(__Pyx_PyCFunction_FastCallWithKeywords)__pyx_pw_13cRandPerfTabs_19cPerformanceTableau_19convertDiscriminationThresholds2Decimal, __Pyx_METH_FASTCALL|METH_KEYWORDS, __pyx_doc_13cRandPerfTabs_19cPerformanceTableau_18convertDiscriminationThresholds2Decimal};
+static PyObject *__pyx_pw_13cRandPerfTabs_19cPerformanceTableau_19convertDiscriminationThresholds2Decimal(PyObject *__pyx_self, 
 #if CYTHON_METH_FASTCALL
 PyObject *const *__pyx_args, Py_ssize_t __pyx_nargs, PyObject *__pyx_kwds
 #else
@@ -10519,7 +10275,7 @@ PyObject *__pyx_args, PyObject *__pyx_kwds
   __Pyx_RefNannyFinishContext();
   return NULL;
   __pyx_L4_argument_unpacking_done:;
-  __pyx_r = __pyx_pf_13cRandPerfTabs_19cPerformanceTableau_20convertDiscriminationThresholds2Decimal(__pyx_self, __pyx_v_self);
+  __pyx_r = __pyx_pf_13cRandPerfTabs_19cPerformanceTableau_18convertDiscriminationThresholds2Decimal(__pyx_self, __pyx_v_self);
 
   /* function exit code */
   {
@@ -10532,7 +10288,7 @@ PyObject *__pyx_args, PyObject *__pyx_kwds
   return __pyx_r;
 }
 
-static PyObject *__pyx_pf_13cRandPerfTabs_19cPerformanceTableau_20convertDiscriminationThresholds2Decimal(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_self) {
+static PyObject *__pyx_pf_13cRandPerfTabs_19cPerformanceTableau_18convertDiscriminationThresholds2Decimal(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_self) {
   PyObject *__pyx_v_Decimal = NULL;
   PyObject *__pyx_v_criteria = NULL;
   PyObject *__pyx_v_g = NULL;
@@ -10893,16 +10649,16 @@ static PyObject *__pyx_pf_13cRandPerfTabs_19cPerformanceTableau_20convertDiscrim
  */
 
 /* Python wrapper */
-static PyObject *__pyx_pw_13cRandPerfTabs_19cPerformanceTableau_23showCriteria(PyObject *__pyx_self, 
+static PyObject *__pyx_pw_13cRandPerfTabs_19cPerformanceTableau_21showCriteria(PyObject *__pyx_self, 
 #if CYTHON_METH_FASTCALL
 PyObject *const *__pyx_args, Py_ssize_t __pyx_nargs, PyObject *__pyx_kwds
 #else
 PyObject *__pyx_args, PyObject *__pyx_kwds
 #endif
 ); /*proto*/
-PyDoc_STRVAR(__pyx_doc_13cRandPerfTabs_19cPerformanceTableau_22showCriteria, "\n        Prints self.criteria with thresholds and weights.\n\n        *Parameters*:\n            * IntegerWeights=True,\n            * Alphabetic=False,\n            * ByObjectives=True,\n            * Debug=False\n        \n        ");
-static PyMethodDef __pyx_mdef_13cRandPerfTabs_19cPerformanceTableau_23showCriteria = {"showCriteria", (PyCFunction)(void*)(__Pyx_PyCFunction_FastCallWithKeywords)__pyx_pw_13cRandPerfTabs_19cPerformanceTableau_23showCriteria, __Pyx_METH_FASTCALL|METH_KEYWORDS, __pyx_doc_13cRandPerfTabs_19cPerformanceTableau_22showCriteria};
-static PyObject *__pyx_pw_13cRandPerfTabs_19cPerformanceTableau_23showCriteria(PyObject *__pyx_self, 
+PyDoc_STRVAR(__pyx_doc_13cRandPerfTabs_19cPerformanceTableau_20showCriteria, "\n        Prints self.criteria with thresholds and weights.\n\n        *Parameters*:\n            * IntegerWeights=True,\n            * Alphabetic=False,\n            * ByObjectives=True,\n            * Debug=False\n        \n        ");
+static PyMethodDef __pyx_mdef_13cRandPerfTabs_19cPerformanceTableau_21showCriteria = {"showCriteria", (PyCFunction)(void*)(__Pyx_PyCFunction_FastCallWithKeywords)__pyx_pw_13cRandPerfTabs_19cPerformanceTableau_21showCriteria, __Pyx_METH_FASTCALL|METH_KEYWORDS, __pyx_doc_13cRandPerfTabs_19cPerformanceTableau_20showCriteria};
+static PyObject *__pyx_pw_13cRandPerfTabs_19cPerformanceTableau_21showCriteria(PyObject *__pyx_self, 
 #if CYTHON_METH_FASTCALL
 PyObject *const *__pyx_args, Py_ssize_t __pyx_nargs, PyObject *__pyx_kwds
 #else
@@ -11034,7 +10790,7 @@ PyObject *__pyx_args, PyObject *__pyx_kwds
   __Pyx_RefNannyFinishContext();
   return NULL;
   __pyx_L4_argument_unpacking_done:;
-  __pyx_r = __pyx_pf_13cRandPerfTabs_19cPerformanceTableau_22showCriteria(__pyx_self, __pyx_v_self, __pyx_v_IntegerWeights, __pyx_v_Alphabetic, __pyx_v_ByObjectives, __pyx_v_Debug);
+  __pyx_r = __pyx_pf_13cRandPerfTabs_19cPerformanceTableau_20showCriteria(__pyx_self, __pyx_v_self, __pyx_v_IntegerWeights, __pyx_v_Alphabetic, __pyx_v_ByObjectives, __pyx_v_Debug);
 
   /* function exit code */
   {
@@ -11047,7 +10803,7 @@ PyObject *__pyx_args, PyObject *__pyx_kwds
   return __pyx_r;
 }
 
-static PyObject *__pyx_pf_13cRandPerfTabs_19cPerformanceTableau_22showCriteria(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_self, PyObject *__pyx_v_IntegerWeights, PyObject *__pyx_v_Alphabetic, PyObject *__pyx_v_ByObjectives, PyObject *__pyx_v_Debug) {
+static PyObject *__pyx_pf_13cRandPerfTabs_19cPerformanceTableau_20showCriteria(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_self, PyObject *__pyx_v_IntegerWeights, PyObject *__pyx_v_Alphabetic, PyObject *__pyx_v_ByObjectives, PyObject *__pyx_v_Debug) {
   PyObject *__pyx_v_criteria = NULL;
   PyObject *__pyx_v_objectives = NULL;
   PyObject *__pyx_v_sumWeights = NULL;
@@ -13006,16 +12762,16 @@ static PyObject *__pyx_pf_13cRandPerfTabs_19cPerformanceTableau_22showCriteria(C
  */
 
 /* Python wrapper */
-static PyObject *__pyx_pw_13cRandPerfTabs_19cPerformanceTableau_25showPerformanceTableau(PyObject *__pyx_self, 
+static PyObject *__pyx_pw_13cRandPerfTabs_19cPerformanceTableau_23showPerformanceTableau(PyObject *__pyx_self, 
 #if CYTHON_METH_FASTCALL
 PyObject *const *__pyx_args, Py_ssize_t __pyx_nargs, PyObject *__pyx_kwds
 #else
 PyObject *__pyx_args, PyObject *__pyx_kwds
 #endif
 ); /*proto*/
-PyDoc_STRVAR(__pyx_doc_13cRandPerfTabs_19cPerformanceTableau_24showPerformanceTableau, "\n        Print the object's performance tableau.\n\n        *Parameters*:\n            - Transposed = False (default = actions x criteria) | True (criteria x actions)\n            - actionsSubset = None\n            - fromIndex = -1 (by default put to 0)\n            - toIndex = -1 (by default put to len(self.actions)\n            - Sorted = False (default) | True\n            - ndigits = 2 (default)\n        \n        ");
-static PyMethodDef __pyx_mdef_13cRandPerfTabs_19cPerformanceTableau_25showPerformanceTableau = {"showPerformanceTableau", (PyCFunction)(void*)(__Pyx_PyCFunction_FastCallWithKeywords)__pyx_pw_13cRandPerfTabs_19cPerformanceTableau_25showPerformanceTableau, __Pyx_METH_FASTCALL|METH_KEYWORDS, __pyx_doc_13cRandPerfTabs_19cPerformanceTableau_24showPerformanceTableau};
-static PyObject *__pyx_pw_13cRandPerfTabs_19cPerformanceTableau_25showPerformanceTableau(PyObject *__pyx_self, 
+PyDoc_STRVAR(__pyx_doc_13cRandPerfTabs_19cPerformanceTableau_22showPerformanceTableau, "\n        Print the object's performance tableau.\n\n        *Parameters*:\n            - Transposed = False (default = actions x criteria) | True (criteria x actions)\n            - actionsSubset = None\n            - fromIndex = -1 (by default put to 0)\n            - toIndex = -1 (by default put to len(self.actions)\n            - Sorted = False (default) | True\n            - ndigits = 2 (default)\n        \n        ");
+static PyMethodDef __pyx_mdef_13cRandPerfTabs_19cPerformanceTableau_23showPerformanceTableau = {"showPerformanceTableau", (PyCFunction)(void*)(__Pyx_PyCFunction_FastCallWithKeywords)__pyx_pw_13cRandPerfTabs_19cPerformanceTableau_23showPerformanceTableau, __Pyx_METH_FASTCALL|METH_KEYWORDS, __pyx_doc_13cRandPerfTabs_19cPerformanceTableau_22showPerformanceTableau};
+static PyObject *__pyx_pw_13cRandPerfTabs_19cPerformanceTableau_23showPerformanceTableau(PyObject *__pyx_self, 
 #if CYTHON_METH_FASTCALL
 PyObject *const *__pyx_args, Py_ssize_t __pyx_nargs, PyObject *__pyx_kwds
 #else
@@ -13195,7 +12951,7 @@ PyObject *__pyx_args, PyObject *__pyx_kwds
   __Pyx_RefNannyFinishContext();
   return NULL;
   __pyx_L4_argument_unpacking_done:;
-  __pyx_r = __pyx_pf_13cRandPerfTabs_19cPerformanceTableau_24showPerformanceTableau(__pyx_self, __pyx_v_self, __pyx_v_Transposed, __pyx_v_actionsSubset, __pyx_v_fromIndex, __pyx_v_toIndex, __pyx_v_Sorted, __pyx_v_ndigits);
+  __pyx_r = __pyx_pf_13cRandPerfTabs_19cPerformanceTableau_22showPerformanceTableau(__pyx_self, __pyx_v_self, __pyx_v_Transposed, __pyx_v_actionsSubset, __pyx_v_fromIndex, __pyx_v_toIndex, __pyx_v_Sorted, __pyx_v_ndigits);
 
   /* "cRandPerfTabs.pyx":296
  *                 print()
@@ -13216,7 +12972,7 @@ PyObject *__pyx_args, PyObject *__pyx_kwds
   return __pyx_r;
 }
 
-static PyObject *__pyx_pf_13cRandPerfTabs_19cPerformanceTableau_24showPerformanceTableau(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_self, int __pyx_v_Transposed, PyObject *__pyx_v_actionsSubset, int __pyx_v_fromIndex, int __pyx_v_toIndex, int __pyx_v_Sorted, PyObject *__pyx_v_ndigits) {
+static PyObject *__pyx_pf_13cRandPerfTabs_19cPerformanceTableau_22showPerformanceTableau(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_self, int __pyx_v_Transposed, PyObject *__pyx_v_actionsSubset, int __pyx_v_fromIndex, int __pyx_v_toIndex, int __pyx_v_Sorted, PyObject *__pyx_v_ndigits) {
   int __pyx_v_i;
   int __pyx_v_x;
   CYTHON_UNUSED PyObject *__pyx_v_Decimal = NULL;
@@ -14224,16 +13980,16 @@ static PyObject *__pyx_pf_13cRandPerfTabs_19cPerformanceTableau_24showPerformanc
  */
 
 /* Python wrapper */
-static PyObject *__pyx_pw_13cRandPerfTabs_19cPerformanceTableau_27normalizeEvaluations(PyObject *__pyx_self, 
+static PyObject *__pyx_pw_13cRandPerfTabs_19cPerformanceTableau_25normalizeEvaluations(PyObject *__pyx_self, 
 #if CYTHON_METH_FASTCALL
 PyObject *const *__pyx_args, Py_ssize_t __pyx_nargs, PyObject *__pyx_kwds
 #else
 PyObject *__pyx_args, PyObject *__pyx_kwds
 #endif
 ); /*proto*/
-PyDoc_STRVAR(__pyx_doc_13cRandPerfTabs_19cPerformanceTableau_26normalizeEvaluations, "\n        Recodes the evaluations between lowValue and highValue on all criteria.\n\n        *Parameters*:\n            * lowValue=0.0,\n            * highValue=100.0,\n            * Debug=False\n            \n        ");
-static PyMethodDef __pyx_mdef_13cRandPerfTabs_19cPerformanceTableau_27normalizeEvaluations = {"normalizeEvaluations", (PyCFunction)(void*)(__Pyx_PyCFunction_FastCallWithKeywords)__pyx_pw_13cRandPerfTabs_19cPerformanceTableau_27normalizeEvaluations, __Pyx_METH_FASTCALL|METH_KEYWORDS, __pyx_doc_13cRandPerfTabs_19cPerformanceTableau_26normalizeEvaluations};
-static PyObject *__pyx_pw_13cRandPerfTabs_19cPerformanceTableau_27normalizeEvaluations(PyObject *__pyx_self, 
+PyDoc_STRVAR(__pyx_doc_13cRandPerfTabs_19cPerformanceTableau_24normalizeEvaluations, "\n        Recodes the evaluations between lowValue and highValue on all criteria.\n\n        *Parameters*:\n            * lowValue=0.0,\n            * highValue=100.0,\n            * Debug=False\n            \n        ");
+static PyMethodDef __pyx_mdef_13cRandPerfTabs_19cPerformanceTableau_25normalizeEvaluations = {"normalizeEvaluations", (PyCFunction)(void*)(__Pyx_PyCFunction_FastCallWithKeywords)__pyx_pw_13cRandPerfTabs_19cPerformanceTableau_25normalizeEvaluations, __Pyx_METH_FASTCALL|METH_KEYWORDS, __pyx_doc_13cRandPerfTabs_19cPerformanceTableau_24normalizeEvaluations};
+static PyObject *__pyx_pw_13cRandPerfTabs_19cPerformanceTableau_25normalizeEvaluations(PyObject *__pyx_self, 
 #if CYTHON_METH_FASTCALL
 PyObject *const *__pyx_args, Py_ssize_t __pyx_nargs, PyObject *__pyx_kwds
 #else
@@ -14354,7 +14110,7 @@ PyObject *__pyx_args, PyObject *__pyx_kwds
   __Pyx_RefNannyFinishContext();
   return NULL;
   __pyx_L4_argument_unpacking_done:;
-  __pyx_r = __pyx_pf_13cRandPerfTabs_19cPerformanceTableau_26normalizeEvaluations(__pyx_self, __pyx_v_self, __pyx_v_lowValue, __pyx_v_highValue, __pyx_v_Debug);
+  __pyx_r = __pyx_pf_13cRandPerfTabs_19cPerformanceTableau_24normalizeEvaluations(__pyx_self, __pyx_v_self, __pyx_v_lowValue, __pyx_v_highValue, __pyx_v_Debug);
 
   /* function exit code */
   {
@@ -14367,7 +14123,7 @@ PyObject *__pyx_args, PyObject *__pyx_kwds
   return __pyx_r;
 }
 
-static PyObject *__pyx_pf_13cRandPerfTabs_19cPerformanceTableau_26normalizeEvaluations(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_self, PyObject *__pyx_v_lowValue, PyObject *__pyx_v_highValue, int __pyx_v_Debug) {
+static PyObject *__pyx_pf_13cRandPerfTabs_19cPerformanceTableau_24normalizeEvaluations(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_self, PyObject *__pyx_v_lowValue, PyObject *__pyx_v_highValue, int __pyx_v_Debug) {
   PyObject *__pyx_v_criteria = NULL;
   PyObject *__pyx_v_actions = NULL;
   PyObject *__pyx_v_evaluation = NULL;
@@ -15251,16 +15007,16 @@ static PyObject *__pyx_pf_13cRandPerfTabs_19cPerformanceTableau_26normalizeEvalu
  */
 
 /* Python wrapper */
-static PyObject *__pyx_pw_13cRandPerfTabs_19cPerformanceTableau_29showHTMLPerformanceHeatmap(PyObject *__pyx_self, 
+static PyObject *__pyx_pw_13cRandPerfTabs_19cPerformanceTableau_27showHTMLPerformanceHeatmap(PyObject *__pyx_self, 
 #if CYTHON_METH_FASTCALL
 PyObject *const *__pyx_args, Py_ssize_t __pyx_nargs, PyObject *__pyx_kwds
 #else
 PyObject *__pyx_args, PyObject *__pyx_kwds
 #endif
 ); /*proto*/
-PyDoc_STRVAR(__pyx_doc_13cRandPerfTabs_19cPerformanceTableau_28showHTMLPerformanceHeatmap, "\n        shows the html heatmap version of the performance tableau in a browser window\n        (see perfTabs.htmlPerformanceHeatMap() method ).\n\n        **Parameters**:\n\n              * *actionsList* and *criteriaList*, if provided,  give the possibility to show the decision alternatives, resp. criteria, in a given ordering.\n              * *ndigits* = 0 may be used to show integer evaluation values.\n              * If no *actionsList* is provided, the decision actions are ordered from the best to the worst. This ranking is obtained by default with the Copeland rule applied on a standard *BipolarOutrankingDigraph*. When the *SparseModel* flag is put to *True*, a sparse *PreRankedOutrankingDigraph* construction is used instead.                \n              * The *minimalComponentSize* allows to control the fill rate of the pre-ranked model. If *minimalComponentSize* = *n* (the number of decision actions) both the pre-ranked model will be in fact equivalent to the standard model.\n              * It may interesting in some cases to use *rankingRule* = 'NetFlows'.\n              * Quantiles used for the pre-ranked decomposition are put by default to *n* (the number of decision alternatives) for *n* < 50. For larger cardinalities up to 1000, quantiles = *n* /10. For bigger performance tableaux the *quantiles* parameter may be set to a much lower value not exceeding usually 1000.\n              * The pre-ranking may be obtained with three ordering strategies for the quantiles equivalence classes: 'average' (default), 'optimistic' or  'pessimistic'.\n              * With *Correlations* = *True* and *criteriaList* = *None*, the criteria will be presented from left to right in decreasing order of the correlations between the marginal criterion based ranking and the global ranking used for presenting the decision alternatives.\n              * For large performance Tableaux, *multiprocessing* techniques may be used by setting.\n              *  *Threading* = *True*"" in order to speed up the computations; especially when *Correlations* = *True*.\n              * By default, the number of cores available, will be detected. It may be necessary in a HPC context to indicate the exact number of singled threaded cores that are actually allocated to the running job.\n\n        >>> from cRandomPerfTabs import RandomPerformanceTableau\n        >>> rt = RandomPerformanceTableau(seed=100)\n        >>> rt.showHTMLPerformanceHeatmap(colorLevels=5,Correlations=True)\n\n        .. image:: perfTabsExample.png\n           :alt: HTML heat map of the performance tableau\n           :width: 600 px\n           :align: center\n        \n        ");
-static PyMethodDef __pyx_mdef_13cRandPerfTabs_19cPerformanceTableau_29showHTMLPerformanceHeatmap = {"showHTMLPerformanceHeatmap", (PyCFunction)(void*)(__Pyx_PyCFunction_FastCallWithKeywords)__pyx_pw_13cRandPerfTabs_19cPerformanceTableau_29showHTMLPerformanceHeatmap, __Pyx_METH_FASTCALL|METH_KEYWORDS, __pyx_doc_13cRandPerfTabs_19cPerformanceTableau_28showHTMLPerformanceHeatmap};
-static PyObject *__pyx_pw_13cRandPerfTabs_19cPerformanceTableau_29showHTMLPerformanceHeatmap(PyObject *__pyx_self, 
+PyDoc_STRVAR(__pyx_doc_13cRandPerfTabs_19cPerformanceTableau_26showHTMLPerformanceHeatmap, "\n        shows the html heatmap version of the performance tableau in a browser window\n        (see perfTabs.htmlPerformanceHeatMap() method ).\n\n        **Parameters**:\n\n              * *actionsList* and *criteriaList*, if provided,  give the possibility to show the decision alternatives, resp. criteria, in a given ordering.\n              * *ndigits* = 0 may be used to show integer evaluation values.\n              * If no *actionsList* is provided, the decision actions are ordered from the best to the worst. This ranking is obtained by default with the Copeland rule applied on a standard *BipolarOutrankingDigraph*. When the *SparseModel* flag is put to *True*, a sparse *PreRankedOutrankingDigraph* construction is used instead.                \n              * The *minimalComponentSize* allows to control the fill rate of the pre-ranked model. If *minimalComponentSize* = *n* (the number of decision actions) both the pre-ranked model will be in fact equivalent to the standard model.\n              * It may interesting in some cases to use *rankingRule* = 'NetFlows'.\n              * Quantiles used for the pre-ranked decomposition are put by default to *n* (the number of decision alternatives) for *n* < 50. For larger cardinalities up to 1000, quantiles = *n* /10. For bigger performance tableaux the *quantiles* parameter may be set to a much lower value not exceeding usually 1000.\n              * The pre-ranking may be obtained with three ordering strategies for the quantiles equivalence classes: 'average' (default), 'optimistic' or  'pessimistic'.\n              * With *Correlations* = *True* and *criteriaList* = *None*, the criteria will be presented from left to right in decreasing order of the correlations between the marginal criterion based ranking and the global ranking used for presenting the decision alternatives.\n              * For large performance Tableaux, *multiprocessing* techniques may be used by setting.\n              *  *Threading* = *True*"" in order to speed up the computations; especially when *Correlations* = *True*.\n              * By default, the number of cores available, will be detected. It may be necessary in a HPC context to indicate the exact number of singled threaded cores that are actually allocated to the running job.\n\n        >>> from cRandomPerfTabs import RandomPerformanceTableau\n        >>> rt = RandomPerformanceTableau(seed=100)\n        >>> rt.showHTMLPerformanceHeatmap(colorLevels=5,Correlations=True)\n\n        .. image:: perfTabsExample.png\n           :alt: HTML heat map of the performance tableau\n           :width: 600 px\n           :align: center\n        \n        ");
+static PyMethodDef __pyx_mdef_13cRandPerfTabs_19cPerformanceTableau_27showHTMLPerformanceHeatmap = {"showHTMLPerformanceHeatmap", (PyCFunction)(void*)(__Pyx_PyCFunction_FastCallWithKeywords)__pyx_pw_13cRandPerfTabs_19cPerformanceTableau_27showHTMLPerformanceHeatmap, __Pyx_METH_FASTCALL|METH_KEYWORDS, __pyx_doc_13cRandPerfTabs_19cPerformanceTableau_26showHTMLPerformanceHeatmap};
+static PyObject *__pyx_pw_13cRandPerfTabs_19cPerformanceTableau_27showHTMLPerformanceHeatmap(PyObject *__pyx_self, 
 #if CYTHON_METH_FASTCALL
 PyObject *const *__pyx_args, Py_ssize_t __pyx_nargs, PyObject *__pyx_kwds
 #else
@@ -15596,7 +15352,7 @@ PyObject *__pyx_args, PyObject *__pyx_kwds
   __Pyx_RefNannyFinishContext();
   return NULL;
   __pyx_L4_argument_unpacking_done:;
-  __pyx_r = __pyx_pf_13cRandPerfTabs_19cPerformanceTableau_28showHTMLPerformanceHeatmap(__pyx_self, __pyx_v_self, __pyx_v_actionsList, __pyx_v_criteriaList, __pyx_v_colorLevels, __pyx_v_pageTitle, __pyx_v_ndigits, __pyx_v_SparseModel, __pyx_v_minimalComponentSize, __pyx_v_rankingRule, __pyx_v_quantiles, __pyx_v_strategy, __pyx_v_Correlations, __pyx_v_Threading, __pyx_v_nbrOfCPUs, __pyx_v_Debug);
+  __pyx_r = __pyx_pf_13cRandPerfTabs_19cPerformanceTableau_26showHTMLPerformanceHeatmap(__pyx_self, __pyx_v_self, __pyx_v_actionsList, __pyx_v_criteriaList, __pyx_v_colorLevels, __pyx_v_pageTitle, __pyx_v_ndigits, __pyx_v_SparseModel, __pyx_v_minimalComponentSize, __pyx_v_rankingRule, __pyx_v_quantiles, __pyx_v_strategy, __pyx_v_Correlations, __pyx_v_Threading, __pyx_v_nbrOfCPUs, __pyx_v_Debug);
 
   /* "cRandPerfTabs.pyx":421
  *         return normEvaluation
@@ -15617,7 +15373,7 @@ PyObject *__pyx_args, PyObject *__pyx_kwds
   return __pyx_r;
 }
 
-static PyObject *__pyx_pf_13cRandPerfTabs_19cPerformanceTableau_28showHTMLPerformanceHeatmap(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_self, PyObject *__pyx_v_actionsList, PyObject *__pyx_v_criteriaList, PyObject *__pyx_v_colorLevels, PyObject *__pyx_v_pageTitle, PyObject *__pyx_v_ndigits, PyObject *__pyx_v_SparseModel, PyObject *__pyx_v_minimalComponentSize, PyObject *__pyx_v_rankingRule, PyObject *__pyx_v_quantiles, PyObject *__pyx_v_strategy, PyObject *__pyx_v_Correlations, PyObject *__pyx_v_Threading, CYTHON_UNUSED PyObject *__pyx_v_nbrOfCPUs, PyObject *__pyx_v_Debug) {
+static PyObject *__pyx_pf_13cRandPerfTabs_19cPerformanceTableau_26showHTMLPerformanceHeatmap(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_self, PyObject *__pyx_v_actionsList, PyObject *__pyx_v_criteriaList, PyObject *__pyx_v_colorLevels, PyObject *__pyx_v_pageTitle, PyObject *__pyx_v_ndigits, PyObject *__pyx_v_SparseModel, PyObject *__pyx_v_minimalComponentSize, PyObject *__pyx_v_rankingRule, PyObject *__pyx_v_quantiles, PyObject *__pyx_v_strategy, PyObject *__pyx_v_Correlations, PyObject *__pyx_v_Threading, CYTHON_UNUSED PyObject *__pyx_v_nbrOfCPUs, PyObject *__pyx_v_Debug) {
   PyObject *__pyx_v_webbrowser = NULL;
   PyObject *__pyx_v_NamedTemporaryFile = NULL;
   PyObject *__pyx_v_fileName = NULL;
@@ -16094,16 +15850,16 @@ static PyObject *__pyx_pf_13cRandPerfTabs_19cPerformanceTableau_28showHTMLPerfor
  */
 
 /* Python wrapper */
-static PyObject *__pyx_pw_13cRandPerfTabs_19cPerformanceTableau_31save(PyObject *__pyx_self, 
+static PyObject *__pyx_pw_13cRandPerfTabs_19cPerformanceTableau_29save(PyObject *__pyx_self, 
 #if CYTHON_METH_FASTCALL
 PyObject *const *__pyx_args, Py_ssize_t __pyx_nargs, PyObject *__pyx_kwds
 #else
 PyObject *__pyx_args, PyObject *__pyx_kwds
 #endif
 ); /*proto*/
-PyDoc_STRVAR(__pyx_doc_13cRandPerfTabs_19cPerformanceTableau_30save, "\n        Persistant storage of Performance Tableaux.\n        ");
-static PyMethodDef __pyx_mdef_13cRandPerfTabs_19cPerformanceTableau_31save = {"save", (PyCFunction)(void*)(__Pyx_PyCFunction_FastCallWithKeywords)__pyx_pw_13cRandPerfTabs_19cPerformanceTableau_31save, __Pyx_METH_FASTCALL|METH_KEYWORDS, __pyx_doc_13cRandPerfTabs_19cPerformanceTableau_30save};
-static PyObject *__pyx_pw_13cRandPerfTabs_19cPerformanceTableau_31save(PyObject *__pyx_self, 
+PyDoc_STRVAR(__pyx_doc_13cRandPerfTabs_19cPerformanceTableau_28save, "\n        Persistant storage of Performance Tableaux.\n        ");
+static PyMethodDef __pyx_mdef_13cRandPerfTabs_19cPerformanceTableau_29save = {"save", (PyCFunction)(void*)(__Pyx_PyCFunction_FastCallWithKeywords)__pyx_pw_13cRandPerfTabs_19cPerformanceTableau_29save, __Pyx_METH_FASTCALL|METH_KEYWORDS, __pyx_doc_13cRandPerfTabs_19cPerformanceTableau_28save};
+static PyObject *__pyx_pw_13cRandPerfTabs_19cPerformanceTableau_29save(PyObject *__pyx_self, 
 #if CYTHON_METH_FASTCALL
 PyObject *const *__pyx_args, Py_ssize_t __pyx_nargs, PyObject *__pyx_kwds
 #else
@@ -16207,7 +15963,7 @@ PyObject *__pyx_args, PyObject *__pyx_kwds
   __Pyx_RefNannyFinishContext();
   return NULL;
   __pyx_L4_argument_unpacking_done:;
-  __pyx_r = __pyx_pf_13cRandPerfTabs_19cPerformanceTableau_30save(__pyx_self, __pyx_v_self, __pyx_v_fileName, __pyx_v_valueDigits);
+  __pyx_r = __pyx_pf_13cRandPerfTabs_19cPerformanceTableau_28save(__pyx_self, __pyx_v_self, __pyx_v_fileName, __pyx_v_valueDigits);
 
   /* function exit code */
   {
@@ -16220,7 +15976,7 @@ PyObject *__pyx_args, PyObject *__pyx_kwds
   return __pyx_r;
 }
 
-static PyObject *__pyx_pf_13cRandPerfTabs_19cPerformanceTableau_30save(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_self, PyObject *__pyx_v_fileName, PyObject *__pyx_v_valueDigits) {
+static PyObject *__pyx_pf_13cRandPerfTabs_19cPerformanceTableau_28save(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_self, PyObject *__pyx_v_fileName, PyObject *__pyx_v_valueDigits) {
   PyObject *__pyx_v_actions = NULL;
   PyObject *__pyx_v_objectives = NULL;
   PyObject *__pyx_v_criteria = NULL;
@@ -47593,7 +47349,7 @@ static int __Pyx_CreateStringTabAndInitStrings(void) {
     {&__pyx_kp_u__10, __pyx_k__10, sizeof(__pyx_k__10), 0, 1, 0, 0},
     {&__pyx_kp_u__11, __pyx_k__11, sizeof(__pyx_k__11), 0, 1, 0, 0},
     {&__pyx_kp_u__12, __pyx_k__12, sizeof(__pyx_k__12), 0, 1, 0, 0},
-    {&__pyx_n_s__121, __pyx_k__121, sizeof(__pyx_k__121), 0, 0, 1, 1},
+    {&__pyx_n_s__120, __pyx_k__120, sizeof(__pyx_k__120), 0, 0, 1, 1},
     {&__pyx_kp_u__14, __pyx_k__14, sizeof(__pyx_k__14), 0, 1, 0, 0},
     {&__pyx_kp_u__15, __pyx_k__15, sizeof(__pyx_k__15), 0, 1, 0, 0},
     {&__pyx_kp_u__16, __pyx_k__16, sizeof(__pyx_k__16), 0, 1, 0, 0},
@@ -48426,26 +48182,17 @@ static CYTHON_SMALL_CODE int __Pyx_InitCachedConstants(void) {
  */
   __pyx_codeobj__72 = (PyObject*)__Pyx_PyCode_New(1, 0, 0, 1, 0, CO_OPTIMIZED|CO_NEWLOCALS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__68, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_cython_cRandPerfTabs_pyx, __pyx_n_s_convertInsite2Standard, 114, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__72)) __PYX_ERR(0, 114, __pyx_L1_error)
 
-  /* "cRandPerfTabs.pyx":122
- *         self.convertDiscriminationThresholds2Decimal()
- * 
- *     def convertInsite2BigData(self):             # <<<<<<<<<<<<<<
- *         """
- *         Converts in site weights, evaluations and discrimination thresholds to bigData float format.
- */
-  __pyx_codeobj__73 = (PyObject*)__Pyx_PyCode_New(1, 0, 0, 1, 0, CO_OPTIMIZED|CO_NEWLOCALS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__68, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_cython_cRandPerfTabs_pyx, __pyx_n_s_convertInsite2BigData, 122, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__73)) __PYX_ERR(0, 122, __pyx_L1_error)
-
   /* "cRandPerfTabs.pyx":130
- *         self.convertDiscriminationThresholds2Decimal()
+ * ##        self.convertDiscriminationThresholds2Decimal()
  * 
  *     def convertWeight2Integer(self):             # <<<<<<<<<<<<<<
  *         """
  *         Converts significance weights from Decimal
  */
-  __pyx_tuple__74 = PyTuple_Pack(3, __pyx_n_s_self, __pyx_n_s_criteria, __pyx_n_s_g); if (unlikely(!__pyx_tuple__74)) __PYX_ERR(0, 130, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_tuple__74);
-  __Pyx_GIVEREF(__pyx_tuple__74);
-  __pyx_codeobj__75 = (PyObject*)__Pyx_PyCode_New(1, 0, 0, 3, 0, CO_OPTIMIZED|CO_NEWLOCALS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__74, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_cython_cRandPerfTabs_pyx, __pyx_n_s_convertWeight2Integer, 130, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__75)) __PYX_ERR(0, 130, __pyx_L1_error)
+  __pyx_tuple__73 = PyTuple_Pack(3, __pyx_n_s_self, __pyx_n_s_criteria, __pyx_n_s_g); if (unlikely(!__pyx_tuple__73)) __PYX_ERR(0, 130, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_tuple__73);
+  __Pyx_GIVEREF(__pyx_tuple__73);
+  __pyx_codeobj__74 = (PyObject*)__Pyx_PyCode_New(1, 0, 0, 3, 0, CO_OPTIMIZED|CO_NEWLOCALS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__73, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_cython_cRandPerfTabs_pyx, __pyx_n_s_convertWeight2Integer, 130, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__74)) __PYX_ERR(0, 130, __pyx_L1_error)
 
   /* "cRandPerfTabs.pyx":140
  *         self.criteria = criteria
@@ -48454,10 +48201,10 @@ static CYTHON_SMALL_CODE int __Pyx_InitCachedConstants(void) {
  *         """
  *         Converts significance weights from int to  Decimal format.
  */
-  __pyx_tuple__76 = PyTuple_Pack(4, __pyx_n_s_self, __pyx_n_s_Decimal, __pyx_n_s_criteria, __pyx_n_s_g); if (unlikely(!__pyx_tuple__76)) __PYX_ERR(0, 140, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_tuple__76);
-  __Pyx_GIVEREF(__pyx_tuple__76);
-  __pyx_codeobj__77 = (PyObject*)__Pyx_PyCode_New(1, 0, 0, 4, 0, CO_OPTIMIZED|CO_NEWLOCALS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__76, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_cython_cRandPerfTabs_pyx, __pyx_n_s_convertWeight2Decimal, 140, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__77)) __PYX_ERR(0, 140, __pyx_L1_error)
+  __pyx_tuple__75 = PyTuple_Pack(4, __pyx_n_s_self, __pyx_n_s_Decimal, __pyx_n_s_criteria, __pyx_n_s_g); if (unlikely(!__pyx_tuple__75)) __PYX_ERR(0, 140, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_tuple__75);
+  __Pyx_GIVEREF(__pyx_tuple__75);
+  __pyx_codeobj__76 = (PyObject*)__Pyx_PyCode_New(1, 0, 0, 4, 0, CO_OPTIMIZED|CO_NEWLOCALS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__75, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_cython_cRandPerfTabs_pyx, __pyx_n_s_convertWeight2Decimal, 140, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__76)) __PYX_ERR(0, 140, __pyx_L1_error)
 
   /* "cRandPerfTabs.pyx":150
  *         self.criteria = criteria
@@ -48466,10 +48213,10 @@ static CYTHON_SMALL_CODE int __Pyx_InitCachedConstants(void) {
  *         """
  *         Converts evaluations from Decimal to float format.
  */
-  __pyx_tuple__78 = PyTuple_Pack(8, __pyx_n_s_self, __pyx_n_s_Decimal, __pyx_n_s_evaluation, __pyx_n_s_actions, __pyx_n_s_criteria, __pyx_n_s_NA, __pyx_n_s_g, __pyx_n_s_x); if (unlikely(!__pyx_tuple__78)) __PYX_ERR(0, 150, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_tuple__78);
-  __Pyx_GIVEREF(__pyx_tuple__78);
-  __pyx_codeobj__79 = (PyObject*)__Pyx_PyCode_New(1, 0, 0, 8, 0, CO_OPTIMIZED|CO_NEWLOCALS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__78, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_cython_cRandPerfTabs_pyx, __pyx_n_s_convertEvaluation2Float, 150, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__79)) __PYX_ERR(0, 150, __pyx_L1_error)
+  __pyx_tuple__77 = PyTuple_Pack(8, __pyx_n_s_self, __pyx_n_s_Decimal, __pyx_n_s_evaluation, __pyx_n_s_actions, __pyx_n_s_criteria, __pyx_n_s_NA, __pyx_n_s_g, __pyx_n_s_x); if (unlikely(!__pyx_tuple__77)) __PYX_ERR(0, 150, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_tuple__77);
+  __Pyx_GIVEREF(__pyx_tuple__77);
+  __pyx_codeobj__78 = (PyObject*)__Pyx_PyCode_New(1, 0, 0, 8, 0, CO_OPTIMIZED|CO_NEWLOCALS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__77, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_cython_cRandPerfTabs_pyx, __pyx_n_s_convertEvaluation2Float, 150, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__78)) __PYX_ERR(0, 150, __pyx_L1_error)
 
   /* "cRandPerfTabs.pyx":165
  *         self.evaluation = evaluation
@@ -48478,10 +48225,10 @@ static CYTHON_SMALL_CODE int __Pyx_InitCachedConstants(void) {
  *         """
  *         Converts evaluations from float to Decimal format.
  */
-  __pyx_tuple__80 = PyTuple_Pack(10, __pyx_n_s_self, __pyx_n_s_ndigits, __pyx_n_s_x, __pyx_n_s_Decimal, __pyx_n_s_evaluation, __pyx_n_s_actions, __pyx_n_s_criteria, __pyx_n_s_NA, __pyx_n_s_fstr, __pyx_n_s_g); if (unlikely(!__pyx_tuple__80)) __PYX_ERR(0, 165, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_tuple__80);
-  __Pyx_GIVEREF(__pyx_tuple__80);
-  __pyx_codeobj__81 = (PyObject*)__Pyx_PyCode_New(2, 0, 0, 10, 0, CO_OPTIMIZED|CO_NEWLOCALS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__80, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_cython_cRandPerfTabs_pyx, __pyx_n_s_convertEvaluation2Decimal, 165, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__81)) __PYX_ERR(0, 165, __pyx_L1_error)
+  __pyx_tuple__79 = PyTuple_Pack(10, __pyx_n_s_self, __pyx_n_s_ndigits, __pyx_n_s_x, __pyx_n_s_Decimal, __pyx_n_s_evaluation, __pyx_n_s_actions, __pyx_n_s_criteria, __pyx_n_s_NA, __pyx_n_s_fstr, __pyx_n_s_g); if (unlikely(!__pyx_tuple__79)) __PYX_ERR(0, 165, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_tuple__79);
+  __Pyx_GIVEREF(__pyx_tuple__79);
+  __pyx_codeobj__80 = (PyObject*)__Pyx_PyCode_New(2, 0, 0, 10, 0, CO_OPTIMIZED|CO_NEWLOCALS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__79, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_cython_cRandPerfTabs_pyx, __pyx_n_s_convertEvaluation2Decimal, 165, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__80)) __PYX_ERR(0, 165, __pyx_L1_error)
 
   /* "cRandPerfTabs.pyx":182
  *         self.evaluation = evaluation
@@ -48490,10 +48237,10 @@ static CYTHON_SMALL_CODE int __Pyx_InitCachedConstants(void) {
  *         """
  *         Converts perrformance discrimination thresholds from Decimal to float format.
  */
-  __pyx_tuple__82 = PyTuple_Pack(6, __pyx_n_s_self, __pyx_n_s_criteria, __pyx_n_s_g, __pyx_n_s_th, __pyx_n_s_d_2, __pyx_n_s_d1); if (unlikely(!__pyx_tuple__82)) __PYX_ERR(0, 182, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_tuple__82);
-  __Pyx_GIVEREF(__pyx_tuple__82);
-  __pyx_codeobj__83 = (PyObject*)__Pyx_PyCode_New(1, 0, 0, 6, 0, CO_OPTIMIZED|CO_NEWLOCALS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__82, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_cython_cRandPerfTabs_pyx, __pyx_n_s_convertDiscriminationThresholds2, 182, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__83)) __PYX_ERR(0, 182, __pyx_L1_error)
+  __pyx_tuple__81 = PyTuple_Pack(6, __pyx_n_s_self, __pyx_n_s_criteria, __pyx_n_s_g, __pyx_n_s_th, __pyx_n_s_d_2, __pyx_n_s_d1); if (unlikely(!__pyx_tuple__81)) __PYX_ERR(0, 182, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_tuple__81);
+  __Pyx_GIVEREF(__pyx_tuple__81);
+  __pyx_codeobj__82 = (PyObject*)__Pyx_PyCode_New(1, 0, 0, 6, 0, CO_OPTIMIZED|CO_NEWLOCALS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__81, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_cython_cRandPerfTabs_pyx, __pyx_n_s_convertDiscriminationThresholds2, 182, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__82)) __PYX_ERR(0, 182, __pyx_L1_error)
 
   /* "cRandPerfTabs.pyx":193
  *                 criteria[g]['thresholds'][th] = d1
@@ -48502,10 +48249,10 @@ static CYTHON_SMALL_CODE int __Pyx_InitCachedConstants(void) {
  *         """
  *         Converts perrformance discrimination thresholds from float to Decimal format.
  */
-  __pyx_tuple__84 = PyTuple_Pack(7, __pyx_n_s_self, __pyx_n_s_Decimal, __pyx_n_s_criteria, __pyx_n_s_g, __pyx_n_s_th, __pyx_n_s_d_2, __pyx_n_s_d1); if (unlikely(!__pyx_tuple__84)) __PYX_ERR(0, 193, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_tuple__84);
-  __Pyx_GIVEREF(__pyx_tuple__84);
-  __pyx_codeobj__85 = (PyObject*)__Pyx_PyCode_New(1, 0, 0, 7, 0, CO_OPTIMIZED|CO_NEWLOCALS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__84, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_cython_cRandPerfTabs_pyx, __pyx_n_s_convertDiscriminationThresholds2_2, 193, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__85)) __PYX_ERR(0, 193, __pyx_L1_error)
+  __pyx_tuple__83 = PyTuple_Pack(7, __pyx_n_s_self, __pyx_n_s_Decimal, __pyx_n_s_criteria, __pyx_n_s_g, __pyx_n_s_th, __pyx_n_s_d_2, __pyx_n_s_d1); if (unlikely(!__pyx_tuple__83)) __PYX_ERR(0, 193, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_tuple__83);
+  __Pyx_GIVEREF(__pyx_tuple__83);
+  __pyx_codeobj__84 = (PyObject*)__Pyx_PyCode_New(1, 0, 0, 7, 0, CO_OPTIMIZED|CO_NEWLOCALS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__83, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_cython_cRandPerfTabs_pyx, __pyx_n_s_convertDiscriminationThresholds2_2, 193, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__84)) __PYX_ERR(0, 193, __pyx_L1_error)
 
   /* "cRandPerfTabs.pyx":205
  *                 criteria[g]['thresholds'][th] = d1
@@ -48514,13 +48261,13 @@ static CYTHON_SMALL_CODE int __Pyx_InitCachedConstants(void) {
  *         """
  *         Prints self.criteria with thresholds and weights.
  */
-  __pyx_tuple__86 = PyTuple_Pack(16, __pyx_n_s_self, __pyx_n_s_IntegerWeights, __pyx_n_s_Alphabetic, __pyx_n_s_ByObjectives, __pyx_n_s_Debug, __pyx_n_s_criteria, __pyx_n_s_objectives, __pyx_n_s_sumWeights, __pyx_n_s_obj, __pyx_n_s_criteriaList, __pyx_n_s_g, __pyx_n_s_criterionName, __pyx_n_s_weightg, __pyx_n_s_th, __pyx_n_s_g, __pyx_n_s_g); if (unlikely(!__pyx_tuple__86)) __PYX_ERR(0, 205, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_tuple__86);
-  __Pyx_GIVEREF(__pyx_tuple__86);
-  __pyx_codeobj__87 = (PyObject*)__Pyx_PyCode_New(5, 0, 0, 16, 0, CO_OPTIMIZED|CO_NEWLOCALS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__86, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_cython_cRandPerfTabs_pyx, __pyx_n_s_showCriteria, 205, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__87)) __PYX_ERR(0, 205, __pyx_L1_error)
-  __pyx_tuple__88 = PyTuple_Pack(4, ((PyObject *)Py_True), ((PyObject *)Py_False), ((PyObject *)Py_True), ((PyObject *)Py_False)); if (unlikely(!__pyx_tuple__88)) __PYX_ERR(0, 205, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_tuple__88);
-  __Pyx_GIVEREF(__pyx_tuple__88);
+  __pyx_tuple__85 = PyTuple_Pack(16, __pyx_n_s_self, __pyx_n_s_IntegerWeights, __pyx_n_s_Alphabetic, __pyx_n_s_ByObjectives, __pyx_n_s_Debug, __pyx_n_s_criteria, __pyx_n_s_objectives, __pyx_n_s_sumWeights, __pyx_n_s_obj, __pyx_n_s_criteriaList, __pyx_n_s_g, __pyx_n_s_criterionName, __pyx_n_s_weightg, __pyx_n_s_th, __pyx_n_s_g, __pyx_n_s_g); if (unlikely(!__pyx_tuple__85)) __PYX_ERR(0, 205, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_tuple__85);
+  __Pyx_GIVEREF(__pyx_tuple__85);
+  __pyx_codeobj__86 = (PyObject*)__Pyx_PyCode_New(5, 0, 0, 16, 0, CO_OPTIMIZED|CO_NEWLOCALS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__85, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_cython_cRandPerfTabs_pyx, __pyx_n_s_showCriteria, 205, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__86)) __PYX_ERR(0, 205, __pyx_L1_error)
+  __pyx_tuple__87 = PyTuple_Pack(4, ((PyObject *)Py_True), ((PyObject *)Py_False), ((PyObject *)Py_True), ((PyObject *)Py_False)); if (unlikely(!__pyx_tuple__87)) __PYX_ERR(0, 205, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_tuple__87);
+  __Pyx_GIVEREF(__pyx_tuple__87);
 
   /* "cRandPerfTabs.pyx":296
  *                 print()
@@ -48529,10 +48276,10 @@ static CYTHON_SMALL_CODE int __Pyx_InitCachedConstants(void) {
  *                                int fromIndex=-1,int toIndex=-1,bint Sorted=False,ndigits=2):
  *         """
  */
-  __pyx_tuple__89 = PyTuple_Pack(16, __pyx_n_s_self, __pyx_n_s_Transposed, __pyx_n_s_actionsSubset, __pyx_n_s_fromIndex, __pyx_n_s_toIndex, __pyx_n_s_Sorted, __pyx_n_s_ndigits, __pyx_n_s_i, __pyx_n_s_x, __pyx_n_s_Decimal, __pyx_n_s_criteriaList, __pyx_n_s_NA, __pyx_n_s_actionsList, __pyx_n_s_formatString, __pyx_n_s_g, __pyx_n_s_evalgx); if (unlikely(!__pyx_tuple__89)) __PYX_ERR(0, 296, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_tuple__89);
-  __Pyx_GIVEREF(__pyx_tuple__89);
-  __pyx_codeobj__90 = (PyObject*)__Pyx_PyCode_New(7, 0, 0, 16, 0, CO_OPTIMIZED|CO_NEWLOCALS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__89, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_cython_cRandPerfTabs_pyx, __pyx_n_s_showPerformanceTableau, 296, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__90)) __PYX_ERR(0, 296, __pyx_L1_error)
+  __pyx_tuple__88 = PyTuple_Pack(16, __pyx_n_s_self, __pyx_n_s_Transposed, __pyx_n_s_actionsSubset, __pyx_n_s_fromIndex, __pyx_n_s_toIndex, __pyx_n_s_Sorted, __pyx_n_s_ndigits, __pyx_n_s_i, __pyx_n_s_x, __pyx_n_s_Decimal, __pyx_n_s_criteriaList, __pyx_n_s_NA, __pyx_n_s_actionsList, __pyx_n_s_formatString, __pyx_n_s_g, __pyx_n_s_evalgx); if (unlikely(!__pyx_tuple__88)) __PYX_ERR(0, 296, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_tuple__88);
+  __Pyx_GIVEREF(__pyx_tuple__88);
+  __pyx_codeobj__89 = (PyObject*)__Pyx_PyCode_New(7, 0, 0, 16, 0, CO_OPTIMIZED|CO_NEWLOCALS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__88, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_cython_cRandPerfTabs_pyx, __pyx_n_s_showPerformanceTableau, 296, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__89)) __PYX_ERR(0, 296, __pyx_L1_error)
 
   /* "cRandPerfTabs.pyx":366
  * 
@@ -48541,10 +48288,10 @@ static CYTHON_SMALL_CODE int __Pyx_InitCachedConstants(void) {
  *         """
  *         Recodes the evaluations between lowValue and highValue on all criteria.
  */
-  __pyx_tuple__91 = PyTuple_Pack(21, __pyx_n_s_self, __pyx_n_s_lowValue, __pyx_n_s_highValue, __pyx_n_s_Debug, __pyx_n_s_criteria, __pyx_n_s_actions, __pyx_n_s_evaluation, __pyx_n_s_NA, __pyx_n_s_amplitude, __pyx_n_s_criterionKeys, __pyx_n_s_actionKeys, __pyx_n_s_normEvaluation, __pyx_n_s_g, __pyx_n_s_glow, __pyx_n_s_ghigh, __pyx_n_s_gamp, __pyx_n_s_x, __pyx_n_s_evalx, __pyx_n_s_sign, __pyx_n_s_x, __pyx_n_s_x); if (unlikely(!__pyx_tuple__91)) __PYX_ERR(0, 366, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_tuple__91);
-  __Pyx_GIVEREF(__pyx_tuple__91);
-  __pyx_codeobj__92 = (PyObject*)__Pyx_PyCode_New(4, 0, 0, 21, 0, CO_OPTIMIZED|CO_NEWLOCALS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__91, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_cython_cRandPerfTabs_pyx, __pyx_n_s_normalizeEvaluations, 366, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__92)) __PYX_ERR(0, 366, __pyx_L1_error)
+  __pyx_tuple__90 = PyTuple_Pack(21, __pyx_n_s_self, __pyx_n_s_lowValue, __pyx_n_s_highValue, __pyx_n_s_Debug, __pyx_n_s_criteria, __pyx_n_s_actions, __pyx_n_s_evaluation, __pyx_n_s_NA, __pyx_n_s_amplitude, __pyx_n_s_criterionKeys, __pyx_n_s_actionKeys, __pyx_n_s_normEvaluation, __pyx_n_s_g, __pyx_n_s_glow, __pyx_n_s_ghigh, __pyx_n_s_gamp, __pyx_n_s_x, __pyx_n_s_evalx, __pyx_n_s_sign, __pyx_n_s_x, __pyx_n_s_x); if (unlikely(!__pyx_tuple__90)) __PYX_ERR(0, 366, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_tuple__90);
+  __Pyx_GIVEREF(__pyx_tuple__90);
+  __pyx_codeobj__91 = (PyObject*)__Pyx_PyCode_New(4, 0, 0, 21, 0, CO_OPTIMIZED|CO_NEWLOCALS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__90, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_cython_cRandPerfTabs_pyx, __pyx_n_s_normalizeEvaluations, 366, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__91)) __PYX_ERR(0, 366, __pyx_L1_error)
 
   /* "cRandPerfTabs.pyx":421
  *         return normEvaluation
@@ -48553,13 +48300,13 @@ static CYTHON_SMALL_CODE int __Pyx_InitCachedConstants(void) {
  *                                    criteriaList=None,
  *                                    colorLevels=7,
  */
-  __pyx_tuple__93 = PyTuple_Pack(20, __pyx_n_s_self, __pyx_n_s_actionsList, __pyx_n_s_criteriaList, __pyx_n_s_colorLevels, __pyx_n_s_pageTitle, __pyx_n_s_ndigits, __pyx_n_s_SparseModel, __pyx_n_s_minimalComponentSize, __pyx_n_s_rankingRule, __pyx_n_s_quantiles, __pyx_n_s_strategy, __pyx_n_s_Correlations, __pyx_n_s_Threading, __pyx_n_s_nbrOfCPUs, __pyx_n_s_Debug, __pyx_n_s_webbrowser, __pyx_n_s_NamedTemporaryFile, __pyx_n_s_fileName, __pyx_n_s_fo, __pyx_n_s_url); if (unlikely(!__pyx_tuple__93)) __PYX_ERR(0, 421, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_tuple__93);
-  __Pyx_GIVEREF(__pyx_tuple__93);
-  __pyx_codeobj__94 = (PyObject*)__Pyx_PyCode_New(15, 0, 0, 20, 0, CO_OPTIMIZED|CO_NEWLOCALS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__93, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_cython_cRandPerfTabs_pyx, __pyx_n_s_showHTMLPerformanceHeatmap, 421, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__94)) __PYX_ERR(0, 421, __pyx_L1_error)
-  __pyx_tuple__95 = PyTuple_Pack(14, Py_None, Py_None, ((PyObject *)__pyx_int_7), Py_None, ((PyObject *)__pyx_int_2), ((PyObject *)Py_False), ((PyObject *)__pyx_int_1), ((PyObject*)__pyx_n_u_NetFlows), Py_None, ((PyObject*)__pyx_n_u_average), ((PyObject *)Py_False), ((PyObject *)Py_False), Py_None, ((PyObject *)Py_False)); if (unlikely(!__pyx_tuple__95)) __PYX_ERR(0, 421, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_tuple__95);
-  __Pyx_GIVEREF(__pyx_tuple__95);
+  __pyx_tuple__92 = PyTuple_Pack(20, __pyx_n_s_self, __pyx_n_s_actionsList, __pyx_n_s_criteriaList, __pyx_n_s_colorLevels, __pyx_n_s_pageTitle, __pyx_n_s_ndigits, __pyx_n_s_SparseModel, __pyx_n_s_minimalComponentSize, __pyx_n_s_rankingRule, __pyx_n_s_quantiles, __pyx_n_s_strategy, __pyx_n_s_Correlations, __pyx_n_s_Threading, __pyx_n_s_nbrOfCPUs, __pyx_n_s_Debug, __pyx_n_s_webbrowser, __pyx_n_s_NamedTemporaryFile, __pyx_n_s_fileName, __pyx_n_s_fo, __pyx_n_s_url); if (unlikely(!__pyx_tuple__92)) __PYX_ERR(0, 421, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_tuple__92);
+  __Pyx_GIVEREF(__pyx_tuple__92);
+  __pyx_codeobj__93 = (PyObject*)__Pyx_PyCode_New(15, 0, 0, 20, 0, CO_OPTIMIZED|CO_NEWLOCALS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__92, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_cython_cRandPerfTabs_pyx, __pyx_n_s_showHTMLPerformanceHeatmap, 421, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__93)) __PYX_ERR(0, 421, __pyx_L1_error)
+  __pyx_tuple__94 = PyTuple_Pack(14, Py_None, Py_None, ((PyObject *)__pyx_int_7), Py_None, ((PyObject *)__pyx_int_2), ((PyObject *)Py_False), ((PyObject *)__pyx_int_1), ((PyObject*)__pyx_n_u_NetFlows), Py_None, ((PyObject*)__pyx_n_u_average), ((PyObject *)Py_False), ((PyObject *)Py_False), Py_None, ((PyObject *)Py_False)); if (unlikely(!__pyx_tuple__94)) __PYX_ERR(0, 421, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_tuple__94);
+  __Pyx_GIVEREF(__pyx_tuple__94);
 
   /* "cRandPerfTabs.pyx":494
  *         self.convertInsite2BigData()
@@ -48568,13 +48315,13 @@ static CYTHON_SMALL_CODE int __Pyx_InitCachedConstants(void) {
  *         """
  *         Persistant storage of Performance Tableaux.
  */
-  __pyx_tuple__96 = PyTuple_Pack(15, __pyx_n_s_self, __pyx_n_s_fileName, __pyx_n_s_valueDigits, __pyx_n_s_actions, __pyx_n_s_objectives, __pyx_n_s_criteria, __pyx_n_s_evaluation, __pyx_n_s_NA, __pyx_n_s_fileNameExt, __pyx_n_s_fo, __pyx_n_s_x, __pyx_n_s_it, __pyx_n_s_obj, __pyx_n_s_g, __pyx_n_s_evaluationString); if (unlikely(!__pyx_tuple__96)) __PYX_ERR(0, 494, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_tuple__96);
-  __Pyx_GIVEREF(__pyx_tuple__96);
-  __pyx_codeobj__97 = (PyObject*)__Pyx_PyCode_New(3, 0, 0, 15, 0, CO_OPTIMIZED|CO_NEWLOCALS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__96, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_cython_cRandPerfTabs_pyx, __pyx_n_s_save, 494, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__97)) __PYX_ERR(0, 494, __pyx_L1_error)
-  __pyx_tuple__98 = PyTuple_Pack(2, ((PyObject*)__pyx_n_u_tempperftab), ((PyObject *)__pyx_int_2)); if (unlikely(!__pyx_tuple__98)) __PYX_ERR(0, 494, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_tuple__98);
-  __Pyx_GIVEREF(__pyx_tuple__98);
+  __pyx_tuple__95 = PyTuple_Pack(15, __pyx_n_s_self, __pyx_n_s_fileName, __pyx_n_s_valueDigits, __pyx_n_s_actions, __pyx_n_s_objectives, __pyx_n_s_criteria, __pyx_n_s_evaluation, __pyx_n_s_NA, __pyx_n_s_fileNameExt, __pyx_n_s_fo, __pyx_n_s_x, __pyx_n_s_it, __pyx_n_s_obj, __pyx_n_s_g, __pyx_n_s_evaluationString); if (unlikely(!__pyx_tuple__95)) __PYX_ERR(0, 494, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_tuple__95);
+  __Pyx_GIVEREF(__pyx_tuple__95);
+  __pyx_codeobj__96 = (PyObject*)__Pyx_PyCode_New(3, 0, 0, 15, 0, CO_OPTIMIZED|CO_NEWLOCALS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__95, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_cython_cRandPerfTabs_pyx, __pyx_n_s_save, 494, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__96)) __PYX_ERR(0, 494, __pyx_L1_error)
+  __pyx_tuple__97 = PyTuple_Pack(2, ((PyObject*)__pyx_n_u_tempperftab), ((PyObject *)__pyx_int_2)); if (unlikely(!__pyx_tuple__97)) __PYX_ERR(0, 494, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_tuple__97);
+  __Pyx_GIVEREF(__pyx_tuple__97);
 
   /* "cRandPerfTabs.pyx":565
  * 
@@ -48583,13 +48330,13 @@ static CYTHON_SMALL_CODE int __Pyx_InitCachedConstants(void) {
  *         cdef int key
  * 
  */
-  __pyx_tuple__99 = PyTuple_Pack(23, __pyx_n_s_self, __pyx_n_s_inPerfTab, __pyx_n_s_actionsSubset, __pyx_n_s_criteriaSubset, __pyx_n_s_objectivesSubset, __pyx_n_s_key_2, __pyx_n_s_deepcopy, __pyx_n_s_OrderedDict, __pyx_n_s_cRandomCBPerformanceTableau, __pyx_n_s_cRandom3ObjectivesPerformanceTab, __pyx_n_s_cRandomPerformanceTableau, __pyx_n_s_na, __pyx_n_s_actions, __pyx_n_s_x, __pyx_n_s_intKey, __pyx_n_s_actionsTypeStatistics, __pyx_n_s_xType, __pyx_n_s_objectives, __pyx_n_s_HasObjectives, __pyx_n_s_criteria, __pyx_n_s_obj, __pyx_n_s_g, __pyx_n_s_evaluation); if (unlikely(!__pyx_tuple__99)) __PYX_ERR(0, 565, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_tuple__99);
-  __Pyx_GIVEREF(__pyx_tuple__99);
-  __pyx_codeobj__100 = (PyObject*)__Pyx_PyCode_New(5, 0, 0, 23, 0, CO_OPTIMIZED|CO_NEWLOCALS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__99, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_cython_cRandPerfTabs_pyx, __pyx_n_s_init, 565, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__100)) __PYX_ERR(0, 565, __pyx_L1_error)
-  __pyx_tuple__101 = PyTuple_Pack(3, Py_None, Py_None, Py_None); if (unlikely(!__pyx_tuple__101)) __PYX_ERR(0, 565, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_tuple__101);
-  __Pyx_GIVEREF(__pyx_tuple__101);
+  __pyx_tuple__98 = PyTuple_Pack(23, __pyx_n_s_self, __pyx_n_s_inPerfTab, __pyx_n_s_actionsSubset, __pyx_n_s_criteriaSubset, __pyx_n_s_objectivesSubset, __pyx_n_s_key_2, __pyx_n_s_deepcopy, __pyx_n_s_OrderedDict, __pyx_n_s_cRandomCBPerformanceTableau, __pyx_n_s_cRandom3ObjectivesPerformanceTab, __pyx_n_s_cRandomPerformanceTableau, __pyx_n_s_na, __pyx_n_s_actions, __pyx_n_s_x, __pyx_n_s_intKey, __pyx_n_s_actionsTypeStatistics, __pyx_n_s_xType, __pyx_n_s_objectives, __pyx_n_s_HasObjectives, __pyx_n_s_criteria, __pyx_n_s_obj, __pyx_n_s_g, __pyx_n_s_evaluation); if (unlikely(!__pyx_tuple__98)) __PYX_ERR(0, 565, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_tuple__98);
+  __Pyx_GIVEREF(__pyx_tuple__98);
+  __pyx_codeobj__99 = (PyObject*)__Pyx_PyCode_New(5, 0, 0, 23, 0, CO_OPTIMIZED|CO_NEWLOCALS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__98, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_cython_cRandPerfTabs_pyx, __pyx_n_s_init, 565, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__99)) __PYX_ERR(0, 565, __pyx_L1_error)
+  __pyx_tuple__100 = PyTuple_Pack(3, Py_None, Py_None, Py_None); if (unlikely(!__pyx_tuple__100)) __PYX_ERR(0, 565, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_tuple__100);
+  __Pyx_GIVEREF(__pyx_tuple__100);
 
   /* "cRandPerfTabs.pyx":727
  * 
@@ -48598,10 +48345,10 @@ static CYTHON_SMALL_CODE int __Pyx_InitCachedConstants(void) {
  *                  int numberOfCriteria = 7,\
  *                  weightDistribution = 'equisignificant',\
  */
-  __pyx_tuple__102 = PyTuple_Pack(57, __pyx_n_s_self, __pyx_n_s_numberOfActions, __pyx_n_s_numberOfCriteria, __pyx_n_s_weightDistribution, __pyx_n_s_weightScale, __pyx_n_s_commonScale, __pyx_n_s_commonThresholds, __pyx_n_s_commonMode, __pyx_n_s_valueDigits, __pyx_n_s_missingDataProbability, __pyx_n_s_NA, __pyx_n_s_BigData, __pyx_n_s_seed, __pyx_n_s_Debug, __pyx_n_s_nd, __pyx_n_s_ng, __pyx_n_s_ngd, __pyx_n_s_digits, __pyx_n_s_i, __pyx_n_s_a, __pyx_n_s_x, __pyx_n_s_ind, __pyx_n_s_pref, __pyx_n_s_weakVeto, __pyx_n_s_veto, __pyx_n_s_randeval, __pyx_n_s_comonAmplitude, __pyx_n_s_m, __pyx_n_s_M, __pyx_n_s_xm, __pyx_n_s_r, __pyx_n_s_beta, __pyx_n_s_alpha, __pyx_n_s_mu, __pyx_n_s_sigma, __pyx_n_s_sys, __pyx_n_s_time, __pyx_n_s_math, __pyx_n_s_copy, __pyx_n_s_random, __pyx_n_s_RNGTr, __pyx_n_s_actions, __pyx_n_s_actionName, __pyx_n_s_weightsList, __pyx_n_s_criteria, __pyx_n_s_commentString, __pyx_n_s_commonAmplitude, __pyx_n_s_g, __pyx_n_s_indThresholds, __pyx_n_s_prefThresholds, __pyx_n_s_weakVetoThresholds, __pyx_n_s_vetoThresholds, __pyx_n_s_evaluation, __pyx_n_s_rng, __pyx_n_s_u, __pyx_n_s_notfound, __pyx_n_s_c); if (unlikely(!__pyx_tuple__102)) __PYX_ERR(0, 727, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_tuple__102);
-  __Pyx_GIVEREF(__pyx_tuple__102);
-  __pyx_codeobj__103 = (PyObject*)__Pyx_PyCode_New(14, 0, 0, 57, 0, CO_OPTIMIZED|CO_NEWLOCALS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__102, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_cython_cRandPerfTabs_pyx, __pyx_n_s_init, 727, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__103)) __PYX_ERR(0, 727, __pyx_L1_error)
+  __pyx_tuple__101 = PyTuple_Pack(57, __pyx_n_s_self, __pyx_n_s_numberOfActions, __pyx_n_s_numberOfCriteria, __pyx_n_s_weightDistribution, __pyx_n_s_weightScale, __pyx_n_s_commonScale, __pyx_n_s_commonThresholds, __pyx_n_s_commonMode, __pyx_n_s_valueDigits, __pyx_n_s_missingDataProbability, __pyx_n_s_NA, __pyx_n_s_BigData, __pyx_n_s_seed, __pyx_n_s_Debug, __pyx_n_s_nd, __pyx_n_s_ng, __pyx_n_s_ngd, __pyx_n_s_digits, __pyx_n_s_i, __pyx_n_s_a, __pyx_n_s_x, __pyx_n_s_ind, __pyx_n_s_pref, __pyx_n_s_weakVeto, __pyx_n_s_veto, __pyx_n_s_randeval, __pyx_n_s_comonAmplitude, __pyx_n_s_m, __pyx_n_s_M, __pyx_n_s_xm, __pyx_n_s_r, __pyx_n_s_beta, __pyx_n_s_alpha, __pyx_n_s_mu, __pyx_n_s_sigma, __pyx_n_s_sys, __pyx_n_s_time, __pyx_n_s_math, __pyx_n_s_copy, __pyx_n_s_random, __pyx_n_s_RNGTr, __pyx_n_s_actions, __pyx_n_s_actionName, __pyx_n_s_weightsList, __pyx_n_s_criteria, __pyx_n_s_commentString, __pyx_n_s_commonAmplitude, __pyx_n_s_g, __pyx_n_s_indThresholds, __pyx_n_s_prefThresholds, __pyx_n_s_weakVetoThresholds, __pyx_n_s_vetoThresholds, __pyx_n_s_evaluation, __pyx_n_s_rng, __pyx_n_s_u, __pyx_n_s_notfound, __pyx_n_s_c); if (unlikely(!__pyx_tuple__101)) __PYX_ERR(0, 727, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_tuple__101);
+  __Pyx_GIVEREF(__pyx_tuple__101);
+  __pyx_codeobj__102 = (PyObject*)__Pyx_PyCode_New(14, 0, 0, 57, 0, CO_OPTIMIZED|CO_NEWLOCALS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__101, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_cython_cRandPerfTabs_pyx, __pyx_n_s_init, 727, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__102)) __PYX_ERR(0, 727, __pyx_L1_error)
 
   /* "cRandPerfTabs.pyx":962
  * 
@@ -48610,10 +48357,10 @@ static CYTHON_SMALL_CODE int __Pyx_InitCachedConstants(void) {
  *                  weightDistribution = 'equisignificant', weightScale=None,\
  *                  commonThresholds = None,
  */
-  __pyx_tuple__104 = PyTuple_Pack(28, __pyx_n_s_self, __pyx_n_s_numberOfActions, __pyx_n_s_numberOfCriteria, __pyx_n_s_weightDistribution, __pyx_n_s_weightScale, __pyx_n_s_commonThresholds, __pyx_n_s_seed, __pyx_n_s_Debug, __pyx_n_s_i, __pyx_n_s_j, __pyx_n_s_nd, __pyx_n_s_randeval, __pyx_n_s_random, __pyx_n_s_actions, __pyx_n_s_actionName, __pyx_n_s_weightsList, __pyx_n_s_ngd, __pyx_n_s_criteria, __pyx_n_s_commentString, __pyx_n_s_g, __pyx_n_s_indThreshold, __pyx_n_s_prefThreshold, __pyx_n_s_vetoThreshold, __pyx_n_s_commonScale, __pyx_n_s_evaluation, __pyx_n_s_choiceRange, __pyx_n_s_a, __pyx_n_s_j); if (unlikely(!__pyx_tuple__104)) __PYX_ERR(0, 962, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_tuple__104);
-  __Pyx_GIVEREF(__pyx_tuple__104);
-  __pyx_codeobj__105 = (PyObject*)__Pyx_PyCode_New(8, 0, 0, 28, 0, CO_OPTIMIZED|CO_NEWLOCALS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__104, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_cython_cRandPerfTabs_pyx, __pyx_n_s_init, 962, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__105)) __PYX_ERR(0, 962, __pyx_L1_error)
+  __pyx_tuple__103 = PyTuple_Pack(28, __pyx_n_s_self, __pyx_n_s_numberOfActions, __pyx_n_s_numberOfCriteria, __pyx_n_s_weightDistribution, __pyx_n_s_weightScale, __pyx_n_s_commonThresholds, __pyx_n_s_seed, __pyx_n_s_Debug, __pyx_n_s_i, __pyx_n_s_j, __pyx_n_s_nd, __pyx_n_s_randeval, __pyx_n_s_random, __pyx_n_s_actions, __pyx_n_s_actionName, __pyx_n_s_weightsList, __pyx_n_s_ngd, __pyx_n_s_criteria, __pyx_n_s_commentString, __pyx_n_s_g, __pyx_n_s_indThreshold, __pyx_n_s_prefThreshold, __pyx_n_s_vetoThreshold, __pyx_n_s_commonScale, __pyx_n_s_evaluation, __pyx_n_s_choiceRange, __pyx_n_s_a, __pyx_n_s_j); if (unlikely(!__pyx_tuple__103)) __PYX_ERR(0, 962, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_tuple__103);
+  __Pyx_GIVEREF(__pyx_tuple__103);
+  __pyx_codeobj__104 = (PyObject*)__Pyx_PyCode_New(8, 0, 0, 28, 0, CO_OPTIMIZED|CO_NEWLOCALS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__103, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_cython_cRandPerfTabs_pyx, __pyx_n_s_init, 962, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__104)) __PYX_ERR(0, 962, __pyx_L1_error)
 
   /* "cRandPerfTabs.pyx":1079
  *     """
@@ -48622,10 +48369,10 @@ static CYTHON_SMALL_CODE int __Pyx_InitCachedConstants(void) {
  *                  int numberOfCriteria = 7,\
  *                  weightDistribution = None,\
  */
-  __pyx_tuple__106 = PyTuple_Pack(68, __pyx_n_s_self, __pyx_n_s_numberOfActions, __pyx_n_s_numberOfCriteria, __pyx_n_s_weightDistribution, __pyx_n_s_weightScale, __pyx_n_s_commonScale, __pyx_n_s_commonThresholds, __pyx_n_s_commonMode, __pyx_n_s_valueDigits, __pyx_n_s_Coalitions, __pyx_n_s_VariableGenerators, __pyx_n_s_Debug, __pyx_n_s_RandomCoalitions, __pyx_n_s_vetoProbability, __pyx_n_s_seed, __pyx_n_s_nd, __pyx_n_s_x, __pyx_n_s_nbrcrit, __pyx_n_s_a, __pyx_n_s_weightsProduct, __pyx_n_s_digits, __pyx_n_s_span, __pyx_n_s_randeval, __pyx_n_s_randVeto, __pyx_n_s_m, __pyx_n_s_M, __pyx_n_s_r, __pyx_n_s_alpha, __pyx_n_s_beta, __pyx_n_s_xm, __pyx_n_s_u, __pyx_n_s_random, __pyx_n_s_RNGTr, __pyx_n_s_OrderedDict, __pyx_n_s_actions, __pyx_n_s_i, __pyx_n_s_actionKey, __pyx_n_s_actionsList, __pyx_n_s_criteriaList, __pyx_n_s_weightMode, __pyx_n_s_weightsList, __pyx_n_s_j, __pyx_n_s_criterionCoalitionsList, __pyx_n_s_bin, __pyx_n_s_p, __pyx_n_s_partition, __pyx_n_s_ni, __pyx_n_s_criteria, __pyx_n_s_gi, __pyx_n_s_g, __pyx_n_s_criterionCoalition, __pyx_n_s_thresholds, __pyx_n_s_thitems, __pyx_n_s_t, __pyx_n_s_coalitionsCardinality, __pyx_n_s_coalition, __pyx_n_s_coalitionSupportingType, __pyx_n_s_c, __pyx_n_s_evaluation, __pyx_n_s_randomMode, __pyx_n_s_commentString, __pyx_n_s_randomRangesList, __pyx_n_s_randomRange, __pyx_n_s_randomModesList, __pyx_n_s_rdseed, __pyx_n_s_rngtr, __pyx_n_s_x, __pyx_n_s_j); if (unlikely(!__pyx_tuple__106)) __PYX_ERR(0, 1079, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_tuple__106);
-  __Pyx_GIVEREF(__pyx_tuple__106);
-  __pyx_codeobj__107 = (PyObject*)__Pyx_PyCode_New(15, 0, 0, 68, 0, CO_OPTIMIZED|CO_NEWLOCALS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__106, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_cython_cRandPerfTabs_pyx, __pyx_n_s_init, 1079, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__107)) __PYX_ERR(0, 1079, __pyx_L1_error)
+  __pyx_tuple__105 = PyTuple_Pack(68, __pyx_n_s_self, __pyx_n_s_numberOfActions, __pyx_n_s_numberOfCriteria, __pyx_n_s_weightDistribution, __pyx_n_s_weightScale, __pyx_n_s_commonScale, __pyx_n_s_commonThresholds, __pyx_n_s_commonMode, __pyx_n_s_valueDigits, __pyx_n_s_Coalitions, __pyx_n_s_VariableGenerators, __pyx_n_s_Debug, __pyx_n_s_RandomCoalitions, __pyx_n_s_vetoProbability, __pyx_n_s_seed, __pyx_n_s_nd, __pyx_n_s_x, __pyx_n_s_nbrcrit, __pyx_n_s_a, __pyx_n_s_weightsProduct, __pyx_n_s_digits, __pyx_n_s_span, __pyx_n_s_randeval, __pyx_n_s_randVeto, __pyx_n_s_m, __pyx_n_s_M, __pyx_n_s_r, __pyx_n_s_alpha, __pyx_n_s_beta, __pyx_n_s_xm, __pyx_n_s_u, __pyx_n_s_random, __pyx_n_s_RNGTr, __pyx_n_s_OrderedDict, __pyx_n_s_actions, __pyx_n_s_i, __pyx_n_s_actionKey, __pyx_n_s_actionsList, __pyx_n_s_criteriaList, __pyx_n_s_weightMode, __pyx_n_s_weightsList, __pyx_n_s_j, __pyx_n_s_criterionCoalitionsList, __pyx_n_s_bin, __pyx_n_s_p, __pyx_n_s_partition, __pyx_n_s_ni, __pyx_n_s_criteria, __pyx_n_s_gi, __pyx_n_s_g, __pyx_n_s_criterionCoalition, __pyx_n_s_thresholds, __pyx_n_s_thitems, __pyx_n_s_t, __pyx_n_s_coalitionsCardinality, __pyx_n_s_coalition, __pyx_n_s_coalitionSupportingType, __pyx_n_s_c, __pyx_n_s_evaluation, __pyx_n_s_randomMode, __pyx_n_s_commentString, __pyx_n_s_randomRangesList, __pyx_n_s_randomRange, __pyx_n_s_randomModesList, __pyx_n_s_rdseed, __pyx_n_s_rngtr, __pyx_n_s_x, __pyx_n_s_j); if (unlikely(!__pyx_tuple__105)) __PYX_ERR(0, 1079, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_tuple__105);
+  __Pyx_GIVEREF(__pyx_tuple__105);
+  __pyx_codeobj__106 = (PyObject*)__Pyx_PyCode_New(15, 0, 0, 68, 0, CO_OPTIMIZED|CO_NEWLOCALS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__105, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_cython_cRandPerfTabs_pyx, __pyx_n_s_init, 1079, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__106)) __PYX_ERR(0, 1079, __pyx_L1_error)
 
   /* "cRandPerfTabs.pyx":1469
  *     """
@@ -48634,10 +48381,10 @@ static CYTHON_SMALL_CODE int __Pyx_InitCachedConstants(void) {
  *                  weightDistribution = 'equiobjectives', weightScale=None,\
  *                  #integerWeights = True,\
  */
-  __pyx_tuple__108 = PyTuple_Pack(64, __pyx_n_s_self, __pyx_n_s_numberOfActions, __pyx_n_s_numberOfCriteria, __pyx_n_s_weightDistribution, __pyx_n_s_weightScale, __pyx_n_s_OrdinalScales, __pyx_n_s_commonScale, __pyx_n_s_commonThresholds, __pyx_n_s_commonMode, __pyx_n_s_valueDigits, __pyx_n_s_vetoProbability, __pyx_n_s_missingDataProbability, __pyx_n_s_NA, __pyx_n_s_seed, __pyx_n_s_Debug, __pyx_n_s_nd, __pyx_n_s_i, __pyx_n_s_t, __pyx_n_s_x, __pyx_n_s_a, __pyx_n_s_digits, __pyx_n_s_weightsProduct, __pyx_n_s_objWeight, __pyx_n_s_span, __pyx_n_s_randVeto, __pyx_n_s_randeval, __pyx_n_s_m, __pyx_n_s_M, __pyx_n_s_r, __pyx_n_s_alpha, __pyx_n_s_beta, __pyx_n_s_xm, __pyx_n_s_u, __pyx_n_s_random, __pyx_n_s_RNGTr, __pyx_n_s_actions, __pyx_n_s_actionKey, __pyx_n_s_weightMode, __pyx_n_s_weightsList, __pyx_n_s_sumWeights, __pyx_n_s_objectives, __pyx_n_s_criteria, __pyx_n_s_objectivesKeys, __pyx_n_s_g, __pyx_n_s_criterionObjective, __pyx_n_s_thresholds, __pyx_n_s_thitems, __pyx_n_s_objectivesCardinality, __pyx_n_s_oi, __pyx_n_s_objectiveSupportingType, __pyx_n_s_profile, __pyx_n_s_obj, __pyx_n_s_ost, __pyx_n_s_evaluation, __pyx_n_s_randomMode, __pyx_n_s_aobj, __pyx_n_s_aobjSt, __pyx_n_s_randomRange, __pyx_n_s_rdseed, __pyx_n_s_rngtr, __pyx_n_s_objCriteria, __pyx_n_s_sevalg, __pyx_n_s_i, __pyx_n_s_g); if (unlikely(!__pyx_tuple__108)) __PYX_ERR(0, 1469, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_tuple__108);
-  __Pyx_GIVEREF(__pyx_tuple__108);
-  __pyx_codeobj__109 = (PyObject*)__Pyx_PyCode_New(15, 0, 0, 64, 0, CO_OPTIMIZED|CO_NEWLOCALS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__108, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_cython_cRandPerfTabs_pyx, __pyx_n_s_init, 1469, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__109)) __PYX_ERR(0, 1469, __pyx_L1_error)
+  __pyx_tuple__107 = PyTuple_Pack(64, __pyx_n_s_self, __pyx_n_s_numberOfActions, __pyx_n_s_numberOfCriteria, __pyx_n_s_weightDistribution, __pyx_n_s_weightScale, __pyx_n_s_OrdinalScales, __pyx_n_s_commonScale, __pyx_n_s_commonThresholds, __pyx_n_s_commonMode, __pyx_n_s_valueDigits, __pyx_n_s_vetoProbability, __pyx_n_s_missingDataProbability, __pyx_n_s_NA, __pyx_n_s_seed, __pyx_n_s_Debug, __pyx_n_s_nd, __pyx_n_s_i, __pyx_n_s_t, __pyx_n_s_x, __pyx_n_s_a, __pyx_n_s_digits, __pyx_n_s_weightsProduct, __pyx_n_s_objWeight, __pyx_n_s_span, __pyx_n_s_randVeto, __pyx_n_s_randeval, __pyx_n_s_m, __pyx_n_s_M, __pyx_n_s_r, __pyx_n_s_alpha, __pyx_n_s_beta, __pyx_n_s_xm, __pyx_n_s_u, __pyx_n_s_random, __pyx_n_s_RNGTr, __pyx_n_s_actions, __pyx_n_s_actionKey, __pyx_n_s_weightMode, __pyx_n_s_weightsList, __pyx_n_s_sumWeights, __pyx_n_s_objectives, __pyx_n_s_criteria, __pyx_n_s_objectivesKeys, __pyx_n_s_g, __pyx_n_s_criterionObjective, __pyx_n_s_thresholds, __pyx_n_s_thitems, __pyx_n_s_objectivesCardinality, __pyx_n_s_oi, __pyx_n_s_objectiveSupportingType, __pyx_n_s_profile, __pyx_n_s_obj, __pyx_n_s_ost, __pyx_n_s_evaluation, __pyx_n_s_randomMode, __pyx_n_s_aobj, __pyx_n_s_aobjSt, __pyx_n_s_randomRange, __pyx_n_s_rdseed, __pyx_n_s_rngtr, __pyx_n_s_objCriteria, __pyx_n_s_sevalg, __pyx_n_s_i, __pyx_n_s_g); if (unlikely(!__pyx_tuple__107)) __PYX_ERR(0, 1469, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_tuple__107);
+  __Pyx_GIVEREF(__pyx_tuple__107);
+  __pyx_codeobj__108 = (PyObject*)__Pyx_PyCode_New(15, 0, 0, 64, 0, CO_OPTIMIZED|CO_NEWLOCALS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__107, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_cython_cRandPerfTabs_pyx, __pyx_n_s_init, 1469, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__108)) __PYX_ERR(0, 1469, __pyx_L1_error)
 
   /* "cRandPerfTabs.pyx":1798
  * 
@@ -48646,10 +48393,10 @@ static CYTHON_SMALL_CODE int __Pyx_InitCachedConstants(void) {
  *         print('*------ show objectives -------"')
  *         for obj in self.objectives:
  */
-  __pyx_tuple__110 = PyTuple_Pack(3, __pyx_n_s_self, __pyx_n_s_obj, __pyx_n_s_g); if (unlikely(!__pyx_tuple__110)) __PYX_ERR(0, 1798, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_tuple__110);
-  __Pyx_GIVEREF(__pyx_tuple__110);
-  __pyx_codeobj__111 = (PyObject*)__Pyx_PyCode_New(1, 0, 0, 3, 0, CO_OPTIMIZED|CO_NEWLOCALS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__110, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_cython_cRandPerfTabs_pyx, __pyx_n_s_showObjectives, 1798, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__111)) __PYX_ERR(0, 1798, __pyx_L1_error)
+  __pyx_tuple__109 = PyTuple_Pack(3, __pyx_n_s_self, __pyx_n_s_obj, __pyx_n_s_g); if (unlikely(!__pyx_tuple__109)) __PYX_ERR(0, 1798, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_tuple__109);
+  __Pyx_GIVEREF(__pyx_tuple__109);
+  __pyx_codeobj__110 = (PyObject*)__Pyx_PyCode_New(1, 0, 0, 3, 0, CO_OPTIMIZED|CO_NEWLOCALS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__109, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_cython_cRandPerfTabs_pyx, __pyx_n_s_showObjectives, 1798, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__110)) __PYX_ERR(0, 1798, __pyx_L1_error)
 
   /* "cRandPerfTabs.pyx":1810
  *                   % (self.objectives[obj]['weight'],len(self.objectives[obj]['criteria'])))
@@ -48658,13 +48405,13 @@ static CYTHON_SMALL_CODE int __Pyx_InitCachedConstants(void) {
  *         """
  *         *Parameter*:
  */
-  __pyx_tuple__112 = PyTuple_Pack(6, __pyx_n_s_self, __pyx_n_s_Alphabetic, __pyx_n_s_actions, __pyx_n_s_actionsKeys, __pyx_n_s_x, __pyx_n_s_x); if (unlikely(!__pyx_tuple__112)) __PYX_ERR(0, 1810, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_tuple__112);
-  __Pyx_GIVEREF(__pyx_tuple__112);
-  __pyx_codeobj__113 = (PyObject*)__Pyx_PyCode_New(2, 0, 0, 6, 0, CO_OPTIMIZED|CO_NEWLOCALS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__112, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_cython_cRandPerfTabs_pyx, __pyx_n_s_showActions, 1810, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__113)) __PYX_ERR(0, 1810, __pyx_L1_error)
-  __pyx_tuple__114 = PyTuple_Pack(1, ((PyObject *)Py_False)); if (unlikely(!__pyx_tuple__114)) __PYX_ERR(0, 1810, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_tuple__114);
-  __Pyx_GIVEREF(__pyx_tuple__114);
+  __pyx_tuple__111 = PyTuple_Pack(6, __pyx_n_s_self, __pyx_n_s_Alphabetic, __pyx_n_s_actions, __pyx_n_s_actionsKeys, __pyx_n_s_x, __pyx_n_s_x); if (unlikely(!__pyx_tuple__111)) __PYX_ERR(0, 1810, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_tuple__111);
+  __Pyx_GIVEREF(__pyx_tuple__111);
+  __pyx_codeobj__112 = (PyObject*)__Pyx_PyCode_New(2, 0, 0, 6, 0, CO_OPTIMIZED|CO_NEWLOCALS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__111, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_cython_cRandPerfTabs_pyx, __pyx_n_s_showActions, 1810, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__112)) __PYX_ERR(0, 1810, __pyx_L1_error)
+  __pyx_tuple__113 = PyTuple_Pack(1, ((PyObject *)Py_False)); if (unlikely(!__pyx_tuple__113)) __PYX_ERR(0, 1810, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_tuple__113);
+  __Pyx_GIVEREF(__pyx_tuple__113);
 
   /* "cRandPerfTabs.pyx":1863
  *     """
@@ -48673,10 +48420,10 @@ static CYTHON_SMALL_CODE int __Pyx_InitCachedConstants(void) {
  *                  int numberOfCriteria = 7,\
  *                  weightDistribution = 'equiobjectives',\
  */
-  __pyx_tuple__115 = PyTuple_Pack(76, __pyx_n_s_self, __pyx_n_s_numberOfActions, __pyx_n_s_numberOfCriteria, __pyx_n_s_weightDistribution, __pyx_n_s_weightScale, __pyx_n_s_commonScale, __pyx_n_s_commonThresholds, __pyx_n_s_commonPercentiles, __pyx_n_s_samplingSize, __pyx_n_s_commonMode, __pyx_n_s_valueDigits, __pyx_n_s_missingDataProbability, __pyx_n_s_NA, __pyx_n_s_seed, __pyx_n_s_Threading, __pyx_n_s_nbrCores, __pyx_n_s_Debug, __pyx_n_s_Comments, __pyx_n_s_nd, __pyx_n_s_i, __pyx_n_s_digits, __pyx_n_s_a, __pyx_n_s_sample, __pyx_n_s_x, __pyx_n_s_y, __pyx_n_s_n, __pyx_n_s_nbuf, __pyx_n_s_n2, __pyx_n_s_mu, __pyx_n_s_sigma, __pyx_n_s_randeval, __pyx_n_s_alpha, __pyx_n_s_beta, __pyx_n_s_m, __pyx_n_s_M, __pyx_n_s_xm, __pyx_n_s_r, __pyx_n_s_deltaMinus, __pyx_n_s_deltaPlus, __pyx_n_s_u, __pyx_n_s_amplitude, __pyx_n_s_sys, __pyx_n_s_math, __pyx_n_s_copy, __pyx_n_s_random, __pyx_n_s_actionsTypesList, __pyx_n_s_actions, __pyx_n_s_actionType, __pyx_n_s_actionName, __pyx_n_s_objectives, __pyx_n_s_criterionTypesList, __pyx_n_s_minScaleTypesList, __pyx_n_s_maxScaleTypesList, __pyx_n_s_criterionTypeCounter, __pyx_n_s_criteria, __pyx_n_s_criterionType, __pyx_n_s_g, __pyx_n_s_scaleType, __pyx_n_s_criterionScale, __pyx_n_s_weightMode, __pyx_n_s_weightsList, __pyx_n_s_obj, __pyx_n_s_evaluation, __pyx_n_s_x30, __pyx_n_s_x50, __pyx_n_s_x70, __pyx_n_s_randomMode, __pyx_n_s_commentString, __pyx_n_s_notfound, __pyx_n_s_IncrementalQuantilesEstimator, __pyx_n_s_est, __pyx_n_s_quantile, __pyx_n_s_evx, __pyx_n_s_evy, __pyx_n_s_q, __pyx_n_s_g); if (unlikely(!__pyx_tuple__115)) __PYX_ERR(0, 1863, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_tuple__115);
-  __Pyx_GIVEREF(__pyx_tuple__115);
-  __pyx_codeobj__116 = (PyObject*)__Pyx_PyCode_New(18, 0, 0, 76, 0, CO_OPTIMIZED|CO_NEWLOCALS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__115, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_cython_cRandPerfTabs_pyx, __pyx_n_s_init, 1863, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__116)) __PYX_ERR(0, 1863, __pyx_L1_error)
+  __pyx_tuple__114 = PyTuple_Pack(76, __pyx_n_s_self, __pyx_n_s_numberOfActions, __pyx_n_s_numberOfCriteria, __pyx_n_s_weightDistribution, __pyx_n_s_weightScale, __pyx_n_s_commonScale, __pyx_n_s_commonThresholds, __pyx_n_s_commonPercentiles, __pyx_n_s_samplingSize, __pyx_n_s_commonMode, __pyx_n_s_valueDigits, __pyx_n_s_missingDataProbability, __pyx_n_s_NA, __pyx_n_s_seed, __pyx_n_s_Threading, __pyx_n_s_nbrCores, __pyx_n_s_Debug, __pyx_n_s_Comments, __pyx_n_s_nd, __pyx_n_s_i, __pyx_n_s_digits, __pyx_n_s_a, __pyx_n_s_sample, __pyx_n_s_x, __pyx_n_s_y, __pyx_n_s_n, __pyx_n_s_nbuf, __pyx_n_s_n2, __pyx_n_s_mu, __pyx_n_s_sigma, __pyx_n_s_randeval, __pyx_n_s_alpha, __pyx_n_s_beta, __pyx_n_s_m, __pyx_n_s_M, __pyx_n_s_xm, __pyx_n_s_r, __pyx_n_s_deltaMinus, __pyx_n_s_deltaPlus, __pyx_n_s_u, __pyx_n_s_amplitude, __pyx_n_s_sys, __pyx_n_s_math, __pyx_n_s_copy, __pyx_n_s_random, __pyx_n_s_actionsTypesList, __pyx_n_s_actions, __pyx_n_s_actionType, __pyx_n_s_actionName, __pyx_n_s_objectives, __pyx_n_s_criterionTypesList, __pyx_n_s_minScaleTypesList, __pyx_n_s_maxScaleTypesList, __pyx_n_s_criterionTypeCounter, __pyx_n_s_criteria, __pyx_n_s_criterionType, __pyx_n_s_g, __pyx_n_s_scaleType, __pyx_n_s_criterionScale, __pyx_n_s_weightMode, __pyx_n_s_weightsList, __pyx_n_s_obj, __pyx_n_s_evaluation, __pyx_n_s_x30, __pyx_n_s_x50, __pyx_n_s_x70, __pyx_n_s_randomMode, __pyx_n_s_commentString, __pyx_n_s_notfound, __pyx_n_s_IncrementalQuantilesEstimator, __pyx_n_s_est, __pyx_n_s_quantile, __pyx_n_s_evx, __pyx_n_s_evy, __pyx_n_s_q, __pyx_n_s_g); if (unlikely(!__pyx_tuple__114)) __PYX_ERR(0, 1863, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_tuple__114);
+  __Pyx_GIVEREF(__pyx_tuple__114);
+  __pyx_codeobj__115 = (PyObject*)__Pyx_PyCode_New(18, 0, 0, 76, 0, CO_OPTIMIZED|CO_NEWLOCALS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__114, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_cython_cRandPerfTabs_pyx, __pyx_n_s_init, 1863, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__115)) __PYX_ERR(0, 1863, __pyx_L1_error)
 
   /* "cRandPerfTabs.pyx":2249
  * 
@@ -48685,10 +48432,10 @@ static CYTHON_SMALL_CODE int __Pyx_InitCachedConstants(void) {
  *         import copy
  *         if isinstance(argPerfTab,(str)):
  */
-  __pyx_tuple__117 = PyTuple_Pack(14, __pyx_n_s_self, __pyx_n_s_argPerfTab, __pyx_n_s_lowValue, __pyx_n_s_highValue, __pyx_n_s_coalition, __pyx_n_s_Debug, __pyx_n_s_copy, __pyx_n_s_perfTab, __pyx_n_s_criteria, __pyx_n_s_g, __pyx_n_s_th, __pyx_n_s_empan, __pyx_n_s_intercept, __pyx_n_s_slope); if (unlikely(!__pyx_tuple__117)) __PYX_ERR(0, 2249, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_tuple__117);
-  __Pyx_GIVEREF(__pyx_tuple__117);
-  __pyx_codeobj__118 = (PyObject*)__Pyx_PyCode_New(6, 0, 0, 14, 0, CO_OPTIMIZED|CO_NEWLOCALS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__117, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_cython_cRandPerfTabs_pyx, __pyx_n_s_init, 2249, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__118)) __PYX_ERR(0, 2249, __pyx_L1_error)
+  __pyx_tuple__116 = PyTuple_Pack(14, __pyx_n_s_self, __pyx_n_s_argPerfTab, __pyx_n_s_lowValue, __pyx_n_s_highValue, __pyx_n_s_coalition, __pyx_n_s_Debug, __pyx_n_s_copy, __pyx_n_s_perfTab, __pyx_n_s_criteria, __pyx_n_s_g, __pyx_n_s_th, __pyx_n_s_empan, __pyx_n_s_intercept, __pyx_n_s_slope); if (unlikely(!__pyx_tuple__116)) __PYX_ERR(0, 2249, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_tuple__116);
+  __Pyx_GIVEREF(__pyx_tuple__116);
+  __pyx_codeobj__117 = (PyObject*)__Pyx_PyCode_New(6, 0, 0, 14, 0, CO_OPTIMIZED|CO_NEWLOCALS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__116, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_cython_cRandPerfTabs_pyx, __pyx_n_s_init, 2249, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__117)) __PYX_ERR(0, 2249, __pyx_L1_error)
 
   /* "cRandPerfTabs.pyx":2281
  *         self.criteria = criteria
@@ -48697,10 +48444,10 @@ static CYTHON_SMALL_CODE int __Pyx_InitCachedConstants(void) {
  *         """
  *         recode the evaluations between lowValue and highValue on all criteria.
  */
-  __pyx_tuple__119 = PyTuple_Pack(22, __pyx_n_s_self, __pyx_n_s_lowValue, __pyx_n_s_highValue, __pyx_n_s_Debug, __pyx_n_s_x, __pyx_n_s_amplitude, __pyx_n_s_Decimal, __pyx_n_s_criteria, __pyx_n_s_actions, __pyx_n_s_evaluation, __pyx_n_s_NA, __pyx_n_s_criterionKeys, __pyx_n_s_actionKeys, __pyx_n_s_normEvaluation, __pyx_n_s_g, __pyx_n_s_glow, __pyx_n_s_ghigh, __pyx_n_s_gamp, __pyx_n_s_evalx, __pyx_n_s_sign, __pyx_n_s_g, __pyx_n_s_x); if (unlikely(!__pyx_tuple__119)) __PYX_ERR(0, 2281, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_tuple__119);
-  __Pyx_GIVEREF(__pyx_tuple__119);
-  __pyx_codeobj__120 = (PyObject*)__Pyx_PyCode_New(4, 0, 0, 22, 0, CO_OPTIMIZED|CO_NEWLOCALS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__119, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_cython_cRandPerfTabs_pyx, __pyx_n_s_normalizeEvaluations, 2281, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__120)) __PYX_ERR(0, 2281, __pyx_L1_error)
+  __pyx_tuple__118 = PyTuple_Pack(22, __pyx_n_s_self, __pyx_n_s_lowValue, __pyx_n_s_highValue, __pyx_n_s_Debug, __pyx_n_s_x, __pyx_n_s_amplitude, __pyx_n_s_Decimal, __pyx_n_s_criteria, __pyx_n_s_actions, __pyx_n_s_evaluation, __pyx_n_s_NA, __pyx_n_s_criterionKeys, __pyx_n_s_actionKeys, __pyx_n_s_normEvaluation, __pyx_n_s_g, __pyx_n_s_glow, __pyx_n_s_ghigh, __pyx_n_s_gamp, __pyx_n_s_evalx, __pyx_n_s_sign, __pyx_n_s_g, __pyx_n_s_x); if (unlikely(!__pyx_tuple__118)) __PYX_ERR(0, 2281, __pyx_L1_error)
+  __Pyx_GOTREF(__pyx_tuple__118);
+  __Pyx_GIVEREF(__pyx_tuple__118);
+  __pyx_codeobj__119 = (PyObject*)__Pyx_PyCode_New(4, 0, 0, 22, 0, CO_OPTIMIZED|CO_NEWLOCALS, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__118, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_cython_cRandPerfTabs_pyx, __pyx_n_s_normalizeEvaluations, 2281, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__119)) __PYX_ERR(0, 2281, __pyx_L1_error)
   __Pyx_RefNannyFinishContext();
   return 0;
   __pyx_L1_error:;
@@ -49225,26 +48972,14 @@ if (!__Pyx_RefNanny) {
   if (__Pyx_SetNameInClass(__pyx_t_5, __pyx_n_s_convertInsite2Standard, __pyx_t_3) < 0) __PYX_ERR(0, 114, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
 
-  /* "cRandPerfTabs.pyx":122
- *         self.convertDiscriminationThresholds2Decimal()
- * 
- *     def convertInsite2BigData(self):             # <<<<<<<<<<<<<<
- *         """
- *         Converts in site weights, evaluations and discrimination thresholds to bigData float format.
- */
-  __pyx_t_3 = __Pyx_CyFunction_New(&__pyx_mdef_13cRandPerfTabs_19cPerformanceTableau_9convertInsite2BigData, 0, __pyx_n_s_cPerformanceTableau_convertInsit, NULL, __pyx_n_s_cRandPerfTabs, __pyx_d, ((PyObject *)__pyx_codeobj__73)); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 122, __pyx_L1_error)
-  __Pyx_GOTREF(__pyx_t_3);
-  if (__Pyx_SetNameInClass(__pyx_t_5, __pyx_n_s_convertInsite2BigData, __pyx_t_3) < 0) __PYX_ERR(0, 122, __pyx_L1_error)
-  __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
-
   /* "cRandPerfTabs.pyx":130
- *         self.convertDiscriminationThresholds2Decimal()
+ * ##        self.convertDiscriminationThresholds2Decimal()
  * 
  *     def convertWeight2Integer(self):             # <<<<<<<<<<<<<<
  *         """
  *         Converts significance weights from Decimal
  */
-  __pyx_t_3 = __Pyx_CyFunction_New(&__pyx_mdef_13cRandPerfTabs_19cPerformanceTableau_11convertWeight2Integer, 0, __pyx_n_s_cPerformanceTableau_convertWeigh, NULL, __pyx_n_s_cRandPerfTabs, __pyx_d, ((PyObject *)__pyx_codeobj__75)); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 130, __pyx_L1_error)
+  __pyx_t_3 = __Pyx_CyFunction_New(&__pyx_mdef_13cRandPerfTabs_19cPerformanceTableau_9convertWeight2Integer, 0, __pyx_n_s_cPerformanceTableau_convertWeigh, NULL, __pyx_n_s_cRandPerfTabs, __pyx_d, ((PyObject *)__pyx_codeobj__74)); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 130, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_3);
   if (__Pyx_SetNameInClass(__pyx_t_5, __pyx_n_s_convertWeight2Integer, __pyx_t_3) < 0) __PYX_ERR(0, 130, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
@@ -49256,7 +48991,7 @@ if (!__Pyx_RefNanny) {
  *         """
  *         Converts significance weights from int to  Decimal format.
  */
-  __pyx_t_3 = __Pyx_CyFunction_New(&__pyx_mdef_13cRandPerfTabs_19cPerformanceTableau_13convertWeight2Decimal, 0, __pyx_n_s_cPerformanceTableau_convertWeigh_2, NULL, __pyx_n_s_cRandPerfTabs, __pyx_d, ((PyObject *)__pyx_codeobj__77)); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 140, __pyx_L1_error)
+  __pyx_t_3 = __Pyx_CyFunction_New(&__pyx_mdef_13cRandPerfTabs_19cPerformanceTableau_11convertWeight2Decimal, 0, __pyx_n_s_cPerformanceTableau_convertWeigh_2, NULL, __pyx_n_s_cRandPerfTabs, __pyx_d, ((PyObject *)__pyx_codeobj__76)); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 140, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_3);
   if (__Pyx_SetNameInClass(__pyx_t_5, __pyx_n_s_convertWeight2Decimal, __pyx_t_3) < 0) __PYX_ERR(0, 140, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
@@ -49268,7 +49003,7 @@ if (!__Pyx_RefNanny) {
  *         """
  *         Converts evaluations from Decimal to float format.
  */
-  __pyx_t_3 = __Pyx_CyFunction_New(&__pyx_mdef_13cRandPerfTabs_19cPerformanceTableau_15convertEvaluation2Float, 0, __pyx_n_s_cPerformanceTableau_convertEvalu, NULL, __pyx_n_s_cRandPerfTabs, __pyx_d, ((PyObject *)__pyx_codeobj__79)); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 150, __pyx_L1_error)
+  __pyx_t_3 = __Pyx_CyFunction_New(&__pyx_mdef_13cRandPerfTabs_19cPerformanceTableau_13convertEvaluation2Float, 0, __pyx_n_s_cPerformanceTableau_convertEvalu, NULL, __pyx_n_s_cRandPerfTabs, __pyx_d, ((PyObject *)__pyx_codeobj__78)); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 150, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_3);
   if (__Pyx_SetNameInClass(__pyx_t_5, __pyx_n_s_convertEvaluation2Float, __pyx_t_3) < 0) __PYX_ERR(0, 150, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
@@ -49287,7 +49022,7 @@ if (!__Pyx_RefNanny) {
   __Pyx_GIVEREF(__pyx_t_3);
   if (__Pyx_PyTuple_SET_ITEM(__pyx_t_6, 0, __pyx_t_3)) __PYX_ERR(0, 165, __pyx_L1_error);
   __pyx_t_3 = 0;
-  __pyx_t_3 = __Pyx_CyFunction_New(&__pyx_mdef_13cRandPerfTabs_19cPerformanceTableau_17convertEvaluation2Decimal, 0, __pyx_n_s_cPerformanceTableau_convertEvalu_2, NULL, __pyx_n_s_cRandPerfTabs, __pyx_d, ((PyObject *)__pyx_codeobj__81)); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 165, __pyx_L1_error)
+  __pyx_t_3 = __Pyx_CyFunction_New(&__pyx_mdef_13cRandPerfTabs_19cPerformanceTableau_15convertEvaluation2Decimal, 0, __pyx_n_s_cPerformanceTableau_convertEvalu_2, NULL, __pyx_n_s_cRandPerfTabs, __pyx_d, ((PyObject *)__pyx_codeobj__80)); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 165, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_3);
   __Pyx_CyFunction_SetDefaultsTuple(__pyx_t_3, __pyx_t_6);
   __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
@@ -49301,7 +49036,7 @@ if (!__Pyx_RefNanny) {
  *         """
  *         Converts perrformance discrimination thresholds from Decimal to float format.
  */
-  __pyx_t_3 = __Pyx_CyFunction_New(&__pyx_mdef_13cRandPerfTabs_19cPerformanceTableau_19convertDiscriminationThresholds2Float, 0, __pyx_n_s_cPerformanceTableau_convertDiscr, NULL, __pyx_n_s_cRandPerfTabs, __pyx_d, ((PyObject *)__pyx_codeobj__83)); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 182, __pyx_L1_error)
+  __pyx_t_3 = __Pyx_CyFunction_New(&__pyx_mdef_13cRandPerfTabs_19cPerformanceTableau_17convertDiscriminationThresholds2Float, 0, __pyx_n_s_cPerformanceTableau_convertDiscr, NULL, __pyx_n_s_cRandPerfTabs, __pyx_d, ((PyObject *)__pyx_codeobj__82)); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 182, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_3);
   if (__Pyx_SetNameInClass(__pyx_t_5, __pyx_n_s_convertDiscriminationThresholds2, __pyx_t_3) < 0) __PYX_ERR(0, 182, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
@@ -49313,7 +49048,7 @@ if (!__Pyx_RefNanny) {
  *         """
  *         Converts perrformance discrimination thresholds from float to Decimal format.
  */
-  __pyx_t_3 = __Pyx_CyFunction_New(&__pyx_mdef_13cRandPerfTabs_19cPerformanceTableau_21convertDiscriminationThresholds2Decimal, 0, __pyx_n_s_cPerformanceTableau_convertDiscr_2, NULL, __pyx_n_s_cRandPerfTabs, __pyx_d, ((PyObject *)__pyx_codeobj__85)); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 193, __pyx_L1_error)
+  __pyx_t_3 = __Pyx_CyFunction_New(&__pyx_mdef_13cRandPerfTabs_19cPerformanceTableau_19convertDiscriminationThresholds2Decimal, 0, __pyx_n_s_cPerformanceTableau_convertDiscr_2, NULL, __pyx_n_s_cRandPerfTabs, __pyx_d, ((PyObject *)__pyx_codeobj__84)); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 193, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_3);
   if (__Pyx_SetNameInClass(__pyx_t_5, __pyx_n_s_convertDiscriminationThresholds2_2, __pyx_t_3) < 0) __PYX_ERR(0, 193, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
@@ -49325,9 +49060,9 @@ if (!__Pyx_RefNanny) {
  *         """
  *         Prints self.criteria with thresholds and weights.
  */
-  __pyx_t_3 = __Pyx_CyFunction_New(&__pyx_mdef_13cRandPerfTabs_19cPerformanceTableau_23showCriteria, 0, __pyx_n_s_cPerformanceTableau_showCriteria, NULL, __pyx_n_s_cRandPerfTabs, __pyx_d, ((PyObject *)__pyx_codeobj__87)); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 205, __pyx_L1_error)
+  __pyx_t_3 = __Pyx_CyFunction_New(&__pyx_mdef_13cRandPerfTabs_19cPerformanceTableau_21showCriteria, 0, __pyx_n_s_cPerformanceTableau_showCriteria, NULL, __pyx_n_s_cRandPerfTabs, __pyx_d, ((PyObject *)__pyx_codeobj__86)); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 205, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_3);
-  __Pyx_CyFunction_SetDefaultsTuple(__pyx_t_3, __pyx_tuple__88);
+  __Pyx_CyFunction_SetDefaultsTuple(__pyx_t_3, __pyx_tuple__87);
   if (__Pyx_SetNameInClass(__pyx_t_5, __pyx_n_s_showCriteria, __pyx_t_3) < 0) __PYX_ERR(0, 205, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
 
@@ -49382,7 +49117,7 @@ if (!__Pyx_RefNanny) {
   __pyx_t_6 = 0;
   __pyx_t_7 = 0;
   __pyx_t_8 = 0;
-  __pyx_t_8 = __Pyx_CyFunction_New(&__pyx_mdef_13cRandPerfTabs_19cPerformanceTableau_25showPerformanceTableau, 0, __pyx_n_s_cPerformanceTableau_showPerforma, NULL, __pyx_n_s_cRandPerfTabs, __pyx_d, ((PyObject *)__pyx_codeobj__90)); if (unlikely(!__pyx_t_8)) __PYX_ERR(0, 296, __pyx_L1_error)
+  __pyx_t_8 = __Pyx_CyFunction_New(&__pyx_mdef_13cRandPerfTabs_19cPerformanceTableau_23showPerformanceTableau, 0, __pyx_n_s_cPerformanceTableau_showPerforma, NULL, __pyx_n_s_cRandPerfTabs, __pyx_d, ((PyObject *)__pyx_codeobj__89)); if (unlikely(!__pyx_t_8)) __PYX_ERR(0, 296, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_8);
   __Pyx_CyFunction_SetDefaultsTuple(__pyx_t_8, __pyx_t_9);
   __Pyx_DECREF(__pyx_t_9); __pyx_t_9 = 0;
@@ -49409,7 +49144,7 @@ if (!__Pyx_RefNanny) {
   __Pyx_GIVEREF(__pyx_t_8);
   if (__Pyx_PyTuple_SET_ITEM(__pyx_t_9, 2, __pyx_t_8)) __PYX_ERR(0, 366, __pyx_L1_error);
   __pyx_t_8 = 0;
-  __pyx_t_8 = __Pyx_CyFunction_New(&__pyx_mdef_13cRandPerfTabs_19cPerformanceTableau_27normalizeEvaluations, 0, __pyx_n_s_cPerformanceTableau_normalizeEva, NULL, __pyx_n_s_cRandPerfTabs, __pyx_d, ((PyObject *)__pyx_codeobj__92)); if (unlikely(!__pyx_t_8)) __PYX_ERR(0, 366, __pyx_L1_error)
+  __pyx_t_8 = __Pyx_CyFunction_New(&__pyx_mdef_13cRandPerfTabs_19cPerformanceTableau_25normalizeEvaluations, 0, __pyx_n_s_cPerformanceTableau_normalizeEva, NULL, __pyx_n_s_cRandPerfTabs, __pyx_d, ((PyObject *)__pyx_codeobj__91)); if (unlikely(!__pyx_t_8)) __PYX_ERR(0, 366, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_8);
   __Pyx_CyFunction_SetDefaultsTuple(__pyx_t_8, __pyx_t_9);
   __Pyx_DECREF(__pyx_t_9); __pyx_t_9 = 0;
@@ -49423,9 +49158,9 @@ if (!__Pyx_RefNanny) {
  *                                    criteriaList=None,
  *                                    colorLevels=7,
  */
-  __pyx_t_8 = __Pyx_CyFunction_New(&__pyx_mdef_13cRandPerfTabs_19cPerformanceTableau_29showHTMLPerformanceHeatmap, 0, __pyx_n_s_cPerformanceTableau_showHTMLPerf, NULL, __pyx_n_s_cRandPerfTabs, __pyx_d, ((PyObject *)__pyx_codeobj__94)); if (unlikely(!__pyx_t_8)) __PYX_ERR(0, 421, __pyx_L1_error)
+  __pyx_t_8 = __Pyx_CyFunction_New(&__pyx_mdef_13cRandPerfTabs_19cPerformanceTableau_27showHTMLPerformanceHeatmap, 0, __pyx_n_s_cPerformanceTableau_showHTMLPerf, NULL, __pyx_n_s_cRandPerfTabs, __pyx_d, ((PyObject *)__pyx_codeobj__93)); if (unlikely(!__pyx_t_8)) __PYX_ERR(0, 421, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_8);
-  __Pyx_CyFunction_SetDefaultsTuple(__pyx_t_8, __pyx_tuple__95);
+  __Pyx_CyFunction_SetDefaultsTuple(__pyx_t_8, __pyx_tuple__94);
   if (__Pyx_SetNameInClass(__pyx_t_5, __pyx_n_s_showHTMLPerformanceHeatmap, __pyx_t_8) < 0) __PYX_ERR(0, 421, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_8); __pyx_t_8 = 0;
 
@@ -49436,9 +49171,9 @@ if (!__Pyx_RefNanny) {
  *         """
  *         Persistant storage of Performance Tableaux.
  */
-  __pyx_t_8 = __Pyx_CyFunction_New(&__pyx_mdef_13cRandPerfTabs_19cPerformanceTableau_31save, 0, __pyx_n_s_cPerformanceTableau_save, NULL, __pyx_n_s_cRandPerfTabs, __pyx_d, ((PyObject *)__pyx_codeobj__97)); if (unlikely(!__pyx_t_8)) __PYX_ERR(0, 494, __pyx_L1_error)
+  __pyx_t_8 = __Pyx_CyFunction_New(&__pyx_mdef_13cRandPerfTabs_19cPerformanceTableau_29save, 0, __pyx_n_s_cPerformanceTableau_save, NULL, __pyx_n_s_cRandPerfTabs, __pyx_d, ((PyObject *)__pyx_codeobj__96)); if (unlikely(!__pyx_t_8)) __PYX_ERR(0, 494, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_8);
-  __Pyx_CyFunction_SetDefaultsTuple(__pyx_t_8, __pyx_tuple__98);
+  __Pyx_CyFunction_SetDefaultsTuple(__pyx_t_8, __pyx_tuple__97);
   if (__Pyx_SetNameInClass(__pyx_t_5, __pyx_n_s_save, __pyx_t_8) < 0) __PYX_ERR(0, 494, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_8); __pyx_t_8 = 0;
 
@@ -49489,9 +49224,9 @@ if (!__Pyx_RefNanny) {
  *         cdef int key
  * 
  */
-  __pyx_t_4 = __Pyx_CyFunction_New(&__pyx_mdef_13cRandPerfTabs_26cPartialPerformanceTableau_1__init__, 0, __pyx_n_s_cPartialPerformanceTableau___ini, NULL, __pyx_n_s_cRandPerfTabs, __pyx_d, ((PyObject *)__pyx_codeobj__100)); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 565, __pyx_L1_error)
+  __pyx_t_4 = __Pyx_CyFunction_New(&__pyx_mdef_13cRandPerfTabs_26cPartialPerformanceTableau_1__init__, 0, __pyx_n_s_cPartialPerformanceTableau___ini, NULL, __pyx_n_s_cRandPerfTabs, __pyx_d, ((PyObject *)__pyx_codeobj__99)); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 565, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_4);
-  __Pyx_CyFunction_SetDefaultsTuple(__pyx_t_4, __pyx_tuple__101);
+  __Pyx_CyFunction_SetDefaultsTuple(__pyx_t_4, __pyx_tuple__100);
   if (__Pyx_SetNameInClass(__pyx_t_8, __pyx_n_s_init, __pyx_t_4) < 0) __PYX_ERR(0, 565, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
 
@@ -49653,7 +49388,7 @@ if (!__Pyx_RefNanny) {
   __pyx_t_3 = 0;
   __pyx_t_10 = 0;
   __pyx_t_11 = 0;
-  __pyx_t_11 = __Pyx_CyFunction_New(&__pyx_mdef_13cRandPerfTabs_25cRandomPerformanceTableau_1__init__, 0, __pyx_n_s_cRandomPerformanceTableau___init, NULL, __pyx_n_s_cRandPerfTabs, __pyx_d, ((PyObject *)__pyx_codeobj__103)); if (unlikely(!__pyx_t_11)) __PYX_ERR(0, 727, __pyx_L1_error)
+  __pyx_t_11 = __Pyx_CyFunction_New(&__pyx_mdef_13cRandPerfTabs_25cRandomPerformanceTableau_1__init__, 0, __pyx_n_s_cRandomPerformanceTableau___init, NULL, __pyx_n_s_cRandPerfTabs, __pyx_d, ((PyObject *)__pyx_codeobj__102)); if (unlikely(!__pyx_t_11)) __PYX_ERR(0, 727, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_11);
   __Pyx_CyFunction_SetDefaultsTuple(__pyx_t_11, __pyx_t_12);
   __Pyx_DECREF(__pyx_t_12); __pyx_t_12 = 0;
@@ -49752,7 +49487,7 @@ if (!__Pyx_RefNanny) {
   __pyx_t_8 = 0;
   __pyx_t_12 = 0;
   __pyx_t_10 = 0;
-  __pyx_t_10 = __Pyx_CyFunction_New(&__pyx_mdef_13cRandPerfTabs_29cRandomRankPerformanceTableau_1__init__, 0, __pyx_n_s_cRandomRankPerformanceTableau_2, NULL, __pyx_n_s_cRandPerfTabs, __pyx_d, ((PyObject *)__pyx_codeobj__105)); if (unlikely(!__pyx_t_10)) __PYX_ERR(0, 962, __pyx_L1_error)
+  __pyx_t_10 = __Pyx_CyFunction_New(&__pyx_mdef_13cRandPerfTabs_29cRandomRankPerformanceTableau_1__init__, 0, __pyx_n_s_cRandomRankPerformanceTableau_2, NULL, __pyx_n_s_cRandPerfTabs, __pyx_d, ((PyObject *)__pyx_codeobj__104)); if (unlikely(!__pyx_t_10)) __PYX_ERR(0, 962, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_10);
   __Pyx_CyFunction_SetDefaultsTuple(__pyx_t_10, __pyx_t_3);
   __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
@@ -49904,7 +49639,7 @@ if (!__Pyx_RefNanny) {
   __pyx_t_6 = 0;
   __pyx_t_7 = 0;
   __pyx_t_9 = 0;
-  __pyx_t_9 = __Pyx_CyFunction_New(&__pyx_mdef_13cRandPerfTabs_36_cRandomCoalitionsPerformanceTableau_1__init__, 0, __pyx_n_s_cRandomCoalitionsPerformanceTab_2, NULL, __pyx_n_s_cRandPerfTabs, __pyx_d, ((PyObject *)__pyx_codeobj__107)); if (unlikely(!__pyx_t_9)) __PYX_ERR(0, 1079, __pyx_L1_error)
+  __pyx_t_9 = __Pyx_CyFunction_New(&__pyx_mdef_13cRandPerfTabs_36_cRandomCoalitionsPerformanceTableau_1__init__, 0, __pyx_n_s_cRandomCoalitionsPerformanceTab_2, NULL, __pyx_n_s_cRandPerfTabs, __pyx_d, ((PyObject *)__pyx_codeobj__106)); if (unlikely(!__pyx_t_9)) __PYX_ERR(0, 1079, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_9);
   __Pyx_CyFunction_SetDefaultsTuple(__pyx_t_9, __pyx_t_5);
   __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
@@ -50074,7 +49809,7 @@ if (!__Pyx_RefNanny) {
   __pyx_t_12 = 0;
   __pyx_t_3 = 0;
   __pyx_t_4 = 0;
-  __pyx_t_4 = __Pyx_CyFunction_New(&__pyx_mdef_13cRandPerfTabs_36cRandom3ObjectivesPerformanceTableau_1__init__, 0, __pyx_n_s_cRandom3ObjectivesPerformanceTab_2, NULL, __pyx_n_s_cRandPerfTabs, __pyx_d, ((PyObject *)__pyx_codeobj__109)); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 1469, __pyx_L1_error)
+  __pyx_t_4 = __Pyx_CyFunction_New(&__pyx_mdef_13cRandPerfTabs_36cRandom3ObjectivesPerformanceTableau_1__init__, 0, __pyx_n_s_cRandom3ObjectivesPerformanceTab_2, NULL, __pyx_n_s_cRandPerfTabs, __pyx_d, ((PyObject *)__pyx_codeobj__108)); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 1469, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_4);
   __Pyx_CyFunction_SetDefaultsTuple(__pyx_t_4, __pyx_t_13);
   __Pyx_DECREF(__pyx_t_13); __pyx_t_13 = 0;
@@ -50088,7 +49823,7 @@ if (!__Pyx_RefNanny) {
  *         print('*------ show objectives -------"')
  *         for obj in self.objectives:
  */
-  __pyx_t_4 = __Pyx_CyFunction_New(&__pyx_mdef_13cRandPerfTabs_36cRandom3ObjectivesPerformanceTableau_3showObjectives, 0, __pyx_n_s_cRandom3ObjectivesPerformanceTab_3, NULL, __pyx_n_s_cRandPerfTabs, __pyx_d, ((PyObject *)__pyx_codeobj__111)); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 1798, __pyx_L1_error)
+  __pyx_t_4 = __Pyx_CyFunction_New(&__pyx_mdef_13cRandPerfTabs_36cRandom3ObjectivesPerformanceTableau_3showObjectives, 0, __pyx_n_s_cRandom3ObjectivesPerformanceTab_3, NULL, __pyx_n_s_cRandPerfTabs, __pyx_d, ((PyObject *)__pyx_codeobj__110)); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 1798, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_4);
   if (__Pyx_SetNameInClass(__pyx_t_9, __pyx_n_s_showObjectives, __pyx_t_4) < 0) __PYX_ERR(0, 1798, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
@@ -50100,9 +49835,9 @@ if (!__Pyx_RefNanny) {
  *         """
  *         *Parameter*:
  */
-  __pyx_t_4 = __Pyx_CyFunction_New(&__pyx_mdef_13cRandPerfTabs_36cRandom3ObjectivesPerformanceTableau_5showActions, 0, __pyx_n_s_cRandom3ObjectivesPerformanceTab_4, NULL, __pyx_n_s_cRandPerfTabs, __pyx_d, ((PyObject *)__pyx_codeobj__113)); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 1810, __pyx_L1_error)
+  __pyx_t_4 = __Pyx_CyFunction_New(&__pyx_mdef_13cRandPerfTabs_36cRandom3ObjectivesPerformanceTableau_5showActions, 0, __pyx_n_s_cRandom3ObjectivesPerformanceTab_4, NULL, __pyx_n_s_cRandPerfTabs, __pyx_d, ((PyObject *)__pyx_codeobj__112)); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 1810, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_4);
-  __Pyx_CyFunction_SetDefaultsTuple(__pyx_t_4, __pyx_tuple__114);
+  __Pyx_CyFunction_SetDefaultsTuple(__pyx_t_4, __pyx_tuple__113);
   if (__Pyx_SetNameInClass(__pyx_t_9, __pyx_n_s_showActions, __pyx_t_4) < 0) __PYX_ERR(0, 1810, __pyx_L1_error)
   __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
 
@@ -50286,7 +50021,7 @@ if (!__Pyx_RefNanny) {
   __pyx_t_6 = 0;
   __pyx_t_7 = 0;
   __pyx_t_5 = 0;
-  __pyx_t_5 = __Pyx_CyFunction_New(&__pyx_mdef_13cRandPerfTabs_27cRandomCBPerformanceTableau_1__init__, 0, __pyx_n_s_cRandomCBPerformanceTableau___in, NULL, __pyx_n_s_cRandPerfTabs, __pyx_d, ((PyObject *)__pyx_codeobj__116)); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 1863, __pyx_L1_error)
+  __pyx_t_5 = __Pyx_CyFunction_New(&__pyx_mdef_13cRandPerfTabs_27cRandomCBPerformanceTableau_1__init__, 0, __pyx_n_s_cRandomCBPerformanceTableau___in, NULL, __pyx_n_s_cRandPerfTabs, __pyx_d, ((PyObject *)__pyx_codeobj__115)); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 1863, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_5);
   __Pyx_CyFunction_SetDefaultsTuple(__pyx_t_5, __pyx_t_11);
   __Pyx_DECREF(__pyx_t_11); __pyx_t_11 = 0;
@@ -50363,7 +50098,7 @@ if (!__Pyx_RefNanny) {
   __pyx_t_9 = 0;
   __pyx_t_11 = 0;
   __pyx_t_7 = 0;
-  __pyx_t_7 = __Pyx_CyFunction_New(&__pyx_mdef_13cRandPerfTabs_29cNormalizedPerformanceTableau_1__init__, 0, __pyx_n_s_cNormalizedPerformanceTableau_2, NULL, __pyx_n_s_cRandPerfTabs, __pyx_d, ((PyObject *)__pyx_codeobj__118)); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 2249, __pyx_L1_error)
+  __pyx_t_7 = __Pyx_CyFunction_New(&__pyx_mdef_13cRandPerfTabs_29cNormalizedPerformanceTableau_1__init__, 0, __pyx_n_s_cNormalizedPerformanceTableau_2, NULL, __pyx_n_s_cRandPerfTabs, __pyx_d, ((PyObject *)__pyx_codeobj__117)); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 2249, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_7);
   __Pyx_CyFunction_SetDefaultsTuple(__pyx_t_7, __pyx_t_6);
   __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
@@ -50394,7 +50129,7 @@ if (!__Pyx_RefNanny) {
   __pyx_t_7 = 0;
   __pyx_t_6 = 0;
   __pyx_t_11 = 0;
-  __pyx_t_11 = __Pyx_CyFunction_New(&__pyx_mdef_13cRandPerfTabs_29cNormalizedPerformanceTableau_3normalizeEvaluations, 0, __pyx_n_s_cNormalizedPerformanceTableau_no, NULL, __pyx_n_s_cRandPerfTabs, __pyx_d, ((PyObject *)__pyx_codeobj__120)); if (unlikely(!__pyx_t_11)) __PYX_ERR(0, 2281, __pyx_L1_error)
+  __pyx_t_11 = __Pyx_CyFunction_New(&__pyx_mdef_13cRandPerfTabs_29cNormalizedPerformanceTableau_3normalizeEvaluations, 0, __pyx_n_s_cNormalizedPerformanceTableau_no, NULL, __pyx_n_s_cRandPerfTabs, __pyx_d, ((PyObject *)__pyx_codeobj__119)); if (unlikely(!__pyx_t_11)) __PYX_ERR(0, 2281, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_11);
   __Pyx_CyFunction_SetDefaultsTuple(__pyx_t_11, __pyx_t_9);
   __Pyx_DECREF(__pyx_t_9); __pyx_t_9 = 0;
@@ -56579,7 +56314,7 @@ __Pyx_PyType_GetName(PyTypeObject* tp)
     if (unlikely(name == NULL) || unlikely(!PyUnicode_Check(name))) {
         PyErr_Clear();
         Py_XDECREF(name);
-        name = __Pyx_NewRef(__pyx_n_s__121);
+        name = __Pyx_NewRef(__pyx_n_s__120);
     }
     return name;
 }

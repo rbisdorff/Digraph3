@@ -119,13 +119,13 @@ class cPerformanceTableau(PerformanceTableau):
         self.convertEvaluation2Decimal()
         self.convertDiscriminationThresholds2Decimal()
 
-    def convertInsite2BigData(self):
-        """
-        Converts in site weights, evaluations and discrimination thresholds to bigData float format.
-        """
-        self.convertWeight2Decimal()
-        self.convertEvaluation2Decimal()
-        self.convertDiscriminationThresholds2Decimal()
+##    def convertInsite2BigData(self):
+##        """
+##        Converts in site weights, evaluations and discrimination thresholds to bigData float format.
+##        """
+##        self.convertWeight2Decimal()
+##        self.convertEvaluation2Decimal()
+##        self.convertDiscriminationThresholds2Decimal()
         
     def convertWeight2Integer(self):
         """

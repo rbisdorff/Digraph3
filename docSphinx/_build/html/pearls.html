@@ -1,27 +1,25 @@
 <!DOCTYPE html>
-<html class="writer-html5" lang="en" data-content_root="./">
+<html class="writer-html5" lang="en" >
 <head>
-  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
 <meta content="Documentation of the Digraph3 collection of python3 modules for algorithmic decision theory" name="description" />
 <meta content="Algorithmic Decision Theory, Outranking Digraphs, MIS and kernels, Multiple Criteria Decision Aid, Bipolar-valued Epistemic Logic" name="keywords" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>3. Pearls of bipolar-valued epistemic logic &mdash; Digraph3 3.12.3 documentation</title>
-      <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=fa44fd50" />
-      <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=19f00094" />
-      <link rel="stylesheet" type="text/css" href="_static/graphviz.css?v=fd3f3429" />
-      <link rel="stylesheet" type="text/css" href="_static/copybutton.css?v=76b2166b" />
-      <link rel="stylesheet" type="text/css" href="_static/css/tooltipster.custom.css?v=7bc2f056" />
-      <link rel="stylesheet" type="text/css" href="_static/css/tooltipster.bundle.min.css?v=37217874" />
-      <link rel="stylesheet" type="text/css" href="_static/css/tooltipster-sideTip-shadow.min.css?v=6227e517" />
-      <link rel="stylesheet" type="text/css" href="_static/css/tooltipster-sideTip-punk.min.css?v=94669e23" />
-      <link rel="stylesheet" type="text/css" href="_static/css/tooltipster-sideTip-noir.min.css?v=21a39f42" />
-      <link rel="stylesheet" type="text/css" href="_static/css/tooltipster-sideTip-light.min.css?v=a18b2449" />
-      <link rel="stylesheet" type="text/css" href="_static/css/tooltipster-sideTip-borderless.min.css?v=dbff53e4" />
-      <link rel="stylesheet" type="text/css" href="_static/css/micromodal.css?v=d7bf34ee" />
-      <link rel="stylesheet" type="text/css" href="_static/css/sphinx_rtd_theme.css?v=3234e928" />
-
-  
+      <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+      <link rel="stylesheet" href="_static/graphviz.css" type="text/css" />
+      <link rel="stylesheet" href="_static/copybutton.css" type="text/css" />
+      <link rel="stylesheet" href="_static/css/tooltipster.custom.css" type="text/css" />
+      <link rel="stylesheet" href="_static/css/tooltipster.bundle.min.css" type="text/css" />
+      <link rel="stylesheet" href="_static/css/tooltipster-sideTip-shadow.min.css" type="text/css" />
+      <link rel="stylesheet" href="_static/css/tooltipster-sideTip-punk.min.css" type="text/css" />
+      <link rel="stylesheet" href="_static/css/tooltipster-sideTip-noir.min.css" type="text/css" />
+      <link rel="stylesheet" href="_static/css/tooltipster-sideTip-light.min.css" type="text/css" />
+      <link rel="stylesheet" href="_static/css/tooltipster-sideTip-borderless.min.css" type="text/css" />
+      <link rel="stylesheet" href="_static/css/micromodal.css" type="text/css" />
+      <link rel="stylesheet" href="_static/css/sphinx_rtd_theme.css" type="text/css" />
   <!--[if lt IE 9]>
     <script src="_static/js/html5shiv.min.js"></script>
   <![endif]-->
@@ -29,11 +27,11 @@
         <script src="_static/jquery.js?v=5d32c60e"></script>
         <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
         <script src="_static/documentation_options.js?v=2c828074"></script>
-        <script src="_static/doctools.js?v=9a2dae69"></script>
+        <script src="_static/doctools.js?v=888ff710"></script>
         <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
         <script src="_static/clipboard.min.js?v=a7894cd8"></script>
         <script src="_static/copybutton.js?v=15d7cbb8"></script>
-        <script src="_static/js/hoverxref.js?v=82c55261"></script>
+        <script src="_static/js/hoverxref.js?v=39f456b5"></script>
         <script src="_static/js/tooltipster.bundle.min.js?v=18bf091b"></script>
         <script src="_static/js/micromodal.min.js?v=04d6302d"></script>
     <script src="_static/js/theme.js"></script>
@@ -73,7 +71,7 @@
 <li class="toctree-l2"><a class="reference internal" href="#enhancing-the-outranking-based-mcda-approach">3.1. Enhancing the outranking based MCDA approach</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="#on-confident-outrankings-with-uncertain-criteria-significance-weights">3.1.1. On confident outrankings with uncertain criteria significance weights</a><ul>
 <li class="toctree-l4"><a class="reference internal" href="#modelling-uncertain-criteria-significance-weights">3.1.1.1. Modelling uncertain criteria significance weights</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#bipolar-valued-likelihood-of-at-least-as-good-as-situations">3.1.1.2. Bipolar-valued likelihood of ‘’at least as good as “ situations</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#bipolar-valued-likelihood-of-at-least-as-good-as-situations">3.1.1.2. Bipolar-valued likelihood of ‘’at least as good as ” situations</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#confidence-level-of-outranking-situations">3.1.1.3. Confidence level of outranking situations</a></li>
 </ul>
 </li>
@@ -270,7 +268,7 @@
 <nav class="contents local" id="id2">
 <ul class="simple">
 <li><p><a class="reference internal" href="#modelling-uncertain-criteria-significance-weights" id="id87">Modelling uncertain criteria significance weights</a></p></li>
-<li><p><a class="reference internal" href="#bipolar-valued-likelihood-of-at-least-as-good-as-situations" id="id88">Bipolar-valued likelihood of ‘’at least as good as “ situations</a></p></li>
+<li><p><a class="reference internal" href="#bipolar-valued-likelihood-of-at-least-as-good-as-situations" id="id88">Bipolar-valued likelihood of ‘’at least as good as ” situations</a></p></li>
 <li><p><a class="reference internal" href="#confidence-level-of-outranking-situations" id="id89">Confidence level of outranking situations</a></p></li>
 </ul>
 </nav>
@@ -305,7 +303,7 @@ parameters <em>alpha</em> = 4 and <em>beta</em> = 4. Thus <em>Wj</em> ~ Beta(4,4
 <p>It is worthwhile noticing that these four uncertainty models all admit the same expected value, <em>E(Wj)</em>, however, with a respective variance which goes decreasing from 1/3, to 1/9 of the square of <em>E(W)</em> (see <a class="hxr-hoverxref hxr-tooltip reference internal" href="#weightdistributions"><span class="std std-numref">Fig. 3.1</span></a>).</p>
 </section>
 <section id="bipolar-valued-likelihood-of-at-least-as-good-as-situations">
-<h4><a class="toc-backref" href="#id88" role="doc-backlink"><span class="section-number">3.1.1.2. </span>Bipolar-valued likelihood of ‘’at least as good as “ situations</a><a class="headerlink" href="#bipolar-valued-likelihood-of-at-least-as-good-as-situations" title="Link to this heading"></a></h4>
+<h4><a class="toc-backref" href="#id88" role="doc-backlink"><span class="section-number">3.1.1.2. </span>Bipolar-valued likelihood of ‘’at least as good as ” situations</a><a class="headerlink" href="#bipolar-valued-likelihood-of-at-least-as-good-as-situations" title="Link to this heading"></a></h4>
 <p>Let <em>A</em> = {<em>x</em>, <em>y</em>, <em>z</em>,…} be a finite set of <em>n</em> potential decision actions, evaluated on <em>F</em> = {1,…, <em>m</em>}, a <em>finite</em> and <em>coherent</em> family of <em>m</em> performance criteria. On each criterion <em>j</em> in <em>F</em>, the decision actions are evaluated on a real performance scale [0; <em>Mj</em> ], supporting an upper-closed indifference threshold <em>indj</em> and a lower-closed preference threshold <em>prj</em> such that 0 &lt;= <em>indj</em> &lt; <em>prj</em> &lt;= <em>Mj</em>. The marginal performance of object <em>x</em> on criterion <em>j</em> is denoted <em>xj</em>. Each criterion <em>j</em> is thus characterising a marginal double threshold order <img class="math" src="_images/math/2a68d1c1c26c22c0eb6f85891cd001a15cf19c46.png" alt="\geq_j"/> on <em>A</em> (see <a class="hxr-hoverxref hxr-tooltip reference internal" href="#rcharacteristic"><span class="std std-numref">Fig. 3.2</span></a>):</p>
 <blockquote>
 <div><div class="math">
@@ -4468,69 +4466,69 @@ best covered terminal kernel</span><a class="headerlink" href="#orientedlaterali
 <h3><span class="section-number">3.4.2. </span>Endnotes<a class="headerlink" href="#endnotes" title="Link to this heading"></a></h3>
 </section>
 <aside class="footnote-list brackets">
-<aside class="footnote brackets" id="id57" role="doc-footnote">
+<aside class="footnote brackets" id="id57" role="note">
 <span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id30">1</a><span class="fn-bracket">]</span></span>
 <p><em>Graffiti</em>, Edition Revue Luxembourg, September 2007, p. 30. You may find the data file <em>graffiti07.py</em> (perfTabs.PerformanceTableau Format) in the <em>examples</em> directory of the Digraph3 resources</p>
 </aside>
-<aside class="footnote brackets" id="id58" role="doc-footnote">
+<aside class="footnote brackets" id="id58" role="note">
 <span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id35">2</a><span class="fn-bracket">]</span></span>
 <p>The 3D PCA plot method requires a running <em>R statistics software</em>  (<a class="reference external" href="https://www.r-project.org/">https://www.r-project.org/</a>) installation and the Calmat matrix calculator (see the calmat directory in the Digraph3 ressources)</p>
 </aside>
-<aside class="footnote brackets" id="id59" role="doc-footnote">
+<aside class="footnote brackets" id="id59" role="note">
 <span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id36">3</a><span class="fn-bracket">]</span></span>
 <p>A <em>kernel</em> in a digraph <em>g</em> is a <em>clique</em> in the dual digraph <em>-g</em>.</p>
 </aside>
-<aside class="footnote brackets" id="id60" role="doc-footnote">
+<aside class="footnote brackets" id="id60" role="note">
 <span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id3">4</a><span class="fn-bracket">]</span></span>
 <p>The <em>Gnu Regression, Econometrics and Time-series Library</em> <a class="reference external" href="http://gretl.sourceforge.net/">http://gretl.sourceforge.net/</a></p>
 </aside>
-<aside class="footnote brackets" id="id61" role="doc-footnote">
+<aside class="footnote brackets" id="id61" role="note">
 <span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id21">5</a><span class="fn-bracket">]</span></span>
 <p>The <a class="reference internal" href="techDoc.html#votingProfiles.RandomLinearVotingProfile" title="votingProfiles.RandomLinearVotingProfile"><code class="xref py py-class docutils literal notranslate"><span class="pre">RandomLinearVotingProfile</span></code></a> constructor provides a <em>DivisivePolitics</em> flag (<em>False</em> by default) for generating random linear voting profiles based on a divisive polls strucure</p>
 </aside>
-<aside class="footnote brackets" id="id62" role="doc-footnote">
+<aside class="footnote brackets" id="id62" role="note">
 <span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id51">6</a><span class="fn-bracket">]</span></span>
 <p>The example was proposed in 2005 by <em>D. Bouyssou</em> when discussing the necessity or not of a <em>Rubis</em> best choice recommendation to be internally stable –pragmatic principle <em>P3</em>– <a class="reference internal" href="#bis-2008p" id="id63"><span>[BIS-2008p]</span></a></p>
 </aside>
-<aside class="footnote brackets" id="id64" role="doc-footnote">
+<aside class="footnote brackets" id="id64" role="note">
 <span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id53">7</a><span class="fn-bracket">]</span></span>
 <p>A solution is provided under the name <em>enigmaPT.py</em> in the <em>examples</em> directory of the Digraph3 resources</p>
 </aside>
-<aside class="footnote brackets" id="id65" role="doc-footnote">
+<aside class="footnote brackets" id="id65" role="note">
 <span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id56">8</a><span class="fn-bracket">]</span></span>
 <p>See the tutorial on <a class="reference internal" href="tutorial.html#randomperformancetableau-tutorial-label"><span class="std std-ref">Generating random performance tableaux</span></a></p>
 </aside>
-<aside class="footnote brackets" id="id66" role="doc-footnote">
+<aside class="footnote brackets" id="id66" role="note">
 <span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id25">9</a><span class="fn-bracket">]</span></span>
 <p>“<em>Il faut qu’il y ait un vote et pas une note. Les électeurs ne sont pas des juges, ce sont des citoyens</em>” Fr. Hollande (31/01/2022) <a class="reference external" href="https://www.bfmtv.com/politique/elections/presidentielle/une-note-n-est-pas-un-vote-francois-hollande-regrette-que-la-primaire-populaire-ne-change-rien_AN-202201310516.html">https://www.bfmtv.com/politique/elections/presidentielle/une-note-n-est-pas-un-vote-francois-hollande-regrette-que-la-primaire-populaire-ne-change-rien_AN-202201310516.html</a></p>
 </aside>
-<aside class="footnote brackets" id="id67" role="doc-footnote">
+<aside class="footnote brackets" id="id67" role="note">
 <span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id26">10</a><span class="fn-bracket">]</span></span>
 <p>See <a class="reference external" href="https://primairepopulaire.fr/la-primaire/">https://primairepopulaire.fr/la-primaire/</a></p>
 </aside>
-<aside class="footnote brackets" id="id68" role="doc-footnote">
+<aside class="footnote brackets" id="id68" role="note">
 <span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id28">11</a><span class="fn-bracket">]</span></span>
 <p>Only the standard bipolar-valued outranking model supports negative significance weights and positive evaluations. When using other outranking models, it is necessary to record, the case given, negative evaluations with a positive significance weight</p>
 </aside>
-<aside class="footnote brackets" id="id69" role="doc-footnote">
+<aside class="footnote brackets" id="id69" role="note">
 <span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id13">12</a><span class="fn-bracket">]</span></span>
 <p>“<em>Pour réunir les deux conditions essentielles à toute décision</em> [publique], <em>la probabilité d’avoir une décision, &amp; celle que la décision obtenue sera vraie, il faut</em> [….] <em>dans le cas des décisions sur des questions compliquées, faire en sorte que le système des propositions simples qui les forment soit rigoureusement développé, que chaque avis possible soit bien exposé, que la voix de chaque Votant soit prise sur chacune des propositions qui forment cet avis, &amp; non sur le résultat seul.</em>” <a class="reference internal" href="#con-1785p" id="id70"><span>[CON-1785p]</span></a> P. lxix</p>
 </aside>
-<aside class="footnote brackets" id="id71" role="doc-footnote">
+<aside class="footnote brackets" id="id71" role="note">
 <span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id1">13</a><span class="fn-bracket">]</span></span>
 <p><a class="reference internal" href="#roy-1966p" id="id72"><span>[ROY-1966p]</span></a></p>
 </aside>
-<aside class="footnote brackets" id="id73" role="doc-footnote">
+<aside class="footnote brackets" id="id73" role="note">
 <span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id17">17</a><span class="fn-bracket">]</span></span>
 <p><em>Borda</em> (1733-1799) was an early and most active promoter of the introduction of an universal <em>metric</em> measurement system. He even elaborated a metric angle measurement system but eventually failed to convince his fellow geometers. See <a class="reference external" href="https://fr.wikipedia.org/wiki/Jean-Charles_de_Borda">https://fr.wikipedia.org/wiki/Jean-Charles_de_Borda</a> and <a class="reference internal" href="#bri-2008p" id="id74"><span>[BRI-2008p]</span></a></p>
 </aside>
-<aside class="footnote brackets" id="id75" role="doc-footnote">
+<aside class="footnote brackets" id="id75" role="note">
 <span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id18">18</a><span class="fn-bracket">]</span></span>
 <p><a class="reference internal" href="#con-1785p" id="id76"><span>[CON-1785p]</span></a> P. clxxvij</p>
 </aside>
-<aside class="footnote brackets" id="id77" role="doc-footnote">
+<aside class="footnote brackets" id="id77" role="note">
 <span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id19">19</a><span class="fn-bracket">]</span></span>
-<p>“ … <em>j’ai cru devoir citer</em> [Borda], <em>1. parce qu’il est le premier qui ait observé que la méthode commune</em> [simple pluralité uninominale] <em>de faire des élections étoit défectueuse; 2. parce que celle qu’il a proposé d’y substituer est très ingénieuse, quelle seroit très-simple dans la pratique</em> … “ <a class="reference internal" href="#con-1785p" id="id78"><span>[CON-1785p]</span></a> P. clxxiX</p>
+<p>” … <em>j’ai cru devoir citer</em> [Borda], <em>1. parce qu’il est le premier qui ait observé que la méthode commune</em> [simple pluralité uninominale] <em>de faire des élections étoit défectueuse; 2. parce que celle qu’il a proposé d’y substituer est très ingénieuse, quelle seroit très-simple dans la pratique</em> … ” <a class="reference internal" href="#con-1785p" id="id78"><span>[CON-1785p]</span></a> P. clxxiX</p>
 </aside>
 </aside>
 </section>
@@ -4548,7 +4546,7 @@ best covered terminal kernel</span><a class="headerlink" href="#orientedlaterali
 
   <div role="contentinfo">
     <p>&#169; Copyright 2012-2024, Raymond Bisdorff.
-      <span class="lastupdated">Last updated on May 16, 2024.
+      <span class="lastupdated">Last updated on Jun 05, 2024.
       </span></p>
   </div>
 

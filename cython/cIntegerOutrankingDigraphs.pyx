@@ -417,7 +417,6 @@ Example Python session:
         evaluation = self.evaluation
         actionsKeys = list(dict.keys(actions))
 
-        self.startMethod = startMethod
         if Comments:
             print('Computing the relation')
         self.relation = self._constructRelationWithThreading(criteria,\
