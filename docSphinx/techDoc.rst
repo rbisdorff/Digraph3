@@ -16,7 +16,9 @@ Technical Reference of the Digraph3 modules
 .. only:: html
 
    :New:
-      
+
+        - In order to explore run time acceleration with CUDA on GPUs, a new **cnpBipolarDigraphs** module with a numpy integer array implementation of the bipolar-valued characteristic valuation has been added to the cythonized collection of Digraph3 modules. 
+	
         - Following a Python 3.12 recommendation, all multiprocessing resources have been refactored to use by default, instead of the traditional *fork*, the safer *spawn* threading start method. As a consequence, main program code of multiprocessing Digraph3 Python scripts must now start with a *__name__=='__main__'* test in order to avoid its recursive execution in each started thread (see the :py:mod:`multiprocessing` module).
 
         - A :py:mod:`pairings` module for solving **fair intergroup** and **intragroup pairing** problems
@@ -250,6 +252,9 @@ Handling big data
 
      :ref:`cSparseIntegerOutrankingDigraphs-label`
 	  Integer and float valued C version of sparse outranking digraphs.
+
+     :ref:`cnpBipolarDigraphs-label`
+	  New numpy integer arrays implemented bipolar outrankingDigraphs.
 
 Sorting, rating and ranking tools
 .................................
@@ -711,11 +716,34 @@ The following modules are compiled C-extensions using the Cython pre-compiler. N
      :ref:`cSparseIntegerOutrankingDigraphs-label`
 	  Integer and float valued C version of sparse outranking digraphs.
 
+     :ref:`cnpBipolarDigraphs-label`
+	  New C version of bipolar outranking digraphs with a numpy integer array implemented characteristic valuation.
+	  
+
 A tutorial with coding examples is available here: :ref:`HPC-Tutorial-label`.
 
 .. note::
 
    These cythonized modules, specifically designed for being run on HPC clusters (see https://hpc.uni.lu), are starting with *Threading=True* their multiprocessing threads by default with the *spawn* start method. The main program code of Python scripts using these modules must therefore be protected with the *__name__=="__main__"* test from recursive re-execution. The threading start method is actually configurable with the *StartMethod* parameter: *spawn*, *forkserver* or *fork*. The latter is not safe --especially on not Linux systems-- and may result in dead locks and hence return partial or false results. 
+
+.. _cnpBipolarDigraphs-label:
+
+cnpBipolarDigraphs module
+.........................
+
+**Inheritance Diagram**
+
+.. inheritance-diagram:: cnpBipolarDigraphs
+   :top-classes: cnpBipolarDigraphs.cnpBipolarOutrankingDigraph
+   :parts: 1
+
+.. automodule:: cnpBipolarDigraphs
+   :no-inherited-members:
+   :members:
+
+Back to the :ref:`Table of Contents <Contents-Table-label>`
+
+-------------
 
 .. _cRandPerfTabs-label:
 

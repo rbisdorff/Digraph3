@@ -31,7 +31,7 @@
         <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
         <script src="_static/clipboard.min.js?v=a7894cd8"></script>
         <script src="_static/copybutton.js?v=15d7cbb8"></script>
-        <script src="_static/js/hoverxref.js?v=39f456b5"></script>
+        <script src="_static/js/hoverxref.js?v=82c55261"></script>
         <script src="_static/js/tooltipster.bundle.min.js?v=18bf091b"></script>
         <script src="_static/js/micromodal.min.js?v=04d6302d"></script>
     <script src="_static/js/theme.js"></script>
@@ -1155,7 +1155,16 @@
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="#cythonized-modules-for-big-digraphs">2.23. Cythonized modules for big digraphs</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="#crandperftabs-module">2.23.1. cRandPerfTabs module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#cnpbipolardigraphs-module">2.23.1. cnpBipolarDigraphs module</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#cnpBipolarDigraphs.CoDualcnpDigraph"><code class="docutils literal notranslate"><span class="pre">CoDualcnpDigraph</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#cnpBipolarDigraphs.ConversecnpDigraph"><code class="docutils literal notranslate"><span class="pre">ConversecnpDigraph</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#cnpBipolarDigraphs.DualcnpDigraph"><code class="docutils literal notranslate"><span class="pre">DualcnpDigraph</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#cnpBipolarDigraphs.cnpBipolarOutrankingDigraph"><code class="docutils literal notranslate"><span class="pre">cnpBipolarOutrankingDigraph</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#cnpBipolarDigraphs.cnpDigraphs"><code class="docutils literal notranslate"><span class="pre">cnpDigraphs</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#cnpBipolarDigraphs.omaxFusioncnpDigraph"><code class="docutils literal notranslate"><span class="pre">omaxFusioncnpDigraph</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#crandperftabs-module">2.23.2. cRandPerfTabs module</a><ul>
 <li class="toctree-l4"><a class="reference internal" href="#cRandPerfTabs.cNormalizedPerformanceTableau"><code class="docutils literal notranslate"><span class="pre">cNormalizedPerformanceTableau</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="#cRandPerfTabs.cPartialPerformanceTableau"><code class="docutils literal notranslate"><span class="pre">cPartialPerformanceTableau</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="#cRandPerfTabs.cPerformanceTableau"><code class="docutils literal notranslate"><span class="pre">cPerformanceTableau</span></code></a></li>
@@ -1165,15 +1174,15 @@
 <li class="toctree-l4"><a class="reference internal" href="#cRandPerfTabs.cRandomRankPerformanceTableau"><code class="docutils literal notranslate"><span class="pre">cRandomRankPerformanceTableau</span></code></a></li>
 </ul>
 </li>
-<li class="toctree-l3"><a class="reference internal" href="#cintegeroutrankingdigraphs-module">2.23.2. cIntegerOutrankingDigraphs module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#cintegeroutrankingdigraphs-module">2.23.3. cIntegerOutrankingDigraphs module</a><ul>
 <li class="toctree-l4"><a class="reference internal" href="#cIntegerOutrankingDigraphs.IntegerBipolarOutrankingDigraph"><code class="docutils literal notranslate"><span class="pre">IntegerBipolarOutrankingDigraph</span></code></a></li>
 </ul>
 </li>
-<li class="toctree-l3"><a class="reference internal" href="#cintegersortingdigraphs-module">2.23.3. cIntegerSortingDigraphs module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#cintegersortingdigraphs-module">2.23.4. cIntegerSortingDigraphs module</a><ul>
 <li class="toctree-l4"><a class="reference internal" href="#cIntegerSortingDigraphs.IntegerQuantilesSortingDigraph"><code class="docutils literal notranslate"><span class="pre">IntegerQuantilesSortingDigraph</span></code></a></li>
 </ul>
 </li>
-<li class="toctree-l3"><a class="reference internal" href="#csparseintegeroutrankingdigraphs-module">2.23.4. cSparseIntegerOutrankingDigraphs module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#csparseintegeroutrankingdigraphs-module">2.23.5. cSparseIntegerOutrankingDigraphs module</a><ul>
 <li class="toctree-l4"><a class="reference internal" href="#cSparseIntegerOutrankingDigraphs.SparseIntegerDigraph"><code class="docutils literal notranslate"><span class="pre">SparseIntegerDigraph</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="#cSparseIntegerOutrankingDigraphs.SparseIntegerOutrankingDigraph"><code class="docutils literal notranslate"><span class="pre">SparseIntegerOutrankingDigraph</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="#cSparseIntegerOutrankingDigraphs.cQuantilesRankingDigraph"><code class="docutils literal notranslate"><span class="pre">cQuantilesRankingDigraph</span></code></a></li>
@@ -1235,6 +1244,7 @@
 <dl class="field-list simple">
 <dt class="field-odd">New<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
+<li><p>In order to explore run time acceleration with CUDA on GPUs, a new <strong>cnpBipolarDigraphs</strong> module with a numpy integer array implementation of the bipolar-valued characteristic valuation has been added to the cythonized collection of Digraph3 modules.</p></li>
 <li><p>Following a Python 3.12 recommendation, all multiprocessing resources have been refactored to use by default, instead of the traditional <em>fork</em>, the safer <em>spawn</em> threading start method. As a consequence, main program code of multiprocessing Digraph3 Python scripts must now start with a <em>__name__==’__main__’</em> test in order to avoid its recursive execution in each started thread (see the <a class="reference external" href="https://docs.python.org/3/library/multiprocessing.html#module-multiprocessing" title="(in Python v3.12)"><code class="xref py py-mod docutils literal notranslate"><span class="pre">multiprocessing</span></code></a> module).</p></li>
 <li><p>A <a class="reference internal" href="#module-pairings" title="pairings"><code class="xref py py-mod docutils literal notranslate"><span class="pre">pairings</span></code></a> module for solving <strong>fair intergroup</strong> and <strong>intragroup pairing</strong> problems</p></li>
 <li><p>A <a class="reference internal" href="#module-dynamicProgramming" title="dynamicProgramming"><code class="xref py py-mod docutils literal notranslate"><span class="pre">dynamicProgramming</span></code></a> module for solving <strong>dynamic programming</strong> problems</p></li>
@@ -1481,6 +1491,8 @@ and bipolar outranking digraphs (order &gt; 1000).</p>
 <dt><a class="reference internal" href="#cintegersortingdigraphs-label"><span class="std std-ref">cIntegerSortingDigraphs module</span></a></dt><dd><p>Integer and float valued C version of the <a class="reference internal" href="#sortingDigraphs.QuantilesSortingDigraph" title="sortingDigraphs.QuantilesSortingDigraph"><code class="xref py py-class docutils literal notranslate"><span class="pre">QuantilesSortingDigraph</span></code></a> class</p>
 </dd>
 <dt><a class="reference internal" href="#csparseintegeroutrankingdigraphs-label"><span class="std std-ref">cSparseIntegerOutrankingDigraphs module</span></a></dt><dd><p>Integer and float valued C version of sparse outranking digraphs.</p>
+</dd>
+<dt><a class="reference internal" href="#cnpbipolardigraphs-label"><span class="std std-ref">cnpBipolarDigraphs module</span></a></dt><dd><p>New numpy integer arrays implemented bipolar outrankingDigraphs.</p>
 </dd>
 </dl>
 </dd>
@@ -12028,6 +12040,8 @@ Rubis Solver computed from a stored XMCDA2 encoded performance tableau.</p>
 </dd>
 <dt><a class="reference internal" href="#csparseintegeroutrankingdigraphs-label"><span class="std std-ref">cSparseIntegerOutrankingDigraphs module</span></a></dt><dd><p>Integer and float valued C version of sparse outranking digraphs.</p>
 </dd>
+<dt><a class="reference internal" href="#cnpbipolardigraphs-label"><span class="std std-ref">cnpBipolarDigraphs module</span></a></dt><dd><p>New C version of bipolar outranking digraphs with a numpy integer array implemented characteristic valuation.</p>
+</dd>
 </dl>
 </div></blockquote>
 <p>A tutorial with coding examples is available here: <a class="reference internal" href="tutorial.html#hpc-tutorial-label"><span class="std std-ref">HPC ranking with big outranking digraphs</span></a>.</p>
@@ -12035,8 +12049,182 @@ Rubis Solver computed from a stored XMCDA2 encoded performance tableau.</p>
 <p class="admonition-title">Note</p>
 <p>These cythonized modules, specifically designed for being run on HPC clusters (see <a class="reference external" href="https://hpc.uni.lu">https://hpc.uni.lu</a>), are starting with <em>Threading=True</em> their multiprocessing threads by default with the <em>spawn</em> start method. The main program code of Python scripts using these modules must therefore be protected with the <em>__name__==”__main__”</em> test from recursive re-execution. The threading start method is actually configurable with the <em>StartMethod</em> parameter: <em>spawn</em>, <em>forkserver</em> or <em>fork</em>. The latter is not safe –especially on not Linux systems– and may result in dead locks and hence return partial or false results.</p>
 </div>
+<section id="cnpbipolardigraphs-module">
+<span id="cnpbipolardigraphs-label"></span><h3><span class="section-number">2.23.1. </span>cnpBipolarDigraphs module<a class="headerlink" href="#cnpbipolardigraphs-module" title="Link to this heading"></a></h3>
+<p><strong>Inheritance Diagram</strong></p>
+<div class="graphviz"><object data="_images/inheritance-4845baa3e851bfcdae29eff5f4952e04cb8ff5fa.svg" type="image/svg+xml" class="inheritance graphviz">
+<p class="warning">Inheritance diagram of cnpBipolarDigraphs</p></object></div>
+<dl class="py class" id="module-cnpBipolarDigraphs">
+<dt class="sig sig-object py" id="cnpBipolarDigraphs.CoDualcnpDigraph">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">cnpBipolarDigraphs.</span></span><span class="sig-name descname"><span class="pre">CoDualcnpDigraph</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">other</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cnpBipolarDigraphs.CoDualcnpDigraph" title="Link to this definition"></a></dt>
+<dd><p>Instantiates the codual ( = negated and transposed valuation) CudaDigraph object from a
+deep copy of a given other CudaDigraph instance.</p>
+<p>The relation constructor returns the codual of
+self.valuation</p>
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="cnpBipolarDigraphs.ConversecnpDigraph">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">cnpBipolarDigraphs.</span></span><span class="sig-name descname"><span class="pre">ConversecnpDigraph</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">other</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cnpBipolarDigraphs.ConversecnpDigraph" title="Link to this definition"></a></dt>
+<dd><p>Instantiates the converse ( = transposed valuation) CudaDigraph object from a
+deep copy of a given other CudaDigraph instance.</p>
+<p>The relation constructor returns the inverse (transposition) of
+self.valuation</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>In a bipolar valuation, the inverse operator corresponds to a transpose of the adjacency table.</p>
+</div>
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="cnpBipolarDigraphs.DualcnpDigraph">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">cnpBipolarDigraphs.</span></span><span class="sig-name descname"><span class="pre">DualcnpDigraph</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">other</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cnpBipolarDigraphs.DualcnpDigraph" title="Link to this definition"></a></dt>
+<dd><p>Instantiates the dual ( = negated valuation) cDigraph object from a
+deep copy of a given other cDigraph instance.</p>
+<p>The relation constructor returns the dual (negation) of
+self.valuation</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>In a bipolar valuation, the dual operator corresponds to a simple changing of signs.</p>
+</div>
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="cnpBipolarDigraphs.cnpBipolarOutrankingDigraph">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">cnpBipolarDigraphs.</span></span><span class="sig-name descname"><span class="pre">cnpBipolarOutrankingDigraph</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">argPerfTab</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">coalition</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">actionsSubset</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">CopyPerfTab</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">BigData</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">Debug</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">Comments</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cnpBipolarDigraphs.cnpBipolarOutrankingDigraph" title="Link to this definition"></a></dt>
+<dd><p>Cythonized BipolarOutrankingDigraph class with numpy
+integer arrays implemented characteristic valuation.</p>
+<p>Usage:</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">cRandPerfTabs</span> <span class="kn">import</span> <span class="o">*</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">na</span> <span class="o">=</span> <span class="mi">500</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">nc</span> <span class="o">=</span> <span class="mi">7</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">pt</span> <span class="o">=</span> <span class="n">cRandomCBPerformanceTableau</span><span class="p">(</span><span class="n">numberOfActions</span> <span class="o">=</span> <span class="n">na</span><span class="p">,</span>
+<span class="gp">... </span>                          <span class="n">numberOfCriteria</span> <span class="o">=</span> <span class="n">nc</span><span class="p">,</span>
+<span class="gp">... </span>                          <span class="n">seed</span> <span class="o">=</span> <span class="mi">1</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">cnpBipolarDigraphs</span> <span class="kn">import</span> <span class="n">cnpBipolarOutrankingDigraph</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">g</span> <span class="o">=</span> <span class="n">cnpBipolarOutrankingDigraph</span><span class="p">(</span><span class="n">pt</span><span class="p">,</span><span class="n">Comments</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="go">*------- Object instance description ------*</span>
+<span class="go">Instance class      : cnpBipolarOutrankingDigraph</span>
+<span class="go">Instance name       : rel_randomCBperftab</span>
+<span class="go">Actions             : 500</span>
+<span class="go">Criteria            : 7</span>
+<span class="go">Size                : 133181</span>
+<span class="go">Valuation domain    : {&#39;min&#39;: -24, &#39;med&#39;: 0, &#39;max&#39;: 24,</span>
+<span class="go">                       &#39;hasIntegerValuation&#39;: True}</span>
+<span class="go">Determinateness (%) : 66.72</span>
+<span class="go">Attributes          : [&#39;name&#39;, &#39;actions&#39;, &#39;objectives&#39;, &#39;criteria&#39;,</span>
+<span class="go">                       &#39;totalWeight&#39;, &#39;valuationdomain&#39;, &#39;NA&#39;,</span>
+<span class="go">                       &#39;evaluation&#39;, &#39;order&#39;, &#39;runTimes&#39;,</span>
+<span class="go">                       &#39;majorityMargins&#39;, &#39;vetoes&#39;, &#39;counterVetoes&#39;,</span>
+<span class="go">                       &#39;valuation&#39;, &#39;gamma&#39;, &#39;notGamma&#39;]</span>
+<span class="go">----  Constructor run times (in sec.) ----</span>
+<span class="go">Total time        : 2.36183</span>
+<span class="go">Data input        : 0.00503</span>
+<span class="go">Majority margins  : 1.92353</span>
+<span class="go">CPD polarisation  : 0.23210</span>
+<span class="go">Gamma sets        : 0.20117</span>
+</pre></div>
+</div>
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="cnpBipolarDigraphs.cnpDigraphs">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">cnpBipolarDigraphs.</span></span><span class="sig-name descname"><span class="pre">cnpDigraphs</span></span><a class="headerlink" href="#cnpBipolarDigraphs.cnpDigraphs" title="Link to this definition"></a></dt>
+<dd><p>Abstract root class for cythonized digraphs
+with a numpy integer <em>valuation</em> attribute instead of the traditional
+double decimal <em>relation</em> dictionary.</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="cnpBipolarDigraphs.cnpDigraphs.addRelation">
+<span class="sig-name descname"><span class="pre">addRelation</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#cnpBipolarDigraphs.cnpDigraphs.addRelation" title="Link to this definition"></a></dt>
+<dd><p>adding the traditional <em>relation</em> attribute to the <em>self</em>
+digraph object.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cnpBipolarDigraphs.cnpDigraphs.computeCoSize">
+<span class="sig-name descname"><span class="pre">computeCoSize</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#cnpBipolarDigraphs.cnpDigraphs.computeCoSize" title="Link to this definition"></a></dt>
+<dd><p>Renders the number of not validated non reflexive arcs</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cnpBipolarDigraphs.cnpDigraphs.computeDeterminateness">
+<span class="sig-name descname"><span class="pre">computeDeterminateness</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">InPercents</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cnpBipolarDigraphs.cnpDigraphs.computeDeterminateness" title="Link to this definition"></a></dt>
+<dd><p>Computes the average absolute epistemic determination
+of the presence and the absence of all pairwise outranking situations.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cnpBipolarDigraphs.cnpDigraphs.computePreKernels">
+<span class="sig-name descname"><span class="pre">computePreKernels</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#cnpBipolarDigraphs.cnpDigraphs.computePreKernels" title="Link to this definition"></a></dt>
+<dd><dl class="simple">
+<dt>computing dominant and absorbent preKernels:</dt><dd><p>Result in self.dompreKernels and self.abspreKernels</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cnpBipolarDigraphs.cnpDigraphs.computeSize">
+<span class="sig-name descname"><span class="pre">computeSize</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#cnpBipolarDigraphs.cnpDigraphs.computeSize" title="Link to this definition"></a></dt>
+<dd><p>Renders the number of validated non reflexive arcs</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cnpBipolarDigraphs.cnpDigraphs.gammaSets">
+<span class="sig-name descname"><span class="pre">gammaSets</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#cnpBipolarDigraphs.cnpDigraphs.gammaSets" title="Link to this definition"></a></dt>
+<dd><p>Renders the dictionary of neighborhoods {node: (dx,ax)}
+with set <em>dx</em> gathering the dominated, and set <em>ax</em> gathering
+the absorbed neighborhood.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cnpBipolarDigraphs.cnpDigraphs.independentChoices">
+<span class="sig-name descname"><span class="pre">independentChoices</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">U</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cnpBipolarDigraphs.cnpDigraphs.independentChoices" title="Link to this definition"></a></dt>
+<dd><p>Generator for all independent choices with neighborhoods of a bipolar valued digraph:</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<ul class="simple">
+<li><p>Initiate with U = self.singletons().</p></li>
+<li><p>Yields [(independent choice, domnb, absnb, indnb)].</p></li>
+</ul>
+</div>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cnpBipolarDigraphs.cnpDigraphs.notGammaSets">
+<span class="sig-name descname"><span class="pre">notGammaSets</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#cnpBipolarDigraphs.cnpDigraphs.notGammaSets" title="Link to this definition"></a></dt>
+<dd><p>Renders the dictionary of neighborhoods {node: (dx,ax)}
+with set <em>dx</em> gathering the <strong>not</strong> dominated, and set <em>ax</em> gathering
+the <strong>not</strong> absorbed neighborhood.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cnpBipolarDigraphs.cnpDigraphs.singletons">
+<span class="sig-name descname"><span class="pre">singletons</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#cnpBipolarDigraphs.cnpDigraphs.singletons" title="Link to this definition"></a></dt>
+<dd><p>Renders the list of singletons with neighborhoods
+[(singx1, +nx1, -nx1, not(+nx1 or -nx1)),…. ]
+where +nx1 = dominated, -nx1 = absorbed neighborhood</p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="cnpBipolarDigraphs.omaxFusioncnpDigraph">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">cnpBipolarDigraphs.</span></span><span class="sig-name descname"><span class="pre">omaxFusioncnpDigraph</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">dg1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dg2</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">Cuda</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cnpBipolarDigraphs.omaxFusioncnpDigraph" title="Link to this definition"></a></dt>
+<dd><p>Instantiates the epistemic disjunctive fusion <em>o-max</em> of 
+two given Digraph instances called dg1 and dg2.</p>
+<p>Parameter:</p>
+<blockquote>
+<div><ul class="simple">
+<li><p><em>dg1</em> and <em>dg2</em> are two npDigraphs objects</p></li>
+</ul>
+</div></blockquote>
+</dd></dl>
+
+<p>Back to the <a class="reference internal" href="#contents-table-label"><span class="std std-ref">Table of Contents</span></a></p>
+<hr class="docutils" />
+</section>
 <section id="crandperftabs-module">
-<span id="crandperftabs-label"></span><h3><span class="section-number">2.23.1. </span>cRandPerfTabs module<a class="headerlink" href="#crandperftabs-module" title="Link to this heading"></a></h3>
+<span id="crandperftabs-label"></span><h3><span class="section-number">2.23.2. </span>cRandPerfTabs module<a class="headerlink" href="#crandperftabs-module" title="Link to this heading"></a></h3>
 <p><strong>Inheritance Diagram</strong></p>
 <div class="graphviz"><object data="_images/inheritance-bcef1dd3a3478871fb5d86f6c720a0b10881b2b7.svg" type="image/svg+xml" class="inheritance graphviz">
 <p class="warning">Inheritance diagram of cRandPerfTabs</p></object></div>
@@ -12441,7 +12629,7 @@ matching the RandomLinearVotingProfiles class (see the votingDigraphs module)</p
 <hr class="docutils" />
 </section>
 <section id="cintegeroutrankingdigraphs-module">
-<span id="cintegeroutrankingdigraphs-label"></span><h3><span class="section-number">2.23.2. </span>cIntegerOutrankingDigraphs module<a class="headerlink" href="#cintegeroutrankingdigraphs-module" title="Link to this heading"></a></h3>
+<span id="cintegeroutrankingdigraphs-label"></span><h3><span class="section-number">2.23.3. </span>cIntegerOutrankingDigraphs module<a class="headerlink" href="#cintegeroutrankingdigraphs-module" title="Link to this heading"></a></h3>
 <div class="graphviz"><object data="_images/inheritance-63639be457aebae91f0af408738def5d8b1c9ce0.svg" type="image/svg+xml" class="inheritance graphviz">
 <p class="warning">Inheritance diagram of cIntegerOutrankingDigraphs</p></object></div>
 <p id="module-cIntegerOutrankingDigraphs">c-Extension for the Digraph3 collection.
@@ -12667,7 +12855,7 @@ is by convention 0.0 at determination level 0.0 .</p>
 <hr class="docutils" />
 </section>
 <section id="cintegersortingdigraphs-module">
-<span id="cintegersortingdigraphs-label"></span><h3><span class="section-number">2.23.3. </span>cIntegerSortingDigraphs module<a class="headerlink" href="#cintegersortingdigraphs-module" title="Link to this heading"></a></h3>
+<span id="cintegersortingdigraphs-label"></span><h3><span class="section-number">2.23.4. </span>cIntegerSortingDigraphs module<a class="headerlink" href="#cintegersortingdigraphs-module" title="Link to this heading"></a></h3>
 <div class="graphviz"><object data="_images/inheritance-3b76ff76e38c79856d574c3d5b866235c49a16b0.svg" type="image/svg+xml" class="inheritance graphviz">
 <p class="warning">Inheritance diagram of cIntegerSortingDigraphs</p></object></div>
 <p id="module-cIntegerSortingDigraphs">c-Extension for the Digraph3 collection.
@@ -13018,7 +13206,7 @@ the high category limit.</p>
 <hr class="docutils" />
 </section>
 <section id="csparseintegeroutrankingdigraphs-module">
-<span id="csparseintegeroutrankingdigraphs-label"></span><h3><span class="section-number">2.23.4. </span>cSparseIntegerOutrankingDigraphs module<a class="headerlink" href="#csparseintegeroutrankingdigraphs-module" title="Link to this heading"></a></h3>
+<span id="csparseintegeroutrankingdigraphs-label"></span><h3><span class="section-number">2.23.5. </span>cSparseIntegerOutrankingDigraphs module<a class="headerlink" href="#csparseintegeroutrankingdigraphs-module" title="Link to this heading"></a></h3>
 <p><strong>Inheritance Diagram</strong></p>
 <div class="graphviz"><object data="_images/inheritance-594caf2ed3800bc4c9ce30e331f6e285d08df244.svg" type="image/svg+xml" class="inheritance graphviz">
 <p class="warning">Inheritance diagram of cSparseIntegerOutrankingDigraphs</p></object></div>
@@ -13858,7 +14046,7 @@ Components are stored in an ordered dictionary.</p>
 
   <div role="contentinfo">
     <p>&#169; Copyright 2012-2024, Raymond Bisdorff.
-      <span class="lastupdated">Last updated on Jun 05, 2024.
+      <span class="lastupdated">Last updated on Jun 06, 2024.
       </span></p>
   </div>
 
