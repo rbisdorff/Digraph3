@@ -734,6 +734,7 @@ cnpBipolarDigraphs module
 **Inheritance Diagram**
 
 .. inheritance-diagram:: cnpBipolarDigraphs
+   :top-classes: cnpBipolarDigraphs.npDigraph,cRandPerfTabs.cPerformanceTableau
    :parts: 1
 
 .. automodule:: cnpBipolarDigraphs
