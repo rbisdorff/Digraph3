@@ -4,3 +4,4 @@ sphinx>=6.2.1
 sphinx_copybutton>=0.4.0
 pygments>=2.10
 sphinx-hoverxref>=1.0.0
+numpy>=1.26.0
