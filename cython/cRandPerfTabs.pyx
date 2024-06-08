@@ -2,7 +2,7 @@
 # -*- coding: utf-8 -*-
 """
 c-Extension for the Digraph3 collection.
-Module cRandPerfTabs.py is a c-compiled version of the
+Module cRandPerfTabs is a c-compiled version of the
 :py:mod:`randomPerfTabs` module for generating random performance tableaux of Big Data type,
 ie with integer action keys and float performance evaluations.
 

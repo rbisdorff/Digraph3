@@ -1,11 +1,73 @@
 #cython: language_level=3
+#!/usr/bin/env python3
+# -*- coding: utf-8 -*-
+"""
+c-Extension for the Digraph3 collection requiring the python *numpy* package.
+
+Module *cnpBipolarDigraphs* is a new c-compiled and openmp optimized reimplementation of the *BipolarOutrankingDigraph* class where the *relation* attribute is replaced by a *numpy* integer double array of type int.  
+
+Copyright (C) 2024  Raymond Bisdorff
+
+"""
 import numpy as np
-from numpy import array
 from cRandPerfTabs import cRandomPerformanceTableau
-#from outrankingDigraphs import BipolarOutrankingDigraph
 import itertools
 import cython
 from time import time
+
+def qtilingIndexList(list indexList,int q,Debug=False,Comments=False):
+    """
+    split an index list into q parts of equal length n.
+    When there is a rest r < q, the r first parts are put to a length of n+1.
+
+    The method is used for distributing balanced sublists to q multiprocessing threads.
+
+    Usage example::
+    
+        >>> from digraphsTools import qtilingIndexList
+        >>> indexList = [i for i in range(10)]
+        >>> indexlist
+         [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
+        >>> qtilingIndexList(indexList,4,Comments=True)
+         cardinalities: [3, 3, 2, 2]
+         [(0, 3), (3, 6), (6, 8), (8, 10)]
+    
+    """
+    cdef int n, nq, r
+    n = len(indexList)
+    if Debug:
+        Comments = True
+        print(indexList, n, q)
+
+    nq = n//(q)
+    if nq * (q) < n:
+        r = n - nq*(q)
+        Rest = True
+        if Debug:
+            print('with Rest', nq, nq*(q), r)
+    else:
+        r = 0
+        Rest = False
+        if Debug:
+            print('Without Rest', q, nq*q, r  )
+            
+    card = [nq for i in range(q)]
+    for j in range(r):
+        card[j] += 1
+    if Comments:
+        print('cardinalities:', card)
+
+    cdef list splitIndex = []
+    cdef int toi, fromi
+    toi = 0
+    fromi = 0
+    for j in range(q):
+        toi += card[j]
+        splitIndex.append( (fromi, toi) )
+        fromi = toi
+    if Debug:
+        print('splitIndex:', splitIndex)
+    return splitIndex
 
 class npDigraph(object):
     """
@@ -32,6 +94,149 @@ class npDigraph(object):
         new = ConversenpDigraph(self)
         new.__class__ = self.__class__
         return new
+
+    def MISgen(self,set S,frozenset I):
+        """
+        generator of maximal independent choices (voir Byskov 2004):
+            * S ::= remaining set of nodes;
+            * I ::= current independent choice of type frozenset
+
+        .. note::
+
+                Inititalize: self.MISgen(set(self.actions),frozenset()),
+                (see self.showMIS() method)
+                
+             
+        """
+        cdef int add
+        cdef frozenset choice
+        cdef set missetit
+        if S == set():
+            add = 1
+            self.missetit = self.misset.copy()
+            for mis in self.missetit:
+                if mis < I:
+                    self.misset.remove(mis)
+                else:
+                    if I <= mis:
+                        add = 0
+                        break
+            if add == 1:
+                self.misset = self.misset | frozenset([I])
+                yield I
+        else:
+            v = S.pop()
+            Sv = S - (self.gamma[v][0] | self.gamma[v][1])
+            Iv = I | set([v])
+            for choice in self.MISgen(Sv,Iv):
+                yield choice
+            for choice in self.MISgen(S,I):
+                yield choice
+
+    def showMIS(self, bint withListing=True):
+        """
+        Prints all maximal independent choices:
+            Result in self.misset.
+
+        """
+        from time import time
+        cdef double t0, t1
+        cdef set actions
+        cdef list v
+        cdef frozenset choice
+        cdef int n
+        print('*---  Maximal independent choices ---*')
+        t0 = time()
+        self.misset = set()
+        actions = set(self.actions)
+        n = len(actions)
+        v = [0 for i in range(n+1)]
+        for choice in self.MISgen(actions,frozenset()):
+            v[len(choice)] += 1
+            if withListing:
+                print(list(choice))
+        del(self.__dict__['missetit'])
+        t1 = time()
+        print('number of solutions: ', len(self.misset))
+        print('cardinality distribution')
+        print('card.: ', list(range(n+1)))
+        print('freq.: ', v)
+        print('execution time: %.5f sec.' % (time()-t0))
+        print('Results in self.misset')
+
+    def showPreKernels(self,bint Comments=True):
+        """
+        Prints all initial and terminal prekernels
+        Result in self.dompreKernels and self.abspreKernels
+
+        """
+        from time import time
+        cdef double t0, t1
+        cdef set actions
+        cdef frozenset mis
+        cdef dompreKernels = set(), abspreKernels = set()
+        cdef misgamdom, misgamabs
+        #cdef list v
+        cdef int n, x
+        print('*--- Initial and terminal prekernels ---*')
+        t0 = time()
+        self.misset = set()
+        #n = len(actions)
+        #v = [0 for i in range(n+1)]
+        for mis in self.MISgen(set(self.actions),frozenset()):
+            #v[len(mis)] += 1
+            actions = set(self.actions)
+            misgamdom = set()
+            misnotgamdom = set()
+            misgamabs = set()
+            misnotgamabs = set()
+            #if Debug:
+            #    print('==>>',mis)
+            for x in mis:
+                misgamdom = misgamdom | (self.gamma[x][0] | self.notGamma[x][1])
+                misgamabs = misgamabs | (self.gamma[x][1] | self.notGamma[x][0])
+                #if Debug:
+                #    print(x,self.gamma[x],self.notGamma[x])
+                #    print(misgamdom,misgamabs)
+            restactions = actions - mis 
+            if restactions <= misgamdom:
+                dompreKernels.add(mis)
+                #if Debug:
+                #    print('initial',mis,restactions,misgamdom)
+            if restactions <= misgamabs:
+                abspreKernels.add(mis)
+                #if Debug:
+                #    print('terminal',mis,restactions,misgamabs)
+        self.dompreKrenels = dompreKernels
+        self.abspreKernels = abspreKernels
+        del(self.__dict__['missetit'])
+        t1 = time() - t0
+        if Comments:
+            print('*----- statistics -----')
+            print('graph name: ', self.name)
+            print('number of solutions')
+            print(' dominant kernels : ', len(dompreKernels))
+            print(' absorbent kernels: ', len(abspreKernels))
+            #print('cardinality frequency distributions')
+            #print('cardinality     : ', list(range(n+1)))
+            #v = [0 for i in range(n+1)]
+            for mis in dompreKernels:
+                print('Initial:', list(mis))
+                #v[len(mis)] += 1
+            #print('dominant kernels : ',v)
+            #v = [0 for i in range(n+1)]
+            for mis in abspreKernels:
+                print('Terminal :', list(mis))
+                #v[len(mis)] += 1
+            #print('absorbent kernel: ',v)
+            print('Execution time  : %.5f sec.' % t1 )
+            
+    def computePreKernels(self):
+        """
+        Result in self.dompreKernels and self.abspreKernels
+
+        """
+        self.showPreKernels(Comments=False)
 
     def computeSize(self):
         """
@@ -67,7 +272,7 @@ class npDigraph(object):
                     size += 1
         return size
     
-    def computeDeterminateness(self,InPercents=True):
+    def computeDeterminateness(self,bint InPercents=True):
         """
         Computes the average absolute epistemic determination
         of the presence and the absence of all pairwise outranking situations. 
@@ -97,13 +302,12 @@ class npDigraph(object):
         the absorbed neighborhood.
 
         """
-        #from numpy import array
         cdef int Med, i, j, n
         cdef list actionsList
         Med = 0
         actionsList = [x for x in self.actions]
         n = self.order
-        valuation = array( (n,n), dtype=int)
+        valuation = np.array( (n,n), dtype=int)
         valuation = self.valuation
         cdef dict gamma = {}
         cdef set dx, ax 
@@ -128,13 +332,12 @@ class npDigraph(object):
         the **not** absorbed neighborhood.
 
         """
-        #from numpy import array
         cdef int Med, i, j, n
         cdef list actionsList
         Med = 0
         actionsList = [x for x in self.actions]
         n = self.order
-        valuation = array( (n,n), dtype=int)
+        valuation = np.array( (n,n), dtype=int)
         valuation = self.valuation
         cdef dict notGamma = {}
         cdef set dx, ax 
@@ -244,6 +447,59 @@ class npDigraph(object):
                 relation[x][y] = valuation[i][j]
         self.relation = relation
         
+    def computeChordlessCircuits(self,bint Odd=False,
+                                 bint Comments=False,
+                                 bint Debug=False):
+        """
+        Renders the set of all chordless circuits detected in a digraph.
+        Result is stored in <self.circuitsList>
+        holding a possibly empty list of tuples with at position 0 the
+        list of adjacent actions of the circuit and at position 1
+        the set of actions in the stored circuit.
+
+        When *Odd* is True, only chordless circuits with an odd length
+        are collected.
+
+        """
+        from digraphsTools import flatten
+        if Comments:
+            if Odd:
+                print('*--- chordless odd circuits ---*')
+            else:
+                print('*--- chordless circuits ---*')
+        cdef list actionsList
+        actionsList = [x for x in self.actions]
+        self.visitedArcs = set()
+        cdef list chordlessCircuits = [], P
+        cdef int n, i, x
+        n = len(actionsList)
+        for i in range(n):
+        #for x in actionsList:
+            x = actionsList[i]
+            P = [x]
+            if Comments:
+                print('Starting from ', x)
+            self.xCC = []
+            if self.chordlessPaths(P,x,Odd,Comments,Debug):
+                chordlessCircuits += self.xCC
+        self.chordlessCircuits = chordlessCircuits
+        if Comments:
+            print('result:', len(self.chordlessCircuits), 'circuit(s)')
+            print(self.chordlessCircuits)
+
+        cdef list circuitsList = []
+        cdef list history = set()
+        for cc in self.chordlessCircuits:
+            #circuitsList.append( (x,frozenset(x)) )
+            circuitActions = [y for y in flatten(cc)]
+            circuitSet = frozenset(circuitActions)
+            if Comments:
+                print('flattening', cc, circuitActions)
+            if circuitSet not in history:
+                history.add(circuitSet)
+                circuitsList.append( (circuitActions,circuitSet) )
+        self.circuitsList = circuitsList
+        return circuitsList
         
 #--------------------
 
@@ -346,7 +602,7 @@ class omaxFusionnpDigraph(npDigraph):
 
     """
 
-    def __init__(self,dg1,dg2,Cuda=False):
+    def __init__(self,dg1,dg2,bint Cuda=False):
         import numpy as np
         from copy import deepcopy
         import math

@@ -6653,7 +6653,9 @@ class Digraph(object):
 
         .. note::
 
-                Inititalize: self.MISgen(self.actions.copy(),set())
+                Inititalize: self.MISgen(set(self.actions),frozenset()),
+                (see self.showMIS() method)
+                
              
         """
         if S == set():

@@ -1162,6 +1162,7 @@
 <li class="toctree-l4"><a class="reference internal" href="#cnpBipolarDigraphs.npBipolarOutrankingDigraph"><code class="docutils literal notranslate"><span class="pre">npBipolarOutrankingDigraph</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="#cnpBipolarDigraphs.npDigraph"><code class="docutils literal notranslate"><span class="pre">npDigraph</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="#cnpBipolarDigraphs.omaxFusionnpDigraph"><code class="docutils literal notranslate"><span class="pre">omaxFusionnpDigraph</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#cnpBipolarDigraphs.qtilingIndexList"><code class="docutils literal notranslate"><span class="pre">qtilingIndexList()</span></code></a></li>
 </ul>
 </li>
 <li class="toctree-l3"><a class="reference internal" href="#crandperftabs-module">2.23.2. cRandPerfTabs module</a><ul>
@@ -1965,7 +1966,8 @@ See Digraph3 tutorials.</p>
 </dl>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
-<p>Inititalize: self.MISgen(self.actions.copy(),set())</p>
+<p>Inititalize: self.MISgen(set(self.actions),frozenset()),
+(see self.showMIS() method)</p>
 </div>
 </dd></dl>
 
@@ -12054,7 +12056,10 @@ Rubis Solver computed from a stored XMCDA2 encoded performance tableau.</p>
 <p><strong>Inheritance Diagram</strong></p>
 <div class="graphviz"><object data="_images/inheritance-af91bccda4a3e8b7749aa9461ee05803b85e701a.svg" type="image/svg+xml" class="inheritance graphviz">
 <p class="warning">Inheritance diagram of cnpBipolarDigraphs</p></object></div>
-<dl class="py class" id="module-cnpBipolarDigraphs">
+<p id="module-cnpBipolarDigraphs">c-Extension for the Digraph3 collection requiring the python <em>numpy</em> package.</p>
+<p>Module <em>cnpBipolarDigraphs</em> is a new c-compiled and openmp optimized reimplementation of the <em>BipolarOutrankingDigraph</em> class where the <em>relation</em> attribute is replaced by a <em>numpy</em> integer double array of type int.</p>
+<p>Copyright (C) 2024  Raymond Bisdorff</p>
+<dl class="py class">
 <dt class="sig sig-object py" id="cnpBipolarDigraphs.CoDualnpDigraph">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">cnpBipolarDigraphs.</span></span><span class="sig-name descname"><span class="pre">CoDualnpDigraph</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">other</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cnpBipolarDigraphs.CoDualnpDigraph" title="Link to this definition"></a></dt>
 <dd><p>Instantiates the codual ( = negated and transposed valuation) CudaDigraph object from a
@@ -12134,10 +12139,39 @@ integer arrays implemented characteristic valuation.</p>
 with a numpy integer <em>valuation</em> attribute instead of the traditional
 double decimal <em>relation</em> dictionary.</p>
 <dl class="py method">
+<dt class="sig sig-object py" id="cnpBipolarDigraphs.npDigraph.MISgen">
+<span class="sig-name descname"><span class="pre">MISgen</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">S</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">I</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cnpBipolarDigraphs.npDigraph.MISgen" title="Link to this definition"></a></dt>
+<dd><dl class="simple">
+<dt>generator of maximal independent choices (voir Byskov 2004):</dt><dd><ul class="simple">
+<li><p>S ::= remaining set of nodes;</p></li>
+<li><p>I ::= current independent choice of type frozenset</p></li>
+</ul>
+</dd>
+</dl>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Inititalize: self.MISgen(set(self.actions),frozenset()),
+(see self.showMIS() method)</p>
+</div>
+</dd></dl>
+
+<dl class="py method">
 <dt class="sig sig-object py" id="cnpBipolarDigraphs.npDigraph.addRelation">
 <span class="sig-name descname"><span class="pre">addRelation</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#cnpBipolarDigraphs.npDigraph.addRelation" title="Link to this definition"></a></dt>
 <dd><p>adding the traditional <em>relation</em> attribute to the <em>self</em>
 digraph object.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cnpBipolarDigraphs.npDigraph.computeChordlessCircuits">
+<span class="sig-name descname"><span class="pre">computeChordlessCircuits</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">Odd</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">Comments</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">Debug</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cnpBipolarDigraphs.npDigraph.computeChordlessCircuits" title="Link to this definition"></a></dt>
+<dd><p>Renders the set of all chordless circuits detected in a digraph.
+Result is stored in &lt;self.circuitsList&gt;
+holding a possibly empty list of tuples with at position 0 the
+list of adjacent actions of the circuit and at position 1
+the set of actions in the stored circuit.</p>
+<p>When <em>Odd</em> is True, only chordless circuits with an odd length
+are collected.</p>
 </dd></dl>
 
 <dl class="py method">
@@ -12198,6 +12232,22 @@ the <strong>not</strong> absorbed neighborhood.</p>
 </dd></dl>
 
 <dl class="py method">
+<dt class="sig sig-object py" id="cnpBipolarDigraphs.npDigraph.showMIS">
+<span class="sig-name descname"><span class="pre">showMIS</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">withListing</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cnpBipolarDigraphs.npDigraph.showMIS" title="Link to this definition"></a></dt>
+<dd><dl class="simple">
+<dt>Prints all maximal independent choices:</dt><dd><p>Result in self.misset.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cnpBipolarDigraphs.npDigraph.showPreKernels">
+<span class="sig-name descname"><span class="pre">showPreKernels</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">Comments</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cnpBipolarDigraphs.npDigraph.showPreKernels" title="Link to this definition"></a></dt>
+<dd><p>Prints all initial and terminal prekernels
+Result in self.dompreKernels and self.abspreKernels</p>
+</dd></dl>
+
+<dl class="py method">
 <dt class="sig sig-object py" id="cnpBipolarDigraphs.npDigraph.singletons">
 <span class="sig-name descname"><span class="pre">singletons</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#cnpBipolarDigraphs.npDigraph.singletons" title="Link to this definition"></a></dt>
 <dd><p>Renders the list of singletons with neighborhoods
@@ -12220,6 +12270,24 @@ two given Digraph instances called dg1 and dg2.</p>
 </div></blockquote>
 </dd></dl>
 
+<dl class="py function">
+<dt class="sig sig-object py" id="cnpBipolarDigraphs.qtilingIndexList">
+<span class="sig-prename descclassname"><span class="pre">cnpBipolarDigraphs.</span></span><span class="sig-name descname"><span class="pre">qtilingIndexList</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">indexList</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">q</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">Debug</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">Comments</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cnpBipolarDigraphs.qtilingIndexList" title="Link to this definition"></a></dt>
+<dd><p>split an index list into q parts of equal length n.
+When there is a rest r &lt; q, the r first parts are put to a length of n+1.</p>
+<p>The method is used for distributing balanced sublists to q multiprocessing threads.</p>
+<p>Usage example:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">digraphsTools</span> <span class="kn">import</span> <span class="n">qtilingIndexList</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">indexList</span> <span class="o">=</span> <span class="p">[</span><span class="n">i</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">10</span><span class="p">)]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">indexlist</span>
+<span class="go"> [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">qtilingIndexList</span><span class="p">(</span><span class="n">indexList</span><span class="p">,</span><span class="mi">4</span><span class="p">,</span><span class="n">Comments</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="go"> cardinalities: [3, 3, 2, 2]</span>
+<span class="go"> [(0, 3), (3, 6), (6, 8), (8, 10)]</span>
+</pre></div>
+</div>
+</dd></dl>
+
 <p>Back to the <a class="reference internal" href="#contents-table-label"><span class="std std-ref">Table of Contents</span></a></p>
 <hr class="docutils" />
 </section>
@@ -12229,7 +12297,7 @@ two given Digraph instances called dg1 and dg2.</p>
 <div class="graphviz"><object data="_images/inheritance-bcef1dd3a3478871fb5d86f6c720a0b10881b2b7.svg" type="image/svg+xml" class="inheritance graphviz">
 <p class="warning">Inheritance diagram of cRandPerfTabs</p></object></div>
 <p id="module-cRandPerfTabs">c-Extension for the Digraph3 collection.
-Module cRandPerfTabs.py is a c-compiled version of the
+Module cRandPerfTabs is a c-compiled version of the
 <a class="reference internal" href="#module-randomPerfTabs" title="randomPerfTabs"><code class="xref py py-mod docutils literal notranslate"><span class="pre">randomPerfTabs</span></code></a> module for generating random performance tableaux of Big Data type,
 ie with integer action keys and float performance evaluations.</p>
 <p>Conversions methods are provided
@@ -14046,7 +14114,7 @@ Components are stored in an ordered dictionary.</p>
 
   <div role="contentinfo">
     <p>&#169; Copyright 2012-2024, Raymond Bisdorff.
-      <span class="lastupdated">Last updated on Jun 06, 2024.
+      <span class="lastupdated">Last updated on Jun 08, 2024.
       </span></p>
   </div>
 
