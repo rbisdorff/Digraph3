@@ -95,6 +95,89 @@ class npDigraph(object):
         new.__class__ = self.__class__
         return new
 
+    def intstab(self,frozenset choice):
+        """
+        Computes the independence degree of a choice.
+        """
+        cdef int Min, Max, deg, x, res
+        Min = self.valuationdomain['min']
+        Max = self.valuationdomain['max']
+        valuation = self.valuation
+        deg = Min
+        for a in choice:
+            for b in choice:
+                x = valuation[a-1][b-1]
+                if x > deg and a != b:
+                    deg = x
+        res = Max - deg + Min
+        return res
+
+    def domin(self,frozenset choice):
+        """
+        Renders the dominance degree of a choice.
+        """
+        cdef int deg, Min,dega, x
+        cdef set restactions
+        deg = self.valuationdomain['max']
+        Min = self.valuationdomain['min']
+        restactions = set(self.actions) - choice
+        valuation = self.valuation
+        for a in restactions:
+            dega = Min
+            for b in choice:
+                x = valuation[b-1][a-1]
+                if x > dega:
+                    dega = x
+            if dega < deg:
+                deg = dega
+        return deg
+
+    def absorb(self,frozenset choice):
+        """
+        Renders the absorbency degree of a choice.
+        """
+        cdef int deg, Min,dega, x
+        cdef set restactions
+        deg = self.valuationdomain['max']
+        Min = self.valuationdomain['min']
+        restactions = set(self.actions) - choice
+        valuation = self.valuation
+        for a in restactions:
+            dega = Min
+            for b in choice:
+                x = self.valuation[a-1][b-1]
+                if x > dega:
+                    dega = x
+            if dega < deg:
+                deg = dega
+        return deg
+    
+    def averageCoveringIndex(self,frozenset choice,direction="out"):
+        """
+        Renders the average covering index of a given choice in a set of objects,
+        ie the average number of choice members that cover each
+        non selected object.
+        """
+        cdef set actions, nonselected
+        cdef int n, m, index
+        actions = set([i for i in self.actions])
+        nonSelected = actions - choice
+        n = len(choice)
+        m = len(nonSelected)
+        index = 0
+        for x in nonSelected:
+            if direction == 'out':
+                index += len(self.gamma[x][1] & choice)
+            else:
+                index += len(self.gamma[x][0] & choice)
+        if n > 0 and m > 0:
+            #return ( Decimal(str(index))/Decimal(str(m)) ) / Decimal(str(n))
+            return (index / m) / n 
+        elif n > 0:
+            return 1.0
+        else:
+            return 0.0
+
     def MISgen(self,set S,frozenset I):
         """
         generator of maximal independent choices (voir Byskov 2004):
@@ -164,7 +247,7 @@ class npDigraph(object):
         print('execution time: %.5f sec.' % (time()-t0))
         print('Results in self.misset')
 
-    def showPreKernels(self,bint Comments=True):
+    def showPreKernels(self,bint Comments=True,bint Debug=False):
         """
         Prints all initial and terminal prekernels
         Result in self.dompreKernels and self.abspreKernels
@@ -190,45 +273,53 @@ class npDigraph(object):
             misnotgamdom = set()
             misgamabs = set()
             misnotgamabs = set()
-            #if Debug:
-            #    print('==>>',mis)
+            if Debug:
+                print('==>>',mis)
             for x in mis:
-                misgamdom = misgamdom | (self.gamma[x][0] | self.notGamma[x][1])
-                misgamabs = misgamabs | (self.gamma[x][1] | self.notGamma[x][0])
-                #if Debug:
-                #    print(x,self.gamma[x],self.notGamma[x])
-                #    print(misgamdom,misgamabs)
+                #misgamdom = misgamdom | (self.gamma[x][0] | self.notGamma[x][1])
+                #misgamabs = misgamabs | (self.gamma[x][1] | self.notGamma[x][0])
+                misgamdom = misgamdom | self.gamma[x][0]
+                misgamabs = misgamabs | self.gamma[x][1]
+                if Debug:
+                    print(x,self.gamma[x],self.notGamma[x])
+                    print(misgamdom,misgamabs)
             restactions = actions - mis 
             if restactions <= misgamdom:
                 dompreKernels.add(mis)
-                #if Debug:
-                #    print('initial',mis,restactions,misgamdom)
+                if Debug:
+                    print('initial',mis,restactions,misgamdom)
             if restactions <= misgamabs:
                 abspreKernels.add(mis)
-                #if Debug:
-                #    print('terminal',mis,restactions,misgamabs)
+                if Debug:
+                    print('terminal',mis,restactions,misgamabs)
         self.dompreKrenels = dompreKernels
         self.abspreKernels = abspreKernels
         del(self.__dict__['missetit'])
         t1 = time() - t0
         if Comments:
+            print('Dominant preKernels :')
+            for choice in dompreKernels:
+                print(list(choice))
+                print('   independence : ', self.intstab(choice))
+                print('   dominance    : ', self.domin(choice))
+                print('   absorbency   : ', self.absorb(choice))
+                print('   covering     :  %.3f' % self.averageCoveringIndex(choice, direction='out'))
+            print('Absorbent preKernels :')
+            for choice in abspreKernels:
+                print(list(choice))
+                print('   independence : ', self.intstab(choice))
+                print('   dominance    : ', self.domin(choice))
+                print('   absorbency   : ', self.absorb(choice))
+                print('   covered      :  %.3f' % self.averageCoveringIndex(choice, direction='in'))
             print('*----- statistics -----')
             print('graph name: ', self.name)
             print('number of solutions')
             print(' dominant kernels : ', len(dompreKernels))
             print(' absorbent kernels: ', len(abspreKernels))
-            #print('cardinality frequency distributions')
-            #print('cardinality     : ', list(range(n+1)))
-            #v = [0 for i in range(n+1)]
             for mis in dompreKernels:
                 print('Initial:', list(mis))
-                #v[len(mis)] += 1
-            #print('dominant kernels : ',v)
-            #v = [0 for i in range(n+1)]
             for mis in abspreKernels:
                 print('Terminal :', list(mis))
-                #v[len(mis)] += 1
-            #print('absorbent kernel: ',v)
             print('Execution time  : %.5f sec.' % t1 )
             
     def computePreKernels(self):
@@ -405,7 +496,7 @@ class npDigraph(object):
                     Sx = [(Sxchoice,Sxgamdom,Sxgamabs,Sxindep)]
                     yield Sx
 
-    def computePreKernels(self):
+    def _computePreKernels(self):
         """
         computing dominant and absorbent preKernels:
             Result in self.dompreKernels and self.abspreKernels

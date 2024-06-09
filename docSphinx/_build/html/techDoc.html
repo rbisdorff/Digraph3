@@ -12156,10 +12156,24 @@ double decimal <em>relation</em> dictionary.</p>
 </dd></dl>
 
 <dl class="py method">
+<dt class="sig sig-object py" id="cnpBipolarDigraphs.npDigraph.absorb">
+<span class="sig-name descname"><span class="pre">absorb</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">choice</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cnpBipolarDigraphs.npDigraph.absorb" title="Link to this definition"></a></dt>
+<dd><p>Renders the absorbency degree of a choice.</p>
+</dd></dl>
+
+<dl class="py method">
 <dt class="sig sig-object py" id="cnpBipolarDigraphs.npDigraph.addRelation">
 <span class="sig-name descname"><span class="pre">addRelation</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#cnpBipolarDigraphs.npDigraph.addRelation" title="Link to this definition"></a></dt>
 <dd><p>adding the traditional <em>relation</em> attribute to the <em>self</em>
 digraph object.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cnpBipolarDigraphs.npDigraph.averageCoveringIndex">
+<span class="sig-name descname"><span class="pre">averageCoveringIndex</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">choice</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">direction</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'out'</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cnpBipolarDigraphs.npDigraph.averageCoveringIndex" title="Link to this definition"></a></dt>
+<dd><p>Renders the average covering index of a given choice in a set of objects,
+ie the average number of choice members that cover each
+non selected object.</p>
 </dd></dl>
 
 <dl class="py method">
@@ -12190,16 +12204,19 @@ of the presence and the absence of all pairwise outranking situations.</p>
 <dl class="py method">
 <dt class="sig sig-object py" id="cnpBipolarDigraphs.npDigraph.computePreKernels">
 <span class="sig-name descname"><span class="pre">computePreKernels</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#cnpBipolarDigraphs.npDigraph.computePreKernels" title="Link to this definition"></a></dt>
-<dd><dl class="simple">
-<dt>computing dominant and absorbent preKernels:</dt><dd><p>Result in self.dompreKernels and self.abspreKernels</p>
-</dd>
-</dl>
+<dd><p>Result in self.dompreKernels and self.abspreKernels</p>
 </dd></dl>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="cnpBipolarDigraphs.npDigraph.computeSize">
 <span class="sig-name descname"><span class="pre">computeSize</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#cnpBipolarDigraphs.npDigraph.computeSize" title="Link to this definition"></a></dt>
 <dd><p>Renders the number of validated non reflexive arcs</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cnpBipolarDigraphs.npDigraph.domin">
+<span class="sig-name descname"><span class="pre">domin</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">choice</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cnpBipolarDigraphs.npDigraph.domin" title="Link to this definition"></a></dt>
+<dd><p>Renders the dominance degree of a choice.</p>
 </dd></dl>
 
 <dl class="py method">
@@ -12224,6 +12241,12 @@ the absorbed neighborhood.</p>
 </dd></dl>
 
 <dl class="py method">
+<dt class="sig sig-object py" id="cnpBipolarDigraphs.npDigraph.intstab">
+<span class="sig-name descname"><span class="pre">intstab</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">choice</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cnpBipolarDigraphs.npDigraph.intstab" title="Link to this definition"></a></dt>
+<dd><p>Computes the independence degree of a choice.</p>
+</dd></dl>
+
+<dl class="py method">
 <dt class="sig sig-object py" id="cnpBipolarDigraphs.npDigraph.notGammaSets">
 <span class="sig-name descname"><span class="pre">notGammaSets</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#cnpBipolarDigraphs.npDigraph.notGammaSets" title="Link to this definition"></a></dt>
 <dd><p>Renders the dictionary of neighborhoods {node: (dx,ax)}
@@ -12242,7 +12265,7 @@ the <strong>not</strong> absorbed neighborhood.</p>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="cnpBipolarDigraphs.npDigraph.showPreKernels">
-<span class="sig-name descname"><span class="pre">showPreKernels</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">Comments</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cnpBipolarDigraphs.npDigraph.showPreKernels" title="Link to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">showPreKernels</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">Comments</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">Debug</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cnpBipolarDigraphs.npDigraph.showPreKernels" title="Link to this definition"></a></dt>
 <dd><p>Prints all initial and terminal prekernels
 Result in self.dompreKernels and self.abspreKernels</p>
 </dd></dl>
@@ -14114,7 +14137,7 @@ Components are stored in an ordered dictionary.</p>
 
   <div role="contentinfo">
     <p>&#169; Copyright 2012-2024, Raymond Bisdorff.
-      <span class="lastupdated">Last updated on Jun 08, 2024.
+      <span class="lastupdated">Last updated on Jun 09, 2024.
       </span></p>
   </div>
 
