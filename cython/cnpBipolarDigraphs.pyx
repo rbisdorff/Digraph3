@@ -17,7 +17,7 @@ from time import time
 
 def qtilingIndexList(list indexList,int q,Debug=False,Comments=False):
     """
-    split an index list into q parts of equal length n.
+    Split an index list into q parts of equal length n.
     When there is a rest r < q, the r first parts are put to a length of n+1.
 
     The method is used for distributing balanced sublists to q multiprocessing threads.
@@ -77,7 +77,7 @@ class npDigraph(object):
     """
     def __neg__(self):
         """
-        Make the negation operator -self available for cDigraph instances. 
+        Make the negation operator -self available for npDigraph instances. 
 
         Returns a DualDigraph instance of self.
         """
@@ -87,7 +87,7 @@ class npDigraph(object):
 
     def __invert__(self):
         """
-        Make the inverting operator ~self available for cDigraph instances. 
+        Make the inverting operator ~self available for npDigraph instances. 
 
         Returns a ConverseDigraph instance of self.
         """
@@ -97,16 +97,20 @@ class npDigraph(object):
 
     def intstab(self,frozenset choice):
         """
-        Computes the independence degree of a choice.
+        Computes the independence degree of a choice of type frozenset.
         """
-        cdef int Min, Max, deg, x, res
+        cdef int Min, Max, i, j, deg, x, res
+        cdef list actionsList
         Min = self.valuationdomain['min']
         Max = self.valuationdomain['max']
         valuation = self.valuation
+        actionsList = self.actionsIndex
         deg = Min
         for a in choice:
+            i = actionsList.index(a)
             for b in choice:
-                x = valuation[a-1][b-1]
+                j = actionsList.index(b)
+                x = valuation[i][j]
                 if x > deg and a != b:
                     deg = x
         res = Max - deg + Min
@@ -114,18 +118,22 @@ class npDigraph(object):
 
     def domin(self,frozenset choice):
         """
-        Renders the dominance degree of a choice.
+        Renders the dominance degree of a choice of type frozenset.
         """
         cdef int deg, Min,dega, x
         cdef set restactions
+        cdef list actionsList
         deg = self.valuationdomain['max']
         Min = self.valuationdomain['min']
         restactions = set(self.actions) - choice
         valuation = self.valuation
+        actionsList = self.actionsIndex
         for a in restactions:
             dega = Min
+            i = actionsList.index(a)
             for b in choice:
-                x = valuation[b-1][a-1]
+                j = actionsList.index(b)
+                x = valuation[j][i]
                 if x > dega:
                     dega = x
             if dega < deg:
@@ -134,18 +142,22 @@ class npDigraph(object):
 
     def absorb(self,frozenset choice):
         """
-        Renders the absorbency degree of a choice.
+        Renders the absorbency degree of a choice of type frozenset.
         """
-        cdef int deg, Min,dega, x
+        cdef int deg, Min,dega, x, i, j
         cdef set restactions
+        cdef list actionsList
         deg = self.valuationdomain['max']
         Min = self.valuationdomain['min']
-        restactions = set(self.actions) - choice
+        restactions = set(self.actionsIndex) - choice
         valuation = self.valuation
+        actionsList = self.actionsIndex
         for a in restactions:
             dega = Min
+            i = actionsList.index(a)
             for b in choice:
-                x = self.valuation[a-1][b-1]
+                j = actionsList.index(b)
+                x = self.valuation[i][j]
                 if x > dega:
                     dega = x
             if dega < deg:
@@ -154,13 +166,13 @@ class npDigraph(object):
     
     def averageCoveringIndex(self,frozenset choice,direction="out"):
         """
-        Renders the average covering index of a given choice in a set of objects,
+        Renders the average covering index of a given choice (frozenset)
         ie the average number of choice members that cover each
-        non selected object.
+        non selected action.
         """
         cdef set actions, nonselected
         cdef int n, m, index
-        actions = set([i for i in self.actions])
+        actions = set(self.actionsIndex)
         nonSelected = actions - choice
         n = len(choice)
         m = len(nonSelected)
@@ -186,8 +198,7 @@ class npDigraph(object):
 
         .. note::
 
-                Inititalize: self.MISgen(set(self.actions),frozenset()),
-                (see self.showMIS() method)
+                Inititalize: self.MISgen(set(self.actionsIndex),frozenset())
                 
              
         """
@@ -218,8 +229,9 @@ class npDigraph(object):
 
     def showMIS(self, bint withListing=True):
         """
-        Prints all maximal independent choices:
-            Result in self.misset.
+        Prints all maximal independent choices using the self.MISgen() method 
+
+        Result in self.misset
 
         """
         from time import time
@@ -231,7 +243,7 @@ class npDigraph(object):
         print('*---  Maximal independent choices ---*')
         t0 = time()
         self.misset = set()
-        actions = set(self.actions)
+        actions = set(self.actionsIndex)
         n = len(actions)
         v = [0 for i in range(n+1)]
         for choice in self.MISgen(actions,frozenset()):
@@ -268,7 +280,7 @@ class npDigraph(object):
         #v = [0 for i in range(n+1)]
         for mis in self.MISgen(set(self.actions),frozenset()):
             #v[len(mis)] += 1
-            actions = set(self.actions)
+            actions = set(self.actionsIndex)
             misgamdom = set()
             misnotgamdom = set()
             misgamabs = set()
@@ -276,8 +288,6 @@ class npDigraph(object):
             if Debug:
                 print('==>>',mis)
             for x in mis:
-                #misgamdom = misgamdom | (self.gamma[x][0] | self.notGamma[x][1])
-                #misgamabs = misgamabs | (self.gamma[x][1] | self.notGamma[x][0])
                 misgamdom = misgamdom | self.gamma[x][0]
                 misgamabs = misgamabs | self.gamma[x][1]
                 if Debug:
@@ -324,6 +334,7 @@ class npDigraph(object):
             
     def computePreKernels(self):
         """
+        Non verbose execution of the showPreKernels() method
         Result in self.dompreKernels and self.abspreKernels
 
         """
@@ -334,7 +345,7 @@ class npDigraph(object):
         Renders the number of validated non reflexive arcs
         """
         cdef int n, size, i, j, Med
-        n = len(self.actions)
+        n = self.order
         Med = self.valuationdomain['med']
         valuation = self.valuation
         size = 0
@@ -348,10 +359,10 @@ class npDigraph(object):
 
     def computeCoSize(self):
         """
-        Renders the number of not validated non reflexive arcs
+        Renders the number of **non** validated non reflexive arcs
         """
         cdef int n, size, i, j, Med
-        n = len(self.actions)
+        n = self.order
         Med = self.valuationdomain['med']
         valuation = self.valuation
         size = 0
@@ -371,7 +382,7 @@ class npDigraph(object):
         cdef int order, Max, Med, i, j, sumValuations
         cdef float deter
         Max = self.valuationdomain['max']
-        actionsList = [x for x in self.actions]
+        #actionsList = self.actionsIndex
         n = self.order
         valuation = self.valuation
         deter = 0.0
@@ -396,7 +407,7 @@ class npDigraph(object):
         cdef int Med, i, j, n
         cdef list actionsList
         Med = 0
-        actionsList = [x for x in self.actions]
+        actionsList = self.actionsIndex
         n = self.order
         valuation = np.array( (n,n), dtype=int)
         valuation = self.valuation
@@ -426,7 +437,7 @@ class npDigraph(object):
         cdef int Med, i, j, n
         cdef list actionsList
         Med = 0
-        actionsList = [x for x in self.actions]
+        actionsList = self.actionsIndex
         n = self.order
         valuation = np.array( (n,n), dtype=int)
         valuation = self.valuation
@@ -457,7 +468,7 @@ class npDigraph(object):
         cdef set indep
         cdef list actionsList
         cdef int x, n, i
-        actionsList = [x for x in self.actions]
+        actionsList = self.actionsIndex
         n = self.order
         cdef dict gamma
         gamma = self.gamma
@@ -498,8 +509,9 @@ class npDigraph(object):
 
     def _computePreKernels(self):
         """
-        computing dominant and absorbent preKernels:
-            Result in self.dompreKernels and self.abspreKernels
+        Computing dominant and absorbent preKernels using the self.independentChoices() generator
+
+        Result in self.dompreKernels and self.abspreKernels
         """
         cdef set actions, restactions
         cdef int n
@@ -521,12 +533,12 @@ class npDigraph(object):
     def addRelation(self):
         """
         adding the traditional *relation* attribute to the *self*
-        digraph object.
+        npDigraph object
 
         """
         cdef list actionsList
         cdef int n, x, y
-        actionsList = [ x for x in self.actions]
+        actionsList = self.actionsIndex
         n = len(actionsList)
         valuation = self.valuation
         cdef dict relation = {}
@@ -542,7 +554,7 @@ class npDigraph(object):
                                  bint Comments=False,
                                  bint Debug=False):
         """
-        Renders the set of all chordless circuits detected in a digraph.
+        Renders the set of all chordless circuits detected in a npDigraph object
         Result is stored in <self.circuitsList>
         holding a possibly empty list of tuples with at position 0 the
         list of adjacent actions of the circuit and at position 1
@@ -596,8 +608,8 @@ class npDigraph(object):
 
 class DualnpDigraph(npDigraph):
     """
-    Instantiates the dual ( = negated valuation) cDigraph object from a
-    deep copy of a given other cDigraph instance.
+    Instantiates the dual ( = negated valuation) npDigraph object from a
+    deep copy of a given other npDigraph instance.
 
     The relation constructor returns the dual (negation) of
     self.valuation 
@@ -627,8 +639,8 @@ class DualnpDigraph(npDigraph):
 
 class ConversenpDigraph(npDigraph):
     """
-    Instantiates the converse ( = transposed valuation) CudaDigraph object from a
-    deep copy of a given other CudaDigraph instance.
+    Instantiates the converse ( = transposed valuation) npDigraph object from a
+    deep copy of a given other npDigraph instance.
 
     The relation constructor returns the inverse (transposition) of
     self.valuation 
@@ -658,8 +670,8 @@ class ConversenpDigraph(npDigraph):
 
 class CoDualnpDigraph(npDigraph):
     """
-    Instantiates the codual ( = negated and transposed valuation) CudaDigraph object from a
-    deep copy of a given other CudaDigraph instance.
+    Instantiates the codual ( = negated and transposed valuation) npDigraph object from a
+    deep copy of a given other npDigraph instance.
 
     The relation constructor returns the codual of
     self.valuation 
@@ -682,7 +694,7 @@ class CoDualnpDigraph(npDigraph):
         self.notGamma = self.notGammaSets()
         self.runTimes['codualTransform'] = time() - t0
 
-class omaxFusionnpDigraph(npDigraph):
+class _omaxFusionnpDigraph(npDigraph):
     """
     Instantiates the epistemic disjunctive fusion *o-max* of 
     two given Digraph instances called dg1 and dg2.
@@ -811,14 +823,14 @@ class npBipolarOutrankingDigraph(npDigraph,cPerformanceTableau):
                  #bint hasNoVeto=False,\
                  #bint hasBipolarVeto=True,\
                  bint CopyPerfTab=True,\
-                 bint BigData=True,\
+                 #bint BigData=True,\
                  #bint Threading=False,\
                  #startMethod=None,\
                  #tempDir=None,\
                  #bint WithConcordanceRelation=False,\
                  #bint WithVetoCounts=False,\
                  #nbrCores=None,\
-                 Debug=False,Comments=False):
+                 bint Debug=False,bint Comments=False):
                  
         cdef int n, nt, totalWeight=0, Min, Max, Med
         cdef double tt, tcp, tg
@@ -857,6 +869,8 @@ class npBipolarOutrankingDigraph(npDigraph,cPerformanceTableau):
             for x in actionsSubset:
                 actions[x] = {'name': str(x)}
             self.actions = actions
+        cdef list actionsIndex = [x for x in self.actions]
+        self.actionsIndex = actionsIndex
 
         # objectives and criteria
         try:
@@ -904,15 +918,6 @@ class npBipolarOutrankingDigraph(npDigraph,cPerformanceTableau):
         else:
             self.evaluation = perfTab.evaluation
             self.NA = perfTab.NA
-        if not BigData:
-            #self.convertEvaluationFloatToDecimal()
-            try:
-                if CopyPerfTab:
-                    self.description = deepcopy(perfTab.description)
-                else:
-                    self.description = perfTab.description
-            except:
-                pass
         # init general digraph Data
         self.order = len(self.actions)
         
@@ -945,14 +950,14 @@ class npBipolarOutrankingDigraph(npDigraph,cPerformanceTableau):
     def _computeMajorityMargins(self):
         # initial time stamp
         tcp = time()
-        
-        #actions = self.actions
+        cdef list actionsList
+        cdef int n
+        actionsList = self.actionsIndex
         evaluation = self.evaluation
         criteria = self.criteria
 
         NA = self.NA
-        cdef list actionsList
-        actionsList = [x for x in self.actions]
+        #actionsList = [x for x in self.actions]
         #n = np.int64
         n = len(actionsList)
 
@@ -1064,6 +1069,5 @@ class npBipolarOutrankingDigraph(npDigraph,cPerformanceTableau):
                 else:
                     valuation[i][j] = majorityMargins[i][j]
         self.valuation = valuation
-        
         
 #-----------------
