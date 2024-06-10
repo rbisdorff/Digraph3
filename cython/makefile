@@ -27,7 +27,7 @@ testsInteger:
 testsCorrelation:
 		(cd Test; ${PYTEST} -vs pytestsVerifyFitness.py)
 testsNpDigraphs:
-		(cd Test; ${PYTEST} -v pytestsNpDigraphs.py)
+		(cd Test; ${PYTEST} -vs pytestsNpDigraphs.py)
 
 tests:
 		(cd Test; ${PYTEST} -v pytestsSparseIntegerOutrankingDigraphs.py)
@@ -40,6 +40,6 @@ verboseTests:
 		(cd Test; ${PYTEST} -vs pytestsIntegerOutrankingDigraphs.py)
 		(cd Test; ${PYTEST} -vs pytestsVerifyFitness.py)
 		(cd Test; ${PYTEST} -vs pytestsNpDigraphs.py)
-		(cd Test; ${PYTEST} -v pytestsNpDigraphs.py)
+		(cd Test; ${PYTEST} -vs pytestsNpDigraphs.py)
 
 

@@ -1161,7 +1161,6 @@
 <li class="toctree-l4"><a class="reference internal" href="#cnpBipolarDigraphs.DualnpDigraph"><code class="docutils literal notranslate"><span class="pre">DualnpDigraph</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="#cnpBipolarDigraphs.npBipolarOutrankingDigraph"><code class="docutils literal notranslate"><span class="pre">npBipolarOutrankingDigraph</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="#cnpBipolarDigraphs.npDigraph"><code class="docutils literal notranslate"><span class="pre">npDigraph</span></code></a></li>
-<li class="toctree-l4"><a class="reference internal" href="#cnpBipolarDigraphs.omaxFusionnpDigraph"><code class="docutils literal notranslate"><span class="pre">omaxFusionnpDigraph</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="#cnpBipolarDigraphs.qtilingIndexList"><code class="docutils literal notranslate"><span class="pre">qtilingIndexList()</span></code></a></li>
 </ul>
 </li>
@@ -12054,7 +12053,7 @@ Rubis Solver computed from a stored XMCDA2 encoded performance tableau.</p>
 <section id="cnpbipolardigraphs-module">
 <span id="cnpbipolardigraphs-label"></span><h3><span class="section-number">2.23.1. </span>cnpBipolarDigraphs module<a class="headerlink" href="#cnpbipolardigraphs-module" title="Link to this heading"></a></h3>
 <p><strong>Inheritance Diagram</strong></p>
-<div class="graphviz"><object data="_images/inheritance-af91bccda4a3e8b7749aa9461ee05803b85e701a.svg" type="image/svg+xml" class="inheritance graphviz">
+<div class="graphviz"><object data="_images/inheritance-866848c7dac28c6c0a875b0fcfffd6a21f1a5c18.svg" type="image/svg+xml" class="inheritance graphviz">
 <p class="warning">Inheritance diagram of cnpBipolarDigraphs</p></object></div>
 <p id="module-cnpBipolarDigraphs">c-Extension for the Digraph3 collection requiring the python <em>numpy</em> package.</p>
 <p>Module <em>cnpBipolarDigraphs</em> is a new c-compiled and openmp optimized reimplementation of the <em>BipolarOutrankingDigraph</em> class where the <em>relation</em> attribute is replaced by a <em>numpy</em> integer double array of type int.</p>
@@ -12062,8 +12061,8 @@ Rubis Solver computed from a stored XMCDA2 encoded performance tableau.</p>
 <dl class="py class">
 <dt class="sig sig-object py" id="cnpBipolarDigraphs.CoDualnpDigraph">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">cnpBipolarDigraphs.</span></span><span class="sig-name descname"><span class="pre">CoDualnpDigraph</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">other</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cnpBipolarDigraphs.CoDualnpDigraph" title="Link to this definition"></a></dt>
-<dd><p>Instantiates the codual ( = negated and transposed valuation) CudaDigraph object from a
-deep copy of a given other CudaDigraph instance.</p>
+<dd><p>Instantiates the codual ( = negated and transposed valuation) npDigraph object from a
+deep copy of a given other npDigraph instance.</p>
 <p>The relation constructor returns the codual of
 self.valuation</p>
 </dd></dl>
@@ -12071,8 +12070,8 @@ self.valuation</p>
 <dl class="py class">
 <dt class="sig sig-object py" id="cnpBipolarDigraphs.ConversenpDigraph">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">cnpBipolarDigraphs.</span></span><span class="sig-name descname"><span class="pre">ConversenpDigraph</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">other</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cnpBipolarDigraphs.ConversenpDigraph" title="Link to this definition"></a></dt>
-<dd><p>Instantiates the converse ( = transposed valuation) CudaDigraph object from a
-deep copy of a given other CudaDigraph instance.</p>
+<dd><p>Instantiates the converse ( = transposed valuation) npDigraph object from a
+deep copy of a given other npDigraph instance.</p>
 <p>The relation constructor returns the inverse (transposition) of
 self.valuation</p>
 <div class="admonition note">
@@ -12084,8 +12083,8 @@ self.valuation</p>
 <dl class="py class">
 <dt class="sig sig-object py" id="cnpBipolarDigraphs.DualnpDigraph">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">cnpBipolarDigraphs.</span></span><span class="sig-name descname"><span class="pre">DualnpDigraph</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">other</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cnpBipolarDigraphs.DualnpDigraph" title="Link to this definition"></a></dt>
-<dd><p>Instantiates the dual ( = negated valuation) cDigraph object from a
-deep copy of a given other cDigraph instance.</p>
+<dd><p>Instantiates the dual ( = negated valuation) npDigraph object from a
+deep copy of a given other npDigraph instance.</p>
 <p>The relation constructor returns the dual (negation) of
 self.valuation</p>
 <div class="admonition note">
@@ -12096,7 +12095,7 @@ self.valuation</p>
 
 <dl class="py class">
 <dt class="sig sig-object py" id="cnpBipolarDigraphs.npBipolarOutrankingDigraph">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">cnpBipolarDigraphs.</span></span><span class="sig-name descname"><span class="pre">npBipolarOutrankingDigraph</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">argPerfTab</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">coalition</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">actionsSubset</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">CopyPerfTab</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">BigData</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">Debug</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">Comments</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cnpBipolarDigraphs.npBipolarOutrankingDigraph" title="Link to this definition"></a></dt>
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">cnpBipolarDigraphs.</span></span><span class="sig-name descname"><span class="pre">npBipolarOutrankingDigraph</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">argPerfTab</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">coalition</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">actionsSubset</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">CopyPerfTab</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">Debug</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">Comments</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cnpBipolarDigraphs.npBipolarOutrankingDigraph" title="Link to this definition"></a></dt>
 <dd><p>Cythonized BipolarOutrankingDigraph class with numpy
 integer arrays implemented characteristic valuation.</p>
 <p>Usage:</p>
@@ -12150,36 +12149,35 @@ double decimal <em>relation</em> dictionary.</p>
 </dl>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
-<p>Inititalize: self.MISgen(set(self.actions),frozenset()),
-(see self.showMIS() method)</p>
+<p>Inititalize: self.MISgen(set(self.actionsIndex),frozenset())</p>
 </div>
 </dd></dl>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="cnpBipolarDigraphs.npDigraph.absorb">
 <span class="sig-name descname"><span class="pre">absorb</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">choice</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cnpBipolarDigraphs.npDigraph.absorb" title="Link to this definition"></a></dt>
-<dd><p>Renders the absorbency degree of a choice.</p>
+<dd><p>Renders the absorbency degree of a choice of type frozenset.</p>
 </dd></dl>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="cnpBipolarDigraphs.npDigraph.addRelation">
 <span class="sig-name descname"><span class="pre">addRelation</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#cnpBipolarDigraphs.npDigraph.addRelation" title="Link to this definition"></a></dt>
 <dd><p>adding the traditional <em>relation</em> attribute to the <em>self</em>
-digraph object.</p>
+npDigraph object</p>
 </dd></dl>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="cnpBipolarDigraphs.npDigraph.averageCoveringIndex">
 <span class="sig-name descname"><span class="pre">averageCoveringIndex</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">choice</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">direction</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'out'</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cnpBipolarDigraphs.npDigraph.averageCoveringIndex" title="Link to this definition"></a></dt>
-<dd><p>Renders the average covering index of a given choice in a set of objects,
+<dd><p>Renders the average covering index of a given choice (frozenset)
 ie the average number of choice members that cover each
-non selected object.</p>
+non selected action.</p>
 </dd></dl>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="cnpBipolarDigraphs.npDigraph.computeChordlessCircuits">
 <span class="sig-name descname"><span class="pre">computeChordlessCircuits</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">Odd</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">Comments</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">Debug</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cnpBipolarDigraphs.npDigraph.computeChordlessCircuits" title="Link to this definition"></a></dt>
-<dd><p>Renders the set of all chordless circuits detected in a digraph.
+<dd><p>Renders the set of all chordless circuits detected in a npDigraph object
 Result is stored in &lt;self.circuitsList&gt;
 holding a possibly empty list of tuples with at position 0 the
 list of adjacent actions of the circuit and at position 1
@@ -12191,7 +12189,7 @@ are collected.</p>
 <dl class="py method">
 <dt class="sig sig-object py" id="cnpBipolarDigraphs.npDigraph.computeCoSize">
 <span class="sig-name descname"><span class="pre">computeCoSize</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#cnpBipolarDigraphs.npDigraph.computeCoSize" title="Link to this definition"></a></dt>
-<dd><p>Renders the number of not validated non reflexive arcs</p>
+<dd><p>Renders the number of <strong>non</strong> validated non reflexive arcs</p>
 </dd></dl>
 
 <dl class="py method">
@@ -12204,7 +12202,8 @@ of the presence and the absence of all pairwise outranking situations.</p>
 <dl class="py method">
 <dt class="sig sig-object py" id="cnpBipolarDigraphs.npDigraph.computePreKernels">
 <span class="sig-name descname"><span class="pre">computePreKernels</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#cnpBipolarDigraphs.npDigraph.computePreKernels" title="Link to this definition"></a></dt>
-<dd><p>Result in self.dompreKernels and self.abspreKernels</p>
+<dd><p>Non verbose execution of the showPreKernels() method
+Result in self.dompreKernels and self.abspreKernels</p>
 </dd></dl>
 
 <dl class="py method">
@@ -12216,7 +12215,7 @@ of the presence and the absence of all pairwise outranking situations.</p>
 <dl class="py method">
 <dt class="sig sig-object py" id="cnpBipolarDigraphs.npDigraph.domin">
 <span class="sig-name descname"><span class="pre">domin</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">choice</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cnpBipolarDigraphs.npDigraph.domin" title="Link to this definition"></a></dt>
-<dd><p>Renders the dominance degree of a choice.</p>
+<dd><p>Renders the dominance degree of a choice of type frozenset.</p>
 </dd></dl>
 
 <dl class="py method">
@@ -12243,7 +12242,7 @@ the absorbed neighborhood.</p>
 <dl class="py method">
 <dt class="sig sig-object py" id="cnpBipolarDigraphs.npDigraph.intstab">
 <span class="sig-name descname"><span class="pre">intstab</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">choice</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cnpBipolarDigraphs.npDigraph.intstab" title="Link to this definition"></a></dt>
-<dd><p>Computes the independence degree of a choice.</p>
+<dd><p>Computes the independence degree of a choice of type frozenset.</p>
 </dd></dl>
 
 <dl class="py method">
@@ -12257,10 +12256,8 @@ the <strong>not</strong> absorbed neighborhood.</p>
 <dl class="py method">
 <dt class="sig sig-object py" id="cnpBipolarDigraphs.npDigraph.showMIS">
 <span class="sig-name descname"><span class="pre">showMIS</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">withListing</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cnpBipolarDigraphs.npDigraph.showMIS" title="Link to this definition"></a></dt>
-<dd><dl class="simple">
-<dt>Prints all maximal independent choices:</dt><dd><p>Result in self.misset.</p>
-</dd>
-</dl>
+<dd><p>Prints all maximal independent choices using the self.MISgen() method</p>
+<p>Result in self.misset</p>
 </dd></dl>
 
 <dl class="py method">
@@ -12280,23 +12277,10 @@ where +nx1 = dominated, -nx1 = absorbed neighborhood</p>
 
 </dd></dl>
 
-<dl class="py class">
-<dt class="sig sig-object py" id="cnpBipolarDigraphs.omaxFusionnpDigraph">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">cnpBipolarDigraphs.</span></span><span class="sig-name descname"><span class="pre">omaxFusionnpDigraph</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">dg1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dg2</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">Cuda</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cnpBipolarDigraphs.omaxFusionnpDigraph" title="Link to this definition"></a></dt>
-<dd><p>Instantiates the epistemic disjunctive fusion <em>o-max</em> of 
-two given Digraph instances called dg1 and dg2.</p>
-<p>Parameter:</p>
-<blockquote>
-<div><ul class="simple">
-<li><p><em>dg1</em> and <em>dg2</em> are two npDigraph objects</p></li>
-</ul>
-</div></blockquote>
-</dd></dl>
-
 <dl class="py function">
 <dt class="sig sig-object py" id="cnpBipolarDigraphs.qtilingIndexList">
 <span class="sig-prename descclassname"><span class="pre">cnpBipolarDigraphs.</span></span><span class="sig-name descname"><span class="pre">qtilingIndexList</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">indexList</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">q</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">Debug</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">Comments</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cnpBipolarDigraphs.qtilingIndexList" title="Link to this definition"></a></dt>
-<dd><p>split an index list into q parts of equal length n.
+<dd><p>Split an index list into q parts of equal length n.
 When there is a rest r &lt; q, the r first parts are put to a length of n+1.</p>
 <p>The method is used for distributing balanced sublists to q multiprocessing threads.</p>
 <p>Usage example:</p>
@@ -14137,7 +14121,7 @@ Components are stored in an ordered dictionary.</p>
 
   <div role="contentinfo">
     <p>&#169; Copyright 2012-2024, Raymond Bisdorff.
-      <span class="lastupdated">Last updated on Jun 09, 2024.
+      <span class="lastupdated">Last updated on Jun 10, 2024.
       </span></p>
   </div>
 

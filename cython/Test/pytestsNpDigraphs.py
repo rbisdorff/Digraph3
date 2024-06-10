@@ -12,9 +12,9 @@ def testNpDigraphs():
     print(g)
     g.showPreKernels()
     (-(~g)).showPreKernels()
-    ##g.computePreKernels()
-    ##print(g.dompreKernels)
-    ##print(g.abspreKernels)
+    g.computePreKernels()
+    print(g.dompreKernels)
+    print(g.abspreKernels)
     from outrankingDigraphs import BipolarOutrankingDigraph
     pt1 = pt.convert2Standard()
     g1 = BipolarOutrankingDigraph(pt1)

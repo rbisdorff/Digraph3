@@ -302,7 +302,7 @@ class npDigraph(object):
                 abspreKernels.add(mis)
                 if Debug:
                     print('terminal',mis,restactions,misgamabs)
-        self.dompreKrenels = dompreKernels
+        self.dompreKernels = dompreKernels
         self.abspreKernels = abspreKernels
         del(self.__dict__['missetit'])
         t1 = time() - t0
