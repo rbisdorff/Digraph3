@@ -12175,9 +12175,24 @@ non selected action.</p>
 </dd></dl>
 
 <dl class="py method">
+<dt class="sig sig-object py" id="cnpBipolarDigraphs.npDigraph.chordlessPaths">
+<span class="sig-name descname"><span class="pre">chordlessPaths</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">Pk</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">n2</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">Odd</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">Comments</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">Debug</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cnpBipolarDigraphs.npDigraph.chordlessPaths" title="Link to this definition"></a></dt>
+<dd><p>New procedure from Agrum study April 2009
+recursive chordless path extraction starting from path
+Pk = [n2, …., n1] and ending in node n2.
+Optimized with marking of visited chordless P1s.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cnpBipolarDigraphs.npDigraph.circuitMinCredibility">
+<span class="sig-name descname"><span class="pre">circuitMinCredibility</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">circuit</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cnpBipolarDigraphs.npDigraph.circuitMinCredibility" title="Link to this definition"></a></dt>
+<dd><p>Renders the minimal linking credibility of a Chordless Circuit.</p>
+</dd></dl>
+
+<dl class="py method">
 <dt class="sig sig-object py" id="cnpBipolarDigraphs.npDigraph.computeChordlessCircuits">
 <span class="sig-name descname"><span class="pre">computeChordlessCircuits</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">Odd</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">Comments</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">Debug</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cnpBipolarDigraphs.npDigraph.computeChordlessCircuits" title="Link to this definition"></a></dt>
-<dd><p>Renders the set of all chordless circuits detected in a npDigraph object
+<dd><p>Renders the set of all chordless circuits detected in a digraph.
 Result is stored in &lt;self.circuitsList&gt;
 holding a possibly empty list of tuples with at position 0 the
 list of adjacent actions of the circuit and at position 1
@@ -12251,6 +12266,13 @@ the absorbed neighborhood.</p>
 <dd><p>Renders the dictionary of neighborhoods {node: (dx,ax)}
 with set <em>dx</em> gathering the <strong>not</strong> dominated, and set <em>ax</em> gathering
 the <strong>not</strong> absorbed neighborhood.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cnpBipolarDigraphs.npDigraph.showChordlessCircuits">
+<span class="sig-name descname"><span class="pre">showChordlessCircuits</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#cnpBipolarDigraphs.npDigraph.showChordlessCircuits" title="Link to this definition"></a></dt>
+<dd><p>Show method for chordless circuits observed in a Digraph instance.</p>
+<p>If previous computation is required, stores the detected circuits in self.circuitsList attribute.</p>
 </dd></dl>
 
 <dl class="py method">
@@ -14121,7 +14143,7 @@ Components are stored in an ordered dictionary.</p>
 
   <div role="contentinfo">
     <p>&#169; Copyright 2012-2024, Raymond Bisdorff.
-      <span class="lastupdated">Last updated on Jun 10, 2024.
+      <span class="lastupdated">Last updated on Jun 11, 2024.
       </span></p>
   </div>
 

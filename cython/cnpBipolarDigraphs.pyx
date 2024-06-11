@@ -95,6 +95,209 @@ class npDigraph(object):
         new.__class__ = self.__class__
         return new
 
+    def computeChordlessCircuits(self,bint Odd=False,
+                                 bint Comments=False,bint Debug=False):
+        """
+        Renders the set of all chordless circuits detected in a digraph.
+        Result is stored in <self.circuitsList>
+        holding a possibly empty list of tuples with at position 0 the
+        list of adjacent actions of the circuit and at position 1
+        the set of actions in the stored circuit.
+
+        When *Odd* is True, only chordless circuits with an odd length
+        are collected.
+
+        """
+        #import copy
+        from digraphsTools import flatten
+        if Comments:
+            if Odd:
+                print('*--- chordless odd circuits ---*')
+            else:
+                print('*--- chordless circuits ---*')
+
+        cdef list actionsList = self.actionsIndex
+        cdef int x
+        cdef set visitedArcs = set()
+        self.visitedArcs = visitedArcs
+        cdef list chordlessCircuits = []
+        cdef list P, xCC
+        for x in actionsList:
+            P = [x]
+            if Comments:
+                print('Starting from ', x)
+            xCC = []
+            self.xCC = xCC
+            if self.chordlessPaths(P,x,Odd,Comments,Debug):
+                chordlessCircuits += self.xCC
+        self.chordlessCircuits = chordlessCircuits
+        if Comments:
+            print('result:', len(self.chordlessCircuits), 'circuit(s)')
+            print(self.chordlessCircuits)
+        
+        cdef list circuitsList = []
+        cdef set history = set()
+        cdef frozenset circuitSet
+        cdef list circuitActions
+        for cc in self.chordlessCircuits:
+            circuitActions = [y for y in flatten(cc)]
+            circuitSet = frozenset(circuitActions)
+            if Comments:
+                print('flattening', cc, circuitActions)
+            if circuitSet not in history:
+                history.add(circuitSet)
+                circuitsList.append( (circuitActions,circuitSet) )
+        self.circuitsList = circuitsList
+        return circuitsList
+    
+    def chordlessPaths(self,list Pk,int n2,bint Odd=False,
+                       bint Comments=False,bint Debug=False):
+        """
+        New procedure from Agrum study April 2009
+        recursive chordless path extraction starting from path
+        Pk = [n2, ...., n1] and ending in node n2.
+        Optimized with marking of visited chordless P1s.
+        """
+        cdef bint detectedChordlessPath, noChord, OddFlag
+        cdef int n, n1
+        cdef set NBn1
+        if Comments:
+            Debug = True
+        n1 = Pk[-1]
+        self.visitedArcs.add((n1,n2))
+        self.visitedArcs.add((n2,n1))
+        med = self.valuationdomain['med']
+        valuation = self.valuation
+        cdef list actionsList = self.actionsIndex
+        i = actionsList.index(n1)
+        j = actionsList.index(n2)
+        if valuation[i][j] > med and valuation[j][i] <= med:
+            detectedChordlessPath = True
+            #self.visitedArcs.add((n1,n2))
+            #OddFlag = True
+            if Debug:
+                print('len(Pk)', Pk, len(Pk), len(Pk) % 2)
+
+            if Odd:
+                if (len(Pk) % 2) != 1:
+                    OddFlag = False
+                else:
+                    OddFlag = True
+            else:
+                OddFlag = True
+
+            if Debug:
+                print('OddFlag: ', OddFlag)
+            if OddFlag:
+                #Pk.append(n2)
+                self.xCC.append(Pk)
+                if Debug:
+                    print('Chordless circuit certificate -->>> ', Pk)
+        else:
+            detectedChordlessPath = False
+            NBn1 = set(self.gamma[n1][0]-self.gamma[n1][1])
+            while NBn1 != set():
+                n = NBn1.pop()
+                if (n1,n) not in self.visitedArcs and (n,n1) not in self.visitedArcs:
+                    P = list(Pk)
+                    noChord = True
+                    for x in P[:-1]:
+                        i = actionsList.index(x)
+                        j = actionsList.index(n)
+                        ## if x == n1:
+                        ##     if self.relation[n][x] > med:
+                        ##         noChord = False
+                        ## elif x == n2:
+                        if x == n2:
+                            if valuation[i][j] > med:
+                                noChord = False
+                                break
+                        else:
+                            if valuation[i][j] > med or valuation[j][i] > med:
+                                noChord = False
+                                break
+                    if noChord:
+                        P.append(n)
+                        if Debug:
+                            print('P,n2',P,n2)
+                        if self.chordlessPaths(P,n2,Odd,Comments,Debug):
+                            detectedChordlessPath = True
+            #self.visitedArcs.add((n1,n2))
+            if Debug:
+                print('No further chordless path from ',n1,' to ', n2)
+        return detectedChordlessPath
+
+    def showChordlessCircuits(self):
+        """
+        Show method for chordless circuits observed in a Digraph instance.
+
+        If previous computation is required, stores the detected circuits in self.circuitsList attribute.
+        """
+        cdef int Max
+        Max = self.valuationdomain['max']
+        try:
+            circuitsList = self.circuitsList
+        except:
+            self.computeChordlessCircuits()
+            circuitsList = self.circuitsList
+        if len(circuitsList) == 0:
+            print('No circuits observed in this digraph.')
+        else:
+            print('*---- Chordless circuits ----*')
+            print('%d circuits.' % (len(circuitsList)))
+            for i,(circList,circSet) in enumerate(circuitsList):
+                deg = self.circuitMinCredibility(circList)
+                print('%d: ' % (i+1), circList, ', credibility : %d/%d' % (deg,Max))
+                #print('%d: ' % (i+1), circList)
+
+    def circuitMinCredibility(self,list circuit):
+        """
+        Renders the minimal linking credibility of a Chordless Circuit.
+        """
+        cdef actionsList = self.actionsIndex
+        cdef int Max = self.valuationdomain['max']
+        cdef int Med = self.valuationdomain['med']
+        valuation = self.valuation
+        cdef int nc, ci, i, cj, j, deg = Max
+        #circuit = list(circ)
+        nc = len(circuit)
+        for ci in range(nc):
+            x = circuit[ci]
+            i = actionsList.index(x)
+            for cj in range(ci+1,nc):
+                y =  circuit[cj]
+                j = actionsList.index(y)
+                if cj == ci+1:
+                    deg = min(deg,max(valuation[i][j],valuation[j][i]))
+        x = circuit[-1]
+        i = actionsList.index(x)
+        y = circuit[0]
+        j = actionsList.index(y)
+        deg = min(deg,max(valuation[i][j],valuation[j][i]))
+        return deg
+
+    # def circuitMaxCredibility(self,circ):
+    #     """
+    #     Renders the maximal linking credibility of a Chordless Circuit.
+    #     """
+    #     actions = self.actions
+    #     Min = self.valuationdomain['min']
+    #     Med = self.valuationdomain['med']
+    #     relation = self.relation
+    #     deg = Min
+    #     circuit = list(circ)
+    #     n = len(circuit)
+    #     for i in range(n):
+    #         x = circuit[i]
+    #         for j in range(i+1,n):
+    #             y =  circuit[j]
+    #             if j == i+1:
+    #                 deg = max(deg,max(relation[x][y],relation[y][x]))
+    #     x = circuit[-1]
+    #     y = circuit[0]
+    #     deg = max(deg,max(relation[x][y],relation[y][x]))
+    #     return deg
+
     def intstab(self,frozenset choice):
         """
         Computes the independence degree of a choice of type frozenset.
@@ -550,59 +753,59 @@ class npDigraph(object):
                 relation[x][y] = valuation[i][j]
         self.relation = relation
         
-    def computeChordlessCircuits(self,bint Odd=False,
-                                 bint Comments=False,
-                                 bint Debug=False):
-        """
-        Renders the set of all chordless circuits detected in a npDigraph object
-        Result is stored in <self.circuitsList>
-        holding a possibly empty list of tuples with at position 0 the
-        list of adjacent actions of the circuit and at position 1
-        the set of actions in the stored circuit.
+    # def computeChordlessCircuits(self,bint Odd=False,
+    #                              bint Comments=False,
+    #                              bint Debug=False):
+    #     """
+    #     Renders the set of all chordless circuits detected in a npDigraph object
+    #     Result is stored in <self.circuitsList>
+    #     holding a possibly empty list of tuples with at position 0 the
+    #     list of adjacent actions of the circuit and at position 1
+    #     the set of actions in the stored circuit.
 
-        When *Odd* is True, only chordless circuits with an odd length
-        are collected.
+    #     When *Odd* is True, only chordless circuits with an odd length
+    #     are collected.
 
-        """
-        from digraphsTools import flatten
-        if Comments:
-            if Odd:
-                print('*--- chordless odd circuits ---*')
-            else:
-                print('*--- chordless circuits ---*')
-        cdef list actionsList
-        actionsList = [x for x in self.actions]
-        self.visitedArcs = set()
-        cdef list chordlessCircuits = [], P
-        cdef int n, i, x
-        n = len(actionsList)
-        for i in range(n):
-        #for x in actionsList:
-            x = actionsList[i]
-            P = [x]
-            if Comments:
-                print('Starting from ', x)
-            self.xCC = []
-            if self.chordlessPaths(P,x,Odd,Comments,Debug):
-                chordlessCircuits += self.xCC
-        self.chordlessCircuits = chordlessCircuits
-        if Comments:
-            print('result:', len(self.chordlessCircuits), 'circuit(s)')
-            print(self.chordlessCircuits)
+    #     """
+    #     from digraphsTools import flatten
+    #     if Comments:
+    #         if Odd:
+    #             print('*--- chordless odd circuits ---*')
+    #         else:
+    #             print('*--- chordless circuits ---*')
+    #     cdef list actionsList
+    #     actionsList = [x for x in self.actions]
+    #     self.visitedArcs = set()
+    #     cdef list chordlessCircuits = [], P
+    #     cdef int n, i, x
+    #     n = len(actionsList)
+    #     for i in range(n):
+    #     #for x in actionsList:
+    #         x = actionsList[i]
+    #         P = [x]
+    #         if Comments:
+    #             print('Starting from ', x)
+    #         self.xCC = []
+    #         if self.chordlessPaths(P,x,Odd,Comments,Debug):
+    #             chordlessCircuits += self.xCC
+    #     self.chordlessCircuits = chordlessCircuits
+    #     if Comments:
+    #         print('result:', len(self.chordlessCircuits), 'circuit(s)')
+    #         print(self.chordlessCircuits)
 
-        cdef list circuitsList = []
-        cdef list history = set()
-        for cc in self.chordlessCircuits:
-            #circuitsList.append( (x,frozenset(x)) )
-            circuitActions = [y for y in flatten(cc)]
-            circuitSet = frozenset(circuitActions)
-            if Comments:
-                print('flattening', cc, circuitActions)
-            if circuitSet not in history:
-                history.add(circuitSet)
-                circuitsList.append( (circuitActions,circuitSet) )
-        self.circuitsList = circuitsList
-        return circuitsList
+    #     cdef list circuitsList = []
+    #     cdef list history = set()
+    #     for cc in self.chordlessCircuits:
+    #         #circuitsList.append( (x,frozenset(x)) )
+    #         circuitActions = [y for y in flatten(cc)]
+    #         circuitSet = frozenset(circuitActions)
+    #         if Comments:
+    #             print('flattening', cc, circuitActions)
+    #         if circuitSet not in history:
+    #             history.add(circuitSet)
+    #             circuitsList.append( (circuitActions,circuitSet) )
+    #     self.circuitsList = circuitsList
+    #     return circuitsList
         
 #--------------------
 
