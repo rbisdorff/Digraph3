@@ -88,12 +88,6 @@
 <li class="toctree-l4"><a class="reference internal" href="#digraphs.BreakAddCocsDigraph.showComponents"><code class="docutils literal notranslate"><span class="pre">BreakAddCocsDigraph.showComponents()</span></code></a></li>
 </ul>
 </li>
-<li class="toctree-l3"><a class="reference internal" href="#digraphs.BrokenChordlessCircuitsDigraph"><code class="docutils literal notranslate"><span class="pre">BrokenChordlessCircuitsDigraph</span></code></a><ul>
-<li class="toctree-l4"><a class="reference internal" href="#digraphs.BrokenChordlessCircuitsDigraph.breakChordlessOddCircuits"><code class="docutils literal notranslate"><span class="pre">BrokenChordlessCircuitsDigraph.breakChordlessOddCircuits()</span></code></a></li>
-<li class="toctree-l4"><a class="reference internal" href="#digraphs.BrokenChordlessCircuitsDigraph.breakCircuits"><code class="docutils literal notranslate"><span class="pre">BrokenChordlessCircuitsDigraph.breakCircuits()</span></code></a></li>
-<li class="toctree-l4"><a class="reference internal" href="#digraphs.BrokenChordlessCircuitsDigraph.showComponents"><code class="docutils literal notranslate"><span class="pre">BrokenChordlessCircuitsDigraph.showComponents()</span></code></a></li>
-</ul>
-</li>
 <li class="toctree-l3"><a class="reference internal" href="#digraphs.BrokenCocsDigraph"><code class="docutils literal notranslate"><span class="pre">BrokenCocsDigraph</span></code></a><ul>
 <li class="toctree-l4"><a class="reference internal" href="#digraphs.BrokenCocsDigraph.breakChordlessOddCircuits"><code class="docutils literal notranslate"><span class="pre">BrokenCocsDigraph.breakChordlessOddCircuits()</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="#digraphs.BrokenCocsDigraph.breakCircuits"><code class="docutils literal notranslate"><span class="pre">BrokenCocsDigraph.breakCircuits()</span></code></a></li>
@@ -1369,7 +1363,7 @@
 <ul>
 <li><dl>
 <dt><a class="reference internal" href="#digraphs-label"><span class="std std-ref">digraphs module</span></a></dt><dd><p>Main part of the Digraph3 source code with the generic root <a class="reference external" href="techDoc.html#digraphs.Digraph">Digraph</a> class.</p>
-<div class="graphviz"><object data="_images/inheritance-a1e5dd75c4b297a11ceab688be680279d984d678.svg" type="image/svg+xml" class="inheritance graphviz">
+<div class="graphviz"><object data="_images/inheritance-f871c3f250be7d5559743237263d15ebbd3e01e7.svg" type="image/svg+xml" class="inheritance graphviz">
 <p class="warning">Inheritance diagram of digraphs</p></object></div>
 </dd>
 </dl>
@@ -1561,7 +1555,7 @@ generic root <a class="reference external" href="techDoc.html#transitiveDigraphs
 <span id="digraphs-label"></span><h2><a class="toc-backref" href="#id5" role="doc-backlink"><span class="section-number">2.3. </span>digraphs module</a><a class="headerlink" href="#digraphs-module" title="Link to this heading"></a></h2>
 <p>A tutorial with coding examples is available here: <a class="reference internal" href="tutorial.html#digraphs-tutorial-label"><span class="std std-ref">Working with the Digraph3 software resources</span></a></p>
 <p><strong>Inheritance Diagram</strong></p>
-<div class="graphviz"><object data="_images/inheritance-a1e5dd75c4b297a11ceab688be680279d984d678.svg" type="image/svg+xml" class="inheritance graphviz">
+<div class="graphviz"><object data="_images/inheritance-f871c3f250be7d5559743237263d15ebbd3e01e7.svg" type="image/svg+xml" class="inheritance graphviz">
 <p class="warning">Inheritance diagram of digraphs</p></object></div>
 <p id="module-digraphs">Python3+ implementation of the digraphs module, root module of the Digraph3 resources.</p>
 <p>Copyright (C) 2006-2023  Raymond Bisdorff</p>
@@ -1647,62 +1641,27 @@ i.e. a link (<em>x</em>, <em>y</em>) with minimal difference between r(<em>x</em
 </dd></dl>
 
 <dl class="py class">
-<dt class="sig sig-object py" id="digraphs.BrokenChordlessCircuitsDigraph">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">digraphs.</span></span><span class="sig-name descname"><span class="pre">BrokenChordlessCircuitsDigraph</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">digraph</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">Piping</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">Comments</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">Threading</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">nbrOfCPUs</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/digraphs.html#BrokenChordlessCircuitsDigraph"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#digraphs.BrokenChordlessCircuitsDigraph" title="Link to this definition"></a></dt>
-<dd><p>Specialization of general Digraph class for instantiation
-of chordless circuits broken digraphs.</p>
-<p>Parameters:</p>
-<blockquote>
-<div><ul class="simple">
-<li><p>digraph: stored or memory resident digraph instance.</p></li>
-<li><p>Piping: using OS pipes for data in- and output between Python and C++.</p></li>
-</ul>
-</div></blockquote>
-<p>All chordless odd circuits are broken at the weakest asymmetric link,
-i.e. a link <img class="math" src="_images/math/b74f469e55333522c48ad9ef8fc4ad07e2bc3483.png" alt="(x, y)"/> with minimal difference between <img class="math" src="_images/math/a4c8105e62fb7869c85de253b2f721f4a12c8f2d.png" alt="r(x S y)"/> and <img class="math" src="_images/math/260bb14c96c24fcb23f4b929687013e7d5838af1.png" alt="r(y S x)"/>.</p>
-<dl class="py method">
-<dt class="sig sig-object py" id="digraphs.BrokenChordlessCircuitsDigraph.breakChordlessOddCircuits">
-<span class="sig-name descname"><span class="pre">breakChordlessOddCircuits</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">Piping</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">Comments</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">Debug</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">Threading</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">nbrOfCPUs</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/digraphs.html#BrokenChordlessCircuitsDigraph.breakChordlessOddCircuits"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#digraphs.BrokenChordlessCircuitsDigraph.breakChordlessOddCircuits" title="Link to this definition"></a></dt>
-<dd><p>Breaking of chordless odd circuits extraction.</p>
-</dd></dl>
-
-<dl class="py method">
-<dt class="sig sig-object py" id="digraphs.BrokenChordlessCircuitsDigraph.breakCircuits">
-<span class="sig-name descname"><span class="pre">breakCircuits</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">Comments</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/digraphs.html#BrokenChordlessCircuitsDigraph.breakCircuits"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#digraphs.BrokenChordlessCircuitsDigraph.breakCircuits" title="Link to this definition"></a></dt>
-<dd><p>Break all cricuits in self.circuits.</p>
-</dd></dl>
-
-<dl class="py method">
-<dt class="sig sig-object py" id="digraphs.BrokenChordlessCircuitsDigraph.showComponents">
-<span class="sig-name descname"><span class="pre">showComponents</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/digraphs.html#BrokenChordlessCircuitsDigraph.showComponents"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#digraphs.BrokenChordlessCircuitsDigraph.showComponents" title="Link to this definition"></a></dt>
-<dd><p>Shows the list of connected components of the digraph instance.</p>
-</dd></dl>
-
-</dd></dl>
-
-<dl class="py class">
 <dt class="sig sig-object py" id="digraphs.BrokenCocsDigraph">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">digraphs.</span></span><span class="sig-name descname"><span class="pre">BrokenCocsDigraph</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">digraph</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">Piping</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">Comments</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">Threading</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">nbrOfCPUs</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/digraphs.html#BrokenCocsDigraph"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#digraphs.BrokenCocsDigraph" title="Link to this definition"></a></dt>
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">digraphs.</span></span><span class="sig-name descname"><span class="pre">BrokenCocsDigraph</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">digraph</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">Comments</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/digraphs.html#BrokenCocsDigraph"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#digraphs.BrokenCocsDigraph" title="Link to this definition"></a></dt>
 <dd><p>Specialization of general Digraph class for instantiation
 of chordless odd circuits broken digraphs.</p>
 <p>Parameters:</p>
 <blockquote>
 <div><ul class="simple">
 <li><p>digraph: stored or memory resident digraph instance.</p></li>
-<li><p>Piping: using OS pipes for data in- and output between Python and C++.</p></li>
 </ul>
 </div></blockquote>
 <p>All chordless odd circuits are broken at the weakest asymmetric link,
 i.e. a link <img class="math" src="_images/math/b74f469e55333522c48ad9ef8fc4ad07e2bc3483.png" alt="(x, y)"/> with minimal difference between <img class="math" src="_images/math/a4c8105e62fb7869c85de253b2f721f4a12c8f2d.png" alt="r(x S y)"/> and <img class="math" src="_images/math/260bb14c96c24fcb23f4b929687013e7d5838af1.png" alt="r(y S x)"/>.</p>
 <dl class="py method">
 <dt class="sig sig-object py" id="digraphs.BrokenCocsDigraph.breakChordlessOddCircuits">
-<span class="sig-name descname"><span class="pre">breakChordlessOddCircuits</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">Piping</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">Comments</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">Debug</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">Threading</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">nbrOfCPUs</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/digraphs.html#BrokenCocsDigraph.breakChordlessOddCircuits"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#digraphs.BrokenCocsDigraph.breakChordlessOddCircuits" title="Link to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">breakChordlessOddCircuits</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">Comments</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">Debug</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/digraphs.html#BrokenCocsDigraph.breakChordlessOddCircuits"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#digraphs.BrokenCocsDigraph.breakChordlessOddCircuits" title="Link to this definition"></a></dt>
 <dd><p>Breaking of chordless odd circuits extraction.</p>
 </dd></dl>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="digraphs.BrokenCocsDigraph.breakCircuits">
-<span class="sig-name descname"><span class="pre">breakCircuits</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">Comments</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/digraphs.html#BrokenCocsDigraph.breakCircuits"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#digraphs.BrokenCocsDigraph.breakCircuits" title="Link to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">breakCircuits</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">Comments</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">Debug</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/digraphs.html#BrokenCocsDigraph.breakCircuits"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#digraphs.BrokenCocsDigraph.breakCircuits" title="Link to this definition"></a></dt>
 <dd><p>Break all cricuits in self.circuits.</p>
 </dd></dl>
 
@@ -2745,7 +2704,7 @@ leq ‘&lt;=’, geq ‘&gt;=’, indeterm ‘?’</p>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="digraphs.Digraph.computeRubisChoice">
-<span class="sig-name descname"><span class="pre">computeRubisChoice</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">Comments</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">_OldCoca</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">BrokenCocs</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">Threading</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">nbrOfCPUs</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/digraphs.html#Digraph.computeRubisChoice"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#digraphs.Digraph.computeRubisChoice" title="Link to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">computeRubisChoice</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">Comments</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">_OldCoca</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">BrokenCocs</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/digraphs.html#Digraph.computeRubisChoice"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#digraphs.Digraph.computeRubisChoice" title="Link to this definition"></a></dt>
 <dd><p>Renders self.strictGoodChoices, self.nullChoices
 self.strictBadChoices, self.nonRobustChoices.</p>
 <div class="admonition warning">
@@ -14143,7 +14102,7 @@ Components are stored in an ordered dictionary.</p>
 
   <div role="contentinfo">
     <p>&#169; Copyright 2012-2024, Raymond Bisdorff.
-      <span class="lastupdated">Last updated on Jun 11, 2024.
+      <span class="lastupdated">Last updated on Jun 12, 2024.
       </span></p>
   </div>
 

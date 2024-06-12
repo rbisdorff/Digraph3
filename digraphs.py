@@ -8992,8 +8992,8 @@ class Digraph(object):
         self.computeRubisChoice(Comments=Comments,_OldCoca=_OldCoca)
 
     def computeRubisChoice(self,
-                           Comments=False,_OldCoca=False,BrokenCocs=True,
-                           Threading=False,nbrOfCPUs=1):
+                           Comments=False,_OldCoca=False,BrokenCocs=True):
+                           #Threading=False,nbrOfCPUs=1):
         """
         Renders self.strictGoodChoices, self.nullChoices
         self.strictBadChoices, self.nonRobustChoices.
@@ -9022,12 +9022,10 @@ class Digraph(object):
             _selfwcoc = CocaDigraph(self,Comments=Comments)
             self.breakings = 0
         elif BrokenCocs:
-            _selfwcoc = BrokenCocsDigraph(self,Comments=Comments,
-                                    Threading=Threading,nbrOfCPUs=nbrOfCPUs)            
+            _selfwcoc = BrokenCocsDigraph(self,Comments=Comments)            
             self.breakings = _selfwcoc.breakings
         else:
-            _selfwcoc = BreakAddCocsDigraph(self,Comments=Comments,
-                                    Threading=Threading,nbrOfCPUs=nbrOfCPUs)
+            _selfwcoc = BreakAddCocsDigraph(self,Comments=Comments)
             self.breakings = _selfwcoc.breakings
         if Comments:
             print('Execution time: %.3f seconds' % (time()-t0))
@@ -13779,14 +13777,15 @@ class BrokenCocsDigraph(Digraph):
     Parameters:
 
         - digraph: stored or memory resident digraph instance.
-        - Piping: using OS pipes for data in- and output between Python and C++.
 
     All chordless odd circuits are broken at the weakest asymmetric link,
     i.e. a link :math:`(x, y)` with minimal difference between :math:`r(x S y)` and :math:`r(y S x)`.
 
     """
-    def __init__(self,digraph=None,Piping=False,
-                 Comments=False,Threading=False,nbrOfCPUs=1):
+    def __init__(self,digraph=None,
+                 #Piping=False,
+                 #Threading=False,nbrOfCPUs=1,
+                 Comments=False):
         import random,sys,array,copy
         from outrankingDigraphs import OutrankingDigraph,\
              RandomOutrankingDigraph, BipolarOutrankingDigraph, ConfidentBipolarOutrankingDigraph
@@ -13822,12 +13821,14 @@ class BrokenCocsDigraph(Digraph):
         self.gamma = self.gammaSets()
         self.notGamma = self.notGammaSets()
         self.weakGamma = self.weakGammaSets()
-        self.breakChordlessOddCircuits(Piping=Piping,
-            Comments=Comments,Threading=Threading,nbrOfCPUs=nbrOfCPUs)
+        self.breakChordlessOddCircuits(Comments=Comments)
+            #Piping=Piping,
+            #Threading=Threading,nbrOfCPUs=nbrOfCPUs)
 
-    def breakChordlessOddCircuits(self,Piping=False,
-                                  Comments=True,Debug=False,
-                                  Threading=False,nbrOfCPUs=1):
+    def breakChordlessOddCircuits(self,
+                                  #Piping=False,
+                                  #Threading=False,nbrOfCPUs=1,
+                                  Comments=True,Debug=False):
         """
         Breaking of chordless odd circuits extraction.
         """
@@ -13844,25 +13845,25 @@ class BrokenCocsDigraph(Digraph):
         while newCircuits != set():
             i += 1
             initialCircuits = set([x for cl,x in self.circuitsList])
-            self.breakCircuits(Comments=Comments)
+            self.breakCircuits(Comments=Comments,Debug=Debug)
             # if Cpp:
             #     if Piping:
             #         self.computeCppInOutPipingChordlessCircuits(Odd=True,
             #                                                     Debug=Debug)
             #     else:
             #         self.computeCppChordlessCircuits(Odd=True,Debug=Debug)
-            if Threading:
-                self.computeChordlessCircuitsMP(Odd=True,Comments=Debug,
-                                    Threading=Threading,nbrOfCPUs=nbrOfCPUs)
-            else:
-                self.computeChordlessCircuits(Odd=True,Comments=Debug)
+            #if Threading:
+            #    self.computeChordlessCircuitsMP(Odd=True,Comments=Debug,
+            #                        Threading=Threading,nbrOfCPUs=nbrOfCPUs)
+            #else:
+            self.computeChordlessCircuits(Odd=True,Comments=Debug)
             newCircuits = set([x for cl,x in self.circuitsList])
             if Comments:
                 print('--->> iteration %d:', i)
                 print('newCircuits', newCircuits)
 
 
-    def breakCircuits(self,Comments=False):
+    def breakCircuits(self,Comments=False,Debug=False):
         """
         Break all cricuits in self.circuits.
         """
@@ -13885,7 +13886,8 @@ class BrokenCocsDigraph(Digraph):
         Med = valuationdomain['med']
         currentCircuits = list(circuitsList)
         for (cycleList,cycle) in circuitsList:
-            degP,degN,minLink = self.circuitCredibilities(cycleList,Debug=Comments)
+            degP,degN,minLink = self.circuitCredibilities(cycleList,
+                                                          Debug=Debug)
             if Comments:
                 print(cycleList,cycle,degP,degN,minLink)
             if Comments:
@@ -13924,7 +13926,7 @@ class BrokenCocsDigraph(Digraph):
             xk = k + 1
 
 #--------------------
-class BrokenChordlessCircuitsDigraph(Digraph):
+class _BrokenChordlessCircuitsDigraph(Digraph):
     """
     Specialization of general Digraph class for instantiation
     of chordless circuits broken digraphs.
