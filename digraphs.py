@@ -13926,157 +13926,172 @@ class BrokenCocsDigraph(Digraph):
             xk = k + 1
 
 #--------------------
-class _BrokenChordlessCircuitsDigraph(Digraph):
+class BrokenChordlessCircuitsDigraph(BrokenCocsDigraph):
     """
-    Specialization of general Digraph class for instantiation
-    of chordless circuits broken digraphs.
-
-    Parameters:
-
-        - digraph: stored or memory resident digraph instance.
-        - Piping: using OS pipes for data in- and output between Python and C++.
-
-    All chordless odd circuits are broken at the weakest asymmetric link,
-    i.e. a link :math:`(x, y)` with minimal difference between :math:`r(x S y)` and :math:`r(y S x)`.
-
+    Terminology requirement
     """
-    def __init__(self,digraph=None,Piping=False,
-                 Comments=False,Threading=False,nbrOfCPUs=1):
-        import random,sys,array,copy
-        from outrankingDigraphs import OutrankingDigraph,\
-             RandomOutrankingDigraph, BipolarOutrankingDigraph, ConfidentBipolarOutrankingDigraph
-        ## if comment is None:
-        ##     silent = True
-        ## else:
-        ##     silent = not(comment)
-        if digraph is None:
-            print('Erreur: A valid Digraph instance is required!')
-            return
-        elif isinstance(digraph,(Digraph,OutrankingDigraph,\
-                                 RandomOutrankingDigraph,BipolarOutrankingDigraph,\
-                                 ConfidentBipolarOutrankingDigraph)):
-            self.name = str(digraph.name)
-            self.actions = copy.deepcopy(digraph.actions)
-            self.valuationdomain = copy.deepcopy(digraph.valuationdomain)
-            try:
-                self.valuationdomain['precision'] = digraph.valuationdomain['precision']
-            except:
-                self.valuationdomain['precision']  = Decimal('0')
-            self.relation = copy.deepcopy(digraph.relation)
-        else:
-            fileName = digraph + 'py'
-            argDict = {}
-            fi = open(fileName,'r')
-            fileText = fi.read()
-            fi.close()
-            exec(compile(fileText, fileName, 'exec'),argDict)
-            self.name = digraph
-            self.actions = argDict['actionset']
-            self.valuationdomain = argDict['valuationdomain']
-            self.relation = argDict['relation']
-
-        self.order = len(self.actions)
-        self.gamma = self.gammaSets()
-        self.notGamma = self.notGammaSets()
-        self.weakGamma = self.weakGammaSets()
-        self.breakChordlessOddCircuits(Piping=Piping,
-                Comments=Comments,Threading=Threading,nbrOfCPUs=nbrOfCPUs)
-
-    def breakChordlessOddCircuits(self,Piping=False,
-                Comments=True,Debug=False,Threading=False,nbrOfCPUs=1):
-        """
-        Breaking of chordless odd circuits extraction.
-        """
-        newCircuits = None
-        self.circuitsList = []
-        self.brokenLinks = set()
-        try:
-            oldBreakings = self.breakings
-        except:
-            self.breakings = 0
-        self.newBreakings = self.order
-        #while newCircuits != set() or self.newBreakings != 0:
-        i = 0
-        while newCircuits != set():
-            i += 1
-            initialCircuits = set([x for cl,x in self.circuitsList])
-            self.breakCircuits(Comments=Comments)
-            # if Cpp:
-            #     if Piping:
-            #         self.computeCppInOutPipingChordlessCircuits(Odd=True,Debug=Debug)
-            #     else:
-            #         self.computeCppChordlessCircuits(Odd=True,Debug=Debug)
-            if Threading:
-                self.computeChordlessCircuitsMP(Odd=True,Comments=Debug,
-                                Threading=Threading,nbrOfCPUs=nbrOfCPUs)
-            else:
-                self.computeChordlessCircuits(Odd=False,Comments=Debug)
-            newCircuits = set([x for cl,x in self.circuitsList])
-            if Comments:
-                print('--->> iteration %d:', i)
-                print('newCircuits', newCircuits)
 
 
-    def breakCircuits(self,Comments=False):
-        """
-        Break all cricuits in self.circuits.
-        """
-        import time
-        from digraphsTools import flatten
+# class _BrokenChordlessCircuitsDigraph(Digraph):
+#     """
+#     Specialization of general Digraph class for instantiation
+#     of chordless circuits broken digraphs.
+
+#     Parameters:
+
+#         - digraph: stored or memory resident digraph instance.
+#         - Piping: using OS pipes for data in- and output between Python and C++.
+
+#     All chordless odd circuits are broken at the weakest asymmetric link,
+#     i.e. a link :math:`(x, y)` with minimal difference between :math:`r(x S y)` and :math:`r(y S x)`.
+
+#     """
+#     def __init__(self,digraph=None,
+#                  #Piping=False,
+#                  Comments=False,
+#                  #Threading=False,
+#                  #nbrOfCPUs=1,
+#                  ):
+#         import random,sys,array,copy
+#         from outrankingDigraphs import OutrankingDigraph,\
+#              RandomOutrankingDigraph, BipolarOutrankingDigraph, ConfidentBipolarOutrankingDigraph
+#         ## if comment is None:
+#         ##     silent = True
+#         ## else:
+#         ##     silent = not(comment)
+#         if digraph is None:
+#             print('Erreur: A valid Digraph instance is required!')
+#             return
+#         elif isinstance(digraph,(Digraph,OutrankingDigraph,\
+#                                  RandomOutrankingDigraph,BipolarOutrankingDigraph,\
+#                                  ConfidentBipolarOutrankingDigraph)):
+#             self.name = str(digraph.name)
+#             self.actions = copy.deepcopy(digraph.actions)
+#             self.valuationdomain = copy.deepcopy(digraph.valuationdomain)
+#             try:
+#                 self.valuationdomain['precision'] = digraph.valuationdomain['precision']
+#             except:
+#                 self.valuationdomain['precision']  = Decimal('0')
+#             self.relation = copy.deepcopy(digraph.relation)
+#         else:
+#             fileName = digraph + 'py'
+#             argDict = {}
+#             fi = open(fileName,'r')
+#             fileText = fi.read()
+#             fi.close()
+#             exec(compile(fileText, fileName, 'exec'),argDict)
+#             self.name = digraph
+#             self.actions = argDict['actionset']
+#             self.valuationdomain = argDict['valuationdomain']
+#             self.relation = argDict['relation']
+
+#         self.order = len(self.actions)
+#         self.gamma = self.gammaSets()
+#         self.notGamma = self.notGammaSets()
+#         self.weakGamma = self.weakGammaSets()
+#         self.breakChordlessOddCircuits(
+#             #Piping=Piping,
+#                 Comments=Comments)
+#                 # Threading=Threading,nbrOfCPUs=nbrOfCPUs)
+
+#     def breakChordlessOddCircuits(self,
+#                                   #Piping=False,
+#                                   Comments=True,Debug=False,
+#                                   #Threading=False,nbrOfCPUs=1,
+#                                   ):
+#         """
+#         Breaking of chordless odd circuits extraction.
+#         """
+#         newCircuits = None
+#         self.circuitsList = []
+#         self.brokenLinks = set()
+#         try:
+#             oldBreakings = self.breakings
+#         except:
+#             self.breakings = 0
+#         self.newBreakings = self.order
+#         #while newCircuits != set() or self.newBreakings != 0:
+#         i = 0
+#         while newCircuits != set():
+#             i += 1
+#             initialCircuits = set([x for cl,x in self.circuitsList])
+#             self.breakCircuits(Comments=Comments)
+#             # if Cpp:
+#             #     if Piping:
+#             #         self.computeCppInOutPipingChordlessCircuits(Odd=True,Debug=Debug)
+#             #     else:
+#             #         self.computeCppChordlessCircuits(Odd=True,Debug=Debug)
+#             if Threading:
+#                 self.computeChordlessCircuitsMP(Odd=True,Comments=Debug,
+#                                 Threading=Threading,nbrOfCPUs=nbrOfCPUs)
+#             else:
+#                 self.computeChordlessCircuits(Odd=False,Comments=Debug)
+#             newCircuits = set([x for cl,x in self.circuitsList])
+#             if Comments:
+#                 print('--->> iteration %d:', i)
+#                 print('newCircuits', newCircuits)
+
+
+#     def breakCircuits(self,Comments=False):
+#         """
+#         Break all cricuits in self.circuits.
+#         """
+#         import time
+#         from digraphsTools import flatten
         
-        newBreakings = 0
-        if not(isinstance(self.actions,dict)):
-            actions = {}
-            for x in self.actions:
-                actions[x] = {'name':x}
-        else:
-            actions = self.actions
-        circuitsList = self.circuitsList
-        if Comments:
-            print('list of circuits tp break : ', circuitsList)
-        valuationdomain = self.valuationdomain
-##        gamma = self.gamma
-        relation = self.relation
-        Med = valuationdomain['med']
-        currentCircuits = list(circuitsList)
-        for (cycleList,cycle) in circuitsList:
-            degP,degN,minLink = self.circuitCredibilities(cycleList,Debug=Comments)
-            if Comments:
-                print(cycleList,cycle,degP,degN,minLink)
-            if Comments:
-                print('Breaking:',cycleList,degP,degN)
-            actionsSubset = [x for x in flatten(cycle)]
-            if Comments:
-                self.showRelationTable(actionsSubset=actionsSubset)
-            x = minLink[0]
-            y = minLink[1]
-            if Comments:
-                print('Minimal link put to doubt: ', x,y)
-            if (x,y) not in self.brokenLinks:
-                relation[x][y] = Med
-                relation[y][x] = Med
-                self.brokenLinks.add((x,y))
-                newBreakings += 1
-            currentCircuits.remove((cycleList,cycle))
+#         newBreakings = 0
+#         if not(isinstance(self.actions,dict)):
+#             actions = {}
+#             for x in self.actions:
+#                 actions[x] = {'name':x}
+#         else:
+#             actions = self.actions
+#         circuitsList = self.circuitsList
+#         if Comments:
+#             print('list of circuits tp break : ', circuitsList)
+#         valuationdomain = self.valuationdomain
+# ##        gamma = self.gamma
+#         relation = self.relation
+#         Med = valuationdomain['med']
+#         currentCircuits = list(circuitsList)
+#         for (cycleList,cycle) in circuitsList:
+#             degP,degN,minLink = self.circuitCredibilities(cycleList,Debug=Comments)
+#             if Comments:
+#                 print(cycleList,cycle,degP,degN,minLink)
+#             if Comments:
+#                 print('Breaking:',cycleList,degP,degN)
+#             actionsSubset = [x for x in flatten(cycle)]
+#             if Comments:
+#                 self.showRelationTable(actionsSubset=actionsSubset)
+#             x = minLink[0]
+#             y = minLink[1]
+#             if Comments:
+#                 print('Minimal link put to doubt: ', x,y)
+#             if (x,y) not in self.brokenLinks:
+#                 relation[x][y] = Med
+#                 relation[y][x] = Med
+#                 self.brokenLinks.add((x,y))
+#                 newBreakings += 1
+#             currentCircuits.remove((cycleList,cycle))
 
-        self.actions = actions
-        self.order = len(actions)
-        self.relation = relation
-        self.circuitsList = currentCircuits
-        self.gamma = self.gammaSets()
-        self.notGamma = self.notGammaSets()
-        self.weakGamma = self.weakGammaSets()
-        self.breakings += newBreakings
+#         self.actions = actions
+#         self.order = len(actions)
+#         self.relation = relation
+#         self.circuitsList = currentCircuits
+#         self.gamma = self.gammaSets()
+#         self.notGamma = self.notGammaSets()
+#         self.weakGamma = self.weakGammaSets()
+#         self.breakings += newBreakings
 
-    def showComponents(self):
-        """Shows the list of connected components of the digraph instance."""
-        print('*--- Connected Components ---*')
-        k=1
-        for Comp in self.components():
-            component = list(Comp)
-            #component.sort()
-            print(str(k) + ': ' + str(component))
-            xk = k + 1
+#     def showComponents(self):
+#         """Shows the list of connected components of the digraph instance."""
+#         print('*--- Connected Components ---*')
+#         k=1
+#         for Comp in self.components():
+#             component = list(Comp)
+#             #component.sort()
+#             print(str(k) + ': ' + str(component))
+#             xk = k + 1
 
 
 #--------------------

@@ -15,59 +15,59 @@ import itertools
 import cython
 from time import time
 
-def qtilingIndexList(list indexList,int q,Debug=False,Comments=False):
-    """
-    Split an index list into q parts of equal length n.
-    When there is a rest r < q, the r first parts are put to a length of n+1.
+# def qtilingIndexList(list indexList,int q,Debug=False,Comments=False):
+#     """
+#     Split an index list into q parts of equal length n.
+#     When there is a rest r < q, the r first parts are put to a length of n+1.
 
-    The method is used for distributing balanced sublists to q multiprocessing threads.
+#     The method is used for distributing balanced sublists to q multiprocessing threads.
 
-    Usage example::
+#     Usage example::
     
-        >>> from digraphsTools import qtilingIndexList
-        >>> indexList = [i for i in range(10)]
-        >>> indexlist
-         [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
-        >>> qtilingIndexList(indexList,4,Comments=True)
-         cardinalities: [3, 3, 2, 2]
-         [(0, 3), (3, 6), (6, 8), (8, 10)]
+#         >>> from digraphsTools import qtilingIndexList
+#         >>> indexList = [i for i in range(10)]
+#         >>> indexlist
+#          [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
+#         >>> qtilingIndexList(indexList,4,Comments=True)
+#          cardinalities: [3, 3, 2, 2]
+#          [(0, 3), (3, 6), (6, 8), (8, 10)]
     
-    """
-    cdef int n, nq, r
-    n = len(indexList)
-    if Debug:
-        Comments = True
-        print(indexList, n, q)
+#     """
+#     cdef int n, nq, r
+#     n = len(indexList)
+#     if Debug:
+#         Comments = True
+#         print(indexList, n, q)
 
-    nq = n//(q)
-    if nq * (q) < n:
-        r = n - nq*(q)
-        Rest = True
-        if Debug:
-            print('with Rest', nq, nq*(q), r)
-    else:
-        r = 0
-        Rest = False
-        if Debug:
-            print('Without Rest', q, nq*q, r  )
+#     nq = n//(q)
+#     if nq * (q) < n:
+#         r = n - nq*(q)
+#         Rest = True
+#         if Debug:
+#             print('with Rest', nq, nq*(q), r)
+#     else:
+#         r = 0
+#         Rest = False
+#         if Debug:
+#             print('Without Rest', q, nq*q, r  )
             
-    card = [nq for i in range(q)]
-    for j in range(r):
-        card[j] += 1
-    if Comments:
-        print('cardinalities:', card)
+#     card = [nq for i in range(q)]
+#     for j in range(r):
+#         card[j] += 1
+#     if Comments:
+#         print('cardinalities:', card)
 
-    cdef list splitIndex = []
-    cdef int toi, fromi
-    toi = 0
-    fromi = 0
-    for j in range(q):
-        toi += card[j]
-        splitIndex.append( (fromi, toi) )
-        fromi = toi
-    if Debug:
-        print('splitIndex:', splitIndex)
-    return splitIndex
+#     cdef list splitIndex = []
+#     cdef int toi, fromi
+#     toi = 0
+#     fromi = 0
+#     for j in range(q):
+#         toi += card[j]
+#         splitIndex.append( (fromi, toi) )
+#         fromi = toi
+#     if Debug:
+#         print('splitIndex:', splitIndex)
+#     return splitIndex
 
 class npDigraph(object):
     """
