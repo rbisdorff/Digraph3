@@ -13,7 +13,7 @@ setup(
   [
     Extension("cnpBipolarDigraphs",
               ["cnpBipolarDigraphs.pyx"],
-              extra_compile_args = ["-O0", "-fopenmp"],
+              extra_compile_args = ["-O2", "-fopenmp"],
               extra_link_args=['-fopenmp']
               )
   ]
