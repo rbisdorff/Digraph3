@@ -1,64 +1,64 @@
 \babel@toc {english}{}\relax 
 \contentsline {section}{\numberline {1}Enhancing the outranking based MCDA approach}{2}{section.1}%
-\contentsline {subsection}{\numberline {1.1}Coping with missing data and indeterminateness}{2}{subsection.1.1}%
-\contentsline {subsubsection}{A motivating data set}{2}{subsubsection*.8}%
-\contentsline {subsubsection}{Modelling pairwise bipolar\sphinxhyphen {}valued rating opinions}{5}{subsubsection*.10}%
-\contentsline {subsection}{\numberline {1.2}On confident outrankings with uncertain criteria significance weights}{7}{subsection.1.2}%
-\contentsline {subsubsection}{Modelling uncertain criteria significance weights}{8}{subsubsection*.14}%
-\contentsline {subsubsection}{Bipolar\sphinxhyphen {}valued likelihood of ‘’at least as good as ” situations}{9}{subsubsection*.15}%
-\contentsline {subsubsection}{Confidence level of outranking situations}{12}{subsubsection*.17}%
-\contentsline {subsection}{\numberline {1.3}On stable outrankings with ordinal criteria significance weights}{17}{subsection.1.3}%
-\contentsline {subsubsection}{Cardinal or ordinal criteria significance weights}{17}{subsubsection*.22}%
-\contentsline {subsubsection}{Qualifying the stability of outranking situations}{19}{subsubsection*.23}%
-\contentsline {subsubsection}{Computing the stability denotation of outranking situations}{23}{subsubsection*.24}%
-\contentsline {subsubsection}{Robust bipolar\sphinxhyphen {}valued outranking digraphs}{25}{subsubsection*.25}%
-\contentsline {subsection}{\numberline {1.4}On unopposed outrankings with multiple decision objectives}{28}{subsection.1.4}%
-\contentsline {subsubsection}{Characterising unopposed multiobjective outranking situations}{29}{subsubsection*.28}%
-\contentsline {subsubsection}{Computing unopposed multiobjective choice recommendations}{32}{subsubsection*.29}%
-\contentsline {section}{\numberline {2}Enhancing social choice procedures}{33}{section.2}%
-\contentsline {subsection}{\numberline {2.1}\sphinxstyleemphasis {Condorcet}’s critical perspective on the simple plurality voting rule}{34}{subsection.2.1}%
-\contentsline {subsubsection}{Bipolar approval voting of motions}{34}{subsubsection*.39}%
-\contentsline {subsubsection}{Who wins the election?}{36}{subsubsection*.40}%
-\contentsline {subsubsection}{Resolving circular social preferences}{38}{subsubsection*.41}%
-\contentsline {subsubsection}{The \sphinxstyleemphasis {Borda} rank analysis method}{41}{subsubsection*.43}%
-\contentsline {subsection}{\numberline {2.2}Two\sphinxhyphen {}stage elections with multipartisan primary selection}{43}{subsection.2.2}%
-\contentsline {subsubsection}{Converting voting profiles into performance tableaux}{43}{subsubsection*.50}%
-\contentsline {subsubsection}{Multipartisan primary selection of eligible candidates}{45}{subsubsection*.51}%
-\contentsline {subsubsection}{Secondary election winner determination}{47}{subsubsection*.52}%
-\contentsline {subsubsection}{Multipartisan preferences in divisive politics}{48}{subsubsection*.53}%
-\contentsline {subsection}{\numberline {2.3}Tempering plurality tyranny effects with bipolar approval voting}{52}{subsection.2.3}%
-\contentsline {subsubsection}{Bipolar approval voting systems}{53}{subsubsection*.59}%
-\contentsline {subsubsection}{Pairwise comparison of bipolar approval votes}{56}{subsubsection*.60}%
-\contentsline {subsubsection}{Three\sphinxhyphen {}valued evaluative voting system}{58}{subsubsection*.61}%
-\contentsline {subsubsection}{Favouring multipartisan candidates}{61}{subsubsection*.62}%
-\contentsline {subsection}{\numberline {2.4}Selecting the winner of a primary election: a critical commentary}{66}{subsection.2.4}%
-\contentsline {subsubsection}{The French popular primary presidential election 2022}{67}{subsubsection*.67}%
-\contentsline {subsubsection}{A bipolar approval\sphinxhyphen {}disapproval election}{68}{subsubsection*.69}%
-\contentsline {subsubsection}{Ranking the potential presidential candidates}{69}{subsubsection*.70}%
-\contentsline {section}{\numberline {3}Theoretical advancements}{70}{section.3}%
-\contentsline {subsection}{\numberline {3.1}Ordinal correlation equals bipolar\sphinxhyphen {}valued relational equivalence}{70}{subsection.3.1}%
+\contentsline {subsection}{\numberline {1.1}On confident outrankings with uncertain criteria significance weights}{2}{subsection.1.1}%
+\contentsline {subsubsection}{Modelling uncertain criteria significance weights}{3}{subsubsection*.10}%
+\contentsline {subsubsection}{Bipolar\sphinxhyphen {}valued likelihood of ‘’at least as good as ” situations}{4}{subsubsection*.11}%
+\contentsline {subsubsection}{Confidence level of outranking situations}{6}{subsubsection*.13}%
+\contentsline {subsection}{\numberline {1.2}On stable outrankings with ordinal criteria significance weights}{11}{subsection.1.2}%
+\contentsline {subsubsection}{Cardinal or ordinal criteria significance weights}{12}{subsubsection*.18}%
+\contentsline {subsubsection}{Qualifying the stability of outranking situations}{13}{subsubsection*.19}%
+\contentsline {subsubsection}{Computing the stability denotation of outranking situations}{18}{subsubsection*.20}%
+\contentsline {subsubsection}{Robust bipolar\sphinxhyphen {}valued outranking digraphs}{19}{subsubsection*.21}%
+\contentsline {subsection}{\numberline {1.3}On unopposed outrankings with multiple decision objectives}{23}{subsection.1.3}%
+\contentsline {subsubsection}{Characterising unopposed multiobjective outranking situations}{23}{subsubsection*.24}%
+\contentsline {subsubsection}{Computing unopposed multiobjective choice recommendations}{26}{subsubsection*.25}%
+\contentsline {section}{\numberline {2}Enhancing social choice procedures}{28}{section.2}%
+\contentsline {subsection}{\numberline {2.1}\sphinxstyleemphasis {Condorcet}’s critical perspective on the simple plurality voting rule}{28}{subsection.2.1}%
+\contentsline {subsubsection}{Bipolar approval voting of motions}{29}{subsubsection*.35}%
+\contentsline {subsubsection}{Who wins the election?}{30}{subsubsection*.36}%
+\contentsline {subsubsection}{Resolving circular social preferences}{32}{subsubsection*.37}%
+\contentsline {subsubsection}{The \sphinxstyleemphasis {Borda} rank analysis method}{35}{subsubsection*.39}%
+\contentsline {subsection}{\numberline {2.2}Two\sphinxhyphen {}stage elections with multipartisan primary selection}{37}{subsection.2.2}%
+\contentsline {subsubsection}{Converting voting profiles into performance tableaux}{38}{subsubsection*.46}%
+\contentsline {subsubsection}{Multipartisan primary selection of eligible candidates}{40}{subsubsection*.47}%
+\contentsline {subsubsection}{Secondary election winner determination}{42}{subsubsection*.48}%
+\contentsline {subsubsection}{Multipartisan preferences in divisive politics}{43}{subsubsection*.49}%
+\contentsline {subsection}{\numberline {2.3}Tempering plurality tyranny effects with bipolar approval voting}{46}{subsection.2.3}%
+\contentsline {subsubsection}{Bipolar approval voting systems}{47}{subsubsection*.55}%
+\contentsline {subsubsection}{Pairwise comparison of bipolar approval votes}{50}{subsubsection*.56}%
+\contentsline {subsubsection}{Three\sphinxhyphen {}valued evaluative voting system}{52}{subsubsection*.57}%
+\contentsline {subsubsection}{Favouring multipartisan candidates}{55}{subsubsection*.58}%
+\contentsline {subsection}{\numberline {2.4}Selecting the winner of a primary election: a critical commentary}{60}{subsection.2.4}%
+\contentsline {subsubsection}{The French popular primary presidential election 2022}{61}{subsubsection*.63}%
+\contentsline {subsubsection}{A bipolar approval\sphinxhyphen {}disapproval election}{62}{subsubsection*.65}%
+\contentsline {subsubsection}{Ranking the potential presidential candidates}{63}{subsubsection*.66}%
+\contentsline {section}{\numberline {3}Theoretical advancements}{64}{section.3}%
+\contentsline {subsection}{\numberline {3.1}Coping with missing data and indeterminateness}{64}{subsection.3.1}%
+\contentsline {subsubsection}{A motivating data set}{65}{subsubsection*.74}%
+\contentsline {subsubsection}{Modelling pairwise bipolar\sphinxhyphen {}valued rating opinions}{68}{subsubsection*.76}%
+\contentsline {subsection}{\numberline {3.2}Ordinal correlation equals bipolar\sphinxhyphen {}valued relational equivalence}{70}{subsection.3.2}%
 \contentsline {subsubsection}{Kendall’s \sphinxstyleemphasis {tau} index}{71}{subsubsection*.82}%
 \contentsline {subsubsection}{Bipolar\sphinxhyphen {}valued relational equivalence}{72}{subsubsection*.83}%
 \contentsline {subsubsection}{Fitness of ranking heuristics}{75}{subsubsection*.84}%
 \contentsline {subsubsection}{Illustrating preference divergences}{77}{subsubsection*.85}%
 \contentsline {subsubsection}{Exploring the \sphinxstyleemphasis {better rated} and the \sphinxstyleemphasis {as well as rated} opinions}{78}{subsubsection*.87}%
-\contentsline {subsection}{\numberline {3.2}On computing digraph kernels}{80}{subsection.3.2}%
+\contentsline {subsection}{\numberline {3.3}On computing digraph kernels}{80}{subsection.3.3}%
 \contentsline {subsubsection}{What is a graph kernel ?}{80}{subsubsection*.94}%
 \contentsline {subsubsection}{Initial and terminal kernels}{85}{subsubsection*.95}%
 \contentsline {subsubsection}{Kernels in lateralized digraphs}{90}{subsubsection*.96}%
 \contentsline {subsubsection}{Computing good and bad choice recommendations}{93}{subsubsection*.97}%
 \contentsline {subsubsection}{Tractability}{98}{subsubsection*.98}%
-\contentsline {subsection}{\numberline {3.3}Bipolar\sphinxhyphen {}valued kernel membership characteristic vectors}{100}{subsection.3.3}%
+\contentsline {subsection}{\numberline {3.4}Bipolar\sphinxhyphen {}valued kernel membership characteristic vectors}{100}{subsection.3.4}%
 \contentsline {subsubsection}{Kernel equation systems}{100}{subsubsection*.101}%
 \contentsline {subsubsection}{Solving bipolar\sphinxhyphen {}valued kernel equation systems}{101}{subsubsection*.102}%
-\contentsline {subsection}{\numberline {3.4}On characterizing bipolar\sphinxhyphen {}valued outranking digraphs}{108}{subsection.3.4}%
+\contentsline {subsection}{\numberline {3.5}On characterizing bipolar\sphinxhyphen {}valued outranking digraphs}{108}{subsection.3.5}%
 \contentsline {subsubsection}{Necessary properties of the outranking digraph}{108}{subsubsection*.107}%
 \contentsline {subsubsection}{Partial tournaments may be strict outranking digraphs}{110}{subsubsection*.109}%
 \contentsline {subsubsection}{Recognizing bipolar outranking valuations}{112}{subsubsection*.110}%
-\contentsline {subsubsection}{On generating random outranking valuations}{115}{subsubsection*.112}%
-\contentsline {subsection}{\numberline {3.5}Consensus quality of the bipolar\sphinxhyphen {}valued outranking relation}{116}{subsection.3.5}%
-\contentsline {subsubsection}{Circular performance tableaux}{116}{subsubsection*.116}%
-\contentsline {subsubsection}{A difficult decision problem}{118}{subsubsection*.117}%
-\contentsline {subsubsection}{The central CONDORCET point of view}{120}{subsubsection*.118}%
+\contentsline {subsubsection}{On generating random outranking valuations}{116}{subsubsection*.112}%
+\contentsline {subsection}{\numberline {3.6}Consensus quality of the bipolar\sphinxhyphen {}valued outranking relation}{117}{subsection.3.6}%
+\contentsline {subsubsection}{Circular performance tableaux}{117}{subsubsection*.116}%
+\contentsline {subsubsection}{A difficult decision problem}{119}{subsubsection*.117}%
+\contentsline {subsubsection}{The central CONDORCET point of view}{121}{subsubsection*.118}%
 \contentsline {section}{\numberline {4}Appendix}{126}{section.4}%
 \contentsline {section}{References}{126}{section.4}%

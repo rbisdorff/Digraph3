@@ -67,8 +67,8 @@
 
 
 \title{Digraph3 Advanced Topics}
-\date{March 07, 2024}
-\release{3.12.1}
+\date{June 15, 2024}
+\release{3.12.3}
 \author{Raymond Bisdorff}
 \newcommand{\sphinxlogo}{\sphinxincludegraphics{introDoc3.png}\par}
 \renewcommand{\releasename}{Release}
@@ -178,163 +178,18 @@ In this part of the \sphinxstylestrong{Digraph3} \sphinxstyleemphasis{documentat
 \begin{itemize}
 \item {} 
 \sphinxAtStartPar
-\phantomsection\label{\detokenize{pearls:id84}}{\hyperref[\detokenize{pearls:coping-with-missing-data-and-indeterminateness}]{\sphinxcrossref{Coping with missing data and indeterminateness}}} (\autopageref*{\detokenize{pearls:coping-with-missing-data-and-indeterminateness}})
+\phantomsection\label{\detokenize{pearls:id84}}{\hyperref[\detokenize{pearls:on-confident-outrankings-with-uncertain-criteria-significance-weights}]{\sphinxcrossref{On confident outrankings with uncertain criteria significance weights}}} (\autopageref*{\detokenize{pearls:on-confident-outrankings-with-uncertain-criteria-significance-weights}})
 
 \item {} 
 \sphinxAtStartPar
-\phantomsection\label{\detokenize{pearls:id85}}{\hyperref[\detokenize{pearls:on-confident-outrankings-with-uncertain-criteria-significance-weights}]{\sphinxcrossref{On confident outrankings with uncertain criteria significance weights}}} (\autopageref*{\detokenize{pearls:on-confident-outrankings-with-uncertain-criteria-significance-weights}})
+\phantomsection\label{\detokenize{pearls:id85}}{\hyperref[\detokenize{pearls:on-stable-outrankings-with-ordinal-criteria-significance-weights}]{\sphinxcrossref{On stable outrankings with ordinal criteria significance weights}}} (\autopageref*{\detokenize{pearls:on-stable-outrankings-with-ordinal-criteria-significance-weights}})
 
 \item {} 
 \sphinxAtStartPar
-\phantomsection\label{\detokenize{pearls:id86}}{\hyperref[\detokenize{pearls:on-stable-outrankings-with-ordinal-criteria-significance-weights}]{\sphinxcrossref{On stable outrankings with ordinal criteria significance weights}}} (\autopageref*{\detokenize{pearls:on-stable-outrankings-with-ordinal-criteria-significance-weights}})
-
-\item {} 
-\sphinxAtStartPar
-\phantomsection\label{\detokenize{pearls:id87}}{\hyperref[\detokenize{pearls:on-unopposed-outrankings-with-multiple-decision-objectives}]{\sphinxcrossref{On unopposed outrankings with multiple decision objectives}}} (\autopageref*{\detokenize{pearls:on-unopposed-outrankings-with-multiple-decision-objectives}})
+\phantomsection\label{\detokenize{pearls:id86}}{\hyperref[\detokenize{pearls:on-unopposed-outrankings-with-multiple-decision-objectives}]{\sphinxcrossref{On unopposed outrankings with multiple decision objectives}}} (\autopageref*{\detokenize{pearls:on-unopposed-outrankings-with-multiple-decision-objectives}})
 
 \end{itemize}
 \end{sphinxShadowBox}
-
-
-\subsection{Coping with missing data and indeterminateness}
-\label{\detokenize{pearls:coping-with-missing-data-and-indeterminateness}}\label{\detokenize{pearls:copingmissing-data-label}}
-\sphinxAtStartPar
-In a stubborn keeping with a two\sphinxhyphen{}valued logic, where every argument can only be true or false, there is no place for efficiently taking into account missing data or logical indeterminateness. These cases are seen as problematic and, at best are simply ignored. Worst, in modern data science, missing data get often replaced with \sphinxstyleemphasis{fictive} values, potentially falsifying hence all subsequent computations.
-
-\sphinxAtStartPar
-In social choice problems like elections, \sphinxstyleemphasis{abstentions} are, however, frequently observed and represent a social expression that may be significant for revealing non represented social preferences.
-
-\sphinxAtStartPar
-In marketing studies, interviewees will not always respond to all the submitted questions. Again, such abstentions do sometimes contain nevertheless valid information concerning consumer preferences.
-
-
-\subsubsection{A motivating data set}
-\label{\detokenize{pearls:a-motivating-data-set}}
-\sphinxAtStartPar
-Let us consider such a performance tableau in file \sphinxhref{\_static/graffiti07.py}{graffiti07.py} gathering a \sphinxstyleemphasis{Movie Magazine} ‘s rating of some movies that could actually be seen in town %
-\begin{footnote}[1]\sphinxAtStartFootnote
-\sphinxstyleemphasis{Graffiti}, Edition Revue Luxembourg, September 2007, p. 30. You may find the data file \sphinxstyleemphasis{graffiti07.py} (perfTabs.PerformanceTableau Format) in the \sphinxstyleemphasis{examples} directory of the Digraph3 resources
-%
-\end{footnote} (see \hyperref[\detokenize{pearls:graffiti07-1}]{Fig.\@ \ref{\detokenize{pearls:graffiti07-1}}}).
-
-\begin{sphinxVerbatim}[commandchars=\\\{\},numbers=left,firstnumber=1,stepnumber=1]
-\PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{k+kn}{from} \PYG{n+nn}{outrankingDigraphs} \PYG{k+kn}{import} \PYG{o}{*}
-\PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{t} \PYG{o}{=} \PYG{n}{PerformanceTableau}\PYG{p}{(}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{graffiti07}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{)}
-\PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{t}\PYG{o}{.}\PYG{n}{showHTMLPerformanceTableau}\PYG{p}{(}\PYG{n}{title}\PYG{o}{=}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{Graffiti Star wars}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{,}
-\PYG{g+gp}{... }                             \PYG{n}{ndigits}\PYG{o}{=}\PYG{l+m+mi}{0}\PYG{p}{)}
-\end{sphinxVerbatim}
-
-\begin{figure}[H]
-\centering
-\capstart
-
-\noindent\sphinxincludegraphics[width=500\sphinxpxdimen]{{graffiti07_1}.png}
-\caption{\sphinxstyleemphasis{Graffiti} magazine’s movie ratings from September 2007}\label{\detokenize{pearls:graffiti07-1}}\end{figure}
-
-\sphinxAtStartPar
-15 journalists and movie critics provide here their rating of 25 movies: 5 stars (\sphinxstyleemphasis{masterpiece}), 4 stars (\sphinxstyleemphasis{must be seen}), 3 stars (\sphinxstyleemphasis{excellent}), 2 stars (\sphinxstyleemphasis{good}), 1 star (\sphinxstyleemphasis{could be seen}), \sphinxhyphen{}1 star (\sphinxstyleemphasis{I do not like}), \sphinxhyphen{}2 (\sphinxstyleemphasis{I hate}), NA (\sphinxstyleemphasis{not seen}).
-
-\sphinxAtStartPar
-To aggregate all the critics’ rating opinions, the \sphinxstyleemphasis{Graffiti} magazine provides for each movie a global score computed as an \sphinxstyleemphasis{average grade}, just ignoring the \sphinxstyleemphasis{not seen} data. These averages are thus not computed on comparable denominators; some critics do indeed use a more or less extended range of grades. The movies not seen by critic \sphinxstyleemphasis{SJ}, for instance, are favored, as this critic is more severe than others in her grading. Dropping the movies that were not seen by all the critics is here not possible either, as no one of the 25 movies was actually seen by all the critics. Providing any value for the missing data will as well always somehow falsify any global value scoring. What to do ?
-
-\sphinxAtStartPar
-A better approach is to rank the movies on the basis of pairwise bipolar\sphinxhyphen{}valued  \sphinxstyleemphasis{at least as well rated as} opinions. Under this epistemic argumentation approach, missing data are naturally treated as opinion abstentions and hence do not falsify the logical computations. Such a ranking (see the tutorial on \DUrole{xref,std,std-ref}{Ranking with incommensurable performance criteria}) of the 25 movies is provided, for instance, by the \sphinxstylestrong{heat map} view shown in \hyperref[\detokenize{pearls:graffiti07-2}]{Fig.\@ \ref{\detokenize{pearls:graffiti07-2}}}.
-
-\begin{sphinxVerbatim}[commandchars=\\\{\}]
-\PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{t}\PYG{o}{.}\PYG{n}{showHTMLPerformanceHeatmap}\PYG{p}{(}\PYG{n}{Correlations}\PYG{o}{=}\PYG{k+kc}{True}\PYG{p}{,}
-\PYG{g+gp}{... }                             \PYG{n}{rankingRule}\PYG{o}{=}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{NetFlows}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{,}
-\PYG{g+gp}{... }                             \PYG{n}{ndigits}\PYG{o}{=}\PYG{l+m+mi}{0}\PYG{p}{)}
-\end{sphinxVerbatim}
-
-\begin{figure}[H]
-\centering
-\capstart
-
-\noindent\sphinxincludegraphics[width=600\sphinxpxdimen]{{graffiti07_2}.png}
-\caption{\sphinxstyleemphasis{Graffiti} magazine’s ordered movie ratings from September 2007}\label{\detokenize{pearls:graffiti07-2}}\end{figure}
-
-\sphinxAtStartPar
-There is no doubt that movie \sphinxstyleemphasis{mv\_QS}, with 6 ‘\sphinxstyleemphasis{must be seen}’ marks, is correctly best\sphinxhyphen{}ranked and the movie \sphinxstyleemphasis{mv\_TV} is worst\sphinxhyphen{}ranked with five ‘\sphinxstyleemphasis{don’t like}’ marks.
-
-
-\subsubsection{Modelling pairwise bipolar\sphinxhyphen{}valued rating opinions}
-\label{\detokenize{pearls:modelling-pairwise-bipolar-valued-rating-opinions}}
-\sphinxAtStartPar
-Let us explicitly construct the underlying bipolar\sphinxhyphen{}valued outranking digraph and consult in \hyperref[\detokenize{pearls:graffiti07-45}]{Fig.\@ \ref{\detokenize{pearls:graffiti07-45}}} the pairwise characteristic values we observe between the two best\sphinxhyphen{}ranked movies, namely \sphinxstyleemphasis{mv\_QS} and \sphinxstyleemphasis{mv\_RR}.
-
-\begin{sphinxVerbatim}[commandchars=\\\{\},numbers=left,firstnumber=1,stepnumber=1]
-\PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{g} \PYG{o}{=} \PYG{n}{BipolarOutrankingDigraph}\PYG{p}{(}\PYG{n}{t}\PYG{p}{)}
-\PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{g}\PYG{o}{.}\PYG{n}{recodeValuation}\PYG{p}{(}\PYG{o}{\PYGZhy{}}\PYG{l+m+mi}{19}\PYG{p}{,}\PYG{l+m+mi}{19}\PYG{p}{)} \PYG{c+c1}{\PYGZsh{} integer characteristic values}
-\PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{g}\PYG{o}{.}\PYG{n}{showHTMLPairwiseOutrankings}\PYG{p}{(}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{mv\PYGZus{}QS}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{,}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{mv\PYGZus{}RR}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{)}
-\end{sphinxVerbatim}
-
-\begin{figure}[H]
-\centering
-\capstart
-
-\noindent\sphinxincludegraphics[width=600\sphinxpxdimen]{{graffiti07_45}.png}
-\caption{Pairwise comparison of the two best\sphinxhyphen{}ranked movies}\label{\detokenize{pearls:graffiti07-45}}\end{figure}
-
-\sphinxAtStartPar
-Six out of the fifteen critics have not seen one or the other of these two movies. Notice the higher significance (3) that is granted to two locally renowned movie critics, namely \sphinxstyleemphasis{JH} and \sphinxstyleemphasis{VT}. Their opinion counts for three times the opinion of the other critics. All nine critics that have seen both movies, except critic \sphinxstyleemphasis{MR}, state that \sphinxstyleemphasis{mv\_QS} is rated at least as well as \sphinxstyleemphasis{mv\_RR} and the balance of positive against negative opinions amounts to +11, a characteristic value which positively validates the outranking situation with a majority of (11/19 + 1.0) / 2.0 = 79\%.
-
-\sphinxAtStartPar
-The complete table of pairwise majority margins of global ‘\sphinxstyleemphasis{at least
-as well rated as}’ opinions, ranked by the same rule as shown in the
-heat map above (see \hyperref[\detokenize{pearls:graffiti07-2}]{Fig.\@ \ref{\detokenize{pearls:graffiti07-2}}}), may be shown in \hyperref[\detokenize{pearls:graffiti07-3}]{Fig.\@ \ref{\detokenize{pearls:graffiti07-3}}}.
-
-\begin{sphinxVerbatim}[commandchars=\\\{\},numbers=left,firstnumber=1,stepnumber=1]
-\PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{ranking} \PYG{o}{=} \PYG{n}{g}\PYG{o}{.}\PYG{n}{computeNetFlowsRanking}\PYG{p}{(}\PYG{p}{)}
-\PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{g}\PYG{o}{.}\PYG{n}{showHTMLRelationTable}\PYG{p}{(}\PYG{n}{actionsList}\PYG{o}{=}\PYG{n}{ranking}\PYG{p}{,} \PYG{n}{ndigits}\PYG{o}{=}\PYG{l+m+mi}{0}\PYG{p}{,}
-\PYG{g+gp}{... }   \PYG{n}{tableTitle}\PYG{o}{=}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{Bipolar characteristic values of}\PYG{l+s+se}{\PYGZbs{}}
-\PYG{g+gp}{... }\PYG{l+s+s1}{ }\PYG{l+s+s1}{\PYGZdq{}}\PYG{l+s+s1}{rated at least as good as}\PYG{l+s+s1}{\PYGZdq{}}\PYG{l+s+s1}{ situations}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{)}
-\end{sphinxVerbatim}
-
-\begin{figure}[H]
-\centering
-\capstart
-
-\noindent\sphinxincludegraphics[width=650\sphinxpxdimen]{{graffiti07_3}.png}
-\caption{Pairwise majority margins of ‘\sphinxstyleemphasis{at least as well rated as}’ rating opinions}\label{\detokenize{pearls:graffiti07-3}}\end{figure}
-
-\sphinxAtStartPar
-Positive characteristic values, validating a global ‘\sphinxstyleemphasis{at least as well rated as}’ opinion are marked in light green (see \hyperref[\detokenize{pearls:graffiti07-3}]{Fig.\@ \ref{\detokenize{pearls:graffiti07-3}}}). Whereas negative characteristic values, invalidating such a global opinion, are marked in light red. We may by the way notice that the best\sphinxhyphen{}ranked movie \sphinxstyleemphasis{mv\_QS} is indeed a \sphinxstyleemphasis{Condorcet} winner, i.e. \sphinxstyleemphasis{better rated than all the other movies} by a 65\% majority of critics. This majority may be assessed from the average determinateness of the given bipolar\sphinxhyphen{}valued outranking digraph \sphinxstyleemphasis{g}.
-
-\begin{sphinxVerbatim}[commandchars=\\\{\}]
-\PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n+nb}{print}\PYG{p}{(} \PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+si}{\PYGZpc{}.0f}\PYG{l+s+si}{\PYGZpc{}\PYGZpc{}}\PYG{l+s+s1}{\PYGZsq{}} \PYG{o}{\PYGZpc{}} \PYG{n}{g}\PYG{o}{.}\PYG{n}{computeDeterminateness}\PYG{p}{(}\PYG{n}{InPercents}\PYG{o}{=}\PYG{k+kc}{True}\PYG{p}{)} \PYG{p}{)}
-\PYG{g+go}{65\PYGZpc{}}
-\end{sphinxVerbatim}
-
-\sphinxAtStartPar
-Notice also the \sphinxstyleemphasis{indeterminate} situation we observe, for instance, when comparing movie \sphinxstyleemphasis{mv\_PE} with movie \sphinxstyleemphasis{mv\_NP}.
-
-\begin{sphinxVerbatim}[commandchars=\\\{\}]
-\PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{g}\PYG{o}{.}\PYG{n}{showHTMLPairwiseComparison}\PYG{p}{(}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{mv\PYGZus{}PE}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{,}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{mv\PYGZus{}NP}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{)}
-\end{sphinxVerbatim}
-
-\begin{figure}[H]
-\centering
-\capstart
-
-\noindent\sphinxincludegraphics[width=400\sphinxpxdimen]{{graffiti07_6}.png}
-\caption{Indeterminate pairwise comparison example}\label{\detokenize{pearls:id79}}\end{figure}
-
-\sphinxAtStartPar
-Only eight, out of the fifteen critics, have seen both movies and the positive opinions do neatly balance the negative ones. A global statement that \sphinxstyleemphasis{mv\_PE} is ‘\sphinxstyleemphasis{at least as well rated as}’ \sphinxstyleemphasis{mv\_NP}  may in this case hence \sphinxstylestrong{neither be validated, nor invalidated}; a preferential situation that cannot be modelled with any scoring approach.
-
-\sphinxAtStartPar
-It is fair, however, to eventually mention here that the \sphinxstyleemphasis{Graffiti} magazine’s average scoring method is actually showing a very similar ranking. Indeed, average scores usually confirm well all evident pairwise comparisons, yet \sphinxstyleemphasis{enforce} comparability for all less evident ones.
-
-\sphinxAtStartPar
-Notice finally the ordinal correlation \sphinxstyleemphasis{tau} values in
-\hyperref[\detokenize{pearls:graffiti07-2}]{Fig.\@ \ref{\detokenize{pearls:graffiti07-2}}} 3rd row. How may we compute these ordinal correlation indexes ?
-
-\sphinxAtStartPar
-Back to {\hyperref[\detokenize{pearls:pearls-label}]{\sphinxcrossref{\DUrole{std,std-ref}{Content Table}}}} (\autopageref*{\detokenize{pearls:pearls-label}})
-
-
-\bigskip\hrule\bigskip
-
 
 
 \subsection{On confident outrankings with uncertain criteria significance weights}
@@ -343,15 +198,15 @@ Back to {\hyperref[\detokenize{pearls:pearls-label}]{\sphinxcrossref{\DUrole{std
 \begin{itemize}
 \item {} 
 \sphinxAtStartPar
-\phantomsection\label{\detokenize{pearls:id88}}{\hyperref[\detokenize{pearls:modelling-uncertain-criteria-significance-weights}]{\sphinxcrossref{Modelling uncertain criteria significance weights}}} (\autopageref*{\detokenize{pearls:modelling-uncertain-criteria-significance-weights}})
+\phantomsection\label{\detokenize{pearls:id87}}{\hyperref[\detokenize{pearls:modelling-uncertain-criteria-significance-weights}]{\sphinxcrossref{Modelling uncertain criteria significance weights}}} (\autopageref*{\detokenize{pearls:modelling-uncertain-criteria-significance-weights}})
 
 \item {} 
 \sphinxAtStartPar
-\phantomsection\label{\detokenize{pearls:id89}}{\hyperref[\detokenize{pearls:bipolar-valued-likelihood-of-at-least-as-good-as-situations}]{\sphinxcrossref{Bipolar\sphinxhyphen{}valued likelihood of ‘’at least as good as ” situations}}} (\autopageref*{\detokenize{pearls:bipolar-valued-likelihood-of-at-least-as-good-as-situations}})
+\phantomsection\label{\detokenize{pearls:id88}}{\hyperref[\detokenize{pearls:bipolar-valued-likelihood-of-at-least-as-good-as-situations}]{\sphinxcrossref{Bipolar\sphinxhyphen{}valued likelihood of ‘’at least as good as ” situations}}} (\autopageref*{\detokenize{pearls:bipolar-valued-likelihood-of-at-least-as-good-as-situations}})
 
 \item {} 
 \sphinxAtStartPar
-\phantomsection\label{\detokenize{pearls:id90}}{\hyperref[\detokenize{pearls:confidence-level-of-outranking-situations}]{\sphinxcrossref{Confidence level of outranking situations}}} (\autopageref*{\detokenize{pearls:confidence-level-of-outranking-situations}})
+\phantomsection\label{\detokenize{pearls:id89}}{\hyperref[\detokenize{pearls:confidence-level-of-outranking-situations}]{\sphinxcrossref{Confidence level of outranking situations}}} (\autopageref*{\detokenize{pearls:confidence-level-of-outranking-situations}})
 
 \end{itemize}
 \end{sphinxShadowBox}
@@ -763,19 +618,19 @@ Back to {\hyperref[\detokenize{pearls:pearls-label}]{\sphinxcrossref{\DUrole{std
 \begin{itemize}
 \item {} 
 \sphinxAtStartPar
-\phantomsection\label{\detokenize{pearls:id91}}{\hyperref[\detokenize{pearls:cardinal-or-ordinal-criteria-significance-weights}]{\sphinxcrossref{Cardinal or ordinal criteria significance weights}}} (\autopageref*{\detokenize{pearls:cardinal-or-ordinal-criteria-significance-weights}})
+\phantomsection\label{\detokenize{pearls:id90}}{\hyperref[\detokenize{pearls:cardinal-or-ordinal-criteria-significance-weights}]{\sphinxcrossref{Cardinal or ordinal criteria significance weights}}} (\autopageref*{\detokenize{pearls:cardinal-or-ordinal-criteria-significance-weights}})
 
 \item {} 
 \sphinxAtStartPar
-\phantomsection\label{\detokenize{pearls:id92}}{\hyperref[\detokenize{pearls:qualifying-the-stability-of-outranking-situations}]{\sphinxcrossref{Qualifying the stability of outranking situations}}} (\autopageref*{\detokenize{pearls:qualifying-the-stability-of-outranking-situations}})
+\phantomsection\label{\detokenize{pearls:id91}}{\hyperref[\detokenize{pearls:qualifying-the-stability-of-outranking-situations}]{\sphinxcrossref{Qualifying the stability of outranking situations}}} (\autopageref*{\detokenize{pearls:qualifying-the-stability-of-outranking-situations}})
 
 \item {} 
 \sphinxAtStartPar
-\phantomsection\label{\detokenize{pearls:id93}}{\hyperref[\detokenize{pearls:computing-the-stability-denotation-of-outranking-situations}]{\sphinxcrossref{Computing the stability denotation of outranking situations}}} (\autopageref*{\detokenize{pearls:computing-the-stability-denotation-of-outranking-situations}})
+\phantomsection\label{\detokenize{pearls:id92}}{\hyperref[\detokenize{pearls:computing-the-stability-denotation-of-outranking-situations}]{\sphinxcrossref{Computing the stability denotation of outranking situations}}} (\autopageref*{\detokenize{pearls:computing-the-stability-denotation-of-outranking-situations}})
 
 \item {} 
 \sphinxAtStartPar
-\phantomsection\label{\detokenize{pearls:id94}}{\hyperref[\detokenize{pearls:robust-bipolar-valued-outranking-digraphs}]{\sphinxcrossref{Robust bipolar\sphinxhyphen{}valued outranking digraphs}}} (\autopageref*{\detokenize{pearls:robust-bipolar-valued-outranking-digraphs}})
+\phantomsection\label{\detokenize{pearls:id93}}{\hyperref[\detokenize{pearls:robust-bipolar-valued-outranking-digraphs}]{\sphinxcrossref{Robust bipolar\sphinxhyphen{}valued outranking digraphs}}} (\autopageref*{\detokenize{pearls:robust-bipolar-valued-outranking-digraphs}})
 
 \end{itemize}
 \end{sphinxShadowBox}
@@ -1612,11 +1467,11 @@ Back to {\hyperref[\detokenize{pearls:pearls-label}]{\sphinxcrossref{\DUrole{std
 \begin{itemize}
 \item {} 
 \sphinxAtStartPar
-\phantomsection\label{\detokenize{pearls:id95}}{\hyperref[\detokenize{pearls:characterising-unopposed-multiobjective-outranking-situations}]{\sphinxcrossref{Characterising unopposed multiobjective outranking situations}}} (\autopageref*{\detokenize{pearls:characterising-unopposed-multiobjective-outranking-situations}})
+\phantomsection\label{\detokenize{pearls:id94}}{\hyperref[\detokenize{pearls:characterising-unopposed-multiobjective-outranking-situations}]{\sphinxcrossref{Characterising unopposed multiobjective outranking situations}}} (\autopageref*{\detokenize{pearls:characterising-unopposed-multiobjective-outranking-situations}})
 
 \item {} 
 \sphinxAtStartPar
-\phantomsection\label{\detokenize{pearls:id96}}{\hyperref[\detokenize{pearls:computing-unopposed-multiobjective-choice-recommendations}]{\sphinxcrossref{Computing unopposed multiobjective choice recommendations}}} (\autopageref*{\detokenize{pearls:computing-unopposed-multiobjective-choice-recommendations}})
+\phantomsection\label{\detokenize{pearls:id95}}{\hyperref[\detokenize{pearls:computing-unopposed-multiobjective-choice-recommendations}]{\sphinxcrossref{Computing unopposed multiobjective choice recommendations}}} (\autopageref*{\detokenize{pearls:computing-unopposed-multiobjective-choice-recommendations}})
 
 \end{itemize}
 \end{sphinxShadowBox}
@@ -1849,19 +1704,19 @@ Back to {\hyperref[\detokenize{pearls:pearls-label}]{\sphinxcrossref{\DUrole{std
 \begin{itemize}
 \item {} 
 \sphinxAtStartPar
-\phantomsection\label{\detokenize{pearls:id97}}{\hyperref[\detokenize{pearls:condorcet-s-critical-perspective-on-the-simple-plurality-voting-rule}]{\sphinxcrossref{\sphinxstyleemphasis{Condorcet}’s critical perspective on the simple plurality voting rule}}} (\autopageref*{\detokenize{pearls:condorcet-s-critical-perspective-on-the-simple-plurality-voting-rule}})
+\phantomsection\label{\detokenize{pearls:id96}}{\hyperref[\detokenize{pearls:condorcet-s-critical-perspective-on-the-simple-plurality-voting-rule}]{\sphinxcrossref{\sphinxstyleemphasis{Condorcet}’s critical perspective on the simple plurality voting rule}}} (\autopageref*{\detokenize{pearls:condorcet-s-critical-perspective-on-the-simple-plurality-voting-rule}})
 
 \item {} 
 \sphinxAtStartPar
-\phantomsection\label{\detokenize{pearls:id98}}{\hyperref[\detokenize{pearls:two-stage-elections-with-multipartisan-primary-selection}]{\sphinxcrossref{Two\sphinxhyphen{}stage elections with multipartisan primary selection}}} (\autopageref*{\detokenize{pearls:two-stage-elections-with-multipartisan-primary-selection}})
+\phantomsection\label{\detokenize{pearls:id97}}{\hyperref[\detokenize{pearls:two-stage-elections-with-multipartisan-primary-selection}]{\sphinxcrossref{Two\sphinxhyphen{}stage elections with multipartisan primary selection}}} (\autopageref*{\detokenize{pearls:two-stage-elections-with-multipartisan-primary-selection}})
 
 \item {} 
 \sphinxAtStartPar
-\phantomsection\label{\detokenize{pearls:id99}}{\hyperref[\detokenize{pearls:tempering-plurality-tyranny-effects-with-bipolar-approval-voting}]{\sphinxcrossref{Tempering plurality tyranny effects with bipolar approval voting}}} (\autopageref*{\detokenize{pearls:tempering-plurality-tyranny-effects-with-bipolar-approval-voting}})
+\phantomsection\label{\detokenize{pearls:id98}}{\hyperref[\detokenize{pearls:tempering-plurality-tyranny-effects-with-bipolar-approval-voting}]{\sphinxcrossref{Tempering plurality tyranny effects with bipolar approval voting}}} (\autopageref*{\detokenize{pearls:tempering-plurality-tyranny-effects-with-bipolar-approval-voting}})
 
 \item {} 
 \sphinxAtStartPar
-\phantomsection\label{\detokenize{pearls:id100}}{\hyperref[\detokenize{pearls:selecting-the-winner-of-a-primary-election-a-critical-commentary}]{\sphinxcrossref{Selecting the winner of a primary election: a critical commentary}}} (\autopageref*{\detokenize{pearls:selecting-the-winner-of-a-primary-election-a-critical-commentary}})
+\phantomsection\label{\detokenize{pearls:id99}}{\hyperref[\detokenize{pearls:selecting-the-winner-of-a-primary-election-a-critical-commentary}]{\sphinxcrossref{Selecting the winner of a primary election: a critical commentary}}} (\autopageref*{\detokenize{pearls:selecting-the-winner-of-a-primary-election-a-critical-commentary}})
 
 \end{itemize}
 \end{sphinxShadowBox}
@@ -1886,19 +1741,19 @@ Back to {\hyperref[\detokenize{pearls:pearls-label}]{\sphinxcrossref{\DUrole{std
 \begin{itemize}
 \item {} 
 \sphinxAtStartPar
-\phantomsection\label{\detokenize{pearls:id101}}{\hyperref[\detokenize{pearls:bipolar-approval-voting-of-motions}]{\sphinxcrossref{Bipolar approval voting of motions}}} (\autopageref*{\detokenize{pearls:bipolar-approval-voting-of-motions}})
+\phantomsection\label{\detokenize{pearls:id100}}{\hyperref[\detokenize{pearls:bipolar-approval-voting-of-motions}]{\sphinxcrossref{Bipolar approval voting of motions}}} (\autopageref*{\detokenize{pearls:bipolar-approval-voting-of-motions}})
 
 \item {} 
 \sphinxAtStartPar
-\phantomsection\label{\detokenize{pearls:id102}}{\hyperref[\detokenize{pearls:who-wins-the-election}]{\sphinxcrossref{Who wins the election?}}} (\autopageref*{\detokenize{pearls:who-wins-the-election}})
+\phantomsection\label{\detokenize{pearls:id101}}{\hyperref[\detokenize{pearls:who-wins-the-election}]{\sphinxcrossref{Who wins the election?}}} (\autopageref*{\detokenize{pearls:who-wins-the-election}})
 
 \item {} 
 \sphinxAtStartPar
-\phantomsection\label{\detokenize{pearls:id103}}{\hyperref[\detokenize{pearls:resolving-circular-social-preferences}]{\sphinxcrossref{Resolving circular social preferences}}} (\autopageref*{\detokenize{pearls:resolving-circular-social-preferences}})
+\phantomsection\label{\detokenize{pearls:id102}}{\hyperref[\detokenize{pearls:resolving-circular-social-preferences}]{\sphinxcrossref{Resolving circular social preferences}}} (\autopageref*{\detokenize{pearls:resolving-circular-social-preferences}})
 
 \item {} 
 \sphinxAtStartPar
-\phantomsection\label{\detokenize{pearls:id104}}{\hyperref[\detokenize{pearls:the-borda-rank-analysis-method}]{\sphinxcrossref{The \sphinxstyleemphasis{Borda} rank analysis method}}} (\autopageref*{\detokenize{pearls:the-borda-rank-analysis-method}})
+\phantomsection\label{\detokenize{pearls:id103}}{\hyperref[\detokenize{pearls:the-borda-rank-analysis-method}]{\sphinxcrossref{The \sphinxstyleemphasis{Borda} rank analysis method}}} (\autopageref*{\detokenize{pearls:the-borda-rank-analysis-method}})
 
 \end{itemize}
 \end{sphinxShadowBox}
@@ -1922,7 +1777,7 @@ To investigate the question, we model the given preference data in the format of
  \PYG{k+kn}{from} \PYG{n+nn}{collections} \PYG{k+kn}{import} \PYG{n}{OrderedDict}
  \PYG{n}{candidates} \PYG{o}{=} \PYG{n}{OrderedDict}\PYG{p}{(}\PYG{p}{[}
  \PYG{p}{(}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{A}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{,} \PYG{p}{\PYGZob{}}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{name}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{:} \PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{A}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{\PYGZcb{}}\PYG{p}{)}\PYG{p}{,}
- \PYG{p}{(}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{B}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{,} \PYG{p}{\PYGZob{}}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{name}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{:} \PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{A}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{\PYGZcb{}}\PYG{p}{)} \PYG{p}{]}\PYG{p}{)}
+ \PYG{p}{(}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{B}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{,} \PYG{p}{\PYGZob{}}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{name}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{:} \PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{B}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{\PYGZcb{}}\PYG{p}{)} \PYG{p}{]}\PYG{p}{)}
  \PYG{n}{voters} \PYG{o}{=} \PYG{n}{OrderedDict}\PYG{p}{(}\PYG{p}{[}
  \PYG{p}{(}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{v1}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{,} \PYG{p}{\PYGZob{}}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{weight}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{:}\PYG{l+m+mi}{11}\PYG{p}{\PYGZcb{}}\PYG{p}{)}\PYG{p}{,}
  \PYG{p}{(}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{v2}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{,} \PYG{p}{\PYGZob{}}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{weight}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{:}\PYG{l+m+mi}{10}\PYG{p}{\PYGZcb{}}\PYG{p}{)}\PYG{p}{,}
@@ -2277,19 +2132,19 @@ Back to {\hyperref[\detokenize{pearls:pearls-label}]{\sphinxcrossref{\DUrole{std
 \begin{itemize}
 \item {} 
 \sphinxAtStartPar
-\phantomsection\label{\detokenize{pearls:id105}}{\hyperref[\detokenize{pearls:converting-voting-profiles-into-performance-tableaux}]{\sphinxcrossref{Converting voting profiles into performance tableaux}}} (\autopageref*{\detokenize{pearls:converting-voting-profiles-into-performance-tableaux}})
+\phantomsection\label{\detokenize{pearls:id104}}{\hyperref[\detokenize{pearls:converting-voting-profiles-into-performance-tableaux}]{\sphinxcrossref{Converting voting profiles into performance tableaux}}} (\autopageref*{\detokenize{pearls:converting-voting-profiles-into-performance-tableaux}})
 
 \item {} 
 \sphinxAtStartPar
-\phantomsection\label{\detokenize{pearls:id106}}{\hyperref[\detokenize{pearls:multipartisan-primary-selection-of-eligible-candidates}]{\sphinxcrossref{Multipartisan primary selection of eligible candidates}}} (\autopageref*{\detokenize{pearls:multipartisan-primary-selection-of-eligible-candidates}})
+\phantomsection\label{\detokenize{pearls:id105}}{\hyperref[\detokenize{pearls:multipartisan-primary-selection-of-eligible-candidates}]{\sphinxcrossref{Multipartisan primary selection of eligible candidates}}} (\autopageref*{\detokenize{pearls:multipartisan-primary-selection-of-eligible-candidates}})
 
 \item {} 
 \sphinxAtStartPar
-\phantomsection\label{\detokenize{pearls:id107}}{\hyperref[\detokenize{pearls:secondary-election-winner-determination}]{\sphinxcrossref{Secondary election winner determination}}} (\autopageref*{\detokenize{pearls:secondary-election-winner-determination}})
+\phantomsection\label{\detokenize{pearls:id106}}{\hyperref[\detokenize{pearls:secondary-election-winner-determination}]{\sphinxcrossref{Secondary election winner determination}}} (\autopageref*{\detokenize{pearls:secondary-election-winner-determination}})
 
 \item {} 
 \sphinxAtStartPar
-\phantomsection\label{\detokenize{pearls:id108}}{\hyperref[\detokenize{pearls:multipartisan-preferences-in-divisive-politics}]{\sphinxcrossref{Multipartisan preferences in divisive politics}}} (\autopageref*{\detokenize{pearls:multipartisan-preferences-in-divisive-politics}})
+\phantomsection\label{\detokenize{pearls:id107}}{\hyperref[\detokenize{pearls:multipartisan-preferences-in-divisive-politics}]{\sphinxcrossref{Multipartisan preferences in divisive politics}}} (\autopageref*{\detokenize{pearls:multipartisan-preferences-in-divisive-politics}})
 
 \end{itemize}
 \end{sphinxShadowBox}
@@ -2683,19 +2538,19 @@ Back to {\hyperref[\detokenize{pearls:pearls-label}]{\sphinxcrossref{\DUrole{std
 \begin{itemize}
 \item {} 
 \sphinxAtStartPar
-\phantomsection\label{\detokenize{pearls:id109}}{\hyperref[\detokenize{pearls:bipolar-approval-voting-systems}]{\sphinxcrossref{Bipolar approval voting systems}}} (\autopageref*{\detokenize{pearls:bipolar-approval-voting-systems}})
+\phantomsection\label{\detokenize{pearls:id108}}{\hyperref[\detokenize{pearls:bipolar-approval-voting-systems}]{\sphinxcrossref{Bipolar approval voting systems}}} (\autopageref*{\detokenize{pearls:bipolar-approval-voting-systems}})
 
 \item {} 
 \sphinxAtStartPar
-\phantomsection\label{\detokenize{pearls:id110}}{\hyperref[\detokenize{pearls:pairwise-comparison-of-bipolar-approval-votes}]{\sphinxcrossref{Pairwise comparison of bipolar approval votes}}} (\autopageref*{\detokenize{pearls:pairwise-comparison-of-bipolar-approval-votes}})
+\phantomsection\label{\detokenize{pearls:id109}}{\hyperref[\detokenize{pearls:pairwise-comparison-of-bipolar-approval-votes}]{\sphinxcrossref{Pairwise comparison of bipolar approval votes}}} (\autopageref*{\detokenize{pearls:pairwise-comparison-of-bipolar-approval-votes}})
 
 \item {} 
 \sphinxAtStartPar
-\phantomsection\label{\detokenize{pearls:id111}}{\hyperref[\detokenize{pearls:three-valued-evaluative-voting-system}]{\sphinxcrossref{Three\sphinxhyphen{}valued evaluative voting system}}} (\autopageref*{\detokenize{pearls:three-valued-evaluative-voting-system}})
+\phantomsection\label{\detokenize{pearls:id110}}{\hyperref[\detokenize{pearls:three-valued-evaluative-voting-system}]{\sphinxcrossref{Three\sphinxhyphen{}valued evaluative voting system}}} (\autopageref*{\detokenize{pearls:three-valued-evaluative-voting-system}})
 
 \item {} 
 \sphinxAtStartPar
-\phantomsection\label{\detokenize{pearls:id112}}{\hyperref[\detokenize{pearls:favouring-multipartisan-candidates}]{\sphinxcrossref{Favouring multipartisan candidates}}} (\autopageref*{\detokenize{pearls:favouring-multipartisan-candidates}})
+\phantomsection\label{\detokenize{pearls:id111}}{\hyperref[\detokenize{pearls:favouring-multipartisan-candidates}]{\sphinxcrossref{Favouring multipartisan candidates}}} (\autopageref*{\detokenize{pearls:favouring-multipartisan-candidates}})
 
 \end{itemize}
 \end{sphinxShadowBox}
@@ -2711,7 +2566,7 @@ File \sphinxhref{\_static/bpApVotingProfile.py}{bpApVotingProfile.py} contains s
 
 \fvset{hllines={, 10,}}%
 \begin{sphinxVerbatim}[commandchars=\\\{\},numbers=left,firstnumber=1,stepnumber=1]
-\PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{k+kn}{from} \PYG{n+nn}{votingProfiles} \PYG{k+kn}{import} \PYG{o}{*}
+\PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{k+kn}{from} \PYG{n+nn}{votingProfiles} \PYG{k+kn}{import} \PYG{n}{BipolarApprovalVotingProfile}
 \PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{bavp} \PYG{o}{=} \PYG{n}{BipolarApprovalVotingProfile}\PYG{p}{(}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{bpApVotingProfile}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{)}
 \PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{bavp}
 \PYG{g+go}{ *\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{} VotingProfile instance description \PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}*}
@@ -3308,15 +3163,15 @@ Back to {\hyperref[\detokenize{pearls:pearls-label}]{\sphinxcrossref{\DUrole{std
 \begin{itemize}
 \item {} 
 \sphinxAtStartPar
-\phantomsection\label{\detokenize{pearls:id113}}{\hyperref[\detokenize{pearls:the-french-popular-primary-presidential-election-2022}]{\sphinxcrossref{The French popular primary presidential election 2022}}} (\autopageref*{\detokenize{pearls:the-french-popular-primary-presidential-election-2022}})
+\phantomsection\label{\detokenize{pearls:id112}}{\hyperref[\detokenize{pearls:the-french-popular-primary-presidential-election-2022}]{\sphinxcrossref{The French popular primary presidential election 2022}}} (\autopageref*{\detokenize{pearls:the-french-popular-primary-presidential-election-2022}})
 
 \item {} 
 \sphinxAtStartPar
-\phantomsection\label{\detokenize{pearls:id114}}{\hyperref[\detokenize{pearls:a-bipolar-approval-disapproval-election}]{\sphinxcrossref{A bipolar approval\sphinxhyphen{}disapproval election}}} (\autopageref*{\detokenize{pearls:a-bipolar-approval-disapproval-election}})
+\phantomsection\label{\detokenize{pearls:id113}}{\hyperref[\detokenize{pearls:a-bipolar-approval-disapproval-election}]{\sphinxcrossref{A bipolar approval\sphinxhyphen{}disapproval election}}} (\autopageref*{\detokenize{pearls:a-bipolar-approval-disapproval-election}})
 
 \item {} 
 \sphinxAtStartPar
-\phantomsection\label{\detokenize{pearls:id115}}{\hyperref[\detokenize{pearls:ranking-the-potential-presidential-candidates}]{\sphinxcrossref{Ranking the potential presidential candidates}}} (\autopageref*{\detokenize{pearls:ranking-the-potential-presidential-candidates}})
+\phantomsection\label{\detokenize{pearls:id114}}{\hyperref[\detokenize{pearls:ranking-the-potential-presidential-candidates}]{\sphinxcrossref{Ranking the potential presidential candidates}}} (\autopageref*{\detokenize{pearls:ranking-the-potential-presidential-candidates}})
 
 \end{itemize}
 \end{sphinxShadowBox}
@@ -3768,6 +3623,10 @@ Back to {\hyperref[\detokenize{pearls:pearls-label}]{\sphinxcrossref{\DUrole{std
 \begin{itemize}
 \item {} 
 \sphinxAtStartPar
+\phantomsection\label{\detokenize{pearls:id115}}{\hyperref[\detokenize{pearls:coping-with-missing-data-and-indeterminateness}]{\sphinxcrossref{Coping with missing data and indeterminateness}}} (\autopageref*{\detokenize{pearls:coping-with-missing-data-and-indeterminateness}})
+
+\item {} 
+\sphinxAtStartPar
 \phantomsection\label{\detokenize{pearls:id116}}{\hyperref[\detokenize{pearls:ordinal-correlation-equals-bipolar-valued-relational-equivalence}]{\sphinxcrossref{Ordinal correlation equals bipolar\sphinxhyphen{}valued relational equivalence}}} (\autopageref*{\detokenize{pearls:ordinal-correlation-equals-bipolar-valued-relational-equivalence}})
 
 \item {} 
@@ -3788,6 +3647,148 @@ Back to {\hyperref[\detokenize{pearls:pearls-label}]{\sphinxcrossref{\DUrole{std
 
 \end{itemize}
 \end{sphinxShadowBox}
+
+
+\subsection{Coping with missing data and indeterminateness}
+\label{\detokenize{pearls:coping-with-missing-data-and-indeterminateness}}\label{\detokenize{pearls:copingmissing-data-label}}
+\sphinxAtStartPar
+In a stubborn keeping with a two\sphinxhyphen{}valued logic, where every argument can only be true or false, there is no place for efficiently taking into account missing data or logical indeterminateness. These cases are seen as problematic and, at best are simply ignored. Worst, in modern data science, missing data get often replaced with \sphinxstyleemphasis{fictive} values, potentially falsifying hence all subsequent computations.
+
+\sphinxAtStartPar
+In social choice problems like elections, \sphinxstyleemphasis{abstentions} are, however, frequently observed and represent a social expression that may be significant for revealing non represented social preferences.
+
+\sphinxAtStartPar
+In marketing studies, interviewees will not always respond to all the submitted questions. Again, such abstentions do sometimes contain nevertheless valid information concerning consumer preferences.
+
+
+\subsubsection{A motivating data set}
+\label{\detokenize{pearls:a-motivating-data-set}}
+\sphinxAtStartPar
+Let us consider such a performance tableau in file \sphinxhref{\_static/graffiti07.py}{graffiti07.py} gathering a \sphinxstyleemphasis{Movie Magazine} ‘s rating of some movies that could actually be seen in town %
+\begin{footnote}[1]\sphinxAtStartFootnote
+\sphinxstyleemphasis{Graffiti}, Edition Revue Luxembourg, September 2007, p. 30. You may find the data file \sphinxstyleemphasis{graffiti07.py} (perfTabs.PerformanceTableau Format) in the \sphinxstyleemphasis{examples} directory of the Digraph3 resources
+%
+\end{footnote} (see \hyperref[\detokenize{pearls:graffiti07-1}]{Fig.\@ \ref{\detokenize{pearls:graffiti07-1}}}).
+
+\begin{sphinxVerbatim}[commandchars=\\\{\},numbers=left,firstnumber=1,stepnumber=1]
+\PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{k+kn}{from} \PYG{n+nn}{perfTabs} \PYG{k+kn}{import} \PYG{n}{PerformanceTableau}
+\PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{t} \PYG{o}{=} \PYG{n}{PerformanceTableau}\PYG{p}{(}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{graffiti07}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{)}
+\PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{t}\PYG{o}{.}\PYG{n}{showHTMLPerformanceTableau}\PYG{p}{(}\PYG{n}{title}\PYG{o}{=}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{Graffiti Star wars}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{,}
+\PYG{g+gp}{... }                             \PYG{n}{ndigits}\PYG{o}{=}\PYG{l+m+mi}{0}\PYG{p}{)}
+\end{sphinxVerbatim}
+
+\begin{figure}[H]
+\centering
+\capstart
+
+\noindent\sphinxincludegraphics[width=500\sphinxpxdimen]{{graffiti07_1}.png}
+\caption{\sphinxstyleemphasis{Graffiti} magazine’s movie ratings from September 2007}\label{\detokenize{pearls:graffiti07-1}}\end{figure}
+
+\sphinxAtStartPar
+15 journalists and movie critics provide here their rating of 25 movies: 5 stars (\sphinxstyleemphasis{masterpiece}), 4 stars (\sphinxstyleemphasis{must be seen}), 3 stars (\sphinxstyleemphasis{excellent}), 2 stars (\sphinxstyleemphasis{good}), 1 star (\sphinxstyleemphasis{could be seen}), \sphinxhyphen{}1 star (\sphinxstyleemphasis{I do not like}), \sphinxhyphen{}2 (\sphinxstyleemphasis{I hate}), NA (\sphinxstyleemphasis{not seen}).
+
+\sphinxAtStartPar
+To aggregate all the critics’ rating opinions, the \sphinxstyleemphasis{Graffiti} magazine provides for each movie a global score computed as an \sphinxstyleemphasis{average grade}, just ignoring the \sphinxstyleemphasis{not seen} data. These averages are thus not computed on comparable denominators; some critics do indeed use a more or less extended range of grades. The movies not seen by critic \sphinxstyleemphasis{SJ}, for instance, are favored, as this critic is more severe than others in her grading. Dropping the movies that were not seen by all the critics is here not possible either, as no one of the 25 movies was actually seen by all the critics. Providing any value for the missing data will as well always somehow falsify any global value scoring. What to do ?
+
+\sphinxAtStartPar
+A better approach is to rank the movies on the basis of pairwise bipolar\sphinxhyphen{}valued  \sphinxstyleemphasis{at least as well rated as} opinions. Under this epistemic argumentation approach, missing data are naturally treated as opinion abstentions and hence do not falsify the logical computations. Such a ranking (see the tutorial on \DUrole{xref,std,std-ref}{Ranking with incommensurable performance criteria}) of the 25 movies is provided, for instance, by the \sphinxstylestrong{heat map} view shown in \hyperref[\detokenize{pearls:graffiti07-2}]{Fig.\@ \ref{\detokenize{pearls:graffiti07-2}}}.
+
+\begin{sphinxVerbatim}[commandchars=\\\{\}]
+\PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{t}\PYG{o}{.}\PYG{n}{showHTMLPerformanceHeatmap}\PYG{p}{(}\PYG{n}{Correlations}\PYG{o}{=}\PYG{k+kc}{True}\PYG{p}{,}
+\PYG{g+gp}{... }                             \PYG{n}{rankingRule}\PYG{o}{=}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{NetFlows}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{,}
+\PYG{g+gp}{... }                             \PYG{n}{ndigits}\PYG{o}{=}\PYG{l+m+mi}{0}\PYG{p}{)}
+\end{sphinxVerbatim}
+
+\begin{figure}[H]
+\centering
+\capstart
+
+\noindent\sphinxincludegraphics[width=600\sphinxpxdimen]{{graffiti07_2}.png}
+\caption{\sphinxstyleemphasis{Graffiti} magazine’s ordered movie ratings from September 2007}\label{\detokenize{pearls:graffiti07-2}}\end{figure}
+
+\sphinxAtStartPar
+There is no doubt that movie \sphinxstyleemphasis{mv\_QS}, with 6 ‘\sphinxstyleemphasis{must be seen}’ marks, is correctly best\sphinxhyphen{}ranked and the movie \sphinxstyleemphasis{mv\_TV} is worst\sphinxhyphen{}ranked with five ‘\sphinxstyleemphasis{don’t like}’ marks.
+
+
+\subsubsection{Modelling pairwise bipolar\sphinxhyphen{}valued rating opinions}
+\label{\detokenize{pearls:modelling-pairwise-bipolar-valued-rating-opinions}}
+\sphinxAtStartPar
+Let us explicitly construct the underlying bipolar\sphinxhyphen{}valued outranking digraph and consult in \hyperref[\detokenize{pearls:graffiti07-45}]{Fig.\@ \ref{\detokenize{pearls:graffiti07-45}}} the pairwise characteristic values we observe between the two best\sphinxhyphen{}ranked movies, namely \sphinxstyleemphasis{mv\_QS} and \sphinxstyleemphasis{mv\_RR}.
+
+\begin{sphinxVerbatim}[commandchars=\\\{\},numbers=left,firstnumber=1,stepnumber=1]
+\PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{k+kn}{from} \PYG{n+nn}{outrankingDigraphs} \PYG{k+kn}{import} \PYG{n}{BipolarOutrankingDigraph}
+\PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{g} \PYG{o}{=} \PYG{n}{BipolarOutrankingDigraph}\PYG{p}{(}\PYG{n}{t}\PYG{p}{)}
+\PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{g}\PYG{o}{.}\PYG{n}{recodeValuation}\PYG{p}{(}\PYG{o}{\PYGZhy{}}\PYG{l+m+mi}{19}\PYG{p}{,}\PYG{l+m+mi}{19}\PYG{p}{)} \PYG{c+c1}{\PYGZsh{} integer characteristic values}
+\PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{g}\PYG{o}{.}\PYG{n}{showHTMLPairwiseOutrankings}\PYG{p}{(}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{mv\PYGZus{}QS}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{,}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{mv\PYGZus{}RR}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{)}
+\end{sphinxVerbatim}
+
+\begin{figure}[H]
+\centering
+\capstart
+
+\noindent\sphinxincludegraphics[width=600\sphinxpxdimen]{{graffiti07_45}.png}
+\caption{Pairwise comparison of the two best\sphinxhyphen{}ranked movies}\label{\detokenize{pearls:graffiti07-45}}\end{figure}
+
+\sphinxAtStartPar
+Six out of the fifteen critics have not seen one or the other of these two movies. Notice the higher significance (3) that is granted to two locally renowned movie critics, namely \sphinxstyleemphasis{JH} and \sphinxstyleemphasis{VT}. Their opinion counts for three times the opinion of the other critics. All nine critics that have seen both movies, except critic \sphinxstyleemphasis{MR}, state that \sphinxstyleemphasis{mv\_QS} is rated at least as well as \sphinxstyleemphasis{mv\_RR} and the balance of positive against negative opinions amounts to +11, a characteristic value which positively validates the outranking situation with a majority of (11/19 + 1.0) / 2.0 = 79\%.
+
+\sphinxAtStartPar
+The complete table of pairwise majority margins of global ‘\sphinxstyleemphasis{at least
+as well rated as}’ opinions, ranked by the same rule as shown in the
+heat map above (see \hyperref[\detokenize{pearls:graffiti07-2}]{Fig.\@ \ref{\detokenize{pearls:graffiti07-2}}}), may be shown in \hyperref[\detokenize{pearls:graffiti07-3}]{Fig.\@ \ref{\detokenize{pearls:graffiti07-3}}}.
+
+\begin{sphinxVerbatim}[commandchars=\\\{\},numbers=left,firstnumber=1,stepnumber=1]
+\PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{ranking} \PYG{o}{=} \PYG{n}{g}\PYG{o}{.}\PYG{n}{computeNetFlowsRanking}\PYG{p}{(}\PYG{p}{)}
+\PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{g}\PYG{o}{.}\PYG{n}{showHTMLRelationTable}\PYG{p}{(}\PYG{n}{actionsList}\PYG{o}{=}\PYG{n}{ranking}\PYG{p}{,} \PYG{n}{ndigits}\PYG{o}{=}\PYG{l+m+mi}{0}\PYG{p}{,}
+\PYG{g+gp}{... }   \PYG{n}{tableTitle}\PYG{o}{=}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{Bipolar characteristic values of}\PYG{l+s+se}{\PYGZbs{}}
+\PYG{g+gp}{... }\PYG{l+s+s1}{ }\PYG{l+s+s1}{\PYGZdq{}}\PYG{l+s+s1}{rated at least as good as}\PYG{l+s+s1}{\PYGZdq{}}\PYG{l+s+s1}{ situations}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{)}
+\end{sphinxVerbatim}
+
+\begin{figure}[H]
+\centering
+\capstart
+
+\noindent\sphinxincludegraphics[width=650\sphinxpxdimen]{{graffiti07_3}.png}
+\caption{Pairwise majority margins of ‘\sphinxstyleemphasis{at least as well rated as}’ rating opinions}\label{\detokenize{pearls:graffiti07-3}}\end{figure}
+
+\sphinxAtStartPar
+Positive characteristic values, validating a global ‘\sphinxstyleemphasis{at least as well rated as}’ opinion are marked in light green (see \hyperref[\detokenize{pearls:graffiti07-3}]{Fig.\@ \ref{\detokenize{pearls:graffiti07-3}}}). Whereas negative characteristic values, invalidating such a global opinion, are marked in light red. We may by the way notice that the best\sphinxhyphen{}ranked movie \sphinxstyleemphasis{mv\_QS} is indeed a \sphinxstyleemphasis{Condorcet} winner, i.e. \sphinxstyleemphasis{better rated than all the other movies} by a 65\% majority of critics. This majority may be assessed from the average determinateness of the given bipolar\sphinxhyphen{}valued outranking digraph \sphinxstyleemphasis{g}.
+
+\begin{sphinxVerbatim}[commandchars=\\\{\}]
+\PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n+nb}{print}\PYG{p}{(} \PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+si}{\PYGZpc{}.0f}\PYG{l+s+si}{\PYGZpc{}\PYGZpc{}}\PYG{l+s+s1}{\PYGZsq{}} \PYG{o}{\PYGZpc{}} \PYG{n}{g}\PYG{o}{.}\PYG{n}{computeDeterminateness}\PYG{p}{(}\PYG{n}{InPercents}\PYG{o}{=}\PYG{k+kc}{True}\PYG{p}{)} \PYG{p}{)}
+\PYG{g+go}{65\PYGZpc{}}
+\end{sphinxVerbatim}
+
+\sphinxAtStartPar
+Notice also the \sphinxstyleemphasis{indeterminate} situation we observe, for instance, when comparing movie \sphinxstyleemphasis{mv\_PE} with movie \sphinxstyleemphasis{mv\_NP}.
+
+\begin{sphinxVerbatim}[commandchars=\\\{\}]
+\PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{g}\PYG{o}{.}\PYG{n}{showHTMLPairwiseComparison}\PYG{p}{(}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{mv\PYGZus{}PE}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{,}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{mv\PYGZus{}NP}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{)}
+\end{sphinxVerbatim}
+
+\begin{figure}[H]
+\centering
+\capstart
+
+\noindent\sphinxincludegraphics[width=400\sphinxpxdimen]{{graffiti07_6}.png}
+\caption{Indeterminate pairwise comparison example}\label{\detokenize{pearls:id79}}\end{figure}
+
+\sphinxAtStartPar
+Only eight, out of the fifteen critics, have seen both movies and the positive opinions do neatly balance the negative ones. A global statement that \sphinxstyleemphasis{mv\_PE} is ‘\sphinxstyleemphasis{at least as well rated as}’ \sphinxstyleemphasis{mv\_NP}  may in this case hence \sphinxstylestrong{neither be validated, nor invalidated}; a preferential situation that cannot be modelled with any scoring approach.
+
+\sphinxAtStartPar
+It is fair, however, to eventually mention here that the \sphinxstyleemphasis{Graffiti} magazine’s average scoring method is actually showing a very similar ranking. Indeed, average scores usually confirm well all evident pairwise comparisons, yet \sphinxstyleemphasis{enforce} comparability for all less evident ones.
+
+\sphinxAtStartPar
+Notice finally the ordinal correlation \sphinxstyleemphasis{tau} values in
+\hyperref[\detokenize{pearls:graffiti07-2}]{Fig.\@ \ref{\detokenize{pearls:graffiti07-2}}} 3rd row. How may we compute these ordinal correlation indexes ?
+
+\sphinxAtStartPar
+Back to {\hyperref[\detokenize{pearls:pearls-label}]{\sphinxcrossref{\DUrole{std,std-ref}{Content Table}}}} (\autopageref*{\detokenize{pearls:pearls-label}})
+
+
+\bigskip\hrule\bigskip
+
 
 
 \subsection{Ordinal correlation equals bipolar\sphinxhyphen{}valued relational equivalence}
@@ -3837,11 +3838,12 @@ i.e. the \sphinxstylestrong{normalized majority margin} of \sphinxstyleemphasis{
 Let \sphinxstyleemphasis{R1} and \sphinxstyleemphasis{R2} be two random crisp relations defined on a same set of 5 alternatives. We may compute Kendall’s \sphinxstyleemphasis{tau} index as follows.
 \sphinxSetupCaptionForVerbatim{Crisp Relational Equivalence Digraph}
 \def\sphinxLiteralBlockLabel{\label{\detokenize{pearls:relequi1}}}
-\fvset{hllines={, 9, 10, 11, 12, 13,}}%
+\fvset{hllines={, 10, 11, 12, 13, 14, 17,}}%
 \begin{sphinxVerbatim}[commandchars=\\\{\},numbers=left,firstnumber=1,stepnumber=1]
-\PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{k+kn}{from} \PYG{n+nn}{digraphs} \PYG{k+kn}{import} \PYG{o}{*}
+\PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{k+kn}{from} \PYG{n+nn}{randomDigraphs} \PYG{k+kn}{import} \PYG{n}{RandomDigraph}
 \PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{R1} \PYG{o}{=} \PYG{n}{RandomDigraph}\PYG{p}{(}\PYG{n}{order}\PYG{o}{=}\PYG{l+m+mi}{5}\PYG{p}{,}\PYG{n}{Bipolar}\PYG{o}{=}\PYG{k+kc}{True}\PYG{p}{)}
 \PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{R2} \PYG{o}{=} \PYG{n}{RandomDigraph}\PYG{p}{(}\PYG{n}{order}\PYG{o}{=}\PYG{l+m+mi}{5}\PYG{p}{,}\PYG{n}{Bipolar}\PYG{o}{=}\PYG{k+kc}{True}\PYG{p}{)}
+\PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{k+kn}{from} \PYG{n+nn}{digraphs} \PYG{k+kn}{import} \PYG{n}{EquivalenceDigraph}
 \PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{E} \PYG{o}{=} \PYG{n}{EquivalenceDigraph}\PYG{p}{(}\PYG{n}{R1}\PYG{p}{,}\PYG{n}{R2}\PYG{p}{)}
 \PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{E}\PYG{o}{.}\PYG{n}{showRelationTable}\PYG{p}{(}\PYG{n}{ReflexiveTerms}\PYG{o}{=}\PYG{k+kc}{False}\PYG{p}{)}
 \PYG{g+go}{ * \PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{} Relation Table \PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}}
@@ -3859,7 +3861,7 @@ Let \sphinxstyleemphasis{R1} and \sphinxstyleemphasis{R2} be two random crisp re
 \sphinxresetverbatimhllines
 
 \sphinxAtStartPar
-In the table of the equivalence relation \((R_1 \Leftrightarrow R_2)\) above (see \hyperref[\detokenize{pearls:relequi1}]{Listing \ref{\detokenize{pearls:relequi1}}} Lines 9\sphinxhyphen{}13), we observe that the normalized majority margin of equivalent versus non equivalent irreflexive pairs amounts to (9 \sphinxhyphen{} 11)/20 = \sphinxhyphen{}0.1, i.e. the value of Kendall’s \sphinxstyleemphasis{tau} index in this plainly determined crisp case (see \hyperref[\detokenize{pearls:relequi1}]{Listing \ref{\detokenize{pearls:relequi1}}} Line 16).
+In the table of the equivalence relation \((R_1 \Leftrightarrow R_2)\) above (see \hyperref[\detokenize{pearls:relequi1}]{Listing \ref{\detokenize{pearls:relequi1}}} Lines 10\sphinxhyphen{}14), we observe that the normalized majority margin of equivalent versus non equivalent irreflexive pairs amounts to (9 \sphinxhyphen{} 11)/20 = \sphinxhyphen{}0.1, i.e. the value of Kendall’s \sphinxstyleemphasis{tau} index in this plainly determined crisp case (see \hyperref[\detokenize{pearls:relequi1}]{Listing \ref{\detokenize{pearls:relequi1}}} Line 17).
 
 \sphinxAtStartPar
 What happens now with more or less determined and even partially indeterminate relations ? May we proceed in a similar way ?
@@ -4019,11 +4021,14 @@ We may now illustrate the quality of the global ranking of the movies shown with
 \subsubsection{Fitness of ranking heuristics}
 \label{\detokenize{pearls:fitness-of-ranking-heuristics}}
 \sphinxAtStartPar
-We reconsider the bipolar\sphinxhyphen{}valued outranking digraph \sphinxstyleemphasis{g} modelling the pairwise global ‘\sphinxstyleemphasis{at least as well rated as}’ relation among the 25 movies seen above (see \hyperref[\detokenize{pearls:exmoviesbg}]{Listing \ref{\detokenize{pearls:exmoviesbg}}}).
+We reconsider the bipolar\sphinxhyphen{}valued outranking digraph \sphinxstyleemphasis{g} modelling the pairwise global ‘\sphinxstyleemphasis{at least as well rated as}’ relation among the 25 movies seen in the topic before (see \hyperref[\detokenize{pearls:graffiti07-2}]{Fig.\@ \ref{\detokenize{pearls:graffiti07-2}}}).
 \sphinxSetupCaptionForVerbatim{Global Movies Outranking Digraph}
 \def\sphinxLiteralBlockLabel{\label{\detokenize{pearls:exmoviesbg}}}
-\fvset{hllines={, 7, 13,}}%
+\fvset{hllines={, 10, 16,}}%
 \begin{sphinxVerbatim}[commandchars=\\\{\},numbers=left,firstnumber=1,stepnumber=1]
+\PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{k+kn}{from} \PYG{n+nn}{perfTabs} \PYG{k+kn}{import} \PYG{n}{PerformanceTableau}
+\PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{t} \PYG{o}{=} \PYG{n}{PerformanceTableau}\PYG{p}{(}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{graffiti07}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{)}
+\PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{k+kn}{from} \PYG{n+nn}{outrankingDigraphs} \PYG{k+kn}{import} \PYG{n}{BipolarOutrankingDigraph}
 \PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{g} \PYG{o}{=} \PYG{n}{BipolarOutrankingDigraph}\PYG{p}{(}\PYG{n}{t}\PYG{p}{,}\PYG{n}{Normalized}\PYG{o}{=}\PYG{k+kc}{True}\PYG{p}{)}
 \PYG{g+go}{ *\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{} Object instance description \PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}*}
 \PYG{g+go}{ Instance class   : BipolarOutrankingDigraph}
@@ -4150,6 +4155,7 @@ In order to furthermore study the quality of a ranking result, it may be interes
 Let us first have a look at the pairwise asymmetric part, namely the ‘\sphinxstyleemphasis{better rated than}’ and ‘\sphinxstyleemphasis{less well rated than}’ opinions of the movie critics.
 
 \begin{sphinxVerbatim}[commandchars=\\\{\}]
+\PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{k+kn}{from} \PYG{n+nn}{digraphs} \PYG{k+kn}{import} \PYG{n}{AsymmetricPartialDigraph}
 \PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{ag} \PYG{o}{=} \PYG{n}{AsymmetricPartialDigraph}\PYG{p}{(}\PYG{n}{g}\PYG{p}{)}
 \PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{ag}\PYG{o}{.}\PYG{n}{showHTMLRelationTable}\PYG{p}{(}\PYG{n}{actionsList}\PYG{o}{=}\PYG{n}{g}\PYG{o}{.}\PYG{n}{computeNetFlowsRanking}\PYG{p}{(}\PYG{p}{)}\PYG{p}{,}\PYG{n}{ndigits}\PYG{o}{=}\PYG{l+m+mi}{0}\PYG{p}{)}
 \end{sphinxVerbatim}
@@ -4165,6 +4171,7 @@ Let us first have a look at the pairwise asymmetric part, namely the ‘\sphinxs
 We notice here that the \sphinxstyleemphasis{Net\sphinxhyphen{}Flows} ranking rule inverts in fact just three ‘\sphinxstyleemphasis{less well ranked than}’ opinions and four ‘\sphinxstyleemphasis{better ranked than}’ ones. A similar look at the symmetric part, the pairwise ‘\sphinxstyleemphasis{as well rated as}’ opinions, suggests a preordered preference structure in several \sphinxstyleemphasis{equivalently rated} classes.
 
 \begin{sphinxVerbatim}[commandchars=\\\{\}]
+\PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{k+kn}{from} \PYG{n+nn}{digraphs} \PYG{k+kn}{import} \PYG{n}{SymmetricPartialDigraph}
 \PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{sg} \PYG{o}{=} \PYG{n}{SymmetricPartialDigraph}\PYG{p}{(}\PYG{n}{g}\PYG{p}{)}
 \PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{sg}\PYG{o}{.}\PYG{n}{showHTMLRelationTable}\PYG{p}{(}\PYG{n}{actionsList}\PYG{o}{=}\PYG{n}{g}\PYG{o}{.}\PYG{n}{computeNetFlowsRanking}\PYG{p}{(}\PYG{p}{)}\PYG{p}{,}\PYG{n}{ndigits}\PYG{o}{=}\PYG{l+m+mi}{0}\PYG{p}{)}
 \end{sphinxVerbatim}
@@ -4730,7 +4737,7 @@ In algorithmic decision theory, initial and terminal prekernels may provide conv
 To illustrate this idea, let us finally compute good and bad choice recommendations in the following random bipolar\sphinxhyphen{}valued \sphinxstylestrong{outranking} digraph.
 
 \begin{sphinxVerbatim}[commandchars=\\\{\},numbers=left,firstnumber=1,stepnumber=1]
-\PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{k+kn}{from} \PYG{n+nn}{outrankingDigraphs} \PYG{k+kn}{import} \PYG{o}{*}
+\PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{k+kn}{from} \PYG{n+nn}{outrankingDigraphs} \PYG{k+kn}{import} \PYG{n}{RandomBipolarOutrankingDigraph}
 \PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{g} \PYG{o}{=} \PYG{n}{RandomBipolarOutrankingDigraph}\PYG{p}{(}\PYG{n}{seed}\PYG{o}{=}\PYG{l+m+mi}{5}\PYG{p}{)}
 \PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{g}
 \PYG{g+go}{ *\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{} Object instance description \PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}*}
@@ -4863,6 +4870,7 @@ In the resulting linear ranking (see \hyperref[\detokenize{pearls:outrankingresu
 Finally, let us give some hints on the \sphinxstylestrong{tractability} of kernel computations. Detecting all (pre)kernels in a digraph is a famously NP\sphinxhyphen{}hard computational problem. Checking external stability conditions for an independent choice is equivalent to checking its maximality and may be done in the linear complexity of the order of the digraph. However, checking all independent choices contained in a digraph may get hard already for tiny sparse digraphs of order \sphinxstyleemphasis{n} \textgreater{} 20 (see \sphinxcite{tutorial:bis-2006b}). Indeed, the worst case is given by an empty or indeterminate digraph where the set of all potential independent choices to check is in fact the power set of the vertices.
 
 \begin{sphinxVerbatim}[commandchars=\\\{\},numbers=left,firstnumber=1,stepnumber=1]
+\PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{k+kn}{from} \PYG{n+nn}{digraphs} \PYG{k+kn}{import} \PYG{n}{EmptyDigraph}
 \PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{e} \PYG{o}{=} \PYG{n}{EmptyDigraph}\PYG{p}{(}\PYG{n}{order}\PYG{o}{=}\PYG{l+m+mi}{20}\PYG{p}{)}
 \PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{e}\PYG{o}{.}\PYG{n}{showMIS}\PYG{p}{(}\PYG{p}{)}   \PYG{c+c1}{\PYGZsh{} by visiting all 2\PYGZca{}20 independent choices}
 \PYG{g+go}{ *\PYGZhy{}\PYGZhy{}\PYGZhy{}  Maximal independent choices \PYGZhy{}\PYGZhy{}\PYGZhy{}*}
@@ -5006,7 +5014,7 @@ makes \(Y^t\) similarly characterise a \sphinxstylestrong{terminal} \sphinxstyle
 Let us verify this result on a tiny random digraph.
 
 \begin{sphinxVerbatim}[commandchars=\\\{\},numbers=left,firstnumber=1,stepnumber=1]
-\PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{k+kn}{from} \PYG{n+nn}{digraphs} \PYG{k+kn}{import} \PYG{o}{*}
+\PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{k+kn}{from} \PYG{n+nn}{digraphs} \PYG{k+kn}{import} \PYG{n}{RandomDigraph}
 \PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{g} \PYG{o}{=} \PYG{n}{RandomDigraph}\PYG{p}{(}\PYG{n}{order}\PYG{o}{=}\PYG{l+m+mi}{3}\PYG{p}{,}\PYG{n}{seed}\PYG{o}{=}\PYG{l+m+mi}{1}\PYG{p}{)}
 \PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{g}\PYG{o}{.}\PYG{n}{showRelationTable}\PYG{p}{(}\PYG{p}{)}
 \PYG{g+go}{ * \PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{} Relation Table \PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}}
@@ -5074,7 +5082,7 @@ Following the \sphinxstyleemphasis{von Neumann} fixpoint algorithm, a similar bi
 \sphinxsetlistlabels{\arabic}{enumi}{enumii}{}{.}%
 \item {} 
 \sphinxAtStartPar
-enumerate all initial and terminal crisp prekernels \sphinxstyleemphasis{K}, \sphinxstyleemphasis{K2}, … in the given bipolar\sphinxhyphen{}valued digraph (see the tutorial on {\hyperref[\detokenize{pearls:kernel-tutorial-label}]{\sphinxcrossref{\DUrole{std,std-ref}{Computing Digraph Kernels}}}} (\autopageref*{\detokenize{pearls:kernel-tutorial-label}}));
+enumerate all initial and terminal crisp prekernels \sphinxstyleemphasis{K1}, \sphinxstyleemphasis{K2}, … in the given bipolar\sphinxhyphen{}valued digraph (see the tutorial on {\hyperref[\detokenize{pearls:kernel-tutorial-label}]{\sphinxcrossref{\DUrole{std,std-ref}{Computing Digraph Kernels}}}} (\autopageref*{\detokenize{pearls:kernel-tutorial-label}}));
 
 \item {} 
 \sphinxAtStartPar
@@ -5108,7 +5116,7 @@ Time for a practical illustration.
 \def\sphinxLiteralBlockLabel{\label{\detokenize{pearls:exrandbg}}}
 \fvset{hllines={, 2,}}%
 \begin{sphinxVerbatim}[commandchars=\\\{\},numbers=left,firstnumber=1,stepnumber=1]
-\PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{k+kn}{from} \PYG{n+nn}{outrankingDigraphs} \PYG{k+kn}{import} \PYG{o}{*}
+\PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{k+kn}{from} \PYG{n+nn}{outrankingDigraphs} \PYG{k+kn}{import} \PYG{n}{RandomBipolarOutrankingDigraph}
 \PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{g} \PYG{o}{=} \PYG{n}{RandomBipolarOutrankingDigraph}\PYG{p}{(}\PYG{n}{Normalized}\PYG{o}{=}\PYG{k+kc}{True}\PYG{p}{,}\PYG{n}{seed}\PYG{o}{=}\PYG{l+m+mi}{5}\PYG{p}{)}
 \PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n+nb}{print}\PYG{p}{(}\PYG{n}{g}\PYG{p}{)}
 \PYG{g+go}{ *\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{} Object instance description \PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}*}
@@ -5411,9 +5419,10 @@ In \hyperref[\detokenize{pearls:bouyssou4orig}]{Fig.\@ \ref{\detokenize{pearls:b
 It is indeed possible to define such a performance tableau by, first, using a single criterion \sphinxstyleemphasis{g1} of significance weight 2 modelling the apparent linear ranking: \sphinxstyleemphasis{a} \textgreater{} \sphinxstyleemphasis{b} \textgreater{} \sphinxstyleemphasis{c} \textgreater{} \sphinxstyleemphasis{d}. We can, secondly, add a criterion \sphinxstyleemphasis{g2} of significance weight 3 modelling exclusively the missing “\sphinxstyleemphasis{as well evaluated as}” situation between \sphinxstyleemphasis{a} and \sphinxstyleemphasis{d}. Both criteria admit without loss of genericity a performance measurement scale of 0 to 100 points with an indifference discrimination threshold of 2.5 and preference discrimination threshold of 5 points. No considerable performance difference discrimination is needed in this example.
 \sphinxSetupCaptionForVerbatim{A potential performance tableau}
 \def\sphinxLiteralBlockLabel{\label{\detokenize{pearls:bouyssou4origpt}}}
-\fvset{hllines={, 8, 9, 10, 11, 17, 20,}}%
+\fvset{hllines={, 9, 10, 11, 12, 18, 21,}}%
 \begin{sphinxVerbatim}[commandchars=\\\{\},numbers=left,firstnumber=1,stepnumber=1]
-\PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{k+kn}{from} \PYG{n+nn}{outrankingDigraphs} \PYG{k+kn}{import} \PYG{o}{*}
+\PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{k+kn}{from} \PYG{n+nn}{perfsTab} \PYG{k+kn}{import} \PYG{n}{PerformanceTableau}
+\PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{k+kn}{from} \PYG{n+nn}{outrankingDigraphs} \PYG{k+kn}{import} \PYG{n}{BipolarOutrankingDigraph}
 \PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{pt} \PYG{o}{=} \PYG{n}{PerformanceTableau}\PYG{p}{(}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{testBouyssou}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{)}
 \PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{pt}\PYG{o}{.}\PYG{n}{showPerformanceTableau}\PYG{p}{(}\PYG{n}{ndigits}\PYG{o}{=}\PYG{l+m+mi}{0}\PYG{p}{)}
 \PYG{g+go}{ *\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}  performance tableau \PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}*}
@@ -5438,7 +5447,7 @@ It is indeed possible to define such a performance tableau by, first, using a si
 \sphinxresetverbatimhllines
 
 \sphinxAtStartPar
-In \hyperref[\detokenize{pearls:bouyssou4origpt}]{Listing \ref{\detokenize{pearls:bouyssou4origpt}}} Lines 8\sphinxhyphen{}11 we notice that criterion \sphinxstyleemphasis{g1} models with a majority margin of 2/5 = 0.40 the requested linear ranking and criterion \sphinxstyleemphasis{g2} warrants with a majority margin of 1/5 = 0.20 that \sphinxstyleemphasis{d} is “\sphinxstyleemphasis{at least as well evaluated as}” \sphinxstyleemphasis{d} (see Lines 17 and 20) leading to the necessary reciprocal outranking situations between \sphinxstyleemphasis{a} and \sphinxstyleemphasis{d}.
+In \hyperref[\detokenize{pearls:bouyssou4origpt}]{Listing \ref{\detokenize{pearls:bouyssou4origpt}}} Lines 9\sphinxhyphen{}12 we notice that criterion \sphinxstyleemphasis{g1} models with a majority margin of 2/5 = 0.40 the requested linear ranking and criterion \sphinxstyleemphasis{g2} warrants with a majority margin of 1/5 = 0.20 that \sphinxstyleemphasis{d} is “\sphinxstyleemphasis{at least as well evaluated as}” \sphinxstyleemphasis{d} (see Lines 18 and 21) leading to the necessary reciprocal outranking situations between \sphinxstyleemphasis{a} and \sphinxstyleemphasis{d}.
 
 \sphinxAtStartPar
 It becomes apparent with the partial tournament example here that, when the number of criteria is not constrained, we may model this way compatible pairwise outranking situations independently one of the other.
@@ -5562,15 +5571,16 @@ It remains to proof that Condition \eqref{equation:pearls:charODG2} is (or is ac
 \end{quote}
 
 \sphinxAtStartPar
-If the conjecture reveals itself to be true, and we are rather confident that this will indeed be the case, we get a method of complexity \(O(n^2)\) for recognizing potential outranking digraph instances with view solely on their relational characteristic valuation (see \hyperref[\detokenize{pearls:checkoutrankingdigraph}]{Listing \ref{\detokenize{pearls:checkoutrankingdigraph}}} Lines 16\sphinxhyphen{}17) \sphinxcite{pearls:mey-2008}.
+If the conjecture reveals itself to be true, and we are rather confident that this will indeed be the case, we get a method of complexity \(O(n^2)\) for recognizing potential outranking digraph instances with view solely on their relational characteristic valuation (see \hyperref[\detokenize{pearls:checkoutrankingdigraph}]{Listing \ref{\detokenize{pearls:checkoutrankingdigraph}}} Lines 17\sphinxhyphen{}18) \sphinxcite{pearls:mey-2008}.
 \sphinxSetupCaptionForVerbatim{Recognizing a bipolar outranking valuation}
 \def\sphinxLiteralBlockLabel{\label{\detokenize{pearls:checkoutrankingdigraph}}}
-\fvset{hllines={, 16, 17,}}%
+\fvset{hllines={, 17, 18,}}%
 \begin{sphinxVerbatim}[commandchars=\\\{\},numbers=left,firstnumber=1,stepnumber=1]
-\PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{k+kn}{from} \PYG{n+nn}{outrankingDigraphs} \PYG{k+kn}{import} \PYG{o}{*}
+\PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{k+kn}{from} \PYG{n+nn}{randomPerfTabs} \PYG{k+kn}{import} \PYG{n}{RandomPerformanceTableau}
 \PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{t} \PYG{o}{=} \PYG{n}{RandomPerformanceTableau}\PYG{p}{(}\PYG{n}{weightDistribution}\PYG{o}{=}\PYG{l+s+s2}{\PYGZdq{}}\PYG{l+s+s2}{equiobjectives}\PYG{l+s+s2}{\PYGZdq{}}\PYG{p}{,}
 \PYG{g+gp}{... }                       \PYG{n}{numberOfActions}\PYG{o}{=}\PYG{l+m+mi}{5}\PYG{p}{,}\PYG{n}{numberOfCriteria}\PYG{o}{=}\PYG{l+m+mi}{3}\PYG{p}{,}
 \PYG{g+gp}{... }                       \PYG{n}{missingDataProbability}\PYG{o}{=}\PYG{l+m+mf}{0.05}\PYG{p}{,}\PYG{n}{seed}\PYG{o}{=}\PYG{l+m+mi}{100}\PYG{p}{)}
+\PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{k+kn}{from} \PYG{n+nn}{outrankingDigraphs} \PYG{k+kn}{import} \PYG{n}{BipolarOutrankingDigraph}
 \PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{g} \PYG{o}{=} \PYG{n}{BipolarOutrankingDigraph}\PYG{p}{(}\PYG{n}{t}\PYG{p}{)}
 \PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{g}\PYG{o}{.}\PYG{n}{showRelationTable}\PYG{p}{(}\PYG{p}{)}
 \PYG{g+go}{ * \PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{} Relation Table \PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}}
@@ -5591,8 +5601,9 @@ If the conjecture reveals itself to be true, and we are rather confident that th
 Whereas, when we consider in \hyperref[\detokenize{pearls:failedoutrankingcheck}]{Listing \ref{\detokenize{pearls:failedoutrankingcheck}}} a genuine randomly bipolar\sphinxhyphen{}valued digraph of order 5, this check will mostly fail.
 \sphinxSetupCaptionForVerbatim{Failing the outranking valuation check}
 \def\sphinxLiteralBlockLabel{\label{\detokenize{pearls:failedoutrankingcheck}}}
-\fvset{hllines={, 6, 9, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24,}}%
+\fvset{hllines={, 7, 10, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25,}}%
 \begin{sphinxVerbatim}[commandchars=\\\{\},numbers=left,firstnumber=1,stepnumber=1]
+\PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{k+kn}{from} \PYG{n+nn}{randomDigraphs} \PYG{k+kn}{import} \PYG{n}{RandomValuationDigraph}
 \PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{rdg} \PYG{o}{=} \PYG{n}{RandomValuationDigraph}\PYG{p}{(}\PYG{n}{order}\PYG{o}{=}\PYG{l+m+mi}{5}\PYG{p}{)}
 \PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{rdg}\PYG{o}{.}\PYG{n}{showRelationTable}\PYG{p}{(}\PYG{p}{)}
 \PYG{g+go}{ * \PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{} Relation Table \PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}}
@@ -5622,7 +5633,7 @@ Whereas, when we consider in \hyperref[\detokenize{pearls:failedoutrankingcheck}
 \sphinxresetverbatimhllines
 
 \sphinxAtStartPar
-We observe in Lines 13\sphinxhyphen{}24 the absence of any relation between \sphinxstyleemphasis{a1} and \sphinxstyleemphasis{a3}, between \sphinxstyleemphasis{a2} and \sphinxstyleemphasis{a4}, and between \sphinxstyleemphasis{a3} and \sphinxstyleemphasis{a5}. This violates the necessary weak completeness Condition \eqref{equation:pearls:weakComp}. The pairs (\sphinxstyleemphasis{a1}, \sphinxstyleemphasis{a2}) and (\sphinxstyleemphasis{a2}, \sphinxstyleemphasis{a3}) furthermore violate Condition \eqref{equation:pearls:indODG}.
+We observe in Lines 14\sphinxhyphen{}25 the absence of any relation between \sphinxstyleemphasis{a1} and \sphinxstyleemphasis{a3}, between \sphinxstyleemphasis{a2} and \sphinxstyleemphasis{a4}, and between \sphinxstyleemphasis{a3} and \sphinxstyleemphasis{a5}. This violates the necessary weak completeness Condition \eqref{equation:pearls:weakComp}. The pairs (\sphinxstyleemphasis{a1}, \sphinxstyleemphasis{a2}) and (\sphinxstyleemphasis{a2}, \sphinxstyleemphasis{a3}) furthermore violate Condition \eqref{equation:pearls:indODG}.
 
 \sphinxAtStartPar
 A Monte Carlo simulation with randomly bipolar\sphinxhyphen{}valued digraphs of order 5 shows that an average proportion of only 0.07\% of random instances verify indeed Condition \eqref{equation:pearls:charODG2}. With randomly bipolar\sphinxhyphen{}valued digraphs of order 6, this proportion drops furthermore to 0.002\%. Condition \eqref{equation:pearls:charODG2} is hence a very specific characteristic of bipolar outranking valuations.
@@ -5839,7 +5850,7 @@ Due to the regular tournament structure, the \sphinxstyleemphasis{Copeland} scor
 
 \fvset{hllines={, 4, 5, 6, 7, 8,}}%
 \begin{sphinxVerbatim}[commandchars=\\\{\},numbers=left,firstnumber=1,stepnumber=1]
-\PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{k+kn}{from} \PYG{n+nn}{linearOrders} \PYG{k+kn}{import} \PYG{o}{*}
+\PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{k+kn}{from} \PYG{n+nn}{linearOrders} \PYG{k+kn}{import} \PYG{n}{CopelandRanking}
 \PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{cop} \PYG{o}{=} \PYG{n}{CopelandRanking}\PYG{p}{(}\PYG{n}{bodg}\PYG{p}{,}\PYG{n}{Comments}\PYG{o}{=}\PYG{k+kc}{True}\PYG{p}{)}
 \PYG{g+go}{ Copeland scores}
 \PYG{g+go}{  a1 : 0}

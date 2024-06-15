@@ -1,25 +1,14 @@
+##########################
+# install all cythonized modules inplace with
+# ...$python3 setup.py buid_ext --inplace
+# (c) R. Bisdorff 2024
+#####################
 FLAG = --inplace
 PYTHON = python3
 PYTEST = ${PYTHON} -m pytest
 
 inplace:
-		${PYTHON} csetupRandPerfTabs.py build_ext ${FLAG}
-		${PYTHON} csetupODGInteger.py build_ext ${FLAG}
-		${PYTHON} csetupSOInteger.py build_ext ${FLAG}
-		${PYTHON} csetupSparseInteger.py build_ext ${FLAG}
-		${PYTHON} csetupNpDigraphs.py build_ext ${FLAG}
-install:
-		sudo -H ${PYTHON} csetupRandPerfTabs.py install
-		sudo -H ${PYTHON} csetupODGInteger.py install
-		sudo -H ${PYTHON} csetupSOInteger.py install
-		sudo -H ${PYTHON} csetupSparseInteger.py install
-		sudo -H ${PYTHON} csetup.NpDigraphspy install
-installVenv:
-		${PYTHON} csetupRandPerfTabs.py install
-		${PYTHON} csetupODGInteger.py install
-		${PYTHON} csetupSOInteger.py install
-		${PYTHON} csetupSparseInteger.py install
-		${PYTHON} csetupNpDigraphs.py install
+		${PYTHON} setup.py build_ext ${FLAG}
 testsSparse:
 		(cd Test; ${PYTEST} -vs pytestsSparseIntegerOutrankingDigraphs.py)
 testsInteger:

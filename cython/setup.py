@@ -19,16 +19,10 @@ ext_modules = [
         ["*.pyx"],
         extra_compile_args=[openmp_arg],
         extra_link_args=[openmp_arg],
-    ),
-    Extension(
-        "*",
-        ["*.pyx"],
-        extra_compile_args=[openmp_arg],
-        extra_link_args=[openmp_arg],
     )
 ]
 
 setup(
-    name='parallel-tutorial',
+    name='Digraph3',
     ext_modules=cythonize(ext_modules,language_level=3),
 ) 
