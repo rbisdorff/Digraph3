@@ -483,7 +483,7 @@ sub <- hthresh > thresh
   text(x$data[(nc+1):(nc+nr),axis1,1][sub[(nc+1):(nc+nr)]],  
        x$data[(nc+1):(nc+nr),axis2,1][sub[(nc+1):(nc+nr)]],
        cex = hlabels[(nc+1):(nc+nr)][sub[(nc+1):(nc+nr)]] * magnify ,
-       font = 3,
+       font = 3,col="red",
        labels=tlabels[(nc+1):(nc+nr)][sub[(nc+1):(nc+nr)]] )
         
 
