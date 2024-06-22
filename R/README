@@ -1,6 +1,6 @@
 # trace of R session
 --$ R
-> source('coraRFP.R')
+> source('coraBFP.R')
 > x = read.csv('quartiersNatAll.csv')
 > Call = as.matrix(x[,3:23])
 > rownames(Call)= x[,1]
