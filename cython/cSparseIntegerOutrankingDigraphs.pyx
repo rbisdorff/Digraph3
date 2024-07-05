@@ -48,8 +48,13 @@ class SparseIntegerDigraph(object):
         reprString += 'fill rate         : %.3f%%\n' % (self.fillRate*100.0)    
         reprString += 'Attributes       : %s\n' % list(self.__dict__.keys())
         reprString += '----  Constructor run times (in sec.) ----\n'
+        try:
+            if self.nbrOfDecomposers > 0:
+                reprString += 'DecomposingThreads           : %d\n' % self.nbrOfDecomposers
+        except:
+            pass
         if self.nbrThreads > 0:
-            reprString += 'Threads           : %d\n' % self.nbrThreads
+            reprString += 'SortingThreads           : %d\n' % self.nbrThreads
             reprString += 'StartMethod       : %s\n' % self.startMethod
         reprString += 'Total time        : %.5f\n' % self.runTimes['totalTime']
         reprString += 'QuantilesSorting  : %.5f\n' % self.runTimes['sorting']
@@ -2254,6 +2259,7 @@ class cQuantilesRankingDigraph(SparseIntegerOutrankingDigraph):
                  startMethod=None,\
                  tempDir='.',\
                  nbrOfCPUs=None,\
+                 nbrOfDecomposingCPUs=None,\
                  save2File=None,\
                  bint CopyPerfTab=False,\
                  bint Comments=False,\
@@ -2333,7 +2339,7 @@ class cQuantilesRankingDigraph(SparseIntegerOutrankingDigraph):
         if Threading:
             import multiprocessing as mp
             if nbrOfCPUs is None:
-                nbrCPUs = mp.cpu_count()
+                nbrOfCPUs = mp.cpu_count()
             if startMethod is None:
                 startMehod = 'spawn'
             self.nbrThreads = nbrOfCPUs
@@ -2390,6 +2396,7 @@ class cQuantilesRankingDigraph(SparseIntegerOutrankingDigraph):
         self.nd = nd
         ### not threding
         if not Threading:
+            self.nbrOfDecomposers = 1
             maximalComponentSize = 0
             components = OrderedDict()
             boostedRanking = []
@@ -2432,7 +2439,9 @@ class cQuantilesRankingDigraph(SparseIntegerOutrankingDigraph):
             #nbrCores = mpctx.cpu_count()
             if nbrOfCPUs is None:
                 nbrOfCPUs = mpctx.cpu_count()
-            self.nbrThreads = nbrOfCPUs
+            if nbrOfDecomposingCPUs is None:
+                nbrOfDecomposingCPUs = nbrOfCPUs
+            self.nbrOfDecomposers = nbrOfDecomposingCPUs
             #from multiprocessing import Process, Queue,active_children, cpu_count                 
             if Comments:
                 print('Processing the %d components' % nc )
@@ -2444,7 +2453,8 @@ class cQuantilesRankingDigraph(SparseIntegerOutrankingDigraph):
                 #td = TemporaryDirectory(dir=tempDir,delete=False)
                 #tempDirName = td.name
                 ## tasks queue and workers launching
-                NUMBER_OF_WORKERS = nbrOfCPUs
+                NUMBER_OF_WORKERS = nbrOfDecomposingCPUs
+                
                 from digraphsTools import qtilingIndexList
                 compIndex = [i for i in range(nc)]
                 from random import shuffle
