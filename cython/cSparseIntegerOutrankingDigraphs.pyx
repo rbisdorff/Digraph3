@@ -2019,7 +2019,7 @@ class SparseIntegerOutrankingDigraph(SparseIntegerDigraph,cPerformanceTableau):
                     
         else:
             for compKey in compKeys:
-                comp = components[compkey]
+                comp = components[compKey]
                 pg = comp['subGraph']
                 print('Relation table of component %s' % str(compKey))
                 actions = [ x for x in pg.actions.keys()]
@@ -3126,7 +3126,7 @@ class cQuantilesRankingDigraph(SparseIntegerOutrankingDigraph):
                     
         else:
             for compKey in compKeys:
-                comp = components[compkey]
+                comp = components[compKey]
                 ranking = comp['componentRanking']
                 print('Relation table of component %s' % str(compKey))
                 print('%s' % ranking)
