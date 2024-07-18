@@ -8534,7 +8534,9 @@ The best ranking correlation with the pairwise outranking situations (+0.75) is 
 HPC quantiles ranking records
 `````````````````````````````
 
-Following from the separability property of the *q*-tiles sorting of each action into each *q*-tiles class, the *q*-sorting algorithm may be safely split into as much threads as are multiple processing cores available in parallel. Furthermore, the ranking procedure being local to each diagonal component, these procedures may as well be safely processed in parallel threads on each component restricted outrankingdigraph.
+Following from the separability property of the *q*-tiles sorting of each action into each *q*-tiles class, the *q*-sorting algorithm may be safely split into as much threads as are multiple processing cores available in parallel. Furthermore, the ranking procedure being local to each diagonal component, these procedures may as well be safely processed in parallel threads on each component restricted outrankingdigraph. Below some examples on different type of computers.
+
+**On a common 2023 desktop computer**
 
 On a common 2023 Terra desktop computer, equipped with a 11th Gen Intel® Core™ i5-11400 × 12 processor and 16.0 GiB of CPU memory, working under Ubuntu 23.10 we may rank a :py:class:`~cRandPerfTabs.cRandom3ObjectivesPerformanceTableau` instance of **five hundred thousand** performance records in about 104 seconds with about 48 seconds for the quantiles sorting step and 55 seconds for the local components ranking step (see below Lines 42-).
 
@@ -8598,6 +8600,8 @@ On a common 2023 Terra desktop computer, equipped with a 11th Gen Intel® Core�
     Decomposing       : 55.12919
 
 When ordering the 146579 components resulting from a 7-tiling sorting with the *optimal* quantiles ordering strategy, the order of a local component is limited to a maximal size of 115 actions which results in a total pairwise adjacency table fill rate of 0.002% (see Lines 29-33).
+
+**On a HPC platform in Spring 2018**
 
 Bigger performance tableaux may definitely be ranked with a larger *cpu_count()*. We were using therefore in 2018 the HPC Platform of the University of Luxembourg (https://hpc.uni.lu/). The following run times for very big quantiles ranking problems of several millions of multicriteria performance records could be achieved both:
 
@@ -8794,7 +8798,45 @@ Restricted to these ten best-ranked alternatives, the *Copeland*, the *NetFlows*
 
 .. note::
 
-   It is therefore *important* to always keep in mind that, based on pairwise outranking situations, there **does not exist** any **unique optimal ranking**; especially when we face such big data problems. Changing the number of quantiles, the component ranking rule, the optimised quantile ordering strategy, all this will indeed produce, sometimes even substantially, diverse global ranking results. 
+   It is therefore *important* to always keep in mind that, based on pairwise outranking situations, there **does not exist** any **unique optimal ranking**; especially when we face such big data problems. Changing the number of quantiles, the component ranking rule, the optimised quantile ordering strategy, all this will indeed produce, sometimes even substantially, diverse global ranking results.
+
+**On the MeluXina supercomputer**
+
+Summer 2024, the author was granted the opportunity to use the large memory HPC resources of the MeluXina EuroHPC supercomputer [54]_  (https://www.luxprovide.lu/meluxina/). Nodes on this platform offer a large RAM for particularly demanding workloads. Each large memory node is composed of 2 AMD Rome CPUs (64 core @ 2.6 GHz, 256HT cores total), has 4 TB of memory (4096 GB) and 1.92 TB of local storage.
+
+Following timings could be achieved with a specially designed *cQuantilesRankingDigraphs.pyx* module when ranking multiple incommensurable performance records assessed on 21 criteria serving 3 decision objectives, namely economic, environmental and societal aspects.
+
+    * One million records could be ranked with 64 sorting and ranking multiprocessing threads in about 69 seconds. The quantiles sorting step is based on 6-tiling.
+
+    * Two million records could be ranked with 128 sorters and 64 rankers in 2 min and 44 sec. The quantiles sorting step is here based on 9-tiling.
+
+    * Three million records could be ranked with 128 sorters and 64 rankers in 4 min and 20 sec The quantiles sorting step is based on 7-tiling. 
+
+
+..
+    +----------------------+-----+-------- +---------+---------+
+    | outranking relation  |  q  |  fill   | nbr of  | run     |
+    |   order  |  size     |     | rate(%) | cores   | times   |
+    +==========+===========+=====+=========+=========+=========+
+    | 1000000  | 1x10^12   |  6  |  0.001  |  64/64  |    69"  |
+    +----------+-----------+-----+---------+---------+---------+
+    | 2000000  | 4x10^12   | 11  |  0.002  | 128/32  |   229"  |
+    +----------+-----------+-----+---------+---------+---------+
+
+ 
+..
+    \begin{center}
+    \begin{tabular}{ c c c }
+    cell1 & cell2 & cell3 \\ 
+    cell4 & cell5 & cell6 \\  
+    cell7 & cell8 & cell9    
+    \end{tabular}
+    \end{center}
+
+
+
+
+to be written
 
 Back to :ref:`Content Table <Tutorial-label>`
 
@@ -10508,6 +10550,8 @@ Appendices
 .. [52] See the documentation of the :py:mod:`multiprocessing` module
 
 .. [53] When tackling matrix computations it may be possible to further accelerate the computations with a potential GPU. The interested reader may find in the *cuda* directory in the Digraph3 resources an experimental *cudaDigraphs.py* module which uses *numpy* and NVIDIA GPU resources for measuring the speeding up of the element wise computation of the dual, converse and codual transforms and the fusion operation for large (order >= 10000) :code:`cIntegerOurankingDigraphs.IntegerBipolarOutrankingDigraph` objects.
+
+.. [54] The acquisition and operation of the EuroHPC supercomputer is funded jointly by the EuroHPC Joint Undertaking, through the European Union's Connecting Europe Facility and the Horizon 2020 research and innovation programme, as well as the Grand Duché du Luxembourg.
 
 ..  LocalWords:  randomDigraph Determinateness valuationdomain py png
 ..  LocalWords:  notGamma tutorialDigraph shortName func irreflexive

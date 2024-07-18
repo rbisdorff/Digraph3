@@ -1182,6 +1182,10 @@
 <li class="toctree-l4"><a class="reference internal" href="#cSparseIntegerOutrankingDigraphs.cQuantilesRankingDigraph"><code class="docutils literal notranslate"><span class="pre">cQuantilesRankingDigraph</span></code></a></li>
 </ul>
 </li>
+<li class="toctree-l3"><a class="reference internal" href="#cquantilesrankingdigraphs-module">2.23.6. cQuantilesRankingDigraphs module</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#cQuantilesRankingDigraphs.cQuantilesRankingDigraph"><code class="docutils literal notranslate"><span class="pre">cQuantilesRankingDigraph</span></code></a></li>
+</ul>
+</li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="#indices-and-tables">2.24. Indices and tables</a></li>
@@ -1486,6 +1490,12 @@ and bipolar outranking digraphs (order &gt; 1000).</p>
 </dd>
 <dt><a class="reference internal" href="#csparseintegeroutrankingdigraphs-label"><span class="std std-ref">cSparseIntegerOutrankingDigraphs module</span></a></dt><dd><p>Integer and float valued C version of sparse outranking digraphs.</p>
 </dd>
+</dl>
+</dd>
+<dt><a class="reference internal" href="#cquantilesrankingdigraphs-label"><span class="std std-ref">cQuantilesRankingDigraphs module</span></a></dt><dd><blockquote>
+<div><p>Integer and float valued C version of sparse outranking digraphs.</p>
+</div></blockquote>
+<dl class="simple">
 <dt><a class="reference internal" href="#cnpbipolardigraphs-label"><span class="std std-ref">cnpBipolarDigraphs module</span></a></dt><dd><p>New numpy integer arrays implemented bipolar outrankingDigraphs.</p>
 </dd>
 </dl>
@@ -12004,7 +12014,9 @@ Rubis Solver computed from a stored XMCDA2 encoded performance tableau.</p>
 </dd>
 <dt><a class="reference internal" href="#cintegersortingdigraphs-label"><span class="std std-ref">cIntegerSortingDigraphs module</span></a></dt><dd><p>Integer and float valued C version of the <a class="reference internal" href="#sortingDigraphs.QuantilesSortingDigraph" title="sortingDigraphs.QuantilesSortingDigraph"><code class="xref py py-class docutils literal notranslate"><span class="pre">QuantilesSortingDigraph</span></code></a> class</p>
 </dd>
-<dt><a class="reference internal" href="#csparseintegeroutrankingdigraphs-label"><span class="std std-ref">cSparseIntegerOutrankingDigraphs module</span></a></dt><dd><p>Integer and float valued C version of sparse outranking digraphs.</p>
+<dt><a class="reference internal" href="#csparseintegeroutrankingdigraphs-label"><span class="std std-ref">cSparseIntegerOutrankingDigraphs module</span></a></dt><dd><p>Integer and float valued C version of sparse outranking digraphs</p>
+</dd>
+<dt><a class="reference internal" href="#cquantilesrankingdigraphs-label"><span class="std std-ref">cQuantilesRankingDigraphs module</span></a></dt><dd><p>Specialised integer and float valued <code class="xref py py-class docutils literal notranslate"><span class="pre">cQuantilesRankingDigraph</span></code> class for very tackling the ranking of several millions of multicriteria performance records</p>
 </dd>
 <dt><a class="reference internal" href="#cnpbipolardigraphs-label"><span class="std std-ref">cnpBipolarDigraphs module</span></a></dt><dd><p>New C version of bipolar outranking digraphs with a numpy integer array implemented characteristic valuation.</p>
 </dd>
@@ -14065,6 +14077,265 @@ Components are stored in an ordered dictionary.</p>
 </dd></dl>
 
 <p>Back to the <a class="reference internal" href="#contents-table-label"><span class="std std-ref">Table of Contents</span></a></p>
+<hr class="docutils" />
+</section>
+<section id="cquantilesrankingdigraphs-module">
+<span id="cquantilesrankingdigraphs-label"></span><h3><span class="section-number">2.23.6. </span>cQuantilesRankingDigraphs module<a class="headerlink" href="#cquantilesrankingdigraphs-module" title="Permalink to this heading"></a></h3>
+<p><strong>Inheritance Diagram</strong></p>
+<span class="target" id="module-cQuantilesRankingDigraphs"></span><p>c-Extension for the Digraph3 collection.
+Module cQuantilesRankingDigraphs.py is a c-compiled partial version of the corresponding <a class="reference internal" href="#module-sparseOutrankingDigraphs" title="sparseOutrankingDigraphs"><code class="xref py py-mod docutils literal notranslate"><span class="pre">sparseOutrankingDigraphs</span></code></a> module for handling quantiles ranking digraphs of very large order.</p>
+<p>Copyright (C) 2024  Raymond Bisdorff</p>
+<dl class="py class">
+<dt class="sig sig-object py" id="cQuantilesRankingDigraphs.cQuantilesRankingDigraph">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">cQuantilesRankingDigraphs.</span></span><span class="sig-name descname"><span class="pre">cQuantilesRankingDigraph</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">argPerfTab</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">quantiles</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">4</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">quantilesOrderingStrategy</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'optimal'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">LowerClosed</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">componentRankingRule</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'Copeland'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">minimalComponentSize</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">Threading</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">startMethod</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">tempDir</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'.'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">nbrOfSorters</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">nbrOfRankers</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">save2File</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">CopyPerfTab</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">Comments</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">Debug</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">Configuring</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cQuantilesRankingDigraphs.cQuantilesRankingDigraph" title="Permalink to this definition"></a></dt>
+<dd><p>Cythonized version of the cQuantlesRanking class for the multiprocessing implementation of multiple criteria quantiles ranking of very big performance tableaux - &gt; 100000. This version was developped on the Luxembourg national supercomputer MeluXina (<a class="reference external" href="https://docs.lxp.lu/">https://docs.lxp.lu/</a>). The author gratefully acknowledges the LuxProvide teams for granting access to the HPC resources and for their kind operational support.</p>
+<dl class="simple">
+<dt><em>Parameters</em>:</dt><dd><ul class="simple">
+<li><p>argPerfTab, a cPerformanceTableau object or a file name of such a stored object,</p></li>
+<li><p>quantiles=4, higher values may give more convincing ranking results.</p></li>
+<li><p>quantilesOrderingStrategy= {“optimal” (default) | ‘average’},</p></li>
+<li><p>LowerClosed=False,</p></li>
+<li><p>componentRankingRule={‘Copeland’ (default) | ‘NetFlows’ },</p></li>
+<li><p>minimalComponentSize=1, higher values my result in lower run times and better ranking results,</p></li>
+<li><p>Threading=False,</p></li>
+<li><p>startMethod={ ‘spawn’ (default) | ‘forkserver’ | ‘fork’ },</p></li>
+<li><p>tempDir= ‘./’ by default,</p></li>
+<li><p>nbrOfSorters=cpu_count() by default,</p></li>
+<li><p>nbrOfRankers=nbrOfSorters by default</p></li>
+<li><p>save2File=None: allows to save a short object description,</p></li>
+<li><p>CopyPerfTab=False: If <em>True</em> allows to show coloured performance heatmaps of the ranking results,</p></li>
+<li><p>Comments=False,</p></li>
+<li><p>Debug=False.</p></li>
+</ul>
+</dd>
+</dl>
+<p>By default, the number of quantiles q is set to quartiles. However, the ranking quality gets better with a finer grained quantiles decomposition.</p>
+<p>For other parameters settings, see the corresponding <a class="reference internal" href="#sparseOutrankingDigraphs.PreRankedOutrankingDigraph" title="sparseOutrankingDigraphs.PreRankedOutrankingDigraph"><code class="xref py py-class docutils literal notranslate"><span class="pre">sparseOutrankingDigraphs.PreRankedOutrankingDigraph</span></code></a> class.</p>
+<p>Example Python session:</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">cRandPerfTabs</span> <span class="kn">import</span> <span class="o">*</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">t</span> <span class="o">=</span> <span class="n">cRandomPerformanceTableau</span><span class="p">(</span><span class="n">numberOfActions</span><span class="o">=</span><span class="mi">1000</span><span class="p">,</span><span class="n">seed</span><span class="o">=</span><span class="mi">100</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">cQuantilesRankingDigraphs</span> <span class="kn">import</span> <span class="o">*</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">qr</span> <span class="o">=</span> <span class="n">cQuantilesRankingDigraph</span><span class="p">(</span><span class="n">t</span><span class="p">,</span><span class="n">quantiles</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span><span class="n">Threading</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">qr</span>
+<span class="go">*----- Object instance description --------------*</span>
+<span class="go">Instance class     : cQuantilesRankingDigraph</span>
+<span class="go">Instance name      : cRandomperftab_mp</span>
+<span class="go">Actions            : 1000</span>
+<span class="go">Criteria           : 7</span>
+<span class="go">Sorting by         : 5-Tiling</span>
+<span class="go">Ordering strategy  : optimal</span>
+<span class="go">Ranking rule       : Copeland</span>
+<span class="go">Components         : 166</span>
+<span class="go">Minimal order      : 1</span>
+<span class="go">Maximal order      : 47</span>
+<span class="go">Average order      : 6.0</span>
+<span class="go">fill rate          : 1.625%</span>
+<span class="go">Attributes         : [&#39;runTimes&#39;, &#39;name&#39;, &#39;actions&#39;, &#39;order&#39;, </span>
+<span class="go">                      &#39;dimension&#39;, &#39;sortingParameters&#39;, &#39;nbrOfSorters&#39;, </span>
+<span class="go">                      &#39;startMethod&#39;, &#39;valuationdomain&#39;, &#39;profiles&#39;, </span>
+<span class="go">                      &#39;categories&#39;, &#39;sorting&#39;, &#39;minimalComponentSize&#39;, </span>
+<span class="go">                      &#39;decomposition&#39;, &#39;nbrComponents&#39;, &#39;nd&#39;, </span>
+<span class="go">                      &#39;nbrOfRankers&#39;, &#39;components&#39;, &#39;fillRate&#39;, </span>
+<span class="go">                      &#39;maximalComponentSize&#39;, &#39;componentRankingRule&#39;, </span>
+<span class="go">                      &#39;boostedRanking&#39;]</span>
+<span class="go">----  Constructor run times (in sec.) ----</span>
+<span class="go">Sorting threads    : 8</span>
+<span class="go">Ranking threads    : 8</span>
+<span class="go">StartMethod        : spawn</span>
+<span class="go">Total time         : 0.25518</span>
+<span class="go">Data input         : 0.00003</span>
+<span class="go">QuantilesSorting   : 0.07712</span>
+<span class="go">Preordering        : 0.00356</span>
+<span class="go">Components ranking : 0.17355</span>
+</pre></div>
+</div>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">bg</span><span class="o">.</span><span class="n">boostedRanking</span><span class="p">[:</span><span class="mi">10</span><span class="p">],</span><span class="s1">&#39; ... &#39;</span><span class="p">,</span><span class="n">bg</span><span class="o">.</span><span class="n">boostedRanking</span><span class="p">[</span><span class="o">-</span><span class="mi">10</span><span class="p">:]</span> <span class="p">)</span>
+<span class="go"> [131, 488, 551, 75, 446, 663, 245, 364, 250, 348]  </span>
+<span class="go">  ...  </span>
+<span class="go"> [825, 145, 955, 276, 621, 444, 54, 55, 898, 666]</span>
+</pre></div>
+</div>
+<dl class="py method">
+<dt class="sig sig-object py" id="cQuantilesRankingDigraphs.cQuantilesRankingDigraph.computeActionCategories">
+<span class="sig-name descname"><span class="pre">computeActionCategories</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">action</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">Show</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">Debug</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">Comments</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">Threading</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">startMethod</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">nbrOfCPUs</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cQuantilesRankingDigraphs.cQuantilesRankingDigraph.computeActionCategories" title="Permalink to this definition"></a></dt>
+<dd><dl class="simple">
+<dt><em>Parameters</em>:</dt><dd><ul class="simple">
+<li><p>action (int key),</p></li>
+<li><p>Show=False,</p></li>
+<li><p>Debug=False,</p></li>
+<li><p>Comments=False,</p></li>
+<li><p>Threading=False,</p></li>
+<li><p>startMethod=’spawn’</p></li>
+<li><p>nbrOfCPUs=1.</p></li>
+</ul>
+</dd>
+</dl>
+<p>Renders the union of categories in which the given action is sorted positively or null into.
+Returns a tuple : action, lowest category key, highest category key, membership credibility !</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cQuantilesRankingDigraphs.cQuantilesRankingDigraph.computeCriterion2RankingCorrelation">
+<span class="sig-name descname"><span class="pre">computeCriterion2RankingCorrelation</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">criterion</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">Threading</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">nbrOfCPUs</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">startMethod</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">Debug</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">Comments</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cQuantilesRankingDigraphs.cQuantilesRankingDigraph.computeCriterion2RankingCorrelation" title="Permalink to this definition"></a></dt>
+<dd><dl class="simple">
+<dt><em>Parameters</em>:</dt><dd><ul class="simple">
+<li><p>criterion,</p></li>
+<li><p>Threading=False,</p></li>
+<li><p>nbrOfCPUs=1,</p></li>
+<li><p>Debug=False,</p></li>
+<li><p>Comments=False.</p></li>
+</ul>
+</dd>
+</dl>
+<p>Renders the ordinal correlation coefficient between
+the global outranking and the marginal criterion relation.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cQuantilesRankingDigraphs.cQuantilesRankingDigraph.computeDeterminateness">
+<span class="sig-name descname"><span class="pre">computeDeterminateness</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">InPercent</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cQuantilesRankingDigraphs.cQuantilesRankingDigraph.computeDeterminateness" title="Permalink to this definition"></a></dt>
+<dd><dl class="simple">
+<dt><em>Parameter</em>:</dt><dd><ul class="simple">
+<li><p>InPercent=True.</p></li>
+</ul>
+</dd>
+</dl>
+<p>Computes the Kendalll distance in % of self
+with the all median valued (indeterminate) digraph.</p>
+<p>deter = (sum_{x,y in X} abs[r(xSy) - Med])/(oder*order-1)</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cQuantilesRankingDigraphs.cQuantilesRankingDigraph.computeMarginalVersusGlobalOutrankingCorrelations">
+<span class="sig-name descname"><span class="pre">computeMarginalVersusGlobalOutrankingCorrelations</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">Sorted</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ValuedCorrelation</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">Threading</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">startMethod</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">nbrCores</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">Comments</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cQuantilesRankingDigraphs.cQuantilesRankingDigraph.computeMarginalVersusGlobalOutrankingCorrelations" title="Permalink to this definition"></a></dt>
+<dd><dl class="simple">
+<dt><em>Parameters</em>:</dt><dd><ul class="simple">
+<li><p>Sorted=True,</p></li>
+<li><p>ValuedCorrelation=False,</p></li>
+<li><p>Threading=False,</p></li>
+<li><p>nbrCores=None,</p></li>
+<li><p>Comments=False.</p></li>
+</ul>
+</dd>
+</dl>
+<p>Method for computing correlations between each individual criterion relation with the corresponding
+global outranking relation.</p>
+<p>Returns a list of tuples (correlation,criterionKey) sorted by default in decreasing order of the correlation.</p>
+<p>If Threading is True, a multiprocessing Pool class is used with a parallel equivalent of the built-in map function.</p>
+<p>If nbrCores is not set, the os.cpu_count() function is used to determine the number of
+available cores.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cQuantilesRankingDigraphs.cQuantilesRankingDigraph.relation">
+<span class="sig-name descname"><span class="pre">relation</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">x</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">y</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cQuantilesRankingDigraphs.cQuantilesRankingDigraph.relation" title="Permalink to this definition"></a></dt>
+<dd><dl class="simple">
+<dt><em>Parameters</em>:</dt><dd><ul class="simple">
+<li><p>x (int action key),</p></li>
+<li><p>y (int action key).</p></li>
+</ul>
+</dd>
+</dl>
+<p>Dynamic construction of the global outranking characteristic function <em>r(x S y)</em>.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cQuantilesRankingDigraphs.cQuantilesRankingDigraph.showActions">
+<span class="sig-name descname"><span class="pre">showActions</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#cQuantilesRankingDigraphs.cQuantilesRankingDigraph.showActions" title="Permalink to this definition"></a></dt>
+<dd><p>Prints out the actions disctionary.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cQuantilesRankingDigraphs.cQuantilesRankingDigraph.showActionsSortingResult">
+<span class="sig-name descname"><span class="pre">showActionsSortingResult</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">actionsSubset</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cQuantilesRankingDigraphs.cQuantilesRankingDigraph.showActionsSortingResult" title="Permalink to this definition"></a></dt>
+<dd><dl class="simple">
+<dt><em>Parameter</em>:</dt><dd><ul class="simple">
+<li><p>actionsSubset=None.</p></li>
+</ul>
+</dd>
+</dl>
+<p>Shows the quantiles sorting result all (default) of a subset of the decision actions.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cQuantilesRankingDigraphs.cQuantilesRankingDigraph.showComponents">
+<span class="sig-name descname"><span class="pre">showComponents</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">direction</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'increasing'</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cQuantilesRankingDigraphs.cQuantilesRankingDigraph.showComponents" title="Permalink to this definition"></a></dt>
+<dd><dl class="simple">
+<dt><em>Parameter</em>:</dt><dd><ul class="simple">
+<li><p>direction=’increasing’.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cQuantilesRankingDigraphs.cQuantilesRankingDigraph.showCriteria">
+<span class="sig-name descname"><span class="pre">showCriteria</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">IntegerWeights</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">Debug</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cQuantilesRankingDigraphs.cQuantilesRankingDigraph.showCriteria" title="Permalink to this definition"></a></dt>
+<dd><dl class="simple">
+<dt><em>Parameters</em>:</dt><dd><ul class="simple">
+<li><p>IntegerWeights=False,</p></li>
+<li><p>Debug=False.</p></li>
+</ul>
+</dd>
+</dl>
+<p>print Criteria with thresholds and weights.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cQuantilesRankingDigraphs.cQuantilesRankingDigraph.showDecomposition">
+<span class="sig-name descname"><span class="pre">showDecomposition</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">direction</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'decreasing'</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cQuantilesRankingDigraphs.cQuantilesRankingDigraph.showDecomposition" title="Permalink to this definition"></a></dt>
+<dd><dl class="simple">
+<dt><em>Parameter</em>:</dt><dd><ul class="simple">
+<li><p>direction=’increasing’.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cQuantilesRankingDigraphs.cQuantilesRankingDigraph.showMarginalVersusGlobalOutrankingCorrelation">
+<span class="sig-name descname"><span class="pre">showMarginalVersusGlobalOutrankingCorrelation</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">Sorted</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">Threading</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">nbrOfCPUs</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">startMethod</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">Comments</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cQuantilesRankingDigraphs.cQuantilesRankingDigraph.showMarginalVersusGlobalOutrankingCorrelation" title="Permalink to this definition"></a></dt>
+<dd><dl class="simple">
+<dt><em>Parameters</em>:</dt><dd><ul class="simple">
+<li><p>Sorted=True,</p></li>
+<li><p>Threading=False,</p></li>
+<li><p>nbrOfCPUs=1,</p></li>
+<li><p>Comments=True.</p></li>
+</ul>
+</dd>
+</dl>
+<p>Show method for computeCriterionCorrelation results.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cQuantilesRankingDigraphs.cQuantilesRankingDigraph.showRelationTable">
+<span class="sig-name descname"><span class="pre">showRelationTable</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">IntegerValues</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">compKeys</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cQuantilesRankingDigraphs.cQuantilesRankingDigraph.showRelationTable" title="Permalink to this definition"></a></dt>
+<dd><dl class="simple">
+<dt><em>Parameters</em>:</dt><dd><ul class="simple">
+<li><p>IntegerValues=True,</p></li>
+<li><p>compKeys=None.</p></li>
+</ul>
+</dd>
+</dl>
+<p>Specialized for showing the quantiles decomposed relation table.
+Components are stored in an ordered dictionary.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="cQuantilesRankingDigraphs.cQuantilesRankingDigraph.showShort">
+<span class="sig-name descname"><span class="pre">showShort</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">fileName</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">WithFileSize</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cQuantilesRankingDigraphs.cQuantilesRankingDigraph.showShort" title="Permalink to this definition"></a></dt>
+<dd><dl class="simple">
+<dt><em>Parameter</em>:</dt><dd><ul class="simple">
+<li><p>WithFileSize=False.</p></li>
+</ul>
+</dd>
+</dl>
+<p>Default (__repr__) presentation method for big outranking digraphs instances:</p>
+</dd></dl>
+
+</dd></dl>
+
+<p>Back to the <a class="reference internal" href="#contents-table-label"><span class="std std-ref">Table of Contents</span></a></p>
 </section>
 </section>
 <hr class="docutils" />
@@ -14090,7 +14361,7 @@ Components are stored in an ordered dictionary.</p>
 
   <div role="contentinfo">
     <p>&#169; Copyright 2012-2024, Raymond Bisdorff.
-      <span class="lastupdated">Last updated on Jul 15, 2024.
+      <span class="lastupdated">Last updated on Jul 18, 2024.
       </span></p>
   </div>
 

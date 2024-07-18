@@ -253,6 +253,9 @@ Handling big data
      :ref:`cSparseIntegerOutrankingDigraphs-label`
 	  Integer and float valued C version of sparse outranking digraphs.
 
+  :ref:`cQuantilesRankingDigraphs-label`
+	  Integer and float valued C version of sparse outranking digraphs.
+
      :ref:`cnpBipolarDigraphs-label`
 	  New numpy integer arrays implemented bipolar outrankingDigraphs.
 
@@ -714,7 +717,10 @@ The following modules are compiled C-extensions using the Cython pre-compiler. N
 	  Integer and float valued C version of the :py:class:`~sortingDigraphs.QuantilesSortingDigraph` class
 
      :ref:`cSparseIntegerOutrankingDigraphs-label`
-	  Integer and float valued C version of sparse outranking digraphs.
+	  Integer and float valued C version of sparse outranking digraphs
+
+     :ref:`cQuantilesRankingDigraphs-label`
+	  Specialised integer and float valued :py:class:`cQuantilesRankingDigraph` class for very tackling the ranking of several millions of multicriteria performance records
 
      :ref:`cnpBipolarDigraphs-label`
 	  New C version of bipolar outranking digraphs with a numpy integer array implemented characteristic valuation.
@@ -819,6 +825,28 @@ cSparseIntegerOutrankingDigraphs module
 Back to the :ref:`Table of Contents <Contents-Table-label>`
 
 -------------
+
+.. _cQuantilesRankingDigraphs-label:
+
+cQuantilesRankingDigraphs module
+.......................................
+
+**Inheritance Diagram**
+
+..
+    .. inheritance-diagram:: cQuantilesRankingDigraphs
+       :top-classes: cQuantilesRankingDigraphs.cQuantilesRankingDigraph
+       :parts: 1
+
+.. automodule:: cQuantilesRankingDigraphs
+   :member-order: alphabetical
+   :no-inherited-members:
+   :members:
+
+Back to the :ref:`Table of Contents <Contents-Table-label>`
+
+-------------
+
 
 Indices and tables
 ------------------
