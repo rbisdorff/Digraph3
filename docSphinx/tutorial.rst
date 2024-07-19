@@ -8848,7 +8848,9 @@ Below is shown an example MeluXina session for ranking 500000 incommensurable 3-
 .. code-block:: bash
 
    [u101979@mel4017 p200541]$ python3
-   Python 3.11.3 (main, Nov 13 2023, 00:27:08) [GCC 12.3.0] on linux
+   (MyPy3124) [u101979@mel4005 Digraph3]$ python3
+   Python 3.12.4 (main, Jul 19 2024, 15:25:25)
+   [GCC 8.5.0 20210514 (Red Hat 8.5.0-20)] on linux
    Type "help", "copyright", "credits" or "license" for more information.
    >>>
     
