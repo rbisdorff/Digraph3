@@ -78,7 +78,13 @@
 
        * :ref:`Sparse bipolar-valued outranking digraphs <SparseOutranking-Tutorial-label>`
        * :ref:`Using the Digraph3 multiprocessing resources <Multiprocessing-Tutorial-label>`
-       * :ref:`HPC ranking of big performance tableaux <HPC-Tutorial-label>`
+       * :ref:`Ranking of big performance tableaux <HPC-Tutorial-label>`
+
+* :ref:`HPC-Ranking of big sparse outranking Digraphs <HPC-Ranking-Tutorial-label>`
+
+       * :ref:`On a common 2023 desktop computer <HPC-CommonDesktop-Tutorial-label>`
+       * :ref:`On the UNILU HPC plaform <HPC-UNILU-Platform-Tutorial-label>`
+       * :ref:`On the EUROHPC MeluXina supercomputer <HPC-Meluxina-Tutorial-label>`	 
      
    * :ref:`Moving on to undirected graphs <Moving-To-Graphs-label>`
      
@@ -8112,8 +8118,8 @@ Back to :ref:`Content Table <Tutorial-label>`
 
 .. _HPC-Tutorial-label:
 
-HPC ranking with big outranking digraphs
-----------------------------------------
+On ranking big outranking digraphs
+----------------------------------
 
 .. contents:: 
 	:depth: 1
@@ -8531,12 +8537,23 @@ We observe an even more considerably less voluminous memory occupation: 208kB co
 
 The best ranking correlation with the pairwise outranking situations (+0.75) is naturally given when we apply the *Copeland* rule to the complete outranking digraph. When we apply the same rule to the sparse 4-tiled outranking digraph, we get a correlation of +0.72, and when applying the *Copeland* rule to the optimised 4-tiled digraph, we still obtain a correlation of +0.71. These results actually depend on the number of quantiles we use as well as on the given model of random performance tableau. In case of Random3ObjectivesPerformanceTableau instances, for instance, we would get in a similar setting a complete outranking correlation of +0.86, a sparse 4-tiling correlation of +0.82, and an optimzed sparse 4-tiling correlation of +0.81.
 
-HPC quantiles ranking records
-`````````````````````````````
+-----------
+
+.. _HPC-Ranking-Tutorial-label:
+
+HPC-Ranking of Big Sparse Outranking Digraphs
+=============================================
 
 Following from the separability property of the *q*-tiles sorting of each action into each *q*-tiles class, the *q*-sorting algorithm may be safely split into as much threads as are multiple processing cores available in parallel. Furthermore, the ranking procedure being local to each diagonal component, these procedures may as well be safely processed in parallel threads on each component restricted outrankingdigraph. Below some examples on different type of computers.
 
-**On a common 2023 desktop computer**
+.. contents:: 
+	:depth: 1
+	:local:
+	   
+.. _HPC-CommonDesktop-Tutorial-label:
+
+On a common 2023 desktop computer
+---------------------------------
 
 On a common 2023 Terra desktop computer, equipped with a 11th Gen Intel® Core™ i5-11400 × 12 processor and 16.0 GiB of CPU memory, working under Ubuntu 23.10 we may rank a :py:class:`~cRandPerfTabs.cRandom3ObjectivesPerformanceTableau` instance of **five hundred thousand** performance records in about 104 seconds with about 48 seconds for the quantiles sorting step and 55 seconds for the local components ranking step (see below Lines 42-).
 
@@ -8601,7 +8618,10 @@ On a common 2023 Terra desktop computer, equipped with a 11th Gen Intel® Core�
 
 When ordering the 146579 components resulting from a 7-tiling sorting with the *optimal* quantiles ordering strategy, the order of a local component is limited to a maximal size of 115 actions which results in a total pairwise adjacency table fill rate of 0.002% (see Lines 29-33).
 
-**On a HPC platform in Spring 2018**
+.. _HPC-UNILU-Platform-Tutorial-label:
+
+On the UNILU-HPC platform in Spring 2018
+----------------------------------------
 
 Bigger performance tableaux may definitely be ranked with a larger *cpu_count()*. We were using therefore in 2018 the HPC Platform of the University of Luxembourg (https://hpc.uni.lu/). The following run times for very big quantiles ranking problems of several millions of multicriteria performance records could be achieved both:
 
@@ -8800,7 +8820,10 @@ Restricted to these ten best-ranked alternatives, the *Copeland*, the *NetFlows*
 
    It is therefore *important* to always keep in mind that, based on pairwise outranking situations, there **does not exist** any **unique optimal ranking**; especially when we face such big data problems. Changing the number of quantiles, the component ranking rule, the optimised quantile ordering strategy, all this will indeed produce, sometimes even substantially, diverse global ranking results.
 
-**On the MeluXina EUROHPC supercomputer** [54]_
+.. _HPC-Meluxina-Tutorial-label:
+
+On the MeluXina EUROHPC supercomputer [54]_
+-------------------------------------------
 
 Summer 2024, the author was granted the opportunity to use the large memory HPC resources of the MeluXina EuroHPC supercomputer [55]_  (https://www.luxprovide.lu/meluxina/). Nodes on this platform offer a large RAM for particularly demanding workloads. Each large memory node is composed of 2 AMD Rome CPUs (64 core @ 2.6 GHz, 256HT cores total), has 4 TB of memory (4096 GB) and 1.92 TB of local storage.
 
@@ -8820,12 +8843,78 @@ Following timings could be achieved with a specially designed *cQuantilesRanking
 
 One million records could be ranked with 64 sorting and 64 ranking multiprocessing threads in about 69 seconds. The quantiles sorting step is based on 6-tiling. Three million records could be ranked with 128 sorters and 64 rankers in 4 min. and 20 sec. and the quantiles step step is here based on 7-tiling. With 28 sorters and 84 rankers, up to five million records could be 7-tiled and ranked in 8 min. and 35 sec.
 
-.. The kind support of the *Faculty of Science Technology and Medecine* of the *University of Luxembourg* (https://www.uni.lu/fstm-en/) and of *LUXPROVIDE* (https://www.luxprovide.lu/) is gratefully acknowledged.
+Below is shown an example MeluXina session for ranking 500000 incommensurable 3-objectives performance records.
+
+.. code-block:: bash
+
+   [u101979@mel4017 p200541]$ python3
+   Python 3.11.3 (main, Nov 13 2023, 00:27:08) [GCC 12.3.0] on linux
+   Type "help", "copyright", "credits" or "license" for more information.
+   >>>
+    
+.. code-block:: pycon
+   :linenos:
+   :emphasize-lines: 26,28,31,35,45-
+
+   >>> from cRandPerfTabs import\
+   ...      cRandom3ObjectivesPerformanceTableau as cR3ObjPT
+   >>> pt = cR3ObjPT(numberOfActions=500000,
+   ...              numberOfCriteria=21,
+   ...              weightDistribution='equiobjectives',
+   ...              commonScale = (0.0,1000.0),
+   ...              commonThresholds = [(1.5,0.0),(2.0,0.0),(75.0,0.0)],
+   ...              commonMode = ['beta','variable',None],
+   ...              missingDataProbability=0.05,
+   ...              seed=16)
+   >>> import cQuantilesRankingDigraphs as QRD
+   >>> qr = QRD.cQuantilesRankingDigraph(pt,quantiles=7,
+   ...                    quantilesOrderingStrategy='optimal',
+   ...                    minimalComponentSize=1,
+   ...                    componentRankingRule='Copeland',
+   ...                    LowerClosed=False,
+   ...                    Threading=True,
+   ...                    nbrOfSorters=64,
+   ...                    nbrOfRankers=32,
+   ...                    tempDir='/tmp',
+   ...                    Comments=False)
+   >>> qr
+    *----- Object instance description --------------*
+    Instance class     : cQuantilesRankingDigraph
+    Instance name      : random3ObjectivesPerfTab_mp
+    Actions            : 500000
+    Criteria           : 21
+    Sorting by         : 7-Tiling
+    Ordering strategy  : optimal
+    Ranking rule       : Copeland
+    Components         : 146579
+    Minimal order      : 1
+    Maximal order      : 115
+    Average order      : 3.4
+    fill rate          : 0.002%
+    Attributes         : ['runTimes', 'name', 'actions', 'order',
+                          'dimension', 'sortingParameters', 'nbrOfSorters',
+                          'startMethod', 'valuationdomain', 'profiles',
+                          'categories', 'sorting', 'minimalComponentSize',
+                          'decomposition', 'nbrComponents', 'nd',
+                          'nbrOfRankers', 'components', 'fillRate',
+                          'maximalComponentSize', 'componentRankingRule',
+                          'boostedRanking']
+    ----  Constructor run times (in sec.) ----
+    Sorting threads    : 64
+    Ranking threads    : 32
+    StartMethod        : spawn
+    Total time         : 25.35695
+    Data input         : 0.00046
+    QuantilesSorting   : 11.07220
+    Preordering        : 2.04658
+    Components ranking : 11.92288
+
+With 64 sorting threads and 32 ranking threads, we need 25.4 sec., about 11 sec. for the 7-tiling step and about 12 sec. for ranking the 146579 components. The fill-rate 0f the sparse outranking digraph is 0.002%.
+
 
 Back to :ref:`Content Table <Tutorial-label>`
 
 ----------------
-
 
 .. _Moving-To-Graphs-label:
 
