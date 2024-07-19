@@ -8800,43 +8800,27 @@ Restricted to these ten best-ranked alternatives, the *Copeland*, the *NetFlows*
 
    It is therefore *important* to always keep in mind that, based on pairwise outranking situations, there **does not exist** any **unique optimal ranking**; especially when we face such big data problems. Changing the number of quantiles, the component ranking rule, the optimised quantile ordering strategy, all this will indeed produce, sometimes even substantially, diverse global ranking results.
 
-**On the MeluXina supercomputer**
+**On the MeluXina EUROHPC supercomputer** [54]_
 
-Summer 2024, the author was granted the opportunity to use the HPC resources of the MeluXina EuroHPC supercomputer [54]_  (https://www.luxprovide.lu/meluxina/).
+Summer 2024, the author was granted the opportunity to use the large memory HPC resources of the MeluXina EuroHPC supercomputer [55]_  (https://www.luxprovide.lu/meluxina/). Nodes on this platform offer a large RAM for particularly demanding workloads. Each large memory node is composed of 2 AMD Rome CPUs (64 core @ 2.6 GHz, 256HT cores total), has 4 TB of memory (4096 GB) and 1.92 TB of local storage.
 
-Following timings could be achieved with a specially designed *cQuantilesRankingDigraphs.pyx* module when ranking multiple incommensurable performance records assessed on 21 criteria serving 3 decision objecives, namely economic, environmental and societal aspects.
+Following timings could be achieved with a specially designed *cQuantilesRankingDigraphs.pyx* module when ranking multiple incommensurable performance records assessed on 21 criteria serving 3 decision objectives, namely economic, environmental and societal aspects (see table below).
 
-    * One million records could be ranked with 64 sorting and ranking multiprocessing threads in about 69 seconds. The quantiles sorting step is based on 6-tiling.
+.. table:: HPCMeluXina Ranking Performance Records (Summer 2024)
 
-    * Two million records could be ranked with 128 sorters and 64 rankers in 2 min and 44 sec. The quantiles sorting step is here based on 9-tiling.
+   ============ =========== ===== ========= ========= =========
+    outranking   relation     q     fill     nbr of     run    
+      order        size             rate(%)   cores     times   
+   ============ =========== ===== ========= ========= ========= 
+    1000000      1x10^12      6     0.001     64/64     1'09"  
+    2000000      4x10^12      9     0.001    128/64     2'43"   
+    3000000      9x10^12      7     0.001    128/64     4'20"
+    5000000      25x10^12     7     0.001    128/84     8'35"
+   ============ =========== ===== ========= ========= ========= 
 
-    * Three million records could be ranked with 128 sorters and 64 rankers in 4 min and 20 sec The quantiles sorting step is based on 7-tiling. 
+One million records could be ranked with 64 sorting and ranking multiprocessing threads in about 69 seconds. The quantiles sorting step is based on 6-tiling. Three million records could be ranked with 128 sorters and 64 rankers in 4 min. and 20 sec. and the quantiles sorting step is based on 7-tiling. With 28 sorters and 84 rankers, up to five million records could be 7-tiled and ranked in 8 min. and 35 sec.
 
-
-..
-    +----------------------+-----+-------- +---------+---------+
-    | outranking relation  |  q  |  fill   | nbr of  | run     |
-    |   order  |  size     |     | rate(%) | cores   | times   |
-    +==========+===========+=====+=========+=========+=========+
-    | 1000000  | 1x10^12   |  6  |  0.001  |  64/64  |    69"  |
-    +----------+-----------+-----+---------+---------+---------+
-    | 2000000  | 4x10^12   | 11  |  0.002  | 128/32  |   229"  |
-    +----------+-----------+-----+---------+---------+---------+
-
- 
-..
-    \begin{center}
-    \begin{tabular}{ c c c }
-    cell1 & cell2 & cell3 \\ 
-    cell4 & cell5 & cell6 \\  
-    cell7 & cell8 & cell9    
-    \end{tabular}
-    \end{center}
-
-
-
-
-to be written
+.. The kind support of the *Faculty of Science Technology and Medecine* of the *University of Luxembourg* (https://www.uni.lu/fstm-en/) and of *LUXPROVIDE* (https://www.luxprovide.lu/) is gratefully acknowledged.
 
 Back to :ref:`Content Table <Tutorial-label>`
 
@@ -10551,7 +10535,10 @@ Appendices
 
 .. [53] When tackling matrix computations it may be possible to further accelerate the computations with a potential GPU. The interested reader may find in the *cuda* directory in the Digraph3 resources an experimental *cudaDigraphs.py* module which uses *numpy* and NVIDIA GPU resources for measuring the speeding up of the element wise computation of the dual, converse and codual transforms and the fusion operation for large (order >= 10000) :code:`cIntegerOurankingDigraphs.IntegerBipolarOutrankingDigraph` objects.
 
-.. [54] The acquisition and operation of the EuroHPC supercomputer is funded jointly by the EuroHPC Joint Undertaking, through the European Union's Connecting Europe Facility and the Horizon 2020 research and innovation programme, as well as the Grand Duché du Luxembourg.
+.. [54] The kind support of the *Faculty of Science Technology and Medecine* of the *University of Luxembourg* (https://www.uni.lu/fstm-en/) and of *LUXPROVIDE* (https://www.luxprovide.lu/) is gratefully acknowledged.
+
+.. [55] The acquisition and operation of the EuroHPC supercomputer is funded jointly by the EuroHPC Joint Undertaking, through the European Union's Connecting Europe Facility and the Horizon 2020 research and innovation programme, as well as the Grand Duché du Luxembourg.
+
 
 ..  LocalWords:  randomDigraph Determinateness valuationdomain py png
 ..  LocalWords:  notGamma tutorialDigraph shortName func irreflexive
