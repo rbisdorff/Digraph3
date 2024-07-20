@@ -80,7 +80,7 @@
        * :ref:`Using the Digraph3 multiprocessing resources <Multiprocessing-Tutorial-label>`
        * :ref:`Ranking of big performance tableaux <HPC-Tutorial-label>`
 
-* :ref:`HPC-Ranking of big sparse outranking Digraphs <HPC-Ranking-Tutorial-label>`
+   * :ref:`HPC-Ranking of big sparse outranking Digraphs <HPC-Ranking-Tutorial-label>`
 
        * :ref:`On a common 2023 desktop computer <HPC-CommonDesktop-Tutorial-label>`
        * :ref:`On the UNILU HPC plaform <HPC-UNILU-Platform-Tutorial-label>`
@@ -8415,6 +8415,7 @@ For sparse outranking digraphs, the adjacency table is implemented as a dynamic 
           else:
 	      return Max
 
+
 Ranking big sets of decision alternatives
 `````````````````````````````````````````
 
@@ -8547,9 +8548,10 @@ HPC-Ranking of Big Sparse Outranking Digraphs
 Following from the separability property of the *q*-tiles sorting of each action into each *q*-tiles class, the *q*-sorting algorithm may be safely split into as much threads as are multiple processing cores available in parallel. Furthermore, the ranking procedure being local to each diagonal component, these procedures may as well be safely processed in parallel threads on each component restricted outrankingdigraph. Below some examples on different type of computers.
 
 .. contents:: 
-	:depth: 1
-	:local:
-	   
+   :depth: 1
+   :local:
+
+	
 .. _HPC-CommonDesktop-Tutorial-label:
 
 On a common 2023 desktop computer
@@ -8620,8 +8622,8 @@ When ordering the 146579 components resulting from a 7-tiling sorting with the *
 
 .. _HPC-UNILU-Platform-Tutorial-label:
 
-On the UNILU-HPC platform in Spring 2018
-----------------------------------------
+On the Uni.Lu HPC platform in Spring 2018
+-----------------------------------------
 
 Bigger performance tableaux may definitely be ranked with a larger *cpu_count()*. We were using therefore in 2018 the HPC Platform of the University of Luxembourg (https://hpc.uni.lu/). The following run times for very big quantiles ranking problems of several millions of multicriteria performance records could be achieved both:
 
@@ -8917,7 +8919,7 @@ With 64 sorting threads and 32 ranking threads, we need 25.4 sec., about 11 sec.
 
 Back to :ref:`Content Table <Tutorial-label>`
 
-----------------
+--------------------------------------
 
 .. _Moving-To-Graphs-label:
 
@@ -8927,8 +8929,8 @@ Moving on to undirected graphs
 This last part of the tutorials introduces Python resources for working with undirected graphs.
 
 .. contents:: 
-	:depth: 1
-	:local:
+   :depth: 1
+   :local:
 
 ------------------------
 
@@ -8938,8 +8940,8 @@ Working with the :py:mod:`graphs` module
 ----------------------------------------
 
 .. contents:: 
-	:depth: 2
-	:local:
+   :depth: 1
+   :local:
 
 .. only:: html
 	  
