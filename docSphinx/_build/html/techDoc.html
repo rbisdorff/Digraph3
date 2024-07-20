@@ -1490,12 +1490,8 @@ and bipolar outranking digraphs (order &gt; 1000).</p>
 </dd>
 <dt><a class="reference internal" href="#csparseintegeroutrankingdigraphs-label"><span class="std std-ref">cSparseIntegerOutrankingDigraphs module</span></a></dt><dd><p>Integer and float valued C version of sparse outranking digraphs.</p>
 </dd>
-</dl>
+<dt><a class="reference internal" href="#cquantilesrankingdigraphs-label"><span class="std std-ref">cQuantilesRankingDigraphs module</span></a></dt><dd><p>Integer and float valued C version of sparse outranking digraphs.</p>
 </dd>
-<dt><a class="reference internal" href="#cquantilesrankingdigraphs-label"><span class="std std-ref">cQuantilesRankingDigraphs module</span></a></dt><dd><blockquote>
-<div><p>Integer and float valued C version of sparse outranking digraphs.</p>
-</div></blockquote>
-<dl class="simple">
 <dt><a class="reference internal" href="#cnpbipolardigraphs-label"><span class="std std-ref">cnpBipolarDigraphs module</span></a></dt><dd><p>New numpy integer arrays implemented bipolar outrankingDigraphs.</p>
 </dd>
 </dl>
@@ -14081,14 +14077,19 @@ Components are stored in an ordered dictionary.</p>
 </section>
 <section id="cquantilesrankingdigraphs-module">
 <span id="cquantilesrankingdigraphs-label"></span><h3><span class="section-number">2.23.6. </span>cQuantilesRankingDigraphs module<a class="headerlink" href="#cquantilesrankingdigraphs-module" title="Permalink to this heading"></a></h3>
-<p><strong>Inheritance Diagram</strong></p>
 <span class="target" id="module-cQuantilesRankingDigraphs"></span><p>c-Extension for the Digraph3 collection.
 Module cQuantilesRankingDigraphs.py is a c-compiled partial version of the corresponding <a class="reference internal" href="#module-sparseOutrankingDigraphs" title="sparseOutrankingDigraphs"><code class="xref py py-mod docutils literal notranslate"><span class="pre">sparseOutrankingDigraphs</span></code></a> module for handling quantiles ranking digraphs of very large order.</p>
 <p>Copyright (C) 2024  Raymond Bisdorff</p>
 <dl class="py class">
 <dt class="sig sig-object py" id="cQuantilesRankingDigraphs.cQuantilesRankingDigraph">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">cQuantilesRankingDigraphs.</span></span><span class="sig-name descname"><span class="pre">cQuantilesRankingDigraph</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">argPerfTab</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">quantiles</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">4</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">quantilesOrderingStrategy</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'optimal'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">LowerClosed</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">componentRankingRule</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'Copeland'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">minimalComponentSize</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">Threading</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">startMethod</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">tempDir</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'.'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">nbrOfSorters</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">nbrOfRankers</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">save2File</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">CopyPerfTab</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">Comments</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">Debug</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">Configuring</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#cQuantilesRankingDigraphs.cQuantilesRankingDigraph" title="Permalink to this definition"></a></dt>
-<dd><p>Cythonized version of the cQuantlesRanking class for the multiprocessing implementation of multiple criteria quantiles ranking of very big performance tableaux - &gt; 100000. This version was developped on the Luxembourg national supercomputer MeluXina (<a class="reference external" href="https://docs.lxp.lu/">https://docs.lxp.lu/</a>). The author gratefully acknowledges the LuxProvide teams for granting access to the HPC resources and for their kind operational support.</p>
+<dd><p>Cythonized special version of the <em>cQuantlesRankingDigraph</em> class for the multiprocessing
+implementation of multiple criteria quantiles ranking of very big
+performance tableaux - &gt; 100000. This version was developped on
+the Luxembourg national EuroHPC supercomputer MeluXina
+(<a class="reference external" href="https://docs.lxp.lu/">https://docs.lxp.lu/</a>).</p>
+<p>The author gratefully acknowledges the <em>LuxProvide</em> teams for granting access to the
+HPC resources and for their kind operational support.</p>
 <dl class="simple">
 <dt><em>Parameters</em>:</dt><dd><ul class="simple">
 <li><p>argPerfTab, a cPerformanceTableau object or a file name of such a stored object,</p></li>

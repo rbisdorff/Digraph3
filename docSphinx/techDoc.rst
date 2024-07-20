@@ -253,7 +253,7 @@ Handling big data
      :ref:`cSparseIntegerOutrankingDigraphs-label`
 	  Integer and float valued C version of sparse outranking digraphs.
 
-  :ref:`cQuantilesRankingDigraphs-label`
+     :ref:`cQuantilesRankingDigraphs-label`
 	  Integer and float valued C version of sparse outranking digraphs.
 
      :ref:`cnpBipolarDigraphs-label`
@@ -829,9 +829,7 @@ Back to the :ref:`Table of Contents <Contents-Table-label>`
 .. _cQuantilesRankingDigraphs-label:
 
 cQuantilesRankingDigraphs module
-.......................................
-
-**Inheritance Diagram**
+................................
 
 ..
     .. inheritance-diagram:: cQuantilesRankingDigraphs

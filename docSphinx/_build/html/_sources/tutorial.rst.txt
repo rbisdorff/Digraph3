@@ -80,7 +80,7 @@
        * :ref:`Using the Digraph3 multiprocessing resources <Multiprocessing-Tutorial-label>`
        * :ref:`Ranking of big performance tableaux <HPC-Tutorial-label>`
 
-   * :ref:`HPC-Ranking of big sparse outranking Digraphs <HPC-Ranking-Tutorial-label>`
+   * :ref:`HPC-Ranking of big sparse outranking digraphs <HPC-Ranking-Tutorial-label>`
 
        * :ref:`On a common 2023 desktop computer <HPC-CommonDesktop-Tutorial-label>`
        * :ref:`On the UNILU HPC plaform <HPC-UNILU-Platform-Tutorial-label>`
@@ -8824,7 +8824,7 @@ Restricted to these ten best-ranked alternatives, the *Copeland*, the *NetFlows*
 
 .. _HPC-Meluxina-Tutorial-label:
 
-On the MeluXina EUROHPC supercomputer [54]_
+On the MeluXina EuroHPC supercomputer [54]_
 -------------------------------------------
 
 Summer 2024, the author was granted the opportunity to use the large memory HPC resources of the MeluXina EuroHPC supercomputer [55]_  (https://www.luxprovide.lu/meluxina/). Large memory nodes on this HPC platform offer a large RAM for particularly demanding workloads. Each large memory node is composed of 2 AMD Rome CPUs (64 core @ 2.6 GHz, 256HT cores total), has 4 TB of memory (4096 GB) and 1.92 TB of local storage.
@@ -8844,14 +8844,13 @@ Following timings could be achieved with a specially designed *cQuantilesRanking
     6000000      36x10^12     9     0.001     128       128      12'11" 
    ============ =========== ===== ========= ========= ========= ========
 
-One million records could be ranked with 64 sorting and 64 ranking multiprocessing threads in about 69 seconds. The quantiles sorting step is based on 6-tiling. Three million records could be ranked with 128 sorters and 64 rankers in 4 min. and 20 sec. and the quantiles step step is here based on 7-tiling. With 28 sorters and 84 rankers, up to five million records could be 7-tiled and ranked in 8 min. and 35 sec.
+One million records could be ranked with 64 sorting and 64 ranking multiprocessing threads in about 69 seconds. The quantiles sorting step is based on 6-tiling. Three million records could be ranked with 128 sorters and 64 rankers in 4 min. and 20 sec. and the quantiles sorting step is here based on 7-tiling. With 28 sorters and 84 rankers, up to five million records could be 7-tiled and ranked in 8 min. and 35 sec.
 
 Below is shown an example MeluXina session for ranking 500000 incommensurable 3-objectives performance records.
 
 .. code-block:: bash
 
-   [u101979@mel4017 p200541]$ python3
-   (MyPy3124) [u101979@mel4005 Digraph3]$ python3
+   (MyPy3124) [userRB@mel4005 Digraph3]$ python3
    Python 3.12.4 (main, Jul 19 2024, 15:25:25)
    [GCC 8.5.0 20210514 (Red Hat 8.5.0-20)] on linux
    Type "help", "copyright", "credits" or "license" for more information.
@@ -8914,7 +8913,7 @@ Below is shown an example MeluXina session for ranking 500000 incommensurable 3-
     Preordering        : 2.04658
     Components ranking : 11.92288
 
-With 64 sorting threads and 32 ranking threads, we need 25.4 sec., about 11 sec. for the 7-tiling step and about 12 sec. for ranking the 146579 components. The fill-rate 0f the sparse outranking digraph is 0.002%.
+With 64 sorting threads and 32 ranking threads, we need 25.4 sec., about 11 sec. for the 7-tiling step and about 12 sec. for ranking the 146579 components. The fill-rate of the resulting sparse outranking digraph is 0.002%.
 
 
 Back to :ref:`Content Table <Tutorial-label>`

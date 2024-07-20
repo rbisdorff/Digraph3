@@ -238,7 +238,7 @@
 <li class="toctree-l2"><a class="reference internal" href="#hpc-ranking-of-big-sparse-outranking-digraphs">1.6. HPC-Ranking of Big Sparse Outranking Digraphs</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="#on-a-common-2023-desktop-computer">1.6.1. On a common 2023 desktop computer</a></li>
 <li class="toctree-l3"><a class="reference internal" href="#on-the-uni-lu-hpc-platform-in-spring-2018">1.6.2. On the Uni.Lu HPC platform in Spring 2018</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#on-the-meluxina-eurohpc-supercomputer-54">1.6.3. On the MeluXina EUROHPC supercomputer </a></li>
+<li class="toctree-l3"><a class="reference internal" href="#on-the-meluxina-eurohpc-supercomputer-54">1.6.3. On the MeluXina EuroHPC supercomputer </a></li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="#moving-on-to-undirected-graphs">1.7. Moving on to undirected graphs</a><ul>
@@ -387,7 +387,7 @@
 </ul>
 </div></blockquote>
 </li>
-<li><p><a class="reference internal" href="#hpc-ranking-tutorial-label"><span class="std std-ref">HPC-Ranking of big sparse outranking Digraphs</span></a></p>
+<li><p><a class="reference internal" href="#hpc-ranking-tutorial-label"><span class="std std-ref">HPC-Ranking of big sparse outranking digraphs</span></a></p>
 <blockquote>
 <div><ul class="simple">
 <li><p><a class="reference internal" href="#hpc-commondesktop-tutorial-label"><span class="std std-ref">On a common 2023 desktop computer</span></a></p></li>
@@ -8216,7 +8216,7 @@ fecop 75.78% success rate</p>
 <ul class="simple">
 <li><p><a class="reference internal" href="#on-a-common-2023-desktop-computer" id="id356">On a common 2023 desktop computer</a></p></li>
 <li><p><a class="reference internal" href="#on-the-uni-lu-hpc-platform-in-spring-2018" id="id357">On the Uni.Lu HPC platform in Spring 2018</a></p></li>
-<li><p><a class="reference internal" href="#on-the-meluxina-eurohpc-supercomputer-54" id="id358">On the MeluXina EUROHPC supercomputer </a></p></li>
+<li><p><a class="reference internal" href="#on-the-meluxina-eurohpc-supercomputer-54" id="id358">On the MeluXina EuroHPC supercomputer </a></p></li>
 </ul>
 </nav>
 <section id="on-a-common-2023-desktop-computer">
@@ -8455,7 +8455,7 @@ fecop 75.78% success rate</p>
 </div>
 </section>
 <section id="on-the-meluxina-eurohpc-supercomputer-54">
-<span id="hpc-meluxina-tutorial-label"></span><h3><a class="toc-backref" href="#id358" role="doc-backlink"><span class="section-number">1.6.3. </span>On the MeluXina EUROHPC supercomputer <a class="footnote-reference brackets" href="#id218" id="id133" role="doc-noteref"><span class="fn-bracket">[</span>54<span class="fn-bracket">]</span></a></a><a class="headerlink" href="#on-the-meluxina-eurohpc-supercomputer-54" title="Permalink to this heading"></a></h3>
+<span id="hpc-meluxina-tutorial-label"></span><h3><a class="toc-backref" href="#id358" role="doc-backlink"><span class="section-number">1.6.3. </span>On the MeluXina EuroHPC supercomputer <a class="footnote-reference brackets" href="#id218" id="id133" role="doc-noteref"><span class="fn-bracket">[</span>54<span class="fn-bracket">]</span></a></a><a class="headerlink" href="#on-the-meluxina-eurohpc-supercomputer-54" title="Permalink to this heading"></a></h3>
 <p>Summer 2024, the author was granted the opportunity to use the large memory HPC resources of the MeluXina EuroHPC supercomputer <a class="footnote-reference brackets" href="#id219" id="id134" role="doc-noteref"><span class="fn-bracket">[</span>55<span class="fn-bracket">]</span></a>  (<a class="reference external" href="https://www.luxprovide.lu/meluxina/">https://www.luxprovide.lu/meluxina/</a>). Large memory nodes on this HPC platform offer a large RAM for particularly demanding workloads. Each large memory node is composed of 2 AMD Rome CPUs (64 core &#64; 2.6 GHz, 256HT cores total), has 4 TB of memory (4096 GB) and 1.92 TB of local storage.</p>
 <p>Following timings could be achieved with a specially designed <em>cQuantilesRankingDigraphs.pyx</em> module when q-tiling and ranking multiple incommensurable performance records of 21 criteria assessing three decision objectives, namely economic, environmental and societal aspects (see table below).</p>
 <table class="docutils align-default" id="id227">
@@ -8521,14 +8521,13 @@ fecop 75.78% success rate</p>
 </tr>
 </tbody>
 </table>
-<p>One million records could be ranked with 64 sorting and 64 ranking multiprocessing threads in about 69 seconds. The quantiles sorting step is based on 6-tiling. Three million records could be ranked with 128 sorters and 64 rankers in 4 min. and 20 sec. and the quantiles step step is here based on 7-tiling. With 28 sorters and 84 rankers, up to five million records could be 7-tiled and ranked in 8 min. and 35 sec.</p>
+<p>One million records could be ranked with 64 sorting and 64 ranking multiprocessing threads in about 69 seconds. The quantiles sorting step is based on 6-tiling. Three million records could be ranked with 128 sorters and 64 rankers in 4 min. and 20 sec. and the quantiles sorting step is here based on 7-tiling. With 28 sorters and 84 rankers, up to five million records could be 7-tiled and ranked in 8 min. and 35 sec.</p>
 <p>Below is shown an example MeluXina session for ranking 500000 incommensurable 3-objectives performance records.</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="linenos">1</span><span class="o">[</span>u101979@mel4017<span class="w"> </span>p200541<span class="o">]</span>$<span class="w"> </span>python3
-<span class="linenos">2</span><span class="o">(</span>MyPy3124<span class="o">)</span><span class="w"> </span><span class="o">[</span>u101979@mel4005<span class="w"> </span>Digraph3<span class="o">]</span>$<span class="w"> </span>python3
-<span class="linenos">3</span>Python<span class="w"> </span><span class="m">3</span>.12.4<span class="w"> </span><span class="o">(</span>main,<span class="w"> </span>Jul<span class="w"> </span><span class="m">19</span><span class="w"> </span><span class="m">2024</span>,<span class="w"> </span><span class="m">15</span>:25:25<span class="o">)</span>
-<span class="linenos">4</span><span class="o">[</span>GCC<span class="w"> </span><span class="m">8</span>.5.0<span class="w"> </span><span class="m">20210514</span><span class="w"> </span><span class="o">(</span>Red<span class="w"> </span>Hat<span class="w"> </span><span class="m">8</span>.5.0-20<span class="o">)]</span><span class="w"> </span>on<span class="w"> </span>linux
-<span class="linenos">5</span>Type<span class="w"> </span><span class="s2">&quot;help&quot;</span>,<span class="w"> </span><span class="s2">&quot;copyright&quot;</span>,<span class="w"> </span><span class="s2">&quot;credits&quot;</span><span class="w"> </span>or<span class="w"> </span><span class="s2">&quot;license&quot;</span><span class="w"> </span><span class="k">for</span><span class="w"> </span>more<span class="w"> </span>information.
-<span class="linenos">6</span>&gt;&gt;&gt;
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="linenos">1</span><span class="o">(</span>MyPy3124<span class="o">)</span><span class="w"> </span><span class="o">[</span>userRB@mel4005<span class="w"> </span>Digraph3<span class="o">]</span>$<span class="w"> </span>python3
+<span class="linenos">2</span>Python<span class="w"> </span><span class="m">3</span>.12.4<span class="w"> </span><span class="o">(</span>main,<span class="w"> </span>Jul<span class="w"> </span><span class="m">19</span><span class="w"> </span><span class="m">2024</span>,<span class="w"> </span><span class="m">15</span>:25:25<span class="o">)</span>
+<span class="linenos">3</span><span class="o">[</span>GCC<span class="w"> </span><span class="m">8</span>.5.0<span class="w"> </span><span class="m">20210514</span><span class="w"> </span><span class="o">(</span>Red<span class="w"> </span>Hat<span class="w"> </span><span class="m">8</span>.5.0-20<span class="o">)]</span><span class="w"> </span>on<span class="w"> </span>linux
+<span class="linenos">4</span>Type<span class="w"> </span><span class="s2">&quot;help&quot;</span>,<span class="w"> </span><span class="s2">&quot;copyright&quot;</span>,<span class="w"> </span><span class="s2">&quot;credits&quot;</span><span class="w"> </span>or<span class="w"> </span><span class="s2">&quot;license&quot;</span><span class="w"> </span><span class="k">for</span><span class="w"> </span>more<span class="w"> </span>information.
+<span class="linenos">5</span>&gt;&gt;&gt;
 </pre></div>
 </div>
 <div class="highlight-pycon notranslate"><div class="highlight"><pre><span></span><span class="linenos"> 1</span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">cRandPerfTabs</span> <span class="kn">import</span>\
@@ -8585,7 +8584,7 @@ fecop 75.78% success rate</p>
 </span><span class="hll"><span class="linenos">52</span><span class="go"> Components ranking : 11.92288</span>
 </span></pre></div>
 </div>
-<p>With 64 sorting threads and 32 ranking threads, we need 25.4 sec., about 11 sec. for the 7-tiling step and about 12 sec. for ranking the 146579 components. The fill-rate 0f the sparse outranking digraph is 0.002%.</p>
+<p>With 64 sorting threads and 32 ranking threads, we need 25.4 sec., about 11 sec. for the 7-tiling step and about 12 sec. for ranking the 146579 components. The fill-rate of the resulting sparse outranking digraph is 0.002%.</p>
 <p>Back to <a class="reference internal" href="#tutorial-label"><span class="std std-ref">Content Table</span></a></p>
 <hr class="docutils" />
 </section>
