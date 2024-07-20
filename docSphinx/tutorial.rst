@@ -8825,21 +8825,22 @@ Restricted to these ten best-ranked alternatives, the *Copeland*, the *NetFlows*
 On the MeluXina EUROHPC supercomputer [54]_
 -------------------------------------------
 
-Summer 2024, the author was granted the opportunity to use the large memory HPC resources of the MeluXina EuroHPC supercomputer [55]_  (https://www.luxprovide.lu/meluxina/). Nodes on this platform offer a large RAM for particularly demanding workloads. Each large memory node is composed of 2 AMD Rome CPUs (64 core @ 2.6 GHz, 256HT cores total), has 4 TB of memory (4096 GB) and 1.92 TB of local storage.
+Summer 2024, the author was granted the opportunity to use the large memory HPC resources of the MeluXina EuroHPC supercomputer [55]_  (https://www.luxprovide.lu/meluxina/). Large memory nodes on this HPC platform offer a large RAM for particularly demanding workloads. Each large memory node is composed of 2 AMD Rome CPUs (64 core @ 2.6 GHz, 256HT cores total), has 4 TB of memory (4096 GB) and 1.92 TB of local storage.
 
-Following timings could be achieved with a specially designed *cQuantilesRankingDigraphs.pyx* module when q-tiling and ranking multiple incommensurable performance records assessed on 21 criteria serving 3 decision objectives, namely economic, environmental and societal aspects (see table below).
+Following timings could be achieved with a specially designed *cQuantilesRankingDigraphs.pyx* module when q-tiling and ranking multiple incommensurable performance records of 21 criteria assessing three decision objectives, namely economic, environmental and societal aspects (see table below).
 
-.. table:: HPCMeluXina Ranking Performance Records (Summer 2024)
+.. table:: EUROHPC MeluXina Ranking Performance Records (Summer 2024)
 
-   ============ =========== ===== ========= ========= =========
-    outranking   relation     q     fill     nbr of     run    
-      order        size             rate(%)   cores     times   
-   ============ =========== ===== ========= ========= ========= 
-    1000000      1x10^12      6     0.001     64/64     1'09"  
-    2000000      4x10^12      9     0.001    128/64     2'43"   
-    3000000      9x10^12      7     0.001    128/64     4'20"
-    5000000      25x10^12     7     0.001    128/84     8'35"
-   ============ =========== ===== ========= ========= ========= 
+   ============ =========== ===== ========= ========= ========= ========
+    outranking   relation     q     fill     nbr of    nbr of     run    
+      order        size             rate(%)  sorters   rankers   times   
+   ============ =========== ===== ========= ========= ========= ========
+    1000000      1x10^12      6     0.001      64        64       1'09"  
+    2000000      4x10^12      9     0.001     128        64       2'43"   
+    3000000      9x10^12      7     0.001     128        64       4'20"
+    5000000      25x10^12     7     0.001     128        84       8'35"
+    6000000      36x10^12     9     0.001     128       128      12'11" 
+   ============ =========== ===== ========= ========= ========= ========
 
 One million records could be ranked with 64 sorting and 64 ranking multiprocessing threads in about 69 seconds. The quantiles sorting step is based on 6-tiling. Three million records could be ranked with 128 sorters and 64 rankers in 4 min. and 20 sec. and the quantiles step step is here based on 7-tiling. With 28 sorters and 84 rankers, up to five million records could be 7-tiled and ranked in 8 min. and 35 sec.
 

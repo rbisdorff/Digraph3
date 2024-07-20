@@ -12022,7 +12022,7 @@ Rubis Solver computed from a stored XMCDA2 encoded performance tableau.</p>
 </dd>
 </dl>
 </div></blockquote>
-<p>A tutorial with coding examples is available here: <a class="reference internal" href="tutorial.html#hpc-tutorial-label"><span class="std std-ref">HPC ranking with big outranking digraphs</span></a>.</p>
+<p>A tutorial with coding examples is available here: <a class="reference internal" href="tutorial.html#hpc-tutorial-label"><span class="std std-ref">On ranking big outranking digraphs</span></a>.</p>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
 <p>These cythonized modules, specifically designed for being run on HPC clusters (see <a class="reference external" href="https://hpc.uni.lu">https://hpc.uni.lu</a>), are starting with <em>Threading=True</em> their multiprocessing threads by default with the <em>spawn</em> start method. The main program code of Python scripts using these modules must therefore be protected with the <em>__name__==”__main__”</em> test from recursive re-execution. The threading start method is actually configurable with the <em>StartMethod</em> parameter: <em>spawn</em>, <em>forkserver</em> or <em>fork</em>. The latter is not safe –especially on not Linux systems– and may result in dead locks and hence return partial or false results.</p>
@@ -14361,7 +14361,7 @@ Components are stored in an ordered dictionary.</p>
 
   <div role="contentinfo">
     <p>&#169; Copyright 2012-2024, Raymond Bisdorff.
-      <span class="lastupdated">Last updated on Jul 18, 2024.
+      <span class="lastupdated">Last updated on Jul 20, 2024.
       </span></p>
   </div>
 

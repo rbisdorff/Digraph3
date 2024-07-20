@@ -8462,15 +8462,16 @@ fecop 75.78% success rate</p>
 </section>
 <section id="on-the-meluxina-eurohpc-supercomputer-54">
 <span id="hpc-meluxina-tutorial-label"></span><h3><a class="toc-backref" href="#id358" role="doc-backlink"><span class="section-number">1.6.3. </span>On the MeluXina EUROHPC supercomputer <a class="footnote-reference brackets" href="#id218" id="id133" role="doc-noteref"><span class="fn-bracket">[</span>54<span class="fn-bracket">]</span></a></a><a class="headerlink" href="#on-the-meluxina-eurohpc-supercomputer-54" title="Permalink to this heading"></a></h3>
-<p>Summer 2024, the author was granted the opportunity to use the large memory HPC resources of the MeluXina EuroHPC supercomputer <a class="footnote-reference brackets" href="#id219" id="id134" role="doc-noteref"><span class="fn-bracket">[</span>55<span class="fn-bracket">]</span></a>  (<a class="reference external" href="https://www.luxprovide.lu/meluxina/">https://www.luxprovide.lu/meluxina/</a>). Nodes on this platform offer a large RAM for particularly demanding workloads. Each large memory node is composed of 2 AMD Rome CPUs (64 core &#64; 2.6 GHz, 256HT cores total), has 4 TB of memory (4096 GB) and 1.92 TB of local storage.</p>
-<p>Following timings could be achieved with a specially designed <em>cQuantilesRankingDigraphs.pyx</em> module when q-tiling and ranking multiple incommensurable performance records assessed on 21 criteria serving 3 decision objectives, namely economic, environmental and societal aspects (see table below).</p>
+<p>Summer 2024, the author was granted the opportunity to use the large memory HPC resources of the MeluXina EuroHPC supercomputer <a class="footnote-reference brackets" href="#id219" id="id134" role="doc-noteref"><span class="fn-bracket">[</span>55<span class="fn-bracket">]</span></a>  (<a class="reference external" href="https://www.luxprovide.lu/meluxina/">https://www.luxprovide.lu/meluxina/</a>). Large memory nodes on this HPC platform offer a large RAM for particularly demanding workloads. Each large memory node is composed of 2 AMD Rome CPUs (64 core &#64; 2.6 GHz, 256HT cores total), has 4 TB of memory (4096 GB) and 1.92 TB of local storage.</p>
+<p>Following timings could be achieved with a specially designed <em>cQuantilesRankingDigraphs.pyx</em> module when q-tiling and ranking multiple incommensurable performance records of 21 criteria assessing three decision objectives, namely economic, environmental and societal aspects (see table below).</p>
 <table class="docutils align-default" id="id227">
-<caption><span class="caption-text">HPCMeluXina Ranking Performance Records (Summer 2024)</span><a class="headerlink" href="#id227" title="Permalink to this table"></a></caption>
+<caption><span class="caption-text">EUROHPC MeluXina Ranking Performance Records (Summer 2024)</span><a class="headerlink" href="#id227" title="Permalink to this table"></a></caption>
 <thead>
 <tr class="row-odd"><th class="head"><p>outranking</p></th>
 <th class="head"><p>relation</p></th>
 <th class="head"><p>q</p></th>
 <th class="head"><p>fill</p></th>
+<th class="head"><p>nbr of</p></th>
 <th class="head"><p>nbr of</p></th>
 <th class="head"><p>run</p></th>
 </tr>
@@ -8478,7 +8479,8 @@ fecop 75.78% success rate</p>
 <th class="head"><p>size</p></th>
 <th class="head"></th>
 <th class="head"><p>rate(%)</p></th>
-<th class="head"><p>cores</p></th>
+<th class="head"><p>sorters</p></th>
+<th class="head"><p>rankers</p></th>
 <th class="head"><p>times</p></th>
 </tr>
 </thead>
@@ -8487,29 +8489,41 @@ fecop 75.78% success rate</p>
 <td><p>1x10^12</p></td>
 <td><p>6</p></td>
 <td><p>0.001</p></td>
-<td><p>64/64</p></td>
+<td><p>64</p></td>
+<td><p>64</p></td>
 <td><p>1’09”</p></td>
 </tr>
 <tr class="row-even"><td><p>2000000</p></td>
 <td><p>4x10^12</p></td>
 <td><p>9</p></td>
 <td><p>0.001</p></td>
-<td><p>128/64</p></td>
+<td><p>128</p></td>
+<td><p>64</p></td>
 <td><p>2’43”</p></td>
 </tr>
 <tr class="row-odd"><td><p>3000000</p></td>
 <td><p>9x10^12</p></td>
 <td><p>7</p></td>
 <td><p>0.001</p></td>
-<td><p>128/64</p></td>
+<td><p>128</p></td>
+<td><p>64</p></td>
 <td><p>4’20”</p></td>
 </tr>
 <tr class="row-even"><td><p>5000000</p></td>
 <td><p>25x10^12</p></td>
 <td><p>7</p></td>
 <td><p>0.001</p></td>
-<td><p>128/84</p></td>
+<td><p>128</p></td>
+<td><p>84</p></td>
 <td><p>8’35”</p></td>
+</tr>
+<tr class="row-odd"><td><p>6000000</p></td>
+<td><p>36x10^12</p></td>
+<td><p>9</p></td>
+<td><p>0.001</p></td>
+<td><p>128</p></td>
+<td><p>128</p></td>
+<td><p>12’11”</p></td>
 </tr>
 </tbody>
 </table>
@@ -10264,7 +10278,7 @@ dot -Grankdir=TB -Tpng rootedTree.dot -o rootedTree.png</p>
 
   <div role="contentinfo">
     <p>&#169; Copyright 2012-2024, Raymond Bisdorff.
-      <span class="lastupdated">Last updated on Jul 19, 2024.
+      <span class="lastupdated">Last updated on Jul 20, 2024.
       </span></p>
   </div>
 
