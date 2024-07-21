@@ -8846,7 +8846,7 @@ Following timings could be achieved with a specially designed *cQuantilesRanking
 
 One million records could be ranked with 64 sorting and 64 ranking multiprocessing threads in about 69 seconds. The quantiles sorting step is based on 6-tiling. Three million records could be ranked with 128 sorters and 64 rankers in 4 min. and 20 sec. and the quantiles sorting step is here based on 7-tiling. With 28 sorters and 84 rankers, up to five million records could be 7-tiled and ranked in 8 min. and 35 sec.
 
-Below is shown an example MeluXina session for ranking 500000 incommensurable 3-objectives performance records.
+Below is shown an example MeluXina session for ranking **six million** incommensurable 3-objectives performance records.
 
 .. code-block:: bash
 
@@ -8862,7 +8862,7 @@ Below is shown an example MeluXina session for ranking 500000 incommensurable 3-
 
    >>> from cRandPerfTabs import\
    ...      cRandom3ObjectivesPerformanceTableau as cR3ObjPT
-   >>> pt = cR3ObjPT(numberOfActions=500000,
+   >>> pt = cR3ObjPT(numberOfActions=6000000,
    ...              numberOfCriteria=21,
    ...              weightDistribution='equiobjectives',
    ...              commonScale = (0.0,1000.0),
@@ -8871,30 +8871,30 @@ Below is shown an example MeluXina session for ranking 500000 incommensurable 3-
    ...              missingDataProbability=0.05,
    ...              seed=16)
    >>> import cQuantilesRankingDigraphs as QRD
-   >>> qr = QRD.cQuantilesRankingDigraph(pt,quantiles=7,
+   >>> qr = QRD.cQuantilesRankingDigraph(pt,quantiles=9,
    ...                    quantilesOrderingStrategy='optimal',
    ...                    minimalComponentSize=1,
    ...                    componentRankingRule='Copeland',
    ...                    LowerClosed=False,
    ...                    Threading=True,
-   ...                    nbrOfSorters=64,
-   ...                    nbrOfRankers=32,
-   ...                    tempDir='/tmp',
+   ...                    nbrOfSorters=128,
+   ...                    nbrOfRankers=128,
+   ...                    tempDir='/project/scratch/p200541',
    ...                    Comments=False)
    >>> qr
     *----- Object instance description --------------*
     Instance class     : cQuantilesRankingDigraph
     Instance name      : random3ObjectivesPerfTab_mp
-    Actions            : 500000
+    Actions            : 6000000
     Criteria           : 21
-    Sorting by         : 7-Tiling
+    Sorting by         : 9-Tiling
     Ordering strategy  : optimal
     Ranking rule       : Copeland
-    Components         : 146579
+    Components         : 439443
     Minimal order      : 1
-    Maximal order      : 115
-    Average order      : 3.4
-    fill rate          : 0.002%
+    Maximal order      : 924
+    Average order      : 13.7
+    fill rate          : 0.001%
     Attributes         : ['runTimes', 'name', 'actions', 'order',
                           'dimension', 'sortingParameters', 'nbrOfSorters',
                           'startMethod', 'valuationdomain', 'profiles',
@@ -8904,16 +8904,16 @@ Below is shown an example MeluXina session for ranking 500000 incommensurable 3-
                           'maximalComponentSize', 'componentRankingRule',
                           'boostedRanking']
     ----  Constructor run times (in sec.) ----
-    Sorting threads    : 64
-    Ranking threads    : 32
+    Sorting threads    : 128
+    Ranking threads    : 128
     StartMethod        : spawn
-    Total time         : 25.35695
-    Data input         : 0.00046
-    QuantilesSorting   : 11.07220
-    Preordering        : 2.04658
-    Components ranking : 11.92288
+    Total time         : 730.49080
+    Data input         : 104.95025
+    QuantilesSorting   : 245.87293
+    Preordering        : 21.06959
+    Components ranking : 354.03710
 
-With 64 sorting threads and 32 ranking threads, we need 25.4 sec., about 11 sec. for the 7-tiling step and about 12 sec. for ranking the 146579 components. The fill-rate of the resulting sparse outranking digraph is 0.002%.
+With 128 sorting threads and 128 ranking threads, we need about 12 min., 4 min. for the 9-tiling step and 7 min. for ranking the 14657 components. The fill-rate of the resulting sparse outranking digraph is 0.001%.
 
 
 Back to :ref:`Content Table <Tutorial-label>`

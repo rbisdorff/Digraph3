@@ -8522,7 +8522,7 @@ fecop 75.78% success rate</p>
 </tbody>
 </table>
 <p>One million records could be ranked with 64 sorting and 64 ranking multiprocessing threads in about 69 seconds. The quantiles sorting step is based on 6-tiling. Three million records could be ranked with 128 sorters and 64 rankers in 4 min. and 20 sec. and the quantiles sorting step is here based on 7-tiling. With 28 sorters and 84 rankers, up to five million records could be 7-tiled and ranked in 8 min. and 35 sec.</p>
-<p>Below is shown an example MeluXina session for ranking 500000 incommensurable 3-objectives performance records.</p>
+<p>Below is shown an example MeluXina session for ranking <strong>six million</strong> incommensurable 3-objectives performance records.</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="linenos">1</span><span class="o">(</span>MyPy3124<span class="o">)</span><span class="w"> </span><span class="o">[</span>userRB@mel4005<span class="w"> </span>Digraph3<span class="o">]</span>$<span class="w"> </span>python3
 <span class="linenos">2</span>Python<span class="w"> </span><span class="m">3</span>.12.4<span class="w"> </span><span class="o">(</span>main,<span class="w"> </span>Jul<span class="w"> </span><span class="m">19</span><span class="w"> </span><span class="m">2024</span>,<span class="w"> </span><span class="m">15</span>:25:25<span class="o">)</span>
 <span class="linenos">3</span><span class="o">[</span>GCC<span class="w"> </span><span class="m">8</span>.5.0<span class="w"> </span><span class="m">20210514</span><span class="w"> </span><span class="o">(</span>Red<span class="w"> </span>Hat<span class="w"> </span><span class="m">8</span>.5.0-20<span class="o">)]</span><span class="w"> </span>on<span class="w"> </span>linux
@@ -8532,7 +8532,7 @@ fecop 75.78% success rate</p>
 </div>
 <div class="highlight-pycon notranslate"><div class="highlight"><pre><span></span><span class="linenos"> 1</span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">cRandPerfTabs</span> <span class="kn">import</span>\
 <span class="linenos"> 2</span><span class="gp">... </span>     <span class="n">cRandom3ObjectivesPerformanceTableau</span> <span class="k">as</span> <span class="n">cR3ObjPT</span>
-<span class="linenos"> 3</span><span class="gp">&gt;&gt;&gt; </span><span class="n">pt</span> <span class="o">=</span> <span class="n">cR3ObjPT</span><span class="p">(</span><span class="n">numberOfActions</span><span class="o">=</span><span class="mi">500000</span><span class="p">,</span>
+<span class="linenos"> 3</span><span class="gp">&gt;&gt;&gt; </span><span class="n">pt</span> <span class="o">=</span> <span class="n">cR3ObjPT</span><span class="p">(</span><span class="n">numberOfActions</span><span class="o">=</span><span class="mi">6000000</span><span class="p">,</span>
 <span class="linenos"> 4</span><span class="gp">... </span>             <span class="n">numberOfCriteria</span><span class="o">=</span><span class="mi">21</span><span class="p">,</span>
 <span class="linenos"> 5</span><span class="gp">... </span>             <span class="n">weightDistribution</span><span class="o">=</span><span class="s1">&#39;equiobjectives&#39;</span><span class="p">,</span>
 <span class="linenos"> 6</span><span class="gp">... </span>             <span class="n">commonScale</span> <span class="o">=</span> <span class="p">(</span><span class="mf">0.0</span><span class="p">,</span><span class="mf">1000.0</span><span class="p">),</span>
@@ -8541,30 +8541,30 @@ fecop 75.78% success rate</p>
 <span class="linenos"> 9</span><span class="gp">... </span>             <span class="n">missingDataProbability</span><span class="o">=</span><span class="mf">0.05</span><span class="p">,</span>
 <span class="linenos">10</span><span class="gp">... </span>             <span class="n">seed</span><span class="o">=</span><span class="mi">16</span><span class="p">)</span>
 <span class="linenos">11</span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">cQuantilesRankingDigraphs</span> <span class="k">as</span> <span class="nn">QRD</span>
-<span class="linenos">12</span><span class="gp">&gt;&gt;&gt; </span><span class="n">qr</span> <span class="o">=</span> <span class="n">QRD</span><span class="o">.</span><span class="n">cQuantilesRankingDigraph</span><span class="p">(</span><span class="n">pt</span><span class="p">,</span><span class="n">quantiles</span><span class="o">=</span><span class="mi">7</span><span class="p">,</span>
+<span class="linenos">12</span><span class="gp">&gt;&gt;&gt; </span><span class="n">qr</span> <span class="o">=</span> <span class="n">QRD</span><span class="o">.</span><span class="n">cQuantilesRankingDigraph</span><span class="p">(</span><span class="n">pt</span><span class="p">,</span><span class="n">quantiles</span><span class="o">=</span><span class="mi">9</span><span class="p">,</span>
 <span class="linenos">13</span><span class="gp">... </span>                   <span class="n">quantilesOrderingStrategy</span><span class="o">=</span><span class="s1">&#39;optimal&#39;</span><span class="p">,</span>
 <span class="linenos">14</span><span class="gp">... </span>                   <span class="n">minimalComponentSize</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span>
 <span class="linenos">15</span><span class="gp">... </span>                   <span class="n">componentRankingRule</span><span class="o">=</span><span class="s1">&#39;Copeland&#39;</span><span class="p">,</span>
 <span class="linenos">16</span><span class="gp">... </span>                   <span class="n">LowerClosed</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
 <span class="linenos">17</span><span class="gp">... </span>                   <span class="n">Threading</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
-<span class="linenos">18</span><span class="gp">... </span>                   <span class="n">nbrOfSorters</span><span class="o">=</span><span class="mi">64</span><span class="p">,</span>
-<span class="linenos">19</span><span class="gp">... </span>                   <span class="n">nbrOfRankers</span><span class="o">=</span><span class="mi">32</span><span class="p">,</span>
-<span class="linenos">20</span><span class="gp">... </span>                   <span class="n">tempDir</span><span class="o">=</span><span class="s1">&#39;/tmp&#39;</span><span class="p">,</span>
+<span class="linenos">18</span><span class="gp">... </span>                   <span class="n">nbrOfSorters</span><span class="o">=</span><span class="mi">128</span><span class="p">,</span>
+<span class="linenos">19</span><span class="gp">... </span>                   <span class="n">nbrOfRankers</span><span class="o">=</span><span class="mi">128</span><span class="p">,</span>
+<span class="linenos">20</span><span class="gp">... </span>                   <span class="n">tempDir</span><span class="o">=</span><span class="s1">&#39;/project/scratch/p200541&#39;</span><span class="p">,</span>
 <span class="linenos">21</span><span class="gp">... </span>                   <span class="n">Comments</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
 <span class="linenos">22</span><span class="gp">&gt;&gt;&gt; </span><span class="n">qr</span>
 <span class="linenos">23</span><span class="go"> *----- Object instance description --------------*</span>
 <span class="linenos">24</span><span class="go"> Instance class     : cQuantilesRankingDigraph</span>
 <span class="linenos">25</span><span class="go"> Instance name      : random3ObjectivesPerfTab_mp</span>
-<span class="hll"><span class="linenos">26</span><span class="go"> Actions            : 500000</span>
+<span class="hll"><span class="linenos">26</span><span class="go"> Actions            : 6000000</span>
 </span><span class="linenos">27</span><span class="go"> Criteria           : 21</span>
-<span class="hll"><span class="linenos">28</span><span class="go"> Sorting by         : 7-Tiling</span>
+<span class="hll"><span class="linenos">28</span><span class="go"> Sorting by         : 9-Tiling</span>
 </span><span class="linenos">29</span><span class="go"> Ordering strategy  : optimal</span>
 <span class="linenos">30</span><span class="go"> Ranking rule       : Copeland</span>
-<span class="hll"><span class="linenos">31</span><span class="go"> Components         : 146579</span>
+<span class="hll"><span class="linenos">31</span><span class="go"> Components         : 439443</span>
 </span><span class="linenos">32</span><span class="go"> Minimal order      : 1</span>
-<span class="linenos">33</span><span class="go"> Maximal order      : 115</span>
-<span class="linenos">34</span><span class="go"> Average order      : 3.4</span>
-<span class="hll"><span class="linenos">35</span><span class="go"> fill rate          : 0.002%</span>
+<span class="linenos">33</span><span class="go"> Maximal order      : 924</span>
+<span class="linenos">34</span><span class="go"> Average order      : 13.7</span>
+<span class="hll"><span class="linenos">35</span><span class="go"> fill rate          : 0.001%</span>
 </span><span class="linenos">36</span><span class="go"> Attributes         : [&#39;runTimes&#39;, &#39;name&#39;, &#39;actions&#39;, &#39;order&#39;,</span>
 <span class="linenos">37</span><span class="go">                       &#39;dimension&#39;, &#39;sortingParameters&#39;, &#39;nbrOfSorters&#39;,</span>
 <span class="linenos">38</span><span class="go">                       &#39;startMethod&#39;, &#39;valuationdomain&#39;, &#39;profiles&#39;,</span>
@@ -8574,17 +8574,17 @@ fecop 75.78% success rate</p>
 <span class="linenos">42</span><span class="go">                       &#39;maximalComponentSize&#39;, &#39;componentRankingRule&#39;,</span>
 <span class="linenos">43</span><span class="go">                       &#39;boostedRanking&#39;]</span>
 <span class="linenos">44</span><span class="go"> ----  Constructor run times (in sec.) ----</span>
-<span class="hll"><span class="linenos">45</span><span class="go"> Sorting threads    : 64</span>
-</span><span class="hll"><span class="linenos">46</span><span class="go"> Ranking threads    : 32</span>
+<span class="hll"><span class="linenos">45</span><span class="go"> Sorting threads    : 128</span>
+</span><span class="hll"><span class="linenos">46</span><span class="go"> Ranking threads    : 128</span>
 </span><span class="hll"><span class="linenos">47</span><span class="go"> StartMethod        : spawn</span>
-</span><span class="hll"><span class="linenos">48</span><span class="go"> Total time         : 25.35695</span>
-</span><span class="hll"><span class="linenos">49</span><span class="go"> Data input         : 0.00046</span>
-</span><span class="hll"><span class="linenos">50</span><span class="go"> QuantilesSorting   : 11.07220</span>
-</span><span class="hll"><span class="linenos">51</span><span class="go"> Preordering        : 2.04658</span>
-</span><span class="hll"><span class="linenos">52</span><span class="go"> Components ranking : 11.92288</span>
+</span><span class="hll"><span class="linenos">48</span><span class="go"> Total time         : 730.49080</span>
+</span><span class="hll"><span class="linenos">49</span><span class="go"> Data input         : 104.95025</span>
+</span><span class="hll"><span class="linenos">50</span><span class="go"> QuantilesSorting   : 245.87293</span>
+</span><span class="hll"><span class="linenos">51</span><span class="go"> Preordering        : 21.06959</span>
+</span><span class="hll"><span class="linenos">52</span><span class="go"> Components ranking : 354.03710</span>
 </span></pre></div>
 </div>
-<p>With 64 sorting threads and 32 ranking threads, we need 25.4 sec., about 11 sec. for the 7-tiling step and about 12 sec. for ranking the 146579 components. The fill-rate of the resulting sparse outranking digraph is 0.002%.</p>
+<p>With 128 sorting threads and 128 ranking threads, we need about 12 min., 4 min. for the 9-tiling step and 7 min. for ranking the 14657 components. The fill-rate of the resulting sparse outranking digraph is 0.001%.</p>
 <p>Back to <a class="reference internal" href="#tutorial-label"><span class="std std-ref">Content Table</span></a></p>
 <hr class="docutils" />
 </section>
@@ -10271,7 +10271,7 @@ dot -Grankdir=TB -Tpng rootedTree.dot -o rootedTree.png</p>
 
   <div role="contentinfo">
     <p>&#169; Copyright 2012-2024, Raymond Bisdorff.
-      <span class="lastupdated">Last updated on Jul 20, 2024.
+      <span class="lastupdated">Last updated on Jul 21, 2024.
       </span></p>
   </div>
 
