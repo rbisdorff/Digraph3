@@ -8913,7 +8913,7 @@ Below is shown an example MeluXina session for ranking **six million** incommens
     Preordering        : 21.06959
     Components ranking : 354.03710
 
-With 128 sorting threads and 128 ranking threads, we need about 12 min., 4 min. for the 9-tiling step and 7 min. for ranking the 14657 components. The fill-rate of the resulting sparse outranking digraph is 0.001%.
+With 128 sorting threads and 128 ranking threads, we need about 12 min., 4 min. for the 9-tiling step and 7 min. for ranking the 439443 components. The fill-rate of the resulting sparse outranking digraph is 0.001%.
 
 
 Back to :ref:`Content Table <Tutorial-label>`
