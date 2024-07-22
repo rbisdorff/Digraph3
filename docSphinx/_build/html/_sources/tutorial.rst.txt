@@ -34,7 +34,7 @@
    :Author: Raymond Bisdorff, Emeritus Professor of Applied Mathematics and Computer Science, University of Luxembourg
    :Url: https://rbisdorff.github.io/
    :Version: |version| (release: |release|)
-   :PDF version: `5.9 MB <_static/digraph3Tutorial.pdf>`_ 
+   :PDF version: `5.9 MB <_build/html/_static/digraph3Tutorial.pdf>`_ 
    :Copyright: `R. Bisdorff <_static/digraph3_copyright.html>`_ 2013-2024
 
 .. _Tutorial-label:
