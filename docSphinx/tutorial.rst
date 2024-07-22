@@ -8545,7 +8545,7 @@ The best ranking correlation with the pairwise outranking situations (+0.75) is 
 HPC-Ranking of Big Sparse Outranking Digraphs
 =============================================
 
-Following from the separability property of the *q*-tiles sorting of each action into each *q*-tiles class, the *q*-sorting algorithm may be safely split into as much threads as are multiple processing cores available in parallel. Furthermore, the ranking procedure being local to each diagonal component, these procedures may as well be safely processed in parallel threads on each component restricted outrankingdigraph. Below some examples on different type of computers.
+Following from the separability property of the *q*-tiles sorting of each action into each *q*-tiles class, the *q*-sorting algorithm may be safely split into as much threads as are multiple processing cores available in parallel. Furthermore, the ranking procedure being local to each diagonal component, these procedures may as well be safely processed in parallel threads on each component restricted outrankingdigraph. Below some examples on different types of computers.
 
 .. contents:: 
    :depth: 1
@@ -8557,7 +8557,7 @@ Following from the separability property of the *q*-tiles sorting of each action
 On a common 2023 desktop computer
 ---------------------------------
 
-On a common 2023 Terra desktop computer, equipped with a 11th Gen Intel® Core™ i5-11400 × 12 processor and 16.0 GiB of CPU memory, working under Ubuntu 23.10 we may rank a :py:class:`~cRandPerfTabs.cRandom3ObjectivesPerformanceTableau` instance of **five hundred thousand** performance records in about 104 seconds with about 48 seconds for the quantiles sorting step and 55 seconds for the local components ranking step (see below Lines 42-).
+On a common 2023 Terra desktop computer [56]_, equipped with a 11th Gen Intel® Core™ i5-11400 × 12 processor and 16.0 GiB of CPU memory, working under Ubuntu 23.10 we may rank a :py:class:`~cRandPerfTabs.cRandom3ObjectivesPerformanceTableau` instance of **five hundred thousand** performance records in about 104 seconds with about 48 seconds for the quantiles sorting step and 55 seconds for the local components ranking step (see below Lines 42-).
 
 .. code-block:: bash
 
@@ -10631,6 +10631,8 @@ Appendices
 .. [54] The kind support of the *Faculty of Science Technology and Medecine* of the *University of Luxembourg* (https://www.uni.lu/fstm-en/) and of *LUXPROVIDE* (https://www.luxprovide.lu/) is gratefully acknowledged.
 
 .. [55] The acquisition and operation of the EuroHPC supercomputer is funded jointly by the EuroHPC Joint Undertaking, through the European Union's Connecting Europe Facility and the Horizon 2020 research and innovation programme, as well as the Grand Duché du Luxembourg.
+
+.. [56] https://www.wortmann.de/
 
 
 ..  LocalWords:  randomDigraph Determinateness valuationdomain py png
