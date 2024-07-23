@@ -8837,7 +8837,7 @@ Following timings could be achieved with a specially designed *cQuantilesRanking
     outranking   relation     q     fill     nbr of    nbr of     run    
       order        size             rate(%)  sorters   rankers   times   
    ============ =========== ===== ========= ========= ========= ========
-    1000000      1x10^12      6     0.001      64        64       1'09"  
+    1000000      1x10^12      7     0.001     100        48       1'07"  
     2000000      4x10^12      9     0.001     128        64       2'43"   
     3000000      9x10^12      7     0.001     128        64       4'20"
     5000000      25x10^12     7     0.001     128        84       8'35"

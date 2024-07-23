@@ -104,14 +104,7 @@ from cSparseIntegerOutrankingDigraphs import SparseIntegerOutrankingDigraph
 
 class cQuantilesRankingDigraph(SparseIntegerOutrankingDigraph):
     """
-    Cythonized special version of the *cQuantlesRankingDigraph* class for the multiprocessing
-    implementation of multiple criteria quantiles ranking of very big
-    performance tableaux - > 100000. This version was developped on
-    the Luxembourg national EuroHPC supercomputer MeluXina
-    (https://docs.lxp.lu/).
-
-    The author gratefully acknowledges the *LuxProvide* teams for granting access to the
-    HPC resources and for their kind operational support.
+    Cythonized version of the cQuantlesRanking class for the multiprocessing implementation of multiple criteria quantiles ranking of very big performance tableaux - > 100000. This version was developped on the Luxembourg national supercomputer MeluXina (https://docs.lxp.lu/). The author gratefully acknowledges the LuxProvide teams for granting access to the HPC resources and for their kind operational support.
 
     *Parameters*:
         * argPerfTab, a cPerformanceTableau object or a file name of such a stored object,
@@ -205,7 +198,7 @@ class cQuantilesRankingDigraph(SparseIntegerOutrankingDigraph):
             reprString += 'StartMethod        : %s\n' % self.startMethod
         reprString += 'Total time         : %.5f\n' % self.runTimes['totalTime']
         reprString += 'Data input         : %.5f\n' % self.runTimes['dataInput']
-        reprString += 'Q-tiling           : %.5f\n' % self.runTimes['sorting']
+        reprString += 'QuantilesSorting   : %.5f\n' % self.runTimes['sorting']
         reprString += 'Preordering        : %.5f\n' % self.runTimes['preordering']
         reprString += 'Components ranking : %.5f\n' % self.runTimes['componentsRanking']
  
@@ -235,6 +228,7 @@ class cQuantilesRankingDigraph(SparseIntegerOutrankingDigraph):
         cdef int maximalComponentSize = 0
         #cdef array.array lTest=array.array('i')
         cdef int NA
+        cdef list boostedRankingList,bosstedRanking,blr
 
         #global perfTab
         #global decomposition
@@ -511,7 +505,7 @@ class cQuantilesRankingDigraph(SparseIntegerOutrankingDigraph):
                 #     boostedRanking += splitComponent['compDict']['componentRanking']
                 ####  post-threading operations    
                 components = OrderedDict()
-                boostedRanking = []
+                boostedRankingList = []
                 for t in range(NUMBER_OF_WORKERS):
                     if Debug:
                         print('job',t)
@@ -530,7 +524,15 @@ class cQuantilesRankingDigraph(SparseIntegerOutrankingDigraph):
                         print('splitComponents',t,splitComponents)
                     for i in splitComponents:
                         components[i] = splitComponents[i]
-                        boostedRanking += splitComponents[i]['componentRanking']
+                        boostedRankingList.append((i,splitComponents[i]['componentRanking']))
+                #print(boostedRankingList)
+                boostedRankingList.sort()
+                print(boostedRankingList)
+                boostedRanking = []
+                for brl in boostedRankingList:
+                    boostedRanking += brl[1]
+                #print(boostedRanking)
+                
                 self.runTimes['componentsRanking'] = time() - t0
             if Comments:
                 print('Ranking time: %.4f' % self.runTimes['componentsRanking']  )
@@ -975,32 +977,56 @@ class cQuantilesRankingDigraph(SparseIntegerOutrankingDigraph):
         """
         #summaryStats = self.computeDecompositionSummaryStatistics()
         from digraphs import total_size
-        if fileName is None:
-            print(self)
+        if fileName == None:
+            print('*----- show short --------------*')
+            print('Instance name     : %s' % self.name)
+            print('Actions           : %d' % self.order)
+            print('Criteria          : %d' % self.dimension)
+            print('Sorting by        : %d-Tiling' % self.sortingParameters['limitingQuantiles'])
+            print('Ordering strategy : %s' % self.sortingParameters['strategy'])
+            print('Ranking rule      : %s' % self.componentRankingRule)
+            print('# Components      : %d' % self.nbrComponents)
+            print('Minimal order     : %d' % self.minimalComponentSize)
+            print('Maximal order     : %d' % self.maximalComponentSize)
+            print('Average order     : %.1f' % (self.order/self.nbrComponents))
+            print('Fill rate         : %.3f%%' % (self.fillRate*100.0))
+            print('----  Constructor run times (in sec.) ----')
+            print('Threads           : %d' % self.nbrThreads)
+            print('Start mthod       : %s' % self.startMethod)
+            print('Total time        : %.5f' % self.runTimes['totalTime'])
+            print('QuantilesSorting  : %.5f' % self.runTimes['sorting'])
+            print('Preordering       : %.5f' % self.runTimes['preordering'])
+            print('Decomposing       : %.5f' % self.runTimes['decomposing'])
+            try:
+                print('Ordering          : %.5f' % self.runTimes['ordering'])
+            except:
+                pass
         else:
             fo = open(fileName,'a')
             fo.write('*----- show short --------------*\n')
             fo.write('Instance name      : %s\n' % self.name)
             if WithFileSize:
                 fo.write('Size (in bytes)    : %d\n' % total_size(self))
-            fo.write('Actions            : %d\n' % self.order)
-            fo.write('Criteria           : %d\n' % self.dimension)
-            fo.write('Q-Tiles            : %d-Tiling\n' % self.sortingParameters['limitingQuantiles'])
+            fo.write('# Actions          : %d\n' % self.order)
+            fo.write('# Criteria         : %d\n' % self.dimension)
+            fo.write('Sorting by         : %d-Tiling\n' % self.sortingParameters['limitingQuantiles'])
             fo.write('Ordering strategy  : %s\n' % self.sortingParameters['strategy'])
             fo.write('Local ranking rule : %s\n' % self.componentRankingRule)
-            fo.write('Components         : %d\n' % self.nbrComponents)
+            fo.write('# Components       : %d\n' % self.nbrComponents)
             fo.write('Minimal size       : %d\n' % self.minimalComponentSize)
             fo.write('Maximal order      : %d\n' % self.maximalComponentSize)
             fo.write('Average order      : %.1f\n' % (self.order/self.nbrComponents))
             fo.write('Fill rate          : %.3f%%\n' % (self.fillRate*100.0))
             fo.write('*-- Constructor run times (in sec.) --*\n')
-            fo.write('Sorting threads    : %d\n' % self.nbrOfSorters)
-            fo.write('Ranking threads    : %d\n' % self.nbrOfRankers)
-            fo.write('Start method       : %s\n' % self.startMethod)
+            fo.write('# Threads          : %d\n' % self.nbrOfCPUs)
             fo.write('Total time         : %.5f\n' % self.runTimes['totalTime'])
-            fo.write('Q-tiling           : %.5f\n' % self.runTimes['sorting'])
+            fo.write('QuantilesSorting   : %.5f\n' % self.runTimes['sorting'])
             fo.write('Preordering        : %.5f\n' % self.runTimes['preordering'])
-            fo.write('Components ranking : %.5f\n' % self.runTimes['componentsRanking'])
+            fo.write('Decomposing        : %.5f\n' % self.runTimes['decomposing'])
+            try:
+                fo.write('Ordering           : %.5f\n' % self.runTimes['ordering'])
+            except:
+                pass
             fo.close()
 
     def showActions(self):
