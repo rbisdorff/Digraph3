@@ -61,6 +61,8 @@ class _myThread1(Process):
         componentRankingRule = self.componentRankingRule
         Comments = self.Comments
         Debug = self.Debug
+        if Comments:
+            print('Starting thread %d, (%d, %d)' % (t+1,splitIndex[0],splitIndex[1]))
         splitComponents = {}
         for spi in range(splitIndex[0],splitIndex[1]):
             i = compIndex[spi]
@@ -92,8 +94,6 @@ class _myThread1(Process):
         fo.write(dumps(splitComponents,-1))
         fo.close()
             #print('Saved: %s' % foName)
-        if Comments:
-            print('Exit thread %d, (%d, %d)' % (t+1,splitIndex[0],splitIndex[1]))
         
 #######################
 
@@ -466,8 +466,8 @@ class cQuantilesRankingDigraph(SparseIntegerOutrankingDigraph):
                                              decomposition,
                                              compIndex,
                                              componentRankingRule,
-                                             Debug,
-                                             Comments)
+                                             Comments,
+                                             Debug)
                     thread.start()
                     #Process(target=_worker1,args=(task_queue,)).start()
                 #if Comments:
@@ -527,11 +527,9 @@ class cQuantilesRankingDigraph(SparseIntegerOutrankingDigraph):
                         boostedRankingList.append((i,splitComponents[i]['componentRanking']))
                 #print(boostedRankingList)
                 boostedRankingList.sort()
-                print(boostedRankingList)
                 boostedRanking = []
                 for brl in boostedRankingList:
                     boostedRanking += brl[1]
-                #print(boostedRanking)
                 
                 self.runTimes['componentsRanking'] = time() - t0
             if Comments:

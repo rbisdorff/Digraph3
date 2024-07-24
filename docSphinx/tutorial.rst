@@ -8834,14 +8834,15 @@ Following timings could be achieved with a specially designed *cQuantilesRanking
 .. table:: EUROHPC MeluXina Ranking Performance Records (Summer 2024)
 
    ============ =========== ===== ========= ========= ========= ========
-    outranking   relation     q     fill     nbr of    nbr of     run    
-      order        size             rate(%)  sorters   rankers   times   
+    digraph      relation     q    fill      nbr of    nbr of    run    
+    order        size              rate(%)   sorters   rankers   times   
    ============ =========== ===== ========= ========= ========= ========
     1000000      1x10^12      7     0.001     100        48       1'07"  
     2000000      4x10^12      9     0.001     128        64       2'43"   
     3000000      9x10^12      7     0.001     128        64       4'20"
     5000000      25x10^12     7     0.001     128        84       8'35"
-    6000000      36x10^12     9     0.001     128       128      12'11" 
+    6000000      36x10^12     9     0.001     128       128      12'11"
+    7000000      49x10^12     7     0.001     128        84      17'02"
    ============ =========== ===== ========= ========= ========= ========
 
 One million records could be ranked with 64 sorting and 64 ranking multiprocessing threads in about 69 seconds. The quantiles sorting step is based on 6-tiling. Three million records could be ranked with 128 sorters and 64 rankers in 4 min. and 20 sec. and the quantiles sorting step is here based on 7-tiling. With 28 sorters and 84 rankers, up to five million records could be 7-tiled and ranked in 8 min. and 35 sec.
