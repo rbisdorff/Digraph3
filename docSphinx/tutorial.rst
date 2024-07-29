@@ -8842,12 +8842,14 @@ Following timings could be achieved with a specially designed *cQuantilesRanking
     3000000      9x10^12      7     0.001     128        64       4'20"
     5000000      25x10^12     7     0.001     128        84       8'35"
     6000000      36x10^12     9     0.001     128       128      12'11"
-    7000000      49x10^12     7     0.001     128        84      17'02"
+    7000000      49x10^12     7     0.001     128       128      15'06"
+    8000000      64x10^12     7     0.001     192       220      15'33"
+    9000000      81x10^12     7     0.001     192       220      18'40"
    ============ =========== ===== ========= ========= ========= ========
 
-One million records could be ranked with 64 sorting and 64 ranking multiprocessing threads in about 69 seconds. The quantiles sorting step is based on 6-tiling. Three million records could be ranked with 128 sorters and 64 rankers in 4 min. and 20 sec. and the quantiles sorting step is here based on 7-tiling. With 128 sorters and 84 rankers, up to five million records could be 7-tiled and ranked in 8 min. and 35 sec.
+One million records could be ranked with 100 sorting and 48 ranking multiprocessing threads in about 67 seconds. The quantiles sorting step is based on 7-tiling. Three million records could be ranked with 128 sorters and 64 rankers in 4 min. and 20 sec. and the quantiles sorting step is here based on 7-tiling. With 128 sorters and 84 rankers, up to five million records could be 7-tiled and ranked in 8 min. and 35 sec.
 
-Below is shown an example MeluXina session for ranking **six million** incommensurable 3-objectives performance records.
+Below is shown an example *MeluXina* session for ranking **six million** incommensurable 21 criteria performance records assessing 3 decision objectives concerning economic, environmental and societal aspects ( see the :ref:`tutorial <Three-Objectives-Performance-Tableau-label>` on generating random three-objectives performance tableaux).
 
 .. code-block:: bash
 
@@ -8914,7 +8916,7 @@ Below is shown an example MeluXina session for ranking **six million** incommens
     Preordering        : 21.06959
     Components ranking : 354.03710
 
-With 128 sorting threads and 128 ranking threads, we need about 12 min., 4 min. for the 9-tiling step and 7 min. for ranking the 439443 components. The fill-rate of the resulting sparse outranking digraph is 0.001%.
+With 128 sorting threads and 128 ranking threads, we need about 12 min., 4 min. for the 9-tiling step and 7 min. for locally ranking each one of the 439443 components. The fill-rate of the resulting sparse outranking digraph is 0.001%.
 
 
 Back to :ref:`Content Table <Tutorial-label>`

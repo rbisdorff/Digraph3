@@ -8524,13 +8524,29 @@ fecop 75.78% success rate</p>
 <td><p>7</p></td>
 <td><p>0.001</p></td>
 <td><p>128</p></td>
-<td><p>84</p></td>
-<td><p>17’02”</p></td>
+<td><p>128</p></td>
+<td><p>15’06”</p></td>
+</tr>
+<tr class="row-odd"><td><p>8000000</p></td>
+<td><p>64x10^12</p></td>
+<td><p>7</p></td>
+<td><p>0.001</p></td>
+<td><p>192</p></td>
+<td><p>220</p></td>
+<td><p>15’33”</p></td>
+</tr>
+<tr class="row-even"><td><p>9000000</p></td>
+<td><p>81x10^12</p></td>
+<td><p>7</p></td>
+<td><p>0.001</p></td>
+<td><p>192</p></td>
+<td><p>220</p></td>
+<td><p>18’40”</p></td>
 </tr>
 </tbody>
 </table>
-<p>One million records could be ranked with 64 sorting and 64 ranking multiprocessing threads in about 69 seconds. The quantiles sorting step is based on 6-tiling. Three million records could be ranked with 128 sorters and 64 rankers in 4 min. and 20 sec. and the quantiles sorting step is here based on 7-tiling. With 128 sorters and 84 rankers, up to five million records could be 7-tiled and ranked in 8 min. and 35 sec.</p>
-<p>Below is shown an example MeluXina session for ranking <strong>six million</strong> incommensurable 3-objectives performance records.</p>
+<p>One million records could be ranked with 100 sorting and 48 ranking multiprocessing threads in about 67 seconds. The quantiles sorting step is based on 7-tiling. Three million records could be ranked with 128 sorters and 64 rankers in 4 min. and 20 sec. and the quantiles sorting step is here based on 7-tiling. With 128 sorters and 84 rankers, up to five million records could be 7-tiled and ranked in 8 min. and 35 sec.</p>
+<p>Below is shown an example <em>MeluXina</em> session for ranking <strong>six million</strong> incommensurable 21 criteria performance records assessing 3 decision objectives concerning economic, environmental and societal aspects ( see the <a class="reference internal" href="#three-objectives-performance-tableau-label"><span class="std std-ref">tutorial</span></a> on generating random three-objectives performance tableaux).</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="linenos">1</span><span class="o">(</span>MyPy3124<span class="o">)</span><span class="w"> </span><span class="o">[</span>userRB@mel4005<span class="w"> </span>Digraph3<span class="o">]</span>$<span class="w"> </span>python3
 <span class="linenos">2</span>Python<span class="w"> </span><span class="m">3</span>.12.4<span class="w"> </span><span class="o">(</span>main,<span class="w"> </span>Jul<span class="w"> </span><span class="m">19</span><span class="w"> </span><span class="m">2024</span>,<span class="w"> </span><span class="m">15</span>:25:25<span class="o">)</span>
 <span class="linenos">3</span><span class="o">[</span>GCC<span class="w"> </span><span class="m">8</span>.5.0<span class="w"> </span><span class="m">20210514</span><span class="w"> </span><span class="o">(</span>Red<span class="w"> </span>Hat<span class="w"> </span><span class="m">8</span>.5.0-20<span class="o">)]</span><span class="w"> </span>on<span class="w"> </span>linux
@@ -8592,7 +8608,7 @@ fecop 75.78% success rate</p>
 </span><span class="hll"><span class="linenos">52</span><span class="go"> Components ranking : 354.03710</span>
 </span></pre></div>
 </div>
-<p>With 128 sorting threads and 128 ranking threads, we need about 12 min., 4 min. for the 9-tiling step and 7 min. for ranking the 439443 components. The fill-rate of the resulting sparse outranking digraph is 0.001%.</p>
+<p>With 128 sorting threads and 128 ranking threads, we need about 12 min., 4 min. for the 9-tiling step and 7 min. for locally ranking each one of the 439443 components. The fill-rate of the resulting sparse outranking digraph is 0.001%.</p>
 <p>Back to <a class="reference internal" href="#tutorial-label"><span class="std std-ref">Content Table</span></a></p>
 <hr class="docutils" />
 </section>
@@ -10283,7 +10299,7 @@ dot -Grankdir=TB -Tpng rootedTree.dot -o rootedTree.png</p>
 
   <div role="contentinfo">
     <p>&#169; Copyright 2012-2024, Raymond Bisdorff.
-      <span class="lastupdated">Last updated on Jul 26, 2024.
+      <span class="lastupdated">Last updated on Jul 29, 2024.
       </span></p>
   </div>
 
