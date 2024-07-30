@@ -42,6 +42,9 @@
 .. only:: html
 	  
    :New:
+
+      - A tutorial on :ref:`using the Digraph3 HPC resources <HPC-Ranking-Tutorial-label>` for ranking several millions of multicriteria performance records via sparse outranking digraphs
+	
       - A tutorial on :ref:`using multiprocessing resources <Multiprocessing-Tutorial-label>` when tackling large performance tableaux with several hundreds of decision alternatives.
 
       - Two tutorials on computing :ref:`fair intergroup<Fair-InterGroup-Pairings-label>` and :ref:`fair intragroup<Fair-IntraGroup-Pairings-label>` pairing solutions	      
@@ -8827,11 +8830,11 @@ Restricted to these ten best-ranked alternatives, the *Copeland*, the *NetFlows*
 On the MeluXina EuroHPC supercomputer [54]_
 -------------------------------------------
 
-Summer 2024, the author was granted the opportunity to use the large memory HPC resources of the MeluXina EuroHPC supercomputer [55]_  (https://www.luxprovide.lu/meluxina/). Large memory nodes on this HPC platform offer a large RAM for particularly demanding workloads. Each large memory node is composed of 2 AMD Rome CPUs (64 core @ 2.6 GHz, 256HT cores total), has 4 TB of memory (4096 GB) and 1.92 TB of local storage.
+Summer 2024, the author was granted the opportunity to use the large memory HPC resources of the MeluXina EuroHPC supercomputer [55]_  (https://www.luxprovide.lu/meluxina/). Computing nodes on this HPC platform offer a large RAM for particularly demanding workloads. Each node is composed of 2 AMD Rome CPUs (64 core @ 2.6 GHz, 256HT cores total), has 4 TB of memory (4096 GB) and 1.92 TB of local storage.
 
 Following timings could be achieved with a specially designed *cQuantilesRankingDigraphs.pyx* module when q-tiling and ranking multiple incommensurable performance records of 21 criteria assessing three decision objectives, namely economic, environmental and societal aspects (see table below).
 
-.. table:: EUROHPC MeluXina Ranking Performance Records (Summer 2024)
+.. table:: EuroHPC MeluXina Ranking Performance Records (Summer 2024)
 
    ============ =========== ===== ========= ========= ========= ========
     digraph      relation     q    fill      nbr of    nbr of    run    
@@ -8845,6 +8848,7 @@ Following timings could be achieved with a specially designed *cQuantilesRanking
     7000000      49x10^12     7     0.001     128       128      15'06"
     8000000      64x10^12     7     0.001     192       220      15'33"
     9000000      81x10^12     7     0.001     192       220      18'40"
+    10000000     1x10^14      9     0.001     220       240      23'17"
    ============ =========== ===== ========= ========= ========= ========
 
 One million records could be ranked with 100 sorting and 48 ranking multiprocessing threads in about 67 seconds. The quantiles sorting step is based on 7-tiling. Three million records could be ranked with 128 sorters and 64 rankers in 4 min. and 20 sec. and the quantiles sorting step is here based on 7-tiling. With 128 sorters and 84 rankers, up to five million records could be 7-tiled and ranked in 8 min. and 35 sec.

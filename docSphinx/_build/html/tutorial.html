@@ -336,6 +336,7 @@
 <dl class="field-list simple" id="tutorial-label">
 <dt class="field-odd">New<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
+<li><p>A tutorial on <a class="reference internal" href="#hpc-ranking-tutorial-label"><span class="std std-ref">using the Digraph3 HPC resources</span></a> for ranking several millions of multicriteria performance records via sparse outranking digraphs</p></li>
 <li><p>A tutorial on <a class="reference internal" href="#multiprocessing-tutorial-label"><span class="std std-ref">using multiprocessing resources</span></a> when tackling large performance tableaux with several hundreds of decision alternatives.</p></li>
 <li><p>Two tutorials on computing <a class="reference internal" href="#fair-intergroup-pairings-label"><span class="std std-ref">fair intergroup</span></a> and <a class="reference internal" href="#fair-intragroup-pairings-label"><span class="std std-ref">fair intragroup</span></a> pairing solutions</p></li>
 </ul>
@@ -8456,10 +8457,10 @@ fecop 75.78% success rate</p>
 </section>
 <section id="on-the-meluxina-eurohpc-supercomputer-54">
 <span id="hpc-meluxina-tutorial-label"></span><h3><a class="toc-backref" href="#id360" role="doc-backlink"><span class="section-number">1.6.3. </span>On the MeluXina EuroHPC supercomputer <a class="footnote-reference brackets" href="#id219" id="id134" role="doc-noteref"><span class="fn-bracket">[</span>54<span class="fn-bracket">]</span></a></a><a class="headerlink" href="#on-the-meluxina-eurohpc-supercomputer-54" title="Permalink to this heading"></a></h3>
-<p>Summer 2024, the author was granted the opportunity to use the large memory HPC resources of the MeluXina EuroHPC supercomputer <a class="footnote-reference brackets" href="#id220" id="id135" role="doc-noteref"><span class="fn-bracket">[</span>55<span class="fn-bracket">]</span></a>  (<a class="reference external" href="https://www.luxprovide.lu/meluxina/">https://www.luxprovide.lu/meluxina/</a>). Large memory nodes on this HPC platform offer a large RAM for particularly demanding workloads. Each large memory node is composed of 2 AMD Rome CPUs (64 core &#64; 2.6 GHz, 256HT cores total), has 4 TB of memory (4096 GB) and 1.92 TB of local storage.</p>
+<p>Summer 2024, the author was granted the opportunity to use the large memory HPC resources of the MeluXina EuroHPC supercomputer <a class="footnote-reference brackets" href="#id220" id="id135" role="doc-noteref"><span class="fn-bracket">[</span>55<span class="fn-bracket">]</span></a>  (<a class="reference external" href="https://www.luxprovide.lu/meluxina/">https://www.luxprovide.lu/meluxina/</a>). Computing nodes on this HPC platform offer a large RAM for particularly demanding workloads. Each node is composed of 2 AMD Rome CPUs (64 core &#64; 2.6 GHz, 256HT cores total), has 4 TB of memory (4096 GB) and 1.92 TB of local storage.</p>
 <p>Following timings could be achieved with a specially designed <em>cQuantilesRankingDigraphs.pyx</em> module when q-tiling and ranking multiple incommensurable performance records of 21 criteria assessing three decision objectives, namely economic, environmental and societal aspects (see table below).</p>
 <table class="docutils align-default" id="id229">
-<caption><span class="caption-text">EUROHPC MeluXina Ranking Performance Records (Summer 2024)</span><a class="headerlink" href="#id229" title="Permalink to this table"></a></caption>
+<caption><span class="caption-text">EuroHPC MeluXina Ranking Performance Records (Summer 2024)</span><a class="headerlink" href="#id229" title="Permalink to this table"></a></caption>
 <thead>
 <tr class="row-odd"><th class="head"><p>digraph</p></th>
 <th class="head"><p>relation</p></th>
@@ -8542,6 +8543,14 @@ fecop 75.78% success rate</p>
 <td><p>192</p></td>
 <td><p>220</p></td>
 <td><p>18’40”</p></td>
+</tr>
+<tr class="row-odd"><td><p>10000000</p></td>
+<td><p>1x10^14</p></td>
+<td><p>9</p></td>
+<td><p>0.001</p></td>
+<td><p>220</p></td>
+<td><p>240</p></td>
+<td><p>23’17”</p></td>
 </tr>
 </tbody>
 </table>
@@ -10299,7 +10308,7 @@ dot -Grankdir=TB -Tpng rootedTree.dot -o rootedTree.png</p>
 
   <div role="contentinfo">
     <p>&#169; Copyright 2012-2024, Raymond Bisdorff.
-      <span class="lastupdated">Last updated on Jul 29, 2024.
+      <span class="lastupdated">Last updated on Jul 30, 2024.
       </span></p>
   </div>
 
