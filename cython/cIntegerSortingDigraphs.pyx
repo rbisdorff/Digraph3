@@ -601,6 +601,7 @@ class IntegerQuantilesSortingDigraph(IntegerBipolarOutrankingDigraph):
         """
         cdef int n, ns, nq, ni, nt, nbrOfJobs, nit, i, j, Min, Max, Med
         cdef bint LowerClosed, InitialSplit
+        cdef list jobs
         actions = self.actions
         criteria = self.criteria
         evaluation = self.evaluation
@@ -792,15 +793,19 @@ class IntegerQuantilesSortingDigraph(IntegerBipolarOutrankingDigraph):
 ##                    spa = dumps(splitActions,-1)
 ##                    fo.write(spa)
 ##                    fo.close()
+                    jobs = []
                     splitThread = _myThread1(j,self,InitialSplit,
                                            tempDirName,splitActions,
                                            hasNoVeto,hasBipolarVeto,
                                            hasSymmetricThresholds,
                                            StoreSorting,Debug)
                     splitThread.start()
-                    
-                while active_children() != []:
-                    pass
+                    jobs.append(splitThread)
+
+                for proc in jobs:
+                    proc.join()
+                #while active_children() != []:
+                #    pass
 
                 if Comments:    
                     print('Exiting computing threads')
