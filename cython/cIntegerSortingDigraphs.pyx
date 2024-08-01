@@ -13,6 +13,7 @@ Copyright (C) 2018-2024  Raymond Bisdorff
 from digraphs import *
 from cIntegerOutrankingDigraphs import *
 from cIntegerSortingDigraphs import *
+from multiprocessing import Process
 
 class _myThread1(Process):
     def __init__(self, int threadID,digraph,\

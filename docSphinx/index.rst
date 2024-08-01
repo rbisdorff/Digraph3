@@ -46,9 +46,11 @@ Wecome! This is the documentation for the **Digraph3** *Python* programming reso
 Parts of the documentation
 ..........................
 :New:
-
+   
    - A series of tutorials for tackling large and big outranking digraphs: see :ref:`BigDigraphs-Tutorial-label`
           
+   - A tutorial on :ref:`using the Digraph3 HPC resources <HPC-Ranking-Tutorial-label>` for ranking several millions of multicriteria performance records via big sparse outranking digraphs
+	
    - A :py:mod:`pairings` module for solving pairing problems illustrated with two tutorials on computing **fair** :ref:`intergroup<Fair-InterGroup-Pairings-label>` and :ref:`intragroup<Fair-IntraGroup-Pairings-label>` pairing solutions
 
 #. `Tutorials <tutorial.html>`_

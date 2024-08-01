@@ -8836,24 +8836,24 @@ Following timings could be achieved with a specially designed *cQuantilesRanking
 
 .. table:: EuroHPC MeluXina Ranking Performance Records (Summer 2024)
 
-   ============ =========== ===== ========= ========= ========= ========
-    digraph      relation     q    fill      nbr of    nbr of    run    
-    order        size              rate(%)   sorters   rankers   times   
-   ============ =========== ===== ========= ========= ========= ========
-    1000000      1x10^12      7     0.001     100        48       1'07"  
-    2000000      4x10^12      9     0.001     128        64       2'43"   
-    3000000      9x10^12      7     0.001     128        64       4'20"
-    5000000      25x10^12     7     0.001     128        84       8'35"
-    6000000      36x10^12     9     0.001     128       128      12'11"
-    7000000      49x10^12     7     0.001     128       128      15'06"
-    8000000      64x10^12     7     0.001     192       220      15'33"
-    9000000      81x10^12     7     0.001     192       220      18'40"
-    10000000     1x10^14      9     0.001     220       240      23'17"
-   ============ =========== ===== ========= ========= ========= ========
+   ============ =========== ===== ========= ========= ========= =========
+    digraph      relation     q    nbr of    nbr of    nbr of    tot.run    
+    order        size              compon.   sorters   rankers   times   
+   ============ =========== ===== ========= ========= ========= =========
+    1000000      1x10^12      7    251468     100        84       1'10"  
+    2000000      4x10^12      9    313870     128        64       2'43"   
+    3000000      9x10^12      7    361401     128        64       4'20"
+    5000000      25x10^12     7    411422     128        84       8'35"
+    6000000      36x10^12     9    439443     128       128      12'11"
+    7000000      49x10^12     7    444444     128       128      15'06"
+    8000000      64x10^12     7    457180     192       220      15'33"
+    9000000      81x10^12     7    469127     192       220      18'40"
+    10000000     1x10^14      9    500475     220       240      23'17"
+   ============ =========== ===== ========= ========= ========= =========
 
 One million records could be ranked with 100 sorting and 48 ranking multiprocessing threads in about 67 seconds. The quantiles sorting step is based on 7-tiling. Three million records could be ranked with 128 sorters and 64 rankers in 4 min. and 20 sec. and the quantiles sorting step is here based on 7-tiling. With 128 sorters and 84 rankers, up to five million records could be 7-tiled and ranked in 8 min. and 35 sec.
 
-Below is shown an example *MeluXina* session for ranking **six million** incommensurable 21 criteria performance records assessing 3 decision objectives concerning economic, environmental and societal aspects ( see the :ref:`tutorial <Three-Objectives-Performance-Tableau-label>` on generating random three-objectives performance tableaux).
+Below is shown an example *MeluXina* session for ranking **six million** incommensurable 21 criteria performance records assessing 3 decision objectives concerning economic, environmental and societal aspects ( see the :ref:`tutorial <Three-Objectives-Performance-Tableau-label>` on generating random three-objectives performance tableaux). The Python3.12.4, compiled with GCC 8.5.0 H and enabled optimizations in a virtual environment is running on RH linux 8.5.0-20. All used cythonized modules were compiled in the same environment. [57]_ 
 
 .. code-block:: bash
 
@@ -10640,6 +10640,8 @@ Appendices
 .. [55] The acquisition and operation of the EuroHPC supercomputer is funded jointly by the EuroHPC Joint Undertaking, through the European Union's Connecting Europe Facility and the Horizon 2020 research and innovation programme, as well as the Grand Duché du Luxembourg.
 
 .. [56] https://www.wortmann.de/
+
+.. [57] The Digraph3 cythonized modules (with *.pyx* suffix) may be found in the *cython* directory of the Digraph3 resources. 
 
 
 ..  LocalWords:  randomDigraph Determinateness valuationdomain py png
