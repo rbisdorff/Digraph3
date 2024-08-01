@@ -8560,7 +8560,7 @@ Following from the separability property of the *q*-tiles sorting of each action
 On a common 2023 desktop computer
 ---------------------------------
 
-On a common 2023 Terra desktop computer [56]_, equipped with a 11th Gen Intel® Core™ i5-11400 × 12 processor and 16.0 GiB of CPU memory, working under Ubuntu 23.10 we may rank a :py:class:`~cRandPerfTabs.cRandom3ObjectivesPerformanceTableau` instance of **five hundred thousand** performance records in about 104 seconds with about 48 seconds for the quantiles sorting step and 55 seconds for the local components ranking step (see below Lines 42-).
+On a common 2023 Terra desktop computer [56]_, equipped with a 11th Gen Intel® Core™ i5-11400 × 12 processor and 16.0 GiB of CPU memory, working under Ubuntu 23.10 we may rank a :py:class:`~cRandPerfTabs.cRandom3ObjectivesPerformanceTableau` instance of **five hundred thousand** multicriteria performance records in about 104 seconds with about 48 seconds for the quantiles sorting step and 55 seconds for the local components ranking step (see below Lines 42-).
 
 .. code-block:: bash
 
@@ -8832,7 +8832,7 @@ On the MeluXina EuroHPC supercomputer [54]_
 
 Summer 2024, the author was granted the opportunity to use the large memory HPC resources of the MeluXina EuroHPC supercomputer [55]_  (https://www.luxprovide.lu/meluxina/). Computing nodes on this HPC platform offer a large RAM for particularly demanding workloads. Each node is composed of 2 AMD Rome CPUs (64 core @ 2.6 GHz, 256HT cores total), has 4 TB of memory (4096 GB) and 1.92 TB of local storage.
 
-Following timings could be achieved with a specially designed *cQuantilesRankingDigraphs.pyx* module when q-tiling and ranking multiple incommensurable performance records of 21 criteria assessing three decision objectives, namely economic, environmental and societal aspects (see table below).
+Following timings (see table below) could be achieved with a specially designed :py:mod:`cQuantilesRankingDigraphs` module [57]_ when q-tiling and ranking multiple incommensurable performance records of 21 criteria assessing three decision objectives, namely economic, environmental and societal aspects ( see the :ref:`tutorial <Three-Objectives-Performance-Tableau-label>` on generating random three-objectives performance tableaux).
 
 .. table:: EuroHPC MeluXina Ranking Performance Records (Summer 2024)
 
@@ -8840,7 +8840,7 @@ Following timings could be achieved with a specially designed *cQuantilesRanking
     digraph      relation     q    nbr of    nbr of    nbr of    tot.run    
     order        size              compon.   sorters   rankers   times   
    ============ =========== ===== ========= ========= ========= =========
-    1000000      1x10^12      7    251468     100        84       1'10"  
+    1000000      1x10^12      7    251468     100        48       1'07"  
     2000000      4x10^12      9    313870     128        64       2'43"   
     3000000      9x10^12      7    361401     128        64       4'20"
     5000000      25x10^12     7    411422     128        84       8'35"
@@ -8853,7 +8853,7 @@ Following timings could be achieved with a specially designed *cQuantilesRanking
 
 One million records could be ranked with 100 sorting and 48 ranking multiprocessing threads in about 67 seconds. The quantiles sorting step is based on 7-tiling. Three million records could be ranked with 128 sorters and 64 rankers in 4 min. and 20 sec. and the quantiles sorting step is here based on 7-tiling. With 128 sorters and 84 rankers, up to five million records could be 7-tiled and ranked in 8 min. and 35 sec.
 
-Below is shown an example *MeluXina* session for ranking **six million** incommensurable 21 criteria performance records assessing 3 decision objectives concerning economic, environmental and societal aspects ( see the :ref:`tutorial <Three-Objectives-Performance-Tableau-label>` on generating random three-objectives performance tableaux). The Python3.12.4, compiled with GCC 8.5.0 H and enabled optimizations in a virtual environment is running on RH linux 8.5.0-20. All used cythonized modules were compiled in the same environment. [57]_ 
+Below is shown an example *MeluXina* session for ranking **six million** incommensurable 21 criteria performance records assessing 3 decision objectives concerning economic, environmental and societal aspects ( see the :ref:`tutorial <Three-Objectives-Performance-Tableau-label>` on generating random three-objectives performance tableaux). The Python 3.12.4 interpreter, compiled with GCC 8.5.0 RH and enabled optimizations, is running in a virtual environment on RH 8.5.0-20 Linux. All the cythonized modules were compiled with Cython-3.0.10 in the same environment. [57]_ 
 
 .. code-block:: bash
 
@@ -8898,9 +8898,9 @@ Below is shown an example *MeluXina* session for ranking **six million** incomme
     Ordering strategy  : optimal
     Ranking rule       : Copeland
     Components         : 439443
-    Minimal order      : 1
-    Maximal order      : 924
-    Average order      : 13.7
+     Minimal order     : 1
+     Maximal order     : 924
+     Average order     : 13.7
     fill rate          : 0.001%
     Attributes         : ['runTimes', 'name', 'actions', 'order',
                           'dimension', 'sortingParameters', 'nbrOfSorters',
@@ -10641,7 +10641,7 @@ Appendices
 
 .. [56] https://www.wortmann.de/
 
-.. [57] The Digraph3 cythonized modules (with *.pyx* suffix) may be found in the *cython* directory of the Digraph3 resources. 
+.. [57] The sources of the cythonized Digraph3 modules (with *.pyx* suffix) may be found in the *cython* directory of the Digraph3 resources. 
 
 
 ..  LocalWords:  randomDigraph Determinateness valuationdomain py png

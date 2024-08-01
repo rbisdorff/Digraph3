@@ -186,9 +186,9 @@ class cQuantilesRankingDigraph(SparseIntegerOutrankingDigraph):
         reprString += 'Ordering strategy  : %s\n' % self.sortingParameters['strategy']
         reprString += 'Ranking rule       : %s\n' % self.componentRankingRule
         reprString += 'Components         : %d\n' % self.nbrComponents
-        reprString += 'Minimal order      : %d\n' % self.minimalComponentSize
-        reprString += 'Maximal order      : %d\n' % self.maximalComponentSize
-        reprString += 'Average order      : %.1f\n' % (self.order/self.nbrComponents)
+        reprString += ' Minimal order     : %d\n' % self.minimalComponentSize
+        reprString += ' Maximal order     : %d\n' % self.maximalComponentSize
+        reprString += ' Average order     : %.1f\n' % (self.order/self.nbrComponents)
         reprString += 'fill rate          : %.3f%%\n' % (self.fillRate*100.0)    
         reprString += 'Attributes         : %s\n' % list(self.__dict__.keys())
         reprString += '----  Constructor run times (in sec.) ----\n'
@@ -201,7 +201,7 @@ class cQuantilesRankingDigraph(SparseIntegerOutrankingDigraph):
         reprString += 'QuantilesSorting   : %.5f\n' % self.runTimes['sorting']
         reprString += 'Preordering        : %.5f\n' % self.runTimes['preordering']
         reprString += 'Components ranking : %.5f\n' % self.runTimes['componentsRanking']
- 
+        reprString += 'Post Threading     : %.5f\n' % self.runTimes['postThreading']
 
         return reprString
     
