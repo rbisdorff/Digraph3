@@ -94,7 +94,9 @@ def testBestChoiceRecommendation():
     bg2 = SparseIntegerOutrankingDigraph(tp,quantiles=35,quantilesOrderingStrategy='average',
                                 LowerClosed=False,
                                minimalComponentSize=10,
-                                    Threading=MP,Debug=False)
+                                    Threading=MP,
+                                         tempDir='.',
+                                         Debug=False)
     t0=time();print(bg2.computeDeterminateness());print(time()-t0,'sec.')
     bg2.showBestChoiceRecommendation(Comments=False)
 
@@ -122,11 +124,11 @@ def testSparseModelFitness():
                                 LowerClosed=False,
                                 CopyPerfTab=True,
                                minimalComponentSize=minimalComponentSize,
-                                    Threading=MP,Debug=False)
+                                             Threading=MP,tempDir='.',Debug=False)
         bg2 = SparseIntegerOutrankingDigraph(tp,quantiles=qTiles,quantilesOrderingStrategy='average',
                                 LowerClosed=False,
                                minimalComponentSize=nbrOfActions,
-                                    Threading=MP,Comments=False,Debug=False)
+                                             Threading=MP,tempDir='.',Comments=False,Debug=False)
         corr = bg1.computeOrdinalCorrelation(bg2,Debug=False)
         fo = open(fileName,'a')
         fo.write('%.3f,%.3f\n' %(corr['correlation'],corr['determination']))
@@ -158,12 +160,12 @@ def testcQuantilesRankingFitness():
                                 LowerClosed=False,
                                 CopyPerfTab=True,
                                minimalComponentSize=minimalComponentSize,
-                                    Threading=MP,Debug=False)
+                                       Threading=MP,tempDir='.',Debug=False)
         print(bg1)
         bg2 = cQuantilesRankingDigraph(tp,quantiles=qTiles,quantilesOrderingStrategy='average',
                                 LowerClosed=False,
                                minimalComponentSize=nbrOfActions,
-                                    Threading=MP,Comments=False,Debug=False)
+                                       Threading=MP,tempDir='.',Comments=False,Debug=False)
         print(bg2)
         corr = bg1.computeOrdinalCorrelation(bg2,Debug=False)
         fo = open(fileName,'a')

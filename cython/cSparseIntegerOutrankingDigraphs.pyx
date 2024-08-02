@@ -1254,6 +1254,8 @@ class SparseIntegerOutrankingDigraph(SparseIntegerDigraph,cPerformanceTableau):
                 nbrOfCPUs = mp.cpu_count()
             if startMethod is None:
                 startMethod  = 'spawn'
+            if tempDir is None:
+                tempDir = "/tmp"
         qs = IntegerQuantilesSortingDigraph(argPerfTab=perfTab,
                                 limitingQuantiles=quantiles,
                                 LowerClosed=LowerClosed,

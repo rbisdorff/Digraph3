@@ -805,8 +805,8 @@ class IntegerQuantilesSortingDigraph(IntegerBipolarOutrankingDigraph):
 
                 for proc in jobs:
                     proc.join()
-                #while active_children() != []:
-                #    pass
+                while active_children() != []:
+                    pass
 
                 if Comments:    
                     print('Exiting computing threads')

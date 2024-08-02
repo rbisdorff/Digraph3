@@ -214,6 +214,7 @@ class cQuantilesRankingDigraph(SparseIntegerOutrankingDigraph):
                  bint Threading=False,
                  startMethod=None,
                  tempDir='.',
+                 nbrOfCPUs=None,
                  nbrOfSorters=None,
                  nbrOfRankers=None,
                  save2File=None,
@@ -228,7 +229,7 @@ class cQuantilesRankingDigraph(SparseIntegerOutrankingDigraph):
         cdef int maximalComponentSize = 0
         #cdef array.array lTest=array.array('i')
         cdef int NA
-        cdef list boostedRankingList,bosstedRanking,blr
+        cdef list jobs,boostedRankingList,boostedRanking,blr
 
         #global perfTab
         #global decomposition
@@ -296,8 +297,12 @@ class cQuantilesRankingDigraph(SparseIntegerOutrankingDigraph):
             print('Computing the %d-quantiles sorting digraph of order %d ...' % (quantiles,na))
         if Threading:
             import multiprocessing as mp
-            if nbrOfSorters is None:
-                nbrOfSorters = mp.cpu_count()
+            if nbrOfCPUs is not None:
+                nbrOfSorters = nbrOfCPUs
+                nbrOfRankers = nbrOfSorters
+            else:
+                if nbrOfSorters is None:
+                    nbrOfSorters = mp.cpu_count()
             if startMethod is None:
                 startMehod = 'spawn'
             self.nbrOfSorters = nbrOfSorters
@@ -417,10 +422,7 @@ class cQuantilesRankingDigraph(SparseIntegerOutrankingDigraph):
             #nbrCores = mpctx.cpu_count()
             if nbrOfRankers is None:
                 nbrOfRankers = mpctx.cpu_count()
-            #if nbrOfDecomposingCPUs is None:
-            #    nbrOfDecomposingCPUs = nbrOfCPUs
             self.nbrOfRankers = nbrOfRankers
-            #from multiprocessing import Process, Queue,active_children, cpu_count                 
             if Comments:
                 print('Processing the %d components' % nc )
                 print('Threading ...')
@@ -457,6 +459,7 @@ class cQuantilesRankingDigraph(SparseIntegerOutrankingDigraph):
                 #TASKS = [(Comments,(i,pos,nc,tempDirName,
                 #        decomposition,compIndex,
                 #        componentRankingRule)) for i,pos in enumerate(splitTasksIndex)]
+                jobs = []
                 for t in range(NUMBER_OF_WORKERS):
                     splitIndex = splitTasksIndex[t]
                     #print(t,splitIndex)
@@ -469,12 +472,14 @@ class cQuantilesRankingDigraph(SparseIntegerOutrankingDigraph):
                                              Comments,
                                              Debug)
                     thread.start()
+                    jobs.append(thread)
                     #Process(target=_worker1,args=(task_queue,)).start()
                 #if Comments:
                 #    print('started')
                 #for i in range(NUMBER_OF_WORKERS):
                 #    task_queue.put('STOP')                   
-
+                for proc in jobs:
+                    proc.join()
                 while active_children() != []:
                     pass
                 if Comments:
