@@ -23,6 +23,8 @@ cython/cRandPerfTabs.pyx
 cython/cIntegerOutrankingDigraphs.pyx
 cython/cIntegerSortingDigraphs.pyx
 cython/cSparseIntegerOutrankingDigraphs.pyx
+cython/cQuantilesRankingDigraphs.pyx
+cython/cnpBipolarDigraphs.pyx
 cython/detertest.h
 cython/csetupSOInteger.py
 cython/csetupRandPerfTabs.py

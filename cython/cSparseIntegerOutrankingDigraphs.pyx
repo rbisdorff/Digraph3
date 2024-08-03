@@ -2170,12 +2170,12 @@ class SparseIntegerOutrankingDigraph(SparseIntegerDigraph,cPerformanceTableau):
 #     return '(%d, %d)' % (splitIndex[0],splitIndex[1])
 
 # ------------
-from cQuantilesRankingDigraphs import cQuantilesRankingDigraph as QRD
-class cQuantilesRankingDigraph(QRD):
+import cQuantilesRankingDigraphs as QRD
+class cQuantilesRankingDigraph(QRD.cQuantilesRankingDigraph):
     """
-    Deprecated and redirected to a reviewed implementation available in the new :py:mod:`cQuantilesRankingDigraphs` module.
+    Deprecated and redirected to a reviewed implementation available in the new# :py:mod:`cQuantilesRankingDigraphs` module.
     """
-    # """
+#    # """
     # Cythonized version of the :py:class:`sparseOutrankingDigraphs.PreRankedOutrankingDigraph` class for the multiprocessing implementation of multiple criteria quantiles ranking of very big performance tableaux - > 100000.
 
     # *Parameters*:
