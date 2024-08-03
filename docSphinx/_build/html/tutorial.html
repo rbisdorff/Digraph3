@@ -6009,7 +6009,7 @@ fecop 75.78% success rate</p>
 <p><span class="caption-number">Fig. 1.46 </span><span class="caption-text">Alice’s performance criteria</span><a class="headerlink" href="#alicecriteria" title="Permalink to this image"></a></p>
 </figcaption>
 </figure>
-<p>It is worthwhile noticing in <a class="hxr-hoverxref hxr-tooltip reference internal" href="#alicecriteria"><span class="std std-numref">Fig. 1.46</span></a> above that, on her subjective attractiveness scale of the study programs (criterion <em>AS</em>), Alice considers a performance differences of 7 points to be <em>considerable</em> and triggering, the case given, a <em>polarisation</em> of the outranking statement. Notice also the proportional <em>indifference</em> (1%) and <em>preference</em> (5%) discrimination thresholds shown on criterion <em>BC</em>-number of inhabitants.</p>
+<p>It is worthwhile noticing in <a class="hxr-hoverxref hxr-tooltip reference internal" href="#alicecriteria"><span class="std std-numref">Fig. 1.46</span></a> above that, on her subjective attractiveness scale of the study programs (criterion <em>AS</em>), Alice considers a performance difference of 7 points to be <em>considerable</em> and triggering, the case given, a <em>polarisation</em> of the outranking situation. Notice also the proportional <em>indifference</em> (1%) and <em>preference</em> (5%) discrimination thresholds shown on criterion <em>BC</em>-number of inhabitants.</p>
 <p>In the following <em>heatmap view</em>, we may now consult Alice’s performance evaluations.</p>
 <div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">t</span><span class="o">.</span><span class="n">showHTMLPerformanceHeatmap</span><span class="p">(</span>\
 <span class="gp">... </span>      <span class="n">colorLevels</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span><span class="n">Correlations</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span><span class="n">ndigits</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
@@ -7837,13 +7837,14 @@ fecop 75.78% success rate</p>
 <section id="c-compiled-python-modules">
 <h4><a class="toc-backref" href="#id356" role="doc-backlink"><span class="section-number">1.5.3.1. </span>C-compiled Python modules</a><a class="headerlink" href="#c-compiled-python-modules" title="Permalink to this heading"></a></h4>
 <p>The Digraph3 collection provides cythonized <a class="footnote-reference brackets" href="#id177" id="id125" role="doc-noteref"><span class="fn-bracket">[</span>6<span class="fn-bracket">]</span></a>, i.e. C-compiled and optimised versions of the main python modules for tackling multiple criteria decision problems facing very large sets of decision alternatives ( &gt; 10000 ). Such problems appear usually with a combinatorial organisation of the potential decision alternatives, as is frequently the case in bioinformatics for instance. If HPC facilities with nodes supporting numerous cores (&gt; 20) and big RAM (&gt; 50GB) are available, ranking up to several millions of alternatives (see <a class="reference internal" href="#bis-2016" id="id126"><span>[BIS-2016]</span></a>) becomes effectively tractable.</p>
-<p>Four cythonized Digraph3 modules, prefixed with the letter <em>c</em> and taking a <em>pyx</em> extension, are provided with their corresponding setup tools in the <em>Digraph3/cython</em> directory, namely</p>
+<p>Five cythonized Digraph3 modules, prefixed with the letter <em>c</em> and taking a <em>pyx</em> extension, are provided with their corresponding setup tools in the <em>Digraph3/cython</em> directory, namely</p>
 <blockquote>
 <div><ul class="simple">
 <li><p><em>cRandPerfTabs.pyx</em></p></li>
 <li><p><em>cIntegerOutrankingDigraphs.pyx</em></p></li>
 <li><p><em>cIntegerSortingDigraphs.pyx</em></p></li>
 <li><p><em>cSparseIntegerOutrankingDigraphs.pyx</em></p></li>
+<li><p><em>cQuantilesRankingDigraphs.pyx</em></p></li>
 </ul>
 </div></blockquote>
 <p>Their automatic compilation and installation (<em>…Digraph3$ make installPip</em>), alongside the standard Digraph3 python3 modules, requires the <em>cython</em> compiler <a class="footnote-reference brackets" href="#id177" id="id127" role="doc-noteref"><span class="fn-bracket">[</span>6<span class="fn-bracket">]</span></a> ( <em>…$ python3 m pip install cython wheel</em> ) and a C compiler ( <em>…$ sudo apt install gcc</em> ). Local <em>inplace</em> compilation and installation ( <em>…/Digraph3/cython$ make</em> ) is provided with a corresponding <em>makefile</em> in the “Digraph3/cython* directory.</p>
@@ -10313,7 +10314,7 @@ dot -Grankdir=TB -Tpng rootedTree.dot -o rootedTree.png</p>
 
   <div role="contentinfo">
     <p>&#169; Copyright 2012-2024, Raymond Bisdorff.
-      <span class="lastupdated">Last updated on Aug 01, 2024.
+      <span class="lastupdated">Last updated on Aug 03, 2024.
       </span></p>
   </div>
 
