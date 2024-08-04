@@ -100,9 +100,9 @@ class _myThread1(Process):
 from cIntegerOutrankingDigraphs import IntegerBipolarOutrankingDigraph
 from cRandPerfTabs import cPartialPerformanceTableau
 from cIntegerSortingDigraphs import IntegerQuantilesSortingDigraph
-from cSparseIntegerOutrankingDigraphs import SparseIntegerOutrankingDigraph
+import cSparseIntegerOutrankingDigraphs as SIOD
 
-class cQuantilesRankingDigraph(SparseIntegerOutrankingDigraph):
+class cQuantilesRankingDigraph(SIOD.SparseIntegerOutrankingDigraph):
     """
     Cythonized version of the cQuantlesRanking class for the multiprocessing implementation of multiple criteria quantiles ranking of very big performance tableaux - > 100000. This version was developped on the Luxembourg national supercomputer MeluXina (https://docs.lxp.lu/). The author gratefully acknowledges the LuxProvide teams for granting access to the HPC resources and for their kind operational support.
 
