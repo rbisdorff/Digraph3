@@ -8549,7 +8549,7 @@ The best ranking correlation with the pairwise outranking situations (+0.75) is 
 HPC-Ranking of Big Sparse Outranking Digraphs
 =============================================
 
-Following from the separability property of the *q*-tiles sorting of each action into each *q*-tiles class, the *q*-sorting algorithm may be safely split into as much threads as are multiple processing cores available in parallel. Furthermore, the ranking procedure being local to each diagonal component, these procedures may as well be safely processed in parallel threads on each component restricted outrankingdigraph. Below some examples on different types of computers.
+Following from the separability property of the *q*-tiles sorting of each action into each *q*-tiles class, the *q*-sorting algorithm may be safely split into as much threads as are multiple processing cores available in parallel. Furthermore, the ranking procedure being local to each diagonal component, these procedures may as well be safely processed in parallel threads on each component restricted outranking digraph. Below some examples on different types of computers.
 
 .. contents:: 
    :depth: 1
@@ -8844,6 +8844,7 @@ Following timings (see table below) could be achieved with a specially designed 
     1000000      1x10^12      7    251468     100        48       1'07"  
     2000000      4x10^12      9    313870     128        64       2'43"   
     3000000      9x10^12      7    361401     128        64       4'20"
+    4000000      16x10^12     7    389459     128       128       5'56"
     5000000      25x10^12     7    411422     128        84       8'35"
     6000000      36x10^12     9    439443     128       128      12'11"
     7000000      49x10^12     7    444444     128       128      15'06"
@@ -8887,7 +8888,7 @@ Below is shown an example *MeluXina* session for ranking **six million** incomme
    ...                    Threading=True,
    ...                    nbrOfSorters=128,
    ...                    nbrOfRankers=128,
-   ...                    tempDir='/project/scratch/p200541',
+   ...                    tempDir='/project/scratch/userRB',
    ...                    Comments=False)
    >>> qr
     *----- Object instance description --------------*

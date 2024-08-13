@@ -124,23 +124,6 @@ colorPalettes = {1: _colorPalette1, 2: _colorPalette2, 3: _colorPalette0}
 
 #     return splitIndex
 
-def balanceEmil(tasks,q,splitLevel,Debug=True,Comments=True):
-    """
-    Emil's algorithm for balancing tasks of uneven length.
-    August 2024
-    """
-    if Debug:
-        print(tasks)
-    bigTasks = []
-    smallTasks = []
-    for t in tasks:
-        if t > splitLevel:
-            bigTasks.append(t)
-        else:
-            smallTasks.append(t)
-    if Debug:
-        print(bigTasks)
-        print(smallTasks)
         
     
 def qtilingIndexList(indexList,q,Debug=False,Comments=False):

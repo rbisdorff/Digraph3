@@ -219,23 +219,6 @@
 
 <span class="c1">#     return splitIndex</span>
 
-<div class="viewcode-block" id="balanceEmil"><a class="viewcode-back" href="../techDoc.html#digraphsTools.balanceEmil">[docs]</a><span class="k">def</span> <span class="nf">balanceEmil</span><span class="p">(</span><span class="n">tasks</span><span class="p">,</span><span class="n">q</span><span class="p">,</span><span class="n">splitLevel</span><span class="p">,</span><span class="n">Debug</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span><span class="n">Comments</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">    Emil&#39;s algorithm for balancing tasks of uneven length.</span>
-<span class="sd">    August 2024</span>
-<span class="sd">    &quot;&quot;&quot;</span>
-    <span class="k">if</span> <span class="n">Debug</span><span class="p">:</span>
-        <span class="nb">print</span><span class="p">(</span><span class="n">tasks</span><span class="p">)</span>
-    <span class="n">bigTasks</span> <span class="o">=</span> <span class="p">[]</span>
-    <span class="n">smallTasks</span> <span class="o">=</span> <span class="p">[]</span>
-    <span class="k">for</span> <span class="n">t</span> <span class="ow">in</span> <span class="n">tasks</span><span class="p">:</span>
-        <span class="k">if</span> <span class="n">t</span> <span class="o">&gt;</span> <span class="n">splitLevel</span><span class="p">:</span>
-            <span class="n">bigTasks</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">t</span><span class="p">)</span>
-        <span class="k">else</span><span class="p">:</span>
-            <span class="n">smallTasks</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">t</span><span class="p">)</span>
-    <span class="k">if</span> <span class="n">Debug</span><span class="p">:</span>
-        <span class="nb">print</span><span class="p">(</span><span class="n">bigTasks</span><span class="p">)</span>
-        <span class="nb">print</span><span class="p">(</span><span class="n">smallTasks</span><span class="p">)</span></div>
         
     
 <div class="viewcode-block" id="qtilingIndexList"><a class="viewcode-back" href="../techDoc.html#digraphsTools.qtilingIndexList">[docs]</a><span class="k">def</span> <span class="nf">qtilingIndexList</span><span class="p">(</span><span class="n">indexList</span><span class="p">,</span><span class="n">q</span><span class="p">,</span><span class="n">Debug</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span><span class="n">Comments</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
@@ -1078,7 +1061,7 @@
 
   <div role="contentinfo">
     <p>&#169; Copyright 2012-2024, Raymond Bisdorff.
-      <span class="lastupdated">Last updated on Aug 04, 2024.
+      <span class="lastupdated">Last updated on Aug 13, 2024.
       </span></p>
   </div>
 

@@ -8213,7 +8213,7 @@ fecop 75.78% success rate</p>
 </section>
 <section id="hpc-ranking-of-big-sparse-outranking-digraphs">
 <span id="hpc-ranking-tutorial-label"></span><h2><span class="section-number">1.6. </span>HPC-Ranking of Big Sparse Outranking Digraphs<a class="headerlink" href="#hpc-ranking-of-big-sparse-outranking-digraphs" title="Permalink to this heading"></a></h2>
-<p>Following from the separability property of the <em>q</em>-tiles sorting of each action into each <em>q</em>-tiles class, the <em>q</em>-sorting algorithm may be safely split into as much threads as are multiple processing cores available in parallel. Furthermore, the ranking procedure being local to each diagonal component, these procedures may as well be safely processed in parallel threads on each component restricted outrankingdigraph. Below some examples on different types of computers.</p>
+<p>Following from the separability property of the <em>q</em>-tiles sorting of each action into each <em>q</em>-tiles class, the <em>q</em>-sorting algorithm may be safely split into as much threads as are multiple processing cores available in parallel. Furthermore, the ranking procedure being local to each diagonal component, these procedures may as well be safely processed in parallel threads on each component restricted outranking digraph. Below some examples on different types of computers.</p>
 <nav class="contents local" id="id128">
 <ul class="simple">
 <li><p><a class="reference internal" href="#on-a-common-2023-desktop-computer" id="id361">On a common 2023 desktop computer</a></p></li>
@@ -8505,7 +8505,15 @@ fecop 75.78% success rate</p>
 <td><p>64</p></td>
 <td><p>4’20”</p></td>
 </tr>
-<tr class="row-even"><td><p>5000000</p></td>
+<tr class="row-even"><td><p>4000000</p></td>
+<td><p>16x10^12</p></td>
+<td><p>7</p></td>
+<td><p>389459</p></td>
+<td><p>128</p></td>
+<td><p>128</p></td>
+<td><p>5’56”</p></td>
+</tr>
+<tr class="row-odd"><td><p>5000000</p></td>
 <td><p>25x10^12</p></td>
 <td><p>7</p></td>
 <td><p>411422</p></td>
@@ -8513,7 +8521,7 @@ fecop 75.78% success rate</p>
 <td><p>84</p></td>
 <td><p>8’35”</p></td>
 </tr>
-<tr class="row-odd"><td><p>6000000</p></td>
+<tr class="row-even"><td><p>6000000</p></td>
 <td><p>36x10^12</p></td>
 <td><p>9</p></td>
 <td><p>439443</p></td>
@@ -8521,7 +8529,7 @@ fecop 75.78% success rate</p>
 <td><p>128</p></td>
 <td><p>12’11”</p></td>
 </tr>
-<tr class="row-even"><td><p>7000000</p></td>
+<tr class="row-odd"><td><p>7000000</p></td>
 <td><p>49x10^12</p></td>
 <td><p>7</p></td>
 <td><p>444444</p></td>
@@ -8529,7 +8537,7 @@ fecop 75.78% success rate</p>
 <td><p>128</p></td>
 <td><p>15’06”</p></td>
 </tr>
-<tr class="row-odd"><td><p>8000000</p></td>
+<tr class="row-even"><td><p>8000000</p></td>
 <td><p>64x10^12</p></td>
 <td><p>7</p></td>
 <td><p>457180</p></td>
@@ -8537,7 +8545,7 @@ fecop 75.78% success rate</p>
 <td><p>220</p></td>
 <td><p>15’33”</p></td>
 </tr>
-<tr class="row-even"><td><p>9000000</p></td>
+<tr class="row-odd"><td><p>9000000</p></td>
 <td><p>81x10^12</p></td>
 <td><p>7</p></td>
 <td><p>469127</p></td>
@@ -8545,7 +8553,7 @@ fecop 75.78% success rate</p>
 <td><p>220</p></td>
 <td><p>18’40”</p></td>
 </tr>
-<tr class="row-odd"><td><p>10000000</p></td>
+<tr class="row-even"><td><p>10000000</p></td>
 <td><p>1x10^14</p></td>
 <td><p>9</p></td>
 <td><p>500475</p></td>
@@ -8583,7 +8591,7 @@ fecop 75.78% success rate</p>
 <span class="linenos">17</span><span class="gp">... </span>                   <span class="n">Threading</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
 <span class="linenos">18</span><span class="gp">... </span>                   <span class="n">nbrOfSorters</span><span class="o">=</span><span class="mi">128</span><span class="p">,</span>
 <span class="linenos">19</span><span class="gp">... </span>                   <span class="n">nbrOfRankers</span><span class="o">=</span><span class="mi">128</span><span class="p">,</span>
-<span class="linenos">20</span><span class="gp">... </span>                   <span class="n">tempDir</span><span class="o">=</span><span class="s1">&#39;/project/scratch/p200541&#39;</span><span class="p">,</span>
+<span class="linenos">20</span><span class="gp">... </span>                   <span class="n">tempDir</span><span class="o">=</span><span class="s1">&#39;/project/scratch/userRB&#39;</span><span class="p">,</span>
 <span class="linenos">21</span><span class="gp">... </span>                   <span class="n">Comments</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
 <span class="linenos">22</span><span class="gp">&gt;&gt;&gt; </span><span class="n">qr</span>
 <span class="linenos">23</span><span class="go"> *----- Object instance description --------------*</span>
@@ -10314,7 +10322,7 @@ dot -Grankdir=TB -Tpng rootedTree.dot -o rootedTree.png</p>
 
   <div role="contentinfo">
     <p>&#169; Copyright 2012-2024, Raymond Bisdorff.
-      <span class="lastupdated">Last updated on Aug 03, 2024.
+      <span class="lastupdated">Last updated on Aug 13, 2024.
       </span></p>
   </div>
 
