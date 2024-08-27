@@ -8088,7 +8088,7 @@ This attribute allows to print out the relation table with the considerable perf
            |  (+0,+0)  (+0,+0)  (+0,+0)  (+1,+0)  (+0,+0) 
      Valuation domain: [-13.000; 13.000]
 
-In Lines 7-8 above, we may for instance notice a considerably large positive performance difference when comparing alternatives 'a002' and 'a004' which results in a polarised *for certain valid* outranking situation: :math:`r(a_{002} \succsim a_{004}) = +13.00`. The converse situation is observed in Lines 11-12 where we may notice the corresponding considerably large negative performance differnce leading this time to a polarised *for certain invalid* outranking situation: :math:`r(a_{004} \succsim a_{002}) = -13.00`.
+In Lines 7-8 above, we may for instance notice a considerably large positive performance difference when comparing alternatives 'a002' and 'a004' which results in a polarised *for certain valid* outranking situation: :math:`r(a_{002} \succsim a_{004}) = +13.00`. The converse situation is observed in Lines 11-12 where we may notice the corresponding considerably large negative performance difference leading this time to a polarised *for certain invalid* outranking situation: :math:`r(a_{004} \succsim a_{002}) = -13.00`.
 
 Setting the Threading parameters
 ````````````````````````````````
@@ -8822,6 +8822,7 @@ Restricted to these ten best-ranked alternatives, the *Copeland*, the *NetFlows*
    >>> ke.kemenyRanking
     [426464, 773909, 155874, 815552, 567308, 298061, 928564, 279729, 668947, 578560]
 
+
 .. note::
 
    It is therefore *important* to always keep in mind that, based on pairwise outranking situations, there **does not exist** any **unique optimal ranking**; especially when we face such big data problems. Changing the number of quantiles, the component ranking rule, the optimised quantile ordering strategy, all this will indeed produce, sometimes even substantially, diverse global ranking results.
@@ -8833,9 +8834,11 @@ On the MeluXina EuroHPC supercomputer [54]_
 
 Summer 2024, the author was granted the opportunity to use the large memory HPC resources of the MeluXina EuroHPC supercomputer [55]_  (https://www.luxprovide.lu/meluxina/). Computing nodes on this HPC platform offer a large RAM for particularly demanding workloads. Each node is composed of 2 AMD Rome CPUs (64 core @ 2.6 GHz, 256HT cores total), has 4 TB of memory (4096 GB) and 1.92 TB of local storage.
 
-Following timings (see table below) could be achieved with a specially designed :py:mod:`cQuantilesRankingDigraphs` module [57]_ when q-tiling and ranking multiple incommensurable performance records of 21 criteria assessing three decision objectives, namely economic, environmental and societal aspects ( see the :ref:`tutorial <Three-Objectives-Performance-Tableau-label>` on generating random three-objectives performance tableaux).
+Following timings (see :numref:`meluxina`) could be achieved with a specially designed :py:mod:`cQuantilesRankingDigraphs` module [57]_ when q-tiling and ranking multiple incommensurable performance records of 21 criteria assessing three decision objectives, namely economic, environmental and societal aspects ( see the :ref:`tutorial <Three-Objectives-Performance-Tableau-label>` on generating random three-objectives performance tableaux).
+
 
 .. table:: EuroHPC MeluXina Ranking Performance Records (Summer 2024)
+   :name: meluxina
 
    ============ =========== ===== ========= ========= ========= =========
     digraph      relation     q    nbr of    nbr of    nbr of    tot.run    
