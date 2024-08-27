@@ -8840,21 +8840,21 @@ Following timings (see :numref:`meluxina`) could be achieved with a specially de
 .. table:: EuroHPC MeluXina Ranking Performance Records (Summer 2024)
    :name: meluxina
 
-   ============ =========== ===== ========= ========= ========= =========
-    digraph      relation     q    nbr of    nbr of    nbr of    tot.run    
-    order        size              compon.   sorters   rankers   times   
-   ============ =========== ===== ========= ========= ========= =========
-    1000000      1x10^12      7    251468     100        48       1'07"  
-    2000000      4x10^12      9    313870     128        64       2'43"   
-    3000000      9x10^12      7    361401     128        64       4'20"
-    4000000      16x10^12     7    389459     128       128       5'56"
-    5000000      25x10^12     7    411422     128        84       8'35"
-    6000000      36x10^12     9    439443     128       128      12'11"
-    7000000      49x10^12     7    444444     128       128      15'06"
-    8000000      64x10^12     7    457180     192       220      15'33"
-    9000000      81x10^12     7    469127     192       220      18'40"
-    10000000     1x10^14      9    500475     220       240      23'17"
-   ============ =========== ===== ========= ========= ========= =========
+   ============ =========== ===== ========= ========== ========= ========= =========
+    digraph      relation     q    nbr of    q-tiling   nbr of    nbr of    tot.run    
+    order        size              sorters   time       compon.   rankers   time   
+   ============ =========== ===== ========= ========== ========= ========= =========
+    1000000      1x10^12      7     100         30"      251468      48       1'07"  
+    2000000      4x10^12      9     128       1'06"      313870      64       2'43"   
+    3000000      9x10^12      7     128       1'44"      361401      64       4'20"
+    4000000      16x10^12     7     128       2'26"      389459     128       5'56"
+    5000000      25x10^12     7     128       3'05"      411422      84       8'35"
+    6000000      36x10^12     9     128       4'05"      439443     128      12'11"
+    7000000      49x10^12     7     128       4'48"      444444     128      15'06"
+    8000000      64x10^12     7     192       5'31"      457180     220      15'33"
+    9000000      81x10^12     7     192       6'02"      469127     220      18'40"
+    10000000     1x10^14      9     220       6'46"      500475     240      23'17"
+   ============ =========== ===== ========= ========== ========= ========= =========
 
 One million records could be ranked with 100 sorting and 48 ranking multiprocessing threads in about 67 seconds. The quantiles sorting step is based on 7-tiling. Three million records could be ranked with 128 sorters and 64 rankers in 4 min. and 20 sec. and the quantiles sorting step is here based on 7-tiling. With 128 sorters and 84 rankers, up to five million records could be 7-tiled and ranked in 8 min. and 35 sec.
 

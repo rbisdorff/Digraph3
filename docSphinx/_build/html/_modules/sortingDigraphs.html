@@ -1,36 +1,38 @@
 <!DOCTYPE html>
-<html class="writer-html5" lang="en" >
+<html class="writer-html5" lang="en" data-content_root="../">
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>sortingDigraphs &mdash; Digraph3 3.12.4 documentation</title>
-      <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
-      <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
-      <link rel="stylesheet" href="../_static/graphviz.css" type="text/css" />
-      <link rel="stylesheet" href="../_static/copybutton.css" type="text/css" />
-      <link rel="stylesheet" href="../_static/css/tooltipster.custom.css" type="text/css" />
-      <link rel="stylesheet" href="../_static/css/tooltipster.bundle.min.css" type="text/css" />
-      <link rel="stylesheet" href="../_static/css/tooltipster-sideTip-shadow.min.css" type="text/css" />
-      <link rel="stylesheet" href="../_static/css/tooltipster-sideTip-punk.min.css" type="text/css" />
-      <link rel="stylesheet" href="../_static/css/tooltipster-sideTip-noir.min.css" type="text/css" />
-      <link rel="stylesheet" href="../_static/css/tooltipster-sideTip-light.min.css" type="text/css" />
-      <link rel="stylesheet" href="../_static/css/tooltipster-sideTip-borderless.min.css" type="text/css" />
-      <link rel="stylesheet" href="../_static/css/micromodal.css" type="text/css" />
-      <link rel="stylesheet" href="../_static/css/sphinx_rtd_theme.css" type="text/css" />
+      <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=fa44fd50" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=19f00094" />
+      <link rel="stylesheet" type="text/css" href="../_static/graphviz.css?v=eafc0fe6" />
+      <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/tooltipster.custom.css?v=7bc2f056" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/tooltipster.bundle.min.css?v=37217874" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/tooltipster-sideTip-shadow.min.css?v=6227e517" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/tooltipster-sideTip-punk.min.css?v=94669e23" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/tooltipster-sideTip-noir.min.css?v=21a39f42" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/tooltipster-sideTip-light.min.css?v=a18b2449" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/tooltipster-sideTip-borderless.min.css?v=dbff53e4" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/micromodal.css?v=d7bf34ee" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/sphinx_rtd_theme.css?v=3234e928" />
+
+  
   <!--[if lt IE 9]>
     <script src="../_static/js/html5shiv.min.js"></script>
   <![endif]-->
   
-        <script src="../_static/jquery.js"></script>
-        <script src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
-        <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
-        <script src="../_static/doctools.js"></script>
-        <script src="../_static/sphinx_highlight.js"></script>
-        <script src="../_static/clipboard.min.js"></script>
-        <script src="../_static/copybutton.js"></script>
-        <script src="../_static/js/hoverxref.js"></script>
-        <script src="../_static/js/tooltipster.bundle.min.js"></script>
-        <script src="../_static/js/micromodal.min.js"></script>
+        <script src="../_static/jquery.js?v=5d32c60e"></script>
+        <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script src="../_static/documentation_options.js?v=e70b10b9"></script>
+        <script src="../_static/doctools.js?v=888ff710"></script>
+        <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+        <script src="../_static/clipboard.min.js?v=a7894cd8"></script>
+        <script src="../_static/copybutton.js?v=15d7cbb8"></script>
+        <script src="../_static/js/hoverxref.js?v=3be43539"></script>
+        <script src="../_static/js/tooltipster.bundle.min.js?v=18bf091b"></script>
+        <script src="../_static/js/micromodal.min.js?v=04d6302d"></script>
     <script src="../_static/js/theme.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" /> 
@@ -191,7 +193,9 @@
         <span class="n">fo</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">dumps</span><span class="p">(</span><span class="n">sorting</span><span class="p">,</span><span class="o">-</span><span class="mi">1</span><span class="p">))</span>
         <span class="n">fo</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
 
-<div class="viewcode-block" id="SortingDigraph"><a class="viewcode-back" href="../techDoc.html#sortingDigraphs.SortingDigraph">[docs]</a><span class="k">class</span> <span class="nc">SortingDigraph</span><span class="p">(</span><span class="n">BipolarOutrankingDigraph</span><span class="p">):</span>
+<div class="viewcode-block" id="SortingDigraph">
+<a class="viewcode-back" href="../techDoc.html#sortingDigraphs.SortingDigraph">[docs]</a>
+<span class="k">class</span> <span class="nc">SortingDigraph</span><span class="p">(</span><span class="n">BipolarOutrankingDigraph</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Specialisation of the digraphs.BipolarOutrankingDigraph Class</span>
 <span class="sd">    for Condorcet based multicriteria sorting of alternatives.</span>
@@ -620,7 +624,9 @@
         <span class="c1"># close</span>
         
         
-<div class="viewcode-block" id="SortingDigraph.htmlCriteriaCategoryLimits"><a class="viewcode-back" href="../techDoc.html#sortingDigraphs.SortingDigraph.htmlCriteriaCategoryLimits">[docs]</a>    <span class="k">def</span> <span class="nf">htmlCriteriaCategoryLimits</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">tableTitle</span><span class="o">=</span><span class="s1">&#39;Category limits&#39;</span><span class="p">):</span>
+<div class="viewcode-block" id="SortingDigraph.htmlCriteriaCategoryLimits">
+<a class="viewcode-back" href="../techDoc.html#sortingDigraphs.SortingDigraph.htmlCriteriaCategoryLimits">[docs]</a>
+    <span class="k">def</span> <span class="nf">htmlCriteriaCategoryLimits</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">tableTitle</span><span class="o">=</span><span class="s1">&#39;Category limits&#39;</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Renders category minimum and maximum limits for each criterion</span>
 <span class="sd">        as a html table.</span>
@@ -652,7 +658,10 @@
         <span class="n">s</span> <span class="o">+=</span> <span class="s1">&#39;&lt;/table&gt;&#39;</span>
         <span class="k">return</span> <span class="n">s</span></div>
 
-<div class="viewcode-block" id="SortingDigraph.computeWeakOrder"><a class="viewcode-back" href="../techDoc.html#sortingDigraphs.SortingDigraph.computeWeakOrder">[docs]</a>    <span class="k">def</span> <span class="nf">computeWeakOrder</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">Descending</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span><span class="n">strategy</span><span class="o">=</span><span class="s1">&#39;average&#39;</span><span class="p">,</span>
+
+<div class="viewcode-block" id="SortingDigraph.computeWeakOrder">
+<a class="viewcode-back" href="../techDoc.html#sortingDigraphs.SortingDigraph.computeWeakOrder">[docs]</a>
+    <span class="k">def</span> <span class="nf">computeWeakOrder</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">Descending</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span><span class="n">strategy</span><span class="o">=</span><span class="s1">&#39;average&#39;</span><span class="p">,</span>
                          <span class="n">Comments</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span><span class="n">Debug</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        specialisation of the showWeakOrder method.</span>
@@ -737,12 +746,18 @@
             <span class="n">weakOrdering</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">content</span><span class="p">)</span>
         <span class="k">return</span> <span class="n">weakOrdering</span></div>
 
-<div class="viewcode-block" id="SortingDigraph.showWeakOrder"><a class="viewcode-back" href="../techDoc.html#sortingDigraphs.SortingDigraph.showWeakOrder">[docs]</a>    <span class="k">def</span> <span class="nf">showWeakOrder</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">Descending</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span><span class="n">strategy</span><span class="o">=</span><span class="s1">&#39;average&#39;</span><span class="p">):</span>
+
+<div class="viewcode-block" id="SortingDigraph.showWeakOrder">
+<a class="viewcode-back" href="../techDoc.html#sortingDigraphs.SortingDigraph.showWeakOrder">[docs]</a>
+    <span class="k">def</span> <span class="nf">showWeakOrder</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">Descending</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span><span class="n">strategy</span><span class="o">=</span><span class="s1">&#39;average&#39;</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot; dummy for computeWeakOrder with Comments=True &quot;&quot;&quot;</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">computeWeakOrder</span><span class="p">(</span><span class="n">Descending</span><span class="o">=</span><span class="n">Descending</span><span class="p">,</span><span class="n">strategy</span><span class="o">=</span><span class="n">strategy</span><span class="p">,</span><span class="n">Comments</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span></div>
+
         
 
-<div class="viewcode-block" id="SortingDigraph.computeSortingRelation"><a class="viewcode-back" href="../techDoc.html#sortingDigraphs.SortingDigraph.computeSortingRelation">[docs]</a>    <span class="k">def</span> <span class="nf">computeSortingRelation</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">categoryContents</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span><span class="n">StoreSorting</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span><span class="n">Debug</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+<div class="viewcode-block" id="SortingDigraph.computeSortingRelation">
+<a class="viewcode-back" href="../techDoc.html#sortingDigraphs.SortingDigraph.computeSortingRelation">[docs]</a>
+    <span class="k">def</span> <span class="nf">computeSortingRelation</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">categoryContents</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span><span class="n">StoreSorting</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span><span class="n">Debug</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        constructs a bipolar sorting relation using the category contents.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
@@ -781,7 +796,10 @@
         <span class="k">return</span> <span class="n">sortingRelation</span></div>
 
 
-<div class="viewcode-block" id="SortingDigraph.showCriteriaCategoryLimits"><a class="viewcode-back" href="../techDoc.html#sortingDigraphs.SortingDigraph.showCriteriaCategoryLimits">[docs]</a>    <span class="k">def</span> <span class="nf">showCriteriaCategoryLimits</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+
+<div class="viewcode-block" id="SortingDigraph.showCriteriaCategoryLimits">
+<a class="viewcode-back" href="../techDoc.html#sortingDigraphs.SortingDigraph.showCriteriaCategoryLimits">[docs]</a>
+    <span class="k">def</span> <span class="nf">showCriteriaCategoryLimits</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Shows category minimum and maximum limits for each criterion.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
@@ -799,7 +817,10 @@
                 <span class="k">else</span><span class="p">:</span>
                     <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\t</span><span class="si">%s</span><span class="s1"> ]</span><span class="si">%s</span><span class="s1">; </span><span class="si">%s</span><span class="s1">]&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="n">c</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">criteriaCategoryLimits</span><span class="p">[</span><span class="n">g</span><span class="p">][</span><span class="n">c</span><span class="p">][</span><span class="s1">&#39;minimum&#39;</span><span class="p">],</span><span class="bp">self</span><span class="o">.</span><span class="n">criteriaCategoryLimits</span><span class="p">[</span><span class="n">g</span><span class="p">][</span><span class="n">c</span><span class="p">][</span><span class="s1">&#39;maximum&#39;</span><span class="p">]))</span></div>
 
-<div class="viewcode-block" id="SortingDigraph.getActionsKeys"><a class="viewcode-back" href="../techDoc.html#sortingDigraphs.SortingDigraph.getActionsKeys">[docs]</a>    <span class="k">def</span> <span class="nf">getActionsKeys</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">action</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span><span class="n">withoutProfiles</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
+
+<div class="viewcode-block" id="SortingDigraph.getActionsKeys">
+<a class="viewcode-back" href="../techDoc.html#sortingDigraphs.SortingDigraph.getActionsKeys">[docs]</a>
+    <span class="k">def</span> <span class="nf">getActionsKeys</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">action</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span><span class="n">withoutProfiles</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        extract normal actions keys()</span>
 <span class="sd">        &quot;&quot;&quot;</span>
@@ -814,7 +835,10 @@
         <span class="k">else</span><span class="p">:</span>
             <span class="k">return</span> <span class="nb">set</span><span class="p">([</span><span class="n">action</span><span class="p">])</span>           </div>
 
-<div class="viewcode-block" id="SortingDigraph.orderedCategoryKeys"><a class="viewcode-back" href="../techDoc.html#sortingDigraphs.SortingDigraph.orderedCategoryKeys">[docs]</a>    <span class="k">def</span> <span class="nf">orderedCategoryKeys</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">Reverse</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+
+<div class="viewcode-block" id="SortingDigraph.orderedCategoryKeys">
+<a class="viewcode-back" href="../techDoc.html#sortingDigraphs.SortingDigraph.orderedCategoryKeys">[docs]</a>
+    <span class="k">def</span> <span class="nf">orderedCategoryKeys</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">Reverse</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Renders the ordered list of category keys</span>
 <span class="sd">        based on self.categories[&#39;order&#39;] numeric values.</span>
@@ -823,6 +847,7 @@
         <span class="k">if</span> <span class="n">Reverse</span><span class="p">:</span>
             <span class="n">orderedCategoryKeys</span><span class="o">.</span><span class="n">reverse</span><span class="p">()</span>
         <span class="k">return</span> <span class="n">orderedCategoryKeys</span></div>
+
 
     <span class="k">def</span> <span class="nf">_computeWeakOrder</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">Descending</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span><span class="n">strategy</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span><span class="n">Comments</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span><span class="n">Debug</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
@@ -877,7 +902,9 @@
                 
         <span class="k">return</span> <span class="n">orderingList</span>
 
-<div class="viewcode-block" id="SortingDigraph.showOrderedRelationTable"><a class="viewcode-back" href="../techDoc.html#sortingDigraphs.SortingDigraph.showOrderedRelationTable">[docs]</a>    <span class="k">def</span> <span class="nf">showOrderedRelationTable</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">direction</span><span class="o">=</span><span class="s2">&quot;decreasing&quot;</span><span class="p">):</span>
+<div class="viewcode-block" id="SortingDigraph.showOrderedRelationTable">
+<a class="viewcode-back" href="../techDoc.html#sortingDigraphs.SortingDigraph.showOrderedRelationTable">[docs]</a>
+    <span class="k">def</span> <span class="nf">showOrderedRelationTable</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">direction</span><span class="o">=</span><span class="s2">&quot;decreasing&quot;</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Showing the relation table in decreasing (default) or increasing order.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
@@ -902,7 +929,10 @@
                                 <span class="n">Sorted</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
                                 <span class="n">ReflexiveTerms</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span></div>
 
-<div class="viewcode-block" id="SortingDigraph.exportDigraphGraphViz"><a class="viewcode-back" href="../techDoc.html#sortingDigraphs.SortingDigraph.exportDigraphGraphViz">[docs]</a>    <span class="k">def</span> <span class="nf">exportDigraphGraphViz</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">fileName</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">bestChoice</span><span class="o">=</span><span class="nb">set</span><span class="p">(),</span><span class="n">worstChoice</span><span class="o">=</span><span class="nb">set</span><span class="p">(),</span>
+
+<div class="viewcode-block" id="SortingDigraph.exportDigraphGraphViz">
+<a class="viewcode-back" href="../techDoc.html#sortingDigraphs.SortingDigraph.exportDigraphGraphViz">[docs]</a>
+    <span class="k">def</span> <span class="nf">exportDigraphGraphViz</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">fileName</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">bestChoice</span><span class="o">=</span><span class="nb">set</span><span class="p">(),</span><span class="n">worstChoice</span><span class="o">=</span><span class="nb">set</span><span class="p">(),</span>
                               <span class="n">Comments</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span><span class="n">graphType</span><span class="o">=</span><span class="s1">&#39;png&#39;</span><span class="p">,</span>
                               <span class="n">graphSize</span><span class="o">=</span><span class="s1">&#39;7,7&#39;</span><span class="p">,</span><span class="n">bgcolor</span><span class="o">=</span><span class="s1">&#39;cornsilk&#39;</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
@@ -917,7 +947,10 @@
                                <span class="n">bgcolor</span><span class="o">=</span><span class="n">bgcolor</span><span class="p">)</span></div>
 
 
-<div class="viewcode-block" id="SortingDigraph.exportGraphViz"><a class="viewcode-back" href="../techDoc.html#sortingDigraphs.SortingDigraph.exportGraphViz">[docs]</a>    <span class="k">def</span> <span class="nf">exportGraphViz</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">fileName</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span><span class="n">direction</span><span class="o">=</span><span class="s1">&#39;decreasing&#39;</span><span class="p">,</span>
+
+<div class="viewcode-block" id="SortingDigraph.exportGraphViz">
+<a class="viewcode-back" href="../techDoc.html#sortingDigraphs.SortingDigraph.exportGraphViz">[docs]</a>
+    <span class="k">def</span> <span class="nf">exportGraphViz</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">fileName</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span><span class="n">direction</span><span class="o">=</span><span class="s1">&#39;decreasing&#39;</span><span class="p">,</span>
                        <span class="n">Comments</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span><span class="n">graphType</span><span class="o">=</span><span class="s1">&#39;png&#39;</span><span class="p">,</span><span class="n">bgcolor</span><span class="o">=</span><span class="s1">&#39;cornsilk&#39;</span><span class="p">,</span>
                        <span class="n">graphSize</span><span class="o">=</span><span class="s1">&#39;7,7&#39;</span><span class="p">,</span>
                        <span class="n">fontSize</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span>
@@ -1030,7 +1063,10 @@
             <span class="k">if</span> <span class="n">Comments</span><span class="p">:</span>
                 <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;graphViz tools not avalaible! Please check installation.&#39;</span><span class="p">)</span></div>
 
-<div class="viewcode-block" id="SortingDigraph.computeSortingCharacteristics"><a class="viewcode-back" href="../techDoc.html#sortingDigraphs.SortingDigraph.computeSortingCharacteristics">[docs]</a>    <span class="k">def</span> <span class="nf">computeSortingCharacteristics</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">action</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">StoreSorting</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+
+<div class="viewcode-block" id="SortingDigraph.computeSortingCharacteristics">
+<a class="viewcode-back" href="../techDoc.html#sortingDigraphs.SortingDigraph.computeSortingCharacteristics">[docs]</a>
+    <span class="k">def</span> <span class="nf">computeSortingCharacteristics</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">action</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">StoreSorting</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
                                       <span class="n">Comments</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">Debug</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
                                         <span class="n">Threading</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">nbrOfCPUs</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
                                       <span class="n">startMethod</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
@@ -1145,8 +1181,11 @@
         <span class="k">if</span> <span class="n">StoreSorting</span><span class="p">:</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">sorting</span> <span class="o">=</span> <span class="n">sorting</span>
         <span class="k">return</span> <span class="n">sorting</span></div>
+
     
-<div class="viewcode-block" id="SortingDigraph.showSortingCharacteristics"><a class="viewcode-back" href="../techDoc.html#sortingDigraphs.SortingDigraph.showSortingCharacteristics">[docs]</a>    <span class="k">def</span> <span class="nf">showSortingCharacteristics</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">action</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+<div class="viewcode-block" id="SortingDigraph.showSortingCharacteristics">
+<a class="viewcode-back" href="../techDoc.html#sortingDigraphs.SortingDigraph.showSortingCharacteristics">[docs]</a>
+    <span class="k">def</span> <span class="nf">showSortingCharacteristics</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">action</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Renders a bipolar-valued bi-dictionary relation</span>
 <span class="sd">        representing the degree of credibility of the</span>
@@ -1204,6 +1243,7 @@
                                                   <span class="n">sorting</span><span class="p">[</span><span class="n">x</span><span class="p">][</span><span class="n">categoryKeys</span><span class="p">[</span><span class="n">i</span><span class="p">]][</span><span class="s1">&#39;notHighLimit&#39;</span><span class="p">],</span>\
                                                   <span class="n">sorting</span><span class="p">[</span><span class="n">x</span><span class="p">][</span><span class="n">categoryKeys</span><span class="p">[</span><span class="n">i</span><span class="p">]][</span><span class="s1">&#39;categoryMembership&#39;</span><span class="p">]))</span></div>
 
+
     <span class="k">def</span> <span class="nf">_computePessimisticSorting</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">Comments</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Returns a dictionary with category keys gathering the actions per ordered category on</span>
@@ -1246,7 +1286,9 @@
                 <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;</span><span class="si">%s</span><span class="s1">: </span><span class="si">%s</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="n">c</span><span class="p">,</span> <span class="nb">str</span><span class="p">(</span><span class="n">sorts</span><span class="p">[</span><span class="n">c</span><span class="p">])))</span>
         <span class="k">return</span> <span class="n">sorts</span>
 
-<div class="viewcode-block" id="SortingDigraph.computeCategoryContents"><a class="viewcode-back" href="../techDoc.html#sortingDigraphs.SortingDigraph.computeCategoryContents">[docs]</a>    <span class="k">def</span> <span class="nf">computeCategoryContents</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">Reverse</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span><span class="n">StoreSorting</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span><span class="n">Comments</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+<div class="viewcode-block" id="SortingDigraph.computeCategoryContents">
+<a class="viewcode-back" href="../techDoc.html#sortingDigraphs.SortingDigraph.computeCategoryContents">[docs]</a>
+    <span class="k">def</span> <span class="nf">computeCategoryContents</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">Reverse</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span><span class="n">StoreSorting</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span><span class="n">Comments</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Computes the sorting results per category.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
@@ -1267,8 +1309,11 @@
         <span class="k">if</span> <span class="n">StoreSorting</span><span class="p">:</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">categoryContent</span> <span class="o">=</span> <span class="n">categoryContent</span>
         <span class="k">return</span> <span class="n">categoryContent</span></div>
+
                                                      
-<div class="viewcode-block" id="SortingDigraph.showSorting"><a class="viewcode-back" href="../techDoc.html#sortingDigraphs.SortingDigraph.showSorting">[docs]</a>    <span class="k">def</span> <span class="nf">showSorting</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">Reverse</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span><span class="n">isReturningHTML</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+<div class="viewcode-block" id="SortingDigraph.showSorting">
+<a class="viewcode-back" href="../techDoc.html#sortingDigraphs.SortingDigraph.showSorting">[docs]</a>
+    <span class="k">def</span> <span class="nf">showSorting</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">Reverse</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span><span class="n">isReturningHTML</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Shows sorting results in decreasing or increasing (Reverse=False)</span>
 <span class="sd">        order of the categories. If isReturningHTML is True (default = False)</span>
@@ -1340,7 +1385,10 @@
             <span class="n">html</span> <span class="o">+=</span> <span class="s1">&#39;&lt;/table&gt;&#39;</span>
             <span class="k">return</span> <span class="n">html</span></div>
 
-<div class="viewcode-block" id="SortingDigraph.showActionCategories"><a class="viewcode-back" href="../techDoc.html#sortingDigraphs.SortingDigraph.showActionCategories">[docs]</a>    <span class="k">def</span> <span class="nf">showActionCategories</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">action</span><span class="p">,</span><span class="n">Debug</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span><span class="n">Comments</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+
+<div class="viewcode-block" id="SortingDigraph.showActionCategories">
+<a class="viewcode-back" href="../techDoc.html#sortingDigraphs.SortingDigraph.showActionCategories">[docs]</a>
+    <span class="k">def</span> <span class="nf">showActionCategories</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">action</span><span class="p">,</span><span class="n">Debug</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span><span class="n">Comments</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
                              <span class="n">Threading</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span><span class="n">nbrOfCPUs</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Renders the union of categories in which the given action is sorted positively or null into.</span>
@@ -1384,7 +1432,10 @@
                 <span class="n">keys</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span>\
                 <span class="n">credibility</span>            </div>
 
-<div class="viewcode-block" id="SortingDigraph.showActionsSortingResult"><a class="viewcode-back" href="../techDoc.html#sortingDigraphs.SortingDigraph.showActionsSortingResult">[docs]</a>    <span class="k">def</span> <span class="nf">showActionsSortingResult</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">actionSubset</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span><span class="n">Debug</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+
+<div class="viewcode-block" id="SortingDigraph.showActionsSortingResult">
+<a class="viewcode-back" href="../techDoc.html#sortingDigraphs.SortingDigraph.showActionsSortingResult">[docs]</a>
+    <span class="k">def</span> <span class="nf">showActionsSortingResult</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">actionSubset</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span><span class="n">Debug</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        shows the quantiles sorting result all (default) of a subset of the decision actions.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
@@ -1397,7 +1448,10 @@
         <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">actions</span><span class="p">:</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">showActionCategories</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="n">Debug</span><span class="o">=</span><span class="n">Debug</span><span class="p">)</span></div>
 
-<div class="viewcode-block" id="SortingDigraph.saveProfilesXMCDA2"><a class="viewcode-back" href="../techDoc.html#sortingDigraphs.SortingDigraph.saveProfilesXMCDA2">[docs]</a>    <span class="k">def</span> <span class="nf">saveProfilesXMCDA2</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">fileName</span><span class="o">=</span><span class="s1">&#39;temp&#39;</span><span class="p">,</span><span class="n">category</span><span class="o">=</span><span class="s1">&#39;XMCDA 2.0 format&#39;</span><span class="p">,</span><span class="n">user</span><span class="o">=</span><span class="s1">&#39;sortinDigraphs Module (RB)&#39;</span><span class="p">,</span><span class="n">version</span><span class="o">=</span><span class="s1">&#39;saved from Python session&#39;</span><span class="p">,</span><span class="n">title</span><span class="o">=</span><span class="s1">&#39;Sorting categories in XMCDA-2.0 format.&#39;</span><span class="p">,</span><span class="n">variant</span><span class="o">=</span><span class="s1">&#39;Rubis&#39;</span><span class="p">,</span><span class="n">valuationType</span><span class="o">=</span><span class="s1">&#39;bipolar&#39;</span><span class="p">,</span><span class="n">isStringIO</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span><span class="n">stringNA</span><span class="o">=</span><span class="s1">&#39;NA&#39;</span><span class="p">,</span><span class="n">comment</span><span class="o">=</span><span class="s1">&#39;produced by saveProfilesXMCDA2()&#39;</span><span class="p">):</span>
+
+<div class="viewcode-block" id="SortingDigraph.saveProfilesXMCDA2">
+<a class="viewcode-back" href="../techDoc.html#sortingDigraphs.SortingDigraph.saveProfilesXMCDA2">[docs]</a>
+    <span class="k">def</span> <span class="nf">saveProfilesXMCDA2</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">fileName</span><span class="o">=</span><span class="s1">&#39;temp&#39;</span><span class="p">,</span><span class="n">category</span><span class="o">=</span><span class="s1">&#39;XMCDA 2.0 format&#39;</span><span class="p">,</span><span class="n">user</span><span class="o">=</span><span class="s1">&#39;sortinDigraphs Module (RB)&#39;</span><span class="p">,</span><span class="n">version</span><span class="o">=</span><span class="s1">&#39;saved from Python session&#39;</span><span class="p">,</span><span class="n">title</span><span class="o">=</span><span class="s1">&#39;Sorting categories in XMCDA-2.0 format.&#39;</span><span class="p">,</span><span class="n">variant</span><span class="o">=</span><span class="s1">&#39;Rubis&#39;</span><span class="p">,</span><span class="n">valuationType</span><span class="o">=</span><span class="s1">&#39;bipolar&#39;</span><span class="p">,</span><span class="n">isStringIO</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span><span class="n">stringNA</span><span class="o">=</span><span class="s1">&#39;NA&#39;</span><span class="p">,</span><span class="n">comment</span><span class="o">=</span><span class="s1">&#39;produced by saveProfilesXMCDA2()&#39;</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Save profiles object self in XMCDA 2.0 format.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
@@ -1494,7 +1548,9 @@
             <span class="k">return</span> <span class="n">problemText</span>
         <span class="k">else</span><span class="p">:</span>
             <span class="n">fo</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
-            <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;File: &#39;</span> <span class="o">+</span> <span class="n">nameExt</span> <span class="o">+</span> <span class="s1">&#39; saved !&#39;</span><span class="p">)</span></div></div>
+            <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;File: &#39;</span> <span class="o">+</span> <span class="n">nameExt</span> <span class="o">+</span> <span class="s1">&#39; saved !&#39;</span><span class="p">)</span></div>
+</div>
+
 
 <span class="c1">##    def recodeValuation(self,newMin=-1.0,newMax=1.0,Debug=False):</span>
 <span class="c1">##        &quot;&quot;&quot;</span>
@@ -1664,7 +1720,9 @@
         <span class="n">fo</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
         
     <span class="c1"># .......</span>
-<div class="viewcode-block" id="QuantilesSortingDigraph"><a class="viewcode-back" href="../techDoc.html#sortingDigraphs.QuantilesSortingDigraph">[docs]</a><span class="k">class</span> <span class="nc">QuantilesSortingDigraph</span><span class="p">(</span><span class="n">SortingDigraph</span><span class="p">):</span>
+<div class="viewcode-block" id="QuantilesSortingDigraph">
+<a class="viewcode-back" href="../techDoc.html#sortingDigraphs.QuantilesSortingDigraph">[docs]</a>
+<span class="k">class</span> <span class="nc">QuantilesSortingDigraph</span><span class="p">(</span><span class="n">SortingDigraph</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Specialisation of the root :py:class:`sortingDigraphs.SortingDigraph` class</span>
 <span class="sd">    for sorting of a large set of alternatives into</span>
@@ -2222,13 +2280,18 @@
                     <span class="bp">self</span><span class="o">.</span><span class="n">sorting</span> <span class="o">=</span> <span class="n">sorting</span>
                 <span class="k">if</span> <span class="n">WithSortingRelation</span><span class="p">:</span>
                     <span class="k">return</span> <span class="n">relation</span>
-<div class="viewcode-block" id="QuantilesSortingDigraph.showCriteriaCategoryLimits"><a class="viewcode-back" href="../techDoc.html#sortingDigraphs.QuantilesSortingDigraph.showCriteriaCategoryLimits">[docs]</a>    <span class="k">def</span> <span class="nf">showCriteriaCategoryLimits</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">ByCriterion</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+<div class="viewcode-block" id="QuantilesSortingDigraph.showCriteriaCategoryLimits">
+<a class="viewcode-back" href="../techDoc.html#sortingDigraphs.QuantilesSortingDigraph.showCriteriaCategoryLimits">[docs]</a>
+    <span class="k">def</span> <span class="nf">showCriteriaCategoryLimits</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">ByCriterion</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Dummy for showCriteriaQuantileLimits()</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">showCriteriaQuantileLimits</span><span class="p">(</span><span class="n">ByCriterion</span><span class="o">=</span><span class="n">ByCriterion</span><span class="p">)</span></div>
+
         
-<div class="viewcode-block" id="QuantilesSortingDigraph.showCriteriaQuantileLimits"><a class="viewcode-back" href="../techDoc.html#sortingDigraphs.QuantilesSortingDigraph.showCriteriaQuantileLimits">[docs]</a>    <span class="k">def</span> <span class="nf">showCriteriaQuantileLimits</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">ByCriterion</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+<div class="viewcode-block" id="QuantilesSortingDigraph.showCriteriaQuantileLimits">
+<a class="viewcode-back" href="../techDoc.html#sortingDigraphs.QuantilesSortingDigraph.showCriteriaQuantileLimits">[docs]</a>
+    <span class="k">def</span> <span class="nf">showCriteriaQuantileLimits</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">ByCriterion</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Shows category minimum and maximum limits for each criterion.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
@@ -2272,11 +2335,14 @@
                         <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;</span><span class="si">%.2f</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="n">catg</span><span class="p">[</span><span class="n">c</span><span class="p">]),</span> <span class="n">end</span><span class="o">=</span><span class="s1">&#39;</span><span class="se">\t</span><span class="s1"> &#39;</span><span class="p">)</span>
                 <span class="nb">print</span><span class="p">()</span></div>
 
+
                         
                     
 
 
-<div class="viewcode-block" id="QuantilesSortingDigraph.showActionCategories"><a class="viewcode-back" href="../techDoc.html#sortingDigraphs.QuantilesSortingDigraph.showActionCategories">[docs]</a>    <span class="k">def</span> <span class="nf">showActionCategories</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">action</span><span class="p">,</span><span class="n">Debug</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span><span class="n">Comments</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+<div class="viewcode-block" id="QuantilesSortingDigraph.showActionCategories">
+<a class="viewcode-back" href="../techDoc.html#sortingDigraphs.QuantilesSortingDigraph.showActionCategories">[docs]</a>
+    <span class="k">def</span> <span class="nf">showActionCategories</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">action</span><span class="p">,</span><span class="n">Debug</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span><span class="n">Comments</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
                              <span class="n">Threading</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span><span class="n">nbrOfCPUs</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Renders the union of categories in which the given action is sorted positively or null into.</span>
@@ -2318,7 +2384,10 @@
                 <span class="n">keys</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span>\
                 <span class="n">credibility</span>            </div>
 
-<div class="viewcode-block" id="QuantilesSortingDigraph.showActionsSortingResult"><a class="viewcode-back" href="../techDoc.html#sortingDigraphs.QuantilesSortingDigraph.showActionsSortingResult">[docs]</a>    <span class="k">def</span> <span class="nf">showActionsSortingResult</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">actionSubset</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span><span class="n">Debug</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+
+<div class="viewcode-block" id="QuantilesSortingDigraph.showActionsSortingResult">
+<a class="viewcode-back" href="../techDoc.html#sortingDigraphs.QuantilesSortingDigraph.showActionsSortingResult">[docs]</a>
+    <span class="k">def</span> <span class="nf">showActionsSortingResult</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">actionSubset</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span><span class="n">Debug</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        shows the quantiles sorting result all (default) of a subset of the decision actions.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
@@ -2330,9 +2399,12 @@
         <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Quantiles sorting result per decision action&#39;</span><span class="p">)</span>
         <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">actions</span><span class="p">:</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">showActionCategories</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="n">Debug</span><span class="o">=</span><span class="n">Debug</span><span class="p">)</span></div>
+
  
 
-<div class="viewcode-block" id="QuantilesSortingDigraph.showWeakOrder"><a class="viewcode-back" href="../techDoc.html#sortingDigraphs.QuantilesSortingDigraph.showWeakOrder">[docs]</a>    <span class="k">def</span> <span class="nf">showWeakOrder</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">Descending</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
+<div class="viewcode-block" id="QuantilesSortingDigraph.showWeakOrder">
+<a class="viewcode-back" href="../techDoc.html#sortingDigraphs.QuantilesSortingDigraph.showWeakOrder">[docs]</a>
+    <span class="k">def</span> <span class="nf">showWeakOrder</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">Descending</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Specialisation for QuantilesSortingDigraphs.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
@@ -2374,6 +2446,7 @@
         <span class="n">weakOrdering</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;result&#39;</span><span class="p">:</span><span class="n">ordering</span><span class="p">}</span>
 
         <span class="n">TransitiveDigraph</span><span class="o">.</span><span class="n">showTransitiveDigraph</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">weakOrdering</span><span class="p">)</span></div>
+
 
 <span class="c1">##        return orderingList</span>
 
@@ -2431,7 +2504,9 @@
         <span class="k">return</span> <span class="n">actionsCategIntervals</span>
 
 
-<div class="viewcode-block" id="QuantilesSortingDigraph.computeQuantileOrdering"><a class="viewcode-back" href="../techDoc.html#sortingDigraphs.QuantilesSortingDigraph.computeQuantileOrdering">[docs]</a>    <span class="k">def</span> <span class="nf">computeQuantileOrdering</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">strategy</span><span class="o">=</span><span class="s1">&#39;average&#39;</span><span class="p">,</span>
+<div class="viewcode-block" id="QuantilesSortingDigraph.computeQuantileOrdering">
+<a class="viewcode-back" href="../techDoc.html#sortingDigraphs.QuantilesSortingDigraph.computeQuantileOrdering">[docs]</a>
+    <span class="k">def</span> <span class="nf">computeQuantileOrdering</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">strategy</span><span class="o">=</span><span class="s1">&#39;average&#39;</span><span class="p">,</span>
                                 <span class="n">Descending</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
                                 <span class="n">HTML</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
                                 <span class="n">title</span><span class="o">=</span><span class="s1">&#39;Quantiles Preordering&#39;</span><span class="p">,</span>
@@ -2572,7 +2647,10 @@
         <span class="k">else</span><span class="p">:</span>
             <span class="k">return</span> <span class="n">weakOrdering</span></div>
 
-<div class="viewcode-block" id="QuantilesSortingDigraph.showQuantileOrdering"><a class="viewcode-back" href="../techDoc.html#sortingDigraphs.QuantilesSortingDigraph.showQuantileOrdering">[docs]</a>    <span class="k">def</span> <span class="nf">showQuantileOrdering</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">strategy</span><span class="o">=</span><span class="s1">&#39;average&#39;</span><span class="p">):</span>
+
+<div class="viewcode-block" id="QuantilesSortingDigraph.showQuantileOrdering">
+<a class="viewcode-back" href="../techDoc.html#sortingDigraphs.QuantilesSortingDigraph.showQuantileOrdering">[docs]</a>
+    <span class="k">def</span> <span class="nf">showQuantileOrdering</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">strategy</span><span class="o">=</span><span class="s1">&#39;average&#39;</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Dummy show method for the commenting computeQuantileOrdering() method.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
@@ -2581,7 +2659,10 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">computeQuantileOrdering</span><span class="p">(</span><span class="n">strategy</span><span class="o">=</span><span class="n">strategy</span><span class="p">,</span><span class="n">Comments</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span></div>
 
 
-<div class="viewcode-block" id="QuantilesSortingDigraph.computeWeakOrder"><a class="viewcode-back" href="../techDoc.html#sortingDigraphs.QuantilesSortingDigraph.computeWeakOrder">[docs]</a>    <span class="k">def</span> <span class="nf">computeWeakOrder</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">Descending</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span><span class="n">Debug</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+
+<div class="viewcode-block" id="QuantilesSortingDigraph.computeWeakOrder">
+<a class="viewcode-back" href="../techDoc.html#sortingDigraphs.QuantilesSortingDigraph.computeWeakOrder">[docs]</a>
+    <span class="k">def</span> <span class="nf">computeWeakOrder</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">Descending</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span><span class="n">Debug</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Specialisation for QuantilesSortingDigraphs.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
@@ -2644,7 +2725,10 @@
                 <span class="n">orderingList</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">y</span><span class="p">)</span>
         <span class="k">return</span> <span class="n">orderingList</span></div>
 
-<div class="viewcode-block" id="QuantilesSortingDigraph.showOrderedRelationTable"><a class="viewcode-back" href="../techDoc.html#sortingDigraphs.QuantilesSortingDigraph.showOrderedRelationTable">[docs]</a>    <span class="k">def</span> <span class="nf">showOrderedRelationTable</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">direction</span><span class="o">=</span><span class="s2">&quot;decreasing&quot;</span><span class="p">):</span>
+
+<div class="viewcode-block" id="QuantilesSortingDigraph.showOrderedRelationTable">
+<a class="viewcode-back" href="../techDoc.html#sortingDigraphs.QuantilesSortingDigraph.showOrderedRelationTable">[docs]</a>
+    <span class="k">def</span> <span class="nf">showOrderedRelationTable</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">direction</span><span class="o">=</span><span class="s2">&quot;decreasing&quot;</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Showing the relation table in decreasing (default) or increasing order.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
@@ -2668,6 +2752,7 @@
                                 <span class="n">relation</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">relation</span><span class="p">,</span>\
                                 <span class="n">Sorted</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>\
                                 <span class="n">ReflexiveTerms</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span></div>
+
         
 
     <span class="k">def</span> <span class="nf">_computeQuantiles</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">x</span><span class="p">,</span><span class="n">Debug</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
@@ -2819,7 +2904,9 @@
             <span class="nb">print</span><span class="p">(</span><span class="n">g</span><span class="p">,</span><span class="n">LowerClosed</span><span class="p">,</span><span class="bp">self</span><span class="o">.</span><span class="n">criteria</span><span class="p">[</span><span class="n">g</span><span class="p">][</span><span class="s1">&#39;preferenceDirection&#39;</span><span class="p">],</span><span class="n">gQuantiles</span><span class="p">)</span>
         <span class="k">return</span> <span class="n">gQuantiles</span>
 
-<div class="viewcode-block" id="QuantilesSortingDigraph.getActionsKeys"><a class="viewcode-back" href="../techDoc.html#sortingDigraphs.QuantilesSortingDigraph.getActionsKeys">[docs]</a>    <span class="k">def</span> <span class="nf">getActionsKeys</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">action</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span><span class="n">withoutProfiles</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
+<div class="viewcode-block" id="QuantilesSortingDigraph.getActionsKeys">
+<a class="viewcode-back" href="../techDoc.html#sortingDigraphs.QuantilesSortingDigraph.getActionsKeys">[docs]</a>
+    <span class="k">def</span> <span class="nf">getActionsKeys</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">action</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span><span class="n">withoutProfiles</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        extract normal actions keys()</span>
 <span class="sd">        &quot;&quot;&quot;</span>
@@ -2833,7 +2920,10 @@
         <span class="k">else</span><span class="p">:</span>
             <span class="k">return</span> <span class="nb">set</span><span class="p">([</span><span class="n">action</span><span class="p">])</span>           </div>
 
-<div class="viewcode-block" id="QuantilesSortingDigraph.computeCategoryContents"><a class="viewcode-back" href="../techDoc.html#sortingDigraphs.QuantilesSortingDigraph.computeCategoryContents">[docs]</a>    <span class="k">def</span> <span class="nf">computeCategoryContents</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">Reverse</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span><span class="n">Comments</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span><span class="n">StoreSorting</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>\
+
+<div class="viewcode-block" id="QuantilesSortingDigraph.computeCategoryContents">
+<a class="viewcode-back" href="../techDoc.html#sortingDigraphs.QuantilesSortingDigraph.computeCategoryContents">[docs]</a>
+    <span class="k">def</span> <span class="nf">computeCategoryContents</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">Reverse</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span><span class="n">Comments</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span><span class="n">StoreSorting</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>\
                                 <span class="n">Threading</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span><span class="n">nbrOfCPUs</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Computes the sorting results per category.</span>
@@ -2857,7 +2947,10 @@
         
         <span class="k">return</span> <span class="n">categoryContent</span></div>
 
-<div class="viewcode-block" id="QuantilesSortingDigraph.computeSortingCharacteristics"><a class="viewcode-back" href="../techDoc.html#sortingDigraphs.QuantilesSortingDigraph.computeSortingCharacteristics">[docs]</a>    <span class="k">def</span> <span class="nf">computeSortingCharacteristics</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">action</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span><span class="n">Comments</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+
+<div class="viewcode-block" id="QuantilesSortingDigraph.computeSortingCharacteristics">
+<a class="viewcode-back" href="../techDoc.html#sortingDigraphs.QuantilesSortingDigraph.computeSortingCharacteristics">[docs]</a>
+    <span class="k">def</span> <span class="nf">computeSortingCharacteristics</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">action</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span><span class="n">Comments</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
                                       <span class="n">StoreSorting</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span><span class="n">Debug</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
                                         <span class="n">Threading</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">nbrOfCPUs</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
@@ -3092,6 +3185,7 @@
             <span class="bp">self</span><span class="o">.</span><span class="n">sorting</span> <span class="o">=</span> <span class="n">sorting</span>
         <span class="k">return</span> <span class="n">sorting</span></div>
 
+
     <span class="k">def</span> <span class="nf">_computeSortingCharacteristicsOld</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">action</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">Comments</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Renders a bipolar-valued bi-dictionary relation</span>
@@ -3164,7 +3258,9 @@
 
         <span class="k">return</span> <span class="n">sorting</span>
 
-<div class="viewcode-block" id="QuantilesSortingDigraph.showSortingCharacteristics"><a class="viewcode-back" href="../techDoc.html#sortingDigraphs.QuantilesSortingDigraph.showSortingCharacteristics">[docs]</a>    <span class="k">def</span> <span class="nf">showSortingCharacteristics</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">action</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+<div class="viewcode-block" id="QuantilesSortingDigraph.showSortingCharacteristics">
+<a class="viewcode-back" href="../techDoc.html#sortingDigraphs.QuantilesSortingDigraph.showSortingCharacteristics">[docs]</a>
+    <span class="k">def</span> <span class="nf">showSortingCharacteristics</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">action</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Renders a bipolar-valued bi-dictionary relation</span>
 <span class="sd">        representing the degree of credibility of the</span>
@@ -3201,7 +3297,10 @@
             <span class="nb">print</span><span class="p">()</span></div>
 
 
-<div class="viewcode-block" id="QuantilesSortingDigraph.showHTMLQuantileOrdering"><a class="viewcode-back" href="../techDoc.html#sortingDigraphs.QuantilesSortingDigraph.showHTMLQuantileOrdering">[docs]</a>    <span class="k">def</span> <span class="nf">showHTMLQuantileOrdering</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">title</span><span class="o">=</span><span class="s1">&#39;Quantiles Preordering&#39;</span><span class="p">,</span>
+
+<div class="viewcode-block" id="QuantilesSortingDigraph.showHTMLQuantileOrdering">
+<a class="viewcode-back" href="../techDoc.html#sortingDigraphs.QuantilesSortingDigraph.showHTMLQuantileOrdering">[docs]</a>
+    <span class="k">def</span> <span class="nf">showHTMLQuantileOrdering</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">title</span><span class="o">=</span><span class="s1">&#39;Quantiles Preordering&#39;</span><span class="p">,</span>
                                  <span class="n">Descending</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span><span class="n">strategy</span><span class="o">=</span><span class="s1">&#39;average&#39;</span><span class="p">,</span>
                                  <span class="n">htmlFileName</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
@@ -3232,7 +3331,10 @@
         <span class="n">webbrowser</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="n">url</span><span class="p">,</span><span class="n">new</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span></div>
 
 
-<div class="viewcode-block" id="QuantilesSortingDigraph.showHTMLSorting"><a class="viewcode-back" href="../techDoc.html#sortingDigraphs.QuantilesSortingDigraph.showHTMLSorting">[docs]</a>    <span class="k">def</span> <span class="nf">showHTMLSorting</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">Reverse</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span><span class="n">htmlFileName</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+
+<div class="viewcode-block" id="QuantilesSortingDigraph.showHTMLSorting">
+<a class="viewcode-back" href="../techDoc.html#sortingDigraphs.QuantilesSortingDigraph.showHTMLSorting">[docs]</a>
+    <span class="k">def</span> <span class="nf">showHTMLSorting</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">Reverse</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span><span class="n">htmlFileName</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        shows the html version of the sorting result in a browser window.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
@@ -3251,7 +3353,10 @@
         <span class="n">webbrowser</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="n">url</span><span class="p">,</span><span class="n">new</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span></div>
 
 
-<div class="viewcode-block" id="QuantilesSortingDigraph.showSorting"><a class="viewcode-back" href="../techDoc.html#sortingDigraphs.QuantilesSortingDigraph.showSorting">[docs]</a>    <span class="k">def</span> <span class="nf">showSorting</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">Reverse</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span><span class="n">isReturningHTML</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span><span class="n">Debug</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+
+<div class="viewcode-block" id="QuantilesSortingDigraph.showSorting">
+<a class="viewcode-back" href="../techDoc.html#sortingDigraphs.QuantilesSortingDigraph.showSorting">[docs]</a>
+    <span class="k">def</span> <span class="nf">showSorting</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">Reverse</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span><span class="n">isReturningHTML</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span><span class="n">Debug</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Shows sorting results in decreasing or increasing (Reverse=False)</span>
 <span class="sd">        order of the categories. If isReturningHTML is True (default = False)</span>
@@ -3296,7 +3401,10 @@
             <span class="n">html</span> <span class="o">+=</span> <span class="s1">&#39;&lt;/table&gt;&#39;</span>
             <span class="k">return</span> <span class="n">html</span></div>
 
-<div class="viewcode-block" id="QuantilesSortingDigraph.computeSortingRelation"><a class="viewcode-back" href="../techDoc.html#sortingDigraphs.QuantilesSortingDigraph.computeSortingRelation">[docs]</a>    <span class="k">def</span> <span class="nf">computeSortingRelation</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">categoryContents</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span><span class="n">Debug</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span><span class="n">StoreSorting</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+
+<div class="viewcode-block" id="QuantilesSortingDigraph.computeSortingRelation">
+<a class="viewcode-back" href="../techDoc.html#sortingDigraphs.QuantilesSortingDigraph.computeSortingRelation">[docs]</a>
+    <span class="k">def</span> <span class="nf">computeSortingRelation</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">categoryContents</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span><span class="n">Debug</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span><span class="n">StoreSorting</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
                                <span class="n">Threading</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span><span class="n">nbrOfCPUs</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span><span class="n">Comments</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        constructs a bipolar sorting relation using the category contents.</span>
@@ -3337,10 +3445,14 @@
                     <span class="n">sortingRelation</span><span class="p">[</span><span class="n">x</span><span class="p">][</span><span class="n">y</span><span class="p">]</span> <span class="o">=</span> <span class="n">Min</span>
                     <span class="n">sortingRelation</span><span class="p">[</span><span class="n">y</span><span class="p">][</span><span class="n">x</span><span class="p">]</span> <span class="o">=</span> <span class="n">Max</span>
             <span class="n">currActions</span> <span class="o">=</span> <span class="n">currActions</span> <span class="o">-</span> <span class="n">ibch</span>
-        <span class="k">return</span> <span class="n">sortingRelation</span></div></div>
+        <span class="k">return</span> <span class="n">sortingRelation</span></div>
+</div>
+
 
 <span class="c1">############################################################</span>
-<div class="viewcode-block" id="ConfidentQuantilesSortingDigraph"><a class="viewcode-back" href="../techDoc.html#sortingDigraphs.ConfidentQuantilesSortingDigraph">[docs]</a><span class="k">class</span> <span class="nc">ConfidentQuantilesSortingDigraph</span><span class="p">(</span><span class="n">QuantilesSortingDigraph</span><span class="p">):</span>
+<div class="viewcode-block" id="ConfidentQuantilesSortingDigraph">
+<a class="viewcode-back" href="../techDoc.html#sortingDigraphs.ConfidentQuantilesSortingDigraph">[docs]</a>
+<span class="k">class</span> <span class="nc">ConfidentQuantilesSortingDigraph</span><span class="p">(</span><span class="n">QuantilesSortingDigraph</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Specialisation of the root :py:class:`~sortingDigraphs.QuantilesSortingDigraph` class</span>
 <span class="sd">    for sorting of a large set of alternatives into</span>
@@ -3615,11 +3727,14 @@
             <span class="bp">self</span><span class="o">.</span><span class="n">notGamma</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">notGammaSets</span><span class="p">()</span>
 
         <span class="bp">self</span><span class="o">.</span><span class="n">runTimes</span><span class="p">[</span><span class="s1">&#39;totalTime&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">time</span><span class="p">()</span> <span class="o">-</span> <span class="n">tt</span></div>
+
     
 <span class="c1">##############################################################</span>
 
 <span class="kn">from</span> <span class="nn">performanceQuantiles</span> <span class="kn">import</span> <span class="n">PerformanceQuantiles</span>  
-<div class="viewcode-block" id="LearnedQuantilesRatingDigraph"><a class="viewcode-back" href="../techDoc.html#sortingDigraphs.LearnedQuantilesRatingDigraph">[docs]</a><span class="k">class</span> <span class="nc">LearnedQuantilesRatingDigraph</span><span class="p">(</span><span class="n">QuantilesSortingDigraph</span><span class="p">,</span><span class="n">PerformanceQuantiles</span><span class="p">):</span>
+<div class="viewcode-block" id="LearnedQuantilesRatingDigraph">
+<a class="viewcode-back" href="../techDoc.html#sortingDigraphs.LearnedQuantilesRatingDigraph">[docs]</a>
+<span class="k">class</span> <span class="nc">LearnedQuantilesRatingDigraph</span><span class="p">(</span><span class="n">QuantilesSortingDigraph</span><span class="p">,</span><span class="n">PerformanceQuantiles</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Specialisation of the root :py:class:`sortingDigraphs.SortingDigraph` class</span>
 <span class="sd">    for absolute rating of a new set of decision actions with</span>
@@ -4072,7 +4187,9 @@
 
 <span class="c1"># ------------ public methods ------------------</span>
 
-<div class="viewcode-block" id="LearnedQuantilesRatingDigraph.computeCategoryContents"><a class="viewcode-back" href="../techDoc.html#sortingDigraphs.LearnedQuantilesRatingDigraph.computeCategoryContents">[docs]</a>    <span class="k">def</span> <span class="nf">computeCategoryContents</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">Debug</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+<div class="viewcode-block" id="LearnedQuantilesRatingDigraph.computeCategoryContents">
+<a class="viewcode-back" href="../techDoc.html#sortingDigraphs.LearnedQuantilesRatingDigraph.computeCategoryContents">[docs]</a>
+    <span class="k">def</span> <span class="nf">computeCategoryContents</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">Debug</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Computes the quantiles sorting results per quantile category.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
@@ -4091,7 +4208,10 @@
                     <span class="n">categoryContent</span><span class="p">[</span><span class="n">c</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
         <span class="k">return</span> <span class="n">categoryContent</span></div>
 
-<div class="viewcode-block" id="LearnedQuantilesRatingDigraph.computeQuantileOrdering"><a class="viewcode-back" href="../techDoc.html#sortingDigraphs.LearnedQuantilesRatingDigraph.computeQuantileOrdering">[docs]</a>    <span class="k">def</span> <span class="nf">computeQuantileOrdering</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">strategy</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+
+<div class="viewcode-block" id="LearnedQuantilesRatingDigraph.computeQuantileOrdering">
+<a class="viewcode-back" href="../techDoc.html#sortingDigraphs.LearnedQuantilesRatingDigraph.computeQuantileOrdering">[docs]</a>
+    <span class="k">def</span> <span class="nf">computeQuantileOrdering</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">strategy</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
                                 <span class="n">Descending</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
                                 <span class="n">HTML</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
                                 <span class="n">Comments</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
@@ -4228,7 +4348,10 @@
         <span class="k">else</span><span class="p">:</span>
             <span class="k">return</span> <span class="n">weakOrdering</span></div>
 
-<div class="viewcode-block" id="LearnedQuantilesRatingDigraph.computeQuantilesRating"><a class="viewcode-back" href="../techDoc.html#sortingDigraphs.LearnedQuantilesRatingDigraph.computeQuantilesRating">[docs]</a>    <span class="k">def</span> <span class="nf">computeQuantilesRating</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">Debug</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+
+<div class="viewcode-block" id="LearnedQuantilesRatingDigraph.computeQuantilesRating">
+<a class="viewcode-back" href="../techDoc.html#sortingDigraphs.LearnedQuantilesRatingDigraph.computeQuantilesRating">[docs]</a>
+    <span class="k">def</span> <span class="nf">computeQuantilesRating</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">Debug</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">          Renders an ordered dictionary of non empty quantiles in ascending order.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
@@ -4263,7 +4386,10 @@
             <span class="nb">print</span><span class="p">(</span><span class="n">ratingCategories</span><span class="p">)</span>
         <span class="k">return</span> <span class="n">ratingCategories</span></div>
 
-<div class="viewcode-block" id="LearnedQuantilesRatingDigraph.computeRatingRelation"><a class="viewcode-back" href="../techDoc.html#sortingDigraphs.LearnedQuantilesRatingDigraph.computeRatingRelation">[docs]</a>    <span class="k">def</span> <span class="nf">computeRatingRelation</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">Debug</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span><span class="n">StoreRating</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
+
+<div class="viewcode-block" id="LearnedQuantilesRatingDigraph.computeRatingRelation">
+<a class="viewcode-back" href="../techDoc.html#sortingDigraphs.LearnedQuantilesRatingDigraph.computeRatingRelation">[docs]</a>
+    <span class="k">def</span> <span class="nf">computeRatingRelation</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">Debug</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span><span class="n">StoreRating</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Computes a bipolar rating relation using a pre-ranking (list of lists)</span>
 <span class="sd">        of the self-actions (self.newActions + self.profiles).</span>
@@ -4316,7 +4442,10 @@
             <span class="bp">self</span><span class="o">.</span><span class="n">ratingRelation</span> <span class="o">=</span> <span class="n">ratingRelation</span>
         <span class="k">return</span> <span class="n">ratingRelation</span></div>
 
-<div class="viewcode-block" id="LearnedQuantilesRatingDigraph.computeSortingCharacteristics"><a class="viewcode-back" href="../techDoc.html#sortingDigraphs.LearnedQuantilesRatingDigraph.computeSortingCharacteristics">[docs]</a>    <span class="k">def</span> <span class="nf">computeSortingCharacteristics</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">action</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">Debug</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+
+<div class="viewcode-block" id="LearnedQuantilesRatingDigraph.computeSortingCharacteristics">
+<a class="viewcode-back" href="../techDoc.html#sortingDigraphs.LearnedQuantilesRatingDigraph.computeSortingCharacteristics">[docs]</a>
+    <span class="k">def</span> <span class="nf">computeSortingCharacteristics</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">action</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">Debug</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Renders a bipolar-valued bi-dictionary relation (newActions x profiles)</span>
 <span class="sd">        representing the degree of credibility of the</span>
@@ -4389,7 +4518,10 @@
 
         <span class="k">return</span> <span class="n">sorting</span></div>
 
-<div class="viewcode-block" id="LearnedQuantilesRatingDigraph.exportRatingGraphViz"><a class="viewcode-back" href="../techDoc.html#sortingDigraphs.LearnedQuantilesRatingDigraph.exportRatingGraphViz">[docs]</a>    <span class="k">def</span> <span class="nf">exportRatingGraphViz</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">fileName</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+
+<div class="viewcode-block" id="LearnedQuantilesRatingDigraph.exportRatingGraphViz">
+<a class="viewcode-back" href="../techDoc.html#sortingDigraphs.LearnedQuantilesRatingDigraph.exportRatingGraphViz">[docs]</a>
+    <span class="k">def</span> <span class="nf">exportRatingGraphViz</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">fileName</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
                              <span class="n">Comments</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
                              <span class="n">graphType</span><span class="o">=</span><span class="s1">&#39;png&#39;</span><span class="p">,</span><span class="n">graphSize</span><span class="o">=</span><span class="s1">&#39;7,7&#39;</span><span class="p">,</span>
                              <span class="n">fontSize</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span><span class="n">bgcolor</span><span class="o">=</span><span class="s1">&#39;cornsilk&#39;</span><span class="p">):</span>
@@ -4403,7 +4535,10 @@
                                    <span class="n">fontSize</span><span class="o">=</span><span class="n">fontSize</span><span class="p">,</span>
                                    <span class="n">bgcolor</span><span class="o">=</span><span class="n">bgcolor</span><span class="p">)</span></div>
 
-<div class="viewcode-block" id="LearnedQuantilesRatingDigraph.exportRatingBySortingGraphViz"><a class="viewcode-back" href="../techDoc.html#sortingDigraphs.LearnedQuantilesRatingDigraph.exportRatingBySortingGraphViz">[docs]</a>    <span class="k">def</span> <span class="nf">exportRatingBySortingGraphViz</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">fileName</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+
+<div class="viewcode-block" id="LearnedQuantilesRatingDigraph.exportRatingBySortingGraphViz">
+<a class="viewcode-back" href="../techDoc.html#sortingDigraphs.LearnedQuantilesRatingDigraph.exportRatingBySortingGraphViz">[docs]</a>
+    <span class="k">def</span> <span class="nf">exportRatingBySortingGraphViz</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">fileName</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
                              <span class="n">Comments</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
                              <span class="n">graphType</span><span class="o">=</span><span class="s1">&#39;png&#39;</span><span class="p">,</span><span class="n">graphSize</span><span class="o">=</span><span class="s1">&#39;12,12&#39;</span><span class="p">,</span>
                              <span class="n">fontSize</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span><span class="n">bgcolor</span><span class="o">=</span><span class="s1">&#39;cornsilk&#39;</span><span class="p">):</span>
@@ -4427,7 +4562,10 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">actions</span> <span class="o">=</span> <span class="n">selfActions</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">relation</span> <span class="o">=</span> <span class="n">selfRelation</span></div>
 
-<div class="viewcode-block" id="LearnedQuantilesRatingDigraph.exportRatingByRankingGraphViz"><a class="viewcode-back" href="../techDoc.html#sortingDigraphs.LearnedQuantilesRatingDigraph.exportRatingByRankingGraphViz">[docs]</a>    <span class="k">def</span> <span class="nf">exportRatingByRankingGraphViz</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">fileName</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+
+<div class="viewcode-block" id="LearnedQuantilesRatingDigraph.exportRatingByRankingGraphViz">
+<a class="viewcode-back" href="../techDoc.html#sortingDigraphs.LearnedQuantilesRatingDigraph.exportRatingByRankingGraphViz">[docs]</a>
+    <span class="k">def</span> <span class="nf">exportRatingByRankingGraphViz</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">fileName</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
                              <span class="n">Comments</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span><span class="n">graphType</span><span class="o">=</span><span class="s1">&#39;png&#39;</span><span class="p">,</span>
                              <span class="n">graphSize</span><span class="o">=</span><span class="s1">&#39;7,7&#39;</span><span class="p">,</span>
                              <span class="n">fontSize</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span><span class="n">bgcolor</span><span class="o">=</span><span class="s1">&#39;cornsilk&#39;</span><span class="p">,</span>
@@ -4572,6 +4710,7 @@
         <span class="k">except</span><span class="p">:</span>
             <span class="k">if</span> <span class="n">Comments</span><span class="p">:</span>
                 <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;graphViz tools not avalaible! Please check installation.&#39;</span><span class="p">)</span></div>
+
 
     <span class="k">def</span> <span class="nf">_exportRatingGraphViz</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">fileName</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span><span class="n">relation</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
                              <span class="n">direction</span><span class="o">=</span><span class="s1">&#39;best&#39;</span><span class="p">,</span><span class="n">Comments</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
@@ -4844,7 +4983,9 @@
         <span class="n">html</span> <span class="o">+=</span> <span class="s1">&#39;&lt;/body&gt;&lt;/html&gt;&#39;</span>
         <span class="k">return</span> <span class="n">html</span>
 
-<div class="viewcode-block" id="LearnedQuantilesRatingDigraph.showActionCategories"><a class="viewcode-back" href="../techDoc.html#sortingDigraphs.LearnedQuantilesRatingDigraph.showActionCategories">[docs]</a>    <span class="k">def</span> <span class="nf">showActionCategories</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">action</span><span class="p">,</span><span class="n">Debug</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span><span class="n">Comments</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
+<div class="viewcode-block" id="LearnedQuantilesRatingDigraph.showActionCategories">
+<a class="viewcode-back" href="../techDoc.html#sortingDigraphs.LearnedQuantilesRatingDigraph.showActionCategories">[docs]</a>
+    <span class="k">def</span> <span class="nf">showActionCategories</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">action</span><span class="p">,</span><span class="n">Debug</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span><span class="n">Comments</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Renders the union of categories in which the given action is sorted positively or null into.</span>
 <span class="sd">        Returns a tuple : action, lowest category key, highest category key, membership credibility !</span>
@@ -4882,7 +5023,10 @@
                 <span class="n">credibility</span>            </div>
 
 
-<div class="viewcode-block" id="LearnedQuantilesRatingDigraph.showActionsSortingResult"><a class="viewcode-back" href="../techDoc.html#sortingDigraphs.LearnedQuantilesRatingDigraph.showActionsSortingResult">[docs]</a>    <span class="k">def</span> <span class="nf">showActionsSortingResult</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">actionsSubset</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span><span class="n">Debug</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+
+<div class="viewcode-block" id="LearnedQuantilesRatingDigraph.showActionsSortingResult">
+<a class="viewcode-back" href="../techDoc.html#sortingDigraphs.LearnedQuantilesRatingDigraph.showActionsSortingResult">[docs]</a>
+    <span class="k">def</span> <span class="nf">showActionsSortingResult</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">actionsSubset</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span><span class="n">Debug</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Shows the quantiles sorting result of all (default) or</span>
 <span class="sd">        a subset of the decision actions.</span>
@@ -4897,10 +5041,16 @@
             <span class="bp">self</span><span class="o">.</span><span class="n">showActionCategories</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="n">Debug</span><span class="o">=</span><span class="n">Debug</span><span class="p">)</span></div>
 
 
-<div class="viewcode-block" id="LearnedQuantilesRatingDigraph.showHTMLPerformanceHeatmap"><a class="viewcode-back" href="../techDoc.html#sortingDigraphs.LearnedQuantilesRatingDigraph.showHTMLPerformanceHeatmap">[docs]</a>    <span class="k">def</span> <span class="nf">showHTMLPerformanceHeatmap</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+
+<div class="viewcode-block" id="LearnedQuantilesRatingDigraph.showHTMLPerformanceHeatmap">
+<a class="viewcode-back" href="../techDoc.html#sortingDigraphs.LearnedQuantilesRatingDigraph.showHTMLPerformanceHeatmap">[docs]</a>
+    <span class="k">def</span> <span class="nf">showHTMLPerformanceHeatmap</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Please use the showHTMLRatingHeatmap() here !!&#39;</span><span class="p">)</span></div>
+
     
-<div class="viewcode-block" id="LearnedQuantilesRatingDigraph.showHTMLRatingHeatmap"><a class="viewcode-back" href="../techDoc.html#sortingDigraphs.LearnedQuantilesRatingDigraph.showHTMLRatingHeatmap">[docs]</a>    <span class="k">def</span> <span class="nf">showHTMLRatingHeatmap</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">actionsList</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+<div class="viewcode-block" id="LearnedQuantilesRatingDigraph.showHTMLRatingHeatmap">
+<a class="viewcode-back" href="../techDoc.html#sortingDigraphs.LearnedQuantilesRatingDigraph.showHTMLRatingHeatmap">[docs]</a>
+    <span class="k">def</span> <span class="nf">showHTMLRatingHeatmap</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">actionsList</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
                               <span class="n">WithActionNames</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
                                    <span class="n">criteriaList</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
                                    <span class="n">colorLevels</span><span class="o">=</span><span class="mi">7</span><span class="p">,</span>
@@ -4970,7 +5120,10 @@
         <span class="n">url</span> <span class="o">=</span> <span class="s1">&#39;file://&#39;</span><span class="o">+</span><span class="n">fileName</span>
         <span class="n">webbrowser</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="n">url</span><span class="p">,</span><span class="n">new</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span></div>
 
-<div class="viewcode-block" id="LearnedQuantilesRatingDigraph.showHTMLQuantilesSorting"><a class="viewcode-back" href="../techDoc.html#sortingDigraphs.LearnedQuantilesRatingDigraph.showHTMLQuantilesSorting">[docs]</a>    <span class="k">def</span> <span class="nf">showHTMLQuantilesSorting</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">Descending</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span><span class="n">strategy</span><span class="o">=</span><span class="s1">&#39;average&#39;</span><span class="p">,</span>
+
+<div class="viewcode-block" id="LearnedQuantilesRatingDigraph.showHTMLQuantilesSorting">
+<a class="viewcode-back" href="../techDoc.html#sortingDigraphs.LearnedQuantilesRatingDigraph.showHTMLQuantilesSorting">[docs]</a>
+    <span class="k">def</span> <span class="nf">showHTMLQuantilesSorting</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">Descending</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span><span class="n">strategy</span><span class="o">=</span><span class="s1">&#39;average&#39;</span><span class="p">,</span>
                                  <span class="n">htmlFileName</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Shows the html version of the quantile sorting result in a browser window.</span>
@@ -4997,7 +5150,10 @@
         <span class="n">url</span> <span class="o">=</span> <span class="s1">&#39;file://&#39;</span><span class="o">+</span><span class="n">fileName</span>
         <span class="n">webbrowser</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="n">url</span><span class="p">,</span><span class="n">new</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span></div>
 
-<div class="viewcode-block" id="LearnedQuantilesRatingDigraph.showOrderedRelationTable"><a class="viewcode-back" href="../techDoc.html#sortingDigraphs.LearnedQuantilesRatingDigraph.showOrderedRelationTable">[docs]</a>    <span class="k">def</span> <span class="nf">showOrderedRelationTable</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">relation</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span><span class="n">direction</span><span class="o">=</span><span class="s2">&quot;decreasing&quot;</span><span class="p">):</span>
+
+<div class="viewcode-block" id="LearnedQuantilesRatingDigraph.showOrderedRelationTable">
+<a class="viewcode-back" href="../techDoc.html#sortingDigraphs.LearnedQuantilesRatingDigraph.showOrderedRelationTable">[docs]</a>
+    <span class="k">def</span> <span class="nf">showOrderedRelationTable</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">relation</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span><span class="n">direction</span><span class="o">=</span><span class="s2">&quot;decreasing&quot;</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Showing the relation table in decreasing (default) or increasing order.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
@@ -5016,6 +5172,7 @@
                                 <span class="n">relation</span><span class="o">=</span><span class="n">relation</span><span class="p">,</span>
                                 <span class="n">Sorted</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
                                 <span class="n">ReflexiveTerms</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span></div>
+
         
     <span class="k">def</span> <span class="nf">showQuantilesRating</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">Descending</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span><span class="n">Debug</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
         <span class="k">try</span><span class="p">:</span>
@@ -5042,14 +5199,19 @@
                     <span class="n">c</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">profiles</span><span class="p">[</span><span class="n">cat</span><span class="p">][</span><span class="s1">&#39;category&#39;</span><span class="p">]</span>
                     <span class="nb">print</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">categories</span><span class="p">[</span><span class="n">c</span><span class="p">][</span><span class="s1">&#39;name&#39;</span><span class="p">],</span><span class="n">ratingCategories</span><span class="p">[</span><span class="n">cat</span><span class="p">])</span>
 
-<div class="viewcode-block" id="LearnedQuantilesRatingDigraph.showQuantilesSorting"><a class="viewcode-back" href="../techDoc.html#sortingDigraphs.LearnedQuantilesRatingDigraph.showQuantilesSorting">[docs]</a>    <span class="k">def</span> <span class="nf">showQuantilesSorting</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">strategy</span><span class="o">=</span><span class="s1">&#39;average&#39;</span><span class="p">):</span>
+<div class="viewcode-block" id="LearnedQuantilesRatingDigraph.showQuantilesSorting">
+<a class="viewcode-back" href="../techDoc.html#sortingDigraphs.LearnedQuantilesRatingDigraph.showQuantilesSorting">[docs]</a>
+    <span class="k">def</span> <span class="nf">showQuantilesSorting</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">strategy</span><span class="o">=</span><span class="s1">&#39;average&#39;</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Dummy show method for the commenting computeQuantileOrdering() method.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;*----- Quantiles sorting result ----&#39;</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">computeQuantileOrdering</span><span class="p">(</span><span class="n">strategy</span><span class="o">=</span><span class="n">strategy</span><span class="p">,</span><span class="n">Comments</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span></div>
+
             
-<div class="viewcode-block" id="LearnedQuantilesRatingDigraph.showRankingScores"><a class="viewcode-back" href="../techDoc.html#sortingDigraphs.LearnedQuantilesRatingDigraph.showRankingScores">[docs]</a>    <span class="k">def</span> <span class="nf">showRankingScores</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">direction</span><span class="o">=</span><span class="s1">&#39;descending&#39;</span><span class="p">):</span>
+<div class="viewcode-block" id="LearnedQuantilesRatingDigraph.showRankingScores">
+<a class="viewcode-back" href="../techDoc.html#sortingDigraphs.LearnedQuantilesRatingDigraph.showRankingScores">[docs]</a>
+    <span class="k">def</span> <span class="nf">showRankingScores</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">direction</span><span class="o">=</span><span class="s1">&#39;descending&#39;</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Shows the ranking scores of the Copeland or the netflows ranking rule,</span>
 <span class="sd">        the number of incoming arcs minus the number of outgoing arcs, resp.</span>
@@ -5062,7 +5224,9 @@
                 <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;</span><span class="si">%s</span><span class="s1"> </span><span class="se">\t</span><span class="s1"> </span><span class="si">%.2f</span><span class="s1">&#39;</span> <span class="o">%</span><span class="p">(</span><span class="n">x</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span><span class="o">-</span><span class="n">x</span><span class="p">[</span><span class="mi">0</span><span class="p">]))</span>
         <span class="k">else</span><span class="p">:</span>
             <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="nb">reversed</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">outFlows</span><span class="p">):</span>
-                <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;</span><span class="si">%s</span><span class="s1"> </span><span class="se">\t</span><span class="s1"> </span><span class="si">%.2f</span><span class="s1">&#39;</span> <span class="o">%</span><span class="p">(</span><span class="n">x</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span><span class="o">-</span><span class="n">x</span><span class="p">[</span><span class="mi">0</span><span class="p">]))</span></div></div>
+                <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;</span><span class="si">%s</span><span class="s1"> </span><span class="se">\t</span><span class="s1"> </span><span class="si">%.2f</span><span class="s1">&#39;</span> <span class="o">%</span><span class="p">(</span><span class="n">x</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span><span class="o">-</span><span class="n">x</span><span class="p">[</span><span class="mi">0</span><span class="p">]))</span></div>
+</div>
+
                                          
 <span class="c1">##    def getActionsKeys(self,action=None,WithoutProfiles=True):</span>
 <span class="c1">##        &quot;&quot;&quot;</span>
@@ -5078,10 +5242,13 @@
 <span class="c1">##        else:</span>
 <span class="c1">##            return set([action])           </span>
 
-<div class="viewcode-block" id="NormedQuantilesRatingDigraph"><a class="viewcode-back" href="../techDoc.html#sortingDigraphs.NormedQuantilesRatingDigraph">[docs]</a><span class="k">class</span> <span class="nc">NormedQuantilesRatingDigraph</span><span class="p">(</span><span class="n">LearnedQuantilesRatingDigraph</span><span class="p">):</span>
+<div class="viewcode-block" id="NormedQuantilesRatingDigraph">
+<a class="viewcode-back" href="../techDoc.html#sortingDigraphs.NormedQuantilesRatingDigraph">[docs]</a>
+<span class="k">class</span> <span class="nc">NormedQuantilesRatingDigraph</span><span class="p">(</span><span class="n">LearnedQuantilesRatingDigraph</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Obsolete name for backward compatibility</span>
 <span class="sd">    &quot;&quot;&quot;</span></div>
+
 <span class="c1">#</span>
 <span class="c1">##########################################################3</span>
 <span class="c1">#----------test SortingDigraph class ----------------</span>
@@ -5158,7 +5325,7 @@
 
   <div role="contentinfo">
     <p>&#169; Copyright 2012-2024, Raymond Bisdorff.
-      <span class="lastupdated">Last updated on Aug 13, 2024.
+      <span class="lastupdated">Last updated on Aug 27, 2024.
       </span></p>
   </div>
 

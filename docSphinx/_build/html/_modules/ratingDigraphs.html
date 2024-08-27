@@ -1,36 +1,38 @@
 <!DOCTYPE html>
-<html class="writer-html5" lang="en" >
+<html class="writer-html5" lang="en" data-content_root="../">
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>ratingDigraphs &mdash; Digraph3 3.12.4 documentation</title>
-      <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
-      <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
-      <link rel="stylesheet" href="../_static/graphviz.css" type="text/css" />
-      <link rel="stylesheet" href="../_static/copybutton.css" type="text/css" />
-      <link rel="stylesheet" href="../_static/css/tooltipster.custom.css" type="text/css" />
-      <link rel="stylesheet" href="../_static/css/tooltipster.bundle.min.css" type="text/css" />
-      <link rel="stylesheet" href="../_static/css/tooltipster-sideTip-shadow.min.css" type="text/css" />
-      <link rel="stylesheet" href="../_static/css/tooltipster-sideTip-punk.min.css" type="text/css" />
-      <link rel="stylesheet" href="../_static/css/tooltipster-sideTip-noir.min.css" type="text/css" />
-      <link rel="stylesheet" href="../_static/css/tooltipster-sideTip-light.min.css" type="text/css" />
-      <link rel="stylesheet" href="../_static/css/tooltipster-sideTip-borderless.min.css" type="text/css" />
-      <link rel="stylesheet" href="../_static/css/micromodal.css" type="text/css" />
-      <link rel="stylesheet" href="../_static/css/sphinx_rtd_theme.css" type="text/css" />
+      <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=fa44fd50" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=19f00094" />
+      <link rel="stylesheet" type="text/css" href="../_static/graphviz.css?v=eafc0fe6" />
+      <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/tooltipster.custom.css?v=7bc2f056" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/tooltipster.bundle.min.css?v=37217874" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/tooltipster-sideTip-shadow.min.css?v=6227e517" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/tooltipster-sideTip-punk.min.css?v=94669e23" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/tooltipster-sideTip-noir.min.css?v=21a39f42" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/tooltipster-sideTip-light.min.css?v=a18b2449" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/tooltipster-sideTip-borderless.min.css?v=dbff53e4" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/micromodal.css?v=d7bf34ee" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/sphinx_rtd_theme.css?v=3234e928" />
+
+  
   <!--[if lt IE 9]>
     <script src="../_static/js/html5shiv.min.js"></script>
   <![endif]-->
   
-        <script src="../_static/jquery.js"></script>
-        <script src="../_static/_sphinx_javascript_frameworks_compat.js"></script>
-        <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
-        <script src="../_static/doctools.js"></script>
-        <script src="../_static/sphinx_highlight.js"></script>
-        <script src="../_static/clipboard.min.js"></script>
-        <script src="../_static/copybutton.js"></script>
-        <script src="../_static/js/hoverxref.js"></script>
-        <script src="../_static/js/tooltipster.bundle.min.js"></script>
-        <script src="../_static/js/micromodal.min.js"></script>
+        <script src="../_static/jquery.js?v=5d32c60e"></script>
+        <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script src="../_static/documentation_options.js?v=e70b10b9"></script>
+        <script src="../_static/doctools.js?v=888ff710"></script>
+        <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+        <script src="../_static/clipboard.min.js?v=a7894cd8"></script>
+        <script src="../_static/copybutton.js?v=15d7cbb8"></script>
+        <script src="../_static/js/hoverxref.js?v=3be43539"></script>
+        <script src="../_static/js/tooltipster.bundle.min.js?v=18bf091b"></script>
+        <script src="../_static/js/micromodal.min.js?v=04d6302d"></script>
     <script src="../_static/js/theme.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" /> 
@@ -134,7 +136,9 @@
 <span class="sd">&quot;&quot;&quot;</span>
 <span class="c1">######### abstract root class</span>
 <span class="kn">from</span> <span class="nn">outrankingDigraphs</span> <span class="kn">import</span> <span class="n">BipolarOutrankingDigraph</span>
-<div class="viewcode-block" id="RatingDigraph"><a class="viewcode-back" href="../techDoc.html#ratingDigraphs.RatingDigraph">[docs]</a><span class="k">class</span> <span class="nc">RatingDigraph</span><span class="p">(</span><span class="n">BipolarOutrankingDigraph</span><span class="p">):</span>
+<div class="viewcode-block" id="RatingDigraph">
+<a class="viewcode-back" href="../techDoc.html#ratingDigraphs.RatingDigraph">[docs]</a>
+<span class="k">class</span> <span class="nc">RatingDigraph</span><span class="p">(</span><span class="n">BipolarOutrankingDigraph</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Abstract root class with generic private and public methods</span>
 <span class="sd">    &quot;&quot;&quot;</span>
@@ -197,7 +201,9 @@
         <span class="n">repString</span> <span class="o">+=</span> <span class="s1">&#39;rating-by-ranking   : </span><span class="si">%.5f</span><span class="se">\n</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="bp">self</span><span class="o">.</span><span class="n">runTimes</span><span class="p">[</span><span class="s1">&#39;rating-by-ranking&#39;</span><span class="p">]</span>
         <span class="k">return</span> <span class="n">repString</span>
     
-<div class="viewcode-block" id="RatingDigraph.exportRatingBySortingGraphViz"><a class="viewcode-back" href="../techDoc.html#ratingDigraphs.RatingDigraph.exportRatingBySortingGraphViz">[docs]</a>    <span class="k">def</span> <span class="nf">exportRatingBySortingGraphViz</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">fileName</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span><span class="n">direction</span><span class="o">=</span><span class="s1">&#39;decreasing&#39;</span><span class="p">,</span>
+<div class="viewcode-block" id="RatingDigraph.exportRatingBySortingGraphViz">
+<a class="viewcode-back" href="../techDoc.html#ratingDigraphs.RatingDigraph.exportRatingBySortingGraphViz">[docs]</a>
+    <span class="k">def</span> <span class="nf">exportRatingBySortingGraphViz</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">fileName</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span><span class="n">direction</span><span class="o">=</span><span class="s1">&#39;decreasing&#39;</span><span class="p">,</span>
                        <span class="n">Comments</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span><span class="n">graphType</span><span class="o">=</span><span class="s1">&#39;png&#39;</span><span class="p">,</span><span class="n">bgcolor</span><span class="o">=</span><span class="s1">&#39;cornsilk&#39;</span><span class="p">,</span>
                        <span class="n">graphSize</span><span class="o">=</span><span class="s1">&#39;7,7&#39;</span><span class="p">,</span>
                        <span class="n">fontSize</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span>
@@ -241,9 +247,12 @@
         <span class="c1"># restore original actions and relation</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">actions</span> <span class="o">=</span> <span class="n">actionsBkp</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">relation</span> <span class="o">=</span> <span class="n">relationBkp</span></div>
+
     
 <span class="c1">#------------</span>
-<div class="viewcode-block" id="RatingDigraph.exportRatingByRankingGraphViz"><a class="viewcode-back" href="../techDoc.html#ratingDigraphs.RatingDigraph.exportRatingByRankingGraphViz">[docs]</a>    <span class="k">def</span> <span class="nf">exportRatingByRankingGraphViz</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">fileName</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+<div class="viewcode-block" id="RatingDigraph.exportRatingByRankingGraphViz">
+<a class="viewcode-back" href="../techDoc.html#ratingDigraphs.RatingDigraph.exportRatingByRankingGraphViz">[docs]</a>
+    <span class="k">def</span> <span class="nf">exportRatingByRankingGraphViz</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">fileName</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
                              <span class="n">Comments</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span><span class="n">graphType</span><span class="o">=</span><span class="s1">&#39;png&#39;</span><span class="p">,</span>
                              <span class="n">graphSize</span><span class="o">=</span><span class="s1">&#39;7,7&#39;</span><span class="p">,</span>
                              <span class="n">fontSize</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span><span class="n">bgcolor</span><span class="o">=</span><span class="s1">&#39;cornsilk&#39;</span><span class="p">,</span>
@@ -390,7 +399,10 @@
             <span class="k">if</span> <span class="n">Comments</span><span class="p">:</span>
                 <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;graphViz tools not avalaible! Please check installation.&#39;</span><span class="p">)</span></div>
 
-<div class="viewcode-block" id="RatingDigraph.showSortingCharacteristics"><a class="viewcode-back" href="../techDoc.html#ratingDigraphs.RatingDigraph.showSortingCharacteristics">[docs]</a>    <span class="k">def</span> <span class="nf">showSortingCharacteristics</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">action</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+
+<div class="viewcode-block" id="RatingDigraph.showSortingCharacteristics">
+<a class="viewcode-back" href="../techDoc.html#ratingDigraphs.RatingDigraph.showSortingCharacteristics">[docs]</a>
+    <span class="k">def</span> <span class="nf">showSortingCharacteristics</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">action</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Renders a bipolar-valued bi-dictionary relation</span>
 <span class="sd">        representing the degree of credibility of the</span>
@@ -427,7 +439,10 @@
             <span class="nb">print</span><span class="p">()</span></div>
 
 
-<div class="viewcode-block" id="RatingDigraph.showHTMLRatingByQuantileSorting"><a class="viewcode-back" href="../techDoc.html#ratingDigraphs.RatingDigraph.showHTMLRatingByQuantileSorting">[docs]</a>    <span class="k">def</span> <span class="nf">showHTMLRatingByQuantileSorting</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">title</span><span class="o">=</span><span class="s1">&#39;Quantiles Preordering&#39;</span><span class="p">,</span>
+
+<div class="viewcode-block" id="RatingDigraph.showHTMLRatingByQuantileSorting">
+<a class="viewcode-back" href="../techDoc.html#ratingDigraphs.RatingDigraph.showHTMLRatingByQuantileSorting">[docs]</a>
+    <span class="k">def</span> <span class="nf">showHTMLRatingByQuantileSorting</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">title</span><span class="o">=</span><span class="s1">&#39;Quantiles Preordering&#39;</span><span class="p">,</span>
                                  <span class="n">Descending</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span><span class="n">strategy</span><span class="o">=</span><span class="s1">&#39;average&#39;</span><span class="p">,</span>
                                  <span class="n">htmlFileName</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
@@ -458,7 +473,10 @@
         <span class="n">webbrowser</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="n">url</span><span class="p">,</span><span class="n">new</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span></div>
 
 
-<div class="viewcode-block" id="RatingDigraph.showHTMLSorting"><a class="viewcode-back" href="../techDoc.html#ratingDigraphs.RatingDigraph.showHTMLSorting">[docs]</a>    <span class="k">def</span> <span class="nf">showHTMLSorting</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">Reverse</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span><span class="n">htmlFileName</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+
+<div class="viewcode-block" id="RatingDigraph.showHTMLSorting">
+<a class="viewcode-back" href="../techDoc.html#ratingDigraphs.RatingDigraph.showHTMLSorting">[docs]</a>
+    <span class="k">def</span> <span class="nf">showHTMLSorting</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">Reverse</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span><span class="n">htmlFileName</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        shows the html version of the sorting result in a browser window.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
@@ -477,7 +495,10 @@
         <span class="n">webbrowser</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="n">url</span><span class="p">,</span><span class="n">new</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span></div>
 
 
-<div class="viewcode-block" id="RatingDigraph.showSorting"><a class="viewcode-back" href="../techDoc.html#ratingDigraphs.RatingDigraph.showSorting">[docs]</a>    <span class="k">def</span> <span class="nf">showSorting</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">Reverse</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span><span class="n">isReturningHTML</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span><span class="n">Debug</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+
+<div class="viewcode-block" id="RatingDigraph.showSorting">
+<a class="viewcode-back" href="../techDoc.html#ratingDigraphs.RatingDigraph.showSorting">[docs]</a>
+    <span class="k">def</span> <span class="nf">showSorting</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">Reverse</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span><span class="n">isReturningHTML</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span><span class="n">Debug</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Shows sorting results in decreasing or increasing (Reverse=False)</span>
 <span class="sd">        order of the categories. If isReturningHTML is True (default = False)</span>
@@ -524,10 +545,16 @@
             <span class="k">return</span> <span class="n">html</span></div>
 
 
-<div class="viewcode-block" id="RatingDigraph.showAllQuantiles"><a class="viewcode-back" href="../techDoc.html#ratingDigraphs.RatingDigraph.showAllQuantiles">[docs]</a>    <span class="k">def</span> <span class="nf">showAllQuantiles</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+
+<div class="viewcode-block" id="RatingDigraph.showAllQuantiles">
+<a class="viewcode-back" href="../techDoc.html#ratingDigraphs.RatingDigraph.showAllQuantiles">[docs]</a>
+    <span class="k">def</span> <span class="nf">showAllQuantiles</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">showCriteriaQuantileLimits</span><span class="p">()</span></div>
+
         
-<div class="viewcode-block" id="RatingDigraph.showCriteriaQuantileLimits"><a class="viewcode-back" href="../techDoc.html#ratingDigraphs.RatingDigraph.showCriteriaQuantileLimits">[docs]</a>    <span class="k">def</span> <span class="nf">showCriteriaQuantileLimits</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">ByCriterion</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+<div class="viewcode-block" id="RatingDigraph.showCriteriaQuantileLimits">
+<a class="viewcode-back" href="../techDoc.html#ratingDigraphs.RatingDigraph.showCriteriaQuantileLimits">[docs]</a>
+    <span class="k">def</span> <span class="nf">showCriteriaQuantileLimits</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">ByCriterion</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Shows category minimum and maximum limits for each criterion.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
@@ -565,10 +592,16 @@
                     <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;</span><span class="si">%.2f</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="n">catg</span><span class="p">[</span><span class="n">c</span><span class="o">-</span><span class="mi">1</span><span class="p">]),</span> <span class="n">end</span><span class="o">=</span><span class="s1">&#39;</span><span class="se">\t</span><span class="s1"> &#39;</span><span class="p">)</span>
                 <span class="nb">print</span><span class="p">()</span></div>
 
-<div class="viewcode-block" id="RatingDigraph.showHTMLPerformanceHeatmap"><a class="viewcode-back" href="../techDoc.html#ratingDigraphs.RatingDigraph.showHTMLPerformanceHeatmap">[docs]</a>    <span class="k">def</span> <span class="nf">showHTMLPerformanceHeatmap</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+
+<div class="viewcode-block" id="RatingDigraph.showHTMLPerformanceHeatmap">
+<a class="viewcode-back" href="../techDoc.html#ratingDigraphs.RatingDigraph.showHTMLPerformanceHeatmap">[docs]</a>
+    <span class="k">def</span> <span class="nf">showHTMLPerformanceHeatmap</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Please use the showHTMLRatingHeatmap() here !!&#39;</span><span class="p">)</span></div>
+
     
-<div class="viewcode-block" id="RatingDigraph.showHTMLRatingHeatmap"><a class="viewcode-back" href="../techDoc.html#ratingDigraphs.RatingDigraph.showHTMLRatingHeatmap">[docs]</a>    <span class="k">def</span> <span class="nf">showHTMLRatingHeatmap</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="c1">#actionsList=None,</span>
+<div class="viewcode-block" id="RatingDigraph.showHTMLRatingHeatmap">
+<a class="viewcode-back" href="../techDoc.html#ratingDigraphs.RatingDigraph.showHTMLRatingHeatmap">[docs]</a>
+    <span class="k">def</span> <span class="nf">showHTMLRatingHeatmap</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="c1">#actionsList=None,</span>
                                    <span class="n">WithActionNames</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
                                    <span class="c1">#criteriaList=None,</span>
                                    <span class="n">colorLevels</span><span class="o">=</span><span class="mi">7</span><span class="p">,</span>
@@ -621,7 +654,10 @@
         <span class="n">url</span> <span class="o">=</span> <span class="s1">&#39;file://&#39;</span><span class="o">+</span><span class="n">fileName</span>
         <span class="n">webbrowser</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="n">url</span><span class="p">,</span><span class="n">new</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span></div>
 
-<div class="viewcode-block" id="RatingDigraph.showRatingByQuantilesRanking"><a class="viewcode-back" href="../techDoc.html#ratingDigraphs.RatingDigraph.showRatingByQuantilesRanking">[docs]</a>    <span class="k">def</span> <span class="nf">showRatingByQuantilesRanking</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">Descending</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span><span class="n">Debug</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+
+<div class="viewcode-block" id="RatingDigraph.showRatingByQuantilesRanking">
+<a class="viewcode-back" href="../techDoc.html#ratingDigraphs.RatingDigraph.showRatingByQuantilesRanking">[docs]</a>
+    <span class="k">def</span> <span class="nf">showRatingByQuantilesRanking</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">Descending</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span><span class="n">Debug</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Show rating-by-ranking result.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
@@ -650,7 +686,10 @@
                     <span class="nb">print</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">categories</span><span class="p">[</span><span class="n">c</span><span class="p">][</span><span class="s1">&#39;name&#39;</span><span class="p">],</span><span class="n">ratingCategories</span><span class="p">[</span><span class="n">cat</span><span class="p">])</span></div>
 
 
-<div class="viewcode-block" id="RatingDigraph.showRatingByQuantilesSorting"><a class="viewcode-back" href="../techDoc.html#ratingDigraphs.RatingDigraph.showRatingByQuantilesSorting">[docs]</a>    <span class="k">def</span> <span class="nf">showRatingByQuantilesSorting</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">strategy</span><span class="o">=</span><span class="s1">&#39;average&#39;</span><span class="p">):</span>
+
+<div class="viewcode-block" id="RatingDigraph.showRatingByQuantilesSorting">
+<a class="viewcode-back" href="../techDoc.html#ratingDigraphs.RatingDigraph.showRatingByQuantilesSorting">[docs]</a>
+    <span class="k">def</span> <span class="nf">showRatingByQuantilesSorting</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">strategy</span><span class="o">=</span><span class="s1">&#39;average&#39;</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Dummy show method for the commenting _computeQuantileOrdering() method.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
@@ -658,6 +697,7 @@
         <span class="k">if</span> <span class="n">strategy</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
             <span class="n">strategy</span> <span class="o">=</span> <span class="s1">&#39;average&#39;</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_computeQuantileOrdering</span><span class="p">(</span><span class="n">strategy</span><span class="o">=</span><span class="n">strategy</span><span class="p">,</span><span class="n">Comments</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span></div>
+
 
     <span class="k">def</span> <span class="nf">computeRatingByRankingCorrelation</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">Debug</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
         <span class="kn">from</span> <span class="nn">decimal</span> <span class="kn">import</span> <span class="n">Decimal</span>
@@ -1541,9 +1581,12 @@
                 <span class="n">keys</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span>\
                 <span class="n">credibility</span></div>
 
+
 <span class="c1">#########   relative quantiles raking</span>
 <span class="kn">from</span> <span class="nn">perfTabs</span> <span class="kn">import</span> <span class="n">PerformanceTableau</span> 
-<div class="viewcode-block" id="RatingByRelativeQuantilesDigraph"><a class="viewcode-back" href="../techDoc.html#ratingDigraphs.RatingByRelativeQuantilesDigraph">[docs]</a><span class="k">class</span> <span class="nc">RatingByRelativeQuantilesDigraph</span><span class="p">(</span><span class="n">RatingDigraph</span><span class="p">,</span><span class="n">PerformanceTableau</span><span class="p">):</span>
+<div class="viewcode-block" id="RatingByRelativeQuantilesDigraph">
+<a class="viewcode-back" href="../techDoc.html#ratingDigraphs.RatingByRelativeQuantilesDigraph">[docs]</a>
+<span class="k">class</span> <span class="nc">RatingByRelativeQuantilesDigraph</span><span class="p">(</span><span class="n">RatingDigraph</span><span class="p">,</span><span class="n">PerformanceTableau</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Constructor for a relative quantiles rating-by sorting and rating-by-ranking digraph.</span>
 <span class="sd">    See the :py:class:`sortingDigraphs.QuantilesSortingDigraph` class.</span>
@@ -1988,12 +2031,15 @@
 
     <span class="k">def</span> <span class="nf">showRatingConsensusQuality</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_computeRatingConsensusQuality</span><span class="p">(</span><span class="n">Comments</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span></div>
+
     
 
 <span class="c1">#########################################</span>
 <span class="c1">#########   learned quantiles rating</span>
 <span class="kn">from</span> <span class="nn">performanceQuantiles</span> <span class="kn">import</span> <span class="n">PerformanceQuantiles</span>
-<div class="viewcode-block" id="RatingByLearnedQuantilesDigraph"><a class="viewcode-back" href="../techDoc.html#ratingDigraphs.RatingByLearnedQuantilesDigraph">[docs]</a><span class="k">class</span> <span class="nc">RatingByLearnedQuantilesDigraph</span><span class="p">(</span><span class="n">RatingDigraph</span><span class="p">,</span><span class="n">PerformanceQuantiles</span><span class="p">):</span>
+<div class="viewcode-block" id="RatingByLearnedQuantilesDigraph">
+<a class="viewcode-back" href="../techDoc.html#ratingDigraphs.RatingByLearnedQuantilesDigraph">[docs]</a>
+<span class="k">class</span> <span class="nc">RatingByLearnedQuantilesDigraph</span><span class="p">(</span><span class="n">RatingDigraph</span><span class="p">,</span><span class="n">PerformanceQuantiles</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Constructor for a learned quantiles rating-by sorting and rating-by-ranking digraph.</span>
 <span class="sd">    See the :py:class:`sortingDigraphs.LearnedQuantilesRatingDigraph` class.</span>
@@ -2380,6 +2426,7 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">notGamma</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">notGammaSets</span><span class="p">()</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">runTimes</span><span class="p">[</span><span class="s1">&#39;totalTime&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">time</span><span class="p">()</span><span class="o">-</span><span class="n">tt</span></div>
 
+
 <span class="c1">#.....  specific absolute rating class methods  ....</span>
 <span class="c1">#       see abstract ratingDigraphs class     </span>
 
@@ -2470,7 +2517,7 @@
 
   <div role="contentinfo">
     <p>&#169; Copyright 2012-2024, Raymond Bisdorff.
-      <span class="lastupdated">Last updated on Aug 13, 2024.
+      <span class="lastupdated">Last updated on Aug 27, 2024.
       </span></p>
   </div>
 
