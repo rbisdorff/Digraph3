@@ -516,7 +516,7 @@ We are starting this tutorial with generating a uniformly random [-1.0; +1.0]-va
                            'valuationdomain', 'relation',
                            'gamma', 'notGamma']
    
-With the :py:func:`~digraphs.Digraph.save` method (see :numref:`tutRandValDigraph` Line 3) we may keep a backup version for future use of *rdg* which will be stored in a file called *tutRandValDigraph.py* in the current working directory. The genric :py:class:`~digraphs.Digraph` class constructor may restore the *rdg* object from the stored file (Line 4). We may easily inspect the content of *rdg* (Lines 5). The digraph size 22 indicates the number of positively valued arcs. The valuation domain is uniformly distributed in the interval :math:`[-1.0; 1.0]` and the mean absolute arc valuation is :math:`(0.7524 \times 2)\, -\, 1.0 \;=\; 0.5048` (Line 12) .
+With the :py:func:`~digraphs.Digraph.save` method (see :numref:`tutRandValDigraph` Line 3) we may keep a backup version for future use of *rdg* which will be stored in a file called *tutRandValDigraph.py* in the current working directory. The generic :py:class:`~digraphs.Digraph` class constructor may restore the *rdg* object from the stored file (Line 4). We may easily inspect the content of *rdg* (Lines 5). The digraph size 22 indicates the number of positively valued arcs. The valuation domain is uniformly distributed in the interval :math:`[-1.0; 1.0]` and the mean absolute arc valuation is :math:`(0.7524 \times 2)\, -\, 1.0 \;=\; 0.5048` (Line 12) .
 
 All :py:class:`~digraphs.Digraph` objects contain at least the list of attributes shown here: a **name** (string), a dictionary of **actions** (digraph nodes), an **order** (integer) attribute containing the number of actions, a **valuationdomain** dictionary, a double dictionary **relation** representing the adjency table of the digraph relation, a **gamma** and a **notGamma** dictionary containing the direct neighbourhood of each action.
 
@@ -8856,9 +8856,9 @@ Following timings (see :numref:`meluxina`) could be achieved with a specially de
     10000000     1x10^14      9     220       6'46"      500475     240      23'17"
    ============ =========== ===== ========= ========== ========= ========= =========
 
-One million records could be ranked with 100 sorting and 48 ranking multiprocessing threads in about 67 seconds. The quantiles sorting step is based on 7-tiling. Three million records could be ranked with 128 sorters and 64 rankers in 4 min. and 20 sec. and the quantiles sorting step is here based on 7-tiling. With 128 sorters and 84 rankers, up to five million records could be 7-tiled and ranked in 8 min. and 35 sec.
+One million records could be ranked with 100 sorting and 48 ranking multiprocessing threads in about 67 seconds. The quantiles sorting step is based on 7-tiling. Three million records could be ranked with 128 sorters and 64 rankers in 4 min. and 20 sec. and the quantiles sorting step is here again based on 7-tiling. With 128 sorters and 84 rankers, up to five million records could be 7-tiled and ranked in 8 min. and 35 sec.
 
-Below is shown an example *MeluXina* session for ranking **six million** incommensurable 21 criteria performance records assessing 3 decision objectives concerning economic, environmental and societal aspects ( see the :ref:`tutorial <Three-Objectives-Performance-Tableau-label>` on generating random three-objectives performance tableaux). The Python 3.12.4 interpreter, compiled with GCC 8.5.0 RH and enabled optimizations, is running in a virtual environment on RH 8.5.0-20 Linux. All the cythonized modules were compiled with Cython-3.0.10 in the same environment. [57]_ 
+Below is shown an example *MeluXina* session for ranking **six million** incommensurable performance records assessing 3 decision objectives concerning economic, environmental and societal aspects on 21 criteria [58]_. The Python 3.12.4 interpreter, compiled with GCC 8.5.0 RH and enabled optimizations, is running in a virtual environment on RH 8.5.0-20 Linux. All the cythonized modules were compiled with Cython-3.0.10 in the same environment. [57]_ 
 
 .. code-block:: bash
 
@@ -10648,6 +10648,7 @@ Appendices
 
 .. [57] The sources of the cythonized Digraph3 modules (with *.pyx* suffix) may be found in the *cython* directory of the Digraph3 resources. 
 
+.. [58] See the :ref:`tutorial <Three-Objectives-Performance-Tableau-label>` on generating random three-objectives performance tableaux.
 
 ..  LocalWords:  randomDigraph Determinateness valuationdomain py png
 ..  LocalWords:  notGamma tutorialDigraph shortName func irreflexive
