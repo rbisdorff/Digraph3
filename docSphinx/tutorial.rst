@@ -86,7 +86,7 @@
    * :ref:`HPC-Ranking of big sparse outranking digraphs <HPC-Ranking-Tutorial-label>`
 
        * :ref:`On a common 2023 desktop computer <HPC-CommonDesktop-Tutorial-label>`
-       * :ref:`On the HPC plaform of the University of Luxembourh <HPC-UNILU-Platform-Tutorial-label>`
+       * :ref:`On the HPC plaform of the University of Luxembourg <HPC-UNILU-Platform-Tutorial-label>`
        * :ref:`On the EuroHPC MeluXina supercomputer <HPC-Meluxina-Tutorial-label>`	 
      
    * :ref:`Moving on to undirected graphs <Moving-To-Graphs-label>`
