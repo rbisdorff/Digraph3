@@ -86,8 +86,8 @@
    * :ref:`HPC-Ranking of big sparse outranking digraphs <HPC-Ranking-Tutorial-label>`
 
        * :ref:`On a common 2023 desktop computer <HPC-CommonDesktop-Tutorial-label>`
-       * :ref:`On the UNILU HPC plaform <HPC-UNILU-Platform-Tutorial-label>`
-       * :ref:`On the EUROHPC MeluXina supercomputer <HPC-Meluxina-Tutorial-label>`	 
+       * :ref:`On the HPC plaform of the University of Luxembourh <HPC-UNILU-Platform-Tutorial-label>`
+       * :ref:`On the EuroHPC MeluXina supercomputer <HPC-Meluxina-Tutorial-label>`	 
      
    * :ref:`Moving on to undirected graphs <Moving-To-Graphs-label>`
      
@@ -8626,8 +8626,8 @@ When ordering the 146579 components resulting from a 7-tiling sorting with the *
 
 .. _HPC-UNILU-Platform-Tutorial-label:
 
-On the Uni.Lu HPC platform in Spring 2018
------------------------------------------
+On the HPC platform of the University of Luxembourg (Spring 2018)
+-----------------------------------------------------------------
 
 Bigger performance tableaux may definitely be ranked with a larger *cpu_count()*. We were using therefore in 2018 the HPC Platform of the University of Luxembourg (https://hpc.uni.lu/). The following run times for very big quantiles ranking problems of several millions of multicriteria performance records could be achieved both:
 
