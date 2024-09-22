@@ -974,6 +974,16 @@ Let us finally mention some special universal classes of digraphs that are readi
 
    Mind the subtle difference between the neighborhoods of an **empty** and the neighborhoods of an **indeterminate** digraph instance. In the first kind, the neighborhoods are known to be completely *empty*  (see :numref:`completeEmpty` Lines 20-25) whereas, in the latter, *nothing is known* about the actual neighborhoods of the nodes  (see :numref:`completeEmpty` Lines 43-48). These two cases illustrate why in the case of **bipolar-valued** digraphs, we may need both a *gamma* **and** a *notGamma* attribute.
 
+Historical notes
+````````````````
+
+It was *Denis Bouyssou* who first suggested us end of the nineties, when we started to work in Prolog on the computation of fuzzy digraph kernels with finite domain constraint solvers, that the 50% criteria significance majority is a very special value that has to be carefully taken into account. The converging solution vectors of the fixpoint kernel equations furthermore confirmed this special status of the 50% majority (see :ref:`Computing bipolar-valued kernel membership characteristic vectors <Bipolar-Valued-Kernels-Tutorial-label>`). These early insights led to the seminal articles on bipolar-valued epistemic logic where we introduced split truth/falseness semantics for a multi-valued logical processing of fuzzy preference modelling ([BIS-2000]_. [BIS-2004a]_). The characteristic valuation domain remained however the classical fuzzy [0.0;1.0] valuation domain.
+
+It is only in 2004, when we succeeded in assessing the stability of the outranking digraph when solely ordinal criteria significance weights are given, that it became clear and evident for us that the characteristic valuation domain had to be shifted to a [-1.0;+1.0]-valued domain (see :ref:`Ordinal correlation equals bipolar-valued relational equivalence <OrdinalCorrelation-Tutorial-label>` and [BIS-2004b]_). In this bipolar valuation, the 50% majority threshold corresponds now to the median 0.0 value, characterising with the correct zero value an epistemic indeterminateness -no knowledge- situation. Furthermore, identifying truth and falseness directly by the sign of the characteristic value revealed itself to be very efficient not only from a computational point of view, but also from scientific and semiotic perspectives. A positive (resp. negative) characteristic value now attest a logically valid (resp. invalid) statement and a negative affirmation now means a positive refutation and vice versa. Furthermore, the median zero value gives way to efficiently handling partial objects -like the border or the assymetric part of a digraph- and, even more important from a practical decision making point of view, any missing data.
+
+The bipolar [-1.0;+1.0]-valued characteristic domain opened so the way to important new operations and concepts, like the disjunctive epistemic fusion operation seen before that confers the outranking digraph a logically sound and epistemically correct definition [BIS-2013]_. *Kendall*'s ordinal correlation index could be extended to a bipolar-valued relational equivalence index between digraphs (see :ref:`Ordinal correlation equals bipolar-valued relational equivalence <OrdinalCorrelation-Tutorial-label>` and [BIS-2012]_). Making usage of the bipolar-valued *Gaussian* error function (*erf*) naturally led to defining a bipolar-valued likelihood function, where a positive, resp. negative, value gives the likelihood of an affirmation, resp. a refutation.      
+
+
 Back to :ref:`Content Table <Tutorial-label>`
 
 ---------------
@@ -1246,6 +1256,20 @@ Many more tools for exploiting bipolar-valued outranking digraphs are available 
 ------------
 
 In this tutorial we have constructed a random outranking digraph with the help of a random performance tableau instance. The next *Digraph3* tutorial presents now different models of random performance tableaux illustrating various types of decision problems.
+
+Historical Notes
+````````````````
+
+The seminal work on outranking digraphs goes back to the seventies and eighties when *Bernard Roy*} joined the just starting *University Paris-Dauphine* and founded there the *Laboratoire d’Analyse et de Modélisation de Systèmes pour l’Aide à la Décision* (LAMSADE). The LAMSADE became the major site in the development of the outranking approach to multiple-criteria decision aiding [ROY-1991]_.
+
+The ongoing success of the original *outranking* concept stems from the fact that it is rooted in a sound pragmatism. The multiple-criteria performance tableau, necessarily associated with a given outranking digraph, is indeed convincingly objective and meaningful [ROY-1993]_. And, ideas from social choice theory gave initially the insight that a pairwise voting mechanism à la *Condorcet* could provide an order-statistical tool for aggregating a set of preference points of view into what *Marc Barbut* called the *central Condorcet* point of view [CON-1785]_ and [BAR-1980]_; in fact the median of the multiple preference points of view, at minimal absolute *Kendall*'s ordinal correlation distance from all individual points of view (see :ref:`Ordinal correlation equals bipolar-valued relational equivalence <OrdinalCorrelation-Tutorial-label>`).
+
+Considering thus each performance criterion as a subset of unanimous voters and balancing the votes in favour against considerable counter-performances in disfavour gave eventually rise to the concept of *outranking situation*, a distinctive feature of the Multiple-Criteria Decision Aiding approach [ROY-1991]_.  A modern definition would be: an alternative *x* is said to *outrank* alternative *y* when – a *significant majority* of criteria confirm that alternative *x* has to be considered as *at least as well evaluated as* an alternative *y* (the *concordance* argument); and – no discordant criterion opens to significant doubt the validity of the previous confirmation by revealing a considerable counter-performance of alternative *x* compared to *y* (the *discordance* argument).
+
+If the concordance argument was always well received, the discordance argument however, very confused in the beginning ([ROY-1966]_), could only be handled in an epistemically correct and logically sound way by using a bipolar-valued epistemic logic ([BIS-2013]_). The outranking situation had consequently to receive an explicit *negative* definition: An alternative *x* is said to *do not outrank* an alternative *y* when – a *significant majority* of criteria confirm that alternative *x* has to be considered as *not at least as well evaluated as* alternative *y*; and – no discordant criterion opens to significant doubt the validity of the previous confirmation by revealing a considerable *better* performance of alternative *x* compared to *y*.
+
+Furthermore, the initial conjunctive aggregation of the concordance and discordance arguments had to be replaced by a disjunctive epistemic fusion operation, polarising in a logically sound and epistemically correct way the concordance with the discordance argument. This way, bipolar-valued outranking  digraphs gained two very useful properties from a measure theoretical perspective. They are *weakly complete*; incomparability situations are no longer attested by the absence of positive outranking relations, but instead by epistemic indeterminateness. And, they verify the *coduality principle*: the negation of the epistemic '*at least as well evaluated as*' situation corresponds formally to the strict converse epistemic '*less well evaluated than*' situation.
+
 
 Back to :ref:`Content Table <Tutorial-label>`
 
@@ -10518,13 +10542,21 @@ Appendices
 .. [BIS-1999] Bisdorff R. (1999), "Bipolar ranking from pairwise fuzzy outrankings", JORBEL *Belgian Journal of Operations Research, Statistics and Computer Science*, Vol. 37 (4) 97 379-387. (PDF file (351.7 Kb) `for downloading <http://hdl.handle.net/10993/38738>`_)
 
 .. [WIL-1996] Wilson D.B. (1996), *Generating random spanning trees more quickly than the cover time*, Proceedings of the Twenty-eighth Annual ACM *Symposium on the Theory of Computing* (Philadelphia, PA, 1996), 296-303, ACM, New York, 1996.
+.. [ROY-1991] Roy B. (1991) The outranking approach and the foundations of electre methods. Theory and Decision 31(1):49--73
+
+.. [ROY-1993] Roy B. and Bouyssou D. (1993), *Aide Multicritère à la Déecision : Méthodes et Ca*, Economica, Paris
 
 .. [BAR-1991] Barthélemy J.-P. and Guenoche A. (1991), *Trees and Proximities Representations*, Wiley, ISBN: 978-0471922636.
 
+.. [BAR-1980] Barbut M. (1980), "Médianes, Condorcet et Kendall". *Mathématiques et Sciences Humaines*, 69:9–13.	       
+
+.. [ROY-1966] Benyaoun S., Roy B. and Sussmann B. (1966), ELECTRE: une méthode pour guider le choix en présence de points de vue multiples, Tech. Rep. 49, SEMA Direction Scientifique Paris. 
 
 .. [KRU-1956] Kruskal J.B. (1956), *On the shortest spanning subtree of a graph and the traveling salesman problem*, Proceedings of the American Mathematical Society. 7: 48–50.
 	    
 .. [GAL-1962] Gale D. and Shapley L. S. (1962). "College Admissions and the Stability of Marriage". *American Mathematical Monthly*. **69** (1): 9–14. doi:10.2307/2312726. JSTOR 2312726. Archived from the original on 2017-09-25. Retrieved 2019-11-20
+
+.. [CON-1785] Condorcet, J.A.N. de Caritat marquis de (1785), *Essai sur l'application de l'analyse à la probabilité des décisions rendues à la pluralité des voix*, Imprimerie royale Paris, https://gallica.bnf.fr/ark:/12148/bpt6k417181/f4.item
 
 .. |location_link4| raw:: html
 
