@@ -1846,8 +1846,8 @@ the current working directory a ‘tutorialDigraph.dot’ file and a
 </span><span class="hll"><span class="linenos">15</span><span class="go">                               &#39;A&#39;: 0.00, &#39;F&#39;: -0.02, &#39;E&#39;: -0.02,</span>
 </span><span class="hll"><span class="linenos">16</span><span class="go">                               &#39;B&#39;: -0.02, }</span>
 </span><span class="linenos">17</span><span class="go"> === &gt;&gt; potential last choice(s)</span>
-<span class="linenos">18</span><span class="go"> * choice              : [&#39;A&#39;, &#39;F&#39;]</span>
-<span class="linenos">19</span><span class="go">   independence        : 0.00</span>
+<span class="hll"><span class="linenos">18</span><span class="go"> * choice              : [&#39;A&#39;, &#39;F&#39;]</span>
+</span><span class="linenos">19</span><span class="go">   independence        : 0.00</span>
 <span class="linenos">20</span><span class="go">   dominance           : -0.52</span>
 <span class="linenos">21</span><span class="go">   absorbency          : 1.00</span>
 <span class="linenos">22</span><span class="go">   covered (%)         : 50.00</span>
@@ -1859,7 +1859,7 @@ the current working directory a ‘tutorialDigraph.dot’ file and a
 </div>
 </div>
 <p>It is interesting to notice in <a class="hxr-hoverxref hxr-tooltip reference internal" href="#strictbestchoice"><span class="std std-numref">Listing 1.14</span></a> (Line 8) that the <strong>strict best choice recommendation</strong> consists in the set of weak Condorcet winners: ‘A’, ‘C’ and ‘D’. In the corresponding characteristic vector (see Lines 14-16), representing the bipolar credibility degree with which each alternative may indeed be considered a best choice (see <a class="reference internal" href="#bis-2006a" id="id41"><span>[BIS-2006a]</span></a>, <a class="reference internal" href="#bis-2006b" id="id42"><span>[BIS-2006b]</span></a>), we find confirmed that alternative <em>D</em> is the only positively validated one, whereas both extreme alternatives - <em>A</em> (the most expensive) and <em>C</em> (the cheapest) - stay in an indeterminate situation. They <strong>may be or not</strong> potential first choice candidates besides <em>D</em>. Notice furthermore that compromise alternative <em>G</em>, while not actually included in an outranking prekernel, shows as well an indeterminate situation with respect to <em>being or not being</em> a potential first choice candidate.</p>
-<p>We may also notice (see Line 20) that both alternatives <em>A</em> and <em>F</em> are reported as potential strict outranked choices, hence as <strong>potential last choice recommendation</strong> . This indicates a global incomparability status of alternative <em>A</em> (see <a class="hxr-hoverxref hxr-tooltip reference internal" href="#bestofficechoice"><span class="std std-numref">Fig. 1.14</span></a>) as shown in <a class="hxr-hoverxref hxr-tooltip reference internal" href="#bestofficechoice"><span class="std std-numref">Fig. 1.14</span></a>.</p>
+<p>We may also notice (see Line 18) that both alternatives <em>A</em> and <em>F</em> are reported as potential <em>strict outranked</em> choices, hence as <strong>potential last choice recommendation</strong> . This indicates a global incomparability status of alternative <em>A</em> (see <a class="hxr-hoverxref hxr-tooltip reference internal" href="#bestofficechoice"><span class="std std-numref">Fig. 1.14</span></a>) as shown in <a class="hxr-hoverxref hxr-tooltip reference internal" href="#bestofficechoice"><span class="std std-numref">Fig. 1.14</span></a>.</p>
 <div class="highlight-pycon notranslate"><div class="highlight"><pre><span></span><span class="linenos">1</span><span class="gp">&gt;&gt;&gt; </span><span class="n">gcd</span> <span class="o">=</span> <span class="o">~</span><span class="p">(</span><span class="o">-</span><span class="n">g</span><span class="p">)</span> <span class="c1"># codual of g</span>
 <span class="linenos">2</span><span class="gp">&gt;&gt;&gt; </span><span class="n">gcd</span><span class="o">.</span><span class="n">exportGraphViz</span><span class="p">(</span><span class="n">fileName</span><span class="o">=</span><span class="s1">&#39;bestChoiceChoice&#39;</span><span class="p">,</span>
 <span class="linenos">3</span><span class="gp">... </span>                   <span class="n">firstChoice</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;C&#39;</span><span class="p">,</span><span class="s1">&#39;D&#39;</span><span class="p">],</span>
@@ -1876,7 +1876,7 @@ the current working directory a ‘tutorialDigraph.dot’ file and a
 </figcaption>
 </figure>
 <p>When comparing now the performances of alternatives <em>D</em> and <em>G</em> on a
-pairwise perspective (see below), we notice that, with the given preference discrimination thresholds, alternative <em>G</em> is actually <strong>certainly</strong> <em>at least as good as</em> alternative <em>D</em>:  <img class="math" src="_images/math/d310d1a6f31c24112d31189eb77f02fd783facde.png" alt="r(G \succsim D) = +145/145 = +1.0"/>.</p>
+pairwise perspective (see below), we notice that, with the given preference discrimination thresholds, alternative <em>G</em> is actually <strong>certainly</strong> <em>at least as good as</em> alternative <em>D</em>:  <img class="math" src="_images/math/d310d1a6f31c24112d31189eb77f02fd783facde.png" alt="r(G \succsim D) = +145/145 = +1.0"/> (see Line 14 below).</p>
 <div class="highlight-pycon notranslate"><div class="highlight"><pre><span></span><span class="linenos"> 1</span><span class="gp">&gt;&gt;&gt; </span><span class="n">g</span><span class="o">.</span><span class="n">showPairwiseComparison</span><span class="p">(</span><span class="s1">&#39;G&#39;</span><span class="p">,</span><span class="s1">&#39;D&#39;</span><span class="p">)</span>
 <span class="linenos"> 2</span><span class="go"> *------------  pairwise comparison ----*</span>
 <span class="linenos"> 3</span><span class="go"> Comparing actions : (G, D)</span>
@@ -1890,10 +1890,10 @@ pairwise perspective (see below), we notice that, with the given preference disc
 <span class="linenos">11</span><span class="go"> V   26.00    100.00     50.00   +50.00 |   10.00   20.00   +26.00   |</span>
 <span class="linenos">12</span><span class="go"> W   10.00     50.00     55.00    -5.00 |   10.00   20.00   +10.00   |</span>
 <span class="linenos">13</span><span class="go"> =========================================================================</span>
-<span class="linenos">14</span><span class="go"> Valuation in range: -145.00 to +145.00; global concordance: +145.00</span>
-</pre></div>
+<span class="hll"><span class="linenos">14</span><span class="go"> Valuation in range: -145.00 to +145.00; global concordance: +145.00</span>
+</span></pre></div>
 </div>
-<p>However, we must as well notice that the cheapest alternative <em>C</em> is in fact <strong>strictly outranking</strong> alternative <em>G</em>:  <img class="math" src="_images/math/98653da7d2be2b1fa121bede995ef28d45280ce0.png" alt="r(C \succsim G) = +15/145 &gt; 0.0"/>, and <img class="math" src="_images/math/9dea3fbd43dd55cd4fc9d03180c759832e4138ae.png" alt="r(G \succsim C) = -15/145 &lt; 0.0"/>.</p>
+<p>However, we must as well notice that the cheapest alternative <em>C</em> is in fact <strong>strictly outranking</strong> alternative <em>G</em>:  <img class="math" src="_images/math/98653da7d2be2b1fa121bede995ef28d45280ce0.png" alt="r(C \succsim G) = +15/145 &gt; 0.0"/>, and <img class="math" src="_images/math/9dea3fbd43dd55cd4fc9d03180c759832e4138ae.png" alt="r(G \succsim C) = -15/145 &lt; 0.0"/> (see Line 14 below).</p>
 <div class="highlight-pycon notranslate"><div class="highlight"><pre><span></span><span class="linenos"> 1</span><span class="gp">&gt;&gt;&gt; </span><span class="n">g</span><span class="o">.</span><span class="n">showPairwiseComparison</span><span class="p">(</span><span class="s1">&#39;C&#39;</span><span class="p">,</span><span class="s1">&#39;G&#39;</span><span class="p">)</span>
 <span class="linenos"> 2</span><span class="go"> *------------  pairwise comparison ----*</span>
 <span class="linenos"> 3</span><span class="go"> Comparing actions : (C, G)/(G, C)</span>
@@ -1907,8 +1907,8 @@ pairwise perspective (see below), we notice that, with the given preference disc
 <span class="linenos">11</span><span class="go"> V    26.00    70.00    100.00    -30.00 |   10.00   20.00  -26.00/+26.00 |</span>
 <span class="linenos">12</span><span class="go"> W    10.00     0.00     50.00    -50.00 |   10.00   20.00  -10.00/+10.00 |</span>
 <span class="linenos">13</span><span class="go"> =========================================================================</span>
-<span class="linenos">14</span><span class="go"> Valuation in range: -145.00 to +145.00; global concordance: +15.00/-15.00</span>
-</pre></div>
+<span class="hll"><span class="linenos">14</span><span class="go"> Valuation in range: -145.00 to +145.00; global concordance: +15.00/-15.00</span>
+</span></pre></div>
 </div>
 </section>
 <section id="weakly-ordering-the-outranking-digraph">
@@ -1916,12 +1916,12 @@ pairwise perspective (see below), we notice that, with the given preference disc
 <p>To get a further insight in the overall strict outranking situations, we may use the <a class="reference internal" href="techDoc.html#transitiveDigraphs.RankingByChoosingDigraph" title="transitiveDigraphs.RankingByChoosingDigraph"><code class="xref py py-class docutils literal notranslate"><span class="pre">RankingByChoosingDigraph</span></code></a> constructor imported from the <a class="reference internal" href="techDoc.html#transitivedigraphs-label"><span class="std std-ref">transitiveDigraphs module</span></a>, for computing a <strong>ranking-by-choosing</strong> result from the codual, i.e. the strict outranking digraph instance <em>gcd</em> (see above).</p>
 <div class="highlight-pycon notranslate"><div class="highlight"><pre><span></span><span class="linenos"> 1</span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">transitiveDigraphs</span> <span class="kn">import</span> <span class="n">RankingByChoosingDigraph</span>
 <span class="linenos"> 2</span><span class="gp">&gt;&gt;&gt; </span><span class="n">rbc</span> <span class="o">=</span> <span class="n">RankingByChoosingDigraph</span><span class="p">(</span><span class="n">gcd</span><span class="p">)</span>
-<span class="linenos"> 3</span><span class="go"> Threading ...  ## multiprocessing if 2 cores are available</span>
-<span class="linenos"> 4</span><span class="go"> Exiting computing threads</span>
-<span class="linenos"> 5</span><span class="gp">&gt;&gt;&gt; </span><span class="n">rbc</span><span class="o">.</span><span class="n">showRankingByChoosing</span><span class="p">()</span>
+<span class="hll"><span class="linenos"> 3</span><span class="go"> Threading ...  ## multiprocessing if 2 cores are available</span>
+</span><span class="hll"><span class="linenos"> 4</span><span class="go"> Exiting computing threads</span>
+</span><span class="linenos"> 5</span><span class="gp">&gt;&gt;&gt; </span><span class="n">rbc</span><span class="o">.</span><span class="n">showRankingByChoosing</span><span class="p">()</span>
 <span class="linenos"> 6</span><span class="go"> Ranking by Choosing and Rejecting</span>
-<span class="linenos"> 7</span><span class="go"> 1st ranked [&#39;D&#39;]</span>
-<span class="linenos"> 8</span><span class="go">    2nd ranked [&#39;C&#39;, &#39;G&#39;]</span>
+<span class="hll"><span class="linenos"> 7</span><span class="go"> 1st ranked [&#39;D&#39;]</span>
+</span><span class="linenos"> 8</span><span class="go">    2nd ranked [&#39;C&#39;, &#39;G&#39;]</span>
 <span class="linenos"> 9</span><span class="go">    2nd last ranked [&#39;B&#39;, &#39;C&#39;, &#39;E&#39;]</span>
 <span class="linenos">10</span><span class="go"> 1st last ranked [&#39;A&#39;, &#39;F&#39;]</span>
 <span class="linenos">11</span><span class="gp">&gt;&gt;&gt; </span><span class="n">rbc</span><span class="o">.</span><span class="n">exportGraphViz</span><span class="p">(</span><span class="s1">&#39;officeChoiceRanking&#39;</span><span class="p">)</span>
@@ -1940,7 +1940,7 @@ pairwise perspective (see below), we notice that, with the given preference disc
 <p><span class="caption-number">Fig. 1.15 </span><span class="caption-text">Ranking-by-choosing from the office choice outranking digraph</span><a class="headerlink" href="#officechoiceranking" title="Link to this image"></a></p>
 </figcaption>
 </figure>
-<p>In this <strong>ranking-by-choosing</strong> method, where we operate the <em>epistemic fusion</em> of iterated (strict) first and last choices, compromise alternative <em>D</em> is now ranked before compromise alternative <em>G</em>. If the computing node supports multiple processor cores, first and last choosing iterations are run in parallel. The overall partial ordering result shows again the important fact that the most expensive location <em>A</em>, and the cheapest location <em>C</em>, both appear incomparable with most of the other alternatives, as is apparent from the Hasse diagram  of the ranking-by-choosing relation (see <a class="hxr-hoverxref hxr-tooltip reference internal" href="#officechoiceranking"><span class="std std-numref">Fig. 1.15</span></a>).</p>
+<p>In this <strong>ranking-by-choosing</strong> method, where we operate the <em>epistemic fusion</em> of iterated (strict) first and last choices, compromise alternative <em>D</em> is now ranked before compromise alternative <em>G</em> (see Line 7). If the computing node supports multiple processor cores, first and last choosing iterations are run in parallel (see Lines 3-4). The overall partial ordering result shows again the important fact that the most expensive location <em>A</em>, and the cheapest location <em>C</em>, both appear incomparable with most of the other alternatives, as is apparent from the Hasse diagram  of the ranking-by-choosing result (see <a class="hxr-hoverxref hxr-tooltip reference internal" href="#officechoiceranking"><span class="std std-numref">Fig. 1.15</span></a>).</p>
 <p>The best choice recommendation appears hence depending on the very importance the CEO is attaching to each of the three decision objectives he is considering. In the setting here, where he considers that <em>maximizing the future turnover</em> is the most important objective followed by <em>minimizing the Costs</em> and, less important, <em>maximizing the working conditions</em>, location <em>D</em> represents actually the best compromise. However, if <em>Costs</em> do not play much a role, it would be perhaps better to decide to move to the most advantageous location <em>A</em>; or if, on the contrary, <em>Costs</em> do matter a lot, moving to the cheapest alternative <em>C</em> could definitely represent a more convincing recommendation.</p>
 <p>It might be worth, as an <strong>exercise</strong>, to modify these criteria significance weights in the ‘officeChoice.py’ data file in such a way that</p>
 <blockquote>

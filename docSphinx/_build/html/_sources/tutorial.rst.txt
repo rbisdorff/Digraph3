@@ -1554,7 +1554,7 @@ Following the Rubis outranking method (see [BIS-2008]_), potential first choice 
    :name: strictBestChoice
    :caption: Computing the strict best choice recommendation
    :linenos:
-   :emphasize-lines: 8,14-16
+   :emphasize-lines: 8,14-16,18
 
    >>> g.showBestChoiceRecommendation(
    ...                   CoDual=True,
@@ -1585,7 +1585,7 @@ Following the Rubis outranking method (see [BIS-2008]_), potential first choice 
 				  
 It is interesting to notice in :numref:`strictBestChoice` (Line 8) that the **strict best choice recommendation** consists in the set of weak Condorcet winners: 'A', 'C' and 'D'. In the corresponding characteristic vector (see Lines 14-16), representing the bipolar credibility degree with which each alternative may indeed be considered a best choice (see [BIS-2006a]_, [BIS-2006b]_), we find confirmed that alternative *D* is the only positively validated one, whereas both extreme alternatives - *A* (the most expensive) and *C* (the cheapest) - stay in an indeterminate situation. They **may be or not** potential first choice candidates besides *D*. Notice furthermore that compromise alternative *G*, while not actually included in an outranking prekernel, shows as well an indeterminate situation with respect to *being or not being* a potential first choice candidate. 
 
-We may also notice (see Line 20) that both alternatives *A* and *F* are reported as potential strict outranked choices, hence as **potential last choice recommendation** . This indicates a global incomparability status of alternative *A* (see :numref:`bestOfficeChoice`) as shown in :numref:`bestOfficeChoice`.
+We may also notice (see Line 18) that both alternatives *A* and *F* are reported as potential *strict outranked* choices, hence as **potential last choice recommendation** . This indicates a global incomparability status of alternative *A* (see :numref:`bestOfficeChoice`) as shown in :numref:`bestOfficeChoice`.
 
 .. code-block:: pycon
    :linenos:
@@ -1606,10 +1606,11 @@ We may also notice (see Line 20) that both alternatives *A* and *F* are reported
    Best office choice recommendation from strict outranking digraph
 
 When comparing now the performances of alternatives *D* and *G* on a
-pairwise perspective (see below), we notice that, with the given preference discrimination thresholds, alternative *G* is actually **certainly** *at least as good as* alternative *D*:  :math:`r(G \succsim D) = +145/145 = +1.0`.
+pairwise perspective (see below), we notice that, with the given preference discrimination thresholds, alternative *G* is actually **certainly** *at least as good as* alternative *D*:  :math:`r(G \succsim D) = +145/145 = +1.0` (see Line 14 below).
 
 .. code-block:: pycon
    :linenos:
+   :emphasize-lines: 14
 
    >>> g.showPairwiseComparison('G','D')
     *------------  pairwise comparison ----*
@@ -1626,10 +1627,11 @@ pairwise perspective (see below), we notice that, with the given preference disc
     =========================================================================
     Valuation in range: -145.00 to +145.00; global concordance: +145.00
 
-However, we must as well notice that the cheapest alternative *C* is in fact **strictly outranking** alternative *G*:  :math:`r(C \succsim G) = +15/145 > 0.0`, and :math:`r(G \succsim C) = -15/145 < 0.0`.
+However, we must as well notice that the cheapest alternative *C* is in fact **strictly outranking** alternative *G*:  :math:`r(C \succsim G) = +15/145 > 0.0`, and :math:`r(G \succsim C) = -15/145 < 0.0` (see Line 14 below).
 
 .. code-block:: pycon
    :linenos:
+   :emphasize-lines: 14
 
    >>> g.showPairwiseComparison('C','G')
     *------------  pairwise comparison ----*
@@ -1654,6 +1656,7 @@ To get a further insight in the overall strict outranking situations, we may use
 
 .. code-block:: pycon
    :linenos:
+   :emphasize-lines: 3-4,7
 
    >>> from transitiveDigraphs import RankingByChoosingDigraph
    >>> rbc = RankingByChoosingDigraph(gcd)
@@ -1681,7 +1684,7 @@ To get a further insight in the overall strict outranking situations, we may use
 
    Ranking-by-choosing from the office choice outranking digraph
 	   
-In this **ranking-by-choosing** method, where we operate the *epistemic fusion* of iterated (strict) first and last choices, compromise alternative *D* is now ranked before compromise alternative *G*. If the computing node supports multiple processor cores, first and last choosing iterations are run in parallel. The overall partial ordering result shows again the important fact that the most expensive location *A*, and the cheapest location *C*, both appear incomparable with most of the other alternatives, as is apparent from the Hasse diagram  of the ranking-by-choosing relation (see :numref:`officeChoiceRanking`). 
+In this **ranking-by-choosing** method, where we operate the *epistemic fusion* of iterated (strict) first and last choices, compromise alternative *D* is now ranked before compromise alternative *G* (see Line 7). If the computing node supports multiple processor cores, first and last choosing iterations are run in parallel (see Lines 3-4). The overall partial ordering result shows again the important fact that the most expensive location *A*, and the cheapest location *C*, both appear incomparable with most of the other alternatives, as is apparent from the Hasse diagram  of the ranking-by-choosing result (see :numref:`officeChoiceRanking`). 
 
 The best choice recommendation appears hence depending on the very importance the CEO is attaching to each of the three decision objectives he is considering. In the setting here, where he considers that *maximizing the future turnover* is the most important objective followed by *minimizing the Costs* and, less important, *maximizing the working conditions*, location *D* represents actually the best compromise. However, if *Costs* do not play much a role, it would be perhaps better to decide to move to the most advantageous location *A*; or if, on the contrary, *Costs* do matter a lot, moving to the cheapest alternative *C* could definitely represent a more convincing recommendation. 
 
