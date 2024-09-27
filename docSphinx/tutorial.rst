@@ -1482,7 +1482,7 @@ In :numref:`officeChoiceOutranking` we may notice that Alternative *D* is **posi
    >>> g.computeWeakCondorcetWinners()
     ['A', 'C', 'D']
 
-For two locations *x* and *y*, the situation "*x* strictly outranks *y*", denoted :math:`(x \succnsim y)`, is given when *x* outranks *y* and *y* does not outrank *y*. From theory, we know that outranking digraphs are *weakly complete*, i.e. for all *x* and *y* in *X*, :math:`r(x \succsim y) < 0.0` implies :math:`r(y \succsim x) \geq 0.0`. And they verify the *coduality principle*: :math:`r(x \not\succsim y) < 0.0 = r(y \succnsim x)` ([BIS-2013]_).
+For two locations *x* and *y*, the situation "*x* strictly outranks *y*", denoted :math:`(x \succnsim y)`, is given when *x* outranks *y* and *y* does not outrank *y*. From theory, we know that outranking digraphs are *weakly complete*, i.e. for all *x* and *y* in *X*, :math:`r(x \succsim y) < 0.0` implies :math:`r(y \succsim x) \geq 0.0`. And they verify the *coduality principle*: :math:`r(x \not\succsim y) = r(y \succnsim x)` ([BIS-2013]_).
 
 We may hence compute a strict outranking digraph *gcd* with the *codual transform*, i.e. the *converse of the negation* (see Line 1 below) of digraph *g* (see tutorial on :ref:`Working with the outrankingDigraphs module <OutrankingDigraphs-Tutorial-label>`).
 
@@ -1533,7 +1533,7 @@ Let *X* be the set of potential decision alternatives. Let *Y* be a non empty su
       
     - To eventually verify principle **P5**, we recommend among all potential initial prekernels, a \*most determined* one, i.e. a strictly *outranking* and *weakly independent* choice supported by the highest criteria significance. And in this most determined initial prekernel we eventually retain the alternative(s) that are included with highest criteria significance (see the tutorial on :ref:`Computing bipolar-valued kernel membership characteristic vectors <Bipolar-Valued-Kernels-Tutorial-label>`).
 
-Mind that a given strict outranking digraph may not always admit prekernels. This is the case when the digraph contains chordless circuits of odd length. Luckily, our strict outranking digraph *bodcd* here does not show any chordless outranking circuits; a fact we can check with the *showChordlessCircuits()* method.
+Mind that a given strict outranking digraph may not always admit prekernels. This is the case when the digraph contains chordless circuits of odd length. Luckily, our strict outranking digraph *gcd* here does not show any chordless outranking circuits; a fact we can check with the *showChordlessCircuits()* method.
 
 .. code-block:: pycon
    :linenos:
@@ -1606,7 +1606,7 @@ We may also notice (see Line 20) that both alternatives *A* and *F* are reported
    Best office choice recommendation from strict outranking digraph
 
 When comparing now the performances of alternatives *D* and *G* on a
-pairwise perspective (see below), we notice that, with the given preference discrimination thresholds, alternative *G* is actually **certainly** *at least as good as* alternative *D*:  r(*G* outranks *D*) = +145/145 = +1.0.
+pairwise perspective (see below), we notice that, with the given preference discrimination thresholds, alternative *G* is actually **certainly** *at least as good as* alternative *D*:  :math:`r(G \succsim D) = +145/145 = +1.0`.
 
 .. code-block:: pycon
    :linenos:
@@ -1626,7 +1626,7 @@ pairwise perspective (see below), we notice that, with the given preference disc
     =========================================================================
     Valuation in range: -145.00 to +145.00; global concordance: +145.00
 
-However, we must as well notice that the cheapest alternative *C* is in fact **strictly outranking** alternative *G*:  r(*C* outranks *G*) = +15/145 > 0.0, and r(*G* outranks *C*) = -15/145 < 0.0.
+However, we must as well notice that the cheapest alternative *C* is in fact **strictly outranking** alternative *G*:  :math:`r(C \succsim G) = +15/145 > 0.0`, and :math:`r(G \succsim C) = -15/145 < 0.0`.
 
 .. code-block:: pycon
    :linenos:
