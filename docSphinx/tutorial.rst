@@ -802,7 +802,7 @@ Computing the *dual*, respectively the *converse*, may also be done with prefixi
 Symmetric and transitive closures
 `````````````````````````````````
 
-Symmetric and transitive closures, by default in-site constructors, are also available (see :numref:`strongComponents`). Note that it is a good idea, before going ahead with these in-site operations, who irreversibly modify the original *rdg* object, to previously make a backup version of *rdg*. The simplest storage method, always provided by the generic :py:func:`~digraphs.Digraph.save()`, writes out in a named file the python content of the Digraph object in string representation.
+Symmetric and transitive closures, by default in-location constructors, are also available (see :numref:`strongComponents`). Note that it is a good idea, before going ahead with these in-site operations, who irreversibly modify the original *rdg* object, to previously make a backup version of *rdg*. The simplest storage method, always provided by the generic :py:func:`~digraphs.Digraph.save()`, writes out in a named file the python content of the Digraph object in string representation.
 
 .. code-block:: pycon
    :linenos:
@@ -1299,12 +1299,12 @@ Computing a first choice recommendation
 
 .. seealso:: Lecture 7 notes from the MICS Algorithmic Decision Theory course: [ADT-L7]_.
 
-What site to choose ?
-`````````````````````
+What office location to choose ?
+````````````````````````````````
 
-A SME, specialized in printing and copy services, has to move into new offices, and its CEO has gathered seven **potential office sites** (see :numref:`newOffSites`).
+A SME, specialized in printing and copy services, has to move into new offices, and its CEO has gathered seven **potential office locations** (see :numref:`newOffSites`).
 
-.. table:: The potential new office sites
+.. table:: The potential new office locations
    :name: newOffSites
 	  
    ==== ====== ====================== ==================================================
@@ -1325,7 +1325,7 @@ Three **decision objectives** are guiding the CEO's choice:
       2. *maximize* the future turnover of the SME,
       3. *maximize* the new working conditions.
 
-The decision consequences to take into account for evaluating the potential new office sites with respect to each of the three objectives are modelled by the following **coherent family of criteria** [26]_.
+The decision consequences to take into account for evaluating the potential new office locations with respect to each of the three objectives are modelled by the following **coherent family of criteria** [26]_.
 
 .. table:: The coherent family of performance criteria
    :name: offCrit
@@ -1344,9 +1344,9 @@ The decision consequences to take into account for evaluating the potential new 
     Working conditions   P    Parking      Available parking facilities
    ==================== ==== ============ =========================================
 
-The evaluation of the seven potential sites on each criterion are gathered in the following **performance tableau**.
+The evaluation of the seven potential locations on each criterion are gathered in the following **performance tableau**.
 
-.. table:: Performance evaluations of the potential office sites
+.. table:: Performance evaluations of the potential office locations
    :name: offPerfTab
 
    ============= ======== ======== ======== ======== ======== ======== ======== ======== 
@@ -1354,22 +1354,20 @@ The evaluation of the seven potential sites on each criterion are gathered in th
    ============= ======== ======== ======== ======== ======== ======== ======== ========
     Costs         45.0     35.0K€   17.8K€   6.7K€    14.1K€   34.8K€   18.6K€   12.0K€
     \              \       \        \        \        \        \        \        \
-    Prox          32.0     100      20       80       70       40       0        60
-    Visi          26.0     60       80       70       50       60       0        100 
-    Stan          23.0     100      10       0        30       90       70       20
+    Proximity     32.0     100      20       80       70       40       0        60
+    Visibility    26.0     60       80       70       50       60       0        100 
+    Standing      23.0     100      10       0        30       90       70       20
     \              \       \        \        \        \        \        \        \
-    Wksp          10.0     75       30       0        55       100      0        50
-    Wkcf           6.0     0        100      10       30       60       80       50
-    Park           3.0     90       30       100      90       70       0        80
+    Work. space   10.0     75       30       0        55       100      0        50
+    Work. comf.    6.0     0        100      10       30       60       80       50
+    Parking        3.0     90       30       100      90       70       0        80
    ============= ======== ======== ======== ======== ======== ======== ======== ========
 
-Except the *Costs* criterion, all other criteria admit for grading a qualitative satisfaction scale from 0% (worst) to 100% (best). We may thus notice in :numref:`offPerfTab` that site *A* is the most expensive, but also 100% satisfying the *Proximity* as well as the  *Standing* criterion. Whereas the site *C* is the cheapest one; providing however no satisfaction at all on both the *Standing* and the *Working Space* criteria.
+Except the *Costs* criterion, all other criteria admit for grading a qualitative satisfaction scale from 0% (worst) to 100% (best). We may thus notice in :numref:`offPerfTab` that location *A* (*Ave*) is the most expensive, but also 100% satisfying the *Proximity* as well as the  *Standing* criterion. Whereas the locations *C* (*Ces*) is the cheapest one; providing however no satisfaction at all on both the *Standing* and the *Working Space* criteria.
 
 In :numref:`offPerfTab` we may also see that the *Costs* criterion admits the highest significance (45.0), followed by the *Future turnover* criteria (32.0 + 26.0 + 23.0 = 81.0), The *Working conditions* criteria are the less significant (10.0 + 6.0, + 3.0 = 19.0). It follows that the CEO considers *maximizing the future turnover* the most important objective (81.0), followed by the *minizing yearly Costs* objective (45.0), and less important, the *maximizing working conditions* objective (19.0). 
 
-Concerning yearly costs, we suppose that the CEO is indifferent up to a performance difference of 1000€, and he actually prefers a site if there is at least a positive difference of 2500€. The grades observed on the six qualitative criteria (measured in percentages of satisfaction) are very subjective and rather imprecise. The CEO is hence indifferent up to a satisfaction difference of 10%, and he claims a significant preference when the satisfaction difference is at least of 20%.  Furthermore, a satisfaction difference of 80% represents for him a *considerably large* performance difference, triggering a *veto* situation the case given (see [BIS-2013]_). 
-
-In view of :numref:`offPerfTab`, what is now the office site we may recommend to the CEO as **best choice** ?
+Concerning yearly costs, we suppose that the CEO is indifferent up to a performance difference of 1000€, and he actually prefers a location if there is at least a positive difference of 2500€. The grades observed on the six qualitative criteria (measured in percentages of satisfaction) are very subjective and rather imprecise. The CEO is hence indifferent up to a satisfaction difference of 10%, and he claims a significant preference when the satisfaction difference is at least of 20%.  Furthermore, a satisfaction difference of 80% represents for him a *considerably large* performance difference, triggering a *veto* situation the case given (see [BIS-2013]_). 
 
 The performance tableau
 ```````````````````````
@@ -1389,9 +1387,9 @@ We may inspect the performance tableau data with the computing resources provide
     *------- PerformanceTableau instance description ------*
      Instance class     : PerformanceTableau
      Instance name      : officeChoice
-     # Actions          : 7
-     # Objectives       : 3
-     # Criteria         : 7
+     Actions            : 7
+     Objectives         : 3
+     Criteria           : 7
      NaN proportion (%) : 0.0
      Attributes         : ['name', 'actions', 'objectives',
                            'criteria', 'weightPreorder',
@@ -1429,7 +1427,7 @@ We thus recover all the input data. To measure the actual preference discriminat
     Threshold veto : 80.00 + 0.00x ; percentile:  90.5
     ...
 
-On the *Costs* criterion, 9.5% of the performance differences are considered insignificant and 14.3% below the preference discrimination threshold (lines 6-7). On the qualitative *Comfort* criterion, we observe again 9.5% of insignificant performance differences (line 11). Due to the imprecision in the subjective grading, we notice here 28.6% of performance differences below the preference discrimination threshold (Line 12). Furthermore, 100.0 - 90.5 = 9.5% of the performance differences are judged *considerably large* (Line 13); 80% and more of satisfaction differences triggering in fact a veto situation. Same information is available for all the other criteria. 
+On the *Costs* criterion, 9.5% of the performance differences are considered insignificant and 14.3% below the preference discrimination threshold (lines 6-7). On the qualitative *Working Comfort* criterion, we observe again 9.5% of insignificant performance differences (line 11). Due to the imprecision in the subjective grading, we notice here 28.6% of performance differences below the preference discrimination threshold (Line 12). Furthermore, 100.0 - 90.5 = 9.5% of the performance differences are judged *considerably large* (Line 13); 80% and more of satisfaction differences triggering in fact a veto situation. Same information is available for all the other criteria. 
  
 A colorful comparison of all the performances is shown on :numref:`officeChoiceHeatmap` by the **heatmap** statistics, illustrating the respective quantile class of each performance. As the set of potential alternatives is tiny, we choose here a classification into performance quintiles.
 
@@ -1441,19 +1439,22 @@ A colorful comparison of all the performances is shown on :numref:`officeChoiceH
    :width: 500 px
    :align: center
 
-   Unranked heatmap of the office choice performance tableau
+   Unranked heatmap of the location choice performance tableau
 	   
-Site *Ave* shows extreme and contradictory performances: highest *Costs* and no *Working Comfort* on one hand, and total satisfaction with respect to *Standing*, *Proximity* and *Parking facilities* on the other hand. Similar, but opposite, situation is given for site *Ces*: unsatisfactory *Working Space*, no *Standing* and no *Working Comfort* on the one hand, and lowest *Costs*, best *Proximity* and *Parking facilities* on the other hand. Contrary to these contradictory alternatives, we observe two appealing compromise decision alternatives: sites *Dom* and *Gar*. Finally, site *Fen* is clearly the less satisfactory alternative of all.
+Location *Ave* shows extreme and contradictory performances: highest *Costs* and no *Working Comfort* on one hand, and total satisfaction with respect to *Standing*, *Proximity* and *Parking facilities* on the other hand. Similar, but opposite, situation is given for location *Ces*: unsatisfactory *Working Space*, no *Standing* and no *Working Comfort* on the one hand, and lowest *Costs*, best *Proximity* and *Parking facilities* on the other hand. Contrary to these contradictory alternatives, we observe two appealing compromise decision alternatives: locations *Dom* and *Gar*. Finally, location *Fen* is clearly the less satisfactory alternative of all.
+
+In view of :numref:`officeChoiceHeatmap`, what is now the office location we may recommend to the CEO as **first choice** ?
+
 
 The outranking digraph
 ``````````````````````
 
-To help now the CEO choosing the best site, we are going to compute pairwise outrankings (see [BIS-2013]_) on the set of potential sites. For two sites *x* and *y*, the situation "*x* outranks *y*", denoted (*x* S *y*), is given if there is:
+To help the CEO choosing the best office location, we are going to compute pairwise outrankings (see [BIS-2013]_) on the set of potential locations. For two locations *x* and *y*, the situation "*x* outranks *y*", denoted :math:`(x \succsim y)`, is given when there is:
 
-     1. a **significant majority** of criteria concordantly supporting that site *x* is *at least as satisfactory as* site *y*, and
+     1. a **significant majority** of criteria concordantly supporting that location *x* is *at least as well evaluated as* location *y*, and
      2. **no considerable** counter-performance observed on any discordant criterion.
 
-The credibility of each pairwise outranking situation (see [BIS-2013]_), denoted r(*x* S *y*), is measured in a bipolar significance valuation [-1.00, 1.00], where **positive** terms r(*x* S *y*) > 0.0 indicate a **validated**, and **negative** terms r(*x* S *y*) < 0.0 indicate a **non-validated** outrankings; whereas the **median** value r(*x* S *y*) = 0.0 represents an **indeterminate** situation (see [BIS-2004a]_).   
+The credibility of each pairwise outranking situation (see [BIS-2013]_), denoted :math:`r(x \succsim y)`, is by default measured in a bipolar significance valuation [-1.00, 1.00], where **positive** terms :math:`r(x \succsim y) > 0.0` indicate a **validated**, and **negative** terms :math:`r(x \succsim y) < 0.0` indicate a **non-validated** outrankings; whereas the **median** value :math:`r(x \succsim  y) = 0.0` represents an **indeterminate** situation (see [BIS-2004a]_).   
 
 For computing such a bipolar-valued outranking digraph from the given performance tableau *t*, we use the :py:class:`~outrankingDigraphs.BipolarOutrankingDigraph` constructor from the :ref:`outrankingDigraphs module <outrankingDigraphs-label>`. The :py:class:`~outrankingDigraphs.BipolarOutrankingDigraph.showHTMLRelationTable` method shows here the resulting bipolar-valued adjacency matrix in a system browser window (see :numref:`officeChoiceOutranking`).
 
@@ -1471,7 +1472,7 @@ For computing such a bipolar-valued outranking digraph from the given performanc
 
    The office choice outranking digraph  
 
-In :numref:`officeChoiceOutranking` we may notice that Alternative *D* is **positively outranking** all other potential office sites (a *Condorcet winner*). Yet, alternatives *A* (the most expensive) and *C* (the cheapest) are *not* outranked by any other site; they are in fact **weak** *Condorcet winners*.
+In :numref:`officeChoiceOutranking` we may notice that Alternative *D* is **positively outranking** all other potential office locations (a *Condorcet winner*). Yet, alternatives *A* (the most expensive) and *C* (the cheapest) are *not* outranked by any other locations; they are in fact **weak** *Condorcet winners*.
 
 .. code-block:: pycon
    :linenos:
@@ -1481,140 +1482,128 @@ In :numref:`officeChoiceOutranking` we may notice that Alternative *D* is **posi
    >>> g.computeWeakCondorcetWinners()
     ['A', 'C', 'D']
 
-We may get even more insight in the apparent outranking situations when looking at the Condorcet digraph (see :numref:`officeChoice`).
+For two locations *x* and *y*, the situation "*x* strictly outranks *y*", denoted :math:`(x \succnsim y)`, is given when *x* outranks *y* and *y* does not outrank *y*. From theory, we know that outranking digraphs are *weakly complete*, i.e. for all *x* and *y* in *X*, :math:`r(x \succsim y) < 0.0` implies :math:`r(y \succsim x) \geq 0.0`. And they verify the *coduality principle*: :math:`r(x \not\succsim y) < 0.0 = r(y \succnsim x)` ([BIS-2013]_).
+
+We may hence compute a strict outranking digraph *gcd* with the *codual transform*, i.e. the *converse of the negation* (see Line 1 below) of digraph *g* (see tutorial on :ref:`Working with the outrankingDigraphs module <OutrankingDigraphs-Tutorial-label>`).
+
+.. code-block:: pycon
+   :linenos:
+   :emphasize-lines: 1,8
+   
+   >>> gcd = ~(-g)
+   >>> gcd
+   *------- Object instance description ------*
+   Instance class       : BipolarOutrankingDigraph
+   Instance name        : converse-dual-rel_officeChoice
+   Actions              : 7
+   Criteria             : 7
+   Size                 : 10
+   Determinateness (%)  : 71.43
+   Valuation domain     : [-1.00;1.00]
+   Attributes           : ['actions', 'ndigits', 'valuationdomain',
+                           'objectives', 'criteria', 'evaluation',
+			   'NA', 'order', 'gamma', 'notGamma',
+			   'name', 'relation']
+
+We observe in the resulting strict outranking digraph *gcd* 10 valid strict outranking situations (see Line 8) on which we are going to focus our search for a best choice recommendation.
+
+Designing a best choice recommender system
+``````````````````````````````````````````
+
+Solving a best-choice problem consists traditionally in finding *the* unique best decision alternative. We adopt here instead a modern recommender system’s approach which shows a non empty subset of decision alternatives which contains by construction the potential best alternative(s).
+
+The five *pragmatic principles* for computing such a *best-choice recommendation* (BCR) are the following
+
+    - **P1**: *Elimination for well motivated reasons*; each eliminated alternative has to be strictly outranked by at least one alternative in the BCR.
+      
+    - **P2**: *Minimal size*; the BCR must be as limited in cardinality as possible.
+      
+    - **P3**: *Efficient and informative*; The BCR must not contain a self-contained sub-recommendation.
+    - **P4**: *Effectively better*; the BCR must not be ambiguous in the sense that it may not be both a first choice as well as a last choice recommendation.
+
+    - **P5**: *Maximally determined*; the BCR is, of all potential best-choice recommendations, the most determined one in the sense of the epistemic characteristics of the bipolar-valued outranking relation.
+
+Let *X* be the set of potential decision alternatives. Let *Y* be a non empty subset of *X*, called a *choice* in the strict outranking digraph :math:`G(X,r(\succnsim))`. We can now qualify a BCR *Y* in following terms:
+
+    - *Y* is called strictly *outranking* (resp. *outranked*) when for all not selected alternative *x* there exists an alternative *y* in *X* retained such that :math:`r(y \succnsim x) > 0.0` (resp. :math:`r(y \precsim x) > 0.0`). Such a choice verifies principle **P1**.
+      
+    - *Y* is called *weakly independent* when for all *x* not equal *y* in *Y* we observe :math:`r(x \succnsim y) \leq 0.0`. Such a choice verifies principles **P3** (*internal stability*).
+      
+    - *Y* is conjointly a strictly *outranking* (resp. *outranked*) **and** *weakly independent* choice. Such a choice is called an *initial* (resp. *terminal*) *prekernel* (see the tutorial on :ref:`computing digraph kernels <Kernel-Tutorial-label>`). The initial prekernel now verifies principles **P1**, **P2**, **P3** and **P4**.
+      
+    - To eventually verify principle **P5**, we recommend among all potential initial prekernels, a \*most determined* one, i.e. a strictly *outranking* and *weakly independent* choice supported by the highest criteria significance. And in this most determined initial prekernel we eventually retain the alternative(s) that are included with highest criteria significance (see the tutorial on :ref:`Computing bipolar-valued kernel membership characteristic vectors <Bipolar-Valued-Kernels-Tutorial-label>`).
+
+Mind that a given strict outranking digraph may not always admit prekernels. This is the case when the digraph contains chordless circuits of odd length. Luckily, our strict outranking digraph *bodcd* here does not show any chordless outranking circuits; a fact we can check with the *showChordlessCircuits()* method.
 
 .. code-block:: pycon
    :linenos:
 
-   >>> g.exportGraphViz('officeChoice')
-    *---- exporting a dot file for GraphViz tools ---------*
-    Exporting to officeChoice.dot
-    dot -Grankdir=BT -Tpng officeChoice.dot -o officeChoice.png
-
-.. figure:: officeChoice.png
-   :name: officeChoice	    
-   :width: 300 px
-   :align: center
-
-   The office choice outranking digraph 	   
-
-One may check that the outranking digraph *g* does not admit in fact any cyclic strict preference situation.
-
-.. code-block:: pycon
-   :linenos:
-
-   >>> g.computeChordlessCircuits()
-    []
-   >>> g.showChordlessCircuits()
+   >>> gcd.showChordlessCircuits()
     No circuits observed in this digraph.
+
+When observing chordless odd outranking circuits, we need to break them open with the :py:class:`digraphs.BrokenCocsDigraph` class at their weakest link, before enumerating the prekernels.
+
+We are ready now for building a best choice recommendation.
 
 The *Rubis* best choice recommendation
 ``````````````````````````````````````
 
-Following the Rubis outranking method (see [BIS-2008]_), potential first choice recommendations are determined by the outranking prekernels --*weakly independent* and *strictly outranking* choices-- of the outranking digraph (see the tutorial on :ref:`computing digraph kernels <Kernel-Tutorial-label>`). The case given, we previously need to break open all chordless odd circuits at their weakest link.
+Following the Rubis outranking method (see [BIS-2008]_), potential first choice recommendations are determined by the outranking prekernels --*weakly independent* and *strictly outranking* choices-- of the strict outranking digraph (see the tutorial on :ref:`computing digraph kernels <Kernel-Tutorial-label>`).
 
 .. code-block:: pycon
+   :name: strictBestChoice
+   :caption: Computing the strict best choice recommendation
    :linenos:
+   :emphasize-lines: 8,14-16
 
-   >>> from digraphs import BrokenCocsDigraph
-   >>> bcg = BrokenCocsDigraph(g)
-   >>> bcg.brokenLinks
-    set()
-
-As we observe indeed no such chordless circuits here, we may directly compute the *prekernels* of the outranking digraph *g*.
-
-.. code-block:: pycon
-   :name: computePreKernels
-   :caption: Computing outranking and outranked prekernels
-   :linenos:
-
-   >>> g.showPreKernels()
-    *--- Computing preKernels ---*
-    Dominant preKernels :
-    ['D']
-       independence :  1.0
-       dominance    :  0.02
-       absorbency   :  -1.0
-       covering     :  1.000
-    ['B', 'E', 'C']
-       independence :  0.00
-       dominance    :  0.10
-       absorbency   :  -1.0
-       covering     :  0.500
-    ['A', 'G']
-       independence :  0.00
-       dominance    :  0.78
-       absorbency   :  0.00
-       covering     :  0.700
-    Absorbent preKernels :
-    ['F', 'A']
-       independence :  0.00
-       dominance    :  0.00
-       absorbency   :  1.0
-       covering     :  0.700
-    *----- statistics -----
-    graph name:  rel_officeChoice.xml
-    number of solutions
-     dominant kernels :  3
-     absorbent kernels:  1
-    cardinality frequency distributions
-    cardinality     :  [0, 1, 2, 3, 4, 5, 6, 7]
-    dominant kernel :  [0, 1, 1, 1, 0, 0, 0, 0]
-    absorbent kernel:  [0, 0, 1, 0, 0, 0, 0, 0]
-    Execution time  : 0.00018 sec.
-    Results in sets: dompreKernels and abspreKernels.
-
-We notice in :numref:`computePreKernels` three potential first choice recommendations: the Condorcet winner *D* (Line 4), the triplet *B*, *C* and *E* (Line 9), and finally the pair *A* and *G* (Line 14). The best choice recommendation is now given by the **most determined** prekernel; the one supported by the most significant criteria coalition. This result is shown with the :py:meth:`~digraphs.Digraph.showBestChoiceRecommendation` method. Notice that this method actually works by default on the broken chords digraph *bcg*.
-
-.. code-block:: pycon
-   :name: showBestChoice
-   :caption: Computing a best choice recommendation
-   :linenos:
-   :emphasize-lines: 7,15,31
-
-   >>> g.showBestChoiceRecommendation(CoDual=False)
-    *****************************************
-    Rubis best choice recommendation(s) (BCR)
+   >>> g.showBestChoiceRecommendation(
+   ...                   CoDual=True,
+   ...                   ChoiceVector=True)
+    * --- First and last choice recommendation(s) ---*
      (in decreasing order of determinateness)   
     Credibility domain: [-1.00,1.00]
     === >> potential first choice(s)
-    * choice              : ['D']
-      independence        : 1.00
-      dominance           : 0.02
-      absorbency          : -1.00
-      covering (%)        : 100.00
-      determinateness (%) : 51.03
-      - most credible action(s) = { 'D': 0.02, }
-    === >> potential first choice(s)
-    * choice              : ['A', 'G']
-      independence        : 0.00
-      dominance           : 0.78
-      absorbency          : 0.00
-      covering (%)        : 70.00
-      determinateness (%) : 50.00
-      - most credible action(s) = { }
-    === >> potential first choice(s)
-    * choice              : ['B', 'C', 'E']
+    * choice              : ['A', 'C', 'D']
       independence        : 0.00
       dominance           : 0.10
-      absorbency          : -1.00
-      covering (%)        : 50.00
-      determinateness (%) : 50.00
-      - most credible action(s) = { }
+      absorbency          : 0.00
+      covering (%)        : 41.67
+      determinateness (%) : 50.59
+      - characteristic vector = { 'D': 0.02, 'G': 0.00, 'C': 0.00,
+	                          'A': 0.00, 'F': -0.02, 'E': -0.02,
+				  'B': -0.02, }
     === >> potential last choice(s) 
     * choice              : ['A', 'F']
       independence        : 0.00
-      dominance           : 0.00
+      dominance           : -0.52
       absorbency          : 1.00
-      covered (%)         : 70.00
+      covered (%)         : 50.00
       determinateness (%) : 50.00
-      - most credible action(s) = { }
-    Execution time: 0.014 seconds
+      - characteristic vector = { 'G': 0.00, 'F': 0.00, 'E': 0.00,
+	                          'D': 0.00, 'C': 0.00, 'B': 0.00,
+				  'A': 0.00, }
+				  
+It is interesting to notice in :numref:`strictBestChoice` (Line 8) that the **strict best choice recommendation** consists in the set of weak Condorcet winners: 'A', 'C' and 'D'. In the corresponding characteristic vector (see Lines 14-16), representing the bipolar credibility degree with which each alternative may indeed be considered a best choice (see [BIS-2006a]_, [BIS-2006b]_), we find confirmed that alternative *D* is the only positively validated one, whereas both extreme alternatives - *A* (the most expensive) and *C* (the cheapest) - stay in an indeterminate situation. They **may be or not** potential first choice candidates besides *D*. Notice furthermore that compromise alternative *G*, while not actually included in an outranking prekernel, shows as well an indeterminate situation with respect to *being or not being* a potential first choice candidate. 
 
-We notice in :numref:`showBestChoice` (Line 7) above that the most significantly supported best choice recommendation is indeed the *Condorcet* winner *D* supported by a majority of 51.03% of the criteria significance (see Line 12). Both other potential first choice recommendations, as well as the potential last choice recommendation, are not positively validated as best, resp. worst choices. They may or may not be considered so. Alternative *A*, with extreme contradictory performances, appears both, in a first and a last choice recommendation (see Lines 15 and 31) and seams hence not actually comparable to its competitors.
+We may also notice (see Line 20) that both alternatives *A* and *F* are reported as potential strict outranked choices, hence as **potential last choice recommendation** . This indicates a global incomparability status of alternative *A* (see :numref:`bestOfficeChoice`) as shown in :numref:`bestOfficeChoice`.
 
-Computing *strict best* choice recommendations
-``````````````````````````````````````````````
+.. code-block:: pycon
+   :linenos:
+
+   >>> gcd = ~(-g) # codual of g
+   >>> gcd.exportGraphViz(fileName='bestChoiceChoice',
+   ...                    firstChoice=['C','D'],
+   ...                    lastChoice=['F'])
+    *---- exporting a dot file for GraphViz tools ---------*
+     Exporting to bestOfficeChoice.dot
+     dot -Grankdir=BT -Tpng bestOfficeChoice.dot -o bestOfficeChoice.png
+
+.. figure:: bestOfficeChoice.png
+   :name: bestOfficeChoice
+   :width: 250 px
+   :align: center
+
+   Best office choice recommendation from strict outranking digraph
 
 When comparing now the performances of alternatives *D* and *G* on a
 pairwise perspective (see below), we notice that, with the given preference discrimination thresholds, alternative *G* is actually **certainly** *at least as good as* alternative *D*:  r(*G* outranks *D*) = +145/145 = +1.0.
@@ -1658,69 +1647,10 @@ However, we must as well notice that the cheapest alternative *C* is in fact **s
     Valuation in range: -145.00 to +145.00; global concordance: +15.00/-15.00
 
 
-To model these *strict outranking* situations, we may recompute the best choice recommendation on the **codual**, the converse (~) of the dual (-) [14]_, of the outranking digraph instance *g* (see [BIS-2013]_), as follows.
-
-.. code-block:: pycon
-   :name: strictBestChoice
-   :caption: Computing the strict best choice recommendation
-   :linenos:
-   :emphasize-lines: 9,15-17
-
-   >>> g.showBestChoiceRecommendation(
-   ...                   CoDual=True,
-   ...                   ChoiceVector=True)
-   
-    * --- First and last choice recommendation(s) ---*
-     (in decreasing order of determinateness)   
-    Credibility domain: [-1.00,1.00]
-    === >> potential first choice(s)
-    * choice              : ['A', 'C', 'D']
-      independence        : 0.00
-      dominance           : 0.10
-      absorbency          : 0.00
-      covering (%)        : 41.67
-      determinateness (%) : 50.59
-      - characteristic vector = { 'D': 0.02, 'G': 0.00, 'C': 0.00,
-	                          'A': 0.00, 'F': -0.02, 'E': -0.02,
-				  'B': -0.02, }
-    === >> potential last choice(s) 
-    * choice              : ['A', 'F']
-      independence        : 0.00
-      dominance           : -0.52
-      absorbency          : 1.00
-      covered (%)         : 50.00
-      determinateness (%) : 50.00
-      - characteristic vector = { 'G': 0.00, 'F': 0.00, 'E': 0.00,
-	                          'D': 0.00, 'C': 0.00, 'B': 0.00,
-				  'A': 0.00, }
-				  
-It is interesting to notice in :numref:`strictBestChoice` (Line 9) that the **strict best choice recommendation** consists in the set of weak Condorcet winners: 'A', 'C' and 'D'. In the corresponding characteristic vector (see Line 15-17), representing the bipolar credibility degree with which each alternative may indeed be considered a best choice (see [BIS-2006a]_, [BIS-2006b]_), we find confirmed that alternative *D* is the only positively validated one, whereas both extreme alternatives - *A* (the most expensive) and *C* (the cheapest) - stay in an indeterminate situation. They may be potential first choice candidates besides *D*. Notice furthermore that compromise alternative *G*, while not actually included in an outranking prekernel, shows as well an indeterminate situation with respect to **being or not being** a potential first choice candidate. 
-
-We may also notice (see Line 17 and Line 21) that both alternatives *A* and *F* are reported as certainly strict outranked choices, hence as **potential last choice recommendation** . This confirms again the global incomparability status of alternative *A* (see :numref:`bestOfficeChoice`).
-
-.. code-block:: pycon
-   :linenos:
-
-   >>> gcd = ~(-g) # codual of g
-   >>> gcd.exportGraphViz(fileName='bestChoiceChoice',
-   ...                    fistChoice=['A','C','D'],
-   ...                    lastChoice=['F'])
-    *---- exporting a dot file for GraphViz tools ---------*
-     Exporting to bestOfficeChoice.dot
-     dot -Grankdir=BT -Tpng bestOfficeChoice.dot -o bestOfficeChoice.png
-
-.. figure:: bestOfficeChoice.png
-   :name: bestOfficeChoice
-   :width: 250 px
-   :align: center
-
-   Best office choice recommendation from strict outranking digraph
-
-
 Weakly ordering the outranking digraph
 ``````````````````````````````````````
 
-To get a more complete insight in the overall strict outranking situations, we may use the :py:class:`~transitiveDigraphs.RankingByChoosingDigraph` constructor imported from the :ref:`transitiveDigraphs module <transitiveDigraphs-label>`, for computing a **ranking-by-choosing** result from the codual, i.e. the strict outranking digraph instance *gcd* (see above).
+To get a further insight in the overall strict outranking situations, we may use the :py:class:`~transitiveDigraphs.RankingByChoosingDigraph` constructor imported from the :ref:`transitiveDigraphs module <transitiveDigraphs-label>`, for computing a **ranking-by-choosing** result from the codual, i.e. the strict outranking digraph instance *gcd* (see above).
 
 .. code-block:: pycon
    :linenos:
@@ -1751,9 +1681,9 @@ To get a more complete insight in the overall strict outranking situations, we m
 
    Ranking-by-choosing from the office choice outranking digraph
 	   
-In this **ranking-by-choosing** method, where we operate the *epistemic fusion* of iterated (strict) first and last choices, compromise alternative *D* is now ranked before compromise alternative *G*. If the computing node supports multiple processor cores, first and last choosing iterations are run in parallel. The overall partial ordering result shows again the important fact that the most expensive site *A*, and the cheapest site *C*, both appear incomparable with most of the other alternatives, as is apparent from the Hasse diagram  of the ranking-by-choosing relation (see :numref:`officeChoiceRanking`). 
+In this **ranking-by-choosing** method, where we operate the *epistemic fusion* of iterated (strict) first and last choices, compromise alternative *D* is now ranked before compromise alternative *G*. If the computing node supports multiple processor cores, first and last choosing iterations are run in parallel. The overall partial ordering result shows again the important fact that the most expensive location *A*, and the cheapest location *C*, both appear incomparable with most of the other alternatives, as is apparent from the Hasse diagram  of the ranking-by-choosing relation (see :numref:`officeChoiceRanking`). 
 
-The best choice recommendation appears hence depending on the very importance the CEO is attaching to each of the three decision objectives he is considering. In the setting here, where he considers that *maximizing the future turnover* is the most important objective followed by *minimizing the Costs* and, less important, *maximizing the working conditions*, site *D* represents actually the best compromise. However, if *Costs* do not play much a role, it would be perhaps better to decide to move to the most advantageous site *A*; or if, on the contrary, *Costs* do matter a lot, moving to the cheapest alternative *C* could definitely represent a more convincing recommendation. 
+The best choice recommendation appears hence depending on the very importance the CEO is attaching to each of the three decision objectives he is considering. In the setting here, where he considers that *maximizing the future turnover* is the most important objective followed by *minimizing the Costs* and, less important, *maximizing the working conditions*, location *D* represents actually the best compromise. However, if *Costs* do not play much a role, it would be perhaps better to decide to move to the most advantageous location *A*; or if, on the contrary, *Costs* do matter a lot, moving to the cheapest alternative *C* could definitely represent a more convincing recommendation. 
 
 It might be worth, as an **exercise**, to modify these criteria significance weights in the 'officeChoice.py' data file in such a way that
 
