@@ -1525,9 +1525,9 @@ The five *pragmatic principles* for computing such a *best-choice recommendation
 
 Let *X* be the set of potential decision alternatives. Let *Y* be a non empty subset of *X*, called a *choice* in the strict outranking digraph :math:`G(X,r(\succnsim))`. We can now qualify a BCR *Y* in following terms:
 
-    - *Y* is called strictly *outranking* (resp. *outranked*) when for all not selected alternative *x* there exists an alternative *y* in *X* retained such that :math:`r(y \succnsim x) > 0.0` (resp. :math:`r(y \precsim x) > 0.0`). Such a choice verifies principle **P1**.
+    - *Y* is called strictly *outranking* (resp. *outranked*) when for all not selected alternative *x* there exists an alternative *y* in *X* retained such that :math:`r(y \succnsim x) > 0.0` (resp. :math:`r(x \succnsim y) > 0.0`). Such a choice verifies principle **P1**.
       
-    - *Y* is called *weakly independent* when for all *x* not equal *y* in *Y* we observe :math:`r(x \succnsim y) \leq 0.0`. Such a choice verifies principles **P3** (*internal stability*).
+    - *Y* is called *weakly independent* when for all *x* not equal *y* in *Y* we observe :math:`r(x \succnsim y) \leq 0.0`. Such a choice verifies principle **P3** (*internal stability*).
       
     - *Y* is conjointly a strictly *outranking* (resp. *outranked*) **and** *weakly independent* choice. Such a choice is called an *initial* (resp. *terminal*) *prekernel* (see the tutorial on :ref:`computing digraph kernels <Kernel-Tutorial-label>`). The initial prekernel now verifies principles **P1**, **P2**, **P3** and **P4**.
       
@@ -1583,7 +1583,7 @@ Following the Rubis outranking method (see [BIS-2008]_), potential first choice 
 	                          'D': 0.00, 'C': 0.00, 'B': 0.00,
 				  'A': 0.00, }
 				  
-It is interesting to notice in :numref:`strictBestChoice` (Line 8) that the **strict best choice recommendation** consists in the set of weak Condorcet winners: 'A', 'C' and 'D'. In the corresponding characteristic vector (see Lines 14-16), representing the bipolar credibility degree with which each alternative may indeed be considered a best choice (see [BIS-2006a]_, [BIS-2006b]_), we find confirmed that alternative *D* is the only positively validated one, whereas both extreme alternatives - *A* (the most expensive) and *C* (the cheapest) - stay in an indeterminate situation. They **may be or not** potential first choice candidates besides *D*. Notice furthermore that compromise alternative *G*, while not actually included in an outranking prekernel, shows as well an indeterminate situation with respect to *being or not being* a potential first choice candidate. 
+It is interesting to notice in :numref:`strictBestChoice` (Line 8) that the **strict best choice recommendation** consists in the set of weak Condorcet winners: 'A', 'C' and 'D'. In the corresponding characteristic vector (see Lines 14-16), representing the bipolar credibility degree with which each alternative may indeed be considered a best choice (see [BIS-2006a]_, [BIS-2006b]_), we find confirmed that alternative *D* is the only positively validated one, whereas both extreme alternatives - *A* (the most expensive) and *C* (the cheapest) - stay in an indeterminate situation. They **may be or not be** potential first choice candidates besides *D*. Whereas, alternatives *B*, *E* and *F* are *negatively* included, i.e. *positively excluded* from the best choice recommendation. Notice furthermore that compromise alternative *G*, while not actually included in an outranking prekernel, shows as well an indeterminate situation with respect to *being or not being* a potential first choice candidate. 
 
 We may also notice (see Line 18) that both alternatives *A* and *F* are reported as potential *strict outranked* choices, hence as **potential last choice recommendation** . This indicates a global incomparability status of alternative *A* (see :numref:`bestOfficeChoice`) as shown in :numref:`bestOfficeChoice`.
 
