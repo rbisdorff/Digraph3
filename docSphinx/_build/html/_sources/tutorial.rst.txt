@@ -1531,7 +1531,7 @@ Let *X* be the set of potential decision alternatives. Let *Y* be a non empty su
       
     - *Y* is conjointly a strictly *outranking* (resp. *outranked*) **and** *weakly independent* choice. Such a choice is called an *initial* (resp. *terminal*) *prekernel* (see the tutorial on :ref:`computing digraph kernels <Kernel-Tutorial-label>`). The initial prekernel now verifies principles **P1**, **P2**, **P3** and **P4**.
       
-    - To eventually verify principle **P5**, we recommend among all potential initial prekernels, a \*most determined* one, i.e. a strictly *outranking* and *weakly independent* choice supported by the highest criteria significance. And in this most determined initial prekernel we eventually retain the alternative(s) that are included with highest criteria significance (see the tutorial on :ref:`Computing bipolar-valued kernel membership characteristic vectors <Bipolar-Valued-Kernels-Tutorial-label>`).
+    - To finally verify principle **P5**, we recommend among all potential initial prekernels, a \*most determined* one, i.e. a strictly *outranking* and *weakly independent* choice supported by the highest criteria significance. And in this most determined initial prekernel we eventually retain the alternative(s) that are included with highest criteria significance (see the tutorial on :ref:`Computing bipolar-valued kernel membership characteristic vectors <Bipolar-Valued-Kernels-Tutorial-label>`).
 
 Mind that a given strict outranking digraph may not always admit prekernels. This is the case when the digraph contains chordless circuits of odd length. Luckily, our strict outranking digraph *gcd* here does not show any chordless outranking circuits; a fact we can check with the *showChordlessCircuits()* method.
 
@@ -1583,7 +1583,7 @@ Following the Rubis outranking method (see [BIS-2008]_), potential first choice 
 	                          'D': 0.00, 'C': 0.00, 'B': 0.00,
 				  'A': 0.00, }
 				  
-It is interesting to notice in :numref:`strictBestChoice` (Line 8) that the **strict best choice recommendation** consists in the set of weak Condorcet winners: 'A', 'C' and 'D'. In the corresponding characteristic vector (see Lines 14-16), representing the bipolar credibility degree with which each alternative may indeed be considered a best choice (see [BIS-2006a]_, [BIS-2006b]_), we find confirmed that alternative *D* is the only positively validated one, whereas both extreme alternatives - *A* (the most expensive) and *C* (the cheapest) - stay in an indeterminate situation. They **may be or not be** potential first choice candidates besides *D*. Whereas, alternatives *B*, *E* and *F* are *negatively* included, i.e. *positively excluded* from the best choice recommendation. Notice furthermore that compromise alternative *G*, while not actually included in an outranking prekernel, shows as well an indeterminate situation with respect to *being or not being* a potential first choice candidate. 
+It is interesting to notice in :numref:`strictBestChoice` (Line 8) that the **strict best choice recommendation** consists in the set of weak Condorcet winners: 'A', 'C' and 'D'. In the corresponding characteristic vector (see Lines 14-16), representing the bipolar credibility degree with which each alternative may indeed be considered a best choice (see [BIS-2006a]_, [BIS-2006b]_), we find confirmed that alternative *D* is the only positively validated one, whereas both extreme alternatives - *A* (the most expensive) and *C* (the cheapest) - stay in an indeterminate situation. They **may be or not be** potential first choice candidates besides *D*. Notice furthermore that compromise alternative *G*, while not actually included in an outranking prekernel, shows as well an indeterminate situation with respect to *being or not being* a potential first choice candidate. Alternatives *B*, *E* and *F* are *negatively* included, i.e. *positively excluded* from this best choice recommendation.
 
 We may also notice (see Line 18) that both alternatives *A* and *F* are reported as potential *strict outranked* choices, hence as **potential last choice recommendation** . This indicates a global incomparability status of alternative *A* (see :numref:`bestOfficeChoice`) as shown in :numref:`bestOfficeChoice`.
 
@@ -1604,8 +1604,8 @@ We may also notice (see Line 18) that both alternatives *A* and *F* are reported
 
    Best office choice recommendation from strict outranking digraph
 
-When comparing now the performances of alternatives *D* and *G* on a
-pairwise perspective (see below), we notice that, with the given preference discrimination thresholds, alternative *G* is actually **certainly** *at least as good as* alternative *D*:  :math:`r(G \succsim D) = +145/145 = +1.0` (see Line 14 below).
+Let us now compare the performances of alternatives *D* and *G* in a
+pairwise perspective (see below). We notice that, with the given preference discrimination thresholds, alternative *G* is actually **certainly** *at least as good as* alternative *D*:  :math:`r(G \succsim D) = +145/145 = +1.0` (see Line 14 below).
 
 .. code-block:: pycon
    :linenos:
@@ -1670,10 +1670,6 @@ To get a further insight in the overall strict outranking situations, we may use
    >>> rbc.exportGraphViz('officeChoiceRanking')
     *---- exporting a dot file for GraphViz tools ---------*
     Exporting to officeChoiceRanking.dot
-    0 { rank = same; A; C; D; }
-    1 { rank = same; G; } 
-    2 { rank = same; E; B; }
-    3 { rank = same; F; }
     dot -Grankdir=TB -Tpng officeChoiceRanking.dot -o officeChoiceRanking.png
 
 .. figure:: officeChoiceRanking.png
@@ -1685,7 +1681,7 @@ To get a further insight in the overall strict outranking situations, we may use
 	   
 In this **ranking-by-choosing** method, where we operate the *epistemic fusion* of iterated (strict) first and last choices, compromise alternative *D* is now ranked before compromise alternative *G* (see Line 7). If the computing node supports multiple processor cores, first and last choosing iterations are run in parallel (see Lines 3-4). The overall partial ordering result shows again the important fact that the most expensive location *A*, and the cheapest location *C*, both appear incomparable with most of the other alternatives, as is apparent from the Hasse diagram  of the ranking-by-choosing result (see :numref:`officeChoiceRanking`). 
 
-The best choice recommendation appears hence depending on the very importance the CEO is attaching to each of the three decision objectives he is considering. In the setting here, where he considers that *maximizing the future turnover* is the most important objective followed by *minimizing the Costs* and, less important, *maximizing the working conditions*, location *D* represents actually the best compromise. However, if *Costs* do not play much a role, it would be perhaps better to decide to move to the most advantageous location *A*; or if, on the contrary, *Costs* do matter a lot, moving to the cheapest alternative *C* could definitely represent a more convincing recommendation. 
+The best choice recommendation appears hence depending on the very importance the CEO is attaching to each one of the three decision objectives he is considering. In the setting here, where he considers that *maximizing the future turnover* is the most important objective followed by *minimizing the Costs* and, less important, *maximizing the working conditions*, location *D* represents actually the best compromise. However, if *Costs* do not play much a role, it would be perhaps better to decide to move to the most advantageous location *A*; or if, on the contrary, *Costs* do matter a lot, moving to the cheapest alternative *C* could definitely represent a more convincing recommendation. 
 
 It might be worth, as an **exercise**, to modify these criteria significance weights in the 'officeChoice.py' data file in such a way that
 
