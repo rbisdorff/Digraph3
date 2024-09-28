@@ -1285,7 +1285,7 @@ This is the methodological part of the tutorials.
 
 .. _Rubis-Tutorial-label:
 
-Computing a first choice recommendation
+Computing a best choice recommendation
 ---------------------------------------
 
 .. epigraph::
@@ -1490,7 +1490,7 @@ We may hence compute a strict outranking digraph *gcd* with the *codual transfor
    :linenos:
    :emphasize-lines: 1,8
    
-   >>> gcd = ~(-g)
+   >>> gcd = ~(-g) # codual transform
    >>> gcd
    *------- Object instance description ------*
    Instance class       : BipolarOutrankingDigraph
@@ -1590,7 +1590,6 @@ We may also notice (see Line 18) that both alternatives *A* and *F* are reported
 .. code-block:: pycon
    :linenos:
 
-   >>> gcd = ~(-g) # codual of g
    >>> gcd.exportGraphViz(fileName='bestChoiceChoice',
    ...                    firstChoice=['C','D'],
    ...                    lastChoice=['F'])

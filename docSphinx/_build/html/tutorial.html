@@ -106,7 +106,7 @@
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="#evaluation-and-decision-methods-and-tools">1.3. Evaluation and decision methods and tools</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="#computing-a-first-choice-recommendation">1.3.1. Computing a first choice recommendation</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#computing-a-best-choice-recommendation">1.3.1. Computing a best choice recommendation</a><ul>
 <li class="toctree-l4"><a class="reference internal" href="#what-office-location-to-choose">1.3.1.1. What office location to choose ?</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#the-performance-tableau">1.3.1.2. The performance tableau</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#the-outranking-digraph">1.3.1.3. The outranking digraph</a></li>
@@ -1420,7 +1420,7 @@ the current working directory a ‘tutorialDigraph.dot’ file and a
 <p>This is the methodological part of the tutorials.</p>
 <nav class="contents local" id="id31">
 <ul class="simple">
-<li><p><a class="reference internal" href="#computing-a-first-choice-recommendation" id="id288">Computing a first choice recommendation</a></p></li>
+<li><p><a class="reference internal" href="#computing-a-best-choice-recommendation" id="id288">Computing a best choice recommendation</a></p></li>
 <li><p><a class="reference internal" href="#how-to-create-a-new-performance-tableau-instance" id="id289">How to create a new performance tableau instance</a></p></li>
 <li><p><a class="reference internal" href="#generating-random-performance-tableaux-with-the-randperftabs-module" id="id290">Generating random performance tableaux with the <code class="xref py py-mod docutils literal notranslate"><span class="pre">randPerfTabs</span></code> module</a></p></li>
 <li><p><a class="reference internal" href="#ranking-with-multiple-incommensurable-criteria" id="id291">Ranking with multiple incommensurable criteria</a></p></li>
@@ -1432,8 +1432,8 @@ the current working directory a ‘tutorialDigraph.dot’ file and a
 </ul>
 </nav>
 <hr class="docutils" />
-<section id="computing-a-first-choice-recommendation">
-<span id="rubis-tutorial-label"></span><h3><a class="toc-backref" href="#id288" role="doc-backlink"><span class="section-number">1.3.1. </span>Computing a first choice recommendation</a><a class="headerlink" href="#computing-a-first-choice-recommendation" title="Link to this heading"></a></h3>
+<section id="computing-a-best-choice-recommendation">
+<span id="rubis-tutorial-label"></span><h3><a class="toc-backref" href="#id288" role="doc-backlink"><span class="section-number">1.3.1. </span>Computing a best choice recommendation</a><a class="headerlink" href="#computing-a-best-choice-recommendation" title="Link to this heading"></a></h3>
 <blockquote class="epigraph">
 <div><p>“<em>The goal of our research was to design a resolution method … that is easy to put into practice, that requires as few and reliable hypotheses as possible, and that meets the needs [of the decision maker] …</em> “</p>
 <p class="attribution">—B. Roy et al. (1966)</p>
@@ -1776,7 +1776,7 @@ the current working directory a ‘tutorialDigraph.dot’ file and a
 </div>
 <p>For two locations <em>x</em> and <em>y</em>, the situation “<em>x</em> strictly outranks <em>y</em>”, denoted <img class="math" src="_images/math/3feafe58a9ed71aa3051dc5f55b6b17772c0726b.png" alt="(x \succnsim y)"/>, is given when <em>x</em> outranks <em>y</em> and <em>y</em> does not outrank <em>y</em>. From theory, we know that outranking digraphs are <em>weakly complete</em>, i.e. for all <em>x</em> and <em>y</em> in <em>X</em>, <img class="math" src="_images/math/3eb34e8d3b88de9afbf79857455c1dfdb48e4e2e.png" alt="r(x \succsim y) &lt; 0.0"/> implies <img class="math" src="_images/math/4a8740cacf9abe72e620f5dd8a368bd2ba674d5c.png" alt="r(y \succsim x) \geq 0.0"/>. And they verify the <em>coduality principle</em>: <img class="math" src="_images/math/be58a8585f9253dd93cd2372c5aa0a913b896044.png" alt="r(x \not\succsim y) = r(y \succnsim x)"/> (<a class="reference internal" href="#bis-2013" id="id39"><span>[BIS-2013]</span></a>).</p>
 <p>We may hence compute a strict outranking digraph <em>gcd</em> with the <em>codual transform</em>, i.e. the <em>converse of the negation</em> (see Line 1 below) of digraph <em>g</em> (see tutorial on <a class="reference internal" href="#outrankingdigraphs-tutorial-label"><span class="std std-ref">Working with the outrankingDigraphs module</span></a>).</p>
-<div class="highlight-pycon notranslate"><div class="highlight"><pre><span></span><span class="hll"><span class="linenos"> 1</span><span class="gp">&gt;&gt;&gt; </span><span class="n">gcd</span> <span class="o">=</span> <span class="o">~</span><span class="p">(</span><span class="o">-</span><span class="n">g</span><span class="p">)</span>
+<div class="highlight-pycon notranslate"><div class="highlight"><pre><span></span><span class="hll"><span class="linenos"> 1</span><span class="gp">&gt;&gt;&gt; </span><span class="n">gcd</span> <span class="o">=</span> <span class="o">~</span><span class="p">(</span><span class="o">-</span><span class="n">g</span><span class="p">)</span> <span class="c1"># codual transform</span>
 </span><span class="linenos"> 2</span><span class="gp">&gt;&gt;&gt; </span><span class="n">gcd</span>
 <span class="linenos"> 3</span><span class="go">*------- Object instance description ------*</span>
 <span class="linenos"> 4</span><span class="go">Instance class       : BipolarOutrankingDigraph</span>
@@ -1860,13 +1860,12 @@ the current working directory a ‘tutorialDigraph.dot’ file and a
 </div>
 <p>It is interesting to notice in <a class="hxr-hoverxref hxr-tooltip reference internal" href="#strictbestchoice"><span class="std std-numref">Listing 1.14</span></a> (Line 8) that the <strong>strict best choice recommendation</strong> consists in the set of weak Condorcet winners: ‘A’, ‘C’ and ‘D’. In the corresponding characteristic vector (see Lines 14-16), representing the bipolar credibility degree with which each alternative may indeed be considered a best choice (see <a class="reference internal" href="#bis-2006a" id="id41"><span>[BIS-2006a]</span></a>, <a class="reference internal" href="#bis-2006b" id="id42"><span>[BIS-2006b]</span></a>), we find confirmed that alternative <em>D</em> is the only positively validated one, whereas both extreme alternatives - <em>A</em> (the most expensive) and <em>C</em> (the cheapest) - stay in an indeterminate situation. They <strong>may be or not be</strong> potential first choice candidates besides <em>D</em>. Whereas, alternatives <em>B</em>, <em>E</em> and <em>F</em> are <em>negatively</em> included, i.e. <em>positively excluded</em> from the best choice recommendation. Notice furthermore that compromise alternative <em>G</em>, while not actually included in an outranking prekernel, shows as well an indeterminate situation with respect to <em>being or not being</em> a potential first choice candidate.</p>
 <p>We may also notice (see Line 18) that both alternatives <em>A</em> and <em>F</em> are reported as potential <em>strict outranked</em> choices, hence as <strong>potential last choice recommendation</strong> . This indicates a global incomparability status of alternative <em>A</em> (see <a class="hxr-hoverxref hxr-tooltip reference internal" href="#bestofficechoice"><span class="std std-numref">Fig. 1.14</span></a>) as shown in <a class="hxr-hoverxref hxr-tooltip reference internal" href="#bestofficechoice"><span class="std std-numref">Fig. 1.14</span></a>.</p>
-<div class="highlight-pycon notranslate"><div class="highlight"><pre><span></span><span class="linenos">1</span><span class="gp">&gt;&gt;&gt; </span><span class="n">gcd</span> <span class="o">=</span> <span class="o">~</span><span class="p">(</span><span class="o">-</span><span class="n">g</span><span class="p">)</span> <span class="c1"># codual of g</span>
-<span class="linenos">2</span><span class="gp">&gt;&gt;&gt; </span><span class="n">gcd</span><span class="o">.</span><span class="n">exportGraphViz</span><span class="p">(</span><span class="n">fileName</span><span class="o">=</span><span class="s1">&#39;bestChoiceChoice&#39;</span><span class="p">,</span>
-<span class="linenos">3</span><span class="gp">... </span>                   <span class="n">firstChoice</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;C&#39;</span><span class="p">,</span><span class="s1">&#39;D&#39;</span><span class="p">],</span>
-<span class="linenos">4</span><span class="gp">... </span>                   <span class="n">lastChoice</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;F&#39;</span><span class="p">])</span>
-<span class="linenos">5</span><span class="go"> *---- exporting a dot file for GraphViz tools ---------*</span>
-<span class="linenos">6</span><span class="go">  Exporting to bestOfficeChoice.dot</span>
-<span class="linenos">7</span><span class="go">  dot -Grankdir=BT -Tpng bestOfficeChoice.dot -o bestOfficeChoice.png</span>
+<div class="highlight-pycon notranslate"><div class="highlight"><pre><span></span><span class="linenos">1</span><span class="gp">&gt;&gt;&gt; </span><span class="n">gcd</span><span class="o">.</span><span class="n">exportGraphViz</span><span class="p">(</span><span class="n">fileName</span><span class="o">=</span><span class="s1">&#39;bestChoiceChoice&#39;</span><span class="p">,</span>
+<span class="linenos">2</span><span class="gp">... </span>                   <span class="n">firstChoice</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;C&#39;</span><span class="p">,</span><span class="s1">&#39;D&#39;</span><span class="p">],</span>
+<span class="linenos">3</span><span class="gp">... </span>                   <span class="n">lastChoice</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;F&#39;</span><span class="p">])</span>
+<span class="linenos">4</span><span class="go"> *---- exporting a dot file for GraphViz tools ---------*</span>
+<span class="linenos">5</span><span class="go">  Exporting to bestOfficeChoice.dot</span>
+<span class="linenos">6</span><span class="go">  dot -Grankdir=BT -Tpng bestOfficeChoice.dot -o bestOfficeChoice.png</span>
 </pre></div>
 </div>
 <figure class="align-center" id="bestofficechoice">
