@@ -47,11 +47,18 @@ Parts of the documentation
 ..........................
 :New:
    
-   - A series of tutorials for tackling large and big outranking digraphs: see :ref:`BigDigraphs-Tutorial-label`
+   - The tutorial on :ref:`Computing a best choice recommendation <Rubis-Tutorial-label>` has been thoroughly reviewed and upgraded
           
    - A tutorial on :ref:`using the Digraph3 HPC resources <HPC-Ranking-Tutorial-label>` for ranking several millions of multicriteria performance records via big sparse outranking digraphs
 	
    - A :py:mod:`pairings` module for solving pairing problems illustrated with two tutorials on computing **fair** :ref:`intergroup<Fair-InterGroup-Pairings-label>` and :ref:`intragroup<Fair-IntraGroup-Pairings-label>` pairing solutions
+
+   - :ref:`Condorcet's 1785 critical perspective on the simple plurality voting rule <Condorcet-Tutorial-label>`
+     
+   - :ref:`On characterizing bipolar-valued outranking digraphs <Sufficiency-Tutorial-label>`
+     
+   - :ref:`Consensus quality of the bipolar-valued outranking relation <Outranking-Consensus-Tutorial-label>`
+
 
 #. `Tutorials <tutorial.html>`_
 

@@ -42,7 +42,9 @@
 .. only:: html
 	  
    :New:
-
+      
+      - The tutorial on :ref:`Computing a best choice recommendation <Rubis-Tutorial-label>` has been thoroughly reviewed and upgraded
+          
       - A tutorial on :ref:`using the Digraph3 HPC resources <HPC-Ranking-Tutorial-label>` for ranking several millions of multicriteria performance records via sparse outranking digraphs
 	
       - A tutorial on :ref:`using multiprocessing resources <Multiprocessing-Tutorial-label>` when tackling large performance tableaux with several hundreds of decision alternatives.
