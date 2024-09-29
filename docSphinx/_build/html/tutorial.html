@@ -1816,7 +1816,7 @@ the current working directory a ‘tutorialDigraph.dot’ file and a
 <li><p>To finally verify principle <strong>P5</strong>, we recommend among all potential initial prekernels, a *most determined* one, i.e. a strictly <em>outranking</em> and <em>weakly independent</em> choice supported by the highest criteria significance. And in this most determined initial prekernel we eventually retain the alternative(s) that are included with highest criteria significance (see the tutorial on <a class="reference internal" href="pearls.html#bipolar-valued-kernels-tutorial-label"><span class="std std-ref">Computing bipolar-valued kernel membership characteristic vectors</span></a>).</p></li>
 </ul>
 </div></blockquote>
-<p>Mind that a given strict outranking digraph may not always admit prekernels. This is the case when the digraph contains chordless circuits of odd length. Luckily, our strict outranking digraph <em>gcd</em> here does not show any chordless outranking circuits; a fact we can check with the <em>showChordlessCircuits()</em> method.</p>
+<p>Mind that a given strict outranking digraph may not always admit prekernels. This is the case when the digraph contains chordless circuits of odd length. Luckily, our strict outranking digraph <em>gcd</em> here does not show any chordless outranking circuits; a fact we can check with the <a class="reference internal" href="techDoc.html#digraphs.Digraph.showChordlessCircuits" title="digraphs.Digraph.showChordlessCircuits"><code class="xref py py-meth docutils literal notranslate"><span class="pre">showChordlessCircuits()</span></code></a> method.</p>
 <div class="highlight-pycon notranslate"><div class="highlight"><pre><span></span><span class="linenos">1</span><span class="gp">&gt;&gt;&gt; </span><span class="n">gcd</span><span class="o">.</span><span class="n">showChordlessCircuits</span><span class="p">()</span>
 <span class="linenos">2</span><span class="go"> No circuits observed in this digraph.</span>
 </pre></div>
@@ -1826,40 +1826,38 @@ the current working directory a ‘tutorialDigraph.dot’ file and a
 </section>
 <section id="the-rubis-best-choice-recommendation">
 <h4><a class="toc-backref" href="#id301" role="doc-backlink"><span class="section-number">1.3.1.5. </span>The <em>Rubis</em> best choice recommendation</a><a class="headerlink" href="#the-rubis-best-choice-recommendation" title="Link to this heading"></a></h4>
-<p>Following the Rubis outranking method (see <a class="reference internal" href="#bis-2008" id="id40"><span>[BIS-2008]</span></a>), potential first choice recommendations are determined by the outranking prekernels –<em>weakly independent</em> and <em>strictly outranking</em> choices– of the strict outranking digraph (see the tutorial on <a class="reference internal" href="pearls.html#kernel-tutorial-label"><span class="std std-ref">computing digraph kernels</span></a>).</p>
+<p>Following the Rubis outranking method (see <a class="reference internal" href="#bis-2008" id="id40"><span>[BIS-2008]</span></a>), potential first choice recommendations are determined by the outranking prekernels –<em>weakly independent</em> and <em>strictly outranking</em> choices– of the strict outranking digraph (see the tutorial on <a class="reference internal" href="pearls.html#kernel-tutorial-label"><span class="std std-ref">computing digraph kernels</span></a>). Any detected chordless odd circuits are by default broken up.</p>
 <div class="literal-block-wrapper docutils container" id="strictbestchoice">
 <div class="code-block-caption"><span class="caption-number">Listing 1.14 </span><span class="caption-text">Computing the strict best choice recommendation</span><a class="headerlink" href="#strictbestchoice" title="Link to this code"></a></div>
-<div class="highlight-pycon notranslate"><div class="highlight"><pre><span></span><span class="linenos"> 1</span><span class="gp">&gt;&gt;&gt; </span><span class="n">g</span><span class="o">.</span><span class="n">showBestChoiceRecommendation</span><span class="p">(</span>
-<span class="linenos"> 2</span><span class="gp">... </span>                  <span class="n">CoDual</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
-<span class="linenos"> 3</span><span class="gp">... </span>                  <span class="n">ChoiceVector</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
-<span class="linenos"> 4</span><span class="go"> * --- First and last choice recommendation(s) ---*</span>
-<span class="linenos"> 5</span><span class="go">  (in decreasing order of determinateness)</span>
-<span class="linenos"> 6</span><span class="go"> Credibility domain: [-1.00,1.00]</span>
-<span class="linenos"> 7</span><span class="go"> === &gt;&gt; potential first choice(s)</span>
-<span class="hll"><span class="linenos"> 8</span><span class="go"> * choice              : [&#39;A&#39;, &#39;C&#39;, &#39;D&#39;]</span>
-</span><span class="linenos"> 9</span><span class="go">   independence        : 0.00</span>
-<span class="linenos">10</span><span class="go">   dominance           : 0.10</span>
-<span class="linenos">11</span><span class="go">   absorbency          : 0.00</span>
-<span class="linenos">12</span><span class="go">   covering (%)        : 41.67</span>
-<span class="linenos">13</span><span class="go">   determinateness (%) : 50.59</span>
-<span class="hll"><span class="linenos">14</span><span class="go">   - characteristic vector = { &#39;D&#39;: 0.02, &#39;G&#39;: 0.00, &#39;C&#39;: 0.00,</span>
-</span><span class="hll"><span class="linenos">15</span><span class="go">                               &#39;A&#39;: 0.00, &#39;F&#39;: -0.02, &#39;E&#39;: -0.02,</span>
-</span><span class="hll"><span class="linenos">16</span><span class="go">                               &#39;B&#39;: -0.02, }</span>
-</span><span class="linenos">17</span><span class="go"> === &gt;&gt; potential last choice(s)</span>
-<span class="hll"><span class="linenos">18</span><span class="go"> * choice              : [&#39;A&#39;, &#39;F&#39;]</span>
-</span><span class="linenos">19</span><span class="go">   independence        : 0.00</span>
-<span class="linenos">20</span><span class="go">   dominance           : -0.52</span>
-<span class="linenos">21</span><span class="go">   absorbency          : 1.00</span>
-<span class="linenos">22</span><span class="go">   covered (%)         : 50.00</span>
-<span class="linenos">23</span><span class="go">   determinateness (%) : 50.00</span>
-<span class="linenos">24</span><span class="go">   - characteristic vector = { &#39;G&#39;: 0.00, &#39;F&#39;: 0.00, &#39;E&#39;: 0.00,</span>
-<span class="linenos">25</span><span class="go">                               &#39;D&#39;: 0.00, &#39;C&#39;: 0.00, &#39;B&#39;: 0.00,</span>
-<span class="linenos">26</span><span class="go">                               &#39;A&#39;: 0.00, }</span>
+<div class="highlight-pycon notranslate"><div class="highlight"><pre><span></span><span class="linenos"> 1</span><span class="gp">&gt;&gt;&gt; </span><span class="n">g</span><span class="o">.</span><span class="n">showBestChoiceRecommendation</span><span class="p">(</span><span class="n">ChoiceVector</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="linenos"> 2</span><span class="go"> * --- First and last choice recommendation(s) ---*</span>
+<span class="linenos"> 3</span><span class="go">  (in decreasing order of determinateness)</span>
+<span class="linenos"> 4</span><span class="go"> Credibility domain: [-1.00,1.00]</span>
+<span class="linenos"> 5</span><span class="go"> === &gt;&gt; potential first choice(s)</span>
+<span class="hll"><span class="linenos"> 6</span><span class="go"> * choice              : [&#39;A&#39;, &#39;C&#39;, &#39;D&#39;]</span>
+</span><span class="linenos"> 7</span><span class="go">   independence        : 0.00</span>
+<span class="linenos"> 8</span><span class="go">   dominance           : 0.10</span>
+<span class="linenos"> 9</span><span class="go">   absorbency          : 0.00</span>
+<span class="linenos">10</span><span class="go">   covering (%)        : 41.67</span>
+<span class="linenos">11</span><span class="go">   determinateness (%) : 50.59</span>
+<span class="hll"><span class="linenos">12</span><span class="go">   - characteristic vector = { &#39;D&#39;: 0.02, &#39;G&#39;: 0.00, &#39;C&#39;: 0.00,</span>
+</span><span class="hll"><span class="linenos">13</span><span class="go">                               &#39;A&#39;: 0.00, &#39;F&#39;: -0.02, &#39;E&#39;: -0.02,</span>
+</span><span class="hll"><span class="linenos">14</span><span class="go">                               &#39;B&#39;: -0.02, }</span>
+</span><span class="linenos">15</span><span class="go"> === &gt;&gt; potential last choice(s)</span>
+<span class="hll"><span class="linenos">16</span><span class="go"> * choice              : [&#39;A&#39;, &#39;F&#39;]</span>
+</span><span class="linenos">17</span><span class="go">   independence        : 0.00</span>
+<span class="linenos">18</span><span class="go">   dominance           : -0.52</span>
+<span class="linenos">19</span><span class="go">   absorbency          : 1.00</span>
+<span class="linenos">20</span><span class="go">   covered (%)         : 50.00</span>
+<span class="linenos">21</span><span class="go">   determinateness (%) : 50.00</span>
+<span class="linenos">22</span><span class="go">   - characteristic vector = { &#39;G&#39;: 0.00, &#39;F&#39;: 0.00, &#39;E&#39;: 0.00,</span>
+<span class="linenos">23</span><span class="go">                               &#39;D&#39;: 0.00, &#39;C&#39;: 0.00, &#39;B&#39;: 0.00,</span>
+<span class="linenos">24</span><span class="go">                               &#39;A&#39;: 0.00, }</span>
 </pre></div>
 </div>
 </div>
-<p>It is interesting to notice in <a class="hxr-hoverxref hxr-tooltip reference internal" href="#strictbestchoice"><span class="std std-numref">Listing 1.14</span></a> (Line 8) that the <strong>strict best choice recommendation</strong> consists in the set of weak Condorcet winners: ‘A’, ‘C’ and ‘D’. In the corresponding characteristic vector (see Lines 14-16), representing the bipolar credibility degree with which each alternative may indeed be considered a best choice (see <a class="reference internal" href="#bis-2006a" id="id41"><span>[BIS-2006a]</span></a>, <a class="reference internal" href="#bis-2006b" id="id42"><span>[BIS-2006b]</span></a>), we find confirmed that alternative <em>D</em> is the only positively validated one, whereas both extreme alternatives - <em>A</em> (the most expensive) and <em>C</em> (the cheapest) - stay in an indeterminate situation. They <strong>may be or not be</strong> potential first choice candidates besides <em>D</em>. Notice furthermore that compromise alternative <em>G</em>, while not actually included in an outranking prekernel, shows as well an indeterminate situation with respect to <em>being or not being</em> a potential first choice candidate. Alternatives <em>B</em>, <em>E</em> and <em>F</em> are <em>negatively</em> included, i.e. <em>positively excluded</em> from this best choice recommendation.</p>
-<p>We may also notice (see Line 18) that both alternatives <em>A</em> and <em>F</em> are reported as potential <em>strict outranked</em> choices, hence as <strong>potential last choice recommendation</strong> . This indicates a global incomparability status of alternative <em>A</em> (see <a class="hxr-hoverxref hxr-tooltip reference internal" href="#bestofficechoice"><span class="std std-numref">Fig. 1.14</span></a>) as shown in <a class="hxr-hoverxref hxr-tooltip reference internal" href="#bestofficechoice"><span class="std std-numref">Fig. 1.14</span></a>.</p>
+<p>It is interesting to notice in <a class="hxr-hoverxref hxr-tooltip reference internal" href="#strictbestchoice"><span class="std std-numref">Listing 1.14</span></a> (Line 6) that the <strong>strict best choice recommendation</strong> consists in the set of weak Condorcet winners: ‘A’, ‘C’ and ‘D’. In the corresponding characteristic vector (see Lines 12-14), representing the bipolar credibility degree with which each alternative may indeed be considered a best choice (see <a class="reference internal" href="#bis-2006a" id="id41"><span>[BIS-2006a]</span></a>, <a class="reference internal" href="#bis-2006b" id="id42"><span>[BIS-2006b]</span></a>), we find confirmed that alternative <em>D</em> is the only positively validated one, whereas both extreme alternatives - <em>A</em> (the most expensive) and <em>C</em> (the cheapest) - stay in an indeterminate situation. They <strong>may be or not be</strong> potential first choice candidates besides <em>D</em>. Notice furthermore that compromise alternative <em>G</em>, while not actually included in an outranking prekernel, shows as well an indeterminate situation with respect to <em>being or not being</em> a potential first choice candidate. Alternatives <em>B</em>, <em>E</em> and <em>F</em> are <em>negatively</em> included, i.e. <em>positively excluded</em> from this best choice recommendation.</p>
+<p>We may also notice in Line 16 that both alternatives <em>A</em> and <em>F</em> are reported as potential <em>strict outranked</em> choices, hence as <strong>potential last choice recommendation</strong> . This indicates a global incomparability status of alternative <em>A</em> as shown in <a class="hxr-hoverxref hxr-tooltip reference internal" href="#bestofficechoice"><span class="std std-numref">Fig. 1.14</span></a>.</p>
 <div class="highlight-pycon notranslate"><div class="highlight"><pre><span></span><span class="linenos">1</span><span class="gp">&gt;&gt;&gt; </span><span class="n">gcd</span><span class="o">.</span><span class="n">exportGraphViz</span><span class="p">(</span><span class="n">fileName</span><span class="o">=</span><span class="s1">&#39;bestChoiceChoice&#39;</span><span class="p">,</span>
 <span class="linenos">2</span><span class="gp">... </span>                   <span class="n">firstChoice</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;C&#39;</span><span class="p">,</span><span class="s1">&#39;D&#39;</span><span class="p">],</span>
 <span class="linenos">3</span><span class="gp">... </span>                   <span class="n">lastChoice</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;F&#39;</span><span class="p">])</span>
@@ -1875,7 +1873,7 @@ the current working directory a ‘tutorialDigraph.dot’ file and a
 </figcaption>
 </figure>
 <p>Let us now compare the performances of alternatives <em>D</em> and <em>G</em> in a
-pairwise perspective (see below). We notice that, with the given preference discrimination thresholds, alternative <em>G</em> is actually <strong>certainly</strong> <em>at least as good as</em> alternative <em>D</em>:  <img class="math" src="_images/math/d310d1a6f31c24112d31189eb77f02fd783facde.png" alt="r(G \succsim D) = +145/145 = +1.0"/> (see Line 14 below).</p>
+pairwise perspective (see below). With the given preference discrimination thresholds, we notice that alternative <em>G</em> is actually <strong>certainly</strong> <em>at least as good as</em> alternative <em>D</em>:  <img class="math" src="_images/math/d310d1a6f31c24112d31189eb77f02fd783facde.png" alt="r(G \succsim D) = +145/145 = +1.0"/> (see Line 14 below).</p>
 <div class="highlight-pycon notranslate"><div class="highlight"><pre><span></span><span class="linenos"> 1</span><span class="gp">&gt;&gt;&gt; </span><span class="n">g</span><span class="o">.</span><span class="n">showPairwiseComparison</span><span class="p">(</span><span class="s1">&#39;G&#39;</span><span class="p">,</span><span class="s1">&#39;D&#39;</span><span class="p">)</span>
 <span class="linenos"> 2</span><span class="go"> *------------  pairwise comparison ----*</span>
 <span class="linenos"> 3</span><span class="go"> Comparing actions : (G, D)</span>
@@ -1892,7 +1890,7 @@ pairwise perspective (see below). We notice that, with the given preference disc
 <span class="hll"><span class="linenos">14</span><span class="go"> Valuation in range: -145.00 to +145.00; global concordance: +145.00</span>
 </span></pre></div>
 </div>
-<p>However, we must as well notice that the cheapest alternative <em>C</em> is in fact <strong>strictly outranking</strong> alternative <em>G</em>:  <img class="math" src="_images/math/98653da7d2be2b1fa121bede995ef28d45280ce0.png" alt="r(C \succsim G) = +15/145 &gt; 0.0"/>, and <img class="math" src="_images/math/9dea3fbd43dd55cd4fc9d03180c759832e4138ae.png" alt="r(G \succsim C) = -15/145 &lt; 0.0"/> (see Line 14 below).</p>
+<p>Yet, we must as well notice that the cheapest alternative <em>C</em> is in fact <strong>strictly outranking</strong> alternative <em>G</em>:  <img class="math" src="_images/math/98653da7d2be2b1fa121bede995ef28d45280ce0.png" alt="r(C \succsim G) = +15/145 &gt; 0.0"/>, and <img class="math" src="_images/math/9dea3fbd43dd55cd4fc9d03180c759832e4138ae.png" alt="r(G \succsim C) = -15/145 &lt; 0.0"/> (see Line 14 below).</p>
 <div class="highlight-pycon notranslate"><div class="highlight"><pre><span></span><span class="linenos"> 1</span><span class="gp">&gt;&gt;&gt; </span><span class="n">g</span><span class="o">.</span><span class="n">showPairwiseComparison</span><span class="p">(</span><span class="s1">&#39;C&#39;</span><span class="p">,</span><span class="s1">&#39;G&#39;</span><span class="p">)</span>
 <span class="linenos"> 2</span><span class="go"> *------------  pairwise comparison ----*</span>
 <span class="linenos"> 3</span><span class="go"> Comparing actions : (C, G)/(G, C)</span>
@@ -10305,7 +10303,7 @@ dot -Grankdir=TB -Tpng rootedTree.dot -o rootedTree.png</p>
 
   <div role="contentinfo">
     <p>&#169; Copyright 2012-2024, Raymond Bisdorff.
-      <span class="lastupdated">Last updated on Sep 28, 2024.
+      <span class="lastupdated">Last updated on Sep 29, 2024.
       </span></p>
   </div>
 

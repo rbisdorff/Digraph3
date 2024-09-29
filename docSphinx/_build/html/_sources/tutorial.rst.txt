@@ -1533,7 +1533,7 @@ Let *X* be the set of potential decision alternatives. Let *Y* be a non empty su
       
     - To finally verify principle **P5**, we recommend among all potential initial prekernels, a \*most determined* one, i.e. a strictly *outranking* and *weakly independent* choice supported by the highest criteria significance. And in this most determined initial prekernel we eventually retain the alternative(s) that are included with highest criteria significance (see the tutorial on :ref:`Computing bipolar-valued kernel membership characteristic vectors <Bipolar-Valued-Kernels-Tutorial-label>`).
 
-Mind that a given strict outranking digraph may not always admit prekernels. This is the case when the digraph contains chordless circuits of odd length. Luckily, our strict outranking digraph *gcd* here does not show any chordless outranking circuits; a fact we can check with the *showChordlessCircuits()* method.
+Mind that a given strict outranking digraph may not always admit prekernels. This is the case when the digraph contains chordless circuits of odd length. Luckily, our strict outranking digraph *gcd* here does not show any chordless outranking circuits; a fact we can check with the :py:meth:`~digraphs.Digraph.showChordlessCircuits` method.
 
 .. code-block:: pycon
    :linenos:
@@ -1548,17 +1548,15 @@ We are ready now for building a best choice recommendation.
 The *Rubis* best choice recommendation
 ``````````````````````````````````````
 
-Following the Rubis outranking method (see [BIS-2008]_), potential first choice recommendations are determined by the outranking prekernels --*weakly independent* and *strictly outranking* choices-- of the strict outranking digraph (see the tutorial on :ref:`computing digraph kernels <Kernel-Tutorial-label>`).
+Following the Rubis outranking method (see [BIS-2008]_), potential first choice recommendations are determined by the outranking prekernels --*weakly independent* and *strictly outranking* choices-- of the strict outranking digraph (see the tutorial on :ref:`computing digraph kernels <Kernel-Tutorial-label>`). Any detected chordless odd circuits are by default broken up.
 
 .. code-block:: pycon
    :name: strictBestChoice
    :caption: Computing the strict best choice recommendation
    :linenos:
-   :emphasize-lines: 8,14-16,18
+   :emphasize-lines: 6,12-14,16
 
-   >>> g.showBestChoiceRecommendation(
-   ...                   CoDual=True,
-   ...                   ChoiceVector=True)
+   >>> g.showBestChoiceRecommendation(ChoiceVector=True)
     * --- First and last choice recommendation(s) ---*
      (in decreasing order of determinateness)   
     Credibility domain: [-1.00,1.00]
@@ -1583,9 +1581,9 @@ Following the Rubis outranking method (see [BIS-2008]_), potential first choice 
 	                          'D': 0.00, 'C': 0.00, 'B': 0.00,
 				  'A': 0.00, }
 				  
-It is interesting to notice in :numref:`strictBestChoice` (Line 8) that the **strict best choice recommendation** consists in the set of weak Condorcet winners: 'A', 'C' and 'D'. In the corresponding characteristic vector (see Lines 14-16), representing the bipolar credibility degree with which each alternative may indeed be considered a best choice (see [BIS-2006a]_, [BIS-2006b]_), we find confirmed that alternative *D* is the only positively validated one, whereas both extreme alternatives - *A* (the most expensive) and *C* (the cheapest) - stay in an indeterminate situation. They **may be or not be** potential first choice candidates besides *D*. Notice furthermore that compromise alternative *G*, while not actually included in an outranking prekernel, shows as well an indeterminate situation with respect to *being or not being* a potential first choice candidate. Alternatives *B*, *E* and *F* are *negatively* included, i.e. *positively excluded* from this best choice recommendation.
+It is interesting to notice in :numref:`strictBestChoice` (Line 6) that the **strict best choice recommendation** consists in the set of weak Condorcet winners: 'A', 'C' and 'D'. In the corresponding characteristic vector (see Lines 12-14), representing the bipolar credibility degree with which each alternative may indeed be considered a best choice (see [BIS-2006a]_, [BIS-2006b]_), we find confirmed that alternative *D* is the only positively validated one, whereas both extreme alternatives - *A* (the most expensive) and *C* (the cheapest) - stay in an indeterminate situation. They **may be or not be** potential first choice candidates besides *D*. Notice furthermore that compromise alternative *G*, while not actually included in an outranking prekernel, shows as well an indeterminate situation with respect to *being or not being* a potential first choice candidate. Alternatives *B*, *E* and *F* are *negatively* included, i.e. *positively excluded* from this best choice recommendation.
 
-We may also notice (see Line 18) that both alternatives *A* and *F* are reported as potential *strict outranked* choices, hence as **potential last choice recommendation** . This indicates a global incomparability status of alternative *A* (see :numref:`bestOfficeChoice`) as shown in :numref:`bestOfficeChoice`.
+We may also notice in Line 16 that both alternatives *A* and *F* are reported as potential *strict outranked* choices, hence as **potential last choice recommendation** . This indicates a global incomparability status of alternative *A* as shown in :numref:`bestOfficeChoice`.
 
 .. code-block:: pycon
    :linenos:
@@ -1605,7 +1603,7 @@ We may also notice (see Line 18) that both alternatives *A* and *F* are reported
    Best office choice recommendation from strict outranking digraph
 
 Let us now compare the performances of alternatives *D* and *G* in a
-pairwise perspective (see below). We notice that, with the given preference discrimination thresholds, alternative *G* is actually **certainly** *at least as good as* alternative *D*:  :math:`r(G \succsim D) = +145/145 = +1.0` (see Line 14 below).
+pairwise perspective (see below). With the given preference discrimination thresholds, we notice that alternative *G* is actually **certainly** *at least as good as* alternative *D*:  :math:`r(G \succsim D) = +145/145 = +1.0` (see Line 14 below).
 
 .. code-block:: pycon
    :linenos:
@@ -1626,7 +1624,7 @@ pairwise perspective (see below). We notice that, with the given preference disc
     =========================================================================
     Valuation in range: -145.00 to +145.00; global concordance: +145.00
 
-However, we must as well notice that the cheapest alternative *C* is in fact **strictly outranking** alternative *G*:  :math:`r(C \succsim G) = +15/145 > 0.0`, and :math:`r(G \succsim C) = -15/145 < 0.0` (see Line 14 below).
+Yet, we must as well notice that the cheapest alternative *C* is in fact **strictly outranking** alternative *G*:  :math:`r(C \succsim G) = +15/145 > 0.0`, and :math:`r(G \succsim C) = -15/145 < 0.0` (see Line 14 below).
 
 .. code-block:: pycon
    :linenos:
