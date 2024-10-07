@@ -704,7 +704,8 @@ class IntegerQuantilesSortingDigraph(IntegerBipolarOutrankingDigraph):
                 startMethod = 'spawn'
             mpctx = mp.get_context(startMethod)
             self.startMethod = mpctx.get_start_method()
-            print("Start method: \'%s\'" % self.startMethod)
+            if Comments:
+                print("Start method: \'%s\'" % self.startMethod)
             Process = mpctx.Process
             active_children = mpctx.active_children
             cpu_count = mpctx.cpu_count
@@ -771,7 +772,7 @@ class IntegerQuantilesSortingDigraph(IntegerBipolarOutrankingDigraph):
                 for j in range(nbrOfJobs):
                 #for j from 0 <= j < nbrOfJobs:
                     if Comments:
-                        print('Thread = %d/%d' % (j+1,nbrOfJobs),end=" ",flush=True)
+                        print('Thread = %d/%d,' % (j+1,nbrOfJobs),end=" ",flush=True)
                     splitActions=[]
                     #for k in range(nit):
                     for k from 0 <= k < nit:

@@ -597,7 +597,7 @@ Example Python session:
         else:  # parallel computation
             if Comments:
                 print('Threading ...')
-                print("Start method: \'%s\'" % startMethod)
+                #print("Start method: \'%s\'" % startMethod)
             from copy import copy, deepcopy
             from io import BytesIO
             from pickle import Pickler, dumps, loads, load
