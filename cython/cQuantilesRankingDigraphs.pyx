@@ -12,7 +12,7 @@ cdef extern from "detertest.h":
 
 cimport cython
 import sys
-from time import time
+from time import time, sleep
 from decimal import Decimal
 from multiprocessing import Process
 
@@ -62,7 +62,7 @@ class _myThread1(Process):
         Comments = self.Comments
         Debug = self.Debug
         if Comments:
-            print('Starting thread %d, (%d, %d)' % (t+1,splitIndex[0],splitIndex[1]))
+            print('Starting thread %d, (%d, %d)' % (t+1,splitIndex[0],splitIndex[1]),flush=True)
         splitComponents = {}
         for spi in range(splitIndex[0],splitIndex[1]):
             i = compIndex[spi]
@@ -247,7 +247,7 @@ class cQuantilesRankingDigraph(SIOD.SparseIntegerOutrankingDigraph):
         #from cIntegerOutrankingDigraphs import IntegerBipolarOutrankingDigraph 
 
         if Comments:
-            print('Cythonized cQuantilesRankingDigraph class')
+            print('Cythonized cQuantilesRankingDigraph HPC class')
    
         ttot = time()
         self.runTimes = {}
@@ -425,11 +425,12 @@ class cQuantilesRankingDigraph(SIOD.SparseIntegerOutrankingDigraph):
             self.nbrOfRankers = nbrOfRankers
             if Comments:
                 print('Processing the %d components' % nc )
-                print('Threading ...')
+                print('Threading ... Test0')
             #tdump = time()
             from tempfile import TemporaryDirectory,mkdtemp
             maximalComponentSize = 0
             with TemporaryDirectory(dir=tempDir) as tempDirName:
+                from time import sleep
                 #td = TemporaryDirectory(dir=tempDir,delete=False)
                 #tempDirName = td.name
                 #foName = tempDirName+'/perfData.py'
@@ -459,7 +460,7 @@ class cQuantilesRankingDigraph(SIOD.SparseIntegerOutrankingDigraph):
                 #TASKS = [(Comments,(i,pos,nc,tempDirName,
                 #        decomposition,compIndex,
                 #        componentRankingRule)) for i,pos in enumerate(splitTasksIndex)]
-                jobs = []
+                #jobs = []
                 for t in range(NUMBER_OF_WORKERS):
                     splitIndex = splitTasksIndex[t]
                     #print(t,splitIndex)
@@ -472,18 +473,25 @@ class cQuantilesRankingDigraph(SIOD.SparseIntegerOutrankingDigraph):
                                              Comments,
                                              Debug)
                     thread.start()
-                    jobs.append(thread)
+                    #jobs.append(thread)
                     #Process(target=_worker1,args=(task_queue,)).start()
-                #if Comments:
-                #    print('started')
+                if Comments:
+                    print('started')
+                    
                 #for i in range(NUMBER_OF_WORKERS):
                 #    task_queue.put('STOP')                   
-                for proc in jobs:
-                    proc.join()
-                while active_children() != []:
-                    pass
+                #for proc in jobs:
+                #    proc.join()
+                
+                nch = len(active_children())
+                while nch > 0:
+                    #if Debug:
+                    #    print('active_children:',nch,flush=True)
+                    nch = len(active_children())
+                    sleep(1)
+                    
                 if Comments:
-                    print('Exit %d threads' % NUMBER_OF_WORKERS)
+                    print('Exit %d threads' % NUMBER_OF_WORKERS,flush=True)
                 
 
                 # ####  post-threading operations    

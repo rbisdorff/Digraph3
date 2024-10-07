@@ -1978,6 +1978,7 @@ class QuantilesSortingDigraph(SortingDigraph):
             from copy import copy, deepcopy
             from io import BytesIO
             from pickle import Pickler, dumps, loads, load
+            from time import sleep
             if startMethod is None:
                 startMethod = 'spawn'
             mpctx = mp.get_context(startMethod)
@@ -2043,7 +2044,7 @@ class QuantilesSortingDigraph(SortingDigraph):
                 splitActionsList = []
                 for j in range(nbrOfJobs):
                     if Comments:
-                        print('Thread = %d/%d' % (j+1,nbrOfJobs),end=" ")
+                        print('Thread = %d/%d' % (j+1,nbrOfJobs),end=" ",flush=True)
                     splitActions=[]
                     for k in range(nit):
                         if j < (nbrOfJobs -1) and i < n:
@@ -2052,7 +2053,7 @@ class QuantilesSortingDigraph(SortingDigraph):
                             splitActions = list(actionsRemain)
                         i += 1
                     if Comments:
-                        print('%d' % (len(splitActions)) )
+                        print('%d' % (len(splitActions)), flush=True)
 ##                    if Debug:
 ##                        print(splitActions)
                     actionsRemain = actionsRemain - set(splitActions)
@@ -2067,7 +2068,7 @@ class QuantilesSortingDigraph(SortingDigraph):
                     splitThread.start()
                     
                 while active_children() != []:
-                    pass
+                    sleep(0.5)
 
                 if Comments:    
                     print('Exiting computing threads')

@@ -11,6 +11,7 @@ Copyright (C) 2018-2024  Raymond Bisdorff
 cimport cython
 from cpython cimport array
 import array
+from time import sleep
 
 cdef extern from "detertest.h":
     int ABS(int a);
@@ -1390,12 +1391,12 @@ class SparseIntegerOutrankingDigraph(SparseIntegerDigraph,cPerformanceTableau):
                     Process(target=_worker,args=(task_queue,)).start()
 
                 if Comments:
-                    print('started')
+                    print('started',flush=True)
                 for i in range(NUMBER_OF_WORKERS):
                     task_queue.put('STOP')                   
-
+                
                 while active_children() != []:
-                    pass
+                    sleep(1)
                 if Comments:
                     print('Exit %d threads' % NUMBER_OF_WORKERS)
 
@@ -2492,7 +2493,8 @@ class cQuantilesRankingDigraph(SparseIntegerOutrankingDigraph):
                     task_queue.put('STOP')                   
 
                 while active_children() != []:
-                    pass
+                    sleep(1)
+                    
                 if Comments:
                     print('Exit %d threads' % NUMBER_OF_WORKERS)
 

@@ -696,7 +696,6 @@ class IntegerQuantilesSortingDigraph(IntegerBipolarOutrankingDigraph):
         else:  # parallel computation
             if Comments:
                 print('Threading ...')
-                print("Start method: \'%s\'" % startMethod)
             from copy import copy, deepcopy
             from io import BytesIO
             from pickle import Pickler, dumps, loads, load
@@ -705,7 +704,7 @@ class IntegerQuantilesSortingDigraph(IntegerBipolarOutrankingDigraph):
                 startMethod = 'spawn'
             mpctx = mp.get_context(startMethod)
             self.startMethod = mpctx.get_start_method()
-            #print("Start method: \'%s\'" % self.startMethod)
+            print("Start method: \'%s\'" % self.startMethod)
             Process = mpctx.Process
             active_children = mpctx.active_children
             cpu_count = mpctx.cpu_count
@@ -772,7 +771,7 @@ class IntegerQuantilesSortingDigraph(IntegerBipolarOutrankingDigraph):
                 for j in range(nbrOfJobs):
                 #for j from 0 <= j < nbrOfJobs:
                     if Comments:
-                        print('Thread = %d/%d' % (j+1,nbrOfJobs),end=" ")
+                        print('Thread = %d/%d' % (j+1,nbrOfJobs),end=" ",flush=True)
                     splitActions=[]
                     #for k in range(nit):
                     for k from 0 <= k < nit:
@@ -782,7 +781,7 @@ class IntegerQuantilesSortingDigraph(IntegerBipolarOutrankingDigraph):
                             splitActions = array('i',list(actionsRemain))
                         i += 1
                     if Comments:
-                        print('%d' % (len(splitActions)) )
+                        print('%d' % (len(splitActions)),flush=True)
 ##                    if Debug:
 ##                        print(splitActions)
                     actionsRemain = actionsRemain - set(splitActions)
@@ -794,19 +793,24 @@ class IntegerQuantilesSortingDigraph(IntegerBipolarOutrankingDigraph):
 ##                    spa = dumps(splitActions,-1)
 ##                    fo.write(spa)
 ##                    fo.close()
-                    jobs = []
+                    #jobs = []
                     splitThread = _myThread1(j,self,InitialSplit,
                                            tempDirName,splitActions,
                                            hasNoVeto,hasBipolarVeto,
                                            hasSymmetricThresholds,
                                            StoreSorting,Debug)
                     splitThread.start()
-                    jobs.append(splitThread)
+                    #jobs.append(splitThread)
 
-                for proc in jobs:
-                    proc.join()
-                while active_children() != []:
-                    pass
+                #for proc in jobs:
+                #    proc.join()
+                from time import sleep
+                nch = len(active_children())
+                #while active_children() != []:
+                while nch > 0:
+                    #print(nch)
+                    nch = len(active_children())
+                    sleep(1)
 
                 if Comments:    
                     print('Exiting computing threads')

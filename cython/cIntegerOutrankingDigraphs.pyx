@@ -656,7 +656,7 @@ Example Python session:
             splitActionsList = []
             for j in range(nbrOfJobs):
                 if Comments:
-                    print('Thread = %d/%d' % (j+1,nbrOfJobs),end=" ")
+                    print('Thread = %d/%d' % (j+1,nbrOfJobs),end=" ",flush=True)
                 splitActions=array.array('i',[])
                 for k in range(nit):
                     if j < (nbrOfJobs -1) and i < n:
@@ -665,7 +665,7 @@ Example Python session:
                         splitActions = array.array('i',actionsRemain)
                     i += 1
                 if Comments:
-                    print('%d' % (len(splitActions)) )
+                    print('%d' % (len(splitActions)),flush=True )
                 actionsRemain = actionsRemain - set(splitActions)
                 splitActionsList.append(splitActions)
                 # foName = tempDirName+'/splitActions-'+str(j)+'.py'
