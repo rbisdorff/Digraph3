@@ -523,7 +523,7 @@ if __name__ == '__main__':
         commonScale=(0.0,1000.0))
     bg = MPBipolarOutrankingDigraph(argPerfTab=pt,Normalized=True,
                                     startMethod=None,
-                                    nbrCores=1,Comments=True)
+                                    nbrCores=5,Comments=True)
     print(bg)
     #bg.showRelationTable()
     #g = BipolarOutrankingDigraph(pt)
