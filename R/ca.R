@@ -1,10 +1,10 @@
 #######################################
 # MICS-3 Computational Statistics
 # Correspondance Analysis of two-way contingency tables
-# R.B. Nay 2018
+# R.B. May 2018
 # https://en.wikipedia.org/wiki/Correspondence_analysis
 #######################################
-ca = function(C,axis1=1,axis2=2,axis3=3,hlabels=0.75) {
+ca = function(C,axis1=1,axis2=2,axis3=3,hnlabels=0.75,hmlabels=0.75) {
 # C is a contingency table as m x n matrix with given row and col names.
 # computing the eigen decomposition on the samllest of the dimensions
 if (dim(C)[1] < dim(C)[2]) {C = t(C) } 
@@ -42,8 +42,8 @@ miny2= min(c(Fn[,a2],Fm[,a2]))
 maxy2= max(c(Fn[,a2],Fm[,a2]))
 plot(Fn[,a1],Fn[,a2],"n",xlab=paste("axis ",a1,":",val[a1]*100,"%"),
       ylab=paste("axis ",a2,":",val[a2]*100,"%"), ylim= c(miny2,maxy2), xlim=c(minx1,maxx1))
-text(Fn[,a1],Fn[,a2],rownames(Fn),cex=hlabels)
-text(Fm[,a1],Fm[,a2],rownames(Fm),col='red',cex=hlabels)
+text(Fn[,a1],Fn[,a2],rownames(Fn),cex=hnlabels)
+text(Fm[,a1],Fm[,a2],rownames(Fm),col='red',cex=hmlabels)
 abline(h=0,lty=2,col="gray")
 abline(v=0,lty=2,col="gray")
 # axes 2 and 3
@@ -55,8 +55,8 @@ miny3= min(c(Fn[,a2],Fm[,a2]))
 maxy3= max(c(Fn[,a2],Fm[,a2]))
 plot(Fn[,a1],Fn[,a2],"n",xlab=paste("axis ",a1,":",val[a1]*100,"%"),
       ylab=paste("axis ",a2,":",val[a2]*100,"%"), ylim= c(miny3,maxy3), xlim=c(minx2,maxx2))
-text(Fn[,a1],Fn[,a2],rownames(Fn),cex=hlabels)
-text(Fm[,a1],Fm[,a2],rownames(Fm),col='red',cex=hlabels)
+text(Fn[,a1],Fn[,a2],rownames(Fn),cex=hnlabels)
+text(Fm[,a1],Fm[,a2],rownames(Fm),col='red',cex=hmlabels)
 abline(h=0,lty=2,col="gray")
 abline(v=0,lty=2,col="gray")
 # axes 1 and 3
@@ -68,8 +68,8 @@ miny3= min(c(Fn[,a2],Fm[,a2]))
 maxy3= max(c(Fn[,a2],Fm[,a2]))
 plot(Fn[,a1],Fn[,a2],"n",xlab=paste("axis ",a1,":",val[a1]*100,"%"),
       ylab=paste("axis ",a2,":",val[a2]*100,"%"), ylim= c(miny3,maxy3), xlim=c(minx1,maxx1))
-text(Fn[,a1],Fn[,a2],rownames(Fn),cex=hlabels)
-text(Fm[,a1],Fm[,a2],rownames(Fm),col='red',cex=hlabels)
+text(Fn[,a1],Fn[,a2],rownames(Fn),cex=hnlabels)
+text(Fm[,a1],Fm[,a2],rownames(Fm),col='red',cex=hmlabels)
 abline(h=0,lty=2,col="gray")
 abline(v=0,lty=2,col="gray")
 # barplot of the eigenvalues
