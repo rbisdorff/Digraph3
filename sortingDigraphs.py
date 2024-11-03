@@ -411,6 +411,7 @@ class SortingDigraph(BipolarOutrankingDigraph):
                         tempDir=tempDir,
                         WithConcordanceRelation=False,
                         WithVetoCounts=False,
+                        Comments=False,
                         Debug=Debug)
             if LowerClosed:
                 for x in actionsOrig.keys():
