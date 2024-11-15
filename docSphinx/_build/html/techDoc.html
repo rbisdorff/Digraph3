@@ -1,5 +1,3 @@
-
-
 <!DOCTYPE html>
 <html class="writer-html5" lang="en" data-content_root="./">
 <head>
@@ -10,8 +8,8 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>2. Technical Reference of the Digraph3 modules &mdash; Digraph3 3.13.0 documentation</title>
       <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=fa44fd50" />
-      <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=e59714d7" />
-      <link rel="stylesheet" type="text/css" href="_static/graphviz.css?v=4ae1632d" />
+      <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=19f00094" />
+      <link rel="stylesheet" type="text/css" href="_static/graphviz.css?v=fd3f3429" />
       <link rel="stylesheet" type="text/css" href="_static/copybutton.css?v=76b2166b" />
       <link rel="stylesheet" type="text/css" href="_static/css/tooltipster.custom.css?v=7bc2f056" />
       <link rel="stylesheet" type="text/css" href="_static/css/tooltipster.bundle.min.css?v=37217874" />
@@ -24,16 +22,20 @@
       <link rel="stylesheet" type="text/css" href="_static/css/sphinx_rtd_theme.css?v=3234e928" />
 
   
-      <script src="_static/jquery.js?v=5d32c60e"></script>
-      <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-      <script src="_static/documentation_options.js?v=6aaf4047"></script>
-      <script src="_static/doctools.js?v=9bcbadda"></script>
-      <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
-      <script src="_static/clipboard.min.js?v=a7894cd8"></script>
-      <script src="_static/copybutton.js?v=15d7cbb8"></script>
-      <script src="_static/js/hoverxref.js?v=ef0cf3f7"></script>
-      <script src="_static/js/tooltipster.bundle.min.js?v=18bf091b"></script>
-      <script src="_static/js/micromodal.min.js?v=04d6302d"></script>
+  <!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script src="_static/jquery.js?v=5d32c60e"></script>
+        <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script src="_static/documentation_options.js?v=6aaf4047"></script>
+        <script src="_static/doctools.js?v=9a2dae69"></script>
+        <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+        <script src="_static/clipboard.min.js?v=a7894cd8"></script>
+        <script src="_static/copybutton.js?v=15d7cbb8"></script>
+        <script src="_static/js/hoverxref.js?v=608c77cb"></script>
+        <script src="_static/js/tooltipster.bundle.min.js?v=18bf091b"></script>
+        <script src="_static/js/micromodal.min.js?v=04d6302d"></script>
     <script src="_static/js/theme.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
@@ -53,6 +55,9 @@
             Digraph3
               <img src="_static/htmlLogo.png" class="logo" alt="Logo"/>
           </a>
+              <div class="version">
+                Python 3.13
+              </div>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
     <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
@@ -1749,8 +1754,7 @@ and/or negative circular shifts of value 1 to n.</div>
 <span class="gp">&gt;&gt;&gt;</span>
 </pre></div>
 </div>
-<a class="reference internal image-reference" href="_images/c8.png"><img alt="circulant [1,3] digraph" class="align-center" src="_images/c8.png" style="width: 300px;" />
-</a>
+<a class="reference internal image-reference" href="_images/c8.png"><img alt="circulant [1,3] digraph" class="align-center" src="_images/c8.png" style="width: 300px;" /></a>
 <dl class="py method">
 <dt class="sig sig-object py" id="digraphs.CirculantDigraph.showShort">
 <span class="sig-name descname"><span class="pre">showShort</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/digraphs.html#CirculantDigraph.showShort"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#digraphs.CirculantDigraph.showShort" title="Link to this definition"></a></dt>
@@ -3573,8 +3577,7 @@ we brake the circuits on their weakest arc.</p>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">gcd</span><span class="o">.</span><span class="n">showHTMLRelationHeatmap</span><span class="p">(</span><span class="n">colorLevels</span><span class="o">=</span><span class="mi">7</span><span class="p">,</span><span class="n">ndigits</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
 </pre></div>
 </div>
-<a class="reference internal image-reference" href="_images/relationHeatmap.png"><img alt="Browser view of a relation map" class="align-center" src="_images/relationHeatmap.png" style="width: 600px;" />
-</a>
+<a class="reference internal image-reference" href="_images/relationHeatmap.png"><img alt="Browser view of a relation map" class="align-center" src="_images/relationHeatmap.png" style="width: 600px;" /></a>
 </dd></dl>
 
 <dl class="py method">
@@ -3594,8 +3597,7 @@ instead in the current working directory.</p>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">gcd</span><span class="o">.</span><span class="n">showHTMLRelationMap</span><span class="p">(</span><span class="n">rankingRule</span><span class="o">=</span><span class="s2">&quot;NetFlows&quot;</span><span class="p">)</span>
 </pre></div>
 </div>
-<a class="reference internal image-reference" href="_images/relationMap.png"><img alt="Browser view of a relation map" class="align-center" src="_images/relationMap.png" style="width: 600px;" />
-</a>
+<a class="reference internal image-reference" href="_images/relationMap.png"><img alt="Browser view of a relation map" class="align-center" src="_images/relationMap.png" style="width: 600px;" /></a>
 </dd></dl>
 
 <dl class="py method">
@@ -3726,8 +3728,7 @@ the Digraph instance.</p>
 </pre></div>
 </div>
 <p><em>Figure</em>: The symmetry axes of the non isomorphic MISs of the 12-cycle:</p>
-<a class="reference internal image-reference" href="_images/c12.png"><img alt="The 4 non isomorphic MIS of the 12-cycle graph" class="align-center" src="_images/c12.png" style="width: 400px;" />
-</a>
+<a class="reference internal image-reference" href="_images/c12.png"><img alt="The 4 non isomorphic MIS of the 12-cycle graph" class="align-center" src="_images/c12.png" style="width: 400px;" /></a>
 <p><em>Reference</em>: R. Bisdorff and J.L. Marichal (2008). Counting non-isomorphic maximal independent sets of the n-cycle graph. <em>Journal of Integer Sequences</em>, Vol. 11 Article 08.5.7 (<a class="reference external" href="https://www.cs.uwaterloo.ca/journals/JIS/VOL11/Marichal/marichal.html">openly accessible here</a>)</p>
 </dd></dl>
 
@@ -4933,8 +4934,7 @@ presenting the decision alternatives.</p></li>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">rt</span><span class="o">.</span><span class="n">showHTMLPerformanceHeatmap</span><span class="p">(</span><span class="n">colorLevels</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span><span class="n">Correlations</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 </pre></div>
 </div>
-<a class="reference internal image-reference" href="_images/perfTabsExample.png"><img alt="HTML heat map of the performance tableau" class="align-center" src="_images/perfTabsExample.png" style="width: 600px;" />
-</a>
+<a class="reference internal image-reference" href="_images/perfTabsExample.png"><img alt="HTML heat map of the performance tableau" class="align-center" src="_images/perfTabsExample.png" style="width: 600px;" /></a>
 </dd></dl>
 
 <dl class="py method">
@@ -6847,8 +6847,7 @@ presenting the decision alternatives.</p></li>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">rt</span><span class="o">.</span><span class="n">showHTMLPerformanceHeatmap</span><span class="p">(</span><span class="n">colorLevels</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span><span class="n">Correlations</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 </pre></div>
 </div>
-<a class="reference internal image-reference" href="_images/perfTabsExample.png"><img alt="HTML heat map of the performance tableau" class="align-center" src="_images/perfTabsExample.png" style="width: 600px;" />
-</a>
+<a class="reference internal image-reference" href="_images/perfTabsExample.png"><img alt="HTML heat map of the performance tableau" class="align-center" src="_images/perfTabsExample.png" style="width: 600px;" /></a>
 </dd></dl>
 
 <dl class="py method">
@@ -7025,8 +7024,7 @@ the main program entry must be started with a *__name__==’__main__’</em> tes
 </div>
 </dd>
 </dl>
-<a class="reference internal image-reference" href="_images/heatMap3.png"><img alt="usage example of Learned Quantiles Rating Digraph" class="align-center" src="_images/heatMap3.png" style="width: 500px;" />
-</a>
+<a class="reference internal image-reference" href="_images/heatMap3.png"><img alt="usage example of Learned Quantiles Rating Digraph" class="align-center" src="_images/heatMap3.png" style="width: 500px;" /></a>
 <dl class="py method">
 <dt class="sig sig-object py" id="sortingDigraphs.LearnedQuantilesRatingDigraph.computeCategoryContents">
 <span class="sig-name descname"><span class="pre">computeCategoryContents</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">Debug</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/sortingDigraphs.html#LearnedQuantilesRatingDigraph.computeCategoryContents"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#sortingDigraphs.LearnedQuantilesRatingDigraph.computeCategoryContents" title="Link to this definition"></a></dt>
@@ -7144,8 +7142,7 @@ presenting the decision alternatives.</p></li>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">rt</span><span class="o">.</span><span class="n">showHTMLPerformanceHeatmap</span><span class="p">(</span><span class="n">colorLevels</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span><span class="n">Correlations</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 </pre></div>
 </div>
-<a class="reference internal image-reference" href="_images/perfTabsExample.png"><img alt="HTML heat map of the performance tableau" class="align-center" src="_images/perfTabsExample.png" style="width: 600px;" />
-</a>
+<a class="reference internal image-reference" href="_images/perfTabsExample.png"><img alt="HTML heat map of the performance tableau" class="align-center" src="_images/perfTabsExample.png" style="width: 600px;" /></a>
 </dd></dl>
 
 <dl class="py method">
@@ -7187,8 +7184,7 @@ see <code class="xref py py-meth docutils literal notranslate"><span class="pre"
 <span class="gp">... </span>                          <span class="n">colorLevels</span> <span class="o">=</span> <span class="mi">5</span><span class="p">)</span>
 </pre></div>
 </div>
-<a class="reference internal image-reference" href="_images/heatMap1.png"><img alt="usage example of Learned Quantiles Rating Digraph" class="align-center" src="_images/heatMap1.png" style="width: 550px;" />
-</a>
+<a class="reference internal image-reference" href="_images/heatMap1.png"><img alt="usage example of Learned Quantiles Rating Digraph" class="align-center" src="_images/heatMap1.png" style="width: 550px;" /></a>
 </dd></dl>
 
 <dl class="py method">
@@ -7257,8 +7253,7 @@ the main program entry must be started with a *__name__==’__main__’</em> tes
 <span class="gp">&gt;&gt;&gt; </span><span class="n">qs</span><span class="o">.</span><span class="n">exportGraphViz</span><span class="p">(</span><span class="s1">&#39;quantilesSorting&#39;</span><span class="p">)</span>
 </pre></div>
 </div>
-<a class="reference internal image-reference" href="_images/quantilesSorting.png"><img alt="Example of quantiles sorting digraph" class="align-center" src="_images/quantilesSorting.png" style="width: 400px;" />
-</a>
+<a class="reference internal image-reference" href="_images/quantilesSorting.png"><img alt="Example of quantiles sorting digraph" class="align-center" src="_images/quantilesSorting.png" style="width: 400px;" /></a>
 <div class="admonition warning">
 <p class="admonition-title">Warning</p>
 <p>The multiprocessing <a class="reference internal" href="#sortingDigraphs.QuantilesSortingDigraph" title="sortingDigraphs.QuantilesSortingDigraph"><code class="xref py py-class docutils literal notranslate"><span class="pre">QuantilesSortingDigraph</span></code></a> constructor uses
@@ -7990,8 +7985,7 @@ filtering from SortingDigraph instances.</p>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">bg</span><span class="o">.</span><span class="n">exportSortingGraphViz</span><span class="p">(</span><span class="n">actionsSubset</span><span class="o">=</span><span class="n">bg</span><span class="o">.</span><span class="n">boostedRanking</span><span class="p">[:</span><span class="mi">100</span><span class="p">])</span>
 </pre></div>
 </div>
-<a class="reference internal image-reference" href="_images/preRankedDigraph.png"><img alt="pre-ranked digraph" class="align-center" src="_images/preRankedDigraph.png" style="width: 400px;" />
-</a>
+<a class="reference internal image-reference" href="_images/preRankedDigraph.png"><img alt="pre-ranked digraph" class="align-center" src="_images/preRankedDigraph.png" style="width: 400px;" /></a>
 </dd></dl>
 
 <dl class="py method">
@@ -8232,8 +8226,7 @@ given performance tableau.</p>
 </div>
 </dd>
 </dl>
-<a class="reference internal image-reference" href="_images/examplePerfQuantiles.png"><img alt="Example limiting quantiles html show method" class="align-center" src="_images/examplePerfQuantiles.png" style="width: 400px;" />
-</a>
+<a class="reference internal image-reference" href="_images/examplePerfQuantiles.png"><img alt="Example limiting quantiles html show method" class="align-center" src="_images/examplePerfQuantiles.png" style="width: 400px;" /></a>
 <dl class="py method">
 <dt class="sig sig-object py" id="performanceQuantiles.PerformanceQuantiles.computeQuantileProfile">
 <span class="sig-name descname"><span class="pre">computeQuantileProfile</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">p</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">qFreq</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">Debug</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/performanceQuantiles.html#PerformanceQuantiles.computeQuantileProfile"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#performanceQuantiles.PerformanceQuantiles.computeQuantileProfile" title="Link to this definition"></a></dt>
@@ -9136,8 +9129,7 @@ added by the class constructor.</p>
 </pre></div>
 </div>
 <p><em>Figure</em>: The path that minimizes the sum of the costs labels</p>
-<a class="reference internal image-reference" href="_images/testDP.png"><img alt="The dynamic programming solution" class="align-center" src="_images/testDP.png" style="width: 400px;" />
-</a>
+<a class="reference internal image-reference" href="_images/testDP.png"><img alt="The dynamic programming solution" class="align-center" src="_images/testDP.png" style="width: 400px;" /></a>
 </dd></dl>
 
 <p>Back to the <a class="reference internal" href="#contents-table-label"><span class="std std-ref">Table of Contents</span></a></p>
@@ -9546,8 +9538,7 @@ using Kruskal’s greedy algorithm on the dual valuation.</p>
 </div>
 </dd>
 </dl>
-<a class="reference internal image-reference" href="_images/spanningTree.png"><img alt="Colored bes determined panning tree" class="align-center" src="_images/spanningTree.png" style="width: 300px;" />
-</a>
+<a class="reference internal image-reference" href="_images/spanningTree.png"><img alt="Colored bes determined panning tree" class="align-center" src="_images/spanningTree.png" style="width: 300px;" /></a>
 </dd></dl>
 
 <dl class="py class">
@@ -9617,8 +9608,7 @@ the order is the length of the given list.</p></li>
 </dd>
 </dl>
 <p>Example of 7-cycle graph instance:</p>
-<a class="reference internal image-reference" href="_images/7cycle.png"><img alt="7-cycle instance" class="align-center" src="_images/7cycle.png" style="width: 300px;" />
-</a>
+<a class="reference internal image-reference" href="_images/7cycle.png"><img alt="7-cycle instance" class="align-center" src="_images/7cycle.png" style="width: 300px;" /></a>
 </dd></dl>
 
 <dl class="py class">
@@ -9916,8 +9906,7 @@ of the vertex keys.</p>
 </div>
 </dd>
 </dl>
-<a class="reference internal image-reference" href="_images/orientedGraph.png"><img alt="Random graph" class="align-center" src="_images/orientedGraph.png" style="width: 300px;" />
-</a>
+<a class="reference internal image-reference" href="_images/orientedGraph.png"><img alt="Random graph" class="align-center" src="_images/orientedGraph.png" style="width: 300px;" /></a>
 </dd></dl>
 
 <dl class="py method">
@@ -9931,8 +9920,7 @@ of the vertex keys.</p>
 </div>
 </dd>
 </dl>
-<a class="reference internal image-reference" href="_images/randomGraph.png"><img alt="Random graph" class="align-center" src="_images/randomGraph.png" style="width: 300px;" />
-</a>
+<a class="reference internal image-reference" href="_images/randomGraph.png"><img alt="Random graph" class="align-center" src="_images/randomGraph.png" style="width: 300px;" /></a>
 </dd></dl>
 
 <dl class="py method">
@@ -10113,8 +10101,7 @@ temporary Grid graphs of dimension n times m.</p>
 </dd>
 </dl>
 <p>Example of 5x5 GridGraph instance:</p>
-<a class="reference internal image-reference" href="_images/grid-5-5.png"><img alt="5x5 grid instance" class="align-center" src="_images/grid-5-5.png" style="width: 300px;" />
-</a>
+<a class="reference internal image-reference" href="_images/grid-5-5.png"><img alt="5x5 grid instance" class="align-center" src="_images/grid-5-5.png" style="width: 300px;" /></a>
 <dl class="py method">
 <dt class="sig sig-object py" id="graphs.GridGraph.showShort">
 <span class="sig-name descname"><span class="pre">showShort</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/graphs.html#GridGraph.showShort"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#graphs.GridGraph.showShort" title="Link to this definition"></a></dt>
@@ -10154,8 +10141,7 @@ intervals, ie pairs (a,b) of integer numbers where a &lt; b.</p>
 </div>
 </dd>
 </dl>
-<a class="reference internal image-reference" href="_images/grid-15-15-ising.png"><img alt="ising configuration of a 15x15 grid with beta=0.3 " class="align-center" src="_images/grid-15-15-ising.png" style="width: 300px;" />
-</a>
+<a class="reference internal image-reference" href="_images/grid-15-15-ising.png"><img alt="ising configuration of a 15x15 grid with beta=0.3 " class="align-center" src="_images/grid-15-15-ising.png" style="width: 300px;" /></a>
 <dl class="py method">
 <dt class="sig sig-object py" id="graphs.IsingModel.computeSpinEnergy">
 <span class="sig-name descname"><span class="pre">computeSpinEnergy</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/graphs.html#IsingModel.computeSpinEnergy"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#graphs.IsingModel.computeSpinEnergy" title="Link to this definition"></a></dt>
@@ -10268,8 +10254,7 @@ Odd cyle graphs do not admid any perfect matching.</p>
 <span class="go">circo -Tpng maxMatchingcyleGraph.dot -o maxMatchingcyleGraph.png</span>
 </pre></div>
 </div>
-<a class="reference internal image-reference" href="_images/maxMatchingcycleGraph.png"><img alt="maximum matching colored c8" class="align-center" src="_images/maxMatchingcycleGraph.png" style="width: 300px;" />
-</a>
+<a class="reference internal image-reference" href="_images/maxMatchingcycleGraph.png"><img alt="maximum matching colored c8" class="align-center" src="_images/maxMatchingcycleGraph.png" style="width: 300px;" /></a>
 </dd></dl>
 
 <dl class="py class">
@@ -10317,8 +10302,7 @@ that is a random MIS generator.</p>
 </div>
 </dd>
 </dl>
-<a class="reference internal image-reference" href="_images/c15-mis.png"><img alt="15-cycle with colored MIS" class="align-center" src="_images/c15-mis.png" style="width: 300px;" />
-</a>
+<a class="reference internal image-reference" href="_images/c15-mis.png"><img alt="15-cycle with colored MIS" class="align-center" src="_images/c15-mis.png" style="width: 300px;" /></a>
 <dl class="py method">
 <dt class="sig sig-object py" id="graphs.MISModel.checkMIS">
 <span class="sig-name descname"><span class="pre">checkMIS</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">Comments</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/graphs.html#MISModel.checkMIS"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#graphs.MISModel.checkMIS" title="Link to this definition"></a></dt>
@@ -10428,8 +10412,7 @@ Annals of Discrete Mathematics 57, Elsevier, Chapter 7, pp 157-170.</p>
 <span class="go">fdp -Tpng permutationGraph.dot -o permutationGraph.png</span>
 </pre></div>
 </div>
-<a class="reference internal image-reference" href="_images/permutationGraph.png"><img alt="Default permutation graph" class="align-center" src="_images/permutationGraph.png" style="width: 300px;" />
-</a>
+<a class="reference internal image-reference" href="_images/permutationGraph.png"><img alt="Default permutation graph" class="align-center" src="_images/permutationGraph.png" style="width: 300px;" /></a>
 <dl class="py method">
 <dt class="sig sig-object py" id="graphs.PermutationGraph.computeMinimalVertexColoring">
 <span class="sig-name descname"><span class="pre">computeMinimalVertexColoring</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">colors</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">Comments</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">Debug</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/graphs.html#PermutationGraph.computeMinimalVertexColoring"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#graphs.PermutationGraph.computeMinimalVertexColoring" title="Link to this definition"></a></dt>
@@ -10465,8 +10448,7 @@ This orientation is always transitive and delivers a weak ordering of the vertic
 <span class="go">dot -Grankdir=TB -Tpng oriented_permutationGraph.dot -o oriented_permutationGraph.png</span>
 </pre></div>
 </div>
-<a class="reference internal image-reference" href="_images/oriented_permutationGraph.png"><img alt="Transitive orientation of a permutation graph" class="align-center" src="_images/oriented_permutationGraph.png" style="width: 200px;" />
-</a>
+<a class="reference internal image-reference" href="_images/oriented_permutationGraph.png"><img alt="Transitive orientation of a permutation graph" class="align-center" src="_images/oriented_permutationGraph.png" style="width: 200px;" /></a>
 </dd></dl>
 
 </dd></dl>
@@ -10503,8 +10485,7 @@ nSim simulation steps (default = len(graph.edges)).</p>
 </div>
 </dd>
 </dl>
-<a class="reference internal image-reference" href="_images/grid-6-6-qcoloring.png"><img alt="3 coloring of a 6x6 grid" class="align-center" src="_images/grid-6-6-qcoloring.png" style="width: 300px;" />
-</a>
+<a class="reference internal image-reference" href="_images/grid-6-6-qcoloring.png"><img alt="3 coloring of a 6x6 grid" class="align-center" src="_images/grid-6-6-qcoloring.png" style="width: 300px;" /></a>
 </div></blockquote>
 <dl class="py method">
 <dt class="sig sig-object py" id="graphs.Q_Coloring.exportGraphViz">
@@ -10542,8 +10523,7 @@ nSim simulation steps (default = len(graph.edges)).</p>
 </div>
 </dd>
 </dl>
-<a class="reference internal image-reference" href="_images/randomGraph-qcoloring.png"><img alt="3-coloring of a random graph" class="align-center" src="_images/randomGraph-qcoloring.png" style="width: 300px;" />
-</a>
+<a class="reference internal image-reference" href="_images/randomGraph-qcoloring.png"><img alt="3-coloring of a random graph" class="align-center" src="_images/randomGraph-qcoloring.png" style="width: 300px;" /></a>
 </dd></dl>
 
 </dd></dl>
@@ -10604,8 +10584,7 @@ temporary random regular graphs of fixed degrees.</p>
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">graphs.</span></span><span class="sig-name descname"><span class="pre">RandomSpanningForest</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">g</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">seed</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">Debug</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/graphs.html#RandomSpanningForest"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#graphs.RandomSpanningForest" title="Link to this definition"></a></dt>
 <dd><p>Random instance of a spanning forest (one or more trees)
 generated from a random depth first search graph g traversal.</p>
-<a class="reference internal image-reference" href="_images/spanningForest.png"><img alt="randomSpanningForest instance" class="align-center" src="_images/spanningForest.png" style="width: 300px;" />
-</a>
+<a class="reference internal image-reference" href="_images/spanningForest.png"><img alt="randomSpanningForest instance" class="align-center" src="_images/spanningForest.png" style="width: 300px;" /></a>
 <dl class="py method">
 <dt class="sig sig-object py" id="graphs.RandomSpanningForest.computeAverageTreeDetermination">
 <span class="sig-name descname"><span class="pre">computeAverageTreeDetermination</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">dfs</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/graphs.html#RandomSpanningForest.computeAverageTreeDetermination"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#graphs.RandomSpanningForest.computeAverageTreeDetermination" title="Link to this definition"></a></dt>
@@ -10623,16 +10602,14 @@ generated with Wilson’s algorithm from a connected Graph g instance.</p>
 <p class="admonition-title">Note</p>
 <p>Wilson’s algorithm only works for connecte graphs.</p>
 </div>
-<a class="reference internal image-reference" href="_images/randomSpanningTree.png"><img alt="randomSpanningTree instance" class="align-center" src="_images/randomSpanningTree.png" style="width: 300px;" />
-</a>
+<a class="reference internal image-reference" href="_images/randomSpanningTree.png"><img alt="randomSpanningTree instance" class="align-center" src="_images/randomSpanningTree.png" style="width: 300px;" /></a>
 </dd></dl>
 
 <dl class="py class">
 <dt class="sig sig-object py" id="graphs.RandomTree">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">graphs.</span></span><span class="sig-name descname"><span class="pre">RandomTree</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">order</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">vertices</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">prueferCode</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">seed</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">Debug</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/graphs.html#RandomTree"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#graphs.RandomTree" title="Link to this definition"></a></dt>
 <dd><p>Instance of a tree generated from a random Prüfer code.</p>
-<a class="reference internal image-reference" href="_images/randomTree.png"><img alt="radomTree instance" class="align-center" src="_images/randomTree.png" style="width: 300px;" />
-</a>
+<a class="reference internal image-reference" href="_images/randomTree.png"><img alt="radomTree instance" class="align-center" src="_images/randomTree.png" style="width: 300px;" /></a>
 </dd></dl>
 
 <dl class="py class">
@@ -10671,8 +10648,7 @@ Markov’s Theorem and 100 Years of the Uniqueness Conjecture, Springer, 2013, p
 <span class="gp">&gt;&gt;&gt; </span><span class="n">s4_7</span><span class="o">.</span><span class="n">exportGraphViz</span><span class="p">(</span><span class="s1">&#39;4_7_snake&#39;</span><span class="p">,</span><span class="n">lineWidth</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span><span class="n">arcColor</span><span class="o">=</span><span class="s1">&#39;red&#39;</span><span class="p">)</span>
 </pre></div>
 </div>
-<a class="reference internal image-reference" href="_images/4_7_snake.png"><img alt="4/7 snake graph instance" class="align-center" src="_images/4_7_snake.png" style="width: 300px;" />
-</a>
+<a class="reference internal image-reference" href="_images/4_7_snake.png"><img alt="4/7 snake graph instance" class="align-center" src="_images/4_7_snake.png" style="width: 300px;" /></a>
 <dl class="py method">
 <dt class="sig sig-object py" id="graphs.SnakeGraph.showShort">
 <span class="sig-name descname"><span class="pre">showShort</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">WithVertices</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/graphs.html#SnakeGraph.showShort"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#graphs.SnakeGraph.showShort" title="Link to this definition"></a></dt>
@@ -10726,8 +10702,7 @@ temporary triangulated grids of dimension n times m.</p>
 </dd>
 </dl>
 <p>Example of 5x5 triangulated grid instance:</p>
-<a class="reference internal image-reference" href="_images/triangular-5-5.png"><img alt="triangulated 5x5 grid" class="align-center" src="_images/triangular-5-5.png" style="width: 300px;" />
-</a>
+<a class="reference internal image-reference" href="_images/triangular-5-5.png"><img alt="triangulated 5x5 grid" class="align-center" src="_images/triangular-5-5.png" style="width: 300px;" /></a>
 <dl class="py method">
 <dt class="sig sig-object py" id="graphs.TriangulatedGrid.showShort">
 <span class="sig-name descname"><span class="pre">showShort</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/graphs.html#TriangulatedGrid.showShort"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#graphs.TriangulatedGrid.showShort" title="Link to this definition"></a></dt>
@@ -11085,8 +11060,7 @@ repeating <em>self.size</em> Bernouilli trials.</p>
 <dt>Cauchy quantile (inverse cdf) function:</dt><dd><p>Q(x|position,scale) = position + scale*tan[pi(x-1/2)]</p>
 </dd>
 </dl>
-<a class="reference internal image-reference" href="_images/cauchyDistribution.png"><img alt="Cauchy Distribution" class="align-center" src="_images/cauchyDistribution.png" style="width: 500px;" />
-</a>
+<a class="reference internal image-reference" href="_images/cauchyDistribution.png"><img alt="Cauchy Distribution" class="align-center" src="_images/cauchyDistribution.png" style="width: 500px;" /></a>
 <dl class="py method">
 <dt class="sig sig-object py" id="randomNumbers.CauchyRandomVariable.random">
 <span class="sig-name descname"><span class="pre">random</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/randomNumbers.html#CauchyRandomVariable.random"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#randomNumbers.CauchyRandomVariable.random" title="Link to this definition"></a></dt>
@@ -11175,8 +11149,7 @@ repeating <em>self.size</em> Bernouilli trials.</p>
 </ul>
 </dd>
 </dl>
-<a class="reference internal image-reference" href="_images/extTrDistribution.png"><img alt="Extended triangular distribution" class="align-center" src="_images/extTrDistribution.png" style="width: 500px;" />
-</a>
+<a class="reference internal image-reference" href="_images/extTrDistribution.png"><img alt="Extended triangular distribution" class="align-center" src="_images/extTrDistribution.png" style="width: 500px;" /></a>
 <dl class="py method">
 <dt class="sig sig-object py" id="randomNumbers.ExtendedTriangularRandomVariable.random">
 <span class="sig-name descname"><span class="pre">random</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/randomNumbers.html#ExtendedTriangularRandomVariable.random"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#randomNumbers.ExtendedTriangularRandomVariable.random" title="Link to this definition"></a></dt>
@@ -11365,10 +11338,8 @@ when switching, becomes: <em>(n-1)/n</em>.</p>
  &gt; plot(x$x1,x$x3) 
 </pre></div>
 </div>
-<a class="reference internal image-reference" href="_images/farey3D.png"><img alt="Checking hypercube filling" class="align-center" src="_images/farey3D.png" style="width: 500px;" />
-</a>
-<a class="reference internal image-reference" href="_images/fareyx1x3.png"><img alt="Checking projection regularity" class="align-center" src="_images/fareyx1x3.png" style="width: 400px;" />
-</a>
+<a class="reference internal image-reference" href="_images/farey3D.png"><img alt="Checking hypercube filling" class="align-center" src="_images/farey3D.png" style="width: 500px;" /></a>
+<a class="reference internal image-reference" href="_images/fareyx1x3.png"><img alt="Checking projection regularity" class="align-center" src="_images/fareyx1x3.png" style="width: 400px;" /></a>
 </dd></dl>
 
 <dl class="py class">
@@ -11413,12 +11384,9 @@ when switching, becomes: <em>(n-1)/n</em>.</p>
 &gt; plot(x$x1,x$x3,pch=&quot;°&quot;)
 </pre></div>
 </div>
-<a class="reference internal image-reference" href="_images/korobov3D.png"><img alt="Checking projection regularity" class="align-center" src="_images/korobov3D.png" style="width: 500px;" />
-</a>
-<a class="reference internal image-reference" href="_images/korobovProjection12.png"><img alt="Checking projection regularity" class="align-center" src="_images/korobovProjection12.png" style="width: 400px;" />
-</a>
-<a class="reference internal image-reference" href="_images/korobovProjection13.png"><img alt="Checking projection regularity" class="align-center" src="_images/korobovProjection13.png" style="width: 400px;" />
-</a>
+<a class="reference internal image-reference" href="_images/korobov3D.png"><img alt="Checking projection regularity" class="align-center" src="_images/korobov3D.png" style="width: 500px;" /></a>
+<a class="reference internal image-reference" href="_images/korobovProjection12.png"><img alt="Checking projection regularity" class="align-center" src="_images/korobovProjection12.png" style="width: 400px;" /></a>
+<a class="reference internal image-reference" href="_images/korobovProjection13.png"><img alt="Checking projection regularity" class="align-center" src="_images/korobovProjection13.png" style="width: 400px;" /></a>
 </dd></dl>
 
 <dl class="py class">
@@ -11753,8 +11721,7 @@ apart from those pairs <em>(a/p)</em>, where <em>a</em> = <em>p</em> = 3 (mod 4)
 <span class="gp">&gt;&gt;&gt; </span><span class="n">aleg</span><span class="o">.</span><span class="n">exportGraphViz</span><span class="p">(</span><span class="s1">&#39;legendreAsym&#39;</span><span class="p">)</span>
 </pre></div>
 </div>
-<a class="reference internal image-reference" href="_images/legendreAsym.png"><img alt="Quadratic residues digraph asymmetric part" class="align-center" src="_images/legendreAsym.png" style="width: 300px;" />
-</a>
+<a class="reference internal image-reference" href="_images/legendreAsym.png"><img alt="Quadratic residues digraph asymmetric part" class="align-center" src="_images/legendreAsym.png" style="width: 300px;" /></a>
 </dd></dl>
 
 <dl class="py function">
@@ -12499,8 +12466,7 @@ to int format.</p>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">rt</span><span class="o">.</span><span class="n">showHTMLPerformanceHeatmap</span><span class="p">(</span><span class="n">colorLevels</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span><span class="n">Correlations</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 </pre></div>
 </div>
-<a class="reference internal image-reference" href="_images/perfTabsExample.png"><img alt="HTML heat map of the performance tableau" class="align-center" src="_images/perfTabsExample.png" style="width: 600px;" />
-</a>
+<a class="reference internal image-reference" href="_images/perfTabsExample.png"><img alt="HTML heat map of the performance tableau" class="align-center" src="_images/perfTabsExample.png" style="width: 600px;" /></a>
 </dd></dl>
 
 <dl class="py method">
@@ -13509,7 +13475,7 @@ in <em>decreasing</em> (default) or <em>increasing</em> preference direction.</p
 <li><p>Colored=True,</p></li>
 <li><p>tableTitle=’Sparse Relation Map’,</p></li>
 <li><p>relationName=’r(x S y)’,</p></li>
-<li><p>symbols=[‘+’,’&amp;middot;’,’&amp;nbsp;’,’&amp;#150;’,’&amp;#151’].</p></li>
+<li><p>symbols=[‘+’,’&amp;middot;’,’&amp;nbsp;‘,’&amp;#150;’,’&amp;#151’].</p></li>
 </ul>
 </dd>
 </dl>
@@ -14392,7 +14358,7 @@ Components are stored in an ordered dictionary.</p>
 
   <div role="contentinfo">
     <p>&#169; Copyright 2012-2024, Raymond Bisdorff.
-      <span class="lastupdated">Last updated on Oct 29, 2024.
+      <span class="lastupdated">Last updated on Nov 15, 2024.
       </span></p>
   </div>
 

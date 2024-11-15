@@ -88,7 +88,7 @@ class _myThread2(Process):
         fo = open(foName,'wb')
         fo.write(dumps(splitCorrelation,-1))
         fo.close()
- 
+
 class Digraph(object):
     
     """
@@ -15157,13 +15157,14 @@ if __name__ == "__main__":
     from randomDigraphs import *
     from decimal import Decimal, getcontext
     t = RandomPerformanceTableau(weightDistribution="equiobjectives",
-                                 numberOfActions=100,numberOfCriteria=7,
+                                 numberOfActions=500,numberOfCriteria=7,
                                              missingDataProbability=0.05,seed=2)
                           
     #t = CircularPerformanceTableau()
     #print(getcontext().prec)
-    g = BipolarOutrankingDigraph(t,Threading=False,startMethod='spawn')
+    g = BipolarOutrankingDigraph(t,Threading=True,startMethod='spawn')
     print(g)
+    t1=time();g.recodeValuation(-2.0,2.0);print(time()-t1)
     #t0 = time()
     #print(g.computeOrdinalCorrelationMP(g,Threading=True,startMethod=None,nbrOfCPUs=None))
     #print(time()-t0)

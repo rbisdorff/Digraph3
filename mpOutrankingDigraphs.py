@@ -434,84 +434,84 @@ class MPBipolarOutrankingDigraph(BipolarOutrankingDigraph):
         
 #-----------------
 
-    def recodeValuation(self,newMin=-1.0,newMax=1.0,ndigits=4,
-                        nbrCores=1,startMethod=None,
-                        Comments=False,Debug=False):
-        """
-        Recodes the characteristic valuation domain according
-        to the parameters given. 
+    # def recodeValuation(self,newMin=-1.0,newMax=1.0,ndigits=4,
+    #                     nbrCores=None,startMethod=None,
+    #                     Comments=False,Debug=False):
+    #     """
+    #     Recodes the characteristic valuation domain according
+    #     to the parameters given. 
 
-        *ndigits* indicates the number of decimal digits of the valuation. 
+    #     *ndigits* indicates the number of decimal digits of the valuation. 
 
-        """
-        from decimal import Decimal
-        #if ndigits is not None:
-        formatString = '%%.%df' % ndigits
-        #else:
-        #    formatString = '%f'
-        oldMax = Decimal(formatString % self.valuationdomain['max'])
-        oldMin = Decimal(formatString % self.valuationdomain['min'])
-        oldMed = Decimal(formatString % self.valuationdomain['med'])
-        try:
-            oldPrecision = self.valuationdomain['precision']
-        except:
-            oldPrecision = Decimal(formatString % 0.0)
+    #     """
+    #     from decimal import Decimal
+    #     #if ndigits is not None:
+    #     formatString = '%%.%df' % ndigits
+    #     #else:
+    #     #    formatString = '%f'
+    #     oldMax = Decimal(formatString % self.valuationdomain['max'])
+    #     oldMin = Decimal(formatString % self.valuationdomain['min'])
+    #     oldMed = Decimal(formatString % self.valuationdomain['med'])
+    #     try:
+    #         oldPrecision = self.valuationdomain['precision']
+    #     except:
+    #         oldPrecision = Decimal(formatString % 0.0)
 
-        oldAmplitude = oldMax - oldMin
-        if Debug:
-            print(oldMin, oldMed, oldMax, oldAmplitude)
-        oldrelation = self.relation
+    #     oldAmplitude = oldMax - oldMin
+    #     if Debug:
+    #         print(oldMin, oldMed, oldMax, oldAmplitude)
+    #     oldrelation = self.relation
 
-        newMin = Decimal(formatString % newMin)
-        newMax = Decimal(formatString % newMax)
-        # the normalized median is set to a strict zero value
-        if newMin == Decimal('-1.00') and newMax == Decimal('1.00'):
-            newMed = Decimal('0.0')
-        else:
-            newMed = Decimal(formatString % ((newMax + newMin)/Decimal('2.0')) )
-        newPrecision = oldPrecision/oldMax
+    #     newMin = Decimal(formatString % newMin)
+    #     newMax = Decimal(formatString % newMax)
+    #     # the normalized median is set to a strict zero value
+    #     if newMin == Decimal('-1.00') and newMax == Decimal('1.00'):
+    #         newMed = Decimal('0.0')
+    #     else:
+    #         newMed = Decimal(formatString % ((newMax + newMin)/Decimal('2.0')) )
+    #     newPrecision = oldPrecision/oldMax
 
-        newAmplitude = newMax - newMin
-        if Debug:
-            print(newMin, newMed, newMax, newAmplitude)
-            print('old and new precison', oldPrecision, newPrecision) 
-        actions = self.actions
-        actionsList = [x for x in actions]
+    #     newAmplitude = newMax - newMin
+    #     if Debug:
+    #         print(newMin, newMed, newMax, newAmplitude)
+    #         print('old and new precison', oldPrecision, newPrecision) 
+    #     actions = self.actions
+    #     actionsList = [x for x in actions]
         
-        if startMethod is None:
-            startMethod = 'spawn'
-        ctx_in_main = multiprocessing.get_context(startMethod)
-        if nbrCores is None:
-            nbrCores = ctx_in_main.cpu_count()
-        splitIndex = qtilingIndexList(actionsList,nbrCores,Debug=False)
-        if Comments:
-            print(splitIndex)
-            args = [oldrelation, oldMax, oldMed, oldMin,
-                  newMax, newMed, newMin,
-                  actionsList,formatString]
-        tasks = [(splitIndex[i],args,
-                  #oldrelation, oldMax, oldMed, oldMin,
-                  #newMax, newMed, newMin,
-                  #actionsList,formatString,
-                  Comments) for i in range(nbrCores)]
+    #     if startMethod is None:
+    #         startMethod = 'spawn'
+    #     ctx_in_main = multiprocessing.get_context(startMethod)
+    #     if nbrCores is None:
+    #         nbrCores = ctx_in_main.cpu_count()
+    #     splitIndex = qtilingIndexList(actionsList,nbrCores,Debug=False)
+    #     if Comments:
+    #         print(splitIndex)
+    #     args = [oldrelation, oldMax, oldMed, oldMin,
+    #               newMax, newMed, newMin,
+    #               actionsList,formatString]
+    #     tasks = [(splitIndex[i],args,
+    #               #oldrelation, oldMax, oldMed, oldMin,
+    #               #newMax, newMed, newMin,
+    #               #actionsList,formatString,
+    #               Comments) for i in range(nbrCores)]
         
-        newrelation = {}
-        with ctx_in_main.Pool(processes=nbrCores) as pool:
-            #print(tasks)
-            for result in pool.imap(worker_func2, tasks):
-                #print(result[0])
-                newrelation.update(result)
+    #     newrelation = {}
+    #     with ctx_in_main.Pool(processes=nbrCores) as pool:
+    #         #print(tasks)
+    #         for result in pool.imap(worker_func2, tasks):
+    #             #print(result[0])
+    #             newrelation.update(result)
         
-        # install new values in self
-        self.valuationdomain['max'] = newMax
-        self.valuationdomain['min'] = newMin
-        self.valuationdomain['med'] = newMed
-        self.valuationdomain['precision'] = newPrecision
-        if ndigits == 0:
-            self.valuationdomain['hasIntegerValuation'] = True
-        else:
-            self.valuationdomain['hasIntegerValuation'] = False
-        self.relation = newrelation
+    #     # install new values in self
+    #     self.valuationdomain['max'] = newMax
+    #     self.valuationdomain['min'] = newMin
+    #     self.valuationdomain['med'] = newMed
+    #     self.valuationdomain['precision'] = newPrecision
+    #     if ndigits == 0:
+    #         self.valuationdomain['hasIntegerValuation'] = True
+    #     else:
+    #         self.valuationdomain['hasIntegerValuation'] = False
+    #     self.relation = newrelation
 
 ###################################
 # testing the module
@@ -525,6 +525,8 @@ if __name__ == '__main__':
                                     startMethod=None,
                                     nbrCores=5,Comments=True)
     print(bg)
+    from time import time as t
+    t1=t();bg.recodeValuation();print(t()-t1)
     #bg.showRelationTable()
     #g = BipolarOutrankingDigraph(pt)
     #g.showRelationTable()
