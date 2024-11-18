@@ -236,7 +236,9 @@ In :numref:`digraphs` we import, for instance, from the :py:mod:`randomDigraphs`
 
    .. note::
 
-      For convenience of redoing the computations, all python code-blocks show in the upper right corner a specific **copy button** which allows to both copy *only* code lines, i.e. lines starting with '>>>' or '...', and stripping the console prompts. The copied code lines may hence be right away *pasted* into a Python console session. As of Python 3.13.0 is necessary to switch in the python terminal console with the F3 function key into a console "*paste mode*" which allows pasting blocks of code. Press F3 key again to return to the regular prompt (see Python 3.13.0 Interactive Mode documentation).
+      For convenience of redoing the computations, all python code-blocks show in the upper right corner a specific **copy button** which allows to both copy *only* code lines, i.e. lines starting with '>>>' or '...', and stripping the console prompts. The copied code lines may hence be right away *pasted* into a Python console session.
+
+      As of Python 3.13.0 is necessary in the python terminal console to previously switch with the F3 function key into a console "*paste mode*" which allows pasting and editing large blocks of code before execution with the return key. To exit the "paste" mode retype again the F3 key (see Python 3.13.0 *Interactive Mode* documentation https://docs.python.org/3/tutorial/appendix.html).
 
 
 *Digraph* object structure
