@@ -248,7 +248,8 @@ def testComputeQuantileOrder():
                                    Debug=False,
                                    missingDataProbability=0.1,
                                    seed=100)
-    res = t.computeQuantileOrder(Comments=True,Threading=True,nbrOfCPUs=4)
+    res = t.computeQuantileOrder(Comments=True,startMethod=None,
+                                 Threading=True,nbrOfCPUs=None)
 ##    assert res == ['a22', 'a20', 'a28', 'a01', 'a12', 'a24', 'a26', 'a19',
 ##                       'a14', 'a30', 'a27', 'a17', 'a08', 'a29', 'a16',
 ##                       'a10', 'a04', 'a09', 'a13', 'a02', 'a11', 'a21',
@@ -261,5 +262,7 @@ def testComputeQuantileOrder():
     print(g.computeOrderCorrelation(res))
     print(g.computeOrderCorrelation(res1))
     res.reverse()
-    resrev = t.computeQuantileRanking()
+    print(res)
+    resrev = t.computeQuantileRanking(Comments=True,startMethod=None,
+                                 Threading=False,nbrOfCPUs=None)
     assert resrev == res
