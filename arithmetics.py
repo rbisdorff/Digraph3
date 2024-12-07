@@ -94,7 +94,22 @@ class QuadraticResiduesDigraph(Digraph):
         self.relation = relation
         self.gamma = self.gammaSets()
         self.notGamma = self.notGammaSets()
-    
+
+# -----------------
+
+def conv2binary(number, Debug=True):
+    bin = ""
+    if number == 0:
+        return "0"
+    else:
+        while number != 0:
+            remainder = number % 2
+            bin += str(remainder)
+            number = number // 2
+            if Debug:
+                print(number,remainder)
+        return bin[::-1] # reverse the binary string
+
 def primesBelow(N,Odd=False):
     """
 
@@ -580,17 +595,17 @@ if __name__ == '__main__':
 
     
     ######  scratch pad for testing the module components
-    from math import sqrt
-    p = 5
-    q = 8
-    print('p =',p,', q =',q)
-    print('cf(p,q) = ', continuedFraction(p,q) )
-    print('eval(cf(p,q)) = ', evalContinuedFraction(continuedFraction(p,q)) )
-    cf = [1,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2]
-    print('cf(sqrt(2))_%d = ' % (len(cf)-1), cf )
-    print('eval(cf(sqrt(2))_%d) = ' % (len(cf)-1), evalContinuedFraction(cf) )
-    print('sqrt(2)              = ', sqrt(2) )
-
+##    from math import sqrt
+##    p = 5
+##    q = 8
+##    print('p =',p,', q =',q)
+##    print('cf(p,q) = ', continuedFraction(p,q) )
+##    print('eval(cf(p,q)) = ', evalContinuedFraction(continuedFraction(p,q)) )
+##    cf = [1,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2]
+##    print('cf(sqrt(2))_%d = ' % (len(cf)-1), cf )
+##    print('eval(cf(sqrt(2))_%d) = ' % (len(cf)-1), evalContinuedFraction(cf) )
+##    print('sqrt(2)              = ', sqrt(2) )
+##
 
     print('*------------------*')
     print('If you see this line all tests were passed successfully :-)')
