@@ -105,44 +105,78 @@ def convInt2Binary(number,Comments=False):
     if type(number) != int:
         print('Number type error: %s must be a positive integer!' % (str(number)) )
     elif number == 0:
-        return '0'
+        return '0b0'
     elif number > 0:
-        bin = ""
+        bstr = ""
         while number > 0:
             remainder = number % 2
-            bin = str(remainder) + bin
+            bstr = str(remainder) + bstr
             number = number // 2
             if Comments:
                 print(number,remainder)
-        bin = '0b' + bin # reverse the binary string
-        return bin 
+        bstr = '0b' + bstr # reverse the binary string
+        return bstr
     else: # number < 0
         print('input error: %d must be a positive integer' % number) 
 
-##def convInt2Base(number, base=2, Debug=False):
-##    """
-##
-##    Converts a positive integer to its 1 < base < 11 string representation
-##
-##    """
-##    if base < 2 or base > 10:
-##        print('Error: base must be between 2 and 10')
-##    else:    
-##        bin = ""
-##        if type(number) != int:
-##            number = int(number)
-##        if number == 0:
-##            return "0"
-##        elif number > 0:
-##            while number > 0:
-##                remainder = number % base
-##                bin += str(remainder)
-##                number = number // base
-##                if Debug:
-##                    print(number,remainder)
-##            return bin[::-1] # reverse the binary string
-##        else:
-##            print('input error: %d must be a positive integer' % number) 
+def convInt2Octal(number,Comments=False):
+    """
+
+    Converts a positive integer to its octal string representation
+
+    """
+    if type(number) != int:
+        print('Number type error: %s must be a positive integer!' % (str(number)) )
+    elif number == 0:
+        return '0o0'
+    elif number > 0:
+        bstr = ""
+        while number > 0:
+            remainder = number % 8
+            bstr = str(remainder) + bstr
+            number = number // 8
+            if Comments:
+                print(number,remainder)
+        bstr = '0o' + bstr # reverse the binary string
+        return bstr
+    else: # number < 0
+        print('input error: %d must be a positive integer' % number) 
+
+def convInt2Hexadecimal(number,Comments=False):
+    """
+
+    Converts a positive integer to its hexadecimal string representation
+
+    """
+    if type(number) != int:
+        print('Number type error: %s must be a positive integer!' % (str(number)) )
+    elif number == 0:
+        return '0x0'
+    elif number > 0:
+        bstr = ""
+        while number > 0:
+            remainder = number % 16
+            if remainder == 10:
+                bstr = 'A' + bstr
+            elif remainder == 11:
+                bstr = 'B' + bstr
+            elif remainder == 12:
+                bstr = 'C' + bstr
+            elif remainder == 13:
+                bstr = 'D' + bstr
+            elif remainder == 14:
+                bstr = 'E' + bstr
+            elif remainder == 15:
+                bstr = 'F' + bstr
+            else:
+                bstr = str(remainder) + bstr
+            number = number // 16
+            if Comments:
+                print(number,remainder)
+        bstr = '0x' + bstr # reverse the binary string
+        return bstr
+    else: # number < 0
+        print('input error: %d must be a positive integer' % number) 
 
 def primesBelow(N,Odd=False):
     """

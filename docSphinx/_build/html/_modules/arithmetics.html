@@ -205,45 +205,85 @@
     <span class="k">if</span> <span class="nb">type</span><span class="p">(</span><span class="n">number</span><span class="p">)</span> <span class="o">!=</span> <span class="nb">int</span><span class="p">:</span>
         <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Number type error: </span><span class="si">%s</span><span class="s1"> must be a positive integer!&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">number</span><span class="p">))</span> <span class="p">)</span>
     <span class="k">elif</span> <span class="n">number</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
-        <span class="k">return</span> <span class="s1">&#39;0&#39;</span>
+        <span class="k">return</span> <span class="s1">&#39;0b0&#39;</span>
     <span class="k">elif</span> <span class="n">number</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
-        <span class="nb">bin</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span>
+        <span class="n">bstr</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span>
         <span class="k">while</span> <span class="n">number</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
             <span class="n">remainder</span> <span class="o">=</span> <span class="n">number</span> <span class="o">%</span> <span class="mi">2</span>
-            <span class="nb">bin</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="n">remainder</span><span class="p">)</span> <span class="o">+</span> <span class="nb">bin</span>
+            <span class="n">bstr</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="n">remainder</span><span class="p">)</span> <span class="o">+</span> <span class="n">bstr</span>
             <span class="n">number</span> <span class="o">=</span> <span class="n">number</span> <span class="o">//</span> <span class="mi">2</span>
             <span class="k">if</span> <span class="n">Comments</span><span class="p">:</span>
                 <span class="nb">print</span><span class="p">(</span><span class="n">number</span><span class="p">,</span><span class="n">remainder</span><span class="p">)</span>
-        <span class="nb">bin</span> <span class="o">=</span> <span class="s1">&#39;0b&#39;</span> <span class="o">+</span> <span class="nb">bin</span> <span class="c1"># reverse the binary string</span>
-        <span class="k">return</span> <span class="nb">bin</span> 
+        <span class="n">bstr</span> <span class="o">=</span> <span class="s1">&#39;0b&#39;</span> <span class="o">+</span> <span class="n">bstr</span> <span class="c1"># reverse the binary string</span>
+        <span class="k">return</span> <span class="n">bstr</span>
     <span class="k">else</span><span class="p">:</span> <span class="c1"># number &lt; 0</span>
         <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;input error: </span><span class="si">%d</span><span class="s1"> must be a positive integer&#39;</span> <span class="o">%</span> <span class="n">number</span><span class="p">)</span> </div>
 
 
-<span class="c1">##def convInt2Base(number, base=2, Debug=False):</span>
-<span class="c1">##    &quot;&quot;&quot;</span>
-<span class="c1">##</span>
-<span class="c1">##    Converts a positive integer to its 1 &lt; base &lt; 11 string representation</span>
-<span class="c1">##</span>
-<span class="c1">##    &quot;&quot;&quot;</span>
-<span class="c1">##    if base &lt; 2 or base &gt; 10:</span>
-<span class="c1">##        print(&#39;Error: base must be between 2 and 10&#39;)</span>
-<span class="c1">##    else:    </span>
-<span class="c1">##        bin = &quot;&quot;</span>
-<span class="c1">##        if type(number) != int:</span>
-<span class="c1">##            number = int(number)</span>
-<span class="c1">##        if number == 0:</span>
-<span class="c1">##            return &quot;0&quot;</span>
-<span class="c1">##        elif number &gt; 0:</span>
-<span class="c1">##            while number &gt; 0:</span>
-<span class="c1">##                remainder = number % base</span>
-<span class="c1">##                bin += str(remainder)</span>
-<span class="c1">##                number = number // base</span>
-<span class="c1">##                if Debug:</span>
-<span class="c1">##                    print(number,remainder)</span>
-<span class="c1">##            return bin[::-1] # reverse the binary string</span>
-<span class="c1">##        else:</span>
-<span class="c1">##            print(&#39;input error: %d must be a positive integer&#39; % number) </span>
+<div class="viewcode-block" id="convInt2Octal">
+<a class="viewcode-back" href="../techDoc.html#arithmetics.convInt2Octal">[docs]</a>
+<span class="k">def</span> <span class="nf">convInt2Octal</span><span class="p">(</span><span class="n">number</span><span class="p">,</span><span class="n">Comments</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+
+<span class="sd">    Converts a positive integer to its octal string representation</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">if</span> <span class="nb">type</span><span class="p">(</span><span class="n">number</span><span class="p">)</span> <span class="o">!=</span> <span class="nb">int</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Number type error: </span><span class="si">%s</span><span class="s1"> must be a positive integer!&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">number</span><span class="p">))</span> <span class="p">)</span>
+    <span class="k">elif</span> <span class="n">number</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="k">return</span> <span class="s1">&#39;0o0&#39;</span>
+    <span class="k">elif</span> <span class="n">number</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="n">bstr</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span>
+        <span class="k">while</span> <span class="n">number</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="n">remainder</span> <span class="o">=</span> <span class="n">number</span> <span class="o">%</span> <span class="mi">8</span>
+            <span class="n">bstr</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="n">remainder</span><span class="p">)</span> <span class="o">+</span> <span class="n">bstr</span>
+            <span class="n">number</span> <span class="o">=</span> <span class="n">number</span> <span class="o">//</span> <span class="mi">8</span>
+            <span class="k">if</span> <span class="n">Comments</span><span class="p">:</span>
+                <span class="nb">print</span><span class="p">(</span><span class="n">number</span><span class="p">,</span><span class="n">remainder</span><span class="p">)</span>
+        <span class="n">bstr</span> <span class="o">=</span> <span class="s1">&#39;0o&#39;</span> <span class="o">+</span> <span class="n">bstr</span> <span class="c1"># reverse the binary string</span>
+        <span class="k">return</span> <span class="n">bstr</span>
+    <span class="k">else</span><span class="p">:</span> <span class="c1"># number &lt; 0</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;input error: </span><span class="si">%d</span><span class="s1"> must be a positive integer&#39;</span> <span class="o">%</span> <span class="n">number</span><span class="p">)</span> </div>
+
+
+<div class="viewcode-block" id="convInt2Hexadecimal">
+<a class="viewcode-back" href="../techDoc.html#arithmetics.convInt2Hexadecimal">[docs]</a>
+<span class="k">def</span> <span class="nf">convInt2Hexadecimal</span><span class="p">(</span><span class="n">number</span><span class="p">,</span><span class="n">Comments</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+
+<span class="sd">    Converts a positive integer to its hexadecimal string representation</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">if</span> <span class="nb">type</span><span class="p">(</span><span class="n">number</span><span class="p">)</span> <span class="o">!=</span> <span class="nb">int</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Number type error: </span><span class="si">%s</span><span class="s1"> must be a positive integer!&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">number</span><span class="p">))</span> <span class="p">)</span>
+    <span class="k">elif</span> <span class="n">number</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="k">return</span> <span class="s1">&#39;0x0&#39;</span>
+    <span class="k">elif</span> <span class="n">number</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="n">bstr</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span>
+        <span class="k">while</span> <span class="n">number</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="n">remainder</span> <span class="o">=</span> <span class="n">number</span> <span class="o">%</span> <span class="mi">16</span>
+            <span class="k">if</span> <span class="n">remainder</span> <span class="o">==</span> <span class="mi">10</span><span class="p">:</span>
+                <span class="n">bstr</span> <span class="o">=</span> <span class="s1">&#39;A&#39;</span> <span class="o">+</span> <span class="n">bstr</span>
+            <span class="k">elif</span> <span class="n">remainder</span> <span class="o">==</span> <span class="mi">11</span><span class="p">:</span>
+                <span class="n">bstr</span> <span class="o">=</span> <span class="s1">&#39;B&#39;</span> <span class="o">+</span> <span class="n">bstr</span>
+            <span class="k">elif</span> <span class="n">remainder</span> <span class="o">==</span> <span class="mi">12</span><span class="p">:</span>
+                <span class="n">bstr</span> <span class="o">=</span> <span class="s1">&#39;C&#39;</span> <span class="o">+</span> <span class="n">bstr</span>
+            <span class="k">elif</span> <span class="n">remainder</span> <span class="o">==</span> <span class="mi">13</span><span class="p">:</span>
+                <span class="n">bstr</span> <span class="o">=</span> <span class="s1">&#39;D&#39;</span> <span class="o">+</span> <span class="n">bstr</span>
+            <span class="k">elif</span> <span class="n">remainder</span> <span class="o">==</span> <span class="mi">14</span><span class="p">:</span>
+                <span class="n">bstr</span> <span class="o">=</span> <span class="s1">&#39;E&#39;</span> <span class="o">+</span> <span class="n">bstr</span>
+            <span class="k">elif</span> <span class="n">remainder</span> <span class="o">==</span> <span class="mi">15</span><span class="p">:</span>
+                <span class="n">bstr</span> <span class="o">=</span> <span class="s1">&#39;F&#39;</span> <span class="o">+</span> <span class="n">bstr</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">bstr</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="n">remainder</span><span class="p">)</span> <span class="o">+</span> <span class="n">bstr</span>
+            <span class="n">number</span> <span class="o">=</span> <span class="n">number</span> <span class="o">//</span> <span class="mi">16</span>
+            <span class="k">if</span> <span class="n">Comments</span><span class="p">:</span>
+                <span class="nb">print</span><span class="p">(</span><span class="n">number</span><span class="p">,</span><span class="n">remainder</span><span class="p">)</span>
+        <span class="n">bstr</span> <span class="o">=</span> <span class="s1">&#39;0x&#39;</span> <span class="o">+</span> <span class="n">bstr</span> <span class="c1"># reverse the binary string</span>
+        <span class="k">return</span> <span class="n">bstr</span>
+    <span class="k">else</span><span class="p">:</span> <span class="c1"># number &lt; 0</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;input error: </span><span class="si">%d</span><span class="s1"> must be a positive integer&#39;</span> <span class="o">%</span> <span class="n">number</span><span class="p">)</span> </div>
+
 
 <div class="viewcode-block" id="primesBelow">
 <a class="viewcode-back" href="../techDoc.html#arithmetics.primesBelow">[docs]</a>
