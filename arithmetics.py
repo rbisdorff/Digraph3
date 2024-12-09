@@ -96,19 +96,53 @@ class QuadraticResiduesDigraph(Digraph):
         self.notGamma = self.notGammaSets()
 
 # -----------------
+def convInt2Binary(number,Comments=False):
+    """
 
-def conv2binary(number, Debug=True):
+    Converts a positive integer to its binary string representation
+
+    """
     bin = ""
-    if number == 0:
+    if type(number) != int:
+        print('Number type error: %s must be a positive integer!' % (str(number)) )
+    elif number == 0:
         return "0"
-    else:
-        while number != 0:
-            remainder = number % 2
+    elif number > 0:
+        base = 2
+        while number > 0:
+            remainder = number % base
             bin += str(remainder)
-            number = number // 2
-            if Debug:
+            number = number // base
+            if Comments:
                 print(number,remainder)
         return bin[::-1] # reverse the binary string
+    else: # number < 0
+        print('input error: %d must be a positive integer' % number) 
+
+##def convInt2Base(number, base=2, Debug=False):
+##    """
+##
+##    Converts a positive integer to its 1 < base < 11 string representation
+##
+##    """
+##    if base < 2 or base > 10:
+##        print('Error: base must be between 2 and 10')
+##    else:    
+##        bin = ""
+##        if type(number) != int:
+##            number = int(number)
+##        if number == 0:
+##            return "0"
+##        elif number > 0:
+##            while number > 0:
+##                remainder = number % base
+##                bin += str(remainder)
+##                number = number // base
+##                if Debug:
+##                    print(number,remainder)
+##            return bin[::-1] # reverse the binary string
+##        else:
+##            print('input error: %d must be a positive integer' % number) 
 
 def primesBelow(N,Odd=False):
     """
