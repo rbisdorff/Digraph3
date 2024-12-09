@@ -102,20 +102,20 @@ def convInt2Binary(number,Comments=False):
     Converts a positive integer to its binary string representation
 
     """
-    bin = ""
     if type(number) != int:
         print('Number type error: %s must be a positive integer!' % (str(number)) )
     elif number == 0:
         return "0"
     elif number > 0:
-        base = 2
+        bin = ""
         while number > 0:
-            remainder = number % base
+            remainder = number % 2
             bin += str(remainder)
-            number = number // base
+            number = number // 2
             if Comments:
                 print(number,remainder)
-        return bin[::-1] # reverse the binary string
+        bin = '0b' + bin[::-1] # reverse the binary string
+        return bin 
     else: # number < 0
         print('input error: %d must be a positive integer' % number) 
 
