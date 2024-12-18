@@ -1,3 +1,5 @@
+
+
 <!DOCTYPE html>
 <html class="writer-html5" lang="en" data-content_root="./">
 <head>
@@ -8,8 +10,8 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>2. Technical Reference of the Digraph3 modules &mdash; Digraph3 3.13.0 documentation</title>
       <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=fa44fd50" />
-      <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=19f00094" />
-      <link rel="stylesheet" type="text/css" href="_static/graphviz.css?v=fd3f3429" />
+      <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="_static/graphviz.css?v=4ae1632d" />
       <link rel="stylesheet" type="text/css" href="_static/copybutton.css?v=76b2166b" />
       <link rel="stylesheet" type="text/css" href="_static/css/tooltipster.custom.css?v=7bc2f056" />
       <link rel="stylesheet" type="text/css" href="_static/css/tooltipster.bundle.min.css?v=37217874" />
@@ -22,20 +24,16 @@
       <link rel="stylesheet" type="text/css" href="_static/css/sphinx_rtd_theme.css?v=3234e928" />
 
   
-  <!--[if lt IE 9]>
-    <script src="_static/js/html5shiv.min.js"></script>
-  <![endif]-->
-  
-        <script src="_static/jquery.js?v=5d32c60e"></script>
-        <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-        <script src="_static/documentation_options.js?v=6aaf4047"></script>
-        <script src="_static/doctools.js?v=9a2dae69"></script>
-        <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
-        <script src="_static/clipboard.min.js?v=a7894cd8"></script>
-        <script src="_static/copybutton.js?v=15d7cbb8"></script>
-        <script src="_static/js/hoverxref.js?v=608c77cb"></script>
-        <script src="_static/js/tooltipster.bundle.min.js?v=18bf091b"></script>
-        <script src="_static/js/micromodal.min.js?v=04d6302d"></script>
+      <script src="_static/jquery.js?v=5d32c60e"></script>
+      <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="_static/documentation_options.js?v=6aaf4047"></script>
+      <script src="_static/doctools.js?v=9bcbadda"></script>
+      <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script src="_static/clipboard.min.js?v=a7894cd8"></script>
+      <script src="_static/copybutton.js?v=15d7cbb8"></script>
+      <script src="_static/js/hoverxref.js?v=6ff7264e"></script>
+      <script src="_static/js/tooltipster.bundle.min.js?v=18bf091b"></script>
+      <script src="_static/js/micromodal.min.js?v=04d6302d"></script>
     <script src="_static/js/theme.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
@@ -55,9 +53,6 @@
             Digraph3
               <img src="_static/htmlLogo.png" class="logo" alt="Logo"/>
           </a>
-              <div class="version">
-                Python 3.13
-              </div>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
     <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
@@ -597,7 +592,6 @@
 </li>
 <li class="toctree-l2"><a class="reference internal" href="#mpoutrankingdigraphs-module">2.8. mpOutrankingDigraphs module</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="#mpOutrankingDigraphs.MPBipolarOutrankingDigraph"><code class="docutils literal notranslate"><span class="pre">MPBipolarOutrankingDigraph</span></code></a><ul>
-<li class="toctree-l4"><a class="reference internal" href="#mpOutrankingDigraphs.MPBipolarOutrankingDigraph.recodeValuation"><code class="docutils literal notranslate"><span class="pre">MPBipolarOutrankingDigraph.recodeValuation()</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="#mpOutrankingDigraphs.MPBipolarOutrankingDigraph.showPolarisations"><code class="docutils literal notranslate"><span class="pre">MPBipolarOutrankingDigraph.showPolarisations()</span></code></a></li>
 </ul>
 </li>
@@ -6590,14 +6584,6 @@ the main program code from the point on where they were launched.</p>
 </div>
 </div>
 <dl class="py method">
-<dt class="sig sig-object py" id="mpOutrankingDigraphs.MPBipolarOutrankingDigraph.recodeValuation">
-<span class="sig-name descname"><span class="pre">recodeValuation</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">newMin</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">-1.0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">newMax</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1.0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ndigits</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">4</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">nbrCores</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">startMethod</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">Comments</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">Debug</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/mpOutrankingDigraphs.html#MPBipolarOutrankingDigraph.recodeValuation"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#mpOutrankingDigraphs.MPBipolarOutrankingDigraph.recodeValuation" title="Link to this definition"></a></dt>
-<dd><p>Recodes the characteristic valuation domain according
-to the parameters given.</p>
-<p><em>ndigits</em> indicates the number of decimal digits of the valuation.</p>
-</dd></dl>
-
-<dl class="py method">
 <dt class="sig sig-object py" id="mpOutrankingDigraphs.MPBipolarOutrankingDigraph.showPolarisations">
 <span class="sig-name descname"><span class="pre">showPolarisations</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/mpOutrankingDigraphs.html#MPBipolarOutrankingDigraph.showPolarisations"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#mpOutrankingDigraphs.MPBipolarOutrankingDigraph.showPolarisations" title="Link to this definition"></a></dt>
 <dd><p>Prints out all negative and positive polarised outranking situations observed in the <em>MPBipolarOutrankingDigraph</em> instance.</p>
@@ -11688,7 +11674,7 @@ To search other containers, add handlers to iterate over their contents:</p>
 <section id="module-arithmetics">
 <span id="arithmetics-module"></span><span id="arithmetics-label"></span><h2><a class="toc-backref" href="#id23" role="doc-backlink"><span class="section-number">2.21. </span>arithmetics module</a><a class="headerlink" href="#module-arithmetics" title="Link to this heading"></a></h2>
 <p>Python3+ implementation of arithmetics tools</p>
-<p>Copyright (C) 2016-2023  Raymond Bisdorff</p>
+<p>Copyright (C) 2016-2024 Raymond Bisdorff</p>
 <p>Tools gathered for doing arithmetics.
 Mainly inspired from G.A. Jones &amp; J.M. Jones,
 Elementary Number Theroy,
@@ -11715,7 +11701,9 @@ states that, for <em>p</em> being an odd prime, <em>(a/p)</em> = <em>(p/a)</em>,
 apart from those pairs <em>(a/p)</em>, where <em>a</em> = <em>p</em> = 3 (mod 4). In this case, <em>(a/p)</em> = -<em>(p/a)</em>.</p>
 <p>We may graphically illustrate the reciprocity theorem as follows:</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">arithmetics</span> <span class="kn">import</span> <span class="o">*</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">leg</span> <span class="o">=</span> <span class="n">QuadraticResiduesDigraph</span><span class="p">(</span><span class="n">primesBelow</span><span class="p">(</span><span class="mi">20</span><span class="p">,</span><span class="n">Odd</span><span class="o">=</span><span class="kc">True</span><span class="p">))</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">primesBelow20</span> <span class="o">=</span> <span class="n">primesBelow</span><span class="p">(</span><span class="mi">20</span><span class="p">,</span><span class="n">Odd</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="go"> [3,5,7,11,13,17,19]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">leg</span> <span class="o">=</span> <span class="n">QuadraticResiduesDigraph</span><span class="p">(</span><span class="n">primesBelow20</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">digraphs</span> <span class="kn">import</span> <span class="n">AsymmetricPartialDigraph</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">aleg</span> <span class="o">=</span> <span class="n">AsymmetricPartialDigraph</span><span class="p">(</span><span class="n">leg</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">aleg</span><span class="o">.</span><span class="n">exportGraphViz</span><span class="p">(</span><span class="s1">&#39;legendreAsym&#39;</span><span class="p">)</span>
@@ -11726,10 +11714,14 @@ apart from those pairs <em>(a/p)</em>, where <em>a</em> = <em>p</em> = 3 (mod 4)
 
 <dl class="py function">
 <dt class="sig sig-object py" id="arithmetics.bezout">
-<span class="sig-prename descclassname"><span class="pre">arithmetics.</span></span><span class="sig-name descname"><span class="pre">bezout</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">a</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">b</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/arithmetics.html#bezout"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#arithmetics.bezout" title="Link to this definition"></a></dt>
+<span class="sig-prename descclassname"><span class="pre">arithmetics.</span></span><span class="sig-name descname"><span class="pre">bezout</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">a</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">b</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">Debug</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/arithmetics.html#bezout"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#arithmetics.bezout" title="Link to this definition"></a></dt>
 <dd><p>Renders d = gcd(a,b) and the
 Bezout coefficients x, y such that
 d = ax + by.</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">bezout</span><span class="p">(</span><span class="mi">120</span><span class="p">,</span><span class="mi">16</span><span class="p">)</span>
+<span class="go"> (8, 1.0, -7.0)</span>
+</pre></div>
+</div>
 </dd></dl>
 
 <dl class="py function">
@@ -11741,6 +11733,12 @@ d = ax + by.</p>
 <div><p><em>n</em>: strictly positive integer (default = 7).
 <em>AsFloats</em>: If True (defaut False), renders the list of approximate floats corresponding to the rational fractions.</p>
 </div></blockquote>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">computeFareaySeries</span><span class="p">(</span><span class="mi">4</span><span class="p">)</span>
+<span class="go"> [[0, 1], [1, 4], [1, 3], [1, 2], [2, 3], [3, 4], [1, 1]]</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">computeFareySeries</span><span class="p">(</span><span class="mi">4</span><span class="p">,</span><span class="n">AsFloats</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="go">[0.0, 0.25, 0.3333333333333333, 0.5, 0.6666666666666666, 0.75, 1.0]</span>
+</pre></div>
+</div>
 <p><em>Source</em>: Graham, Knuth, Patashnik, Sec. 4.5 in Concrete Mathematics 2nd Ed., Addison-Wesley 1994, pp 115-123.</p>
 </dd></dl>
 
@@ -11783,12 +11781,20 @@ decimals of <img class="math" src="_images/math/9cc8517129c87252edd7fe2e4532af9d
 <span class="sig-prename descclassname"><span class="pre">arithmetics.</span></span><span class="sig-name descname"><span class="pre">continuedFraction</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">p</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">q</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/arithmetics.html#continuedFraction"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#arithmetics.continuedFraction" title="Link to this definition"></a></dt>
 <dd><p>Renders the continued fraction [a_0,a_1,a_2,…,a_n]
 of the ratio of two integers p and q, q &gt; 0 and where a0 = p//q.</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">continuedFraction</span><span class="p">(</span><span class="mi">12</span><span class="p">,</span><span class="mi">7</span><span class="p">)</span>
+<span class="go"> [1, 1, 2, 1, 1]</span>
+</pre></div>
+</div>
 </dd></dl>
 
 <dl class="py function">
 <dt class="sig sig-object py" id="arithmetics.divisors">
 <span class="sig-prename descclassname"><span class="pre">arithmetics.</span></span><span class="sig-name descname"><span class="pre">divisors</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">n</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">Sorted</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/arithmetics.html#divisors"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#arithmetics.divisors" title="Link to this definition"></a></dt>
 <dd><p>Renders the list of divisors of integer n.</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">divisors</span><span class="p">(</span><span class="mi">12</span><span class="p">)</span>
+<span class="go"> [1, 2, 3, 4, 6, 12]</span>
+</pre></div>
+</div>
 </dd></dl>
 
 <dl class="py function">
@@ -11809,12 +11815,22 @@ of the ratio of two integers p and q, q &gt; 0 and where a0 = p//q.</p>
 <dd><p>Backwise recursive evaluation: ev_i-1 + 1/ev_i, for i = n,..,1
 of the continued fraction cf = [a_0,a_1,a_2,…,a_n] and 
 where a_0 corresponds to its integer part.</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">evalContinuedFraction</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">])</span>  <span class="c1"># 12/7</span>
+<span class="go"> Decimal(&#39;1.714285714285714285714285714&#39;)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="mi">12</span><span class="o">/</span><span class="mi">7</span>
+<span class="go"> 1.7142857142857142</span>
+</pre></div>
+</div>
 </dd></dl>
 
 <dl class="py function">
 <dt class="sig sig-object py" id="arithmetics.gcd">
 <span class="sig-prename descclassname"><span class="pre">arithmetics.</span></span><span class="sig-name descname"><span class="pre">gcd</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">a</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">b</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/arithmetics.html#gcd"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#arithmetics.gcd" title="Link to this definition"></a></dt>
 <dd><p>Renders the greatest common divisor of a and b.</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">gcd</span><span class="p">(</span><span class="mi">120</span><span class="p">,</span><span class="mi">16</span><span class="p">)</span>
+<span class="go"> 8</span>
+</pre></div>
+</div>
 </dd></dl>
 
 <dl class="py function">
@@ -11834,6 +11850,10 @@ where a_0 corresponds to its integer part.</p>
 <dt class="sig sig-object py" id="arithmetics.lcm">
 <span class="sig-prename descclassname"><span class="pre">arithmetics.</span></span><span class="sig-name descname"><span class="pre">lcm</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">a</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">b</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/arithmetics.html#lcm"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#arithmetics.lcm" title="Link to this definition"></a></dt>
 <dd><p>Renders the least common multiple of a and b.</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">lcm</span><span class="p">(</span><span class="mi">120</span><span class="p">,</span><span class="mi">16</span><span class="p">)</span>
+<span class="go"> 240</span>
+</pre></div>
+</div>
 </dd></dl>
 
 <dl class="py function">
@@ -11877,18 +11897,32 @@ For instance, sternBrocot(5,7) = [‘L’,’R’,’R’,’L’].</p>
 <span class="sig-prename descclassname"><span class="pre">arithmetics.</span></span><span class="sig-name descname"><span class="pre">totient</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">n</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/arithmetics.html#totient"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#arithmetics.totient" title="Link to this definition"></a></dt>
 <dd><p>Implements the totient function rendering
 Euler’s number of coprime elements a in Zn.</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">totient</span><span class="p">(</span><span class="mi">12</span><span class="p">)</span>
+<span class="go"> 4</span>
+</pre></div>
+</div>
 </dd></dl>
 
 <dl class="py function">
 <dt class="sig sig-object py" id="arithmetics.zn_squareroots">
 <span class="sig-prename descclassname"><span class="pre">arithmetics.</span></span><span class="sig-name descname"><span class="pre">zn_squareroots</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">n</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">Comments</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/arithmetics.html#zn_squareroots"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#arithmetics.zn_squareroots" title="Link to this definition"></a></dt>
 <dd><p>Renders the quadratic residues of Zn as a dictionary.</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">zn_squareroots</span><span class="p">(</span><span class="mi">13</span><span class="p">,</span><span class="n">Comments</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+<span class="go"> {1: [1, 12], 4: [2, 11],</span>
+<span class="go">  9: [3, 10], 3: [4, 9],</span>
+<span class="go">  12: [5, 8], 10: [6, 7]}</span>
+</pre></div>
+</div>
 </dd></dl>
 
 <dl class="py function">
 <dt class="sig sig-object py" id="arithmetics.zn_units">
 <span class="sig-prename descclassname"><span class="pre">arithmetics.</span></span><span class="sig-name descname"><span class="pre">zn_units</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">n</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">Comments</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/arithmetics.html#zn_units"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#arithmetics.zn_units" title="Link to this definition"></a></dt>
 <dd><p>Renders the set of units of Zn.</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">zn_units</span><span class="p">(</span><span class="mi">12</span><span class="p">)</span>
+<span class="go"> {1, 11, 5, 7}</span>
+</pre></div>
+</div>
 </dd></dl>
 
 <p>Back to the <a class="reference internal" href="#contents-table-label"><span class="std std-ref">Table of Contents</span></a></p>
@@ -14358,7 +14392,7 @@ Components are stored in an ordered dictionary.</p>
 
   <div role="contentinfo">
     <p>&#169; Copyright 2012-2024, Raymond Bisdorff.
-      <span class="lastupdated">Last updated on Nov 15, 2024.
+      <span class="lastupdated">Last updated on Dec 18, 2024.
       </span></p>
   </div>
 

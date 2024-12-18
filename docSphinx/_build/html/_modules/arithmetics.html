@@ -1,3 +1,5 @@
+
+
 <!DOCTYPE html>
 <html class="writer-html5" lang="en" data-content_root="../">
 <head>
@@ -5,8 +7,8 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>arithmetics &mdash; Digraph3 3.13.0 documentation</title>
       <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=fa44fd50" />
-      <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=19f00094" />
-      <link rel="stylesheet" type="text/css" href="../_static/graphviz.css?v=fd3f3429" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="../_static/graphviz.css?v=4ae1632d" />
       <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
       <link rel="stylesheet" type="text/css" href="../_static/css/tooltipster.custom.css?v=7bc2f056" />
       <link rel="stylesheet" type="text/css" href="../_static/css/tooltipster.bundle.min.css?v=37217874" />
@@ -19,20 +21,16 @@
       <link rel="stylesheet" type="text/css" href="../_static/css/sphinx_rtd_theme.css?v=3234e928" />
 
   
-  <!--[if lt IE 9]>
-    <script src="../_static/js/html5shiv.min.js"></script>
-  <![endif]-->
-  
-        <script src="../_static/jquery.js?v=5d32c60e"></script>
-        <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-        <script src="../_static/documentation_options.js?v=6aaf4047"></script>
-        <script src="../_static/doctools.js?v=9a2dae69"></script>
-        <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
-        <script src="../_static/clipboard.min.js?v=a7894cd8"></script>
-        <script src="../_static/copybutton.js?v=15d7cbb8"></script>
-        <script src="../_static/js/hoverxref.js?v=ef0cf3f7"></script>
-        <script src="../_static/js/tooltipster.bundle.min.js?v=18bf091b"></script>
-        <script src="../_static/js/micromodal.min.js?v=04d6302d"></script>
+      <script src="../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../_static/documentation_options.js?v=6aaf4047"></script>
+      <script src="../_static/doctools.js?v=9bcbadda"></script>
+      <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script src="../_static/clipboard.min.js?v=a7894cd8"></script>
+      <script src="../_static/copybutton.js?v=15d7cbb8"></script>
+      <script src="../_static/js/hoverxref.js?v=6ff7264e"></script>
+      <script src="../_static/js/tooltipster.bundle.min.js?v=18bf091b"></script>
+      <script src="../_static/js/micromodal.min.js?v=04d6302d"></script>
     <script src="../_static/js/theme.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" /> 
@@ -50,9 +48,6 @@
             Digraph3
               <img src="../_static/htmlLogo.png" class="logo" alt="Logo"/>
           </a>
-              <div class="version">
-                Python 3.13
-              </div>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
     <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
@@ -99,7 +94,7 @@
 <span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">Python3+ implementation of arithmetics tools</span>
 
-<span class="sd">Copyright (C) 2016-2023  Raymond Bisdorff</span>
+<span class="sd">Copyright (C) 2016-2024 Raymond Bisdorff</span>
 
 <span class="sd">Tools gathered for doing arithmetics.</span>
 <span class="sd">Mainly inspired from G.A. Jones &amp; J.M. Jones,</span>
@@ -141,7 +136,9 @@
 <span class="sd">    We may graphically illustrate the reciprocity theorem as follows::</span>
 <span class="sd">    </span>
 <span class="sd">       &gt;&gt;&gt; from arithmetics import *</span>
-<span class="sd">       &gt;&gt;&gt; leg = QuadraticResiduesDigraph(primesBelow(20,Odd=True))</span>
+<span class="sd">       &gt;&gt;&gt; primesBelow20 = primesBelow(20,Odd=True)</span>
+<span class="sd">        [3,5,7,11,13,17,19]</span>
+<span class="sd">       &gt;&gt;&gt; leg = QuadraticResiduesDigraph(primesBelow20)</span>
 <span class="sd">       &gt;&gt;&gt; from digraphs import AsymmetricPartialDigraph</span>
 <span class="sd">       &gt;&gt;&gt; aleg = AsymmetricPartialDigraph(leg)</span>
 <span class="sd">       &gt;&gt;&gt; aleg.exportGraphViz(&#39;legendreAsym&#39;)</span>
@@ -339,7 +336,7 @@
 <span class="sd">    n = p1^e1 * ... * pk^ek with each ei &gt;= 1 for i = 1, ..., k.  </span>
 
 <span class="sd">    mu = 0 if ei &gt; 1 for some i = 1, ... k else mu = (-1)^k.</span>
-<span class="sd">    </span>
+
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="k">if</span> <span class="n">n</span> <span class="o">&lt;</span> <span class="mi">1</span><span class="p">:</span>
         <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;n must be a positive integer!&#39;</span><span class="p">)</span>
@@ -362,6 +359,10 @@
 <span class="k">def</span> <span class="nf">divisors</span><span class="p">(</span><span class="n">n</span><span class="p">,</span><span class="n">Sorted</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Renders the list of divisors of integer n.</span>
+
+<span class="sd">    &gt;&gt;&gt; divisors(12)</span>
+<span class="sd">     [1, 2, 3, 4, 6, 12]</span>
+<span class="sd">     </span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="k">if</span> <span class="n">n</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
         <span class="k">return</span>
@@ -398,6 +399,10 @@
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Implements the totient function rendering</span>
 <span class="sd">    Euler&#39;s number of coprime elements a in Zn.</span>
+
+<span class="sd">    &gt;&gt;&gt; totient(12)</span>
+<span class="sd">     4</span>
+
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="k">if</span> <span class="n">n</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span> <span class="k">return</span> <span class="mi">1</span>
 
@@ -418,6 +423,10 @@
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Renders the continued fraction [a_0,a_1,a_2,...,a_n]</span>
 <span class="sd">    of the ratio of two integers p and q, q &gt; 0 and where a0 = p//q.</span>
+
+<span class="sd">    &gt;&gt;&gt; continuedFraction(12,7)</span>
+<span class="sd">     [1, 1, 2, 1, 1]</span>
+<span class="sd">    </span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="k">if</span> <span class="n">q</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">:</span>
         <span class="k">return</span> <span class="kc">None</span>
@@ -443,6 +452,12 @@
 <span class="sd">    Backwise recursive evaluation: ev_i-1 + 1/ev_i, for i = n,..,1</span>
 <span class="sd">    of the continued fraction cf = [a_0,a_1,a_2,...,a_n] and </span>
 <span class="sd">    where a_0 corresponds to its integer part.</span>
+
+<span class="sd">    &gt;&gt;&gt; evalContinuedFraction([1, 1, 2, 1, 1])  # 12/7</span>
+<span class="sd">     Decimal(&#39;1.714285714285714285714285714&#39;)</span>
+<span class="sd">    &gt;&gt;&gt; 12/7</span>
+<span class="sd">     1.7142857142857142</span>
+
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="kn">from</span> <span class="nn">decimal</span> <span class="kn">import</span> <span class="n">Decimal</span>
     <span class="n">n</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">cf</span><span class="p">)</span> <span class="o">-</span> <span class="mi">1</span>
@@ -460,38 +475,51 @@
 <span class="k">def</span> <span class="nf">gcd</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Renders the greatest common divisor of a and b.</span>
+
+<span class="sd">    &gt;&gt;&gt; gcd(120,16)</span>
+<span class="sd">     8</span>
+
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="k">if</span> <span class="n">a</span> <span class="o">==</span> <span class="n">b</span><span class="p">:</span> <span class="k">return</span> <span class="n">a</span>
     <span class="k">while</span> <span class="n">b</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span> <span class="n">a</span><span class="p">,</span> <span class="n">b</span> <span class="o">=</span> <span class="n">b</span><span class="p">,</span> <span class="n">a</span> <span class="o">%</span> <span class="n">b</span>
     <span class="k">return</span> <span class="n">a</span></div>
 
-
+    
 <div class="viewcode-block" id="lcm">
 <a class="viewcode-back" href="../techDoc.html#arithmetics.lcm">[docs]</a>
 <span class="k">def</span> <span class="nf">lcm</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Renders the least common multiple of a and b.</span>
+
+<span class="sd">    &gt;&gt;&gt; lcm(120,16)</span>
+<span class="sd">     240</span>
+
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="k">return</span> <span class="nb">abs</span><span class="p">(</span><span class="n">a</span> <span class="o">*</span> <span class="n">b</span><span class="p">)</span> <span class="o">//</span> <span class="n">gcd</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">)</span></div>
 
 
 <div class="viewcode-block" id="bezout">
 <a class="viewcode-back" href="../techDoc.html#arithmetics.bezout">[docs]</a>
-<span class="k">def</span> <span class="nf">bezout</span><span class="p">(</span><span class="n">a</span><span class="p">,</span><span class="n">b</span><span class="p">):</span>
+<span class="k">def</span> <span class="nf">bezout</span><span class="p">(</span><span class="n">a</span><span class="p">,</span><span class="n">b</span><span class="p">,</span><span class="n">Debug</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Renders d = gcd(a,b) and the</span>
 <span class="sd">    Bezout coefficients x, y such that</span>
 <span class="sd">    d = ax + by.</span>
+
+<span class="sd">    &gt;&gt;&gt; bezout(120,16)</span>
+<span class="sd">     (8, 1.0, -7.0)</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     
     <span class="n">x</span><span class="p">,</span><span class="n">y</span><span class="p">,</span><span class="n">u</span><span class="p">,</span><span class="n">v</span> <span class="o">=</span> <span class="mi">1</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span>
-    <span class="nb">print</span><span class="p">(</span><span class="n">a</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="n">x</span><span class="p">,</span><span class="n">y</span><span class="p">)</span>
-    <span class="nb">print</span><span class="p">(</span><span class="n">a</span><span class="p">,</span><span class="n">b</span><span class="p">,</span><span class="n">u</span><span class="p">,</span><span class="n">v</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">Debug</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="n">a</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="n">x</span><span class="p">,</span><span class="n">y</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="n">a</span><span class="p">,</span><span class="n">b</span><span class="p">,</span><span class="n">u</span><span class="p">,</span><span class="n">v</span><span class="p">)</span>
     <span class="k">while</span> <span class="n">b</span> <span class="o">!=</span> <span class="mi">0</span><span class="p">:</span>
         <span class="n">r</span> <span class="o">=</span> <span class="n">a</span> <span class="o">%</span> <span class="n">b</span>
         <span class="n">q</span> <span class="o">=</span> <span class="p">(</span><span class="n">a</span> <span class="o">-</span> <span class="n">r</span><span class="p">)</span><span class="o">/</span><span class="n">b</span>
         <span class="n">x</span><span class="p">,</span><span class="n">y</span><span class="p">,</span> <span class="n">u</span><span class="p">,</span><span class="n">v</span> <span class="o">=</span> <span class="n">u</span><span class="p">,</span><span class="n">v</span><span class="p">,</span> <span class="n">x</span><span class="o">-</span><span class="p">(</span><span class="n">q</span><span class="o">*</span><span class="n">u</span><span class="p">),</span><span class="n">y</span><span class="o">-</span><span class="p">(</span><span class="n">q</span><span class="o">*</span><span class="n">v</span><span class="p">)</span>
-        <span class="nb">print</span><span class="p">(</span><span class="n">a</span><span class="p">,</span><span class="n">b</span><span class="p">,</span><span class="n">q</span><span class="p">,</span><span class="n">r</span><span class="p">,</span><span class="n">u</span><span class="p">,</span><span class="n">v</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">Debug</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="n">a</span><span class="p">,</span><span class="n">b</span><span class="p">,</span><span class="n">q</span><span class="p">,</span><span class="n">r</span><span class="p">,</span><span class="n">u</span><span class="p">,</span><span class="n">v</span><span class="p">)</span>
         <span class="n">a</span><span class="p">,</span><span class="n">b</span> <span class="o">=</span> <span class="n">b</span><span class="p">,</span><span class="n">r</span>
     <span class="k">return</span> <span class="n">a</span><span class="p">,</span><span class="n">x</span><span class="p">,</span><span class="n">y</span></div>
 
@@ -515,11 +543,38 @@
     <span class="k">return</span> <span class="n">C</span><span class="o">*</span><span class="n">x</span><span class="p">,</span> <span class="n">C</span><span class="o">*</span><span class="n">y</span> <span class="p">,</span> <span class="n">A</span><span class="p">,</span> <span class="n">B</span> <span class="c1"># solution particulière plus coefficients</span></div>
 
 
+<div class="viewcode-block" id="zn_units">
+<a class="viewcode-back" href="../techDoc.html#arithmetics.zn_units">[docs]</a>
+<span class="k">def</span> <span class="nf">zn_units</span><span class="p">(</span><span class="n">n</span><span class="p">,</span><span class="n">Comments</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Renders the set of units of Zn.</span>
+
+<span class="sd">    &gt;&gt;&gt; zn_units(12)</span>
+<span class="sd">     {1, 11, 5, 7}</span>
+<span class="sd">     </span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">units</span> <span class="o">=</span> <span class="nb">set</span><span class="p">()</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="n">n</span><span class="p">):</span>
+        <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="n">n</span><span class="p">):</span>
+            <span class="k">if</span> <span class="p">(</span><span class="n">i</span> <span class="o">*</span> <span class="n">j</span><span class="p">)</span> <span class="o">%</span> <span class="n">n</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
+                <span class="n">units</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">i</span><span class="p">)</span>
+                <span class="n">units</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">j</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">Comments</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="n">units</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">units</span></div>
+
+
 <div class="viewcode-block" id="zn_squareroots">
 <a class="viewcode-back" href="../techDoc.html#arithmetics.zn_squareroots">[docs]</a>
 <span class="k">def</span> <span class="nf">zn_squareroots</span><span class="p">(</span><span class="n">n</span><span class="p">,</span><span class="n">Comments</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Renders the quadratic residues of Zn as a dictionary.</span>
+
+<span class="sd">    &gt;&gt;&gt; zn_squareroots(13,Comments=False)</span>
+<span class="sd">     {1: [1, 12], 4: [2, 11],</span>
+<span class="sd">      9: [3, 10], 3: [4, 9],</span>
+<span class="sd">      12: [5, 8], 10: [6, 7]}</span>
+<span class="sd">    </span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">sqrt</span> <span class="o">=</span> <span class="p">{}</span>
     <span class="n">units</span> <span class="o">=</span> <span class="n">zn_units</span><span class="p">(</span><span class="n">n</span><span class="p">)</span>
@@ -534,23 +589,6 @@
         <span class="k">except</span><span class="p">:</span>
             <span class="n">sqrt</span><span class="p">[</span><span class="n">sqi</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span><span class="n">i</span><span class="p">]</span>
     <span class="k">return</span> <span class="n">sqrt</span></div>
-
-
-<div class="viewcode-block" id="zn_units">
-<a class="viewcode-back" href="../techDoc.html#arithmetics.zn_units">[docs]</a>
-<span class="k">def</span> <span class="nf">zn_units</span><span class="p">(</span><span class="n">n</span><span class="p">,</span><span class="n">Comments</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">    Renders the set of units of Zn.</span>
-<span class="sd">    &quot;&quot;&quot;</span>
-    <span class="n">units</span> <span class="o">=</span> <span class="nb">set</span><span class="p">()</span>
-    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="n">n</span><span class="p">):</span>
-        <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="n">n</span><span class="p">):</span>
-            <span class="k">if</span> <span class="p">(</span><span class="n">i</span> <span class="o">*</span> <span class="n">j</span><span class="p">)</span> <span class="o">%</span> <span class="n">n</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
-                <span class="n">units</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">i</span><span class="p">)</span>
-                <span class="n">units</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">j</span><span class="p">)</span>
-    <span class="k">if</span> <span class="n">Comments</span><span class="p">:</span>
-        <span class="nb">print</span><span class="p">(</span><span class="n">units</span><span class="p">)</span>
-    <span class="k">return</span> <span class="n">units</span></div>
 
 
 <div class="viewcode-block" id="computePiDecimals">
@@ -683,9 +721,15 @@
 <span class="sd">    *Parametrs*:</span>
 
 <span class="sd">        *n*: strictly positive integer (default = 7).</span>
-<span class="sd">        *AsFloats*: If True (defaut False), renders the list of approximate floats corresponding to the rational fractions. </span>
+<span class="sd">        *AsFloats*: If True (defaut False), renders the list of approximate floats corresponding to the rational fractions.</span>
 
-<span class="sd">    *Source*: Graham, Knuth, Patashnik, Sec. 4.5 in Concrete Mathematics 2nd Ed., Addison-Wesley 1994, pp 115-123. </span>
+<span class="sd">    &gt;&gt;&gt; computeFareaySeries(4)</span>
+<span class="sd">     [[0, 1], [1, 4], [1, 3], [1, 2], [2, 3], [3, 4], [1, 1]]</span>
+<span class="sd">    &gt;&gt;&gt; computeFareySeries(4,AsFloats=True)</span>
+<span class="sd">    [0.0, 0.25, 0.3333333333333333, 0.5, 0.6666666666666666, 0.75, 1.0]</span>
+
+<span class="sd">    *Source*: Graham, Knuth, Patashnik, Sec. 4.5 in Concrete Mathematics 2nd Ed., Addison-Wesley 1994, pp 115-123.</span>
+<span class="sd">    </span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">f</span> <span class="o">=</span> <span class="p">[[</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">],[</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">]]</span>
     <span class="k">if</span> <span class="n">n</span> <span class="o">&lt;</span> <span class="mi">1</span><span class="p">:</span>
@@ -763,7 +807,7 @@
 
   <div role="contentinfo">
     <p>&#169; Copyright 2012-2024, Raymond Bisdorff.
-      <span class="lastupdated">Last updated on Nov 15, 2024.
+      <span class="lastupdated">Last updated on Dec 18, 2024.
       </span></p>
   </div>
 

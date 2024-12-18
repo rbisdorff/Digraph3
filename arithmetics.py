@@ -2,7 +2,7 @@
 """
 Python3+ implementation of arithmetics tools
 
-Copyright (C) 2016-2023  Raymond Bisdorff
+Copyright (C) 2016-2024 Raymond Bisdorff
 
 Tools gathered for doing arithmetics.
 Mainly inspired from G.A. Jones & J.M. Jones,
@@ -42,7 +42,9 @@ class QuadraticResiduesDigraph(Digraph):
     We may graphically illustrate the reciprocity theorem as follows::
     
        >>> from arithmetics import *
-       >>> leg = QuadraticResiduesDigraph(primesBelow(20,Odd=True))
+       >>> primesBelow20 = primesBelow(20,Odd=True)
+        [3,5,7,11,13,17,19]
+       >>> leg = QuadraticResiduesDigraph(primesBelow20)
        >>> from digraphs import AsymmetricPartialDigraph
        >>> aleg = AsymmetricPartialDigraph(leg)
        >>> aleg.exportGraphViz('legendreAsym')
@@ -228,7 +230,7 @@ def moebius_mu(n):
     n = p1^e1 * ... * pk^ek with each ei >= 1 for i = 1, ..., k.  
 
     mu = 0 if ei > 1 for some i = 1, ... k else mu = (-1)^k.
-    
+
     """
     if n < 1:
         print('n must be a positive integer!')
@@ -248,6 +250,10 @@ def moebius_mu(n):
 def divisors(n,Sorted=True):
     """
     Renders the list of divisors of integer n.
+
+    >>> divisors(12)
+     [1, 2, 3, 4, 6, 12]
+     
     """
     if n == 0:
         return
@@ -278,6 +284,10 @@ def totient(n):
     """
     Implements the totient function rendering
     Euler's number of coprime elements a in Zn.
+
+    >>> totient(12)
+     4
+
     """
     if n == 0: return 1
 
@@ -295,6 +305,10 @@ def continuedFraction(p, q):
     """
     Renders the continued fraction [a_0,a_1,a_2,...,a_n]
     of the ratio of two integers p and q, q > 0 and where a0 = p//q.
+
+    >>> continuedFraction(12,7)
+     [1, 1, 2, 1, 1]
+    
     """
     if q < 0:
         return None
@@ -317,6 +331,12 @@ def evalContinuedFraction(cf):
     Backwise recursive evaluation: ev_i-1 + 1/ev_i, for i = n,..,1
     of the continued fraction cf = [a_0,a_1,a_2,...,a_n] and 
     where a_0 corresponds to its integer part.
+
+    >>> evalContinuedFraction([1, 1, 2, 1, 1])  # 12/7
+     Decimal('1.714285714285714285714285714')
+    >>> 12/7
+     1.7142857142857142
+
     """
     from decimal import Decimal
     n = len(cf) - 1
@@ -331,32 +351,45 @@ def evalContinuedFraction(cf):
 def gcd(a, b):
     """
     Renders the greatest common divisor of a and b.
+
+    >>> gcd(120,16)
+     8
+
     """
     if a == b: return a
     while b > 0: a, b = b, a % b
     return a
-
+    
 def lcm(a, b):
     """
     Renders the least common multiple of a and b.
+
+    >>> lcm(120,16)
+     240
+
     """
     return abs(a * b) // gcd(a, b)
 
-def bezout(a,b):
+def bezout(a,b,Debug=False):
     """
     Renders d = gcd(a,b) and the
     Bezout coefficients x, y such that
     d = ax + by.
+
+    >>> bezout(120,16)
+     (8, 1.0, -7.0)
     """
     
     x,y,u,v = 1,0,0,1
-    print(a,0,x,y)
-    print(a,b,u,v)
+    if Debug:
+        print(a,0,x,y)
+        print(a,b,u,v)
     while b != 0:
         r = a % b
         q = (a - r)/b
         x,y, u,v = u,v, x-(q*u),y-(q*v)
-        print(a,b,q,r,u,v)
+        if Debug:
+            print(a,b,q,r,u,v)
         a,b = b,r
     return a,x,y
 
@@ -376,9 +409,33 @@ def solPartEqnDioph(a,b,c):
 
     return C*x, C*y , A, B # solution particulière plus coefficients
 
+def zn_units(n,Comments=False):
+    """
+    Renders the set of units of Zn.
+
+    >>> zn_units(12)
+     {1, 11, 5, 7}
+     
+    """
+    units = set()
+    for i in range(1,n):
+        for j in range(1,n):
+            if (i * j) % n == 1:
+                units.add(i)
+                units.add(j)
+    if Comments:
+        print(units)
+    return units
+
 def zn_squareroots(n,Comments=False):
     """
     Renders the quadratic residues of Zn as a dictionary.
+
+    >>> zn_squareroots(13,Comments=False)
+     {1: [1, 12], 4: [2, 11],
+      9: [3, 10], 3: [4, 9],
+      12: [5, 8], 10: [6, 7]}
+    
     """
     sqrt = {}
     units = zn_units(n)
@@ -393,20 +450,6 @@ def zn_squareroots(n,Comments=False):
         except:
             sqrt[sqi] = [i]
     return sqrt
-
-def zn_units(n,Comments=False):
-    """
-    Renders the set of units of Zn.
-    """
-    units = set()
-    for i in range(1,n):
-        for j in range(1,n):
-            if (i * j) % n == 1:
-                units.add(i)
-                units.add(j)
-    if Comments:
-        print(units)
-    return units
 
 def computePiDecimals(decimalWordLength=4,nbrOfWords=600,Comments=False):
     """
@@ -527,9 +570,15 @@ def computeFareySeries(n=7,AsFloats=False,Debug=False):
     *Parametrs*:
 
         *n*: strictly positive integer (default = 7).
-        *AsFloats*: If True (defaut False), renders the list of approximate floats corresponding to the rational fractions. 
+        *AsFloats*: If True (defaut False), renders the list of approximate floats corresponding to the rational fractions.
 
-    *Source*: Graham, Knuth, Patashnik, Sec. 4.5 in Concrete Mathematics 2nd Ed., Addison-Wesley 1994, pp 115-123. 
+    >>> computeFareaySeries(4)
+     [[0, 1], [1, 4], [1, 3], [1, 2], [2, 3], [3, 4], [1, 1]]
+    >>> computeFareySeries(4,AsFloats=True)
+    [0.0, 0.25, 0.3333333333333333, 0.5, 0.6666666666666666, 0.75, 1.0]
+
+    *Source*: Graham, Knuth, Patashnik, Sec. 4.5 in Concrete Mathematics 2nd Ed., Addison-Wesley 1994, pp 115-123.
+    
     """
     f = [[0,1],[1,1]]
     if n < 1:
