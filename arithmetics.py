@@ -301,19 +301,25 @@ def totient(n):
     _totients[n] = tot
     return tot
 
-def continuedFraction(p, q):
+def continuedFraction(p, q, Comments=False):
     """
     Renders the continued fraction [a_0,a_1,a_2,...,a_n]
     of the ratio of two integers p and q, q > 0 and where a0 = p//q.
 
-    >>> continuedFraction(12,7)
+    >>> continuedFraction(12,7,Comments=True)
+     12//7 = 1R5
+     7//5 = 1R2
+     5//2 = 2R1
+     2//1 = 2R0
+     1//1 = 1R0
      [1, 1, 2, 1, 1]
     
     """
     if q < 0:
         return None
     res = [p//q]
-    #print(p,q,res)
+    if Comments:
+        print('%d//%d = %dR%d' % (p,q,(p//q),(p%q)) )
     while q > 0: 
         q0 = q
         p, q = q, p % q
@@ -323,7 +329,11 @@ def continuedFraction(p, q):
             res.append(1)
         elif q0 == 1:
             res.append(1)
-        #print(p,q0,q,res)
+        if Comments:
+            if q > 0:    
+                print('%d//%d = %dR%d' % (p,q,(p//q),(p%q)) )
+            else:
+                print('%d//%d = %dR%d' % (p,q0,(p//q0),(p%q0)) )      
     return res
 
 def evalContinuedFraction(cf):
@@ -341,10 +351,8 @@ def evalContinuedFraction(cf):
     from decimal import Decimal
     n = len(cf) - 1
     res = Decimal(str(cf[n]))
-    #print(n,res)
     for i in range(n-1,0,-1):
         res = Decimal(str(cf[i])) + Decimal('1')/res
-        #print(i,res)
     res = Decimal(str(cf[0])) + Decimal('1')/res
     return res
         
