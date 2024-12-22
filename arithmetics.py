@@ -355,7 +355,37 @@ def evalContinuedFraction(cf):
         res = Decimal(str(cf[i])) + Decimal('1')/res
     res = Decimal(str(cf[0])) + Decimal('1')/res
     return res
-        
+
+def cf2Rational(cf, Debug=False):
+    """
+    Converts the finite continued Fraction *cf* back to
+    its corresponding rational number expression.
+
+    >>> continuedFraction(75,8)
+     [9, 2, 1, 1, 1]
+    >>> cf2Rational([9,2,1,1,1])
+     '75/8'
+
+    """
+    
+    if Debug:
+        print(cf)
+    ecf = evalContinuedFraction(cf)
+    if Debug:
+        print(ecf)
+    ndec = len(str(ecf))
+    if Debug:
+        print(ndec)
+    mult = 10**ndec
+    if Debug:
+        print(mult)
+    div = gcd((ecf*mult),mult)
+    if Debug:
+        print(div)
+    res = '%d/%d' % ( ((ecf*mult)//div), (mult//div) )
+    return res
+
+
 def gcd(a, b):
     """
     Renders the greatest common divisor of a and b.

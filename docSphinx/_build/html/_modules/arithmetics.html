@@ -477,7 +477,40 @@
     <span class="n">res</span> <span class="o">=</span> <span class="n">Decimal</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">cf</span><span class="p">[</span><span class="mi">0</span><span class="p">]))</span> <span class="o">+</span> <span class="n">Decimal</span><span class="p">(</span><span class="s1">&#39;1&#39;</span><span class="p">)</span><span class="o">/</span><span class="n">res</span>
     <span class="k">return</span> <span class="n">res</span></div>
 
-        
+
+<div class="viewcode-block" id="cf2Rational">
+<a class="viewcode-back" href="../techDoc.html#arithmetics.cf2Rational">[docs]</a>
+<span class="k">def</span> <span class="nf">cf2Rational</span><span class="p">(</span><span class="n">cf</span><span class="p">,</span> <span class="n">Debug</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Converts the finite continued Fraction *cf* back to</span>
+<span class="sd">    its corresponding rational number expression.</span>
+
+<span class="sd">    &gt;&gt;&gt; continuedFraction(75,8)</span>
+<span class="sd">     [9, 2, 1, 1, 1]</span>
+<span class="sd">    &gt;&gt;&gt; cf2Rational([9,2,1,1,1])</span>
+<span class="sd">     &#39;75/8&#39;</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+    
+    <span class="k">if</span> <span class="n">Debug</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="n">cf</span><span class="p">)</span>
+    <span class="n">ecf</span> <span class="o">=</span> <span class="n">evalContinuedFraction</span><span class="p">(</span><span class="n">cf</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">Debug</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="n">ecf</span><span class="p">)</span>
+    <span class="n">ndec</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">ecf</span><span class="p">))</span>
+    <span class="k">if</span> <span class="n">Debug</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="n">ndec</span><span class="p">)</span>
+    <span class="n">mult</span> <span class="o">=</span> <span class="mi">10</span><span class="o">**</span><span class="n">ndec</span>
+    <span class="k">if</span> <span class="n">Debug</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="n">mult</span><span class="p">)</span>
+    <span class="n">div</span> <span class="o">=</span> <span class="n">gcd</span><span class="p">((</span><span class="n">ecf</span><span class="o">*</span><span class="n">mult</span><span class="p">),</span><span class="n">mult</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">Debug</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="n">div</span><span class="p">)</span>
+    <span class="n">res</span> <span class="o">=</span> <span class="s1">&#39;</span><span class="si">%d</span><span class="s1">/</span><span class="si">%d</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="p">(</span> <span class="p">((</span><span class="n">ecf</span><span class="o">*</span><span class="n">mult</span><span class="p">)</span><span class="o">//</span><span class="n">div</span><span class="p">),</span> <span class="p">(</span><span class="n">mult</span><span class="o">//</span><span class="n">div</span><span class="p">)</span> <span class="p">)</span>
+    <span class="k">return</span> <span class="n">res</span></div>
+
+
+
 <div class="viewcode-block" id="gcd">
 <a class="viewcode-back" href="../techDoc.html#arithmetics.gcd">[docs]</a>
 <span class="k">def</span> <span class="nf">gcd</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">):</span>
@@ -815,7 +848,7 @@
 
   <div role="contentinfo">
     <p>&#169; Copyright 2012-2024, Raymond Bisdorff.
-      <span class="lastupdated">Last updated on Dec 21, 2024.
+      <span class="lastupdated">Last updated on Dec 22, 2024.
       </span></p>
   </div>
 
