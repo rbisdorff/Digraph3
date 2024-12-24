@@ -301,39 +301,75 @@ def totient(n):
     _totients[n] = tot
     return tot
 
+def continuedFraction1(argp, argq, nTerms=20, rel_tol=1e-9, abs_tol=0.0,Comments=True):
+    """
+    Dr. Drang
+    """
+    from fractions import Fraction
+    from math import isclose
+
+    cf = [argp//argq]
+    remainder = argp%argq
+    p = [0, 1]
+    q = [1, 0]
+    s = []
+
+    for i in range(nTerms):
+        whole, frac = divmod(remainder,1)
+        #whole = cf[-1]//remainder
+        #frac = cf[-1]%remainder
+        an = int(whole)
+        pn = an*p[-1] + p[-2]
+        qn = an*q[-1] + q[-2]
+        sn = Fraction(pn,qn)
+        cf.append(an)
+        p.append(pn)
+        q.append(qn)
+        s.append(sn)
+
+        if isclose( (argp/argq), float(sn), rel_tol=rel_tol,abs_tol=abs_tol):
+            break
+        if frac == 0: 
+            remainder = 1
+            break
+        else:
+            remainder = 1/frac
+
+    return(cf,s)
+        
 def continuedFraction(p, q, Comments=False):
     """
     Renders the continued fraction [a_0,a_1,a_2,...,a_n]
-    of the ratio of two integers p and q, q > 0 and where a0 = p//q.
+    of the ratio of two positive integers p > 0 and q > 0 by
+    following the Euclidian division algorithm.
 
     >>> continuedFraction(12,7,Comments=True)
      12//7 = 1R5
      7//5 = 1R2
      5//2 = 2R1
      2//1 = 2R0
-     1//1 = 1R0
-     [1, 1, 2, 1, 1]
+     [1, 1, 2, 2]
     
     """
-    if q < 0:
+    if p < 0 or q < 0:
+        Print('Error: p and q arguments must be positive integers!') 
         return None
+    if type(p) != int or type(q) != int:
+        Print('Error: p and q arguments must be positive integers!')
+        return None
+    
     res = [p//q]
     if Comments:
         print('%d//%d = %dR%d' % (p,q,(p//q),(p%q)) )
     while q > 0: 
-        q0 = q
         p, q = q, p % q
         if q > 1:
             res.append(p//q)
         elif q == 1 :
-            res.append(1)
-        elif q0 == 1:
-            res.append(1)
+            res.append(p)
         if Comments:
             if q > 0:    
                 print('%d//%d = %dR%d' % (p,q,(p//q),(p%q)) )
-            else:
-                print('%d//%d = %dR%d' % (p,q0,(p//q0),(p%q0)) )      
     return res
 
 def evalContinuedFraction(cf):

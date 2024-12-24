@@ -1121,6 +1121,7 @@
 <li class="toctree-l3"><a class="reference internal" href="#arithmetics.computeFareySeries"><code class="docutils literal notranslate"><span class="pre">computeFareySeries()</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="#arithmetics.computePiDecimals"><code class="docutils literal notranslate"><span class="pre">computePiDecimals()</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="#arithmetics.continuedFraction"><code class="docutils literal notranslate"><span class="pre">continuedFraction()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#arithmetics.continuedFraction1"><code class="docutils literal notranslate"><span class="pre">continuedFraction1()</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="#arithmetics.divisors"><code class="docutils literal notranslate"><span class="pre">divisors()</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="#arithmetics.divisorsFunction"><code class="docutils literal notranslate"><span class="pre">divisorsFunction()</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="#arithmetics.evalContinuedFraction"><code class="docutils literal notranslate"><span class="pre">evalContinuedFraction()</span></code></a></li>
@@ -11794,16 +11795,22 @@ decimals of <img class="math" src="_images/math/9cc8517129c87252edd7fe2e4532af9d
 <dt class="sig sig-object py" id="arithmetics.continuedFraction">
 <span class="sig-prename descclassname"><span class="pre">arithmetics.</span></span><span class="sig-name descname"><span class="pre">continuedFraction</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">p</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">q</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">Comments</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/arithmetics.html#continuedFraction"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#arithmetics.continuedFraction" title="Link to this definition"></a></dt>
 <dd><p>Renders the continued fraction [a_0,a_1,a_2,…,a_n]
-of the ratio of two integers p and q, q &gt; 0 and where a0 = p//q.</p>
+of the ratio of two positive integers p &gt; 0 and q &gt; 0 by
+following the Euclidian division algorithm.</p>
 <div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">continuedFraction</span><span class="p">(</span><span class="mi">12</span><span class="p">,</span><span class="mi">7</span><span class="p">,</span><span class="n">Comments</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 <span class="go"> 12//7 = 1R5</span>
 <span class="go"> 7//5 = 1R2</span>
 <span class="go"> 5//2 = 2R1</span>
 <span class="go"> 2//1 = 2R0</span>
-<span class="go"> 1//1 = 1R0</span>
-<span class="go"> [1, 1, 2, 1, 1]</span>
+<span class="go"> [1, 1, 2, 2]</span>
 </pre></div>
 </div>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="arithmetics.continuedFraction1">
+<span class="sig-prename descclassname"><span class="pre">arithmetics.</span></span><span class="sig-name descname"><span class="pre">continuedFraction1</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">argp</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">argq</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">nTerms</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">20</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">rel_tol</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1e-09</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">abs_tol</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0.0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">Comments</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/arithmetics.html#continuedFraction1"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#arithmetics.continuedFraction1" title="Link to this definition"></a></dt>
+<dd><p>Dr. Drang</p>
 </dd></dl>
 
 <dl class="py function">
@@ -14411,7 +14418,7 @@ Components are stored in an ordered dictionary.</p>
 
   <div role="contentinfo">
     <p>&#169; Copyright 2012-2024, Raymond Bisdorff.
-      <span class="lastupdated">Last updated on Dec 22, 2024.
+      <span class="lastupdated">Last updated on Dec 24, 2024.
       </span></p>
   </div>
 

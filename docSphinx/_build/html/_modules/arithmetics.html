@@ -417,41 +417,80 @@
     <span class="k">return</span> <span class="n">tot</span></div>
 
 
+<div class="viewcode-block" id="continuedFraction1">
+<a class="viewcode-back" href="../techDoc.html#arithmetics.continuedFraction1">[docs]</a>
+<span class="k">def</span> <span class="nf">continuedFraction1</span><span class="p">(</span><span class="n">argp</span><span class="p">,</span> <span class="n">argq</span><span class="p">,</span> <span class="n">nTerms</span><span class="o">=</span><span class="mi">20</span><span class="p">,</span> <span class="n">rel_tol</span><span class="o">=</span><span class="mf">1e-9</span><span class="p">,</span> <span class="n">abs_tol</span><span class="o">=</span><span class="mf">0.0</span><span class="p">,</span><span class="n">Comments</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Dr. Drang</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="kn">from</span> <span class="nn">fractions</span> <span class="kn">import</span> <span class="n">Fraction</span>
+    <span class="kn">from</span> <span class="nn">math</span> <span class="kn">import</span> <span class="n">isclose</span>
+
+    <span class="n">cf</span> <span class="o">=</span> <span class="p">[</span><span class="n">argp</span><span class="o">//</span><span class="n">argq</span><span class="p">]</span>
+    <span class="n">remainder</span> <span class="o">=</span> <span class="n">argp</span><span class="o">%</span><span class="n">argq</span>
+    <span class="n">p</span> <span class="o">=</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">]</span>
+    <span class="n">q</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">]</span>
+    <span class="n">s</span> <span class="o">=</span> <span class="p">[]</span>
+
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">nTerms</span><span class="p">):</span>
+        <span class="n">whole</span><span class="p">,</span> <span class="n">frac</span> <span class="o">=</span> <span class="nb">divmod</span><span class="p">(</span><span class="n">remainder</span><span class="p">,</span><span class="mi">1</span><span class="p">)</span>
+        <span class="c1">#whole = cf[-1]//remainder</span>
+        <span class="c1">#frac = cf[-1]%remainder</span>
+        <span class="n">an</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">whole</span><span class="p">)</span>
+        <span class="n">pn</span> <span class="o">=</span> <span class="n">an</span><span class="o">*</span><span class="n">p</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">+</span> <span class="n">p</span><span class="p">[</span><span class="o">-</span><span class="mi">2</span><span class="p">]</span>
+        <span class="n">qn</span> <span class="o">=</span> <span class="n">an</span><span class="o">*</span><span class="n">q</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">+</span> <span class="n">q</span><span class="p">[</span><span class="o">-</span><span class="mi">2</span><span class="p">]</span>
+        <span class="n">sn</span> <span class="o">=</span> <span class="n">Fraction</span><span class="p">(</span><span class="n">pn</span><span class="p">,</span><span class="n">qn</span><span class="p">)</span>
+        <span class="n">cf</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">an</span><span class="p">)</span>
+        <span class="n">p</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">pn</span><span class="p">)</span>
+        <span class="n">q</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">qn</span><span class="p">)</span>
+        <span class="n">s</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">sn</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="n">isclose</span><span class="p">(</span> <span class="p">(</span><span class="n">argp</span><span class="o">/</span><span class="n">argq</span><span class="p">),</span> <span class="nb">float</span><span class="p">(</span><span class="n">sn</span><span class="p">),</span> <span class="n">rel_tol</span><span class="o">=</span><span class="n">rel_tol</span><span class="p">,</span><span class="n">abs_tol</span><span class="o">=</span><span class="n">abs_tol</span><span class="p">):</span>
+            <span class="k">break</span>
+        <span class="k">if</span> <span class="n">frac</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span> 
+            <span class="n">remainder</span> <span class="o">=</span> <span class="mi">1</span>
+            <span class="k">break</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">remainder</span> <span class="o">=</span> <span class="mi">1</span><span class="o">/</span><span class="n">frac</span>
+
+    <span class="k">return</span><span class="p">(</span><span class="n">cf</span><span class="p">,</span><span class="n">s</span><span class="p">)</span></div>
+
+        
 <div class="viewcode-block" id="continuedFraction">
 <a class="viewcode-back" href="../techDoc.html#arithmetics.continuedFraction">[docs]</a>
 <span class="k">def</span> <span class="nf">continuedFraction</span><span class="p">(</span><span class="n">p</span><span class="p">,</span> <span class="n">q</span><span class="p">,</span> <span class="n">Comments</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Renders the continued fraction [a_0,a_1,a_2,...,a_n]</span>
-<span class="sd">    of the ratio of two integers p and q, q &gt; 0 and where a0 = p//q.</span>
+<span class="sd">    of the ratio of two positive integers p &gt; 0 and q &gt; 0 by</span>
+<span class="sd">    following the Euclidian division algorithm.</span>
 
 <span class="sd">    &gt;&gt;&gt; continuedFraction(12,7,Comments=True)</span>
 <span class="sd">     12//7 = 1R5</span>
 <span class="sd">     7//5 = 1R2</span>
 <span class="sd">     5//2 = 2R1</span>
 <span class="sd">     2//1 = 2R0</span>
-<span class="sd">     1//1 = 1R0</span>
-<span class="sd">     [1, 1, 2, 1, 1]</span>
+<span class="sd">     [1, 1, 2, 2]</span>
 <span class="sd">    </span>
 <span class="sd">    &quot;&quot;&quot;</span>
-    <span class="k">if</span> <span class="n">q</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">:</span>
+    <span class="k">if</span> <span class="n">p</span> <span class="o">&lt;</span> <span class="mi">0</span> <span class="ow">or</span> <span class="n">q</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="n">Print</span><span class="p">(</span><span class="s1">&#39;Error: p and q arguments must be positive integers!&#39;</span><span class="p">)</span> 
         <span class="k">return</span> <span class="kc">None</span>
+    <span class="k">if</span> <span class="nb">type</span><span class="p">(</span><span class="n">p</span><span class="p">)</span> <span class="o">!=</span> <span class="nb">int</span> <span class="ow">or</span> <span class="nb">type</span><span class="p">(</span><span class="n">q</span><span class="p">)</span> <span class="o">!=</span> <span class="nb">int</span><span class="p">:</span>
+        <span class="n">Print</span><span class="p">(</span><span class="s1">&#39;Error: p and q arguments must be positive integers!&#39;</span><span class="p">)</span>
+        <span class="k">return</span> <span class="kc">None</span>
+    
     <span class="n">res</span> <span class="o">=</span> <span class="p">[</span><span class="n">p</span><span class="o">//</span><span class="n">q</span><span class="p">]</span>
     <span class="k">if</span> <span class="n">Comments</span><span class="p">:</span>
         <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;</span><span class="si">%d</span><span class="s1">//</span><span class="si">%d</span><span class="s1"> = </span><span class="si">%d</span><span class="s1">R</span><span class="si">%d</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="n">p</span><span class="p">,</span><span class="n">q</span><span class="p">,(</span><span class="n">p</span><span class="o">//</span><span class="n">q</span><span class="p">),(</span><span class="n">p</span><span class="o">%</span><span class="n">q</span><span class="p">))</span> <span class="p">)</span>
     <span class="k">while</span> <span class="n">q</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span> 
-        <span class="n">q0</span> <span class="o">=</span> <span class="n">q</span>
         <span class="n">p</span><span class="p">,</span> <span class="n">q</span> <span class="o">=</span> <span class="n">q</span><span class="p">,</span> <span class="n">p</span> <span class="o">%</span> <span class="n">q</span>
         <span class="k">if</span> <span class="n">q</span> <span class="o">&gt;</span> <span class="mi">1</span><span class="p">:</span>
             <span class="n">res</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">p</span><span class="o">//</span><span class="n">q</span><span class="p">)</span>
         <span class="k">elif</span> <span class="n">q</span> <span class="o">==</span> <span class="mi">1</span> <span class="p">:</span>
-            <span class="n">res</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
-        <span class="k">elif</span> <span class="n">q0</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
-            <span class="n">res</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+            <span class="n">res</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">p</span><span class="p">)</span>
         <span class="k">if</span> <span class="n">Comments</span><span class="p">:</span>
             <span class="k">if</span> <span class="n">q</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>    
                 <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;</span><span class="si">%d</span><span class="s1">//</span><span class="si">%d</span><span class="s1"> = </span><span class="si">%d</span><span class="s1">R</span><span class="si">%d</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="n">p</span><span class="p">,</span><span class="n">q</span><span class="p">,(</span><span class="n">p</span><span class="o">//</span><span class="n">q</span><span class="p">),(</span><span class="n">p</span><span class="o">%</span><span class="n">q</span><span class="p">))</span> <span class="p">)</span>
-            <span class="k">else</span><span class="p">:</span>
-                <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;</span><span class="si">%d</span><span class="s1">//</span><span class="si">%d</span><span class="s1"> = </span><span class="si">%d</span><span class="s1">R</span><span class="si">%d</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="n">p</span><span class="p">,</span><span class="n">q0</span><span class="p">,(</span><span class="n">p</span><span class="o">//</span><span class="n">q0</span><span class="p">),(</span><span class="n">p</span><span class="o">%</span><span class="n">q0</span><span class="p">))</span> <span class="p">)</span>      
     <span class="k">return</span> <span class="n">res</span></div>
 
 
@@ -848,7 +887,7 @@
 
   <div role="contentinfo">
     <p>&#169; Copyright 2012-2024, Raymond Bisdorff.
-      <span class="lastupdated">Last updated on Dec 22, 2024.
+      <span class="lastupdated">Last updated on Dec 24, 2024.
       </span></p>
   </div>
 
