@@ -456,9 +456,9 @@
     <span class="k">return</span><span class="p">(</span><span class="n">cf</span><span class="p">,</span><span class="n">s</span><span class="p">)</span></div>
 
         
-<div class="viewcode-block" id="continuedFraction">
-<a class="viewcode-back" href="../techDoc.html#arithmetics.continuedFraction">[docs]</a>
-<span class="k">def</span> <span class="nf">continuedFraction</span><span class="p">(</span><span class="n">p</span><span class="p">,</span> <span class="n">q</span><span class="p">,</span> <span class="n">Comments</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+<div class="viewcode-block" id="simpleContinuedFraction">
+<a class="viewcode-back" href="../techDoc.html#arithmetics.simpleContinuedFraction">[docs]</a>
+<span class="k">def</span> <span class="nf">simpleContinuedFraction</span><span class="p">(</span><span class="n">p</span><span class="p">,</span> <span class="n">q</span><span class="p">,</span> <span class="n">Comments</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Renders the continued fraction [a_0,a_1,a_2,...,a_n]</span>
 <span class="sd">    of the ratio of two positive integers p &gt; 0 and q &gt; 0 by</span>
@@ -492,6 +492,34 @@
             <span class="k">if</span> <span class="n">q</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>    
                 <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;</span><span class="si">%d</span><span class="s1">//</span><span class="si">%d</span><span class="s1"> = </span><span class="si">%d</span><span class="s1">R</span><span class="si">%d</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="n">p</span><span class="p">,</span><span class="n">q</span><span class="p">,(</span><span class="n">p</span><span class="o">//</span><span class="n">q</span><span class="p">),(</span><span class="n">p</span><span class="o">%</span><span class="n">q</span><span class="p">))</span> <span class="p">)</span>
     <span class="k">return</span> <span class="n">res</span></div>
+
+
+<div class="viewcode-block" id="simpleConvergents">
+<a class="viewcode-back" href="../techDoc.html#arithmetics.simpleConvergents">[docs]</a>
+<span class="k">def</span> <span class="nf">simpleConvergents</span><span class="p">(</span><span class="n">cf</span><span class="p">,</span> <span class="n">AsFloats</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Renders the convergents *pi* and *qi* for *i* = 0 to *n* in list format</span>
+<span class="sd">    for a given simple continued fraction of two positive integer a and b.</span>
+<span class="sd">    If AsFloats==True, the float value fi = pi/qi are also provided.</span>
+<span class="sd">    The return delivers a tuple (p,q) of (p,q,f).</span>
+<span class="sd">    p[-1] and q[-1] deliver the initial numerator a and denominator b.</span>
+<span class="sd">    f[-1] delivers the float value of the rational fraction a/b.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">n</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">cf</span><span class="p">)</span>
+    <span class="n">a</span> <span class="o">=</span> <span class="n">cf</span>
+    <span class="n">p</span> <span class="o">=</span> <span class="p">[</span><span class="n">a</span><span class="p">[</span><span class="mi">0</span><span class="p">],(</span><span class="n">a</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">*</span><span class="n">a</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)]</span>
+    <span class="n">q</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="n">a</span><span class="p">[</span><span class="mi">1</span><span class="p">]]</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span><span class="n">n</span><span class="p">):</span>
+        <span class="nb">print</span><span class="p">(</span><span class="n">i</span><span class="p">,</span><span class="n">a</span><span class="p">[</span><span class="n">i</span><span class="p">],</span><span class="n">p</span><span class="p">[</span><span class="n">i</span><span class="o">-</span><span class="mi">1</span><span class="p">],</span><span class="n">p</span><span class="p">[</span><span class="n">i</span><span class="o">-</span><span class="mi">2</span><span class="p">])</span>
+        <span class="n">p</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">a</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">*</span><span class="n">p</span><span class="p">[</span><span class="n">i</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">+</span> <span class="n">p</span><span class="p">[</span><span class="n">i</span><span class="o">-</span><span class="mi">2</span><span class="p">])</span>
+        <span class="n">q</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">a</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">*</span><span class="n">q</span><span class="p">[</span><span class="n">i</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">+</span> <span class="n">q</span><span class="p">[</span><span class="n">i</span><span class="o">-</span><span class="mi">2</span><span class="p">])</span>
+    <span class="n">f</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">if</span> <span class="n">AsFloats</span><span class="p">:</span>
+        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
+            <span class="n">f</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">p</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">/</span><span class="n">q</span><span class="p">[</span><span class="n">i</span><span class="p">])</span>
+        <span class="k">return</span> <span class="p">(</span><span class="n">p</span><span class="p">,</span><span class="n">q</span><span class="p">,</span><span class="n">f</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="k">return</span> <span class="p">(</span><span class="n">p</span><span class="p">,</span><span class="n">q</span><span class="p">)</span></div>
 
 
 <div class="viewcode-block" id="evalContinuedFraction">
@@ -865,8 +893,8 @@
     <span class="n">p</span> <span class="o">=</span> <span class="mi">5</span>
     <span class="n">q</span> <span class="o">=</span> <span class="mi">8</span>
     <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;p =&#39;</span><span class="p">,</span><span class="n">p</span><span class="p">,</span><span class="s1">&#39;, q =&#39;</span><span class="p">,</span><span class="n">q</span><span class="p">)</span>
-    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;cf(p,q) = &#39;</span><span class="p">,</span> <span class="n">continuedFraction</span><span class="p">(</span><span class="n">p</span><span class="p">,</span><span class="n">q</span><span class="p">)</span> <span class="p">)</span>
-    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;eval(cf(p,q)) = &#39;</span><span class="p">,</span> <span class="n">evalContinuedFraction</span><span class="p">(</span><span class="n">continuedFraction</span><span class="p">(</span><span class="n">p</span><span class="p">,</span><span class="n">q</span><span class="p">))</span> <span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;cf(p,q) = &#39;</span><span class="p">,</span> <span class="n">simpleContinuedFraction</span><span class="p">(</span><span class="n">p</span><span class="p">,</span><span class="n">q</span><span class="p">)</span> <span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;eval(cf(p,q)) = &#39;</span><span class="p">,</span> <span class="n">evalContinuedFraction</span><span class="p">(</span><span class="n">simpleContinuedFraction</span><span class="p">(</span><span class="n">p</span><span class="p">,</span><span class="n">q</span><span class="p">))</span> <span class="p">)</span>
     <span class="n">cf</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">2</span><span class="p">]</span>
     <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;cf(sqrt(2))_</span><span class="si">%d</span><span class="s1"> = &#39;</span> <span class="o">%</span> <span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">cf</span><span class="p">)</span><span class="o">-</span><span class="mi">1</span><span class="p">),</span> <span class="n">cf</span> <span class="p">)</span>
     <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;eval(cf(sqrt(2))_</span><span class="si">%d</span><span class="s1">) = &#39;</span> <span class="o">%</span> <span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">cf</span><span class="p">)</span><span class="o">-</span><span class="mi">1</span><span class="p">),</span> <span class="n">evalContinuedFraction</span><span class="p">(</span><span class="n">cf</span><span class="p">)</span> <span class="p">)</span>

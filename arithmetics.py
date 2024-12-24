@@ -337,13 +337,13 @@ def continuedFraction1(argp, argq, nTerms=20, rel_tol=1e-9, abs_tol=0.0,Comments
 
     return(cf,s)
         
-def continuedFraction(p, q, Comments=False):
+def simpleContinuedFraction(p, q, Comments=False):
     """
     Renders the continued fraction [a_0,a_1,a_2,...,a_n]
     of the ratio of two positive integers p > 0 and q > 0 by
     following the Euclidian division algorithm.
 
-    >>> continuedFraction(12,7,Comments=True)
+    >>> simpleContinuedFraction(12,7,Comments=True)
      12//7 = 1R5
      7//5 = 1R2
      5//2 = 2R1
@@ -371,6 +371,42 @@ def continuedFraction(p, q, Comments=False):
             if q > 0:    
                 print('%d//%d = %dR%d' % (p,q,(p//q),(p%q)) )
     return res
+
+def simpleConvergents(cf, AsFloats=False):
+    """
+    Renders the convergents *pi* and *qi* for *i* = 0 to *n* in list format
+    for a given simple continued fraction of two positive integer a and b.
+    If AsFloats==True, the float value fi = pi/qi are also provided.
+    The return delivers a tuple (p,q) or (p,q,f).
+    p[-1] and q[-1] deliver the initial numerator a and denominator b.
+    f[-1] delivers the float value of the rational fraction a/b.
+
+    >>> cf = simpleContinuedFraction(12,7)
+    >>> cf
+     [1, 1, 2, 2]
+    >>> p,q,f = simpleConvergents(cf, AsFloats=True)
+    >>> p
+     [1, 2, 5, 12]
+    >>> q
+     [1, 1, 3, 7]
+    >>> f
+     [1.0, 2.0, 1.6666666666666667, 1.7142857142857142]
+
+    """
+    n = len(cf)
+    a = cf
+    p = [a[0],(a[1]*a[0] + 1)]
+    q = [1,a[1]]
+    for i in range(2,n):
+        p.append(a[i]*p[i-1] + p[i-2])
+        q.append(a[i]*q[i-1] + q[i-2])
+    f = []
+    if AsFloats:
+        for i in range(n):
+            f.append(p[i]/q[i])
+        return (p,q,f)
+    else:
+        return (p,q)
 
 def evalContinuedFraction(cf):
     """
@@ -707,8 +743,8 @@ if __name__ == '__main__':
     p = 5
     q = 8
     print('p =',p,', q =',q)
-    print('cf(p,q) = ', continuedFraction(p,q) )
-    print('eval(cf(p,q)) = ', evalContinuedFraction(continuedFraction(p,q)) )
+    print('cf(p,q) = ', simpleContinuedFraction(p,q) )
+    print('eval(cf(p,q)) = ', evalContinuedFraction(simpleContinuedFraction(p,q)) )
     cf = [1,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2]
     print('cf(sqrt(2))_%d = ' % (len(cf)-1), cf )
     print('eval(cf(sqrt(2))_%d) = ' % (len(cf)-1), evalContinuedFraction(cf) )
