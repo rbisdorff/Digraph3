@@ -62,7 +62,20 @@ def testSternBrocot():
     print(sb)
     (m,n) = invSternBrocot(sb,Debug=True)
     print(m,n)
-     
+
+def testContinuedFraction():
+    from math import sqrt
+    p = 5
+    q = 8
+    print('p =',p,', q =',q)
+    print('cf(p,q) = ', simpleContinuedFraction(p,q) )
+    print('eval(cf(p,q)) = ', decimalEvalContinuedFraction(simpleContinuedFraction(p,q)) )
+    cf = [1,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2]
+    print('cf(sqrt(2))_%d = ' % (len(cf)-1), cf )
+    print('eval(cf(sqrt(2))_%d) = ' % (len(cf)-1), decimalEvalContinuedFraction(cf) )
+    print('sqrt(2)              = ', sqrt(2) )
+    
+
 
 
     

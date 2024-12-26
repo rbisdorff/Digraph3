@@ -300,48 +300,12 @@ def totient(n):
 
     _totients[n] = tot
     return tot
-
-def continuedFraction1(argp, argq, nTerms=20, rel_tol=1e-9, abs_tol=0.0,Comments=True):
-    """
-    Dr. Drang
-    """
-    from fractions import Fraction
-    from math import isclose
-
-    cf = [argp//argq]
-    remainder = argp%argq
-    p = [0, 1]
-    q = [1, 0]
-    s = []
-
-    for i in range(nTerms):
-        whole, frac = divmod(remainder,1)
-        #whole = cf[-1]//remainder
-        #frac = cf[-1]%remainder
-        an = int(whole)
-        pn = an*p[-1] + p[-2]
-        qn = an*q[-1] + q[-2]
-        sn = Fraction(pn,qn)
-        cf.append(an)
-        p.append(pn)
-        q.append(qn)
-        s.append(sn)
-
-        if isclose( (argp/argq), float(sn), rel_tol=rel_tol,abs_tol=abs_tol):
-            break
-        if frac == 0: 
-            remainder = 1
-            break
-        else:
-            remainder = 1/frac
-
-    return(cf,s)
         
 def simpleContinuedFraction(p, q, Comments=False):
     """
     Renders the continued fraction [a_0,a_1,a_2,...,a_n]
     of the ratio of two positive integers p > 0 and q > 0 by
-    following the Euclidian division algorithm.
+    following Euclide's division algorithm.
 
     >>> simpleContinuedFraction(12,7,Comments=True)
      12//7 = 1R5
@@ -375,11 +339,11 @@ def simpleContinuedFraction(p, q, Comments=False):
 def simpleConvergents(cf, AsFloats=False):
     """
     Renders the convergents *pi* and *qi* for *i* = 0 to *n* in list format
-    for a given simple continued fraction of two positive integer a and b.
-    If AsFloats==True, the float value fi = pi/qi are also provided.
-    The return delivers a tuple (p,q) or (p,q,f).
-    p[-1] and q[-1] deliver the initial numerator a and denominator b.
-    f[-1] delivers the float value of the rational fraction a/b.
+    for a given simple continued fraction of two positive integer *a* and *b*.
+    - If AsFloats==True, the float value *fi = pi/qi* are also provided.
+    - The return delivers a tuple (p,q) or (p,q,f).
+    - p[-1] and q[-1] deliver the initial numerator *a* and denominator *b*.
+    - f[-1] delivers the float value of the rational fraction *a/b*.
 
     >>> cf = simpleContinuedFraction(12,7)
     >>> cf
@@ -408,13 +372,13 @@ def simpleConvergents(cf, AsFloats=False):
     else:
         return (p,q)
 
-def evalContinuedFraction(cf):
+def decimalEvalContinuedFraction(cf):
     """
     Backwise recursive evaluation: ev_i-1 + 1/ev_i, for i = n,..,1
     of the continued fraction cf = [a_0,a_1,a_2,...,a_n] and 
     where a_0 corresponds to its integer part.
 
-    >>> evalContinuedFraction([1, 1, 2, 1, 1])  # 12/7
+    >>> decimalEvalContinuedFraction([1, 1, 2, 1, 1])  # 12/7
      Decimal('1.714285714285714285714285714')
     >>> 12/7
      1.7142857142857142
@@ -442,7 +406,7 @@ def cf2Rational(cf, Debug=False):
     
     if Debug:
         print(cf)
-    ecf = evalContinuedFraction(cf)
+    ecf = decimalEvalContinuedFraction(cf)
     if Debug:
         print(ecf)
     ndec = len(str(ecf))
@@ -739,17 +703,17 @@ if __name__ == '__main__':
 
     
     ######  scratch pad for testing the module components
-    from math import sqrt
-    p = 5
-    q = 8
-    print('p =',p,', q =',q)
-    print('cf(p,q) = ', simpleContinuedFraction(p,q) )
-    print('eval(cf(p,q)) = ', evalContinuedFraction(simpleContinuedFraction(p,q)) )
-    cf = [1,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2]
-    print('cf(sqrt(2))_%d = ' % (len(cf)-1), cf )
-    print('eval(cf(sqrt(2))_%d) = ' % (len(cf)-1), evalContinuedFraction(cf) )
-    print('sqrt(2)              = ', sqrt(2) )
-
+##    from math import sqrt
+##    p = 5
+##    q = 8
+##    print('p =',p,', q =',q)
+##    print('cf(p,q) = ', simpleContinuedFraction(p,q) )
+##    print('eval(cf(p,q)) = ', decimalEvalContinuedFraction(simpleContinuedFraction(p,q)) )
+##    cf = [1,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2]
+##    print('cf(sqrt(2))_%d = ' % (len(cf)-1), cf )
+##    print('eval(cf(sqrt(2))_%d) = ' % (len(cf)-1), decimalEvalContinuedFraction(cf) )
+##    print('sqrt(2)              = ', sqrt(2) )
+##
 
     print('*------------------*')
     print('If you see this line all tests were passed successfully :-)')
