@@ -11728,13 +11728,16 @@ d = ax + by.</p>
 
 <dl class="py function">
 <dt class="sig sig-object py" id="arithmetics.cf2Rational">
-<span class="sig-prename descclassname"><span class="pre">arithmetics.</span></span><span class="sig-name descname"><span class="pre">cf2Rational</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">cf</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">Debug</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/arithmetics.html#cf2Rational"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#arithmetics.cf2Rational" title="Link to this definition"></a></dt>
+<span class="sig-prename descclassname"><span class="pre">arithmetics.</span></span><span class="sig-name descname"><span class="pre">cf2Rational</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">cf</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">AsDecimal</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">Debug</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/arithmetics.html#cf2Rational"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#arithmetics.cf2Rational" title="Link to this definition"></a></dt>
 <dd><p>Converts the finite continued Fraction <em>cf</em> back to
-its corresponding rational number expression.</p>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">continuedFraction</span><span class="p">(</span><span class="mi">75</span><span class="p">,</span><span class="mi">8</span><span class="p">)</span>
+its corresponding rational number expression.
+Returns a/b or (a/b, Decimal(a/b)) if AsDecimal is True.</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">simpleContinuedFraction</span><span class="p">(</span><span class="mi">75</span><span class="p">,</span><span class="mi">8</span><span class="p">)</span>
 <span class="go"> [9, 2, 1, 1, 1]</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">cf2Rational</span><span class="p">([</span><span class="mi">9</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">])</span>
-<span class="go"> &#39;75/8&#39;</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">cf2Rational</span><span class="p">([</span><span class="mi">9</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">],</span> <span class="n">AsDecimal</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="go"> (&#39;75/8&#39;, Decimal(&#39;9.375&#39;)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">eval</span><span class="p">(</span><span class="s1">&#39;75/8&#39;</span><span class="p">)</span>
+<span class="go"> 9.375</span>
 </pre></div>
 </div>
 </dd></dl>
@@ -14435,7 +14438,7 @@ Components are stored in an ordered dictionary.</p>
 
   <div role="contentinfo">
     <p>&#169; Copyright 2012-2024, Raymond Bisdorff.
-      <span class="lastupdated">Last updated on Dec 26, 2024.
+      <span class="lastupdated">Last updated on Dec 27, 2024.
       </span></p>
   </div>
 

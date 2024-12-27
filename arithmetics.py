@@ -392,35 +392,30 @@ def decimalEvalContinuedFraction(cf):
     res = Decimal(str(cf[0])) + Decimal('1')/res
     return res
 
-def cf2Rational(cf, Debug=False):
+def cf2Rational(cf, AsDecimal=False, Debug=False):
     """
     Converts the finite continued Fraction *cf* back to
     its corresponding rational number expression.
+    Returns a/b or (a/b, Decimal(a/b)) if AsDecimal is True.
 
-    >>> continuedFraction(75,8)
+    >>> simpleContinuedFraction(75,8)
      [9, 2, 1, 1, 1]
-    >>> cf2Rational([9,2,1,1,1])
-     '75/8'
+    >>> cf2Rational([9,2,1,1,1], AsDecimal=True)
+     ('75/8', Decimal('9.375')
+    >>> eval('75/8')
+     9.375
 
     """
-    
-    if Debug:
-        print(cf)
-    ecf = decimalEvalContinuedFraction(cf)
-    if Debug:
-        print(ecf)
-    ndec = len(str(ecf))
-    if Debug:
-        print(ndec)
-    mult = 10**ndec
-    if Debug:
-        print(mult)
-    div = gcd((ecf*mult),mult)
-    if Debug:
-        print(div)
-    res = '%d/%d' % ( ((ecf*mult)//div), (mult//div) )
-    return res
-
+    from decimal import Decimal
+    p,q = simpleConvergents(cf)
+    a = p[-1]
+    b = q[-1]
+    res = '%d/%d' % (a, b)
+    if AsDecimal:
+        resd = Decimal(str(a))/Decimal(str(b))
+        return res,resd
+    else:
+        return res
 
 def gcd(a, b):
     """
