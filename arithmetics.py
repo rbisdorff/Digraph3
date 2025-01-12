@@ -419,12 +419,17 @@ def cf2Rational(cf, AsDecimal=False, Debug=False):
 
 def gcd(a, b):
     """
-    Renders the greatest common divisor of a and b.
+    Renders the greatest common divisor of two positive integers a and b. 
 
     >>> gcd(120,16)
      8
 
     """
+    if a < 0 or b < 0:
+        print('Error: both parameters a and b must be positive integers')
+        return None
+    a = int(a)
+    b = int(b)
     if a == b: return a
     while b > 0: a, b = b, a % b
     return a
@@ -441,9 +446,10 @@ def lcm(a, b):
 
 def bezout(a,b,Comments=False,Debug=False):
     """
-    Renders d = gcd(a,b) and the
-    Bezout coefficients x, y such that
-    d = ax + by.
+    Renders the tuple *(d,x,y)* wher *d = gcd(a,b)* and *x* and *y* are the
+    Bezout coefficients such that *d = ax + by*.
+
+    Both arguments *a* and *b* must be positive integers.
 
     >>> bezout(120,16,Comments=True)
      d = 8, x = 1, y = -7
@@ -452,6 +458,9 @@ def bezout(a,b,Comments=False,Debug=False):
     """
     
     x,y,u,v = 1,0,0,1
+    if a < 0 or b  < 0:
+        print('Error: a and b must be positive integers !')
+        return None,None,None
     arga = int(a)
     argb = int(b)
     if Debug:
@@ -474,21 +483,32 @@ def bezout(a,b,Comments=False,Debug=False):
             print('%d = %d*%d + %d*%d' % (a,arga,x,argb,y))
     return a,x,y
 
-def solPartEqnDioph(a,b,c):
+def solPartEqnDioph(a,b,c,Comments=False):
     """
     renders a particular integer solution of the Diophantian equation
-    ax + by = c.
+    ax + by = c. The method returns the tuple
+    (C*x, B*y, A, B) where d = gcd(a,b), C=c//d, A = a//d, and B=b//d. 
+
+    >>> solPartEqnDioph(3,4,5,Comments=True)
+     d = 1, a = 3, x = -5, b = 4, y = 5
+     (3)*(-5) + (4)*(5) = 5
+     (-5, 5, 3, 4)
+
     """
 
     d = gcd(a,b)
     if c % d != 0:
         return None,None,None,None # pas de solution
     
-    A,B,C = a/d, b/d, c/d
+    A,B,C = a//d, b//d, c//d
 
     D,x,y = bezout(A,B)
 
-    return C*x, C*y , A, B # solution particulière plus coefficients
+    if Comments:
+        print('C*x = %d, C*y = %d, A = %d, B = %d' % (C*x,C*y,A,B))
+        print('(%d)*(%d) + (%d)*(%d) = %d' % (a, C*x, b, C*y, d)) 
+
+    return C*x, C*y, A, B  # solution particulière plus coefficients
 
 def zn_units(n,Comments=False):
     """
