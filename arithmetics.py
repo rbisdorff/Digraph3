@@ -445,7 +445,7 @@ def bezout(a,b,Comments=False,Debug=False):
     Bezout coefficients x, y such that
     d = ax + by.
 
-    >>> bezout(120,16)
+    >>> bezout(120,16,Comments=True)
      d = 8, x = 1, y = -7
      8 = 120*1 + 16*(-7)
      (8, 1, -7)
@@ -466,9 +466,7 @@ def bezout(a,b,Comments=False,Debug=False):
         a,b = b,r
     if Comments:
         print('d = %d, x = %d, y = %d' % (a,x,y))
-        if x < 0 and y < 0:
-            print('%d = %d*(%d) + %d*(%d)' % (a,arga,x,argb,y))
-        elif x < 0:
+        if x < 0:
             print('%d = %d*(%d) + %d*%d' % (a,arga,x,argb,y))
         elif y < 0:
             print('%d = %d*%d + %d*(%d)' % (a,arga,x,argb,y))
