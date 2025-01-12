@@ -549,12 +549,17 @@
 <a class="viewcode-back" href="../techDoc.html#arithmetics.gcd">[docs]</a>
 <span class="k">def</span> <span class="nf">gcd</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">    Renders the greatest common divisor of a and b.</span>
+<span class="sd">    Renders the greatest common divisor of two positive integers a and b. </span>
 
 <span class="sd">    &gt;&gt;&gt; gcd(120,16)</span>
 <span class="sd">     8</span>
 
 <span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">if</span> <span class="n">a</span> <span class="o">&lt;</span> <span class="mi">0</span> <span class="ow">or</span> <span class="n">b</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Error: both parameters a and b must be positive integers&#39;</span><span class="p">)</span>
+        <span class="k">return</span> <span class="kc">None</span>
+    <span class="n">a</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">a</span><span class="p">)</span>
+    <span class="n">b</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">b</span><span class="p">)</span>
     <span class="k">if</span> <span class="n">a</span> <span class="o">==</span> <span class="n">b</span><span class="p">:</span> <span class="k">return</span> <span class="n">a</span>
     <span class="k">while</span> <span class="n">b</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span> <span class="n">a</span><span class="p">,</span> <span class="n">b</span> <span class="o">=</span> <span class="n">b</span><span class="p">,</span> <span class="n">a</span> <span class="o">%</span> <span class="n">b</span>
     <span class="k">return</span> <span class="n">a</span></div>
@@ -577,9 +582,10 @@
 <a class="viewcode-back" href="../techDoc.html#arithmetics.bezout">[docs]</a>
 <span class="k">def</span> <span class="nf">bezout</span><span class="p">(</span><span class="n">a</span><span class="p">,</span><span class="n">b</span><span class="p">,</span><span class="n">Comments</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span><span class="n">Debug</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">    Renders d = gcd(a,b) and the</span>
-<span class="sd">    Bezout coefficients x, y such that</span>
-<span class="sd">    d = ax + by.</span>
+<span class="sd">    Renders the tuple *(d,x,y)* wher *d = gcd(a,b)* and *x* and *y* are the</span>
+<span class="sd">    Bezout coefficients such that *d = ax + by*.</span>
+
+<span class="sd">    Both arguments *a* and *b* must be positive integers.</span>
 
 <span class="sd">    &gt;&gt;&gt; bezout(120,16,Comments=True)</span>
 <span class="sd">     d = 8, x = 1, y = -7</span>
@@ -588,6 +594,9 @@
 <span class="sd">    &quot;&quot;&quot;</span>
     
     <span class="n">x</span><span class="p">,</span><span class="n">y</span><span class="p">,</span><span class="n">u</span><span class="p">,</span><span class="n">v</span> <span class="o">=</span> <span class="mi">1</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span>
+    <span class="k">if</span> <span class="n">a</span> <span class="o">&lt;</span> <span class="mi">0</span> <span class="ow">or</span> <span class="n">b</span>  <span class="o">&lt;</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Error: a and b must be positive integers !&#39;</span><span class="p">)</span>
+        <span class="k">return</span> <span class="kc">None</span><span class="p">,</span><span class="kc">None</span><span class="p">,</span><span class="kc">None</span>
     <span class="n">arga</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">a</span><span class="p">)</span>
     <span class="n">argb</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">b</span><span class="p">)</span>
     <span class="k">if</span> <span class="n">Debug</span><span class="p">:</span>
@@ -613,21 +622,32 @@
 
 <div class="viewcode-block" id="solPartEqnDioph">
 <a class="viewcode-back" href="../techDoc.html#arithmetics.solPartEqnDioph">[docs]</a>
-<span class="k">def</span> <span class="nf">solPartEqnDioph</span><span class="p">(</span><span class="n">a</span><span class="p">,</span><span class="n">b</span><span class="p">,</span><span class="n">c</span><span class="p">):</span>
+<span class="k">def</span> <span class="nf">solPartEqnDioph</span><span class="p">(</span><span class="n">a</span><span class="p">,</span><span class="n">b</span><span class="p">,</span><span class="n">c</span><span class="p">,</span><span class="n">Comments</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    renders a particular integer solution of the Diophantian equation</span>
-<span class="sd">    ax + by = c.</span>
+<span class="sd">    ax + by = c. The method returns the tuple</span>
+<span class="sd">    (C*x, B*y, A, B) where d = gcd(a,b), C=c//d, A = a//d, and B=b//d. </span>
+
+<span class="sd">    &gt;&gt;&gt; solPartEqnDioph(3,4,5,Comments=True)</span>
+<span class="sd">     d = 1, a = 3, x = -5, b = 4, y = 5</span>
+<span class="sd">     (3)*(-5) + (4)*(5) = 5</span>
+<span class="sd">     (-5, 5, 3, 4)</span>
+
 <span class="sd">    &quot;&quot;&quot;</span>
 
     <span class="n">d</span> <span class="o">=</span> <span class="n">gcd</span><span class="p">(</span><span class="n">a</span><span class="p">,</span><span class="n">b</span><span class="p">)</span>
     <span class="k">if</span> <span class="n">c</span> <span class="o">%</span> <span class="n">d</span> <span class="o">!=</span> <span class="mi">0</span><span class="p">:</span>
         <span class="k">return</span> <span class="kc">None</span><span class="p">,</span><span class="kc">None</span><span class="p">,</span><span class="kc">None</span><span class="p">,</span><span class="kc">None</span> <span class="c1"># pas de solution</span>
     
-    <span class="n">A</span><span class="p">,</span><span class="n">B</span><span class="p">,</span><span class="n">C</span> <span class="o">=</span> <span class="n">a</span><span class="o">/</span><span class="n">d</span><span class="p">,</span> <span class="n">b</span><span class="o">/</span><span class="n">d</span><span class="p">,</span> <span class="n">c</span><span class="o">/</span><span class="n">d</span>
+    <span class="n">A</span><span class="p">,</span><span class="n">B</span><span class="p">,</span><span class="n">C</span> <span class="o">=</span> <span class="n">a</span><span class="o">//</span><span class="n">d</span><span class="p">,</span> <span class="n">b</span><span class="o">//</span><span class="n">d</span><span class="p">,</span> <span class="n">c</span><span class="o">//</span><span class="n">d</span>
 
     <span class="n">D</span><span class="p">,</span><span class="n">x</span><span class="p">,</span><span class="n">y</span> <span class="o">=</span> <span class="n">bezout</span><span class="p">(</span><span class="n">A</span><span class="p">,</span><span class="n">B</span><span class="p">)</span>
 
-    <span class="k">return</span> <span class="n">C</span><span class="o">*</span><span class="n">x</span><span class="p">,</span> <span class="n">C</span><span class="o">*</span><span class="n">y</span> <span class="p">,</span> <span class="n">A</span><span class="p">,</span> <span class="n">B</span> <span class="c1"># solution particulière plus coefficients</span></div>
+    <span class="k">if</span> <span class="n">Comments</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;C*x = </span><span class="si">%d</span><span class="s1">, C*y = </span><span class="si">%d</span><span class="s1">, A = </span><span class="si">%d</span><span class="s1">, B = </span><span class="si">%d</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="n">C</span><span class="o">*</span><span class="n">x</span><span class="p">,</span><span class="n">C</span><span class="o">*</span><span class="n">y</span><span class="p">,</span><span class="n">A</span><span class="p">,</span><span class="n">B</span><span class="p">))</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;(</span><span class="si">%d</span><span class="s1">)*(</span><span class="si">%d</span><span class="s1">) + (</span><span class="si">%d</span><span class="s1">)*(</span><span class="si">%d</span><span class="s1">) = </span><span class="si">%d</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">C</span><span class="o">*</span><span class="n">x</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="n">C</span><span class="o">*</span><span class="n">y</span><span class="p">,</span> <span class="n">d</span><span class="p">))</span> 
+
+    <span class="k">return</span> <span class="n">C</span><span class="o">*</span><span class="n">x</span><span class="p">,</span> <span class="n">C</span><span class="o">*</span><span class="n">y</span><span class="p">,</span> <span class="n">A</span><span class="p">,</span> <span class="n">B</span>  <span class="c1"># solution particulière plus coefficients</span></div>
 
 
 <div class="viewcode-block" id="zn_units">

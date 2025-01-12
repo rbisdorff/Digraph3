@@ -11717,9 +11717,9 @@ apart from those pairs <em>(a/p)</em>, where <em>a</em> = <em>p</em> = 3 (mod 4)
 <dl class="py function">
 <dt class="sig sig-object py" id="arithmetics.bezout">
 <span class="sig-prename descclassname"><span class="pre">arithmetics.</span></span><span class="sig-name descname"><span class="pre">bezout</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">a</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">b</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">Comments</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">Debug</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/arithmetics.html#bezout"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#arithmetics.bezout" title="Link to this definition"></a></dt>
-<dd><p>Renders d = gcd(a,b) and the
-Bezout coefficients x, y such that
-d = ax + by.</p>
+<dd><p>Renders the tuple <em>(d,x,y)</em> wher <em>d = gcd(a,b)</em> and <em>x</em> and <em>y</em> are the
+Bezout coefficients such that <em>d = ax + by</em>.</p>
+<p>Both arguments <em>a</em> and <em>b</em> must be positive integers.</p>
 <div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">bezout</span><span class="p">(</span><span class="mi">120</span><span class="p">,</span><span class="mi">16</span><span class="p">,</span><span class="n">Comments</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 <span class="go"> d = 8, x = 1, y = -7</span>
 <span class="go"> 8 = 120*1 + 16*(-7)</span>
@@ -11835,7 +11835,7 @@ where a_0 corresponds to its integer part.</p>
 <dl class="py function">
 <dt class="sig sig-object py" id="arithmetics.gcd">
 <span class="sig-prename descclassname"><span class="pre">arithmetics.</span></span><span class="sig-name descname"><span class="pre">gcd</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">a</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">b</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/arithmetics.html#gcd"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#arithmetics.gcd" title="Link to this definition"></a></dt>
-<dd><p>Renders the greatest common divisor of a and b.</p>
+<dd><p>Renders the greatest common divisor of two positive integers a and b.</p>
 <div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">gcd</span><span class="p">(</span><span class="mi">120</span><span class="p">,</span><span class="mi">16</span><span class="p">)</span>
 <span class="go"> 8</span>
 </pre></div>
@@ -11927,9 +11927,16 @@ for a given simple continued fraction of two positive integer <em>a</em> and <em
 
 <dl class="py function">
 <dt class="sig sig-object py" id="arithmetics.solPartEqnDioph">
-<span class="sig-prename descclassname"><span class="pre">arithmetics.</span></span><span class="sig-name descname"><span class="pre">solPartEqnDioph</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">a</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">b</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">c</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/arithmetics.html#solPartEqnDioph"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#arithmetics.solPartEqnDioph" title="Link to this definition"></a></dt>
+<span class="sig-prename descclassname"><span class="pre">arithmetics.</span></span><span class="sig-name descname"><span class="pre">solPartEqnDioph</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">a</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">b</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">c</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">Comments</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/arithmetics.html#solPartEqnDioph"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#arithmetics.solPartEqnDioph" title="Link to this definition"></a></dt>
 <dd><p>renders a particular integer solution of the Diophantian equation
-ax + by = c.</p>
+ax + by = c. The method returns the tuple
+(C*x, B*y, A, B) where d = gcd(a,b), C=c//d, A = a//d, and B=b//d.</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">solPartEqnDioph</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span><span class="p">,</span><span class="mi">5</span><span class="p">,</span><span class="n">Comments</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="go"> d = 1, a = 3, x = -5, b = 4, y = 5</span>
+<span class="go"> (3)*(-5) + (4)*(5) = 5</span>
+<span class="go"> (-5, 5, 3, 4)</span>
+</pre></div>
+</div>
 </dd></dl>
 
 <dl class="py function">
