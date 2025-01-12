@@ -446,7 +446,9 @@ def bezout(a,b,Comments=False,Debug=False):
     d = ax + by.
 
     >>> bezout(120,16)
-     (8, 1.0, -7.0)
+     d = 8, x = 1, y = -7
+     8 = 120*1 + 16*(-7)
+     (8, 1, -7)
     """
     
     x,y,u,v = 1,0,0,1
@@ -457,14 +459,21 @@ def bezout(a,b,Comments=False,Debug=False):
         print(a,b,u,v)
     while b != 0:
         r = a % b
-        q = (a - r)/b
+        q = (a - r)//b
         x,y, u,v = u,v, x-(q*u),y-(q*v)
         if Debug:
             print(a,b,q,r,u,v)
         a,b = b,r
     if Comments:
         print('d = %d, x = %d, y = %d' % (a,x,y))
-        print('%d = %d*%d + %d*%d' % (a,x,arga,y,argb)) 
+        if x < 0 and y < 0:
+            print('%d = %d*(%d) + %d*(%d)' % (a,arga,x,argb,y))
+        elif x < 0:
+            print('%d = %d*(%d) + %d*%d' % (a,arga,x,argb,y))
+        elif y < 0:
+            print('%d = %d*%d + %d*(%d)' % (a,arga,x,argb,y))
+        else:
+            print('%d = %d*%d + %d*%d' % (a,arga,x,argb,y))
     return a,x,y
 
 def solPartEqnDioph(a,b,c):
