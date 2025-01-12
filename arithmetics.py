@@ -439,7 +439,7 @@ def lcm(a, b):
     """
     return abs(a * b) // gcd(a, b)
 
-def bezout(a,b,Debug=False):
+def bezout(a,b,Comments=False,Debug=False):
     """
     Renders d = gcd(a,b) and the
     Bezout coefficients x, y such that
@@ -450,6 +450,8 @@ def bezout(a,b,Debug=False):
     """
     
     x,y,u,v = 1,0,0,1
+    arga = int(a)
+    argb = int(b)
     if Debug:
         print(a,0,x,y)
         print(a,b,u,v)
@@ -460,6 +462,9 @@ def bezout(a,b,Debug=False):
         if Debug:
             print(a,b,q,r,u,v)
         a,b = b,r
+    if Comments:
+        print('d = %d, x = %d, y = %d' % (a,x,y))
+        print('%d = %d*%d + %d*%d' % (a,x,arga,y,argb)) 
     return a,x,y
 
 def solPartEqnDioph(a,b,c):
