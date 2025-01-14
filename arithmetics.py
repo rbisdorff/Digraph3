@@ -417,6 +417,74 @@ def cf2Rational(cf, AsDecimal=False, Debug=False):
     else:
         return res
 
+def continuedFraction(x, terms=20, AsFloats=False, rel_tol=1e-9, abs_tol=0.0):
+    """
+
+    source: https://leancrew.com/all-this/2023/08/continued-fractions-in-python/
+
+    Return the continued fraction and convergents of the argument.
+
+    >>> from math import sqrt, pi
+    >>> continued(sqrt(2))
+     ([1, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2], [Fraction(1, 1),
+     Fraction(3, 2), Fraction(7, 5), Fraction(17, 12), Fraction(41, 29),
+     Fraction(99, 70), Fraction(239, 169), Fraction(577, 408),
+     Fraction(1393, 985), Fraction(3363, 2378), Fraction(8119, 5741),
+     Fraction(19601, 13860), Fraction(47321, 33461)])
+    >>> continuedFraction(sqrt(2),AsFloats=True)
+     ([1, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2],
+     [1.0, 1.5, 1.4, 1.4166666666666667, 1.4137931034482758,
+      1.4142857142857144, 1.4142011834319526, 1.4142156862745099,
+      1.4142131979695431, 1.4142136248948696, 1.4142135516460548,
+      1.4142135642135643, 1.4142135620573204])
+    >>> continuedFraction(pi,rel_tol=1e-15,AsFloats=True)
+     ([3, 7, 15, 1, 292, 1, 1, 1, 2, 1, 3, 1, 14],
+    [3.0, 3.142857142857143, 3.141509433962264, 3.1415929203539825,
+     3.1415926530119025, 3.141592653921421, 3.1415926534674368,
+     3.1415926536189365, 3.141592653581078, 3.141592653591404,
+     3.141592653589389, 3.1415926535898153, 3.1415926535897927])
+    >>> pi
+     3.141592653589793
+
+    """
+
+    from fractions import Fraction
+    from math import isclose
+    
+    # Initialize, using Khinchin's notation
+    a = []       # continued fraction terms
+    p = [0, 1]   # convergent numerator terms (-2 and -1 indices)
+    q = [1, 0]   # convergent denominator terms (-2 and -1 indices)
+    s = []       # convergent terms
+    remainder = x
+  
+    # Collect the continued fraction and convergent terms
+    for i in range(terms):
+        # Compute the next terms
+        whole, frac = divmod(remainder, 1)
+        an = int(whole)
+        pn = an*p[-1] + p[-2]
+        qn = an*q[-1] + q[-2]
+        sn = Fraction(pn, qn)
+   
+        # Add terms to lists
+        a.append(an)
+        p.append(pn)
+        q.append(qn)
+        s.append(Fraction(sn))
+  
+        # Convergence check
+        if isclose(x, float(sn), rel_tol=rel_tol, abs_tol=abs_tol):
+            break
+
+        # Get ready for next iteration
+        remainder = 1/frac
+  
+    # Return the tuple of the continued fraction and the convergents
+    if AsFloats:
+        s = [float(x) for x in s]
+    return(a, s) 
+
 def gcd(a, b):
     """
     Renders the greatest common divisor of two positive integers a and b. 
