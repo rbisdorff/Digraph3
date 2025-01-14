@@ -420,12 +420,14 @@ def cf2Rational(cf, AsDecimal=False, Debug=False):
 def continuedFraction(x, terms=20, AsFloats=False, rel_tol=1e-9, abs_tol=0.0):
     """
 
-    source: https://leancrew.com/all-this/2023/08/continued-fractions-in-python/
-
-    Return the continued fraction and convergents of the argument.
+    Source: https://leancrew.com/all-this/2023/08/continued-fractions-in-python/
+    See also: https://en.wikipedia.org/wiki/Continued_fraction
+    
+    Returns a tuple with the continued fraction (in list format)
+    and the convergents (in Fraction format) of the argument.
 
     >>> from math import sqrt, pi
-    >>> continued(sqrt(2))
+    >>> continuedFraction(sqrt(2))
      ([1, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2], [Fraction(1, 1),
      Fraction(3, 2), Fraction(7, 5), Fraction(17, 12), Fraction(41, 29),
      Fraction(99, 70), Fraction(239, 169), Fraction(577, 408),
