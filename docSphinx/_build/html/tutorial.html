@@ -31,7 +31,7 @@
         <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
         <script src="_static/clipboard.min.js?v=a7894cd8"></script>
         <script src="_static/copybutton.js?v=15d7cbb8"></script>
-        <script src="_static/js/hoverxref.js?v=6ff7264e"></script>
+        <script src="_static/js/hoverxref.js?v=4352a7d3"></script>
         <script src="_static/js/tooltipster.bundle.min.js?v=18bf091b"></script>
         <script src="_static/js/micromodal.min.js?v=04d6302d"></script>
     <script src="_static/js/theme.js"></script>
@@ -1339,7 +1339,7 @@ the current working directory a ‘tutorialDigraph.dot’ file and a
 <span class="linenos">14</span><span class="go">  Valuation in range: -7.00 to +7.00; r(x,y): +5/7 = +0.71</span>
 </pre></div>
 </div>
-<p>The outranking characteristic value <img class="math" src="_images/math/07c5962ee88b15732c9488e8f13c33bd4ce26c22.png" alt="r(a_1 \succsim a_2)"/> represents the <strong>majority margin</strong> resulting from the difference between the weights of the criteria in favor and the weights of the criteria in disfavor of the statement that alternative <em>a1</em> is at least as well performing as alternative <em>a2</em>. No considerable performance difference being observed above, no veto or counter-veto situation is triggered in this pairwise comparison. Such a situation is, however, observed for instance when we pairwise compare the performances of alternatives <em>a1</em> and <em>a7</em>.</p>
+<p>The outranking characteristic value <img class="math" src="_images/math/07c5962ee88b15732c9488e8f13c33bd4ce26c22.png" alt="r(a_1 \succsim a_2)"/> represents the <strong>majority margin</strong> resulting from the difference between the weights of the criteria in favor and the weights of the criteria in disfavor of the statement that alternative <em>a1</em> is at least as well performing as alternative <em>a2</em>. No considerable performance difference being observed above, no outranking polarisation is triggered in this pairwise comparison. Such a situation is, however, observed for instance when we pairwise compare the performances of alternatives <em>a1</em> and <em>a7</em>.</p>
 <div class="highlight-pycon notranslate"><div class="highlight"><pre><span></span><span class="linenos"> 1</span><span class="gp">&gt;&gt;&gt; </span><span class="n">odg</span><span class="o">.</span><span class="n">showPairwiseComparison</span><span class="p">(</span><span class="s1">&#39;a1&#39;</span><span class="p">,</span><span class="s1">&#39;a7&#39;</span><span class="p">)</span>
 <span class="linenos"> 2</span><span class="go"> *------------  pairwise comparison ----*</span>
 <span class="linenos"> 3</span><span class="go">  Comparing actions : (a1, a7)</span>
@@ -1677,7 +1677,7 @@ the current working directory a ‘tutorialDigraph.dot’ file and a
 </table>
 <p>Except the <em>Costs</em> criterion, all other criteria admit for grading a qualitative satisfaction scale from 0% (worst) to 100% (best). We may thus notice in <a class="hxr-hoverxref hxr-tooltip reference internal" href="#offperftab"><span class="std std-numref">Table 1.3</span></a> that location <em>A</em> (<em>Ave</em>) is the most expensive, but also 100% satisfying the <em>Proximity</em> as well as the  <em>Standing</em> criterion. Whereas the locations <em>C</em> (<em>Ces</em>) is the cheapest one; providing however no satisfaction at all on both the <em>Standing</em> and the <em>Working Space</em> criteria.</p>
 <p>In <a class="hxr-hoverxref hxr-tooltip reference internal" href="#offperftab"><span class="std std-numref">Table 1.3</span></a> we may also see that the <em>Costs</em> criterion admits the highest significance (45.0), followed by the <em>Future turnover</em> criteria (32.0 + 26.0 + 23.0 = 81.0), The <em>Working conditions</em> criteria are the less significant (10.0 + 6.0, + 3.0 = 19.0). It follows that the CEO considers <em>maximizing the future turnover</em> the most important objective (81.0), followed by the <em>minizing yearly Costs</em> objective (45.0), and less important, the <em>maximizing working conditions</em> objective (19.0).</p>
-<p>Concerning yearly costs, we suppose that the CEO is indifferent up to a performance difference of 1000€, and he actually prefers a location if there is at least a positive difference of 2500€. The grades observed on the six qualitative criteria (measured in percentages of satisfaction) are very subjective and rather imprecise. The CEO is hence indifferent up to a satisfaction difference of 10%, and he claims a significant preference when the satisfaction difference is at least of 20%.  Furthermore, a satisfaction difference of 80% represents for him a <em>considerably large</em> performance difference, triggering a <em>veto</em> situation the case given (see <a class="reference internal" href="#bis-2013" id="id35"><span>[BIS-2013]</span></a>).</p>
+<p>Concerning yearly costs, we suppose that the CEO is indifferent up to a performance difference of 1000€, and he actually prefers a location if there is at least a positive difference of 2500€. The grades observed on the six qualitative criteria (measured in percentages of satisfaction) are very subjective and rather imprecise. The CEO is hence indifferent up to a satisfaction difference of 10%, and he claims a significant preference when the satisfaction difference is at least of 20%.  Furthermore, a satisfaction difference of 80% represents for him a <em>considerably large</em> performance difference, triggering an outranking <em>polarisation</em> the case given (see <a class="reference internal" href="#bis-2013" id="id35"><span>[BIS-2013]</span></a>).</p>
 </section>
 <section id="the-performance-tableau">
 <h4><a class="toc-backref" href="#id298" role="doc-backlink"><span class="section-number">1.3.1.2. </span>The performance tableau</a><a class="headerlink" href="#the-performance-tableau" title="Link to this heading"></a></h4>
@@ -1729,7 +1729,7 @@ the current working directory a ‘tutorialDigraph.dot’ file and a
 <span class="linenos">14</span><span class="go"> ...</span>
 </pre></div>
 </div>
-<p>On the <em>Costs</em> criterion, 9.5% of the performance differences are considered insignificant and 14.3% below the preference discrimination threshold (lines 6-7). On the qualitative <em>Working Comfort</em> criterion, we observe again 9.5% of insignificant performance differences (line 11). Due to the imprecision in the subjective grading, we notice here 28.6% of performance differences below the preference discrimination threshold (Line 12). Furthermore, 100.0 - 90.5 = 9.5% of the performance differences are judged <em>considerably large</em> (Line 13); 80% and more of satisfaction differences triggering in fact a veto situation. Same information is available for all the other criteria.</p>
+<p>On the <em>Costs</em> criterion, 9.5% of the performance differences are considered insignificant and 14.3% below the preference discrimination threshold (lines 6-7). On the qualitative <em>Working Comfort</em> criterion, we observe again 9.5% of insignificant performance differences (line 11). Due to the imprecision in the subjective grading, we notice here 28.6% of performance differences below the preference discrimination threshold (Line 12). Furthermore, 100.0 - 90.5 = 9.5% of the performance differences are judged <em>considerably large</em> (Line 13); 80% and more of satisfaction differences triggering in fact an outranking polarisation. Same information is available for all the other criteria.</p>
 <p>A colorful comparison of all the performances is shown on <a class="hxr-hoverxref hxr-tooltip reference internal" href="#officechoiceheatmap"><span class="std std-numref">Fig. 1.11</span></a> by the <strong>heatmap</strong> statistics, illustrating the respective quantile class of each performance. As the set of potential alternatives is tiny, we choose here a classification into performance quintiles.</p>
 <div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">t</span><span class="o">.</span><span class="n">showHTMLPerformanceHeatmap</span><span class="p">(</span><span class="n">colorLevels</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span>
 <span class="gp">... </span>                             <span class="n">rankingRule</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span>
@@ -2274,16 +2274,16 @@ pairwise perspective (see below). With the given preference discrimination thres
 <p>We may furthermore compute the associated outranking digraph and check if we observe any polarised outranking situtations.</p>
 <div class="highlight-pycon notranslate"><div class="highlight"><pre><span></span><span class="linenos"> 1</span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">outrankingDigraphs</span> <span class="kn">import</span> <span class="n">BipolarOutrankingDigraph</span>
 <span class="linenos"> 2</span><span class="gp">&gt;&gt;&gt; </span><span class="n">g</span> <span class="o">=</span> <span class="n">BipolarOutrankingDigraph</span><span class="p">(</span><span class="n">t</span><span class="p">)</span>
-<span class="linenos"> 3</span><span class="gp">&gt;&gt;&gt; </span><span class="n">g</span><span class="o">.</span><span class="n">showVetos</span><span class="p">()</span>
-<span class="linenos"> 4</span><span class="go"> *----  Veto situations ---</span>
-<span class="linenos"> 5</span><span class="go">  number of veto situations : 1</span>
+<span class="linenos"> 3</span><span class="gp">&gt;&gt;&gt; </span><span class="n">g</span><span class="o">.</span><span class="n">showPolarisations</span><span class="p">()</span>
+<span class="linenos"> 4</span><span class="go"> *----  Negative polarisations ----*</span>
+<span class="linenos"> 5</span><span class="go">  number of negative polarisations : 1</span>
 <span class="linenos"> 6</span><span class="go">  1: r(a4 &gt;= a2) = -0.44</span>
 <span class="linenos"> 7</span><span class="go">  criterion: g1</span>
 <span class="linenos"> 8</span><span class="go">  Considerable performance difference : -77.00</span>
 <span class="linenos"> 9</span><span class="go">  Veto discrimination threshold       : -60.00</span>
 <span class="linenos">10</span><span class="go">  Polarisation: r(a4 &gt;= a2) = -0.44 ==&gt; -1.00</span>
-<span class="linenos">11</span><span class="go"> *----  Counter-veto situations ---</span>
-<span class="linenos">12</span><span class="go">  number of counter-veto situations : 1</span>
+<span class="linenos">11</span><span class="go"> *----  Positive polarisations ----*</span>
+<span class="linenos">12</span><span class="go">  number of positive polarisations: 1</span>
 <span class="linenos">13</span><span class="go">  1: r(a2 &gt;= a4) = 0.56</span>
 <span class="linenos">14</span><span class="go">  criterion: g1</span>
 <span class="linenos">15</span><span class="go">  Considerable performance difference : 77.00</span>
@@ -2505,7 +2505,7 @@ which provides ranks (linearly ordered performances without ties) of a given num
 <li><p>Random performances on each type of criteria  are drawn, either from an ordinal scale [0;10], or from a cardinal scale [0.0;100.0], following a parametric triangular law of mode: 30% performance for cheap, 50% for neutral, and 70% performance for expensive decision actions, with constant probability repartition 0.5 on each side of the respective mode.</p></li>
 <li><p>Cost criteria use mostly cardinal scales (3/4), whereas benefit criteria use mostly ordinal scales (2/3).</p></li>
 <li><p>The sum of weights of the cost criteria by default equals the sum weights of the benefit criteria: weighDistribution = ‘equiobjectives’.</p></li>
-<li><p>On cardinal criteria, both of cost or of benefit type, we observe following constant preference discrimination quantiles: 5% indifferent situations, 90% strict preference situations, and 5% veto situation.</p></li>
+<li><p>On cardinal criteria, both of cost or of benefit type, we observe following constant preference discrimination quantiles: 5% indifferent situations, 90% strict preference situations, and 5% considerable performance differences.</p></li>
 </ul>
 </div></blockquote>
 <dl class="simple">
@@ -7456,7 +7456,7 @@ fecop 75.78% success rate</p>
 <section id="a-fair-diploma-validation-decision">
 <h4><span class="section-number">1.4.4.5. </span>A fair diploma validation decision (§§§)<a class="headerlink" href="#a-fair-diploma-validation-decision" title="Link to this heading"></a></h4>
 <p><strong>Data</strong></p>
-<p>Use the <a class="reference internal" href="techDoc.html#randomPerfTabs.RandomAcademicPerformanceTableau" title="randomPerfTabs.RandomAcademicPerformanceTableau"><code class="xref py py-class docutils literal notranslate"><span class="pre">RandomAcademicPerformanceTableau</span></code></a> constructor from the <strong>Digraph3</strong> Python resources for generating realistic random students performance tableaux concerning a curriculum of nine ECTS weighted Courses. Assume that all the gradings are done on an integer scale from 0 (weakest) to 20 (best). It is known that all grading procedures are inevitably imprecise; therefore we will assume an indifference threshold of 1 point and a preference theshold of 2 points. Thurthermore, a performance difference of more than 12 points is considerable and will trigger a veto situation. To validate eventually their curriculum, the students are required to obtain more or less 10 points in each course.</p>
+<p>Use the <a class="reference internal" href="techDoc.html#randomPerfTabs.RandomAcademicPerformanceTableau" title="randomPerfTabs.RandomAcademicPerformanceTableau"><code class="xref py py-class docutils literal notranslate"><span class="pre">RandomAcademicPerformanceTableau</span></code></a> constructor from the <strong>Digraph3</strong> Python resources for generating realistic random students performance tableaux concerning a curriculum of nine ECTS weighted Courses. Assume that all the gradings are done on an integer scale from 0 (weakest) to 20 (best). It is known that all grading procedures are inevitably imprecise; therefore we will assume an indifference threshold of 1 point and a preference theshold of 2 points. Thurthermore, a performance difference of more than 12 points is considerable and will trigger an outranking polarisation. To validate eventually their curriculum, the students are required to obtain more or less 10 points in each course.</p>
 <p><strong>Questions</strong></p>
 <ol class="arabic simple">
 <li><p>Design and implement a fair diploma validation decision rule based on the grades obtained in the nine Courses.</p></li>
@@ -10303,7 +10303,7 @@ dot -Grankdir=TB -Tpng rootedTree.dot -o rootedTree.png</p>
 
   <div role="contentinfo">
     <p>&#169; Copyright 2012-2024, Raymond Bisdorff.
-      <span class="lastupdated">Last updated on Jan 14, 2025.
+      <span class="lastupdated">Last updated on Jan 28, 2025.
       </span></p>
   </div>
 

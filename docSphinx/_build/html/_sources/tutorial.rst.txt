@@ -1177,7 +1177,7 @@ From above given semantics, we may consider (see Line 5 above) that *a1* outrank
      ----------------------------------------
      Valuation in range: -7.00 to +7.00; r(x,y): +5/7 = +0.71
 
-The outranking characteristic value :math:`r(a_1 \succsim a_2)` represents the **majority margin** resulting from the difference between the weights of the criteria in favor and the weights of the criteria in disfavor of the statement that alternative *a1* is at least as well performing as alternative *a2*. No considerable performance difference being observed above, no veto or counter-veto situation is triggered in this pairwise comparison. Such a situation is, however, observed for instance when we pairwise compare the performances of alternatives *a1* and *a7*.
+The outranking characteristic value :math:`r(a_1 \succsim a_2)` represents the **majority margin** resulting from the difference between the weights of the criteria in favor and the weights of the criteria in disfavor of the statement that alternative *a1* is at least as well performing as alternative *a2*. No considerable performance difference being observed above, no outranking polarisation is triggered in this pairwise comparison. Such a situation is, however, observed for instance when we pairwise compare the performances of alternatives *a1* and *a7*.
 
 .. code-block:: pycon
    :linenos:
@@ -1369,7 +1369,7 @@ Except the *Costs* criterion, all other criteria admit for grading a qualitative
 
 In :numref:`offPerfTab` we may also see that the *Costs* criterion admits the highest significance (45.0), followed by the *Future turnover* criteria (32.0 + 26.0 + 23.0 = 81.0), The *Working conditions* criteria are the less significant (10.0 + 6.0, + 3.0 = 19.0). It follows that the CEO considers *maximizing the future turnover* the most important objective (81.0), followed by the *minizing yearly Costs* objective (45.0), and less important, the *maximizing working conditions* objective (19.0). 
 
-Concerning yearly costs, we suppose that the CEO is indifferent up to a performance difference of 1000€, and he actually prefers a location if there is at least a positive difference of 2500€. The grades observed on the six qualitative criteria (measured in percentages of satisfaction) are very subjective and rather imprecise. The CEO is hence indifferent up to a satisfaction difference of 10%, and he claims a significant preference when the satisfaction difference is at least of 20%.  Furthermore, a satisfaction difference of 80% represents for him a *considerably large* performance difference, triggering a *veto* situation the case given (see [BIS-2013]_). 
+Concerning yearly costs, we suppose that the CEO is indifferent up to a performance difference of 1000€, and he actually prefers a location if there is at least a positive difference of 2500€. The grades observed on the six qualitative criteria (measured in percentages of satisfaction) are very subjective and rather imprecise. The CEO is hence indifferent up to a satisfaction difference of 10%, and he claims a significant preference when the satisfaction difference is at least of 20%.  Furthermore, a satisfaction difference of 80% represents for him a *considerably large* performance difference, triggering an outranking *polarisation* the case given (see [BIS-2013]_). 
 
 The performance tableau
 ```````````````````````
@@ -1429,7 +1429,7 @@ We thus recover all the input data. To measure the actual preference discriminat
     Threshold veto : 80.00 + 0.00x ; percentile:  90.5
     ...
 
-On the *Costs* criterion, 9.5% of the performance differences are considered insignificant and 14.3% below the preference discrimination threshold (lines 6-7). On the qualitative *Working Comfort* criterion, we observe again 9.5% of insignificant performance differences (line 11). Due to the imprecision in the subjective grading, we notice here 28.6% of performance differences below the preference discrimination threshold (Line 12). Furthermore, 100.0 - 90.5 = 9.5% of the performance differences are judged *considerably large* (Line 13); 80% and more of satisfaction differences triggering in fact a veto situation. Same information is available for all the other criteria. 
+On the *Costs* criterion, 9.5% of the performance differences are considered insignificant and 14.3% below the preference discrimination threshold (lines 6-7). On the qualitative *Working Comfort* criterion, we observe again 9.5% of insignificant performance differences (line 11). Due to the imprecision in the subjective grading, we notice here 28.6% of performance differences below the preference discrimination threshold (Line 12). Furthermore, 100.0 - 90.5 = 9.5% of the performance differences are judged *considerably large* (Line 13); 80% and more of satisfaction differences triggering in fact an outranking polarisation. Same information is available for all the other criteria. 
  
 A colorful comparison of all the performances is shown on :numref:`officeChoiceHeatmap` by the **heatmap** statistics, illustrating the respective quantile class of each performance. As the set of potential alternatives is tiny, we choose here a classification into performance quintiles.
 
@@ -2053,16 +2053,16 @@ We may furthermore compute the associated outranking digraph and check if we obs
 
    >>> from outrankingDigraphs import BipolarOutrankingDigraph
    >>> g = BipolarOutrankingDigraph(t)
-   >>> g.showVetos()
-    *----  Veto situations ---
-     number of veto situations : 1 
+   >>> g.showPolarisations()
+    *----  Negative polarisations ----*
+     number of negative polarisations : 1 
      1: r(a4 >= a2) = -0.44
      criterion: g1
      Considerable performance difference : -77.00
      Veto discrimination threshold       : -60.00
      Polarisation: r(a4 >= a2) = -0.44 ==> -1.00
-    *----  Counter-veto situations ---
-     number of counter-veto situations : 1 
+    *----  Positive polarisations ----*
+     number of positive polarisations: 1 
      1: r(a2 >= a4) = 0.56
      criterion: g1
      Considerable performance difference : 77.00
@@ -2300,7 +2300,7 @@ We provide the :py:class:`~randomPerfTabs.RandomCBPerformanceTableau` class for 
     * Random performances on each type of criteria  are drawn, either from an ordinal scale [0;10], or from a cardinal scale [0.0;100.0], following a parametric triangular law of mode: 30\% performance for cheap, 50% for neutral, and 70% performance for expensive decision actions, with constant probability repartition 0.5 on each side of the respective mode. 
     * Cost criteria use mostly cardinal scales (3/4), whereas benefit criteria use mostly ordinal scales (2/3). 
     * The sum of weights of the cost criteria by default equals the sum weights of the benefit criteria: weighDistribution = 'equiobjectives'. 
-    * On cardinal criteria, both of cost or of benefit type, we observe following constant preference discrimination quantiles: 5\% indifferent situations, 90\% strict preference situations, and 5\% veto situation. 
+    * On cardinal criteria, both of cost or of benefit type, we observe following constant preference discrimination quantiles: 5\% indifferent situations, 90\% strict preference situations, and 5\% considerable performance differences. 
 
 *Parameters*:
     * If *numberOfActions* == None, a uniform random number between 10 and 31 of cheap, neutral or advantageous actions (equal 1/3 probability each type) actions is instantiated
@@ -7702,7 +7702,7 @@ A fair diploma validation decision (§§§)
 
 **Data**
 
-Use the :py:class:`~randomPerfTabs.RandomAcademicPerformanceTableau` constructor from the **Digraph3** Python resources for generating realistic random students performance tableaux concerning a curriculum of nine ECTS weighted Courses. Assume that all the gradings are done on an integer scale from 0 (weakest) to 20 (best). It is known that all grading procedures are inevitably imprecise; therefore we will assume an indifference threshold of 1 point and a preference theshold of 2 points. Thurthermore, a performance difference of more than 12 points is considerable and will trigger a veto situation. To validate eventually their curriculum, the students are required to obtain more or less 10 points in each course. 
+Use the :py:class:`~randomPerfTabs.RandomAcademicPerformanceTableau` constructor from the **Digraph3** Python resources for generating realistic random students performance tableaux concerning a curriculum of nine ECTS weighted Courses. Assume that all the gradings are done on an integer scale from 0 (weakest) to 20 (best). It is known that all grading procedures are inevitably imprecise; therefore we will assume an indifference threshold of 1 point and a preference theshold of 2 points. Thurthermore, a performance difference of more than 12 points is considerable and will trigger an outranking polarisation. To validate eventually their curriculum, the students are required to obtain more or less 10 points in each course. 
 
 **Questions**
 
