@@ -9,7 +9,8 @@ from randomDigraphs import *
 def testRandomDigraph():
 
     print('==>> Testing generating random digraphs')
-    h = RandomDigraph(order=5)
+    h = RandomDigraph(order=5,arcProbability=0.4,namePrefix='b',seed=2)
+    h.showActions()
     h.showStatistics()
     h.showAll()
 

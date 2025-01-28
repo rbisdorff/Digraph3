@@ -29,15 +29,16 @@ class RandomDigraph(Digraph):
     temporary crisp (irreflexive) random crisp digraphs.
     
     *Parameters*:
-        * order (default = 10);
-        * arcProbability (in [0.,1.], default=0.5)
+        * order (integer, default = 10);
+        * arcProbability (float in [0.,1.], default=0.5)
+        * namePrefix (str, default = 'a')
         * IntegerValuation (default = True);
-        * If Bipolar=True, valuation domain = {-1,1} otherwise = {0,1}
+        * If Bipolar=True, valuation domain = {-1,0,1} otherwise = {0,1}
         * If seed is not None, the random generator is seeded 
 
      """
 
-    def __init__(self,order=9,arcProbability=0.5,
+    def __init__(self,order=9,arcProbability=0.5,namePrefix='a',
                  IntegerValuation=True, Bipolar=True,
                  seed=None):
 
@@ -57,9 +58,10 @@ class RandomDigraph(Digraph):
             nd = len(str(order))
             actions = OrderedDict()
             for i in range(order):
-                actionKey = ('a%%0%dd' % nd) % (i+1)
+                actionKey = ('%s%%0%dd' % (namePrefix,nd)) % (i+1)
                 actions[actionKey] = {'shortName':actionKey,
-                                      'name': 'random decision action'}
+                                      'name': 'action %s' % (actionKey),
+                                      'comment': 'RandomDigraph generated'}
             self.actions = actions
 ##            actionsList = [x for x in self.actions]
 ##            actionsList.sort()
@@ -79,7 +81,7 @@ class RandomDigraph(Digraph):
                 rx = relation[x]
                 for y in actions.keys():
                     if x == y:
-                        rx[y] = Min
+                        rx[y] = Med
                     else:
                         if random.random() <= arcProbability:
                             rx[y] = Max
