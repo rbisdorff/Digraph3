@@ -26,19 +26,24 @@ from digraphs import *
 class RandomDigraph(Digraph):
     """
     Specialization of the general Digraph class for generating
-    temporary crisp (irreflexive) random crisp digraphs.
+    temporary crisp random crisp digraphs.
+
+    The charcateristic values of reflexive relations
+    are set to the *indeterminate* value (default = 0)
     
     *Parameters*:
         * order (integer, default = 10);
         * arcProbability (float in [0.,1.], default=0.5)
+        * missingRelationProbability (float in [0.,1.], default=0.1)
         * namePrefix (str, default = 'a')
         * IntegerValuation (default = True);
-        * If Bipolar=True, valuation domain = {-1,0,1} otherwise = {0,1}
+        * If Bipolar=True, valuation domain = {-1,0,1} otherwise = {0,0.5,1}
         * If seed is not None, the random generator is seeded 
 
      """
 
     def __init__(self,order=9,arcProbability=0.5,namePrefix='a',
+                 missingRelationProbability=0.1,
                  IntegerValuation=True, Bipolar=True,
                  seed=None):
 
@@ -52,9 +57,9 @@ class RandomDigraph(Digraph):
             random.seed(seed)
             from digraphs import EmptyDigraph
             if Bipolar:
-                domain = (-1.0,1.0)
+                domain = ('-1.0','1.0')
             else:
-                domain = (0.0,1.0)
+                domain = ('0.0','1.0')
             nd = len(str(order))
             actions = OrderedDict()
             for i in range(order):
@@ -66,10 +71,12 @@ class RandomDigraph(Digraph):
 ##            actionsList = [x for x in self.actions]
 ##            actionsList.sort()
             valuationdomain = dict()
-            Min = Decimal(str(domain[0]))
-            Max = Decimal(str(domain[1]))
-            Med = Min + \
-                (Max-Min)/Decimal('2.0')
+            Min = Decimal(domain[0])
+            Max = Decimal(domain[1])
+            if Bipolar:
+                Med = Decimal('0.0')
+            else:
+                Med = Decimal('0.5')
             valuationdomain['min'] = Min
             valuationdomain['max'] = Max
             valuationdomain['med'] = Med
@@ -81,6 +88,8 @@ class RandomDigraph(Digraph):
                 rx = relation[x]
                 for y in actions.keys():
                     if x == y:
+                        rx[y] = Med
+                    elif random.random() <= missingRelationProbability:
                         rx[y] = Med
                     else:
                         if random.random() <= arcProbability:
