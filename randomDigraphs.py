@@ -26,15 +26,15 @@ from digraphs import *
 class RandomDigraph(Digraph):
     """
     Specialization of the general Digraph class for generating
-    temporary crisp random crisp digraphs.
+    temporary random crisp digraphs.
 
-    The charcateristic values of reflexive relations
-    are set to the *indeterminate* value (default = 0)
+    The charcateristic values of the reflexive relations
+    are set to the *indeterminate* value (default = Decimal('0')
     
     *Parameters*:
         * order (integer, default = 10);
         * arcProbability (float in [0.,1.], default=0.5)
-        * missingRelationProbability (float in [0.,1.], default=0.1)
+        * missingRelationProbability (float in [0.,1.], default=0.0)
         * namePrefix (str, default = 'a')
         * IntegerValuation (default = True);
         * If Bipolar=True, valuation domain = {-1,0,1} otherwise = {0,0.5,1}
@@ -43,7 +43,7 @@ class RandomDigraph(Digraph):
      """
 
     def __init__(self,order=9,arcProbability=0.5,namePrefix='a',
-                 missingRelationProbability=0.1,
+                 missingRelationProbability=0.0,
                  IntegerValuation=True, Bipolar=True,
                  seed=None):
 
