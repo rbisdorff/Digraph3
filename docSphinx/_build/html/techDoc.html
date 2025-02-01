@@ -1137,6 +1137,7 @@
 <li class="toctree-l3"><a class="reference internal" href="#arithmetics.simpleContinuedFraction"><code class="docutils literal notranslate"><span class="pre">simpleContinuedFraction()</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="#arithmetics.simpleConvergents"><code class="docutils literal notranslate"><span class="pre">simpleConvergents()</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="#arithmetics.solPartEqnDioph"><code class="docutils literal notranslate"><span class="pre">solPartEqnDioph()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#arithmetics.solvingQuadraticEquation"><code class="docutils literal notranslate"><span class="pre">solvingQuadraticEquation()</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="#arithmetics.sternBrocot"><code class="docutils literal notranslate"><span class="pre">sternBrocot()</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="#arithmetics.totient"><code class="docutils literal notranslate"><span class="pre">totient()</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="#arithmetics.zn_squareroots"><code class="docutils literal notranslate"><span class="pre">zn_squareroots()</span></code></a></li>
@@ -11980,6 +11981,14 @@ ax + by = c. The method returns the tuple
 </dd></dl>
 
 <dl class="py function">
+<dt class="sig sig-object py" id="arithmetics.solvingQuadraticEquation">
+<span class="sig-prename descclassname"><span class="pre">arithmetics.</span></span><span class="sig-name descname"><span class="pre">solvingQuadraticEquation</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">a</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">b</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">c</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">Comments</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/arithmetics.html#solvingQuadraticEquation"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#arithmetics.solvingQuadraticEquation" title="Link to this definition"></a></dt>
+<dd><p>Renders both roots x,y of ax2 + bx + c = 0 where
+x = (-b + sqrt(b^2 -4ac))/2a and
+y = (-b - sqrt(b^2 -4ac))/2a</p>
+</dd></dl>
+
+<dl class="py function">
 <dt class="sig sig-object py" id="arithmetics.sternBrocot">
 <span class="sig-prename descclassname"><span class="pre">arithmetics.</span></span><span class="sig-name descname"><span class="pre">sternBrocot</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">m</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">5</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">n</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">7</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">Debug</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/arithmetics.html#sternBrocot"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#arithmetics.sternBrocot" title="Link to this definition"></a></dt>
 <dd><p>Renders the Stern-Brocot representation of the rational m/n (m and n are positive integers).
@@ -14487,7 +14496,7 @@ Components are stored in an ordered dictionary.</p>
 
   <div role="contentinfo">
     <p>&#169; Copyright 2012-2024, Raymond Bisdorff.
-      <span class="lastupdated">Last updated on Jan 30, 2025.
+      <span class="lastupdated">Last updated on Feb 01, 2025.
       </span></p>
   </div>
 

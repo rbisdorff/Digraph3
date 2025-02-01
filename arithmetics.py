@@ -784,6 +784,35 @@ def computeFareySeries(n=7,AsFloats=False,Debug=False):
         f = [float(x[0])/float(x[1]) for x in f]
     return f
 
+def solvingQuadraticEquation(a,b,c,Comments=False):
+    """
+    Renders both roots x,y of ax2 + bx + c = 0 where
+    x = (-b + sqrt(b^2 -4ac))/2a and
+    y = (-b - sqrt(b^2 -4ac))/2a
+    """
+    from math import sqrt
+    D = (b*b -4*a*c)
+    if Comments:
+        print('D = (b^2 -4*a*c) = %f' % D )
+        
+    if D > 0:
+        if Comments:
+            print('D > 0 => two real roots')
+        x = (-b + sqrt(D))/(2*a)
+        y = (-b - sqrt(D))/(2*a)
+    elif D == 0:
+        if Comments:
+            print('D == 0 => one real root')
+        x = -b / (2*a)
+        y = -b / (2*a)
+    else:
+        if Comments:
+            print('D < 0 => two complex roots')       
+        z = sqrt(-D)
+        x = (complex(-b,z))/(2*a)
+        y = (complex(-b,-z))/(2*a)
+    return x,y
+    
 ###############################
 if __name__ == '__main__':
     print("""
