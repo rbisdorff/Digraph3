@@ -789,6 +789,20 @@ def solvingQuadraticEquation(a,b,c,Comments=False):
     Renders both roots x,y of ax2 + bx + c = 0 where
     x = (-b + sqrt(b^2 -4ac))/2a and
     y = (-b - sqrt(b^2 -4ac))/2a
+
+    >>> solvingQuadraticEquation(1,-2,-1,Comments=True)
+     D = (b^2 -4*a*c) = 8.000000
+     D > 0 => two real roots
+     (2.414213562373095, -0.41421356237309515)
+    >>> solvingQuadraticEquation(1,2,1,Comments=True)
+     D = (b^2 -4*a*c) = 0.000000
+     D == 0 => one real root
+     (-1.0, -1.0)
+    >>> solvingQuadraticEquation(-1,6,-10,Comments=True)
+     D = (b^2 -4*a*c) = -4.000000
+     D < 0 => two complex roots
+     ((3-1j), (3+1j))
+
     """
     from math import sqrt
     D = (b*b -4*a*c)

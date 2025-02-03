@@ -11986,6 +11986,20 @@ ax + by = c. The method returns the tuple
 <dd><p>Renders both roots x,y of ax2 + bx + c = 0 where
 x = (-b + sqrt(b^2 -4ac))/2a and
 y = (-b - sqrt(b^2 -4ac))/2a</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">solvingQuadraticEquation</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="o">-</span><span class="mi">2</span><span class="p">,</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="n">Comments</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="go"> D = (b^2 -4*a*c) = 8.000000</span>
+<span class="go"> D &gt; 0 =&gt; two real roots</span>
+<span class="go"> (2.414213562373095, -0.41421356237309515)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">solvingQuadraticEquation</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="n">Comments</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="go"> D = (b^2 -4*a*c) = 0.000000</span>
+<span class="go"> D == 0 =&gt; one real root</span>
+<span class="go"> (-1.0, -1.0)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">solvingQuadraticEquation</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="mi">6</span><span class="p">,</span><span class="o">-</span><span class="mi">10</span><span class="p">,</span><span class="n">Comments</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="go"> D = (b^2 -4*a*c) = -4.000000</span>
+<span class="go"> D &lt; 0 =&gt; two complex roots</span>
+<span class="go"> ((3-1j), (3+1j))</span>
+</pre></div>
+</div>
 </dd></dl>
 
 <dl class="py function">
@@ -14496,7 +14510,7 @@ Components are stored in an ordered dictionary.</p>
 
   <div role="contentinfo">
     <p>&#169; Copyright 2012-2024, Raymond Bisdorff.
-      <span class="lastupdated">Last updated on Feb 01, 2025.
+      <span class="lastupdated">Last updated on Feb 03, 2025.
       </span></p>
   </div>
 

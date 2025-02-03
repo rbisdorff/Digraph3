@@ -955,6 +955,20 @@
 <span class="sd">    Renders both roots x,y of ax2 + bx + c = 0 where</span>
 <span class="sd">    x = (-b + sqrt(b^2 -4ac))/2a and</span>
 <span class="sd">    y = (-b - sqrt(b^2 -4ac))/2a</span>
+
+<span class="sd">    &gt;&gt;&gt; solvingQuadraticEquation(1,-2,-1,Comments=True)</span>
+<span class="sd">     D = (b^2 -4*a*c) = 8.000000</span>
+<span class="sd">     D &gt; 0 =&gt; two real roots</span>
+<span class="sd">     (2.414213562373095, -0.41421356237309515)</span>
+<span class="sd">    &gt;&gt;&gt; solvingQuadraticEquation(1,2,1,Comments=True)</span>
+<span class="sd">     D = (b^2 -4*a*c) = 0.000000</span>
+<span class="sd">     D == 0 =&gt; one real root</span>
+<span class="sd">     (-1.0, -1.0)</span>
+<span class="sd">    &gt;&gt;&gt; solvingQuadraticEquation(-1,6,-10,Comments=True)</span>
+<span class="sd">     D = (b^2 -4*a*c) = -4.000000</span>
+<span class="sd">     D &lt; 0 =&gt; two complex roots</span>
+<span class="sd">     ((3-1j), (3+1j))</span>
+
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="kn">from</span> <span class="nn">math</span> <span class="kn">import</span> <span class="n">sqrt</span>
     <span class="n">D</span> <span class="o">=</span> <span class="p">(</span><span class="n">b</span><span class="o">*</span><span class="n">b</span> <span class="o">-</span><span class="mi">4</span><span class="o">*</span><span class="n">a</span><span class="o">*</span><span class="n">c</span><span class="p">)</span>
@@ -1022,7 +1036,7 @@
 
   <div role="contentinfo">
     <p>&#169; Copyright 2012-2024, Raymond Bisdorff.
-      <span class="lastupdated">Last updated on Feb 01, 2025.
+      <span class="lastupdated">Last updated on Feb 03, 2025.
       </span></p>
   </div>
 
