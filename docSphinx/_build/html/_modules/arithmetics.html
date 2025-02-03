@@ -203,6 +203,9 @@
 <span class="sd">    http://stackoverflow.com/questions/2068372/fastest-way-to-list-all-primes-below-n-in-python/3035188#3035188</span>
 <span class="sd">    Input N&gt;=6, Returns a list of primes, 2 &lt;= p &lt; N</span>
 
+<span class="sd">    &gt;&gt;&gt; primesBelow(30,Odd=True)</span>
+<span class="sd">     [3, 5, 7, 11, 13, 17, 19, 23, 29]</span>
+
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">correction</span> <span class="o">=</span> <span class="n">N</span> <span class="o">%</span> <span class="mi">6</span> <span class="o">&gt;</span> <span class="mi">1</span>
     <span class="n">N</span> <span class="o">=</span> <span class="p">{</span><span class="mi">0</span><span class="p">:</span><span class="n">N</span><span class="p">,</span> <span class="mi">1</span><span class="p">:</span><span class="n">N</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">:</span><span class="n">N</span><span class="o">+</span><span class="mi">4</span><span class="p">,</span> <span class="mi">3</span><span class="p">:</span><span class="n">N</span><span class="o">+</span><span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">:</span><span class="n">N</span><span class="o">+</span><span class="mi">2</span><span class="p">,</span> <span class="mi">5</span><span class="p">:</span><span class="n">N</span><span class="o">+</span><span class="mi">1</span><span class="p">}[</span><span class="n">N</span><span class="o">%</span><span class="mi">6</span><span class="p">]</span>
@@ -258,9 +261,7 @@
     <span class="k">return</span> <span class="kc">True</span></div>
 
 
-<div class="viewcode-block" id="pollard_brent">
-<a class="viewcode-back" href="../techDoc.html#arithmetics.pollard_brent">[docs]</a>
-<span class="k">def</span> <span class="nf">pollard_brent</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
+<span class="k">def</span> <span class="nf">_pollard_brent</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 
 <span class="sd">    https://comeoncodeon.wordpress.com/2010/09/18/pollard-rho-brent-integer-factorization/</span>
@@ -292,11 +293,17 @@
             <span class="k">if</span> <span class="n">g</span> <span class="o">&gt;</span> <span class="mi">1</span><span class="p">:</span>
                 <span class="k">break</span>
 
-    <span class="k">return</span> <span class="n">g</span></div>
-
+    <span class="k">return</span> <span class="n">g</span>
 
 <span class="n">_smallprimes</span> <span class="o">=</span> <span class="n">primesBelow</span><span class="p">(</span><span class="mi">1000</span><span class="p">)</span> <span class="c1"># might seem low, but 1000*1000 = 1000000, so this will fully factor every composite &lt; 1000000</span>
+<div class="viewcode-block" id="primeFactors">
+<a class="viewcode-back" href="../techDoc.html#arithmetics.primeFactors">[docs]</a>
 <span class="k">def</span> <span class="nf">primeFactors</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="n">sort</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    &gt;&gt;&gt; primeFactors(12345)</span>
+<span class="sd">    [3, 5, 823]</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">factors</span> <span class="o">=</span> <span class="p">[]</span>
 
     <span class="n">limit</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">n</span> <span class="o">**</span> <span class="mf">.5</span><span class="p">)</span> <span class="o">+</span> <span class="mi">1</span>
@@ -314,13 +321,14 @@
         <span class="k">if</span> <span class="n">isprime</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
             <span class="n">factors</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">n</span><span class="p">)</span>
             <span class="k">break</span>
-        <span class="n">factor</span> <span class="o">=</span> <span class="n">pollard_brent</span><span class="p">(</span><span class="n">n</span><span class="p">)</span> <span class="c1"># trial division did not fully factor, switch to pollard-brent</span>
+        <span class="n">factor</span> <span class="o">=</span> <span class="n">_pollard_brent</span><span class="p">(</span><span class="n">n</span><span class="p">)</span> <span class="c1"># trial division did not fully factor, switch to pollard-brent</span>
         <span class="n">factors</span><span class="o">.</span><span class="n">extend</span><span class="p">(</span><span class="n">primeFactors</span><span class="p">(</span><span class="n">factor</span><span class="p">))</span> <span class="c1"># recurse to factor the not necessarily prime factor returned by pollard-brent</span>
         <span class="n">n</span> <span class="o">//=</span> <span class="n">factor</span>
 
     <span class="k">if</span> <span class="n">sort</span><span class="p">:</span> <span class="n">factors</span><span class="o">.</span><span class="n">sort</span><span class="p">()</span>
 
-    <span class="k">return</span> <span class="n">factors</span>
+    <span class="k">return</span> <span class="n">factors</span></div>
+
 
 <span class="k">def</span> <span class="nf">factorization</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
     <span class="n">factors</span> <span class="o">=</span> <span class="n">OrderedDict</span><span class="p">()</span>
@@ -339,6 +347,19 @@
 <span class="sd">    n = p1^e1 * ... * pk^ek with each ei &gt;= 1 for i = 1, ..., k.  </span>
 
 <span class="sd">    mu = 0 if ei &gt; 1 for some i = 1, ... k else mu = (-1)^k.</span>
+
+<span class="sd">    &gt;&gt;&gt; factorization(15)</span>
+<span class="sd">     OrderedDict({3: 1, 5: 1})</span>
+<span class="sd">    &gt;&gt;&gt; moebius_mu(15)</span>
+<span class="sd">     1</span>
+<span class="sd">    &gt;&gt;&gt; factorization(12345)</span>
+<span class="sd">     OrderedDict({3: 1, 5: 1, 823: 1})</span>
+<span class="sd">    &gt;&gt;&gt; moebius_mu(12345)</span>
+<span class="sd">     -1</span>
+<span class="sd">    &gt;&gt;&gt; factorization(12321)</span>
+<span class="sd">     OrderedDict({3: 2, 37: 2})</span>
+<span class="sd">    &gt;&gt;&gt; moebius_mu(12321)</span>
+<span class="sd">     0</span>
 
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="k">if</span> <span class="n">n</span> <span class="o">&lt;</span> <span class="mi">1</span><span class="p">:</span>

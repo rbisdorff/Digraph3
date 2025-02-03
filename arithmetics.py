@@ -103,6 +103,9 @@ def primesBelow(N,Odd=False):
     http://stackoverflow.com/questions/2068372/fastest-way-to-list-all-primes-below-n-in-python/3035188#3035188
     Input N>=6, Returns a list of primes, 2 <= p < N
 
+    >>> primesBelow(30,Odd=True)
+     [3, 5, 7, 11, 13, 17, 19, 23, 29]
+
     """
     correction = N % 6 > 1
     N = {0:N, 1:N-1, 2:N+4, 3:N+3, 4:N+2, 5:N+1}[N%6]
@@ -154,7 +157,7 @@ def isprime(n, precision=7):
 
     return True
 
-def pollard_brent(n):
+def _pollard_brent(n):
     """
 
     https://comeoncodeon.wordpress.com/2010/09/18/pollard-rho-brent-integer-factorization/
@@ -190,6 +193,11 @@ def pollard_brent(n):
 
 _smallprimes = primesBelow(1000) # might seem low, but 1000*1000 = 1000000, so this will fully factor every composite < 1000000
 def primeFactors(n, sort=True):
+    """
+    >>> primeFactors(12345)
+    [3, 5, 823]
+
+    """
     factors = []
 
     limit = int(n ** .5) + 1
@@ -207,7 +215,7 @@ def primeFactors(n, sort=True):
         if isprime(n):
             factors.append(n)
             break
-        factor = pollard_brent(n) # trial division did not fully factor, switch to pollard-brent
+        factor = _pollard_brent(n) # trial division did not fully factor, switch to pollard-brent
         factors.extend(primeFactors(factor)) # recurse to factor the not necessarily prime factor returned by pollard-brent
         n //= factor
 
@@ -230,6 +238,19 @@ def moebius_mu(n):
     n = p1^e1 * ... * pk^ek with each ei >= 1 for i = 1, ..., k.  
 
     mu = 0 if ei > 1 for some i = 1, ... k else mu = (-1)^k.
+
+    >>> factorization(15)
+     OrderedDict({3: 1, 5: 1})
+    >>> moebius_mu(15)
+     1
+    >>> factorization(12345)
+     OrderedDict({3: 1, 5: 1, 823: 1})
+    >>> moebius_mu(12345)
+     -1
+    >>> factorization(12321)
+     OrderedDict({3: 2, 37: 2})
+    >>> moebius_mu(12321)
+     0
 
     """
     if n < 1:

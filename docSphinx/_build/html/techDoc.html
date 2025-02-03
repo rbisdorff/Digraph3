@@ -1132,7 +1132,7 @@
 <li class="toctree-l3"><a class="reference internal" href="#arithmetics.isprime"><code class="docutils literal notranslate"><span class="pre">isprime()</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="#arithmetics.lcm"><code class="docutils literal notranslate"><span class="pre">lcm()</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="#arithmetics.moebius_mu"><code class="docutils literal notranslate"><span class="pre">moebius_mu()</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="#arithmetics.pollard_brent"><code class="docutils literal notranslate"><span class="pre">pollard_brent()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#arithmetics.primeFactors"><code class="docutils literal notranslate"><span class="pre">primeFactors()</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="#arithmetics.primesBelow"><code class="docutils literal notranslate"><span class="pre">primesBelow()</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="#arithmetics.simpleContinuedFraction"><code class="docutils literal notranslate"><span class="pre">simpleContinuedFraction()</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="#arithmetics.simpleConvergents"><code class="docutils literal notranslate"><span class="pre">simpleConvergents()</span></code></a></li>
@@ -11912,12 +11912,29 @@ where a_0 corresponds to its integer part.</p>
 <dd><p>Implements the Moebius mu function on N based on n’s prime factorization:
 n = p1^e1 * … * pk^ek with each ei &gt;= 1 for i = 1, …, k.</p>
 <p>mu = 0 if ei &gt; 1 for some i = 1, … k else mu = (-1)^k.</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">factorization</span><span class="p">(</span><span class="mi">15</span><span class="p">)</span>
+<span class="go"> OrderedDict({3: 1, 5: 1})</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">moebius_mu</span><span class="p">(</span><span class="mi">15</span><span class="p">)</span>
+<span class="go"> 1</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">factorization</span><span class="p">(</span><span class="mi">12345</span><span class="p">)</span>
+<span class="go"> OrderedDict({3: 1, 5: 1, 823: 1})</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">moebius_mu</span><span class="p">(</span><span class="mi">12345</span><span class="p">)</span>
+<span class="go"> -1</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">factorization</span><span class="p">(</span><span class="mi">12321</span><span class="p">)</span>
+<span class="go"> OrderedDict({3: 2, 37: 2})</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">moebius_mu</span><span class="p">(</span><span class="mi">12321</span><span class="p">)</span>
+<span class="go"> 0</span>
+</pre></div>
+</div>
 </dd></dl>
 
 <dl class="py function">
-<dt class="sig sig-object py" id="arithmetics.pollard_brent">
-<span class="sig-prename descclassname"><span class="pre">arithmetics.</span></span><span class="sig-name descname"><span class="pre">pollard_brent</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">n</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/arithmetics.html#pollard_brent"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#arithmetics.pollard_brent" title="Link to this definition"></a></dt>
-<dd><p><a class="reference external" href="https://comeoncodeon.wordpress.com/2010/09/18/pollard-rho-brent-integer-factorization/">https://comeoncodeon.wordpress.com/2010/09/18/pollard-rho-brent-integer-factorization/</a></p>
+<dt class="sig sig-object py" id="arithmetics.primeFactors">
+<span class="sig-prename descclassname"><span class="pre">arithmetics.</span></span><span class="sig-name descname"><span class="pre">primeFactors</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">n</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sort</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/arithmetics.html#primeFactors"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#arithmetics.primeFactors" title="Link to this definition"></a></dt>
+<dd><div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">primeFactors</span><span class="p">(</span><span class="mi">12345</span><span class="p">)</span>
+<span class="go">[3, 5, 823]</span>
+</pre></div>
+</div>
 </dd></dl>
 
 <dl class="py function">
@@ -11925,6 +11942,10 @@ n = p1^e1 * … * pk^ek with each ei &gt;= 1 for i = 1, …, k.</p>
 <span class="sig-prename descclassname"><span class="pre">arithmetics.</span></span><span class="sig-name descname"><span class="pre">primesBelow</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">N</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">Odd</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/arithmetics.html#primesBelow"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#arithmetics.primesBelow" title="Link to this definition"></a></dt>
 <dd><p><a class="reference external" href="http://stackoverflow.com/questions/2068372/fastest-way-to-list-all-primes-below-n-in-python/3035188#3035188">http://stackoverflow.com/questions/2068372/fastest-way-to-list-all-primes-below-n-in-python/3035188#3035188</a>
 Input N&gt;=6, Returns a list of primes, 2 &lt;= p &lt; N</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">primesBelow</span><span class="p">(</span><span class="mi">30</span><span class="p">,</span><span class="n">Odd</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="go"> [3, 5, 7, 11, 13, 17, 19, 23, 29]</span>
+</pre></div>
+</div>
 </dd></dl>
 
 <dl class="py function">
