@@ -4004,9 +4004,23 @@ Notice that the stable low vector characterises the **negative membership** part
 
 The adjacency matrix of a symmetric digraph staying *unchanged* by the transposition operator, the previous computations, when qualifying the same kernel as a *terminal* instance, will hence produce exactly the same result.
 
+Historical notes
+................
+
+Following the observation that an independent absorbent choice in an acyclic digraph corresponds to the zero values of the associated *Grundy* function, *J. Riguet* [RIG-1948p]_ introduced the name **noyau** (kernel) for such a choice. Terminal kernels where in the sequel studied by *Claude Berge* [BER-1958p]_ in the context of Combinatorial Game Theory. Initial kernels --independent and dominating choices-- were introduced under the name game solutions by *John von Neumann* [NEU-1944p]_. The absorbent version of the crisp kernel equation system  was first introduced by *Schmidt G. and Ströhlein Th.* [SCH-1985p]_ in the context of their thorough exploration of relational algebra.
+
+The fuzzy version of kernel equation systems was first investigated by *Kitainik L.* [KIT-1993p]_. Commenting on this work at a meeting in Spring 1995 of the EURO Working Group on Multicriteria Decision Aiding in Lausanne (Switzerland), *Marc Roubens* feared that solving such fuzzy kernel equation systems could be computationally difficult. Triggered by his pessimistic remark and knowing about kernel equation systems and the *Neumann* fixpoint theorem ([NEU-1944p]_, [SCH-1985p]_), I immediately started to implement in Prolog a solver for the valued version of Equation :math:`T(Y)`; the equation system serving as constraints for a discrete labelling of all possible rational solution vectors. And in Summer 1995, we luckily obtained with a commercial finite domain solver the very first valued initial and terminal kernels from a didactic outranking digraph of order 8, well known in the multiple-criteria decision aiding community. The computation took several seconds on a CRAY 6412 superserver with 12 processors operating in a nowadays ridiculous CPU speed of 90 Mhz. The labelled solution vectors, obtained in the sequel for any outranking digraph with a single initial or terminal kernel, were structured in a way that suggested the converging stages of the *Neumann* fixpoint algorithm and so gave the initial hint for our Algorithm ([BIS-1996p]_, [BIS-1997p]_). 
+
+In our present Python3.12 implementation, such a tiny problem is solved in less than a thousandth of a second on a common laptop. And this remains practically the same for any relevant example of outranking digraph observed in a real decision-aiding problem. Several times we wrote in our personal journal that there is certainly now no more potential for any substantial improvement of this computational efficiency; Only to discover, shortly later, that following a new theoretical idea or choosing a more efficient implementation –-using for instance the amazing instrument of iterator generators in Python–-, execution times could well be divided by 20.
+
+This nowadays available computational efficiency confers the bipolar-valued kernel concept a methodological premium for solving specific decision problems on the basis of the bipolar-valued outranking digraph. But it also opens new opportunities for verifying and implementing kernel extraction algorithms for more graph theoretical purposes. New results, like enumerating the non isomorphic maximal independent sets --the kernels-- of known difficult graph instances like the *n*-cycle, could be obtained [ISO-2008p]_.
+
+
+
 .. note::
 
    It is worthwhile noticing again the essential computational role, the logical **indeterminate value 0.0** is playing in this double fixpoint algorithm. To implement such kind of algorithms without a logical **neutral term** would be like implementing numerical algorithms without a possible usage of the number 0. Infinitely many trivial *impossibility theorems* and *dubious logical results* come up. 
+
 
 Back to :ref:`Content Table <Pearls-label>`
 
@@ -4733,13 +4747,32 @@ Appendix
 
 .. [SCH-1985p] Schmidt G. and Ströhlein Th. (1985), "On kernels of graphs and solutions of games: a synopsis based on relations and fixpoints". SIAM, J. *Algebraic Discrete Methods*, 6:54–65.
 
+.. [RIG-1948p] Riguet J. (1948), "Relations binaires, fermetures, correspondances de galois". *Bull Soc Math France* 76:114--155.
+
+.. [NEU-1944p] von Neumann J. and Morgenstern O. (1944). *Theory of games and economic behaviour*. Princeton University Press, Pinceton.
+
+.. [KIT-1993p] Kitainik L. (1993). *Fuzzy decision procedures with binary relations: towards a
+  unified theory*. Kluwer Academic Publisher Boston.
+
+.. [ISO-2008p] Bisdorff R. and Marichal J. (2008). "Counting non-isomorphic maximal independent sets
+  of the n-cycle graph". *Journal of Integer Sequences* 11 (Art. 08.5.7):1--16, https://cs.uwaterloo.ca/journals/JIS/VOL11/Marichal/marichal.html
+
+.. [BIS-1996p] Bisdorff R. (1996). "On computing kernels on fuzzy simple graphs by combinatorial
+  enumeration using a CPL(FD) system". In: *8th Benelux Workshop on Logic
+  Programming*, Louvain-la-Neuve (BE), 9 September 1996, Université catholique
+  de Louvain, http://hdl.handle.net/10993/46933
+
+.. [BIS-1997p] Bisdorff R. (1997). "On computing kernels on l-valued simple graphs*. In:
+  *Proceedings of EUFIT'97, 5th European Congress on Fuzzy and Intelligent
+  Technologies*, Aachen, September 8-11, 1997}, pp 97--103.
+
 .. [BAR-1980p] Barbut M. (1980), "Médianes, Condorcet et Kendall". *Mathématiques et Sciences Humaines*, 69:9–13.	       
 
-.. ..[BER-1958p] Berge C. (2001), *The theory of graphs*. Dover Publications Inc. 2001. First published in English by Methuen & Co Ltd., London 1962. Translated from a French edition by Dunod, Paris 1958.
+.. [BER-1958p] Berge C. (2001), *The theory of graphs*. Dover Publications Inc. 2001. First published in English by Methuen & Co Ltd., London 1962. Translated from a French edition by Dunod, Paris 1958.
 
 .. [KEN-1938p] Kendall M.G. (1938), "A New Measure of Rank Correlation". *Biometrica* 30:81–93
 
-.. [ROY-1966p] Benyaoun S., Roy B. and Sussmann B. (1966), ELECTRE: une méthode pour guider le choix en présence de points de vue multiples. Tech. Rep. 49, SEMA Direction Scientifique Paris. 
+.. [ROY-1966p] Benyaoun S., Roy B. and Sussmann B. (1966), "ELECTRE: une méthode pour guider le choix en présence de points de vue multiples". *Tech. Rep. 49, SEMA Direction Scientifique Paris*. 
 
 .. [CON-1785p] Condorcet, J.A.N. de Caritat marquis de (1785), *Essai sur l'application de l'analyse à la probabilité des décisions rendues à la pluralité des voix*, Imprimerie royale Paris, https://gallica.bnf.fr/ark:/12148/bpt6k417181/f4.item
 
