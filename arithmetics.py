@@ -228,14 +228,16 @@ def addBachet(num1,num2):
 
 class Bachet(object):
     """
-    Define bipolar-valued base {-1,0,1} encoded integers
+    Bipolar-valued base {-1,0,1} encoded Bachet integers
+    
+    https://en.wikipedia.org/wiki/Claude_Gaspar_Bachet_de_M%C3%A9ziriac
     
     >>> print('*---- base3toBachet(): from int to Bachet via base 3 -----*')  
      *---- base3toBachet(): from int to Bachet via base 3 -----*
     >>> num_string = base10to3(154)
     >>> print(154, ' in base 3 = ', num_string)
      154  in base 3 =  12201
-    >>> print(num_string, ' in Bachet coding = ', base3toBachet(num_string))
+    >>> print(num_string, ' in Bachet encoding = ', base3toBachet(num_string))
      12201  in Bachet coding =  ('1-10-101', [1, -1, 0, -1, 0, 1])
     >>> print('*---- int2bachet(): directly from int to Bachet -----*')    
      *---- int2bachet(): directly from int to Bachet -----*

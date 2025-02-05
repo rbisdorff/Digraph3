@@ -11704,13 +11704,14 @@ Springer Verlag London 1998.</p>
 <dl class="py class">
 <dt class="sig sig-object py" id="arithmetics.Bachet">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">arithmetics.</span></span><span class="sig-name descname"><span class="pre">Bachet</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">num_int</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/arithmetics.html#Bachet"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#arithmetics.Bachet" title="Link to this definition"></a></dt>
-<dd><p>Define bipolar-valued base {-1,0,1} encoded integers</p>
+<dd><p>Bipolar-valued base {-1,0,1} encoded Bachet integers</p>
+<p><a class="reference external" href="https://en.wikipedia.org/wiki/Claude_Gaspar_Bachet_de_M%C3%A9ziriac">https://en.wikipedia.org/wiki/Claude_Gaspar_Bachet_de_M%C3%A9ziriac</a></p>
 <div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="s1">&#39;*---- base3toBachet(): from int to Bachet via base 3 -----*&#39;</span><span class="p">)</span>  
 <span class="go"> *---- base3toBachet(): from int to Bachet via base 3 -----*</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">num_string</span> <span class="o">=</span> <span class="n">base10to3</span><span class="p">(</span><span class="mi">154</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="mi">154</span><span class="p">,</span> <span class="s1">&#39; in base 3 = &#39;</span><span class="p">,</span> <span class="n">num_string</span><span class="p">)</span>
 <span class="go"> 154  in base 3 =  12201</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">num_string</span><span class="p">,</span> <span class="s1">&#39; in Bachet coding = &#39;</span><span class="p">,</span> <span class="n">base3toBachet</span><span class="p">(</span><span class="n">num_string</span><span class="p">))</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">num_string</span><span class="p">,</span> <span class="s1">&#39; in Bachet encoding = &#39;</span><span class="p">,</span> <span class="n">base3toBachet</span><span class="p">(</span><span class="n">num_string</span><span class="p">))</span>
 <span class="go"> 12201  in Bachet coding =  (&#39;1-10-101&#39;, [1, -1, 0, -1, 0, 1])</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="s1">&#39;*---- int2bachet(): directly from int to Bachet -----*&#39;</span><span class="p">)</span>    
 <span class="go"> *---- int2bachet(): directly from int to Bachet -----*</span>
