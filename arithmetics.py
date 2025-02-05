@@ -96,6 +96,179 @@ class QuadraticResiduesDigraph(Digraph):
         self.relation = relation
         self.gamma = self.gammaSets()
         self.notGamma = self.notGammaSets()
+
+# ------ Bachet bipolar {-1,0,1} base 3 encoded integers ---------------
+# Discrete Mathematics lectures 2008
+
+def base10to3(num):
+    """
+    Change a base 10 number to a base-3 number.
+    """
+    new_num_string = ''
+    current = num
+    while current != 0:
+        remainder = current%3
+        remainder_string = str(remainder)
+        new_num_string = remainder_string + new_num_string
+        current = current//3
+    return new_num_string
+
+def base3toBachet(num_string):
+    """
+    convert a [0,1,2] coded base 3 integer into a [-1,0,1] coded one.
+    returns a Bachet string and a Bachet vector representation
+    Michel Criton, Les problèmes de pesèes. 
+    Pour la science, dossier avril/juin 2008, p. 15. 
+    """
+    new_num_string=''
+    new_vector=[0 for x in range(len(num_string))]
+    reste = 0
+    for i in range(len(num_string)-1,-1,-1):
+        # range(start,step,stop)
+        # range(len([1,0,-1])-1,-1,-1) = [2,1,0] = reversed list index
+        
+        num = eval(num_string[i])+reste
+        if num == 2:
+            new_num_string = '-1' + new_num_string
+            new_vector[i] = -1
+            reste = 1
+        elif num == 3:
+            new_num_string = '0' + new_num_string
+            new_vector[i] = 0
+            reste = 1
+        else:
+            new_num_string = str(num) + new_num_string
+            new_vector[i] = num
+            reste = 0
+    
+    if reste == 1:
+        new_num_string = '1' + new_num_string       
+        new_vector = [1] + new_vector
+        
+    return new_num_string,new_vector
+
+def int2bachet(num_int):
+    """
+    convert a signed integer to bachet code
+    """
+    if num_int < 0:
+        unsigned_num_int = abs(num_int)
+    else:
+        unsigned_num_int = num_int
+    base3_unsigned_num_int = base10to3(unsigned_num_int)
+    bachet_unsigned_num_int = base3toBachet(base3_unsigned_num_int)
+    if num_int > 0:
+        return bachet_unsigned_num_int
+    elif num_int == 0:
+        return '0',[0]
+    else:
+        bachet_vector = bachet_unsigned_num_int[1]
+        bachet_str_int=''
+        for i in range(len(bachet_unsigned_num_int[1])):
+            bachet_str_int = str(bachet_unsigned_num_int[1][i]*-1) + bachet_str_int 
+            bachet_vector[i] = bachet_unsigned_num_int[1][i]*-1
+        return bachet_str_int,bachet_vector
+
+def bachet2int(bachet_int):
+    """
+    convert a bachet coded integer back to base 10 integer
+    """
+    result_int = 0
+    for i in range(len(bachet_int[1])):
+        result_int += 3**i*bachet_int[1][len(bachet_int[1])-i-1]
+    return result_int
+
+def addBachet(num1,num2):
+    """
+    add two bachet coded integers.
+    """
+    vec1 = num1[1]
+    vec2 = num2[1]
+    n1 = len(vec1)
+    n2 = len(vec2)
+    n = max(n1,n2)
+
+    for i in range(n):   # ajuster vec1 et vec2 à la même longueur n en préfixant 0
+        if n1 < i+1:
+            vec1 = [0] + vec1
+        if n2 < i+1:
+            vec2 = [0] + vec2
+
+    vec3 = [0 for i in range(n)]  #  initialiser vec 3 avec n x 0
+    reste = 0
+    
+    for i in range(n-1,-1,-1):    #  indice inversé n-1, n-2, ..., 1, 0
+
+        num = vec1[i] + vec2[i] + reste
+        
+        if num == 3:   
+            vec3[i] = 0
+            reste   = 1
+
+        elif num == -2:
+            vec3[i] = 1
+            reste   = -1
+
+        elif num == 2:
+            vec3[i] = -1
+            reste   = 1
+
+        else:
+            vec3[i] = num
+            reste   = 0
+        
+    if reste != 0:
+        vec3 = [reste] + vec3
+        
+    vec3_str=''
+    for i in range(len(vec3)):
+        vec3_str += str(vec3[i])
+        
+    return vec3_str,vec3
+
+class Bachet(object):
+    """
+    define bipolar coded binary integers.
+    """
+    def __init__(self,num_int):
+        """
+        tranform a signed integer in a bachet coded one.
+        """
+        self.vector = int2bachet(num_int)[1]
+
+    def __str__(self):
+            bachet_string = ''
+            for i in range(len(self.vector)):
+                bachet_string += str(self.vector[i])
+            return bachet_string
+       
+    def __neg__(self):
+        neg_vector = self.vector
+        for i in range(len(self.vector)):
+            neg_vector[i] = self.vector[i] * -1
+        
+    def __add__(self,other):
+        n1 = self.value()
+        n2 = other.value()
+        n3 = n1 + n2
+        return Bachet(n3)
+        
+    def value(self):
+        result_int = 0
+        for i in range(len(self.vector)):
+            result_int += 3**i*self.vector[len(self.vector)-i-1]
+        return result_int
+
+    def __len__(self):
+        return len(self.vector)
+
+    def reverse(self):
+        result = [0 for i in range(len(self.vector))]
+        for i in range(len(self.vector)):
+            result[i] = self.vector[len(self.vector)-i-1]
+        self.vector = result
+
+#-------------------------------
     
 def primesBelow(N,Odd=False):
     """
@@ -875,6 +1048,35 @@ if __name__ == '__main__':
 ##    print('eval(cf(sqrt(2))_%d) = ' % (len(cf)-1), decimalEvalContinuedFraction(cf) )
 ##    print('sqrt(2)              = ', sqrt(2) )
 ##
+    print('*---- base3toBachet(): from int to Bachet via base 3 -----*')  
+    num_string = base10to3(154)
+    print(154, ' in base 3 = ', num_string)
+    print(num_string, ' in Bachet coding = ', base3toBachet(num_string))
+
+    print('*---- int2bachet(): directly from int to Bachet -----*')    
+    print(19, ' = ', int2bachet(19))
+    print(-37, ' = ', int2bachet(-37))
+    print(-1, ' = ', int2bachet(-1))
+
+    print('*---- int2bachet() & bachet2int() : conversion in both directions -----*')
+    print('120 = ', int2bachet(120))
+    print(int2bachet(120), '=', bachet2int(int2bachet(120))) 
+    print('13 = ', int2bachet(13))
+    print(int2bachet(13), '=', bachet2int(int2bachet(13)))
+    print('133 = ', int2bachet(133))
+    print(int2bachet(133), '=', bachet2int(int2bachet(133)))
+
+    print('*-----addition of Bachet numbers----------*') 
+    n1 = Bachet(12)
+    n2 = Bachet(13)
+    n3 = n1 + n2
+
+    print('"%s" (%d) + "%s" (%d) = "%s" (%d)' % (n1, n1.value(), n2, n2.value(), n3, n3.value() ))
+
+    print('length of "%s" = %d' % (n1, len(n1)))
+    n1.reverse()
+    -n2
+    print('"%s" (%d) + "%s" (%d) = "%s" (%d)' % ( n1, n1.value(), n2, n2.value(),n1 + n2, (n1+n2).value() ))
 
     print('*------------------*')
     print('If you see this line all tests were passed successfully :-)')

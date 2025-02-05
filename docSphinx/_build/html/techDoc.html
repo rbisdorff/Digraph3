@@ -1118,7 +1118,12 @@
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="#module-arithmetics">2.21. arithmetics module</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#arithmetics.Bachet"><code class="docutils literal notranslate"><span class="pre">Bachet</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="#arithmetics.QuadraticResiduesDigraph"><code class="docutils literal notranslate"><span class="pre">QuadraticResiduesDigraph</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#arithmetics.addBachet"><code class="docutils literal notranslate"><span class="pre">addBachet()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#arithmetics.bachet2int"><code class="docutils literal notranslate"><span class="pre">bachet2int()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#arithmetics.base10to3"><code class="docutils literal notranslate"><span class="pre">base10to3()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#arithmetics.base3toBachet"><code class="docutils literal notranslate"><span class="pre">base3toBachet()</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="#arithmetics.bezout"><code class="docutils literal notranslate"><span class="pre">bezout()</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="#arithmetics.cf2Rational"><code class="docutils literal notranslate"><span class="pre">cf2Rational()</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="#arithmetics.computeFareySeries"><code class="docutils literal notranslate"><span class="pre">computeFareySeries()</span></code></a></li>
@@ -1128,6 +1133,7 @@
 <li class="toctree-l3"><a class="reference internal" href="#arithmetics.divisors"><code class="docutils literal notranslate"><span class="pre">divisors()</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="#arithmetics.divisorsFunction"><code class="docutils literal notranslate"><span class="pre">divisorsFunction()</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="#arithmetics.gcd"><code class="docutils literal notranslate"><span class="pre">gcd()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#arithmetics.int2bachet"><code class="docutils literal notranslate"><span class="pre">int2bachet()</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="#arithmetics.invSternBrocot"><code class="docutils literal notranslate"><span class="pre">invSternBrocot()</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="#arithmetics.isprime"><code class="docutils literal notranslate"><span class="pre">isprime()</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="#arithmetics.lcm"><code class="docutils literal notranslate"><span class="pre">lcm()</span></code></a></li>
@@ -11696,6 +11702,12 @@ Springer Verlag London 1998.</p>
 <p>You should have received a copy of the GNU General Public License along with this program; if not, write to the Free Software Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.</p>
 </div></blockquote>
 <dl class="py class">
+<dt class="sig sig-object py" id="arithmetics.Bachet">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">arithmetics.</span></span><span class="sig-name descname"><span class="pre">Bachet</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">num_int</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/arithmetics.html#Bachet"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#arithmetics.Bachet" title="Link to this definition"></a></dt>
+<dd><p>define bipolar coded binary integers.</p>
+</dd></dl>
+
+<dl class="py class">
 <dt class="sig sig-object py" id="arithmetics.QuadraticResiduesDigraph">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">arithmetics.</span></span><span class="sig-name descname"><span class="pre">QuadraticResiduesDigraph</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">integers</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">[3,</span> <span class="pre">5,</span> <span class="pre">7,</span> <span class="pre">11,</span> <span class="pre">13,</span> <span class="pre">17,</span> <span class="pre">19]</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/arithmetics.html#QuadraticResiduesDigraph"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#arithmetics.QuadraticResiduesDigraph" title="Link to this definition"></a></dt>
 <dd><p>The <strong>Legendre</strong> symbol <em>(a/p)</em> of any pair of non null integers <em>a</em> and <em>p</em> is:</p>
@@ -11721,6 +11733,33 @@ apart from those pairs <em>(a/p)</em>, where <em>a</em> = <em>p</em> = 3 (mod 4)
 </pre></div>
 </div>
 <a class="reference internal image-reference" href="_images/legendreAsym.png"><img alt="Quadratic residues digraph asymmetric part" class="align-center" src="_images/legendreAsym.png" style="width: 300px;" /></a>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="arithmetics.addBachet">
+<span class="sig-prename descclassname"><span class="pre">arithmetics.</span></span><span class="sig-name descname"><span class="pre">addBachet</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">num1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">num2</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/arithmetics.html#addBachet"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#arithmetics.addBachet" title="Link to this definition"></a></dt>
+<dd><p>add two bachet coded integers.</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="arithmetics.bachet2int">
+<span class="sig-prename descclassname"><span class="pre">arithmetics.</span></span><span class="sig-name descname"><span class="pre">bachet2int</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">bachet_int</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/arithmetics.html#bachet2int"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#arithmetics.bachet2int" title="Link to this definition"></a></dt>
+<dd><p>convert a bachet coded integer back to base 10 integer</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="arithmetics.base10to3">
+<span class="sig-prename descclassname"><span class="pre">arithmetics.</span></span><span class="sig-name descname"><span class="pre">base10to3</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">num</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/arithmetics.html#base10to3"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#arithmetics.base10to3" title="Link to this definition"></a></dt>
+<dd><p>Change a base 10 number to a base-3 number.</p>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="arithmetics.base3toBachet">
+<span class="sig-prename descclassname"><span class="pre">arithmetics.</span></span><span class="sig-name descname"><span class="pre">base3toBachet</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">num_string</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/arithmetics.html#base3toBachet"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#arithmetics.base3toBachet" title="Link to this definition"></a></dt>
+<dd><p>convert a [0,1,2] coded base 3 integer into a [-1,0,1] coded one.
+returns a Bachet string and a Bachet vector representation
+Michel Criton, Les problèmes de pesèes. 
+Pour la science, dossier avril/juin 2008, p. 15.</p>
 </dd></dl>
 
 <dl class="py function">
@@ -11881,6 +11920,12 @@ where a_0 corresponds to its integer part.</p>
 <span class="go"> 8</span>
 </pre></div>
 </div>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="arithmetics.int2bachet">
+<span class="sig-prename descclassname"><span class="pre">arithmetics.</span></span><span class="sig-name descname"><span class="pre">int2bachet</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">num_int</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/arithmetics.html#int2bachet"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#arithmetics.int2bachet" title="Link to this definition"></a></dt>
+<dd><p>convert a signed integer to bachet code</p>
 </dd></dl>
 
 <dl class="py function">
@@ -14531,7 +14576,7 @@ Components are stored in an ordered dictionary.</p>
 
   <div role="contentinfo">
     <p>&#169; Copyright 2012-2024, Raymond Bisdorff.
-      <span class="lastupdated">Last updated on Feb 03, 2025.
+      <span class="lastupdated">Last updated on Feb 05, 2025.
       </span></p>
   </div>
 
