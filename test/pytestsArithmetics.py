@@ -77,35 +77,17 @@ def testContinuedFraction():
     
 def testBachetIntegerEncoding():
     print('==>> Testing Bachet encoding of integers')
-    print('*---- base3toBachet(): from int to Bachet via base 3 -----*')  
-    num_string = base10to3(154)
-    print(154, ' in base 3 = ', num_string)
-    print(num_string, ' in Bachet coding = ', base3toBachet(num_string))
-
-    print('*---- int2bachet(): directly from int to Bachet -----*')    
-    print(19, ' = ', int2bachet(19))
-    print(-37, ' = ', int2bachet(-37))
-    print(-1, ' = ', int2bachet(-1))
-
-    print('*---- int2bachet() & bachet2int() : conversion in both directions -----*')
-    print('120 = ', int2bachet(120))
-    print(int2bachet(120), '=', bachet2int(int2bachet(120))) 
-    print('13 = ', int2bachet(13))
-    print(int2bachet(13), '=', bachet2int(int2bachet(13)))
-    print('133 = ', int2bachet(133))
-    print(int2bachet(133), '=', bachet2int(int2bachet(133)))
-
     print('*-----addition of Bachet numbers----------*') 
     n1 = Bachet(12)
     n2 = Bachet(13)
     n3 = n1 + n2
 
-    print('"%s" (%d) + "%s" (%d) = "%s" (%d)' % (n1, n1.value(), n2, n2.value(), n3, n3.value() ))
+    print('%s (%d) + %s (%d) = %s (%d)' % (n1, n1.value(), n2, n2.value(), n3, n3.value() ))
 
-    print('length of "%s" = %d' % (n1, len(n1)))
+    print('length of %s = %d' % (n1, len(n1)))
     n1.reverse()
     -n2
-    print('"%s" (%d) + "%s" (%d) = "%s" (%d)' % ( n1, n1.value(), n2, n2.value(),n1 + n2, (n1+n2).value() ))
+    print('%s (%d) + %s (%d) = %s (%d)' % ( n1, n1.value(), n2, n2.value(),n1 + n2, (n1+n2).value() ))
     
 
 
