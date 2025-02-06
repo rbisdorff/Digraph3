@@ -107,6 +107,7 @@ class Bachet(object):
     
     https://en.wikipedia.org/wiki/Claude_Gaspar_Bachet_de_M%C3%A9ziriac
     
+    >>> from arithmetics import Bachet
     >>> n1 = Bachet(12)
     >>> n2 = Bachet(13)
     >>> n3 = n1 + n2
@@ -269,7 +270,8 @@ def primesBelow(N,Odd=False):
     http://stackoverflow.com/questions/2068372/fastest-way-to-list-all-primes-below-n-in-python/3035188#3035188
     Input N>=6, Returns a list of primes, 2 <= p < N
 
-    >>> primesBelow(30,Odd=True)
+    >>> import arithmetics as ar
+    >>> ar.primesBelow(30,Odd=True)
      [3, 5, 7, 11, 13, 17, 19, 23, 29]
 
     """
@@ -360,7 +362,8 @@ def _pollard_brent(n):
 _smallprimes = primesBelow(1000) # might seem low, but 1000*1000 = 1000000, so this will fully factor every composite < 1000000
 def primeFactors(n, sort=True):
     """
-    >>> primeFactors(12345)
+    >>> import arithmetics as ar
+    >>> ar.primeFactors(12345)
     [3, 5, 823]
 
     """
@@ -405,17 +408,18 @@ def moebius_mu(n):
 
     mu = 0 if ei > 1 for some i = 1, ... k else mu = (-1)^k.
 
-    >>> factorization(15)
+    >>> import arithmetics as ar
+    >>> ar.factorization(15)
      OrderedDict({3: 1, 5: 1})
-    >>> moebius_mu(15)
+    >>> ar.moebius_mu(15)
      1
-    >>> factorization(12345)
+    >>> ar.factorization(12345)
      OrderedDict({3: 1, 5: 1, 823: 1})
-    >>> moebius_mu(12345)
+    >>> ar.moebius_mu(12345)
      -1
-    >>> factorization(12321)
+    >>> ar.factorization(12321)
      OrderedDict({3: 2, 37: 2})
-    >>> moebius_mu(12321)
+    >>> ar.moebius_mu(12321)
      0
 
     """
@@ -438,7 +442,8 @@ def divisors(n,Sorted=True):
     """
     Renders the list of divisors of integer n.
 
-    >>> divisors(12)
+    >>> import arithmetics as ar
+    >>> ar.divisors(12)
      [1, 2, 3, 4, 6, 12]
      
     """
@@ -472,7 +477,8 @@ def totient(n):
     Implements the totient function rendering
     Euler's number of coprime elements a in Zn.
 
-    >>> totient(12)
+    >>> import arithmetics as ar
+    >>> ar.totient(12)
      4
 
     """
@@ -494,7 +500,8 @@ def simpleContinuedFraction(p, q, Comments=False):
     of the ratio of two positive integers p > 0 and q > 0 by
     following Euclide's division algorithm.
 
-    >>> simpleContinuedFraction(12,7,Comments=True)
+    >>> import arithmetics as ar
+    >>> ar.simpleContinuedFraction(12,7,Comments=True)
      12//7 = 1R5
      7//5 = 1R2
      5//2 = 2R1
@@ -532,10 +539,11 @@ def simpleConvergents(cf, AsFloats=False):
     - p[-1] and q[-1] deliver the initial numerator *a* and denominator *b*.
     - f[-1] delivers the float value of the rational fraction *a/b*.
 
-    >>> cf = simpleContinuedFraction(12,7)
+    >>> import arithmetics as ar
+    >>> cf = ar.simpleContinuedFraction(12,7)
     >>> cf
      [1, 1, 2, 2]
-    >>> p,q,f = simpleConvergents(cf, AsFloats=True)
+    >>> p,q,f = ar.simpleConvergents(cf, AsFloats=True)
     >>> p
      [1, 2, 5, 12]
     >>> q
@@ -565,7 +573,8 @@ def decimalEvalContinuedFraction(cf):
     of the continued fraction cf = [a_0,a_1,a_2,...,a_n] and 
     where a_0 corresponds to its integer part.
 
-    >>> decimalEvalContinuedFraction([1, 1, 2, 1, 1])  # 12/7
+    >>> import arithmetics as ar
+    >>> ar.decimalEvalContinuedFraction([1, 1, 2, 1, 1])  # 12/7
      Decimal('1.714285714285714285714285714')
     >>> 12/7
      1.7142857142857142
@@ -585,9 +594,10 @@ def cf2Rational(cf, AsDecimal=False, Debug=False):
     its corresponding rational number expression.
     Returns a/b or (a/b, Decimal(a/b)) if AsDecimal is True.
 
-    >>> simpleContinuedFraction(75,8)
+    >>> import arithmetics as ar
+    >>> ar.simpleContinuedFraction(75,8)
      [9, 2, 1, 1, 1]
-    >>> cf2Rational([9,2,1,1,1], AsDecimal=True)
+    >>> ar.cf2Rational([9,2,1,1,1], AsDecimal=True)
      ('75/8', Decimal('9.375')
     >>> eval('75/8')
      9.375
@@ -613,20 +623,21 @@ def continuedFraction(x, terms=20, AsFloats=False, rel_tol=1e-9, abs_tol=0.0):
     Returns a tuple with the continued fraction (in list format)
     and the convergents (in Fraction format) of the argument.
 
+    >>> import arithmetics as ar
     >>> from math import sqrt, pi
-    >>> continuedFraction(sqrt(2))
+    >>> ar.continuedFraction(sqrt(2))
      ([1, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2], [Fraction(1, 1),
      Fraction(3, 2), Fraction(7, 5), Fraction(17, 12), Fraction(41, 29),
      Fraction(99, 70), Fraction(239, 169), Fraction(577, 408),
      Fraction(1393, 985), Fraction(3363, 2378), Fraction(8119, 5741),
      Fraction(19601, 13860), Fraction(47321, 33461)])
-    >>> continuedFraction(sqrt(2),AsFloats=True)
+    >>> ar.continuedFraction(sqrt(2),AsFloats=True)
      ([1, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2],
      [1.0, 1.5, 1.4, 1.4166666666666667, 1.4137931034482758,
       1.4142857142857144, 1.4142011834319526, 1.4142156862745099,
       1.4142131979695431, 1.4142136248948696, 1.4142135516460548,
       1.4142135642135643, 1.4142135620573204])
-    >>> continuedFraction(pi,rel_tol=1e-15,AsFloats=True)
+    >>> ar.continuedFraction(pi,rel_tol=1e-15,AsFloats=True)
      ([3, 7, 15, 1, 292, 1, 1, 1, 2, 1, 3, 1, 14],
     [3.0, 3.142857142857143, 3.141509433962264, 3.1415929203539825,
      3.1415926530119025, 3.141592653921421, 3.1415926534674368,
@@ -678,7 +689,8 @@ def gcd(a, b):
     """
     Renders the greatest common divisor of two positive integers a and b. 
 
-    >>> gcd(120,16)
+    >>> import arithmetics as ar
+    >>> ar.gcd(120,16)
      8
 
     """
@@ -695,7 +707,8 @@ def lcm(a, b):
     """
     Renders the least common multiple of a and b.
 
-    >>> lcm(120,16)
+    >>> import arithmetics as ar
+    >>> ar.lcm(120,16)
      240
 
     """
@@ -708,7 +721,8 @@ def bezout(a,b,Comments=False,Debug=False):
 
     Both arguments *a* and *b* must be positive integers.
 
-    >>> bezout(120,16,Comments=True)
+    >>> import arithmetics as ar
+    >>> ar.bezout(120,16,Comments=True)
      d = 8, x = 1, y = -7
      8 = 120*1 + 16*(-7)
      (8, 1, -7)
@@ -746,7 +760,8 @@ def solPartEqnDioph(a,b,c,Comments=False):
     ax + by = c. The method returns the tuple
     (C*x, B*y, A, B) where d = gcd(a,b), C=c//d, A = a//d, and B=b//d. 
 
-    >>> solPartEqnDioph(3,4,5,Comments=True)
+    >>> import arithmetics as ar
+    >>> ar.solPartEqnDioph(3,4,5,Comments=True)
      d = 1, a = 3, x = -5, b = 4, y = 5
      (3)*(-5) + (4)*(5) = 5
      (-5, 5, 3, 4)
@@ -770,8 +785,9 @@ def solPartEqnDioph(a,b,c,Comments=False):
 def zn_units(n,Comments=False):
     """
     Renders the set of units of Zn.
-
-    >>> zn_units(12)
+    
+    >>> import arithmetics as ar
+    >>> ar.zn_units(12)
      {1, 11, 5, 7}
      
     """
@@ -789,7 +805,8 @@ def zn_squareroots(n,Comments=False):
     """
     Renders the quadratic residues of Zn as a dictionary.
 
-    >>> zn_squareroots(13,Comments=False)
+    >>> import arithmetics as ar
+    >>> ar.zn_squareroots(13,Comments=False)
      {1: [1, 12], 4: [2, 11],
       9: [3, 10], 3: [4, 9],
       12: [5, 8], 10: [6, 7]}
@@ -930,9 +947,10 @@ def computeFareySeries(n=7,AsFloats=False,Debug=False):
         *n*: strictly positive integer (default = 7).
         *AsFloats*: If True (defaut False), renders the list of approximate floats corresponding to the rational fractions.
 
-    >>> computeFareaySeries(4)
+    >>> import arithmetics as ar
+    >>> ar.computeFareySeries(4)
      [[0, 1], [1, 4], [1, 3], [1, 2], [2, 3], [3, 4], [1, 1]]
-    >>> computeFareySeries(4,AsFloats=True)
+    >>> ar.computeFareySeries(4,AsFloats=True)
     [0.0, 0.25, 0.3333333333333333, 0.5, 0.6666666666666666, 0.75, 1.0]
 
     *Source*: Graham, Knuth, Patashnik, Sec. 4.5 in Concrete Mathematics 2nd Ed., Addison-Wesley 1994, pp 115-123.
@@ -977,15 +995,16 @@ def solvingQuadraticEquation(a,b,c,Comments=False):
     x = (-b + sqrt(b^2 -4ac))/2a and
     y = (-b - sqrt(b^2 -4ac))/2a
 
-    >>> solvingQuadraticEquation(1,-2,-1,Comments=True)
+    >>> import arithmetics as ar
+    >>> ar.solvingQuadraticEquation(1,-2,-1,Comments=True)
      D = (b^2 -4*a*c) = 8.000000
      D > 0 => two real roots
      (2.414213562373095, -0.41421356237309515)
-    >>> solvingQuadraticEquation(1,2,1,Comments=True)
+    >>> ar.solvingQuadraticEquation(1,2,1,Comments=True)
      D = (b^2 -4*a*c) = 0.000000
      D == 0 => one real root
      (-1.0, -1.0)
-    >>> solvingQuadraticEquation(-1,6,-10,Comments=True)
+    >>> ar.solvingQuadraticEquation(-1,6,-10,Comments=True)
      D = (b^2 -4*a*c) = -4.000000
      D < 0 => two complex roots
      ((3-1j), (3+1j))

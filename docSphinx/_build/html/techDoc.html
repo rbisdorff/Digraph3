@@ -11705,7 +11705,8 @@ Springer Verlag London 1998.</p>
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">arithmetics.</span></span><span class="sig-name descname"><span class="pre">Bachet</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">num_int</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/arithmetics.html#Bachet"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#arithmetics.Bachet" title="Link to this definition"></a></dt>
 <dd><p>Bipolar-valued base {-1,0,1} encoded Bachet integers</p>
 <p><a class="reference external" href="https://en.wikipedia.org/wiki/Claude_Gaspar_Bachet_de_M%C3%A9ziriac">https://en.wikipedia.org/wiki/Claude_Gaspar_Bachet_de_M%C3%A9ziriac</a></p>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">n1</span> <span class="o">=</span> <span class="n">Bachet</span><span class="p">(</span><span class="mi">12</span><span class="p">)</span>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">arithmetics</span> <span class="kn">import</span> <span class="n">Bachet</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">n1</span> <span class="o">=</span> <span class="n">Bachet</span><span class="p">(</span><span class="mi">12</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">n2</span> <span class="o">=</span> <span class="n">Bachet</span><span class="p">(</span><span class="mi">13</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">n3</span> <span class="o">=</span> <span class="n">n1</span> <span class="o">+</span> <span class="n">n2</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="s1">&#39;</span><span class="si">%s</span><span class="s1"> (</span><span class="si">%d</span><span class="s1">) + </span><span class="si">%s</span><span class="s1"> (</span><span class="si">%d</span><span class="s1">) = </span><span class="si">%s</span><span class="s1"> (</span><span class="si">%d</span><span class="s1">)&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="n">n1</span><span class="p">,</span> <span class="n">n1</span><span class="o">.</span><span class="n">value</span><span class="p">(),</span> <span class="n">n2</span><span class="p">,</span> <span class="n">n2</span><span class="o">.</span><span class="n">value</span><span class="p">(),</span> <span class="n">n3</span><span class="p">,</span> <span class="n">n3</span><span class="o">.</span><span class="n">value</span><span class="p">()</span> <span class="p">))</span>
@@ -11766,7 +11767,8 @@ apart from those pairs <em>(a/p)</em>, where <em>a</em> = <em>p</em> = 3 (mod 4)
 <dd><p>Renders the tuple <em>(d,x,y)</em> wher <em>d = gcd(a,b)</em> and <em>x</em> and <em>y</em> are the
 Bezout coefficients such that <em>d = ax + by</em>.</p>
 <p>Both arguments <em>a</em> and <em>b</em> must be positive integers.</p>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">bezout</span><span class="p">(</span><span class="mi">120</span><span class="p">,</span><span class="mi">16</span><span class="p">,</span><span class="n">Comments</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">arithmetics</span> <span class="k">as</span> <span class="nn">ar</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">ar</span><span class="o">.</span><span class="n">bezout</span><span class="p">(</span><span class="mi">120</span><span class="p">,</span><span class="mi">16</span><span class="p">,</span><span class="n">Comments</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 <span class="go"> d = 8, x = 1, y = -7</span>
 <span class="go"> 8 = 120*1 + 16*(-7)</span>
 <span class="go"> (8, 1, -7)</span>
@@ -11780,9 +11782,10 @@ Bezout coefficients such that <em>d = ax + by</em>.</p>
 <dd><p>Converts the finite continued Fraction <em>cf</em> back to
 its corresponding rational number expression.
 Returns a/b or (a/b, Decimal(a/b)) if AsDecimal is True.</p>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">simpleContinuedFraction</span><span class="p">(</span><span class="mi">75</span><span class="p">,</span><span class="mi">8</span><span class="p">)</span>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">arithmetics</span> <span class="k">as</span> <span class="nn">ar</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">ar</span><span class="o">.</span><span class="n">simpleContinuedFraction</span><span class="p">(</span><span class="mi">75</span><span class="p">,</span><span class="mi">8</span><span class="p">)</span>
 <span class="go"> [9, 2, 1, 1, 1]</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">cf2Rational</span><span class="p">([</span><span class="mi">9</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">],</span> <span class="n">AsDecimal</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">ar</span><span class="o">.</span><span class="n">cf2Rational</span><span class="p">([</span><span class="mi">9</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">],</span> <span class="n">AsDecimal</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 <span class="go"> (&#39;75/8&#39;, Decimal(&#39;9.375&#39;)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="nb">eval</span><span class="p">(</span><span class="s1">&#39;75/8&#39;</span><span class="p">)</span>
 <span class="go"> 9.375</span>
@@ -11799,9 +11802,10 @@ Returns a/b or (a/b, Decimal(a/b)) if AsDecimal is True.</p>
 <div><p><em>n</em>: strictly positive integer (default = 7).
 <em>AsFloats</em>: If True (defaut False), renders the list of approximate floats corresponding to the rational fractions.</p>
 </div></blockquote>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">computeFareaySeries</span><span class="p">(</span><span class="mi">4</span><span class="p">)</span>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">arithmetics</span> <span class="k">as</span> <span class="nn">ar</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">ar</span><span class="o">.</span><span class="n">computeFareySeries</span><span class="p">(</span><span class="mi">4</span><span class="p">)</span>
 <span class="go"> [[0, 1], [1, 4], [1, 3], [1, 2], [2, 3], [3, 4], [1, 1]]</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">computeFareySeries</span><span class="p">(</span><span class="mi">4</span><span class="p">,</span><span class="n">AsFloats</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">ar</span><span class="o">.</span><span class="n">computeFareySeries</span><span class="p">(</span><span class="mi">4</span><span class="p">,</span><span class="n">AsFloats</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 <span class="go">[0.0, 0.25, 0.3333333333333333, 0.5, 0.6666666666666666, 0.75, 1.0]</span>
 </pre></div>
 </div>
@@ -11849,20 +11853,21 @@ decimals of <img class="math" src="_images/math/9cc8517129c87252edd7fe2e4532af9d
 See also: <a class="reference external" href="https://en.wikipedia.org/wiki/Continued_fraction">https://en.wikipedia.org/wiki/Continued_fraction</a></p>
 <p>Returns a tuple with the continued fraction (in list format)
 and the convergents (in Fraction format) of the argument.</p>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">math</span> <span class="kn">import</span> <span class="n">sqrt</span><span class="p">,</span> <span class="n">pi</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">continuedFraction</span><span class="p">(</span><span class="n">sqrt</span><span class="p">(</span><span class="mi">2</span><span class="p">))</span>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">arithmetics</span> <span class="k">as</span> <span class="nn">ar</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">math</span> <span class="kn">import</span> <span class="n">sqrt</span><span class="p">,</span> <span class="n">pi</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">ar</span><span class="o">.</span><span class="n">continuedFraction</span><span class="p">(</span><span class="n">sqrt</span><span class="p">(</span><span class="mi">2</span><span class="p">))</span>
 <span class="go"> ([1, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2], [Fraction(1, 1),</span>
 <span class="go"> Fraction(3, 2), Fraction(7, 5), Fraction(17, 12), Fraction(41, 29),</span>
 <span class="go"> Fraction(99, 70), Fraction(239, 169), Fraction(577, 408),</span>
 <span class="go"> Fraction(1393, 985), Fraction(3363, 2378), Fraction(8119, 5741),</span>
 <span class="go"> Fraction(19601, 13860), Fraction(47321, 33461)])</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">continuedFraction</span><span class="p">(</span><span class="n">sqrt</span><span class="p">(</span><span class="mi">2</span><span class="p">),</span><span class="n">AsFloats</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">ar</span><span class="o">.</span><span class="n">continuedFraction</span><span class="p">(</span><span class="n">sqrt</span><span class="p">(</span><span class="mi">2</span><span class="p">),</span><span class="n">AsFloats</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 <span class="go"> ([1, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2],</span>
 <span class="go"> [1.0, 1.5, 1.4, 1.4166666666666667, 1.4137931034482758,</span>
 <span class="go">  1.4142857142857144, 1.4142011834319526, 1.4142156862745099,</span>
 <span class="go">  1.4142131979695431, 1.4142136248948696, 1.4142135516460548,</span>
 <span class="go">  1.4142135642135643, 1.4142135620573204])</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">continuedFraction</span><span class="p">(</span><span class="n">pi</span><span class="p">,</span><span class="n">rel_tol</span><span class="o">=</span><span class="mf">1e-15</span><span class="p">,</span><span class="n">AsFloats</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">ar</span><span class="o">.</span><span class="n">continuedFraction</span><span class="p">(</span><span class="n">pi</span><span class="p">,</span><span class="n">rel_tol</span><span class="o">=</span><span class="mf">1e-15</span><span class="p">,</span><span class="n">AsFloats</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 <span class="go"> ([3, 7, 15, 1, 292, 1, 1, 1, 2, 1, 3, 1, 14],</span>
 <span class="go">[3.0, 3.142857142857143, 3.141509433962264, 3.1415929203539825,</span>
 <span class="go"> 3.1415926530119025, 3.141592653921421, 3.1415926534674368,</span>
@@ -11880,7 +11885,8 @@ and the convergents (in Fraction format) of the argument.</p>
 <dd><p>Backwise recursive evaluation: ev_i-1 + 1/ev_i, for i = n,..,1
 of the continued fraction cf = [a_0,a_1,a_2,…,a_n] and 
 where a_0 corresponds to its integer part.</p>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">decimalEvalContinuedFraction</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">])</span>  <span class="c1"># 12/7</span>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">arithmetics</span> <span class="k">as</span> <span class="nn">ar</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">ar</span><span class="o">.</span><span class="n">decimalEvalContinuedFraction</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">])</span>  <span class="c1"># 12/7</span>
 <span class="go"> Decimal(&#39;1.714285714285714285714285714&#39;)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="mi">12</span><span class="o">/</span><span class="mi">7</span>
 <span class="go"> 1.7142857142857142</span>
@@ -11892,7 +11898,8 @@ where a_0 corresponds to its integer part.</p>
 <dt class="sig sig-object py" id="arithmetics.divisors">
 <span class="sig-prename descclassname"><span class="pre">arithmetics.</span></span><span class="sig-name descname"><span class="pre">divisors</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">n</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">Sorted</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/arithmetics.html#divisors"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#arithmetics.divisors" title="Link to this definition"></a></dt>
 <dd><p>Renders the list of divisors of integer n.</p>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">divisors</span><span class="p">(</span><span class="mi">12</span><span class="p">)</span>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">arithmetics</span> <span class="k">as</span> <span class="nn">ar</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">ar</span><span class="o">.</span><span class="n">divisors</span><span class="p">(</span><span class="mi">12</span><span class="p">)</span>
 <span class="go"> [1, 2, 3, 4, 6, 12]</span>
 </pre></div>
 </div>
@@ -11914,7 +11921,8 @@ where a_0 corresponds to its integer part.</p>
 <dt class="sig sig-object py" id="arithmetics.gcd">
 <span class="sig-prename descclassname"><span class="pre">arithmetics.</span></span><span class="sig-name descname"><span class="pre">gcd</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">a</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">b</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/arithmetics.html#gcd"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#arithmetics.gcd" title="Link to this definition"></a></dt>
 <dd><p>Renders the greatest common divisor of two positive integers a and b.</p>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">gcd</span><span class="p">(</span><span class="mi">120</span><span class="p">,</span><span class="mi">16</span><span class="p">)</span>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">arithmetics</span> <span class="k">as</span> <span class="nn">ar</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">ar</span><span class="o">.</span><span class="n">gcd</span><span class="p">(</span><span class="mi">120</span><span class="p">,</span><span class="mi">16</span><span class="p">)</span>
 <span class="go"> 8</span>
 </pre></div>
 </div>
@@ -11937,7 +11945,8 @@ where a_0 corresponds to its integer part.</p>
 <dt class="sig sig-object py" id="arithmetics.lcm">
 <span class="sig-prename descclassname"><span class="pre">arithmetics.</span></span><span class="sig-name descname"><span class="pre">lcm</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">a</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">b</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/arithmetics.html#lcm"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#arithmetics.lcm" title="Link to this definition"></a></dt>
 <dd><p>Renders the least common multiple of a and b.</p>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">lcm</span><span class="p">(</span><span class="mi">120</span><span class="p">,</span><span class="mi">16</span><span class="p">)</span>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">arithmetics</span> <span class="k">as</span> <span class="nn">ar</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">ar</span><span class="o">.</span><span class="n">lcm</span><span class="p">(</span><span class="mi">120</span><span class="p">,</span><span class="mi">16</span><span class="p">)</span>
 <span class="go"> 240</span>
 </pre></div>
 </div>
@@ -11949,17 +11958,18 @@ where a_0 corresponds to its integer part.</p>
 <dd><p>Implements the Moebius mu function on N based on n’s prime factorization:
 n = p1^e1 * … * pk^ek with each ei &gt;= 1 for i = 1, …, k.</p>
 <p>mu = 0 if ei &gt; 1 for some i = 1, … k else mu = (-1)^k.</p>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">factorization</span><span class="p">(</span><span class="mi">15</span><span class="p">)</span>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">arithmetics</span> <span class="k">as</span> <span class="nn">ar</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">ar</span><span class="o">.</span><span class="n">factorization</span><span class="p">(</span><span class="mi">15</span><span class="p">)</span>
 <span class="go"> OrderedDict({3: 1, 5: 1})</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">moebius_mu</span><span class="p">(</span><span class="mi">15</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">ar</span><span class="o">.</span><span class="n">moebius_mu</span><span class="p">(</span><span class="mi">15</span><span class="p">)</span>
 <span class="go"> 1</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">factorization</span><span class="p">(</span><span class="mi">12345</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">ar</span><span class="o">.</span><span class="n">factorization</span><span class="p">(</span><span class="mi">12345</span><span class="p">)</span>
 <span class="go"> OrderedDict({3: 1, 5: 1, 823: 1})</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">moebius_mu</span><span class="p">(</span><span class="mi">12345</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">ar</span><span class="o">.</span><span class="n">moebius_mu</span><span class="p">(</span><span class="mi">12345</span><span class="p">)</span>
 <span class="go"> -1</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">factorization</span><span class="p">(</span><span class="mi">12321</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">ar</span><span class="o">.</span><span class="n">factorization</span><span class="p">(</span><span class="mi">12321</span><span class="p">)</span>
 <span class="go"> OrderedDict({3: 2, 37: 2})</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">moebius_mu</span><span class="p">(</span><span class="mi">12321</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">ar</span><span class="o">.</span><span class="n">moebius_mu</span><span class="p">(</span><span class="mi">12321</span><span class="p">)</span>
 <span class="go"> 0</span>
 </pre></div>
 </div>
@@ -11968,7 +11978,8 @@ n = p1^e1 * … * pk^ek with each ei &gt;= 1 for i = 1, …, k.</p>
 <dl class="py function">
 <dt class="sig sig-object py" id="arithmetics.primeFactors">
 <span class="sig-prename descclassname"><span class="pre">arithmetics.</span></span><span class="sig-name descname"><span class="pre">primeFactors</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">n</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sort</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/arithmetics.html#primeFactors"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#arithmetics.primeFactors" title="Link to this definition"></a></dt>
-<dd><div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">primeFactors</span><span class="p">(</span><span class="mi">12345</span><span class="p">)</span>
+<dd><div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">arithmetics</span> <span class="k">as</span> <span class="nn">ar</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">ar</span><span class="o">.</span><span class="n">primeFactors</span><span class="p">(</span><span class="mi">12345</span><span class="p">)</span>
 <span class="go">[3, 5, 823]</span>
 </pre></div>
 </div>
@@ -11979,7 +11990,8 @@ n = p1^e1 * … * pk^ek with each ei &gt;= 1 for i = 1, …, k.</p>
 <span class="sig-prename descclassname"><span class="pre">arithmetics.</span></span><span class="sig-name descname"><span class="pre">primesBelow</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">N</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">Odd</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/arithmetics.html#primesBelow"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#arithmetics.primesBelow" title="Link to this definition"></a></dt>
 <dd><p><a class="reference external" href="http://stackoverflow.com/questions/2068372/fastest-way-to-list-all-primes-below-n-in-python/3035188#3035188">http://stackoverflow.com/questions/2068372/fastest-way-to-list-all-primes-below-n-in-python/3035188#3035188</a>
 Input N&gt;=6, Returns a list of primes, 2 &lt;= p &lt; N</p>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">primesBelow</span><span class="p">(</span><span class="mi">30</span><span class="p">,</span><span class="n">Odd</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">arithmetics</span> <span class="k">as</span> <span class="nn">ar</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">ar</span><span class="o">.</span><span class="n">primesBelow</span><span class="p">(</span><span class="mi">30</span><span class="p">,</span><span class="n">Odd</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 <span class="go"> [3, 5, 7, 11, 13, 17, 19, 23, 29]</span>
 </pre></div>
 </div>
@@ -11991,7 +12003,8 @@ Input N&gt;=6, Returns a list of primes, 2 &lt;= p &lt; N</p>
 <dd><p>Renders the continued fraction [a_0,a_1,a_2,…,a_n]
 of the ratio of two positive integers p &gt; 0 and q &gt; 0 by
 following Euclide’s division algorithm.</p>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">simpleContinuedFraction</span><span class="p">(</span><span class="mi">12</span><span class="p">,</span><span class="mi">7</span><span class="p">,</span><span class="n">Comments</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">arithmetics</span> <span class="k">as</span> <span class="nn">ar</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">ar</span><span class="o">.</span><span class="n">simpleContinuedFraction</span><span class="p">(</span><span class="mi">12</span><span class="p">,</span><span class="mi">7</span><span class="p">,</span><span class="n">Comments</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 <span class="go"> 12//7 = 1R5</span>
 <span class="go"> 7//5 = 1R2</span>
 <span class="go"> 5//2 = 2R1</span>
@@ -12010,10 +12023,11 @@ for a given simple continued fraction of two positive integer <em>a</em> and <em
 - The return delivers a tuple (p,q) or (p,q,f).
 - p[-1] and q[-1] deliver the initial numerator <em>a</em> and denominator <em>b</em>.
 - f[-1] delivers the float value of the rational fraction <em>a/b</em>.</p>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">cf</span> <span class="o">=</span> <span class="n">simpleContinuedFraction</span><span class="p">(</span><span class="mi">12</span><span class="p">,</span><span class="mi">7</span><span class="p">)</span>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">arithmetics</span> <span class="k">as</span> <span class="nn">ar</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">cf</span> <span class="o">=</span> <span class="n">ar</span><span class="o">.</span><span class="n">simpleContinuedFraction</span><span class="p">(</span><span class="mi">12</span><span class="p">,</span><span class="mi">7</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">cf</span>
 <span class="go"> [1, 1, 2, 2]</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">p</span><span class="p">,</span><span class="n">q</span><span class="p">,</span><span class="n">f</span> <span class="o">=</span> <span class="n">simpleConvergents</span><span class="p">(</span><span class="n">cf</span><span class="p">,</span> <span class="n">AsFloats</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">p</span><span class="p">,</span><span class="n">q</span><span class="p">,</span><span class="n">f</span> <span class="o">=</span> <span class="n">ar</span><span class="o">.</span><span class="n">simpleConvergents</span><span class="p">(</span><span class="n">cf</span><span class="p">,</span> <span class="n">AsFloats</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">p</span>
 <span class="go"> [1, 2, 5, 12]</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">q</span>
@@ -12030,7 +12044,8 @@ for a given simple continued fraction of two positive integer <em>a</em> and <em
 <dd><p>renders a particular integer solution of the Diophantian equation
 ax + by = c. The method returns the tuple
 (C*x, B*y, A, B) where d = gcd(a,b), C=c//d, A = a//d, and B=b//d.</p>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">solPartEqnDioph</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span><span class="p">,</span><span class="mi">5</span><span class="p">,</span><span class="n">Comments</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">arithmetics</span> <span class="k">as</span> <span class="nn">ar</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">ar</span><span class="o">.</span><span class="n">solPartEqnDioph</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span><span class="p">,</span><span class="mi">5</span><span class="p">,</span><span class="n">Comments</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 <span class="go"> d = 1, a = 3, x = -5, b = 4, y = 5</span>
 <span class="go"> (3)*(-5) + (4)*(5) = 5</span>
 <span class="go"> (-5, 5, 3, 4)</span>
@@ -12044,15 +12059,16 @@ ax + by = c. The method returns the tuple
 <dd><p>Renders both roots x,y of ax2 + bx + c = 0 where
 x = (-b + sqrt(b^2 -4ac))/2a and
 y = (-b - sqrt(b^2 -4ac))/2a</p>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">solvingQuadraticEquation</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="o">-</span><span class="mi">2</span><span class="p">,</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="n">Comments</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">arithmetics</span> <span class="k">as</span> <span class="nn">ar</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">ar</span><span class="o">.</span><span class="n">solvingQuadraticEquation</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="o">-</span><span class="mi">2</span><span class="p">,</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="n">Comments</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 <span class="go"> D = (b^2 -4*a*c) = 8.000000</span>
 <span class="go"> D &gt; 0 =&gt; two real roots</span>
 <span class="go"> (2.414213562373095, -0.41421356237309515)</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">solvingQuadraticEquation</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="n">Comments</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">ar</span><span class="o">.</span><span class="n">solvingQuadraticEquation</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="n">Comments</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 <span class="go"> D = (b^2 -4*a*c) = 0.000000</span>
 <span class="go"> D == 0 =&gt; one real root</span>
 <span class="go"> (-1.0, -1.0)</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">solvingQuadraticEquation</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="mi">6</span><span class="p">,</span><span class="o">-</span><span class="mi">10</span><span class="p">,</span><span class="n">Comments</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">ar</span><span class="o">.</span><span class="n">solvingQuadraticEquation</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="mi">6</span><span class="p">,</span><span class="o">-</span><span class="mi">10</span><span class="p">,</span><span class="n">Comments</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 <span class="go"> D = (b^2 -4*a*c) = -4.000000</span>
 <span class="go"> D &lt; 0 =&gt; two complex roots</span>
 <span class="go"> ((3-1j), (3+1j))</span>
@@ -12073,7 +12089,8 @@ For instance, sternBrocot(5,7) = [‘L’,’R’,’R’,’L’].</p>
 <span class="sig-prename descclassname"><span class="pre">arithmetics.</span></span><span class="sig-name descname"><span class="pre">totient</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">n</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/arithmetics.html#totient"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#arithmetics.totient" title="Link to this definition"></a></dt>
 <dd><p>Implements the totient function rendering
 Euler’s number of coprime elements a in Zn.</p>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">totient</span><span class="p">(</span><span class="mi">12</span><span class="p">)</span>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">arithmetics</span> <span class="k">as</span> <span class="nn">ar</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">ar</span><span class="o">.</span><span class="n">totient</span><span class="p">(</span><span class="mi">12</span><span class="p">)</span>
 <span class="go"> 4</span>
 </pre></div>
 </div>
@@ -12083,7 +12100,8 @@ Euler’s number of coprime elements a in Zn.</p>
 <dt class="sig sig-object py" id="arithmetics.zn_squareroots">
 <span class="sig-prename descclassname"><span class="pre">arithmetics.</span></span><span class="sig-name descname"><span class="pre">zn_squareroots</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">n</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">Comments</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/arithmetics.html#zn_squareroots"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#arithmetics.zn_squareroots" title="Link to this definition"></a></dt>
 <dd><p>Renders the quadratic residues of Zn as a dictionary.</p>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">zn_squareroots</span><span class="p">(</span><span class="mi">13</span><span class="p">,</span><span class="n">Comments</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">arithmetics</span> <span class="k">as</span> <span class="nn">ar</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">ar</span><span class="o">.</span><span class="n">zn_squareroots</span><span class="p">(</span><span class="mi">13</span><span class="p">,</span><span class="n">Comments</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
 <span class="go"> {1: [1, 12], 4: [2, 11],</span>
 <span class="go">  9: [3, 10], 3: [4, 9],</span>
 <span class="go">  12: [5, 8], 10: [6, 7]}</span>
@@ -12095,7 +12113,8 @@ Euler’s number of coprime elements a in Zn.</p>
 <dt class="sig sig-object py" id="arithmetics.zn_units">
 <span class="sig-prename descclassname"><span class="pre">arithmetics.</span></span><span class="sig-name descname"><span class="pre">zn_units</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">n</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">Comments</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/arithmetics.html#zn_units"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#arithmetics.zn_units" title="Link to this definition"></a></dt>
 <dd><p>Renders the set of units of Zn.</p>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">zn_units</span><span class="p">(</span><span class="mi">12</span><span class="p">)</span>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">arithmetics</span> <span class="k">as</span> <span class="nn">ar</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">ar</span><span class="o">.</span><span class="n">zn_units</span><span class="p">(</span><span class="mi">12</span><span class="p">)</span>
 <span class="go"> {1, 11, 5, 7}</span>
 </pre></div>
 </div>

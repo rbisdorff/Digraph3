@@ -207,6 +207,7 @@
 <span class="sd">    </span>
 <span class="sd">    https://en.wikipedia.org/wiki/Claude_Gaspar_Bachet_de_M%C3%A9ziriac</span>
 <span class="sd">    </span>
+<span class="sd">    &gt;&gt;&gt; from arithmetics import Bachet</span>
 <span class="sd">    &gt;&gt;&gt; n1 = Bachet(12)</span>
 <span class="sd">    &gt;&gt;&gt; n2 = Bachet(13)</span>
 <span class="sd">    &gt;&gt;&gt; n3 = n1 + n2</span>
@@ -378,7 +379,8 @@
 <span class="sd">    http://stackoverflow.com/questions/2068372/fastest-way-to-list-all-primes-below-n-in-python/3035188#3035188</span>
 <span class="sd">    Input N&gt;=6, Returns a list of primes, 2 &lt;= p &lt; N</span>
 
-<span class="sd">    &gt;&gt;&gt; primesBelow(30,Odd=True)</span>
+<span class="sd">    &gt;&gt;&gt; import arithmetics as ar</span>
+<span class="sd">    &gt;&gt;&gt; ar.primesBelow(30,Odd=True)</span>
 <span class="sd">     [3, 5, 7, 11, 13, 17, 19, 23, 29]</span>
 
 <span class="sd">    &quot;&quot;&quot;</span>
@@ -475,7 +477,8 @@
 <a class="viewcode-back" href="../techDoc.html#arithmetics.primeFactors">[docs]</a>
 <span class="k">def</span> <span class="nf">primeFactors</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="n">sort</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">    &gt;&gt;&gt; primeFactors(12345)</span>
+<span class="sd">    &gt;&gt;&gt; import arithmetics as ar</span>
+<span class="sd">    &gt;&gt;&gt; ar.primeFactors(12345)</span>
 <span class="sd">    [3, 5, 823]</span>
 
 <span class="sd">    &quot;&quot;&quot;</span>
@@ -523,17 +526,18 @@
 
 <span class="sd">    mu = 0 if ei &gt; 1 for some i = 1, ... k else mu = (-1)^k.</span>
 
-<span class="sd">    &gt;&gt;&gt; factorization(15)</span>
+<span class="sd">    &gt;&gt;&gt; import arithmetics as ar</span>
+<span class="sd">    &gt;&gt;&gt; ar.factorization(15)</span>
 <span class="sd">     OrderedDict({3: 1, 5: 1})</span>
-<span class="sd">    &gt;&gt;&gt; moebius_mu(15)</span>
+<span class="sd">    &gt;&gt;&gt; ar.moebius_mu(15)</span>
 <span class="sd">     1</span>
-<span class="sd">    &gt;&gt;&gt; factorization(12345)</span>
+<span class="sd">    &gt;&gt;&gt; ar.factorization(12345)</span>
 <span class="sd">     OrderedDict({3: 1, 5: 1, 823: 1})</span>
-<span class="sd">    &gt;&gt;&gt; moebius_mu(12345)</span>
+<span class="sd">    &gt;&gt;&gt; ar.moebius_mu(12345)</span>
 <span class="sd">     -1</span>
-<span class="sd">    &gt;&gt;&gt; factorization(12321)</span>
+<span class="sd">    &gt;&gt;&gt; ar.factorization(12321)</span>
 <span class="sd">     OrderedDict({3: 2, 37: 2})</span>
-<span class="sd">    &gt;&gt;&gt; moebius_mu(12321)</span>
+<span class="sd">    &gt;&gt;&gt; ar.moebius_mu(12321)</span>
 <span class="sd">     0</span>
 
 <span class="sd">    &quot;&quot;&quot;</span>
@@ -559,7 +563,8 @@
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Renders the list of divisors of integer n.</span>
 
-<span class="sd">    &gt;&gt;&gt; divisors(12)</span>
+<span class="sd">    &gt;&gt;&gt; import arithmetics as ar</span>
+<span class="sd">    &gt;&gt;&gt; ar.divisors(12)</span>
 <span class="sd">     [1, 2, 3, 4, 6, 12]</span>
 <span class="sd">     </span>
 <span class="sd">    &quot;&quot;&quot;</span>
@@ -599,7 +604,8 @@
 <span class="sd">    Implements the totient function rendering</span>
 <span class="sd">    Euler&#39;s number of coprime elements a in Zn.</span>
 
-<span class="sd">    &gt;&gt;&gt; totient(12)</span>
+<span class="sd">    &gt;&gt;&gt; import arithmetics as ar</span>
+<span class="sd">    &gt;&gt;&gt; ar.totient(12)</span>
 <span class="sd">     4</span>
 
 <span class="sd">    &quot;&quot;&quot;</span>
@@ -624,7 +630,8 @@
 <span class="sd">    of the ratio of two positive integers p &gt; 0 and q &gt; 0 by</span>
 <span class="sd">    following Euclide&#39;s division algorithm.</span>
 
-<span class="sd">    &gt;&gt;&gt; simpleContinuedFraction(12,7,Comments=True)</span>
+<span class="sd">    &gt;&gt;&gt; import arithmetics as ar</span>
+<span class="sd">    &gt;&gt;&gt; ar.simpleContinuedFraction(12,7,Comments=True)</span>
 <span class="sd">     12//7 = 1R5</span>
 <span class="sd">     7//5 = 1R2</span>
 <span class="sd">     5//2 = 2R1</span>
@@ -665,10 +672,11 @@
 <span class="sd">    - p[-1] and q[-1] deliver the initial numerator *a* and denominator *b*.</span>
 <span class="sd">    - f[-1] delivers the float value of the rational fraction *a/b*.</span>
 
-<span class="sd">    &gt;&gt;&gt; cf = simpleContinuedFraction(12,7)</span>
+<span class="sd">    &gt;&gt;&gt; import arithmetics as ar</span>
+<span class="sd">    &gt;&gt;&gt; cf = ar.simpleContinuedFraction(12,7)</span>
 <span class="sd">    &gt;&gt;&gt; cf</span>
 <span class="sd">     [1, 1, 2, 2]</span>
-<span class="sd">    &gt;&gt;&gt; p,q,f = simpleConvergents(cf, AsFloats=True)</span>
+<span class="sd">    &gt;&gt;&gt; p,q,f = ar.simpleConvergents(cf, AsFloats=True)</span>
 <span class="sd">    &gt;&gt;&gt; p</span>
 <span class="sd">     [1, 2, 5, 12]</span>
 <span class="sd">    &gt;&gt;&gt; q</span>
@@ -701,7 +709,8 @@
 <span class="sd">    of the continued fraction cf = [a_0,a_1,a_2,...,a_n] and </span>
 <span class="sd">    where a_0 corresponds to its integer part.</span>
 
-<span class="sd">    &gt;&gt;&gt; decimalEvalContinuedFraction([1, 1, 2, 1, 1])  # 12/7</span>
+<span class="sd">    &gt;&gt;&gt; import arithmetics as ar</span>
+<span class="sd">    &gt;&gt;&gt; ar.decimalEvalContinuedFraction([1, 1, 2, 1, 1])  # 12/7</span>
 <span class="sd">     Decimal(&#39;1.714285714285714285714285714&#39;)</span>
 <span class="sd">    &gt;&gt;&gt; 12/7</span>
 <span class="sd">     1.7142857142857142</span>
@@ -724,9 +733,10 @@
 <span class="sd">    its corresponding rational number expression.</span>
 <span class="sd">    Returns a/b or (a/b, Decimal(a/b)) if AsDecimal is True.</span>
 
-<span class="sd">    &gt;&gt;&gt; simpleContinuedFraction(75,8)</span>
+<span class="sd">    &gt;&gt;&gt; import arithmetics as ar</span>
+<span class="sd">    &gt;&gt;&gt; ar.simpleContinuedFraction(75,8)</span>
 <span class="sd">     [9, 2, 1, 1, 1]</span>
-<span class="sd">    &gt;&gt;&gt; cf2Rational([9,2,1,1,1], AsDecimal=True)</span>
+<span class="sd">    &gt;&gt;&gt; ar.cf2Rational([9,2,1,1,1], AsDecimal=True)</span>
 <span class="sd">     (&#39;75/8&#39;, Decimal(&#39;9.375&#39;)</span>
 <span class="sd">    &gt;&gt;&gt; eval(&#39;75/8&#39;)</span>
 <span class="sd">     9.375</span>
@@ -755,20 +765,21 @@
 <span class="sd">    Returns a tuple with the continued fraction (in list format)</span>
 <span class="sd">    and the convergents (in Fraction format) of the argument.</span>
 
+<span class="sd">    &gt;&gt;&gt; import arithmetics as ar</span>
 <span class="sd">    &gt;&gt;&gt; from math import sqrt, pi</span>
-<span class="sd">    &gt;&gt;&gt; continuedFraction(sqrt(2))</span>
+<span class="sd">    &gt;&gt;&gt; ar.continuedFraction(sqrt(2))</span>
 <span class="sd">     ([1, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2], [Fraction(1, 1),</span>
 <span class="sd">     Fraction(3, 2), Fraction(7, 5), Fraction(17, 12), Fraction(41, 29),</span>
 <span class="sd">     Fraction(99, 70), Fraction(239, 169), Fraction(577, 408),</span>
 <span class="sd">     Fraction(1393, 985), Fraction(3363, 2378), Fraction(8119, 5741),</span>
 <span class="sd">     Fraction(19601, 13860), Fraction(47321, 33461)])</span>
-<span class="sd">    &gt;&gt;&gt; continuedFraction(sqrt(2),AsFloats=True)</span>
+<span class="sd">    &gt;&gt;&gt; ar.continuedFraction(sqrt(2),AsFloats=True)</span>
 <span class="sd">     ([1, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2],</span>
 <span class="sd">     [1.0, 1.5, 1.4, 1.4166666666666667, 1.4137931034482758,</span>
 <span class="sd">      1.4142857142857144, 1.4142011834319526, 1.4142156862745099,</span>
 <span class="sd">      1.4142131979695431, 1.4142136248948696, 1.4142135516460548,</span>
 <span class="sd">      1.4142135642135643, 1.4142135620573204])</span>
-<span class="sd">    &gt;&gt;&gt; continuedFraction(pi,rel_tol=1e-15,AsFloats=True)</span>
+<span class="sd">    &gt;&gt;&gt; ar.continuedFraction(pi,rel_tol=1e-15,AsFloats=True)</span>
 <span class="sd">     ([3, 7, 15, 1, 292, 1, 1, 1, 2, 1, 3, 1, 14],</span>
 <span class="sd">    [3.0, 3.142857142857143, 3.141509433962264, 3.1415929203539825,</span>
 <span class="sd">     3.1415926530119025, 3.141592653921421, 3.1415926534674368,</span>
@@ -823,7 +834,8 @@
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Renders the greatest common divisor of two positive integers a and b. </span>
 
-<span class="sd">    &gt;&gt;&gt; gcd(120,16)</span>
+<span class="sd">    &gt;&gt;&gt; import arithmetics as ar</span>
+<span class="sd">    &gt;&gt;&gt; ar.gcd(120,16)</span>
 <span class="sd">     8</span>
 
 <span class="sd">    &quot;&quot;&quot;</span>
@@ -843,7 +855,8 @@
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Renders the least common multiple of a and b.</span>
 
-<span class="sd">    &gt;&gt;&gt; lcm(120,16)</span>
+<span class="sd">    &gt;&gt;&gt; import arithmetics as ar</span>
+<span class="sd">    &gt;&gt;&gt; ar.lcm(120,16)</span>
 <span class="sd">     240</span>
 
 <span class="sd">    &quot;&quot;&quot;</span>
@@ -859,7 +872,8 @@
 
 <span class="sd">    Both arguments *a* and *b* must be positive integers.</span>
 
-<span class="sd">    &gt;&gt;&gt; bezout(120,16,Comments=True)</span>
+<span class="sd">    &gt;&gt;&gt; import arithmetics as ar</span>
+<span class="sd">    &gt;&gt;&gt; ar.bezout(120,16,Comments=True)</span>
 <span class="sd">     d = 8, x = 1, y = -7</span>
 <span class="sd">     8 = 120*1 + 16*(-7)</span>
 <span class="sd">     (8, 1, -7)</span>
@@ -900,7 +914,8 @@
 <span class="sd">    ax + by = c. The method returns the tuple</span>
 <span class="sd">    (C*x, B*y, A, B) where d = gcd(a,b), C=c//d, A = a//d, and B=b//d. </span>
 
-<span class="sd">    &gt;&gt;&gt; solPartEqnDioph(3,4,5,Comments=True)</span>
+<span class="sd">    &gt;&gt;&gt; import arithmetics as ar</span>
+<span class="sd">    &gt;&gt;&gt; ar.solPartEqnDioph(3,4,5,Comments=True)</span>
 <span class="sd">     d = 1, a = 3, x = -5, b = 4, y = 5</span>
 <span class="sd">     (3)*(-5) + (4)*(5) = 5</span>
 <span class="sd">     (-5, 5, 3, 4)</span>
@@ -927,8 +942,9 @@
 <span class="k">def</span> <span class="nf">zn_units</span><span class="p">(</span><span class="n">n</span><span class="p">,</span><span class="n">Comments</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Renders the set of units of Zn.</span>
-
-<span class="sd">    &gt;&gt;&gt; zn_units(12)</span>
+<span class="sd">    </span>
+<span class="sd">    &gt;&gt;&gt; import arithmetics as ar</span>
+<span class="sd">    &gt;&gt;&gt; ar.zn_units(12)</span>
 <span class="sd">     {1, 11, 5, 7}</span>
 <span class="sd">     </span>
 <span class="sd">    &quot;&quot;&quot;</span>
@@ -949,7 +965,8 @@
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Renders the quadratic residues of Zn as a dictionary.</span>
 
-<span class="sd">    &gt;&gt;&gt; zn_squareroots(13,Comments=False)</span>
+<span class="sd">    &gt;&gt;&gt; import arithmetics as ar</span>
+<span class="sd">    &gt;&gt;&gt; ar.zn_squareroots(13,Comments=False)</span>
 <span class="sd">     {1: [1, 12], 4: [2, 11],</span>
 <span class="sd">      9: [3, 10], 3: [4, 9],</span>
 <span class="sd">      12: [5, 8], 10: [6, 7]}</span>
@@ -1102,9 +1119,10 @@
 <span class="sd">        *n*: strictly positive integer (default = 7).</span>
 <span class="sd">        *AsFloats*: If True (defaut False), renders the list of approximate floats corresponding to the rational fractions.</span>
 
-<span class="sd">    &gt;&gt;&gt; computeFareaySeries(4)</span>
+<span class="sd">    &gt;&gt;&gt; import arithmetics as ar</span>
+<span class="sd">    &gt;&gt;&gt; ar.computeFareySeries(4)</span>
 <span class="sd">     [[0, 1], [1, 4], [1, 3], [1, 2], [2, 3], [3, 4], [1, 1]]</span>
-<span class="sd">    &gt;&gt;&gt; computeFareySeries(4,AsFloats=True)</span>
+<span class="sd">    &gt;&gt;&gt; ar.computeFareySeries(4,AsFloats=True)</span>
 <span class="sd">    [0.0, 0.25, 0.3333333333333333, 0.5, 0.6666666666666666, 0.75, 1.0]</span>
 
 <span class="sd">    *Source*: Graham, Knuth, Patashnik, Sec. 4.5 in Concrete Mathematics 2nd Ed., Addison-Wesley 1994, pp 115-123.</span>
@@ -1152,15 +1170,16 @@
 <span class="sd">    x = (-b + sqrt(b^2 -4ac))/2a and</span>
 <span class="sd">    y = (-b - sqrt(b^2 -4ac))/2a</span>
 
-<span class="sd">    &gt;&gt;&gt; solvingQuadraticEquation(1,-2,-1,Comments=True)</span>
+<span class="sd">    &gt;&gt;&gt; import arithmetics as ar</span>
+<span class="sd">    &gt;&gt;&gt; ar.solvingQuadraticEquation(1,-2,-1,Comments=True)</span>
 <span class="sd">     D = (b^2 -4*a*c) = 8.000000</span>
 <span class="sd">     D &gt; 0 =&gt; two real roots</span>
 <span class="sd">     (2.414213562373095, -0.41421356237309515)</span>
-<span class="sd">    &gt;&gt;&gt; solvingQuadraticEquation(1,2,1,Comments=True)</span>
+<span class="sd">    &gt;&gt;&gt; ar.solvingQuadraticEquation(1,2,1,Comments=True)</span>
 <span class="sd">     D = (b^2 -4*a*c) = 0.000000</span>
 <span class="sd">     D == 0 =&gt; one real root</span>
 <span class="sd">     (-1.0, -1.0)</span>
-<span class="sd">    &gt;&gt;&gt; solvingQuadraticEquation(-1,6,-10,Comments=True)</span>
+<span class="sd">    &gt;&gt;&gt; ar.solvingQuadraticEquation(-1,6,-10,Comments=True)</span>
 <span class="sd">     D = (b^2 -4*a*c) = -4.000000</span>
 <span class="sd">     D &lt; 0 =&gt; two complex roots</span>
 <span class="sd">     ((3-1j), (3+1j))</span>
