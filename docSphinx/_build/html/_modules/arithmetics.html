@@ -222,22 +222,31 @@
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">num_int</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        tranform a signed integer in a bachet coded one.</span>
+<span class="sd">        Tranforms a potentially signed integer into a Bachet number</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">vector</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">int2bachet</span><span class="p">(</span><span class="n">num_int</span><span class="p">)</span>
 
     <span class="k">def</span> <span class="fm">__str__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-            <span class="n">bachet_string</span> <span class="o">=</span> <span class="s1">&#39;&#39;</span>
-            <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">vector</span><span class="p">)):</span>
-                <span class="n">bachet_string</span> <span class="o">+=</span> <span class="nb">str</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">vector</span><span class="p">[</span><span class="n">i</span><span class="p">])</span>
-            <span class="k">return</span> <span class="n">bachet_string</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Defines the printable string version of a Bachet number</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">bachet_string</span> <span class="o">=</span> <span class="s1">&#39;&#39;</span>
+        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">vector</span><span class="p">)):</span>
+            <span class="n">bachet_string</span> <span class="o">+=</span> <span class="nb">str</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">vector</span><span class="p">[</span><span class="n">i</span><span class="p">])</span>
+        <span class="k">return</span> <span class="n">bachet_string</span>
        
     <span class="k">def</span> <span class="fm">__neg__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Defines the negation operator for Bachet encoded numbers</span>
+<span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">neg_vector</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">vector</span>
         <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">vector</span><span class="p">)):</span>
             <span class="n">neg_vector</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">vector</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">*</span> <span class="o">-</span><span class="mi">1</span>
         
     <span class="k">def</span> <span class="fm">__add__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">other</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Defines the addition operator for Bachet encoded numbers</span>
+<span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">n1</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">value</span><span class="p">()</span>
         <span class="n">n2</span> <span class="o">=</span> <span class="n">other</span><span class="o">.</span><span class="n">value</span><span class="p">()</span>
         <span class="n">n3</span> <span class="o">=</span> <span class="n">n1</span> <span class="o">+</span> <span class="n">n2</span>
@@ -247,7 +256,7 @@
 <a class="viewcode-back" href="../techDoc.html#arithmetics.Bachet.base10to3">[docs]</a>
     <span class="k">def</span> <span class="nf">base10to3</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">num</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        Change a base 10 number to a base-3 number.</span>
+<span class="sd">        Change a base 10 number to a base 3 number.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">new_num_string</span> <span class="o">=</span> <span class="s1">&#39;&#39;</span>
         <span class="n">current</span> <span class="o">=</span> <span class="n">num</span>
@@ -263,10 +272,9 @@
 <a class="viewcode-back" href="../techDoc.html#arithmetics.Bachet.base3toBachet">[docs]</a>
     <span class="k">def</span> <span class="nf">base3toBachet</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">num_string</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        convert a [0,1,2] coded base 3 integer into a [-1,0,1] coded one.</span>
-<span class="sd">        returns a Bachet string and a Bachet vector representation</span>
-<span class="sd">        Michel Criton, Les problèmes de pesèes. </span>
-<span class="sd">        Pour la science, dossier avril/juin 2008, p. 15. </span>
+<span class="sd">        Converts a base 3 encoded integer into a</span>
+<span class="sd">        bipolar {-1,0,1} encoded one.</span>
+
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">new_vector</span><span class="o">=</span><span class="p">[</span><span class="mi">0</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">num_string</span><span class="p">))]</span>
         <span class="n">reste</span> <span class="o">=</span> <span class="mi">0</span>
@@ -292,7 +300,7 @@
 <a class="viewcode-back" href="../techDoc.html#arithmetics.Bachet.int2bachet">[docs]</a>
     <span class="k">def</span> <span class="nf">int2bachet</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">num_int</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        convert a signed integer to bachet code</span>
+<span class="sd">        Converts a signed integer into a Bachet encoded number</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">if</span> <span class="n">num_int</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">:</span>
             <span class="n">unsigned_num_int</span> <span class="o">=</span> <span class="nb">abs</span><span class="p">(</span><span class="n">num_int</span><span class="p">)</span>
@@ -311,20 +319,36 @@
             <span class="k">return</span> <span class="n">bachet_vector</span></div>
 
        
+<div class="viewcode-block" id="Bachet.value">
+<a class="viewcode-back" href="../techDoc.html#arithmetics.Bachet.value">[docs]</a>
     <span class="k">def</span> <span class="nf">value</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Renders the integer corresponding to the Bachet number</span>
+<span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">result_int</span> <span class="o">=</span> <span class="mi">0</span>
         <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">vector</span><span class="p">)):</span>
             <span class="n">result_int</span> <span class="o">+=</span> <span class="mi">3</span><span class="o">**</span><span class="n">i</span><span class="o">*</span><span class="bp">self</span><span class="o">.</span><span class="n">vector</span><span class="p">[</span><span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">vector</span><span class="p">)</span><span class="o">-</span><span class="n">i</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
-        <span class="k">return</span> <span class="n">result_int</span>
+        <span class="k">return</span> <span class="n">result_int</span></div>
+
 
     <span class="k">def</span> <span class="fm">__len__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Returns the length of the Bachet encoding</span>
+<span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">vector</span><span class="p">)</span>
 
+<div class="viewcode-block" id="Bachet.reverse">
+<a class="viewcode-back" href="../techDoc.html#arithmetics.Bachet.reverse">[docs]</a>
     <span class="k">def</span> <span class="nf">reverse</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Reverses the Bachet code</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">Renders</span>
         <span class="n">result</span> <span class="o">=</span> <span class="p">[</span><span class="mi">0</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">vector</span><span class="p">))]</span>
         <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">vector</span><span class="p">)):</span>
             <span class="n">result</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">vector</span><span class="p">[</span><span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">vector</span><span class="p">)</span><span class="o">-</span><span class="n">i</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">vector</span> <span class="o">=</span> <span class="n">result</span></div>
+</div>
 
 
 <span class="c1">#------------- end of Bachet class ------------------</span>

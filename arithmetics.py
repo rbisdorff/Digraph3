@@ -122,22 +122,31 @@ class Bachet(object):
     """
     def __init__(self,num_int):
         """
-        tranform a signed integer in a bachet coded one.
+        Tranforms a potentially signed integer into a Bachet number
         """
         self.vector = self.int2bachet(num_int)
 
     def __str__(self):
-            bachet_string = ''
-            for i in range(len(self.vector)):
-                bachet_string += str(self.vector[i])
-            return bachet_string
+        """
+        Defines the printable string version of a Bachet number
+        """
+        bachet_string = ''
+        for i in range(len(self.vector)):
+            bachet_string += str(self.vector[i])
+        return bachet_string
        
     def __neg__(self):
+        """
+        Defines the negation operator for Bachet encoded numbers
+        """
         neg_vector = self.vector
         for i in range(len(self.vector)):
             neg_vector[i] = self.vector[i] * -1
         
     def __add__(self,other):
+        """
+        Defines the addition operator for Bachet encoded numbers
+        """
         n1 = self.value()
         n2 = other.value()
         n3 = n1 + n2
@@ -145,7 +154,7 @@ class Bachet(object):
         
     def base10to3(self,num):
         """
-        Change a base 10 number to a base-3 number.
+        Change a base 10 number to a base 3 number.
         """
         new_num_string = ''
         current = num
@@ -158,10 +167,9 @@ class Bachet(object):
 
     def base3toBachet(self,num_string):
         """
-        convert a [0,1,2] coded base 3 integer into a [-1,0,1] coded one.
-        returns a Bachet string and a Bachet vector representation
-        Michel Criton, Les problèmes de pesèes. 
-        Pour la science, dossier avril/juin 2008, p. 15. 
+        Converts a base 3 encoded integer into a
+        bipolar {-1,0,1} encoded one.
+
         """
         new_vector=[0 for x in range(len(num_string))]
         reste = 0
@@ -184,7 +192,7 @@ class Bachet(object):
 
     def int2bachet(self,num_int):
         """
-        convert a signed integer to bachet code
+        Converts a signed integer into a Bachet encoded number
         """
         if num_int < 0:
             unsigned_num_int = abs(num_int)
@@ -203,15 +211,25 @@ class Bachet(object):
             return bachet_vector
        
     def value(self):
+        """
+        Renders the integer corresponding to the Bachet number
+        """
         result_int = 0
         for i in range(len(self.vector)):
             result_int += 3**i*self.vector[len(self.vector)-i-1]
         return result_int
 
     def __len__(self):
+        """
+        Returns the length of the Bachet encoding
+        """
         return len(self.vector)
 
     def reverse(self):
+        """
+        Reverses the Bachet code
+        """
+        Renders
         result = [0 for i in range(len(self.vector))]
         for i in range(len(self.vector)):
             result[i] = self.vector[len(self.vector)-i-1]
