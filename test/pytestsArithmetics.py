@@ -81,8 +81,9 @@ def testBachetIntegerEncoding():
     n1 = Bachet(12)
     n2 = Bachet(13)
     n3 = n1 + n2
-
+    n4 = n1 * n2
     print('%s (%d) + %s (%d) = %s (%d)' % (n1, n1.value(), n2, n2.value(), n3, n3.value() ))
+    print('%s (%d) * %s (%d) = %s (%d)' % (n1, n1.value(), n2, n2.value(), n4, n4.value() ))
 
     print('length of %s = %d' % (n1, len(n1)))
     n1.reverse()
