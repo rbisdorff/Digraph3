@@ -120,6 +120,19 @@ class Bachet(object):
      011 (4) + -1-1-1 (-13) = -100 (-9)
 
     """
+    def __repr__(self):
+        """
+        Default presentation method for Bchet number instances.
+        """
+        reprString = '*------- Bachet number description ------*\n'
+        reprString += 'Instance class : %s\n' % self.__class__.__name__
+        reprString += 'String         : %s\n' % str(self)
+        reprString += 'Vector         : %s\n' % self.vector
+        reprString += 'Length         : %d\n' % len(self)
+        reprString += 'Value          : %d\n' % self.value()
+        reprString += 'Attributes     : %s\n' % list(self.__dict__.keys())    
+        return reprString
+    
     def __init__(self,num_int):
         """
         Tranforms a potentially signed integer into a Bachet number
@@ -139,9 +152,11 @@ class Bachet(object):
         """
         Defines the negation operator for Bachet encoded numbers
         """
-        neg_vector = self.vector
+        from copy import copy
+        neg = copy(self)
         for i in range(len(self.vector)):
-            neg_vector[i] = self.vector[i] * -1
+            neg.vector[i] = self.vector[i] * -1
+        return neg
         
     def __add__(self,other):
         """
@@ -238,10 +253,13 @@ class Bachet(object):
         """
         Reverses the Bachet code
         """
+        from copy import copy
+        rev = copy(self)
         result = [0 for i in range(len(self.vector))]
         for i in range(len(self.vector)):
             result[i] = self.vector[len(self.vector)-i-1]
-        self.vector = result
+        rev.vector = result
+        return rev
 
 #------------- end of Bachet class ------------------
     
@@ -1023,7 +1041,7 @@ if __name__ == '__main__':
 ##    print('eval(cf(sqrt(2))_%d) = ' % (len(cf)-1), decimalEvalContinuedFraction(cf) )
 ##    print('sqrt(2)              = ', sqrt(2) )
 ##
-    print('*-----addition of Bachet numbers----------*') 
+    print('*-----Computing with Bachet numbers----------*') 
     n1 = Bachet(12)
     n2 = Bachet(13)
     n3 = n1 + n2
@@ -1031,10 +1049,9 @@ if __name__ == '__main__':
     print('%s (%d) + %s (%d) = %s (%d)' % (n1, n1.value(), n2, n2.value(), n3, n3.value() ))
     print('%s (%d) * %s (%d) = %s (%d)' % (n1, n1.value(), n2, n2.value(), n4, n4.value() ))
 
-    print('length of %s = %d' % (n1, len(n1)))
-    n1.reverse()
-    -n2
-    print('%s (%d) + %s (%d) = %s (%d)' % ( n1, n1.value(), n2, n2.value(),n1 + n2, (n1+n2).value() ))
+    n5 = n1.reverse()
+    n6 = -n2
+    print('%s (%d) + %s (%d) = %s (%d)' % ( n5, n5.value(), n6, n6.value(),n5 + n6, (n5+n6).value() ))
 
     print('*------------------*')
     print('If you see this line all tests were passed successfully :-)')

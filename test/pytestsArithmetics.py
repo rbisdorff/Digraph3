@@ -77,7 +77,6 @@ def testContinuedFraction():
     
 def testBachetIntegerEncoding():
     print('==>> Testing Bachet encoding of integers')
-    print('*-----addition of Bachet numbers----------*') 
     n1 = Bachet(12)
     n2 = Bachet(13)
     n3 = n1 + n2
@@ -86,9 +85,9 @@ def testBachetIntegerEncoding():
     print('%s (%d) * %s (%d) = %s (%d)' % (n1, n1.value(), n2, n2.value(), n4, n4.value() ))
 
     print('length of %s = %d' % (n1, len(n1)))
-    n1.reverse()
-    -n2
-    print('%s (%d) + %s (%d) = %s (%d)' % ( n1, n1.value(), n2, n2.value(),n1 + n2, (n1+n2).value() ))
+    n5 = n1.reverse()
+    n6 = -n2
+    print('%s (%d) + %s (%d) = %s (%d)' % ( n5, n5.value(), n6, n6.value(),n5 + n6, (n5+n6).value() ))
     
 
 
