@@ -107,47 +107,17 @@ class Bachet(object):
     
     https://en.wikipedia.org/wiki/Claude_Gaspar_Bachet_de_M%C3%A9ziriac
     
-    >>> print('*---- base3toBachet(): from int to Bachet via base 3 -----*')  
-     *---- base3toBachet(): from int to Bachet via base 3 -----*
-    >>> num_string = base10to3(154)
-    >>> print(154, ' in base 3 = ', num_string)
-     154  in base 3 =  12201
-    >>> print(num_string, ' in Bachet encoding = ', base3toBachet(num_string))
-     12201  in Bachet coding =  ('1-10-101', [1, -1, 0, -1, 0, 1])
-    >>> print('*---- int2bachet(): directly from int to Bachet -----*')    
-     *---- int2bachet(): directly from int to Bachet -----*
-    >>> print(19, ' = ', int2bachet(19))
-     19  =  ('1-101', [1, -1, 0, 1])
-    >>> print(-37, ' = ', int2bachet(-37))
-     -37  =  ('-10-1-1', [-1, -1, 0, -1])
-    >>> print(-1, ' = ', int2bachet(-1))
-    >>> print('*---- int2bachet() & bachet2int() : conversion in both directions -----*')
-     *---- int2bachet() & bachet2int() : conversion in both directions -----*
-    >>> print('120 = ', int2bachet(120))
-     120 =  ('11110', [1, 1, 1, 1, 0])
-    >>> print(int2bachet(120), '=', bachet2int(int2bachet(120)))
-     ('11110', [1, 1, 1, 1, 0]) = 120
-    >>> print('13 = ', int2bachet(13))
-     13 =  ('111', [1, 1, 1])
-    >>> print(int2bachet(13), '=', bachet2int(int2bachet(13)))
-     ('111', [1, 1, 1]) = 13
-    >>> print('133 = ', int2bachet(133))
-     133 =  ('1-1-10-11', [1, -1, -1, 0, -1, 1])
-    >>> print(int2bachet(133), '=', bachet2int(int2bachet(133)))
-     ('1-1-10-11', [1, -1, -1, 0, -1, 1]) = 133
-    >>> print('*-----addition of Bachet numbers----------*')
-     *-----addition of Bachet numbers----------*
     >>> n1 = Bachet(12)
     >>> n2 = Bachet(13)
     >>> n3 = n1 + n2
-    >>> print('"%s" (%d) + "%s" (%d) = "%s" (%d)' % (n1, n1.value(), n2, n2.value(), n3, n3.value() ))
-     "110" (12) + "111" (13) = "10-11" (25)
-    >>> print('length of "%s" = %d' % (n1, len(n1)))
-     length of "110" = 3
+    >>> print('%s (%d) + %s (%d) = %s (%d)' % (n1, n1.value(), n2, n2.value(), n3, n3.value() ))
+     110 (12) + 111 (13) = 10-11 (25)
+    >>> print('length of %s = %d' % (n1, len(n1)))
+     length of 110 = 3
     >>> n1.reverse()
     >>> -n2
-    >>> print('"%s" (%d) + "%s" (%d) = "%s" (%d)' % ( n1, n1.value(), n2, n2.value(),n1 + n2, (n1+n2).value() ))
-     "011" (4) + "-1-1-1" (-13) = "-100" (-9)
+    >>> print('%s (%d) + %s (%d) = %s (%d)' % ( n1, n1.value(), n2, n2.value(),n1 + n2, (n1+n2).value() ))
+     011 (4) + -1-1-1 (-13) = -100 (-9)
 
     """
     def __init__(self,num_int):
