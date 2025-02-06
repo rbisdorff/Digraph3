@@ -124,7 +124,7 @@ class Bachet(object):
         """
         Tranforms a potentially signed integer into a Bachet number
         """
-        self.vector = self.int2bachet(num_int)
+        self.vector = self._int2bachet(num_int)
 
     def __str__(self):
         """
@@ -152,7 +152,7 @@ class Bachet(object):
         n3 = n1 + n2
         return Bachet(n3)
         
-    def base10to3(self,num):
+    def _base10to3(self,num):
         """
         Change a base 10 number to a base 3 number.
         """
@@ -165,7 +165,7 @@ class Bachet(object):
             current = current//3
         return new_num_string
 
-    def base3toBachet(self,num_string):
+    def _base3toBachet(self,num_string):
         """
         Converts a base 3 encoded integer into a
         bipolar {-1,0,1} encoded one.
@@ -190,7 +190,7 @@ class Bachet(object):
             
         return new_vector
 
-    def int2bachet(self,num_int):
+    def _int2bachet(self,num_int):
         """
         Converts a signed integer into a Bachet encoded number
         """
@@ -198,8 +198,8 @@ class Bachet(object):
             unsigned_num_int = abs(num_int)
         else:
             unsigned_num_int = num_int
-        base3_unsigned_num_int = self.base10to3(unsigned_num_int)
-        bachet_unsigned_num_int = self.base3toBachet(base3_unsigned_num_int)
+        base3_unsigned_num_int = self._base10to3(unsigned_num_int)
+        bachet_unsigned_num_int = self._base3toBachet(base3_unsigned_num_int)
         if num_int > 0:
             return bachet_unsigned_num_int
         elif num_int == 0:
@@ -229,7 +229,6 @@ class Bachet(object):
         """
         Reverses the Bachet code
         """
-        Renders
         result = [0 for i in range(len(self.vector))]
         for i in range(len(self.vector)):
             result[i] = self.vector[len(self.vector)-i-1]

@@ -224,7 +224,7 @@
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Tranforms a potentially signed integer into a Bachet number</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">vector</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">int2bachet</span><span class="p">(</span><span class="n">num_int</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">vector</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_int2bachet</span><span class="p">(</span><span class="n">num_int</span><span class="p">)</span>
 
     <span class="k">def</span> <span class="fm">__str__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
@@ -252,9 +252,7 @@
         <span class="n">n3</span> <span class="o">=</span> <span class="n">n1</span> <span class="o">+</span> <span class="n">n2</span>
         <span class="k">return</span> <span class="n">Bachet</span><span class="p">(</span><span class="n">n3</span><span class="p">)</span>
         
-<div class="viewcode-block" id="Bachet.base10to3">
-<a class="viewcode-back" href="../techDoc.html#arithmetics.Bachet.base10to3">[docs]</a>
-    <span class="k">def</span> <span class="nf">base10to3</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">num</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">_base10to3</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">num</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Change a base 10 number to a base 3 number.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
@@ -265,12 +263,9 @@
             <span class="n">remainder_string</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="n">remainder</span><span class="p">)</span>
             <span class="n">new_num_string</span> <span class="o">=</span> <span class="n">remainder_string</span> <span class="o">+</span> <span class="n">new_num_string</span>
             <span class="n">current</span> <span class="o">=</span> <span class="n">current</span><span class="o">//</span><span class="mi">3</span>
-        <span class="k">return</span> <span class="n">new_num_string</span></div>
+        <span class="k">return</span> <span class="n">new_num_string</span>
 
-
-<div class="viewcode-block" id="Bachet.base3toBachet">
-<a class="viewcode-back" href="../techDoc.html#arithmetics.Bachet.base3toBachet">[docs]</a>
-    <span class="k">def</span> <span class="nf">base3toBachet</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">num_string</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">_base3toBachet</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">num_string</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Converts a base 3 encoded integer into a</span>
 <span class="sd">        bipolar {-1,0,1} encoded one.</span>
@@ -293,12 +288,9 @@
         <span class="k">if</span> <span class="n">reste</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
             <span class="n">new_vector</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">+</span> <span class="n">new_vector</span>
             
-        <span class="k">return</span> <span class="n">new_vector</span></div>
+        <span class="k">return</span> <span class="n">new_vector</span>
 
-
-<div class="viewcode-block" id="Bachet.int2bachet">
-<a class="viewcode-back" href="../techDoc.html#arithmetics.Bachet.int2bachet">[docs]</a>
-    <span class="k">def</span> <span class="nf">int2bachet</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">num_int</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">_int2bachet</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">num_int</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Converts a signed integer into a Bachet encoded number</span>
 <span class="sd">        &quot;&quot;&quot;</span>
@@ -306,8 +298,8 @@
             <span class="n">unsigned_num_int</span> <span class="o">=</span> <span class="nb">abs</span><span class="p">(</span><span class="n">num_int</span><span class="p">)</span>
         <span class="k">else</span><span class="p">:</span>
             <span class="n">unsigned_num_int</span> <span class="o">=</span> <span class="n">num_int</span>
-        <span class="n">base3_unsigned_num_int</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">base10to3</span><span class="p">(</span><span class="n">unsigned_num_int</span><span class="p">)</span>
-        <span class="n">bachet_unsigned_num_int</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">base3toBachet</span><span class="p">(</span><span class="n">base3_unsigned_num_int</span><span class="p">)</span>
+        <span class="n">base3_unsigned_num_int</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_base10to3</span><span class="p">(</span><span class="n">unsigned_num_int</span><span class="p">)</span>
+        <span class="n">bachet_unsigned_num_int</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_base3toBachet</span><span class="p">(</span><span class="n">base3_unsigned_num_int</span><span class="p">)</span>
         <span class="k">if</span> <span class="n">num_int</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
             <span class="k">return</span> <span class="n">bachet_unsigned_num_int</span>
         <span class="k">elif</span> <span class="n">num_int</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
@@ -316,8 +308,7 @@
             <span class="n">bachet_vector</span> <span class="o">=</span> <span class="n">bachet_unsigned_num_int</span>
             <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">bachet_unsigned_num_int</span><span class="p">)):</span>
                 <span class="n">bachet_vector</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">bachet_unsigned_num_int</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">*-</span><span class="mi">1</span>
-            <span class="k">return</span> <span class="n">bachet_vector</span></div>
-
+            <span class="k">return</span> <span class="n">bachet_vector</span>
        
 <div class="viewcode-block" id="Bachet.value">
 <a class="viewcode-back" href="../techDoc.html#arithmetics.Bachet.value">[docs]</a>
@@ -343,7 +334,6 @@
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Reverses the Bachet code</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="n">Renders</span>
         <span class="n">result</span> <span class="o">=</span> <span class="p">[</span><span class="mi">0</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">vector</span><span class="p">))]</span>
         <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">vector</span><span class="p">)):</span>
             <span class="n">result</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">vector</span><span class="p">[</span><span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">vector</span><span class="p">)</span><span class="o">-</span><span class="n">i</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
