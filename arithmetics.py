@@ -101,23 +101,47 @@ class QuadraticResiduesDigraph(Digraph):
 # Discrete Mathematics lectures 2008
 # (c) 2025 RB 
 
-class Bachet(object):
+class BachetNumber(object):
     """
     Bipolar-valued base {-1,0,1} encoded Bachet integers
     
     https://en.wikipedia.org/wiki/Claude_Gaspar_Bachet_de_M%C3%A9ziriac
     
-    >>> from arithmetics import Bachet
-    >>> n1 = Bachet(12)
-    >>> n2 = Bachet(13)
+    >>> from arithmetics import BachetNumber
+    >>> n1 = BachetNumber(12)
+    >>> n1
+     *------- Bachet number description ------*
+     Instance class : BachetNumber
+     String         : 110
+     Vector         : [1, 1, 0]
+     Length         : 3
+     Value          : 12
+     Attributes     : ['vector']  
+    >>> n2 = BachetNumber(13)
+    >>> n2
+     *------- Bachet number description ------*
+     Instance class : BachetNumber
+     String         : 111
+     Vector         : [1, 1, 1]
+     Length         : 3
+     Value          : 13
+     Attributes     : ['vector']
     >>> n3 = n1 + n2
+    >>> n3
+     *------- Bachet number description ------*
+     Instance class : BachetNumber
+     String         : 10-11
+     Vector         : [1, 0, -1, 1]
+     Length         : 4
+     Value          : 25
+     Attributes     : ['vector']
     >>> print('%s (%d) + %s (%d) = %s (%d)' % (n1, n1.value(), n2, n2.value(), n3, n3.value() ))
      110 (12) + 111 (13) = 10-11 (25)
     >>> print('length of %s = %d' % (n1, len(n1)))
      length of 110 = 3
-    >>> n1.reverse()
-    >>> -n2
-    >>> print('%s (%d) + %s (%d) = %s (%d)' % ( n1, n1.value(), n2, n2.value(),n1 + n2, (n1+n2).value() ))
+    >>> n4 = n1.reverse()
+    >>> n5 = -n2
+    >>> print('%s (%d) + %s (%d) = %s (%d)' % ( n4, n4.value(), n5, n5.value(),n1 + n2, (n1+n2).value() ))
      011 (4) + -1-1-1 (-13) = -100 (-9)
 
     """
@@ -153,10 +177,10 @@ class Bachet(object):
         """
         Defines the negation operator for Bachet encoded numbers
         """
-        from copy import copy
-        neg = copy(self)
-        for i in range(len(self.vector)):
-            neg.vector[i] = self.vector[i] * -1
+        from copy import deepcopy
+        neg = deepcopy(self)
+        for i in range(len(neg)):
+            neg.vector[i] = neg.vector[i] * -1
         return neg
         
 ##    def __add__(self,other):
@@ -166,22 +190,22 @@ class Bachet(object):
 ##        n1 = self.value()
 ##        n2 = other.value()
 ##        n3 = n1 + n2
-##        return Bachet(n3)        
+##        return BachetNumber(n3)        
 
     def __add__(self,other,Debug=False):
         """
         Defines the addition operator for Bachet encoded numbers
         """
-        from copy import copy
+        from copy import deepcopy
         srv = self.reverse()
         orv = other.reverse()
         n1 = len(self)
         n2 = len(other)
         if n1 >= n2:
-            new = copy(self)
+            new = deepcopy(self)
             new.vector = [0 for i in range(n1)]
         else:
-            new = copy(other)
+            new = deepcopy(other)
             new.vector = [0 for i in range(n2)]
         n = max(n1,n2)
         reste = 0
@@ -230,7 +254,7 @@ class Bachet(object):
         n1 = self.value()
         n2 = other.value()
         n3 = n1 * n2
-        return Bachet(n3)
+        return BachetNumber(n3)
         
     def _base10to3(self,num):
         """
@@ -309,15 +333,15 @@ class Bachet(object):
         """
         Reverses the Bachet code
         """
-        from copy import copy
-        rev = copy(self)
+        from copy import deepcopy
+        rev = deepcopy(self)
         result = [0 for i in range(len(self.vector))]
         for i in range(len(self.vector)):
             result[i] = self.vector[len(self.vector)-i-1]
         rev.vector = result
         return rev
 
-#------------- end of Bachet class ------------------
+#------------- end of BachetNumber class ------------------
     
 def primesBelow(N,Odd=False):
     """
@@ -1117,8 +1141,8 @@ if __name__ == '__main__':
 ##
 
     print('*-----Computing with Bachet numbers----------*') 
-    n1 = Bachet(12)
-    n2 = Bachet(154)
+    n1 = BachetNumber(12)
+    n2 = BachetNumber(154)
     n3 = n1 + n2
     n4 = n1 * n2
     print('%s (%d) + %s (%d) = %s (%d)' % (n1, n1.value(), n2, n2.value(), n3, n3.value() ))

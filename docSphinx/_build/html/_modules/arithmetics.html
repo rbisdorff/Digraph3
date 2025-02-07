@@ -199,25 +199,49 @@
 <span class="c1"># Discrete Mathematics lectures 2008</span>
 <span class="c1"># (c) 2025 RB </span>
 
-<div class="viewcode-block" id="Bachet">
-<a class="viewcode-back" href="../techDoc.html#arithmetics.Bachet">[docs]</a>
-<span class="k">class</span> <span class="nc">Bachet</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+<div class="viewcode-block" id="BachetNumber">
+<a class="viewcode-back" href="../techDoc.html#arithmetics.BachetNumber">[docs]</a>
+<span class="k">class</span> <span class="nc">BachetNumber</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Bipolar-valued base {-1,0,1} encoded Bachet integers</span>
 <span class="sd">    </span>
 <span class="sd">    https://en.wikipedia.org/wiki/Claude_Gaspar_Bachet_de_M%C3%A9ziriac</span>
 <span class="sd">    </span>
-<span class="sd">    &gt;&gt;&gt; from arithmetics import Bachet</span>
-<span class="sd">    &gt;&gt;&gt; n1 = Bachet(12)</span>
-<span class="sd">    &gt;&gt;&gt; n2 = Bachet(13)</span>
+<span class="sd">    &gt;&gt;&gt; from arithmetics import BachetNumber</span>
+<span class="sd">    &gt;&gt;&gt; n1 = BachetNumber(12)</span>
+<span class="sd">    &gt;&gt;&gt; n1</span>
+<span class="sd">     *------- Bachet number description ------*</span>
+<span class="sd">     Instance class : BachetNumber</span>
+<span class="sd">     String         : 110</span>
+<span class="sd">     Vector         : [1, 1, 0]</span>
+<span class="sd">     Length         : 3</span>
+<span class="sd">     Value          : 12</span>
+<span class="sd">     Attributes     : [&#39;vector&#39;]  </span>
+<span class="sd">    &gt;&gt;&gt; n2 = BachetNumber(13)</span>
+<span class="sd">    &gt;&gt;&gt; n2</span>
+<span class="sd">     *------- Bachet number description ------*</span>
+<span class="sd">     Instance class : BachetNumber</span>
+<span class="sd">     String         : 111</span>
+<span class="sd">     Vector         : [1, 1, 1]</span>
+<span class="sd">     Length         : 3</span>
+<span class="sd">     Value          : 13</span>
+<span class="sd">     Attributes     : [&#39;vector&#39;]</span>
 <span class="sd">    &gt;&gt;&gt; n3 = n1 + n2</span>
+<span class="sd">    &gt;&gt;&gt; n3</span>
+<span class="sd">     *------- Bachet number description ------*</span>
+<span class="sd">     Instance class : BachetNumber</span>
+<span class="sd">     String         : 10-11</span>
+<span class="sd">     Vector         : [1, 0, -1, 1]</span>
+<span class="sd">     Length         : 4</span>
+<span class="sd">     Value          : 25</span>
+<span class="sd">     Attributes     : [&#39;vector&#39;]</span>
 <span class="sd">    &gt;&gt;&gt; print(&#39;%s (%d) + %s (%d) = %s (%d)&#39; % (n1, n1.value(), n2, n2.value(), n3, n3.value() ))</span>
 <span class="sd">     110 (12) + 111 (13) = 10-11 (25)</span>
 <span class="sd">    &gt;&gt;&gt; print(&#39;length of %s = %d&#39; % (n1, len(n1)))</span>
 <span class="sd">     length of 110 = 3</span>
-<span class="sd">    &gt;&gt;&gt; n1.reverse()</span>
-<span class="sd">    &gt;&gt;&gt; -n2</span>
-<span class="sd">    &gt;&gt;&gt; print(&#39;%s (%d) + %s (%d) = %s (%d)&#39; % ( n1, n1.value(), n2, n2.value(),n1 + n2, (n1+n2).value() ))</span>
+<span class="sd">    &gt;&gt;&gt; n4 = n1.reverse()</span>
+<span class="sd">    &gt;&gt;&gt; n5 = -n2</span>
+<span class="sd">    &gt;&gt;&gt; print(&#39;%s (%d) + %s (%d) = %s (%d)&#39; % ( n4, n4.value(), n5, n5.value(),n1 + n2, (n1+n2).value() ))</span>
 <span class="sd">     011 (4) + -1-1-1 (-13) = -100 (-9)</span>
 
 <span class="sd">    &quot;&quot;&quot;</span>
@@ -253,10 +277,10 @@
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Defines the negation operator for Bachet encoded numbers</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="kn">from</span> <span class="nn">copy</span> <span class="kn">import</span> <span class="n">copy</span>
-        <span class="n">neg</span> <span class="o">=</span> <span class="n">copy</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
-        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">vector</span><span class="p">)):</span>
-            <span class="n">neg</span><span class="o">.</span><span class="n">vector</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">vector</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">*</span> <span class="o">-</span><span class="mi">1</span>
+        <span class="kn">from</span> <span class="nn">copy</span> <span class="kn">import</span> <span class="n">deepcopy</span>
+        <span class="n">neg</span> <span class="o">=</span> <span class="n">deepcopy</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
+        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">neg</span><span class="p">)):</span>
+            <span class="n">neg</span><span class="o">.</span><span class="n">vector</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">neg</span><span class="o">.</span><span class="n">vector</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">*</span> <span class="o">-</span><span class="mi">1</span>
         <span class="k">return</span> <span class="n">neg</span>
         
 <span class="c1">##    def __add__(self,other):</span>
@@ -266,22 +290,22 @@
 <span class="c1">##        n1 = self.value()</span>
 <span class="c1">##        n2 = other.value()</span>
 <span class="c1">##        n3 = n1 + n2</span>
-<span class="c1">##        return Bachet(n3)        </span>
+<span class="c1">##        return BachetNumber(n3)        </span>
 
     <span class="k">def</span> <span class="fm">__add__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">other</span><span class="p">,</span><span class="n">Debug</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Defines the addition operator for Bachet encoded numbers</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="kn">from</span> <span class="nn">copy</span> <span class="kn">import</span> <span class="n">copy</span>
+        <span class="kn">from</span> <span class="nn">copy</span> <span class="kn">import</span> <span class="n">deepcopy</span>
         <span class="n">srv</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">reverse</span><span class="p">()</span>
         <span class="n">orv</span> <span class="o">=</span> <span class="n">other</span><span class="o">.</span><span class="n">reverse</span><span class="p">()</span>
         <span class="n">n1</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
         <span class="n">n2</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">other</span><span class="p">)</span>
         <span class="k">if</span> <span class="n">n1</span> <span class="o">&gt;=</span> <span class="n">n2</span><span class="p">:</span>
-            <span class="n">new</span> <span class="o">=</span> <span class="n">copy</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
+            <span class="n">new</span> <span class="o">=</span> <span class="n">deepcopy</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
             <span class="n">new</span><span class="o">.</span><span class="n">vector</span> <span class="o">=</span> <span class="p">[</span><span class="mi">0</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n1</span><span class="p">)]</span>
         <span class="k">else</span><span class="p">:</span>
-            <span class="n">new</span> <span class="o">=</span> <span class="n">copy</span><span class="p">(</span><span class="n">other</span><span class="p">)</span>
+            <span class="n">new</span> <span class="o">=</span> <span class="n">deepcopy</span><span class="p">(</span><span class="n">other</span><span class="p">)</span>
             <span class="n">new</span><span class="o">.</span><span class="n">vector</span> <span class="o">=</span> <span class="p">[</span><span class="mi">0</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n2</span><span class="p">)]</span>
         <span class="n">n</span> <span class="o">=</span> <span class="nb">max</span><span class="p">(</span><span class="n">n1</span><span class="p">,</span><span class="n">n2</span><span class="p">)</span>
         <span class="n">reste</span> <span class="o">=</span> <span class="mi">0</span>
@@ -330,7 +354,7 @@
         <span class="n">n1</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">value</span><span class="p">()</span>
         <span class="n">n2</span> <span class="o">=</span> <span class="n">other</span><span class="o">.</span><span class="n">value</span><span class="p">()</span>
         <span class="n">n3</span> <span class="o">=</span> <span class="n">n1</span> <span class="o">*</span> <span class="n">n2</span>
-        <span class="k">return</span> <span class="n">Bachet</span><span class="p">(</span><span class="n">n3</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">BachetNumber</span><span class="p">(</span><span class="n">n3</span><span class="p">)</span>
         
     <span class="k">def</span> <span class="nf">_base10to3</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">num</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
@@ -390,8 +414,8 @@
                 <span class="n">bachet_vector</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">bachet_unsigned_num_int</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">*-</span><span class="mi">1</span>
             <span class="k">return</span> <span class="n">bachet_vector</span>
        
-<div class="viewcode-block" id="Bachet.value">
-<a class="viewcode-back" href="../techDoc.html#arithmetics.Bachet.value">[docs]</a>
+<div class="viewcode-block" id="BachetNumber.value">
+<a class="viewcode-back" href="../techDoc.html#arithmetics.BachetNumber.value">[docs]</a>
     <span class="k">def</span> <span class="nf">value</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Renders the integer corresponding to the Bachet number</span>
@@ -408,14 +432,14 @@
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">vector</span><span class="p">)</span>
 
-<div class="viewcode-block" id="Bachet.reverse">
-<a class="viewcode-back" href="../techDoc.html#arithmetics.Bachet.reverse">[docs]</a>
+<div class="viewcode-block" id="BachetNumber.reverse">
+<a class="viewcode-back" href="../techDoc.html#arithmetics.BachetNumber.reverse">[docs]</a>
     <span class="k">def</span> <span class="nf">reverse</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Reverses the Bachet code</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="kn">from</span> <span class="nn">copy</span> <span class="kn">import</span> <span class="n">copy</span>
-        <span class="n">rev</span> <span class="o">=</span> <span class="n">copy</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
+        <span class="kn">from</span> <span class="nn">copy</span> <span class="kn">import</span> <span class="n">deepcopy</span>
+        <span class="n">rev</span> <span class="o">=</span> <span class="n">deepcopy</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
         <span class="n">result</span> <span class="o">=</span> <span class="p">[</span><span class="mi">0</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">vector</span><span class="p">))]</span>
         <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">vector</span><span class="p">)):</span>
             <span class="n">result</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">vector</span><span class="p">[</span><span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">vector</span><span class="p">)</span><span class="o">-</span><span class="n">i</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
@@ -424,7 +448,7 @@
 </div>
 
 
-<span class="c1">#------------- end of Bachet class ------------------</span>
+<span class="c1">#------------- end of BachetNumber class ------------------</span>
     
 <div class="viewcode-block" id="primesBelow">
 <a class="viewcode-back" href="../techDoc.html#arithmetics.primesBelow">[docs]</a>
@@ -1293,8 +1317,8 @@
 <span class="c1">##</span>
 
     <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;*-----Computing with Bachet numbers----------*&#39;</span><span class="p">)</span> 
-    <span class="n">n1</span> <span class="o">=</span> <span class="n">Bachet</span><span class="p">(</span><span class="mi">12</span><span class="p">)</span>
-    <span class="n">n2</span> <span class="o">=</span> <span class="n">Bachet</span><span class="p">(</span><span class="mi">154</span><span class="p">)</span>
+    <span class="n">n1</span> <span class="o">=</span> <span class="n">BachetNumber</span><span class="p">(</span><span class="mi">12</span><span class="p">)</span>
+    <span class="n">n2</span> <span class="o">=</span> <span class="n">BachetNumber</span><span class="p">(</span><span class="mi">154</span><span class="p">)</span>
     <span class="n">n3</span> <span class="o">=</span> <span class="n">n1</span> <span class="o">+</span> <span class="n">n2</span>
     <span class="n">n4</span> <span class="o">=</span> <span class="n">n1</span> <span class="o">*</span> <span class="n">n2</span>
     <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;</span><span class="si">%s</span><span class="s1"> (</span><span class="si">%d</span><span class="s1">) + </span><span class="si">%s</span><span class="s1"> (</span><span class="si">%d</span><span class="s1">) = </span><span class="si">%s</span><span class="s1"> (</span><span class="si">%d</span><span class="s1">)&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="n">n1</span><span class="p">,</span> <span class="n">n1</span><span class="o">.</span><span class="n">value</span><span class="p">(),</span> <span class="n">n2</span><span class="p">,</span> <span class="n">n2</span><span class="o">.</span><span class="n">value</span><span class="p">(),</span> <span class="n">n3</span><span class="p">,</span> <span class="n">n3</span><span class="o">.</span><span class="n">value</span><span class="p">()</span> <span class="p">))</span>

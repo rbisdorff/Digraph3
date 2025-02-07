@@ -1118,9 +1118,9 @@
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="#module-arithmetics">2.21. arithmetics module</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="#arithmetics.Bachet"><code class="docutils literal notranslate"><span class="pre">Bachet</span></code></a><ul>
-<li class="toctree-l4"><a class="reference internal" href="#arithmetics.Bachet.reverse"><code class="docutils literal notranslate"><span class="pre">Bachet.reverse()</span></code></a></li>
-<li class="toctree-l4"><a class="reference internal" href="#arithmetics.Bachet.value"><code class="docutils literal notranslate"><span class="pre">Bachet.value()</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#arithmetics.BachetNumber"><code class="docutils literal notranslate"><span class="pre">BachetNumber</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#arithmetics.BachetNumber.reverse"><code class="docutils literal notranslate"><span class="pre">BachetNumber.reverse()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#arithmetics.BachetNumber.value"><code class="docutils literal notranslate"><span class="pre">BachetNumber.value()</span></code></a></li>
 </ul>
 </li>
 <li class="toctree-l3"><a class="reference internal" href="#arithmetics.QuadraticResiduesDigraph"><code class="docutils literal notranslate"><span class="pre">QuadraticResiduesDigraph</span></code></a></li>
@@ -11701,33 +11701,57 @@ Springer Verlag London 1998.</p>
 <p>You should have received a copy of the GNU General Public License along with this program; if not, write to the Free Software Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.</p>
 </div></blockquote>
 <dl class="py class">
-<dt class="sig sig-object py" id="arithmetics.Bachet">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">arithmetics.</span></span><span class="sig-name descname"><span class="pre">Bachet</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">num_int</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/arithmetics.html#Bachet"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#arithmetics.Bachet" title="Link to this definition"></a></dt>
+<dt class="sig sig-object py" id="arithmetics.BachetNumber">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">arithmetics.</span></span><span class="sig-name descname"><span class="pre">BachetNumber</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">num_int</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/arithmetics.html#BachetNumber"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#arithmetics.BachetNumber" title="Link to this definition"></a></dt>
 <dd><p>Bipolar-valued base {-1,0,1} encoded Bachet integers</p>
 <p><a class="reference external" href="https://en.wikipedia.org/wiki/Claude_Gaspar_Bachet_de_M%C3%A9ziriac">https://en.wikipedia.org/wiki/Claude_Gaspar_Bachet_de_M%C3%A9ziriac</a></p>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">arithmetics</span> <span class="kn">import</span> <span class="n">Bachet</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">n1</span> <span class="o">=</span> <span class="n">Bachet</span><span class="p">(</span><span class="mi">12</span><span class="p">)</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">n2</span> <span class="o">=</span> <span class="n">Bachet</span><span class="p">(</span><span class="mi">13</span><span class="p">)</span>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">arithmetics</span> <span class="kn">import</span> <span class="n">BachetNumber</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">n1</span> <span class="o">=</span> <span class="n">BachetNumber</span><span class="p">(</span><span class="mi">12</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">n1</span>
+<span class="go"> *------- Bachet number description ------*</span>
+<span class="go"> Instance class : BachetNumber</span>
+<span class="go"> String         : 110</span>
+<span class="go"> Vector         : [1, 1, 0]</span>
+<span class="go"> Length         : 3</span>
+<span class="go"> Value          : 12</span>
+<span class="go"> Attributes     : [&#39;vector&#39;]  </span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">n2</span> <span class="o">=</span> <span class="n">BachetNumber</span><span class="p">(</span><span class="mi">13</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">n2</span>
+<span class="go"> *------- Bachet number description ------*</span>
+<span class="go"> Instance class : BachetNumber</span>
+<span class="go"> String         : 111</span>
+<span class="go"> Vector         : [1, 1, 1]</span>
+<span class="go"> Length         : 3</span>
+<span class="go"> Value          : 13</span>
+<span class="go"> Attributes     : [&#39;vector&#39;]</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">n3</span> <span class="o">=</span> <span class="n">n1</span> <span class="o">+</span> <span class="n">n2</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">n3</span>
+<span class="go"> *------- Bachet number description ------*</span>
+<span class="go"> Instance class : BachetNumber</span>
+<span class="go"> String         : 10-11</span>
+<span class="go"> Vector         : [1, 0, -1, 1]</span>
+<span class="go"> Length         : 4</span>
+<span class="go"> Value          : 25</span>
+<span class="go"> Attributes     : [&#39;vector&#39;]</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="s1">&#39;</span><span class="si">%s</span><span class="s1"> (</span><span class="si">%d</span><span class="s1">) + </span><span class="si">%s</span><span class="s1"> (</span><span class="si">%d</span><span class="s1">) = </span><span class="si">%s</span><span class="s1"> (</span><span class="si">%d</span><span class="s1">)&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="n">n1</span><span class="p">,</span> <span class="n">n1</span><span class="o">.</span><span class="n">value</span><span class="p">(),</span> <span class="n">n2</span><span class="p">,</span> <span class="n">n2</span><span class="o">.</span><span class="n">value</span><span class="p">(),</span> <span class="n">n3</span><span class="p">,</span> <span class="n">n3</span><span class="o">.</span><span class="n">value</span><span class="p">()</span> <span class="p">))</span>
 <span class="go"> 110 (12) + 111 (13) = 10-11 (25)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="s1">&#39;length of </span><span class="si">%s</span><span class="s1"> = </span><span class="si">%d</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="n">n1</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">n1</span><span class="p">)))</span>
 <span class="go"> length of 110 = 3</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">n1</span><span class="o">.</span><span class="n">reverse</span><span class="p">()</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="o">-</span><span class="n">n2</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="s1">&#39;</span><span class="si">%s</span><span class="s1"> (</span><span class="si">%d</span><span class="s1">) + </span><span class="si">%s</span><span class="s1"> (</span><span class="si">%d</span><span class="s1">) = </span><span class="si">%s</span><span class="s1"> (</span><span class="si">%d</span><span class="s1">)&#39;</span> <span class="o">%</span> <span class="p">(</span> <span class="n">n1</span><span class="p">,</span> <span class="n">n1</span><span class="o">.</span><span class="n">value</span><span class="p">(),</span> <span class="n">n2</span><span class="p">,</span> <span class="n">n2</span><span class="o">.</span><span class="n">value</span><span class="p">(),</span><span class="n">n1</span> <span class="o">+</span> <span class="n">n2</span><span class="p">,</span> <span class="p">(</span><span class="n">n1</span><span class="o">+</span><span class="n">n2</span><span class="p">)</span><span class="o">.</span><span class="n">value</span><span class="p">()</span> <span class="p">))</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">n4</span> <span class="o">=</span> <span class="n">n1</span><span class="o">.</span><span class="n">reverse</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">n5</span> <span class="o">=</span> <span class="o">-</span><span class="n">n2</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="s1">&#39;</span><span class="si">%s</span><span class="s1"> (</span><span class="si">%d</span><span class="s1">) + </span><span class="si">%s</span><span class="s1"> (</span><span class="si">%d</span><span class="s1">) = </span><span class="si">%s</span><span class="s1"> (</span><span class="si">%d</span><span class="s1">)&#39;</span> <span class="o">%</span> <span class="p">(</span> <span class="n">n4</span><span class="p">,</span> <span class="n">n4</span><span class="o">.</span><span class="n">value</span><span class="p">(),</span> <span class="n">n5</span><span class="p">,</span> <span class="n">n5</span><span class="o">.</span><span class="n">value</span><span class="p">(),</span><span class="n">n1</span> <span class="o">+</span> <span class="n">n2</span><span class="p">,</span> <span class="p">(</span><span class="n">n1</span><span class="o">+</span><span class="n">n2</span><span class="p">)</span><span class="o">.</span><span class="n">value</span><span class="p">()</span> <span class="p">))</span>
 <span class="go"> 011 (4) + -1-1-1 (-13) = -100 (-9)</span>
 </pre></div>
 </div>
 <dl class="py method">
-<dt class="sig sig-object py" id="arithmetics.Bachet.reverse">
-<span class="sig-name descname"><span class="pre">reverse</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/arithmetics.html#Bachet.reverse"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#arithmetics.Bachet.reverse" title="Link to this definition"></a></dt>
+<dt class="sig sig-object py" id="arithmetics.BachetNumber.reverse">
+<span class="sig-name descname"><span class="pre">reverse</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/arithmetics.html#BachetNumber.reverse"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#arithmetics.BachetNumber.reverse" title="Link to this definition"></a></dt>
 <dd><p>Reverses the Bachet code</p>
 </dd></dl>
 
 <dl class="py method">
-<dt class="sig sig-object py" id="arithmetics.Bachet.value">
-<span class="sig-name descname"><span class="pre">value</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/arithmetics.html#Bachet.value"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#arithmetics.Bachet.value" title="Link to this definition"></a></dt>
+<dt class="sig sig-object py" id="arithmetics.BachetNumber.value">
+<span class="sig-name descname"><span class="pre">value</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/arithmetics.html#BachetNumber.value"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#arithmetics.BachetNumber.value" title="Link to this definition"></a></dt>
 <dd><p>Renders the integer corresponding to the Bachet number</p>
 </dd></dl>
 

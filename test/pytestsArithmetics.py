@@ -89,6 +89,7 @@ def testBachetIntegerEncoding():
     n6 = -n2
     print('%s (%d) + %s (%d) = %s (%d)' % ( n5, n5.value(), n6, n6.value(),n5 + n6, (n5+n6).value() ))
     
+    
 
 
     
