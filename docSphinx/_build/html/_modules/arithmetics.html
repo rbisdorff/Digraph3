@@ -259,14 +259,69 @@
             <span class="n">neg</span><span class="o">.</span><span class="n">vector</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">vector</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">*</span> <span class="o">-</span><span class="mi">1</span>
         <span class="k">return</span> <span class="n">neg</span>
         
-    <span class="k">def</span> <span class="fm">__add__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">other</span><span class="p">):</span>
+<span class="c1">##    def __add__(self,other):</span>
+<span class="c1">##        &quot;&quot;&quot;</span>
+<span class="c1">##        Defines the addition operator for Bachet encoded numbers</span>
+<span class="c1">##        &quot;&quot;&quot;</span>
+<span class="c1">##        n1 = self.value()</span>
+<span class="c1">##        n2 = other.value()</span>
+<span class="c1">##        n3 = n1 + n2</span>
+<span class="c1">##        return Bachet(n3)        </span>
+
+    <span class="k">def</span> <span class="fm">__add__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">other</span><span class="p">,</span><span class="n">Debug</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Defines the addition operator for Bachet encoded numbers</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="n">n1</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">value</span><span class="p">()</span>
-        <span class="n">n2</span> <span class="o">=</span> <span class="n">other</span><span class="o">.</span><span class="n">value</span><span class="p">()</span>
-        <span class="n">n3</span> <span class="o">=</span> <span class="n">n1</span> <span class="o">+</span> <span class="n">n2</span>
-        <span class="k">return</span> <span class="n">Bachet</span><span class="p">(</span><span class="n">n3</span><span class="p">)</span>
+        <span class="kn">from</span> <span class="nn">copy</span> <span class="kn">import</span> <span class="n">copy</span>
+        <span class="n">srv</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">reverse</span><span class="p">()</span>
+        <span class="n">orv</span> <span class="o">=</span> <span class="n">other</span><span class="o">.</span><span class="n">reverse</span><span class="p">()</span>
+        <span class="n">n1</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
+        <span class="n">n2</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">other</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">n1</span> <span class="o">&gt;=</span> <span class="n">n2</span><span class="p">:</span>
+            <span class="n">new</span> <span class="o">=</span> <span class="n">copy</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
+            <span class="n">new</span><span class="o">.</span><span class="n">vector</span> <span class="o">=</span> <span class="p">[</span><span class="mi">0</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n1</span><span class="p">)]</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">new</span> <span class="o">=</span> <span class="n">copy</span><span class="p">(</span><span class="n">other</span><span class="p">)</span>
+            <span class="n">new</span><span class="o">.</span><span class="n">vector</span> <span class="o">=</span> <span class="p">[</span><span class="mi">0</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n2</span><span class="p">)]</span>
+        <span class="n">n</span> <span class="o">=</span> <span class="nb">max</span><span class="p">(</span><span class="n">n1</span><span class="p">,</span><span class="n">n2</span><span class="p">)</span>
+        <span class="n">reste</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
+            <span class="k">try</span><span class="p">:</span>
+                <span class="n">psi</span> <span class="o">=</span> <span class="n">srv</span><span class="o">.</span><span class="n">vector</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
+            <span class="k">except</span><span class="p">:</span>
+                <span class="n">psi</span> <span class="o">=</span> <span class="mi">0</span>
+            <span class="k">try</span><span class="p">:</span>
+                <span class="n">poi</span> <span class="o">=</span> <span class="n">orv</span><span class="o">.</span><span class="n">vector</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
+            <span class="k">except</span><span class="p">:</span>
+                <span class="n">poi</span> <span class="o">=</span> <span class="mi">0</span>
+            <span class="n">pi</span> <span class="o">=</span> <span class="n">psi</span> <span class="o">+</span> <span class="n">poi</span> <span class="o">+</span> <span class="n">reste</span>
+            <span class="k">if</span> <span class="n">Debug</span><span class="p">:</span>
+                <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;i,psi,poi,reste,pi&#39;</span><span class="p">,</span> <span class="n">i</span><span class="p">,</span><span class="n">psi</span><span class="p">,</span><span class="n">poi</span><span class="p">,</span><span class="n">reste</span><span class="p">,</span><span class="n">pi</span><span class="p">)</span>
+            <span class="k">if</span> <span class="n">pi</span> <span class="o">==</span> <span class="mi">2</span><span class="p">:</span>
+                <span class="n">new</span><span class="o">.</span><span class="n">vector</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="o">-</span><span class="mi">1</span>
+                <span class="n">reste</span> <span class="o">=</span> <span class="mi">1</span>
+            <span class="k">elif</span> <span class="n">pi</span> <span class="o">==</span> <span class="mi">3</span><span class="p">:</span>
+                <span class="n">new</span><span class="o">.</span><span class="n">vector</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="mi">0</span>
+                <span class="n">reste</span> <span class="o">=</span> <span class="mi">1</span>
+            <span class="k">elif</span> <span class="n">pi</span> <span class="o">==</span> <span class="o">-</span><span class="mi">2</span><span class="p">:</span>
+                <span class="n">new</span><span class="o">.</span><span class="n">vector</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="mi">1</span>
+                <span class="n">reste</span> <span class="o">=</span> <span class="o">-</span><span class="mi">1</span>
+            <span class="k">elif</span> <span class="n">pi</span> <span class="o">==</span> <span class="o">-</span><span class="mi">3</span><span class="p">:</span>
+                <span class="n">new</span><span class="o">.</span><span class="n">vector</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="mi">0</span>
+                <span class="n">reste</span> <span class="o">=</span> <span class="o">-</span><span class="mi">1</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">new</span><span class="o">.</span><span class="n">vector</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">pi</span>
+                <span class="n">reste</span> <span class="o">=</span> <span class="mi">0</span>
+            <span class="k">if</span> <span class="n">Debug</span><span class="p">:</span>
+                <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;reste&quot;</span><span class="p">,</span><span class="n">reste</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">reste</span> <span class="o">!=</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">Debug</span><span class="p">:</span>
+                <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;add&#39;</span><span class="p">,</span><span class="n">reste</span><span class="p">)</span>
+            <span class="n">new</span><span class="o">.</span><span class="n">vector</span> <span class="o">=</span> <span class="n">new</span><span class="o">.</span><span class="n">vector</span> <span class="o">+</span> <span class="p">[</span><span class="n">reste</span><span class="p">]</span>
+        <span class="k">if</span> <span class="n">Debug</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="n">new</span><span class="o">.</span><span class="n">vector</span><span class="p">)</span>
+        <span class="n">result</span> <span class="o">=</span> <span class="n">new</span><span class="o">.</span><span class="n">reverse</span><span class="p">()</span>
+        <span class="k">return</span> <span class="n">result</span>
 
     <span class="k">def</span> <span class="fm">__mul__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">other</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
@@ -1236,17 +1291,19 @@
 <span class="c1">##    print(&#39;eval(cf(sqrt(2))_%d) = &#39; % (len(cf)-1), decimalEvalContinuedFraction(cf) )</span>
 <span class="c1">##    print(&#39;sqrt(2)              = &#39;, sqrt(2) )</span>
 <span class="c1">##</span>
+
     <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;*-----Computing with Bachet numbers----------*&#39;</span><span class="p">)</span> 
     <span class="n">n1</span> <span class="o">=</span> <span class="n">Bachet</span><span class="p">(</span><span class="mi">12</span><span class="p">)</span>
-    <span class="n">n2</span> <span class="o">=</span> <span class="n">Bachet</span><span class="p">(</span><span class="mi">13</span><span class="p">)</span>
+    <span class="n">n2</span> <span class="o">=</span> <span class="n">Bachet</span><span class="p">(</span><span class="mi">154</span><span class="p">)</span>
     <span class="n">n3</span> <span class="o">=</span> <span class="n">n1</span> <span class="o">+</span> <span class="n">n2</span>
     <span class="n">n4</span> <span class="o">=</span> <span class="n">n1</span> <span class="o">*</span> <span class="n">n2</span>
     <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;</span><span class="si">%s</span><span class="s1"> (</span><span class="si">%d</span><span class="s1">) + </span><span class="si">%s</span><span class="s1"> (</span><span class="si">%d</span><span class="s1">) = </span><span class="si">%s</span><span class="s1"> (</span><span class="si">%d</span><span class="s1">)&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="n">n1</span><span class="p">,</span> <span class="n">n1</span><span class="o">.</span><span class="n">value</span><span class="p">(),</span> <span class="n">n2</span><span class="p">,</span> <span class="n">n2</span><span class="o">.</span><span class="n">value</span><span class="p">(),</span> <span class="n">n3</span><span class="p">,</span> <span class="n">n3</span><span class="o">.</span><span class="n">value</span><span class="p">()</span> <span class="p">))</span>
     <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;</span><span class="si">%s</span><span class="s1"> (</span><span class="si">%d</span><span class="s1">) * </span><span class="si">%s</span><span class="s1"> (</span><span class="si">%d</span><span class="s1">) = </span><span class="si">%s</span><span class="s1"> (</span><span class="si">%d</span><span class="s1">)&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="n">n1</span><span class="p">,</span> <span class="n">n1</span><span class="o">.</span><span class="n">value</span><span class="p">(),</span> <span class="n">n2</span><span class="p">,</span> <span class="n">n2</span><span class="o">.</span><span class="n">value</span><span class="p">(),</span> <span class="n">n4</span><span class="p">,</span> <span class="n">n4</span><span class="o">.</span><span class="n">value</span><span class="p">()</span> <span class="p">))</span>
 
     <span class="n">n5</span> <span class="o">=</span> <span class="n">n1</span><span class="o">.</span><span class="n">reverse</span><span class="p">()</span>
-    <span class="n">n6</span> <span class="o">=</span> <span class="o">-</span><span class="n">n2</span>
+    <span class="n">n6</span> <span class="o">=</span> <span class="o">-</span><span class="n">n1</span>
     <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;</span><span class="si">%s</span><span class="s1"> (</span><span class="si">%d</span><span class="s1">) + </span><span class="si">%s</span><span class="s1"> (</span><span class="si">%d</span><span class="s1">) = </span><span class="si">%s</span><span class="s1"> (</span><span class="si">%d</span><span class="s1">)&#39;</span> <span class="o">%</span> <span class="p">(</span> <span class="n">n5</span><span class="p">,</span> <span class="n">n5</span><span class="o">.</span><span class="n">value</span><span class="p">(),</span> <span class="n">n6</span><span class="p">,</span> <span class="n">n6</span><span class="o">.</span><span class="n">value</span><span class="p">(),</span><span class="n">n5</span> <span class="o">+</span> <span class="n">n6</span><span class="p">,</span> <span class="p">(</span><span class="n">n5</span><span class="o">+</span><span class="n">n6</span><span class="p">)</span><span class="o">.</span><span class="n">value</span><span class="p">()</span> <span class="p">))</span>
+
 
     <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;*------------------*&#39;</span><span class="p">)</span>
     <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;If you see this line all tests were passed successfully :-)&#39;</span><span class="p">)</span>
@@ -1262,7 +1319,7 @@
 
   <div role="contentinfo">
     <p>&#169; Copyright 2012-2024, Raymond Bisdorff.
-      <span class="lastupdated">Last updated on Feb 06, 2025.
+      <span class="lastupdated">Last updated on Feb 07, 2025.
       </span></p>
   </div>
 

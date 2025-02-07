@@ -159,14 +159,69 @@ class Bachet(object):
             neg.vector[i] = self.vector[i] * -1
         return neg
         
-    def __add__(self,other):
+##    def __add__(self,other):
+##        """
+##        Defines the addition operator for Bachet encoded numbers
+##        """
+##        n1 = self.value()
+##        n2 = other.value()
+##        n3 = n1 + n2
+##        return Bachet(n3)        
+
+    def __add__(self,other,Debug=False):
         """
         Defines the addition operator for Bachet encoded numbers
         """
-        n1 = self.value()
-        n2 = other.value()
-        n3 = n1 + n2
-        return Bachet(n3)
+        from copy import copy
+        srv = self.reverse()
+        orv = other.reverse()
+        n1 = len(self)
+        n2 = len(other)
+        if n1 >= n2:
+            new = copy(self)
+            new.vector = [0 for i in range(n1)]
+        else:
+            new = copy(other)
+            new.vector = [0 for i in range(n2)]
+        n = max(n1,n2)
+        reste = 0
+        for i in range(n):
+            try:
+                psi = srv.vector[i]
+            except:
+                psi = 0
+            try:
+                poi = orv.vector[i]
+            except:
+                poi = 0
+            pi = psi + poi + reste
+            if Debug:
+                print('i,psi,poi,reste,pi', i,psi,poi,reste,pi)
+            if pi == 2:
+                new.vector[i] = -1
+                reste = 1
+            elif pi == 3:
+                new.vector[i] = 0
+                reste = 1
+            elif pi == -2:
+                new.vector[i] = 1
+                reste = -1
+            elif pi == -3:
+                new.vector[i] = 0
+                reste = -1
+            else:
+                new.vector[i] = pi
+                reste = 0
+            if Debug:
+                print("reste",reste)
+        if reste != 0:
+            if Debug:
+                print('add',reste)
+            new.vector = new.vector + [reste]
+        if Debug:
+            print(new.vector)
+        result = new.reverse()
+        return result
 
     def __mul__(self,other):
         """
@@ -1060,17 +1115,19 @@ if __name__ == '__main__':
 ##    print('eval(cf(sqrt(2))_%d) = ' % (len(cf)-1), decimalEvalContinuedFraction(cf) )
 ##    print('sqrt(2)              = ', sqrt(2) )
 ##
+
     print('*-----Computing with Bachet numbers----------*') 
     n1 = Bachet(12)
-    n2 = Bachet(13)
+    n2 = Bachet(154)
     n3 = n1 + n2
     n4 = n1 * n2
     print('%s (%d) + %s (%d) = %s (%d)' % (n1, n1.value(), n2, n2.value(), n3, n3.value() ))
     print('%s (%d) * %s (%d) = %s (%d)' % (n1, n1.value(), n2, n2.value(), n4, n4.value() ))
 
     n5 = n1.reverse()
-    n6 = -n2
+    n6 = -n1
     print('%s (%d) + %s (%d) = %s (%d)' % ( n5, n5.value(), n6, n6.value(),n5 + n6, (n5+n6).value() ))
+
 
     print('*------------------*')
     print('If you see this line all tests were passed successfully :-)')
