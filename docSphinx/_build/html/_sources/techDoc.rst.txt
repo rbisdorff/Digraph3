@@ -9,7 +9,7 @@ Technical Reference of the Digraph3 modules
 :Author: Raymond Bisdorff, Emeritus Professor of Computer Science and Applied Mathematics, University of Luxembourg
 :Url: https://rbisdorff.github.io/
 :Version: |version| (release: |release|)
-:Copyright: `R. Bisdorff <_static/digraph3_copyright.html>`_ 2013-2024
+:Copyright: `R. Bisdorff <_static/digraph3_copyright.html>`_ 2013-2025
 
 	    
 

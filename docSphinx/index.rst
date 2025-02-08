@@ -22,7 +22,7 @@ Wecome! This is the documentation for the **Digraph3** *Python* programming reso
 :Author: Raymond Bisdorff, Emeritus Professor of Applied Mathematics and Computer Science, University of Luxembourg
 :Url: https://rbisdorff.github.io/
 :Version: |version| (release: |release|)
-:Copyright: R. Bisdorff |location_link3| 2013-2024
+:Copyright: R. Bisdorff |location_link3| 2013-2025
 
 .. image:: introDoc2.png
     :width: 500pt

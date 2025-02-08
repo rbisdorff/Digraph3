@@ -30,7 +30,7 @@ Pearls of bipolar-valued epistemic logic
    :Url: https://rbisdorff.github.io/
    :Version: |version| (release: |release|)
    :PDF version: `3.3 MB <_static/digraph3Pearls.pdf>`_
-   :Copyright: `R. Bisdorff <_static/digraph3_copyright.html>`_ 2013-2024
+   :Copyright: `R. Bisdorff <_static/digraph3_copyright.html>`_ 2013-2025
 
 .. _Pearls-label:	   
 

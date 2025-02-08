@@ -35,7 +35,7 @@
    :Url: https://rbisdorff.github.io/
    :Version: |version| (release: |release|)
    :PDF version: `5.9 MB <_static/digraph3Tutorial.pdf>`_ 
-   :Copyright: `R. Bisdorff <_static/digraph3_copyright.html>`_ 2013-2024
+   :Copyright: `R. Bisdorff <_static/digraph3_copyright.html>`_ 2013-2025
 
 .. _Tutorial-label:
 
