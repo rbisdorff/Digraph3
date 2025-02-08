@@ -47,7 +47,7 @@ Parts of the documentation
 ..........................
 :New:
 
-   - The documentation of the :py:mod:`arithmetics` module has been reviewed and a bipolar {-1,0,1} encoding of *Bachet* numbers has been added by the way (see the :py:class:`arithmetics.BachetNumber` class).
+   - The documentation of the :py:mod:`arithmetics` module has been reviewed and a bipolar {-1,0,1} *Bachet*-encoding of integers has been added by the way (see the :py:class:`arithmetics.BachetNumber` class).
      
    - The tutorial on :ref:`Computing a best choice recommendation <Rubis-Tutorial-label>` has been thoroughly reviewed and upgraded
           

@@ -158,11 +158,14 @@ class BachetNumber(object):
         reprString += 'Attributes     : %s\n' % list(self.__dict__.keys())    
         return reprString
     
-    def __init__(self,num_int):
+    def __init__(self,num_int=None,vector=None):
         """
         Tranforms a potentially signed integer into a Bachet number
         """
-        self.vector = self._int2bachet(num_int)
+        if num_int is None:
+            self.vector = vector
+        else:
+            self.vector = self._int2bachet(num_int)
 
     def __str__(self):
         """
