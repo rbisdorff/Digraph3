@@ -135,14 +135,14 @@ class BachetNumber(object):
      Length         : 4
      Value          : 25
      Attributes     : ['vector']
-    >>> print('%s (%d) + %s (%d) = %s (%d)' \
+    >>> print('%s (%d) + %s (%d) = %s (%d)'
     ...        % (n1, n1.value(), n2, n2.value(), n3, n3.value() ))
      110 (12) + 111 (13) = 10-11 (25)
     >>> print('length of %s = %d' % (n1, len(n1)))
      length of 110 = 3
     >>> n4 = n1.reverse()
     >>> n5 = -n2
-    >>> print('%s (%d) + %s (%d) = %s (%d)' \
+    >>> print('%s (%d) + %s (%d) = %s (%d)'
     ...       % ( n4, n4.value(), n5, n5.value(),n1 + n2, (n1+n2).value() ))
      011 (4) + -1-1-1 (-13) = -100 (-9)
 
