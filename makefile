@@ -1,6 +1,6 @@
 ## makefile for digraphs module installation
-## R Bisdorff Mar 2021
-## version 3.9
+## R Bisdorff (c) 2023-2025
+## version 3.13.2
 ########################
 # use PYTHON parameter for selecting a
 # specific Python environment as follows:

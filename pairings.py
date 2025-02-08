@@ -2,7 +2,7 @@
 """
 Python3 implementation of solvers for fair inter- and intragroup pairing problems
 
-Copyright (C) 2023 Raymond Bisdorff
+Copyright (C) 2023-2025 Raymond Bisdorff
 
     This program is free software; you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -21,7 +21,7 @@ Copyright (C) 2023 Raymond Bisdorff
 """
 #######################
 
-__version__ = "$Revision: Python 3.11"
+__version__ = "$Revision: Python 3.13.2"
 
 #-------------
 from graphs import BipartiteGraph

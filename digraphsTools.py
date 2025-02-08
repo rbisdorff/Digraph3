@@ -5,7 +5,7 @@ Python3+ implementation of Digraph3 tools
 
 The module provides various generic methods and tools for handling digraphs.
 
-Copyright (C) 2016-2023 Raymond Bisdorff
+Copyright (C) 2016-2025 Raymond Bisdorff
 
     This program is free software; you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -24,7 +24,7 @@ Copyright (C) 2016-2023 Raymond Bisdorff
 """
 ###################################
 
-__version__ = "$Revision: Python 3.10"
+__version__ = "$Revision: Python 3.13.2"
 
 #--------- Decimal precision --------------
 from decimal import Decimal

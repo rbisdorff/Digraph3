@@ -3,7 +3,7 @@
 """
 Python3+ implementation of the digraphs module, root module of the Digraph3 resources.
 
-Copyright (C) 2006-2023  Raymond Bisdorff
+Copyright (C) 2006-2025  Raymond Bisdorff
 
     This program is free software; you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -22,7 +22,7 @@ Copyright (C) 2006-2023  Raymond Bisdorff
 """
 #######################
 
-__version__ = "Branch: Python3.10 $"
+__version__ = "Branch: Python3.13.2 $"
 
 from digraphsTools import *
 #from digraphs import *

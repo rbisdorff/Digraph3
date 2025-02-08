@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """
 Python3 implementation of outranking digraphs.
-Copyright (C) 2006-2023  Raymond Bisdorff
+Copyright (C) 2006-2025  Raymond Bisdorff
 
     This program is free software; you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -19,7 +19,7 @@ Copyright (C) 2006-2023  Raymond Bisdorff
 
 """
 
-__version__ = "Revision: Py3.10"
+__version__ = "Revision: Py3.13.2"
 
 from digraphsTools import *
 from digraphs import *

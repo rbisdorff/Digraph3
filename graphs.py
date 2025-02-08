@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """
   Digraph3 graphs.py module
-  Copyright (C)  2011-2023 Raymond Bisdorff
+  Copyright (C)  2011-2025 Raymond Bisdorff
 
     This program is free software; you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -20,7 +20,7 @@
 """
 #############################################
 
-__version__ = "$Revision: Python 3.10"
+__version__ = "$Revision: Python 3.13.2"
 
 
 from decimal import Decimal

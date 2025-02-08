@@ -2,7 +2,7 @@
 """
 Python implementation of digraphs
 Module for generating random performance tableaux  
-Copyright (C) 2015-2023  Raymond Bisdorff
+Copyright (C) 2015-2025  Raymond Bisdorff
 
     This program is free software; you can redistribute it and/or modify it under the terms of the GNU General Public License as published by the Free Software Foundation; either version 3 of the License, or (at your option) any later version.
 
@@ -13,8 +13,7 @@ Copyright (C) 2015-2023  Raymond Bisdorff
 """
 #######################
 
-__version__ = "$Revision: python3.10 $"
-# $Source: /home/cvsroot/Digraph/randomPerfTabs.py,v $
+__version__ = "$Revision: python3.13.2 $"
 
 from perfTabs import PerformanceTableau
 from decimal import Decimal

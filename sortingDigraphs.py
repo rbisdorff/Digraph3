@@ -5,7 +5,7 @@ Algorithmic Decision Theory applications.
 
 Module for sorting and rating applications.
 
-Copyright (C) 2016-2023  Raymond Bisdorff.
+Copyright (C) 2016-2025  Raymond Bisdorff.
 
     This program is free software; you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -24,7 +24,7 @@ Copyright (C) 2016-2023  Raymond Bisdorff.
 """
 #######################
 
-__version__ = "$Revision: Python 3.10"
+__version__ = "$Revision: Python 3.13.2"
 
 #from digraphsTools import *
 #from digraphs import *
