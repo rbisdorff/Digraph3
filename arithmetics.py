@@ -117,7 +117,7 @@ class BachetNumber(object):
      Length         : 3
      Value          : 12
      Attributes     : ['vector']  
-    >>> n2 = BachetNumber(13)
+    >>> n2 = BachetNumber(vector=[1,1,1])
     >>> n2
      *------- Bachet number description ------*
      Instance class : BachetNumber
@@ -165,7 +165,10 @@ class BachetNumber(object):
         Tranforms a potentially signed integer into a Bachet number
         """
         if num_int is None:
-            self.vector = vector
+            if vector is not None:
+                self.vector = vector
+            else:
+                self.vector=[0]
         else:
             self.vector = self._int2bachet(num_int)
 
