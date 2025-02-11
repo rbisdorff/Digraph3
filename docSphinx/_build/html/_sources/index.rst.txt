@@ -48,6 +48,8 @@ Parts of the documentation
 :New:
 
    - The documentation of the :py:mod:`arithmetics` module has been reviewed and a bipolar {-1,0,1} *Bachet*-encoding of integers has been added by the way (see the :py:class:`arithmetics.BachetNumber` class).
+
+   - These previous *Bachet* numbers are used in the :py:class:`linearOrders.BachetRanking` class implementing a new ranking rule relying on the fact that the row and column vectors of the outranking characterics define Bachet vectors corresponding repectively to the global outrankingness and outrankedness credibilities of each decision action.
      
    - The tutorial on :ref:`Computing a best choice recommendation <Rubis-Tutorial-label>` has been thoroughly reviewed and upgraded
           

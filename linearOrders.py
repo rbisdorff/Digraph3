@@ -1218,10 +1218,217 @@ class _OutFlowsOrder(LinearOrder):
         else:
             for x in reversed(self.outFlows):
                 print('%s \t %.2f' %(x[1],x[0]))
+#------------
+class BachetRanking(LinearOrder):
+    """
+    Instantiates the Bachet Ranking and Order from
+    a given bipolar-valued Digraph instance *other*.
 
+    For each action *x* in *other.actions*, the polarised integer row vector of the *other.relation* attribute defines a *Bachet vector* which correponds to a significance weight *rbx* of its **outrankingness credibility**.
+
+    Similarly, the corresponding polarised integer column vector in the *other.relation* attribute defines a *Bachet vector* whose negation correponds to a significance weight *-cbx* of its **not outrankedness credibility**. Taking the sum *rbx + (-cbx)* of both credibilities gives us per action *x* a fitness score of the statement that *x* may be *first-ranked*.
+
+    Sorting in decreasing (resp. increasing) order these Bachet fitness scores gives the *Bachet ranking*, respective *ordering*, result. Both results are stored in the attributes *self.bachetRanking* and *self.BachetOrder*. 
+
+    >>> from outrankingDigraphs import RandomBipolarOutrankingDigraph
+    >>> g = RandomBipolarOutrankingDigraph(seed=1)
+    >>> g
+     *------- Object instance description ------*
+     Instance class       : RandomBipolarOutrankingDigraph
+     Instance name        : rel_randomperftab
+     Actions              : 7
+     Criteria             : 7
+     Size                 : 23
+     Determinateness (%)  : 74.56
+     Valuation domain     : [-1.00;1.00]
+    >>> from linearOrders import BachetRanking
+    >>> ba = BachetRanking(g)
+    >>> ba.bachetRanking
+     ['a5', 'a7', 'a4', 'a1', 'a2', 'a6', 'a3']
+    >>> ba.showScores()
+     Bachet decreasing scores
+     action : score
+       a5   : 2114
+       a7   : 1608
+       a4   : 1383
+       a1   : 115
+       a2   : 12
+       a6   : -317
+       a3   : -1775
+    >>> corr = g.computeRankingCorrelation(ba.bachetRanking)
+    >>> g.showCorrelation(corr)
+     Correlation indexes:
+      Crisp ordinal correlation  : +0.885
+      Epistemic determination    :  0.491
+      Bipolar-valued equivalence : +0.435
+    >>> g.showRankingConsensusQuality(ba.bachetRanking)
+     Consensus quality of ranking:
+      ['a5', 'a7', 'a4', 'a1', 'a2', 'a6', 'a3']
+     criterion (weight): correlation
+     -------------------------------
+      g1 (0.211): +0.643
+      g6 (0.263): +0.476
+      g7 (0.079): +0.381
+      g5 (0.053): +0.333
+      g2 (0.211): +0.238
+      g3 (0.053): +0.143
+      g4 (0.132): -0.238
+     Summary:
+      Weighted mean marginal correlation (a): +0.335
+      Standard deviation (b)                : +0.269
+      Ranking fairness (a)-(b)              : +0.065   
+
+    .. note:: The Bachet ranking rule is, like the Copeland and the NetFlows rules, *invariant* under the *codual* transform. The Bachet ranking rule is furthermore, like the Copeland rule, also *Condorcet consistent*, i.e. when the outranking digraph models a linear relation, its Bachet ranking result will be consistent with this linear outranking relation.
+    
+    """
+    def __init__(self,other,CoDual=False,actionsList=None,
+                 Comments=False,Debug=False):
+        """
+        constructor for generating a linear order
+        from a given other digraph following
+        the Bachet ordering rule
+        """
+
+        #from copy import deepcopy
+        from collections import OrderedDict
+        from time import time
+        from operator import itemgetter
+        import arithmetics as ar
+        from copy import deepcopy
+        if Debug:
+            Comments=True
+        #timings
+        tt = time()
+        runTimes = OrderedDict()
+        # prepare local variables
+        if CoDual:
+            otherCoDual = CoDualDigraph(other)
+            otherRelation = deepcopy(otherCoDual.relation)
+            if Debug:
+                otherCoDual.showRelationTable()
+                print(otherCoDual.valuationdomain)
+        else:
+            otherRelation = deepcopy(other.relation)
+        n = len(other.actions)
+        if actionsList is None:
+            #actions = [x for x in reversed(other.actions)]
+            actions = [x for x in other.actions]
+        else:
+            actions = actionsList
+        gamma = other.gamma
+        selfRelation = {}
+        Min = Decimal('-1')
+        Med = Decimal('0')
+        Max = Decimal('1')
+        valuationdomain = {'min': Min,\
+                           'med': Med,\
+                           'max': Max,
+                           'hasIntegerValuation':True}
+        
+        runTimes['prepareLocals'] = time()-tt
+        
+        # compute net flows
+        tnf = time()
+        incBachetScores = []
+        decBachetScores = []
+        # with Condorcet Digraph valuation
+        c = PolarisedDigraph(other,level=other.valuationdomain['med'],\
+                         StrictCut=True,KeepValues=False)
+        if Debug:
+            print(c)
+        c.recodeValuation(ndigits=0)
+        cRelation = c.relation
+        for x in actions:
+            vecx = [int(cRelation[x][y]) for y in actions]
+            vecy = [int(cRelation[y][x]) for y in actions]
+            if Debug:
+                print(vecx,vecy)
+            bx = ar.BachetNumber(vector=vecx)
+            by = ar.BachetNumber(vector=vecy)
+            bScore = bx + (-by)
+            #bScore = bx + by
+            incBachetScores.append((bScore.value(),x))
+            decBachetScores.append((-bScore.value(),x))
+        # reversed sorting with keeping the actions initial ordering
+        # in case of ties
+        if Debug:
+            print(incBachetScores,decBachetScores)
+        incBachetScores.sort(key=itemgetter(0))
+        decBachetScores.sort(key=itemgetter(0))
+        decBachetScores = [(-x[0],x[1]) for x in decBachetScores]
+        self.decBachetScores = decBachetScores
+        self.incBachetScores = incBachetScores
+        if Debug:
+            print(incBachetScores,decBachetScores)
+    
+        if Comments:
+            print('Bachet decreasing scores')
+            for x in decBachetScores:
+                print( '%s : %d' %( x[1],x[0] ) )
+##            print('Bachet increasing scores')
+##            for x in incBachetScores:
+##                print( '%s : %d' %( x[1],x[0] ) )
+
+        bachetRanking = [x[1] for x in decBachetScores]
+        self.bachetRanking = bachetRanking
+        bachetOrder = [x[1] for x in incBachetScores]
+        self.bachetOrder = bachetOrder
+        if Comments:
+            print('Bachet Ranking:')
+            print(bachetRanking)
+            
+        runTimes['bachet'] = time() - tnf
+
+        # init relation
+        tr = time()
+        actionsList = [x for x in actions]
+        relation = {}
+        for x in actionsList:
+            xi = bachetRanking.index(x)
+            relation[x] = {}
+            #print(x,xi)
+            for y in actionsList:
+                yj = bachetRanking.index(y)
+                #print(x,xi,y,yj,max(Med,cRelation[x][y]) )
+                if xi < yj:                    
+                    relation[x][y] = Max
+                elif xi == yj:
+                    relation[x][y] = Med
+                else:
+                    relation[x][y] = Min
+                #print(x,xi,y,yj,relation[x][y] )
+        runTimes['relation'] = time() - tr
+        
+        # store attributes
+        self.name = other.name + '_ranked'        
+        self.actions = deepcopy(other.actions)
+        self.order = n
+        self.valuationdomain = valuationdomain
+        self.relation = deepcopy(relation)
+        self.gamma = self.gammaSets()
+        self.notGamma = self.notGammaSets()
+        runTimes['totalTime'] = time() - tt
+        self.runTimes = runTimes
+
+    def showScores(self,direction='descending'):
+        print('Bachet scores in %s order' % direction)
+        print('action \t score')
+        if direction == 'descending':
+            for x in self.decBachetScores:
+                print('%s \t %.2f' %(x[1],x[0]))
+        else:
+            for x in self.incBachetScores:
+                print('%s \t %.2f' %(x[1],x[0]))
+         
+class BachetOrder(BachetRanking):
+    """
+    Dummy for BachetRanking class
+    """
+
+#-------------
 class CopelandRanking(LinearOrder):
     """
-    instantiates the Copeland Ranking and Order from
+    Instantiates the Copeland Ranking and Order from
     a given bipolar-valued Digraph instance *other*.
 
     When *Gamma* == *True*, the Copeland scores for each action *x* 
@@ -1760,60 +1967,51 @@ if __name__ == "__main__":
     print('*-------- Testing class and methods -------')
 
     Threading = False
-    seed = random.randint(1,1000)
-##    t = CircularPerformanceTableau()
-    #t.showHTMLPerformanceHeatmap(Correlations=True,colorLevels=5)
-    #t = PerformanceTableau('testLin')
-    t = RandomPerformanceTableau(numberOfActions=5,seed=450)
-    g = BipolarOutrankingDigraph(t)
-
-    ke = KemenyRanking(g)
-    ke.showHTMLRelationHeatmap(actionsList=ke.kemenyRanking)
-
-    kev = KemenyRanking(g,Valued=True)
-    kev.showHTMLRelationHeatmap(actionsList=ke.kemenyRanking)
-
-##    ko = KohlerRanking(g,Valued=True,Comments=True)
-##    ko.showHTMLRelationHeatmap(rankingRule='Kohler')
-
-##    nf = NetFlowsRanking(g,Valued=True)
-##    nf.showHTMLRelationHeatmap(rankingRule='NetFlows')
-##
-##    nfo = NetFlowsOrder(g,Valued=True)
-##    nfo.showHTMLRelationHeatmap(rankingRule='NetFlows')
-
-##    cop = CopelandRanking(g,Valued=True)
-##    cop.showHTMLRelationHeatmap()
-##
-##    copo = CopelandOrder(g,Valued=True)
-##    copo.showHTMLRelationHeatmap()
+    res = open('testReversedActions4.csv','w')
+    res.write('"seed","ba1","cop","ba2","nf"\n')
+    sampleSize = 1
+    #t = Random3ObjectivesPerformanceTableau(numberOfActions=10,seed=1)
+    for sample in range(sampleSize):
+        print(sample)
+        seed = random.randint(1,1000000)
+        #seed = 796
+    ##    t = CircularPerformanceTableau()
+        #t.showHTMLPerformanceHeatmap(Correlations=True,colorLevels=5)
+        #t = PerformanceTableau('testLin')
+        t = Random3ObjectivesPerformanceTableau(numberOfActions=50,seed=seed)
+        g = BipolarOutrankingDigraph(t)
+        revba1 = [x for x in reversed(g.actions)]
+        ba1 = BachetRanking(g,CoDual=True,
+                            Comments=False,
+                            actionsList=revba1,
+                            )
+        #print(ba1.bachetRanking)
+        corrba1 = g.computeRankingCorrelation(ba1.bachetRanking)
+        cop = CopelandRanking(g,Comments=False)
+        #print(cop.copelandRanking)
+        corrcop = g.computeRankingCorrelation(cop.copelandRanking)
+        #print(cop.copelandRanking)
+        randomActions = [x for x in g.actions]
+        #print(randomActions)
+        random.shuffle(randomActions)
+        #revba1 = [x for x in reversed(ba1.bachetRanking)]
+        revba2 = [x for x in reversed(g.actions)]
+        #print(randomActions)
+        #print(revba1)
+        ba2 = BachetRanking(g,Comments=False,
+                            CoDual=True,
+                            actionsList=randomActions)
+        #print(ba2.bachetRanking)
+        corrba2 = g.computeRankingCorrelation(ba2.bachetRanking)
+        nf = NetFlowsRanking(g)
+        corrnf = g.computeRankingCorrelation(nf.netFlowsRanking)
+        res.write('%d,%.4f,%.4f,%.4f,%.4f\n' % (seed,corrba1['correlation'],
+                                           corrcop['correlation'],
+                max(corrba1['correlation'],corrba2['correlation']),
+                                        corrnf['correlation']) )
+    res.close()
+        
     
-##    #g.showHTMLRelationTable()
-##    rp = RankedPairsRanking(g,Dual=False,Debug=False)
-##    #rp.showNeighborhoods() print(rp.rankedPairsRanking)
-##    print(g.computeRankingCorrelation(rp.rankedPairsRanking))
-##    print(rp.rankedPairsOrder)
-##    print(g.computeOrderCorrelation(rp.rankedPairsOrder)) rpd =
-##    RankedPairsRanking(g,Dual=True,Debug=False) #rp.showNeighborhoods()
-##    print(rpd.rankedPairsRanking)
-##    print(g.computeRankingCorrelation(rpd.rankedPairsRanking))
-##    print(rpd.rankedPairsOrder)
-##    print(g.computeOrderCorrelation(rpd.rankedPairsOrder))
-    
-##    print('*-------- Testing MedianRanking class -------')
-##    cop = CopelandRanking(g,Comments=True)
-##    nf = NetFlowsRanking(g,Comments=True)
-##    print('==>> Principal ordering:')
-##    po = PrincipalOrder(g,Colwise=True)
-##    print(po.principalOrder)
-##    print(g.computeOrderCorrelation(po.principalOrder))
-##    print(po.principalRanking)
-##    print(g.computeRankingCorrelation(po.principalRanking))
-##    por = PrincipalOrder(g,Colwise=False)
-##    print(por.principalOrder)
-##    print(g.computeOrderCorrelation(por.principalOrder))
-##    print(por.principalRanking)
-##    print(g.computeRankingCorrelation(por.principalRanking))
      
     print('*------------------*')
     print('If you see this line all tests were passed successfully :-)')
