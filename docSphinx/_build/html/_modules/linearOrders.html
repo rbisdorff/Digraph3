@@ -1382,7 +1382,7 @@
 
 <span class="sd">    Taking now the sum *rbx + (-cbx)* of both credibilities gives us per action *x* a Bachet fitness score of the statement that *x* may be *first-ranked*. Sorting in decreasing (resp. increasing) order these Bachet fitness scores gives the *Bachet ranking*, respective *ordering*, result. Both results are stored in the *self.bachetRanking* resp. *self.bachetOrder* attribute. </span>
 
-<span class="sd">    The Bachet ranking rule is, like the Copeland and the NetFlows rules, *invariant* under the *codual* transform. The Bachet ranking rule is furthermore, like the Copeland rule, also *Condorcet consistent*, i.e. when the outranking digraph models a linear relation, its Bachet ranking result will be consistent with this linear outranking relation.</span>
+<span class="sd">    Like the Copeland and the NetFlows rules, the Bachet ranking rule is *invariant* under the *codual* transform. The Bachet rule is furthermore, like the Copeland rule, also *Condorcet consistent*, i.e. when the outranking digraph models a linear relation, its Bachet ranking result will be consistent with this linear outranking relation.</span>
 
 <span class="sd">    &gt;&gt;&gt; from outrankingDigraphs import RandomBipolarOutrankingDigraph</span>
 <span class="sd">    &gt;&gt;&gt; g = RandomBipolarOutrankingDigraph(seed=1)</span>
@@ -1431,13 +1431,13 @@
 
 <span class="sd">    .. note::</span>
 
-<span class="sd">       Mind that the Bachet numbering is a positional {-1,0,1} numeral system that is isomorphic to the {0,1,2} base 3 numeral system. A Bachet ranking result is hence depending on the very ordering of the rows and columns of the *other.relation* attribute. It is therefore recommended to compute a first Bachet ranking result with the given order of the *other.actions* atribute and a second one with the reversed order. Choose eventually the best qualified ranking result. In our example session above, it is the first ranking result that is sligthly better qualified (0.8852 vs 0.8801). </span>
+<span class="sd">       Mind that the Bachet numbering system is a positional {-1,0,1} numeral system that is isomorphic to the {0,1,2} base 3 numeral system. A Bachet ranking result is therefore depending on the very ordering of the rows and columns of the *other.relation* attribute. It is hence recommended to compute with the *Optimal=True* parameter setting which computes a first Bachet ranking result with the given order of the *other.actions* atribute and a second one with the reversed order. The best qualified of both ranking results is eventually chosen. In our example session above, it is the first ranking result that appears sligthly better correlated with the given outranking relation (0.8852 vs 0.8801). </span>
 
-<span class="sd">       Mind also that the integer value of a sum of Bachet numbers gets quickly huge with the length of the given row and column chracteristic vectors. The digraph *orderLimit* parameter is set by default to 50, allowing to tackle integer values in the range +- 358948993845926294385124. This limit may be adjusted when there is need to tackle digraphs of larger order. </span>
+<span class="sd">       Mind also that the integer value of a sum of Bachet numbers gets quickly huge with the length of the given row and column chracteristic vectors. The digraph *orderLimit* parameter is set by default to 50, allowing to tackle integer values in the huge integer range +-358948993845926294385124. When there is need to tackle digraphs of larger order, this *orderLimit* parameter may be adjusted. </span>
 <span class="sd">    </span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">other</span><span class="p">,</span><span class="n">CoDual</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span><span class="n">actionsList</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
-                 <span class="n">orderLimit</span><span class="o">=</span><span class="mi">50</span><span class="p">,</span>
+                 <span class="n">orderLimit</span><span class="o">=</span><span class="mi">50</span><span class="p">,</span><span class="n">Optimal</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
                  <span class="n">Comments</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span><span class="n">Debug</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        constructor for generating a linear order</span>
@@ -1492,6 +1492,10 @@
         <span class="n">tnf</span> <span class="o">=</span> <span class="n">time</span><span class="p">()</span>
         <span class="n">incBachetScores</span> <span class="o">=</span> <span class="p">[]</span>
         <span class="n">decBachetScores</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="k">if</span> <span class="n">Optimal</span><span class="p">:</span>
+            <span class="n">incBachetRevScores</span> <span class="o">=</span> <span class="p">[]</span>
+            <span class="n">decBachetRevScores</span> <span class="o">=</span> <span class="p">[]</span>
+            
         <span class="c1"># with Condorcet Digraph valuation</span>
         <span class="n">c</span> <span class="o">=</span> <span class="n">PolarisedDigraph</span><span class="p">(</span><span class="n">other</span><span class="p">,</span><span class="n">level</span><span class="o">=</span><span class="n">other</span><span class="o">.</span><span class="n">valuationdomain</span><span class="p">[</span><span class="s1">&#39;med&#39;</span><span class="p">],</span>\
                          <span class="n">StrictCut</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span><span class="n">KeepValues</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
@@ -1510,29 +1514,64 @@
             <span class="c1">#bScore = bx + by</span>
             <span class="n">incBachetScores</span><span class="o">.</span><span class="n">append</span><span class="p">((</span><span class="n">bScore</span><span class="o">.</span><span class="n">value</span><span class="p">(),</span><span class="n">x</span><span class="p">))</span>
             <span class="n">decBachetScores</span><span class="o">.</span><span class="n">append</span><span class="p">((</span><span class="o">-</span><span class="n">bScore</span><span class="o">.</span><span class="n">value</span><span class="p">(),</span><span class="n">x</span><span class="p">))</span>
+            <span class="k">if</span> <span class="n">Optimal</span><span class="p">:</span>
+                <span class="n">bRevScore</span> <span class="o">=</span> <span class="n">bx</span><span class="o">.</span><span class="n">reverse</span><span class="p">()</span> <span class="o">+</span> <span class="p">(</span><span class="o">-</span><span class="n">by</span><span class="o">.</span><span class="n">reverse</span><span class="p">())</span>
+                <span class="n">incBachetRevScores</span><span class="o">.</span><span class="n">append</span><span class="p">((</span><span class="n">bRevScore</span><span class="o">.</span><span class="n">value</span><span class="p">(),</span><span class="n">x</span><span class="p">))</span>
+                <span class="n">decBachetRevScores</span><span class="o">.</span><span class="n">append</span><span class="p">((</span><span class="o">-</span><span class="n">bRevScore</span><span class="o">.</span><span class="n">value</span><span class="p">(),</span><span class="n">x</span><span class="p">))</span>
         <span class="c1"># reversed sorting with keeping the actions initial ordering</span>
         <span class="c1"># in case of ties</span>
         <span class="k">if</span> <span class="n">Debug</span><span class="p">:</span>
             <span class="nb">print</span><span class="p">(</span><span class="n">incBachetScores</span><span class="p">,</span><span class="n">decBachetScores</span><span class="p">)</span>
         <span class="n">incBachetScores</span><span class="o">.</span><span class="n">sort</span><span class="p">(</span><span class="n">key</span><span class="o">=</span><span class="n">itemgetter</span><span class="p">(</span><span class="mi">0</span><span class="p">))</span>
         <span class="n">decBachetScores</span><span class="o">.</span><span class="n">sort</span><span class="p">(</span><span class="n">key</span><span class="o">=</span><span class="n">itemgetter</span><span class="p">(</span><span class="mi">0</span><span class="p">))</span>
+        <span class="k">if</span> <span class="n">Optimal</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">Debug</span><span class="p">:</span>
+                <span class="nb">print</span><span class="p">(</span><span class="n">incBachetRevScores</span><span class="p">,</span><span class="n">decBachetRevScores</span><span class="p">)</span>
+            <span class="n">incBachetRevScores</span><span class="o">.</span><span class="n">sort</span><span class="p">(</span><span class="n">key</span><span class="o">=</span><span class="n">itemgetter</span><span class="p">(</span><span class="mi">0</span><span class="p">))</span>
+            <span class="n">decBachetRevScores</span><span class="o">.</span><span class="n">sort</span><span class="p">(</span><span class="n">key</span><span class="o">=</span><span class="n">itemgetter</span><span class="p">(</span><span class="mi">0</span><span class="p">))</span>
+            
         <span class="n">decBachetScores</span> <span class="o">=</span> <span class="p">[(</span><span class="o">-</span><span class="n">x</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span><span class="n">x</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">decBachetScores</span><span class="p">]</span>
+        <span class="n">incBachetScores</span> <span class="o">=</span> <span class="p">[(</span><span class="o">-</span><span class="n">x</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span><span class="n">x</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">incBachetScores</span><span class="p">]</span>               
         <span class="bp">self</span><span class="o">.</span><span class="n">decBachetScores</span> <span class="o">=</span> <span class="n">decBachetScores</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">incBachetScores</span> <span class="o">=</span> <span class="n">incBachetScores</span>
         <span class="k">if</span> <span class="n">Debug</span><span class="p">:</span>
             <span class="nb">print</span><span class="p">(</span><span class="n">incBachetScores</span><span class="p">,</span><span class="n">decBachetScores</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">Optimal</span><span class="p">:</span>
+            <span class="n">decBachetRevScores</span> <span class="o">=</span> <span class="p">[(</span><span class="o">-</span><span class="n">x</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span><span class="n">x</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">decBachetRevScores</span><span class="p">]</span>
+            <span class="n">incBachetRevScores</span> <span class="o">=</span> <span class="p">[(</span><span class="o">-</span><span class="n">x</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span><span class="n">x</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">incBachetRevScores</span><span class="p">]</span>               
+            <span class="bp">self</span><span class="o">.</span><span class="n">decBachetRevScores</span> <span class="o">=</span> <span class="n">decBachetRevScores</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">incBachetRevScores</span> <span class="o">=</span> <span class="n">incBachetRevScores</span>
+            <span class="k">if</span> <span class="n">Debug</span><span class="p">:</span>
+                <span class="nb">print</span><span class="p">(</span><span class="n">incBachetRevScores</span><span class="p">,</span><span class="n">decBachetRevScores</span><span class="p">)</span>
+            
     
         <span class="k">if</span> <span class="n">Comments</span><span class="p">:</span>
             <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Bachet decreasing scores&#39;</span><span class="p">)</span>
             <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">decBachetScores</span><span class="p">:</span>
                 <span class="nb">print</span><span class="p">(</span> <span class="s1">&#39;</span><span class="si">%s</span><span class="s1"> : </span><span class="si">%d</span><span class="s1">&#39;</span> <span class="o">%</span><span class="p">(</span> <span class="n">x</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span><span class="n">x</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="p">)</span> <span class="p">)</span>
-<span class="c1">##            print(&#39;Bachet increasing scores&#39;)</span>
-<span class="c1">##            for x in incBachetScores:</span>
-<span class="c1">##                print( &#39;%s : %d&#39; %( x[1],x[0] ) )</span>
+            <span class="k">if</span> <span class="n">Optimal</span><span class="p">:</span>
+                <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;reversed Bachet decreasing scores&#39;</span><span class="p">)</span>
+                <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">decBachetRevScores</span><span class="p">:</span>
+                    <span class="nb">print</span><span class="p">(</span> <span class="s1">&#39;</span><span class="si">%s</span><span class="s1"> : </span><span class="si">%d</span><span class="s1">&#39;</span> <span class="o">%</span><span class="p">(</span> <span class="n">x</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span><span class="n">x</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="p">)</span> <span class="p">)</span>
+                
 
         <span class="n">bachetRanking</span> <span class="o">=</span> <span class="p">[</span><span class="n">x</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">decBachetScores</span><span class="p">]</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">bachetRanking</span> <span class="o">=</span> <span class="n">bachetRanking</span>
         <span class="n">bachetOrder</span> <span class="o">=</span> <span class="p">[</span><span class="n">x</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">incBachetScores</span><span class="p">]</span>
+        <span class="k">if</span> <span class="n">Debug</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="n">bachetRanking</span><span class="p">,</span><span class="n">bachetOrder</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">Optimal</span><span class="p">:</span>
+            <span class="n">bachetRevRanking</span> <span class="o">=</span>  <span class="p">[</span><span class="n">x</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">decBachetRevScores</span><span class="p">]</span>
+            <span class="n">bachetRevOrder</span> <span class="o">=</span> <span class="p">[</span><span class="n">x</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">incBachetRevScores</span><span class="p">]</span>
+            <span class="n">corr</span> <span class="o">=</span> <span class="n">other</span><span class="o">.</span><span class="n">computeRankingCorrelation</span><span class="p">(</span><span class="n">bachetRanking</span><span class="p">)</span>
+            <span class="n">corrRev</span> <span class="o">=</span> <span class="n">other</span><span class="o">.</span><span class="n">computeRankingCorrelation</span><span class="p">(</span><span class="n">bachetRevRanking</span><span class="p">)</span>
+            <span class="k">if</span> <span class="n">corrRev</span><span class="p">[</span><span class="s1">&#39;correlation&#39;</span><span class="p">]</span> <span class="o">&gt;</span> <span class="n">corr</span><span class="p">[</span><span class="s1">&#39;correlation&#39;</span><span class="p">]:</span>
+                <span class="n">bachetRanking</span> <span class="o">=</span> <span class="n">bachetRevRanking</span>
+                <span class="n">bachetOrder</span> <span class="o">=</span> <span class="n">bachetRevOrder</span>
+            <span class="c1">#else:</span>
+            <span class="c1">#    bachetRanking = [x[1] for x in decBachetScores]</span>
+            <span class="c1">#    bachetOrder = [x[1] for x in incBachetScores]</span>
+                            
+        <span class="bp">self</span><span class="o">.</span><span class="n">bachetRanking</span> <span class="o">=</span> <span class="n">bachetRanking</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">bachetOrder</span> <span class="o">=</span> <span class="n">bachetOrder</span>
         <span class="k">if</span> <span class="n">Comments</span><span class="p">:</span>
             <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Bachet Ranking:&#39;</span><span class="p">)</span>
@@ -1561,7 +1600,10 @@
         <span class="n">runTimes</span><span class="p">[</span><span class="s1">&#39;relation&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">time</span><span class="p">()</span> <span class="o">-</span> <span class="n">tr</span>
         
         <span class="c1"># store attributes</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="n">other</span><span class="o">.</span><span class="n">name</span> <span class="o">+</span> <span class="s1">&#39;_ranked&#39;</span>        
+        <span class="k">if</span> <span class="n">Optimal</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="n">other</span><span class="o">.</span><span class="n">name</span> <span class="o">+</span> <span class="s1">&#39;_optimal_ranked&#39;</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="n">other</span><span class="o">.</span><span class="n">name</span> <span class="o">+</span> <span class="s1">&#39;_ranked&#39;</span>         
         <span class="bp">self</span><span class="o">.</span><span class="n">actions</span> <span class="o">=</span> <span class="n">actions</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">order</span> <span class="o">=</span> <span class="n">n</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">valuationdomain</span> <span class="o">=</span> <span class="n">valuationdomain</span>
@@ -2160,18 +2202,18 @@
     <span class="k">for</span> <span class="n">sample</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">sampleSize</span><span class="p">):</span>
         <span class="nb">print</span><span class="p">(</span><span class="n">sample</span><span class="p">)</span>
         <span class="n">seed</span> <span class="o">=</span> <span class="n">random</span><span class="o">.</span><span class="n">randint</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">1000000</span><span class="p">)</span>
-        <span class="c1">#seed = 796</span>
+        <span class="n">seed</span> <span class="o">=</span> <span class="mi">1</span>
     <span class="c1">##    t = CircularPerformanceTableau()</span>
         <span class="c1">#t.showHTMLPerformanceHeatmap(Correlations=True,colorLevels=5)</span>
         <span class="c1">#t = PerformanceTableau(&#39;testLin&#39;)</span>
-        <span class="n">t</span> <span class="o">=</span> <span class="n">Random3ObjectivesPerformanceTableau</span><span class="p">(</span><span class="n">numberOfActions</span><span class="o">=</span><span class="mi">100</span><span class="p">,</span><span class="n">seed</span><span class="o">=</span><span class="n">seed</span><span class="p">)</span>
+        <span class="n">t</span> <span class="o">=</span> <span class="n">Random3ObjectivesPerformanceTableau</span><span class="p">(</span><span class="n">numberOfActions</span><span class="o">=</span><span class="mi">7</span><span class="p">,</span><span class="n">seed</span><span class="o">=</span><span class="n">seed</span><span class="p">)</span>
         <span class="n">g</span> <span class="o">=</span> <span class="n">BipolarOutrankingDigraph</span><span class="p">(</span><span class="n">t</span><span class="p">)</span>
         <span class="n">revba1</span> <span class="o">=</span> <span class="p">[</span><span class="n">x</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="nb">reversed</span><span class="p">(</span><span class="n">g</span><span class="o">.</span><span class="n">actions</span><span class="p">)]</span>
-        <span class="n">ba1</span> <span class="o">=</span> <span class="n">BachetRanking</span><span class="p">(</span><span class="n">g</span><span class="p">,</span><span class="n">CoDual</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
-                            <span class="n">Comments</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+        <span class="n">ba1</span> <span class="o">=</span> <span class="n">BachetRanking</span><span class="p">(</span><span class="n">g</span><span class="p">,</span><span class="n">CoDual</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span><span class="n">Optimal</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+                            <span class="n">Comments</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span><span class="n">Debug</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
                             <span class="n">actionsList</span><span class="o">=</span><span class="n">g</span><span class="o">.</span><span class="n">actions</span><span class="p">,</span>
                             <span class="p">)</span>
-        <span class="c1">#print(ba1.bachetRanking)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="n">ba1</span><span class="p">)</span>
         <span class="n">corrba1</span> <span class="o">=</span> <span class="n">g</span><span class="o">.</span><span class="n">computeRankingCorrelation</span><span class="p">(</span><span class="n">ba1</span><span class="o">.</span><span class="n">bachetRanking</span><span class="p">)</span>
         <span class="n">cop</span> <span class="o">=</span> <span class="n">CopelandRanking</span><span class="p">(</span><span class="n">g</span><span class="p">,</span><span class="n">Comments</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
         <span class="c1">#print(cop.copelandRanking)</span>
@@ -2187,8 +2229,8 @@
         <span class="c1">#print(randomActions)</span>
         <span class="c1">#print(revba1)</span>
         <span class="n">ba2</span> <span class="o">=</span> <span class="n">BachetRanking</span><span class="p">(</span><span class="n">g</span><span class="p">,</span><span class="n">Comments</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
-                            <span class="n">CoDual</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
-                            <span class="n">actionsList</span><span class="o">=</span><span class="n">cop</span><span class="o">.</span><span class="n">copelandRanking</span><span class="p">)</span>
+                            <span class="n">CoDual</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span><span class="n">Optimal</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+                            <span class="n">actionsList</span><span class="o">=</span><span class="n">g</span><span class="o">.</span><span class="n">actions</span><span class="p">)</span>
         <span class="c1">#print(ba2.bachetRanking)</span>
         <span class="n">corrba2</span> <span class="o">=</span> <span class="n">g</span><span class="o">.</span><span class="n">computeRankingCorrelation</span><span class="p">(</span><span class="n">ba2</span><span class="o">.</span><span class="n">bachetRanking</span><span class="p">)</span>
         <span class="n">res</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s1">&#39;</span><span class="si">%d</span><span class="s1">,</span><span class="si">%.4f</span><span class="s1">,</span><span class="si">%.4f</span><span class="s1">,</span><span class="si">%.4f</span><span class="s1">,</span><span class="si">%.4f</span><span class="se">\n</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="n">seed</span><span class="p">,</span><span class="n">corrba1</span><span class="p">[</span><span class="s1">&#39;correlation&#39;</span><span class="p">],</span>
