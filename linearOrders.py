@@ -1312,9 +1312,11 @@ class BachetRanking(LinearOrder):
         n = len(other.actions)
         if actionsList is None:
             #actions = [x for x in reversed(other.actions)]
-            actions = [x for x in other.actions]
+            actions = deepcopy(other.actions)
         else:
-            actions = actionsList
+            actions = OrderedDict()
+            for x in actionsList:
+                actions[x] = deepcopy(other.actions[x])
         gamma = other.gamma
         selfRelation = {}
         Min = Decimal('-1')
@@ -1401,7 +1403,7 @@ class BachetRanking(LinearOrder):
         
         # store attributes
         self.name = other.name + '_ranked'        
-        self.actions = deepcopy(other.actions)
+        self.actions = actions
         self.order = n
         self.valuationdomain = valuationdomain
         self.relation = deepcopy(relation)
@@ -1967,9 +1969,9 @@ if __name__ == "__main__":
     print('*-------- Testing class and methods -------')
 
     Threading = False
-    res = open('testReversedActions4.csv','w')
+    res = open('testReversedActions2.csv','w')
     res.write('"seed","ba1","cop","ba2","nf"\n')
-    sampleSize = 1
+    sampleSize = 100
     #t = Random3ObjectivesPerformanceTableau(numberOfActions=10,seed=1)
     for sample in range(sampleSize):
         print(sample)
@@ -1978,12 +1980,12 @@ if __name__ == "__main__":
     ##    t = CircularPerformanceTableau()
         #t.showHTMLPerformanceHeatmap(Correlations=True,colorLevels=5)
         #t = PerformanceTableau('testLin')
-        t = Random3ObjectivesPerformanceTableau(numberOfActions=50,seed=seed)
+        t = Random3ObjectivesPerformanceTableau(numberOfActions=20,seed=seed)
         g = BipolarOutrankingDigraph(t)
         revba1 = [x for x in reversed(g.actions)]
         ba1 = BachetRanking(g,CoDual=True,
                             Comments=False,
-                            actionsList=revba1,
+                            actionsList=g.actions,
                             )
         #print(ba1.bachetRanking)
         corrba1 = g.computeRankingCorrelation(ba1.bachetRanking)
@@ -2000,14 +2002,14 @@ if __name__ == "__main__":
         #print(revba1)
         ba2 = BachetRanking(g,Comments=False,
                             CoDual=True,
-                            actionsList=randomActions)
+                            actionsList=revba2)
         #print(ba2.bachetRanking)
         corrba2 = g.computeRankingCorrelation(ba2.bachetRanking)
         nf = NetFlowsRanking(g)
         corrnf = g.computeRankingCorrelation(nf.netFlowsRanking)
         res.write('%d,%.4f,%.4f,%.4f,%.4f\n' % (seed,corrba1['correlation'],
                                            corrcop['correlation'],
-                max(corrba1['correlation'],corrba2['correlation']),
+                                        corrba2['correlation'],
                                         corrnf['correlation']) )
     res.close()
         
