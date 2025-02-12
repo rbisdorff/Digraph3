@@ -1221,14 +1221,14 @@ class _OutFlowsOrder(LinearOrder):
 #------------
 class BachetRanking(LinearOrder):
     """
-    Instantiates the Bachet Ranking and Order from
+    Instantiates the Bachet Ranking and Ordering from
     a given bipolar-valued Digraph instance *other*.
 
-    For each action *x* in *other.actions*, the polarised integer row vector of the *other.relation* attribute defines a *Bachet vector* which correponds to a significance weight *rbx* of its **outrankingness credibility**.
+    For each action *x* in *other.actions*, the polarised integer row vector of the *other.relation* attribute defines a *Bachet vector* which correponds to a significance weight *rbx* of its **outrankingness credibility**. Similarly, the corresponding polarised integer column vector in the *other.relation* attribute defines a *Bachet vector* whose negation correponds to a significance weight *-cbx* of its **not outrankedness credibility**.
 
-    Similarly, the corresponding polarised integer column vector in the *other.relation* attribute defines a *Bachet vector* whose negation correponds to a significance weight *-cbx* of its **not outrankedness credibility**. Taking the sum *rbx + (-cbx)* of both credibilities gives us per action *x* a fitness score of the statement that *x* may be *first-ranked*.
+    Taking now the sum *rbx + (-cbx)* of both credibilities gives us per action *x* a Bachet fitness score of the statement that *x* may be *first-ranked*. Sorting in decreasing (resp. increasing) order these Bachet fitness scores gives the *Bachet ranking*, respective *ordering*, result. Both results are stored in the *self.bachetRanking* resp. *self.bachetOrder* attribute. 
 
-    Sorting in decreasing (resp. increasing) order these Bachet fitness scores gives the *Bachet ranking*, respective *ordering*, result. Both results are stored in the attributes *self.bachetRanking* and *self.BachetOrder*. 
+    The Bachet ranking rule is, like the Copeland and the NetFlows rules, *invariant* under the *codual* transform. The Bachet ranking rule is furthermore, like the Copeland rule, also *Condorcet consistent*, i.e. when the outranking digraph models a linear relation, its Bachet ranking result will be consistent with this linear outranking relation.
 
     >>> from outrankingDigraphs import RandomBipolarOutrankingDigraph
     >>> g = RandomBipolarOutrankingDigraph(seed=1)
@@ -1242,46 +1242,48 @@ class BachetRanking(LinearOrder):
      Determinateness (%)  : 74.56
      Valuation domain     : [-1.00;1.00]
     >>> from linearOrders import BachetRanking
-    >>> ba = BachetRanking(g)
-    >>> ba.bachetRanking
+    >>> actions = [x for x in g.actions]
+    >>> ba1 = BachetRanking(g,actionsList=actions)
+     action 	 score
+     a5 	 2114.00
+     a7 	 1608.00
+     a4 	 1383.00
+     a1 	 115.00
+     a2 	 12.00
+     a6 	 -317.00
+     a3 	 -1775.00
+    >>> revActions = [x for x in reversed(g.actions)] 
+    >>> ba2 = BachetRanking(g,actionsList=revActions)
+    >>> ba2.showScores()
+    Bachet scores in descending order
+     action 	 score
+     a5 	 1970.00
+     a4 	 511.00
+     a7 	 344.00
+     a2 	 36.00
+     a1 	 -1629.00
+     a6 	 -1677.00
+     a3 	 -1679.00
+    >>> ba1.bachetRanking
      ['a5', 'a7', 'a4', 'a1', 'a2', 'a6', 'a3']
-    >>> ba.showScores()
-     Bachet decreasing scores
-     action : score
-       a5   : 2114
-       a7   : 1608
-       a4   : 1383
-       a1   : 115
-       a2   : 12
-       a6   : -317
-       a3   : -1775
-    >>> corr = g.computeRankingCorrelation(ba.bachetRanking)
-    >>> g.showCorrelation(corr)
-     Correlation indexes:
-      Crisp ordinal correlation  : +0.885
-      Epistemic determination    :  0.491
-      Bipolar-valued equivalence : +0.435
-    >>> g.showRankingConsensusQuality(ba.bachetRanking)
-     Consensus quality of ranking:
-      ['a5', 'a7', 'a4', 'a1', 'a2', 'a6', 'a3']
-     criterion (weight): correlation
-     -------------------------------
-      g1 (0.211): +0.643
-      g6 (0.263): +0.476
-      g7 (0.079): +0.381
-      g5 (0.053): +0.333
-      g2 (0.211): +0.238
-      g3 (0.053): +0.143
-      g4 (0.132): -0.238
-     Summary:
-      Weighted mean marginal correlation (a): +0.335
-      Standard deviation (b)                : +0.269
-      Ranking fairness (a)-(b)              : +0.065   
+    >>> ba2.bachetRanking
+     ['a5', 'a4', 'a7', 'a2', 'a1', 'a6', 'a3']
+    >>> g.computeRankingCorrelation(ba1.bachetRanking)
+     {'correlation': 0.8852041063621471,
+      'determination': 0.4912238095238095}
+    >>> g.computeRankingCorrelation(ba2.bachetRanking)
+     {'correlation': 0.880095388582452,
+      'determination': 0.4912238095238095}
 
-    .. note:: The Bachet ranking rule is, like the Copeland and the NetFlows rules, *invariant* under the *codual* transform. The Bachet ranking rule is furthermore, like the Copeland rule, also *Condorcet consistent*, i.e. when the outranking digraph models a linear relation, its Bachet ranking result will be consistent with this linear outranking relation.
+    .. note::
+
+       Mind that the Bachet numbering is a positional {-1,0,1} numeral system that is isomorphic to the {0,1,2} base 3 numeral system. A Bachet ranking result is hence depending on the very ordering of the rows and columns of the *other.relation* attribute. It is therefore recommended to compute a first Bachet ranking result with the given order of the *other.actions* atribute and a second one with the reversed order. Choose eventually the best qualified ranking result. In our example session above, it is the first ranking result that is sligthly better qualified (0.8852 vs 0.8801). 
+
+       Mind also that the integer value of a sum of Bachet numbers gets quickly huge with the length of the given row and column chracteristic vectors. The digraph *orderLimit* parameter is set by default to 50, allowing to tackle integer values in the range +- 358948993845926294385124. This limit may be adjusted when there is need to tackle digraphs of larger order. 
     
     """
     def __init__(self,other,CoDual=False,actionsList=None,
+                 orderLimit=50,
                  Comments=False,Debug=False):
         """
         constructor for generating a linear order
@@ -1289,7 +1291,10 @@ class BachetRanking(LinearOrder):
         the Bachet ordering rule
         """
 
-        #from copy import deepcopy
+        # check orderLimit
+        if other.order > orderLimit:
+            print('!!! Error: the given digraph order %d is greater than the allowed orderLimit %d. ' % (other.order,orderLimit))
+            return None
         from collections import OrderedDict
         from time import time
         from operator import itemgetter
@@ -1969,9 +1974,9 @@ if __name__ == "__main__":
     print('*-------- Testing class and methods -------')
 
     Threading = False
-    res = open('testReversedActions2.csv','w')
+    res = open('testNfActions.csv','w')
     res.write('"seed","ba1","cop","ba2","nf"\n')
-    sampleSize = 100
+    sampleSize = 1
     #t = Random3ObjectivesPerformanceTableau(numberOfActions=10,seed=1)
     for sample in range(sampleSize):
         print(sample)
@@ -1980,7 +1985,7 @@ if __name__ == "__main__":
     ##    t = CircularPerformanceTableau()
         #t.showHTMLPerformanceHeatmap(Correlations=True,colorLevels=5)
         #t = PerformanceTableau('testLin')
-        t = Random3ObjectivesPerformanceTableau(numberOfActions=20,seed=seed)
+        t = Random3ObjectivesPerformanceTableau(numberOfActions=100,seed=seed)
         g = BipolarOutrankingDigraph(t)
         revba1 = [x for x in reversed(g.actions)]
         ba1 = BachetRanking(g,CoDual=True,
@@ -1993,6 +1998,8 @@ if __name__ == "__main__":
         #print(cop.copelandRanking)
         corrcop = g.computeRankingCorrelation(cop.copelandRanking)
         #print(cop.copelandRanking)
+        nf = NetFlowsRanking(g)
+        corrnf = g.computeRankingCorrelation(nf.netFlowsRanking)
         randomActions = [x for x in g.actions]
         #print(randomActions)
         random.shuffle(randomActions)
@@ -2002,11 +2009,9 @@ if __name__ == "__main__":
         #print(revba1)
         ba2 = BachetRanking(g,Comments=False,
                             CoDual=True,
-                            actionsList=revba2)
+                            actionsList=cop.copelandRanking)
         #print(ba2.bachetRanking)
         corrba2 = g.computeRankingCorrelation(ba2.bachetRanking)
-        nf = NetFlowsRanking(g)
-        corrnf = g.computeRankingCorrelation(nf.netFlowsRanking)
         res.write('%d,%.4f,%.4f,%.4f,%.4f\n' % (seed,corrba1['correlation'],
                                            corrcop['correlation'],
                                         corrba2['correlation'],

@@ -65,7 +65,6 @@ def testIteratedNetFlowsOrdering():
     info = IteratedNetFlowsRanking(g,CoDual=False,Debug=True)
     print(info.computeOrder())
 
-
 def testRandomLinearOrders():
     print("*==>> testing RandomLinearOrder Class ----*")
     g1 = RandomLinearOrder(numberOfActions=10,Debug=True)
@@ -159,3 +158,18 @@ def testRankingCorrelations():
     print(g.computeOrderCorrelation(por.principalOrder))
     print(por.principalRanking)
     print(g.computeRankingCorrelation(por.principalRanking))
+
+def testBachetRanking():
+    print("*==>> testing BachetRanking Class ----*")
+    from outrankingDigraphs import RandomBipolarOutrankingDigraph
+    g = RandomBipolarOutrankingDigraph(seed=1)
+    print(g)
+    from linearOrders import BachetRanking
+    actions = [x for x in g.actions]
+    ba1 = BachetRanking(g,actionsList=actions)
+    ba1.showScores()
+    revActions = [x for x in reversed(g.actions)] 
+    ba2 = BachetRanking(g,actionsList=revActions)
+    ba2.showScores()
+    print(g.computeRankingCorrelation(ba1.bachetRanking))
+    print(g.computeRankingCorrelation(ba2.bachetRanking))
