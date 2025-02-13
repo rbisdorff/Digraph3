@@ -1375,6 +1375,8 @@
 <a class="viewcode-back" href="../techDoc.html#linearOrders.BachetRanking">[docs]</a>
 <span class="k">class</span> <span class="nc">BachetRanking</span><span class="p">(</span><span class="n">LinearOrder</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    .. warning:: Still under development ! The ranking rule may fail to deliver convincing results due to its dependency on the given ordering of the decision actions in the *other.actions* attribute.</span>
+<span class="sd">    </span>
 <span class="sd">    Instantiates the Bachet Ranking and Ordering from</span>
 <span class="sd">    a given bipolar-valued Digraph instance *other*.</span>
 
@@ -1418,7 +1420,7 @@
 
 <span class="sd">       Mind that the Bachet numbering system is a positional {-1,0,1} numeral system that is isomorphic to the {0,1,2} base 3 numeral system. A Bachet ranking result is therefore depending on the very ordering of the rows and columns of the *other.relation* attribute. It is hence recommended (*BestQualified=True* setting by default) to compute a first Bachet ranking result with the given order of the *other.actions* atribute and a second one with the reversed order. The best qualified of both ranking results is eventually returned.</span>
 
-<span class="sd">       Mind also that the integer value range of Bachet numbers gets quickly huge with the length of the given row and column chracteristic vectors. The digraph *orderLimit* parameter is set by default to 50, allowing to tackle integer values in the huge integer range +-358948993845926294385124. When there is need to tackle digraphs of larger order, this *orderLimit* parameter may be adjusted. </span>
+<span class="sd">       Mind also that the integer value range of Bachet numbers gets quickly huge with the length of the given row and column chracteristic vectors. The digraph *orderLimit* parameter is therefore set by default to 50, allowing to tackle integer values in the huge integer range +-358948993845926294385124. When there is need to tackle digraphs of larger order, this *orderLimit* parameter may be adjusted. </span>
 <span class="sd">    </span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">other</span><span class="p">,</span><span class="n">CoDual</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span><span class="n">actionsList</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>

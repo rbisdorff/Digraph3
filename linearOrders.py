@@ -1221,6 +1221,8 @@ class _OutFlowsOrder(LinearOrder):
 #------------
 class BachetRanking(LinearOrder):
     """
+    .. warning:: Still under development ! The ranking rule may fail to deliver convincing results due to its dependency on the given ordering of the decision actions in the *other.actions* attribute.
+    
     Instantiates the Bachet Ranking and Ordering from
     a given bipolar-valued Digraph instance *other*.
 
@@ -1264,7 +1266,7 @@ class BachetRanking(LinearOrder):
 
        Mind that the Bachet numbering system is a positional {-1,0,1} numeral system that is isomorphic to the {0,1,2} base 3 numeral system. A Bachet ranking result is therefore depending on the very ordering of the rows and columns of the *other.relation* attribute. It is hence recommended (*BestQualified=True* setting by default) to compute a first Bachet ranking result with the given order of the *other.actions* atribute and a second one with the reversed order. The best qualified of both ranking results is eventually returned.
 
-       Mind also that the integer value range of Bachet numbers gets quickly huge with the length of the given row and column chracteristic vectors. The digraph *orderLimit* parameter is set by default to 50, allowing to tackle integer values in the huge integer range +-358948993845926294385124. When there is need to tackle digraphs of larger order, this *orderLimit* parameter may be adjusted. 
+       Mind also that the integer value range of Bachet numbers gets quickly huge with the length of the given row and column chracteristic vectors. The digraph *orderLimit* parameter is therefore set by default to 50, allowing to tackle integer values in the huge integer range +-358948993845926294385124. When there is need to tackle digraphs of larger order, this *orderLimit* parameter may be adjusted. 
     
     """
     def __init__(self,other,CoDual=False,actionsList=None,
