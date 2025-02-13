@@ -166,10 +166,11 @@ def testBachetRanking():
     print(g)
     from linearOrders import BachetRanking
     actions = [x for x in g.actions]
-    ba1 = BachetRanking(g,actionsList=actions)
-    ba1.showScores()
-    revActions = [x for x in reversed(g.actions)] 
-    ba2 = BachetRanking(g,actionsList=revActions)
+    ba1 = BachetRanking(g,BestQualified=True)
+    print(ba1)
+    ba1.showScores() 
+    ba2 = BachetRanking(g,BestQualified=False)
+    print(ba2)
     ba2.showScores()
     print(g.computeRankingCorrelation(ba1.bachetRanking))
     print(g.computeRankingCorrelation(ba2.bachetRanking))

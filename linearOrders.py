@@ -1243,18 +1243,8 @@ class BachetRanking(LinearOrder):
      Valuation domain     : [-1.00;1.00]
     >>> from linearOrders import BachetRanking
     >>> actions = [x for x in g.actions]
-    >>> ba1 = BachetRanking(g,actionsList=actions)
-     action 	 score
-     a5 	 2114.00
-     a7 	 1608.00
-     a4 	 1383.00
-     a1 	 115.00
-     a2 	 12.00
-     a6 	 -317.00
-     a3 	 -1775.00
-    >>> revActions = [x for x in reversed(g.actions)] 
-    >>> ba2 = BachetRanking(g,actionsList=revActions)
-    >>> ba2.showScores()
+    >>> ba1 = BachetRanking(g,actionsList=actions,BestQualified=True)
+    >>> ba1.showScores()
     Bachet scores in descending order
      action 	 score
      a5 	 1970.00
@@ -1265,25 +1255,21 @@ class BachetRanking(LinearOrder):
      a6 	 -1677.00
      a3 	 -1679.00
     >>> ba1.bachetRanking
-     ['a5', 'a7', 'a4', 'a1', 'a2', 'a6', 'a3']
-    >>> ba2.bachetRanking
      ['a5', 'a4', 'a7', 'a2', 'a1', 'a6', 'a3']
     >>> g.computeRankingCorrelation(ba1.bachetRanking)
      {'correlation': 0.8852041063621471,
       'determination': 0.4912238095238095}
-    >>> g.computeRankingCorrelation(ba2.bachetRanking)
-     {'correlation': 0.880095388582452,
-      'determination': 0.4912238095238095}
 
     .. note::
 
-       Mind that the Bachet numbering system is a positional {-1,0,1} numeral system that is isomorphic to the {0,1,2} base 3 numeral system. A Bachet ranking result is therefore depending on the very ordering of the rows and columns of the *other.relation* attribute. It is hence recommended to compute with the *Optimal=True* parameter setting which computes a first Bachet ranking result with the given order of the *other.actions* atribute and a second one with the reversed order. The best qualified of both ranking results is eventually chosen. In our example session above, it is the first ranking result that appears sligthly better correlated with the given outranking relation (0.8852 vs 0.8801). 
+       Mind that the Bachet numbering system is a positional {-1,0,1} numeral system that is isomorphic to the {0,1,2} base 3 numeral system. A Bachet ranking result is therefore depending on the very ordering of the rows and columns of the *other.relation* attribute. It is hence recommended (*BestQualified=True* setting by default) to compute a first Bachet ranking result with the given order of the *other.actions* atribute and a second one with the reversed order. The best qualified of both ranking results is eventually returned.
 
-       Mind also that the integer value of a sum of Bachet numbers gets quickly huge with the length of the given row and column chracteristic vectors. The digraph *orderLimit* parameter is set by default to 50, allowing to tackle integer values in the huge integer range +-358948993845926294385124. When there is need to tackle digraphs of larger order, this *orderLimit* parameter may be adjusted. 
+       Mind also that the integer value range of Bachet numbers gets quickly huge with the length of the given row and column chracteristic vectors. The digraph *orderLimit* parameter is set by default to 50, allowing to tackle integer values in the huge integer range +-358948993845926294385124. When there is need to tackle digraphs of larger order, this *orderLimit* parameter may be adjusted. 
     
     """
     def __init__(self,other,CoDual=False,actionsList=None,
-                 orderLimit=50,Optimal=False,
+                 orderLimit=50,
+                 BestQualified=True,
                  Comments=False,Debug=False):
         """
         constructor for generating a linear order
@@ -1335,6 +1321,12 @@ class BachetRanking(LinearOrder):
         runTimes['prepareLocals'] = time()-tt
         
         # compute net flows
+        if BestQualified:
+            Optimal = True
+            if Comments:
+                print('Both Bachet ranking with the given order and the reversed order of the decision actions are computed and the best qualified is eventually returned')
+        else:
+            Optimal = False
         tnf = time()
         incBachetScores = []
         decBachetScores = []
@@ -1405,6 +1397,7 @@ class BachetRanking(LinearOrder):
         bachetOrder = [x[1] for x in incBachetScores]
         if Debug:
             print(bachetRanking,bachetOrder)
+
         if Optimal:
             bachetRevRanking =  [x[1] for x in decBachetRevScores]
             bachetRevOrder = [x[1] for x in incBachetRevScores]
@@ -1413,10 +1406,7 @@ class BachetRanking(LinearOrder):
             if corrRev['correlation'] > corr['correlation']:
                 bachetRanking = bachetRevRanking
                 bachetOrder = bachetRevOrder
-            #else:
-            #    bachetRanking = [x[1] for x in decBachetScores]
-            #    bachetOrder = [x[1] for x in incBachetScores]
-                            
+
         self.bachetRanking = bachetRanking
         self.bachetOrder = bachetOrder
         if Comments:
@@ -1447,7 +1437,7 @@ class BachetRanking(LinearOrder):
         
         # store attributes
         if Optimal:
-            self.name = other.name + '_optimal_ranked'
+            self.name = other.name + '_best_ranked'
         else:
             self.name = other.name + '_ranked'         
         self.actions = actions
@@ -2030,8 +2020,8 @@ if __name__ == "__main__":
         t = Random3ObjectivesPerformanceTableau(numberOfActions=7,seed=seed)
         g = BipolarOutrankingDigraph(t)
         revba1 = [x for x in reversed(g.actions)]
-        ba1 = BachetRanking(g,CoDual=True,Optimal=True,
-                            Comments=True,Debug=True,
+        ba1 = BachetRanking(g,CoDual=True,BestQualified=True,
+                            Comments=True,Debug=False,
                             actionsList=g.actions,
                             )
         print(ba1)
@@ -2050,8 +2040,9 @@ if __name__ == "__main__":
         #print(randomActions)
         #print(revba1)
         ba2 = BachetRanking(g,Comments=False,
-                            CoDual=True,Optimal=False,
+                            CoDual=True,BestQualified=False,
                             actionsList=g.actions)
+        print(ba2)
         #print(ba2.bachetRanking)
         corrba2 = g.computeRankingCorrelation(ba2.bachetRanking)
         res.write('%d,%.4f,%.4f,%.4f,%.4f\n' % (seed,corrba1['correlation'],
