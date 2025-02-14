@@ -1236,9 +1236,9 @@ class BachetRanking(LinearOrder):
     >>> from outrankingDigraphs import RandomBipolarOutrankingDigraph
     >>> g = RandomBipolarOutrankingDigraph(numberOfActions=9,seed=1)
     >>> from linearOrders import BachetRanking
-    >>> print('*---- given and reversed ordering of the actions')
-    >>> ba1 = BachetRanking(g,BestQualified=True)
-    >>> ba1.showScores() 
+    >>> print('*---- solely given ordering of the actions')
+    >>> ba1 = BachetRanking(g,BestQualified=False)
+    >>> ba1.showScores()
      Bachet scores in descending order
      action 	 score
      a2 	 14768.00
@@ -1251,10 +1251,10 @@ class BachetRanking(LinearOrder):
      a5 	 -3846.00
      a1 	 -5849.00
     >>> print(g.computeRankingCorrelation(ba1.bachetRanking))
-     {'correlation': 0.46511675333945146, 'determination': 0.408625}
-    print('*---- solely given ordering of the actions')
-    >>> ba2 = BachetRanking(g,BestQualified=False)
-    >>> ba2.showScores()
+     {'correlation': 0.3935624213996805, 'determination': 0.408625}
+    >>> print('*---- given and reversed ordering of the actions')
+    >>> ba2 = BachetRanking(g,BestQualified=True)
+    >>> ba2.showScores() 
      Bachet scores in descending order
      action 	 score
      a2 	 14768.00
@@ -1267,8 +1267,8 @@ class BachetRanking(LinearOrder):
      a5 	 -3846.00
      a1 	 -5849.00
     >>> print(g.computeRankingCorrelation(ba2.bachetRanking))
-     {'correlation': 0.3935624213996805, 'determination': 0.408625}
-    print('*---- using 10 random ordering and their reversed versions')
+     {'correlation': 0.46511675333945146, 'determination': 0.408625}
+    >>> print('*---- using 10 random ordering and their reversed versions')
     >>> ba3 = BachetRanking(g,BestQualified=True,randomized=10)
     >>> ba3.showScores()
      Bachet scores in descending order
@@ -1361,7 +1361,7 @@ class BachetRanking(LinearOrder):
                 if corr['correlation'] > correlation:
                     correlation = corr['correlation']
                     bar = ba
-            self.name = bar.name
+            self.name = other.name + '_randomized_ranked'
             self.decBachetScores = bar.decBachetScores
             self.incBachetScores = bar.incBachetScores
             self.bachetRanking = bar.bachetRanking

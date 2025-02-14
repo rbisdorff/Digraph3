@@ -175,5 +175,6 @@ def testBachetRanking():
     ba2.showScores()
     print(g.computeRankingCorrelation(ba2.bachetRanking))
     ba3 = BachetRanking(g,randomized=10)
+    print(ba3)
     ba3.showScores()
     print(g.computeRankingCorrelation(ba3.bachetRanking))

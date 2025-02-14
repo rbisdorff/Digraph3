@@ -8838,9 +8838,9 @@ a given bipolar-valued Digraph instance <em>other</em>.</p>
 <span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">outrankingDigraphs</span> <span class="kn">import</span> <span class="n">RandomBipolarOutrankingDigraph</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">g</span> <span class="o">=</span> <span class="n">RandomBipolarOutrankingDigraph</span><span class="p">(</span><span class="n">numberOfActions</span><span class="o">=</span><span class="mi">9</span><span class="p">,</span><span class="n">seed</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">linearOrders</span> <span class="kn">import</span> <span class="n">BachetRanking</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="s1">&#39;*---- given and reversed ordering of the actions&#39;</span><span class="p">)</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">ba1</span> <span class="o">=</span> <span class="n">BachetRanking</span><span class="p">(</span><span class="n">g</span><span class="p">,</span><span class="n">BestQualified</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">ba1</span><span class="o">.</span><span class="n">showScores</span><span class="p">()</span> 
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="s1">&#39;*---- solely given ordering of the actions&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">ba1</span> <span class="o">=</span> <span class="n">BachetRanking</span><span class="p">(</span><span class="n">g</span><span class="p">,</span><span class="n">BestQualified</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">ba1</span><span class="o">.</span><span class="n">showScores</span><span class="p">()</span>
 <span class="go"> Bachet scores in descending order</span>
 <span class="go"> action      score</span>
 <span class="go"> a2          14768.00</span>
@@ -8853,10 +8853,10 @@ a given bipolar-valued Digraph instance <em>other</em>.</p>
 <span class="go"> a5          -3846.00</span>
 <span class="go"> a1          -5849.00</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">g</span><span class="o">.</span><span class="n">computeRankingCorrelation</span><span class="p">(</span><span class="n">ba1</span><span class="o">.</span><span class="n">bachetRanking</span><span class="p">))</span>
-<span class="go"> {&#39;correlation&#39;: 0.46511675333945146, &#39;determination&#39;: 0.408625}</span>
-<span class="go">print(&#39;*---- solely given ordering of the actions&#39;)</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">ba2</span> <span class="o">=</span> <span class="n">BachetRanking</span><span class="p">(</span><span class="n">g</span><span class="p">,</span><span class="n">BestQualified</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">ba2</span><span class="o">.</span><span class="n">showScores</span><span class="p">()</span>
+<span class="go"> {&#39;correlation&#39;: 0.3935624213996805, &#39;determination&#39;: 0.408625}</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="s1">&#39;*---- given and reversed ordering of the actions&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">ba2</span> <span class="o">=</span> <span class="n">BachetRanking</span><span class="p">(</span><span class="n">g</span><span class="p">,</span><span class="n">BestQualified</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">ba2</span><span class="o">.</span><span class="n">showScores</span><span class="p">()</span> 
 <span class="go"> Bachet scores in descending order</span>
 <span class="go"> action      score</span>
 <span class="go"> a2          14768.00</span>
@@ -8869,8 +8869,8 @@ a given bipolar-valued Digraph instance <em>other</em>.</p>
 <span class="go"> a5          -3846.00</span>
 <span class="go"> a1          -5849.00</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">g</span><span class="o">.</span><span class="n">computeRankingCorrelation</span><span class="p">(</span><span class="n">ba2</span><span class="o">.</span><span class="n">bachetRanking</span><span class="p">))</span>
-<span class="go"> {&#39;correlation&#39;: 0.3935624213996805, &#39;determination&#39;: 0.408625}</span>
-<span class="go">print(&#39;*---- using 10 random ordering and their reversed versions&#39;)</span>
+<span class="go"> {&#39;correlation&#39;: 0.46511675333945146, &#39;determination&#39;: 0.408625}</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="s1">&#39;*---- using 10 random ordering and their reversed versions&#39;</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">ba3</span> <span class="o">=</span> <span class="n">BachetRanking</span><span class="p">(</span><span class="n">g</span><span class="p">,</span><span class="n">BestQualified</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span><span class="n">randomized</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">ba3</span><span class="o">.</span><span class="n">showScores</span><span class="p">()</span>
 <span class="go"> Bachet scores in descending order</span>

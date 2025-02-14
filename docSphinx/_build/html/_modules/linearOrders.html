@@ -1390,9 +1390,9 @@
 <span class="sd">    &gt;&gt;&gt; from outrankingDigraphs import RandomBipolarOutrankingDigraph</span>
 <span class="sd">    &gt;&gt;&gt; g = RandomBipolarOutrankingDigraph(numberOfActions=9,seed=1)</span>
 <span class="sd">    &gt;&gt;&gt; from linearOrders import BachetRanking</span>
-<span class="sd">    &gt;&gt;&gt; print(&#39;*---- given and reversed ordering of the actions&#39;)</span>
-<span class="sd">    &gt;&gt;&gt; ba1 = BachetRanking(g,BestQualified=True)</span>
-<span class="sd">    &gt;&gt;&gt; ba1.showScores() </span>
+<span class="sd">    &gt;&gt;&gt; print(&#39;*---- solely given ordering of the actions&#39;)</span>
+<span class="sd">    &gt;&gt;&gt; ba1 = BachetRanking(g,BestQualified=False)</span>
+<span class="sd">    &gt;&gt;&gt; ba1.showScores()</span>
 <span class="sd">     Bachet scores in descending order</span>
 <span class="sd">     action 	 score</span>
 <span class="sd">     a2 	 14768.00</span>
@@ -1405,10 +1405,10 @@
 <span class="sd">     a5 	 -3846.00</span>
 <span class="sd">     a1 	 -5849.00</span>
 <span class="sd">    &gt;&gt;&gt; print(g.computeRankingCorrelation(ba1.bachetRanking))</span>
-<span class="sd">     {&#39;correlation&#39;: 0.46511675333945146, &#39;determination&#39;: 0.408625}</span>
-<span class="sd">    print(&#39;*---- solely given ordering of the actions&#39;)</span>
-<span class="sd">    &gt;&gt;&gt; ba2 = BachetRanking(g,BestQualified=False)</span>
-<span class="sd">    &gt;&gt;&gt; ba2.showScores()</span>
+<span class="sd">     {&#39;correlation&#39;: 0.3935624213996805, &#39;determination&#39;: 0.408625}</span>
+<span class="sd">    &gt;&gt;&gt; print(&#39;*---- given and reversed ordering of the actions&#39;)</span>
+<span class="sd">    &gt;&gt;&gt; ba2 = BachetRanking(g,BestQualified=True)</span>
+<span class="sd">    &gt;&gt;&gt; ba2.showScores() </span>
 <span class="sd">     Bachet scores in descending order</span>
 <span class="sd">     action 	 score</span>
 <span class="sd">     a2 	 14768.00</span>
@@ -1421,8 +1421,8 @@
 <span class="sd">     a5 	 -3846.00</span>
 <span class="sd">     a1 	 -5849.00</span>
 <span class="sd">    &gt;&gt;&gt; print(g.computeRankingCorrelation(ba2.bachetRanking))</span>
-<span class="sd">     {&#39;correlation&#39;: 0.3935624213996805, &#39;determination&#39;: 0.408625}</span>
-<span class="sd">    print(&#39;*---- using 10 random ordering and their reversed versions&#39;)</span>
+<span class="sd">     {&#39;correlation&#39;: 0.46511675333945146, &#39;determination&#39;: 0.408625}</span>
+<span class="sd">    &gt;&gt;&gt; print(&#39;*---- using 10 random ordering and their reversed versions&#39;)</span>
 <span class="sd">    &gt;&gt;&gt; ba3 = BachetRanking(g,BestQualified=True,randomized=10)</span>
 <span class="sd">    &gt;&gt;&gt; ba3.showScores()</span>
 <span class="sd">     Bachet scores in descending order</span>
@@ -1515,7 +1515,7 @@
                 <span class="k">if</span> <span class="n">corr</span><span class="p">[</span><span class="s1">&#39;correlation&#39;</span><span class="p">]</span> <span class="o">&gt;</span> <span class="n">correlation</span><span class="p">:</span>
                     <span class="n">correlation</span> <span class="o">=</span> <span class="n">corr</span><span class="p">[</span><span class="s1">&#39;correlation&#39;</span><span class="p">]</span>
                     <span class="n">bar</span> <span class="o">=</span> <span class="n">ba</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="n">bar</span><span class="o">.</span><span class="n">name</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="n">other</span><span class="o">.</span><span class="n">name</span> <span class="o">+</span> <span class="s1">&#39;_randomized_ranked&#39;</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">decBachetScores</span> <span class="o">=</span> <span class="n">bar</span><span class="o">.</span><span class="n">decBachetScores</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">incBachetScores</span> <span class="o">=</span> <span class="n">bar</span><span class="o">.</span><span class="n">incBachetScores</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">bachetRanking</span> <span class="o">=</span> <span class="n">bar</span><span class="o">.</span><span class="n">bachetRanking</span>
