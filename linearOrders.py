@@ -1272,6 +1272,7 @@ class BachetRanking(LinearOrder):
     def __init__(self,other,CoDual=False,actionsList=None,
                  orderLimit=50,
                  BestQualified=True,
+                 randomized=0,
                  Comments=False,Debug=False):
         """
         constructor for generating a linear order
@@ -1321,70 +1322,99 @@ class BachetRanking(LinearOrder):
                            'hasIntegerValuation':True}
         
         runTimes['prepareLocals'] = time()-tt
-        
-        # compute net flows
-        if BestQualified:
-            Optimal = True
-            if Comments:
-                print('Both Bachet ranking with the given order and the reversed order of the decision actions are computed and the best qualified is eventually returned')
-        else:
-            Optimal = False
-        tnf = time()
-        incBachetScores = []
-        decBachetScores = []
-        if Optimal:
-            incBachetRevScores = []
-            decBachetRevScores = []
+
+        if randomized > 0:
+            from random import shuffle
+            randomActions = [x for x in actions]
+            correlation = -1.0
+            bar = None
+            for i in range(randomized):
+                shuffle(randomActions) 
+                ba = BachetRanking(other,BestQualified=True,actionsList=randomActions)
+                corr = other.computeRankingCorrelation(ba.bachetRanking)
+                if corr['correlation'] > correlation:
+                    correlation = corr['correlation']
+                    bar = ba
+            self.name = bar.name
+            self.decBachetScores = bar.decBachetScores
+            self.incBachetScores = bar.incBachetScores
+            self.bachetRanking = bar.bachetRanking
+            self.bachetOrder = bar.bachetOrder
+            self.actions = bar.actions
+            self.order = bar.order
+            self.valuationdomain = bar.valuationdomain
+            self.relation = bar.relation
+            self.gamma = bar.gamma,
+            self.notGamma = bar.notGamma
+            self.runTimes = bar.runTimes
+            return
+
+        else: # not randomized
             
-        # with Condorcet Digraph valuation
-        c = PolarisedDigraph(other,level=other.valuationdomain['med'],\
-                         StrictCut=True,KeepValues=False)
-        if Debug:
-            print(c)
-        c.recodeValuation(ndigits=0)
-        cRelation = c.relation
-        for x in actions:
-            vecx = [int(cRelation[x][y]) for y in actions]
-            vecy = [int(cRelation[y][x]) for y in actions]
-            if Debug:
-                print(vecx,vecy)
-            bx = ar.BachetNumber(vector=vecx)
-            by = ar.BachetNumber(vector=vecy)
-            bScore = bx + (-by)
-            #bScore = bx + by
-            incBachetScores.append((bScore.value(),x))
-            decBachetScores.append((-bScore.value(),x))
+            if BestQualified:
+                Optimal = True
+                if Comments:
+                    print('Both Bachet ranking with the given order and the reversed order of the decision actions are computed and the best qualified is eventually returned')
+            else:
+                Optimal = False
+            tnf = time()
+            incBachetScores = []
+            decBachetScores = []
             if Optimal:
-                bRevScore = bx.reverse() + (-by.reverse())
-                incBachetRevScores.append((bRevScore.value(),x))
-                decBachetRevScores.append((-bRevScore.value(),x))
-        # reversed sorting with keeping the actions initial ordering
-        # in case of ties
-        if Debug:
-            print(incBachetScores,decBachetScores)
-        incBachetScores.sort(key=itemgetter(0))
-        decBachetScores.sort(key=itemgetter(0))
-        if Optimal:
+                incBachetRevScores = []
+                decBachetRevScores = []
+
+            # with Condorcet Digraph valuation
+            c = PolarisedDigraph(other,level=other.valuationdomain['med'],\
+                             StrictCut=True,KeepValues=False)
             if Debug:
-                print(incBachetRevScores,decBachetRevScores)
-            incBachetRevScores.sort(key=itemgetter(0))
-            decBachetRevScores.sort(key=itemgetter(0))
-            
-        decBachetScores = [(-x[0],x[1]) for x in decBachetScores]
-        incBachetScores = [(-x[0],x[1]) for x in incBachetScores]               
-        self.decBachetScores = decBachetScores
-        self.incBachetScores = incBachetScores
-        if Debug:
-            print(incBachetScores,decBachetScores)
-        if Optimal:
-            decBachetRevScores = [(-x[0],x[1]) for x in decBachetRevScores]
-            incBachetRevScores = [(-x[0],x[1]) for x in incBachetRevScores]               
-            self.decBachetRevScores = decBachetRevScores
-            self.incBachetRevScores = incBachetRevScores
+                print(c)
+            c.recodeValuation(ndigits=0)
+            cRelation = c.relation
+
+
+            for x in actions:
+                vecx = [int(cRelation[x][y]) for y in actions]
+                vecy = [int(cRelation[y][x]) for y in actions]
+                if Debug:
+                    print(vecx,vecy)
+                bx = ar.BachetNumber(vector=vecx)
+                by = ar.BachetNumber(vector=vecy)
+                bScore = bx + (-by)
+                #bScore = bx + by
+                incBachetScores.append((bScore.value(),x))
+                decBachetScores.append((-bScore.value(),x))
+                if Optimal:
+                    bRevScore = bx.reverse() + (-by.reverse())
+                    incBachetRevScores.append((bRevScore.value(),x))
+                    decBachetRevScores.append((-bRevScore.value(),x))
+            # reversed sorting with keeping the actions initial ordering
+            # in case of ties
             if Debug:
-                print(incBachetRevScores,decBachetRevScores)
-            
-    
+                print(incBachetScores,decBachetScores)
+            incBachetScores.sort(key=itemgetter(0))
+            decBachetScores.sort(key=itemgetter(0))
+            if Optimal:
+                if Debug:
+                    print(incBachetRevScores,decBachetRevScores)
+                incBachetRevScores.sort(key=itemgetter(0))
+                decBachetRevScores.sort(key=itemgetter(0))
+
+            decBachetScores = [(-x[0],x[1]) for x in decBachetScores]
+            incBachetScores = [(-x[0],x[1]) for x in incBachetScores]               
+            self.decBachetScores = decBachetScores
+            self.incBachetScores = incBachetScores
+            if Debug:
+                print(incBachetScores,decBachetScores)
+            if Optimal:
+                decBachetRevScores = [(-x[0],x[1]) for x in decBachetRevScores]
+                incBachetRevScores = [(-x[0],x[1]) for x in incBachetRevScores]               
+                self.decBachetRevScores = decBachetRevScores
+                self.incBachetRevScores = incBachetRevScores
+                if Debug:
+                    print(incBachetRevScores,decBachetRevScores)
+
+
         if Comments:
             print('Bachet decreasing scores')
             for x in decBachetScores:
@@ -1393,7 +1423,7 @@ class BachetRanking(LinearOrder):
                 print('reversed Bachet decreasing scores')
                 for x in decBachetRevScores:
                     print( '%s : %d' %( x[1],x[0] ) )
-                
+
 
         bachetRanking = [x[1] for x in decBachetScores]
         bachetOrder = [x[1] for x in incBachetScores]
@@ -1414,7 +1444,7 @@ class BachetRanking(LinearOrder):
         if Comments:
             print('Bachet Ranking:')
             print(bachetRanking)
-            
+
         runTimes['bachet'] = time() - tnf
 
         # init relation
@@ -1436,7 +1466,7 @@ class BachetRanking(LinearOrder):
                     relation[x][y] = Min
                 #print(x,xi,y,yj,relation[x][y] )
         runTimes['relation'] = time() - tr
-        
+
         # store attributes
         if Optimal:
             self.name = other.name + '_best_ranked'
@@ -2008,7 +2038,7 @@ if __name__ == "__main__":
     print('*-------- Testing class and methods -------')
 
     Threading = False
-    res = open('testNfActions.csv','w')
+    res = open('testrandomized.csv','w')
     res.write('"seed","ba1","cop","ba2","nf"\n')
     sampleSize = 1
     #t = Random3ObjectivesPerformanceTableau(numberOfActions=10,seed=1)
@@ -2019,14 +2049,15 @@ if __name__ == "__main__":
     ##    t = CircularPerformanceTableau()
         #t.showHTMLPerformanceHeatmap(Correlations=True,colorLevels=5)
         #t = PerformanceTableau('testLin')
-        t = Random3ObjectivesPerformanceTableau(numberOfActions=7,seed=seed)
+        t = RandomCBPerformanceTableau(numberOfActions=9,
+                                       numberOfCriteria=13,seed=200)
         g = BipolarOutrankingDigraph(t)
         revba1 = [x for x in reversed(g.actions)]
         ba1 = BachetRanking(g,CoDual=True,BestQualified=True,
                             Comments=True,Debug=False,
                             actionsList=g.actions,
                             )
-        print(ba1)
+        #print(ba1)
         corrba1 = g.computeRankingCorrelation(ba1.bachetRanking)
         cop = CopelandRanking(g,Comments=False)
         #print(cop.copelandRanking)
@@ -2042,15 +2073,15 @@ if __name__ == "__main__":
         #print(randomActions)
         #print(revba1)
         ba2 = BachetRanking(g,Comments=False,
-                            CoDual=True,BestQualified=False,
+                            CoDual=True,randomized=20,
                             actionsList=g.actions)
         print(ba2)
         #print(ba2.bachetRanking)
-        corrba2 = g.computeRankingCorrelation(ba2.bachetRanking)
-        res.write('%d,%.4f,%.4f,%.4f,%.4f\n' % (seed,corrba1['correlation'],
-                                           corrcop['correlation'],
-                                        corrba2['correlation'],
-                                        corrnf['correlation']) )
+        #corrba2 = g.computeRankingCorrelation(ba2.bachetRanking)
+        #res.write('%d,%.4f,%.4f,%.4f,%.4f\n' % (seed,corrba1['correlation'],
+        #                                   corrcop['correlation'],
+        #                                corrba2['correlation'],
+        #                                corrnf['correlation']) )
     res.close()
         
     
