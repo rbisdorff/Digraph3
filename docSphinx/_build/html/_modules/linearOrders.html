@@ -1386,36 +1386,60 @@
 
 <span class="sd">    Like the Copeland and the NetFlows rules, the Bachet ranking rule is *invariant* under the *codual* transform. The Bachet rule is furthermore, like the Copeland rule, also *Condorcet consistent*, i.e. when the outranking digraph models a linear relation, its Bachet ranking result will be consistent with this linear outranking relation.</span>
 
+<span class="sd">    &gt;&gt;&gt; print(&quot;*==&gt;&gt; testing BachetRanking Class ----*&quot;)</span>
 <span class="sd">    &gt;&gt;&gt; from outrankingDigraphs import RandomBipolarOutrankingDigraph</span>
-<span class="sd">    &gt;&gt;&gt; g = RandomBipolarOutrankingDigraph(seed=1)</span>
-<span class="sd">    &gt;&gt;&gt; g</span>
-<span class="sd">     *------- Object instance description ------*</span>
-<span class="sd">     Instance class       : RandomBipolarOutrankingDigraph</span>
-<span class="sd">     Instance name        : rel_randomperftab</span>
-<span class="sd">     Actions              : 7</span>
-<span class="sd">     Criteria             : 7</span>
-<span class="sd">     Size                 : 23</span>
-<span class="sd">     Determinateness (%)  : 74.56</span>
-<span class="sd">     Valuation domain     : [-1.00;1.00]</span>
+<span class="sd">    &gt;&gt;&gt; g = RandomBipolarOutrankingDigraph(numberOfActions=9,seed=1)</span>
 <span class="sd">    &gt;&gt;&gt; from linearOrders import BachetRanking</span>
-<span class="sd">    &gt;&gt;&gt; actions = [x for x in g.actions]</span>
-<span class="sd">    &gt;&gt;&gt; ba1 = BachetRanking(g,actionsList=actions,BestQualified=True)</span>
-<span class="sd">    &gt;&gt;&gt; ba1.showScores()</span>
-<span class="sd">    Bachet scores in descending order</span>
+<span class="sd">    &gt;&gt;&gt; print(&#39;*---- given and reversed ordering of the actions&#39;)</span>
+<span class="sd">    &gt;&gt;&gt; ba1 = BachetRanking(g,BestQualified=True)</span>
+<span class="sd">    &gt;&gt;&gt; ba1.showScores() </span>
+<span class="sd">     Bachet scores in descending order</span>
 <span class="sd">     action 	 score</span>
-<span class="sd">     a5 	 1970.00</span>
-<span class="sd">     a4 	 511.00</span>
-<span class="sd">     a7 	 344.00</span>
-<span class="sd">     a2 	 36.00</span>
-<span class="sd">     a1 	 -1629.00</span>
-<span class="sd">     a6 	 -1677.00</span>
-<span class="sd">     a3 	 -1679.00</span>
-<span class="sd">    &gt;&gt;&gt; ba1.bachetRanking</span>
-<span class="sd">     [&#39;a5&#39;, &#39;a4&#39;, &#39;a7&#39;, &#39;a2&#39;, &#39;a1&#39;, &#39;a6&#39;, &#39;a3&#39;]</span>
-<span class="sd">    &gt;&gt;&gt; g.computeRankingCorrelation(ba1.bachetRanking)</span>
-<span class="sd">     {&#39;correlation&#39;: 0.8852041063621471,</span>
-<span class="sd">      &#39;determination&#39;: 0.4912238095238095}</span>
+<span class="sd">     a2 	 14768.00</span>
+<span class="sd">     a8 	 10061.00</span>
+<span class="sd">     a9 	 9264.00</span>
+<span class="sd">     a3 	 8211.00</span>
+<span class="sd">     a6 	 1394.00</span>
+<span class="sd">     a7 	 1317.00</span>
+<span class="sd">     a4 	 1294.00</span>
+<span class="sd">     a5 	 -3846.00</span>
+<span class="sd">     a1 	 -5849.00</span>
+<span class="sd">    &gt;&gt;&gt; print(g.computeRankingCorrelation(ba1.bachetRanking))</span>
+<span class="sd">     {&#39;correlation&#39;: 0.46511675333945146, &#39;determination&#39;: 0.408625}</span>
+<span class="sd">    print(&#39;*---- solely given ordering of the actions&#39;)</span>
+<span class="sd">    &gt;&gt;&gt; ba2 = BachetRanking(g,BestQualified=False)</span>
+<span class="sd">    &gt;&gt;&gt; ba2.showScores()</span>
+<span class="sd">     Bachet scores in descending order</span>
+<span class="sd">     action 	 score</span>
+<span class="sd">     a2 	 14768.00</span>
+<span class="sd">     a8 	 10061.00</span>
+<span class="sd">     a9 	 9264.00</span>
+<span class="sd">     a3 	 8211.00</span>
+<span class="sd">     a6 	 1394.00</span>
+<span class="sd">     a7 	 1317.00</span>
+<span class="sd">     a4 	 1294.00</span>
+<span class="sd">     a5 	 -3846.00</span>
+<span class="sd">     a1 	 -5849.00</span>
+<span class="sd">    &gt;&gt;&gt; print(g.computeRankingCorrelation(ba2.bachetRanking))</span>
+<span class="sd">     {&#39;correlation&#39;: 0.3935624213996805, &#39;determination&#39;: 0.408625}</span>
+<span class="sd">    print(&#39;*---- using 10 random ordering and their reversed versions&#39;)</span>
+<span class="sd">    &gt;&gt;&gt; ba3 = BachetRanking(g,BestQualified=True,randomized=10)</span>
+<span class="sd">    &gt;&gt;&gt; ba3.showScores()</span>
+<span class="sd">     Bachet scores in descending order</span>
+<span class="sd">     action 	 score</span>
+<span class="sd">     a2 	 15092.00</span>
+<span class="sd">     a9 	 8884.00</span>
+<span class="sd">     a3 	 8533.00</span>
+<span class="sd">     a8 	 8493.00</span>
+<span class="sd">     a7 	 1771.00</span>
+<span class="sd">     a6 	 -246.00</span>
+<span class="sd">     a4 	 -990.00</span>
+<span class="sd">     a5 	 -4234.00</span>
+<span class="sd">     a1 	 -6323.00</span>
+<span class="sd">    &gt;&gt;&gt; print(g.computeRankingCorrelation(ba3.bachetRanking))</span>
+<span class="sd">     {&#39;correlation&#39;: 0.7585058291696407, &#39;determination&#39;: 0.408625}</span>
 
+<span class="sd">    </span>
 <span class="sd">    .. note::</span>
 
 <span class="sd">       Mind that the Bachet numbering system is a positional {-1,0,1} numeral system that is isomorphic to the {0,1,2} base 3 numeral system. A Bachet ranking result is therefore depending on the very ordering of the rows and columns of the *other.relation* attribute. It is hence recommended (*BestQualified=True* setting by default) to compute a first Bachet ranking result with the given order of the *other.actions* atribute and a second one with the reversed order. The best qualified of both ranking results is eventually returned.</span>

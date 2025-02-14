@@ -8834,35 +8834,58 @@ a given bipolar-valued Digraph instance <em>other</em>.</p>
 <p>For each action <em>x</em> in <em>other.actions</em>, the polarised integer row vector of the <em>other.relation</em> attribute defines a <em>Bachet vector</em> which correponds to a significance weight <em>rbx</em> of its <strong>outrankingness credibility</strong>. Similarly, the corresponding polarised integer column vector in the <em>other.relation</em> attribute defines a <em>Bachet vector</em> whose negation correponds to a significance weight <em>-cbx</em> of its <strong>not outrankedness credibility</strong>.</p>
 <p>Taking now the sum <em>rbx + (-cbx)</em> of both credibilities gives us per action <em>x</em> a Bachet fitness score of the statement that <em>x</em> may be <em>first-ranked</em>. Sorting in decreasing (resp. increasing) order these Bachet fitness scores gives the <em>Bachet ranking</em>, respective <em>ordering</em>, result. Both results are stored in the <em>self.bachetRanking</em> resp. <em>self.bachetOrder</em> attribute.</p>
 <p>Like the Copeland and the NetFlows rules, the Bachet ranking rule is <em>invariant</em> under the <em>codual</em> transform. The Bachet rule is furthermore, like the Copeland rule, also <em>Condorcet consistent</em>, i.e. when the outranking digraph models a linear relation, its Bachet ranking result will be consistent with this linear outranking relation.</p>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">outrankingDigraphs</span> <span class="kn">import</span> <span class="n">RandomBipolarOutrankingDigraph</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">g</span> <span class="o">=</span> <span class="n">RandomBipolarOutrankingDigraph</span><span class="p">(</span><span class="n">seed</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">g</span>
-<span class="go"> *------- Object instance description ------*</span>
-<span class="go"> Instance class       : RandomBipolarOutrankingDigraph</span>
-<span class="go"> Instance name        : rel_randomperftab</span>
-<span class="go"> Actions              : 7</span>
-<span class="go"> Criteria             : 7</span>
-<span class="go"> Size                 : 23</span>
-<span class="go"> Determinateness (%)  : 74.56</span>
-<span class="go"> Valuation domain     : [-1.00;1.00]</span>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;*==&gt;&gt; testing BachetRanking Class ----*&quot;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">outrankingDigraphs</span> <span class="kn">import</span> <span class="n">RandomBipolarOutrankingDigraph</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">g</span> <span class="o">=</span> <span class="n">RandomBipolarOutrankingDigraph</span><span class="p">(</span><span class="n">numberOfActions</span><span class="o">=</span><span class="mi">9</span><span class="p">,</span><span class="n">seed</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">linearOrders</span> <span class="kn">import</span> <span class="n">BachetRanking</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">actions</span> <span class="o">=</span> <span class="p">[</span><span class="n">x</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">g</span><span class="o">.</span><span class="n">actions</span><span class="p">]</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">ba1</span> <span class="o">=</span> <span class="n">BachetRanking</span><span class="p">(</span><span class="n">g</span><span class="p">,</span><span class="n">actionsList</span><span class="o">=</span><span class="n">actions</span><span class="p">,</span><span class="n">BestQualified</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">ba1</span><span class="o">.</span><span class="n">showScores</span><span class="p">()</span>
-<span class="go">Bachet scores in descending order</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="s1">&#39;*---- given and reversed ordering of the actions&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">ba1</span> <span class="o">=</span> <span class="n">BachetRanking</span><span class="p">(</span><span class="n">g</span><span class="p">,</span><span class="n">BestQualified</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">ba1</span><span class="o">.</span><span class="n">showScores</span><span class="p">()</span> 
+<span class="go"> Bachet scores in descending order</span>
 <span class="go"> action      score</span>
-<span class="go"> a5          1970.00</span>
-<span class="go"> a4          511.00</span>
-<span class="go"> a7          344.00</span>
-<span class="go"> a2          36.00</span>
-<span class="go"> a1          -1629.00</span>
-<span class="go"> a6          -1677.00</span>
-<span class="go"> a3          -1679.00</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">ba1</span><span class="o">.</span><span class="n">bachetRanking</span>
-<span class="go"> [&#39;a5&#39;, &#39;a4&#39;, &#39;a7&#39;, &#39;a2&#39;, &#39;a1&#39;, &#39;a6&#39;, &#39;a3&#39;]</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">g</span><span class="o">.</span><span class="n">computeRankingCorrelation</span><span class="p">(</span><span class="n">ba1</span><span class="o">.</span><span class="n">bachetRanking</span><span class="p">)</span>
-<span class="go"> {&#39;correlation&#39;: 0.8852041063621471,</span>
-<span class="go">  &#39;determination&#39;: 0.4912238095238095}</span>
+<span class="go"> a2          14768.00</span>
+<span class="go"> a8          10061.00</span>
+<span class="go"> a9          9264.00</span>
+<span class="go"> a3          8211.00</span>
+<span class="go"> a6          1394.00</span>
+<span class="go"> a7          1317.00</span>
+<span class="go"> a4          1294.00</span>
+<span class="go"> a5          -3846.00</span>
+<span class="go"> a1          -5849.00</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">g</span><span class="o">.</span><span class="n">computeRankingCorrelation</span><span class="p">(</span><span class="n">ba1</span><span class="o">.</span><span class="n">bachetRanking</span><span class="p">))</span>
+<span class="go"> {&#39;correlation&#39;: 0.46511675333945146, &#39;determination&#39;: 0.408625}</span>
+<span class="go">print(&#39;*---- solely given ordering of the actions&#39;)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">ba2</span> <span class="o">=</span> <span class="n">BachetRanking</span><span class="p">(</span><span class="n">g</span><span class="p">,</span><span class="n">BestQualified</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">ba2</span><span class="o">.</span><span class="n">showScores</span><span class="p">()</span>
+<span class="go"> Bachet scores in descending order</span>
+<span class="go"> action      score</span>
+<span class="go"> a2          14768.00</span>
+<span class="go"> a8          10061.00</span>
+<span class="go"> a9          9264.00</span>
+<span class="go"> a3          8211.00</span>
+<span class="go"> a6          1394.00</span>
+<span class="go"> a7          1317.00</span>
+<span class="go"> a4          1294.00</span>
+<span class="go"> a5          -3846.00</span>
+<span class="go"> a1          -5849.00</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">g</span><span class="o">.</span><span class="n">computeRankingCorrelation</span><span class="p">(</span><span class="n">ba2</span><span class="o">.</span><span class="n">bachetRanking</span><span class="p">))</span>
+<span class="go"> {&#39;correlation&#39;: 0.3935624213996805, &#39;determination&#39;: 0.408625}</span>
+<span class="go">print(&#39;*---- using 10 random ordering and their reversed versions&#39;)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">ba3</span> <span class="o">=</span> <span class="n">BachetRanking</span><span class="p">(</span><span class="n">g</span><span class="p">,</span><span class="n">BestQualified</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span><span class="n">randomized</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">ba3</span><span class="o">.</span><span class="n">showScores</span><span class="p">()</span>
+<span class="go"> Bachet scores in descending order</span>
+<span class="go"> action      score</span>
+<span class="go"> a2          15092.00</span>
+<span class="go"> a9          8884.00</span>
+<span class="go"> a3          8533.00</span>
+<span class="go"> a8          8493.00</span>
+<span class="go"> a7          1771.00</span>
+<span class="go"> a6          -246.00</span>
+<span class="go"> a4          -990.00</span>
+<span class="go"> a5          -4234.00</span>
+<span class="go"> a1          -6323.00</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">g</span><span class="o">.</span><span class="n">computeRankingCorrelation</span><span class="p">(</span><span class="n">ba3</span><span class="o">.</span><span class="n">bachetRanking</span><span class="p">))</span>
+<span class="go"> {&#39;correlation&#39;: 0.7585058291696407, &#39;determination&#39;: 0.408625}</span>
 </pre></div>
 </div>
 <div class="admonition note">

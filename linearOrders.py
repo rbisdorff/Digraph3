@@ -1232,36 +1232,60 @@ class BachetRanking(LinearOrder):
 
     Like the Copeland and the NetFlows rules, the Bachet ranking rule is *invariant* under the *codual* transform. The Bachet rule is furthermore, like the Copeland rule, also *Condorcet consistent*, i.e. when the outranking digraph models a linear relation, its Bachet ranking result will be consistent with this linear outranking relation.
 
+    >>> print("*==>> testing BachetRanking Class ----*")
     >>> from outrankingDigraphs import RandomBipolarOutrankingDigraph
-    >>> g = RandomBipolarOutrankingDigraph(seed=1)
-    >>> g
-     *------- Object instance description ------*
-     Instance class       : RandomBipolarOutrankingDigraph
-     Instance name        : rel_randomperftab
-     Actions              : 7
-     Criteria             : 7
-     Size                 : 23
-     Determinateness (%)  : 74.56
-     Valuation domain     : [-1.00;1.00]
+    >>> g = RandomBipolarOutrankingDigraph(numberOfActions=9,seed=1)
     >>> from linearOrders import BachetRanking
-    >>> actions = [x for x in g.actions]
-    >>> ba1 = BachetRanking(g,actionsList=actions,BestQualified=True)
-    >>> ba1.showScores()
-    Bachet scores in descending order
+    >>> print('*---- given and reversed ordering of the actions')
+    >>> ba1 = BachetRanking(g,BestQualified=True)
+    >>> ba1.showScores() 
+     Bachet scores in descending order
      action 	 score
-     a5 	 1970.00
-     a4 	 511.00
-     a7 	 344.00
-     a2 	 36.00
-     a1 	 -1629.00
-     a6 	 -1677.00
-     a3 	 -1679.00
-    >>> ba1.bachetRanking
-     ['a5', 'a4', 'a7', 'a2', 'a1', 'a6', 'a3']
-    >>> g.computeRankingCorrelation(ba1.bachetRanking)
-     {'correlation': 0.8852041063621471,
-      'determination': 0.4912238095238095}
+     a2 	 14768.00
+     a8 	 10061.00
+     a9 	 9264.00
+     a3 	 8211.00
+     a6 	 1394.00
+     a7 	 1317.00
+     a4 	 1294.00
+     a5 	 -3846.00
+     a1 	 -5849.00
+    >>> print(g.computeRankingCorrelation(ba1.bachetRanking))
+     {'correlation': 0.46511675333945146, 'determination': 0.408625}
+    print('*---- solely given ordering of the actions')
+    >>> ba2 = BachetRanking(g,BestQualified=False)
+    >>> ba2.showScores()
+     Bachet scores in descending order
+     action 	 score
+     a2 	 14768.00
+     a8 	 10061.00
+     a9 	 9264.00
+     a3 	 8211.00
+     a6 	 1394.00
+     a7 	 1317.00
+     a4 	 1294.00
+     a5 	 -3846.00
+     a1 	 -5849.00
+    >>> print(g.computeRankingCorrelation(ba2.bachetRanking))
+     {'correlation': 0.3935624213996805, 'determination': 0.408625}
+    print('*---- using 10 random ordering and their reversed versions')
+    >>> ba3 = BachetRanking(g,BestQualified=True,randomized=10)
+    >>> ba3.showScores()
+     Bachet scores in descending order
+     action 	 score
+     a2 	 15092.00
+     a9 	 8884.00
+     a3 	 8533.00
+     a8 	 8493.00
+     a7 	 1771.00
+     a6 	 -246.00
+     a4 	 -990.00
+     a5 	 -4234.00
+     a1 	 -6323.00
+    >>> print(g.computeRankingCorrelation(ba3.bachetRanking))
+     {'correlation': 0.7585058291696407, 'determination': 0.408625}
 
+    
     .. note::
 
        Mind that the Bachet numbering system is a positional {-1,0,1} numeral system that is isomorphic to the {0,1,2} base 3 numeral system. A Bachet ranking result is therefore depending on the very ordering of the rows and columns of the *other.relation* attribute. It is hence recommended (*BestQualified=True* setting by default) to compute a first Bachet ranking result with the given order of the *other.actions* atribute and a second one with the reversed order. The best qualified of both ranking results is eventually returned.
