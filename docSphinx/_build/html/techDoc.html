@@ -8869,6 +8869,7 @@ a given bipolar-valued Digraph instance <em>other</em>.</p>
 <p class="admonition-title">Note</p>
 <p>Mind that the Bachet numbering system is a positional {-1,0,1} numeral system that is isomorphic to the {0,1,2} base 3 numeral system. A Bachet ranking result is therefore depending on the very ordering of the rows and columns of the <em>other.relation</em> attribute. It is hence recommended (<em>BestQualified=True</em> setting by default) to compute a first Bachet ranking result with the given order of the <em>other.actions</em> atribute and a second one with the reversed order. The best qualified of both ranking results is eventually returned.</p>
 <p>Mind also that the integer value range of Bachet numbers gets quickly huge with the length of the given row and column chracteristic vectors. The digraph <em>orderLimit</em> parameter is therefore set by default to 50, allowing to tackle integer values in the huge integer range +-358948993845926294385124. When there is need to tackle digraphs of larger order, this <em>orderLimit</em> parameter may be adjusted.</p>
+<p>When the ranking result appears suspiciously uncorrelated with the given outranking digraph, it is recommended to set the <em>randomized</em> parameter to a positive integer <em>n</em>. In this case, <em>n</em> random orderings of the decision actions with their reversed versions will be used for generating Bachet rankings. The best correlated ranking will eventually be returned.</p>
 </div>
 </dd></dl>
 
