@@ -1400,13 +1400,14 @@ class BachetRanking(LinearOrder):
 
 
             for x in actions:
-                vecx = [int(cRelation[x][y]) for y in actions]
-                vecy = [int(cRelation[y][x]) for y in actions]
+                vecx = [int(cRelation[x][y]) for y in actions if y != x]
+                vecy = [int(cRelation[y][x]) for y in actions if y != x]
                 if Debug:
                     print(vecx,vecy)
                 bx = ar.BachetNumber(vector=vecx)
                 by = ar.BachetNumber(vector=vecy)
-                bScore = bx + (-by)
+                #bScore = bx + (-by)
+                bScore = bx
                 #bScore = bx + by
                 incBachetScores.append((bScore.value(),x))
                 decBachetScores.append((-bScore.value(),x))
@@ -2099,11 +2100,17 @@ if __name__ == "__main__":
         #print(randomActions)
         #print(revba1)
         ba2 = BachetRanking(g,Comments=False,
-                            CoDual=True,randomized=20,
-                            actionsList=g.actions)
+                            CoDual=True,
+                            randomized=10,
+                            #actionsList=g.actions,
+                            )
         print(ba2)
         #print(ba2.bachetRanking)
-        #corrba2 = g.computeRankingCorrelation(ba2.bachetRanking)
+        corrba2 = g.computeRankingCorrelation(ba2.bachetRanking)
+        print('%d,%.4f,%.4f,%.4f,%.4f\n' % (seed,corrba1['correlation'],
+                                           corrcop['correlation'],
+                                        corrba2['correlation'],
+                                        corrnf['correlation']) )
         #res.write('%d,%.4f,%.4f,%.4f,%.4f\n' % (seed,corrba1['correlation'],
         #                                   corrcop['correlation'],
         #                                corrba2['correlation'],

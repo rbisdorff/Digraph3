@@ -1554,13 +1554,14 @@
 
 
             <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">actions</span><span class="p">:</span>
-                <span class="n">vecx</span> <span class="o">=</span> <span class="p">[</span><span class="nb">int</span><span class="p">(</span><span class="n">cRelation</span><span class="p">[</span><span class="n">x</span><span class="p">][</span><span class="n">y</span><span class="p">])</span> <span class="k">for</span> <span class="n">y</span> <span class="ow">in</span> <span class="n">actions</span><span class="p">]</span>
-                <span class="n">vecy</span> <span class="o">=</span> <span class="p">[</span><span class="nb">int</span><span class="p">(</span><span class="n">cRelation</span><span class="p">[</span><span class="n">y</span><span class="p">][</span><span class="n">x</span><span class="p">])</span> <span class="k">for</span> <span class="n">y</span> <span class="ow">in</span> <span class="n">actions</span><span class="p">]</span>
+                <span class="n">vecx</span> <span class="o">=</span> <span class="p">[</span><span class="nb">int</span><span class="p">(</span><span class="n">cRelation</span><span class="p">[</span><span class="n">x</span><span class="p">][</span><span class="n">y</span><span class="p">])</span> <span class="k">for</span> <span class="n">y</span> <span class="ow">in</span> <span class="n">actions</span> <span class="k">if</span> <span class="n">y</span> <span class="o">!=</span> <span class="n">x</span><span class="p">]</span>
+                <span class="n">vecy</span> <span class="o">=</span> <span class="p">[</span><span class="nb">int</span><span class="p">(</span><span class="n">cRelation</span><span class="p">[</span><span class="n">y</span><span class="p">][</span><span class="n">x</span><span class="p">])</span> <span class="k">for</span> <span class="n">y</span> <span class="ow">in</span> <span class="n">actions</span> <span class="k">if</span> <span class="n">y</span> <span class="o">!=</span> <span class="n">x</span><span class="p">]</span>
                 <span class="k">if</span> <span class="n">Debug</span><span class="p">:</span>
                     <span class="nb">print</span><span class="p">(</span><span class="n">vecx</span><span class="p">,</span><span class="n">vecy</span><span class="p">)</span>
                 <span class="n">bx</span> <span class="o">=</span> <span class="n">ar</span><span class="o">.</span><span class="n">BachetNumber</span><span class="p">(</span><span class="n">vector</span><span class="o">=</span><span class="n">vecx</span><span class="p">)</span>
                 <span class="n">by</span> <span class="o">=</span> <span class="n">ar</span><span class="o">.</span><span class="n">BachetNumber</span><span class="p">(</span><span class="n">vector</span><span class="o">=</span><span class="n">vecy</span><span class="p">)</span>
-                <span class="n">bScore</span> <span class="o">=</span> <span class="n">bx</span> <span class="o">+</span> <span class="p">(</span><span class="o">-</span><span class="n">by</span><span class="p">)</span>
+                <span class="c1">#bScore = bx + (-by)</span>
+                <span class="n">bScore</span> <span class="o">=</span> <span class="n">bx</span>
                 <span class="c1">#bScore = bx + by</span>
                 <span class="n">incBachetScores</span><span class="o">.</span><span class="n">append</span><span class="p">((</span><span class="n">bScore</span><span class="o">.</span><span class="n">value</span><span class="p">(),</span><span class="n">x</span><span class="p">))</span>
                 <span class="n">decBachetScores</span><span class="o">.</span><span class="n">append</span><span class="p">((</span><span class="o">-</span><span class="n">bScore</span><span class="o">.</span><span class="n">value</span><span class="p">(),</span><span class="n">x</span><span class="p">))</span>
@@ -2278,11 +2279,17 @@
         <span class="c1">#print(randomActions)</span>
         <span class="c1">#print(revba1)</span>
         <span class="n">ba2</span> <span class="o">=</span> <span class="n">BachetRanking</span><span class="p">(</span><span class="n">g</span><span class="p">,</span><span class="n">Comments</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
-                            <span class="n">CoDual</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span><span class="n">randomized</span><span class="o">=</span><span class="mi">20</span><span class="p">,</span>
-                            <span class="n">actionsList</span><span class="o">=</span><span class="n">g</span><span class="o">.</span><span class="n">actions</span><span class="p">)</span>
+                            <span class="n">CoDual</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+                            <span class="n">randomized</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span>
+                            <span class="c1">#actionsList=g.actions,</span>
+                            <span class="p">)</span>
         <span class="nb">print</span><span class="p">(</span><span class="n">ba2</span><span class="p">)</span>
         <span class="c1">#print(ba2.bachetRanking)</span>
-        <span class="c1">#corrba2 = g.computeRankingCorrelation(ba2.bachetRanking)</span>
+        <span class="n">corrba2</span> <span class="o">=</span> <span class="n">g</span><span class="o">.</span><span class="n">computeRankingCorrelation</span><span class="p">(</span><span class="n">ba2</span><span class="o">.</span><span class="n">bachetRanking</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;</span><span class="si">%d</span><span class="s1">,</span><span class="si">%.4f</span><span class="s1">,</span><span class="si">%.4f</span><span class="s1">,</span><span class="si">%.4f</span><span class="s1">,</span><span class="si">%.4f</span><span class="se">\n</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="n">seed</span><span class="p">,</span><span class="n">corrba1</span><span class="p">[</span><span class="s1">&#39;correlation&#39;</span><span class="p">],</span>
+                                           <span class="n">corrcop</span><span class="p">[</span><span class="s1">&#39;correlation&#39;</span><span class="p">],</span>
+                                        <span class="n">corrba2</span><span class="p">[</span><span class="s1">&#39;correlation&#39;</span><span class="p">],</span>
+                                        <span class="n">corrnf</span><span class="p">[</span><span class="s1">&#39;correlation&#39;</span><span class="p">])</span> <span class="p">)</span>
         <span class="c1">#res.write(&#39;%d,%.4f,%.4f,%.4f,%.4f\n&#39; % (seed,corrba1[&#39;correlation&#39;],</span>
         <span class="c1">#                                   corrcop[&#39;correlation&#39;],</span>
         <span class="c1">#                                corrba2[&#39;correlation&#39;],</span>
@@ -2311,7 +2318,7 @@
 
   <div role="contentinfo">
     <p>&#169; Copyright 2012-2025, Raymond Bisdorff.
-      <span class="lastupdated">Last updated on Feb 14, 2025.
+      <span class="lastupdated">Last updated on Feb 15, 2025.
       </span></p>
   </div>
 

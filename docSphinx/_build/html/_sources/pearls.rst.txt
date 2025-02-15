@@ -4026,6 +4026,200 @@ Back to :ref:`Content Table <Pearls-label>`
 
 -----------------
 
+.. _Machet-Tutorial-label:
+
+Ranking-by-scoring with sbit numbers
+````````````````````````````````````
+.. contents:: 
+   :depth: 1
+   :local:
+
+bipolar-valued binary Machet numbers
+....................................
+
+Bipolar-valued {-1,0,1} base 3 encoded integers are due to *Claude Gaspard Bachet de Méziriac* (1581-1638) [20]_. The idea is to represent the value of an integer *n* in a base 3 positional numerotation where at each position may appear a **signed binary number** e.i. one of the three symbols **{-1,0,1}**, called hereafter **sbits** for short.
+
+*Bachet*'s positional *sbit* numerotation system is simulating a weight balance scale where the number *n* and the potential negative powers of 3 are put on the left tray and the potential positive powers of 3 are put on the right tray. The equation for *n = 5* gives :math:`(n + 3^1 + 3^0) = 3^2`. And the *sbit* encoding corresponds to '1-1-1'. As, this representation is isomorphic to a base 3 bit encoding, every positive or negative integer may hence be represented with a unique *sbit* representation. With three powers of 3, namely :math:`3^0, 3^1, 3^2`, one may hence represent any integer value in the range -13 to +13. *Bachet* proved that this bipolar-valued weight measuring system uses the smallest possible number of weights to balance the scale for any given weight *n* [BAC-1624p]_.
+
+The Digraph3 :py:mod:`arithmetics` module provides in the :py:class:`~arithmetics.BachetNumber` class an efffective implementation for such base 3 sbit encoded integers. *Negation*, *addition* and *reversing* operations on such Machet numbers are implemented (see :numref:`BachetNumbers` below). 
+
+.. code-block:: pycon
+   :caption: Working with Bachet sbit numbers
+   :name: BachetNumbers
+   :emphasize-lines: 6,15,20,24,31-
+   :linenos:
+    
+   >>> from arithmetics import BachetNumber
+   >>> n1 = BachetNumber(5)
+   >>> n1
+     *------- Bachet number description ------*
+     Instance class : BachetNumber
+     String         : 1-1-1
+     Vector         : [1, -1, -1]
+     Length         : 3
+     Value          : 5
+     Attributes     : ['vector']  
+   >>> n2 = BachetNumber(vector=[1,1,1])
+   >>> n2
+     *------- Bachet number description ------*
+     Instance class : BachetNumber
+     String         : 111
+     Vector         : [1, 1, 1]
+     Length         : 3
+     Value          : 13
+     Attributes     : ['vector']
+   >>> n3 = n1 + n2
+   >>> n3
+     *------- Bachet number description ------*
+     Instance class : BachetNumber
+     String         : 1-100
+     Vector         : [1, -1, 0, 0]
+     Length         : 4
+     Value          : 18
+     Attributes     : ['vector']
+   >>> print('%s (%d) + %s (%d) = %s (%d)'
+   ...        % (n1, n1.value(), n2, n2.value(), n3, n3.value() ))
+     1-1-1 (5) + 111 (13) = 1-100 (18)
+   >>> n4 = n1.reverse()
+   >>> n5 = -n2
+   >>> print('%s (%d) + %s (%d) = %s (%d)'
+   ...       % ( n4, n4.value(), n5, n5.value(),n4 + n5, (n4+n5).value() ))
+     -1-11 (-11) + -1-1-1 (-13) = -1010 (-24)
+
+Examples of sbit encoded Bachet numbers
+.......................................
+
+Examples of such *sbit* encoded Bachet numbers are for instance provided by the rows and columns of the *relation* attribute of a polarised outranking digraph (see :numref:`examplesBachet` Lines 4-6 below). 
+
+.. code-block:: pycon
+   :caption: Examples of sbit encoded numbers
+   :name: examplesBachet
+   :emphasize-lines: 16-19,22-25
+
+   >>> from outrankingDigraphs import *
+   >>> from linearOrders import *
+   >>> from arithmetics import BachetNumber
+   >>> g = RandomBipolarOutrankingDigraph(numberOfActions=4,seed=1)
+   >>> pg = PolarisedDigraph(g,level=g.valuationdomain['med'],
+   ...                      StrictCut=True,KeepValues=False)
+   >>> pg.recodeValuation(ndigits=0)
+   >>> pg.showRelationTable()
+    * ---- Relation Table -----
+        S   | 'a1' 'a2' 'a3' 'a4'	  
+      ------|-------------------------
+       'a1' |   0    0	  1   -1	 
+       'a2' |   1    0	 -1   -1	 
+       'a3' |   1    1	  0   -1	 
+       'a4' |   1    1	  1    0	 
+    >>> ra1 = BachetNumber(vector=[0,1,-1])
+    >>> ra2 = BachetNumber(vector=[1,-1,-1])
+    >>> ra3 = BachetNumber(vector=[1,1,-1])
+    >>> ra4 = BachetNumber(vector=[1,1,1])
+    >>> print( ra1.value(), ra2.value(), ra3.value(), ra4.value() )
+     2 5 11 13
+    >>> ca1 = BachetNumber(vector=[1,1,1])
+    >>> ca2 = BachetNumber(vector=[0,1,1])
+    >>> ca3 = BachetNumber(vector=[1,-1,1])
+    >>> ca4 = BachetNumber(vector=[-1,-1,-1])
+    >>> print(ca1.value(),ca2.value(),ca3.value(),ca4.value())
+     13 4 7 -13
+    >>> print( ra1.value()-ca1.value(), ra2.value()-ca2.value(),
+    ...        ra3.value()-ca3.value(), ra4.value()-ca4.value() )
+     -11 1 4 26
+
+The Bachet numbers, instantiated by the row vectors without the reflexive terms (see Lines 16-19) and the column vectors (see Lines 22-25) of the digraph "g.relation* attribute, give an effective **outrankingness** measure *rx*, respectively an **outrankedness** measure *cx*. The difference *rx* - *cx* of these measures gives a ranking score per decision action *x* similar to the *Copeland* and *NetFlows* scores. In our example here we obtain the Bachet ranking *'a4' (26) > 'a3' (4) > 'a2' (1) > 'a1' (-11)* which is convincingly well correlated with the given outranking digraph *g* (tau = 0.795, see below).
+
+    >>> corr = g.computeRankingCorrelation(['a4','a3','a2','a1'])
+    >>> g.showCorrelation(['a4', 'a3', 'a2', 'a1'])
+     Correlation indexes:
+      Crisp ordinal correlation  : +0.795
+      Epistemic determination    :  0.621
+      Bipolar-valued equivalence : +0.493
+
+
+The Bachet ranking rule, a new ranking-by-scoring method
+........................................................
+
+We provide in the :py:mod:`linearOrders` module a :py:class:`~linearOrders.BachetRanking` class implementing the previously introduced Bachet numbers based ranking rule.
+
+Mind that the integer value range of these Bachet numbers may get quickly huge with the order of the given outranking digraph, i.e the actual length of the given row and column chracteristic vectors. We provide an *orderLimit* parameter, set by default to 50, allowing to tackle the case given integer values in the huge integer range +-358948993845926294385124. When there is need to tackle digraphs of even larger order, this *orderLimit* parameter may be adjusted.
+
+Like the Copeland and the NetFlows ranking rules, the Bachet ranking rule is *invariant* under the *codual* transform and by default works on the corresponding strict outranking digraph. The Bachet ranking rule is furthermore, like the Copeland rule, also *Condorcet consistent*, i.e. when the polarised strict outranking digraph models a crisp linear relation, its Bachet ranking result will be consistent with this linear outranking relation.
+
+Mind also that the Bachet sbit numbering system is a positional numeral system, implying that the Bachet ranking scores are essentially depending on the very ordering of the rows and columns of the outranking digraph's *relation* attribute. It is hence recommended to compute a first Bachet ranking result with the given order of the *actions* atribute and a second one with the reversed order. The best qualified of both ranking results is eventually returned (see :numref:`optimisingBachet` Lines 6 and 22). The :py:class:`~linearOrders.BachetRanking` class provides therefore the *BestQualified* parameter set by default to *True*.
+
+When the ranking result remains however suspiciously uncorrelated with the given outranking digraph, as we may notice in our example :numref:`optimisingBachet` below, it is recommended to set the provided *randomized* parameter (default=0) to a positive integer *n*. In this case, *n* random orderings of the decision actions with their reversed versions will generated in order to compute multiple Bachet rankings. The best correlated ranking will eventually be returned (see below).   
+
+.. code-block:: pycon
+   :caption: Optimising the Bachet ranking result
+   :name: optimisingBachet
+   :emphasize-lines: 6,20,22,36,38,52
+
+   >>> print("*==>> testing BachetRanking Class ----*")
+   >>> from outrankingDigraphs import RandomBipolarOutrankingDigraph
+   >>> g = RandomBipolarOutrankingDigraph(numberOfActions=9,seed=1)
+   >>> from linearOrders import BachetRanking
+   >>> print('*---- solely given ordering of the actions ---*')
+   >>> ba1 = BachetRanking(g,BestQualified=False)
+   >>> ba1.showScores()
+     Bachet scores in descending order
+     action 	 score
+     a2 	 14768.00
+     a8 	 10061.00
+     a9 	 9264.00
+     a3 	 8211.00
+     a6 	 1394.00
+     a7 	 1317.00
+     a4 	 1294.00
+     a5 	 -3846.00
+     a1 	 -5849.00
+   >>> print(g.computeRankingCorrelation(ba1.bachetRanking))
+     {'correlation': 0.3935624213996805, 'determination': 0.408625}
+   >>> print('*---- given and reversed ordering of the actions ---*')
+   >>> ba2 = BachetRanking(g,BestQualified=True)
+   >>> ba2.showScores() 
+     Bachet scores in descending order
+     action 	 score
+     a2 	 14768.00
+     a8 	 10061.00
+     a9 	 9264.00
+     a3 	 8211.00
+     a6 	 1394.00
+     a7 	 1317.00
+     a4 	 1294.00
+     a5 	 -3846.00
+     a1 	 -5849.00
+   >>> print(g.computeRankingCorrelation(ba2.bachetRanking))
+     {'correlation': 0.46511675333945146, 'determination': 0.408625}
+   >>> print('*---- using 10 random ordering and their reversed versions ---*')
+   >>> ba3 = BachetRanking(g,BestQualified=True,randomized=10)
+   >>> ba3.showScores()
+     Bachet scores in descending order
+     action 	 score
+     a2 	 15092.00
+     a9 	 8884.00
+     a3 	 8533.00
+     a8 	 8493.00
+     a7 	 1771.00
+     a6 	 -246.00
+     a4 	 -990.00
+     a5 	 -4234.00
+     a1 	 -6323.00
+   >>> print(g.computeRankingCorrelation(ba3.bachetRanking))
+     {'correlation': 0.7585058291696407, 'determination': 0.408625}
+
+
+Consensus quality of the bachet ranking results
+...............................................
+
+To be tested !
+
+..............................................
+
+Back to :ref:`Content Table <Pearls-label>`
+
+-----------------
+
 .. _Sufficiency-Tutorial-label:
 
 On characterizing bipolar-valued outranking digraphs
@@ -4778,6 +4972,8 @@ Appendix
 
 .. [BRI-2008p] Brian E. (2008), "Condorcet and Borda in 1784. Misfits and Documents", *Journal Electronique d'Histore des Probabilités et de la Statistique*, Vol 4, n°1, Juin/June 2008, https://www.jehps.net/
 
+.. [BAC-1624p] Claude Gaspard Bachet, sieur de Méziriac, *Problèmes plaisants et délectables…* , 2nd ed. (Lyons, France: Pierre Rigaud & Associates, 1624), pp. 18–33
+
 .. only:: html
 
     Endnotes
@@ -4813,7 +5009,9 @@ Appendix
 
 .. [18] [CON-1785p]_ P. clxxvij
 
-.. [19] " ... *j'ai cru devoir citer* [Borda], *1. parce qu'il est le premier qui ait observé que la méthode commune* [simple pluralité uninominale] *de faire des élections étoit défectueuse; 2. parce que celle qu'il a proposé d'y substituer est très ingénieuse, quelle seroit très-simple dans la pratique* ... " [CON-1785p]_ P. clxxiX   
+.. [19] " ... *j'ai cru devoir citer* [Borda], *1. parce qu'il est le premier qui ait observé que la méthode commune* [simple pluralité uninominale] *de faire des élections étoit défectueuse; 2. parce que celle qu'il a proposé d'y substituer est très ingénieuse, quelle seroit très-simple dans la pratique* ... " [CON-1785p]_ P. clxxiX
+
+.. [20] https://en.wikipedia.org/wiki/Claude_Gaspar_Bachet_de_M%C3%A9ziriac
 
 .. raw:: latex
 

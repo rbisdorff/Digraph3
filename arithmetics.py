@@ -143,7 +143,7 @@ class BachetNumber(object):
     >>> n4 = n1.reverse()
     >>> n5 = -n2
     >>> print('%s (%d) + %s (%d) = %s (%d)'
-    ...       % ( n4, n4.value(), n5, n5.value(),n1 + n2, (n1+n2).value() ))
+    ...       % ( n4, n4.value(), n5, n5.value(),n4 + n5, (n4+n5).value() ))
      011 (4) + -1-1-1 (-13) = -100 (-9)
 
     """
