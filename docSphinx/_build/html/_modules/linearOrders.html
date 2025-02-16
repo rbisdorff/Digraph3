@@ -1583,15 +1583,15 @@
 
             <span class="n">decBachetScores</span> <span class="o">=</span> <span class="p">[(</span><span class="o">-</span><span class="n">x</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span><span class="n">x</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">decBachetScores</span><span class="p">]</span>
             <span class="n">incBachetScores</span> <span class="o">=</span> <span class="p">[(</span><span class="o">-</span><span class="n">x</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span><span class="n">x</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">incBachetScores</span><span class="p">]</span>               
-            <span class="bp">self</span><span class="o">.</span><span class="n">decBachetScores</span> <span class="o">=</span> <span class="n">decBachetScores</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">incBachetScores</span> <span class="o">=</span> <span class="n">incBachetScores</span>
+            <span class="c1">#self.decBachetScores = decBachetScores</span>
+            <span class="c1">#self.incBachetScores = incBachetScores</span>
             <span class="k">if</span> <span class="n">Debug</span><span class="p">:</span>
                 <span class="nb">print</span><span class="p">(</span><span class="n">incBachetScores</span><span class="p">,</span><span class="n">decBachetScores</span><span class="p">)</span>
             <span class="k">if</span> <span class="n">Optimal</span><span class="p">:</span>
                 <span class="n">decBachetRevScores</span> <span class="o">=</span> <span class="p">[(</span><span class="o">-</span><span class="n">x</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span><span class="n">x</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">decBachetRevScores</span><span class="p">]</span>
                 <span class="n">incBachetRevScores</span> <span class="o">=</span> <span class="p">[(</span><span class="o">-</span><span class="n">x</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span><span class="n">x</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">incBachetRevScores</span><span class="p">]</span>               
-                <span class="bp">self</span><span class="o">.</span><span class="n">decBachetRevScores</span> <span class="o">=</span> <span class="n">decBachetRevScores</span>
-                <span class="bp">self</span><span class="o">.</span><span class="n">incBachetRevScores</span> <span class="o">=</span> <span class="n">incBachetRevScores</span>
+                <span class="c1">#self.decBachetRevScores = decBachetRevScores</span>
+                <span class="c1">#self.incBachetRevScores = incBachetRevScores</span>
                 <span class="k">if</span> <span class="n">Debug</span><span class="p">:</span>
                     <span class="nb">print</span><span class="p">(</span><span class="n">incBachetRevScores</span><span class="p">,</span><span class="n">decBachetRevScores</span><span class="p">)</span>
 
@@ -1618,10 +1618,14 @@
             <span class="n">corrRev</span> <span class="o">=</span> <span class="n">other</span><span class="o">.</span><span class="n">computeRankingCorrelation</span><span class="p">(</span><span class="n">bachetRevRanking</span><span class="p">)</span>
             <span class="k">if</span> <span class="n">corrRev</span><span class="p">[</span><span class="s1">&#39;correlation&#39;</span><span class="p">]</span> <span class="o">&gt;</span> <span class="n">corr</span><span class="p">[</span><span class="s1">&#39;correlation&#39;</span><span class="p">]:</span>
                 <span class="n">bachetRanking</span> <span class="o">=</span> <span class="n">bachetRevRanking</span>
+                <span class="n">decBachetScores</span> <span class="o">=</span> <span class="n">decBachetRevScores</span>
                 <span class="n">bachetOrder</span> <span class="o">=</span> <span class="n">bachetRevOrder</span>
+                <span class="n">incBachetScores</span> <span class="o">=</span> <span class="n">incBachetRevScores</span>
 
         <span class="bp">self</span><span class="o">.</span><span class="n">bachetRanking</span> <span class="o">=</span> <span class="n">bachetRanking</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">bachetOrder</span> <span class="o">=</span> <span class="n">bachetOrder</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">decBachetScores</span> <span class="o">=</span> <span class="n">decBachetScores</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">incBachetScores</span> <span class="o">=</span> <span class="n">incBachetScores</span>
         <span class="k">if</span> <span class="n">Comments</span><span class="p">:</span>
             <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Bachet Ranking:&#39;</span><span class="p">)</span>
             <span class="nb">print</span><span class="p">(</span><span class="n">bachetRanking</span><span class="p">)</span>
@@ -2318,7 +2322,7 @@
 
   <div role="contentinfo">
     <p>&#169; Copyright 2012-2025, Raymond Bisdorff.
-      <span class="lastupdated">Last updated on Feb 15, 2025.
+      <span class="lastupdated">Last updated on Feb 16, 2025.
       </span></p>
   </div>
 

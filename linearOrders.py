@@ -1429,15 +1429,15 @@ class BachetRanking(LinearOrder):
 
             decBachetScores = [(-x[0],x[1]) for x in decBachetScores]
             incBachetScores = [(-x[0],x[1]) for x in incBachetScores]               
-            self.decBachetScores = decBachetScores
-            self.incBachetScores = incBachetScores
+            #self.decBachetScores = decBachetScores
+            #self.incBachetScores = incBachetScores
             if Debug:
                 print(incBachetScores,decBachetScores)
             if Optimal:
                 decBachetRevScores = [(-x[0],x[1]) for x in decBachetRevScores]
                 incBachetRevScores = [(-x[0],x[1]) for x in incBachetRevScores]               
-                self.decBachetRevScores = decBachetRevScores
-                self.incBachetRevScores = incBachetRevScores
+                #self.decBachetRevScores = decBachetRevScores
+                #self.incBachetRevScores = incBachetRevScores
                 if Debug:
                     print(incBachetRevScores,decBachetRevScores)
 
@@ -1464,10 +1464,14 @@ class BachetRanking(LinearOrder):
             corrRev = other.computeRankingCorrelation(bachetRevRanking)
             if corrRev['correlation'] > corr['correlation']:
                 bachetRanking = bachetRevRanking
+                decBachetScores = decBachetRevScores
                 bachetOrder = bachetRevOrder
+                incBachetScores = incBachetRevScores
 
         self.bachetRanking = bachetRanking
         self.bachetOrder = bachetOrder
+        self.decBachetScores = decBachetScores
+        self.incBachetScores = incBachetScores
         if Comments:
             print('Bachet Ranking:')
             print(bachetRanking)

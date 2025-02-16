@@ -119,7 +119,7 @@ class OutrankingDigraph(Digraph,PerformanceTableau):
                                           Threading=False,nbrCores=None,
                                           Comments=True):
         """ Show method for the computeOutrankingConsensusQuality() method."""
-        self.computeOutrankingConsensusQuality(self,Sorted=Dorted,
+        self.computeOutrankingConsensusQuality(self,Sorted=Sorted,
                                                ValuedCorrelation=ValuedCorrelation,
                                           Threading=Threading,nbrCores=nbrCores,
                                           Comments=Comments)
