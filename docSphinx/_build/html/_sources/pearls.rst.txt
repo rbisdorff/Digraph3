@@ -38,7 +38,7 @@ Pearls of bipolar-valued epistemic logic
    
    :New:
 
-      * :ref:`A new ranking rule based on signed bit numbers <Bachet-Tutorial-label>`	 
+      * :ref:`A new ranking rule based on bipolar-valued Bachet numbers <Bachet-Tutorial-label>`	 
       *	:ref:`Condorcet's 1785 critical perspective on the simple plurality voting rule <Condorcet-Tutorial-label>`
 
    In this part of the **Digraph3** *documentation*, we provide an insight in computational enhancements one may get when working in a *bipolar-valued epistemic logic* framework, like - easily coping with *missing data* and uncertain criterion *significance weights*, - computing valued *ordinal correlations* between bipolar-valued outranking digraphs,  - computing digraph kernels and solving bipolar-valued kernel equation systems and, - testing for stability and confidence of outranking statements when facing uncertain performance criteria significance weights or decision objectives' importance weights.
@@ -61,7 +61,7 @@ Pearls of bipolar-valued epistemic logic
        * :ref:`Ordinal correlation equals bipolar-valued relational equivalence <OrdinalCorrelation-Tutorial-label>`
        * :ref:`On computing graph and digraph kernels <Kernel-Tutorial-label>`
        * :ref:`Computing bipolar-valued kernel membership characteristic vectors <Bipolar-Valued-Kernels-Tutorial-label>`
-       * :ref:`A new ranking rule based on signed bit numbers <Bachet-Tutorial-label>`	 
+       * :ref:`A new ranking rule based on bipolar-valued sbit numbers <Bachet-Tutorial-label>`	 
        * :ref:`On characterizing bipolar-valued outranking digraphs <Sufficiency-Tutorial-label>`
        * :ref:`Consensus quality of the bipolar-valued outranking relation <Outranking-Consensus-Tutorial-label>`
 
@@ -4032,20 +4032,20 @@ Back to :ref:`Content Table <Pearls-label>`
 
 .. _Bachet-Tutorial-label:
 
-Ranking-by-scoring with signed binary numbers
-```````````````````````````````````````````````````
+Ranking-by-scoring with bipolar-valued bit numbers
+``````````````````````````````````````````````````
 .. contents:: 
    :depth: 1
    :local:
 
-bipolar-valued binary Bachet numbers
-....................................
+bipolar-valued base 3 encoded  numbers
+......................................
 
 Bipolar-valued {-1,0,1} base 3 encoded integers are due to *Claude Gaspard Bachet de Méziriac* (1581-1638) [20]_. The idea is to represent the value of an integer *n* in a base 3 positional numerotation where at each position may appear a **signed binary number** e.i. one of the three symbols **{-1,0,1}**, called hereafter **sbits** for short.
 
 *Bachet*'s positional *sbit* numerotation system is simulating a weight balance scale where the number *n* and the potential negative powers of 3 are put on the right tray and the potential positive powers of 3 are put on the left tray. The equation for *n = 5* gives for instance :math:`3^2 = (n + 3^1 + 3^0)`. And the *sbit* encoding corresponds hence to the string '1-1-1'. As, this representation is isomorphic to a base 3 bit encoding, every positive or negative integer may hence be represented with a unique *sbit* representation. With three powers of 3, namely :math:`3^2, 3^1, 3^0`, one may for instance represent any integer value in the integer range -13 to +13. *Bachet* proved that this bipolar-valued weight measuring system uses the smallest possible number of weights -base 3 powers- to balance the scale for any given weight *n* [BAC-1624p]_.
 
-The Digraph3 :py:mod:`arithmetics` module provides in the :py:class:`~arithmetics.BachetNumber` class an efffective implementation for such base 3 sbit encoded integers. *Negation*, *addition* and *reversing* operations on such Bachet numbers are implemented (see :numref:`BachetNumbers` below). 
+The Digraph3 :py:mod:`arithmetics` module provides in the :py:class:`~arithmetics.BachetNumber` class an efffective implementation for such base 3 sbit encoded integers. *Negation*, *addition* and *reversing* operations on such Bachet numbers are implemented as shown in :numref:`BachetNumbers` below. 
 
 .. code-block:: pycon
    :caption: Working with Bachet sbit numbers
