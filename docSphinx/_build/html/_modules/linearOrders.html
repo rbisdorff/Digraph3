@@ -1560,8 +1560,8 @@
                     <span class="nb">print</span><span class="p">(</span><span class="n">vecx</span><span class="p">,</span><span class="n">vecy</span><span class="p">)</span>
                 <span class="n">bx</span> <span class="o">=</span> <span class="n">ar</span><span class="o">.</span><span class="n">BachetNumber</span><span class="p">(</span><span class="n">vector</span><span class="o">=</span><span class="n">vecx</span><span class="p">)</span>
                 <span class="n">by</span> <span class="o">=</span> <span class="n">ar</span><span class="o">.</span><span class="n">BachetNumber</span><span class="p">(</span><span class="n">vector</span><span class="o">=</span><span class="n">vecy</span><span class="p">)</span>
-                <span class="c1">#bScore = bx + (-by)</span>
-                <span class="n">bScore</span> <span class="o">=</span> <span class="n">bx</span>
+                <span class="n">bScore</span> <span class="o">=</span> <span class="n">bx</span> <span class="o">+</span> <span class="p">(</span><span class="o">-</span><span class="n">by</span><span class="p">)</span>
+                <span class="c1">#bScore = bx</span>
                 <span class="c1">#bScore = bx + by</span>
                 <span class="n">incBachetScores</span><span class="o">.</span><span class="n">append</span><span class="p">((</span><span class="n">bScore</span><span class="o">.</span><span class="n">value</span><span class="p">(),</span><span class="n">x</span><span class="p">))</span>
                 <span class="n">decBachetScores</span><span class="o">.</span><span class="n">append</span><span class="p">((</span><span class="o">-</span><span class="n">bScore</span><span class="o">.</span><span class="n">value</span><span class="p">(),</span><span class="n">x</span><span class="p">))</span>

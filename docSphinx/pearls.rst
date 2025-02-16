@@ -61,7 +61,7 @@ Pearls of bipolar-valued epistemic logic
        * :ref:`Ordinal correlation equals bipolar-valued relational equivalence <OrdinalCorrelation-Tutorial-label>`
        * :ref:`On computing graph and digraph kernels <Kernel-Tutorial-label>`
        * :ref:`Computing bipolar-valued kernel membership characteristic vectors <Bipolar-Valued-Kernels-Tutorial-label>`
-       * :ref:`A new ranking rule based on bipolar-valued sbit numbers <Bachet-Tutorial-label>`	 
+       * :ref:`A new ranking rule based on bipolar-valued Bachet numbers <Bachet-Tutorial-label>`	 
        * :ref:`On characterizing bipolar-valued outranking digraphs <Sufficiency-Tutorial-label>`
        * :ref:`Consensus quality of the bipolar-valued outranking relation <Outranking-Consensus-Tutorial-label>`
 
@@ -4041,7 +4041,7 @@ Ranking-by-scoring with bipolar-valued bit numbers
 bipolar-valued base 3 encoded  numbers
 ......................................
 
-Bipolar-valued {-1,0,1} base 3 encoded integers are due to *Claude Gaspard Bachet de Méziriac* (1581-1638) [20]_. The idea is to represent the value of an integer *n* in a base 3 positional numerotation where at each position may appear a **signed binary number** e.i. one of the three symbols **{-1,0,1}**, called hereafter **sbits** for short.
+Bipolar-valued {-1,0,1} base 3 encoded integers are due to *Claude Gaspard Bachet de Méziriac* (1581-1638) [20]_. The idea is to represent the value of an integer *n* in a base 3 positional numerotation where at each position may appear a **signed bit** e.i. one of the three symbols **{-1,0,1}**, called hereafter **sbits** for short.
 
 *Bachet*'s positional *sbit* numerotation system is simulating a weight balance scale where the number *n* and the potential negative powers of 3 are put on the right tray and the potential positive powers of 3 are put on the left tray. The equation for *n = 5* gives for instance :math:`3^2 = (n + 3^1 + 3^0)`. And the *sbit* encoding corresponds hence to the string '1-1-1'. As, this representation is isomorphic to a base 3 bit encoding, every positive or negative integer may hence be represented with a unique *sbit* representation. With three powers of 3, namely :math:`3^2, 3^1, 3^0`, one may for instance represent any integer value in the integer range -13 to +13. *Bachet* proved that this bipolar-valued weight measuring system uses the smallest possible number of weights -base 3 powers- to balance the scale for any given weight *n* [BAC-1624p]_.
 
@@ -4166,7 +4166,6 @@ We provide in the :py:mod:`linearOrders` module a new :py:class:`~linearOrders.B
      Valuation domain    : [-1.00;1.00]
      Determinateness (%) : 100.00
      Attributes          : ['decBachetScores', 'incBachetScores',
-                            'decBachetRevScores', 'incBachetRevScores',
 	                    'bachetRanking', 'bachetOrder',
 	                    'name', 'actions', 'order', 'valuationdomain',
 	                    'relation', 'gamma', 'notGamma', 'runTimes']
@@ -4251,17 +4250,17 @@ When the ranking result remains however suspiciously uncorrelated with the given
    >>> ba1.showScores()
      Bachet scores in descending order
       action 	 score
-        a2 	 3280.00
-        a6 	 3252.00
-        a4 	 3116.00
-        a5 	 1822.00
-        a9 	 1822.00
-        a8 	 1767.00
-        a7 	 1528.00
-        a3 	 1276.00
-        a1 	-2569.00
+        a2 	 6020.00
+        a8 	 3353.00
+        a9 	 3088.00
+        a3 	 2379.00
+        a6 	 476.00
+        a7 	 435.00
+        a4 	 322.00
+        a5 	 -1254.00
+        a1 	 -5849.00
    >>> g.computeRankingCorrelation(ba1.bachetRanking)
-    {'correlation': 0.5080520716495021, 'determination': 0.408625}
+     {'correlation': 0.3935624213996805, 'determination': 0.408625}
     *---- given and reversed ordering of the actions ---*')
    >>> ba2 = BachetRanking(g,BestQualified=True)
    >>> ba2.showScores() 
@@ -4296,6 +4295,25 @@ When the ranking result remains however suspiciously uncorrelated with the given
     {'correlation': 0.7585058291696407, 'determination': 0.408625}
 
 Notice that correlation +0.7585 corresponds to the correlation of the unique optimal Kemeny ranking ['a2', 'a5', 'a9', 'a6', 'a8', 'a4', 'a3', 'a7', 'a1']. It is hence the highest possible correlation one may obtain with any ranking result.
+
+When comparing the Bachet rankings of best-qualified and randomized=100 versions with the corresponding Copeland rankings obtained from 1000 random Cost-Benefit performance tableaux of order 20 ,envolving 13 performance criteria, we observe the following correlation statistics with the corresponding outranking digraphs.
+
+     ==================  ==================  ==================
+             Bachet ranking rule                 Copeland
+     --------------------------------------  ------------------
+      best qualified      randomized = 100      ranking rule  
+     ==================  ==================  ==================
+      Min.   : +0.3485    Min.   : +0.5634    Min.   : +0.5442  
+      1st Qu.: +0.6678    1st Qu.: +0.7812    1st Qu.: +0.7887  
+      Median : +0.7282    Median : +0.8240    Median : +0.8318  
+      Mean   : +0.7190    Mean   : +0.8172    Mean   : +0.8219  
+      3rd Qu.: +0.7822    3rd Qu.: +0.8589    3rd Qu.: +0.8646  
+      Max.   : +0.9047    Max.   : +0.9460    Max.   : +0.9541  
+     ==================  ==================  ==================
+
+The statistical figures confirm the expected noticeable performance enhancement one may obtain with the randomized version of the Bachet ranking rule which provides rankings of a correlation quality very similar to the Copeland rankings quality.
+
+Mind however that the Bachet ranking rule, unlike the Copeland rule, is not at all scalable to large or big performance tableaux with hundreds or thousands of performance records. 
 
 ..............................................
 

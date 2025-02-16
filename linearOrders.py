@@ -1406,8 +1406,8 @@ class BachetRanking(LinearOrder):
                     print(vecx,vecy)
                 bx = ar.BachetNumber(vector=vecx)
                 by = ar.BachetNumber(vector=vecy)
-                #bScore = bx + (-by)
-                bScore = bx
+                bScore = bx + (-by)
+                #bScore = bx
                 #bScore = bx + by
                 incBachetScores.append((bScore.value(),x))
                 decBachetScores.append((-bScore.value(),x))
