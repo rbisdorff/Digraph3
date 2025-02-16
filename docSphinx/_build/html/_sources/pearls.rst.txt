@@ -4038,14 +4038,14 @@ Ranking-by-scoring with bipolar-valued bit numbers
    :depth: 1
    :local:
 
-bipolar-valued base 3 encoded  numbers
+Bipolar-valued base 3 encoded  numbers
 ......................................
 
-Bipolar-valued {-1,0,1} base 3 encoded integers are due to *Claude Gaspard Bachet de Méziriac* (1581-1638) [20]_. The idea is to represent the value of an integer *n* in a base 3 positional numerotation where at each position may appear a **signed bit** e.i. one of the three symbols **{-1,0,1}**, called hereafter **sbits** for short.
+Bipolar-valued {-1,0,1} base 3 encoded integers are due to *Claude Gaspard Bachet de Méziriac* (1581-1638) [20]_. The idea is to represent the value of an integer *n* in a base 3 positional numerotation where in each position may appear a **signed bit** e.i. one of the three symbols **{-1,0,1}**, called hereafter **sbits** for short.
 
-*Bachet*'s positional *sbit* numerotation system is simulating a weight balance scale where the number *n* and the potential negative powers of 3 are put on the right tray and the potential positive powers of 3 are put on the left tray. The equation for *n = 5* gives for instance :math:`3^2 = (n + 3^1 + 3^0)`. And the *sbit* encoding corresponds hence to the string '1-1-1'. As, this representation is isomorphic to a base 3 bit encoding, every positive or negative integer may hence be represented with a unique *sbit* representation. With three powers of 3, namely :math:`3^2, 3^1, 3^0`, one may for instance represent any integer value in the integer range -13 to +13. *Bachet* proved that this bipolar-valued weight measuring system uses the smallest possible number of weights -base 3 powers- to balance the scale for any given weight *n* [BAC-1624p]_.
+*Bachet*'s positional *sbit* numerotation system is simulating a weight balance scale where the number *n* and the potential negative powers of 3 are put on the right tray and the potential positive powers of 3 are put on the left tray. The equation for *n = 5* gives for instance :math:`3^2 = (n + 3^1 + 3^0)`. And the *sbit* encoding corresponds hence to the string '1-1-1'. As, this representation is isomorphic to a base 3 bit encoding, every positive or negative integer may this way be represented with a unique *sbit* string. With three powers of 3, namely :math:`3^2, 3^1, 3^0`, one may for instance represent any integer value in the integer range -13 to +13. *Bachet* showed that this bipolar-valued weight measuring system relies on the smallest possible number of weights -base 3 powers- to balance the scale for any given weight *n* [BAC-1624p]_.
 
-The Digraph3 :py:mod:`arithmetics` module provides in the :py:class:`~arithmetics.BachetNumber` class an efffective implementation for such base 3 sbit encoded integers. *Negation*, *addition* and *reversing* operations on such Bachet numbers are implemented as shown in :numref:`BachetNumbers` below. 
+The Digraph3 :py:mod:`arithmetics` module provides in the :py:class:`~arithmetics.BachetNumber` class an implementation for such base 3 sbit encoded integers. The class provides *negation*, *addition* and *reversing* defines operation methods as illustrated in :numref:`BachetNumbers` below. 
 
 .. code-block:: pycon
    :caption: Working with Bachet sbit numbers
@@ -4195,7 +4195,7 @@ Properties of the Bachet ranking rule
 
 Note that, like the Copeland and the NetFlows ranking rules, the Bachet ranking rule is *invariant* under the *codual* transform and the :py:class:`~linearOrdres.BachetRanking` constructor works by default on the corresponding strict outranking digraph. The Bachet ranking rule is furthermore, like the Copeland rule, also *Condorcet consistent*, i.e. when the polarised strict outranking digraph models a crisp linear relation, its Bachet ranking result will be consistent with this linear outranking relation.
 
-Mind however that the Bachet sbit numbering system is a positional numeral system, implying that the Bachet ranking scores are essentially depending on the very ordering of the rows and columns of the outranking digraph's *self.relation* attribute. When measuring the correlations of all possible 24 permutations of the list ['a1', 'a2', 'a3', 'a4'], we may observe below in :numref:`BachetPerms` three different levels of correlation: +0.5265 (13), +0.6890 (3) and +0.7950 (8) (see Lines 6-8). In 8 out of 12 cases, the reversed versions delivers however the highest possible correlation (see Lines 6-7 and 14-15).
+Mind however that the Bachet sbit numbering system is a positional numeral system, implying that the Bachet ranking scores are essentially depending on the very ordering of the rows and columns of the outranking digraph's *self.relation* attribute. When measuring the quality of Bachet rankings obtained by operating the Bachet rule on all the 24 permutations of the actions list ['a1', 'a2', 'a3', 'a4'], we may observe below in :numref:`BachetPerms` three different levels of correlation: +0.5265 (13), +0.6890 (3) and +0.7950 (8) (see Lines 6-8). In 8 out of 12 cases, the reversed actions list delivers however the highest possible correlation (see Lines 6-7 and 14-15).
 
 .. code-block:: pycon
    :linenos:		
@@ -4233,7 +4233,7 @@ Mind however that the Bachet sbit numbering system is a positional numeral syste
     ['a2', 'a1', 'a3', 'a4'] ['a4', 'a3', 'a2', 'a1'] 0.7950
      ['a4', 'a3', 'a1', 'a2'] ['a4', 'a3', 'a1', 'a2'] 0.5265
      
-It is hence recommended to compute a first Bachet ranking result with the given order of the *self.actions* atribute and a second one with the corresponding reversed order. The best qualified of both ranking results is eventually returned. The :py:class:`~linearOrders.BachetRanking` class provides therefore the *BestQualified* parameter set by default to *True* (see :numref:`optimisingBachet` Lines 5 and 21)
+It is hence opportune to compute a first Bachet ranking result with the given order of the *self.actions* atribute and a second one with the corresponding reversed order. The best qualified of both ranking results is eventually returned. The :py:class:`~linearOrders.BachetRanking` class provides therefore the *BestQualified* parameter set by default to *True* (see :numref:`optimisingBachet` Lines 5 and 21)
 
 When the ranking result remains however suspiciously uncorrelated with the given outranking digraph, as we may notice in our example :numref:`optimisingBachet`  Line 35 below , it is recommended to set the provided *randomized* parameter (default=0) to a positive integer *n*. In this case, *n* random orderings of the decision actions with their reversed versions will be generated in order to compute potentially diverse Bachet ranking results. The best correlated Bachet ranking result will eventually be returned (see Lines 37 and 51 below).   
 
@@ -4294,7 +4294,7 @@ When the ranking result remains however suspiciously uncorrelated with the given
    >>> g.computeRankingCorrelation(ba3.bachetRanking)
     {'correlation': 0.7585058291696407, 'determination': 0.408625}
 
-Notice that correlation +0.7585 corresponds to the correlation of the unique optimal Kemeny ranking ['a2', 'a5', 'a9', 'a6', 'a8', 'a4', 'a3', 'a7', 'a1']. It is hence the highest possible correlation one may obtain with any ranking result.
+Notice that correlation +0.7585 corresponds in fact to the unique optimal Kemeny ranking ['a2', 'a5', 'a9', 'a6', 'a8', 'a4', 'a3', 'a7', 'a1']. It is hence the highest possible correlation one may obtain with any ranking result.
 
 When comparing the Bachet rankings of best-qualified and randomized=100 versions with the corresponding Copeland rankings obtained from 1000 random Cost-Benefit performance tableaux of order 20 ,envolving 13 performance criteria, we observe the following correlation statistics with the corresponding outranking digraphs.
 
@@ -4311,9 +4311,9 @@ When comparing the Bachet rankings of best-qualified and randomized=100 versions
       Max.   : +0.9047    Max.   : +0.9460    Max.   : +0.9541  
      ==================  ==================  ==================
 
-The statistical figures confirm the expected noticeable performance enhancement one may obtain with the randomized version of the Bachet ranking rule which provides rankings of a correlation quality very similar to the Copeland rankings quality.
+The statistical figures confirm the expected noticeable performance enhancement one may obtain with the randomized version of the Bachet ranking rule which provides in fact rankings of a correlation quality very similar to the Copeland rankings.
 
-Mind however that the Bachet ranking rule, unlike the Copeland rule, is not at all scalable to large or big performance tableaux with hundreds or thousands of performance records. 
+Mind however that the Bachet ranking rule, unlike the Copeland rule, is not scalable to large or big performance tableaux with hundreds or thousands of performance records. 
 
 ..............................................
 
