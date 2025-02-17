@@ -4246,47 +4246,47 @@ Note that, like the Copeland and the NetFlows ranking rules, the Bachet ranking 
 
 Mind however that the Bachet sbit numbering system is a positional numeral system, implying that the Bachet ranking scores, as noticed before, depend essentially on the very ordering of the rows and columns of the outranking digraph's *self.relation* attribute.
 
-When measuring the quality of Bachet rankings obtained by operating the Bachet rule on all the potential 24 permutations of the actions list ['a1', 'a2', 'a3', 'a4'], we may observe below in :numref:`BachetPerms` three different levels of correlation: +0.5265 (13), +0.6890 (3) and +0.7950 (8) (see Lines 6-8). In 8 out of 12 cases, the reversed actions list delivers however the highest possible correlation (see Lines 6-7 and 14-15).
+When measuring the quality of Bachet rankings obtained by operating the Bachet rule on all the potential 24 permutations of the actions list ['a1', 'a2', 'a3', 'a4'], we may observe below in :numref:`BachetPerms` four different levels of correlation: +0.7950, +0.6890 (3), +0.6113(3) and +0.5265 (10) (see :numref:`BachetPerms`). The first correlation correspond to 8 ['a4', 'a3', 'a2', 'a1'] ranking results, the second to three ['a4', 'a1', 'a3', 'a2'], the third to three ['a4', 'a2', 'a3', 'a1'], and the last to 10 ['a4', 'a3', 'a1', 'a2'] ranking results. In 8 out of 12 cases, the reversed actions list delivers however the highest possible correlation (see Lines 6-7 and 24-25).
 
 .. code-block:: pycon
    :linenos:		
    :caption: Importance of the ordering of the actions dictionary 
    :name: BachetPerms
-   :emphasize-lines: 6-8,14-15
+   :emphasize-lines: 6-7,13,24-25
 
    >>> perms = [p for  p in all_perms(['a1', 'a2', 'a3', 'a4'])]
    >>> for p in perms:
    ...     ba = BachetRanking(g,actionsList=p,BestQualified=False)
    ...     corr = g.computeRankingCorrelation(ba.bachetRanking)
    ...     print(p, ba.bachetRanking, '%.4f' % (corr['correlation']))
-    ['a4', 'a3', 'a2', 'a1'] ['a4', 'a3', 'a1', 'a2'] 0.5265
-     ['a1', 'a2', 'a3', 'a4'] ['a4', 'a3', 'a2', 'a1'] 0.7950
-    ['a3', 'a4', 'a2', 'a1'] ['a4', 'a1', 'a3', 'a2'] 0.6890
-     ['a1', 'a2', 'a4', 'a3'] ['a4', 'a3', 'a2', 'a1'] 0.7950
-    ['a3', 'a2', 'a4', 'a1'] ['a4', 'a1', 'a3', 'a2'] 0.6890
-     ['a1', 'a4', 'a2', 'a3'] ['a4', 'a3', 'a2', 'a1'] 0.7950
-    ['a3', 'a2', 'a1', 'a4'] ['a4', 'a3', 'a1', 'a2'] 0.5265
-     ['a4', 'a1', 'a2', 'a3'] ['a4', 'a3', 'a2', 'a1'] 0.7950
-    ['a4', 'a2', 'a3', 'a1'] ['a4', 'a3', 'a1', 'a2'] 0.5265
-     ['a1', 'a3', 'a2', 'a4'] ['a4', 'a3', 'a1', 'a2'] 0.5265
-    ['a2', 'a4', 'a3', 'a1'] ['a4', 'a3', 'a1', 'a2'] 0.5265
-     ['a1', 'a3', 'a4', 'a2'] ['a4', 'a3', 'a1', 'a2'] 0.5265
-    ['a2', 'a3', 'a4', 'a1'] ['a4', 'a3', 'a1', 'a2'] 0.5265
-     ['a1', 'a4', 'a3', 'a2'] ['a4', 'a3', 'a2', 'a1'] 0.7950
-    ['a2', 'a3', 'a1', 'a4'] ['a4', 'a3', 'a1', 'a2'] 0.5265
-     ['a4', 'a1', 'a3', 'a2'] ['a4', 'a3', 'a1', 'a2'] 0.5265
-    ['a4', 'a2', 'a1', 'a3'] ['a4', 'a3', 'a2', 'a1'] 0.7950
-     ['a3', 'a1', 'a2', 'a4'] ['a4', 'a3', 'a1', 'a2'] 0.5265
-    ['a2', 'a4', 'a1', 'a3'] ['a4', 'a3', 'a1', 'a2'] 0.5265
-     ['a3', 'a1', 'a4', 'a2'] ['a4', 'a3', 'a1', 'a2'] 0.5265
-    ['a2', 'a1', 'a4', 'a3'] ['a4', 'a3', 'a2', 'a1'] 0.7950
-     ['a3', 'a4', 'a1', 'a2'] ['a4', 'a3', 'a1', 'a2'] 0.6890
+    ['a1', 'a2', 'a3', 'a4'] ['a4', 'a3', 'a2', 'a1'] 0.7950
+     ['a4', 'a3', 'a2', 'a1'] ['a4', 'a3', 'a1', 'a2'] 0.5265
     ['a2', 'a1', 'a3', 'a4'] ['a4', 'a3', 'a2', 'a1'] 0.7950
      ['a4', 'a3', 'a1', 'a2'] ['a4', 'a3', 'a1', 'a2'] 0.5265
+    ['a2', 'a3', 'a1', 'a4'] ['a4', 'a3', 'a1', 'a2'] 0.5265
+     ['a4', 'a1', 'a3', 'a2'] ['a4', 'a3', 'a2', 'a1'] 0.7950
+    ['a2', 'a3', 'a4', 'a1'] ['a4', 'a3', 'a1', 'a2'] 0.5265
+     ['a1', 'a4', 'a3', 'a2'] ['a4', 'a2', 'a3', 'a1'] 0.6113
+    ['a1', 'a3', 'a2', 'a4'] ['a4', 'a3', 'a2', 'a1'] 0.7950
+     ['a4', 'a2', 'a3', 'a1'] ['a4', 'a3', 'a1', 'a2'] 0.5265
+    ['a3', 'a1', 'a2', 'a4'] ['a4', 'a3', 'a1', 'a2'] 0.5265
+     ['a4', 'a2', 'a1', 'a3'] ['a4', 'a3', 'a2', 'a1'] 0.7950
+    ['a3', 'a2', 'a1', 'a4'] ['a4', 'a3', 'a1', 'a2'] 0.5265
+     ['a4', 'a1', 'a2', 'a3'] ['a4', 'a3', 'a2', 'a1'] 0.7950
+    ['a3', 'a2', 'a4', 'a1'] ['a4', 'a3', 'a1', 'a2'] 0.5265
+     ['a1', 'a4', 'a2', 'a3'] ['a4', 'a2', 'a3', 'a1'] 0.6113
+    ['a1', 'a3', 'a4', 'a2'] ['a4', 'a2', 'a3', 'a1'] 0.6113
+     ['a2', 'a4', 'a3', 'a1'] ['a4', 'a3', 'a1', 'a2'] 0.5265
+    ['a3', 'a1', 'a4', 'a2'] ['a4', 'a3', 'a1', 'a2'] 0.5265
+     ['a2', 'a4', 'a1', 'a3'] ['a4', 'a3', 'a1', 'a2'] 0.5265
+    ['a3', 'a4', 'a1', 'a2'] ['a4', 'a1', 'a3', 'a2'] 0.6890
+     ['a2', 'a1', 'a4', 'a3'] ['a4', 'a3', 'a2', 'a1'] 0.7950
+    ['a3', 'a4', 'a2', 'a1'] ['a4', 'a1', 'a3', 'a2'] 0.6890
+     ['a1', 'a2', 'a4', 'a3'] ['a4', 'a3', 'a2', 'a1'] 0.7950
      
-It is hence opportune to compute a first Bachet ranking result with the given order of the *self.actions* atribute and a second one with the corresponding reversed order. The best qualified of both ranking results is eventually returned. The :py:class:`~linearOrders.BachetRanking` class provides therefore the *BestQualified* parameter set by default to *True* (see :numref:`optimisingBachet` Lines 5 and 21)
+It appears hence to be opportune to compute a first Bachet ranking result with the given order of the *self.actions* atribute and a second one with the corresponding reversed order. The best correlated of both ranking results is eventually returned. The :py:class:`~linearOrders.BachetRanking` class provides therefore the *BestQualified* parameter set by default to *True* (see :numref:`optimisingBachet` Lines 5 and 21)
 
-When the ranking result remains however suspiciously uncorrelated with the given outranking digraph, as we may notice in our example :numref:`optimisingBachet`  Line 35 below , it is recommended to set the provided *randomized* parameter (default=0) to a positive integer *n*. In this case, *n* random orderings of the decision actions with their reversed versions will be generated in order to compute potentially diverse Bachet ranking results. The best correlated Bachet ranking result will eventually be returned (see Lines 37 and 51 below).
+When the ranking result remains however weakly correlated with the given outranking relation, as we may notice in this second example of random outranking digraph of order 9 (see :numref:`optimisingBachet`  Line 35 below), it is recommended to set the provided *randomized* parameter (default=0) to a positive integer *n*. In this case, *n* random orderings of the decision actions with their reversed versions will be generated in order to compute potentially diverse Bachet ranking results. The best correlated Bachet ranking result will eventually be returned (see Lines 37 and 51 below).
 
 .. code-block:: pycon
    :caption: Optimising the Bachet ranking result
@@ -4311,7 +4311,7 @@ When the ranking result remains however suspiciously uncorrelated with the given
         a5 	 -1254.00
         a1 	 -5849.00
    >>> g.computeRankingCorrelation(ba1.bachetRanking)
-     {'correlation': 0.3935624213996805, 'determination': 0.408625}
+     {'correlation': +0.3936, 'determination': 0.4086}
     *---- given and reversed ordering of the actions ---*')
    >>> ba2 = BachetRanking(g,BestQualified=True)
    >>> ba2.showScores() 
@@ -4327,7 +4327,7 @@ When the ranking result remains however suspiciously uncorrelated with the given
         a4 	-4410.00
         a1 	-6083.00
    >>> g.computeRankingCorrelation(ba2.bachetRanking)
-    {'correlation': 0.6314945107236328, 'determination': 0.408625}
+    {'correlation': +0.6315, 'determination': 0.4086}
     *---- using 100 random ordering and their reversed versions ---*')
    >>> ba3 = BachetRanking(g,BestQualified=True,randomized=100)
    >>> ba3.showScores()
@@ -4343,9 +4343,9 @@ When the ranking result remains however suspiciously uncorrelated with the given
         a7 	  858.00
         a1 	-2733.00
    >>> g.computeRankingCorrelation(ba3.bachetRanking)
-    {'correlation': 0.7585058291696407, 'determination': 0.408625}
+    {'correlation': +0.7585, 'determination': 0.4086}
 
-The correlation +0.7585 corresponds in the case given here to the unique optimal Kemeny ranking ['a2', 'a5', 'a9', 'a6', 'a8', 'a4', 'a3', 'a7', 'a1']. It is hence the highest possible correlation one may obtain with any ranking result.
+The correlation +0.7585 corresponds in the case given here to the unique optimal Kemeny ranking ['a2', 'a5', 'a9', 'a6', 'a8', 'a4', 'a3', 'a7', 'a1']. It is hence the highest possible correlation one may obtain.
 
 When comparing now the Bachet rankings of best-qualified and randomized=100 versions with the corresponding Copeland rankings obtained from 1000 random Cost-Benefit performance tableaux of order 20 and involving 13 performance criteria, we may observe the following correlation statistics.
 
@@ -4362,9 +4362,9 @@ When comparing now the Bachet rankings of best-qualified and randomized=100 vers
       Max.   : +0.9047    Max.   : +0.9460    Max.   : +0.9541  
      ==================  ==================  ==================
 
-The statistical figures confirm the expected noticeable performance enhancement one may obtain with the randomized version of the Bachet ranking rule, providing in fact rankings of a correlation quality very similar to the Copeland rankings.
+The statistical figures confirm the expected noticeable performance enhancement one may obtain with the randomized version of the Bachet ranking rule, providing in fact rankings of a correlation quality very similar to the Copeland rankings. Yet, computing a ranking result just from the given ordering of the *self.actions* dictionary  and its reverse ordering may give with a median correlation of +7282 already satisfactory ranking results. 
 
-Mind however that the Bachet ranking rule, unlike the Copeland rule, is not scalable to large or big performance tableaux with hundreds or thousands of performance records. The integer value of Bachet numbers get indeed quickly huge with the order of the given outranking digraph. The :py:class:`~linearOrders.BachetRanking` constructor provides therefore an *ordeLimit* parameter set by default to 50, which allows to represent integer values in the huge range +- 358948993845926294385124.
+Mind finally that the Bachet ranking rule, unlike the Copeland rule, is not scalable to large or big performance tableaux with hundreds or thousands of performance records. The integer value of Bachet numbers get indeed quickly huge with the order of the given outranking digraph. The :py:class:`~linearOrders.BachetRanking` constructor provides therefore an *ordeLimit* parameter set by default to 50, which allows to represent integer values in the huge range +- 358948993845926294385124.
 
 .. code-block:: pycon
 
@@ -4373,7 +4373,7 @@ Mind however that the Bachet ranking rule, unlike the Copeland rule, is not scal
    >>> n.value()
     358948993845926294385124
 
-Mind that the range of integers is in Python only limited by the available CPU memory and the *orderLimit* parameter may be adjusted to tackle, if useful, digraphs of larger orders than 50. The Bachet randomized ranking results may however need a considerable sampling size. But this issue has still to be explored.
+In Python, the range of integers is luckily only limited by the available CPU memory and the *orderLimit* parameter may be adjusted to tackle, if required, digraphs of larger orders than 50. The Bachet randomized ranking rule might however need a considerable sampling size in order to achieve convincingly correlated rankings. But this issue has still to be explored.
 
 ..............................................
 
