@@ -38,7 +38,7 @@ Pearls of bipolar-valued epistemic logic
    
    :New:
 
-      * :ref:`A new ranking rule based on bipolar-valued Bachet sbits numbers <Bachet-Tutorial-label>`	 
+      * :ref:`A new ranking rule based on bipolar-valued base 3 Bachet numbers <Bachet-Tutorial-label>`	 
       *	:ref:`Condorcet's 1785 critical perspective on the simple plurality voting rule <Condorcet-Tutorial-label>`
 
    In this part of the **Digraph3** *documentation*, we provide an insight in computational enhancements one may get when working in a *bipolar-valued epistemic logic* framework, like - easily coping with *missing data* and uncertain criterion *significance weights*, - computing valued *ordinal correlations* between bipolar-valued outranking digraphs,  - computing digraph kernels and solving bipolar-valued kernel equation systems and, - testing for stability and confidence of outranking statements when facing uncertain performance criteria significance weights or decision objectives' importance weights.
@@ -4041,14 +4041,14 @@ Ranking-by-scoring with bipolar-valued base 3 encoded numbers
 Bipolar-valued base 3 encoded  numbers
 ......................................
 
-Bipolar-valued {-1,0,1} base 3 encoded integers are due to *Claude Gaspard Bachet de Méziriac* (1581-1638) [20]_. The idea is to represent the value of an integer *n* in a base 3 positional numerotation where in each position may appear a **signed bit** e.i. one of the three symbols **{-1,0,1}**, called hereafter **sbits** for short.
+Bipolar-valued {-1,0,1} base 3 encoded integers are due to *Claude Gaspard Bachet de Méziriac* (1581-1638) [20]_. The idea is to represent the value of an integer *n* in a base 3 positional numerotation where in each position may appear a **signed bit** e.i. one of the three symbols **{-1,0,1}**, called hereafter **bpbits** for short.
 
-*Bachet*'s positional *sbits* numerotation system is simulating a weight balance scale where the number *n* and the potential negative powers of 3 are put on the right tray and the potential positive powers of 3 are put on the left tray. The equation for *n = 5* gives for instance :math:`3^2 = (n + 3^1 + 3^0)`. And the *sbits* encoding corresponds hence to the string '1-1-1'. As, this representation is isomorphic to a base 3 binary encoding, every positive or negative integer may this way be represented with a unique *sbits* string. With three powers of 3, namely :math:`3^2, 3^1, 3^0`, one may for instance represent any value in the integer range -13 to +13. *Bachet* showed that this bipolar weighing system relies on the smallest possible number of weights -base 3 powers- to balance the scale for any given weight *n* [BAC-1624p]_.
+*Bachet*'s positional *bpbits* numerotation system is simulating a weight balance scale where the number *n* and the potential negative powers of 3 are put on the right tray and the potential positive powers of 3 are put on the left tray. The equation for *n = 5* gives for instance :math:`3^2 = (n + 3^1 + 3^0)`. And the *sbits* encoding corresponds hence to the string '1-1-1'. As, this representation is isomorphic to a base 3 binary encoding, every positive or negative integer may this way be represented with a unique *bpbits* string. With three powers of 3, namely :math:`3^2, 3^1, 3^0`, one may for instance represent any value in the integer range -13 to +13. *Bachet* showed that this bipolar weighing system relies on the smallest possible number of weights -base 3 powers- to balance the scale for any given weight *n* [BAC-1624p]_.
 
-The Digraph3 :py:mod:`arithmetics` module provides with the :py:class:`~arithmetics.BachetNumber` class an implementation for such sbits encoded integers. Instantiating a Bachet number may be done either with an integer value or with a vector of sbits (see :numref:`BachetNumbers` Lines  6 and 11). The class provides *negation*, *addition* and *reversing* methods as illustrated in Lines 20,32 and 33 below. 
+The Digraph3 :py:mod:`arithmetics` module provides with the :py:class:`~arithmetics.BachetNumber` class an implementation for such *bpbits* encoded integers. Instantiating a Bachet number may be done either with an integer value or with a vector of bpbits (see :numref:`BachetNumbers` Lines  6 and 11). The class provides *negation*, *addition* and *reversing* methods as illustrated in Lines 20,32 and 33 below. 
 
 .. code-block:: pycon
-   :caption: Working with Bachet sbit numbers
+   :caption: Working with Bachet bpbits encoded numbers
    :name: BachetNumbers
    :emphasize-lines: 2,6,11,15,20,31-33,36
    :linenos:
@@ -4090,13 +4090,13 @@ The Digraph3 :py:mod:`arithmetics` module provides with the :py:class:`~arithmet
    ...       % ( n4, n4.value(), n5, n5.value(),n4 + n5, (n4+n5).value() ))
      -1-11 (-11) + -1-1-1 (-13) = -1010 (-24)
 
-Examples of sbits encoded Bachet numbers
-........................................
+Examples of bpbits encoded Bachet numbers
+.........................................
 
-Examples of such *sbits* encoded Bachet numbers are immediately provided by the rows and columns of the *self.relation* attribute of a polarised outranking digraph instance (see :numref:`examplesBachet` Lines 4-6  and 12-15 below). 
+Examples of such *bpbits* encoded Bachet numbers are immediately provided by the rows and columns of the *self.relation* attribute of a polarised outranking digraph instance (see :numref:`examplesBachet` Lines 4-6  and 12-15 below). 
 
 .. code-block:: pycon
-   :caption: Examples of sbit encoded numbers
+   :caption: Examples of bpbits encoded numbers
    :name: examplesBachet
    :emphasize-lines: 4-6,12-19,16-27,30
    :linenos:
@@ -4249,7 +4249,7 @@ The class delivers as usual a ranking (*self.bachetRanking*) and a corresponding
 
 Note that, like the Copeland and the NetFlows ranking rules, the Bachet ranking rule is actually *invariant* under the *codual* transform and the :py:class:`~linearOrdres.BachetRanking` constructor works by default on the corresponding strict outranking digraph (*CoDual=True*). The Bachet ranking rule is furthermore, like the Copeland rule, also *Condorcet consistent*, i.e. when the polarised strict outranking digraph models a crisp linear relation, its Bachet ranking result will be consistent with this linear outranking relation.
 
-Mind however that the sbits based numbering system is a *positional numeral system*, implying that the Bachet ranking scores, as noticed before, depend essentially on the very ordering of the rows and columns of the outranking digraph's *self.relation* attribute.
+Mind however that a bpbits based numbering system is a *positional numeral system*, implying that the Bachet ranking scores, as noticed before, depend essentially on the very ordering of the rows and columns of the outranking digraph's *self.relation* attribute.
 
 When measuring now the quality of Bachet rankings obtained by operating the Bachet rule on each one of all the potential 24 permutations of the four *self.actions* keys ['a1', 'a2', 'a3', 'a4'], we may observe below in :numref:`BachetPerms` four different levels of correlation: +0.7950 (8), +0.6890 (3), +0.6113(3) and +0.5265 (10) (see :numref:`BachetPerms`). The first correlation correspond to eight ['a4', 'a3', 'a2', 'a1'] ranking results, the second to three ['a4', 'a1', 'a3', 'a2'], the third to three ['a4', 'a2', 'a3', 'a1'], and the last to ten ['a4', 'a3', 'a1', 'a2'] ranking results. In 8 out of 12 cases, the reversed actions list delivers the highest possible correlation +0.7950 (see Lines 6-7 and 24-25).
 
