@@ -67,8 +67,8 @@
 
 
 \title{Tutorials for the Digraph3 Python software resources}
-\date{February 05, 2025}
-\release{3.13.0}
+\date{February 17, 2025}
+\release{3.13.2}
 \author{Raymond Bisdorff}
 \newcommand{\sphinxlogo}{\sphinxincludegraphics{introDoc3.png}\par}
 \renewcommand{\releasename}{Release}
@@ -1429,7 +1429,7 @@ From above given semantics, we may consider (see Line 5 above) that \sphinxstyle
 \end{sphinxVerbatim}
 
 \sphinxAtStartPar
-The outranking characteristic value \(r(a_1 \succsim a_2)\) represents the \sphinxstylestrong{majority margin} resulting from the difference between the weights of the criteria in favor and the weights of the criteria in disfavor of the statement that alternative \sphinxstyleemphasis{a1} is at least as well performing as alternative \sphinxstyleemphasis{a2}. No considerable performance difference being observed above, no veto or counter\sphinxhyphen{}veto situation is triggered in this pairwise comparison. Such a situation is, however, observed for instance when we pairwise compare the performances of alternatives \sphinxstyleemphasis{a1} and \sphinxstyleemphasis{a7}.
+The outranking characteristic value \(r(a_1 \succsim a_2)\) represents the \sphinxstylestrong{majority margin} resulting from the difference between the weights of the criteria in favor and the weights of the criteria in disfavor of the statement that alternative \sphinxstyleemphasis{a1} is at least as well performing as alternative \sphinxstyleemphasis{a2}. No considerable performance difference being observed above, no outranking polarisation is triggered in this pairwise comparison. Such a situation is, however, observed for instance when we pairwise compare the performances of alternatives \sphinxstyleemphasis{a1} and \sphinxstyleemphasis{a7}.
 
 \fvset{hllines={, 6,}}%
 \begin{sphinxVerbatim}[commandchars=\\\{\},numbers=left,firstnumber=1,stepnumber=1]
@@ -2241,7 +2241,7 @@ Except the \sphinxstyleemphasis{Costs} criterion, all other criteria admit for g
 In \hyperref[\detokenize{tutorial:offperftab}]{Table \ref{\detokenize{tutorial:offperftab}}} we may also see that the \sphinxstyleemphasis{Costs} criterion admits the highest significance (45.0), followed by the \sphinxstyleemphasis{Future turnover} criteria (32.0 + 26.0 + 23.0 = 81.0), The \sphinxstyleemphasis{Working conditions} criteria are the less significant (10.0 + 6.0, + 3.0 = 19.0). It follows that the CEO considers \sphinxstyleemphasis{maximizing the future turnover} the most important objective (81.0), followed by the \sphinxstyleemphasis{minizing yearly Costs} objective (45.0), and less important, the \sphinxstyleemphasis{maximizing working conditions} objective (19.0).
 
 \sphinxAtStartPar
-Concerning yearly costs, we suppose that the CEO is indifferent up to a performance difference of 1000\texteuro{}, and he actually prefers a location if there is at least a positive difference of 2500\texteuro{}. The grades observed on the six qualitative criteria (measured in percentages of satisfaction) are very subjective and rather imprecise. The CEO is hence indifferent up to a satisfaction difference of 10\%, and he claims a significant preference when the satisfaction difference is at least of 20\%.  Furthermore, a satisfaction difference of 80\% represents for him a \sphinxstyleemphasis{considerably large} performance difference, triggering a \sphinxstyleemphasis{veto} situation the case given (see \sphinxcite{tutorial:bis-2013}).
+Concerning yearly costs, we suppose that the CEO is indifferent up to a performance difference of 1000\texteuro{}, and he actually prefers a location if there is at least a positive difference of 2500\texteuro{}. The grades observed on the six qualitative criteria (measured in percentages of satisfaction) are very subjective and rather imprecise. The CEO is hence indifferent up to a satisfaction difference of 10\%, and he claims a significant preference when the satisfaction difference is at least of 20\%.  Furthermore, a satisfaction difference of 80\% represents for him a \sphinxstyleemphasis{considerably large} performance difference, triggering an outranking \sphinxstyleemphasis{polarisation} the case given (see \sphinxcite{tutorial:bis-2013}).
 
 
 \subsubsection{The performance tableau}
@@ -2303,7 +2303,7 @@ We thus recover all the input data. To measure the actual preference discriminat
 \end{sphinxVerbatim}
 
 \sphinxAtStartPar
-On the \sphinxstyleemphasis{Costs} criterion, 9.5\% of the performance differences are considered insignificant and 14.3\% below the preference discrimination threshold (lines 6\sphinxhyphen{}7). On the qualitative \sphinxstyleemphasis{Working Comfort} criterion, we observe again 9.5\% of insignificant performance differences (line 11). Due to the imprecision in the subjective grading, we notice here 28.6\% of performance differences below the preference discrimination threshold (Line 12). Furthermore, 100.0 \sphinxhyphen{} 90.5 = 9.5\% of the performance differences are judged \sphinxstyleemphasis{considerably large} (Line 13); 80\% and more of satisfaction differences triggering in fact a veto situation. Same information is available for all the other criteria.
+On the \sphinxstyleemphasis{Costs} criterion, 9.5\% of the performance differences are considered insignificant and 14.3\% below the preference discrimination threshold (lines 6\sphinxhyphen{}7). On the qualitative \sphinxstyleemphasis{Working Comfort} criterion, we observe again 9.5\% of insignificant performance differences (line 11). Due to the imprecision in the subjective grading, we notice here 28.6\% of performance differences below the preference discrimination threshold (Line 12). Furthermore, 100.0 \sphinxhyphen{} 90.5 = 9.5\% of the performance differences are judged \sphinxstyleemphasis{considerably large} (Line 13); 80\% and more of satisfaction differences triggering in fact an outranking polarisation. Same information is available for all the other criteria.
 
 \sphinxAtStartPar
 A colorful comparison of all the performances is shown on \hyperref[\detokenize{tutorial:officechoiceheatmap}]{Fig.\@ \ref{\detokenize{tutorial:officechoiceheatmap}}} by the \sphinxstylestrong{heatmap} statistics, illustrating the respective quantile class of each performance. As the set of potential alternatives is tiny, we choose here a classification into performance quintiles.
@@ -3045,16 +3045,16 @@ We may furthermore compute the associated outranking digraph and check if we obs
 \begin{sphinxVerbatim}[commandchars=\\\{\},numbers=left,firstnumber=1,stepnumber=1]
 \PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{k+kn}{from} \PYG{n+nn}{outrankingDigraphs} \PYG{k+kn}{import} \PYG{n}{BipolarOutrankingDigraph}
 \PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{g} \PYG{o}{=} \PYG{n}{BipolarOutrankingDigraph}\PYG{p}{(}\PYG{n}{t}\PYG{p}{)}
-\PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{g}\PYG{o}{.}\PYG{n}{showVetos}\PYG{p}{(}\PYG{p}{)}
-\PYG{g+go}{ *\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}  Veto situations \PYGZhy{}\PYGZhy{}\PYGZhy{}}
-\PYG{g+go}{  number of veto situations : 1}
+\PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{g}\PYG{o}{.}\PYG{n}{showPolarisations}\PYG{p}{(}\PYG{p}{)}
+\PYG{g+go}{ *\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}  Negative polarisations \PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}*}
+\PYG{g+go}{  number of negative polarisations : 1}
 \PYG{g+go}{  1: r(a4 \PYGZgt{}= a2) = \PYGZhy{}0.44}
 \PYG{g+go}{  criterion: g1}
 \PYG{g+go}{  Considerable performance difference : \PYGZhy{}77.00}
 \PYG{g+go}{  Veto discrimination threshold       : \PYGZhy{}60.00}
 \PYG{g+go}{  Polarisation: r(a4 \PYGZgt{}= a2) = \PYGZhy{}0.44 ==\PYGZgt{} \PYGZhy{}1.00}
-\PYG{g+go}{ *\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}  Counter\PYGZhy{}veto situations \PYGZhy{}\PYGZhy{}\PYGZhy{}}
-\PYG{g+go}{  number of counter\PYGZhy{}veto situations : 1}
+\PYG{g+go}{ *\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}  Positive polarisations \PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}*}
+\PYG{g+go}{  number of positive polarisations: 1}
 \PYG{g+go}{  1: r(a2 \PYGZgt{}= a4) = 0.56}
 \PYG{g+go}{  criterion: g1}
 \PYG{g+go}{  Considerable performance difference : 77.00}
@@ -3386,7 +3386,7 @@ The sum of weights of the cost criteria by default equals the sum weights of the
 
 \item {} 
 \sphinxAtStartPar
-On cardinal criteria, both of cost or of benefit type, we observe following constant preference discrimination quantiles: 5\% indifferent situations, 90\% strict preference situations, and 5\% veto situation.
+On cardinal criteria, both of cost or of benefit type, we observe following constant preference discrimination quantiles: 5\% indifferent situations, 90\% strict preference situations, and 5\% considerable performance differences.
 
 \end{itemize}
 \begin{description}
@@ -10699,7 +10699,7 @@ Based on the previous best policies shortlist (see Question 6), what is your eve
 \sphinxstylestrong{Data}
 
 \sphinxAtStartPar
-Use the \sphinxcode{\sphinxupquote{RandomAcademicPerformanceTableau}} constructor from the \sphinxstylestrong{Digraph3} Python resources for generating realistic random students performance tableaux concerning a curriculum of nine ECTS weighted Courses. Assume that all the gradings are done on an integer scale from 0 (weakest) to 20 (best). It is known that all grading procedures are inevitably imprecise; therefore we will assume an indifference threshold of 1 point and a preference theshold of 2 points. Thurthermore, a performance difference of more than 12 points is considerable and will trigger a veto situation. To validate eventually their curriculum, the students are required to obtain more or less 10 points in each course.
+Use the \sphinxcode{\sphinxupquote{RandomAcademicPerformanceTableau}} constructor from the \sphinxstylestrong{Digraph3} Python resources for generating realistic random students performance tableaux concerning a curriculum of nine ECTS weighted Courses. Assume that all the gradings are done on an integer scale from 0 (weakest) to 20 (best). It is known that all grading procedures are inevitably imprecise; therefore we will assume an indifference threshold of 1 point and a preference theshold of 2 points. Thurthermore, a performance difference of more than 12 points is considerable and will trigger an outranking polarisation. To validate eventually their curriculum, the students are required to obtain more or less 10 points in each course.
 
 \sphinxAtStartPar
 \sphinxstylestrong{Questions}

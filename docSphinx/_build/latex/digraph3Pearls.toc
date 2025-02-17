@@ -34,31 +34,36 @@
 \contentsline {subsubsection}{Ranking the potential presidential candidates}{63}{subsubsection*.66}%
 \contentsline {section}{\numberline {3}Theoretical advancements}{64}{section.3}%
 \contentsline {subsection}{\numberline {3.1}Coping with missing data and indeterminateness}{64}{subsection.3.1}%
-\contentsline {subsubsection}{A motivating data set}{65}{subsubsection*.74}%
-\contentsline {subsubsection}{Modelling pairwise bipolar\sphinxhyphen {}valued rating opinions}{68}{subsubsection*.76}%
+\contentsline {subsubsection}{A motivating data set}{65}{subsubsection*.75}%
+\contentsline {subsubsection}{Modelling pairwise bipolar\sphinxhyphen {}valued rating opinions}{68}{subsubsection*.77}%
 \contentsline {subsection}{\numberline {3.2}Ordinal correlation equals bipolar\sphinxhyphen {}valued relational equivalence}{70}{subsection.3.2}%
-\contentsline {subsubsection}{Kendall’s \sphinxstyleemphasis {tau} index}{71}{subsubsection*.82}%
-\contentsline {subsubsection}{Bipolar\sphinxhyphen {}valued relational equivalence}{72}{subsubsection*.83}%
-\contentsline {subsubsection}{Fitness of ranking heuristics}{75}{subsubsection*.84}%
-\contentsline {subsubsection}{Illustrating preference divergences}{77}{subsubsection*.85}%
-\contentsline {subsubsection}{Exploring the \sphinxstyleemphasis {better rated} and the \sphinxstyleemphasis {as well as rated} opinions}{78}{subsubsection*.87}%
+\contentsline {subsubsection}{Kendall’s \sphinxstyleemphasis {tau} index}{71}{subsubsection*.83}%
+\contentsline {subsubsection}{Bipolar\sphinxhyphen {}valued relational equivalence}{72}{subsubsection*.84}%
+\contentsline {subsubsection}{Fitness of ranking heuristics}{75}{subsubsection*.85}%
+\contentsline {subsubsection}{Illustrating preference divergences}{77}{subsubsection*.86}%
+\contentsline {subsubsection}{Exploring the \sphinxstyleemphasis {better rated} and the \sphinxstyleemphasis {as well as rated} opinions}{78}{subsubsection*.88}%
 \contentsline {subsection}{\numberline {3.3}On computing digraph kernels}{80}{subsection.3.3}%
-\contentsline {subsubsection}{What is a graph kernel ?}{80}{subsubsection*.94}%
-\contentsline {subsubsection}{Initial and terminal kernels}{85}{subsubsection*.95}%
-\contentsline {subsubsection}{Kernels in lateralized digraphs}{90}{subsubsection*.96}%
-\contentsline {subsubsection}{Computing good and bad choice recommendations}{93}{subsubsection*.97}%
-\contentsline {subsubsection}{Tractability}{98}{subsubsection*.98}%
+\contentsline {subsubsection}{What is a graph kernel ?}{80}{subsubsection*.95}%
+\contentsline {subsubsection}{Initial and terminal kernels}{85}{subsubsection*.96}%
+\contentsline {subsubsection}{Kernels in lateralized digraphs}{90}{subsubsection*.97}%
+\contentsline {subsubsection}{Computing good and bad choice recommendations}{93}{subsubsection*.98}%
+\contentsline {subsubsection}{Tractability}{98}{subsubsection*.99}%
 \contentsline {subsection}{\numberline {3.4}Bipolar\sphinxhyphen {}valued kernel membership characteristic vectors}{100}{subsection.3.4}%
-\contentsline {subsubsection}{Kernel equation systems}{100}{subsubsection*.101}%
-\contentsline {subsubsection}{Solving bipolar\sphinxhyphen {}valued kernel equation systems}{101}{subsubsection*.102}%
-\contentsline {subsection}{\numberline {3.5}On characterizing bipolar\sphinxhyphen {}valued outranking digraphs}{108}{subsection.3.5}%
-\contentsline {subsubsection}{Necessary properties of the outranking digraph}{108}{subsubsection*.107}%
-\contentsline {subsubsection}{Partial tournaments may be strict outranking digraphs}{110}{subsubsection*.109}%
-\contentsline {subsubsection}{Recognizing bipolar outranking valuations}{112}{subsubsection*.110}%
-\contentsline {subsubsection}{On generating random outranking valuations}{116}{subsubsection*.112}%
-\contentsline {subsection}{\numberline {3.6}Consensus quality of the bipolar\sphinxhyphen {}valued outranking relation}{117}{subsection.3.6}%
-\contentsline {subsubsection}{Circular performance tableaux}{117}{subsubsection*.116}%
-\contentsline {subsubsection}{A difficult decision problem}{119}{subsubsection*.117}%
-\contentsline {subsubsection}{The central CONDORCET point of view}{121}{subsubsection*.118}%
-\contentsline {section}{\numberline {4}Appendix}{126}{section.4}%
-\contentsline {section}{References}{126}{section.4}%
+\contentsline {subsubsection}{Kernel equation systems}{100}{subsubsection*.103}%
+\contentsline {subsubsection}{Solving bipolar\sphinxhyphen {}valued kernel equation systems}{101}{subsubsection*.104}%
+\contentsline {subsubsection}{Historical notes}{108}{subsubsection*.105}%
+\contentsline {subsection}{\numberline {3.5}Ranking\sphinxhyphen {}by\sphinxhyphen {}scoring with bipolar\sphinxhyphen {}valued bit numbers}{109}{subsection.3.5}%
+\contentsline {subsubsection}{Bipolar\sphinxhyphen {}valued base 3 encoded numbers}{109}{subsubsection*.109}%
+\contentsline {subsubsection}{Examples of sbits encoded Bachet numbers}{110}{subsubsection*.111}%
+\contentsline {subsubsection}{The Bachet ranking rule, a new ranking\sphinxhyphen {}by\sphinxhyphen {}scoring method}{113}{subsubsection*.113}%
+\contentsline {subsection}{\numberline {3.6}On characterizing bipolar\sphinxhyphen {}valued outranking digraphs}{117}{subsection.3.6}%
+\contentsline {subsubsection}{Necessary properties of the outranking digraph}{118}{subsubsection*.118}%
+\contentsline {subsubsection}{Partial tournaments may be strict outranking digraphs}{119}{subsubsection*.120}%
+\contentsline {subsubsection}{Recognizing bipolar outranking valuations}{121}{subsubsection*.121}%
+\contentsline {subsubsection}{On generating random outranking valuations}{125}{subsubsection*.123}%
+\contentsline {subsection}{\numberline {3.7}Consensus quality of the bipolar\sphinxhyphen {}valued outranking relation}{126}{subsection.3.7}%
+\contentsline {subsubsection}{Circular performance tableaux}{126}{subsubsection*.127}%
+\contentsline {subsubsection}{A difficult decision problem}{128}{subsubsection*.128}%
+\contentsline {subsubsection}{The central CONDORCET point of view}{130}{subsubsection*.129}%
+\contentsline {section}{\numberline {4}Appendix}{135}{section.4}%
+\contentsline {section}{References}{135}{section.4}%
