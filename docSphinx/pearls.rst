@@ -38,7 +38,7 @@ Pearls of bipolar-valued epistemic logic
    
    :New:
 
-      * :ref:`A new ranking rule based on bipolar-valued Bachet numbers <Bachet-Tutorial-label>`	 
+      * :ref:`A new ranking rule based on bipolar-valued Bachet sbits numbers <Bachet-Tutorial-label>`	 
       *	:ref:`Condorcet's 1785 critical perspective on the simple plurality voting rule <Condorcet-Tutorial-label>`
 
    In this part of the **Digraph3** *documentation*, we provide an insight in computational enhancements one may get when working in a *bipolar-valued epistemic logic* framework, like - easily coping with *missing data* and uncertain criterion *significance weights*, - computing valued *ordinal correlations* between bipolar-valued outranking digraphs,  - computing digraph kernels and solving bipolar-valued kernel equation systems and, - testing for stability and confidence of outranking statements when facing uncertain performance criteria significance weights or decision objectives' importance weights.
@@ -4043,14 +4043,14 @@ Bipolar-valued base 3 encoded  numbers
 
 Bipolar-valued {-1,0,1} base 3 encoded integers are due to *Claude Gaspard Bachet de Méziriac* (1581-1638) [20]_. The idea is to represent the value of an integer *n* in a base 3 positional numerotation where in each position may appear a **signed bit** e.i. one of the three symbols **{-1,0,1}**, called hereafter **sbits** for short.
 
-*Bachet*'s positional *sbit* numerotation system is simulating a weight balance scale where the number *n* and the potential negative powers of 3 are put on the right tray and the potential positive powers of 3 are put on the left tray. The equation for *n = 5* gives for instance :math:`3^2 = (n + 3^1 + 3^0)`. And the *sbit* encoding corresponds hence to the string '1-1-1'. As, this representation is isomorphic to a base 3 bit encoding, every positive or negative integer may this way be represented with a unique *sbit* string. With three powers of 3, namely :math:`3^2, 3^1, 3^0`, one may for instance represent any integer value in the integer range -13 to +13. *Bachet* showed that this bipolar-valued weight measuring system relies on the smallest possible number of weights -base 3 powers- to balance the scale for any given weight *n* [BAC-1624p]_.
+*Bachet*'s positional *sbits* numerotation system is simulating a weight balance scale where the number *n* and the potential negative powers of 3 are put on the right tray and the potential positive powers of 3 are put on the left tray. The equation for *n = 5* gives for instance :math:`3^2 = (n + 3^1 + 3^0)`. And the *sbits* encoding corresponds hence to the string '1-1-1'. As, this representation is isomorphic to a base 3 encoding, every positive or negative integer may this way be represented with a unique *sbits* string. With three powers of 3, namely :math:`3^2, 3^1, 3^0`, one may for instance represent any value in the integer range -13 to +13. *Bachet* showed that this bipolar weighing system relies on the smallest possible number of weights -base 3 powers- to balance the scale for any given weight *n* [BAC-1624p]_.
 
-The Digraph3 :py:mod:`arithmetics` module provides in the :py:class:`~arithmetics.BachetNumber` class an implementation for such base 3 sbit encoded integers. The class provides *negation*, *addition* and *reversing* defines operation methods as illustrated in :numref:`BachetNumbers` below. 
+The Digraph3 :py:mod:`arithmetics` module provides with the :py:class:`~arithmetics.BachetNumber` class an implementation for such sbits encoded integers. Instantiating a Bachet number may be done either with an integer value or with a vector of sbits (see :numref:`BachetNumbers` Lines  6 and 11). The class provides *negation*, *addition* and *reversing* methods as illustrated in Lines 20,32 and 33 below. 
 
 .. code-block:: pycon
    :caption: Working with Bachet sbit numbers
    :name: BachetNumbers
-   :emphasize-lines: 6,15,20,24,31-
+   :emphasize-lines: 2,6,11,15,20,31-33,36
    :linenos:
     
    >>> from arithmetics import BachetNumber
@@ -4090,15 +4090,15 @@ The Digraph3 :py:mod:`arithmetics` module provides in the :py:class:`~arithmetic
    ...       % ( n4, n4.value(), n5, n5.value(),n4 + n5, (n4+n5).value() ))
      -1-11 (-11) + -1-1-1 (-13) = -1010 (-24)
 
-Examples of sbit encoded Bachet numbers
-.......................................
+Examples of sbits encoded Bachet numbers
+........................................
 
-Examples of such *sbit* encoded Bachet numbers are immediately provided by the rows and columns of the *self.relation* attribute of a polarised outranking digraph instance (see :numref:`examplesBachet` Lines 4-6 below). 
+Examples of such *sbits* encoded Bachet numbers are immediately provided by the rows and columns of the *self.relation* attribute of a polarised outranking digraph instance (see :numref:`examplesBachet` Lines 4-6  and 12-15 below). 
 
 .. code-block:: pycon
    :caption: Examples of sbit encoded numbers
    :name: examplesBachet
-   :emphasize-lines: 4-6,12-19,22-25
+   :emphasize-lines: 4-6,12-19,16-27,30
    :linenos:
 
    >>> from outrankingDigraphs import *
@@ -4132,7 +4132,11 @@ Examples of such *sbit* encoded Bachet numbers are immediately provided by the r
    ...        ra3.value()-ca3.value(), ra4.value()-ca4.value() )
      -11 1 4 26
 
-The Bachet numbers, instantiated by the row vectors without the reflexive terms (see Lines 16-19) and the column vectors without the reflexive terms (see Lines 22-25) of the digraph *g.relation* attribute, represent in fact an **outrankingness** measure *rx*, respectively an **outrankedness** measure *cx*. The difference *(rx - cx)* of both these measures gives a potential ranking score per decision action *x*, similar to the *Copeland* and *NetFlows* ranking scores [21]_. In our example here we obtain the Bachet ranking *'a4' (26) > 'a3' (4) > 'a2' (1) > 'a1' (-11)* which appears to correspond to the optimal Kemeny ranking and as such maximally correlated with the given outranking digraph *g* (tau = 0.795, see Lines 4 and 8 below).
+The Bachet numbers, instantiated by the row vectors without reflexive terms  and the column vectors without reflexive terms of the digraph's *self.relation* attribute, model in fact respectively an **outrankingness** measure *rx* and an **outrankedness** measure *cx* (see Lines 16-27).
+
+The difference *(rx - cx)* of both these measures renders now per decision action *x* a potential ranking fitness score, similar to *Copeland* or *NetFlows* ranking scores [21]_.
+
+In our example here we obtain this way the Bachet ranking 'a4' (26) > 'a3' (4) > 'a2' (1) > 'a1' (-11) (see Line 30 above). A ranking result, which corresponds to the corresponding optimal Kemeny ranking and is as such maximally correlated with the given outranking digraph (tau = 0.795, see Lines 4 and 8 below).
 
 .. code-block:: pycon
    :linenos:		
@@ -4149,12 +4153,13 @@ The Bachet numbers, instantiated by the row vectors without the reflexive terms 
       Epistemic determination    :  0.621
       Bipolar-valued equivalence : +0.493
 
-However, if we reverse the given ordering of the *actions* dictionary, we obtain a different ranking result.
+If we reverse however the given ordering of the *actions* dictionary, we may obtain different ranking scores resulting in a different ranking result (see :numref:`actionsOrdering` below) 
 
 .. code-block:: pycon
    :caption: Importance of the actions ordering
    :name: actionsOrdering
-   :linenos: 
+   :linenos:
+   :emphasize-lines: 1,5-8,15,21,24
 
    >>> pg.showRelationTable(actionsSubset=['a4','a3','a2','a1'])
     * ---- Relation Table -----
@@ -4181,7 +4186,7 @@ However, if we reverse the given ordering of the *actions* dictionary, we obtain
    ...        ra2.value()-ca2.value(), ra1.value()-ca1.value())
     26 -12 -23 -19
 
-Now we obtain the Bachet ranking *'a4' (26) > 'a3' (-12) > 'a1' (-19) > 'a2' (-23)*. This ranking result  is less well correlated with the given outranking digraph, but corresponds in fact to the actual Copeland ranking.
+Now we obtain the ranking 'a4' (26) > 'a3' (-12) > 'a1' (-19) > 'a2' (-23). This ranking result is less well correlated with the given outranking digraph, but corresponds in fact to the actual Copeland ranking.
 
 .. code-block:: pycon
    :linenos:
@@ -4204,14 +4209,14 @@ Now we obtain the Bachet ranking *'a4' (26) > 'a3' (-12) > 'a1' (-19) > 'a2' (-2
      Epistemic determination    :  0.621
      Bipolar-valued equivalence : +0.327
 
-The Copeland ranking rule delivers indeed for this example outranking digraph only ranking scores with a tie between actions 'a1' and 'a2' which is resolved by following a lexicographic rule favouring in this case action 'a1'. This ranking leads however to a less well correlated ranking result: +0.5265 vs +0.795 (see above).
+The Copeland ranking rule delivers indeed for this example outranking digraph ranking scores with a tie between actions 'a1' and 'a2' which is by convention resolved by following a lexicographic rule favouring in this case action 'a1'. This ranking is however much less correlated to the given outranking digraph than the optimal Kemeny ranking: +0.5265 vs +0.795 (see above).
 
-Nevertheless, the Bachet fitness scores of the original and the reversed ordering of the polarised relation table lead to plausible and convincing ranking results. This consideration gave the positive stimulus for trying to implement this new *ranking-by-scoring* method.  
+Nevertheless, the Bachet fitness scores of the original and the reversed ordering of the polarised relation table lead in our example here to plausible and convincing ranking results. This consideration gave the positive stimulus for implement this new *ranking-by-scoring* rule.  
 
 The Bachet ranking rule, a new ranking-by-scoring method
 ........................................................
 
-The :py:mod:`linearOrders` module provides indeed a new :py:class:`~linearOrders.BachetRanking` class implementing a ranking rule based on the Bachet numbers modelled by the polarised version of the relation table of a given outranking digraph.
+The :py:mod:`linearOrders` module provides now a new :py:class:`~linearOrders.BachetRanking` class implementing a ranking rule based on the Bachet ranking fitness scores modelled by the polarised version of the relation table of a given outranking digraph.
 
 .. code-block:: pycon
    :linenos:
@@ -4240,13 +4245,13 @@ The :py:mod:`linearOrders` module provides indeed a new :py:class:`~linearOrders
         a2 	  1.00
         a1      -11.00
 
-The class delivers as usual a ranking (*self.bachetRanking*) and a corresponding ordering result (*self.bachetOrder*- besides the decreasing (*self.decBachetScores*) and the increasing Bachet ranking scores (*self.incBachetScores*).
+The class delivers as usual a ranking (*self.bachetRanking*) and a corresponding ordering result (*self.bachetOrder*) besides the decreasing list (*self.decBachetScores*) and the increasing list of the corresponding Bachet ranking scores (*self.incBachetScores*). Due to potential ties observed among Bachet scores and the lexicographic resolving of such ties, the decreasing and increasing lists of ranking scores might indeed not always be just the reversed version of one another. 
 
-Note that, like the Copeland and the NetFlows ranking rules, the Bachet ranking rule is *invariant* under the *codual* transform and the :py:class:`~linearOrdres.BachetRanking` constructor works by default on the corresponding strict outranking digraph (*CoDual=True*). The Bachet ranking rule is furthermore, like the Copeland rule, also *Condorcet consistent*, i.e. when the polarised strict outranking digraph models a crisp linear relation, its Bachet ranking result will be consistent with this linear outranking relation.
+Note that, like the Copeland and the NetFlows ranking rules, the Bachet ranking rule is actually *invariant* under the *codual* transform and the :py:class:`~linearOrdres.BachetRanking` constructor works by default on the corresponding strict outranking digraph (*CoDual=True*). The Bachet ranking rule is furthermore, like the Copeland rule, also *Condorcet consistent*, i.e. when the polarised strict outranking digraph models a crisp linear relation, its Bachet ranking result will be consistent with this linear outranking relation.
 
-Mind however that the Bachet sbit numbering system is a positional numeral system, implying that the Bachet ranking scores, as noticed before, depend essentially on the very ordering of the rows and columns of the outranking digraph's *self.relation* attribute.
+Mind however that the sbits based numbering system is a positional numeral system, implying that the Bachet ranking scores, as noticed before, depend essentially on the very ordering of the rows and columns of the outranking digraph's *self.relation* attribute.
 
-When measuring the quality of Bachet rankings obtained by operating the Bachet rule on all the potential 24 permutations of the actions list ['a1', 'a2', 'a3', 'a4'], we may observe below in :numref:`BachetPerms` four different levels of correlation: +0.7950, +0.6890 (3), +0.6113(3) and +0.5265 (10) (see :numref:`BachetPerms`). The first correlation correspond to 8 ['a4', 'a3', 'a2', 'a1'] ranking results, the second to three ['a4', 'a1', 'a3', 'a2'], the third to three ['a4', 'a2', 'a3', 'a1'], and the last to 10 ['a4', 'a3', 'a1', 'a2'] ranking results. In 8 out of 12 cases, the reversed actions list delivers however the highest possible correlation (see Lines 6-7 and 24-25).
+When measuring now the quality of Bachet rankings obtained by operating the Bachet rule on each one of all the potential 24 permutations of the four *self.actions* keys ['a1', 'a2', 'a3', 'a4'], we may observe below in :numref:`BachetPerms` four different levels of correlation: +0.7950 (8), +0.6890 (3), +0.6113(3) and +0.5265 (10) (see :numref:`BachetPerms`). The first correlation correspond to eight ['a4', 'a3', 'a2', 'a1'] ranking results, the second to three ['a4', 'a1', 'a3', 'a2'], the third to three ['a4', 'a2', 'a3', 'a1'], and the last to ten ['a4', 'a3', 'a1', 'a2'] ranking results. In 8 out of 12 cases, the reversed actions list delivers however the highest possible correlation (see Lines 6-7 and 24-25).
 
 .. code-block:: pycon
    :linenos:		
@@ -4284,9 +4289,9 @@ When measuring the quality of Bachet rankings obtained by operating the Bachet r
     ['a3', 'a4', 'a2', 'a1'] ['a4', 'a1', 'a3', 'a2'] 0.6890
      ['a1', 'a2', 'a4', 'a3'] ['a4', 'a3', 'a2', 'a1'] 0.7950
      
-It appears hence to be opportune to compute a first Bachet ranking result with the given order of the *self.actions* atribute and a second one with the corresponding reversed order. The best correlated of both ranking results is eventually returned. The :py:class:`~linearOrders.BachetRanking` class provides therefore the *BestQualified* parameter set by default to *True* (see :numref:`optimisingBachet` Lines 5 and 21)
+It appears hence to be opportune to compute a first Bachet ranking result with the given order of the *self.actions* atribute and a second one with the corresponding reversed ordering. The best correlated of both ranking results is eventually returned. The :py:class:`~linearOrders.BachetRanking` class provides therefore the *BestQualified* parameter set by default to *True* (see below :numref:`optimisingBachet` Lines 5 and 21)
 
-When the ranking result remains however weakly correlated with the given outranking relation, as we may notice in this second example of random outranking digraph of order 9 (see :numref:`optimisingBachet`  Line 35 below), it is recommended to set the provided *randomized* parameter (default=0) to a positive integer *n*. In this case, *n* random orderings of the decision actions with their reversed versions will be generated in order to compute potentially diverse Bachet ranking results. The best correlated Bachet ranking result will eventually be returned (see Lines 37 and 51 below).
+When the ranking result remains however only weakly correlated with the given outranking relation, as we may notice in this second example of random outranking digraph of order 9 (see :numref:`optimisingBachet`  Line 35 below), it is recommended to set the provided *randomized* class parameter (default=0) to a positive integer *n*. In this case, *n* random orderings of the decision actions with their reversed versions will be generated in order to compute potentially diverse Bachet ranking results. The best correlated ranking will eventually be returned (see Lines 37 and 51 below).
 
 .. code-block:: pycon
    :caption: Optimising the Bachet ranking result
@@ -4345,9 +4350,9 @@ When the ranking result remains however weakly correlated with the given outrank
    >>> g.computeRankingCorrelation(ba3.bachetRanking)
     {'correlation': +0.7585, 'determination': 0.4086}
 
-The correlation +0.7585 corresponds in the case given here to the unique optimal Kemeny ranking ['a2', 'a5', 'a9', 'a6', 'a8', 'a4', 'a3', 'a7', 'a1']. It is hence the highest possible correlation one may obtain.
+The correlation +0.7585 corresponds, in the example given here, again to the unique optimal Kemeny ranking ['a2', 'a5', 'a9', 'a6', 'a8', 'a4', 'a3', 'a7', 'a1']. It is hence the highest possible correlation one may obtain.
 
-When comparing now the Bachet rankings of best-qualified and randomized=100 versions with the corresponding Copeland rankings obtained from 1000 random Cost-Benefit performance tableaux of order 20 and involving 13 performance criteria, we may observe the following correlation statistics.
+When comparing now the Bachet rankings of *best-qualified* and *randomized=100* versions with the corresponding Copeland rankings obtained from 1000 random Cost-Benefit performance tableaux of order 20 and involving 13 performance criteria, we may observe the following correlation statistics.
 
      ==================  ==================  ==================
              Bachet ranking rule                 Copeland
@@ -4362,9 +4367,9 @@ When comparing now the Bachet rankings of best-qualified and randomized=100 vers
       Max.   : +0.9047    Max.   : +0.9460    Max.   : +0.9541  
      ==================  ==================  ==================
 
-The statistical figures confirm the expected noticeable performance enhancement one may obtain with the randomized version of the Bachet ranking rule, providing in fact rankings of a correlation quality very similar to the Copeland rankings. Yet, computing a ranking result just from the given ordering of the *self.actions* dictionary  and its reverse ordering may give with a median correlation of +7282 already satisfactory ranking results. 
+The statistical figures confirm the expected noticeable performance enhancement one obtains with the randomized version of the Bachet ranking rule, providing in fact rankings of a correlation quality very similar to the Copeland rankings. Yet, computing a ranking result, just from the given ordering of the *self.actions* dictionary  and its reverse ordering, may render with a first quartile correlation of +0.6678 and a median correlation of +7282 already satisfactory ranking results in most cases.
 
-Mind finally that the Bachet ranking rule, unlike the Copeland rule, is not scalable to large or big performance tableaux with hundreds or thousands of performance records. The integer value of Bachet numbers get indeed quickly huge with the order of the given outranking digraph. The :py:class:`~linearOrders.BachetRanking` constructor provides therefore an *ordeLimit* parameter set by default to 50, which allows to represent integer values in the huge range +- 358948993845926294385124.
+Mind finally that the Bachet ranking rule, even of comparable complexity :math:`O(n^2)` as the Copeland and NetFlows rules, is not scalable to large or big performance tableaux with hundreds or thousands of performance records. The integer value range of Bachet numbers gets indeed quickly huge with the order of the given outranking digraph. The :py:class:`~linearOrders.BachetRanking` constructor provides therefore an *orderLimit* parameter set by default to 50, which allows to represent integer values in the huge range +- 358948993845926294385124.
 
 .. code-block:: pycon
 
@@ -4373,7 +4378,7 @@ Mind finally that the Bachet ranking rule, unlike the Copeland rule, is not scal
    >>> n.value()
     358948993845926294385124
 
-In Python, the range of integers is luckily only limited by the available CPU memory and the *orderLimit* parameter may be adjusted to tackle, if required, digraphs of larger orders than 50. The Bachet randomized ranking rule might however need a considerable sampling size in order to achieve convincingly correlated rankings. But this issue has still to be explored.
+In Python, the range of integers is luckily only limited by the available CPU memory and the *orderLimit* parameter may be adjusted to tackle, if required, outranking digraphs of orders > 50. The Bachet randomized ranking rule might however need in these cases a considerable sampling size in order to achieve convincingly correlated ranking results. But this issue has still to be explored.
 
 ..............................................
 

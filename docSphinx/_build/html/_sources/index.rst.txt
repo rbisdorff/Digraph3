@@ -47,9 +47,9 @@ Parts of the documentation
 ..........................
 :New:
 
-   - The documentation of the :py:mod:`arithmetics` module has been reviewed and a bipolar {-1,0,1} *Bachet*-encoding of integers has been added by the way (see the :py:class:`arithmetics.BachetNumber` class).
+   - The documentation of the :py:mod:`arithmetics` module has been reviewed and the :py:class:`arithmetics.BachetNumber` class was added for handling **sbits** -bipolar-valued {-1,0,1}- encoded integers.
 
-   - Such *Bachet* numbers are used in the :py:class:`linearOrders.BachetRanking` class implementing a **new ranking-by-scoring rule** relying on the fact that the row and column vectors of the bipolar-valued polarised outranking characterics define Bachet vectors corresponding repectively to the global outrankingness and outrankedness credibilities of each decision action (see the advanced topic on :ref:`A new ranking rule based on bipolar-valued Bachet numbers <Bachet-Tutorial-label>`).
+   - The :py:class:`linearOrders.BachetRanking` class implements a :ref:`new ranking rule  <Bachet-Tutorial-label>` based on such sbits encoded numbers.
      
    - The tutorial on :ref:`Computing a best choice recommendation <Rubis-Tutorial-label>` has been thoroughly reviewed and upgraded
           
