@@ -151,7 +151,6 @@
 <li class="toctree-l4"><a class="reference internal" href="#bipolar-valued-base-3-encoded-numbers">3.3.5.1. Bipolar-valued base 3 encoded  numbers</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#examples-of-sbit-encoded-bachet-numbers">3.3.5.2. Examples of sbit encoded Bachet numbers</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#the-bachet-ranking-rule-a-new-ranking-by-scoring-method">3.3.5.3. The Bachet ranking rule, a new ranking-by-scoring method</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#properties-of-the-bachet-ranking-rule">3.3.5.4. Properties of the Bachet ranking rule</a></li>
 </ul>
 </li>
 <li class="toctree-l3"><a class="reference internal" href="#on-characterizing-bipolar-valued-outranking-digraphs">3.3.6. On characterizing bipolar-valued outranking digraphs</a><ul>
@@ -3833,7 +3832,6 @@ best covered terminal kernel</span><a class="headerlink" href="#orientedlaterali
 <li><p><a class="reference internal" href="#bipolar-valued-base-3-encoded-numbers" id="id151">Bipolar-valued base 3 encoded  numbers</a></p></li>
 <li><p><a class="reference internal" href="#examples-of-sbit-encoded-bachet-numbers" id="id152">Examples of sbit encoded Bachet numbers</a></p></li>
 <li><p><a class="reference internal" href="#the-bachet-ranking-rule-a-new-ranking-by-scoring-method" id="id153">The Bachet ranking rule, a new ranking-by-scoring method</a></p></li>
-<li><p><a class="reference internal" href="#properties-of-the-bachet-ranking-rule" id="id154">Properties of the Bachet ranking rule</a></p></li>
 </ul>
 </nav>
 <section id="bipolar-valued-base-3-encoded-numbers">
@@ -3921,22 +3919,78 @@ best covered terminal kernel</span><a class="headerlink" href="#orientedlaterali
 </pre></div>
 </div>
 </div>
-<p>The Bachet numbers, instantiated by the row vectors without the reflexive terms (see Lines 16-19) and the column vectors without the reflexive terms (see Lines 22-25) of the digraph <em>g.relation</em> attribute, represent in fact an <strong>outrankingness</strong> measure <em>rx</em>, respectively an <strong>outrankedness</strong> measure <em>cx</em>. The difference <em>(rx - cx)</em> of both these measures gives a potential ranking score per decision action <em>x</em>, similar to the <em>Copeland</em> and <em>NetFlows</em> ranking scores <a class="footnote-reference brackets" href="#id94" id="id62" role="doc-noteref"><span class="fn-bracket">[</span>21<span class="fn-bracket">]</span></a>. In our example here we obtain the Bachet ranking <em>‘a4’ (26) &gt; ‘a3’ (4) &gt; ‘a2’ (1) &gt; ‘a1’ (-11)</em> which appears convincingly well correlated with the given outranking digraph <em>g</em> (tau = 0.795, see Line 4 below).</p>
-<div class="highlight-pycon notranslate"><div class="highlight"><pre><span></span><span class="linenos">1</span><span class="gp">&gt;&gt;&gt; </span><span class="n">corr</span> <span class="o">=</span> <span class="n">g</span><span class="o">.</span><span class="n">computeRankingCorrelation</span><span class="p">([</span><span class="s1">&#39;a4&#39;</span><span class="p">,</span><span class="s1">&#39;a3&#39;</span><span class="p">,</span><span class="s1">&#39;a2&#39;</span><span class="p">,</span><span class="s1">&#39;a1&#39;</span><span class="p">])</span>
-<span class="linenos">2</span><span class="gp">&gt;&gt;&gt; </span><span class="n">g</span><span class="o">.</span><span class="n">showCorrelation</span><span class="p">(</span><span class="n">corr</span><span class="p">)</span>
-<span class="linenos">3</span><span class="go">  Correlation indexes:</span>
-<span class="hll"><span class="linenos">4</span><span class="go">   Crisp ordinal correlation  : +0.795</span>
-</span><span class="linenos">5</span><span class="go">   Epistemic determination    :  0.621</span>
-<span class="linenos">6</span><span class="go">   Bipolar-valued equivalence : +0.493</span>
+<p>The Bachet numbers, instantiated by the row vectors without the reflexive terms (see Lines 16-19) and the column vectors without the reflexive terms (see Lines 22-25) of the digraph <em>g.relation</em> attribute, represent in fact an <strong>outrankingness</strong> measure <em>rx</em>, respectively an <strong>outrankedness</strong> measure <em>cx</em>. The difference <em>(rx - cx)</em> of both these measures gives a potential ranking score per decision action <em>x</em>, similar to the <em>Copeland</em> and <em>NetFlows</em> ranking scores <a class="footnote-reference brackets" href="#id94" id="id62" role="doc-noteref"><span class="fn-bracket">[</span>21<span class="fn-bracket">]</span></a>. In our example here we obtain the Bachet ranking <em>‘a4’ (26) &gt; ‘a3’ (4) &gt; ‘a2’ (1) &gt; ‘a1’ (-11)</em> which appears to correspond to the optimal Kemeny ranking and as such maximally correlated with the given outranking digraph <em>g</em> (tau = 0.795, see Lines 4 and 8 below).</p>
+<div class="highlight-pycon notranslate"><div class="highlight"><pre><span></span><span class="linenos"> 1</span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">linearOrders</span> <span class="kn">import</span> <span class="n">KemenyRanking</span>
+<span class="linenos"> 2</span><span class="gp">&gt;&gt;&gt; </span><span class="n">ke</span> <span class="o">=</span> <span class="n">KemenyRanking</span><span class="p">(</span><span class="n">g</span><span class="p">)</span>
+<span class="linenos"> 3</span><span class="gp">&gt;&gt;&gt; </span><span class="n">ke</span><span class="o">.</span><span class="n">kemenyRanking</span>
+<span class="hll"><span class="linenos"> 4</span><span class="go"> [&#39;a4&#39;, &#39;a3&#39;, &#39;a2&#39;, &#39;a1&#39;]</span>
+</span><span class="linenos"> 5</span><span class="gp">&gt;&gt;&gt; </span><span class="n">corr</span> <span class="o">=</span> <span class="n">g</span><span class="o">.</span><span class="n">computeRankingCorrelation</span><span class="p">([</span><span class="s1">&#39;a4&#39;</span><span class="p">,</span><span class="s1">&#39;a3&#39;</span><span class="p">,</span><span class="s1">&#39;a2&#39;</span><span class="p">,</span><span class="s1">&#39;a1&#39;</span><span class="p">])</span>
+<span class="linenos"> 6</span><span class="gp">&gt;&gt;&gt; </span><span class="n">g</span><span class="o">.</span><span class="n">showCorrelation</span><span class="p">(</span><span class="n">corr</span><span class="p">)</span>
+<span class="linenos"> 7</span><span class="go">  Correlation indexes:</span>
+<span class="hll"><span class="linenos"> 8</span><span class="go">   Crisp ordinal correlation  : +0.795</span>
+</span><span class="linenos"> 9</span><span class="go">   Epistemic determination    :  0.621</span>
+<span class="linenos">10</span><span class="go">   Bipolar-valued equivalence : +0.493</span>
 </pre></div>
 </div>
+<p>However, if we reverse the given ordering of the <em>actions</em> dictionary, we obtain a different ranking result.</p>
+<div class="literal-block-wrapper docutils container" id="actionsordering">
+<div class="code-block-caption"><span class="caption-text">Importance of the actions ordering</span><a class="headerlink" href="#actionsordering" title="Link to this code"></a></div>
+<div class="highlight-pycon notranslate"><div class="highlight"><pre><span></span><span class="linenos"> 1</span><span class="gp">&gt;&gt;&gt; </span><span class="n">pg</span><span class="o">.</span><span class="n">showRelationTable</span><span class="p">(</span><span class="n">actionsSubset</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;a4&#39;</span><span class="p">,</span><span class="s1">&#39;a3&#39;</span><span class="p">,</span><span class="s1">&#39;a2&#39;</span><span class="p">,</span><span class="s1">&#39;a1&#39;</span><span class="p">])</span>
+<span class="linenos"> 2</span><span class="go"> * ---- Relation Table -----</span>
+<span class="linenos"> 3</span><span class="go">    S   | &#39;a4&#39; &#39;a3&#39; &#39;a2&#39; &#39;a1&#39;</span>
+<span class="linenos"> 4</span><span class="go">  ------|----------------------</span>
+<span class="linenos"> 5</span><span class="go">   &#39;a4&#39; |   0    1    1    1</span>
+<span class="linenos"> 6</span><span class="go">   &#39;a3&#39; |  -1    0    1    1</span>
+<span class="linenos"> 7</span><span class="go">   &#39;a2&#39; |  -1   -1    0    1</span>
+<span class="linenos"> 8</span><span class="go">   &#39;a1&#39; |  -1    1    0    0</span>
+<span class="linenos"> 9</span><span class="go">  Valuation domain: [-1;+1]</span>
+<span class="linenos">10</span><span class="gp">&gt;&gt;&gt; </span><span class="n">ra4</span> <span class="o">=</span> <span class="n">BachetNumber</span><span class="p">(</span><span class="n">vector</span><span class="o">=</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">])</span>
+<span class="linenos">11</span><span class="gp">&gt;&gt;&gt; </span><span class="n">ra3</span> <span class="o">=</span> <span class="n">BachetNumber</span><span class="p">(</span><span class="n">vector</span><span class="o">=</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">])</span>
+<span class="linenos">12</span><span class="gp">&gt;&gt;&gt; </span><span class="n">ra2</span> <span class="o">=</span> <span class="n">BachetNumber</span><span class="p">(</span><span class="n">vector</span><span class="o">=</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">])</span>
+<span class="linenos">13</span><span class="gp">&gt;&gt;&gt; </span><span class="n">ra1</span> <span class="o">=</span> <span class="n">BachetNumber</span><span class="p">(</span><span class="n">vector</span><span class="o">=</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">0</span><span class="p">])</span>
+<span class="linenos">14</span><span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span> <span class="n">ra1</span><span class="o">.</span><span class="n">value</span><span class="p">(),</span> <span class="n">ra2</span><span class="o">.</span><span class="n">value</span><span class="p">(),</span> <span class="n">ra3</span><span class="o">.</span><span class="n">value</span><span class="p">(),</span> <span class="n">ra4</span><span class="o">.</span><span class="n">value</span><span class="p">()</span> <span class="p">)</span>
+<span class="linenos">15</span><span class="go"> -6 -11 -5 13</span>
+<span class="linenos">16</span><span class="gp">&gt;&gt;&gt; </span><span class="n">ca4</span> <span class="o">=</span> <span class="n">BachetNumber</span><span class="p">(</span><span class="n">vector</span><span class="o">=</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span>
+<span class="linenos">17</span><span class="gp">&gt;&gt;&gt; </span><span class="n">ca3</span> <span class="o">=</span> <span class="n">BachetNumber</span><span class="p">(</span><span class="n">vector</span><span class="o">=</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">])</span>
+<span class="linenos">18</span><span class="gp">&gt;&gt;&gt; </span><span class="n">ca2</span> <span class="o">=</span> <span class="n">BachetNumber</span><span class="p">(</span><span class="n">vector</span><span class="o">=</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">0</span><span class="p">])</span>
+<span class="linenos">19</span><span class="gp">&gt;&gt;&gt; </span><span class="n">ca1</span> <span class="o">=</span> <span class="n">BachetNumber</span><span class="p">(</span><span class="n">vector</span><span class="o">=</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">])</span>
+<span class="linenos">20</span><span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span> <span class="n">ca1</span><span class="o">.</span><span class="n">value</span><span class="p">(),</span> <span class="n">ca2</span><span class="o">.</span><span class="n">value</span><span class="p">(),</span> <span class="n">ca3</span><span class="o">.</span><span class="n">value</span><span class="p">(),</span> <span class="n">ca4</span><span class="o">.</span><span class="n">value</span><span class="p">()</span> <span class="p">)</span>
+<span class="linenos">21</span><span class="go"> 13 12 7 -13</span>
+<span class="linenos">22</span><span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span> <span class="n">ra4</span><span class="o">.</span><span class="n">value</span><span class="p">()</span><span class="o">-</span><span class="n">ca4</span><span class="o">.</span><span class="n">value</span><span class="p">(),</span> <span class="n">ra3</span><span class="o">.</span><span class="n">value</span><span class="p">()</span><span class="o">-</span><span class="n">ca3</span><span class="o">.</span><span class="n">value</span><span class="p">(),</span>
+<span class="linenos">23</span><span class="gp">... </span>       <span class="n">ra2</span><span class="o">.</span><span class="n">value</span><span class="p">()</span><span class="o">-</span><span class="n">ca2</span><span class="o">.</span><span class="n">value</span><span class="p">(),</span> <span class="n">ra1</span><span class="o">.</span><span class="n">value</span><span class="p">()</span><span class="o">-</span><span class="n">ca1</span><span class="o">.</span><span class="n">value</span><span class="p">())</span>
+<span class="linenos">24</span><span class="go"> 26 -12 -23 -19</span>
+</pre></div>
+</div>
+</div>
+<p>Now we obtain the Bachet ranking <em>‘a4’ (26) &gt; ‘a3’ (-12) &gt; ‘a1’ (-19) &gt; ‘a2’ (-23)</em>. This ranking result  is less well correlated with the given outranking digraph, but corresponds in fact to the actual Copeland ranking.</p>
+<div class="highlight-pycon notranslate"><div class="highlight"><pre><span></span><span class="linenos"> 1</span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">linearOrders</span> <span class="kn">import</span> <span class="n">CopelandRanking</span>
+<span class="linenos"> 2</span><span class="gp">&gt;&gt;&gt; </span><span class="n">cop</span> <span class="o">=</span> <span class="n">CopelandRanking</span><span class="p">(</span><span class="n">g</span><span class="p">)</span>
+<span class="linenos"> 3</span><span class="gp">&gt;&gt;&gt; </span><span class="n">cop</span><span class="o">.</span><span class="n">showScores</span><span class="p">()</span>
+<span class="linenos"> 4</span><span class="go"> Copeland scores in descending order</span>
+<span class="linenos"> 5</span><span class="go">  action      score</span>
+<span class="linenos"> 6</span><span class="go">    a4        6.00</span>
+<span class="linenos"> 7</span><span class="go">    a3        0.00</span>
+<span class="linenos"> 8</span><span class="go">    a1       -3.00</span>
+<span class="linenos"> 9</span><span class="go">    a2       -3.00</span>
+<span class="linenos">10</span><span class="gp">&gt;&gt;&gt; </span><span class="n">cop</span><span class="o">.</span><span class="n">copelandRanking</span>
+<span class="linenos">11</span><span class="go"> [&#39;a4&#39;, &#39;a3&#39;, &#39;a1&#39;, &#39;a2&#39;]</span>
+<span class="linenos">12</span><span class="gp">&gt;&gt;&gt; </span><span class="n">corr</span> <span class="o">=</span> <span class="n">g</span><span class="o">.</span><span class="n">computeRankingCorrelation</span><span class="p">(</span><span class="n">cop</span><span class="o">.</span><span class="n">copelandRanking</span><span class="p">)</span>
+<span class="linenos">13</span><span class="gp">&gt;&gt;&gt; </span><span class="n">g</span><span class="o">.</span><span class="n">showCorrelation</span><span class="p">(</span><span class="n">corr</span><span class="p">)</span>
+<span class="linenos">14</span><span class="go"> Correlation indexes:</span>
+<span class="linenos">15</span><span class="go">  Crisp ordinal correlation  : +0.526</span>
+<span class="linenos">16</span><span class="go">  Epistemic determination    :  0.621</span>
+<span class="linenos">17</span><span class="go">  Bipolar-valued equivalence : +0.327</span>
+</pre></div>
+</div>
+<p>The Copeland ranking rule delivers indeed for this example outranking digraph only ranking scores with a tie between actions ‘a1’ and ‘a2’ which is resolved by following a lexicographic rule favouring in this case action ‘a1’. This ranking leads however to a less well correlated ranking result: +0.5265 vs +0.795 (see above).</p>
+<p>Nevertheless, the Bachet fitness scores of the original and the reversed ordering of the polarised relation table lead to plausible and convincing ranking results. This consideration gave the positive stimulus for trying to implement this new <em>ranking-by-scoring</em> method.</p>
 </section>
 <section id="the-bachet-ranking-rule-a-new-ranking-by-scoring-method">
 <h4><a class="toc-backref" href="#id153" role="doc-backlink"><span class="section-number">3.3.5.3. </span>The Bachet ranking rule, a new ranking-by-scoring method</a><a class="headerlink" href="#the-bachet-ranking-rule-a-new-ranking-by-scoring-method" title="Link to this heading"></a></h4>
-<p>We provide in the <a class="reference internal" href="techDoc.html#module-linearOrders" title="linearOrders"><code class="xref py py-mod docutils literal notranslate"><span class="pre">linearOrders</span></code></a> module a new <a class="reference internal" href="techDoc.html#linearOrders.BachetRanking" title="linearOrders.BachetRanking"><code class="xref py py-class docutils literal notranslate"><span class="pre">BachetRanking</span></code></a> class implementing the previously introduced Bachet ranking rule.</p>
+<p>The <a class="reference internal" href="techDoc.html#module-linearOrders" title="linearOrders"><code class="xref py py-mod docutils literal notranslate"><span class="pre">linearOrders</span></code></a> module provides indeed a new <a class="reference internal" href="techDoc.html#linearOrders.BachetRanking" title="linearOrders.BachetRanking"><code class="xref py py-class docutils literal notranslate"><span class="pre">BachetRanking</span></code></a> class implementing a ranking rule based on the Bachet numbers modelled by the polarised version of the relation table of a given outranking digraph.</p>
 <div class="highlight-pycon notranslate"><div class="highlight"><pre><span></span><span class="linenos"> 1</span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">linearOrders</span> <span class="kn">import</span> <span class="n">BachetRanking</span>
-<span class="hll"><span class="linenos"> 2</span><span class="gp">&gt;&gt;&gt; </span><span class="n">ba</span> <span class="o">=</span> <span class="n">BachetRanking</span><span class="p">(</span><span class="n">g</span><span class="p">)</span>
-</span><span class="linenos"> 3</span><span class="gp">&gt;&gt;&gt; </span><span class="n">ba</span>
+<span class="linenos"> 2</span><span class="gp">&gt;&gt;&gt; </span><span class="n">ba</span> <span class="o">=</span> <span class="n">BachetRanking</span><span class="p">(</span><span class="n">g</span><span class="p">)</span>
+<span class="linenos"> 3</span><span class="gp">&gt;&gt;&gt; </span><span class="n">ba</span>
 <span class="linenos"> 4</span><span class="go"> *------- Digraph instance description ------*</span>
 <span class="linenos"> 5</span><span class="go">  Instance class      : BachetRanking</span>
 <span class="linenos"> 6</span><span class="go">  Instance name       : rel_randomperftab_best_ranked</span>
@@ -3944,36 +3998,25 @@ best covered terminal kernel</span><a class="headerlink" href="#orientedlaterali
 <span class="linenos"> 8</span><span class="go">  Digraph Size        : 6</span>
 <span class="linenos"> 9</span><span class="go">  Valuation domain    : [-1.00;1.00]</span>
 <span class="linenos">10</span><span class="go">  Determinateness (%) : 100.00</span>
-<span class="hll"><span class="linenos">11</span><span class="go">  Attributes          : [&#39;decBachetScores&#39;, &#39;incBachetScores&#39;,</span>
-</span><span class="hll"><span class="linenos">12</span><span class="go">                         &#39;bachetRanking&#39;, &#39;bachetOrder&#39;,</span>
-</span><span class="hll"><span class="linenos">13</span><span class="go">                         &#39;name&#39;, &#39;actions&#39;, &#39;order&#39;, &#39;valuationdomain&#39;,</span>
-</span><span class="hll"><span class="linenos">14</span><span class="go">                         &#39;relation&#39;, &#39;gamma&#39;, &#39;notGamma&#39;, &#39;runTimes&#39;]</span>
-</span><span class="hll"><span class="linenos">15</span><span class="gp">&gt;&gt;&gt; </span><span class="n">ba</span><span class="o">.</span><span class="n">bachetRanking</span>
-</span><span class="linenos">16</span><span class="go"> [&#39;a4&#39;, &#39;a3&#39;, &#39;a2&#39;, &#39;a1&#39;]</span>
-<span class="hll"><span class="linenos">17</span><span class="gp">&gt;&gt;&gt; </span><span class="n">cop</span> <span class="o">=</span> <span class="n">CopelandRanking</span><span class="p">(</span><span class="n">g</span><span class="p">)</span>
-</span><span class="linenos">18</span><span class="gp">&gt;&gt;&gt; </span><span class="n">cop</span><span class="o">.</span><span class="n">showScores</span><span class="p">()</span>
-<span class="linenos">19</span><span class="go"> Copeland scores in descending order</span>
-<span class="hll"><span class="linenos">20</span><span class="go">  action      score</span>
-</span><span class="hll"><span class="linenos">21</span><span class="go">    a4        6.00</span>
-</span><span class="hll"><span class="linenos">22</span><span class="go">    a3        0.00</span>
-</span><span class="hll"><span class="linenos">23</span><span class="go">    a1       -3.00</span>
-</span><span class="hll"><span class="linenos">24</span><span class="go">    a2       -3.00</span>
-</span><span class="hll"><span class="linenos">25</span><span class="gp">&gt;&gt;&gt; </span><span class="n">cop</span><span class="o">.</span><span class="n">copelandRanking</span>
-</span><span class="linenos">26</span><span class="go"> [&#39;a4&#39;, &#39;a3&#39;, &#39;a1&#39;, &#39;a2&#39;]</span>
-<span class="hll"><span class="linenos">27</span><span class="gp">&gt;&gt;&gt; </span><span class="n">corr</span> <span class="o">=</span> <span class="n">g</span><span class="o">.</span><span class="n">computeRankingCorrelation</span><span class="p">(</span><span class="n">cop</span><span class="o">.</span><span class="n">copelandRanking</span><span class="p">)</span>
-</span><span class="linenos">28</span><span class="gp">&gt;&gt;&gt; </span><span class="n">g</span><span class="o">.</span><span class="n">showCorrelation</span><span class="p">(</span><span class="n">corr</span><span class="p">)</span>
-<span class="hll"><span class="linenos">29</span><span class="go"> Correlation indexes:</span>
-</span><span class="linenos">30</span><span class="go">  Crisp ordinal correlation  : +0.526</span>
-<span class="linenos">31</span><span class="go">  Epistemic determination    :  0.621</span>
-<span class="linenos">32</span><span class="go">  Bipolar-valued equivalence : +0.327</span>
+<span class="linenos">11</span><span class="go">  Attributes          : [&#39;decBachetScores&#39;, &#39;incBachetScores&#39;,</span>
+<span class="linenos">12</span><span class="go">                         &#39;bachetRanking&#39;, &#39;bachetOrder&#39;,</span>
+<span class="linenos">13</span><span class="go">                         &#39;name&#39;, &#39;actions&#39;, &#39;order&#39;, &#39;valuationdomain&#39;,</span>
+<span class="linenos">14</span><span class="go">                         &#39;relation&#39;, &#39;gamma&#39;, &#39;notGamma&#39;, &#39;runTimes&#39;]</span>
+<span class="linenos">15</span><span class="gp">&gt;&gt;&gt; </span><span class="n">ba</span><span class="o">.</span><span class="n">bachetRanking</span>
+<span class="linenos">16</span><span class="go"> [&#39;a4&#39;, &#39;a3&#39;, &#39;a2&#39;, &#39;a1&#39;]</span>
+<span class="linenos">17</span><span class="gp">&gt;&gt;&gt; </span><span class="n">ba</span><span class="o">.</span><span class="n">showScores</span><span class="p">()</span>
+<span class="linenos">18</span><span class="go"> Bachet scores in descending order</span>
+<span class="linenos">19</span><span class="go">   action     score</span>
+<span class="linenos">20</span><span class="go">     a4       26.00</span>
+<span class="linenos">21</span><span class="go">     a3        4.00</span>
+<span class="linenos">22</span><span class="go">     a2        1.00</span>
+<span class="linenos">23</span><span class="go">     a1      -11.00</span>
 </pre></div>
 </div>
-<p>The Copeland ranking rule delivers for this example outranking digraph only ranking scores with a tie between actions ‘a1’ and ‘a2’ which is resolved by following a lexicographic rule favouring action ‘a1’. This ranking leads however to a less well correlated ranking result: +0.5265 vs +0.795. The Bachet ranking scores appear to be indeed more discriminating in general and mostly lead to ranking scores without ties.</p>
-</section>
-<section id="properties-of-the-bachet-ranking-rule">
-<h4><a class="toc-backref" href="#id154" role="doc-backlink"><span class="section-number">3.3.5.4. </span>Properties of the Bachet ranking rule</a><a class="headerlink" href="#properties-of-the-bachet-ranking-rule" title="Link to this heading"></a></h4>
-<p>Note that, like the Copeland and the NetFlows ranking rules, the Bachet ranking rule is <em>invariant</em> under the <em>codual</em> transform and the <code class="xref py py-class docutils literal notranslate"><span class="pre">BachetRanking</span></code> constructor works by default on the corresponding strict outranking digraph. The Bachet ranking rule is furthermore, like the Copeland rule, also <em>Condorcet consistent</em>, i.e. when the polarised strict outranking digraph models a crisp linear relation, its Bachet ranking result will be consistent with this linear outranking relation.</p>
-<p>Mind however that the Bachet sbit numbering system is a positional numeral system, implying that the Bachet ranking scores are essentially depending on the very ordering of the rows and columns of the outranking digraph’s <em>self.relation</em> attribute. When measuring the quality of Bachet rankings obtained by operating the Bachet rule on all the 24 permutations of the actions list [‘a1’, ‘a2’, ‘a3’, ‘a4’], we may observe below in <a class="hxr-hoverxref hxr-tooltip reference internal" href="#bachetperms"><span class="std std-numref">Listing 3.48</span></a> three different levels of correlation: +0.5265 (13), +0.6890 (3) and +0.7950 (8) (see Lines 6-8). In 8 out of 12 cases, the reversed actions list delivers however the highest possible correlation (see Lines 6-7 and 14-15).</p>
+<p>The class delivers as usual a ranking (<em>self.bachetRanking</em>) and a corresponding ordering result (<em>self.bachetOrder</em>- besides the decreasing (<em>self.decBachetScores</em>) and the increasing Bachet ranking scores (<em>self.incBachetScores</em>).</p>
+<p>Note that, like the Copeland and the NetFlows ranking rules, the Bachet ranking rule is <em>invariant</em> under the <em>codual</em> transform and the <code class="xref py py-class docutils literal notranslate"><span class="pre">BachetRanking</span></code> constructor works by default on the corresponding strict outranking digraph (<em>CoDual=True</em>). The Bachet ranking rule is furthermore, like the Copeland rule, also <em>Condorcet consistent</em>, i.e. when the polarised strict outranking digraph models a crisp linear relation, its Bachet ranking result will be consistent with this linear outranking relation.</p>
+<p>Mind however that the Bachet sbit numbering system is a positional numeral system, implying that the Bachet ranking scores, as noticed before, depend essentially on the very ordering of the rows and columns of the outranking digraph’s <em>self.relation</em> attribute.</p>
+<p>When measuring the quality of Bachet rankings obtained by operating the Bachet rule on all the potential 24 permutations of the actions list [‘a1’, ‘a2’, ‘a3’, ‘a4’], we may observe below in <a class="hxr-hoverxref hxr-tooltip reference internal" href="#bachetperms"><span class="std std-numref">Listing 3.48</span></a> three different levels of correlation: +0.5265 (13), +0.6890 (3) and +0.7950 (8) (see Lines 6-8). In 8 out of 12 cases, the reversed actions list delivers however the highest possible correlation (see Lines 6-7 and 14-15).</p>
 <div class="literal-block-wrapper docutils container" id="bachetperms">
 <div class="code-block-caption"><span class="caption-number">Listing 3.48 </span><span class="caption-text">Importance of the ordering of the actions dictionary</span><a class="headerlink" href="#bachetperms" title="Link to this code"></a></div>
 <div class="highlight-pycon notranslate"><div class="highlight"><pre><span></span><span class="linenos"> 1</span><span class="gp">&gt;&gt;&gt; </span><span class="n">perms</span> <span class="o">=</span> <span class="p">[</span><span class="n">p</span> <span class="k">for</span>  <span class="n">p</span> <span class="ow">in</span> <span class="n">all_perms</span><span class="p">([</span><span class="s1">&#39;a1&#39;</span><span class="p">,</span> <span class="s1">&#39;a2&#39;</span><span class="p">,</span> <span class="s1">&#39;a3&#39;</span><span class="p">,</span> <span class="s1">&#39;a4&#39;</span><span class="p">])]</span>
@@ -4066,8 +4109,8 @@ best covered terminal kernel</span><a class="headerlink" href="#orientedlaterali
 </span></pre></div>
 </div>
 </div>
-<p>Notice that correlation +0.7585 corresponds in fact to the unique optimal Kemeny ranking [‘a2’, ‘a5’, ‘a9’, ‘a6’, ‘a8’, ‘a4’, ‘a3’, ‘a7’, ‘a1’]. It is hence the highest possible correlation one may obtain with any ranking result.</p>
-<p>When comparing the Bachet rankings of best-qualified and randomized=100 versions with the corresponding Copeland rankings obtained from 1000 random Cost-Benefit performance tableaux of order 20 ,envolving 13 performance criteria, we observe the following correlation statistics with the corresponding outranking digraphs.</p>
+<p>The correlation +0.7585 corresponds in the case given here to the unique optimal Kemeny ranking [‘a2’, ‘a5’, ‘a9’, ‘a6’, ‘a8’, ‘a4’, ‘a3’, ‘a7’, ‘a1’]. It is hence the highest possible correlation one may obtain with any ranking result.</p>
+<p>When comparing now the Bachet rankings of best-qualified and randomized=100 versions with the corresponding Copeland rankings obtained from 1000 random Cost-Benefit performance tableaux of order 20 and involving 13 performance criteria, we may observe the following correlation statistics.</p>
 <blockquote>
 <div><table class="docutils align-default">
 <thead>
@@ -4107,8 +4150,15 @@ best covered terminal kernel</span><a class="headerlink" href="#orientedlaterali
 </tbody>
 </table>
 </div></blockquote>
-<p>The statistical figures confirm the expected noticeable performance enhancement one may obtain with the randomized version of the Bachet ranking rule which provides in fact rankings of a correlation quality very similar to the Copeland rankings.</p>
-<p>Mind however that the Bachet ranking rule, unlike the Copeland rule, is not scalable to large or big performance tableaux with hundreds or thousands of performance records.</p>
+<p>The statistical figures confirm the expected noticeable performance enhancement one may obtain with the randomized version of the Bachet ranking rule, providing in fact rankings of a correlation quality very similar to the Copeland rankings.</p>
+<p>Mind however that the Bachet ranking rule, unlike the Copeland rule, is not scalable to large or big performance tableaux with hundreds or thousands of performance records. The integer value of Bachet numbers get indeed quickly huge with the order of the given outranking digraph. The <a class="reference internal" href="techDoc.html#linearOrders.BachetRanking" title="linearOrders.BachetRanking"><code class="xref py py-class docutils literal notranslate"><span class="pre">BachetRanking</span></code></a> constructor provides therefore an <em>ordeLimit</em> parameter set by default to 50, which allows to represent integer values in the huge range +- 358948993845926294385124.</p>
+<div class="highlight-pycon notranslate"><div class="highlight"><pre><span></span><span class="linenos">1</span><span class="gp">&gt;&gt;&gt; </span><span class="n">v</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">50</span><span class="p">)]</span>
+<span class="linenos">2</span><span class="gp">&gt;&gt;&gt; </span><span class="n">n</span> <span class="o">=</span> <span class="n">BachetNumber</span><span class="p">(</span><span class="n">vector</span><span class="o">=</span><span class="n">v</span><span class="p">)</span>
+<span class="linenos">3</span><span class="gp">&gt;&gt;&gt; </span><span class="n">n</span><span class="o">.</span><span class="n">value</span><span class="p">()</span>
+<span class="linenos">4</span><span class="go"> 358948993845926294385124</span>
+</pre></div>
+</div>
+<p>Mind that the range of integers is in Python only limited by the available CPU memory and the <em>orderLimit</em> parameter may be adjusted to tackle, if useful, digraphs of larger orders than 50. The Bachet randomized ranking results may however need a considerable sampling size. But this issue has still to be explored.</p>
 <hr class="docutils" />
 <p>Back to <a class="reference internal" href="#pearls-label"><span class="std std-ref">Content Table</span></a></p>
 <hr class="docutils" />
@@ -4118,14 +4168,14 @@ best covered terminal kernel</span><a class="headerlink" href="#orientedlaterali
 <span id="sufficiency-tutorial-label"></span><h3><a class="toc-backref" href="#id136" role="doc-backlink"><span class="section-number">3.3.6. </span>On characterizing bipolar-valued outranking digraphs</a><a class="headerlink" href="#on-characterizing-bipolar-valued-outranking-digraphs" title="Link to this heading"></a></h3>
 <nav class="contents local" id="id63">
 <ul class="simple">
-<li><p><a class="reference internal" href="#necessary-properties-of-the-outranking-digraph" id="id155">Necessary properties of the outranking digraph</a></p></li>
-<li><p><a class="reference internal" href="#partial-tournaments-may-be-strict-outranking-digraphs" id="id156">Partial tournaments may be strict outranking digraphs</a></p></li>
-<li><p><a class="reference internal" href="#recognizing-bipolar-outranking-valuations" id="id157">Recognizing bipolar outranking valuations</a></p></li>
-<li><p><a class="reference internal" href="#on-generating-random-outranking-valuations" id="id158">On generating random outranking valuations</a></p></li>
+<li><p><a class="reference internal" href="#necessary-properties-of-the-outranking-digraph" id="id154">Necessary properties of the outranking digraph</a></p></li>
+<li><p><a class="reference internal" href="#partial-tournaments-may-be-strict-outranking-digraphs" id="id155">Partial tournaments may be strict outranking digraphs</a></p></li>
+<li><p><a class="reference internal" href="#recognizing-bipolar-outranking-valuations" id="id156">Recognizing bipolar outranking valuations</a></p></li>
+<li><p><a class="reference internal" href="#on-generating-random-outranking-valuations" id="id157">On generating random outranking valuations</a></p></li>
 </ul>
 </nav>
 <section id="necessary-properties-of-the-outranking-digraph">
-<h4><a class="toc-backref" href="#id155" role="doc-backlink"><span class="section-number">3.3.6.1. </span>Necessary properties of the outranking digraph</a><a class="headerlink" href="#necessary-properties-of-the-outranking-digraph" title="Link to this heading"></a></h4>
+<h4><a class="toc-backref" href="#id154" role="doc-backlink"><span class="section-number">3.3.6.1. </span>Necessary properties of the outranking digraph</a><a class="headerlink" href="#necessary-properties-of-the-outranking-digraph" title="Link to this heading"></a></h4>
 <p>Bipolar-valued outranking digraphs verify two necessary properties <a class="reference internal" href="#bis-2013p" id="id64"><span>[BIS-2013p]</span></a>:</p>
 <blockquote>
 <div><ol class="arabic">
@@ -4176,7 +4226,7 @@ best covered terminal kernel</span><a class="headerlink" href="#orientedlaterali
 <p>It becomes apparent with the partial tournament example here that, when the number of criteria is not constrained, we may model this way compatible pairwise outranking situations independently one of the other.</p>
 </section>
 <section id="partial-tournaments-may-be-strict-outranking-digraphs">
-<h4><a class="toc-backref" href="#id156" role="doc-backlink"><span class="section-number">3.3.6.2. </span>Partial tournaments may be strict outranking digraphs</a><a class="headerlink" href="#partial-tournaments-may-be-strict-outranking-digraphs" title="Link to this heading"></a></h4>
+<h4><a class="toc-backref" href="#id155" role="doc-backlink"><span class="section-number">3.3.6.2. </span>Partial tournaments may be strict outranking digraphs</a><a class="headerlink" href="#partial-tournaments-may-be-strict-outranking-digraphs" title="Link to this heading"></a></h4>
 <p>In the <a class="reference internal" href="techDoc.html#module-randomDigraphs" title="randomDigraphs"><code class="xref py py-mod docutils literal notranslate"><span class="pre">randomDigraphs</span></code></a> module we provide the <a class="reference internal" href="techDoc.html#randomDigraphs.RandomPartialTournament" title="randomDigraphs.RandomPartialTournament"><code class="xref py py-class docutils literal notranslate"><span class="pre">RandomPartialTournament</span></code></a> class for providing such partial tournament instances.</p>
 <div class="literal-block-wrapper docutils container" id="partialtournament">
 <div class="code-block-caption"><span class="caption-number">Listing 3.51 </span><span class="caption-text">A partial tournament of order 5</span><a class="headerlink" href="#partialtournament" title="Link to this code"></a></div>
@@ -4238,7 +4288,7 @@ best covered terminal kernel</span><a class="headerlink" href="#orientedlaterali
 <p>To all partial tournament we may this way associate a multicriteria performance tableau, making it hence the instance of a potential bipolar-valued strict outranking digraph. Yet, we have not taken care of reproducing the precise characteristic valuation of a given partial tournament. Is it as well possible to always associate a valid performance tableau which produces a strict outranking digraph with exactly the given characteristic valuation?</p>
 </section>
 <section id="recognizing-bipolar-outranking-valuations">
-<h4><a class="toc-backref" href="#id157" role="doc-backlink"><span class="section-number">3.3.6.3. </span>Recognizing bipolar outranking valuations</a><a class="headerlink" href="#recognizing-bipolar-outranking-valuations" title="Link to this heading"></a></h4>
+<h4><a class="toc-backref" href="#id156" role="doc-backlink"><span class="section-number">3.3.6.3. </span>Recognizing bipolar outranking valuations</a><a class="headerlink" href="#recognizing-bipolar-outranking-valuations" title="Link to this heading"></a></h4>
 <p>From the fact that the epistemic support of a strict outranking –’<em>better evaluated as</em>’– situation is a potential sub-part only of the epistemic support of the corresponding outranking –’<em>at least as well evaluated as</em>’– situation, it follows that for all irreflexive pairs (<em>x</em>, <em>y</em>), <img class="math" src="_images/math/2357805e76e455196818cef0351727bf2476380c.png" alt="r(x \succsim y)\, \geqslant\, r(x \succnsim y)"/>, which induces by the coduality principle the following necessary condition on the valuation of a potential outranking digraph:</p>
 <blockquote>
 <div><div class="math" id="equation-charodg1">
@@ -4353,7 +4403,7 @@ best covered terminal kernel</span><a class="headerlink" href="#orientedlaterali
 <p>A similar Monte Carlo simulation with randomly bipolar-valued digraphs of order 5 shows that an average proportion of only 0.12% of random instances verify Condition <a class="reference internal" href="#equation-strictodg">(3.5)</a>. With randomly bipolar-valued digraphs of order 6, this proportion drops to 0.006%. Condition <a class="reference internal" href="#equation-strictodg">(3.5)</a> is hence again a very specific characteristic of bipolar strict outranking valuations.</p>
 </section>
 <section id="on-generating-random-outranking-valuations">
-<h4><a class="toc-backref" href="#id158" role="doc-backlink"><span class="section-number">3.3.6.4. </span>On generating random outranking valuations</a><a class="headerlink" href="#on-generating-random-outranking-valuations" title="Link to this heading"></a></h4>
+<h4><a class="toc-backref" href="#id157" role="doc-backlink"><span class="section-number">3.3.6.4. </span>On generating random outranking valuations</a><a class="headerlink" href="#on-generating-random-outranking-valuations" title="Link to this heading"></a></h4>
 <p>The <a class="reference internal" href="techDoc.html#randomDigraphs.RandomOutrankingValuationDigraph" title="randomDigraphs.RandomOutrankingValuationDigraph"><code class="xref py py-class docutils literal notranslate"><span class="pre">RandomOutrankingValuationDigraph</span></code></a> class from the <a class="reference internal" href="techDoc.html#module-randomDigraphs" title="randomDigraphs"><code class="xref py py-mod docutils literal notranslate"><span class="pre">randomDigraphs</span></code></a> module provides a generator for random outranking valuation digraphs.</p>
 <div class="literal-block-wrapper docutils container" id="generateoutrankingvaluation">
 <div class="code-block-caption"><span class="caption-number">Listing 3.54 </span><span class="caption-text">Generating random outranking valuations</span><a class="headerlink" href="#generateoutrankingvaluation" title="Link to this code"></a></div>
@@ -4391,13 +4441,13 @@ best covered terminal kernel</span><a class="headerlink" href="#orientedlaterali
 <span id="outranking-consensus-tutorial-label"></span><h3><a class="toc-backref" href="#id137" role="doc-backlink"><span class="section-number">3.3.7. </span>Consensus quality of the bipolar-valued outranking relation</a><a class="headerlink" href="#consensus-quality-of-the-bipolar-valued-outranking-relation" title="Link to this heading"></a></h3>
 <nav class="contents local" id="id68">
 <ul class="simple">
-<li><p><a class="reference internal" href="#circular-performance-tableaux" id="id159">Circular performance tableaux</a></p></li>
-<li><p><a class="reference internal" href="#a-difficult-decision-problem" id="id160">A difficult decision problem</a></p></li>
-<li><p><a class="reference internal" href="#the-central-condorcet-point-of-view" id="id161">The central CONDORCET point of view</a></p></li>
+<li><p><a class="reference internal" href="#circular-performance-tableaux" id="id158">Circular performance tableaux</a></p></li>
+<li><p><a class="reference internal" href="#a-difficult-decision-problem" id="id159">A difficult decision problem</a></p></li>
+<li><p><a class="reference internal" href="#the-central-condorcet-point-of-view" id="id160">The central CONDORCET point of view</a></p></li>
 </ul>
 </nav>
 <section id="circular-performance-tableaux">
-<h4><a class="toc-backref" href="#id159" role="doc-backlink"><span class="section-number">3.3.7.1. </span>Circular performance tableaux</a><a class="headerlink" href="#circular-performance-tableaux" title="Link to this heading"></a></h4>
+<h4><a class="toc-backref" href="#id158" role="doc-backlink"><span class="section-number">3.3.7.1. </span>Circular performance tableaux</a><a class="headerlink" href="#circular-performance-tableaux" title="Link to this heading"></a></h4>
 <p>In order to study the actual consensus quality of a bipolar-valued outranking relation, let us consider a small didactic performance tableau consisting of five decision actions evaluated with respect to five performance criteria of equal significance. On each one of the criteria, we swap first and last ranked evaluations in a circular way (see Lines 8-12 below).</p>
 <div class="literal-block-wrapper docutils container" id="circularperftab">
 <div class="code-block-caption"><span class="caption-number">Listing 3.55 </span><span class="caption-text">Circular performance tableau</span><a class="headerlink" href="#circularperftab" title="Link to this code"></a></div>
@@ -4462,7 +4512,7 @@ best covered terminal kernel</span><a class="headerlink" href="#orientedlaterali
 </div>
 </section>
 <section id="a-difficult-decision-problem">
-<h4><a class="toc-backref" href="#id160" role="doc-backlink"><span class="section-number">3.3.7.2. </span>A difficult decision problem</a><a class="headerlink" href="#a-difficult-decision-problem" title="Link to this heading"></a></h4>
+<h4><a class="toc-backref" href="#id159" role="doc-backlink"><span class="section-number">3.3.7.2. </span>A difficult decision problem</a><a class="headerlink" href="#a-difficult-decision-problem" title="Link to this heading"></a></h4>
 <p>Due to the regular tournament structure, the <em>Copeland</em> scores are the same for each one of the decision alternatives and we end up with a ranking in alphabetic order.</p>
 <div class="highlight-pycon notranslate"><div class="highlight"><pre><span></span><span class="linenos"> 1</span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">linearOrders</span> <span class="kn">import</span> <span class="n">CopelandRanking</span>
 <span class="linenos"> 2</span><span class="gp">&gt;&gt;&gt; </span><span class="n">cop</span> <span class="o">=</span> <span class="n">CopelandRanking</span><span class="p">(</span><span class="n">bodg</span><span class="p">,</span><span class="n">Comments</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
@@ -4526,7 +4576,7 @@ best covered terminal kernel</span><a class="headerlink" href="#orientedlaterali
 <p>The pairwise outranking relation shown in <a class="hxr-hoverxref hxr-tooltip reference internal" href="#rel-circular-5-pt"><span class="std std-numref">Fig. 3.40</span></a> does hence represent a <em>faithful consensus</em> of the preference modelled by each one of the five performance criteria. We can inspect the actual quality of this consensus with the help of the bipolar-valued equivalence index (see the <a class="reference internal" href="#ordinalcorrelation-tutorial-label"><span class="std std-ref">advanced topic on the ordinal correlation between bipolar-valued digraphs</span></a>).</p>
 </section>
 <section id="the-central-condorcet-point-of-view">
-<h4><a class="toc-backref" href="#id161" role="doc-backlink"><span class="section-number">3.3.7.3. </span>The central CONDORCET point of view</a><a class="headerlink" href="#the-central-condorcet-point-of-view" title="Link to this heading"></a></h4>
+<h4><a class="toc-backref" href="#id160" role="doc-backlink"><span class="section-number">3.3.7.3. </span>The central CONDORCET point of view</a><a class="headerlink" href="#the-central-condorcet-point-of-view" title="Link to this heading"></a></h4>
 <p>The bipolar-valued outranking relation corresponds in fact to the median of the multicriteria points of view, at minimal KENDALL’s ordinal correlation distance from all marginal criteria points of view <a class="reference internal" href="#bar-1980p" id="id69"><span>[BAR-1980p]</span></a>.</p>
 <div class="literal-block-wrapper docutils container" id="outrankingconsensus">
 <div class="code-block-caption"><span class="caption-number">Listing 3.56 </span><span class="caption-text">Outranking Consensus quality</span><a class="headerlink" href="#outrankingconsensus" title="Link to this code"></a></div>
@@ -4901,7 +4951,7 @@ Technologies</em>, Aachen, September 8-11, 1997}, pp 97–103.</p>
 
   <div role="contentinfo">
     <p>&#169; Copyright 2012-2025, Raymond Bisdorff.
-      <span class="lastupdated">Last updated on Feb 16, 2025.
+      <span class="lastupdated">Last updated on Feb 17, 2025.
       </span></p>
   </div>
 
