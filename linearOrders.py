@@ -1221,12 +1221,11 @@ class _OutFlowsOrder(LinearOrder):
 #------------
 class BachetRanking(LinearOrder):
     """
-    .. warning:: Still under development ! The ranking rule may fail to deliver convincing results due to its dependency on the given ordering of the decision actions in the *other.actions* attribute.
-    
+
     Instantiates the Bachet Ranking and Ordering from
     a given bipolar-valued Digraph instance *other*.
 
-    For each action *x* in *other.actions*, the polarised integer row vector of the *other.relation* attribute defines a *Bachet vector* which correponds to a significance weight *rbx* of its **outrankingness credibility**. Similarly, the corresponding polarised integer column vector in the *other.relation* attribute defines a *Bachet vector* whose negation correponds to a significance weight *-cbx* of its **not outrankedness credibility**.
+    For each action *x* in *other.actions*, the polarised integer row vector of the *other.relation* attribute without the reflexive terms defines a *Bachet vector* which correponds to a significance weight *rbx* of its **outrankingness credibility**. Similarly, the corresponding polarised integer column vector in the *other.relation* attribute without the reflexive terms defines a *Bachet vector* whose negation correponds to a significance weight *-cbx* of its **not outrankedness credibility**.
 
     Taking now the sum *rbx + (-cbx)* of both credibilities gives us per action *x* a Bachet fitness score of the statement that *x* may be *first-ranked*. Sorting in decreasing (resp. increasing) order these Bachet fitness scores gives the *Bachet ranking*, respective *ordering*, result. Both results are stored in the *self.bachetRanking* resp. *self.bachetOrder* attribute. 
 

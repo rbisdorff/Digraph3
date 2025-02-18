@@ -1375,12 +1375,11 @@
 <a class="viewcode-back" href="../techDoc.html#linearOrders.BachetRanking">[docs]</a>
 <span class="k">class</span> <span class="nc">BachetRanking</span><span class="p">(</span><span class="n">LinearOrder</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">    .. warning:: Still under development ! The ranking rule may fail to deliver convincing results due to its dependency on the given ordering of the decision actions in the *other.actions* attribute.</span>
-<span class="sd">    </span>
+
 <span class="sd">    Instantiates the Bachet Ranking and Ordering from</span>
 <span class="sd">    a given bipolar-valued Digraph instance *other*.</span>
 
-<span class="sd">    For each action *x* in *other.actions*, the polarised integer row vector of the *other.relation* attribute defines a *Bachet vector* which correponds to a significance weight *rbx* of its **outrankingness credibility**. Similarly, the corresponding polarised integer column vector in the *other.relation* attribute defines a *Bachet vector* whose negation correponds to a significance weight *-cbx* of its **not outrankedness credibility**.</span>
+<span class="sd">    For each action *x* in *other.actions*, the polarised integer row vector of the *other.relation* attribute without the reflexive terms defines a *Bachet vector* which correponds to a significance weight *rbx* of its **outrankingness credibility**. Similarly, the corresponding polarised integer column vector in the *other.relation* attribute without the reflexive terms defines a *Bachet vector* whose negation correponds to a significance weight *-cbx* of its **not outrankedness credibility**.</span>
 
 <span class="sd">    Taking now the sum *rbx + (-cbx)* of both credibilities gives us per action *x* a Bachet fitness score of the statement that *x* may be *first-ranked*. Sorting in decreasing (resp. increasing) order these Bachet fitness scores gives the *Bachet ranking*, respective *ordering*, result. Both results are stored in the *self.bachetRanking* resp. *self.bachetOrder* attribute. </span>
 
