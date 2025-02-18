@@ -2727,7 +2727,7 @@ Note that, like the Copeland and the NetFlows ranking rules, the Bachet ranking 
 
 Mind however that a base 3 sbits based numbering system is a *positional numeral system*, implying that the Bachet ranking scores, as noticed before, depend essentially on the very ordering of the rows and columns of the outranking digraph's *self.relation* attribute.
 
-When measuring now the quality of Bachet rankings obtained by operating the Bachet rule on each one of all the potential 24 permutations of the four *self.actions* keys ['a1', 'a2', 'a3', 'a4'], we may observe below in :numref:`BachetPerms` four different levels of correlation: +0.7950 (8), +0.6890 (3), +0.6113(3) and +0.5265 (10) (see :numref:`BachetPerms`). The first correlation correspond to eight ['a4', 'a3', 'a2', 'a1'] ranking results, the second to three ['a4', 'a1', 'a3', 'a2'], the third to three ['a4', 'a2', 'a3', 'a1'], and the last to ten ['a4', 'a3', 'a1', 'a2'] ranking results. In 8 out of 12 cases, the reversed actions list delivers the highest possible correlation +0.7950 (see Lines 6-7 and 24-25).
+When measuring now the quality of Bachet rankings obtained by operating the Bachet rule on each one of all the potential 24 permutations of the four *self.actions* keys ['a1', 'a2', 'a3', 'a4'], we may observe below in :numref:`BachetPerms` four different levels of correlation: +0.7950 (8), +0.6890 (3), +0.6113(3) and +0.5265 (10). The first correlation correspond to eight ['a4', 'a3', 'a2', 'a1'] ranking results, the second to three ['a4', 'a1', 'a3', 'a2'], the third to three ['a4', 'a2', 'a3', 'a1'], and the last to ten ['a4', 'a3', 'a1', 'a2'] ranking results. In 8 out of 12 cases, the reversed actions list delivers the highest possible correlation +0.7950 (see Lines 6-7 and 24-25).
 
 .. code-block:: pycon
    :linenos:		
@@ -5178,7 +5178,7 @@ Appendix
 
 .. [19] " ... *j'ai cru devoir citer* [Borda], *1. parce qu'il est le premier qui ait observé que la méthode commune* [simple pluralité uninominale] *de faire des élections étoit défectueuse; 2. parce que celle qu'il a proposé d'y substituer est très ingénieuse, quelle seroit très-simple dans la pratique* ... " [CON-1785p]_ P. clxxiX
 
-.. [20] https://en.wikipedia.org/wiki/Claude_Gaspar_Bachet_de_M%C3%A9ziriac
+.. [20] https://en.wikipedia.org/wiki/Claude_Gaspar_Bachet_de_M%C3%A9ziriac Claude Gaspar Bachet (9 October 1581 – 26 February 1638) was a French mathematician and poet who is known today for his 1624 proof of Bézout's theorem stating the special case of the Bachet-Bézout identity for two coprime integers. Étienne Bézout actually proved this result in 1779 only for polynomials and Bézout's theorem is misattributed to Bézout by Bourbaki. The general Bachet-Bézout identity is a direct algebraic consequence of Euclid's division algorithm and was known long before Bachet (see the :py:meth:`arithmetics.bezout` method). It is furthemore in a Latin Translation by Bachet of the Arithmetica of Diophantus where Pierre de Fermat wrote in 1638 his famous margin note about his last theorem. 
 
 .. [21] See the tutorial on :ref:`ranking with multiple incommensurable criteria <Ranking-Tutorial-label>`
 
