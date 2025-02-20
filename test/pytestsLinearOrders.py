@@ -162,7 +162,7 @@ def testRankingCorrelations():
 def testBachetRanking():
     print("*==>> testing BachetRanking Class ----*")
     from outrankingDigraphs import RandomBipolarOutrankingDigraph
-    g = RandomBipolarOutrankingDigraph(numberOfActions=9,seed=1)
+    g = RandomBipolarOutrankingDigraph(numberOfActions=7,seed=1)
     print(g)
     from linearOrders import BachetRanking
     actions = [x for x in g.actions]
@@ -174,7 +174,11 @@ def testBachetRanking():
     print(ba2)
     ba2.showScores()
     print(g.computeRankingCorrelation(ba2.bachetRanking))
-    ba3 = BachetRanking(g,randomized=10)
+    ba3 = BachetRanking(g,randomized=10,seed=1)
     print(ba3)
     ba3.showScores()
     print(g.computeRankingCorrelation(ba3.bachetRanking))
+    ba4 = BachetRanking(g,Optimal=True,Comments=True)
+    print(ba4)
+    ba4.showScores()
+    print(g.computeRankingCorrelation(ba4.bachetRanking))

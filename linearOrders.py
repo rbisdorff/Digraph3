@@ -1438,8 +1438,6 @@ class BachetRanking(LinearOrder):
                 #Optimal = True
                 if Comments:
                     print('Both Bachet ranking with the given order and the reversed order of the decision actions are computed and the best qualified is eventually returned')
-            else:
-                Optimal = False
             tnf = time()
             incBachetScores = []
             decBachetScores = []
@@ -1453,6 +1451,7 @@ class BachetRanking(LinearOrder):
             #if Debug:
             #    print(c)
             #c.recodeValuation(ndigits=0)
+            # ## moved above the Optimal section
             cRelation = c.relation
 
 
