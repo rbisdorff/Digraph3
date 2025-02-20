@@ -1235,7 +1235,7 @@ class BachetRanking(LinearOrder):
 
         - *randomized*: integer number (default = 0) of random orderings of the other.actions that are ranked and the best correlated is eventually returned.
 
-        - *Optimal*: (False by default) all possible permutations of the given other.actions ordering are ranking and the best correlated ranking is eventually returned.
+        - *Optimal*: (False by default) all possible permutations of the given other.actions ordering are ranked and the best correlated ranking is eventually returned.
     
 
     For each action *x* in *other.actions*, the polarised integer row vector of the *other.relation* attribute without the reflexive terms defines a *Bachet vector* which correponds to a significance weight *rbx* of its **outrankingness credibility**. Similarly, the corresponding polarised integer column vector in the *other.relation* attribute without the reflexive terms defines a *Bachet vector* whose negation correponds to a significance weight *-cbx* of its **not outrankedness credibility**.
@@ -1312,6 +1312,7 @@ class BachetRanking(LinearOrder):
                  BestQualified=True,
                  randomized=0,seed=None,
                  Optimal=False,
+                 Polarised=False,
                  Comments=False,Debug=False):
         """
         constructor for generating a linear order
@@ -1360,12 +1361,15 @@ class BachetRanking(LinearOrder):
                            'max': Max,
                            'hasIntegerValuation':True}
         # with Condorcet Digraph valuation
-        c = PolarisedDigraph(other,level=other.valuationdomain['med'],\
-                             StrictCut=True,KeepValues=False)
-        if Debug:
-            print(c)
-        c.recodeValuation(ndigits=0)
-        cRelation = c.relation
+        if not Polarised:
+            c = PolarisedDigraph(other,level=other.valuationdomain['med'],\
+                                 StrictCut=True,KeepValues=False)
+            if Debug:
+                print(c)
+            c.recodeValuation(ndigits=0)
+            cRelation = c.relation
+        else:
+            cRelation = otherRelation
         
         runTimes['prepareLocals'] = time()-tt
 
@@ -1378,8 +1382,8 @@ class BachetRanking(LinearOrder):
             from digraphsTools import all_perms
             actions = [x for x in other.actions]
             for p in all_perms(actions): 
-                ba = BachetRanking(c,BestQualified=False,actionsList=p)
-                corr = c.computeRankingCorrelation(ba.bachetRanking)
+                ba = BachetRanking(c,Polarised=True,BestQualified=False,actionsList=p)
+                corr = other.computeRankingCorrelation(ba.bachetRanking)
                 if corr['correlation'] > correlation:
                     correlation = corr['correlation']
                     bar = ba
@@ -1411,8 +1415,10 @@ class BachetRanking(LinearOrder):
             bar = None
             for i in range(randomized):
                 random.shuffle(randomActions) 
-                ba = BachetRanking(c,BestQualified=True,actionsList=randomActions)
-                corr = c.computeRankingCorrelation(ba.bachetRanking)
+                ba = BachetRanking(c,Polarised=True,
+                                   BestQualified=True,
+                                   actionsList=randomActions)
+                corr = other.computeRankingCorrelation(ba.bachetRanking)
                 if corr['correlation'] > correlation:
                     correlation = corr['correlation']
                     bar = ba
@@ -1452,7 +1458,10 @@ class BachetRanking(LinearOrder):
             #    print(c)
             #c.recodeValuation(ndigits=0)
             # ## moved above the Optimal section
-            cRelation = c.relation
+            if Polarised:
+                cRelation = otherRelation
+            else:
+                cRelation = c.relation
 
 
             for x in actions:
