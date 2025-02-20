@@ -183,7 +183,7 @@ class BachetNumber(object):
        
     def __neg__(self):
         """
-        Defines the negation operator for Bachet encoded numbers
+        Defines an unary negating operator for Bachet encoded numbers
         """
         from copy import deepcopy
         neg = deepcopy(self)
