@@ -40,6 +40,9 @@ Pearls of bipolar-valued epistemic logic
 
       * :ref:`A new ranking rule based on bipolar-valued base 3 Bachet numbers <Bachet-Tutorial-label>`	 
       *	:ref:`Condorcet's 1785 critical perspective on the simple plurality voting rule <Condorcet-Tutorial-label>`
+      * :ref:`On characterizing bipolar-valued outranking digraphs <Sufficiency-Tutorial-label>`     
+      * :ref:`Consensus quality of the bipolar-valued outranking relation <Outranking-Consensus-Tutorial-label>`
+
 
    In this part of the **Digraph3** *documentation*, we provide an insight in computational enhancements one may get when working in a *bipolar-valued epistemic logic* framework, like - easily coping with *missing data* and uncertain criterion *significance weights*, - computing valued *ordinal correlations* between bipolar-valued outranking digraphs,  - computing digraph kernels and solving bipolar-valued kernel equation systems and, - testing for stability and confidence of outranking statements when facing uncertain performance criteria significance weights or decision objectives' importance weights.
 	    
@@ -2827,6 +2830,9 @@ Yet, when the ranking result remains apparently only weakly correlated with the 
     {'correlation': +0.7585, 'determination': 0.4086}
 
 The correlation +0.7585 corresponds, in the example given here, again to the unique optimal Kemeny ranking ['a2', 'a5', 'a9', 'a6', 'a8', 'a4', 'a3', 'a7', 'a1']. It is hence the highest possible correlation one may obtain.
+
+Efficiency of the Bachet ranking rule settings
+..............................................
 
 When comparing now the ranking results obtained from *single*, *best-qualified* and *randomized=100* Bachet rule settings with the corresponding Copeland rankings obtained from 1000 random Cost-Benefit performance tableaux of order 20 and involving 13 performance criteria, we may observe the following correlation statistics.
 

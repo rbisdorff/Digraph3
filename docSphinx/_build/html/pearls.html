@@ -124,6 +124,7 @@
 <li class="toctree-l4"><a class="reference internal" href="#bipolar-valued-base-3-encoded-bachet-numbers">3.3.1.1. Bipolar-valued base 3 encoded Bachet numbers</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#examples-of-sbits-encoded-bachet-numbers">3.3.1.2. Examples of sbits encoded Bachet numbers</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#the-bachet-ranking-rule-a-new-ranking-by-scoring-method">3.3.1.3. The Bachet ranking rule, a new ranking-by-scoring method</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#efficiency-of-the-bachet-ranking-rule-settings">3.3.1.4. Efficiency of the Bachet ranking rule settings</a></li>
 </ul>
 </li>
 <li class="toctree-l3"><a class="reference internal" href="#coping-with-missing-data-and-indeterminateness">3.3.2. Coping with missing data and indeterminateness</a><ul>
@@ -230,6 +231,8 @@
 <dd class="field-odd"><ul class="simple">
 <li><p><a class="reference internal" href="#bachet-tutorial-label"><span class="std std-ref">A new ranking rule based on bipolar-valued base 3 Bachet numbers</span></a></p></li>
 <li><p><a class="reference internal" href="#condorcet-tutorial-label"><span class="std std-ref">Condorcet’s 1785 critical perspective on the simple plurality voting rule</span></a></p></li>
+<li><p><a class="reference internal" href="#sufficiency-tutorial-label"><span class="std std-ref">On characterizing bipolar-valued outranking digraphs</span></a></p></li>
+<li><p><a class="reference internal" href="#outranking-consensus-tutorial-label"><span class="std std-ref">Consensus quality of the bipolar-valued outranking relation</span></a></p></li>
 </ul>
 </dd>
 </dl>
@@ -2565,6 +2568,7 @@ confidence level <em>alpha</em> %, when</p>
 <li><p><a class="reference internal" href="#bipolar-valued-base-3-encoded-bachet-numbers" id="id138">Bipolar-valued base 3 encoded Bachet numbers</a></p></li>
 <li><p><a class="reference internal" href="#examples-of-sbits-encoded-bachet-numbers" id="id139">Examples of sbits encoded Bachet numbers</a></p></li>
 <li><p><a class="reference internal" href="#the-bachet-ranking-rule-a-new-ranking-by-scoring-method" id="id140">The Bachet ranking rule, a new ranking-by-scoring method</a></p></li>
+<li><p><a class="reference internal" href="#efficiency-of-the-bachet-ranking-rule-settings" id="id141">Efficiency of the Bachet ranking rule settings</a></p></li>
 </ul>
 </nav>
 <section id="bipolar-valued-base-3-encoded-bachet-numbers">
@@ -2845,6 +2849,9 @@ confidence level <em>alpha</em> %, when</p>
 </div>
 </div>
 <p>The correlation +0.7585 corresponds, in the example given here, again to the unique optimal Kemeny ranking [‘a2’, ‘a5’, ‘a9’, ‘a6’, ‘a8’, ‘a4’, ‘a3’, ‘a7’, ‘a1’]. It is hence the highest possible correlation one may obtain.</p>
+</section>
+<section id="efficiency-of-the-bachet-ranking-rule-settings">
+<h4><a class="toc-backref" href="#id141" role="doc-backlink"><span class="section-number">3.3.1.4. </span>Efficiency of the Bachet ranking rule settings</a><a class="headerlink" href="#efficiency-of-the-bachet-ranking-rule-settings" title="Link to this heading"></a></h4>
 <p>When comparing now the ranking results obtained from <em>single</em>, <em>best-qualified</em> and <em>randomized=100</em> Bachet rule settings with the corresponding Copeland rankings obtained from 1000 random Cost-Benefit performance tableaux of order 20 and involving 13 performance criteria, we may observe the following correlation statistics.</p>
 <blockquote>
 <div><table class="docutils align-default">
@@ -3000,15 +3007,15 @@ heat map above (see <a class="hxr-hoverxref hxr-tooltip reference internal" href
 <span id="ordinalcorrelation-tutorial-label"></span><h3><a class="toc-backref" href="#id133" role="doc-backlink"><span class="section-number">3.3.3. </span>Ordinal correlation equals bipolar-valued relational equivalence</a><a class="headerlink" href="#ordinal-correlation-equals-bipolar-valued-relational-equivalence" title="Link to this heading"></a></h3>
 <nav class="contents local" id="id35">
 <ul class="simple">
-<li><p><a class="reference internal" href="#kendall-s-tau-index" id="id141">Kendall’s <em>tau</em> index</a></p></li>
-<li><p><a class="reference internal" href="#bipolar-valued-relational-equivalence" id="id142">Bipolar-valued relational equivalence</a></p></li>
-<li><p><a class="reference internal" href="#fitness-of-ranking-heuristics" id="id143">Fitness of ranking heuristics</a></p></li>
-<li><p><a class="reference internal" href="#illustrating-preference-divergences" id="id144">Illustrating preference divergences</a></p></li>
-<li><p><a class="reference internal" href="#exploring-the-better-rated-and-the-as-well-as-rated-opinions" id="id145">Exploring the <em>better rated</em>  and the <em>as well as rated</em> opinions</a></p></li>
+<li><p><a class="reference internal" href="#kendall-s-tau-index" id="id142">Kendall’s <em>tau</em> index</a></p></li>
+<li><p><a class="reference internal" href="#bipolar-valued-relational-equivalence" id="id143">Bipolar-valued relational equivalence</a></p></li>
+<li><p><a class="reference internal" href="#fitness-of-ranking-heuristics" id="id144">Fitness of ranking heuristics</a></p></li>
+<li><p><a class="reference internal" href="#illustrating-preference-divergences" id="id145">Illustrating preference divergences</a></p></li>
+<li><p><a class="reference internal" href="#exploring-the-better-rated-and-the-as-well-as-rated-opinions" id="id146">Exploring the <em>better rated</em>  and the <em>as well as rated</em> opinions</a></p></li>
 </ul>
 </nav>
 <section id="kendall-s-tau-index">
-<h4><a class="toc-backref" href="#id141" role="doc-backlink"><span class="section-number">3.3.3.1. </span>Kendall’s <em>tau</em> index</a><a class="headerlink" href="#kendall-s-tau-index" title="Link to this heading"></a></h4>
+<h4><a class="toc-backref" href="#id142" role="doc-backlink"><span class="section-number">3.3.3.1. </span>Kendall’s <em>tau</em> index</a><a class="headerlink" href="#kendall-s-tau-index" title="Link to this heading"></a></h4>
 <p><em>M. G. Kendall</em> (<a class="reference internal" href="#ken-1938p" id="id36"><span>[KEN-1938p]</span></a>) defined his <em>ordinal correlation</em> <img class="math" src="_images/math/914b2d4b6659b86d3153d5510839dfb254dfc8a3.png" alt="\tau"/> (<strong>tau</strong>) <em>index</em> for linear orders of dimension <em>n</em> as a <em>balancing</em> of the number <em>#Co</em> of correctly oriented pairs against the number <em>#In</em> of incorrectly oriented pairs. The total number of irreflexive pairs being <em>n(n-1)</em>, in the case of linear orders, <img class="math" src="_images/math/cc1381f429e25ffcb437b16f7bb9927df7e88d31.png" alt="\#Co + \#In \;=\; n(n-1)"/>.  Hence <img class="math" src="_images/math/987ef0789be95a81a87903c5cbbc1c9dc8d6a3e2.png" alt="\tau \;=\; \big(\frac{\#Co}{n(n-1)}\big) \,-\, \big(\frac{\#In}{n(n-1)}\big)"/>. In case <em>#In</em> is zero, <img class="math" src="_images/math/6e3b85adbb278c4ab9b16935b125f48e78f649d5.png" alt="\tau \;=\; +1"/>  (all pairs are <em>equivalently oriented</em>); inversely, in case <em>#Co</em> is zero, <img class="math" src="_images/math/2c76c8cc03e5d5605f653ad55c2d0670d9d91195.png" alt="\tau \;=\; -1"/> (all pairs are <em>differently oriented</em>).</p>
 <p>Noticing that <img class="math" src="_images/math/82483d015808fb70f05b9c57fe9add655b3a6ab5.png" alt="\frac{\#Co}{n(n-1)} \;=\; 1 \,-\, \frac{\#In}{n(n-1)}"/>, and recalling that the bipolar-valued negation is operated by changing the sign of the characteristic value, <em>Kendall</em>’s original <em>tau</em> definition implemented in fact the bipolar-valued <strong>negation</strong> of the <strong>non equivalence</strong> of two linear orders:</p>
 <blockquote>
@@ -3043,7 +3050,7 @@ heat map above (see <a class="hxr-hoverxref hxr-tooltip reference internal" href
 <p>What happens now with more or less determined and even partially indeterminate relations ? May we proceed in a similar way ?</p>
 </section>
 <section id="bipolar-valued-relational-equivalence">
-<h4><a class="toc-backref" href="#id142" role="doc-backlink"><span class="section-number">3.3.3.2. </span>Bipolar-valued relational equivalence</a><a class="headerlink" href="#bipolar-valued-relational-equivalence" title="Link to this heading"></a></h4>
+<h4><a class="toc-backref" href="#id143" role="doc-backlink"><span class="section-number">3.3.3.2. </span>Bipolar-valued relational equivalence</a><a class="headerlink" href="#bipolar-valued-relational-equivalence" title="Link to this heading"></a></h4>
 <p>Let us now consider two randomly bipolar-valued digraphs <em>R1</em> and <em>R2</em> of order five.</p>
 <div class="literal-block-wrapper docutils container" id="tworand">
 <div class="code-block-caption"><span class="caption-number">Listing 3.40 </span><span class="caption-text">Two Random Bipolar-valued Digraphs</span><a class="headerlink" href="#tworand" title="Link to this code"></a></div>
@@ -3153,7 +3160,7 @@ heat map above (see <a class="hxr-hoverxref hxr-tooltip reference internal" href
 <p>We may now illustrate the quality of the global ranking of the movies shown with the heat map in <a class="hxr-hoverxref hxr-tooltip reference internal" href="#graffiti07-2"><span class="std std-numref">Fig. 3.15</span></a>.</p>
 </section>
 <section id="fitness-of-ranking-heuristics">
-<h4><a class="toc-backref" href="#id143" role="doc-backlink"><span class="section-number">3.3.3.3. </span>Fitness of ranking heuristics</a><a class="headerlink" href="#fitness-of-ranking-heuristics" title="Link to this heading"></a></h4>
+<h4><a class="toc-backref" href="#id144" role="doc-backlink"><span class="section-number">3.3.3.3. </span>Fitness of ranking heuristics</a><a class="headerlink" href="#fitness-of-ranking-heuristics" title="Link to this heading"></a></h4>
 <p>We reconsider the bipolar-valued outranking digraph <em>g</em> modelling the pairwise global ‘<em>at least as well rated as</em>’ relation among the 25 movies seen in the topic before (see <a class="hxr-hoverxref hxr-tooltip reference internal" href="#graffiti07-2"><span class="std std-numref">Fig. 3.15</span></a>).</p>
 <div class="literal-block-wrapper docutils container" id="exmoviesbg">
 <div class="code-block-caption"><span class="caption-number">Listing 3.44 </span><span class="caption-text">Global Movies Outranking Digraph</span><a class="headerlink" href="#exmoviesbg" title="Link to this code"></a></div>
@@ -3227,7 +3234,7 @@ heat map above (see <a class="hxr-hoverxref hxr-tooltip reference internal" href
 <p>It would be interesting to compare similarly the correlations one may obtain with other global ranking heuristics, like the <em>Copeland</em> or the <em>Kohler</em> ranking rule.</p>
 </section>
 <section id="illustrating-preference-divergences">
-<h4><a class="toc-backref" href="#id144" role="doc-backlink"><span class="section-number">3.3.3.4. </span>Illustrating preference divergences</a><a class="headerlink" href="#illustrating-preference-divergences" title="Link to this heading"></a></h4>
+<h4><a class="toc-backref" href="#id145" role="doc-backlink"><span class="section-number">3.3.3.4. </span>Illustrating preference divergences</a><a class="headerlink" href="#illustrating-preference-divergences" title="Link to this heading"></a></h4>
 <p>The valued relational equivalence index gives us a further measure for studying how <strong>divergent</strong> appear the rating opinions expressed by the movie critics.</p>
 <figure class="align-center" id="correlationtable">
 <a class="reference internal image-reference" href="_images/correlationTable.png"><img alt="Pairwise valued correlation of movie critics" src="_images/correlationTable.png" style="width: 600px;" /></a>
@@ -3249,7 +3256,7 @@ heat map above (see <a class="hxr-hoverxref hxr-tooltip reference internal" href
 <p>The first 3 principal axes support together about 70% of the total inertia. Most <em>eccentric</em> and <em>opposed</em> in their respective rating opinions appear, on the first principal axis with 27.2% inertia, the conservative daily press against labour and public press. On the second principal axis with 23.7.7% inertia, it is the people press versus the cultural critical press. And, on the third axis with still 19.3% inertia, the written media appear most opposed to the radio media.</p>
 </section>
 <section id="exploring-the-better-rated-and-the-as-well-as-rated-opinions">
-<h4><a class="toc-backref" href="#id145" role="doc-backlink"><span class="section-number">3.3.3.5. </span>Exploring the <em>better rated</em>  and the <em>as well as rated</em> opinions</a><a class="headerlink" href="#exploring-the-better-rated-and-the-as-well-as-rated-opinions" title="Link to this heading"></a></h4>
+<h4><a class="toc-backref" href="#id146" role="doc-backlink"><span class="section-number">3.3.3.5. </span>Exploring the <em>better rated</em>  and the <em>as well as rated</em> opinions</a><a class="headerlink" href="#exploring-the-better-rated-and-the-as-well-as-rated-opinions" title="Link to this heading"></a></h4>
 <p>In order to furthermore study the quality of a ranking result, it may be interesting to have a separate view on the asymmetric and symmetric parts of the ‘<em>at least as well rated as</em>’ opinions (see the tutorial on <a class="reference internal" href="tutorial.html#digraphs-tutorial-label"><span class="std std-ref">Manipulating Digraph objects</span></a>).</p>
 <p>Let us first have a look at the pairwise asymmetric part, namely the ‘<em>better rated than</em>’ and ‘<em>less well rated than</em>’ opinions of the movie critics.</p>
 <div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">digraphs</span> <span class="kn">import</span> <span class="n">AsymmetricPartialDigraph</span>
@@ -3302,15 +3309,15 @@ heat map above (see <a class="hxr-hoverxref hxr-tooltip reference internal" href
 <span id="kernel-tutorial-label"></span><h3><a class="toc-backref" href="#id134" role="doc-backlink"><span class="section-number">3.3.4. </span>On computing digraph kernels</a><a class="headerlink" href="#on-computing-digraph-kernels" title="Link to this heading"></a></h3>
 <nav class="contents local" id="id41">
 <ul class="simple">
-<li><p><a class="reference internal" href="#what-is-a-graph-kernel" id="id146">What is a graph kernel ?</a></p></li>
-<li><p><a class="reference internal" href="#initial-and-terminal-kernels" id="id147">Initial and terminal kernels</a></p></li>
-<li><p><a class="reference internal" href="#kernels-in-lateralized-digraphs" id="id148">Kernels in lateralized digraphs</a></p></li>
-<li><p><a class="reference internal" href="#computing-good-and-bad-choice-recommendations" id="id149">Computing good and bad choice recommendations</a></p></li>
-<li><p><a class="reference internal" href="#tractability" id="id150">Tractability</a></p></li>
+<li><p><a class="reference internal" href="#what-is-a-graph-kernel" id="id147">What is a graph kernel ?</a></p></li>
+<li><p><a class="reference internal" href="#initial-and-terminal-kernels" id="id148">Initial and terminal kernels</a></p></li>
+<li><p><a class="reference internal" href="#kernels-in-lateralized-digraphs" id="id149">Kernels in lateralized digraphs</a></p></li>
+<li><p><a class="reference internal" href="#computing-good-and-bad-choice-recommendations" id="id150">Computing good and bad choice recommendations</a></p></li>
+<li><p><a class="reference internal" href="#tractability" id="id151">Tractability</a></p></li>
 </ul>
 </nav>
 <section id="what-is-a-graph-kernel">
-<h4><a class="toc-backref" href="#id146" role="doc-backlink"><span class="section-number">3.3.4.1. </span>What is a graph kernel ?</a><a class="headerlink" href="#what-is-a-graph-kernel" title="Link to this heading"></a></h4>
+<h4><a class="toc-backref" href="#id147" role="doc-backlink"><span class="section-number">3.3.4.1. </span>What is a graph kernel ?</a><a class="headerlink" href="#what-is-a-graph-kernel" title="Link to this heading"></a></h4>
 <p>We call <strong>choice</strong> in a graph, respectively a digraph, a subset of its vertices, resp. of its nodes or actions. A choice <em>Y</em> is called <strong>internally stable</strong> or <strong>independent</strong> when there exist <strong>no links</strong> (edges) or relations (arcs) between its members. Furthermore, a choice <em>Y</em> is called <strong>externally stable</strong> when for each vertex, node or action <em>x</em> not in <em>Y</em>, there exists at least a member <em>y</em> of <em>Y</em> such that <em>x</em> is linked or related to <em>y</em>. Now, an internally <strong>and</strong> externally stable choice is called a <strong>kernel</strong>.</p>
 <p>A first trivial example is immediately given by the maximal independent vertices sets (MISs) of the n-cycle graph (see tutorial on <a class="reference internal" href="tutorial.html#isomorphicmis-tutorial-label"><span class="std std-ref">computing isomorphic choices</span></a>). Indeed, each MIS in the n-cycle graph is by definition independent, i.e. internally stable, and each non selected vertex in the n-cycle graph is in relation with either one or even two members of the MIS. See, for instance, the four non isomorphic MISs of the 12-cycle graph as shown in <a class="hxr-hoverxref hxr-tooltip reference internal" href="tutorial.html#misc12"><span class="std std-numref">Fig. 1.74</span></a>.</p>
 <p>In all graph or symmetric digraph, the <em>maximality condition</em> imposed on the internal stability is equivalent to the external stability condition. Indeed, if there would exist a vertex or node not related to any of the elements of a choice, then we may safely add this vertex or node to the given choice without violating its internal stability. All kernels must hence be maximal independent choices. In fact, in a topological sense, they correspond to maximal <strong>holes</strong> in the given graph.</p>
@@ -3460,7 +3467,7 @@ instance (see <a class="hxr-hoverxref hxr-tooltip reference internal" href="#ran
 <p>In the context of digraphs, i.e. <em>oriented</em> graphs, the kernel concept gets much richer and separates from the symmetric MIS concept.</p>
 </section>
 <section id="initial-and-terminal-kernels">
-<h4><a class="toc-backref" href="#id147" role="doc-backlink"><span class="section-number">3.3.4.2. </span>Initial and terminal kernels</a><a class="headerlink" href="#initial-and-terminal-kernels" title="Link to this heading"></a></h4>
+<h4><a class="toc-backref" href="#id148" role="doc-backlink"><span class="section-number">3.3.4.2. </span>Initial and terminal kernels</a><a class="headerlink" href="#initial-and-terminal-kernels" title="Link to this heading"></a></h4>
 <p>In an oriented graph context, the internal stability condition of the kernel concept remains untouched; however, the external stability condition gets indeed split up by the <em>orientation</em> into two lateral cases:</p>
 <blockquote>
 <div><ol class="arabic simple">
@@ -3612,7 +3619,7 @@ instance (see <a class="hxr-hoverxref hxr-tooltip reference internal" href="#ran
 <p>It immediately follows that weak chordless circuits are part of the class of digraphs that are <strong>invariant</strong> under the <em>codual</em> transform, <em>cn</em> = - (~ <em>cn</em> ) = ~ ( -<em>cn</em> ).</p>
 </section>
 <section id="kernels-in-lateralized-digraphs">
-<h4><a class="toc-backref" href="#id148" role="doc-backlink"><span class="section-number">3.3.4.3. </span>Kernels in lateralized digraphs</a><a class="headerlink" href="#kernels-in-lateralized-digraphs" title="Link to this heading"></a></h4>
+<h4><a class="toc-backref" href="#id149" role="doc-backlink"><span class="section-number">3.3.4.3. </span>Kernels in lateralized digraphs</a><a class="headerlink" href="#kernels-in-lateralized-digraphs" title="Link to this heading"></a></h4>
 <p>Humans do live in an apparent physical space of plain transitive <strong>lateral orientation</strong>, fully empowered in finite geometrical 3D models with <strong>linear orders</strong>, where first, resp. last ranked, nodes deliver unique initial, resp. terminal, kernels. Similarly, in finite <strong>preorders</strong>, the first, resp. last, equivalence classes deliver the unique initial, resp. unique terminal, kernels. More generally, in finite <strong>partial orders</strong>, i.e. asymmetric and transitive digraphs, topological sort algorithms will easily reveal on the first, resp. last, level all unique initial, resp. terminal, kernels.</p>
 <p>In genuine random digraphs, however, we may need to check for each of its MISs, whether <em>one</em>, <em>both</em>, or <em>none</em> of the lateralized external stability conditions may be satisfied. Consider, for instance, the following random digraph instance of order 7 and generated with an arc probability of 30%.</p>
 <div class="highlight-pycon notranslate"><div class="highlight"><pre><span></span><span class="linenos">1</span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">randomDigraphs</span> <span class="kn">import</span> <span class="n">RandomDigraph</span>
@@ -3702,7 +3709,7 @@ best covered terminal kernel</span><a class="headerlink" href="#orientedlaterali
 <p>In algorithmic decision theory, initial and terminal prekernels may provide convincing best, resp. worst, choice recommendations (see tutorial on <a class="reference internal" href="tutorial.html#rubis-tutorial-label"><span class="std std-ref">computing a best choice recommendation</span></a>).</p>
 </section>
 <section id="computing-good-and-bad-choice-recommendations">
-<h4><a class="toc-backref" href="#id149" role="doc-backlink"><span class="section-number">3.3.4.4. </span>Computing good and bad choice recommendations</a><a class="headerlink" href="#computing-good-and-bad-choice-recommendations" title="Link to this heading"></a></h4>
+<h4><a class="toc-backref" href="#id150" role="doc-backlink"><span class="section-number">3.3.4.4. </span>Computing good and bad choice recommendations</a><a class="headerlink" href="#computing-good-and-bad-choice-recommendations" title="Link to this heading"></a></h4>
 <p>To illustrate this idea, let us finally compute good and bad choice recommendations in the following random bipolar-valued <strong>outranking</strong> digraph.</p>
 <div class="highlight-pycon notranslate"><div class="highlight"><pre><span></span><span class="linenos"> 1</span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">outrankingDigraphs</span> <span class="kn">import</span> <span class="n">RandomBipolarOutrankingDigraph</span>
 <span class="linenos"> 2</span><span class="gp">&gt;&gt;&gt; </span><span class="n">g</span> <span class="o">=</span> <span class="n">RandomBipolarOutrankingDigraph</span><span class="p">(</span><span class="n">seed</span><span class="o">=</span><span class="mi">5</span><span class="p">)</span>
@@ -3809,7 +3816,7 @@ best covered terminal kernel</span><a class="headerlink" href="#orientedlaterali
 <p>In the resulting linear ranking (see <a class="hxr-hoverxref hxr-tooltip reference internal" href="#outrankingresult"><span class="std std-numref">Fig. 3.34</span></a>), action ‘a4’ is set at first rank, followed by action ‘a2’. This makes sense as ‘a4’ shows three performances in the first quintile, whereas ‘a2’ is only partially evaluated and shows only two such excellent performances. But ‘a4’ also shows a very weak performance in the first quintile. Both decision actions, hence, don’t show eventually a performance profile that would make apparent a clear preference situation in favour of one or the other. In this sense, the prekernels based best choice recommendations may appear more faithful with respect to the actually definite strict outranking relation than any ‘forced’ linear ranking result as shown in <a class="hxr-hoverxref hxr-tooltip reference internal" href="#outrankingresult"><span class="std std-numref">Fig. 3.34</span></a> above.</p>
 </section>
 <section id="tractability">
-<h4><a class="toc-backref" href="#id150" role="doc-backlink"><span class="section-number">3.3.4.5. </span>Tractability</a><a class="headerlink" href="#tractability" title="Link to this heading"></a></h4>
+<h4><a class="toc-backref" href="#id151" role="doc-backlink"><span class="section-number">3.3.4.5. </span>Tractability</a><a class="headerlink" href="#tractability" title="Link to this heading"></a></h4>
 <p>Finally, let us give some hints on the <strong>tractability</strong> of kernel computations. Detecting all (pre)kernels in a digraph is a famously NP-hard computational problem. Checking external stability conditions for an independent choice is equivalent to checking its maximality and may be done in the linear complexity of the order of the digraph. However, checking all independent choices contained in a digraph may get hard already for tiny sparse digraphs of order <em>n</em> &gt; 20 (see <a class="reference internal" href="tutorial.html#bis-2006b" id="id44"><span>[BIS-2006b]</span></a>). Indeed, the worst case is given by an empty or indeterminate digraph where the set of all potential independent choices to check is in fact the power set of the vertices.</p>
 <div class="highlight-pycon notranslate"><div class="highlight"><pre><span></span><span class="linenos"> 1</span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">digraphs</span> <span class="kn">import</span> <span class="n">EmptyDigraph</span>
 <span class="linenos"> 2</span><span class="gp">&gt;&gt;&gt; </span><span class="n">e</span> <span class="o">=</span> <span class="n">EmptyDigraph</span><span class="p">(</span><span class="n">order</span><span class="o">=</span><span class="mi">20</span><span class="p">)</span>
@@ -3894,13 +3901,13 @@ best covered terminal kernel</span><a class="headerlink" href="#orientedlaterali
 <span id="bipolar-valued-kernels-tutorial-label"></span><h3><a class="toc-backref" href="#id135" role="doc-backlink"><span class="section-number">3.3.5. </span>Bipolar-valued kernel membership characteristic vectors</a><a class="headerlink" href="#bipolar-valued-kernel-membership-characteristic-vectors" title="Link to this heading"></a></h3>
 <nav class="contents local" id="id47">
 <ul class="simple">
-<li><p><a class="reference internal" href="#kernel-equation-systems" id="id151">Kernel equation systems</a></p></li>
-<li><p><a class="reference internal" href="#solving-bipolar-valued-kernel-equation-systems" id="id152">Solving bipolar-valued kernel equation systems</a></p></li>
-<li><p><a class="reference internal" href="#historical-notes" id="id153">Historical notes</a></p></li>
+<li><p><a class="reference internal" href="#kernel-equation-systems" id="id152">Kernel equation systems</a></p></li>
+<li><p><a class="reference internal" href="#solving-bipolar-valued-kernel-equation-systems" id="id153">Solving bipolar-valued kernel equation systems</a></p></li>
+<li><p><a class="reference internal" href="#historical-notes" id="id154">Historical notes</a></p></li>
 </ul>
 </nav>
 <section id="kernel-equation-systems">
-<h4><a class="toc-backref" href="#id151" role="doc-backlink"><span class="section-number">3.3.5.1. </span>Kernel equation systems</a><a class="headerlink" href="#kernel-equation-systems" title="Link to this heading"></a></h4>
+<h4><a class="toc-backref" href="#id152" role="doc-backlink"><span class="section-number">3.3.5.1. </span>Kernel equation systems</a><a class="headerlink" href="#kernel-equation-systems" title="Link to this heading"></a></h4>
 <p>Let <em>G(X,R)</em> be a crisp irreflexive digraph defined on a finite set <em>X</em> of nodes and where <em>R</em> is the corresponding {-1,+1}-valued adjacency matrix. Let <em>Y</em> be the {-1,+1}-valued membership characteristic (row) vector of a choice in <em>X</em>. When <em>Y</em> satisfies the following equation system</p>
 <blockquote>
 <div><p><img class="math" src="_images/math/40d68affcfedbe051e19caa0c9bcfafeb35e49c4.png" alt="Y \circ R \; = \; -Y\;,"/></p>
@@ -3948,7 +3955,7 @@ best covered terminal kernel</span><a class="headerlink" href="#orientedlaterali
 </div></blockquote>
 </section>
 <section id="solving-bipolar-valued-kernel-equation-systems">
-<h4><a class="toc-backref" href="#id152" role="doc-backlink"><span class="section-number">3.3.5.2. </span>Solving bipolar-valued kernel equation systems</a><a class="headerlink" href="#solving-bipolar-valued-kernel-equation-systems" title="Link to this heading"></a></h4>
+<h4><a class="toc-backref" href="#id153" role="doc-backlink"><span class="section-number">3.3.5.2. </span>Solving bipolar-valued kernel equation systems</a><a class="headerlink" href="#solving-bipolar-valued-kernel-equation-systems" title="Link to this heading"></a></h4>
 <p><em>John von Neumann</em> showed indeed that, when a digraph <em>G(X,R)</em> is <strong>acyclic</strong> with a  <strong>unique initial kernel</strong> <em>K</em> characterised by its membership characteristics vector <em>Yk</em>, then the following double bipolar-valued fixpoint equation</p>
 <blockquote>
 <div><p><img class="math" src="_images/math/e8801a1214db64aa368aca3176b1032e9950d636.png" alt="T^2(Y) \; := \; -\big( -(Y \circ R) \circ R) \; = \; Y\;."/></p>
@@ -4160,7 +4167,7 @@ best covered terminal kernel</span><a class="headerlink" href="#orientedlaterali
 <p>The adjacency matrix of a symmetric digraph staying <em>unchanged</em> by the transposition operator, the previous computations, when qualifying the same kernel as a <em>terminal</em> instance, will hence produce exactly the same result.</p>
 </section>
 <section id="historical-notes">
-<h4><a class="toc-backref" href="#id153" role="doc-backlink"><span class="section-number">3.3.5.3. </span>Historical notes</a><a class="headerlink" href="#historical-notes" title="Link to this heading"></a></h4>
+<h4><a class="toc-backref" href="#id154" role="doc-backlink"><span class="section-number">3.3.5.3. </span>Historical notes</a><a class="headerlink" href="#historical-notes" title="Link to this heading"></a></h4>
 <p>Following the observation that an independent absorbent choice in an acyclic digraph corresponds to the zero values of the associated <em>Grundy</em> function, <em>J. Riguet</em> <a class="reference internal" href="#rig-1948p" id="id53"><span>[RIG-1948p]</span></a> introduced the name <strong>noyau</strong> (kernel) for such a choice. Terminal kernels where in the sequel studied by <em>Claude Berge</em> <a class="reference internal" href="#ber-1958p" id="id54"><span>[BER-1958p]</span></a> in the context of Combinatorial Game Theory. Initial kernels –independent and dominating choices– were introduced under the name game solutions by <em>John von Neumann</em> <a class="reference internal" href="#neu-1944p" id="id55"><span>[NEU-1944p]</span></a>. The absorbent version of the crisp kernel equation system  was first introduced by <em>Schmidt G. and Ströhlein Th.</em> <a class="reference internal" href="#sch-1985p" id="id56"><span>[SCH-1985p]</span></a> in the context of their thorough exploration of relational algebra.</p>
 <p>The fuzzy version of kernel equation systems was first investigated by <em>Kitainik L.</em> <a class="reference internal" href="#kit-1993p" id="id57"><span>[KIT-1993p]</span></a>. Commenting on this work at a meeting in Spring 1995 of the EURO Working Group on Multicriteria Decision Aiding in Lausanne (Switzerland), <em>Marc Roubens</em> feared that solving such fuzzy kernel equation systems could be computationally difficult. Triggered by his pessimistic remark and knowing about kernel equation systems and the <em>Neumann</em> fixpoint theorem (<a class="reference internal" href="#neu-1944p" id="id58"><span>[NEU-1944p]</span></a>, <a class="reference internal" href="#sch-1985p" id="id59"><span>[SCH-1985p]</span></a>), I immediately started to implement in Prolog a solver for the valued version of Equation <img class="math" src="_images/math/4d457d6bc5e0133d45b70200e8c1e143f1ba4679.png" alt="T(Y)"/>, the equation system serving as constraints for a discrete labelling of all possible rational solution vectors. And in Summer 1995, we luckily obtained with a commercial finite domain solver the very first valued initial and terminal kernels from a didactic outranking digraph of order 8, well known in the multiple-criteria decision aiding community. The computation took several seconds on a CRAY 6412 superserver with 12 processors operating in a nowadays ridiculous CPU speed of 90 Mhz. The labelled solution vectors, obtained in the sequel for any outranking digraph with a single initial or terminal kernel, were structured in a way that suggested the converging stages of the <em>Neumann</em> fixpoint algorithm and so gave the initial hint for our Algorithm (<a class="reference internal" href="#bis-1996p" id="id60"><span>[BIS-1996p]</span></a>, <a class="reference internal" href="#bis-1997p" id="id61"><span>[BIS-1997p]</span></a>).</p>
 <p>In our present Python3.12 implementation, such a tiny problem is solved in less than a thousandth of a second on a common laptop. And this remains practically the same for any relevant example of outranking digraph observed in a real decision-aiding problem. Several times we wrote in our personal journal that there is certainly now no more potential for any substantial improvement of this computational efficiency; Only to discover, shortly later, that following a new theoretical idea or choosing a more efficient implementation –-using for instance the amazing instrument of iterator generators in Python–-, execution times could well be divided by 20.</p>
@@ -4177,14 +4184,14 @@ best covered terminal kernel</span><a class="headerlink" href="#orientedlaterali
 <span id="sufficiency-tutorial-label"></span><h3><a class="toc-backref" href="#id136" role="doc-backlink"><span class="section-number">3.3.6. </span>On characterizing bipolar-valued outranking digraphs</a><a class="headerlink" href="#on-characterizing-bipolar-valued-outranking-digraphs" title="Link to this heading"></a></h3>
 <nav class="contents local" id="id63">
 <ul class="simple">
-<li><p><a class="reference internal" href="#necessary-properties-of-the-outranking-digraph" id="id154">Necessary properties of the outranking digraph</a></p></li>
-<li><p><a class="reference internal" href="#partial-tournaments-may-be-strict-outranking-digraphs" id="id155">Partial tournaments may be strict outranking digraphs</a></p></li>
-<li><p><a class="reference internal" href="#recognizing-bipolar-outranking-valuations" id="id156">Recognizing bipolar outranking valuations</a></p></li>
-<li><p><a class="reference internal" href="#on-generating-random-outranking-valuations" id="id157">On generating random outranking valuations</a></p></li>
+<li><p><a class="reference internal" href="#necessary-properties-of-the-outranking-digraph" id="id155">Necessary properties of the outranking digraph</a></p></li>
+<li><p><a class="reference internal" href="#partial-tournaments-may-be-strict-outranking-digraphs" id="id156">Partial tournaments may be strict outranking digraphs</a></p></li>
+<li><p><a class="reference internal" href="#recognizing-bipolar-outranking-valuations" id="id157">Recognizing bipolar outranking valuations</a></p></li>
+<li><p><a class="reference internal" href="#on-generating-random-outranking-valuations" id="id158">On generating random outranking valuations</a></p></li>
 </ul>
 </nav>
 <section id="necessary-properties-of-the-outranking-digraph">
-<h4><a class="toc-backref" href="#id154" role="doc-backlink"><span class="section-number">3.3.6.1. </span>Necessary properties of the outranking digraph</a><a class="headerlink" href="#necessary-properties-of-the-outranking-digraph" title="Link to this heading"></a></h4>
+<h4><a class="toc-backref" href="#id155" role="doc-backlink"><span class="section-number">3.3.6.1. </span>Necessary properties of the outranking digraph</a><a class="headerlink" href="#necessary-properties-of-the-outranking-digraph" title="Link to this heading"></a></h4>
 <p>Bipolar-valued outranking digraphs verify two necessary properties <a class="reference internal" href="#bis-2013p" id="id64"><span>[BIS-2013p]</span></a>:</p>
 <blockquote>
 <div><ol class="arabic">
@@ -4235,7 +4242,7 @@ best covered terminal kernel</span><a class="headerlink" href="#orientedlaterali
 <p>It becomes apparent with the partial tournament example here that, when the number of criteria is not constrained, we may model this way compatible pairwise outranking situations independently one of the other.</p>
 </section>
 <section id="partial-tournaments-may-be-strict-outranking-digraphs">
-<h4><a class="toc-backref" href="#id155" role="doc-backlink"><span class="section-number">3.3.6.2. </span>Partial tournaments may be strict outranking digraphs</a><a class="headerlink" href="#partial-tournaments-may-be-strict-outranking-digraphs" title="Link to this heading"></a></h4>
+<h4><a class="toc-backref" href="#id156" role="doc-backlink"><span class="section-number">3.3.6.2. </span>Partial tournaments may be strict outranking digraphs</a><a class="headerlink" href="#partial-tournaments-may-be-strict-outranking-digraphs" title="Link to this heading"></a></h4>
 <p>In the <a class="reference internal" href="techDoc.html#module-randomDigraphs" title="randomDigraphs"><code class="xref py py-mod docutils literal notranslate"><span class="pre">randomDigraphs</span></code></a> module we provide the <a class="reference internal" href="techDoc.html#randomDigraphs.RandomPartialTournament" title="randomDigraphs.RandomPartialTournament"><code class="xref py py-class docutils literal notranslate"><span class="pre">RandomPartialTournament</span></code></a> class for providing such partial tournament instances.</p>
 <div class="literal-block-wrapper docutils container" id="partialtournament">
 <div class="code-block-caption"><span class="caption-number">Listing 3.52 </span><span class="caption-text">A partial tournament of order 5</span><a class="headerlink" href="#partialtournament" title="Link to this code"></a></div>
@@ -4297,7 +4304,7 @@ best covered terminal kernel</span><a class="headerlink" href="#orientedlaterali
 <p>To all partial tournament we may this way associate a multicriteria performance tableau, making it hence the instance of a potential bipolar-valued strict outranking digraph. Yet, we have not taken care of reproducing the precise characteristic valuation of a given partial tournament. Is it as well possible to always associate a valid performance tableau which produces a strict outranking digraph with exactly the given characteristic valuation?</p>
 </section>
 <section id="recognizing-bipolar-outranking-valuations">
-<h4><a class="toc-backref" href="#id156" role="doc-backlink"><span class="section-number">3.3.6.3. </span>Recognizing bipolar outranking valuations</a><a class="headerlink" href="#recognizing-bipolar-outranking-valuations" title="Link to this heading"></a></h4>
+<h4><a class="toc-backref" href="#id157" role="doc-backlink"><span class="section-number">3.3.6.3. </span>Recognizing bipolar outranking valuations</a><a class="headerlink" href="#recognizing-bipolar-outranking-valuations" title="Link to this heading"></a></h4>
 <p>From the fact that the epistemic support of a strict outranking –’<em>better evaluated as</em>’– situation is a potential sub-part only of the epistemic support of the corresponding outranking –’<em>at least as well evaluated as</em>’– situation, it follows that for all irreflexive pairs (<em>x</em>, <em>y</em>), <img class="math" src="_images/math/2357805e76e455196818cef0351727bf2476380c.png" alt="r(x \succsim y)\, \geqslant\, r(x \succnsim y)"/>, which induces by the coduality principle the following necessary condition on the valuation of a potential outranking digraph:</p>
 <blockquote>
 <div><div class="math" id="equation-charodg1">
@@ -4412,7 +4419,7 @@ best covered terminal kernel</span><a class="headerlink" href="#orientedlaterali
 <p>A similar Monte Carlo simulation with randomly bipolar-valued digraphs of order 5 shows that an average proportion of only 0.12% of random instances verify Condition <a class="reference internal" href="#equation-strictodg">(3.5)</a>. With randomly bipolar-valued digraphs of order 6, this proportion drops to 0.006%. Condition <a class="reference internal" href="#equation-strictodg">(3.5)</a> is hence again a very specific characteristic of bipolar strict outranking valuations.</p>
 </section>
 <section id="on-generating-random-outranking-valuations">
-<h4><a class="toc-backref" href="#id157" role="doc-backlink"><span class="section-number">3.3.6.4. </span>On generating random outranking valuations</a><a class="headerlink" href="#on-generating-random-outranking-valuations" title="Link to this heading"></a></h4>
+<h4><a class="toc-backref" href="#id158" role="doc-backlink"><span class="section-number">3.3.6.4. </span>On generating random outranking valuations</a><a class="headerlink" href="#on-generating-random-outranking-valuations" title="Link to this heading"></a></h4>
 <p>The <a class="reference internal" href="techDoc.html#randomDigraphs.RandomOutrankingValuationDigraph" title="randomDigraphs.RandomOutrankingValuationDigraph"><code class="xref py py-class docutils literal notranslate"><span class="pre">RandomOutrankingValuationDigraph</span></code></a> class from the <a class="reference internal" href="techDoc.html#module-randomDigraphs" title="randomDigraphs"><code class="xref py py-mod docutils literal notranslate"><span class="pre">randomDigraphs</span></code></a> module provides a generator for random outranking valuation digraphs.</p>
 <div class="literal-block-wrapper docutils container" id="generateoutrankingvaluation">
 <div class="code-block-caption"><span class="caption-number">Listing 3.55 </span><span class="caption-text">Generating random outranking valuations</span><a class="headerlink" href="#generateoutrankingvaluation" title="Link to this code"></a></div>
@@ -4450,13 +4457,13 @@ best covered terminal kernel</span><a class="headerlink" href="#orientedlaterali
 <span id="outranking-consensus-tutorial-label"></span><h3><a class="toc-backref" href="#id137" role="doc-backlink"><span class="section-number">3.3.7. </span>Consensus quality of the bipolar-valued outranking relation</a><a class="headerlink" href="#consensus-quality-of-the-bipolar-valued-outranking-relation" title="Link to this heading"></a></h3>
 <nav class="contents local" id="id68">
 <ul class="simple">
-<li><p><a class="reference internal" href="#circular-performance-tableaux" id="id158">Circular performance tableaux</a></p></li>
-<li><p><a class="reference internal" href="#a-difficult-decision-problem" id="id159">A difficult decision problem</a></p></li>
-<li><p><a class="reference internal" href="#the-central-condorcet-point-of-view" id="id160">The central CONDORCET point of view</a></p></li>
+<li><p><a class="reference internal" href="#circular-performance-tableaux" id="id159">Circular performance tableaux</a></p></li>
+<li><p><a class="reference internal" href="#a-difficult-decision-problem" id="id160">A difficult decision problem</a></p></li>
+<li><p><a class="reference internal" href="#the-central-condorcet-point-of-view" id="id161">The central CONDORCET point of view</a></p></li>
 </ul>
 </nav>
 <section id="circular-performance-tableaux">
-<h4><a class="toc-backref" href="#id158" role="doc-backlink"><span class="section-number">3.3.7.1. </span>Circular performance tableaux</a><a class="headerlink" href="#circular-performance-tableaux" title="Link to this heading"></a></h4>
+<h4><a class="toc-backref" href="#id159" role="doc-backlink"><span class="section-number">3.3.7.1. </span>Circular performance tableaux</a><a class="headerlink" href="#circular-performance-tableaux" title="Link to this heading"></a></h4>
 <p>In order to study the actual consensus quality of a bipolar-valued outranking relation, let us consider a small didactic performance tableau consisting of five decision actions evaluated with respect to five performance criteria of equal significance. On each one of the criteria, we swap first and last ranked evaluations in a circular way (see Lines 8-12 below).</p>
 <div class="literal-block-wrapper docutils container" id="circularperftab">
 <div class="code-block-caption"><span class="caption-number">Listing 3.56 </span><span class="caption-text">Circular performance tableau</span><a class="headerlink" href="#circularperftab" title="Link to this code"></a></div>
@@ -4521,7 +4528,7 @@ best covered terminal kernel</span><a class="headerlink" href="#orientedlaterali
 </div>
 </section>
 <section id="a-difficult-decision-problem">
-<h4><a class="toc-backref" href="#id159" role="doc-backlink"><span class="section-number">3.3.7.2. </span>A difficult decision problem</a><a class="headerlink" href="#a-difficult-decision-problem" title="Link to this heading"></a></h4>
+<h4><a class="toc-backref" href="#id160" role="doc-backlink"><span class="section-number">3.3.7.2. </span>A difficult decision problem</a><a class="headerlink" href="#a-difficult-decision-problem" title="Link to this heading"></a></h4>
 <p>Due to the regular tournament structure, the <em>Copeland</em> scores are the same for each one of the decision alternatives and we end up with a ranking in alphabetic order.</p>
 <div class="highlight-pycon notranslate"><div class="highlight"><pre><span></span><span class="linenos"> 1</span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">linearOrders</span> <span class="kn">import</span> <span class="n">CopelandRanking</span>
 <span class="linenos"> 2</span><span class="gp">&gt;&gt;&gt; </span><span class="n">cop</span> <span class="o">=</span> <span class="n">CopelandRanking</span><span class="p">(</span><span class="n">bodg</span><span class="p">,</span><span class="n">Comments</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
@@ -4585,7 +4592,7 @@ best covered terminal kernel</span><a class="headerlink" href="#orientedlaterali
 <p>The pairwise outranking relation shown in <a class="hxr-hoverxref hxr-tooltip reference internal" href="#rel-circular-5-pt"><span class="std std-numref">Fig. 3.40</span></a> does hence represent a <em>faithful consensus</em> of the preference modelled by each one of the five performance criteria. We can inspect the actual quality of this consensus with the help of the bipolar-valued equivalence index (see the <a class="reference internal" href="#ordinalcorrelation-tutorial-label"><span class="std std-ref">advanced topic on the ordinal correlation between bipolar-valued digraphs</span></a>).</p>
 </section>
 <section id="the-central-condorcet-point-of-view">
-<h4><a class="toc-backref" href="#id160" role="doc-backlink"><span class="section-number">3.3.7.3. </span>The central CONDORCET point of view</a><a class="headerlink" href="#the-central-condorcet-point-of-view" title="Link to this heading"></a></h4>
+<h4><a class="toc-backref" href="#id161" role="doc-backlink"><span class="section-number">3.3.7.3. </span>The central CONDORCET point of view</a><a class="headerlink" href="#the-central-condorcet-point-of-view" title="Link to this heading"></a></h4>
 <p>The bipolar-valued outranking relation corresponds in fact to the median of the multicriteria points of view, at minimal KENDALL’s ordinal correlation distance from all marginal criteria points of view <a class="reference internal" href="#bar-1980p" id="id69"><span>[BAR-1980p]</span></a>.</p>
 <div class="literal-block-wrapper docutils container" id="outrankingconsensus">
 <div class="code-block-caption"><span class="caption-number">Listing 3.57 </span><span class="caption-text">Outranking Consensus quality</span><a class="headerlink" href="#outrankingconsensus" title="Link to this code"></a></div>
@@ -4960,7 +4967,7 @@ Technologies</em>, Aachen, September 8-11, 1997}, pp 97–103.</p>
 
   <div role="contentinfo">
     <p>&#169; Copyright 2012-2025, Raymond Bisdorff.
-      <span class="lastupdated">Last updated on Feb 19, 2025.
+      <span class="lastupdated">Last updated on Feb 21, 2025.
       </span></p>
   </div>
 
