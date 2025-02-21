@@ -1,39 +1,39 @@
+
+
 <!DOCTYPE html>
-<html class="writer-html5" lang="en" >
+<html class="writer-html5" lang="en" data-content_root="./">
 <head>
-  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 <meta content="Documentation of the Digraph3 collection of python3 modules for algorithmic decision theory" name="description" />
 <meta content="Algorithmic Decision Theory, Outranking Digraphs, MIS and kernels, Multiple Criteria Decision Aid, Bipolar-valued Epistemic Logic" name="keywords" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>1. Digraph3 Tutorials &mdash; Digraph3 3.13.2 documentation</title>
-      <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
-      <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
-      <link rel="stylesheet" href="_static/graphviz.css" type="text/css" />
-      <link rel="stylesheet" href="_static/copybutton.css" type="text/css" />
-      <link rel="stylesheet" href="_static/css/tooltipster.custom.css" type="text/css" />
-      <link rel="stylesheet" href="_static/css/tooltipster.bundle.min.css" type="text/css" />
-      <link rel="stylesheet" href="_static/css/tooltipster-sideTip-shadow.min.css" type="text/css" />
-      <link rel="stylesheet" href="_static/css/tooltipster-sideTip-punk.min.css" type="text/css" />
-      <link rel="stylesheet" href="_static/css/tooltipster-sideTip-noir.min.css" type="text/css" />
-      <link rel="stylesheet" href="_static/css/tooltipster-sideTip-light.min.css" type="text/css" />
-      <link rel="stylesheet" href="_static/css/tooltipster-sideTip-borderless.min.css" type="text/css" />
-      <link rel="stylesheet" href="_static/css/micromodal.css" type="text/css" />
-      <link rel="stylesheet" href="_static/css/sphinx_rtd_theme.css" type="text/css" />
-  <!--[if lt IE 9]>
-    <script src="_static/js/html5shiv.min.js"></script>
-  <![endif]-->
+      <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=fa44fd50" />
+      <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="_static/graphviz.css?v=4ae1632d" />
+      <link rel="stylesheet" type="text/css" href="_static/copybutton.css?v=76b2166b" />
+      <link rel="stylesheet" type="text/css" href="_static/css/tooltipster.custom.css?v=7bc2f056" />
+      <link rel="stylesheet" type="text/css" href="_static/css/tooltipster.bundle.min.css?v=37217874" />
+      <link rel="stylesheet" type="text/css" href="_static/css/tooltipster-sideTip-shadow.min.css?v=6227e517" />
+      <link rel="stylesheet" type="text/css" href="_static/css/tooltipster-sideTip-punk.min.css?v=94669e23" />
+      <link rel="stylesheet" type="text/css" href="_static/css/tooltipster-sideTip-noir.min.css?v=21a39f42" />
+      <link rel="stylesheet" type="text/css" href="_static/css/tooltipster-sideTip-light.min.css?v=a18b2449" />
+      <link rel="stylesheet" type="text/css" href="_static/css/tooltipster-sideTip-borderless.min.css?v=dbff53e4" />
+      <link rel="stylesheet" type="text/css" href="_static/css/micromodal.css?v=d7bf34ee" />
+      <link rel="stylesheet" type="text/css" href="_static/css/sphinx_rtd_theme.css?v=3234e928" />
+
   
-        <script src="_static/jquery.js?v=5d32c60e"></script>
-        <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-        <script src="_static/documentation_options.js?v=f92f4e34"></script>
-        <script src="_static/doctools.js?v=888ff710"></script>
-        <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
-        <script src="_static/clipboard.min.js?v=a7894cd8"></script>
-        <script src="_static/copybutton.js?v=15d7cbb8"></script>
-        <script src="_static/js/hoverxref.js?v=4352a7d3"></script>
-        <script src="_static/js/tooltipster.bundle.min.js?v=18bf091b"></script>
-        <script src="_static/js/micromodal.min.js?v=04d6302d"></script>
+      <script src="_static/jquery.js?v=5d32c60e"></script>
+      <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="_static/documentation_options.js?v=f92f4e34"></script>
+      <script src="_static/doctools.js?v=9bcbadda"></script>
+      <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script src="_static/clipboard.min.js?v=a7894cd8"></script>
+      <script src="_static/copybutton.js?v=15d7cbb8"></script>
+      <script src="_static/js/hoverxref.js?v=4352a7d3"></script>
+      <script src="_static/js/tooltipster.bundle.min.js?v=18bf091b"></script>
+      <script src="_static/js/micromodal.min.js?v=04d6302d"></script>
     <script src="_static/js/theme.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
@@ -53,9 +53,6 @@
             Digraph3
               <img src="_static/htmlLogo.png" class="logo" alt="Logo"/>
           </a>
-              <div class="version">
-                Python 3.13
-              </div>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
     <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
@@ -628,7 +625,8 @@ the current working directory a ‘tutorialDigraph.dot’ file and a
 </pre></div>
 </div>
 <figure class="align-center" id="tutorialdigraphfig">
-<a class="reference internal image-reference" href="_images/tutorialDigraph.png"><img alt="_images/tutorialDigraph.png" src="_images/tutorialDigraph.png" style="width: 300px;" /></a>
+<a class="reference internal image-reference" href="_images/tutorialDigraph.png"><img alt="_images/tutorialDigraph.png" src="_images/tutorialDigraph.png" style="width: 300px;" />
+</a>
 <figcaption>
 <p><span class="caption-number">Fig. 1.1 </span><span class="caption-text">The tutorial crisp digraph</span><a class="headerlink" href="#tutorialdigraphfig" title="Link to this image"></a></p>
 </figcaption>
@@ -691,7 +689,8 @@ the current working directory a ‘tutorialDigraph.dot’ file and a
 </pre></div>
 </div>
 <figure class="align-center" id="relationmap1">
-<a class="reference internal image-reference" href="_images/relationMap1.png"><img alt="_images/relationMap1.png" src="_images/relationMap1.png" style="width: 350px;" /></a>
+<a class="reference internal image-reference" href="_images/relationMap1.png"><img alt="_images/relationMap1.png" src="_images/relationMap1.png" style="width: 350px;" />
+</a>
 <figcaption>
 <p><span class="caption-number">Fig. 1.2 </span><span class="caption-text">Browsing the relation map of the tutorial digraph</span><a class="headerlink" href="#relationmap1" title="Link to this image"></a></p>
 </figcaption>
@@ -710,7 +709,8 @@ the current working directory a ‘tutorialDigraph.dot’ file and a
 </pre></div>
 </div>
 <figure class="align-center" id="tutorialgrid">
-<a class="reference internal image-reference" href="_images/tutorialGrid.png"><img alt="_images/tutorialGrid.png" src="_images/tutorialGrid.png" style="width: 200px;" /></a>
+<a class="reference internal image-reference" href="_images/tutorialGrid.png"><img alt="_images/tutorialGrid.png" src="_images/tutorialGrid.png" style="width: 200px;" />
+</a>
 <figcaption>
 <p><span class="caption-number">Fig. 1.3 </span><span class="caption-text">The 5x5 grid graph median split oriented</span><a class="headerlink" href="#tutorialgrid" title="Link to this image"></a></p>
 </figcaption>
@@ -822,7 +822,8 @@ the current working directory a ‘tutorialDigraph.dot’ file and a
 </pre></div>
 </div>
 <figure class="align-center" id="tutorialvaldigraph">
-<a class="reference internal image-reference" href="_images/tutRandValDigraph.png"><img alt="_images/tutRandValDigraph.png" src="_images/tutRandValDigraph.png" style="width: 300px;" /></a>
+<a class="reference internal image-reference" href="_images/tutRandValDigraph.png"><img alt="_images/tutRandValDigraph.png" src="_images/tutRandValDigraph.png" style="width: 300px;" />
+</a>
 <figcaption>
 <p><span class="caption-number">Fig. 1.4 </span><span class="caption-text">The tutorial random valuation digraph</span><a class="headerlink" href="#tutorialvaldigraph" title="Link to this image"></a></p>
 </figcaption>
@@ -842,7 +843,8 @@ the current working directory a ‘tutorialDigraph.dot’ file and a
 </pre></div>
 </div>
 <figure class="align-center" id="asymsymparts">
-<a class="reference internal image-reference" href="_images/asymSymParts.png"><img alt="_images/asymSymParts.png" src="_images/asymSymParts.png" style="width: 600px;" /></a>
+<a class="reference internal image-reference" href="_images/asymSymParts.png"><img alt="_images/asymSymParts.png" src="_images/asymSymParts.png" style="width: 600px;" />
+</a>
 <figcaption>
 <p><span class="caption-number">Fig. 1.5 </span><span class="caption-text">Asymmetric and symmetric part of the tutorial random valuation digraph</span><a class="headerlink" href="#asymsymparts" title="Link to this image"></a></p>
 </figcaption>
@@ -894,7 +896,8 @@ the current working directory a ‘tutorialDigraph.dot’ file and a
 </div>
 </div>
 <figure class="align-center" id="graphborderandinner1">
-<a class="reference internal image-reference" href="_images/graphBorderAndInner1.png"><img alt="_images/graphBorderAndInner1.png" src="_images/graphBorderAndInner1.png" style="width: 600px;" /></a>
+<a class="reference internal image-reference" href="_images/graphBorderAndInner1.png"><img alt="_images/graphBorderAndInner1.png" src="_images/graphBorderAndInner1.png" style="width: 600px;" />
+</a>
 <figcaption>
 <p><span class="caption-number">Fig. 1.6 </span><span class="caption-text"><em>Border</em> and <em>inner</em> part of a linear order oriented by <em>terminal</em> and <em>initial</em> kernels</span><a class="headerlink" href="#graphborderandinner1" title="Link to this image"></a></p>
 </figcaption>
@@ -906,7 +909,8 @@ the current working directory a ‘tutorialDigraph.dot’ file and a
 </div>
 <p>Being much <em>denser</em> than a linear order, the actual inner part of our tutorial random valuation digraph <em>dg</em> is reduced to a single arc between nodes 3 and 4 (see <a class="hxr-hoverxref hxr-tooltip reference internal" href="#graphborderandinner"><span class="std std-numref">Fig. 1.7</span></a>).</p>
 <figure class="align-center" id="graphborderandinner">
-<a class="reference internal image-reference" href="_images/graphBorderAndInner.png"><img alt="_images/graphBorderAndInner.png" src="_images/graphBorderAndInner.png" style="width: 600px;" /></a>
+<a class="reference internal image-reference" href="_images/graphBorderAndInner.png"><img alt="_images/graphBorderAndInner.png" src="_images/graphBorderAndInner.png" style="width: 600px;" />
+</a>
 <figcaption>
 <p><span class="caption-number">Fig. 1.7 </span><span class="caption-text">Border and inner part of the tutorial random valuation digraph <em>rdg</em></span><a class="headerlink" href="#graphborderandinner" title="Link to this image"></a></p>
 </figcaption>
@@ -1020,7 +1024,8 @@ the current working directory a ‘tutorialDigraph.dot’ file and a
 </div>
 </div>
 <figure class="align-center" id="strongcomponents">
-<a class="reference internal image-reference" href="_images/strongComponents.png"><img alt="_images/strongComponents.png" src="_images/strongComponents.png" style="width: 300px;" /></a>
+<a class="reference internal image-reference" href="_images/strongComponents.png"><img alt="_images/strongComponents.png" src="_images/strongComponents.png" style="width: 300px;" />
+</a>
 <figcaption>
 <p><span class="caption-number">Fig. 1.8 </span><span class="caption-text">Symmetric and transitive in-site closures</span><a class="headerlink" href="#strongcomponents" title="Link to this image"></a></p>
 </figcaption>
@@ -1092,7 +1097,8 @@ the current working directory a ‘tutorialDigraph.dot’ file and a
 </pre></div>
 </div>
 <figure class="align-center" id="htmltutorialdigraph">
-<a class="reference internal image-reference" href="_images/htmlTutorialDigraph.png"><img alt="_images/htmlTutorialDigraph.png" src="_images/htmlTutorialDigraph.png" style="width: 400px;" /></a>
+<a class="reference internal image-reference" href="_images/htmlTutorialDigraph.png"><img alt="_images/htmlTutorialDigraph.png" src="_images/htmlTutorialDigraph.png" style="width: 400px;" />
+</a>
 <figcaption>
 <p><span class="caption-number">Fig. 1.9 </span><span class="caption-text">The valued relation table shown in a browser window</span><a class="headerlink" href="#htmltutorialdigraph" title="Link to this image"></a></p>
 </figcaption>
@@ -1394,7 +1400,8 @@ the current working directory a ‘tutorialDigraph.dot’ file and a
 </pre></div>
 </div>
 <figure class="align-center" id="id239">
-<a class="reference internal image-reference" href="_images/codualOdg.png"><img alt="_images/codualOdg.png" src="_images/codualOdg.png" style="width: 300px;" /></a>
+<a class="reference internal image-reference" href="_images/codualOdg.png"><img alt="_images/codualOdg.png" src="_images/codualOdg.png" style="width: 300px;" />
+</a>
 <figcaption>
 <p><span class="caption-number">Fig. 1.10 </span><span class="caption-text">Codual digraph</span><a class="headerlink" href="#id239" title="Link to this image"></a></p>
 </figcaption>
@@ -1736,7 +1743,8 @@ the current working directory a ‘tutorialDigraph.dot’ file and a
 </pre></div>
 </div>
 <figure class="align-center" id="officechoiceheatmap">
-<a class="reference internal image-reference" href="_images/officeChoiceHeatmap.png"><img alt="_images/officeChoiceHeatmap.png" src="_images/officeChoiceHeatmap.png" style="width: 500px;" /></a>
+<a class="reference internal image-reference" href="_images/officeChoiceHeatmap.png"><img alt="_images/officeChoiceHeatmap.png" src="_images/officeChoiceHeatmap.png" style="width: 500px;" />
+</a>
 <figcaption>
 <p><span class="caption-number">Fig. 1.11 </span><span class="caption-text">Unranked heatmap of the location choice performance tableau</span><a class="headerlink" href="#officechoiceheatmap" title="Link to this image"></a></p>
 </figcaption>
@@ -1761,7 +1769,8 @@ the current working directory a ‘tutorialDigraph.dot’ file and a
 </pre></div>
 </div>
 <figure class="align-center" id="officechoiceoutranking">
-<a class="reference internal image-reference" href="_images/officeChoiceOutranking.png"><img alt="_images/officeChoiceOutranking.png" src="_images/officeChoiceOutranking.png" style="width: 400px;" /></a>
+<a class="reference internal image-reference" href="_images/officeChoiceOutranking.png"><img alt="_images/officeChoiceOutranking.png" src="_images/officeChoiceOutranking.png" style="width: 400px;" />
+</a>
 <figcaption>
 <p><span class="caption-number">Fig. 1.12 </span><span class="caption-text">The office choice outranking digraph</span><a class="headerlink" href="#officechoiceoutranking" title="Link to this image"></a></p>
 </figcaption>
@@ -1866,7 +1875,8 @@ the current working directory a ‘tutorialDigraph.dot’ file and a
 </pre></div>
 </div>
 <figure class="align-center" id="bestofficechoice">
-<a class="reference internal image-reference" href="_images/bestOfficeChoice.png"><img alt="_images/bestOfficeChoice.png" src="_images/bestOfficeChoice.png" style="width: 250px;" /></a>
+<a class="reference internal image-reference" href="_images/bestOfficeChoice.png"><img alt="_images/bestOfficeChoice.png" src="_images/bestOfficeChoice.png" style="width: 250px;" />
+</a>
 <figcaption>
 <p><span class="caption-number">Fig. 1.13 </span><span class="caption-text">Best office choice recommendation from strict outranking digraph</span><a class="headerlink" href="#bestofficechoice" title="Link to this image"></a></p>
 </figcaption>
@@ -1927,7 +1937,8 @@ pairwise perspective (see below). With the given preference discrimination thres
 </pre></div>
 </div>
 <figure class="align-center" id="officechoiceranking">
-<a class="reference internal image-reference" href="_images/officeChoiceRanking.png"><img alt="_images/officeChoiceRanking.png" src="_images/officeChoiceRanking.png" style="width: 200px;" /></a>
+<a class="reference internal image-reference" href="_images/officeChoiceRanking.png"><img alt="_images/officeChoiceRanking.png" src="_images/officeChoiceRanking.png" style="width: 200px;" />
+</a>
 <figcaption>
 <p><span class="caption-number">Fig. 1.14 </span><span class="caption-text">Ranking-by-choosing from the office choice outranking digraph</span><a class="headerlink" href="#officechoiceranking" title="Link to this image"></a></p>
 </figcaption>
@@ -2320,7 +2331,8 @@ pairwise perspective (see below). With the given preference discrimination thres
 </pre></div>
 </div>
 <figure class="align-center" id="templatedrawing">
-<a class="reference internal image-reference" href="_images/template.png"><img alt="_images/template.png" src="_images/template.png" style="width: 200px;" /></a>
+<a class="reference internal image-reference" href="_images/template.png"><img alt="_images/template.png" src="_images/template.png" style="width: 200px;" />
+</a>
 <figcaption>
 <p><span class="caption-number">Fig. 1.15 </span><span class="caption-text">The template outranking digraph</span><a class="headerlink" href="#templatedrawing" title="Link to this image"></a></p>
 </figcaption>
@@ -2351,14 +2363,16 @@ pairwise perspective (see below). With the given preference discrimination thres
 <span class="gp">... </span>   <span class="n">pageTitle</span><span class="o">=</span><span class="s1">&#39;Heatmap of the template performance tableau&#39;</span><span class="p">)</span>
 </pre></div>
 </div>
-<a class="reference internal image-reference" href="_images/templateHeatmapCop.png"><img alt="_images/templateHeatmapCop.png" class="align-center" src="_images/templateHeatmapCop.png" style="width: 600px;" /></a>
+<a class="reference internal image-reference" href="_images/templateHeatmapCop.png"><img alt="_images/templateHeatmapCop.png" class="align-center" src="_images/templateHeatmapCop.png" style="width: 600px;" />
+</a>
 <p>Due to a 11 against 7 <strong>plurality tyranny</strong> effect, the <em>Copeland</em> ranking rule, essentially based on crisp majority outranking counts, puts here alternative <em>action5</em> (<em>a5</em>) last, despite its excellent grades observed on criteria <em>g2</em>, <em>g5</em> and <em>g6</em>. A slightly <strong>fairer</strong> ranking result may be obtained with the <em>NetFlows</em> ranking rule.</p>
 <div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="n">g</span><span class="o">.</span><span class="n">showHTMLPerformanceHeatmap</span><span class="p">(</span><span class="n">ndigits</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span><span class="n">colorLevels</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span>
 <span class="gp">... </span>   <span class="n">Correlations</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span><span class="n">rankingRule</span><span class="o">=</span><span class="s1">&#39;NetFlows&#39;</span><span class="p">,</span>
 <span class="gp">... </span>   <span class="n">pageTitle</span><span class="o">=</span><span class="s1">&#39;Heatmap of the template performance tableau&#39;</span><span class="p">)</span>
 </pre></div>
 </div>
-<a class="reference internal image-reference" href="_images/templateHeatmapNF.png"><img alt="_images/templateHeatmapNF.png" class="align-center" src="_images/templateHeatmapNF.png" style="width: 600px;" /></a>
+<a class="reference internal image-reference" href="_images/templateHeatmapNF.png"><img alt="_images/templateHeatmapNF.png" class="align-center" src="_images/templateHeatmapNF.png" style="width: 600px;" />
+</a>
 <p>It might be opportun to furthermore study the robustness of the apparent outranking situations when assuming only <em>ordinal</em> or <em>uncertain</em> criteria significance weights. If interested in mainly objectively <em>unopposed</em> (multipartisan) outranking situations, one might also try the <code class="xref py py-class docutils literal notranslate"><span class="pre">UnOpposedOutrankingDigraph</span></code> constructor. (see the <a class="reference internal" href="pearls.html#advanced-topics-label"><span class="std std-ref">advanced topics of the Digraph3 documentation</span></a>).</p>
 <p>Back to <a class="reference internal" href="#tutorial-label"><span class="std std-ref">Content Table</span></a></p>
 <hr class="docutils" />
@@ -2486,7 +2500,8 @@ which provides ranks (linearly ordered performances without ties) of a given num
 </div>
 </div>
 <figure class="align-center" id="id240">
-<a class="reference internal image-reference" href="_images/randomPerfTab1.png"><img alt="_images/randomPerfTab1.png" src="_images/randomPerfTab1.png" style="width: 500px;" /></a>
+<a class="reference internal image-reference" href="_images/randomPerfTab1.png"><img alt="_images/randomPerfTab1.png" src="_images/randomPerfTab1.png" style="width: 500px;" />
+</a>
 <figcaption>
 <p><span class="caption-number">Fig. 1.16 </span><span class="caption-text">Browser view on random performance tableau instance</span><a class="headerlink" href="#id240" title="Link to this image"></a></p>
 </figcaption>
@@ -2603,7 +2618,8 @@ which provides ranks (linearly ordered performances without ties) of a given num
 </pre></div>
 </div>
 <figure class="align-center" id="id241">
-<a class="reference internal image-reference" href="_images/randomCBHeatmap.png"><img alt="_images/randomCBHeatmap.png" src="_images/randomCBHeatmap.png" style="width: 400px;" /></a>
+<a class="reference internal image-reference" href="_images/randomCBHeatmap.png"><img alt="_images/randomCBHeatmap.png" src="_images/randomCBHeatmap.png" style="width: 400px;" />
+</a>
 <figcaption>
 <p><span class="caption-number">Fig. 1.17 </span><span class="caption-text">Unranked heatmap of a random Cost-Benefit performance tableau</span><a class="headerlink" href="#id241" title="Link to this image"></a></p>
 </figcaption>
@@ -2774,7 +2790,8 @@ three modes at 0.3 (-), 0.5 (~), respectively 0.7 (+) of the common scale span a
 </pre></div>
 </div>
 <figure class="align-center" id="id242">
-<a class="reference internal image-reference" href="_images/sccFusionObjectives.png"><img alt="_images/sccFusionObjectives.png" src="_images/sccFusionObjectives.png" style="width: 300px;" /></a>
+<a class="reference internal image-reference" href="_images/sccFusionObjectives.png"><img alt="_images/sccFusionObjectives.png" src="_images/sccFusionObjectives.png" style="width: 300px;" />
+</a>
 <figcaption>
 <p><span class="caption-number">Fig. 1.18 </span><span class="caption-text">Strong components digraph</span><a class="headerlink" href="#id242" title="Link to this image"></a></p>
 </figcaption>
@@ -2866,7 +2883,8 @@ three modes at 0.3 (-), 0.5 (~), respectively 0.7 (+) of the common scale span a
 </div>
 </div>
 <figure class="align-center" id="rankingstudents">
-<a class="reference internal image-reference" href="_images/rankingStudents.png"><img alt="_images/rankingStudents.png" src="_images/rankingStudents.png" style="width: 400px;" /></a>
+<a class="reference internal image-reference" href="_images/rankingStudents.png"><img alt="_images/rankingStudents.png" src="_images/rankingStudents.png" style="width: 400px;" />
+</a>
 <figcaption>
 <p><span class="caption-number">Fig. 1.19 </span><span class="caption-text">Ranking the students with a performance heatmap view</span><a class="headerlink" href="#rankingstudents" title="Link to this image"></a></p>
 </figcaption>
@@ -3002,7 +3020,8 @@ three modes at 0.3 (-), 0.5 (~), respectively 0.7 (+) of the common scale span a
 </pre></div>
 </div>
 <figure class="align-center" id="rankingtutorial">
-<a class="reference internal image-reference" href="_images/rankingTutorial.png"><img alt="_images/rankingTutorial.png" src="_images/rankingTutorial.png" style="width: 300px;" /></a>
+<a class="reference internal image-reference" href="_images/rankingTutorial.png"><img alt="_images/rankingTutorial.png" src="_images/rankingTutorial.png" style="width: 300px;" />
+</a>
 <figcaption>
 <p><span class="caption-number">Fig. 1.20 </span><span class="caption-text">The <em>strict outranking</em> digraph</span><a class="headerlink" href="#rankingtutorial" title="Link to this image"></a></p>
 </figcaption>
@@ -3096,7 +3115,8 @@ three modes at 0.3 (-), 0.5 (~), respectively 0.7 (+) of the common scale span a
 </div>
 </div>
 <figure class="align-center" id="weakrankingdrawing">
-<a class="reference internal image-reference" href="_images/weakCopelandRanking.png"><img alt="_images/weakCopelandRanking.png" src="_images/weakCopelandRanking.png" style="width: 200px;" /></a>
+<a class="reference internal image-reference" href="_images/weakCopelandRanking.png"><img alt="_images/weakCopelandRanking.png" src="_images/weakCopelandRanking.png" style="width: 200px;" />
+</a>
 <figcaption>
 <p><span class="caption-number">Fig. 1.21 </span><span class="caption-text">A weak Copeland ranking</span><a class="headerlink" href="#weakrankingdrawing" title="Link to this image"></a></p>
 </figcaption>
@@ -3197,7 +3217,8 @@ three modes at 0.3 (-), 0.5 (~), respectively 0.7 (+) of the common scale span a
 </div>
 </div>
 <figure class="align-center" id="tutorialkemeny">
-<a class="reference internal image-reference" href="_images/tutorialKemeny.png"><img alt="_images/tutorialKemeny.png" src="_images/tutorialKemeny.png" style="width: 175pt;" /></a>
+<a class="reference internal image-reference" href="_images/tutorialKemeny.png"><img alt="_images/tutorialKemeny.png" src="_images/tutorialKemeny.png" style="width: 175pt;" />
+</a>
 <figcaption>
 <p><span class="caption-number">Fig. 1.22 </span><span class="caption-text">Epistemic disjunction of optimal <em>Kemeny</em> rankings</span><a class="headerlink" href="#tutorialkemeny" title="Link to this image"></a></p>
 </figcaption>
@@ -3295,7 +3316,8 @@ three modes at 0.3 (-), 0.5 (~), respectively 0.7 (+) of the common scale span a
 </div>
 </div>
 <figure class="align-center" id="tutorialslater">
-<a class="reference internal image-reference" href="_images/tutorialSlater.png"><img alt="_images/tutorialSlater.png" src="_images/tutorialSlater.png" style="width: 175pt;" /></a>
+<a class="reference internal image-reference" href="_images/tutorialSlater.png"><img alt="_images/tutorialSlater.png" src="_images/tutorialSlater.png" style="width: 175pt;" />
+</a>
 <figcaption>
 <p><span class="caption-number">Fig. 1.23 </span><span class="caption-text">Epistemic disjunction of optimal <em>Slater</em> rankings</span><a class="headerlink" href="#tutorialslater" title="Link to this image"></a></p>
 </figcaption>
@@ -3792,7 +3814,8 @@ three modes at 0.3 (-), 0.5 (~), respectively 0.7 (+) of the common scale span a
 </pre></div>
 </div>
 <figure class="align-center" id="exampleperfquantiles">
-<a class="reference internal image-reference" href="_images/examplePerfQuantiles.png"><img alt="Example limiting quantiles html show method" src="_images/examplePerfQuantiles.png" style="width: 400px;" /></a>
+<a class="reference internal image-reference" href="_images/examplePerfQuantiles.png"><img alt="Example limiting quantiles html show method" src="_images/examplePerfQuantiles.png" style="width: 400px;" />
+</a>
 <figcaption>
 <p><span class="caption-number">Fig. 1.24 </span><span class="caption-text">Showing the updated quartiles limits</span><a class="headerlink" href="#exampleperfquantiles" title="Link to this image"></a></p>
 </figcaption>
@@ -3926,7 +3949,8 @@ three modes at 0.3 (-), 0.5 (~), respectively 0.7 (+) of the common scale span a
 </pre></div>
 </div>
 <figure class="align-center" id="heatmap1">
-<a class="reference internal image-reference" href="_images/heatMap1.png"><img alt="heatmap of Absolute Quartiles Rating" src="_images/heatMap1.png" style="width: 400px;" /></a>
+<a class="reference internal image-reference" href="_images/heatMap1.png"><img alt="heatmap of Absolute Quartiles Rating" src="_images/heatMap1.png" style="width: 400px;" />
+</a>
 <figcaption>
 <p><span class="caption-number">Fig. 1.25 </span><span class="caption-text">Heatmap of absolute quartiles ranking</span><a class="headerlink" href="#heatmap1" title="Link to this image"></a></p>
 </figcaption>
@@ -3939,7 +3963,8 @@ three modes at 0.3 (-), 0.5 (~), respectively 0.7 (+) of the common scale span a
 </pre></div>
 </div>
 <figure class="align-center" id="normedratingdigraph">
-<a class="reference internal image-reference" href="_images/normedRatingDigraph.png"><img alt="drawing of absolute Quartiles Rating Digraph" src="_images/normedRatingDigraph.png" style="width: 500px;" /></a>
+<a class="reference internal image-reference" href="_images/normedRatingDigraph.png"><img alt="drawing of absolute Quartiles Rating Digraph" src="_images/normedRatingDigraph.png" style="width: 500px;" />
+</a>
 <figcaption>
 <p><span class="caption-number">Fig. 1.26 </span><span class="caption-text">Absolute quartiles rating digraph</span><a class="headerlink" href="#normedratingdigraph" title="Link to this image"></a></p>
 </figcaption>
@@ -4014,7 +4039,8 @@ three modes at 0.3 (-), 0.5 (~), respectively 0.7 (+) of the common scale span a
 </pre></div>
 </div>
 <figure class="align-center" id="heatmap2">
-<a class="reference internal image-reference" href="_images/heatMap2.png"><img alt="Heatmap of absolute deciles rating" src="_images/heatMap2.png" style="width: 400px;" /></a>
+<a class="reference internal image-reference" href="_images/heatMap2.png"><img alt="Heatmap of absolute deciles rating" src="_images/heatMap2.png" style="width: 400px;" />
+</a>
 <figcaption>
 <p><span class="caption-number">Fig. 1.27 </span><span class="caption-text">Heatmap of absolute deciles rating</span><a class="headerlink" href="#heatmap2" title="Link to this image"></a></p>
 </figcaption>
@@ -4221,7 +4247,8 @@ three modes at 0.3 (-), 0.5 (~), respectively 0.7 (+) of the common scale span a
 </pre></div>
 </div>
 <figure class="align-center" id="tutoriallinearballots">
-<a class="reference internal image-reference" href="_images/tutorialLinearBallots.png"><img alt="_images/tutorialLinearBallots.png" src="_images/tutorialLinearBallots.png" style="width: 300px;" /></a>
+<a class="reference internal image-reference" href="_images/tutorialLinearBallots.png"><img alt="_images/tutorialLinearBallots.png" src="_images/tutorialLinearBallots.png" style="width: 300px;" />
+</a>
 <figcaption>
 <p><span class="caption-number">Fig. 1.28 </span><span class="caption-text">Visualizing an election result</span><a class="headerlink" href="#tutoriallinearballots" title="Link to this image"></a></p>
 </figcaption>
@@ -4265,7 +4292,8 @@ three modes at 0.3 (-), 0.5 (~), respectively 0.7 (+) of the common scale span a
 </pre></div>
 </div>
 <figure class="align-center" id="cyclicsocialpreferences">
-<a class="reference internal image-reference" href="_images/cycles.png"><img alt="_images/cycles.png" src="_images/cycles.png" style="width: 200px;" /></a>
+<a class="reference internal image-reference" href="_images/cycles.png"><img alt="_images/cycles.png" src="_images/cycles.png" style="width: 200px;" />
+</a>
 <figcaption>
 <p><span class="caption-number">Fig. 1.29 </span><span class="caption-text">Cyclic social preferences</span><a class="headerlink" href="#cyclicsocialpreferences" title="Link to this image"></a></p>
 </figcaption>
@@ -4289,7 +4317,8 @@ three modes at 0.3 (-), 0.5 (~), respectively 0.7 (+) of the common scale span a
 </div>
 </div>
 <figure class="align-center" id="cyclicvoting">
-<a class="reference internal image-reference" href="_images/votingHeatmap.png"><img alt="_images/votingHeatmap.png" src="_images/votingHeatmap.png" style="width: 550px;" /></a>
+<a class="reference internal image-reference" href="_images/votingHeatmap.png"><img alt="_images/votingHeatmap.png" src="_images/votingHeatmap.png" style="width: 550px;" />
+</a>
 <figcaption>
 <p><span class="caption-number">Fig. 1.30 </span><span class="caption-text">Visualizing a linear voting profile in a heatmap format</span><a class="headerlink" href="#cyclicvoting" title="Link to this image"></a></p>
 </figcaption>
@@ -4385,7 +4414,8 @@ three modes at 0.3 (-), 0.5 (~), respectively 0.7 (+) of the common scale span a
 </pre></div>
 </div>
 <figure class="align-center" id="majoritymargins">
-<a class="reference internal image-reference" href="_images/majorityMargins.png"><img alt="_images/majorityMargins.png" src="_images/majorityMargins.png" style="width: 450px;" /></a>
+<a class="reference internal image-reference" href="_images/majorityMargins.png"><img alt="_images/majorityMargins.png" src="_images/majorityMargins.png" style="width: 450px;" />
+</a>
 <figcaption>
 <p><span class="caption-number">Fig. 1.31 </span><span class="caption-text">Browsing the majority margins</span><a class="headerlink" href="#majoritymargins" title="Link to this image"></a></p>
 </figcaption>
@@ -4680,7 +4710,8 @@ three modes at 0.3 (-), 0.5 (~), respectively 0.7 (+) of the common scale span a
 </pre></div>
 </div>
 <figure class="align-center" id="fairpairing">
-<a class="reference internal image-reference" href="_images/fairPairing.png"><img alt="Fairest first-ranked matching" src="_images/fairPairing.png" style="width: 250px;" /></a>
+<a class="reference internal image-reference" href="_images/fairPairing.png"><img alt="Fairest first-ranked matching" src="_images/fairPairing.png" style="width: 250px;" />
+</a>
 <figcaption>
 <p><span class="caption-number">Fig. 1.32 </span><span class="caption-text">Fairest intergroup pairing decision</span><a class="headerlink" href="#fairpairing" title="Link to this image"></a></p>
 </figcaption>
@@ -4707,7 +4738,8 @@ three modes at 0.3 (-), 0.5 (~), respectively 0.7 (+) of the common scale span a
 </pre></div>
 </div>
 <figure class="align-center" id="fairpairingpermutation">
-<a class="reference internal image-reference" href="_images/fairPairingPermutation.png"><img alt="Fairest first-ranked matching's permutation" src="_images/fairPairingPermutation.png" style="width: 250px;" /></a>
+<a class="reference internal image-reference" href="_images/fairPairingPermutation.png"><img alt="Fairest first-ranked matching's permutation" src="_images/fairPairingPermutation.png" style="width: 250px;" />
+</a>
 <figcaption>
 <p><span class="caption-number">Fig. 1.33 </span><span class="caption-text">Fairest pairing’s coloured matching diagram</span><a class="headerlink" href="#fairpairingpermutation" title="Link to this image"></a></p>
 </figcaption>
@@ -4742,7 +4774,8 @@ three modes at 0.3 (-), 0.5 (~), respectively 0.7 (+) of the common scale span a
 <p>We have already seen this <em>Gale-Shapley</em> pairing solution. It is in fact the 2nd-ranked fairest pairing, discussed in the previous section. Now, is the fact of being <em>stable</em> any essential characteristic of a fair pairing solution?</p>
 <p>In a Monte Carlo simulation of solving 1000 random pairing problems of order 5, we obtain the following distribution of the actual fairness ranking indexes of the fairest stable matching.</p>
 <figure class="align-center" id="diststablefairness">
-<a class="reference internal image-reference" href="_images/distStableFairness.png"><img alt="Distribution of the ranks of the fairest stable matching" src="_images/distStableFairness.png" style="width: 500px;" /></a>
+<a class="reference internal image-reference" href="_images/distStableFairness.png"><img alt="Distribution of the ranks of the fairest stable matching" src="_images/distStableFairness.png" style="width: 500px;" />
+</a>
 <figcaption>
 <p><span class="caption-number">Fig. 1.34 </span><span class="caption-text">Distribution of the fairness rank of the fairest stable matching</span><a class="headerlink" href="#diststablefairness" title="Link to this image"></a></p>
 </figcaption>
@@ -4996,7 +5029,8 @@ three modes at 0.3 (-), 0.5 (~), respectively 0.7 (+) of the common scale span a
 </div>
 <p>How likely is it to obtain such an unfair <em>Gale-Shapley</em> matching? With our Monte Carlo simulation of 1000 random pairing problems of order 5, we may empirically check the likely fairness index of the fairest of both <em>Gale-Shapley</em> solutions.</p>
 <figure class="align-center" id="distgsfairness">
-<a class="reference internal image-reference" href="_images/distGSFairness.png"><img alt="Distribution of the index of the fairest *Gale-Shapley* matching" src="_images/distGSFairness.png" style="width: 500px;" /></a>
+<a class="reference internal image-reference" href="_images/distGSFairness.png"><img alt="Distribution of the index of the fairest *Gale-Shapley* matching" src="_images/distGSFairness.png" style="width: 500px;" />
+</a>
 <figcaption>
 <p><span class="caption-number">Fig. 1.35 </span><span class="caption-text">Distribution of the fairness index of the fairest <em>Gale-Shapley</em> matching</span><a class="headerlink" href="#distgsfairness" title="Link to this image"></a></p>
 </figcaption>
@@ -5004,7 +5038,8 @@ three modes at 0.3 (-), 0.5 (~), respectively 0.7 (+) of the common scale span a
 <p>In <a class="hxr-hoverxref hxr-tooltip reference internal" href="#distgsfairness"><span class="std std-numref">Fig. 1.35</span></a>, we see that the fairest of both <em>Gale-Shapley</em> solutions will correspond to the overall fairest pairing (index = 0) in about <em>36%</em> out of the 1000 random cases. Yet, it is indeed the complexity in <img class="math" src="_images/math/0c54ec2390ec7c7cc19ef74f38272948b253af7d.png" alt="O(k^2)"/> of the <em>Gale-Shapley</em> algorithm that makes it an interesting alternative to our brute force approach in complexity <img class="math" src="_images/math/bbe5265a958faff3be9508581bc41b22abf52988.png" alt="O(k!)"/>.</p>
 <p>It is worthwhile noticing furthermore that the number of stable matchings is in general  very small compared to the size of the huge set of potential maximal matchings as shown in <a class="hxr-hoverxref hxr-tooltip reference internal" href="#stablefreq"><span class="std std-numref">Fig. 1.36</span></a>.</p>
 <figure class="align-center" id="stablefreq">
-<a class="reference internal image-reference" href="_images/stableFreq.png"><img alt="Frequency of stable matchings" src="_images/stableFreq.png" style="width: 500px;" /></a>
+<a class="reference internal image-reference" href="_images/stableFreq.png"><img alt="Frequency of stable matchings" src="_images/stableFreq.png" style="width: 500px;" />
+</a>
 <figcaption>
 <p><span class="caption-number">Fig. 1.36 </span><span class="caption-text">Distribution of the number of stable matchings</span><a class="headerlink" href="#stablefreq" title="Link to this image"></a></p>
 </figcaption>
@@ -5014,7 +5049,8 @@ three modes at 0.3 (-), 0.5 (~), respectively 0.7 (+) of the common scale span a
 <p>Dropping however the <em>stability</em> requirement opens a second way of reducing the actual complexity of the fair pairing problem. This way  goes by trying to enhance the fairness of a <em>Gale-Shapley</em> matching via a <em>hill-climbing</em> heuristic where we swap partners in couples of pairs that mostly increase the average ordinal correlation and decrease the gap between the groups’ correlations.</p>
 <p>With this strategy we may hence expect to likely reach one of the fairest possible matching solutions. In a Monte Carlo simulation of 1000 random pairing problems of order 6 we may indeed notice in <a class="hxr-hoverxref hxr-tooltip reference internal" href="#enhancedfreq"><span class="std std-numref">Fig. 1.37</span></a> that we reach in a very limited number  of swaps –less than <img class="math" src="_images/math/cb534cef97900c662dc4c4d5630c8e170c732771.png" alt="2 \times k"/>– a fairness index less than [3] in nearly 95% of the cases. The weakest fairness index found is 16.</p>
 <figure class="align-center" id="enhancedfreq">
-<a class="reference internal image-reference" href="_images/enhancedFreq.png"><img alt="Distribution of the fairness index of enhanced Gale-Shapley solutions" src="_images/enhancedFreq.png" style="width: 500px;" /></a>
+<a class="reference internal image-reference" href="_images/enhancedFreq.png"><img alt="Distribution of the fairness index of enhanced Gale-Shapley solutions" src="_images/enhancedFreq.png" style="width: 500px;" />
+</a>
 <figcaption>
 <p><span class="caption-number">Fig. 1.37 </span><span class="caption-text">Distribution of the fairness index of enhanced Gale-Shapley solutions</span><a class="headerlink" href="#enhancedfreq" title="Link to this image"></a></p>
 </figcaption>
@@ -5264,7 +5300,8 @@ three modes at 0.3 (-), 0.5 (~), respectively 0.7 (+) of the common scale span a
 </div>
 <p>Mind however that our fairness enhancing algorithm does not guarantee to end always in the very fairest potential maximal matching. In <a class="hxr-hoverxref hxr-tooltip reference internal" href="#intergroupquality-6-52"><span class="std std-numref">Fig. 1.38</span></a> is shown the result of a Monte Carlo simulation of 1000 random intergroup pairing problems of order 6 envolving bipolar approval voting profiles with approval, resp. disapproval probalities of 50%, resp. 20%. The failure rate to obtain the fairest pairing solution amounts to 12.4% with an average failure –optimal minus fairness enhanced average ordinal correlation– of -0.056 and a maximum failure of -0.292.</p>
 <figure class="align-center" id="intergroupquality-6-52">
-<a class="reference internal image-reference" href="_images/interGroupQuality_6_52.png"><img alt="Optimal versus fairness enhanced pairings" src="_images/interGroupQuality_6_52.png" style="width: 500px;" /></a>
+<a class="reference internal image-reference" href="_images/interGroupQuality_6_52.png"><img alt="Optimal versus fairness enhanced pairings" src="_images/interGroupQuality_6_52.png" style="width: 500px;" />
+</a>
 <figcaption>
 <p><span class="caption-number">Fig. 1.38 </span><span class="caption-text">Optimal versus fairness enhanced ordinal correlations</span><a class="headerlink" href="#intergroupquality-6-52" title="Link to this image"></a></p>
 </figcaption>
@@ -5313,7 +5350,8 @@ three modes at 0.3 (-), 0.5 (~), respectively 0.7 (+) of the common scale span a
 </div>
 <p>A Monte Carlo simulation with 1000 intergroup pairing problems of order 6 with approval and disapproval probabilities of 30% shows actually that both starting points –<em>initalMatching</em> = <em>None</em> and <em>initialMatching</em> = ‘bestCopeland’– of the fairness enhancing heuristic may diverge positively and negatively in their respective best solutions.</p>
 <figure class="align-center" id="femfecopcomparison">
-<a class="reference internal image-reference" href="_images/femfecopComparison.png"><img alt="Influence of the fairness enhancing start matching" src="_images/femfecopComparison.png" style="width: 500px;" /></a>
+<a class="reference internal image-reference" href="_images/femfecopComparison.png"><img alt="Influence of the fairness enhancing start matching" src="_images/femfecopComparison.png" style="width: 500px;" />
+</a>
 <figcaption>
 <p><span class="caption-number">Fig. 1.39 </span><span class="caption-text">Influence of the starting point on the fainess enhanced pairing solution</span><a class="headerlink" href="#femfecopcomparison" title="Link to this image"></a></p>
 </figcaption>
@@ -5323,7 +5361,8 @@ fem 78.18% success rate
 fecop 75.78% success rate</p>
 <p>If we run the fairness enhancing heuristic from both the left and right initial matchings as well as from the best determined Copeland matching and retain in fact the respective fairest solution of these three, we obtain, as shown in <a class="hxr-hoverxref hxr-tooltip reference internal" href="#femfecopquality"><span class="std std-numref">Fig. 1.40</span></a>, a success rate of 87.39% for reaching the fairest possible pairing solution with an average failure of -0.036 and a maximum failure of -0.150.</p>
 <figure class="align-center" id="femfecopquality">
-<a class="reference internal image-reference" href="_images/femfecopQuality.png"><img alt="Optimal versus best fairness enhanced pairing solution" src="_images/femfecopQuality.png" style="width: 500px;" /></a>
+<a class="reference internal image-reference" href="_images/femfecopQuality.png"><img alt="Optimal versus best fairness enhanced pairing solution" src="_images/femfecopQuality.png" style="width: 500px;" />
+</a>
 <figcaption>
 <p><span class="caption-number">Fig. 1.40 </span><span class="caption-text">Optimal versus best fairness enhanced pairing solution</span><a class="headerlink" href="#femfecopquality" title="Link to this image"></a></p>
 </figcaption>
@@ -5368,7 +5407,8 @@ fecop 75.78% success rate</p>
 <p>The median overall average correlation with the individual pairing preferences amounts to +0.886 with a maximum at +0.923. The <em>Unfairness</em> statistic indicates the absolute difference between the average correlations obtained in group A versus group B.</p>
 <p>In order to study the potential difference in quality and fairness of the pairing solutions obtained by starting the fairness enhancing procedure from both the left and right inital matching, from the best determined <em>Copeland</em> matching as well as from the fairest <em>Gale-Shapley</em> we ran a Monte Carlo simulation with 1000 random intergroup pairing problems of order 20 and where the individual pairing preferences were given with complete linear voting profiles (see <a class="hxr-hoverxref hxr-tooltip reference internal" href="#compfemcopgs"><span class="std std-numref">Fig. 1.41</span></a>).</p>
 <figure class="align-center" id="compfemcopgs">
-<a class="reference internal image-reference" href="_images/compFemCopGS.png"><img alt="Comapring fairness enhancing results from different initial matchings" src="_images/compFemCopGS.png" style="width: 600px;" /></a>
+<a class="reference internal image-reference" href="_images/compFemCopGS.png"><img alt="Comapring fairness enhancing results from different initial matchings" src="_images/compFemCopGS.png" style="width: 600px;" />
+</a>
 <figcaption>
 <p><span class="caption-number">Fig. 1.41 </span><span class="caption-text">Comparing pairing results from different fairnesss enhancing start points</span><a class="headerlink" href="#compfemcopgs" title="Link to this image"></a></p>
 </figcaption>
@@ -5513,7 +5553,8 @@ fecop 75.78% success rate</p>
 </pre></div>
 </div>
 <figure class="align-center" id="fairestintragrouppairing">
-<a class="reference internal image-reference" href="_images/fairestIntraGroupPairing.png"><img alt="Fairest Pairing" src="_images/fairestIntraGroupPairing.png" style="width: 250px;" /></a>
+<a class="reference internal image-reference" href="_images/fairestIntraGroupPairing.png"><img alt="Fairest Pairing" src="_images/fairestIntraGroupPairing.png" style="width: 250px;" />
+</a>
 <figcaption>
 <p><span class="caption-number">Fig. 1.42 </span><span class="caption-text">Fairest intragroup pairing solution</span><a class="headerlink" href="#fairestintragrouppairing" title="Link to this image"></a></p>
 </figcaption>
@@ -5629,7 +5670,8 @@ fecop 75.78% success rate</p>
 </div>
 <p>As the size of the potential maximal matchings with a pairing problem of order 20 exceeds 650 million instances, computing the overall fairest pairing solution becomes intractable and we are unable to check if we reached or not this optimal pairing solution. A Monte Carlo simulation with 1000 random intragroup pairing problem of order 8, applying an approval probability of 50% and a disapproval probability of 20%, shows however in <a class="hxr-hoverxref hxr-tooltip reference internal" href="#intragroupquality8"><span class="std std-numref">Fig. 1.43</span></a> the apparent operational efficiency of our hill climbing heuristic, at least for small orders.</p>
 <figure class="align-center" id="intragroupquality8">
-<a class="reference internal image-reference" href="_images/intraGroupQuality.png"><img alt="Quality of fairness enhanced intragroup pairing solutions" src="_images/intraGroupQuality.png" style="width: 500px;" /></a>
+<a class="reference internal image-reference" href="_images/intraGroupQuality.png"><img alt="Quality of fairness enhanced intragroup pairing solutions" src="_images/intraGroupQuality.png" style="width: 500px;" />
+</a>
 <figcaption>
 <p><span class="caption-number">Fig. 1.43 </span><span class="caption-text">Quality of fairness enhanced intragroup pairing solutions of order 8</span><a class="headerlink" href="#intragroupquality8" title="Link to this image"></a></p>
 </figcaption>
@@ -5637,7 +5679,8 @@ fecop 75.78% success rate</p>
 <p>Only 43 failures to reach the optimal average correlation were counted among the 1000 computations (4.3%) with a maximal difference in between of +0.250.</p>
 <p>A similar simulation with more constrained random intragroup pairing problems of order 10, applying an approval and disapproval probability of only 30%, gives a failure rate of 19.1% to attain the optimal fairest pairing solution (see <a class="hxr-hoverxref hxr-tooltip reference internal" href="#intragroupquality10"><span class="std std-numref">Fig. 1.44</span></a>).</p>
 <figure class="align-center" id="intragroupquality10">
-<a class="reference internal image-reference" href="_images/intraGroupQuality10.png"><img alt="Quality of fairness enhanced intragroup pairing solutions" src="_images/intraGroupQuality10.png" style="width: 500px;" /></a>
+<a class="reference internal image-reference" href="_images/intraGroupQuality10.png"><img alt="Quality of fairness enhanced intragroup pairing solutions" src="_images/intraGroupQuality10.png" style="width: 500px;" />
+</a>
 <figcaption>
 <p><span class="caption-number">Fig. 1.44 </span><span class="caption-text">Quality of fairness enhanced intragroup pairing solutions of order 10</span><a class="headerlink" href="#intragroupquality10" title="Link to this image"></a></p>
 </figcaption>
@@ -5743,7 +5786,8 @@ fecop 75.78% success rate</p>
 </nav>
 <aside class="sidebar">
 <p class="sidebar-title">Alice D.</p>
-<a class="reference internal image-reference" href="_images/AliceF.png"><img alt="_images/AliceF.png" class="align-center" src="_images/AliceF.png" style="width: 150px;" /></a>
+<a class="reference internal image-reference" href="_images/AliceF.png"><img alt="_images/AliceF.png" class="align-center" src="_images/AliceF.png" style="width: 150px;" />
+</a>
 </aside>
 <p>Alice D. , 19 years old German student finishing her secondary studies in Köln (Germany), desires to undertake foreign languages studies. She will probably receive her “Abitur” with satisfactory and/or good marks and  wants to start her further studies thereafter.</p>
 <p>She would not mind staying in Köln, yet is ready to move elsewhere if necessary. The length of the higher studies do concern her, as she wants to earn her life as soon as possible.  Her parents however agree to financially support her study fees as well as her living costs during her studies.</p>
@@ -5946,7 +5990,8 @@ fecop 75.78% success rate</p>
 </pre></div>
 </div>
 <figure class="align-center" id="alicecriteria">
-<a class="reference internal image-reference" href="_images/aliceCriteria.png"><img alt="_images/aliceCriteria.png" src="_images/aliceCriteria.png" style="width: 750px;" /></a>
+<a class="reference internal image-reference" href="_images/aliceCriteria.png"><img alt="_images/aliceCriteria.png" src="_images/aliceCriteria.png" style="width: 750px;" />
+</a>
 <figcaption>
 <p><span class="caption-number">Fig. 1.45 </span><span class="caption-text">Alice’s performance criteria</span><a class="headerlink" href="#alicecriteria" title="Link to this image"></a></p>
 </figcaption>
@@ -5958,7 +6003,8 @@ fecop 75.78% success rate</p>
 </pre></div>
 </div>
 <figure class="align-center" id="aliceheatmap">
-<a class="reference internal image-reference" href="_images/aliceHeatmap.png"><img alt="_images/aliceHeatmap.png" src="_images/aliceHeatmap.png" style="width: 650px;" /></a>
+<a class="reference internal image-reference" href="_images/aliceHeatmap.png"><img alt="_images/aliceHeatmap.png" src="_images/aliceHeatmap.png" style="width: 650px;" />
+</a>
 <figcaption>
 <p><span class="caption-number">Fig. 1.46 </span><span class="caption-text">Heatmap of Alice’s performance tableau</span><a class="headerlink" href="#aliceheatmap" title="Link to this image"></a></p>
 </figcaption>
@@ -5997,7 +6043,8 @@ fecop 75.78% success rate</p>
 </pre></div>
 </div>
 <figure class="align-center" id="alicerelationmap">
-<a class="reference internal image-reference" href="_images/aliceRelationMap.png"><img alt="_images/aliceRelationMap.png" src="_images/aliceRelationMap.png" style="width: 550px;" /></a>
+<a class="reference internal image-reference" href="_images/aliceRelationMap.png"><img alt="_images/aliceRelationMap.png" src="_images/aliceRelationMap.png" style="width: 550px;" />
+</a>
 <figcaption>
 <p><span class="caption-number">Fig. 1.47 </span><span class="caption-text">‘Copeland’-ranked outranking relation map</span><a class="headerlink" href="#alicerelationmap" title="Link to this image"></a></p>
 </figcaption>
@@ -6091,7 +6138,8 @@ fecop 75.78% success rate</p>
 </div>
 </div>
 <figure class="align-center" id="alicebestchoiceimage">
-<a class="reference internal image-reference" href="_images/aliceBestChoice.png"><img alt="_images/aliceBestChoice.png" src="_images/aliceBestChoice.png" style="width: 400px;" /></a>
+<a class="reference internal image-reference" href="_images/aliceBestChoice.png"><img alt="_images/aliceBestChoice.png" src="_images/aliceBestChoice.png" style="width: 400px;" />
+</a>
 <figcaption>
 <p><span class="caption-number">Fig. 1.48 </span><span class="caption-text">Alice’s best choice recommendation</span><a class="headerlink" href="#alicebestchoiceimage" title="Link to this image"></a></p>
 </figcaption>
@@ -6102,7 +6150,8 @@ fecop 75.78% success rate</p>
 </pre></div>
 </div>
 <figure class="align-center" id="pairwisecomparison">
-<a class="reference internal image-reference" href="_images/pairwiseComparison.png"><img alt="_images/pairwiseComparison.png" src="_images/pairwiseComparison.png" style="width: 550px;" /></a>
+<a class="reference internal image-reference" href="_images/pairwiseComparison.png"><img alt="_images/pairwiseComparison.png" src="_images/pairwiseComparison.png" style="width: 550px;" />
+</a>
 <figcaption>
 <p><span class="caption-number">Fig. 1.49 </span><span class="caption-text">Comparing the first and second best-ranked study programs</span><a class="headerlink" href="#pairwisecomparison" title="Link to this image"></a></p>
 </figcaption>
@@ -6217,7 +6266,8 @@ fecop 75.78% success rate</p>
 </pre></div>
 </div>
 <figure class="align-center" id="alicechoice-unopposed">
-<a class="reference internal image-reference" href="_images/AliceChoice_unopposed.png"><img alt="_images/AliceChoice_unopposed.png" src="_images/AliceChoice_unopposed.png" style="width: 200px;" /></a>
+<a class="reference internal image-reference" href="_images/AliceChoice_unopposed.png"><img alt="_images/AliceChoice_unopposed.png" src="_images/AliceChoice_unopposed.png" style="width: 200px;" />
+</a>
 <figcaption>
 <p><span class="caption-number">Fig. 1.50 </span><span class="caption-text">Unopposed partial ranking of the potential study programs</span><a class="headerlink" href="#alicechoice-unopposed" title="Link to this image"></a></p>
 </figcaption>
@@ -6503,7 +6553,8 @@ fecop 75.78% success rate</p>
 </pre></div>
 </div>
 <figure class="align-center" id="thecscriteria">
-<a class="reference internal image-reference" href="_images/the_cs_2016Criteria.png"><img alt="_images/the_cs_2016Criteria.png" src="_images/the_cs_2016Criteria.png" style="width: 500pt;" /></a>
+<a class="reference internal image-reference" href="_images/the_cs_2016Criteria.png"><img alt="_images/the_cs_2016Criteria.png" src="_images/the_cs_2016Criteria.png" style="width: 500pt;" />
+</a>
 <figcaption>
 <p><span class="caption-number">Fig. 1.51 </span><span class="caption-text">The THE ranking criteria</span><a class="headerlink" href="#thecscriteria" title="Link to this image"></a></p>
 </figcaption>
@@ -6816,7 +6867,8 @@ fecop 75.78% success rate</p>
 </pre></div>
 </div>
 <figure class="align-center" id="therelationmap">
-<a class="reference internal image-reference" href="_images/the_cs_RelationMap.png"><img alt="_images/the_cs_RelationMap.png" src="_images/the_cs_RelationMap.png" style="width: 600px;" /></a>
+<a class="reference internal image-reference" href="_images/the_cs_RelationMap.png"><img alt="_images/the_cs_RelationMap.png" src="_images/the_cs_RelationMap.png" style="width: 600px;" />
+</a>
 <figcaption>
 <p><span class="caption-number">Fig. 1.52 </span><span class="caption-text">Relation map of the robust outranking relation</span><a class="headerlink" href="#therelationmap" title="Link to this image"></a></p>
 </figcaption>
@@ -6870,7 +6922,8 @@ fecop 75.78% success rate</p>
 </pre></div>
 </div>
 <figure class="align-center" id="thecs3dcorrelation">
-<a class="reference internal image-reference" href="_images/the_cs_3Dcorrelation.png"><img alt="_images/the_cs_3Dcorrelation.png" src="_images/the_cs_3Dcorrelation.png" style="width: 400pt;" /></a>
+<a class="reference internal image-reference" href="_images/the_cs_3Dcorrelation.png"><img alt="_images/the_cs_3Dcorrelation.png" src="_images/the_cs_3Dcorrelation.png" style="width: 400pt;" />
+</a>
 <figcaption>
 <p><span class="caption-number">Fig. 1.53 </span><span class="caption-text">3D PCA plot of the pairwise criteria correlation table</span><a class="headerlink" href="#thecs3dcorrelation" title="Link to this image"></a></p>
 </figcaption>
@@ -6915,7 +6968,8 @@ fecop 75.78% success rate</p>
 </pre></div>
 </div>
 <figure class="align-center" id="id243">
-<a class="reference internal image-reference" href="_images/theHeatmap.png"><img alt="_images/theHeatmap.png" src="_images/theHeatmap.png" style="width: 600pt;" /></a>
+<a class="reference internal image-reference" href="_images/theHeatmap.png"><img alt="_images/theHeatmap.png" src="_images/theHeatmap.png" style="width: 600pt;" />
+</a>
 <figcaption>
 <p><span class="caption-number">Fig. 1.54 </span><span class="caption-text">Extract of a heatmap browser view on the <em>NetFlows</em> ranking result</span><a class="headerlink" href="#id243" title="Link to this image"></a></p>
 </figcaption>
@@ -6962,7 +7016,8 @@ fecop 75.78% success rate</p>
 </div>
 </div>
 <figure class="align-default" id="qualityscores">
-<a class="reference internal image-reference" href="_images/ratingData.png"><img alt="Average quality scores of German University Students" src="_images/ratingData.png" style="width: 600px;" /></a>
+<a class="reference internal image-reference" href="_images/ratingData.png"><img alt="Average quality scores of German University Students" src="_images/ratingData.png" style="width: 600px;" />
+</a>
 <figcaption>
 <p><span class="caption-number">Fig. 1.55 </span><span class="caption-text">Average quality of enroled students per academic subject</span><a class="headerlink" href="#qualityscores" title="Link to this image"></a></p>
 </figcaption>
@@ -6974,7 +7029,8 @@ fecop 75.78% success rate</p>
 </pre></div>
 </div>
 <figure class="align-center" id="spiegelcriteria">
-<a class="reference internal image-reference" href="_images/spiegelCriteria.png"><img alt="_images/spiegelCriteria.png" src="_images/spiegelCriteria.png" style="width: 750px;" /></a>
+<a class="reference internal image-reference" href="_images/spiegelCriteria.png"><img alt="_images/spiegelCriteria.png" src="_images/spiegelCriteria.png" style="width: 750px;" />
+</a>
 <figcaption>
 <p><span class="caption-number">Fig. 1.56 </span><span class="caption-text">Details of the rating criteria</span><a class="headerlink" href="#spiegelcriteria" title="Link to this image"></a></p>
 </figcaption>
@@ -7012,7 +7068,8 @@ fecop 75.78% success rate</p>
 </pre></div>
 </div>
 <figure class="align-center" id="score9limits">
-<a class="reference internal image-reference" href="_images/score9Limits.png"><img alt="_images/score9Limits.png" src="_images/score9Limits.png" style="width: 350px;" /></a>
+<a class="reference internal image-reference" href="_images/score9Limits.png"><img alt="_images/score9Limits.png" src="_images/score9Limits.png" style="width: 350px;" />
+</a>
 <figcaption>
 <p><span class="caption-number">Fig. 1.57 </span><span class="caption-text">9-tiling quality score limits per academic subject</span><a class="headerlink" href="#score9limits" title="Link to this image"></a></p>
 </figcaption>
@@ -7030,7 +7087,8 @@ fecop 75.78% success rate</p>
 </pre></div>
 </div>
 <figure class="align-center" id="ninetiledheatmap">
-<a class="reference internal image-reference" href="_images/nineTilingResult.png"><img alt="_images/nineTilingResult.png" src="_images/nineTilingResult.png" style="width: 650px;" /></a>
+<a class="reference internal image-reference" href="_images/nineTilingResult.png"><img alt="_images/nineTilingResult.png" src="_images/nineTilingResult.png" style="width: 650px;" />
+</a>
 <figcaption>
 <p><span class="caption-number">Fig. 1.58 </span><span class="caption-text">Heatmap view of the 9-tiles rating-by-ranking result</span><a class="headerlink" href="#ninetiledheatmap" title="Link to this image"></a></p>
 </figcaption>
@@ -7066,7 +7124,8 @@ fecop 75.78% success rate</p>
 </pre></div>
 </div>
 <figure class="align-center" id="ratingresult">
-<a class="reference internal image-reference" href="_images/ratingResult.png"><img alt="_images/ratingResult.png" src="_images/ratingResult.png" style="width: 500px;" /></a>
+<a class="reference internal image-reference" href="_images/ratingResult.png"><img alt="_images/ratingResult.png" src="_images/ratingResult.png" style="width: 500px;" />
+</a>
 <figcaption>
 <p><span class="caption-number">Fig. 1.59 </span><span class="caption-text">Drawing of the 9-tiles rating-by-ranking result</span><a class="headerlink" href="#ratingresult" title="Link to this image"></a></p>
 </figcaption>
@@ -7075,7 +7134,8 @@ fecop 75.78% success rate</p>
 <aside class="sidebar">
 <p class="sidebar-title">Fusion of two rating results</p>
 <figure class="align-center" id="fusionresult">
-<a class="reference internal image-reference" href="_images/fusionResult.png"><img alt="_images/fusionResult.png" src="_images/fusionResult.png" style="width: 150px;" /></a>
+<a class="reference internal image-reference" href="_images/fusionResult.png"><img alt="_images/fusionResult.png" src="_images/fusionResult.png" style="width: 150px;" />
+</a>
 <figcaption>
 <p><span class="caption-number">Fig. 1.60 </span><span class="caption-text">Fused Copeland and NetFlows ratings</span><a class="headerlink" href="#fusionresult" title="Link to this image"></a></p>
 </figcaption>
@@ -7226,7 +7286,8 @@ fecop 75.78% success rate</p>
 </pre></div>
 </div>
 <figure class="align-center" id="ninetilingordering">
-<a class="reference internal image-reference" href="_images/nineTilingOrdering.png"><img alt="_images/nineTilingOrdering.png" src="_images/nineTilingOrdering.png" style="width: 400px;" /></a>
+<a class="reference internal image-reference" href="_images/nineTilingOrdering.png"><img alt="_images/nineTilingOrdering.png" src="_images/nineTilingOrdering.png" style="width: 400px;" />
+</a>
 <figcaption>
 <p><span class="caption-number">Fig. 1.61 </span><span class="caption-text">The ranked 9-tiles rating-by-sorting result</span><a class="headerlink" href="#ninetilingordering" title="Link to this image"></a></p>
 </figcaption>
@@ -7241,7 +7302,8 @@ fecop 75.78% success rate</p>
 </pre></div>
 </div>
 <figure class="align-center" id="ninetilingdrawing">
-<a class="reference internal image-reference" href="_images/nineTilingDrawing.png"><img alt="_images/nineTilingDrawing.png" src="_images/nineTilingDrawing.png" style="width: 650px;" /></a>
+<a class="reference internal image-reference" href="_images/nineTilingDrawing.png"><img alt="_images/nineTilingDrawing.png" src="_images/nineTilingDrawing.png" style="width: 650px;" />
+</a>
 <figcaption>
 <p><span class="caption-number">Fig. 1.62 </span><span class="caption-text">Graphviz drawing of the 9-tiles sorting digraph</span><a class="headerlink" href="#ninetilingdrawing" title="Link to this image"></a></p>
 </figcaption>
@@ -7338,7 +7400,8 @@ fecop 75.78% success rate</p>
 </pre></div>
 </div>
 <figure class="align-center" id="graffiti03-1">
-<a class="reference internal image-reference" href="_images/graffiti03_1.png"><img alt="_images/graffiti03_1.png" src="_images/graffiti03_1.png" style="width: 600px;" /></a>
+<a class="reference internal image-reference" href="_images/graffiti03_1.png"><img alt="_images/graffiti03_1.png" src="_images/graffiti03_1.png" style="width: 600px;" />
+</a>
 <figcaption>
 <p><span class="caption-number">Fig. 1.63 </span><span class="caption-text">Graffiti magazine’s movie ratings from February 2003</span><a class="headerlink" href="#graffiti03-1" title="Link to this image"></a></p>
 </figcaption>
@@ -7545,7 +7608,8 @@ fecop 75.78% success rate</p>
 </pre></div>
 </div>
 <figure class="align-center" id="sparse75relationmap">
-<a class="reference internal image-reference" href="_images/sparse75RelationMap.png"><img alt="_images/sparse75RelationMap.png" src="_images/sparse75RelationMap.png" style="width: 550px;" /></a>
+<a class="reference internal image-reference" href="_images/sparse75RelationMap.png"><img alt="_images/sparse75RelationMap.png" src="_images/sparse75RelationMap.png" style="width: 550px;" />
+</a>
 <figcaption>
 <p><span class="caption-number">Fig. 1.64 </span><span class="caption-text">The relation map of a sparse outranking digraph</span><a class="headerlink" href="#sparse75relationmap" title="Link to this image"></a></p>
 </figcaption>
@@ -7992,7 +8056,8 @@ fecop 75.78% success rate</p>
 </pre></div>
 </div>
 <figure class="align-center" id="id244">
-<a class="reference internal image-reference" href="_images/sparseRelationMap.png"><img alt="_images/sparseRelationMap.png" src="_images/sparseRelationMap.png" style="width: 450px;" /></a>
+<a class="reference internal image-reference" href="_images/sparseRelationMap.png"><img alt="_images/sparseRelationMap.png" src="_images/sparseRelationMap.png" style="width: 450px;" />
+</a>
 <figcaption>
 <p><span class="caption-number">Fig. 1.65 </span><span class="caption-text">Sparse quartiles-sorting decomposed outranking relation (extract). <strong>Legend</strong>: <em>outranking</em> for certain (<img class="math" src="_images/math/e6a8aa777bba61537a83df04f5fadf4cb2ada566.png" alt="\top"/>); <em>outranked</em> for certain (<img class="math" src="_images/math/5fae947ebaf7b6e50c19837002cf26089cf5d923.png" alt="\bot"/>); more or less <em>outranking</em> (<img class="math" src="_images/math/26d77804f7b0232a53e8432702479a275a171831.png" alt="+"/>); more or less <em>outranked</em> (<img class="math" src="_images/math/181cffb4dcf81e4177e5baaa0d4f02b126a745f0.png" alt="-"/>); <em>indeterminate</em> ( ).</span><a class="headerlink" href="#id244" title="Link to this image"></a></p>
 </figcaption>
@@ -8235,7 +8300,8 @@ fecop 75.78% success rate</p>
 </div></blockquote>
 <p>by running the cythonized python modules in an Intel compiled virtual Python 3.6.5 environment [GCC Intel(R) 17.0.1 –enable-optimizations c++ gcc 6.3 mode] on <em>Debian</em> 8 Linux.</p>
 <figure class="align-center" id="id245">
-<a class="reference internal image-reference" href="_images/rankingRecords.png"><img alt="_images/rankingRecords.png" src="_images/rankingRecords.png" style="width: 350px;" /></a>
+<a class="reference internal image-reference" href="_images/rankingRecords.png"><img alt="_images/rankingRecords.png" src="_images/rankingRecords.png" style="width: 350px;" />
+</a>
 <figcaption>
 <p><span class="caption-number">Fig. 1.66 </span><span class="caption-text">HPC-UL Ranking Performance Records (Spring 2018)</span><a class="headerlink" href="#id245" title="Link to this image"></a></p>
 </figcaption>
@@ -8378,7 +8444,8 @@ fecop 75.78% success rate</p>
 </pre></div>
 </div>
 <figure class="align-center" id="converse-dual-rel-best10">
-<a class="reference internal image-reference" href="_images/converse-dual_rel_best10.png"><img alt="_images/converse-dual_rel_best10.png" src="_images/converse-dual_rel_best10.png" style="width: 400px;" /></a>
+<a class="reference internal image-reference" href="_images/converse-dual_rel_best10.png"><img alt="_images/converse-dual_rel_best10.png" src="_images/converse-dual_rel_best10.png" style="width: 400px;" />
+</a>
 <figcaption>
 <p><span class="caption-number">Fig. 1.67 </span><span class="caption-text">Validated <em>strict</em> outranking situations between the ten best-ranked alternatives</span><a class="headerlink" href="#converse-dual-rel-best10" title="Link to this image"></a></p>
 </figcaption>
@@ -8676,7 +8743,8 @@ fecop 75.78% success rate</p>
 </pre></div>
 </div>
 <figure class="align-center" id="id246">
-<a class="reference internal image-reference" href="_images/tutorialGraph.png"><img alt="_images/tutorialGraph.png" src="_images/tutorialGraph.png" style="width: 400px;" /></a>
+<a class="reference internal image-reference" href="_images/tutorialGraph.png"><img alt="_images/tutorialGraph.png" src="_images/tutorialGraph.png" style="width: 400px;" />
+</a>
 <figcaption>
 <p><span class="caption-number">Fig. 1.68 </span><span class="caption-text">Tutorial graph instance</span><a class="headerlink" href="#id246" title="Link to this image"></a></p>
 </figcaption>
@@ -8757,7 +8825,8 @@ fecop 75.78% success rate</p>
 </pre></div>
 </div>
 <figure class="align-center" id="id247">
-<a class="reference internal image-reference" href="_images/tutorial-3-coloring.png"><img alt="_images/tutorial-3-coloring.png" src="_images/tutorial-3-coloring.png" style="width: 400px;" /></a>
+<a class="reference internal image-reference" href="_images/tutorial-3-coloring.png"><img alt="_images/tutorial-3-coloring.png" src="_images/tutorial-3-coloring.png" style="width: 400px;" />
+</a>
 <figcaption>
 <p><span class="caption-number">Fig. 1.69 </span><span class="caption-text">3-Coloring of the tutorial graph</span><a class="headerlink" href="#id247" title="Link to this image"></a></p>
 </figcaption>
@@ -8780,7 +8849,8 @@ fecop 75.78% success rate</p>
 </pre></div>
 </div>
 <figure class="align-center" id="id248">
-<a class="reference internal image-reference" href="_images/tutorial-2-coloring.png"><img alt="_images/tutorial-2-coloring.png" src="_images/tutorial-2-coloring.png" style="width: 400px;" /></a>
+<a class="reference internal image-reference" href="_images/tutorial-2-coloring.png"><img alt="_images/tutorial-2-coloring.png" src="_images/tutorial-2-coloring.png" style="width: 400px;" />
+</a>
 <figcaption>
 <p><span class="caption-number">Fig. 1.70 </span><span class="caption-text">2-coloring of the tutorial graph</span><a class="headerlink" href="#id248" title="Link to this image"></a></p>
 </figcaption>
@@ -8914,7 +8984,8 @@ fecop 75.78% success rate</p>
 </pre></div>
 </div>
 <figure class="align-center" id="id249">
-<a class="reference internal image-reference" href="_images/maxMatchingcycleGraph.png"><img alt="maximum matching colored c8" src="_images/maxMatchingcycleGraph.png" style="width: 300px;" /></a>
+<a class="reference internal image-reference" href="_images/maxMatchingcycleGraph.png"><img alt="maximum matching colored c8" src="_images/maxMatchingcycleGraph.png" style="width: 300px;" />
+</a>
 <figcaption>
 <p><span class="caption-number">Fig. 1.71 </span><span class="caption-text">A perfect maximum matching of the 8-cycle graph</span><a class="headerlink" href="#id249" title="Link to this image"></a></p>
 </figcaption>
@@ -8940,7 +9011,8 @@ fecop 75.78% success rate</p>
 </pre></div>
 </div>
 <figure class="align-center" id="id250">
-<a class="reference internal image-reference" href="_images/grid-15-15-ising.png"><img alt="_images/grid-15-15-ising.png" src="_images/grid-15-15-ising.png" style="width: 600px;" /></a>
+<a class="reference internal image-reference" href="_images/grid-15-15-ising.png"><img alt="_images/grid-15-15-ising.png" src="_images/grid-15-15-ising.png" style="width: 600px;" />
+</a>
 <figcaption>
 <p><span class="caption-number">Fig. 1.72 </span><span class="caption-text">Ising model of the 15x15 grid graph</span><a class="headerlink" href="#id250" title="Link to this image"></a></p>
 </figcaption>
@@ -9048,7 +9120,8 @@ fecop 75.78% success rate</p>
 </pre></div>
 </div>
 <figure class="align-center" id="id251">
-<a class="reference internal image-reference" href="_images/cg12.png"><img alt="The 12-cycle graph" src="_images/cg12.png" style="width: 400px;" /></a>
+<a class="reference internal image-reference" href="_images/cg12.png"><img alt="The 12-cycle graph" src="_images/cg12.png" style="width: 400px;" />
+</a>
 <figcaption>
 <p><span class="caption-number">Fig. 1.73 </span><span class="caption-text">The 12-cycle graph</span><a class="headerlink" href="#id251" title="Link to this image"></a></p>
 </figcaption>
@@ -9158,7 +9231,8 @@ fecop 75.78% success rate</p>
 </div>
 <p>The corresponding group stabilizers’ sizes and frequencies – orbit 1 with 6 symmetry axes, orbit 2 with 4 symmetry axes, and orbits 3 and 4 both with one symmetry axis (see Lines 12-13), are illustrated in the corresponding unlabelled graphs of <a class="hxr-hoverxref hxr-tooltip reference internal" href="#misc12"><span class="std std-numref">Fig. 1.74</span></a> below.</p>
 <figure class="align-center" id="misc12">
-<a class="reference internal image-reference" href="_images/c12.png"><img alt="The 4 non isomorphic MIS of the 12-cycle graph" src="_images/c12.png" style="width: 400px;" /></a>
+<a class="reference internal image-reference" href="_images/c12.png"><img alt="The 4 non isomorphic MIS of the 12-cycle graph" src="_images/c12.png" style="width: 400px;" />
+</a>
 <figcaption>
 <p><span class="caption-number">Fig. 1.74 </span><span class="caption-text">The symmetry axes of the four non isomorphic MISs of the 12-cycle graph</span><a class="headerlink" href="#misc12" title="Link to this image"></a></p>
 </figcaption>
@@ -9246,7 +9320,8 @@ fecop 75.78% success rate</p>
 </div>
 </div>
 <figure class="align-center" id="randomsplitgraph">
-<a class="reference internal image-reference" href="_images/randomSplitGraph.png"><img alt="Random split graph" src="_images/randomSplitGraph.png" style="width: 350px;" /></a>
+<a class="reference internal image-reference" href="_images/randomSplitGraph.png"><img alt="Random split graph" src="_images/randomSplitGraph.png" style="width: 350px;" />
+</a>
 <figcaption>
 <p><span class="caption-number">Fig. 1.75 </span><span class="caption-text">A conjointly triangulated, comparability, interval, permutation and split graph</span><a class="headerlink" href="#randomsplitgraph" title="Link to this image"></a></p>
 </figcaption>
@@ -9317,7 +9392,8 @@ fecop 75.78% success rate</p>
 </pre></div>
 </div>
 <figure class="align-center" id="id252">
-<a class="reference internal image-reference" href="_images/berge1.png"><img alt="_images/berge1.png" src="_images/berge1.png" style="width: 400px;" /></a>
+<a class="reference internal image-reference" href="_images/berge1.png"><img alt="_images/berge1.png" src="_images/berge1.png" style="width: 400px;" />
+</a>
 <figcaption>
 <p><span class="caption-number">Fig. 1.76 </span><span class="caption-text">Graph representation of the testimonies of the professors</span><a class="headerlink" href="#id252" title="Link to this image"></a></p>
 </figcaption>
@@ -9358,7 +9434,8 @@ fecop 75.78% success rate</p>
 </pre></div>
 </div>
 <figure class="align-center" id="id253">
-<a class="reference internal image-reference" href="_images/berge2.png"><img alt="_images/berge2.png" src="_images/berge2.png" style="width: 400px;" /></a>
+<a class="reference internal image-reference" href="_images/berge2.png"><img alt="_images/berge2.png" src="_images/berge2.png" style="width: 400px;" />
+</a>
 <figcaption>
 <p><span class="caption-number">Fig. 1.77 </span><span class="caption-text">The triangulated testimonies graph</span><a class="headerlink" href="#id253" title="Link to this image"></a></p>
 </figcaption>
@@ -9388,7 +9465,8 @@ fecop 75.78% success rate</p>
 </pre></div>
 </div>
 <figure class="align-center" id="id254">
-<a class="reference internal image-reference" href="_images/permutationGraph.png"><img alt="Default permutation graph" src="_images/permutationGraph.png" style="width: 300px;" /></a>
+<a class="reference internal image-reference" href="_images/permutationGraph.png"><img alt="Default permutation graph" src="_images/permutationGraph.png" style="width: 300px;" />
+</a>
 <figcaption>
 <p><span class="caption-number">Fig. 1.78 </span><span class="caption-text">The default permutation graph</span><a class="headerlink" href="#id254" title="Link to this image"></a></p>
 </figcaption>
@@ -9409,7 +9487,8 @@ fecop 75.78% success rate</p>
 </pre></div>
 </div>
 <figure class="align-center" id="id255">
-<a class="reference internal image-reference" href="_images/coloredPermutationGraph.png"><img alt="minimal vertex coloring" src="_images/coloredPermutationGraph.png" style="width: 300px;" /></a>
+<a class="reference internal image-reference" href="_images/coloredPermutationGraph.png"><img alt="minimal vertex coloring" src="_images/coloredPermutationGraph.png" style="width: 300px;" />
+</a>
 <figcaption>
 <p><span class="caption-number">Fig. 1.79 </span><span class="caption-text">Minimal vertex coloring of the permutation graph</span><a class="headerlink" href="#id255" title="Link to this image"></a></p>
 </figcaption>
@@ -9422,7 +9501,8 @@ fecop 75.78% success rate</p>
 </pre></div>
 </div>
 <figure class="align-center" id="perm-permutationgraph">
-<a class="reference internal image-reference" href="_images/perm_permutationGraph.png"><img alt="The inversions of the permutation [4, 3, 6, 1, 5, 2]" src="_images/perm_permutationGraph.png" style="width: 400px;" /></a>
+<a class="reference internal image-reference" href="_images/perm_permutationGraph.png"><img alt="The inversions of the permutation [4, 3, 6, 1, 5, 2]" src="_images/perm_permutationGraph.png" style="width: 400px;" />
+</a>
 <figcaption>
 <p><span class="caption-number">Fig. 1.80 </span><span class="caption-text">Colored matching diagram of the permutation [4, 3, 6, 1, 5, 2]</span><a class="headerlink" href="#perm-permutationgraph" title="Link to this image"></a></p>
 </figcaption>
@@ -9451,7 +9531,8 @@ fecop 75.78% success rate</p>
 </pre></div>
 </div>
 <figure class="align-center" id="id256">
-<a class="reference internal image-reference" href="_images/oriented_permutationGraph.png"><img alt="Hasse diagram of the orientationofof a permutation graph" src="_images/oriented_permutationGraph.png" style="width: 200px;" /></a>
+<a class="reference internal image-reference" href="_images/oriented_permutationGraph.png"><img alt="Hasse diagram of the orientationofof a permutation graph" src="_images/oriented_permutationGraph.png" style="width: 200px;" />
+</a>
 <figcaption>
 <p><span class="caption-number">Fig. 1.81 </span><span class="caption-text">Hasse diagram of the transitive orientation of the permutation graph</span><a class="headerlink" href="#id256" title="Link to this image"></a></p>
 </figcaption>
@@ -9489,7 +9570,8 @@ fecop 75.78% success rate</p>
 </pre></div>
 </div>
 <figure class="align-center" id="randomgraph4335">
-<a class="reference internal image-reference" href="_images/randomGraph4335.png"><img alt="Random graph" src="_images/randomGraph4335.png" style="width: 400px;" /></a>
+<a class="reference internal image-reference" href="_images/randomGraph4335.png"><img alt="Random graph" src="_images/randomGraph4335.png" style="width: 400px;" />
+</a>
 <figcaption>
 <p><span class="caption-number">Fig. 1.82 </span><span class="caption-text">Random graph of order 8 generated with edge probability 0.4</span><a class="headerlink" href="#randomgraph4335" title="Link to this image"></a></p>
 </figcaption>
@@ -9517,7 +9599,8 @@ fecop 75.78% success rate</p>
 </pre></div>
 </div>
 <figure class="align-center" id="transorientgraph">
-<a class="reference internal image-reference" href="_images/transOrientGraph.png"><img alt="transitive orientation of a graph" src="_images/transOrientGraph.png" style="width: 400px;" /></a>
+<a class="reference internal image-reference" href="_images/transOrientGraph.png"><img alt="transitive orientation of a graph" src="_images/transOrientGraph.png" style="width: 400px;" />
+</a>
 <figcaption>
 <p><span class="caption-number">Fig. 1.83 </span><span class="caption-text">Transitive neighbourhoods of the graph <em>g</em></span><a class="headerlink" href="#transorientgraph" title="Link to this image"></a></p>
 </figcaption>
@@ -9546,7 +9629,8 @@ fecop 75.78% success rate</p>
 </pre></div>
 </div>
 <figure class="align-center" id="transorientdualgraph">
-<a class="reference internal image-reference" href="_images/transOrientDualGraph.png"><img alt="transitive orientation of the dual graph" src="_images/transOrientDualGraph.png" style="width: 400px;" /></a>
+<a class="reference internal image-reference" href="_images/transOrientDualGraph.png"><img alt="transitive orientation of the dual graph" src="_images/transOrientDualGraph.png" style="width: 400px;" />
+</a>
 <figcaption>
 <p><span class="caption-number">Fig. 1.84 </span><span class="caption-text">Transitive neighbourhoods of the dual graph <em>-g</em></span><a class="headerlink" href="#transorientdualgraph" title="Link to this image"></a></p>
 </figcaption>
@@ -9620,7 +9704,8 @@ fecop 75.78% success rate</p>
 </pre></div>
 </div>
 <figure class="align-center" id="isomorphicpermgraphs">
-<a class="reference internal image-reference" href="_images/isomorphicPerms.png"><img alt="Isomorphic permutation graphs" src="_images/isomorphicPerms.png" style="width: 700px;" /></a>
+<a class="reference internal image-reference" href="_images/isomorphicPerms.png"><img alt="Isomorphic permutation graphs" src="_images/isomorphicPerms.png" style="width: 700px;" />
+</a>
 <figcaption>
 <p><span class="caption-number">Fig. 1.85 </span><span class="caption-text">Isomorphic permutation graphs</span><a class="headerlink" href="#isomorphicpermgraphs" title="Link to this image"></a></p>
 </figcaption>
@@ -9664,7 +9749,8 @@ fecop 75.78% success rate</p>
 </pre></div>
 </div>
 <figure class="align-center" id="id257">
-<a class="reference internal image-reference" href="_images/tutRandomTree.png"><img alt="Random tree instance" src="_images/tutRandomTree.png" style="width: 300px;" /></a>
+<a class="reference internal image-reference" href="_images/tutRandomTree.png"><img alt="Random tree instance" src="_images/tutRandomTree.png" style="width: 300px;" />
+</a>
 <figcaption>
 <p><span class="caption-number">Fig. 1.86 </span><span class="caption-text">Random Tree instance of order 9</span><a class="headerlink" href="#id257" title="Link to this image"></a></p>
 </figcaption>
@@ -9702,7 +9788,8 @@ fecop 75.78% success rate</p>
 </pre></div>
 </div>
 <figure class="align-center" id="id258">
-<a class="reference internal image-reference" href="_images/tutPruefTree.png"><img alt="Tree instance from a random Prüfer code" src="_images/tutPruefTree.png" style="width: 350px;" /></a>
+<a class="reference internal image-reference" href="_images/tutPruefTree.png"><img alt="Tree instance from a random Prüfer code" src="_images/tutPruefTree.png" style="width: 350px;" />
+</a>
 <figcaption>
 <p><span class="caption-number">Fig. 1.87 </span><span class="caption-text">Tree instance from a random Prüfer code</span><a class="headerlink" href="#id258" title="Link to this image"></a></p>
 </figcaption>
@@ -9741,7 +9828,8 @@ fecop 75.78% success rate</p>
 </pre></div>
 </div>
 <figure class="align-center" id="test62tree">
-<a class="reference internal image-reference" href="_images/test62.png"><img alt="Recognizing a tree" src="_images/test62.png" style="width: 350px;" /></a>
+<a class="reference internal image-reference" href="_images/test62.png"><img alt="Recognizing a tree" src="_images/test62.png" style="width: 350px;" />
+</a>
 <figcaption>
 <p><span class="caption-number">Fig. 1.88 </span><span class="caption-text">Recognizing a tree instance</span><a class="headerlink" href="#test62tree" title="Link to this image"></a></p>
 </figcaption>
@@ -9768,7 +9856,8 @@ dot -Grankdir=TB -Tpng rootedTree.dot -o rootedTree.png</p>
 </div></blockquote>
 </div></blockquote>
 <figure class="align-center" id="test62rooted">
-<a class="reference internal image-reference" href="_images/rootedTree.png"><img alt="Rooted tree" src="_images/rootedTree.png" style="width: 250px;" /></a>
+<a class="reference internal image-reference" href="_images/rootedTree.png"><img alt="Rooted tree" src="_images/rootedTree.png" style="width: 250px;" />
+</a>
 <figcaption>
 <p><span class="caption-number">Fig. 1.89 </span><span class="caption-text">Drawing an oriented tree rooted at its centre</span><a class="headerlink" href="#test62rooted" title="Link to this image"></a></p>
 </figcaption>
@@ -9807,7 +9896,8 @@ dot -Grankdir=TB -Tpng rootedTree.dot -o rootedTree.png</p>
 </pre></div>
 </div>
 <figure class="align-center" id="id259">
-<a class="reference internal image-reference" href="_images/randomSpanningTree.png"><img alt="randomSpanningTree instance" src="_images/randomSpanningTree.png" style="width: 300px;" /></a>
+<a class="reference internal image-reference" href="_images/randomSpanningTree.png"><img alt="randomSpanningTree instance" src="_images/randomSpanningTree.png" style="width: 300px;" />
+</a>
 <figcaption>
 <p><span class="caption-number">Fig. 1.90 </span><span class="caption-text">Random spanning tree</span><a class="headerlink" href="#id259" title="Link to this image"></a></p>
 </figcaption>
@@ -9832,7 +9922,8 @@ dot -Grankdir=TB -Tpng rootedTree.dot -o rootedTree.png</p>
 </pre></div>
 </div>
 <figure class="align-center" id="id260">
-<a class="reference internal image-reference" href="_images/spanningForest.png"><img alt="Random spanning forest instance" src="_images/spanningForest.png" style="width: 350px;" /></a>
+<a class="reference internal image-reference" href="_images/spanningForest.png"><img alt="Random spanning forest instance" src="_images/spanningForest.png" style="width: 350px;" />
+</a>
 <figcaption>
 <p><span class="caption-number">Fig. 1.91 </span><span class="caption-text">Random spanning forest instance</span><a class="headerlink" href="#id260" title="Link to this image"></a></p>
 </figcaption>
@@ -9898,7 +9989,8 @@ dot -Grankdir=TB -Tpng rootedTree.dot -o rootedTree.png</p>
 </pre></div>
 </div>
 <figure class="align-center" id="bestdeterminedspanningtree">
-<a class="reference internal image-reference" href="_images/bestDeterminedSpanningTree.png"><img alt="Best determined spanning tree" src="_images/bestDeterminedSpanningTree.png" style="width: 350px;" /></a>
+<a class="reference internal image-reference" href="_images/bestDeterminedSpanningTree.png"><img alt="Best determined spanning tree" src="_images/bestDeterminedSpanningTree.png" style="width: 350px;" />
+</a>
 <figcaption>
 <p><span class="caption-number">Fig. 1.92 </span><span class="caption-text">Best determined spanning tree</span><a class="headerlink" href="#bestdeterminedspanningtree" title="Link to this image"></a></p>
 </figcaption>
@@ -10062,228 +10154,228 @@ dot -Grankdir=TB -Tpng rootedTree.dot -o rootedTree.png</p>
 <span id="endnotes-label"></span><h3><span class="section-number">1.8.2. </span>Endnotes<a class="headerlink" href="#endnotes" title="Link to this heading"></a></h3>
 </section>
 <aside class="footnote-list brackets">
-<aside class="footnote brackets" id="id184" role="note">
+<aside class="footnote brackets" id="id184" role="doc-footnote">
 <span class="label"><span class="fn-bracket">[</span>1<span class="fn-bracket">]</span></span>
 <span class="backrefs">(<a role="doc-backlink" href="#id3">1</a>,<a role="doc-backlink" href="#id7">2</a>,<a role="doc-backlink" href="#id22">3</a>,<a role="doc-backlink" href="#id49">4</a>,<a role="doc-backlink" href="#id68">5</a>,<a role="doc-backlink" href="#id153">6</a>)</span>
 <p>The <em>exportGraphViz</em> method is depending on drawing tools from <a class="reference external" href="https://graphviz.org/">graphviz</a>. On Linux Ubuntu or Debian you may try ‘sudo apt-get install graphviz’ to install them. There are ready <em>dmg</em> installers for Mac OSX.</p>
 </aside>
-<aside class="footnote brackets" id="id186" role="note">
+<aside class="footnote brackets" id="id186" role="doc-footnote">
 <span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id160">2</a><span class="fn-bracket">]</span></span>
 <p>Dependency: The <a class="reference internal" href="techDoc.html#digraphs.Digraph.automorphismGenerators" title="digraphs.Digraph.automorphismGenerators"><code class="xref py py-func docutils literal notranslate"><span class="pre">automorphismGenerators()</span></code></a> method uses the shell <code class="code docutils literal notranslate"><span class="pre">dreadnaut</span></code> command from the nauty software package. See <a class="reference external" href="https://www3.cs.stonybrook.edu/~algorith/implement/nauty/implement.shtml">https://www3.cs.stonybrook.edu/~algorith/implement/nauty/implement.shtml</a> . On Mac OS there exist dmg installers and on Ubuntu Linux or Debian, one may easily install it with <code class="code docutils literal notranslate"><span class="pre">...$</span> <span class="pre">sudo</span> <span class="pre">apt-get</span> <span class="pre">install</span> <span class="pre">nauty</span></code>.</p>
 </aside>
-<aside class="footnote brackets" id="id187" role="note">
+<aside class="footnote brackets" id="id187" role="doc-footnote">
 <span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id159">3</a><span class="fn-bracket">]</span></span>
 <p>The <code class="code docutils literal notranslate"><span class="pre">perrinMIS</span></code> shell command may be installed system wide with the command <code class="code docutils literal notranslate"><span class="pre">.../Digraph3$</span> <span class="pre">make</span> <span class="pre">installPerrin</span></code> from the main Digraph3 directory. It is stored by default into <code class="code docutils literal notranslate"><span class="pre">&lt;/usr/local/bin/&gt;</span></code>. This may be changed with the <code class="code docutils literal notranslate"><span class="pre">INSTALLDIR</span></code> flag. The command <code class="code docutils literal notranslate"><span class="pre">.../Digraph3$</span> <span class="pre">make</span> <span class="pre">installPerrinUser</span></code> installs it instead without sudo into the user’s private <code class="code docutils literal notranslate"><span class="pre">&lt;$Home/.bin&gt;</span></code> directory.</p>
 </aside>
-<aside class="footnote brackets" id="id188" role="note">
+<aside class="footnote brackets" id="id188" role="doc-footnote">
 <span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id181">4</a><span class="fn-bracket">]</span></span>
 <p><em>Wilson</em>’s algorithm uses <em>loop-erased random walks</em>. See <a class="reference external" href="https://en.wikipedia.org/wiki/Loop-erased_random_walk">https://en.wikipedia.org/wiki/Loop-erased_random_walk</a> .</p>
 </aside>
-<aside class="footnote brackets" id="id189" role="note">
+<aside class="footnote brackets" id="id189" role="doc-footnote">
 <span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id182">5</a><span class="fn-bracket">]</span></span>
 <p><em>Kruskal</em>’s algorithm is a <em>minimum-spanning-tree</em> algorithm which finds an edge of the least possible weight that connects any two trees in the forest.  See <a class="reference external" href="https://en.wikipedia.org/wiki/Kruskal%27s_algorithm">https://en.wikipedia.org/wiki/Kruskal%27s_algorithm</a> .</p>
 </aside>
-<aside class="footnote brackets" id="id190" role="note">
+<aside class="footnote brackets" id="id190" role="doc-footnote">
 <span class="label"><span class="fn-bracket">[</span>6<span class="fn-bracket">]</span></span>
 <span class="backrefs">(<a role="doc-backlink" href="#id137">1</a>,<a role="doc-backlink" href="#id139">2</a>)</span>
 <p>See <a class="reference external" href="https://cython.org/">https://cython.org/</a></p>
 </aside>
-<aside class="footnote brackets" id="id191" role="note">
+<aside class="footnote brackets" id="id191" role="doc-footnote">
 <span class="label"><span class="fn-bracket">[</span>7<span class="fn-bracket">]</span></span>
 <span class="backrefs">(<a role="doc-backlink" href="#id142">1</a>,<a role="doc-backlink" href="#id144">2</a>,<a role="doc-backlink" href="#id145">3</a>)</span>
 <p>See <a class="reference external" href="https://hpc.uni.lu/systems/iris/">https://hpc.uni.lu/systems/iris/</a></p>
 </aside>
-<aside class="footnote brackets" id="id192" role="note">
+<aside class="footnote brackets" id="id192" role="doc-footnote">
 <span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id143">8</a><span class="fn-bracket">]</span></span>
 <p>See <a class="reference external" href="https://hpc.uni.lu/systems/gaia/">https://hpc.uni.lu/systems/gaia/</a></p>
 </aside>
-<aside class="footnote brackets" id="id193" role="note">
+<aside class="footnote brackets" id="id193" role="doc-footnote">
 <span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id67">13</a><span class="fn-bracket">]</span></span>
 <p>The class of <em>self-codual</em> bipolar-valued digraphs consists of all <em>weakly asymmetric</em> digraphs, i.e. digraphs containing only <em>asymmetric</em> and/or <em>indeterminate</em> links. Limit cases consists of, on the one side, <em>full tournaments</em> with <em>indeterminate reflexive links</em>, and, on the other side, <em>fully indeterminate</em> digraphs. In this class, the <em>converse</em> (inverse ~ ) operator is indeed identical to the <em>dual</em> (negation - ) one.</p>
 </aside>
-<aside class="footnote brackets" id="id194" role="note">
+<aside class="footnote brackets" id="id194" role="doc-footnote">
 <span class="label"><span class="fn-bracket">[</span>14<span class="fn-bracket">]</span></span>
 <span class="backrefs">(<a role="doc-backlink" href="#id8">1</a>,<a role="doc-backlink" href="#id21">2</a>,<a role="doc-backlink" href="#id154">3</a>)</span>
 <p>Not to be confused with the <em>dual graph</em> of a plane graph <em>g</em> that has a vertex for each face of <em>g</em>. Here we mean the <em>less than</em> (strict converse) relation corresponding to a <em>greater or equal</em> relation, or the <em>less than or equal</em> relation corresponding to a (strict) <em>better than</em> relation.</p>
 </aside>
-<aside class="footnote brackets" id="id195" role="note">
+<aside class="footnote brackets" id="id195" role="doc-footnote">
 <span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id70">15</a><span class="fn-bracket">]</span></span>
 <p>The concept of <em>Condorcet</em> winner -a generalization of absolute majority winners- proposed by <em>Condorcet</em> in 1785, is an early historical example of <em>initial</em> digraph kernel (see the tutorial <a class="reference internal" href="pearls.html#kernel-tutorial-label"><span class="std std-ref">On computing digraph kernels</span></a>).</p>
 </aside>
-<aside class="footnote brackets" id="id196" role="note">
+<aside class="footnote brackets" id="id196" role="doc-footnote">
 <span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id72">16</a><span class="fn-bracket">]</span></span>
 <p>Discrete random variables with a given empirical probability law (here the polls) are provided in the <a class="reference internal" href="techDoc.html#module-randomNumbers" title="randomNumbers"><code class="xref py py-mod docutils literal notranslate"><span class="pre">randomNumbers</span></code></a> module by the <a class="reference internal" href="techDoc.html#randomNumbers.DiscreteRandomVariable" title="randomNumbers.DiscreteRandomVariable"><code class="xref py py-class docutils literal notranslate"><span class="pre">DiscreteRandomVariable</span></code></a> class.</p>
 </aside>
-<aside class="footnote brackets" id="id197" role="note">
+<aside class="footnote brackets" id="id197" role="doc-footnote">
 <span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id9">17</a><span class="fn-bracket">]</span></span>
 <p>Roy, B. <em>Transitivité et connexité.</em> C. R. Acad. Sci. Paris 249, 216-218, 1959. Warshall, S. <em>A Theorem on Boolean Matrices.</em> J. ACM 9, 11-12, 1962.</p>
 </aside>
-<aside class="footnote brackets" id="id198" role="note">
+<aside class="footnote brackets" id="id198" role="doc-footnote">
 <span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id168">18</a><span class="fn-bracket">]</span></span>
 <p>A Digraph3 <em>graphs.Graph</em> encoded file is available in the <code class="code docutils literal notranslate"><span class="pre">examples</span></code> directory of the Digraph3 software collection.</p>
 </aside>
-<aside class="footnote brackets" id="id199" role="note">
+<aside class="footnote brackets" id="id199" role="doc-footnote">
 <span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id89">19</a><span class="fn-bracket">]</span></span>
 <p>This case study is inspired by a <em>Multiple Criteria Decision Analysis</em> case study published in Eisenführ Fr., Langer Th., and Weber M., <em>Fallstudien zu rationalem Entscheiden</em>, Springer 2001, pp. 1-17.</p>
 </aside>
-<aside class="footnote brackets" id="id200" role="note">
+<aside class="footnote brackets" id="id200" role="doc-footnote">
 <span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id94">20</a><span class="fn-bracket">]</span></span>
 <p>Ganzeboom H.B.G, Treiman D.J. “Internationally Comparable Measures of Occupational Status for the 1988 International Standard Classification of Occupations”, <em>Social Science Research</em> 25, 201–239 (1996).</p>
 </aside>
-<aside class="footnote brackets" id="id201" role="note">
+<aside class="footnote brackets" id="id201" role="doc-footnote">
 <span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id93">21</a><span class="fn-bracket">]</span></span>
 <p>Alice’s performance tableau <code class="code docutils literal notranslate"><span class="pre">AliceChoice.py</span></code> is available in the <code class="code docutils literal notranslate"><span class="pre">examples</span></code> directory of the Digraph3 software collection.</p>
 </aside>
-<aside class="footnote brackets" id="id202" role="note">
+<aside class="footnote brackets" id="id202" role="doc-footnote">
 <span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id99">22</a><span class="fn-bracket">]</span></span>
 <p>See also the corresponding <a class="reference internal" href="pearls.html#bipolar-valued-likelihood-tutorial-label"><span class="std std-ref">Advanced Topic</span></a> in the Digraph3 documentation.</p>
 </aside>
-<aside class="footnote brackets" id="id203" role="note">
+<aside class="footnote brackets" id="id203" role="doc-footnote">
 <span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id95">23</a><span class="fn-bracket">]</span></span>
 <p>See the tutorial on <a class="reference internal" href="#ranking-tutorial-label"><span class="std std-ref">ranking with multiple incommensurable criteria</span></a>.</p>
 </aside>
-<aside class="footnote brackets" id="id204" role="note">
+<aside class="footnote brackets" id="id204" role="doc-footnote">
 <span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id97">24</a><span class="fn-bracket">]</span></span>
 <p>See also the <a class="reference internal" href="pearls.html#bipolar-valued-kernels-tutorial-label"><span class="std std-ref">Advanced Topic</span></a> about computing best choice membership characteristics in the Digraph3 documentation.</p>
 </aside>
-<aside class="footnote brackets" id="id205" role="note">
+<aside class="footnote brackets" id="id205" role="doc-footnote">
 <span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id100">25</a><span class="fn-bracket">]</span></span>
 <p>See also the corresponding <a class="reference internal" href="pearls.html#unopposed-outranking-tutorial-label"><span class="std std-ref">Advanced Topic</span></a> in the Digraph3 documentation.</p>
 </aside>
-<aside class="footnote brackets" id="id206" role="note">
+<aside class="footnote brackets" id="id206" role="doc-footnote">
 <span class="label"><span class="fn-bracket">[</span>26<span class="fn-bracket">]</span></span>
 <span class="backrefs">(<a role="doc-backlink" href="#id34">1</a>,<a role="doc-backlink" href="#id91">2</a>)</span>
 <p>A <em>coherent family</em> of performance criteria verifies: a) <em>Exhaustiveness</em>: No argument acceptable to all stakeholders can be put forward to justify a preference in favour of action <em>x</em> versus action <em>y</em>  when <em>x</em> and <em>y</em> have the same performance level on each of the criteria of the family; b) <em>Cohesiveness</em>: Stakeholders unanimously recognize that action <em>x</em> must be preferred to action <em>y</em> whenever the performance level of <em>x</em> is significantly better than that of <em>x</em> on one of the criteria of positive weight, performance levels of <em>x</em> and <em>y</em> being the same on each of the other criteria; c) <em>Nonredundancy</em>: One of the above requirements is violated if one of the criteria is left out from the family. <em>Source</em>: European Working Group “<em>Multicriteria Aid for Decisions</em>” Series 3, no1, Spring, 2000.</p>
 </aside>
-<aside class="footnote brackets" id="id207" role="note">
+<aside class="footnote brackets" id="id207" role="doc-footnote">
 <span class="label"><span class="fn-bracket">[</span>27<span class="fn-bracket">]</span></span>
 <span class="backrefs">(<a role="doc-backlink" href="#id96">1</a>,<a role="doc-backlink" href="#id113">2</a>)</span>
 <p>See also the corresponding <a class="reference internal" href="pearls.html#ordinalcorrelation-tutorial-label"><span class="std std-ref">Advanced Topic</span></a> in the Digraph3 documentation.</p>
 </aside>
-<aside class="footnote brackets" id="id208" role="note">
+<aside class="footnote brackets" id="id208" role="doc-footnote">
 <span class="label"><span class="fn-bracket">[</span>28<span class="fn-bracket">]</span></span>
 <span class="backrefs">(<a role="doc-backlink" href="#id115">1</a>,<a role="doc-backlink" href="#id118">2</a>)</span>
 <p>Ref: <em>Der Spiegel</em> 48/2004 p.181, Url: <a class="reference external" href="https://www.spiegel.de/thema/studentenspiegel/">https://www.spiegel.de/thema/studentenspiegel/</a> .</p>
 </aside>
-<aside class="footnote brackets" id="id209" role="note">
+<aside class="footnote brackets" id="id209" role="doc-footnote">
 <span class="label"><span class="fn-bracket">[</span>29<span class="fn-bracket">]</span></span>
 <span class="backrefs">(<a role="doc-backlink" href="#id116">1</a>,<a role="doc-backlink" href="#id117">2</a>,<a role="doc-backlink" href="#id121">3</a>,<a role="doc-backlink" href="#id122">4</a>,<a role="doc-backlink" href="#id123">5</a>)</span>
 <p>The methology guiding the <em>Spiegel</em> survey may be consulted in German <a class="reference external" href="_static/spiegelMethod.pdf">here</a> . A copy may be consulted in <em>examples</em> directory of the <em>Digraph3</em> ressources.</p>
 </aside>
-<aside class="footnote brackets" id="id210" role="note">
+<aside class="footnote brackets" id="id210" role="doc-footnote">
 <span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id125">30</a><span class="fn-bracket">]</span></span>
 <p>It would have been much more accurate to estimate such quantile limits from the individual qualitiy scores of all the nearly 50,000 surveyed students. But this data was not public.</p>
 </aside>
-<aside class="footnote brackets" id="id211" role="note">
+<aside class="footnote brackets" id="id211" role="doc-footnote">
 <span class="label"><span class="fn-bracket">[</span>31<span class="fn-bracket">]</span></span>
 <span class="backrefs">(<a role="doc-backlink" href="#id127">1</a>,<a role="doc-backlink" href="#id128">2</a>)</span>
 <p>Converted by a +1.0 shift and a 0.5 * 100 scale transform from a bipolar-valued credibility of +0.07 in [-1.0, +1.0] to a majority (in %) support.</p>
 </aside>
-<aside class="footnote brackets" id="id212" role="note">
+<aside class="footnote brackets" id="id212" role="doc-footnote">
 <span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id120">32</a><span class="fn-bracket">]</span></span>
 <p>The performance tableau <code class="code docutils literal notranslate"><span class="pre">studentenSpiegel04.py</span></code> is also available in the <code class="code docutils literal notranslate"><span class="pre">examples</span></code> directory of the Digraph3 software collection.</p>
 </aside>
-<aside class="footnote brackets" id="id213" role="note">
+<aside class="footnote brackets" id="id213" role="doc-footnote">
 <span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id124">34</a><span class="fn-bracket">]</span></span>
 <p>See the tutorial on <a class="reference internal" href="#ranking-tutorial-label"><span class="std std-ref">ranking with incommensurable performance criteria</span></a>.</p>
 </aside>
-<aside class="footnote brackets" id="id214" role="note">
+<aside class="footnote brackets" id="id214" role="doc-footnote">
 <span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id126">35</a><span class="fn-bracket">]</span></span>
 <p>See the advanced topic on <a class="reference internal" href="pearls.html#ordinalcorrelation-tutorial-label"><span class="std std-ref">the ordinal correlation of bipolar-valued digraphs</span></a>.</p>
 </aside>
-<aside class="footnote brackets" id="id215" role="note">
+<aside class="footnote brackets" id="id215" role="doc-footnote">
 <span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id103">36</a><span class="fn-bracket">]</span></span>
 <p><a class="reference external" href="https://www.timeshighereducation.com/world-university-rankings/2017/subject-ranking/computer-science#!/page/0/length/25/sort_by/rank/sort_order/asc/cols/scores">https://www.timeshighereducation.com/world-university-rankings/2017/subject-ranking/computer-science#!/page/0/length/25/sort_by/rank/sort_order/asc/cols/scores</a></p>
 </aside>
-<aside class="footnote brackets" id="id216" role="note">
+<aside class="footnote brackets" id="id216" role="doc-footnote">
 <span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id104">37</a><span class="fn-bracket">]</span></span>
 <p>The performance tableau <code class="code docutils literal notranslate"><span class="pre">the_cs_2016.py</span></code> is also available in the <code class="code docutils literal notranslate"><span class="pre">examples</span></code> directory of the Digraph3 software collection.</p>
 </aside>
-<aside class="footnote brackets" id="id217" role="note">
+<aside class="footnote brackets" id="id217" role="doc-footnote">
 <span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id107">38</a><span class="fn-bracket">]</span></span>
 <p>The author’s own Computer Science Dept at the <em>University of Luxembourg</em> was ranked on position 63 with an overall score of 58.0.</p>
 </aside>
-<aside class="footnote brackets" id="id218" role="note">
+<aside class="footnote brackets" id="id218" role="doc-footnote">
 <span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id105">39</a><span class="fn-bracket">]</span></span>
 <p><a class="reference external" href="https://www.timeshighereducation.com/sites/default/files/styles/article785xauto/public/wur_graphic_1.jpg?itok=XS6NcZfL">https://www.timeshighereducation.com/sites/default/files/styles/article785xauto/public/wur_graphic_1.jpg?itok=XS6NcZfL</a> gives some insight on the subject and significance of the actual performance criteria used for grading along each ranking objective.</p>
 </aside>
-<aside class="footnote brackets" id="id219" role="note">
+<aside class="footnote brackets" id="id219" role="doc-footnote">
 <span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id106">40</a><span class="fn-bracket">]</span></span>
 <p><a class="reference external" href="https://www.timeshighereducation.com/world-university-rankings/methodology-world-university-rankings-2016-2017">https://www.timeshighereducation.com/world-university-rankings/methodology-world-university-rankings-2016-2017</a></p>
 </aside>
-<aside class="footnote brackets" id="id220" role="note">
+<aside class="footnote brackets" id="id220" role="doc-footnote">
 <span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id112">41</a><span class="fn-bracket">]</span></span>
 <p>The reader might try other ranking rules, like <em>Copeland</em>’s, <em>Kohler</em>’s, <em>Tideman</em>’s rule or the iterated versions of the <em>NetFlows</em> and <em>Copeland</em>’s rule. Mind that the latter <em>ranking-by-choosing</em> rules are more complex.</p>
 </aside>
-<aside class="footnote brackets" id="id221" role="note">
+<aside class="footnote brackets" id="id221" role="doc-footnote">
 <span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id110">42</a><span class="fn-bracket">]</span></span>
 <p>In a social choice context, this potential double bind between voting profiles and election result, corresponds to voting manipulation strategies.</p>
 </aside>
-<aside class="footnote brackets" id="id222" role="note">
+<aside class="footnote brackets" id="id222" role="doc-footnote">
 <span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id77">43</a><span class="fn-bracket">]</span></span>
 <p><a class="reference internal" href="#gal-1962" id="id223"><span>[GAL-1962]</span></a></p>
 </aside>
-<aside class="footnote brackets" id="id224" role="note">
+<aside class="footnote brackets" id="id224" role="doc-footnote">
 <span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id79">44</a><span class="fn-bracket">]</span></span>
 <p>Our implementation is based on John Lekberg’s blog. See
 <a class="reference external" href="https://johnlekberg.com/blog/2020-08-22-stable-matching.html">https://johnlekberg.com/blog/2020-08-22-stable-matching.html</a></p>
 </aside>
-<aside class="footnote brackets" id="id225" role="note">
+<aside class="footnote brackets" id="id225" role="doc-footnote">
 <span class="label"><span class="fn-bracket">[</span>45<span class="fn-bracket">]</span></span>
 <span class="backrefs">(<a role="doc-backlink" href="#id76">1</a>,<a role="doc-backlink" href="#id78">2</a>,<a role="doc-backlink" href="#id80">3</a>)</span>
 <p>See <a class="reference external" href="https://en.wikipedia.org/wiki/Gale%E2%80%93Shapley_algorithm">https://en.wikipedia.org/wiki/Gale%E2%80%93Shapley_algorithm</a></p>
 </aside>
-<aside class="footnote brackets" id="id226" role="note">
+<aside class="footnote brackets" id="id226" role="doc-footnote">
 <span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id129">46</a><span class="fn-bracket">]</span></span>
 <p>The data is taken from Ph. Vincke, <em>Multicriteria Decision-Aid</em>, John Wiley &amp; Sons Ltd, Chichester UK 1992, p.33-35.</p>
 </aside>
-<aside class="footnote brackets" id="id227" role="note">
+<aside class="footnote brackets" id="id227" role="doc-footnote">
 <span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id86">47</a><span class="fn-bracket">]</span></span>
 <p>Integer sequence <a class="reference external" href="http://oeis.org/A001147">http://oeis.org/A001147</a></p>
 </aside>
-<aside class="footnote brackets" id="id228" role="note">
+<aside class="footnote brackets" id="id228" role="doc-footnote">
 <span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id85">48</a><span class="fn-bracket">]</span></span>
 <p>A perfect matching is a saturated matching, i.e. a maximal matching which leaves no vertice unconnected.</p>
 </aside>
-<aside class="footnote brackets" id="id229" role="note">
+<aside class="footnote brackets" id="id229" role="doc-footnote">
 <span class="label"><span class="fn-bracket">[</span>49<span class="fn-bracket">]</span></span>
 <span class="backrefs">(<a role="doc-backlink" href="#id75">1</a>,<a role="doc-backlink" href="#id81">2</a>,<a role="doc-backlink" href="#id82">3</a>,<a role="doc-backlink" href="#id83">4</a>)</span>
 <p>The stored versions <em>lvAx.py</em>, <em>lvBx.py</em>, <em>apA1.py</em> and <em>apB1.py</em> of the examples of reciprocal randdom voting profiles discussed in the intergroup pairing tutorial may be found in the <em>examples</em> directory of the <em>Digraph3</em> resources.</p>
 </aside>
-<aside class="footnote brackets" id="id230" role="note">
+<aside class="footnote brackets" id="id230" role="doc-footnote">
 <span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id87">50</a><span class="fn-bracket">]</span></span>
 <p>The inter- and intragroup pairing solvers solely maximise the overall correlation with the individual pairing preferences. It may happen that a slightly lesser overall correlation result comes with a considerable lower standard deviation. Is this pairing solution than fairer than the one with a higher overall correlation? Asked more generally: is a society with highest global welfare but uneven wealth distribution a fairer society than the one showing less global welfare but with a considerable less uneven wealth distribution?</p>
 </aside>
-<aside class="footnote brackets" id="id231" role="note">
+<aside class="footnote brackets" id="id231" role="doc-footnote">
 <span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id135">51</a><span class="fn-bracket">]</span></span>
 <p>See <a class="reference external" href="https://britishgeologicalsurvey.github.io/science/python-forking-vs-spawn/">https://britishgeologicalsurvey.github.io/science/python-forking-vs-spawn/</a></p>
 </aside>
-<aside class="footnote brackets" id="id232" role="note">
+<aside class="footnote brackets" id="id232" role="doc-footnote">
 <span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id134">52</a><span class="fn-bracket">]</span></span>
 <p>See the documentation of the <a class="reference external" href="https://docs.python.org/3/library/multiprocessing.html#module-multiprocessing" title="(in Python v3.13)"><code class="xref py py-mod docutils literal notranslate"><span class="pre">multiprocessing</span></code></a> module</p>
 </aside>
-<aside class="footnote brackets" id="id233" role="note">
+<aside class="footnote brackets" id="id233" role="doc-footnote">
 <span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id133">53</a><span class="fn-bracket">]</span></span>
 <p>When tackling matrix computations it may be possible to further accelerate the computations with a potential GPU. The interested reader may find in the <em>cuda</em> directory in the Digraph3 resources an experimental <em>cudaDigraphs.py</em> module which uses <em>numpy</em> and NVIDIA GPU resources for measuring the speeding up of the element wise computation of the dual, converse and codual transforms and the fusion operation for large (order &gt;= 10000) <code class="code docutils literal notranslate"><span class="pre">cIntegerOurankingDigraphs.IntegerBipolarOutrankingDigraph</span></code> objects.</p>
 </aside>
-<aside class="footnote brackets" id="id234" role="note">
+<aside class="footnote brackets" id="id234" role="doc-footnote">
 <span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id146">54</a><span class="fn-bracket">]</span></span>
 <p>The kind support of the <em>Faculty of Science Technology and Medecine</em> of the <em>University of Luxembourg</em> (<a class="reference external" href="https://www.uni.lu/fstm-en/">https://www.uni.lu/fstm-en/</a>) and of <em>LUXPROVIDE</em> (<a class="reference external" href="https://www.luxprovide.lu/">https://www.luxprovide.lu/</a>) is gratefully acknowledged.</p>
 </aside>
-<aside class="footnote brackets" id="id235" role="note">
+<aside class="footnote brackets" id="id235" role="doc-footnote">
 <span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id147">55</a><span class="fn-bracket">]</span></span>
 <p>The acquisition and operation of the EuroHPC supercomputer is funded jointly by the EuroHPC Joint Undertaking, through the European Union’s Connecting Europe Facility and the Horizon 2020 research and innovation programme, as well as the Grand Duché du Luxembourg.</p>
 </aside>
-<aside class="footnote brackets" id="id236" role="note">
+<aside class="footnote brackets" id="id236" role="doc-footnote">
 <span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id141">56</a><span class="fn-bracket">]</span></span>
 <p><a class="reference external" href="https://www.wortmann.de/">https://www.wortmann.de/</a></p>
 </aside>
-<aside class="footnote brackets" id="id237" role="note">
+<aside class="footnote brackets" id="id237" role="doc-footnote">
 <span class="label"><span class="fn-bracket">[</span>57<span class="fn-bracket">]</span></span>
 <span class="backrefs">(<a role="doc-backlink" href="#id148">1</a>,<a role="doc-backlink" href="#id150">2</a>)</span>
 <p>The sources of the cythonized Digraph3 modules (with <em>.pyx</em> suffix) may be found in the <em>cython</em> directory of the Digraph3 resources.</p>
 </aside>
-<aside class="footnote brackets" id="id238" role="note">
+<aside class="footnote brackets" id="id238" role="doc-footnote">
 <span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id149">58</a><span class="fn-bracket">]</span></span>
 <p>See the <a class="reference internal" href="#three-objectives-performance-tableau-label"><span class="std std-ref">tutorial</span></a> on generating random three-objectives performance tableaux.</p>
 </aside>
@@ -10303,7 +10395,7 @@ dot -Grankdir=TB -Tpng rootedTree.dot -o rootedTree.png</p>
 
   <div role="contentinfo">
     <p>&#169; Copyright 2012-2025, Raymond Bisdorff.
-      <span class="lastupdated">Last updated on Feb 17, 2025.
+      <span class="lastupdated">Last updated on Feb 21, 2025.
       </span></p>
   </div>
 

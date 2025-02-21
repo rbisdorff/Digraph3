@@ -2834,6 +2834,23 @@ The correlation +0.7585 corresponds, in the example given here, again to the uni
 Efficiency of the Bachet ranking rule settings
 ..............................................
 
+We may check the quality of the latter *ba3.bachetRanking* result with a corresponding performance heatmap statistic.
+
+.. code-block:: pycon
+
+   >>> g.showHTMLPerformanceHeatmap(Correlations=True,
+   ...            actionsList=ba3.bachetRanking,colorLevels=5)
+
+.. Figure:: BachetHeatmap.png
+   :name: bachetHeatmap
+   :alt: Bachet ranked heatmap
+   :width: 400 px
+   :align: center
+
+   Bachet randomized 100 rule ranked performance heatmap view
+
+In :numref:`bachetHeatmap` we may observe that the *ba3.bachetRanking* is positively correlated to six out of seven performance criteria with a mean correlation of +0.213 and a positive ranking fairness (+0.06).  With four out of seven performance grades in the highest quintile [80% - 100%], action *a2* is convincingly first-ranked. Similarly, action *a1*, with only one performance in the fourth quintile [60%-80%] shows the weakest performances and is last-ranked. It is worthwhile noticing that action *a9* is actually ranked before actions *a6* and *a8* despite an apparent lesser performance profile. This is due to both the considerable negative performance differences (-85.89 and -87.20) observed on criterion *g2* triggering in fact a polarised outranking situation in favour of action *a9*.
+
 When comparing now the ranking results obtained from *single*, *best-qualified* and *randomized=100* Bachet rule settings with the corresponding Copeland rankings obtained from 1000 random Cost-Benefit performance tableaux of order 20 and involving 13 performance criteria, we may observe the following correlation statistics.
 
      ==================  ==================  ==================  ==================
@@ -2849,8 +2866,8 @@ When comparing now the ranking results obtained from *single*, *best-qualified* 
       Max.   : +0.9047    Max.   : +0.9047    Max.   : +0.9460    Max.   : +0.9541  
      ==================  ==================  ==================  ==================
 
-The statistical figures confirm the expected noticeable performance enhancement one obtains first with the *BestQualified=True* and secondly even more with the *randomized=100* settings of the Bachet ranking rule. The latter setting renders in fact ranking results of a correlation quality very similar to the Copeland rule. Yet, computing ranking results just from the given ordering of the *self.actions* dictionary and its reversed ordering may render, with a first quartile correlation of +0.6678 and a median correlation of +0.7282, already satisfactory ranking results in most cases. It is finally remarquable that even the single actions ordering setting shows already, with a first quartile correlation of +0.6089 and a median correlation of +0.6854, quite acceptable results.   
-
+The statistical figures confirm the expected noticeable performance enhancement one obtains first with the *BestQualified=True* and secondly even more with the *randomized=100* settings of the Bachet ranking rule. The latter setting renders in fact ranking results of a correlation quality very similar to the Copeland rule. Yet, computing ranking results just from the given ordering of the *self.actions* dictionary and its reversed ordering may render, with a first quartile correlation of +0.6678 and a median correlation of +0.7282, already satisfactory ranking results in most cases. It is finally remarquable that even the single actions ordering setting shows already, with a first quartile correlation of +0.6089 and a median correlation of +0.6854, quite acceptable results.
+   
 Mind finally that the Bachet ranking rule, even of comparable complexity :math:`O(n^2)` as the Copeland and NetFlows rules, is not scalable to large performance tableaux with hundreds of performance records. The integer value range of Bachet numbers gets indeed quickly huge with the order of the given outranking digraph. The :py:class:`~linearOrders.BachetRanking` constructor provides therefore an *orderLimit* parameter set by default to 50, which allows to represent integer values in the huge range +- 358948993845926294385124.
 
 .. code-block:: pycon
