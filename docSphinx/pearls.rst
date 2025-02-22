@@ -3845,13 +3845,13 @@ Among the six MISs contained in this random digraph (see above Lines 3-8) we dis
    A random digraph oriented by best covering initial and
    best covered terminal kernel
 
-In algorithmic decision theory, initial and terminal prekernels may provide convincing best, resp. worst, choice recommendations (see tutorial on :ref:`computing a best choice recommendation <Rubis-Tutorial-label>`).
+In algorithmic decision theory, initial and terminal prekernels may provide convincing first, resp. last, choice recommendations (see tutorial on :ref:`computing a best choice recommendation <Rubis-Tutorial-label>`).
 
 
-Computing good and bad choice recommendations
-.............................................
+Computing first and last choice recommendations
+...............................................
 
-To illustrate this idea, let us finally compute good and bad choice recommendations in the following random bipolar-valued **outranking** digraph.
+To illustrate this idea, let us finally compute first and last choice recommendations in the following random bipolar-valued **outranking** digraph.
 
 .. code-block:: pycon
    :linenos:
@@ -3916,12 +3916,12 @@ All decision actions appear strictly better performing than action 'a7'. We call
        absorbency   :  16.28
        covered      :  0.800
 
-With such unique disjoint initial and terminal prekernels (see Line 4 and 10), the given digraph instance is hence clearly *lateralized*. Indeed, these initial and terminal prekernels of the codual outranking digraph reveal best, resp. worst, choice recommendations one may formulate on the basis of a given outranking digraph instance.
+With such unique disjoint initial and terminal prekernels (see Line 4 and 10), the given digraph instance is hence clearly *lateralized*. Indeed, these initial and terminal prekernels of the codual outranking digraph reveal first, resp. last, choice recommendations one may formulate on the basis of a given outranking digraph instance.
 
 .. code-block:: pycon
    :linenos:
 
-   >>> g.showBestChoiceRecommendation()
+   >>> g.showFirstChoiceRecommendation()
     ***********************
     Rubis best choice recommendation(s) (BCR)
      (in decreasing order of determinateness)   

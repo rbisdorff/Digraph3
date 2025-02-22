@@ -141,7 +141,7 @@
 <li class="toctree-l4"><a class="reference internal" href="#what-is-a-graph-kernel">3.3.4.1. What is a graph kernel ?</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#initial-and-terminal-kernels">3.3.4.2. Initial and terminal kernels</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#kernels-in-lateralized-digraphs">3.3.4.3. Kernels in lateralized digraphs</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#computing-good-and-bad-choice-recommendations">3.3.4.4. Computing good and bad choice recommendations</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#computing-first-and-last-choice-recommendations">3.3.4.4. Computing first and last choice recommendations</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#tractability">3.3.4.5. Tractability</a></li>
 </ul>
 </li>
@@ -2736,7 +2736,7 @@ confidence level <em>alpha</em> %, when</p>
 </section>
 <section id="the-bachet-ranking-rule-a-new-ranking-by-scoring-method">
 <h4><a class="toc-backref" href="#id140" role="doc-backlink"><span class="section-number">3.3.1.3. </span>The Bachet ranking rule, a new ranking-by-scoring method</a><a class="headerlink" href="#the-bachet-ranking-rule-a-new-ranking-by-scoring-method" title="Link to this heading"></a></h4>
-<p>The <a class="reference internal" href="techDoc.html#module-linearOrders" title="linearOrders"><code class="xref py py-mod docutils literal notranslate"><span class="pre">linearOrders</span></code></a> module provides now a <code class="xref py py-class docutils literal notranslate"><span class="pre">BachetRanking</span></code> class implementing a ranking rule based on the Bachet fitness scores modelled by the polarised version of the relation table of a given outranking digraph.</p>
+<p>The <a class="reference internal" href="techDoc.html#module-linearOrders" title="linearOrders"><code class="xref py py-mod docutils literal notranslate"><span class="pre">linearOrders</span></code></a> module provides now a <a class="reference internal" href="techDoc.html#linearOrders.BachetRanking" title="linearOrders.BachetRanking"><code class="xref py py-class docutils literal notranslate"><span class="pre">BachetRanking</span></code></a> class implementing a ranking rule based on the Bachet fitness scores modelled by the polarised version of the relation table of a given outranking digraph.</p>
 <div class="highlight-pycon notranslate"><div class="highlight"><pre><span></span><span class="linenos"> 1</span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">linearOrders</span> <span class="kn">import</span> <span class="n">BachetRanking</span>
 <span class="linenos"> 2</span><span class="gp">&gt;&gt;&gt; </span><span class="n">ba</span> <span class="o">=</span> <span class="n">BachetRanking</span><span class="p">(</span><span class="n">g</span><span class="p">)</span>
 <span class="linenos"> 3</span><span class="gp">&gt;&gt;&gt; </span><span class="n">ba</span>
@@ -2800,7 +2800,7 @@ confidence level <em>alpha</em> %, when</p>
 </pre></div>
 </div>
 </div>
-<p>It appears hence to be opportune to compute a first Bachet ranking result with the given order of the <em>self.actions</em> atribute and a second one with the corresponding reversed ordering. The best correlated of both ranking results is eventually returned. The <code class="xref py py-class docutils literal notranslate"><span class="pre">BachetRanking</span></code> class provides therefore the <em>BestQualified</em> parameter set by default to <em>True</em> (see below <a class="hxr-hoverxref hxr-tooltip reference internal" href="#optimisingbachet"><span class="std std-numref">Listing 3.38</span></a> Lines 5 and 21). Computing the reversed version of the Bachet rule is indeed computationally easy as it just requires to reverse the previously used Bachet vectors, a method directly provided by the <a class="reference internal" href="techDoc.html#arithmetics.BachetNumber" title="arithmetics.BachetNumber"><code class="xref py py-mod docutils literal notranslate"><span class="pre">BachetNumber</span></code></a> class.</p>
+<p>It appears hence to be opportune to compute a first Bachet ranking result with the given order of the <em>self.actions</em> atribute and a second one with the corresponding reversed ordering. The best correlated of both ranking results is eventually returned. The <a class="reference internal" href="techDoc.html#linearOrders.BachetRanking" title="linearOrders.BachetRanking"><code class="xref py py-class docutils literal notranslate"><span class="pre">BachetRanking</span></code></a> class provides therefore the <em>BestQualified</em> parameter set by default to <em>True</em> (see below <a class="hxr-hoverxref hxr-tooltip reference internal" href="#optimisingbachet"><span class="std std-numref">Listing 3.38</span></a> Lines 5 and 21). Computing the reversed version of the Bachet rule is indeed computationally easy as it just requires to reverse the previously used Bachet vectors, a method directly provided by the <a class="reference internal" href="techDoc.html#arithmetics.BachetNumber" title="arithmetics.BachetNumber"><code class="xref py py-mod docutils literal notranslate"><span class="pre">BachetNumber</span></code></a> class.</p>
 <p>Yet, when the ranking result remains apparently only weakly correlated with the given outranking relation, as we may notice in this second example of random outranking digraph of order 9 (see <a class="hxr-hoverxref hxr-tooltip reference internal" href="#optimisingbachet"><span class="std std-numref">Listing 3.38</span></a>  Line 35 below), it is recommended to set the class constructor provided <em>randomized</em> parameter (default=0) to a positive integer <em>n</em>. In this case, <em>n</em> random orderings of the decision actions with their reversed versions will be generated in order to compute potentially diverse Bachet ranking results. The best correlated ranking will eventually be returned (see Lines 37 and 51 below).</p>
 <div class="literal-block-wrapper docutils container" id="optimisingbachet">
 <div class="code-block-caption"><span class="caption-number">Listing 3.38 </span><span class="caption-text">Optimising the Bachet ranking result</span><a class="headerlink" href="#optimisingbachet" title="Link to this code"></a></div>
@@ -2923,7 +2923,7 @@ confidence level <em>alpha</em> %, when</p>
 </table>
 </div></blockquote>
 <p>The statistical figures confirm the expected noticeable performance enhancement one obtains first with the <em>BestQualified=True</em> and secondly even more with the <em>randomized=100</em> settings of the Bachet ranking rule. The latter setting renders in fact ranking results of a correlation quality very similar to the Copeland rule. Yet, computing ranking results just from the given ordering of the <em>self.actions</em> dictionary and its reversed ordering may render, with a first quartile correlation of +0.6678 and a median correlation of +0.7282, already satisfactory ranking results in most cases. It is finally remarquable that even the single actions ordering setting shows already, with a first quartile correlation of +0.6089 and a median correlation of +0.6854, quite acceptable results.</p>
-<p>Mind finally that the Bachet ranking rule, even of comparable complexity <img class="math" src="_images/math/cb487c73415b93656e35ddcbb45a04f8f8ee33fa.png" alt="O(n^2)"/> as the Copeland and NetFlows rules, is not scalable to large performance tableaux with hundreds of performance records. The integer value range of Bachet numbers gets indeed quickly huge with the order of the given outranking digraph. The <code class="xref py py-class docutils literal notranslate"><span class="pre">BachetRanking</span></code> constructor provides therefore an <em>orderLimit</em> parameter set by default to 50, which allows to represent integer values in the huge range +- 358948993845926294385124.</p>
+<p>Mind finally that the Bachet ranking rule, even of comparable complexity <img class="math" src="_images/math/cb487c73415b93656e35ddcbb45a04f8f8ee33fa.png" alt="O(n^2)"/> as the Copeland and NetFlows rules, is not scalable to large performance tableaux with hundreds of performance records. The integer value range of Bachet numbers gets indeed quickly huge with the order of the given outranking digraph. The <a class="reference internal" href="techDoc.html#linearOrders.BachetRanking" title="linearOrders.BachetRanking"><code class="xref py py-class docutils literal notranslate"><span class="pre">BachetRanking</span></code></a> constructor provides therefore an <em>orderLimit</em> parameter set by default to 50, which allows to represent integer values in the huge range +- 358948993845926294385124.</p>
 <div class="highlight-pycon notranslate"><div class="highlight"><pre><span></span><span class="linenos">1</span><span class="gp">&gt;&gt;&gt; </span><span class="n">v</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">50</span><span class="p">)]</span>
 <span class="linenos">2</span><span class="gp">&gt;&gt;&gt; </span><span class="n">n</span> <span class="o">=</span> <span class="n">BachetNumber</span><span class="p">(</span><span class="n">vector</span><span class="o">=</span><span class="n">v</span><span class="p">)</span>
 <span class="linenos">3</span><span class="gp">&gt;&gt;&gt; </span><span class="n">n</span><span class="o">.</span><span class="n">value</span><span class="p">()</span>
@@ -3344,7 +3344,7 @@ heat map above (see <a class="hxr-hoverxref hxr-tooltip reference internal" href
 <li><p><a class="reference internal" href="#what-is-a-graph-kernel" id="id147">What is a graph kernel ?</a></p></li>
 <li><p><a class="reference internal" href="#initial-and-terminal-kernels" id="id148">Initial and terminal kernels</a></p></li>
 <li><p><a class="reference internal" href="#kernels-in-lateralized-digraphs" id="id149">Kernels in lateralized digraphs</a></p></li>
-<li><p><a class="reference internal" href="#computing-good-and-bad-choice-recommendations" id="id150">Computing good and bad choice recommendations</a></p></li>
+<li><p><a class="reference internal" href="#computing-first-and-last-choice-recommendations" id="id150">Computing first and last choice recommendations</a></p></li>
 <li><p><a class="reference internal" href="#tractability" id="id151">Tractability</a></p></li>
 </ul>
 </nav>
@@ -3746,11 +3746,11 @@ instance (see <a class="hxr-hoverxref hxr-tooltip reference internal" href="#ran
 best covered terminal kernel</span><a class="headerlink" href="#orientedlaterality" title="Link to this image"></a></p>
 </figcaption>
 </figure>
-<p>In algorithmic decision theory, initial and terminal prekernels may provide convincing best, resp. worst, choice recommendations (see tutorial on <a class="reference internal" href="tutorial.html#rubis-tutorial-label"><span class="std std-ref">computing a best choice recommendation</span></a>).</p>
+<p>In algorithmic decision theory, initial and terminal prekernels may provide convincing first, resp. last, choice recommendations (see tutorial on <a class="reference internal" href="tutorial.html#rubis-tutorial-label"><span class="std std-ref">computing a best choice recommendation</span></a>).</p>
 </section>
-<section id="computing-good-and-bad-choice-recommendations">
-<h4><a class="toc-backref" href="#id150" role="doc-backlink"><span class="section-number">3.3.4.4. </span>Computing good and bad choice recommendations</a><a class="headerlink" href="#computing-good-and-bad-choice-recommendations" title="Link to this heading"></a></h4>
-<p>To illustrate this idea, let us finally compute good and bad choice recommendations in the following random bipolar-valued <strong>outranking</strong> digraph.</p>
+<section id="computing-first-and-last-choice-recommendations">
+<h4><a class="toc-backref" href="#id150" role="doc-backlink"><span class="section-number">3.3.4.4. </span>Computing first and last choice recommendations</a><a class="headerlink" href="#computing-first-and-last-choice-recommendations" title="Link to this heading"></a></h4>
+<p>To illustrate this idea, let us finally compute first and last choice recommendations in the following random bipolar-valued <strong>outranking</strong> digraph.</p>
 <div class="highlight-pycon notranslate"><div class="highlight"><pre><span></span><span class="linenos"> 1</span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">outrankingDigraphs</span> <span class="kn">import</span> <span class="n">RandomBipolarOutrankingDigraph</span>
 <span class="linenos"> 2</span><span class="gp">&gt;&gt;&gt; </span><span class="n">g</span> <span class="o">=</span> <span class="n">RandomBipolarOutrankingDigraph</span><span class="p">(</span><span class="n">seed</span><span class="o">=</span><span class="mi">5</span><span class="p">)</span>
 <span class="linenos"> 3</span><span class="gp">&gt;&gt;&gt; </span><span class="n">g</span>
@@ -3804,8 +3804,8 @@ best covered terminal kernel</span><a class="headerlink" href="#orientedlaterali
 <span class="linenos">14</span><span class="go">    covered      :  0.800</span>
 </pre></div>
 </div>
-<p>With such unique disjoint initial and terminal prekernels (see Line 4 and 10), the given digraph instance is hence clearly <em>lateralized</em>. Indeed, these initial and terminal prekernels of the codual outranking digraph reveal best, resp. worst, choice recommendations one may formulate on the basis of a given outranking digraph instance.</p>
-<div class="highlight-pycon notranslate"><div class="highlight"><pre><span></span><span class="linenos"> 1</span><span class="gp">&gt;&gt;&gt; </span><span class="n">g</span><span class="o">.</span><span class="n">showBestChoiceRecommendation</span><span class="p">()</span>
+<p>With such unique disjoint initial and terminal prekernels (see Line 4 and 10), the given digraph instance is hence clearly <em>lateralized</em>. Indeed, these initial and terminal prekernels of the codual outranking digraph reveal first, resp. last, choice recommendations one may formulate on the basis of a given outranking digraph instance.</p>
+<div class="highlight-pycon notranslate"><div class="highlight"><pre><span></span><span class="linenos"> 1</span><span class="gp">&gt;&gt;&gt; </span><span class="n">g</span><span class="o">.</span><span class="n">showFirstChoiceRecommendation</span><span class="p">()</span>
 <span class="linenos"> 2</span><span class="go"> ***********************</span>
 <span class="linenos"> 3</span><span class="go"> Rubis best choice recommendation(s) (BCR)</span>
 <span class="linenos"> 4</span><span class="go">  (in decreasing order of determinateness)</span>
@@ -5023,7 +5023,7 @@ Technologies</em>, Aachen, September 8-11, 1997}, pp 97–103.</p>
 
   <div role="contentinfo">
     <p>&#169; Copyright 2012-2025, Raymond Bisdorff.
-      <span class="lastupdated">Last updated on Feb 21, 2025.
+      <span class="lastupdated">Last updated on Feb 22, 2025.
       </span></p>
   </div>
 
