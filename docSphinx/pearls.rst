@@ -2728,9 +2728,17 @@ The class delivers as usual a ranking (*self.bachetRanking*) and a corresponding
 
 Note that, like the *Copeland* and the *NetFlows* ranking rules, the *Bachet* ranking rule is actually *invariant* under the *codual* transform and the :py:class:`~linearOrdres.BachetRanking` constructor works by default on the corresponding strict outranking digraph (*CoDual=True*). The *Bachet* ranking rule is furthermore, like the *Copeland* rule, also *Condorcet consistent*, i.e. when the polarised strict outranking digraph models a crisp linear relation, its *Bachet* ranking result will be consistent with this linear outranking relation.
 
-Mind however that a base 3 sbits based numbering system is a *positional numeral system*, implying that the *Bachet* ranking scores, as noticed before, depend essentially on the very ordering of the rows and columns of the outranking digraph's *self.relation* attribute.
+Mind however that a base 3 sbits based numbering system is a *positional numeral system*, implying that the *Bachet* ranking scores, as noticed before, depend essentially on the very ordering of the rows and columns of the outranking digraph's *self.relation* attribute when the relation shows a low transitivity degree. However, when the digraph is actually transitive, the *Bachet* ranking scores will render a stable preorder independently of the ordering of the rows and columns of the *self.relation* attribute. This attractive property represents the best argument in favour of the *Bachet* ranking rule. 
 
-When measuring now the quality of *Bachet* rankings obtained by operating the *Bachet* rule on each one of all the potential 24 permutations of the four *self.actions* keys ['a1', 'a2', 'a3', 'a4'], we may observe below in :numref:`BachetPerms` four different levels of correlation: +0.7950 (8), +0.6890 (3), +0.6113(3) and +0.5265 (10). The first correlation correspond to eight ['a4', 'a3', 'a2', 'a1'] ranking results, the second to three ['a4', 'a1', 'a3', 'a2'], the third to three ['a4', 'a2', 'a3', 'a1'], and the last to ten ['a4', 'a3', 'a1', 'a2'] ranking results. In 8 out of 12 cases, the reversed actions list delivers the highest possible correlation +0.7950 (see Lines 6-7 and 24-25).
+The transitivity degree of our random outranking digraph *g*, generated above in :numref:`examplesBachet` Line 4, amounts for instance to 0.833. 
+
+.. code-block:: pycon
+   :linenos:
+
+   >>> print('Transitivity degree: %.4f' % (g.computeTransitivityDegree())
+   Transitivity degree: 0.8333
+    
+When we reconsider digraph *g*'s relation table, we may indeed notice that 'a1' outranks 'a3', 'a3' outranks 'a2', but 'a1' does not outrank 'a2' (see :numref:`examplesBachet` Lines 12-15). When measuring now the quality of *Bachet* rankings obtained by operating the *Bachet* rule on each one of all the potential 24 permutations of the four *self.actions* keys ['a1', 'a2', 'a3', 'a4'], we may observe below in :numref:`BachetPerms` four different levels of correlation: +0.7950 (8), +0.6890 (3), +0.6113(3) and +0.5265 (10). The first correlation corresponds to eight ['a4', 'a3', 'a2', 'a1'] ranking results, the second to three ['a4', 'a1', 'a3', 'a2'], the third to three ['a4', 'a2', 'a3', 'a1'], and the last to ten ['a4', 'a3', 'a1', 'a2'] ranking results. In 8 out of 12 cases, the reversed actions list delivers the highest possible correlation +0.7950 (see Lines 6-7 and 24-25).
 
 .. code-block:: pycon
    :linenos:		
@@ -2770,15 +2778,17 @@ When measuring now the quality of *Bachet* rankings obtained by operating the *B
      
 It appears hence to be opportune to compute a first *Bachet* ranking result with the given order of the *self.actions* atribute and a second one with the corresponding reversed ordering. The best correlated of both ranking results is eventually returned. The :py:class:`~linearOrders.BachetRanking` class provides therefore the *BestQualified* parameter set by default to *True* (see below :numref:`optimisingBachet` Lines 5 and 21). Computing the reversed version of the *Bachet* rule is indeed computationally easy as it just requires to reverse the previously used *Bachet* vectors, a method directly provided by the :py:mod:`~arithmetics.BachetNumber` class. 
 
-Yet, when the ranking result remains apparently only weakly correlated with the given outranking relation, as we may notice in this second example of random outranking digraph of order 9 (see :numref:`optimisingBachet`  Line 35 below), it is recommended to set the class constructor provided *randomized* parameter (default=0) to a positive integer *n*. In this case, *n* random orderings of the decision actions with their reversed versions will be generated in order to compute potentially diverse *Bachet* ranking results. The best correlated ranking will eventually be returned (see Lines 37 and 51 below).
+Yet, when observing a low transitivity degree and the ranking result remains apparently only weakly correlated with the given outranking relation, as we may notice in this second example of random outranking digraph of order 9 (see :numref:`optimisingBachet` Lines 4, 21 and 37 below), it is recommended to set the class constructor provided *randomized* parameter (default=0) to a positive integer *n*. In this case, *n* random orderings of the decision actions with their reversed versions will be generated in order to compute potentially diverse *Bachet* ranking results. The best correlated ranking will eventually be returned (see Lines 39 and 53 below).
 
 .. code-block:: pycon
    :caption: Optimising the *Bachet* ranking result
    :name: optimisingBachet
-   :emphasize-lines: 5,19,21,35,37,51
+   :emphasize-lines: 3-4,7,21,23,37,39,53
 
    >>> from outrankingDigraphs import RandomBipolarOutrankingDigraph
    >>> g = RandomBipolarOutrankingDigraph(numberOfActions=9,seed=1)
+   >>> print('Transitivity degree: %.4f' % (g.computeTransitivityDegree()))
+    Transitivity degree: 0.6806
    >>> from linearOrders import BachetRanking
     *---- solely given ordering of the actions ---*')
    >>> ba1 = BachetRanking(g,BestQualified=False)
@@ -2829,7 +2839,7 @@ Yet, when the ranking result remains apparently only weakly correlated with the 
    >>> g.computeRankingCorrelation(ba3.bachetRanking)
     {'correlation': +0.7585, 'determination': 0.4086}
 
-The correlation +0.7585 corresponds, in the example given here, again to the unique optimal *Kemeny* ranking ['a2', 'a5', 'a9', 'a6', 'a8', 'a4', 'a3', 'a7', 'a1']. It is hence the highest possible correlation one may obtain.
+The correlation +0.7585 above corresponds, in the example given here, again to the unique optimal *Kemeny* ranking ['a2', 'a5', 'a9', 'a6', 'a8', 'a4', 'a3', 'a7', 'a1']. It is hence the highest possible correlation one may obtain.
 
 Efficiency of the Bachet ranking rule settings
 ..............................................

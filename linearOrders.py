@@ -1300,7 +1300,7 @@ class BachetRanking(LinearOrder):
     
     .. note::
 
-       Mind that the Bachet numbering system is a positional {-1,0,1} numeral system that is isomorphic to the {0,1,2} base 3 numeral system. A Bachet ranking result is therefore depending on the very ordering of the rows and columns of the *other.relation* attribute. It is hence recommended (*BestQualified=True* setting by default) to compute a first Bachet ranking result with the given order of the *other.actions* atribute and a second one with the reversed order. The best qualified of both ranking results is eventually returned.
+       Mind that the Bachet numbering system is a positional {-1,0,1} numeral system that is isomorphic to the {0,1,2} base 3 numeral system. A Bachet ranking result is therefore depending on the very ordering of the rows and columns of the *other.relation* attribute when there is a lack of transitivity observed in the relation. It is hence recommended (*BestQualified=True* setting by default) to compute a first Bachet ranking result with the given order of the *other.actions* atribute and a second one with the reversed order. The best qualified of both ranking results is eventually returned.
 
        Mind also that the integer value range of Bachet numbers gets quickly huge with the length of the given row and column chracteristic vectors. The digraph *orderLimit* parameter is therefore set by default to 50, allowing to tackle integer values in the huge integer range +-358948993845926294385124. When there is need to tackle digraphs of larger order, this *orderLimit* parameter may be adjusted.
 
@@ -1321,9 +1321,11 @@ class BachetRanking(LinearOrder):
         """
 
         # check orderLimit
+        if Debug:
+            print('orderLimit',orderLimit)
         if other.order > orderLimit:
             print('!!! Error: the given digraph order %d is greater than the allowed orderLimit %d. ' % (other.order,orderLimit))
-            return None
+            return
         from collections import OrderedDict
         from time import time
         from operator import itemgetter
@@ -1369,6 +1371,7 @@ class BachetRanking(LinearOrder):
             c.recodeValuation(ndigits=0)
             cRelation = c.relation
         else:
+            c = other
             cRelation = otherRelation
         
         runTimes['prepareLocals'] = time()-tt
@@ -1382,7 +1385,10 @@ class BachetRanking(LinearOrder):
             from digraphsTools import all_perms
             actions = [x for x in other.actions]
             for p in all_perms(actions): 
-                ba = BachetRanking(c,Polarised=True,BestQualified=False,actionsList=p)
+                ba = BachetRanking(c,orderLimit=orderLimit,
+                                   Polarised=True,
+                                   BestQualified=False,
+                                   actionsList=p)
                 corr = other.computeRankingCorrelation(ba.bachetRanking)
                 if corr['correlation'] > correlation:
                     correlation = corr['correlation']
@@ -1415,7 +1421,8 @@ class BachetRanking(LinearOrder):
             bar = None
             for i in range(randomized):
                 random.shuffle(randomActions) 
-                ba = BachetRanking(c,Polarised=True,
+                ba = BachetRanking(c,orderLimit=orderLimit,
+                                   Polarised=True,
                                    BestQualified=True,
                                    actionsList=randomActions)
                 corr = other.computeRankingCorrelation(ba.bachetRanking)
@@ -1475,31 +1482,31 @@ class BachetRanking(LinearOrder):
                 #bScore = bx
                 #bScore = bx + by
                 incBachetScores.append((bScore.value(),x))
-                decBachetScores.append((-bScore.value(),x))
+                decBachetScores.append((bScore.value(),x))
                 if BestQualified:
                     bRevScore = bx.reverse() + (-by.reverse())
                     incBachetRevScores.append((bRevScore.value(),x))
-                    decBachetRevScores.append((-bRevScore.value(),x))
+                    decBachetRevScores.append((bRevScore.value(),x))
             # reversed sorting with keeping the actions initial ordering
             # in case of ties
             if Debug:
                 print(incBachetScores,decBachetScores)
             incBachetScores.sort(key=itemgetter(0))
-            decBachetScores.sort(key=itemgetter(0))
+            decBachetScores.sort(reverse=True,key=itemgetter(0))
             if BestQualified:
                 if Debug:
                     print(incBachetRevScores,decBachetRevScores)
                 incBachetRevScores.sort(key=itemgetter(0))
-                decBachetRevScores.sort(key=itemgetter(0))
+                decBachetRevScores.sort(reverse=True,key=itemgetter(0))
 
-            decBachetScores = [(-x[0],x[1]) for x in decBachetScores]
+            decBachetScores = [(x[0],x[1]) for x in decBachetScores]
             incBachetScores = [(x[0],x[1]) for x in incBachetScores]               
             #self.decBachetScores = decBachetScores
             #self.incBachetScores = incBachetScores
             if Debug:
                 print(incBachetScores,decBachetScores)
             if BestQualified:
-                decBachetRevScores = [(-x[0],x[1]) for x in decBachetRevScores]
+                decBachetRevScores = [(x[0],x[1]) for x in decBachetRevScores]
                 incBachetRevScores = [(x[0],x[1]) for x in incBachetRevScores]               
                 #self.decBachetRevScores = decBachetRevScores
                 #self.incBachetRevScores = incBachetRevScores
@@ -2147,10 +2154,12 @@ if __name__ == "__main__":
         #t = PerformanceTableau('testLin')
         t = RandomCBPerformanceTableau(numberOfActions=7,
                                        numberOfCriteria=13,seed=200)
-        g = BipolarOutrankingDigraph(t)
+        #g = BipolarOutrankingDigraph(t)
+        g = RandomDigraph(order=7)
         revba1 = [x for x in reversed(g.actions)]
-        ba1 = BachetRanking(g,CoDual=True,BestQualified=True,
-                            Comments=True,Debug=False,
+        ba1 = BachetRanking(g,CoDual=True,Polarised=False,
+                            orderLimit=75,BestQualified=True,
+                            Comments=True,Debug=True,
                             actionsList=g.actions,
                             )
         #print(ba1)
