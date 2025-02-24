@@ -2524,7 +2524,7 @@ Bipolar-valued {-1,0,1} base 3 encoded integers are due to *Claude Gaspard Bache
 
 *Bachet*'s positional *sbits* numerotation system is simulating a weight balance scale where the number *n* and the potential negative powers of 3 are put on the right tray and the potential positive powers of 3 are put on the left tray. The equation for *n = 5* gives for instance :math:`3^2 = (n + 3^1 + 3^0)`. And the *sbits* encoding corresponds hence to the string '1-1-1'. As, this representation is isomorphic to a base 3 binary encoding, every positive or negative integer may this way be represented with a unique *sbits* string. With three powers of 3, namely :math:`3^2, 3^1, 3^0`, one may for instance represent any value in the integer range -13 to +13. *Bachet* showed that this bipolar weighing system relies on the smallest possible number of weights -base powers- to balance the scale for any given weight *n* [BAC-1624p]_.
 
-The Digraph3 :py:mod:`arithmetics` module provides with the :py:class:`~arithmetics.BachetNumber` class an implementation for such *sbits* encoded integers. Instantiating a *Bachet* number may be done either with an integer value or with a vector of sbits (see :numref:`BachetNumbers` Lines  6 and 11). The class provides a binary *addition* method and unary *negating* and *reversing* methods as illustrated in Lines 20,32 and 33 below. 
+The Digraph3 :py:mod:`arithmetics` module provides with the :py:class:`~arithmetics.BachetNumber` class an implementation for such *sbits* encoded integers. Instantiating a *Bachet* number may be done either with an integer value or with a vector of sbits (see :numref:`BachetNumbers` Lines  2, 6, 11 and 15). The class provides a binary *addition* method and unary *negating* and *reversing* methods as illustrated in Lines 20,32 and 33 below. 
 
 .. code-block:: pycon
    :caption: Working with *Bachet* sbits encoded numbers
@@ -2669,6 +2669,7 @@ With the reversed *Bachet* numbers we obtain the ranking 'a4' (26) > 'a3' (-12) 
 
 .. code-block:: pycon
    :linenos:
+   :emphasize-lines: 11,15
       
    >>> from linearOrders import CopelandRanking
    >>> cop = CopelandRanking(g)
@@ -2699,6 +2700,7 @@ The :py:mod:`linearOrders` module provides now a :py:class:`~linearOrders.Bachet
 
 .. code-block:: pycon
    :linenos:
+   :emphasize-lines: 2,11-12,16
 		     
    >>> from linearOrders import BachetRanking
    >>> ba = BachetRanking(g)
@@ -2728,7 +2730,7 @@ The class delivers as usual a ranking (*self.bachetRanking*) and a corresponding
 
 Note that, like the *Copeland* and the *NetFlows* ranking rules, the *Bachet* ranking rule is actually **invariant** under the **codual** transform and the :py:class:`~linearOrdres.BachetRanking` constructor works by default on the corresponding strict outranking digraph (*CoDual=True*).
 
-Mind however that a base 3 sbits based numbering system is a *positional numeral system*, implying that the *Bachet* ranking scores, as noticed before, depend essentially on the very ordering of the rows and columns of the outranking digraph's *self.relation* attribute when the relation shows a low transitivity degree. However, when the digraph is actually transitive and acyclic, the *Bachet* ranking scores will consistently model the orientations of all transitive triplets independently of the ordering of the rows and columns of the *self.relation* attribute [22]_. The *Bachet* ranking rule is hence, like the *Copeland* rule, **Condorcet consistent**, i.e. when the polarised strict outranking digraph models a transitive acyclic relation, its *Bachet* ranking result will always be consistent with this strict outranking relation.
+Mind however that a base 3 sbits based numbering system is a *positional numeral system*, implying that the *Bachet* ranking scores, as noticed before, depend essentially on the very ordering of the rows and columns of the outranking digraph's *self.relation* attribute when the relation shows a low transitivity degree. However, when the digraph is actually transitive and acyclic, the *Bachet* ranking scores will consistently model the orientations of all transitive triplets independently of the ordering of the rows and columns of the *self.relation* attribute. The *Bachet* ranking rule is hence, like the *Copeland* rule, **Condorcet consistent**, i.e. when the polarised strict outranking digraph models a transitive acyclic relation, its *Bachet* ranking result will always be consistent with this strict outranking relation [22]_.
 
 Our random outranking digraph *g*, generated above in :numref:`examplesBachet` Line 4 is for instance not transitive. Its transitivity degree amounts to 0.833 (see below). 
 
@@ -2829,7 +2831,7 @@ It appears hence to be opportune to compute a first *Bachet* ranking result with
     {'correlation': +0.6315, 'determination': 0.4086}
     *---- using 100 random ordering and their reversed versions ---*')
 
-Yet, when observing a lower transitivity degree as we may notice in :numref:`optimisingBachet1` Line 2), it is recommended to set the *randomized* parameter (default=0) to a positive integer *n*. In this case, *n* random orderings of the decision actions with their reversed versions will be generated in order to compute potentially diverse *Bachet* ranking results. The best correlated ranking will eventually be returned (see :numref:`optimisingBachet1` Lines 3 and 17).
+Yet, when observing a lower transitivity degree as we may notice in :numref:`optimisingBachet1` Line 2, it is recommended to set the *randomized* parameter (default=0) to a positive integer *n*. In this case, *n* random orderings of the decision actions with their reversed versions will be generated in order to compute potentially diverse *Bachet* ranking results. The best correlated ranking will eventually be returned (see :numref:`optimisingBachet1` Lines 3 and 17).
 
 .. code-block:: pycon
    :caption: Optimising the *Bachet* ranking result II
@@ -5230,7 +5232,7 @@ Appendix
 
 .. [21] See the tutorial on :ref:`ranking with multiple incommensurable criteria <Ranking-Tutorial-label>`
 
-.. [22] To prove the *Condorcet consistency* property of the *Bachet* ranking rule, it is sufficient to notice that the contributions of a transitive triplet *'ai' > 'aj' > 'ak'* to the corresponding *Bachet* ranking scores will respect the actual ordering of the triplet with all potential permutations of [..., ai, ..., aj, ...,ak, ...] in a relation table.
+.. [22] To prove the *Condorcet consistency* property of the *Bachet* ranking rule, it is sufficient to notice that the contributions of a transitive triplet *'ai' > 'aj' > 'ak'* to the corresponding *Bachet* ranking scores will respect the actual ordering of the triplet with all positional permutations of [..., ai, ..., aj, ...,ak, ...] in a relation table.
 
 .. raw:: latex
 
