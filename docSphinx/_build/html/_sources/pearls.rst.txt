@@ -815,7 +815,7 @@ The corresponding *robust* outranking digraph may be computed with the :py:class
       'p7'   | +0.22  -0.50  +0.00  +0.00  +0.78  +0.42  +1.00  
 	     |  (+2)   (-2)   (+1)   (-1)   (+3)   (+2)   (+4)  
 
-We may notice that all outranking situations, qualified at stability level +1 or -1, are now put to an *indeterminate* status. In the example here, we actually drop three positive outrankings: between *p3* and *p7*, between *p7* and *p3*, and between *p6* and *p3*, where the last situation is actually already put to doubt by a veto situation (see :numref:`robG` Lines 22-35). We drop as well three negative outrankings: between *p1* and *p7*, between *p4* and *p2*, and between *p7* and *p4* (see :numref:`robG` Lines 22-35).
+We may notice that all outranking situations, qualified at stability level +1 or -1, are now put to an *indeterminate* status. In the example here, we actually drop three positive outrankings: between *p3* and *p7*, between *p7* and *p3*, and between *p6* and *p3*, where the last situation is already put to doubt by a veto situation (see :numref:`robG` Lines 22-35). We drop as well three negative outrankings: between *p1* and *p7*, between *p4* and *p2*, and between *p7* and *p4* (see :numref:`robG` Lines 22-35).
 
 Notice by the way that outranking (resp. outranked) situations, although qualified at level +2 or +3 (resp. -2 or -3) may nevertheless be put to doubt by considerable performance differences. We may observe such an outranking situation when comparing, for instance, alternatives *p2* and *p4* (see :numref:`robG` Lines 24-25).
 
@@ -2615,7 +2615,7 @@ The *Bachet* numbers, instantiated by the row vectors without reflexive terms  a
 
 The sum *rx + (-cx)* of both the **outrankingness** and the **not outrankedness** measures renders now per decision action *x* a potential ranking fitness score, similar to *Copeland* or *NetFlows* ranking scores [21]_.
 
-In our example here we actually obtain the *Bachet* ranking 'a4' (26) > 'a3' (4) > 'a2' (1) > 'a1' (-11) (see Line 30 above). A ranking result, which is the corresponding optimal *Kemeny* ranking maximally correlated with the given outranking digraph (tau = 0.795, see Lines 4 and 8 below).
+In our example here we obtain the *Bachet* ranking 'a4' (26) > 'a3' (4) > 'a2' (1) > 'a1' (-11) (see Line 30 above). A ranking result, which is the corresponding optimal *Kemeny* ranking maximally correlated with the given outranking digraph (tau = 0.795, see Lines 4 and 8 below).
 
 .. code-block:: pycon
    :linenos:		
@@ -2728,9 +2728,9 @@ The :py:mod:`linearOrders` module provides now a :py:class:`~linearOrders.Bachet
 
 The class delivers as usual a ranking (*self.bachetRanking*) and a corresponding ordering result (*self.bachetOrder*) besides the decreasing list (*self.decBachetScores*) and the increasing list of the corresponding *Bachet* ranking scores (*self.incBachetScores*). Due to potential ties observed among *Bachet* scores and the lexicographic resolving of such ties, the decreasing and increasing lists of ranking scores might indeed not always be just the reversed version of one another. 
 
-Note that, like the *Copeland* and the *NetFlows* ranking rules, the *Bachet* ranking rule is actually **invariant** under the **codual** transform and the :py:class:`~linearOrdres.BachetRanking` constructor works by default on the corresponding strict outranking digraph (*CoDual=True*).
+Note that, like the *Copeland* and the *NetFlows* ranking rules, the *Bachet* ranking rule is **invariant** under the **codual** transform and the :py:class:`~linearOrdres.BachetRanking` constructor works by default on the corresponding strict outranking digraph (*CoDual=True*).
 
-Mind however that a base 3 sbits based numbering system is a *positional numeral system*, implying that the *Bachet* ranking scores, as noticed before, depend essentially on the very ordering of the rows and columns of the outranking digraph's *self.relation* attribute when the relation shows a low transitivity degree. However, when the digraph is actually transitive and acyclic, the *Bachet* ranking scores will consistently model the orientations of all transitive triplets independently of the ordering of the rows and columns of the *self.relation* attribute. The *Bachet* ranking rule is hence, like the *Copeland* rule, **Condorcet consistent**, i.e. when the polarised strict outranking digraph models a transitive acyclic relation, its *Bachet* ranking result will always be consistent with this strict outranking relation [22]_.
+Mind however that a base 3 sbits based numbering system is a *positional numeral system*, implying that the *Bachet* ranking scores, as noticed before, depend essentially on the very ordering of the rows and columns of the outranking digraph's *self.relation* attribute when the relation shows a low transitivity degree. However, when the digraph is *transitive* and *acyclic*, the *Bachet* ranking scores will consistently model the orientations of all transitive triplets independently of the ordering of the rows and columns of the *self.relation* attribute. The *Bachet* ranking rule is hence, like the *Copeland* rule, **Condorcet consistent**, i.e. when the polarised strict outranking digraph models a transitive acyclic relation, its *Bachet* ranking result will always be consistent with this strict outranking relation [22]_.
 
 Our random outranking digraph *g*, generated above in :numref:`examplesBachet` Line 4 is for instance not transitive. Its transitivity degree amounts to 0.833 (see below). 
 
