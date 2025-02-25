@@ -2713,7 +2713,7 @@ The :py:mod:`linearOrders` module provides now a :py:class:`~linearOrders.Bachet
      Valuation domain    : [-1.00;1.00]
      Determinateness (%) : 100.00
      Attributes          : ['decBachetScores', 'incBachetScores',
-	                    'bachetRanking', 'bachetOrder',
+	                    'bachetRanking', 'bachetOrder', 'correlation',
 	                    'name', 'actions', 'order', 'valuationdomain',
 	                    'relation', 'gamma', 'notGamma', 'runTimes']
    >>> ba.bachetRanking
@@ -2726,7 +2726,7 @@ The :py:mod:`linearOrders` module provides now a :py:class:`~linearOrders.Bachet
         a2 	  1.00
         a1      -11.00
 
-The class delivers as usual a ranking (*self.bachetRanking*) and a corresponding ordering result (*self.bachetOrder*) besides the decreasing list (*self.decBachetScores*) and the increasing list of the corresponding *Bachet* ranking scores (*self.incBachetScores*). Due to potential ties observed among *Bachet* scores and the lexicographic resolving of such ties, the decreasing and increasing lists of ranking scores might indeed not always be just the reversed version of one another. 
+The class delivers as usual a ranking (*self.bachetRanking*) and a corresponding ordering result (*self.bachetOrder*) besides the decreasing list (*self.decBachetScores*) and the increasing list of the corresponding *Bachet* ranking scores (*self.incBachetScores*). Due to potential ties observed among *Bachet* scores and the lexicographic resolving of such ties, the decreasing and increasing lists of ranking scores might indeed not always be just the reversed version of one another. The *self.correlation* attribute containes the ordinal correlation index between the given outranking relation and the computed *Bachet* ranking.
 
 Note that, like the *Copeland* and the *NetFlows* ranking rules, the *Bachet* ranking rule is **invariant** under the **codual** transform and the :py:class:`~linearOrdres.BachetRanking` constructor works by default on the corresponding strict outranking digraph (*CoDual=True*).
 

@@ -28,7 +28,7 @@
         <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
         <script src="../_static/clipboard.min.js?v=a7894cd8"></script>
         <script src="../_static/copybutton.js?v=15d7cbb8"></script>
-        <script src="../_static/js/hoverxref.js?v=6ff7264e"></script>
+        <script src="../_static/js/hoverxref.js?v=4352a7d3"></script>
         <script src="../_static/js/tooltipster.bundle.min.js?v=18bf091b"></script>
         <script src="../_static/js/micromodal.min.js?v=04d6302d"></script>
     <script src="../_static/js/theme.js"></script>
@@ -1556,6 +1556,7 @@
             <span class="bp">self</span><span class="o">.</span><span class="n">incBachetScores</span> <span class="o">=</span> <span class="n">bar</span><span class="o">.</span><span class="n">incBachetScores</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">bachetRanking</span> <span class="o">=</span> <span class="n">bar</span><span class="o">.</span><span class="n">bachetRanking</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">bachetOrder</span> <span class="o">=</span> <span class="n">bar</span><span class="o">.</span><span class="n">bachetOrder</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">correlation</span> <span class="o">=</span> <span class="n">correlation</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">actions</span> <span class="o">=</span> <span class="n">bar</span><span class="o">.</span><span class="n">actions</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">order</span> <span class="o">=</span> <span class="n">bar</span><span class="o">.</span><span class="n">order</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">valuationdomain</span> <span class="o">=</span> <span class="n">bar</span><span class="o">.</span><span class="n">valuationdomain</span>
@@ -1590,6 +1591,7 @@
             <span class="bp">self</span><span class="o">.</span><span class="n">incBachetScores</span> <span class="o">=</span> <span class="n">bar</span><span class="o">.</span><span class="n">incBachetScores</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">bachetRanking</span> <span class="o">=</span> <span class="n">bar</span><span class="o">.</span><span class="n">bachetRanking</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">bachetOrder</span> <span class="o">=</span> <span class="n">bar</span><span class="o">.</span><span class="n">bachetOrder</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">correlation</span> <span class="o">=</span> <span class="n">correlation</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">actions</span> <span class="o">=</span> <span class="n">bar</span><span class="o">.</span><span class="n">actions</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">order</span> <span class="o">=</span> <span class="n">bar</span><span class="o">.</span><span class="n">order</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">valuationdomain</span> <span class="o">=</span> <span class="n">bar</span><span class="o">.</span><span class="n">valuationdomain</span>
@@ -1733,6 +1735,9 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">order</span> <span class="o">=</span> <span class="n">n</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">valuationdomain</span> <span class="o">=</span> <span class="n">valuationdomain</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">relation</span> <span class="o">=</span> <span class="n">deepcopy</span><span class="p">(</span><span class="n">relation</span><span class="p">)</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">Polarised</span><span class="p">:</span>
+            <span class="n">corr</span> <span class="o">=</span> <span class="n">other</span><span class="o">.</span><span class="n">computeRankingCorrelation</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">bachetRanking</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">correlation</span> <span class="o">=</span> <span class="n">corr</span><span class="p">[</span><span class="s1">&#39;correlation&#39;</span><span class="p">]</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">gamma</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">gammaSets</span><span class="p">()</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">notGamma</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">notGammaSets</span><span class="p">()</span>
         <span class="n">runTimes</span><span class="p">[</span><span class="s1">&#39;totalTime&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">time</span><span class="p">()</span> <span class="o">-</span> <span class="n">tt</span>
@@ -2332,9 +2337,9 @@
         <span class="c1">#t.showHTMLPerformanceHeatmap(Correlations=True,colorLevels=5)</span>
         <span class="c1">#t = PerformanceTableau(&#39;testLin&#39;)</span>
         <span class="n">t</span> <span class="o">=</span> <span class="n">RandomCBPerformanceTableau</span><span class="p">(</span><span class="n">numberOfActions</span><span class="o">=</span><span class="mi">7</span><span class="p">,</span>
-                                       <span class="n">numberOfCriteria</span><span class="o">=</span><span class="mi">13</span><span class="p">,</span><span class="n">seed</span><span class="o">=</span><span class="mi">200</span><span class="p">)</span>
-        <span class="c1">#g = BipolarOutrankingDigraph(t)</span>
-        <span class="n">g</span> <span class="o">=</span> <span class="n">RandomDigraph</span><span class="p">(</span><span class="n">order</span><span class="o">=</span><span class="mi">7</span><span class="p">)</span>
+                                       <span class="n">numberOfCriteria</span><span class="o">=</span><span class="mi">13</span><span class="p">,</span><span class="n">seed</span><span class="o">=</span><span class="mi">20</span><span class="p">)</span>
+        <span class="n">g</span> <span class="o">=</span> <span class="n">BipolarOutrankingDigraph</span><span class="p">(</span><span class="n">t</span><span class="p">)</span>
+        <span class="c1">#g = RandomDigraph(order=7)</span>
         <span class="n">revba1</span> <span class="o">=</span> <span class="p">[</span><span class="n">x</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="nb">reversed</span><span class="p">(</span><span class="n">g</span><span class="o">.</span><span class="n">actions</span><span class="p">)]</span>
         <span class="n">ba1</span> <span class="o">=</span> <span class="n">BachetRanking</span><span class="p">(</span><span class="n">g</span><span class="p">,</span><span class="n">CoDual</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span><span class="n">Polarised</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
                             <span class="n">orderLimit</span><span class="o">=</span><span class="mi">75</span><span class="p">,</span><span class="n">BestQualified</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
@@ -2407,7 +2412,7 @@
 
   <div role="contentinfo">
     <p>&#169; Copyright 2012-2025, Raymond Bisdorff.
-      <span class="lastupdated">Last updated on Feb 23, 2025.
+      <span class="lastupdated">Last updated on Feb 25, 2025.
       </span></p>
   </div>
 

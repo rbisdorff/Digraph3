@@ -1402,6 +1402,7 @@ class BachetRanking(LinearOrder):
             self.incBachetScores = bar.incBachetScores
             self.bachetRanking = bar.bachetRanking
             self.bachetOrder = bar.bachetOrder
+            self.correlation = correlation
             self.actions = bar.actions
             self.order = bar.order
             self.valuationdomain = bar.valuationdomain
@@ -1436,6 +1437,7 @@ class BachetRanking(LinearOrder):
             self.incBachetScores = bar.incBachetScores
             self.bachetRanking = bar.bachetRanking
             self.bachetOrder = bar.bachetOrder
+            self.correlation = correlation
             self.actions = bar.actions
             self.order = bar.order
             self.valuationdomain = bar.valuationdomain
@@ -1579,6 +1581,9 @@ class BachetRanking(LinearOrder):
         self.order = n
         self.valuationdomain = valuationdomain
         self.relation = deepcopy(relation)
+        if not Polarised:
+            corr = other.computeRankingCorrelation(self.bachetRanking)
+            self.correlation = corr['correlation']
         self.gamma = self.gammaSets()
         self.notGamma = self.notGammaSets()
         runTimes['totalTime'] = time() - tt
@@ -2153,9 +2158,9 @@ if __name__ == "__main__":
         #t.showHTMLPerformanceHeatmap(Correlations=True,colorLevels=5)
         #t = PerformanceTableau('testLin')
         t = RandomCBPerformanceTableau(numberOfActions=7,
-                                       numberOfCriteria=13,seed=200)
-        #g = BipolarOutrankingDigraph(t)
-        g = RandomDigraph(order=7)
+                                       numberOfCriteria=13,seed=20)
+        g = BipolarOutrankingDigraph(t)
+        #g = RandomDigraph(order=7)
         revba1 = [x for x in reversed(g.actions)]
         ba1 = BachetRanking(g,CoDual=True,Polarised=False,
                             orderLimit=75,BestQualified=True,
