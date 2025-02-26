@@ -51,104 +51,105 @@
 \contentsline {subsubsection}{Random academic performance tableaux}{70}{subsubsection*.103}%
 \contentsline {subsubsection}{Random linearly ranked performance tableaux}{74}{subsubsection*.104}%
 \contentsline {subsection}{\numberline {2.4}Ranking with multiple incommensurable criteria}{74}{subsection.2.4}%
-\contentsline {subsubsection}{The ranking problem}{75}{subsubsection*.112}%
-\contentsline {subsubsection}{The \sphinxstyleemphasis {Copeland} ranking}{78}{subsubsection*.113}%
-\contentsline {subsubsection}{The \sphinxstyleemphasis {NetFlows} ranking}{81}{subsubsection*.114}%
-\contentsline {subsubsection}{\sphinxstyleemphasis {Kemeny} rankings}{82}{subsubsection*.115}%
-\contentsline {subsubsection}{\sphinxstyleemphasis {Slater} rankings}{86}{subsubsection*.116}%
-\contentsline {subsubsection}{\sphinxstyleemphasis {Kohler}’s ranking\sphinxhyphen {}by\sphinxhyphen {}choosing rule}{88}{subsubsection*.117}%
-\contentsline {subsubsection}{\sphinxstyleemphasis {Tideman}’s ranked\sphinxhyphen {}pairs rule}{90}{subsubsection*.118}%
-\contentsline {subsection}{\numberline {2.5}Rating into relative performance quantiles}{91}{subsection.2.5}%
-\contentsline {subsubsection}{Performance quantile sorting on a single criterion}{91}{subsubsection*.122}%
-\contentsline {subsubsection}{Rating\sphinxhyphen {}by\sphinxhyphen {}sorting into relative multicriteria performance quantiles}{92}{subsubsection*.123}%
-\contentsline {subsubsection}{Rating\sphinxhyphen {}by\sphinxhyphen {}ranking with relative quantile limits}{96}{subsubsection*.124}%
-\contentsline {subsection}{\numberline {2.6}Rating with learned performance quantile norms}{97}{subsection.2.6}%
-\contentsline {subsubsection}{Introduction}{98}{subsubsection*.128}%
-\contentsline {subsubsection}{Incremental learning of historical performance quantiles}{98}{subsubsection*.129}%
-\contentsline {subsubsection}{Rating\sphinxhyphen {}by\sphinxhyphen {}ranking new performances with quantile norms}{102}{subsubsection*.130}%
-\contentsline {subsection}{\numberline {2.7}Computing the winner of an election with the \sphinxstyleliteralintitle {\sphinxupquote {votingProfiles}} module}{110}{subsection.2.7}%
-\contentsline {subsubsection}{Linear voting profiles}{111}{subsubsection*.136}%
-\contentsline {subsubsection}{Computing the winner}{112}{subsubsection*.137}%
-\contentsline {subsubsection}{The \sphinxstyleemphasis {Condorcet} winner}{114}{subsubsection*.138}%
-\contentsline {subsubsection}{Cyclic social preferences}{116}{subsubsection*.140}%
-\contentsline {subsubsection}{On generating realistic random linear voting profiles}{118}{subsubsection*.141}%
-\contentsline {subsection}{\numberline {2.8}On computing fair intergroup pairings}{123}{subsection.2.8}%
-\contentsline {subsubsection}{The fair intergroup pairing problem}{123}{subsubsection*.152}%
-\contentsline {subsubsection}{Generating the set of potential maximal matchings}{125}{subsubsection*.154}%
-\contentsline {subsubsection}{Measuring the fitness of a matching from a personal perspective}{126}{subsubsection*.155}%
-\contentsline {subsubsection}{Computing the fairest intergroup pairing}{127}{subsubsection*.156}%
-\contentsline {subsubsection}{Fair versus stable pairings}{131}{subsubsection*.158}%
-\contentsline {subsubsection}{Relaxing the requirement for complete linear voting profiles}{144}{subsubsection*.161}%
-\contentsline {subsubsection}{Using Copeland scores for guiding the fairness enhancement}{147}{subsubsection*.162}%
-\contentsline {subsubsection}{Starting the fairness enhancement from a best determined Copeland matching}{149}{subsubsection*.163}%
-\contentsline {subsection}{\numberline {2.9}On computing fair intragroup pairings}{153}{subsection.2.9}%
-\contentsline {subsubsection}{The fair intragroup pairing problem}{154}{subsubsection*.169}%
-\contentsline {subsubsection}{Generating random intragroup bipolar approval voting profiles}{155}{subsubsection*.170}%
-\contentsline {subsubsection}{The set of potential ìntragroup pairing decisions}{156}{subsubsection*.171}%
-\contentsline {subsubsection}{Computing the fairest intragroup pairing}{157}{subsubsection*.174}%
-\contentsline {subsubsection}{Fairness enhancing of a given pairing decision}{158}{subsubsection*.176}%
-\contentsline {section}{\numberline {3}Evaluation and decision case studies}{165}{section.3}%
-\contentsline {subsection}{\numberline {3.1}Alice’s best choice: A \sphinxstyleemphasis {selection} case study }{165}{sphinxfootnotemark.11}%
-\contentsline {subsubsection}{The decision problem}{166}{subsubsection*.186}%
-\contentsline {subsubsection}{The performance tableau}{167}{subsubsection*.187}%
-\contentsline {subsubsection}{Building a best choice recommendation}{170}{subsubsection*.192}%
-\contentsline {subsubsection}{Robustness analysis}{176}{subsubsection*.194}%
-\contentsline {subsection}{\numberline {3.2}The best academic \sphinxstyleemphasis {Computer Science} Depts: a \sphinxstyleemphasis {ranking} case study}{180}{subsection.3.2}%
-\contentsline {subsubsection}{The THE performance tableau}{180}{subsubsection*.201}%
-\contentsline {subsubsection}{Ranking with multiple incommensurable criteria of ordinal significance}{186}{subsubsection*.206}%
-\contentsline {subsubsection}{How to judge the quality of a ranking result?}{194}{subsubsection*.209}%
-\contentsline {subsection}{\numberline {3.3}The best students, where do they study? A \sphinxstyleemphasis {rating} case study}{202}{subsection.3.3}%
-\contentsline {subsubsection}{The performance tableau}{202}{subsubsection*.217}%
-\contentsline {subsubsection}{Rating\sphinxhyphen {}by\sphinxhyphen {}ranking with lower\sphinxhyphen {}closed quantile limits}{206}{subsubsection*.219}%
-\contentsline {subsubsection}{Inspecting the bipolar\sphinxhyphen {}valued outranking digraph}{211}{subsubsection*.223}%
-\contentsline {subsubsection}{Rating by quantiles sorting}{213}{subsubsection*.225}%
-\contentsline {subsubsection}{To conclude}{216}{subsubsection*.226}%
-\contentsline {subsection}{\numberline {3.4}Exercises}{216}{subsection.3.4}%
-\contentsline {subsubsection}{Who will receive the best student award? (\S {})}{217}{subsubsection*.227}%
-\contentsline {subsubsection}{How to fairly rank movies (\S {})}{217}{subsubsection*.228}%
-\contentsline {subsubsection}{What is your best choice recommendation? (\S {})}{219}{subsubsection*.229}%
-\contentsline {subsubsection}{What is the best public policy? (\S {}\S {})}{220}{subsubsection*.231}%
-\contentsline {subsubsection}{A fair diploma validation decision (\S {}\S {}\S {})}{220}{subsubsection*.232}%
-\contentsline {section}{\numberline {4}Working with big outranking digraphs}{221}{section.4}%
-\contentsline {subsection}{\numberline {4.1}Sparse bipolar\sphinxhyphen {}valued outranking digraphs}{221}{subsection.4.1}%
-\contentsline {subsubsection}{The sparse pre\sphinxhyphen {}ranked outranking digraph model}{222}{subsubsection*.238}%
-\contentsline {subsubsection}{Ranking pre\sphinxhyphen {}ranked sparse outranking digraphs}{225}{subsubsection*.239}%
-\contentsline {subsection}{\numberline {4.2}Using Digraph3 multiprocessing resources}{226}{subsection.4.2}%
-\contentsline {subsubsection}{Computing with multiple threads in parallel}{227}{subsubsection*.243}%
-\contentsline {subsubsection}{Using the mpOutrankingDigraphs module}{228}{subsubsection*.245}%
-\contentsline {subsubsection}{Setting the Threading parameters}{230}{subsubsection*.246}%
-\contentsline {subsection}{\numberline {4.3}On ranking big outranking digraphs}{230}{subsection.4.3}%
-\contentsline {subsubsection}{C\sphinxhyphen {}compiled Python modules}{231}{subsubsection*.254}%
-\contentsline {subsubsection}{Big Data performance tableaux}{231}{subsubsection*.256}%
-\contentsline {subsubsection}{C\sphinxhyphen {}implemented integer\sphinxhyphen {}valued outranking digraphs}{233}{subsubsection*.257}%
-\contentsline {subsubsection}{The sparse outranking digraph implementation}{235}{subsubsection*.258}%
-\contentsline {subsubsection}{Ranking big sets of decision alternatives}{239}{subsubsection*.259}%
-\contentsline {section}{\numberline {5}HPC\sphinxhyphen {}Ranking of Big Sparse Outranking Digraphs}{241}{section.5}%
-\contentsline {subsection}{\numberline {5.1}On a common 2023 desktop computer}{242}{subsection.5.1}%
-\contentsline {subsection}{\numberline {5.2}On the HPC platform of the University of Luxembourg (Spring 2018)}{243}{subsection.5.2}%
-\contentsline {subsection}{\numberline {5.3}On the MeluXina EuroHPC supercomputer }{249}{sphinxfootnotemark.23}%
-\contentsline {section}{\numberline {6}Moving on to undirected graphs}{251}{section.6}%
-\contentsline {subsection}{\numberline {6.1}Working with the \sphinxstyleliteralintitle {\sphinxupquote {graphs}} module}{252}{subsection.6.1}%
-\contentsline {subsubsection}{Structure of a \sphinxstyleliteralintitle {\sphinxupquote {Graph}} object}{252}{subsubsection*.280}%
-\contentsline {subsubsection}{q\sphinxhyphen {}coloring of a graph}{255}{subsubsection*.281}%
-\contentsline {subsubsection}{MIS and clique enumeration}{257}{subsubsection*.282}%
-\contentsline {subsubsection}{Line graphs and maximal matchings}{258}{subsubsection*.283}%
-\contentsline {subsubsection}{Grids and the Ising model}{261}{subsubsection*.284}%
-\contentsline {subsubsection}{Simulating Metropolis random walks}{262}{subsubsection*.285}%
-\contentsline {subsection}{\numberline {6.2}Computing the non isomorphic MISs of the 12\sphinxhyphen {}cycle graph}{264}{subsection.6.2}%
-\contentsline {subsubsection}{Introduction}{264}{subsubsection*.290}%
-\contentsline {subsubsection}{Computing the maximal independent sets (MISs)}{265}{subsubsection*.291}%
-\contentsline {subsubsection}{Computing the automorphism group}{267}{subsubsection*.293}%
-\contentsline {subsubsection}{Computing the isomorphic MISs}{267}{subsubsection*.295}%
-\contentsline {subsection}{\numberline {6.3}About split, interval and permutation graphs}{269}{subsection.6.3}%
-\contentsline {subsubsection}{A multiply \sphinxstyleemphasis {perfect} graph}{269}{subsubsection*.300}%
-\contentsline {subsubsection}{Who is the liar ?}{271}{subsubsection*.301}%
-\contentsline {subsubsection}{Generating permutation graphs}{274}{subsubsection*.303}%
-\contentsline {subsubsection}{Recognizing permutation graphs}{277}{subsubsection*.304}%
-\contentsline {subsection}{\numberline {6.4}On tree graphs and graph forests}{283}{subsection.6.4}%
-\contentsline {subsubsection}{Generating random tree graphs}{283}{subsubsection*.309}%
-\contentsline {subsubsection}{Recognizing tree graphs}{286}{subsubsection*.310}%
-\contentsline {subsubsection}{Spanning trees and forests}{288}{subsubsection*.311}%
-\contentsline {subsubsection}{Maximum determined spanning forests}{290}{subsubsection*.313}%
-\contentsline {section}{\numberline {7}Appendices}{292}{section.7}%
-\contentsline {section}{References}{292}{section.7}%
+\contentsline {subsubsection}{The ranking problem}{75}{subsubsection*.113}%
+\contentsline {subsubsection}{The \sphinxstyleemphasis {Copeland} ranking}{78}{subsubsection*.114}%
+\contentsline {subsubsection}{The \sphinxstyleemphasis {NetFlows} ranking}{81}{subsubsection*.115}%
+\contentsline {subsubsection}{\sphinxstyleemphasis {Bachet} rankings}{82}{subsubsection*.117}%
+\contentsline {subsubsection}{\sphinxstyleemphasis {Kemeny} rankings}{83}{subsubsection*.118}%
+\contentsline {subsubsection}{\sphinxstyleemphasis {Slater} rankings}{87}{subsubsection*.119}%
+\contentsline {subsubsection}{\sphinxstyleemphasis {Kohler}’s ranking\sphinxhyphen {}by\sphinxhyphen {}choosing rule}{89}{subsubsection*.120}%
+\contentsline {subsubsection}{\sphinxstyleemphasis {Tideman}’s ranked\sphinxhyphen {}pairs rule}{91}{subsubsection*.121}%
+\contentsline {subsection}{\numberline {2.5}Rating into relative performance quantiles}{92}{subsection.2.5}%
+\contentsline {subsubsection}{Performance quantile sorting on a single criterion}{92}{subsubsection*.125}%
+\contentsline {subsubsection}{Rating\sphinxhyphen {}by\sphinxhyphen {}sorting into relative multicriteria performance quantiles}{93}{subsubsection*.126}%
+\contentsline {subsubsection}{Rating\sphinxhyphen {}by\sphinxhyphen {}ranking with relative quantile limits}{97}{subsubsection*.127}%
+\contentsline {subsection}{\numberline {2.6}Rating with learned performance quantile norms}{98}{subsection.2.6}%
+\contentsline {subsubsection}{Introduction}{99}{subsubsection*.131}%
+\contentsline {subsubsection}{Incremental learning of historical performance quantiles}{99}{subsubsection*.132}%
+\contentsline {subsubsection}{Rating\sphinxhyphen {}by\sphinxhyphen {}ranking new performances with quantile norms}{103}{subsubsection*.133}%
+\contentsline {subsection}{\numberline {2.7}Computing the winner of an election with the \sphinxstyleliteralintitle {\sphinxupquote {votingProfiles}} module}{111}{subsection.2.7}%
+\contentsline {subsubsection}{Linear voting profiles}{112}{subsubsection*.139}%
+\contentsline {subsubsection}{Computing the winner}{113}{subsubsection*.140}%
+\contentsline {subsubsection}{The \sphinxstyleemphasis {Condorcet} winner}{115}{subsubsection*.141}%
+\contentsline {subsubsection}{Cyclic social preferences}{117}{subsubsection*.143}%
+\contentsline {subsubsection}{On generating realistic random linear voting profiles}{119}{subsubsection*.144}%
+\contentsline {subsection}{\numberline {2.8}On computing fair intergroup pairings}{124}{subsection.2.8}%
+\contentsline {subsubsection}{The fair intergroup pairing problem}{124}{subsubsection*.155}%
+\contentsline {subsubsection}{Generating the set of potential maximal matchings}{126}{subsubsection*.157}%
+\contentsline {subsubsection}{Measuring the fitness of a matching from a personal perspective}{127}{subsubsection*.158}%
+\contentsline {subsubsection}{Computing the fairest intergroup pairing}{128}{subsubsection*.159}%
+\contentsline {subsubsection}{Fair versus stable pairings}{132}{subsubsection*.161}%
+\contentsline {subsubsection}{Relaxing the requirement for complete linear voting profiles}{145}{subsubsection*.164}%
+\contentsline {subsubsection}{Using Copeland scores for guiding the fairness enhancement}{148}{subsubsection*.165}%
+\contentsline {subsubsection}{Starting the fairness enhancement from a best determined Copeland matching}{150}{subsubsection*.166}%
+\contentsline {subsection}{\numberline {2.9}On computing fair intragroup pairings}{154}{subsection.2.9}%
+\contentsline {subsubsection}{The fair intragroup pairing problem}{155}{subsubsection*.172}%
+\contentsline {subsubsection}{Generating random intragroup bipolar approval voting profiles}{156}{subsubsection*.173}%
+\contentsline {subsubsection}{The set of potential ìntragroup pairing decisions}{157}{subsubsection*.174}%
+\contentsline {subsubsection}{Computing the fairest intragroup pairing}{158}{subsubsection*.177}%
+\contentsline {subsubsection}{Fairness enhancing of a given pairing decision}{159}{subsubsection*.179}%
+\contentsline {section}{\numberline {3}Evaluation and decision case studies}{166}{section.3}%
+\contentsline {subsection}{\numberline {3.1}Alice’s best choice: A \sphinxstyleemphasis {selection} case study }{166}{sphinxfootnotemark.11}%
+\contentsline {subsubsection}{The decision problem}{167}{subsubsection*.189}%
+\contentsline {subsubsection}{The performance tableau}{168}{subsubsection*.190}%
+\contentsline {subsubsection}{Building a best choice recommendation}{171}{subsubsection*.195}%
+\contentsline {subsubsection}{Robustness analysis}{177}{subsubsection*.197}%
+\contentsline {subsection}{\numberline {3.2}The best academic \sphinxstyleemphasis {Computer Science} Depts: a \sphinxstyleemphasis {ranking} case study}{181}{subsection.3.2}%
+\contentsline {subsubsection}{The THE performance tableau}{181}{subsubsection*.204}%
+\contentsline {subsubsection}{Ranking with multiple incommensurable criteria of ordinal significance}{187}{subsubsection*.209}%
+\contentsline {subsubsection}{How to judge the quality of a ranking result?}{195}{subsubsection*.212}%
+\contentsline {subsection}{\numberline {3.3}The best students, where do they study? A \sphinxstyleemphasis {rating} case study}{203}{subsection.3.3}%
+\contentsline {subsubsection}{The performance tableau}{203}{subsubsection*.220}%
+\contentsline {subsubsection}{Rating\sphinxhyphen {}by\sphinxhyphen {}ranking with lower\sphinxhyphen {}closed quantile limits}{207}{subsubsection*.222}%
+\contentsline {subsubsection}{Inspecting the bipolar\sphinxhyphen {}valued outranking digraph}{212}{subsubsection*.226}%
+\contentsline {subsubsection}{Rating by quantiles sorting}{214}{subsubsection*.228}%
+\contentsline {subsubsection}{To conclude}{217}{subsubsection*.229}%
+\contentsline {subsection}{\numberline {3.4}Exercises}{217}{subsection.3.4}%
+\contentsline {subsubsection}{Who will receive the best student award? (\S {})}{218}{subsubsection*.230}%
+\contentsline {subsubsection}{How to fairly rank movies (\S {})}{218}{subsubsection*.231}%
+\contentsline {subsubsection}{What is your best choice recommendation? (\S {})}{220}{subsubsection*.232}%
+\contentsline {subsubsection}{What is the best public policy? (\S {}\S {})}{221}{subsubsection*.234}%
+\contentsline {subsubsection}{A fair diploma validation decision (\S {}\S {}\S {})}{221}{subsubsection*.235}%
+\contentsline {section}{\numberline {4}Working with big outranking digraphs}{222}{section.4}%
+\contentsline {subsection}{\numberline {4.1}Sparse bipolar\sphinxhyphen {}valued outranking digraphs}{222}{subsection.4.1}%
+\contentsline {subsubsection}{The sparse pre\sphinxhyphen {}ranked outranking digraph model}{223}{subsubsection*.241}%
+\contentsline {subsubsection}{Ranking pre\sphinxhyphen {}ranked sparse outranking digraphs}{226}{subsubsection*.242}%
+\contentsline {subsection}{\numberline {4.2}Using Digraph3 multiprocessing resources}{227}{subsection.4.2}%
+\contentsline {subsubsection}{Computing with multiple threads in parallel}{228}{subsubsection*.246}%
+\contentsline {subsubsection}{Using the mpOutrankingDigraphs module}{229}{subsubsection*.248}%
+\contentsline {subsubsection}{Setting the Threading parameters}{231}{subsubsection*.249}%
+\contentsline {subsection}{\numberline {4.3}On ranking big outranking digraphs}{231}{subsection.4.3}%
+\contentsline {subsubsection}{C\sphinxhyphen {}compiled Python modules}{232}{subsubsection*.257}%
+\contentsline {subsubsection}{Big Data performance tableaux}{232}{subsubsection*.259}%
+\contentsline {subsubsection}{C\sphinxhyphen {}implemented integer\sphinxhyphen {}valued outranking digraphs}{234}{subsubsection*.260}%
+\contentsline {subsubsection}{The sparse outranking digraph implementation}{236}{subsubsection*.261}%
+\contentsline {subsubsection}{Ranking big sets of decision alternatives}{240}{subsubsection*.262}%
+\contentsline {section}{\numberline {5}HPC\sphinxhyphen {}Ranking of Big Sparse Outranking Digraphs}{242}{section.5}%
+\contentsline {subsection}{\numberline {5.1}On a common 2023 desktop computer}{243}{subsection.5.1}%
+\contentsline {subsection}{\numberline {5.2}On the HPC platform of the University of Luxembourg (Spring 2018)}{244}{subsection.5.2}%
+\contentsline {subsection}{\numberline {5.3}On the MeluXina EuroHPC supercomputer }{250}{sphinxfootnotemark.23}%
+\contentsline {section}{\numberline {6}Moving on to undirected graphs}{252}{section.6}%
+\contentsline {subsection}{\numberline {6.1}Working with the \sphinxstyleliteralintitle {\sphinxupquote {graphs}} module}{253}{subsection.6.1}%
+\contentsline {subsubsection}{Structure of a \sphinxstyleliteralintitle {\sphinxupquote {Graph}} object}{253}{subsubsection*.283}%
+\contentsline {subsubsection}{q\sphinxhyphen {}coloring of a graph}{256}{subsubsection*.284}%
+\contentsline {subsubsection}{MIS and clique enumeration}{258}{subsubsection*.285}%
+\contentsline {subsubsection}{Line graphs and maximal matchings}{259}{subsubsection*.286}%
+\contentsline {subsubsection}{Grids and the Ising model}{262}{subsubsection*.287}%
+\contentsline {subsubsection}{Simulating Metropolis random walks}{263}{subsubsection*.288}%
+\contentsline {subsection}{\numberline {6.2}Computing the non isomorphic MISs of the 12\sphinxhyphen {}cycle graph}{265}{subsection.6.2}%
+\contentsline {subsubsection}{Introduction}{265}{subsubsection*.293}%
+\contentsline {subsubsection}{Computing the maximal independent sets (MISs)}{266}{subsubsection*.294}%
+\contentsline {subsubsection}{Computing the automorphism group}{268}{subsubsection*.296}%
+\contentsline {subsubsection}{Computing the isomorphic MISs}{268}{subsubsection*.298}%
+\contentsline {subsection}{\numberline {6.3}About split, interval and permutation graphs}{270}{subsection.6.3}%
+\contentsline {subsubsection}{A multiply \sphinxstyleemphasis {perfect} graph}{270}{subsubsection*.303}%
+\contentsline {subsubsection}{Who is the liar ?}{272}{subsubsection*.304}%
+\contentsline {subsubsection}{Generating permutation graphs}{275}{subsubsection*.306}%
+\contentsline {subsubsection}{Recognizing permutation graphs}{278}{subsubsection*.307}%
+\contentsline {subsection}{\numberline {6.4}On tree graphs and graph forests}{284}{subsection.6.4}%
+\contentsline {subsubsection}{Generating random tree graphs}{284}{subsubsection*.312}%
+\contentsline {subsubsection}{Recognizing tree graphs}{287}{subsubsection*.313}%
+\contentsline {subsubsection}{Spanning trees and forests}{289}{subsubsection*.314}%
+\contentsline {subsubsection}{Maximum determined spanning forests}{291}{subsubsection*.316}%
+\contentsline {section}{\numberline {7}Appendices}{293}{section.7}%
+\contentsline {section}{References}{293}{section.7}%

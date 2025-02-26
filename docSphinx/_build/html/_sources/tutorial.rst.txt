@@ -3016,11 +3016,11 @@ Indeed, the extended *Kendall* tau index of +0.638 leads to a bipolar-valued *re
 
 A further valued version of the *Copeland* ranking-by-scoring rule is given by the new *Bachet* ranking rule (see the advanced topic on :ref:`a new ranking rule based on bipolar-valued base 3 Bachet numbers <Bachet-Tutorial-label>`) [59]_.	
 
-*Bachet* rankings
-`````````````````
+The *Bachet* ranking
+````````````````````
 The *Bachet* numbers --bipolar-valued {-1,0,1} base 3 encoded integers-- instantiated by the row vectors without reflxive terms and the colum vectors without reflexive terms of the strict outranking digraph's polarised relation table model in fact per decision action respectively an **outrankingness** and a **not outrankedness** ranking fitness scores similar to the previous *NetFlows* ranking scores (see :numref:`polarisedAStrictOutranking` and :py:class:`linearOrders.BachetRanking`).
 
-Now, *Bachet* numbers are formulated in a base 3 positional numeral system and the integer values of the *Bachet* ranking scores may depend therefore on the actual ordering of the outranking digraph's *actions* dictiionary. The *Bachet* rule is however, like the *Copeland* rule, **invariant** under the **codual** transform and **Condorcet consistent**, ie. when the outranking digraph models a stransitive and acyclic relation, this relation will be preserved by the *Bachet* ranking scores. Here, as we have seen above, the given digraph's transitivity degree is only 0.487. To reduce therefore the dependency on the given initial ordering of the *actions* dictionary, we compute below *Bachet* ranking results for 10 random permutations and their reversed orderings of the actions keys (see :numref:`BachetRanking` Line 2) and keep the one ranking that is best correlated with the given outranking digraph (see the :py:class:`~linearOrders.BachetRanking` class documentation). 
+Now, *Bachet* numbers are formulated in a base 3 positional numeral system and the integer values of the *Bachet* ranking scores may depend therefore on the actual ordering of the outranking digraph's *actions* dictiionary. The *Bachet* rule is however, like the *Copeland* rule, **invariant** under the **codual** transform and **Condorcet consistent**, ie. when the outranking digraph models a transitive and acyclic relation, this relation will be preserved by the *Bachet* ranking scores. Here, as we have seen above, the given digraph's transitivity degree is only 0.487. To reduce therefore the dependency on the given initial ordering of the *actions* dictionary, we compute below *Bachet* ranking results for 10 random permutations and their reversed orderings of the actions keys (see :numref:`BachetRanking` Line 2) and keep the one ranking that is best correlated with the given outranking digraph (see the :py:class:`~linearOrders.BachetRanking` class documentation). 
 
 .. code-block:: pycon
    :name: BachetRanking
@@ -3054,7 +3054,7 @@ Now, *Bachet* numbers are formulated in a base 3 positional numeral system and t
 
 In :numref:`BachetRanking` Line 22 above, we may observe that the *Bachet* scores lead eventually to a ranking result that is again slightly better correlated  with the given outranking relation than the previous *NetFlows* ranking (+0.715 versus +0.638). 
 
-To appreciate now the more or less correlations of the *Copeland*, the *NetFlows* and the *Bachet* rankings with the given outranking relation, it is useful to consider *Kemeny*'s and *Slater*'s **best fitting** ranking rules.
+To appreciate now the more or less correlations of the *Copeland*, the *NetFlows* and the *Bachet* ranking with the given outranking relation, it is useful to consider *Kemeny*'s and *Slater*'s **best fitting** ranking rules.
 
 *Kemeny* rankings
 `````````````````

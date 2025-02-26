@@ -34,36 +34,37 @@
 \contentsline {subsubsection}{Ranking the potential presidential candidates}{63}{subsubsection*.66}%
 \contentsline {section}{\numberline {3}Theoretical advancements}{64}{section.3}%
 \contentsline {subsection}{\numberline {3.1}Ranking\sphinxhyphen {}by\sphinxhyphen {}scoring with bipolar\sphinxhyphen {}valued base 3 encoded numbers}{64}{subsection.3.1}%
-\contentsline {subsubsection}{Bipolar\sphinxhyphen {}valued base 3 encoded Bachet numbers}{65}{subsubsection*.78}%
-\contentsline {subsubsection}{Examples of sbits encoded Bachet numbers}{66}{subsubsection*.80}%
-\contentsline {subsubsection}{The Bachet ranking rule, a new ranking\sphinxhyphen {}by\sphinxhyphen {}scoring method}{69}{subsubsection*.82}%
-\contentsline {subsection}{\numberline {3.2}Coping with missing data and indeterminateness}{73}{subsection.3.2}%
-\contentsline {subsubsection}{A motivating data set}{74}{subsubsection*.83}%
-\contentsline {subsubsection}{Modelling pairwise bipolar\sphinxhyphen {}valued rating opinions}{77}{subsubsection*.85}%
-\contentsline {subsection}{\numberline {3.3}Ordinal correlation equals bipolar\sphinxhyphen {}valued relational equivalence}{79}{subsection.3.3}%
-\contentsline {subsubsection}{Kendall’s \sphinxstyleemphasis {tau} index}{80}{subsubsection*.91}%
-\contentsline {subsubsection}{Bipolar\sphinxhyphen {}valued relational equivalence}{81}{subsubsection*.92}%
-\contentsline {subsubsection}{Fitness of ranking heuristics}{84}{subsubsection*.93}%
-\contentsline {subsubsection}{Illustrating preference divergences}{86}{subsubsection*.94}%
-\contentsline {subsubsection}{Exploring the \sphinxstyleemphasis {better rated} and the \sphinxstyleemphasis {as well as rated} opinions}{87}{subsubsection*.96}%
-\contentsline {subsection}{\numberline {3.4}On computing digraph kernels}{89}{subsection.3.4}%
-\contentsline {subsubsection}{What is a graph kernel ?}{89}{subsubsection*.103}%
-\contentsline {subsubsection}{Initial and terminal kernels}{94}{subsubsection*.104}%
-\contentsline {subsubsection}{Kernels in lateralized digraphs}{99}{subsubsection*.105}%
-\contentsline {subsubsection}{Computing good and bad choice recommendations}{102}{subsubsection*.106}%
-\contentsline {subsubsection}{Tractability}{107}{subsubsection*.107}%
-\contentsline {subsection}{\numberline {3.5}Bipolar\sphinxhyphen {}valued kernel membership characteristic vectors}{109}{subsection.3.5}%
-\contentsline {subsubsection}{Kernel equation systems}{109}{subsubsection*.111}%
-\contentsline {subsubsection}{Solving bipolar\sphinxhyphen {}valued kernel equation systems}{110}{subsubsection*.112}%
-\contentsline {subsubsection}{Historical notes}{117}{subsubsection*.113}%
-\contentsline {subsection}{\numberline {3.6}On characterizing bipolar\sphinxhyphen {}valued outranking digraphs}{118}{subsection.3.6}%
-\contentsline {subsubsection}{Necessary properties of the outranking digraph}{118}{subsubsection*.118}%
-\contentsline {subsubsection}{Partial tournaments may be strict outranking digraphs}{120}{subsubsection*.120}%
-\contentsline {subsubsection}{Recognizing bipolar outranking valuations}{122}{subsubsection*.121}%
-\contentsline {subsubsection}{On generating random outranking valuations}{126}{subsubsection*.123}%
-\contentsline {subsection}{\numberline {3.7}Consensus quality of the bipolar\sphinxhyphen {}valued outranking relation}{127}{subsection.3.7}%
-\contentsline {subsubsection}{Circular performance tableaux}{127}{subsubsection*.127}%
-\contentsline {subsubsection}{A difficult decision problem}{129}{subsubsection*.128}%
-\contentsline {subsubsection}{The central CONDORCET point of view}{131}{subsubsection*.129}%
-\contentsline {section}{\numberline {4}Appendix}{136}{section.4}%
-\contentsline {section}{References}{136}{section.4}%
+\contentsline {subsubsection}{Bipolar\sphinxhyphen {}valued base 3 encoded Bachet numbers}{65}{subsubsection*.79}%
+\contentsline {subsubsection}{Examples of sbits encoded Bachet numbers}{66}{subsubsection*.81}%
+\contentsline {subsubsection}{The Bachet ranking rule, a new ranking\sphinxhyphen {}by\sphinxhyphen {}scoring method}{69}{subsubsection*.83}%
+\contentsline {subsubsection}{Efficiency of the Bachet ranking rule settings}{73}{subsubsection*.85}%
+\contentsline {subsection}{\numberline {3.2}Coping with missing data and indeterminateness}{76}{subsection.3.2}%
+\contentsline {subsubsection}{A motivating data set}{76}{subsubsection*.86}%
+\contentsline {subsubsection}{Modelling pairwise bipolar\sphinxhyphen {}valued rating opinions}{79}{subsubsection*.88}%
+\contentsline {subsection}{\numberline {3.3}Ordinal correlation equals bipolar\sphinxhyphen {}valued relational equivalence}{81}{subsection.3.3}%
+\contentsline {subsubsection}{Kendall’s \sphinxstyleemphasis {tau} index}{82}{subsubsection*.94}%
+\contentsline {subsubsection}{Bipolar\sphinxhyphen {}valued relational equivalence}{83}{subsubsection*.95}%
+\contentsline {subsubsection}{Fitness of ranking heuristics}{86}{subsubsection*.96}%
+\contentsline {subsubsection}{Illustrating preference divergences}{88}{subsubsection*.97}%
+\contentsline {subsubsection}{Exploring the \sphinxstyleemphasis {better rated} and the \sphinxstyleemphasis {as well as rated} opinions}{89}{subsubsection*.99}%
+\contentsline {subsection}{\numberline {3.4}On computing digraph kernels}{91}{subsection.3.4}%
+\contentsline {subsubsection}{What is a graph kernel ?}{91}{subsubsection*.106}%
+\contentsline {subsubsection}{Initial and terminal kernels}{96}{subsubsection*.107}%
+\contentsline {subsubsection}{Kernels in lateralized digraphs}{101}{subsubsection*.108}%
+\contentsline {subsubsection}{Computing first and last choice recommendations}{104}{subsubsection*.109}%
+\contentsline {subsubsection}{Tractability}{109}{subsubsection*.110}%
+\contentsline {subsection}{\numberline {3.5}Bipolar\sphinxhyphen {}valued kernel membership characteristic vectors}{111}{subsection.3.5}%
+\contentsline {subsubsection}{Kernel equation systems}{111}{subsubsection*.114}%
+\contentsline {subsubsection}{Solving bipolar\sphinxhyphen {}valued kernel equation systems}{112}{subsubsection*.115}%
+\contentsline {subsubsection}{Historical notes}{119}{subsubsection*.116}%
+\contentsline {subsection}{\numberline {3.6}On characterizing bipolar\sphinxhyphen {}valued outranking digraphs}{120}{subsection.3.6}%
+\contentsline {subsubsection}{Necessary properties of the outranking digraph}{120}{subsubsection*.121}%
+\contentsline {subsubsection}{Partial tournaments may be strict outranking digraphs}{122}{subsubsection*.123}%
+\contentsline {subsubsection}{Recognizing bipolar outranking valuations}{124}{subsubsection*.124}%
+\contentsline {subsubsection}{On generating random outranking valuations}{128}{subsubsection*.126}%
+\contentsline {subsection}{\numberline {3.7}Consensus quality of the bipolar\sphinxhyphen {}valued outranking relation}{129}{subsection.3.7}%
+\contentsline {subsubsection}{Circular performance tableaux}{129}{subsubsection*.130}%
+\contentsline {subsubsection}{A difficult decision problem}{131}{subsubsection*.131}%
+\contentsline {subsubsection}{The central CONDORCET point of view}{133}{subsubsection*.132}%
+\contentsline {section}{\numberline {4}Appendix}{138}{section.4}%
+\contentsline {section}{References}{138}{section.4}%
