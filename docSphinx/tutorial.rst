@@ -2854,7 +2854,7 @@ The strict outranking relation  :math:`\succnsim` shown here is apparently *not 
      #triples x>y>z: 78, #closed: 38, #open: 40
      #closed/#triples =  0.487
     
-With only 35% of the required transitive arcs, the strict outranking relation here is hence very far from being transitive; a serious problem when a linear ordering of the decision alternatives is looked for. Let us furthermore see if there are any cyclic outrankings.
+With only 49% of the required transitive arcs, the strict outranking relation here is hence very far from being transitive; a serious problem when a linear ordering of the decision alternatives is looked for. Let us furthermore see if there are any cyclic outrankings.
     
 .. code-block:: pycon
    :linenos:
@@ -2869,7 +2869,7 @@ There is one chordless circuit detected in the given strict outranking digraph *
 
 Now, several heuristic ranking rules have been proposed for constructing a linear ordering which is closest in some specific sense to a given outranking relation.
 
-The Digraph3 resources provide some of the most common of these ranking rules, like *Copeland*'s, *Kemeny*'s, *Slater*'s, *Kohler*'s, *Arrow-Raynaud*'s or *Tideman*'s ranking rule.
+The Digraph3 resources provide some of the most common of these ranking rules, like *Copeland*'s, *Kemeny*'s, *Slater*'s, *Kohler*'s, *Arrow-Raynaud*'s or *Tideman*'s ranking rule. Recently, a new *Bachet* ranking rule --a valued *Copeland* variant-- has been added.
 
 .. _Copeland-Ranking-label:
 
@@ -2967,7 +2967,7 @@ Let us now consider a similar ranking rule, but working directly on the *bipolar
 The *NetFlows* ranking
 ``````````````````````
 
-The valued version of the *Copeland* rule, called **NetFlows** rule, computes for each alternative *x* a *net flow* score,  i.e. the sum of the differences between the **strict outranking** characteristics :math:`r(x\, \succnsim \,y)` and the **strict outranked** characteristics :math:`r(y\, \succnsim \,x)` for all pairs of alternatives where *y* is different from *x*.
+A valued version of the *Copeland* rule, called **NetFlows** rule, computes for each alternative *x* a *net flow* score,  i.e. the sum of the differences between the **strict outranking** characteristics :math:`r(x\, \succnsim \,y)` and the **strict outranked** characteristics :math:`r(y\, \succnsim \,x)` for all pairs of alternatives where *y* is different from *x*.
   
 .. code-block:: pycon
    :name: NetFlowsRanking
@@ -3014,7 +3014,47 @@ The **NetFlows** ranking result appears to be slightly better correlated (+0.638
 
 Indeed, the extended *Kendall* tau index of +0.638 leads to a bipolar-valued *relational equivalence* characteristics of +0.147, i.e. a *majority* of 57.35% of the criteria significance supports the relational equivalence between the given outranking digraphs *g* or *gcd*  and the corresponding *NetFlows* ranking. This lesser ranking performance of the *Copeland* rule stems in this example essentially from the *weakness* of the actual ranking result and our subsequent *arbitrary* lexicographic resolution of the many ties given by the *Copeland* scores (see :numref:`weakRankingDrawing`).
 
-To appreciate now the more or less correlation of both the *Copeland* and the *NetFlows* rankings with the underlying pairwise outranking relation, it is useful to consider *Kemeny*'s and *Slater*'s **best fitting** ranking rules.
+A further valued version of the *Copeland* ranking-by-scoring rule is given by the new *Bachet* ranking rule (see the advanced topic on :ref:`a new ranking rule based on bipolar-valued base 3 Bachet numbers <Bachet-Tutorial-label>`) [59]_.	
+
+*Bachet* rankings
+`````````````````
+The *Bachet* numbers --bipolar-valued {-1,0,1} base 3 encoded integers-- instantiated by the row vectors without reflxive terms and the colum vectors without reflexive terms of the strict outranking digraph's polarised relation table model in fact per decision action respectively an **outrankingness** and a **not outrankedness** ranking fitness scores similar to the previous *NetFlows* ranking scores (see :numref:`polarisedAStrictOutranking` and :py:class:`linearOrders.BachetRanking`).
+
+Now, *Bachet* numbers are formulated in a base 3 positional numeral system and the integer values of the *Bachet* ranking scores may depend therefore on the actual ordering of the outranking digraph's *actions* dictiionary. The *Bachet* rule is however, like the *Copeland* rule, **invariant** under the **codual** transform and **Condorcet consistent**, ie. when the outranking digraph models a stransitive and acyclic relation, this relation will be preserved by the *Bachet* ranking scores. Here, as we have seen above, the given digraph's transitivity degree is only 0.487. To reduce therefore the dependency on the given initial ordering of the *actions* dictionary, we compute below *Bachet* ranking results for 10 random permutations and their reversed orderings of the actions keys (see :numref:`BachetRanking` Line 2) and keep the one ranking that is best correlated with the given outranking digraph (see the :py:class:`~linearOrders.BachetRanking` class documentation). 
+
+.. code-block:: pycon
+   :name: BachetRanking
+   :caption: Computing a *NetFlows* ranking
+   :emphasize-lines: 2,16,22
+
+   :linenos:
+
+   >>> from linearOrders import BachetRanking
+   >>> ba = BacetRanking(gcd,randomized=10)
+   >>> ba.showScores()
+    Bachet scores in descending order
+     action 	 score
+       a5       5096.00
+       a6       3074.00
+       a7       1794.00
+       a3        -71.00
+       a4       -141.00
+       a8       -360.00
+       a1       -490.00
+       a2       -537.00
+       a9      -1135.00
+   >>> ba.bachetRanking
+    ['a5', 'a6', 'a7', 'a3', 'a4', 'a8', 'a1', 'a2', 'a9']
+   >>> corr = g.computeRankingCorrelation(ba.bachetRanking)
+   >>> g.showCorrelation(corr)
+    Correlation indexes:
+     Crisp ordinal correlation  : +0.715
+     Epistemic determination    :  0.230
+     Bipolar-valued equivalence : +0.165
+
+In :numref:`BachetRanking` Line 22 above, we may observe that the *Bachet* scores lead eventually to a ranking result that is again slightly better correlated  with the given outranking relation than the previous *NetFlows* ranking (+0.715 versus +0.638). 
+
+To appreciate now the more or less correlations of the *Copeland*, the *NetFlows* and the *Bachet* rankings with the given outranking relation, it is useful to consider *Kemeny*'s and *Slater*'s **best fitting** ranking rules.
 
 *Kemeny* rankings
 `````````````````
@@ -3192,7 +3232,7 @@ We notice in :numref:`SlaterRanking` Line 7 that the first *Slater* ranking is a
        
 What precise ranking result should we hence adopt? *Kemeny*'s and *Slater*'s ranking rules are furthermore computationally *difficult* problems and effective ranking results are only computable for tiny outranking digraphs (< 20 objects). 
 
-More efficient ranking heuristics, like the *Copeland* and the *NetFlows* rules, are therefore needed in practice. Let us finally, after these *ranking-by-scoring* strategies, also present two popular *ranking-by-choosing* strategies.
+More efficient ranking heuristics, like the *Copeland* and the *NetFlows* rules, and in a minor version, the *Bachet* rule, are therefore needed in practice. Let us finally, after these *ranking-by-scoring* strategies, also present two popular *ranking-by-choosing* strategies.
 
 *Kohler*'s ranking-by-choosing rule
 ```````````````````````````````````
@@ -10606,6 +10646,8 @@ Appendices
 .. [57] The sources of the cythonized Digraph3 modules (with *.pyx* suffix) may be found in the *cython* directory of the Digraph3 resources. 
 
 .. [58] See the :ref:`tutorial <Three-Objectives-Performance-Tableau-label>` on generating random three-objectives performance tableaux.
+
+.. [59] https://digraph3.readthedocs.io/en/latest/_static/digraph3Pearls.pdf
 
 ..  LocalWords:  randomDigraph Determinateness valuationdomain py png
 ..  LocalWords:  notGamma tutorialDigraph shortName func irreflexive

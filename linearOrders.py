@@ -1220,10 +1220,8 @@ class _OutFlowsOrder(LinearOrder):
                 print('%s \t %.2f' %(x[1],x[0]))
 #------------
 class BachetRanking(LinearOrder):
-    """
-    .. warning:: Still under development ! The ranking rule may fail to deliver convincing results due to its dependency on the given ordering of the decision actions in the *other.actions* attribute.
-    
-    Instantiates the Bachet Ranking and Ordering from a given bipolar-valued Digraph instance *other*.
+    """    
+    Instantiates the Bachet Ranking and Ordering from a given bipolar-valued *Digraph* instance *other*.
 
     *Parameters*
 
