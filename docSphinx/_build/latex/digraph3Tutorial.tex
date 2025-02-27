@@ -67,7 +67,7 @@
 
 
 \title{Tutorials for the Digraph3 Python software resources}
-\date{February 26, 2025}
+\date{February 27, 2025}
 \release{3.13.2}
 \author{Raymond Bisdorff}
 \newcommand{\sphinxlogo}{\sphinxincludegraphics{introDoc3.png}\par}
@@ -4016,7 +4016,7 @@ Back to {\hyperref[\detokenize{tutorial:tutorial-label}]{\sphinxcrossref{\DUrole
 
 \item {} 
 \sphinxAtStartPar
-\phantomsection\label{\detokenize{tutorial:id321}}{\hyperref[\detokenize{tutorial:bachet-rankings}]{\sphinxcrossref{\sphinxstyleemphasis{Bachet} rankings}}} (\autopageref*{\detokenize{tutorial:bachet-rankings}})
+\phantomsection\label{\detokenize{tutorial:id321}}{\hyperref[\detokenize{tutorial:the-bachet-ranking}]{\sphinxcrossref{The \sphinxstyleemphasis{Bachet} ranking}}} (\autopageref*{\detokenize{tutorial:the-bachet-ranking}})
 
 \item {} 
 \sphinxAtStartPar
@@ -4240,8 +4240,6 @@ A valued version of the \sphinxstyleemphasis{Copeland} rule, called \sphinxstyle
 \def\sphinxLiteralBlockLabel{\label{\detokenize{tutorial:netflowsranking}}}
 \fvset{hllines={, 14, 16,}}%
 \begin{sphinxVerbatim}[commandchars=\\\{\},numbers=left,firstnumber=1,stepnumber=1]
-\PYG{g+go}{:linenos:}
-
 \PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{k+kn}{from} \PYG{n+nn}{linearOrders} \PYG{k+kn}{import} \PYG{n}{NetFlowsRanking}
 \PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{nf} \PYG{o}{=} \PYG{n}{NetFlowsRanking}\PYG{p}{(}\PYG{n}{gcd}\PYG{p}{,}\PYG{n}{Comments}\PYG{o}{=}\PYG{k+kc}{True}\PYG{p}{)}
 \PYG{g+go}{ Net Flows :}
@@ -4293,19 +4291,17 @@ A further valued version of the \sphinxstyleemphasis{Copeland} ranking\sphinxhyp
 \end{footnote}.
 
 
-\subsubsection{\sphinxstyleemphasis{Bachet} rankings}
-\label{\detokenize{tutorial:bachet-rankings}}
+\subsubsection{The \sphinxstyleemphasis{Bachet} ranking}
+\label{\detokenize{tutorial:the-bachet-ranking}}
 \sphinxAtStartPar
 The \sphinxstyleemphasis{Bachet} numbers \textendash{}bipolar\sphinxhyphen{}valued \{\sphinxhyphen{}1,0,1\} base 3 encoded integers\textendash{} instantiated by the row vectors without reflxive terms and the colum vectors without reflexive terms of the strict outranking digraph’s polarised relation table model in fact per decision action respectively an \sphinxstylestrong{outrankingness} and a \sphinxstylestrong{not outrankedness} ranking fitness scores similar to the previous \sphinxstyleemphasis{NetFlows} ranking scores (see \hyperref[\detokenize{tutorial:polarisedastrictoutranking}]{Listing \ref{\detokenize{tutorial:polarisedastrictoutranking}}} and \sphinxcode{\sphinxupquote{linearOrders.BachetRanking}}).
 
 \sphinxAtStartPar
-Now, \sphinxstyleemphasis{Bachet} numbers are formulated in a base 3 positional numeral system and the integer values of the \sphinxstyleemphasis{Bachet} ranking scores may depend therefore on the actual ordering of the outranking digraph’s \sphinxstyleemphasis{actions} dictiionary. The \sphinxstyleemphasis{Bachet} rule is however, like the \sphinxstyleemphasis{Copeland} rule, \sphinxstylestrong{invariant} under the \sphinxstylestrong{codual* transform and **Condorcet consistent}. When the outranking digraph models a stransitive and acyclic relation, this relation will be preserved by the \sphinxstyleemphasis{Bachet} ranking scores. Here, as we have seen above, the given digraph’s transitivity degree is only 0.487. To reduce therefore the dependency on the given initial ordering of the \sphinxstyleemphasis{actions} dictionary, we will compute below \sphinxstyleemphasis{Bachet} ranking results for 10 random permutations and their reversed ordering of the actions keys (see \hyperref[\detokenize{tutorial:bachetranking}]{Listing \ref{\detokenize{tutorial:bachetranking}}} Line 2) and keep the one ranking that is best correlated with the given outranking digraph (see the \sphinxcode{\sphinxupquote{BachetRanking}} class documentation).
+Now, \sphinxstyleemphasis{Bachet} numbers are formulated in a base 3 positional numeral system and the integer values of the \sphinxstyleemphasis{Bachet} ranking scores may depend therefore on the actual ordering of the outranking digraph’s \sphinxstyleemphasis{actions} dictiionary. The \sphinxstyleemphasis{Bachet} rule is however, like the \sphinxstyleemphasis{Copeland} rule, \sphinxstylestrong{invariant} under the \sphinxstylestrong{codual} transform and \sphinxstylestrong{Condorcet consistent}, ie. when the outranking digraph models a transitive and acyclic relation, this relation will be preserved by the \sphinxstyleemphasis{Bachet} ranking scores. Here, as we have seen above, the given digraph’s transitivity degree is only 0.487. To reduce therefore the dependency on the given initial ordering of the \sphinxstyleemphasis{actions} dictionary, we compute below \sphinxstyleemphasis{Bachet} ranking results for 10 random permutations and their reversed orderings of the actions keys (see \hyperref[\detokenize{tutorial:bachetranking}]{Listing \ref{\detokenize{tutorial:bachetranking}}} Line 2) and keep the one ranking that is best correlated with the given outranking digraph (see the \sphinxcode{\sphinxupquote{BachetRanking}} class documentation).
 \sphinxSetupCaptionForVerbatim{Computing a \sphinxstyleemphasis{NetFlows} ranking}
 \def\sphinxLiteralBlockLabel{\label{\detokenize{tutorial:bachetranking}}}
-\fvset{hllines={, 2, 16, 20,}}%
+\fvset{hllines={, 2, 16, 22,}}%
 \begin{sphinxVerbatim}[commandchars=\\\{\},numbers=left,firstnumber=1,stepnumber=1]
-\PYG{g+go}{:linenos:}
-
 \PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{k+kn}{from} \PYG{n+nn}{linearOrders} \PYG{k+kn}{import} \PYG{n}{BachetRanking}
 \PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{ba} \PYG{o}{=} \PYG{n}{BacetRanking}\PYG{p}{(}\PYG{n}{gcd}\PYG{p}{,}\PYG{n}{randomized}\PYG{o}{=}\PYG{l+m+mi}{10}\PYG{p}{)}
 \PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{ba}\PYG{o}{.}\PYG{n}{showScores}\PYG{p}{(}\PYG{p}{)}
@@ -4332,10 +4328,50 @@ Now, \sphinxstyleemphasis{Bachet} numbers are formulated in a base 3 positional 
 \sphinxresetverbatimhllines
 
 \sphinxAtStartPar
-In \hyperref[\detokenize{tutorial:bachetranking}]{Listing \ref{\detokenize{tutorial:bachetranking}}} Line 20 above, we may observe that the \sphinxstyleemphasis{Bachet} scores lead eventually to a ranking result that is again slightly better correlated  with the given outranking relation than the previous \sphinxstyleemphasis{NetFlows} ranking (+0.715 versus +0.638).
+In \hyperref[\detokenize{tutorial:bachetranking}]{Listing \ref{\detokenize{tutorial:bachetranking}}} Line 22 above, we may observe that the \sphinxstyleemphasis{Bachet} scores lead eventually to a ranking result that is again slightly better correlated  with the given outranking relation than the previous \sphinxstyleemphasis{NetFlows} ranking (+0.715 versus +0.638).
 
 \sphinxAtStartPar
-To appreciate now the more or less correlation of the \sphinxstyleemphasis{Copeland}, the \sphinxstyleemphasis{NetFlows} and the \sphinxstyleemphasis{Bachet} rankings with the underlying pairwise outranking relation, it is useful to consider \sphinxstyleemphasis{Kemeny}’s and \sphinxstyleemphasis{Slater}’s \sphinxstylestrong{best fitting} ranking rules.
+To vizualize the ranking consensus between the \sphinxstyleemphasis{Copeland}, the \sphinxstyleemphasis{NetFlows} and the \sphinxstyleemphasis{Bachet} ranking results, we can use the \sphinxcode{\sphinxupquote{transitive.RankingsFusionDigraph}} class.
+\sphinxSetupCaptionForVerbatim{Computing a rankings consensus}
+\def\sphinxLiteralBlockLabel{\label{\detokenize{tutorial:rankingconsensus}}}
+\begin{sphinxVerbatim}[commandchars=\\\{\},numbers=left,firstnumber=1,stepnumber=1]
+\PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{k+kn}{from} \PYG{n+nn}{transitiveDigraphs} \PYG{k+kn}{import} \PYG{n}{RankingsFusionDigraph}
+\PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{rankings} \PYG{o}{=} \PYG{p}{[}\PYG{n}{cop}\PYG{o}{.}\PYG{n}{copelandRanking}\PYG{p}{,}
+\PYG{g+gp}{... }            \PYG{n}{nf}\PYG{o}{.}\PYG{n}{netFlowsRanking}\PYG{p}{,}
+\PYG{g+gp}{... }            \PYG{n}{ba}\PYG{o}{.}\PYG{n}{bachetRanking}\PYG{p}{]}
+\PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{fdg} \PYG{o}{=} \PYG{n}{RankingsFusionDigraph}\PYG{p}{(}\PYG{n}{gcd}\PYG{p}{,}\PYG{n}{rankings}\PYG{p}{)}
+\PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{fdg}\PYG{o}{.}\PYG{n}{exportGraphViz}\PYG{p}{(}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{rankingsByScoringFusion}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{)}
+\PYG{g+go}{ *\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{} exporting a dot file for GraphViz tools \PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}*}
+\PYG{g+go}{ Exporting to rankingsByScoringFusion.dot}
+\PYG{g+go}{  0 \PYGZob{} rank = 0; a5; \PYGZcb{}}
+\PYG{g+go}{  1 \PYGZob{} rank = 1; a1; a7; a6; \PYGZcb{}}
+\PYG{g+go}{  2 \PYGZob{} rank = 2; a4; a3; a8; \PYGZcb{}}
+\PYG{g+go}{  3 \PYGZob{} rank = 3; a9; \PYGZcb{}}
+\PYG{g+go}{  4 \PYGZob{} rank = 4; a2; \PYGZcb{}}
+\PYG{g+go}{ dot \PYGZhy{}Grankdir=TB \PYGZhy{}Tpng rankingsByScoringFusion.dot \PYGZhy{}o rankingsByScoringFusion.png}
+\end{sphinxVerbatim}
+
+\begin{figure}[H]
+\centering
+\capstart
+
+\noindent\sphinxincludegraphics[width=200\sphinxpxdimen]{{rankingsByScoringFusion}.png}
+\caption{\sphinxstyleemphasis{Copeland}, \sphinxstyleemphasis{NetFlows} and \sphinxstyleemphasis{Bachet} ranking consensus}\label{\detokenize{tutorial:rankingconsensusfigure}}\end{figure}
+
+\sphinxAtStartPar
+In \hyperref[\detokenize{tutorial:rankingconsensusfigure}]{Fig.\@ \ref{\detokenize{tutorial:rankingconsensusfigure}}} appears a convincing ranking consensus with four levels of agreement. This epistemic fusion of all three \sphinxstyleemphasis{ranking\sphinxhyphen{}by\sphinxhyphen{}scoring} rules delivers a highly correlated preordering with the given outranking digraph (see Line 3 below).
+
+\begin{sphinxVerbatim}[commandchars=\\\{\},numbers=left,firstnumber=1,stepnumber=1]
+\PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{o}{\PYGZgt{}\PYGZgt{}}\PYG{o}{\PYGZgt{}} \PYG{n}{corr} \PYG{o}{=} \PYG{n}{g}\PYG{o}{.}\PYG{n}{computeOrdinalCorrelation}\PYG{p}{(}\PYG{n}{fg}\PYG{p}{)}
+\PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{g}\PYG{o}{.}\PYG{n}{showCorrelation}\PYG{p}{(}\PYG{n}{corr}\PYG{p}{)}
+\PYG{g+go}{ Correlation indexes:}
+\PYG{g+go}{  Crisp ordinal correlation  : +0.852}
+\PYG{g+go}{  Epistemic determination    :  0.163}
+\PYG{g+go}{  Bipolar\PYGZhy{}valued equivalence : +0.139}
+\end{sphinxVerbatim}
+
+\sphinxAtStartPar
+To appreciate now the more or less ranking performances of the \sphinxstyleemphasis{Copeland}, the \sphinxstyleemphasis{NetFlows} and the \sphinxstyleemphasis{Bachet} ranking with the given outranking relation, it is useful to consider \sphinxstyleemphasis{Kemeny}’s and \sphinxstyleemphasis{Slater}’s \sphinxstylestrong{best fitting} ranking rules.
 
 
 \subsubsection{\sphinxstyleemphasis{Kemeny} rankings}

@@ -137,8 +137,8 @@
 <li class="toctree-l4"><a class="reference internal" href="#the-copeland-ranking">1.3.4.2. The <em>Copeland</em> ranking</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#the-netflows-ranking">1.3.4.3. The <em>NetFlows</em> ranking</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#the-bachet-ranking">1.3.4.4. The <em>Bachet</em> ranking</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#kemeny-rankings">1.3.4.5. <em>Kemeny</em> rankings</a></li>
-<li class="toctree-l4"><a class="reference internal" href="#slater-rankings">1.3.4.6. <em>Slater</em> rankings</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#optimal-kemeny-rankings">1.3.4.5. Optimal <em>Kemeny</em> rankings</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#optimal-slater-rankings">1.3.4.6. Optimal <em>Slater</em> rankings</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#kohler-s-ranking-by-choosing-rule">1.3.4.7. <em>Kohler</em>’s ranking-by-choosing rule</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#tideman-s-ranked-pairs-rule">1.3.4.8. <em>Tideman</em>’s ranked-pairs rule</a></li>
 </ul>
@@ -2938,8 +2938,8 @@ three modes at 0.3 (-), 0.5 (~), respectively 0.7 (+) of the common scale span a
 <li><p><a class="reference internal" href="#the-copeland-ranking" id="id319">The <em>Copeland</em> ranking</a></p></li>
 <li><p><a class="reference internal" href="#the-netflows-ranking" id="id320">The <em>NetFlows</em> ranking</a></p></li>
 <li><p><a class="reference internal" href="#the-bachet-ranking" id="id321">The <em>Bachet</em> ranking</a></p></li>
-<li><p><a class="reference internal" href="#kemeny-rankings" id="id322"><em>Kemeny</em> rankings</a></p></li>
-<li><p><a class="reference internal" href="#slater-rankings" id="id323"><em>Slater</em> rankings</a></p></li>
+<li><p><a class="reference internal" href="#optimal-kemeny-rankings" id="id322">Optimal <em>Kemeny</em> rankings</a></p></li>
+<li><p><a class="reference internal" href="#optimal-slater-rankings" id="id323">Optimal <em>Slater</em> rankings</a></p></li>
 <li><p><a class="reference internal" href="#kohler-s-ranking-by-choosing-rule" id="id324"><em>Kohler</em>’s ranking-by-choosing rule</a></p></li>
 <li><p><a class="reference internal" href="#tideman-s-ranked-pairs-rule" id="id325"><em>Tideman</em>’s ranked-pairs rule</a></p></li>
 </ul>
@@ -3149,9 +3149,9 @@ three modes at 0.3 (-), 0.5 (~), respectively 0.7 (+) of the common scale span a
 <section id="the-bachet-ranking">
 <h4><a class="toc-backref" href="#id321" role="doc-backlink"><span class="section-number">1.3.4.4. </span>The <em>Bachet</em> ranking</a><a class="headerlink" href="#the-bachet-ranking" title="Link to this heading"></a></h4>
 <p>The <em>Bachet</em> numbers –bipolar-valued {-1,0,1} base 3 encoded integers– instantiated by the row vectors without reflxive terms and the colum vectors without reflexive terms of the strict outranking digraph’s polarised relation table model in fact per decision action respectively an <strong>outrankingness</strong> and a <strong>not outrankedness</strong> ranking fitness scores similar to the previous <em>NetFlows</em> ranking scores (see <a class="hxr-hoverxref hxr-tooltip reference internal" href="#polarisedastrictoutranking"><span class="std std-numref">Listing 1.26</span></a> and <a class="reference internal" href="techDoc.html#linearOrders.BachetRanking" title="linearOrders.BachetRanking"><code class="xref py py-class docutils literal notranslate"><span class="pre">linearOrders.BachetRanking</span></code></a>).</p>
-<p>Now, <em>Bachet</em> numbers are formulated in a base 3 positional numeral system and the integer values of the <em>Bachet</em> ranking scores may depend therefore on the actual ordering of the outranking digraph’s <em>actions</em> dictiionary. The <em>Bachet</em> rule is however, like the <em>Copeland</em> rule, <strong>invariant</strong> under the <strong>codual</strong> transform and <strong>Condorcet consistent</strong>, ie. when the outranking digraph models a transitive and acyclic relation, this relation will be preserved by the <em>Bachet</em> ranking scores. Here, as we have seen above, the given digraph’s transitivity degree is only 0.487. To reduce therefore the dependency on the given initial ordering of the <em>actions</em> dictionary, we compute below <em>Bachet</em> ranking results for 10 random permutations and their reversed orderings of the actions keys (see <a class="hxr-hoverxref hxr-tooltip reference internal" href="#bachetranking"><span class="std std-numref">Listing 1.33</span></a> Line 2) and keep the one ranking that is best correlated with the given outranking digraph ((see the advanced topic on <a class="reference internal" href="pearls.html#bachet-tutorial-label"><span class="std std-ref">a new ranking rule based on bipolar-valued base 3 Bachet numbers</span></a>) <a class="footnote-reference brackets" href="#id240" id="id51" role="doc-noteref"><span class="fn-bracket">[</span>59<span class="fn-bracket">]</span></a>.</p>
+<p>Now, <em>Bachet</em> numbers are formulated in a base 3 positional numeral system and the integer values of the <em>Bachet</em> ranking scores may depend therefore on the actual ordering of the outranking digraph’s <em>actions</em> dictiionary. The <em>Bachet</em> rule is however, like the <em>Copeland</em> rule, <strong>invariant</strong> under the <strong>codual</strong> transform and <strong>Condorcet consistent</strong>, ie. when the outranking digraph models a transitive and acyclic relation, this relation will be preserved by the <em>Bachet</em> ranking scores. Here, as we have seen above, the given digraph’s transitivity degree is only 0.487. To reduce therefore the dependency on the given initial ordering of the <em>actions</em> dictionary, we compute below <em>Bachet</em> ranking results for 10 random permutations and their reversed orderings of the actions keys (see <a class="hxr-hoverxref hxr-tooltip reference internal" href="#bachetranking"><span class="std std-numref">Listing 1.33</span></a> Line 2) and keep the one ranking that is best correlated with the given outranking digraph (see the advanced topic on <a class="reference internal" href="pearls.html#bachet-tutorial-label"><span class="std std-ref">a new ranking rule based on bipolar-valued base 3 Bachet numbers</span></a> ) <a class="footnote-reference brackets" href="#id240" id="id51" role="doc-noteref"><span class="fn-bracket">[</span>59<span class="fn-bracket">]</span></a>.</p>
 <div class="literal-block-wrapper docutils container" id="bachetranking">
-<div class="code-block-caption"><span class="caption-number">Listing 1.33 </span><span class="caption-text">Computing a <em>NetFlows</em> ranking</span><a class="headerlink" href="#bachetranking" title="Link to this code"></a></div>
+<div class="code-block-caption"><span class="caption-number">Listing 1.33 </span><span class="caption-text">Computing a <em>Bachet</em> ranking</span><a class="headerlink" href="#bachetranking" title="Link to this code"></a></div>
 <div class="highlight-pycon notranslate"><div class="highlight"><pre><span></span><span class="linenos"> 1</span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">linearOrders</span> <span class="kn">import</span> <span class="n">BachetRanking</span>
 <span class="hll"><span class="linenos"> 2</span><span class="gp">&gt;&gt;&gt; </span><span class="n">ba</span> <span class="o">=</span> <span class="n">BachetRanking</span><span class="p">(</span><span class="n">gcd</span><span class="p">,</span><span class="n">randomized</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span><span class="n">seed</span><span class="o">=</span><span class="mi">28</span><span class="p">)</span>
 </span><span class="linenos"> 3</span><span class="gp">&gt;&gt;&gt; </span><span class="n">ba</span><span class="o">.</span><span class="n">showScores</span><span class="p">()</span>
@@ -3171,14 +3171,14 @@ three modes at 0.3 (-), 0.5 (~), respectively 0.7 (+) of the common scale span a
 </span><span class="linenos">17</span><span class="gp">&gt;&gt;&gt; </span><span class="n">corr</span> <span class="o">=</span> <span class="n">g</span><span class="o">.</span><span class="n">computeRankingCorrelation</span><span class="p">(</span><span class="n">ba</span><span class="o">.</span><span class="n">bachetRanking</span><span class="p">)</span>
 <span class="linenos">18</span><span class="gp">&gt;&gt;&gt; </span><span class="n">g</span><span class="o">.</span><span class="n">showCorrelation</span><span class="p">(</span><span class="n">corr</span><span class="p">)</span>
 <span class="linenos">19</span><span class="go"> Correlation indexes:</span>
-<span class="linenos">20</span><span class="go">  Crisp ordinal correlation  : +0.715</span>
-<span class="linenos">21</span><span class="go">  Epistemic determination    :  0.230</span>
-<span class="hll"><span class="linenos">22</span><span class="go">  Bipolar-valued equivalence : +0.165</span>
-</span></pre></div>
+<span class="hll"><span class="linenos">20</span><span class="go">  Crisp ordinal correlation  : +0.715</span>
+</span><span class="linenos">21</span><span class="go">  Epistemic determination    :  0.230</span>
+<span class="linenos">22</span><span class="go">  Bipolar-valued equivalence : +0.165</span>
+</pre></div>
 </div>
 </div>
-<p>In <a class="hxr-hoverxref hxr-tooltip reference internal" href="#bachetranking"><span class="std std-numref">Listing 1.33</span></a> Line 22 above, we may observe that the <em>Bachet</em> scores lead eventually to a ranking result that is again slightly better correlated  with the given outranking relation than the previous <em>NetFlows</em> ranking (+0.715 versus +0.638).</p>
-<p>To vizualize the ranking consensus between the <em>Copeland</em>, the <em>NetFlows</em> and the <em>Bachet</em> ranking results, we can use the <code class="xref py py-class docutils literal notranslate"><span class="pre">transitive.RankingsFusionDigraph</span></code> class.</p>
+<p>In <a class="hxr-hoverxref hxr-tooltip reference internal" href="#bachetranking"><span class="std std-numref">Listing 1.33</span></a> Line 20 above, we may observe that the <em>Bachet</em> scores lead eventually to a ranking result that is again slightly better correlated  with the given outranking relation than the previous <em>NetFlows</em> ranking (+0.715 versus +0.638).</p>
+<p>To vizualize the ranking consensus between the <em>Copeland</em>, the <em>NetFlows</em> and the <em>Bachet</em> ranking results, we can use the <a class="reference internal" href="techDoc.html#transitiveDigraphs.RankingsFusionDigraph" title="transitiveDigraphs.RankingsFusionDigraph"><code class="xref py py-class docutils literal notranslate"><span class="pre">transitiveDigraphs.RankingsFusionDigraph</span></code></a> class.</p>
 <div class="literal-block-wrapper docutils container" id="rankingconsensus">
 <div class="code-block-caption"><span class="caption-number">Listing 1.34 </span><span class="caption-text">Computing a rankings consensus</span><a class="headerlink" href="#rankingconsensus" title="Link to this code"></a></div>
 <div class="highlight-pycon notranslate"><div class="highlight"><pre><span></span><span class="linenos"> 1</span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">transitiveDigraphs</span> <span class="kn">import</span> <span class="n">RankingsFusionDigraph</span>
@@ -3192,10 +3192,9 @@ three modes at 0.3 (-), 0.5 (~), respectively 0.7 (+) of the common scale span a
 <span class="linenos"> 9</span><span class="go">  0 { rank = 0; a5; }</span>
 <span class="linenos">10</span><span class="go">  1 { rank = 1; a1; a7; a6; }</span>
 <span class="linenos">11</span><span class="go">  2 { rank = 2; a4; a3; a8; }</span>
-<span class="linenos">12</span><span class="go">  3 { rank = 3; a9; }</span>
-<span class="linenos">13</span><span class="go">  4 { rank = 4; a2; }</span>
-<span class="linenos">14</span><span class="go"> dot -Grankdir=TB -Tpng rankingsByScoringFusion.dot \</span>
-<span class="linenos">15</span><span class="go">                     -o rankingsByScoringFusion.png</span>
+<span class="linenos">12</span><span class="go">  3 { rank = 3; a9; a2; }</span>
+<span class="linenos">13</span><span class="go"> dot -Grankdir=TB -Tpng rankingsByScoringFusion.dot \</span>
+<span class="linenos">14</span><span class="go">                     -o rankingsByScoringFusion.png</span>
 </pre></div>
 </div>
 </div>
@@ -3205,8 +3204,8 @@ three modes at 0.3 (-), 0.5 (~), respectively 0.7 (+) of the common scale span a
 <p><span class="caption-number">Fig. 1.22 </span><span class="caption-text"><em>Copeland</em>, <em>NetFlows</em> and <em>Bachet</em> ranking consensus</span><a class="headerlink" href="#rankingconsensusfigure" title="Link to this image"></a></p>
 </figcaption>
 </figure>
-<p>In <a class="hxr-hoverxref hxr-tooltip reference internal" href="#rankingconsensusfigure"><span class="std std-numref">Fig. 1.22</span></a> appears a convincing ranking consensus with four levels of agreement. This epistemic fusion of all three <em>ranking-by-scoring</em> results delivers indeed a highly correlated preordering with the given outranking digraph (+0.852, see Line 4 below).</p>
-<div class="highlight-pycon notranslate"><div class="highlight"><pre><span></span><span class="linenos">1</span><span class="gp">&gt;&gt;&gt; </span><span class="o">&gt;&gt;&gt;</span> <span class="n">corr</span> <span class="o">=</span> <span class="n">g</span><span class="o">.</span><span class="n">computeOrdinalCorrelation</span><span class="p">(</span><span class="n">rfdg</span><span class="p">)</span>
+<p>In <a class="hxr-hoverxref hxr-tooltip reference internal" href="#rankingconsensusfigure"><span class="std std-numref">Fig. 1.22</span></a> appears a convincing ranking consensus with four levels of agreement. This epistemic fusion of all three <em>ranking-by-scoring</em> results delivers indeed a highly correlated preordering with the given outranking digraph <em>g</em> (+0.852, see Line 4 below).</p>
+<div class="highlight-pycon notranslate"><div class="highlight"><pre><span></span><span class="linenos">1</span><span class="gp">&gt;&gt;&gt; </span><span class="n">corr</span> <span class="o">=</span> <span class="n">g</span><span class="o">.</span><span class="n">computeOrdinalCorrelation</span><span class="p">(</span><span class="n">rfdg</span><span class="p">)</span>
 <span class="linenos">2</span><span class="gp">&gt;&gt;&gt; </span><span class="n">g</span><span class="o">.</span><span class="n">showCorrelation</span><span class="p">(</span><span class="n">corr</span><span class="p">)</span>
 <span class="linenos">3</span><span class="go"> Correlation indexes:</span>
 <span class="hll"><span class="linenos">4</span><span class="go">  Crisp ordinal correlation  : +0.852</span>
@@ -3214,10 +3213,10 @@ three modes at 0.3 (-), 0.5 (~), respectively 0.7 (+) of the common scale span a
 <span class="linenos">6</span><span class="go">  Bipolar-valued equivalence : +0.139</span>
 </pre></div>
 </div>
-<p>To appreciate now the more or less performance of the <em>Copeland</em>, the <em>NetFlows</em> and the <em>Bachet</em> ranking rules with the given outranking relation, it is useful to consider <em>Kemeny</em>’s and <em>Slater</em>’s <strong>optimal fitting</strong> ranking rules.</p>
+<p>To appreciate now the ranking performance of the <em>Copeland</em>, the <em>NetFlows</em> or the <em>Bachet</em> rules with the given outranking relation, it is useful to consider <em>Kemeny</em>’s and <em>Slater</em>’s <strong>optimal fitting</strong> ranking rules.</p>
 </section>
-<section id="kemeny-rankings">
-<h4><a class="toc-backref" href="#id322" role="doc-backlink"><span class="section-number">1.3.4.5. </span><em>Kemeny</em> rankings</a><a class="headerlink" href="#kemeny-rankings" title="Link to this heading"></a></h4>
+<section id="optimal-kemeny-rankings">
+<h4><a class="toc-backref" href="#id322" role="doc-backlink"><span class="section-number">1.3.4.5. </span>Optimal <em>Kemeny</em> rankings</a><a class="headerlink" href="#optimal-kemeny-rankings" title="Link to this heading"></a></h4>
 <p>A <strong>Kemeny</strong> ranking is a linear ranking without ties which is <em>closest</em>, in the sense of the ordinal <em>Kendall</em> distance (see <a class="reference internal" href="#bis-2012" id="id52"><span>[BIS-2012]</span></a>), to the given valued outranking digraphs <em>g</em> or <em>gcd</em>. This rule is also <em>invariant</em> under the <em>codual</em> transform.</p>
 <div class="literal-block-wrapper docutils container" id="kemenyranking">
 <div class="code-block-caption"><span class="caption-number">Listing 1.35 </span><span class="caption-text">Computing a <em>Kemeny</em> ranking</span><a class="headerlink" href="#kemenyranking" title="Link to this code"></a></div>
@@ -3326,8 +3325,8 @@ three modes at 0.3 (-), 0.5 (~), respectively 0.7 (+) of the common scale span a
 <p>Both Kemeny rankings show the same <em>weighted mean marginal correlation</em> (+0.099, see <a class="hxr-hoverxref hxr-tooltip reference internal" href="#consensualkemeny"><span class="std std-numref">Listing 1.38</span></a> Lines 19-22, 42-44) with all thirteen performance criteria. However, the second ranking shows a slightly lower <em>standard deviation</em> (+0.132 vs +0.177), resulting in a slightly <strong>fairer</strong> ranking result (-0.033 vs -0.079).</p>
 <p>When several rankings with maximal Kemeny index are given, the <a class="reference internal" href="techDoc.html#linearOrders.KemenyRanking" title="linearOrders.KemenyRanking"><code class="xref py py-class docutils literal notranslate"><span class="pre">KemenyRanking</span></code></a> class constructor instantiates a <em>most consensual</em> one, i.e. a ranking with <em>highest</em> mean marginal correlation and, in case of ties, with <em>lowest</em> weighted standard deviation. Here we obtain ranking: [‘a5’, ‘a6’, ‘a7’, ‘a3’, ‘a9’, ‘a4’, ‘a1’, ‘a8’, ‘a2’] (see <a class="hxr-hoverxref hxr-tooltip reference internal" href="#kemenyranking"><span class="std std-numref">Listing 1.35</span></a> Line 4).</p>
 </section>
-<section id="slater-rankings">
-<h4><a class="toc-backref" href="#id323" role="doc-backlink"><span class="section-number">1.3.4.6. </span><em>Slater</em> rankings</a><a class="headerlink" href="#slater-rankings" title="Link to this heading"></a></h4>
+<section id="optimal-slater-rankings">
+<h4><a class="toc-backref" href="#id323" role="doc-backlink"><span class="section-number">1.3.4.6. </span>Optimal <em>Slater</em> rankings</a><a class="headerlink" href="#optimal-slater-rankings" title="Link to this heading"></a></h4>
 <p>The <strong>Slater</strong> ranking rule is identical to <em>Kemeny</em>’s, but it is working, instead, on the <em>median cut polarised</em> digraph. <em>Slater</em>’s ranking rule is also <em>invariant</em> under the <em>codual</em> transform and delivers again indifferently on <em>g</em> or <em>gcd</em> the following results.</p>
 <div class="literal-block-wrapper docutils container" id="slaterranking">
 <div class="code-block-caption"><span class="caption-number">Listing 1.39 </span><span class="caption-text">Computing a <em>Slater</em> ranking</span><a class="headerlink" href="#slaterranking" title="Link to this code"></a></div>
@@ -3370,8 +3369,8 @@ three modes at 0.3 (-), 0.5 (~), respectively 0.7 (+) of the common scale span a
 <p><span class="caption-number">Fig. 1.24 </span><span class="caption-text">Epistemic disjunction of optimal <em>Slater</em> rankings</span><a class="headerlink" href="#tutorialslater" title="Link to this image"></a></p>
 </figcaption>
 </figure>
-<p>What precise ranking result should we hence adopt? <em>Kemeny</em>’s and <em>Slater</em>’s ranking rules are furthermore computationally <em>difficult</em> problems and effective ranking results are only computable for tiny outranking digraphs (&lt; 20 objects).</p>
-<p>More efficient ranking heuristics, like the <em>Copeland</em> and the <em>NetFlows</em> rules, and in a minor version, the <em>Bachet</em> rule, are therefore needed in practice. Let us finally, after these <em>ranking-by-scoring</em> strategies, also present two popular <em>ranking-by-choosing</em> strategies.</p>
+<p>What precise ranking result should we hence adopt? <em>Kemeny</em>’s and <em>Slater</em>’s optimal ranking rules are furthermore computationally <em>difficult</em> problems and effective ranking results are only computable for tiny outranking digraphs (&lt; 20 objects).</p>
+<p>More efficient ranking heuristics, like the <em>Copeland</em>, the <em>NetFlows</em> rules and the <em>Bachet</em> rule are therefore needed in practice. Let us finally, after these <em>ranking-by-scoring</em> strategies, also present two popular <em>ranking-by-choosing</em> strategies.</p>
 </section>
 <section id="kohler-s-ranking-by-choosing-rule">
 <h4><a class="toc-backref" href="#id324" role="doc-backlink"><span class="section-number">1.3.4.7. </span><em>Kohler</em>’s ranking-by-choosing rule</a><a class="headerlink" href="#kohler-s-ranking-by-choosing-rule" title="Link to this heading"></a></h4>
