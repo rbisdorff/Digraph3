@@ -3028,7 +3028,7 @@ Now, *Bachet* numbers are formulated in a base 3 positional numeral system and t
    :linenos:
 
    >>> from linearOrders import BachetRanking
-   >>> ba = BacetRanking(gcd,randomized=10)
+   >>> ba = BachetRanking(gcd,randomized=10,seed=28)
    >>> ba.showScores()
     Bachet scores in descending order
      action 	 score
@@ -3082,7 +3082,7 @@ To vizualize the ranking consensus between the *Copeland*, the *NetFlows* and th
 
    *Copeland*, *NetFlows* and *Bachet* ranking consensus 	   
     
-In :numref:`rankingConsensusFigure` appears a convincing ranking consensus with four levels of agreement. This epistemic fusion of all three *ranking-by-scoring* results delivers indeed a highly correlated preordering with the given outranking digraph (see Line 4 below). 
+In :numref:`rankingConsensusFigure` appears a convincing ranking consensus with four levels of agreement. This epistemic fusion of all three *ranking-by-scoring* results delivers indeed a highly correlated preordering with the given outranking digraph (+0.852, see Line 4 below). 
 
 .. code-block:: pycon
    :linenos:
