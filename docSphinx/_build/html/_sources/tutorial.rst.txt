@@ -2973,7 +2973,6 @@ A valued version of the *Copeland* rule, called **NetFlows** rule, computes for 
    :name: NetFlowsRanking
    :caption: Computing a *NetFlows* ranking
    :emphasize-lines: 14,16
-
    :linenos:
 
    >>> from linearOrders import NetFlowsRanking
@@ -3026,7 +3025,6 @@ Now, *Bachet* numbers are formulated in a base 3 positional numeral system and t
    :name: BachetRanking
    :caption: Computing a *NetFlows* ranking
    :emphasize-lines: 2,16,22
-
    :linenos:
 
    >>> from linearOrders import BachetRanking
@@ -3052,9 +3050,52 @@ Now, *Bachet* numbers are formulated in a base 3 positional numeral system and t
      Epistemic determination    :  0.230
      Bipolar-valued equivalence : +0.165
 
-In :numref:`BachetRanking` Line 22 above, we may observe that the *Bachet* scores lead eventually to a ranking result that is again slightly better correlated  with the given outranking relation than the previous *NetFlows* ranking (+0.715 versus +0.638). 
+In :numref:`BachetRanking` Line 22 above, we may observe that the *Bachet* scores lead eventually to a ranking result that is again slightly better correlated  with the given outranking relation than the previous *NetFlows* ranking (+0.715 versus +0.638).
 
-To appreciate now the more or less correlations of the *Copeland*, the *NetFlows* and the *Bachet* ranking with the given outranking relation, it is useful to consider *Kemeny*'s and *Slater*'s **best fitting** ranking rules.
+To vizualize the ranking consensus between the *Copeland*, the *NetFlows* and the *Bachet* ranking results, we can use the :py:class:`transitive.RankingsFusionDigraph` class.
+
+.. code-block:: pycon
+   :name: RankingConsensus
+   :caption: Computing a rankings consensus
+   :linenos:
+
+   >>> from transitiveDigraphs import RankingsFusionDigraph
+   >>> rankings = [cop.copelandRanking,
+   ...             nf.netFlowsRanking,
+   ...             ba.bachetRanking]
+   >>> rfdg = RankingsFusionDigraph(gcd,rankings)
+   >>> rfdg.exportGraphViz('rankingsByScoringFusion')
+    *---- exporting a dot file for GraphViz tools ---------*
+    Exporting to rankingsByScoringFusion.dot
+     0 { rank = 0; a5; }
+     1 { rank = 1; a1; a7; a6; }
+     2 { rank = 2; a4; a3; a8; }
+     3 { rank = 3; a9; }
+     4 { rank = 4; a2; }
+    dot -Grankdir=TB -Tpng rankingsByScoringFusion.dot \
+                        -o rankingsByScoringFusion.png
+
+.. Figure:: rankingsByScoringFusion.png
+   :name: rankingConsensusFigure
+   :width: 200 px
+   :align: center
+
+   *Copeland*, *NetFlows* and *Bachet* ranking consensus 	   
+    
+In :numref:`rankingConsensusFigure` appears a convincing ranking consensus with four levels of agreement. This epistemic fusion of all three *ranking-by-scoring* results delivers indeed a highly correlated preordering with the given outranking digraph (see Line 4 below). 
+
+.. code-block:: pycon
+   :linenos:
+   :emphasize-lines: 4
+   
+   >>> >>> corr = g.computeOrdinalCorrelation(rfdg)
+   >>> g.showCorrelation(corr)
+    Correlation indexes:
+     Crisp ordinal correlation  : +0.852
+     Epistemic determination    :  0.163
+     Bipolar-valued equivalence : +0.139
+
+To appreciate now the more or less performance of the *Copeland*, the *NetFlows* and the *Bachet* ranking rules with the given outranking relation, it is useful to consider *Kemeny*'s and *Slater*'s **optimal fitting** ranking rules.
 
 *Kemeny* rankings
 `````````````````
