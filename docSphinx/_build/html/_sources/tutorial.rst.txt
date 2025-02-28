@@ -3052,7 +3052,25 @@ Now, *Bachet* numbers are formulated in a base 3 positional numeral system and t
 
 In :numref:`BachetRanking` Line 20 above, we may observe that the *Bachet* scores lead eventually to a ranking result that is again slightly better correlated  with the given outranking relation than the previous *NetFlows* ranking (+0.715 versus +0.638).
 
-To vizualize the ranking consensus between the *Copeland*, the *NetFlows* and the *Bachet* ranking results, we can use the :py:class:`transitiveDigraphs.RankingsFusionDigraph` class.
+A heatmap view on the performance tableau illustrates well the actual quality of this *Bachet* ranking result.
+
+.. code-block:: pycon
+   :linenos:
+
+   >>> g.showHTMLPerformanceHeatmap(Correlations=True,
+   ...                              colorLevels=7,
+   ...                              actionsList=ba.bachetRanking)
+
+.. Figure:: bachetHeatmapT.png
+   :name: bachetHeatmapT
+   :width: 400 px
+   :align: center
+
+   *Bachet* rule ranked heatmap view on the performance records 	   
+
+In :numref:`bachetHeatmapT` we may notice that action 'a5', with all grades above the third 7-tile (> 42.86%), appears convincingly first-ranked. Similarly, with five grades in the lowest 7-tiled class (< 14.29%), action 'a9' appears last-ranked. Most significant in this ranking appear to be the *Benefit* criteria 'b09', 'b04' and 'b01' with a coreelation (> +0.40), whereas *Costs* criteria 'c02' and 'c03' appear somehow in contradiction (-0.11 and -0.28) with the proposed *Bachet* ranking. Action 'a7', with only three weak grades, is not first-ranked because of the fact that on all three *Costs* criteria and on the *Benefit* criterion 'b08', i.e on a majority (33/60) of criteria significance, action 'a7' is positively outranked by actions 'a6' and 'a7'. The mean marginal correlation over all 13 criteria is positive (+0.09). The standard deviation (+0.261) is however quite high so that the ranking lacks apparently a bit of fairness (-0.171).
+
+To vizualize now the ranking consensus between the *Copeland*, the *NetFlows* and the *Bachet* ranking results, we can use the :py:class:`transitiveDigraphs.RankingsFusionDigraph` class.
 
 .. code-block:: pycon
    :name: RankingConsensus
