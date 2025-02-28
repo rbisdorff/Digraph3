@@ -3063,14 +3063,14 @@ A heatmap view on the performance tableau illustrates well the actual quality of
 
 .. Figure:: bachetHeatmapT.png
    :name: bachetHeatmapT
-   :width: 400 px
+   :width: 500 px
    :align: center
 
    *Bachet* rule ranked heatmap view on the performance records 	   
 
-In :numref:`bachetHeatmapT` we may notice that action 'a5', with all grades above the third 7-tile (> 42.86%), appears convincingly first-ranked. Similarly, with five grades in the lowest 7-tiled class (< 14.29%), action 'a9' appears last-ranked. Most significant in this ranking appear to be the *Benefit* criteria 'b09', 'b04' and 'b01' with a coreelation (> +0.40), whereas *Costs* criteria 'c02' and 'c03' appear somehow in contradiction (-0.11 and -0.28) with the proposed *Bachet* ranking. Action 'a7', with only three weak grades, is not first-ranked because of the fact that on all three *Costs* criteria and on the *Benefit* criterion 'b08', i.e on a majority (33/60) of criteria significance, action 'a7' is positively outranked by actions 'a6' and 'a7'. The mean marginal correlation over all 13 criteria is positive (+0.09). The standard deviation (+0.261) is however quite high so that the ranking lacks apparently a bit of fairness (-0.171).
+In :numref:`bachetHeatmapT` we may notice that action *a5*, with all grades above the third 7-tile (> 42.86%), appears convincingly first-ranked. Similarly, with five grades in the lowest 7-tiled class (< 14.29%), action *a9* appears last-ranked. Most significant in this ranking appear to be the *Benefit* criteria *b09*, *b04* and *b01* with a correlation > +0.40, whereas *Costs* criteria *c02* and *c03* appear somehow in contradiction (-0.11 and -0.28) with the proposed *Bachet* ranking. Action *a7*, with only three weak grades, is not first-ranked because of the fact that on all three *Costs* criteria and on the *Benefit* criterion *b08*, i.e on a majority (33/60) of criteria significance, action *a7* is positively outranked by actions *a6* and *a5*. Notice also the highly contradictory performance record of action *a1* with three grades both in the highest 7-tile (> 85.71%) and in the lowest 7-tile (<14.29%). The mean marginal correlation over all 13 criteria is positive (+0.09). The standard deviation of the marginal correlations is however quite high (+0.261) so that the ranking lacks apparently a bit of fairness (-0.171).
 
-To vizualize now the ranking consensus between the *Copeland*, the *NetFlows* and the *Bachet* ranking results, we can use the :py:class:`transitiveDigraphs.RankingsFusionDigraph` class.
+To vizualize the **ranking consensus**  between the *Copeland*, the *NetFlows* and the *Bachet* ranking results, we may use the :py:class:`transitiveDigraphs.RankingsFusionDigraph` class.
 
 .. code-block:: pycon
    :name: RankingConsensus
@@ -3099,7 +3099,7 @@ To vizualize now the ranking consensus between the *Copeland*, the *NetFlows* an
 
    *Copeland*, *NetFlows* and *Bachet* ranking consensus 	   
     
-In :numref:`rankingConsensusFigure` appears a convincing ranking consensus with four levels of agreement. This epistemic fusion of all three *ranking-by-scoring* results delivers indeed a highly correlated preordering with the given outranking digraph *g* (+0.852, see Line 4 below). 
+In :numref:`rankingConsensusFigure` appears a convincing ranking consensus with four levels of agreement where action *a5* appears consistently first-ranked and actions *a2* and *a9*, both, last-ranked. The epistemic fusion of all three *ranking-by-scoring* results delivers indeed a highly correlated preordering with the given outranking digraph *g* (+0.852, see Line 4 below). 
 
 .. code-block:: pycon
    :linenos:
@@ -3112,12 +3112,12 @@ In :numref:`rankingConsensusFigure` appears a convincing ranking consensus with 
      Epistemic determination    :  0.163
      Bipolar-valued equivalence : +0.139
 
-To appreciate now the ranking performance of the *Copeland*, the *NetFlows* or the *Bachet* rules with the given outranking relation, it is useful to consider *Kemeny*'s and *Slater*'s **optimal fitting** ranking rules.
+To appreciate now the actual ranking performance of the *Copeland*, the *NetFlows* or the *Bachet* rule with the given outranking relation, it is useful to consider *Kemeny*'s and *Slater*'s **optimal fitting** ranking rules.
 
 Optimal *Kemeny* rankings
 `````````````````````````
 
-A **Kemeny** ranking is a linear ranking without ties which is *closest*, in the sense of the ordinal *Kendall* distance (see [BIS-2012]_), to the given valued outranking digraphs *g* or *gcd*. This rule is also *invariant* under the *codual* transform. 
+A **Kemeny** ranking is a linear ranking without ties which is *closest*, in the sense of the ordinal (Kendall) correlation index (see [BIS-2012]_), to the given valued outranking digraphs *g* or *gcd*. This rule is also *invariant* under the *codual* transform, yet, not necessarily *Condorcet consistent*.
 
 .. code-block:: pycon
    :name: KemenyRanking
@@ -3135,9 +3135,9 @@ A **Kemeny** ranking is a linear ranking without ties which is *closest*, in the
      Epistemic determination    :  0.230
      Bipolar-valued equivalence : +0.179
     
-So, **+0.779** represents the *highest possible* ordinal correlation (fitness) any potential linear ranking can achieve with the given pairwise outranking digraph (see :numref:`KemenyRanking` Lines 7-10).
+So, **+0.779** represents the *highest possible* ordinal correlation any potential linear ranking can achieve with the given pairwise outranking digraph (see :numref:`KemenyRanking` Lines 7-10).
 
-A *Kemeny* ranking may not be unique. In our example here, we obtain in fact two *Kemeny* rankings with a same **maximal** *Kemeny* index of 12.9. 
+A *Kemeny* ranking may not be unique. In our example here, we obtain in fact two *Kemeny* rankings with a same **maximal** correlation of +0.779 (see [BIS-2012]_). 
 
 .. code-block:: pycon
    :caption: Optimal *Kemeny* rankings
@@ -3147,8 +3147,6 @@ A *Kemeny* ranking may not be unique. In our example here, we obtain in fact two
    >>> ke.maximalRankings
     [['a5', 'a6', 'a7', 'a3', 'a8', 'a9', 'a4', 'a1', 'a2'],
      ['a5', 'a6', 'a7', 'a3', 'a9', 'a4', 'a1', 'a8', 'a2']]
-   >>> ke.maxKemenyIndex
-    Decimal('12.9166667')
 
 We may visualize the partial order defined by the :ref:`epistemic disjunction <Epistemic-Fusion-label>` of both optimal *Kemeny* rankings by using the :py:class:`~transitiveDigraphs.RankingsFusion` class as follows.
 
@@ -3236,7 +3234,7 @@ To choose now a specific representative among all the potential rankings with ma
 
 Both Kemeny rankings show the same *weighted mean marginal correlation* (+0.099, see :numref:`consensualKemeny` Lines 19-22, 42-44) with all thirteen performance criteria. However, the second ranking shows a slightly lower *standard deviation* (+0.132 vs +0.177), resulting in a slightly **fairer** ranking result (-0.033 vs -0.079).
 
-When several rankings with maximal Kemeny index are given, the :py:class:`~linearOrders.KemenyRanking` class constructor instantiates a *most consensual* one, i.e. a ranking with *highest* mean marginal correlation and, in case of ties, with *lowest* weighted standard deviation. Here we obtain ranking: ['a5', 'a6', 'a7', 'a3', 'a9', 'a4', 'a1', 'a8', 'a2'] (see :numref:`KemenyRanking` Line 4).
+When several rankings with maximal correlation index are given, the :py:class:`~linearOrders.KemenyRanking` class constructor instantiates a *most consensual* one, i.e. a ranking with *highest* mean marginal correlation and, in case of ties, with *lowest* weighted standard deviation. Here we obtain ranking: ['a5', 'a6', 'a7', 'a3', 'a9', 'a4', 'a1', 'a8', 'a2'] (see :numref:`KemenyRanking` Line 4).
 
 Optimal *Slater* rankings
 `````````````````````````
