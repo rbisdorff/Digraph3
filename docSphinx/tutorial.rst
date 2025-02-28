@@ -3068,16 +3068,22 @@ A heatmap view on the performance tableau illustrates well the actual quality of
 
    *Bachet* rule ranked heatmap view on the performance records 	   
 
-In :numref:`bachetHeatmapT` we may notice that action *a5*, with all grades above the third 7-tile (> 42.86%), appears convincingly first-ranked. Similarly, with five grades in the lowest 7-tiled class (< 14.29%), action *a9* appears last-ranked. Most significant in this ranking appear to be the *Benefit* criteria *b09*, *b04* and *b01* with a correlation > +0.40, whereas *Costs* criteria *c02* and *c03* appear somehow in contradiction (-0.11 and -0.28) with the proposed *Bachet* ranking. Action *a7*, with only three weak grades, is not first-ranked because of the fact that on all three *Costs* criteria and on the *Benefit* criterion *b08*, i.e on a majority (33/60) of criteria significance, action *a7* is positively outranked by actions *a6* and *a5*. Notice also the highly contradictory performance record of action *a1* with three grades both in the highest 7-tile (> 85.71%) and in the lowest 7-tile (<14.29%). The mean marginal correlation over all 13 criteria is positive (+0.09). The standard deviation of the marginal correlations is however quite high (+0.261) so that the ranking lacks apparently a bit of fairness (-0.171).
+In :numref:`bachetHeatmapT` we may notice that action *a5*, with all grades above the third 7-tile (> 42.86%), appears convincingly first-ranked. Similarly, with five grades in the lowest 7-tiled class (< 14.29%), action *a9* appears last-ranked. Most significant in this ranking appear to be the *Benefit* criteria *b09*, *b04* and *b01* with a correlation > +0.40, whereas *Costs* criteria *c02* and *c03* appear somehow in contradiction (-0.11 and -0.28) with the proposed *Bachet* ranking. Action *a7*, with only three weak grades, is not first-ranked because of the fact that on all three *Costs* criteria and on the *Benefit* criterion *b08*, i.e on a majority (33/60) of criteria significance, action *a7* is positively outranked by actions *a6* and *a5*. Notice also the highly contrasted performance record of action *a1* with three grades in the highest 7-tile (> 85.71%) and four grades in the lowest 7-tile (<14.29%). A similar contrasted situation is given for action *a3* with 7 grades in the two top 7-tiles (>71.43%) and four grades in the two lowest 7-tiles (<28.57%). The mean marginal correlation over all 13 criteria is positive (+0.09). The standard deviation of the marginal correlations is however quite high (+0.261) so that the ranking lacks apparently a bit of fairness (-0.171).
 
-To vizualize the **ranking consensus**  between the *Copeland*, the *NetFlows* and the *Bachet* ranking results, we may use the :py:class:`transitiveDigraphs.RankingsFusionDigraph` class.
+To compare the three ranking results we have so far obtained, it is useful to vizualize the **ranking consensus**  one may observe between the *Copeland*, the *NetFlows* and the *Bachet* ranking results. To compute such a ranking consensus we can make usage of the :py:class:`transitiveDigraphs.RankingsFusionDigraph` class.
 
 .. code-block:: pycon
    :name: RankingConsensus
    :caption: Computing a rankings consensus
-   :linenos:
+   :emphasize-lines: 3,5,7,15-18
 
    >>> from transitiveDigraphs import RankingsFusionDigraph
+   >>> cop.copelandRanking
+    ['a5', 'a1', 'a6', 'a7', 'a8', 'a4', 'a9', 'a3', 'a2']
+   >>> netFlowsRanking
+    ['a5', 'a7', 'a6', 'a3', 'a1', 'a8', 'a4', 'a9', 'a2']
+   >>> ba.bachetRanking
+    ['a5', 'a6', 'a7', 'a3', 'a4', 'a8', 'a1', 'a2', 'a9']
    >>> rankings = [cop.copelandRanking,
    ...             nf.netFlowsRanking,
    ...             ba.bachetRanking]
@@ -3099,11 +3105,10 @@ To vizualize the **ranking consensus**  between the *Copeland*, the *NetFlows* a
 
    *Copeland*, *NetFlows* and *Bachet* ranking consensus 	   
     
-In :numref:`rankingConsensusFigure` appears a convincing ranking consensus with four levels of agreement where action *a5* appears consistently first-ranked and actions *a2* and *a9*, both, last-ranked. The epistemic fusion of all three *ranking-by-scoring* results delivers indeed a highly correlated preordering with the given outranking digraph *g* (+0.852, see Line 4 below). 
+In :numref:`rankingConsensusFigure` appears a convincing ranking consensus with four levels of agreement where action *a5* appears consistently first-ranked and actions *a2* and *a9*, both, last-ranked. Notice the unstable rank positions of action *a1* (2,5 and 7), as well as the unstable rank positions of action *a3* (5, 8), both a consequence of their contrasted performance records. The epistemic fusion of all three *ranking-by-scoring* results delivers here a convincing partial transitive ordering, highly correlated with the given outranking digraph *g* (+0.852, see Line 4 below). 
 
 .. code-block:: pycon
    :linenos:
-   :emphasize-lines: 4
    
    >>> corr = g.computeOrdinalCorrelation(rfdg)
    >>> g.showCorrelation(corr)
@@ -3112,12 +3117,12 @@ In :numref:`rankingConsensusFigure` appears a convincing ranking consensus with 
      Epistemic determination    :  0.163
      Bipolar-valued equivalence : +0.139
 
-To appreciate now the actual ranking performance of the *Copeland*, the *NetFlows* or the *Bachet* rule with the given outranking relation, it is useful to consider *Kemeny*'s and *Slater*'s **optimal fitting** ranking rules.
+To appreciate now the actual ranking performances of the *Copeland*, the *NetFlows* or the *Bachet* rule with the given outranking relation, it is useful to consider *Kemeny*'s and *Slater*'s **optimal fitting** ranking rules.
 
 Optimal *Kemeny* rankings
 `````````````````````````
 
-A **Kemeny** ranking is a linear ranking without ties which is *closest*, in the sense of the ordinal (Kendall) correlation index (see [BIS-2012]_), to the given valued outranking digraphs *g* or *gcd*. This rule is also *invariant* under the *codual* transform, yet, not necessarily *Condorcet consistent*.
+A **Kemeny** ranking is a linear ranking without ties which is *closest*, in the sense of the ordinal (Kendall) correlation index (see :ref:`the advanced topic on the bipolar-valued relational equivalence between bipolar-valued digraphs <OrdinalCorrelation-Tutorial-label>` [BIS-2012]_), to the given valued outranking digraphs *g* or *gcd*. This rule is also *invariant* under the *codual* transform, yet, not necessarily *Condorcet consistent*.
 
 .. code-block:: pycon
    :name: KemenyRanking
@@ -3148,15 +3153,15 @@ A *Kemeny* ranking may not be unique. In our example here, we obtain in fact two
     [['a5', 'a6', 'a7', 'a3', 'a8', 'a9', 'a4', 'a1', 'a2'],
      ['a5', 'a6', 'a7', 'a3', 'a9', 'a4', 'a1', 'a8', 'a2']]
 
-We may visualize the partial order defined by the :ref:`epistemic disjunction <Epistemic-Fusion-label>` of both optimal *Kemeny* rankings by using the :py:class:`~transitiveDigraphs.RankingsFusion` class as follows.
+We may visualize the partial order defined by the :ref:`epistemic fusion <Epistemic-Fusion-label>` of both optimal *Kemeny* rankings by using the :py:class:`~transitiveDigraphs.RankingsFusionDigraph` class as follows.
 
 .. code-block:: pycon
    :name: KemenyRankingsFusion
-   :caption: Computing the epistemic disjunction of all optimal *Kemeny* rankings
+   :caption: Computing the epistemic fusion of all optimal *Kemeny* rankings
    :linenos:
 
-   >>> from transitiveDigraphs import RankingsFusion
-   >>> wke = RankingsFusion(ke,ke.maximalRankings)
+   >>> from transitiveDigraphs import RankingsFusionDigraph
+   >>> wke = RankingsFusionDigraph(ke,ke.maximalRankings)
    >>> wke.exportGraphViz(fileName='tutorialKemeny')
     *---- exporting a dot file for GraphViz tools ---------*
     Exporting to tutorialKemeny.dot
@@ -3175,11 +3180,11 @@ We may visualize the partial order defined by the :ref:`epistemic disjunction <E
    :width: 175pt
    :align: center
 
-   Epistemic disjunction of optimal *Kemeny* rankings	   
+   Epistemic fusion of optimal *Kemeny* rankings	   
 
 It is interesting to notice in :numref:`tutorialKemeny` and :numref:`optimalKemeny`, that both *Kemeny* rankings only differ in their respective positioning of alternative *a8*; either before or after alternatives *a9*, *a4* and *a1*.
 
-To choose now a specific representative among all the potential rankings with maximal Kemeny index, we will choose, with the help of the :py:func:`~perfTabs.PerformanceTableau.showRankingConsensusQuality` method, the *most consensual* one.
+To choose now a specific representative among all the potential rankings with maximal ordinal correlation index, we will choose, with the help of the :py:func:`~perfTabs.PerformanceTableau.showRankingConsensusQuality` method, the *most consensual* one.
 
 .. code-block:: pycon
    :caption: Computing Consensus Quality of Rankings
@@ -3259,14 +3264,14 @@ The **Slater** ranking rule is identical to *Kemeny*'s, but it is working, inste
    >>> len(sl.maximalRankings)
     7
 
-We notice in :numref:`SlaterRanking` Line 7 that the first *Slater* ranking is a rather good fit (+0.676), slightly better apparently than the *NetFlows* ranking result (+638). However, there are in fact 7 such potentially optimal *Slater* rankings (see :numref:`SlaterRanking` Line 11). The corresponding :ref:`epistemic disjunction <Epistemic-Fusion-label>` gives the following partial ordering.
+We notice in :numref:`SlaterRanking` Line 7 that the first *Slater* ranking is a rather good fit (+0.676), slightly better apparently than the *NetFlows* ranking result (+638). However, there are in fact 7 such potentially optimal *Slater* rankings (see :numref:`SlaterRanking` Line 11). The corresponding :ref:`epistemic fusion <Epistemic-Fusion-label>` gives the following partial ordering.
 
 .. code-block:: pycon
    :name: SlaterRankingsFusion
    :caption: Computing the epistemic disjunction of optimal *Slater* rankings 
    :linenos:
 
-   >>> slw = RankingsFusion(sl,sl.maximalRankings)
+   >>> slw = RankingsFusionDigraph(sl,sl.maximalRankings)
    >>> slw.exportGraphViz(fileName='tutorialSlater')
     *---- exporting a dot file for GraphViz tools ---------*
     Exporting to tutorialSlater.dot
@@ -3284,7 +3289,7 @@ We notice in :numref:`SlaterRanking` Line 7 that the first *Slater* ranking is a
     :width: 175pt
     :align: center
 
-    Epistemic disjunction of optimal *Slater* rankings
+    Epistemic fusion of optimal *Slater* rankings
        
 What precise ranking result should we hence adopt? *Kemeny*'s and *Slater*'s optimal ranking rules are furthermore computationally *difficult* problems and effective ranking results are only computable for tiny outranking digraphs (< 20 objects). 
 
