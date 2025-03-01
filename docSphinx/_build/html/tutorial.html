@@ -3034,33 +3034,34 @@ three modes at 0.3 (-), 0.5 (~), respectively 0.7 (+) of the common scale span a
 <div class="literal-block-wrapper docutils container" id="copelandranking">
 <div class="code-block-caption"><span class="caption-number">Listing 1.27 </span><span class="caption-text">Computing a <em>Copeland</em> Ranking</span><a class="headerlink" href="#copelandranking" title="Link to this code"></a></div>
 <div class="highlight-pycon notranslate"><div class="highlight"><pre><span></span><span class="linenos"> 1</span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">linearOrders</span> <span class="kn">import</span> <span class="n">CopelandRanking</span>
-<span class="linenos"> 2</span><span class="gp">&gt;&gt;&gt; </span><span class="n">cop</span> <span class="o">=</span> <span class="n">CopelandRanking</span><span class="p">(</span><span class="n">gcd</span><span class="p">,</span><span class="n">Comments</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
-<span class="linenos"> 3</span><span class="go"> Copeland decreasing scores</span>
-<span class="linenos"> 4</span><span class="go">  a5 : 12</span>
-<span class="linenos"> 5</span><span class="go">  a1 : 2</span>
-<span class="linenos"> 6</span><span class="go">  a6 : 2</span>
-<span class="linenos"> 7</span><span class="go">  a7 : 2</span>
-<span class="linenos"> 8</span><span class="go">  a8 : 0</span>
-<span class="linenos"> 9</span><span class="go">  a4 : -3</span>
-<span class="linenos">10</span><span class="go">  a9 : -3</span>
-<span class="linenos">11</span><span class="go">  a3 : -5</span>
-<span class="linenos">12</span><span class="go">  a2 : -7</span>
-<span class="linenos">13</span><span class="go"> Copeland Ranking:</span>
-<span class="linenos">14</span><span class="go"> [&#39;a5&#39;, &#39;a1&#39;, &#39;a6&#39;, &#39;a7&#39;, &#39;a8&#39;, &#39;a4&#39;, &#39;a9&#39;, &#39;a3&#39;, &#39;a2&#39;]</span>
-</pre></div>
+<span class="hll"><span class="linenos"> 2</span><span class="gp">&gt;&gt;&gt; </span><span class="n">cop</span> <span class="o">=</span> <span class="n">CopelandRanking</span><span class="p">(</span><span class="n">gcd</span><span class="p">,</span><span class="n">Comments</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+</span><span class="linenos"> 3</span><span class="go"> Copeland decreasing scores</span>
+<span class="hll"><span class="linenos"> 4</span><span class="go">  a5 : 12</span>
+</span><span class="hll"><span class="linenos"> 5</span><span class="go">  a1 : 2</span>
+</span><span class="hll"><span class="linenos"> 6</span><span class="go">  a6 : 2</span>
+</span><span class="hll"><span class="linenos"> 7</span><span class="go">  a7 : 2</span>
+</span><span class="hll"><span class="linenos"> 8</span><span class="go">  a8 : 0</span>
+</span><span class="hll"><span class="linenos"> 9</span><span class="go">  a4 : -3</span>
+</span><span class="hll"><span class="linenos">10</span><span class="go">  a9 : -3</span>
+</span><span class="hll"><span class="linenos">11</span><span class="go">  a3 : -5</span>
+</span><span class="hll"><span class="linenos">12</span><span class="go">  a2 : -7</span>
+</span><span class="linenos">13</span><span class="go"> Copeland Ranking:</span>
+<span class="hll"><span class="linenos">14</span><span class="go"> [&#39;a5&#39;, &#39;a1&#39;, &#39;a6&#39;, &#39;a7&#39;, &#39;a8&#39;, &#39;a4&#39;, &#39;a9&#39;, &#39;a3&#39;, &#39;a2&#39;]</span>
+</span></pre></div>
 </div>
 </div>
-<p>Alternative <em>a5</em> obtains here the best <em>Copeland</em> score (+12), followed by alternatives <em>a1</em>, <em>a6</em> and <em>a7</em> with same score (+2); following the lexicographic rule, <em>a1</em> is hence ranked before <em>a6</em> and <em>a6</em> before <em>a7</em>. Same situation is observed for <em>a4</em> and <em>a9</em> with a score of -3 (see <a class="hxr-hoverxref hxr-tooltip reference internal" href="#copelandranking"><span class="std std-numref">Listing 1.27</span></a> Lines 4-12).</p>
-<p><em>Copeland</em>’s ranking rule appears in fact <strong>invariant</strong> under the <a class="reference internal" href="#codual-transform-label"><span class="std std-ref">codual transform</span></a> and renders a same linear order indifferently from digraphs <em>g</em> or <em>gcd</em> . The resulting ranking (see <a class="hxr-hoverxref hxr-tooltip reference internal" href="#copelandranking"><span class="std std-numref">Listing 1.27</span></a> Line 14) is rather correlated (+0.463) with the given pairwise outranking relation in the ordinal <em>Kendall</em> sense (see <a class="hxr-hoverxref hxr-tooltip reference internal" href="#copelandcorrelationindexes"><span class="std std-numref">Listing 1.28</span></a>).</p>
+<p>Alternative <em>a5</em> obtains here the best <em>Copeland</em> score (+12), followed by alternatives <em>a1</em>, <em>a6</em> and <em>a7</em> with same score (+2); following the lexicographic rule, <em>a1</em> is hence ranked before <em>a6</em> and <em>a6</em> before <em>a7</em>. Same situation is observed for <em>a4</em> and <em>a9</em> with a score of -3 (see <a class="hxr-hoverxref hxr-tooltip reference internal" href="#copelandranking"><span class="std std-numref">Listing 1.27</span></a> Lines 4-12 and 14).</p>
+<p><em>Copeland</em>’s ranking rule appears in fact <strong>invariant</strong> under the <a class="reference internal" href="#codual-transform-label"><span class="std std-ref">codual transform</span></a> and renders a same linear order indifferently from digraphs <em>g</em> or <em>gcd</em> . The <em>Copeland</em> rule is furthermore <strong>Condorcet consistent</strong>, i.e. when the outranking relation models a <em>transitive</em> and <em>acyclic</em> relation, this relation is preserved in the <em>Copeland</em> ranking result.</p>
+<p>The <em>Copeland</em> ranking result (see <a class="hxr-hoverxref hxr-tooltip reference internal" href="#copelandranking"><span class="std std-numref">Listing 1.27</span></a> Line 14) is rather correlated (+0.463) with the given pairwise outranking relation in the ordinal <em>Kendall</em> sense (see <a class="hxr-hoverxref hxr-tooltip reference internal" href="#copelandcorrelationindexes"><span class="std std-numref">Listing 1.28</span></a>).</p>
 <div class="literal-block-wrapper docutils container" id="copelandcorrelationindexes">
 <div class="code-block-caption"><span class="caption-number">Listing 1.28 </span><span class="caption-text">Checking the quality of the <em>Copeland</em> Ranking</span><a class="headerlink" href="#copelandcorrelationindexes" title="Link to this code"></a></div>
 <div class="highlight-pycon notranslate"><div class="highlight"><pre><span></span><span class="linenos">1</span><span class="gp">&gt;&gt;&gt; </span><span class="n">corr</span> <span class="o">=</span> <span class="n">g</span><span class="o">.</span><span class="n">computeRankingCorrelation</span><span class="p">(</span><span class="n">cop</span><span class="o">.</span><span class="n">copelandRanking</span><span class="p">)</span>
 <span class="linenos">2</span><span class="gp">&gt;&gt;&gt; </span><span class="n">g</span><span class="o">.</span><span class="n">showCorrelation</span><span class="p">(</span><span class="n">corr</span><span class="p">)</span>
 <span class="linenos">3</span><span class="go"> Correlation indexes:</span>
-<span class="linenos">4</span><span class="go">  Crisp ordinal correlation : +0.463</span>
-<span class="linenos">5</span><span class="go">  Valued equivalalence      : +0.107</span>
-<span class="linenos">6</span><span class="go">  Epistemic determination   :  0.230</span>
-</pre></div>
+<span class="hll"><span class="linenos">4</span><span class="go">  Crisp ordinal correlation : +0.463</span>
+</span><span class="hll"><span class="linenos">5</span><span class="go">  Valued equivalalence      : +0.107</span>
+</span><span class="hll"><span class="linenos">6</span><span class="go">  Epistemic determination   :  0.230</span>
+</span></pre></div>
 </div>
 </div>
 <p>With an epistemic determination level of 0.230, the <em>extended Kendall tau</em> index (see <a class="reference internal" href="#bis-2012" id="id50"><span>[BIS-2012]</span></a>) is in fact computed on 61.5% (100.0 x (1.0 + 0.23)/2) of the pairwise strict outranking comparisons. Furthermore, the bipolar-valued <em>relational equivalence</em> characteristics between the strict outranking relation and the <em>Copeland</em> ranking equals +0.107, i.e. a <em>majority</em> of 55.35% of the criteria significance supports the relational equivalence between the given strict outranking relation and the corresponding <em>Copeland</em> ranking.</p>
@@ -3072,15 +3073,15 @@ three modes at 0.3 (-), 0.5 (~), respectively 0.7 (+) of the common scale span a
 <span class="linenos"> 3</span><span class="gp">&gt;&gt;&gt; </span><span class="n">wcop</span><span class="o">.</span><span class="n">showRankingByChoosing</span><span class="p">()</span>
 <span class="linenos"> 4</span><span class="go"> Ranking by Choosing and Rejecting</span>
 <span class="linenos"> 5</span><span class="go">  1st ranked [&#39;a5&#39;]</span>
-<span class="linenos"> 6</span><span class="go">    2nd ranked [&#39;a1&#39;, &#39;a6&#39;, &#39;a7&#39;]</span>
-<span class="linenos"> 7</span><span class="go">      3rd ranked [&#39;a8&#39;]</span>
-<span class="linenos"> 8</span><span class="go">      3rd last ranked [&#39;a4&#39;, &#39;a9&#39;]</span>
-<span class="linenos"> 9</span><span class="go">    2nd last ranked [&#39;a3&#39;]</span>
+<span class="hll"><span class="linenos"> 6</span><span class="go">    2nd ranked [&#39;a1&#39;, &#39;a6&#39;, &#39;a7&#39;]</span>
+</span><span class="linenos"> 7</span><span class="go">      3rd ranked [&#39;a8&#39;]</span>
+<span class="hll"><span class="linenos"> 8</span><span class="go">      3rd last ranked [&#39;a4&#39;, &#39;a9&#39;]</span>
+</span><span class="linenos"> 9</span><span class="go">    2nd last ranked [&#39;a3&#39;]</span>
 <span class="linenos">10</span><span class="go">  1st last ranked [&#39;a2&#39;]</span>
 </pre></div>
 </div>
 </div>
-<p>We recover in <a class="hxr-hoverxref hxr-tooltip reference internal" href="#weakcopelandranking"><span class="std std-numref">Listing 1.29</span></a> above, the ranking with ties delivered by the <em>Copeland</em> scores (see <a class="hxr-hoverxref hxr-tooltip reference internal" href="#copelandranking"><span class="std std-numref">Listing 1.27</span></a>). We may draw its corresponding <em>Hasse</em> diagram (see <a class="hxr-hoverxref hxr-tooltip reference internal" href="#weakcopelandrankingdrawing"><span class="std std-numref">Listing 1.30</span></a>).</p>
+<p>We recover in <a class="hxr-hoverxref hxr-tooltip reference internal" href="#weakcopelandranking"><span class="std std-numref">Listing 1.29</span></a> Lines 6 and 8 above, the ranking with ties delivered by the <em>Copeland</em> scores (see <a class="hxr-hoverxref hxr-tooltip reference internal" href="#copelandranking"><span class="std std-numref">Listing 1.27</span></a>). We may draw its corresponding <em>Hasse</em> diagram (see <a class="hxr-hoverxref hxr-tooltip reference internal" href="#weakcopelandrankingdrawing"><span class="std std-numref">Listing 1.30</span></a>).</p>
 <div class="literal-block-wrapper docutils container" id="weakcopelandrankingdrawing">
 <div class="code-block-caption"><span class="caption-number">Listing 1.30 </span><span class="caption-text">Drawing a weak <em>Copeland</em> ranking</span><a class="headerlink" href="#weakcopelandrankingdrawing" title="Link to this code"></a></div>
 <div class="highlight-pycon notranslate"><div class="highlight"><pre><span></span><span class="linenos"> 1</span><span class="gp">&gt;&gt;&gt; </span><span class="n">wcop</span><span class="o">.</span><span class="n">exportGraphViz</span><span class="p">(</span><span class="n">fileName</span><span class="o">=</span><span class="s1">&#39;weakCopelandRanking&#39;</span><span class="p">)</span>
@@ -3129,8 +3130,8 @@ three modes at 0.3 (-), 0.5 (~), respectively 0.7 (+) of the common scale span a
 </span></pre></div>
 </div>
 </div>
-<p>It is worthwhile noticing again, that similar to the <em>Copeland</em> ranking rule seen before, the <em>NetFlows</em> ranking rule is also <strong>invariant</strong> under the <a class="reference internal" href="#codual-transform-label"><span class="std std-ref">codual transform</span></a> and delivers again the same ranking result indifferently from digraphs <em>g</em> or <em>gcd</em> (see <a class="hxr-hoverxref hxr-tooltip reference internal" href="#netflowsranking"><span class="std std-numref">Listing 1.31</span></a> Line 14). The <em>Copeland</em> rule is also <strong>Condorcet consistent</strong>, i.e. when the outranking relation models a <em>transitive</em> and <em>acyclic</em> relation, this relation is preserved in the <em>Copeland</em> ranking result.</p>
-<p>In our example here, the <em>NetFlows</em> scores deliver  a ranking <em>without ties</em> which is rather different from the one delivered by <em>Copeland</em>’s rule (see <a class="hxr-hoverxref hxr-tooltip reference internal" href="#netflowsranking"><span class="std std-numref">Listing 1.31</span></a> Line 16). It may happen, however, that we obtain, as with the <em>Copeland</em> scores above, only a ranking with ties, which may then be resolved again by following a lexicographic rule. In such cases, it is possible to construct again a <em>weak ranking</em> with the corresponding <a class="reference internal" href="techDoc.html#transitiveDigraphs.WeakNetFlowsOrder" title="transitiveDigraphs.WeakNetFlowsOrder"><code class="xref py py-class docutils literal notranslate"><span class="pre">WeakNetFlowsOrder</span></code></a> class.</p>
+<p>It is worthwhile noticing again that, similar to the <em>Copeland</em> ranking rule seen before, the <em>NetFlows</em> ranking rule is also <strong>invariant</strong> under the <a class="reference internal" href="#codual-transform-label"><span class="std std-ref">codual transform</span></a> and delivers again the same ranking result indifferently from digraphs <em>g</em> or <em>gcd</em> (see <a class="hxr-hoverxref hxr-tooltip reference internal" href="#netflowsranking"><span class="std std-numref">Listing 1.31</span></a> Line 14). Yet, the <em>NetFlows</em> ranking rule, working directly with the bipolar characteristic values of the outranking relation is not necessarily <em>Condorcet consistent</em>.</p>
+<p>In our example here, the <em>NetFlows</em> scores deliver  a ranking <em>without ties</em> which is rather different from the one delivered by <em>Copeland</em>’s rule (see <a class="hxr-hoverxref hxr-tooltip reference internal" href="#netflowsranking"><span class="std std-numref">Listing 1.31</span></a> Line 16). It may happen, however, that we obtain, as with the <em>Copeland</em> scores above, only a ranking result with ties, which may then be resolved again by following a lexicographic rule. In such cases, it is possible to construct again a <em>weak ranking</em> with the corresponding <a class="reference internal" href="techDoc.html#transitiveDigraphs.WeakNetFlowsOrder" title="transitiveDigraphs.WeakNetFlowsOrder"><code class="xref py py-class docutils literal notranslate"><span class="pre">WeakNetFlowsOrder</span></code></a> class.</p>
 <p>The <strong>NetFlows</strong> ranking result appears to be slightly better correlated (+0.638) with the given outranking relation than its crisp cousin, the <em>Copeland</em> ranking (see <a class="hxr-hoverxref hxr-tooltip reference internal" href="#copelandcorrelationindexes"><span class="std std-numref">Listing 1.28</span></a> Lines 4-6).</p>
 <div class="literal-block-wrapper docutils container" id="netflowscorrelationindexes">
 <div class="code-block-caption"><span class="caption-number">Listing 1.32 </span><span class="caption-text">Checking the quality of the <em>NetFlows</em> Ranking</span><a class="headerlink" href="#netflowscorrelationindexes" title="Link to this code"></a></div>
@@ -3143,8 +3144,8 @@ three modes at 0.3 (-), 0.5 (~), respectively 0.7 (+) of the common scale span a
 </span></pre></div>
 </div>
 </div>
-<p>Indeed, the extended <em>Kendall</em> tau index of +0.638 leads to a bipolar-valued <em>relational equivalence</em> characteristics of +0.147, i.e. a <em>majority</em> of 57.35% of the criteria significance supports the relational equivalence between the given outranking digraphs <em>g</em> or <em>gcd</em>  and the corresponding <em>NetFlows</em> ranking. This lesser ranking performance of the <em>Copeland</em> rule stems in this example essentially from the <em>weakness</em> of the actual ranking result and our subsequent <em>arbitrary</em> lexicographic resolution of the many ties given by the <em>Copeland</em> scores (see <a class="hxr-hoverxref hxr-tooltip reference internal" href="#weakrankingdrawing"><span class="std std-numref">Fig. 1.21</span></a>).</p>
-<p>A further valued version of the <em>Copeland</em> ranking-by-scoring rule is given by the new <em>Bachet</em> ranking rule.</p>
+<p>Indeed, the extended <em>Kendall</em> tau index of +0.638 leads to a bipolar-valued <em>relational equivalence</em> characteristics of +0.147, i.e. a <em>majority</em> of 57.35% of the criteria significance supports the relational equivalence between the given outranking digraphs <em>g</em> or <em>gcd</em>  and the corresponding <em>NetFlows</em> ranking. Th lesser ranking performance of the previous <em>Copeland</em> rule stems in this example here essentially from the <em>weakness</em> of the actual ranking result and our subsequent <em>arbitrary</em> lexicographic resolution of the many ties given by the <em>Copeland</em> scores (see <a class="hxr-hoverxref hxr-tooltip reference internal" href="#weakrankingdrawing"><span class="std std-numref">Fig. 1.21</span></a>).</p>
+<p>A further valued version of the <em>Copeland</em> ranking-by-scoring rule is given by <a class="reference internal" href="pearls.html#bachet-tutorial-label"><span class="std std-ref">the new Bachet ranking rule</span></a> .</p>
 </section>
 <section id="the-bachet-ranking">
 <h4><a class="toc-backref" href="#id322" role="doc-backlink"><span class="section-number">1.3.4.4. </span>The <em>Bachet</em> ranking</a><a class="headerlink" href="#the-bachet-ranking" title="Link to this heading"></a></h4>

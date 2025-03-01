@@ -2881,6 +2881,7 @@ The *Copeland* ranking
 .. code-block:: pycon
    :name: CopelandRanking
    :caption: Computing a *Copeland* Ranking
+   :emphasize-lines: 2,4-12,14
    :linenos:
 
    >>> from linearOrders import CopelandRanking
@@ -2898,13 +2899,16 @@ The *Copeland* ranking
     Copeland Ranking:
     ['a5', 'a1', 'a6', 'a7', 'a8', 'a4', 'a9', 'a3', 'a2']
 
-Alternative *a5* obtains here the best *Copeland* score (+12), followed by alternatives *a1*, *a6* and *a7* with same score (+2); following the lexicographic rule, *a1* is hence ranked before *a6* and *a6* before *a7*. Same situation is observed for *a4* and *a9* with a score of -3 (see :numref:`CopelandRanking` Lines 4-12).
+Alternative *a5* obtains here the best *Copeland* score (+12), followed by alternatives *a1*, *a6* and *a7* with same score (+2); following the lexicographic rule, *a1* is hence ranked before *a6* and *a6* before *a7*. Same situation is observed for *a4* and *a9* with a score of -3 (see :numref:`CopelandRanking` Lines 4-12 and 14).
 
-*Copeland*'s ranking rule appears in fact **invariant** under the :ref:`codual transform <Codual-Transform-label>` and renders a same linear order indifferently from digraphs *g* or *gcd* . The resulting ranking (see :numref:`CopelandRanking` Line 14) is rather correlated (+0.463) with the given pairwise outranking relation in the ordinal *Kendall* sense (see :numref:`CopelandCorrelationIndexes`).
+*Copeland*'s ranking rule appears in fact **invariant** under the :ref:`codual transform <Codual-Transform-label>` and renders a same linear order indifferently from digraphs *g* or *gcd* . The *Copeland* rule is furthermore **Condorcet consistent**, i.e. when the outranking relation models a *transitive* and *acyclic* relation, this relation is preserved in the *Copeland* ranking result.
+
+The *Copeland* ranking result (see :numref:`CopelandRanking` Line 14) is rather correlated (+0.463) with the given pairwise outranking relation in the ordinal *Kendall* sense (see :numref:`CopelandCorrelationIndexes`).
 
 .. code-block:: pycon
    :name: CopelandCorrelationIndexes
    :caption: Checking the quality of the *Copeland* Ranking
+   :emphasize-lines: 4-6
    :linenos:
 
    >>> corr = g.computeRankingCorrelation(cop.copelandRanking)
@@ -2921,6 +2925,7 @@ The *Copeland* scores deliver actually only a unique *weak ranking*, i.e. a rank
 .. code-block:: pycon
    :name: weakCopelandRanking
    :caption: Computing a weak *Copeland* ranking
+   :emphasize-lines: 6,8
    :linenos:
 
    >>> from transitiveDigraphs import WeakCopelandOrder
@@ -2934,7 +2939,7 @@ The *Copeland* scores deliver actually only a unique *weak ranking*, i.e. a rank
        2nd last ranked ['a3']
      1st last ranked ['a2']
 
-We recover in :numref:`weakCopelandRanking` above, the ranking with ties delivered by the *Copeland* scores (see :numref:`CopelandRanking`). We may draw its corresponding *Hasse* diagram (see :numref:`weakCopelandRankingDrawing`).
+We recover in :numref:`weakCopelandRanking` Lines 6 and 8 above, the ranking with ties delivered by the *Copeland* scores (see :numref:`CopelandRanking`). We may draw its corresponding *Hasse* diagram (see :numref:`weakCopelandRankingDrawing`).
 
 .. code-block:: pycon
    :name: weakCopelandRankingDrawing
@@ -2992,9 +2997,9 @@ A valued version of the *Copeland* rule, called **NetFlows** rule, computes for 
    >>> cop.copelandRanking
     ['a5', 'a1', 'a6', 'a7', 'a8', 'a4', 'a9', 'a3', 'a2']
 
-It is worthwhile noticing again, that similar to the *Copeland* ranking rule seen before, the *NetFlows* ranking rule is also **invariant** under the :ref:`codual transform <Codual-Transform-label>` and delivers again the same ranking result indifferently from digraphs *g* or *gcd* (see :numref:`NetFlowsRanking` Line 14). The *Copeland* rule is also **Condorcet consistent**, i.e. when the outranking relation models a *transitive* and *acyclic* relation, this relation is preserved in the *Copeland* ranking result.
+It is worthwhile noticing again that, similar to the *Copeland* ranking rule seen before, the *NetFlows* ranking rule is also **invariant** under the :ref:`codual transform <Codual-Transform-label>` and delivers again the same ranking result indifferently from digraphs *g* or *gcd* (see :numref:`NetFlowsRanking` Line 14). Yet, the *NetFlows* ranking rule, working directly with the bipolar characteristic values of the outranking relation is not necessarily *Condorcet consistent*. 
 
-In our example here, the *NetFlows* scores deliver  a ranking *without ties* which is rather different from the one delivered by *Copeland*'s rule (see :numref:`NetFlowsRanking` Line 16). It may happen, however, that we obtain, as with the *Copeland* scores above, only a ranking with ties, which may then be resolved again by following a lexicographic rule. In such cases, it is possible to construct again a *weak ranking* with the corresponding :py:class:`~transitiveDigraphs.WeakNetFlowsOrder` class.
+In our example here, the *NetFlows* scores deliver  a ranking *without ties* which is rather different from the one delivered by *Copeland*'s rule (see :numref:`NetFlowsRanking` Line 16). It may happen, however, that we obtain, as with the *Copeland* scores above, only a ranking result with ties, which may then be resolved again by following a lexicographic rule. In such cases, it is possible to construct again a *weak ranking* with the corresponding :py:class:`~transitiveDigraphs.WeakNetFlowsOrder` class.
 
 The **NetFlows** ranking result appears to be slightly better correlated (+0.638) with the given outranking relation than its crisp cousin, the *Copeland* ranking (see :numref:`CopelandCorrelationIndexes` Lines 4-6).
 
@@ -3011,9 +3016,9 @@ The **NetFlows** ranking result appears to be slightly better correlated (+0.638
      Epistemic determination    :  0.230
      Bipolar-valued equivalence : +0.147
 
-Indeed, the extended *Kendall* tau index of +0.638 leads to a bipolar-valued *relational equivalence* characteristics of +0.147, i.e. a *majority* of 57.35% of the criteria significance supports the relational equivalence between the given outranking digraphs *g* or *gcd*  and the corresponding *NetFlows* ranking. This lesser ranking performance of the *Copeland* rule stems in this example essentially from the *weakness* of the actual ranking result and our subsequent *arbitrary* lexicographic resolution of the many ties given by the *Copeland* scores (see :numref:`weakRankingDrawing`).
+Indeed, the extended *Kendall* tau index of +0.638 leads to a bipolar-valued *relational equivalence* characteristics of +0.147, i.e. a *majority* of 57.35% of the criteria significance supports the relational equivalence between the given outranking digraphs *g* or *gcd*  and the corresponding *NetFlows* ranking. Th lesser ranking performance of the previous *Copeland* rule stems in this example here essentially from the *weakness* of the actual ranking result and our subsequent *arbitrary* lexicographic resolution of the many ties given by the *Copeland* scores (see :numref:`weakRankingDrawing`).
 
-A further valued version of the *Copeland* ranking-by-scoring rule is given by the new *Bachet* ranking rule.	
+A further valued version of the *Copeland* ranking-by-scoring rule is given by :ref:`the new Bachet ranking rule <Bachet-Tutorial-label>` .	
 
 The *Bachet* ranking
 ````````````````````
