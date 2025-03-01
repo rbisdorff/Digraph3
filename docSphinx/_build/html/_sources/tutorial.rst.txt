@@ -3070,7 +3070,7 @@ A heatmap view on the performance tableau illustrates well the actual quality of
 
 In :numref:`bachetHeatmapT` we may notice that action *a5*, with all grades above the third 7-tile (> 42.86%), appears convincingly first-ranked. Similarly, with five grades in the lowest 7-tiled class (< 14.29%), action *a9* appears last-ranked. Most significant in this ranking appear to be the *Benefit* criteria *b09*, *b04* and *b01* with a correlation > +0.40, whereas *Costs* criteria *c02* and *c03* appear somehow in contradiction (-0.11 and -0.28) with the proposed *Bachet* ranking. Action *a7*, with only three weak grades, is not first-ranked because of the fact that on all three *Costs* criteria and on the *Benefit* criterion *b08*, i.e on a majority (33/60) of criteria significance, action *a7* is positively outranked by actions *a6* and *a5*. Notice also the highly contrasted performance record of action *a1* with three grades in the highest 7-tile (> 85.71%) and four grades in the lowest 7-tile (<14.29%). A similar contrasted situation is given for action *a3* with 7 grades in the two top 7-tiles (>71.43%) and four grades in the two lowest 7-tiles (<28.57%). The mean marginal correlation over all 13 criteria is positive (+0.09). The standard deviation of the marginal correlations is however quite high (+0.261) so that the ranking lacks apparently a bit of fairness (-0.171).
 
-To compare the three ranking results we have so far obtained, it is useful to vizualize the **ranking consensus**  one may observe between the *Copeland*, the *NetFlows* and the *Bachet* ranking results. To compute such a ranking consensus we can make usage of the :py:class:`transitiveDigraphs.RankingsFusionDigraph` class.
+To compare the three rankings we have so far obtained with *ranking-by-scoring* strategies, it is useful to vizualize the **ranking consensus**  one may observe between the *Copeland*, the *NetFlows* and the *Bachet* ranking results. To compute such a ranking consensus we can make usage of the :py:class:`transitiveDigraphs.RankingsFusionDigraph` class.
 
 .. code-block:: pycon
    :name: RankingConsensus
@@ -3291,9 +3291,11 @@ We notice in :numref:`SlaterRanking` Line 7 that the first *Slater* ranking is a
 
     Epistemic fusion of optimal *Slater* rankings
        
-What precise ranking result should we hence adopt? *Kemeny*'s and *Slater*'s optimal ranking rules are furthermore computationally *difficult* problems and effective ranking results are only computable for tiny outranking digraphs (< 20 objects). 
+What precise ranking result should we hence adopt? With a complexity of :math:`O(n!)` where *n* is the order of the outranking digraph, *Kemeny*'s and *Slater*'s optimal ranking rules are computationally *difficult* problems and effective ranking results are only computable for small outranking digraphs (< 20 objects).
 
-More efficient ranking heuristics, like the *Copeland*, the *NetFlows* rules and the *Bachet* rule are therefore needed in practice. Let us finally, after these *ranking-by-scoring* strategies, also present two popular *ranking-by-choosing* strategies.
+Efficient *ranking-by-scoring* heuristics, like the *Copeland* and the *NetFlows* rules with a complexity of :math:`O(n^2)` and the randomized *Bachet* rule with a complexity of :math:`O(n^3)`, are therefore needed in practice.
+
+Let us finally present two popular *ranking-by-choosing* strategies.
 
 *Kohler*'s ranking-by-choosing rule
 ```````````````````````````````````
@@ -3323,7 +3325,7 @@ At step *i* (*i* goes from 1 to *n*) do the following:
      Epistemic determination    :  0.230
      Bipolar-valued equivalence : +0.172
 
-With this *min-max* lexicographic *ranking-by-choosing* strategy, we find a correlation result (+0.747) that is until now clearly the nearest to an optimal *Kemeny* ranking (see :numref:`optimalKemeny`). Only two adjacent pairs: *[a6, a7]* and *[a8, a9]* are actually inverted here. Notice that *Kohler*'s ranking rule, contrary to the previously mentioned rules, is **not** *invariant* under the *codual* transform and requires to work on the *strict outranking* digraph *gcd* for a better correlation result.
+With this *min-max* lexicographic *ranking-by-choosing* strategy, we find a correlation result (+0.747) that is until now the nearest to an optimal *Kemeny* ranking (see :numref:`optimalKemeny`). Only two adjacent pairs: *[a6, a7]* and *[a8, a9]* are actually inverted here. Notice that *Kohler*'s ranking rule, contrary to the previously mentioned rules, is **not** *invariant* under the *codual* transform and requires to work on the *strict outranking* digraph *gcd* for a better correlation result.
 
 .. code-block:: pycon
    :linenos:
