@@ -3016,13 +3016,13 @@ The **NetFlows** ranking result appears to be slightly better correlated (+0.638
      Epistemic determination    :  0.230
      Bipolar-valued equivalence : +0.147
 
-Indeed, the extended *Kendall* tau index of +0.638 leads to a bipolar-valued *relational equivalence* characteristics of +0.147, i.e. a *majority* of 57.35% of the criteria significance supports the relational equivalence between the given outranking digraphs *g* or *gcd*  and the corresponding *NetFlows* ranking. Th lesser ranking performance of the previous *Copeland* rule stems in this example here essentially from the *weakness* of the actual ranking result and our subsequent *arbitrary* lexicographic resolution of the many ties given by the *Copeland* scores (see :numref:`weakRankingDrawing`).
+Indeed, the extended *Kendall* tau index of +0.638 leads to a bipolar-valued *relational equivalence* characteristics of +0.147, i.e. a *majority* of 57.35% of the criteria significance supports the relational equivalence between the given outranking digraphs *g* or *gcd*  and the corresponding *NetFlows* ranking. The lesser ranking performance of the previous *Copeland* rule stems in this example here essentially from the *weakness* of the actual ranking result and our subsequent *arbitrary* lexicographic resolution of the many ties given by the *Copeland* scores (see :numref:`weakRankingDrawing`).
 
 A further valued version of the *Copeland* ranking-by-scoring rule is given by :ref:`the new Bachet ranking rule <Bachet-Tutorial-label>` .	
 
 The *Bachet* ranking
 ````````````````````
-The *Bachet* numbers --bipolar-valued {-1,0,1} base 3 encoded integers-- instantiated by the row vectors without reflxive terms and the colum vectors without reflexive terms of the strict outranking digraph's polarised relation table model in fact per decision action respectively an **outrankingness** and a **not outrankedness** ranking fitness scores similar to the previous *NetFlows* ranking scores (see :numref:`polarisedAStrictOutranking` and :py:class:`linearOrders.BachetRanking`).
+The *Bachet* numbers --bipolar-valued {-1,0,1} base 3 encoded integers-- instantiated by the row vectors without reflxive terms and the colum vectors without reflexive terms of the strict outranking digraph's polarised relation table model in fact per decision action respectively an **outrankingness** and a **not outrankedness** ranking fitness score similar to the previous *NetFlows* ranking scores (see :numref:`polarisedAStrictOutranking` and :py:class:`linearOrders.BachetRanking`).
 
 Now, *Bachet* numbers are formulated in a base 3 positional numeral system and the integer values of the *Bachet* ranking scores may depend therefore on the actual ordering of the outranking digraph's *actions* dictiionary. The *Bachet* rule is however, like the *Copeland* rule, **invariant** under the **codual** transform and **Condorcet consistent**, ie. when the outranking digraph models a transitive and acyclic relation, this relation will be preserved by the *Bachet* ranking scores. Here, as we have seen above, the given digraph's transitivity degree is only 0.487. To reduce therefore the dependency on the given initial ordering of the *actions* dictionary, we compute below *Bachet* ranking results for 10 random permutations and their reversed orderings of the actions keys (see :numref:`BachetRanking` Line 2) and keep the one ranking that is best correlated with the given outranking digraph (see the advanced topic on :ref:`a new ranking rule based on bipolar-valued base 3 Bachet numbers <Bachet-Tutorial-label>` ) [59]_.
 
@@ -3110,7 +3110,7 @@ To compare the three rankings we have so far obtained with *ranking-by-scoring* 
 
    *Copeland*, *NetFlows* and *Bachet* ranking consensus 	   
     
-In :numref:`rankingConsensusFigure` appears a convincing ranking consensus with four levels of agreement where action *a5* appears consistently first-ranked and actions *a2* and *a9*, both, last-ranked. Notice the unstable rank positions of action *a1* (2,5 and 7), as well as the unstable rank positions of action *a3* (5, 8), both a consequence of their contrasted performance records. The epistemic fusion of all three *ranking-by-scoring* results delivers here a convincing partial transitive ordering, highly correlated with the given outranking digraph *g* (+0.852, see Line 4 below). 
+In :numref:`rankingConsensusFigure` appears a convincing ranking consensus with four levels of agreement where action *a5* appears consistently first-ranked and actions *a2* and *a9*, both, last-ranked. Notice the unstable rank positions of action *a1* (2,5 and 7), as well as the unstable rank positions of action *a3* (5, 8), both a consequence of their contrasted performance records. The epistemic fusion of all three *ranking-by-scoring* results delivers here a convincing transitive partial ordering, highly correlated with the given outranking digraph *g* (+0.852, see Line 4 below). 
 
 .. code-block:: pycon
    :linenos:
@@ -3158,7 +3158,7 @@ A *Kemeny* ranking may not be unique. In our example here, we obtain in fact two
     [['a5', 'a6', 'a7', 'a3', 'a8', 'a9', 'a4', 'a1', 'a2'],
      ['a5', 'a6', 'a7', 'a3', 'a9', 'a4', 'a1', 'a8', 'a2']]
 
-We may visualize the partial order defined by the :ref:`epistemic fusion <Epistemic-Fusion-label>` of both optimal *Kemeny* rankings by using the :py:class:`~transitiveDigraphs.RankingsFusionDigraph` class as follows.
+We visualize the partial order defined by the :ref:`epistemic fusion <Epistemic-Fusion-label>` of both optimal *Kemeny* rankings by using the :py:class:`~transitiveDigraphs.RankingsFusionDigraph` class as follows.
 
 .. code-block:: pycon
    :name: KemenyRankingsFusion
@@ -3185,7 +3185,7 @@ We may visualize the partial order defined by the :ref:`epistemic fusion <Episte
    :width: 175pt
    :align: center
 
-   Epistemic fusion of optimal *Kemeny* rankings	   
+   Epistemic disjunctive fusion of optimal *Kemeny* rankings	   
 
 It is interesting to notice in :numref:`tutorialKemeny` and :numref:`optimalKemeny`, that both *Kemeny* rankings only differ in their respective positioning of alternative *a8*; either before or after alternatives *a9*, *a4* and *a1*.
 
