@@ -2874,7 +2874,7 @@ Now, several heuristic ranking rules have been proposed for constructing a linea
 The *Copeland* ranking
 ``````````````````````
 
-*Copeland*'s rule, the most intuitive one as it balances the number of *outranking* against *outranked* arcs, works on the *median cut* polarised strict outranking digraph *ccd*. The rule computes for each alternative a score resulting from the sum of the differences between the polarised **strict outranking** characteristics :math:`r(x\, \succnsim \,y)_{>0}` and the polarised **strict outranked** characteristics :math:`r(y\, \succnsim \, x)_{>0}`  for all pairs of alternatives where *y* is different from *x*. The alternatives are ranked in decreasing order of these *Copeland* scores; ties, the case given, being resolved by a lexicographical rule. 
+*Copeland*'s rule, the most intuitive one as it balances the number of *outranking* against the number of *outranked* arcs, works on the *median cut* polarised strict outranking digraph *ccd*. The rule computes for each alternative a score resulting from the sum of the differences between the polarised **strict outranking** characteristics :math:`r(x\, \succnsim \,y)_{>0}` and the polarised **strict outranked** characteristics :math:`r(y\, \succnsim \, x)_{>0}`  for all pairs of alternatives where *y* is different from *x*. The alternatives are ranked in decreasing order of these *Copeland* scores; ties, the case given, being resolved by a lexicographical rule. 
 
 .. code-block:: pycon
    :name: CopelandRanking
@@ -3014,7 +3014,7 @@ The **NetFlows** ranking result appears to be slightly better correlated (+0.638
      Epistemic determination    :  0.230
      Bipolar-valued equivalence : +0.147
 
-Indeed, the extended *Kendall* tau index of +0.638 leads to a bipolar-valued *relational equivalence* characteristics of +0.147, i.e. a *majority* of 57.35% of the criteria significance supports the relational equivalence between the given outranking digraphs *g* or *gcd*  and the corresponding *NetFlows* ranking. The lesser ranking performance of the previous *Copeland* rule stems in this example here essentially from the *weakness* of the actual ranking result and our subsequent *arbitrary* lexicographic resolution of the many ties given by the *Copeland* scores (see :numref:`weakRankingDrawing`).
+Indeed, the extended *Kendall* tau index of +0.638 leads to a bipolar-valued *relational equivalence* characteristics of +0.147, i.e. a *majority* of 57.35% of the criteria significance supports the relational equivalence between the given outranking digraphs *g* or *gcd*  and the corresponding *NetFlows* ranking. The lesser ranking performance of the previous *Copeland* rule stems in this example here essentially from the *weakness* of the actual *Copeland* ranking result and our subsequent *arbitrary* lexicographic resolution of the many ties given by the *Copeland* scores (see :numref:`weakRankingDrawing`).
 
 A further valued version of the *Copeland* ranking-by-scoring rule is given by :ref:`the new Bachet ranking rule <Bachet-Tutorial-label>` .	
 
@@ -3440,9 +3440,9 @@ The *RankedPairs* ranking rule renders in our example here luckily one of the tw
 
 Similar to *Kohler*'s rule, the *RankedPairs* rule has also a prudent *dual* version, the **Dias-Lamboray** *ordering-by-choosing* rule, which produces, when working this time on the codual *strict outranking* digraph *gcd*, a similar ranking result (see [LAM-2009]_, [DIA-2010]_).
 
-Besides of not providing a unique linear ranking, the *ranking-by-choosing* rules, as well as their dual *ordering-by-choosing* rules, are unfortunately *not scalable* to outranking digraphs of larger orders (> 100). For such bigger outranking digraphs, with several hundred or thousands of alternatives, only the *Copeland*, the *NetFlows* ranking-by-scoring rules, with a polynomial complexity of :math:`O(n^2)`, where *n* is the order of the outranking digraph, remain in fact computationally tractable.
+Besides of not providing a unique linear ranking, the *ranking-by-choosing* rules, as well as their dual *ordering-by-choosing* rules, are unfortunately *not scalable* to outranking digraphs of larger orders (> 100). For such bigger outranking digraphs, with several hundred or thousands of alternatives, only the *Copeland* and the *NetFlows* ranking-by-scoring rules, with a polynomial complexity of :math:`O(n^2)`, where *n* is the order of the outranking digraph, remain in fact computationally tractable.
 
-It is important finally to underline that for all outranking digraphs of small or larger order there does usually **not exist** a unique optimal ranking result when the corresponding strict outranking digraph lacks transitivity and contains some chordless cycles. Instead of computing hence a more or less convincing linear ranking, it may be more meaningful and faithful to sort the performance records into **ordered quantile** performance equivalence classes. This order statistics based **rating** approach is presented in the following Section.  
+It is important finally to underline that for all outranking digraphs of small or larger orders there does usually **not exist** a unique optimal ranking result when the corresponding strict outranking digraph contains chordless cycles and lacks transitivity. Instead of computing hence a more or less convincing linear ranking, it may be more meaningful and faithful to sort the performance records into performance **quantile equivalence classes**. This order statistics based **rating** approach is presented in the following Section.  
 
 Back to :ref:`Content Table <Tutorial-label>`
 

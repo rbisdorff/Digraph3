@@ -2587,14 +2587,14 @@ Examples of such *sbits* encoded *Bachet* numbers are immediately provided by th
    >>> pg = PolarisedDigraph(g,level=g.valuationdomain['med'],
    ...                      StrictCut=True,KeepValues=False)
    >>> pg.recodeValuation(ndigits=0)
-   >>> pg.showRelationTable()
+   >>> pg.showRelationTable(ReflexiveTerms=False)
     * ---- Relation Table -----
         S   | 'a1' 'a2' 'a3' 'a4'	  
       ------|-------------------------
-       'a1' |   0    0	  1   -1	 
-       'a2' |   1    0	 -1   -1	 
-       'a3' |   1    1	  0   -1	 
-       'a4' |   1    1	  1    0	 
+       'a1' |   -    0	  1   -1	 
+       'a2' |   1    -	 -1   -1	 
+       'a3' |   1    1	  -   -1	 
+       'a4' |   1    1	  1    -	 
    >>> ra1 = BachetNumber(vector=[0,1,-1])
    >>> ra2 = BachetNumber(vector=[1,-1,-1])
    >>> ra3 = BachetNumber(vector=[1,1,-1])
@@ -2640,14 +2640,15 @@ If we reverse however the given ordering of the *actions* dictionary, we may obt
    :linenos:
    :emphasize-lines: 1,5-8,15,21,24
 
-   >>> pg.showRelationTable(actionsSubset=['a4','a3','a2','a1'])
+   >>> pg.showRelationTable(actionsSubset=['a4','a3','a2','a1'],
+   ...                      RefelxiveTerms=False)
     * ---- Relation Table -----
        S   | 'a4' 'a3' 'a2' 'a1'	  
      ------|----------------------
-      'a4' |   0    1    1    1	 
-      'a3' |  -1    0    1    1	 
-      'a2' |  -1   -1    0    1	 
-      'a1' |  -1    1    0    0	 
+      'a4' |   -    1    1    1	 
+      'a3' |  -1    -    1    1	 
+      'a2' |  -1   -1    -    1	 
+      'a1' |  -1    1    0    -	 
      Valuation domain: [-1;+1]
    >>> ra4 = BachetNumber(vector=[1,1,1])
    >>> ra3 = BachetNumber(vector=[-1,1,1])
@@ -2739,14 +2740,14 @@ Our random outranking digraph *g*, generated above in :numref:`examplesBachet` L
 
    >>> print('Transitivity degree: %.4f' % (g.computeTransitivityDegree())
     Transitivity degree: 0.8333
-   >>> pg.showRelationTable()
+   >>> pg.showRelationTable(ReflexiveTerms= False)
     * ---- Relation Table -----
       S   | 'a1' 'a2' 'a3' 'a4'	  
     ------|--------------------
-     'a1' |   0	   0    1   -1	 
-     'a2' |   1	   0   -1   -1	 
-     'a3' |   1	   1    0   -1	 
-     'a4' |   1	   1    1    0	 
+     'a1' |   -	   0    1   -1	 
+     'a2' |   1	   -   -1   -1	 
+     'a3' |   1	   1    -   -1	 
+     'a4' |   1	   1    1    -	 
       Valuation domain: [-1;+1]
  
 When we reconsider above digraph *g*'s polarised relation table, we may indeed notice that 'a1' outranks 'a3', 'a3' outranks 'a2', but 'a1' does not outrank 'a2'. When measuring now the quality of *Bachet* rankings obtained by operating the *Bachet* rule on each one of all the potential 24 permutations of the four *g.actions* keys ['a1', 'a2', 'a3', 'a4'], we may observe below in :numref:`BachetPerms` four different levels of correlation: +0.7950 (8), +0.6890 (3), +0.6113(3) and +0.5265 (10). The first correlation corresponds to eight ['a4', 'a3', 'a2', 'a1'] ranking results, the second to three ['a4', 'a1', 'a3', 'a2'], the third to three ['a4', 'a2', 'a3', 'a1'], and the last to ten ['a4', 'a3', 'a1', 'a2'] ranking results. In 8 out of 12 cases, the reversed actions list delivers the highest possible correlation +0.7950 (see Lines 6-7 and 24-25).
