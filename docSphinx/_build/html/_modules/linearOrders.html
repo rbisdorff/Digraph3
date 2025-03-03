@@ -1814,6 +1814,7 @@
         <span class="n">n</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">other</span><span class="o">.</span><span class="n">actions</span><span class="p">)</span>
         <span class="n">actions</span> <span class="o">=</span> <span class="n">other</span><span class="o">.</span><span class="n">actions</span>
         <span class="n">gamma</span> <span class="o">=</span> <span class="n">other</span><span class="o">.</span><span class="n">gamma</span>
+        <span class="n">notGamma</span> <span class="o">=</span> <span class="n">other</span><span class="o">.</span><span class="n">notGamma</span>
         <span class="n">selfRelation</span> <span class="o">=</span> <span class="p">{}</span>
         <span class="n">Min</span> <span class="o">=</span> <span class="n">Decimal</span><span class="p">(</span><span class="s1">&#39;-1.0&#39;</span><span class="p">)</span>
         <span class="n">Med</span> <span class="o">=</span> <span class="n">Decimal</span><span class="p">(</span><span class="s1">&#39;0.0&#39;</span><span class="p">)</span>
@@ -1830,9 +1831,9 @@
         <span class="c1"># with gamma functions</span>
         <span class="k">if</span> <span class="n">Gamma</span><span class="p">:</span>
             <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">actions</span><span class="p">:</span>
-                <span class="n">copelandScore</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">gamma</span><span class="p">[</span><span class="n">x</span><span class="p">][</span><span class="mi">0</span><span class="p">])</span> <span class="o">-</span> <span class="nb">len</span><span class="p">(</span><span class="n">gamma</span><span class="p">[</span><span class="n">x</span><span class="p">][</span><span class="mi">1</span><span class="p">])</span>
+                <span class="n">copelandScore</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">gamma</span><span class="p">[</span><span class="n">x</span><span class="p">][</span><span class="mi">0</span><span class="p">])</span> <span class="o">+</span> <span class="nb">len</span><span class="p">(</span><span class="n">gamma</span><span class="p">[</span><span class="n">x</span><span class="p">][</span><span class="mi">1</span><span class="p">])</span>
                 <span class="n">incCopelandScores</span><span class="o">.</span><span class="n">append</span><span class="p">((</span><span class="n">copelandScore</span><span class="p">,</span><span class="n">x</span><span class="p">))</span>
-                <span class="n">decCopelandScores</span><span class="o">.</span><span class="n">append</span><span class="p">((</span><span class="o">-</span><span class="n">copelandScore</span><span class="p">,</span><span class="n">x</span><span class="p">))</span>
+                <span class="n">decCopelandScores</span><span class="o">.</span><span class="n">append</span><span class="p">((</span><span class="n">copelandScore</span><span class="p">,</span><span class="n">x</span><span class="p">))</span>
         <span class="k">else</span><span class="p">:</span> <span class="c1"># with Condorcet Digraph valuation</span>
             <span class="n">c</span> <span class="o">=</span> <span class="n">PolarisedDigraph</span><span class="p">(</span><span class="n">other</span><span class="p">,</span><span class="n">level</span><span class="o">=</span><span class="n">other</span><span class="o">.</span><span class="n">valuationdomain</span><span class="p">[</span><span class="s1">&#39;med&#39;</span><span class="p">],</span>\
                              <span class="n">StrictCut</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span><span class="n">KeepValues</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
@@ -1843,14 +1844,18 @@
             <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">actions</span><span class="p">:</span>
                 <span class="n">copelandScore</span> <span class="o">=</span> <span class="n">Decimal</span><span class="p">(</span><span class="s1">&#39;0&#39;</span><span class="p">)</span>
                 <span class="k">for</span> <span class="n">y</span> <span class="ow">in</span> <span class="n">actions</span><span class="p">:</span>
-                    <span class="n">copelandScore</span> <span class="o">+=</span> <span class="n">cRelation</span><span class="p">[</span><span class="n">x</span><span class="p">][</span><span class="n">y</span><span class="p">]</span> <span class="o">-</span> <span class="n">cRelation</span><span class="p">[</span><span class="n">y</span><span class="p">][</span><span class="n">x</span><span class="p">]</span>
+                    <span class="k">if</span> <span class="n">x</span> <span class="o">!=</span> <span class="n">y</span><span class="p">:</span>
+                        <span class="n">copelandScore</span> <span class="o">+=</span> <span class="n">cRelation</span><span class="p">[</span><span class="n">x</span><span class="p">][</span><span class="n">y</span><span class="p">]</span> <span class="o">-</span> <span class="n">cRelation</span><span class="p">[</span><span class="n">y</span><span class="p">][</span><span class="n">x</span><span class="p">]</span>
+                        <span class="k">if</span> <span class="n">Debug</span><span class="p">:</span>
+                            <span class="nb">print</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="n">y</span><span class="p">,</span><span class="n">cRelation</span><span class="p">[</span><span class="n">x</span><span class="p">][</span><span class="n">y</span><span class="p">],</span>
+                                  <span class="o">-</span><span class="n">cRelation</span><span class="p">[</span><span class="n">y</span><span class="p">][</span><span class="n">x</span><span class="p">],</span><span class="n">copelandScore</span><span class="p">)</span>
                 <span class="n">incCopelandScores</span><span class="o">.</span><span class="n">append</span><span class="p">((</span><span class="n">copelandScore</span><span class="p">,</span><span class="n">x</span><span class="p">))</span>
-                <span class="n">decCopelandScores</span><span class="o">.</span><span class="n">append</span><span class="p">((</span><span class="o">-</span><span class="n">copelandScore</span><span class="p">,</span><span class="n">x</span><span class="p">))</span>
+                <span class="n">decCopelandScores</span><span class="o">.</span><span class="n">append</span><span class="p">((</span><span class="n">copelandScore</span><span class="p">,</span><span class="n">x</span><span class="p">))</span>
+
         <span class="c1"># reversed sorting with keeping the actions initial ordering</span>
         <span class="c1"># in case of ties</span>
         <span class="n">incCopelandScores</span><span class="o">.</span><span class="n">sort</span><span class="p">(</span><span class="n">key</span><span class="o">=</span><span class="n">itemgetter</span><span class="p">(</span><span class="mi">0</span><span class="p">))</span>
-        <span class="n">decCopelandScores</span><span class="o">.</span><span class="n">sort</span><span class="p">(</span><span class="n">key</span><span class="o">=</span><span class="n">itemgetter</span><span class="p">(</span><span class="mi">0</span><span class="p">))</span>
-        <span class="n">decCopelandScores</span> <span class="o">=</span> <span class="p">[(</span><span class="o">-</span><span class="n">x</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span><span class="n">x</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">decCopelandScores</span><span class="p">]</span>
+        <span class="n">decCopelandScores</span><span class="o">.</span><span class="n">sort</span><span class="p">(</span><span class="n">reverse</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span><span class="n">key</span><span class="o">=</span><span class="n">itemgetter</span><span class="p">(</span><span class="mi">0</span><span class="p">))</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">decCopelandScores</span> <span class="o">=</span> <span class="n">decCopelandScores</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">incCopelandScores</span> <span class="o">=</span> <span class="n">incCopelandScores</span>
     
@@ -2347,7 +2352,7 @@
         <span class="c1">#print(ba1)</span>
         <span class="n">corrba1</span> <span class="o">=</span> <span class="n">g</span><span class="o">.</span><span class="n">computeRankingCorrelation</span><span class="p">(</span><span class="n">ba1</span><span class="o">.</span><span class="n">bachetRanking</span><span class="p">)</span>
         <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;ba1&#39;</span><span class="p">,</span><span class="n">ba1</span><span class="o">.</span><span class="n">bachetRanking</span><span class="p">,</span><span class="n">corrba1</span><span class="p">)</span>
-        <span class="n">cop</span> <span class="o">=</span> <span class="n">CopelandRanking</span><span class="p">(</span><span class="n">g</span><span class="p">,</span><span class="n">Comments</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+        <span class="n">cop</span> <span class="o">=</span> <span class="n">CopelandRanking</span><span class="p">(</span><span class="n">g</span><span class="p">,</span><span class="n">Comments</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span><span class="n">Gamma</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
         <span class="nb">print</span><span class="p">(</span><span class="n">cop</span><span class="o">.</span><span class="n">copelandRanking</span><span class="p">)</span>
         <span class="n">corrcop</span> <span class="o">=</span> <span class="n">g</span><span class="o">.</span><span class="n">computeRankingCorrelation</span><span class="p">(</span><span class="n">cop</span><span class="o">.</span><span class="n">copelandRanking</span><span class="p">)</span>
         <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;cop&#39;</span><span class="p">,</span><span class="n">cop</span><span class="o">.</span><span class="n">copelandRanking</span><span class="p">,</span><span class="n">corrcop</span><span class="p">)</span>
@@ -2410,7 +2415,7 @@
 
   <div role="contentinfo">
     <p>&#169; Copyright 2012-2025, Raymond Bisdorff.
-      <span class="lastupdated">Last updated on Feb 26, 2025.
+      <span class="lastupdated">Last updated on Mar 03, 2025.
       </span></p>
   </div>
 

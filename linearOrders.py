@@ -1654,6 +1654,7 @@ class CopelandRanking(LinearOrder):
         n = len(other.actions)
         actions = other.actions
         gamma = other.gamma
+        notGamma = other.notGamma
         selfRelation = {}
         Min = Decimal('-1.0')
         Med = Decimal('0.0')
@@ -1670,9 +1671,9 @@ class CopelandRanking(LinearOrder):
         # with gamma functions
         if Gamma:
             for x in actions:
-                copelandScore = len(gamma[x][0]) - len(gamma[x][1])
+                copelandScore = len(gamma[x][0]) + len(gamma[x][1])
                 incCopelandScores.append((copelandScore,x))
-                decCopelandScores.append((-copelandScore,x))
+                decCopelandScores.append((copelandScore,x))
         else: # with Condorcet Digraph valuation
             c = PolarisedDigraph(other,level=other.valuationdomain['med'],\
                              StrictCut=True,KeepValues=False)
@@ -1683,14 +1684,18 @@ class CopelandRanking(LinearOrder):
             for x in actions:
                 copelandScore = Decimal('0')
                 for y in actions:
-                    copelandScore += cRelation[x][y] - cRelation[y][x]
+                    if x != y:
+                        copelandScore += cRelation[x][y] - cRelation[y][x]
+                        if Debug:
+                            print(x,y,cRelation[x][y],
+                                  -cRelation[y][x],copelandScore)
                 incCopelandScores.append((copelandScore,x))
-                decCopelandScores.append((-copelandScore,x))
+                decCopelandScores.append((copelandScore,x))
+
         # reversed sorting with keeping the actions initial ordering
         # in case of ties
         incCopelandScores.sort(key=itemgetter(0))
-        decCopelandScores.sort(key=itemgetter(0))
-        decCopelandScores = [(-x[0],x[1]) for x in decCopelandScores]
+        decCopelandScores.sort(reverse=True,key=itemgetter(0))
         self.decCopelandScores = decCopelandScores
         self.incCopelandScores = incCopelandScores
     
@@ -2168,7 +2173,7 @@ if __name__ == "__main__":
         #print(ba1)
         corrba1 = g.computeRankingCorrelation(ba1.bachetRanking)
         print('ba1',ba1.bachetRanking,corrba1)
-        cop = CopelandRanking(g,Comments=False)
+        cop = CopelandRanking(g,Comments=False,Gamma=True)
         print(cop.copelandRanking)
         corrcop = g.computeRankingCorrelation(cop.copelandRanking)
         print('cop',cop.copelandRanking,corrcop)

@@ -2813,8 +2813,8 @@ Some ranking rules will work on the associated **Condorcet Digraph**, i.e. the c
    >>> ccd = PolarisedOutrankingDigraph(gcd,
    ...                  level=g.valuationdomain['med'],
    ...                  KeepValues=False,StrictCut=True)
-   
-   >>> ccd.showRelationTable(ReflexiveTerms=False,IntegerValues=True)
+   >>> ccd.recodeValuation(ndigits=0)
+   >>> ccd.showRelationTable(ReflexiveTerms=False)
     *---- Relation Table -----
      r(>)_med | 'a1' 'a2' 'a3' 'a4' 'a5' 'a6' 'a7' 'a8' 'a9'   
      ---------|---------------------------------------------
@@ -2876,7 +2876,7 @@ The Digraph3 resources provide some of the most common of these ranking rules, l
 The *Copeland* ranking
 ``````````````````````
 
-*Copeland*'s rule, the most intuitive one as it works well for any strict outranking relation which models in fact a linear order, works on the *median cut* strict outranking digraph *ccd*. The rule computes for each alternative a score resulting from the sum of the differences between the crisp **strict outranking** characteristics :math:`r(x\, \succnsim \,y)_{>0}` and the crisp **strict outranked** characteristics :math:`r(y\, \succnsim \, x)_{>0}`  for all pairs of alternatives where *y* is different from *x*. The alternatives are ranked in decreasing order of these *Copeland* scores; ties, the case given, being resolved by a lexicographical rule. 
+*Copeland*'s rule, the most intuitive one as it balances the number of *outranking* against *outranked* arcs, works on the *median cut* polarised strict outranking digraph *ccd*. The rule computes for each alternative a score resulting from the sum of the differences between the polarised **strict outranking** characteristics :math:`r(x\, \succnsim \,y)_{>0}` and the polarised **strict outranked** characteristics :math:`r(y\, \succnsim \, x)_{>0}`  for all pairs of alternatives where *y* is different from *x*. The alternatives are ranked in decreasing order of these *Copeland* scores; ties, the case given, being resolved by a lexicographical rule. 
 
 .. code-block:: pycon
    :name: CopelandRanking
@@ -2997,7 +2997,7 @@ A valued version of the *Copeland* rule, called **NetFlows** rule, computes for 
    >>> cop.copelandRanking
     ['a5', 'a1', 'a6', 'a7', 'a8', 'a4', 'a9', 'a3', 'a2']
 
-It is worthwhile noticing again that, similar to the *Copeland* ranking rule seen before, the *NetFlows* ranking rule is also **invariant** under the :ref:`codual transform <Codual-Transform-label>` and delivers again the same ranking result indifferently from digraphs *g* or *gcd* (see :numref:`NetFlowsRanking` Line 14). Yet, the *NetFlows* ranking rule, working directly with the bipolar characteristic values of the outranking relation is not necessarily *Condorcet consistent*. 
+It is worthwhile noticing again that, similar to the *Copeland* ranking rule seen before, the *NetFlows* ranking rule is also **invariant** under the :ref:`codual transform <Codual-Transform-label>` and delivers again the same ranking result indifferently from digraphs *g* or *gcd* (see :numref:`NetFlowsRanking` Line 14). Yet, the *NetFlows* ranking rule, working directly with the bipolar characteristic values of the outranking relation is **not** necessarily **Condorcet consistent**. 
 
 In our example here, the *NetFlows* scores deliver  a ranking *without ties* which is rather different from the one delivered by *Copeland*'s rule (see :numref:`NetFlowsRanking` Line 16). It may happen, however, that we obtain, as with the *Copeland* scores above, only a ranking result with ties, which may then be resolved again by following a lexicographic rule. In such cases, it is possible to construct again a *weak ranking* with the corresponding :py:class:`~transitiveDigraphs.WeakNetFlowsOrder` class.
 
@@ -3055,7 +3055,7 @@ Now, *Bachet* numbers are formulated in a base 3 positional numeral system and t
      Epistemic determination    :  0.230
      Bipolar-valued equivalence : +0.165
 
-In :numref:`BachetRanking` Line 20 above, we may observe that the *Bachet* scores lead eventually to a ranking result that is again slightly better correlated  with the given outranking relation than the previous *NetFlows* ranking (+0.715 versus +0.638).
+In :numref:`BachetRanking` Line 20 above, we may observe that the *Bachet* scores lead eventually to a ranking result that is again slightly better correlated  with the given outranking relation than the previous *NetFlows* ranking (+0.715 versus +0.638). 	
 
 A heatmap view on the performance tableau illustrates well the actual quality of this *Bachet* ranking result.
 
