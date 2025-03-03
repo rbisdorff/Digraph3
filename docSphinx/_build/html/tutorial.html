@@ -3025,8 +3025,7 @@ three modes at 0.3 (-), 0.5 (~), respectively 0.7 (+) of the common scale span a
 </pre></div>
 </div>
 <p>There is one chordless circuit detected in the given strict outranking digraph <em>gcd</em>, namely <em>a6</em> outranks <em>a7</em>, the latter outranks <em>a8</em>, and <em>a8</em> outranks again <em>a6</em> (see <a class="hxr-hoverxref hxr-tooltip reference internal" href="#rankingtutorial"><span class="std std-numref">Fig. 1.20</span></a>). Any potential linear ordering of these three alternatives will, in fact, always contradict somehow the given outranking relation.</p>
-<p>Now, several heuristic ranking rules have been proposed for constructing a linear ordering which is closest in some specific sense to a given outranking relation.</p>
-<p>The Digraph3 resources provide some of the most common of these ranking rules, like <em>Copeland</em>’s, <em>Kemeny</em>’s, <em>Slater</em>’s, <em>Kohler</em>’s, <em>Arrow-Raynaud</em>’s or <em>Tideman</em>’s ranking rule. Recently, a new <em>Bachet</em> ranking rule –a valued <em>Copeland</em> variant– has been added.</p>
+<p>Now, several heuristic ranking rules have been proposed for constructing a linear ordering which is closest in some specific sense to a given outranking relation. The Digraph3 resources provide some of the most common of these ranking rules, like <em>Copeland</em>’s, <em>Kemeny</em>’s, <em>Slater</em>’s, <em>Kohler</em>’s, <em>Arrow-Raynaud</em>’s or <em>Tideman</em>’s ranking rule. Recently, a new <em>Bachet</em> ranking rule –a valued <em>Copeland</em> variant– has been added.</p>
 </section>
 <section id="the-copeland-ranking">
 <span id="copeland-ranking-label"></span><h4><a class="toc-backref" href="#id320" role="doc-backlink"><span class="section-number">1.3.4.2. </span>The <em>Copeland</em> ranking</a><a class="headerlink" href="#the-copeland-ranking" title="Link to this heading"></a></h4>
@@ -3178,7 +3177,7 @@ three modes at 0.3 (-), 0.5 (~), respectively 0.7 (+) of the common scale span a
 </pre></div>
 </div>
 </div>
-<p>In <a class="hxr-hoverxref hxr-tooltip reference internal" href="#bachetranking"><span class="std std-numref">Listing 1.33</span></a> Line 20 above, we may observe that the <em>Bachet</em> scores lead eventually to a ranking result that is again slightly better correlated  with the given outranking relation than the previous <em>NetFlows</em> ranking (+0.715 versus +0.638).</p>
+<p>In <a class="hxr-hoverxref hxr-tooltip reference internal" href="#bachetranking"><span class="std std-numref">Listing 1.33</span></a> Line 20 above, we may observe that the <em>Bachet</em> scores lead eventually to a ranking result that is better correlated  with the given outranking relation than the previous <em>NetFlows</em> ranking (+0.715 versus +0.638).</p>
 <p>A heatmap view on the performance tableau illustrates well the actual quality of this <em>Bachet</em> ranking result.</p>
 <div class="highlight-pycon notranslate"><div class="highlight"><pre><span></span><span class="linenos">1</span><span class="gp">&gt;&gt;&gt; </span><span class="n">g</span><span class="o">.</span><span class="n">showHTMLPerformanceHeatmap</span><span class="p">(</span><span class="n">Correlations</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
 <span class="linenos">2</span><span class="gp">... </span>                             <span class="n">colorLevels</span><span class="o">=</span><span class="mi">7</span><span class="p">,</span>
@@ -3224,14 +3223,14 @@ three modes at 0.3 (-), 0.5 (~), respectively 0.7 (+) of the common scale span a
 <p><span class="caption-number">Fig. 1.24 </span><span class="caption-text"><em>Copeland</em>, <em>NetFlows</em> and <em>Bachet</em> ranking consensus</span><a class="headerlink" href="#rankingconsensusfigure" title="Link to this image"></a></p>
 </figcaption>
 </figure>
-<p>In <a class="hxr-hoverxref hxr-tooltip reference internal" href="#rankingconsensusfigure"><span class="std std-numref">Fig. 1.24</span></a> appears a convincing ranking consensus with four levels of agreement where action <em>a5</em> appears consistently first-ranked and actions <em>a2</em> and <em>a9</em>, both, last-ranked. Notice the unstable rank positions of action <em>a1</em> (2,5 and 7), as well as the unstable rank positions of action <em>a3</em> (5, 8), both a consequence of their contrasted performance records. The epistemic fusion of all three <em>ranking-by-scoring</em> results delivers here a convincing transitive partial ordering, highly correlated with the given outranking digraph <em>g</em> (+0.852, see Line 4 below).</p>
+<p>In <a class="hxr-hoverxref hxr-tooltip reference internal" href="#rankingconsensusfigure"><span class="std std-numref">Fig. 1.24</span></a> appears a convincing ranking consensus with four levels of agreement where action <em>a5</em> appears consistently first-ranked and actions <em>a2</em> and <em>a9</em>, both, last-ranked. Notice the unstable rank positions of action <em>a1</em> (2,5 and 7), as well as the unstable rank positions of action <em>a3</em> (5, 8), both a consequence of their contrasted performance records. The epistemic fusion of all three <em>ranking-by-scoring</em> results delivers here a convincing transitive partial ordering, highly correlated with the given outranking digraph <em>g</em> (+0.852), supported by a criteria significance majority of 57% (see Lines 4-6 below) .</p>
 <div class="highlight-pycon notranslate"><div class="highlight"><pre><span></span><span class="linenos">1</span><span class="gp">&gt;&gt;&gt; </span><span class="n">corr</span> <span class="o">=</span> <span class="n">g</span><span class="o">.</span><span class="n">computeOrdinalCorrelation</span><span class="p">(</span><span class="n">rfdg</span><span class="p">)</span>
 <span class="linenos">2</span><span class="gp">&gt;&gt;&gt; </span><span class="n">g</span><span class="o">.</span><span class="n">showCorrelation</span><span class="p">(</span><span class="n">corr</span><span class="p">)</span>
 <span class="linenos">3</span><span class="go"> Correlation indexes:</span>
-<span class="linenos">4</span><span class="go">  Crisp ordinal correlation  : +0.852</span>
-<span class="linenos">5</span><span class="go">  Epistemic determination    :  0.163</span>
-<span class="linenos">6</span><span class="go">  Bipolar-valued equivalence : +0.139</span>
-</pre></div>
+<span class="hll"><span class="linenos">4</span><span class="go">  Crisp ordinal correlation  : +0.852</span>
+</span><span class="hll"><span class="linenos">5</span><span class="go">  Epistemic determination    :  0.163</span>
+</span><span class="hll"><span class="linenos">6</span><span class="go">  Bipolar-valued equivalence : +0.139</span>
+</span></pre></div>
 </div>
 <p>To appreciate now the actual ranking performances of the <em>Copeland</em>, the <em>NetFlows</em> or the <em>Bachet</em> rule with the given outranking relation, it is useful to consider <em>Kemeny</em>’s and <em>Slater</em>’s <strong>optimal fitting</strong> ranking rules.</p>
 </section>
@@ -3388,7 +3387,7 @@ three modes at 0.3 (-), 0.5 (~), respectively 0.7 (+) of the common scale span a
 </figcaption>
 </figure>
 <p>What precise ranking result should we hence adopt? With a complexity of <img class="math" src="_images/math/50fa78eb190aa6d504a236ace5f17cb25cee79d0.png" alt="O(n!)"/> where <em>n</em> is the order of the outranking digraph, <em>Kemeny</em>’s and <em>Slater</em>’s optimal ranking rules are computationally <em>difficult</em> problems and effective ranking results are only computable for small outranking digraphs (&lt; 20 objects).</p>
-<p>Efficient <em>ranking-by-scoring</em> heuristics, like the <em>Copeland</em> and the <em>NetFlows</em> rules with a complexity of <img class="math" src="_images/math/cb487c73415b93656e35ddcbb45a04f8f8ee33fa.png" alt="O(n^2)"/> and the randomized <em>Bachet</em> rule with a complexity of <img class="math" src="_images/math/174aef04544e022a085aab16ddeae821c5667e2b.png" alt="O(n^3)"/>, are therefore needed in practice.</p>
+<p>Efficient <em>ranking-by-scoring</em> heuristics, like the <em>Copeland</em> and the <em>NetFlows</em> rules with a complexity of <img class="math" src="_images/math/cb487c73415b93656e35ddcbb45a04f8f8ee33fa.png" alt="O(n^2)"/> and, in a lesser manner, the randomized <em>Bachet</em> rule with a complexity of <img class="math" src="_images/math/174aef04544e022a085aab16ddeae821c5667e2b.png" alt="O(n^3)"/>, are therefore needed in practice.</p>
 <p>Let us finally present two popular <em>ranking-by-choosing</em> strategies.</p>
 </section>
 <section id="kohler-s-ranking-by-choosing-rule">
@@ -3513,7 +3512,7 @@ three modes at 0.3 (-), 0.5 (~), respectively 0.7 (+) of the common scale span a
 </div>
 <p>Similar to <em>Kohler</em>’s rule, the <em>RankedPairs</em> rule has also a prudent <em>dual</em> version, the <strong>Dias-Lamboray</strong> <em>ordering-by-choosing</em> rule, which produces, when working this time on the codual <em>strict outranking</em> digraph <em>gcd</em>, a similar ranking result (see <a class="reference internal" href="#lam-2009" id="id57"><span>[LAM-2009]</span></a>, <a class="reference internal" href="#dia-2010" id="id58"><span>[DIA-2010]</span></a>).</p>
 <p>Besides of not providing a unique linear ranking, the <em>ranking-by-choosing</em> rules, as well as their dual <em>ordering-by-choosing</em> rules, are unfortunately <em>not scalable</em> to outranking digraphs of larger orders (&gt; 100). For such bigger outranking digraphs, with several hundred or thousands of alternatives, only the <em>Copeland</em>, the <em>NetFlows</em> ranking-by-scoring rules, with a polynomial complexity of <img class="math" src="_images/math/cb487c73415b93656e35ddcbb45a04f8f8ee33fa.png" alt="O(n^2)"/>, where <em>n</em> is the order of the outranking digraph, remain in fact computationally tractable.</p>
-<p>It is important finally to underline that for outranking digraphs of a larger order (&gt; 50) there does usually <strong>not exist</strong> a unique optimal ranking result when the corresponding strict outranking digraph lacks transitivity and contains some chordless cycles. With such larger or bigger  outranking digraphs, instead of computing a more or less convincing linear ranking, it gets more meaningful and useful to sort the performance records into a set of ordered <strong>quantile equivalence classes</strong>. This order statistics based <strong>rating</strong> approach is presented in the following Section.</p>
+<p>It is important finally to underline that for all outranking digraphs of small or larger order there does usually <strong>not exist</strong> a unique optimal ranking result when the corresponding strict outranking digraph lacks transitivity and contains some chordless cycles. Instead of computing hence a more or less convincing linear ranking, it may be more meaningful and faithful to sort the performance records into <strong>ordered quantile</strong> performance equivalence classes. This order statistics based <strong>rating</strong> approach is presented in the following Section.</p>
 <p>Back to <a class="reference internal" href="#tutorial-label"><span class="std std-ref">Content Table</span></a></p>
 <hr class="docutils" />
 </section>

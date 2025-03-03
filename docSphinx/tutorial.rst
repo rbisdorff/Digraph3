@@ -2867,9 +2867,7 @@ With only 49% of the required transitive arcs, the strict outranking relation he
 
 There is one chordless circuit detected in the given strict outranking digraph *gcd*, namely *a6* outranks *a7*, the latter outranks *a8*, and *a8* outranks again *a6* (see :numref:`rankingTutorial`). Any potential linear ordering of these three alternatives will, in fact, always contradict somehow the given outranking relation.
 
-Now, several heuristic ranking rules have been proposed for constructing a linear ordering which is closest in some specific sense to a given outranking relation.
-
-The Digraph3 resources provide some of the most common of these ranking rules, like *Copeland*'s, *Kemeny*'s, *Slater*'s, *Kohler*'s, *Arrow-Raynaud*'s or *Tideman*'s ranking rule. Recently, a new *Bachet* ranking rule --a valued *Copeland* variant-- has been added.
+Now, several heuristic ranking rules have been proposed for constructing a linear ordering which is closest in some specific sense to a given outranking relation. The Digraph3 resources provide some of the most common of these ranking rules, like *Copeland*'s, *Kemeny*'s, *Slater*'s, *Kohler*'s, *Arrow-Raynaud*'s or *Tideman*'s ranking rule. Recently, a new *Bachet* ranking rule --a valued *Copeland* variant-- has been added.
 
 .. _Copeland-Ranking-label:
 
@@ -3055,7 +3053,7 @@ Now, *Bachet* numbers are formulated in a base 3 positional numeral system and t
      Epistemic determination    :  0.230
      Bipolar-valued equivalence : +0.165
 
-In :numref:`BachetRanking` Line 20 above, we may observe that the *Bachet* scores lead eventually to a ranking result that is again slightly better correlated  with the given outranking relation than the previous *NetFlows* ranking (+0.715 versus +0.638). 	
+In :numref:`BachetRanking` Line 20 above, we may observe that the *Bachet* scores lead eventually to a ranking result that is better correlated  with the given outranking relation than the previous *NetFlows* ranking (+0.715 versus +0.638). 	
 
 A heatmap view on the performance tableau illustrates well the actual quality of this *Bachet* ranking result.
 
@@ -3110,10 +3108,11 @@ To compare the three rankings we have so far obtained with *ranking-by-scoring* 
 
    *Copeland*, *NetFlows* and *Bachet* ranking consensus 	   
     
-In :numref:`rankingConsensusFigure` appears a convincing ranking consensus with four levels of agreement where action *a5* appears consistently first-ranked and actions *a2* and *a9*, both, last-ranked. Notice the unstable rank positions of action *a1* (2,5 and 7), as well as the unstable rank positions of action *a3* (5, 8), both a consequence of their contrasted performance records. The epistemic fusion of all three *ranking-by-scoring* results delivers here a convincing transitive partial ordering, highly correlated with the given outranking digraph *g* (+0.852, see Line 4 below). 
+In :numref:`rankingConsensusFigure` appears a convincing ranking consensus with four levels of agreement where action *a5* appears consistently first-ranked and actions *a2* and *a9*, both, last-ranked. Notice the unstable rank positions of action *a1* (2,5 and 7), as well as the unstable rank positions of action *a3* (5, 8), both a consequence of their contrasted performance records. The epistemic fusion of all three *ranking-by-scoring* results delivers here a convincing transitive partial ordering, highly correlated with the given outranking digraph *g* (+0.852), supported by a criteria significance majority of 57% (see Lines 4-6 below) . 
 
 .. code-block:: pycon
    :linenos:
+   :emphasize-lines: 4-6
    
    >>> corr = g.computeOrdinalCorrelation(rfdg)
    >>> g.showCorrelation(corr)
@@ -3298,7 +3297,7 @@ We notice in :numref:`SlaterRanking` Line 7 that the first *Slater* ranking is a
        
 What precise ranking result should we hence adopt? With a complexity of :math:`O(n!)` where *n* is the order of the outranking digraph, *Kemeny*'s and *Slater*'s optimal ranking rules are computationally *difficult* problems and effective ranking results are only computable for small outranking digraphs (< 20 objects).
 
-Efficient *ranking-by-scoring* heuristics, like the *Copeland* and the *NetFlows* rules with a complexity of :math:`O(n^2)` and the randomized *Bachet* rule with a complexity of :math:`O(n^3)`, are therefore needed in practice.
+Efficient *ranking-by-scoring* heuristics, like the *Copeland* and the *NetFlows* rules with a complexity of :math:`O(n^2)` and, in a lesser manner, the randomized *Bachet* rule with a complexity of :math:`O(n^3)`, are therefore needed in practice.
 
 Let us finally present two popular *ranking-by-choosing* strategies.
 
@@ -3443,7 +3442,7 @@ Similar to *Kohler*'s rule, the *RankedPairs* rule has also a prudent *dual* ver
 
 Besides of not providing a unique linear ranking, the *ranking-by-choosing* rules, as well as their dual *ordering-by-choosing* rules, are unfortunately *not scalable* to outranking digraphs of larger orders (> 100). For such bigger outranking digraphs, with several hundred or thousands of alternatives, only the *Copeland*, the *NetFlows* ranking-by-scoring rules, with a polynomial complexity of :math:`O(n^2)`, where *n* is the order of the outranking digraph, remain in fact computationally tractable.
 
-It is important finally to underline that for outranking digraphs of a larger order (> 50) there does usually **not exist** a unique optimal ranking result when the corresponding strict outranking digraph lacks transitivity and contains some chordless cycles. With such larger or bigger  outranking digraphs, instead of computing a more or less convincing linear ranking, it gets more meaningful and useful to sort the performance records into a set of ordered **quantile equivalence classes**. This order statistics based **rating** approach is presented in the following Section.  
+It is important finally to underline that for all outranking digraphs of small or larger order there does usually **not exist** a unique optimal ranking result when the corresponding strict outranking digraph lacks transitivity and contains some chordless cycles. Instead of computing hence a more or less convincing linear ranking, it may be more meaningful and faithful to sort the performance records into **ordered quantile** performance equivalence classes. This order statistics based **rating** approach is presented in the following Section.  
 
 Back to :ref:`Content Table <Tutorial-label>`
 
