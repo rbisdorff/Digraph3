@@ -2874,7 +2874,7 @@ Now, several heuristic ranking rules have been proposed for constructing a linea
 The *Copeland* ranking
 ``````````````````````
 
-*Copeland*'s rule, the most intuitive one as it balances the number of *outranking* against the number of *outranked* arcs, works on the *median cut* polarised strict outranking digraph *ccd*. The rule computes for each alternative a score resulting from the sum of the differences between the polarised **strict outranking** characteristics :math:`r(x\, \succnsim \,y)_{>0}` and the polarised **strict outranked** characteristics :math:`r(y\, \succnsim \, x)_{>0}`  for all pairs of alternatives where *y* is different from *x*. The alternatives are ranked in decreasing order of these *Copeland* scores; ties, the case given, being resolved by a lexicographical rule. 
+*Copeland*'s rule, the most intuitive one as it balances the outdegrees --the number of *outranking* situations-- against the indegrees --the number of *outranked* situations, of the *median cut* polarised strict outranking digraph *ccd*. The rule computes for each alternative *x* a score resulting from the sum of the differences between the polarised **strict outranking** characteristics :math:`r(x\, \succnsim \,y)_{>0}` and the polarised **strict outranked** characteristics :math:`r(y\, \succnsim \, x)_{>0}`  for all alternatives *y* different from *x*. The set of alternatives is eventually ranked in decreasing order of these *Copeland* scores; ties, the case given, being resolved by a lexicographical rule. 
 
 .. code-block:: pycon
    :name: CopelandRanking
@@ -2916,7 +2916,7 @@ The *Copeland* ranking result (see :numref:`CopelandRanking` Line 14) is rather 
      Valued equivalalence      : +0.107
      Epistemic determination   :  0.230
 
-With an epistemic determination level of 0.230, the *extended Kendall tau* index (see [BIS-2012]_) is in fact computed on 61.5% (100.0 x (1.0 + 0.23)/2) of the pairwise strict outranking comparisons. Furthermore, the bipolar-valued *relational equivalence* characteristics between the strict outranking relation and the *Copeland* ranking equals +0.107, i.e. a *majority* of 55.35% of the criteria significance supports the relational equivalence between the given strict outranking relation and the corresponding *Copeland* ranking.
+With an epistemic determination level of 0.230, the *extended Kendall tau* index (see [BIS-2012]_) is in fact computed on 61.5% (100.0 x (1.0 + 0.23)/2) of the pairwise strict outranking comparisons. Furthermore, the bipolar-valued *relational equivalence* characteristics between the strict outranking relation and the *Copeland* ranking equals +0.107, i.e. a *majority* of 55.35% of the criteria significance supports the relational equivalence between the given strict outranking relation and the corresponding *Copeland* ranking [60]_.
 
 The *Copeland* scores deliver actually only a unique *weak ranking*, i.e. a ranking with potential ties. This weak ranking may be constructed with the :py:class:`~transitiveDigraphs.WeakCopelandOrder` class.
 
@@ -10717,6 +10717,8 @@ Appendices
 .. [58] See the :ref:`tutorial <Three-Objectives-Performance-Tableau-label>` on generating random three-objectives performance tableaux.
 
 .. [59] https://digraph3.readthedocs.io/en/latest/_static/digraph3Pearls.pdf
+
+.. [60] See the advanced topic on :ref:`bipolar-valued relational equivalence between bipolar-valued digraphs <OrdinalCorrelation-Tutorial-label>`.
 
 ..  LocalWords:  randomDigraph Determinateness valuationdomain py png
 ..  LocalWords:  notGamma tutorialDigraph shortName func irreflexive

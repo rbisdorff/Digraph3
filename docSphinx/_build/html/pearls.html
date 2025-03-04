@@ -3218,7 +3218,7 @@ heat map above (see <a class="hxr-hoverxref hxr-tooltip reference internal" href
 </div>
 </div>
 <p>Out of the 25 x 24 = 600 irreflexive movie pairs, digraph <em>g</em> contains 390 positively validated, 188 positively invalidated, and 22 <em>indeterminate</em> outranking situations (see the zero-valued cells in <a class="hxr-hoverxref hxr-tooltip reference internal" href="#graffiti07-3"><span class="std std-numref">Fig. 3.18</span></a>).</p>
-<p>Let us now compute the normalized majority margin <em>r(&lt;=&gt;)</em>  of the equivalence between the marginal critic’s pairwise ratings and the global <em>Net-Flows</em> ranking shown in the ordered heat map (see <a class="hxr-hoverxref hxr-tooltip reference internal" href="#graffiti07-2"><span class="std std-numref">Fig. 3.16</span></a>).</p>
+<p>Let us now compute the normalized majority margin <em>r(&lt;=&gt;)</em>  of the equivalence between the marginal critic’s pairwise ratings and the global <em>NetFlows</em> ranking shown in the ordered heat map (see <a class="hxr-hoverxref hxr-tooltip reference internal" href="#graffiti07-2"><span class="std std-numref">Fig. 3.16</span></a>).</p>
 <div class="literal-block-wrapper docutils container" id="margcorr">
 <div class="code-block-caption"><span class="caption-number">Listing 3.46 </span><span class="caption-text">Marginal Criterion Correlations with global <em>NetFlows</em> Ranking</span><a class="headerlink" href="#margcorr" title="Link to this code"></a></div>
 <div class="highlight-pycon notranslate"><div class="highlight"><pre><span></span><span class="linenos"> 1</span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">linearOrders</span> <span class="kn">import</span> <span class="n">NetFlowsOrder</span>
@@ -3251,8 +3251,8 @@ heat map above (see <a class="hxr-hoverxref hxr-tooltip reference internal" href
 </pre></div>
 </div>
 </div>
-<p>In <a class="hxr-hoverxref hxr-tooltip reference internal" href="#margcorr"><span class="std std-numref">Listing 3.46</span></a> (see Lines 13-27), we recover above the relational equivalence characteristic values shown in the third row of the table in <a class="hxr-hoverxref hxr-tooltip reference internal" href="#graffiti07-2"><span class="std std-numref">Fig. 3.16</span></a>. The global <em>Net-Flows</em> ranking represents obviously a rather balanced compromise with respect to all movie critics’ opinions as there appears no valued negative correlation with anyone of them. The <em>Net-Flows</em> ranking apparently takes also correctly in account that the journalist <em>JH</em>, a locally renowned movie critic, shows a higher significance weight (see Line 13).</p>
-<p>The ordinal correlation between the global <em>Net-Flows</em> ranking and the digraph <em>g</em> may be furthermore computed as follows:</p>
+<p>In <a class="hxr-hoverxref hxr-tooltip reference internal" href="#margcorr"><span class="std std-numref">Listing 3.46</span></a> (see Lines 13-27), we recover above the relational equivalence characteristic values shown in the third row of the table in <a class="hxr-hoverxref hxr-tooltip reference internal" href="#graffiti07-2"><span class="std std-numref">Fig. 3.16</span></a>. The global <em>NetFlows</em> ranking represents obviously a rather balanced compromise with respect to all movie critics’ opinions as there appears no valued negative correlation with anyone of them. The <em>NetFlows</em> ranking apparently takes also correctly in account that the journalist <em>JH</em>, a locally renowned movie critic, shows a higher significance weight (see Line 13).</p>
+<p>The ordinal correlation between the global <em>NetFlows</em> ranking and the digraph <em>g</em> may be furthermore computed as follows:</p>
 <div class="literal-block-wrapper docutils container" id="globalcorr">
 <div class="code-block-caption"><span class="caption-number">Listing 3.47 </span><span class="caption-text">Correlation between outrankings global <em>NetFlows</em> Ranking</span><a class="headerlink" href="#globalcorr" title="Link to this code"></a></div>
 <div class="highlight-pycon notranslate"><div class="highlight"><pre><span></span><span class="linenos">1</span><span class="gp">&gt;&gt;&gt; </span><span class="n">corrgnf</span> <span class="o">=</span> <span class="n">g</span><span class="o">.</span><span class="n">computeOrdinalCorrelation</span><span class="p">(</span><span class="n">nf</span><span class="p">)</span>
@@ -3264,7 +3264,7 @@ heat map above (see <a class="hxr-hoverxref hxr-tooltip reference internal" href
 </pre></div>
 </div>
 </div>
-<p>We notice in <a class="hxr-hoverxref hxr-tooltip reference internal" href="#globalcorr"><span class="std std-numref">Listing 3.47</span></a> Line 4 that the ordinal correlation <em>tau(g,nf)</em> index between the <em>Net-Flows</em> ranking <em>nf</em> and the determined part of the outranking digraph <em>g</em> is quite high (+0.78). Due to the rather high number of missing data, the <em>r</em> -valued relational equivalence between the <em>nf</em> and the <em>g</em> digraph, with a characteristics value of <em>only</em> +0.234, may be misleading. Yet, +0.234 still corresponds to an epistemic majority support of nearly 62% of the movie critics’ rating opinions.</p>
+<p>We notice in <a class="hxr-hoverxref hxr-tooltip reference internal" href="#globalcorr"><span class="std std-numref">Listing 3.47</span></a> Line 4 that the ordinal correlation <em>tau(g,nf)</em> index between the <em>NetFlows</em> ranking <em>nf</em> and the determined part of the outranking digraph <em>g</em> is quite high (+0.78). Due to the rather high number of missing data, the <em>r</em> -valued relational equivalence between the <em>nf</em> and the <em>g</em> digraph, with a characteristics value of <em>only</em> +0.234, may be misleading. Yet, +0.234 still corresponds to an epistemic majority support of nearly 62% of the movie critics’ rating opinions.</p>
 <p>It would be interesting to compare similarly the correlations one may obtain with other global ranking heuristics, like the <em>Copeland</em> or the <em>Kohler</em> ranking rule.</p>
 </section>
 <section id="illustrating-preference-divergences">
@@ -3304,7 +3304,7 @@ heat map above (see <a class="hxr-hoverxref hxr-tooltip reference internal" href
 <p><span class="caption-number">Fig. 3.22 </span><span class="caption-text">Asymmetric part of graffiti07 digraph</span><a class="headerlink" href="#asymmetricpart" title="Link to this image"></a></p>
 </figcaption>
 </figure>
-<p>We notice here that the <em>Net-Flows</em> ranking rule inverts in fact just three ‘<em>less well ranked than</em>’ opinions and four ‘<em>better ranked than</em>’ ones. A similar look at the symmetric part, the pairwise ‘<em>as well rated as</em>’ opinions, suggests a preordered preference structure in several <em>equivalently rated</em> classes.</p>
+<p>We notice here that the <em>NetFlows</em> ranking rule inverts in fact just three ‘<em>less well ranked than</em>’ opinions and four ‘<em>better ranked than</em>’ ones. A similar look at the symmetric part, the pairwise ‘<em>as well rated as</em>’ opinions, suggests a preordered preference structure in several <em>equivalently rated</em> classes.</p>
 <div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">digraphs</span> <span class="kn">import</span> <span class="n">SymmetricPartialDigraph</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">sg</span> <span class="o">=</span> <span class="n">SymmetricPartialDigraph</span><span class="p">(</span><span class="n">g</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">sg</span><span class="o">.</span><span class="n">showHTMLRelationTable</span><span class="p">(</span><span class="n">actionsList</span><span class="o">=</span><span class="n">g</span><span class="o">.</span><span class="n">computeNetFlowsRanking</span><span class="p">(),</span><span class="n">ndigits</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
@@ -5005,7 +5005,7 @@ Technologies</em>, Aachen, September 8-11, 1997}, pp 97–103.</p>
 
   <div role="contentinfo">
     <p>&#169; Copyright 2012-2025, Raymond Bisdorff.
-      <span class="lastupdated">Last updated on Mar 03, 2025.
+      <span class="lastupdated">Last updated on Mar 04, 2025.
       </span></p>
   </div>
 

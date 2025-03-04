@@ -3247,7 +3247,7 @@ We reconsider the bipolar-valued outranking digraph *g* modelling the pairwise g
 
 Out of the 25 x 24 = 600 irreflexive movie pairs, digraph *g* contains 390 positively validated, 188 positively invalidated, and 22 *indeterminate* outranking situations (see the zero-valued cells in :numref:`graffiti07_3`).
 
-Let us now compute the normalized majority margin *r(<=>)*  of the equivalence between the marginal critic's pairwise ratings and the global *Net-Flows* ranking shown in the ordered heat map (see :numref:`graffiti07_2`).
+Let us now compute the normalized majority margin *r(<=>)*  of the equivalence between the marginal critic's pairwise ratings and the global *NetFlows* ranking shown in the ordered heat map (see :numref:`graffiti07_2`).
 
 .. code-block:: pycon
    :linenos:
@@ -3283,9 +3283,9 @@ Let us now compute the normalized majority margin *r(<=>)*  of the equivalence b
     r(AS<=>nf)  = +0.080
     r(FG<=>nf)  = +0.027
 
-In :numref:`margCorr` (see Lines 13-27), we recover above the relational equivalence characteristic values shown in the third row of the table in :numref:`graffiti07_2`. The global *Net-Flows* ranking represents obviously a rather balanced compromise with respect to all movie critics' opinions as there appears no valued negative correlation with anyone of them. The *Net-Flows* ranking apparently takes also correctly in account that the journalist *JH*, a locally renowned movie critic, shows a higher significance weight (see Line 13).
+In :numref:`margCorr` (see Lines 13-27), we recover above the relational equivalence characteristic values shown in the third row of the table in :numref:`graffiti07_2`. The global *NetFlows* ranking represents obviously a rather balanced compromise with respect to all movie critics' opinions as there appears no valued negative correlation with anyone of them. The *NetFlows* ranking apparently takes also correctly in account that the journalist *JH*, a locally renowned movie critic, shows a higher significance weight (see Line 13).
 
-The ordinal correlation between the global *Net-Flows* ranking and the digraph *g* may be furthermore computed as follows: 
+The ordinal correlation between the global *NetFlows* ranking and the digraph *g* may be furthermore computed as follows: 
 
 .. code-block:: pycon
    :linenos:
@@ -3300,7 +3300,7 @@ The ordinal correlation between the global *Net-Flows* ranking and the digraph *
      Epistemic determination    :  0.300
      Bipolar-valued equivalence : +0.234
 
-We notice in :numref:`globalCorr` Line 4 that the ordinal correlation *tau(g,nf)* index between the *Net-Flows* ranking *nf* and the determined part of the outranking digraph *g* is quite high (+0.78). Due to the rather high number of missing data, the *r* -valued relational equivalence between the *nf* and the *g* digraph, with a characteristics value of *only* +0.234, may be misleading. Yet, +0.234 still corresponds to an epistemic majority support of nearly 62% of the movie critics' rating opinions.
+We notice in :numref:`globalCorr` Line 4 that the ordinal correlation *tau(g,nf)* index between the *NetFlows* ranking *nf* and the determined part of the outranking digraph *g* is quite high (+0.78). Due to the rather high number of missing data, the *r* -valued relational equivalence between the *nf* and the *g* digraph, with a characteristics value of *only* +0.234, may be misleading. Yet, +0.234 still corresponds to an epistemic majority support of nearly 62% of the movie critics' rating opinions.
 
 It would be interesting to compare similarly the correlations one may obtain with other global ranking heuristics, like the *Copeland* or the *Kohler* ranking rule.
 
@@ -3353,7 +3353,7 @@ Let us first have a look at the pairwise asymmetric part, namely the '*better ra
 
    Asymmetric part of graffiti07 digraph
 
-We notice here that the *Net-Flows* ranking rule inverts in fact just three '*less well ranked than*' opinions and four '*better ranked than*' ones. A similar look at the symmetric part, the pairwise '*as well rated as*' opinions, suggests a preordered preference structure in several *equivalently rated* classes.
+We notice here that the *NetFlows* ranking rule inverts in fact just three '*less well ranked than*' opinions and four '*better ranked than*' ones. A similar look at the symmetric part, the pairwise '*as well rated as*' opinions, suggests a preordered preference structure in several *equivalently rated* classes.
 
    >>> from digraphs import SymmetricPartialDigraph
    >>> sg = SymmetricPartialDigraph(g)
