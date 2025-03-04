@@ -43,7 +43,7 @@
 	  
    :New:
       
-      - The tutorial on :ref:`Computing a best choice recommendation <Rubis-Tutorial-label>` has been thoroughly reviewed and upgraded
+      - The *Bachet* ranking rule has been added to the tutorial on :ref:`ranking with multiple incommensurable criteria <Ranking-Tutorial-label>`
           
       - A tutorial on :ref:`using the Digraph3 HPC resources <HPC-Ranking-Tutorial-label>` for ranking several millions of multicriteria performance records via sparse outranking digraphs
 	
