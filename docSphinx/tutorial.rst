@@ -3053,9 +3053,18 @@ Now, *Bachet* numbers are formulated in a base 3 positional numeral system and t
      Epistemic determination    :  0.230
      Bipolar-valued equivalence : +0.165
 
-In :numref:`BachetRanking` Line 20 above, we may observe that the *Bachet* scores lead eventually to a ranking result that is better correlated  with the given outranking relation than the previous *NetFlows* ranking (+0.715 versus +0.638). 	
+In :numref:`BachetRanking` Line 20 above, we may observe that the *Bachet* scores lead eventually to a ranking result that is better correlated  with the given outranking relation than the previous *NetFlows* ranking (+0.715 versus +0.638).
 
-A heatmap view on the performance tableau illustrates well the actual quality of this *Bachet* ranking result.
+A Monte Carlo experiment testing the correlation results obtained when ranking 500 random Cost-Benefit performance tableaux of order 10, involving 13 performance criteria, confirms a clear advantage of the *Bachet* (randomized=100) rule (see :numref:`bachetPerformance` below).
+
+.. Figure:: bachetPerformance.png
+   :name: bachetPerformance
+   :width: 500 px
+   :align: center
+
+   Performance comparison of the three ranking-by-scoring rules	   
+
+A heatmap view on the performance tableau illustrates furthermore the actual quality of this *Bachet* ranking result.
 
 .. code-block:: pycon
    :linenos:
