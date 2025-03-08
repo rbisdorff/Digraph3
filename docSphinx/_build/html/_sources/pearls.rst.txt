@@ -2502,8 +2502,8 @@ Back to :ref:`Content Table <Pearls-label>`
 
 .. _Theoretical-Enhancements-label:
 
-Theoretical advancements
-------------------------
+Theoretical and computational advancements
+------------------------------------------
 
 .. contents:: 
 	:depth: 1
