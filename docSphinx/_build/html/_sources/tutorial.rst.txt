@@ -3055,16 +3055,7 @@ Now, *Bachet* numbers are formulated in a base 3 positional numeral system and t
 
 In :numref:`BachetRanking` Line 20 above, we may observe that the *Bachet* scores lead eventually to a ranking result that is better correlated  with the given outranking relation than the previous *NetFlows* ranking (+0.715 versus +0.638).
 
-A Monte Carlo experiment testing the correlation results obtained when ranking 500 random Cost-Benefit performance tableaux of order 10, involving 13 performance criteria, confirms a clear advantage of the *Bachet* (randomized=100) rule (see :numref:`bachetPerformance` below).
-
-.. Figure:: bachetPerformance.png
-   :name: bachetPerformance
-   :width: 500 px
-   :align: center
-
-   Performance comparison of the three ranking-by-scoring rules	   
-
-A heatmap view on the performance tableau illustrates furthermore the actual quality of this *Bachet* ranking result.
+A heatmap view on the performance tableau illustrates the actual quality of this *Bachet* ranking result.
 
 .. code-block:: pycon
    :linenos:
@@ -3254,10 +3245,21 @@ Both Kemeny rankings show the same *weighted mean marginal correlation* (+0.099,
 
 When several rankings with maximal correlation index are given, the :py:class:`~linearOrders.KemenyRanking` class constructor instantiates a *most consensual* one, i.e. a ranking with *highest* mean marginal correlation and, in case of ties, with *lowest* weighted standard deviation. Here we obtain ranking: ['a5', 'a6', 'a7', 'a3', 'a9', 'a4', 'a1', 'a8', 'a2'] (see :numref:`KemenyRanking` Line 4).
 
+A Monte Carlo experiment, comparing the correlation results obtained by the previous three ranking-by-scoring rules with the optimal *Kemeny* rule when ranking 100 random Cost-Benefit performance tableaux of order 10, involving 13 performance criteria, confirms a clear advantage of the *Bachet* (randomized=100) rule against the *Copeland* and the *NetFlows* rules (see :numref:`compareRules10A` below). Mind that this apparent better performance of the *Bachet* ranking rule is essentially due to computing the *Bachet* scores on 100 permutations and their reverses and keeping the best correlated one, which meets by the way the strategy of the optimal *Kemeny* rule. This performance advantage is hence limited to the ranking of small outranking digraphs of order < 20 (see the advanced topic on :ref:`a new ranking rule based on bipolar-valued base 3 Bachet numbers <Bachet-Tutorial-label>`). 
+
+.. Figure:: compareRules10A.png
+   :name: compareRules10A
+   :width: 500 px
+   :align: center
+
+   Performance comparison of the three ranking-by-scoring rules	   
+
+Let us now present the non-valued cousin of the optimal *Kemeny* rule.  
+
 Optimal *Slater* rankings
 `````````````````````````
 
-The **Slater** ranking rule is identical to *Kemeny*'s, but it is working, instead, on the *median cut polarised* digraph. *Slater*'s ranking rule is also *invariant* under the *codual* transform and delivers again indifferently on *g* or *gcd* the following results.
+The **Slater** ranking rule is identical to *Kemeny*'s but works, instead, on the *median cut polarised* digraph. *Slater*'s ranking rule is also *invariant* under the *codual* transform and delivers again indifferently on *g* or *gcd* the following results.
 
 .. code-block:: pycon
    :name: SlaterRanking
@@ -3306,7 +3308,7 @@ We notice in :numref:`SlaterRanking` Line 7 that the first *Slater* ranking is a
        
 What precise ranking result should we hence adopt? With a complexity of :math:`O(n!)` where *n* is the order of the outranking digraph, *Kemeny*'s and *Slater*'s optimal ranking rules are computationally *difficult* problems and effective ranking results are only computable for small outranking digraphs (< 20 objects).
 
-Efficient *ranking-by-scoring* heuristics, like the *Copeland* and the *NetFlows* rules with a complexity of :math:`O(n^2)` and, in a lesser manner, the randomized *Bachet* rule with a complexity of :math:`O(n^3)`, are therefore needed in practice.
+Efficient *ranking-by-scoring* heuristics, like the *Copeland* and the *NetFlows* rules with a complexity of :math:`O(n^2)` are therefore needed in practice.
 
 Let us finally present two popular *ranking-by-choosing* strategies.
 
