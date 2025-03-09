@@ -3245,7 +3245,7 @@ Both Kemeny rankings show the same *weighted mean marginal correlation* (+0.099,
 
 When several rankings with maximal correlation index are given, the :py:class:`~linearOrders.KemenyRanking` class constructor instantiates a *most consensual* one, i.e. a ranking with *highest* mean marginal correlation and, in case of ties, with *lowest* weighted standard deviation. Here we obtain ranking: ['a5', 'a6', 'a7', 'a3', 'a9', 'a4', 'a1', 'a8', 'a2'] (see :numref:`KemenyRanking` Line 4).
 
-A Monte Carlo experiment, comparing the correlation results obtained by the previous three ranking-by-scoring rules with the optimal *Kemeny* rule when ranking 100 random Cost-Benefit performance tableaux of order 10, involving 13 performance criteria, confirms a clear advantage of the *Bachet* (randomized=100) rule against the *Copeland* and the *NetFlows* rules (see :numref:`compareRules10A` below). Mind that this apparent better performance of the *Bachet* ranking rule is essentially due to computing the *Bachet* scores on 100 permutations and their reverses and keeping the best correlated one, which meets by the way the strategy of the optimal *Kemeny* rule. This performance advantage is hence limited to the ranking of small outranking digraphs of order < 20 (see the advanced topic on :ref:`a new ranking rule based on bipolar-valued base 3 Bachet numbers <Bachet-Tutorial-label>`). 
+A Monte Carlo experiment, comparing the correlation results obtained by the previous three ranking-by-scoring rules with the optimal *Kemeny* rule when ranking 100 random Cost-Benefit performance tableaux of order 10, involving 13 performance criteria, confirms a clear advantage of the *Bachet* (randomized=100) rule against the *Copeland* and the *NetFlows* rules (see :numref:`compareRules10A` below). 
 
 .. Figure:: compareRules10A.png
    :name: compareRules10A
@@ -3253,6 +3253,8 @@ A Monte Carlo experiment, comparing the correlation results obtained by the prev
    :align: center
 
    Performance comparison of the three ranking-by-scoring rules	   
+
+Mind however that this apparent better performance of the *Bachet* ranking rule is essentially due to computing the *Bachet* scores on 100 permutations and their reverses of the ouranking relation table and keeping the best correlated one. A strategy which meets by the way the ranking strategy of the optimal *Kemeny* rule. This performance advantage compared to the *Copeland* and the *netFlows* rules is hence limited to the ranking of small outranking digraphs of order < 20 (see :ref:`the efficiency of the Bachet ranking rule <Bachet-Tutorial-label>`).
 
 Let us now present the non-valued cousin of the optimal *Kemeny* rule.  
 
