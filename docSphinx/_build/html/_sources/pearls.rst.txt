@@ -2729,9 +2729,9 @@ The :py:mod:`linearOrders` module provides now a :py:class:`~linearOrders.Bachet
 
 The class delivers as usual a ranking (*self.bachetRanking*) and a corresponding ordering result (*self.bachetOrder*) besides the decreasing list (*self.decBachetScores*) and the increasing list of the corresponding *Bachet* ranking scores (*self.incBachetScores*). Due to potential ties observed among *Bachet* scores and the lexicographic resolving of such ties, the decreasing and increasing lists of ranking scores might indeed not always be just the reversed version of one another. The *self.correlation* attribute containes the ordinal correlation index between the given outranking relation and the computed *Bachet* ranking.
 
-Note that, like the *Copeland* and the *NetFlows* ranking rules, the *Bachet* ranking rule is **invariant** under the **codual** transform and the :py:class:`~linearOrdres.BachetRanking` constructor works by default on the corresponding strict outranking digraph (*CoDual=True*).
+Note that, like the *Copeland* and the *NetFlows* ranking rules, the *Bachet* ranking rule is **invariant** under the **codual** transform [22]_ and the :py:class:`~linearOrdres.BachetRanking` constructor works by default on the corresponding strict outranking digraph (*CoDual=True*).
 
-Mind however that a base 3 sbits based numbering system is a *positional numeral system*, implying that the *Bachet* ranking scores, as noticed before, depend essentially on the very ordering of the rows and columns of the outranking digraph's *self.relation* attribute when the relation shows a low transitivity degree. However, when the digraph is *transitive* and *acyclic*, the *Bachet* ranking scores will consistently model the orientations of all transitive triplets independently of the ordering of the rows and columns of the *self.relation* attribute. The *Bachet* ranking rule is hence, like the *Copeland* rule, **Condorcet consistent**, i.e. when the polarised strict outranking digraph models a transitive acyclic relation, its *Bachet* ranking result will always be consistent with this strict outranking relation [22]_.
+Mind however that a base 3 sbits based numbering system is a *positional numeral system*, implying that the *Bachet* ranking scores, as noticed before, depend essentially on the very ordering of the rows and columns of the outranking digraph's *self.relation* attribute when the relation shows a low transitivity degree. However, when the digraph is *transitive* and *acyclic*, the *Bachet* ranking scores will consistently model the orientations of all transitive triplets independently of the ordering of the rows and columns of the *self.relation* attribute. The *Bachet* ranking rule is hence, like the *Copeland* rule, **Condorcet consistent**, i.e. when the polarised strict outranking digraph models a transitive acyclic relation, its *Bachet* ranking result will always be consistent with this strict outranking relation [23]_.
 
 Our random outranking digraph *g*, generated above in :numref:`examplesBachet` Line 4 is for instance not transitive. Its transitivity degree amounts to 0.833 (see below). 
 
@@ -5233,7 +5233,10 @@ Appendix
 
 .. [21] See the tutorial on :ref:`ranking with multiple incommensurable criteria <Ranking-Tutorial-label>`
 
-.. [22] To prove the *Condorcet consistency* property of the *Bachet* ranking rule, it is sufficient to notice that the contributions of a transitive triplet *'ai' > 'aj' > 'ak'* to the corresponding *Bachet* ranking scores will respect the actual ordering of the triplet with all positional permutations of [..., ai, ..., aj, ...,ak, ...] in a relation table.
+.. [22] To prove the *invariance* of the *Bachet* ranking under the *codual transform*, it is sufficient to notice that the contribution to the *Bachet* scores of any pair of actions, outranking each other and situated respectively in positions *p* and *q* in a relation relation table, amounts to  :math:`(3^p + 3^q*) - (3^p + 3^q) = 0`. Same zero contribution :math:`(-3^p - 3^q*) - (-3^p - 3^q) = 0` occurs for any pair positively *not outranking* each other.
+
+.. [23] To prove the *Condorcet consistency* property of the *Bachet* ranking rule, it is sufficient to notice that the contributions of a transitive triplet *'ai' > 'aj' > 'ak'* to the corresponding *Bachet* ranking scores will respect the actual ordering of the triplet with all positional permutations of [..., ai, ..., aj, ...,ak, ...] in a relation table.
+
 
 .. raw:: latex
 

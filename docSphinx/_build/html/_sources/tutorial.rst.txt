@@ -3254,7 +3254,7 @@ A Monte Carlo experiment, comparing the correlation results obtained by the prev
 
    Performance comparison of the three ranking-by-scoring rules	   
 
-Mind however that this apparent better performance of the *Bachet* ranking rule is essentially due to computing the *Bachet* scores on 100 permutations and their reverses of the ouranking relation table and keeping the best correlated one. A strategy which meets by the way the ranking strategy of the optimal *Kemeny* rule. This performance advantage compared to the *Copeland* and the *netFlows* rules is hence limited to the ranking of small outranking digraphs of order < 20 (see :ref:`the efficiency of the Bachet ranking rule <Bachet-Tutorial-label>`).
+Mind however that this apparent better performance of the *Bachet* ranking rule is essentially due to computing the *Bachet* scores on 100 permutations and their reverses of the ouranking relation table and keeping the best correlated one. A strategy which meets by the way the ranking strategy of the optimal *Kemeny* rule. This performance advantage compared to the *Copeland* and the *netFlows* rules is hence also limited to the ranking of small outranking digraphs of order < 20 (see :ref:`the efficiency of the Bachet ranking rule <Bachet-Tutorial-label>`).
 
 Let us now present the non-valued cousin of the optimal *Kemeny* rule.  
 
