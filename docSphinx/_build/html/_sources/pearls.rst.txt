@@ -2907,6 +2907,72 @@ Mind finally that the *Bachet* ranking rule, even of comparable complexity :math
 
 In Python, the range of integers is luckily only limited by the available CPU memory and the *orderLimit* parameter may be adjusted to tackle, if required, outranking digraphs of orders > 50. The randomized *Bachet* ranking rule might however need in these cases a considerable sampling size in order to achieve convincingly correlated ranking results. But this issue has still to be explored.
 
+The Bachet rule: a new method for weakly ranking 
+................................................
+
+As we have noticed before, the randomized *Bachet* ranking rule produces multiple rankings of unequal correlation equality. If we collect a small subset of best correlated rankings, we may use the :py:class:`transitiveDigraphs.RankingsFusionDigraph` class for constructing, by epistemic disjunctive fusion of these best correlated rankings, a weak *Bachet* ranking result.
+
+To explore the efficiency of this opportunity, a new :py:class:`~transitiveDigraphs.WeakBachetRanking` class has been added to the :py:mod:`transitiveDigraphs` module. To illustrate its usefulness, let us reconsider the example outranking digraph *g* of :numref:`optimisingBachet`. 
+
+.. code-block:: pycon
+   :caption: *Bachet* weak ranking result
+   :name: weakBachet1
+   :emphasize-lines: 4,22-26,29
+
+   >>> from outrankingDigraphs import RandomBipolarOutrankingDigraph
+   >>> g = RandomBipolarOutrankingDigraph(numberOfActions=9,seed=1)
+   >>> from transitiveDigraphs import WeakBachetRanking
+   >>> wb = WeakBachetRanking(g,randomized=20,seed=1,maxNbrOfRankings=5)
+   >>> wb
+    *------- Digraph instance description ------*
+     Instance class      : WeakBachetRanking
+     Instance name       : rel_randomperftab_wk
+     Digraph Order       : 9
+     Digraph Size        : 31
+     Valuation domain    : [-1.00;1.00]
+     Determinateness (%) : 93.06
+     Attributes          : ['name', 'actions', 'ndigits',
+                 'valuationdomain', 'criteria', 'methodData',
+		 'evaluation', 'NA', 'order', 'runTimes',
+		 'nbrThreads', 'startMethod', 'concordanceRelation',
+		 'vetos', 'negativeVetos', 'largePerformanceDifferencesCount',
+		 'relation', 'gamma', 'notGamma', 'resStat',
+		 'rankings', 'weakBachetCorrelation',
+		 'bachetRanking', 'bachetCorrelation', 'bachetConsensus']
+   >>> wb.showWeakOrder()
+    Ranking by Choosing and Rejecting
+     1st ranked ['a2', 'a5']
+       2nd ranked ['a6', 'a8', 'a9']
+       2nd last ranked ['a6', 'a8', 'a9'])
+     1st last ranked ['a1', 'a3', 'a4', 'a7'])
+   >>> wb.showCorrelation(wb.weakBachetCorrelation)
+    Correlation indexes:
+     Crisp ordinal correlation  : +0.818
+     Epistemic determination    :  0.237
+     Bipolar-valued equivalence : +0.194
+
+The weak *Bachet* ranking result is highly correlated with the given outranking digraph *g* (+0.851, see Line 29).  In :numref:`weakBachet` below, is shown its *Hasse* diagram. 
+
+.. code-block:: pycon
+
+   >>> wb.exportGraphViz('weakBachet')
+    *---- exporting a dot file for GraphViz tools ---------*
+    Exporting to rel_randomperftab_wk.dot
+     0 { rank = 0; a2; a5; }
+     1 { rank = 1; a6; a9; a8; a3; }
+     2 { rank = 2; a7; a4; a1; }
+    dot -Grankdir=TB -Tpng weakBachet.dot -o weakBachet.png
+
+.. Figure:: weakBachet.png
+   :name: weakBachet
+   :alt: weak Bachet ranking
+   :width: 400 px
+   :align: center
+
+   Weak *Bachet* ranking result 
+
+The nine performance records are grouped into three performance equivalence classes. The resulting partail ordering is in fact consistent with the *Kemeny* ranking ['a2', 'a5', 'a9', 'a6', 'a8', 'a4', 'a3', 'a7', 'a1']. 
+
 ..............................................
 
 Back to :ref:`Content Table <Pearls-label>`
