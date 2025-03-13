@@ -123,8 +123,6 @@ colorPalettes = {1: _colorPalette1, 2: _colorPalette2, 3: _colorPalette0}
 #             splitIndex.append( (j*nq, (j+1)*nq) )
 
 #     return splitIndex
-
-        
     
 def qtilingIndexList(indexList,q,Debug=False,Comments=False):
     """

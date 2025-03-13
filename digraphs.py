@@ -2824,7 +2824,7 @@ class Digraph(object):
             return stages
 
     def computeTransitivityDegree(self,
-                InPercents=False,Comments=False):
+                InPercents=False,Comments=False,ReturnIntransitiveTriples=False):
         """
         Renders the transitivity degree (Decimal) of a digraph.
 
@@ -2838,6 +2838,7 @@ class Digraph(object):
         transRel = self.closeTransitive(InSite=False)
         ntriples = 0
         nclosed = 0
+        triples = []
         for x in self.actions:
             for y in self.actions:
                 if x != y:
@@ -2848,6 +2849,8 @@ class Digraph(object):
                                 ntriples += 1
                                 if self.relation[x][z] > Med:
                                     nclosed += 1
+                                else:
+                                    triples.append([x,y,z])
         if (ntriples) > 0:
             res = Decimal(str(nclosed))/Decimal(str(ntriples))
         else:
@@ -2865,7 +2868,10 @@ class Digraph(object):
                 print(' #triples x>y>z: %d, #closed: %d, #open: %d' %\
                   (ntriples,nclosed,ntriples-nclosed) )
                 print(' (#closed/#triples) =  %.3f' %(res) )
-        return res
+        if ReturnIntransitiveTriples:
+            return triples
+        else:
+            return res
             
     def isTransitive(self,Comments=False):
         """

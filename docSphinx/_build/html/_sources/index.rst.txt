@@ -47,7 +47,7 @@ Parts of the documentation
 ..........................
 :New:
    
-   * A new :ref:`multicriteria ranking rule based on bipolar-valued base 3 Bachet numbers <Bachet-Tutorial-label>`
+   * A new :ref:`multicriteria weak ranking rule based on bipolar-valued base 3 Bachet numbers <Bachet-Tutorial-label>`
    * A tutorial on :ref:`using the Digraph3 HPC resources <HPC-Ranking-Tutorial-label>` for ranking several millions of multicriteria performance records via big sparse outranking digraphs
    *  A :py:mod:`pairings` module for solving pairing problems illustrated with two tutorials on computing **fair** :ref:`intergroup<Fair-InterGroup-Pairings-label>` and :ref:`intragroup<Fair-IntraGroup-Pairings-label>` pairing solutions
 

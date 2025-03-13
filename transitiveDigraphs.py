@@ -1817,6 +1817,83 @@ class WeakNetFlowsOrder(TransitiveDigraph):
             for x in reversed(self.netFlowScores):
                 print('%s \t %.2f' %(x[1],x[0]))
 
+
+class WeakBachetRanking(TransitiveDigraph):
+    """
+    Uses the :py:class:`linearOrders.BachetRanking` class for generating a number
+    of best correlated Bachet rankings.
+
+    The :py:class:`transitiveDigraphs.RankingsFusionDigraph` uses
+    these *Bachet* rankings for contructing a weak *Bachet* ranking result.
+
+    - *g* is a valid BipolarOutrankingDigraph instance.
+    - *randomized* (default = 100) gives the number of random permutations used for generating different Bachet ranking results.
+    - *maxNbrOfRanking* (defaut = 5) is the number of best correlated rankings that are used for constructing the *RankingsFusionDigraph* instance.
+
+    >>> from randomPerfTabs import RandomCBPerformanceTableau
+    >>> t = RandomCBPerformanceTableau(numberOfActions=20,
+    ...                 numberOfCriteria=13,seed=100)
+    >>> from outrankingDigraphs import BipolarOutrankingDigraph
+    >>> g = BipolarOutrankingDigraph(t)
+    >>> from transitiveDigraphs import WeakBachetRanking
+    >>> wg = WeakBachetRanking(g,randomized=100,seed=100,
+    ...                       maxNbrOfRankings=10)
+    >>> wg.showWeakOrder()
+     Ranking by Choosing and Rejecting
+      1st ranked ['a04']
+        2nd ranked ['a02', 'a05', 'a06', 'a11', 'a18', 'a20']
+          3rd ranked ['a09', 'a14', 'a16']
+          3rd last ranked ['a09', 'a10', 'a14'])
+        2nd last ranked ['a01', 'a03', 'a12', 'a13', 'a15'])
+      1st last ranked ['a07', 'a08', 'a17', 'a19'])
+    
+    """
+    
+    def __init__(self,g,randomized=100,maxNbrOfRankings=10,
+                 seed=None,
+                 Comments=False,Debug=False):
+        from time import time
+        from linearOrders import BachetRanking
+        from copy import deepcopy
+        tt = time()
+        statistics = {}
+        actions = [x for x in g.actions]
+        import random
+        random.seed(seed)
+        for i in range(randomized):
+            random.shuffle(actions)
+            ba = BachetRanking(g,actionsList=actions,BestQualified=False)
+            corrKey = '%.4f' % ba.correlation
+            try:
+                statistics[corrKey]['freq'] += 1
+                statistics[corrKey]['rankings'].append(perm)
+                statistics[corrKey]['optimal'] = ba.bachetRanking
+            except:
+                statistics[corrKey] = {'freq':1,
+                                       'rankings':[actions],
+                                       'optimal': ba.bachetRanking}
+        resStat = [(float(x),statistics[x]) for x in statistics]
+        resStat = list(sorted(resStat,reverse=True))
+        rankings = []
+        if len(resStat) < maxNbrOfRankings:
+            maxNbrOfRankings = len(resStat)
+        for i in range(maxNbrOfRankings):
+            rankings.append(resStat[i][1]['optimal'])
+        if Debug:
+            print(len(rankings),rankings)
+        ba1 = RankingsFusionDigraph(g,rankings)
+        ba1.resStat = resStat
+        ba1.rankings = rankings
+        for att in ba1.__dict__:
+            self.__dict__[att] = deepcopy(ba1.__dict__[att])
+        
+        self.weakBachetCorrelation = g.computeOrdinalCorrelation(ba1)
+        self.bachetRanking = resStat[0][1]['optimal']
+        self.bachetCorrelation = resStat[0][0]
+        self.bachetConsensus = g.computeRankingConsensusQuality(self.bachetRanking)
+        self.runTimes['totalTime'] = time() - tt
+        if Comments:
+            self.showWeakOrder()
 #########
 # compatibility with obsolete weakOrders module
 #######################
@@ -1876,12 +1953,13 @@ if __name__ == "__main__":
 ##    rbc.exportTopologicalGraphViz('test')
 ##    rbc.exportGraphViz('test1')
 ## 
-    pt = RandomCBPerformanceTableau(numberOfCriteria=5,seed=1000)
+    pt = RandomCBPerformanceTableau(numberOfActions=20,numberOfCriteria=13,seed=100)
     g = BipolarOutrankingDigraph(pt)
-    wcg = WeakCopelandOrder(g,WithFairestRanking=True)
-    print(wcg.copelandPermutations)
-    print(wcg.copelandPreRanking)
-    print(wcg.fairestCopelandRanking)
+    wbg = WeakBachetRanking(g,seed=100,Comments=True)
+    #wcg = WeakCopelandOrder(g,WithFairestRanking=True)
+    #print(wcg.copelandPermutations)
+    #print(wcg.copelandPreRanking)
+    #print(wcg.fairestCopelandRanking)
 
     print('*------------------*')
     print('If you see this line all tests were passed successfully :-)')

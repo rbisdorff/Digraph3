@@ -901,6 +901,7 @@
 <li class="toctree-l4"><a class="reference internal" href="#transitiveDigraphs.TransitiveDigraph.showWeakOrder"><code class="docutils literal notranslate"><span class="pre">TransitiveDigraph.showWeakOrder()</span></code></a></li>
 </ul>
 </li>
+<li class="toctree-l3"><a class="reference internal" href="#transitiveDigraphs.WeakBachetRanking"><code class="docutils literal notranslate"><span class="pre">WeakBachetRanking</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="#transitiveDigraphs.WeakCopelandOrder"><code class="docutils literal notranslate"><span class="pre">WeakCopelandOrder</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="#transitiveDigraphs.WeakNetFlowsOrder"><code class="docutils literal notranslate"><span class="pre">WeakNetFlowsOrder</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="#transitiveDigraphs.WeakOrder"><code class="docutils literal notranslate"><span class="pre">WeakOrder</span></code></a></li>
@@ -1252,6 +1253,7 @@
 <dl class="field-list simple">
 <dt class="field-odd">New<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
+<li><p>Added a new <a class="reference internal" href="#transitiveDigraphs.WeakBachetRanking" title="transitiveDigraphs.WeakBachetRanking"><code class="xref py py-class docutils literal notranslate"><span class="pre">transitiveDigraphs.WeakBachetRanking</span></code></a> class using the new <a class="reference internal" href="#linearOrders.BachetRanking" title="linearOrders.BachetRanking"><code class="xref py py-class docutils literal notranslate"><span class="pre">linearOrders.BachetRanking</span></code></a> class for generating highly correlated <strong>weak rankings</strong> from a given outranking digraph instance.</p></li>
 <li><p>In order to explore potential run time accelerations with CUDA on GPUs, a new cythonized <strong>cnpBipolarDigraphs</strong> module with a numpy integer array implementation of the bipolar-valued characteristic valuation has been added to the cythonized collection of Digraph3 modules.</p></li>
 <li><p>Following a Python 3.12 recommendation, all multiprocessing resources have been refactored to use by default, instead of the traditional <em>fork</em>, the safer <em>spawn</em> threading start method. As a consequence, main program code of multiprocessing Digraph3 Python scripts must now start with a <em>__name__==’__main__’</em> test in order to avoid its recursive execution in each started thread (see the <a class="reference external" href="https://docs.python.org/3/library/multiprocessing.html#module-multiprocessing" title="(in Python v3.13)"><code class="xref py py-mod docutils literal notranslate"><span class="pre">multiprocessing</span></code></a> module).</p></li>
 <li><p>A <a class="reference internal" href="#module-pairings" title="pairings"><code class="xref py py-mod docutils literal notranslate"><span class="pre">pairings</span></code></a> module for solving <strong>fair intergroup</strong> and <strong>intragroup pairing</strong> problems</p></li>
@@ -1541,7 +1543,7 @@ class;</p>
 <li><dl>
 <dt><a class="reference internal" href="#transitivedigraphs-label"><span class="std std-ref">transitiveDigraphs module</span></a></dt><dd><p>Additional tools for solving pre-ranking problems with abstract
 generic root <a class="reference external" href="techDoc.html#transitiveDigraphs.TransitiveDigraph">TransitiveDigraph</a> class.</p>
-<div class="graphviz"><object data="_images/inheritance-3a027376e3d12bcf78a3570c9981b8bd0bd4fe6f.svg" type="image/svg+xml" class="inheritance graphviz">
+<div class="graphviz"><object data="_images/inheritance-c82605e2d74ca2f74bc5f32d023c8a0f9ffbc978.svg" type="image/svg+xml" class="inheritance graphviz">
 <p class="warning">Inheritance diagram of transitiveDigraphs</p></object></div>
 </dd>
 </dl>
@@ -2802,7 +2804,7 @@ Return a tuple: slaterOrder, slaterIndex</p>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="digraphs.Digraph.computeTransitivityDegree">
-<span class="sig-name descname"><span class="pre">computeTransitivityDegree</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">InPercents</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">Comments</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/digraphs.html#Digraph.computeTransitivityDegree"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#digraphs.Digraph.computeTransitivityDegree" title="Link to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">computeTransitivityDegree</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">InPercents</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">Comments</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ReturnIntransitiveTriples</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/digraphs.html#Digraph.computeTransitivityDegree"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#digraphs.Digraph.computeTransitivityDegree" title="Link to this definition"></a></dt>
 <dd><p>Renders the transitivity degree (Decimal) of a digraph.</p>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
@@ -9227,7 +9229,7 @@ added by the class constructor.</p>
 <section id="transitivedigraphs-module">
 <span id="transitivedigraphs-label"></span><h2><a class="toc-backref" href="#id18" role="doc-backlink"><span class="section-number">2.16. </span>transitiveDigraphs module</a><a class="headerlink" href="#transitivedigraphs-module" title="Link to this heading"></a></h2>
 <p><strong>Inheritance Diagram</strong></p>
-<div class="graphviz"><object data="_images/inheritance-3a027376e3d12bcf78a3570c9981b8bd0bd4fe6f.svg" type="image/svg+xml" class="inheritance graphviz">
+<div class="graphviz"><object data="_images/inheritance-c82605e2d74ca2f74bc5f32d023c8a0f9ffbc978.svg" type="image/svg+xml" class="inheritance graphviz">
 <p class="warning">Inheritance diagram of transitiveDigraphs</p></object></div>
 <p id="module-transitiveDigraphs">Digraph3 module for working with transitive digraphs. 
 Copyright (C) 2006-2025  Raymond Bisdorff</p>
@@ -9542,6 +9544,38 @@ disjunctive or conjunctive fusion (omax|omin operator) of a list of rankings.</p
 <dd><p>A dummy for the showTransitiveDigraph() method.</p>
 </dd></dl>
 
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="transitiveDigraphs.WeakBachetRanking">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">transitiveDigraphs.</span></span><span class="sig-name descname"><span class="pre">WeakBachetRanking</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">g</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">randomized</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">100</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">maxNbrOfRankings</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">10</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">seed</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">Comments</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">Debug</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/transitiveDigraphs.html#WeakBachetRanking"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#transitiveDigraphs.WeakBachetRanking" title="Link to this definition"></a></dt>
+<dd><p>Uses the <a class="reference internal" href="#linearOrders.BachetRanking" title="linearOrders.BachetRanking"><code class="xref py py-class docutils literal notranslate"><span class="pre">linearOrders.BachetRanking</span></code></a> class for generating a number
+of best correlated Bachet rankings.</p>
+<p>The <a class="reference internal" href="#transitiveDigraphs.RankingsFusionDigraph" title="transitiveDigraphs.RankingsFusionDigraph"><code class="xref py py-class docutils literal notranslate"><span class="pre">transitiveDigraphs.RankingsFusionDigraph</span></code></a> uses
+these <em>Bachet</em> rankings for contructing a weak <em>Bachet</em> ranking result.</p>
+<ul class="simple">
+<li><p><em>g</em> is a valid BipolarOutrankingDigraph instance.</p></li>
+<li><p><em>randomized</em> (default = 100) gives the number of random permutations used for generating different Bachet ranking results.</p></li>
+<li><p><em>maxNbrOfRanking</em> (defaut = 5) is the number of best correlated rankings that are used for constructing the <em>RankingsFusionDigraph</em> instance.</p></li>
+</ul>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">randomPerfTabs</span> <span class="kn">import</span> <span class="n">RandomCBPerformanceTableau</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">t</span> <span class="o">=</span> <span class="n">RandomCBPerformanceTableau</span><span class="p">(</span><span class="n">numberOfActions</span><span class="o">=</span><span class="mi">20</span><span class="p">,</span>
+<span class="gp">... </span>                <span class="n">numberOfCriteria</span><span class="o">=</span><span class="mi">13</span><span class="p">,</span><span class="n">seed</span><span class="o">=</span><span class="mi">100</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">outrankingDigraphs</span> <span class="kn">import</span> <span class="n">BipolarOutrankingDigraph</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">g</span> <span class="o">=</span> <span class="n">BipolarOutrankingDigraph</span><span class="p">(</span><span class="n">t</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">transitiveDigraphs</span> <span class="kn">import</span> <span class="n">WeakBachetRanking</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">wg</span> <span class="o">=</span> <span class="n">WeakBachetRanking</span><span class="p">(</span><span class="n">g</span><span class="p">,</span><span class="n">randomized</span><span class="o">=</span><span class="mi">100</span><span class="p">,</span><span class="n">seed</span><span class="o">=</span><span class="mi">100</span><span class="p">,</span>
+<span class="gp">... </span>                      <span class="n">maxNbrOfRankings</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">wg</span><span class="o">.</span><span class="n">showWeakOrder</span><span class="p">()</span>
+<span class="go"> Ranking by Choosing and Rejecting</span>
+<span class="go">  1st ranked [&#39;a04&#39;]</span>
+<span class="go">    2nd ranked [&#39;a02&#39;, &#39;a05&#39;, &#39;a06&#39;, &#39;a11&#39;, &#39;a18&#39;, &#39;a20&#39;]</span>
+<span class="go">      3rd ranked [&#39;a09&#39;, &#39;a14&#39;, &#39;a16&#39;]</span>
+<span class="go">      3rd last ranked [&#39;a09&#39;, &#39;a10&#39;, &#39;a14&#39;])</span>
+<span class="go">    2nd last ranked [&#39;a01&#39;, &#39;a03&#39;, &#39;a12&#39;, &#39;a13&#39;, &#39;a15&#39;])</span>
+<span class="go">  1st last ranked [&#39;a07&#39;, &#39;a08&#39;, &#39;a17&#39;, &#39;a19&#39;])</span>
+</pre></div>
+</div>
 </dd></dl>
 
 <dl class="py class">
@@ -14700,7 +14734,7 @@ Components are stored in an ordered dictionary.</p>
 
   <div role="contentinfo">
     <p>&#169; Copyright 2012-2025, Raymond Bisdorff.
-      <span class="lastupdated">Last updated on Mar 09, 2025.
+      <span class="lastupdated">Last updated on Mar 13, 2025.
       </span></p>
   </div>
 

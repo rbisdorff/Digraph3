@@ -17,6 +17,8 @@ Technical Reference of the Digraph3 modules
 
    :New:
 
+        - Added a new :py:class:`transitiveDigraphs.WeakBachetRanking` class using the new :py:class:`linearOrders.BachetRanking` class for generating highly correlated **weak rankings** from a given outranking digraph instance.
+
         - In order to explore potential run time accelerations with CUDA on GPUs, a new cythonized **cnpBipolarDigraphs** module with a numpy integer array implementation of the bipolar-valued characteristic valuation has been added to the cythonized collection of Digraph3 modules.
 	
         - Following a Python 3.12 recommendation, all multiprocessing resources have been refactored to use by default, instead of the traditional *fork*, the safer *spawn* threading start method. As a consequence, main program code of multiprocessing Digraph3 Python scripts must now start with a *__name__=='__main__'* test in order to avoid its recursive execution in each started thread (see the :py:mod:`multiprocessing` module).
