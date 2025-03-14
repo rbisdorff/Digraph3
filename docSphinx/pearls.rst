@@ -2957,21 +2957,21 @@ The weak *Bachet* ranking result obtained in this example (see Lines 7-10) is hi
     *---- exporting a dot file for GraphViz tools ---------*
     Exporting to rel_randomperftab_wk.dot
      0 { rank = 0; a2; a5; }
-     1 { rank = 1; a6; a9; a8; a3; }
-     2 { rank = 2; a7; a4; a1; }
+     1 { rank = 1; a6; a9; a8; }
+     2 { rank = 2; a7; a4; a1; a3; }
     dot -Grankdir=TB -Tpng weakBachet.dot -o weakBachet.png
 
 .. Figure:: weakBachet.png
    :name: weakBachet
    :alt: weak Bachet ranking
-   :width: 250 px
+   :width: 300 px
    :align: center
 
    Weak *Bachet* ranking result 
 
 The nine performance records are grouped into three performance equivalence classes. The resulting weak ranking is in fact consistent with the *Kemeny* ranking ['a2', 'a5', 'a9', 'a6', 'a8', 'a4', 'a3', 'a7', 'a1'] (see :numref:`optimalKemeny1` Line 4).
 
-A Monte Carlo experiment with the same 500 random Cost-Benefit performance tableaux reporting the grades obtained by 20 decision actions on 13 criteria, already used before, shows, with *randomized=100* and *maxNbrOfRankings=10* settings, a median weak ranking correlation of +0.960 (min. +0.770) on a common median determination part of 61.5% (min. 54%) of the given outranking digraphs. The valued median equivalence of the weak rankings with the given outranking digraphs is hence supported by a median criteria significance majority of 62% (min. 54%).
+A Monte Carlo experiment with the same 500 random Cost-Benefit performance tableaux, reporting the grades obtained by 20 decision actions on 13 criteria already used before, shows with *randomized=100* and *maxNbrOfRankings=10* settings a median weak ranking correlation of +0.960 (min. +0.770) on a common median determination part of 61.5% (min. 54%) of the given outranking digraphs. The valued median equivalence of the weak rankings with the given outranking digraphs is hence supported by a median criteria significance majority of 62% (min. 54%).
 
 The :py:class:`~transitiveDigraphs.WeakBachetRanking` class provides indeed
 a valuable and interesting method for computing weak rankings from given bipolar-valued outranking digraphs. Such a weak ranking makes apparent the actual transitive part of the outranking relation. And, the first and last equivalence classes of a topological sort of these weak rankings --their **initial and terminal prekernels**-- give suitable action candidates for a *first choice*, respectively a *last choice* recommendation.

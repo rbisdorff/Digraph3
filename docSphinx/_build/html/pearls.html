@@ -2986,19 +2986,19 @@ confidence level <em>alpha</em> %, when</p>
 <span class="linenos">2</span><span class="go"> *---- exporting a dot file for GraphViz tools ---------*</span>
 <span class="linenos">3</span><span class="go"> Exporting to rel_randomperftab_wk.dot</span>
 <span class="linenos">4</span><span class="go">  0 { rank = 0; a2; a5; }</span>
-<span class="linenos">5</span><span class="go">  1 { rank = 1; a6; a9; a8; a3; }</span>
-<span class="linenos">6</span><span class="go">  2 { rank = 2; a7; a4; a1; }</span>
+<span class="linenos">5</span><span class="go">  1 { rank = 1; a6; a9; a8; }</span>
+<span class="linenos">6</span><span class="go">  2 { rank = 2; a7; a4; a1; a3; }</span>
 <span class="linenos">7</span><span class="go"> dot -Grankdir=TB -Tpng weakBachet.dot -o weakBachet.png</span>
 </pre></div>
 </div>
 <figure class="align-center" id="weakbachet">
-<a class="reference internal image-reference" href="_images/weakBachet.png"><img alt="weak Bachet ranking" src="_images/weakBachet.png" style="width: 250px;" /></a>
+<a class="reference internal image-reference" href="_images/weakBachet.png"><img alt="weak Bachet ranking" src="_images/weakBachet.png" style="width: 300px;" /></a>
 <figcaption>
 <p><span class="caption-number">Fig. 3.15 </span><span class="caption-text">Weak <em>Bachet</em> ranking result</span><a class="headerlink" href="#weakbachet" title="Link to this image"></a></p>
 </figcaption>
 </figure>
 <p>The nine performance records are grouped into three performance equivalence classes. The resulting weak ranking is in fact consistent with the <em>Kemeny</em> ranking [‘a2’, ‘a5’, ‘a9’, ‘a6’, ‘a8’, ‘a4’, ‘a3’, ‘a7’, ‘a1’] (see <a class="hxr-hoverxref hxr-tooltip reference internal" href="#optimalkemeny1"><span class="std std-numref">Listing 3.40</span></a> Line 4).</p>
-<p>A Monte Carlo experiment with the same 500 random Cost-Benefit performance tableaux reporting the grades obtained by 20 decision actions on 13 criteria, already used before, shows, with <em>randomized=100</em> and <em>maxNbrOfRankings=10</em> settings, a median weak ranking correlation of +0.960 (min. +0.770) on a common median determination part of 61.5% (min. 54%) of the given outranking digraphs. The valued median equivalence of the weak rankings with the given outranking digraphs is hence supported by a median criteria significance majority of 62% (min. 54%).</p>
+<p>A Monte Carlo experiment with the same 500 random Cost-Benefit performance tableaux, reporting the grades obtained by 20 decision actions on 13 criteria already used before, shows with <em>randomized=100</em> and <em>maxNbrOfRankings=10</em> settings a median weak ranking correlation of +0.960 (min. +0.770) on a common median determination part of 61.5% (min. 54%) of the given outranking digraphs. The valued median equivalence of the weak rankings with the given outranking digraphs is hence supported by a median criteria significance majority of 62% (min. 54%).</p>
 <p>The <a class="reference internal" href="techDoc.html#transitiveDigraphs.WeakBachetRanking" title="transitiveDigraphs.WeakBachetRanking"><code class="xref py py-class docutils literal notranslate"><span class="pre">WeakBachetRanking</span></code></a> class provides indeed
 a valuable and interesting method for computing weak rankings from given bipolar-valued outranking digraphs. Such a weak ranking makes apparent the actual transitive part of the outranking relation. And, the first and last equivalence classes of a topological sort of these weak rankings –their <strong>initial and terminal prekernels</strong>– give suitable action candidates for a <em>first choice</em>, respectively a <em>last choice</em> recommendation.</p>
 <hr class="docutils" />
