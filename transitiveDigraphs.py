@@ -196,7 +196,7 @@ class TransitiveDigraph(Digraph):
         if not digraph.Acyclic:
             print('Error: not a transitive digraph !!!')
             return
-        topologicalRanking = digraph.topologicalRanking
+        topologicalRanking = digraph.computeTopologicalRanking()
         if Debug:
             print(topologicalRanking)
 ##        if direction == 'best':
@@ -1889,11 +1889,17 @@ class WeakBachetRanking(TransitiveDigraph):
         
         self.weakBachetCorrelation = g.computeOrdinalCorrelation(ba1)
         self.bachetRanking = resStat[0][1]['optimal']
-        self.bachetCorrelation = resStat[0][0]
+        self.bachetCorrelation = g.computeRankingCorrelation(self.bachetRanking)
         self.bachetConsensus = g.computeRankingConsensusQuality(self.bachetRanking)
         self.runTimes['totalTime'] = time() - tt
         if Comments:
             self.showWeakOrder()
+    def showWeakRanking(self):
+        """ dummy for generic method below
+        """
+        self.showTransitiveDigraph()
+
+        
 #########
 # compatibility with obsolete weakOrders module
 #######################

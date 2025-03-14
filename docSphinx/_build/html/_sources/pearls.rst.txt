@@ -2830,39 +2830,53 @@ It appears hence to be opportune to compute a first *Bachet* ranking result with
         a1 	-6083.00
    >>> g.computeRankingCorrelation(ba2.bachetRanking)
     {'correlation': +0.6315, 'determination': 0.4086}
-    *---- using 100 random ordering and their reversed versions ---*')
 
 Yet, when observing a lower transitivity degree as we may notice in :numref:`optimisingBachet1` Line 2, it is recommended to set the *randomized* parameter (default=0) to a positive integer *n*. In this case, *n* random orderings of the decision actions with their reversed versions will be generated in order to compute potentially diverse *Bachet* ranking results. The best correlated ranking will eventually be returned (see :numref:`optimisingBachet1` Lines 3 and 17).
 
 .. code-block:: pycon
    :caption: Optimising the *Bachet* ranking result II
    :name: optimisingBachet1
-   :emphasize-lines: 2,3,17
+   :emphasize-lines: 2,4,18
 
    >>> print('Transitivity degree: %.4f' % (g.computeTransitivityDegree()))
     Transitivity degree: 0.6806
-   >>> ba3 = BachetRanking(g,BestQualified=True,randomized=100)
+    *---- using 100 random ordering and their reversed versions ---*')
+   >>> ba3 = BachetRanking(g,BestQualified=True,randomized=100,seed=5)
    >>> ba3.showScores()
      Bachet scores in descending order
       action 	 score
-        a2 	 3280.00
-        a5 	 3262.00
-        a9 	 3226.00
-        a6 	 2548.00
-        a8 	 2491.00
-        a4 	 1816.00
-        a3 	 1120.00
-        a7 	  858.00
-        a1 	-2733.00
+        a2 	 6552.00
+        a5 	 4442.00
+        a9 	 2300.00
+        a6 	  -84.00
+        a8 	 -153.00
+        a4 	 -978.00
+        a3 	-4031.00
+        a7 	-4605.00
+        a1 	-6453.00
    >>> g.computeRankingCorrelation(ba3.bachetRanking)
     {'correlation': +0.7585, 'determination': 0.4086}
 
-The correlation +0.7585 above corresponds, in the example given here, again to the unique optimal *Kemeny* ranking ['a2', 'a5', 'a9', 'a6', 'a8', 'a4', 'a3', 'a7', 'a1']. It is hence the highest possible correlation one may obtain.
+The correlation +0.7585 above corresponds, in the example given here, again to the unique optimal *Kemeny* ranking ['a2', 'a5', 'a9', 'a6', 'a8', 'a4', 'a3', 'a7', 'a1'] (see below). 
 
+.. code-block:: pycon
+   :caption: Computing an optimal  Kemeny ranking
+   :name: optimalKemeny1
+   :emphasize-lines: 4,6
+
+   >>> from linearOrders import KemenyRanking
+   >>> KemenyRanking(g,orderLimit=9)
+   >>> ke.kemenyRanking
+    ['a2', 'a5', 'a9', 'a6', 'a8', 'a4', 'a3', 'a7', 'a1']
+   >>> g.computeRankingCorrelation(ke.kemenyRanking)
+    {'correlation': +0.7585, 'determination': 0.4086}
+
++0.7585 (see Line 4) is hence the highest possible correlation any linear ranking can show with the given outranking digraph *g*.
+		
 Efficiency of the Bachet ranking rule settings
 ..............................................
 
-We may check the quality of the latter *ba3.bachetRanking* result with a corresponding performance heatmap statistic.
+We may check the quality of the *optimal Bachet ranking* result with a corresponding performance heatmap statistic.
 
 .. code-block:: pycon
 
@@ -2910,36 +2924,20 @@ In Python, the range of integers is luckily only limited by the available CPU me
 The Bachet rule: a new method for weakly ranking 
 ................................................
 
-As we have noticed before, the randomized *Bachet* ranking rule produces multiple rankings of unequal correlation equality. If we collect a small subset of best correlated rankings, we may use the :py:class:`transitiveDigraphs.RankingsFusionDigraph` class for constructing, by epistemic disjunctive fusion of these best correlated rankings, a weak *Bachet* ranking result.
+As we have noticed before, the randomized *Bachet* ranking rule produces multiple rankings of unequal correlation equality, respecting more or less the transitive part of the given outranking digraph. If we collect now a small subset of the best correlated rankings, we may use the :py:class:`transitiveDigraphs.RankingsFusionDigraph` class for constructing, by epistemic disjunctive fusion of these selected rankings, a weak *Bachet* ranking result showing in fact this transitive part. 
 
-To explore the efficiency of this opportunity, a new :py:class:`~transitiveDigraphs.WeakBachetRanking` class has been added to the :py:mod:`transitiveDigraphs` module. To illustrate its usefulness, let us reconsider the example outranking digraph *g* of :numref:`optimisingBachet`. 
+To explore this opportunity, a new :py:class:`~transitiveDigraphs.WeakBachetRanking` class has been added to the :py:mod:`transitiveDigraphs` module. To illustrate its usefulness, let us reconsider the example outranking digraph *g* of :numref:`optimisingBachet`. 
 
 .. code-block:: pycon
    :caption: *Bachet* weak ranking result
    :name: weakBachet1
-   :emphasize-lines: 4,22-26,29
+   :emphasize-lines: 3-4,7-10,13
 
    >>> from outrankingDigraphs import RandomBipolarOutrankingDigraph
    >>> g = RandomBipolarOutrankingDigraph(numberOfActions=9,seed=1)
    >>> from transitiveDigraphs import WeakBachetRanking
    >>> wb = WeakBachetRanking(g,randomized=20,seed=1,maxNbrOfRankings=5)
-   >>> wb
-    *------- Digraph instance description ------*
-     Instance class      : WeakBachetRanking
-     Instance name       : rel_randomperftab_wk
-     Digraph Order       : 9
-     Digraph Size        : 31
-     Valuation domain    : [-1.00;1.00]
-     Determinateness (%) : 93.06
-     Attributes          : ['name', 'actions', 'ndigits',
-                 'valuationdomain', 'criteria', 'methodData',
-		 'evaluation', 'NA', 'order', 'runTimes',
-		 'nbrThreads', 'startMethod', 'concordanceRelation',
-		 'vetos', 'negativeVetos', 'largePerformanceDifferencesCount',
-		 'relation', 'gamma', 'notGamma', 'resStat',
-		 'rankings', 'weakBachetCorrelation',
-		 'bachetRanking', 'bachetCorrelation', 'bachetConsensus']
-   >>> wb.showWeakOrder()
+   >>> wb.showWeakRanking()
     Ranking by Choosing and Rejecting
      1st ranked ['a2', 'a5']
        2nd ranked ['a6', 'a8', 'a9']
@@ -2951,7 +2949,7 @@ To explore the efficiency of this opportunity, a new :py:class:`~transitiveDigra
      Epistemic determination    :  0.237
      Bipolar-valued equivalence : +0.194
 
-The weak *Bachet* ranking result is highly correlated with the given outranking digraph *g* (+0.851, see Line 29).  In :numref:`weakBachet` below, is shown its *Hasse* diagram. 
+The weak *Bachet* ranking result is highly correlated with the given outranking digraph *g* (+0.818, see Line 29).  In :numref:`weakBachet` below, is shown its *Hasse* diagram. 
 
 .. code-block:: pycon
 
@@ -2971,7 +2969,7 @@ The weak *Bachet* ranking result is highly correlated with the given outranking 
 
    Weak *Bachet* ranking result 
 
-The nine performance records are grouped into three performance equivalence classes. The resulting partail ordering is in fact consistent with the *Kemeny* ranking ['a2', 'a5', 'a9', 'a6', 'a8', 'a4', 'a3', 'a7', 'a1']. 
+The nine performance records are grouped into three performance equivalence classes. The resulting weak ranking is in fact consistent with the *Kemeny* ranking ['a2', 'a5', 'a9', 'a6', 'a8', 'a4', 'a3', 'a7', 'a1'] (see :numref:`optimalKemeny1` Line 4). 
 
 ..............................................
 
