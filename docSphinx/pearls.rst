@@ -2727,7 +2727,7 @@ The :py:mod:`linearOrders` module provides now a :py:class:`~linearOrders.Bachet
         a2 	  1.00
         a1      -11.00
 
-The class delivers as usual a ranking (*self.bachetRanking*) and a corresponding ordering result (*self.bachetOrder*) besides the decreasing list (*self.decBachetScores*) and the increasing list of the corresponding *Bachet* ranking scores (*self.incBachetScores*). Due to potential ties observed among *Bachet* scores and the lexicographic resolving of such ties, the decreasing and increasing lists of ranking scores might indeed not always be just the reversed version of one another. The *self.correlation* attribute containes the ordinal correlation index between the given outranking relation and the computed *Bachet* ranking.
+The class delivers as usual a ranking (*self.bachetRanking*) and a corresponding ordering result (*self.bachetOrder*) besides the decreasing list (*self.decBachetScores*) and the increasing list of the corresponding *Bachet* ranking scores (*self.incBachetScores*). Due to potential ties observed among *Bachet* scores and the lexicographic resolving of such ties, the decreasing and increasing lists of ranking scores might indeed not always be just the reversed version of one another. The *self.correlation* attribute contains the ordinal correlation index between the given outranking relation and the computed *Bachet* ranking.
 
 Note that, like the *Copeland* and the *NetFlows* ranking rules, the *Bachet* ranking rule is **invariant** under the **codual** transform [22]_ and the :py:class:`~linearOrdres.BachetRanking` constructor works by default on the corresponding strict outranking digraph (*CoDual=True*).
 
@@ -2924,7 +2924,7 @@ In Python, the range of integers is luckily only limited by the available CPU me
 The Bachet rule: a new method for weakly ranking 
 ................................................
 
-As we have noticed before, the randomized *Bachet* ranking rule produces multiple rankings of unequal correlation equality, respecting more or less the transitive part of the given outranking digraph. If we collect now a small subset of the best correlated rankings, we may use the :py:class:`transitiveDigraphs.RankingsFusionDigraph` class for constructing, by epistemic disjunctive fusion of these selected rankings, a weak *Bachet* ranking result showing in fact this transitive part. 
+As we have noticed before, the randomized *Bachet* ranking rule produces multiple rankings of unequal correlation results, respecting more or less the transitive part of the given outranking digraph. If we collect now a small subset of the best correlated rankings, we can use the :py:class:`transitiveDigraphs.RankingsFusionDigraph` class for constructing, by epistemic disjunctive fusion of these selected rankings, a weak *Bachet* ranking result showing in fact the transitive part of the given outranking digraph. 
 
 To explore this opportunity, a new :py:class:`~transitiveDigraphs.WeakBachetRanking` class has been added to the :py:mod:`transitiveDigraphs` module. To illustrate its usefulness, let us reconsider the example outranking digraph *g* of :numref:`optimisingBachet`. 
 
@@ -2949,7 +2949,7 @@ To explore this opportunity, a new :py:class:`~transitiveDigraphs.WeakBachetRank
      Epistemic determination    :  0.237
      Bipolar-valued equivalence : +0.194
 
-The weak *Bachet* ranking result is highly correlated with the given outranking digraph *g* (+0.818, see Line 29).  In :numref:`weakBachet` below, is shown its *Hasse* diagram. 
+The weak *Bachet* ranking result obtained in this example (see Lines 7-10) is highly correlated with the given outranking digraph *g* (+0.818, see Line 13).  In :numref:`weakBachet` below, is shown its *Hasse* diagram. 
 
 .. code-block:: pycon
 
@@ -2964,12 +2964,17 @@ The weak *Bachet* ranking result is highly correlated with the given outranking 
 .. Figure:: weakBachet.png
    :name: weakBachet
    :alt: weak Bachet ranking
-   :width: 400 px
+   :width: 250 px
    :align: center
 
    Weak *Bachet* ranking result 
 
-The nine performance records are grouped into three performance equivalence classes. The resulting weak ranking is in fact consistent with the *Kemeny* ranking ['a2', 'a5', 'a9', 'a6', 'a8', 'a4', 'a3', 'a7', 'a1'] (see :numref:`optimalKemeny1` Line 4). 
+The nine performance records are grouped into three performance equivalence classes. The resulting weak ranking is in fact consistent with the *Kemeny* ranking ['a2', 'a5', 'a9', 'a6', 'a8', 'a4', 'a3', 'a7', 'a1'] (see :numref:`optimalKemeny1` Line 4).
+
+A Monte Carlo experiment with the same 500 random Cost-Benefit performance tableaux reporting the grades obtained by 20 decision actions on 13 criteria, already used before, shows, with *randomized=100* and *maxNbrOfRankings=10* settings, a median weak ranking correlation of +0.960 (min. +0.770) on a common median determination part of 61.5% (min. 54%) of the given outranking digraphs. The valued median equivalence of the weak rankings with the given outranking digraphs is hence supported by a median criteria significance majority of 62% (min. 54%).
+
+The :py:class:`~transitiveDigraphs.WeakBachetRanking` class provides indeed
+a valuable and interesting method for computing weak rankings from given bipolar-valued outranking digraphs. Such a weak ranking makes apparent the actual transitive part of the outranking relation. And, the first and last equivalence classes of a topological sort of these weak rankings --their **initial and terminal prekernels**-- give suitable action candidates for a *first choice*, respectively a *last choice* recommendation.
 
 ..............................................
 
