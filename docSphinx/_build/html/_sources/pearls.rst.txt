@@ -3457,13 +3457,13 @@ A Monte Carlo experiment with the same 500 random Cost-Benefit performance table
 
 The :py:class:`~transitiveDigraphs.WeakBachetRanking` class provides this way a valuable and interesting method for computing weak rankings from given bipolar-valued outranking digraphs. Such weak rankings make apparent the actual transitive part of outranking relations. And, the first and last equivalence classes of a topological sort of these weak rankings --their **initial and terminal kernels**-- give suitable action candidates for a *first choice*, respectively a *last choice* recommendation.
 
-Computing kernels in graphs and digraphs is the subject of the next Section.
+Computing such *kernels* in bipolar-valued digraphs is the subject of the next Section.
 
 .. note::
    
    The weak *Bachet* ranking rule illustrates convincingly the benefit one may obtain when computing, not in a binary {0,1} bit world like today all bit-wise computing devices, but instead in a bipolar-valued {-1,0,1} world whith **sbit-wise Bachet computers**. The power of the epistemic disjunctive fusion operator, for instance, is indeed impressive. When two arguments prove the *Truthfullness* of a logical statement, their fusion will be **True**. When two arguments prove the **Falseness** of the staement, their fusion will be **False**, However, when they provide conjointly a proof of Falseness and and a proof of Thruthfullness, their fusion will be **indeterminate** (zero knowledge). It is worthwhile noticing again the essential role this indeterminate **zero** value is given in such a *Bachet* computer.
 
-   Instead of running these days intensely after chimeric and unreliable HPC quantum computer designs, it would be a thousand times more fruitful, less energy and money wasting, to defintely start designing *Bachet* computers. But I am sure that their will be a future time where people will wonder how it was possible that the XXth-century bit computing devices could survive so long.
+   Instead of running these days intensely after chimeric and unreliable HPC quantum computer designs, it would be a thousand times more fruitful, less energy and money wasting, to defintely start designing *Bachet* computers. But I am sure that their will be a future time where people will wonder how it was possible that XXth-century awkward bit computing devices could survive so long.
 
 ..............................................
 
