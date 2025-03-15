@@ -3455,7 +3455,8 @@ Similar to *Kohler*'s rule, the *RankedPairs* rule has also a prudent *dual* ver
 
 Besides of not providing a unique linear ranking, the *ranking-by-choosing* rules, as well as their dual *ordering-by-choosing* rules, are unfortunately *not scalable* to outranking digraphs of larger orders (> 100). For such bigger outranking digraphs, with several hundred or thousands of alternatives, only the *Copeland* and the *NetFlows* ranking-by-scoring rules, with a polynomial complexity of :math:`O(n^2)`, where *n* is the order of the outranking digraph, remain in fact computationally tractable.
 
-It is important finally to underline that for all outranking digraphs of small or larger orders there does usually **not exist** a unique optimal linear ranking result when the corresponding strict outranking digraph contains chordless cycles and lacks transitivity. Instead of computing hence a more or less convincing linear ranking, it may be more meaningful and faithful to sort the performance records into performance **quantile equivalence classes**. This order statistics based **rating** approach is presented in the following Section.  
+.. note::
+   It is important finally to notice that for all outranking digraphs of small **or** larger orders there does usually **not exist** a unique optimal linear ranking result when the corresponding strict outranking digraph lacks transitivity and contains chordless cycles. Instead of computing hence a more or less convincing linear ranking, it may be more meaningful and faithful to sort the performance records into performance **quantile equivalence classes**. This order statistics based **rating** approach is presented in the following Section.  
 
 Back to :ref:`Content Table <Tutorial-label>`
 
