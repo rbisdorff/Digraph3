@@ -33,11 +33,17 @@ class TransitiveDigraph(Digraph):
     def __init__(self):
         print('abstract root class')
         
-    def showWeakOrder(self,rankingByChoosing=None):
+    def showWeakOrder(self,rankingByChoosing=None,WithCoverCredibility=False):
         """
         A dummy for the showTransitiveDigraph() method.
         """
-        self.showTransitiveDigraph()
+        self.showTransitiveDigraph(WithCoverCredibility=WithCoverCredibility)
+
+    def showWeakRanking(self,rankingByChoosing=None,WithCoverCredibility=False):
+        """
+        A dummy for the showTransitiveDigraph() method.
+        """
+        self.showTransitiveDigraph(WithCoverCredibility=WithCoverCredibility)
         
     def showTransitiveDigraph(self,rankingByChoosing=None,WithCoverCredibility=False):
         """
@@ -1838,15 +1844,16 @@ class WeakBachetRanking(TransitiveDigraph):
     >>> from transitiveDigraphs import WeakBachetRanking
     >>> wg = WeakBachetRanking(g,randomized=100,seed=100,
     ...                       maxNbrOfRankings=10)
-    >>> wg.showWeakOrder()
+    >>> wg.showWeakRanking(WithCoverCredibility=True)
      Ranking by Choosing and Rejecting
-      1st ranked ['a04']
-        2nd ranked ['a02', 'a05', 'a06', 'a11', 'a18', 'a20']
-          3rd ranked ['a09', 'a14', 'a16']
-          3rd last ranked ['a09', 'a10', 'a14'])
-        2nd last ranked ['a01', 'a03', 'a12', 'a13', 'a15'])
-      1st last ranked ['a07', 'a08', 'a17', 'a19'])
-    
+      1st ranked ['a04'] (1.00)
+        2nd ranked ['a02', 'a05', 'a06', 'a11', 'a18', 'a20'] (0.70)
+          3rd ranked ['a09', 'a14', 'a16'] (0.33)
+          3rd last ranked ['a09', 'a10', 'a14']) (0.33)
+        2nd last ranked ['a01', 'a03', 'a12', 'a13', 'a15']) (0.60)
+      1st last ranked ['a07', 'a08', 'a17', 'a19']) (0.80)
+
+    The cover credibities shown above represent in fact the mean outranking, respectively outranked, characteristic value of the complement of the nth choice or rejection. 
     """
     
     def __init__(self,g,randomized=100,maxNbrOfRankings=10,
@@ -1893,11 +1900,11 @@ class WeakBachetRanking(TransitiveDigraph):
         self.bachetConsensus = g.computeRankingConsensusQuality(self.bachetRanking)
         self.runTimes['totalTime'] = time() - tt
         if Comments:
-            self.showWeakOrder()
-    def showWeakRanking(self):
+            self.showWeakOrder(WithCoverCredibility=False)
+    def showWeakRanking(self,WithCoverCredibility=False):
         """ dummy for generic method below
         """
-        self.showTransitiveDigraph()
+        self.showTransitiveDigraph(WithCoverCredibility=WithCoverCredibility)
 
         
 #########
@@ -1962,6 +1969,7 @@ if __name__ == "__main__":
     pt = RandomCBPerformanceTableau(numberOfActions=20,numberOfCriteria=13,seed=100)
     g = BipolarOutrankingDigraph(pt)
     wbg = WeakBachetRanking(g,seed=100,Comments=True)
+    wbg.showWeakRanking(WithCoverCredibility=True)
     #wcg = WeakCopelandOrder(g,WithFairestRanking=True)
     #print(wcg.copelandPermutations)
     #print(wcg.copelandPreRanking)

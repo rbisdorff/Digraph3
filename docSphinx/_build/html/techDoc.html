@@ -899,6 +899,7 @@
 <li class="toctree-l4"><a class="reference internal" href="#transitiveDigraphs.TransitiveDigraph.showRankingByChoosing"><code class="docutils literal notranslate"><span class="pre">TransitiveDigraph.showRankingByChoosing()</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="#transitiveDigraphs.TransitiveDigraph.showTransitiveDigraph"><code class="docutils literal notranslate"><span class="pre">TransitiveDigraph.showTransitiveDigraph()</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="#transitiveDigraphs.TransitiveDigraph.showWeakOrder"><code class="docutils literal notranslate"><span class="pre">TransitiveDigraph.showWeakOrder()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#transitiveDigraphs.TransitiveDigraph.showWeakRanking"><code class="docutils literal notranslate"><span class="pre">TransitiveDigraph.showWeakRanking()</span></code></a></li>
 </ul>
 </li>
 <li class="toctree-l3"><a class="reference internal" href="#transitiveDigraphs.WeakBachetRanking"><code class="docutils literal notranslate"><span class="pre">WeakBachetRanking</span></code></a><ul>
@@ -9543,7 +9544,13 @@ disjunctive or conjunctive fusion (omax|omin operator) of a list of rankings.</p
 
 <dl class="py method">
 <dt class="sig sig-object py" id="transitiveDigraphs.TransitiveDigraph.showWeakOrder">
-<span class="sig-name descname"><span class="pre">showWeakOrder</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">rankingByChoosing</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/transitiveDigraphs.html#TransitiveDigraph.showWeakOrder"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#transitiveDigraphs.TransitiveDigraph.showWeakOrder" title="Link to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">showWeakOrder</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">rankingByChoosing</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">WithCoverCredibility</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/transitiveDigraphs.html#TransitiveDigraph.showWeakOrder"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#transitiveDigraphs.TransitiveDigraph.showWeakOrder" title="Link to this definition"></a></dt>
+<dd><p>A dummy for the showTransitiveDigraph() method.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="transitiveDigraphs.TransitiveDigraph.showWeakRanking">
+<span class="sig-name descname"><span class="pre">showWeakRanking</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">rankingByChoosing</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">WithCoverCredibility</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/transitiveDigraphs.html#TransitiveDigraph.showWeakRanking"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#transitiveDigraphs.TransitiveDigraph.showWeakRanking" title="Link to this definition"></a></dt>
 <dd><p>A dummy for the showTransitiveDigraph() method.</p>
 </dd></dl>
 
@@ -9569,19 +9576,20 @@ these <em>Bachet</em> rankings for contructing a weak <em>Bachet</em> ranking re
 <span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">transitiveDigraphs</span> <span class="kn">import</span> <span class="n">WeakBachetRanking</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">wg</span> <span class="o">=</span> <span class="n">WeakBachetRanking</span><span class="p">(</span><span class="n">g</span><span class="p">,</span><span class="n">randomized</span><span class="o">=</span><span class="mi">100</span><span class="p">,</span><span class="n">seed</span><span class="o">=</span><span class="mi">100</span><span class="p">,</span>
 <span class="gp">... </span>                      <span class="n">maxNbrOfRankings</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">wg</span><span class="o">.</span><span class="n">showWeakOrder</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">wg</span><span class="o">.</span><span class="n">showWeakRanking</span><span class="p">(</span><span class="n">WithCoverCredibility</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 <span class="go"> Ranking by Choosing and Rejecting</span>
-<span class="go">  1st ranked [&#39;a04&#39;]</span>
-<span class="go">    2nd ranked [&#39;a02&#39;, &#39;a05&#39;, &#39;a06&#39;, &#39;a11&#39;, &#39;a18&#39;, &#39;a20&#39;]</span>
-<span class="go">      3rd ranked [&#39;a09&#39;, &#39;a14&#39;, &#39;a16&#39;]</span>
-<span class="go">      3rd last ranked [&#39;a09&#39;, &#39;a10&#39;, &#39;a14&#39;])</span>
-<span class="go">    2nd last ranked [&#39;a01&#39;, &#39;a03&#39;, &#39;a12&#39;, &#39;a13&#39;, &#39;a15&#39;])</span>
-<span class="go">  1st last ranked [&#39;a07&#39;, &#39;a08&#39;, &#39;a17&#39;, &#39;a19&#39;])</span>
+<span class="go">  1st ranked [&#39;a04&#39;] (1.00)</span>
+<span class="go">    2nd ranked [&#39;a02&#39;, &#39;a05&#39;, &#39;a06&#39;, &#39;a11&#39;, &#39;a18&#39;, &#39;a20&#39;] (0.70)</span>
+<span class="go">      3rd ranked [&#39;a09&#39;, &#39;a14&#39;, &#39;a16&#39;] (0.33)</span>
+<span class="go">      3rd last ranked [&#39;a09&#39;, &#39;a10&#39;, &#39;a14&#39;]) (0.33)</span>
+<span class="go">    2nd last ranked [&#39;a01&#39;, &#39;a03&#39;, &#39;a12&#39;, &#39;a13&#39;, &#39;a15&#39;]) (0.60)</span>
+<span class="go">  1st last ranked [&#39;a07&#39;, &#39;a08&#39;, &#39;a17&#39;, &#39;a19&#39;]) (0.80)</span>
 </pre></div>
 </div>
+<p>The cover credibities shown above represent in fact the mean outranking, respectively outranked, characteristic value of the complement of the nth choice or rejection.</p>
 <dl class="py method">
 <dt class="sig sig-object py" id="transitiveDigraphs.WeakBachetRanking.showWeakRanking">
-<span class="sig-name descname"><span class="pre">showWeakRanking</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/transitiveDigraphs.html#WeakBachetRanking.showWeakRanking"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#transitiveDigraphs.WeakBachetRanking.showWeakRanking" title="Link to this definition"></a></dt>
+<span class="sig-name descname"><span class="pre">showWeakRanking</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">WithCoverCredibility</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/transitiveDigraphs.html#WeakBachetRanking.showWeakRanking"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#transitiveDigraphs.WeakBachetRanking.showWeakRanking" title="Link to this definition"></a></dt>
 <dd><p>dummy for generic method below</p>
 </dd></dl>
 

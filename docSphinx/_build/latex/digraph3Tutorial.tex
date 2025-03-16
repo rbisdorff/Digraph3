@@ -67,7 +67,7 @@
 
 
 \title{Tutorials for the Digraph3 Python software resources}
-\date{March 15, 2025}
+\date{March 16, 2025}
 \release{3.13.2}
 \author{Raymond Bisdorff}
 \newcommand{\sphinxlogo}{\sphinxincludegraphics{introDoc3.png}\par}
@@ -4800,8 +4800,10 @@ Similar to \sphinxstyleemphasis{Kohler}’s rule, the \sphinxstyleemphasis{Ranke
 \sphinxAtStartPar
 Besides of not providing a unique linear ranking, the \sphinxstyleemphasis{ranking\sphinxhyphen{}by\sphinxhyphen{}choosing} rules, as well as their dual \sphinxstyleemphasis{ordering\sphinxhyphen{}by\sphinxhyphen{}choosing} rules, are unfortunately \sphinxstyleemphasis{not scalable} to outranking digraphs of larger orders (\textgreater{} 100). For such bigger outranking digraphs, with several hundred or thousands of alternatives, only the \sphinxstyleemphasis{Copeland} and the \sphinxstyleemphasis{NetFlows} ranking\sphinxhyphen{}by\sphinxhyphen{}scoring rules, with a polynomial complexity of \(O(n^2)\), where \sphinxstyleemphasis{n} is the order of the outranking digraph, remain in fact computationally tractable.
 
+\begin{sphinxadmonition}{note}{Note:}
 \sphinxAtStartPar
-It is important finally to underline that for all outranking digraphs of small or larger orders there does usually \sphinxstylestrong{not exist} a unique optimal linear ranking result when the corresponding strict outranking digraph contains chordless cycles and lacks transitivity. Instead of computing hence a more or less convincing linear ranking, it may be more meaningful and faithful to sort the performance records into performance \sphinxstylestrong{quantile equivalence classes}. This order statistics based \sphinxstylestrong{rating} approach is presented in the following Section.
+It is important finally to notice that for all outranking digraphs of small \sphinxstylestrong{or} larger orders there does usually \sphinxstylestrong{not exist} a unique optimal linear ranking result when the corresponding strict outranking digraph lacks transitivity and contains chordless cycles. Instead of computing hence a more or less convincing linear ranking, it may be more meaningful and faithful to sort the performance records into performance \sphinxstylestrong{quantile equivalence classes}. This order statistics based \sphinxstylestrong{rating} approach is presented in the following Section.
+\end{sphinxadmonition}
 
 \sphinxAtStartPar
 Back to {\hyperref[\detokenize{tutorial:tutorial-label}]{\sphinxcrossref{\DUrole{std,std-ref}{Content Table}}}} (\autopageref*{\detokenize{tutorial:tutorial-label}})
@@ -13461,7 +13463,7 @@ A Digraph3 \sphinxstyleemphasis{graphs.Graph} encoded file is available in the \
 \end{sphinxVerbatim}
 
 \sphinxAtStartPar
-Six professors (labeled \sphinxstyleemphasis{A}, \sphinxstyleemphasis{B}, \sphinxstyleemphasis{C}, \sphinxstyleemphasis{D}, \sphinxstyleemphasis{E} and \sphinxstyleemphasis{I}) had been to the library on the day that a rare tractate was stolen. Each entered once, stayed for some time, and then left. If two professors were in the library at the same time, then at least one of them saw the other. Detectives questioned the professors and gathered the testimonies that \sphinxstyleemphasis{A} saw \sphinxstyleemphasis{B} and \sphinxstyleemphasis{E}; \sphinxstyleemphasis{B} saw \sphinxstyleemphasis{A} and \sphinxstyleemphasis{I}; \sphinxstyleemphasis{C} saw \sphinxstyleemphasis{D} and \sphinxstyleemphasis{I}; \sphinxstyleemphasis{D} saw \sphinxstyleemphasis{A} and \sphinxstyleemphasis{I}; \sphinxstyleemphasis{E} saw \sphinxstyleemphasis{B} and \sphinxstyleemphasis{I}; and \sphinxstyleemphasis{I} saw \sphinxstyleemphasis{C} and \sphinxstyleemphasis{E}. This data is gathered in the previous file, where each positive edge \(\{x,y\}\) models the testimony that, either \sphinxstyleemphasis{x} saw \sphinxstyleemphasis{y}, or \sphinxstyleemphasis{y} saw \sphinxstyleemphasis{x}.
+Six professors (labeled \sphinxstyleemphasis{A}, \sphinxstyleemphasis{B}, \sphinxstyleemphasis{C}, \sphinxstyleemphasis{D}, \sphinxstyleemphasis{E} and \sphinxstyleemphasis{I}) had been to the library on the day that a rare document was stolen. Each entered once, stayed for some time, and then left. If two professors were in the library at the same time, then at least one of them saw the other. Detectives questioned the professors and gathered the testimonies that \sphinxstyleemphasis{A} saw \sphinxstyleemphasis{B} and \sphinxstyleemphasis{E}; \sphinxstyleemphasis{B} saw \sphinxstyleemphasis{A} and \sphinxstyleemphasis{I}; \sphinxstyleemphasis{C} saw \sphinxstyleemphasis{D} and \sphinxstyleemphasis{I}; \sphinxstyleemphasis{D} saw \sphinxstyleemphasis{A} and \sphinxstyleemphasis{I}; \sphinxstyleemphasis{E} saw \sphinxstyleemphasis{B} and \sphinxstyleemphasis{I}; and \sphinxstyleemphasis{I} saw \sphinxstyleemphasis{C} and \sphinxstyleemphasis{E}. This data is gathered in the previous file, where each positive edge \(\{x,y\}\) models the testimony that, either \sphinxstyleemphasis{x} saw \sphinxstyleemphasis{y}, or \sphinxstyleemphasis{y} saw \sphinxstyleemphasis{x}.
 
 \begin{sphinxVerbatim}[commandchars=\\\{\},numbers=left,firstnumber=1,stepnumber=1]
 \PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{k+kn}{from} \PYG{n+nn}{graphs} \PYG{k+kn}{import} \PYG{n}{Graph}
