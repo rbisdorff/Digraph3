@@ -67,78 +67,91 @@ objectives = OrderedDict([])
 # The critics rating the movies  
 criteria = OrderedDict([
 ('jt', {
+    'name': 'movie critic',
 'weight': 1,
 'scale': [-2.0, 5.0],
 'thresholds': {'ind': (Decimal('0.0'), Decimal('0.0')), 'pref': (Decimal('0.5'), Decimal('0.0'))},
 'preferenceDirection': 'max' 
 }),
 ('td', {
+    'name': 'movie critic',
 'weight': 1,
 'scale': [-2.0, 5.0],
 'thresholds': {'ind': (Decimal('0.0'), Decimal('0.0')), 'pref': (Decimal('0.5'), Decimal('0.0'))},
 'preferenceDirection': 'max' 
 }),
 ('cn', {
+    'name': 'movie critic',
 'weight': 1,
 'scale': [-2.0, 5.0],
 'thresholds': {'ind': (Decimal('0.0'), Decimal('0.0')), 'pref': (Decimal('0.5'), Decimal('0.0'))},
 'preferenceDirection': 'max' 
 }),
 ('mr', {
+    'name': 'movie critic',
 'weight': 1,
 'scale': [-2.0, 5.0],
 'thresholds': {'ind': (Decimal('0.0'), Decimal('0.0')), 'pref': (Decimal('0.5'), Decimal('0.0'))},
 'preferenceDirection': 'max' 
 }),
 ('as', {
+    'name': 'movie critic',
 'weight': 1,
 'scale': [-2.0, 5.0],
 'thresholds': {'ind': (Decimal('0.0'), Decimal('0.0')), 'pref': (Decimal('0.5'), Decimal('0.0'))},
 'preferenceDirection': 'max' 
 }),
 ('dr', {
+    'name': 'movie critic',
 'weight': 1,
 'scale': [-2.0, 5.0],
 'thresholds': {'ind': (Decimal('0.0'), Decimal('0.0')), 'pref': (Decimal('0.5'), Decimal('0.0'))},
 'preferenceDirection': 'max' 
 }),
 ('vt', {
+    'name': 'movie critic',
 'weight': 2,
 'scale': [-2.0, 5.0],
 'thresholds': {'ind': (Decimal('0.0'), Decimal('0.0')), 'pref': (Decimal('0.5'), Decimal('0.0'))},
 'preferenceDirection': 'max' 
 }),
 ('cs', {
+    'name': 'movie critic',
 'weight': 1,
 'scale': [-2.0, 5.0],
 'thresholds': {'ind': (Decimal('0.0'), Decimal('0.0')), 'pref': (Decimal('0.5'), Decimal('0.0'))},
 'preferenceDirection': 'max' 
 }),
 ('jh', {
+    'name': 'movie critic',
 'weight': 2,
 'scale': [-2.0, 5.0],
 'thresholds': {'ind': (Decimal('0.0'), Decimal('0.0')), 'pref': (Decimal('0.5'), Decimal('0.0'))},
 'preferenceDirection': 'max' 
 }),
 ('rr', {
+    'name': 'movie critic',
 'weight': 1,
 'scale': [-2.0, 5.0],
 'thresholds': {'ind': (Decimal('0.0'), Decimal('0.0')), 'pref': (Decimal('0.5'), Decimal('0.0'))},
 'preferenceDirection': 'max' 
 }),
 ('ap', {
+    'name': 'movie critic',
 'weight': 1,
 'scale': [-2.0, 5.0],
 'thresholds': {'ind': (Decimal('0.0'), Decimal('0.0')), 'pref': (Decimal('0.5'), Decimal('0.0'))},
 'preferenceDirection': 'max' 
 }),
 ('mk', {
+    'name': 'movie critic',
 'weight': 1,
 'scale': [-2.0, 5.0],
 'thresholds': {'ind': (Decimal('0.0'), Decimal('0.0')), 'pref': (Decimal('0.5'), Decimal('0.0'))},
 'preferenceDirection': 'max' 
 }),
 ('cf', {
+    'name': 'movie critic',
 'weight': 1,
 'scale': [-2.0, 5.0],
 'thresholds': {'ind': (Decimal('0.0'), Decimal('0.0')), 'pref': (Decimal('0.5'), Decimal('0.0'))},

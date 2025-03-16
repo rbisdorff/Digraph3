@@ -380,7 +380,10 @@ The performance evaluations of each decision alternative on each criterion are g
                     print('  short name:',actions[x]['shortName'])
                 except KeyError:
                     pass
-                print('  name:      ',actions[x]['name'])
+                try:
+                    print('  name:      ',actions[x]['name'])
+                except KeyError:
+                    pass
                 try:
                     print('  comment:   ',actions[x]['comment'])
                 except KeyError:
@@ -393,7 +396,10 @@ The performance evaluations of each decision alternative on each criterion are g
                     print('  short name:',actions[x]['shortName'])
                 except KeyError:
                     pass
-                print('  name:      ',actions[x]['name'])
+                try:
+                    print('  name:      ',actions[x]['name'])
+                except KeyError:
+                    pass
                 try:
                     print('  comment:   ',actions[x]['comment'])
                 except KeyError:
@@ -660,7 +666,10 @@ The performance evaluations of each decision alternative on each criterion are g
                 criteriaList.sort()
             for g in criteriaList:
                 cg = criteria[g]
-                print(g, cg['name'])
+                try:
+                    print(g, cg['name'])
+                except:
+                    print(g)
                 try:
                     prefDir = cg['preferenceDirection']
                 except:
