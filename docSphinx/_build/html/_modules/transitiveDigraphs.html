@@ -529,7 +529,7 @@
         <span class="c1"># same ranks for Hasses equivalence classes</span>
         <span class="n">k</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">rankingByChoosing</span><span class="p">)</span>
         <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">k</span><span class="p">):</span>
-            <span class="n">sameRank</span> <span class="o">=</span> <span class="s1">&#39;{ rank = </span><span class="si">%d</span><span class="s1">; &#39;</span> <span class="o">%</span> <span class="n">i</span>
+            <span class="n">sameRank</span> <span class="o">=</span> <span class="s1">&#39;subGraph { rank = same; &#39;</span>
             <span class="n">ich</span> <span class="o">=</span> <span class="n">rankingByChoosing</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="mi">1</span><span class="p">]</span>
             <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">ich</span><span class="p">:</span>
                 <span class="n">sameRank</span> <span class="o">+=</span> <span class="nb">str</span><span class="p">(</span><span class="n">_safeName</span><span class="p">(</span><span class="n">x</span><span class="p">))</span><span class="o">+</span><span class="s1">&#39;; &#39;</span>
@@ -577,12 +577,12 @@
                         <span class="k">else</span><span class="p">:</span>
                             <span class="k">if</span> <span class="n">relation</span><span class="p">[</span><span class="n">x</span><span class="p">][</span><span class="n">y</span><span class="p">]</span> <span class="o">&gt;</span> <span class="n">digraph</span><span class="o">.</span><span class="n">valuationdomain</span><span class="p">[</span><span class="s1">&#39;med&#39;</span><span class="p">]:</span>
                                 <span class="n">arcColor</span> <span class="o">=</span> <span class="s1">&#39;black&#39;</span>
-                                <span class="n">edge</span> <span class="o">=</span> <span class="s1">&#39;</span><span class="si">%s</span><span class="s1">-&gt; </span><span class="si">%s</span><span class="s1"> [style=&quot;setlinewidth(</span><span class="si">%d</span><span class="s1">)&quot;,color=</span><span class="si">%s</span><span class="s1">] ;</span><span class="se">\n</span><span class="s1">&#39;</span> <span class="o">%</span>\
+                                <span class="n">edge</span> <span class="o">=</span> <span class="s1">&#39;</span><span class="si">%s</span><span class="s1">-&gt; </span><span class="si">%s</span><span class="s1"> [style=&quot;setlinewidth(</span><span class="si">%d</span><span class="s1">)&quot;,color=</span><span class="si">%s</span><span class="s1">,arrowhead=none] ;</span><span class="se">\n</span><span class="s1">&#39;</span> <span class="o">%</span>\
                                     <span class="p">(</span><span class="n">_safeName</span><span class="p">(</span><span class="n">x</span><span class="p">),</span><span class="n">_safeName</span><span class="p">(</span><span class="n">y</span><span class="p">),</span><span class="mi">1</span><span class="p">,</span><span class="n">arcColor</span><span class="p">)</span>
                                 <span class="n">fo</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">edge</span><span class="p">)</span>
                             <span class="k">elif</span> <span class="n">relation</span><span class="p">[</span><span class="n">y</span><span class="p">][</span><span class="n">x</span><span class="p">]</span> <span class="o">&gt;</span> <span class="n">digraph</span><span class="o">.</span><span class="n">valuationdomain</span><span class="p">[</span><span class="s1">&#39;med&#39;</span><span class="p">]:</span>
                                 <span class="n">arcColor</span> <span class="o">=</span> <span class="s1">&#39;black&#39;</span>
-                                <span class="n">edge</span> <span class="o">=</span> <span class="s1">&#39;</span><span class="si">%s</span><span class="s1">-&gt; </span><span class="si">%s</span><span class="s1"> [style=&quot;setlinewidth(</span><span class="si">%d</span><span class="s1">)&quot;,color=</span><span class="si">%s</span><span class="s1">] ;</span><span class="se">\n</span><span class="s1">&#39;</span> <span class="o">%</span>\
+                                <span class="n">edge</span> <span class="o">=</span> <span class="s1">&#39;</span><span class="si">%s</span><span class="s1">-&gt; </span><span class="si">%s</span><span class="s1"> [style=&quot;setlinewidth(</span><span class="si">%d</span><span class="s1">)&quot;,color=</span><span class="si">%s</span><span class="s1">,arrowhead=none] ;</span><span class="se">\n</span><span class="s1">&#39;</span> <span class="o">%</span>\
                                     <span class="p">(</span><span class="n">_safeName</span><span class="p">(</span><span class="n">y</span><span class="p">),</span><span class="n">_safeName</span><span class="p">(</span><span class="n">x</span><span class="p">),</span><span class="mi">1</span><span class="p">,</span><span class="n">arcColor</span><span class="p">)</span>
                                 <span class="n">fo</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">edge</span><span class="p">)</span>
                                                   
@@ -993,7 +993,10 @@
         <span class="n">String</span> <span class="o">+=</span> <span class="s1">&#39;Determinateness (</span><span class="si">%%</span><span class="s1">) : </span><span class="si">%.1f</span><span class="se">\n</span><span class="s1">&#39;</span> <span class="o">%</span>\
                   <span class="bp">self</span><span class="o">.</span><span class="n">computeDeterminateness</span><span class="p">(</span><span class="n">InPercents</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
         <span class="n">String</span> <span class="o">+=</span> <span class="s1">&#39;*------  Constructor run times (in sec.) ------*</span><span class="se">\n</span><span class="s1">&#39;</span>
-        <span class="n">String</span> <span class="o">+=</span> <span class="s1">&#39;Threads             : </span><span class="si">%d</span><span class="se">\n</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="bp">self</span><span class="o">.</span><span class="n">nbrThreads</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="n">String</span> <span class="o">+=</span> <span class="s1">&#39;Threads             : </span><span class="si">%d</span><span class="se">\n</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="bp">self</span><span class="o">.</span><span class="n">nbrThreads</span>
+        <span class="k">except</span><span class="p">:</span>
+            <span class="k">pass</span>
         <span class="n">String</span> <span class="o">+=</span> <span class="s1">&#39;Total time          : </span><span class="si">%.5f</span><span class="se">\n</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="bp">self</span><span class="o">.</span><span class="n">runTimes</span><span class="p">[</span><span class="s1">&#39;totalTime&#39;</span><span class="p">]</span>
         <span class="n">String</span> <span class="o">+=</span> <span class="s1">&#39;Data input          : </span><span class="si">%.5f</span><span class="se">\n</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="bp">self</span><span class="o">.</span><span class="n">runTimes</span><span class="p">[</span><span class="s1">&#39;dataInput&#39;</span><span class="p">]</span>
         <span class="n">String</span> <span class="o">+=</span> <span class="s1">&#39;Ranking-by-choosing : </span><span class="si">%.5f</span><span class="se">\n</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="bp">self</span><span class="o">.</span><span class="n">runTimes</span><span class="p">[</span><span class="s1">&#39;bestLast&#39;</span><span class="p">]</span>
@@ -1189,7 +1192,7 @@
         
 <div class="viewcode-block" id="RankingByBestChoosingDigraph.showTransitiveDigraph">
 <a class="viewcode-back" href="../techDoc.html#transitiveDigraphs.RankingByBestChoosingDigraph.showTransitiveDigraph">[docs]</a>
-    <span class="k">def</span> <span class="nf">showTransitiveDigraph</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">showTransitiveDigraph</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">WithCoverCredibility</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Specialisation of showTransitiveDigraph() for ranking-by-best-choosing results.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
@@ -1222,7 +1225,7 @@
     
 <div class="viewcode-block" id="RankingByLastChoosingDigraph.showTransitiveDigraph">
 <a class="viewcode-back" href="../techDoc.html#transitiveDigraphs.RankingByLastChoosingDigraph.showTransitiveDigraph">[docs]</a>
-    <span class="k">def</span> <span class="nf">showTransitiveDigraph</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">showTransitiveDigraph</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">WithCoverCredibility</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Specialisation of showTransitiveDigraph() for ranking-by-last-choosing results.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
@@ -1549,7 +1552,7 @@
                 
 <div class="viewcode-block" id="PrincipalInOutDegreesOrderingFusion.showTransitiveDigraph">
 <a class="viewcode-back" href="../techDoc.html#transitiveDigraphs.PrincipalInOutDegreesOrderingFusion.showTransitiveDigraph">[docs]</a>
-    <span class="k">def</span> <span class="nf">showTransitiveDigraph</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">ColwiseOrder</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">showTransitiveDigraph</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">ColwiseOrder</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span><span class="n">WithCoverCredibility</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Specialisation for PrincipalInOutDegreesOrderings.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
@@ -2192,7 +2195,7 @@
 
   <div role="contentinfo">
     <p>&#169; Copyright 2012-2025, Raymond Bisdorff.
-      <span class="lastupdated">Last updated on Mar 16, 2025.
+      <span class="lastupdated">Last updated on Mar 17, 2025.
       </span></p>
   </div>
 

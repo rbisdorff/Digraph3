@@ -409,7 +409,7 @@ class TransitiveDigraph(Digraph):
         # same ranks for Hasses equivalence classes
         k = len(rankingByChoosing)
         for i in range(k):
-            sameRank = '{ rank = %d; ' % i
+            sameRank = 'subGraph { rank = same; '
             ich = rankingByChoosing[i][1]
             for x in ich:
                 sameRank += str(_safeName(x))+'; '
@@ -457,12 +457,12 @@ class TransitiveDigraph(Digraph):
                         else:
                             if relation[x][y] > digraph.valuationdomain['med']:
                                 arcColor = 'black'
-                                edge = '%s-> %s [style="setlinewidth(%d)",color=%s] ;\n' %\
+                                edge = '%s-> %s [style="setlinewidth(%d)",color=%s,arrowhead=none] ;\n' %\
                                     (_safeName(x),_safeName(y),1,arcColor)
                                 fo.write(edge)
                             elif relation[y][x] > digraph.valuationdomain['med']:
                                 arcColor = 'black'
-                                edge = '%s-> %s [style="setlinewidth(%d)",color=%s] ;\n' %\
+                                edge = '%s-> %s [style="setlinewidth(%d)",color=%s,arrowhead=none] ;\n' %\
                                     (_safeName(y),_safeName(x),1,arcColor)
                                 fo.write(edge)
                                                   
@@ -857,7 +857,10 @@ class RankingByChoosingDigraph(TransitiveDigraph):
         String += 'Determinateness (%%) : %.1f\n' %\
                   self.computeDeterminateness(InPercents=True)
         String += '*------  Constructor run times (in sec.) ------*\n'
-        String += 'Threads             : %d\n' % self.nbrThreads
+        try:
+            String += 'Threads             : %d\n' % self.nbrThreads
+        except:
+            pass
         String += 'Total time          : %.5f\n' % self.runTimes['totalTime']
         String += 'Data input          : %.5f\n' % self.runTimes['dataInput']
         String += 'Ranking-by-choosing : %.5f\n' % self.runTimes['bestLast']
@@ -1036,7 +1039,7 @@ class RankingByBestChoosingDigraph(RankingByChoosingDigraph):
         self.notGamma = self.notGammaSets()
         self.rankingByBestChoosing = digraph.rankingByBestChoosing
         
-    def showTransitiveDigraph(self):
+    def showTransitiveDigraph(self,WithCoverCredibility=False):
         """
         Specialisation of showTransitiveDigraph() for ranking-by-best-choosing results.
         """
@@ -1063,7 +1066,7 @@ class RankingByLastChoosingDigraph(RankingByChoosingDigraph):
         self.notGamma = self.notGammaSets()
         self.rankingByLastChoosing = digraph.rankingByLastChoosing
     
-    def showTransitiveDigraph(self):
+    def showTransitiveDigraph(self,WithCoverCredibility=False):
         """
         Specialisation of showTransitiveDigraph() for ranking-by-last-choosing results.
         """
@@ -1375,7 +1378,7 @@ class PrincipalInOutDegreesOrderingFusion(TransitiveDigraph):
         TransitiveDigraphing = {'result':ordering}
         return TransitiveDigraphing
                 
-    def showTransitiveDigraph(self, ColwiseOrder=False):
+    def showTransitiveDigraph(self, ColwiseOrder=False,WithCoverCredibility=False):
         """
         Specialisation for PrincipalInOutDegreesOrderings.
         """

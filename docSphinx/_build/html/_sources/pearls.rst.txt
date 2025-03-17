@@ -5312,7 +5312,7 @@ Appendix
 
 .. [23] To prove the *Condorcet consistency* property of the *Bachet* ranking rule, it is sufficient to notice that the contributions of a transitive triplet *'ai' > 'aj' > 'ak'* to the corresponding *Bachet* ranking scores will respect the actual ordering of the triplet with all positional permutations of [..., ai, ..., aj, ...,ak, ...] in a relation table.
 
-.. [24] The weak *Bachet* ranking digraph represents in fact the directed version of a **comparability** graph, i.e. :ref:`a Berge or perfect graph <Permutation-Tutorial-label>`. We have this way found an algorithm for computing a *transitively oriented* digraph that is close in the :ref:`bipolar-valued relational equivalence <OrdinalCorrelation-Tutorial-label>` sense to a given bipolar-valued outranking digraph. This finding opens the way to a new design of first or last choice recommendation algorithms avoiding the necessity to break up all potential chordless outranking circuits. An opportunity yet to be explored.
+.. [24] The weak *Bachet* ranking digraph represents in fact the directed version of a **comparability** graph, i.e. :ref:`a Berge or perfect graph <Permutation-Tutorial-label>`. We have this way found an algorithm for computing a *transitively oriented* digraph that is close in the :ref:`bipolar-valued relational equivalence <OrdinalCorrelation-Tutorial-label>` sense to the transitive part of a given bipolar-valued outranking digraph. This finding opens the way to a new design of first or last choice recommendation algorithms avoiding the necessity to arbitrarily break up all potential chordless outranking circuits. An opportunity yet to be explored.
 
 .. raw:: latex
 
