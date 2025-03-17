@@ -3095,7 +3095,7 @@ Examples of such *sbits* encoded *Bachet* numbers are immediately provided by th
 
 The *Bachet* numbers, instantiated by the row vectors without reflexive terms  and the column vectors without reflexive terms of the digraph's *self.relation* attribute, model in fact respectively an **outrankingness** measure *rx* and an **outrankedness** measure *cx* (see Lines 16-27).
 
-The sum *rx + (-cx)* of both the **outrankingness** and the **not outrankedness** measures renders now per decision action *x* a potential ranking fitness score, similar to *Copeland* or *NetFlows* ranking scores [21]_.
+The sum *rx + (-cx)* of both the **outrankingness** and the **not-outrankedness** measures renders now per decision action *x* a potential ranking fitness score, similar to *Copeland* or *NetFlows* ranking scores [21]_.
 
 In our example here we obtain the *Bachet* ranking 'a4' (26) > 'a3' (4) > 'a2' (1) > 'a1' (-11) (see Line 30 above). A ranking result, which is the corresponding optimal *Kemeny* ranking maximally correlated with the given outranking digraph (tau = 0.795, see Lines 4 and 8 below).
 
@@ -3114,7 +3114,7 @@ In our example here we obtain the *Bachet* ranking 'a4' (26) > 'a3' (4) > 'a2' (
       Epistemic determination    :  0.621
       Bipolar-valued equivalence : +0.493
 
-If we reverse however the given ordering of the *actions* dictionary, we may obtain different ranking scores resulting in a different ranking result (see :numref:`actionsOrdering` below). 
+If we reverse however the given ordering of the *actions* dictionary, we may obtain other ranking scores resulting in a different ranking result (see :numref:`actionsOrdering` below). 
 
 .. code-block:: pycon
    :caption: Importance of the actions ordering
@@ -3213,7 +3213,7 @@ The class delivers as usual a ranking (*self.bachetRanking*) and a corresponding
 
 Note that, like the *Copeland* and the *NetFlows* ranking rules, the *Bachet* ranking rule is **invariant** under the **codual** transform [22]_ and the :py:class:`~linearOrdres.BachetRanking` constructor works by default on the corresponding strict outranking digraph (*CoDual=True*).
 
-Mind however that a base 3 sbits based numbering system is a *positional numeral system*, implying that the *Bachet* ranking scores, as noticed before, depend essentially on the very ordering of the rows and columns of the outranking digraph's *self.relation* attribute when the relation shows a low transitivity degree. However, when the digraph is *transitive* and *acyclic*, the *Bachet* ranking scores will consistently model the orientations of all transitive triplets independently of the ordering of the rows and columns of the *self.relation* attribute. The *Bachet* ranking rule is hence, like the *Copeland* rule, **Condorcet consistent**, i.e. when the polarised strict outranking digraph models a transitive acyclic relation, its *Bachet* ranking result will always be consistent with this strict outranking relation [23]_.
+Mind however that a base 3 sbits numbering system is a *positional numeral system*, implying that the *Bachet* ranking scores, as noticed before, depend essentially on the very ordering of the rows and columns of the outranking digraph's *self.relation* attribute when the relation shows a low transitivity degree. However, when the digraph is *transitive* and *acyclic*, the *Bachet* ranking scores will consistently model the orientations of all transitive triplets independently of the ordering of the rows and columns of the *self.relation* attribute. The *Bachet* ranking rule is hence, like the *Copeland* rule, **Condorcet consistent**, i.e. when the polarised strict outranking digraph models a transitive acyclic relation, its *Bachet* ranking result will always be consistent with this strict outranking relation [23]_.
 
 Our random outranking digraph *g*, generated above in :numref:`examplesBachet` Line 4 is for instance not transitive. Its transitivity degree amounts to 0.833 (see below). 
 
@@ -3406,7 +3406,7 @@ In Python, the range of integers is luckily only limited by the available CPU me
 The Bachet rule: a new method for weakly ranking 
 ................................................
 
-As we have noticed before, the randomized *Bachet* ranking rule produces multiple rankings of unequal correlation results, respecting more or less the transitive part of the given outranking digraph. If we collect now a small subset of the best correlated rankings, we can use the :py:class:`transitiveDigraphs.RankingsFusionDigraph` class for constructing, by epistemic disjunctive fusion of these selected rankings, a weak *Bachet* ranking result showing in fact the transitive part of the given outranking digraph. 
+As we have noticed before, the randomized *Bachet* ranking rule produces multiple rankings of unequal correlation results, respecting more or less the transitive part of the given outranking digraph. If we collect now a small subset of the best correlated rankings, we can use the :py:class:`transitiveDigraphs.RankingsFusionDigraph` class for constructing, by epistemic disjunctive fusion of these selected rankings, a weak *Bachet* ranking result --a ranking with ties-- showing in fact the transitive part of the given outranking digraph. 
 
 To explore this opportunity, a new :py:class:`~transitiveDigraphs.WeakBachetRanking` class has been added to the :py:mod:`transitiveDigraphs` module. To illustrate its usefulness, let us reconsider the example outranking digraph *g* of :numref:`optimisingBachet`. 
 
@@ -3455,13 +3455,13 @@ The nine performance records are grouped into three performance equivalence clas
 
 A Monte Carlo experiment with the same 500 random Cost-Benefit performance tableaux, reporting the grades obtained by 20 decision actions on 13 criteria already used before, shows with *randomized=100* and *maxNbrOfRankings=10* settings a median weak ranking correlation of +0.960 (min. +0.770) on a common median determination part of 61.5% (min. 54%) of the given outranking digraphs. The valued median equivalence of the weak rankings with the given outranking digraphs is hence supported by a median criteria significance majority of 62% (min. 54%).
 
-The :py:class:`~transitiveDigraphs.WeakBachetRanking` class provides this way a valuable and interesting method for computing weak rankings from given bipolar-valued outranking digraphs. Such weak rankings make apparent the actual transitive part of outranking relations. And, the first and last equivalence classes of a topological sort of these weak rankings --their **initial and terminal kernels**-- give suitable action candidates for a *first choice*, respectively a *last choice* recommendation.
+The :py:class:`~transitiveDigraphs.WeakBachetRanking` class provides this way a valuable and effective method for computing weak rankings from given bipolar-valued outranking digraphs [24]_. Such *weak rankings* make apparent the actual transitive part of outranking relations. And the first and last levels of a topological sort of these weak rankings --their **initial and terminal kernels**-- give convincing candidates for a *first choice*, respectively a *last choice* recommendation.
 
 Computing such *kernels* in bipolar-valued digraphs is the subject of the next Section.
 
 .. note::
    
-   The weak *Bachet* ranking rule illustrates convincingly the benefit one may obtain when computing, not in a binary {0,1} bit world like today all bit-wise computing devices, but instead in a bipolar-valued {-1,0,1} world whith **sbit-wise Bachet computers**. The power of the epistemic disjunctive fusion operator, for instance, is indeed impressive. When two arguments prove the *Truthfullness* of a logical statement, their fusion will be **True**. When two arguments prove the **Falseness** of the staement, their fusion will be **False**, However, when they provide conjointly a proof of Falseness and and a proof of Thruthfullness, their fusion will be **indeterminate** (zero knowledge). It is worthwhile noticing again the essential role this indeterminate **zero** value will be given in such a *Bachet* computer. Instead of running these days intensely after chimeric and unreliable *qubits* computers, it would be a thousand times more fruitful, and less energy and money wasting, to defintely start designing **sbit** computers. Yet I am sure that there will be a future time where people will wonder how it was possible that XXth-century awkward bit computing devices could survive so long.
+   The weak *Bachet* ranking rule illustrates convincingly the benefit one may obtain when computing, not in a binary {0,1} bit world like today all bit-wise computing devices, but instead in a bipolar-valued {-1,0,1} world with **sbit-wise Bachet computers**. The power of the epistemic disjunctive fusion operator, for instance, is indeed impressive. When two arguments prove the *Truthfullness* of a logical statement, their fusion will be **True**. When two arguments prove the **Falseness** of the staement, their fusion will be **False**, However, when they provide conjointly a proof of Falseness and and a proof of Thruthfullness, their fusion will be **indeterminate** (zero knowledge). It is worthwhile noticing again the essential role this indeterminate **zero** value will be given in such a *Bachet* computer. Instead of investing these days frenetically into the designof  chimeric and unreliable *qubit* computers, it would be a thousand times more fruitful, and less energy and money wasting, to defintely start designing **sbit** computers. Yet I am sure that there will be a future time where people will wonder how it was possible that XXth-century logically awkward bit computing devices could survive so long.
 
 ..............................................
 
@@ -5312,6 +5312,7 @@ Appendix
 
 .. [23] To prove the *Condorcet consistency* property of the *Bachet* ranking rule, it is sufficient to notice that the contributions of a transitive triplet *'ai' > 'aj' > 'ak'* to the corresponding *Bachet* ranking scores will respect the actual ordering of the triplet with all positional permutations of [..., ai, ..., aj, ...,ak, ...] in a relation table.
 
+.. [24] The weak *Bachet* ranking digraph represents in fact the directed version of a **comparability** graph, .e. a *Berge* graph (see the tutorial  :ref:`about Berge graphs <Permutation-Tutorial-label>`). We have this way found an effective algorithm for computing an optimal *comparability* graph that is closest, in the ordinal *Kendall* correlation distance sense, to a given bipolar-valued outranking digraph. 
 
 .. raw:: latex
 
