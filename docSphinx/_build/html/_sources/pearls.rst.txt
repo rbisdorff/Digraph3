@@ -3431,7 +3431,7 @@ To explore this opportunity, a new :py:class:`~transitiveDigraphs.WeakBachetRank
      Epistemic determination    :  0.237
      Bipolar-valued equivalence : +0.194
 
-The weak *Bachet* ranking result obtained in this example (see Lines 7-10) is highly correlated with the given outranking digraph *g* (+0.818, see Line 13).  In :numref:`weakBachet` below, is shown its *Hasse* diagram. 
+The nine performance records are grouped into three performance equivalence classes. The resulting *weak ranking* is consistent with the optimal *Kemeny* ranking ['a2', 'a5', 'a9', 'a6', 'a8', 'a4', 'a3', 'a7', 'a1'] (see :numref:`optimalKemeny1` Line 4) and is therefore highly correlated with the common determinated part of the given outranking digraph *g* (+0.818, see Line 13) leading to a relational equivalence supported by a criteria significance majority of nearly 60%. In :numref:`weakBachet` below, is shown its *Hasse* diagram. 
 
 .. code-block:: pycon
 
@@ -3451,11 +3451,17 @@ The weak *Bachet* ranking result obtained in this example (see Lines 7-10) is hi
 
    Weak *Bachet* ranking result 
 
-The nine performance records are grouped into three performance equivalence classes. The resulting weak ranking is in fact consistent with the *Kemeny* ranking ['a2', 'a5', 'a9', 'a6', 'a8', 'a4', 'a3', 'a7', 'a1'] (see :numref:`optimalKemeny1` Line 4).
-
 A Monte Carlo experiment with the same 500 random Cost-Benefit performance tableaux, reporting the grades obtained by 20 decision actions on 13 criteria already used before, shows with *randomized=100* and *maxNbrOfRankings=10* settings a median weak ranking correlation of +0.960 (min. +0.770) on a common median determination part of 61.5% (min. 54%) of the given outranking digraphs. The valued median equivalence of the weak rankings with the given outranking digraphs is hence supported by a median criteria significance majority of 62% (min. 54%).
 
-The :py:class:`~transitiveDigraphs.WeakBachetRanking` class provides this way a valuable and effective method for computing weak rankings from given bipolar-valued outranking digraphs [24]_. Such *weak rankings* make apparent the actual transitive part of outranking relations. And the first and last levels of a topological sort of these weak rankings --their **initial and terminal kernels**-- give convincing candidates for a *first choice*, respectively a *last choice* recommendation.
+The :py:class:`~transitiveDigraphs.WeakBachetRanking` class provides this way a valuable and effective method for computing *weak rankings* from given bipolar-valued outranking digraphs. The weak *Bachet* ranking digraph represents in fact the directed version of a **comparability** graph, i.e. :ref:`a Berge or perfect graph <Permutation-Tutorial-label>` . We have this way found an algorithm for computing a *transitively orientable* graph, close in the :ref:`bipolar-valued relational equivalence <OrdinalCorrelation-Tutorial-label>` sense to the transitive part of a given bipolar-valued outranking digraph.
+
+.. code-block:: pycon
+
+   >>> cg = wb.digraph2Graph(ConjunctiveConversion=False)
+   >>> cg.isComparabilityGraph()
+    True
+
+Such *weak rankings* make apparent the actual transitive part of outranking relations. This finding opens the way to a new design of first or last choice recommendation algorithms avoiding the necessity to arbitrarily break up all potential chordless outranking circuits. The first and last levels of a topological sort of such weak rankings --their **initial and terminal kernels**-- give indeed convincing candidates for a *first choice*, respectively a *last choice* recommendation (see :numref:`weakBachet`).
 
 Computing such *kernels* in bipolar-valued digraphs is the subject of the next Section.
 
@@ -5311,8 +5317,6 @@ Appendix
 .. [22] To prove the *invariance* of the *Bachet* ranking under the *codual transform*, it is sufficient to notice that the contribution to the *Bachet* scores of any pair of actions, outranking each other and situated respectively in positions *p* and *q* in a relation relation table, amounts to  :math:`(3^p + 3^q) - (3^p + 3^q) = 0`. Same zero contribution :math:`(-3^p - 3^q) - (-3^p - 3^q) = 0` occurs for any pair positively *not outranking* each other.
 
 .. [23] To prove the *Condorcet consistency* property of the *Bachet* ranking rule, it is sufficient to notice that the contributions of a transitive triplet *'ai' > 'aj' > 'ak'* to the corresponding *Bachet* ranking scores will respect the actual ordering of the triplet with all positional permutations of [..., ai, ..., aj, ...,ak, ...] in a relation table.
-
-.. [24] The weak *Bachet* ranking digraph represents in fact the directed version of a **comparability** graph, i.e. :ref:`a Berge or perfect graph <Permutation-Tutorial-label>`. We have this way found an algorithm for computing a *transitively oriented* digraph that is close in the :ref:`bipolar-valued relational equivalence <OrdinalCorrelation-Tutorial-label>` sense to the transitive part of a given bipolar-valued outranking digraph. This finding opens the way to a new design of first or last choice recommendation algorithms avoiding the necessity to arbitrarily break up all potential chordless outranking circuits. An opportunity yet to be explored.
 
 .. raw:: latex
 
