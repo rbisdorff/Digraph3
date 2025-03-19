@@ -8,6 +8,15 @@ from outrankingDigraphs import *
 from transitiveDigraphs import *
 from time import time
 
+def testWeakBachetRanking():
+    print('=== >>> testing the weak ranking contruction')
+    from randomPerfTabs import RandomCBPerformanceTableau
+    pt = RandomCBPerformanceTableau(numberOfActions=20,numberOfCriteria=13,seed=100)
+    g = BipolarOutrankingDigraph(pt)
+    wbg = WeakBachetRanking(g,seed=100,Comments=True)
+    wbg.showWeakRanking(WithCoverCredibility=True)
+    wbg.exportGraphViz('weakBachet')
+    
 def testRankingByChoosingWithKernels():
     print('=== >>> testing best and last fusion (default)')
     g = RandomBipolarOutrankingDigraph(Normalized=True,numberOfActions=10)

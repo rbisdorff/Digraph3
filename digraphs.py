@@ -574,7 +574,7 @@ class Digraph(object):
         """
         Mimetic Wrapper of the topologicalSort() method.
         """
-        self.topologicalSort(Debug=Debug)
+        return self.topologicalSort(Debug=Debug)
 
     #---------------
             

@@ -177,132 +177,132 @@ class TransitiveDigraph(Digraph):
                                graphType=graphType,
                                graphSize=graphSize)
 
-    def exportTopologicalGraphViz(self,fileName=None,
-                                  relation=None,direction='best',
-                                  Comments=True,graphType='png',
-                                  graphSize='7,7',
-                                  fontSize=10,Debug=True):
-        """
-        export GraphViz dot file for Hasse diagram drawing filtering.
-        """
-        import os
-        from copy import copy as deepcopy
+#     def exportTopologicalGraphViz(self,fileName=None,
+#                                   relation=None,direction='best',
+#                                   Comments=True,graphType='png',
+#                                   graphSize='7,7',
+#                                   fontSize=10,Debug=True):
+#         """
+#         export GraphViz dot file for Hasse diagram drawing filtering.
+#         """
+#         import os
+#         from copy import copy as deepcopy
             
-        def _safeName(t0):
-            t = t0.split(sep="-")
-            t1 = t[0]
-            n = len(t)
-            if n > 1:
-                for i in range(1,n):
-                    t1 += '%s%s' % ('_',t[i])
-            return t1
-        # working on a deepcopy of self
-        digraph = deepcopy(self)
-        digraph.computeTopologicalRanking()
-        if not digraph.Acyclic:
-            print('Error: not a transitive digraph !!!')
-            return
-        topologicalRanking = digraph.computeTopologicalRanking()
-        if Debug:
-            print(topologicalRanking)
-##        if direction == 'best':
-##            try:
-##                rankingByChoosing = digraph.rankingByBestChoosing['result']
-##            except:
-##                digraph.computeRankingByBestChoosing()
-##                rankingByChoosing = digraph.rankingByBestChoosing['result']
-##        else:
-##            try:
-##                rankingByChoosing = digraph.rankingByLastChoosing['result']
-##            except:
-##                digraph.computeRankingByLastChoosing()
-##                rankingByChoosing = digraph.rankingByLastChoosing['result']
-##        if Debug:
-##            print(rankingByChoosing)
+#         def _safeName(t0):
+#             t = t0.split(sep="-")
+#             t1 = t[0]
+#             n = len(t)
+#             if n > 1:
+#                 for i in range(1,n):
+#                     t1 += '%s%s' % ('_',t[i])
+#             return t1
+#         # working on a deepcopy of self
+#         digraph = deepcopy(self)
+#         digraph.computeTopologicalRanking()
+#         if not digraph.Acyclic:
+#             print('Error: not a transitive digraph !!!')
+#             return
+#         topologicalRanking = digraph.computeTopologicalRanking()
+#         if Debug:
+#             print(topologicalRanking)
+# ##        if direction == 'best':
+# ##            try:
+# ##                rankingByChoosing = digraph.rankingByBestChoosing['result']
+# ##            except:
+# ##                digraph.computeRankingByBestChoosing()
+# ##                rankingByChoosing = digraph.rankingByBestChoosing['result']
+# ##        else:
+# ##            try:
+# ##                rankingByChoosing = digraph.rankingByLastChoosing['result']
+# ##            except:
+# ##                digraph.computeRankingByLastChoosing()
+# ##                rankingByChoosing = digraph.rankingByLastChoosing['result']
+# ##        if Debug:
+# ##            print(rankingByChoosing)
         
-        if Comments:
-            print('*---- exporting a dot file for GraphViz tools ---------*')
-        actionKeys = [x for x in digraph.actions]
-        n = len(actionKeys)
-        if relation is None:
-            relation = deepcopy(digraph.relation)
-        Med = digraph.valuationdomain['med']
-        i = 0
-        if fileName is None:
-            name = digraph.name
-        else:
-            name = fileName
-        dotName = name+'.dot'
-        if Comments:
-            print('Exporting to '+dotName)
-##        if bestChoice != set():
-##            rankBestString = '{rank=max; '
-##        if worstChoice != set():
-##            rankWorstString = '{rank=min; '
-        fo = open(dotName,'w')
-        fo.write('digraph G {\n')
-        fo.write('graph [ bgcolor = cornsilk, ordering = out, fontname = "Helvetica-Oblique",\n fontsize = 12,\n label = "')
-        fo.write('\\nDigraph3 (graphviz)\\n R. Bisdorff, 2020", size="')
-        fo.write(graphSize),fo.write('",fontsize=%d];\n' % fontSize)
-        # nodes
-        for x in actionKeys:  
-            try:
-                nodeName = digraph.actions[x]['shortName']
-            except:
-                nodeName = str(x)
-            node = '%s [shape = "circle", label = "%s", fontsize=%d];\n'\
-                   % (str(_safeName(x)),_safeName(nodeName),fontSize)
-            fo.write(node)
-        # same ranks for Hasses equivalence classes
-        k = len(topologicalRanking)
-        i = 1
-        for ich in topologicalRanking:
-            sameRank = '{ rank = %d ; ' % i
-            for x in topologicalRanking[ich]:
-                sameRank += str(_safeName(x))+'; '
-            sameRank += '}\n'
-            print(i,sameRank)
-            fo.write(sameRank)
-            i += 1
-##        k = len(rankingByChoosing)
-##        for i in range(k):
-##            sameRank = '{ rank = same; '
-##            ich = rankingByChoosing[i][1]
-##            for x in ich:
-##                sameRank += str(_safeName(x))+'; '
-##            sameRank += '}\n'
-##            print(i,sameRank)
-##            fo.write(sameRank)
+#         if Comments:
+#             print('*---- exporting a dot file for GraphViz tools ---------*')
+#         actionKeys = [x for x in digraph.actions]
+#         n = len(actionKeys)
+#         if relation is None:
+#             relation = deepcopy(digraph.relation)
+#         Med = digraph.valuationdomain['med']
+#         i = 0
+#         if fileName is None:
+#             name = digraph.name
+#         else:
+#             name = fileName
+#         dotName = name+'.dot'
+#         if Comments:
+#             print('Exporting to '+dotName)
+# ##        if bestChoice != set():
+# ##            rankBestString = '{rank=max; '
+# ##        if worstChoice != set():
+# ##            rankWorstString = '{rank=min; '
+#         fo = open(dotName,'w')
+#         fo.write('digraph G {\n')
+#         fo.write('graph [ bgcolor = cornsilk, ordering = out, fontname = "Helvetica-Oblique",\n fontsize = 12,\n label = "')
+#         fo.write('\\nDigraph3 (graphviz)\\n R. Bisdorff, 2020", size="')
+#         fo.write(graphSize),fo.write('",fontsize=%d];\n' % fontSize)
+#         # nodes
+#         for x in actionKeys:  
+#             try:
+#                 nodeName = digraph.actions[x]['shortName']
+#             except:
+#                 nodeName = str(x)
+#             node = '%s [shape = "circle", label = "%s", fontsize=%d];\n'\
+#                    % (str(_safeName(x)),_safeName(nodeName),fontSize)
+#             fo.write(node)
+#         # same ranks for Hasses equivalence classes
+#         k = len(topologicalRanking)
+#         i = 1
+#         for ich in topologicalRanking:
+#             sameRank = 'subGraph { rank = %d ; ' % i
+#             for x in topologicalRanking[ich]:
+#                 sameRank += str(_safeName(x))+'; '
+#             sameRank += '}\n'
+#             print(i,sameRank)
+#             fo.write(sameRank)
+#             i += 1
+# ##        k = len(rankingByChoosing)
+# ##        for i in range(k):
+# ##            sameRank = '{ rank = same; '
+# ##            ich = rankingByChoosing[i][1]
+# ##            for x in ich:
+# ##                sameRank += str(_safeName(x))+'; '
+# ##            sameRank += '}\n'
+# ##            print(i,sameRank)
+# ##            fo.write(sameRank)
 
-        # save original relation
-        #originalRelation = deepcopy(relation)
-        #digraph.closeTransitive(Reverse=False)
-        relation = digraph.closeTransitive(Reverse=True,InSite=False)
-        k = len(topologicalRanking)
-        for i in range(1,k+1):
-            ich = topologicalRanking[i]
-            for x in ich:
-                for j in range(i+1,k+1):
-                    jch = topologicalRanking[j]
-                    for y in jch:
-                        if relation[x][y] > digraph.valuationdomain['med']:
-                            arcColor = 'black'
-                            edge = '%s-> %s [style="setlinewidth(%d)",color=%s] ;\n' %\
-                                (_safeName(x),_safeName(y),1,arcColor)
-                            fo.write(edge)                                                  
-        fo.write('}\n \n')
-        fo.close()
+#         # save original relation
+#         #originalRelation = deepcopy(relation)
+#         #digraph.closeTransitive(Reverse=False)
+#         relation = digraph.closeTransitive(Reverse=True,InSite=False)
+#         k = len(topologicalRanking)
+#         for i in range(1,k+1):
+#             ich = topologicalRanking[i]
+#             for x in ich:
+#                 for j in range(i+1,k+1):
+#                     jch = topologicalRanking[j]
+#                     for y in jch:
+#                         if relation[x][y] > digraph.valuationdomain['med']:
+#                             arcColor = 'black'
+#                             edge = '%s-> %s [style="setlinewidth(%d)",color=%s] ;\n' %\
+#                                 (_safeName(x),_safeName(y),1,arcColor)
+#                             fo.write(edge)                                                  
+#         fo.write('}\n \n')
+#         fo.close()
         
-        commandString = 'dot -Grankdir=TB -T'+graphType+' ' + \
-                           dotName+' -o '+name+'.'+graphType
-            #commandString = 'dot -T'+graphType+' ' +dotName+' -o '+name+'.'+graphType
-        if Comments:
-            print(commandString)
-        try:
-            os.system(commandString)
-        except:
-            if Comments:
-                print('graphViz tools not avalaible! Please check installation.')
+#         commandString = 'dot -Grankdir=TB -T'+graphType+' ' + \
+#                            dotName+' -o '+name+'.'+graphType
+#             #commandString = 'dot -T'+graphType+' ' +dotName+' -o '+name+'.'+graphType
+#         if Comments:
+#             print(commandString)
+#         try:
+#             os.system(commandString)
+#         except:
+#             if Comments:
+#                 print('graphViz tools not avalaible! Please check installation.')
 
     def exportGraphViz(self,fileName=None,direction='best',
                        WithBestPathDecoration=False,

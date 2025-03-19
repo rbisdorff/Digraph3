@@ -292,135 +292,132 @@
                                <span class="n">graphSize</span><span class="o">=</span><span class="n">graphSize</span><span class="p">)</span></div>
 
 
-<div class="viewcode-block" id="TransitiveDigraph.exportTopologicalGraphViz">
-<a class="viewcode-back" href="../techDoc.html#transitiveDigraphs.TransitiveDigraph.exportTopologicalGraphViz">[docs]</a>
-    <span class="k">def</span> <span class="nf">exportTopologicalGraphViz</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">fileName</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
-                                  <span class="n">relation</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span><span class="n">direction</span><span class="o">=</span><span class="s1">&#39;best&#39;</span><span class="p">,</span>
-                                  <span class="n">Comments</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span><span class="n">graphType</span><span class="o">=</span><span class="s1">&#39;png&#39;</span><span class="p">,</span>
-                                  <span class="n">graphSize</span><span class="o">=</span><span class="s1">&#39;7,7&#39;</span><span class="p">,</span>
-                                  <span class="n">fontSize</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span><span class="n">Debug</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        export GraphViz dot file for Hasse diagram drawing filtering.</span>
-<span class="sd">        &quot;&quot;&quot;</span>
-        <span class="kn">import</span> <span class="nn">os</span>
-        <span class="kn">from</span> <span class="nn">copy</span> <span class="kn">import</span> <span class="n">copy</span> <span class="k">as</span> <span class="n">deepcopy</span>
+<span class="c1">#     def exportTopologicalGraphViz(self,fileName=None,</span>
+<span class="c1">#                                   relation=None,direction=&#39;best&#39;,</span>
+<span class="c1">#                                   Comments=True,graphType=&#39;png&#39;,</span>
+<span class="c1">#                                   graphSize=&#39;7,7&#39;,</span>
+<span class="c1">#                                   fontSize=10,Debug=True):</span>
+<span class="c1">#         &quot;&quot;&quot;</span>
+<span class="c1">#         export GraphViz dot file for Hasse diagram drawing filtering.</span>
+<span class="c1">#         &quot;&quot;&quot;</span>
+<span class="c1">#         import os</span>
+<span class="c1">#         from copy import copy as deepcopy</span>
             
-        <span class="k">def</span> <span class="nf">_safeName</span><span class="p">(</span><span class="n">t0</span><span class="p">):</span>
-            <span class="n">t</span> <span class="o">=</span> <span class="n">t0</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="n">sep</span><span class="o">=</span><span class="s2">&quot;-&quot;</span><span class="p">)</span>
-            <span class="n">t1</span> <span class="o">=</span> <span class="n">t</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
-            <span class="n">n</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">t</span><span class="p">)</span>
-            <span class="k">if</span> <span class="n">n</span> <span class="o">&gt;</span> <span class="mi">1</span><span class="p">:</span>
-                <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="n">n</span><span class="p">):</span>
-                    <span class="n">t1</span> <span class="o">+=</span> <span class="s1">&#39;</span><span class="si">%s%s</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="s1">&#39;_&#39;</span><span class="p">,</span><span class="n">t</span><span class="p">[</span><span class="n">i</span><span class="p">])</span>
-            <span class="k">return</span> <span class="n">t1</span>
-        <span class="c1"># working on a deepcopy of self</span>
-        <span class="n">digraph</span> <span class="o">=</span> <span class="n">deepcopy</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
-        <span class="n">digraph</span><span class="o">.</span><span class="n">computeTopologicalRanking</span><span class="p">()</span>
-        <span class="k">if</span> <span class="ow">not</span> <span class="n">digraph</span><span class="o">.</span><span class="n">Acyclic</span><span class="p">:</span>
-            <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Error: not a transitive digraph !!!&#39;</span><span class="p">)</span>
-            <span class="k">return</span>
-        <span class="n">topologicalRanking</span> <span class="o">=</span> <span class="n">digraph</span><span class="o">.</span><span class="n">computeTopologicalRanking</span><span class="p">()</span>
-        <span class="k">if</span> <span class="n">Debug</span><span class="p">:</span>
-            <span class="nb">print</span><span class="p">(</span><span class="n">topologicalRanking</span><span class="p">)</span>
-<span class="c1">##        if direction == &#39;best&#39;:</span>
-<span class="c1">##            try:</span>
-<span class="c1">##                rankingByChoosing = digraph.rankingByBestChoosing[&#39;result&#39;]</span>
-<span class="c1">##            except:</span>
-<span class="c1">##                digraph.computeRankingByBestChoosing()</span>
-<span class="c1">##                rankingByChoosing = digraph.rankingByBestChoosing[&#39;result&#39;]</span>
-<span class="c1">##        else:</span>
-<span class="c1">##            try:</span>
-<span class="c1">##                rankingByChoosing = digraph.rankingByLastChoosing[&#39;result&#39;]</span>
-<span class="c1">##            except:</span>
-<span class="c1">##                digraph.computeRankingByLastChoosing()</span>
-<span class="c1">##                rankingByChoosing = digraph.rankingByLastChoosing[&#39;result&#39;]</span>
-<span class="c1">##        if Debug:</span>
-<span class="c1">##            print(rankingByChoosing)</span>
+<span class="c1">#         def _safeName(t0):</span>
+<span class="c1">#             t = t0.split(sep=&quot;-&quot;)</span>
+<span class="c1">#             t1 = t[0]</span>
+<span class="c1">#             n = len(t)</span>
+<span class="c1">#             if n &gt; 1:</span>
+<span class="c1">#                 for i in range(1,n):</span>
+<span class="c1">#                     t1 += &#39;%s%s&#39; % (&#39;_&#39;,t[i])</span>
+<span class="c1">#             return t1</span>
+<span class="c1">#         # working on a deepcopy of self</span>
+<span class="c1">#         digraph = deepcopy(self)</span>
+<span class="c1">#         digraph.computeTopologicalRanking()</span>
+<span class="c1">#         if not digraph.Acyclic:</span>
+<span class="c1">#             print(&#39;Error: not a transitive digraph !!!&#39;)</span>
+<span class="c1">#             return</span>
+<span class="c1">#         topologicalRanking = digraph.computeTopologicalRanking()</span>
+<span class="c1">#         if Debug:</span>
+<span class="c1">#             print(topologicalRanking)</span>
+<span class="c1"># ##        if direction == &#39;best&#39;:</span>
+<span class="c1"># ##            try:</span>
+<span class="c1"># ##                rankingByChoosing = digraph.rankingByBestChoosing[&#39;result&#39;]</span>
+<span class="c1"># ##            except:</span>
+<span class="c1"># ##                digraph.computeRankingByBestChoosing()</span>
+<span class="c1"># ##                rankingByChoosing = digraph.rankingByBestChoosing[&#39;result&#39;]</span>
+<span class="c1"># ##        else:</span>
+<span class="c1"># ##            try:</span>
+<span class="c1"># ##                rankingByChoosing = digraph.rankingByLastChoosing[&#39;result&#39;]</span>
+<span class="c1"># ##            except:</span>
+<span class="c1"># ##                digraph.computeRankingByLastChoosing()</span>
+<span class="c1"># ##                rankingByChoosing = digraph.rankingByLastChoosing[&#39;result&#39;]</span>
+<span class="c1"># ##        if Debug:</span>
+<span class="c1"># ##            print(rankingByChoosing)</span>
         
-        <span class="k">if</span> <span class="n">Comments</span><span class="p">:</span>
-            <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;*---- exporting a dot file for GraphViz tools ---------*&#39;</span><span class="p">)</span>
-        <span class="n">actionKeys</span> <span class="o">=</span> <span class="p">[</span><span class="n">x</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">digraph</span><span class="o">.</span><span class="n">actions</span><span class="p">]</span>
-        <span class="n">n</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">actionKeys</span><span class="p">)</span>
-        <span class="k">if</span> <span class="n">relation</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
-            <span class="n">relation</span> <span class="o">=</span> <span class="n">deepcopy</span><span class="p">(</span><span class="n">digraph</span><span class="o">.</span><span class="n">relation</span><span class="p">)</span>
-        <span class="n">Med</span> <span class="o">=</span> <span class="n">digraph</span><span class="o">.</span><span class="n">valuationdomain</span><span class="p">[</span><span class="s1">&#39;med&#39;</span><span class="p">]</span>
-        <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span>
-        <span class="k">if</span> <span class="n">fileName</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
-            <span class="n">name</span> <span class="o">=</span> <span class="n">digraph</span><span class="o">.</span><span class="n">name</span>
-        <span class="k">else</span><span class="p">:</span>
-            <span class="n">name</span> <span class="o">=</span> <span class="n">fileName</span>
-        <span class="n">dotName</span> <span class="o">=</span> <span class="n">name</span><span class="o">+</span><span class="s1">&#39;.dot&#39;</span>
-        <span class="k">if</span> <span class="n">Comments</span><span class="p">:</span>
-            <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Exporting to &#39;</span><span class="o">+</span><span class="n">dotName</span><span class="p">)</span>
-<span class="c1">##        if bestChoice != set():</span>
-<span class="c1">##            rankBestString = &#39;{rank=max; &#39;</span>
-<span class="c1">##        if worstChoice != set():</span>
-<span class="c1">##            rankWorstString = &#39;{rank=min; &#39;</span>
-        <span class="n">fo</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="n">dotName</span><span class="p">,</span><span class="s1">&#39;w&#39;</span><span class="p">)</span>
-        <span class="n">fo</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s1">&#39;digraph G {</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)</span>
-        <span class="n">fo</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s1">&#39;graph [ bgcolor = cornsilk, ordering = out, fontname = &quot;Helvetica-Oblique&quot;,</span><span class="se">\n</span><span class="s1"> fontsize = 12,</span><span class="se">\n</span><span class="s1"> label = &quot;&#39;</span><span class="p">)</span>
-        <span class="n">fo</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\\</span><span class="s1">nDigraph3 (graphviz)</span><span class="se">\\</span><span class="s1">n R. Bisdorff, 2020&quot;, size=&quot;&#39;</span><span class="p">)</span>
-        <span class="n">fo</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">graphSize</span><span class="p">),</span><span class="n">fo</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s1">&#39;&quot;,fontsize=</span><span class="si">%d</span><span class="s1">];</span><span class="se">\n</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="n">fontSize</span><span class="p">)</span>
-        <span class="c1"># nodes</span>
-        <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">actionKeys</span><span class="p">:</span>  
-            <span class="k">try</span><span class="p">:</span>
-                <span class="n">nodeName</span> <span class="o">=</span> <span class="n">digraph</span><span class="o">.</span><span class="n">actions</span><span class="p">[</span><span class="n">x</span><span class="p">][</span><span class="s1">&#39;shortName&#39;</span><span class="p">]</span>
-            <span class="k">except</span><span class="p">:</span>
-                <span class="n">nodeName</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
-            <span class="n">node</span> <span class="o">=</span> <span class="s1">&#39;</span><span class="si">%s</span><span class="s1"> [shape = &quot;circle&quot;, label = &quot;</span><span class="si">%s</span><span class="s1">&quot;, fontsize=</span><span class="si">%d</span><span class="s1">];</span><span class="se">\n</span><span class="s1">&#39;</span>\
-                   <span class="o">%</span> <span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">_safeName</span><span class="p">(</span><span class="n">x</span><span class="p">)),</span><span class="n">_safeName</span><span class="p">(</span><span class="n">nodeName</span><span class="p">),</span><span class="n">fontSize</span><span class="p">)</span>
-            <span class="n">fo</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">node</span><span class="p">)</span>
-        <span class="c1"># same ranks for Hasses equivalence classes</span>
-        <span class="n">k</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">topologicalRanking</span><span class="p">)</span>
-        <span class="n">i</span> <span class="o">=</span> <span class="mi">1</span>
-        <span class="k">for</span> <span class="n">ich</span> <span class="ow">in</span> <span class="n">topologicalRanking</span><span class="p">:</span>
-            <span class="n">sameRank</span> <span class="o">=</span> <span class="s1">&#39;{ rank = </span><span class="si">%d</span><span class="s1"> ; &#39;</span> <span class="o">%</span> <span class="n">i</span>
-            <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">topologicalRanking</span><span class="p">[</span><span class="n">ich</span><span class="p">]:</span>
-                <span class="n">sameRank</span> <span class="o">+=</span> <span class="nb">str</span><span class="p">(</span><span class="n">_safeName</span><span class="p">(</span><span class="n">x</span><span class="p">))</span><span class="o">+</span><span class="s1">&#39;; &#39;</span>
-            <span class="n">sameRank</span> <span class="o">+=</span> <span class="s1">&#39;}</span><span class="se">\n</span><span class="s1">&#39;</span>
-            <span class="nb">print</span><span class="p">(</span><span class="n">i</span><span class="p">,</span><span class="n">sameRank</span><span class="p">)</span>
-            <span class="n">fo</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">sameRank</span><span class="p">)</span>
-            <span class="n">i</span> <span class="o">+=</span> <span class="mi">1</span>
-<span class="c1">##        k = len(rankingByChoosing)</span>
-<span class="c1">##        for i in range(k):</span>
-<span class="c1">##            sameRank = &#39;{ rank = same; &#39;</span>
-<span class="c1">##            ich = rankingByChoosing[i][1]</span>
-<span class="c1">##            for x in ich:</span>
-<span class="c1">##                sameRank += str(_safeName(x))+&#39;; &#39;</span>
-<span class="c1">##            sameRank += &#39;}\n&#39;</span>
-<span class="c1">##            print(i,sameRank)</span>
-<span class="c1">##            fo.write(sameRank)</span>
+<span class="c1">#         if Comments:</span>
+<span class="c1">#             print(&#39;*---- exporting a dot file for GraphViz tools ---------*&#39;)</span>
+<span class="c1">#         actionKeys = [x for x in digraph.actions]</span>
+<span class="c1">#         n = len(actionKeys)</span>
+<span class="c1">#         if relation is None:</span>
+<span class="c1">#             relation = deepcopy(digraph.relation)</span>
+<span class="c1">#         Med = digraph.valuationdomain[&#39;med&#39;]</span>
+<span class="c1">#         i = 0</span>
+<span class="c1">#         if fileName is None:</span>
+<span class="c1">#             name = digraph.name</span>
+<span class="c1">#         else:</span>
+<span class="c1">#             name = fileName</span>
+<span class="c1">#         dotName = name+&#39;.dot&#39;</span>
+<span class="c1">#         if Comments:</span>
+<span class="c1">#             print(&#39;Exporting to &#39;+dotName)</span>
+<span class="c1"># ##        if bestChoice != set():</span>
+<span class="c1"># ##            rankBestString = &#39;{rank=max; &#39;</span>
+<span class="c1"># ##        if worstChoice != set():</span>
+<span class="c1"># ##            rankWorstString = &#39;{rank=min; &#39;</span>
+<span class="c1">#         fo = open(dotName,&#39;w&#39;)</span>
+<span class="c1">#         fo.write(&#39;digraph G {\n&#39;)</span>
+<span class="c1">#         fo.write(&#39;graph [ bgcolor = cornsilk, ordering = out, fontname = &quot;Helvetica-Oblique&quot;,\n fontsize = 12,\n label = &quot;&#39;)</span>
+<span class="c1">#         fo.write(&#39;\\nDigraph3 (graphviz)\\n R. Bisdorff, 2020&quot;, size=&quot;&#39;)</span>
+<span class="c1">#         fo.write(graphSize),fo.write(&#39;&quot;,fontsize=%d];\n&#39; % fontSize)</span>
+<span class="c1">#         # nodes</span>
+<span class="c1">#         for x in actionKeys:  </span>
+<span class="c1">#             try:</span>
+<span class="c1">#                 nodeName = digraph.actions[x][&#39;shortName&#39;]</span>
+<span class="c1">#             except:</span>
+<span class="c1">#                 nodeName = str(x)</span>
+<span class="c1">#             node = &#39;%s [shape = &quot;circle&quot;, label = &quot;%s&quot;, fontsize=%d];\n&#39;\</span>
+<span class="c1">#                    % (str(_safeName(x)),_safeName(nodeName),fontSize)</span>
+<span class="c1">#             fo.write(node)</span>
+<span class="c1">#         # same ranks for Hasses equivalence classes</span>
+<span class="c1">#         k = len(topologicalRanking)</span>
+<span class="c1">#         i = 1</span>
+<span class="c1">#         for ich in topologicalRanking:</span>
+<span class="c1">#             sameRank = &#39;subGraph { rank = %d ; &#39; % i</span>
+<span class="c1">#             for x in topologicalRanking[ich]:</span>
+<span class="c1">#                 sameRank += str(_safeName(x))+&#39;; &#39;</span>
+<span class="c1">#             sameRank += &#39;}\n&#39;</span>
+<span class="c1">#             print(i,sameRank)</span>
+<span class="c1">#             fo.write(sameRank)</span>
+<span class="c1">#             i += 1</span>
+<span class="c1"># ##        k = len(rankingByChoosing)</span>
+<span class="c1"># ##        for i in range(k):</span>
+<span class="c1"># ##            sameRank = &#39;{ rank = same; &#39;</span>
+<span class="c1"># ##            ich = rankingByChoosing[i][1]</span>
+<span class="c1"># ##            for x in ich:</span>
+<span class="c1"># ##                sameRank += str(_safeName(x))+&#39;; &#39;</span>
+<span class="c1"># ##            sameRank += &#39;}\n&#39;</span>
+<span class="c1"># ##            print(i,sameRank)</span>
+<span class="c1"># ##            fo.write(sameRank)</span>
 
-        <span class="c1"># save original relation</span>
-        <span class="c1">#originalRelation = deepcopy(relation)</span>
-        <span class="c1">#digraph.closeTransitive(Reverse=False)</span>
-        <span class="n">relation</span> <span class="o">=</span> <span class="n">digraph</span><span class="o">.</span><span class="n">closeTransitive</span><span class="p">(</span><span class="n">Reverse</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span><span class="n">InSite</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
-        <span class="n">k</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">topologicalRanking</span><span class="p">)</span>
-        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="n">k</span><span class="o">+</span><span class="mi">1</span><span class="p">):</span>
-            <span class="n">ich</span> <span class="o">=</span> <span class="n">topologicalRanking</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
-            <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">ich</span><span class="p">:</span>
-                <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">,</span><span class="n">k</span><span class="o">+</span><span class="mi">1</span><span class="p">):</span>
-                    <span class="n">jch</span> <span class="o">=</span> <span class="n">topologicalRanking</span><span class="p">[</span><span class="n">j</span><span class="p">]</span>
-                    <span class="k">for</span> <span class="n">y</span> <span class="ow">in</span> <span class="n">jch</span><span class="p">:</span>
-                        <span class="k">if</span> <span class="n">relation</span><span class="p">[</span><span class="n">x</span><span class="p">][</span><span class="n">y</span><span class="p">]</span> <span class="o">&gt;</span> <span class="n">digraph</span><span class="o">.</span><span class="n">valuationdomain</span><span class="p">[</span><span class="s1">&#39;med&#39;</span><span class="p">]:</span>
-                            <span class="n">arcColor</span> <span class="o">=</span> <span class="s1">&#39;black&#39;</span>
-                            <span class="n">edge</span> <span class="o">=</span> <span class="s1">&#39;</span><span class="si">%s</span><span class="s1">-&gt; </span><span class="si">%s</span><span class="s1"> [style=&quot;setlinewidth(</span><span class="si">%d</span><span class="s1">)&quot;,color=</span><span class="si">%s</span><span class="s1">] ;</span><span class="se">\n</span><span class="s1">&#39;</span> <span class="o">%</span>\
-                                <span class="p">(</span><span class="n">_safeName</span><span class="p">(</span><span class="n">x</span><span class="p">),</span><span class="n">_safeName</span><span class="p">(</span><span class="n">y</span><span class="p">),</span><span class="mi">1</span><span class="p">,</span><span class="n">arcColor</span><span class="p">)</span>
-                            <span class="n">fo</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">edge</span><span class="p">)</span>                                                  
-        <span class="n">fo</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s1">&#39;}</span><span class="se">\n</span><span class="s1"> </span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)</span>
-        <span class="n">fo</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+<span class="c1">#         # save original relation</span>
+<span class="c1">#         #originalRelation = deepcopy(relation)</span>
+<span class="c1">#         #digraph.closeTransitive(Reverse=False)</span>
+<span class="c1">#         relation = digraph.closeTransitive(Reverse=True,InSite=False)</span>
+<span class="c1">#         k = len(topologicalRanking)</span>
+<span class="c1">#         for i in range(1,k+1):</span>
+<span class="c1">#             ich = topologicalRanking[i]</span>
+<span class="c1">#             for x in ich:</span>
+<span class="c1">#                 for j in range(i+1,k+1):</span>
+<span class="c1">#                     jch = topologicalRanking[j]</span>
+<span class="c1">#                     for y in jch:</span>
+<span class="c1">#                         if relation[x][y] &gt; digraph.valuationdomain[&#39;med&#39;]:</span>
+<span class="c1">#                             arcColor = &#39;black&#39;</span>
+<span class="c1">#                             edge = &#39;%s-&gt; %s [style=&quot;setlinewidth(%d)&quot;,color=%s] ;\n&#39; %\</span>
+<span class="c1">#                                 (_safeName(x),_safeName(y),1,arcColor)</span>
+<span class="c1">#                             fo.write(edge)                                                  </span>
+<span class="c1">#         fo.write(&#39;}\n \n&#39;)</span>
+<span class="c1">#         fo.close()</span>
         
-        <span class="n">commandString</span> <span class="o">=</span> <span class="s1">&#39;dot -Grankdir=TB -T&#39;</span><span class="o">+</span><span class="n">graphType</span><span class="o">+</span><span class="s1">&#39; &#39;</span> <span class="o">+</span> \
-                           <span class="n">dotName</span><span class="o">+</span><span class="s1">&#39; -o &#39;</span><span class="o">+</span><span class="n">name</span><span class="o">+</span><span class="s1">&#39;.&#39;</span><span class="o">+</span><span class="n">graphType</span>
-            <span class="c1">#commandString = &#39;dot -T&#39;+graphType+&#39; &#39; +dotName+&#39; -o &#39;+name+&#39;.&#39;+graphType</span>
-        <span class="k">if</span> <span class="n">Comments</span><span class="p">:</span>
-            <span class="nb">print</span><span class="p">(</span><span class="n">commandString</span><span class="p">)</span>
-        <span class="k">try</span><span class="p">:</span>
-            <span class="n">os</span><span class="o">.</span><span class="n">system</span><span class="p">(</span><span class="n">commandString</span><span class="p">)</span>
-        <span class="k">except</span><span class="p">:</span>
-            <span class="k">if</span> <span class="n">Comments</span><span class="p">:</span>
-                <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;graphViz tools not avalaible! Please check installation.&#39;</span><span class="p">)</span></div>
-
+<span class="c1">#         commandString = &#39;dot -Grankdir=TB -T&#39;+graphType+&#39; &#39; + \</span>
+<span class="c1">#                            dotName+&#39; -o &#39;+name+&#39;.&#39;+graphType</span>
+<span class="c1">#             #commandString = &#39;dot -T&#39;+graphType+&#39; &#39; +dotName+&#39; -o &#39;+name+&#39;.&#39;+graphType</span>
+<span class="c1">#         if Comments:</span>
+<span class="c1">#             print(commandString)</span>
+<span class="c1">#         try:</span>
+<span class="c1">#             os.system(commandString)</span>
+<span class="c1">#         except:</span>
+<span class="c1">#             if Comments:</span>
+<span class="c1">#                 print(&#39;graphViz tools not avalaible! Please check installation.&#39;)</span>
 
 <div class="viewcode-block" id="TransitiveDigraph.exportGraphViz">
 <a class="viewcode-back" href="../techDoc.html#transitiveDigraphs.TransitiveDigraph.exportGraphViz">[docs]</a>
@@ -2195,7 +2192,7 @@
 
   <div role="contentinfo">
     <p>&#169; Copyright 2012-2025, Raymond Bisdorff.
-      <span class="lastupdated">Last updated on Mar 17, 2025.
+      <span class="lastupdated">Last updated on Mar 18, 2025.
       </span></p>
   </div>
 

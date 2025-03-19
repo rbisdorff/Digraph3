@@ -1,3 +1,5 @@
+#!/Usr/bin/env python3
+#########################
 """
 Python3 implementation of a solver for **dynamic programming** problems.
 
