@@ -3002,9 +3002,15 @@ Ranking-by-scoring with bipolar-valued base 3 encoded numbers
 Bipolar-valued base 3 encoded Bachet numbers
 ............................................
 
+.. epigraph::
+   "*Estant proposee telle quantité qu'on voudra pesant un nombre de livres despuis 1. iusques à 40. inclusivement (sans toutefois admettre les fractions ) on demande combien de pois pour le moins il faudrait employer à cet effect.* "
+
+   -- Cl. G. Bachet (1622)
+
+
 Bipolar-valued {-1,0,1} base 3 encoded integers are due to *Claude Gaspard Bachet de Méziriac* (1581-1638) [20]_. The idea is to represent the value of an integer *n* in a base 3 positional numerotation where in each position may appear a **signed bit** e.i. one of the three symbols **{-1,0,1}**, called hereafter **sbits** for short.
 
-*Bachet*'s positional *sbits* numerotation is simulating a weight balance scale where the number *n* and the potential negative powers of 3 are put on the right tray and the potential positive powers of 3 are put on the left tray. The equation for *n = 5* gives for instance :math:`3^2 = (n + 3^1 + 3^0)`. And the *sbits* encoding corresponds hence to the string '1-1-1'. As, this representation is isomorphic to a base 3 binary encoding, every positive or negative integer may this way be represented with a unique *sbits* string. With three powers of 3, namely :math:`3^2, 3^1, 3^0`, one may for instance represent any value in the integer range -13 to +13. *Bachet* showed that this bipolar weighing system relies on the smallest possible number of weights -base powers- needed in order to balance the scale for any given weight *n* [BAC-1624p]_.
+*Bachet*'s positional *sbits* numerotation is simulating a weight balance scale where the number *n* and the potential negative powers of 3 are put on the right tray and the potential positive powers of 3 are put on the left tray. The equation for *n = 5* gives for instance :math:`3^2 = (n + 3^1 + 3^0)`. And the *sbits* encoding corresponds hence to the string '1-1-1'. As, this representation is isomorphic to a base 3 binary encoding, every positive or negative integer may this way be represented with a unique *sbits* string. With three powers of 3, namely :math:`3^2, 3^1, 3^0`, one may for instance represent any value in the integer range -13 to +13. *Bachet* showed that this bipolar weighing system relies on the smallest possible number of weights -base powers- needed in order to balance the scale for any given weight *n* [BAC-1622p]_.
 
 The Digraph3 :py:mod:`arithmetics` module provides with the :py:class:`~arithmetics.BachetNumber` class an implementation for such *sbits* encoded integers. Instantiating a *Bachet* number may be done either with an integer value or with a vector of sbits (see :numref:`BachetNumbers` Lines  2, 6, 11 and 15). The class provides a binary *addition* method and unary *negating* and *reversing* methods as illustrated in Lines 20,32 and 33 below. 
 
@@ -5271,7 +5277,7 @@ Appendix
 
 .. [BRI-2008p] Brian E. (2008), "Condorcet and Borda in 1784. Misfits and Documents", *Journal Electronique d'Histore des Probabilités et de la Statistique*, Vol 4, n°1, Juin/June 2008, https://www.jehps.net/
 
-.. [BAC-1624p] Claude Gaspard Bachet, sieur de Méziriac, *Problèmes plaisants et délectables…* , 2nd ed. (Lyons, France: Pierre Rigaud & Associates, 1624), pp. 18–33
+.. [BAC-1622p] Claude Gaspard Bachet, sieur de Méziriac, *Problèmes plaisants et délectables…* , 1st ed. Pierre Rigaud & Associates, Lyon, France 1622, pp. 143-146
 
 .. only:: html
 
