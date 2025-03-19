@@ -3319,7 +3319,7 @@ It appears hence to be opportune to compute a first *Bachet* ranking result with
    >>> g.computeRankingCorrelation(ba2.bachetRanking)
     {'correlation': +0.6315, 'determination': 0.4086}
 
-Yet, when observing a lower transitivity degree as we may notice in :numref:`optimisingBachet1` Line 2, it is recommended to set the *randomized* parameter (default=0) to a positive integer *n*. In this case, *n* random orderings of the decision actions with their reversed versions will be generated in order to compute potentially diverse *Bachet* ranking results. The best correlated ranking will eventually be returned (see :numref:`optimisingBachet1` Lines 3 and 17).
+Yet, when observing a somehow lower transitivity degree, as we may notice in :numref:`optimisingBachet1` Line 2, it is recommended to set the *randomized* parameter (default=0) to a positive integer *n*. In this case, *n* random orderings of the decision actions with their reversed versions will be generated in order to compute potentially diverse *Bachet* ranking results. The best correlated ranking will eventually be returned (see :numref:`optimisingBachet1` Lines 3 and 17).
 
 .. code-block:: pycon
    :caption: Optimising the *Bachet* ranking result II
