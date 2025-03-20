@@ -32,6 +32,34 @@ class TransitiveDigraph(Digraph):
     """
     def __init__(self):
         print('abstract root class')
+
+   
+            
+        
+##        for comp in components.values():
+##            #comp = self.components[cki]
+##            pg = comp['subGraph']
+##            if rankingRule == 'Copeland':
+##                opg = CopelandOrder(pg)
+##                ranking += opg.copelandRanking
+##            elif rankingRule == 'NetFlows':
+##                opg = NetFlowsOrder(pg)
+##                ranking += opg.netFlowsRanking
+##            elif rankingRule == 'Kohler':
+##                opg = KohlerOrder(pg)
+##                ranking += opg.kohlerRanking
+##        return ranking
+
+    def computeBoostedOrdering(self,orderingRule='Copeland'):
+        """
+        Renders an ordred list of decision actions ranked in
+        increasing preference direction following the orderingRule
+        on each component.
+        """
+        ranking = self.computeBoostedRanking(rankingRule=orderingRule)
+        ranking.reverse()
+        return ranking
+    
         
     def showWeakOrder(self,rankingByChoosing=None,WithCoverCredibility=False):
         """
@@ -1859,7 +1887,7 @@ class WeakBachetRanking(TransitiveDigraph):
     The cover credibities shown above represent in fact the mean outranking, respectively outranked, characteristic value of the complement of the nth choice or rejection. 
     """
     
-    def __init__(self,g,randomized=100,maxNbrOfRankings=10,
+    def __init__(self,g,randomized=100,maxNbrOfRankings=5,
                  seed=None,
                  Comments=False,Debug=False):
         from time import time
@@ -1876,27 +1904,32 @@ class WeakBachetRanking(TransitiveDigraph):
             corrKey = '%.4f' % ba.correlation
             try:
                 statistics[corrKey]['freq'] += 1
-                statistics[corrKey]['rankings'].append(perm)
+                statistics[corrKey]['rankings'].actions
                 statistics[corrKey]['optimal'] = ba.bachetRanking
             except:
                 statistics[corrKey] = {'freq':1,
-                                       'rankings':[actions],
+                                       'rankings':actions,
                                        'optimal': ba.bachetRanking}
         resStat = [(float(x),statistics[x]) for x in statistics]
         resStat = list(sorted(resStat,reverse=True))
-        rankings = []
+        bachetRankings = []
         if len(resStat) < maxNbrOfRankings:
             maxNbrOfRankings = len(resStat)
         for i in range(maxNbrOfRankings):
-            rankings.append(resStat[i][1]['optimal'])
+            bachetRankings.append((resStat[i][0],resStat[i][1]['optimal']))
+        rankings = [bachetRankings[i][1] for i in range(maxNbrOfRankings)]
         if Debug:
             print(len(rankings),rankings)
         ba1 = RankingsFusionDigraph(g,rankings)
         ba1.resStat = resStat
+        ba1.bachetRankings = bachetRankings
         ba1.rankings = rankings
         for att in ba1.__dict__:
             self.__dict__[att] = deepcopy(ba1.__dict__[att])
-        
+        self.computeRankingByChoosing()
+        print
+        self.boostedRanking = self.computeBoostedRanking()
+        self.boostedOrdering = self.computeBoostedOrdering()
         self.weakBachetCorrelation = g.computeOrdinalCorrelation(ba1)
         self.bachetRanking = resStat[0][1]['optimal']
         self.bachetCorrelation = g.computeRankingCorrelation(self.bachetRanking)
@@ -1904,11 +1937,48 @@ class WeakBachetRanking(TransitiveDigraph):
         self.runTimes['totalTime'] = time() - tt
         if Comments:
             self.showWeakOrder(WithCoverCredibility=False)
-    def showWeakRanking(self,WithCoverCredibility=False):
-        """ dummy for generic method below
-        """
-        self.showTransitiveDigraph(WithCoverCredibility=WithCoverCredibility)
 
+    def computeBoostedRanking(self):
+        """
+        Renders an ordred list of decision actions ranked in
+        decreasing preference direction following the rankingRule
+        on each component.
+        """
+        ranking = []
+        components = self.rankingByChoosing
+        for i in range(len(components['result'])):
+            ranking += components['result'][i][0][1]
+        ordering = []
+        components = self.rankingByChoosing
+        for i in range(len(components['result'])):
+            ordering += components['result'][i][1][1]
+        boostedRanking = ranking
+        for x in reversed(ordering):
+            if x not in ranking:
+                boostedRanking.append(x)
+        return boostedRanking
+
+    def computeBoostedOrdering(self):
+        """
+        Renders an ordred list of decision actions ranked in
+        decreasing preference direction following the rankingRule
+        on each component.
+        """
+        ranking = []
+        components = self.rankingByChoosing
+        for i in range(len(components['result'])):
+            ranking += components['result'][i][0][1]
+        ordering = []
+        components = self.rankingByChoosing
+        for i in range(len(components['result'])):
+            ordering += components['result'][i][1][1]
+        boostedOrdering = ordering
+        for x in reversed(ranking):
+            if x not in ordering:
+                boostedOrdering.append(x)
+        return boostedOrdering
+
+ 
         
 #########
 # compatibility with obsolete weakOrders module
@@ -1969,10 +2039,10 @@ if __name__ == "__main__":
 ##    rbc.exportTopologicalGraphViz('test')
 ##    rbc.exportGraphViz('test1')
 ## 
-    pt = RandomCBPerformanceTableau(numberOfActions=20,numberOfCriteria=13,seed=100)
+    pt = RandomCBPerformanceTableau(numberOfActions=30,numberOfCriteria=13,seed=100)
     g = BipolarOutrankingDigraph(pt)
-    wbg = WeakBachetRanking(g,seed=100,Comments=True)
-    wbg.showWeakRanking(WithCoverCredibility=True)
+    wbg = WeakBachetRanking(g,seed=100,Comments=False)
+    #wbg.showWeakRanking(WithCoverCredibility=True)
     #wcg = WeakCopelandOrder(g,WithFairestRanking=True)
     #print(wcg.copelandPermutations)
     #print(wcg.copelandPreRanking)

@@ -892,6 +892,7 @@
 <li class="toctree-l3"><a class="reference internal" href="#transitiveDigraphs.RankingsFusion"><code class="docutils literal notranslate"><span class="pre">RankingsFusion</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="#transitiveDigraphs.RankingsFusionDigraph"><code class="docutils literal notranslate"><span class="pre">RankingsFusionDigraph</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="#transitiveDigraphs.TransitiveDigraph"><code class="docutils literal notranslate"><span class="pre">TransitiveDigraph</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#transitiveDigraphs.TransitiveDigraph.computeBoostedOrdering"><code class="docutils literal notranslate"><span class="pre">TransitiveDigraph.computeBoostedOrdering()</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="#transitiveDigraphs.TransitiveDigraph.exportDigraphGraphViz"><code class="docutils literal notranslate"><span class="pre">TransitiveDigraph.exportDigraphGraphViz()</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="#transitiveDigraphs.TransitiveDigraph.exportGraphViz"><code class="docutils literal notranslate"><span class="pre">TransitiveDigraph.exportGraphViz()</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="#transitiveDigraphs.TransitiveDigraph.showOrderedRelationTable"><code class="docutils literal notranslate"><span class="pre">TransitiveDigraph.showOrderedRelationTable()</span></code></a></li>
@@ -902,7 +903,8 @@
 </ul>
 </li>
 <li class="toctree-l3"><a class="reference internal" href="#transitiveDigraphs.WeakBachetRanking"><code class="docutils literal notranslate"><span class="pre">WeakBachetRanking</span></code></a><ul>
-<li class="toctree-l4"><a class="reference internal" href="#transitiveDigraphs.WeakBachetRanking.showWeakRanking"><code class="docutils literal notranslate"><span class="pre">WeakBachetRanking.showWeakRanking()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#transitiveDigraphs.WeakBachetRanking.computeBoostedOrdering"><code class="docutils literal notranslate"><span class="pre">WeakBachetRanking.computeBoostedOrdering()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#transitiveDigraphs.WeakBachetRanking.computeBoostedRanking"><code class="docutils literal notranslate"><span class="pre">WeakBachetRanking.computeBoostedRanking()</span></code></a></li>
 </ul>
 </li>
 <li class="toctree-l3"><a class="reference internal" href="#transitiveDigraphs.WeakCopelandOrder"><code class="docutils literal notranslate"><span class="pre">WeakCopelandOrder</span></code></a></li>
@@ -9506,6 +9508,14 @@ disjunctive or conjunctive fusion (omax|omin operator) of a list of rankings.</p
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">transitiveDigraphs.</span></span><span class="sig-name descname"><span class="pre">TransitiveDigraph</span></span><a class="reference internal" href="_modules/transitiveDigraphs.html#TransitiveDigraph"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#transitiveDigraphs.TransitiveDigraph" title="Link to this definition"></a></dt>
 <dd><p>Abstract class for specialized methods addressing transitive digraphs.</p>
 <dl class="py method">
+<dt class="sig sig-object py" id="transitiveDigraphs.TransitiveDigraph.computeBoostedOrdering">
+<span class="sig-name descname"><span class="pre">computeBoostedOrdering</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">orderingRule</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'Copeland'</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/transitiveDigraphs.html#TransitiveDigraph.computeBoostedOrdering"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#transitiveDigraphs.TransitiveDigraph.computeBoostedOrdering" title="Link to this definition"></a></dt>
+<dd><p>Renders an ordred list of decision actions ranked in
+increasing preference direction following the orderingRule
+on each component.</p>
+</dd></dl>
+
+<dl class="py method">
 <dt class="sig sig-object py" id="transitiveDigraphs.TransitiveDigraph.exportDigraphGraphViz">
 <span class="sig-name descname"><span class="pre">exportDigraphGraphViz</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">fileName</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">bestChoice</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">{}</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">worstChoice</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">{}</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">Comments</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">graphType</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'png'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">graphSize</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'7,7'</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/transitiveDigraphs.html#TransitiveDigraph.exportDigraphGraphViz"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#transitiveDigraphs.TransitiveDigraph.exportDigraphGraphViz" title="Link to this definition"></a></dt>
 <dd><p>export GraphViz dot file for digraph drawing filtering.</p>
@@ -9551,7 +9561,7 @@ disjunctive or conjunctive fusion (omax|omin operator) of a list of rankings.</p
 
 <dl class="py class">
 <dt class="sig sig-object py" id="transitiveDigraphs.WeakBachetRanking">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">transitiveDigraphs.</span></span><span class="sig-name descname"><span class="pre">WeakBachetRanking</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">g</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">randomized</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">100</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">maxNbrOfRankings</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">10</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">seed</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">Comments</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">Debug</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/transitiveDigraphs.html#WeakBachetRanking"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#transitiveDigraphs.WeakBachetRanking" title="Link to this definition"></a></dt>
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">transitiveDigraphs.</span></span><span class="sig-name descname"><span class="pre">WeakBachetRanking</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">g</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">randomized</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">100</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">maxNbrOfRankings</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">5</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">seed</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">Comments</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">Debug</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/transitiveDigraphs.html#WeakBachetRanking"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#transitiveDigraphs.WeakBachetRanking" title="Link to this definition"></a></dt>
 <dd><p>Uses the <a class="reference internal" href="#linearOrders.BachetRanking" title="linearOrders.BachetRanking"><code class="xref py py-class docutils literal notranslate"><span class="pre">linearOrders.BachetRanking</span></code></a> class for generating a number
 of best correlated Bachet rankings.</p>
 <p>The <a class="reference internal" href="#transitiveDigraphs.RankingsFusionDigraph" title="transitiveDigraphs.RankingsFusionDigraph"><code class="xref py py-class docutils literal notranslate"><span class="pre">transitiveDigraphs.RankingsFusionDigraph</span></code></a> uses
@@ -9581,9 +9591,19 @@ these <em>Bachet</em> rankings for contructing a weak <em>Bachet</em> ranking re
 </div>
 <p>The cover credibities shown above represent in fact the mean outranking, respectively outranked, characteristic value of the complement of the nth choice or rejection.</p>
 <dl class="py method">
-<dt class="sig sig-object py" id="transitiveDigraphs.WeakBachetRanking.showWeakRanking">
-<span class="sig-name descname"><span class="pre">showWeakRanking</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">WithCoverCredibility</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/transitiveDigraphs.html#WeakBachetRanking.showWeakRanking"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#transitiveDigraphs.WeakBachetRanking.showWeakRanking" title="Link to this definition"></a></dt>
-<dd><p>dummy for generic method below</p>
+<dt class="sig sig-object py" id="transitiveDigraphs.WeakBachetRanking.computeBoostedOrdering">
+<span class="sig-name descname"><span class="pre">computeBoostedOrdering</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/transitiveDigraphs.html#WeakBachetRanking.computeBoostedOrdering"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#transitiveDigraphs.WeakBachetRanking.computeBoostedOrdering" title="Link to this definition"></a></dt>
+<dd><p>Renders an ordred list of decision actions ranked in
+decreasing preference direction following the rankingRule
+on each component.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="transitiveDigraphs.WeakBachetRanking.computeBoostedRanking">
+<span class="sig-name descname"><span class="pre">computeBoostedRanking</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/transitiveDigraphs.html#WeakBachetRanking.computeBoostedRanking"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#transitiveDigraphs.WeakBachetRanking.computeBoostedRanking" title="Link to this definition"></a></dt>
+<dd><p>Renders an ordred list of decision actions ranked in
+decreasing preference direction following the rankingRule
+on each component.</p>
 </dd></dl>
 
 </dd></dl>
@@ -14744,7 +14764,7 @@ Components are stored in an ordered dictionary.</p>
 
   <div role="contentinfo">
     <p>&#169; Copyright 2012-2025, Raymond Bisdorff.
-      <span class="lastupdated">Last updated on Mar 18, 2025.
+      <span class="lastupdated">Last updated on Mar 20, 2025.
       </span></p>
   </div>
 

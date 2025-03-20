@@ -129,6 +129,37 @@
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;abstract root class&#39;</span><span class="p">)</span>
+
+   
+            
+        
+<span class="c1">##        for comp in components.values():</span>
+<span class="c1">##            #comp = self.components[cki]</span>
+<span class="c1">##            pg = comp[&#39;subGraph&#39;]</span>
+<span class="c1">##            if rankingRule == &#39;Copeland&#39;:</span>
+<span class="c1">##                opg = CopelandOrder(pg)</span>
+<span class="c1">##                ranking += opg.copelandRanking</span>
+<span class="c1">##            elif rankingRule == &#39;NetFlows&#39;:</span>
+<span class="c1">##                opg = NetFlowsOrder(pg)</span>
+<span class="c1">##                ranking += opg.netFlowsRanking</span>
+<span class="c1">##            elif rankingRule == &#39;Kohler&#39;:</span>
+<span class="c1">##                opg = KohlerOrder(pg)</span>
+<span class="c1">##                ranking += opg.kohlerRanking</span>
+<span class="c1">##        return ranking</span>
+
+<div class="viewcode-block" id="TransitiveDigraph.computeBoostedOrdering">
+<a class="viewcode-back" href="../techDoc.html#transitiveDigraphs.TransitiveDigraph.computeBoostedOrdering">[docs]</a>
+    <span class="k">def</span> <span class="nf">computeBoostedOrdering</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">orderingRule</span><span class="o">=</span><span class="s1">&#39;Copeland&#39;</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Renders an ordred list of decision actions ranked in</span>
+<span class="sd">        increasing preference direction following the orderingRule</span>
+<span class="sd">        on each component.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">ranking</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">computeBoostedRanking</span><span class="p">(</span><span class="n">rankingRule</span><span class="o">=</span><span class="n">orderingRule</span><span class="p">)</span>
+        <span class="n">ranking</span><span class="o">.</span><span class="n">reverse</span><span class="p">()</span>
+        <span class="k">return</span> <span class="n">ranking</span></div>
+
+    
         
 <div class="viewcode-block" id="TransitiveDigraph.showWeakOrder">
 <a class="viewcode-back" href="../techDoc.html#transitiveDigraphs.TransitiveDigraph.showWeakOrder">[docs]</a>
@@ -2043,7 +2074,7 @@
 <span class="sd">    The cover credibities shown above represent in fact the mean outranking, respectively outranked, characteristic value of the complement of the nth choice or rejection. </span>
 <span class="sd">    &quot;&quot;&quot;</span>
     
-    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">g</span><span class="p">,</span><span class="n">randomized</span><span class="o">=</span><span class="mi">100</span><span class="p">,</span><span class="n">maxNbrOfRankings</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">g</span><span class="p">,</span><span class="n">randomized</span><span class="o">=</span><span class="mi">100</span><span class="p">,</span><span class="n">maxNbrOfRankings</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span>
                  <span class="n">seed</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
                  <span class="n">Comments</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span><span class="n">Debug</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
         <span class="kn">from</span> <span class="nn">time</span> <span class="kn">import</span> <span class="n">time</span>
@@ -2060,27 +2091,32 @@
             <span class="n">corrKey</span> <span class="o">=</span> <span class="s1">&#39;</span><span class="si">%.4f</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="n">ba</span><span class="o">.</span><span class="n">correlation</span>
             <span class="k">try</span><span class="p">:</span>
                 <span class="n">statistics</span><span class="p">[</span><span class="n">corrKey</span><span class="p">][</span><span class="s1">&#39;freq&#39;</span><span class="p">]</span> <span class="o">+=</span> <span class="mi">1</span>
-                <span class="n">statistics</span><span class="p">[</span><span class="n">corrKey</span><span class="p">][</span><span class="s1">&#39;rankings&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">perm</span><span class="p">)</span>
+                <span class="n">statistics</span><span class="p">[</span><span class="n">corrKey</span><span class="p">][</span><span class="s1">&#39;rankings&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">actions</span>
                 <span class="n">statistics</span><span class="p">[</span><span class="n">corrKey</span><span class="p">][</span><span class="s1">&#39;optimal&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">ba</span><span class="o">.</span><span class="n">bachetRanking</span>
             <span class="k">except</span><span class="p">:</span>
                 <span class="n">statistics</span><span class="p">[</span><span class="n">corrKey</span><span class="p">]</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;freq&#39;</span><span class="p">:</span><span class="mi">1</span><span class="p">,</span>
-                                       <span class="s1">&#39;rankings&#39;</span><span class="p">:[</span><span class="n">actions</span><span class="p">],</span>
+                                       <span class="s1">&#39;rankings&#39;</span><span class="p">:</span><span class="n">actions</span><span class="p">,</span>
                                        <span class="s1">&#39;optimal&#39;</span><span class="p">:</span> <span class="n">ba</span><span class="o">.</span><span class="n">bachetRanking</span><span class="p">}</span>
         <span class="n">resStat</span> <span class="o">=</span> <span class="p">[(</span><span class="nb">float</span><span class="p">(</span><span class="n">x</span><span class="p">),</span><span class="n">statistics</span><span class="p">[</span><span class="n">x</span><span class="p">])</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">statistics</span><span class="p">]</span>
         <span class="n">resStat</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="nb">sorted</span><span class="p">(</span><span class="n">resStat</span><span class="p">,</span><span class="n">reverse</span><span class="o">=</span><span class="kc">True</span><span class="p">))</span>
-        <span class="n">rankings</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="n">bachetRankings</span> <span class="o">=</span> <span class="p">[]</span>
         <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">resStat</span><span class="p">)</span> <span class="o">&lt;</span> <span class="n">maxNbrOfRankings</span><span class="p">:</span>
             <span class="n">maxNbrOfRankings</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">resStat</span><span class="p">)</span>
         <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">maxNbrOfRankings</span><span class="p">):</span>
-            <span class="n">rankings</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">resStat</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="mi">1</span><span class="p">][</span><span class="s1">&#39;optimal&#39;</span><span class="p">])</span>
+            <span class="n">bachetRankings</span><span class="o">.</span><span class="n">append</span><span class="p">((</span><span class="n">resStat</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="mi">0</span><span class="p">],</span><span class="n">resStat</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="mi">1</span><span class="p">][</span><span class="s1">&#39;optimal&#39;</span><span class="p">]))</span>
+        <span class="n">rankings</span> <span class="o">=</span> <span class="p">[</span><span class="n">bachetRankings</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="mi">1</span><span class="p">]</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">maxNbrOfRankings</span><span class="p">)]</span>
         <span class="k">if</span> <span class="n">Debug</span><span class="p">:</span>
             <span class="nb">print</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">rankings</span><span class="p">),</span><span class="n">rankings</span><span class="p">)</span>
         <span class="n">ba1</span> <span class="o">=</span> <span class="n">RankingsFusionDigraph</span><span class="p">(</span><span class="n">g</span><span class="p">,</span><span class="n">rankings</span><span class="p">)</span>
         <span class="n">ba1</span><span class="o">.</span><span class="n">resStat</span> <span class="o">=</span> <span class="n">resStat</span>
+        <span class="n">ba1</span><span class="o">.</span><span class="n">bachetRankings</span> <span class="o">=</span> <span class="n">bachetRankings</span>
         <span class="n">ba1</span><span class="o">.</span><span class="n">rankings</span> <span class="o">=</span> <span class="n">rankings</span>
         <span class="k">for</span> <span class="n">att</span> <span class="ow">in</span> <span class="n">ba1</span><span class="o">.</span><span class="vm">__dict__</span><span class="p">:</span>
             <span class="bp">self</span><span class="o">.</span><span class="vm">__dict__</span><span class="p">[</span><span class="n">att</span><span class="p">]</span> <span class="o">=</span> <span class="n">deepcopy</span><span class="p">(</span><span class="n">ba1</span><span class="o">.</span><span class="vm">__dict__</span><span class="p">[</span><span class="n">att</span><span class="p">])</span>
-        
+        <span class="bp">self</span><span class="o">.</span><span class="n">computeRankingByChoosing</span><span class="p">()</span>
+        <span class="nb">print</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">boostedRanking</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">computeBoostedRanking</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">boostedOrdering</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">computeBoostedOrdering</span><span class="p">()</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">weakBachetCorrelation</span> <span class="o">=</span> <span class="n">g</span><span class="o">.</span><span class="n">computeOrdinalCorrelation</span><span class="p">(</span><span class="n">ba1</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">bachetRanking</span> <span class="o">=</span> <span class="n">resStat</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">1</span><span class="p">][</span><span class="s1">&#39;optimal&#39;</span><span class="p">]</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">bachetCorrelation</span> <span class="o">=</span> <span class="n">g</span><span class="o">.</span><span class="n">computeRankingCorrelation</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">bachetRanking</span><span class="p">)</span>
@@ -2088,15 +2124,55 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">runTimes</span><span class="p">[</span><span class="s1">&#39;totalTime&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">time</span><span class="p">()</span> <span class="o">-</span> <span class="n">tt</span>
         <span class="k">if</span> <span class="n">Comments</span><span class="p">:</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">showWeakOrder</span><span class="p">(</span><span class="n">WithCoverCredibility</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
-<div class="viewcode-block" id="WeakBachetRanking.showWeakRanking">
-<a class="viewcode-back" href="../techDoc.html#transitiveDigraphs.WeakBachetRanking.showWeakRanking">[docs]</a>
-    <span class="k">def</span> <span class="nf">showWeakRanking</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">WithCoverCredibility</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot; dummy for generic method below</span>
+
+<div class="viewcode-block" id="WeakBachetRanking.computeBoostedRanking">
+<a class="viewcode-back" href="../techDoc.html#transitiveDigraphs.WeakBachetRanking.computeBoostedRanking">[docs]</a>
+    <span class="k">def</span> <span class="nf">computeBoostedRanking</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Renders an ordred list of decision actions ranked in</span>
+<span class="sd">        decreasing preference direction following the rankingRule</span>
+<span class="sd">        on each component.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">showTransitiveDigraph</span><span class="p">(</span><span class="n">WithCoverCredibility</span><span class="o">=</span><span class="n">WithCoverCredibility</span><span class="p">)</span></div>
+        <span class="n">ranking</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="n">components</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">rankingByChoosing</span>
+        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">components</span><span class="p">[</span><span class="s1">&#39;result&#39;</span><span class="p">])):</span>
+            <span class="n">ranking</span> <span class="o">+=</span> <span class="n">components</span><span class="p">[</span><span class="s1">&#39;result&#39;</span><span class="p">][</span><span class="n">i</span><span class="p">][</span><span class="mi">0</span><span class="p">][</span><span class="mi">1</span><span class="p">]</span>
+        <span class="n">ordering</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="n">components</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">rankingByChoosing</span>
+        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">components</span><span class="p">[</span><span class="s1">&#39;result&#39;</span><span class="p">])):</span>
+            <span class="n">ordering</span> <span class="o">+=</span> <span class="n">components</span><span class="p">[</span><span class="s1">&#39;result&#39;</span><span class="p">][</span><span class="n">i</span><span class="p">][</span><span class="mi">1</span><span class="p">][</span><span class="mi">1</span><span class="p">]</span>
+        <span class="n">boostedRanking</span> <span class="o">=</span> <span class="n">ranking</span>
+        <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="nb">reversed</span><span class="p">(</span><span class="n">ordering</span><span class="p">):</span>
+            <span class="k">if</span> <span class="n">x</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">ranking</span><span class="p">:</span>
+                <span class="n">boostedRanking</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">boostedRanking</span></div>
+
+
+<div class="viewcode-block" id="WeakBachetRanking.computeBoostedOrdering">
+<a class="viewcode-back" href="../techDoc.html#transitiveDigraphs.WeakBachetRanking.computeBoostedOrdering">[docs]</a>
+    <span class="k">def</span> <span class="nf">computeBoostedOrdering</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Renders an ordred list of decision actions ranked in</span>
+<span class="sd">        decreasing preference direction following the rankingRule</span>
+<span class="sd">        on each component.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">ranking</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="n">components</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">rankingByChoosing</span>
+        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">components</span><span class="p">[</span><span class="s1">&#39;result&#39;</span><span class="p">])):</span>
+            <span class="n">ranking</span> <span class="o">+=</span> <span class="n">components</span><span class="p">[</span><span class="s1">&#39;result&#39;</span><span class="p">][</span><span class="n">i</span><span class="p">][</span><span class="mi">0</span><span class="p">][</span><span class="mi">1</span><span class="p">]</span>
+        <span class="n">ordering</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="n">components</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">rankingByChoosing</span>
+        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">components</span><span class="p">[</span><span class="s1">&#39;result&#39;</span><span class="p">])):</span>
+            <span class="n">ordering</span> <span class="o">+=</span> <span class="n">components</span><span class="p">[</span><span class="s1">&#39;result&#39;</span><span class="p">][</span><span class="n">i</span><span class="p">][</span><span class="mi">1</span><span class="p">][</span><span class="mi">1</span><span class="p">]</span>
+        <span class="n">boostedOrdering</span> <span class="o">=</span> <span class="n">ordering</span>
+        <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="nb">reversed</span><span class="p">(</span><span class="n">ranking</span><span class="p">):</span>
+            <span class="k">if</span> <span class="n">x</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">ordering</span><span class="p">:</span>
+                <span class="n">boostedOrdering</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">boostedOrdering</span></div>
 </div>
 
 
+ 
         
 <span class="c1">#########</span>
 <span class="c1"># compatibility with obsolete weakOrders module</span>
@@ -2169,10 +2245,10 @@
 <span class="c1">##    rbc.exportTopologicalGraphViz(&#39;test&#39;)</span>
 <span class="c1">##    rbc.exportGraphViz(&#39;test1&#39;)</span>
 <span class="c1">## </span>
-    <span class="n">pt</span> <span class="o">=</span> <span class="n">RandomCBPerformanceTableau</span><span class="p">(</span><span class="n">numberOfActions</span><span class="o">=</span><span class="mi">20</span><span class="p">,</span><span class="n">numberOfCriteria</span><span class="o">=</span><span class="mi">13</span><span class="p">,</span><span class="n">seed</span><span class="o">=</span><span class="mi">100</span><span class="p">)</span>
+    <span class="n">pt</span> <span class="o">=</span> <span class="n">RandomCBPerformanceTableau</span><span class="p">(</span><span class="n">numberOfActions</span><span class="o">=</span><span class="mi">30</span><span class="p">,</span><span class="n">numberOfCriteria</span><span class="o">=</span><span class="mi">13</span><span class="p">,</span><span class="n">seed</span><span class="o">=</span><span class="mi">100</span><span class="p">)</span>
     <span class="n">g</span> <span class="o">=</span> <span class="n">BipolarOutrankingDigraph</span><span class="p">(</span><span class="n">pt</span><span class="p">)</span>
-    <span class="n">wbg</span> <span class="o">=</span> <span class="n">WeakBachetRanking</span><span class="p">(</span><span class="n">g</span><span class="p">,</span><span class="n">seed</span><span class="o">=</span><span class="mi">100</span><span class="p">,</span><span class="n">Comments</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
-    <span class="n">wbg</span><span class="o">.</span><span class="n">showWeakRanking</span><span class="p">(</span><span class="n">WithCoverCredibility</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+    <span class="n">wbg</span> <span class="o">=</span> <span class="n">WeakBachetRanking</span><span class="p">(</span><span class="n">g</span><span class="p">,</span><span class="n">seed</span><span class="o">=</span><span class="mi">100</span><span class="p">,</span><span class="n">Comments</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+    <span class="c1">#wbg.showWeakRanking(WithCoverCredibility=True)</span>
     <span class="c1">#wcg = WeakCopelandOrder(g,WithFairestRanking=True)</span>
     <span class="c1">#print(wcg.copelandPermutations)</span>
     <span class="c1">#print(wcg.copelandPreRanking)</span>
@@ -2192,7 +2268,7 @@
 
   <div role="contentinfo">
     <p>&#169; Copyright 2012-2025, Raymond Bisdorff.
-      <span class="lastupdated">Last updated on Mar 18, 2025.
+      <span class="lastupdated">Last updated on Mar 20, 2025.
       </span></p>
   </div>
 
