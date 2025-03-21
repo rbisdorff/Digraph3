@@ -3101,7 +3101,7 @@ Examples of such *sbits* encoded *Bachet* numbers are immediately provided by th
 
 The *Bachet* numbers, instantiated by the row vectors without reflexive terms  and the column vectors without reflexive terms of the digraph's *self.relation* attribute, model in fact respectively an **outrankingness** measure *rx* and an **outrankedness** measure *cx* (see Lines 16-27).
 
-The sum *rx + (-cx)* of both the **outrankingness** and the **not-outrankedness** measures renders now per decision action *x* a potential ranking fitness score, similar to *Copeland* or *NetFlows* ranking scores [21]_.
+The sum *rx + (-cx)* of both the **outrankingness** and the **not-outrankedness** measures renders now per decision action *x* a potential ranking score, similar to *Copeland* or *NetFlows* ranking scores [21]_.
 
 In our example here we obtain the *Bachet* ranking 'a4' (26) > 'a3' (4) > 'a2' (1) > 'a1' (-11) (see Line 30 above). A ranking result, which is the corresponding optimal *Kemeny* ranking maximally correlated with the given outranking digraph (tau = 0.795, see Lines 4 and 8 below).
 
@@ -3180,12 +3180,12 @@ With the reversed *Bachet* numbers we obtain the ranking 'a4' (26) > 'a3' (-12) 
 
 The *Copeland* ranking rule delivers indeed for this example outranking digraph ranking scores with a tie between actions 'a1' and 'a2' which is by convention resolved by following a lexicographic rule favouring in this case action 'a1'. This ranking is however much less correlated to the given outranking digraph than the optimal *Kemeny* ranking (see +0.795 above).
 
-Nevertheless, the *Bachet* fitness scores of the original and the reversed ordering of the polarised relation table lead in our example here to very plausible and convincing ranking results. This hindsight gave the positive stimulus for implementing this new *ranking-by-scoring* rule.  
+Nevertheless, the *Bachet* ranking scores of the original and the reversed ordering of the polarised relation table lead in our example here to very plausible and convincing ranking results. This hindsight gave the positive stimulus for implementing this new *ranking-by-scoring* rule.  
 
 The Bachet ranking rule, a new ranking-by-scoring method
 ........................................................
 
-The :py:mod:`linearOrders` module provides now a :py:class:`~linearOrders.BachetRanking` class implementing a ranking rule based on the *Bachet* fitness scores modelled by the polarised version of the relation table of a given outranking digraph.
+The :py:mod:`linearOrders` module provides now a :py:class:`~linearOrders.BachetRanking` class implementing a ranking rule based on the *Bachet* ranking scores modelled by the polarised version of the relation table of a given outranking digraph.
 
 .. code-block:: pycon
    :linenos:
@@ -5316,7 +5316,7 @@ Appendix
 
 .. [19] " ... *j'ai cru devoir citer* [Borda], *1. parce qu'il est le premier qui ait observé que la méthode commune* [simple pluralité uninominale] *de faire des élections étoit défectueuse; 2. parce que celle qu'il a proposé d'y substituer est très ingénieuse, quelle seroit très-simple dans la pratique* ... " [CON-1785p]_ P. clxxiX
 
-.. [20] https://en.wikipedia.org/wiki/Claude_Gaspar_Bachet_de_M%C3%A9ziriac *Claude Gaspar Bachet* Sieur de Méziriac (9 October 1581 – 26 February 1638) was a French mathematician and poet who is known today for his 1624 proof of Bézout's theorem stating the special case of the Bachet-Bézout identity for two coprime integers. *Étienne Bézout* actually proved this result in 1779 only for polynomials and Bézout's theorem is misattributed to Bézout by Bourbaki. The general Bachet-Bézout identity is a direct algebraic consequence of Euclid's division algorithm and was known before Bachet (see the :py:meth:`arithmetics.bezout` method). It is furthemore in a Latin Translation by Bachet of the Arithmetica of Diophantus where Pierre de Fermat wrote in 1638 his famous margin note about the missing proof of his last theorem. 
+.. [20] https://en.wikipedia.org/wiki/Claude_Gaspar_Bachet_de_M%C3%A9ziriac *Claude Gaspar Bachet* Sieur de Méziriac (9 October 1581 – 26 February 1638) was a French mathematician and poet who is known today for his 1622 proof of Bézout's theorem stating the special case of the *Bachet-Bézout* identity for two coprime integers. *Étienne Bézout* actually proved this result in 1779 only for polynomials and Bézout's theorem is misattributed to Bézout by Bourbaki. The general *Bachet-Bézout* identity is a direct algebraic consequence of Euclid's division algorithm and was known before Bachet (see the :py:meth:`arithmetics.bezout` method). It is furthemore in a Latin Translation by Bachet of the Arithmetica of Diophantus where Pierre de Fermat wrote in 1638 his famous margin note about the missing proof of his last theorem. 
 
 .. [21] See the tutorial on :ref:`ranking with multiple incommensurable criteria <Ranking-Tutorial-label>`
 
