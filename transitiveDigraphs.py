@@ -437,7 +437,7 @@ class TransitiveDigraph(Digraph):
         # same ranks for Hasses equivalence classes
         k = len(rankingByChoosing)
         for i in range(k):
-            sameRank = 'subGraph { rank = same; '
+            sameRank = '{ rank = i; '
             ich = rankingByChoosing[i][1]
             for x in ich:
                 sameRank += str(_safeName(x))+'; '
@@ -2015,12 +2015,14 @@ class WeakBachetRanking(TransitiveDigraph):
                 rankingByChoosing.append(rbcp[k-i-1][1])
             k1 = len(rankingByChoosing)
             for i in range(1,k1):
-                print('==>>',i,rankingByChoosing[i-1],rankingByChoosing[i])
+                if Debug:
+                    print('==>>',i,rankingByChoosing[i-1],rankingByChoosing[i])
                 ci = []
                 for x in rankingByChoosing[i][1]:
                     if x not in rankingByChoosing[i-1][1]:
                         ci.append(x)
-                print('==>>',i,rankingByChoosing[i-1],rankingByChoosing[i],ci)                
+                if Debug:
+                    print('==>>',i,rankingByChoosing[i-1],rankingByChoosing[i],ci)                
                 rankingByChoosing[i] = (rankingByChoosing[1][0],ci)
             if Debug:
                 print('rbcp: ', rbcp)
@@ -2109,6 +2111,7 @@ class WeakBachetRanking(TransitiveDigraph):
         k = len(rankingByChoosing)
         for i in range(k):
             sameRank = 'subGraph { rank = same; '
+            #sameRank = '{ rank = i; '
             ich = rankingByChoosing[i][1]
             for x in ich:
                 sameRank += str(_safeName(x))+'; '
