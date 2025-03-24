@@ -2173,12 +2173,10 @@
 
 <div class="viewcode-block" id="WeakBachetRanking.exportGraphViz">
 <a class="viewcode-back" href="../techDoc.html#transitiveDigraphs.WeakBachetRanking.exportGraphViz">[docs]</a>
-    <span class="k">def</span> <span class="nf">exportGraphViz</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">fileName</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span><span class="n">direction</span><span class="o">=</span><span class="s1">&#39;bipolar&#39;</span><span class="p">,</span>
-                       <span class="n">WithBestPathDecoration</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
-                       <span class="n">WithRatingDecoration</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+    <span class="k">def</span> <span class="nf">exportGraphViz</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">fileName</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
                        <span class="n">Comments</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span><span class="n">graphType</span><span class="o">=</span><span class="s1">&#39;png&#39;</span><span class="p">,</span>
                        <span class="n">graphSize</span><span class="o">=</span><span class="s1">&#39;7,7&#39;</span><span class="p">,</span><span class="n">bgcolor</span><span class="o">=</span><span class="s1">&#39;cornsilk&#39;</span><span class="p">,</span>
-                       <span class="n">fontSize</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span><span class="n">Debug</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+                       <span class="n">fontSize</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span><span class="n">Debug</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        export GraphViz dot file for Hasse diagram drawing filtering.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
@@ -2195,54 +2193,35 @@
             <span class="k">return</span> <span class="n">t1</span>
         <span class="c1"># working on a deepcopy of self</span>
         <span class="n">digraph</span> <span class="o">=</span> <span class="n">deepcopy</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
-        <span class="k">if</span> <span class="n">direction</span> <span class="o">==</span> <span class="s1">&#39;bipolar&#39;</span><span class="p">:</span>
-            <span class="k">try</span><span class="p">:</span>
-                <span class="n">rankingByChoosing</span> <span class="o">=</span> <span class="n">digraph</span><span class="o">.</span><span class="n">rankingByChoosing</span><span class="p">[</span><span class="s1">&#39;result&#39;</span><span class="p">]</span>
-            <span class="k">except</span><span class="p">:</span>
-                <span class="n">digraph</span><span class="o">.</span><span class="n">computeRankingByChoosing</span><span class="p">()</span>
-                <span class="nb">print</span><span class="p">(</span><span class="n">digraph</span><span class="o">.</span><span class="n">rankingByChoosing</span><span class="p">)</span>
-            <span class="n">rbcp</span> <span class="o">=</span> <span class="n">digraph</span><span class="o">.</span><span class="n">rankingByChoosing</span><span class="p">[</span><span class="s1">&#39;result&#39;</span><span class="p">]</span>
-            <span class="n">rankingByChoosing</span> <span class="o">=</span> <span class="p">[]</span>
-            <span class="n">k</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">rbcp</span><span class="p">)</span>
-            <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">k</span><span class="p">):</span>
-                <span class="n">rankingByChoosing</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">rbcp</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="mi">0</span><span class="p">])</span>
-            <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">k</span><span class="p">):</span>
-                <span class="n">rankingByChoosing</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">rbcp</span><span class="p">[</span><span class="n">k</span><span class="o">-</span><span class="n">i</span><span class="o">-</span><span class="mi">1</span><span class="p">][</span><span class="mi">1</span><span class="p">])</span>
-            <span class="n">k1</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">rankingByChoosing</span><span class="p">)</span>
-            <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="n">k1</span><span class="p">):</span>
-                <span class="k">if</span> <span class="n">Debug</span><span class="p">:</span>
-                    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;==&gt;&gt;&#39;</span><span class="p">,</span><span class="n">i</span><span class="p">,</span><span class="n">rankingByChoosing</span><span class="p">[</span><span class="n">i</span><span class="o">-</span><span class="mi">1</span><span class="p">],</span><span class="n">rankingByChoosing</span><span class="p">[</span><span class="n">i</span><span class="p">])</span>
-                <span class="n">ci</span> <span class="o">=</span> <span class="p">[]</span>
-                <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">rankingByChoosing</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="mi">1</span><span class="p">]:</span>
-                    <span class="k">if</span> <span class="n">x</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">rankingByChoosing</span><span class="p">[</span><span class="n">i</span><span class="o">-</span><span class="mi">1</span><span class="p">][</span><span class="mi">1</span><span class="p">]:</span>
-                        <span class="n">ci</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
-                <span class="k">if</span> <span class="n">Debug</span><span class="p">:</span>
-                    <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;==&gt;&gt;&#39;</span><span class="p">,</span><span class="n">i</span><span class="p">,</span><span class="n">rankingByChoosing</span><span class="p">[</span><span class="n">i</span><span class="o">-</span><span class="mi">1</span><span class="p">],</span><span class="n">rankingByChoosing</span><span class="p">[</span><span class="n">i</span><span class="p">],</span><span class="n">ci</span><span class="p">)</span>                
-                <span class="n">rankingByChoosing</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="n">rankingByChoosing</span><span class="p">[</span><span class="mi">1</span><span class="p">][</span><span class="mi">0</span><span class="p">],</span><span class="n">ci</span><span class="p">)</span>
-            <span class="k">if</span> <span class="n">Debug</span><span class="p">:</span>
-                <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;rbcp: &#39;</span><span class="p">,</span> <span class="n">rbcp</span><span class="p">)</span>
-                <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;rankingByChoosing:&#39;</span><span class="p">,</span><span class="n">rankingByChoosing</span><span class="p">)</span>
-        <span class="k">elif</span> <span class="n">direction</span> <span class="o">==</span> <span class="s1">&#39;best&#39;</span><span class="p">:</span>
-            <span class="k">try</span><span class="p">:</span>
-                <span class="n">rankingByChoosing</span> <span class="o">=</span> <span class="n">digraph</span><span class="o">.</span><span class="n">rankingByBestChoosing</span><span class="p">[</span><span class="s1">&#39;result&#39;</span><span class="p">]</span>
-            <span class="k">except</span><span class="p">:</span>
-                <span class="n">digraph</span><span class="o">.</span><span class="n">computeRankingByBestChoosing</span><span class="p">()</span>
-                <span class="n">rankingByChoosing</span> <span class="o">=</span> <span class="n">digraph</span><span class="o">.</span><span class="n">rankingByBestChoosing</span><span class="p">[</span><span class="s1">&#39;result&#39;</span><span class="p">]</span>
-        <span class="k">else</span><span class="p">:</span>
-            <span class="k">try</span><span class="p">:</span>
-                <span class="n">rankingByChoosing</span> <span class="o">=</span> <span class="n">digraph</span><span class="o">.</span><span class="n">rankingByLastChoosing</span><span class="p">[</span><span class="s1">&#39;result&#39;</span><span class="p">]</span>
-            <span class="k">except</span><span class="p">:</span>
-                <span class="n">digraph</span><span class="o">.</span><span class="n">computeRankingByLastChoosing</span><span class="p">()</span>
-                <span class="n">rankingByChoosing</span> <span class="o">=</span> <span class="n">digraph</span><span class="o">.</span><span class="n">rankingByLastChoosing</span><span class="p">[</span><span class="s1">&#39;result&#39;</span><span class="p">]</span>
+        <span class="n">digraph</span><span class="o">.</span><span class="n">computeRankingByChoosing</span><span class="p">()</span>
         <span class="k">if</span> <span class="n">Debug</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="n">digraph</span><span class="o">.</span><span class="n">rankingByChoosing</span><span class="p">)</span>
+        <span class="n">rbcp</span> <span class="o">=</span> <span class="n">digraph</span><span class="o">.</span><span class="n">rankingByChoosing</span><span class="p">[</span><span class="s1">&#39;result&#39;</span><span class="p">]</span>
+        <span class="n">rankingByChoosing</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="n">k</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">rbcp</span><span class="p">)</span>
+        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">k</span><span class="p">):</span>
+            <span class="n">rankingByChoosing</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">rbcp</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="mi">0</span><span class="p">])</span>
+        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">k</span><span class="p">):</span>
+            <span class="n">rankingByChoosing</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">rbcp</span><span class="p">[</span><span class="n">k</span><span class="o">-</span><span class="n">i</span><span class="o">-</span><span class="mi">1</span><span class="p">][</span><span class="mi">1</span><span class="p">])</span>
+        <span class="n">k1</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">rankingByChoosing</span><span class="p">)</span>
+        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="n">k1</span><span class="p">):</span>
+            <span class="k">if</span> <span class="n">Debug</span><span class="p">:</span>
+                <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;==&gt;&gt;&#39;</span><span class="p">,</span><span class="n">i</span><span class="p">,</span><span class="n">rankingByChoosing</span><span class="p">[</span><span class="n">i</span><span class="o">-</span><span class="mi">1</span><span class="p">],</span><span class="n">rankingByChoosing</span><span class="p">[</span><span class="n">i</span><span class="p">])</span>
+            <span class="n">ci</span> <span class="o">=</span> <span class="p">[]</span>
+            <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">rankingByChoosing</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="mi">1</span><span class="p">]:</span>
+                <span class="k">if</span> <span class="n">x</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">rankingByChoosing</span><span class="p">[</span><span class="n">i</span><span class="o">-</span><span class="mi">1</span><span class="p">][</span><span class="mi">1</span><span class="p">]:</span>
+                    <span class="n">ci</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+            <span class="k">if</span> <span class="n">Debug</span><span class="p">:</span>
+                <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;==&gt;&gt;&#39;</span><span class="p">,</span><span class="n">i</span><span class="p">,</span><span class="n">rankingByChoosing</span><span class="p">[</span><span class="n">i</span><span class="o">-</span><span class="mi">1</span><span class="p">],</span><span class="n">rankingByChoosing</span><span class="p">[</span><span class="n">i</span><span class="p">],</span><span class="n">ci</span><span class="p">)</span>                
+            <span class="n">rankingByChoosing</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="n">rankingByChoosing</span><span class="p">[</span><span class="mi">1</span><span class="p">][</span><span class="mi">0</span><span class="p">],</span><span class="n">ci</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">Debug</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;rbcp: &#39;</span><span class="p">,</span> <span class="n">rbcp</span><span class="p">)</span>
             <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;rankingByChoosing:&#39;</span><span class="p">,</span><span class="n">rankingByChoosing</span><span class="p">)</span>
         
         <span class="k">if</span> <span class="n">Comments</span><span class="p">:</span>
             <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;*---- exporting a dot file for GraphViz tools ---------*&#39;</span><span class="p">)</span>
         <span class="n">actionKeys</span> <span class="o">=</span> <span class="p">[</span><span class="n">x</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">digraph</span><span class="o">.</span><span class="n">actions</span><span class="p">]</span>
         <span class="n">n</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">actionKeys</span><span class="p">)</span>
-        <span class="c1">#if relation is None:</span>
-        <span class="c1">#    relation = deepcopy(digraph.relation)</span>
         <span class="n">Med</span> <span class="o">=</span> <span class="n">digraph</span><span class="o">.</span><span class="n">valuationdomain</span><span class="p">[</span><span class="s1">&#39;med&#39;</span><span class="p">]</span>
         <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span>
         <span class="k">if</span> <span class="n">fileName</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
@@ -2252,55 +2231,22 @@
         <span class="n">dotName</span> <span class="o">=</span> <span class="n">name</span><span class="o">+</span><span class="s1">&#39;.dot&#39;</span>
         <span class="k">if</span> <span class="n">Comments</span><span class="p">:</span>
             <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Exporting to &#39;</span><span class="o">+</span><span class="n">dotName</span><span class="p">)</span>
-<span class="c1">##        if bestChoice != set():</span>
-<span class="c1">##            rankBestString = &#39;{rank=max; &#39;</span>
-<span class="c1">##        if worstChoice != set():</span>
-<span class="c1">##            rankWorstString = &#39;{rank=min; &#39;</span>
         <span class="n">fo</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="n">dotName</span><span class="p">,</span><span class="s1">&#39;w&#39;</span><span class="p">)</span>
         <span class="n">fo</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s1">&#39;digraph G {</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)</span>
         <span class="k">if</span> <span class="n">bgcolor</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
             <span class="n">fo</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s1">&#39;graph [ ordering = out, fontname = &quot;Helvetica-Oblique&quot;,</span><span class="se">\n</span><span class="s1"> fontsize = 12,</span><span class="se">\n</span><span class="s1"> label = &quot;&#39;</span><span class="p">)</span>
-
         <span class="k">else</span><span class="p">:</span>
             <span class="n">fo</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s1">&#39;graph [ bgcolor = </span><span class="si">%s</span><span class="s1">, ordering = out, fontname = &quot;Helvetica-Oblique&quot;,</span><span class="se">\n</span><span class="s1"> fontsize = 12,</span><span class="se">\n</span><span class="s1"> label = &quot;&#39;</span> <span class="o">%</span> <span class="n">bgcolor</span><span class="p">)</span>
         <span class="n">fo</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\\</span><span class="s1">nDigraph3 (graphviz)</span><span class="se">\\</span><span class="s1">n R. Bisdorff, 2020&quot;, size=&quot;&#39;</span><span class="p">)</span>
         <span class="n">fo</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">graphSize</span><span class="p">),</span><span class="n">fo</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s1">&#39;&quot;,fontsize=</span><span class="si">%d</span><span class="s1">];</span><span class="se">\n</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="n">fontSize</span><span class="p">)</span>
         <span class="c1"># nodes</span>
         <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">actionKeys</span><span class="p">:</span>
-            <span class="k">if</span> <span class="n">WithRatingDecoration</span><span class="p">:</span>
-                <span class="k">if</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">digraph</span><span class="o">.</span><span class="n">profiles</span><span class="p">:</span>
-                    <span class="n">cat</span> <span class="o">=</span> <span class="n">digraph</span><span class="o">.</span><span class="n">profiles</span><span class="p">[</span><span class="n">x</span><span class="p">][</span><span class="s1">&#39;category&#39;</span><span class="p">]</span>
-                    <span class="k">if</span> <span class="n">digraph</span><span class="o">.</span><span class="n">LowerClosed</span><span class="p">:</span>
-                        <span class="n">nodeName</span> <span class="o">=</span> <span class="n">digraph</span><span class="o">.</span><span class="n">categories</span><span class="p">[</span><span class="n">cat</span><span class="p">][</span><span class="s1">&#39;lowLimit&#39;</span><span class="p">]</span> <span class="o">+</span> <span class="s1">&#39; -&#39;</span>
-                    <span class="k">else</span><span class="p">:</span>
-                        <span class="n">nodeName</span> <span class="o">=</span> <span class="s1">&#39;- &#39;</span> <span class="o">+</span><span class="n">digraph</span><span class="o">.</span><span class="n">categories</span><span class="p">[</span><span class="n">cat</span><span class="p">][</span><span class="s1">&#39;highLimit&#39;</span><span class="p">]</span>
-                    <span class="n">node</span> <span class="o">=</span> <span class="s1">&#39;</span><span class="si">%s</span><span class="s1"> [shape = &quot;box&quot;, fillcolor=lightcoral, style=filled, label = &quot;</span><span class="si">%s</span><span class="s1">&quot;, fontsize=</span><span class="si">%d</span><span class="s1">];</span><span class="se">\n</span><span class="s1">&#39;</span>\
-                       <span class="o">%</span> <span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">x</span><span class="p">),</span><span class="n">nodeName</span><span class="p">,</span><span class="n">fontSize</span><span class="p">)</span>           
-                <span class="k">else</span><span class="p">:</span>
-                    <span class="k">try</span><span class="p">:</span>
-                        <span class="n">nodeName</span> <span class="o">=</span> <span class="n">digraph</span><span class="o">.</span><span class="n">actions</span><span class="p">[</span><span class="n">x</span><span class="p">][</span><span class="s1">&#39;shortName&#39;</span><span class="p">]</span>
-                    <span class="k">except</span><span class="p">:</span>
-                        <span class="n">nodeName</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
-                    <span class="n">node</span> <span class="o">=</span> <span class="s1">&#39;</span><span class="si">%s</span><span class="s1"> [shape = &quot;circle&quot;, label = &quot;</span><span class="si">%s</span><span class="s1">&quot;, fontsize=</span><span class="si">%d</span><span class="s1">];</span><span class="se">\n</span><span class="s1">&#39;</span>\
-                       <span class="o">%</span> <span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">_safeName</span><span class="p">(</span><span class="n">x</span><span class="p">)),</span><span class="n">_safeName</span><span class="p">(</span><span class="n">nodeName</span><span class="p">),</span><span class="n">fontSize</span><span class="p">)</span>       
-            <span class="k">elif</span> <span class="n">WithBestPathDecoration</span><span class="p">:</span>
-                <span class="k">try</span><span class="p">:</span>
-                    <span class="n">nodeName</span> <span class="o">=</span> <span class="n">digraph</span><span class="o">.</span><span class="n">actions</span><span class="p">[</span><span class="n">x</span><span class="p">][</span><span class="s1">&#39;shortName&#39;</span><span class="p">]</span>
-                <span class="k">except</span><span class="p">:</span>
-                    <span class="n">nodeName</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>                    
-                <span class="k">if</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">digraph</span><span class="o">.</span><span class="n">optimalPath</span><span class="p">:</span>
-                    <span class="n">node</span> <span class="o">=</span> <span class="s1">&#39;</span><span class="si">%s</span><span class="s1"> [shape = &quot;circle&quot;, fillcolor=lightcoral, style=filled, label = &quot;</span><span class="si">%s</span><span class="s1">&quot;, fontsize=</span><span class="si">%d</span><span class="s1">];</span><span class="se">\n</span><span class="s1">&#39;</span>\
-                       <span class="o">%</span> <span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">_safeName</span><span class="p">(</span><span class="n">x</span><span class="p">)),</span><span class="n">_safeName</span><span class="p">(</span><span class="n">nodeName</span><span class="p">),</span><span class="n">fontSize</span><span class="p">)</span>           
-                <span class="k">else</span><span class="p">:</span>
-                    <span class="n">node</span> <span class="o">=</span> <span class="s1">&#39;</span><span class="si">%s</span><span class="s1"> [shape = &quot;circle&quot;, label = &quot;</span><span class="si">%s</span><span class="s1">&quot;, fontsize=</span><span class="si">%d</span><span class="s1">];</span><span class="se">\n</span><span class="s1">&#39;</span>\
-                       <span class="o">%</span> <span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">_safeName</span><span class="p">(</span><span class="n">x</span><span class="p">)),</span><span class="n">_safeName</span><span class="p">(</span><span class="n">nodeName</span><span class="p">),</span><span class="n">fontSize</span><span class="p">)</span>       
-            <span class="k">else</span><span class="p">:</span>
-                <span class="k">try</span><span class="p">:</span>
-                    <span class="n">nodeName</span> <span class="o">=</span> <span class="n">digraph</span><span class="o">.</span><span class="n">actions</span><span class="p">[</span><span class="n">x</span><span class="p">][</span><span class="s1">&#39;shortName&#39;</span><span class="p">]</span>
-                <span class="k">except</span><span class="p">:</span>
-                    <span class="n">nodeName</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
-                <span class="n">node</span> <span class="o">=</span> <span class="s1">&#39;</span><span class="si">%s</span><span class="s1"> [shape = &quot;circle&quot;, label = &quot;</span><span class="si">%s</span><span class="s1">&quot;, fontsize=</span><span class="si">%d</span><span class="s1">];</span><span class="se">\n</span><span class="s1">&#39;</span>\
-                       <span class="o">%</span> <span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">_safeName</span><span class="p">(</span><span class="n">x</span><span class="p">)),</span><span class="n">_safeName</span><span class="p">(</span><span class="n">nodeName</span><span class="p">),</span><span class="n">fontSize</span><span class="p">)</span>
+            <span class="k">try</span><span class="p">:</span>
+                <span class="n">nodeName</span> <span class="o">=</span> <span class="n">digraph</span><span class="o">.</span><span class="n">actions</span><span class="p">[</span><span class="n">x</span><span class="p">][</span><span class="s1">&#39;shortName&#39;</span><span class="p">]</span>
+            <span class="k">except</span><span class="p">:</span>
+                <span class="n">nodeName</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+            <span class="n">node</span> <span class="o">=</span> <span class="s1">&#39;</span><span class="si">%s</span><span class="s1"> [shape = &quot;circle&quot;, label = &quot;</span><span class="si">%s</span><span class="s1">&quot;, fontsize=</span><span class="si">%d</span><span class="s1">];</span><span class="se">\n</span><span class="s1">&#39;</span>\
+                   <span class="o">%</span> <span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">_safeName</span><span class="p">(</span><span class="n">x</span><span class="p">)),</span><span class="n">_safeName</span><span class="p">(</span><span class="n">nodeName</span><span class="p">),</span><span class="n">fontSize</span><span class="p">)</span>
             <span class="n">fo</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">node</span><span class="p">)</span>
         <span class="c1"># same ranks for Hasses equivalence classes</span>
         <span class="n">k</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">rankingByChoosing</span><span class="p">)</span>
@@ -2323,45 +2269,16 @@
                     <span class="n">jch</span> <span class="o">=</span> <span class="n">rankingByChoosing</span><span class="p">[</span><span class="n">j</span><span class="p">][</span><span class="mi">1</span><span class="p">]</span>
                     <span class="k">for</span> <span class="n">y</span> <span class="ow">in</span> <span class="n">jch</span><span class="p">:</span>
                         <span class="c1">#edge = &#39;n&#39;+str(i+1)+&#39;-&gt; n&#39;+str(i+2)+&#39; [dir=forward,style=&quot;setlinewidth(1)&quot;,color=black, arrowhead=normal] ;\n&#39;</span>
-                        <span class="k">if</span> <span class="n">WithBestPathDecoration</span><span class="p">:</span>
-                            <span class="k">if</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">digraph</span><span class="o">.</span><span class="n">optimalPath</span> <span class="ow">and</span> <span class="n">y</span> <span class="ow">in</span> <span class="n">digraph</span><span class="o">.</span><span class="n">optimalPath</span><span class="p">:</span>
-                                <span class="n">arcColor</span> <span class="o">=</span> <span class="s1">&#39;blue&#39;</span>
-                                <span class="n">lineWidth</span> <span class="o">=</span> <span class="mi">2</span>
-                                <span class="k">if</span> <span class="n">relation</span><span class="p">[</span><span class="n">x</span><span class="p">][</span><span class="n">y</span><span class="p">]</span> <span class="o">&gt;</span> <span class="n">digraph</span><span class="o">.</span><span class="n">valuationdomain</span><span class="p">[</span><span class="s1">&#39;med&#39;</span><span class="p">]:</span>
-                                    <span class="c1">#arcColor = &#39;black&#39;</span>
-                                    <span class="n">edge</span> <span class="o">=</span> <span class="s1">&#39;</span><span class="si">%s</span><span class="s1">-&gt; </span><span class="si">%s</span><span class="s1"> [label=&quot;</span><span class="si">%.0f</span><span class="s1">&quot;,style=&quot;setlinewidth(</span><span class="si">%d</span><span class="s1">)&quot;,color=</span><span class="si">%s</span><span class="s1">] ;</span><span class="se">\n</span><span class="s1">&#39;</span> <span class="o">%</span>\
-                                        <span class="p">(</span><span class="n">_safeName</span><span class="p">(</span><span class="n">x</span><span class="p">),</span><span class="n">_safeName</span><span class="p">(</span><span class="n">y</span><span class="p">),</span><span class="n">digraph</span><span class="o">.</span><span class="n">costs</span><span class="p">[</span><span class="n">x</span><span class="p">][</span><span class="n">y</span><span class="p">],</span><span class="n">lineWidth</span><span class="p">,</span><span class="n">arcColor</span><span class="p">)</span>
-                                    <span class="n">fo</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">edge</span><span class="p">)</span>
-                                <span class="k">elif</span> <span class="n">relation</span><span class="p">[</span><span class="n">y</span><span class="p">][</span><span class="n">x</span><span class="p">]</span> <span class="o">&gt;</span> <span class="n">digraph</span><span class="o">.</span><span class="n">valuationdomain</span><span class="p">[</span><span class="s1">&#39;med&#39;</span><span class="p">]:</span>
-                                    <span class="c1">#arcColor = &#39;black&#39;</span>
-                                    <span class="n">edge</span> <span class="o">=</span> <span class="s1">&#39;</span><span class="si">%s</span><span class="s1">-&gt; </span><span class="si">%s</span><span class="s1"> [label=&quot;</span><span class="si">%.0f</span><span class="s1">&quot;,style=&quot;setlinewidth(</span><span class="si">%d</span><span class="s1">)&quot;,color=</span><span class="si">%s</span><span class="s1">] ;</span><span class="se">\n</span><span class="s1">&#39;</span> <span class="o">%</span>\
-                                        <span class="p">(</span><span class="n">_safeName</span><span class="p">(</span><span class="n">y</span><span class="p">),</span><span class="n">_safeName</span><span class="p">(</span><span class="n">x</span><span class="p">),</span><span class="n">digraph</span><span class="o">.</span><span class="n">costs</span><span class="p">[</span><span class="n">y</span><span class="p">][</span><span class="n">x</span><span class="p">],</span><span class="n">lineWidth</span><span class="p">,</span><span class="n">arcColor</span><span class="p">)</span>
-                                    <span class="n">fo</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">edge</span><span class="p">)</span>
-                            <span class="k">else</span><span class="p">:</span>
-                                <span class="n">arcColor</span><span class="o">=</span> <span class="s1">&#39;grey&#39;</span>
-                                <span class="n">lineWidth</span> <span class="o">=</span> <span class="mi">1</span>
-                                <span class="k">if</span> <span class="n">relation</span><span class="p">[</span><span class="n">x</span><span class="p">][</span><span class="n">y</span><span class="p">]</span> <span class="o">&gt;</span> <span class="n">digraph</span><span class="o">.</span><span class="n">valuationdomain</span><span class="p">[</span><span class="s1">&#39;med&#39;</span><span class="p">]:</span>
-                                    <span class="c1">#arcColor = &#39;black&#39;</span>
-                                    <span class="n">edge</span> <span class="o">=</span> <span class="s1">&#39;</span><span class="si">%s</span><span class="s1">-&gt; </span><span class="si">%s</span><span class="s1"> [style=&quot;setlinewidth(</span><span class="si">%d</span><span class="s1">)&quot;,color=</span><span class="si">%s</span><span class="s1">] ;</span><span class="se">\n</span><span class="s1">&#39;</span> <span class="o">%</span>\
-                                        <span class="p">(</span><span class="n">_safeName</span><span class="p">(</span><span class="n">x</span><span class="p">),</span><span class="n">_safeName</span><span class="p">(</span><span class="n">y</span><span class="p">),</span><span class="n">lineWidth</span><span class="p">,</span><span class="n">arcColor</span><span class="p">)</span>
-                                    <span class="n">fo</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">edge</span><span class="p">)</span>
-                                <span class="k">elif</span> <span class="n">relation</span><span class="p">[</span><span class="n">y</span><span class="p">][</span><span class="n">x</span><span class="p">]</span> <span class="o">&gt;</span> <span class="n">digraph</span><span class="o">.</span><span class="n">valuationdomain</span><span class="p">[</span><span class="s1">&#39;med&#39;</span><span class="p">]:</span>
-                                    <span class="c1">#arcColor = &#39;black&#39;</span>
-                                    <span class="n">edge</span> <span class="o">=</span> <span class="s1">&#39;</span><span class="si">%s</span><span class="s1">-&gt; </span><span class="si">%s</span><span class="s1"> [style=&quot;setlinewidth(</span><span class="si">%d</span><span class="s1">)&quot;,color=</span><span class="si">%s</span><span class="s1">] ;</span><span class="se">\n</span><span class="s1">&#39;</span> <span class="o">%</span>\
-                                        <span class="p">(</span><span class="n">_safeName</span><span class="p">(</span><span class="n">y</span><span class="p">),</span><span class="n">_safeName</span><span class="p">(</span><span class="n">x</span><span class="p">),</span><span class="n">lineWidth</span><span class="p">,</span><span class="n">arcColor</span><span class="p">)</span>
-                                    <span class="n">fo</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">edge</span><span class="p">)</span>
-
-                        <span class="k">else</span><span class="p">:</span>
-                            <span class="k">if</span> <span class="n">relation</span><span class="p">[</span><span class="n">x</span><span class="p">][</span><span class="n">y</span><span class="p">]</span> <span class="o">&gt;</span> <span class="n">digraph</span><span class="o">.</span><span class="n">valuationdomain</span><span class="p">[</span><span class="s1">&#39;med&#39;</span><span class="p">]:</span>
-                                <span class="n">arcColor</span> <span class="o">=</span> <span class="s1">&#39;black&#39;</span>
-                                <span class="n">edge</span> <span class="o">=</span> <span class="s1">&#39;</span><span class="si">%s</span><span class="s1">-&gt; </span><span class="si">%s</span><span class="s1"> [style=&quot;setlinewidth(</span><span class="si">%d</span><span class="s1">)&quot;,color=</span><span class="si">%s</span><span class="s1">,arrowhead=none] ;</span><span class="se">\n</span><span class="s1">&#39;</span> <span class="o">%</span>\
-                                    <span class="p">(</span><span class="n">_safeName</span><span class="p">(</span><span class="n">x</span><span class="p">),</span><span class="n">_safeName</span><span class="p">(</span><span class="n">y</span><span class="p">),</span><span class="mi">1</span><span class="p">,</span><span class="n">arcColor</span><span class="p">)</span>
-                                <span class="n">fo</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">edge</span><span class="p">)</span>
-                            <span class="k">elif</span> <span class="n">relation</span><span class="p">[</span><span class="n">y</span><span class="p">][</span><span class="n">x</span><span class="p">]</span> <span class="o">&gt;</span> <span class="n">digraph</span><span class="o">.</span><span class="n">valuationdomain</span><span class="p">[</span><span class="s1">&#39;med&#39;</span><span class="p">]:</span>
-                                <span class="n">arcColor</span> <span class="o">=</span> <span class="s1">&#39;black&#39;</span>
-                                <span class="n">edge</span> <span class="o">=</span> <span class="s1">&#39;</span><span class="si">%s</span><span class="s1">-&gt; </span><span class="si">%s</span><span class="s1"> [style=&quot;setlinewidth(</span><span class="si">%d</span><span class="s1">)&quot;,color=</span><span class="si">%s</span><span class="s1">,arrowhead=none] ;</span><span class="se">\n</span><span class="s1">&#39;</span> <span class="o">%</span>\
-                                    <span class="p">(</span><span class="n">_safeName</span><span class="p">(</span><span class="n">y</span><span class="p">),</span><span class="n">_safeName</span><span class="p">(</span><span class="n">x</span><span class="p">),</span><span class="mi">1</span><span class="p">,</span><span class="n">arcColor</span><span class="p">)</span>
-                                <span class="n">fo</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">edge</span><span class="p">)</span>
+                        <span class="k">if</span> <span class="n">relation</span><span class="p">[</span><span class="n">x</span><span class="p">][</span><span class="n">y</span><span class="p">]</span> <span class="o">&gt;</span> <span class="n">digraph</span><span class="o">.</span><span class="n">valuationdomain</span><span class="p">[</span><span class="s1">&#39;med&#39;</span><span class="p">]:</span>
+                            <span class="n">arcColor</span> <span class="o">=</span> <span class="s1">&#39;black&#39;</span>
+                            <span class="n">edge</span> <span class="o">=</span> <span class="s1">&#39;</span><span class="si">%s</span><span class="s1">-&gt; </span><span class="si">%s</span><span class="s1"> [style=&quot;setlinewidth(</span><span class="si">%d</span><span class="s1">)&quot;,color=</span><span class="si">%s</span><span class="s1">,arrowhead=none] ;</span><span class="se">\n</span><span class="s1">&#39;</span> <span class="o">%</span>\
+                                <span class="p">(</span><span class="n">_safeName</span><span class="p">(</span><span class="n">x</span><span class="p">),</span><span class="n">_safeName</span><span class="p">(</span><span class="n">y</span><span class="p">),</span><span class="mi">1</span><span class="p">,</span><span class="n">arcColor</span><span class="p">)</span>
+                            <span class="n">fo</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">edge</span><span class="p">)</span>
+                        <span class="k">elif</span> <span class="n">relation</span><span class="p">[</span><span class="n">y</span><span class="p">][</span><span class="n">x</span><span class="p">]</span> <span class="o">&gt;</span> <span class="n">digraph</span><span class="o">.</span><span class="n">valuationdomain</span><span class="p">[</span><span class="s1">&#39;med&#39;</span><span class="p">]:</span>
+                            <span class="n">arcColor</span> <span class="o">=</span> <span class="s1">&#39;black&#39;</span>
+                            <span class="n">edge</span> <span class="o">=</span> <span class="s1">&#39;</span><span class="si">%s</span><span class="s1">-&gt; </span><span class="si">%s</span><span class="s1"> [style=&quot;setlinewidth(</span><span class="si">%d</span><span class="s1">)&quot;,color=</span><span class="si">%s</span><span class="s1">,arrowhead=none] ;</span><span class="se">\n</span><span class="s1">&#39;</span> <span class="o">%</span>\
+                                <span class="p">(</span><span class="n">_safeName</span><span class="p">(</span><span class="n">y</span><span class="p">),</span><span class="n">_safeName</span><span class="p">(</span><span class="n">x</span><span class="p">),</span><span class="mi">1</span><span class="p">,</span><span class="n">arcColor</span><span class="p">)</span>
+                            <span class="n">fo</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">edge</span><span class="p">)</span>
                                                   
         <span class="n">fo</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s1">&#39;}</span><span class="se">\n</span><span class="s1"> </span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)</span>
         <span class="n">fo</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
@@ -2380,8 +2297,7 @@
                 <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;graphViz tools not avalaible! Please check installation.&#39;</span><span class="p">)</span></div>
 </div>
 
- 
-        
+         
 <span class="c1">#########</span>
 <span class="c1"># compatibility with obsolete weakOrders module</span>
 <span class="c1">#######################</span>
@@ -2476,7 +2392,7 @@
 
   <div role="contentinfo">
     <p>&#169; Copyright 2012-2025, Raymond Bisdorff.
-      <span class="lastupdated">Last updated on Mar 21, 2025.
+      <span class="lastupdated">Last updated on Mar 24, 2025.
       </span></p>
   </div>
 

@@ -1978,12 +1978,10 @@ class WeakBachetRanking(TransitiveDigraph):
                 boostedOrdering.append(x)
         return boostedOrdering
 
-    def exportGraphViz(self,fileName=None,direction='bipolar',
-                       WithBestPathDecoration=False,
-                       WithRatingDecoration=False,
+    def exportGraphViz(self,fileName=None,
                        Comments=True,graphType='png',
                        graphSize='7,7',bgcolor='cornsilk',
-                       fontSize=10,Debug=False):
+                       fontSize=10,Debug=True):
         """
         export GraphViz dot file for Hasse diagram drawing filtering.
         """
@@ -2000,54 +1998,35 @@ class WeakBachetRanking(TransitiveDigraph):
             return t1
         # working on a deepcopy of self
         digraph = deepcopy(self)
-        if direction == 'bipolar':
-            try:
-                rankingByChoosing = digraph.rankingByChoosing['result']
-            except:
-                digraph.computeRankingByChoosing()
-                print(digraph.rankingByChoosing)
-            rbcp = digraph.rankingByChoosing['result']
-            rankingByChoosing = []
-            k = len(rbcp)
-            for i in range(k):
-                rankingByChoosing.append(rbcp[i][0])
-            for i in range(k):
-                rankingByChoosing.append(rbcp[k-i-1][1])
-            k1 = len(rankingByChoosing)
-            for i in range(1,k1):
-                if Debug:
-                    print('==>>',i,rankingByChoosing[i-1],rankingByChoosing[i])
-                ci = []
-                for x in rankingByChoosing[i][1]:
-                    if x not in rankingByChoosing[i-1][1]:
-                        ci.append(x)
-                if Debug:
-                    print('==>>',i,rankingByChoosing[i-1],rankingByChoosing[i],ci)                
-                rankingByChoosing[i] = (rankingByChoosing[1][0],ci)
-            if Debug:
-                print('rbcp: ', rbcp)
-                print('rankingByChoosing:',rankingByChoosing)
-        elif direction == 'best':
-            try:
-                rankingByChoosing = digraph.rankingByBestChoosing['result']
-            except:
-                digraph.computeRankingByBestChoosing()
-                rankingByChoosing = digraph.rankingByBestChoosing['result']
-        else:
-            try:
-                rankingByChoosing = digraph.rankingByLastChoosing['result']
-            except:
-                digraph.computeRankingByLastChoosing()
-                rankingByChoosing = digraph.rankingByLastChoosing['result']
+        digraph.computeRankingByChoosing()
         if Debug:
+            print(digraph.rankingByChoosing)
+        rbcp = digraph.rankingByChoosing['result']
+        rankingByChoosing = []
+        k = len(rbcp)
+        for i in range(k):
+            rankingByChoosing.append(rbcp[i][0])
+        for i in range(k):
+            rankingByChoosing.append(rbcp[k-i-1][1])
+        k1 = len(rankingByChoosing)
+        for i in range(1,k1):
+            if Debug:
+                print('==>>',i,rankingByChoosing[i-1],rankingByChoosing[i])
+            ci = []
+            for x in rankingByChoosing[i][1]:
+                if x not in rankingByChoosing[i-1][1]:
+                    ci.append(x)
+            if Debug:
+                print('==>>',i,rankingByChoosing[i-1],rankingByChoosing[i],ci)                
+            rankingByChoosing[i] = (rankingByChoosing[1][0],ci)
+        if Debug:
+            print('rbcp: ', rbcp)
             print('rankingByChoosing:',rankingByChoosing)
         
         if Comments:
             print('*---- exporting a dot file for GraphViz tools ---------*')
         actionKeys = [x for x in digraph.actions]
         n = len(actionKeys)
-        #if relation is None:
-        #    relation = deepcopy(digraph.relation)
         Med = digraph.valuationdomain['med']
         i = 0
         if fileName is None:
@@ -2057,55 +2036,22 @@ class WeakBachetRanking(TransitiveDigraph):
         dotName = name+'.dot'
         if Comments:
             print('Exporting to '+dotName)
-##        if bestChoice != set():
-##            rankBestString = '{rank=max; '
-##        if worstChoice != set():
-##            rankWorstString = '{rank=min; '
         fo = open(dotName,'w')
         fo.write('digraph G {\n')
         if bgcolor is None:
             fo.write('graph [ ordering = out, fontname = "Helvetica-Oblique",\n fontsize = 12,\n label = "')
-
         else:
             fo.write('graph [ bgcolor = %s, ordering = out, fontname = "Helvetica-Oblique",\n fontsize = 12,\n label = "' % bgcolor)
         fo.write('\\nDigraph3 (graphviz)\\n R. Bisdorff, 2020", size="')
         fo.write(graphSize),fo.write('",fontsize=%d];\n' % fontSize)
         # nodes
         for x in actionKeys:
-            if WithRatingDecoration:
-                if x in digraph.profiles:
-                    cat = digraph.profiles[x]['category']
-                    if digraph.LowerClosed:
-                        nodeName = digraph.categories[cat]['lowLimit'] + ' -'
-                    else:
-                        nodeName = '- ' +digraph.categories[cat]['highLimit']
-                    node = '%s [shape = "box", fillcolor=lightcoral, style=filled, label = "%s", fontsize=%d];\n'\
-                       % (str(x),nodeName,fontSize)           
-                else:
-                    try:
-                        nodeName = digraph.actions[x]['shortName']
-                    except:
-                        nodeName = str(x)
-                    node = '%s [shape = "circle", label = "%s", fontsize=%d];\n'\
-                       % (str(_safeName(x)),_safeName(nodeName),fontSize)       
-            elif WithBestPathDecoration:
-                try:
-                    nodeName = digraph.actions[x]['shortName']
-                except:
-                    nodeName = str(x)                    
-                if x in digraph.optimalPath:
-                    node = '%s [shape = "circle", fillcolor=lightcoral, style=filled, label = "%s", fontsize=%d];\n'\
-                       % (str(_safeName(x)),_safeName(nodeName),fontSize)           
-                else:
-                    node = '%s [shape = "circle", label = "%s", fontsize=%d];\n'\
-                       % (str(_safeName(x)),_safeName(nodeName),fontSize)       
-            else:
-                try:
-                    nodeName = digraph.actions[x]['shortName']
-                except:
-                    nodeName = str(x)
-                node = '%s [shape = "circle", label = "%s", fontsize=%d];\n'\
-                       % (str(_safeName(x)),_safeName(nodeName),fontSize)
+            try:
+                nodeName = digraph.actions[x]['shortName']
+            except:
+                nodeName = str(x)
+            node = '%s [shape = "circle", label = "%s", fontsize=%d];\n'\
+                   % (str(_safeName(x)),_safeName(nodeName),fontSize)
             fo.write(node)
         # same ranks for Hasses equivalence classes
         k = len(rankingByChoosing)
@@ -2128,45 +2074,16 @@ class WeakBachetRanking(TransitiveDigraph):
                     jch = rankingByChoosing[j][1]
                     for y in jch:
                         #edge = 'n'+str(i+1)+'-> n'+str(i+2)+' [dir=forward,style="setlinewidth(1)",color=black, arrowhead=normal] ;\n'
-                        if WithBestPathDecoration:
-                            if x in digraph.optimalPath and y in digraph.optimalPath:
-                                arcColor = 'blue'
-                                lineWidth = 2
-                                if relation[x][y] > digraph.valuationdomain['med']:
-                                    #arcColor = 'black'
-                                    edge = '%s-> %s [label="%.0f",style="setlinewidth(%d)",color=%s] ;\n' %\
-                                        (_safeName(x),_safeName(y),digraph.costs[x][y],lineWidth,arcColor)
-                                    fo.write(edge)
-                                elif relation[y][x] > digraph.valuationdomain['med']:
-                                    #arcColor = 'black'
-                                    edge = '%s-> %s [label="%.0f",style="setlinewidth(%d)",color=%s] ;\n' %\
-                                        (_safeName(y),_safeName(x),digraph.costs[y][x],lineWidth,arcColor)
-                                    fo.write(edge)
-                            else:
-                                arcColor= 'grey'
-                                lineWidth = 1
-                                if relation[x][y] > digraph.valuationdomain['med']:
-                                    #arcColor = 'black'
-                                    edge = '%s-> %s [style="setlinewidth(%d)",color=%s] ;\n' %\
-                                        (_safeName(x),_safeName(y),lineWidth,arcColor)
-                                    fo.write(edge)
-                                elif relation[y][x] > digraph.valuationdomain['med']:
-                                    #arcColor = 'black'
-                                    edge = '%s-> %s [style="setlinewidth(%d)",color=%s] ;\n' %\
-                                        (_safeName(y),_safeName(x),lineWidth,arcColor)
-                                    fo.write(edge)
-
-                        else:
-                            if relation[x][y] > digraph.valuationdomain['med']:
-                                arcColor = 'black'
-                                edge = '%s-> %s [style="setlinewidth(%d)",color=%s,arrowhead=none] ;\n' %\
-                                    (_safeName(x),_safeName(y),1,arcColor)
-                                fo.write(edge)
-                            elif relation[y][x] > digraph.valuationdomain['med']:
-                                arcColor = 'black'
-                                edge = '%s-> %s [style="setlinewidth(%d)",color=%s,arrowhead=none] ;\n' %\
-                                    (_safeName(y),_safeName(x),1,arcColor)
-                                fo.write(edge)
+                        if relation[x][y] > digraph.valuationdomain['med']:
+                            arcColor = 'black'
+                            edge = '%s-> %s [style="setlinewidth(%d)",color=%s,arrowhead=none] ;\n' %\
+                                (_safeName(x),_safeName(y),1,arcColor)
+                            fo.write(edge)
+                        elif relation[y][x] > digraph.valuationdomain['med']:
+                            arcColor = 'black'
+                            edge = '%s-> %s [style="setlinewidth(%d)",color=%s,arrowhead=none] ;\n' %\
+                                (_safeName(y),_safeName(x),1,arcColor)
+                            fo.write(edge)
                                                   
         fo.write('}\n \n')
         fo.close()
@@ -2183,8 +2100,7 @@ class WeakBachetRanking(TransitiveDigraph):
         except:
             if Comments:
                 print('graphViz tools not avalaible! Please check installation.')
- 
-        
+         
 #########
 # compatibility with obsolete weakOrders module
 #######################
