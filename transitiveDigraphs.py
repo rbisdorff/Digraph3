@@ -1981,7 +1981,7 @@ class WeakBachetRanking(TransitiveDigraph):
     def exportGraphViz(self,fileName=None,
                        Comments=True,graphType='png',
                        graphSize='7,7',bgcolor='cornsilk',
-                       fontSize=10,Debug=True):
+                       fontSize=10,Debug=False):
         """
         export GraphViz dot file for Hasse diagram drawing filtering.
         """
