@@ -367,8 +367,8 @@ def omin(Med,L, Debug=False):
     Epistemic **conjunction** of a list L of bipolar outranking characteristics.
     Med is the given valuation domain median.
 
-    With **positive** arguments, omin operates a **min**,
-    with **negative** arguments, a **max**.
+    With **positive or zero** arguments, omin operates a **min**,
+    with **negative or zero** arguments, a **max**.
 
     The mixture of both **positive and negative** arguments results
     in an **indeterminate** value.
@@ -381,21 +381,33 @@ def omin(Med,L, Debug=False):
     terms = list(L)
     termsPlus = []
     termsMinus = []
+    termsNull = []
     for i in range(len(terms)):
         if terms[i] > Med:
             termsPlus.append(terms[i])
         elif terms[i] < Med:
             termsMinus.append(terms[i])
+        else:
+            termsNull.append(terms[i])
 ##    if Debug:
 ##        print('terms', terms)
 ##        print('termsPlus',termsPlus)
 ##        print('termsMinus', termsMinus)
     np = len(termsPlus)
     nm = len(termsMinus)
-    if np > 0 and nm == 0:
-        return min(termsPlus)
-    elif nm > 0 and np == 0:
-        return max(termsMinus)
+    nn = len(termsNull)
+    if np > 0:
+        if nm > 0:
+            return Med
+        elif nn > 0:
+            return Med
+        else:
+            return min(termsPlus)
+    elif nm > 0:
+        if nn > 0:
+            return Med
+        else:
+            return max(termsMinus)
     else:
         return Med
 
