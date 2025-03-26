@@ -335,6 +335,7 @@ class TransitiveDigraph(Digraph):
     def exportGraphViz(self,fileName=None,direction='best',
                        WithBestPathDecoration=False,
                        WithRatingDecoration=False,
+                       Arrowheads=False,
                        Comments=True,graphType='png',
                        graphSize='7,7',bgcolor='cornsilk',
                        fontSize=10,Debug=False):
@@ -485,13 +486,22 @@ class TransitiveDigraph(Digraph):
                         else:
                             if relation[x][y] > digraph.valuationdomain['med']:
                                 arcColor = 'black'
-                                edge = '%s-> %s [style="setlinewidth(%d)",color=%s,arrowhead=none] ;\n' %\
+                                if ArrowHeads:
+                                    edge = '%s-> %s [style="setlinewidth(%d)",color=%s] ;\n' %\
                                     (_safeName(x),_safeName(y),1,arcColor)
+                                else:
+                                    edge = '%s-> %s [style="setlinewidth(%d)",color=%s,arrowhead=none] ;\n' %\
+                                    (_safeName(x),_safeName(y),1,arcColor)                                    
                                 fo.write(edge)
                             elif relation[y][x] > digraph.valuationdomain['med']:
                                 arcColor = 'black'
-                                edge = '%s-> %s [style="setlinewidth(%d)",color=%s,arrowhead=none] ;\n' %\
+                                if ArrowHeads:
+                                    edge = '%s-> %s [style="setlinewidth(%d)",color=%s] ;\n' %\
                                     (_safeName(y),_safeName(x),1,arcColor)
+                                else:
+                                    edge = '%s-> %s [style="setlinewidth(%d)",color=%s,arrowhead=none] ;\n' %\
+                                    (_safeName(y),_safeName(x),1,arcColor)
+                                    
                                 fo.write(edge)
                                                   
         fo.write('}\n \n')
@@ -1978,7 +1988,7 @@ class WeakBachetRanking(TransitiveDigraph):
                 boostedOrdering.append(x)
         return boostedOrdering
 
-    def exportGraphViz(self,fileName=None,
+    def exportGraphViz(self,fileName=None,ArrowHeads=False,
                        Comments=True,graphType='png',
                        graphSize='7,7',bgcolor='cornsilk',
                        fontSize=10,Debug=False):
@@ -2076,13 +2086,22 @@ class WeakBachetRanking(TransitiveDigraph):
                         #edge = 'n'+str(i+1)+'-> n'+str(i+2)+' [dir=forward,style="setlinewidth(1)",color=black, arrowhead=normal] ;\n'
                         if relation[x][y] > digraph.valuationdomain['med']:
                             arcColor = 'black'
-                            edge = '%s-> %s [style="setlinewidth(%d)",color=%s,arrowhead=none] ;\n' %\
-                                (_safeName(x),_safeName(y),1,arcColor)
+                            if ArrowHeads:
+                                edge = '%s-> %s [style="setlinewidth(%d)",color=%s] ;\n' %\
+                                    (_safeName(x),_safeName(y),1,arcColor)
+                            else:
+                                edge = '%s-> %s [style="setlinewidth(%d)",color=%s,arrowhead=none] ;\n' %\
+                                    (_safeName(x),_safeName(y),1,arcColor)                                
                             fo.write(edge)
                         elif relation[y][x] > digraph.valuationdomain['med']:
                             arcColor = 'black'
-                            edge = '%s-> %s [style="setlinewidth(%d)",color=%s,arrowhead=none] ;\n' %\
-                                (_safeName(y),_safeName(x),1,arcColor)
+                            if ArrowHeads:
+                                edge = '%s-> %s [style="setlinewidth(%d)",color=%s] ;\n' %\
+                                    (_safeName(y),_safeName(x),1,arcColor)
+                            else:
+                                edge = '%s-> %s [style="setlinewidth(%d)",color=%s,arrowhead=none] ;\n' %\
+                                    (_safeName(y),_safeName(x),1,arcColor)
+                                
                             fo.write(edge)
                                                   
         fo.write('}\n \n')
