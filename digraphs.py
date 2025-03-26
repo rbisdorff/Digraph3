@@ -2872,6 +2872,11 @@ class Digraph(object):
             return triples
         else:
             return res
+    def computeIntransitiveTriples(self):
+        """
+        Renders the list of intransitive triples detected in self.
+        """
+        return self.computeTransitivityDegree(ReturnIntransitiveTriples=True)
             
     def isTransitive(self,Comments=False):
         """

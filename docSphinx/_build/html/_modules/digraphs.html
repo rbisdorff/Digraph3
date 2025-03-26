@@ -3125,6 +3125,14 @@
         <span class="k">else</span><span class="p">:</span>
             <span class="k">return</span> <span class="n">res</span></div>
 
+<div class="viewcode-block" id="Digraph.computeIntransitiveTriples">
+<a class="viewcode-back" href="../techDoc.html#digraphs.Digraph.computeIntransitiveTriples">[docs]</a>
+    <span class="k">def</span> <span class="nf">computeIntransitiveTriples</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Renders the list of intransitive triples detected in self.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">computeTransitivityDegree</span><span class="p">(</span><span class="n">ReturnIntransitiveTriples</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span></div>
+
             
 <div class="viewcode-block" id="Digraph.isTransitive">
 <a class="viewcode-back" href="../techDoc.html#digraphs.Digraph.isTransitive">[docs]</a>
