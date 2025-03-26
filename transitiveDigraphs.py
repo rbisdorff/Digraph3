@@ -1940,6 +1940,7 @@ class WeakBachetRanking(TransitiveDigraph):
         print
         self.boostedRanking = self.computeBoostedRanking()
         self.boostedOrdering = self.computeBoostedOrdering()
+        self.weakRanking = self.rankingByChoosing['ranking']
         self.weakBachetCorrelation = g.computeOrdinalCorrelation(ba1)
         self.bachetRanking = resStat[0][1]['optimal']
         self.bachetCorrelation = g.computeRankingCorrelation(self.bachetRanking)

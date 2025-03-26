@@ -1004,9 +1004,32 @@ class Digraph(object):
             rankingByChoosing.append((bestChoice,worstChoice))
             if Debug:
                 print(rankingByChoosing)
-                
-        self.rankingByChoosing = {'CoDual': CoDual, 'result': rankingByChoosing}
-        return {'CoDual': CoDual, 'result': rankingByChoosing}
+        # computing the final ranking
+        rbcp = rankingByChoosing
+        ranking = []
+        k = len(rbcp)
+        for i in range(k):
+            ranking.append(rbcp[i][0])
+        for i in range(k):
+            ranking.append(rbcp[k-i-1][1])
+        k1 = len(ranking)
+        for i in range(1,k1):
+            if Debug:
+                print('==>>',i,ranking[i-1],ranking[i])
+            ci = []
+            for x in ranking[i][1]:
+                if x not in ranking[i-1][1]:
+                    ci.append(x)
+            if Debug:
+                print('==>>',i,ranking[i-1],ranking[i],ci)                
+            ranking[i] = (ranking[1][0],ci)
+        rbc = []
+        for i in range(k1):
+            rbc += ranking[i][1]
+        #from digraphsTools import flatten
+        #rbc = [ x for x in flatten(rbc)]
+        self.rankingByChoosing = {'CoDual': CoDual, 'result': rankingByChoosing, 'ranking': rbc}
+        return {'CoDual': CoDual, 'result': rankingByChoosing, 'ranking': rbc}
 
     def computeRankingByBestChoosing(self,CoDual=False,Debug=False,):
         """
