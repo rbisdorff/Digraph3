@@ -335,7 +335,7 @@ class TransitiveDigraph(Digraph):
     def exportGraphViz(self,fileName=None,direction='best',
                        WithBestPathDecoration=False,
                        WithRatingDecoration=False,
-                       Arrowheads=False,
+                       ArrowHeads=False,
                        Comments=True,graphType='png',
                        graphSize='7,7',bgcolor='cornsilk',
                        fontSize=10,Debug=False):
