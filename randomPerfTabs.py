@@ -2941,7 +2941,7 @@ class RandomCBPerformanceTableau(PerformanceTableau):
         * Parameter commonScale is not used. The scale of cost criteria is cardinal or ordinal (0-10) with probability 1/4, respectively 3/4, whereas the scale of benefit criteria is ordinal or cardinal with probabilities 2/3, respectively 1/3.
         * All cardinal criteria are evaluated with decimals between 0.0 and 100.0 wheras all ordinal criteria are evaluated with integers between 0 and 10.
         * commonThresholds parameter is not used. Preference discrimination is specified as percentiles of concerned performance differences (see below).
-        * CommonPercentiles = {'ind':0.05, 'pref':0.10, 'veto':'95} are expressed in percentiles of the observed performance differences and only concern cardinal criteria.
+        * commonPercentiles = {'ind':0.05, 'pref':0.10, 'veto':0.95} are expressed in percentiles of the observed performance differences and only concern cardinal criteria.
 
     .. note::
 
