@@ -2381,6 +2381,8 @@ class OutrankingDigraph(Digraph,PerformanceTableau):
                             print('$\\;-\\;$ &', end=' ')
                         else:
                             print('  -  ', end=' ')
+                    elif relation is not None:
+                        print('%+d ' % (relation[x[1]][y[1]]), end=' ')
                     else:
                         Max = self.valuationdomain['max']
                         if hasLPDDenotation:

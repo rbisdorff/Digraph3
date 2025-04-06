@@ -1,36 +1,36 @@
+
+
 <!DOCTYPE html>
-<html class="writer-html5" lang="en" >
+<html class="writer-html5" lang="en" data-content_root="../">
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>digraphs &mdash; Digraph3 3.13.2 documentation</title>
-      <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
-      <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
-      <link rel="stylesheet" href="../_static/graphviz.css" type="text/css" />
-      <link rel="stylesheet" href="../_static/copybutton.css" type="text/css" />
-      <link rel="stylesheet" href="../_static/css/tooltipster.custom.css" type="text/css" />
-      <link rel="stylesheet" href="../_static/css/tooltipster.bundle.min.css" type="text/css" />
-      <link rel="stylesheet" href="../_static/css/tooltipster-sideTip-shadow.min.css" type="text/css" />
-      <link rel="stylesheet" href="../_static/css/tooltipster-sideTip-punk.min.css" type="text/css" />
-      <link rel="stylesheet" href="../_static/css/tooltipster-sideTip-noir.min.css" type="text/css" />
-      <link rel="stylesheet" href="../_static/css/tooltipster-sideTip-light.min.css" type="text/css" />
-      <link rel="stylesheet" href="../_static/css/tooltipster-sideTip-borderless.min.css" type="text/css" />
-      <link rel="stylesheet" href="../_static/css/micromodal.css" type="text/css" />
-      <link rel="stylesheet" href="../_static/css/sphinx_rtd_theme.css" type="text/css" />
-  <!--[if lt IE 9]>
-    <script src="../_static/js/html5shiv.min.js"></script>
-  <![endif]-->
+      <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=fa44fd50" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=e59714d7" />
+      <link rel="stylesheet" type="text/css" href="../_static/graphviz.css?v=4ae1632d" />
+      <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/tooltipster.custom.css?v=7bc2f056" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/tooltipster.bundle.min.css?v=37217874" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/tooltipster-sideTip-shadow.min.css?v=6227e517" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/tooltipster-sideTip-punk.min.css?v=94669e23" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/tooltipster-sideTip-noir.min.css?v=21a39f42" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/tooltipster-sideTip-light.min.css?v=a18b2449" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/tooltipster-sideTip-borderless.min.css?v=dbff53e4" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/micromodal.css?v=d7bf34ee" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/sphinx_rtd_theme.css?v=3234e928" />
+
   
-        <script src="../_static/jquery.js?v=5d32c60e"></script>
-        <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-        <script src="../_static/documentation_options.js?v=f92f4e34"></script>
-        <script src="../_static/doctools.js?v=888ff710"></script>
-        <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
-        <script src="../_static/clipboard.min.js?v=a7894cd8"></script>
-        <script src="../_static/copybutton.js?v=15d7cbb8"></script>
-        <script src="../_static/js/hoverxref.js?v=4352a7d3"></script>
-        <script src="../_static/js/tooltipster.bundle.min.js?v=18bf091b"></script>
-        <script src="../_static/js/micromodal.min.js?v=04d6302d"></script>
+      <script src="../_static/jquery.js?v=5d32c60e"></script>
+      <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+      <script src="../_static/documentation_options.js?v=f92f4e34"></script>
+      <script src="../_static/doctools.js?v=9bcbadda"></script>
+      <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+      <script src="../_static/clipboard.min.js?v=a7894cd8"></script>
+      <script src="../_static/copybutton.js?v=15d7cbb8"></script>
+      <script src="../_static/js/hoverxref.js?v=6ff7264e"></script>
+      <script src="../_static/js/tooltipster.bundle.min.js?v=18bf091b"></script>
+      <script src="../_static/js/micromodal.min.js?v=04d6302d"></script>
     <script src="../_static/js/theme.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" /> 
@@ -48,9 +48,6 @@
             Digraph3
               <img src="../_static/htmlLogo.png" class="logo" alt="Logo"/>
           </a>
-              <div class="version">
-                Python 3.13
-              </div>
 <div role="search">
   <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
     <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
@@ -3096,6 +3093,74 @@
             <span class="k">return</span> <span class="n">stages</span></div>
 
 
+<div class="viewcode-block" id="Digraph.computeWeakTransitivityDegree">
+<a class="viewcode-back" href="../techDoc.html#digraphs.Digraph.computeWeakTransitivityDegree">[docs]</a>
+    <span class="k">def</span> <span class="nf">computeWeakTransitivityDegree</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span>
+                <span class="n">InPercents</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span><span class="n">Comments</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span><span class="n">ReturnWeakIntransitiveTriples</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Renders the weak transitivity degree (Decimal) of a digraph.</span>
+
+<span class="sd">        With *ReturnWeakIntransitiveTriples=True* returns a tuple with a list of intransitive triples and a list of weakly intransitive triples.</span>
+
+<span class="sd">        .. note:: </span>
+
+<span class="sd">           Digraphs without connected triples, like empty or indeterminate digraphs are considered to be weakly transitive.</span>
+
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="kn">from</span> <span class="nn">decimal</span> <span class="kn">import</span> <span class="n">Decimal</span>
+        <span class="n">Med</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">valuationdomain</span><span class="p">[</span><span class="s1">&#39;med&#39;</span><span class="p">]</span>
+        <span class="n">transRel</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">closeTransitive</span><span class="p">(</span><span class="n">InSite</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+        <span class="n">ntriples</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="n">trans</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="n">weakTrans</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="n">intrans</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="n">openTriples</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="n">weakTriples</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">actions</span><span class="p">:</span>
+            <span class="k">for</span> <span class="n">y</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">actions</span><span class="p">:</span>
+                <span class="k">if</span> <span class="n">x</span> <span class="o">!=</span> <span class="n">y</span><span class="p">:</span>
+                    <span class="k">for</span> <span class="n">z</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">actions</span><span class="p">:</span>
+                        <span class="k">if</span> <span class="n">z</span> <span class="o">!=</span> <span class="n">x</span> <span class="ow">and</span> <span class="n">z</span> <span class="o">!=</span> <span class="n">y</span><span class="p">:</span>
+                            <span class="k">if</span> <span class="n">transRel</span><span class="p">[</span><span class="n">x</span><span class="p">][</span><span class="n">y</span><span class="p">]</span> <span class="o">&gt;</span> <span class="n">Med</span> <span class="ow">and</span>\
+                               <span class="n">transRel</span><span class="p">[</span><span class="n">y</span><span class="p">][</span><span class="n">z</span><span class="p">]</span> <span class="o">&gt;</span> <span class="n">Med</span><span class="p">:</span>
+                                <span class="n">ntriples</span> <span class="o">+=</span> <span class="mi">1</span>
+                                <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">relation</span><span class="p">[</span><span class="n">x</span><span class="p">][</span><span class="n">z</span><span class="p">]</span> <span class="o">&gt;</span> <span class="n">Med</span><span class="p">:</span>
+                                    <span class="n">trans</span> <span class="o">+=</span> <span class="mi">1</span>
+                                <span class="k">elif</span> <span class="bp">self</span><span class="o">.</span><span class="n">relation</span><span class="p">[</span><span class="n">x</span><span class="p">][</span><span class="n">z</span><span class="p">]</span> <span class="o">==</span> <span class="n">Med</span><span class="p">:</span>
+                                    <span class="n">weakTrans</span> <span class="o">+=</span> <span class="mi">1</span>
+                                    <span class="n">weakTriples</span><span class="o">.</span><span class="n">append</span><span class="p">([</span><span class="n">x</span><span class="p">,</span><span class="n">y</span><span class="p">,</span><span class="n">z</span><span class="p">])</span>
+                                <span class="k">else</span><span class="p">:</span>
+                                    <span class="n">intrans</span> <span class="o">+=</span> <span class="mi">1</span>
+                                    <span class="n">openTriples</span><span class="o">.</span><span class="n">append</span><span class="p">([</span><span class="n">x</span><span class="p">,</span><span class="n">y</span><span class="p">,</span><span class="n">z</span><span class="p">])</span>
+        <span class="k">if</span> <span class="p">(</span><span class="n">ntriples</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="n">tres</span> <span class="o">=</span> <span class="n">Decimal</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">trans</span><span class="p">))</span><span class="o">/</span><span class="n">Decimal</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">ntriples</span><span class="p">))</span>
+            <span class="n">wtres</span> <span class="o">=</span> <span class="n">Decimal</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">trans</span><span class="o">+</span><span class="n">weakTrans</span><span class="p">))</span><span class="o">/</span><span class="n">Decimal</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">ntriples</span><span class="p">))</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">tres</span> <span class="o">=</span> <span class="n">Decimal</span><span class="p">(</span><span class="s1">&#39;1.0&#39;</span><span class="p">)</span>
+            <span class="n">wtres</span> <span class="o">=</span> <span class="n">Decimal</span><span class="p">(</span><span class="s1">&#39;1.0&#39;</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">InPercents</span><span class="p">:</span>
+            <span class="n">tres</span> <span class="o">*=</span> <span class="n">Decimal</span><span class="p">(</span><span class="s1">&#39;100.0&#39;</span><span class="p">)</span> 
+            <span class="n">wtres</span> <span class="o">*=</span> <span class="n">Decimal</span><span class="p">(</span><span class="s1">&#39;100.0&#39;</span><span class="p">)</span> 
+        <span class="k">if</span> <span class="n">Comments</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">InPercents</span><span class="p">:</span>
+                <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Transitivity degree (</span><span class="si">%%</span><span class="s1">) of digraph &lt;</span><span class="si">%s</span><span class="s1">&gt;:&#39;</span> <span class="o">%</span> <span class="bp">self</span><span class="o">.</span><span class="n">name</span><span class="p">)</span>
+                <span class="nb">print</span><span class="p">(</span><span class="s1">&#39; #triples x&gt;y&gt;z: </span><span class="si">%d</span><span class="s1">, #closed: </span><span class="si">%d</span><span class="s1">, #weakly-closed: </span><span class="si">%d</span><span class="s1">, #open: </span><span class="si">%d</span><span class="s1">&#39;</span> <span class="o">%</span>\
+                  <span class="p">(</span><span class="n">ntriples</span><span class="p">,</span><span class="n">trans</span><span class="p">,</span><span class="n">weakTrans</span><span class="p">,(</span><span class="n">ntriples</span><span class="o">-</span><span class="n">trans</span><span class="p">))</span> <span class="p">)</span>
+                <span class="nb">print</span><span class="p">(</span><span class="s1">&#39; (#trans/#triples) =  </span><span class="si">%.1f</span><span class="s1">&#39;</span> <span class="o">%</span><span class="p">(</span><span class="n">tres</span><span class="p">)</span> <span class="p">)</span>
+                <span class="nb">print</span><span class="p">(</span><span class="s1">&#39; (#weakly-trans/#triples) =  </span><span class="si">%.1f</span><span class="s1">&#39;</span> <span class="o">%</span><span class="p">(</span><span class="n">wtres</span><span class="p">)</span> <span class="p">)</span>
+                
+            <span class="k">else</span><span class="p">:</span>
+                <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Transitivity degree of digraph &lt;</span><span class="si">%s</span><span class="s1">&gt;:&#39;</span> <span class="o">%</span> <span class="bp">self</span><span class="o">.</span><span class="n">name</span><span class="p">)</span>
+                <span class="nb">print</span><span class="p">(</span><span class="s1">&#39; #triples x&gt;y&gt;z: </span><span class="si">%d</span><span class="s1">, #closed: </span><span class="si">%d</span><span class="s1">, #weakly-closed: </span><span class="si">%d</span><span class="s1">,#open: </span><span class="si">%d</span><span class="s1">&#39;</span> <span class="o">%</span>\
+                  <span class="p">(</span><span class="n">ntriples</span><span class="p">,</span><span class="n">trans</span><span class="p">,</span><span class="n">weakTrans</span><span class="p">,(</span><span class="n">ntriples</span><span class="o">-</span><span class="n">trans</span><span class="p">))</span> <span class="p">)</span>
+                <span class="nb">print</span><span class="p">(</span><span class="s1">&#39; (#trans/#triples) =  </span><span class="si">%.3f</span><span class="s1">&#39;</span> <span class="o">%</span><span class="p">(</span><span class="n">tres</span><span class="p">)</span> <span class="p">)</span>
+                <span class="nb">print</span><span class="p">(</span><span class="s1">&#39; (#weakly-trans/#triples) =  </span><span class="si">%.3f</span><span class="s1">&#39;</span> <span class="o">%</span><span class="p">(</span><span class="n">wtres</span><span class="p">)</span> <span class="p">)</span>
+        <span class="k">if</span> <span class="n">ReturnWeakIntransitiveTriples</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">openTriples</span><span class="p">,</span> <span class="n">weakTriples</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">tres</span><span class="p">,</span><span class="n">wtres</span></div>
+
+
 <div class="viewcode-block" id="Digraph.computeTransitivityDegree">
 <a class="viewcode-back" href="../techDoc.html#digraphs.Digraph.computeTransitivityDegree">[docs]</a>
     <span class="k">def</span> <span class="nf">computeTransitivityDegree</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span>
@@ -3147,6 +3212,7 @@
             <span class="k">return</span> <span class="n">triples</span>
         <span class="k">else</span><span class="p">:</span>
             <span class="k">return</span> <span class="n">res</span></div>
+
 
 <div class="viewcode-block" id="Digraph.computeIntransitiveTriples">
 <a class="viewcode-back" href="../techDoc.html#digraphs.Digraph.computeIntransitiveTriples">[docs]</a>
@@ -16125,16 +16191,17 @@
 
     <span class="kn">from</span> <span class="nn">time</span> <span class="kn">import</span> <span class="n">time</span>
     <span class="c1">#from digraphsTools import *</span>
+    <span class="c1">#from randomPerfTabs import *</span>
     <span class="kn">from</span> <span class="nn">outrankingDigraphs</span> <span class="kn">import</span> <span class="o">*</span>
     <span class="kn">from</span> <span class="nn">randomDigraphs</span> <span class="kn">import</span> <span class="o">*</span>
     <span class="kn">from</span> <span class="nn">decimal</span> <span class="kn">import</span> <span class="n">Decimal</span><span class="p">,</span> <span class="n">getcontext</span>
     <span class="n">t</span> <span class="o">=</span> <span class="n">RandomPerformanceTableau</span><span class="p">(</span><span class="n">weightDistribution</span><span class="o">=</span><span class="s2">&quot;equiobjectives&quot;</span><span class="p">,</span>
-                                 <span class="n">numberOfActions</span><span class="o">=</span><span class="mi">500</span><span class="p">,</span><span class="n">numberOfCriteria</span><span class="o">=</span><span class="mi">7</span><span class="p">,</span>
+                                 <span class="n">numberOfActions</span><span class="o">=</span><span class="mi">6</span><span class="p">,</span><span class="n">numberOfCriteria</span><span class="o">=</span><span class="mi">7</span><span class="p">,</span>
                                              <span class="n">missingDataProbability</span><span class="o">=</span><span class="mf">0.05</span><span class="p">,</span><span class="n">seed</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
                           
     <span class="c1">#t = CircularPerformanceTableau()</span>
     <span class="c1">#print(getcontext().prec)</span>
-    <span class="n">g</span> <span class="o">=</span> <span class="n">BipolarOutrankingDigraph</span><span class="p">(</span><span class="n">t</span><span class="p">,</span><span class="n">Threading</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span><span class="n">startMethod</span><span class="o">=</span><span class="s1">&#39;spawn&#39;</span><span class="p">)</span>
+    <span class="n">g</span> <span class="o">=</span> <span class="n">BipolarOutrankingDigraph</span><span class="p">(</span><span class="n">t</span><span class="p">,</span><span class="n">Threading</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span><span class="n">startMethod</span><span class="o">=</span><span class="s1">&#39;spawn&#39;</span><span class="p">)</span>
     <span class="nb">print</span><span class="p">(</span><span class="n">g</span><span class="p">)</span>
     <span class="n">t1</span><span class="o">=</span><span class="n">time</span><span class="p">();</span><span class="n">g</span><span class="o">.</span><span class="n">recodeValuation</span><span class="p">(</span><span class="o">-</span><span class="mf">2.0</span><span class="p">,</span><span class="mf">2.0</span><span class="p">);</span><span class="nb">print</span><span class="p">(</span><span class="n">time</span><span class="p">()</span><span class="o">-</span><span class="n">t1</span><span class="p">)</span>
     <span class="c1">#t0 = time()</span>
@@ -16238,7 +16305,7 @@
 
   <div role="contentinfo">
     <p>&#169; Copyright 2012-2025, Raymond Bisdorff.
-      <span class="lastupdated">Last updated on Mar 28, 2025.
+      <span class="lastupdated">Last updated on Apr 06, 2025.
       </span></p>
   </div>
 

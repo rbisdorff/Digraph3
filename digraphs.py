@@ -2846,6 +2846,71 @@ class Digraph(object):
         else:
             return stages
 
+    def computeWeakTransitivityDegree(self,
+                InPercents=False,Comments=False,ReturnWeakIntransitiveTriples=False):
+        """
+        Renders the weak transitivity degree (Decimal) of a digraph.
+
+        With *ReturnWeakIntransitiveTriples=True* returns a tuple with a list of intransitive triples and a list of weakly intransitive triples.
+
+        .. note:: 
+
+           Digraphs without connected triples, like empty or indeterminate digraphs are considered to be weakly transitive.
+
+        """
+        from decimal import Decimal
+        Med = self.valuationdomain['med']
+        transRel = self.closeTransitive(InSite=False)
+        ntriples = 0
+        trans = 0
+        weakTrans = 0
+        intrans = 0
+        openTriples = []
+        weakTriples = []
+        for x in self.actions:
+            for y in self.actions:
+                if x != y:
+                    for z in self.actions:
+                        if z != x and z != y:
+                            if transRel[x][y] > Med and\
+                               transRel[y][z] > Med:
+                                ntriples += 1
+                                if self.relation[x][z] > Med:
+                                    trans += 1
+                                elif self.relation[x][z] == Med:
+                                    weakTrans += 1
+                                    weakTriples.append([x,y,z])
+                                else:
+                                    intrans += 1
+                                    openTriples.append([x,y,z])
+        if (ntriples) > 0:
+            tres = Decimal(str(trans))/Decimal(str(ntriples))
+            wtres = Decimal(str(trans+weakTrans))/Decimal(str(ntriples))
+        else:
+            tres = Decimal('1.0')
+            wtres = Decimal('1.0')
+        if InPercents:
+            tres *= Decimal('100.0') 
+            wtres *= Decimal('100.0') 
+        if Comments:
+            if InPercents:
+                print('Transitivity degree (%%) of digraph <%s>:' % self.name)
+                print(' #triples x>y>z: %d, #closed: %d, #weakly-closed: %d, #open: %d' %\
+                  (ntriples,trans,weakTrans,(ntriples-trans)) )
+                print(' (#trans/#triples) =  %.1f' %(tres) )
+                print(' (#weakly-trans/#triples) =  %.1f' %(wtres) )
+                
+            else:
+                print('Transitivity degree of digraph <%s>:' % self.name)
+                print(' #triples x>y>z: %d, #closed: %d, #weakly-closed: %d,#open: %d' %\
+                  (ntriples,trans,weakTrans,(ntriples-trans)) )
+                print(' (#trans/#triples) =  %.3f' %(tres) )
+                print(' (#weakly-trans/#triples) =  %.3f' %(wtres) )
+        if ReturnWeakIntransitiveTriples:
+            return openTriples, weakTriples
+        else:
+            return tres,wtres
+
     def computeTransitivityDegree(self,
                 InPercents=False,Comments=False,ReturnIntransitiveTriples=False):
         """
@@ -2895,6 +2960,7 @@ class Digraph(object):
             return triples
         else:
             return res
+
     def computeIntransitiveTriples(self):
         """
         Renders the list of intransitive triples detected in self.
@@ -15187,16 +15253,17 @@ if __name__ == "__main__":
 
     from time import time
     #from digraphsTools import *
+    #from randomPerfTabs import *
     from outrankingDigraphs import *
     from randomDigraphs import *
     from decimal import Decimal, getcontext
     t = RandomPerformanceTableau(weightDistribution="equiobjectives",
-                                 numberOfActions=500,numberOfCriteria=7,
+                                 numberOfActions=6,numberOfCriteria=7,
                                              missingDataProbability=0.05,seed=2)
                           
     #t = CircularPerformanceTableau()
     #print(getcontext().prec)
-    g = BipolarOutrankingDigraph(t,Threading=True,startMethod='spawn')
+    g = BipolarOutrankingDigraph(t,Threading=False,startMethod='spawn')
     print(g)
     t1=time();g.recodeValuation(-2.0,2.0);print(time()-t1)
     #t0 = time()
