@@ -2849,7 +2849,7 @@ class Digraph(object):
     def computeWeakTransitivityDegree(self,
                 InPercents=False,Comments=False,ReturnWeakIntransitiveTriples=False):
         """
-        Renders the weak transitivity degree (Decimal) of a digraph.
+        Renders the strict and the weak transitivity degrees (Decimal) of a digraph, i.e. the ratio of the number of closed x>z  , respt. weakly-closed (x>z and x<>y) triples over the number of x>y>z triples of the transitive closure of the digraph.
 
         With *ReturnWeakIntransitiveTriples=True* returns a tuple with a list of intransitive triples and a list of weakly intransitive triples.
 
@@ -2896,16 +2896,16 @@ class Digraph(object):
             if InPercents:
                 print('Transitivity degree (%%) of digraph <%s>:' % self.name)
                 print(' #triples x>y>z: %d, #closed: %d, #weakly-closed: %d, #open: %d' %\
-                  (ntriples,trans,weakTrans,(ntriples-trans)) )
-                print(' (#trans/#triples) =  %.1f' %(tres) )
-                print(' (#weakly-trans/#triples) =  %.1f' %(wtres) )
+                  (ntriples,trans,weakTrans,intrans) )
+                print(' (#closed/#triples) =  %.1f' %(tres) )
+                print(' (#weakly-closed/#triples) =  %.1f' %(wtres) )
                 
             else:
                 print('Transitivity degree of digraph <%s>:' % self.name)
                 print(' #triples x>y>z: %d, #closed: %d, #weakly-closed: %d,#open: %d' %\
-                  (ntriples,trans,weakTrans,(ntriples-trans)) )
-                print(' (#trans/#triples) =  %.3f' %(tres) )
-                print(' (#weakly-trans/#triples) =  %.3f' %(wtres) )
+                  (ntriples,trans,weakTrans,intrans) )
+                print(' (#closed/#triples) =  %.3f' %(tres) )
+                print(' (#weakly-closed/#triples) =  %.3f' %(wtres) )
         if ReturnWeakIntransitiveTriples:
             return openTriples, weakTriples
         else:
@@ -15257,8 +15257,8 @@ if __name__ == "__main__":
     from outrankingDigraphs import *
     from randomDigraphs import *
     from decimal import Decimal, getcontext
-    t = RandomPerformanceTableau(weightDistribution="equiobjectives",
-                                 numberOfActions=6,numberOfCriteria=7,
+    t = RandomCBPerformanceTableau(weightDistribution="equiobjectives",
+                                 numberOfActions=10,numberOfCriteria=11,
                                              missingDataProbability=0.05,seed=2)
                           
     #t = CircularPerformanceTableau()

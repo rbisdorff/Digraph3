@@ -2886,7 +2886,7 @@ are set to the indeterminate value.</p>
 <dl class="py method">
 <dt class="sig sig-object py" id="digraphs.Digraph.computeWeakTransitivityDegree">
 <span class="sig-name descname"><span class="pre">computeWeakTransitivityDegree</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">InPercents</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">Comments</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ReturnWeakIntransitiveTriples</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/digraphs.html#Digraph.computeWeakTransitivityDegree"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#digraphs.Digraph.computeWeakTransitivityDegree" title="Link to this definition"></a></dt>
-<dd><p>Renders the weak transitivity degree (Decimal) of a digraph.</p>
+<dd><p>Renders the strict and the weak transitivity degrees (Decimal) of a digraph, i.e. the ratio of the number of closed x&gt;z  , respt. weakly-closed (x&gt;z and x&lt;&gt;y) triples over the number of x&gt;y&gt;z triples of the transitive closure of the digraph.</p>
 <p>With <em>ReturnWeakIntransitiveTriples=True</em> returns a tuple with a list of intransitive triples and a list of weakly intransitive triples.</p>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
@@ -14787,7 +14787,7 @@ Components are stored in an ordered dictionary.</p>
 
   <div role="contentinfo">
     <p>&#169; Copyright 2012-2025, Raymond Bisdorff.
-      <span class="lastupdated">Last updated on Apr 06, 2025.
+      <span class="lastupdated">Last updated on Apr 09, 2025.
       </span></p>
   </div>
 
