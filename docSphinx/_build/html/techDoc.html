@@ -2892,6 +2892,20 @@ are set to the indeterminate value.</p>
 <p class="admonition-title">Note</p>
 <p>Digraphs without connected triples, like empty or indeterminate digraphs are considered to be weakly transitive.</p>
 </div>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">outrankingDigraphs</span> <span class="kn">import</span> <span class="n">BipolarOutrankingDigraph</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">randomDigraphs</span> <span class="kn">import</span> <span class="n">RandomCBPerformanceTableau</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">t</span> <span class="o">=</span> <span class="n">RandomCBPerformanceTableau</span><span class="p">(</span>
+<span class="gp">... </span>                        <span class="n">weightDistribution</span><span class="o">=</span><span class="s2">&quot;equiobjectives&quot;</span><span class="p">,</span>
+<span class="gp">... </span>                        <span class="n">numberOfActions</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span><span class="n">numberOfCriteria</span><span class="o">=</span><span class="mi">11</span><span class="p">,</span>
+<span class="gp">... </span>                        <span class="n">missingDataProbability</span><span class="o">=</span><span class="mf">0.05</span><span class="p">,</span><span class="n">seed</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">g</span> <span class="o">=</span> <span class="n">BipolarOutrankingDigraph</span><span class="p">(</span><span class="n">t</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">g</span><span class="o">.</span><span class="n">computeWeakTransitivityDegree</span><span class="p">(</span><span class="n">Comments</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="go"> Transitivity degree of digraph &lt;rel_randomCBperftab&gt;:</span>
+<span class="go"> #triples x&gt;y&gt;z: 720, #closed: 400, #weakly-closed: 80,#open: 240</span>
+<span class="go"> (#closed/#triples) =  0.556</span>
+<span class="go"> (#weakly-closed/#triples) =  0.667</span>
+</pre></div>
+</div>
 </dd></dl>
 
 <dl class="py method">
@@ -14787,7 +14801,7 @@ Components are stored in an ordered dictionary.</p>
 
   <div role="contentinfo">
     <p>&#169; Copyright 2012-2025, Raymond Bisdorff.
-      <span class="lastupdated">Last updated on Apr 09, 2025.
+      <span class="lastupdated">Last updated on Apr 12, 2025.
       </span></p>
   </div>
 

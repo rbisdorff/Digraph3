@@ -2857,6 +2857,20 @@ class Digraph(object):
 
            Digraphs without connected triples, like empty or indeterminate digraphs are considered to be weakly transitive.
 
+        >>> from outrankingDigraphs import BipolarOutrankingDigraph
+        >>> from randomDigraphs import RandomCBPerformanceTableau
+        >>> t = RandomCBPerformanceTableau(
+        ...                         weightDistribution="equiobjectives",
+        ...                         numberOfActions=10,numberOfCriteria=11,
+        ...                         missingDataProbability=0.05,seed=2)
+        >>> g = BipolarOutrankingDigraph(t)
+        >>> g.computeWeakTransitivityDegree(Comments=True)
+         Transitivity degree of digraph <rel_randomCBperftab>:
+         #triples x>y>z: 720, #closed: 400, #weakly-closed: 80,#open: 240
+         (#closed/#triples) =  0.556
+         (#weakly-closed/#triples) =  0.667
+        
+
         """
         from decimal import Decimal
         Med = self.valuationdomain['med']
@@ -15265,7 +15279,8 @@ if __name__ == "__main__":
     #print(getcontext().prec)
     g = BipolarOutrankingDigraph(t,Threading=False,startMethod='spawn')
     print(g)
-    t1=time();g.recodeValuation(-2.0,2.0);print(time()-t1)
+    print(g.computeWeakTransitivityDegree(Comments=True))
+    #t1=time();g.recodeValuation(-2.0,2.0);print(time()-t1)
     #t0 = time()
     #print(g.computeOrdinalCorrelationMP(g,Threading=True,startMethod=None,nbrOfCPUs=None))
     #print(time()-t0)
