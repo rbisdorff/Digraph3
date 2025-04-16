@@ -5,8 +5,8 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>linearOrders &mdash; Digraph3 3.13.2 documentation</title>
-      <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=fa44fd50" />
+  <title>linearOrders &mdash; Digraph3 3.13.3 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=03e43079" />
       <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=e59714d7" />
       <link rel="stylesheet" type="text/css" href="../_static/graphviz.css?v=4ae1632d" />
       <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
@@ -23,7 +23,7 @@
   
       <script src="../_static/jquery.js?v=5d32c60e"></script>
       <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-      <script src="../_static/documentation_options.js?v=f92f4e34"></script>
+      <script src="../_static/documentation_options.js?v=5d57ca2d"></script>
       <script src="../_static/doctools.js?v=9bcbadda"></script>
       <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
       <script src="../_static/clipboard.min.js?v=a7894cd8"></script>
@@ -109,15 +109,15 @@
 
 
 <span class="c1"># from digraphsTools import *</span>
-<span class="kn">from</span> <span class="nn">digraphs</span> <span class="kn">import</span> <span class="o">*</span>
-<span class="kn">from</span> <span class="nn">linearOrders</span> <span class="kn">import</span> <span class="o">*</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">digraphs</span><span class="w"> </span><span class="kn">import</span> <span class="o">*</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">linearOrders</span><span class="w"> </span><span class="kn">import</span> <span class="o">*</span>
 
 <span class="c1">#--------- Decimal precision --------------</span>
-<span class="kn">from</span> <span class="nn">decimal</span> <span class="kn">import</span> <span class="n">Decimal</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">decimal</span><span class="w"> </span><span class="kn">import</span> <span class="n">Decimal</span>
 
 <span class="c1">#--------- Partial Extended Prudent Digraph class ---------</span>
 
-<span class="k">class</span> <span class="nc">_ExtendedPrudentDigraph</span><span class="p">(</span><span class="n">Digraph</span><span class="p">):</span>
+<span class="k">class</span><span class="w"> </span><span class="nc">_ExtendedPrudentDigraph</span><span class="p">(</span><span class="n">Digraph</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Instantiates the associated extended prudent</span>
 <span class="sd">    codual of the digraph enstance.</span>
@@ -126,9 +126,9 @@
 <span class="sd">    and the evaluation dictionary into self.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
 
-    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">other</span><span class="p">,</span><span class="n">prudentBetaLevel</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span><span class="n">CoDual</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span><span class="n">Debug</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
-        <span class="kn">from</span> <span class="nn">digraphsTools</span> <span class="kn">import</span> <span class="n">omax</span><span class="p">,</span> <span class="n">omin</span>
-        <span class="kn">from</span> <span class="nn">copy</span> <span class="kn">import</span> <span class="n">copy</span><span class="p">,</span> <span class="n">deepcopy</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">other</span><span class="p">,</span><span class="n">prudentBetaLevel</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span><span class="n">CoDual</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span><span class="n">Debug</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+        <span class="kn">from</span><span class="w"> </span><span class="nn">digraphsTools</span><span class="w"> </span><span class="kn">import</span> <span class="n">omax</span><span class="p">,</span> <span class="n">omin</span>
+        <span class="kn">from</span><span class="w"> </span><span class="nn">copy</span><span class="w"> </span><span class="kn">import</span> <span class="n">copy</span><span class="p">,</span> <span class="n">deepcopy</span>
         <span class="bp">self</span><span class="o">.</span><span class="vm">__class__</span> <span class="o">=</span> <span class="n">other</span><span class="o">.</span><span class="vm">__class__</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="s1">&#39;extprud-&#39;</span><span class="o">+</span><span class="n">other</span><span class="o">.</span><span class="n">name</span>
         <span class="k">try</span><span class="p">:</span>
@@ -196,22 +196,22 @@
 
 <div class="viewcode-block" id="LinearOrder">
 <a class="viewcode-back" href="../techDoc.html#linearOrders.LinearOrder">[docs]</a>
-<span class="k">class</span> <span class="nc">LinearOrder</span><span class="p">(</span><span class="n">Digraph</span><span class="p">):</span>
+<span class="k">class</span><span class="w"> </span><span class="nc">LinearOrder</span><span class="p">(</span><span class="n">Digraph</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    abstract class for digraphs which represent</span>
 <span class="sd">    linear orders.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
-    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Abstract root class&#39;</span><span class="p">)</span>
         
 <div class="viewcode-block" id="LinearOrder.computeRanking">
 <a class="viewcode-back" href="../techDoc.html#linearOrders.LinearOrder.computeRanking">[docs]</a>
-    <span class="k">def</span> <span class="nf">computeRanking</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">computeRanking</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        computes the linear ordering from lowest (best, rank = 1) to highest (worst rank=n)</span>
 <span class="sd">        of an instance of the LinearOrcer class by sorting by outdegrees (gamma[x][0]).</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="kn">from</span> <span class="nn">operator</span> <span class="kn">import</span> <span class="n">itemgetter</span>
+        <span class="kn">from</span><span class="w"> </span><span class="nn">operator</span><span class="w"> </span><span class="kn">import</span> <span class="n">itemgetter</span>
         <span class="n">degrees</span> <span class="o">=</span> <span class="p">[]</span>
         <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">actions</span><span class="p">:</span>
             <span class="n">degrees</span><span class="o">.</span><span class="n">append</span><span class="p">((</span><span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">gamma</span><span class="p">[</span><span class="n">x</span><span class="p">][</span><span class="mi">0</span><span class="p">]),</span><span class="n">x</span><span class="p">))</span>
@@ -224,12 +224,12 @@
 
 <div class="viewcode-block" id="LinearOrder.computeOrder">
 <a class="viewcode-back" href="../techDoc.html#linearOrders.LinearOrder.computeOrder">[docs]</a>
-    <span class="k">def</span> <span class="nf">computeOrder</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">computeOrder</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        computes the linear ordering from lowest (worst) to highest (best)</span>
 <span class="sd">        of an instance of the LinearOrcer class by sorting by indegrees (gamma[x][1]).</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="kn">from</span> <span class="nn">operator</span> <span class="kn">import</span> <span class="n">itemgetter</span>
+        <span class="kn">from</span><span class="w"> </span><span class="nn">operator</span><span class="w"> </span><span class="kn">import</span> <span class="n">itemgetter</span>
         <span class="n">degrees</span> <span class="o">=</span> <span class="p">[]</span>
         <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">actions</span><span class="p">:</span>
             <span class="n">degrees</span><span class="o">.</span><span class="n">append</span><span class="p">((</span><span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">gamma</span><span class="p">[</span><span class="n">x</span><span class="p">][</span><span class="mi">1</span><span class="p">]),</span><span class="n">x</span><span class="p">))</span>
@@ -242,7 +242,7 @@
 
 <div class="viewcode-block" id="LinearOrder.showOrdering">
 <a class="viewcode-back" href="../techDoc.html#linearOrders.LinearOrder.showOrdering">[docs]</a>
-    <span class="k">def</span> <span class="nf">showOrdering</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">showOrdering</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        shows the linearly ordered actions in list format.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
@@ -251,7 +251,7 @@
 
 <div class="viewcode-block" id="LinearOrder.showRanking">
 <a class="viewcode-back" href="../techDoc.html#linearOrders.LinearOrder.showRanking">[docs]</a>
-    <span class="k">def</span> <span class="nf">showRanking</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">showRanking</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        shows the linearly ordered actions in list format.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
@@ -261,7 +261,7 @@
         
 <div class="viewcode-block" id="LinearOrder.htmlOrder">
 <a class="viewcode-back" href="../techDoc.html#linearOrders.LinearOrder.htmlOrder">[docs]</a>
-    <span class="k">def</span> <span class="nf">htmlOrder</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">htmlOrder</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        returns the html encoded presentation of a linear order</span>
 <span class="sd">        &quot;&quot;&quot;</span>
@@ -282,7 +282,7 @@
 
 <div class="viewcode-block" id="LinearOrder.htmlRanking">
 <a class="viewcode-back" href="../techDoc.html#linearOrders.LinearOrder.htmlRanking">[docs]</a>
-    <span class="k">def</span> <span class="nf">htmlRanking</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">htmlRanking</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        returns the html encoded presentation of a linear order</span>
 <span class="sd">        &quot;&quot;&quot;</span>
@@ -303,7 +303,7 @@
     
 <div class="viewcode-block" id="LinearOrder.exportDigraphGraphViz">
 <a class="viewcode-back" href="../techDoc.html#linearOrders.LinearOrder.exportDigraphGraphViz">[docs]</a>
-    <span class="k">def</span> <span class="nf">exportDigraphGraphViz</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">fileName</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">firstChoice</span><span class="o">=</span><span class="nb">set</span><span class="p">(),</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">exportDigraphGraphViz</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">fileName</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">firstChoice</span><span class="o">=</span><span class="nb">set</span><span class="p">(),</span>
                               <span class="n">bestChoice</span><span class="o">=</span><span class="nb">set</span><span class="p">(),</span><span class="n">lastChoice</span><span class="o">=</span><span class="nb">set</span><span class="p">(),</span>
                               <span class="n">worstChoice</span><span class="o">=</span><span class="nb">set</span><span class="p">(),</span><span class="n">Comments</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
                               <span class="n">graphType</span><span class="o">=</span><span class="s1">&#39;png&#39;</span><span class="p">,</span><span class="n">graphSize</span><span class="o">=</span><span class="s1">&#39;7,7&#39;</span><span class="p">):</span>
@@ -319,7 +319,7 @@
 
 <div class="viewcode-block" id="LinearOrder.exportGraphViz">
 <a class="viewcode-back" href="../techDoc.html#linearOrders.LinearOrder.exportGraphViz">[docs]</a>
-    <span class="k">def</span> <span class="nf">exportGraphViz</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">fileName</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">isValued</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">exportGraphViz</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">fileName</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">isValued</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
                        <span class="n">firstChoice</span><span class="o">=</span><span class="nb">set</span><span class="p">(),</span><span class="n">lastChoice</span><span class="o">=</span><span class="nb">set</span><span class="p">(),</span>
                        <span class="n">bestChoice</span><span class="o">=</span><span class="nb">set</span><span class="p">(),</span><span class="n">worstChoice</span><span class="o">=</span><span class="nb">set</span><span class="p">(),</span>
                        <span class="n">Comments</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span><span class="n">graphType</span><span class="o">=</span><span class="s1">&#39;png&#39;</span><span class="p">,</span>
@@ -327,7 +327,7 @@
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        export GraphViz dot file  for linear order drawing filtering.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="kn">import</span> <span class="nn">os</span>
+        <span class="kn">import</span><span class="w"> </span><span class="nn">os</span>
         <span class="k">if</span> <span class="n">Comments</span><span class="p">:</span>
             <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;*---- exporting a dot file for GraphViz tools ---------*&#39;</span><span class="p">)</span>
         <span class="c1">#actionkeys = [x for x in self.actions]</span>
@@ -394,14 +394,14 @@
     
 <div class="viewcode-block" id="LinearOrder.computeKemenyIndex">
 <a class="viewcode-back" href="../techDoc.html#linearOrders.LinearOrder.computeKemenyIndex">[docs]</a>
-    <span class="k">def</span> <span class="nf">computeKemenyIndex</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">other</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">computeKemenyIndex</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">other</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        renders the Kemeny index of the self.relation (linear order)</span>
 <span class="sd">        compared with a given bipolar-valued relation of a compatible</span>
 <span class="sd">        other digraph (same nodes or actions).</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">try</span><span class="p">:</span>
-            <span class="kn">from</span> <span class="nn">math</span> <span class="kn">import</span> <span class="n">copysign</span>
+            <span class="kn">from</span><span class="w"> </span><span class="nn">math</span><span class="w"> </span><span class="kn">import</span> <span class="n">copysign</span>
             <span class="n">CopySign</span> <span class="o">=</span> <span class="kc">True</span>
         <span class="k">except</span><span class="p">:</span>
             <span class="n">CopySign</span> <span class="o">=</span> <span class="kc">False</span>
@@ -429,23 +429,23 @@
 
 <div class="viewcode-block" id="RandomLinearOrder">
 <a class="viewcode-back" href="../techDoc.html#linearOrders.RandomLinearOrder">[docs]</a>
-<span class="k">class</span> <span class="nc">RandomLinearOrder</span><span class="p">(</span><span class="n">LinearOrder</span><span class="p">):</span>
+<span class="k">class</span><span class="w"> </span><span class="nc">RandomLinearOrder</span><span class="p">(</span><span class="n">LinearOrder</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Instantiates random linear orders</span>
 <span class="sd">    &quot;&quot;&quot;</span>
-    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">numberOfActions</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">numberOfActions</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span>
                  <span class="n">Debug</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span><span class="n">OutrankingModel</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
                  <span class="n">Valued</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span><span class="n">seed</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        constructor for generating random instances of linear orders with a given number of actions (default=10).</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="kn">import</span> <span class="nn">random</span>
+        <span class="kn">import</span><span class="w"> </span><span class="nn">random</span>
         <span class="n">random</span><span class="o">.</span><span class="n">seed</span><span class="p">(</span><span class="n">seed</span><span class="p">)</span>
         <span class="k">if</span> <span class="n">OutrankingModel</span><span class="p">:</span>
-            <span class="kn">from</span> <span class="nn">outrankingDigraphs</span> <span class="kn">import</span> <span class="n">RandomOutrankingDigraph</span>
+            <span class="kn">from</span><span class="w"> </span><span class="nn">outrankingDigraphs</span><span class="w"> </span><span class="kn">import</span> <span class="n">RandomOutrankingDigraph</span>
             <span class="n">g</span> <span class="o">=</span> <span class="n">RandomOutrankingDigraph</span><span class="p">(</span><span class="n">numberOfActions</span><span class="o">=</span><span class="n">numberOfActions</span><span class="p">)</span>
         <span class="k">else</span><span class="p">:</span>
-            <span class="kn">from</span> <span class="nn">randomDigraphs</span> <span class="kn">import</span> <span class="n">RandomValuationDigraph</span>
+            <span class="kn">from</span><span class="w"> </span><span class="nn">randomDigraphs</span><span class="w"> </span><span class="kn">import</span> <span class="n">RandomValuationDigraph</span>
             <span class="n">g</span> <span class="o">=</span> <span class="n">RandomValuationDigraph</span><span class="p">(</span><span class="n">order</span><span class="o">=</span><span class="n">numberOfActions</span><span class="p">)</span>
         <span class="n">g</span><span class="o">.</span><span class="n">recodeValuation</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">)</span>
         <span class="n">actionsList</span> <span class="o">=</span> <span class="p">[</span><span class="n">x</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">g</span><span class="o">.</span><span class="n">actions</span><span class="p">]</span>
@@ -477,12 +477,12 @@
 <span class="c1">######   instantiable class of linear orders</span>
 <div class="viewcode-block" id="RankedPairsRanking">
 <a class="viewcode-back" href="../techDoc.html#linearOrders.RankedPairsRanking">[docs]</a>
-<span class="k">class</span> <span class="nc">RankedPairsRanking</span><span class="p">(</span><span class="n">LinearOrder</span><span class="p">):</span>
+<span class="k">class</span><span class="w"> </span><span class="nc">RankedPairsRanking</span><span class="p">(</span><span class="n">LinearOrder</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    instantiates the Ranked Pairs Ranking from</span>
 <span class="sd">    a given bipolar-valued Digraph instance</span>
 <span class="sd">    &quot;&quot;&quot;</span>
-    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">other</span><span class="p">,</span><span class="n">Dual</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">other</span><span class="p">,</span><span class="n">Dual</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
                  <span class="n">Valued</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
                  <span class="c1">#isExtendedPrudent=False,</span>
                  <span class="n">Debug</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
@@ -492,8 +492,8 @@
 <span class="sd">        the ranked pairs (Lexmin Dias-Lamboray) rule</span>
 <span class="sd">        Parameter: isExtendedPrudent </span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="kn">from</span> <span class="nn">copy</span> <span class="kn">import</span> <span class="n">copy</span><span class="p">,</span> <span class="n">deepcopy</span>
-        <span class="kn">from</span> <span class="nn">operator</span> <span class="kn">import</span> <span class="n">itemgetter</span>
+        <span class="kn">from</span><span class="w"> </span><span class="nn">copy</span><span class="w"> </span><span class="kn">import</span> <span class="n">copy</span><span class="p">,</span> <span class="n">deepcopy</span>
+        <span class="kn">from</span><span class="w"> </span><span class="nn">operator</span><span class="w"> </span><span class="kn">import</span> <span class="n">itemgetter</span>
         <span class="c1"># construct ranked pairs</span>
 
         <span class="k">if</span> <span class="n">Dual</span><span class="p">:</span>
@@ -616,7 +616,7 @@
 
 <div class="viewcode-block" id="RankedPairsOrder">
 <a class="viewcode-back" href="../techDoc.html#linearOrders.RankedPairsOrder">[docs]</a>
-<span class="k">class</span> <span class="nc">RankedPairsOrder</span><span class="p">(</span><span class="n">RankedPairsRanking</span><span class="p">):</span>
+<span class="k">class</span><span class="w"> </span><span class="nc">RankedPairsOrder</span><span class="p">(</span><span class="n">RankedPairsRanking</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Dummy for RankedPairsRanking class</span>
 <span class="sd">    &quot;&quot;&quot;</span></div>
@@ -624,7 +624,7 @@
 <span class="c1">#----------------  </span>
 <div class="viewcode-block" id="KohlerRanking">
 <a class="viewcode-back" href="../techDoc.html#linearOrders.KohlerRanking">[docs]</a>
-<span class="k">class</span> <span class="nc">KohlerRanking</span><span class="p">(</span><span class="n">LinearOrder</span><span class="p">):</span>
+<span class="k">class</span><span class="w"> </span><span class="nc">KohlerRanking</span><span class="p">(</span><span class="n">LinearOrder</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    instantiates the Kohler Order from</span>
 <span class="sd">    a given bipolar-valued Digraph instance.</span>
@@ -637,7 +637,7 @@
 <span class="sd">    .. note:: The Kohler ranking rule is *not* invariant under the codual transform</span>
 <span class="sd">    </span>
 <span class="sd">    &quot;&quot;&quot;</span>
-    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">other</span><span class="p">,</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">other</span><span class="p">,</span>
                  <span class="n">Valued</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
                  <span class="n">CoDual</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span><span class="n">Debug</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span><span class="n">Comments</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
@@ -652,8 +652,8 @@
 <span class="sd">        .. note:: The Kohler ranking rule is *not* invariant under the codual transform</span>
 <span class="sd">        </span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="kn">from</span> <span class="nn">copy</span> <span class="kn">import</span> <span class="n">copy</span><span class="p">,</span> <span class="n">deepcopy</span>
-        <span class="kn">from</span> <span class="nn">collections</span> <span class="kn">import</span> <span class="n">OrderedDict</span>
+        <span class="kn">from</span><span class="w"> </span><span class="nn">copy</span><span class="w"> </span><span class="kn">import</span> <span class="n">copy</span><span class="p">,</span> <span class="n">deepcopy</span>
+        <span class="kn">from</span><span class="w"> </span><span class="nn">collections</span><span class="w"> </span><span class="kn">import</span> <span class="n">OrderedDict</span>
         
         <span class="c1"># construct ranked pairs</span>
         <span class="k">if</span> <span class="n">CoDual</span><span class="p">:</span>
@@ -765,7 +765,7 @@
 
 <div class="viewcode-block" id="KohlerOrder">
 <a class="viewcode-back" href="../techDoc.html#linearOrders.KohlerOrder">[docs]</a>
-<span class="k">class</span> <span class="nc">KohlerOrder</span><span class="p">(</span><span class="n">KohlerRanking</span><span class="p">):</span>
+<span class="k">class</span><span class="w"> </span><span class="nc">KohlerOrder</span><span class="p">(</span><span class="n">KohlerRanking</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Dummy for KohlerRanking class</span>
 <span class="sd">    &quot;&quot;&quot;</span></div>
@@ -773,7 +773,7 @@
 
 <div class="viewcode-block" id="NetFlowsRanking">
 <a class="viewcode-back" href="../techDoc.html#linearOrders.NetFlowsRanking">[docs]</a>
-<span class="k">class</span> <span class="nc">NetFlowsRanking</span><span class="p">(</span><span class="n">LinearOrder</span><span class="p">):</span>
+<span class="k">class</span><span class="w"> </span><span class="nc">NetFlowsRanking</span><span class="p">(</span><span class="n">LinearOrder</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    instantiates the *NetFlows* ranking  and ordering from</span>
 <span class="sd">    a given bipolar-valued Digraph instance *other*.</span>
@@ -788,7 +788,7 @@
 <span class="sd">    .. note:: The NetFlows ranking rule is invariant under the codual transform</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     
-    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">other</span><span class="p">,</span><span class="n">CoDual</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span><span class="n">Valued</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span><span class="n">Comments</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span><span class="n">Debug</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">other</span><span class="p">,</span><span class="n">CoDual</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span><span class="n">Valued</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span><span class="n">Comments</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span><span class="n">Debug</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        constructor for generating a linear order</span>
 <span class="sd">        from a given other digraph following</span>
@@ -798,10 +798,10 @@
 <span class="sd">        &quot;&quot;&quot;</span>
 
         <span class="c1">#from copy import deepcopy</span>
-        <span class="kn">from</span> <span class="nn">collections</span> <span class="kn">import</span> <span class="n">OrderedDict</span>
-        <span class="kn">from</span> <span class="nn">time</span> <span class="kn">import</span> <span class="n">time</span>
-        <span class="kn">from</span> <span class="nn">operator</span> <span class="kn">import</span> <span class="n">itemgetter</span>
-        <span class="kn">from</span> <span class="nn">copy</span> <span class="kn">import</span> <span class="n">copy</span>
+        <span class="kn">from</span><span class="w"> </span><span class="nn">collections</span><span class="w"> </span><span class="kn">import</span> <span class="n">OrderedDict</span>
+        <span class="kn">from</span><span class="w"> </span><span class="nn">time</span><span class="w"> </span><span class="kn">import</span> <span class="n">time</span>
+        <span class="kn">from</span><span class="w"> </span><span class="nn">operator</span><span class="w"> </span><span class="kn">import</span> <span class="n">itemgetter</span>
+        <span class="kn">from</span><span class="w"> </span><span class="nn">copy</span><span class="w"> </span><span class="kn">import</span> <span class="n">copy</span>
 
         <span class="k">if</span> <span class="n">Debug</span><span class="p">:</span>
             <span class="n">Comments</span><span class="o">=</span><span class="kc">True</span>
@@ -929,7 +929,7 @@
         <span class="n">runTimes</span><span class="p">[</span><span class="s1">&#39;totalTime&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">time</span><span class="p">()</span> <span class="o">-</span> <span class="n">tt</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">runTimes</span> <span class="o">=</span> <span class="n">runTimes</span>
 
-    <span class="k">def</span> <span class="nf">showScores</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">direction</span><span class="o">=</span><span class="s1">&#39;descending&#39;</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">showScores</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">direction</span><span class="o">=</span><span class="s1">&#39;descending&#39;</span><span class="p">):</span>
         <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Net flow scores in </span><span class="si">%s</span><span class="s1"> order&#39;</span> <span class="o">%</span> <span class="n">direction</span><span class="p">)</span>
         <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;action </span><span class="se">\t</span><span class="s1"> score&#39;</span><span class="p">)</span>
         <span class="k">if</span> <span class="n">direction</span> <span class="o">==</span> <span class="s1">&#39;descending&#39;</span><span class="p">:</span>
@@ -942,7 +942,7 @@
 
 <div class="viewcode-block" id="NetFlowsOrder">
 <a class="viewcode-back" href="../techDoc.html#linearOrders.NetFlowsOrder">[docs]</a>
-<span class="k">class</span> <span class="nc">NetFlowsOrder</span><span class="p">(</span><span class="n">NetFlowsRanking</span><span class="p">):</span>
+<span class="k">class</span><span class="w"> </span><span class="nc">NetFlowsOrder</span><span class="p">(</span><span class="n">NetFlowsRanking</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Dummy for NetFlowsRanking class</span>
 <span class="sd">    &quot;&quot;&quot;</span></div>
@@ -950,21 +950,21 @@
 
 <div class="viewcode-block" id="IteratedNetFlowsRanking">
 <a class="viewcode-back" href="../techDoc.html#linearOrders.IteratedNetFlowsRanking">[docs]</a>
-<span class="k">class</span> <span class="nc">IteratedNetFlowsRanking</span><span class="p">(</span><span class="n">LinearOrder</span><span class="p">):</span>
+<span class="k">class</span><span class="w"> </span><span class="nc">IteratedNetFlowsRanking</span><span class="p">(</span><span class="n">LinearOrder</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    instantiates the iterated NetFlows order from</span>
 <span class="sd">    a given bipolar-valued Digraph instance</span>
 <span class="sd">    &quot;&quot;&quot;</span>
-    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">other</span><span class="p">,</span><span class="n">CoDual</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span><span class="n">Valued</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">other</span><span class="p">,</span><span class="n">CoDual</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span><span class="n">Valued</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
                  <span class="n">Comments</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span><span class="n">Debug</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        constructor for generating a linear order</span>
 <span class="sd">        from a given other digraph following</span>
 <span class="sd">        the iterated NetFlows rules</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="kn">from</span> <span class="nn">copy</span> <span class="kn">import</span> <span class="n">copy</span><span class="p">,</span> <span class="n">deepcopy</span>
-        <span class="kn">from</span> <span class="nn">collections</span> <span class="kn">import</span> <span class="n">OrderedDict</span>
-        <span class="kn">from</span> <span class="nn">operator</span> <span class="kn">import</span> <span class="n">itemgetter</span>
+        <span class="kn">from</span><span class="w"> </span><span class="nn">copy</span><span class="w"> </span><span class="kn">import</span> <span class="n">copy</span><span class="p">,</span> <span class="n">deepcopy</span>
+        <span class="kn">from</span><span class="w"> </span><span class="nn">collections</span><span class="w"> </span><span class="kn">import</span> <span class="n">OrderedDict</span>
+        <span class="kn">from</span><span class="w"> </span><span class="nn">operator</span><span class="w"> </span><span class="kn">import</span> <span class="n">itemgetter</span>
         <span class="c1"># construct ranked pairs</span>
         <span class="k">if</span> <span class="n">CoDual</span><span class="p">:</span>
             <span class="n">otherCoDual</span> <span class="o">=</span> <span class="n">CoDualDigraph</span><span class="p">(</span><span class="n">other</span><span class="p">)</span>
@@ -1105,20 +1105,20 @@
 
 <div class="viewcode-block" id="IteratedCopelandRanking">
 <a class="viewcode-back" href="../techDoc.html#linearOrders.IteratedCopelandRanking">[docs]</a>
-<span class="k">class</span> <span class="nc">IteratedCopelandRanking</span><span class="p">(</span><span class="n">LinearOrder</span><span class="p">):</span>
+<span class="k">class</span><span class="w"> </span><span class="nc">IteratedCopelandRanking</span><span class="p">(</span><span class="n">LinearOrder</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    instantiates the iterated Copeland ranking from</span>
 <span class="sd">    a given bipolar-valued Digraph instance</span>
 <span class="sd">    &quot;&quot;&quot;</span>
-    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">other</span><span class="p">,</span><span class="n">CoDual</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span><span class="n">Valued</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">other</span><span class="p">,</span><span class="n">CoDual</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span><span class="n">Valued</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
                  <span class="n">Comments</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span><span class="n">Debug</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        constructor for generating a linear order</span>
 <span class="sd">        from a given other digraph following</span>
 <span class="sd">        the iterated Copeland rules</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="kn">from</span> <span class="nn">copy</span> <span class="kn">import</span> <span class="n">copy</span><span class="p">,</span> <span class="n">deepcopy</span>
-        <span class="kn">from</span> <span class="nn">collections</span> <span class="kn">import</span> <span class="n">OrderedDict</span>
+        <span class="kn">from</span><span class="w"> </span><span class="nn">copy</span><span class="w"> </span><span class="kn">import</span> <span class="n">copy</span><span class="p">,</span> <span class="n">deepcopy</span>
+        <span class="kn">from</span><span class="w"> </span><span class="nn">collections</span><span class="w"> </span><span class="kn">import</span> <span class="n">OrderedDict</span>
         <span class="c1"># construct ranked pairs</span>
         <span class="k">if</span> <span class="n">CoDual</span><span class="p">:</span>
             <span class="n">otherCoDual</span> <span class="o">=</span> <span class="n">CoDualDigraph</span><span class="p">(</span><span class="n">other</span><span class="p">)</span>
@@ -1258,12 +1258,12 @@
             <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Iterated Copelans ranking: &#39;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">iteratedCopelandRanking</span><span class="p">)</span></div>
 
 
-<span class="k">class</span> <span class="nc">_OutFlowsOrder</span><span class="p">(</span><span class="n">LinearOrder</span><span class="p">):</span>
+<span class="k">class</span><span class="w"> </span><span class="nc">_OutFlowsOrder</span><span class="p">(</span><span class="n">LinearOrder</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    instantiates the out flows Order from</span>
 <span class="sd">    a given bipolar-valued Digraph instance</span>
 <span class="sd">    &quot;&quot;&quot;</span>
-    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">other</span><span class="p">,</span><span class="n">coDual</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span><span class="n">Debug</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">other</span><span class="p">,</span><span class="n">coDual</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span><span class="n">Debug</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        constructor for generating a linear order</span>
 <span class="sd">        from a given other digraph following</span>
@@ -1271,10 +1271,10 @@
 <span class="sd">        &quot;&quot;&quot;</span>
 
         <span class="c1">#from copy import deepcopy</span>
-        <span class="kn">from</span> <span class="nn">linearOrders</span> <span class="kn">import</span> <span class="n">_OutFlowsOrder</span>
-        <span class="kn">from</span> <span class="nn">collections</span> <span class="kn">import</span> <span class="n">OrderedDict</span>
-        <span class="kn">from</span> <span class="nn">time</span> <span class="kn">import</span> <span class="n">time</span>
-        <span class="kn">from</span> <span class="nn">operator</span> <span class="kn">import</span> <span class="n">itemgetter</span>
+        <span class="kn">from</span><span class="w"> </span><span class="nn">linearOrders</span><span class="w"> </span><span class="kn">import</span> <span class="n">_OutFlowsOrder</span>
+        <span class="kn">from</span><span class="w"> </span><span class="nn">collections</span><span class="w"> </span><span class="kn">import</span> <span class="n">OrderedDict</span>
+        <span class="kn">from</span><span class="w"> </span><span class="nn">time</span><span class="w"> </span><span class="kn">import</span> <span class="n">time</span>
+        <span class="kn">from</span><span class="w"> </span><span class="nn">operator</span><span class="w"> </span><span class="kn">import</span> <span class="n">itemgetter</span>
 
         <span class="c1">#timings</span>
         <span class="n">tt</span> <span class="o">=</span> <span class="n">time</span><span class="p">()</span>
@@ -1358,7 +1358,7 @@
 <span class="c1">##            self.showRelationTable()</span>
 <span class="c1">##            self.showOrdering()</span>
 
-    <span class="k">def</span> <span class="nf">showScores</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">direction</span><span class="o">=</span><span class="s1">&#39;descending&#39;</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">showScores</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">direction</span><span class="o">=</span><span class="s1">&#39;descending&#39;</span><span class="p">):</span>
         <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Out flow scores in </span><span class="si">%s</span><span class="s1"> order&#39;</span> <span class="o">%</span> <span class="n">direction</span><span class="p">)</span>
         <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;action </span><span class="se">\t</span><span class="s1"> score&#39;</span><span class="p">)</span>
         <span class="k">if</span> <span class="n">direction</span> <span class="o">==</span> <span class="s1">&#39;descending&#39;</span><span class="p">:</span>
@@ -1370,7 +1370,7 @@
 <span class="c1">#------------</span>
 <div class="viewcode-block" id="BachetRanking">
 <a class="viewcode-back" href="../techDoc.html#linearOrders.BachetRanking">[docs]</a>
-<span class="k">class</span> <span class="nc">BachetRanking</span><span class="p">(</span><span class="n">LinearOrder</span><span class="p">):</span>
+<span class="k">class</span><span class="w"> </span><span class="nc">BachetRanking</span><span class="p">(</span><span class="n">LinearOrder</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;    </span>
 <span class="sd">    Instantiates the Bachet Ranking and Ordering from a given bipolar-valued *Digraph* instance *other*.</span>
 
@@ -1456,7 +1456,7 @@
 <span class="sd">       When the ranking result appears suspiciously uncorrelated with the given outranking digraph, it is recommended to set the *randomized* parameter to a positive integer *n*. In this case, *n* random orderings of the decision actions with their reversed versions will be used for generating Bachet rankings. The best correlated ranking will eventually be returned.   </span>
 <span class="sd">    </span>
 <span class="sd">    &quot;&quot;&quot;</span>
-    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">other</span><span class="p">,</span><span class="n">CoDual</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span><span class="n">actionsList</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">other</span><span class="p">,</span><span class="n">CoDual</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span><span class="n">actionsList</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
                  <span class="n">orderLimit</span><span class="o">=</span><span class="mi">50</span><span class="p">,</span>
                  <span class="n">BestQualified</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
                  <span class="n">randomized</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span><span class="n">seed</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
@@ -1475,11 +1475,11 @@
         <span class="k">if</span> <span class="n">other</span><span class="o">.</span><span class="n">order</span> <span class="o">&gt;</span> <span class="n">orderLimit</span><span class="p">:</span>
             <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;!!! Error: the given digraph order </span><span class="si">%d</span><span class="s1"> is greater than the allowed orderLimit </span><span class="si">%d</span><span class="s1">. &#39;</span> <span class="o">%</span> <span class="p">(</span><span class="n">other</span><span class="o">.</span><span class="n">order</span><span class="p">,</span><span class="n">orderLimit</span><span class="p">))</span>
             <span class="k">return</span>
-        <span class="kn">from</span> <span class="nn">collections</span> <span class="kn">import</span> <span class="n">OrderedDict</span>
-        <span class="kn">from</span> <span class="nn">time</span> <span class="kn">import</span> <span class="n">time</span>
-        <span class="kn">from</span> <span class="nn">operator</span> <span class="kn">import</span> <span class="n">itemgetter</span>
-        <span class="kn">import</span> <span class="nn">arithmetics</span> <span class="k">as</span> <span class="nn">ar</span>
-        <span class="kn">from</span> <span class="nn">copy</span> <span class="kn">import</span> <span class="n">deepcopy</span>
+        <span class="kn">from</span><span class="w"> </span><span class="nn">collections</span><span class="w"> </span><span class="kn">import</span> <span class="n">OrderedDict</span>
+        <span class="kn">from</span><span class="w"> </span><span class="nn">time</span><span class="w"> </span><span class="kn">import</span> <span class="n">time</span>
+        <span class="kn">from</span><span class="w"> </span><span class="nn">operator</span><span class="w"> </span><span class="kn">import</span> <span class="n">itemgetter</span>
+        <span class="kn">import</span><span class="w"> </span><span class="nn">arithmetics</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">ar</span>
+        <span class="kn">from</span><span class="w"> </span><span class="nn">copy</span><span class="w"> </span><span class="kn">import</span> <span class="n">deepcopy</span>
         <span class="k">if</span> <span class="n">Debug</span><span class="p">:</span>
             <span class="n">Comments</span><span class="o">=</span><span class="kc">True</span>
         <span class="c1">#timings</span>
@@ -1531,7 +1531,7 @@
 
             <span class="n">maximalRankings</span> <span class="o">=</span> <span class="p">[]</span>
             <span class="n">correlation</span> <span class="o">=</span> <span class="o">-</span><span class="mf">1.0</span>
-            <span class="kn">from</span> <span class="nn">digraphsTools</span> <span class="kn">import</span> <span class="n">all_perms</span>
+            <span class="kn">from</span><span class="w"> </span><span class="nn">digraphsTools</span><span class="w"> </span><span class="kn">import</span> <span class="n">all_perms</span>
             <span class="n">actions</span> <span class="o">=</span> <span class="p">[</span><span class="n">x</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">other</span><span class="o">.</span><span class="n">actions</span><span class="p">]</span>
             <span class="k">for</span> <span class="n">p</span> <span class="ow">in</span> <span class="n">all_perms</span><span class="p">(</span><span class="n">actions</span><span class="p">):</span> 
                 <span class="n">ba</span> <span class="o">=</span> <span class="n">BachetRanking</span><span class="p">(</span><span class="n">c</span><span class="p">,</span><span class="n">orderLimit</span><span class="o">=</span><span class="n">orderLimit</span><span class="p">,</span>
@@ -1563,7 +1563,7 @@
 
         <span class="k">elif</span> <span class="n">randomized</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
             <span class="n">t0</span> <span class="o">=</span> <span class="n">time</span><span class="p">()</span>
-            <span class="kn">import</span> <span class="nn">random</span>
+            <span class="kn">import</span><span class="w"> </span><span class="nn">random</span>
             <span class="n">random</span><span class="o">.</span><span class="n">seed</span><span class="p">(</span><span class="n">seed</span><span class="p">)</span>
             <span class="c1">#from random import shuffle</span>
             <span class="n">randomActions</span> <span class="o">=</span> <span class="p">[</span><span class="n">x</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">actions</span><span class="p">]</span>
@@ -1738,7 +1738,7 @@
         <span class="n">runTimes</span><span class="p">[</span><span class="s1">&#39;totalTime&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">time</span><span class="p">()</span> <span class="o">-</span> <span class="n">tt</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">runTimes</span> <span class="o">=</span> <span class="n">runTimes</span>
 
-    <span class="k">def</span> <span class="nf">showScores</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">direction</span><span class="o">=</span><span class="s1">&#39;descending&#39;</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">showScores</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">direction</span><span class="o">=</span><span class="s1">&#39;descending&#39;</span><span class="p">):</span>
         <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Bachet scores in </span><span class="si">%s</span><span class="s1"> order&#39;</span> <span class="o">%</span> <span class="n">direction</span><span class="p">)</span>
         <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;action </span><span class="se">\t</span><span class="s1"> score&#39;</span><span class="p">)</span>
         <span class="k">if</span> <span class="n">direction</span> <span class="o">==</span> <span class="s1">&#39;descending&#39;</span><span class="p">:</span>
@@ -1751,7 +1751,7 @@
          
 <div class="viewcode-block" id="BachetOrder">
 <a class="viewcode-back" href="../techDoc.html#linearOrders.BachetOrder">[docs]</a>
-<span class="k">class</span> <span class="nc">BachetOrder</span><span class="p">(</span><span class="n">BachetRanking</span><span class="p">):</span>
+<span class="k">class</span><span class="w"> </span><span class="nc">BachetOrder</span><span class="p">(</span><span class="n">BachetRanking</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Dummy for BachetRanking class</span>
 <span class="sd">    &quot;&quot;&quot;</span></div>
@@ -1760,7 +1760,7 @@
 <span class="c1">#-------------</span>
 <div class="viewcode-block" id="CopelandRanking">
 <a class="viewcode-back" href="../techDoc.html#linearOrders.CopelandRanking">[docs]</a>
-<span class="k">class</span> <span class="nc">CopelandRanking</span><span class="p">(</span><span class="n">LinearOrder</span><span class="p">):</span>
+<span class="k">class</span><span class="w"> </span><span class="nc">CopelandRanking</span><span class="p">(</span><span class="n">LinearOrder</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Instantiates the Copeland Ranking and Order from</span>
 <span class="sd">    a given bipolar-valued Digraph instance *other*.</span>
@@ -1781,7 +1781,7 @@
 <span class="sd">    .. note:: The Copeland ranking rule is invariant under the codual transform</span>
 <span class="sd">    </span>
 <span class="sd">    &quot;&quot;&quot;</span>
-    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">other</span><span class="p">,</span><span class="n">CoDual</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span><span class="n">Gamma</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">other</span><span class="p">,</span><span class="n">CoDual</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span><span class="n">Gamma</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
                  <span class="n">Valued</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
                  <span class="n">Comments</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span><span class="n">Debug</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
@@ -1791,9 +1791,9 @@
 <span class="sd">        &quot;&quot;&quot;</span>
 
         <span class="c1">#from copy import deepcopy</span>
-        <span class="kn">from</span> <span class="nn">collections</span> <span class="kn">import</span> <span class="n">OrderedDict</span>
-        <span class="kn">from</span> <span class="nn">time</span> <span class="kn">import</span> <span class="n">time</span>
-        <span class="kn">from</span> <span class="nn">operator</span> <span class="kn">import</span> <span class="n">itemgetter</span>
+        <span class="kn">from</span><span class="w"> </span><span class="nn">collections</span><span class="w"> </span><span class="kn">import</span> <span class="n">OrderedDict</span>
+        <span class="kn">from</span><span class="w"> </span><span class="nn">time</span><span class="w"> </span><span class="kn">import</span> <span class="n">time</span>
+        <span class="kn">from</span><span class="w"> </span><span class="nn">operator</span><span class="w"> </span><span class="kn">import</span> <span class="n">itemgetter</span>
         <span class="k">if</span> <span class="n">Debug</span><span class="p">:</span>
             <span class="n">Comments</span><span class="o">=</span><span class="kc">True</span>
         <span class="c1">#timings</span>
@@ -1903,7 +1903,7 @@
         <span class="n">runTimes</span><span class="p">[</span><span class="s1">&#39;totalTime&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">time</span><span class="p">()</span> <span class="o">-</span> <span class="n">tt</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">runTimes</span> <span class="o">=</span> <span class="n">runTimes</span>
 
-    <span class="k">def</span> <span class="nf">showScores</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">direction</span><span class="o">=</span><span class="s1">&#39;descending&#39;</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">showScores</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">direction</span><span class="o">=</span><span class="s1">&#39;descending&#39;</span><span class="p">):</span>
         <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Copeland scores in </span><span class="si">%s</span><span class="s1"> order&#39;</span> <span class="o">%</span> <span class="n">direction</span><span class="p">)</span>
         <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;action </span><span class="se">\t</span><span class="s1"> score&#39;</span><span class="p">)</span>
         <span class="k">if</span> <span class="n">direction</span> <span class="o">==</span> <span class="s1">&#39;descending&#39;</span><span class="p">:</span>
@@ -1916,7 +1916,7 @@
          
 <div class="viewcode-block" id="CopelandOrder">
 <a class="viewcode-back" href="../techDoc.html#linearOrders.CopelandOrder">[docs]</a>
-<span class="k">class</span> <span class="nc">CopelandOrder</span><span class="p">(</span><span class="n">CopelandRanking</span><span class="p">):</span>
+<span class="k">class</span><span class="w"> </span><span class="nc">CopelandOrder</span><span class="p">(</span><span class="n">CopelandRanking</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Dummy for CopelandRanking class</span>
 <span class="sd">    &quot;&quot;&quot;</span></div>
@@ -2015,14 +2015,14 @@
 
 <div class="viewcode-block" id="KemenyRanking">
 <a class="viewcode-back" href="../techDoc.html#linearOrders.KemenyRanking">[docs]</a>
-<span class="k">class</span> <span class="nc">KemenyRanking</span><span class="p">(</span><span class="n">LinearOrder</span><span class="p">):</span>
+<span class="k">class</span><span class="w"> </span><span class="nc">KemenyRanking</span><span class="p">(</span><span class="n">LinearOrder</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Instantiates the Kemeny Ranking wrt the outranking relation from</span>
 <span class="sd">    a given bipolar-valued Digraph instance of small order.</span>
 <span class="sd">    Multiple Kemeny rankings are sorted in decreasing order of their mean marginal correlations</span>
 <span class="sd">    and the resulting Kemeny ranking is the first one in this list.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
-    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">other</span><span class="p">,</span><span class="n">orderLimit</span><span class="o">=</span><span class="mi">7</span><span class="p">,</span><span class="n">Valued</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span><span class="n">Debug</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">other</span><span class="p">,</span><span class="n">orderLimit</span><span class="o">=</span><span class="mi">7</span><span class="p">,</span><span class="n">Valued</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span><span class="n">Debug</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        constructor for generating a linear order</span>
 <span class="sd">        from a given other digraph by exact enumeration</span>
@@ -2032,9 +2032,9 @@
             <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Digraph order </span><span class="si">%d</span><span class="s1"> to high. The default limit (7) may be changed with the oderLimit argument.&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="n">other</span><span class="o">.</span><span class="n">order</span><span class="p">)</span> <span class="p">)</span>
             <span class="k">return</span>
                   
-        <span class="kn">from</span> <span class="nn">digraphs</span> <span class="kn">import</span> <span class="n">all_perms</span>
-        <span class="kn">from</span> <span class="nn">copy</span> <span class="kn">import</span> <span class="n">copy</span><span class="p">,</span><span class="n">deepcopy</span>
-        <span class="kn">from</span> <span class="nn">decimal</span> <span class="kn">import</span> <span class="n">Decimal</span>
+        <span class="kn">from</span><span class="w"> </span><span class="nn">digraphs</span><span class="w"> </span><span class="kn">import</span> <span class="n">all_perms</span>
+        <span class="kn">from</span><span class="w"> </span><span class="nn">copy</span><span class="w"> </span><span class="kn">import</span> <span class="n">copy</span><span class="p">,</span><span class="n">deepcopy</span>
+        <span class="kn">from</span><span class="w"> </span><span class="nn">decimal</span><span class="w"> </span><span class="kn">import</span> <span class="n">Decimal</span>
         
         <span class="n">Min</span> <span class="o">=</span> <span class="n">other</span><span class="o">.</span><span class="n">valuationdomain</span><span class="p">[</span><span class="s1">&#39;min&#39;</span><span class="p">]</span>
         <span class="n">Max</span> <span class="o">=</span> <span class="n">other</span><span class="o">.</span><span class="n">valuationdomain</span><span class="p">[</span><span class="s1">&#39;max&#39;</span><span class="p">]</span>
@@ -2056,7 +2056,7 @@
 <span class="c1">##            maxKemenyIndex = kemenyRankings[1]</span>
 <span class="c1">##            maximalRankings = list(other.maximalRankings)</span>
         <span class="k">else</span><span class="p">:</span>
-            <span class="kn">from</span> <span class="nn">operator</span> <span class="kn">import</span> <span class="n">itemgetter</span>
+            <span class="kn">from</span><span class="w"> </span><span class="nn">operator</span><span class="w"> </span><span class="kn">import</span> <span class="n">itemgetter</span>
             <span class="n">orderedMaximalRankings</span> <span class="o">=</span> <span class="p">[]</span>
             <span class="k">for</span> <span class="n">r</span> <span class="ow">in</span> <span class="n">other</span><span class="o">.</span><span class="n">maximalRankings</span><span class="p">:</span>
                 <span class="k">try</span><span class="p">:</span>
@@ -2132,7 +2132,7 @@
 
 <div class="viewcode-block" id="KemenyOrder">
 <a class="viewcode-back" href="../techDoc.html#linearOrders.KemenyOrder">[docs]</a>
-<span class="k">class</span> <span class="nc">KemenyOrder</span><span class="p">(</span><span class="n">KemenyRanking</span><span class="p">):</span>
+<span class="k">class</span><span class="w"> </span><span class="nc">KemenyOrder</span><span class="p">(</span><span class="n">KemenyRanking</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Dummy class</span>
 <span class="sd">    &quot;&quot;&quot;</span></div>
@@ -2140,17 +2140,17 @@
 
 <div class="viewcode-block" id="SlaterRanking">
 <a class="viewcode-back" href="../techDoc.html#linearOrders.SlaterRanking">[docs]</a>
-<span class="k">class</span> <span class="nc">SlaterRanking</span><span class="p">(</span><span class="n">KemenyRanking</span><span class="p">):</span>
+<span class="k">class</span><span class="w"> </span><span class="nc">SlaterRanking</span><span class="p">(</span><span class="n">KemenyRanking</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Instantiates a Slater ranking by instantiating a *KemenyRanking* from the Condorcet Digraph -the median cut polarised digraph- of a given bipolar-valued Digraph instance. </span>
 <span class="sd">    &quot;&quot;&quot;</span>
-    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">other</span><span class="p">,</span><span class="n">orderLimit</span><span class="o">=</span><span class="mi">7</span><span class="p">,</span><span class="n">Debug</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">other</span><span class="p">,</span><span class="n">orderLimit</span><span class="o">=</span><span class="mi">7</span><span class="p">,</span><span class="n">Debug</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        A constructor for generating a linear order</span>
 <span class="sd">        from a given other digraph by exact enumeration</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="kn">from</span> <span class="nn">digraphs</span> <span class="kn">import</span> <span class="n">PolarisedDigraph</span>
-        <span class="kn">from</span> <span class="nn">copy</span> <span class="kn">import</span> <span class="n">copy</span><span class="p">,</span><span class="n">deepcopy</span>
+        <span class="kn">from</span><span class="w"> </span><span class="nn">digraphs</span><span class="w"> </span><span class="kn">import</span> <span class="n">PolarisedDigraph</span>
+        <span class="kn">from</span><span class="w"> </span><span class="nn">copy</span><span class="w"> </span><span class="kn">import</span> <span class="n">copy</span><span class="p">,</span><span class="n">deepcopy</span>
         <span class="n">c</span> <span class="o">=</span> <span class="n">PolarisedDigraph</span><span class="p">(</span><span class="n">other</span><span class="p">)</span>
         <span class="n">sl</span> <span class="o">=</span> <span class="n">KemenyOrder</span><span class="p">(</span><span class="n">c</span><span class="p">,</span><span class="n">orderLimit</span><span class="o">=</span><span class="n">orderLimit</span><span class="p">,</span><span class="n">Debug</span><span class="o">=</span><span class="n">Debug</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="n">other</span><span class="o">.</span><span class="n">name</span> <span class="o">+</span> <span class="s1">&#39;_ranked&#39;</span>        
@@ -2168,7 +2168,7 @@
 
 <div class="viewcode-block" id="SlaterOrder">
 <a class="viewcode-back" href="../techDoc.html#linearOrders.SlaterOrder">[docs]</a>
-<span class="k">class</span> <span class="nc">SlaterOrder</span><span class="p">(</span><span class="n">SlaterRanking</span><span class="p">):</span>
+<span class="k">class</span><span class="w"> </span><span class="nc">SlaterOrder</span><span class="p">(</span><span class="n">SlaterRanking</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Dummy class</span>
 <span class="sd">    &quot;&quot;&quot;</span></div>
@@ -2178,13 +2178,13 @@
 
 <div class="viewcode-block" id="PrincipalOrder">
 <a class="viewcode-back" href="../techDoc.html#linearOrders.PrincipalOrder">[docs]</a>
-<span class="k">class</span> <span class="nc">PrincipalOrder</span><span class="p">(</span><span class="n">LinearOrder</span><span class="p">):</span>
+<span class="k">class</span><span class="w"> </span><span class="nc">PrincipalOrder</span><span class="p">(</span><span class="n">LinearOrder</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    instantiates the order from the scores obtained by the first</span>
 <span class="sd">    princiapl axis of the eigen deomposition of the covariance of the</span>
 <span class="sd">    outdegrees of the valued digraph &#39;other&#39;.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
-    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">other</span><span class="p">,</span><span class="n">Colwise</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span><span class="n">imageType</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">other</span><span class="p">,</span><span class="n">Colwise</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span><span class="n">imageType</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
                  <span class="n">plotFileName</span><span class="o">=</span><span class="s2">&quot;principalOrdering&quot;</span><span class="p">,</span>
                  <span class="n">tempDir</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span><span class="n">Comments</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span><span class="n">Debug</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
@@ -2199,10 +2199,10 @@
 
 <span class="sd">        The plot file name only matters with a non None image type.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="kn">from</span> <span class="nn">copy</span> <span class="kn">import</span> <span class="n">copy</span><span class="p">,</span> <span class="n">deepcopy</span>
-        <span class="kn">from</span> <span class="nn">decimal</span> <span class="kn">import</span> <span class="n">Decimal</span>
-        <span class="kn">from</span> <span class="nn">tempfile</span> <span class="kn">import</span> <span class="n">TemporaryDirectory</span>
-        <span class="kn">from</span> <span class="nn">operator</span> <span class="kn">import</span> <span class="n">itemgetter</span>
+        <span class="kn">from</span><span class="w"> </span><span class="nn">copy</span><span class="w"> </span><span class="kn">import</span> <span class="n">copy</span><span class="p">,</span> <span class="n">deepcopy</span>
+        <span class="kn">from</span><span class="w"> </span><span class="nn">decimal</span><span class="w"> </span><span class="kn">import</span> <span class="n">Decimal</span>
+        <span class="kn">from</span><span class="w"> </span><span class="nn">tempfile</span><span class="w"> </span><span class="kn">import</span> <span class="n">TemporaryDirectory</span>
+        <span class="kn">from</span><span class="w"> </span><span class="nn">operator</span><span class="w"> </span><span class="kn">import</span> <span class="n">itemgetter</span>
         
         <span class="n">Min</span> <span class="o">=</span> <span class="n">other</span><span class="o">.</span><span class="n">valuationdomain</span><span class="p">[</span><span class="s1">&#39;min&#39;</span><span class="p">]</span>
         <span class="n">Max</span> <span class="o">=</span> <span class="n">other</span><span class="o">.</span><span class="n">valuationdomain</span><span class="p">[</span><span class="s1">&#39;max&#39;</span><span class="p">]</span>
@@ -2301,14 +2301,14 @@
 <span class="c1">#        for testing ongoing developmens</span>
 <span class="c1">####################################</span>
 <span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s2">&quot;__main__&quot;</span><span class="p">:</span>
-    <span class="kn">import</span> <span class="nn">sys</span><span class="o">,</span><span class="nn">array</span>
-    <span class="kn">from</span> <span class="nn">time</span> <span class="kn">import</span> <span class="n">time</span>
-    <span class="kn">from</span> <span class="nn">digraphs</span> <span class="kn">import</span> <span class="o">*</span>
-    <span class="kn">from</span> <span class="nn">outrankingDigraphs</span> <span class="kn">import</span> <span class="o">*</span>
-    <span class="kn">from</span> <span class="nn">sortingDigraphs</span> <span class="kn">import</span> <span class="o">*</span>
-    <span class="kn">from</span> <span class="nn">linearOrders</span> <span class="kn">import</span> <span class="o">*</span>
-    <span class="kn">from</span> <span class="nn">transitiveDigraphs</span> <span class="kn">import</span> <span class="o">*</span>
-    <span class="kn">from</span> <span class="nn">randomPerfTabs</span> <span class="kn">import</span> <span class="o">*</span>
+    <span class="kn">import</span><span class="w"> </span><span class="nn">sys</span><span class="o">,</span><span class="nn">array</span>
+    <span class="kn">from</span><span class="w"> </span><span class="nn">time</span><span class="w"> </span><span class="kn">import</span> <span class="n">time</span>
+    <span class="kn">from</span><span class="w"> </span><span class="nn">digraphs</span><span class="w"> </span><span class="kn">import</span> <span class="o">*</span>
+    <span class="kn">from</span><span class="w"> </span><span class="nn">outrankingDigraphs</span><span class="w"> </span><span class="kn">import</span> <span class="o">*</span>
+    <span class="kn">from</span><span class="w"> </span><span class="nn">sortingDigraphs</span><span class="w"> </span><span class="kn">import</span> <span class="o">*</span>
+    <span class="kn">from</span><span class="w"> </span><span class="nn">linearOrders</span><span class="w"> </span><span class="kn">import</span> <span class="o">*</span>
+    <span class="kn">from</span><span class="w"> </span><span class="nn">transitiveDigraphs</span><span class="w"> </span><span class="kn">import</span> <span class="o">*</span>
+    <span class="kn">from</span><span class="w"> </span><span class="nn">randomPerfTabs</span><span class="w"> </span><span class="kn">import</span> <span class="o">*</span>
 
     <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;&quot;&quot;</span>
 <span class="s2">    ****************************************************</span>
@@ -2320,8 +2320,8 @@
 <span class="s2">    * redistribute it if it remains free software.     *</span>
 <span class="s2">    ****************************************************</span>
 <span class="s2">    &quot;&quot;&quot;</span><span class="p">)</span>
-    <span class="kn">import</span> <span class="nn">random</span>
-    <span class="kn">from</span> <span class="nn">time</span> <span class="kn">import</span> <span class="n">time</span>
+    <span class="kn">import</span><span class="w"> </span><span class="nn">random</span>
+    <span class="kn">from</span><span class="w"> </span><span class="nn">time</span><span class="w"> </span><span class="kn">import</span> <span class="n">time</span>
     <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;*-------- Testing class and methods -------&#39;</span><span class="p">)</span>
 
     <span class="n">Threading</span> <span class="o">=</span> <span class="kc">False</span>
@@ -2412,7 +2412,7 @@
 
   <div role="contentinfo">
     <p>&#169; Copyright 2012-2025, Raymond Bisdorff.
-      <span class="lastupdated">Last updated on Apr 12, 2025.
+      <span class="lastupdated">Last updated on Apr 16, 2025.
       </span></p>
   </div>
 

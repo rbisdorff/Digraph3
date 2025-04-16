@@ -5,8 +5,8 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>votingProfiles &mdash; Digraph3 3.13.2 documentation</title>
-      <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=fa44fd50" />
+  <title>votingProfiles &mdash; Digraph3 3.13.3 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=03e43079" />
       <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=e59714d7" />
       <link rel="stylesheet" type="text/css" href="../_static/graphviz.css?v=4ae1632d" />
       <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
@@ -23,7 +23,7 @@
   
       <script src="../_static/jquery.js?v=5d32c60e"></script>
       <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-      <script src="../_static/documentation_options.js?v=f92f4e34"></script>
+      <script src="../_static/documentation_options.js?v=5d57ca2d"></script>
       <script src="../_static/doctools.js?v=9bcbadda"></script>
       <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
       <script src="../_static/clipboard.min.js?v=a7894cd8"></script>
@@ -115,17 +115,17 @@
 
 <span class="n">__version__</span> <span class="o">=</span> <span class="s2">&quot;$Revision: Python 3.13.2&quot;</span>
 
-<span class="kn">from</span> <span class="nn">digraphsTools</span> <span class="kn">import</span> <span class="o">*</span> 
-<span class="kn">from</span> <span class="nn">digraphs</span> <span class="kn">import</span> <span class="o">*</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">digraphsTools</span><span class="w"> </span><span class="kn">import</span> <span class="o">*</span> 
+<span class="kn">from</span><span class="w"> </span><span class="nn">digraphs</span><span class="w"> </span><span class="kn">import</span> <span class="o">*</span>
 
 <span class="c1">#--------- Decimal precision --------------</span>
-<span class="kn">from</span> <span class="nn">decimal</span> <span class="kn">import</span> <span class="n">Decimal</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">decimal</span><span class="w"> </span><span class="kn">import</span> <span class="n">Decimal</span>
 
 <span class="c1">#---------- voting profiles</span>
 
 <div class="viewcode-block" id="VotingProfile">
 <a class="viewcode-back" href="../techDoc.html#votingProfiles.VotingProfile">[docs]</a>
-<span class="k">class</span> <span class="nc">VotingProfile</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+<span class="k">class</span><span class="w"> </span><span class="nc">VotingProfile</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    A generic class for storing voting profiles.</span>
 
@@ -153,7 +153,7 @@
 <span class="sd">    	}</span>
 
 <span class="sd">    &quot;&quot;&quot;</span>
-    <span class="k">def</span> <span class="fm">__repr__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__repr__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Default description for VotingProfile instances.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
@@ -166,7 +166,7 @@
        
         <span class="k">return</span> <span class="n">reprString</span>
     
-    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">fileVotingProfile</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span><span class="n">seed</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">fileVotingProfile</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span><span class="n">seed</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
 
         <span class="k">if</span> <span class="n">fileVotingProfile</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
             <span class="n">fileName</span> <span class="o">=</span> <span class="n">fileVotingProfile</span><span class="o">+</span><span class="s1">&#39;.py&#39;</span>
@@ -183,7 +183,7 @@
             <span class="k">return</span>
 <div class="viewcode-block" id="VotingProfile.showAll">
 <a class="viewcode-back" href="../techDoc.html#votingProfiles.VotingProfile.showAll">[docs]</a>
-    <span class="k">def</span> <span class="nf">showAll</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">WithBallots</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">showAll</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">WithBallots</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Show method for &lt;VotingProfile&gt; instances.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
@@ -205,7 +205,7 @@
 
 <div class="viewcode-block" id="VotingProfile.showVoterBallot">
 <a class="viewcode-back" href="../techDoc.html#votingProfiles.VotingProfile.showVoterBallot">[docs]</a>
-    <span class="k">def</span> <span class="nf">showVoterBallot</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">voter</span><span class="p">,</span> <span class="n">hasIntegerValuation</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">showVoterBallot</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">voter</span><span class="p">,</span> <span class="n">hasIntegerValuation</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Show the actual voting of a voter.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
@@ -227,7 +227,7 @@
 
 <div class="viewcode-block" id="VotingProfile.save">
 <a class="viewcode-back" href="../techDoc.html#votingProfiles.VotingProfile.save">[docs]</a>
-    <span class="k">def</span> <span class="nf">save</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">fileName</span><span class="o">=</span><span class="s1">&#39;tempVotingProfile&#39;</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">save</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">fileName</span><span class="o">=</span><span class="s1">&#39;tempVotingProfile&#39;</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Persistant storage of an approval voting profile.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
@@ -267,7 +267,7 @@
 
 <div class="viewcode-block" id="VotingProfile.computePrerankedBallot">
 <a class="viewcode-back" href="../techDoc.html#votingProfiles.VotingProfile.computePrerankedBallot">[docs]</a>
-    <span class="k">def</span> <span class="nf">computePrerankedBallot</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">preranking</span><span class="p">,</span><span class="n">Debug</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">computePrerankedBallot</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">preranking</span><span class="p">,</span><span class="n">Debug</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Renders the bipolar-valued ballot obtained from</span>
 <span class="sd">        given preorderings of the candidates per voter</span>
@@ -305,13 +305,13 @@
 
 <div class="viewcode-block" id="RandomVotingProfile">
 <a class="viewcode-back" href="../techDoc.html#votingProfiles.RandomVotingProfile">[docs]</a>
-<span class="k">class</span> <span class="nc">RandomVotingProfile</span><span class="p">(</span><span class="n">VotingProfile</span><span class="p">):</span>
+<span class="k">class</span><span class="w"> </span><span class="nc">RandomVotingProfile</span><span class="p">(</span><span class="n">VotingProfile</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    A subclass for generating random voting profiles.</span>
 <span class="sd">    </span>
 <span class="sd">    When *IntraGroup* is set to *True*, the candidates are the voters themselves</span>
 <span class="sd">    &quot;&quot;&quot;</span>
-    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">numberOfVoters</span><span class="o">=</span><span class="mi">9</span><span class="p">,</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">numberOfVoters</span><span class="o">=</span><span class="mi">9</span><span class="p">,</span>
                  <span class="n">votersIdPrefix</span><span class="o">=</span><span class="s1">&#39;v&#39;</span><span class="p">,</span>
                  <span class="n">IntraGroup</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
                  <span class="n">numberOfCandidates</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span>
@@ -325,8 +325,8 @@
 <span class="sd">            | numberOfCandidates=5</span>
 
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="kn">from</span> <span class="nn">collections</span> <span class="kn">import</span> <span class="n">OrderedDict</span>
-        <span class="kn">import</span> <span class="nn">random</span>
+        <span class="kn">from</span><span class="w"> </span><span class="nn">collections</span><span class="w"> </span><span class="kn">import</span> <span class="n">OrderedDict</span>
+        <span class="kn">import</span><span class="w"> </span><span class="nn">random</span>
         <span class="n">random</span><span class="o">.</span><span class="n">seed</span><span class="p">(</span><span class="n">seed</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">seed</span> <span class="o">=</span> <span class="n">seed</span>
         <span class="n">votersList</span> <span class="o">=</span> <span class="p">[</span><span class="n">x</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="n">numberOfVoters</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)]</span>
@@ -357,13 +357,13 @@
 
 <div class="viewcode-block" id="RandomVotingProfile.generateRandomBallot">
 <a class="viewcode-back" href="../techDoc.html#votingProfiles.RandomVotingProfile.generateRandomBallot">[docs]</a>
-    <span class="k">def</span> <span class="nf">generateRandomBallot</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">seed</span><span class="p">,</span><span class="n">Debug</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">generateRandomBallot</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">seed</span><span class="p">,</span><span class="n">Debug</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Renders a randomly generated approval ballot</span>
 <span class="sd">        from a list of candidates for each voter.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="kn">from</span> <span class="nn">decimal</span> <span class="kn">import</span> <span class="n">Decimal</span>
-        <span class="kn">import</span> <span class="nn">random</span>
+        <span class="kn">from</span><span class="w"> </span><span class="nn">decimal</span><span class="w"> </span><span class="kn">import</span> <span class="n">Decimal</span>
+        <span class="kn">import</span><span class="w"> </span><span class="nn">random</span>
         <span class="k">if</span> <span class="n">seed</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
             <span class="n">random</span><span class="o">.</span><span class="n">seed</span><span class="p">(</span><span class="n">seed</span><span class="p">)</span>
         <span class="n">ballot</span> <span class="o">=</span> <span class="p">{}</span>
@@ -396,7 +396,7 @@
 
 <div class="viewcode-block" id="PrerankedVotingProfile">
 <a class="viewcode-back" href="../techDoc.html#votingProfiles.PrerankedVotingProfile">[docs]</a>
-<span class="k">class</span> <span class="nc">PrerankedVotingProfile</span><span class="p">(</span><span class="n">VotingProfile</span><span class="p">):</span>
+<span class="k">class</span><span class="w"> </span><span class="nc">PrerankedVotingProfile</span><span class="p">(</span><span class="n">VotingProfile</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    A specialised class for preranked voting profiles</span>
 
@@ -412,7 +412,7 @@
 <span class="sd">            ...</span>
 <span class="sd">            }</span>
 <span class="sd">    &quot;&quot;&quot;</span>
-    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">fileVotingProfile</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">fileVotingProfile</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
 
         <span class="k">if</span> <span class="n">fileVotingProfile</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
             <span class="n">fileName</span> <span class="o">=</span> <span class="n">fileVotingProfile</span><span class="o">+</span><span class="s1">&#39;.py&#39;</span>
@@ -436,7 +436,7 @@
         
 <div class="viewcode-block" id="PrerankedVotingProfile.save">
 <a class="viewcode-back" href="../techDoc.html#votingProfiles.PrerankedVotingProfile.save">[docs]</a>
-    <span class="k">def</span> <span class="nf">save</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">fileName</span><span class="o">=</span><span class="s1">&#39;tempPreRankedProfile&#39;</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">save</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">fileName</span><span class="o">=</span><span class="s1">&#39;tempPreRankedProfile&#39;</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Persistant storage of a  preranked voting profile.</span>
 
@@ -477,7 +477,7 @@
 
 <div class="viewcode-block" id="PrerankedVotingProfile.showPrerankedBallots">
 <a class="viewcode-back" href="../techDoc.html#votingProfiles.PrerankedVotingProfile.showPrerankedBallots">[docs]</a>
-    <span class="k">def</span> <span class="nf">showPrerankedBallots</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">IntegerWeights</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">showPrerankedBallots</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">IntegerWeights</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        show the preranked ballots</span>
 <span class="sd">        &quot;&quot;&quot;</span>
@@ -499,11 +499,11 @@
 
 <div class="viewcode-block" id="PrerankedVotingProfile.computeBallot">
 <a class="viewcode-back" href="../techDoc.html#votingProfiles.PrerankedVotingProfile.computeBallot">[docs]</a>
-    <span class="k">def</span> <span class="nf">computeBallot</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">Debug</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">computeBallot</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">Debug</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        compute ballots from the prerankeds</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="kn">from</span> <span class="nn">copy</span> <span class="kn">import</span> <span class="n">deepcopy</span>
+        <span class="kn">from</span><span class="w"> </span><span class="nn">copy</span><span class="w"> </span><span class="kn">import</span> <span class="n">deepcopy</span>
         <span class="n">ballot</span> <span class="o">=</span> <span class="p">{}</span>
         <span class="k">for</span> <span class="n">v</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">voters</span><span class="p">:</span>
             <span class="n">preranked</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">prerankedBallot</span><span class="p">[</span><span class="n">v</span><span class="p">]</span>
@@ -519,7 +519,7 @@
 
 <div class="viewcode-block" id="RandomPrerankedVotingProfile">
 <a class="viewcode-back" href="../techDoc.html#votingProfiles.RandomPrerankedVotingProfile">[docs]</a>
-<span class="k">class</span> <span class="nc">RandomPrerankedVotingProfile</span><span class="p">(</span><span class="n">PrerankedVotingProfile</span><span class="p">):</span>
+<span class="k">class</span><span class="w"> </span><span class="nc">RandomPrerankedVotingProfile</span><span class="p">(</span><span class="n">PrerankedVotingProfile</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    A specialized class for generating random preranked voting profiles.</span>
 
@@ -532,7 +532,7 @@
 <span class="sd">        * the *lengthProbability* influences the expected cardinalities of the equivalence classes</span>
 <span class="sd">          </span>
 <span class="sd">    &quot;&quot;&quot;</span>
-    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">numberOfVoters</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">numberOfVoters</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span>
                  <span class="n">numberOfCandidates</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span>
                  <span class="n">votersIdPrefix</span><span class="o">=</span><span class="s1">&#39;v&#39;</span><span class="p">,</span>
                  <span class="n">candidatesIdPrefix</span><span class="o">=</span><span class="s1">&#39;c&#39;</span><span class="p">,</span>
@@ -542,8 +542,8 @@
                  <span class="n">seed</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span><span class="n">Debug</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="kn">from</span> <span class="nn">collections</span> <span class="kn">import</span> <span class="n">OrderedDict</span>
-        <span class="kn">import</span> <span class="nn">random</span>
+        <span class="kn">from</span><span class="w"> </span><span class="nn">collections</span><span class="w"> </span><span class="kn">import</span> <span class="n">OrderedDict</span>
+        <span class="kn">import</span><span class="w"> </span><span class="nn">random</span>
         <span class="k">if</span> <span class="n">seed</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
             <span class="n">seed</span> <span class="o">=</span> <span class="n">random</span><span class="o">.</span><span class="n">random</span><span class="p">()</span>
         <span class="n">random</span><span class="o">.</span><span class="n">seed</span><span class="p">(</span><span class="n">seed</span><span class="p">)</span>
@@ -586,12 +586,12 @@
 
 <div class="viewcode-block" id="RandomPrerankedVotingProfile.generateRandomPrerankedBallot">
 <a class="viewcode-back" href="../techDoc.html#votingProfiles.RandomPrerankedVotingProfile.generateRandomPrerankedBallot">[docs]</a>
-    <span class="k">def</span> <span class="nf">generateRandomPrerankedBallot</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">generateRandomPrerankedBallot</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span>
                                    <span class="n">seed</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span><span class="n">Debug</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Renders a randomly generated preranked ballot.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="kn">import</span> <span class="nn">random</span>
+        <span class="kn">import</span><span class="w"> </span><span class="nn">random</span>
         <span class="n">random</span><span class="o">.</span><span class="n">seed</span><span class="p">(</span><span class="n">seed</span><span class="p">)</span>
         <span class="n">prerankedBallot</span> <span class="o">=</span> <span class="p">{}</span>
         <span class="n">voters</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">voters</span>
@@ -603,7 +603,7 @@
             <span class="n">random</span><span class="o">.</span><span class="n">shuffle</span><span class="p">(</span><span class="n">candidatesList</span><span class="p">)</span>
             <span class="k">if</span> <span class="n">Debug</span><span class="p">:</span>
                 <span class="nb">print</span><span class="p">(</span><span class="n">candidatesList</span><span class="p">)</span>
-            <span class="kn">from</span> <span class="nn">randomNumbers</span> <span class="kn">import</span>\
+            <span class="kn">from</span><span class="w"> </span><span class="nn">randomNumbers</span><span class="w"> </span><span class="kn">import</span>\
                      <span class="n">BinomialRandomVariable</span>
             <span class="n">currIndex</span> <span class="o">=</span> <span class="mi">0</span>
             <span class="n">prerankedBallotv</span> <span class="o">=</span> <span class="p">[]</span>
@@ -629,7 +629,7 @@
 <span class="c1">#-------------</span>
 <div class="viewcode-block" id="LinearVotingProfile">
 <a class="viewcode-back" href="../techDoc.html#votingProfiles.LinearVotingProfile">[docs]</a>
-<span class="k">class</span> <span class="nc">LinearVotingProfile</span><span class="p">(</span><span class="n">VotingProfile</span><span class="p">):</span>
+<span class="k">class</span><span class="w"> </span><span class="nc">LinearVotingProfile</span><span class="p">(</span><span class="n">VotingProfile</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    A specialised class for linear voting profiles</span>
 
@@ -685,7 +685,7 @@
 <span class="sd">    [&#39;c1&#39;]</span>
 
 <span class="sd">    &quot;&quot;&quot;</span>
-    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">fileVotingProfile</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span><span class="n">numberOfCandidates</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">fileVotingProfile</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span><span class="n">numberOfCandidates</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span>
                  <span class="n">numberOfVoters</span><span class="o">=</span><span class="mi">9</span><span class="p">):</span>
         <span class="k">if</span> <span class="n">fileVotingProfile</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
             <span class="n">fileName</span> <span class="o">=</span> <span class="n">fileVotingProfile</span> <span class="o">+</span> <span class="s1">&#39;.py&#39;</span>
@@ -741,7 +741,7 @@
 
 <div class="viewcode-block" id="LinearVotingProfile.computeBallot">
 <a class="viewcode-back" href="../techDoc.html#votingProfiles.LinearVotingProfile.computeBallot">[docs]</a>
-    <span class="k">def</span> <span class="nf">computeBallot</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">computeBallot</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Computes a complete ballot from the linear Ballot.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
@@ -767,7 +767,7 @@
 
 <div class="viewcode-block" id="LinearVotingProfile.save">
 <a class="viewcode-back" href="../techDoc.html#votingProfiles.LinearVotingProfile.save">[docs]</a>
-    <span class="k">def</span> <span class="nf">save</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">fileName</span><span class="o">=</span><span class="s1">&#39;templinearprofile&#39;</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">save</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">fileName</span><span class="o">=</span><span class="s1">&#39;templinearprofile&#39;</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Persistant storage of a linear voting profile.</span>
 
@@ -808,7 +808,7 @@
 
 <div class="viewcode-block" id="LinearVotingProfile.showLinearBallots">
 <a class="viewcode-back" href="../techDoc.html#votingProfiles.LinearVotingProfile.showLinearBallots">[docs]</a>
-    <span class="k">def</span> <span class="nf">showLinearBallots</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">IntegerWeights</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">showLinearBallots</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">IntegerWeights</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        show the linear ballots</span>
 <span class="sd">        &quot;&quot;&quot;</span>
@@ -830,7 +830,7 @@
 
 <div class="viewcode-block" id="LinearVotingProfile.computeRankAnalysis">
 <a class="viewcode-back" href="../techDoc.html#votingProfiles.LinearVotingProfile.computeRankAnalysis">[docs]</a>
-    <span class="k">def</span> <span class="nf">computeRankAnalysis</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">computeRankAnalysis</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        compute the number of ranks each candidate obtains</span>
 <span class="sd">        &quot;&quot;&quot;</span>
@@ -854,7 +854,7 @@
 
 <div class="viewcode-block" id="LinearVotingProfile.showRankAnalysisTable">
 <a class="viewcode-back" href="../techDoc.html#votingProfiles.LinearVotingProfile.showRankAnalysisTable">[docs]</a>
-    <span class="k">def</span> <span class="nf">showRankAnalysisTable</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">Sorted</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span><span class="n">ndigits</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span><span class="n">Debug</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">showRankAnalysisTable</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">Sorted</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span><span class="n">ndigits</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span><span class="n">Debug</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Print the rank analysis tableau.</span>
 <span class="sd">        </span>
@@ -902,12 +902,12 @@
 
 <div class="viewcode-block" id="LinearVotingProfile.computeBordaScores">
 <a class="viewcode-back" href="../techDoc.html#votingProfiles.LinearVotingProfile.computeBordaScores">[docs]</a>
-    <span class="k">def</span> <span class="nf">computeBordaScores</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">computeBordaScores</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        compute Borda scores from the rank analysis</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="kn">from</span> <span class="nn">collections</span> <span class="kn">import</span> <span class="n">defaultdict</span><span class="p">,</span> <span class="n">OrderedDict</span>
-        <span class="kn">from</span> <span class="nn">operator</span> <span class="kn">import</span> <span class="n">itemgetter</span>
+        <span class="kn">from</span><span class="w"> </span><span class="nn">collections</span><span class="w"> </span><span class="kn">import</span> <span class="n">defaultdict</span><span class="p">,</span> <span class="n">OrderedDict</span>
+        <span class="kn">from</span><span class="w"> </span><span class="nn">operator</span><span class="w"> </span><span class="kn">import</span> <span class="n">itemgetter</span>
         <span class="n">ranks</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">computeRankAnalysis</span><span class="p">()</span>
         <span class="n">scores</span> <span class="o">=</span> <span class="p">[]</span>
         <span class="n">candidatesList</span> <span class="o">=</span> <span class="p">[</span><span class="n">x</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">candidates</span><span class="p">]</span>
@@ -927,7 +927,7 @@
 
 <div class="viewcode-block" id="LinearVotingProfile.showBordaRanking">
 <a class="viewcode-back" href="../techDoc.html#votingProfiles.LinearVotingProfile.showBordaRanking">[docs]</a>
-    <span class="k">def</span> <span class="nf">showBordaRanking</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">showBordaRanking</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        show Borda ranking in increasing order of the Borda score</span>
 <span class="sd">        &quot;&quot;&quot;</span>
@@ -939,7 +939,7 @@
                   
 <div class="viewcode-block" id="LinearVotingProfile.computeBordaWinners">
 <a class="viewcode-back" href="../techDoc.html#votingProfiles.LinearVotingProfile.computeBordaWinners">[docs]</a>
-    <span class="k">def</span> <span class="nf">computeBordaWinners</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">computeBordaWinners</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        compute the Borda winner from the Borda scores, ie the list of</span>
 <span class="sd">        candidates with the minimal Borda score.</span>
@@ -961,12 +961,12 @@
 
 <div class="viewcode-block" id="LinearVotingProfile.computeInstantRunoffWinner">
 <a class="viewcode-back" href="../techDoc.html#votingProfiles.LinearVotingProfile.computeInstantRunoffWinner">[docs]</a>
-    <span class="k">def</span> <span class="nf">computeInstantRunoffWinner</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">Comments</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">computeInstantRunoffWinner</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">Comments</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        compute the instant runoff winner from a linear voting ballot</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="kn">from</span> <span class="nn">copy</span> <span class="kn">import</span> <span class="n">deepcopy</span><span class="p">,</span><span class="n">copy</span>
-        <span class="kn">from</span> <span class="nn">decimal</span> <span class="kn">import</span> <span class="n">Decimal</span>
+        <span class="kn">from</span><span class="w"> </span><span class="nn">copy</span><span class="w"> </span><span class="kn">import</span> <span class="n">deepcopy</span><span class="p">,</span><span class="n">copy</span>
+        <span class="kn">from</span><span class="w"> </span><span class="nn">decimal</span><span class="w"> </span><span class="kn">import</span> <span class="n">Decimal</span>
         <span class="n">voters</span> <span class="o">=</span> <span class="n">copy</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">voters</span><span class="p">)</span>
         <span class="n">votersList</span> <span class="o">=</span> <span class="p">[</span><span class="n">x</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">voters</span><span class="p">]</span>
         <span class="n">totalWeight</span> <span class="o">=</span> <span class="n">Decimal</span><span class="p">(</span><span class="s2">&quot;0.0&quot;</span><span class="p">)</span>
@@ -1025,7 +1025,7 @@
 
 <div class="viewcode-block" id="LinearVotingProfile.save2PerfTab">
 <a class="viewcode-back" href="../techDoc.html#votingProfiles.LinearVotingProfile.save2PerfTab">[docs]</a>
-    <span class="k">def</span> <span class="nf">save2PerfTab</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">fileName</span><span class="o">=</span><span class="s1">&#39;votingPerfTab&#39;</span><span class="p">,</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">save2PerfTab</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">fileName</span><span class="o">=</span><span class="s1">&#39;votingPerfTab&#39;</span><span class="p">,</span>
                      <span class="n">isDecimal</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span><span class="n">NA</span><span class="o">=-</span><span class="mi">9999</span><span class="p">,</span>
                      <span class="n">valueDigits</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span><span class="n">NegativeWeights</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
                      <span class="n">Comments</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
@@ -1036,7 +1036,7 @@
 <span class="sd">        number of candidates - linearProfile[v].index(x)</span>
 <span class="sd">        </span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="kn">from</span> <span class="nn">copy</span> <span class="kn">import</span> <span class="n">deepcopy</span>
+        <span class="kn">from</span><span class="w"> </span><span class="nn">copy</span><span class="w"> </span><span class="kn">import</span> <span class="n">deepcopy</span>
         <span class="k">if</span> <span class="n">Comments</span><span class="p">:</span>
             <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;*--- Saving as performance tableau in file: &lt;&#39;</span> \
                                        <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">fileName</span><span class="p">)</span> <span class="o">+</span> <span class="s1">&#39;.py&gt; ---*&#39;</span><span class="p">)</span>
@@ -1126,7 +1126,7 @@
 
 <div class="viewcode-block" id="LinearVotingProfile.showHTMLVotingHeatmap">
 <a class="viewcode-back" href="../techDoc.html#votingProfiles.LinearVotingProfile.showHTMLVotingHeatmap">[docs]</a>
-    <span class="k">def</span> <span class="nf">showHTMLVotingHeatmap</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">criteriaList</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> 
+    <span class="k">def</span><span class="w"> </span><span class="nf">showHTMLVotingHeatmap</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">criteriaList</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> 
                               <span class="n">actionsList</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
                               <span class="n">fromIndex</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
                               <span class="n">toIndex</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
@@ -1149,7 +1149,7 @@
 <span class="sd">        </span>
 <span class="sd">        (see perfTabs.PerformanceTableau.showHTMLPerformanceHeatmap() )</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="kn">from</span> <span class="nn">tempfile</span> <span class="kn">import</span> <span class="n">mkdtemp</span>
+        <span class="kn">from</span><span class="w"> </span><span class="nn">tempfile</span><span class="w"> </span><span class="kn">import</span> <span class="n">mkdtemp</span>
         <span class="n">tempDir</span> <span class="o">=</span> <span class="n">mkdtemp</span><span class="p">()</span>
         <span class="n">perfTabFileName</span> <span class="o">=</span> <span class="s1">&#39;</span><span class="si">%s</span><span class="s1">/votingPerfTab&#39;</span> <span class="o">%</span> <span class="n">tempDir</span>
         <span class="k">if</span> <span class="n">SparseModel</span><span class="p">:</span>
@@ -1173,7 +1173,7 @@
 
 <div class="viewcode-block" id="LinearVotingProfile.computeUninominalVotes">
 <a class="viewcode-back" href="../techDoc.html#votingProfiles.LinearVotingProfile.computeUninominalVotes">[docs]</a>
-    <span class="k">def</span> <span class="nf">computeUninominalVotes</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">candidates</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span><span class="n">linearBallot</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">computeUninominalVotes</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">candidates</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span><span class="n">linearBallot</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        compute uninominal votes for each candidate in candidates sublist</span>
 <span class="sd">        and restricted linear ballots</span>
@@ -1193,7 +1193,7 @@
 
 <div class="viewcode-block" id="LinearVotingProfile.computeSimpleMajorityWinner">
 <a class="viewcode-back" href="../techDoc.html#votingProfiles.LinearVotingProfile.computeSimpleMajorityWinner">[docs]</a>
-    <span class="k">def</span> <span class="nf">computeSimpleMajorityWinner</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">Comments</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">computeSimpleMajorityWinner</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">Comments</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        compute the winner in a uninominal Election from a linear ballot</span>
 <span class="sd">        &quot;&quot;&quot;</span>
@@ -1218,7 +1218,7 @@
 
 <div class="viewcode-block" id="RandomLinearVotingProfile">
 <a class="viewcode-back" href="../techDoc.html#votingProfiles.RandomLinearVotingProfile">[docs]</a>
-<span class="k">class</span> <span class="nc">RandomLinearVotingProfile</span><span class="p">(</span><span class="n">LinearVotingProfile</span><span class="p">):</span>
+<span class="k">class</span><span class="w"> </span><span class="nc">RandomLinearVotingProfile</span><span class="p">(</span><span class="n">LinearVotingProfile</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    A specialized class for generating random liwear voting profiles.</span>
 
@@ -1241,7 +1241,7 @@
 <span class="sd">          randomly shortened with the *lengthProbability* parameter.</span>
 <span class="sd">          </span>
 <span class="sd">    &quot;&quot;&quot;</span>
-    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">numberOfVoters</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">numberOfVoters</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span>
                  <span class="n">numberOfCandidates</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span>
                  <span class="n">IntraGroup</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
                  <span class="n">votersIdPrefix</span><span class="o">=</span><span class="s1">&#39;v&#39;</span><span class="p">,</span>
@@ -1257,8 +1257,8 @@
                  <span class="n">seed</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span><span class="n">Debug</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="kn">from</span> <span class="nn">collections</span> <span class="kn">import</span> <span class="n">OrderedDict</span>
-        <span class="kn">import</span> <span class="nn">random</span>
+        <span class="kn">from</span><span class="w"> </span><span class="nn">collections</span><span class="w"> </span><span class="kn">import</span> <span class="n">OrderedDict</span>
+        <span class="kn">import</span><span class="w"> </span><span class="nn">random</span>
         <span class="k">if</span> <span class="n">seed</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
             <span class="n">seed</span> <span class="o">=</span> <span class="n">random</span><span class="o">.</span><span class="n">random</span><span class="p">()</span>
         <span class="n">random</span><span class="o">.</span><span class="n">seed</span><span class="p">(</span><span class="n">seed</span><span class="p">)</span>
@@ -1313,14 +1313,14 @@
 
 <div class="viewcode-block" id="RandomLinearVotingProfile.generateRandomLinearBallot">
 <a class="viewcode-back" href="../techDoc.html#votingProfiles.RandomLinearVotingProfile.generateRandomLinearBallot">[docs]</a>
-    <span class="k">def</span> <span class="nf">generateRandomLinearBallot</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">generateRandomLinearBallot</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span>
                         <span class="n">PartialLinearBallots</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
                         <span class="n">lengthProbability</span><span class="o">=</span><span class="mf">0.5</span><span class="p">,</span>
                                    <span class="n">seed</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span><span class="n">Debug</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Renders a randomly generated linear ballot.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="kn">from</span> <span class="nn">random</span> <span class="kn">import</span> <span class="n">shuffle</span>
+        <span class="kn">from</span><span class="w"> </span><span class="nn">random</span><span class="w"> </span><span class="kn">import</span> <span class="n">shuffle</span>
 <span class="c1">##        random.seed(seed)</span>
         <span class="n">linearBallot</span> <span class="o">=</span> <span class="p">{}</span>
         <span class="n">voters</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">voters</span>
@@ -1335,7 +1335,7 @@
             <span class="k">if</span> <span class="n">Debug</span><span class="p">:</span>
                 <span class="nb">print</span><span class="p">(</span><span class="n">v</span><span class="p">,</span><span class="n">candidatesList</span><span class="p">)</span>
             <span class="k">if</span> <span class="n">PartialLinearBallots</span><span class="p">:</span>
-                <span class="kn">from</span> <span class="nn">randomNumbers</span> <span class="kn">import</span>\
+                <span class="kn">from</span><span class="w"> </span><span class="nn">randomNumbers</span><span class="w"> </span><span class="kn">import</span>\
                      <span class="n">BinomialRandomVariable</span>
                 <span class="n">length</span> <span class="o">=</span> <span class="n">BinomialRandomVariable</span><span class="p">(</span><span class="n">n</span><span class="p">,</span><span class="n">lengthProbability</span><span class="p">)</span>
                 <span class="n">linearBallot</span><span class="p">[</span><span class="n">v</span><span class="p">]</span> <span class="o">=</span> <span class="n">candidatesList</span><span class="p">[:</span><span class="n">length</span><span class="o">.</span><span class="n">random</span><span class="p">()]</span>
@@ -1346,7 +1346,7 @@
 
 <div class="viewcode-block" id="RandomLinearVotingProfile.generateRandomLinearBallotWithPoll">
 <a class="viewcode-back" href="../techDoc.html#votingProfiles.RandomLinearVotingProfile.generateRandomLinearBallotWithPoll">[docs]</a>
-    <span class="k">def</span> <span class="nf">generateRandomLinearBallotWithPoll</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">partyRepartition</span><span class="p">,</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">generateRandomLinearBallotWithPoll</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">partyRepartition</span><span class="p">,</span>
                                            <span class="n">other</span><span class="p">,</span><span class="n">DivisivePolitics</span><span class="p">,</span>
                                            <span class="n">seed</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span><span class="n">Debug</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
@@ -1356,9 +1356,9 @@
 <span class="sd">        Polls are distributed in the *bipartisan* proportion.</span>
 <span class="sd">        </span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="kn">import</span> <span class="nn">random</span>
+        <span class="kn">import</span><span class="w"> </span><span class="nn">random</span>
         <span class="n">random</span><span class="o">.</span><span class="n">seed</span><span class="p">(</span><span class="n">seed</span><span class="p">)</span>
-        <span class="kn">from</span> <span class="nn">randomNumbers</span> <span class="kn">import</span> <span class="n">DiscreteRandomVariable</span>
+        <span class="kn">from</span><span class="w"> </span><span class="nn">randomNumbers</span><span class="w"> </span><span class="kn">import</span> <span class="n">DiscreteRandomVariable</span>
         <span class="n">voters</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">voters</span>
         <span class="n">candidatesList</span> <span class="o">=</span> <span class="p">[</span><span class="n">x</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">candidates</span><span class="p">]</span>
         <span class="k">if</span> <span class="n">Debug</span><span class="p">:</span>
@@ -1453,11 +1453,11 @@
 
 <div class="viewcode-block" id="RandomLinearVotingProfile.showRandomPolls">
 <a class="viewcode-back" href="../techDoc.html#votingProfiles.RandomLinearVotingProfile.showRandomPolls">[docs]</a>
-    <span class="k">def</span> <span class="nf">showRandomPolls</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">Debug</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">showRandomPolls</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">Debug</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Shows the random polls, the case given.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="kn">from</span> <span class="nn">operator</span> <span class="kn">import</span> <span class="n">itemgetter</span>
+        <span class="kn">from</span><span class="w"> </span><span class="nn">operator</span><span class="w"> </span><span class="kn">import</span> <span class="n">itemgetter</span>
         <span class="k">try</span><span class="p">:</span>
             <span class="n">poll1</span> <span class="o">=</span> <span class="p">[(</span><span class="bp">self</span><span class="o">.</span><span class="n">poll1</span><span class="p">[</span><span class="n">x</span><span class="p">],</span><span class="n">x</span><span class="p">)</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">poll1</span><span class="p">]</span>
         <span class="k">except</span><span class="p">:</span>
@@ -1507,7 +1507,7 @@
 
 <div class="viewcode-block" id="BipolarApprovalVotingProfile">
 <a class="viewcode-back" href="../techDoc.html#votingProfiles.BipolarApprovalVotingProfile">[docs]</a>
-<span class="k">class</span> <span class="nc">BipolarApprovalVotingProfile</span><span class="p">(</span><span class="n">VotingProfile</span><span class="p">):</span>
+<span class="k">class</span><span class="w"> </span><span class="nc">BipolarApprovalVotingProfile</span><span class="p">(</span><span class="n">VotingProfile</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    A specialised class for approval-disapproval voting profiles.</span>
 
@@ -1526,7 +1526,7 @@
 <span class="sd">            }</span>
 <span class="sd">        ...</span>
 <span class="sd">    &quot;&quot;&quot;</span>
-    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">fileVotingProfile</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span><span class="n">seed</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">fileVotingProfile</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span><span class="n">seed</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
         <span class="k">if</span> <span class="n">fileVotingProfile</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
             <span class="n">fileName</span> <span class="o">=</span> <span class="n">fileVotingProfile</span> <span class="o">+</span> <span class="s1">&#39;.py&#39;</span>
         <span class="c1">## else:</span>
@@ -1548,7 +1548,7 @@
             <span class="k">return</span>
 <div class="viewcode-block" id="BipolarApprovalVotingProfile.showBipolarApprovals">
 <a class="viewcode-back" href="../techDoc.html#votingProfiles.BipolarApprovalVotingProfile.showBipolarApprovals">[docs]</a>
-    <span class="k">def</span> <span class="nf">showBipolarApprovals</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">showBipolarApprovals</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Renders the approval and disapprovals per voter</span>
 <span class="sd">        &quot;&quot;&quot;</span>
@@ -1567,11 +1567,11 @@
         
 <div class="viewcode-block" id="BipolarApprovalVotingProfile.showApprovalResults">
 <a class="viewcode-back" href="../techDoc.html#votingProfiles.BipolarApprovalVotingProfile.showApprovalResults">[docs]</a>
-    <span class="k">def</span> <span class="nf">showApprovalResults</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">showApprovalResults</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Renders the number of approvals obtained by each candidate.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="kn">from</span> <span class="nn">operator</span> <span class="kn">import</span> <span class="n">itemgetter</span>
+        <span class="kn">from</span><span class="w"> </span><span class="nn">operator</span><span class="w"> </span><span class="kn">import</span> <span class="n">itemgetter</span>
         <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Approval results&#39;</span><span class="p">)</span>
         <span class="n">candidates</span> <span class="o">=</span> <span class="p">[</span><span class="n">x</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">candidates</span><span class="p">]</span>
         <span class="n">voters</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">voters</span>
@@ -1603,11 +1603,11 @@
 
 <div class="viewcode-block" id="BipolarApprovalVotingProfile.showDisapprovalResults">
 <a class="viewcode-back" href="../techDoc.html#votingProfiles.BipolarApprovalVotingProfile.showDisapprovalResults">[docs]</a>
-    <span class="k">def</span> <span class="nf">showDisapprovalResults</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">showDisapprovalResults</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Renders the number of disapprovals obtained by each candidate.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="kn">from</span> <span class="nn">operator</span> <span class="kn">import</span> <span class="n">itemgetter</span>
+        <span class="kn">from</span><span class="w"> </span><span class="nn">operator</span><span class="w"> </span><span class="kn">import</span> <span class="n">itemgetter</span>
         <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Disapproval results&#39;</span><span class="p">)</span>
         <span class="n">candidates</span> <span class="o">=</span> <span class="p">[</span><span class="n">x</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">candidates</span><span class="p">]</span>
         <span class="n">voters</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">voters</span>
@@ -1639,7 +1639,7 @@
 
 <div class="viewcode-block" id="BipolarApprovalVotingProfile.showHTMLVotingHeatmap">
 <a class="viewcode-back" href="../techDoc.html#votingProfiles.BipolarApprovalVotingProfile.showHTMLVotingHeatmap">[docs]</a>
-    <span class="k">def</span> <span class="nf">showHTMLVotingHeatmap</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">criteriaList</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> 
+    <span class="k">def</span><span class="w"> </span><span class="nf">showHTMLVotingHeatmap</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">criteriaList</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> 
                               <span class="n">actionsList</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
                               <span class="n">fromIndex</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
                               <span class="n">toIndex</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
@@ -1660,7 +1660,7 @@
 <span class="sd">        </span>
 <span class="sd">        (see perfTabs.PerformanceTableau.showHTMLPerformanceHeatmap() )</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="kn">from</span> <span class="nn">tempfile</span> <span class="kn">import</span> <span class="n">mkdtemp</span>
+        <span class="kn">from</span><span class="w"> </span><span class="nn">tempfile</span><span class="w"> </span><span class="kn">import</span> <span class="n">mkdtemp</span>
         <span class="n">tempDir</span> <span class="o">=</span> <span class="n">mkdtemp</span><span class="p">()</span>
         <span class="n">perfTabFileName</span> <span class="o">=</span> <span class="s1">&#39;</span><span class="si">%s</span><span class="s1">/votingPerfTab&#39;</span> <span class="o">%</span> <span class="n">tempDir</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">save2PerfTab</span><span class="p">(</span><span class="n">perfTabFileName</span><span class="p">)</span>
@@ -1680,11 +1680,11 @@
 
 <div class="viewcode-block" id="BipolarApprovalVotingProfile.computeNetApprovalScores">
 <a class="viewcode-back" href="../techDoc.html#votingProfiles.BipolarApprovalVotingProfile.computeNetApprovalScores">[docs]</a>
-    <span class="k">def</span> <span class="nf">computeNetApprovalScores</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">Debug</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">computeNetApprovalScores</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">Debug</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Computes the approvals - disapprovals score obtained by each candidate.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="kn">from</span> <span class="nn">operator</span> <span class="kn">import</span> <span class="n">itemgetter</span>
+        <span class="kn">from</span><span class="w"> </span><span class="nn">operator</span><span class="w"> </span><span class="kn">import</span> <span class="n">itemgetter</span>
         <span class="n">candidates</span> <span class="o">=</span> <span class="p">[</span><span class="n">x</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">candidates</span><span class="p">]</span>
         <span class="n">voters</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">voters</span>
         <span class="n">Max</span> <span class="o">=</span> <span class="n">Decimal</span><span class="p">(</span><span class="s1">&#39;1&#39;</span><span class="p">)</span>
@@ -1713,11 +1713,11 @@
 
 <div class="viewcode-block" id="BipolarApprovalVotingProfile.showNetApprovalScores">
 <a class="viewcode-back" href="../techDoc.html#votingProfiles.BipolarApprovalVotingProfile.showNetApprovalScores">[docs]</a>
-    <span class="k">def</span> <span class="nf">showNetApprovalScores</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">showNetApprovalScores</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Prints the  approval - disapproval scores obtained by each candidate.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="kn">from</span> <span class="nn">operator</span> <span class="kn">import</span> <span class="n">itemgetter</span>
+        <span class="kn">from</span><span class="w"> </span><span class="nn">operator</span><span class="w"> </span><span class="kn">import</span> <span class="n">itemgetter</span>
         <span class="n">candidates</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">candidates</span>
         <span class="n">scores</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">netApprovalScores</span>
         <span class="n">results</span> <span class="o">=</span> <span class="p">[]</span>
@@ -1732,7 +1732,7 @@
 
 <div class="viewcode-block" id="BipolarApprovalVotingProfile.computeBallot">
 <a class="viewcode-back" href="../techDoc.html#votingProfiles.BipolarApprovalVotingProfile.computeBallot">[docs]</a>
-    <span class="k">def</span> <span class="nf">computeBallot</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">Debug</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">computeBallot</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">Debug</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Computes a complete ballot from the approval Ballot.</span>
 
@@ -1772,7 +1772,7 @@
 
 <div class="viewcode-block" id="BipolarApprovalVotingProfile.save">
 <a class="viewcode-back" href="../techDoc.html#votingProfiles.BipolarApprovalVotingProfile.save">[docs]</a>
-    <span class="k">def</span> <span class="nf">save</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">fileName</span><span class="o">=</span><span class="s1">&#39;tempAVprofile&#39;</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">save</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">fileName</span><span class="o">=</span><span class="s1">&#39;tempAVprofile&#39;</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Persistant storage of a bipolar approval voting profile.</span>
 
@@ -1836,7 +1836,7 @@
 
 <div class="viewcode-block" id="BipolarApprovalVotingProfile.save2PerfTab">
 <a class="viewcode-back" href="../techDoc.html#votingProfiles.BipolarApprovalVotingProfile.save2PerfTab">[docs]</a>
-    <span class="k">def</span> <span class="nf">save2PerfTab</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">fileName</span><span class="o">=</span><span class="s1">&#39;votingPerfTab&#39;</span><span class="p">,</span><span class="n">valueDigits</span><span class="o">=</span><span class="mi">2</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">save2PerfTab</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">fileName</span><span class="o">=</span><span class="s1">&#39;votingPerfTab&#39;</span><span class="p">,</span><span class="n">valueDigits</span><span class="o">=</span><span class="mi">2</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Persistant storage of an approval voting profile in the format of a standard performance tableau.</span>
 <span class="sd">        For each voter *v*, the performance of candidate *x* corresponds to:</span>
@@ -1845,7 +1845,7 @@
 <span class="sd">              -1, if disapproved;</span>
 <span class="sd">              NA, missing evaluation otherwise,</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="kn">from</span> <span class="nn">copy</span> <span class="kn">import</span> <span class="n">deepcopy</span>
+        <span class="kn">from</span><span class="w"> </span><span class="nn">copy</span><span class="w"> </span><span class="kn">import</span> <span class="n">deepcopy</span>
         <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;*--- Saving as performance tableau in file: &lt;&#39;</span> \
                                       <span class="o">+</span> <span class="nb">str</span><span class="p">(</span><span class="n">fileName</span><span class="p">)</span> <span class="o">+</span> <span class="s1">&#39;.py&gt; ---*&#39;</span><span class="p">)</span>
         <span class="n">objectives</span> <span class="o">=</span> <span class="p">{}</span>
@@ -1908,7 +1908,7 @@
 <span class="c1"># ------------------------</span>
 <div class="viewcode-block" id="RandomBipolarApprovalVotingProfile">
 <a class="viewcode-back" href="../techDoc.html#votingProfiles.RandomBipolarApprovalVotingProfile">[docs]</a>
-<span class="k">class</span> <span class="nc">RandomBipolarApprovalVotingProfile</span><span class="p">(</span><span class="n">BipolarApprovalVotingProfile</span><span class="p">,</span>
+<span class="k">class</span><span class="w"> </span><span class="nc">RandomBipolarApprovalVotingProfile</span><span class="p">(</span><span class="n">BipolarApprovalVotingProfile</span><span class="p">,</span>
                                          <span class="n">RandomLinearVotingProfile</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    A specialized class for generating random approval-disapproval voting profiles</span>
@@ -1918,7 +1918,7 @@
 <span class="sd">    *disapprovalProbability* determines the number of last-ranked candidates disapproved</span>
 
 <span class="sd">    &quot;&quot;&quot;</span>
-    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span>
                  <span class="n">numberOfVoters</span><span class="o">=</span><span class="mi">100</span><span class="p">,</span>
                  <span class="n">votersIdPrefix</span><span class="o">=</span> <span class="s1">&#39;v&#39;</span><span class="p">,</span>
                  <span class="n">IntraGroup</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
@@ -1938,8 +1938,8 @@
 <span class="sd">            | numberOfVoters=9, numberOfCandidates=5,</span>
 <span class="sd">            | minSizeOfBallot=1, maxSizeOfBallot=2.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="kn">from</span> <span class="nn">collections</span> <span class="kn">import</span> <span class="n">OrderedDict</span>
-        <span class="kn">from</span> <span class="nn">votingProfiles</span> <span class="kn">import</span> <span class="n">RandomLinearVotingProfile</span>
+        <span class="kn">from</span><span class="w"> </span><span class="nn">collections</span><span class="w"> </span><span class="kn">import</span> <span class="n">OrderedDict</span>
+        <span class="kn">from</span><span class="w"> </span><span class="nn">votingProfiles</span><span class="w"> </span><span class="kn">import</span> <span class="n">RandomLinearVotingProfile</span>
         <span class="n">rlv</span> <span class="o">=</span> <span class="n">RandomLinearVotingProfile</span><span class="p">(</span>
                  <span class="n">numberOfVoters</span><span class="o">=</span><span class="n">numberOfVoters</span><span class="p">,</span>
                  <span class="n">votersIdPrefix</span><span class="o">=</span><span class="n">votersIdPrefix</span><span class="p">,</span>
@@ -1987,14 +1987,14 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">netApprovalScores</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">computeNetApprovalScores</span><span class="p">()</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">ballot</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">computeBallot</span><span class="p">()</span>
 
-    <span class="k">def</span> <span class="nf">_generateRandomApprovalBallot</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">rlv</span><span class="p">,</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">_generateRandomApprovalBallot</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">rlv</span><span class="p">,</span>
                                       <span class="n">approvalProbability</span><span class="o">=</span><span class="mf">0.25</span><span class="p">,</span>
                                       <span class="n">disapprovalProbability</span><span class="o">=</span><span class="mf">0.35</span><span class="p">,</span>
                                       <span class="n">seed</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span><span class="n">Debug</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Renders a randomly generated approval ballot.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="kn">from</span> <span class="nn">randomNumbers</span> <span class="kn">import</span> <span class="n">BinomialRandomVariable</span>
+        <span class="kn">from</span><span class="w"> </span><span class="nn">randomNumbers</span><span class="w"> </span><span class="kn">import</span> <span class="n">BinomialRandomVariable</span>
         <span class="n">approvalBallot</span> <span class="o">=</span> <span class="p">{}</span>
         <span class="c1">#disapprovalBallot = {}</span>
         <span class="n">voters</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">voters</span>
@@ -2037,7 +2037,7 @@
 <span class="c1">#--------------------------------</span>
 <div class="viewcode-block" id="MajorityMarginsDigraph">
 <a class="viewcode-back" href="../techDoc.html#votingProfiles.MajorityMarginsDigraph">[docs]</a>
-<span class="k">class</span> <span class="nc">MajorityMarginsDigraph</span><span class="p">(</span><span class="n">Digraph</span><span class="p">,</span><span class="n">VotingProfile</span><span class="p">):</span>
+<span class="k">class</span><span class="w"> </span><span class="nc">MajorityMarginsDigraph</span><span class="p">(</span><span class="n">Digraph</span><span class="p">,</span><span class="n">VotingProfile</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Specialization of the general Digraph class for generating</span>
 <span class="sd">    bipolar-valued marginal pairwise majority margins digraphs.</span>
@@ -2085,11 +2085,11 @@
 <span class="sd">    </span>
 <span class="sd">    </span>
 <span class="sd">    &quot;&quot;&quot;</span>
-    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">argVotingProfile</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">argVotingProfile</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
                  <span class="n">coalition</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
                  <span class="n">IntegerValuation</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
                  <span class="n">Debug</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
-        <span class="kn">from</span> <span class="nn">copy</span> <span class="kn">import</span> <span class="n">copy</span>
+        <span class="kn">from</span><span class="w"> </span><span class="nn">copy</span><span class="w"> </span><span class="kn">import</span> <span class="n">copy</span>
         <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">argVotingProfile</span><span class="p">,</span> <span class="p">(</span><span class="n">VotingProfile</span><span class="p">,</span>
                                          <span class="n">LinearVotingProfile</span><span class="p">,</span>
                                          <span class="n">BipolarApprovalVotingProfile</span><span class="p">)):</span>
@@ -2115,7 +2115,7 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">gamma</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">gammaSets</span><span class="p">()</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">notGamma</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">notGammaSets</span><span class="p">()</span>
 
-    <span class="k">def</span> <span class="nf">_constructMajorityMarginsRelation</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">IntegerValuation</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span><span class="n">Debug</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">_constructMajorityMarginsRelation</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">IntegerValuation</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span><span class="n">Debug</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Renders the marginal majority between candidates</span>
 <span class="sd">        on the basis of an approval ballot.</span>
@@ -2164,7 +2164,7 @@
 
 <div class="viewcode-block" id="MajorityMarginsDigraph.showMajorityMargins">
 <a class="viewcode-back" href="../techDoc.html#votingProfiles.MajorityMarginsDigraph.showMajorityMargins">[docs]</a>
-    <span class="k">def</span> <span class="nf">showMajorityMargins</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="o">**</span><span class="n">args</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">showMajorityMargins</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="o">**</span><span class="n">args</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Wrapper for the</span>
 <span class="sd">        Digraph.showRelationTable(Sorted=True, IntegerValues=False,</span>
@@ -2179,7 +2179,7 @@
         
 <div class="viewcode-block" id="CondorcetDigraph">
 <a class="viewcode-back" href="../techDoc.html#votingProfiles.CondorcetDigraph">[docs]</a>
-<span class="k">class</span> <span class="nc">CondorcetDigraph</span><span class="p">(</span><span class="n">MajorityMarginsDigraph</span><span class="p">):</span>
+<span class="k">class</span><span class="w"> </span><span class="nc">CondorcetDigraph</span><span class="p">(</span><span class="n">MajorityMarginsDigraph</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Dummy obsolete class name for MajorityMarginsDigraph class.</span>
 <span class="sd">    &quot;&quot;&quot;</span>        </div>
@@ -2290,7 +2290,7 @@
 
   <div role="contentinfo">
     <p>&#169; Copyright 2012-2025, Raymond Bisdorff.
-      <span class="lastupdated">Last updated on Apr 12, 2025.
+      <span class="lastupdated">Last updated on Apr 16, 2025.
       </span></p>
   </div>
 

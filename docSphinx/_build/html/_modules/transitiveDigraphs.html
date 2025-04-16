@@ -5,8 +5,8 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>transitiveDigraphs &mdash; Digraph3 3.13.2 documentation</title>
-      <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=fa44fd50" />
+  <title>transitiveDigraphs &mdash; Digraph3 3.13.3 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=03e43079" />
       <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=e59714d7" />
       <link rel="stylesheet" type="text/css" href="../_static/graphviz.css?v=4ae1632d" />
       <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
@@ -23,7 +23,7 @@
   
       <script src="../_static/jquery.js?v=5d32c60e"></script>
       <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-      <script src="../_static/documentation_options.js?v=f92f4e34"></script>
+      <script src="../_static/documentation_options.js?v=5d57ca2d"></script>
       <script src="../_static/doctools.js?v=9bcbadda"></script>
       <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
       <script src="../_static/clipboard.min.js?v=a7894cd8"></script>
@@ -106,12 +106,12 @@
 
 <span class="n">__version__</span> <span class="o">=</span> <span class="s2">&quot;$Revision: Python 3.13.2&quot;</span>
 
-<span class="kn">from</span> <span class="nn">digraphsTools</span> <span class="kn">import</span> <span class="o">*</span>
-<span class="kn">from</span> <span class="nn">digraphs</span> <span class="kn">import</span> <span class="o">*</span>
-<span class="kn">from</span> <span class="nn">outrankingDigraphs</span> <span class="kn">import</span> <span class="o">*</span>
-<span class="kn">from</span> <span class="nn">transitiveDigraphs</span> <span class="kn">import</span> <span class="o">*</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">digraphsTools</span><span class="w"> </span><span class="kn">import</span> <span class="o">*</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">digraphs</span><span class="w"> </span><span class="kn">import</span> <span class="o">*</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">outrankingDigraphs</span><span class="w"> </span><span class="kn">import</span> <span class="o">*</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">transitiveDigraphs</span><span class="w"> </span><span class="kn">import</span> <span class="o">*</span>
 <span class="c1">#from multiprocessing import Process, active_children, cpu_count</span>
-<span class="kn">import</span> <span class="nn">multiprocessing</span> <span class="k">as</span> <span class="nn">mp</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">multiprocessing</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">mp</span>
 <span class="n">mpctx</span> <span class="o">=</span> <span class="n">mp</span><span class="o">.</span><span class="n">get_context</span><span class="p">(</span><span class="s1">&#39;spawn&#39;</span><span class="p">)</span>
 <span class="n">Process</span> <span class="o">=</span> <span class="n">mpctx</span><span class="o">.</span><span class="n">Process</span>
 <span class="n">active_children</span> <span class="o">=</span> <span class="n">mpctx</span><span class="o">.</span><span class="n">active_children</span>
@@ -120,11 +120,11 @@
 
 <div class="viewcode-block" id="TransitiveDigraph">
 <a class="viewcode-back" href="../techDoc.html#transitiveDigraphs.TransitiveDigraph">[docs]</a>
-<span class="k">class</span> <span class="nc">TransitiveDigraph</span><span class="p">(</span><span class="n">Digraph</span><span class="p">):</span>
+<span class="k">class</span><span class="w"> </span><span class="nc">TransitiveDigraph</span><span class="p">(</span><span class="n">Digraph</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Abstract class for specialized methods addressing transitive digraphs.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
-    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;abstract root class&#39;</span><span class="p">)</span>
 
    
@@ -146,7 +146,7 @@
 
 <div class="viewcode-block" id="TransitiveDigraph.computeBoostedOrdering">
 <a class="viewcode-back" href="../techDoc.html#transitiveDigraphs.TransitiveDigraph.computeBoostedOrdering">[docs]</a>
-    <span class="k">def</span> <span class="nf">computeBoostedOrdering</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">orderingRule</span><span class="o">=</span><span class="s1">&#39;Copeland&#39;</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">computeBoostedOrdering</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">orderingRule</span><span class="o">=</span><span class="s1">&#39;Copeland&#39;</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Renders an ordred list of decision actions ranked in</span>
 <span class="sd">        increasing preference direction following the orderingRule</span>
@@ -160,7 +160,7 @@
         
 <div class="viewcode-block" id="TransitiveDigraph.showWeakOrder">
 <a class="viewcode-back" href="../techDoc.html#transitiveDigraphs.TransitiveDigraph.showWeakOrder">[docs]</a>
-    <span class="k">def</span> <span class="nf">showWeakOrder</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">rankingByChoosing</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span><span class="n">WithCoverCredibility</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">showWeakOrder</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">rankingByChoosing</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span><span class="n">WithCoverCredibility</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        A dummy for the showTransitiveDigraph() method.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
@@ -169,7 +169,7 @@
 
 <div class="viewcode-block" id="TransitiveDigraph.showWeakRanking">
 <a class="viewcode-back" href="../techDoc.html#transitiveDigraphs.TransitiveDigraph.showWeakRanking">[docs]</a>
-    <span class="k">def</span> <span class="nf">showWeakRanking</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">rankingByChoosing</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span><span class="n">WithCoverCredibility</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">showWeakRanking</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">rankingByChoosing</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span><span class="n">WithCoverCredibility</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        A dummy for the showTransitiveDigraph() method.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
@@ -178,7 +178,7 @@
         
 <div class="viewcode-block" id="TransitiveDigraph.showTransitiveDigraph">
 <a class="viewcode-back" href="../techDoc.html#transitiveDigraphs.TransitiveDigraph.showTransitiveDigraph">[docs]</a>
-    <span class="k">def</span> <span class="nf">showTransitiveDigraph</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">rankingByChoosing</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span><span class="n">WithCoverCredibility</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">showTransitiveDigraph</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">rankingByChoosing</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span><span class="n">WithCoverCredibility</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        A show method for self.rankinByChoosing result.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
@@ -253,7 +253,7 @@
 
 <div class="viewcode-block" id="TransitiveDigraph.showRankingByChoosing">
 <a class="viewcode-back" href="../techDoc.html#transitiveDigraphs.TransitiveDigraph.showRankingByChoosing">[docs]</a>
-    <span class="k">def</span> <span class="nf">showRankingByChoosing</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">actionsList</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span><span class="n">rankingByChoosing</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span><span class="n">WithCoverCredibility</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">showRankingByChoosing</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">actionsList</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span><span class="n">rankingByChoosing</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span><span class="n">WithCoverCredibility</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Dummy name for showTransitiveDigraph() method</span>
 <span class="sd">        &quot;&quot;&quot;</span>
@@ -263,7 +263,7 @@
     
 <div class="viewcode-block" id="TransitiveDigraph.showOrderedRelationTable">
 <a class="viewcode-back" href="../techDoc.html#transitiveDigraphs.TransitiveDigraph.showOrderedRelationTable">[docs]</a>
-    <span class="k">def</span> <span class="nf">showOrderedRelationTable</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">direction</span><span class="o">=</span><span class="s2">&quot;decreasing&quot;</span><span class="p">,</span><span class="n">originalRelation</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">showOrderedRelationTable</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">direction</span><span class="o">=</span><span class="s2">&quot;decreasing&quot;</span><span class="p">,</span><span class="n">originalRelation</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Showing the relation table in decreasing (default) or increasing order.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
@@ -308,7 +308,7 @@
 
 <div class="viewcode-block" id="TransitiveDigraph.exportDigraphGraphViz">
 <a class="viewcode-back" href="../techDoc.html#transitiveDigraphs.TransitiveDigraph.exportDigraphGraphViz">[docs]</a>
-    <span class="k">def</span> <span class="nf">exportDigraphGraphViz</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">fileName</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">bestChoice</span><span class="o">=</span><span class="nb">set</span><span class="p">(),</span><span class="n">worstChoice</span><span class="o">=</span><span class="nb">set</span><span class="p">(),</span><span class="n">Comments</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span><span class="n">graphType</span><span class="o">=</span><span class="s1">&#39;png&#39;</span><span class="p">,</span><span class="n">graphSize</span><span class="o">=</span><span class="s1">&#39;7,7&#39;</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">exportDigraphGraphViz</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">fileName</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">bestChoice</span><span class="o">=</span><span class="nb">set</span><span class="p">(),</span><span class="n">worstChoice</span><span class="o">=</span><span class="nb">set</span><span class="p">(),</span><span class="n">Comments</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span><span class="n">graphType</span><span class="o">=</span><span class="s1">&#39;png&#39;</span><span class="p">,</span><span class="n">graphSize</span><span class="o">=</span><span class="s1">&#39;7,7&#39;</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        export GraphViz dot file for digraph drawing filtering.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
@@ -449,7 +449,7 @@
 
 <div class="viewcode-block" id="TransitiveDigraph.exportGraphViz">
 <a class="viewcode-back" href="../techDoc.html#transitiveDigraphs.TransitiveDigraph.exportGraphViz">[docs]</a>
-    <span class="k">def</span> <span class="nf">exportGraphViz</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">fileName</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span><span class="n">direction</span><span class="o">=</span><span class="s1">&#39;best&#39;</span><span class="p">,</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">exportGraphViz</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">fileName</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span><span class="n">direction</span><span class="o">=</span><span class="s1">&#39;best&#39;</span><span class="p">,</span>
                        <span class="n">WithBestPathDecoration</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
                        <span class="n">WithRatingDecoration</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
                        <span class="n">ArrowHeads</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
@@ -459,10 +459,10 @@
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        export GraphViz dot file for Hasse diagram drawing filtering.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="kn">import</span> <span class="nn">os</span>
-        <span class="kn">from</span> <span class="nn">copy</span> <span class="kn">import</span> <span class="n">copy</span> <span class="k">as</span> <span class="n">deepcopy</span>
+        <span class="kn">import</span><span class="w"> </span><span class="nn">os</span>
+        <span class="kn">from</span><span class="w"> </span><span class="nn">copy</span><span class="w"> </span><span class="kn">import</span> <span class="n">copy</span> <span class="k">as</span> <span class="n">deepcopy</span>
             
-        <span class="k">def</span> <span class="nf">_safeName</span><span class="p">(</span><span class="n">t0</span><span class="p">):</span>
+        <span class="k">def</span><span class="w"> </span><span class="nf">_safeName</span><span class="p">(</span><span class="n">t0</span><span class="p">):</span>
             <span class="n">t</span> <span class="o">=</span> <span class="n">t0</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="n">sep</span><span class="o">=</span><span class="s2">&quot;-&quot;</span><span class="p">)</span>
             <span class="n">t1</span> <span class="o">=</span> <span class="n">t</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
             <span class="n">n</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">t</span><span class="p">)</span>
@@ -642,7 +642,7 @@
 
 <div class="viewcode-block" id="RankingsFusionDigraph">
 <a class="viewcode-back" href="../techDoc.html#transitiveDigraphs.RankingsFusionDigraph">[docs]</a>
-<span class="k">class</span> <span class="nc">RankingsFusionDigraph</span><span class="p">(</span><span class="n">TransitiveDigraph</span><span class="p">):</span>
+<span class="k">class</span><span class="w"> </span><span class="nc">RankingsFusionDigraph</span><span class="p">(</span><span class="n">TransitiveDigraph</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Specialization of the abstract TransitiveDigraph class for </span>
 <span class="sd">    digraphs resulting from the epistemic</span>
@@ -669,11 +669,11 @@
 <span class="sd">    [&#39;a07&#39;, &#39;a10&#39;, &#39;a06&#39;, &#39;a11&#39;, &#39;a02&#39;, &#39;a08&#39;, &#39;a04&#39;, &#39;a03&#39;, &#39;a01&#39;, &#39;a09&#39;, &#39;a12&#39;, &#39;a13&#39;, &#39;a05&#39;]</span>
 
 <span class="sd">    &quot;&quot;&quot;</span>
-    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">other</span><span class="p">,</span><span class="n">rankings</span><span class="p">,</span><span class="n">fusionOperator</span><span class="o">=</span><span class="s1">&#39;o-max&#39;</span><span class="p">,</span><span class="n">Debug</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">other</span><span class="p">,</span><span class="n">rankings</span><span class="p">,</span><span class="n">fusionOperator</span><span class="o">=</span><span class="s1">&#39;o-max&#39;</span><span class="p">,</span><span class="n">Debug</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
         
-        <span class="kn">from</span> <span class="nn">digraphsTools</span> <span class="kn">import</span> <span class="n">ranking2preorder</span><span class="p">,</span> <span class="n">omax</span><span class="p">,</span> <span class="n">omin</span>
-        <span class="kn">from</span> <span class="nn">copy</span> <span class="kn">import</span> <span class="n">deepcopy</span>
-        <span class="kn">from</span> <span class="nn">decimal</span> <span class="kn">import</span> <span class="n">Decimal</span>
+        <span class="kn">from</span><span class="w"> </span><span class="nn">digraphsTools</span><span class="w"> </span><span class="kn">import</span> <span class="n">ranking2preorder</span><span class="p">,</span> <span class="n">omax</span><span class="p">,</span> <span class="n">omin</span>
+        <span class="kn">from</span><span class="w"> </span><span class="nn">copy</span><span class="w"> </span><span class="kn">import</span> <span class="n">deepcopy</span>
+        <span class="kn">from</span><span class="w"> </span><span class="nn">decimal</span><span class="w"> </span><span class="kn">import</span> <span class="n">Decimal</span>
         <span class="k">if</span> <span class="n">Debug</span><span class="p">:</span>
             <span class="nb">print</span><span class="p">(</span><span class="n">rankings</span><span class="p">)</span>
         <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">rankings</span><span class="p">)</span> <span class="o">&lt;</span> <span class="mi">1</span><span class="p">:</span>
@@ -719,7 +719,7 @@
 
 <div class="viewcode-block" id="RankingsFusion">
 <a class="viewcode-back" href="../techDoc.html#transitiveDigraphs.RankingsFusion">[docs]</a>
-<span class="k">class</span> <span class="nc">RankingsFusion</span><span class="p">(</span><span class="n">RankingsFusionDigraph</span><span class="p">):</span>
+<span class="k">class</span><span class="w"> </span><span class="nc">RankingsFusion</span><span class="p">(</span><span class="n">RankingsFusionDigraph</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Obsolete dummy for the RankingsFusionDigraph class</span>
 <span class="sd">    &quot;&quot;&quot;</span></div>
@@ -727,7 +727,7 @@
 
 <div class="viewcode-block" id="KemenyOrdersFusion">
 <a class="viewcode-back" href="../techDoc.html#transitiveDigraphs.KemenyOrdersFusion">[docs]</a>
-<span class="k">class</span> <span class="nc">KemenyOrdersFusion</span><span class="p">(</span><span class="n">TransitiveDigraph</span><span class="p">):</span>
+<span class="k">class</span><span class="w"> </span><span class="nc">KemenyOrdersFusion</span><span class="p">(</span><span class="n">TransitiveDigraph</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Specialization of the abstract TransitiveDigraph class for </span>
 <span class="sd">    transitive digraphs resulting from the epistemic</span>
@@ -739,16 +739,16 @@
 <span class="sd">         * fusionOperator = &#39;o-max&#39; (default) | &#39;o-min&#39; : Disjunctive, resp. conjuntive epistemic fusion.</span>
 <span class="sd">    </span>
 <span class="sd">    &quot;&quot;&quot;</span>
-    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">other</span><span class="p">,</span><span class="n">orderLimit</span><span class="o">=</span><span class="mi">7</span><span class="p">,</span><span class="n">fusionOperator</span><span class="o">=</span><span class="s1">&#39;o-max&#39;</span><span class="p">,</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">other</span><span class="p">,</span><span class="n">orderLimit</span><span class="o">=</span><span class="mi">7</span><span class="p">,</span><span class="n">fusionOperator</span><span class="o">=</span><span class="s1">&#39;o-max&#39;</span><span class="p">,</span>
                  <span class="n">Debug</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
         
         <span class="k">if</span> <span class="n">other</span><span class="o">.</span><span class="n">order</span> <span class="o">&gt;</span> <span class="n">orderLimit</span><span class="p">:</span>
             <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Digraph order </span><span class="si">%d</span><span class="s1"> to high. The default limit (7) may be changed with the oderLimit argument.&#39;</span><span class="p">)</span>
             <span class="k">return</span>
                   
-        <span class="kn">from</span> <span class="nn">digraphsTools</span> <span class="kn">import</span> <span class="n">ranking2preorder</span><span class="p">,</span> <span class="n">omax</span><span class="p">,</span> <span class="n">omin</span>
-        <span class="kn">from</span> <span class="nn">copy</span> <span class="kn">import</span> <span class="n">deepcopy</span>
-        <span class="kn">from</span> <span class="nn">decimal</span> <span class="kn">import</span> <span class="n">Decimal</span>
+        <span class="kn">from</span><span class="w"> </span><span class="nn">digraphsTools</span><span class="w"> </span><span class="kn">import</span> <span class="n">ranking2preorder</span><span class="p">,</span> <span class="n">omax</span><span class="p">,</span> <span class="n">omin</span>
+        <span class="kn">from</span><span class="w"> </span><span class="nn">copy</span><span class="w"> </span><span class="kn">import</span> <span class="n">deepcopy</span>
+        <span class="kn">from</span><span class="w"> </span><span class="nn">decimal</span><span class="w"> </span><span class="kn">import</span> <span class="n">Decimal</span>
 
         <span class="bp">self</span><span class="o">.</span><span class="vm">__dict__</span> <span class="o">=</span> <span class="n">deepcopy</span><span class="p">(</span><span class="n">other</span><span class="o">.</span><span class="vm">__dict__</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="n">other</span><span class="o">.</span><span class="n">name</span> <span class="o">+</span> <span class="s1">&#39;_wk&#39;</span>
@@ -797,20 +797,20 @@
 <span class="c1"># myThread for KohlerArrawRaynaudFusion</span>
 <span class="c1">##        if Threading:</span>
 <span class="c1">##            from multiprocessing import Process, Lock, active_children, cpu_count</span>
-<span class="k">class</span> <span class="nc">_myKARThread</span><span class="p">(</span><span class="n">Process</span><span class="p">):</span>
-    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">threadID</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="n">direction</span><span class="p">,</span> <span class="n">tempDirName</span><span class="p">,</span> <span class="n">Debug</span><span class="p">):</span>
+<span class="k">class</span><span class="w"> </span><span class="nc">_myKARThread</span><span class="p">(</span><span class="n">Process</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">threadID</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="n">direction</span><span class="p">,</span> <span class="n">tempDirName</span><span class="p">,</span> <span class="n">Debug</span><span class="p">):</span>
         <span class="n">Process</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">threadID</span> <span class="o">=</span> <span class="n">threadID</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="n">name</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">direction</span> <span class="o">=</span> <span class="n">direction</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">workingDirectory</span> <span class="o">=</span> <span class="n">tempDirName</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">Debug</span> <span class="o">=</span> <span class="n">Debug</span>
-    <span class="k">def</span> <span class="nf">run</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="kn">from</span> <span class="nn">linearOrders</span> <span class="kn">import</span> <span class="n">KohlerOrder</span>
-        <span class="kn">from</span> <span class="nn">pickle</span> <span class="kn">import</span> <span class="n">dumps</span><span class="p">,</span> <span class="n">loads</span>
-        <span class="kn">from</span> <span class="nn">os</span> <span class="kn">import</span> <span class="n">chdir</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">run</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="kn">from</span><span class="w"> </span><span class="nn">linearOrders</span><span class="w"> </span><span class="kn">import</span> <span class="n">KohlerOrder</span>
+        <span class="kn">from</span><span class="w"> </span><span class="nn">pickle</span><span class="w"> </span><span class="kn">import</span> <span class="n">dumps</span><span class="p">,</span> <span class="n">loads</span>
+        <span class="kn">from</span><span class="w"> </span><span class="nn">os</span><span class="w"> </span><span class="kn">import</span> <span class="n">chdir</span>
         <span class="n">chdir</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">workingDirectory</span><span class="p">)</span>
-        <span class="kn">from</span> <span class="nn">sys</span> <span class="kn">import</span> <span class="n">setrecursionlimit</span>
+        <span class="kn">from</span><span class="w"> </span><span class="nn">sys</span><span class="w"> </span><span class="kn">import</span> <span class="n">setrecursionlimit</span>
         <span class="n">setrecursionlimit</span><span class="p">(</span><span class="mi">2</span><span class="o">**</span><span class="mi">20</span><span class="p">)</span>
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">Debug</span><span class="p">:</span>
             <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Starting working in </span><span class="si">%s</span><span class="s2"> on </span><span class="si">%s</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">workingDirectory</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">name</span><span class="p">))</span>
@@ -833,22 +833,22 @@
 
 <div class="viewcode-block" id="KohlerArrowRaynaudFusion">
 <a class="viewcode-back" href="../techDoc.html#transitiveDigraphs.KohlerArrowRaynaudFusion">[docs]</a>
-<span class="k">class</span> <span class="nc">KohlerArrowRaynaudFusion</span><span class="p">(</span><span class="n">TransitiveDigraph</span><span class="p">):</span>
+<span class="k">class</span><span class="w"> </span><span class="nc">KohlerArrowRaynaudFusion</span><span class="p">(</span><span class="n">TransitiveDigraph</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Specialization of the abstract TransitiveDigraph class for </span>
 <span class="sd">    ranking-by-choosing orderings resulting from the epistemic</span>
 <span class="sd">    disjunctive (o-max) or conjunctive (o-min) fusion of a</span>
 <span class="sd">    Kohler linear best ordering and an Arrow-Raynaud linear worst ordering. </span>
 <span class="sd">    &quot;&quot;&quot;</span>
-    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">outrankingDigraph</span><span class="p">,</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">outrankingDigraph</span><span class="p">,</span>
                  <span class="n">fusionOperator</span><span class="o">=</span><span class="s1">&#39;o-max&#39;</span><span class="p">,</span>
                  <span class="n">Threading</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
                  <span class="n">Debug</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
         
-        <span class="kn">from</span> <span class="nn">digraphsTools</span> <span class="kn">import</span> <span class="n">ranking2preorder</span><span class="p">,</span> <span class="n">omax</span><span class="p">,</span> <span class="n">omin</span>
-        <span class="kn">from</span> <span class="nn">copy</span> <span class="kn">import</span> <span class="n">copy</span> <span class="k">as</span> <span class="n">deepcopy</span>
-        <span class="kn">from</span> <span class="nn">pickle</span> <span class="kn">import</span> <span class="n">dumps</span><span class="p">,</span> <span class="n">loads</span><span class="p">,</span> <span class="n">load</span>
-        <span class="kn">from</span> <span class="nn">linearOrders</span> <span class="kn">import</span> <span class="n">KohlerOrder</span>
+        <span class="kn">from</span><span class="w"> </span><span class="nn">digraphsTools</span><span class="w"> </span><span class="kn">import</span> <span class="n">ranking2preorder</span><span class="p">,</span> <span class="n">omax</span><span class="p">,</span> <span class="n">omin</span>
+        <span class="kn">from</span><span class="w"> </span><span class="nn">copy</span><span class="w"> </span><span class="kn">import</span> <span class="n">copy</span> <span class="k">as</span> <span class="n">deepcopy</span>
+        <span class="kn">from</span><span class="w"> </span><span class="nn">pickle</span><span class="w"> </span><span class="kn">import</span> <span class="n">dumps</span><span class="p">,</span> <span class="n">loads</span><span class="p">,</span> <span class="n">load</span>
+        <span class="kn">from</span><span class="w"> </span><span class="nn">linearOrders</span><span class="w"> </span><span class="kn">import</span> <span class="n">KohlerOrder</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">Debug</span><span class="o">=</span><span class="n">Debug</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">Threading</span> <span class="o">=</span> <span class="n">Threading</span>
         
@@ -864,7 +864,7 @@
 
         <span class="k">if</span> <span class="n">Threading</span> <span class="ow">and</span> <span class="n">cpu_count</span><span class="p">()</span><span class="o">&gt;</span><span class="mi">2</span><span class="p">:</span>
             <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Threading ...&#39;</span><span class="p">)</span>
-            <span class="kn">from</span> <span class="nn">tempfile</span> <span class="kn">import</span> <span class="n">TemporaryDirectory</span>
+            <span class="kn">from</span><span class="w"> </span><span class="nn">tempfile</span><span class="w"> </span><span class="kn">import</span> <span class="n">TemporaryDirectory</span>
             <span class="k">with</span> <span class="n">TemporaryDirectory</span><span class="p">()</span> <span class="k">as</span> <span class="n">tempDirName</span><span class="p">:</span>
                 <span class="n">digraphFileName</span> <span class="o">=</span> <span class="n">tempDirName</span> <span class="o">+</span><span class="s1">&#39;/dumpDigraph.py&#39;</span>
                 <span class="k">if</span> <span class="n">Debug</span><span class="p">:</span>
@@ -922,8 +922,8 @@
 
 <span class="c1">#---------------------</span>
 <span class="c1"># my Thread for the RankingByChoosing class</span>
-<span class="k">class</span> <span class="nc">_myRBCThread</span><span class="p">(</span><span class="n">Process</span><span class="p">):</span>
-    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">threadID</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="n">direction</span><span class="p">,</span> <span class="n">tempDirName</span><span class="p">,</span> <span class="n">CoDual</span><span class="p">,</span> <span class="n">Debug</span><span class="p">):</span>
+<span class="k">class</span><span class="w"> </span><span class="nc">_myRBCThread</span><span class="p">(</span><span class="n">Process</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">threadID</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="n">direction</span><span class="p">,</span> <span class="n">tempDirName</span><span class="p">,</span> <span class="n">CoDual</span><span class="p">,</span> <span class="n">Debug</span><span class="p">):</span>
         <span class="n">Process</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">threadID</span> <span class="o">=</span> <span class="n">threadID</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="n">name</span>
@@ -931,11 +931,11 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">workingDirectory</span> <span class="o">=</span> <span class="n">tempDirName</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">CoDual</span> <span class="o">=</span> <span class="n">CoDual</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">Debug</span> <span class="o">=</span> <span class="n">Debug</span>
-    <span class="k">def</span> <span class="nf">run</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="kn">from</span> <span class="nn">pickle</span> <span class="kn">import</span> <span class="n">dumps</span><span class="p">,</span> <span class="n">loads</span>
-        <span class="kn">from</span> <span class="nn">os</span> <span class="kn">import</span> <span class="n">chdir</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">run</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="kn">from</span><span class="w"> </span><span class="nn">pickle</span><span class="w"> </span><span class="kn">import</span> <span class="n">dumps</span><span class="p">,</span> <span class="n">loads</span>
+        <span class="kn">from</span><span class="w"> </span><span class="nn">os</span><span class="w"> </span><span class="kn">import</span> <span class="n">chdir</span>
         <span class="n">chdir</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">workingDirectory</span><span class="p">)</span>
-        <span class="kn">from</span> <span class="nn">sys</span> <span class="kn">import</span> <span class="n">setrecursionlimit</span>
+        <span class="kn">from</span><span class="w"> </span><span class="nn">sys</span><span class="w"> </span><span class="kn">import</span> <span class="n">setrecursionlimit</span>
         <span class="n">setrecursionlimit</span><span class="p">(</span><span class="mi">2</span><span class="o">**</span><span class="mi">20</span><span class="p">)</span>
         <span class="n">Debug</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">Debug</span>
         <span class="n">CoDual</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">CoDual</span>
@@ -957,7 +957,7 @@
 
 <div class="viewcode-block" id="RankingByChoosingDigraph">
 <a class="viewcode-back" href="../techDoc.html#transitiveDigraphs.RankingByChoosingDigraph">[docs]</a>
-<span class="k">class</span> <span class="nc">RankingByChoosingDigraph</span><span class="p">(</span><span class="n">TransitiveDigraph</span><span class="p">):</span>
+<span class="k">class</span><span class="w"> </span><span class="nc">RankingByChoosingDigraph</span><span class="p">(</span><span class="n">TransitiveDigraph</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Specialization of the abstract TransitiveDigraph class for </span>
 <span class="sd">    ranking-by-Rubis-choosing orderings.</span>
@@ -1013,7 +1013,7 @@
 
 <span class="sd">    &quot;&quot;&quot;</span>
 
-    <span class="k">def</span> <span class="fm">__repr__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__repr__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Presentation method for RankingByChoosing Digraph instance.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
@@ -1041,17 +1041,17 @@
 
                     
     
-    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">other</span><span class="p">,</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">other</span><span class="p">,</span>
                  <span class="n">fusionOperator</span> <span class="o">=</span> <span class="s2">&quot;o-max&quot;</span><span class="p">,</span>
                  <span class="n">CoDual</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
                  <span class="n">Debug</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
                  <span class="c1">#CppAgrum=False,</span>
                  <span class="n">Threading</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
 
-        <span class="kn">from</span> <span class="nn">digraphsTools</span> <span class="kn">import</span> <span class="n">ranking2preorder</span><span class="p">,</span> <span class="n">omax</span><span class="p">,</span> <span class="n">omin</span>        
-        <span class="kn">from</span> <span class="nn">copy</span> <span class="kn">import</span> <span class="n">copy</span><span class="p">,</span> <span class="n">deepcopy</span>
-        <span class="kn">from</span> <span class="nn">pickle</span> <span class="kn">import</span> <span class="n">dumps</span><span class="p">,</span> <span class="n">loads</span><span class="p">,</span> <span class="n">load</span>
-        <span class="kn">from</span> <span class="nn">time</span> <span class="kn">import</span> <span class="n">time</span>
+        <span class="kn">from</span><span class="w"> </span><span class="nn">digraphsTools</span><span class="w"> </span><span class="kn">import</span> <span class="n">ranking2preorder</span><span class="p">,</span> <span class="n">omax</span><span class="p">,</span> <span class="n">omin</span>        
+        <span class="kn">from</span><span class="w"> </span><span class="nn">copy</span><span class="w"> </span><span class="kn">import</span> <span class="n">copy</span><span class="p">,</span> <span class="n">deepcopy</span>
+        <span class="kn">from</span><span class="w"> </span><span class="nn">pickle</span><span class="w"> </span><span class="kn">import</span> <span class="n">dumps</span><span class="p">,</span> <span class="n">loads</span><span class="p">,</span> <span class="n">load</span>
+        <span class="kn">from</span><span class="w"> </span><span class="nn">time</span><span class="w"> </span><span class="kn">import</span> <span class="n">time</span>
 
         <span class="bp">self</span><span class="o">.</span><span class="n">CoDual</span><span class="o">=</span><span class="n">CoDual</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">Debug</span><span class="o">=</span><span class="n">Debug</span>
@@ -1076,7 +1076,7 @@
         <span class="k">if</span> <span class="n">Threading</span> <span class="ow">and</span> <span class="n">cpu_count</span><span class="p">()</span><span class="o">&gt;</span><span class="mi">2</span><span class="p">:</span>
             <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Threading ...&#39;</span><span class="p">)</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">nbrThreads</span> <span class="o">=</span> <span class="mi">2</span>
-            <span class="kn">from</span> <span class="nn">tempfile</span> <span class="kn">import</span> <span class="n">TemporaryDirectory</span>
+            <span class="kn">from</span><span class="w"> </span><span class="nn">tempfile</span><span class="w"> </span><span class="kn">import</span> <span class="n">TemporaryDirectory</span>
             <span class="k">with</span> <span class="n">TemporaryDirectory</span><span class="p">()</span> <span class="k">as</span> <span class="n">tempDirName</span><span class="p">:</span>
                 <span class="n">digraphFileName</span> <span class="o">=</span> <span class="n">tempDirName</span> <span class="o">+</span><span class="s1">&#39;/dumpDigraph.py&#39;</span>
                 <span class="k">if</span> <span class="n">Debug</span><span class="p">:</span>
@@ -1103,7 +1103,7 @@
             
         <span class="k">else</span><span class="p">:</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">nbrThreads</span> <span class="o">=</span> <span class="mi">1</span>
-            <span class="kn">from</span> <span class="nn">sys</span> <span class="kn">import</span> <span class="n">setrecursionlimit</span>
+            <span class="kn">from</span><span class="w"> </span><span class="nn">sys</span><span class="w"> </span><span class="kn">import</span> <span class="n">setrecursionlimit</span>
             <span class="n">setrecursionlimit</span><span class="p">(</span><span class="mi">2</span><span class="o">**</span><span class="mi">20</span><span class="p">)</span>
             <span class="n">digraph</span><span class="o">.</span><span class="n">computeRankingByBestChoosing</span><span class="p">(</span><span class="n">CoDual</span><span class="o">=</span><span class="n">CoDual</span><span class="p">,</span><span class="n">Debug</span><span class="o">=</span><span class="n">Debug</span><span class="p">)</span>
             <span class="n">digraph</span><span class="o">.</span><span class="n">computeRankingByLastChoosing</span><span class="p">(</span><span class="n">CoDual</span><span class="o">=</span><span class="n">CoDual</span><span class="p">,</span><span class="n">Debug</span><span class="o">=</span><span class="n">Debug</span><span class="p">)</span>
@@ -1151,7 +1151,7 @@
 
 <div class="viewcode-block" id="RankingByChoosingDigraph.showTransitiveDigraph">
 <a class="viewcode-back" href="../techDoc.html#transitiveDigraphs.RankingByChoosingDigraph.showTransitiveDigraph">[docs]</a>
-    <span class="k">def</span> <span class="nf">showTransitiveDigraph</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">rankingByChoosing</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span><span class="n">rankingStrategy</span><span class="o">=</span><span class="s1">&#39;optimistic&#39;</span><span class="p">,</span><span class="n">WithCoverCredibility</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">showTransitiveDigraph</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">rankingByChoosing</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span><span class="n">rankingStrategy</span><span class="o">=</span><span class="s1">&#39;optimistic&#39;</span><span class="p">,</span><span class="n">WithCoverCredibility</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Specialization of generic method.</span>
 <span class="sd">        Without argument, a weak ordering is recomputed from the</span>
@@ -1172,7 +1172,7 @@
 
 <div class="viewcode-block" id="RankingByChoosingDigraph.showRankingByChoosing">
 <a class="viewcode-back" href="../techDoc.html#transitiveDigraphs.RankingByChoosingDigraph.showRankingByChoosing">[docs]</a>
-    <span class="k">def</span> <span class="nf">showRankingByChoosing</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">rankingByChoosing</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span><span class="n">rankingStrategy</span><span class="o">=</span><span class="s1">&#39;optimistic&#39;</span><span class="p">,</span><span class="n">WithCoverCredibility</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">showRankingByChoosing</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">rankingByChoosing</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span><span class="n">rankingStrategy</span><span class="o">=</span><span class="s1">&#39;optimistic&#39;</span><span class="p">,</span><span class="n">WithCoverCredibility</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Dummy for showTransitiveDigraph method</span>
 <span class="sd">        &quot;&quot;&quot;</span>
@@ -1183,7 +1183,7 @@
 
 <div class="viewcode-block" id="RankingByChoosingDigraph.computeRankingByBestChoosing">
 <a class="viewcode-back" href="../techDoc.html#transitiveDigraphs.RankingByChoosingDigraph.computeRankingByBestChoosing">[docs]</a>
-    <span class="k">def</span> <span class="nf">computeRankingByBestChoosing</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">Forced</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">computeRankingByBestChoosing</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">Forced</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Dummy for blocking recomputing without forcing. </span>
 <span class="sd">        &quot;&quot;&quot;</span>
@@ -1193,7 +1193,7 @@
 
 <div class="viewcode-block" id="RankingByChoosingDigraph.computeRankingByLastChoosing">
 <a class="viewcode-back" href="../techDoc.html#transitiveDigraphs.RankingByChoosingDigraph.computeRankingByLastChoosing">[docs]</a>
-    <span class="k">def</span> <span class="nf">computeRankingByLastChoosing</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">Forced</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">computeRankingByLastChoosing</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">Forced</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Dummy for blocking recomputing without forcing. </span>
 <span class="sd">        &quot;&quot;&quot;</span>
@@ -1205,12 +1205,12 @@
 <span class="c1">#--------------------</span>
 <div class="viewcode-block" id="RankingByBestChoosingDigraph">
 <a class="viewcode-back" href="../techDoc.html#transitiveDigraphs.RankingByBestChoosingDigraph">[docs]</a>
-<span class="k">class</span> <span class="nc">RankingByBestChoosingDigraph</span><span class="p">(</span><span class="n">RankingByChoosingDigraph</span><span class="p">):</span>
+<span class="k">class</span><span class="w"> </span><span class="nc">RankingByBestChoosingDigraph</span><span class="p">(</span><span class="n">RankingByChoosingDigraph</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Specialization of abstract TransitiveDigraph class for computing a ranking by best-choosing.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
-    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">digraph</span><span class="p">,</span><span class="n">Normalized</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span><span class="n">CoDual</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span><span class="n">Debug</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
-        <span class="kn">from</span> <span class="nn">copy</span> <span class="kn">import</span> <span class="n">copy</span> <span class="k">as</span> <span class="n">deepcopy</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">digraph</span><span class="p">,</span><span class="n">Normalized</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span><span class="n">CoDual</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span><span class="n">Debug</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+        <span class="kn">from</span><span class="w"> </span><span class="nn">copy</span><span class="w"> </span><span class="kn">import</span> <span class="n">copy</span> <span class="k">as</span> <span class="n">deepcopy</span>
         <span class="n">digraphName</span> <span class="o">=</span> <span class="s1">&#39;ranking-by-best&#39;</span><span class="o">+</span><span class="n">digraph</span><span class="o">.</span><span class="n">name</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="n">deepcopy</span><span class="p">(</span><span class="n">digraphName</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">actions</span> <span class="o">=</span> <span class="n">deepcopy</span><span class="p">(</span><span class="n">digraph</span><span class="o">.</span><span class="n">actions</span><span class="p">)</span>
@@ -1227,7 +1227,7 @@
         
 <div class="viewcode-block" id="RankingByBestChoosingDigraph.showTransitiveDigraph">
 <a class="viewcode-back" href="../techDoc.html#transitiveDigraphs.RankingByBestChoosingDigraph.showTransitiveDigraph">[docs]</a>
-    <span class="k">def</span> <span class="nf">showTransitiveDigraph</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">WithCoverCredibility</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">showTransitiveDigraph</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">WithCoverCredibility</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Specialisation of showTransitiveDigraph() for ranking-by-best-choosing results.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
@@ -1238,12 +1238,12 @@
 
 <div class="viewcode-block" id="RankingByLastChoosingDigraph">
 <a class="viewcode-back" href="../techDoc.html#transitiveDigraphs.RankingByLastChoosingDigraph">[docs]</a>
-<span class="k">class</span> <span class="nc">RankingByLastChoosingDigraph</span><span class="p">(</span><span class="n">RankingByChoosingDigraph</span><span class="p">):</span>
+<span class="k">class</span><span class="w"> </span><span class="nc">RankingByLastChoosingDigraph</span><span class="p">(</span><span class="n">RankingByChoosingDigraph</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Specialization of abstract TransitiveDigraph class for computing a ranking by rejecting.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
-    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">digraph</span><span class="p">,</span><span class="n">Normalized</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span><span class="n">CoDual</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span><span class="n">Debug</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
-        <span class="kn">from</span> <span class="nn">copy</span> <span class="kn">import</span> <span class="n">copy</span> <span class="k">as</span> <span class="n">deepcopy</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">digraph</span><span class="p">,</span><span class="n">Normalized</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span><span class="n">CoDual</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span><span class="n">Debug</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+        <span class="kn">from</span><span class="w"> </span><span class="nn">copy</span><span class="w"> </span><span class="kn">import</span> <span class="n">copy</span> <span class="k">as</span> <span class="n">deepcopy</span>
         <span class="n">digraphName</span> <span class="o">=</span> <span class="s1">&#39;ranking-by-last&#39;</span><span class="o">+</span><span class="n">digraph</span><span class="o">.</span><span class="n">name</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="n">deepcopy</span><span class="p">(</span><span class="n">digraphName</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">actions</span> <span class="o">=</span> <span class="n">deepcopy</span><span class="p">(</span><span class="n">digraph</span><span class="o">.</span><span class="n">actions</span><span class="p">)</span>
@@ -1260,7 +1260,7 @@
     
 <div class="viewcode-block" id="RankingByLastChoosingDigraph.showTransitiveDigraph">
 <a class="viewcode-back" href="../techDoc.html#transitiveDigraphs.RankingByLastChoosingDigraph.showTransitiveDigraph">[docs]</a>
-    <span class="k">def</span> <span class="nf">showTransitiveDigraph</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">WithCoverCredibility</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">showTransitiveDigraph</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">WithCoverCredibility</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Specialisation of showTransitiveDigraph() for ranking-by-last-choosing results.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
@@ -1271,13 +1271,13 @@
 
 <div class="viewcode-block" id="RankingByPrudentChoosingDigraph">
 <a class="viewcode-back" href="../techDoc.html#transitiveDigraphs.RankingByPrudentChoosingDigraph">[docs]</a>
-<span class="k">class</span> <span class="nc">RankingByPrudentChoosingDigraph</span><span class="p">(</span><span class="n">RankingByChoosingDigraph</span><span class="p">):</span>
+<span class="k">class</span><span class="w"> </span><span class="nc">RankingByPrudentChoosingDigraph</span><span class="p">(</span><span class="n">RankingByChoosingDigraph</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Specialization for ranking-by-rejecting results with prudent single elimination of chordless circuits. By default, the cut level for circuits elimination is set to 20% of the valuation domain maximum (1.0).</span>
 <span class="sd">    &quot;&quot;&quot;</span>
-    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">digraph</span><span class="p">,</span><span class="n">CoDual</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span><span class="n">Normalized</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span><span class="n">Odd</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span><span class="n">Limited</span><span class="o">=</span><span class="mf">0.2</span><span class="p">,</span><span class="n">Comments</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span><span class="n">Debug</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span><span class="n">SplitCorrelation</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
-        <span class="kn">from</span> <span class="nn">copy</span> <span class="kn">import</span> <span class="n">copy</span><span class="p">,</span> <span class="n">deepcopy</span>
-        <span class="kn">from</span> <span class="nn">time</span> <span class="kn">import</span> <span class="n">time</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">digraph</span><span class="p">,</span><span class="n">CoDual</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span><span class="n">Normalized</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span><span class="n">Odd</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span><span class="n">Limited</span><span class="o">=</span><span class="mf">0.2</span><span class="p">,</span><span class="n">Comments</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span><span class="n">Debug</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span><span class="n">SplitCorrelation</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
+        <span class="kn">from</span><span class="w"> </span><span class="nn">copy</span><span class="w"> </span><span class="kn">import</span> <span class="n">copy</span><span class="p">,</span> <span class="n">deepcopy</span>
+        <span class="kn">from</span><span class="w"> </span><span class="nn">time</span><span class="w"> </span><span class="kn">import</span> <span class="n">time</span>
         <span class="k">if</span> <span class="n">Comments</span><span class="p">:</span>          
             <span class="n">t0</span> <span class="o">=</span> <span class="n">time</span><span class="p">()</span>
             <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;------- Commenting ranking by prudent choosing ------&#39;</span><span class="p">)</span>
@@ -1348,8 +1348,8 @@
 
 <span class="c1"># multiprocessing thread for the principal fusion class</span>
 <span class="c1">#from multiprocessing import Process, Lock, active_children, cpu_count</span>
-<span class="k">class</span> <span class="nc">_myPRIODThread</span><span class="p">(</span><span class="n">Process</span><span class="p">):</span>
-    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">threadID</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="n">direction</span><span class="p">,</span>
+<span class="k">class</span><span class="w"> </span><span class="nc">_myPRIODThread</span><span class="p">(</span><span class="n">Process</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">threadID</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="n">direction</span><span class="p">,</span>
                  <span class="n">tempDirName</span><span class="p">,</span> <span class="n">imageType</span><span class="p">,</span> <span class="n">plotFileName</span><span class="p">,</span> <span class="n">Debug</span><span class="p">):</span>
         <span class="n">Process</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">threadID</span> <span class="o">=</span> <span class="n">threadID</span>
@@ -1359,10 +1359,10 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">imageType</span> <span class="o">=</span> <span class="n">imageType</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">plotFileName</span> <span class="o">=</span> <span class="n">plotFileName</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">Debug</span> <span class="o">=</span> <span class="n">Debug</span>
-    <span class="k">def</span> <span class="nf">run</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="kn">from</span> <span class="nn">pickle</span> <span class="kn">import</span> <span class="n">dumps</span><span class="p">,</span> <span class="n">loads</span>
-        <span class="kn">from</span> <span class="nn">os</span> <span class="kn">import</span> <span class="n">chdir</span>
-        <span class="kn">from</span> <span class="nn">linearOrders</span> <span class="kn">import</span> <span class="n">PrincipalOrder</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">run</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="kn">from</span><span class="w"> </span><span class="nn">pickle</span><span class="w"> </span><span class="kn">import</span> <span class="n">dumps</span><span class="p">,</span> <span class="n">loads</span>
+        <span class="kn">from</span><span class="w"> </span><span class="nn">os</span><span class="w"> </span><span class="kn">import</span> <span class="n">chdir</span>
+        <span class="kn">from</span><span class="w"> </span><span class="nn">linearOrders</span><span class="w"> </span><span class="kn">import</span> <span class="n">PrincipalOrder</span>
         <span class="n">chdir</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">workingDirectory</span><span class="p">)</span>
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">Debug</span><span class="p">:</span>
             <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Starting working in </span><span class="si">%s</span><span class="s2"> on </span><span class="si">%s</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">workingDirectory</span><span class="p">,</span><span class="bp">self</span><span class="o">.</span><span class="n">name</span><span class="p">)</span> <span class="p">)</span>
@@ -1389,7 +1389,7 @@
 
 <div class="viewcode-block" id="PrincipalInOutDegreesOrderingFusion">
 <a class="viewcode-back" href="../techDoc.html#transitiveDigraphs.PrincipalInOutDegreesOrderingFusion">[docs]</a>
-<span class="k">class</span> <span class="nc">PrincipalInOutDegreesOrderingFusion</span><span class="p">(</span><span class="n">TransitiveDigraph</span><span class="p">):</span>
+<span class="k">class</span><span class="w"> </span><span class="nc">PrincipalInOutDegreesOrderingFusion</span><span class="p">(</span><span class="n">TransitiveDigraph</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Specialization of abstract TransitiveDigraph class for ranking by fusion</span>
 <span class="sd">    of the principal orders of the variance-covariance of in- </span>
@@ -1434,14 +1434,14 @@
 <span class="sd">    c1 	 -0.21991 	 -0.21991</span>
 <span class="sd">    </span>
 <span class="sd">    &quot;&quot;&quot;</span>
-    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">other</span><span class="p">,</span><span class="n">fusionOperator</span><span class="o">=</span><span class="s2">&quot;o-max&quot;</span><span class="p">,</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">other</span><span class="p">,</span><span class="n">fusionOperator</span><span class="o">=</span><span class="s2">&quot;o-max&quot;</span><span class="p">,</span>
                  <span class="n">imageType</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
                  <span class="n">plotFileName</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
                  <span class="n">Threading</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
                  <span class="n">Debug</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
-        <span class="kn">from</span> <span class="nn">copy</span> <span class="kn">import</span> <span class="n">copy</span><span class="p">,</span> <span class="n">deepcopy</span>
-        <span class="kn">from</span> <span class="nn">linearOrders</span> <span class="kn">import</span> <span class="n">PrincipalOrder</span>
-        <span class="kn">from</span> <span class="nn">pickle</span> <span class="kn">import</span> <span class="n">dumps</span><span class="p">,</span> <span class="n">loads</span><span class="p">,</span> <span class="n">load</span>
+        <span class="kn">from</span><span class="w"> </span><span class="nn">copy</span><span class="w"> </span><span class="kn">import</span> <span class="n">copy</span><span class="p">,</span> <span class="n">deepcopy</span>
+        <span class="kn">from</span><span class="w"> </span><span class="nn">linearOrders</span><span class="w"> </span><span class="kn">import</span> <span class="n">PrincipalOrder</span>
+        <span class="kn">from</span><span class="w"> </span><span class="nn">pickle</span><span class="w"> </span><span class="kn">import</span> <span class="n">dumps</span><span class="p">,</span> <span class="n">loads</span><span class="p">,</span> <span class="n">load</span>
 
         <span class="c1">#if Threading:</span>
 
@@ -1461,7 +1461,7 @@
 
         <span class="k">if</span> <span class="n">Threading</span> <span class="ow">and</span> <span class="n">cpu_count</span><span class="p">()</span><span class="o">&gt;</span><span class="mi">2</span><span class="p">:</span>
             <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Threading ...&#39;</span><span class="p">)</span>
-            <span class="kn">from</span> <span class="nn">tempfile</span> <span class="kn">import</span> <span class="n">TemporaryDirectory</span>
+            <span class="kn">from</span><span class="w"> </span><span class="nn">tempfile</span><span class="w"> </span><span class="kn">import</span> <span class="n">TemporaryDirectory</span>
             <span class="k">with</span> <span class="n">TemporaryDirectory</span><span class="p">()</span> <span class="k">as</span> <span class="n">tempDirName</span><span class="p">:</span>
                 <span class="n">digraphFileName</span> <span class="o">=</span> <span class="n">tempDirName</span> <span class="o">+</span><span class="s1">&#39;/dumpDigraph.py&#39;</span>
                 <span class="k">if</span> <span class="n">Debug</span><span class="p">:</span>
@@ -1532,7 +1532,7 @@
 
 <div class="viewcode-block" id="PrincipalInOutDegreesOrderingFusion.showPrincipalScores">
 <a class="viewcode-back" href="../techDoc.html#transitiveDigraphs.PrincipalInOutDegreesOrderingFusion.showPrincipalScores">[docs]</a>
-    <span class="k">def</span> <span class="nf">showPrincipalScores</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">ColwiseOrder</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">RowwiseOrder</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">showPrincipalScores</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">ColwiseOrder</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">RowwiseOrder</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        showing the principal in- (Colwise) and out-degrees (Rowwise) scores.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
@@ -1561,7 +1561,7 @@
 
 <div class="viewcode-block" id="PrincipalInOutDegreesOrderingFusion.computeTransitiveDigraph">
 <a class="viewcode-back" href="../techDoc.html#transitiveDigraphs.PrincipalInOutDegreesOrderingFusion.computeTransitiveDigraph">[docs]</a>
-    <span class="k">def</span> <span class="nf">computeTransitiveDigraph</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">ColwiseOrder</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">computeTransitiveDigraph</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">ColwiseOrder</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Specialisation for PrincipalInOutDegreesOrderings.</span>
 <span class="sd">        &quot;&quot;&quot;</span>        
@@ -1587,7 +1587,7 @@
                 
 <div class="viewcode-block" id="PrincipalInOutDegreesOrderingFusion.showTransitiveDigraph">
 <a class="viewcode-back" href="../techDoc.html#transitiveDigraphs.PrincipalInOutDegreesOrderingFusion.showTransitiveDigraph">[docs]</a>
-    <span class="k">def</span> <span class="nf">showTransitiveDigraph</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">ColwiseOrder</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span><span class="n">WithCoverCredibility</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">showTransitiveDigraph</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">ColwiseOrder</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span><span class="n">WithCoverCredibility</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Specialisation for PrincipalInOutDegreesOrderings.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
@@ -1622,7 +1622,7 @@
 
 <div class="viewcode-block" id="PrincipalInOutDegreesOrderingFusion.exportGraphViz">
 <a class="viewcode-back" href="../techDoc.html#transitiveDigraphs.PrincipalInOutDegreesOrderingFusion.exportGraphViz">[docs]</a>
-    <span class="k">def</span> <span class="nf">exportGraphViz</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">fileName</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span><span class="n">direction</span><span class="o">=</span><span class="s1">&#39;ColwiseOrder&#39;</span><span class="p">,</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">exportGraphViz</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">fileName</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span><span class="n">direction</span><span class="o">=</span><span class="s1">&#39;ColwiseOrder&#39;</span><span class="p">,</span>
                        <span class="n">Comments</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span><span class="n">graphType</span><span class="o">=</span><span class="s1">&#39;png&#39;</span><span class="p">,</span>
                        <span class="n">graphSize</span><span class="o">=</span><span class="s1">&#39;7,7&#39;</span><span class="p">,</span>
                        <span class="n">fontSize</span><span class="o">=</span><span class="mi">10</span><span class="p">):</span>
@@ -1646,7 +1646,7 @@
 
 <span class="c1">##################</span>
 
-<span class="k">def</span> <span class="nf">_jobTaskRubis</span><span class="p">(</span><span class="n">categID</span><span class="p">):</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">_jobTaskRubis</span><span class="p">(</span><span class="n">categID</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Task definition for multiprocessing threaded local RubisChoice jobs in the QantilesRankingDigraph contructor.</span>
 <span class="sd">    </span>
@@ -1655,13 +1655,13 @@
 <span class="sd">          is set to 30. Above this cardinality, the PrincipalInOutDegreesOrdering is used.</span>
 <span class="sd">          </span>
 <span class="sd">    &quot;&quot;&quot;</span>
-    <span class="kn">from</span> <span class="nn">tempfile</span> <span class="kn">import</span> <span class="n">TemporaryDirectory</span>
-    <span class="kn">from</span> <span class="nn">os</span> <span class="kn">import</span> <span class="n">getcwd</span><span class="p">,</span> <span class="n">chdir</span>
-    <span class="kn">from</span> <span class="nn">pickle</span> <span class="kn">import</span> <span class="n">dumps</span><span class="p">,</span> <span class="n">loads</span><span class="p">,</span> <span class="n">load</span>
-    <span class="kn">from</span> <span class="nn">copy</span> <span class="kn">import</span> <span class="n">copy</span> <span class="k">as</span> <span class="n">deepcopy</span>
-    <span class="kn">from</span> <span class="nn">outrankingDigraphs</span> <span class="kn">import</span> <span class="n">BipolarOutrankingDigraph</span>
+    <span class="kn">from</span><span class="w"> </span><span class="nn">tempfile</span><span class="w"> </span><span class="kn">import</span> <span class="n">TemporaryDirectory</span>
+    <span class="kn">from</span><span class="w"> </span><span class="nn">os</span><span class="w"> </span><span class="kn">import</span> <span class="n">getcwd</span><span class="p">,</span> <span class="n">chdir</span>
+    <span class="kn">from</span><span class="w"> </span><span class="nn">pickle</span><span class="w"> </span><span class="kn">import</span> <span class="n">dumps</span><span class="p">,</span> <span class="n">loads</span><span class="p">,</span> <span class="n">load</span>
+    <span class="kn">from</span><span class="w"> </span><span class="nn">copy</span><span class="w"> </span><span class="kn">import</span> <span class="n">copy</span> <span class="k">as</span> <span class="n">deepcopy</span>
+    <span class="kn">from</span><span class="w"> </span><span class="nn">outrankingDigraphs</span><span class="w"> </span><span class="kn">import</span> <span class="n">BipolarOutrankingDigraph</span>
     <span class="c1">#from linearOrders import RankedPairsOrder, KohlerOrder</span>
-    <span class="kn">from</span> <span class="nn">TransitiveDigraphs</span> <span class="kn">import</span> <span class="n">PrincipalInOutDegreesOrdering</span>
+    <span class="kn">from</span><span class="w"> </span><span class="nn">TransitiveDigraphs</span><span class="w"> </span><span class="kn">import</span> <span class="n">PrincipalInOutDegreesOrdering</span>
     <span class="n">maxCatContent</span> <span class="o">=</span> <span class="mi">30</span>
     <span class="n">Comments</span> <span class="o">=</span> <span class="kc">False</span>
     <span class="k">if</span> <span class="n">Comments</span><span class="p">:</span>
@@ -1717,7 +1717,7 @@
     <span class="n">writestr</span> <span class="o">=</span> <span class="s1">&#39;Finished category </span><span class="si">%d</span><span class="s1"> </span><span class="si">%d</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="n">categID</span><span class="p">,</span><span class="n">nc</span><span class="p">)</span>
     <span class="k">return</span> <span class="n">writestr</span>
 <span class="c1">#####</span>
-<span class="k">def</span> <span class="nf">_jobTaskKohler</span><span class="p">(</span><span class="n">categID</span><span class="p">):</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">_jobTaskKohler</span><span class="p">(</span><span class="n">categID</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Task definition for multiprocessing threaded jobs in QsRbcRanking.</span>
 <span class="sd">    </span>
@@ -1726,11 +1726,11 @@
 <span class="sd">          The indiviual quantile classes are linarly order with</span>
 <span class="sd">          Kohler&#39;s ranking rule.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
-    <span class="kn">from</span> <span class="nn">pickle</span> <span class="kn">import</span> <span class="n">dumps</span><span class="p">,</span> <span class="n">loads</span><span class="p">,</span> <span class="n">load</span>
-    <span class="kn">from</span> <span class="nn">copy</span> <span class="kn">import</span> <span class="n">copy</span> <span class="k">as</span> <span class="n">deepcopy</span>
-    <span class="kn">from</span> <span class="nn">outrankingDigraphs</span> <span class="kn">import</span> <span class="n">BipolarOutrankingDigraph</span>
-    <span class="kn">from</span> <span class="nn">linearOrders</span> <span class="kn">import</span> <span class="n">KohlerOrder</span>
-    <span class="kn">from</span> <span class="nn">TransitiveDigraphs</span> <span class="kn">import</span> <span class="n">PrincipalInOutDegreesOrdering</span>
+    <span class="kn">from</span><span class="w"> </span><span class="nn">pickle</span><span class="w"> </span><span class="kn">import</span> <span class="n">dumps</span><span class="p">,</span> <span class="n">loads</span><span class="p">,</span> <span class="n">load</span>
+    <span class="kn">from</span><span class="w"> </span><span class="nn">copy</span><span class="w"> </span><span class="kn">import</span> <span class="n">copy</span> <span class="k">as</span> <span class="n">deepcopy</span>
+    <span class="kn">from</span><span class="w"> </span><span class="nn">outrankingDigraphs</span><span class="w"> </span><span class="kn">import</span> <span class="n">BipolarOutrankingDigraph</span>
+    <span class="kn">from</span><span class="w"> </span><span class="nn">linearOrders</span><span class="w"> </span><span class="kn">import</span> <span class="n">KohlerOrder</span>
+    <span class="kn">from</span><span class="w"> </span><span class="nn">TransitiveDigraphs</span><span class="w"> </span><span class="kn">import</span> <span class="n">PrincipalInOutDegreesOrdering</span>
     <span class="n">Comments</span> <span class="o">=</span> <span class="kc">False</span>
     <span class="k">if</span> <span class="n">Comments</span><span class="p">:</span>
         <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Starting working on category </span><span class="si">%d</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="n">categID</span><span class="p">),</span> <span class="n">end</span><span class="o">=</span><span class="s2">&quot; &quot;</span><span class="p">)</span>
@@ -1753,7 +1753,7 @@
     <span class="k">return</span> <span class="n">writestr</span>
 
 <span class="c1">#####</span>
-<span class="k">def</span> <span class="nf">_jobTaskKohlerFusion</span><span class="p">(</span><span class="n">categID</span><span class="p">):</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">_jobTaskKohlerFusion</span><span class="p">(</span><span class="n">categID</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Task definition for multiprocessing threaded jobs in Quantiles Ranking.</span>
 <span class="sd">    </span>
@@ -1765,11 +1765,11 @@
 <span class="sd">          outranking digraph.</span>
 <span class="sd">          </span>
 <span class="sd">    &quot;&quot;&quot;</span>
-    <span class="kn">from</span> <span class="nn">pickle</span> <span class="kn">import</span> <span class="n">dumps</span><span class="p">,</span> <span class="n">loads</span><span class="p">,</span> <span class="n">load</span>
-    <span class="kn">from</span> <span class="nn">copy</span> <span class="kn">import</span> <span class="n">copy</span> <span class="k">as</span> <span class="n">deepcopy</span>
-    <span class="kn">from</span> <span class="nn">outrankingDigraphs</span> <span class="kn">import</span> <span class="n">BipolarOutrankingDigraph</span>
-    <span class="kn">from</span> <span class="nn">linearOrders</span> <span class="kn">import</span> <span class="n">KohlerOrder</span>
-    <span class="kn">from</span> <span class="nn">TransitiveDigraphs</span> <span class="kn">import</span> <span class="n">PrincipalInOutDegreesOrdering</span>
+    <span class="kn">from</span><span class="w"> </span><span class="nn">pickle</span><span class="w"> </span><span class="kn">import</span> <span class="n">dumps</span><span class="p">,</span> <span class="n">loads</span><span class="p">,</span> <span class="n">load</span>
+    <span class="kn">from</span><span class="w"> </span><span class="nn">copy</span><span class="w"> </span><span class="kn">import</span> <span class="n">copy</span> <span class="k">as</span> <span class="n">deepcopy</span>
+    <span class="kn">from</span><span class="w"> </span><span class="nn">outrankingDigraphs</span><span class="w"> </span><span class="kn">import</span> <span class="n">BipolarOutrankingDigraph</span>
+    <span class="kn">from</span><span class="w"> </span><span class="nn">linearOrders</span><span class="w"> </span><span class="kn">import</span> <span class="n">KohlerOrder</span>
+    <span class="kn">from</span><span class="w"> </span><span class="nn">TransitiveDigraphs</span><span class="w"> </span><span class="kn">import</span> <span class="n">PrincipalInOutDegreesOrdering</span>
     <span class="n">Comments</span> <span class="o">=</span> <span class="kc">False</span>
     <span class="k">if</span> <span class="n">Comments</span><span class="p">:</span>
         <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Starting working on category </span><span class="si">%d</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="n">categID</span><span class="p">),</span> <span class="n">end</span><span class="o">=</span><span class="s2">&quot; &quot;</span><span class="p">)</span>
@@ -1801,7 +1801,7 @@
 
 <div class="viewcode-block" id="WeakCopelandOrder">
 <a class="viewcode-back" href="../techDoc.html#transitiveDigraphs.WeakCopelandOrder">[docs]</a>
-<span class="k">class</span> <span class="nc">WeakCopelandOrder</span><span class="p">(</span><span class="n">TransitiveDigraph</span><span class="p">):</span>
+<span class="k">class</span><span class="w"> </span><span class="nc">WeakCopelandOrder</span><span class="p">(</span><span class="n">TransitiveDigraph</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    instantiates the Weak Copeland Order from</span>
 <span class="sd">    a given bipolar-valued Digraph instance</span>
@@ -1815,18 +1815,18 @@
 <span class="sd">    a valid outranking digraph.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     
-    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">other</span><span class="p">,</span><span class="n">WithFairestRanking</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span><span class="n">SelfCoDual</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span><span class="n">Debug</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">other</span><span class="p">,</span><span class="n">WithFairestRanking</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span><span class="n">SelfCoDual</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span><span class="n">Debug</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        constructor for generating a weak order</span>
 <span class="sd">        from a given other digraph following</span>
 <span class="sd">        the Copeland ordering rule.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
 
-        <span class="kn">from</span> <span class="nn">copy</span> <span class="kn">import</span> <span class="n">deepcopy</span>
-        <span class="kn">from</span> <span class="nn">collections</span> <span class="kn">import</span> <span class="n">OrderedDict</span>
-        <span class="kn">from</span> <span class="nn">time</span> <span class="kn">import</span> <span class="n">time</span>
-        <span class="kn">from</span> <span class="nn">operator</span> <span class="kn">import</span> <span class="n">itemgetter</span>
-        <span class="kn">from</span> <span class="nn">digraphsTools</span> <span class="kn">import</span> <span class="n">all_partial_perms</span>
+        <span class="kn">from</span><span class="w"> </span><span class="nn">copy</span><span class="w"> </span><span class="kn">import</span> <span class="n">deepcopy</span>
+        <span class="kn">from</span><span class="w"> </span><span class="nn">collections</span><span class="w"> </span><span class="kn">import</span> <span class="n">OrderedDict</span>
+        <span class="kn">from</span><span class="w"> </span><span class="nn">time</span><span class="w"> </span><span class="kn">import</span> <span class="n">time</span>
+        <span class="kn">from</span><span class="w"> </span><span class="nn">operator</span><span class="w"> </span><span class="kn">import</span> <span class="n">itemgetter</span>
+        <span class="kn">from</span><span class="w"> </span><span class="nn">digraphsTools</span><span class="w"> </span><span class="kn">import</span> <span class="n">all_partial_perms</span>
 
         <span class="c1">#timings</span>
         <span class="n">tt</span> <span class="o">=</span> <span class="n">time</span><span class="p">()</span>
@@ -1930,7 +1930,7 @@
         <span class="n">runTimes</span><span class="p">[</span><span class="s1">&#39;totalTime&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">time</span><span class="p">()</span> <span class="o">-</span> <span class="n">tt</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">runTimes</span> <span class="o">=</span> <span class="n">runTimes</span>
 
-    <span class="k">def</span> <span class="nf">showScores</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">direction</span><span class="o">=</span><span class="s1">&#39;descending&#39;</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">showScores</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">direction</span><span class="o">=</span><span class="s1">&#39;descending&#39;</span><span class="p">):</span>
         <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Copeland scores in </span><span class="si">%s</span><span class="s1"> order&#39;</span> <span class="o">%</span> <span class="n">direction</span><span class="p">)</span>
         <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;action </span><span class="se">\t</span><span class="s1"> score&#39;</span><span class="p">)</span>
         <span class="k">if</span> <span class="n">direction</span> <span class="o">==</span> <span class="s1">&#39;descending&#39;</span><span class="p">:</span>
@@ -1943,7 +1943,7 @@
 
 <div class="viewcode-block" id="WeakNetFlowsOrder">
 <a class="viewcode-back" href="../techDoc.html#transitiveDigraphs.WeakNetFlowsOrder">[docs]</a>
-<span class="k">class</span> <span class="nc">WeakNetFlowsOrder</span><span class="p">(</span><span class="n">TransitiveDigraph</span><span class="p">):</span>
+<span class="k">class</span><span class="w"> </span><span class="nc">WeakNetFlowsOrder</span><span class="p">(</span><span class="n">TransitiveDigraph</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Instantiates the Weak NetFlows Order from</span>
 <span class="sd">    a given bipolar-valued Digraph instance.</span>
@@ -1954,7 +1954,7 @@
 <span class="sd">    complement of the preorder is instantiated.</span>
 <span class="sd">    </span>
 <span class="sd">    &quot;&quot;&quot;</span>
-    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">other</span><span class="p">,</span><span class="n">SelfCoDual</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span><span class="n">Debug</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">other</span><span class="p">,</span><span class="n">SelfCoDual</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span><span class="n">Debug</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Constructor for generating a weak order</span>
 <span class="sd">        from a given other digraph following</span>
@@ -1962,9 +1962,9 @@
 <span class="sd">        &quot;&quot;&quot;</span>
 
         <span class="c1">#from copy import deepcopy</span>
-        <span class="kn">from</span> <span class="nn">collections</span> <span class="kn">import</span> <span class="n">OrderedDict</span>
-        <span class="kn">from</span> <span class="nn">time</span> <span class="kn">import</span> <span class="n">time</span>
-        <span class="kn">from</span> <span class="nn">operator</span> <span class="kn">import</span> <span class="n">itemgetter</span>
+        <span class="kn">from</span><span class="w"> </span><span class="nn">collections</span><span class="w"> </span><span class="kn">import</span> <span class="n">OrderedDict</span>
+        <span class="kn">from</span><span class="w"> </span><span class="nn">time</span><span class="w"> </span><span class="kn">import</span> <span class="n">time</span>
+        <span class="kn">from</span><span class="w"> </span><span class="nn">operator</span><span class="w"> </span><span class="kn">import</span> <span class="n">itemgetter</span>
         <span class="c1">#timings</span>
         <span class="n">tt</span> <span class="o">=</span> <span class="n">time</span><span class="p">()</span>
         <span class="n">runTimes</span> <span class="o">=</span> <span class="n">OrderedDict</span><span class="p">()</span>
@@ -2035,7 +2035,7 @@
         <span class="n">runTimes</span><span class="p">[</span><span class="s1">&#39;totalTime&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">time</span><span class="p">()</span> <span class="o">-</span> <span class="n">tt</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">runTimes</span> <span class="o">=</span> <span class="n">runTimes</span>
 
-    <span class="k">def</span> <span class="nf">showScores</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">direction</span><span class="o">=</span><span class="s1">&#39;descending&#39;</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">showScores</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">direction</span><span class="o">=</span><span class="s1">&#39;descending&#39;</span><span class="p">):</span>
         <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;NetFlows scores in </span><span class="si">%s</span><span class="s1"> order&#39;</span> <span class="o">%</span> <span class="n">direction</span><span class="p">)</span>
         <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;action </span><span class="se">\t</span><span class="s1"> score&#39;</span><span class="p">)</span>
         <span class="k">if</span> <span class="n">direction</span> <span class="o">==</span> <span class="s1">&#39;descending&#39;</span><span class="p">:</span>
@@ -2049,7 +2049,7 @@
 
 <div class="viewcode-block" id="WeakBachetRanking">
 <a class="viewcode-back" href="../techDoc.html#transitiveDigraphs.WeakBachetRanking">[docs]</a>
-<span class="k">class</span> <span class="nc">WeakBachetRanking</span><span class="p">(</span><span class="n">TransitiveDigraph</span><span class="p">):</span>
+<span class="k">class</span><span class="w"> </span><span class="nc">WeakBachetRanking</span><span class="p">(</span><span class="n">TransitiveDigraph</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Uses the :py:class:`linearOrders.BachetRanking` class for generating a number</span>
 <span class="sd">    of best correlated Bachet rankings.</span>
@@ -2081,16 +2081,16 @@
 <span class="sd">    The cover credibities shown above represent in fact the mean outranking, respectively outranked, characteristic value of the complement of the nth choice or rejection. </span>
 <span class="sd">    &quot;&quot;&quot;</span>
     
-    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">g</span><span class="p">,</span><span class="n">randomized</span><span class="o">=</span><span class="mi">100</span><span class="p">,</span><span class="n">maxNbrOfRankings</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">g</span><span class="p">,</span><span class="n">randomized</span><span class="o">=</span><span class="mi">100</span><span class="p">,</span><span class="n">maxNbrOfRankings</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span>
                  <span class="n">seed</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
                  <span class="n">Comments</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span><span class="n">Debug</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
-        <span class="kn">from</span> <span class="nn">time</span> <span class="kn">import</span> <span class="n">time</span>
-        <span class="kn">from</span> <span class="nn">linearOrders</span> <span class="kn">import</span> <span class="n">BachetRanking</span>
-        <span class="kn">from</span> <span class="nn">copy</span> <span class="kn">import</span> <span class="n">deepcopy</span>
+        <span class="kn">from</span><span class="w"> </span><span class="nn">time</span><span class="w"> </span><span class="kn">import</span> <span class="n">time</span>
+        <span class="kn">from</span><span class="w"> </span><span class="nn">linearOrders</span><span class="w"> </span><span class="kn">import</span> <span class="n">BachetRanking</span>
+        <span class="kn">from</span><span class="w"> </span><span class="nn">copy</span><span class="w"> </span><span class="kn">import</span> <span class="n">deepcopy</span>
         <span class="n">tt</span> <span class="o">=</span> <span class="n">time</span><span class="p">()</span>
         <span class="n">statistics</span> <span class="o">=</span> <span class="p">{}</span>
         <span class="n">actions</span> <span class="o">=</span> <span class="p">[</span><span class="n">x</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">g</span><span class="o">.</span><span class="n">actions</span><span class="p">]</span>
-        <span class="kn">import</span> <span class="nn">random</span>
+        <span class="kn">import</span><span class="w"> </span><span class="nn">random</span>
         <span class="n">random</span><span class="o">.</span><span class="n">seed</span><span class="p">(</span><span class="n">seed</span><span class="p">)</span>
         <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">randomized</span><span class="p">):</span>
             <span class="n">random</span><span class="o">.</span><span class="n">shuffle</span><span class="p">(</span><span class="n">actions</span><span class="p">)</span>
@@ -2135,7 +2135,7 @@
 
 <div class="viewcode-block" id="WeakBachetRanking.computeBoostedRanking">
 <a class="viewcode-back" href="../techDoc.html#transitiveDigraphs.WeakBachetRanking.computeBoostedRanking">[docs]</a>
-    <span class="k">def</span> <span class="nf">computeBoostedRanking</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">computeBoostedRanking</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Renders an ordred list of decision actions ranked in</span>
 <span class="sd">        decreasing preference direction following the rankingRule</span>
@@ -2158,7 +2158,7 @@
 
 <div class="viewcode-block" id="WeakBachetRanking.computeBoostedOrdering">
 <a class="viewcode-back" href="../techDoc.html#transitiveDigraphs.WeakBachetRanking.computeBoostedOrdering">[docs]</a>
-    <span class="k">def</span> <span class="nf">computeBoostedOrdering</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">computeBoostedOrdering</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Renders an ordred list of decision actions ranked in</span>
 <span class="sd">        decreasing preference direction following the rankingRule</span>
@@ -2181,17 +2181,17 @@
 
 <div class="viewcode-block" id="WeakBachetRanking.exportGraphViz">
 <a class="viewcode-back" href="../techDoc.html#transitiveDigraphs.WeakBachetRanking.exportGraphViz">[docs]</a>
-    <span class="k">def</span> <span class="nf">exportGraphViz</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">fileName</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span><span class="n">ArrowHeads</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">exportGraphViz</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">fileName</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span><span class="n">ArrowHeads</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
                        <span class="n">Comments</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span><span class="n">graphType</span><span class="o">=</span><span class="s1">&#39;png&#39;</span><span class="p">,</span>
                        <span class="n">graphSize</span><span class="o">=</span><span class="s1">&#39;7,7&#39;</span><span class="p">,</span><span class="n">bgcolor</span><span class="o">=</span><span class="s1">&#39;cornsilk&#39;</span><span class="p">,</span>
                        <span class="n">fontSize</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span><span class="n">Debug</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        export GraphViz dot file for Hasse diagram drawing filtering.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="kn">import</span> <span class="nn">os</span>
-        <span class="kn">from</span> <span class="nn">copy</span> <span class="kn">import</span> <span class="n">copy</span> <span class="k">as</span> <span class="n">deepcopy</span>
+        <span class="kn">import</span><span class="w"> </span><span class="nn">os</span>
+        <span class="kn">from</span><span class="w"> </span><span class="nn">copy</span><span class="w"> </span><span class="kn">import</span> <span class="n">copy</span> <span class="k">as</span> <span class="n">deepcopy</span>
             
-        <span class="k">def</span> <span class="nf">_safeName</span><span class="p">(</span><span class="n">t0</span><span class="p">):</span>
+        <span class="k">def</span><span class="w"> </span><span class="nf">_safeName</span><span class="p">(</span><span class="n">t0</span><span class="p">):</span>
             <span class="n">t</span> <span class="o">=</span> <span class="n">t0</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="n">sep</span><span class="o">=</span><span class="s2">&quot;-&quot;</span><span class="p">)</span>
             <span class="n">t1</span> <span class="o">=</span> <span class="n">t</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
             <span class="n">n</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">t</span><span class="p">)</span>
@@ -2321,7 +2321,7 @@
 
 <div class="viewcode-block" id="PartialRanking">
 <a class="viewcode-back" href="../techDoc.html#transitiveDigraphs.PartialRanking">[docs]</a>
-<span class="k">class</span> <span class="nc">PartialRanking</span><span class="p">(</span><span class="n">RankingsFusion</span><span class="p">):</span>
+<span class="k">class</span><span class="w"> </span><span class="nc">PartialRanking</span><span class="p">(</span><span class="n">RankingsFusion</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    dummy class for backward compatibility.</span>
 <span class="sd">    &quot;&quot;&quot;</span></div>
@@ -2329,7 +2329,7 @@
 
 <div class="viewcode-block" id="KemenyWeakOrder">
 <a class="viewcode-back" href="../techDoc.html#transitiveDigraphs.KemenyWeakOrder">[docs]</a>
-<span class="k">class</span> <span class="nc">KemenyWeakOrder</span><span class="p">(</span><span class="n">KemenyOrdersFusion</span><span class="p">):</span>
+<span class="k">class</span><span class="w"> </span><span class="nc">KemenyWeakOrder</span><span class="p">(</span><span class="n">KemenyOrdersFusion</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    dummy class for backward compatibility.</span>
 <span class="sd">    &quot;&quot;&quot;</span></div>
@@ -2337,7 +2337,7 @@
 
 <div class="viewcode-block" id="PrincipalInOutDegreesOrdering">
 <a class="viewcode-back" href="../techDoc.html#transitiveDigraphs.PrincipalInOutDegreesOrdering">[docs]</a>
-<span class="k">class</span> <span class="nc">PrincipalInOutDegreesOrdering</span><span class="p">(</span><span class="n">PrincipalInOutDegreesOrderingFusion</span><span class="p">):</span>
+<span class="k">class</span><span class="w"> </span><span class="nc">PrincipalInOutDegreesOrdering</span><span class="p">(</span><span class="n">PrincipalInOutDegreesOrderingFusion</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    dummy class for backward compatibility.</span>
 <span class="sd">    &quot;&quot;&quot;</span></div>
@@ -2345,7 +2345,7 @@
 
 <div class="viewcode-block" id="WeakOrder">
 <a class="viewcode-back" href="../techDoc.html#transitiveDigraphs.WeakOrder">[docs]</a>
-<span class="k">class</span> <span class="nc">WeakOrder</span><span class="p">(</span><span class="n">TransitiveDigraph</span><span class="p">):</span>
+<span class="k">class</span><span class="w"> </span><span class="nc">WeakOrder</span><span class="p">(</span><span class="n">TransitiveDigraph</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    dummy class for backward compatibility.</span>
 <span class="sd">    &quot;&quot;&quot;</span></div>
@@ -2356,13 +2356,13 @@
 <span class="c1">#----------test outrankingDigraphs classes ----------------</span>
 <span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s2">&quot;__main__&quot;</span><span class="p">:</span>
 
-    <span class="kn">from</span> <span class="nn">digraphs</span> <span class="kn">import</span> <span class="o">*</span>
-    <span class="kn">from</span> <span class="nn">outrankingDigraphs</span> <span class="kn">import</span> <span class="o">*</span>
-    <span class="kn">from</span> <span class="nn">sortingDigraphs</span> <span class="kn">import</span> <span class="o">*</span>
-    <span class="kn">from</span> <span class="nn">transitiveDigraphs</span> <span class="kn">import</span> <span class="o">*</span>
-    <span class="kn">from</span> <span class="nn">linearOrders</span> <span class="kn">import</span> <span class="o">*</span>
-    <span class="kn">from</span> <span class="nn">votingProfiles</span> <span class="kn">import</span> <span class="o">*</span>
-    <span class="kn">from</span> <span class="nn">time</span> <span class="kn">import</span> <span class="n">time</span>
+    <span class="kn">from</span><span class="w"> </span><span class="nn">digraphs</span><span class="w"> </span><span class="kn">import</span> <span class="o">*</span>
+    <span class="kn">from</span><span class="w"> </span><span class="nn">outrankingDigraphs</span><span class="w"> </span><span class="kn">import</span> <span class="o">*</span>
+    <span class="kn">from</span><span class="w"> </span><span class="nn">sortingDigraphs</span><span class="w"> </span><span class="kn">import</span> <span class="o">*</span>
+    <span class="kn">from</span><span class="w"> </span><span class="nn">transitiveDigraphs</span><span class="w"> </span><span class="kn">import</span> <span class="o">*</span>
+    <span class="kn">from</span><span class="w"> </span><span class="nn">linearOrders</span><span class="w"> </span><span class="kn">import</span> <span class="o">*</span>
+    <span class="kn">from</span><span class="w"> </span><span class="nn">votingProfiles</span><span class="w"> </span><span class="kn">import</span> <span class="o">*</span>
+    <span class="kn">from</span><span class="w"> </span><span class="nn">time</span><span class="w"> </span><span class="kn">import</span> <span class="n">time</span>
 
     <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;&quot;&quot;</span>
 <span class="s2">    ****************************************************</span>
@@ -2409,7 +2409,7 @@
 
   <div role="contentinfo">
     <p>&#169; Copyright 2012-2025, Raymond Bisdorff.
-      <span class="lastupdated">Last updated on Apr 12, 2025.
+      <span class="lastupdated">Last updated on Apr 16, 2025.
       </span></p>
   </div>
 

@@ -5,8 +5,8 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>ratingDigraphs &mdash; Digraph3 3.13.2 documentation</title>
-      <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=fa44fd50" />
+  <title>ratingDigraphs &mdash; Digraph3 3.13.3 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=03e43079" />
       <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=e59714d7" />
       <link rel="stylesheet" type="text/css" href="../_static/graphviz.css?v=4ae1632d" />
       <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
@@ -23,7 +23,7 @@
   
       <script src="../_static/jquery.js?v=5d32c60e"></script>
       <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
-      <script src="../_static/documentation_options.js?v=f92f4e34"></script>
+      <script src="../_static/documentation_options.js?v=5d57ca2d"></script>
       <script src="../_static/doctools.js?v=9bcbadda"></script>
       <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
       <script src="../_static/clipboard.min.js?v=a7894cd8"></script>
@@ -131,23 +131,23 @@
 <span class="sd">&quot;&quot;&quot;</span>
 
 <span class="c1">######### abstract root class</span>
-<span class="kn">from</span> <span class="nn">outrankingDigraphs</span> <span class="kn">import</span> <span class="n">BipolarOutrankingDigraph</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">outrankingDigraphs</span><span class="w"> </span><span class="kn">import</span> <span class="n">BipolarOutrankingDigraph</span>
 <div class="viewcode-block" id="RatingDigraph">
 <a class="viewcode-back" href="../techDoc.html#ratingDigraphs.RatingDigraph">[docs]</a>
-<span class="k">class</span> <span class="nc">RatingDigraph</span><span class="p">(</span><span class="n">BipolarOutrankingDigraph</span><span class="p">):</span>
+<span class="k">class</span><span class="w"> </span><span class="nc">RatingDigraph</span><span class="p">(</span><span class="n">BipolarOutrankingDigraph</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Abstract root class with generic private and public methods</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     
-    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Abstract root class with private and public methods for RatingDigraph instances&#39;</span><span class="p">)</span>
 
-    <span class="k">def</span> <span class="fm">__repr__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__repr__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Default presentation method for relative quantiles</span>
 <span class="sd">        rating digraph instance.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="kn">from</span> <span class="nn">decimal</span> <span class="kn">import</span> <span class="n">Decimal</span>
+        <span class="kn">from</span><span class="w"> </span><span class="nn">decimal</span><span class="w"> </span><span class="kn">import</span> <span class="n">Decimal</span>
         <span class="n">repString</span> <span class="o">=</span>  <span class="s1">&#39;*-----  Object instance description -----------*</span><span class="se">\n</span><span class="s1">&#39;</span>
         <span class="n">repString</span> <span class="o">+=</span> <span class="s1">&#39;Instance class      : </span><span class="si">%s</span><span class="se">\n</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="bp">self</span><span class="o">.</span><span class="vm">__class__</span><span class="o">.</span><span class="vm">__name__</span>
         <span class="n">repString</span> <span class="o">+=</span> <span class="s1">&#39;Instance name       : </span><span class="si">%s</span><span class="se">\n</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="bp">self</span><span class="o">.</span><span class="n">name</span>
@@ -199,7 +199,7 @@
     
 <div class="viewcode-block" id="RatingDigraph.exportRatingBySortingGraphViz">
 <a class="viewcode-back" href="../techDoc.html#ratingDigraphs.RatingDigraph.exportRatingBySortingGraphViz">[docs]</a>
-    <span class="k">def</span> <span class="nf">exportRatingBySortingGraphViz</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">fileName</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span><span class="n">direction</span><span class="o">=</span><span class="s1">&#39;decreasing&#39;</span><span class="p">,</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">exportRatingBySortingGraphViz</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">fileName</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span><span class="n">direction</span><span class="o">=</span><span class="s1">&#39;decreasing&#39;</span><span class="p">,</span>
                        <span class="n">Comments</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span><span class="n">graphType</span><span class="o">=</span><span class="s1">&#39;png&#39;</span><span class="p">,</span><span class="n">bgcolor</span><span class="o">=</span><span class="s1">&#39;cornsilk&#39;</span><span class="p">,</span>
                        <span class="n">graphSize</span><span class="o">=</span><span class="s1">&#39;7,7&#39;</span><span class="p">,</span>
                        <span class="n">fontSize</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span>
@@ -209,7 +209,7 @@
 <span class="sd">        export GraphViz dot file for weak order (Hasse diagram) drawing</span>
 <span class="sd">        filtering from SortingDigraph instances.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="kn">from</span> <span class="nn">copy</span> <span class="kn">import</span> <span class="n">deepcopy</span>
+        <span class="kn">from</span><span class="w"> </span><span class="nn">copy</span><span class="w"> </span><span class="kn">import</span> <span class="n">deepcopy</span>
 
         <span class="c1"># backup actions and relation        </span>
         <span class="n">relationBkp</span> <span class="o">=</span> <span class="n">deepcopy</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">relation</span><span class="p">)</span>
@@ -229,7 +229,7 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">actions</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_getActionsKeys</span><span class="p">()</span>
         <span class="k">if</span> <span class="n">Debug</span><span class="p">:</span>
             <span class="nb">print</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">isTransitive</span><span class="p">())</span>
-        <span class="kn">from</span> <span class="nn">transitiveDigraphs</span> <span class="kn">import</span> <span class="n">TransitiveDigraph</span>
+        <span class="kn">from</span><span class="w"> </span><span class="nn">transitiveDigraphs</span><span class="w"> </span><span class="kn">import</span> <span class="n">TransitiveDigraph</span>
         <span class="n">TransitiveDigraph</span><span class="o">.</span><span class="n">exportGraphViz</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span>
                                          <span class="n">fileName</span><span class="o">=</span><span class="n">fileName</span><span class="p">,</span>
                                          <span class="n">direction</span><span class="o">=</span><span class="n">direction</span><span class="p">,</span>
@@ -248,7 +248,7 @@
 <span class="c1">#------------</span>
 <div class="viewcode-block" id="RatingDigraph.exportRatingByRankingGraphViz">
 <a class="viewcode-back" href="../techDoc.html#ratingDigraphs.RatingDigraph.exportRatingByRankingGraphViz">[docs]</a>
-    <span class="k">def</span> <span class="nf">exportRatingByRankingGraphViz</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">fileName</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">exportRatingByRankingGraphViz</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">fileName</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
                              <span class="n">Comments</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span><span class="n">graphType</span><span class="o">=</span><span class="s1">&#39;png&#39;</span><span class="p">,</span>
                              <span class="n">graphSize</span><span class="o">=</span><span class="s1">&#39;7,7&#39;</span><span class="p">,</span>
                              <span class="n">fontSize</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span><span class="n">bgcolor</span><span class="o">=</span><span class="s1">&#39;cornsilk&#39;</span><span class="p">,</span>
@@ -256,11 +256,11 @@
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        export GraphViz dot file for Hasse diagram drawing filtering.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="kn">import</span> <span class="nn">os</span>
-        <span class="kn">from</span> <span class="nn">copy</span> <span class="kn">import</span> <span class="n">deepcopy</span>
-        <span class="kn">from</span> <span class="nn">decimal</span> <span class="kn">import</span> <span class="n">Decimal</span>
+        <span class="kn">import</span><span class="w"> </span><span class="nn">os</span>
+        <span class="kn">from</span><span class="w"> </span><span class="nn">copy</span><span class="w"> </span><span class="kn">import</span> <span class="n">deepcopy</span>
+        <span class="kn">from</span><span class="w"> </span><span class="nn">decimal</span><span class="w"> </span><span class="kn">import</span> <span class="n">Decimal</span>
             
-        <span class="k">def</span> <span class="nf">_safeName</span><span class="p">(</span><span class="n">t0</span><span class="p">,</span><span class="n">QuantileName</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+        <span class="k">def</span><span class="w"> </span><span class="nf">_safeName</span><span class="p">(</span><span class="n">t0</span><span class="p">,</span><span class="n">QuantileName</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
             <span class="k">if</span> <span class="n">QuantileName</span><span class="p">:</span> <span class="c1"># graphviz node names must not start with a digit</span>
                 <span class="n">t0</span> <span class="o">=</span> <span class="n">t0</span><span class="p">[::</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>   
             <span class="n">t</span> <span class="o">=</span> <span class="n">t0</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="n">sep</span><span class="o">=</span><span class="s2">&quot;-&quot;</span><span class="p">)</span>
@@ -398,7 +398,7 @@
 
 <div class="viewcode-block" id="RatingDigraph.showSortingCharacteristics">
 <a class="viewcode-back" href="../techDoc.html#ratingDigraphs.RatingDigraph.showSortingCharacteristics">[docs]</a>
-    <span class="k">def</span> <span class="nf">showSortingCharacteristics</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">action</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">showSortingCharacteristics</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">action</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Renders a bipolar-valued bi-dictionary relation</span>
 <span class="sd">        representing the degree of credibility of the</span>
@@ -438,7 +438,7 @@
 
 <div class="viewcode-block" id="RatingDigraph.showHTMLRatingByQuantileSorting">
 <a class="viewcode-back" href="../techDoc.html#ratingDigraphs.RatingDigraph.showHTMLRatingByQuantileSorting">[docs]</a>
-    <span class="k">def</span> <span class="nf">showHTMLRatingByQuantileSorting</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">title</span><span class="o">=</span><span class="s1">&#39;Quantiles Preordering&#39;</span><span class="p">,</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">showHTMLRatingByQuantileSorting</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">title</span><span class="o">=</span><span class="s1">&#39;Quantiles Preordering&#39;</span><span class="p">,</span>
                                  <span class="n">Descending</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span><span class="n">strategy</span><span class="o">=</span><span class="s1">&#39;average&#39;</span><span class="p">,</span>
                                  <span class="n">htmlFileName</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
@@ -450,13 +450,13 @@
 <span class="sd">            * **pessimistic**, following the lower quantile limits.</span>
 <span class="sd">            </span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="kn">import</span> <span class="nn">webbrowser</span>
+        <span class="kn">import</span><span class="w"> </span><span class="nn">webbrowser</span>
         <span class="k">if</span> <span class="n">htmlFileName</span> <span class="o">==</span> <span class="kc">None</span><span class="p">:</span>
-            <span class="kn">from</span> <span class="nn">tempfile</span> <span class="kn">import</span> <span class="n">NamedTemporaryFile</span>
+            <span class="kn">from</span><span class="w"> </span><span class="nn">tempfile</span><span class="w"> </span><span class="kn">import</span> <span class="n">NamedTemporaryFile</span>
             <span class="n">fileName</span> <span class="o">=</span> <span class="p">(</span><span class="n">NamedTemporaryFile</span><span class="p">(</span><span class="n">suffix</span><span class="o">=</span><span class="s1">&#39;.html&#39;</span><span class="p">,</span>
                                            <span class="n">delete</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span><span class="nb">dir</span><span class="o">=</span><span class="s1">&#39;.&#39;</span><span class="p">))</span><span class="o">.</span><span class="n">name</span>
         <span class="k">else</span><span class="p">:</span>
-            <span class="kn">from</span> <span class="nn">os</span> <span class="kn">import</span> <span class="n">getcwd</span>
+            <span class="kn">from</span><span class="w"> </span><span class="nn">os</span><span class="w"> </span><span class="kn">import</span> <span class="n">getcwd</span>
             <span class="n">fileName</span> <span class="o">=</span> <span class="n">getcwd</span><span class="p">()</span><span class="o">+</span><span class="s1">&#39;/&#39;</span><span class="o">+</span><span class="n">htmlFileName</span>
         <span class="n">fo</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="n">fileName</span><span class="p">,</span><span class="s1">&#39;w&#39;</span><span class="p">)</span>
         <span class="n">fo</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_computeQuantileOrdering</span><span class="p">(</span><span class="n">Descending</span><span class="o">=</span><span class="n">Descending</span><span class="p">,</span>
@@ -472,17 +472,17 @@
 
 <div class="viewcode-block" id="RatingDigraph.showHTMLSorting">
 <a class="viewcode-back" href="../techDoc.html#ratingDigraphs.RatingDigraph.showHTMLSorting">[docs]</a>
-    <span class="k">def</span> <span class="nf">showHTMLSorting</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">Reverse</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span><span class="n">htmlFileName</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">showHTMLSorting</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">Reverse</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span><span class="n">htmlFileName</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        shows the html version of the sorting result in a browser window.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="kn">import</span> <span class="nn">webbrowser</span>
+        <span class="kn">import</span><span class="w"> </span><span class="nn">webbrowser</span>
         <span class="k">if</span> <span class="n">htmlFileName</span> <span class="o">==</span> <span class="kc">None</span><span class="p">:</span>
-            <span class="kn">from</span> <span class="nn">tempfile</span> <span class="kn">import</span> <span class="n">NamedTemporaryFile</span>
+            <span class="kn">from</span><span class="w"> </span><span class="nn">tempfile</span><span class="w"> </span><span class="kn">import</span> <span class="n">NamedTemporaryFile</span>
             <span class="n">fileName</span> <span class="o">=</span> <span class="p">(</span><span class="n">NamedTemporaryFile</span><span class="p">(</span><span class="n">suffix</span><span class="o">=</span><span class="s1">&#39;.html&#39;</span><span class="p">,</span>
                                            <span class="n">delete</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span><span class="nb">dir</span><span class="o">=</span><span class="s1">&#39;.&#39;</span><span class="p">))</span><span class="o">.</span><span class="n">name</span>
         <span class="k">else</span><span class="p">:</span>
-            <span class="kn">from</span> <span class="nn">os</span> <span class="kn">import</span> <span class="n">getcwd</span>
+            <span class="kn">from</span><span class="w"> </span><span class="nn">os</span><span class="w"> </span><span class="kn">import</span> <span class="n">getcwd</span>
             <span class="n">fileName</span> <span class="o">=</span> <span class="n">getcwd</span><span class="p">()</span><span class="o">+</span><span class="s1">&#39;/&#39;</span><span class="o">+</span><span class="n">htmlFileName</span>
         <span class="n">fo</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="n">fileName</span><span class="p">,</span><span class="s1">&#39;w&#39;</span><span class="p">)</span>
         <span class="n">fo</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">showSorting</span><span class="p">(</span><span class="n">Reverse</span><span class="o">=</span><span class="n">Reverse</span><span class="p">,</span><span class="n">isReturningHTML</span><span class="o">=</span><span class="kc">True</span><span class="p">))</span>
@@ -494,7 +494,7 @@
 
 <div class="viewcode-block" id="RatingDigraph.showSorting">
 <a class="viewcode-back" href="../techDoc.html#ratingDigraphs.RatingDigraph.showSorting">[docs]</a>
-    <span class="k">def</span> <span class="nf">showSorting</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">Reverse</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span><span class="n">isReturningHTML</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span><span class="n">Debug</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">showSorting</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">Reverse</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span><span class="n">isReturningHTML</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span><span class="n">Debug</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Shows sorting results in decreasing or increasing (Reverse=False)</span>
 <span class="sd">        order of the categories. If isReturningHTML is True (default = False)</span>
@@ -502,7 +502,7 @@
 <span class="sd">        </span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="c1">#from string import replace</span>
-        <span class="kn">from</span> <span class="nn">copy</span> <span class="kn">import</span> <span class="n">copy</span><span class="p">,</span> <span class="n">deepcopy</span>
+        <span class="kn">from</span><span class="w"> </span><span class="nn">copy</span><span class="w"> </span><span class="kn">import</span> <span class="n">copy</span><span class="p">,</span> <span class="n">deepcopy</span>
 
         <span class="k">try</span><span class="p">:</span>
             <span class="n">categoryContent</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">relativeCategoryContent</span>
@@ -544,13 +544,13 @@
 
 <div class="viewcode-block" id="RatingDigraph.showAllQuantiles">
 <a class="viewcode-back" href="../techDoc.html#ratingDigraphs.RatingDigraph.showAllQuantiles">[docs]</a>
-    <span class="k">def</span> <span class="nf">showAllQuantiles</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">showAllQuantiles</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">showCriteriaQuantileLimits</span><span class="p">()</span></div>
 
         
 <div class="viewcode-block" id="RatingDigraph.showCriteriaQuantileLimits">
 <a class="viewcode-back" href="../techDoc.html#ratingDigraphs.RatingDigraph.showCriteriaQuantileLimits">[docs]</a>
-    <span class="k">def</span> <span class="nf">showCriteriaQuantileLimits</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">ByCriterion</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">showCriteriaQuantileLimits</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">ByCriterion</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Shows category minimum and maximum limits for each criterion.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
@@ -591,13 +591,13 @@
 
 <div class="viewcode-block" id="RatingDigraph.showHTMLPerformanceHeatmap">
 <a class="viewcode-back" href="../techDoc.html#ratingDigraphs.RatingDigraph.showHTMLPerformanceHeatmap">[docs]</a>
-    <span class="k">def</span> <span class="nf">showHTMLPerformanceHeatmap</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">showHTMLPerformanceHeatmap</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Please use the showHTMLRatingHeatmap() here !!&#39;</span><span class="p">)</span></div>
 
     
 <div class="viewcode-block" id="RatingDigraph.showHTMLRatingHeatmap">
 <a class="viewcode-back" href="../techDoc.html#ratingDigraphs.RatingDigraph.showHTMLRatingHeatmap">[docs]</a>
-    <span class="k">def</span> <span class="nf">showHTMLRatingHeatmap</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="c1">#actionsList=None,</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">showHTMLRatingHeatmap</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="c1">#actionsList=None,</span>
                                    <span class="n">WithActionNames</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
                                    <span class="c1">#criteriaList=None,</span>
                                    <span class="n">colorLevels</span><span class="o">=</span><span class="mi">7</span><span class="p">,</span>
@@ -622,13 +622,13 @@
 <span class="sd">              - Computing the marginal correlations may be boosted with Threading = True, if multiple parallel computing cores are available.</span>
 <span class="sd">        </span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="kn">import</span> <span class="nn">webbrowser</span>
+        <span class="kn">import</span><span class="w"> </span><span class="nn">webbrowser</span>
         <span class="k">if</span> <span class="n">htmlFileName</span> <span class="o">==</span> <span class="kc">None</span><span class="p">:</span>
-            <span class="kn">from</span> <span class="nn">tempfile</span> <span class="kn">import</span> <span class="n">NamedTemporaryFile</span>
+            <span class="kn">from</span><span class="w"> </span><span class="nn">tempfile</span><span class="w"> </span><span class="kn">import</span> <span class="n">NamedTemporaryFile</span>
             <span class="n">fileName</span> <span class="o">=</span> <span class="p">(</span><span class="n">NamedTemporaryFile</span><span class="p">(</span><span class="n">suffix</span><span class="o">=</span><span class="s1">&#39;.html&#39;</span><span class="p">,</span>
                                            <span class="n">delete</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span><span class="nb">dir</span><span class="o">=</span><span class="s1">&#39;.&#39;</span><span class="p">))</span><span class="o">.</span><span class="n">name</span>
         <span class="k">else</span><span class="p">:</span>
-            <span class="kn">from</span> <span class="nn">os</span> <span class="kn">import</span> <span class="n">getcwd</span>
+            <span class="kn">from</span><span class="w"> </span><span class="nn">os</span><span class="w"> </span><span class="kn">import</span> <span class="n">getcwd</span>
             <span class="n">fileName</span> <span class="o">=</span> <span class="n">getcwd</span><span class="p">()</span><span class="o">+</span><span class="s1">&#39;/&#39;</span><span class="o">+</span><span class="n">htmlFileName</span>
         <span class="n">fo</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="n">fileName</span><span class="p">,</span><span class="s1">&#39;w&#39;</span><span class="p">)</span>
         <span class="k">if</span> <span class="n">pageTitle</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
@@ -653,7 +653,7 @@
 
 <div class="viewcode-block" id="RatingDigraph.showRatingByQuantilesRanking">
 <a class="viewcode-back" href="../techDoc.html#ratingDigraphs.RatingDigraph.showRatingByQuantilesRanking">[docs]</a>
-    <span class="k">def</span> <span class="nf">showRatingByQuantilesRanking</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">Descending</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span><span class="n">Debug</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">showRatingByQuantilesRanking</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">Descending</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span><span class="n">Debug</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Show rating-by-ranking result.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
@@ -685,18 +685,18 @@
 
 <div class="viewcode-block" id="RatingDigraph.showRatingByQuantilesSorting">
 <a class="viewcode-back" href="../techDoc.html#ratingDigraphs.RatingDigraph.showRatingByQuantilesSorting">[docs]</a>
-    <span class="k">def</span> <span class="nf">showRatingByQuantilesSorting</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">strategy</span><span class="o">=</span><span class="s1">&#39;average&#39;</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">showRatingByQuantilesSorting</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">strategy</span><span class="o">=</span><span class="s1">&#39;average&#39;</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Dummy show method for the commenting _computeQuantileOrdering() method.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="kn">from</span> <span class="nn">decimal</span> <span class="kn">import</span> <span class="n">Decimal</span>
+        <span class="kn">from</span><span class="w"> </span><span class="nn">decimal</span><span class="w"> </span><span class="kn">import</span> <span class="n">Decimal</span>
         <span class="k">if</span> <span class="n">strategy</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
             <span class="n">strategy</span> <span class="o">=</span> <span class="s1">&#39;average&#39;</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_computeQuantileOrdering</span><span class="p">(</span><span class="n">strategy</span><span class="o">=</span><span class="n">strategy</span><span class="p">,</span><span class="n">Comments</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span></div>
 
 
-    <span class="k">def</span> <span class="nf">computeRatingByRankingCorrelation</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">Debug</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
-        <span class="kn">from</span> <span class="nn">decimal</span> <span class="kn">import</span> <span class="n">Decimal</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">computeRatingByRankingCorrelation</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">Debug</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+        <span class="kn">from</span><span class="w"> </span><span class="nn">decimal</span><span class="w"> </span><span class="kn">import</span> <span class="n">Decimal</span>
         <span class="n">E</span> <span class="o">=</span> <span class="n">Decimal</span><span class="p">(</span><span class="s1">&#39;0&#39;</span><span class="p">)</span>
         <span class="n">D</span> <span class="o">=</span> <span class="n">Decimal</span><span class="p">(</span><span class="s1">&#39;0&#39;</span><span class="p">)</span>
         <span class="n">ratingRelation</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_computeRatingRelation</span><span class="p">()</span>
@@ -740,7 +740,7 @@
 
 <span class="c1">#######  private genric class methods</span>
         
-    <span class="k">def</span> <span class="nf">_getActionsKeys</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">action</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span><span class="n">withoutProfiles</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">_getActionsKeys</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">action</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span><span class="n">withoutProfiles</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        extract normal actions keys()</span>
 <span class="sd">        &quot;&quot;&quot;</span>
@@ -755,7 +755,7 @@
             <span class="k">return</span> <span class="nb">set</span><span class="p">([</span><span class="n">action</span><span class="p">])</span>
         
         
-    <span class="k">def</span> <span class="nf">_computeCategoryContents</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">Reverse</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">_computeCategoryContents</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">Reverse</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Computes the sorting results per category.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
@@ -777,13 +777,13 @@
         
         <span class="k">return</span> <span class="n">categoryContent</span>
 
-    <span class="k">def</span> <span class="nf">_computeLimitingQuantiles</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">g</span><span class="p">,</span><span class="n">Debug</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span><span class="n">PrefThresholds</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">_computeLimitingQuantiles</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">g</span><span class="p">,</span><span class="n">Debug</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span><span class="n">PrefThresholds</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Renders the list of limiting quantiles on criteria g</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="kn">from</span> <span class="nn">math</span> <span class="kn">import</span> <span class="n">floor</span>
-        <span class="kn">from</span> <span class="nn">copy</span> <span class="kn">import</span> <span class="n">copy</span><span class="p">,</span> <span class="n">deepcopy</span>
-        <span class="kn">from</span> <span class="nn">decimal</span> <span class="kn">import</span> <span class="n">Decimal</span>
+        <span class="kn">from</span><span class="w"> </span><span class="nn">math</span><span class="w"> </span><span class="kn">import</span> <span class="n">floor</span>
+        <span class="kn">from</span><span class="w"> </span><span class="nn">copy</span><span class="w"> </span><span class="kn">import</span> <span class="n">copy</span><span class="p">,</span> <span class="n">deepcopy</span>
+        <span class="kn">from</span><span class="w"> </span><span class="nn">decimal</span><span class="w"> </span><span class="kn">import</span> <span class="n">Decimal</span>
         
         <span class="n">LowerClosed</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">criteriaCategoryLimits</span><span class="p">[</span><span class="s1">&#39;LowerClosed&#39;</span><span class="p">]</span>
         <span class="n">LowerClosed</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">LowerClosed</span>
@@ -879,12 +879,12 @@
             <span class="nb">print</span><span class="p">(</span><span class="n">g</span><span class="p">,</span><span class="n">LowerClosed</span><span class="p">,</span><span class="bp">self</span><span class="o">.</span><span class="n">criteria</span><span class="p">[</span><span class="n">g</span><span class="p">][</span><span class="s1">&#39;preferenceDirection&#39;</span><span class="p">],</span><span class="n">gQuantiles</span><span class="p">)</span>
         <span class="k">return</span> <span class="n">gQuantiles</span>
 
-    <span class="k">def</span> <span class="nf">_computePreorderRelation</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">preorder</span><span class="p">,</span><span class="n">Normalized</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span><span class="n">Debug</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">_computePreorderRelation</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">preorder</span><span class="p">,</span><span class="n">Normalized</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span><span class="n">Debug</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Renders the bipolar-valued relation obtained from</span>
 <span class="sd">        a given preordering in increasing levels (list of lists) result.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="kn">from</span> <span class="nn">decimal</span> <span class="kn">import</span> <span class="n">Decimal</span>
+        <span class="kn">from</span><span class="w"> </span><span class="nn">decimal</span><span class="w"> </span><span class="kn">import</span> <span class="n">Decimal</span>
         
         <span class="k">if</span> <span class="n">Normalized</span><span class="p">:</span>
             <span class="n">Max</span> <span class="o">=</span> <span class="n">Decimal</span><span class="p">(</span><span class="s1">&#39;1&#39;</span><span class="p">)</span>
@@ -920,7 +920,7 @@
             <span class="n">currentActions</span> <span class="o">=</span> <span class="n">currentActions</span> <span class="o">-</span> <span class="nb">set</span><span class="p">(</span><span class="n">eqcl</span><span class="p">)</span>
         <span class="k">return</span> <span class="n">preorderRelation</span>
 
-    <span class="k">def</span> <span class="nf">_computeQuantileOrdering</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">strategy</span><span class="o">=</span><span class="s1">&#39;average&#39;</span><span class="p">,</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">_computeQuantileOrdering</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">strategy</span><span class="o">=</span><span class="s1">&#39;average&#39;</span><span class="p">,</span>
                                 <span class="n">Descending</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
                                 <span class="n">HTML</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
                                 <span class="n">title</span><span class="o">=</span><span class="s1">&#39;Quantiles Preordering&#39;</span><span class="p">,</span>
@@ -933,7 +933,7 @@
 <span class="sd">              in the uppest, the lowest or the average potential quantile.</span>
 <span class="sd">        </span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="kn">from</span> <span class="nn">operator</span> <span class="kn">import</span> <span class="n">itemgetter</span>
+        <span class="kn">from</span><span class="w"> </span><span class="nn">operator</span><span class="w"> </span><span class="kn">import</span> <span class="n">itemgetter</span>
         <span class="k">if</span> <span class="n">strategy</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
             <span class="n">strategy</span> <span class="o">=</span> <span class="s1">&#39;optimistic&#39;</span>
         <span class="k">if</span> <span class="n">HTML</span><span class="p">:</span>
@@ -1064,12 +1064,12 @@
         <span class="k">else</span><span class="p">:</span>
             <span class="k">return</span> <span class="n">weakOrdering</span>
             
-    <span class="k">def</span> <span class="nf">_computeQuantilesFrequencies</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">x</span><span class="p">,</span><span class="n">Debug</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">_computeQuantilesFrequencies</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">x</span><span class="p">,</span><span class="n">Debug</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        renders the quantiles frequencies</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="kn">from</span> <span class="nn">math</span> <span class="kn">import</span> <span class="n">floor</span>
-        <span class="kn">from</span> <span class="nn">decimal</span> <span class="kn">import</span> <span class="n">Decimal</span>
+        <span class="kn">from</span><span class="w"> </span><span class="nn">math</span><span class="w"> </span><span class="kn">import</span> <span class="n">floor</span>
+        <span class="kn">from</span><span class="w"> </span><span class="nn">decimal</span><span class="w"> </span><span class="kn">import</span> <span class="n">Decimal</span>
         
         <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="nb">int</span><span class="p">):</span>
             <span class="n">n</span> <span class="o">=</span> <span class="n">x</span>
@@ -1116,11 +1116,11 @@
         <span class="c1">#self.name = &#39;sorting_with_%d-tile_limits&#39; % n</span>
         <span class="k">return</span> <span class="n">quantilesFrequencies</span>
 
-    <span class="k">def</span> <span class="nf">_computeQuantilesRatingByRanking</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">Debug</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">_computeQuantilesRatingByRanking</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">Debug</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">          Renders an ordered dictionary of non empty quantiles in ascending order.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="kn">from</span> <span class="nn">collections</span> <span class="kn">import</span> <span class="n">OrderedDict</span>
+        <span class="kn">from</span><span class="w"> </span><span class="nn">collections</span><span class="w"> </span><span class="kn">import</span> <span class="n">OrderedDict</span>
         
         <span class="n">ranking</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">actionsRanking</span><span class="p">)</span>
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">LowerClosed</span><span class="p">:</span> <span class="c1"># lower closed quantiles</span>
@@ -1153,7 +1153,7 @@
             <span class="nb">print</span><span class="p">(</span><span class="n">ratingCategories</span><span class="p">)</span>
         <span class="k">return</span> <span class="n">ratingCategories</span>
 
-    <span class="k">def</span> <span class="nf">_computeRatingRelation</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">Debug</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span><span class="n">StoreRating</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">_computeRatingRelation</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">Debug</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span><span class="n">StoreRating</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Computes a bipolar rating relation using a pre-ranking (list of lists)</span>
 <span class="sd">        of the self-actions (self.newActions + self.profiles).</span>
@@ -1188,7 +1188,7 @@
             <span class="bp">self</span><span class="o">.</span><span class="n">ratingRelation</span> <span class="o">=</span> <span class="n">ratingRelation</span>
         <span class="k">return</span> <span class="n">ratingRelation</span>
 
-    <span class="k">def</span> <span class="nf">_computeSortingRelation</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">categoryContents</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span><span class="n">Debug</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">_computeSortingRelation</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">categoryContents</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span><span class="n">Debug</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        constructs a bipolar sorting relation using the category contents.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
@@ -1228,7 +1228,7 @@
             <span class="n">currActions</span> <span class="o">=</span> <span class="n">currActions</span> <span class="o">-</span> <span class="n">ibch</span>
         <span class="k">return</span> <span class="n">sortingRelation</span>
     
-    <span class="k">def</span> <span class="nf">_computeSortingCharacteristics</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">action</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">Comments</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">_computeSortingCharacteristics</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">action</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">Comments</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Renders a bipolar-valued bi-dictionary relation</span>
 <span class="sd">        representing the degree of credibility of the</span>
@@ -1301,7 +1301,7 @@
 
         <span class="k">return</span> <span class="n">sorting</span>
 
-    <span class="k">def</span> <span class="nf">_htmlRatingHeatmap</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">argCriteriaList</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">_htmlRatingHeatmap</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">argCriteriaList</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
                                <span class="n">argActionsList</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
                                <span class="n">WithActionNames</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
                                <span class="c1">#quantiles=None,</span>
@@ -1322,8 +1322,8 @@
 <span class="sd">        See the corresponding :py:meth:`perfTabs.showHTMLPerformanceHeatMap` method.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;see browser&#39;</span><span class="p">)</span>
-        <span class="kn">from</span> <span class="nn">decimal</span> <span class="kn">import</span> <span class="n">Decimal</span>
-        <span class="kn">from</span> <span class="nn">operator</span> <span class="kn">import</span> <span class="n">itemgetter</span>
+        <span class="kn">from</span><span class="w"> </span><span class="nn">decimal</span><span class="w"> </span><span class="kn">import</span> <span class="n">Decimal</span>
+        <span class="kn">from</span><span class="w"> </span><span class="nn">operator</span><span class="w"> </span><span class="kn">import</span> <span class="n">itemgetter</span>
         <span class="n">brewerRdYlGn9Colors</span> <span class="o">=</span> <span class="p">[(</span><span class="n">Decimal</span><span class="p">(</span><span class="s1">&#39;0.1111&#39;</span><span class="p">),</span><span class="s1">&#39;&quot;#D53E4F&quot;&#39;</span><span class="p">),</span>
                                <span class="p">(</span><span class="n">Decimal</span><span class="p">(</span><span class="s1">&#39;0.2222&#39;</span><span class="p">),</span><span class="s1">&#39;&quot;#F46D43&quot;&#39;</span><span class="p">),</span>
                                <span class="p">(</span><span class="n">Decimal</span><span class="p">(</span><span class="s1">&#39;0.3333&#39;</span><span class="p">),</span><span class="s1">&#39;&quot;#FDAE61&quot;&#39;</span><span class="p">),</span>
@@ -1529,7 +1529,7 @@
         <span class="n">html</span> <span class="o">+=</span> <span class="s1">&#39;&lt;/body&gt;&lt;/html&gt;&#39;</span>
         <span class="k">return</span> <span class="n">html</span>
 
-    <span class="k">def</span> <span class="nf">_orderedCategoryKeys</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">Reverse</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">_orderedCategoryKeys</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">Reverse</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Renders the ordered list of category keys</span>
 <span class="sd">        based on self.categories[&#39;order&#39;] numeric values.</span>
@@ -1539,7 +1539,7 @@
             <span class="n">orderedCategoryKeys</span><span class="o">.</span><span class="n">reverse</span><span class="p">()</span>
         <span class="k">return</span> <span class="n">orderedCategoryKeys</span>
 
-    <span class="k">def</span> <span class="nf">_showActionCategories</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">action</span><span class="p">,</span><span class="n">Debug</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span><span class="n">Comments</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">_showActionCategories</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">action</span><span class="p">,</span><span class="n">Debug</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span><span class="n">Comments</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Renders the union of categories in which the given action is sorted positively or null into.</span>
 <span class="sd">        Returns a tuple : action, lowest category key, highest category key, membership credibility !</span>
@@ -1579,10 +1579,10 @@
 
 
 <span class="c1">#########   relative quantiles raking</span>
-<span class="kn">from</span> <span class="nn">perfTabs</span> <span class="kn">import</span> <span class="n">PerformanceTableau</span> 
+<span class="kn">from</span><span class="w"> </span><span class="nn">perfTabs</span><span class="w"> </span><span class="kn">import</span> <span class="n">PerformanceTableau</span> 
 <div class="viewcode-block" id="RatingByRelativeQuantilesDigraph">
 <a class="viewcode-back" href="../techDoc.html#ratingDigraphs.RatingByRelativeQuantilesDigraph">[docs]</a>
-<span class="k">class</span> <span class="nc">RatingByRelativeQuantilesDigraph</span><span class="p">(</span><span class="n">RatingDigraph</span><span class="p">,</span><span class="n">PerformanceTableau</span><span class="p">):</span>
+<span class="k">class</span><span class="w"> </span><span class="nc">RatingByRelativeQuantilesDigraph</span><span class="p">(</span><span class="n">RatingDigraph</span><span class="p">,</span><span class="n">PerformanceTableau</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Constructor for a relative quantiles rating-by sorting and rating-by-ranking digraph.</span>
 <span class="sd">    See the :py:class:`sortingDigraphs.QuantilesSortingDigraph` class.</span>
@@ -1653,7 +1653,7 @@
 
 <span class="sd">    &quot;&quot;&quot;</span>
 
-    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">argPerfTab</span><span class="p">,</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">argPerfTab</span><span class="p">,</span>
                  <span class="n">quantiles</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
                  <span class="n">LowerClosed</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
                  <span class="n">outrankingModel</span><span class="o">=</span><span class="s1">&#39;standard&#39;</span><span class="p">,</span>
@@ -1667,13 +1667,13 @@
                  <span class="n">CopyPerfTab</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
                  <span class="n">Debug</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
         
-        <span class="kn">from</span> <span class="nn">time</span> <span class="kn">import</span> <span class="n">time</span>
-        <span class="kn">from</span> <span class="nn">copy</span> <span class="kn">import</span> <span class="n">copy</span><span class="p">,</span> <span class="n">deepcopy</span>
+        <span class="kn">from</span><span class="w"> </span><span class="nn">time</span><span class="w"> </span><span class="kn">import</span> <span class="n">time</span>
+        <span class="kn">from</span><span class="w"> </span><span class="nn">copy</span><span class="w"> </span><span class="kn">import</span> <span class="n">copy</span><span class="p">,</span> <span class="n">deepcopy</span>
         <span class="k">if</span> <span class="n">CopyPerfTab</span><span class="p">:</span>
             <span class="n">copy2self</span> <span class="o">=</span> <span class="n">deepcopy</span>
         <span class="k">else</span><span class="p">:</span>
             <span class="n">copy2self</span> <span class="o">=</span> <span class="n">copy</span>
-        <span class="kn">from</span> <span class="nn">decimal</span> <span class="kn">import</span> <span class="n">Decimal</span>
+        <span class="kn">from</span><span class="w"> </span><span class="nn">decimal</span><span class="w"> </span><span class="kn">import</span> <span class="n">Decimal</span>
 
         <span class="c1"># import the performance tableau</span>
         <span class="n">tt</span> <span class="o">=</span> <span class="n">time</span><span class="p">()</span>
@@ -1686,7 +1686,7 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="s1">&#39;relative_rating_</span><span class="si">%s</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="n">perfTab</span><span class="o">.</span><span class="n">name</span><span class="p">)</span> 
 
         <span class="c1"># normalize the actions as a dictionary construct</span>
-        <span class="kn">from</span> <span class="nn">collections</span> <span class="kn">import</span> <span class="n">OrderedDict</span>
+        <span class="kn">from</span><span class="w"> </span><span class="nn">collections</span><span class="w"> </span><span class="kn">import</span> <span class="n">OrderedDict</span>
         <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">perfTab</span><span class="o">.</span><span class="n">actions</span><span class="p">,</span><span class="nb">list</span><span class="p">):</span>
             <span class="n">actions</span> <span class="o">=</span> <span class="n">OrderedDict</span><span class="p">()</span>
             <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">perfTab</span><span class="o">.</span><span class="n">actions</span><span class="p">:</span>
@@ -1700,7 +1700,7 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">actionsOrig</span> <span class="o">=</span> <span class="n">actionsOrig</span>
 
         <span class="c1">#  normalizing the performance tableau</span>
-        <span class="kn">from</span> <span class="nn">perfTabs</span> <span class="kn">import</span> <span class="n">NormalizedPerformanceTableau</span>
+        <span class="kn">from</span><span class="w"> </span><span class="nn">perfTabs</span><span class="w"> </span><span class="kn">import</span> <span class="n">NormalizedPerformanceTableau</span>
         <span class="n">normPerfTab</span> <span class="o">=</span> <span class="n">NormalizedPerformanceTableau</span><span class="p">(</span><span class="n">perfTab</span><span class="p">)</span>
 
         <span class="c1"># instantiating the performance tableau part</span>
@@ -1820,12 +1820,12 @@
 <span class="c1">##        else:</span>
 <span class="c1">##            self.nbrThreads = nbrCores</span>
         <span class="k">if</span> <span class="n">outrankingModel</span> <span class="o">==</span> <span class="s1">&#39;mp&#39;</span><span class="p">:</span>
-            <span class="kn">import</span> <span class="nn">os</span>
+            <span class="kn">import</span><span class="w"> </span><span class="nn">os</span>
             <span class="c1"># from perfTabs import PerformanceTableau</span>
             <span class="c1"># PerformanceTableau.save(self,&#39;sharedPerfTab&#39;)</span>
             <span class="c1"># while not os.path.exists(&#39;./sharedPerfTab.py&#39;):</span>
             <span class="c1">#     pass</span>
-            <span class="kn">from</span> <span class="nn">mpOutrankingDigraphs</span> <span class="kn">import</span> <span class="n">MPBipolarOutrankingDigraph</span>
+            <span class="kn">from</span><span class="w"> </span><span class="nn">mpOutrankingDigraphs</span><span class="w"> </span><span class="kn">import</span> <span class="n">MPBipolarOutrankingDigraph</span>
             <span class="n">g</span> <span class="o">=</span> <span class="n">MPBipolarOutrankingDigraph</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">Normalized</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
                                            <span class="n">startMethod</span><span class="o">=</span><span class="n">startMethod</span><span class="p">,</span>
                                            <span class="n">nbrCores</span><span class="o">=</span><span class="n">nbrCores</span><span class="p">)</span>
@@ -1833,7 +1833,7 @@
             <span class="bp">self</span><span class="o">.</span><span class="n">relation</span> <span class="o">=</span> <span class="n">copy2self</span><span class="p">(</span><span class="n">g</span><span class="o">.</span><span class="n">relation</span><span class="p">)</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">valuationdomain</span> <span class="o">=</span> <span class="n">copy2self</span><span class="p">(</span><span class="n">g</span><span class="o">.</span><span class="n">valuationdomain</span><span class="p">)</span>
         <span class="k">if</span> <span class="n">outrankingModel</span> <span class="o">==</span> <span class="s1">&#39;standard&#39;</span><span class="p">:</span>
-            <span class="kn">from</span> <span class="nn">outrankingDigraphs</span> <span class="kn">import</span> <span class="n">BipolarOutrankingDigraph</span>
+            <span class="kn">from</span><span class="w"> </span><span class="nn">outrankingDigraphs</span><span class="w"> </span><span class="kn">import</span> <span class="n">BipolarOutrankingDigraph</span>
             <span class="n">g</span> <span class="o">=</span> <span class="n">BipolarOutrankingDigraph</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span>
                                     <span class="n">Threading</span><span class="o">=</span><span class="n">Threading</span><span class="p">,</span>
                                     <span class="n">startMethod</span><span class="o">=</span><span class="n">startMethod</span><span class="p">,</span>
@@ -1843,7 +1843,7 @@
             <span class="bp">self</span><span class="o">.</span><span class="n">valuationdomain</span> <span class="o">=</span> <span class="n">copy2self</span><span class="p">(</span><span class="n">g</span><span class="o">.</span><span class="n">valuationdomain</span><span class="p">)</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">nbrThreads</span> <span class="o">=</span> <span class="n">copy2self</span><span class="p">(</span><span class="n">g</span><span class="o">.</span><span class="n">nbrThreads</span><span class="p">)</span>
         <span class="k">elif</span> <span class="n">outrankingModel</span> <span class="o">==</span> <span class="s1">&#39;confident&#39;</span><span class="p">:</span>
-            <span class="kn">from</span> <span class="nn">outrankingDigraphs</span> <span class="kn">import</span> <span class="n">ConfidentBipolarOutrankingDigraph</span>
+            <span class="kn">from</span><span class="w"> </span><span class="nn">outrankingDigraphs</span><span class="w"> </span><span class="kn">import</span> <span class="n">ConfidentBipolarOutrankingDigraph</span>
             <span class="n">g</span> <span class="o">=</span> <span class="n">ConfidentBipolarOutrankingDigraph</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span>
                                 <span class="n">distribution</span><span class="o">=</span><span class="n">distribution</span><span class="p">,</span>
                                 <span class="n">betaParameter</span><span class="o">=</span><span class="n">betaParameter</span><span class="p">,</span>
@@ -1859,7 +1859,7 @@
             <span class="bp">self</span><span class="o">.</span><span class="n">betaParameter</span> <span class="o">=</span> <span class="n">copy2self</span><span class="p">(</span><span class="n">g</span><span class="o">.</span><span class="n">betaParameter</span><span class="p">)</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">likelihoods</span> <span class="o">=</span> <span class="n">copy2self</span><span class="p">(</span><span class="n">g</span><span class="o">.</span><span class="n">likelihoods</span><span class="p">)</span>
         <span class="k">elif</span> <span class="n">outrankingModel</span> <span class="o">==</span> <span class="s1">&#39;robust&#39;</span><span class="p">:</span>
-            <span class="kn">from</span> <span class="nn">outrankingDigraphs</span> <span class="kn">import</span> <span class="n">RobustOutrankingDigraph</span>
+            <span class="kn">from</span><span class="w"> </span><span class="nn">outrankingDigraphs</span><span class="w"> </span><span class="kn">import</span> <span class="n">RobustOutrankingDigraph</span>
             <span class="n">g</span> <span class="o">=</span> <span class="n">RobustOutrankingDigraph</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">nbrThreads</span> <span class="o">=</span> <span class="mi">0</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">startMethod</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
@@ -1878,7 +1878,7 @@
         <span class="c1"># compute rating-by-ranking</span>
         <span class="n">t0</span> <span class="o">=</span> <span class="n">time</span><span class="p">()</span>
         <span class="k">if</span> <span class="n">rankingRule</span> <span class="o">==</span> <span class="s1">&#39;best&#39;</span><span class="p">:</span>
-            <span class="kn">from</span> <span class="nn">linearOrders</span> <span class="kn">import</span> <span class="n">NetFlowsOrder</span><span class="p">,</span><span class="n">CopelandOrder</span>
+            <span class="kn">from</span><span class="w"> </span><span class="nn">linearOrders</span><span class="w"> </span><span class="kn">import</span> <span class="n">NetFlowsOrder</span><span class="p">,</span><span class="n">CopelandOrder</span>
             <span class="n">nf</span> <span class="o">=</span> <span class="n">NetFlowsOrder</span><span class="p">(</span><span class="n">g</span><span class="p">)</span>           
             <span class="n">cop</span> <span class="o">=</span> <span class="n">CopelandOrder</span><span class="p">(</span><span class="n">g</span><span class="p">)</span>
             <span class="n">corrnf</span> <span class="o">=</span> <span class="n">g</span><span class="o">.</span><span class="n">computeOrderCorrelation</span><span class="p">(</span><span class="n">nf</span><span class="o">.</span><span class="n">netFlowsOrder</span><span class="p">)</span>
@@ -1896,31 +1896,31 @@
                 <span class="bp">self</span><span class="o">.</span><span class="n">rankingCorrelation</span> <span class="o">=</span> <span class="n">corrcop</span>
                 <span class="bp">self</span><span class="o">.</span><span class="n">rankingScores</span> <span class="o">=</span> <span class="n">cop</span><span class="o">.</span><span class="n">decCopelandScores</span>
         <span class="k">elif</span> <span class="n">rankingRule</span> <span class="o">==</span> <span class="s1">&#39;Copeland&#39;</span><span class="p">:</span>
-            <span class="kn">from</span> <span class="nn">linearOrders</span> <span class="kn">import</span> <span class="n">CopelandOrder</span>
+            <span class="kn">from</span><span class="w"> </span><span class="nn">linearOrders</span><span class="w"> </span><span class="kn">import</span> <span class="n">CopelandOrder</span>
             <span class="n">cop</span> <span class="o">=</span> <span class="n">CopelandOrder</span><span class="p">(</span><span class="n">g</span><span class="p">)</span>
             <span class="n">actionsList</span> <span class="o">=</span> <span class="n">cop</span><span class="o">.</span><span class="n">copelandRanking</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">rankingRule</span> <span class="o">=</span> <span class="s1">&#39;Copeland&#39;</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">rankingScores</span> <span class="o">=</span> <span class="n">cop</span><span class="o">.</span><span class="n">decCopelandScores</span>
         <span class="k">elif</span> <span class="n">rankingRule</span> <span class="o">==</span> <span class="s1">&#39;NetFlows&#39;</span><span class="p">:</span>
-            <span class="kn">from</span> <span class="nn">linearOrders</span> <span class="kn">import</span> <span class="n">NetFlowsOrder</span>
+            <span class="kn">from</span><span class="w"> </span><span class="nn">linearOrders</span><span class="w"> </span><span class="kn">import</span> <span class="n">NetFlowsOrder</span>
             <span class="n">nf</span> <span class="o">=</span> <span class="n">NetFlowsOrder</span><span class="p">(</span><span class="n">g</span><span class="p">)</span>
             <span class="n">actionsList</span> <span class="o">=</span> <span class="n">nf</span><span class="o">.</span><span class="n">netFlowsRanking</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">rankingRule</span> <span class="o">=</span> <span class="s1">&#39;NetFlows&#39;</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">rankingScores</span> <span class="o">=</span> <span class="n">nf</span><span class="o">.</span><span class="n">decnetFlowScores</span>
         <span class="k">elif</span> <span class="n">rankingRule</span> <span class="o">==</span> <span class="s1">&#39;RankedPairs&#39;</span><span class="p">:</span>
-            <span class="kn">from</span> <span class="nn">linearOrders</span> <span class="kn">import</span> <span class="n">RankedPairsRanking</span>
+            <span class="kn">from</span><span class="w"> </span><span class="nn">linearOrders</span><span class="w"> </span><span class="kn">import</span> <span class="n">RankedPairsRanking</span>
             <span class="n">rp</span> <span class="o">=</span> <span class="n">RankedPairsRanking</span><span class="p">(</span><span class="n">g</span><span class="p">)</span>
             <span class="n">actionsList</span> <span class="o">=</span> <span class="n">rp</span><span class="o">.</span><span class="n">rankedPairsRanking</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">rankingRule</span> <span class="o">=</span> <span class="s1">&#39;RankedPairs&#39;</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">rankingScores</span> <span class="o">=</span> <span class="kc">None</span>
         <span class="k">elif</span> <span class="n">rankingRule</span> <span class="o">==</span> <span class="s1">&#39;IteratedCopeland&#39;</span><span class="p">:</span>
-            <span class="kn">from</span> <span class="nn">linearOrders</span> <span class="kn">import</span> <span class="n">IteratedCopelandRanking</span>
+            <span class="kn">from</span><span class="w"> </span><span class="nn">linearOrders</span><span class="w"> </span><span class="kn">import</span> <span class="n">IteratedCopelandRanking</span>
             <span class="n">rp</span> <span class="o">=</span> <span class="n">IteratedCopelandRanking</span><span class="p">(</span><span class="n">g</span><span class="p">)</span>
             <span class="n">actionsList</span> <span class="o">=</span> <span class="n">rp</span><span class="o">.</span><span class="n">iteratedCopelandRanking</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">rankingRule</span> <span class="o">=</span> <span class="s1">&#39;IteratedCopeland&#39;</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">rankingScores</span> <span class="o">=</span> <span class="kc">None</span>
         <span class="k">elif</span> <span class="n">rankingRule</span> <span class="o">==</span> <span class="s1">&#39;IteratedNetFlows&#39;</span><span class="p">:</span>
-            <span class="kn">from</span> <span class="nn">linearOrders</span> <span class="kn">import</span> <span class="n">IteratedNetFlowsRanking</span>
+            <span class="kn">from</span><span class="w"> </span><span class="nn">linearOrders</span><span class="w"> </span><span class="kn">import</span> <span class="n">IteratedNetFlowsRanking</span>
             <span class="n">rp</span> <span class="o">=</span> <span class="n">IteratedNetFlowsRanking</span><span class="p">(</span><span class="n">g</span><span class="p">)</span>
             <span class="n">actionsList</span> <span class="o">=</span> <span class="n">rp</span><span class="o">.</span><span class="n">iteratedNetFlowsRanking</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">rankingRule</span> <span class="o">=</span> <span class="s1">&#39;IteratedNetFlows&#39;</span>
@@ -1957,10 +1957,10 @@
  
 <span class="c1">#.....  specific relative rating class methods  ....</span>
         
-    <span class="k">def</span> <span class="nf">_computeMarginalRatingCorrelations</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">Debug</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
-        <span class="kn">from</span> <span class="nn">perfTabs</span> <span class="kn">import</span> <span class="n">PartialPerformanceTableau</span>
-        <span class="kn">from</span> <span class="nn">digraphs</span> <span class="kn">import</span> <span class="n">BipartitePartialDigraph</span>
-        <span class="kn">from</span> <span class="nn">linearOrders</span> <span class="kn">import</span> <span class="n">NetFlowsRanking</span><span class="p">,</span><span class="n">CopelandRanking</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">_computeMarginalRatingCorrelations</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">Debug</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+        <span class="kn">from</span><span class="w"> </span><span class="nn">perfTabs</span><span class="w"> </span><span class="kn">import</span> <span class="n">PartialPerformanceTableau</span>
+        <span class="kn">from</span><span class="w"> </span><span class="nn">digraphs</span><span class="w"> </span><span class="kn">import</span> <span class="n">BipartitePartialDigraph</span>
+        <span class="kn">from</span><span class="w"> </span><span class="nn">linearOrders</span><span class="w"> </span><span class="kn">import</span> <span class="n">NetFlowsRanking</span><span class="p">,</span><span class="n">CopelandRanking</span>
         <span class="c1">#nf = NetFlowsRanking(self)</span>
         <span class="c1">#cop = CopelandRanking(self)</span>
         <span class="n">bp</span> <span class="o">=</span> <span class="n">BipartitePartialDigraph</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="bp">self</span><span class="o">.</span><span class="n">actionsOrig</span><span class="p">,</span><span class="bp">self</span><span class="o">.</span><span class="n">profiles</span><span class="p">)</span>
@@ -1979,13 +1979,13 @@
                 <span class="nb">print</span><span class="p">(</span><span class="n">g</span><span class="p">,</span><span class="n">marginalCorrelations</span><span class="p">[</span><span class="n">g</span><span class="p">])</span>
         <span class="k">return</span> <span class="n">marginalCorrelations</span>   
 
-    <span class="k">def</span> <span class="nf">_computeRatingConsensusQuality</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">Comments</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">_computeRatingConsensusQuality</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">Comments</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Renders the marginal criteria correlations with a given rating with summary.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="c1">#from outrankingDigraphs import BipolarOutrankingDigraph</span>
-        <span class="kn">from</span> <span class="nn">math</span> <span class="kn">import</span> <span class="n">sqrt</span>
-        <span class="kn">from</span> <span class="nn">decimal</span> <span class="kn">import</span> <span class="n">Decimal</span>
+        <span class="kn">from</span><span class="w"> </span><span class="nn">math</span><span class="w"> </span><span class="kn">import</span> <span class="n">sqrt</span>
+        <span class="kn">from</span><span class="w"> </span><span class="nn">decimal</span><span class="w"> </span><span class="kn">import</span> <span class="n">Decimal</span>
         <span class="c1">#g = BipolarOutrankingDigraph(self,Normalized=True)</span>
         <span class="n">criteria</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">criteria</span>
         <span class="n">marginalCorrelation</span> <span class="o">=</span>\
@@ -2025,17 +2025,17 @@
                   <span class="p">(</span><span class="nb">float</span><span class="p">(</span><span class="n">meanMarginalCorrelation</span><span class="p">)</span> <span class="o">-</span> <span class="n">sdMarginalCorrelation</span><span class="p">)</span> <span class="p">)</span>
         <span class="k">return</span> <span class="p">(</span><span class="n">marginalCorrelation</span><span class="p">,</span><span class="n">meanMarginalCorrelation</span><span class="p">,</span><span class="n">sdMarginalCorrelation</span><span class="p">)</span>
 
-    <span class="k">def</span> <span class="nf">showRatingConsensusQuality</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">showRatingConsensusQuality</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_computeRatingConsensusQuality</span><span class="p">(</span><span class="n">Comments</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span></div>
 
     
 
 <span class="c1">#########################################</span>
 <span class="c1">#########   learned quantiles rating</span>
-<span class="kn">from</span> <span class="nn">performanceQuantiles</span> <span class="kn">import</span> <span class="n">PerformanceQuantiles</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">performanceQuantiles</span><span class="w"> </span><span class="kn">import</span> <span class="n">PerformanceQuantiles</span>
 <div class="viewcode-block" id="RatingByLearnedQuantilesDigraph">
 <a class="viewcode-back" href="../techDoc.html#ratingDigraphs.RatingByLearnedQuantilesDigraph">[docs]</a>
-<span class="k">class</span> <span class="nc">RatingByLearnedQuantilesDigraph</span><span class="p">(</span><span class="n">RatingDigraph</span><span class="p">,</span><span class="n">PerformanceQuantiles</span><span class="p">):</span>
+<span class="k">class</span><span class="w"> </span><span class="nc">RatingByLearnedQuantilesDigraph</span><span class="p">(</span><span class="n">RatingDigraph</span><span class="p">,</span><span class="n">PerformanceQuantiles</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Constructor for a learned quantiles rating-by sorting and rating-by-ranking digraph.</span>
 <span class="sd">    See the :py:class:`sortingDigraphs.LearnedQuantilesRatingDigraph` class.</span>
@@ -2102,7 +2102,7 @@
 
 <span class="sd">    &quot;&quot;&quot;</span>
 
-    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">argPerfQuantiles</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">argPerfQuantiles</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
                  <span class="n">newData</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
                  <span class="n">quantiles</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
                  <span class="c1">#hasNoVeto=False,</span>
@@ -2117,10 +2117,10 @@
                  <span class="n">CopyPerfTab</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
                  <span class="n">Debug</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
         
-        <span class="kn">from</span> <span class="nn">time</span> <span class="kn">import</span> <span class="n">time</span>
-        <span class="kn">from</span> <span class="nn">copy</span> <span class="kn">import</span> <span class="n">copy</span><span class="p">,</span> <span class="n">deepcopy</span>
-        <span class="kn">from</span> <span class="nn">collections</span> <span class="kn">import</span> <span class="n">OrderedDict</span>
-        <span class="kn">from</span> <span class="nn">decimal</span> <span class="kn">import</span> <span class="n">Decimal</span>
+        <span class="kn">from</span><span class="w"> </span><span class="nn">time</span><span class="w"> </span><span class="kn">import</span> <span class="n">time</span>
+        <span class="kn">from</span><span class="w"> </span><span class="nn">copy</span><span class="w"> </span><span class="kn">import</span> <span class="n">copy</span><span class="p">,</span> <span class="n">deepcopy</span>
+        <span class="kn">from</span><span class="w"> </span><span class="nn">collections</span><span class="w"> </span><span class="kn">import</span> <span class="n">OrderedDict</span>
+        <span class="kn">from</span><span class="w"> </span><span class="nn">decimal</span><span class="w"> </span><span class="kn">import</span> <span class="n">Decimal</span>
         
         <span class="k">if</span> <span class="n">CopyPerfTab</span><span class="p">:</span>
             <span class="n">copy2self</span> <span class="o">=</span> <span class="n">deepcopy</span>
@@ -2288,7 +2288,7 @@
 
         <span class="bp">self</span><span class="o">.</span><span class="n">order</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">actions</span><span class="p">)</span>
         <span class="k">if</span> <span class="n">outrankingModel</span> <span class="o">==</span> <span class="s1">&#39;standard&#39;</span><span class="p">:</span>
-            <span class="kn">from</span> <span class="nn">outrankingDigraphs</span> <span class="kn">import</span> <span class="n">BipolarOutrankingDigraph</span>
+            <span class="kn">from</span><span class="w"> </span><span class="nn">outrankingDigraphs</span><span class="w"> </span><span class="kn">import</span> <span class="n">BipolarOutrankingDigraph</span>
             <span class="n">g</span> <span class="o">=</span> <span class="n">BipolarOutrankingDigraph</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span>
                                      <span class="n">Threading</span><span class="o">=</span><span class="n">Threading</span><span class="p">,</span>
                                          <span class="n">startMethod</span><span class="o">=</span><span class="n">startMethod</span><span class="p">,</span>
@@ -2299,8 +2299,8 @@
             <span class="bp">self</span><span class="o">.</span><span class="n">valuationdomain</span> <span class="o">=</span> <span class="n">copy2self</span><span class="p">(</span><span class="n">g</span><span class="o">.</span><span class="n">valuationdomain</span><span class="p">)</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">nbrThreads</span> <span class="o">=</span> <span class="n">copy2self</span><span class="p">(</span><span class="n">g</span><span class="o">.</span><span class="n">nbrThreads</span><span class="p">)</span>
         <span class="k">elif</span> <span class="n">outrankingModel</span> <span class="o">==</span> <span class="s1">&#39;mp&#39;</span><span class="p">:</span>
-            <span class="kn">import</span> <span class="nn">os</span>
-            <span class="kn">from</span> <span class="nn">mpOutrankingDigraphs</span> <span class="kn">import</span> <span class="n">MPBipolarOutrankingDigraph</span>
+            <span class="kn">import</span><span class="w"> </span><span class="nn">os</span>
+            <span class="kn">from</span><span class="w"> </span><span class="nn">mpOutrankingDigraphs</span><span class="w"> </span><span class="kn">import</span> <span class="n">MPBipolarOutrankingDigraph</span>
             <span class="n">g</span> <span class="o">=</span> <span class="n">MPBipolarOutrankingDigraph</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">Normalized</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">nbrThreads</span> <span class="o">=</span> <span class="n">copy2self</span><span class="p">(</span><span class="n">g</span><span class="o">.</span><span class="n">nbrThreads</span><span class="p">)</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">startMethod</span> <span class="o">=</span> <span class="n">copy2self</span><span class="p">(</span><span class="n">g</span><span class="o">.</span><span class="n">startMethod</span><span class="p">)</span>
@@ -2308,7 +2308,7 @@
             <span class="bp">self</span><span class="o">.</span><span class="n">valuationdomain</span> <span class="o">=</span> <span class="n">copy2self</span><span class="p">(</span><span class="n">g</span><span class="o">.</span><span class="n">valuationdomain</span><span class="p">)</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">nbrThreads</span> <span class="o">=</span> <span class="n">copy2self</span><span class="p">(</span><span class="n">g</span><span class="o">.</span><span class="n">nbrThreads</span><span class="p">)</span>
         <span class="k">elif</span> <span class="n">outrankingModel</span> <span class="o">==</span> <span class="s1">&#39;confident&#39;</span><span class="p">:</span>
-            <span class="kn">from</span> <span class="nn">outrankingDigraphs</span> <span class="kn">import</span> <span class="n">ConfidentBipolarOutrankingDigraph</span>
+            <span class="kn">from</span><span class="w"> </span><span class="nn">outrankingDigraphs</span><span class="w"> </span><span class="kn">import</span> <span class="n">ConfidentBipolarOutrankingDigraph</span>
             <span class="n">g</span> <span class="o">=</span> <span class="n">ConfidentBipolarOutrankingDigraph</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span>
                                 <span class="n">distribution</span><span class="o">=</span><span class="n">distribution</span><span class="p">,</span>
                                 <span class="n">betaParameter</span><span class="o">=</span><span class="n">betaParameter</span><span class="p">,</span>
@@ -2324,7 +2324,7 @@
             <span class="bp">self</span><span class="o">.</span><span class="n">betaParameter</span> <span class="o">=</span> <span class="n">copy2self</span><span class="p">(</span><span class="n">g</span><span class="o">.</span><span class="n">betaParameter</span><span class="p">)</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">likelihoods</span> <span class="o">=</span> <span class="n">copy2self</span><span class="p">(</span><span class="n">g</span><span class="o">.</span><span class="n">likelihoods</span><span class="p">)</span>
         <span class="k">elif</span> <span class="n">outrankingModel</span> <span class="o">==</span> <span class="s1">&#39;robust&#39;</span><span class="p">:</span>
-            <span class="kn">from</span> <span class="nn">outrankingDigraphs</span> <span class="kn">import</span> <span class="n">RobustOutrankingDigraph</span>
+            <span class="kn">from</span><span class="w"> </span><span class="nn">outrankingDigraphs</span><span class="w"> </span><span class="kn">import</span> <span class="n">RobustOutrankingDigraph</span>
             <span class="n">g</span> <span class="o">=</span> <span class="n">RobustOutrankingDigraph</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">nbrThreads</span> <span class="o">=</span> <span class="mi">0</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">startMethod</span> <span class="o">=</span> <span class="kc">None</span>
@@ -2345,7 +2345,7 @@
         <span class="c1"># compute rating-by-ranking</span>
         <span class="n">t0</span> <span class="o">=</span> <span class="n">time</span><span class="p">()</span>
         <span class="k">if</span> <span class="n">rankingRule</span> <span class="o">==</span> <span class="s1">&#39;best&#39;</span><span class="p">:</span>
-            <span class="kn">from</span> <span class="nn">linearOrders</span> <span class="kn">import</span> <span class="n">NetFlowsOrder</span><span class="p">,</span><span class="n">CopelandOrder</span>
+            <span class="kn">from</span><span class="w"> </span><span class="nn">linearOrders</span><span class="w"> </span><span class="kn">import</span> <span class="n">NetFlowsOrder</span><span class="p">,</span><span class="n">CopelandOrder</span>
             <span class="n">nf</span> <span class="o">=</span> <span class="n">NetFlowsOrder</span><span class="p">(</span><span class="n">g</span><span class="p">)</span>           
             <span class="n">cop</span> <span class="o">=</span> <span class="n">CopelandOrder</span><span class="p">(</span><span class="n">g</span><span class="p">)</span>
             <span class="n">corrnf</span> <span class="o">=</span> <span class="n">g</span><span class="o">.</span><span class="n">computeOrderCorrelation</span><span class="p">(</span><span class="n">nf</span><span class="o">.</span><span class="n">netFlowsOrder</span><span class="p">)</span>
@@ -2363,31 +2363,31 @@
                 <span class="bp">self</span><span class="o">.</span><span class="n">rankingCorrelation</span> <span class="o">=</span> <span class="n">corrcop</span>
                 <span class="bp">self</span><span class="o">.</span><span class="n">rankingScores</span> <span class="o">=</span> <span class="n">cop</span><span class="o">.</span><span class="n">decCopelandScores</span>
         <span class="k">elif</span> <span class="n">rankingRule</span> <span class="o">==</span> <span class="s1">&#39;Copeland&#39;</span><span class="p">:</span>
-            <span class="kn">from</span> <span class="nn">linearOrders</span> <span class="kn">import</span> <span class="n">CopelandOrder</span>
+            <span class="kn">from</span><span class="w"> </span><span class="nn">linearOrders</span><span class="w"> </span><span class="kn">import</span> <span class="n">CopelandOrder</span>
             <span class="n">cop</span> <span class="o">=</span> <span class="n">CopelandOrder</span><span class="p">(</span><span class="n">g</span><span class="p">)</span>
             <span class="n">actionsList</span> <span class="o">=</span> <span class="n">cop</span><span class="o">.</span><span class="n">copelandRanking</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">rankingRule</span> <span class="o">=</span> <span class="s1">&#39;Copeland&#39;</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">rankingScores</span> <span class="o">=</span> <span class="n">cop</span><span class="o">.</span><span class="n">decCopelandScores</span>
         <span class="k">elif</span> <span class="n">rankingRule</span> <span class="o">==</span> <span class="s1">&#39;NetFlows&#39;</span><span class="p">:</span>
-            <span class="kn">from</span> <span class="nn">linearOrders</span> <span class="kn">import</span> <span class="n">NetFlowsOrder</span>
+            <span class="kn">from</span><span class="w"> </span><span class="nn">linearOrders</span><span class="w"> </span><span class="kn">import</span> <span class="n">NetFlowsOrder</span>
             <span class="n">nf</span> <span class="o">=</span> <span class="n">NetFlowsOrder</span><span class="p">(</span><span class="n">g</span><span class="p">)</span>
             <span class="n">actionsList</span> <span class="o">=</span> <span class="n">nf</span><span class="o">.</span><span class="n">netFlowsRanking</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">rankingRule</span> <span class="o">=</span> <span class="s1">&#39;NetFlows&#39;</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">rankingScores</span> <span class="o">=</span> <span class="n">nf</span><span class="o">.</span><span class="n">decnetFlowScores</span>
         <span class="k">elif</span> <span class="n">rankingRule</span> <span class="o">==</span> <span class="s1">&#39;RankedPairs&#39;</span><span class="p">:</span>
-            <span class="kn">from</span> <span class="nn">linearOrders</span> <span class="kn">import</span> <span class="n">RankedPairsRanking</span>
+            <span class="kn">from</span><span class="w"> </span><span class="nn">linearOrders</span><span class="w"> </span><span class="kn">import</span> <span class="n">RankedPairsRanking</span>
             <span class="n">rp</span> <span class="o">=</span> <span class="n">RankedPairsRanking</span><span class="p">(</span><span class="n">g</span><span class="p">)</span>
             <span class="n">actionsList</span> <span class="o">=</span> <span class="n">rp</span><span class="o">.</span><span class="n">rankedPairsRanking</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">rankingRule</span> <span class="o">=</span> <span class="s1">&#39;RankedPairs&#39;</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">rankingScores</span> <span class="o">=</span> <span class="kc">None</span>
         <span class="k">elif</span> <span class="n">rankingRule</span> <span class="o">==</span> <span class="s1">&#39;IteratedCopeland&#39;</span><span class="p">:</span>
-            <span class="kn">from</span> <span class="nn">linearOrders</span> <span class="kn">import</span> <span class="n">IteratedCopelandRanking</span>
+            <span class="kn">from</span><span class="w"> </span><span class="nn">linearOrders</span><span class="w"> </span><span class="kn">import</span> <span class="n">IteratedCopelandRanking</span>
             <span class="n">rp</span> <span class="o">=</span> <span class="n">IteratedCopelandRanking</span><span class="p">(</span><span class="n">g</span><span class="p">)</span>
             <span class="n">actionsList</span> <span class="o">=</span> <span class="n">rp</span><span class="o">.</span><span class="n">iteratedCopelandRanking</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">rankingRule</span> <span class="o">=</span> <span class="s1">&#39;IteratedCopeland&#39;</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">rankingScores</span> <span class="o">=</span> <span class="kc">None</span>
         <span class="k">elif</span> <span class="n">rankingRule</span> <span class="o">==</span> <span class="s1">&#39;IteratedNetFlows&#39;</span><span class="p">:</span>
-            <span class="kn">from</span> <span class="nn">linearOrders</span> <span class="kn">import</span> <span class="n">IteratedNetFlowsRanking</span>
+            <span class="kn">from</span><span class="w"> </span><span class="nn">linearOrders</span><span class="w"> </span><span class="kn">import</span> <span class="n">IteratedNetFlowsRanking</span>
             <span class="n">rp</span> <span class="o">=</span> <span class="n">IteratedNetFlowsRanking</span><span class="p">(</span><span class="n">g</span><span class="p">)</span>
             <span class="n">actionsList</span> <span class="o">=</span> <span class="n">rp</span><span class="o">.</span><span class="n">iteratedNetFlowsRanking</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">rankingRule</span> <span class="o">=</span> <span class="s1">&#39;IteratedNetFlows&#39;</span>
@@ -2396,7 +2396,7 @@
             <span class="k">if</span> <span class="n">g</span><span class="o">.</span><span class="n">order</span> <span class="o">&gt;</span> <span class="mi">12</span><span class="p">:</span>
                 <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Error: the digraph is to big for the Kemeny ranking rule üüü&#39;</span><span class="p">)</span>
             <span class="k">else</span><span class="p">:</span>
-                <span class="kn">from</span> <span class="nn">linearOrders</span> <span class="kn">import</span> <span class="n">KemenyRanking</span>
+                <span class="kn">from</span><span class="w"> </span><span class="nn">linearOrders</span><span class="w"> </span><span class="kn">import</span> <span class="n">KemenyRanking</span>
                 <span class="n">ke</span> <span class="o">=</span> <span class="n">KemenyRanking</span><span class="p">(</span><span class="n">g</span><span class="p">,</span> <span class="n">orderLimit</span><span class="o">=</span><span class="n">g</span><span class="o">.</span><span class="n">order</span><span class="p">)</span>
                 <span class="n">actionsList</span> <span class="o">=</span> <span class="n">ke</span><span class="o">.</span><span class="n">kemenyRanking</span>
                 <span class="bp">self</span><span class="o">.</span><span class="n">rankingRule</span> <span class="o">=</span> <span class="s1">&#39;Kemeny&#39;</span>
@@ -2443,7 +2443,7 @@
     <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;*-------- Testing classes and methods -------&#39;</span><span class="p">)</span>
 
 
-    <span class="kn">from</span> <span class="nn">randomPerfTabs</span> <span class="kn">import</span> <span class="o">*</span>
+    <span class="kn">from</span><span class="w"> </span><span class="nn">randomPerfTabs</span><span class="w"> </span><span class="kn">import</span> <span class="o">*</span>
     <span class="n">MP</span> <span class="o">=</span> <span class="kc">True</span>
     <span class="n">nbrCores</span> <span class="o">=</span> <span class="mi">8</span>
 
@@ -2471,11 +2471,11 @@
     <span class="c1"># absolute quantiles rating from randomPerfTabs import</span>
 <span class="c1">#   Random3ObjectivesPerformanceTableau</span>
     <span class="n">hpt</span> <span class="o">=</span> <span class="n">Random3ObjectivesPerformanceTableau</span><span class="p">(</span><span class="n">numberOfActions</span><span class="o">=</span><span class="mi">1000</span><span class="p">,</span><span class="n">seed</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
-    <span class="kn">from</span> <span class="nn">performanceQuantiles</span> <span class="kn">import</span> <span class="n">PerformanceQuantiles</span>
+    <span class="kn">from</span><span class="w"> </span><span class="nn">performanceQuantiles</span><span class="w"> </span><span class="kn">import</span> <span class="n">PerformanceQuantiles</span>
     <span class="n">pq</span> <span class="o">=</span> <span class="n">PerformanceQuantiles</span><span class="p">(</span><span class="n">hpt</span><span class="p">,</span><span class="n">numberOfBins</span><span class="o">=</span><span class="mi">20</span><span class="p">,</span><span class="n">LowerClosed</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span><span class="n">Debug</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
     <span class="c1"># new incoming decision actions of the same kind</span>
-    <span class="kn">from</span> <span class="nn">randomPerfTabs</span>\
-    <span class="kn">import</span> <span class="nn">RandomPerformanceGenerator</span> <span class="k">as</span> <span class="nn">PerfTabGenerator</span>
+    <span class="kn">from</span><span class="w"> </span><span class="nn">randomPerfTabs</span>\
+    <span class="kn">import</span><span class="w"> </span><span class="nn">RandomPerformanceGenerator</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">PerfTabGenerator</span>
     <span class="n">tpg</span> <span class="o">=</span> <span class="n">PerfTabGenerator</span><span class="p">(</span><span class="n">hpt</span><span class="p">,</span><span class="n">instanceCounter</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span><span class="n">seed</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
     <span class="n">newActions</span> <span class="o">=</span> <span class="n">tpg</span><span class="o">.</span><span class="n">randomActions</span><span class="p">(</span><span class="mi">20</span><span class="p">)</span>
     <span class="c1"># rating the new set of decision actions after</span>
@@ -2513,7 +2513,7 @@
 
   <div role="contentinfo">
     <p>&#169; Copyright 2012-2025, Raymond Bisdorff.
-      <span class="lastupdated">Last updated on Apr 12, 2025.
+      <span class="lastupdated">Last updated on Apr 16, 2025.
       </span></p>
   </div>
 
