@@ -6,7 +6,7 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>randomDigraphs &mdash; Digraph3 3.13.3 documentation</title>
-      <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=03e43079" />
+      <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=fa44fd50" />
       <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=e59714d7" />
       <link rel="stylesheet" type="text/css" href="../_static/graphviz.css?v=4ae1632d" />
       <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
@@ -28,7 +28,7 @@
       <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
       <script src="../_static/clipboard.min.js?v=a7894cd8"></script>
       <script src="../_static/copybutton.js?v=15d7cbb8"></script>
-      <script src="../_static/js/hoverxref.js?v=6ff7264e"></script>
+      <script src="../_static/js/hoverxref.js?v=85f38ef1"></script>
       <script src="../_static/js/tooltipster.bundle.min.js?v=18bf091b"></script>
       <script src="../_static/js/micromodal.min.js?v=04d6302d"></script>
     <script src="../_static/js/theme.js"></script>
@@ -109,15 +109,15 @@
 
 
 <span class="c1">#from digraphsTools import *</span>
-<span class="kn">from</span><span class="w"> </span><span class="nn">decimal</span><span class="w"> </span><span class="kn">import</span> <span class="n">Decimal</span>
-<span class="kn">from</span><span class="w"> </span><span class="nn">collections</span><span class="w"> </span><span class="kn">import</span> <span class="n">OrderedDict</span>
+<span class="kn">from</span> <span class="nn">decimal</span> <span class="kn">import</span> <span class="n">Decimal</span>
+<span class="kn">from</span> <span class="nn">collections</span> <span class="kn">import</span> <span class="n">OrderedDict</span>
 
 <span class="c1">#---------- Random Digraph classes -----------------</span>
-<span class="kn">from</span><span class="w"> </span><span class="nn">digraphs</span><span class="w"> </span><span class="kn">import</span> <span class="o">*</span>
+<span class="kn">from</span> <span class="nn">digraphs</span> <span class="kn">import</span> <span class="o">*</span>
 
 <div class="viewcode-block" id="RandomDigraph">
 <a class="viewcode-back" href="../techDoc.html#randomDigraphs.RandomDigraph">[docs]</a>
-<span class="k">class</span><span class="w"> </span><span class="nc">RandomDigraph</span><span class="p">(</span><span class="n">Digraph</span><span class="p">):</span>
+<span class="k">class</span> <span class="nc">RandomDigraph</span><span class="p">(</span><span class="n">Digraph</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Specialization of the general Digraph class for generating</span>
 <span class="sd">    temporary random crisp digraphs.</span>
@@ -136,7 +136,7 @@
 
 <span class="sd">     &quot;&quot;&quot;</span>
 
-    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">order</span><span class="o">=</span><span class="mi">9</span><span class="p">,</span><span class="n">arcProbability</span><span class="o">=</span><span class="mf">0.5</span><span class="p">,</span><span class="n">namePrefix</span><span class="o">=</span><span class="s1">&#39;a&#39;</span><span class="p">,</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">order</span><span class="o">=</span><span class="mi">9</span><span class="p">,</span><span class="n">arcProbability</span><span class="o">=</span><span class="mf">0.5</span><span class="p">,</span><span class="n">namePrefix</span><span class="o">=</span><span class="s1">&#39;a&#39;</span><span class="p">,</span>
                  <span class="n">missingRelationProbability</span><span class="o">=</span><span class="mf">0.0</span><span class="p">,</span>
                  <span class="n">IntegerValuation</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">Bipolar</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
                  <span class="n">seed</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
@@ -147,9 +147,9 @@
         <span class="k">elif</span> <span class="n">arcProbability</span> <span class="o">&lt;</span> <span class="n">Decimal</span><span class="p">(</span><span class="s2">&quot;0.0&quot;</span><span class="p">):</span>
             <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Error: arc probability too low !!&#39;</span><span class="p">)</span>
         <span class="k">else</span><span class="p">:</span>
-            <span class="kn">import</span><span class="w"> </span><span class="nn">random</span>
+            <span class="kn">import</span> <span class="nn">random</span>
             <span class="n">random</span><span class="o">.</span><span class="n">seed</span><span class="p">(</span><span class="n">seed</span><span class="p">)</span>
-            <span class="kn">from</span><span class="w"> </span><span class="nn">digraphs</span><span class="w"> </span><span class="kn">import</span> <span class="n">EmptyDigraph</span>
+            <span class="kn">from</span> <span class="nn">digraphs</span> <span class="kn">import</span> <span class="n">EmptyDigraph</span>
             <span class="k">if</span> <span class="n">Bipolar</span><span class="p">:</span>
                 <span class="n">domain</span> <span class="o">=</span> <span class="p">(</span><span class="s1">&#39;-1.0&#39;</span><span class="p">,</span><span class="s1">&#39;1.0&#39;</span><span class="p">)</span>
             <span class="k">else</span><span class="p">:</span>
@@ -202,7 +202,7 @@
 
 <div class="viewcode-block" id="RandomValuationDigraph">
 <a class="viewcode-back" href="../techDoc.html#randomDigraphs.RandomValuationDigraph">[docs]</a>
-<span class="k">class</span><span class="w"> </span><span class="nc">RandomValuationDigraph</span><span class="p">(</span><span class="n">Digraph</span><span class="p">):</span>
+<span class="k">class</span> <span class="nc">RandomValuationDigraph</span><span class="p">(</span><span class="n">Digraph</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Specialization of the general Digraph class for generating</span>
 <span class="sd">    temporary uniformly valuated random digraphs.</span>
@@ -256,11 +256,11 @@
 
 <span class="sd">    &quot;&quot;&quot;</span>
 
-    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">order</span><span class="o">=</span><span class="mi">9</span><span class="p">,</span> <span class="n">ndigits</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">order</span><span class="o">=</span><span class="mi">9</span><span class="p">,</span> <span class="n">ndigits</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span>
                  <span class="n">Normalized</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
                  <span class="n">IntegerValuation</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
                  <span class="n">seed</span> <span class="o">=</span> <span class="kc">None</span><span class="p">):</span>
-        <span class="kn">import</span><span class="w"> </span><span class="nn">random</span>
+        <span class="kn">import</span> <span class="nn">random</span>
         <span class="n">random</span><span class="o">.</span><span class="n">seed</span><span class="p">(</span><span class="n">seed</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="s1">&#39;randomValuationDigraph&#39;</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">order</span> <span class="o">=</span> <span class="n">order</span>
@@ -308,7 +308,7 @@
 
 <div class="viewcode-block" id="RandomOutrankingValuationDigraph">
 <a class="viewcode-back" href="../techDoc.html#randomDigraphs.RandomOutrankingValuationDigraph">[docs]</a>
-<span class="k">class</span><span class="w"> </span><span class="nc">RandomOutrankingValuationDigraph</span><span class="p">(</span><span class="n">Digraph</span><span class="p">):</span>
+<span class="k">class</span> <span class="nc">RandomOutrankingValuationDigraph</span><span class="p">(</span><span class="n">Digraph</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Specialization of the general Digraph class for generating</span>
 <span class="sd">    temporary uniform random outranking valuation digraphs.</span>
@@ -324,14 +324,14 @@
 <span class="sd">    </span>
 <span class="sd">    &quot;&quot;&quot;</span>
 
-    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">order</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span><span class="n">weightsSum</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">order</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span><span class="n">weightsSum</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span>
                  <span class="n">distribution</span><span class="o">=</span><span class="s1">&#39;uniform&#39;</span><span class="p">,</span>
                  <span class="n">incomparabilityProbability</span><span class="o">=</span><span class="mf">0.1</span><span class="p">,</span>
                  <span class="n">polarizationProbability</span><span class="o">=</span><span class="mf">0.05</span><span class="p">,</span>
                  <span class="n">ndigits</span><span class="o">=</span><span class="mi">4</span><span class="p">,</span>
                  <span class="n">seed</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span><span class="n">Debug</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
-        <span class="kn">from</span><span class="w"> </span><span class="nn">decimal</span><span class="w"> </span><span class="kn">import</span> <span class="n">Decimal</span>
-        <span class="kn">import</span><span class="w"> </span><span class="nn">random</span>
+        <span class="kn">from</span> <span class="nn">decimal</span> <span class="kn">import</span> <span class="n">Decimal</span>
+        <span class="kn">import</span> <span class="nn">random</span>
         <span class="c1"># seeding the random generator</span>
         <span class="n">random</span><span class="o">.</span><span class="n">seed</span><span class="p">(</span><span class="n">seed</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">seed</span> <span class="o">=</span> <span class="n">seed</span>
@@ -413,7 +413,7 @@
 
 <div class="viewcode-block" id="RandomWeakTournament">
 <a class="viewcode-back" href="../techDoc.html#randomDigraphs.RandomWeakTournament">[docs]</a>
-<span class="k">class</span><span class="w"> </span><span class="nc">RandomWeakTournament</span><span class="p">(</span><span class="n">Digraph</span><span class="p">):</span>
+<span class="k">class</span> <span class="nc">RandomWeakTournament</span><span class="p">(</span><span class="n">Digraph</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Specialization of the general Digraph class for generating</span>
 <span class="sd">    temporary bipolar-valued weak, i.e. partially determinate, tournaments.</span>
@@ -428,14 +428,14 @@
 
 <span class="sd">    &quot;&quot;&quot;</span>
 
-    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">order</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span><span class="n">ndigits</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">order</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span><span class="n">ndigits</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span>
                  <span class="n">IntegerValuation</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
                  <span class="n">weaknessDegree</span><span class="o">=</span><span class="mf">0.25</span><span class="p">,</span>
                  <span class="n">indeterminatenessProbability</span><span class="o">=</span><span class="mf">0.0</span><span class="p">,</span>
                  <span class="n">seed</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
                  <span class="n">Comments</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
-        <span class="kn">from</span><span class="w"> </span><span class="nn">decimal</span><span class="w"> </span><span class="kn">import</span> <span class="n">Decimal</span>
-        <span class="kn">import</span><span class="w"> </span><span class="nn">random</span>
+        <span class="kn">from</span> <span class="nn">decimal</span> <span class="kn">import</span> <span class="n">Decimal</span>
+        <span class="kn">import</span> <span class="nn">random</span>
         <span class="n">random</span><span class="o">.</span><span class="n">seed</span><span class="p">(</span><span class="n">seed</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">seed</span><span class="o">=</span> <span class="n">seed</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">weaknessDegree</span> <span class="o">=</span> <span class="n">weaknessDegree</span>
@@ -547,7 +547,7 @@
 
 <div class="viewcode-block" id="RandomPartialTournament">
 <a class="viewcode-back" href="../techDoc.html#randomDigraphs.RandomPartialTournament">[docs]</a>
-<span class="k">class</span><span class="w"> </span><span class="nc">RandomPartialTournament</span><span class="p">(</span><span class="n">Digraph</span><span class="p">):</span>
+<span class="k">class</span> <span class="nc">RandomPartialTournament</span><span class="p">(</span><span class="n">Digraph</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Specialization of the general Digraph class for generating</span>
 <span class="sd">    temporary partial bipolar-valued tournaments.</span>
@@ -560,13 +560,13 @@
 
 <span class="sd">    &quot;&quot;&quot;</span>
 
-    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">order</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span><span class="n">ndigits</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">order</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span><span class="n">ndigits</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span>
                  <span class="n">Crisp</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
                  <span class="n">missingRelationProbability</span> <span class="o">=</span> <span class="mf">0.3</span><span class="p">,</span>
                  <span class="n">seed</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
                  <span class="n">Debug</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
-        <span class="kn">from</span><span class="w"> </span><span class="nn">decimal</span><span class="w"> </span><span class="kn">import</span> <span class="n">Decimal</span>
-        <span class="kn">import</span><span class="w"> </span><span class="nn">random</span>
+        <span class="kn">from</span> <span class="nn">decimal</span> <span class="kn">import</span> <span class="n">Decimal</span>
+        <span class="kn">import</span> <span class="nn">random</span>
         <span class="k">if</span> <span class="n">seed</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
             <span class="n">seed</span> <span class="o">=</span> <span class="n">random</span><span class="o">.</span><span class="n">randint</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="mi">1000</span><span class="p">)</span>
         <span class="n">random</span><span class="o">.</span><span class="n">seed</span><span class="p">(</span><span class="n">seed</span><span class="p">)</span>
@@ -643,7 +643,7 @@
 
 <div class="viewcode-block" id="RandomTournament">
 <a class="viewcode-back" href="../techDoc.html#randomDigraphs.RandomTournament">[docs]</a>
-<span class="k">class</span><span class="w"> </span><span class="nc">RandomTournament</span><span class="p">(</span><span class="n">Digraph</span><span class="p">):</span>
+<span class="k">class</span> <span class="nc">RandomTournament</span><span class="p">(</span><span class="n">Digraph</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Specialization of the general Digraph class for generating</span>
 <span class="sd">    temporary complete tournaments.</span>
@@ -655,12 +655,12 @@
 
 <span class="sd">    &quot;&quot;&quot;</span>
 
-    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">order</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span><span class="n">ndigits</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">order</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span><span class="n">ndigits</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span>
                  <span class="n">Crisp</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
                  <span class="n">valuationDomain</span><span class="o">=</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">],</span>
                  <span class="n">seed</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
-        <span class="kn">from</span><span class="w"> </span><span class="nn">decimal</span><span class="w"> </span><span class="kn">import</span> <span class="n">Decimal</span>
-        <span class="kn">import</span><span class="w"> </span><span class="nn">random</span>
+        <span class="kn">from</span> <span class="nn">decimal</span> <span class="kn">import</span> <span class="n">Decimal</span>
+        <span class="kn">import</span> <span class="nn">random</span>
         <span class="n">random</span><span class="o">.</span><span class="n">seed</span><span class="p">(</span><span class="n">seed</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">seed</span> <span class="o">=</span> <span class="n">seed</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="s1">&#39;randomTournament&#39;</span>
@@ -736,7 +736,7 @@
 
 <div class="viewcode-block" id="RandomFixedSizeDigraph">
 <a class="viewcode-back" href="../techDoc.html#randomDigraphs.RandomFixedSizeDigraph">[docs]</a>
-<span class="k">class</span><span class="w"> </span><span class="nc">RandomFixedSizeDigraph</span><span class="p">(</span><span class="n">Digraph</span><span class="p">):</span>
+<span class="k">class</span> <span class="nc">RandomFixedSizeDigraph</span><span class="p">(</span><span class="n">Digraph</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Generates a random crisp digraph with a fixed size, </span>
 <span class="sd">    by instantiating a fixed numbers of arcs</span>
@@ -744,8 +744,8 @@
 <span class="sd">    pairs of nodes numbered from 1 to order. </span>
 
 <span class="sd">    &quot;&quot;&quot;</span>
-    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">order</span><span class="o">=</span><span class="mi">7</span><span class="p">,</span><span class="n">size</span><span class="o">=</span><span class="mi">14</span><span class="p">,</span><span class="n">seed</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
-        <span class="kn">import</span><span class="w"> </span><span class="nn">random</span><span class="o">,</span><span class="nn">copy</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">order</span><span class="o">=</span><span class="mi">7</span><span class="p">,</span><span class="n">size</span><span class="o">=</span><span class="mi">14</span><span class="p">,</span><span class="n">seed</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+        <span class="kn">import</span> <span class="nn">random</span><span class="o">,</span><span class="nn">copy</span>
         <span class="n">random</span><span class="o">.</span><span class="n">seed</span><span class="p">(</span><span class="n">seed</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">seed</span> <span class="o">=</span> <span class="n">seed</span>
         <span class="c1"># check feasability</span>
@@ -785,7 +785,7 @@
 
 <div class="viewcode-block" id="RandomFixedDegreeSequenceDigraph">
 <a class="viewcode-back" href="../techDoc.html#randomDigraphs.RandomFixedDegreeSequenceDigraph">[docs]</a>
-<span class="k">class</span><span class="w"> </span><span class="nc">RandomFixedDegreeSequenceDigraph</span><span class="p">(</span><span class="n">Digraph</span><span class="p">):</span>
+<span class="k">class</span> <span class="nc">RandomFixedDegreeSequenceDigraph</span><span class="p">(</span><span class="n">Digraph</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Specialization of the general Digraph class for generating</span>
 <span class="sd">    temporary random crisp graphs (symmetric digraphs) with a fixed sequence of degrees.</span>
@@ -798,8 +798,8 @@
 <span class="sd">        The implementation is not guaranteeing a uniform choice among all potential valid graph instances.</span>
 
 <span class="sd">    &quot;&quot;&quot;</span>
-    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">order</span><span class="o">=</span><span class="mi">7</span><span class="p">,</span><span class="n">degreeSequence</span><span class="o">=</span><span class="p">[</span><span class="mi">3</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">0</span><span class="p">],</span><span class="n">seed</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
-        <span class="kn">import</span><span class="w"> </span><span class="nn">random</span><span class="o">,</span><span class="nn">copy</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">order</span><span class="o">=</span><span class="mi">7</span><span class="p">,</span><span class="n">degreeSequence</span><span class="o">=</span><span class="p">[</span><span class="mi">3</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">0</span><span class="p">],</span><span class="n">seed</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+        <span class="kn">import</span> <span class="nn">random</span><span class="o">,</span><span class="nn">copy</span>
         <span class="n">random</span><span class="o">.</span><span class="n">seed</span><span class="p">(</span><span class="n">seed</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">seed</span> <span class="o">=</span> <span class="n">seed</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">degreeSequence</span> <span class="o">=</span> <span class="n">degreeSequence</span>
@@ -886,7 +886,7 @@
 
 <div class="viewcode-block" id="RandomRegularDigraph">
 <a class="viewcode-back" href="../techDoc.html#randomDigraphs.RandomRegularDigraph">[docs]</a>
-<span class="k">class</span><span class="w"> </span><span class="nc">RandomRegularDigraph</span><span class="p">(</span><span class="n">Digraph</span><span class="p">):</span>
+<span class="k">class</span> <span class="nc">RandomRegularDigraph</span><span class="p">(</span><span class="n">Digraph</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Specialization of Digraph class for random regular symmetric instances.</span>
 
@@ -894,8 +894,8 @@
 <span class="sd">        order and degree.</span>
 
 <span class="sd">    &quot;&quot;&quot;</span>
-    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">order</span><span class="o">=</span><span class="mi">7</span><span class="p">,</span><span class="n">degree</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">seed</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
-        <span class="kn">import</span><span class="w"> </span><span class="nn">random</span><span class="o">,</span><span class="nn">copy</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">order</span><span class="o">=</span><span class="mi">7</span><span class="p">,</span><span class="n">degree</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">seed</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+        <span class="kn">import</span> <span class="nn">random</span><span class="o">,</span><span class="nn">copy</span>
         <span class="n">random</span><span class="o">.</span><span class="n">seed</span><span class="p">(</span><span class="n">seed</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">seed</span> <span class="o">=</span> <span class="n">seed</span>
         <span class="c1"># check feasability</span>
@@ -968,7 +968,7 @@
 
 <div class="viewcode-block" id="RandomGridDigraph">
 <a class="viewcode-back" href="../techDoc.html#randomDigraphs.RandomGridDigraph">[docs]</a>
-<span class="k">class</span><span class="w"> </span><span class="nc">RandomGridDigraph</span><span class="p">(</span><span class="n">GridDigraph</span><span class="p">):</span>
+<span class="k">class</span> <span class="nc">RandomGridDigraph</span><span class="p">(</span><span class="n">GridDigraph</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Specialization of the general Digraph class for generating</span>
 <span class="sd">    temporary randomly oriented Grid digraphs of dimension n time m</span>
@@ -980,9 +980,9 @@
 
 <span class="sd">    &quot;&quot;&quot;</span>
 
-    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">n</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span><span class="n">m</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span><span class="n">valuationdomain</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;min&#39;</span><span class="p">:</span><span class="o">-</span><span class="mf">1.0</span><span class="p">,</span><span class="s1">&#39;max&#39;</span><span class="p">:</span><span class="mf">1.0</span><span class="p">},</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">n</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span><span class="n">m</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span><span class="n">valuationdomain</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;min&#39;</span><span class="p">:</span><span class="o">-</span><span class="mf">1.0</span><span class="p">,</span><span class="s1">&#39;max&#39;</span><span class="p">:</span><span class="mf">1.0</span><span class="p">},</span>
                  <span class="n">seed</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span><span class="n">Debug</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
-        <span class="kn">import</span><span class="w"> </span><span class="nn">random</span>
+        <span class="kn">import</span> <span class="nn">random</span>
         <span class="n">random</span><span class="o">.</span><span class="n">seed</span><span class="p">(</span><span class="n">seed</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">seed</span> <span class="o">=</span> <span class="n">seed</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="s1">&#39;randomGrid-&#39;</span><span class="o">+</span><span class="nb">str</span><span class="p">(</span><span class="n">n</span><span class="p">)</span><span class="o">+</span><span class="s1">&#39;-&#39;</span><span class="o">+</span><span class="nb">str</span><span class="p">(</span><span class="n">m</span><span class="p">)</span>
@@ -1108,7 +1108,7 @@
 
   <div role="contentinfo">
     <p>&#169; Copyright 2012-2025, Raymond Bisdorff.
-      <span class="lastupdated">Last updated on Apr 16, 2025.
+      <span class="lastupdated">Last updated on Apr 29, 2025.
       </span></p>
   </div>
 

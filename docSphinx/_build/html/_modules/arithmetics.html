@@ -6,7 +6,7 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>arithmetics &mdash; Digraph3 3.13.3 documentation</title>
-      <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=03e43079" />
+      <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=fa44fd50" />
       <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=e59714d7" />
       <link rel="stylesheet" type="text/css" href="../_static/graphviz.css?v=4ae1632d" />
       <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
@@ -28,7 +28,7 @@
       <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
       <script src="../_static/clipboard.min.js?v=a7894cd8"></script>
       <script src="../_static/copybutton.js?v=15d7cbb8"></script>
-      <script src="../_static/js/hoverxref.js?v=6ff7264e"></script>
+      <script src="../_static/js/hoverxref.js?v=85f38ef1"></script>
       <script src="../_static/js/tooltipster.bundle.min.js?v=18bf091b"></script>
       <script src="../_static/js/micromodal.min.js?v=04d6302d"></script>
     <script src="../_static/js/theme.js"></script>
@@ -112,15 +112,15 @@
 
 <span class="n">__version__</span> <span class="o">=</span> <span class="s2">&quot;$Revision: Python 3.13.2 $&quot;</span>
 
-<span class="kn">from</span><span class="w"> </span><span class="nn">arithmetics</span><span class="w"> </span><span class="kn">import</span> <span class="o">*</span>
-<span class="kn">from</span><span class="w"> </span><span class="nn">digraphs</span><span class="w"> </span><span class="kn">import</span> <span class="n">Digraph</span>
-<span class="kn">from</span><span class="w"> </span><span class="nn">decimal</span><span class="w"> </span><span class="kn">import</span> <span class="n">Decimal</span>
-<span class="kn">from</span><span class="w"> </span><span class="nn">collections</span><span class="w"> </span><span class="kn">import</span> <span class="n">OrderedDict</span>
+<span class="kn">from</span> <span class="nn">arithmetics</span> <span class="kn">import</span> <span class="o">*</span>
+<span class="kn">from</span> <span class="nn">digraphs</span> <span class="kn">import</span> <span class="n">Digraph</span>
+<span class="kn">from</span> <span class="nn">decimal</span> <span class="kn">import</span> <span class="n">Decimal</span>
+<span class="kn">from</span> <span class="nn">collections</span> <span class="kn">import</span> <span class="n">OrderedDict</span>
 
 <span class="c1">#---------------</span>
 <div class="viewcode-block" id="QuadraticResiduesDigraph">
 <a class="viewcode-back" href="../techDoc.html#arithmetics.QuadraticResiduesDigraph">[docs]</a>
-<span class="k">class</span><span class="w"> </span><span class="nc">QuadraticResiduesDigraph</span><span class="p">(</span><span class="n">Digraph</span><span class="p">):</span>
+<span class="k">class</span> <span class="nc">QuadraticResiduesDigraph</span><span class="p">(</span><span class="n">Digraph</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    The **Legendre** symbol *(a/p)* of any pair of non null integers *a* and *p* is:</span>
 
@@ -149,13 +149,13 @@
 <span class="sd">       :align: center</span>
 
 <span class="sd">    &quot;&quot;&quot;</span>
-    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">integers</span><span class="o">=</span><span class="p">[</span><span class="mi">3</span><span class="p">,</span><span class="mi">5</span><span class="p">,</span><span class="mi">7</span><span class="p">,</span><span class="mi">11</span><span class="p">,</span><span class="mi">13</span><span class="p">,</span><span class="mi">17</span><span class="p">,</span><span class="mi">19</span><span class="p">]):</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">integers</span><span class="o">=</span><span class="p">[</span><span class="mi">3</span><span class="p">,</span><span class="mi">5</span><span class="p">,</span><span class="mi">7</span><span class="p">,</span><span class="mi">11</span><span class="p">,</span><span class="mi">13</span><span class="p">,</span><span class="mi">17</span><span class="p">,</span><span class="mi">19</span><span class="p">]):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        By default we consider only primes, but the Legendre symbol</span>
 <span class="sd">        works for any integer sequence not containing 0.</span>
 
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="kn">import</span><span class="w"> </span><span class="nn">sys</span><span class="o">,</span><span class="nn">array</span><span class="o">,</span><span class="nn">copy</span>
+        <span class="kn">import</span> <span class="nn">sys</span><span class="o">,</span><span class="nn">array</span><span class="o">,</span><span class="nn">copy</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="s1">&#39;legendreDigraph&#39;</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">order</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">integers</span><span class="p">)</span>
         <span class="n">actionsList</span> <span class="o">=</span> <span class="n">integers</span>
@@ -198,7 +198,7 @@
 
 <div class="viewcode-block" id="BachetNumber">
 <a class="viewcode-back" href="../techDoc.html#arithmetics.BachetNumber">[docs]</a>
-<span class="k">class</span><span class="w"> </span><span class="nc">BachetNumber</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+<span class="k">class</span> <span class="nc">BachetNumber</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Bipolar-valued {-1,0,1} base 3 encoded integers due to Claude Gaspard Bachet de Méziriac (1621)</span>
 <span class="sd">    </span>
@@ -244,7 +244,7 @@
 <span class="sd">     011 (4) + -1-1-1 (-13) = -100 (-9)</span>
 
 <span class="sd">    &quot;&quot;&quot;</span>
-    <span class="k">def</span><span class="w"> </span><span class="fm">__repr__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="k">def</span> <span class="fm">__repr__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Default presentation method for Bchet number instances.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
@@ -257,7 +257,7 @@
         <span class="n">reprString</span> <span class="o">+=</span> <span class="s1">&#39;Attributes     : </span><span class="si">%s</span><span class="se">\n</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="nb">list</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="vm">__dict__</span><span class="o">.</span><span class="n">keys</span><span class="p">())</span>    
         <span class="k">return</span> <span class="n">reprString</span>
     
-    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">num_int</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span><span class="n">vector</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">num_int</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span><span class="n">vector</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Tranforms a potentially signed integer into a Bachet number</span>
 <span class="sd">        &quot;&quot;&quot;</span>
@@ -269,7 +269,7 @@
         <span class="k">else</span><span class="p">:</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">vector</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_int2bachet</span><span class="p">(</span><span class="n">num_int</span><span class="p">)</span>
 
-    <span class="k">def</span><span class="w"> </span><span class="fm">__str__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="k">def</span> <span class="fm">__str__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Defines the printable string version of a Bachet number</span>
 <span class="sd">        &quot;&quot;&quot;</span>
@@ -278,11 +278,11 @@
             <span class="n">bachet_string</span> <span class="o">+=</span> <span class="nb">str</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">vector</span><span class="p">[</span><span class="n">i</span><span class="p">])</span>
         <span class="k">return</span> <span class="n">bachet_string</span>
        
-    <span class="k">def</span><span class="w"> </span><span class="fm">__neg__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="k">def</span> <span class="fm">__neg__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Defines an unary negating operator for Bachet encoded numbers</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="kn">from</span><span class="w"> </span><span class="nn">copy</span><span class="w"> </span><span class="kn">import</span> <span class="n">deepcopy</span>
+        <span class="kn">from</span> <span class="nn">copy</span> <span class="kn">import</span> <span class="n">deepcopy</span>
         <span class="n">neg</span> <span class="o">=</span> <span class="n">deepcopy</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
         <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">neg</span><span class="p">)):</span>
             <span class="n">neg</span><span class="o">.</span><span class="n">vector</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">neg</span><span class="o">.</span><span class="n">vector</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">*</span> <span class="o">-</span><span class="mi">1</span>
@@ -297,11 +297,11 @@
 <span class="c1">##        n3 = n1 + n2</span>
 <span class="c1">##        return BachetNumber(n3)        </span>
 
-    <span class="k">def</span><span class="w"> </span><span class="fm">__add__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">other</span><span class="p">,</span><span class="n">Debug</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+    <span class="k">def</span> <span class="fm">__add__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">other</span><span class="p">,</span><span class="n">Debug</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Defines the addition operator for Bachet encoded numbers</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="kn">from</span><span class="w"> </span><span class="nn">copy</span><span class="w"> </span><span class="kn">import</span> <span class="n">deepcopy</span>
+        <span class="kn">from</span> <span class="nn">copy</span> <span class="kn">import</span> <span class="n">deepcopy</span>
         <span class="n">srv</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">reverse</span><span class="p">()</span>
         <span class="n">orv</span> <span class="o">=</span> <span class="n">other</span><span class="o">.</span><span class="n">reverse</span><span class="p">()</span>
         <span class="n">n1</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
@@ -352,7 +352,7 @@
         <span class="n">result</span> <span class="o">=</span> <span class="n">new</span><span class="o">.</span><span class="n">reverse</span><span class="p">()</span>
         <span class="k">return</span> <span class="n">result</span>
 
-    <span class="k">def</span><span class="w"> </span><span class="fm">__mul__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">other</span><span class="p">):</span>
+    <span class="k">def</span> <span class="fm">__mul__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">other</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Defines the addition operator for Bachet encoded numbers</span>
 <span class="sd">        &quot;&quot;&quot;</span>
@@ -361,7 +361,7 @@
         <span class="n">n3</span> <span class="o">=</span> <span class="n">n1</span> <span class="o">*</span> <span class="n">n2</span>
         <span class="k">return</span> <span class="n">BachetNumber</span><span class="p">(</span><span class="n">n3</span><span class="p">)</span>
         
-    <span class="k">def</span><span class="w"> </span><span class="nf">_base10to3</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">num</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">_base10to3</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">num</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Change a base 10 number to a base 3 number.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
@@ -374,7 +374,7 @@
             <span class="n">current</span> <span class="o">=</span> <span class="n">current</span><span class="o">//</span><span class="mi">3</span>
         <span class="k">return</span> <span class="n">new_num_string</span>
 
-    <span class="k">def</span><span class="w"> </span><span class="nf">_base3toBachet</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">num_string</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">_base3toBachet</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">num_string</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Converts a base 3 encoded integer into a</span>
 <span class="sd">        bipolar {-1,0,1} encoded one.</span>
@@ -399,7 +399,7 @@
             
         <span class="k">return</span> <span class="n">new_vector</span>
 
-    <span class="k">def</span><span class="w"> </span><span class="nf">_int2bachet</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">num_int</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">_int2bachet</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">num_int</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Converts a signed integer into a Bachet encoded number</span>
 <span class="sd">        &quot;&quot;&quot;</span>
@@ -421,7 +421,7 @@
        
 <div class="viewcode-block" id="BachetNumber.value">
 <a class="viewcode-back" href="../techDoc.html#arithmetics.BachetNumber.value">[docs]</a>
-    <span class="k">def</span><span class="w"> </span><span class="nf">value</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">value</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Renders the integer corresponding to the Bachet number</span>
 <span class="sd">        &quot;&quot;&quot;</span>
@@ -431,7 +431,7 @@
         <span class="k">return</span> <span class="n">result_int</span></div>
 
 
-    <span class="k">def</span><span class="w"> </span><span class="fm">__len__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="k">def</span> <span class="fm">__len__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Returns the length of the Bachet encoding</span>
 <span class="sd">        &quot;&quot;&quot;</span>
@@ -439,11 +439,11 @@
 
 <div class="viewcode-block" id="BachetNumber.reverse">
 <a class="viewcode-back" href="../techDoc.html#arithmetics.BachetNumber.reverse">[docs]</a>
-    <span class="k">def</span><span class="w"> </span><span class="nf">reverse</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">reverse</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Reverses the Bachet code</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="kn">from</span><span class="w"> </span><span class="nn">copy</span><span class="w"> </span><span class="kn">import</span> <span class="n">deepcopy</span>
+        <span class="kn">from</span> <span class="nn">copy</span> <span class="kn">import</span> <span class="n">deepcopy</span>
         <span class="n">rev</span> <span class="o">=</span> <span class="n">deepcopy</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
         <span class="n">result</span> <span class="o">=</span> <span class="p">[</span><span class="mi">0</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">vector</span><span class="p">))]</span>
         <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">vector</span><span class="p">)):</span>
@@ -457,7 +457,7 @@
     
 <div class="viewcode-block" id="primesBelow">
 <a class="viewcode-back" href="../techDoc.html#arithmetics.primesBelow">[docs]</a>
-<span class="k">def</span><span class="w"> </span><span class="nf">primesBelow</span><span class="p">(</span><span class="n">N</span><span class="p">,</span><span class="n">Odd</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+<span class="k">def</span> <span class="nf">primesBelow</span><span class="p">(</span><span class="n">N</span><span class="p">,</span><span class="n">Odd</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 
 <span class="sd">    http://stackoverflow.com/questions/2068372/fastest-way-to-list-all-primes-below-n-in-python/3035188#3035188</span>
@@ -487,7 +487,7 @@
 <span class="n">_smallprimesetSize</span> <span class="o">=</span> <span class="mi">100000</span>
 <div class="viewcode-block" id="isprime">
 <a class="viewcode-back" href="../techDoc.html#arithmetics.isprime">[docs]</a>
-<span class="k">def</span><span class="w"> </span><span class="nf">isprime</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="n">precision</span><span class="o">=</span><span class="mi">7</span><span class="p">):</span>
+<span class="k">def</span> <span class="nf">isprime</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="n">precision</span><span class="o">=</span><span class="mi">7</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 
 <span class="sd">    http://en.wikipedia.org/wiki/Miller-Rabin_primality_test#Algorithm_and_running_time</span>
@@ -522,7 +522,7 @@
     <span class="k">return</span> <span class="kc">True</span></div>
 
 
-<span class="k">def</span><span class="w"> </span><span class="nf">_pollard_brent</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
+<span class="k">def</span> <span class="nf">_pollard_brent</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 
 <span class="sd">    https://comeoncodeon.wordpress.com/2010/09/18/pollard-rho-brent-integer-factorization/</span>
@@ -530,7 +530,7 @@
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="k">if</span> <span class="n">n</span> <span class="o">%</span> <span class="mi">2</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span> <span class="k">return</span> <span class="mi">2</span>
     <span class="k">if</span> <span class="n">n</span> <span class="o">%</span> <span class="mi">3</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span> <span class="k">return</span> <span class="mi">3</span>
-    <span class="kn">import</span><span class="w"> </span><span class="nn">random</span>
+    <span class="kn">import</span> <span class="nn">random</span>
     <span class="n">y</span><span class="p">,</span> <span class="n">c</span><span class="p">,</span> <span class="n">m</span> <span class="o">=</span> <span class="n">random</span><span class="o">.</span><span class="n">randint</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">n</span><span class="o">-</span><span class="mi">1</span><span class="p">),</span> <span class="n">random</span><span class="o">.</span><span class="n">randint</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">n</span><span class="o">-</span><span class="mi">1</span><span class="p">),</span> <span class="n">random</span><span class="o">.</span><span class="n">randint</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">n</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span>
     <span class="n">g</span><span class="p">,</span> <span class="n">r</span><span class="p">,</span> <span class="n">q</span> <span class="o">=</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span>
     <span class="k">while</span> <span class="n">g</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
@@ -559,7 +559,7 @@
 <span class="n">_smallprimes</span> <span class="o">=</span> <span class="n">primesBelow</span><span class="p">(</span><span class="mi">1000</span><span class="p">)</span> <span class="c1"># might seem low, but 1000*1000 = 1000000, so this will fully factor every composite &lt; 1000000</span>
 <div class="viewcode-block" id="primeFactors">
 <a class="viewcode-back" href="../techDoc.html#arithmetics.primeFactors">[docs]</a>
-<span class="k">def</span><span class="w"> </span><span class="nf">primeFactors</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="n">sort</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
+<span class="k">def</span> <span class="nf">primeFactors</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="n">sort</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    &gt;&gt;&gt; import arithmetics as ar</span>
 <span class="sd">    &gt;&gt;&gt; ar.primeFactors(12345)</span>
@@ -592,7 +592,7 @@
     <span class="k">return</span> <span class="n">factors</span></div>
 
 
-<span class="k">def</span><span class="w"> </span><span class="nf">factorization</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
+<span class="k">def</span> <span class="nf">factorization</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
     <span class="n">factors</span> <span class="o">=</span> <span class="n">OrderedDict</span><span class="p">()</span>
     <span class="k">for</span> <span class="n">p1</span> <span class="ow">in</span> <span class="n">primeFactors</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
         <span class="k">try</span><span class="p">:</span>
@@ -603,7 +603,7 @@
 
 <div class="viewcode-block" id="moebius_mu">
 <a class="viewcode-back" href="../techDoc.html#arithmetics.moebius_mu">[docs]</a>
-<span class="k">def</span><span class="w"> </span><span class="nf">moebius_mu</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
+<span class="k">def</span> <span class="nf">moebius_mu</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Implements the Moebius mu function on N based on n&#39;s prime factorization:</span>
 <span class="sd">    n = p1^e1 * ... * pk^ek with each ei &gt;= 1 for i = 1, ..., k.  </span>
@@ -643,7 +643,7 @@
 
 <div class="viewcode-block" id="divisors">
 <a class="viewcode-back" href="../techDoc.html#arithmetics.divisors">[docs]</a>
-<span class="k">def</span><span class="w"> </span><span class="nf">divisors</span><span class="p">(</span><span class="n">n</span><span class="p">,</span><span class="n">Sorted</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
+<span class="k">def</span> <span class="nf">divisors</span><span class="p">(</span><span class="n">n</span><span class="p">,</span><span class="n">Sorted</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Renders the list of divisors of integer n.</span>
 
@@ -667,7 +667,7 @@
 
 <div class="viewcode-block" id="divisorsFunction">
 <a class="viewcode-back" href="../techDoc.html#arithmetics.divisorsFunction">[docs]</a>
-<span class="k">def</span><span class="w"> </span><span class="nf">divisorsFunction</span><span class="p">(</span><span class="n">k</span><span class="p">,</span><span class="n">n</span><span class="p">):</span>
+<span class="k">def</span> <span class="nf">divisorsFunction</span><span class="p">(</span><span class="n">k</span><span class="p">,</span><span class="n">n</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    generic divisor function:</span>
 
@@ -683,7 +683,7 @@
 <span class="n">_totients</span> <span class="o">=</span> <span class="p">{}</span>
 <div class="viewcode-block" id="totient">
 <a class="viewcode-back" href="../techDoc.html#arithmetics.totient">[docs]</a>
-<span class="k">def</span><span class="w"> </span><span class="nf">totient</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
+<span class="k">def</span> <span class="nf">totient</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Implements the totient function rendering</span>
 <span class="sd">    Euler&#39;s number of coprime elements a in Zn.</span>
@@ -708,7 +708,7 @@
         
 <div class="viewcode-block" id="simpleContinuedFraction">
 <a class="viewcode-back" href="../techDoc.html#arithmetics.simpleContinuedFraction">[docs]</a>
-<span class="k">def</span><span class="w"> </span><span class="nf">simpleContinuedFraction</span><span class="p">(</span><span class="n">p</span><span class="p">,</span> <span class="n">q</span><span class="p">,</span> <span class="n">Comments</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+<span class="k">def</span> <span class="nf">simpleContinuedFraction</span><span class="p">(</span><span class="n">p</span><span class="p">,</span> <span class="n">q</span><span class="p">,</span> <span class="n">Comments</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Renders the continued fraction [a_0,a_1,a_2,...,a_n]</span>
 <span class="sd">    of the ratio of two positive integers p &gt; 0 and q &gt; 0 by</span>
@@ -747,7 +747,7 @@
 
 <div class="viewcode-block" id="simpleConvergents">
 <a class="viewcode-back" href="../techDoc.html#arithmetics.simpleConvergents">[docs]</a>
-<span class="k">def</span><span class="w"> </span><span class="nf">simpleConvergents</span><span class="p">(</span><span class="n">cf</span><span class="p">,</span> <span class="n">AsFloats</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+<span class="k">def</span> <span class="nf">simpleConvergents</span><span class="p">(</span><span class="n">cf</span><span class="p">,</span> <span class="n">AsFloats</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Renders the convergents *pi* and *qi* for *i* = 0 to *n* in list format</span>
 <span class="sd">    for a given simple continued fraction of two positive integer *a* and *b*.</span>
@@ -787,7 +787,7 @@
 
 <div class="viewcode-block" id="decimalEvalContinuedFraction">
 <a class="viewcode-back" href="../techDoc.html#arithmetics.decimalEvalContinuedFraction">[docs]</a>
-<span class="k">def</span><span class="w"> </span><span class="nf">decimalEvalContinuedFraction</span><span class="p">(</span><span class="n">cf</span><span class="p">):</span>
+<span class="k">def</span> <span class="nf">decimalEvalContinuedFraction</span><span class="p">(</span><span class="n">cf</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Backwise recursive evaluation: ev_i-1 + 1/ev_i, for i = n,..,1</span>
 <span class="sd">    of the continued fraction cf = [a_0,a_1,a_2,...,a_n] and </span>
@@ -800,7 +800,7 @@
 <span class="sd">     1.7142857142857142</span>
 
 <span class="sd">    &quot;&quot;&quot;</span>
-    <span class="kn">from</span><span class="w"> </span><span class="nn">decimal</span><span class="w"> </span><span class="kn">import</span> <span class="n">Decimal</span>
+    <span class="kn">from</span> <span class="nn">decimal</span> <span class="kn">import</span> <span class="n">Decimal</span>
     <span class="n">n</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">cf</span><span class="p">)</span> <span class="o">-</span> <span class="mi">1</span>
     <span class="n">res</span> <span class="o">=</span> <span class="n">Decimal</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">cf</span><span class="p">[</span><span class="n">n</span><span class="p">]))</span>
     <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="o">-</span><span class="mi">1</span><span class="p">):</span>
@@ -811,7 +811,7 @@
 
 <div class="viewcode-block" id="cf2Rational">
 <a class="viewcode-back" href="../techDoc.html#arithmetics.cf2Rational">[docs]</a>
-<span class="k">def</span><span class="w"> </span><span class="nf">cf2Rational</span><span class="p">(</span><span class="n">cf</span><span class="p">,</span> <span class="n">AsDecimal</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">Debug</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+<span class="k">def</span> <span class="nf">cf2Rational</span><span class="p">(</span><span class="n">cf</span><span class="p">,</span> <span class="n">AsDecimal</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">Debug</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Converts the finite continued Fraction *cf* back to</span>
 <span class="sd">    its corresponding rational number expression.</span>
@@ -826,7 +826,7 @@
 <span class="sd">     9.375</span>
 
 <span class="sd">    &quot;&quot;&quot;</span>
-    <span class="kn">from</span><span class="w"> </span><span class="nn">decimal</span><span class="w"> </span><span class="kn">import</span> <span class="n">Decimal</span>
+    <span class="kn">from</span> <span class="nn">decimal</span> <span class="kn">import</span> <span class="n">Decimal</span>
     <span class="n">p</span><span class="p">,</span><span class="n">q</span> <span class="o">=</span> <span class="n">simpleConvergents</span><span class="p">(</span><span class="n">cf</span><span class="p">)</span>
     <span class="n">a</span> <span class="o">=</span> <span class="n">p</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
     <span class="n">b</span> <span class="o">=</span> <span class="n">q</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
@@ -840,7 +840,7 @@
 
 <div class="viewcode-block" id="continuedFraction">
 <a class="viewcode-back" href="../techDoc.html#arithmetics.continuedFraction">[docs]</a>
-<span class="k">def</span><span class="w"> </span><span class="nf">continuedFraction</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">terms</span><span class="o">=</span><span class="mi">20</span><span class="p">,</span> <span class="n">AsFloats</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">rel_tol</span><span class="o">=</span><span class="mf">1e-9</span><span class="p">,</span> <span class="n">abs_tol</span><span class="o">=</span><span class="mf">0.0</span><span class="p">):</span>
+<span class="k">def</span> <span class="nf">continuedFraction</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">terms</span><span class="o">=</span><span class="mi">20</span><span class="p">,</span> <span class="n">AsFloats</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">rel_tol</span><span class="o">=</span><span class="mf">1e-9</span><span class="p">,</span> <span class="n">abs_tol</span><span class="o">=</span><span class="mf">0.0</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 
 <span class="sd">    Source: https://leancrew.com/all-this/2023/08/continued-fractions-in-python/</span>
@@ -874,8 +874,8 @@
 
 <span class="sd">    &quot;&quot;&quot;</span>
 
-    <span class="kn">from</span><span class="w"> </span><span class="nn">fractions</span><span class="w"> </span><span class="kn">import</span> <span class="n">Fraction</span>
-    <span class="kn">from</span><span class="w"> </span><span class="nn">math</span><span class="w"> </span><span class="kn">import</span> <span class="n">isclose</span>
+    <span class="kn">from</span> <span class="nn">fractions</span> <span class="kn">import</span> <span class="n">Fraction</span>
+    <span class="kn">from</span> <span class="nn">math</span> <span class="kn">import</span> <span class="n">isclose</span>
     
     <span class="c1"># Initialize, using Khinchin&#39;s notation</span>
     <span class="n">a</span> <span class="o">=</span> <span class="p">[]</span>       <span class="c1"># continued fraction terms</span>
@@ -914,7 +914,7 @@
 
 <div class="viewcode-block" id="gcd">
 <a class="viewcode-back" href="../techDoc.html#arithmetics.gcd">[docs]</a>
-<span class="k">def</span><span class="w"> </span><span class="nf">gcd</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">):</span>
+<span class="k">def</span> <span class="nf">gcd</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Renders the greatest common divisor of two positive integers a and b. </span>
 
@@ -935,7 +935,7 @@
     
 <div class="viewcode-block" id="lcm">
 <a class="viewcode-back" href="../techDoc.html#arithmetics.lcm">[docs]</a>
-<span class="k">def</span><span class="w"> </span><span class="nf">lcm</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">):</span>
+<span class="k">def</span> <span class="nf">lcm</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Renders the least common multiple of a and b.</span>
 
@@ -949,7 +949,7 @@
 
 <div class="viewcode-block" id="bezout">
 <a class="viewcode-back" href="../techDoc.html#arithmetics.bezout">[docs]</a>
-<span class="k">def</span><span class="w"> </span><span class="nf">bezout</span><span class="p">(</span><span class="n">a</span><span class="p">,</span><span class="n">b</span><span class="p">,</span><span class="n">Comments</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span><span class="n">Debug</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+<span class="k">def</span> <span class="nf">bezout</span><span class="p">(</span><span class="n">a</span><span class="p">,</span><span class="n">b</span><span class="p">,</span><span class="n">Comments</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span><span class="n">Debug</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Renders the tuple *(d,x,y)* wher *d = gcd(a,b)* and *x* and *y* are the</span>
 <span class="sd">    Bezout coefficients such that *d = ax + by*.</span>
@@ -992,7 +992,7 @@
 
 <div class="viewcode-block" id="solPartEqnDioph">
 <a class="viewcode-back" href="../techDoc.html#arithmetics.solPartEqnDioph">[docs]</a>
-<span class="k">def</span><span class="w"> </span><span class="nf">solPartEqnDioph</span><span class="p">(</span><span class="n">a</span><span class="p">,</span><span class="n">b</span><span class="p">,</span><span class="n">c</span><span class="p">,</span><span class="n">Comments</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+<span class="k">def</span> <span class="nf">solPartEqnDioph</span><span class="p">(</span><span class="n">a</span><span class="p">,</span><span class="n">b</span><span class="p">,</span><span class="n">c</span><span class="p">,</span><span class="n">Comments</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    renders a particular integer solution of the Diophantian equation</span>
 <span class="sd">    ax + by = c. The method returns the tuple</span>
@@ -1023,7 +1023,7 @@
 
 <div class="viewcode-block" id="zn_units">
 <a class="viewcode-back" href="../techDoc.html#arithmetics.zn_units">[docs]</a>
-<span class="k">def</span><span class="w"> </span><span class="nf">zn_units</span><span class="p">(</span><span class="n">n</span><span class="p">,</span><span class="n">Comments</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+<span class="k">def</span> <span class="nf">zn_units</span><span class="p">(</span><span class="n">n</span><span class="p">,</span><span class="n">Comments</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Renders the set of units of Zn.</span>
 <span class="sd">    </span>
@@ -1045,7 +1045,7 @@
 
 <div class="viewcode-block" id="zn_squareroots">
 <a class="viewcode-back" href="../techDoc.html#arithmetics.zn_squareroots">[docs]</a>
-<span class="k">def</span><span class="w"> </span><span class="nf">zn_squareroots</span><span class="p">(</span><span class="n">n</span><span class="p">,</span><span class="n">Comments</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+<span class="k">def</span> <span class="nf">zn_squareroots</span><span class="p">(</span><span class="n">n</span><span class="p">,</span><span class="n">Comments</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Renders the quadratic residues of Zn as a dictionary.</span>
 
@@ -1073,7 +1073,7 @@
 
 <div class="viewcode-block" id="computePiDecimals">
 <a class="viewcode-back" href="../techDoc.html#arithmetics.computePiDecimals">[docs]</a>
-<span class="k">def</span><span class="w"> </span><span class="nf">computePiDecimals</span><span class="p">(</span><span class="n">decimalWordLength</span><span class="o">=</span><span class="mi">4</span><span class="p">,</span><span class="n">nbrOfWords</span><span class="o">=</span><span class="mi">600</span><span class="p">,</span><span class="n">Comments</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+<span class="k">def</span> <span class="nf">computePiDecimals</span><span class="p">(</span><span class="n">decimalWordLength</span><span class="o">=</span><span class="mi">4</span><span class="p">,</span><span class="n">nbrOfWords</span><span class="o">=</span><span class="mi">600</span><span class="p">,</span><span class="n">Comments</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Renders at least *decimalWordLenght* x *nbrOfWords* (default: 4x600=2400)</span>
 <span class="sd">    decimals of :math:`\\pi`.</span>
@@ -1139,7 +1139,7 @@
 
 <div class="viewcode-block" id="sternBrocot">
 <a class="viewcode-back" href="../techDoc.html#arithmetics.sternBrocot">[docs]</a>
-<span class="k">def</span><span class="w"> </span><span class="nf">sternBrocot</span><span class="p">(</span><span class="n">m</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span><span class="n">n</span><span class="o">=</span><span class="mi">7</span><span class="p">,</span><span class="n">Debug</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+<span class="k">def</span> <span class="nf">sternBrocot</span><span class="p">(</span><span class="n">m</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span><span class="n">n</span><span class="o">=</span><span class="mi">7</span><span class="p">,</span><span class="n">Debug</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Renders the Stern-Brocot representation of the rational m/n (m and n are positive integers).</span>
 <span class="sd">    For instance, sternBrocot(5,7) = [&#39;L&#39;,&#39;R&#39;,&#39;R&#39;,&#39;L&#39;].</span>
@@ -1161,13 +1161,13 @@
 
 <div class="viewcode-block" id="invSternBrocot">
 <a class="viewcode-back" href="../techDoc.html#arithmetics.invSternBrocot">[docs]</a>
-<span class="k">def</span><span class="w"> </span><span class="nf">invSternBrocot</span><span class="p">(</span><span class="n">sb</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;L&#39;</span><span class="p">,</span><span class="s1">&#39;R&#39;</span><span class="p">,</span><span class="s1">&#39;R&#39;</span><span class="p">,</span><span class="s1">&#39;L&#39;</span><span class="p">],</span><span class="n">Debug</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+<span class="k">def</span> <span class="nf">invSternBrocot</span><span class="p">(</span><span class="n">sb</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;L&#39;</span><span class="p">,</span><span class="s1">&#39;R&#39;</span><span class="p">,</span><span class="s1">&#39;R&#39;</span><span class="p">,</span><span class="s1">&#39;L&#39;</span><span class="p">],</span><span class="n">Debug</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Computing the rational which corresponds to the Stern-Brocot string sb.</span>
 
 <span class="sd">    *Source*: Graham, Knuth, Patashnik, Sec. 4.5 in Concrete Mathematics 2nd Ed., Addison-Wesley 1994, pp 115-123. </span>
 <span class="sd">    &quot;&quot;&quot;</span>
-    <span class="k">def</span><span class="w"> </span><span class="nf">_matMult</span><span class="p">(</span><span class="n">S</span><span class="p">,</span><span class="n">X</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">_matMult</span><span class="p">(</span><span class="n">S</span><span class="p">,</span><span class="n">X</span><span class="p">):</span>
         <span class="n">R</span> <span class="o">=</span> <span class="p">[[</span><span class="n">S</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span><span class="o">*</span><span class="n">X</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span><span class="o">+</span><span class="n">S</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">1</span><span class="p">]</span><span class="o">*</span><span class="n">X</span><span class="p">[</span><span class="mi">1</span><span class="p">][</span><span class="mi">0</span><span class="p">],</span><span class="n">S</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span><span class="o">*</span><span class="n">X</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">1</span><span class="p">]</span><span class="o">+</span><span class="n">S</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">1</span><span class="p">]</span><span class="o">*</span><span class="n">X</span><span class="p">[</span><span class="mi">1</span><span class="p">][</span><span class="mi">1</span><span class="p">]],</span>
              <span class="p">[</span><span class="n">S</span><span class="p">[</span><span class="mi">1</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span><span class="o">*</span><span class="n">X</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span><span class="o">+</span><span class="n">S</span><span class="p">[</span><span class="mi">1</span><span class="p">][</span><span class="mi">1</span><span class="p">]</span><span class="o">*</span><span class="n">X</span><span class="p">[</span><span class="mi">1</span><span class="p">][</span><span class="mi">0</span><span class="p">],</span><span class="n">S</span><span class="p">[</span><span class="mi">1</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span><span class="o">*</span><span class="n">X</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">1</span><span class="p">]</span><span class="o">+</span><span class="n">S</span><span class="p">[</span><span class="mi">1</span><span class="p">][</span><span class="mi">1</span><span class="p">]</span><span class="o">*</span><span class="n">X</span><span class="p">[</span><span class="mi">1</span><span class="p">][</span><span class="mi">1</span><span class="p">]]]</span>
         <span class="k">return</span> <span class="n">R</span>
@@ -1194,7 +1194,7 @@
 
 <div class="viewcode-block" id="computeFareySeries">
 <a class="viewcode-back" href="../techDoc.html#arithmetics.computeFareySeries">[docs]</a>
-<span class="k">def</span><span class="w"> </span><span class="nf">computeFareySeries</span><span class="p">(</span><span class="n">n</span><span class="o">=</span><span class="mi">7</span><span class="p">,</span><span class="n">AsFloats</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span><span class="n">Debug</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+<span class="k">def</span> <span class="nf">computeFareySeries</span><span class="p">(</span><span class="n">n</span><span class="o">=</span><span class="mi">7</span><span class="p">,</span><span class="n">AsFloats</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span><span class="n">Debug</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Renders the Farey series, ie the ordered list of positive rational fractions with positive denominator lower or equal to n. For *n* = 1, we obtain: [[0,1],[1,1]].</span>
 
@@ -1248,7 +1248,7 @@
 
 <div class="viewcode-block" id="solvingQuadraticEquation">
 <a class="viewcode-back" href="../techDoc.html#arithmetics.solvingQuadraticEquation">[docs]</a>
-<span class="k">def</span><span class="w"> </span><span class="nf">solvingQuadraticEquation</span><span class="p">(</span><span class="n">a</span><span class="p">,</span><span class="n">b</span><span class="p">,</span><span class="n">c</span><span class="p">,</span><span class="n">Comments</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+<span class="k">def</span> <span class="nf">solvingQuadraticEquation</span><span class="p">(</span><span class="n">a</span><span class="p">,</span><span class="n">b</span><span class="p">,</span><span class="n">c</span><span class="p">,</span><span class="n">Comments</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Renders both roots x,y of ax2 + bx + c = 0 where</span>
 <span class="sd">    x = (-b + sqrt(b^2 -4ac))/2a and</span>
@@ -1269,7 +1269,7 @@
 <span class="sd">     ((3-1j), (3+1j))</span>
 
 <span class="sd">    &quot;&quot;&quot;</span>
-    <span class="kn">from</span><span class="w"> </span><span class="nn">math</span><span class="w"> </span><span class="kn">import</span> <span class="n">sqrt</span>
+    <span class="kn">from</span> <span class="nn">math</span> <span class="kn">import</span> <span class="n">sqrt</span>
     <span class="n">D</span> <span class="o">=</span> <span class="p">(</span><span class="n">b</span><span class="o">*</span><span class="n">b</span> <span class="o">-</span><span class="mi">4</span><span class="o">*</span><span class="n">a</span><span class="o">*</span><span class="n">c</span><span class="p">)</span>
     <span class="k">if</span> <span class="n">Comments</span><span class="p">:</span>
         <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;D = (b^2 -4*a*c) = </span><span class="si">%f</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="n">D</span> <span class="p">)</span>
@@ -1348,7 +1348,7 @@
 
   <div role="contentinfo">
     <p>&#169; Copyright 2012-2025, Raymond Bisdorff.
-      <span class="lastupdated">Last updated on Apr 16, 2025.
+      <span class="lastupdated">Last updated on Apr 29, 2025.
       </span></p>
   </div>
 

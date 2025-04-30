@@ -6,7 +6,7 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>perfTabs &mdash; Digraph3 3.13.3 documentation</title>
-      <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=03e43079" />
+      <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=fa44fd50" />
       <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=e59714d7" />
       <link rel="stylesheet" type="text/css" href="../_static/graphviz.css?v=4ae1632d" />
       <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
@@ -28,7 +28,7 @@
       <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
       <script src="../_static/clipboard.min.js?v=a7894cd8"></script>
       <script src="../_static/copybutton.js?v=15d7cbb8"></script>
-      <script src="../_static/js/hoverxref.js?v=6ff7264e"></script>
+      <script src="../_static/js/hoverxref.js?v=85f38ef1"></script>
       <script src="../_static/js/tooltipster.bundle.min.js?v=18bf091b"></script>
       <script src="../_static/js/micromodal.min.js?v=04d6302d"></script>
     <script src="../_static/js/theme.js"></script>
@@ -108,17 +108,17 @@
 
 <span class="n">__version__</span> <span class="o">=</span> <span class="s2">&quot;$Revision: Python 3.13.2&quot;</span>
 
-<span class="kn">from</span><span class="w"> </span><span class="nn">perfTabs</span><span class="w"> </span><span class="kn">import</span> <span class="o">*</span>
-<span class="kn">import</span><span class="w"> </span><span class="nn">json</span>
-<span class="kn">import</span><span class="w"> </span><span class="nn">decimal</span>
+<span class="kn">from</span> <span class="nn">perfTabs</span> <span class="kn">import</span> <span class="o">*</span>
+<span class="kn">import</span> <span class="nn">json</span>
+<span class="kn">import</span> <span class="nn">decimal</span>
 <span class="c1"># from digraphsTools import *</span>
-<span class="kn">from</span><span class="w"> </span><span class="nn">decimal</span><span class="w"> </span><span class="kn">import</span> <span class="n">Decimal</span>
-<span class="kn">from</span><span class="w"> </span><span class="nn">collections</span><span class="w"> </span><span class="kn">import</span> <span class="n">OrderedDict</span>
-<span class="kn">from</span><span class="w"> </span><span class="nn">ast</span><span class="w"> </span><span class="kn">import</span> <span class="n">literal_eval</span>
+<span class="kn">from</span> <span class="nn">decimal</span> <span class="kn">import</span> <span class="n">Decimal</span>
+<span class="kn">from</span> <span class="nn">collections</span> <span class="kn">import</span> <span class="n">OrderedDict</span>
+<span class="kn">from</span> <span class="nn">ast</span> <span class="kn">import</span> <span class="n">literal_eval</span>
 
 <div class="viewcode-block" id="PerformanceTableau">
 <a class="viewcode-back" href="../techDoc.html#perfTabs.PerformanceTableau">[docs]</a>
-<span class="k">class</span><span class="w"> </span><span class="nc">PerformanceTableau</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+<span class="k">class</span> <span class="nc">PerformanceTableau</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">In this *Digraph3* module, the root :py:class:`perfTabs.PerformanceTableau` class provides a generic **performance table model**. A given object of this class consists in:</span>
 
@@ -237,7 +237,7 @@
 
 <span class="sd">    &quot;&quot;&quot;</span>
 
-    <span class="k">def</span><span class="w"> </span><span class="fm">__repr__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="k">def</span> <span class="fm">__repr__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Default presentation method for PerformanceTableau instances.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
@@ -260,9 +260,9 @@
                     <span class="o">%</span> <span class="nb">list</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="vm">__dict__</span><span class="o">.</span><span class="n">keys</span><span class="p">())</span>     
         <span class="k">return</span> <span class="n">reprString</span>
 
-    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">filePerfTab</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span><span class="n">isEmpty</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
-        <span class="kn">from</span><span class="w"> </span><span class="nn">decimal</span><span class="w"> </span><span class="kn">import</span> <span class="n">Decimal</span>
-        <span class="kn">from</span><span class="w"> </span><span class="nn">collections</span><span class="w"> </span><span class="kn">import</span> <span class="n">OrderedDict</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">filePerfTab</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span><span class="n">isEmpty</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+        <span class="kn">from</span> <span class="nn">decimal</span> <span class="kn">import</span> <span class="n">Decimal</span>
+        <span class="kn">from</span> <span class="nn">collections</span> <span class="kn">import</span> <span class="n">OrderedDict</span>
         <span class="k">if</span> <span class="n">filePerfTab</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
             <span class="n">fileName</span> <span class="o">=</span> <span class="n">filePerfTab</span> <span class="o">+</span> <span class="s1">&#39;.py&#39;</span>
             <span class="n">argDict</span> <span class="o">=</span> <span class="p">{}</span>
@@ -314,8 +314,8 @@
             <span class="bp">self</span><span class="o">.</span><span class="n">evaluation</span> <span class="o">=</span> <span class="n">evaluation</span>
             
         <span class="k">elif</span> <span class="ow">not</span> <span class="n">isEmpty</span><span class="p">:</span>
-            <span class="kn">from</span><span class="w"> </span><span class="nn">copy</span><span class="w"> </span><span class="kn">import</span> <span class="n">deepcopy</span>
-            <span class="kn">from</span><span class="w"> </span><span class="nn">randomPerfTabs</span><span class="w"> </span><span class="kn">import</span> <span class="n">RandomPerformanceTableau</span>
+            <span class="kn">from</span> <span class="nn">copy</span> <span class="kn">import</span> <span class="n">deepcopy</span>
+            <span class="kn">from</span> <span class="nn">randomPerfTabs</span> <span class="kn">import</span> <span class="n">RandomPerformanceTableau</span>
             <span class="n">temp</span> <span class="o">=</span> <span class="n">RandomPerformanceTableau</span><span class="p">()</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="n">deepcopy</span><span class="p">(</span><span class="n">temp</span><span class="o">.</span><span class="n">name</span><span class="p">)</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">actions</span> <span class="o">=</span> <span class="n">deepcopy</span><span class="p">(</span><span class="n">temp</span><span class="o">.</span><span class="n">actions</span><span class="p">)</span>
@@ -333,7 +333,7 @@
             
 <div class="viewcode-block" id="PerformanceTableau.replaceNA">
 <a class="viewcode-back" href="../techDoc.html#perfTabs.PerformanceTableau.replaceNA">[docs]</a>
-    <span class="k">def</span><span class="w"> </span><span class="nf">replaceNA</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">newNA</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span><span class="n">Comments</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">replaceNA</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">newNA</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span><span class="n">Comments</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Replaces the current self.NA symbol with the *newNA* symbol of type &lt;Decimal&gt;. If newNA is None, the defauklt value Decimal(&#39;-999&#39;) is used.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
@@ -370,7 +370,7 @@
 
 <div class="viewcode-block" id="PerformanceTableau.setObjectiveWeights">
 <a class="viewcode-back" href="../techDoc.html#perfTabs.PerformanceTableau.setObjectiveWeights">[docs]</a>
-    <span class="k">def</span><span class="w"> </span><span class="nf">setObjectiveWeights</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">Debug</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">setObjectiveWeights</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">Debug</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Set the objective weights to the sum of the corresponding criteria significance weights.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
@@ -392,12 +392,12 @@
             
 <div class="viewcode-block" id="PerformanceTableau.hasOddWeightAlgebra">
 <a class="viewcode-back" href="../techDoc.html#perfTabs.PerformanceTableau.hasOddWeightAlgebra">[docs]</a>
-    <span class="k">def</span><span class="w"> </span><span class="nf">hasOddWeightAlgebra</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">Debug</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">hasOddWeightAlgebra</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">Debug</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Verify if the given criteria[self][&#39;weight&#39;] are odd or not.</span>
 <span class="sd">        Return a Boolen value.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="kn">from</span><span class="w"> </span><span class="nn">digraphsTools</span><span class="w"> </span><span class="kn">import</span> <span class="n">powerset</span>
+        <span class="kn">from</span> <span class="nn">digraphsTools</span> <span class="kn">import</span> <span class="n">powerset</span>
         <span class="n">criteria</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">criteria</span>
         <span class="n">w</span> <span class="o">=</span> <span class="p">[]</span>
         <span class="k">for</span> <span class="n">g</span> <span class="ow">in</span> <span class="n">criteria</span><span class="p">:</span>
@@ -429,7 +429,7 @@
         
 <div class="viewcode-block" id="PerformanceTableau.computeWeightedAveragePerformances">
 <a class="viewcode-back" href="../techDoc.html#perfTabs.PerformanceTableau.computeWeightedAveragePerformances">[docs]</a>
-    <span class="k">def</span><span class="w"> </span><span class="nf">computeWeightedAveragePerformances</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">isNormalized</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">lowValue</span><span class="o">=</span><span class="mf">0.0</span><span class="p">,</span> <span class="n">highValue</span><span class="o">=</span><span class="mf">100.0</span><span class="p">,</span> <span class="n">isListRanked</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">computeWeightedAveragePerformances</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">isNormalized</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">lowValue</span><span class="o">=</span><span class="mf">0.0</span><span class="p">,</span> <span class="n">highValue</span><span class="o">=</span><span class="mf">100.0</span><span class="p">,</span> <span class="n">isListRanked</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Compute normalized weighted average scores by ignoring missing data.</span>
 <span class="sd">        When *isNormalized* == True (False by default), </span>
@@ -437,7 +437,7 @@
 <span class="sd">        A lowValue and highValue parameter</span>
 <span class="sd">        can be provided for a specific normalisation.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="kn">from</span><span class="w"> </span><span class="nn">operator</span><span class="w"> </span><span class="kn">import</span> <span class="n">itemgetter</span>
+        <span class="kn">from</span> <span class="nn">operator</span> <span class="kn">import</span> <span class="n">itemgetter</span>
         <span class="n">actions</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">actions</span>
         <span class="n">criteria</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">criteria</span>
         <span class="n">NA</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">NA</span>
@@ -473,7 +473,7 @@
         
 <div class="viewcode-block" id="PerformanceTableau.showActions">
 <a class="viewcode-back" href="../techDoc.html#perfTabs.PerformanceTableau.showActions">[docs]</a>
-    <span class="k">def</span><span class="w"> </span><span class="nf">showActions</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">Alphabetic</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">showActions</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">Alphabetic</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        presentation methods for decision actions or alternatives</span>
 <span class="sd">        &quot;&quot;&quot;</span>
@@ -517,7 +517,7 @@
 
 <div class="viewcode-block" id="PerformanceTableau.showPairwiseComparison">
 <a class="viewcode-back" href="../techDoc.html#perfTabs.PerformanceTableau.showPairwiseComparison">[docs]</a>
-    <span class="k">def</span><span class="w"> </span><span class="nf">showPairwiseComparison</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">a</span><span class="p">,</span><span class="n">b</span><span class="p">,</span>
+    <span class="k">def</span> <span class="nf">showPairwiseComparison</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">a</span><span class="p">,</span><span class="n">b</span><span class="p">,</span>
                                <span class="c1">#hasSymetricThresholds=True,</span>
                                <span class="n">Debug</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
                                <span class="n">isReturningHTML</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
@@ -526,7 +526,7 @@
 <span class="sd">        renders the pairwise comprison parameters on all criteria</span>
 <span class="sd">        in html format</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="kn">from</span><span class="w"> </span><span class="nn">outrankingDigraphs</span><span class="w"> </span><span class="kn">import</span> <span class="n">BipolarOutrankingDigraph</span>
+        <span class="kn">from</span> <span class="nn">outrankingDigraphs</span> <span class="kn">import</span> <span class="n">BipolarOutrankingDigraph</span>
         <span class="n">evaluation</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">evaluation</span>
         <span class="n">NA</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">NA</span>
         <span class="n">criteria</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">criteria</span>
@@ -728,7 +728,7 @@
     
 <div class="viewcode-block" id="PerformanceTableau.showCriteria">
 <a class="viewcode-back" href="../techDoc.html#perfTabs.PerformanceTableau.showCriteria">[docs]</a>
-    <span class="k">def</span><span class="w"> </span><span class="nf">showCriteria</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">IntegerWeights</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span><span class="n">Alphabetic</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span><span class="n">ByObjectives</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span><span class="n">Debug</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">showCriteria</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">IntegerWeights</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span><span class="n">Alphabetic</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span><span class="n">ByObjectives</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span><span class="n">Debug</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        print Criteria with thresholds and weights.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
@@ -812,7 +812,7 @@
                 <span class="nb">print</span><span class="p">()</span></div>
 
 
-    <span class="k">def</span><span class="w"> </span><span class="nf">showObjectives</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">showObjectives</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="k">if</span> <span class="s1">&#39;objectives&#39;</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="vm">__dict__</span><span class="p">:</span>
             <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;*------ decision objectives -------&quot;&#39;</span><span class="p">)</span>
             
@@ -831,7 +831,7 @@
 
 <div class="viewcode-block" id="PerformanceTableau.showWeightPreorder">
 <a class="viewcode-back" href="../techDoc.html#perfTabs.PerformanceTableau.showWeightPreorder">[docs]</a>
-    <span class="k">def</span><span class="w"> </span><span class="nf">showWeightPreorder</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">showWeightPreorder</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Renders a preordering of the the criteria signficance weights. </span>
 <span class="sd">        &quot;&quot;&quot;</span>
@@ -845,7 +845,7 @@
             
 <div class="viewcode-block" id="PerformanceTableau.convertInsite2Standard">
 <a class="viewcode-back" href="../techDoc.html#perfTabs.PerformanceTableau.convertInsite2Standard">[docs]</a>
-    <span class="k">def</span><span class="w"> </span><span class="nf">convertInsite2Standard</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">convertInsite2Standard</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Convert in site a bigData formated Performance tableau back into a standard formated PerformanceTableau instance.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
@@ -856,7 +856,7 @@
 
 <div class="viewcode-block" id="PerformanceTableau.convertInsite2BigData">
 <a class="viewcode-back" href="../techDoc.html#perfTabs.PerformanceTableau.convertInsite2BigData">[docs]</a>
-    <span class="k">def</span><span class="w"> </span><span class="nf">convertInsite2BigData</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">convertInsite2BigData</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Convert in site a standard formated Performance tableau into a bigData formated instance.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
@@ -867,13 +867,13 @@
 
 <div class="viewcode-block" id="PerformanceTableau.convert2BigData">
 <a class="viewcode-back" href="../techDoc.html#perfTabs.PerformanceTableau.convert2BigData">[docs]</a>
-    <span class="k">def</span><span class="w"> </span><span class="nf">convert2BigData</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">convert2BigData</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Renders a cPerformanceTableau instance, by converting the action keys to integers and evaluations to floats, including the discrimination thresholds, the case given.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="kn">from</span><span class="w"> </span><span class="nn">collections</span><span class="w"> </span><span class="kn">import</span> <span class="n">OrderedDict</span>
-        <span class="kn">from</span><span class="w"> </span><span class="nn">cRandPerfTabs</span><span class="w"> </span><span class="kn">import</span> <span class="n">cPerformanceTableau</span>
-        <span class="kn">from</span><span class="w"> </span><span class="nn">copy</span><span class="w"> </span><span class="kn">import</span> <span class="n">deepcopy</span>
+        <span class="kn">from</span> <span class="nn">collections</span> <span class="kn">import</span> <span class="n">OrderedDict</span>
+        <span class="kn">from</span> <span class="nn">cRandPerfTabs</span> <span class="kn">import</span> <span class="n">cPerformanceTableau</span>
+        <span class="kn">from</span> <span class="nn">copy</span> <span class="kn">import</span> <span class="n">deepcopy</span>
         <span class="n">t</span> <span class="o">=</span> <span class="n">PerformanceTableau</span><span class="p">(</span><span class="n">isEmpty</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
         <span class="n">t</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="s1">&#39;bgd_&#39;</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">name</span>
         <span class="n">att</span> <span class="o">=</span> <span class="p">[</span><span class="n">a</span> <span class="k">for</span> <span class="n">a</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="vm">__dict__</span><span class="p">]</span>
@@ -907,7 +907,7 @@
         
 <div class="viewcode-block" id="PerformanceTableau.convertWeight2Integer">
 <a class="viewcode-back" href="../techDoc.html#perfTabs.PerformanceTableau.convertWeight2Integer">[docs]</a>
-    <span class="k">def</span><span class="w"> </span><span class="nf">convertWeight2Integer</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">convertWeight2Integer</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Convert significance weights from Decimal format</span>
 <span class="sd">        to int format.</span>
@@ -920,11 +920,11 @@
 
 <div class="viewcode-block" id="PerformanceTableau.convertEvaluation2Float">
 <a class="viewcode-back" href="../techDoc.html#perfTabs.PerformanceTableau.convertEvaluation2Float">[docs]</a>
-    <span class="k">def</span><span class="w"> </span><span class="nf">convertEvaluation2Float</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">convertEvaluation2Float</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Convert evaluations from decimal format to float</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="kn">from</span><span class="w"> </span><span class="nn">decimal</span><span class="w"> </span><span class="kn">import</span> <span class="n">Decimal</span>
+        <span class="kn">from</span> <span class="nn">decimal</span> <span class="kn">import</span> <span class="n">Decimal</span>
         <span class="n">evaluation</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">evaluation</span>
         <span class="n">actions</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">actions</span>
         <span class="n">criteria</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">criteria</span>
@@ -936,7 +936,7 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">evaluation</span> <span class="o">=</span> <span class="n">evaluation</span></div>
 
 
-    <span class="k">def</span><span class="w"> </span><span class="nf">convertDiscriminationThresholds2Float</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">convertDiscriminationThresholds2Float</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="n">criteria</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">criteria</span>
         <span class="k">for</span> <span class="n">g</span> <span class="ow">in</span> <span class="n">criteria</span><span class="p">:</span>
             <span class="k">for</span> <span class="n">th</span> <span class="ow">in</span> <span class="n">criteria</span><span class="p">[</span><span class="n">g</span><span class="p">][</span><span class="s1">&#39;thresholds&#39;</span><span class="p">]:</span>
@@ -944,8 +944,8 @@
                 <span class="n">d1</span> <span class="o">=</span> <span class="p">(</span><span class="nb">float</span><span class="p">(</span><span class="n">d</span><span class="p">[</span><span class="mi">0</span><span class="p">]),</span><span class="nb">float</span><span class="p">(</span><span class="n">d</span><span class="p">[</span><span class="mi">1</span><span class="p">]))</span>
                 <span class="n">criteria</span><span class="p">[</span><span class="n">g</span><span class="p">][</span><span class="s1">&#39;thresholds&#39;</span><span class="p">][</span><span class="n">th</span><span class="p">]</span> <span class="o">=</span> <span class="n">d1</span>
 
-    <span class="k">def</span><span class="w"> </span><span class="nf">convertDiscriminationThresholds2Decimal</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="kn">from</span><span class="w"> </span><span class="nn">decimal</span><span class="w"> </span><span class="kn">import</span> <span class="n">Decimal</span>
+    <span class="k">def</span> <span class="nf">convertDiscriminationThresholds2Decimal</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="kn">from</span> <span class="nn">decimal</span> <span class="kn">import</span> <span class="n">Decimal</span>
         <span class="n">criteria</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">criteria</span>
         <span class="k">for</span> <span class="n">g</span> <span class="ow">in</span> <span class="n">criteria</span><span class="p">:</span>
             <span class="k">for</span> <span class="n">th</span> <span class="ow">in</span> <span class="n">criteria</span><span class="p">[</span><span class="n">g</span><span class="p">][</span><span class="s1">&#39;thresholds&#39;</span><span class="p">]:</span>
@@ -956,12 +956,12 @@
  
 <div class="viewcode-block" id="PerformanceTableau.convertWeight2Decimal">
 <a class="viewcode-back" href="../techDoc.html#perfTabs.PerformanceTableau.convertWeight2Decimal">[docs]</a>
-    <span class="k">def</span><span class="w"> </span><span class="nf">convertWeight2Decimal</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">convertWeight2Decimal</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Convert significance weights from obsolete float format</span>
 <span class="sd">        to decimal format.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="kn">from</span><span class="w"> </span><span class="nn">decimal</span><span class="w"> </span><span class="kn">import</span> <span class="n">Decimal</span>
+        <span class="kn">from</span> <span class="nn">decimal</span> <span class="kn">import</span> <span class="n">Decimal</span>
         <span class="n">criteria</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">criteria</span>
         <span class="n">criteriaList</span> <span class="o">=</span> <span class="p">[</span><span class="n">x</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">criteria</span><span class="p">]</span>
         <span class="k">for</span> <span class="n">g</span> <span class="ow">in</span> <span class="n">criteriaList</span><span class="p">:</span>
@@ -971,11 +971,11 @@
 
 <div class="viewcode-block" id="PerformanceTableau.convertEvaluation2Decimal">
 <a class="viewcode-back" href="../techDoc.html#perfTabs.PerformanceTableau.convertEvaluation2Decimal">[docs]</a>
-    <span class="k">def</span><span class="w"> </span><span class="nf">convertEvaluation2Decimal</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">convertEvaluation2Decimal</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Convert evaluations from obsolete float format to decimal format</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="kn">from</span><span class="w"> </span><span class="nn">decimal</span><span class="w"> </span><span class="kn">import</span> <span class="n">Decimal</span>
+        <span class="kn">from</span> <span class="nn">decimal</span> <span class="kn">import</span> <span class="n">Decimal</span>
         <span class="n">evaluation</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">evaluation</span>
         <span class="n">actionsList</span> <span class="o">=</span> <span class="p">[</span><span class="n">x</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">actions</span><span class="p">]</span>
         <span class="n">criteriaList</span> <span class="o">=</span> <span class="p">[</span><span class="n">x</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">criteria</span><span class="p">]</span>
@@ -987,11 +987,11 @@
 
 <div class="viewcode-block" id="PerformanceTableau.convertWeights2Negative">
 <a class="viewcode-back" href="../techDoc.html#perfTabs.PerformanceTableau.convertWeights2Negative">[docs]</a>
-    <span class="k">def</span><span class="w"> </span><span class="nf">convertWeights2Negative</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">convertWeights2Negative</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Negates the weights of criteria to be minimzed.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="kn">from</span><span class="w"> </span><span class="nn">decimal</span><span class="w"> </span><span class="kn">import</span> <span class="n">Decimal</span>
+        <span class="kn">from</span> <span class="nn">decimal</span> <span class="kn">import</span> <span class="n">Decimal</span>
         <span class="n">criteria</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">criteria</span>
         <span class="n">evaluation</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">evaluation</span>
         <span class="n">NA</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">NA</span>
@@ -1010,11 +1010,11 @@
 
 <div class="viewcode-block" id="PerformanceTableau.convertWeights2Positive">
 <a class="viewcode-back" href="../techDoc.html#perfTabs.PerformanceTableau.convertWeights2Positive">[docs]</a>
-    <span class="k">def</span><span class="w"> </span><span class="nf">convertWeights2Positive</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">convertWeights2Positive</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Sets negative weights back to positive weights and negates corresponding evaluation grades.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="kn">from</span><span class="w"> </span><span class="nn">decimal</span><span class="w"> </span><span class="kn">import</span> <span class="n">Decimal</span>
+        <span class="kn">from</span> <span class="nn">decimal</span> <span class="kn">import</span> <span class="n">Decimal</span>
         <span class="n">criteria</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">criteria</span>
         <span class="n">evaluation</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">evaluation</span>
         <span class="n">NA</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">NA</span>
@@ -1033,7 +1033,7 @@
         
 <div class="viewcode-block" id="PerformanceTableau.computePerformanceDifferences">
 <a class="viewcode-back" href="../techDoc.html#perfTabs.PerformanceTableau.computePerformanceDifferences">[docs]</a>
-    <span class="k">def</span><span class="w"> </span><span class="nf">computePerformanceDifferences</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">Comments</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
+    <span class="k">def</span> <span class="nf">computePerformanceDifferences</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">Comments</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
                                       <span class="n">Debug</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
                                       <span class="n">NotPermanentDiffs</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
                                       <span class="n">WithMaxMin</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
@@ -1134,7 +1134,7 @@
 
 <div class="viewcode-block" id="PerformanceTableau.computeCriterionPerformanceDifferences">
 <a class="viewcode-back" href="../techDoc.html#perfTabs.PerformanceTableau.computeCriterionPerformanceDifferences">[docs]</a>
-    <span class="k">def</span><span class="w"> </span><span class="nf">computeCriterionPerformanceDifferences</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">c</span><span class="p">,</span> <span class="n">Comments</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
+    <span class="k">def</span> <span class="nf">computeCriterionPerformanceDifferences</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">c</span><span class="p">,</span> <span class="n">Comments</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
                                       <span class="n">Debug</span> <span class="o">=</span> <span class="kc">False</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Renders the ordered list of all observed performance differences on the given criterion.</span>
@@ -1186,7 +1186,7 @@
             
 <div class="viewcode-block" id="PerformanceTableau.computeActionCriterionPerformanceDifferences">
 <a class="viewcode-back" href="../techDoc.html#perfTabs.PerformanceTableau.computeActionCriterionPerformanceDifferences">[docs]</a>
-    <span class="k">def</span><span class="w"> </span><span class="nf">computeActionCriterionPerformanceDifferences</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">refAction</span><span class="p">,</span><span class="n">refCriterion</span><span class="p">,</span><span class="n">comments</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span> <span class="n">Debug</span> <span class="o">=</span> <span class="kc">False</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">computeActionCriterionPerformanceDifferences</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">refAction</span><span class="p">,</span><span class="n">refCriterion</span><span class="p">,</span><span class="n">comments</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span> <span class="n">Debug</span> <span class="o">=</span> <span class="kc">False</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        computes the performances differences observed between the reference action and the others on the given criterion</span>
 <span class="sd">        &quot;&quot;&quot;</span>
@@ -1216,7 +1216,7 @@
 
 <div class="viewcode-block" id="PerformanceTableau.computeActionCriterionQuantile">
 <a class="viewcode-back" href="../techDoc.html#perfTabs.PerformanceTableau.computeActionCriterionQuantile">[docs]</a>
-    <span class="k">def</span><span class="w"> </span><span class="nf">computeActionCriterionQuantile</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">action</span><span class="p">,</span><span class="n">criterion</span><span class="p">,</span><span class="n">strategy</span><span class="o">=</span><span class="s1">&#39;average&#39;</span><span class="p">,</span><span class="n">Debug</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">computeActionCriterionQuantile</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">action</span><span class="p">,</span><span class="n">criterion</span><span class="p">,</span><span class="n">strategy</span><span class="o">=</span><span class="s1">&#39;average&#39;</span><span class="p">,</span><span class="n">Debug</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        renders the quantile of the performance of action on criterion</span>
 <span class="sd">        &quot;&quot;&quot;</span>
@@ -1248,12 +1248,12 @@
             <span class="k">return</span> <span class="s1">&#39;NA&#39;</span></div>
 
 
-    <span class="k">def</span><span class="w"> </span><span class="nf">_computeLimitingQuantiles</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">g</span><span class="p">,</span><span class="n">frequencies</span><span class="p">,</span><span class="n">LowerClosed</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span><span class="n">Debug</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span><span class="n">PrefThresholds</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">_computeLimitingQuantiles</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">g</span><span class="p">,</span><span class="n">frequencies</span><span class="p">,</span><span class="n">LowerClosed</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span><span class="n">Debug</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span><span class="n">PrefThresholds</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Renders the list of limiting quantiles *q(p)* on criteria *g* for *p* in *frequencies* </span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="kn">from</span><span class="w"> </span><span class="nn">math</span><span class="w"> </span><span class="kn">import</span> <span class="n">floor</span>
-        <span class="kn">from</span><span class="w"> </span><span class="nn">copy</span><span class="w"> </span><span class="kn">import</span> <span class="n">copy</span><span class="p">,</span> <span class="n">deepcopy</span>
+        <span class="kn">from</span> <span class="nn">math</span> <span class="kn">import</span> <span class="n">floor</span>
+        <span class="kn">from</span> <span class="nn">copy</span> <span class="kn">import</span> <span class="n">copy</span><span class="p">,</span> <span class="n">deepcopy</span>
         <span class="n">actions</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">actions</span>
         <span class="n">criteria</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">criteria</span>
         <span class="n">evaluation</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">evaluation</span>
@@ -1351,7 +1351,7 @@
 
 <div class="viewcode-block" id="PerformanceTableau.computeQuantiles">
 <a class="viewcode-back" href="../techDoc.html#perfTabs.PerformanceTableau.computeQuantiles">[docs]</a>
-    <span class="k">def</span><span class="w"> </span><span class="nf">computeQuantiles</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">Debug</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">computeQuantiles</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">Debug</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        renders a quantiles matrix action x criterion with the performance quantile of action on criterion</span>
 <span class="sd">        &quot;&quot;&quot;</span>
@@ -1372,7 +1372,7 @@
 
 <div class="viewcode-block" id="PerformanceTableau.computeActionQuantile">
 <a class="viewcode-back" href="../techDoc.html#perfTabs.PerformanceTableau.computeActionQuantile">[docs]</a>
-    <span class="k">def</span><span class="w"> </span><span class="nf">computeActionQuantile</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">action</span><span class="p">,</span><span class="n">Debug</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">computeActionQuantile</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">action</span><span class="p">,</span><span class="n">Debug</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        renders the overall performance quantile of action</span>
 <span class="sd">        &quot;&quot;&quot;</span>
@@ -1411,7 +1411,7 @@
             
 <div class="viewcode-block" id="PerformanceTableau.csvAllQuantiles">
 <a class="viewcode-back" href="../techDoc.html#perfTabs.PerformanceTableau.csvAllQuantiles">[docs]</a>
-    <span class="k">def</span><span class="w"> </span><span class="nf">csvAllQuantiles</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">fileName</span><span class="o">=</span><span class="s1">&#39;quantiles&#39;</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">csvAllQuantiles</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">fileName</span><span class="o">=</span><span class="s1">&#39;quantiles&#39;</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        save quantiles matrix criterionxaction in CSV format</span>
 <span class="sd">        &quot;&quot;&quot;</span>
@@ -1457,7 +1457,7 @@
 
 <div class="viewcode-block" id="PerformanceTableau.showAllQuantiles">
 <a class="viewcode-back" href="../techDoc.html#perfTabs.PerformanceTableau.showAllQuantiles">[docs]</a>
-    <span class="k">def</span><span class="w"> </span><span class="nf">showAllQuantiles</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">Sorted</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">showAllQuantiles</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">Sorted</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        prints the performance quantiles tableau in the session console.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
@@ -1466,17 +1466,17 @@
 
 <div class="viewcode-block" id="PerformanceTableau.showHTMLPerformanceQuantiles">
 <a class="viewcode-back" href="../techDoc.html#perfTabs.PerformanceTableau.showHTMLPerformanceQuantiles">[docs]</a>
-    <span class="k">def</span><span class="w"> </span><span class="nf">showHTMLPerformanceQuantiles</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">Sorted</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span><span class="n">htmlFileName</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">showHTMLPerformanceQuantiles</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">Sorted</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span><span class="n">htmlFileName</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        shows the performance quantiles tableau in a browser window.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="kn">import</span><span class="w"> </span><span class="nn">webbrowser</span>
+        <span class="kn">import</span> <span class="nn">webbrowser</span>
         <span class="k">if</span> <span class="n">htmlFileName</span> <span class="o">==</span> <span class="kc">None</span><span class="p">:</span>
-            <span class="kn">from</span><span class="w"> </span><span class="nn">tempfile</span><span class="w"> </span><span class="kn">import</span> <span class="n">NamedTemporaryFile</span>
+            <span class="kn">from</span> <span class="nn">tempfile</span> <span class="kn">import</span> <span class="n">NamedTemporaryFile</span>
             <span class="n">fileName</span> <span class="o">=</span> <span class="p">(</span><span class="n">NamedTemporaryFile</span><span class="p">(</span><span class="n">suffix</span><span class="o">=</span><span class="s1">&#39;.html&#39;</span><span class="p">,</span>
                                            <span class="n">delete</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span><span class="nb">dir</span><span class="o">=</span><span class="s1">&#39;.&#39;</span><span class="p">))</span><span class="o">.</span><span class="n">name</span>
         <span class="k">else</span><span class="p">:</span>
-            <span class="kn">from</span><span class="w"> </span><span class="nn">os</span><span class="w"> </span><span class="kn">import</span> <span class="n">getcwd</span>
+            <span class="kn">from</span> <span class="nn">os</span> <span class="kn">import</span> <span class="n">getcwd</span>
             <span class="n">fileName</span> <span class="o">=</span> <span class="n">getcwd</span><span class="p">()</span><span class="o">+</span><span class="s1">&#39;/&#39;</span><span class="o">+</span><span class="n">htmlFileName</span>
         <span class="n">fo</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="n">fileName</span><span class="p">,</span><span class="s1">&#39;w&#39;</span><span class="p">)</span>
         <span class="n">fo</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">computeAllQuantiles</span><span class="p">(</span><span class="n">Sorted</span><span class="o">=</span><span class="n">Sorted</span><span class="p">,</span><span class="n">Comments</span><span class="o">=</span><span class="kc">False</span><span class="p">))</span>
@@ -1487,7 +1487,7 @@
         
 <div class="viewcode-block" id="PerformanceTableau.computeAllQuantiles">
 <a class="viewcode-back" href="../techDoc.html#perfTabs.PerformanceTableau.computeAllQuantiles">[docs]</a>
-    <span class="k">def</span><span class="w"> </span><span class="nf">computeAllQuantiles</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">Sorted</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span><span class="n">Comments</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">computeAllQuantiles</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">Sorted</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span><span class="n">Comments</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        renders a html string showing the table of</span>
 <span class="sd">        the quantiles matrix action x criterion</span>
@@ -1544,7 +1544,7 @@
 
 <div class="viewcode-block" id="PerformanceTableau.computeQuantileOrder">
 <a class="viewcode-back" href="../techDoc.html#perfTabs.PerformanceTableau.computeQuantileOrder">[docs]</a>
-    <span class="k">def</span><span class="w"> </span><span class="nf">computeQuantileOrder</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">q0</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span><span class="n">q1</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span><span class="n">Threading</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span><span class="n">nbrOfCPUs</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span><span class="n">startMethod</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span><span class="n">Comments</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">computeQuantileOrder</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">q0</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span><span class="n">q1</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span><span class="n">Threading</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span><span class="n">nbrOfCPUs</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span><span class="n">startMethod</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span><span class="n">Comments</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Renders a linear ordering of the decision actions from a simulation of pre-ranked outranking digraphs.</span>
 
@@ -1554,8 +1554,8 @@
 <span class="sd">        The actions are ordered along a decreasing Borda score of their ranking results.</span>
 <span class="sd">        </span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="kn">from</span><span class="w"> </span><span class="nn">sparseOutrankingDigraphs</span><span class="w"> </span><span class="kn">import</span> <span class="n">PreRankedOutrankingDigraph</span>
-        <span class="kn">from</span><span class="w"> </span><span class="nn">operator</span><span class="w"> </span><span class="kn">import</span> <span class="n">itemgetter</span>
+        <span class="kn">from</span> <span class="nn">sparseOutrankingDigraphs</span> <span class="kn">import</span> <span class="n">PreRankedOutrankingDigraph</span>
+        <span class="kn">from</span> <span class="nn">operator</span> <span class="kn">import</span> <span class="n">itemgetter</span>
         <span class="n">n</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">actions</span><span class="p">)</span>
         <span class="n">kBestFrequency</span> <span class="o">=</span> <span class="n">OrderedDict</span><span class="p">([(</span><span class="n">x</span><span class="p">,[</span><span class="mi">0</span> <span class="k">for</span> <span class="n">r</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n</span><span class="o">+</span><span class="mi">1</span><span class="p">)])</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">actions</span><span class="p">])</span>
         <span class="n">ordering</span> <span class="o">=</span> <span class="p">[]</span>
@@ -1584,7 +1584,7 @@
 
 <div class="viewcode-block" id="PerformanceTableau.computeQuantileRanking">
 <a class="viewcode-back" href="../techDoc.html#perfTabs.PerformanceTableau.computeQuantileRanking">[docs]</a>
-    <span class="k">def</span><span class="w"> </span><span class="nf">computeQuantileRanking</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">q0</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span><span class="n">q1</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span><span class="n">Threading</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span><span class="n">nbrOfCPUs</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span><span class="n">startMethod</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span><span class="n">Comments</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">computeQuantileRanking</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">q0</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span><span class="n">q1</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span><span class="n">Threading</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span><span class="n">nbrOfCPUs</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span><span class="n">startMethod</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span><span class="n">Comments</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Renders a linear ranking of the decision actions from a simulation of pre-ranked outranking digraphs.</span>
 
@@ -1606,11 +1606,11 @@
         
 <div class="viewcode-block" id="PerformanceTableau.computeQuantileSort">
 <a class="viewcode-back" href="../techDoc.html#perfTabs.PerformanceTableau.computeQuantileSort">[docs]</a>
-    <span class="k">def</span><span class="w"> </span><span class="nf">computeQuantileSort</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">computeQuantileSort</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        shows a sorting of the actions from decreasing majority quantiles</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="kn">from</span><span class="w"> </span><span class="nn">operator</span><span class="w"> </span><span class="kn">import</span> <span class="n">itemgetter</span>
+        <span class="kn">from</span> <span class="nn">operator</span> <span class="kn">import</span> <span class="n">itemgetter</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">computeQuantiles</span><span class="p">()</span>
         <span class="n">actionsSorting</span> <span class="o">=</span> <span class="p">[]</span>
         <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="nb">list</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">actions</span><span class="o">.</span><span class="n">keys</span><span class="p">()):</span>
@@ -1621,11 +1621,11 @@
 
 <div class="viewcode-block" id="PerformanceTableau.computeQuantilePreorder">
 <a class="viewcode-back" href="../techDoc.html#perfTabs.PerformanceTableau.computeQuantilePreorder">[docs]</a>
-    <span class="k">def</span><span class="w"> </span><span class="nf">computeQuantilePreorder</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">Comments</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span><span class="n">Debug</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">computeQuantilePreorder</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">Comments</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span><span class="n">Debug</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        computes the preorder of the actions obtained from decreasing majority quantiles. The quantiles are recomputed with a call to the self.computeQuantileSort() method.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="kn">from</span><span class="w"> </span><span class="nn">operator</span><span class="w"> </span><span class="kn">import</span> <span class="n">itemgetter</span>
+        <span class="kn">from</span> <span class="nn">operator</span> <span class="kn">import</span> <span class="n">itemgetter</span>
         <span class="n">quantiles</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">computeQuantileSort</span><span class="p">()</span>
         <span class="n">quantiles</span><span class="o">.</span><span class="n">sort</span><span class="p">(</span><span class="n">reverse</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span><span class="n">key</span><span class="o">=</span><span class="n">itemgetter</span><span class="p">(</span><span class="mi">0</span><span class="p">))</span>
         <span class="k">if</span> <span class="n">Debug</span><span class="p">:</span>
@@ -1658,7 +1658,7 @@
 
 <div class="viewcode-block" id="PerformanceTableau.showQuantileSort">
 <a class="viewcode-back" href="../techDoc.html#perfTabs.PerformanceTableau.showQuantileSort">[docs]</a>
-    <span class="k">def</span><span class="w"> </span><span class="nf">showQuantileSort</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">Debug</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">showQuantileSort</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">Debug</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Wrapper of computeQuantilePreorder() for the obsolete showQuantileSort() method.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
@@ -1667,7 +1667,7 @@
  
 <div class="viewcode-block" id="PerformanceTableau.computeDefaultDiscriminationThresholds">
 <a class="viewcode-back" href="../techDoc.html#perfTabs.PerformanceTableau.computeDefaultDiscriminationThresholds">[docs]</a>
-    <span class="k">def</span><span class="w"> </span><span class="nf">computeDefaultDiscriminationThresholds</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">criteriaList</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+    <span class="k">def</span> <span class="nf">computeDefaultDiscriminationThresholds</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">criteriaList</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
                                                <span class="n">quantile</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;ind&#39;</span><span class="p">:</span><span class="mi">10</span><span class="p">,</span><span class="s1">&#39;pref&#39;</span><span class="p">:</span><span class="mi">20</span><span class="p">,</span><span class="s1">&#39;weakVeto&#39;</span><span class="p">:</span><span class="mi">60</span><span class="p">,</span><span class="s1">&#39;veto&#39;</span><span class="p">:</span><span class="mi">80</span><span class="p">},</span>
                                                <span class="n">Debug</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
                                                <span class="n">Comments</span> <span class="o">=</span> <span class="kc">False</span><span class="p">):</span>
@@ -1677,7 +1677,7 @@
 <span class="sd">        Parameters: quantile = {&#39;ind&#39;: 10, &#39;pref&#39;: 20, &#39;weakVeto&#39;: 60, &#39;veto: 80}.</span>
 <span class="sd">        </span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="kn">import</span><span class="w"> </span><span class="nn">math</span>
+        <span class="kn">import</span> <span class="nn">math</span>
         
         <span class="k">if</span> <span class="n">Debug</span><span class="p">:</span>
             <span class="n">Comments</span> <span class="o">=</span> <span class="kc">True</span>
@@ -1739,7 +1739,7 @@
 
 <div class="viewcode-block" id="PerformanceTableau.computeThresholdPercentile">
 <a class="viewcode-back" href="../techDoc.html#perfTabs.PerformanceTableau.computeThresholdPercentile">[docs]</a>
-    <span class="k">def</span><span class="w"> </span><span class="nf">computeThresholdPercentile</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">criterion</span><span class="p">,</span><span class="n">threshold</span><span class="p">,</span> <span class="n">Debug</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">computeThresholdPercentile</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">criterion</span><span class="p">,</span><span class="n">threshold</span><span class="p">,</span> <span class="n">Debug</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        computes for a given criterion the quantile</span>
 <span class="sd">        of the performance differences of a given constant threshold.</span>
@@ -1774,7 +1774,7 @@
 
 <div class="viewcode-block" id="PerformanceTableau.computeVariableThresholdPercentile">
 <a class="viewcode-back" href="../techDoc.html#perfTabs.PerformanceTableau.computeVariableThresholdPercentile">[docs]</a>
-    <span class="k">def</span><span class="w"> </span><span class="nf">computeVariableThresholdPercentile</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">criterion</span><span class="p">,</span> <span class="n">threshold</span><span class="p">,</span> <span class="n">Debug</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">computeVariableThresholdPercentile</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">criterion</span><span class="p">,</span> <span class="n">threshold</span><span class="p">,</span> <span class="n">Debug</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        computes for a given criterion the quantile</span>
 <span class="sd">        of the performance differences of a given threshold.</span>
@@ -1818,12 +1818,12 @@
 
 <div class="viewcode-block" id="PerformanceTableau.showPerformanceTableau">
 <a class="viewcode-back" href="../techDoc.html#perfTabs.PerformanceTableau.showPerformanceTableau">[docs]</a>
-    <span class="k">def</span><span class="w"> </span><span class="nf">showPerformanceTableau</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">Transposed</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span><span class="n">actionsSubset</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+    <span class="k">def</span> <span class="nf">showPerformanceTableau</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">Transposed</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span><span class="n">actionsSubset</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
                                <span class="n">fromIndex</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span><span class="n">toIndex</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span><span class="n">Sorted</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span><span class="n">ndigits</span><span class="o">=</span><span class="mi">2</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Print the performance Tableau.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="kn">from</span><span class="w"> </span><span class="nn">decimal</span><span class="w"> </span><span class="kn">import</span> <span class="n">Decimal</span>
+        <span class="kn">from</span> <span class="nn">decimal</span> <span class="kn">import</span> <span class="n">Decimal</span>
         <span class="n">NA</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">NA</span>
         <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;*----  performance tableau -----*&#39;</span><span class="p">)</span>
         <span class="n">criteriaList</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">criteria</span><span class="p">)</span>
@@ -1885,14 +1885,14 @@
 
 <div class="viewcode-block" id="PerformanceTableau.saveCSV">
 <a class="viewcode-back" href="../techDoc.html#perfTabs.PerformanceTableau.saveCSV">[docs]</a>
-    <span class="k">def</span><span class="w"> </span><span class="nf">saveCSV</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">fileName</span><span class="o">=</span><span class="s1">&#39;tempPerfTab&#39;</span><span class="p">,</span>
+    <span class="k">def</span> <span class="nf">saveCSV</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">fileName</span><span class="o">=</span><span class="s1">&#39;tempPerfTab&#39;</span><span class="p">,</span>
                 <span class="n">Sorted</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span><span class="n">criteriaList</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
                 <span class="n">actionsList</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span><span class="n">ndigits</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span><span class="n">Debug</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;1</span>
 <span class="sd">        Store the performance Tableau self Actions x Criteria in CSV format.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="kn">import</span><span class="w"> </span><span class="nn">itertools</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">IT</span>
-        <span class="kn">import</span><span class="w"> </span><span class="nn">collections</span>
+        <span class="kn">import</span> <span class="nn">itertools</span> <span class="k">as</span> <span class="nn">IT</span>
+        <span class="kn">import</span> <span class="nn">collections</span>
         <span class="n">actions</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">actions</span>
         <span class="n">criteria</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">criteria</span>
         <span class="n">evaluation</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">evaluation</span>
@@ -1947,7 +1947,7 @@
         
 <div class="viewcode-block" id="PerformanceTableau.computeMissingDataProportion">
 <a class="viewcode-back" href="../techDoc.html#perfTabs.PerformanceTableau.computeMissingDataProportion">[docs]</a>
-    <span class="k">def</span><span class="w"> </span><span class="nf">computeMissingDataProportion</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">InPercents</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span><span class="n">Comments</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">computeMissingDataProportion</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">InPercents</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span><span class="n">Comments</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Renders the proportion of missing data, </span>
 <span class="sd">        i.e. NA == Decimal(&#39;-999&#39;) entries in self.evaluation.</span>
@@ -1979,7 +1979,7 @@
    
 <div class="viewcode-block" id="PerformanceTableau.computeMinMaxEvaluations">
 <a class="viewcode-back" href="../techDoc.html#perfTabs.PerformanceTableau.computeMinMaxEvaluations">[docs]</a>
-    <span class="k">def</span><span class="w"> </span><span class="nf">computeMinMaxEvaluations</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">criteria</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span><span class="n">actions</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">computeMinMaxEvaluations</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">criteria</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span><span class="n">actions</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        renders minimum and maximum performances on each criterion</span>
 <span class="sd">        in dictionary form: {&#39;g&#39;: {&#39;minimum&#39;: x, &#39;maximum&#39;: x}}</span>
@@ -2020,18 +2020,18 @@
 
 <div class="viewcode-block" id="PerformanceTableau.showHTMLCriteria">
 <a class="viewcode-back" href="../techDoc.html#perfTabs.PerformanceTableau.showHTMLCriteria">[docs]</a>
-    <span class="k">def</span><span class="w"> </span><span class="nf">showHTMLCriteria</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">criteriaSubset</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span><span class="n">Sorted</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+    <span class="k">def</span> <span class="nf">showHTMLCriteria</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">criteriaSubset</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span><span class="n">Sorted</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
                          <span class="n">ndigits</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span><span class="n">title</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span><span class="n">htmlFileName</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        shows the criteria in the system browser view.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="kn">import</span><span class="w"> </span><span class="nn">webbrowser</span>
+        <span class="kn">import</span> <span class="nn">webbrowser</span>
         <span class="k">if</span> <span class="n">htmlFileName</span> <span class="o">==</span> <span class="kc">None</span><span class="p">:</span>
-            <span class="kn">from</span><span class="w"> </span><span class="nn">tempfile</span><span class="w"> </span><span class="kn">import</span> <span class="n">NamedTemporaryFile</span>
+            <span class="kn">from</span> <span class="nn">tempfile</span> <span class="kn">import</span> <span class="n">NamedTemporaryFile</span>
             <span class="n">fileName</span> <span class="o">=</span> <span class="p">(</span><span class="n">NamedTemporaryFile</span><span class="p">(</span><span class="n">suffix</span><span class="o">=</span><span class="s1">&#39;.html&#39;</span><span class="p">,</span>
                                            <span class="n">delete</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span><span class="nb">dir</span><span class="o">=</span><span class="s1">&#39;.&#39;</span><span class="p">))</span><span class="o">.</span><span class="n">name</span>
         <span class="k">else</span><span class="p">:</span>
-            <span class="kn">from</span><span class="w"> </span><span class="nn">os</span><span class="w"> </span><span class="kn">import</span> <span class="n">getcwd</span>
+            <span class="kn">from</span> <span class="nn">os</span> <span class="kn">import</span> <span class="n">getcwd</span>
             <span class="n">fileName</span> <span class="o">=</span> <span class="n">getcwd</span><span class="p">()</span><span class="o">+</span><span class="s1">&#39;/&#39;</span><span class="o">+</span><span class="n">htmlFileName</span>
         <span class="n">fo</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="n">fileName</span><span class="p">,</span><span class="s1">&#39;w&#39;</span><span class="p">)</span>
         <span class="n">fo</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_htmlCriteriaView</span><span class="p">(</span><span class="n">criteria</span><span class="o">=</span><span class="n">criteriaSubset</span><span class="p">,</span>
@@ -2043,7 +2043,7 @@
         <span class="n">webbrowser</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="n">url</span><span class="p">,</span><span class="n">new</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span></div>
 
 
-    <span class="k">def</span><span class="w"> </span><span class="nf">_htmlCriteriaView</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">criteria</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span><span class="n">Sorted</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+    <span class="k">def</span> <span class="nf">_htmlCriteriaView</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">criteria</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span><span class="n">Sorted</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
                          <span class="n">ndigits</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span><span class="n">title</span><span class="o">=</span><span class="s1">&#39;Family of Criteria&#39;</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Renders a html view of the in the XMCDA2 format.</span>
@@ -2128,7 +2128,7 @@
         
 <div class="viewcode-block" id="PerformanceTableau.showHTMLPerformanceTableau">
 <a class="viewcode-back" href="../techDoc.html#perfTabs.PerformanceTableau.showHTMLPerformanceTableau">[docs]</a>
-    <span class="k">def</span><span class="w"> </span><span class="nf">showHTMLPerformanceTableau</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">actionsSubset</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+    <span class="k">def</span> <span class="nf">showHTMLPerformanceTableau</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">actionsSubset</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
                                    <span class="n">fromIndex</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span><span class="n">toIndex</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
                                    <span class="n">isSorted</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
                                    <span class="n">Transposed</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span><span class="n">ndigits</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span>
@@ -2137,13 +2137,13 @@
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        shows the html version of the performance tableau in a browser window.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="kn">import</span><span class="w"> </span><span class="nn">webbrowser</span>
+        <span class="kn">import</span> <span class="nn">webbrowser</span>
         <span class="k">if</span> <span class="n">htmlFileName</span> <span class="o">==</span> <span class="kc">None</span><span class="p">:</span>
-            <span class="kn">from</span><span class="w"> </span><span class="nn">tempfile</span><span class="w"> </span><span class="kn">import</span> <span class="n">NamedTemporaryFile</span>
+            <span class="kn">from</span> <span class="nn">tempfile</span> <span class="kn">import</span> <span class="n">NamedTemporaryFile</span>
             <span class="n">fileName</span> <span class="o">=</span> <span class="p">(</span><span class="n">NamedTemporaryFile</span><span class="p">(</span><span class="n">suffix</span><span class="o">=</span><span class="s1">&#39;.html&#39;</span><span class="p">,</span>
                                            <span class="n">delete</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span><span class="nb">dir</span><span class="o">=</span><span class="s1">&#39;.&#39;</span><span class="p">))</span><span class="o">.</span><span class="n">name</span>
         <span class="k">else</span><span class="p">:</span>
-            <span class="kn">from</span><span class="w"> </span><span class="nn">os</span><span class="w"> </span><span class="kn">import</span> <span class="n">getcwd</span>
+            <span class="kn">from</span> <span class="nn">os</span> <span class="kn">import</span> <span class="n">getcwd</span>
             <span class="n">fileName</span> <span class="o">=</span> <span class="n">getcwd</span><span class="p">()</span><span class="o">+</span><span class="s1">&#39;/&#39;</span><span class="o">+</span><span class="n">htmlFileName</span>
         <span class="n">fo</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="n">fileName</span><span class="p">,</span><span class="s1">&#39;w&#39;</span><span class="p">)</span>
         <span class="n">fo</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_htmlPerformanceTableau</span><span class="p">(</span><span class="n">actions</span><span class="o">=</span><span class="n">actionsSubset</span><span class="p">,</span>
@@ -2159,7 +2159,7 @@
         <span class="n">webbrowser</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="n">url</span><span class="p">,</span><span class="n">new</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span></div>
 
             
-    <span class="k">def</span><span class="w"> </span><span class="nf">_htmlPerformanceTableau</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">actions</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+    <span class="k">def</span> <span class="nf">_htmlPerformanceTableau</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">actions</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
                                <span class="n">fromIndex</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
                                <span class="n">toIndex</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
                                <span class="n">isSorted</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
@@ -2299,7 +2299,7 @@
 
 <div class="viewcode-block" id="PerformanceTableau.showHTMLPerformanceHeatmap">
 <a class="viewcode-back" href="../techDoc.html#perfTabs.PerformanceTableau.showHTMLPerformanceHeatmap">[docs]</a>
-    <span class="k">def</span><span class="w"> </span><span class="nf">showHTMLPerformanceHeatmap</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">actionsList</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+    <span class="k">def</span> <span class="nf">showHTMLPerformanceHeatmap</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">actionsList</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
                                    <span class="n">WithActionNames</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
                                    <span class="n">fromIndex</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
                                    <span class="n">toIndex</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
@@ -2366,13 +2366,13 @@
 <span class="sd">           :align: center</span>
 <span class="sd">        </span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="kn">import</span><span class="w"> </span><span class="nn">webbrowser</span>
+        <span class="kn">import</span> <span class="nn">webbrowser</span>
         <span class="k">if</span> <span class="n">htmlFileName</span> <span class="o">==</span> <span class="kc">None</span><span class="p">:</span>
-            <span class="kn">from</span><span class="w"> </span><span class="nn">tempfile</span><span class="w"> </span><span class="kn">import</span> <span class="n">NamedTemporaryFile</span>
+            <span class="kn">from</span> <span class="nn">tempfile</span> <span class="kn">import</span> <span class="n">NamedTemporaryFile</span>
             <span class="n">fileName</span> <span class="o">=</span> <span class="p">(</span><span class="n">NamedTemporaryFile</span><span class="p">(</span><span class="n">suffix</span><span class="o">=</span><span class="s1">&#39;.html&#39;</span><span class="p">,</span>
                                            <span class="n">delete</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span><span class="nb">dir</span><span class="o">=</span><span class="s1">&#39;.&#39;</span><span class="p">))</span><span class="o">.</span><span class="n">name</span>
         <span class="k">else</span><span class="p">:</span>
-            <span class="kn">from</span><span class="w"> </span><span class="nn">os</span><span class="w"> </span><span class="kn">import</span> <span class="n">getcwd</span>
+            <span class="kn">from</span> <span class="nn">os</span> <span class="kn">import</span> <span class="n">getcwd</span>
             <span class="n">fileName</span> <span class="o">=</span> <span class="n">getcwd</span><span class="p">()</span><span class="o">+</span><span class="s1">&#39;/&#39;</span><span class="o">+</span><span class="n">htmlFileName</span>
         <span class="n">fo</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="n">fileName</span><span class="p">,</span><span class="s1">&#39;w&#39;</span><span class="p">)</span>
         <span class="k">if</span> <span class="n">pageTitle</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
@@ -2403,7 +2403,7 @@
         <span class="n">webbrowser</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="n">url</span><span class="p">,</span><span class="n">new</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span></div>
 
 
-    <span class="k">def</span><span class="w"> </span><span class="nf">_htmlPerformanceHeatmap</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">argCriteriaList</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+    <span class="k">def</span> <span class="nf">_htmlPerformanceHeatmap</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">argCriteriaList</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
                                 <span class="n">argActionsList</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
                                 <span class="n">WithActionNames</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
                                 <span class="n">fromIndex</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
@@ -2430,8 +2430,8 @@
 
 <span class="sd">        See the corresponding perfTabs.showHTMLPerformanceHeatMap() method.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="kn">from</span><span class="w"> </span><span class="nn">decimal</span><span class="w"> </span><span class="kn">import</span> <span class="n">Decimal</span>
-        <span class="kn">from</span><span class="w"> </span><span class="nn">operator</span><span class="w"> </span><span class="kn">import</span> <span class="n">itemgetter</span>            
+        <span class="kn">from</span> <span class="nn">decimal</span> <span class="kn">import</span> <span class="n">Decimal</span>
+        <span class="kn">from</span> <span class="nn">operator</span> <span class="kn">import</span> <span class="n">itemgetter</span>            
         <span class="n">brewerRdYlGn9Colors</span> <span class="o">=</span> <span class="p">[(</span><span class="n">Decimal</span><span class="p">(</span><span class="s1">&#39;0.1111&#39;</span><span class="p">),</span><span class="s1">&#39;&quot;#D53E4F&quot;&#39;</span><span class="p">),</span>
                                <span class="p">(</span><span class="n">Decimal</span><span class="p">(</span><span class="s1">&#39;0.2222&#39;</span><span class="p">),</span><span class="s1">&#39;&quot;#F46D43&quot;&#39;</span><span class="p">),</span>
                                <span class="p">(</span><span class="n">Decimal</span><span class="p">(</span><span class="s1">&#39;0.3333&#39;</span><span class="p">),</span><span class="s1">&#39;&quot;#FDAE61&quot;&#39;</span><span class="p">),</span>
@@ -2504,7 +2504,7 @@
             
             <span class="n">na</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">actions</span><span class="p">)</span>
             <span class="k">if</span> <span class="n">SparseModel</span><span class="p">:</span>
-                <span class="kn">from</span><span class="w"> </span><span class="nn">sparseOutrankingDigraphs</span><span class="w"> </span><span class="kn">import</span> <span class="n">PreRankedOutrankingDigraph</span>
+                <span class="kn">from</span> <span class="nn">sparseOutrankingDigraphs</span> <span class="kn">import</span> <span class="n">PreRankedOutrankingDigraph</span>
                 <span class="k">if</span> <span class="n">quantiles</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
                     <span class="k">if</span> <span class="n">na</span> <span class="o">&lt;</span> <span class="mi">100</span><span class="p">:</span>
                         <span class="n">q</span> <span class="o">=</span> <span class="mi">5</span>
@@ -2521,14 +2521,14 @@
                 
             <span class="k">else</span><span class="p">:</span> <span class="c1"># standard outranking model</span>
                 <span class="k">if</span> <span class="n">outrankingModel</span> <span class="o">==</span> <span class="s1">&#39;standard&#39;</span><span class="p">:</span>
-                    <span class="kn">from</span><span class="w"> </span><span class="nn">outrankingDigraphs</span><span class="w"> </span><span class="kn">import</span> <span class="n">BipolarOutrankingDigraph</span>
+                    <span class="kn">from</span> <span class="nn">outrankingDigraphs</span> <span class="kn">import</span> <span class="n">BipolarOutrankingDigraph</span>
                     <span class="n">g</span> <span class="o">=</span> <span class="n">BipolarOutrankingDigraph</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">actionsSubset</span><span class="o">=</span><span class="n">argActionsList</span><span class="p">,</span><span class="n">Normalized</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
                                                  <span class="n">Threading</span><span class="o">=</span><span class="n">Threading</span><span class="p">,</span><span class="n">nbrCores</span><span class="o">=</span><span class="n">nbrOfCPUs</span><span class="p">)</span>
                 <span class="k">elif</span> <span class="n">outrankingModel</span> <span class="o">==</span> <span class="s1">&#39;confident&#39;</span><span class="p">:</span>
-                    <span class="kn">from</span><span class="w"> </span><span class="nn">outrankingDigraphs</span><span class="w"> </span><span class="kn">import</span> <span class="n">ConfidentBipolarOutrankingDigraph</span>
+                    <span class="kn">from</span> <span class="nn">outrankingDigraphs</span> <span class="kn">import</span> <span class="n">ConfidentBipolarOutrankingDigraph</span>
                     <span class="n">g</span> <span class="o">=</span> <span class="n">ConfidentBipolarOutrankingDigraph</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">Normalized</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
                 <span class="k">elif</span> <span class="n">outrankingModel</span> <span class="o">==</span> <span class="s1">&#39;robust&#39;</span><span class="p">:</span>
-                    <span class="kn">from</span><span class="w"> </span><span class="nn">outrankingDigraphs</span><span class="w"> </span><span class="kn">import</span> <span class="n">RobustOutrankingDigraph</span>
+                    <span class="kn">from</span> <span class="nn">outrankingDigraphs</span> <span class="kn">import</span> <span class="n">RobustOutrankingDigraph</span>
                     <span class="n">g</span> <span class="o">=</span> <span class="n">RobustOutrankingDigraph</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
                 <span class="k">elif</span> <span class="n">outrankingModel</span> <span class="o">==</span> <span class="s1">&#39;this&#39;</span><span class="p">:</span>
                     <span class="n">g</span> <span class="o">=</span> <span class="bp">self</span>                 
@@ -2548,7 +2548,7 @@
                     <span class="k">if</span> <span class="n">StoreRanking</span><span class="p">:</span>
                         <span class="bp">self</span><span class="o">.</span><span class="n">kohlerRanking</span> <span class="o">=</span> <span class="n">actionsList</span>
                 <span class="k">elif</span> <span class="n">rankingRule</span> <span class="o">==</span> <span class="s1">&#39;RankedPairs&#39;</span><span class="p">:</span>
-                    <span class="kn">from</span><span class="w"> </span><span class="nn">linearOrders</span><span class="w"> </span><span class="kn">import</span> <span class="n">RankedPairsOrder</span>
+                    <span class="kn">from</span> <span class="nn">linearOrders</span> <span class="kn">import</span> <span class="n">RankedPairsOrder</span>
                     <span class="n">rp</span> <span class="o">=</span> <span class="n">RankedPairsOrder</span><span class="p">(</span><span class="n">g</span><span class="p">)</span>
                     <span class="n">actionsList</span> <span class="o">=</span> <span class="n">rp</span><span class="o">.</span><span class="n">computeRanking</span><span class="p">()</span>
                     <span class="k">if</span> <span class="n">StoreRanking</span><span class="p">:</span>
@@ -2558,13 +2558,13 @@
                     <span class="k">if</span> <span class="n">StoreRanking</span><span class="p">:</span>
                         <span class="bp">self</span><span class="o">.</span><span class="n">arrowRaynaudRanking</span> <span class="o">=</span> <span class="n">actionsList</span>
                 <span class="k">elif</span> <span class="n">rankingRule</span> <span class="o">==</span> <span class="s1">&#39;IteratedNetFlows&#39;</span><span class="p">:</span>
-                    <span class="kn">from</span><span class="w"> </span><span class="nn">linearOrders</span><span class="w"> </span><span class="kn">import</span> <span class="n">IteratedNetFlowsRanking</span>
+                    <span class="kn">from</span> <span class="nn">linearOrders</span> <span class="kn">import</span> <span class="n">IteratedNetFlowsRanking</span>
                     <span class="n">inf</span> <span class="o">=</span> <span class="n">IteratedNetFlowsRanking</span><span class="p">(</span><span class="n">g</span><span class="p">)</span>
                     <span class="n">actionsList</span> <span class="o">=</span> <span class="n">inf</span><span class="o">.</span><span class="n">iteratedNetFlowsRanking</span>
                     <span class="k">if</span> <span class="n">StoreRanking</span><span class="p">:</span>
                         <span class="bp">self</span><span class="o">.</span><span class="n">iteratedNetFlowsRanking</span> <span class="o">=</span> <span class="n">actionsList</span>
                 <span class="k">elif</span> <span class="n">rankingRule</span> <span class="o">==</span> <span class="s1">&#39;IteratedCopeland&#39;</span><span class="p">:</span>
-                    <span class="kn">from</span><span class="w"> </span><span class="nn">linearOrders</span><span class="w"> </span><span class="kn">import</span> <span class="n">IteratedCopelandRanking</span>
+                    <span class="kn">from</span> <span class="nn">linearOrders</span> <span class="kn">import</span> <span class="n">IteratedCopelandRanking</span>
                     <span class="n">icop</span> <span class="o">=</span> <span class="n">IteratedCopelandRanking</span><span class="p">(</span><span class="n">g</span><span class="p">)</span>
                     <span class="n">actionsList</span> <span class="o">=</span> <span class="n">icop</span><span class="o">.</span><span class="n">iteratedCopelandRanking</span>
                     <span class="k">if</span> <span class="n">StoreRanking</span><span class="p">:</span>
@@ -2586,7 +2586,7 @@
             <span class="k">if</span> <span class="n">SparseModel</span><span class="p">:</span>
                 <span class="n">rankCorrelation</span> <span class="o">=</span> <span class="kc">None</span>
             <span class="k">else</span><span class="p">:</span>
-                <span class="kn">from</span><span class="w"> </span><span class="nn">outrankingDigraphs</span><span class="w"> </span><span class="kn">import</span> <span class="n">BipolarOutrankingDigraph</span>
+                <span class="kn">from</span> <span class="nn">outrankingDigraphs</span> <span class="kn">import</span> <span class="n">BipolarOutrankingDigraph</span>
                 <span class="n">g</span> <span class="o">=</span> <span class="n">BipolarOutrankingDigraph</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">actionsSubset</span><span class="o">=</span><span class="n">argActionsList</span><span class="p">,</span><span class="n">Normalized</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
                 <span class="n">rankCorrelation</span> <span class="o">=</span> <span class="n">g</span><span class="o">.</span><span class="n">computeOrderCorrelation</span><span class="p">(</span><span class="nb">list</span><span class="p">(</span><span class="nb">reversed</span><span class="p">(</span><span class="n">actionsList</span><span class="p">)))</span>
         <span class="k">if</span> <span class="n">Debug</span><span class="p">:</span>
@@ -2774,12 +2774,12 @@
             <span class="n">html</span> <span class="o">+=</span> <span class="s1">&#39;&lt;/body&gt;&lt;/html&gt;&#39;</span>
         <span class="k">return</span> <span class="n">html</span>
 
-    <span class="k">def</span><span class="w"> </span><span class="nf">_computeRankingConsensusQuality</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">ranking</span><span class="p">,</span><span class="n">Comments</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span><span class="n">Threading</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span><span class="n">nbrOfCPUs</span><span class="o">=</span><span class="mi">1</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">_computeRankingConsensusQuality</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">ranking</span><span class="p">,</span><span class="n">Comments</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span><span class="n">Threading</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span><span class="n">nbrOfCPUs</span><span class="o">=</span><span class="mi">1</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Renders the marginal criteria correlations with a given ranking with summary.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="kn">from</span><span class="w"> </span><span class="nn">outrankingDigraphs</span><span class="w"> </span><span class="kn">import</span> <span class="n">BipolarOutrankingDigraph</span>
-        <span class="kn">from</span><span class="w"> </span><span class="nn">math</span><span class="w"> </span><span class="kn">import</span> <span class="n">sqrt</span>
+        <span class="kn">from</span> <span class="nn">outrankingDigraphs</span> <span class="kn">import</span> <span class="n">BipolarOutrankingDigraph</span>
+        <span class="kn">from</span> <span class="nn">math</span> <span class="kn">import</span> <span class="n">sqrt</span>
         <span class="n">g</span> <span class="o">=</span> <span class="n">BipolarOutrankingDigraph</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">Normalized</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
         <span class="n">criteria</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">criteria</span>
         <span class="n">marginalCorrelations</span> \
@@ -2828,12 +2828,12 @@
 
 <div class="viewcode-block" id="PerformanceTableau.computeRankingConsensusQuality">
 <a class="viewcode-back" href="../techDoc.html#perfTabs.PerformanceTableau.computeRankingConsensusQuality">[docs]</a>
-    <span class="k">def</span><span class="w"> </span><span class="nf">computeRankingConsensusQuality</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">ranking</span><span class="p">,</span><span class="n">Comments</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span><span class="n">Threading</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span><span class="n">nbrOfCPUs</span><span class="o">=</span><span class="mi">1</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">computeRankingConsensusQuality</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">ranking</span><span class="p">,</span><span class="n">Comments</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span><span class="n">Threading</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span><span class="n">nbrOfCPUs</span><span class="o">=</span><span class="mi">1</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Renders the marginal criteria correlations with a given ranking with summary.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="kn">from</span><span class="w"> </span><span class="nn">outrankingDigraphs</span><span class="w"> </span><span class="kn">import</span> <span class="n">BipolarOutrankingDigraph</span>
-        <span class="kn">from</span><span class="w"> </span><span class="nn">math</span><span class="w"> </span><span class="kn">import</span> <span class="n">sqrt</span>
+        <span class="kn">from</span> <span class="nn">outrankingDigraphs</span> <span class="kn">import</span> <span class="n">BipolarOutrankingDigraph</span>
+        <span class="kn">from</span> <span class="nn">math</span> <span class="kn">import</span> <span class="n">sqrt</span>
         <span class="n">g</span> <span class="o">=</span> <span class="n">BipolarOutrankingDigraph</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">Normalized</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
         <span class="n">criteria</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">criteria</span>
         <span class="n">marginalCorrelations</span> \
@@ -2880,7 +2880,7 @@
         
 <div class="viewcode-block" id="PerformanceTableau.showRankingConsensusQuality">
 <a class="viewcode-back" href="../techDoc.html#perfTabs.PerformanceTableau.showRankingConsensusQuality">[docs]</a>
-    <span class="k">def</span><span class="w"> </span><span class="nf">showRankingConsensusQuality</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">ranking</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">showRankingConsensusQuality</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">ranking</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        shows the marginal criteria correlations with a given ranking with summary.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
@@ -2889,7 +2889,7 @@
 
 <div class="viewcode-block" id="PerformanceTableau.computeWeightPreorder">
 <a class="viewcode-back" href="../techDoc.html#perfTabs.PerformanceTableau.computeWeightPreorder">[docs]</a>
-    <span class="k">def</span><span class="w"> </span><span class="nf">computeWeightPreorder</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">computeWeightPreorder</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        renders the weight preorder following from the given</span>
 <span class="sd">        criteria weights in a list of increasing equivalence</span>
@@ -2924,7 +2924,7 @@
    
 <div class="viewcode-block" id="PerformanceTableau.showAll">
 <a class="viewcode-back" href="../techDoc.html#perfTabs.PerformanceTableau.showAll">[docs]</a>
-    <span class="k">def</span><span class="w"> </span><span class="nf">showAll</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">showAll</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Show fonction for performance tableau</span>
 <span class="sd">        &quot;&quot;&quot;</span>
@@ -2951,13 +2951,13 @@
 
 <div class="viewcode-block" id="PerformanceTableau.showEvaluationStatistics">
 <a class="viewcode-back" href="../techDoc.html#perfTabs.PerformanceTableau.showEvaluationStatistics">[docs]</a>
-    <span class="k">def</span><span class="w"> </span><span class="nf">showEvaluationStatistics</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">showEvaluationStatistics</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        renders the variance and standard deviation of</span>
 <span class="sd">        the values observed in the performance Tableau.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="kn">import</span><span class="w"> </span><span class="nn">math</span>
-        <span class="kn">from</span><span class="w"> </span><span class="nn">decimal</span><span class="w"> </span><span class="kn">import</span> <span class="n">Decimal</span>
+        <span class="kn">import</span> <span class="nn">math</span>
+        <span class="kn">from</span> <span class="nn">decimal</span> <span class="kn">import</span> <span class="n">Decimal</span>
         <span class="n">NA</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">NA</span>
         <span class="n">evaluation</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">evaluation</span>
         <span class="n">criteria</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">criteria</span>
@@ -2986,7 +2986,7 @@
 
 <div class="viewcode-block" id="PerformanceTableau.save">
 <a class="viewcode-back" href="../techDoc.html#perfTabs.PerformanceTableau.save">[docs]</a>
-    <span class="k">def</span><span class="w"> </span><span class="nf">save</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">fileName</span><span class="o">=</span><span class="s1">&#39;tempperftab&#39;</span><span class="p">,</span><span class="n">isDecimal</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+    <span class="k">def</span> <span class="nf">save</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">fileName</span><span class="o">=</span><span class="s1">&#39;tempperftab&#39;</span><span class="p">,</span><span class="n">isDecimal</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
              <span class="n">valueDigits</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span><span class="n">Comments</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Persistant storage of Performance Tableaux.</span>
@@ -3072,7 +3072,7 @@
         <span class="n">fo</span><span class="o">.</span><span class="n">close</span><span class="p">()</span></div>
 
 
-    <span class="k">def</span><span class="w"> </span><span class="nf">_saveXML</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">name</span><span class="o">=</span><span class="s1">&#39;temp&#39;</span><span class="p">,</span><span class="n">category</span><span class="o">=</span><span class="s1">&#39;standard&#39;</span><span class="p">,</span>
+    <span class="k">def</span> <span class="nf">_saveXML</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">name</span><span class="o">=</span><span class="s1">&#39;temp&#39;</span><span class="p">,</span><span class="n">category</span><span class="o">=</span><span class="s1">&#39;standard&#39;</span><span class="p">,</span>
                  <span class="n">subcategory</span><span class="o">=</span><span class="s1">&#39;standard&#39;</span><span class="p">,</span><span class="n">author</span><span class="o">=</span><span class="s1">&#39;digraphs Module (RB)&#39;</span><span class="p">,</span>
                  <span class="n">reference</span><span class="o">=</span><span class="s1">&#39;saved from Python&#39;</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
@@ -3149,11 +3149,11 @@
         <span class="n">fo</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
         <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;File: &#39;</span> <span class="o">+</span> <span class="n">nameExt</span> <span class="o">+</span> <span class="s1">&#39; saved !&#39;</span><span class="p">)</span>
 
-    <span class="k">def</span><span class="w"> </span><span class="nf">_saveXMLRubis</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">name</span><span class="o">=</span><span class="s1">&#39;temp&#39;</span><span class="p">,</span><span class="n">category</span><span class="o">=</span><span class="s1">&#39;Rubis&#39;</span><span class="p">,</span><span class="n">subcategory</span><span class="o">=</span><span class="s1">&#39;new D2 version&#39;</span><span class="p">,</span><span class="n">author</span><span class="o">=</span><span class="s1">&#39;digraphs Module (RB)&#39;</span><span class="p">,</span><span class="n">reference</span><span class="o">=</span><span class="s1">&#39;saved from Python&#39;</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">_saveXMLRubis</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">name</span><span class="o">=</span><span class="s1">&#39;temp&#39;</span><span class="p">,</span><span class="n">category</span><span class="o">=</span><span class="s1">&#39;Rubis&#39;</span><span class="p">,</span><span class="n">subcategory</span><span class="o">=</span><span class="s1">&#39;new D2 version&#39;</span><span class="p">,</span><span class="n">author</span><span class="o">=</span><span class="s1">&#39;digraphs Module (RB)&#39;</span><span class="p">,</span><span class="n">reference</span><span class="o">=</span><span class="s1">&#39;saved from Python&#39;</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        save temporary performance tableau self in XML Rubis format.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="kn">import</span><span class="w"> </span><span class="nn">codecs</span>
+        <span class="kn">import</span> <span class="nn">codecs</span>
         <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;*----- saving performance tableau in XML Rubis format  -------------*&#39;</span><span class="p">)</span>        
         <span class="n">nameExt</span> <span class="o">=</span> <span class="n">name</span><span class="o">+</span><span class="s1">&#39;.xml&#39;</span>
         <span class="n">fo</span> <span class="o">=</span> <span class="n">codecs</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="n">nameExt</span><span class="p">,</span><span class="s1">&#39;w&#39;</span><span class="p">,</span><span class="n">encoding</span><span class="o">=</span><span class="s1">&#39;utf-8&#39;</span><span class="p">)</span>
@@ -3258,11 +3258,11 @@
         <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;File: &#39;</span> <span class="o">+</span> <span class="n">nameExt</span> <span class="o">+</span> <span class="s1">&#39; saved !&#39;</span><span class="p">)</span>
 
 
-    <span class="k">def</span><span class="w"> </span><span class="nf">_saveXMCDA</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">fileName</span><span class="o">=</span><span class="s1">&#39;temp&#39;</span><span class="p">,</span><span class="n">category</span><span class="o">=</span><span class="s1">&#39;New XMCDA Rubis format&#39;</span><span class="p">,</span><span class="n">user</span><span class="o">=</span><span class="s1">&#39;digraphs Module (RB)&#39;</span><span class="p">,</span><span class="n">version</span><span class="o">=</span><span class="s1">&#39;saved from Python session&#39;</span><span class="p">,</span><span class="n">variant</span><span class="o">=</span><span class="s1">&#39;Rubis&#39;</span><span class="p">,</span><span class="n">valuationType</span><span class="o">=</span><span class="s1">&#39;standard&#39;</span><span class="p">,</span><span class="n">servingD3</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">_saveXMCDA</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">fileName</span><span class="o">=</span><span class="s1">&#39;temp&#39;</span><span class="p">,</span><span class="n">category</span><span class="o">=</span><span class="s1">&#39;New XMCDA Rubis format&#39;</span><span class="p">,</span><span class="n">user</span><span class="o">=</span><span class="s1">&#39;digraphs Module (RB)&#39;</span><span class="p">,</span><span class="n">version</span><span class="o">=</span><span class="s1">&#39;saved from Python session&#39;</span><span class="p">,</span><span class="n">variant</span><span class="o">=</span><span class="s1">&#39;Rubis&#39;</span><span class="p">,</span><span class="n">valuationType</span><span class="o">=</span><span class="s1">&#39;standard&#39;</span><span class="p">,</span><span class="n">servingD3</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        save performance tableau object self in XMCDA format.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="kn">import</span><span class="w"> </span><span class="nn">codecs</span>
+        <span class="kn">import</span> <span class="nn">codecs</span>
         <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;*----- saving performance tableau in XMCDA format  -------------*&#39;</span><span class="p">)</span>        
         <span class="n">nameExt</span> <span class="o">=</span> <span class="n">fileName</span><span class="o">+</span><span class="s1">&#39;.xmcda&#39;</span>
         <span class="n">fo</span> <span class="o">=</span> <span class="n">codecs</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="n">nameExt</span><span class="p">,</span><span class="s1">&#39;w&#39;</span><span class="p">,</span><span class="n">encoding</span><span class="o">=</span><span class="s1">&#39;utf-8&#39;</span><span class="p">)</span>
@@ -3509,7 +3509,7 @@
 
 <div class="viewcode-block" id="PerformanceTableau.saveXMCDA2">
 <a class="viewcode-back" href="../techDoc.html#perfTabs.PerformanceTableau.saveXMCDA2">[docs]</a>
-    <span class="k">def</span><span class="w"> </span><span class="nf">saveXMCDA2</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">fileName</span><span class="o">=</span><span class="s1">&#39;temp&#39;</span><span class="p">,</span>
+    <span class="k">def</span> <span class="nf">saveXMCDA2</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">fileName</span><span class="o">=</span><span class="s1">&#39;temp&#39;</span><span class="p">,</span>
                    <span class="n">category</span><span class="o">=</span><span class="s1">&#39;XMCDA 2.0 Extended format&#39;</span><span class="p">,</span>
                    <span class="n">user</span><span class="o">=</span><span class="s1">&#39;digraphs Module (RB)&#39;</span><span class="p">,</span>
                    <span class="n">version</span><span class="o">=</span><span class="s1">&#39;saved from Python session&#39;</span><span class="p">,</span>
@@ -3524,13 +3524,13 @@
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        save performance tableau object self in XMCDA 2.0 format including decision objectives, the case given.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="kn">import</span><span class="w"> </span><span class="nn">codecs</span>
+        <span class="kn">import</span> <span class="nn">codecs</span>
         <span class="k">if</span> <span class="ow">not</span> <span class="n">isStringIO</span><span class="p">:</span>
             <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;*----- saving performance tableau in XMCDA 2.0 format  -------------*&#39;</span><span class="p">)</span>
         <span class="n">nameExt</span> <span class="o">=</span> <span class="n">fileName</span><span class="o">+</span><span class="s1">&#39;.xml&#39;</span>
         <span class="k">if</span> <span class="n">isStringIO</span><span class="p">:</span>
             <span class="n">comment</span><span class="o">=</span><span class="s1">&#39;produced by stringIO()&#39;</span>
-            <span class="kn">import</span><span class="w"> </span><span class="nn">io</span>
+            <span class="kn">import</span> <span class="nn">io</span>
             <span class="c1">## ms = 100 * len(self.actions) + 500 * len(self.criteria) * 20 * len(self.evaluation)</span>
             <span class="c1">## print &#39;estimated mapped memory size = %d&#39; % (ms)</span>
             <span class="c1">##fo = mmap.mmap(-1,ms)</span>
@@ -3829,7 +3829,7 @@
             <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;File: &#39;</span> <span class="o">+</span> <span class="n">nameExt</span> <span class="o">+</span> <span class="s1">&#39; saved !&#39;</span><span class="p">)</span></div>
 
 
-    <span class="k">def</span><span class="w"> </span><span class="nf">_saveXMCDA2</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">fileName</span><span class="o">=</span><span class="s1">&#39;temp&#39;</span><span class="p">,</span>
+    <span class="k">def</span> <span class="nf">_saveXMCDA2</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">fileName</span><span class="o">=</span><span class="s1">&#39;temp&#39;</span><span class="p">,</span>
                    <span class="n">category</span><span class="o">=</span><span class="s1">&#39;XMCDA 2.0 format&#39;</span><span class="p">,</span>
                    <span class="n">user</span><span class="o">=</span><span class="s1">&#39;digraphs Module (RB)&#39;</span><span class="p">,</span>
                    <span class="n">version</span><span class="o">=</span><span class="s1">&#39;saved from Python session&#39;</span><span class="p">,</span>
@@ -3844,13 +3844,13 @@
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        save performance tableau object self in XMCDA 2.0 format.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="kn">import</span><span class="w"> </span><span class="nn">codecs</span>
+        <span class="kn">import</span> <span class="nn">codecs</span>
         <span class="k">if</span> <span class="ow">not</span> <span class="n">isStringIO</span><span class="p">:</span>
             <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;*----- saving performance tableau in XMCDA 2.0 format  -------------*&#39;</span><span class="p">)</span>
         <span class="n">nameExt</span> <span class="o">=</span> <span class="n">fileName</span><span class="o">+</span><span class="s1">&#39;.xml&#39;</span>
         <span class="k">if</span> <span class="n">isStringIO</span><span class="p">:</span>
             <span class="n">comment</span><span class="o">=</span><span class="s1">&#39;produced by stringIO()&#39;</span>
-            <span class="kn">import</span><span class="w"> </span><span class="nn">io</span>
+            <span class="kn">import</span> <span class="nn">io</span>
             <span class="c1">## ms = 100 * len(self.actions) + 500 * len(self.criteria) * 20 * len(self.evaluation)</span>
             <span class="c1">## print &#39;estimated mapped memory size = %d&#39; % (ms)</span>
             <span class="c1">##fo = mmap.mmap(-1,ms)</span>
@@ -4106,7 +4106,7 @@
 
 <div class="viewcode-block" id="PerformanceTableau.saveXMCDA2String">
 <a class="viewcode-back" href="../techDoc.html#perfTabs.PerformanceTableau.saveXMCDA2String">[docs]</a>
-    <span class="k">def</span><span class="w"> </span><span class="nf">saveXMCDA2String</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">fileName</span><span class="o">=</span><span class="s1">&#39;temp&#39;</span><span class="p">,</span><span class="n">category</span><span class="o">=</span><span class="s1">&#39;XMCDA 2.0 format&#39;</span><span class="p">,</span>
+    <span class="k">def</span> <span class="nf">saveXMCDA2String</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">fileName</span><span class="o">=</span><span class="s1">&#39;temp&#39;</span><span class="p">,</span><span class="n">category</span><span class="o">=</span><span class="s1">&#39;XMCDA 2.0 format&#39;</span><span class="p">,</span>
                          <span class="n">user</span><span class="o">=</span><span class="s1">&#39;digraphs Module (RB)&#39;</span><span class="p">,</span><span class="n">version</span><span class="o">=</span><span class="s1">&#39;saved from Python session&#39;</span><span class="p">,</span>
                          <span class="n">title</span><span class="o">=</span><span class="s1">&#39;Performance Tableau in XMCDA-2.0 format.&#39;</span><span class="p">,</span><span class="n">variant</span><span class="o">=</span><span class="s1">&#39;Rubis&#39;</span><span class="p">,</span>
                          <span class="n">valuationType</span><span class="o">=</span><span class="s1">&#39;bipolar&#39;</span><span class="p">,</span><span class="n">servingD3</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span><span class="n">comment</span><span class="o">=</span><span class="s1">&#39;produced by stringIO()&#39;</span><span class="p">,</span>
@@ -4115,7 +4115,7 @@
 <span class="sd">        save performance tableau object self in XMCDA 2.0 format.</span>
 <span class="sd">        !!! obsolete: replaced by the isStringIO in the saveXMCDA2 method !!!</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="kn">import</span><span class="w"> </span><span class="nn">codecs</span>
+        <span class="kn">import</span> <span class="nn">codecs</span>
         <span class="n">nameExt</span> <span class="o">=</span> <span class="n">fileName</span><span class="o">+</span><span class="s1">&#39;.xml&#39;</span>
         <span class="n">fo</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="s1">&#39;&#39;</span><span class="p">)</span>
         <span class="n">fo</span> <span class="o">+=</span> <span class="s1">&#39;&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;</span><span class="se">\n</span><span class="s1">&#39;</span>
@@ -4397,7 +4397,7 @@
 
 <div class="viewcode-block" id="PerformanceTableau.computeNormalizedDiffEvaluations">
 <a class="viewcode-back" href="../techDoc.html#perfTabs.PerformanceTableau.computeNormalizedDiffEvaluations">[docs]</a>
-    <span class="k">def</span><span class="w"> </span><span class="nf">computeNormalizedDiffEvaluations</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">lowValue</span><span class="o">=</span><span class="mf">0.0</span><span class="p">,</span><span class="n">highValue</span><span class="o">=</span><span class="mf">100.0</span><span class="p">,</span><span class="n">withOutput</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span><span class="n">Debug</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">computeNormalizedDiffEvaluations</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">lowValue</span><span class="o">=</span><span class="mf">0.0</span><span class="p">,</span><span class="n">highValue</span><span class="o">=</span><span class="mf">100.0</span><span class="p">,</span><span class="n">withOutput</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span><span class="n">Debug</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        renders and csv stores (withOutput=True) the</span>
 <span class="sd">        list of normalized evaluation differences observed on the family of criteria</span>
@@ -4437,12 +4437,12 @@
     
 <div class="viewcode-block" id="PerformanceTableau.showStatistics">
 <a class="viewcode-back" href="../techDoc.html#perfTabs.PerformanceTableau.showStatistics">[docs]</a>
-    <span class="k">def</span><span class="w"> </span><span class="nf">showStatistics</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">Debug</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">showStatistics</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">Debug</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        show statistics concerning the evaluation distributions</span>
 <span class="sd">        on each criteria.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="kn">import</span><span class="w"> </span><span class="nn">math</span>
+        <span class="kn">import</span> <span class="nn">math</span>
         <span class="n">criteriaKeys</span> <span class="o">=</span> <span class="p">[</span><span class="n">x</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">criteria</span><span class="p">]</span>
         <span class="n">criteriaKeys</span><span class="o">.</span><span class="n">sort</span><span class="p">()</span>
         <span class="n">nc</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">criteria</span><span class="p">)</span>
@@ -4537,7 +4537,7 @@
 
 <div class="viewcode-block" id="PerformanceTableau.normalizeEvaluations">
 <a class="viewcode-back" href="../techDoc.html#perfTabs.PerformanceTableau.normalizeEvaluations">[docs]</a>
-    <span class="k">def</span><span class="w"> </span><span class="nf">normalizeEvaluations</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">lowValue</span><span class="o">=</span><span class="mf">0.0</span><span class="p">,</span><span class="n">highValue</span><span class="o">=</span><span class="mf">100.0</span><span class="p">,</span><span class="n">Debug</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">normalizeEvaluations</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">lowValue</span><span class="o">=</span><span class="mf">0.0</span><span class="p">,</span><span class="n">highValue</span><span class="o">=</span><span class="mf">100.0</span><span class="p">,</span><span class="n">Debug</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        recode the evaluations between lowValue and highValue on all criteria</span>
 <span class="sd">        &quot;&quot;&quot;</span>
@@ -4595,7 +4595,7 @@
 
 <div class="viewcode-block" id="PerformanceTableau.quantizeCriterionEvaluations">
 <a class="viewcode-back" href="../techDoc.html#perfTabs.PerformanceTableau.quantizeCriterionEvaluations">[docs]</a>
-    <span class="k">def</span><span class="w"> </span><span class="nf">quantizeCriterionEvaluations</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">g</span><span class="p">,</span><span class="n">q</span><span class="p">,</span><span class="n">ndigits</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span><span class="n">Debug</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">quantizeCriterionEvaluations</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">g</span><span class="p">,</span><span class="n">q</span><span class="p">,</span><span class="n">ndigits</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span><span class="n">Debug</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        q-tile evaluation of criterion q</span>
 <span class="sd">        &quot;&quot;&quot;</span>
@@ -4639,7 +4639,7 @@
    
 <div class="viewcode-block" id="PerformanceTableau.restoreOriginalEvaluations">
 <a class="viewcode-back" href="../techDoc.html#perfTabs.PerformanceTableau.restoreOriginalEvaluations">[docs]</a>
-    <span class="k">def</span><span class="w"> </span><span class="nf">restoreOriginalEvaluations</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">lowValue</span><span class="o">=</span><span class="mf">0.0</span><span class="p">,</span><span class="n">highValue</span><span class="o">=</span><span class="mf">100.0</span><span class="p">,</span><span class="n">Debug</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">restoreOriginalEvaluations</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">lowValue</span><span class="o">=</span><span class="mf">0.0</span><span class="p">,</span><span class="n">highValue</span><span class="o">=</span><span class="mf">100.0</span><span class="p">,</span><span class="n">Debug</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        recode the evaluations to their original values on all criteria</span>
 <span class="sd">        &quot;&quot;&quot;</span>
@@ -4689,12 +4689,12 @@
 <span class="c1">#-----------------------</span>
 <div class="viewcode-block" id="EmptyPerformanceTableau">
 <a class="viewcode-back" href="../techDoc.html#perfTabs.EmptyPerformanceTableau">[docs]</a>
-<span class="k">class</span><span class="w"> </span><span class="nc">EmptyPerformanceTableau</span><span class="p">(</span><span class="n">PerformanceTableau</span><span class="p">):</span>
+<span class="k">class</span> <span class="nc">EmptyPerformanceTableau</span><span class="p">(</span><span class="n">PerformanceTableau</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Template for PerformanceTableau objects.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
-    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="kn">from</span><span class="w"> </span><span class="nn">collections</span><span class="w"> </span><span class="kn">import</span> <span class="n">OrderedDict</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="kn">from</span> <span class="nn">collections</span> <span class="kn">import</span> <span class="n">OrderedDict</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="s1">&#39;PerfTab-template&#39;</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">objectives</span> <span class="o">=</span> <span class="n">OrderedDict</span><span class="p">()</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">criteria</span> <span class="o">=</span> <span class="n">OrderedDict</span><span class="p">()</span>
@@ -4706,14 +4706,14 @@
 <span class="c1">#-----------------------</span>
 <div class="viewcode-block" id="PartialPerformanceTableau">
 <a class="viewcode-back" href="../techDoc.html#perfTabs.PartialPerformanceTableau">[docs]</a>
-<span class="k">class</span><span class="w"> </span><span class="nc">PartialPerformanceTableau</span><span class="p">(</span><span class="n">PerformanceTableau</span><span class="p">):</span>
+<span class="k">class</span> <span class="nc">PartialPerformanceTableau</span><span class="p">(</span><span class="n">PerformanceTableau</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Constructor for partial performance tableaux concerning a subset of actions and/or criteria and/or objectives</span>
 <span class="sd">    &quot;&quot;&quot;</span>
-    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">inPerfTab</span><span class="p">,</span><span class="n">actionsSubset</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span><span class="n">criteriaSubset</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span><span class="n">objectivesSubset</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
-        <span class="kn">from</span><span class="w"> </span><span class="nn">copy</span><span class="w"> </span><span class="kn">import</span> <span class="n">deepcopy</span>
-        <span class="kn">from</span><span class="w"> </span><span class="nn">collections</span><span class="w"> </span><span class="kn">import</span> <span class="n">OrderedDict</span>
-        <span class="kn">from</span><span class="w"> </span><span class="nn">randomPerfTabs</span><span class="w"> </span><span class="kn">import</span> <span class="n">RandomCBPerformanceTableau</span><span class="p">,</span>\
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">inPerfTab</span><span class="p">,</span><span class="n">actionsSubset</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span><span class="n">criteriaSubset</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span><span class="n">objectivesSubset</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+        <span class="kn">from</span> <span class="nn">copy</span> <span class="kn">import</span> <span class="n">deepcopy</span>
+        <span class="kn">from</span> <span class="nn">collections</span> <span class="kn">import</span> <span class="n">OrderedDict</span>
+        <span class="kn">from</span> <span class="nn">randomPerfTabs</span> <span class="kn">import</span> <span class="n">RandomCBPerformanceTableau</span><span class="p">,</span>\
                                    <span class="n">Random3ObjectivesPerformanceTableau</span><span class="p">,</span>\
                                    <span class="n">RandomPerformanceTableau</span>
         <span class="k">if</span> <span class="n">inPerfTab</span><span class="o">.</span><span class="vm">__class__</span> <span class="ow">in</span> <span class="p">[</span><span class="n">RandomCBPerformanceTableau</span><span class="p">,</span>
@@ -4824,7 +4824,7 @@
 <span class="c1">#-----------------------</span>
 <div class="viewcode-block" id="ConstantPerformanceTableau">
 <a class="viewcode-back" href="../techDoc.html#perfTabs.ConstantPerformanceTableau">[docs]</a>
-<span class="k">class</span><span class="w"> </span><span class="nc">ConstantPerformanceTableau</span><span class="p">(</span><span class="n">PerformanceTableau</span><span class="p">):</span>
+<span class="k">class</span> <span class="nc">ConstantPerformanceTableau</span><span class="p">(</span><span class="n">PerformanceTableau</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Constructor for (partially) constant performance tableaux.</span>
 
@@ -4835,9 +4835,9 @@
 <span class="sd">        * The *position* parameter (default = median performance) selects the constant performance in the respective scale of each performance criterion.</span>
 <span class="sd">    </span>
 <span class="sd">    &quot;&quot;&quot;</span>
-    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">inPerfTab</span><span class="p">,</span><span class="n">actionsSubset</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span><span class="n">criteriaSubset</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">inPerfTab</span><span class="p">,</span><span class="n">actionsSubset</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span><span class="n">criteriaSubset</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
                  <span class="n">position</span><span class="o">=</span><span class="mf">0.5</span><span class="p">):</span>
-        <span class="kn">from</span><span class="w"> </span><span class="nn">copy</span><span class="w"> </span><span class="kn">import</span> <span class="n">deepcopy</span>
+        <span class="kn">from</span> <span class="nn">copy</span> <span class="kn">import</span> <span class="n">deepcopy</span>
         
         <span class="bp">self</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="s1">&#39;constant-&#39;</span><span class="o">+</span><span class="n">inPerfTab</span><span class="o">.</span><span class="n">name</span>
 
@@ -4874,13 +4874,13 @@
 <span class="c1">#-----------------------</span>
 <div class="viewcode-block" id="CircularPerformanceTableau">
 <a class="viewcode-back" href="../techDoc.html#perfTabs.CircularPerformanceTableau">[docs]</a>
-<span class="k">class</span><span class="w"> </span><span class="nc">CircularPerformanceTableau</span><span class="p">(</span><span class="n">PerformanceTableau</span><span class="p">):</span>
+<span class="k">class</span> <span class="nc">CircularPerformanceTableau</span><span class="p">(</span><span class="n">PerformanceTableau</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Constructor for circular performance tableaux.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
-    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">order</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span><span class="n">scale</span><span class="o">=</span><span class="p">(</span><span class="mf">0.0</span><span class="p">,</span><span class="mf">100.0</span><span class="p">),</span><span class="n">NoPolarisation</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
-        <span class="kn">from</span><span class="w"> </span><span class="nn">copy</span><span class="w"> </span><span class="kn">import</span> <span class="n">deepcopy</span>
-        <span class="kn">from</span><span class="w"> </span><span class="nn">randomPerfTabs</span><span class="w"> </span><span class="kn">import</span> <span class="n">RandomPerformanceTableau</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">order</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span><span class="n">scale</span><span class="o">=</span><span class="p">(</span><span class="mf">0.0</span><span class="p">,</span><span class="mf">100.0</span><span class="p">),</span><span class="n">NoPolarisation</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
+        <span class="kn">from</span> <span class="nn">copy</span> <span class="kn">import</span> <span class="n">deepcopy</span>
+        <span class="kn">from</span> <span class="nn">randomPerfTabs</span> <span class="kn">import</span> <span class="n">RandomPerformanceTableau</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="s1">&#39;circular-</span><span class="si">%s</span><span class="s1">-PT&#39;</span> <span class="o">%</span> <span class="nb">str</span><span class="p">(</span><span class="n">order</span><span class="p">)</span>
 
         <span class="n">t</span> <span class="o">=</span> <span class="n">RandomPerformanceTableau</span><span class="p">(</span><span class="n">numberOfActions</span><span class="o">=</span><span class="n">order</span><span class="p">,</span>
@@ -4910,16 +4910,16 @@
 <span class="c1"># ----------------------</span>
 <div class="viewcode-block" id="NormalizedPerformanceTableau">
 <a class="viewcode-back" href="../techDoc.html#perfTabs.NormalizedPerformanceTableau">[docs]</a>
-<span class="k">class</span><span class="w"> </span><span class="nc">NormalizedPerformanceTableau</span><span class="p">(</span><span class="n">PerformanceTableau</span><span class="p">):</span>
+<span class="k">class</span> <span class="nc">NormalizedPerformanceTableau</span><span class="p">(</span><span class="n">PerformanceTableau</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    specialsation of the PerformanceTableau class for</span>
 <span class="sd">    constructing normalized, 0 - 100, valued PerformanceTableau</span>
 <span class="sd">    instances from a given argPerfTab instance.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
-    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">argPerfTab</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span><span class="n">lowValue</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span><span class="n">highValue</span><span class="o">=</span><span class="mi">100</span><span class="p">,</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">argPerfTab</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span><span class="n">lowValue</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span><span class="n">highValue</span><span class="o">=</span><span class="mi">100</span><span class="p">,</span>
                  <span class="n">coalition</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span><span class="n">Debug</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
-        <span class="kn">from</span><span class="w"> </span><span class="nn">copy</span><span class="w"> </span><span class="kn">import</span> <span class="n">deepcopy</span>
-        <span class="kn">from</span><span class="w"> </span><span class="nn">decimal</span><span class="w"> </span><span class="kn">import</span> <span class="n">Decimal</span>
+        <span class="kn">from</span> <span class="nn">copy</span> <span class="kn">import</span> <span class="n">deepcopy</span>
+        <span class="kn">from</span> <span class="nn">decimal</span> <span class="kn">import</span> <span class="n">Decimal</span>
         <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">argPerfTab</span><span class="p">,(</span><span class="nb">str</span><span class="p">)):</span>
             <span class="n">perfTab</span> <span class="o">=</span> <span class="n">PerformanceTableau</span><span class="p">(</span><span class="n">argPerfTab</span><span class="p">)</span>
         <span class="k">elif</span> <span class="n">argPerfTab</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
@@ -5010,7 +5010,7 @@
 
 <div class="viewcode-block" id="XMCDA2PerformanceTableau">
 <a class="viewcode-back" href="../techDoc.html#perfTabs.XMCDA2PerformanceTableau">[docs]</a>
-<span class="k">class</span><span class="w"> </span><span class="nc">XMCDA2PerformanceTableau</span><span class="p">(</span><span class="n">PerformanceTableau</span><span class="p">):</span>
+<span class="k">class</span> <span class="nc">XMCDA2PerformanceTableau</span><span class="p">(</span><span class="n">PerformanceTableau</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    For reading stored XMCDA 2.0 formatted instances with exact decimal numbers.</span>
 <span class="sd">    Using the inbuilt module xml.etree (for Python 2.5+).</span>
@@ -5026,11 +5026,11 @@
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="c1">#from collections import OrderedDict</span>
     
-    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">fileName</span><span class="o">=</span><span class="s1">&#39;temp&#39;</span><span class="p">,</span><span class="n">HasSeparatedWeights</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">fileName</span><span class="o">=</span><span class="s1">&#39;temp&#39;</span><span class="p">,</span><span class="n">HasSeparatedWeights</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
                  <span class="n">HasSeparatedThresholds</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span><span class="n">stringInput</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
                  <span class="n">Debug</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
         
-        <span class="kn">from</span><span class="w"> </span><span class="nn">xml.etree</span><span class="w"> </span><span class="kn">import</span> <span class="n">ElementTree</span>
+        <span class="kn">from</span> <span class="nn">xml.etree</span> <span class="kn">import</span> <span class="n">ElementTree</span>
         <span class="k">if</span> <span class="n">stringInput</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
             <span class="n">fileNameExt</span> <span class="o">=</span> <span class="n">fileName</span> <span class="o">+</span> <span class="s1">&#39;.xmcda2&#39;</span>
             <span class="k">try</span><span class="p">:</span>
@@ -5042,7 +5042,7 @@
                 <span class="k">except</span><span class="p">:</span>
                     <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Error: file </span><span class="si">%s</span><span class="s2">{.xmcda2|.xml} not found !&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="n">fileName</span><span class="p">))</span>
         <span class="k">else</span><span class="p">:</span>
-            <span class="kn">from</span><span class="w"> </span><span class="nn">io</span><span class="w"> </span><span class="kn">import</span> <span class="n">StringIO</span>
+            <span class="kn">from</span> <span class="nn">io</span> <span class="kn">import</span> <span class="n">StringIO</span>
             <span class="k">try</span><span class="p">:</span>
                 <span class="n">fo</span> <span class="o">=</span> <span class="n">StringIO</span><span class="p">(</span><span class="n">stringInput</span><span class="p">)</span>
             <span class="k">except</span><span class="p">:</span>
@@ -5325,16 +5325,16 @@
 <span class="c1">###########</span>
 <div class="viewcode-block" id="CSVPerformanceTableau">
 <a class="viewcode-back" href="../techDoc.html#perfTabs.CSVPerformanceTableau">[docs]</a>
-<span class="k">class</span><span class="w"> </span><span class="nc">CSVPerformanceTableau</span><span class="p">(</span><span class="n">PerformanceTableau</span><span class="p">):</span>
+<span class="k">class</span> <span class="nc">CSVPerformanceTableau</span><span class="p">(</span><span class="n">PerformanceTableau</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Reading stored CSV encoded actions x criteria PerformanceTableau instances, Using the inbuilt module csv.</span>
 
 <span class="sd">    Param:</span>
 <span class="sd">        fileName (without the extension .csv).</span>
 <span class="sd">    &quot;&quot;&quot;</span>
-    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">fileName</span><span class="o">=</span><span class="s1">&#39;temp&#39;</span><span class="p">,</span><span class="n">Debug</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
-        <span class="kn">from</span><span class="w"> </span><span class="nn">csv</span><span class="w"> </span><span class="kn">import</span> <span class="n">reader</span>
-        <span class="kn">from</span><span class="w"> </span><span class="nn">collections</span><span class="w"> </span><span class="kn">import</span> <span class="n">OrderedDict</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">fileName</span><span class="o">=</span><span class="s1">&#39;temp&#39;</span><span class="p">,</span><span class="n">Debug</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+        <span class="kn">from</span> <span class="nn">csv</span> <span class="kn">import</span> <span class="n">reader</span>
+        <span class="kn">from</span> <span class="nn">collections</span> <span class="kn">import</span> <span class="n">OrderedDict</span>
 
         <span class="k">try</span><span class="p">:</span>
             <span class="n">fileNameExt</span> <span class="o">=</span> <span class="n">fileName</span> <span class="o">+</span> <span class="s1">&#39;.csv&#39;</span>
@@ -5390,15 +5390,15 @@
 <span class="c1">#----------test Digraph class ----------------</span>
 <span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s2">&quot;__main__&quot;</span><span class="p">:</span>
     
-    <span class="kn">from</span><span class="w"> </span><span class="nn">digraphs</span><span class="w"> </span><span class="kn">import</span> <span class="o">*</span>
-    <span class="kn">from</span><span class="w"> </span><span class="nn">perfTabs</span><span class="w"> </span><span class="kn">import</span> <span class="o">*</span>
-    <span class="kn">from</span><span class="w"> </span><span class="nn">outrankingDigraphs</span><span class="w"> </span><span class="kn">import</span> <span class="o">*</span>
-    <span class="kn">import</span><span class="w"> </span><span class="nn">sortingDigraphs</span>
-    <span class="kn">from</span><span class="w"> </span><span class="nn">linearOrders</span><span class="w"> </span><span class="kn">import</span> <span class="o">*</span>
-    <span class="kn">from</span><span class="w"> </span><span class="nn">transitiveDigraphs</span><span class="w"> </span><span class="kn">import</span> <span class="o">*</span>
-    <span class="kn">from</span><span class="w"> </span><span class="nn">randomPerfTabs</span><span class="w"> </span><span class="kn">import</span> <span class="o">*</span>
-    <span class="kn">from</span><span class="w"> </span><span class="nn">time</span><span class="w"> </span><span class="kn">import</span> <span class="n">time</span>
-    <span class="kn">import</span><span class="w"> </span><span class="nn">random</span>
+    <span class="kn">from</span> <span class="nn">digraphs</span> <span class="kn">import</span> <span class="o">*</span>
+    <span class="kn">from</span> <span class="nn">perfTabs</span> <span class="kn">import</span> <span class="o">*</span>
+    <span class="kn">from</span> <span class="nn">outrankingDigraphs</span> <span class="kn">import</span> <span class="o">*</span>
+    <span class="kn">import</span> <span class="nn">sortingDigraphs</span>
+    <span class="kn">from</span> <span class="nn">linearOrders</span> <span class="kn">import</span> <span class="o">*</span>
+    <span class="kn">from</span> <span class="nn">transitiveDigraphs</span> <span class="kn">import</span> <span class="o">*</span>
+    <span class="kn">from</span> <span class="nn">randomPerfTabs</span> <span class="kn">import</span> <span class="o">*</span>
+    <span class="kn">from</span> <span class="nn">time</span> <span class="kn">import</span> <span class="n">time</span>
+    <span class="kn">import</span> <span class="nn">random</span>
 
     <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;&quot;&quot;</span>
 <span class="s2">    ****************************************************</span>
@@ -5472,7 +5472,7 @@
 
   <div role="contentinfo">
     <p>&#169; Copyright 2012-2025, Raymond Bisdorff.
-      <span class="lastupdated">Last updated on Apr 16, 2025.
+      <span class="lastupdated">Last updated on Apr 29, 2025.
       </span></p>
   </div>
 

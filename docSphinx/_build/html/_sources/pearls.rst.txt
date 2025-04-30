@@ -3008,7 +3008,7 @@ Bipolar-valued base 3 encoded Bachet numbers
    -- Cl. G. Bachet (1622)
 
 
-Bipolar-valued {-1,0,1} base 3 encoded integers are due to *Claude Gaspard Bachet de Méziriac* (1581-1638) [20]_. The idea is to represent the value of an integer *n* in a base 3 positional numerotation where in each position may appear a **signed bit** e.i. one of the three symbols **{-1,0,1}**, called hereafter **sbits** for short.
+Bipolar-valued {-1,0,1} base 3 encoded integers are due to *Claude Gaspard Bachet de Méziriac* (1581-1638) [20]_. The idea is to represent the value of an integer *n* in a base 3 positional numerotation where in each position may appear a **signed bit** --one of the three symbols **{-1,0,1}**-- called hereafter **sbits** for short.
 
 *Bachet*'s positional *sbits* numerotation is simulating a weight balance scale where the number *n* and the potential negative powers of 3 are put on the right tray and the potential positive powers of 3 are put on the left tray. The equation for *n = 5* gives for instance :math:`3^2 = (n + 3^1 + 3^0)`. And the *sbits* encoding corresponds hence to the string '1-1-1'. As, this representation is isomorphic to a base 3 binary encoding, every positive or negative integer may this way be represented with a unique *sbits* string. With four powers of 3, namely :math:`{3^3, 3^2, 3^1, 3^0}`, one may for instance represent any value in the integer range -40 to +40. *Bachet* showed that this bipolar weighing system relies on the smallest possible number of weights -base powers- needed in order to balance the scale for any given integer weight *n* [BAC-1622p]_.
 
@@ -3101,7 +3101,7 @@ Examples of such *sbits* encoded *Bachet* numbers are immediately provided by th
 
 The *Bachet* numbers, instantiated by the row vectors without reflexive terms  and the column vectors without reflexive terms of the digraph's *self.relation* attribute, model in fact respectively an **outrankingness** measure *rx* and an **outrankedness** measure *cx* (see Lines 16-27).
 
-The sum *rx + (-cx)* of both the **outrankingness** and the **not-outrankedness** measures renders now per decision action *x* a potential ranking score, similar to *Copeland* or *NetFlows* ranking scores [21]_.
+The sum *rx + (-cx)* of both the **outrankingness** and the **negated outrankedness** measures renders now per decision action *x* a potential ranking score, similar to *Copeland* or *NetFlows* ranking scores [21]_.
 
 In our example here we obtain the *Bachet* ranking 'a4' (26) > 'a3' (4) > 'a2' (1) > 'a1' (-11) (see Line 30 above). A ranking result, which is the corresponding optimal *Kemeny* ranking maximally correlated with the given outranking digraph (tau = 0.795, see Lines 4 and 8 below).
 
