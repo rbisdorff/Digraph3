@@ -3010,7 +3010,7 @@ Bipolar-valued base 3 encoded Bachet numbers
 
 Bipolar-valued {-1,0,1} base 3 encoded integers are due to *Claude Gaspard Bachet de Méziriac* (1581-1638) [20]_. The idea is to represent the value of an integer *n* in a base 3 positional numerotation where in each position may appear a **signed bit** --one of the three symbols **{-1,0,1}**-- called hereafter **sbits** for short.
 
-*Bachet*'s positional *sbits* numerotation is simulating a weight balance scale where the number *n* and the potential negative powers of 3 are put on the right tray and the potential positive powers of 3 are put on the left tray. The equation for *n = 5* gives for instance :math:`3^2 = (n + 3^1 + 3^0)`. And the *sbits* encoding corresponds hence to the string '1-1-1'. As, this representation is isomorphic to a base 3 binary encoding, every positive or negative integer may this way be represented with a unique *sbits* string. With four powers of 3, namely :math:`{3^3, 3^2, 3^1, 3^0}`, one may for instance represent any value in the integer range -40 to +40. *Bachet* showed that this bipolar weighing system relies on the smallest possible number of weights -base powers- needed in order to balance the scale for any given integer weight *n* [BAC-1622p]_.
+*Bachet*'s positional *sbits* numerotation is simulating a weight balance scale where the number *n* and the potential negative powers of 3 are put on the right tray and the potential positive powers of 3 are put on the left tray. The equation for *n = 5* gives for instance :math:`3^2 = (n + 3^1 + 3^0)`. And the *sbits* encoding corresponds hence to the string '+1-1-1'. As, this representation is isomorphic to a base 3 binary encoding, every positive or negative integer may this way be represented with a unique *sbits* string. With four powers of 3, namely :math:`{3^3, 3^2, 3^1, 3^0}`, one may for instance represent any value in the integer range -40 to +40. *Bachet* showed that this bipolar weighing system relies on the smallest possible number of weights -base powers- needed in order to balance the scale for any given integer weight *n* [BAC-1622p]_.
 
 The Digraph3 :py:mod:`arithmetics` module provides with the :py:class:`~arithmetics.BachetNumber` class an implementation for such *sbits* encoded integers. Instantiating a *Bachet* number may be done either with an integer value or with a vector of sbits (see :numref:`BachetNumbers` Lines  2, 6, 11 and 15). The class provides a binary *addition* method and unary *negating* and *reversing* methods as illustrated in Lines 20 and 32-33 below. 
 
@@ -3025,7 +3025,7 @@ The Digraph3 :py:mod:`arithmetics` module provides with the :py:class:`~arithmet
    >>> n1
      *------- Bachet number description ------*
      Instance class : BachetNumber
-     String         : 1-1-1
+     String         : '+1-1-1'
      Vector         : [1, -1, -1]
      Length         : 3
      Value          : 5
@@ -3034,7 +3034,7 @@ The Digraph3 :py:mod:`arithmetics` module provides with the :py:class:`~arithmet
    >>> n2
      *------- Bachet number description ------*
      Instance class : BachetNumber
-     String         : 111
+     String         : '+1+1+1'
      Vector         : [1, 1, 1]
      Length         : 3
      Value          : 13
@@ -3043,19 +3043,19 @@ The Digraph3 :py:mod:`arithmetics` module provides with the :py:class:`~arithmet
    >>> n3
      *------- Bachet number description ------*
      Instance class : BachetNumber
-     String         : 1-100
+     String         : '+1-100'
      Vector         : [1, -1, 0, 0]
      Length         : 4
      Value          : 18
      Attributes     : ['vector']
    >>> print('%s (%d) + %s (%d) = %s (%d)'
    ...        % (n1, n1.value(), n2, n2.value(), n3, n3.value() ))
-     1-1-1 (5) + 111 (13) = 1-100 (18)
+     '+1-1-1' (5) + '+1+1+1' (13) = '+1-100' (18)
    >>> n4 = n1.reverse()
    >>> n5 = -n2
    >>> print('%s (%d) + %s (%d) = %s (%d)'
    ...       % ( n4, n4.value(), n5, n5.value(),n4 + n5, (n4+n5).value() ))
-     -1-11 (-11) + -1-1-1 (-13) = -1010 (-24)
+     '-1-1+1' (-11) + '-1-1-1' (-13) = '-10+10' (-24)
 
 Examples of sbits encoded Bachet numbers
 ........................................

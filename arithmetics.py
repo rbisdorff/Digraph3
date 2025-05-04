@@ -176,9 +176,13 @@ class BachetNumber(object):
         """
         Defines the printable string version of a Bachet number
         """
-        bachet_string = ''
+        bachet_string = '\''
         for i in range(len(self.vector)):
-            bachet_string += str(self.vector[i])
+            if self.vector[i] != 0:
+                bachet_string += '%+d' % (self.vector[i])
+            else:
+                bachet_string += '%d' % (self.vector[i])
+        bachet_string += "\'"
         return bachet_string
        
     def __neg__(self):
