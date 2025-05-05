@@ -1898,10 +1898,13 @@ class WeakBachetRanking(TransitiveDigraph):
     """
     
     def __init__(self,g,randomized=100,maxNbrOfRankings=5,
-                 seed=None,
+                 seed=None,Polarised=True,
                  Comments=False,Debug=False):
         from time import time
-        from linearOrders import BachetRanking
+        if Polarised:
+            from linearOrders import PolarisedBachetRanking as BachetRanking
+        else:
+            from linearOrders import BachetRanking
         from copy import deepcopy
         tt = time()
         statistics = {}
@@ -2182,8 +2185,8 @@ if __name__ == "__main__":
 ## 
     pt = RandomCBPerformanceTableau(numberOfActions=9,numberOfCriteria=13,seed=100)
     g = BipolarOutrankingDigraph(pt)
-    wbg = WeakBachetRanking(g,seed=100,Comments=False)
-    #wbg.showWeakRanking(WithCoverCredibility=True)
+    wbg = WeakBachetRanking(g,seed=100,Polarised=True,Comments=False)
+    wbg.showTransitiveDigraph(WithCoverCredibility=True)
     #wcg = WeakCopelandOrder(g,WithFairestRanking=True)
     #print(wcg.copelandPermutations)
     #print(wcg.copelandPreRanking)
