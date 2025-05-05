@@ -3020,7 +3020,7 @@ A further valued version of the *Copeland* ranking-by-scoring rule is given by :
 
 The *Bachet* ranking
 ````````````````````
-The *Bachet* numbers --bipolar-valued {-1,0,1} base 3 encoded integers-- instantiated by the row vectors without reflxive terms and the colum vectors without reflexive terms of the strict outranking digraph's polarised relation table model in fact per decision action respectively an **outrankingness** and a **not outrankedness** ranking fitness score similar to the previous *NetFlows* ranking scores (see :numref:`polarisedAStrictOutranking` and :py:class:`linearOrders.BachetRanking`).
+The *Bachet* numbers --bipolar-valued {-1,0,+1} base 3 encoded integers-- instantiated by the row vectors without reflxive terms and the colum vectors without reflexive terms of the strict outranking digraph's polarised relation table model in fact per decision action respectively an **outrankingness** and a **not outrankedness** ranking fitness score similar to the previous *NetFlows* ranking scores (see :numref:`polarisedAStrictOutranking` and :py:class:`linearOrders.PolarisedBachetRanking`).
 
 Now, *Bachet* numbers are formulated in a base 3 positional numeral system and the integer values of the *Bachet* ranking scores may depend therefore on the actual ordering of the outranking digraph's *actions* dictiionary. The *Bachet* rule is however, like the *Copeland* rule, **invariant** under the **codual** transform and **Condorcet consistent**, ie. when the outranking digraph models a transitive and acyclic relation, this relation will be preserved by the *Bachet* ranking scores. Here, as we have seen above, the given digraph's transitivity degree is only 0.487. To reduce therefore the dependency on the given initial ordering of the *actions* dictionary, we compute below *Bachet* ranking results for 10 random permutations and their reversed orderings of the actions keys (see :numref:`BachetRanking` Line 2) and keep the one ranking that is best correlated with the given outranking digraph (see the advanced topic on :ref:`a new ranking rule based on bipolar-valued base 3 Bachet numbers <Bachet-Tutorial-label>` ) [59]_.
 
@@ -3031,7 +3031,7 @@ Now, *Bachet* numbers are formulated in a base 3 positional numeral system and t
    :linenos:
 
    >>> from linearOrders import BachetRanking
-   >>> ba = BachetRanking(gcd,randomized=10,seed=28)
+   >>> ba = PolarisedBachetRanking(gcd,randomized=10,seed=28)
    >>> ba.showScores()
     Bachet scores in descending order
      action 	 score
