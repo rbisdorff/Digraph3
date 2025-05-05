@@ -1219,7 +1219,7 @@ class _OutFlowsOrder(LinearOrder):
             for x in reversed(self.outFlows):
                 print('%s \t %.2f' %(x[1],x[0]))
 #------------
-class BachetRanking(LinearOrder):
+class PolarisedBachetRanking(LinearOrder):
     """    
     Instantiates the Bachet Ranking and Ordering from a given bipolar-valued *Digraph* instance *other*.
 
@@ -1247,7 +1247,7 @@ class BachetRanking(LinearOrder):
     >>> g = RandomBipolarOutrankingDigraph(numberOfActions=9,seed=1)
     >>> from linearOrders import BachetRanking
     >>> print('*---- solely given ordering of the actions')
-    >>> ba1 = BachetRanking(g,BestQualified=False)
+    >>> ba1 = PolariseBachetRanking(g,BestQualified=False)
     >>> ba1.showScores()
      Bachet scores in descending order
      action 	 score
@@ -1263,7 +1263,7 @@ class BachetRanking(LinearOrder):
     >>> print(g.computeRankingCorrelation(ba1.bachetRanking))
      {'correlation': 0.3935624213996805, 'determination': 0.408625}
     >>> print('*---- given and reversed ordering of the actions')
-    >>> ba2 = BachetRanking(g,BestQualified=True)
+    >>> ba2 = PolarisedBachetRanking(g,BestQualified=True)
     >>> ba2.showScores() 
      Bachet scores in descending order
      action 	 score
@@ -1279,7 +1279,7 @@ class BachetRanking(LinearOrder):
     >>> print(g.computeRankingCorrelation(ba2.bachetRanking))
      {'correlation': 0.46511675333945146, 'determination': 0.408625}
     >>> print('*---- using 10 random ordering and their reversed versions')
-    >>> ba3 = BachetRanking(g,BestQualified=True,randomized=10)
+    >>> ba3 = PolarisedBachetRanking(g,BestQualified=True,randomized=10)
     >>> ba3.showScores()
      Bachet scores in descending order
      action 	 score
@@ -1383,7 +1383,7 @@ class BachetRanking(LinearOrder):
             from digraphsTools import all_perms
             actions = [x for x in other.actions]
             for p in all_perms(actions): 
-                ba = BachetRanking(c,orderLimit=orderLimit,
+                ba = PolarisedBachetRanking(c,orderLimit=orderLimit,
                                    Polarised=True,
                                    BestQualified=False,
                                    actionsList=p)
@@ -1420,7 +1420,7 @@ class BachetRanking(LinearOrder):
             bar = None
             for i in range(randomized):
                 random.shuffle(randomActions) 
-                ba = BachetRanking(c,orderLimit=orderLimit,
+                ba = PolarisedBachetRanking(c,orderLimit=orderLimit,
                                    Polarised=True,
                                    BestQualified=True,
                                    actionsList=randomActions)
@@ -1597,13 +1597,13 @@ class BachetRanking(LinearOrder):
             for x in self.incBachetScores:
                 print('%s \t %.2f' %(x[1],x[0]))
          
-class BachetOrder(BachetRanking):
+class PolarisedBachetOrder(PolarisedBachetRanking):
     """
-    Dummy for BachetRanking class
+    Dummy for PolarisedBachetRanking class
     """
 
 #------------
-class ValuedBachetRanking(LinearOrder):
+class BachetRanking(LinearOrder):
     """    
     Instantiates the Bachet Ranking and Ordering from a given bipolar-valued *Digraph* instance *other*.
 
@@ -1620,64 +1620,48 @@ class ValuedBachetRanking(LinearOrder):
         - *Optimal*: (False by default) all possible permutations of the given other.actions ordering are ranked and the best correlated ranking is eventually returned.
     
 
-    For each action *x* in *other.actions*, the polarised integer row vector of the *other.relation* attribute without the reflexive terms defines a *Bachet vector* which correponds to a significance weight *rbx* of its **outrankingness credibility**. Similarly, the corresponding polarised integer column vector in the *other.relation* attribute without the reflexive terms defines a *Bachet vector* whose negation correponds to a significance weight *-cbx* of its **not outrankedness credibility**.
+    For each action *x* in *other.actions*, the row vector of the *other.relation* attribute without the reflexive terms defines a *Bachet vector* which correponds to a significance weight *rbx* of its **outrankingness credibility**. Similarly, the corresponding column vector in the *other.relation* attribute without the reflexive terms defines a *Bachet vector* whose negation correponds to a significance weight *-cbx* of its **negated outrankedness credibility**.
 
-    Taking now the sum *rbx + (-cbx)* of both credibilities gives us per action *x* a Bachet fitness score of the statement that *x* may be *first-ranked*. Sorting in decreasing (resp. increasing) order these Bachet fitness scores gives the *Bachet ranking*, respective *ordering*, result. Both results are stored in the *self.bachetRanking* resp. *self.bachetOrder* attribute. 
+    Taking now the sum *rbx + (-cbx)* of both credibilities gives us per action *x* a valued Bachet fitness score of the statement that *x* may be *first-ranked*. Sorting in decreasing (resp. increasing) order these Bachet fitness scores gives the *Bachet ranking*, respective *ordering*, result. Both results are stored in the *self.bachetRanking* resp. *self.bachetOrder* attribute. 
 
-    Like the Copeland and the NetFlows rules, the Bachet ranking rule is *invariant* under the *codual* transform. The Bachet rule is furthermore, like the Copeland rule, also *Condorcet consistent*, i.e. when the outranking digraph models a linear relation, its Bachet ranking result will be consistent with this linear outranking relation.
+    Like the Copeland and the NetFlows rules, the Bachet ranking rule is *invariant* under the *codual* transform. The Bachet rule is however, unlike the Copeland rule, not necessarily  *Condorcet consistent*.
 
     >>> print("*==>> testing BachetRanking Class ----*")
     >>> from outrankingDigraphs import RandomBipolarOutrankingDigraph
     >>> g = RandomBipolarOutrankingDigraph(numberOfActions=9,seed=1)
     >>> from linearOrders import BachetRanking
-    >>> print('*---- solely given ordering of the actions')
-    >>> ba1 = BachetRanking(g,BestQualified=False)
-    >>> ba1.showScores()
+    >>> print('*---- solely given ordering and the reverse of the actions')
+    >>> ba1 = BachetRanking(g,BestQualified=True)
+    >>> ba1.showScores() 
      Bachet scores in descending order
      action 	 score
-     a2 	 14768.00
-     a8 	 10061.00
-     a9 	 9264.00
-     a3 	 8211.00
-     a6 	 1394.00
-     a7 	 1317.00
-     a4 	 1294.00
-     a5 	 -3846.00
-     a1 	 -5849.00
+     a2 	 3126.01
+     a5 	 1660.68
+     a9 	 1439.05
+     a3 	 490.35
+     a6 	 288.43
+     a4 	 -59.94
+     a8 	 -107.58
+     a7 	 -270.58
+     a1 	 -2948.69
     >>> print(g.computeRankingCorrelation(ba1.bachetRanking))
-     {'correlation': 0.3935624213996805, 'determination': 0.408625}
-    >>> print('*---- given and reversed ordering of the actions')
-    >>> ba2 = BachetRanking(g,BestQualified=True)
-    >>> ba2.showScores() 
+     {'correlation': 0.6314945107236328, 'determination': 0.408625}
+    >>> print('*---- using 100 random orderings and their reversed versions')
+    >>> ba2 = BachetRanking(g,randomized=100)
+    >>> ba2.showScores()
      Bachet scores in descending order
      action 	 score
-     a2 	 14768.00
-     a8 	 10061.00
-     a9 	 9264.00
-     a3 	 8211.00
-     a6 	 1394.00
-     a7 	 1317.00
-     a4 	 1294.00
-     a5 	 -3846.00
-     a1 	 -5849.00
-    >>> print(g.computeRankingCorrelation(ba2.bachetRanking))
-     {'correlation': 0.46511675333945146, 'determination': 0.408625}
-    >>> print('*---- using 10 random ordering and their reversed versions')
-    >>> ba3 = BachetRanking(g,BestQualified=True,randomized=10)
-    >>> ba3.showScores()
-     Bachet scores in descending order
-     action 	 score
-     a2 	 15092.00
-     a9 	 8884.00
-     a3 	 8533.00
-     a8 	 8493.00
-     a7 	 1771.00
-     a6 	 -246.00
-     a4 	 -990.00
-     a5 	 -4234.00
-     a1 	 -6323.00
+     a2 	 3580.93
+     a9 	 2725.92
+     a5 	 1773.33
+     a6 	 672.79
+     a8 	 -115.16
+     a4 	 -489.13
+     a3 	 -652.16
+     a7 	 -1102.77
+     a1 	 -1550.40
     >>> print(g.computeRankingCorrelation(ba3.bachetRanking))
-     {'correlation': 0.7585058291696407, 'determination': 0.408625}
+     {'correlation': 0.7459841609734544, 'determination': 0.408625}
 
     
     .. note::
@@ -1767,7 +1751,7 @@ class ValuedBachetRanking(LinearOrder):
             from digraphsTools import all_perms
             actions = [x for x in other.actions]
             for p in all_perms(actions): 
-                ba = ValuedBachetRanking(c,orderLimit=orderLimit,
+                ba = BachetRanking(c,orderLimit=orderLimit,
                                    #Polarised=True,
                                    BestQualified=False,
                                    actionsList=p)
@@ -1804,7 +1788,7 @@ class ValuedBachetRanking(LinearOrder):
             bar = None
             for i in range(randomized):
                 random.shuffle(randomActions) 
-                ba = ValuedBachetRanking(c,orderLimit=orderLimit,
+                ba = BachetRanking(c,orderLimit=orderLimit,
                                    #Polarised=True,
                                    BestQualified=True,
                                    actionsList=randomActions)
@@ -2549,7 +2533,7 @@ if __name__ == "__main__":
         g = BipolarOutrankingDigraph(t)
         #g = RandomDigraph(order=7)
         revba1 = [x for x in reversed(g.actions)]
-        ba1 = ValuedBachetRanking(g,CoDual=True,
+        ba1 = BachetRanking(g,CoDual=True,
                             orderLimit=75,BestQualified=True,
                             Comments=True,Debug=True,
                             actionsList=g.actions,
@@ -2557,7 +2541,7 @@ if __name__ == "__main__":
         #print(ba1)
         corrba1 = g.computeRankingCorrelation(ba1.bachetRanking)
         print('ba1',ba1.bachetRanking,corrba1)
-        cop = CopelandRanking(g,Comments=False,Gamma=True)
+        cop = CopelandRanking(g,Comments=False,Gamma=False)
         print(cop.copelandRanking)
         corrcop = g.computeRankingCorrelation(cop.copelandRanking)
         print('cop',cop.copelandRanking,corrcop)
@@ -2574,7 +2558,7 @@ if __name__ == "__main__":
         revba2 = [x for x in reversed(g.actions)]
         #print(randomActions)
         #print(revba1)
-        ba2 = ValuedBachetRanking(g,Comments=False,
+        ba2 = BachetRanking(g,Comments=False,
                             CoDual=True,
                             randomized=100,seed=11,
                             #actionsList=g.actions,
@@ -2582,7 +2566,7 @@ if __name__ == "__main__":
         #print(ba2)
         corrba2 = g.computeRankingCorrelation(ba2.bachetRanking)
         print('ba2',ba2.bachetRanking,corrba2)
-        ba3 = ValuedBachetRanking(g,Comments=False,BestQualified=False,
+        ba3 = BachetRanking(g,Comments=False,BestQualified=False,
                             CoDual=True,
                             Optimal=True,Debug=True,
                             )
