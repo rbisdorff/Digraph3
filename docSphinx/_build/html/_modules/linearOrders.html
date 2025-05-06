@@ -1761,9 +1761,9 @@
 
 
 <span class="c1">#------------</span>
-<div class="viewcode-block" id="BachetRanking">
-<a class="viewcode-back" href="../techDoc.html#linearOrders.BachetRanking">[docs]</a>
-<span class="k">class</span> <span class="nc">BachetRanking</span><span class="p">(</span><span class="n">LinearOrder</span><span class="p">):</span>
+<div class="viewcode-block" id="ValuedBachetRanking">
+<a class="viewcode-back" href="../techDoc.html#linearOrders.ValuedBachetRanking">[docs]</a>
+<span class="k">class</span> <span class="nc">ValuedBachetRanking</span><span class="p">(</span><span class="n">LinearOrder</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;    </span>
 <span class="sd">    Instantiates the Bachet Ranking and Ordering from a given bipolar-valued *Digraph* instance *other*.</span>
 
@@ -1786,12 +1786,12 @@
 
 <span class="sd">    Like the Copeland and the NetFlows rules, the Bachet ranking rule is *invariant* under the *codual* transform. The Bachet rule is however, unlike the Copeland rule, not necessarily  *Condorcet consistent*.</span>
 
-<span class="sd">    &gt;&gt;&gt; print(&quot;*==&gt;&gt; testing BachetRanking Class ----*&quot;)</span>
+<span class="sd">    &gt;&gt;&gt; print(&quot;*==&gt;&gt; testing ValuedBachetRanking Class ----*&quot;)</span>
 <span class="sd">    &gt;&gt;&gt; from outrankingDigraphs import RandomBipolarOutrankingDigraph</span>
 <span class="sd">    &gt;&gt;&gt; g = RandomBipolarOutrankingDigraph(numberOfActions=9,seed=1)</span>
-<span class="sd">    &gt;&gt;&gt; from linearOrders import BachetRanking</span>
+<span class="sd">    &gt;&gt;&gt; from linearOrders import ValuedBachetRanking</span>
 <span class="sd">    &gt;&gt;&gt; print(&#39;*---- solely given ordering and the reverse of the actions&#39;)</span>
-<span class="sd">    &gt;&gt;&gt; ba1 = BachetRanking(g,BestQualified=True)</span>
+<span class="sd">    &gt;&gt;&gt; ba1 = ValuedBachetRanking(g,BestQualified=True)</span>
 <span class="sd">    &gt;&gt;&gt; ba1.showScores() </span>
 <span class="sd">     Bachet scores in descending order</span>
 <span class="sd">     action 	 score</span>
@@ -1807,7 +1807,7 @@
 <span class="sd">    &gt;&gt;&gt; print(g.computeRankingCorrelation(ba1.bachetRanking))</span>
 <span class="sd">     {&#39;correlation&#39;: 0.6314945107236328, &#39;determination&#39;: 0.408625}</span>
 <span class="sd">    &gt;&gt;&gt; print(&#39;*---- using 100 random orderings and their reversed versions&#39;)</span>
-<span class="sd">    &gt;&gt;&gt; ba2 = BachetRanking(g,randomized=100)</span>
+<span class="sd">    &gt;&gt;&gt; ba2 = ValuedBachetRanking(g,randomized=100)</span>
 <span class="sd">    &gt;&gt;&gt; ba2.showScores()</span>
 <span class="sd">     Bachet scores in descending order</span>
 <span class="sd">     action 	 score</span>
@@ -1911,7 +1911,7 @@
             <span class="kn">from</span> <span class="nn">digraphsTools</span> <span class="kn">import</span> <span class="n">all_perms</span>
             <span class="n">actions</span> <span class="o">=</span> <span class="p">[</span><span class="n">x</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">other</span><span class="o">.</span><span class="n">actions</span><span class="p">]</span>
             <span class="k">for</span> <span class="n">p</span> <span class="ow">in</span> <span class="n">all_perms</span><span class="p">(</span><span class="n">actions</span><span class="p">):</span> 
-                <span class="n">ba</span> <span class="o">=</span> <span class="n">BachetRanking</span><span class="p">(</span><span class="n">c</span><span class="p">,</span><span class="n">orderLimit</span><span class="o">=</span><span class="n">orderLimit</span><span class="p">,</span>
+                <span class="n">ba</span> <span class="o">=</span> <span class="n">ValuedBachetRanking</span><span class="p">(</span><span class="n">c</span><span class="p">,</span><span class="n">orderLimit</span><span class="o">=</span><span class="n">orderLimit</span><span class="p">,</span>
                                    <span class="c1">#Polarised=True,</span>
                                    <span class="n">BestQualified</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
                                    <span class="n">actionsList</span><span class="o">=</span><span class="n">p</span><span class="p">)</span>
@@ -1948,7 +1948,7 @@
             <span class="n">bar</span> <span class="o">=</span> <span class="kc">None</span>
             <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">randomized</span><span class="p">):</span>
                 <span class="n">random</span><span class="o">.</span><span class="n">shuffle</span><span class="p">(</span><span class="n">randomActions</span><span class="p">)</span> 
-                <span class="n">ba</span> <span class="o">=</span> <span class="n">BachetRanking</span><span class="p">(</span><span class="n">c</span><span class="p">,</span><span class="n">orderLimit</span><span class="o">=</span><span class="n">orderLimit</span><span class="p">,</span>
+                <span class="n">ba</span> <span class="o">=</span> <span class="n">ValuedBachetRanking</span><span class="p">(</span><span class="n">c</span><span class="p">,</span><span class="n">orderLimit</span><span class="o">=</span><span class="n">orderLimit</span><span class="p">,</span>
                                    <span class="c1">#Polarised=True,</span>
                                    <span class="n">BestQualified</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
                                    <span class="n">actionsList</span><span class="o">=</span><span class="n">randomActions</span><span class="p">)</span>
@@ -2126,11 +2126,11 @@
                 <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;</span><span class="si">%s</span><span class="s1"> </span><span class="se">\t</span><span class="s1"> </span><span class="si">%.2f</span><span class="s1">&#39;</span> <span class="o">%</span><span class="p">(</span><span class="n">x</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span><span class="n">x</span><span class="p">[</span><span class="mi">0</span><span class="p">]))</span></div>
 
          
-<div class="viewcode-block" id="BachetOrder">
-<a class="viewcode-back" href="../techDoc.html#linearOrders.BachetOrder">[docs]</a>
-<span class="k">class</span> <span class="nc">BachetOrder</span><span class="p">(</span><span class="n">BachetRanking</span><span class="p">):</span>
+<div class="viewcode-block" id="ValuedBachetOrder">
+<a class="viewcode-back" href="../techDoc.html#linearOrders.ValuedBachetOrder">[docs]</a>
+<span class="k">class</span> <span class="nc">ValuedBachetOrder</span><span class="p">(</span><span class="n">ValuedBachetRanking</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">    Dummy for BachetRanking class</span>
+<span class="sd">    Dummy for ValuedBachetRanking class</span>
 <span class="sd">    &quot;&quot;&quot;</span></div>
 
 
@@ -2718,7 +2718,7 @@
         <span class="n">g</span> <span class="o">=</span> <span class="n">BipolarOutrankingDigraph</span><span class="p">(</span><span class="n">t</span><span class="p">)</span>
         <span class="c1">#g = RandomDigraph(order=7)</span>
         <span class="n">revba1</span> <span class="o">=</span> <span class="p">[</span><span class="n">x</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="nb">reversed</span><span class="p">(</span><span class="n">g</span><span class="o">.</span><span class="n">actions</span><span class="p">)]</span>
-        <span class="n">ba1</span> <span class="o">=</span> <span class="n">BachetRanking</span><span class="p">(</span><span class="n">g</span><span class="p">,</span><span class="n">CoDual</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+        <span class="n">ba1</span> <span class="o">=</span> <span class="n">ValuedBachetRanking</span><span class="p">(</span><span class="n">g</span><span class="p">,</span><span class="n">CoDual</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
                             <span class="n">orderLimit</span><span class="o">=</span><span class="mi">75</span><span class="p">,</span><span class="n">BestQualified</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
                             <span class="n">Comments</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span><span class="n">Debug</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
                             <span class="n">actionsList</span><span class="o">=</span><span class="n">g</span><span class="o">.</span><span class="n">actions</span><span class="p">,</span>
@@ -2743,7 +2743,7 @@
         <span class="n">revba2</span> <span class="o">=</span> <span class="p">[</span><span class="n">x</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="nb">reversed</span><span class="p">(</span><span class="n">g</span><span class="o">.</span><span class="n">actions</span><span class="p">)]</span>
         <span class="c1">#print(randomActions)</span>
         <span class="c1">#print(revba1)</span>
-        <span class="n">ba2</span> <span class="o">=</span> <span class="n">BachetRanking</span><span class="p">(</span><span class="n">g</span><span class="p">,</span><span class="n">Comments</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+        <span class="n">ba2</span> <span class="o">=</span> <span class="n">ValuedBachetRanking</span><span class="p">(</span><span class="n">g</span><span class="p">,</span><span class="n">Comments</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
                             <span class="n">CoDual</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
                             <span class="n">randomized</span><span class="o">=</span><span class="mi">100</span><span class="p">,</span><span class="n">seed</span><span class="o">=</span><span class="mi">11</span><span class="p">,</span>
                             <span class="c1">#actionsList=g.actions,</span>
@@ -2751,7 +2751,7 @@
         <span class="c1">#print(ba2)</span>
         <span class="n">corrba2</span> <span class="o">=</span> <span class="n">g</span><span class="o">.</span><span class="n">computeRankingCorrelation</span><span class="p">(</span><span class="n">ba2</span><span class="o">.</span><span class="n">bachetRanking</span><span class="p">)</span>
         <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;ba2&#39;</span><span class="p">,</span><span class="n">ba2</span><span class="o">.</span><span class="n">bachetRanking</span><span class="p">,</span><span class="n">corrba2</span><span class="p">)</span>
-        <span class="n">ba3</span> <span class="o">=</span> <span class="n">BachetRanking</span><span class="p">(</span><span class="n">g</span><span class="p">,</span><span class="n">Comments</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span><span class="n">BestQualified</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+        <span class="n">ba3</span> <span class="o">=</span> <span class="n">ValuedBachetRanking</span><span class="p">(</span><span class="n">g</span><span class="p">,</span><span class="n">Comments</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span><span class="n">BestQualified</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
                             <span class="n">CoDual</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
                             <span class="n">Optimal</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span><span class="n">Debug</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
                             <span class="p">)</span>

@@ -1603,7 +1603,7 @@ class PolarisedBachetOrder(PolarisedBachetRanking):
     """
 
 #------------
-class BachetRanking(LinearOrder):
+class ValuedBachetRanking(LinearOrder):
     """    
     Instantiates the Bachet Ranking and Ordering from a given bipolar-valued *Digraph* instance *other*.
 
@@ -1626,12 +1626,12 @@ class BachetRanking(LinearOrder):
 
     Like the Copeland and the NetFlows rules, the Bachet ranking rule is *invariant* under the *codual* transform. The Bachet rule is however, unlike the Copeland rule, not necessarily  *Condorcet consistent*.
 
-    >>> print("*==>> testing BachetRanking Class ----*")
+    >>> print("*==>> testing ValuedBachetRanking Class ----*")
     >>> from outrankingDigraphs import RandomBipolarOutrankingDigraph
     >>> g = RandomBipolarOutrankingDigraph(numberOfActions=9,seed=1)
-    >>> from linearOrders import BachetRanking
+    >>> from linearOrders import ValuedBachetRanking
     >>> print('*---- solely given ordering and the reverse of the actions')
-    >>> ba1 = BachetRanking(g,BestQualified=True)
+    >>> ba1 = ValuedBachetRanking(g,BestQualified=True)
     >>> ba1.showScores() 
      Bachet scores in descending order
      action 	 score
@@ -1647,7 +1647,7 @@ class BachetRanking(LinearOrder):
     >>> print(g.computeRankingCorrelation(ba1.bachetRanking))
      {'correlation': 0.6314945107236328, 'determination': 0.408625}
     >>> print('*---- using 100 random orderings and their reversed versions')
-    >>> ba2 = BachetRanking(g,randomized=100)
+    >>> ba2 = ValuedBachetRanking(g,randomized=100)
     >>> ba2.showScores()
      Bachet scores in descending order
      action 	 score
@@ -1751,7 +1751,7 @@ class BachetRanking(LinearOrder):
             from digraphsTools import all_perms
             actions = [x for x in other.actions]
             for p in all_perms(actions): 
-                ba = BachetRanking(c,orderLimit=orderLimit,
+                ba = ValuedBachetRanking(c,orderLimit=orderLimit,
                                    #Polarised=True,
                                    BestQualified=False,
                                    actionsList=p)
@@ -1788,7 +1788,7 @@ class BachetRanking(LinearOrder):
             bar = None
             for i in range(randomized):
                 random.shuffle(randomActions) 
-                ba = BachetRanking(c,orderLimit=orderLimit,
+                ba = ValuedBachetRanking(c,orderLimit=orderLimit,
                                    #Polarised=True,
                                    BestQualified=True,
                                    actionsList=randomActions)
@@ -1965,9 +1965,9 @@ class BachetRanking(LinearOrder):
             for x in self.incBachetScores:
                 print('%s \t %.2f' %(x[1],x[0]))
          
-class BachetOrder(BachetRanking):
+class ValuedBachetOrder(ValuedBachetRanking):
     """
-    Dummy for BachetRanking class
+    Dummy for ValuedBachetRanking class
     """
 
 #-------------
@@ -2533,7 +2533,7 @@ if __name__ == "__main__":
         g = BipolarOutrankingDigraph(t)
         #g = RandomDigraph(order=7)
         revba1 = [x for x in reversed(g.actions)]
-        ba1 = BachetRanking(g,CoDual=True,
+        ba1 = ValuedBachetRanking(g,CoDual=True,
                             orderLimit=75,BestQualified=True,
                             Comments=True,Debug=True,
                             actionsList=g.actions,
@@ -2558,7 +2558,7 @@ if __name__ == "__main__":
         revba2 = [x for x in reversed(g.actions)]
         #print(randomActions)
         #print(revba1)
-        ba2 = BachetRanking(g,Comments=False,
+        ba2 = ValuedBachetRanking(g,Comments=False,
                             CoDual=True,
                             randomized=100,seed=11,
                             #actionsList=g.actions,
@@ -2566,7 +2566,7 @@ if __name__ == "__main__":
         #print(ba2)
         corrba2 = g.computeRankingCorrelation(ba2.bachetRanking)
         print('ba2',ba2.bachetRanking,corrba2)
-        ba3 = BachetRanking(g,Comments=False,BestQualified=False,
+        ba3 = ValuedBachetRanking(g,Comments=False,BestQualified=False,
                             CoDual=True,
                             Optimal=True,Debug=True,
                             )

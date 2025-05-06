@@ -164,21 +164,21 @@ def testBachetRanking():
     from outrankingDigraphs import RandomBipolarOutrankingDigraph
     g = RandomBipolarOutrankingDigraph(numberOfActions=7,seed=1)
     print(g)
-    from linearOrders import BachetRanking
+    from linearOrders import PolarisedBachetRanking
     actions = [x for x in g.actions]
-    ba1 = BachetRanking(g,BestQualified=True)
+    ba1 = PolarisedBachetRanking(g,BestQualified=True)
     print(ba1)
     ba1.showScores() 
     print(g.computeRankingCorrelation(ba1.bachetRanking))
-    ba2 = BachetRanking(g,BestQualified=False)
+    ba2 = POlarisedBachetRanking(g,BestQualified=False)
     print(ba2)
     ba2.showScores()
     print(g.computeRankingCorrelation(ba2.bachetRanking))
-    ba3 = BachetRanking(g,randomized=10,seed=1)
+    ba3 = POlarisedBachetRanking(g,randomized=10,seed=1)
     print(ba3)
     ba3.showScores()
     print(g.computeRankingCorrelation(ba3.bachetRanking))
-    ba4 = BachetRanking(g,Optimal=True,Comments=True)
+    ba4 = PolarisedBachetRanking(g,Optimal=True,Comments=True)
     print(ba4)
     ba4.showScores()
     print(g.computeRankingCorrelation(ba4.bachetRanking))

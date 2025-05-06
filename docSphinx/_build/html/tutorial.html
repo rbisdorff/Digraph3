@@ -3152,7 +3152,7 @@ three modes at 0.3 (-), 0.5 (~), respectively 0.7 (+) of the common scale span a
 <p>Now, <em>Bachet</em> numbers are formulated in a base 3 positional numeral system and the integer values of the <em>Bachet</em> ranking scores may depend therefore on the actual ordering of the outranking digraph’s <em>actions</em> dictiionary. The <em>Bachet</em> rule is however, like the <em>Copeland</em> rule, <strong>invariant</strong> under the <strong>codual</strong> transform and <strong>Condorcet consistent</strong>, ie. when the outranking digraph models a transitive and acyclic relation, this relation will be preserved by the <em>Bachet</em> ranking scores. Here, as we have seen above, the given digraph’s transitivity degree is only 0.487. To reduce therefore the dependency on the given initial ordering of the <em>actions</em> dictionary, we compute below <em>Bachet</em> ranking results for 10 random permutations and their reversed orderings of the actions keys (see <a class="hxr-hoverxref hxr-tooltip reference internal" href="#bachetranking"><span class="std std-numref">Listing 1.33</span></a> Line 2) and keep the one ranking that is best correlated with the given outranking digraph (see the advanced topic on <a class="reference internal" href="pearls.html#bachet-tutorial-label"><span class="std std-ref">a new ranking rule based on bipolar-valued base 3 Bachet numbers</span></a> ) <a class="footnote-reference brackets" href="#id242" id="id52" role="doc-noteref"><span class="fn-bracket">[</span>59<span class="fn-bracket">]</span></a>.</p>
 <div class="literal-block-wrapper docutils container" id="bachetranking">
 <div class="code-block-caption"><span class="caption-number">Listing 1.33 </span><span class="caption-text">Computing a <em>Bachet</em> ranking</span><a class="headerlink" href="#bachetranking" title="Link to this code"></a></div>
-<div class="highlight-pycon notranslate"><div class="highlight"><pre><span></span><span class="linenos"> 1</span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">linearOrders</span> <span class="kn">import</span> <span class="n">BachetRanking</span>
+<div class="highlight-pycon notranslate"><div class="highlight"><pre><span></span><span class="linenos"> 1</span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">linearOrders</span> <span class="kn">import</span> <span class="n">PolarisedBachetRanking</span>
 <span class="hll"><span class="linenos"> 2</span><span class="gp">&gt;&gt;&gt; </span><span class="n">ba</span> <span class="o">=</span> <span class="n">PolarisedBachetRanking</span><span class="p">(</span><span class="n">gcd</span><span class="p">,</span><span class="n">randomized</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span><span class="n">seed</span><span class="o">=</span><span class="mi">28</span><span class="p">)</span>
 </span><span class="linenos"> 3</span><span class="gp">&gt;&gt;&gt; </span><span class="n">ba</span><span class="o">.</span><span class="n">showScores</span><span class="p">()</span>
 <span class="linenos"> 4</span><span class="go"> Bachet scores in descending order</span>
@@ -10411,7 +10411,7 @@ dot -Grankdir=TB -Tpng rootedTree.dot -o rootedTree.png</p>
 
   <div role="contentinfo">
     <p>&#169; Copyright 2012-2025, Raymond Bisdorff.
-      <span class="lastupdated">Last updated on May 05, 2025.
+      <span class="lastupdated">Last updated on May 06, 2025.
       </span></p>
   </div>
 

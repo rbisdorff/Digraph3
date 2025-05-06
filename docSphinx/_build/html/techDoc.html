@@ -820,8 +820,6 @@
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="#linearorders-module">2.14. linearOrders module</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="#linearOrders.BachetOrder"><code class="docutils literal notranslate"><span class="pre">BachetOrder</span></code></a></li>
-<li class="toctree-l3"><a class="reference internal" href="#linearOrders.BachetRanking"><code class="docutils literal notranslate"><span class="pre">BachetRanking</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="#linearOrders.CopelandOrder"><code class="docutils literal notranslate"><span class="pre">CopelandOrder</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="#linearOrders.CopelandRanking"><code class="docutils literal notranslate"><span class="pre">CopelandRanking</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="#linearOrders.IteratedCopelandRanking"><code class="docutils literal notranslate"><span class="pre">IteratedCopelandRanking</span></code></a></li>
@@ -852,6 +850,8 @@
 <li class="toctree-l3"><a class="reference internal" href="#linearOrders.RankedPairsRanking"><code class="docutils literal notranslate"><span class="pre">RankedPairsRanking</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="#linearOrders.SlaterOrder"><code class="docutils literal notranslate"><span class="pre">SlaterOrder</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="#linearOrders.SlaterRanking"><code class="docutils literal notranslate"><span class="pre">SlaterRanking</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#linearOrders.ValuedBachetOrder"><code class="docutils literal notranslate"><span class="pre">ValuedBachetOrder</span></code></a></li>
+<li class="toctree-l3"><a class="reference internal" href="#linearOrders.ValuedBachetRanking"><code class="docutils literal notranslate"><span class="pre">ValuedBachetRanking</span></code></a></li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="#dynamicprogramming-module">2.15. dynamicProgramming module</a><ul>
@@ -1263,7 +1263,7 @@
 <dl class="field-list simple">
 <dt class="field-odd">New<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
-<li><p>Added a new <a class="reference internal" href="#transitiveDigraphs.WeakBachetRanking" title="transitiveDigraphs.WeakBachetRanking"><code class="xref py py-class docutils literal notranslate"><span class="pre">transitiveDigraphs.WeakBachetRanking</span></code></a> class using the new <a class="reference internal" href="#linearOrders.BachetRanking" title="linearOrders.BachetRanking"><code class="xref py py-class docutils literal notranslate"><span class="pre">linearOrders.BachetRanking</span></code></a> class for generating highly correlated <strong>weak rankings</strong> from a given outranking digraph instance.</p></li>
+<li><p>Added a new <a class="reference internal" href="#transitiveDigraphs.WeakBachetRanking" title="transitiveDigraphs.WeakBachetRanking"><code class="xref py py-class docutils literal notranslate"><span class="pre">transitiveDigraphs.WeakBachetRanking</span></code></a> class using the new <a class="reference internal" href="#linearOrders.PolarisedBachetRanking" title="linearOrders.PolarisedBachetRanking"><code class="xref py py-class docutils literal notranslate"><span class="pre">linearOrders.PolarisedBachetRanking</span></code></a> class for generating highly correlated <strong>weak rankings</strong> from a given outranking digraph instance.</p></li>
 <li><p>In order to explore potential run time accelerations with CUDA on GPUs, a new cythonized <strong>cnpBipolarDigraphs</strong> module with a numpy integer array implementation of the bipolar-valued characteristic valuation has been added to the cythonized collection of Digraph3 modules.</p></li>
 <li><p>Following a Python 3.12 recommendation, all multiprocessing resources have been refactored to use by default, instead of the traditional <em>fork</em>, the safer <em>spawn</em> threading start method. As a consequence, main program code of multiprocessing Digraph3 Python scripts must now start with a <em>__name__==’__main__’</em> test in order to avoid its recursive execution in each started thread (see the <a class="reference external" href="https://docs.python.org/3/library/multiprocessing.html#module-multiprocessing" title="(in Python v3.13)"><code class="xref py py-mod docutils literal notranslate"><span class="pre">multiprocessing</span></code></a> module).</p></li>
 <li><p>A <a class="reference internal" href="#module-pairings" title="pairings"><code class="xref py py-mod docutils literal notranslate"><span class="pre">pairings</span></code></a> module for solving <strong>fair intergroup</strong> and <strong>intragroup pairing</strong> problems</p></li>
@@ -1545,7 +1545,7 @@ class;</p>
 <dt><a class="reference internal" href="#linearorders-label"><span class="std std-ref">linearOrders module</span></a></dt><dd><p>Additional tools for solving linearly ranking problems with the
 abstract generic root <a class="reference external" href="techDoc.html#linearOrders.LinearOrder">LinearOrder</a>
 class;</p>
-<div class="graphviz"><object data="_images/inheritance-5e9f09f9e0a0727934eced25d62022c52a878e2d.svg" type="image/svg+xml" class="inheritance graphviz">
+<div class="graphviz"><object data="_images/inheritance-75eb4db5c69f8b19501c3d82931cef88b0fbb3d9.svg" type="image/svg+xml" class="inheritance graphviz">
 <p class="warning">Inheritance diagram of linearOrders</p></object></div>
 </dd>
 </dl>
@@ -8849,7 +8849,7 @@ given preorderings of the candidates per voter</p>
 <span id="linearorders-label"></span><h2><a class="toc-backref" href="#id16" role="doc-backlink"><span class="section-number">2.14. </span>linearOrders module</a><a class="headerlink" href="#linearorders-module" title="Link to this heading"></a></h2>
 <p>A tutorial with coding examples is available here: <a class="reference internal" href="tutorial.html#ranking-tutorial-label"><span class="std std-ref">Ranking with multiple incommensurable criteria</span></a></p>
 <p><strong>Inheritance Diagram</strong></p>
-<div class="graphviz"><object data="_images/inheritance-5e9f09f9e0a0727934eced25d62022c52a878e2d.svg" type="image/svg+xml" class="inheritance graphviz">
+<div class="graphviz"><object data="_images/inheritance-75eb4db5c69f8b19501c3d82931cef88b0fbb3d9.svg" type="image/svg+xml" class="inheritance graphviz">
 <p class="warning">Inheritance diagram of linearOrders</p></object></div>
 <p id="module-linearOrders">Python3 implementation of linear orders
 Dependancy: digraphs module
@@ -8859,75 +8859,6 @@ Copyright (C) 2011-2025  Raymond Bisdorff</p>
 <p>This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU General Public License for more details.</p>
 <p>You should have received a copy of the GNU General Public License along with this program; if not, write to the Free Software Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.</p>
 </div></blockquote>
-<dl class="py class">
-<dt class="sig sig-object py" id="linearOrders.BachetOrder">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">linearOrders.</span></span><span class="sig-name descname"><span class="pre">BachetOrder</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">other</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">CoDual</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">actionsList</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">orderLimit</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">50</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">BestQualified</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">randomized</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">seed</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">Optimal</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">Comments</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">Debug</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/linearOrders.html#BachetOrder"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#linearOrders.BachetOrder" title="Link to this definition"></a></dt>
-<dd><p>Dummy for BachetRanking class</p>
-</dd></dl>
-
-<dl class="py class">
-<dt class="sig sig-object py" id="linearOrders.BachetRanking">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">linearOrders.</span></span><span class="sig-name descname"><span class="pre">BachetRanking</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">other</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">CoDual</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">actionsList</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">orderLimit</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">50</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">BestQualified</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">randomized</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">seed</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">Optimal</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">Comments</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">Debug</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/linearOrders.html#BachetRanking"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#linearOrders.BachetRanking" title="Link to this definition"></a></dt>
-<dd><p>Instantiates the Bachet Ranking and Ordering from a given bipolar-valued <em>Digraph</em> instance <em>other</em>.</p>
-<p><em>Parameters</em></p>
-<blockquote>
-<div><ul class="simple">
-<li><p><em>orderLimit</em> : maximal length of the <em>other.actions</em> dictionary.</p></li>
-<li><p><em>actionsList</em> : a given ordering of the other.actions dictionary.</p></li>
-<li><p><em>BestQualified</em>: if True (default) both the given <em>actionsList</em> and its reversed version are ranked and the best correlated of both rankings is returned.</p></li>
-<li><p><em>randomized</em>: integer number (default = 0) of random orderings of the other.actions that are ranked and the best correlated is eventually returned.</p></li>
-<li><p><em>Optimal</em>: (False by default) all possible permutations of the given other.actions ordering are ranked and the best correlated ranking is eventually returned.</p></li>
-</ul>
-</div></blockquote>
-<p>For each action <em>x</em> in <em>other.actions</em>, the row vector of the <em>other.relation</em> attribute without the reflexive terms defines a <em>Bachet vector</em> which correponds to a significance weight <em>rbx</em> of its <strong>outrankingness credibility</strong>. Similarly, the corresponding column vector in the <em>other.relation</em> attribute without the reflexive terms defines a <em>Bachet vector</em> whose negation correponds to a significance weight <em>-cbx</em> of its <strong>negated outrankedness credibility</strong>.</p>
-<p>Taking now the sum <em>rbx + (-cbx)</em> of both credibilities gives us per action <em>x</em> a valued Bachet fitness score of the statement that <em>x</em> may be <em>first-ranked</em>. Sorting in decreasing (resp. increasing) order these Bachet fitness scores gives the <em>Bachet ranking</em>, respective <em>ordering</em>, result. Both results are stored in the <em>self.bachetRanking</em> resp. <em>self.bachetOrder</em> attribute.</p>
-<p>Like the Copeland and the NetFlows rules, the Bachet ranking rule is <em>invariant</em> under the <em>codual</em> transform. The Bachet rule is however, unlike the Copeland rule, not necessarily  <em>Condorcet consistent</em>.</p>
-<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;*==&gt;&gt; testing BachetRanking Class ----*&quot;</span><span class="p">)</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">outrankingDigraphs</span> <span class="kn">import</span> <span class="n">RandomBipolarOutrankingDigraph</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">g</span> <span class="o">=</span> <span class="n">RandomBipolarOutrankingDigraph</span><span class="p">(</span><span class="n">numberOfActions</span><span class="o">=</span><span class="mi">9</span><span class="p">,</span><span class="n">seed</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">linearOrders</span> <span class="kn">import</span> <span class="n">BachetRanking</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="s1">&#39;*---- solely given ordering and the reverse of the actions&#39;</span><span class="p">)</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">ba1</span> <span class="o">=</span> <span class="n">BachetRanking</span><span class="p">(</span><span class="n">g</span><span class="p">,</span><span class="n">BestQualified</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">ba1</span><span class="o">.</span><span class="n">showScores</span><span class="p">()</span> 
-<span class="go"> Bachet scores in descending order</span>
-<span class="go"> action      score</span>
-<span class="go"> a2          3126.01</span>
-<span class="go"> a5          1660.68</span>
-<span class="go"> a9          1439.05</span>
-<span class="go"> a3          490.35</span>
-<span class="go"> a6          288.43</span>
-<span class="go"> a4          -59.94</span>
-<span class="go"> a8          -107.58</span>
-<span class="go"> a7          -270.58</span>
-<span class="go"> a1          -2948.69</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">g</span><span class="o">.</span><span class="n">computeRankingCorrelation</span><span class="p">(</span><span class="n">ba1</span><span class="o">.</span><span class="n">bachetRanking</span><span class="p">))</span>
-<span class="go"> {&#39;correlation&#39;: 0.6314945107236328, &#39;determination&#39;: 0.408625}</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="s1">&#39;*---- using 100 random orderings and their reversed versions&#39;</span><span class="p">)</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">ba2</span> <span class="o">=</span> <span class="n">BachetRanking</span><span class="p">(</span><span class="n">g</span><span class="p">,</span><span class="n">randomized</span><span class="o">=</span><span class="mi">100</span><span class="p">)</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">ba2</span><span class="o">.</span><span class="n">showScores</span><span class="p">()</span>
-<span class="go"> Bachet scores in descending order</span>
-<span class="go"> action      score</span>
-<span class="go"> a2          3580.93</span>
-<span class="go"> a9          2725.92</span>
-<span class="go"> a5          1773.33</span>
-<span class="go"> a6          672.79</span>
-<span class="go"> a8          -115.16</span>
-<span class="go"> a4          -489.13</span>
-<span class="go"> a3          -652.16</span>
-<span class="go"> a7          -1102.77</span>
-<span class="go"> a1          -1550.40</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">g</span><span class="o">.</span><span class="n">computeRankingCorrelation</span><span class="p">(</span><span class="n">ba3</span><span class="o">.</span><span class="n">bachetRanking</span><span class="p">))</span>
-<span class="go"> {&#39;correlation&#39;: 0.7459841609734544, &#39;determination&#39;: 0.408625}</span>
-</pre></div>
-</div>
-<div class="admonition note">
-<p class="admonition-title">Note</p>
-<p>Mind that the Bachet numbering system is a positional {-1,0,1} numeral system that is isomorphic to the {0,1,2} base 3 numeral system. A Bachet ranking result is therefore depending on the very ordering of the rows and columns of the <em>other.relation</em> attribute when there is a lack of transitivity observed in the relation. It is hence recommended (<em>BestQualified=True</em> setting by default) to compute a first Bachet ranking result with the given order of the <em>other.actions</em> atribute and a second one with the reversed order. The best qualified of both ranking results is eventually returned.</p>
-<p>Mind also that the integer value range of Bachet numbers gets quickly huge with the length of the given row and column chracteristic vectors. The digraph <em>orderLimit</em> parameter is therefore set by default to 50, allowing to tackle integer values in the huge integer range +-358948993845926294385124. When there is need to tackle digraphs of larger order, this <em>orderLimit</em> parameter may be adjusted.</p>
-<p>When the ranking result appears suspiciously uncorrelated with the given outranking digraph, it is recommended to set the <em>randomized</em> parameter to a positive integer <em>n</em>. In this case, <em>n</em> random orderings of the decision actions with their reversed versions will be used for generating Bachet rankings. The best correlated ranking will eventually be returned.</p>
-</div>
-</dd></dl>
-
 <dl class="py class">
 <dt class="sig sig-object py" id="linearOrders.CopelandOrder">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">linearOrders.</span></span><span class="sig-name descname"><span class="pre">CopelandOrder</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">other</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">CoDual</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">Gamma</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">Valued</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">Comments</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">Debug</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/linearOrders.html#CopelandOrder"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#linearOrders.CopelandOrder" title="Link to this definition"></a></dt>
@@ -9212,6 +9143,75 @@ a given bipolar-valued Digraph instance</p>
 <dt class="sig sig-object py" id="linearOrders.SlaterRanking">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">linearOrders.</span></span><span class="sig-name descname"><span class="pre">SlaterRanking</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">other</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">orderLimit</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">7</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">Debug</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/linearOrders.html#SlaterRanking"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#linearOrders.SlaterRanking" title="Link to this definition"></a></dt>
 <dd><p>Instantiates a Slater ranking by instantiating a <em>KemenyRanking</em> from the Condorcet Digraph -the median cut polarised digraph- of a given bipolar-valued Digraph instance.</p>
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="linearOrders.ValuedBachetOrder">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">linearOrders.</span></span><span class="sig-name descname"><span class="pre">ValuedBachetOrder</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">other</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">CoDual</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">actionsList</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">orderLimit</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">50</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">BestQualified</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">randomized</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">seed</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">Optimal</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">Comments</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">Debug</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/linearOrders.html#ValuedBachetOrder"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#linearOrders.ValuedBachetOrder" title="Link to this definition"></a></dt>
+<dd><p>Dummy for ValuedBachetRanking class</p>
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="linearOrders.ValuedBachetRanking">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">linearOrders.</span></span><span class="sig-name descname"><span class="pre">ValuedBachetRanking</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">other</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">CoDual</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">actionsList</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">orderLimit</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">50</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">BestQualified</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">randomized</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">seed</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">Optimal</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">Comments</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">Debug</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/linearOrders.html#ValuedBachetRanking"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#linearOrders.ValuedBachetRanking" title="Link to this definition"></a></dt>
+<dd><p>Instantiates the Bachet Ranking and Ordering from a given bipolar-valued <em>Digraph</em> instance <em>other</em>.</p>
+<p><em>Parameters</em></p>
+<blockquote>
+<div><ul class="simple">
+<li><p><em>orderLimit</em> : maximal length of the <em>other.actions</em> dictionary.</p></li>
+<li><p><em>actionsList</em> : a given ordering of the other.actions dictionary.</p></li>
+<li><p><em>BestQualified</em>: if True (default) both the given <em>actionsList</em> and its reversed version are ranked and the best correlated of both rankings is returned.</p></li>
+<li><p><em>randomized</em>: integer number (default = 0) of random orderings of the other.actions that are ranked and the best correlated is eventually returned.</p></li>
+<li><p><em>Optimal</em>: (False by default) all possible permutations of the given other.actions ordering are ranked and the best correlated ranking is eventually returned.</p></li>
+</ul>
+</div></blockquote>
+<p>For each action <em>x</em> in <em>other.actions</em>, the row vector of the <em>other.relation</em> attribute without the reflexive terms defines a <em>Bachet vector</em> which correponds to a significance weight <em>rbx</em> of its <strong>outrankingness credibility</strong>. Similarly, the corresponding column vector in the <em>other.relation</em> attribute without the reflexive terms defines a <em>Bachet vector</em> whose negation correponds to a significance weight <em>-cbx</em> of its <strong>negated outrankedness credibility</strong>.</p>
+<p>Taking now the sum <em>rbx + (-cbx)</em> of both credibilities gives us per action <em>x</em> a valued Bachet fitness score of the statement that <em>x</em> may be <em>first-ranked</em>. Sorting in decreasing (resp. increasing) order these Bachet fitness scores gives the <em>Bachet ranking</em>, respective <em>ordering</em>, result. Both results are stored in the <em>self.bachetRanking</em> resp. <em>self.bachetOrder</em> attribute.</p>
+<p>Like the Copeland and the NetFlows rules, the Bachet ranking rule is <em>invariant</em> under the <em>codual</em> transform. The Bachet rule is however, unlike the Copeland rule, not necessarily  <em>Condorcet consistent</em>.</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;*==&gt;&gt; testing ValuedBachetRanking Class ----*&quot;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">outrankingDigraphs</span> <span class="kn">import</span> <span class="n">RandomBipolarOutrankingDigraph</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">g</span> <span class="o">=</span> <span class="n">RandomBipolarOutrankingDigraph</span><span class="p">(</span><span class="n">numberOfActions</span><span class="o">=</span><span class="mi">9</span><span class="p">,</span><span class="n">seed</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">linearOrders</span> <span class="kn">import</span> <span class="n">ValuedBachetRanking</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="s1">&#39;*---- solely given ordering and the reverse of the actions&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">ba1</span> <span class="o">=</span> <span class="n">ValuedBachetRanking</span><span class="p">(</span><span class="n">g</span><span class="p">,</span><span class="n">BestQualified</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">ba1</span><span class="o">.</span><span class="n">showScores</span><span class="p">()</span> 
+<span class="go"> Bachet scores in descending order</span>
+<span class="go"> action      score</span>
+<span class="go"> a2          3126.01</span>
+<span class="go"> a5          1660.68</span>
+<span class="go"> a9          1439.05</span>
+<span class="go"> a3          490.35</span>
+<span class="go"> a6          288.43</span>
+<span class="go"> a4          -59.94</span>
+<span class="go"> a8          -107.58</span>
+<span class="go"> a7          -270.58</span>
+<span class="go"> a1          -2948.69</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">g</span><span class="o">.</span><span class="n">computeRankingCorrelation</span><span class="p">(</span><span class="n">ba1</span><span class="o">.</span><span class="n">bachetRanking</span><span class="p">))</span>
+<span class="go"> {&#39;correlation&#39;: 0.6314945107236328, &#39;determination&#39;: 0.408625}</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="s1">&#39;*---- using 100 random orderings and their reversed versions&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">ba2</span> <span class="o">=</span> <span class="n">ValuedBachetRanking</span><span class="p">(</span><span class="n">g</span><span class="p">,</span><span class="n">randomized</span><span class="o">=</span><span class="mi">100</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">ba2</span><span class="o">.</span><span class="n">showScores</span><span class="p">()</span>
+<span class="go"> Bachet scores in descending order</span>
+<span class="go"> action      score</span>
+<span class="go"> a2          3580.93</span>
+<span class="go"> a9          2725.92</span>
+<span class="go"> a5          1773.33</span>
+<span class="go"> a6          672.79</span>
+<span class="go"> a8          -115.16</span>
+<span class="go"> a4          -489.13</span>
+<span class="go"> a3          -652.16</span>
+<span class="go"> a7          -1102.77</span>
+<span class="go"> a1          -1550.40</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">g</span><span class="o">.</span><span class="n">computeRankingCorrelation</span><span class="p">(</span><span class="n">ba3</span><span class="o">.</span><span class="n">bachetRanking</span><span class="p">))</span>
+<span class="go"> {&#39;correlation&#39;: 0.7459841609734544, &#39;determination&#39;: 0.408625}</span>
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>Mind that the Bachet numbering system is a positional {-1,0,1} numeral system that is isomorphic to the {0,1,2} base 3 numeral system. A Bachet ranking result is therefore depending on the very ordering of the rows and columns of the <em>other.relation</em> attribute when there is a lack of transitivity observed in the relation. It is hence recommended (<em>BestQualified=True</em> setting by default) to compute a first Bachet ranking result with the given order of the <em>other.actions</em> atribute and a second one with the reversed order. The best qualified of both ranking results is eventually returned.</p>
+<p>Mind also that the integer value range of Bachet numbers gets quickly huge with the length of the given row and column chracteristic vectors. The digraph <em>orderLimit</em> parameter is therefore set by default to 50, allowing to tackle integer values in the huge integer range +-358948993845926294385124. When there is need to tackle digraphs of larger order, this <em>orderLimit</em> parameter may be adjusted.</p>
+<p>When the ranking result appears suspiciously uncorrelated with the given outranking digraph, it is recommended to set the <em>randomized</em> parameter to a positive integer <em>n</em>. In this case, <em>n</em> random orderings of the decision actions with their reversed versions will be used for generating Bachet rankings. The best correlated ranking will eventually be returned.</p>
+</div>
 </dd></dl>
 
 <p>Back to the <a class="reference internal" href="#contents-table-label"><span class="std std-ref">Table of Contents</span></a></p>
@@ -9667,7 +9667,7 @@ on each component.</p>
 <dl class="py class">
 <dt class="sig sig-object py" id="transitiveDigraphs.WeakBachetRanking">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">transitiveDigraphs.</span></span><span class="sig-name descname"><span class="pre">WeakBachetRanking</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">g</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">randomized</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">100</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">maxNbrOfRankings</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">5</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">seed</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">Polarised</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">Comments</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">Debug</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/transitiveDigraphs.html#WeakBachetRanking"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#transitiveDigraphs.WeakBachetRanking" title="Link to this definition"></a></dt>
-<dd><p>Uses the <a class="reference internal" href="#linearOrders.BachetRanking" title="linearOrders.BachetRanking"><code class="xref py py-class docutils literal notranslate"><span class="pre">linearOrders.BachetRanking</span></code></a> class for generating a number
+<dd><p>Uses the <code class="xref py py-class docutils literal notranslate"><span class="pre">linearOrders.BachetRanking</span></code> class for generating a number
 of best correlated Bachet rankings.</p>
 <p>The <a class="reference internal" href="#transitiveDigraphs.RankingsFusionDigraph" title="transitiveDigraphs.RankingsFusionDigraph"><code class="xref py py-class docutils literal notranslate"><span class="pre">transitiveDigraphs.RankingsFusionDigraph</span></code></a> uses
 these <em>Bachet</em> rankings for contructing a weak <em>Bachet</em> ranking result.</p>

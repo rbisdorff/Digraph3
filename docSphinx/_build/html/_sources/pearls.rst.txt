@@ -3191,11 +3191,11 @@ The :py:mod:`linearOrders` module provides now a :py:class:`~linearOrders.Polari
    :linenos:
    :emphasize-lines: 2,11-12,16
 		     
-   >>> from linearOrders import BachetRanking
+   >>> from linearOrders import PolarisedBachetRanking
    >>> ba = PolarisedBachetRanking(g)
    >>> ba
     *------- Digraph instance description ------*
-     Instance class      : BachetRanking
+     Instance class      : PolarisedBachetRanking
      Instance name       : rel_randomperftab_best_ranked
      Digraph Order       : 4
      Digraph Size        : 6
@@ -3285,7 +3285,7 @@ It appears hence to be opportune to compute a first *Bachet* ranking result with
 
    >>> from outrankingDigraphs import RandomBipolarOutrankingDigraph
    >>> g = RandomBipolarOutrankingDigraph(numberOfActions=9,seed=1)
-   >>> from linearOrders import BachetRanking
+   >>> from linearOrders import PolarisedBachetRanking
     *---- solely given ordering of the actions ---*')
    >>> ba1 = PolarisedBachetRanking(g,BestQualified=False)
    >>> ba1.showScores()
@@ -3398,7 +3398,7 @@ When comparing now the ranking results obtained from *single*, *best-qualified* 
 
 The statistical figures confirm the expected noticeable performance enhancement one obtains first with the *BestQualified=True* and secondly even more with the *randomized=100* settings of the *Bachet* ranking rule. The latter setting renders in fact ranking results of a correlation quality very similar to the *Copeland* rule. Yet, computing ranking results just from the given ordering of the *self.actions* dictionary and its reversed ordering may render, with a first quartile correlation of +0.6678 and a median correlation of +0.7282, already satisfactory ranking results in most cases. It is finally remarquable that even the single actions ordering setting shows already, with a first quartile correlation of +0.6089 and a median correlation of +0.6854, quite acceptable results.
    
-Mind finally that the *Bachet* ranking rule, even of comparable complexity :math:`O(n^2)` as the *Copeland* and *NetFlows* rules, is not scalable to large performance tableaux with hundreds of performance records. The integer value range of *Bachet* numbers gets indeed quickly huge with the order of the given outranking digraph. The :py:class:`~linearOrders.POlarisedBachetRanking` constructor provides therefore an *orderLimit* parameter set by default to 50, which allows to represent integer values in the huge range +- 358948993845926294385124.
+Mind finally that the *Bachet* ranking rule, even of comparable complexity :math:`O(n^2)` as the *Copeland* and *NetFlows* rules, is not scalable to large performance tableaux with hundreds of performance records. The integer value range of *Bachet* numbers gets indeed quickly huge with the order of the given outranking digraph. The :py:class:`~linearOrders.PolarisedBachetRanking` constructor provides therefore an *orderLimit* parameter set by default to 50, which allows to represent integer values in the huge range +- 358948993845926294385124.
 
 .. code-block:: pycon
 

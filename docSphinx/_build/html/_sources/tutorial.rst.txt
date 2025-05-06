@@ -3030,7 +3030,7 @@ Now, *Bachet* numbers are formulated in a base 3 positional numeral system and t
    :emphasize-lines: 2,16,20
    :linenos:
 
-   >>> from linearOrders import BachetRanking
+   >>> from linearOrders import PolarisedBachetRanking
    >>> ba = PolarisedBachetRanking(gcd,randomized=10,seed=28)
    >>> ba.showScores()
     Bachet scores in descending order
