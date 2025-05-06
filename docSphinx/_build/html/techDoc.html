@@ -9116,20 +9116,20 @@ to the indeterminate value.</p>
 <div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;*==&gt;&gt; testing BachetRanking Class ----*&quot;</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">outrankingDigraphs</span> <span class="kn">import</span> <span class="n">RandomBipolarOutrankingDigraph</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">g</span> <span class="o">=</span> <span class="n">RandomBipolarOutrankingDigraph</span><span class="p">(</span><span class="n">numberOfActions</span><span class="o">=</span><span class="mi">9</span><span class="p">,</span><span class="n">seed</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">linearOrders</span> <span class="kn">import</span> <span class="n">BachetRanking</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">linearOrders</span> <span class="kn">import</span> <span class="n">PolarisedBachetRanking</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="s1">&#39;*---- solely given ordering of the actions&#39;</span><span class="p">)</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">ba1</span> <span class="o">=</span> <span class="n">PolariseBachetRanking</span><span class="p">(</span><span class="n">g</span><span class="p">,</span><span class="n">BestQualified</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">ba1</span> <span class="o">=</span> <span class="n">PolarisedBachetRanking</span><span class="p">(</span><span class="n">g</span><span class="p">,</span><span class="n">BestQualified</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">ba1</span><span class="o">.</span><span class="n">showScores</span><span class="p">()</span>
 <span class="go"> Bachet scores in descending order</span>
 <span class="go"> action      score</span>
-<span class="go"> a2          14768.00</span>
-<span class="go"> a8          10061.00</span>
-<span class="go"> a9          9264.00</span>
-<span class="go"> a3          8211.00</span>
-<span class="go"> a6          1394.00</span>
-<span class="go"> a7          1317.00</span>
-<span class="go"> a4          1294.00</span>
-<span class="go"> a5          -3846.00</span>
+<span class="go"> a2          6020.00</span>
+<span class="go"> a8          3353.00</span>
+<span class="go"> a9          3088.00</span>
+<span class="go"> a3          2379.00</span>
+<span class="go"> a6          476.00</span>
+<span class="go"> a7          435.00</span>
+<span class="go"> a4          322.00</span>
+<span class="go"> a5          -1254.00</span>
 <span class="go"> a1          -5849.00</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">g</span><span class="o">.</span><span class="n">computeRankingCorrelation</span><span class="p">(</span><span class="n">ba1</span><span class="o">.</span><span class="n">bachetRanking</span><span class="p">))</span>
 <span class="go"> {&#39;correlation&#39;: 0.3935624213996805, &#39;determination&#39;: 0.408625}</span>
@@ -9138,33 +9138,33 @@ to the indeterminate value.</p>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">ba2</span><span class="o">.</span><span class="n">showScores</span><span class="p">()</span> 
 <span class="go"> Bachet scores in descending order</span>
 <span class="go"> action      score</span>
-<span class="go"> a2          14768.00</span>
-<span class="go"> a8          10061.00</span>
-<span class="go"> a9          9264.00</span>
-<span class="go"> a3          8211.00</span>
-<span class="go"> a6          1394.00</span>
-<span class="go"> a7          1317.00</span>
-<span class="go"> a4          1294.00</span>
-<span class="go"> a5          -3846.00</span>
-<span class="go"> a1          -5849.00</span>
+<span class="go"> a2          6380.00</span>
+<span class="go"> a9          2480.00</span>
+<span class="go"> a5          1830.00</span>
+<span class="go"> a8          -877.00</span>
+<span class="go"> a3          -1399.00</span>
+<span class="go"> a6          -1764.00</span>
+<span class="go"> a7          -2039.00</span>
+<span class="go"> a4          -4410.00</span>
+<span class="go"> a1          -6083.00</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">g</span><span class="o">.</span><span class="n">computeRankingCorrelation</span><span class="p">(</span><span class="n">ba2</span><span class="o">.</span><span class="n">bachetRanking</span><span class="p">))</span>
-<span class="go"> {&#39;correlation&#39;: 0.46511675333945146, &#39;determination&#39;: 0.408625}</span>
+<span class="go"> {&#39;correlation&#39;: 0.6314945107236328, &#39;determination&#39;: 0.408625}</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="s1">&#39;*---- using 10 random ordering and their reversed versions&#39;</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">ba3</span> <span class="o">=</span> <span class="n">PolarisedBachetRanking</span><span class="p">(</span><span class="n">g</span><span class="p">,</span><span class="n">BestQualified</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span><span class="n">randomized</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">ba3</span><span class="o">.</span><span class="n">showScores</span><span class="p">()</span>
 <span class="go"> Bachet scores in descending order</span>
 <span class="go"> action      score</span>
-<span class="go"> a2          15092.00</span>
-<span class="go"> a9          8884.00</span>
-<span class="go"> a3          8533.00</span>
-<span class="go"> a8          8493.00</span>
-<span class="go"> a7          1771.00</span>
-<span class="go"> a6          -246.00</span>
-<span class="go"> a4          -990.00</span>
-<span class="go"> a5          -4234.00</span>
-<span class="go"> a1          -6323.00</span>
+<span class="go"> a2          6540.00</span>
+<span class="go"> a5          3016.00</span>
+<span class="go"> a9          802.00</span>
+<span class="go"> a6          -106.00</span>
+<span class="go"> a4          -534.00</span>
+<span class="go"> a8          -4719.00</span>
+<span class="go"> a3          -5741.00</span>
+<span class="go"> a7          -5891.00</span>
+<span class="go"> a1          -6405.00</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">g</span><span class="o">.</span><span class="n">computeRankingCorrelation</span><span class="p">(</span><span class="n">ba3</span><span class="o">.</span><span class="n">bachetRanking</span><span class="p">))</span>
-<span class="go"> {&#39;correlation&#39;: 0.7585058291696407, &#39;determination&#39;: 0.408625}</span>
+<span class="go"> {&#39;correlation&#39;: 0.7441963223547806, &#39;determination&#39;: 0.408625}</span>
 </pre></div>
 </div>
 <div class="admonition note">
@@ -14875,7 +14875,7 @@ Components are stored in an ordered dictionary.</p>
 
   <div role="contentinfo">
     <p>&#169; Copyright 2012-2025, Raymond Bisdorff.
-      <span class="lastupdated">Last updated on May 05, 2025.
+      <span class="lastupdated">Last updated on May 06, 2025.
       </span></p>
   </div>
 

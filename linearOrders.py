@@ -1245,20 +1245,20 @@ class PolarisedBachetRanking(LinearOrder):
     >>> print("*==>> testing BachetRanking Class ----*")
     >>> from outrankingDigraphs import RandomBipolarOutrankingDigraph
     >>> g = RandomBipolarOutrankingDigraph(numberOfActions=9,seed=1)
-    >>> from linearOrders import BachetRanking
+    >>> from linearOrders import PolarisedBachetRanking
     >>> print('*---- solely given ordering of the actions')
-    >>> ba1 = PolariseBachetRanking(g,BestQualified=False)
+    >>> ba1 = PolarisedBachetRanking(g,BestQualified=False)
     >>> ba1.showScores()
      Bachet scores in descending order
      action 	 score
-     a2 	 14768.00
-     a8 	 10061.00
-     a9 	 9264.00
-     a3 	 8211.00
-     a6 	 1394.00
-     a7 	 1317.00
-     a4 	 1294.00
-     a5 	 -3846.00
+     a2 	 6020.00
+     a8 	 3353.00
+     a9 	 3088.00
+     a3 	 2379.00
+     a6 	 476.00
+     a7 	 435.00
+     a4 	 322.00
+     a5 	 -1254.00
      a1 	 -5849.00
     >>> print(g.computeRankingCorrelation(ba1.bachetRanking))
      {'correlation': 0.3935624213996805, 'determination': 0.408625}
@@ -1267,33 +1267,33 @@ class PolarisedBachetRanking(LinearOrder):
     >>> ba2.showScores() 
      Bachet scores in descending order
      action 	 score
-     a2 	 14768.00
-     a8 	 10061.00
-     a9 	 9264.00
-     a3 	 8211.00
-     a6 	 1394.00
-     a7 	 1317.00
-     a4 	 1294.00
-     a5 	 -3846.00
-     a1 	 -5849.00
+     a2 	 6380.00
+     a9 	 2480.00
+     a5 	 1830.00
+     a8 	 -877.00
+     a3 	 -1399.00
+     a6 	 -1764.00
+     a7 	 -2039.00
+     a4 	 -4410.00
+     a1 	 -6083.00
     >>> print(g.computeRankingCorrelation(ba2.bachetRanking))
-     {'correlation': 0.46511675333945146, 'determination': 0.408625}
+     {'correlation': 0.6314945107236328, 'determination': 0.408625}
     >>> print('*---- using 10 random ordering and their reversed versions')
     >>> ba3 = PolarisedBachetRanking(g,BestQualified=True,randomized=10)
     >>> ba3.showScores()
      Bachet scores in descending order
      action 	 score
-     a2 	 15092.00
-     a9 	 8884.00
-     a3 	 8533.00
-     a8 	 8493.00
-     a7 	 1771.00
-     a6 	 -246.00
-     a4 	 -990.00
-     a5 	 -4234.00
-     a1 	 -6323.00
+     a2 	 6540.00
+     a5 	 3016.00
+     a9 	 802.00
+     a6 	 -106.00
+     a4 	 -534.00
+     a8 	 -4719.00
+     a3 	 -5741.00
+     a7 	 -5891.00
+     a1 	 -6405.00
     >>> print(g.computeRankingCorrelation(ba3.bachetRanking))
-     {'correlation': 0.7585058291696407, 'determination': 0.408625}
+     {'correlation': 0.7441963223547806, 'determination': 0.408625}
 
     
     .. note::

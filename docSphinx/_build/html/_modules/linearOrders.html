@@ -1399,20 +1399,20 @@
 <span class="sd">    &gt;&gt;&gt; print(&quot;*==&gt;&gt; testing BachetRanking Class ----*&quot;)</span>
 <span class="sd">    &gt;&gt;&gt; from outrankingDigraphs import RandomBipolarOutrankingDigraph</span>
 <span class="sd">    &gt;&gt;&gt; g = RandomBipolarOutrankingDigraph(numberOfActions=9,seed=1)</span>
-<span class="sd">    &gt;&gt;&gt; from linearOrders import BachetRanking</span>
+<span class="sd">    &gt;&gt;&gt; from linearOrders import PolarisedBachetRanking</span>
 <span class="sd">    &gt;&gt;&gt; print(&#39;*---- solely given ordering of the actions&#39;)</span>
-<span class="sd">    &gt;&gt;&gt; ba1 = PolariseBachetRanking(g,BestQualified=False)</span>
+<span class="sd">    &gt;&gt;&gt; ba1 = PolarisedBachetRanking(g,BestQualified=False)</span>
 <span class="sd">    &gt;&gt;&gt; ba1.showScores()</span>
 <span class="sd">     Bachet scores in descending order</span>
 <span class="sd">     action 	 score</span>
-<span class="sd">     a2 	 14768.00</span>
-<span class="sd">     a8 	 10061.00</span>
-<span class="sd">     a9 	 9264.00</span>
-<span class="sd">     a3 	 8211.00</span>
-<span class="sd">     a6 	 1394.00</span>
-<span class="sd">     a7 	 1317.00</span>
-<span class="sd">     a4 	 1294.00</span>
-<span class="sd">     a5 	 -3846.00</span>
+<span class="sd">     a2 	 6020.00</span>
+<span class="sd">     a8 	 3353.00</span>
+<span class="sd">     a9 	 3088.00</span>
+<span class="sd">     a3 	 2379.00</span>
+<span class="sd">     a6 	 476.00</span>
+<span class="sd">     a7 	 435.00</span>
+<span class="sd">     a4 	 322.00</span>
+<span class="sd">     a5 	 -1254.00</span>
 <span class="sd">     a1 	 -5849.00</span>
 <span class="sd">    &gt;&gt;&gt; print(g.computeRankingCorrelation(ba1.bachetRanking))</span>
 <span class="sd">     {&#39;correlation&#39;: 0.3935624213996805, &#39;determination&#39;: 0.408625}</span>
@@ -1421,33 +1421,33 @@
 <span class="sd">    &gt;&gt;&gt; ba2.showScores() </span>
 <span class="sd">     Bachet scores in descending order</span>
 <span class="sd">     action 	 score</span>
-<span class="sd">     a2 	 14768.00</span>
-<span class="sd">     a8 	 10061.00</span>
-<span class="sd">     a9 	 9264.00</span>
-<span class="sd">     a3 	 8211.00</span>
-<span class="sd">     a6 	 1394.00</span>
-<span class="sd">     a7 	 1317.00</span>
-<span class="sd">     a4 	 1294.00</span>
-<span class="sd">     a5 	 -3846.00</span>
-<span class="sd">     a1 	 -5849.00</span>
+<span class="sd">     a2 	 6380.00</span>
+<span class="sd">     a9 	 2480.00</span>
+<span class="sd">     a5 	 1830.00</span>
+<span class="sd">     a8 	 -877.00</span>
+<span class="sd">     a3 	 -1399.00</span>
+<span class="sd">     a6 	 -1764.00</span>
+<span class="sd">     a7 	 -2039.00</span>
+<span class="sd">     a4 	 -4410.00</span>
+<span class="sd">     a1 	 -6083.00</span>
 <span class="sd">    &gt;&gt;&gt; print(g.computeRankingCorrelation(ba2.bachetRanking))</span>
-<span class="sd">     {&#39;correlation&#39;: 0.46511675333945146, &#39;determination&#39;: 0.408625}</span>
+<span class="sd">     {&#39;correlation&#39;: 0.6314945107236328, &#39;determination&#39;: 0.408625}</span>
 <span class="sd">    &gt;&gt;&gt; print(&#39;*---- using 10 random ordering and their reversed versions&#39;)</span>
 <span class="sd">    &gt;&gt;&gt; ba3 = PolarisedBachetRanking(g,BestQualified=True,randomized=10)</span>
 <span class="sd">    &gt;&gt;&gt; ba3.showScores()</span>
 <span class="sd">     Bachet scores in descending order</span>
 <span class="sd">     action 	 score</span>
-<span class="sd">     a2 	 15092.00</span>
-<span class="sd">     a9 	 8884.00</span>
-<span class="sd">     a3 	 8533.00</span>
-<span class="sd">     a8 	 8493.00</span>
-<span class="sd">     a7 	 1771.00</span>
-<span class="sd">     a6 	 -246.00</span>
-<span class="sd">     a4 	 -990.00</span>
-<span class="sd">     a5 	 -4234.00</span>
-<span class="sd">     a1 	 -6323.00</span>
+<span class="sd">     a2 	 6540.00</span>
+<span class="sd">     a5 	 3016.00</span>
+<span class="sd">     a9 	 802.00</span>
+<span class="sd">     a6 	 -106.00</span>
+<span class="sd">     a4 	 -534.00</span>
+<span class="sd">     a8 	 -4719.00</span>
+<span class="sd">     a3 	 -5741.00</span>
+<span class="sd">     a7 	 -5891.00</span>
+<span class="sd">     a1 	 -6405.00</span>
 <span class="sd">    &gt;&gt;&gt; print(g.computeRankingCorrelation(ba3.bachetRanking))</span>
-<span class="sd">     {&#39;correlation&#39;: 0.7585058291696407, &#39;determination&#39;: 0.408625}</span>
+<span class="sd">     {&#39;correlation&#39;: 0.7441963223547806, &#39;determination&#39;: 0.408625}</span>
 
 <span class="sd">    </span>
 <span class="sd">    .. note::</span>
@@ -2789,7 +2789,7 @@
 
   <div role="contentinfo">
     <p>&#169; Copyright 2012-2025, Raymond Bisdorff.
-      <span class="lastupdated">Last updated on May 05, 2025.
+      <span class="lastupdated">Last updated on May 06, 2025.
       </span></p>
   </div>
 
