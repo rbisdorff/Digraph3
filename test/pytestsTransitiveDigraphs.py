@@ -13,9 +13,12 @@ def testWeakBachetRanking():
     from randomPerfTabs import RandomCBPerformanceTableau
     pt = RandomCBPerformanceTableau(numberOfActions=20,numberOfCriteria=13,seed=100)
     g = BipolarOutrankingDigraph(pt)
-    wbg = WeakBachetRanking(g,seed=100,Comments=True)
+    wbg = WeakBachetRanking(g,seed=100,Polarised=True,Comments=True)
     wbg.showWeakRanking(WithCoverCredibility=True)
-    wbg.exportGraphViz('weakBachet')
+    wbg.exportGraphViz('weakpolarisedBachet')
+    wbg = WeakBachetRanking(g,seed=100,Polarised=False,Comments=True)
+    wbg.showWeakRanking(WithCoverCredibility=True)
+    wbg.exportGraphViz('weakValuedBachet')
     
 def testRankingByChoosingWithKernels():
     print('=== >>> testing best and last fusion (default)')

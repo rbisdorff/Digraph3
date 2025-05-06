@@ -203,7 +203,7 @@
 <a class="viewcode-back" href="../techDoc.html#arithmetics.BachetNumber">[docs]</a>
 <span class="k">class</span> <span class="nc">BachetNumber</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">    Bipolar-valued {-1,0,1} base 3 encoded integers due to Claude Gaspard Bachet de Méziriac (1621)</span>
+<span class="sd">    Bipolar-valued {-1,0,+1} base 3 encoded integers due to Claude Gaspard Bachet de Méziriac (1621)</span>
 <span class="sd">    </span>
 <span class="sd">    https://en.wikipedia.org/wiki/Claude_Gaspar_Bachet_de_M%C3%A9ziriac</span>
 <span class="sd">    </span>
@@ -212,7 +212,7 @@
 <span class="sd">    &gt;&gt;&gt; n1</span>
 <span class="sd">     *------- Bachet number description ------*</span>
 <span class="sd">     Instance class : BachetNumber</span>
-<span class="sd">     String         : 110</span>
+<span class="sd">     String         : &#39;+1+10&#39;</span>
 <span class="sd">     Vector         : [1, 1, 0]</span>
 <span class="sd">     Length         : 3</span>
 <span class="sd">     Value          : 12</span>
@@ -221,7 +221,7 @@
 <span class="sd">    &gt;&gt;&gt; n2</span>
 <span class="sd">     *------- Bachet number description ------*</span>
 <span class="sd">     Instance class : BachetNumber</span>
-<span class="sd">     String         : 111</span>
+<span class="sd">     String         : &#39;+1+1+1&#39;</span>
 <span class="sd">     Vector         : [1, 1, 1]</span>
 <span class="sd">     Length         : 3</span>
 <span class="sd">     Value          : 13</span>
@@ -230,21 +230,21 @@
 <span class="sd">    &gt;&gt;&gt; n3</span>
 <span class="sd">     *------- Bachet number description ------*</span>
 <span class="sd">     Instance class : BachetNumber</span>
-<span class="sd">     String         : 10-11</span>
+<span class="sd">     String         : &#39;+10-1+1&#39;</span>
 <span class="sd">     Vector         : [1, 0, -1, 1]</span>
 <span class="sd">     Length         : 4</span>
 <span class="sd">     Value          : 25</span>
 <span class="sd">     Attributes     : [&#39;vector&#39;]</span>
 <span class="sd">    &gt;&gt;&gt; print(&#39;%s (%d) + %s (%d) = %s (%d)&#39;</span>
 <span class="sd">    ...        % (n1, n1.value(), n2, n2.value(), n3, n3.value() ))</span>
-<span class="sd">     110 (12) + 111 (13) = 10-11 (25)</span>
+<span class="sd">     &#39;+1+10&#39; (12) + &#39;+1+1+1&#39; (13) = 10-11 (25)</span>
 <span class="sd">    &gt;&gt;&gt; print(&#39;length of %s = %d&#39; % (n1, len(n1)))</span>
-<span class="sd">     length of 110 = 3</span>
+<span class="sd">     length of &#39;+1+10&#39; = 3</span>
 <span class="sd">    &gt;&gt;&gt; n4 = n1.reverse()</span>
 <span class="sd">    &gt;&gt;&gt; n5 = -n2</span>
 <span class="sd">    &gt;&gt;&gt; print(&#39;%s (%d) + %s (%d) = %s (%d)&#39;</span>
 <span class="sd">    ...       % ( n4, n4.value(), n5, n5.value(),n4 + n5, (n4+n5).value() ))</span>
-<span class="sd">     011 (4) + -1-1-1 (-13) = -100 (-9)</span>
+<span class="sd">     &#39;0+1+1&#39; (4) + &#39;-1-1-1&#39; (-13) = &#39;-100&#39; (-9)</span>
 
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="k">def</span> <span class="fm">__repr__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
@@ -384,7 +384,7 @@
     <span class="k">def</span> <span class="nf">_base3toBachet</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">num_string</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Converts a base 3 encoded integer into a</span>
-<span class="sd">        bipolar {-1,0,1} encoded one.</span>
+<span class="sd">        bipolar {-1,0,+1} encoded one.</span>
 
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">new_vector</span><span class="o">=</span><span class="p">[</span><span class="mi">0</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">num_string</span><span class="p">))]</span>

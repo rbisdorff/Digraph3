@@ -9100,7 +9100,7 @@ to the indeterminate value.</p>
 </div>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
-<p>Mind that the Bachet numbering system is a positional {-1,0,1} numeral system that is isomorphic to the {0,1,2} base 3 numeral system. A Bachet ranking result is therefore depending on the very ordering of the rows and columns of the <em>other.relation</em> attribute when there is a lack of transitivity observed in the relation. It is hence recommended (<em>BestQualified=True</em> setting by default) to compute a first Bachet ranking result with the given order of the <em>other.actions</em> atribute and a second one with the reversed order. The best qualified of both ranking results is eventually returned.</p>
+<p>Mind that the Bachet numbering system is a positional {-1,0,+1} numeral system that is isomorphic to the {0,1,2} base 3 numeral system. A Bachet ranking result is therefore depending on the very ordering of the rows and columns of the <em>other.relation</em> attribute when there is a lack of transitivity observed in the relation. It is hence recommended (<em>BestQualified=True</em> setting by default) to compute a first Bachet ranking result with the given order of the <em>other.actions</em> atribute and a second one with the reversed order. The best qualified of both ranking results is eventually returned.</p>
 <p>Mind also that the integer value range of Bachet numbers gets quickly huge with the length of the given row and column chracteristic vectors. The digraph <em>orderLimit</em> parameter is therefore set by default to 50, allowing to tackle integer values in the huge integer range +-358948993845926294385124. When there is need to tackle digraphs of larger order, this <em>orderLimit</em> parameter may be adjusted.</p>
 <p>When the ranking result appears suspiciously uncorrelated with the given outranking digraph, it is recommended to set the <em>randomized</em> parameter to a positive integer <em>n</em>. In this case, <em>n</em> random orderings of the decision actions with their reversed versions will be used for generating Bachet rankings. The best correlated ranking will eventually be returned.</p>
 </div>
@@ -9208,7 +9208,7 @@ a given bipolar-valued Digraph instance</p>
 </div>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
-<p>Mind that the Bachet numbering system is a positional {-1,0,1} numeral system that is isomorphic to the {0,1,2} base 3 numeral system. A Bachet ranking result is therefore depending on the very ordering of the rows and columns of the <em>other.relation</em> attribute when there is a lack of transitivity observed in the relation. It is hence recommended (<em>BestQualified=True</em> setting by default) to compute a first Bachet ranking result with the given order of the <em>other.actions</em> atribute and a second one with the reversed order. The best qualified of both ranking results is eventually returned.</p>
+<p>Mind that the Bachet numbering system is a positional {-1,0,+1} numeral system that is isomorphic to the {0,1,2} base 3 numeral system. A Bachet ranking result is therefore depending on the very ordering of the rows and columns of the <em>other.relation</em> attribute when there is a lack of transitivity observed in the relation. It is hence recommended (<em>BestQualified=True</em> setting by default) to compute a first Bachet ranking result with the given order of the <em>other.actions</em> atribute and a second one with the reversed order. The best qualified of both ranking results is eventually returned.</p>
 <p>Mind also that the integer value range of Bachet numbers gets quickly huge with the length of the given row and column chracteristic vectors. The digraph <em>orderLimit</em> parameter is therefore set by default to 50, allowing to tackle integer values in the huge integer range +-358948993845926294385124. When there is need to tackle digraphs of larger order, this <em>orderLimit</em> parameter may be adjusted.</p>
 <p>When the ranking result appears suspiciously uncorrelated with the given outranking digraph, it is recommended to set the <em>randomized</em> parameter to a positive integer <em>n</em>. In this case, <em>n</em> random orderings of the decision actions with their reversed versions will be used for generating Bachet rankings. The best correlated ranking will eventually be returned.</p>
 </div>
@@ -11965,14 +11965,14 @@ Springer Verlag London 1998.</p>
 <dl class="py class">
 <dt class="sig sig-object py" id="arithmetics.BachetNumber">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">arithmetics.</span></span><span class="sig-name descname"><span class="pre">BachetNumber</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">num_int</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">vector</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/arithmetics.html#BachetNumber"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#arithmetics.BachetNumber" title="Link to this definition"></a></dt>
-<dd><p>Bipolar-valued {-1,0,1} base 3 encoded integers due to Claude Gaspard Bachet de Méziriac (1621)</p>
+<dd><p>Bipolar-valued {-1,0,+1} base 3 encoded integers due to Claude Gaspard Bachet de Méziriac (1621)</p>
 <p><a class="reference external" href="https://en.wikipedia.org/wiki/Claude_Gaspar_Bachet_de_M%C3%A9ziriac">https://en.wikipedia.org/wiki/Claude_Gaspar_Bachet_de_M%C3%A9ziriac</a></p>
 <div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">arithmetics</span> <span class="kn">import</span> <span class="n">BachetNumber</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">n1</span> <span class="o">=</span> <span class="n">BachetNumber</span><span class="p">(</span><span class="mi">12</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">n1</span>
 <span class="go"> *------- Bachet number description ------*</span>
 <span class="go"> Instance class : BachetNumber</span>
-<span class="go"> String         : 110</span>
+<span class="go"> String         : &#39;+1+10&#39;</span>
 <span class="go"> Vector         : [1, 1, 0]</span>
 <span class="go"> Length         : 3</span>
 <span class="go"> Value          : 12</span>
@@ -11981,7 +11981,7 @@ Springer Verlag London 1998.</p>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">n2</span>
 <span class="go"> *------- Bachet number description ------*</span>
 <span class="go"> Instance class : BachetNumber</span>
-<span class="go"> String         : 111</span>
+<span class="go"> String         : &#39;+1+1+1&#39;</span>
 <span class="go"> Vector         : [1, 1, 1]</span>
 <span class="go"> Length         : 3</span>
 <span class="go"> Value          : 13</span>
@@ -11990,21 +11990,21 @@ Springer Verlag London 1998.</p>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">n3</span>
 <span class="go"> *------- Bachet number description ------*</span>
 <span class="go"> Instance class : BachetNumber</span>
-<span class="go"> String         : 10-11</span>
+<span class="go"> String         : &#39;+10-1+1&#39;</span>
 <span class="go"> Vector         : [1, 0, -1, 1]</span>
 <span class="go"> Length         : 4</span>
 <span class="go"> Value          : 25</span>
 <span class="go"> Attributes     : [&#39;vector&#39;]</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="s1">&#39;</span><span class="si">%s</span><span class="s1"> (</span><span class="si">%d</span><span class="s1">) + </span><span class="si">%s</span><span class="s1"> (</span><span class="si">%d</span><span class="s1">) = </span><span class="si">%s</span><span class="s1"> (</span><span class="si">%d</span><span class="s1">)&#39;</span>
 <span class="gp">... </span>       <span class="o">%</span> <span class="p">(</span><span class="n">n1</span><span class="p">,</span> <span class="n">n1</span><span class="o">.</span><span class="n">value</span><span class="p">(),</span> <span class="n">n2</span><span class="p">,</span> <span class="n">n2</span><span class="o">.</span><span class="n">value</span><span class="p">(),</span> <span class="n">n3</span><span class="p">,</span> <span class="n">n3</span><span class="o">.</span><span class="n">value</span><span class="p">()</span> <span class="p">))</span>
-<span class="go"> 110 (12) + 111 (13) = 10-11 (25)</span>
+<span class="go"> &#39;+1+10&#39; (12) + &#39;+1+1+1&#39; (13) = 10-11 (25)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="s1">&#39;length of </span><span class="si">%s</span><span class="s1"> = </span><span class="si">%d</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="n">n1</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">n1</span><span class="p">)))</span>
-<span class="go"> length of 110 = 3</span>
+<span class="go"> length of &#39;+1+10&#39; = 3</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">n4</span> <span class="o">=</span> <span class="n">n1</span><span class="o">.</span><span class="n">reverse</span><span class="p">()</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">n5</span> <span class="o">=</span> <span class="o">-</span><span class="n">n2</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="s1">&#39;</span><span class="si">%s</span><span class="s1"> (</span><span class="si">%d</span><span class="s1">) + </span><span class="si">%s</span><span class="s1"> (</span><span class="si">%d</span><span class="s1">) = </span><span class="si">%s</span><span class="s1"> (</span><span class="si">%d</span><span class="s1">)&#39;</span>
 <span class="gp">... </span>      <span class="o">%</span> <span class="p">(</span> <span class="n">n4</span><span class="p">,</span> <span class="n">n4</span><span class="o">.</span><span class="n">value</span><span class="p">(),</span> <span class="n">n5</span><span class="p">,</span> <span class="n">n5</span><span class="o">.</span><span class="n">value</span><span class="p">(),</span><span class="n">n4</span> <span class="o">+</span> <span class="n">n5</span><span class="p">,</span> <span class="p">(</span><span class="n">n4</span><span class="o">+</span><span class="n">n5</span><span class="p">)</span><span class="o">.</span><span class="n">value</span><span class="p">()</span> <span class="p">))</span>
-<span class="go"> 011 (4) + -1-1-1 (-13) = -100 (-9)</span>
+<span class="go"> &#39;0+1+1&#39; (4) + &#39;-1-1-1&#39; (-13) = &#39;-100&#39; (-9)</span>
 </pre></div>
 </div>
 <dl class="py method">

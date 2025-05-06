@@ -103,7 +103,7 @@ class QuadraticResiduesDigraph(Digraph):
 
 class BachetNumber(object):
     """
-    Bipolar-valued {-1,0,1} base 3 encoded integers due to Claude Gaspard Bachet de Méziriac (1621)
+    Bipolar-valued {-1,0,+1} base 3 encoded integers due to Claude Gaspard Bachet de Méziriac (1621)
     
     https://en.wikipedia.org/wiki/Claude_Gaspar_Bachet_de_M%C3%A9ziriac
     
@@ -112,7 +112,7 @@ class BachetNumber(object):
     >>> n1
      *------- Bachet number description ------*
      Instance class : BachetNumber
-     String         : 110
+     String         : '+1+10'
      Vector         : [1, 1, 0]
      Length         : 3
      Value          : 12
@@ -121,7 +121,7 @@ class BachetNumber(object):
     >>> n2
      *------- Bachet number description ------*
      Instance class : BachetNumber
-     String         : 111
+     String         : '+1+1+1'
      Vector         : [1, 1, 1]
      Length         : 3
      Value          : 13
@@ -130,21 +130,21 @@ class BachetNumber(object):
     >>> n3
      *------- Bachet number description ------*
      Instance class : BachetNumber
-     String         : 10-11
+     String         : '+10-1+1'
      Vector         : [1, 0, -1, 1]
      Length         : 4
      Value          : 25
      Attributes     : ['vector']
     >>> print('%s (%d) + %s (%d) = %s (%d)'
     ...        % (n1, n1.value(), n2, n2.value(), n3, n3.value() ))
-     110 (12) + 111 (13) = 10-11 (25)
+     '+1+10' (12) + '+1+1+1' (13) = 10-11 (25)
     >>> print('length of %s = %d' % (n1, len(n1)))
-     length of 110 = 3
+     length of '+1+10' = 3
     >>> n4 = n1.reverse()
     >>> n5 = -n2
     >>> print('%s (%d) + %s (%d) = %s (%d)'
     ...       % ( n4, n4.value(), n5, n5.value(),n4 + n5, (n4+n5).value() ))
-     011 (4) + -1-1-1 (-13) = -100 (-9)
+     '0+1+1' (4) + '-1-1-1' (-13) = '-100' (-9)
 
     """
     def __repr__(self):
@@ -284,7 +284,7 @@ class BachetNumber(object):
     def _base3toBachet(self,num_string):
         """
         Converts a base 3 encoded integer into a
-        bipolar {-1,0,1} encoded one.
+        bipolar {-1,0,+1} encoded one.
 
         """
         new_vector=[0 for x in range(len(num_string))]

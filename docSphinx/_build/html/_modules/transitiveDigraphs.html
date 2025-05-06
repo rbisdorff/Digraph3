@@ -2091,7 +2091,7 @@
         <span class="k">if</span> <span class="n">Polarised</span><span class="p">:</span>
             <span class="kn">from</span> <span class="nn">linearOrders</span> <span class="kn">import</span> <span class="n">PolarisedBachetRanking</span> <span class="k">as</span> <span class="n">BachetRanking</span>
         <span class="k">else</span><span class="p">:</span>
-            <span class="kn">from</span> <span class="nn">linearOrders</span> <span class="kn">import</span> <span class="n">BachetRanking</span>
+            <span class="kn">from</span> <span class="nn">linearOrders</span> <span class="kn">import</span> <span class="n">ValuedBachetRanking</span> <span class="k">as</span> <span class="n">BachetRanking</span>
         <span class="kn">from</span> <span class="nn">copy</span> <span class="kn">import</span> <span class="n">deepcopy</span>
         <span class="n">tt</span> <span class="o">=</span> <span class="n">time</span><span class="p">()</span>
         <span class="n">statistics</span> <span class="o">=</span> <span class="p">{}</span>
@@ -2394,7 +2394,7 @@
 <span class="c1">## </span>
     <span class="n">pt</span> <span class="o">=</span> <span class="n">RandomCBPerformanceTableau</span><span class="p">(</span><span class="n">numberOfActions</span><span class="o">=</span><span class="mi">9</span><span class="p">,</span><span class="n">numberOfCriteria</span><span class="o">=</span><span class="mi">13</span><span class="p">,</span><span class="n">seed</span><span class="o">=</span><span class="mi">100</span><span class="p">)</span>
     <span class="n">g</span> <span class="o">=</span> <span class="n">BipolarOutrankingDigraph</span><span class="p">(</span><span class="n">pt</span><span class="p">)</span>
-    <span class="n">wbg</span> <span class="o">=</span> <span class="n">WeakBachetRanking</span><span class="p">(</span><span class="n">g</span><span class="p">,</span><span class="n">seed</span><span class="o">=</span><span class="mi">100</span><span class="p">,</span><span class="n">Polarised</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span><span class="n">Comments</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+    <span class="n">wbg</span> <span class="o">=</span> <span class="n">WeakBachetRanking</span><span class="p">(</span><span class="n">g</span><span class="p">,</span><span class="n">seed</span><span class="o">=</span><span class="mi">100</span><span class="p">,</span><span class="n">Polarised</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span><span class="n">Comments</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
     <span class="n">wbg</span><span class="o">.</span><span class="n">showTransitiveDigraph</span><span class="p">(</span><span class="n">WithCoverCredibility</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
     <span class="c1">#wcg = WeakCopelandOrder(g,WithFairestRanking=True)</span>
     <span class="c1">#print(wcg.copelandPermutations)</span>
