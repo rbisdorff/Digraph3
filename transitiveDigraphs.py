@@ -1939,8 +1939,8 @@ class WeakBachetRanking(TransitiveDigraph):
         ba1.rankings = rankings
         for att in ba1.__dict__:
             self.__dict__[att] = deepcopy(ba1.__dict__[att])
-        self.computeRankingByChoosing()
-        print
+        if Debug:
+            ba1.showRankingByChoosing()
         self.boostedRanking = self.computeBoostedRanking()
         self.boostedOrdering = self.computeBoostedOrdering()
         self.weakRanking = self.rankingByChoosing['ranking']
@@ -1959,11 +1959,11 @@ class WeakBachetRanking(TransitiveDigraph):
         on each component.
         """
         ranking = []
-        components = self.rankingByChoosing
+        components = self.computeRankingByChoosing()
         for i in range(len(components['result'])):
             ranking += components['result'][i][0][1]
         ordering = []
-        components = self.rankingByChoosing
+        components = self.computeRankingByChoosing()
         for i in range(len(components['result'])):
             ordering += components['result'][i][1][1]
         boostedRanking = ranking
