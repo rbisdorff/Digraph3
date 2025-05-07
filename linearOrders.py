@@ -2039,7 +2039,7 @@ class CopelandRanking(LinearOrder):
         # with gamma functions
         if Gamma:
             for x in actions:
-                copelandScore = len(gamma[x][0]) + len(gamma[x][1])
+                copelandScore = len(gamma[x][0]) - len(gamma[x][1])
                 incCopelandScores.append((copelandScore,x))
                 decCopelandScores.append((copelandScore,x))
         else: # with Condorcet Digraph valuation

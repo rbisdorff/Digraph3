@@ -2205,7 +2205,7 @@
         <span class="c1"># with gamma functions</span>
         <span class="k">if</span> <span class="n">Gamma</span><span class="p">:</span>
             <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">actions</span><span class="p">:</span>
-                <span class="n">copelandScore</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">gamma</span><span class="p">[</span><span class="n">x</span><span class="p">][</span><span class="mi">0</span><span class="p">])</span> <span class="o">+</span> <span class="nb">len</span><span class="p">(</span><span class="n">gamma</span><span class="p">[</span><span class="n">x</span><span class="p">][</span><span class="mi">1</span><span class="p">])</span>
+                <span class="n">copelandScore</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">gamma</span><span class="p">[</span><span class="n">x</span><span class="p">][</span><span class="mi">0</span><span class="p">])</span> <span class="o">-</span> <span class="nb">len</span><span class="p">(</span><span class="n">gamma</span><span class="p">[</span><span class="n">x</span><span class="p">][</span><span class="mi">1</span><span class="p">])</span>
                 <span class="n">incCopelandScores</span><span class="o">.</span><span class="n">append</span><span class="p">((</span><span class="n">copelandScore</span><span class="p">,</span><span class="n">x</span><span class="p">))</span>
                 <span class="n">decCopelandScores</span><span class="o">.</span><span class="n">append</span><span class="p">((</span><span class="n">copelandScore</span><span class="p">,</span><span class="n">x</span><span class="p">))</span>
         <span class="k">else</span><span class="p">:</span> <span class="c1"># with Condorcet Digraph valuation</span>
@@ -2789,7 +2789,7 @@
 
   <div role="contentinfo">
     <p>&#169; Copyright 2012-2025, Raymond Bisdorff.
-      <span class="lastupdated">Last updated on May 06, 2025.
+      <span class="lastupdated">Last updated on May 07, 2025.
       </span></p>
   </div>
 
