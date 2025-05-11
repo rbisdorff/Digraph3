@@ -65,7 +65,8 @@
        * :ref:`Computing a best choice recommendation <Rubis-Tutorial-label>`
        * :ref:`How to create a new performance tableau instance <New-PerformanceTableau-Tutorial-label>`
        * :ref:`Generating random performance tableaux <RandomPerformanceTableau-Tutorial-label>`
-       * :ref:`Ranking with multiple incommensurable criteria <Ranking-Tutorial-label>`
+       * :ref:`Linear ranking with multiple incommensurable criteria <Ranking-Tutorial-label>`
+       * :ref:`Weakly ranking with multiple incommensurable criteria <Weak-Ranking-Tutorial-label>`
        * :ref:`Rating into relative performance quantiles <QuantilesRating-Tutorial-label>`
        * :ref:`Rating-by-ranking with learned performance quantile limits <LearnedRating-Tutorial-label>`
        * :ref:`Computing the winner of an election <LinearVoting-Tutorial-label>`
@@ -3078,7 +3079,7 @@ Indeed, the extended *Kendall* tau index of +0.638 leads to a bipolar-valued *re
 The valued *Bachet* ranking
 ```````````````````````````
 
-The polarised *Bachet* ranking rules only considers the crisp relational structure of the outranking digraph, ignoring the actual credibility of the individual arcs. The :py:mod:`linearOrders` module provides also a :py:class:`~linearOrders.ValuedBachetRanking` rule taking into account, like the *NetFlows* rule, the actual bipolar-valued characteristic determination of the outranking situations. The *Bachet* numbers making up the ranking scores are therefore instantiated from the rows and columns of the normalized relation instead of the polarised relation of the outranking digraph. 
+The polarised *Bachet* ranking rule only considers the crisp relational structure of the outranking digraph, ignoring the actual credibility of the individual arcs. The :py:mod:`linearOrders` module provides now also a :py:class:`~linearOrders.ValuedBachetRanking` rule taking into account, like the *NetFlows* rule, the actual bipolar-valued characteristic determination of the outranking situations. The *Bachet* numbers making up the ranking scores are therefore instantiated from the rows and columns of the normalized relation instead of the polarised relation of the outranking digraph. 
 
 .. code-block:: pycon
    :name: ValuedBachetRanking
@@ -3109,60 +3110,9 @@ The polarised *Bachet* ranking rules only considers the crisp relational structu
      Epistemic determination    :  0.230
      Bipolar-valued equivalence : +0.170
 
-With the valued version of the *Bachet* ranking rule we recover a similar ranking as the one obtained with the previous polarised version, only actions '*a1*' and '*a8*' are swapped. Notice by the way in :numref:`ValuedBachetRanking` Line 2  that we are sampling here 100 random orderings of the *actions* keys. This way we obtain a better correlated ranking result than with the simple *NetFlows* rule (+739 vs +0.638)
+With the *valued* version of the *Bachet* ranking rule we recover a similar ranking as the one obtained with the previous polarised version, only actions '*a1*' and '*a8*' are swapped. Notice by the way in :numref:`ValuedBachetRanking` Line 2  that we are sampling here 100 random orderings of the *actions* keys. This way we obtain a better correlated ranking result than with the simple *NetFlows* rule (+739 vs +0.638). The valued *Bachet* ranking is like the polarised *Bachet* rule invariant under the codual transform. However, like the *NetFlows* rule, the valued version of the *bachet* rule is **not** necessarily **Condorcet consistent**. 
 
-To compare the four rankings we have so far obtained with *ranking-by-scoring* strategies, it is useful to vizualize the **ranking consensus**  one may observe between the *Copeland*, the *NetFlows* and both *Bachet* ranking results. To compute such a ranking consensus we can make usage of the :py:class:`transitiveDigraphs.RankingsFusionDigraph` class.
-
-.. code-block:: pycon
-   :name: RankingConsensus
-   :caption: Computing a rankings consensus
-   :emphasize-lines: 3,5,7,9, 18-21
-
-   >>> from transitiveDigraphs import RankingsFusionDigraph
-   >>> cop.copelandRanking
-    ['a5', 'a1', 'a6', 'a7', 'a8', 'a4', 'a9', 'a3', 'a2']
-   >>> ba.bachetRanking
-    ['a5', 'a6', 'a7', 'a3', 'a4', 'a8', 'a1', 'a2', 'a9']
-   >>> nf.netFlowsRanking
-    ['a5', 'a7', 'a6', 'a3', 'a1', 'a8', 'a4', 'a9', 'a2']
-   >>> bav.bachetRanking
-    ['a5', 'a6', 'a7', 'a3', 'a4', 'a1', 'a8', 'a9', 'a2']
-   >>> rankings = [cop.copelandRanking,
-   ...             ba.bachetRanking,
-   ...             nf.netFlowsRanking,
-   ...             bav.bachetRanking]
-   >>> rfdg = RankingsFusionDigraph(gcd,rankings)
-   >>> rfdg.exportGraphViz('rankingsByScoringFusion')
-    *---- exporting a dot file for GraphViz tools ---------*
-    Exporting to rankingsByScoringFusion.dot
-     0 { rank = 0; a5; }
-     1 { rank = 1; a6; a1; a7; }
-     2 { rank = 2; a3; a8; a4; }
-     3 { rank = 3; a2; a9; }
-    dot -Grankdir=TB -Tpng rankingsByScoringFusion.dot \
-                        -o rankingsByScoringFusion.png
-
-.. Figure:: rankingsByScoringFusion.png
-   :name: rankingConsensusFigure
-   :width: 200 px
-   :align: center
-
-   *Copeland*, *NetFlows* and *Bachet* ranking consensus 	   
-    
-In :numref:`rankingConsensusFigure` appears a convincing ranking consensus with four levels of agreement where action *a5* appears consistently first-ranked and actions *a2* and *a9*, both, last-ranked. Notice the unstable rank positions of action *a1* (2, 5, and 7), as well as the unstable rank positions of action *a3* (4 and 8), both a consequence of their contrasted performance records. The epistemic fusion of all four *ranking-by-scoring* results delivers here a convincing transitive partial ordering, highly correlated with the given outranking digraph *g* (+0.847), supported by a criteria significance majority of 58% (see Lines 4-6 below) . 
-
-.. code-block:: pycon
-   :linenos:
-   :emphasize-lines: 4-6
-   
-   >>> corr = g.computeOrdinalCorrelation(rfdg)
-   >>> g.showCorrelation(corr)
-    Correlation indexes:
-     Crisp ordinal correlation  : +0.847
-     Epistemic determination    :  0.157
-     Bipolar-valued equivalence : +0.133
-
-To appreciate now the actual ranking performances of the *Copeland*, the *NetFlows* or both  *Bachet* rules with the given outranking relation, it is useful to consider *Kemeny*'s and *Slater*'s **optimal fitting** ranking rules.
+To appreciate now the actual ranking performances of the *ranking-by-scoring* rules seen so far, it is useful to consider *Kemeny*'s and *Slater*'s **optimal fitting** ranking rules.
 
 Optimal *Kemeny* rankings
 `````````````````````````
@@ -3496,8 +3446,158 @@ Similar to *Kohler*'s rule, the *RankedPairs* rule has also a prudent *dual* ver
 
 Besides of not providing a unique linear ranking, the *ranking-by-choosing* rules, as well as their dual *ordering-by-choosing* rules, are unfortunately *not scalable* to outranking digraphs of larger orders (> 100). For such bigger outranking digraphs, with several hundred or thousands of alternatives, only the *Copeland* and the *NetFlows* ranking-by-scoring rules, with a polynomial complexity of :math:`O(n^2)`, where *n* is the order of the outranking digraph, remain in fact computationally tractable.
 
-.. note::
-   It is important finally to notice that for all outranking digraphs of small **or** larger orders there does usually **not exist** a unique optimal linear ranking result when the corresponding strict outranking digraph lacks transitivity and contains chordless cycles. Instead of computing hence a more or less convincing linear ranking, it may be more meaningful and faithful to sort the performance records into performance **quantile equivalence classes**. This order statistics based **rating** approach is presented in the following Section.  
+It is important finally to notice that for all outranking digraphs of small **or** larger orders there does usually **not exist** a unique optimal linear ranking result when the corresponding strict outranking digraph lacks transitivity and contains chordless cycles. In such a case, it may be interesting to compute a **ranking consensus** from multiple plausible linear rankings.
+
+
+Back to :ref:`Content Table <Tutorial-label>`
+
+--------------
+
+.. _Weak-Ranking-Tutorial-label:
+
+On weakly ranking strategies
+----------------------------
+
+Computing a ranking consensus
+`````````````````````````````
+
+To compare for instance the four rankings we have previously obtained with *ranking-by-scoring* strategies, it is worthwhile vizualizing the **ranking consensus**  one may observe between the *Copeland*, the *NetFlows* and both *Bachet* ranking results. To compute such a ranking consensus we make usage of the :py:class:`transitiveDigraphs.RankingsFusionDigraph` class.
+
+.. code-block:: pycon
+   :name: RankingConsensus
+   :caption: Computing a rankings consensus
+   :emphasize-lines: 3,5,7,9, 18-21
+
+   >>> from outrankingDigraphs import *
+   >>> t = RandomCBPerformanceTableau(numberOfActions=9,
+   ...                       numberOfCriteria=13,seed=200)
+   >>> g = BipolarOutrankingDigraph(t,Normalized=True)
+   >>> from linearOrders import *
+   >>> cop = CopelandOrder(g)
+   >>> cop.copelandRanking
+    ['a5', 'a1', 'a6', 'a7', 'a8', 'a4', 'a9', 'a3', 'a2']
+   >>> ba = PolarisedBachetRanking(g,randomized=10,seed=28)
+   >>> ba.bachetRanking
+    ['a5', 'a6', 'a7', 'a3', 'a4', 'a8', 'a1', 'a2', 'a9']
+   >>> nf = NetFlowsRanking(g)
+   >>> nf.netFlowsRanking
+    ['a5', 'a7', 'a6', 'a3', 'a1', 'a8', 'a4', 'a9', 'a2']
+   >>> bav = ValuedBachetRanking(g,randomized=100,seed=28)
+   >>> bav.bachetRanking
+    ['a5', 'a6', 'a7', 'a3', 'a4', 'a1', 'a8', 'a9', 'a2']
+   >>> rankings = [cop.copelandRanking,
+   ...             ba.bachetRanking,
+   ...             nf.netFlowsRanking,
+   ...             bav.bachetRanking]
+   >>> from transitiveDigraphs import RankingsFusionDigraph
+   >>> rfdg = RankingsFusionDigraph(g,rankings)
+   >>> rfdg.exportGraphViz('rankingsByScoringFusion')
+    *---- exporting a dot file for GraphViz tools ---------*
+    Exporting to rankingsByScoringFusion.dot
+     0 { rank = 0; a5; }
+     1 { rank = 1; a6; a1; a7; }
+     2 { rank = 2; a3; a8; a4; }
+     3 { rank = 3; a2; a9; }
+    dot -Grankdir=TB -Tpng rankingsByScoringFusion.dot \
+                        -o rankingsByScoringFusion.png
+
+.. Figure:: rankingsByScoringFusion.png
+   :name: rankingConsensusFigure
+   :width: 200 px
+   :align: center
+
+   *Copeland*, *NetFlows* and *Bachet* ranking consensus 	   
+    
+:numref:`rankingConsensusFigure` makes apparent a ranking consensus with four levels of agreement where action *a5* appears consistently first-ranked and actions *a2* and *a9*, both, last-ranked. Notice the unstable rank positions of action *a1* (2, 5, and 7), a consequence of its contrasted performance record. The epistemic fusion of all four *ranking-by-scoring* results delivers here a convincing transitive partial ordering, highly correlated with the given outranking digraph *g* (+0.847), supported by a criteria significance majority of 58% (see Lines 4-6 below) . 
+
+.. code-block:: pycon
+   :linenos:
+   :emphasize-lines: 4-6
+   
+   >>> corr = g.computeOrdinalCorrelation(rfdg)
+   >>> g.showCorrelation(corr)
+    Correlation indexes:
+     Crisp ordinal correlation  : +0.847
+     Epistemic determination    :  0.157
+     Bipolar-valued equivalence : +0.133
+
+As we have noticed before, the randomized *Bachet* ranking rules produce multiple rankings of unequal correlation results, respecting more or less the transitive part of the given outranking digraph. A subset of best correlated *Bachet* rankings represent now a suitable sample for computing a convincing ranking consensus. 
+
+On weakly ranking with the  Bachet rules
+````````````````````````````````````````
+
+To explore this opportunity, a new :py:class:`~transitiveDigraphs.WeakBachetRanking` class has been added to the :py:mod:`transitiveDigraphs` module. To illustrate its usefulness, let us reconsider the example outranking digraph *g* of :numref:`RankingConsensus`. 
+
+.. code-block:: pycon
+   :caption: *Bachet* weak ranking result
+   :name: weakBachet3
+   :emphasize-lines: 8-12,15
+
+   >>> from outrankingDigraphs import *
+   >>> t = RandomCBPerformanceTableau(numberOfActions=9,
+   ...                       numberOfCriteria=13,seed=200)
+   >>> g = BipolarOutrankingDigraph(t,Normalized=True)
+   >>> from transitiveDigraphs import WeakBachetRanking
+   >>> wb = WeakBachetRanking(g,randomized=100,seed=1,maxNbrOfRankings=5)
+   >>> wb.showWeakRanking()
+    Ranking by Choosing and Rejecting
+     1st ranked ['a5', 'a7']
+       2nd ranked ['a1', 'a3', 'a6', 'a8']
+       2nd last ranked ['a1', 'a3', 'a4', 'a8'])
+     1st last ranked ['a2', 'a9'])
+   >>> wb.showCorrelation(wb.weakBachetCorrelation)
+    Correlation indexes:
+     Crisp ordinal correlation  : +0.806
+     Epistemic determination    :  0.179
+     Bipolar-valued equivalence : +0.144
+    
+The nine performance records are grouped into four performance equivalence classes. The resulting *weak ranking* is highly correlated with the common determinated part of the given outranking digraph *g* (+0.806, see Line 15) leading to a relational equivalence supported by a criteria significance majority of 57%. In :numref:`weakBachet2` below, is shown its *Hasse* diagram. 
+
+.. code-block:: pycon
+
+   >>> wb.exportGraphViz('weakBachet2')
+    *---- exporting a dot file for GraphViz tools ---------*
+    Exporting to rel_randomperftab_wk.dot
+     0 subGraph { rank = same; a5; }
+     1 subGraph { rank = same; a6; }
+     2 subGraph { rank = same; a7; a3; a1; a4; }
+     3 subGraph { rank = same; a2; a9; a8; }
+    dot -Grankdir=TB -Tpng weakBachet2.dot -o weakBachet2.png
+
+.. Figure:: weakBachet2.png
+   :name: weakBachet2
+   :alt: weak Bachet ranking
+   :width: 250 px
+   :align: center
+
+   Weak *Bachet* ranking result
+
+In :numref:`weakBachet2` we recover a weak ranking very similar to the previous ranking consensus obtained from of all four *ranking-by-scoring* results (see :numref:`rankingConsensusFigure`). As the :py:class:`~transitiveDigraphs.WeakBachetRanking` constructor uses by default the *polarised* version of the *Bachet* rule, the weak ranking result obtained above represents in fact a ranking consensus respecting the actual **transitive parts** of the given outranking digraph (see :ref:`the advanced topic <Bachet-Tutorial-label>` dedicated to the *Bachet* ranking rules). The :py:class:`~transitiveDigraphs.WeakBachetRanking` now provides a *Polarised == False* flag allowing tu use instead the **valued** version of the *Bachet* rule.
+
+.. code-block:: pycon
+   :caption: *Bachet* weak ranking result
+   :name: weakBachet4
+   :emphasize-lines: 1-2,5-8,11
+
+   >>> wbv = WeakBachetRanking(g,Polarised=False,
+   ...            randomized=100,seed=1,maxNbrOfRankings=5)
+   >>> wbv.showWeakRanking()
+    Ranking by Choosing and Rejecting
+     1st ranked ['a5', 'a6']
+       2nd ranked ['a7'], 
+       2nd last ranked [''a3', 'a8'])
+     1st last ranked ['a1', 'a2', 'a4', 'a9'])
+   >>> wbv.showCorrelation(wbv.weakBachetCorrelation)
+    Correlation indexes:
+     Crisp ordinal correlation  : +0.888
+     Epistemic determination    :  0.157
+     Bipolar-valued equivalence : +0.139
+
+In :numref:`weakBachet4` we observe a weak ordering of the nine performance records taking into account not only the polarised relational structure, but also the individual arc determinations of the given outranking digraph.
+
+This way, the *Bachet* ranking rules deliver very effective tools for constructing convincing weak rankings providing by the way an effective way for computing first or last choice recommendations, actually the initial and terminal kernels of such weak rankings. Mind however that the *Bachet* ranking rules can only handle small outranking digraphs ( < 50 ). For larger ( > 50 ) or big ( > 1000 ) outranking digraphs it is opportune to turn to order statistics and compute weak rankings by sorting the multicriteria performance records into relative or absolute performance **quantile equivalence classes**.
+
+This order statistics based **rating** approach is presented in the following Sections.  
 
 Back to :ref:`Content Table <Tutorial-label>`
 
