@@ -62,7 +62,7 @@ Pearls of bipolar-valued epistemic logic
    :ref:`Theoretical and computational advancements <Theoretical-Enhancements-label>`
        * :ref:`Coping with missing evaluation and indeterminateness <CopingMissing-Data-label>`
        * :ref:`Ordinal correlation equals bipolar-valued relational equivalence <OrdinalCorrelation-Tutorial-label>`
-       * :ref:`A new ranking rule based on bipolar-valued Bachet numbers <Bachet-Tutorial-label>`	 
+       * :ref:`A new ranking rule based on bipolar-valued Bachet numbers <Bachet-Tutorial-label>` 	 
        * :ref:`On computing graph and digraph kernels <Kernel-Tutorial-label>`
        * :ref:`Computing bipolar-valued kernel membership characteristic vectors <Bipolar-Valued-Kernels-Tutorial-label>`
        * :ref:`On characterizing bipolar-valued outranking digraphs <Sufficiency-Tutorial-label>`

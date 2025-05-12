@@ -1652,22 +1652,22 @@ Yet, we must as well notice that the cheapest alternative *C* is in fact **stric
 Weakly ordering the outranking digraph
 ``````````````````````````````````````
 
-To get a further insight in the overall strict outranking situations, we may use the :py:class:`~transitiveDigraphs.RankingByChoosingDigraph` constructor imported from the :ref:`transitiveDigraphs module <transitiveDigraphs-label>`, for computing a **ranking-by-choosing** result from the codual, i.e. the strict outranking digraph instance *gcd* (see above).
+To get a further insight in the overall strict outranking situations, we may use the :py:class:`~transitiveDigraphs.WeakBachetRanking` constructor imported from the :ref:`transitiveDigraphs module <transitiveDigraphs-label>`, for computing a **ranking-by-scoring** result with ties from the codual, i.e. the strict outranking digraph instance *gcd* (see above).
 
 .. code-block:: pycon
    :linenos:
    :emphasize-lines: 3-4,7
 
-   >>> from transitiveDigraphs import RankingByChoosingDigraph
-   >>> rbc = RankingByChoosingDigraph(gcd)
+   >>> from transitiveDigraphs import WeakBachetRanking
+   >>> wbr = WeakBachetRanking(gcd,randomized=200,seed=3)
     Threading ...  ## multiprocessing if 2 cores are available
     Exiting computing threads
    >>> rbc.showRankingByChoosing()
     Ranking by Choosing and Rejecting
-    1st ranked ['D']
-       2nd ranked ['C', 'G']
-       2nd last ranked ['B', 'C', 'E']
-    1st last ranked ['A', 'F']
+    1st ranked ['A', 'C', 'D', 'G']
+       2nd ranked ['B', 'E']
+       2nd last ranked ['B', 'E']
+    1st last ranked ['F']
    >>> rbc.exportGraphViz('officeChoiceRanking')
     *---- exporting a dot file for GraphViz tools ---------*
     Exporting to officeChoiceRanking.dot
@@ -1680,7 +1680,7 @@ To get a further insight in the overall strict outranking situations, we may use
 
    Ranking-by-choosing from the office choice outranking digraph
 	   
-In this **ranking-by-choosing** method, where we operate the *epistemic fusion* of iterated (strict) first and last choices, compromise alternative *D* is now ranked before compromise alternative *G* (see Line 7). If the computing node supports multiple processor cores, first and last choosing iterations are run in parallel (see Lines 3-4). The overall partial ordering result shows again the important fact that the most expensive location *A*, and the cheapest location *C*, both appear incomparable with most of the other alternatives, as is apparent from the Hasse diagram  of the ranking-by-choosing result (see :numref:`officeChoiceRanking`). 
+In this weakly **ranking-by-scoring** method, where we operate the *epistemic fusion* of best correlated *Bachet* rankings (see XXX), alternatives *A*, *C*, *D* as well as *G* are now all first-ranked (see Line 7), whereas alternative *F* is clearly last-ranked. The overall partial ordering result shows again the important fact that the most expensive location *A*, and the cheapest location *C*, both appear incomparable with most of the other alternatives, as is apparent from the Hasse diagram  of the ranking-by-choosing result (see :numref:`officeChoiceRanking`). 
 
 The best choice recommendation appears hence depending on the very importance the CEO is attaching to each one of the three decision objectives he is considering. In the setting here, where he considers that *maximizing the future turnover* is the most important objective followed by *minimizing the Costs* and, less important, *maximizing the working conditions*, location *D* represents actually the best compromise. However, if *Costs* do not play much a role, it would be perhaps better to decide to move to the most advantageous location *A*; or if, on the contrary, *Costs* do matter a lot, moving to the cheapest alternative *C* could definitely represent a more convincing recommendation. 
 

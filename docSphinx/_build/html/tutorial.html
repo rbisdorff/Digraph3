@@ -1918,17 +1918,17 @@ pairwise perspective (see below). With the given preference discrimination thres
 </section>
 <section id="weakly-ordering-the-outranking-digraph">
 <h4><a class="toc-backref" href="#id308" role="doc-backlink"><span class="section-number">1.3.1.6. </span>Weakly ordering the outranking digraph</a><a class="headerlink" href="#weakly-ordering-the-outranking-digraph" title="Link to this heading"></a></h4>
-<p>To get a further insight in the overall strict outranking situations, we may use the <a class="reference internal" href="techDoc.html#transitiveDigraphs.RankingByChoosingDigraph" title="transitiveDigraphs.RankingByChoosingDigraph"><code class="xref py py-class docutils literal notranslate"><span class="pre">RankingByChoosingDigraph</span></code></a> constructor imported from the <a class="reference internal" href="techDoc.html#transitivedigraphs-label"><span class="std std-ref">transitiveDigraphs module</span></a>, for computing a <strong>ranking-by-choosing</strong> result from the codual, i.e. the strict outranking digraph instance <em>gcd</em> (see above).</p>
-<div class="highlight-pycon notranslate"><div class="highlight"><pre><span></span><span class="linenos"> 1</span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">transitiveDigraphs</span> <span class="kn">import</span> <span class="n">RankingByChoosingDigraph</span>
-<span class="linenos"> 2</span><span class="gp">&gt;&gt;&gt; </span><span class="n">rbc</span> <span class="o">=</span> <span class="n">RankingByChoosingDigraph</span><span class="p">(</span><span class="n">gcd</span><span class="p">)</span>
+<p>To get a further insight in the overall strict outranking situations, we may use the <a class="reference internal" href="techDoc.html#transitiveDigraphs.WeakBachetRanking" title="transitiveDigraphs.WeakBachetRanking"><code class="xref py py-class docutils literal notranslate"><span class="pre">WeakBachetRanking</span></code></a> constructor imported from the <a class="reference internal" href="techDoc.html#transitivedigraphs-label"><span class="std std-ref">transitiveDigraphs module</span></a>, for computing a <strong>ranking-by-scoring</strong> result with ties from the codual, i.e. the strict outranking digraph instance <em>gcd</em> (see above).</p>
+<div class="highlight-pycon notranslate"><div class="highlight"><pre><span></span><span class="linenos"> 1</span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">transitiveDigraphs</span> <span class="kn">import</span> <span class="n">WeakBachetRanking</span>
+<span class="linenos"> 2</span><span class="gp">&gt;&gt;&gt; </span><span class="n">wbr</span> <span class="o">=</span> <span class="n">WeakBachetRanking</span><span class="p">(</span><span class="n">gcd</span><span class="p">,</span><span class="n">randomized</span><span class="o">=</span><span class="mi">200</span><span class="p">,</span><span class="n">seed</span><span class="o">=</span><span class="mi">3</span><span class="p">)</span>
 <span class="hll"><span class="linenos"> 3</span><span class="go"> Threading ...  ## multiprocessing if 2 cores are available</span>
 </span><span class="hll"><span class="linenos"> 4</span><span class="go"> Exiting computing threads</span>
 </span><span class="linenos"> 5</span><span class="gp">&gt;&gt;&gt; </span><span class="n">rbc</span><span class="o">.</span><span class="n">showRankingByChoosing</span><span class="p">()</span>
 <span class="linenos"> 6</span><span class="go"> Ranking by Choosing and Rejecting</span>
-<span class="hll"><span class="linenos"> 7</span><span class="go"> 1st ranked [&#39;D&#39;]</span>
-</span><span class="linenos"> 8</span><span class="go">    2nd ranked [&#39;C&#39;, &#39;G&#39;]</span>
-<span class="linenos"> 9</span><span class="go">    2nd last ranked [&#39;B&#39;, &#39;C&#39;, &#39;E&#39;]</span>
-<span class="linenos">10</span><span class="go"> 1st last ranked [&#39;A&#39;, &#39;F&#39;]</span>
+<span class="hll"><span class="linenos"> 7</span><span class="go"> 1st ranked [&#39;A&#39;, &#39;C&#39;, &#39;D&#39;, &#39;G&#39;]</span>
+</span><span class="linenos"> 8</span><span class="go">    2nd ranked [&#39;B&#39;, &#39;E&#39;]</span>
+<span class="linenos"> 9</span><span class="go">    2nd last ranked [&#39;B&#39;, &#39;E&#39;]</span>
+<span class="linenos">10</span><span class="go"> 1st last ranked [&#39;F&#39;]</span>
 <span class="linenos">11</span><span class="gp">&gt;&gt;&gt; </span><span class="n">rbc</span><span class="o">.</span><span class="n">exportGraphViz</span><span class="p">(</span><span class="s1">&#39;officeChoiceRanking&#39;</span><span class="p">)</span>
 <span class="linenos">12</span><span class="go"> *---- exporting a dot file for GraphViz tools ---------*</span>
 <span class="linenos">13</span><span class="go"> Exporting to officeChoiceRanking.dot</span>
@@ -1941,7 +1941,7 @@ pairwise perspective (see below). With the given preference discrimination thres
 <p><span class="caption-number">Fig. 1.14 </span><span class="caption-text">Ranking-by-choosing from the office choice outranking digraph</span><a class="headerlink" href="#officechoiceranking" title="Link to this image"></a></p>
 </figcaption>
 </figure>
-<p>In this <strong>ranking-by-choosing</strong> method, where we operate the <em>epistemic fusion</em> of iterated (strict) first and last choices, compromise alternative <em>D</em> is now ranked before compromise alternative <em>G</em> (see Line 7). If the computing node supports multiple processor cores, first and last choosing iterations are run in parallel (see Lines 3-4). The overall partial ordering result shows again the important fact that the most expensive location <em>A</em>, and the cheapest location <em>C</em>, both appear incomparable with most of the other alternatives, as is apparent from the Hasse diagram  of the ranking-by-choosing result (see <a class="hxr-hoverxref hxr-tooltip reference internal" href="#officechoiceranking"><span class="std std-numref">Fig. 1.14</span></a>).</p>
+<p>In this weakly <strong>ranking-by-scoring</strong> method, where we operate the <em>epistemic fusion</em> of best correlated <em>Bachet</em> rankings (see XXX), alternatives <em>A</em>, <em>C</em>, <em>D</em> as well as <em>G</em> are now all first-ranked (see Line 7), whereas alternative <em>F</em> is clearly last-ranked. The overall partial ordering result shows again the important fact that the most expensive location <em>A</em>, and the cheapest location <em>C</em>, both appear incomparable with most of the other alternatives, as is apparent from the Hasse diagram  of the ranking-by-choosing result (see <a class="hxr-hoverxref hxr-tooltip reference internal" href="#officechoiceranking"><span class="std std-numref">Fig. 1.14</span></a>).</p>
 <p>The best choice recommendation appears hence depending on the very importance the CEO is attaching to each one of the three decision objectives he is considering. In the setting here, where he considers that <em>maximizing the future turnover</em> is the most important objective followed by <em>minimizing the Costs</em> and, less important, <em>maximizing the working conditions</em>, location <em>D</em> represents actually the best compromise. However, if <em>Costs</em> do not play much a role, it would be perhaps better to decide to move to the most advantageous location <em>A</em>; or if, on the contrary, <em>Costs</em> do matter a lot, moving to the cheapest alternative <em>C</em> could definitely represent a more convincing recommendation.</p>
 <p>It might be worth, as an <strong>exercise</strong>, to modify these criteria significance weights in the ‘officeChoice.py’ data file in such a way that</p>
 <blockquote>
@@ -10535,7 +10535,7 @@ dot -Grankdir=TB -Tpng rootedTree.dot -o rootedTree.png</p>
 
   <div role="contentinfo">
     <p>&#169; Copyright 2012-2025, Raymond Bisdorff.
-      <span class="lastupdated">Last updated on May 11, 2025.
+      <span class="lastupdated">Last updated on May 12, 2025.
       </span></p>
   </div>
 
