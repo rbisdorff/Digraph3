@@ -46,7 +46,7 @@
 \contentsline {subsubsection}{Bipolar\sphinxhyphen {}valued base 3 encoded Bachet numbers}{81}{subsubsection*.95}%
 \contentsline {subsubsection}{Examples of sbits encoded Bachet numbers}{82}{subsubsection*.97}%
 \contentsline {subsubsection}{The Bachet ranking rule, a new ranking\sphinxhyphen {}by\sphinxhyphen {}scoring method}{85}{subsubsection*.99}%
-\contentsline {subsubsection}{Efficiency of the Bachet ranking rule settings}{90}{subsubsection*.102}%
+\contentsline {subsubsection}{Efficiency of the Bachet ranking rule settings}{89}{subsubsection*.102}%
 \contentsline {subsubsection}{The Bachet rule: a new method for weakly ranking}{92}{subsubsection*.103}%
 \contentsline {subsection}{\numberline {3.4}On computing digraph kernels}{94}{subsection.3.4}%
 \contentsline {subsubsection}{What is a graph kernel ?}{94}{subsubsection*.109}%

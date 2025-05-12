@@ -3424,7 +3424,7 @@ To explore this opportunity, a new :py:class:`~transitiveDigraphs.WeakBachetRank
    >>> from outrankingDigraphs import RandomBipolarOutrankingDigraph
    >>> g = RandomBipolarOutrankingDigraph(numberOfActions=9,seed=1)
    >>> from transitiveDigraphs import WeakBachetRanking
-   >>> wb = WeakBachetRanking(g,randomized=20,seed=1,maxNbrOfRankings=5)
+   >>> wb = WeakBachetRanking(g,randomized=100,seed=1,maxNbrOfRankings=5)
    >>> wb.showWeakRanking()
     Ranking by Choosing and Rejecting
      1st ranked ['a2', 'a5']

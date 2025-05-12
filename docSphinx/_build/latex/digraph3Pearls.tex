@@ -67,8 +67,8 @@
 
 
 \title{Digraph3 Advanced Topics}
-\date{March 21, 2025}
-\release{3.13.2}
+\date{May 12, 2025}
+\release{3.13.3}
 \author{Raymond Bisdorff}
 \newcommand{\sphinxlogo}{\sphinxincludegraphics{introDoc3.png}\par}
 \renewcommand{\releasename}{Release}
@@ -4261,14 +4261,14 @@ Back to {\hyperref[\detokenize{pearls:pearls-label}]{\sphinxcrossref{\DUrole{std
 \end{quote}
 
 \sphinxAtStartPar
-Bipolar\sphinxhyphen{}valued \{\sphinxhyphen{}1,0,1\} base 3 encoded integers are due to \sphinxstyleemphasis{Claude Gaspard Bachet de Méziriac} (1581\sphinxhyphen{}1638) %
+Bipolar\sphinxhyphen{}valued \{\sphinxhyphen{}1,0,+1\} base 3 encoded integers are due to \sphinxstyleemphasis{Claude Gaspard Bachet de Méziriac} (1581\sphinxhyphen{}1638) %
 \begin{footnote}[20]\sphinxAtStartFootnote
-\sphinxurl{https://en.wikipedia.org/wiki/Claude\_Gaspar\_Bachet\_de\_M\%C3\%A9ziriac} \sphinxstyleemphasis{Claude Gaspar Bachet} Sieur de Méziriac (9 October 1581 \textendash{} 26 February 1638) was a French mathematician and poet who is known today for his 1624 proof of Bézout’s theorem stating the special case of the Bachet\sphinxhyphen{}Bézout identity for two coprime integers. \sphinxstyleemphasis{Étienne Bézout} actually proved this result in 1779 only for polynomials and Bézout’s theorem is misattributed to Bézout by Bourbaki. The general Bachet\sphinxhyphen{}Bézout identity is a direct algebraic consequence of Euclid’s division algorithm and was known before Bachet (see the \sphinxcode{\sphinxupquote{arithmetics.bezout()}} method). It is furthemore in a Latin Translation by Bachet of the Arithmetica of Diophantus where Pierre de Fermat wrote in 1638 his famous margin note about the missing proof of his last theorem.
+\sphinxurl{https://en.wikipedia.org/wiki/Claude\_Gaspar\_Bachet\_de\_M\%C3\%A9ziriac} \sphinxstyleemphasis{Claude Gaspar Bachet} Sieur de Méziriac (9 October 1581 \textendash{} 26 February 1638) was a French mathematician and poet who is known today for his 1622 proof of Bézout’s theorem stating the special case of the \sphinxstyleemphasis{Bachet\sphinxhyphen{}Bézout} identity for two coprime integers. \sphinxstyleemphasis{Étienne Bézout} actually proved this result in 1779 only for polynomials and Bézout’s theorem is misattributed to Bézout by Bourbaki. The general \sphinxstyleemphasis{Bachet\sphinxhyphen{}Bézout} identity is a direct algebraic consequence of Euclid’s division algorithm and was known before Bachet (see the \sphinxcode{\sphinxupquote{arithmetics.bezout()}} method). It is furthemore in a Latin Translation by Bachet of the Arithmetica of Diophantus where Pierre de Fermat wrote in 1638 his famous margin note about the missing proof of his last theorem.
 %
-\end{footnote}. The idea is to represent the value of an integer \sphinxstyleemphasis{n} in a base 3 positional numerotation where in each position may appear a \sphinxstylestrong{signed bit} e.i. one of the three symbols \sphinxstylestrong{\{\sphinxhyphen{}1,0,1\}}, called hereafter \sphinxstylestrong{sbits} for short.
+\end{footnote}. The idea is to represent the value of an integer \sphinxstyleemphasis{n} in a base 3 positional numerotation where in each position may appear a \sphinxstylestrong{signed bit} \textendash{}one of the three symbols \sphinxstylestrong{\{\sphinxhyphen{}1,0,+1\}}\textendash{} called hereafter \sphinxstylestrong{sbits} for short.
 
 \sphinxAtStartPar
-\sphinxstyleemphasis{Bachet}’s positional \sphinxstyleemphasis{sbits} numerotation is simulating a weight balance scale where the number \sphinxstyleemphasis{n} and the potential negative powers of 3 are put on the right tray and the potential positive powers of 3 are put on the left tray. The equation for \sphinxstyleemphasis{n = 5} gives for instance \(3^2 = (n + 3^1 + 3^0)\). And the \sphinxstyleemphasis{sbits} encoding corresponds hence to the string ‘1\sphinxhyphen{}1\sphinxhyphen{}1’. As, this representation is isomorphic to a base 3 binary encoding, every positive or negative integer may this way be represented with a unique \sphinxstyleemphasis{sbits} string. With three powers of 3, namely \(3^2, 3^1, 3^0\), one may for instance represent any value in the integer range \sphinxhyphen{}13 to +13. \sphinxstyleemphasis{Bachet} showed that this bipolar weighing system relies on the smallest possible number of weights \sphinxhyphen{}base powers\sphinxhyphen{} needed in order to balance the scale for any given weight \sphinxstyleemphasis{n} \sphinxcite{pearls:bac-1622p}.
+\sphinxstyleemphasis{Bachet}’s positional \sphinxstyleemphasis{sbits} numerotation is simulating a weight balance scale where the number \sphinxstyleemphasis{n} and the potential negative powers of 3 are put on the right tray and the potential positive powers of 3 are put on the left tray. The equation for \sphinxstyleemphasis{n = 5} gives for instance \(3^2 = (n + 3^1 + 3^0)\). And the \sphinxstyleemphasis{sbits} encoding corresponds hence to the string ‘+1\sphinxhyphen{}1\sphinxhyphen{}1’. As, this representation is isomorphic to a base 3 binary encoding, every positive or negative integer may this way be represented with a unique \sphinxstyleemphasis{sbits} string. With four powers of 3, namely \({3^3, 3^2, 3^1, 3^0}\), one may for instance represent any value in the integer range \sphinxhyphen{}40 to +40. \sphinxstyleemphasis{Bachet} showed that this bipolar weighing system relies on the smallest possible number of weights \sphinxhyphen{}base powers\sphinxhyphen{} needed in order to balance the scale for any given integer weight \sphinxstyleemphasis{n} \sphinxcite{pearls:bac-1622p}.
 
 \sphinxAtStartPar
 The Digraph3 \sphinxcode{\sphinxupquote{arithmetics}} module provides with the \sphinxcode{\sphinxupquote{BachetNumber}} class an implementation for such \sphinxstyleemphasis{sbits} encoded integers. Instantiating a \sphinxstyleemphasis{Bachet} number may be done either with an integer value or with a vector of sbits (see \hyperref[\detokenize{pearls:bachetnumbers}]{Listing \ref{\detokenize{pearls:bachetnumbers}}} Lines  2, 6, 11 and 15). The class provides a binary \sphinxstyleemphasis{addition} method and unary \sphinxstyleemphasis{negating} and \sphinxstyleemphasis{reversing} methods as illustrated in Lines 20 and 32\sphinxhyphen{}33 below.
@@ -4281,7 +4281,7 @@ The Digraph3 \sphinxcode{\sphinxupquote{arithmetics}} module provides with the \
 \PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{n1}
 \PYG{g+go}{  *\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{} Bachet number description \PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}*}
 \PYG{g+go}{  Instance class : BachetNumber}
-\PYG{g+go}{  String         : 1\PYGZhy{}1\PYGZhy{}1}
+\PYG{g+go}{  String         : \PYGZsq{}+1\PYGZhy{}1\PYGZhy{}1\PYGZsq{}}
 \PYG{g+go}{  Vector         : [1, \PYGZhy{}1, \PYGZhy{}1]}
 \PYG{g+go}{  Length         : 3}
 \PYG{g+go}{  Value          : 5}
@@ -4290,7 +4290,7 @@ The Digraph3 \sphinxcode{\sphinxupquote{arithmetics}} module provides with the \
 \PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{n2}
 \PYG{g+go}{  *\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{} Bachet number description \PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}*}
 \PYG{g+go}{  Instance class : BachetNumber}
-\PYG{g+go}{  String         : 111}
+\PYG{g+go}{  String         : \PYGZsq{}+1+1+1\PYGZsq{}}
 \PYG{g+go}{  Vector         : [1, 1, 1]}
 \PYG{g+go}{  Length         : 3}
 \PYG{g+go}{  Value          : 13}
@@ -4299,19 +4299,19 @@ The Digraph3 \sphinxcode{\sphinxupquote{arithmetics}} module provides with the \
 \PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{n3}
 \PYG{g+go}{  *\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{} Bachet number description \PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}*}
 \PYG{g+go}{  Instance class : BachetNumber}
-\PYG{g+go}{  String         : 1\PYGZhy{}100}
+\PYG{g+go}{  String         : \PYGZsq{}+1\PYGZhy{}100\PYGZsq{}}
 \PYG{g+go}{  Vector         : [1, \PYGZhy{}1, 0, 0]}
 \PYG{g+go}{  Length         : 4}
 \PYG{g+go}{  Value          : 18}
 \PYG{g+go}{  Attributes     : [\PYGZsq{}vector\PYGZsq{}]}
 \PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n+nb}{print}\PYG{p}{(}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+si}{\PYGZpc{}s}\PYG{l+s+s1}{ (}\PYG{l+s+si}{\PYGZpc{}d}\PYG{l+s+s1}{) + }\PYG{l+s+si}{\PYGZpc{}s}\PYG{l+s+s1}{ (}\PYG{l+s+si}{\PYGZpc{}d}\PYG{l+s+s1}{) = }\PYG{l+s+si}{\PYGZpc{}s}\PYG{l+s+s1}{ (}\PYG{l+s+si}{\PYGZpc{}d}\PYG{l+s+s1}{)}\PYG{l+s+s1}{\PYGZsq{}}
 \PYG{g+gp}{... }       \PYG{o}{\PYGZpc{}} \PYG{p}{(}\PYG{n}{n1}\PYG{p}{,} \PYG{n}{n1}\PYG{o}{.}\PYG{n}{value}\PYG{p}{(}\PYG{p}{)}\PYG{p}{,} \PYG{n}{n2}\PYG{p}{,} \PYG{n}{n2}\PYG{o}{.}\PYG{n}{value}\PYG{p}{(}\PYG{p}{)}\PYG{p}{,} \PYG{n}{n3}\PYG{p}{,} \PYG{n}{n3}\PYG{o}{.}\PYG{n}{value}\PYG{p}{(}\PYG{p}{)} \PYG{p}{)}\PYG{p}{)}
-\PYG{g+go}{  1\PYGZhy{}1\PYGZhy{}1 (5) + 111 (13) = 1\PYGZhy{}100 (18)}
+\PYG{g+go}{  \PYGZsq{}+1\PYGZhy{}1\PYGZhy{}1\PYGZsq{} (5) + \PYGZsq{}+1+1+1\PYGZsq{} (13) = \PYGZsq{}+1\PYGZhy{}100\PYGZsq{} (18)}
 \PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{n4} \PYG{o}{=} \PYG{n}{n1}\PYG{o}{.}\PYG{n}{reverse}\PYG{p}{(}\PYG{p}{)}
 \PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{n5} \PYG{o}{=} \PYG{o}{\PYGZhy{}}\PYG{n}{n2}
 \PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n+nb}{print}\PYG{p}{(}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+si}{\PYGZpc{}s}\PYG{l+s+s1}{ (}\PYG{l+s+si}{\PYGZpc{}d}\PYG{l+s+s1}{) + }\PYG{l+s+si}{\PYGZpc{}s}\PYG{l+s+s1}{ (}\PYG{l+s+si}{\PYGZpc{}d}\PYG{l+s+s1}{) = }\PYG{l+s+si}{\PYGZpc{}s}\PYG{l+s+s1}{ (}\PYG{l+s+si}{\PYGZpc{}d}\PYG{l+s+s1}{)}\PYG{l+s+s1}{\PYGZsq{}}
 \PYG{g+gp}{... }      \PYG{o}{\PYGZpc{}} \PYG{p}{(} \PYG{n}{n4}\PYG{p}{,} \PYG{n}{n4}\PYG{o}{.}\PYG{n}{value}\PYG{p}{(}\PYG{p}{)}\PYG{p}{,} \PYG{n}{n5}\PYG{p}{,} \PYG{n}{n5}\PYG{o}{.}\PYG{n}{value}\PYG{p}{(}\PYG{p}{)}\PYG{p}{,}\PYG{n}{n4} \PYG{o}{+} \PYG{n}{n5}\PYG{p}{,} \PYG{p}{(}\PYG{n}{n4}\PYG{o}{+}\PYG{n}{n5}\PYG{p}{)}\PYG{o}{.}\PYG{n}{value}\PYG{p}{(}\PYG{p}{)} \PYG{p}{)}\PYG{p}{)}
-\PYG{g+go}{  \PYGZhy{}1\PYGZhy{}11 (\PYGZhy{}11) + \PYGZhy{}1\PYGZhy{}1\PYGZhy{}1 (\PYGZhy{}13) = \PYGZhy{}1010 (\PYGZhy{}24)}
+\PYG{g+go}{  \PYGZsq{}\PYGZhy{}1\PYGZhy{}1+1\PYGZsq{} (\PYGZhy{}11) + \PYGZsq{}\PYGZhy{}1\PYGZhy{}1\PYGZhy{}1\PYGZsq{} (\PYGZhy{}13) = \PYGZsq{}\PYGZhy{}10+10\PYGZsq{} (\PYGZhy{}24)}
 \end{sphinxVerbatim}
 \sphinxresetverbatimhllines
 
@@ -4361,7 +4361,7 @@ Examples of such \sphinxstyleemphasis{sbits} encoded \sphinxstyleemphasis{Bachet
 The \sphinxstyleemphasis{Bachet} numbers, instantiated by the row vectors without reflexive terms  and the column vectors without reflexive terms of the digraph’s \sphinxstyleemphasis{self.relation} attribute, model in fact respectively an \sphinxstylestrong{outrankingness} measure \sphinxstyleemphasis{rx} and an \sphinxstylestrong{outrankedness} measure \sphinxstyleemphasis{cx} (see Lines 16\sphinxhyphen{}27).
 
 \sphinxAtStartPar
-The sum \sphinxstyleemphasis{rx + (\sphinxhyphen{}cx)} of both the \sphinxstylestrong{outrankingness} and the \sphinxstylestrong{not\sphinxhyphen{}outrankedness} measures renders now per decision action \sphinxstyleemphasis{x} a potential ranking fitness score, similar to \sphinxstyleemphasis{Copeland} or \sphinxstyleemphasis{NetFlows} ranking scores %
+The sum \sphinxstyleemphasis{rx + (\sphinxhyphen{}cx)} of both the \sphinxstylestrong{outrankingness} and the \sphinxstylestrong{negated outrankedness} measures renders now per decision action \sphinxstyleemphasis{x} a potential ranking score, similar to \sphinxstyleemphasis{Copeland} or \sphinxstyleemphasis{NetFlows} ranking scores %
 \begin{footnote}[21]\sphinxAtStartFootnote
 See the tutorial on \DUrole{xref,std,std-ref}{ranking with multiple incommensurable criteria}
 %
@@ -4448,21 +4448,21 @@ With the reversed \sphinxstyleemphasis{Bachet} numbers we obtain the ranking ‘
 The \sphinxstyleemphasis{Copeland} ranking rule delivers indeed for this example outranking digraph ranking scores with a tie between actions ‘a1’ and ‘a2’ which is by convention resolved by following a lexicographic rule favouring in this case action ‘a1’. This ranking is however much less correlated to the given outranking digraph than the optimal \sphinxstyleemphasis{Kemeny} ranking (see +0.795 above).
 
 \sphinxAtStartPar
-Nevertheless, the \sphinxstyleemphasis{Bachet} fitness scores of the original and the reversed ordering of the polarised relation table lead in our example here to very plausible and convincing ranking results. This hindsight gave the positive stimulus for implementing this new \sphinxstyleemphasis{ranking\sphinxhyphen{}by\sphinxhyphen{}scoring} rule.
+Nevertheless, the \sphinxstyleemphasis{Bachet} ranking scores of the original and the reversed ordering of the polarised relation table lead in our example here to very plausible and convincing ranking results. This hindsight gave the positive stimulus for implementing this new \sphinxstyleemphasis{ranking\sphinxhyphen{}by\sphinxhyphen{}scoring} rule.
 
 
 \subsubsection{The Bachet ranking rule, a new ranking\sphinxhyphen{}by\sphinxhyphen{}scoring method}
 \label{\detokenize{pearls:the-bachet-ranking-rule-a-new-ranking-by-scoring-method}}
 \sphinxAtStartPar
-The \sphinxcode{\sphinxupquote{linearOrders}} module provides now a \sphinxcode{\sphinxupquote{BachetRanking}} class implementing a ranking rule based on the \sphinxstyleemphasis{Bachet} fitness scores modelled by the polarised version of the relation table of a given outranking digraph.
+The \sphinxcode{\sphinxupquote{linearOrders}} module provides now a \sphinxcode{\sphinxupquote{PolarisedBachetRanking}} class implementing a ranking rule based on the \sphinxstyleemphasis{Bachet} ranking scores modelled by the polarised version of the relation table of a given outranking digraph.
 
 \fvset{hllines={, 2, 11, 12, 16,}}%
 \begin{sphinxVerbatim}[commandchars=\\\{\},numbers=left,firstnumber=1,stepnumber=1]
-\PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{k+kn}{from} \PYG{n+nn}{linearOrders} \PYG{k+kn}{import} \PYG{n}{BachetRanking}
-\PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{ba} \PYG{o}{=} \PYG{n}{BachetRanking}\PYG{p}{(}\PYG{n}{g}\PYG{p}{)}
+\PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{k+kn}{from} \PYG{n+nn}{linearOrders} \PYG{k+kn}{import} \PYG{n}{PolarisedBachetRanking}
+\PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{ba} \PYG{o}{=} \PYG{n}{PolarisedBachetRanking}\PYG{p}{(}\PYG{n}{g}\PYG{p}{)}
 \PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{ba}
 \PYG{g+go}{ *\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{} Digraph instance description \PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}*}
-\PYG{g+go}{  Instance class      : BachetRanking}
+\PYG{g+go}{  Instance class      : PolarisedBachetRanking}
 \PYG{g+go}{  Instance name       : rel\PYGZus{}randomperftab\PYGZus{}best\PYGZus{}ranked}
 \PYG{g+go}{  Digraph Order       : 4}
 \PYG{g+go}{  Digraph Size        : 6}
@@ -4492,10 +4492,10 @@ Note that, like the \sphinxstyleemphasis{Copeland} and the \sphinxstyleemphasis{
 \begin{footnote}[22]\sphinxAtStartFootnote
 To prove the \sphinxstyleemphasis{invariance} of the \sphinxstyleemphasis{Bachet} ranking under the \sphinxstyleemphasis{codual transform}, it is sufficient to notice that the contribution to the \sphinxstyleemphasis{Bachet} scores of any pair of actions, outranking each other and situated respectively in positions \sphinxstyleemphasis{p} and \sphinxstyleemphasis{q} in a relation relation table, amounts to  \((3^p + 3^q) - (3^p + 3^q) = 0\). Same zero contribution \((-3^p - 3^q) - (-3^p - 3^q) = 0\) occurs for any pair positively \sphinxstyleemphasis{not outranking} each other.
 %
-\end{footnote} and the \sphinxcode{\sphinxupquote{BachetRanking}} constructor works by default on the corresponding strict outranking digraph (\sphinxstyleemphasis{CoDual=True}).
+\end{footnote} and the \sphinxcode{\sphinxupquote{PolarisedBachetRanking}} constructor works by default on the corresponding strict outranking digraph (\sphinxstyleemphasis{CoDual=True}).
 
 \sphinxAtStartPar
-Mind however that a base 3 sbits numbering system is a \sphinxstyleemphasis{positional numeral system}, implying that the \sphinxstyleemphasis{Bachet} ranking scores, as noticed before, depend essentially on the very ordering of the rows and columns of the outranking digraph’s \sphinxstyleemphasis{self.relation} attribute when the relation shows a low transitivity degree. However, when the digraph is \sphinxstyleemphasis{transitive} and \sphinxstyleemphasis{acyclic}, the \sphinxstyleemphasis{Bachet} ranking scores will consistently model the orientations of all transitive triplets independently of the ordering of the rows and columns of the \sphinxstyleemphasis{self.relation} attribute. The \sphinxstyleemphasis{Bachet} ranking rule is hence, like the \sphinxstyleemphasis{Copeland} rule, \sphinxstylestrong{Condorcet consistent}, i.e. when the polarised strict outranking digraph models a transitive acyclic relation, its \sphinxstyleemphasis{Bachet} ranking result will always be consistent with this strict outranking relation %
+Mind however that a base 3 sbits numbering system is a \sphinxstyleemphasis{positional numeral system}, implying that the \sphinxstyleemphasis{Bachet} ranking scores, as noticed before, depend essentially on the very ordering of the rows and columns of the outranking digraph’s \sphinxstyleemphasis{self.relation} attribute when the relation shows a low transitivity degree. However, when the digraph is \sphinxstyleemphasis{transitive} and \sphinxstyleemphasis{acyclic}, the \sphinxstyleemphasis{Bachet} ranking scores will consistently model the orientations of all transitive triplets independently of the ordering of the rows and columns of the \sphinxstyleemphasis{self.relation} attribute. The polarised \sphinxstyleemphasis{Bachet} ranking rule is hence, like the \sphinxstyleemphasis{Copeland} rule, \sphinxstylestrong{Condorcet consistent}, i.e. when the polarised strict outranking digraph models a transitive acyclic relation, its \sphinxstyleemphasis{Bachet} ranking result will always be consistent with this strict outranking relation %
 \begin{footnote}[23]\sphinxAtStartFootnote
 To prove the \sphinxstyleemphasis{Condorcet consistency} property of the \sphinxstyleemphasis{Bachet} ranking rule, it is sufficient to notice that the contributions of a transitive triplet \sphinxstyleemphasis{‘ai’ \textgreater{} ‘aj’ \textgreater{} ‘ak’} to the corresponding \sphinxstyleemphasis{Bachet} ranking scores will respect the actual ordering of the triplet with all positional permutations of {[}…, ai, …, aj, …,ak, …{]} in a relation table.
 %
@@ -4526,7 +4526,7 @@ When we reconsider above digraph \sphinxstyleemphasis{g}’s polarised relation 
 \begin{sphinxVerbatim}[commandchars=\\\{\},numbers=left,firstnumber=1,stepnumber=1]
 \PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{k+kn}{from} \PYG{n+nn}{digraphsTools} \PYG{k+kn}{import} \PYG{n}{all\PYGZus{}perms}
 \PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{k}{for} \PYG{n}{perm} \PYG{o+ow}{in} \PYG{n}{all\PYGZus{}perms}\PYG{p}{(}\PYG{p}{[}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{a1}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{,} \PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{a2}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{,} \PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{a3}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{,} \PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{a4}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{]}\PYG{p}{)}\PYG{p}{:}
-\PYG{g+gp}{... }    \PYG{n}{ba} \PYG{o}{=} \PYG{n}{BachetRanking}\PYG{p}{(}\PYG{n}{g}\PYG{p}{,}\PYG{n}{actionsList}\PYG{o}{=}\PYG{n}{perm}\PYG{p}{,}\PYG{n}{BestQualified}\PYG{o}{=}\PYG{k+kc}{False}\PYG{p}{)}
+\PYG{g+gp}{... }    \PYG{n}{ba} \PYG{o}{=} \PYG{n}{PolarisedBachetRanking}\PYG{p}{(}\PYG{n}{g}\PYG{p}{,}\PYG{n}{actionsList}\PYG{o}{=}\PYG{n}{perm}\PYG{p}{,}\PYG{n}{BestQualified}\PYG{o}{=}\PYG{k+kc}{False}\PYG{p}{)}
 \PYG{g+gp}{... }    \PYG{n}{corr} \PYG{o}{=} \PYG{n}{g}\PYG{o}{.}\PYG{n}{computeRankingCorrelation}\PYG{p}{(}\PYG{n}{ba}\PYG{o}{.}\PYG{n}{bachetRanking}\PYG{p}{)}
 \PYG{g+gp}{... }    \PYG{n+nb}{print}\PYG{p}{(}\PYG{n}{perm}\PYG{p}{,} \PYG{n}{ba}\PYG{o}{.}\PYG{n}{bachetRanking}\PYG{p}{,} \PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+si}{\PYGZpc{}.4f}\PYG{l+s+s1}{\PYGZsq{}} \PYG{o}{\PYGZpc{}} \PYG{p}{(}\PYG{n}{corr}\PYG{p}{[}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{correlation}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{]}\PYG{p}{)}\PYG{p}{)}
 \PYG{g+go}{ [\PYGZsq{}a1\PYGZsq{}, \PYGZsq{}a2\PYGZsq{}, \PYGZsq{}a3\PYGZsq{}, \PYGZsq{}a4\PYGZsq{}] [\PYGZsq{}a4\PYGZsq{}, \PYGZsq{}a3\PYGZsq{}, \PYGZsq{}a2\PYGZsq{}, \PYGZsq{}a1\PYGZsq{}] 0.7950}
@@ -4557,16 +4557,16 @@ When we reconsider above digraph \sphinxstyleemphasis{g}’s polarised relation 
 \sphinxresetverbatimhllines
 
 \sphinxAtStartPar
-It appears hence to be opportune to compute a first \sphinxstyleemphasis{Bachet} ranking result with the given order of the \sphinxstyleemphasis{self.actions} atribute and a second one with the corresponding reversed ordering. The best correlated of both ranking results is eventually returned. The \sphinxcode{\sphinxupquote{BachetRanking}} class provides therefore the \sphinxstyleemphasis{BestQualified} parameter set by default to \sphinxstyleemphasis{True} (see below \hyperref[\detokenize{pearls:optimisingbachet}]{Listing \ref{\detokenize{pearls:optimisingbachet}}} Lines 5 and 19,21,35). Computing the reversed version of the \sphinxstyleemphasis{Bachet} rule is indeed computationally easy as it just requires to reverse the previously used \sphinxstyleemphasis{Bachet} vectors, a method directly provided by the \sphinxcode{\sphinxupquote{BachetNumber}} class.
+It appears hence to be opportune to compute a first \sphinxstyleemphasis{Bachet} ranking result with the given order of the \sphinxstyleemphasis{self.actions} atribute and a second one with the corresponding reversed ordering. The best correlated of both ranking results is eventually returned. The \sphinxcode{\sphinxupquote{PolarisedBachetRanking}} class provides therefore the \sphinxstyleemphasis{BestQualified} parameter set by default to \sphinxstyleemphasis{True} (see below \hyperref[\detokenize{pearls:optimisingbachet}]{Listing \ref{\detokenize{pearls:optimisingbachet}}} Lines 5 and 19,21,35). Computing the reversed version of the \sphinxstyleemphasis{Bachet} rule is indeed computationally easy as it just requires to reverse the previously used \sphinxstyleemphasis{Bachet} vectors, a method directly provided by the \sphinxcode{\sphinxupquote{BachetNumber}} class.
 \sphinxSetupCaptionForVerbatim{Optimising the \sphinxstyleemphasis{Bachet} ranking result I}
 \def\sphinxLiteralBlockLabel{\label{\detokenize{pearls:optimisingbachet}}}
 \fvset{hllines={, 5, 19, 21, 35,}}%
 \begin{sphinxVerbatim}[commandchars=\\\{\},numbers=left,firstnumber=1,stepnumber=1]
 \PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{k+kn}{from} \PYG{n+nn}{outrankingDigraphs} \PYG{k+kn}{import} \PYG{n}{RandomBipolarOutrankingDigraph}
 \PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{g} \PYG{o}{=} \PYG{n}{RandomBipolarOutrankingDigraph}\PYG{p}{(}\PYG{n}{numberOfActions}\PYG{o}{=}\PYG{l+m+mi}{9}\PYG{p}{,}\PYG{n}{seed}\PYG{o}{=}\PYG{l+m+mi}{1}\PYG{p}{)}
-\PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{k+kn}{from} \PYG{n+nn}{linearOrders} \PYG{k+kn}{import} \PYG{n}{BachetRanking}
+\PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{k+kn}{from} \PYG{n+nn}{linearOrders} \PYG{k+kn}{import} \PYG{n}{PolarisedBachetRanking}
 \PYG{g+go}{ *\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{} solely given ordering of the actions \PYGZhy{}\PYGZhy{}\PYGZhy{}*\PYGZsq{})}
-\PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{ba1} \PYG{o}{=} \PYG{n}{BachetRanking}\PYG{p}{(}\PYG{n}{g}\PYG{p}{,}\PYG{n}{BestQualified}\PYG{o}{=}\PYG{k+kc}{False}\PYG{p}{)}
+\PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{ba1} \PYG{o}{=} \PYG{n}{PolarisedBachetRanking}\PYG{p}{(}\PYG{n}{g}\PYG{p}{,}\PYG{n}{BestQualified}\PYG{o}{=}\PYG{k+kc}{False}\PYG{p}{)}
 \PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{ba1}\PYG{o}{.}\PYG{n}{showScores}\PYG{p}{(}\PYG{p}{)}
 \PYG{g+go}{  Bachet scores in descending order}
 \PYG{g+go}{   action     score}
@@ -4582,7 +4582,7 @@ It appears hence to be opportune to compute a first \sphinxstyleemphasis{Bachet}
 \PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{g}\PYG{o}{.}\PYG{n}{computeRankingCorrelation}\PYG{p}{(}\PYG{n}{ba1}\PYG{o}{.}\PYG{n}{bachetRanking}\PYG{p}{)}
 \PYG{g+go}{  \PYGZob{}\PYGZsq{}correlation\PYGZsq{}: +0.3936, \PYGZsq{}determination\PYGZsq{}: 0.4086\PYGZcb{}}
 \PYG{g+go}{ *\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{} given and reversed ordering of the actions \PYGZhy{}\PYGZhy{}\PYGZhy{}*\PYGZsq{})}
-\PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{ba2} \PYG{o}{=} \PYG{n}{BachetRanking}\PYG{p}{(}\PYG{n}{g}\PYG{p}{,}\PYG{n}{BestQualified}\PYG{o}{=}\PYG{k+kc}{True}\PYG{p}{)}
+\PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{ba2} \PYG{o}{=} \PYG{n}{PolarisedBachetRanking}\PYG{p}{(}\PYG{n}{g}\PYG{p}{,}\PYG{n}{BestQualified}\PYG{o}{=}\PYG{k+kc}{True}\PYG{p}{)}
 \PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{ba2}\PYG{o}{.}\PYG{n}{showScores}\PYG{p}{(}\PYG{p}{)}
 \PYG{g+go}{  Bachet scores in descending order}
 \PYG{g+go}{   action     score}
@@ -4609,7 +4609,7 @@ Yet, when observing a somehow lower transitivity degree, as we may notice in \hy
 \PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n+nb}{print}\PYG{p}{(}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{Transitivity degree: }\PYG{l+s+si}{\PYGZpc{}.4f}\PYG{l+s+s1}{\PYGZsq{}} \PYG{o}{\PYGZpc{}} \PYG{p}{(}\PYG{n}{g}\PYG{o}{.}\PYG{n}{computeTransitivityDegree}\PYG{p}{(}\PYG{p}{)}\PYG{p}{)}\PYG{p}{)}
 \PYG{g+go}{ Transitivity degree: 0.6806}
 \PYG{g+go}{ *\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{} using 100 random ordering and their reversed versions \PYGZhy{}\PYGZhy{}\PYGZhy{}*\PYGZsq{})}
-\PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{ba3} \PYG{o}{=} \PYG{n}{BachetRanking}\PYG{p}{(}\PYG{n}{g}\PYG{p}{,}\PYG{n}{BestQualified}\PYG{o}{=}\PYG{k+kc}{True}\PYG{p}{,}\PYG{n}{randomized}\PYG{o}{=}\PYG{l+m+mi}{100}\PYG{p}{,}\PYG{n}{seed}\PYG{o}{=}\PYG{l+m+mi}{5}\PYG{p}{)}
+\PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{ba3} \PYG{o}{=} \PYG{n}{PolarisedBachetRanking}\PYG{p}{(}\PYG{n}{g}\PYG{p}{,}\PYG{n}{BestQualified}\PYG{o}{=}\PYG{k+kc}{True}\PYG{p}{,}\PYG{n}{randomized}\PYG{o}{=}\PYG{l+m+mi}{100}\PYG{p}{,}\PYG{n}{seed}\PYG{o}{=}\PYG{l+m+mi}{5}\PYG{p}{)}
 \PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{ba3}\PYG{o}{.}\PYG{n}{showScores}\PYG{p}{(}\PYG{p}{)}
 \PYG{g+go}{  Bachet scores in descending order}
 \PYG{g+go}{   action     score}
@@ -4789,7 +4789,7 @@ Max.   : +0.9541
 The statistical figures confirm the expected noticeable performance enhancement one obtains first with the \sphinxstyleemphasis{BestQualified=True} and secondly even more with the \sphinxstyleemphasis{randomized=100} settings of the \sphinxstyleemphasis{Bachet} ranking rule. The latter setting renders in fact ranking results of a correlation quality very similar to the \sphinxstyleemphasis{Copeland} rule. Yet, computing ranking results just from the given ordering of the \sphinxstyleemphasis{self.actions} dictionary and its reversed ordering may render, with a first quartile correlation of +0.6678 and a median correlation of +0.7282, already satisfactory ranking results in most cases. It is finally remarquable that even the single actions ordering setting shows already, with a first quartile correlation of +0.6089 and a median correlation of +0.6854, quite acceptable results.
 
 \sphinxAtStartPar
-Mind finally that the \sphinxstyleemphasis{Bachet} ranking rule, even of comparable complexity \(O(n^2)\) as the \sphinxstyleemphasis{Copeland} and \sphinxstyleemphasis{NetFlows} rules, is not scalable to large performance tableaux with hundreds of performance records. The integer value range of \sphinxstyleemphasis{Bachet} numbers gets indeed quickly huge with the order of the given outranking digraph. The \sphinxcode{\sphinxupquote{BachetRanking}} constructor provides therefore an \sphinxstyleemphasis{orderLimit} parameter set by default to 50, which allows to represent integer values in the huge range +\sphinxhyphen{} 358948993845926294385124.
+Mind finally that the \sphinxstyleemphasis{Bachet} ranking rule, even of comparable complexity \(O(n^2)\) as the \sphinxstyleemphasis{Copeland} and \sphinxstyleemphasis{NetFlows} rules, is not scalable to large performance tableaux with hundreds of performance records. The integer value range of \sphinxstyleemphasis{Bachet} numbers gets indeed quickly huge with the order of the given outranking digraph. The \sphinxcode{\sphinxupquote{PolarisedBachetRanking}} constructor provides therefore an \sphinxstyleemphasis{orderLimit} parameter set by default to 50, which allows to represent integer values in the huge range +\sphinxhyphen{} 358948993845926294385124.
 
 \begin{sphinxVerbatim}[commandchars=\\\{\},numbers=left,firstnumber=1,stepnumber=1]
 \PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{v} \PYG{o}{=} \PYG{p}{[}\PYG{l+m+mi}{1} \PYG{k}{for} \PYG{n}{i} \PYG{o+ow}{in} \PYG{n+nb}{range}\PYG{p}{(}\PYG{l+m+mi}{50}\PYG{p}{)}\PYG{p}{]}
@@ -4805,7 +4805,7 @@ In Python, the range of integers is luckily only limited by the available CPU me
 \subsubsection{The Bachet rule: a new method for weakly ranking}
 \label{\detokenize{pearls:the-bachet-rule-a-new-method-for-weakly-ranking}}
 \sphinxAtStartPar
-As we have noticed before, the randomized \sphinxstyleemphasis{Bachet} ranking rule produces multiple rankings of unequal correlation results, respecting more or less the transitive part of the given outranking digraph. If we collect now a small subset of the best correlated rankings, we can use the \sphinxcode{\sphinxupquote{transitiveDigraphs.RankingsFusionDigraph}} class for constructing, by epistemic disjunctive fusion of these selected rankings, a weak \sphinxstyleemphasis{Bachet} ranking result \textendash{}a ranking with ties\textendash{} showing in fact the transitive part of the given outranking digraph.
+As we have noticed before, the randomized \sphinxstyleemphasis{Bachet} ranking rule produces multiple rankings of unequal correlation results, respecting more or less the transitive part of the given outranking digraph. If we collect now a small subset of the best correlated rankings, we can use the \sphinxcode{\sphinxupquote{transitiveDigraphs.RankingsFusionDigraph}} class for constructing, by epistemic disjunctive fusion of these selected rankings, a weak \sphinxstyleemphasis{Bachet} ranking result \textendash{}a ranking with ties\textendash{} showing in fact the transitive part of the given polarised outranking digraph.
 
 \sphinxAtStartPar
 To explore this opportunity, a new \sphinxcode{\sphinxupquote{WeakBachetRanking}} class has been added to the \sphinxcode{\sphinxupquote{transitiveDigraphs}} module. To illustrate its usefulness, let us reconsider the example outranking digraph \sphinxstyleemphasis{g} of \hyperref[\detokenize{pearls:optimisingbachet}]{Listing \ref{\detokenize{pearls:optimisingbachet}}}.
@@ -4871,7 +4871,7 @@ Computing \sphinxstyleemphasis{kernels} in digraphs is the subject of the next S
 
 \begin{sphinxadmonition}{note}{Note:}
 \sphinxAtStartPar
-The weak \sphinxstyleemphasis{Bachet} ranking rule illustrates convincingly the benefit one may obtain when computing, not in a binary \{0,1\} bit world like today all bit\sphinxhyphen{}wise computing devices, but instead in a bipolar\sphinxhyphen{}valued \{\sphinxhyphen{}1,0,1\} world with \sphinxstylestrong{sbit\sphinxhyphen{}wise Bachet computers}. The power of the epistemic disjunctive fusion operator, for instance, is indeed impressive. When two arguments prove the \sphinxstyleemphasis{Truthfullness} of a logical statement, their fusion will be \sphinxstylestrong{True}. When two arguments prove the \sphinxstylestrong{Falseness} of the staement, their fusion will be \sphinxstylestrong{False}, However, when they provide conjointly a proof of Falseness and and a proof of Thruthfullness, their fusion will be \sphinxstylestrong{indeterminate} (zero knowledge). It is worthwhile noticing again the essential computational role this indeterminate \sphinxstylestrong{zero} value is taking on in such a \sphinxstyleemphasis{Bachet} computer.
+The weak \sphinxstyleemphasis{Bachet} ranking rule illustrates convincingly the benefit one may obtain when computing, not in a binary \{0,1\} bit world like today all bit\sphinxhyphen{}wise computing devices, but instead in a bipolar\sphinxhyphen{}valued \{\sphinxhyphen{}1,0,+1\} world with \sphinxstylestrong{sbit\sphinxhyphen{}wise Bachet computers}. The power of the epistemic disjunctive fusion operator, for instance, is indeed impressive. When two arguments prove the \sphinxstyleemphasis{Truthfullness} of a logical statement, their fusion will be \sphinxstylestrong{True}. When two arguments prove the \sphinxstylestrong{Falseness} of the staement, their fusion will be \sphinxstylestrong{False}, However, when they provide conjointly a proof of Falseness and and a proof of Thruthfullness, their fusion will be \sphinxstylestrong{indeterminate} (zero knowledge). It is worthwhile noticing again the essential computational role this indeterminate \sphinxstylestrong{zero} value is taking on in such a \sphinxstyleemphasis{Bachet} computer.
 \end{sphinxadmonition}
 
 
