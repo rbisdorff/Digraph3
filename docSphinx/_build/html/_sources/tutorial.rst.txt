@@ -1660,15 +1660,13 @@ To get a further insight in the overall strict outranking situations, we may use
 
    >>> from transitiveDigraphs import WeakBachetRanking
    >>> wbr = WeakBachetRanking(gcd,randomized=200,seed=3)
-    Threading ...  ## multiprocessing if 2 cores are available
-    Exiting computing threads
-   >>> rbc.showRankingByChoosing()
+   >>> wbr.showRankingByChoosing()
     Ranking by Choosing and Rejecting
     1st ranked ['A', 'C', 'D', 'G']
        2nd ranked ['B', 'E']
        2nd last ranked ['B', 'E']
     1st last ranked ['F']
-   >>> rbc.exportGraphViz('officeChoiceRanking')
+   >>> wbr.exportGraphViz('officeChoiceRanking')
     *---- exporting a dot file for GraphViz tools ---------*
     Exporting to officeChoiceRanking.dot
     dot -Grankdir=TB -Tpng officeChoiceRanking.dot -o officeChoiceRanking.png
@@ -1678,11 +1676,11 @@ To get a further insight in the overall strict outranking situations, we may use
    :width: 200 px
    :align: center
 
-   Ranking-by-choosing from the office choice outranking digraph
+   Weakly ranking-by-scoring from the office choice outranking digraph
 	   
-In this weakly **ranking-by-scoring** method, where we operate the *epistemic fusion* of best correlated *Bachet* rankings (see XXX), alternatives *A*, *C*, *D* as well as *G* are now all first-ranked (see Line 7), whereas alternative *F* is clearly last-ranked. The overall partial ordering result shows again the important fact that the most expensive location *A*, and the cheapest location *C*, both appear incomparable with most of the other alternatives, as is apparent from the Hasse diagram  of the ranking-by-choosing result (see :numref:`officeChoiceRanking`). 
+In this weakly **ranking-by-scoring** method, where we operate the *epistemic fusion* of best correlated *Bachet* rankings (see the advanced topic on :ref:`weakly ranking strategies <Weak-Ranking-Tutorial-label>`), alternatives *A*, *C*, *D* as well as *G* are now all first-ranked (see Line 7), whereas alternative *F* is clearly last-ranked. The overall partial ordering result shows again the important fact that the most expensive location *A*, and the cheapest location *C*, both appear incomparable with most of the other alternatives, as is apparent from the Hasse diagram  of the ranking-by-choosing result (see :numref:`officeChoiceRanking`). 
 
-The best choice recommendation appears hence depending on the very importance the CEO is attaching to each one of the three decision objectives he is considering. In the setting here, where he considers that *maximizing the future turnover* is the most important objective followed by *minimizing the Costs* and, less important, *maximizing the working conditions*, location *D* represents actually the best compromise. However, if *Costs* do not play much a role, it would be perhaps better to decide to move to the most advantageous location *A*; or if, on the contrary, *Costs* do matter a lot, moving to the cheapest alternative *C* could definitely represent a more convincing recommendation. 
+The best choice recommendation appears hence depending on the very importance the CEO is attaching to each one of the three decision objectives he is considering. In the setting here, where he considers that *maximizing the future turnover* is the most important objective followed by *minimizing the Costs* and, less important, *maximizing the working conditions*, locations *D* or *G* represent actually the best choices. However, if *Costs* do not play much a role, it would be perhaps better to decide to move to the most advantageous location *A*; or if, on the contrary, *Costs* do matter a lot, moving to the cheapest alternative *C* could definitely represent a more convincing recommendation. 
 
 It might be worth, as an **exercise**, to modify these criteria significance weights in the 'officeChoice.py' data file in such a way that
 
