@@ -3108,7 +3108,7 @@ The polarised *Bachet* ranking rule only considers the crisp relational structur
      Epistemic determination    :  0.230
      Bipolar-valued equivalence : +0.170
 
-With the *valued* version of the *Bachet* ranking rule we recover a similar ranking as the one obtained with the previous polarised version, only actions '*a1*' and '*a8*' are swapped. Notice by the way in :numref:`ValuedBachetRanking` Line 2  that we are sampling here 100 random orderings of the *actions* keys. This way we obtain a better correlated ranking result than with the simple *NetFlows* rule (+739 vs +0.638). The valued *Bachet* ranking is like the polarised *Bachet* rule invariant under the codual transform. However, like the *NetFlows* rule, the valued version of the *bachet* rule is **not** necessarily **Condorcet consistent**. 
+With the *valued* version of the *Bachet* ranking rule we recover a similar ranking as the one obtained with the previous polarised version, only actions '*a1*' and '*a8*' are swapped. Notice by the way in :numref:`ValuedBachetRanking` Line 2  that we are sampling here 100 random orderings of the *actions* keys. This way we obtain a better correlated ranking result than with the simple *NetFlows* rule (+739 vs +0.638). The valued *Bachet* ranking is like the polarised *Bachet* rule invariant under the codual transform. However, like the *NetFlows* rule, the valued version of the *Bachet* rule is **not** necessarily **Condorcet consistent**. 
 
 To appreciate now the actual ranking performances of the *ranking-by-scoring* rules seen so far, it is useful to consider *Kemeny*'s and *Slater*'s **optimal fitting** ranking rules.
 
@@ -3453,11 +3453,13 @@ Back to :ref:`Content Table <Tutorial-label>`
 
 .. _Weak-Ranking-Tutorial-label:
 
-On weakly ranking strategies
-----------------------------
+On weakly ranking outranking digraphs
+-------------------------------------
 
-Computing a ranking consensus
-`````````````````````````````
+In this section, instead of computing linear rankings or orders, we illustrate two ranking strategies for directly computing partial rankings --rankings with potential ties-- from a given outranking digraph, a result we call **weak rankings**.
+
+Computing a ranking consensus from several linear rankings
+``````````````````````````````````````````````````````````
 
 To compare for instance the four rankings we have previously obtained with *ranking-by-scoring* strategies, it is worthwhile vizualizing the **ranking consensus**  one may observe between the *Copeland*, the *NetFlows* and both *Bachet* ranking results. To compute such a ranking consensus we make usage of the :py:class:`transitiveDigraphs.RankingsFusionDigraph` class.
 
@@ -3521,13 +3523,13 @@ To compare for instance the four rankings we have previously obtained with *rank
 
 As we have noticed before, the randomized *Bachet* ranking rules produce multiple rankings of unequal correlation results, respecting more or less the transitive part of the given outranking digraph. A subset of best correlated *Bachet* rankings represent now a suitable sample for computing a convincing ranking consensus. 
 
-On weakly ranking with the  Bachet rules
+On weakly ranking with the Bachet rules
 ````````````````````````````````````````
 
-To explore this opportunity, a new :py:class:`~transitiveDigraphs.WeakBachetRanking` class has been added to the :py:mod:`transitiveDigraphs` module. To illustrate its usefulness, let us reconsider the example outranking digraph *g* of :numref:`RankingConsensus`. 
+To implement this second strategy, a new :py:class:`~transitiveDigraphs.WeakBachetRanking` class has been added to the :py:mod:`transitiveDigraphs` module. To illustrate its usefulness, let us reconsider the example outranking digraph *g* of :numref:`RankingConsensus`. 
 
 .. code-block:: pycon
-   :caption: *Bachet* weak ranking result
+   :caption: Polarised Bachet weak ranking result
    :name: weakBachet3
    :emphasize-lines: 8-12,15
 
@@ -3539,41 +3541,34 @@ To explore this opportunity, a new :py:class:`~transitiveDigraphs.WeakBachetRank
    >>> wb = WeakBachetRanking(g,randomized=100,seed=1,maxNbrOfRankings=5)
    >>> wb.showWeakRanking()
     Ranking by Choosing and Rejecting
-     1st ranked ['a5', 'a7']
-       2nd ranked ['a1', 'a3', 'a6', 'a8']
-       2nd last ranked ['a1', 'a3', 'a4', 'a8'])
-     1st last ranked ['a2', 'a9'])
+     1st ranked ['a5']
+       2nd ranked ['a6']
+       2nd last ranked ['a1', 'a3', 'a4', 'a7'])
+     1st last ranked ['a2', 'a8', 'a9'])
    >>> wb.showCorrelation(wb.weakBachetCorrelation)
     Correlation indexes:
      Crisp ordinal correlation  : +0.806
      Epistemic determination    :  0.179
      Bipolar-valued equivalence : +0.144
-    
-The nine performance records are grouped into four performance equivalence classes. The resulting *weak ranking* is highly correlated with the common determinated part of the given outranking digraph *g* (+0.806, see Line 15) leading to a relational equivalence supported by a criteria significance majority of 57%. In :numref:`weakBachet2` below, is shown its *Hasse* diagram. 
-
-.. code-block:: pycon
-
-   >>> wb.exportGraphViz('weakBachet2')
+   >>> wb.exportGraphViz('weakBachetpol')
     *---- exporting a dot file for GraphViz tools ---------*
-    Exporting to rel_randomperftab_wk.dot
-     0 subGraph { rank = same; a5; }
-     1 subGraph { rank = same; a6; }
-     2 subGraph { rank = same; a7; a3; a1; a4; }
-     3 subGraph { rank = same; a2; a9; a8; }
-    dot -Grankdir=TB -Tpng weakBachet2.dot -o weakBachet2.png
+     Exporting to weakBachetpol.dot
+     dot -Grankdir=TB -Tpng weakBachetpol.dot -o weakBachetpol.png
 
-.. Figure:: weakBachet2.png
-   :name: weakBachet2
-   :alt: weak Bachet ranking
-   :width: 250 px
+.. Figure:: weakBachetpol.png
+   :name: weakBachetpol
+   :width: 200 px
    :align: center
 
-   Weak *Bachet* ranking result
+   Polarised Bachet weak ranking result  	   
 
-In :numref:`weakBachet2` we recover a weak ranking very similar to the previous ranking consensus obtained from of all four *ranking-by-scoring* results (see :numref:`rankingConsensusFigure`). As the :py:class:`~transitiveDigraphs.WeakBachetRanking` constructor uses by default the *polarised* version of the *Bachet* rule, the weak ranking result obtained above represents in fact a ranking consensus respecting the actual **transitive parts** of the given outranking digraph (see :ref:`the advanced topic <Bachet-Tutorial-label>` dedicated to the *Bachet* ranking rules). The :py:class:`~transitiveDigraphs.WeakBachetRanking` now provides a *Polarised == False* flag allowing tu use instead the **valued** version of the *Bachet* rule.
+
+In :numref:`weakBachetpol` the nine performance records are grouped into four performance equivalence classes. The resulting *weak ranking* is highly correlated with the common determinated part of the given outranking digraph *g* (+0.806, see Line 15) leading to a relational equivalence supported by a criteria significance majority of 57%. we recover above a weak ranking very similar to the previous ranking consensus obtained from of all four *ranking-by-scoring* results (see :numref:`rankingConsensusFigure`).
+
+As the :py:class:`~transitiveDigraphs.WeakBachetRanking` constructor uses by default the *polarised* version of the *Bachet* rule, the weak ranking result obtained in :numref:`weakBachetpol` represents in fact a ranking consensus respecting the actual **transitive parts** of the given outranking digraph (see :ref:`the advanced topic <Bachet-Tutorial-label>` dedicated to the *Bachet* ranking rules). The :py:class:`~transitiveDigraphs.WeakBachetRanking` now provides a **Polarised == False** flag allowing tu use instead the **valued** version of the *Bachet* rule.
 
 .. code-block:: pycon
-   :caption: *Bachet* weak ranking result
+   :caption: Valued Bachet weak ranking result
    :name: weakBachet4
    :emphasize-lines: 1-2,5-8,11
 
@@ -3590,8 +3585,19 @@ In :numref:`weakBachet2` we recover a weak ranking very similar to the previous 
      Crisp ordinal correlation  : +0.888
      Epistemic determination    :  0.157
      Bipolar-valued equivalence : +0.139
+   >>> wbv.exportGraphViz('weakBachetval')
+    *---- exporting a dot file for GraphViz tools ---------*
+     Exporting to weakBachetval.dot
+     dot -Grankdir=TB -Tpng weakBachetval.dot -o weakBachetval.png
 
-In :numref:`weakBachet4` we observe a weak ordering of the nine performance records taking into account not only the polarised relational structure, but also the individual arc determinations of the given outranking digraph.
+.. Figure:: weakBachetval.png
+   :name: weakBachetval
+   :width: 200 px
+   :align: center
+
+   valued Bachet weak ranking result  	   
+
+In :numref:`weakBachet4` Lines 5-8 we observe a weak ordering of the nine performance records taking into account not only the polarised relational structure, but also the **epistemic determination** of the given outranking digraph. And the ordinal correlation with the given outranking digraph gets even better: +0.888 vs +0.806, supported by a similar criteria significance of 57%. It is worthwhile noticing in the corresponding :numref:`weakBachetval` that alternative *a1* appears incomparable to most of the other alternatives, a fact already made apparent in :numref:`rankingConsensusFigure`.  
 
 This way, the *Bachet* ranking rules deliver very effective tools for constructing convincing weak rankings providing by the way an effective way for computing first or last choice recommendations, actually the initial and terminal kernels of such weak rankings. Mind however that the *Bachet* ranking rules can only handle small outranking digraphs ( < 50 ). For larger ( > 50 ) or big ( > 1000 ) outranking digraphs it is opportune to turn to order statistics and compute weak rankings by sorting the multicriteria performance records into relative or absolute performance **quantile equivalence classes**.
 
