@@ -61,13 +61,13 @@ class TransitiveDigraph(Digraph):
         return ranking
     
         
-    def showWeakOrder(self,rankingByChoosing=None,WithCoverCredibility=False):
+    def showPartialOrder(self,rankingByChoosing=None,WithCoverCredibility=False):
         """
         A dummy for the showTransitiveDigraph() method.
         """
         self.showTransitiveDigraph(WithCoverCredibility=WithCoverCredibility)
 
-    def showWeakRanking(self,rankingByChoosing=None,WithCoverCredibility=False):
+    def showPartialRanking(self,rankingByChoosing=None,WithCoverCredibility=False):
         """
         A dummy for the showTransitiveDigraph() method.
         """
@@ -1871,7 +1871,7 @@ class PartialBachetRanking(TransitiveDigraph):
     of best correlated Bachet rankings.
 
     The :py:class:`transitiveDigraphs.RankingsFusionDigraph` uses
-    these *Bachet* rankings for contructing a weak *Bachet* ranking result.
+    these *Bachet* rankings for contructing a partial *Bachet* ranking result.
 
     - *g* is a valid BipolarOutrankingDigraph instance.
     - *randomized* (default = 100) gives the number of random permutations used for generating different Bachet ranking results.
@@ -1943,14 +1943,14 @@ class PartialBachetRanking(TransitiveDigraph):
             ba1.showRankingByChoosing()
         self.boostedRanking = self.computeBoostedRanking()
         self.boostedOrdering = self.computeBoostedOrdering()
-        self.weakRanking = self.rankingByChoosing['ranking']
-        self.weakBachetCorrelation = g.computeOrdinalCorrelation(ba1)
+        self.partialRanking = self.rankingByChoosing['ranking']
+        self.partialBachetCorrelation = g.computeOrdinalCorrelation(ba1)
         self.bachetRanking = resStat[0][1]['optimal']
         self.bachetCorrelation = g.computeRankingCorrelation(self.bachetRanking)
         self.bachetConsensus = g.computeRankingConsensusQuality(self.bachetRanking)
         self.runTimes['totalTime'] = time() - tt
         if Comments:
-            self.showWeakOrder(WithCoverCredibility=False)
+            self.showTransitiveDigraph(WithCoverCredibility=False)
 
     def computeBoostedRanking(self):
         """

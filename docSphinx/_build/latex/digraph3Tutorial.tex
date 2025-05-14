@@ -67,7 +67,7 @@
 
 
 \title{Tutorials for the Digraph3 Python software resources}
-\date{May 12, 2025}
+\date{May 14, 2025}
 \release{3.13.3}
 \author{Raymond Bisdorff}
 \newcommand{\sphinxlogo}{\sphinxincludegraphics{introDoc3.png}\par}
@@ -1562,7 +1562,7 @@ This is the methodological part of the tutorials.
 
 \item {} 
 \sphinxAtStartPar
-\phantomsection\label{\detokenize{tutorial:id297}}{\hyperref[\detokenize{tutorial:on-weakly-ranking-strategies}]{\sphinxcrossref{On weakly ranking strategies}}} (\autopageref*{\detokenize{tutorial:on-weakly-ranking-strategies}})
+\phantomsection\label{\detokenize{tutorial:id297}}{\hyperref[\detokenize{tutorial:on-weakly-ranking-outranking-digraphs}]{\sphinxcrossref{On weakly ranking outranking digraphs}}} (\autopageref*{\detokenize{tutorial:on-weakly-ranking-outranking-digraphs}})
 
 \item {} 
 \sphinxAtStartPar
@@ -2577,21 +2577,19 @@ Yet, we must as well notice that the cheapest alternative \sphinxstyleemphasis{C
 \subsubsection{Weakly ordering the outranking digraph}
 \label{\detokenize{tutorial:weakly-ordering-the-outranking-digraph}}
 \sphinxAtStartPar
-To get a further insight in the overall strict outranking situations, we may use the \sphinxcode{\sphinxupquote{RankingByChoosingDigraph}} constructor imported from the \DUrole{xref,std,std-ref}{transitiveDigraphs module}, for computing a \sphinxstylestrong{ranking\sphinxhyphen{}by\sphinxhyphen{}choosing} result from the codual, i.e. the strict outranking digraph instance \sphinxstyleemphasis{gcd} (see above).
+To get a further insight in the overall strict outranking situations, we may use the \sphinxcode{\sphinxupquote{WeakBachetRanking}} constructor imported from the \DUrole{xref,std,std-ref}{transitiveDigraphs module}, for computing a \sphinxstylestrong{ranking\sphinxhyphen{}by\sphinxhyphen{}scoring} result with ties from the codual, i.e. the strict outranking digraph instance \sphinxstyleemphasis{gcd} (see above).
 
 \fvset{hllines={, 3, 4, 7,}}%
 \begin{sphinxVerbatim}[commandchars=\\\{\},numbers=left,firstnumber=1,stepnumber=1]
-\PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{k+kn}{from} \PYG{n+nn}{transitiveDigraphs} \PYG{k+kn}{import} \PYG{n}{RankingByChoosingDigraph}
-\PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{rbc} \PYG{o}{=} \PYG{n}{RankingByChoosingDigraph}\PYG{p}{(}\PYG{n}{gcd}\PYG{p}{)}
-\PYG{g+go}{ Threading ...  \PYGZsh{}\PYGZsh{} multiprocessing if 2 cores are available}
-\PYG{g+go}{ Exiting computing threads}
-\PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{rbc}\PYG{o}{.}\PYG{n}{showRankingByChoosing}\PYG{p}{(}\PYG{p}{)}
+\PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{k+kn}{from} \PYG{n+nn}{transitiveDigraphs} \PYG{k+kn}{import} \PYG{n}{WeakBachetRanking}
+\PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{wbr} \PYG{o}{=} \PYG{n}{WeakBachetRanking}\PYG{p}{(}\PYG{n}{gcd}\PYG{p}{,}\PYG{n}{randomized}\PYG{o}{=}\PYG{l+m+mi}{200}\PYG{p}{,}\PYG{n}{seed}\PYG{o}{=}\PYG{l+m+mi}{3}\PYG{p}{)}
+\PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{wbr}\PYG{o}{.}\PYG{n}{showRankingByChoosing}\PYG{p}{(}\PYG{p}{)}
 \PYG{g+go}{ Ranking by Choosing and Rejecting}
-\PYG{g+go}{ 1st ranked [\PYGZsq{}D\PYGZsq{}]}
-\PYG{g+go}{    2nd ranked [\PYGZsq{}C\PYGZsq{}, \PYGZsq{}G\PYGZsq{}]}
-\PYG{g+go}{    2nd last ranked [\PYGZsq{}B\PYGZsq{}, \PYGZsq{}C\PYGZsq{}, \PYGZsq{}E\PYGZsq{}]}
-\PYG{g+go}{ 1st last ranked [\PYGZsq{}A\PYGZsq{}, \PYGZsq{}F\PYGZsq{}]}
-\PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{rbc}\PYG{o}{.}\PYG{n}{exportGraphViz}\PYG{p}{(}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{officeChoiceRanking}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{)}
+\PYG{g+go}{ 1st ranked [\PYGZsq{}A\PYGZsq{}, \PYGZsq{}C\PYGZsq{}, \PYGZsq{}D\PYGZsq{}, \PYGZsq{}G\PYGZsq{}]}
+\PYG{g+go}{    2nd ranked [\PYGZsq{}B\PYGZsq{}, \PYGZsq{}E\PYGZsq{}]}
+\PYG{g+go}{    2nd last ranked [\PYGZsq{}B\PYGZsq{}, \PYGZsq{}E\PYGZsq{}]}
+\PYG{g+go}{ 1st last ranked [\PYGZsq{}F\PYGZsq{}]}
+\PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{wbr}\PYG{o}{.}\PYG{n}{exportGraphViz}\PYG{p}{(}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{officeChoiceRanking}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{)}
 \PYG{g+go}{ *\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{} exporting a dot file for GraphViz tools \PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}*}
 \PYG{g+go}{ Exporting to officeChoiceRanking.dot}
 \PYG{g+go}{ dot \PYGZhy{}Grankdir=TB \PYGZhy{}Tpng officeChoiceRanking.dot \PYGZhy{}o officeChoiceRanking.png}
@@ -2603,13 +2601,13 @@ To get a further insight in the overall strict outranking situations, we may use
 \capstart
 
 \noindent\sphinxincludegraphics[width=200\sphinxpxdimen]{{officeChoiceRanking}.png}
-\caption{Ranking\sphinxhyphen{}by\sphinxhyphen{}choosing from the office choice outranking digraph}\label{\detokenize{tutorial:officechoiceranking}}\end{figure}
+\caption{Weakly ranking\sphinxhyphen{}by\sphinxhyphen{}scoring from the office choice outranking digraph}\label{\detokenize{tutorial:officechoiceranking}}\end{figure}
 
 \sphinxAtStartPar
-In this \sphinxstylestrong{ranking\sphinxhyphen{}by\sphinxhyphen{}choosing} method, where we operate the \sphinxstyleemphasis{epistemic fusion} of iterated (strict) first and last choices, compromise alternative \sphinxstyleemphasis{D} is now ranked before compromise alternative \sphinxstyleemphasis{G} (see Line 7). If the computing node supports multiple processor cores, first and last choosing iterations are run in parallel (see Lines 3\sphinxhyphen{}4). The overall partial ordering result shows again the important fact that the most expensive location \sphinxstyleemphasis{A}, and the cheapest location \sphinxstyleemphasis{C}, both appear incomparable with most of the other alternatives, as is apparent from the Hasse diagram  of the ranking\sphinxhyphen{}by\sphinxhyphen{}choosing result (see \hyperref[\detokenize{tutorial:officechoiceranking}]{Fig.\@ \ref{\detokenize{tutorial:officechoiceranking}}}).
+In this weakly \sphinxstylestrong{ranking\sphinxhyphen{}by\sphinxhyphen{}scoring} method, where we operate the \sphinxstyleemphasis{epistemic fusion} of best correlated \sphinxstyleemphasis{Bachet} rankings (see the advanced topic on \DUrole{xref,std,std-ref}{weakly ranking strategies}), alternatives \sphinxstyleemphasis{A}, \sphinxstyleemphasis{C}, \sphinxstyleemphasis{D} as well as \sphinxstyleemphasis{G} are now all first\sphinxhyphen{}ranked (see Line 7), whereas alternative \sphinxstyleemphasis{F} is clearly last\sphinxhyphen{}ranked. The overall partial ordering result shows again the important fact that the most expensive location \sphinxstyleemphasis{A}, and the cheapest location \sphinxstyleemphasis{C}, both appear incomparable with most of the other alternatives, as is apparent from the Hasse diagram  of the weakly ranking result (see \hyperref[\detokenize{tutorial:officechoiceranking}]{Fig.\@ \ref{\detokenize{tutorial:officechoiceranking}}}).
 
 \sphinxAtStartPar
-The best choice recommendation appears hence depending on the very importance the CEO is attaching to each one of the three decision objectives he is considering. In the setting here, where he considers that \sphinxstyleemphasis{maximizing the future turnover} is the most important objective followed by \sphinxstyleemphasis{minimizing the Costs} and, less important, \sphinxstyleemphasis{maximizing the working conditions}, location \sphinxstyleemphasis{D} represents actually the best compromise. However, if \sphinxstyleemphasis{Costs} do not play much a role, it would be perhaps better to decide to move to the most advantageous location \sphinxstyleemphasis{A}; or if, on the contrary, \sphinxstyleemphasis{Costs} do matter a lot, moving to the cheapest alternative \sphinxstyleemphasis{C} could definitely represent a more convincing recommendation.
+The best choice recommendation appears hence depending on the very importance the CEO is attaching to each one of the three decision objectives he is considering. In the setting here, where he considers that \sphinxstyleemphasis{maximizing the future turnover} is the most important objective followed by \sphinxstyleemphasis{minimizing the Costs} and, less important, \sphinxstyleemphasis{maximizing the working conditions}, locations \sphinxstyleemphasis{D} or \sphinxstyleemphasis{G} represent actually the best choices. However, if \sphinxstyleemphasis{Costs} do not play much a role, it would be perhaps better to decide to move to the most advantageous location \sphinxstyleemphasis{A}; or if, on the contrary, \sphinxstyleemphasis{Costs} do matter a lot, moving to the cheapest alternative \sphinxstyleemphasis{C} could definitely represent a more convincing recommendation.
 
 \sphinxAtStartPar
 It might be worth, as an \sphinxstylestrong{exercise}, to modify these criteria significance weights in the ‘officeChoice.py’ data file in such a way that
@@ -4402,7 +4400,7 @@ The polarised \sphinxstyleemphasis{Bachet} ranking rule only considers the crisp
 \sphinxresetverbatimhllines
 
 \sphinxAtStartPar
-With the \sphinxstyleemphasis{valued} version of the \sphinxstyleemphasis{Bachet} ranking rule we recover a similar ranking as the one obtained with the previous polarised version, only actions ‘\sphinxstyleemphasis{a1}’ and ‘\sphinxstyleemphasis{a8}’ are swapped. Notice by the way in \hyperref[\detokenize{tutorial:valuedbachetranking}]{Listing \ref{\detokenize{tutorial:valuedbachetranking}}} Line 2  that we are sampling here 100 random orderings of the \sphinxstyleemphasis{actions} keys. This way we obtain a better correlated ranking result than with the simple \sphinxstyleemphasis{NetFlows} rule (+739 vs +0.638). The valued \sphinxstyleemphasis{Bachet} ranking is like the polarised \sphinxstyleemphasis{Bachet} rule invariant under the codual transform. However, like the \sphinxstyleemphasis{NetFlows} rule, the valued version of the \sphinxstyleemphasis{bachet} rule is \sphinxstylestrong{not} necessarily \sphinxstylestrong{Condorcet consistent}.
+With the \sphinxstyleemphasis{valued} version of the \sphinxstyleemphasis{Bachet} ranking rule we recover a similar ranking as the one obtained with the previous polarised version, only actions ‘\sphinxstyleemphasis{a1}’ and ‘\sphinxstyleemphasis{a8}’ are swapped. Notice by the way in \hyperref[\detokenize{tutorial:valuedbachetranking}]{Listing \ref{\detokenize{tutorial:valuedbachetranking}}} Line 2  that we are sampling here 100 random orderings of the \sphinxstyleemphasis{actions} keys. This way we obtain a better correlated ranking result than with the simple \sphinxstyleemphasis{NetFlows} rule (+739 vs +0.638). The valued \sphinxstyleemphasis{Bachet} ranking is like the polarised \sphinxstyleemphasis{Bachet} rule invariant under the codual transform. However, like the \sphinxstyleemphasis{NetFlows} rule, the valued version of the \sphinxstyleemphasis{Bachet} rule is \sphinxstylestrong{not} necessarily \sphinxstylestrong{Condorcet consistent}.
 
 \sphinxAtStartPar
 To appreciate now the actual ranking performances of the \sphinxstyleemphasis{ranking\sphinxhyphen{}by\sphinxhyphen{}scoring} rules seen so far, it is useful to consider \sphinxstyleemphasis{Kemeny}’s and \sphinxstyleemphasis{Slater}’s \sphinxstylestrong{optimal fitting} ranking rules.
@@ -4806,11 +4804,14 @@ Back to {\hyperref[\detokenize{tutorial:tutorial-label}]{\sphinxcrossref{\DUrole
 
 
 
-\subsection{On weakly ranking strategies}
-\label{\detokenize{tutorial:on-weakly-ranking-strategies}}\label{\detokenize{tutorial:weakly-ranking-tutorial-label}}
+\subsection{On weakly ranking outranking digraphs}
+\label{\detokenize{tutorial:on-weakly-ranking-outranking-digraphs}}\label{\detokenize{tutorial:weak-ranking-tutorial-label}}
+\sphinxAtStartPar
+In this section, instead of computing linear rankings or orders, we illustrate two ranking strategies for directly computing partial rankings \textendash{}rankings with potential ties\textendash{} from a given outranking digraph, a result we call \sphinxstylestrong{weak rankings}.
 
-\subsubsection{Computing a ranking consensus}
-\label{\detokenize{tutorial:computing-a-ranking-consensus}}
+
+\subsubsection{Computing a ranking consensus from several linear rankings}
+\label{\detokenize{tutorial:computing-a-ranking-consensus-from-several-linear-rankings}}
 \sphinxAtStartPar
 To compare for instance the four rankings we have previously obtained with \sphinxstyleemphasis{ranking\sphinxhyphen{}by\sphinxhyphen{}scoring} strategies, it is worthwhile vizualizing the \sphinxstylestrong{ranking consensus}  one may observe between the \sphinxstyleemphasis{Copeland}, the \sphinxstyleemphasis{NetFlows} and both \sphinxstyleemphasis{Bachet} ranking results. To compute such a ranking consensus we make usage of the \sphinxcode{\sphinxupquote{transitiveDigraphs.RankingsFusionDigraph}} class.
 \sphinxSetupCaptionForVerbatim{Computing a rankings consensus}
@@ -4825,7 +4826,7 @@ To compare for instance the four rankings we have previously obtained with \sphi
 \PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{cop} \PYG{o}{=} \PYG{n}{CopelandOrder}\PYG{p}{(}\PYG{n}{g}\PYG{p}{)}
 \PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{cop}\PYG{o}{.}\PYG{n}{copelandRanking}
 \PYG{g+go}{ [\PYGZsq{}a5\PYGZsq{}, \PYGZsq{}a1\PYGZsq{}, \PYGZsq{}a6\PYGZsq{}, \PYGZsq{}a7\PYGZsq{}, \PYGZsq{}a8\PYGZsq{}, \PYGZsq{}a4\PYGZsq{}, \PYGZsq{}a9\PYGZsq{}, \PYGZsq{}a3\PYGZsq{}, \PYGZsq{}a2\PYGZsq{}]}
-\PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{ba} \PYG{o}{=} \PYG{n}{PolarisedBachetRanking}\PYG{p}{(}\PYG{n}{g}\PYG{p}{,}\PYG{n}{randomized}\PYG{o}{=}\PYG{l+m+mi}{10}\PYG{p}{,}\PYG{n}{seed}\PYG{o}{=}\PYG{l+m+mi}{28}\PYG{p}{)}\PYG{p}{)}
+\PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{ba} \PYG{o}{=} \PYG{n}{PolarisedBachetRanking}\PYG{p}{(}\PYG{n}{g}\PYG{p}{,}\PYG{n}{randomized}\PYG{o}{=}\PYG{l+m+mi}{10}\PYG{p}{,}\PYG{n}{seed}\PYG{o}{=}\PYG{l+m+mi}{28}\PYG{p}{)}
 \PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{ba}\PYG{o}{.}\PYG{n}{bachetRanking}
 \PYG{g+go}{ [\PYGZsq{}a5\PYGZsq{}, \PYGZsq{}a6\PYGZsq{}, \PYGZsq{}a7\PYGZsq{}, \PYGZsq{}a3\PYGZsq{}, \PYGZsq{}a4\PYGZsq{}, \PYGZsq{}a8\PYGZsq{}, \PYGZsq{}a1\PYGZsq{}, \PYGZsq{}a2\PYGZsq{}, \PYGZsq{}a9\PYGZsq{}]}
 \PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{nf} \PYG{o}{=} \PYG{n}{NetFlowsRanking}\PYG{p}{(}\PYG{n}{g}\PYG{p}{)}
@@ -4860,7 +4861,7 @@ To compare for instance the four rankings we have previously obtained with \sphi
 \caption{\sphinxstyleemphasis{Copeland}, \sphinxstyleemphasis{NetFlows} and \sphinxstyleemphasis{Bachet} ranking consensus}\label{\detokenize{tutorial:rankingconsensusfigure}}\end{figure}
 
 \sphinxAtStartPar
-\hyperref[\detokenize{tutorial:rankingconsensusfigure}]{Fig.\@ \ref{\detokenize{tutorial:rankingconsensusfigure}}} makes apparent a ranking consensus with four levels of agreement where action \sphinxstyleemphasis{a5} appears consistently first\sphinxhyphen{}ranked and actions \sphinxstyleemphasis{a2} and \sphinxstyleemphasis{a9}, both, last\sphinxhyphen{}ranked. Notice the unstable rank positions of action \sphinxstyleemphasis{a1} (2, 5, and 7), as well as the unstable rank positions of action \sphinxstyleemphasis{a3} (4 and 8), both a consequence of their contrasted performance records. The epistemic fusion of all four \sphinxstyleemphasis{ranking\sphinxhyphen{}by\sphinxhyphen{}scoring} results delivers here a convincing transitive partial ordering, highly correlated with the given outranking digraph \sphinxstyleemphasis{g} (+0.847), supported by a criteria significance majority of 58\% (see Lines 4\sphinxhyphen{}6 below) .
+\hyperref[\detokenize{tutorial:rankingconsensusfigure}]{Fig.\@ \ref{\detokenize{tutorial:rankingconsensusfigure}}} makes apparent a ranking consensus with four levels of agreement where action \sphinxstyleemphasis{a5} appears consistently first\sphinxhyphen{}ranked and actions \sphinxstyleemphasis{a2} and \sphinxstyleemphasis{a9}, both, last\sphinxhyphen{}ranked. Notice the unstable rank positions of action \sphinxstyleemphasis{a1} (2, 5, and 7), a consequence of its contrasted performance record. The epistemic fusion of all four \sphinxstyleemphasis{ranking\sphinxhyphen{}by\sphinxhyphen{}scoring} results delivers here a convincing transitive partial ordering, highly correlated with the given outranking digraph \sphinxstyleemphasis{g} (+0.847), supported by a criteria significance majority of 58\% (see Lines 4\sphinxhyphen{}6 below) .
 
 \fvset{hllines={, 4, 5, 6,}}%
 \begin{sphinxVerbatim}[commandchars=\\\{\},numbers=left,firstnumber=1,stepnumber=1]
@@ -4877,11 +4878,11 @@ To compare for instance the four rankings we have previously obtained with \sphi
 As we have noticed before, the randomized \sphinxstyleemphasis{Bachet} ranking rules produce multiple rankings of unequal correlation results, respecting more or less the transitive part of the given outranking digraph. A subset of best correlated \sphinxstyleemphasis{Bachet} rankings represent now a suitable sample for computing a convincing ranking consensus.
 
 
-\subsubsection{On weakly ranking with the  Bachet rules}
+\subsubsection{On weakly ranking with the Bachet rules}
 \label{\detokenize{tutorial:on-weakly-ranking-with-the-bachet-rules}}
 \sphinxAtStartPar
-To explore this opportunity, a new \sphinxcode{\sphinxupquote{WeakBachetRanking}} class has been added to the \sphinxcode{\sphinxupquote{transitiveDigraphs}} module. To illustrate its usefulness, let us reconsider the example outranking digraph \sphinxstyleemphasis{g} of \hyperref[\detokenize{tutorial:rankingconsensus}]{Listing \ref{\detokenize{tutorial:rankingconsensus}}}.
-\sphinxSetupCaptionForVerbatim{\sphinxstyleemphasis{Bachet} weak ranking result}
+To implement this second strategy, a new \sphinxcode{\sphinxupquote{WeakBachetRanking}} class has been added to the \sphinxcode{\sphinxupquote{transitiveDigraphs}} module. To illustrate its usefulness, let us reconsider the example outranking digraph \sphinxstyleemphasis{g} of \hyperref[\detokenize{tutorial:rankingconsensus}]{Listing \ref{\detokenize{tutorial:rankingconsensus}}}.
+\sphinxSetupCaptionForVerbatim{Polarised Bachet weak ranking result}
 \def\sphinxLiteralBlockLabel{\label{\detokenize{tutorial:weakbachet3}}}
 \fvset{hllines={, 8, 9, 10, 11, 12, 15,}}%
 \begin{sphinxVerbatim}[commandchars=\\\{\},numbers=left,firstnumber=1,stepnumber=1]
@@ -4893,46 +4894,39 @@ To explore this opportunity, a new \sphinxcode{\sphinxupquote{WeakBachetRanking}
 \PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{wb} \PYG{o}{=} \PYG{n}{WeakBachetRanking}\PYG{p}{(}\PYG{n}{g}\PYG{p}{,}\PYG{n}{randomized}\PYG{o}{=}\PYG{l+m+mi}{100}\PYG{p}{,}\PYG{n}{seed}\PYG{o}{=}\PYG{l+m+mi}{1}\PYG{p}{,}\PYG{n}{maxNbrOfRankings}\PYG{o}{=}\PYG{l+m+mi}{5}\PYG{p}{)}
 \PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{wb}\PYG{o}{.}\PYG{n}{showWeakRanking}\PYG{p}{(}\PYG{p}{)}
 \PYG{g+go}{ Ranking by Choosing and Rejecting}
-\PYG{g+go}{  1st ranked [\PYGZsq{}a5\PYGZsq{}, \PYGZsq{}a7\PYGZsq{}]}
-\PYG{g+go}{    2nd ranked [\PYGZsq{}a1\PYGZsq{}, \PYGZsq{}a3\PYGZsq{}, \PYGZsq{}a6\PYGZsq{}, \PYGZsq{}a8\PYGZsq{}]}
-\PYG{g+go}{    2nd last ranked [\PYGZsq{}a1\PYGZsq{}, \PYGZsq{}a3\PYGZsq{}, \PYGZsq{}a4\PYGZsq{}, \PYGZsq{}a8\PYGZsq{}])}
-\PYG{g+go}{  1st last ranked [\PYGZsq{}a2\PYGZsq{}, \PYGZsq{}a9\PYGZsq{}])}
+\PYG{g+go}{  1st ranked [\PYGZsq{}a5\PYGZsq{}]}
+\PYG{g+go}{    2nd ranked [\PYGZsq{}a6\PYGZsq{}]}
+\PYG{g+go}{    2nd last ranked [\PYGZsq{}a1\PYGZsq{}, \PYGZsq{}a3\PYGZsq{}, \PYGZsq{}a4\PYGZsq{}, \PYGZsq{}a7\PYGZsq{}])}
+\PYG{g+go}{  1st last ranked [\PYGZsq{}a2\PYGZsq{}, \PYGZsq{}a8\PYGZsq{}, \PYGZsq{}a9\PYGZsq{}])}
 \PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{wb}\PYG{o}{.}\PYG{n}{showCorrelation}\PYG{p}{(}\PYG{n}{wb}\PYG{o}{.}\PYG{n}{weakBachetCorrelation}\PYG{p}{)}
 \PYG{g+go}{ Correlation indexes:}
 \PYG{g+go}{  Crisp ordinal correlation  : +0.806}
 \PYG{g+go}{  Epistemic determination    :  0.179}
 \PYG{g+go}{  Bipolar\PYGZhy{}valued equivalence : +0.144}
+\PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{wb}\PYG{o}{.}\PYG{n}{exportGraphViz}\PYG{p}{(}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{weakBachetpol}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{)}
+\PYG{g+go}{ *\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{} exporting a dot file for GraphViz tools \PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}*}
+\PYG{g+go}{  Exporting to weakBachetpol.dot}
+\PYG{g+go}{  dot \PYGZhy{}Grankdir=TB \PYGZhy{}Tpng weakBachetpol.dot \PYGZhy{}o weakBachetpol.png}
 \end{sphinxVerbatim}
 \sphinxresetverbatimhllines
-
-\sphinxAtStartPar
-The nine performance records are grouped into four performance equivalence classes. The resulting \sphinxstyleemphasis{weak ranking} is highly correlated with the common determinated part of the given outranking digraph \sphinxstyleemphasis{g} (+0.862, see Line 15) leading to a relational equivalence supported by a criteria significance majority of nearly 57\%. In \hyperref[\detokenize{tutorial:weakbachet2}]{Fig.\@ \ref{\detokenize{tutorial:weakbachet2}}} below, is shown its \sphinxstyleemphasis{Hasse} diagram.
-
-\begin{sphinxVerbatim}[commandchars=\\\{\},numbers=left,firstnumber=1,stepnumber=1]
-\PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{wb}\PYG{o}{.}\PYG{n}{exportGraphViz}\PYG{p}{(}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{weakBachet2}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{)}
-\PYG{g+go}{ *\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{} exporting a dot file for GraphViz tools \PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}*}
-\PYG{g+go}{ Exporting to rel\PYGZus{}randomperftab\PYGZus{}wk.dot}
-\PYG{g+go}{  0 subGraph \PYGZob{} rank = same; a5; \PYGZcb{}}
-\PYG{g+go}{  1 subGraph \PYGZob{} rank = same; a6; \PYGZcb{}}
-\PYG{g+go}{  2 subGraph \PYGZob{} rank = same; a7; a3; a1; a4; \PYGZcb{}}
-\PYG{g+go}{  3 subGraph \PYGZob{} rank = same; a2; a9; a8; \PYGZcb{}}
-\PYG{g+go}{ dot \PYGZhy{}Grankdir=TB \PYGZhy{}Tpng weakBachet2.dot \PYGZhy{}o weakBachet2.png}
-\end{sphinxVerbatim}
 
 \begin{figure}[H]
 \centering
 \capstart
 
-\noindent\sphinxincludegraphics[width=250\sphinxpxdimen]{{weakBachet2}.png}
-\caption{Weak \sphinxstyleemphasis{Bachet} ranking result}\label{\detokenize{tutorial:weakbachet2}}\end{figure}
+\noindent\sphinxincludegraphics[width=200\sphinxpxdimen]{{weakBachetpol}.png}
+\caption{Polarised Bachet weak ranking result}\label{\detokenize{tutorial:weakbachetpol}}\end{figure}
 
 \sphinxAtStartPar
-In \hyperref[\detokenize{tutorial:weakbachet2}]{Fig.\@ \ref{\detokenize{tutorial:weakbachet2}}} we recover a weak ranking very similar to the previous ranking consensus obtained from of all four \sphinxstyleemphasis{ranking\sphinxhyphen{}by\sphinxhyphen{}scoring} results (see \hyperref[\detokenize{tutorial:rankingconsensusfigure}]{Fig.\@ \ref{\detokenize{tutorial:rankingconsensusfigure}}}). As the \sphinxcode{\sphinxupquote{WeakBachetRanking}} works by default with the polarised version of the \sphinxstyleemphasis{Bachet} rule, the weak ranking result obtained above represents in fact a ranking consensus respecting the actual transitive parts of the given outranking digraph (see \DUrole{xref,std,std-ref}{the advanced topic} dedicated to the \sphinxstyleemphasis{Bachet} ranking rules). The \sphinxcode{\sphinxupquote{WeakBachetRanking}} provides a \sphinxstyleemphasis{Polarised} flag allowing tu use instead the valued version of the \sphinxstyleemphasis{Bachet} rule.
-\sphinxSetupCaptionForVerbatim{\sphinxstyleemphasis{Bachet} weak ranking result}
+In \hyperref[\detokenize{tutorial:weakbachetpol}]{Fig.\@ \ref{\detokenize{tutorial:weakbachetpol}}} the nine performance records are grouped into four performance equivalence classes. The resulting \sphinxstyleemphasis{weak ranking} is highly correlated with the common determinated part of the given outranking digraph \sphinxstyleemphasis{g} (+0.806, see Line 15) leading to a relational equivalence supported by a criteria significance majority of 57\%. we recover above a weak ranking very similar to the previous ranking consensus obtained from of all four \sphinxstyleemphasis{ranking\sphinxhyphen{}by\sphinxhyphen{}scoring} results (see \hyperref[\detokenize{tutorial:rankingconsensusfigure}]{Fig.\@ \ref{\detokenize{tutorial:rankingconsensusfigure}}}).
+
+\sphinxAtStartPar
+As the \sphinxcode{\sphinxupquote{WeakBachetRanking}} constructor uses by default the \sphinxstyleemphasis{polarised} version of the \sphinxstyleemphasis{Bachet} rule, the weak ranking result obtained in \hyperref[\detokenize{tutorial:weakbachetpol}]{Fig.\@ \ref{\detokenize{tutorial:weakbachetpol}}} represents in fact a ranking consensus respecting the actual \sphinxstylestrong{transitive parts} of the given outranking digraph (see \DUrole{xref,std,std-ref}{the advanced topic} dedicated to the \sphinxstyleemphasis{Bachet} ranking rules). The \sphinxcode{\sphinxupquote{WeakBachetRanking}} now provides a \sphinxstylestrong{Polarised == False} flag allowing tu use instead the \sphinxstylestrong{valued} version of the \sphinxstyleemphasis{Bachet} rule.
+\sphinxSetupCaptionForVerbatim{Valued Bachet weak ranking result}
 \def\sphinxLiteralBlockLabel{\label{\detokenize{tutorial:weakbachet4}}}
 \fvset{hllines={, 1, 2, 5, 6, 7, 8, 11,}}%
 \begin{sphinxVerbatim}[commandchars=\\\{\},numbers=left,firstnumber=1,stepnumber=1]
-\PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{wbv} \PYG{o}{=} \PYG{n}{WeakBachetRanking}\PYG{p}{(}\PYG{n}{g}\PYG{p}{,}\PYG{n}{Polarise}\PYG{o}{=}\PYG{k+kc}{False}\PYG{p}{,}
+\PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{wbv} \PYG{o}{=} \PYG{n}{WeakBachetRanking}\PYG{p}{(}\PYG{n}{g}\PYG{p}{,}\PYG{n}{Polarised}\PYG{o}{=}\PYG{k+kc}{False}\PYG{p}{,}
 \PYG{g+gp}{... }           \PYG{n}{randomized}\PYG{o}{=}\PYG{l+m+mi}{100}\PYG{p}{,}\PYG{n}{seed}\PYG{o}{=}\PYG{l+m+mi}{1}\PYG{p}{,}\PYG{n}{maxNbrOfRankings}\PYG{o}{=}\PYG{l+m+mi}{5}\PYG{p}{)}
 \PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{wbv}\PYG{o}{.}\PYG{n}{showWeakRanking}\PYG{p}{(}\PYG{p}{)}
 \PYG{g+go}{ Ranking by Choosing and Rejecting}
@@ -4940,19 +4934,30 @@ In \hyperref[\detokenize{tutorial:weakbachet2}]{Fig.\@ \ref{\detokenize{tutorial
 \PYG{g+go}{    2nd ranked [\PYGZsq{}a7\PYGZsq{}],}
 \PYG{g+go}{    2nd last ranked [\PYGZsq{}\PYGZsq{}a3\PYGZsq{}, \PYGZsq{}a8\PYGZsq{}])}
 \PYG{g+go}{  1st last ranked [\PYGZsq{}a1\PYGZsq{}, \PYGZsq{}a2\PYGZsq{}, \PYGZsq{}a4\PYGZsq{}, \PYGZsq{}a9\PYGZsq{}])}
-\PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{wb}\PYG{o}{.}\PYG{n}{showCorrelation}\PYG{p}{(}\PYG{n}{wb}\PYG{o}{.}\PYG{n}{weakBachetCorrelation}\PYG{p}{)}
+\PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{wbv}\PYG{o}{.}\PYG{n}{showCorrelation}\PYG{p}{(}\PYG{n}{wbv}\PYG{o}{.}\PYG{n}{weakBachetCorrelation}\PYG{p}{)}
 \PYG{g+go}{ Correlation indexes:}
 \PYG{g+go}{  Crisp ordinal correlation  : +0.888}
 \PYG{g+go}{  Epistemic determination    :  0.157}
 \PYG{g+go}{  Bipolar\PYGZhy{}valued equivalence : +0.139}
+\PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{wbv}\PYG{o}{.}\PYG{n}{exportGraphViz}\PYG{p}{(}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{weakBachetval}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{)}
+\PYG{g+go}{ *\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{} exporting a dot file for GraphViz tools \PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}*}
+\PYG{g+go}{  Exporting to weakBachetval.dot}
+\PYG{g+go}{  dot \PYGZhy{}Grankdir=TB \PYGZhy{}Tpng weakBachetval.dot \PYGZhy{}o weakBachetval.png}
 \end{sphinxVerbatim}
 \sphinxresetverbatimhllines
 
-\sphinxAtStartPar
-In \hyperref[\detokenize{tutorial:weakbachet4}]{Listing \ref{\detokenize{tutorial:weakbachet4}}} we observe a weak ordering of the nine performance records taking into account not only the polarised relational structure, but also the individual arc determinations of the given outranking digraph.
+\begin{figure}[H]
+\centering
+\capstart
+
+\noindent\sphinxincludegraphics[width=200\sphinxpxdimen]{{weakBachetval}.png}
+\caption{valued Bachet weak ranking result}\label{\detokenize{tutorial:weakbachetval}}\end{figure}
 
 \sphinxAtStartPar
-This way, the \sphinxstyleemphasis{Bachet} ranking rules deliver very effective tools for constructing convincing weak rankings providing by the way a pomputationally effective way for computing first or last choice recommendation, actually the initial and terminal kernels of the weak rankings. Mind however that the \sphinxstyleemphasis{Bachet} ranking rules can only handle small outranking digraphs (\textless{}50). For larger (\textgreater{}50) or big (\textgreater{}1000) outranking digraphs it is opportune to sort the performance records into relative or absolute performance \sphinxstylestrong{quantile equivalence classes}.
+In \hyperref[\detokenize{tutorial:weakbachet4}]{Listing \ref{\detokenize{tutorial:weakbachet4}}} Lines 5\sphinxhyphen{}8 we observe a weak ordering of the nine performance records taking into account not only the polarised relational structure, but also the \sphinxstylestrong{epistemic determination} of the given outranking digraph. And the ordinal correlation with the given outranking digraph gets even better: +0.888 vs +0.806, supported by a similar criteria significance of 57\%. It is worthwhile noticing in the corresponding \hyperref[\detokenize{tutorial:weakbachetval}]{Fig.\@ \ref{\detokenize{tutorial:weakbachetval}}} that alternative \sphinxstyleemphasis{a1} appears incomparable to most of the other alternatives, a fact already made apparent in \hyperref[\detokenize{tutorial:rankingconsensusfigure}]{Fig.\@ \ref{\detokenize{tutorial:rankingconsensusfigure}}}.
+
+\sphinxAtStartPar
+This way, the \sphinxstyleemphasis{Bachet} ranking rules deliver very effective tools for constructing convincing weak rankings providing by the way an effective way for computing first or last choice recommendations, actually the initial and terminal kernels of such weak rankings. Mind however that the \sphinxstyleemphasis{Bachet} ranking rules can only handle small outranking digraphs ( \textless{} 50 ). For larger ( \textgreater{} 50 ) or big ( \textgreater{} 1000 ) outranking digraphs it is opportune to turn to order statistics and compute weak rankings by sorting the multicriteria performance records into relative or absolute performance \sphinxstylestrong{quantile equivalence classes}.
 
 \sphinxAtStartPar
 This order statistics based \sphinxstylestrong{rating} approach is presented in the following Sections.

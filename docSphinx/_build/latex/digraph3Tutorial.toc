@@ -60,16 +60,16 @@
 \contentsline {subsubsection}{Optimal \sphinxstyleemphasis {Slater} rankings}{90}{subsubsection*.123}%
 \contentsline {subsubsection}{\sphinxstyleemphasis {Kohler}’s ranking\sphinxhyphen {}by\sphinxhyphen {}choosing rule}{92}{subsubsection*.124}%
 \contentsline {subsubsection}{\sphinxstyleemphasis {Tideman}’s ranked\sphinxhyphen {}pairs rule}{94}{subsubsection*.125}%
-\contentsline {subsection}{\numberline {2.5}On weakly ranking strategies}{95}{subsection.2.5}%
-\contentsline {subsubsection}{Computing a ranking consensus}{95}{subsubsection*.126}%
+\contentsline {subsection}{\numberline {2.5}On weakly ranking outranking digraphs}{95}{subsection.2.5}%
+\contentsline {subsubsection}{Computing a ranking consensus from several linear rankings}{95}{subsubsection*.126}%
 \contentsline {subsubsection}{On weakly ranking with the Bachet rules}{97}{subsubsection*.127}%
-\contentsline {subsection}{\numberline {2.6}Rating into relative performance quantiles}{99}{subsection.2.6}%
+\contentsline {subsection}{\numberline {2.6}Rating into relative performance quantiles}{100}{subsection.2.6}%
 \contentsline {subsubsection}{Performance quantile sorting on a single criterion}{100}{subsubsection*.131}%
 \contentsline {subsubsection}{Rating\sphinxhyphen {}by\sphinxhyphen {}sorting into relative multicriteria performance quantiles}{101}{subsubsection*.132}%
-\contentsline {subsubsection}{Rating\sphinxhyphen {}by\sphinxhyphen {}ranking with relative quantile limits}{104}{subsubsection*.133}%
-\contentsline {subsection}{\numberline {2.7}Rating with learned performance quantile norms}{105}{subsection.2.7}%
+\contentsline {subsubsection}{Rating\sphinxhyphen {}by\sphinxhyphen {}ranking with relative quantile limits}{105}{subsubsection*.133}%
+\contentsline {subsection}{\numberline {2.7}Rating with learned performance quantile norms}{106}{subsection.2.7}%
 \contentsline {subsubsection}{Introduction}{106}{subsubsection*.137}%
-\contentsline {subsubsection}{Incremental learning of historical performance quantiles}{106}{subsubsection*.138}%
+\contentsline {subsubsection}{Incremental learning of historical performance quantiles}{107}{subsubsection*.138}%
 \contentsline {subsubsection}{Rating\sphinxhyphen {}by\sphinxhyphen {}ranking new performances with quantile norms}{110}{subsubsection*.139}%
 \contentsline {subsection}{\numberline {2.8}Computing the winner of an election with the \sphinxstyleliteralintitle {\sphinxupquote {votingProfiles}} module}{118}{subsection.2.8}%
 \contentsline {subsubsection}{Linear voting profiles}{119}{subsubsection*.145}%
