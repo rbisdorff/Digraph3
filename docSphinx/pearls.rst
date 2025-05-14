@@ -3409,57 +3409,53 @@ Mind finally that the *Bachet* ranking rule, even of comparable complexity :math
 
 In Python, the range of integers is luckily only limited by the available CPU memory and the *orderLimit* parameter may be adjusted to tackle, if required, outranking digraphs of orders > 50. The randomized *Bachet* ranking rule might however need in these cases a considerable sampling size in order to achieve convincingly correlated ranking results. But this issue has still to be explored.
 
-The Bachet rule: a new method for weakly ranking 
-................................................
+The Bachet rule: a new method for partially ranking 
+...................................................
 
-As we have noticed before, the randomized *Bachet* ranking rule produces multiple rankings of unequal correlation results, respecting more or less the transitive part of the given outranking digraph. If we collect now a small subset of the best correlated rankings, we can use the :py:class:`transitiveDigraphs.RankingsFusionDigraph` class for constructing, by epistemic disjunctive fusion of these selected rankings, a weak *Bachet* ranking result --a ranking with ties-- showing in fact the transitive part of the given polarised outranking digraph. 
+As we have noticed before, the randomized *Bachet* ranking rule produces multiple rankings of unequal correlation results, respecting more or less the transitive part of the given outranking digraph. If we collect now a small subset of the best correlated rankings, we can use the :py:class:`transitiveDigraphs.RankingsFusionDigraph` class for constructing, by epistemic disjunctive fusion of these selected rankings, a partial *Bachet* ranking result --a transitive asymmetric digraph with indeterminate reflexive relations-- showing in fact the transitive part of the given polarised outranking digraph. 
 
-To explore this opportunity, a new :py:class:`~transitiveDigraphs.WeakBachetRanking` class has been added to the :py:mod:`transitiveDigraphs` module. To illustrate its usefulness, let us reconsider the example outranking digraph *g* of :numref:`optimisingBachet`. 
+To explore this opportunity, a new :py:class:`~transitiveDigraphs.PartialBachetRanking` class has been added to the :py:mod:`transitiveDigraphs` module. To illustrate its usefulness, let us reconsider the example outranking digraph *g* of :numref:`optimisingBachet`. 
 
 .. code-block:: pycon
-   :caption: *Bachet* weak ranking result
-   :name: weakBachet1
-   :emphasize-lines: 3-4,7-10,13
+   :caption: Partial *Bachet* ranking result
+   :name: partialBachet0
+   :emphasize-lines: 3-4,7-10,13,15
 
    >>> from outrankingDigraphs import RandomBipolarOutrankingDigraph
    >>> g = RandomBipolarOutrankingDigraph(numberOfActions=9,seed=1)
-   >>> from transitiveDigraphs import WeakBachetRanking
-   >>> wb = WeakBachetRanking(g,randomized=100,seed=1,maxNbrOfRankings=5)
-   >>> wb.showWeakRanking()
+   >>> from transitiveDigraphs import PartialBachetRanking
+   >>> wb = PartialBachetRanking(g,randomized=10,seed=4,maxNbrOfRankings=5)
+   >>> wb.showTransitiveDigraph()
     Ranking by Choosing and Rejecting
-     1st ranked ['a2', 'a5']
-       2nd ranked ['a6', 'a8', 'a9']
-       2nd last ranked ['a6', 'a8', 'a9'])
-     1st last ranked ['a1', 'a3', 'a4', 'a7'])
-   >>> wb.showCorrelation(wb.weakBachetCorrelation)
+     1st ranked ['a2', 'a5', 'a9']
+       2nd ranked ['a3', 'a6', 'a8']
+       2nd last ranked ['a3', 'a6', 'a8'])
+     1st last ranked ['a1', 'a4', 'a7'])
+   >>> g.computeOrdinalCorrelation(wb)
     Correlation indexes:
-     Crisp ordinal correlation  : +0.818
-     Epistemic determination    :  0.237
-     Bipolar-valued equivalence : +0.194
+     Crisp ordinal correlation  : +0.872
+     Epistemic determination    :  0.228
+     Bipolar-valued equivalence : +0.198
 
-The nine performance records are grouped into three performance equivalence classes. The resulting *weak ranking* is consistent with the optimal *Kemeny* ranking ['a2', 'a5', 'a9', 'a6', 'a8', 'a4', 'a3', 'a7', 'a1'] (see :numref:`optimalKemeny1` Line 4) and is therefore highly correlated with the common determinated part of the given outranking digraph *g* (+0.818, see Line 13) leading to a relational equivalence supported by a criteria significance majority of nearly 60%. In :numref:`weakBachet` below, is shown its *Hasse* diagram. 
+The nine performance records are grouped into three performance equivalence classes. The resulting *partial ranking* is, except the rankings of alternatives *a3* and *a4*, consistent with the optimal *Kemeny* ranking ['a2', 'a5', 'a9', 'a6', 'a8', 'a4', 'a3', 'a7', 'a1'] (see :numref:`optimalKemeny1` Line 4) and is therefore highly correlated (+0.872) with the common determinated part of the given outranking digraph *g*  leading to a relational equivalence between both digraphs supported by a criteria significance majority of nearly 60% (see :numref:`partialBachet0` Line 13 and 15). In :numref:`partialBachet1` below, is shown its *Hasse* diagram. 
 
 .. code-block:: pycon
 
-   >>> wb.exportGraphViz('weakBachet')
+   >>> wb.exportGraphViz('partialBachet1')
     *---- exporting a dot file for GraphViz tools ---------*
-    Exporting to rel_randomperftab_wk.dot
-     0 { rank = 0; a2; a5; }
-     1 { rank = 1; a6; a9; a8; }
-     2 { rank = 2; a7; a4; a1; a3; }
-    dot -Grankdir=TB -Tpng weakBachet.dot -o weakBachet.png
+    dot -Grankdir=TB -Tpng partialBachet1.dot -o partialBachet1.png
 
-.. Figure:: weakBachet.png
-   :name: weakBachet
-   :alt: weak Bachet ranking
-   :width: 250 px
+.. Figure:: partialBachet1.png
+   :name: partialBachet1
+   :alt: partial Bachet ranking
+   :width: 350 px
    :align: center
 
-   Weak *Bachet* ranking result 
+   Partial *Bachet* ranking result 
 
-A Monte Carlo experiment with the same 500 random Cost-Benefit performance tableaux, reporting the grades obtained by 20 decision actions on 13 criteria already used before, shows with *randomized=100* and *maxNbrOfRankings=5* settings a median weak ranking correlation of +0.936 (min. +0.760) on a common median determination part of 63%% (min. 55%) of the given outranking digraphs. The valued median equivalence of the weak rankings with the given outranking digraphs is hence supported by a median criteria significance majority of 62% (min. 54%).
+A Monte Carlo experiment with the same 500 random Cost-Benefit performance tableaux, reporting the grades obtained by 20 decision actions on 13 criteria already used before, shows with *randomized=100* and *maxNbrOfRankings=5* settings a median partial ranking correlation of +0.936 (min. +0.760) on a common median determination part of 63%% (min. 55%) of the given outranking digraphs. The valued median equivalence of the partial rankings with the given outranking digraphs is hence supported by a median criteria significance majority of 62% (min. 54%).
 
-The :py:class:`~transitiveDigraphs.WeakBachetRanking` class provides this way a valuable and effective method for computing *weak rankings* from given bipolar-valued outranking digraphs. The weak *Bachet* ranking digraph represents in fact the directed version of a **comparability** graph, i.e. :ref:`a Berge or perfect graph <Permutation-Tutorial-label>` . We have this way found an algorithm for computing a *transitively orientable* graph, close in the :ref:`bipolar-valued relational equivalence <OrdinalCorrelation-Tutorial-label>` sense to the transitive part of a given bipolar-valued outranking digraph.
+The :py:class:`~transitiveDigraphs.PartialBachetRanking` class provides this way a valuable and effective method for computing *partial rankings* from given bipolar-valued outranking digraphs. The partial *Bachet* ranking digraph represents in fact the directed version of a **comparability** graph, i.e. :ref:`a Berge or perfect graph <Permutation-Tutorial-label>` . We have this way found an algorithm for computing a *transitively orientable* graph, close in the :ref:`bipolar-valued relational equivalence <OrdinalCorrelation-Tutorial-label>` sense to the transitive part of a given bipolar-valued outranking digraph.
 
 .. code-block:: pycon
 
@@ -3467,13 +3463,13 @@ The :py:class:`~transitiveDigraphs.WeakBachetRanking` class provides this way a 
    >>> cg.isComparabilityGraph()
     True
 
-*Weak Bachet* rankings make hence apparent the actual **transitive part** of outranking relations. This interesting finding opens the way to a new design of first- or last-choice recommender algorithms avoiding the necessity to arbitrarily break up potential chordless outranking circuits. The first and last levels of a topological sort of weak rankings --their **initial and terminal kernels**-- give indeed convincing candidates for a *first-choice*, respectively a *last-choice* recommendation (see :numref:`weakBachet`). An opportunity yet to be explored.
+*Partial Bachet* rankings make hence apparent the actual **transitive part** of outranking relations. This interesting finding opens the way to a new design of first- or last-choice recommender algorithms avoiding the necessity to arbitrarily break up potential chordless outranking circuits. The first and last levels of a topological sort of weak rankings --their **initial and terminal kernels**-- give indeed convincing candidates for a *first-choice*, respectively a *last-choice* recommendation (see :numref:`partialBachet0` Lines 7-10). An opportunity yet to be explored.
 
 Computing *kernels* in digraphs is the subject of the next Section.
 
 .. note::
    
-   The weak *Bachet* ranking rule illustrates convincingly the benefit one may obtain when computing, not in a binary {0,1} bit world like today all bit-wise computing devices, but instead in a bipolar-valued {-1,0,+1} world with **sbit-wise Bachet computers**. The power of the epistemic disjunctive fusion operator, for instance, is indeed impressive. When two arguments prove the *Truthfullness* of a logical statement, their fusion will be **True**. When two arguments prove the **Falseness** of the staement, their fusion will be **False**, However, when they provide conjointly a proof of Falseness and and a proof of Thruthfullness, their fusion will be **indeterminate** (zero knowledge). It is worthwhile noticing again the essential computational role this indeterminate **zero** value is taking on in such a *Bachet* computer.
+   The partial *Bachet* ranking rule illustrates convincingly the benefit one may obtain when computing, not in a binary {0,1} bit world like today all bit-wise computing devices, but instead in a bipolar-valued {-1,0,+1} world with **sbit-wise Bachet computers**. The power of the epistemic disjunctive fusion operator, for instance, is indeed impressive. When two arguments prove the *Truthfullness* of a logical statement, their fusion will be **True**. When two arguments prove the **Falseness** of the staement, their fusion will be **False**, However, when they provide conjointly a proof of Falseness and and a proof of Thruthfullness, their fusion will be **indeterminate** (zero knowledge). It is worthwhile noticing again the essential computational role this indeterminate **zero** value is taking on in such a *Bachet* computer.
 
 ..............................................
 

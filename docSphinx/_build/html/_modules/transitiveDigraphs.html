@@ -2050,9 +2050,9 @@
 
 
 
-<div class="viewcode-block" id="WeakBachetRanking">
-<a class="viewcode-back" href="../techDoc.html#transitiveDigraphs.WeakBachetRanking">[docs]</a>
-<span class="k">class</span> <span class="nc">WeakBachetRanking</span><span class="p">(</span><span class="n">TransitiveDigraph</span><span class="p">):</span>
+<div class="viewcode-block" id="PartialBachetRanking">
+<a class="viewcode-back" href="../techDoc.html#transitiveDigraphs.PartialBachetRanking">[docs]</a>
+<span class="k">class</span> <span class="nc">PartialBachetRanking</span><span class="p">(</span><span class="n">TransitiveDigraph</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Uses the :py:class:`linearOrders.BachetRanking` class for generating a number</span>
 <span class="sd">    of best correlated Bachet rankings.</span>
@@ -2069,10 +2069,10 @@
 <span class="sd">    ...                 numberOfCriteria=13,seed=100)</span>
 <span class="sd">    &gt;&gt;&gt; from outrankingDigraphs import BipolarOutrankingDigraph</span>
 <span class="sd">    &gt;&gt;&gt; g = BipolarOutrankingDigraph(t)</span>
-<span class="sd">    &gt;&gt;&gt; from transitiveDigraphs import WeakBachetRanking</span>
-<span class="sd">    &gt;&gt;&gt; wg = WeakBachetRanking(g,randomized=100,seed=100,</span>
+<span class="sd">    &gt;&gt;&gt; from transitiveDigraphs import PartialBachetRanking</span>
+<span class="sd">    &gt;&gt;&gt; wg = PartialBachetRanking(g,randomized=100,seed=100,</span>
 <span class="sd">    ...                       maxNbrOfRankings=10)</span>
-<span class="sd">    &gt;&gt;&gt; wg.showWeakRanking(WithCoverCredibility=True)</span>
+<span class="sd">    &gt;&gt;&gt; wg.showTransitiveDigraph(WithCoverCredibility=True)</span>
 <span class="sd">     Ranking by Choosing and Rejecting</span>
 <span class="sd">      1st ranked [&#39;a04&#39;] (1.00)</span>
 <span class="sd">        2nd ranked [&#39;a02&#39;, &#39;a05&#39;, &#39;a06&#39;, &#39;a11&#39;, &#39;a18&#39;, &#39;a20&#39;] (0.70)</span>
@@ -2139,8 +2139,8 @@
         <span class="k">if</span> <span class="n">Comments</span><span class="p">:</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">showWeakOrder</span><span class="p">(</span><span class="n">WithCoverCredibility</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
 
-<div class="viewcode-block" id="WeakBachetRanking.computeBoostedRanking">
-<a class="viewcode-back" href="../techDoc.html#transitiveDigraphs.WeakBachetRanking.computeBoostedRanking">[docs]</a>
+<div class="viewcode-block" id="PartialBachetRanking.computeBoostedRanking">
+<a class="viewcode-back" href="../techDoc.html#transitiveDigraphs.PartialBachetRanking.computeBoostedRanking">[docs]</a>
     <span class="k">def</span> <span class="nf">computeBoostedRanking</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Renders an ordred list of decision actions ranked in</span>
@@ -2162,8 +2162,8 @@
         <span class="k">return</span> <span class="n">boostedRanking</span></div>
 
 
-<div class="viewcode-block" id="WeakBachetRanking.computeBoostedOrdering">
-<a class="viewcode-back" href="../techDoc.html#transitiveDigraphs.WeakBachetRanking.computeBoostedOrdering">[docs]</a>
+<div class="viewcode-block" id="PartialBachetRanking.computeBoostedOrdering">
+<a class="viewcode-back" href="../techDoc.html#transitiveDigraphs.PartialBachetRanking.computeBoostedOrdering">[docs]</a>
     <span class="k">def</span> <span class="nf">computeBoostedOrdering</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Renders an ordred list of decision actions ranked in</span>
@@ -2185,8 +2185,8 @@
         <span class="k">return</span> <span class="n">boostedOrdering</span></div>
 
 
-<div class="viewcode-block" id="WeakBachetRanking.exportGraphViz">
-<a class="viewcode-back" href="../techDoc.html#transitiveDigraphs.WeakBachetRanking.exportGraphViz">[docs]</a>
+<div class="viewcode-block" id="PartialBachetRanking.exportGraphViz">
+<a class="viewcode-back" href="../techDoc.html#transitiveDigraphs.PartialBachetRanking.exportGraphViz">[docs]</a>
     <span class="k">def</span> <span class="nf">exportGraphViz</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">fileName</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span><span class="n">ArrowHeads</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
                        <span class="n">Comments</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span><span class="n">graphType</span><span class="o">=</span><span class="s1">&#39;png&#39;</span><span class="p">,</span>
                        <span class="n">graphSize</span><span class="o">=</span><span class="s1">&#39;7,7&#39;</span><span class="p">,</span><span class="n">bgcolor</span><span class="o">=</span><span class="s1">&#39;cornsilk&#39;</span><span class="p">,</span>
@@ -2394,7 +2394,7 @@
 <span class="c1">## </span>
     <span class="n">pt</span> <span class="o">=</span> <span class="n">RandomCBPerformanceTableau</span><span class="p">(</span><span class="n">numberOfActions</span><span class="o">=</span><span class="mi">9</span><span class="p">,</span><span class="n">numberOfCriteria</span><span class="o">=</span><span class="mi">13</span><span class="p">,</span><span class="n">seed</span><span class="o">=</span><span class="mi">100</span><span class="p">)</span>
     <span class="n">g</span> <span class="o">=</span> <span class="n">BipolarOutrankingDigraph</span><span class="p">(</span><span class="n">pt</span><span class="p">)</span>
-    <span class="n">wbg</span> <span class="o">=</span> <span class="n">WeakBachetRanking</span><span class="p">(</span><span class="n">g</span><span class="p">,</span><span class="n">seed</span><span class="o">=</span><span class="mi">100</span><span class="p">,</span><span class="n">Polarised</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span><span class="n">Comments</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+    <span class="n">wbg</span> <span class="o">=</span> <span class="n">PartialBachetRanking</span><span class="p">(</span><span class="n">g</span><span class="p">,</span><span class="n">seed</span><span class="o">=</span><span class="mi">100</span><span class="p">,</span><span class="n">Polarised</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span><span class="n">Comments</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
     <span class="n">wbg</span><span class="o">.</span><span class="n">showTransitiveDigraph</span><span class="p">(</span><span class="n">WithCoverCredibility</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
     <span class="c1">#wcg = WeakCopelandOrder(g,WithFairestRanking=True)</span>
     <span class="c1">#print(wcg.copelandPermutations)</span>
@@ -2415,7 +2415,7 @@
 
   <div role="contentinfo">
     <p>&#169; Copyright 2012-2025, Raymond Bisdorff.
-      <span class="lastupdated">Last updated on May 10, 2025.
+      <span class="lastupdated">Last updated on May 14, 2025.
       </span></p>
   </div>
 

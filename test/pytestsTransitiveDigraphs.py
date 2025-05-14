@@ -8,16 +8,16 @@ from outrankingDigraphs import *
 from transitiveDigraphs import *
 from time import time
 
-def testWeakBachetRanking():
+def testPartialBachetRanking():
     print('=== >>> testing the weak ranking contruction')
     from randomPerfTabs import RandomCBPerformanceTableau
     pt = RandomCBPerformanceTableau(numberOfActions=20,numberOfCriteria=13,seed=100)
     g = BipolarOutrankingDigraph(pt)
-    wbg = WeakBachetRanking(g,seed=100,Polarised=True,Comments=True)
-    wbg.showWeakRanking(WithCoverCredibility=True)
+    wbg = PartialBachetRanking(g,seed=100,Polarised=True,Comments=True)
+    wbg.showTransitiveDigraph(WithCoverCredibility=True)
     wbg.exportGraphViz('weakpolarisedBachet')
-    wbg = WeakBachetRanking(g,seed=100,Polarised=False,Comments=True)
-    wbg.showWeakRanking(WithCoverCredibility=True)
+    wbg = PartialBachetRanking(g,seed=100,Polarised=False,Comments=True)
+    wbg.showTransitiveDigraph(WithCoverCredibility=True)
     wbg.exportGraphViz('weakValuedBachet')
     
 def testRankingByChoosingWithKernels():

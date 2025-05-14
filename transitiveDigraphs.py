@@ -1865,7 +1865,7 @@ class WeakNetFlowsOrder(TransitiveDigraph):
                 print('%s \t %.2f' %(x[1],x[0]))
 
 
-class WeakBachetRanking(TransitiveDigraph):
+class PartialBachetRanking(TransitiveDigraph):
     """
     Uses the :py:class:`linearOrders.BachetRanking` class for generating a number
     of best correlated Bachet rankings.
@@ -1882,10 +1882,10 @@ class WeakBachetRanking(TransitiveDigraph):
     ...                 numberOfCriteria=13,seed=100)
     >>> from outrankingDigraphs import BipolarOutrankingDigraph
     >>> g = BipolarOutrankingDigraph(t)
-    >>> from transitiveDigraphs import WeakBachetRanking
-    >>> wg = WeakBachetRanking(g,randomized=100,seed=100,
+    >>> from transitiveDigraphs import PartialBachetRanking
+    >>> wg = PartialBachetRanking(g,randomized=100,seed=100,
     ...                       maxNbrOfRankings=10)
-    >>> wg.showWeakRanking(WithCoverCredibility=True)
+    >>> wg.showTransitiveDigraph(WithCoverCredibility=True)
      Ranking by Choosing and Rejecting
       1st ranked ['a04'] (1.00)
         2nd ranked ['a02', 'a05', 'a06', 'a11', 'a18', 'a20'] (0.70)
@@ -2185,7 +2185,7 @@ if __name__ == "__main__":
 ## 
     pt = RandomCBPerformanceTableau(numberOfActions=9,numberOfCriteria=13,seed=100)
     g = BipolarOutrankingDigraph(pt)
-    wbg = WeakBachetRanking(g,seed=100,Polarised=False,Comments=False)
+    wbg = PartialBachetRanking(g,seed=100,Polarised=False,Comments=False)
     wbg.showTransitiveDigraph(WithCoverCredibility=True)
     #wcg = WeakCopelandOrder(g,WithFairestRanking=True)
     #print(wcg.copelandPermutations)

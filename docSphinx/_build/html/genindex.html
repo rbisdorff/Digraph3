@@ -371,9 +371,9 @@
       <ul>
         <li><a href="techDoc.html#sparseOutrankingDigraphs.PreRankedOutrankingDigraph.computeBoostedOrdering">(sparseOutrankingDigraphs.PreRankedOutrankingDigraph method)</a>
 </li>
-        <li><a href="techDoc.html#transitiveDigraphs.TransitiveDigraph.computeBoostedOrdering">(transitiveDigraphs.TransitiveDigraph method)</a>
+        <li><a href="techDoc.html#transitiveDigraphs.PartialBachetRanking.computeBoostedOrdering">(transitiveDigraphs.PartialBachetRanking method)</a>
 </li>
-        <li><a href="techDoc.html#transitiveDigraphs.WeakBachetRanking.computeBoostedOrdering">(transitiveDigraphs.WeakBachetRanking method)</a>
+        <li><a href="techDoc.html#transitiveDigraphs.TransitiveDigraph.computeBoostedOrdering">(transitiveDigraphs.TransitiveDigraph method)</a>
 </li>
       </ul></li>
       <li><a href="techDoc.html#cSparseIntegerOutrankingDigraphs.SparseIntegerOutrankingDigraph.computeBoostedRanking">computeBoostedRanking() (cSparseIntegerOutrankingDigraphs.SparseIntegerOutrankingDigraph method)</a>
@@ -381,7 +381,7 @@
       <ul>
         <li><a href="techDoc.html#sparseOutrankingDigraphs.PreRankedOutrankingDigraph.computeBoostedRanking">(sparseOutrankingDigraphs.PreRankedOutrankingDigraph method)</a>
 </li>
-        <li><a href="techDoc.html#transitiveDigraphs.WeakBachetRanking.computeBoostedRanking">(transitiveDigraphs.WeakBachetRanking method)</a>
+        <li><a href="techDoc.html#transitiveDigraphs.PartialBachetRanking.computeBoostedRanking">(transitiveDigraphs.PartialBachetRanking method)</a>
 </li>
       </ul></li>
       <li><a href="techDoc.html#votingProfiles.LinearVotingProfile.computeBordaScores">computeBordaScores() (votingProfiles.LinearVotingProfile method)</a>
@@ -1185,11 +1185,11 @@
 </li>
         <li><a href="techDoc.html#sparseOutrankingDigraphs.SparseOutrankingDigraph.exportGraphViz">(sparseOutrankingDigraphs.SparseOutrankingDigraph method)</a>
 </li>
+        <li><a href="techDoc.html#transitiveDigraphs.PartialBachetRanking.exportGraphViz">(transitiveDigraphs.PartialBachetRanking method)</a>
+</li>
         <li><a href="techDoc.html#transitiveDigraphs.PrincipalInOutDegreesOrderingFusion.exportGraphViz">(transitiveDigraphs.PrincipalInOutDegreesOrderingFusion method)</a>
 </li>
         <li><a href="techDoc.html#transitiveDigraphs.TransitiveDigraph.exportGraphViz">(transitiveDigraphs.TransitiveDigraph method)</a>
-</li>
-        <li><a href="techDoc.html#transitiveDigraphs.WeakBachetRanking.exportGraphViz">(transitiveDigraphs.WeakBachetRanking method)</a>
 </li>
       </ul></li>
   </ul></td>
@@ -1688,6 +1688,8 @@
         <li><a href="techDoc.html#module-pairings">module</a>
 </li>
       </ul></li>
+      <li><a href="techDoc.html#transitiveDigraphs.PartialBachetRanking">PartialBachetRanking (class in transitiveDigraphs)</a>
+</li>
       <li><a href="techDoc.html#perfTabs.PartialPerformanceTableau">PartialPerformanceTableau (class in perfTabs)</a>
 </li>
       <li><a href="techDoc.html#transitiveDigraphs.PartialRanking">PartialRanking (class in transitiveDigraphs)</a>
@@ -1714,10 +1716,10 @@
 </li>
       <li><a href="techDoc.html#digraphs.Digraph.plusirredundant">plusirredundant() (digraphs.Digraph method)</a>
 </li>
-      <li><a href="techDoc.html#linearOrders.PolarisedBachetOrder">PolarisedBachetOrder (class in linearOrders)</a>
-</li>
   </ul></td>
   <td style="width: 33%; vertical-align: top;"><ul>
+      <li><a href="techDoc.html#linearOrders.PolarisedBachetOrder">PolarisedBachetOrder (class in linearOrders)</a>
+</li>
       <li><a href="techDoc.html#linearOrders.PolarisedBachetRanking">PolarisedBachetRanking (class in linearOrders)</a>
 </li>
       <li><a href="techDoc.html#digraphs.PolarisedDigraph">PolarisedDigraph (class in digraphs)</a>
@@ -2770,16 +2772,14 @@
   <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="techDoc.html#digraphs.Digraph.weakAneighbors">weakAneighbors() (digraphs.Digraph method)</a>
 </li>
-      <li><a href="techDoc.html#transitiveDigraphs.WeakBachetRanking">WeakBachetRanking (class in transitiveDigraphs)</a>
-</li>
       <li><a href="techDoc.html#digraphs.Digraph.weakCondorcetLosers">weakCondorcetLosers() (digraphs.Digraph method)</a>
 </li>
       <li><a href="techDoc.html#digraphs.Digraph.weakCondorcetWinners">weakCondorcetWinners() (digraphs.Digraph method)</a>
 </li>
-  </ul></td>
-  <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="techDoc.html#transitiveDigraphs.WeakCopelandOrder">WeakCopelandOrder (class in transitiveDigraphs)</a>
 </li>
+  </ul></td>
+  <td style="width: 33%; vertical-align: top;"><ul>
       <li><a href="techDoc.html#digraphs.Digraph.weakDneighbors">weakDneighbors() (digraphs.Digraph method)</a>
 </li>
       <li><a href="techDoc.html#digraphs.Digraph.weakGammaSets">weakGammaSets() (digraphs.Digraph method)</a>
@@ -2836,7 +2836,7 @@
 
   <div role="contentinfo">
     <p>&#169; Copyright 2012-2025, Raymond Bisdorff.
-      <span class="lastupdated">Last updated on May 13, 2025.
+      <span class="lastupdated">Last updated on May 14, 2025.
       </span></p>
   </div>
 
