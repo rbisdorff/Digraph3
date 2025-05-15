@@ -2898,7 +2898,7 @@ The *Copeland* ranking
 
 Alternative *a5* obtains here the best *Copeland* score (+12), followed by alternatives *a1*, *a6* and *a7* with same score (+2); following the lexicographic rule, *a1* is hence ranked before *a6* and *a6* before *a7*. Same situation is observed for *a4* and *a9* with a score of -3 (see :numref:`CopelandRanking` Lines 4-12 and 14).
 
-*Copeland*'s ranking rule appears in fact **invariant** under the :ref:`codual transform <Codual-Transform-label>` and renders a same linear order indifferently from digraphs *g* or *gcd* . The *Copeland* rule is furthermore **Condorcet consistent**, i.e. when the outranking relation models a *transitive* and *acyclic* relation, this relation is preserved in the *Copeland* ranking result.
+*Copeland*'s ranking rule appears in fact **invariant** under the :ref:`codual transform <Codual-Transform-label>` and renders a same linear order indifferently from digraphs *g* or *gcd* . The *Copeland* rule is furthermore **Condorcet consistent**, i.e. when the strict outranking relation models a *transitive* relation, this relation is preserved in the *Copeland* ranking result.
 
 The *Copeland* ranking result (see :numref:`CopelandRanking` Line 14) is rather correlated (+0.463) with the given pairwise outranking relation in the ordinal *Kendall* sense (see :numref:`CopelandCorrelationIndexes`).
 
