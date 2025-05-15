@@ -3003,7 +3003,7 @@ Bipolar-valued base 3 encoded Bachet numbers
 ............................................
 
 .. epigraph::
-   "*Estant proposee telle quantité qu'on voudra pesant un nombre de livres despuis 1. iusques à 40. inclusivement (sans toutefois admettre les fractions ) on demande combien de pois pour le moins il faudrait employer à cet effect.* "
+   "*Estant proposee telle quantité qu'on voudra pesant un nombre de livres despuis 1. iusques à 40. inclusivement (sans toutefois admettre les fractions ) on demande combien de pois pour le moins il faudrait employer à cet effect.*" [24]_
 
    -- Cl. G. Bachet (1622)
 
@@ -5319,6 +5319,8 @@ Appendix
 .. [22] To prove the *invariance* of the *Bachet* ranking under the *codual transform*, it is sufficient to notice that the contribution to the *Bachet* scores of any pair of actions, outranking each other and situated respectively in positions *p* and *q* in a relation relation table, amounts to  :math:`(3^p + 3^q) - (3^p + 3^q) = 0`. Same zero contribution :math:`(-3^p - 3^q) - (-3^p - 3^q) = 0` occurs for any pair positively *not outranking* each other.
 
 .. [23] To prove the *Condorcet consistency* property of the *Bachet* ranking rule, it is sufficient to notice that the contributions of a transitive triplet *'ai' > 'aj' > 'ak'* to the corresponding *Bachet* ranking scores will respect the actual ordering of the triplet with all positional permutations of [..., ai, ..., aj, ...,ak, ...] in a relation table.
+
+.. [24] "*Being proposed to assess with a weight balance a quantity weighing an integer number of pounds between 1 and 40 included, how many weights at minimum are needed for being able to do so*".
 
 .. raw:: latex
 
