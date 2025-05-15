@@ -2915,9 +2915,9 @@ The *Copeland* ranking result (see :numref:`CopelandRanking` Line 14) is rather 
      Valued equivalalence      : +0.107
      Epistemic determination   :  0.230
 
-With an epistemic determination level of 0.230, the *extended Kendall tau* index (see [BIS-2012]_) is in fact computed on 61.5% (100.0 x (1.0 + 0.23)/2) of the pairwise strict outranking comparisons. Furthermore, the bipolar-valued *relational equivalence* characteristics between the strict outranking relation and the *Copeland* ranking equals +0.107, i.e. a *majority* of 55.35% of the criteria significance supports the relational equivalence between the given strict outranking relation and the corresponding *Copeland* ranking [60]_.
+With an epistemic determination level of 0.230, the *extended Kendall tau* index (see [BIS-2012]_) is in fact computed on 61.5% (100.0 x (1.0 + 0.23)/2) of the pairwise strict outranking comparisons. Furthermore, the bipolar-valued *relational equivalence* characteristics between the strict outranking relation and the *Copeland* ranking equals +0.107, i.e. a *majority* of 55.35% of the criteria significance supports the relational equivalence between the given strict outranking relation and the corresponding *Copeland* ranking [59]_.
 
-The *Copeland* scores deliver actually only a unique *weak ranking*, i.e. a ranking with potential ties. This weak ranking may be constructed with the :py:class:`~transitiveDigraphs.WeakCopelandOrder` class.
+The *Copeland* scores deliver actually only a unique *weak ranking*, i.e. a ranking with potential ties. This weak ranking may be constructed with the :py:class:`transitiveDigraphs.WeakCopelandOrder` class.
 
 .. code-block:: pycon
    :name: weakCopelandRanking
@@ -2962,13 +2962,13 @@ We recover in :numref:`weakCopelandRanking` Lines 6 and 8 above, the ranking wit
 
    A weak Copeland ranking 	   
 
-A valued version of the *Copeland* ranking-by-scoring rule is given by :ref:`the new Bachet ranking rule <Bachet-Tutorial-label>` .	
+A valued version of the *Copeland* ranking-by-scoring rule is given by the new *Bachet* ranking rule.	
 
 The *Bachet* ranking
 ````````````````````
-The *Bachet* numbers --bipolar-valued {-1,0,+1} base 3 encoded integers-- instantiated by the row vectors without reflxive terms and the colum vectors without reflexive terms of the strict outranking digraph's polarised relation table model in fact per decision action respectively an **outrankingness** and a **negated outrankedness** ranking fitness score similar to the previous *Copeland* ranking scores (see :numref:`polarisedAStrictOutranking` and :py:class:`linearOrders.PolarisedBachetRanking`).
+*Bachet* numbers --bipolar-valued {-1,0,+1} base 3 encoded integers provided by the :py:class:`arithmetics.BachetNumber` class-- instantiated by the row vectors without reflxive terms and the colum vectors without reflexive terms of the strict outranking digraph's polarised relation table model in fact per decision action respectively an **outrankingness** and a **negated outrankedness** ranking fitness score similar to the previous *Copeland* ranking scores (see the advanced topic on :ref:`a new ranking rule based on bipolar-valued base 3 Bachet numbers <Bachet-Tutorial-label>` ).
 
-Now, *Bachet* numbers are formulated in a base 3 positional numeral system and the integer values of the *Bachet* ranking scores may depend therefore on the actual ordering of the outranking digraph's *actions* dictiionary. The *Bachet* rule is however, like the *Copeland* rule, **invariant** under the **codual** transform and **Condorcet consistent**, ie. when the outranking digraph models a transitive and acyclic relation, this relation will be preserved by the *Bachet* ranking scores. Here, as we have seen above, the given digraph's transitivity degree is only 0.487. To reduce therefore the dependency on the given initial ordering of the *actions* dictionary, we compute below *Bachet* ranking results for 10 random permutations and their reversed orderings of the actions keys (see :numref:`BachetRanking` Line 2) and keep the one ranking that is best correlated with the given outranking digraph (see the advanced topic on :ref:`a new ranking rule based on bipolar-valued base 3 Bachet numbers <Bachet-Tutorial-label>` ) [59]_.
+Now, *Bachet* numbers are formulated in a base 3 positional numeral system and the integer values of the *Bachet* ranking scores may depend therefore on the actual ordering of the outranking digraph's *actions* dictiionary. The *Bachet* rule is however, like the *Copeland* rule, **invariant** under the **codual** transform and **Condorcet consistent**, ie. when the outranking digraph models a transitive relation, this relation will be preserved by the *Bachet* ranking scores. Here, as we have seen above, the given digraph's transitivity degree is only 0.487. To reduce therefore the dependency on the given initial ordering of the *actions* dictionary, we compute below *Bachet* ranking results for 10 random permutations and their reversed orderings of the actions keys (see :numref:`BachetRanking` Line 2) and keep the one ranking that is best correlated with the given outranking digraph. 
 
 .. code-block:: pycon
    :name: BachetRanking
@@ -10931,9 +10931,7 @@ Appendices
 
 .. [58] See the :ref:`tutorial <Three-Objectives-Performance-Tableau-label>` on generating random three-objectives performance tableaux.
 
-.. [59] https://digraph3.readthedocs.io/en/latest/_static/digraph3Pearls.pdf
-
-.. [60] See the advanced topic on :ref:`bipolar-valued relational equivalence between bipolar-valued digraphs <OrdinalCorrelation-Tutorial-label>`.
+.. [59] See the advanced topic on :ref:`bipolar-valued relational equivalence between bipolar-valued digraphs <OrdinalCorrelation-Tutorial-label>`.
 
 ..  LocalWords:  randomDigraph Determinateness valuationdomain py png
 ..  LocalWords:  notGamma tutorialDigraph shortName func irreflexive
