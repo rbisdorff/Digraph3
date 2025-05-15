@@ -3456,7 +3456,7 @@ Back to :ref:`Content Table <Tutorial-label>`
 On partially ranking outranking digraphs
 ----------------------------------------
 
-In this section, instead of computing linear rankings or orders, we illustrate two ranking strategies for directly computing partial rankings --partially determined transitive asymetrical relations-- from a given outranking digraph, a result we call **partial rankings**.
+In this section, instead of computing linear rankings or orders, we illustrate two ranking strategies for directly computing *partial rankings* --partially determined transitive asymetrical relations-- from a given outranking digraph.
 
 Computing a ranking consensus from several linear rankings
 ``````````````````````````````````````````````````````````
@@ -3466,7 +3466,7 @@ To compare for instance the four rankings we have previously obtained with *rank
 .. code-block:: pycon
    :name: RankingConsensus
    :caption: Computing a rankings consensus
-   :emphasize-lines: 3,5,7,9, 18-21
+   :emphasize-lines: 8,11,14,17,22-23,35-36
 
    >>> from outrankingDigraphs import *
    >>> t = RandomCBPerformanceTableau(numberOfActions=9,
@@ -3491,6 +3491,33 @@ To compare for instance the four rankings we have previously obtained with *rank
    ...             bav.bachetRanking]
    >>> from transitiveDigraphs import RankingsFusionDigraph
    >>> rfdg = RankingsFusionDigraph(g,rankings)
+   >>> rfdg
+    *------- Digraph instance description ------*
+    Instance class      : RankingsFusionDigraph
+    Instance name       : rel_randomCBperftab_wk
+    Digraph Order       : 9
+    Digraph Size        : 25
+    Valuation domain    : [-1.00;1.00]
+    Determinateness (%) : 84.72
+    Attributes          : ['name', 'actions', ... ,
+                           'valuationdomain', 'relation', ... ,
+	                   'rankings', 'fusionOperator']
+   >>> rfdg.isTransitive()
+    True
+
+By epistemic disjunctive fusion of the given *rfdg.rankings*, the :py:class:`~transitiveDigraphs.RankingsFusionDigraph` class constructor computes a transitive asymmetrical partial relation which is invariant under the codual transform (see :numref:`RankingConsensus`). As ranking and ordering of such potentially incomplete relations do not give the same result when incomparable alternatives do appear, the :py:class:`transitiveDigraphs.TransitiveDigraph` class provides a :py:meth:`~transitiveDigraphs.TransitiveDigraph.showTransitiveDigraph` method which iteratively extracts conjointly first and last choices as shown in :numref:`RankingConsensus1` Lines 2-6. A similar itrative bipolar selection strategy is used for the drawing of such partial rankings (Lines 10-13). 
+
+.. code-block:: pycon
+   :name: RankingConsensus1
+   :caption: Inspecting a partial ranking
+   :emphasize-lines: 2-6,10-13
+
+   >>> rfdg.showTransitiveDigraph()
+    Ranking by Choosing and Rejecting
+     1st ranked ['a5']
+       2nd ranked ['a1', 'a6', 'a7']
+       2nd last ranked ['a1', 'a3', 'a4', 'a8'])
+     1st last ranked ['a2', 'a9'])
    >>> rfdg.exportGraphViz('rankingsByScoringFusion')
     *---- exporting a dot file for GraphViz tools ---------*
     Exporting to rankingsByScoringFusion.dot
@@ -3508,30 +3535,31 @@ To compare for instance the four rankings we have previously obtained with *rank
 
    *Copeland*, *NetFlows* and *Bachet* ranking consensus 	   
     
-:numref:`rankingConsensusFigure` makes apparent a ranking consensus with four levels of agreement where action *a5* appears consistently first-ranked and actions *a2* and *a9*, both, last-ranked. Notice the unstable rank positions of action *a1* (2, 5, and 7), a consequence of its contrasted performance record. The epistemic fusion of all four *ranking-by-scoring* results delivers here a convincing transitive partial ordering, highly correlated with the given outranking digraph *g* (+0.847), supported by a criteria significance majority of 58% (see Lines 4-6 below) . 
-
+:numref:`rankingConsensusFigure` makes apparent a ranking consensus with four levels of agreement where action *a5* appears consistently first-ranked and actions *a2* and *a9*, both, last-ranked. Notice the unstable rank positions of action *a1* (2, 5, and 7), a consequence of its contrasted performance record.
+	
 .. code-block:: pycon
    :linenos:
-   :emphasize-lines: 4-6
+   :emphasize-lines: 3-5
    
-   >>> corr = g.computeOrdinalCorrelation(rfdg)
-   >>> g.showCorrelation(corr)
+   >>> g.showCorrelation(g.computeOrdinalCorrelation(rfdg))
     Correlation indexes:
      Crisp ordinal correlation  : +0.847
      Epistemic determination    :  0.157
      Bipolar-valued equivalence : +0.133
 
-As we have noticed before, the randomized *Bachet* ranking rules produce multiple rankings of unequal correlation results, respecting more or less the transitive part of the given outranking digraph. A subset of best correlated *Bachet* rankings represent now a suitable sample for computing a convincing ranking consensus. 
+The epistemic fusion of all four *ranking-by-scoring* results delivers here a convincing transitive partial ordering, highly correlated with the given outranking digraph *g* (+0.847), supported by a criteria significance majority of 58% (see Lines 3-5 above) . 
+
+A second partially ranking strategy makes usage of the *Bachet* ranking rule.
 
 On partially ranking with the Bachet rules
 ``````````````````````````````````````````
 
-To implement this second strategy, a new :py:class:`~transitiveDigraphs.PartialBachetRanking` class has been added to the :py:mod:`transitiveDigraphs` module. To illustrate its usefulness, let us reconsider the example outranking digraph *g* of :numref:`RankingConsensus`. 
+As we have noticed before, the randomized *Bachet* ranking rules produce multiple rankings of unequal correlation qualities, respecting more or less the transitive part of the given outranking digraph. A subset of best correlated *Bachet* rankings represent now a suitable sample for computing a convincing ranking consensus. This second strategy is provided by the :py:class:`transitiveDigraphs.PartialBachetRanking` class. To illustrate its usefulness, let us reconsider the example outranking digraph *g* of :numref:`RankingConsensus`. 
 
 .. code-block:: pycon
-   :caption: Partial polarised Bachet ranking result
+   :caption: Partial polarised Bachet ranking digraph
    :name: weakBachet3
-   :emphasize-lines: 8-12,15
+   :emphasize-lines: 6,20-25
 
    >>> from outrankingDigraphs import *
    >>> t = RandomCBPerformanceTableau(numberOfActions=9,
@@ -3539,7 +3567,34 @@ To implement this second strategy, a new :py:class:`~transitiveDigraphs.PartialB
    >>> g = BipolarOutrankingDigraph(t,Normalized=True)
    >>> from transitiveDigraphs import PartialBachetRanking
    >>> wb = PartialBachetRanking(g,randomized=100,seed=1,maxNbrOfRankings=5)
-   >>> wb.transitiveDigraph()
+   >>> wb
+    *------- Digraph instance description ------*
+     Instance class      : PartialBachetRanking
+     Instance name       : rel_randomCBperftab_wk
+     Digraph Order       : 9
+     Digraph Size        : 27
+     Valuation domain    : [-1.00;1.00]
+     Determinateness (%) : 87.50
+     Attributes          : ['name', 'actions', 'order', ...,
+                            'valuationdomain', 'relation', ...,
+                            'randomized', 'seed', 'bachetRankings',
+		            'maxNbrOfRankings','Polarised',
+			    'partialBachetCorrelation']
+   >>> wb.bachetRankings
+    [(0.6824, ['a5', 'a6', 'a3', 'a4', 'a1', 'a7', 'a8', 'a9', 'a2']),
+     (0.6523, ['a5', 'a6', 'a4', 'a7', 'a1', 'a3', 'a9', 'a2', 'a8']),
+     (0.6482, ['a5', 'a6', 'a4', 'a1', 'a7', 'a3', 'a9', 'a2', 'a8']),
+     (0.6442, ['a5', 'a6', 'a4', 'a3', 'a1', 'a7', 'a9', 'a8', 'a2']),
+     (0.6382, ['a5', 'a6', 'a1', 'a7', 'a3', 'a4', 'a8', 'a2', 'a9'])]
+
+In :numref:`weakBachet3` Line 6, we notice that we sample 100 *Bachet* rankings and keep the five best correlated rankings for constructing the ranking consensus (see Lines 20-25). We may notice that alternative *a5* is always first-ranked and alternative *a6* second-ranked are always first-ranked, whereas alternatives *a2*, *a8* and *a9* make up the the tail group. The :py:meth:`~transitiveDigraphs.TransitiveDigraph.showTransitiveDigraph` method confirms this partial ranking (see :numref:`weakBachet4` Lines 2-6 below and :numref:`weakBachetpol`).
+
+.. code-block:: pycon
+   :caption: Partial polarised Bachet ranking result
+   :name: weakBachet4
+   :emphasize-lines: 2-6,9-11
+
+   >>> wb.showTransitiveDigraph()
     Ranking by Choosing and Rejecting
      1st ranked ['a5']
        2nd ranked ['a6']
@@ -3560,17 +3615,18 @@ To implement this second strategy, a new :py:class:`~transitiveDigraphs.PartialB
    :width: 200 px
    :align: center
 
-   Polarised Bachet weak ranking result  	   
+   Polarised Bachet partial ranking result  	   
 
+The resulting *partial ranking* is highly correlated with the common determinated part of the given outranking digraph *g* (+0.806) leading to a *relational equivalence* with the given outranking digraph *g* supported by a criteria significance majority of 57% (see Lines 9-11 above).
 
-In :numref:`weakBachetpol` the nine performance records are grouped into four performance equivalence classes. The resulting *partial ranking* is highly correlated with the common determinated part of the given outranking digraph *g* (+0.806, see Line 15) leading to a *relational equivalence* supported by a criteria significance majority of 57%. we recover above a partial ranking very similar to the previous ranking consensus obtained from of all four *ranking-by-scoring* results (see :numref:`rankingConsensusFigure`).
+We recover with the *Bachet* ranking rule a ranking consensus actually very similar to the previous consensus obtained from of all four *ranking-by-scoring* results (see :numref:`rankingConsensusFigure`).
 
 As the :py:class:`~transitiveDigraphs.PartialBachetRanking` constructor uses by default the *polarised* version of the *Bachet* rule, the partial ranking result obtained in :numref:`weakBachetpol` represents in fact a ranking consensus respecting the actual **transitive parts** of the given outranking digraph (see :ref:`the advanced topic <Bachet-Tutorial-label>` dedicated to the *Bachet* ranking rules). The :py:class:`~transitiveDigraphs.PartialBachetRanking` now provides a **Polarised == False** flag allowing to use instead the **valued** version of the *Bachet* rule.
 
 .. code-block:: pycon
    :caption: Valued Bachet weak ranking result
-   :name: weakBachet4
-   :emphasize-lines: 1-2,5-8,11,13
+   :name: weakBachet5
+   :emphasize-lines: 1,5-8,11,13
 
    >>> wbv = PartialBachetRanking(g,Polarised=False,
    ...            randomized=100,seed=1,maxNbrOfRankings=5)
@@ -3597,9 +3653,9 @@ As the :py:class:`~transitiveDigraphs.PartialBachetRanking` constructor uses by 
 
    valued Bachet weak ranking result  	   
 
-In :numref:`weakBachet4` Lines 5-8 we observe a partial ordering of the nine performance records taking into account not only the polarised relational structure, but also the **epistemic determination** of the given outranking digraph. And the ordinal correlation with the given outranking digraph gets even higher: +0.888 vs +0.806, supported by a similar criteria significance of 57% (see :numref:`weakBachet4` Lines 11 and 13). It is worthwhile noticing in the corresponding :numref:`weakBachetval` that alternative *a1* appears incomparable to most of the other alternatives, a fact already made apparent in :numref:`rankingConsensusFigure`.  
+In :numref:`weakBachet5` Lines 5-8 we observe now a partial ranking taking into account not only the polarised relational structure, but also the **epistemic determination** of the given outranking digraph *g*. And the ordinal correlation with *g*, supported by a similar criteria significance of 57%, gets even higher: +0.888 vs +0.806 (see :numref:`weakBachet5` Lines 11-13). It is worthwhile noticing in the corresponding :numref:`weakBachetval` that alternative *a1* appears indeed incomparable to most of the other alternatives, a fact already made apparent in :numref:`rankingConsensusFigure`.  
 
-This way, the *Bachet* ranking rules deliver very effective tools for constructing convincing partial rankings providing by the way an effective way for computing first or last choice recommendations, actually the initial and terminal kernels of such partial rankings. Mind however that the *Bachet* ranking rules can only handle small outranking digraphs ( < 50 ). For larger ( > 50 ) or big ( > 1000 ) outranking digraphs it is opportune to turn to order statistics and compute **weak rankings** --rankings with ties-- by sorting the multicriteria performance records into relative or absolute performance **quantile equivalence classes**.
+This way, the *Bachet* ranking rules deliver very effective tools for constructing convincing partial rankings providing by the way an effective tool for computing first or last choice recommendations, actually the initial and terminal kernels of such partial transitive digraphs. Mind however that the *Bachet* ranking rules can only handle small outranking digraphs ( < 50 ). For larger ( > 50 ) or big ( > 1000 ) outranking digraphs it is opportune to turn to order statistics and compute **weak rankings** --rankings with ties-- by sorting the multicriteria performance records into relative or absolute performance **quantile equivalence classes**.
 
 This order statistics based **rating** approach is presented in the following Sections.  
 

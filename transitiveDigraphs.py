@@ -561,6 +561,8 @@ class RankingsFusionDigraph(TransitiveDigraph):
         self.__dict__ = deepcopy(other.__dict__)
         self.order = len(self.actions)
         self.name = other.name + '_wk'
+        self.rankings = rankings
+        self.fusionOperator = fusionOperator
         self.valuationdomain = {}
         self.valuationdomain['min'] = Decimal('-1')
         self.valuationdomain['max'] = Decimal('1')
@@ -1934,20 +1936,27 @@ class PartialBachetRanking(TransitiveDigraph):
         if Debug:
             print(len(rankings),rankings)
         ba1 = RankingsFusionDigraph(g,rankings)
-        ba1.resStat = resStat
+        #ba1.resStat = resStat
         ba1.bachetRankings = bachetRankings
-        ba1.rankings = rankings
-        for att in ba1.__dict__:
+        #ba1.rankings = rankings
+        atts = [att for att in ba1.__dict__]
+        atts.remove('rankings')
+        atts.remove('vetos')
+        atts.remove('negativeVetos')
+        atts.remove('methodData')
+        atts.remove('concordanceRelation')
+        atts.remove('largePerformanceDifferencesCount')
+        atts.remove('fusionOperator')
+        for att in atts:
             self.__dict__[att] = deepcopy(ba1.__dict__[att])
         if Debug:
             ba1.showRankingByChoosing()
-        self.boostedRanking = self.computeBoostedRanking()
-        self.boostedOrdering = self.computeBoostedOrdering()
-        self.partialRanking = self.rankingByChoosing['ranking']
+        # store attributes
+        self.randomized = randomized
+        self.seed = seed
+        self.maxNbrOfRankings = maxNbrOfRankings
+        self.Polarised = Polarised
         self.partialBachetCorrelation = g.computeOrdinalCorrelation(ba1)
-        self.bachetRanking = resStat[0][1]['optimal']
-        self.bachetCorrelation = g.computeRankingCorrelation(self.bachetRanking)
-        self.bachetConsensus = g.computeRankingConsensusQuality(self.bachetRanking)
         self.runTimes['totalTime'] = time() - tt
         if Comments:
             self.showTransitiveDigraph(WithCoverCredibility=False)
@@ -2185,8 +2194,9 @@ if __name__ == "__main__":
 ## 
     pt = RandomCBPerformanceTableau(numberOfActions=9,numberOfCriteria=13,seed=100)
     g = BipolarOutrankingDigraph(pt)
-    wbg = PartialBachetRanking(g,seed=100,Polarised=False,Comments=False)
-    wbg.showTransitiveDigraph(WithCoverCredibility=True)
+    wbg = PartialBachetRanking(g,seed=100,Polarised=True,Comments=False)
+    print(wbg)
+    #wbg.showTransitiveDigraph(WithCoverCredibility=True)
     #wcg = WeakCopelandOrder(g,WithFairestRanking=True)
     #print(wcg.copelandPermutations)
     #print(wcg.copelandPreRanking)

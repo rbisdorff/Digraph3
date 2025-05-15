@@ -906,10 +906,10 @@
 <li class="toctree-l4"><a class="reference internal" href="#transitiveDigraphs.TransitiveDigraph.exportDigraphGraphViz"><code class="docutils literal notranslate"><span class="pre">TransitiveDigraph.exportDigraphGraphViz()</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="#transitiveDigraphs.TransitiveDigraph.exportGraphViz"><code class="docutils literal notranslate"><span class="pre">TransitiveDigraph.exportGraphViz()</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="#transitiveDigraphs.TransitiveDigraph.showOrderedRelationTable"><code class="docutils literal notranslate"><span class="pre">TransitiveDigraph.showOrderedRelationTable()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#transitiveDigraphs.TransitiveDigraph.showPartialOrder"><code class="docutils literal notranslate"><span class="pre">TransitiveDigraph.showPartialOrder()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#transitiveDigraphs.TransitiveDigraph.showPartialRanking"><code class="docutils literal notranslate"><span class="pre">TransitiveDigraph.showPartialRanking()</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="#transitiveDigraphs.TransitiveDigraph.showRankingByChoosing"><code class="docutils literal notranslate"><span class="pre">TransitiveDigraph.showRankingByChoosing()</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="#transitiveDigraphs.TransitiveDigraph.showTransitiveDigraph"><code class="docutils literal notranslate"><span class="pre">TransitiveDigraph.showTransitiveDigraph()</span></code></a></li>
-<li class="toctree-l4"><a class="reference internal" href="#transitiveDigraphs.TransitiveDigraph.showWeakOrder"><code class="docutils literal notranslate"><span class="pre">TransitiveDigraph.showWeakOrder()</span></code></a></li>
-<li class="toctree-l4"><a class="reference internal" href="#transitiveDigraphs.TransitiveDigraph.showWeakRanking"><code class="docutils literal notranslate"><span class="pre">TransitiveDigraph.showWeakRanking()</span></code></a></li>
 </ul>
 </li>
 <li class="toctree-l3"><a class="reference internal" href="#transitiveDigraphs.WeakCopelandOrder"><code class="docutils literal notranslate"><span class="pre">WeakCopelandOrder</span></code></a></li>
@@ -9384,7 +9384,7 @@ Kohler linear best ordering and an Arrow-Raynaud linear worst ordering.</p>
 <dd><p>Uses the <code class="xref py py-class docutils literal notranslate"><span class="pre">linearOrders.BachetRanking</span></code> class for generating a number
 of best correlated Bachet rankings.</p>
 <p>The <a class="reference internal" href="#transitiveDigraphs.RankingsFusionDigraph" title="transitiveDigraphs.RankingsFusionDigraph"><code class="xref py py-class docutils literal notranslate"><span class="pre">transitiveDigraphs.RankingsFusionDigraph</span></code></a> uses
-these <em>Bachet</em> rankings for contructing a weak <em>Bachet</em> ranking result.</p>
+these <em>Bachet</em> rankings for contructing a partial <em>Bachet</em> ranking result.</p>
 <ul class="simple">
 <li><p><em>g</em> is a valid BipolarOutrankingDigraph instance.</p></li>
 <li><p><em>randomized</em> (default = 100) gives the number of random permutations used for generating different Bachet ranking results.</p></li>
@@ -9694,6 +9694,18 @@ on each component.</p>
 </dd></dl>
 
 <dl class="py method">
+<dt class="sig sig-object py" id="transitiveDigraphs.TransitiveDigraph.showPartialOrder">
+<span class="sig-name descname"><span class="pre">showPartialOrder</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">rankingByChoosing</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">WithCoverCredibility</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/transitiveDigraphs.html#TransitiveDigraph.showPartialOrder"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#transitiveDigraphs.TransitiveDigraph.showPartialOrder" title="Link to this definition"></a></dt>
+<dd><p>A dummy for the showTransitiveDigraph() method.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="transitiveDigraphs.TransitiveDigraph.showPartialRanking">
+<span class="sig-name descname"><span class="pre">showPartialRanking</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">rankingByChoosing</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">WithCoverCredibility</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/transitiveDigraphs.html#TransitiveDigraph.showPartialRanking"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#transitiveDigraphs.TransitiveDigraph.showPartialRanking" title="Link to this definition"></a></dt>
+<dd><p>A dummy for the showTransitiveDigraph() method.</p>
+</dd></dl>
+
+<dl class="py method">
 <dt class="sig sig-object py" id="transitiveDigraphs.TransitiveDigraph.showRankingByChoosing">
 <span class="sig-name descname"><span class="pre">showRankingByChoosing</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">actionsList</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">rankingByChoosing</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">WithCoverCredibility</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/transitiveDigraphs.html#TransitiveDigraph.showRankingByChoosing"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#transitiveDigraphs.TransitiveDigraph.showRankingByChoosing" title="Link to this definition"></a></dt>
 <dd><p>Dummy name for showTransitiveDigraph() method</p>
@@ -9703,18 +9715,6 @@ on each component.</p>
 <dt class="sig sig-object py" id="transitiveDigraphs.TransitiveDigraph.showTransitiveDigraph">
 <span class="sig-name descname"><span class="pre">showTransitiveDigraph</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">rankingByChoosing</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">WithCoverCredibility</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/transitiveDigraphs.html#TransitiveDigraph.showTransitiveDigraph"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#transitiveDigraphs.TransitiveDigraph.showTransitiveDigraph" title="Link to this definition"></a></dt>
 <dd><p>A show method for self.rankinByChoosing result.</p>
-</dd></dl>
-
-<dl class="py method">
-<dt class="sig sig-object py" id="transitiveDigraphs.TransitiveDigraph.showWeakOrder">
-<span class="sig-name descname"><span class="pre">showWeakOrder</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">rankingByChoosing</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">WithCoverCredibility</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/transitiveDigraphs.html#TransitiveDigraph.showWeakOrder"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#transitiveDigraphs.TransitiveDigraph.showWeakOrder" title="Link to this definition"></a></dt>
-<dd><p>A dummy for the showTransitiveDigraph() method.</p>
-</dd></dl>
-
-<dl class="py method">
-<dt class="sig sig-object py" id="transitiveDigraphs.TransitiveDigraph.showWeakRanking">
-<span class="sig-name descname"><span class="pre">showWeakRanking</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">rankingByChoosing</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">WithCoverCredibility</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/transitiveDigraphs.html#TransitiveDigraph.showWeakRanking"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#transitiveDigraphs.TransitiveDigraph.showWeakRanking" title="Link to this definition"></a></dt>
-<dd><p>A dummy for the showTransitiveDigraph() method.</p>
 </dd></dl>
 
 </dd></dl>
@@ -14875,7 +14875,7 @@ Components are stored in an ordered dictionary.</p>
 
   <div role="contentinfo">
     <p>&#169; Copyright 2012-2025, Raymond Bisdorff.
-      <span class="lastupdated">Last updated on May 14, 2025.
+      <span class="lastupdated">Last updated on May 15, 2025.
       </span></p>
   </div>
 
