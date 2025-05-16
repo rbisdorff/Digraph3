@@ -1940,12 +1940,14 @@ class PartialBachetRanking(TransitiveDigraph):
         ba1.bachetRankings = bachetRankings
         #ba1.rankings = rankings
         atts = [att for att in ba1.__dict__]
-        atts.remove('rankings')
-        atts.remove('vetos')
-        atts.remove('negativeVetos')
-        atts.remove('methodData')
-        atts.remove('concordanceRelation')
-        atts.remove('largePerformanceDifferencesCount')
+        try:
+            atts.remove('vetos')
+            atts.remove('negativeVetos')
+            atts.remove('methodData')
+            atts.remove('concordanceRelation')
+            atts.remove('largePerformanceDifferencesCount')
+        except:
+            pass
         atts.remove('fusionOperator')
         for att in atts:
             self.__dict__[att] = deepcopy(ba1.__dict__[att])

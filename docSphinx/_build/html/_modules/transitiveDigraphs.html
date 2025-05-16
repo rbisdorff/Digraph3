@@ -2127,12 +2127,14 @@
         <span class="n">ba1</span><span class="o">.</span><span class="n">bachetRankings</span> <span class="o">=</span> <span class="n">bachetRankings</span>
         <span class="c1">#ba1.rankings = rankings</span>
         <span class="n">atts</span> <span class="o">=</span> <span class="p">[</span><span class="n">att</span> <span class="k">for</span> <span class="n">att</span> <span class="ow">in</span> <span class="n">ba1</span><span class="o">.</span><span class="vm">__dict__</span><span class="p">]</span>
-        <span class="n">atts</span><span class="o">.</span><span class="n">remove</span><span class="p">(</span><span class="s1">&#39;rankings&#39;</span><span class="p">)</span>
-        <span class="n">atts</span><span class="o">.</span><span class="n">remove</span><span class="p">(</span><span class="s1">&#39;vetos&#39;</span><span class="p">)</span>
-        <span class="n">atts</span><span class="o">.</span><span class="n">remove</span><span class="p">(</span><span class="s1">&#39;negativeVetos&#39;</span><span class="p">)</span>
-        <span class="n">atts</span><span class="o">.</span><span class="n">remove</span><span class="p">(</span><span class="s1">&#39;methodData&#39;</span><span class="p">)</span>
-        <span class="n">atts</span><span class="o">.</span><span class="n">remove</span><span class="p">(</span><span class="s1">&#39;concordanceRelation&#39;</span><span class="p">)</span>
-        <span class="n">atts</span><span class="o">.</span><span class="n">remove</span><span class="p">(</span><span class="s1">&#39;largePerformanceDifferencesCount&#39;</span><span class="p">)</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="n">atts</span><span class="o">.</span><span class="n">remove</span><span class="p">(</span><span class="s1">&#39;vetos&#39;</span><span class="p">)</span>
+            <span class="n">atts</span><span class="o">.</span><span class="n">remove</span><span class="p">(</span><span class="s1">&#39;negativeVetos&#39;</span><span class="p">)</span>
+            <span class="n">atts</span><span class="o">.</span><span class="n">remove</span><span class="p">(</span><span class="s1">&#39;methodData&#39;</span><span class="p">)</span>
+            <span class="n">atts</span><span class="o">.</span><span class="n">remove</span><span class="p">(</span><span class="s1">&#39;concordanceRelation&#39;</span><span class="p">)</span>
+            <span class="n">atts</span><span class="o">.</span><span class="n">remove</span><span class="p">(</span><span class="s1">&#39;largePerformanceDifferencesCount&#39;</span><span class="p">)</span>
+        <span class="k">except</span><span class="p">:</span>
+            <span class="k">pass</span>
         <span class="n">atts</span><span class="o">.</span><span class="n">remove</span><span class="p">(</span><span class="s1">&#39;fusionOperator&#39;</span><span class="p">)</span>
         <span class="k">for</span> <span class="n">att</span> <span class="ow">in</span> <span class="n">atts</span><span class="p">:</span>
             <span class="bp">self</span><span class="o">.</span><span class="vm">__dict__</span><span class="p">[</span><span class="n">att</span><span class="p">]</span> <span class="o">=</span> <span class="n">deepcopy</span><span class="p">(</span><span class="n">ba1</span><span class="o">.</span><span class="vm">__dict__</span><span class="p">[</span><span class="n">att</span><span class="p">])</span>
@@ -2425,7 +2427,7 @@
 
   <div role="contentinfo">
     <p>&#169; Copyright 2012-2025, Raymond Bisdorff.
-      <span class="lastupdated">Last updated on May 15, 2025.
+      <span class="lastupdated">Last updated on May 16, 2025.
       </span></p>
   </div>
 

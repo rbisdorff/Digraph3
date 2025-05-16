@@ -42,8 +42,10 @@
 .. only:: html
 	  
    :New:
+
+      - A tutorial on :ref:`extracting partial rankings <Partial-Ranking-Tutorial-label>` from a given outranking digraph
       
-      - The *Bachet* ranking rule has been added to the tutorial on :ref:`ranking with multiple incommensurable criteria <Ranking-Tutorial-label>`
+      - The *Bachet* ranking rules are illustrated in the tutorial on :ref:`ranking with multiple incommensurable criteria <Ranking-Tutorial-label>`
           
       - A tutorial on :ref:`using the Digraph3 HPC resources <HPC-Ranking-Tutorial-label>` for ranking several millions of multicriteria performance records via sparse outranking digraphs
 	
@@ -2866,7 +2868,7 @@ With only 49% of the required transitive arcs, the strict outranking relation he
 
 There is one chordless circuit detected in the given strict outranking digraph *gcd*, namely *a6* outranks *a7*, the latter outranks *a8*, and *a8* outranks again *a6* (see :numref:`rankingTutorial`). Any potential linear ordering of these three alternatives will, in fact, always contradict somehow the given outranking relation.
 
-Now, several heuristic ranking rules have been proposed for constructing a linear ordering which is closest in some specific sense to a given outranking relation. The Digraph3 resources provide some of the most common of these ranking rules, like *Copeland*'s, *Kemeny*'s, *Slater*'s, *Kohler*'s, *Arrow-Raynaud*'s or *Tideman*'s ranking rule. Recently, a new *Bachet* ranking rule --a valued *Copeland* variant-- has been added.
+Now, several heuristic ranking rules have been proposed for constructing a linear ordering which is closest in some specific sense to a given outranking relation. The Digraph3 resources provide some of the most common of these ranking rules, like *Copeland*'s, *Kemeny*'s, *Slater*'s, *Kohler*'s, *Arrow-Raynaud*'s or *Tideman*'s ranking rule. Recently, new *Bachet* ranking rules have been added.
 
 .. _Copeland-Ranking-label:
 
@@ -3456,7 +3458,7 @@ Back to :ref:`Content Table <Tutorial-label>`
 On partially ranking outranking digraphs
 ----------------------------------------
 
-In this section, instead of computing linear rankings or orders, we illustrate two ranking strategies for directly computing *partial rankings* --partially determined transitive asymetrical relations-- from a given outranking digraph.
+In this section, instead of computing linear rankings or orders, we illustrate two ranking strategies for computing *partial rankings* --partially determined transitive asymetrical relations-- from a given outranking digraph.
 
 Computing a ranking consensus from several linear rankings
 ``````````````````````````````````````````````````````````

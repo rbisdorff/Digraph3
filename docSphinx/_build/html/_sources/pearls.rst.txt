@@ -38,7 +38,7 @@ Pearls of bipolar-valued epistemic logic
    
    :New:
 
-      * :ref:`A new ranking rule based on bipolar-valued base 3 Bachet numbers <Bachet-Tutorial-label>`	 
+      * :ref:`New ranking rules based on bipolar-valued base 3 Bachet numbers <Bachet-Tutorial-label>`	 
       *	:ref:`Condorcet's 1785 critical perspective on the simple plurality voting rule <Condorcet-Tutorial-label>`
       * :ref:`On characterizing bipolar-valued outranking digraphs <Sufficiency-Tutorial-label>`     
       * :ref:`Consensus quality of the bipolar-valued outranking relation <Outranking-Consensus-Tutorial-label>`
@@ -2995,18 +2995,19 @@ Back to :ref:`Content Table <Pearls-label>`
 
 Ranking-by-scoring with bipolar-valued base 3 encoded numbers
 `````````````````````````````````````````````````````````````
-.. contents:: 
-   :depth: 1
-   :local:
-
-Bipolar-valued base 3 encoded Bachet numbers
-............................................
 
 .. epigraph::
    "*Estant proposee telle quantité qu'on voudra pesant un nombre de livres despuis 1. iusques à 40. inclusivement (sans toutefois admettre les fractions ) on demande combien de pois pour le moins il faudrait employer à cet effect.*" [24]_
 
    -- Cl. G. Bachet (1622)
 
+
+.. contents:: 
+   :depth: 1
+   :local:
+
+Bipolar-valued base 3 encoded Bachet numbers
+............................................
 
 Bipolar-valued {-1,0,+1} base 3 encoded integers are due to *Claude Gaspard Bachet de Méziriac* (1581-1638) [20]_. The idea is to represent the value of an integer *n* in a base 3 positional numerotation where in each position may appear a **signed bit** --one of the three symbols **{-1,0,+1}**-- called hereafter **sbits** for short.
 

@@ -230,7 +230,7 @@
 <dl class="field-list simple" id="pearls-label">
 <dt class="field-odd">New<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><a class="reference internal" href="#bachet-tutorial-label"><span class="std std-ref">A new ranking rule based on bipolar-valued base 3 Bachet numbers</span></a></p></li>
+<li><p><a class="reference internal" href="#bachet-tutorial-label"><span class="std std-ref">New ranking rules based on bipolar-valued base 3 Bachet numbers</span></a></p></li>
 <li><p><a class="reference internal" href="#condorcet-tutorial-label"><span class="std std-ref">Condorcet’s 1785 critical perspective on the simple plurality voting rule</span></a></p></li>
 <li><p><a class="reference internal" href="#sufficiency-tutorial-label"><span class="std std-ref">On characterizing bipolar-valued outranking digraphs</span></a></p></li>
 <li><p><a class="reference internal" href="#outranking-consensus-tutorial-label"><span class="std std-ref">Consensus quality of the bipolar-valued outranking relation</span></a></p></li>
@@ -2956,7 +2956,11 @@ heat map above (see <a class="hxr-hoverxref hxr-tooltip reference internal" href
 </section>
 <section id="ranking-by-scoring-with-bipolar-valued-base-3-encoded-numbers">
 <span id="bachet-tutorial-label"></span><h3><a class="toc-backref" href="#id139" role="doc-backlink"><span class="section-number">3.3.3. </span>Ranking-by-scoring with bipolar-valued base 3 encoded numbers</a><a class="headerlink" href="#ranking-by-scoring-with-bipolar-valued-base-3-encoded-numbers" title="Link to this heading"></a></h3>
-<nav class="contents local" id="id37">
+<blockquote class="epigraph">
+<div><p>“<em>Estant proposee telle quantité qu’on voudra pesant un nombre de livres despuis 1. iusques à 40. inclusivement (sans toutefois admettre les fractions ) on demande combien de pois pour le moins il faudrait employer à cet effect.</em>” <a class="footnote-reference brackets" href="#id100" id="id37" role="doc-noteref"><span class="fn-bracket">[</span>24<span class="fn-bracket">]</span></a></p>
+<p class="attribution">—Cl. G. Bachet (1622)</p>
+</div></blockquote>
+<nav class="contents local" id="id38">
 <ul class="simple">
 <li><p><a class="reference internal" href="#bipolar-valued-base-3-encoded-bachet-numbers" id="id149">Bipolar-valued base 3 encoded Bachet numbers</a></p></li>
 <li><p><a class="reference internal" href="#examples-of-sbits-encoded-bachet-numbers" id="id150">Examples of sbits encoded Bachet numbers</a></p></li>
@@ -2967,10 +2971,6 @@ heat map above (see <a class="hxr-hoverxref hxr-tooltip reference internal" href
 </nav>
 <section id="bipolar-valued-base-3-encoded-bachet-numbers">
 <h4><a class="toc-backref" href="#id149" role="doc-backlink"><span class="section-number">3.3.3.1. </span>Bipolar-valued base 3 encoded Bachet numbers</a><a class="headerlink" href="#bipolar-valued-base-3-encoded-bachet-numbers" title="Link to this heading"></a></h4>
-<blockquote class="epigraph">
-<div><p>“<em>Estant proposee telle quantité qu’on voudra pesant un nombre de livres despuis 1. iusques à 40. inclusivement (sans toutefois admettre les fractions ) on demande combien de pois pour le moins il faudrait employer à cet effect.</em>” <a class="footnote-reference brackets" href="#id100" id="id38" role="doc-noteref"><span class="fn-bracket">[</span>24<span class="fn-bracket">]</span></a></p>
-<p class="attribution">—Cl. G. Bachet (1622)</p>
-</div></blockquote>
 <p>Bipolar-valued {-1,0,+1} base 3 encoded integers are due to <em>Claude Gaspard Bachet de Méziriac</em> (1581-1638) <a class="footnote-reference brackets" href="#id96" id="id39" role="doc-noteref"><span class="fn-bracket">[</span>20<span class="fn-bracket">]</span></a>. The idea is to represent the value of an integer <em>n</em> in a base 3 positional numerotation where in each position may appear a <strong>signed bit</strong> –one of the three symbols <strong>{-1,0,+1}</strong>– called hereafter <strong>sbits</strong> for short.</p>
 <p><em>Bachet</em>’s positional <em>sbits</em> numerotation is simulating a weight balance scale where the number <em>n</em> and the potential negative powers of 3 are put on the right tray and the potential positive powers of 3 are put on the left tray. The equation for <em>n = 5</em> gives for instance <img class="math" src="_images/math/925d3cdbf9761dd4bbab603ccc18d0d1af510fb0.png" alt="3^2 = (n + 3^1 + 3^0)"/>. And the <em>sbits</em> encoding corresponds hence to the string ‘+1-1-1’. As, this representation is isomorphic to a base 3 binary encoding, every positive or negative integer may this way be represented with a unique <em>sbits</em> string. With four powers of 3, namely <img class="math" src="_images/math/a7719c02539a8a801d939b912bd5be0b45761912.png" alt="{3^3, 3^2, 3^1, 3^0}"/>, one may for instance represent any value in the integer range -40 to +40. <em>Bachet</em> showed that this bipolar weighing system relies on the smallest possible number of weights -base powers- needed in order to balance the scale for any given integer weight <em>n</em> <a class="reference internal" href="#bac-1622p" id="id40"><span>[BAC-1622p]</span></a>.</p>
 <p>The Digraph3 <a class="reference internal" href="techDoc.html#module-arithmetics" title="arithmetics"><code class="xref py py-mod docutils literal notranslate"><span class="pre">arithmetics</span></code></a> module provides with the <a class="reference internal" href="techDoc.html#arithmetics.BachetNumber" title="arithmetics.BachetNumber"><code class="xref py py-class docutils literal notranslate"><span class="pre">BachetNumber</span></code></a> class an implementation for such <em>sbits</em> encoded integers. Instantiating a <em>Bachet</em> number may be done either with an integer value or with a vector of sbits (see <a class="hxr-hoverxref hxr-tooltip reference internal" href="#bachetnumbers"><span class="std std-numref">Listing 3.43</span></a> Lines  2, 6, 11 and 15). The class provides a binary <em>addition</em> method and unary <em>negating</em> and <em>reversing</em> methods as illustrated in Lines 20 and 32-33 below.</p>
@@ -5062,7 +5062,7 @@ Technologies</em>, Aachen, September 8-11, 1997}, pp 97–103.</p>
 <p>To prove the <em>Condorcet consistency</em> property of the <em>Bachet</em> ranking rule, it is sufficient to notice that the contributions of a transitive triplet <em>‘ai’ &gt; ‘aj’ &gt; ‘ak’</em> to the corresponding <em>Bachet</em> ranking scores will respect the actual ordering of the triplet with all positional permutations of […, ai, …, aj, …,ak, …] in a relation table.</p>
 </aside>
 <aside class="footnote brackets" id="id100" role="note">
-<span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id38">24</a><span class="fn-bracket">]</span></span>
+<span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id37">24</a><span class="fn-bracket">]</span></span>
 <p>“<em>Being proposed to assess with a weight balance a quantity weighing an integer number of pounds between 1 and 40 included, how many balance weights at minimum are needed for being able to do so</em>”.</p>
 </aside>
 </aside>
@@ -5081,7 +5081,7 @@ Technologies</em>, Aachen, September 8-11, 1997}, pp 97–103.</p>
 
   <div role="contentinfo">
     <p>&#169; Copyright 2012-2025, Raymond Bisdorff.
-      <span class="lastupdated">Last updated on May 15, 2025.
+      <span class="lastupdated">Last updated on May 16, 2025.
       </span></p>
   </div>
 

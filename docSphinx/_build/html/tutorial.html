@@ -345,7 +345,8 @@
 <dl class="field-list simple" id="tutorial-label">
 <dt class="field-odd">New<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
-<li><p>The <em>Bachet</em> ranking rule has been added to the tutorial on <a class="reference internal" href="#ranking-tutorial-label"><span class="std std-ref">ranking with multiple incommensurable criteria</span></a></p></li>
+<li><p>A tutorial on <a class="reference internal" href="#partial-ranking-tutorial-label"><span class="std std-ref">extracting partial rankings</span></a> from a given outranking digraph</p></li>
+<li><p>The <em>Bachet</em> ranking rules are illustrated in the tutorial on <a class="reference internal" href="#ranking-tutorial-label"><span class="std std-ref">ranking with multiple incommensurable criteria</span></a></p></li>
 <li><p>A tutorial on <a class="reference internal" href="#hpc-ranking-tutorial-label"><span class="std std-ref">using the Digraph3 HPC resources</span></a> for ranking several millions of multicriteria performance records via sparse outranking digraphs</p></li>
 <li><p>A tutorial on <a class="reference internal" href="#multiprocessing-tutorial-label"><span class="std std-ref">using multiprocessing resources</span></a> when tackling large performance tableaux with several hundreds of decision alternatives.</p></li>
 <li><p>Two tutorials on computing <a class="reference internal" href="#fair-intergroup-pairings-label"><span class="std std-ref">fair intergroup</span></a> and <a class="reference internal" href="#fair-intragroup-pairings-label"><span class="std std-ref">fair intragroup</span></a> pairing solutions</p></li>
@@ -3032,7 +3033,7 @@ three modes at 0.3 (-), 0.5 (~), respectively 0.7 (+) of the common scale span a
 </pre></div>
 </div>
 <p>There is one chordless circuit detected in the given strict outranking digraph <em>gcd</em>, namely <em>a6</em> outranks <em>a7</em>, the latter outranks <em>a8</em>, and <em>a8</em> outranks again <em>a6</em> (see <a class="hxr-hoverxref hxr-tooltip reference internal" href="#rankingtutorial"><span class="std std-numref">Fig. 1.20</span></a>). Any potential linear ordering of these three alternatives will, in fact, always contradict somehow the given outranking relation.</p>
-<p>Now, several heuristic ranking rules have been proposed for constructing a linear ordering which is closest in some specific sense to a given outranking relation. The Digraph3 resources provide some of the most common of these ranking rules, like <em>Copeland</em>’s, <em>Kemeny</em>’s, <em>Slater</em>’s, <em>Kohler</em>’s, <em>Arrow-Raynaud</em>’s or <em>Tideman</em>’s ranking rule. Recently, a new <em>Bachet</em> ranking rule –a valued <em>Copeland</em> variant– has been added.</p>
+<p>Now, several heuristic ranking rules have been proposed for constructing a linear ordering which is closest in some specific sense to a given outranking relation. The Digraph3 resources provide some of the most common of these ranking rules, like <em>Copeland</em>’s, <em>Kemeny</em>’s, <em>Slater</em>’s, <em>Kohler</em>’s, <em>Arrow-Raynaud</em>’s or <em>Tideman</em>’s ranking rule. Recently, new <em>Bachet</em> ranking rules have been added.</p>
 </section>
 <section id="the-copeland-ranking">
 <span id="copeland-ranking-label"></span><h4><a class="toc-backref" href="#id321" role="doc-backlink"><span class="section-number">1.3.4.2. </span>The <em>Copeland</em> ranking</a><a class="headerlink" href="#the-copeland-ranking" title="Link to this heading"></a></h4>
@@ -3526,7 +3527,7 @@ three modes at 0.3 (-), 0.5 (~), respectively 0.7 (+) of the common scale span a
 </section>
 <section id="on-partially-ranking-outranking-digraphs">
 <span id="partial-ranking-tutorial-label"></span><h3><a class="toc-backref" href="#id295" role="doc-backlink"><span class="section-number">1.3.5. </span>On partially ranking outranking digraphs</a><a class="headerlink" href="#on-partially-ranking-outranking-digraphs" title="Link to this heading"></a></h3>
-<p>In this section, instead of computing linear rankings or orders, we illustrate two ranking strategies for directly computing <em>partial rankings</em> –partially determined transitive asymetrical relations– from a given outranking digraph.</p>
+<p>In this section, instead of computing linear rankings or orders, we illustrate two ranking strategies for computing <em>partial rankings</em> –partially determined transitive asymetrical relations– from a given outranking digraph.</p>
 <section id="computing-a-ranking-consensus-from-several-linear-rankings">
 <h4><span class="section-number">1.3.5.1. </span>Computing a ranking consensus from several linear rankings<a class="headerlink" href="#computing-a-ranking-consensus-from-several-linear-rankings" title="Link to this heading"></a></h4>
 <p>To compare for instance the four rankings we have previously obtained with <em>ranking-by-scoring</em> strategies, it is worthwhile vizualizing the <strong>ranking consensus</strong>  one may observe between the <em>Copeland</em>, the <em>NetFlows</em> and both <em>Bachet</em> ranking results. To compute such a ranking consensus we make usage of the <a class="reference internal" href="techDoc.html#transitiveDigraphs.RankingsFusionDigraph" title="transitiveDigraphs.RankingsFusionDigraph"><code class="xref py py-class docutils literal notranslate"><span class="pre">transitiveDigraphs.RankingsFusionDigraph</span></code></a> class.</p>
@@ -10585,7 +10586,7 @@ dot -Grankdir=TB -Tpng rootedTree.dot -o rootedTree.png</p>
 
   <div role="contentinfo">
     <p>&#169; Copyright 2012-2025, Raymond Bisdorff.
-      <span class="lastupdated">Last updated on May 15, 2025.
+      <span class="lastupdated">Last updated on May 16, 2025.
       </span></p>
   </div>
 
