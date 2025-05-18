@@ -1614,7 +1614,7 @@ confidence level <em>alpha</em> %, when</p>
 </pre></div>
 </div>
 </div>
-<p>In this example (see <a class="hxr-hoverxref hxr-tooltip reference internal" href="tutorial.html#linearvotingprofilewithpolls"><span class="std std-numref">Listing 1.71</span></a> Lines 18-), we obtained 460 Party_1 supporters (46%), 436 Party_2 supporters (43.6%) and 104 other voters (10.4%). Favorite candidates of <em>Party_1</em> supporters, with more than 10%, appeared to be <em>a06</em> (19.91%), <em>a07</em> (14.27%) and <em>a03</em> (10.02%). Whereas for <em>Party_2</em> supporters, favorite candidates appeared to be <em>a11</em> (22.94%), followed by <em>a08</em> (15.65%), <em>a04</em> (15.07%) and <em>a06</em> (13.4%).</p>
+<p>In this example (see <a class="hxr-hoverxref hxr-tooltip reference internal" href="tutorial.html#linearvotingprofilewithpolls"><span class="std std-numref">Listing 1.72</span></a> Lines 18-), we obtained 460 Party_1 supporters (46%), 436 Party_2 supporters (43.6%) and 104 other voters (10.4%). Favorite candidates of <em>Party_1</em> supporters, with more than 10%, appeared to be <em>a06</em> (19.91%), <em>a07</em> (14.27%) and <em>a03</em> (10.02%). Whereas for <em>Party_2</em> supporters, favorite candidates appeared to be <em>a11</em> (22.94%), followed by <em>a08</em> (15.65%), <em>a04</em> (15.07%) and <em>a06</em> (13.4%).</p>
 <p>We may convert this linear voting profile into a PerformanceTableau object where each party corresponds to a decision objective.</p>
 <div class="literal-block-wrapper docutils container" id="convertvotingprofile2perftab">
 <div class="code-block-caption"><span class="caption-number">Listing 3.24 </span><span class="caption-text">Converting a voting profile into a performance tableau</span><a class="headerlink" href="#convertvotingprofile2perftab" title="Link to this code"></a></div>
@@ -2641,7 +2641,7 @@ heat map above (see <a class="hxr-hoverxref hxr-tooltip reference internal" href
 <figure class="align-center" id="id101">
 <a class="reference internal image-reference" href="_images/graffiti07_6.png"><img alt="Comparing mv_PE and mv_NP" src="_images/graffiti07_6.png" style="width: 400px;" /></a>
 <figcaption>
-<p><span class="caption-number">Fig. 3.37 </span><span class="caption-text">Indeterminate pairwise comparison example</span><a class="headerlink" href="#id101" title="Link to this image"></a></p>
+<p><span class="caption-number">Fig. 3.18 </span><span class="caption-text">Indeterminate pairwise comparison example</span><a class="headerlink" href="#id101" title="Link to this image"></a></p>
 </figcaption>
 </figure>
 <p>Only eight, out of the fifteen critics, have seen both movies and the positive opinions do neatly balance the negative ones. A global statement that <em>mv_PE</em> is ‘<em>at least as well rated as</em>’ <em>mv_NP</em>  may in this case hence <strong>neither be validated, nor invalidated</strong>; a preferential situation that cannot be modelled with any scoring approach.</p>
@@ -3384,7 +3384,7 @@ heat map above (see <a class="hxr-hoverxref hxr-tooltip reference internal" href
 </pre></div>
 </div>
 <figure class="align-center" id="partialbachet1">
-<a class="reference internal image-reference" href="_images/partialBachet1.png"><img alt="partial Bachet ranking" src="_images/partialBachet1.png" style="width: 350px;" /></a>
+<a class="reference internal image-reference" href="partialBachet1.png"><img alt="partial Bachet ranking" src="partialBachet1.png" style="width: 350px;" /></a>
 <figcaption>
 <p><span class="caption-number">Fig. 3.24 </span><span class="caption-text">Partial <em>Bachet</em> ranking result</span><a class="headerlink" href="#partialbachet1" title="Link to this image"></a></p>
 </figcaption>
@@ -3563,7 +3563,7 @@ instance (see <a class="hxr-hoverxref hxr-tooltip reference internal" href="#ran
 <figure class="align-center" id="id102">
 <a class="reference internal image-reference" href="_images/maxMatchingcycleGraph.png"><img alt="Perfect maximum matching in the 8.cycle graph" src="_images/maxMatchingcycleGraph.png" style="width: 300px;" /></a>
 <figcaption>
-<p><span class="caption-number">Fig. 3.38 </span><span class="caption-text">Perfect maximum matching in the 8-cycle graph</span><a class="headerlink" href="#id102" title="Link to this image"></a></p>
+<p><span class="caption-number">Fig. 3.28 </span><span class="caption-text">Perfect maximum matching in the 8-cycle graph</span><a class="headerlink" href="#id102" title="Link to this image"></a></p>
 </figcaption>
 </figure>
 <p>In the context of digraphs, i.e. <em>oriented</em> graphs, the kernel concept gets much richer and separates from the symmetric MIS concept.</p>
@@ -4148,12 +4148,12 @@ best covered terminal kernel</span><a class="headerlink" href="#orientedlaterali
 <figure class="align-center" id="id103">
 <a class="reference internal image-reference" href="_images/k1restricted.png"><img alt="Kernel restricted adjacency table" src="_images/k1restricted.png" style="width: 400px;" /></a>
 <figcaption>
-<p><span class="caption-number">Fig. 3.39 </span><span class="caption-text">Initial kernel [<em>a1</em>, <em>a2</em>, <em>a4</em>] restricted adjacency table</span><a class="headerlink" href="#id103" title="Link to this image"></a></p>
+<p><span class="caption-number">Fig. 3.37 </span><span class="caption-text">Initial kernel [<em>a1</em>, <em>a2</em>, <em>a4</em>] restricted adjacency table</span><a class="headerlink" href="#id103" title="Link to this image"></a></p>
 </figcaption>
 </figure>
 <p>We first notice that this initial prekernel is indeed only <em>weakly independent</em>: The outranking situation between <em>a4</em> and <em>a1</em> appears <em>indeterminate</em>. The corresponding initial prekernel membership characteristic vector may be computed with the <a class="reference internal" href="techDoc.html#digraphs.Digraph.computeKernelVector" title="digraphs.Digraph.computeKernelVector"><code class="xref py py-func docutils literal notranslate"><span class="pre">computeKernelVector()</span></code></a> method.</p>
 <div class="literal-block-wrapper docutils container" id="id55">
-<div class="code-block-caption"><span class="caption-text">Fixpoint iterations for initial prekernel [‘a1’, ‘a2’, ‘a4’]</span><a class="headerlink" href="#id55" title="Link to this code"></a></div>
+<div class="code-block-caption"><span class="caption-number">Listing 3.53 </span><span class="caption-text">Fixpoint iterations for initial prekernel [‘a1’, ‘a2’, ‘a4’]</span><a class="headerlink" href="#id55" title="Link to this code"></a></div>
 <div class="highlight-pycon notranslate"><div class="highlight"><pre><span></span><span class="linenos"> 1</span><span class="gp">&gt;&gt;&gt; </span><span class="n">gcd</span><span class="o">.</span><span class="n">computeKernelVector</span><span class="p">([</span><span class="s1">&#39;a1&#39;</span><span class="p">,</span><span class="s1">&#39;a2&#39;</span><span class="p">,</span><span class="s1">&#39;a4&#39;</span><span class="p">],</span><span class="n">Initial</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span><span class="n">Comments</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 <span class="linenos"> 2</span><span class="go"> --&gt; Initial prekernel: {&#39;a1&#39;, &#39;a2&#39;, &#39;a4&#39;}</span>
 <span class="linenos"> 3</span><span class="go"> initial low vector : [-1.00, -1.00, -1.00, -1.00, -1.00, -1.00, -1.00]</span>
@@ -4192,7 +4192,7 @@ best covered terminal kernel</span><a class="headerlink" href="#orientedlaterali
 <figure class="align-center" id="id104">
 <a class="reference internal image-reference" href="_images/k2restricted.png"><img alt="Kernel restricted adjacency table" src="_images/k2restricted.png" style="width: 400px;" /></a>
 <figcaption>
-<p><span class="caption-text">Terminal kernel [‘a3’,’a7’] restricted adjacency table</span><a class="headerlink" href="#id104" title="Link to this image"></a></p>
+<p><span class="caption-number">Fig. 3.38 </span><span class="caption-text">Terminal kernel [‘a3’,’a7’] restricted adjacency table</span><a class="headerlink" href="#id104" title="Link to this image"></a></p>
 </figcaption>
 </figure>
 <p>Again, we notice that this terminal prekernel is indeed only weakly independent. The corresponding bipolar-valued characteristic vector <em>Y2</em> may be computed as follows.</p>
@@ -4223,7 +4223,7 @@ best covered terminal kernel</span><a class="headerlink" href="#orientedlaterali
 <figure class="align-center" id="id105">
 <a class="reference internal image-reference" href="_images/bestWorstOrientation.png"><img alt="The random outranking digraph oriented by its initial and terminal prekernels" src="_images/bestWorstOrientation.png" style="width: 300px;" /></a>
 <figcaption>
-<p><span class="caption-text">The strict outranking digraph oriented by the positive members of its initial and terminal prekernels</span><a class="headerlink" href="#id105" title="Link to this image"></a></p>
+<p><span class="caption-number">Fig. 3.39 </span><span class="caption-text">The strict outranking digraph oriented by the positive members of its initial and terminal prekernels</span><a class="headerlink" href="#id105" title="Link to this image"></a></p>
 </figcaption>
 </figure>
 <p>it becomes obvious why alternative <em>a1</em> is <strong>neither included nor excluded</strong> from the initial prekernel. Same observation is applicable to alternative <em>a3</em> which can <strong>neither be included nor excluded</strong> from the terminal prekernel. It may even happen, in case of more indeterminate outranking situations, that no alternative  is positively included or excluded from a weakly independent prekernel; the corresponding bipolar-valued membership characteristic vector being completely indeterminate (see for instance the tutorial on <a class="reference internal" href="tutorial.html#rubis-tutorial-label"><span class="std std-ref">Computing a Best Choice Recommendation</span></a>).</p>
@@ -5081,7 +5081,7 @@ Technologies</em>, Aachen, September 8-11, 1997}, pp 97–103.</p>
 
   <div role="contentinfo">
     <p>&#169; Copyright 2012-2025, Raymond Bisdorff.
-      <span class="lastupdated">Last updated on May 16, 2025.
+      <span class="lastupdated">Last updated on May 18, 2025.
       </span></p>
   </div>
 
