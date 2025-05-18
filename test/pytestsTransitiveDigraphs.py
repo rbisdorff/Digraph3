@@ -24,16 +24,16 @@ def testRankingByChoosingWithKernels():
     print('=== >>> testing best and last fusion (default)')
     g = RandomBipolarOutrankingDigraph(Normalized=True,numberOfActions=10)
     rcg0 = RankingByChoosingDigraph(g,Debug=False)
-    rcg0.showWeakOrder()
+    rcg0.showTransitiveDigraph()
     rcg0.showRankingByChoosing()
     print(rcg0.computeOrdinalCorrelation(g))
     print('=== >>> best') 
     rcg1 = RankingByBestChoosingDigraph(g,Debug=False)
-    rcg1.showWeakOrder()
+    rcg1.showTransitiveDigraph()
     print(rcg1.computeOrdinalCorrelation(g))
     print('=== >>> last')
     rcg2 = RankingByLastChoosingDigraph(g,Debug=False)
-    rcg2.showWeakOrder()
+    rcg2.showTransitiveDigraph()
     rcg2.exportGraphViz(fileName='test1',direction="worst")
     print(rcg2.computeOrdinalCorrelation(g))
 
@@ -48,7 +48,7 @@ def testPrincipalInOutDegreesRanking():
     print('=== >>> principal preorder')
     g = RandomBipolarOutrankingDigraph(Normalized=True,numberOfActions=10)
     rcf = PrincipalInOutDegreesOrdering(g,imageType="pdf",Debug=False)
-    rcf.showWeakOrder()
+    rcf.showTransitiveDigraph()
     print(rcf.computeOrdinalCorrelation(g))
     rcf.exportGraphViz(fileName='test2',direction="Colwise")
 
@@ -66,14 +66,14 @@ def testRBCThreadingOptions():
                                                      Debug=False,\
                                                      Threading=False)
     print('execution time %s: ' % (str ( time()-t0 ) ) )
-    rcg0.showWeakOrder()
+    rcg0.showTransitiveDigraph()
     t0 = time()
     rcg1 = RankingByChoosingDigraph(g,\
                                                      fusionOperator="o-min",\
                                                      Debug=False,\
                                                      Threading=True)
     print('execution time %s: ' % (str ( time()-t0 ) ) )
-    rcg1.showWeakOrder()
+    rcg1.showTransitiveDigraph()
 
 def testPRIThreadingOptions():
     print('===>>> test threading option')
@@ -87,13 +87,13 @@ def testPRIThreadingOptions():
                                            imageType=None,Debug=False,
                                            Threading=False)
     print('execution time %s: ' % (str ( time()-t0 ) ) )
-    rcf1.showWeakOrder()
+    rcf1.showTransitiveDigraph()
     t0 = time()
     rcf2 = PrincipalInOutDegreesOrdering(g,fusionOperator="o-min",
                                            imageType=None,Debug=False,\
                                            Threading=True)
     print('execution time %s: ' % (str ( time()-t0 ) ) )
-    rcf2.showWeakOrder()
+    rcf2.showTransitiveDigraph()
 
 def testKohlerArrowRaynaudFusionDigraph():
     print('===>>> test KohlerArrowRaynaudFusionDigraph class ---------')

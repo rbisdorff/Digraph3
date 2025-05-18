@@ -3520,7 +3520,7 @@ The generic :py:class:`~transitiveDigraphs.TransitiveDigraph` class provides the
        2nd last ranked ['a1', 'a3', 'a4', 'a8'])
      1st last ranked ['a2', 'a9'])
 
-The nine alternatives are gathered into four levels. Mind that alternative *a1* appears actually on the 2nd first-ranked **and** on the 2nd-last level (Lines 4 -5). 
+The nine alternatives are gathered into four levels. Mind that alternative *a1* appears actually on the 2nd first-ranked **and** on the 2nd last-ranked level (Lines 4 -5). 
 
 The drawing of partial rankings makes usage of a topological sort algorithm [60]_ (see :numref:`RankingConsensus2` Lines 4-7). 
 
