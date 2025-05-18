@@ -3529,7 +3529,7 @@ The drawing of partial rankings makes usage of a topological sort algorithm [60]
    :caption: Inspecting a partial ranking
    :emphasize-lines: 4-7
 
-   >>> rfdg.exportGraphViz('rankingsByScoringFusion',strategy='optimistic')
+   >>> rfdg.exportGraphViz('rankingsByScoringFusion')
     *---- exporting a dot file for GraphViz tools ---------*
     Exporting to rankingsByScoringFusion.dot
      0 { rank = 0; a5; }
@@ -3634,15 +3634,21 @@ The resulting *partial ranking* is highly correlated with the common determinate
 
 We recover with the *Bachet* ranking rule a ranking consensus actually very similar to the previous consensus obtained from of all four *ranking-by-scoring* results (see :numref:`rankingConsensusFigure`).
 
-As the :py:class:`~transitiveDigraphs.PartialBachetRanking` constructor uses by default the *polarised* version of the *Bachet* rule, the partial ranking result obtained in :numref:`weakBachetpol` represents in fact a ranking consensus respecting the actual **transitive parts** of the given outranking digraph (see the advanced topic dedicated to the :ref:`Bachet ranking rules <Bachet-Tutorial-label>`). The :py:class:`~transitiveDigraphs.PartialBachetRanking` now provides a **Polarised == False** flag allowing to use instead the **valued** version of the *Bachet* rule.
+As the :py:class:`~transitiveDigraphs.PartialBachetRanking` constructor uses by default the *polarised* version of the *Bachet* rule, the partial ranking result obtained in :numref:`weakBachetpol` represents in fact a ranking consensus respecting the actual **transitive parts** of the given outranking digraph (see the advanced topic dedicated to the :ref:`Bachet ranking rules <Bachet-Tutorial-label>`). The :py:class:`~transitiveDigraphs.PartialBachetRanking` now provides a "**Polarised == False**" flag allowing to use instead the **valued** version of the *Bachet* ranking rule.
 
 .. code-block:: pycon
    :caption: Valued Bachet weak ranking result
    :name: weakBachet5
-   :emphasize-lines: 1,5-8,11,13
+   :emphasize-lines: 1,4-8,11-14,17-19
 
    >>> wbv = PartialBachetRanking(g,Polarised=False,
    ...            randomized=100,seed=1,maxNbrOfRankings=5)
+   >>> wbv.bachetRankings
+    [(0.6764, ['a6', 'a5', 'a7', 'a4', 'a1', 'a8', 'a3', 'a2', 'a9']),
+     (0.6583, ['a5', 'a6', 'a7', 'a1', 'a3', 'a8', 'a2', 'a4', 'a9']),
+     (0.6543, ['a5', 'a6', 'a1', 'a7', 'a3', 'a8', 'a2', 'a4', 'a9']),
+     (0.6503, ['a5', 'a6', 'a7', 'a8', 'a3', 'a9', 'a2', 'a4', 'a1']),
+     (0.6462, ['a5', 'a6', 'a1', 'a7', 'a8', 'a2', 'a3', 'a4', 'a9'])]
    >>> wbv.showTransitiveDigraph()
     Ranking by Choosing and Rejecting
      1st ranked ['a5', 'a6']
@@ -3666,7 +3672,7 @@ As the :py:class:`~transitiveDigraphs.PartialBachetRanking` constructor uses by 
 
    valued Bachet weak ranking result  	   
 
-In :numref:`weakBachet5` Lines 5-8 we observe now a partial ranking taking into account not only the polarised relational structure, but also the **epistemic determination** of the given outranking digraph *g*. And the ordinal correlation with *g*, supported by a similar criteria significance of 57%, gets even higher: +0.888 vs +0.806 (see :numref:`weakBachet5` Lines 11-13). It is worthwhile noticing again in :numref:`weakBachetval` that alternative *a1* appears indeed incomparable to most of the other alternatives, a fact already made previously apparent in :numref:`rankingConsensusFigure`.  
+In :numref:`weakBachet5` Lines 11-14 we observe now a partial ranking taking into account not only the polarised relational structure, but also the **epistemic determination** of the given outranking digraph *g*. And the ordinal correlation with *g*, supported by a similar criteria significance of 57%, gets even higher: +0.888 vs +0.806 (see :numref:`weakBachet5` Lines 17-19). It is worthwhile noticing in :numref:`weakBachetval` that alternative *a1* (in ranks 3,4,5 and 9) appears indeed incomparable to the other alternatives except alternatives *a5* and *a6*, a fact already made previously apparent in :numref:`rankingConsensusFigure`.  
 
 This way, the *Bachet* ranking rules deliver efficient tools for constructing convincing partial rankings providing by the way an effective tool for computing first or last choice recommendations, actually the :ref:`initial and terminal prekernels <Bipolar-Valued-Kernels-Tutorial-label>` of such partial transitive digraphs. Mind however that the *Bachet* ranking rules can only handle small outranking digraphs ( < 50 ). For larger ( > 50 ) or big ( > 1000 ) outranking digraphs it is opportune to turn to order statistics and compute **weak rankings** --rankings with ties-- by sorting the multicriteria performance records into relative or absolute performance **quantile equivalence classes**.
 
