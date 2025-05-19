@@ -130,7 +130,7 @@ def testCoalitionsPerformanceTableau():
     g.computeRankingByChoosing(CoDual=False)
     g.showRankingByChoosing()
     prg = PrincipalInOutDegreesOrdering(g,imageType="pdf")
-    prg.showWeakOrder()
+    prg.showTransitiveDigraph()
     print(g.computeOrdinalCorrelation(prg))
 
 def testPercentilesOfThresholds():

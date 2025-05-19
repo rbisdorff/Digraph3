@@ -363,9 +363,9 @@ def testStochasticOutrankingDigraphs():
             print('sd',gmc.relationStatistics[x][y]['sd'])
     
     grbc = RankingByChoosingDigraph(g)
-    grbc.showWeakOrder()
+    grbc.showTransitiveDigraph()
     gmcrbc = RankingByChoosingDigraph(gmc)
-    gmcrbc.showWeakOrder()
+    gmcrbc.showTransitiveDigraph()
 
 def testRandomWeightsLaws():
     print('*------- test random laws for stochastic outranking ------*')
