@@ -3613,7 +3613,7 @@ three modes at 0.3 (-), 0.5 (~), respectively 0.7 (+) of the common scale span a
 </span><span class="hll"><span class="linenos">5</span><span class="go">  Bipolar-valued equivalence : +0.133</span>
 </span></pre></div>
 </div>
-<p>The epistemic fusion of all four <em>ranking-by-scoring</em> results delivers here a convincing transitive partial ordering, highly correlated with the given outranking digraph <em>g</em> (+0.847), supported by a criteria significance majority of 58% (see Lines 3-5 above) .</p>
+<p>The epistemic fusion of all four <em>ranking-by-scoring</em> results delivers here a convincing transitive partial ordering, highly correlated with the given outranking digraph <em>g</em> (+0.847), supported by a criteria significance majority of 56.7% (see Lines 3-5 above) .</p>
 <p>A second strategy for constructing partial rankings makes usage of the <em>Bachet</em> ranking rules.</p>
 </section>
 <section id="on-partially-ranking-with-the-bachet-rules">
@@ -3676,7 +3676,7 @@ three modes at 0.3 (-), 0.5 (~), respectively 0.7 (+) of the common scale span a
 <p><span class="caption-number">Fig. 1.27 </span><span class="caption-text">Polarised Bachet partial ranking result</span><a class="headerlink" href="#weakbachetpol" title="Link to this image"></a></p>
 </figcaption>
 </figure>
-<p>The resulting <em>partial ranking</em> is highly correlated with the common determinated part of the given outranking digraph <em>g</em> (+0.806) leading to a <em>relational equivalence</em> with the given outranking digraph <em>g</em> supported by a criteria significance majority of 57% (see Lines 9-11 above).</p>
+<p>The resulting <em>partial ranking</em> is highly correlated with the common determinated part of the given outranking digraph <em>g</em> (+0.806) leading to a <em>relational equivalence</em> with the given outranking digraph <em>g</em> supported by a criteria significance majority of 57.2% (see Lines 9-11 above).</p>
 <p>We recover with the <em>Bachet</em> ranking rule a ranking consensus actually very similar to the previous consensus obtained from of all four <em>ranking-by-scoring</em> results (see <a class="hxr-hoverxref hxr-tooltip reference internal" href="#rankingconsensusfigure"><span class="std std-numref">Fig. 1.26</span></a>).</p>
 <p>The <a class="reference internal" href="techDoc.html#transitiveDigraphs.PartialBachetRanking" title="transitiveDigraphs.PartialBachetRanking"><code class="xref py py-class docutils literal notranslate"><span class="pre">PartialBachetRanking</span></code></a> constructor uses by default the <em>polarised</em> version of the <em>Bachet</em> ranking rule. Due to its <em>Condorcet consistency</em> property, the partial ranking result obtained in <a class="hxr-hoverxref hxr-tooltip reference internal" href="#weakbachetpol"><span class="std std-numref">Fig. 1.27</span></a> represents in fact a ranking consensus respecting the actual <strong>transitive parts</strong> of the given outranking digraph (see the advanced topic dedicated to the <a class="reference internal" href="pearls.html#bachet-tutorial-label"><span class="std std-ref">Bachet ranking rules</span></a>).</p>
 <p>The <a class="reference internal" href="techDoc.html#transitiveDigraphs.PartialBachetRanking" title="transitiveDigraphs.PartialBachetRanking"><code class="xref py py-class docutils literal notranslate"><span class="pre">PartialBachetRanking</span></code></a> now provides a “<strong>Polarised == False</strong>” flag allowing to use instead the <strong>valued</strong> version of the <em>Bachet</em> ranking rule (see below <a class="hxr-hoverxref hxr-tooltip reference internal" href="#weakbachet5"><span class="std std-numref">Listing 1.49</span></a> Line 1). The five best qualified <em>Bachet</em> rankings are shown in Lines 4-8.</p>
@@ -3722,7 +3722,7 @@ three modes at 0.3 (-), 0.5 (~), respectively 0.7 (+) of the common scale span a
 <p><span class="caption-number">Fig. 1.28 </span><span class="caption-text">valued Bachet weak ranking result</span><a class="headerlink" href="#weakbachetval" title="Link to this image"></a></p>
 </figcaption>
 </figure>
-<p>This way, the <em>Bachet</em> ranking rules deliver efficient tools for constructing convincing partial rankings providing by the way an effective tool for computing first or last choice recommendations, actually the <a class="reference internal" href="pearls.html#bipolar-valued-kernels-tutorial-label"><span class="std std-ref">initial and terminal prekernels</span></a> of such partial transitive digraphs. Mind however that the <em>Bachet</em> ranking rules can only handle small outranking digraphs ( &lt; 50 ). For larger ( &gt; 50 ) or big ( &gt; 1000 ) outranking digraphs it is opportune to turn to order statistics and compute <strong>weak rankings</strong> –rankings with ties– by sorting the multicriteria performance records into relative or absolute performance <strong>quantile equivalence classes</strong>.</p>
+<p>This way, the <em>Bachet</em> ranking rules deliver efficient tools for constructing convincing partial rankings providing by the way a tool for computing potential first or last choice recommendations, actually the <a class="reference internal" href="pearls.html#bipolar-valued-kernels-tutorial-label"><span class="std std-ref">initial and terminal prekernels</span></a> of such partial transitive digraphs. Mind however that the <em>Bachet</em> ranking rules can only handle small outranking digraphs ( &lt; 50 ). For larger ( &gt; 50 ) or big ( &gt; 1000 ) outranking digraphs it is opportune to turn to order statistics and compute <strong>weak rankings</strong> –rankings with ties– by sorting the multicriteria performance records into relative or absolute performance <strong>quantile equivalence classes</strong>.</p>
 <p>This order statistics based <strong>rating</strong> approach is presented in the following tutorials.</p>
 <p>Back to <a class="reference internal" href="#tutorial-label"><span class="std std-ref">Content Table</span></a></p>
 <hr class="docutils" />
@@ -10610,7 +10610,7 @@ dot -Grankdir=TB -Tpng rootedTree.dot -o rootedTree.png</p>
 
   <div role="contentinfo">
     <p>&#169; Copyright 2012-2025, Raymond Bisdorff.
-      <span class="lastupdated">Last updated on May 18, 2025.
+      <span class="lastupdated">Last updated on May 19, 2025.
       </span></p>
   </div>
 

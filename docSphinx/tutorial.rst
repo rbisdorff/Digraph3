@@ -3560,7 +3560,7 @@ Following an optimistic drawing perspective, alternative *a1* is placed here on 
      Epistemic determination    :  0.157
      Bipolar-valued equivalence : +0.133
 
-The epistemic fusion of all four *ranking-by-scoring* results delivers here a convincing transitive partial ordering, highly correlated with the given outranking digraph *g* (+0.847), supported by a criteria significance majority of 58% (see Lines 3-5 above) . 
+The epistemic fusion of all four *ranking-by-scoring* results delivers here a convincing transitive partial ordering, highly correlated with the given outranking digraph *g* (+0.847), supported by a criteria significance majority of 56.7% (see Lines 3-5 above) . 
 
 A second strategy for constructing partial rankings makes usage of the *Bachet* ranking rules.
 
@@ -3630,7 +3630,7 @@ In :numref:`weakBachet3` Line 6, we notice that we sample 100 *Bachet* rankings 
 
    Polarised Bachet partial ranking result  	   
 
-The resulting *partial ranking* is highly correlated with the common determinated part of the given outranking digraph *g* (+0.806) leading to a *relational equivalence* with the given outranking digraph *g* supported by a criteria significance majority of 57% (see Lines 9-11 above).
+The resulting *partial ranking* is highly correlated with the common determinated part of the given outranking digraph *g* (+0.806) leading to a *relational equivalence* with the given outranking digraph *g* supported by a criteria significance majority of 57.2% (see Lines 9-11 above).
 
 We recover with the *Bachet* ranking rule a ranking consensus actually very similar to the previous consensus obtained from of all four *ranking-by-scoring* results (see :numref:`rankingConsensusFigure`).
 
@@ -3688,7 +3688,7 @@ It is worthwhile noticing in :numref:`weakBachetval` that alternative *a1* appea
 
 
 
-This way, the *Bachet* ranking rules deliver efficient tools for constructing convincing partial rankings providing by the way an effective tool for computing first or last choice recommendations, actually the :ref:`initial and terminal prekernels <Bipolar-Valued-Kernels-Tutorial-label>` of such partial transitive digraphs. Mind however that the *Bachet* ranking rules can only handle small outranking digraphs ( < 50 ). For larger ( > 50 ) or big ( > 1000 ) outranking digraphs it is opportune to turn to order statistics and compute **weak rankings** --rankings with ties-- by sorting the multicriteria performance records into relative or absolute performance **quantile equivalence classes**.
+This way, the *Bachet* ranking rules deliver efficient tools for constructing convincing partial rankings providing by the way a tool for computing potential first or last choice recommendations, actually the :ref:`initial and terminal prekernels <Bipolar-Valued-Kernels-Tutorial-label>` of such partial transitive digraphs. Mind however that the *Bachet* ranking rules can only handle small outranking digraphs ( < 50 ). For larger ( > 50 ) or big ( > 1000 ) outranking digraphs it is opportune to turn to order statistics and compute **weak rankings** --rankings with ties-- by sorting the multicriteria performance records into relative or absolute performance **quantile equivalence classes**.
 
 This order statistics based **rating** approach is presented in the following tutorials.  
 
