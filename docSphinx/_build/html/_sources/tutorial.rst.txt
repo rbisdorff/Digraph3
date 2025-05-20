@@ -6764,7 +6764,7 @@ We may hence make use of the :py:meth:`~transitiveDigraphs.TransitiveDigraph.exp
    :linenos:
 
    >>> from transitiveDigraphs import TransitiveDigraph
-   >>> TransitiveDigraph.exportGraphViz(uop,
+   >>> TransitiveDigraph.exportGraphViz(uop,ArrowHeads=True,
    ...           fileName='choice_unopposed')
     *---- exporting a dot file for GraphViz tools ---------*
      Exporting to choice_unopposed.dot
