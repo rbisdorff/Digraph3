@@ -6491,7 +6491,7 @@ We have mentioned that Alice considers a performance difference of 7 points on t
    :name: aliceVetos
    :linenos:
    :caption: Polarised outranking situations
-   :emphasize-lines: 8,13,18,25,30,25
+   :emphasize-lines: 1,8,13,18,25,30,35
 
    >>> dg.showPolarisations()
     *----  Negative polarisations ----*
@@ -6529,9 +6529,9 @@ We have mentioned that Alice considers a performance difference of 7 points on t
     Counter-veto threshold              : 7.00
     Polarisation: r(I-UHB >= S-HKK) = 0.17 ==> +1.00
 
-In :numref:`aliceVetos`, we see that *considerable performance differences* concerning the *Attractiveness of the studies* (*AS* criterion) are indeed observed between the *Specialised Secretary* study programm offered in Köln and the *Graduate Interpreter* study programs offered in Köln, Saarbrücken and Heidelberg. They polarise, hence, three *more or less invalid* outranking situations to *certainly invalid* (Lines 8, 13, 18) and corresponding three *more or less valid* converse outranking situations to *certainly valid* ones (Lines 25, 30, 35). 
+In :numref:`aliceVetos`, we see that *considerable performance differences* concerning the *Attractiveness of the studies* (*AS* criterion) are indeed observed between the *Specialised Secretary* study programm offered in Köln and the *Graduate Interpreter* study programs offered in Köln, Saarbrücken and Heidelberg. They polarise, hence, three *more or less invalid* outranking situations to *certainly invalid* (Lines 8, 13, 18) and corresponding three *more or less valid* converse outranking situations to *certainly valid* ones (Lines 25, 30, 35).
 
-We may finally notice in the relation map, shown in :numref:`aliceRelationMap`, that the four best-ranked study programs, *I-FHK*, *I-USB*, *I-UHB* and *T-FHK*,  are in fact *Condorcet* winners (see :numref:`aliceBestChoice` Line 2), i.e. they are all four *indifferent* one of the other **and** positively *outrank* all other alternatives, a result confirmed below by our best choice recommendation (Line 8).
+We may furthermore notice in :numref:`aliceRelationMap`, that the four first-ranked study programs, *I-FHK*, *I-USB*, *I-UHB* and *T-FHK*,  are in fact *Condorcet* winners (see :numref:`aliceBestChoice` Line 2), i.e. they are all four *indifferent* one of the other **and** they positively *outrank* all other alternatives, a result confirmed below by our best choice recommendation (Line 8).
    
 .. code-block:: pycon
    :name: aliceBestChoice
@@ -6563,9 +6563,48 @@ We may finally notice in the relation map, shown in :numref:`aliceRelationMap`, 
      determinateness (%) : 58.33
      most credible action(s) = {'S-HKK': 0.17,'C-HKK': 0.17}
 
-Most credible best choice among the four best-ranked study programs eventually becomes the *Graduate Interpreter* study program at the *Technical High School* in *Köln* (see :numref:`aliceBestChoice` Line 14) supported by a :math:`(0.75 + 1)/2.0 \,=\,87.5\%` (18/24) majority of global criteria significance [24]_.
+Notice in Line 14 above that the most credible best choice among the four first-ranked study programs eventually becomes the *Graduate Interpreter* study program at the *Technical High School* in *Köln* supported by a :math:`(0.75 + 1)/2.0 \,=\,87.5\%` (18/24) majority of global criteria significance [24]_.
 
-Let us now, for instance, check the pairwise outranking situations observed between the first and a second-ranked alternative: *Garduate Interpreter* studies in *Köln* versus *Graduate Interpreter* studies in *Saabrücken* (see *I-FHK* and *I-USB* in :numref:`aliceHeatmap`).
+In the relation map, shown in :numref:`aliceRelationMap` above, we finally see in the left corner that the *asymetric* part of the outranking relation, i.e. the corresponding *strict* outranking relation, is actually *transitive* (see Lines 3-6 in :numref:`transitivePart`). We can hence make usage of the :py:meth:`~transitiveDigraphs.TransitiveDigraph.showTransitiveDigraph` method from the :py:class:`transitiveDigraphs.TransitiveDigraph` to illustrate our previous first choice recommendation.
+
+.. code-block:: pycon
+   :name: transitivePart
+   :caption: The asymetrical outranking is transitive 
+   :linenos:
+   :emphasize-lines: 1,6,10-13
+
+   >>> cdg = ~(dg)  # codual == strict outranking digraph
+   >>> cdg.computeTransitivityDegree(Comments=True)
+    Transitivity degree of digraph <converse-dual-rel_AliceChoice>:
+     #triples x>y>z: 14, #closed: 14, #open: 0
+     (#closed/#triples) =  1.000
+    Decimal('1')
+   >>> from transitiveDigraphs import TransitiveDigraph
+   >>> TransitiveDigraph.showTransitiveDigraph(cdg)
+    Ranking by Choosing and Rejecting
+     1st ranked ['I-FHK', 'I-UHB', 'I-USB', 'T-FHK']
+       2nd ranked ['T-FHM', 'T-UD', 'T-UHB', 'T-USB']
+       2nd last ranked ['T-FHM', 'T-UD', 'T-UHB', 'T-USB'])
+     1st last ranked ['C-HKK', 'S-HKK'])
+   >>> TransitiveDigraph.exportGraphViz(cdg,
+   ...                 'strictOutranking')
+    *---- exporting a dot file for GraphViz tools ---------*
+     Exporting to strictOutranking.dot
+      0 { rank = i; I_FHK; I_UHB; I_USB; T_FHK; }
+      1 { rank = i; T_UHB; T_USB; T_UD; T_FHM; }
+      2 { rank = i; S_HKK; C_HKK; }
+    dot -Grankdir=TB -Tpng strictOutranking.dot -o strictOutranking.png
+
+.. figure:: strictOutranking.png
+   :name: strictOutranking1
+   :width: 350 px
+   :align: center
+
+   The strict outranking relation	   
+
+In :numref:`transitivePart` and in :numref:`strictOutranking1` we find actually confirmed  that all the *Graduate Intergreter* studies come first, followed by the *Qualified Translator* studies. Last come the *Köln Chamber of Commerce*'s specialized studies. This confirms again the high significance Alice attaches to the *attractiveness* of her further stdies and of her future profession (see criteria *AS* and *AP* in :numref:`aliceHeatmap`).
+
+Let us now, for instance, check the pairwise outranking situations observed between the *Graduate Interpreter* studies in *Köln* and the  *Graduate Interpreter* studies in *Saabrücken* (see *I-FHK* and *I-USB* in :numref:`aliceHeatmap`).
 
    >>> dg.showHTMLPairwiseOutrankings('I-FHK','I-USB')
 
@@ -6588,12 +6627,12 @@ In a similar way, we may compute a *partial ranking* of all the potential study 
 
    >>> from transitiveDigraphs import PartialBachetRankingDigraph
    >>> pbr = PartialBachetRanking(dg,randomized=100,maxNbrOfRankings=5,seed=1)
-   >>> pbr.rankings
-    [['I-FHK','I-USB','T-FHK','I-UHB','T-UD' ,'T-USB','T-UHB','T-FHM','C-HKK','S-HKK']),
-     ['I-FHK','I-USB','T-FHK','T-UD', 'T-USB','I-UHB','T-UHB','T-FHM','C-HKK','S-HKK']),
-     ['I-FHK','I-UHB','I-USB','T-FHK','T-UD' ,'T-USB','T-UHB','T-FHM','C-HKK','S-HKK']),
-     ['I-FHK','I-USB','I-UHB','T-FHK','T-UD' ,'T-USB','T-UHB','T-FHM','S-HKK','C-HKK']),
-     ['I-FHK','I-USB','T-FHK','T-USB','I-UHB','T-UD' ,'T-UHB','T-FHM','C-HKK','S-HKK'])]
+   >>> pbr.bachetRankings
+    [(+0.715,['I-FHK','I-USB','T-FHK','I-UHB','T-UD', 'T-USB','T-UHB','T-FHM','C-HKK','S-HKK']),
+     (+0.700,['I-FHK','I-USB','T-FHK','T-UD', 'T-USB','I-UHB','T-UHB','T-FHM','C-HKK','S-HKK']),
+     (+0.698,['I-FHK','I-UHB','I-USB','T-FHK','T-UD', 'T-USB','T-UHB','T-FHM','C-HKK','S-HKK']),
+     (+0.692,['I-FHK','I-USB','I-UHB','T-FHK','T-UD', 'T-USB','T-UHB','T-FHM','S-HKK','C-HKK']),
+     (+0.684,['I-FHK','I-USB','T-FHK','T-USB','I-UHB','T-UD', 'T-UHB','T-FHM','C-HKK','S-HKK'])]
    >>> pbr.showTransitiveDigraph()
     Ranking by Choosing and Rejecting
      1st ranked ['I-FHK']
@@ -6610,7 +6649,7 @@ In a similar way, we may compute a *partial ranking* of all the potential study 
      Epistemic determination    :  0.405
      Bipolar-valued equivalence : +0.323
 
-In :numref:`aliceRankingByChoosing`, we find confirmed that the *Köln Interpreter* studies appear always first-ranked (Lines 4-8) and all the *Interpreter* studies are preferrred to the *Translator* studies (Lines 11-12). The *Köln Translater* studies are the preferred one of all the *Translater* studies (Line 13). The *Foreign Correspondent* and the *Specialised Secretary* studies both appear last ranked (Line 18). This partial ranking result is highly correlated (+0.80) with the given outranking digraph *dg* supported by a criteria significance majority of 66% (Lines 21-23).
+In :numref:`aliceRankingByChoosing`, we find confirmed that the *Köln Interpreter* studies appear always first-ranked (Lines 4-8) and all the *Interpreter* studies are preferrred to the *Translator* studies (Lines 11-12). The *Köln Translater* studies are the preferred one of all the *Translater* studies (Line 13). The *Foreign Correspondent* and the *Specialised Secretary* studies both appear last-ranked (Line 18). Notice by the way the high ordinal correlations of each one of the five *Bachet* rankings with the digraph *dg* (Lines 4-8). Their ranking consensus is hence also highly correlated with the given outranking digraph *dg* (+0.80) and supported by a criteria significance majority of 66% (Lines 21-23).
 
 .. code-block:: pycon
    :linenos:
@@ -6627,7 +6666,7 @@ In :numref:`aliceRankingByChoosing`, we find confirmed that the *Köln Interpret
 
    Partial ranking of the study programs	   
 
-In :numref:`alicePartialRanking` we find the corresponding drawing of the partial ranking of the ten study programs. We may notice here that the *Heidelberg* Interpreter studies do not compare well with the studies in *Saarbrücken* or *Düsseldorf*. 
+In :numref:`alicePartialRanking` we find the corresponding drawing of the partial ranking of the ten further study alternatives. We may notice there that the *Heidelberg* Interpreter studies do not compare well with the studies in *Saarbrücken*, *Düsseldorf* or *Köln*. 
 
 Yet, how *robust* are our findings with respect to potential settings of the decision objectives' importance and the performance criteria significance ?
 		
