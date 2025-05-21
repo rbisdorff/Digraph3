@@ -438,7 +438,7 @@ class TransitiveDigraph(Digraph):
         # same ranks for Hasses equivalence classes
         k = len(rankingByChoosing)
         for i in range(k):
-            sameRank = '{ rank = i; '
+            sameRank = '{ rank = same; '
             ich = rankingByChoosing[i][1]
             for x in ich:
                 sameRank += str(_safeName(x))+'; '
@@ -2198,6 +2198,8 @@ if __name__ == "__main__":
     g = BipolarOutrankingDigraph(pt)
     wbg = PartialBachetRanking(g,seed=100,Polarised=True,Comments=False)
     print(wbg)
+    wbg.showTransitiveDigraph()
+    TransitiveDigraph.exportGraphViz(wbg)
     #wbg.showTransitiveDigraph(WithCoverCredibility=True)
     #wcg = WeakCopelandOrder(g,WithFairestRanking=True)
     #print(wcg.copelandPermutations)

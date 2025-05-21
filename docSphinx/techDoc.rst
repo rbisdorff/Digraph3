@@ -17,7 +17,7 @@ Technical Reference of the Digraph3 modules
 
    :New:
 
-        - Added a new :py:class:`transitiveDigraphs.WeakBachetRanking` class using the new :py:class:`linearOrders.PolarisedBachetRanking` class for generating highly correlated **weak rankings** from a given outranking digraph instance.
+        - Added a new :py:class:`transitiveDigraphs.PartialBachetRanking` class using the new :py:class:`linearOrders.PolarisedBachetRanking` class for generating highly correlated **partial rankings** from a given outranking digraph instance.
 
         - In order to explore potential run time accelerations with CUDA on GPUs, a new cythonized **cnpBipolarDigraphs** module with a numpy integer array implementation of the bipolar-valued characteristic valuation has been added to the cythonized collection of Digraph3 modules.
 	

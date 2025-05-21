@@ -38,7 +38,8 @@ extensions = ['sphinx_rtd_theme',
               'sphinx.ext.autosectionlabel',
               'sphinx_copybutton',
               'sphinx.ext.graphviz',
-              'hoverxref.extension']
+#              'hoverxref.extension'
+              ]
 copybutton_prompt_text = r'\s*\d*>>> |\s*\d*\.\.\. '
 copybutton_exclude = '.exclude_me' # keep line numbers
 copybutton_prompt_is_regexp = True

@@ -3684,7 +3684,7 @@ It is worthwhile noticing in :numref:`weakBachetval` that alternative *a1* appea
    :width: 200 px
    :align: center
 
-   valued Bachet weak ranking result  	   
+   valued Bachet partial ranking result  	   
 
 
 
