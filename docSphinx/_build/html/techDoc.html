@@ -854,8 +854,6 @@
 <li class="toctree-l3"><a class="reference internal" href="#transitiveDigraphs.KemenyWeakOrder"><code class="docutils literal notranslate"><span class="pre">KemenyWeakOrder</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="#transitiveDigraphs.KohlerArrowRaynaudFusion"><code class="docutils literal notranslate"><span class="pre">KohlerArrowRaynaudFusion</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="#transitiveDigraphs.PartialBachetRanking"><code class="docutils literal notranslate"><span class="pre">PartialBachetRanking</span></code></a><ul>
-<li class="toctree-l4"><a class="reference internal" href="#transitiveDigraphs.PartialBachetRanking.computeBoostedOrdering"><code class="docutils literal notranslate"><span class="pre">PartialBachetRanking.computeBoostedOrdering()</span></code></a></li>
-<li class="toctree-l4"><a class="reference internal" href="#transitiveDigraphs.PartialBachetRanking.computeBoostedRanking"><code class="docutils literal notranslate"><span class="pre">PartialBachetRanking.computeBoostedRanking()</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="#transitiveDigraphs.PartialBachetRanking.exportGraphViz"><code class="docutils literal notranslate"><span class="pre">PartialBachetRanking.exportGraphViz()</span></code></a></li>
 </ul>
 </li>
@@ -1538,7 +1536,7 @@ class;</p>
 <li><dl>
 <dt><a class="reference internal" href="#transitivedigraphs-label"><span class="std std-ref">transitiveDigraphs module</span></a></dt><dd><p>Additional tools for solving pre-ranking problems with abstract
 generic root <a class="reference external" href="techDoc.html#transitiveDigraphs.TransitiveDigraph">TransitiveDigraph</a> class.</p>
-<div class="graphviz"><object data="_images/inheritance-7ffbbb89e046970ba424515593ff7df90489554f.svg" type="image/svg+xml" class="inheritance graphviz">
+<div class="graphviz"><object data="_images/inheritance-04af3b6fa289b9144423f47100cf4a6de0b8c394.svg" type="image/svg+xml" class="inheritance graphviz">
 <p class="warning">Inheritance diagram of transitiveDigraphs</p></object></div>
 </dd>
 </dl>
@@ -9337,7 +9335,7 @@ added by the class constructor.</p>
 <section id="transitivedigraphs-module">
 <span id="transitivedigraphs-label"></span><h2><a class="toc-backref" href="#id18" role="doc-backlink"><span class="section-number">2.16. </span>transitiveDigraphs module</a><a class="headerlink" href="#transitivedigraphs-module" title="Link to this heading"></a></h2>
 <p><strong>Inheritance Diagram</strong></p>
-<div class="graphviz"><object data="_images/inheritance-7ffbbb89e046970ba424515593ff7df90489554f.svg" type="image/svg+xml" class="inheritance graphviz">
+<div class="graphviz"><object data="_images/inheritance-04af3b6fa289b9144423f47100cf4a6de0b8c394.svg" type="image/svg+xml" class="inheritance graphviz">
 <p class="warning">Inheritance diagram of transitiveDigraphs</p></object></div>
 <p id="module-transitiveDigraphs">Digraph3 module for working with transitive digraphs. 
 Copyright (C) 2006-2025  Raymond Bisdorff</p>
@@ -9379,14 +9377,18 @@ Kohler linear best ordering and an Arrow-Raynaud linear worst ordering.</p>
 <dl class="py class">
 <dt class="sig sig-object py" id="transitiveDigraphs.PartialBachetRanking">
 <em class="property"><span class="k"><span class="pre">class</span></span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">transitiveDigraphs.</span></span><span class="sig-name descname"><span class="pre">PartialBachetRanking</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">g</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">randomized</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">100</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">maxNbrOfRankings</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">5</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">seed</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">Polarised</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">Comments</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">Debug</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/transitiveDigraphs.html#PartialBachetRanking"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#transitiveDigraphs.PartialBachetRanking" title="Link to this definition"></a></dt>
-<dd><p>Uses the <code class="xref py py-class docutils literal notranslate"><span class="pre">linearOrders.BachetRanking</span></code> class for generating a number
+<dd><p>Uses ba default the <a class="reference internal" href="#linearOrders.PolarisedBachetRanking" title="linearOrders.PolarisedBachetRanking"><code class="xref py py-class docutils literal notranslate"><span class="pre">linearOrders.PolarisedBachetRanking</span></code></a> class for generating a number
 of best correlated Bachet rankings.</p>
 <p>The <a class="reference internal" href="#transitiveDigraphs.RankingsFusionDigraph" title="transitiveDigraphs.RankingsFusionDigraph"><code class="xref py py-class docutils literal notranslate"><span class="pre">transitiveDigraphs.RankingsFusionDigraph</span></code></a> uses
 these <em>Bachet</em> rankings for contructing a partial <em>Bachet</em> ranking result.</p>
 <ul class="simple">
 <li><p><em>g</em> is a valid BipolarOutrankingDigraph instance.</p></li>
-<li><p><em>randomized</em> (default = 100) gives the number of random permutations used for generating different Bachet ranking results.</p></li>
-<li><p><em>maxNbrOfRanking</em> (defaut = 5) is the number of best correlated rankings that are used for constructing the <em>RankingsFusionDigraph</em> instance.</p></li>
+<li><p><em>randomized = integer</em> (default = 100) gives the number of random permutations
+used for generating different Bachet ranking results.</p></li>
+<li><p><em>maxNbrOfRanking = integer</em> (defaut = 5) is the number of best correlated
+rankings that are used for constructing the <em>RankingsFusionDigraph</em> instance.</p></li>
+<li><p><em>Polarised = {True (default) | False}</em>, When Polarised = False, the
+<code class="xref py py-class docutils literal notranslate"><span class="pre">linearOrders.valuedBachetRanking</span></code> class is used.</p></li>
 </ul>
 <div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">randomPerfTabs</span> <span class="kn">import</span> <span class="n">RandomCBPerformanceTableau</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">t</span> <span class="o">=</span> <span class="n">RandomCBPerformanceTableau</span><span class="p">(</span><span class="n">numberOfActions</span><span class="o">=</span><span class="mi">20</span><span class="p">,</span>
@@ -9407,22 +9409,6 @@ these <em>Bachet</em> rankings for contructing a partial <em>Bachet</em> ranking
 </pre></div>
 </div>
 <p>The cover credibities shown above represent in fact the mean outranking, respectively outranked, characteristic value of the complement of the nth choice or rejection.</p>
-<dl class="py method">
-<dt class="sig sig-object py" id="transitiveDigraphs.PartialBachetRanking.computeBoostedOrdering">
-<span class="sig-name descname"><span class="pre">computeBoostedOrdering</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/transitiveDigraphs.html#PartialBachetRanking.computeBoostedOrdering"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#transitiveDigraphs.PartialBachetRanking.computeBoostedOrdering" title="Link to this definition"></a></dt>
-<dd><p>Renders an ordred list of decision actions ranked in
-decreasing preference direction following the rankingRule
-on each component.</p>
-</dd></dl>
-
-<dl class="py method">
-<dt class="sig sig-object py" id="transitiveDigraphs.PartialBachetRanking.computeBoostedRanking">
-<span class="sig-name descname"><span class="pre">computeBoostedRanking</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/transitiveDigraphs.html#PartialBachetRanking.computeBoostedRanking"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#transitiveDigraphs.PartialBachetRanking.computeBoostedRanking" title="Link to this definition"></a></dt>
-<dd><p>Renders an ordred list of decision actions ranked in
-decreasing preference direction following the rankingRule
-on each component.</p>
-</dd></dl>
-
 <dl class="py method">
 <dt class="sig sig-object py" id="transitiveDigraphs.PartialBachetRanking.exportGraphViz">
 <span class="sig-name descname"><span class="pre">exportGraphViz</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">fileName</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ArrowHeads</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">Comments</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">graphType</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'png'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">graphSize</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'7,7'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">bgcolor</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'cornsilk'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">fontSize</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">10</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">Debug</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/transitiveDigraphs.html#PartialBachetRanking.exportGraphViz"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#transitiveDigraphs.PartialBachetRanking.exportGraphViz" title="Link to this definition"></a></dt>

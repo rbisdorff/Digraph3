@@ -10,15 +10,6 @@
       <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=e59714d7" />
       <link rel="stylesheet" type="text/css" href="../_static/graphviz.css?v=4ae1632d" />
       <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
-      <link rel="stylesheet" type="text/css" href="../_static/css/tooltipster.custom.css?v=7bc2f056" />
-      <link rel="stylesheet" type="text/css" href="../_static/css/tooltipster.bundle.min.css?v=37217874" />
-      <link rel="stylesheet" type="text/css" href="../_static/css/tooltipster-sideTip-shadow.min.css?v=6227e517" />
-      <link rel="stylesheet" type="text/css" href="../_static/css/tooltipster-sideTip-punk.min.css?v=94669e23" />
-      <link rel="stylesheet" type="text/css" href="../_static/css/tooltipster-sideTip-noir.min.css?v=21a39f42" />
-      <link rel="stylesheet" type="text/css" href="../_static/css/tooltipster-sideTip-light.min.css?v=a18b2449" />
-      <link rel="stylesheet" type="text/css" href="../_static/css/tooltipster-sideTip-borderless.min.css?v=dbff53e4" />
-      <link rel="stylesheet" type="text/css" href="../_static/css/micromodal.css?v=d7bf34ee" />
-      <link rel="stylesheet" type="text/css" href="../_static/css/sphinx_rtd_theme.css?v=3234e928" />
 
   
       <script src="../_static/jquery.js?v=5d32c60e"></script>
@@ -28,9 +19,6 @@
       <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
       <script src="../_static/clipboard.min.js?v=a7894cd8"></script>
       <script src="../_static/copybutton.js?v=15d7cbb8"></script>
-      <script src="../_static/js/hoverxref.js?v=85f38ef1"></script>
-      <script src="../_static/js/tooltipster.bundle.min.js?v=18bf091b"></script>
-      <script src="../_static/js/micromodal.min.js?v=04d6302d"></script>
     <script src="../_static/js/theme.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" /> 
@@ -555,7 +543,7 @@
         <span class="c1"># same ranks for Hasses equivalence classes</span>
         <span class="n">k</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">rankingByChoosing</span><span class="p">)</span>
         <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">k</span><span class="p">):</span>
-            <span class="n">sameRank</span> <span class="o">=</span> <span class="s1">&#39;{ rank = same; &#39;</span>
+            <span class="n">sameRank</span> <span class="o">=</span> <span class="s1">&#39;subgraph { rank=same; &#39;</span>
             <span class="n">ich</span> <span class="o">=</span> <span class="n">rankingByChoosing</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="mi">1</span><span class="p">]</span>
             <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">ich</span><span class="p">:</span>
                 <span class="n">sameRank</span> <span class="o">+=</span> <span class="nb">str</span><span class="p">(</span><span class="n">_safeName</span><span class="p">(</span><span class="n">x</span><span class="p">))</span><span class="o">+</span><span class="s1">&#39;; &#39;</span>
@@ -2053,15 +2041,19 @@
 <a class="viewcode-back" href="../techDoc.html#transitiveDigraphs.PartialBachetRanking">[docs]</a>
 <span class="k">class</span> <span class="nc">PartialBachetRanking</span><span class="p">(</span><span class="n">TransitiveDigraph</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">    Uses the :py:class:`linearOrders.BachetRanking` class for generating a number</span>
+<span class="sd">    Uses ba default the :py:class:`linearOrders.PolarisedBachetRanking` class for generating a number</span>
 <span class="sd">    of best correlated Bachet rankings.</span>
 
 <span class="sd">    The :py:class:`transitiveDigraphs.RankingsFusionDigraph` uses</span>
 <span class="sd">    these *Bachet* rankings for contructing a partial *Bachet* ranking result.</span>
 
 <span class="sd">    - *g* is a valid BipolarOutrankingDigraph instance.</span>
-<span class="sd">    - *randomized* (default = 100) gives the number of random permutations used for generating different Bachet ranking results.</span>
-<span class="sd">    - *maxNbrOfRanking* (defaut = 5) is the number of best correlated rankings that are used for constructing the *RankingsFusionDigraph* instance.</span>
+<span class="sd">    - *randomized = integer* (default = 100) gives the number of random permutations</span>
+<span class="sd">      used for generating different Bachet ranking results.</span>
+<span class="sd">    - *maxNbrOfRanking = integer* (defaut = 5) is the number of best correlated</span>
+<span class="sd">      rankings that are used for constructing the *RankingsFusionDigraph* instance.</span>
+<span class="sd">    - *Polarised = {True (default) | False}*, When Polarised = False, the</span>
+<span class="sd">      :py:class:`linearOrders.valuedBachetRanking` class is used.</span>
 
 <span class="sd">    &gt;&gt;&gt; from randomPerfTabs import RandomCBPerformanceTableau</span>
 <span class="sd">    &gt;&gt;&gt; t = RandomCBPerformanceTableau(numberOfActions=20,</span>
@@ -2147,51 +2139,45 @@
         <span class="k">if</span> <span class="n">Comments</span><span class="p">:</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">showTransitiveDigraph</span><span class="p">(</span><span class="n">WithCoverCredibility</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
 
-<div class="viewcode-block" id="PartialBachetRanking.computeBoostedRanking">
-<a class="viewcode-back" href="../techDoc.html#transitiveDigraphs.PartialBachetRanking.computeBoostedRanking">[docs]</a>
-    <span class="k">def</span> <span class="nf">computeBoostedRanking</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        Renders an ordred list of decision actions ranked in</span>
-<span class="sd">        decreasing preference direction following the rankingRule</span>
-<span class="sd">        on each component.</span>
-<span class="sd">        &quot;&quot;&quot;</span>
-        <span class="n">ranking</span> <span class="o">=</span> <span class="p">[]</span>
-        <span class="n">components</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">computeRankingByChoosing</span><span class="p">()</span>
-        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">components</span><span class="p">[</span><span class="s1">&#39;result&#39;</span><span class="p">])):</span>
-            <span class="n">ranking</span> <span class="o">+=</span> <span class="n">components</span><span class="p">[</span><span class="s1">&#39;result&#39;</span><span class="p">][</span><span class="n">i</span><span class="p">][</span><span class="mi">0</span><span class="p">][</span><span class="mi">1</span><span class="p">]</span>
-        <span class="n">ordering</span> <span class="o">=</span> <span class="p">[]</span>
-        <span class="n">components</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">computeRankingByChoosing</span><span class="p">()</span>
-        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">components</span><span class="p">[</span><span class="s1">&#39;result&#39;</span><span class="p">])):</span>
-            <span class="n">ordering</span> <span class="o">+=</span> <span class="n">components</span><span class="p">[</span><span class="s1">&#39;result&#39;</span><span class="p">][</span><span class="n">i</span><span class="p">][</span><span class="mi">1</span><span class="p">][</span><span class="mi">1</span><span class="p">]</span>
-        <span class="n">boostedRanking</span> <span class="o">=</span> <span class="n">ranking</span>
-        <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="nb">reversed</span><span class="p">(</span><span class="n">ordering</span><span class="p">):</span>
-            <span class="k">if</span> <span class="n">x</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">ranking</span><span class="p">:</span>
-                <span class="n">boostedRanking</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
-        <span class="k">return</span> <span class="n">boostedRanking</span></div>
-
-
-<div class="viewcode-block" id="PartialBachetRanking.computeBoostedOrdering">
-<a class="viewcode-back" href="../techDoc.html#transitiveDigraphs.PartialBachetRanking.computeBoostedOrdering">[docs]</a>
-    <span class="k">def</span> <span class="nf">computeBoostedOrdering</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        Renders an ordred list of decision actions ranked in</span>
-<span class="sd">        decreasing preference direction following the rankingRule</span>
-<span class="sd">        on each component.</span>
-<span class="sd">        &quot;&quot;&quot;</span>
-        <span class="n">ranking</span> <span class="o">=</span> <span class="p">[]</span>
-        <span class="n">components</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">rankingByChoosing</span>
-        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">components</span><span class="p">[</span><span class="s1">&#39;result&#39;</span><span class="p">])):</span>
-            <span class="n">ranking</span> <span class="o">+=</span> <span class="n">components</span><span class="p">[</span><span class="s1">&#39;result&#39;</span><span class="p">][</span><span class="n">i</span><span class="p">][</span><span class="mi">0</span><span class="p">][</span><span class="mi">1</span><span class="p">]</span>
-        <span class="n">ordering</span> <span class="o">=</span> <span class="p">[]</span>
-        <span class="n">components</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">rankingByChoosing</span>
-        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">components</span><span class="p">[</span><span class="s1">&#39;result&#39;</span><span class="p">])):</span>
-            <span class="n">ordering</span> <span class="o">+=</span> <span class="n">components</span><span class="p">[</span><span class="s1">&#39;result&#39;</span><span class="p">][</span><span class="n">i</span><span class="p">][</span><span class="mi">1</span><span class="p">][</span><span class="mi">1</span><span class="p">]</span>
-        <span class="n">boostedOrdering</span> <span class="o">=</span> <span class="n">ordering</span>
-        <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="nb">reversed</span><span class="p">(</span><span class="n">ranking</span><span class="p">):</span>
-            <span class="k">if</span> <span class="n">x</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">ordering</span><span class="p">:</span>
-                <span class="n">boostedOrdering</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
-        <span class="k">return</span> <span class="n">boostedOrdering</span></div>
-
+<span class="c1">##    def computeBoostedRanking(self):</span>
+<span class="c1">##        &quot;&quot;&quot;</span>
+<span class="c1">##        Renders an ordred list of decision actions ranked in</span>
+<span class="c1">##        decreasing preference direction following the rankingRule</span>
+<span class="c1">##        on each component.</span>
+<span class="c1">##        &quot;&quot;&quot;</span>
+<span class="c1">##        ranking = []</span>
+<span class="c1">##        components = self.computeRankingByChoosing()</span>
+<span class="c1">##        for i in range(len(components[&#39;result&#39;])):</span>
+<span class="c1">##            ranking += components[&#39;result&#39;][i][0][1]</span>
+<span class="c1">##        ordering = []</span>
+<span class="c1">##        components = self.computeRankingByChoosing()</span>
+<span class="c1">##        for i in range(len(components[&#39;result&#39;])):</span>
+<span class="c1">##            ordering += components[&#39;result&#39;][i][1][1]</span>
+<span class="c1">##        boostedRanking = ranking</span>
+<span class="c1">##        for x in reversed(ordering):</span>
+<span class="c1">##            if x not in ranking:</span>
+<span class="c1">##                boostedRanking.append(x)</span>
+<span class="c1">##        return boostedRanking</span>
+<span class="c1">##</span>
+<span class="c1">##    def computeBoostedOrdering(self):</span>
+<span class="c1">##        &quot;&quot;&quot;</span>
+<span class="c1">##        Renders an ordred list of decision actions ranked in</span>
+<span class="c1">##        decreasing preference direction following the rankingRule</span>
+<span class="c1">##        on each component.</span>
+<span class="c1">##        &quot;&quot;&quot;</span>
+<span class="c1">##        ranking = []</span>
+<span class="c1">##        components = self.rankingByChoosing</span>
+<span class="c1">##        for i in range(len(components[&#39;result&#39;])):</span>
+<span class="c1">##            ranking += components[&#39;result&#39;][i][0][1]</span>
+<span class="c1">##        ordering = []</span>
+<span class="c1">##        components = self.rankingByChoosing</span>
+<span class="c1">##        for i in range(len(components[&#39;result&#39;])):</span>
+<span class="c1">##            ordering += components[&#39;result&#39;][i][1][1]</span>
+<span class="c1">##        boostedOrdering = ordering</span>
+<span class="c1">##        for x in reversed(ranking):</span>
+<span class="c1">##            if x not in ordering:</span>
+<span class="c1">##                boostedOrdering.append(x)</span>
+<span class="c1">##        return boostedOrdering</span>
 
 <div class="viewcode-block" id="PartialBachetRanking.exportGraphViz">
 <a class="viewcode-back" href="../techDoc.html#transitiveDigraphs.PartialBachetRanking.exportGraphViz">[docs]</a>

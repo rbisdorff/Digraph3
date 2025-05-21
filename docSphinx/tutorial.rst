@@ -2948,12 +2948,12 @@ We recover in :numref:`weakCopelandRanking` Lines 6 and 8 above, the ranking wit
    >>> wcop.exportGraphViz(fileName='weakCopelandRanking')
     *---- exporting a dot file for GraphViz tools ---------*
     Exporting to weakCopelandRanking.dot
-    0 { rank = same; a5; }
-    1 { rank = same; a1; a7; a6; }
-    2 { rank = same; a8; }
-    3 { rank = same; a4; a9}
-    4 { rank = same; a3; }
-    5 { rank = same; a2; }
+    0 subgraph { rank = same; a5; }
+    1 subgraph { rank = same; a1; a7; a6; }
+    2 subgraph { rank = same; a8; }
+    3 subgraph { rank = same; a4; a9}
+    4 subgraph { rank = same; a3; }
+    5 subgraph { rank = same; a2; }
     dot -Grankdir=TB -Tpng weakCopelandRanking.dot\
         -o weakCopelandRanking.png
 
@@ -3160,14 +3160,14 @@ We visualize the partial order defined by the :ref:`epistemic fusion <Epistemic-
    >>> wke.exportGraphViz(fileName='tutorialKemeny')
     *---- exporting a dot file for GraphViz tools ---------*
     Exporting to tutorialKemeny.dot
-    0 { rank = same; a5; }
-    1 { rank = same; a6; }
-    2 { rank = same; a7; }
-    3 { rank = same; a3; }
-    4 { rank = same; a9; a8; }
-    5 { rank = same; a4; }
-    6 { rank = same; a1; }
-    7 { rank = same; a2; }
+    0 subgraph { rank = same; a5; }
+    1 subgraph { rank = same; a6; }
+    2 subgraph { rank = same; a7; }
+    3 subgraph { rank = same; a3; }
+    4 subgraph { rank = same; a9; a8; }
+    5 subgraph { rank = same; a4; }
+    6 subgraph { rank = same; a1; }
+    7 subgraph { rank = same; a2; }
     dot -Grankdir=TB -Tpng tutorialKemeny.dot -o tutorialKemeny.png
 
 .. Figure:: tutorialKemeny.png
@@ -3283,13 +3283,13 @@ We notice in :numref:`SlaterRanking` Line 7 that the first *Slater* ranking is a
    >>> slw.exportGraphViz(fileName='tutorialSlater')
     *---- exporting a dot file for GraphViz tools ---------*
     Exporting to tutorialSlater.dot
-    0 { rank = same; a5; }
-    1 { rank = same; a6; }
-    2 { rank = same; a7; a4; }
-    3 { rank = same; a1; }
-    4 { rank = same; a8; a3; }
-    5 { rank = same; a9; }
-    6 { rank = same; a2; }
+    0 subgraph { rank = same; a5; }
+    1 subgraph { rank = same; a6; }
+    2 subgraph { rank = same; a7; a4; }
+    3 subgraph { rank = same; a1; }
+    4 subgraph { rank = same; a8; a3; }
+    5 subgraph { rank = same; a9; }
+    6 subgraph { rank = same; a2; }
     dot -Grankdir=TB -Tpng tutorialSlater.dot -o tutorialSlater.png
 
 .. Figure:: tutorialSlater.png
@@ -3532,10 +3532,10 @@ The drawing of partial rankings makes usage of a topological sort algorithm [60]
    >>> rfdg.exportGraphViz('rankingsByScoringFusion')
     *---- exporting a dot file for GraphViz tools ---------*
     Exporting to rankingsByScoringFusion.dot
-     0 { rank = 0; a5; }
-     1 { rank = 1; a6; a1; a7; }
-     2 { rank = 2; a3; a8; a4; }
-     3 { rank = 3; a2; a9; }
+     0 subgraph { rank = same; a5; }
+     1 subgraph { rank = same; a6; a1; a7; }
+     2 subgraph { rank = same; a3; a8; a4; }
+     3 subgraph { rank = same; a2; a9; }
     dot -Grankdir=TB -Tpng rankingsByScoringFusion.dot \
                         -o rankingsByScoringFusion.png
 
@@ -6590,9 +6590,9 @@ In the relation map, shown in :numref:`aliceRelationMap` above, we finally see i
    ...                 'strictOutranking')
     *---- exporting a dot file for GraphViz tools ---------*
      Exporting to strictOutranking.dot
-      0 { rank = i; I_FHK; I_UHB; I_USB; T_FHK; }
-      1 { rank = i; T_UHB; T_USB; T_UD; T_FHM; }
-      2 { rank = i; S_HKK; C_HKK; }
+      0 subgraph { rank=same ; I_FHK; I_UHB; I_USB; T_FHK; }
+      1 subgraph { rank=same; T_UHB; T_USB; T_UD; T_FHM; }
+      2 subgraph { rank=same; S_HKK; C_HKK; }
     dot -Grankdir=TB -Tpng strictOutranking.dot -o strictOutranking.png
 
 .. figure:: strictOutranking.png
@@ -10251,9 +10251,9 @@ As mentioned before, a permutation graph and its dual are **transitively orienta
    >>> dg.exportGraphViz()
     *---- exporting a dot file for GraphViz tools ---------*
     Exporting to oriented_permutationGraph.dot
-    0 { rank = same; 1; 2; }
-    1 { rank = same; 5; 3; }
-    2 { rank = same; 4; 6; }
+    0 subgraph { rank = same; 1; 2; }
+    1 subgraph { rank = same; 5; 3; }
+    2 subgraph { rank = same; 4; 6; }
     dot -Grankdir=TB -Tpng oriented_permutationGraph.dot -o oriented_permutationGraph.png
 
 .. figure:: oriented_permutationGraph.png

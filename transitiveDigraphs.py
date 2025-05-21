@@ -438,7 +438,7 @@ class TransitiveDigraph(Digraph):
         # same ranks for Hasses equivalence classes
         k = len(rankingByChoosing)
         for i in range(k):
-            sameRank = '{ rank = same; '
+            sameRank = 'subgraph { rank=same; '
             ich = rankingByChoosing[i][1]
             for x in ich:
                 sameRank += str(_safeName(x))+'; '
@@ -1869,15 +1869,19 @@ class WeakNetFlowsOrder(TransitiveDigraph):
 
 class PartialBachetRanking(TransitiveDigraph):
     """
-    Uses the :py:class:`linearOrders.BachetRanking` class for generating a number
+    Uses ba default the :py:class:`linearOrders.PolarisedBachetRanking` class for generating a number
     of best correlated Bachet rankings.
 
     The :py:class:`transitiveDigraphs.RankingsFusionDigraph` uses
     these *Bachet* rankings for contructing a partial *Bachet* ranking result.
 
     - *g* is a valid BipolarOutrankingDigraph instance.
-    - *randomized* (default = 100) gives the number of random permutations used for generating different Bachet ranking results.
-    - *maxNbrOfRanking* (defaut = 5) is the number of best correlated rankings that are used for constructing the *RankingsFusionDigraph* instance.
+    - *randomized = integer* (default = 100) gives the number of random permutations
+      used for generating different Bachet ranking results.
+    - *maxNbrOfRanking = integer* (defaut = 5) is the number of best correlated
+      rankings that are used for constructing the *RankingsFusionDigraph* instance.
+    - *Polarised = {True (default) | False}*, When Polarised = False, the
+      :py:class:`linearOrders.valuedBachetRanking` class is used.
 
     >>> from randomPerfTabs import RandomCBPerformanceTableau
     >>> t = RandomCBPerformanceTableau(numberOfActions=20,
@@ -1963,45 +1967,45 @@ class PartialBachetRanking(TransitiveDigraph):
         if Comments:
             self.showTransitiveDigraph(WithCoverCredibility=False)
 
-    def computeBoostedRanking(self):
-        """
-        Renders an ordred list of decision actions ranked in
-        decreasing preference direction following the rankingRule
-        on each component.
-        """
-        ranking = []
-        components = self.computeRankingByChoosing()
-        for i in range(len(components['result'])):
-            ranking += components['result'][i][0][1]
-        ordering = []
-        components = self.computeRankingByChoosing()
-        for i in range(len(components['result'])):
-            ordering += components['result'][i][1][1]
-        boostedRanking = ranking
-        for x in reversed(ordering):
-            if x not in ranking:
-                boostedRanking.append(x)
-        return boostedRanking
-
-    def computeBoostedOrdering(self):
-        """
-        Renders an ordred list of decision actions ranked in
-        decreasing preference direction following the rankingRule
-        on each component.
-        """
-        ranking = []
-        components = self.rankingByChoosing
-        for i in range(len(components['result'])):
-            ranking += components['result'][i][0][1]
-        ordering = []
-        components = self.rankingByChoosing
-        for i in range(len(components['result'])):
-            ordering += components['result'][i][1][1]
-        boostedOrdering = ordering
-        for x in reversed(ranking):
-            if x not in ordering:
-                boostedOrdering.append(x)
-        return boostedOrdering
+##    def computeBoostedRanking(self):
+##        """
+##        Renders an ordred list of decision actions ranked in
+##        decreasing preference direction following the rankingRule
+##        on each component.
+##        """
+##        ranking = []
+##        components = self.computeRankingByChoosing()
+##        for i in range(len(components['result'])):
+##            ranking += components['result'][i][0][1]
+##        ordering = []
+##        components = self.computeRankingByChoosing()
+##        for i in range(len(components['result'])):
+##            ordering += components['result'][i][1][1]
+##        boostedRanking = ranking
+##        for x in reversed(ordering):
+##            if x not in ranking:
+##                boostedRanking.append(x)
+##        return boostedRanking
+##
+##    def computeBoostedOrdering(self):
+##        """
+##        Renders an ordred list of decision actions ranked in
+##        decreasing preference direction following the rankingRule
+##        on each component.
+##        """
+##        ranking = []
+##        components = self.rankingByChoosing
+##        for i in range(len(components['result'])):
+##            ranking += components['result'][i][0][1]
+##        ordering = []
+##        components = self.rankingByChoosing
+##        for i in range(len(components['result'])):
+##            ordering += components['result'][i][1][1]
+##        boostedOrdering = ordering
+##        for x in reversed(ranking):
+##            if x not in ordering:
+##                boostedOrdering.append(x)
+##        return boostedOrdering
 
     def exportGraphViz(self,fileName=None,ArrowHeads=False,
                        Comments=True,graphType='png',

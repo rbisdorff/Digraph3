@@ -3101,12 +3101,12 @@ three modes at 0.3 (-), 0.5 (~), respectively 0.7 (+) of the common scale span a
 <div class="highlight-pycon notranslate"><div class="highlight"><pre><span></span><span class="linenos"> 1</span><span class="gp">&gt;&gt;&gt; </span><span class="n">wcop</span><span class="o">.</span><span class="n">exportGraphViz</span><span class="p">(</span><span class="n">fileName</span><span class="o">=</span><span class="s1">&#39;weakCopelandRanking&#39;</span><span class="p">)</span>
 <span class="linenos"> 2</span><span class="go"> *---- exporting a dot file for GraphViz tools ---------*</span>
 <span class="linenos"> 3</span><span class="go"> Exporting to weakCopelandRanking.dot</span>
-<span class="linenos"> 4</span><span class="go"> 0 { rank = same; a5; }</span>
-<span class="linenos"> 5</span><span class="go"> 1 { rank = same; a1; a7; a6; }</span>
-<span class="linenos"> 6</span><span class="go"> 2 { rank = same; a8; }</span>
-<span class="linenos"> 7</span><span class="go"> 3 { rank = same; a4; a9}</span>
-<span class="linenos"> 8</span><span class="go"> 4 { rank = same; a3; }</span>
-<span class="linenos"> 9</span><span class="go"> 5 { rank = same; a2; }</span>
+<span class="linenos"> 4</span><span class="go"> 0 subgraph { rank = same; a5; }</span>
+<span class="linenos"> 5</span><span class="go"> 1 subgraph { rank = same; a1; a7; a6; }</span>
+<span class="linenos"> 6</span><span class="go"> 2 subgraph { rank = same; a8; }</span>
+<span class="linenos"> 7</span><span class="go"> 3 subgraph { rank = same; a4; a9}</span>
+<span class="linenos"> 8</span><span class="go"> 4 subgraph { rank = same; a3; }</span>
+<span class="linenos"> 9</span><span class="go"> 5 subgraph { rank = same; a2; }</span>
 <span class="linenos">10</span><span class="go"> dot -Grankdir=TB -Tpng weakCopelandRanking.dot\</span>
 <span class="linenos">11</span><span class="go">     -o weakCopelandRanking.png</span>
 </pre></div>
@@ -3278,14 +3278,14 @@ three modes at 0.3 (-), 0.5 (~), respectively 0.7 (+) of the common scale span a
 <span class="linenos"> 3</span><span class="gp">&gt;&gt;&gt; </span><span class="n">wke</span><span class="o">.</span><span class="n">exportGraphViz</span><span class="p">(</span><span class="n">fileName</span><span class="o">=</span><span class="s1">&#39;tutorialKemeny&#39;</span><span class="p">)</span>
 <span class="linenos"> 4</span><span class="go"> *---- exporting a dot file for GraphViz tools ---------*</span>
 <span class="linenos"> 5</span><span class="go"> Exporting to tutorialKemeny.dot</span>
-<span class="linenos"> 6</span><span class="go"> 0 { rank = same; a5; }</span>
-<span class="linenos"> 7</span><span class="go"> 1 { rank = same; a6; }</span>
-<span class="linenos"> 8</span><span class="go"> 2 { rank = same; a7; }</span>
-<span class="linenos"> 9</span><span class="go"> 3 { rank = same; a3; }</span>
-<span class="linenos">10</span><span class="go"> 4 { rank = same; a9; a8; }</span>
-<span class="linenos">11</span><span class="go"> 5 { rank = same; a4; }</span>
-<span class="linenos">12</span><span class="go"> 6 { rank = same; a1; }</span>
-<span class="linenos">13</span><span class="go"> 7 { rank = same; a2; }</span>
+<span class="linenos"> 6</span><span class="go"> 0 subgraph { rank = same; a5; }</span>
+<span class="linenos"> 7</span><span class="go"> 1 subgraph { rank = same; a6; }</span>
+<span class="linenos"> 8</span><span class="go"> 2 subgraph { rank = same; a7; }</span>
+<span class="linenos"> 9</span><span class="go"> 3 subgraph { rank = same; a3; }</span>
+<span class="linenos">10</span><span class="go"> 4 subgraph { rank = same; a9; a8; }</span>
+<span class="linenos">11</span><span class="go"> 5 subgraph { rank = same; a4; }</span>
+<span class="linenos">12</span><span class="go"> 6 subgraph { rank = same; a1; }</span>
+<span class="linenos">13</span><span class="go"> 7 subgraph { rank = same; a2; }</span>
 <span class="linenos">14</span><span class="go"> dot -Grankdir=TB -Tpng tutorialKemeny.dot -o tutorialKemeny.png</span>
 </pre></div>
 </div>
@@ -3388,13 +3388,13 @@ three modes at 0.3 (-), 0.5 (~), respectively 0.7 (+) of the common scale span a
 <span class="linenos"> 2</span><span class="gp">&gt;&gt;&gt; </span><span class="n">slw</span><span class="o">.</span><span class="n">exportGraphViz</span><span class="p">(</span><span class="n">fileName</span><span class="o">=</span><span class="s1">&#39;tutorialSlater&#39;</span><span class="p">)</span>
 <span class="linenos"> 3</span><span class="go"> *---- exporting a dot file for GraphViz tools ---------*</span>
 <span class="linenos"> 4</span><span class="go"> Exporting to tutorialSlater.dot</span>
-<span class="linenos"> 5</span><span class="go"> 0 { rank = same; a5; }</span>
-<span class="linenos"> 6</span><span class="go"> 1 { rank = same; a6; }</span>
-<span class="linenos"> 7</span><span class="go"> 2 { rank = same; a7; a4; }</span>
-<span class="linenos"> 8</span><span class="go"> 3 { rank = same; a1; }</span>
-<span class="linenos"> 9</span><span class="go"> 4 { rank = same; a8; a3; }</span>
-<span class="linenos">10</span><span class="go"> 5 { rank = same; a9; }</span>
-<span class="linenos">11</span><span class="go"> 6 { rank = same; a2; }</span>
+<span class="linenos"> 5</span><span class="go"> 0 subgraph { rank = same; a5; }</span>
+<span class="linenos"> 6</span><span class="go"> 1 subgraph { rank = same; a6; }</span>
+<span class="linenos"> 7</span><span class="go"> 2 subgraph { rank = same; a7; a4; }</span>
+<span class="linenos"> 8</span><span class="go"> 3 subgraph { rank = same; a1; }</span>
+<span class="linenos"> 9</span><span class="go"> 4 subgraph { rank = same; a8; a3; }</span>
+<span class="linenos">10</span><span class="go"> 5 subgraph { rank = same; a9; }</span>
+<span class="linenos">11</span><span class="go"> 6 subgraph { rank = same; a2; }</span>
 <span class="linenos">12</span><span class="go"> dot -Grankdir=TB -Tpng tutorialSlater.dot -o tutorialSlater.png</span>
 </pre></div>
 </div>
@@ -3601,10 +3601,10 @@ three modes at 0.3 (-), 0.5 (~), respectively 0.7 (+) of the common scale span a
 <div class="highlight-pycon notranslate"><div class="highlight"><pre><span></span><span class="linenos">1</span><span class="gp">&gt;&gt;&gt; </span><span class="n">rfdg</span><span class="o">.</span><span class="n">exportGraphViz</span><span class="p">(</span><span class="s1">&#39;rankingsByScoringFusion&#39;</span><span class="p">)</span>
 <span class="linenos">2</span><span class="go"> *---- exporting a dot file for GraphViz tools ---------*</span>
 <span class="linenos">3</span><span class="go"> Exporting to rankingsByScoringFusion.dot</span>
-<span class="hll"><span class="linenos">4</span><span class="go">  0 { rank = 0; a5; }</span>
-</span><span class="hll"><span class="linenos">5</span><span class="go">  1 { rank = 1; a6; a1; a7; }</span>
-</span><span class="hll"><span class="linenos">6</span><span class="go">  2 { rank = 2; a3; a8; a4; }</span>
-</span><span class="hll"><span class="linenos">7</span><span class="go">  3 { rank = 3; a2; a9; }</span>
+<span class="hll"><span class="linenos">4</span><span class="go">  0 subgraph { rank = same; a5; }</span>
+</span><span class="hll"><span class="linenos">5</span><span class="go">  1 subgraph { rank = same; a6; a1; a7; }</span>
+</span><span class="hll"><span class="linenos">6</span><span class="go">  2 subgraph { rank = same; a3; a8; a4; }</span>
+</span><span class="hll"><span class="linenos">7</span><span class="go">  3 subgraph { rank = same; a2; a9; }</span>
 </span><span class="linenos">8</span><span class="go"> dot -Grankdir=TB -Tpng rankingsByScoringFusion.dot \</span>
 <span class="linenos">9</span><span class="go">                     -o rankingsByScoringFusion.png</span>
 </pre></div>
@@ -6433,9 +6433,9 @@ fecop 75.78% success rate</p>
 <span class="linenos">15</span><span class="gp">... </span>                <span class="s1">&#39;strictOutranking&#39;</span><span class="p">)</span>
 <span class="linenos">16</span><span class="go"> *---- exporting a dot file for GraphViz tools ---------*</span>
 <span class="linenos">17</span><span class="go">  Exporting to strictOutranking.dot</span>
-<span class="linenos">18</span><span class="go">   0 { rank = i; I_FHK; I_UHB; I_USB; T_FHK; }</span>
-<span class="linenos">19</span><span class="go">   1 { rank = i; T_UHB; T_USB; T_UD; T_FHM; }</span>
-<span class="linenos">20</span><span class="go">   2 { rank = i; S_HKK; C_HKK; }</span>
+<span class="linenos">18</span><span class="go">   0 subgraph { rank=same ; I_FHK; I_UHB; I_USB; T_FHK; }</span>
+<span class="linenos">19</span><span class="go">   1 subgraph { rank=same; T_UHB; T_USB; T_UD; T_FHM; }</span>
+<span class="linenos">20</span><span class="go">   2 subgraph { rank=same; S_HKK; C_HKK; }</span>
 <span class="linenos">21</span><span class="go"> dot -Grankdir=TB -Tpng strictOutranking.dot -o strictOutranking.png</span>
 </pre></div>
 </div>
@@ -9848,9 +9848,9 @@ fecop 75.78% success rate</p>
 <span class="linenos">14</span><span class="gp">&gt;&gt;&gt; </span><span class="n">dg</span><span class="o">.</span><span class="n">exportGraphViz</span><span class="p">()</span>
 <span class="linenos">15</span><span class="go"> *---- exporting a dot file for GraphViz tools ---------*</span>
 <span class="linenos">16</span><span class="go"> Exporting to oriented_permutationGraph.dot</span>
-<span class="linenos">17</span><span class="go"> 0 { rank = same; 1; 2; }</span>
-<span class="linenos">18</span><span class="go"> 1 { rank = same; 5; 3; }</span>
-<span class="linenos">19</span><span class="go"> 2 { rank = same; 4; 6; }</span>
+<span class="linenos">17</span><span class="go"> 0 subgraph { rank = same; 1; 2; }</span>
+<span class="linenos">18</span><span class="go"> 1 subgraph { rank = same; 5; 3; }</span>
+<span class="linenos">19</span><span class="go"> 2 subgraph { rank = same; 4; 6; }</span>
 <span class="linenos">20</span><span class="go"> dot -Grankdir=TB -Tpng oriented_permutationGraph.dot -o oriented_permutationGraph.png</span>
 </pre></div>
 </div>
