@@ -1881,7 +1881,7 @@ class PartialBachetRanking(TransitiveDigraph):
     - *maxNbrOfRanking = integer* (defaut = 5) is the number of best correlated
       rankings that are used for constructing the *RankingsFusionDigraph* instance.
     - *Polarised = {True (default) | False}*, When Polarised = False, the
-      :py:class:`linearOrders.valuedBachetRanking` class is used.
+      :py:class:`linearOrders.ValuedBachetRanking` class is used.
 
     >>> from randomPerfTabs import RandomCBPerformanceTableau
     >>> t = RandomCBPerformanceTableau(numberOfActions=20,
@@ -1899,6 +1899,18 @@ class PartialBachetRanking(TransitiveDigraph):
           3rd last ranked ['a09', 'a10', 'a14']) (0.33)
         2nd last ranked ['a01', 'a03', 'a12', 'a13', 'a15']) (0.60)
       1st last ranked ['a07', 'a08', 'a17', 'a19']) (0.80)
+    >>> vwg = PartialBachetRanking(g,Polarised=False,randomized=100,
+    ...                      seed=100,maxNbrOfRankings=10)
+    >>> vwg.showTransitiveDigraph(WithCoverCredibility=True)
+     Ranking by Choosing and Rejecting
+      1st ranked ['a04'] (1.00)
+        2nd ranked ['a02', 'a05', 'a06', 'a18'] (0.77)
+          3rd ranked ['a09', 'a11', 'a16', 'a20'] (0.55)
+            4th ranked ['a14'] (1.00)
+            4th last ranked ['a14'] (1.00)
+          3rd last ranked ['a01', 'a12', 'a13', 'a15'] (0.55)
+        2nd last ranked ['a03', 'a07', 'a08', 'a10', 'a17'] (0.69)
+      1st last ranked ['a19'] (1.00)
 
     The cover credibities shown above represent in fact the mean outranking, respectively outranked, characteristic value of the complement of the nth choice or rejection. 
     """

@@ -1213,36 +1213,38 @@ All outranking digraphs, being of root type :py:class:`~digraphs.Digraph`, inher
 
    >>> odg.recodeValuation(-7,+7)
    >>> odg.valuationdomain['hasIntegerValuation'] = True
-   >>> Digraph.showRelationTable(odg,ReflexiveTerms=False)
+   >>> Digraph.showRelationTable(odg,ReflexiveTerms=True)
     * ---- Relation Table -----
      r(x,y)  |  'a1'  'a2'  'a3'  'a4'  'a5'  'a6'  'a7'	  
     ---------|------------------------------------------
-      'a1'   |    0     5     2     2	  2     2     0	 
-      'a2'   |   -5     0    -1	   -1     1     2    -4	 
-      'a3'   |   -1     2     0	   -1    -1     0    -1	 
-      'a4'   |    0     1     4	    0     2     4    -3	 
-      'a5'   |   -1     0     1	    0     0     2    -1	 
-      'a6'   |   -1     0     1	   -1     1     0     0	 
-      'a7'   |    0     5     4	    3     2     0     0	 
+      'a1'   |    0    +5    +2    +2	 +2    +2     0	 
+      'a2'   |   -5     0    -1	   -1    +1    +2    -4	 
+      'a3'   |   -1    +2     0	   -1    -1     0    -1	 
+      'a4'   |    0    +1    +4	    0    +2    +4    -3	 
+      'a5'   |   -1     0    +1	    0     0    +2    -1	 
+      'a6'   |   -1     0    +1	   -1    +1     0     0	 
+      'a7'   |    0    +5    +4	   +3    +2     0     0	 
     Valuation domain: [-7;+7]
 
 .. warning::
 
- Notice that the reflexive self comparison characteristic :math:`r(x,x)` is set above by default to the median indeterminate valuation value 0; the reflexive terms of binary relation being generally ignored in most of the *Digraph3* resources. 
+ Notice that the reflexive self comparison characteristic :math:`r(x,x)` is set above by default to the median indeterminate valuation value 0; the reflexive terms of binary relation being generalr(x \not \geq y)ly ignored in most of the *Digraph3* resources. 
 
 .. _CoDual-Digraph-label:
  
 The strict outranking digraph
 `````````````````````````````
 
-From the theory (see [BIS-2013]_, [ADT-L7]_ ) we know that a bipolar-valued outranking digraph is **weakly complete**, i.e. if :math:`r(x,y) < 0.0` then :math:`r(y,x) \geq 0.0` . A bipolar-valued outranking relation verifies furthermore the **coduality** principle: the **dual** (*strict negation* - [14]_) of the **converse** (*inverse* ~) of the outranking relation corresponds to its *strict outranking* part.
+We know from theory that bipolar-valued outranking digraphs are **weakly complete**, i.e. if :math:`r(x \geq y) < 0.0` then :math:`r(y \geq x) \geq 0.0`. A bipolar-valued outranking relation :math:`r(x \geq y)` verifies furthermore the **coduality** principle: the **converse** (the *inverse* ~) of the **dual** [14]_ (the *negation* - ) corresponds to its asymetric **strict outranking** part: :math:`\sim\big(-r(y \geq x)\big) \;=\; \sim\big(r(y \not \geq x)\big) \;=\; \sim\big(r(y < x)\big)  \;=\; r(x > y)`.
+
+See the advanced topic on :ref:`characterizing bipolar-valued outranking digraphs <Sufficiency-Tutorial-label>`, [BIS-2013]_, [ADT-L7]_ .
 
 We may visualize the **codual** (*strict*) outranking digraph with a graphviz drawing [1]_.
 
 .. code-block:: pycon
    :linenos:
 
-   >>> cdodg = -(~odg)
+   >>> cdodg = ~(-odg) # == -(~odg) == codual transform
    >>> cdodg.exportGraphViz('codualOdg')
     *---- exporting a dot file for GraphViz tools ---------*
     Exporting to codualOdg.dot
@@ -1252,7 +1254,7 @@ We may visualize the **codual** (*strict*) outranking digraph with a graphviz dr
    :width: 300 px
    :align: center
 
-   Codual digraph
+   The strict (codual) outranking digraph
 
 It becomes readily clear now from the picture above that both alternatives *a1*  and *a7* are *not outranked* by any other alternatives. Hence, *a1*  and *a7* appear as **weak Condorcet winner** and may be recommended as potential *best decision actions* in this illustrative preference modelling exercise. 
 

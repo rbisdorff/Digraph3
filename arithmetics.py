@@ -261,13 +261,13 @@ class BachetNumber(object):
 
     def __mul__(self,other):
         """
-        Defines the addition operator for Bachet encoded numbers
+        Defines the multiplication operator for Bachet encoded numbers
         """
         n1 = self.value()
         n2 = other.value()
         n3 = n1 * n2
         return BachetNumber(n3)
-        
+    
     def _base10to3(self,num):
         """
         Change a base 10 number to a base 3 number.
