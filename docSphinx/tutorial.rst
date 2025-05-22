@@ -1656,7 +1656,7 @@ Yet, we must as well notice that the cheapest alternative *C* is in fact **stric
 Partially ordering the outranking digraph
 `````````````````````````````````````````
 
-To get a further insight in the overall strict outranking situations, we may use the :py:class:`~transitiveDigraphs.PartialBachetRanking` constructor imported from the :ref:`transitiveDigraphs module <transitiveDigraphs-label>`, for computing a partial **ranking-by-scoring** result from the codual, i.e. the strict outranking digraph instance *gcd* (see above).
+To get a further insight in the overall strict outranking situations, we may use the :py:class:`~transitiveDigraphs.PartialBachetRanking` constructor imported from the :py:mod:`transitiveDigraphs` module, for computing a partial **ranking-by-scoring** result from the *codual*, i.e. the strict outranking digraph instance *gcd* (see above).
 
 .. code-block:: pycon
    :linenos:
