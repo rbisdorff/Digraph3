@@ -1489,7 +1489,7 @@ In :numref:`officeChoiceOutranking` we may notice that Alternative *D* is **posi
    >>> g.computeWeakCondorcetWinners()
     ['A', 'C', 'D']
 
-For two locations *x* and *y*, the situation "*x* strictly outranks *y*", denoted :math:`(x \succnsim y)`, is given when *x* outranks *y* and *y* does not outrank *y*. From theory, we know that outranking digraphs are *weakly complete*, i.e. for all *x* and *y* in *X*, :math:`r(x \succsim y) < 0.0` implies :math:`r(y \succsim x) \geq 0.0`. And they verify the *coduality principle*: :math:`r(x \not\succsim y) = r(y \succnsim x)` ([BIS-2013]_).
+For two locations *x* and *y*, the situation "*x* strictly outranks *y*", denoted :math:`(x \succnsim y)`, is given when *x* outranks *y* and *y* does not outrank *y*. From theory, we know that outranking digraphs are *weakly complete*, i.e. for all *x* and *y* in *X*, :math:`r(x \succsim y) \geq 0.0` implies :math:`r(y \succsim x) \geq 0.0`. And they verify the *coduality principle*: :math:`r(x \not\succsim y) = r(y \succnsim x)` ([BIS-2013]_).
 
 We may hence compute a strict outranking digraph *gcd* with the *codual transform*, i.e. the *converse of the negation* (see Line 1 below) of digraph *g* (see tutorial on :ref:`Working with the outrankingDigraphs module <OutrankingDigraphs-Tutorial-label>`).
 
@@ -1512,7 +1512,7 @@ We may hence compute a strict outranking digraph *gcd* with the *codual transfor
 			   'NA', 'order', 'gamma', 'notGamma',
 			   'name', 'relation']
 
-We observe in the resulting strict outranking digraph *gcd* 10 valid strict outranking situations (see Line 8) on which we are going to focus our search for a best choice recommendation.
+We observe in the resulting strict outranking digraph *gcd* 10 valid strict outranking situations (see Line 8) on which we are going to focus our search for a best choice recommendation. 
 
 Designing a best choice recommender system
 ``````````````````````````````````````````
@@ -1590,7 +1590,7 @@ Following the Rubis outranking method (see [BIS-2008]_), potential first choice 
 				  
 It is interesting to notice in :numref:`strictBestChoice` (Line 6) that the **strict best choice recommendation** consists in the set of weak Condorcet winners: 'A', 'C' and 'D'. In the corresponding characteristic vector (see Lines 12-14), representing the bipolar credibility degree with which each alternative may indeed be considered a best choice (see [BIS-2006a]_, [BIS-2006b]_), we find confirmed that alternative *D* is the only positively validated one, whereas both extreme alternatives - *A* (the most expensive) and *C* (the cheapest) - stay in an indeterminate situation. They **may be or not be** potential first choice candidates besides *D*. Notice furthermore that compromise alternative *G*, while not actually included in an outranking prekernel, shows as well an indeterminate situation with respect to *being or not being* a potential first choice candidate. Alternatives *B*, *E* and *F* are *negatively* included, i.e. *positively excluded* from this best choice recommendation.
 
-We may also notice in Line 16 that both alternatives *A* and *F* are reported as potential *strict outranked* choices, hence as **potential last choice recommendation** . This indicates a global incomparability status of alternative *A* as shown in :numref:`bestOfficeChoice`.
+We may also notice in Line 16 that both alternatives *A* and *F* are reported as potential *strict outranked* choices, hence as **potential last choice recommendation** . The ambiguous first-ranked and last-ranked position of alternative *A* indicates its global incomparability status as shown in :numref:`bestOfficeChoice`.
 
 .. code-block:: pycon
    :linenos:
@@ -1610,7 +1610,7 @@ We may also notice in Line 16 that both alternatives *A* and *F* are reported as
    Best office choice recommendation from strict outranking digraph
 
 Let us now compare the performances of alternatives *D* and *G* in a
-pairwise perspective (see below). With the given preference discrimination thresholds, we notice that alternative *G* is actually **certainly** *at least as good as* alternative *D*:  :math:`r(G \succsim D) = +145/145 = +1.0` (see Line 14 below).
+pairwise perspective (see below). With the given preference discrimination thresholds, we notice that alternative *G* is actually **certainly** *at least as good as* alternative *D*:  :math:`r(G \succsim D) = +145/145 = +1.0` and alternative *D* is **as well** *at least as good as* alternative *G* :math:`r(D \succsim G) = +36/145 = +0.25` (see Line 14 below).
 
 .. code-block:: pycon
    :linenos:
@@ -1619,19 +1619,19 @@ pairwise perspective (see below). With the given preference discrimination thres
    >>> g.showPairwiseComparison('G','D')
     *------------  pairwise comparison ----*
     Comparing actions : (G, D)
-    crit. wght.  g(x)      g(y)    diff.  |   ind     pref    concord 	|
+    crit. wght.  g(x)      g(y)    diff.  |   ind     pref    (G,D)/(D,G)   |
     =========================================================================
-    C   45.00 -12000.00 -14100.00 +2100.00 | 1000.00 2500.00   +45.00 	| 
-    Cf   6.00     50.00     30.00   +20.00 |   10.00   20.00    +6.00 	| 
-    P    3.00     80.00     90.00   -10.00 |   10.00   20.00    +3.00 	| 
-    Pr  32.00     60.00     70.00   -10.00 |   10.00   20.00   +32.00 	| 
-    St  23.00     20.00     30.00   -10.00 |   10.00   20.00   +23.00 	| 
-    V   26.00    100.00     50.00   +50.00 |   10.00   20.00   +26.00 	| 
-    W   10.00     50.00     55.00    -5.00 |   10.00   20.00   +10.00 	|
+    C   45.00 -12000.00 -14100.00 +2100.00 | 1000.00 2500.00  +45.00/+0.00  | 
+    Cf   6.00     50.00     30.00   +20.00 |   10.00   20.00   +6.00/-6.00  | 
+    P    3.00     80.00     90.00   -10.00 |   10.00   20.00   +3.00/+3.00  | 
+    Pr  32.00     60.00     70.00   -10.00 |   10.00   20.00  +32.00/+32.00 | 
+    St  23.00     20.00     30.00   -10.00 |   10.00   20.00  +23.00/+23.00 | 
+    V   26.00    100.00     50.00   +50.00 |   10.00   20.00  +26.00/-26.00 | 
+    W   10.00     50.00     55.00    -5.00 |   10.00   20.00  +10.00/+10.00 |
     =========================================================================
-    Valuation in range: -145.00 to +145.00; global concordance: +145.00
+    Valuation in range: [-145.00;+145.00]; global concordance: +145.00/+36.00
 
-Yet, we must as well notice that the cheapest alternative *C* is in fact **strictly outranking** alternative *G*:  :math:`r(C \succsim G) = +15/145 > 0.0`, and :math:`r(G \succsim C) = -15/145 < 0.0` (see Line 14 below).
+Yet, we must also notice that the cheapest alternative *C* is in fact **strictly outranking** alternative *G*:  :math:`r(C \succsim G) = +15/145 > 0.0`, and :math:`r(G \succsim C) = -15/145 < 0.0` (see Line 14 below). 
 
 .. code-block:: pycon
    :linenos:
@@ -1652,25 +1652,31 @@ Yet, we must as well notice that the cheapest alternative *C* is in fact **stric
     =========================================================================
     Valuation in range: -145.00 to +145.00; global concordance: +15.00/-15.00
 
+Following pragmatic principle **P3**, stating that a BCR should not contain a sub-recommendation, alternative *G* is hence dropped from our first-ranked list of alternatives.
 
-Partially ordering the outranking digraph
-`````````````````````````````````````````
+To get a further insight in the overall outranking situations, we may use the new :py:class:`~transitiveDigraphs.PartialBachetRanking` class imported from the :py:mod:`transitiveDigraphs` module, for computing a **partial ranking** from the outranking digraph *g*.
 
-To get a further insight in the overall strict outranking situations, we may use the :py:class:`~transitiveDigraphs.PartialBachetRanking` constructor imported from the :py:mod:`transitiveDigraphs` module, for computing a partial **ranking-by-scoring** result from the *codual*, i.e. the strict outranking digraph instance *gcd* (see above).
+Partially ranking the outranking digraph
+````````````````````````````````````````
+In :numref:`BachetRanking0` Line 2, we operate the *epistemic disjunctive fusion* of the five best correlated rankings obtained from 200 random *Bachet* rankings (see the advanced topic on :ref:`partially ranking strategies <Partial-Ranking-Tutorial-label>`).
+
+In this transitive partial relation, alternatives *A*, *C*, *D* as well as *G* are now all first-ranked (see Line 5), whereas alternative *F* is clearly last-ranked (see Line 8).
 
 .. code-block:: pycon
+   :name: BachetRanking0
+   :caption: Partially ranking the location alternatives
    :linenos:
-   :emphasize-lines: 3-4,7
+   :emphasize-lines: 2,5-8
 
    >>> from transitiveDigraphs import PartialBachetRanking
-   >>> wbr = PartialBachetRanking(gcd,randomized=200,seed=3)
+   >>> wbr = PartialBachetRanking(g,randomized=200,maxNbrOfRankings=5,seed=3)
    >>> wbr.showTransitiveDigraph()
     Ranking by Choosing and Rejecting
     1st ranked ['A', 'C', 'D', 'G']
        2nd ranked ['B', 'E']
        2nd last ranked ['B', 'E']
     1st last ranked ['F']
-   >>> wbr.exportGraphViz('officeChoiceRanking')
+   >>> wbr.exportGraphViz('officeChoiceRanking',ArrowHeads=True)
     *---- exporting a dot file for GraphViz tools ---------*
     Exporting to officeChoiceRanking.dot
     dot -Grankdir=TB -Tpng officeChoiceRanking.dot -o officeChoiceRanking.png
@@ -1680,11 +1686,11 @@ To get a further insight in the overall strict outranking situations, we may use
    :width: 200 px
    :align: center
 
-   Partially ranking-by-scoring from the office choice outranking digraph
+   Partially ranking the outranking digraph
 	   
-In this partially **ranking-by-scoring** method, where we operate the *epistemic fusion* of best correlated *Bachet* rankings (see the advanced topic on :ref:`partially ranking strategies <Partial-Ranking-Tutorial-label>`), alternatives *A*, *C*, *D* as well as *G* are now all first-ranked (see Line 7), whereas alternative *F* is clearly last-ranked. The overall partial ordering result shows again the important fact that the most expensive location *A*, and the cheapest location *C*, both appear incomparable with most of the other alternatives, as is apparent from the Hasse diagram  of the partial ranking result (see :numref:`officeChoiceRanking`). 
+:numref:`officeChoiceRanking` makes again clearly apparent the important fact that the most expensive location *A* and the cheapest location *C*, both appear incomparable with all of the other alternatives except the last-ranked location *F*.
 
-The best choice recommendation appears hence depending on the very importance the CEO is attaching to each one of the three decision objectives he is considering. In the setting here, where he considers that *maximizing the future turnover* is the most important objective followed by *minimizing the Costs* and, less important, *maximizing the working conditions*, locations *D* or *G* represent actually the best choices. However, if *Costs* do not play much a role, it would be perhaps better to decide to move to the most advantageous location *A*; or if, on the contrary, *Costs* do matter a lot, moving to the cheapest alternative *C* could definitely represent a more convincing recommendation. 
+The best choice recommendation appears hence depending on the very importance the CEO is attaching to each one of the three decision objectives he is considering. In the setting here, where he considers that *maximizing the future turnover* is the most important objective followed by *minimizing the Costs* and, less important, *maximizing the working conditions*, location *D* or perhaps *G* represent actually the potential best choices. However, if *Costs* do not play much a role, it would be perhaps better to choose the most advantageous location *A*; or if, on the contrary, *Costs* do matter a lot, choosing the cheapest alternative *C* could definitely be a more convincing decision. 
 
 It might be worth, as an **exercise**, to modify these criteria significance weights in the 'officeChoice.py' data file in such a way that
 
