@@ -1610,7 +1610,7 @@ We may also notice in Line 16 that both alternatives *A* and *F* are reported as
    Best office choice recommendation from strict outranking digraph
 
 Let us now compare the performances of alternatives *D* and *G* in a
-pairwise perspective (see below). With the given preference discrimination thresholds, we notice that alternative *G* is actually **certainly** *at least as good as* alternative *D*:  :math:`r(G \succsim D) = +145/145 = +1.0` and alternative *D* is **as well** *at least as good as* alternative *G* :math:`r(D \succsim G) = +36/145 = +0.25` (see Line 14 below).
+pairwise perspective (see below). With the given preference discrimination thresholds, we notice that alternative *G* is actually **certainly** *at least as good as* alternative *D*:  :math:`r(G \succsim D) = +145/145 = +1.0` and alternative *D* is also positively, but less credibly, *at least as good as* alternative *G*:  :math:`r(D \succsim G) = +36/145 = +0.25` (see Line 14 below).
 
 .. code-block:: pycon
    :linenos:
@@ -1631,7 +1631,7 @@ pairwise perspective (see below). With the given preference discrimination thres
     =========================================================================
     Valuation in range: [-145.00;+145.00]; global concordance: +145.00/+36.00
 
-Yet, we must also notice that the cheapest alternative *C* is in fact **strictly outranking** alternative *G*:  :math:`r(C \succsim G) = +15/145 > 0.0`, and :math:`r(G \succsim C) = -15/145 < 0.0` (see Line 14 below). 
+Yet, we must as well notice that the cheapest alternative *C* is in fact **strictly outranking** alternative *G*:  :math:`r(C \succsim G) = +15/145 > 0.0`, and :math:`r(G \succsim C) = -15/145 < 0.0` (see Line 14 below). 
 
 .. code-block:: pycon
    :linenos:
@@ -1654,22 +1654,26 @@ Yet, we must also notice that the cheapest alternative *C* is in fact **strictly
 
 Following pragmatic principle **P3**, stating that a BCR should not contain a sub-recommendation, alternative *G* is hence dropped from our first-ranked list of alternatives.
 
-To get a further insight in the overall outranking situations, we may use the new :py:class:`~transitiveDigraphs.PartialBachetRanking` class imported from the :py:mod:`transitiveDigraphs` module, for computing a **partial ranking** from the outranking digraph *g*.
+To get a further insight in the overall outranking situation, we may use the new :py:class:`~transitiveDigraphs.PartialBachetRanking` class imported from the :py:mod:`transitiveDigraphs` module, for computing a **partial ranking** of all the potential office locations (see the advanced topic on :ref:`partially ranking strategies <Partial-Ranking-Tutorial-label>`).
 
 Partially ranking the outranking digraph
 ````````````````````````````````````````
-In :numref:`BachetRanking0` Line 2, we operate the *epistemic disjunctive fusion* of the five best correlated rankings obtained from 200 random *Bachet* rankings (see the advanced topic on :ref:`partially ranking strategies <Partial-Ranking-Tutorial-label>`).
-
-In this transitive partial relation, alternatives *A*, *C*, *D* as well as *G* are now all first-ranked (see Line 5), whereas alternative *F* is clearly last-ranked (see Line 8).
+In :numref:`BachetRanking0` Line 2, we operate the *epistemic disjunctive fusion* of the five best correlated *Bachet* rankings obtained from 200 random *Bachet* rankings (see Lines 4-8). In the resulting transitive partial relation, alternatives *A*, *C*, *D* as well as *G* appear all ranked before *B* and *E*, whereas alternative *F* appears always last-ranked (see Lines 11 and 13).
 
 .. code-block:: pycon
    :name: BachetRanking0
    :caption: Partially ranking the location alternatives
    :linenos:
-   :emphasize-lines: 2,5-8
+   :emphasize-lines: 2,4-8,11,13
 
    >>> from transitiveDigraphs import PartialBachetRanking
    >>> wbr = PartialBachetRanking(g,randomized=200,maxNbrOfRankings=5,seed=3)
+   >>> wbr.bachetRankings
+    [(0.816, ['G', 'D', 'A', 'C', 'B', 'E', 'F']),
+     (0.788, ['G', 'D', 'E', 'B', 'A', 'C', 'F']),
+     (0.778, ['A', 'D', 'C', 'G', 'E', 'B', 'F']),
+     (0.758, ['D', 'A', 'C', 'G', 'E', 'B', 'F']),
+     (0.756, ['G', 'C', 'D', 'A', 'E', 'B', 'F'])]
    >>> wbr.showTransitiveDigraph()
     Ranking by Choosing and Rejecting
     1st ranked ['A', 'C', 'D', 'G']
@@ -1688,18 +1692,36 @@ In this transitive partial relation, alternatives *A*, *C*, *D* as well as *G* a
 
    Partially ranking the outranking digraph
 	   
-:numref:`officeChoiceRanking` makes again clearly apparent the important fact that the most expensive location *A* and the cheapest location *C*, both appear incomparable with all of the other alternatives except the last-ranked location *F*.
+:numref:`officeChoiceRanking` makes hence again clearly apparent the important fact that the most expensive location *A* and the cheapest location *C*, both,  appear incomparable with all the other alternatives except the last-ranked location *F*.
 
-The best choice recommendation appears hence depending on the very importance the CEO is attaching to each one of the three decision objectives he is considering. In the setting here, where he considers that *maximizing the future turnover* is the most important objective followed by *minimizing the Costs* and, less important, *maximizing the working conditions*, location *D* or perhaps *G* represent actually the potential best choices. However, if *Costs* do not play much a role, it would be perhaps better to choose the most advantageous location *A*; or if, on the contrary, *Costs* do matter a lot, choosing the cheapest alternative *C* could definitely be a more convincing decision. 
+We may use the best, with the outranking digraph *g* correlated (+0.816), *Bachet* ranking ['G', 'D', 'A', 'C', 'B', 'E', 'F']  for showing in :numref:`rankedOfficeChoiceHeatmap` a from best to worst ranked performance heatmap of all the potential office locations.
 
-It might be worth, as an **exercise**, to modify these criteria significance weights in the 'officeChoice.py' data file in such a way that
+>>> t.showHTMLPerformanceHeatmap(actionsList=wbr.bachetRankings[0][1],
+   ...                              Correlations=True)
 
-    - all criteria under an objective appear *equi-significant*, and
-    - all three decision objectives are considered *equally important*.
+.. figure:: rankedOfficeChoiceHeatmap.png
+   :name: rankedOfficeChoiceHeatmap
+   :width: 400 px
+   :align: center
+
+   The ranked performance heatmap of the potential office locations
+
+In view of :numref:`rankedOfficeChoiceHeatmap`, office locations *G* or *D* make up convincing best choice recommendations with an apparent slight advantage for location *G*. This advantage is however largely due to the indifference and preference discrimination thresholds (10% resp. 20%) retained on the qualitative performance criteria.
+
+A best choice recommendation appears eventually depending on the very importance the CEO is attaching to each one of the three decision objectives he is considering. In the setting here, where he considers that *maximizing the future turnover* is the most important objective followed by *minimizing the Costs* and, less important, *maximizing the working conditions*, locations *D* as well as *G* represent actually potential first choices. However, if *Costs* do not play much a role, it would be perhaps better to choose the most advantageous location *A*; or if, on the contrary, *Costs* do matter a lot, choosing the cheapest alternative *C* could definitely be a more convincing choice. 
+
+It might be worth, as an **exercise**, to modify the criteria significance weights in the 'officeChoice.py' data file in such a way that
+
+    - all three decision objectives are considered *equally important*, and
+    - all criteria under an objective are considered *equi-significant*.
 
 What will become the best choice recommendation under this working hypothesis?  
 
-.. seealso:: Lecture 7 notes from the MICS Algorithmic Decision Theory course: [ADT-L7]_.
+.. seealso::
+
+   - :ref:`Alice’s best choice: A selection case study <Alice-Tutorial-label>`  
+   - Lecture 7 notes from the MICS Algorithmic Decision Theory course: [ADT-L7]_.
+
 
 Back to :ref:`Content Table <Tutorial-label>`
 
