@@ -595,12 +595,12 @@ We may even get a better insight into the :py:class:`~digraphs.Digraph` object *
 
    The tutorial random valuation digraph
 
-Double links are drawn in bold black with an arrowhead at each end, whereas single asymmetric links are drawn in black with an arrowhead showing the direction of the link. Notice the undetermined relational situation (:math:`r(6\,S\,2) = 0.00`) observed between nodes '6' and '2'. The corresponding link is marked in gray with an open arrowhead in the drawing (see :numref:`tutorialValDigraph`). 
+Double links are drawn in bold black with an arrowhead at each end, whereas single asymmetrical links are drawn in black with an arrowhead showing the direction of the link. Notice the undetermined relational situation (:math:`r(6\,S\,2) = 0.00`) observed between nodes '6' and '2'. The corresponding link is marked in gray with an open arrowhead in the drawing (see :numref:`tutorialValDigraph`). 
 
 Asymmetric and symmetric parts
 ``````````````````````````````
 
-We may now extract both the *symmetric* as well as the *asymmetric* part of digraph *dg* with the help of two corresponding constructors (see :numref:`asymSymParts`).
+We may now extract both the *symmetric* as well as the *asymmetrical* part of digraph *dg* with the help of two corresponding constructors (see :numref:`asymSymParts`).
 
 .. code-block:: pycon
    :linenos:
@@ -622,7 +622,7 @@ We may now extract both the *symmetric* as well as the *asymmetric* part of digr
    
 .. note::
 
-    The constructor of the partial objects *asymDg* and *symDg* puts to the indeterminate characteristic value all *not-asymmetric*, respectively *not-symmetric* links between nodes (see :numref:`asymSymParts`). 
+    The constructor of the partial objects *asymDg* and *symDg* puts to the indeterminate characteristic value all *not-asymmetrical*, respectively *not-symmetric* links between nodes (see :numref:`asymSymParts`). 
 
 Here below, for illustration the source code of the *relation* constructor of the :py:class:`~digraphs.AsymmetricPartialDigraph` class.
 
@@ -3534,7 +3534,7 @@ To compare for instance the four rankings we have previously obtained with *rank
    >>> rfdg.isTransitive()
     True
 
-By epistemic disjunctive fusion of the four *rankings*, the :py:class:`transitiveDigraphs.RankingsFusionDigraph` constructor computes a transitive asymmetrical partial digraph (see :numref:`RankingConsensus`  Lines 20, 32-33). Notice in Lines 15-18 the unstable ranks of alternative *a1* (rank 2,5,6 and 7) which induce contradictory ranking results leadind to many incomparability situations. Ranking and ordering of partial relations do not give now the same result when such largely incomparable alternatives do appear.
+By epistemic disjunctive fusion of the four *rankings*, the :py:class:`transitiveDigraphs.RankingsFusionDigraph` constructor computes a transitive asymmetric partial digraph (see :numref:`RankingConsensus`  Lines 20, 32-33). Notice in Lines 15-18 the unstable ranks of alternative *a1* (rank 2,5,6 and 7) which induce contradictory ranking results leadind to many incomparability situations. Ranking and ordering of partial relations do not give now the same result when such largely incomparable alternatives do appear.
 
 The generic :py:class:`~transitiveDigraphs.TransitiveDigraph` class provides therefore a :py:meth:`~transitiveDigraphs.TransitiveDigraph.showTransitiveDigraph` method which iteratively extracts conjointly first and last choices --:ref:`initial and terminal kernels <Bipolar-Valued-Kernels-Tutorial-label>`-- as shown in :numref:`RankingConsensus1` Lines 2-6 below. 
 
@@ -10939,7 +10939,7 @@ Appendices
 
 .. [8] See https://hpc.uni.lu/systems/gaia/
 
-.. [13] The class of *self-codual* bipolar-valued digraphs consists of all *weakly asymmetric* digraphs, i.e. digraphs containing only *asymmetric* and/or *indeterminate* links. Limit cases consists of, on the one side, *full tournaments* with *indeterminate reflexive links*, and, on the other side, *fully indeterminate* digraphs. In this class, the *converse* (inverse ~ ) operator is indeed identical to the *dual* (negation - ) one.
+.. [13] The class of *self-codual* bipolar-valued digraphs consists of all *weakly asymmetric* digraphs, i.e. digraphs containing only *asymmetrical* and/or *indeterminate* links. Limit cases consists of, on the one side, *full tournaments* with *indeterminate reflexive links*, and, on the other side, *fully indeterminate* digraphs. In this class, the *converse* (inverse ~ ) operator is indeed identical to the *dual* (negation - ) one.
 
 .. [14] Not to be confused with the *dual graph* of a plane graph *g* that has a vertex for each face of *g*. Here we mean the *less than* (strict converse) relation corresponding to a *greater or equal* relation, or the *less than or equal* relation corresponding to a (strict) *better than* relation.
 

@@ -2964,7 +2964,7 @@ We notice here that the *NetFlows* ranking rule inverts in fact just three '*les
 
    Symmetric part of graffiti07 digraph
 
-Such a preordering of the movies may, for instance, be computed with the :py:func:`~digraphs.Digraph.computeRankingByChoosing` method, where we iteratively extract *dominant kernels* -remaining first choices- and *absorbent kernels* -remaining last choices- (see the tutorial on :ref:`Computing Digraph Kernels <Kernel-Tutorial-label>`). We operate therefore on the asymmetric '*better rated than*', i.e. the *codual* ([3]_) of the '*at least as well rated as*' opinions (see :numref:`rankGraf` Line 2).
+Such a preordering of the movies may, for instance, be computed with the :py:func:`~digraphs.Digraph.computeRankingByChoosing` method, where we iteratively extract *dominant kernels* -remaining first choices- and *absorbent kernels* -remaining last choices- (see the tutorial on :ref:`Computing Digraph Kernels <Kernel-Tutorial-label>`). We operate therefore on the asymmetrical '*better rated than*', i.e. the *codual* ([3]_) of the '*at least as well rated as*' opinions (see :numref:`rankGraf` Line 2).
 
 .. code-block:: pycon
    :linenos:
@@ -4646,7 +4646,7 @@ The crisp partial tournament *rpt* shown in :numref:`randomPartialTournament` co
       'g09'  |   1.0   |  NA    NA    50    NA    50
       'g10'  |   1.0   |  NA    NA    NA    40    60
 
-Each one of the ten performance criteria independently models, with a majority margin of 1/10 = 0.10,  one of the 10 links between the five nodes of the tournament *rpt*.  Criterion *g01* models for instance the asymmetric link between *a1* and *a2* (Line 4), criterion *g9* models the symmetric link between *a3* and *a5* (Line 12) and so on. The bipolar-valued strict outranking relation we obtain with this performance tableau is the following::
+Each one of the ten performance criteria independently models, with a majority margin of 1/10 = 0.10,  one of the 10 links between the five nodes of the tournament *rpt*.  Criterion *g01* models for instance the asymmetrical link between *a1* and *a2* (Line 4), criterion *g9* models the symmetric link between *a3* and *a5* (Line 12) and so on. The bipolar-valued strict outranking relation we obtain with this performance tableau is the following::
 
     * ---- Relation Table -----
        r  |  'a1'   'a2'   'a3'   'a4'   'a5'   
