@@ -1489,7 +1489,7 @@ In :numref:`officeChoiceOutranking` we may notice that Alternative *D* is **posi
    >>> g.computeWeakCondorcetWinners()
     ['A', 'C', 'D']
 
-For two locations *x* and *y*, the situation "*x* strictly outranks *y*", denoted :math:`(x \succnsim y)`, is given when *x* outranks *y* and *y* does not outrank *y*. From theory, we know that outranking digraphs are *weakly complete*, i.e. for all *x* and *y* in *X*, :math:`r(x \succsim y) \geq 0.0` implies :math:`r(y \succsim x) \geq 0.0`. And they verify the *coduality principle*: :math:`r(x \not\succsim y) = r(y \succnsim x)` ([BIS-2013]_).
+For two locations *x* and *y*, the situation "*x* strictly outranks *y*", denoted :math:`(x \succnsim y)`, is given when *x* outranks *y* and *y* does not outrank *y*. From theory, we know that outranking digraphs are *weakly complete*, i.e. for all *x* and *y* in *X*, :math:`r(x \succsim y) + r(y \succsim x) \geq 0.0`. And they verify the *coduality principle*: :math:`r(x \not\succsim y) = r(y \succnsim x)` (see :ref:`On characterizing bipolar-valued outranking digraphs <Sufficiency-Tutorial-label>` and [BIS-2013]_).
 
 We may hence compute a strict outranking digraph *gcd* with the *codual transform*, i.e. the *converse of the negation* (see Line 1 below) of digraph *g* (see tutorial on :ref:`Working with the outrankingDigraphs module <OutrankingDigraphs-Tutorial-label>`).
 
@@ -1552,18 +1552,18 @@ When observing chordless odd outranking circuits, we need to break them open wit
 
 We are ready now for building a best choice recommendation.
 
-The *Rubis* best choice recommendation
-``````````````````````````````````````
+Computing the best choice recommendation
+````````````````````````````````````````
 
-Following the Rubis outranking method (see [BIS-2008]_), potential first choice recommendations are determined by the outranking prekernels --*weakly independent* and *strictly outranking* choices-- of the strict outranking digraph (see the tutorial on :ref:`computing digraph kernels <Kernel-Tutorial-label>`). Any detected chordless odd circuits are by default broken up.
+Following the previously stated pragmatic principles, potential first choice recommendations are determined by the outranking prekernels --*weakly independent* and *strictly outranking* choices-- of the strict outranking digraph (see the tutorial on :ref:`computing digraph kernels <Kernel-Tutorial-label>`). Any detected chordless odd circuits are by default broken up (see [BIS-2008]_).
 
 .. code-block:: pycon
    :name: strictBestChoice
    :caption: Computing the strict best choice recommendation
    :linenos:
-   :emphasize-lines: 6,12-14,16
+   :emphasize-lines: 1,6,12-14,16
 
-   >>> g.showBestChoiceRecommendation(ChoiceVector=True)
+   >>> g.showFirstChoiceRecommendation(ChoiceVector=True)
     * --- First and last choice recommendation(s) ---*
      (in decreasing order of determinateness)   
     Credibility domain: [-1.00,1.00]
@@ -1658,7 +1658,7 @@ To get a further insight in the overall outranking situation, we may use the new
 
 Partially ranking the outranking digraph
 ````````````````````````````````````````
-In :numref:`BachetRanking0` Line 2, we operate the *epistemic disjunctive fusion* of the five best correlated *Bachet* rankings obtained from 200 random *Bachet* rankings (see Lines 4-8). In the resulting transitive partial relation, alternatives *A*, *C*, *D* as well as *G* appear all ranked before *B* and *E*, whereas alternative *F* appears always last-ranked (see Lines 11 and 13).
+In :numref:`BachetRanking0` Line 2, we operate the :ref:`epistemic disjunctive fusion <Epistemic-Fusion-label>` of the five best correlated *Bachet* rankings obtained from 200 random *Bachet* rankings (see Lines 4-8). In the resulting transitive partial relation, alternatives *A*, *C*, *D* as well as *G* appear all ranked before *B* and *E*, whereas alternative *F* appears always last-ranked (see Lines 11 and 13).
 
 .. code-block:: pycon
    :name: BachetRanking0
