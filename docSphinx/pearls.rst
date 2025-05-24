@@ -1743,7 +1743,7 @@ As a consequence, a **multipartisan primary selection**, computed with a :py:met
    :linenos:
 
    >>> uodg.showBestChoiceRecommendation()
-    Rubis best choice recommendation(s) (BCR)
+    Best choice recommendation(s) (BCR)
      (in decreasing order of determinateness)   
     Credibility domain: [-1.00,1.00]
     === >> ambiguous choice(s)
@@ -2132,7 +2132,7 @@ Encouraged by this positive result, we may furthermore try to compute as well a 
 
    >>> odg.showBestChoiceRecommendation()
     ***********************
-    Rubis best choice recommendation(s) (BCR)
+    Best choice recommendation(s) (BCR)
      (in decreasing order of determinateness)   
      Credibility domain: [-1.00,1.00]
     === >> ambiguous first choice(s) 
@@ -2340,7 +2340,7 @@ We see this result furthermore confirmed when computing the corresponding **firs
    :emphasize-lines: 6,14
    
    >>> m.showBestChoiceRecommendation()
-    Rubis best choice recommendation(s) (BCR)
+    Best choice recommendation(s) (BCR)
      (in decreasing order of determinateness)   
     Credibility domain: [-100.00,100.00]
      === >> potential first choice(s)
@@ -4035,7 +4035,7 @@ With such unique disjoint initial and terminal prekernels (see Line 4 and 10), t
 
    >>> g.showFirstChoiceRecommendation()
     ***********************
-    Rubis best choice recommendation(s) (BCR)
+    First choice recommendation(s) (BCR)
      (in decreasing order of determinateness)   
     Credibility domain: [-100.00,100.00]
      === >> potential first choice(s)
@@ -5291,7 +5291,7 @@ Appendix
 
 .. [5] The :py:class:`~votingProfiles.RandomLinearVotingProfile` constructor provides a *DivisivePolitics* flag (*False* by default) for generating random linear voting profiles based on a divisive polls strucure
 
-.. [6] The example was proposed in 2005 by *D. Bouyssou* when discussing the necessity or not of a *Rubis* best choice recommendation to be internally stable --pragmatic principle *P3*-- [BIS-2008p]_ 
+.. [6] The example was proposed in 2005 by *D. Bouyssou* when discussing the necessity or not of a best choice recommendation to be internally stable --pragmatic principle *P3*-- [BIS-2008p]_ 
 
 .. [7] A solution is provided under the name *enigmaPT.py* in the *examples* directory of the Digraph3 resources
 

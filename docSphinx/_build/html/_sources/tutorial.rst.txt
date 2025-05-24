@@ -1708,7 +1708,7 @@ We may use the best, with the outranking digraph *g* correlated (+0.816), *Bache
 
 In view of :numref:`rankedOfficeChoiceHeatmap`, office locations *G* or *D* make up convincing best choice recommendations with an apparent slight advantage for location *G*. This advantage is however largely due to the indifference and preference discrimination thresholds (10% resp. 20%) retained on the qualitative performance criteria.
 
-A best choice recommendation appears eventually depending on the very importance the CEO is attaching to each one of the three decision objectives he is considering. In the setting here, where he considers that *maximizing the future turnover* is the most important objective followed by *minimizing the Costs* and, less important, *maximizing the working conditions*, locations *D* as well as *G* represent actually potential first choices. However, if *Costs* do not play much a role, it would be perhaps better to choose the most advantageous location *A*; or if, on the contrary, *Costs* do matter a lot, choosing the cheapest alternative *C* could definitely be a more convincing choice. 
+A best choice recommendation appears eventually depending on the very importance the CEO is attaching to each one of the three decision objectives he is considering. In the setting here, where he considers that *maximizing the future turnover* is the most important objective followed by *minimizing the Costs* and, less important, *maximizing the working conditions*, locations *D* as well as *G* represent actually potential first choices. However, if *Costs* do not play much a role, it would perhaps be better to choose the most advantageous location *A*; or if, on the contrary, *Costs* do matter a lot, choosing the cheapest alternative *C* could definitely be a more convincing choice. 
 
 It might be worth, as an **exercise**, to modify the criteria significance weights in the 'officeChoice.py' data file in such a way that
 
@@ -2184,7 +2184,7 @@ Due to a 11 against 7 **plurality tyranny** effect, the *Copeland* ranking rule,
    :width: 600 px
    :align: center
 
-It might be opportun to furthermore study the robustness of the apparent outranking situations when assuming only *ordinal* or *uncertain* criteria significance weights. If interested in mainly objectively *unopposed* (multipartisan) outranking situations, one might also try the :py:class:`~outrankingDigraphs.UnOpposedOutrankingDigraph` constructor. (see the :ref:`advanced topics of the Digraph3 documentation <Advanced-Topics-label>`). 
+It might be opportune to furthermore study the robustness of the apparent outranking situations when assuming only *ordinal* or *uncertain* criteria significance weights. If interested in mainly objectively *unopposed* (multipartisan) outranking situations, one might also try the :py:class:`~outrankingDigraphs.UnOpposedOutrankingDigraph` constructor. (see the :ref:`advanced topics of the Digraph3 documentation <Advanced-Topics-label>`). 
 
 Back to :ref:`Content Table <Tutorial-label>`
 
@@ -6811,7 +6811,7 @@ Again, when *equi-signficant* performance criteria are assumed per decision obje
 
 In view of her performance tableau in :numref:`aliceHeatmap`, *Graduate Interpreter* studies at the *Technical High School Köln*, thus, represent definitely **Alice's very best choice**.
 
-For further reading about the *Rubis* Best Choice methodology, one may consult in [BIS-2015]_ the study of a *real decision aid case* about choosing a best poster in a scientific conference.
+For further reading about the Best Choice methodology, one may consult in [BIS-2015]_ the study of a *real decision aid case* about choosing a best poster in a scientific conference.
 
 Back to :ref:`Content Table <Tutorial-label>`
 

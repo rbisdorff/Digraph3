@@ -8437,11 +8437,11 @@ class Digraph(object):
                                           BrokenCocs=True,
                                           ):
         """
-        Shows the RuBis first choice recommendation.
+        Shows a first choice recommendation.
 
         .. note::
 
-            Computes by default the Rubis first choice recommendation on the corresponding strict (codual) outranking digraph.
+            Computes by default a first-choice recommendation on the corresponding strict (codual) outranking digraph.
 
             By default, with BrokenCocs=True, we brake all chordless circuits at their weakest determined ( abs(r(x>y)) + abs(r(y>x)) ) link.
 
@@ -8459,7 +8459,7 @@ class Digraph(object):
         >>> g = BipolarOutrankingDigraph(t)
         >>> g.showFirstChoiceRecommendation()
         ***********************
-        RuBis First Choice Recommendation (BCR)
+        First Choice Recommendation (BCR)
         (in decreasing order of determinateness)   
         Credibility domain:  [-100.0, 100.0]
         === >> potential first choices
@@ -8535,7 +8535,7 @@ class Digraph(object):
             print('first and last choices: ',g.goodChoices,g.badChoices)
         t1 = time()
         if Comments:
-            print('Rubis first choice recommendation(s) (BCR)')
+            print('First choice recommendation(s) (BCR)')
             print(' (in decreasing order of determinateness)   ')
             print('Credibility domain: [%.2f,%.2f]' % (g.valuationdomain['min'],\
                                                                         g.valuationdomain['max']) )
@@ -8642,11 +8642,11 @@ class Digraph(object):
                                           BrokenCocs=True,
                                           ):
         """
-        Shows the RuBis best choice recommendation.
+        Shows a best choice recommendation.
 
         .. note::
 
-            Computes by default the Rubis best choice recommendation on the corresponding strict (codual) outranking digraph.
+            Computes by default a best choice recommendation on the corresponding strict (codual) outranking digraph.
 
             By default, with BrokenCocs=True, we brake all chordless circuits at their weakest determined ( abs(r(x>y)) + abs(r(y>x)) ) link.
 
@@ -8664,7 +8664,7 @@ class Digraph(object):
         >>> g = BipolarOutrankingDigraph(t)
         >>> g.showBestChoiceRecommendation()
         ***********************
-        RuBis Best Choice Recommendation (BCR)
+        Best Choice Recommendation (BCR)
         (in decreasing order of determinateness)   
         Credibility domain:  [-100.0, 100.0]
         === >> potential first choices
@@ -8740,7 +8740,7 @@ class Digraph(object):
             print('first and last choices: ',g.goodChoices,g.badChoices)
         t1 = time()
         if Comments:
-            print('Rubis best choice recommendation(s) (BCR)')
+            print('Best choice recommendation(s) (BCR)')
             print(' (in decreasing order of determinateness)   ')
             print('Credibility domain: [%.2f,%.2f]' % (g.valuationdomain['min'],\
                                                                         g.valuationdomain['max']) )
@@ -8884,11 +8884,11 @@ class Digraph(object):
                                           BrokenCocs=True,
                                           ):
         """
-        Renders the RuBis best choice recommendation in a browser window.
+        Renders a best choice recommendation in a browser window.
 
         .. note::
 
-            Computes by default the Rubis best choice recommendation on the corresponding strict (codual) outranking digraph.
+            Computes by default a best choice recommendation on the corresponding strict (codual) outranking digraph.
 
             In case of chordless circuits, if supporting arcs are more credible
             than the reversed negating arcs, we collapse the circuits into hyper nodes.
@@ -8970,12 +8970,12 @@ class Digraph(object):
 
         t1 = time()
         if Debug:
-            print('Rubis best choice recommendation(s) (BCR)')
+            print('Best choice recommendation(s) (BCR)')
             print(' (in decreasing order of determinateness)   ')
             print('Credibility domain: [%.2f,%.2f]' %\
                   (g.valuationdomain['min'],\
                    g.valuationdomain['max']) )
-        html += '<p>Rubis best choice recommendation(s) (BCR)</br>\n'
+        html += '<p>Best choice recommendation(s) (BCR)</br>\n'
         html += ' (in decreasing order of determinateness)</br>\n'
         html += 'Credibility domain: [%.2f,%.2f]</p>\n' %\
                   (g.valuationdomain['min'],\
