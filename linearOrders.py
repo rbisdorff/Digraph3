@@ -1989,7 +1989,10 @@ class CopelandRanking(LinearOrder):
     concordant with the Copeland ranking, are kept whereas
     the discordant ones are set to the indeterminate value.
 
-    .. note:: The Copeland ranking rule is invariant under the codual transform
+    .. note::
+
+       The Copeland ranking rule is invariant under the codual transform
+       and Condorcet consistent.
     
     """
     def __init__(self,other,CoDual=False,Gamma=False,
@@ -2129,97 +2132,165 @@ class CopelandOrder(CopelandRanking):
     Dummy for CopelandRanking class
     """
 
-########  instantiates optimal linear orderings
-
-# class MedianRanking(LinearOrder):
-#     """
-#     instantiates the ranking of highest mean marginal correlation and lowest amplitude from
-#     a given bipolar-valued Digraph instance of small order 
-#     """
-#     def __init__(self,other,orderLimit=7,
-#                  Threading=False,nbrOfCPUs=1,
-#                  Comments=False,Debug=False):
-#         """
-#         constructor for generating a linear order
-#         from a given other digraph by exact enumeration
-#         of all permutations of actions.
-#         """
-#         if other.order > orderLimit:
-#             print('Digraph order %d to high. The default limit (7) may be changed with the oderLimit argument.' % (other.order) )
-#             return
-                  
-#         from digraphs import all_perms
-#         from copy import copy,deepcopy
-#         from decimal import Decimal
-        
-#         Min = other.valuationdomain['min']
-#         Max = other.valuationdomain['max']
-#         Med = other.valuationdomain['med']
-#         #relation = copy(other.relation)
-#         medianRankings = other.computeMedianRanking(orderLimit=orderLimit,
-#                                                     Threading=Threading,
-#                                                     nbrOfCPUs=nbrOfCPUs,
-#                                                     Comments=Comments,
-#                                                     Debug=Debug)
-#         # [0] = ordered actions list, [1] = maximal marginal corrleation index,
-#         # [2] = minimal marginal correlation amplitude,
-        
-#         medianRanking = medianRankings[0]
-#         maxMarginalCorrelation = medianRankings[1]
-#         minMarginalCorrelationAmplitude = medianRanking[2]
-#         maximalRankings = deepcopy(other.maximalRankings)
-        
-#         if medianRankings is None:
-#             print('Intantiation error: unable to compute a median ranking !!!')
-#             print('Digraph order %d is required to be lower than 8!' % n)
-#             return
-#         if Debug:
-#             print(medianRankings,other.maximalRankings)
-        
-#         # instatiates a Digraph template
-#         actions = deepcopy(other.actions)
-#         Min = Decimal('-1.0')
-#         Max = Decimal('1.0')
-#         Med = Decimal('0.0')
-#         valuationdomain = {'min': Min, 'med': Med, 'max': Max}
-#         relation = {}
-#         n = len(actions)
-#         self.order = n
-#         for i in range(n):
-#             x = medianRanking[i]
-#             relation[x] = {}
-#             for j in range(n):
-#                 y = medianRanking[j]
-#                 relation[x][y] = Med
-#                 if i < j:
-#                     relation[x][y] = Max
-#                     try:
-#                         relation[y][x] = Min
-#                     except:
-#                         relation[y] = {x: Min}
-#                 elif i > j:
-#                     relation[x][y] = Min
-#                     try:
-#                         relation[y][x] = Max
-#                     except:
-#                         relation[y] = {y: Max}
-
-#         self.name = other.name + '_ranked'        
-#         self.actions = actions
-#         self.order = n
-#         self.valuationdomain = valuationdomain
-#         self.relation = relation
-#         self.gamma = self.gammaSets()
-#         self.notGamma = self.notGammaSets()
-#         self.medianRanking = medianRanking
-#         self.maxMarginalCorrelation = maxMarginalCorrelation
-#         self.minMarginalCorrelationAmplitude = minMarginalCorrelationAmplitude
-#         self.maximalRankings = maximalRankings
-#         self.medianOrder = list(reversed(list(medianRanking)))
-#         if Debug:
-#             self.showRelationTable()
-#             print('Median Ranking = ', self.medianRanking)
-
+##class _WeightedCopelandRanking(LinearOrder):
+##    """
+##    Instantiates the weighted Copeland Ranking and Order from
+##    a given bipolar-valued Digraph instance *other*.
+##
+##    The weighted Copeland scores for each action *x* 
+##    are computed as the weighted sum of the differences
+##    between the polarised *other* outranking characteristics.
+##    The weights are given by the position of *x* in the self.relation table.
+##
+##    The weighted Copeland ranking and the Copeland ordering are stored in
+##    the attributes *self.weightedCopelandRanking* and *self.weightedCopelandOrder*.
+##
+##    When *Valued == *True*, the *other* outranking characteristic values,
+##    concordant with the Copeland ranking, are kept whereas
+##    the discordant ones are set to the indeterminate value.
+##
+##    .. note::
+##
+##       The weighted Copeland ranking rule is invariant under the codual transform
+##       and Condorcet consistent
+##    
+##    """
+##    def __init__(self,other,CoDual=False,actionsList=None,
+##                 Valued=False,
+##                 Comments=False,Debug=False):
+##        """
+##        constructor for generating a linear order
+##        from a given other digraph following
+##        the Copeland ordering rule
+##        """
+##
+##        from copy import deepcopy
+##        from collections import OrderedDict
+##        from time import time
+##        from operator import itemgetter
+##        if Debug:
+##            Comments=True
+##        #timings
+##        tt = time()
+##        runTimes = OrderedDict()
+##        # prepare local variables
+##        if CoDual:
+##            otherCoDual = CoDualDigraph(other)
+##            otherRelation = otherCoDual.relation
+##            if Debug:
+##                otherCoDual.showRelationTable()
+##                print(otherCoDual.valuationdomain)
+##        else:
+##            otherRelation = other.relation
+##        n = len(other.actions)
+##        if actionsList is None:
+##            actions = [x for x in other.actions]
+##        else:
+##            actions = actionsList
+##        n = len(actions)
+##        selfRelation = {}
+##        Min = Decimal('-1.0')
+##        Med = Decimal('0.0')
+##        Max = Decimal('1.0')
+##        valuationdomain = {'min': Min,\
+##                           'med': Med,\
+##                           'max': Max}
+##        runTimes['prepareLocals'] = time()-tt
+##
+##        # compute net flows
+##        tnf = time()
+##        incCopelandScores = []
+##        decCopelandScores = []
+##        # with gamma functions
+####        if Gamma:
+####            for x in actions:
+####                copelandScore = len(gamma[x][0]) - len(gamma[x][1])
+####                incCopelandScores.append((copelandScore,x))
+####                decCopelandScores.append((copelandScore,x))
+####        else: # with Condorcet Digraph valuation
+##        c = PolarisedDigraph(other,level=other.valuationdomain['med'],\
+##                         StrictCut=True,KeepValues=False)
+##        if Debug:
+##            print(c)
+##        c.recodeValuation()
+##        cRelation = c.relation
+##        for i in range(n):
+##            x = actions[i]
+##            copelandScore = Decimal('0')
+##            for j in range(n):
+##                if i != j:
+##                    y = actions[j]
+##                    copelandScore += (i+1)*cRelation[x][y] - (j+1)*cRelation[y][x]
+##                    if Debug:
+##                        print(x,y,cRelation[x][y],
+##                              -cRelation[y][x],copelandScore)
+##            incCopelandScores.append((copelandScore,x))
+##            decCopelandScores.append((copelandScore,x))
+##
+##        # reversed sorting with keeping the actions initial ordering
+##        # in case of ties
+##        incCopelandScores.sort(key=itemgetter(0))
+##        decCopelandScores.sort(reverse=True,key=itemgetter(0))
+##        self.decCopelandScores = decCopelandScores
+##        self.incCopelandScores = incCopelandScores
+##    
+##        if Comments:
+##            print('Copeland decreasing scores')
+##            for x in decCopelandScores:
+##                print( '%s : %d' %( x[1],int(x[0]) ) )
+##            print('Copeland increasing scores')
+##            for x in incCopelandScores:
+##                print( '%s : %d' %( x[1],int(x[0]) ) )
+##
+##        copelandRanking = [x[1] for x in decCopelandScores]
+##        self.copelandRanking = copelandRanking
+##        copelandOrder = [x[1] for x in incCopelandScores]
+##        self.copelandOrder = copelandOrder
+##
+##        if Comments:
+##            print('Copeland Ranking:')
+##            print(copelandRanking)
+##            
+##        runTimes['copeland'] = time() - tnf
+##
+##        # init relation
+##        tr = time()
+##        actionsList = [x for x in actions]
+##        relation = {}
+##        for x in actionsList:
+##            xi = copelandRanking.index(x)
+##            relation[x] = {}
+##            for y in actionsList:
+##                yj = copelandRanking.index(y)
+##                if xi < yj:
+##                    relation[x][y] = max(Med, otherRelation[x][y])
+##                elif xi == yj:
+##                    relation[x][y] = Med
+##                else:
+##                    relation[x][y] = min(Med, otherRelation[x][y])
+##        runTimes['relation'] = time() - tr
+##        
+##        # store attributes
+##        self.name = other.name + '_ranked'        
+##        self.actions = actions
+##        self.order = n
+##        self.valuationdomain = valuationdomain
+##        self.relation = relation
+##        self.gamma = self.gammaSets()
+##        self.notGamma = self.notGammaSets()
+##        runTimes['totalTime'] = time() - tt
+##        self.runTimes = runTimes
+##
+##    def showScores(self,direction='descending'):
+##        print('Copeland scores in %s order' % direction)
+##        print('action \t score')
+##        if direction == 'descending':
+##            for x in self.decCopelandScores:
+##                print('%s \t %.2f' %(x[1],x[0]))
+##        else:
+##            for x in self.incCopelandScores:
+##                print('%s \t %.2f' %(x[1],x[0]))
+         
 class KemenyRanking(LinearOrder):
     """
     Instantiates the Kemeny Ranking wrt the outranking relation from
@@ -2545,6 +2616,16 @@ if __name__ == "__main__":
         print(cop.copelandRanking)
         corrcop = g.computeRankingCorrelation(cop.copelandRanking)
         print('cop',cop.copelandRanking,corrcop)
+        wcop1 = WeightedCopelandRanking(g,Comments=False,Debug=False)
+        print(wcop1.copelandRanking)
+        corrwcop1 = g.computeRankingCorrelation(wcop1.copelandRanking)
+        print('wcop1',wcop1.copelandRanking,corrwcop1)
+        actions = [x for x in g.actions]
+        actions.reverse()
+        wcop2 = WeightedCopelandRanking(g,actionsList=actions,Comments=False,Debug=False)
+        print(wcop2.copelandRanking)
+        corrwcop2 = g.computeRankingCorrelation(wcop2.copelandRanking)
+        print('wcop2',wcop2.copelandRanking,corrwcop2)
         nf = NetFlowsRanking(g)
         corrnf = g.computeRankingCorrelation(nf.netFlowsRanking)
         print('nf',nf.netFlowsRanking,corrnf)

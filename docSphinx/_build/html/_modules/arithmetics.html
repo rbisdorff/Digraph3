@@ -346,13 +346,13 @@
 
     <span class="k">def</span> <span class="fm">__mul__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">other</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        Defines the addition operator for Bachet encoded numbers</span>
+<span class="sd">        Defines the multiplication operator for Bachet encoded numbers</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">n1</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">value</span><span class="p">()</span>
         <span class="n">n2</span> <span class="o">=</span> <span class="n">other</span><span class="o">.</span><span class="n">value</span><span class="p">()</span>
         <span class="n">n3</span> <span class="o">=</span> <span class="n">n1</span> <span class="o">*</span> <span class="n">n2</span>
         <span class="k">return</span> <span class="n">BachetNumber</span><span class="p">(</span><span class="n">n3</span><span class="p">)</span>
-        
+    
     <span class="k">def</span> <span class="nf">_base10to3</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">num</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Change a base 10 number to a base 3 number.</span>
@@ -1340,7 +1340,7 @@
 
   <div role="contentinfo">
     <p>&#169; Copyright 2012-2025, Raymond Bisdorff.
-      <span class="lastupdated">Last updated on May 21, 2025.
+      <span class="lastupdated">Last updated on May 27, 2025.
       </span></p>
   </div>
 

@@ -2140,7 +2140,10 @@
 <span class="sd">    concordant with the Copeland ranking, are kept whereas</span>
 <span class="sd">    the discordant ones are set to the indeterminate value.</span>
 
-<span class="sd">    .. note:: The Copeland ranking rule is invariant under the codual transform</span>
+<span class="sd">    .. note::</span>
+
+<span class="sd">       The Copeland ranking rule is invariant under the codual transform</span>
+<span class="sd">       and Condorcet consistent.</span>
 <span class="sd">    </span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">other</span><span class="p">,</span><span class="n">CoDual</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span><span class="n">Gamma</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
@@ -2284,97 +2287,165 @@
 <span class="sd">    &quot;&quot;&quot;</span></div>
 
 
-<span class="c1">########  instantiates optimal linear orderings</span>
-
-<span class="c1"># class MedianRanking(LinearOrder):</span>
-<span class="c1">#     &quot;&quot;&quot;</span>
-<span class="c1">#     instantiates the ranking of highest mean marginal correlation and lowest amplitude from</span>
-<span class="c1">#     a given bipolar-valued Digraph instance of small order </span>
-<span class="c1">#     &quot;&quot;&quot;</span>
-<span class="c1">#     def __init__(self,other,orderLimit=7,</span>
-<span class="c1">#                  Threading=False,nbrOfCPUs=1,</span>
-<span class="c1">#                  Comments=False,Debug=False):</span>
-<span class="c1">#         &quot;&quot;&quot;</span>
-<span class="c1">#         constructor for generating a linear order</span>
-<span class="c1">#         from a given other digraph by exact enumeration</span>
-<span class="c1">#         of all permutations of actions.</span>
-<span class="c1">#         &quot;&quot;&quot;</span>
-<span class="c1">#         if other.order &gt; orderLimit:</span>
-<span class="c1">#             print(&#39;Digraph order %d to high. The default limit (7) may be changed with the oderLimit argument.&#39; % (other.order) )</span>
-<span class="c1">#             return</span>
-                  
-<span class="c1">#         from digraphs import all_perms</span>
-<span class="c1">#         from copy import copy,deepcopy</span>
-<span class="c1">#         from decimal import Decimal</span>
-        
-<span class="c1">#         Min = other.valuationdomain[&#39;min&#39;]</span>
-<span class="c1">#         Max = other.valuationdomain[&#39;max&#39;]</span>
-<span class="c1">#         Med = other.valuationdomain[&#39;med&#39;]</span>
-<span class="c1">#         #relation = copy(other.relation)</span>
-<span class="c1">#         medianRankings = other.computeMedianRanking(orderLimit=orderLimit,</span>
-<span class="c1">#                                                     Threading=Threading,</span>
-<span class="c1">#                                                     nbrOfCPUs=nbrOfCPUs,</span>
-<span class="c1">#                                                     Comments=Comments,</span>
-<span class="c1">#                                                     Debug=Debug)</span>
-<span class="c1">#         # [0] = ordered actions list, [1] = maximal marginal corrleation index,</span>
-<span class="c1">#         # [2] = minimal marginal correlation amplitude,</span>
-        
-<span class="c1">#         medianRanking = medianRankings[0]</span>
-<span class="c1">#         maxMarginalCorrelation = medianRankings[1]</span>
-<span class="c1">#         minMarginalCorrelationAmplitude = medianRanking[2]</span>
-<span class="c1">#         maximalRankings = deepcopy(other.maximalRankings)</span>
-        
-<span class="c1">#         if medianRankings is None:</span>
-<span class="c1">#             print(&#39;Intantiation error: unable to compute a median ranking !!!&#39;)</span>
-<span class="c1">#             print(&#39;Digraph order %d is required to be lower than 8!&#39; % n)</span>
-<span class="c1">#             return</span>
-<span class="c1">#         if Debug:</span>
-<span class="c1">#             print(medianRankings,other.maximalRankings)</span>
-        
-<span class="c1">#         # instatiates a Digraph template</span>
-<span class="c1">#         actions = deepcopy(other.actions)</span>
-<span class="c1">#         Min = Decimal(&#39;-1.0&#39;)</span>
-<span class="c1">#         Max = Decimal(&#39;1.0&#39;)</span>
-<span class="c1">#         Med = Decimal(&#39;0.0&#39;)</span>
-<span class="c1">#         valuationdomain = {&#39;min&#39;: Min, &#39;med&#39;: Med, &#39;max&#39;: Max}</span>
-<span class="c1">#         relation = {}</span>
-<span class="c1">#         n = len(actions)</span>
-<span class="c1">#         self.order = n</span>
-<span class="c1">#         for i in range(n):</span>
-<span class="c1">#             x = medianRanking[i]</span>
-<span class="c1">#             relation[x] = {}</span>
-<span class="c1">#             for j in range(n):</span>
-<span class="c1">#                 y = medianRanking[j]</span>
-<span class="c1">#                 relation[x][y] = Med</span>
-<span class="c1">#                 if i &lt; j:</span>
-<span class="c1">#                     relation[x][y] = Max</span>
-<span class="c1">#                     try:</span>
-<span class="c1">#                         relation[y][x] = Min</span>
-<span class="c1">#                     except:</span>
-<span class="c1">#                         relation[y] = {x: Min}</span>
-<span class="c1">#                 elif i &gt; j:</span>
-<span class="c1">#                     relation[x][y] = Min</span>
-<span class="c1">#                     try:</span>
-<span class="c1">#                         relation[y][x] = Max</span>
-<span class="c1">#                     except:</span>
-<span class="c1">#                         relation[y] = {y: Max}</span>
-
-<span class="c1">#         self.name = other.name + &#39;_ranked&#39;        </span>
-<span class="c1">#         self.actions = actions</span>
-<span class="c1">#         self.order = n</span>
-<span class="c1">#         self.valuationdomain = valuationdomain</span>
-<span class="c1">#         self.relation = relation</span>
-<span class="c1">#         self.gamma = self.gammaSets()</span>
-<span class="c1">#         self.notGamma = self.notGammaSets()</span>
-<span class="c1">#         self.medianRanking = medianRanking</span>
-<span class="c1">#         self.maxMarginalCorrelation = maxMarginalCorrelation</span>
-<span class="c1">#         self.minMarginalCorrelationAmplitude = minMarginalCorrelationAmplitude</span>
-<span class="c1">#         self.maximalRankings = maximalRankings</span>
-<span class="c1">#         self.medianOrder = list(reversed(list(medianRanking)))</span>
-<span class="c1">#         if Debug:</span>
-<span class="c1">#             self.showRelationTable()</span>
-<span class="c1">#             print(&#39;Median Ranking = &#39;, self.medianRanking)</span>
-
+<span class="c1">##class _WeightedCopelandRanking(LinearOrder):</span>
+<span class="c1">##    &quot;&quot;&quot;</span>
+<span class="c1">##    Instantiates the weighted Copeland Ranking and Order from</span>
+<span class="c1">##    a given bipolar-valued Digraph instance *other*.</span>
+<span class="c1">##</span>
+<span class="c1">##    The weighted Copeland scores for each action *x* </span>
+<span class="c1">##    are computed as the weighted sum of the differences</span>
+<span class="c1">##    between the polarised *other* outranking characteristics.</span>
+<span class="c1">##    The weights are given by the position of *x* in the self.relation table.</span>
+<span class="c1">##</span>
+<span class="c1">##    The weighted Copeland ranking and the Copeland ordering are stored in</span>
+<span class="c1">##    the attributes *self.weightedCopelandRanking* and *self.weightedCopelandOrder*.</span>
+<span class="c1">##</span>
+<span class="c1">##    When *Valued == *True*, the *other* outranking characteristic values,</span>
+<span class="c1">##    concordant with the Copeland ranking, are kept whereas</span>
+<span class="c1">##    the discordant ones are set to the indeterminate value.</span>
+<span class="c1">##</span>
+<span class="c1">##    .. note::</span>
+<span class="c1">##</span>
+<span class="c1">##       The weighted Copeland ranking rule is invariant under the codual transform</span>
+<span class="c1">##       and Condorcet consistent</span>
+<span class="c1">##    </span>
+<span class="c1">##    &quot;&quot;&quot;</span>
+<span class="c1">##    def __init__(self,other,CoDual=False,actionsList=None,</span>
+<span class="c1">##                 Valued=False,</span>
+<span class="c1">##                 Comments=False,Debug=False):</span>
+<span class="c1">##        &quot;&quot;&quot;</span>
+<span class="c1">##        constructor for generating a linear order</span>
+<span class="c1">##        from a given other digraph following</span>
+<span class="c1">##        the Copeland ordering rule</span>
+<span class="c1">##        &quot;&quot;&quot;</span>
+<span class="c1">##</span>
+<span class="c1">##        from copy import deepcopy</span>
+<span class="c1">##        from collections import OrderedDict</span>
+<span class="c1">##        from time import time</span>
+<span class="c1">##        from operator import itemgetter</span>
+<span class="c1">##        if Debug:</span>
+<span class="c1">##            Comments=True</span>
+<span class="c1">##        #timings</span>
+<span class="c1">##        tt = time()</span>
+<span class="c1">##        runTimes = OrderedDict()</span>
+<span class="c1">##        # prepare local variables</span>
+<span class="c1">##        if CoDual:</span>
+<span class="c1">##            otherCoDual = CoDualDigraph(other)</span>
+<span class="c1">##            otherRelation = otherCoDual.relation</span>
+<span class="c1">##            if Debug:</span>
+<span class="c1">##                otherCoDual.showRelationTable()</span>
+<span class="c1">##                print(otherCoDual.valuationdomain)</span>
+<span class="c1">##        else:</span>
+<span class="c1">##            otherRelation = other.relation</span>
+<span class="c1">##        n = len(other.actions)</span>
+<span class="c1">##        if actionsList is None:</span>
+<span class="c1">##            actions = [x for x in other.actions]</span>
+<span class="c1">##        else:</span>
+<span class="c1">##            actions = actionsList</span>
+<span class="c1">##        n = len(actions)</span>
+<span class="c1">##        selfRelation = {}</span>
+<span class="c1">##        Min = Decimal(&#39;-1.0&#39;)</span>
+<span class="c1">##        Med = Decimal(&#39;0.0&#39;)</span>
+<span class="c1">##        Max = Decimal(&#39;1.0&#39;)</span>
+<span class="c1">##        valuationdomain = {&#39;min&#39;: Min,\</span>
+<span class="c1">##                           &#39;med&#39;: Med,\</span>
+<span class="c1">##                           &#39;max&#39;: Max}</span>
+<span class="c1">##        runTimes[&#39;prepareLocals&#39;] = time()-tt</span>
+<span class="c1">##</span>
+<span class="c1">##        # compute net flows</span>
+<span class="c1">##        tnf = time()</span>
+<span class="c1">##        incCopelandScores = []</span>
+<span class="c1">##        decCopelandScores = []</span>
+<span class="c1">##        # with gamma functions</span>
+<span class="c1">####        if Gamma:</span>
+<span class="c1">####            for x in actions:</span>
+<span class="c1">####                copelandScore = len(gamma[x][0]) - len(gamma[x][1])</span>
+<span class="c1">####                incCopelandScores.append((copelandScore,x))</span>
+<span class="c1">####                decCopelandScores.append((copelandScore,x))</span>
+<span class="c1">####        else: # with Condorcet Digraph valuation</span>
+<span class="c1">##        c = PolarisedDigraph(other,level=other.valuationdomain[&#39;med&#39;],\</span>
+<span class="c1">##                         StrictCut=True,KeepValues=False)</span>
+<span class="c1">##        if Debug:</span>
+<span class="c1">##            print(c)</span>
+<span class="c1">##        c.recodeValuation()</span>
+<span class="c1">##        cRelation = c.relation</span>
+<span class="c1">##        for i in range(n):</span>
+<span class="c1">##            x = actions[i]</span>
+<span class="c1">##            copelandScore = Decimal(&#39;0&#39;)</span>
+<span class="c1">##            for j in range(n):</span>
+<span class="c1">##                if i != j:</span>
+<span class="c1">##                    y = actions[j]</span>
+<span class="c1">##                    copelandScore += (i+1)*cRelation[x][y] - (j+1)*cRelation[y][x]</span>
+<span class="c1">##                    if Debug:</span>
+<span class="c1">##                        print(x,y,cRelation[x][y],</span>
+<span class="c1">##                              -cRelation[y][x],copelandScore)</span>
+<span class="c1">##            incCopelandScores.append((copelandScore,x))</span>
+<span class="c1">##            decCopelandScores.append((copelandScore,x))</span>
+<span class="c1">##</span>
+<span class="c1">##        # reversed sorting with keeping the actions initial ordering</span>
+<span class="c1">##        # in case of ties</span>
+<span class="c1">##        incCopelandScores.sort(key=itemgetter(0))</span>
+<span class="c1">##        decCopelandScores.sort(reverse=True,key=itemgetter(0))</span>
+<span class="c1">##        self.decCopelandScores = decCopelandScores</span>
+<span class="c1">##        self.incCopelandScores = incCopelandScores</span>
+<span class="c1">##    </span>
+<span class="c1">##        if Comments:</span>
+<span class="c1">##            print(&#39;Copeland decreasing scores&#39;)</span>
+<span class="c1">##            for x in decCopelandScores:</span>
+<span class="c1">##                print( &#39;%s : %d&#39; %( x[1],int(x[0]) ) )</span>
+<span class="c1">##            print(&#39;Copeland increasing scores&#39;)</span>
+<span class="c1">##            for x in incCopelandScores:</span>
+<span class="c1">##                print( &#39;%s : %d&#39; %( x[1],int(x[0]) ) )</span>
+<span class="c1">##</span>
+<span class="c1">##        copelandRanking = [x[1] for x in decCopelandScores]</span>
+<span class="c1">##        self.copelandRanking = copelandRanking</span>
+<span class="c1">##        copelandOrder = [x[1] for x in incCopelandScores]</span>
+<span class="c1">##        self.copelandOrder = copelandOrder</span>
+<span class="c1">##</span>
+<span class="c1">##        if Comments:</span>
+<span class="c1">##            print(&#39;Copeland Ranking:&#39;)</span>
+<span class="c1">##            print(copelandRanking)</span>
+<span class="c1">##            </span>
+<span class="c1">##        runTimes[&#39;copeland&#39;] = time() - tnf</span>
+<span class="c1">##</span>
+<span class="c1">##        # init relation</span>
+<span class="c1">##        tr = time()</span>
+<span class="c1">##        actionsList = [x for x in actions]</span>
+<span class="c1">##        relation = {}</span>
+<span class="c1">##        for x in actionsList:</span>
+<span class="c1">##            xi = copelandRanking.index(x)</span>
+<span class="c1">##            relation[x] = {}</span>
+<span class="c1">##            for y in actionsList:</span>
+<span class="c1">##                yj = copelandRanking.index(y)</span>
+<span class="c1">##                if xi &lt; yj:</span>
+<span class="c1">##                    relation[x][y] = max(Med, otherRelation[x][y])</span>
+<span class="c1">##                elif xi == yj:</span>
+<span class="c1">##                    relation[x][y] = Med</span>
+<span class="c1">##                else:</span>
+<span class="c1">##                    relation[x][y] = min(Med, otherRelation[x][y])</span>
+<span class="c1">##        runTimes[&#39;relation&#39;] = time() - tr</span>
+<span class="c1">##        </span>
+<span class="c1">##        # store attributes</span>
+<span class="c1">##        self.name = other.name + &#39;_ranked&#39;        </span>
+<span class="c1">##        self.actions = actions</span>
+<span class="c1">##        self.order = n</span>
+<span class="c1">##        self.valuationdomain = valuationdomain</span>
+<span class="c1">##        self.relation = relation</span>
+<span class="c1">##        self.gamma = self.gammaSets()</span>
+<span class="c1">##        self.notGamma = self.notGammaSets()</span>
+<span class="c1">##        runTimes[&#39;totalTime&#39;] = time() - tt</span>
+<span class="c1">##        self.runTimes = runTimes</span>
+<span class="c1">##</span>
+<span class="c1">##    def showScores(self,direction=&#39;descending&#39;):</span>
+<span class="c1">##        print(&#39;Copeland scores in %s order&#39; % direction)</span>
+<span class="c1">##        print(&#39;action \t score&#39;)</span>
+<span class="c1">##        if direction == &#39;descending&#39;:</span>
+<span class="c1">##            for x in self.decCopelandScores:</span>
+<span class="c1">##                print(&#39;%s \t %.2f&#39; %(x[1],x[0]))</span>
+<span class="c1">##        else:</span>
+<span class="c1">##            for x in self.incCopelandScores:</span>
+<span class="c1">##                print(&#39;%s \t %.2f&#39; %(x[1],x[0]))</span>
+         
 <div class="viewcode-block" id="KemenyRanking">
 <a class="viewcode-back" href="../techDoc.html#linearOrders.KemenyRanking">[docs]</a>
 <span class="k">class</span> <span class="nc">KemenyRanking</span><span class="p">(</span><span class="n">LinearOrder</span><span class="p">):</span>
@@ -2715,6 +2786,16 @@
         <span class="nb">print</span><span class="p">(</span><span class="n">cop</span><span class="o">.</span><span class="n">copelandRanking</span><span class="p">)</span>
         <span class="n">corrcop</span> <span class="o">=</span> <span class="n">g</span><span class="o">.</span><span class="n">computeRankingCorrelation</span><span class="p">(</span><span class="n">cop</span><span class="o">.</span><span class="n">copelandRanking</span><span class="p">)</span>
         <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;cop&#39;</span><span class="p">,</span><span class="n">cop</span><span class="o">.</span><span class="n">copelandRanking</span><span class="p">,</span><span class="n">corrcop</span><span class="p">)</span>
+        <span class="n">wcop1</span> <span class="o">=</span> <span class="n">WeightedCopelandRanking</span><span class="p">(</span><span class="n">g</span><span class="p">,</span><span class="n">Comments</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span><span class="n">Debug</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="n">wcop1</span><span class="o">.</span><span class="n">copelandRanking</span><span class="p">)</span>
+        <span class="n">corrwcop1</span> <span class="o">=</span> <span class="n">g</span><span class="o">.</span><span class="n">computeRankingCorrelation</span><span class="p">(</span><span class="n">wcop1</span><span class="o">.</span><span class="n">copelandRanking</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;wcop1&#39;</span><span class="p">,</span><span class="n">wcop1</span><span class="o">.</span><span class="n">copelandRanking</span><span class="p">,</span><span class="n">corrwcop1</span><span class="p">)</span>
+        <span class="n">actions</span> <span class="o">=</span> <span class="p">[</span><span class="n">x</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">g</span><span class="o">.</span><span class="n">actions</span><span class="p">]</span>
+        <span class="n">actions</span><span class="o">.</span><span class="n">reverse</span><span class="p">()</span>
+        <span class="n">wcop2</span> <span class="o">=</span> <span class="n">WeightedCopelandRanking</span><span class="p">(</span><span class="n">g</span><span class="p">,</span><span class="n">actionsList</span><span class="o">=</span><span class="n">actions</span><span class="p">,</span><span class="n">Comments</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span><span class="n">Debug</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="n">wcop2</span><span class="o">.</span><span class="n">copelandRanking</span><span class="p">)</span>
+        <span class="n">corrwcop2</span> <span class="o">=</span> <span class="n">g</span><span class="o">.</span><span class="n">computeRankingCorrelation</span><span class="p">(</span><span class="n">wcop2</span><span class="o">.</span><span class="n">copelandRanking</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;wcop2&#39;</span><span class="p">,</span><span class="n">wcop2</span><span class="o">.</span><span class="n">copelandRanking</span><span class="p">,</span><span class="n">corrwcop2</span><span class="p">)</span>
         <span class="n">nf</span> <span class="o">=</span> <span class="n">NetFlowsRanking</span><span class="p">(</span><span class="n">g</span><span class="p">)</span>
         <span class="n">corrnf</span> <span class="o">=</span> <span class="n">g</span><span class="o">.</span><span class="n">computeRankingCorrelation</span><span class="p">(</span><span class="n">nf</span><span class="o">.</span><span class="n">netFlowsRanking</span><span class="p">)</span>
         <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;nf&#39;</span><span class="p">,</span><span class="n">nf</span><span class="o">.</span><span class="n">netFlowsRanking</span><span class="p">,</span><span class="n">corrnf</span><span class="p">)</span>
@@ -2774,7 +2855,7 @@
 
   <div role="contentinfo">
     <p>&#169; Copyright 2012-2025, Raymond Bisdorff.
-      <span class="lastupdated">Last updated on May 21, 2025.
+      <span class="lastupdated">Last updated on May 27, 2025.
       </span></p>
   </div>
 

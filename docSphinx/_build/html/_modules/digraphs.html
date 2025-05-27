@@ -9079,11 +9079,11 @@
                                           <span class="n">BrokenCocs</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
                                           <span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        Shows the RuBis first choice recommendation.</span>
+<span class="sd">        Shows a first choice recommendation.</span>
 
 <span class="sd">        .. note::</span>
 
-<span class="sd">            Computes by default the Rubis first choice recommendation on the corresponding strict (codual) outranking digraph.</span>
+<span class="sd">            Computes by default a first-choice recommendation on the corresponding strict (codual) outranking digraph.</span>
 
 <span class="sd">            By default, with BrokenCocs=True, we brake all chordless circuits at their weakest determined ( abs(r(x&gt;y)) + abs(r(y&gt;x)) ) link.</span>
 
@@ -9101,7 +9101,7 @@
 <span class="sd">        &gt;&gt;&gt; g = BipolarOutrankingDigraph(t)</span>
 <span class="sd">        &gt;&gt;&gt; g.showFirstChoiceRecommendation()</span>
 <span class="sd">        ***********************</span>
-<span class="sd">        RuBis First Choice Recommendation (BCR)</span>
+<span class="sd">        First Choice Recommendation (BCR)</span>
 <span class="sd">        (in decreasing order of determinateness)   </span>
 <span class="sd">        Credibility domain:  [-100.0, 100.0]</span>
 <span class="sd">        === &gt;&gt; potential first choices</span>
@@ -9177,7 +9177,7 @@
             <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;first and last choices: &#39;</span><span class="p">,</span><span class="n">g</span><span class="o">.</span><span class="n">goodChoices</span><span class="p">,</span><span class="n">g</span><span class="o">.</span><span class="n">badChoices</span><span class="p">)</span>
         <span class="n">t1</span> <span class="o">=</span> <span class="n">time</span><span class="p">()</span>
         <span class="k">if</span> <span class="n">Comments</span><span class="p">:</span>
-            <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Rubis first choice recommendation(s) (BCR)&#39;</span><span class="p">)</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;First choice recommendation(s) (BCR)&#39;</span><span class="p">)</span>
             <span class="nb">print</span><span class="p">(</span><span class="s1">&#39; (in decreasing order of determinateness)   &#39;</span><span class="p">)</span>
             <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Credibility domain: [</span><span class="si">%.2f</span><span class="s1">,</span><span class="si">%.2f</span><span class="s1">]&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="n">g</span><span class="o">.</span><span class="n">valuationdomain</span><span class="p">[</span><span class="s1">&#39;min&#39;</span><span class="p">],</span>\
                                                                         <span class="n">g</span><span class="o">.</span><span class="n">valuationdomain</span><span class="p">[</span><span class="s1">&#39;max&#39;</span><span class="p">])</span> <span class="p">)</span>
@@ -9287,11 +9287,11 @@
                                           <span class="n">BrokenCocs</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
                                           <span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        Shows the RuBis best choice recommendation.</span>
+<span class="sd">        Shows a best choice recommendation.</span>
 
 <span class="sd">        .. note::</span>
 
-<span class="sd">            Computes by default the Rubis best choice recommendation on the corresponding strict (codual) outranking digraph.</span>
+<span class="sd">            Computes by default a best choice recommendation on the corresponding strict (codual) outranking digraph.</span>
 
 <span class="sd">            By default, with BrokenCocs=True, we brake all chordless circuits at their weakest determined ( abs(r(x&gt;y)) + abs(r(y&gt;x)) ) link.</span>
 
@@ -9309,7 +9309,7 @@
 <span class="sd">        &gt;&gt;&gt; g = BipolarOutrankingDigraph(t)</span>
 <span class="sd">        &gt;&gt;&gt; g.showBestChoiceRecommendation()</span>
 <span class="sd">        ***********************</span>
-<span class="sd">        RuBis Best Choice Recommendation (BCR)</span>
+<span class="sd">        Best Choice Recommendation (BCR)</span>
 <span class="sd">        (in decreasing order of determinateness)   </span>
 <span class="sd">        Credibility domain:  [-100.0, 100.0]</span>
 <span class="sd">        === &gt;&gt; potential first choices</span>
@@ -9385,7 +9385,7 @@
             <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;first and last choices: &#39;</span><span class="p">,</span><span class="n">g</span><span class="o">.</span><span class="n">goodChoices</span><span class="p">,</span><span class="n">g</span><span class="o">.</span><span class="n">badChoices</span><span class="p">)</span>
         <span class="n">t1</span> <span class="o">=</span> <span class="n">time</span><span class="p">()</span>
         <span class="k">if</span> <span class="n">Comments</span><span class="p">:</span>
-            <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Rubis best choice recommendation(s) (BCR)&#39;</span><span class="p">)</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Best choice recommendation(s) (BCR)&#39;</span><span class="p">)</span>
             <span class="nb">print</span><span class="p">(</span><span class="s1">&#39; (in decreasing order of determinateness)   &#39;</span><span class="p">)</span>
             <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Credibility domain: [</span><span class="si">%.2f</span><span class="s1">,</span><span class="si">%.2f</span><span class="s1">]&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="n">g</span><span class="o">.</span><span class="n">valuationdomain</span><span class="p">[</span><span class="s1">&#39;min&#39;</span><span class="p">],</span>\
                                                                         <span class="n">g</span><span class="o">.</span><span class="n">valuationdomain</span><span class="p">[</span><span class="s1">&#39;max&#39;</span><span class="p">])</span> <span class="p">)</span>
@@ -9533,11 +9533,11 @@
                                           <span class="n">BrokenCocs</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
                                           <span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        Renders the RuBis best choice recommendation in a browser window.</span>
+<span class="sd">        Renders a best choice recommendation in a browser window.</span>
 
 <span class="sd">        .. note::</span>
 
-<span class="sd">            Computes by default the Rubis best choice recommendation on the corresponding strict (codual) outranking digraph.</span>
+<span class="sd">            Computes by default a best choice recommendation on the corresponding strict (codual) outranking digraph.</span>
 
 <span class="sd">            In case of chordless circuits, if supporting arcs are more credible</span>
 <span class="sd">            than the reversed negating arcs, we collapse the circuits into hyper nodes.</span>
@@ -9619,12 +9619,12 @@
 
         <span class="n">t1</span> <span class="o">=</span> <span class="n">time</span><span class="p">()</span>
         <span class="k">if</span> <span class="n">Debug</span><span class="p">:</span>
-            <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Rubis best choice recommendation(s) (BCR)&#39;</span><span class="p">)</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Best choice recommendation(s) (BCR)&#39;</span><span class="p">)</span>
             <span class="nb">print</span><span class="p">(</span><span class="s1">&#39; (in decreasing order of determinateness)   &#39;</span><span class="p">)</span>
             <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Credibility domain: [</span><span class="si">%.2f</span><span class="s1">,</span><span class="si">%.2f</span><span class="s1">]&#39;</span> <span class="o">%</span>\
                   <span class="p">(</span><span class="n">g</span><span class="o">.</span><span class="n">valuationdomain</span><span class="p">[</span><span class="s1">&#39;min&#39;</span><span class="p">],</span>\
                    <span class="n">g</span><span class="o">.</span><span class="n">valuationdomain</span><span class="p">[</span><span class="s1">&#39;max&#39;</span><span class="p">])</span> <span class="p">)</span>
-        <span class="n">html</span> <span class="o">+=</span> <span class="s1">&#39;&lt;p&gt;Rubis best choice recommendation(s) (BCR)&lt;/br&gt;</span><span class="se">\n</span><span class="s1">&#39;</span>
+        <span class="n">html</span> <span class="o">+=</span> <span class="s1">&#39;&lt;p&gt;Best choice recommendation(s) (BCR)&lt;/br&gt;</span><span class="se">\n</span><span class="s1">&#39;</span>
         <span class="n">html</span> <span class="o">+=</span> <span class="s1">&#39; (in decreasing order of determinateness)&lt;/br&gt;</span><span class="se">\n</span><span class="s1">&#39;</span>
         <span class="n">html</span> <span class="o">+=</span> <span class="s1">&#39;Credibility domain: [</span><span class="si">%.2f</span><span class="s1">,</span><span class="si">%.2f</span><span class="s1">]&lt;/p&gt;</span><span class="se">\n</span><span class="s1">&#39;</span> <span class="o">%</span>\
                   <span class="p">(</span><span class="n">g</span><span class="o">.</span><span class="n">valuationdomain</span><span class="p">[</span><span class="s1">&#39;min&#39;</span><span class="p">],</span>\
@@ -16308,7 +16308,7 @@
 
   <div role="contentinfo">
     <p>&#169; Copyright 2012-2025, Raymond Bisdorff.
-      <span class="lastupdated">Last updated on May 21, 2025.
+      <span class="lastupdated">Last updated on May 27, 2025.
       </span></p>
   </div>
 

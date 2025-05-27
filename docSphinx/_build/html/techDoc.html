@@ -3478,10 +3478,10 @@ Renders the sharpest of two characteristic vectors v and w.</p>
 <dl class="py method">
 <dt class="sig sig-object py" id="digraphs.Digraph.showBestChoiceRecommendation">
 <span class="sig-name descname"><span class="pre">showBestChoiceRecommendation</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">Verbose</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">Comments</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ChoiceVector</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">CoDual</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">Debug</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">_OldCoca</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">BrokenCocs</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/digraphs.html#Digraph.showBestChoiceRecommendation"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#digraphs.Digraph.showBestChoiceRecommendation" title="Link to this definition"></a></dt>
-<dd><p>Shows the RuBis best choice recommendation.</p>
+<dd><p>Shows a best choice recommendation.</p>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
-<p>Computes by default the Rubis best choice recommendation on the corresponding strict (codual) outranking digraph.</p>
+<p>Computes by default a best choice recommendation on the corresponding strict (codual) outranking digraph.</p>
 <p>By default, with BrokenCocs=True, we brake all chordless circuits at their weakest determined ( abs(r(x&gt;y)) + abs(r(y&gt;x)) ) link.</p>
 <p>When BrokenCocs=False we proceed like follows:</p>
 <p>In case of chordless circuits, if supporting arcs are more credible
@@ -3495,7 +3495,7 @@ we brake the circuits on their weakest arc.</p>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">g</span> <span class="o">=</span> <span class="n">BipolarOutrankingDigraph</span><span class="p">(</span><span class="n">t</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">g</span><span class="o">.</span><span class="n">showBestChoiceRecommendation</span><span class="p">()</span>
 <span class="go">***********************</span>
-<span class="go">RuBis Best Choice Recommendation (BCR)</span>
+<span class="go">Best Choice Recommendation (BCR)</span>
 <span class="go">(in decreasing order of determinateness)   </span>
 <span class="go">Credibility domain:  [-100.0, 100.0]</span>
 <span class="go">=== &gt;&gt; potential first choices</span>
@@ -3548,10 +3548,10 @@ we brake the circuits on their weakest arc.</p>
 <dl class="py method">
 <dt class="sig sig-object py" id="digraphs.Digraph.showFirstChoiceRecommendation">
 <span class="sig-name descname"><span class="pre">showFirstChoiceRecommendation</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">Verbose</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">Comments</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ChoiceVector</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">CoDual</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">Debug</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">_OldCoca</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">BrokenCocs</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/digraphs.html#Digraph.showFirstChoiceRecommendation"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#digraphs.Digraph.showFirstChoiceRecommendation" title="Link to this definition"></a></dt>
-<dd><p>Shows the RuBis first choice recommendation.</p>
+<dd><p>Shows a first choice recommendation.</p>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
-<p>Computes by default the Rubis first choice recommendation on the corresponding strict (codual) outranking digraph.</p>
+<p>Computes by default a first-choice recommendation on the corresponding strict (codual) outranking digraph.</p>
 <p>By default, with BrokenCocs=True, we brake all chordless circuits at their weakest determined ( abs(r(x&gt;y)) + abs(r(y&gt;x)) ) link.</p>
 <p>When BrokenCocs=False we proceed like follows:</p>
 <p>In case of chordless circuits, if supporting arcs are more credible
@@ -3565,7 +3565,7 @@ we brake the circuits on their weakest arc.</p>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">g</span> <span class="o">=</span> <span class="n">BipolarOutrankingDigraph</span><span class="p">(</span><span class="n">t</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">g</span><span class="o">.</span><span class="n">showFirstChoiceRecommendation</span><span class="p">()</span>
 <span class="go">***********************</span>
-<span class="go">RuBis First Choice Recommendation (BCR)</span>
+<span class="go">First Choice Recommendation (BCR)</span>
 <span class="go">(in decreasing order of determinateness)   </span>
 <span class="go">Credibility domain:  [-100.0, 100.0]</span>
 <span class="go">=== &gt;&gt; potential first choices</span>
@@ -8877,7 +8877,8 @@ concordant with the Copeland ranking, are kept whereas
 the discordant ones are set to the indeterminate value.</p>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
-<p>The Copeland ranking rule is invariant under the codual transform</p>
+<p>The Copeland ranking rule is invariant under the codual transform
+and Condorcet consistent.</p>
 </div>
 </dd></dl>
 
@@ -9388,7 +9389,7 @@ used for generating different Bachet ranking results.</p></li>
 <li><p><em>maxNbrOfRanking = integer</em> (defaut = 5) is the number of best correlated
 rankings that are used for constructing the <em>RankingsFusionDigraph</em> instance.</p></li>
 <li><p><em>Polarised = {True (default) | False}</em>, When Polarised = False, the
-<code class="xref py py-class docutils literal notranslate"><span class="pre">linearOrders.valuedBachetRanking</span></code> class is used.</p></li>
+<a class="reference internal" href="#linearOrders.ValuedBachetRanking" title="linearOrders.ValuedBachetRanking"><code class="xref py py-class docutils literal notranslate"><span class="pre">linearOrders.ValuedBachetRanking</span></code></a> class is used.</p></li>
 </ul>
 <div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">randomPerfTabs</span> <span class="kn">import</span> <span class="n">RandomCBPerformanceTableau</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">t</span> <span class="o">=</span> <span class="n">RandomCBPerformanceTableau</span><span class="p">(</span><span class="n">numberOfActions</span><span class="o">=</span><span class="mi">20</span><span class="p">,</span>
@@ -9406,6 +9407,18 @@ rankings that are used for constructing the <em>RankingsFusionDigraph</em> insta
 <span class="go">      3rd last ranked [&#39;a09&#39;, &#39;a10&#39;, &#39;a14&#39;]) (0.33)</span>
 <span class="go">    2nd last ranked [&#39;a01&#39;, &#39;a03&#39;, &#39;a12&#39;, &#39;a13&#39;, &#39;a15&#39;]) (0.60)</span>
 <span class="go">  1st last ranked [&#39;a07&#39;, &#39;a08&#39;, &#39;a17&#39;, &#39;a19&#39;]) (0.80)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">vwg</span> <span class="o">=</span> <span class="n">PartialBachetRanking</span><span class="p">(</span><span class="n">g</span><span class="p">,</span><span class="n">Polarised</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span><span class="n">randomized</span><span class="o">=</span><span class="mi">100</span><span class="p">,</span>
+<span class="gp">... </span>                     <span class="n">seed</span><span class="o">=</span><span class="mi">100</span><span class="p">,</span><span class="n">maxNbrOfRankings</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">vwg</span><span class="o">.</span><span class="n">showTransitiveDigraph</span><span class="p">(</span><span class="n">WithCoverCredibility</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="go"> Ranking by Choosing and Rejecting</span>
+<span class="go">  1st ranked [&#39;a04&#39;] (1.00)</span>
+<span class="go">    2nd ranked [&#39;a02&#39;, &#39;a05&#39;, &#39;a06&#39;, &#39;a18&#39;] (0.77)</span>
+<span class="go">      3rd ranked [&#39;a09&#39;, &#39;a11&#39;, &#39;a16&#39;, &#39;a20&#39;] (0.55)</span>
+<span class="go">        4th ranked [&#39;a14&#39;] (1.00)</span>
+<span class="go">        4th last ranked [&#39;a14&#39;] (1.00)</span>
+<span class="go">      3rd last ranked [&#39;a01&#39;, &#39;a12&#39;, &#39;a13&#39;, &#39;a15&#39;] (0.55)</span>
+<span class="go">    2nd last ranked [&#39;a03&#39;, &#39;a07&#39;, &#39;a08&#39;, &#39;a10&#39;, &#39;a17&#39;] (0.69)</span>
+<span class="go">  1st last ranked [&#39;a19&#39;] (1.00)</span>
 </pre></div>
 </div>
 <p>The cover credibities shown above represent in fact the mean outranking, respectively outranked, characteristic value of the complement of the nth choice or rejection.</p>
@@ -14885,7 +14898,7 @@ Components are stored in an ordered dictionary.</p>
 
   <div role="contentinfo">
     <p>&#169; Copyright 2012-2025, Raymond Bisdorff.
-      <span class="lastupdated">Last updated on May 21, 2025.
+      <span class="lastupdated">Last updated on May 27, 2025.
       </span></p>
   </div>
 
