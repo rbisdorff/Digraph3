@@ -6714,10 +6714,8 @@ To answer this question, we will consider the respective criteria significance w
 
    >>> from outrankingDigraphs import\
    ...         ConfidentBipolarOutrankingDigraph
-
    >>> cdg = ConfidentBipolarOutrankingDigraph(t,
    ...         distribution='triangular',confidence=90.0)
-
    >>> cdg
     *------- Object instance description ------*
     Instance class       : ConfidentBipolarOutrankingDigraph

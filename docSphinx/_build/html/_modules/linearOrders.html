@@ -2786,16 +2786,16 @@
         <span class="nb">print</span><span class="p">(</span><span class="n">cop</span><span class="o">.</span><span class="n">copelandRanking</span><span class="p">)</span>
         <span class="n">corrcop</span> <span class="o">=</span> <span class="n">g</span><span class="o">.</span><span class="n">computeRankingCorrelation</span><span class="p">(</span><span class="n">cop</span><span class="o">.</span><span class="n">copelandRanking</span><span class="p">)</span>
         <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;cop&#39;</span><span class="p">,</span><span class="n">cop</span><span class="o">.</span><span class="n">copelandRanking</span><span class="p">,</span><span class="n">corrcop</span><span class="p">)</span>
-        <span class="n">wcop1</span> <span class="o">=</span> <span class="n">WeightedCopelandRanking</span><span class="p">(</span><span class="n">g</span><span class="p">,</span><span class="n">Comments</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span><span class="n">Debug</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
-        <span class="nb">print</span><span class="p">(</span><span class="n">wcop1</span><span class="o">.</span><span class="n">copelandRanking</span><span class="p">)</span>
-        <span class="n">corrwcop1</span> <span class="o">=</span> <span class="n">g</span><span class="o">.</span><span class="n">computeRankingCorrelation</span><span class="p">(</span><span class="n">wcop1</span><span class="o">.</span><span class="n">copelandRanking</span><span class="p">)</span>
-        <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;wcop1&#39;</span><span class="p">,</span><span class="n">wcop1</span><span class="o">.</span><span class="n">copelandRanking</span><span class="p">,</span><span class="n">corrwcop1</span><span class="p">)</span>
-        <span class="n">actions</span> <span class="o">=</span> <span class="p">[</span><span class="n">x</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">g</span><span class="o">.</span><span class="n">actions</span><span class="p">]</span>
-        <span class="n">actions</span><span class="o">.</span><span class="n">reverse</span><span class="p">()</span>
-        <span class="n">wcop2</span> <span class="o">=</span> <span class="n">WeightedCopelandRanking</span><span class="p">(</span><span class="n">g</span><span class="p">,</span><span class="n">actionsList</span><span class="o">=</span><span class="n">actions</span><span class="p">,</span><span class="n">Comments</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span><span class="n">Debug</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
-        <span class="nb">print</span><span class="p">(</span><span class="n">wcop2</span><span class="o">.</span><span class="n">copelandRanking</span><span class="p">)</span>
-        <span class="n">corrwcop2</span> <span class="o">=</span> <span class="n">g</span><span class="o">.</span><span class="n">computeRankingCorrelation</span><span class="p">(</span><span class="n">wcop2</span><span class="o">.</span><span class="n">copelandRanking</span><span class="p">)</span>
-        <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;wcop2&#39;</span><span class="p">,</span><span class="n">wcop2</span><span class="o">.</span><span class="n">copelandRanking</span><span class="p">,</span><span class="n">corrwcop2</span><span class="p">)</span>
+<span class="c1">##        wcop1 = _WeightedCopelandRanking(g,Comments=False,Debug=False)</span>
+<span class="c1">##        print(wcop1.copelandRanking)</span>
+<span class="c1">##        corrwcop1 = g.computeRankingCorrelation(wcop1.copelandRanking)</span>
+<span class="c1">##        print(&#39;wcop1&#39;,wcop1.copelandRanking,corrwcop1)</span>
+<span class="c1">##        actions = [x for x in g.actions]</span>
+<span class="c1">##        actions.reverse()</span>
+<span class="c1">##        wcop2 = _WeightedCopelandRanking(g,actionsList=actions,Comments=False,Debug=False)</span>
+<span class="c1">##        print(wcop2.copelandRanking)</span>
+<span class="c1">##        corrwcop2 = g.computeRankingCorrelation(wcop2.copelandRanking)</span>
+<span class="c1">##        print(&#39;wcop2&#39;,wcop2.copelandRanking,corrwcop2)</span>
         <span class="n">nf</span> <span class="o">=</span> <span class="n">NetFlowsRanking</span><span class="p">(</span><span class="n">g</span><span class="p">)</span>
         <span class="n">corrnf</span> <span class="o">=</span> <span class="n">g</span><span class="o">.</span><span class="n">computeRankingCorrelation</span><span class="p">(</span><span class="n">nf</span><span class="o">.</span><span class="n">netFlowsRanking</span><span class="p">)</span>
         <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;nf&#39;</span><span class="p">,</span><span class="n">nf</span><span class="o">.</span><span class="n">netFlowsRanking</span><span class="p">,</span><span class="n">corrnf</span><span class="p">)</span>

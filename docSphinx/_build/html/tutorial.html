@@ -6542,23 +6542,21 @@ fecop 75.78% success rate</p>
 <div class="code-block-caption"><span class="caption-number">Listing 1.84 </span><span class="caption-text">The 90% confident outranking digraph</span><a class="headerlink" href="#aliceconfidentdigraph" title="Link to this code"></a></div>
 <div class="highlight-pycon notranslate"><div class="highlight"><pre><span></span><span class="linenos"> 1</span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">outrankingDigraphs</span> <span class="kn">import</span>\
 <span class="linenos"> 2</span><span class="gp">... </span>        <span class="n">ConfidentBipolarOutrankingDigraph</span>
-<span class="linenos"> 3</span>
-<span class="linenos"> 4</span><span class="gp">&gt;&gt;&gt; </span><span class="n">cdg</span> <span class="o">=</span> <span class="n">ConfidentBipolarOutrankingDigraph</span><span class="p">(</span><span class="n">t</span><span class="p">,</span>
-<span class="linenos"> 5</span><span class="gp">... </span>        <span class="n">distribution</span><span class="o">=</span><span class="s1">&#39;triangular&#39;</span><span class="p">,</span><span class="n">confidence</span><span class="o">=</span><span class="mf">90.0</span><span class="p">)</span>
-<span class="linenos"> 6</span>
-<span class="linenos"> 7</span><span class="gp">&gt;&gt;&gt; </span><span class="n">cdg</span>
-<span class="linenos"> 8</span><span class="go"> *------- Object instance description ------*</span>
-<span class="linenos"> 9</span><span class="go"> Instance class       : ConfidentBipolarOutrankingDigraph</span>
-<span class="linenos">10</span><span class="go"> Instance name        : rel_AliceChoice_CLT</span>
-<span class="hll"><span class="linenos">11</span><span class="go"> # Actions            : 10</span>
-</span><span class="linenos">12</span><span class="go"> # Criteria           : 9</span>
-<span class="linenos">13</span><span class="go"> Size                 : 44</span>
-<span class="linenos">14</span><span class="go"> Valuation domain     : [-1.00;1.00]</span>
-<span class="hll"><span class="linenos">15</span><span class="go"> Uncertainty model    : triangular(a=0,b=2w)</span>
-</span><span class="hll"><span class="linenos">16</span><span class="go"> Likelihood domain    : [-1.0;+1.0]</span>
-</span><span class="linenos">17</span><span class="go"> Confidence level     : 90.0%</span>
-<span class="linenos">18</span><span class="go"> Confident majority   : 14/24 (58.3%)</span>
-<span class="linenos">19</span><span class="go"> Determinateness (%)  : 68.19</span>
+<span class="linenos"> 3</span><span class="gp">&gt;&gt;&gt; </span><span class="n">cdg</span> <span class="o">=</span> <span class="n">ConfidentBipolarOutrankingDigraph</span><span class="p">(</span><span class="n">t</span><span class="p">,</span>
+<span class="linenos"> 4</span><span class="gp">... </span>        <span class="n">distribution</span><span class="o">=</span><span class="s1">&#39;triangular&#39;</span><span class="p">,</span><span class="n">confidence</span><span class="o">=</span><span class="mf">90.0</span><span class="p">)</span>
+<span class="linenos"> 5</span><span class="gp">&gt;&gt;&gt; </span><span class="n">cdg</span>
+<span class="linenos"> 6</span><span class="go"> *------- Object instance description ------*</span>
+<span class="linenos"> 7</span><span class="go"> Instance class       : ConfidentBipolarOutrankingDigraph</span>
+<span class="linenos"> 8</span><span class="go"> Instance name        : rel_AliceChoice_CLT</span>
+<span class="linenos"> 9</span><span class="go"> # Actions            : 10</span>
+<span class="linenos">10</span><span class="go"> # Criteria           : 9</span>
+<span class="hll"><span class="linenos">11</span><span class="go"> Size                 : 44</span>
+</span><span class="linenos">12</span><span class="go"> Valuation domain     : [-1.00;1.00]</span>
+<span class="linenos">13</span><span class="go"> Uncertainty model    : triangular(a=0,b=2w)</span>
+<span class="linenos">14</span><span class="go"> Likelihood domain    : [-1.0;+1.0]</span>
+<span class="hll"><span class="linenos">15</span><span class="go"> Confidence level     : 90.0%</span>
+</span><span class="hll"><span class="linenos">16</span><span class="go"> Confident majority   : 14/24 (58.3%)</span>
+</span><span class="linenos">17</span><span class="go"> Determinateness (%)  : 68.19</span>
 </pre></div>
 </div>
 </div>
@@ -10755,7 +10753,7 @@ dot -Grankdir=TB -Tpng rootedTree.dot -o rootedTree.png</p>
 
   <div role="contentinfo">
     <p>&#169; Copyright 2012-2025, Raymond Bisdorff.
-      <span class="lastupdated">Last updated on May 24, 2025.
+      <span class="lastupdated">Last updated on May 27, 2025.
       </span></p>
   </div>
 
