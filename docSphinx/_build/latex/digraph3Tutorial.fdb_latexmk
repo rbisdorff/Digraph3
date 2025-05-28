@@ -1,11 +1,11 @@
 # Fdb version 4
-["makeindex digraph3Tutorial.idx"] 1742131595.73566 "digraph3Tutorial.idx" "digraph3Tutorial.ind" "digraph3Tutorial" 1747747186.7389 0
-  "digraph3Tutorial.idx" 1747747180.68965 0 d41d8cd98f00b204e9800998ecf8427e "pdflatex"
+["makeindex digraph3Tutorial.idx"] 1742131595.73566 "digraph3Tutorial.idx" "digraph3Tutorial.ind" "digraph3Tutorial" 1748342453.63709 0
+  "digraph3Tutorial.idx" 1748342447.52229 0 d41d8cd98f00b204e9800998ecf8427e "pdflatex"
   (generated)
   "digraph3Tutorial.ilg"
   "digraph3Tutorial.ind"
   (rewritten before read)
-["pdflatex"] 1747747180.20766 "digraph3Tutorial.tex" "digraph3Tutorial.pdf" "digraph3Tutorial" 1747747186.73909 0
+["pdflatex"] 1748342447.0403 "digraph3Tutorial.tex" "digraph3Tutorial.pdf" "digraph3Tutorial" 1748342453.63721 0
   "/etc/texmf/web2c/texmf.cnf" 1697638898.09346 475 c0e671620eb5563b2130f56340a5fde8 ""
   "/home/bisdorff/.texlive2023/texmf-var/fonts/pk/ljfour/jknappen/ec/ecbi1200.600pk" 1706520347.31458 42704 815dbeb8b1062279b7f2bd6280f2c8fa ""
   "/home/bisdorff/.texlive2023/texmf-var/fonts/pk/ljfour/jknappen/ec/ecbx1200.600pk" 1706520336.98266 31928 219cae0d4d3156a2cb87c1cbab0a6c51 ""
@@ -232,11 +232,11 @@
   "compareRules10A.png" 1741517224.03839 25465 74307cc9b41a4fd2e473fa5466206db1 ""
   "converse-dual_rel_best10.png" 1718428518.48973 65760 5d5d409f110f9914d7fe19fce26ff459 ""
   "cycles.png" 1718428518.49173 38389 9515e841f4881dd2df51947edd07b3e9 ""
-  "digraph3Tutorial.aux" 1747747186.41959 144417 95013d36a882abdd297b1916168b6e6a "pdflatex"
+  "digraph3Tutorial.aux" 1748342453.31723 144961 f861844f7491821266ad50a7add7f91c "pdflatex"
   "digraph3Tutorial.ind" 1742131595.74622 0 d41d8cd98f00b204e9800998ecf8427e "makeindex digraph3Tutorial.idx"
-  "digraph3Tutorial.out" 1747747186.42659 39678 a7e2c5e98008f587d47344d20b8c2817 "pdflatex"
-  "digraph3Tutorial.tex" 1747747153.00394 1167327 6457ba1902db6c18cfe6d140ab2fdf92 ""
-  "digraph3Tutorial.toc" 1747747186.42659 15985 a64e0b449218d333002fa8e59804857b "pdflatex"
+  "digraph3Tutorial.out" 1748342453.32523 39693 fd2e642cb4fb133971812cc1d36b6e77 "pdflatex"
+  "digraph3Tutorial.tex" 1748342423.53754 1171954 aa0bbdfa54afa139538497e10475b1c2 ""
+  "digraph3Tutorial.toc" 1748342453.32523 15966 a2a53259c56314dc1031e4962dcb39e1 "pdflatex"
   "distGSFairness.png" 1718428518.63073 24704 78fbd418381a5fa82d67302573693a91 ""
   "distStableFairness.png" 1718428518.63073 23842 9e06dcd9f166aeaf01b3f640b6ed7b89 ""
   "enhancedFreq.png" 1718428518.63173 24449 910cf8db479bb329d7f220a127d42ac5 ""
@@ -266,7 +266,7 @@
   "normedRatingDigraph.png" 1718428518.51673 53654 b855a825214bc9974c32e6ecd2870746 ""
   "officeChoiceHeatmap.png" 1718428518.51673 71368 c0771d22b6c56d7c8a404da56eed93ce ""
   "officeChoiceOutranking.png" 1718428518.51773 38479 1142db6f4d66fd82ac6d27807789f2b8 ""
-  "officeChoiceRanking.png" 1747039547.63348 20760 1bf7674b498929739590537b1bd2c9dd ""
+  "officeChoiceRanking.png" 1747991333.36054 21878 767b8e353668d4b8e666dd32e1452d45 ""
   "oriented_permutationGraph.png" 1718428518.51773 20831 9aa4215f96b7c918d38c8532010bbd8a ""
   "pairwiseComparison.png" 1718428518.51873 115291 e5cbb01c0dc10d2bc12ba00daa93cbc2 ""
   "perm_permutationGraph.png" 1718428518.51873 19706 b063270359fa02a6fa5853cbe4d7faa9 ""
@@ -276,6 +276,7 @@
   "randomPerfTab1.png" 1718428518.52173 120276 f716f92d7250f0d97db523afcd745fe2 ""
   "randomSpanningTree.png" 1718428518.52173 35808 a38f8887f144f833e8f3ee6c5103cdc5 ""
   "randomSplitGraph.png" 1718428518.52173 42121 f3ec6e1474692db2b6c4567a830b30e1 ""
+  "rankedOfficeChoiceHeatmap.png" 1747999823.30705 147258 57a764924f6abe170f1295424eee53f9 ""
   "rankingRecords.png" 1718428518.52173 49244 43d498f50504d0f70badeba7e57677ff ""
   "rankingStudents.png" 1718428518.52173 83691 031c2f5e0ad72f94fdba59e8980adfa1 ""
   "rankingTutorial.png" 1718428518.52273 57800 52dc7babd375628bf3d155e93e296c2a ""
@@ -290,7 +291,7 @@
   "sparse75RelationMap.png" 1718428518.52673 75230 8417e72bd2306a26da729fd398a4e039 ""
   "sparseRelationMap.png" 1718428518.52773 13187 df51199ccfddd95f44d62a9338454774 ""
   "sphinx.sty" 1747746702.39367 54203 ee7fe875437470f5328ee20661bb9f1d ""
-  "sphinxhighlight.sty" 1747747109.74439 7553 83fb52292c17957d9f4aadcb28c57a87 ""
+  "sphinxhighlight.sty" 1748342380.49099 7553 83fb52292c17957d9f4aadcb28c57a87 ""
   "sphinxhowto.cls" 1718428518.52773 3256 55d5772de2f18cad818d98a3e6e8e37b ""
   "sphinxlatexadmonitions.sty" 1747746702.39467 19111 5e67a0f91439018bceb7cadf319345e6 ""
   "sphinxlatexcontainers.sty" 1747746702.39467 900 d61f923db071a7b54d3cee8a1e6935d3 ""
@@ -305,7 +306,7 @@
   "sphinxlatexstylepage.sty" 1747746702.39667 2671 e63daf3b9f0f8a387a8b4ba09c515982 ""
   "sphinxlatexstyletext.sty" 1747746702.39667 6759 9e932c65374cfb62686485d331bc975c ""
   "sphinxlatextables.sty" 1747746702.39667 57643 7f1013c2fa11942370d867527bdda568 ""
-  "sphinxmessages.sty" 1747747165.21481 745 3f5fcd6cdd7964ed608767954a8ced6f ""
+  "sphinxmessages.sty" 1748342435.71941 745 3f5fcd6cdd7964ed608767954a8ced6f ""
   "sphinxoptionsgeometry.sty" 1747746702.39667 2060 6c27b3eba37bde592ae8908ab2c1ac0f ""
   "sphinxoptionshyperref.sty" 1747746702.39767 1093 e468489bae7631a7f387b4b0f7bc15d4 ""
   "sphinxpackageboxes.sty" 1747746702.39767 36106 1be2053eb1cb9b083b3a75e3657bcb24 ""

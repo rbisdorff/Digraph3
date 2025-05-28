@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.25 (TeX Live 2023/Debian) (preloaded format=pdflatex 2024.5.23)  20 MAY 2025 15:19
+This is pdfTeX, Version 3.141592653-2.6-1.40.25 (TeX Live 2023/Debian) (preloaded format=pdflatex 2024.5.23)  27 MAY 2025 12:40
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -1399,9 +1399,9 @@ lic/amsfonts/cm/cmsy6.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/ams
 fonts/cm/cmsy8.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/s
 ymbols/msam10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/sy
 mbols/msbm10.pfb>
-Output written on digraph3Pearls.pdf (143 pages, 3516453 bytes).
+Output written on digraph3Pearls.pdf (143 pages, 3516685 bytes).
 PDF statistics:
- 2928 PDF objects out of 2984 (max. 8388607)
+ 2929 PDF objects out of 2984 (max. 8388607)
  1751 compressed objects within 18 object streams
  484 named destinations out of 1000 (max. 500000)
  821 words of extra memory for PDF output out of 10000 (max. 10000000)

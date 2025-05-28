@@ -67,7 +67,7 @@
 
 
 \title{Digraph3 Advanced Topics}
-\date{May 20, 2025}
+\date{May 27, 2025}
 \release{3.13.3}
 \author{Raymond Bisdorff}
 \newcommand{\sphinxlogo}{\sphinxincludegraphics{introDoc3.png}\par}
@@ -2447,7 +2447,7 @@ As a consequence, a \sphinxstylestrong{multipartisan primary selection}, compute
 \def\sphinxLiteralBlockLabel{\label{\detokenize{pearls:ineffectiveprimaryselection}}}
 \begin{sphinxVerbatim}[commandchars=\\\{\},numbers=left,firstnumber=1,stepnumber=1]
 \PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{uodg}\PYG{o}{.}\PYG{n}{showBestChoiceRecommendation}\PYG{p}{(}\PYG{p}{)}
-\PYG{g+go}{ Rubis best choice recommendation(s) (BCR)}
+\PYG{g+go}{ Best choice recommendation(s) (BCR)}
 \PYG{g+go}{  (in decreasing order of determinateness)}
 \PYG{g+go}{ Credibility domain: [\PYGZhy{}1.00,1.00]}
 \PYG{g+go}{ === \PYGZgt{}\PYGZgt{} ambiguous choice(s)}
@@ -2890,7 +2890,7 @@ Encouraged by this positive result, we may furthermore try to compute as well a 
 \begin{sphinxVerbatim}[commandchars=\\\{\},numbers=left,firstnumber=1,stepnumber=1]
 \PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{odg}\PYG{o}{.}\PYG{n}{showBestChoiceRecommendation}\PYG{p}{(}\PYG{p}{)}
 \PYG{g+go}{ ***********************}
-\PYG{g+go}{ Rubis best choice recommendation(s) (BCR)}
+\PYG{g+go}{ Best choice recommendation(s) (BCR)}
 \PYG{g+go}{  (in decreasing order of determinateness)}
 \PYG{g+go}{  Credibility domain: [\PYGZhy{}1.00,1.00]}
 \PYG{g+go}{ === \PYGZgt{}\PYGZgt{} ambiguous first choice(s)}
@@ -3113,7 +3113,7 @@ We see this result furthermore confirmed when computing the corresponding \sphin
 \fvset{hllines={, 6, 14,}}%
 \begin{sphinxVerbatim}[commandchars=\\\{\},numbers=left,firstnumber=1,stepnumber=1]
 \PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{m}\PYG{o}{.}\PYG{n}{showBestChoiceRecommendation}\PYG{p}{(}\PYG{p}{)}
-\PYG{g+go}{ Rubis best choice recommendation(s) (BCR)}
+\PYG{g+go}{ Best choice recommendation(s) (BCR)}
 \PYG{g+go}{  (in decreasing order of determinateness)}
 \PYG{g+go}{ Credibility domain: [\PYGZhy{}100.00,100.00]}
 \PYG{g+go}{  === \PYGZgt{}\PYGZgt{} potential first choice(s)}
@@ -4188,7 +4188,7 @@ We notice here that the \sphinxstyleemphasis{NetFlows} ranking rule inverts in f
 \caption{Symmetric part of graffiti07 digraph}\label{\detokenize{pearls:symmetricpart}}\end{figure}
 
 \sphinxAtStartPar
-Such a preordering of the movies may, for instance, be computed with the \sphinxcode{\sphinxupquote{computeRankingByChoosing()}} method, where we iteratively extract \sphinxstyleemphasis{dominant kernels} \sphinxhyphen{}remaining first choices\sphinxhyphen{} and \sphinxstyleemphasis{absorbent kernels} \sphinxhyphen{}remaining last choices\sphinxhyphen{} (see the tutorial on {\hyperref[\detokenize{pearls:kernel-tutorial-label}]{\sphinxcrossref{\DUrole{std}{\DUrole{std-ref}{Computing Digraph Kernels}}}}} (\autopageref*{\detokenize{pearls:kernel-tutorial-label}})). We operate therefore on the asymmetric ‘\sphinxstyleemphasis{better rated than}’, i.e. the \sphinxstyleemphasis{codual} (%
+Such a preordering of the movies may, for instance, be computed with the \sphinxcode{\sphinxupquote{computeRankingByChoosing()}} method, where we iteratively extract \sphinxstyleemphasis{dominant kernels} \sphinxhyphen{}remaining first choices\sphinxhyphen{} and \sphinxstyleemphasis{absorbent kernels} \sphinxhyphen{}remaining last choices\sphinxhyphen{} (see the tutorial on {\hyperref[\detokenize{pearls:kernel-tutorial-label}]{\sphinxcrossref{\DUrole{std}{\DUrole{std-ref}{Computing Digraph Kernels}}}}} (\autopageref*{\detokenize{pearls:kernel-tutorial-label}})). We operate therefore on the asymmetrical ‘\sphinxstyleemphasis{better rated than}’, i.e. the \sphinxstyleemphasis{codual} (%
 \begin{footnote}[3]\sphinxAtStartFootnote
 A \sphinxstyleemphasis{kernel} in a digraph \sphinxstyleemphasis{g} is a \sphinxstyleemphasis{clique} in the dual digraph \sphinxstyleemphasis{\sphinxhyphen{}g}.
 %
@@ -4272,7 +4272,7 @@ Bipolar\sphinxhyphen{}valued \{\sphinxhyphen{}1,0,+1\} base 3 encoded integers a
 \end{footnote}. The idea is to represent the value of an integer \sphinxstyleemphasis{n} in a base 3 positional numerotation where in each position may appear a \sphinxstylestrong{signed bit} \textendash{}one of the three symbols \sphinxstylestrong{\{\sphinxhyphen{}1,0,+1\}}\textendash{} called hereafter \sphinxstylestrong{sbits} for short.
 
 \sphinxAtStartPar
-\sphinxstyleemphasis{Bachet}’s positional \sphinxstyleemphasis{sbits} numerotation is simulating a weight balance scale where the number \sphinxstyleemphasis{n} and the potential negative powers of 3 are put on the right tray and the potential positive powers of 3 are put on the left tray. The equation for \sphinxstyleemphasis{n = 5} gives for instance \(3^2 = (n + 3^1 + 3^0)\). And the \sphinxstyleemphasis{sbits} encoding corresponds hence to the string ‘+1\sphinxhyphen{}1\sphinxhyphen{}1’. As, this representation is isomorphic to a base 3 binary encoding, every positive or negative integer may this way be represented with a unique \sphinxstyleemphasis{sbits} string. With four powers of 3, namely \({3^3, 3^2, 3^1, 3^0}\), one may for instance represent any value in the integer range \sphinxhyphen{}40 to +40. \sphinxstyleemphasis{Bachet} showed that this bipolar weighing system relies on the smallest possible number of weights \sphinxhyphen{}base powers\sphinxhyphen{} needed in order to balance the scale for any given integer weight \sphinxstyleemphasis{n} \sphinxcite{pearls:bac-1622p}.
+\sphinxstyleemphasis{Bachet}’s positional \sphinxstyleemphasis{sbits} numerotation is simulating a weight balance scale where the number \sphinxstyleemphasis{n} and the potential negative powers of 3 are put on the right tray and the potential positive powers of 3 are put on the left tray. The equation for \sphinxstyleemphasis{n = 5} gives for instance \(3^2 = (n + 3^1 + 3^0)\). And the \sphinxstyleemphasis{sbits} encoding corresponds hence to the string ‘+1\sphinxhyphen{}1\sphinxhyphen{}1’. As, this representation is isomorphic to a base 3 binary encoding, every positive or negative integer may this way be represented with a unique \sphinxstyleemphasis{sbits} string. With four powers of 3, namely \({3^3, 3^2, 3^1, 3^0}\), one may for instance represent any value in the integer range \sphinxhyphen{}40 to +40. \sphinxstyleemphasis{Bachet} showed that this bipolar weighing system relies on the smallest possible number of balance weights \sphinxhyphen{}base powers\sphinxhyphen{} needed in order to balance the scale for any given integer weight \sphinxstyleemphasis{n} \sphinxcite{pearls:bac-1622p}.
 
 \sphinxAtStartPar
 The Digraph3 \sphinxcode{\sphinxupquote{arithmetics}} module provides with the \sphinxcode{\sphinxupquote{BachetNumber}} class an implementation for such \sphinxstyleemphasis{sbits} encoded integers. Instantiating a \sphinxstyleemphasis{Bachet} number may be done either with an integer value or with a vector of sbits (see \hyperref[\detokenize{pearls:bachetnumbers}]{Listing \ref{\detokenize{pearls:bachetnumbers}}} Lines  2, 6, 11 and 15). The class provides a binary \sphinxstyleemphasis{addition} method and unary \sphinxstyleemphasis{negating} and \sphinxstyleemphasis{reversing} methods as illustrated in Lines 20 and 32\sphinxhyphen{}33 below.
@@ -4864,7 +4864,7 @@ The \sphinxcode{\sphinxupquote{PartialBachetRanking}} class provides this way a 
 \end{sphinxVerbatim}
 
 \sphinxAtStartPar
-\sphinxstyleemphasis{Partial Bachet} rankings make hence apparent the actual \sphinxstylestrong{transitive part} of outranking relations. This interesting finding opens the way to a new design of first\sphinxhyphen{} or last\sphinxhyphen{}choice recommender algorithms avoiding the necessity to arbitrarily break up potential chordless outranking circuits. The first and last levels of a topological sort of weak rankings \textendash{}their \sphinxstylestrong{initial and terminal kernels}\textendash{} give indeed convincing candidates for a \sphinxstyleemphasis{first\sphinxhyphen{}choice}, respectively a \sphinxstyleemphasis{last\sphinxhyphen{}choice} recommendation (see \hyperref[\detokenize{pearls:partialbachet0}]{Listing \ref{\detokenize{pearls:partialbachet0}}} Lines 7\sphinxhyphen{}10). An opportunity yet to be explored.
+\sphinxstyleemphasis{Partial Bachet} rankings make hence apparent the actual \sphinxstylestrong{transitive part} of outranking relations. This interesting finding opens the way to a new design of first\sphinxhyphen{} or last\sphinxhyphen{}choice recommender algorithms avoiding the necessity to arbitrarily break up potential chordless outranking circuits. The first and last levels of a topological sort of partial rankings \textendash{}their \sphinxstylestrong{initial and terminal kernels}\textendash{} give indeed convincing candidates for a \sphinxstyleemphasis{first\sphinxhyphen{}choice}, respectively a \sphinxstyleemphasis{last\sphinxhyphen{}choice} recommendation (see \hyperref[\detokenize{pearls:partialbachet0}]{Listing \ref{\detokenize{pearls:partialbachet0}}} Lines 7\sphinxhyphen{}10). An opportunity yet to be explored.
 
 \sphinxAtStartPar
 Computing \sphinxstyleemphasis{kernels} in digraphs is the subject of the next Section.
@@ -5471,7 +5471,7 @@ With such unique disjoint initial and terminal prekernels (see Line 4 and 10), t
 \begin{sphinxVerbatim}[commandchars=\\\{\},numbers=left,firstnumber=1,stepnumber=1]
 \PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{g}\PYG{o}{.}\PYG{n}{showFirstChoiceRecommendation}\PYG{p}{(}\PYG{p}{)}
 \PYG{g+go}{ ***********************}
-\PYG{g+go}{ Rubis best choice recommendation(s) (BCR)}
+\PYG{g+go}{ First choice recommendation(s) (BCR)}
 \PYG{g+go}{  (in decreasing order of determinateness)}
 \PYG{g+go}{ Credibility domain: [\PYGZhy{}100.00,100.00]}
 \PYG{g+go}{  === \PYGZgt{}\PYGZgt{} potential first choice(s)}
@@ -6089,7 +6089,7 @@ Now, the codual of weakly complete digraphs correspond to the class of asymmetri
 \sphinxAtStartPar
 Let us consider for instance such a partial tournament %
 \begin{footnote}[6]\sphinxAtStartFootnote
-The example was proposed in 2005 by \sphinxstyleemphasis{D. Bouyssou} when discussing the necessity or not of a \sphinxstyleemphasis{Rubis} best choice recommendation to be internally stable \textendash{}pragmatic principle \sphinxstyleemphasis{P3}\textendash{} \sphinxcite{pearls:bis-2008p}
+The example was proposed in 2005 by \sphinxstyleemphasis{D. Bouyssou} when discussing the necessity or not of a best choice recommendation to be internally stable \textendash{}pragmatic principle \sphinxstyleemphasis{P3}\textendash{} \sphinxcite{pearls:bis-2008p}
 %
 \end{footnote}.
 
@@ -6196,7 +6196,7 @@ The crisp partial tournament \sphinxstyleemphasis{rpt} shown in \hyperref[\detok
 \sphinxresetverbatimhllines
 
 \sphinxAtStartPar
-Each one of the ten performance criteria independently models, with a majority margin of 1/10 = 0.10,  one of the 10 links between the five nodes of the tournament \sphinxstyleemphasis{rpt}.  Criterion \sphinxstyleemphasis{g01} models for instance the asymmetric link between \sphinxstyleemphasis{a1} and \sphinxstyleemphasis{a2} (Line 4), criterion \sphinxstyleemphasis{g9} models the symmetric link between \sphinxstyleemphasis{a3} and \sphinxstyleemphasis{a5} (Line 12) and so on. The bipolar\sphinxhyphen{}valued strict outranking relation we obtain with this performance tableau is the following:
+Each one of the ten performance criteria independently models, with a majority margin of 1/10 = 0.10,  one of the 10 links between the five nodes of the tournament \sphinxstyleemphasis{rpt}.  Criterion \sphinxstyleemphasis{g01} models for instance the asymmetrical link between \sphinxstyleemphasis{a1} and \sphinxstyleemphasis{a2} (Line 4), criterion \sphinxstyleemphasis{g9} models the symmetric link between \sphinxstyleemphasis{a3} and \sphinxstyleemphasis{a5} (Line 12) and so on. The bipolar\sphinxhyphen{}valued strict outranking relation we obtain with this performance tableau is the following:
 
 \begin{sphinxVerbatim}[commandchars=\\\{\},numbers=left,firstnumber=1,stepnumber=1]
 \PYG{g+go}{* \PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{} Relation Table \PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}}

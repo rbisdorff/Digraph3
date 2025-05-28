@@ -67,7 +67,7 @@
 
 
 \title{Tutorials for the Digraph3 Python software resources}
-\date{May 20, 2025}
+\date{May 27, 2025}
 \release{3.13.3}
 \author{Raymond Bisdorff}
 \newcommand{\sphinxlogo}{\sphinxincludegraphics{introDoc3.png}\par}
@@ -752,13 +752,13 @@ We may even get a better insight into the \sphinxcode{\sphinxupquote{Digraph}} o
 \caption{The tutorial random valuation digraph}\label{\detokenize{tutorial:tutorialvaldigraph}}\end{figure}
 
 \sphinxAtStartPar
-Double links are drawn in bold black with an arrowhead at each end, whereas single asymmetric links are drawn in black with an arrowhead showing the direction of the link. Notice the undetermined relational situation (\(r(6\,S\,2) = 0.00\)) observed between nodes ‘6’ and ‘2’. The corresponding link is marked in gray with an open arrowhead in the drawing (see \hyperref[\detokenize{tutorial:tutorialvaldigraph}]{Fig.\@ \ref{\detokenize{tutorial:tutorialvaldigraph}}}).
+Double links are drawn in bold black with an arrowhead at each end, whereas single asymmetrical links are drawn in black with an arrowhead showing the direction of the link. Notice the undetermined relational situation (\(r(6\,S\,2) = 0.00\)) observed between nodes ‘6’ and ‘2’. The corresponding link is marked in gray with an open arrowhead in the drawing (see \hyperref[\detokenize{tutorial:tutorialvaldigraph}]{Fig.\@ \ref{\detokenize{tutorial:tutorialvaldigraph}}}).
 
 
 \subsubsection{Asymmetric and symmetric parts}
 \label{\detokenize{tutorial:asymmetric-and-symmetric-parts}}
 \sphinxAtStartPar
-We may now extract both the \sphinxstyleemphasis{symmetric} as well as the \sphinxstyleemphasis{asymmetric} part of digraph \sphinxstyleemphasis{dg} with the help of two corresponding constructors (see \hyperref[\detokenize{tutorial:asymsymparts}]{Fig.\@ \ref{\detokenize{tutorial:asymsymparts}}}).
+We may now extract both the \sphinxstyleemphasis{symmetric} as well as the \sphinxstyleemphasis{asymmetrical} part of digraph \sphinxstyleemphasis{dg} with the help of two corresponding constructors (see \hyperref[\detokenize{tutorial:asymsymparts}]{Fig.\@ \ref{\detokenize{tutorial:asymsymparts}}}).
 
 \begin{sphinxVerbatim}[commandchars=\\\{\},numbers=left,firstnumber=1,stepnumber=1]
 \PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{k+kn}{from} \PYG{n+nn}{digraphs} \PYG{k+kn}{import} \PYG{n}{AsymmetricPartialDigraph}\PYG{p}{,}
@@ -779,7 +779,7 @@ We may now extract both the \sphinxstyleemphasis{symmetric} as well as the \sphi
 
 \begin{sphinxadmonition}{note}{Note:}
 \sphinxAtStartPar
-The constructor of the partial objects \sphinxstyleemphasis{asymDg} and \sphinxstyleemphasis{symDg} puts to the indeterminate characteristic value all \sphinxstyleemphasis{not\sphinxhyphen{}asymmetric}, respectively \sphinxstyleemphasis{not\sphinxhyphen{}symmetric} links between nodes (see \hyperref[\detokenize{tutorial:asymsymparts}]{Fig.\@ \ref{\detokenize{tutorial:asymsymparts}}}).
+The constructor of the partial objects \sphinxstyleemphasis{asymDg} and \sphinxstyleemphasis{symDg} puts to the indeterminate characteristic value all \sphinxstyleemphasis{not\sphinxhyphen{}asymmetrical}, respectively \sphinxstyleemphasis{not\sphinxhyphen{}symmetric} links between nodes (see \hyperref[\detokenize{tutorial:asymsymparts}]{Fig.\@ \ref{\detokenize{tutorial:asymsymparts}}}).
 \end{sphinxadmonition}
 
 \sphinxAtStartPar
@@ -1462,36 +1462,39 @@ All outranking digraphs, being of root type \sphinxcode{\sphinxupquote{Digraph}}
 \begin{sphinxVerbatim}[commandchars=\\\{\},numbers=left,firstnumber=1,stepnumber=1]
 \PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{odg}\PYG{o}{.}\PYG{n}{recodeValuation}\PYG{p}{(}\PYG{o}{\PYGZhy{}}\PYG{l+m+mi}{7}\PYG{p}{,}\PYG{o}{+}\PYG{l+m+mi}{7}\PYG{p}{)}
 \PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{odg}\PYG{o}{.}\PYG{n}{valuationdomain}\PYG{p}{[}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{hasIntegerValuation}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{]} \PYG{o}{=} \PYG{k+kc}{True}
-\PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{Digraph}\PYG{o}{.}\PYG{n}{showRelationTable}\PYG{p}{(}\PYG{n}{odg}\PYG{p}{,}\PYG{n}{ReflexiveTerms}\PYG{o}{=}\PYG{k+kc}{False}\PYG{p}{)}
+\PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{Digraph}\PYG{o}{.}\PYG{n}{showRelationTable}\PYG{p}{(}\PYG{n}{odg}\PYG{p}{,}\PYG{n}{ReflexiveTerms}\PYG{o}{=}\PYG{k+kc}{True}\PYG{p}{)}
 \PYG{g+go}{ * \PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{} Relation Table \PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}}
 \PYG{g+go}{  r(x,y)  |  \PYGZsq{}a1\PYGZsq{}  \PYGZsq{}a2\PYGZsq{}  \PYGZsq{}a3\PYGZsq{}  \PYGZsq{}a4\PYGZsq{}  \PYGZsq{}a5\PYGZsq{}  \PYGZsq{}a6\PYGZsq{}  \PYGZsq{}a7\PYGZsq{}}
 \PYG{g+go}{ \PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}|\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}}
-\PYG{g+go}{   \PYGZsq{}a1\PYGZsq{}   |    0     5     2     2     2     2     0}
-\PYG{g+go}{   \PYGZsq{}a2\PYGZsq{}   |   \PYGZhy{}5     0    \PYGZhy{}1    \PYGZhy{}1     1     2    \PYGZhy{}4}
-\PYG{g+go}{   \PYGZsq{}a3\PYGZsq{}   |   \PYGZhy{}1     2     0    \PYGZhy{}1    \PYGZhy{}1     0    \PYGZhy{}1}
-\PYG{g+go}{   \PYGZsq{}a4\PYGZsq{}   |    0     1     4     0     2     4    \PYGZhy{}3}
-\PYG{g+go}{   \PYGZsq{}a5\PYGZsq{}   |   \PYGZhy{}1     0     1     0     0     2    \PYGZhy{}1}
-\PYG{g+go}{   \PYGZsq{}a6\PYGZsq{}   |   \PYGZhy{}1     0     1    \PYGZhy{}1     1     0     0}
-\PYG{g+go}{   \PYGZsq{}a7\PYGZsq{}   |    0     5     4     3     2     0     0}
+\PYG{g+go}{   \PYGZsq{}a1\PYGZsq{}   |    0    +5    +2    +2    +2    +2     0}
+\PYG{g+go}{   \PYGZsq{}a2\PYGZsq{}   |   \PYGZhy{}5     0    \PYGZhy{}1    \PYGZhy{}1    +1    +2    \PYGZhy{}4}
+\PYG{g+go}{   \PYGZsq{}a3\PYGZsq{}   |   \PYGZhy{}1    +2     0    \PYGZhy{}1    \PYGZhy{}1     0    \PYGZhy{}1}
+\PYG{g+go}{   \PYGZsq{}a4\PYGZsq{}   |    0    +1    +4     0    +2    +4    \PYGZhy{}3}
+\PYG{g+go}{   \PYGZsq{}a5\PYGZsq{}   |   \PYGZhy{}1     0    +1     0     0    +2    \PYGZhy{}1}
+\PYG{g+go}{   \PYGZsq{}a6\PYGZsq{}   |   \PYGZhy{}1     0    +1    \PYGZhy{}1    +1     0     0}
+\PYG{g+go}{   \PYGZsq{}a7\PYGZsq{}   |    0    +5    +4    +3    +2     0     0}
 \PYG{g+go}{ Valuation domain: [\PYGZhy{}7;+7]}
 \end{sphinxVerbatim}
 
 \begin{sphinxadmonition}{warning}{Warning:}
 \sphinxAtStartPar
-Notice that the reflexive self comparison characteristic \(r(x,x)\) is set above by default to the median indeterminate valuation value 0; the reflexive terms of binary relation being generally ignored in most of the \sphinxstyleemphasis{Digraph3} resources.
+Notice that the reflexive self comparison characteristic \(r(x,x)\) is set above by default to the median indeterminate valuation value 0; the reflexive terms of binary relation being generalr(x not geq y)ly ignored in most of the \sphinxstyleemphasis{Digraph3} resources.
 \end{sphinxadmonition}
 
 
 \subsubsection{The strict outranking digraph}
 \label{\detokenize{tutorial:the-strict-outranking-digraph}}\label{\detokenize{tutorial:codual-digraph-label}}
 \sphinxAtStartPar
-From the theory (see \sphinxcite{tutorial:bis-2013}, \sphinxcite{tutorial:adt-l7} ) we know that a bipolar\sphinxhyphen{}valued outranking digraph is \sphinxstylestrong{weakly complete}, i.e. if \(r(x,y) < 0.0\) then \(r(y,x) \geq 0.0\) . A bipolar\sphinxhyphen{}valued outranking relation verifies furthermore the \sphinxstylestrong{coduality} principle: the \sphinxstylestrong{dual} (\sphinxstyleemphasis{strict negation} \sphinxhyphen{} \sphinxfootnotemark[14]) of the \sphinxstylestrong{converse} (\sphinxstyleemphasis{inverse} \textasciitilde{}) of the outranking relation corresponds to its \sphinxstyleemphasis{strict outranking} part.
+We know from theory that bipolar\sphinxhyphen{}valued outranking digraphs are \sphinxstylestrong{weakly complete}, i.e. if \(r(x \geq y) < 0.0\) then \(r(y \geq x) \geq 0.0\). A bipolar\sphinxhyphen{}valued outranking relation \(r(x \geq y)\) verifies furthermore the \sphinxstylestrong{coduality} principle: the \sphinxstylestrong{converse} (the \sphinxstyleemphasis{inverse} \textasciitilde{}) of the \sphinxstylestrong{dual} \sphinxfootnotemark[14] (the \sphinxstyleemphasis{negation} \sphinxhyphen{} ) corresponds to its asymetric \sphinxstylestrong{strict outranking} part: \(\sim\big(-r(y \geq x)\big) \;=\; \sim\big(r(y \not \geq x)\big) \;=\; \sim\big(r(y < x)\big)  \;=\; r(x > y)\).
+
+\sphinxAtStartPar
+See the advanced topic on \DUrole{xref}{\DUrole{std}{\DUrole{std-ref}{characterizing bipolar\sphinxhyphen{}valued outranking digraphs}}}, \sphinxcite{tutorial:bis-2013}, \sphinxcite{tutorial:adt-l7} .
 
 \sphinxAtStartPar
 We may visualize the \sphinxstylestrong{codual} (\sphinxstyleemphasis{strict}) outranking digraph with a graphviz drawing \sphinxfootnotemark[1].
 
 \begin{sphinxVerbatim}[commandchars=\\\{\},numbers=left,firstnumber=1,stepnumber=1]
-\PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{cdodg} \PYG{o}{=} \PYG{o}{\PYGZhy{}}\PYG{p}{(}\PYG{o}{\PYGZti{}}\PYG{n}{odg}\PYG{p}{)}
+\PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{cdodg} \PYG{o}{=} \PYG{o}{\PYGZti{}}\PYG{p}{(}\PYG{o}{\PYGZhy{}}\PYG{n}{odg}\PYG{p}{)} \PYG{c+c1}{\PYGZsh{} == \PYGZhy{}(\PYGZti{}odg) == codual transform}
 \PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{cdodg}\PYG{o}{.}\PYG{n}{exportGraphViz}\PYG{p}{(}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{codualOdg}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{)}
 \PYG{g+go}{ *\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{} exporting a dot file for GraphViz tools \PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}*}
 \PYG{g+go}{ Exporting to codualOdg.dot}
@@ -1503,7 +1506,7 @@ We may visualize the \sphinxstylestrong{codual} (\sphinxstyleemphasis{strict}) o
 \capstart
 
 \noindent\sphinxincludegraphics[width=300\sphinxpxdimen]{{codualOdg}.png}
-\caption{Codual digraph}\label{\detokenize{tutorial:id245}}\end{figure}
+\caption{The strict (codual) outranking digraph}\label{\detokenize{tutorial:id245}}\end{figure}
 
 \sphinxAtStartPar
 It becomes readily clear now from the picture above that both alternatives \sphinxstyleemphasis{a1}  and \sphinxstyleemphasis{a7} are \sphinxstyleemphasis{not outranked} by any other alternatives. Hence, \sphinxstyleemphasis{a1}  and \sphinxstyleemphasis{a7} appear as \sphinxstylestrong{weak Condorcet winner} and may be recommended as potential \sphinxstyleemphasis{best decision actions} in this illustrative preference modelling exercise.
@@ -1623,11 +1626,11 @@ This is the methodological part of the tutorials.
 
 \item {} 
 \sphinxAtStartPar
-\phantomsection\label{\detokenize{tutorial:id308}}{\hyperref[\detokenize{tutorial:the-rubis-best-choice-recommendation}]{\sphinxcrossref{The \sphinxstyleemphasis{Rubis} best choice recommendation}}} (\autopageref*{\detokenize{tutorial:the-rubis-best-choice-recommendation}})
+\phantomsection\label{\detokenize{tutorial:id308}}{\hyperref[\detokenize{tutorial:computing-the-best-choice-recommendation}]{\sphinxcrossref{Computing the best choice recommendation}}} (\autopageref*{\detokenize{tutorial:computing-the-best-choice-recommendation}})
 
 \item {} 
 \sphinxAtStartPar
-\phantomsection\label{\detokenize{tutorial:id309}}{\hyperref[\detokenize{tutorial:partially-ordering-the-outranking-digraph}]{\sphinxcrossref{Partially ordering the outranking digraph}}} (\autopageref*{\detokenize{tutorial:partially-ordering-the-outranking-digraph}})
+\phantomsection\label{\detokenize{tutorial:id309}}{\hyperref[\detokenize{tutorial:partially-ranking-the-outranking-digraph}]{\sphinxcrossref{Partially ranking the outranking digraph}}} (\autopageref*{\detokenize{tutorial:partially-ranking-the-outranking-digraph}})
 
 \end{itemize}
 \end{sphinxcontents}
@@ -2377,7 +2380,7 @@ In \hyperref[\detokenize{tutorial:officechoiceoutranking}]{Fig.\@ \ref{\detokeni
 \end{sphinxVerbatim}
 
 \sphinxAtStartPar
-For two locations \sphinxstyleemphasis{x} and \sphinxstyleemphasis{y}, the situation “\sphinxstyleemphasis{x} strictly outranks \sphinxstyleemphasis{y}”, denoted \((x \succnsim y)\), is given when \sphinxstyleemphasis{x} outranks \sphinxstyleemphasis{y} and \sphinxstyleemphasis{y} does not outrank \sphinxstyleemphasis{y}. From theory, we know that outranking digraphs are \sphinxstyleemphasis{weakly complete}, i.e. for all \sphinxstyleemphasis{x} and \sphinxstyleemphasis{y} in \sphinxstyleemphasis{X}, \(r(x \succsim y) < 0.0\) implies \(r(y \succsim x) \geq 0.0\). And they verify the \sphinxstyleemphasis{coduality principle}: \(r(x \not\succsim y) = r(y \succnsim x)\) (\sphinxcite{tutorial:bis-2013}).
+For two locations \sphinxstyleemphasis{x} and \sphinxstyleemphasis{y}, the situation “\sphinxstyleemphasis{x} strictly outranks \sphinxstyleemphasis{y}”, denoted \((x \succnsim y)\), is given when \sphinxstyleemphasis{x} outranks \sphinxstyleemphasis{y} and \sphinxstyleemphasis{y} does not outrank \sphinxstyleemphasis{y}. From theory, we know that outranking digraphs are \sphinxstyleemphasis{weakly complete}, i.e. for all \sphinxstyleemphasis{x} and \sphinxstyleemphasis{y} in \sphinxstyleemphasis{X}, \(r(x \succsim y) + r(y \succsim x) \geq 0.0\). And they verify the \sphinxstyleemphasis{coduality principle}: \(r(x \not\succsim y) = r(y \succnsim x)\) (see \DUrole{xref}{\DUrole{std}{\DUrole{std-ref}{On characterizing bipolar\sphinxhyphen{}valued outranking digraphs}}} and \sphinxcite{tutorial:bis-2013}).
 
 \sphinxAtStartPar
 We may hence compute a strict outranking digraph \sphinxstyleemphasis{gcd} with the \sphinxstyleemphasis{codual transform}, i.e. the \sphinxstyleemphasis{converse of the negation} (see Line 1 below) of digraph \sphinxstyleemphasis{g} (see tutorial on {\hyperref[\detokenize{tutorial:outrankingdigraphs-tutorial-label}]{\sphinxcrossref{\DUrole{std}{\DUrole{std-ref}{Working with the outrankingDigraphs module}}}}} (\autopageref*{\detokenize{tutorial:outrankingdigraphs-tutorial-label}})).
@@ -2471,15 +2474,15 @@ When observing chordless odd outranking circuits, we need to break them open wit
 We are ready now for building a best choice recommendation.
 
 
-\subsubsection{The \sphinxstyleemphasis{Rubis} best choice recommendation}
-\label{\detokenize{tutorial:the-rubis-best-choice-recommendation}}
+\subsubsection{Computing the best choice recommendation}
+\label{\detokenize{tutorial:computing-the-best-choice-recommendation}}
 \sphinxAtStartPar
-Following the Rubis outranking method (see \sphinxcite{tutorial:bis-2008}), potential first choice recommendations are determined by the outranking prekernels \textendash{}\sphinxstyleemphasis{weakly independent} and \sphinxstyleemphasis{strictly outranking} choices\textendash{} of the strict outranking digraph (see the tutorial on \DUrole{xref}{\DUrole{std}{\DUrole{std-ref}{computing digraph kernels}}}). Any detected chordless odd circuits are by default broken up.
+Following the previously stated pragmatic principles, potential first choice recommendations are determined by the outranking prekernels \textendash{}\sphinxstyleemphasis{weakly independent} and \sphinxstyleemphasis{strictly outranking} choices\textendash{} of the strict outranking digraph (see the tutorial on \DUrole{xref}{\DUrole{std}{\DUrole{std-ref}{computing digraph kernels}}}). Any detected chordless odd circuits are by default broken up (see \sphinxcite{tutorial:bis-2008}).
 \sphinxSetupCaptionForVerbatim{Computing the strict best choice recommendation}
 \def\sphinxLiteralBlockLabel{\label{\detokenize{tutorial:strictbestchoice}}}
-\fvset{hllines={, 6, 12, 13, 14, 16,}}%
+\fvset{hllines={, 1, 6, 12, 13, 14, 16,}}%
 \begin{sphinxVerbatim}[commandchars=\\\{\},numbers=left,firstnumber=1,stepnumber=1]
-\PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{g}\PYG{o}{.}\PYG{n}{showBestChoiceRecommendation}\PYG{p}{(}\PYG{n}{ChoiceVector}\PYG{o}{=}\PYG{k+kc}{True}\PYG{p}{)}
+\PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{g}\PYG{o}{.}\PYG{n}{showFirstChoiceRecommendation}\PYG{p}{(}\PYG{n}{ChoiceVector}\PYG{o}{=}\PYG{k+kc}{True}\PYG{p}{)}
 \PYG{g+go}{ * \PYGZhy{}\PYGZhy{}\PYGZhy{} First and last choice recommendation(s) \PYGZhy{}\PYGZhy{}\PYGZhy{}*}
 \PYG{g+go}{  (in decreasing order of determinateness)}
 \PYG{g+go}{ Credibility domain: [\PYGZhy{}1.00,1.00]}
@@ -2510,7 +2513,7 @@ Following the Rubis outranking method (see \sphinxcite{tutorial:bis-2008}), pote
 It is interesting to notice in \hyperref[\detokenize{tutorial:strictbestchoice}]{Listing \ref{\detokenize{tutorial:strictbestchoice}}} (Line 6) that the \sphinxstylestrong{strict best choice recommendation} consists in the set of weak Condorcet winners: ‘A’, ‘C’ and ‘D’. In the corresponding characteristic vector (see Lines 12\sphinxhyphen{}14), representing the bipolar credibility degree with which each alternative may indeed be considered a best choice (see \sphinxcite{tutorial:bis-2006a}, \sphinxcite{tutorial:bis-2006b}), we find confirmed that alternative \sphinxstyleemphasis{D} is the only positively validated one, whereas both extreme alternatives \sphinxhyphen{} \sphinxstyleemphasis{A} (the most expensive) and \sphinxstyleemphasis{C} (the cheapest) \sphinxhyphen{} stay in an indeterminate situation. They \sphinxstylestrong{may be or not be} potential first choice candidates besides \sphinxstyleemphasis{D}. Notice furthermore that compromise alternative \sphinxstyleemphasis{G}, while not actually included in an outranking prekernel, shows as well an indeterminate situation with respect to \sphinxstyleemphasis{being or not being} a potential first choice candidate. Alternatives \sphinxstyleemphasis{B}, \sphinxstyleemphasis{E} and \sphinxstyleemphasis{F} are \sphinxstyleemphasis{negatively} included, i.e. \sphinxstyleemphasis{positively excluded} from this best choice recommendation.
 
 \sphinxAtStartPar
-We may also notice in Line 16 that both alternatives \sphinxstyleemphasis{A} and \sphinxstyleemphasis{F} are reported as potential \sphinxstyleemphasis{strict outranked} choices, hence as \sphinxstylestrong{potential last choice recommendation} . This indicates a global incomparability status of alternative \sphinxstyleemphasis{A} as shown in \hyperref[\detokenize{tutorial:bestofficechoice}]{Fig.\@ \ref{\detokenize{tutorial:bestofficechoice}}}.
+We may also notice in Line 16 that both alternatives \sphinxstyleemphasis{A} and \sphinxstyleemphasis{F} are reported as potential \sphinxstyleemphasis{strict outranked} choices, hence as \sphinxstylestrong{potential last choice recommendation} . The ambiguous first\sphinxhyphen{}ranked and last\sphinxhyphen{}ranked position of alternative \sphinxstyleemphasis{A} indicates its global incomparability status as shown in \hyperref[\detokenize{tutorial:bestofficechoice}]{Fig.\@ \ref{\detokenize{tutorial:bestofficechoice}}}.
 
 \begin{sphinxVerbatim}[commandchars=\\\{\},numbers=left,firstnumber=1,stepnumber=1]
 \PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{gcd}\PYG{o}{.}\PYG{n}{exportGraphViz}\PYG{p}{(}\PYG{n}{fileName}\PYG{o}{=}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{bestChoiceChoice}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{,}
@@ -2530,24 +2533,24 @@ We may also notice in Line 16 that both alternatives \sphinxstyleemphasis{A} and
 
 \sphinxAtStartPar
 Let us now compare the performances of alternatives \sphinxstyleemphasis{D} and \sphinxstyleemphasis{G} in a
-pairwise perspective (see below). With the given preference discrimination thresholds, we notice that alternative \sphinxstyleemphasis{G} is actually \sphinxstylestrong{certainly} \sphinxstyleemphasis{at least as good as} alternative \sphinxstyleemphasis{D}:  \(r(G \succsim D) = +145/145 = +1.0\) (see Line 14 below).
+pairwise perspective (see below). With the given preference discrimination thresholds, we notice that alternative \sphinxstyleemphasis{G} is actually \sphinxstylestrong{certainly} \sphinxstyleemphasis{at least as good as} alternative \sphinxstyleemphasis{D}:  \(r(G \succsim D) = +145/145 = +1.0\) and alternative \sphinxstyleemphasis{D} is also positively, but less credibly, \sphinxstyleemphasis{at least as good as} alternative \sphinxstyleemphasis{G}:  \(r(D \succsim G) = +36/145 = +0.25\) (see Line 14 below).
 
 \fvset{hllines={, 14,}}%
 \begin{sphinxVerbatim}[commandchars=\\\{\},numbers=left,firstnumber=1,stepnumber=1]
 \PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{g}\PYG{o}{.}\PYG{n}{showPairwiseComparison}\PYG{p}{(}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{G}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{,}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{D}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{)}
 \PYG{g+go}{ *\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}  pairwise comparison \PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}*}
 \PYG{g+go}{ Comparing actions : (G, D)}
-\PYG{g+go}{ crit. wght.  g(x)      g(y)    diff.  |   ind     pref    concord   |}
+\PYG{g+go}{ crit. wght.  g(x)      g(y)    diff.  |   ind     pref    (G,D)/(D,G)   |}
 \PYG{g+go}{ =========================================================================}
-\PYG{g+go}{ C   45.00 \PYGZhy{}12000.00 \PYGZhy{}14100.00 +2100.00 | 1000.00 2500.00   +45.00   |}
-\PYG{g+go}{ Cf   6.00     50.00     30.00   +20.00 |   10.00   20.00    +6.00   |}
-\PYG{g+go}{ P    3.00     80.00     90.00   \PYGZhy{}10.00 |   10.00   20.00    +3.00   |}
-\PYG{g+go}{ Pr  32.00     60.00     70.00   \PYGZhy{}10.00 |   10.00   20.00   +32.00   |}
-\PYG{g+go}{ St  23.00     20.00     30.00   \PYGZhy{}10.00 |   10.00   20.00   +23.00   |}
-\PYG{g+go}{ V   26.00    100.00     50.00   +50.00 |   10.00   20.00   +26.00   |}
-\PYG{g+go}{ W   10.00     50.00     55.00    \PYGZhy{}5.00 |   10.00   20.00   +10.00   |}
+\PYG{g+go}{ C   45.00 \PYGZhy{}12000.00 \PYGZhy{}14100.00 +2100.00 | 1000.00 2500.00  +45.00/+0.00  |}
+\PYG{g+go}{ Cf   6.00     50.00     30.00   +20.00 |   10.00   20.00   +6.00/\PYGZhy{}6.00  |}
+\PYG{g+go}{ P    3.00     80.00     90.00   \PYGZhy{}10.00 |   10.00   20.00   +3.00/+3.00  |}
+\PYG{g+go}{ Pr  32.00     60.00     70.00   \PYGZhy{}10.00 |   10.00   20.00  +32.00/+32.00 |}
+\PYG{g+go}{ St  23.00     20.00     30.00   \PYGZhy{}10.00 |   10.00   20.00  +23.00/+23.00 |}
+\PYG{g+go}{ V   26.00    100.00     50.00   +50.00 |   10.00   20.00  +26.00/\PYGZhy{}26.00 |}
+\PYG{g+go}{ W   10.00     50.00     55.00    \PYGZhy{}5.00 |   10.00   20.00  +10.00/+10.00 |}
 \PYG{g+go}{ =========================================================================}
-\PYG{g+go}{ Valuation in range: \PYGZhy{}145.00 to +145.00; global concordance: +145.00}
+\PYG{g+go}{ Valuation in range: [\PYGZhy{}145.00;+145.00]; global concordance: +145.00/+36.00}
 \end{sphinxVerbatim}
 \sphinxresetverbatimhllines
 
@@ -2573,23 +2576,36 @@ Yet, we must as well notice that the cheapest alternative \sphinxstyleemphasis{C
 \end{sphinxVerbatim}
 \sphinxresetverbatimhllines
 
-
-\subsubsection{Partially ordering the outranking digraph}
-\label{\detokenize{tutorial:partially-ordering-the-outranking-digraph}}
 \sphinxAtStartPar
-To get a further insight in the overall strict outranking situations, we may use the \sphinxcode{\sphinxupquote{PartialBachetRanking}} constructor imported from the \DUrole{xref}{\DUrole{std}{\DUrole{std-ref}{transitiveDigraphs module}}}, for computing a partial \sphinxstylestrong{ranking\sphinxhyphen{}by\sphinxhyphen{}scoring} result from the codual, i.e. the strict outranking digraph instance \sphinxstyleemphasis{gcd} (see above).
+Following pragmatic principle \sphinxstylestrong{P3}, stating that a BCR should not contain a sub\sphinxhyphen{}recommendation, alternative \sphinxstyleemphasis{G} is hence dropped from our first\sphinxhyphen{}ranked list of alternatives.
 
-\fvset{hllines={, 3, 4, 7,}}%
+\sphinxAtStartPar
+To get a further insight in the overall outranking situation, we may use the new \sphinxcode{\sphinxupquote{PartialBachetRanking}} class imported from the \sphinxcode{\sphinxupquote{transitiveDigraphs}} module, for computing a \sphinxstylestrong{partial ranking} of all the potential office locations (see the advanced topic on {\hyperref[\detokenize{tutorial:partial-ranking-tutorial-label}]{\sphinxcrossref{\DUrole{std}{\DUrole{std-ref}{partially ranking strategies}}}}} (\autopageref*{\detokenize{tutorial:partial-ranking-tutorial-label}})).
+
+
+\subsubsection{Partially ranking the outranking digraph}
+\label{\detokenize{tutorial:partially-ranking-the-outranking-digraph}}
+\sphinxAtStartPar
+In \hyperref[\detokenize{tutorial:bachetranking0}]{Listing \ref{\detokenize{tutorial:bachetranking0}}} Line 2, we operate the {\hyperref[\detokenize{tutorial:epistemic-fusion-label}]{\sphinxcrossref{\DUrole{std}{\DUrole{std-ref}{epistemic disjunctive fusion}}}}} (\autopageref*{\detokenize{tutorial:epistemic-fusion-label}}) of the five best correlated \sphinxstyleemphasis{Bachet} rankings obtained from 200 random \sphinxstyleemphasis{Bachet} rankings (see Lines 4\sphinxhyphen{}8). In the resulting transitive partial relation, alternatives \sphinxstyleemphasis{A}, \sphinxstyleemphasis{C}, \sphinxstyleemphasis{D} as well as \sphinxstyleemphasis{G} appear all ranked before \sphinxstyleemphasis{B} and \sphinxstyleemphasis{E}, whereas alternative \sphinxstyleemphasis{F} appears always last\sphinxhyphen{}ranked (see Lines 11 and 13).
+\sphinxSetupCaptionForVerbatim{Partially ranking the location alternatives}
+\def\sphinxLiteralBlockLabel{\label{\detokenize{tutorial:bachetranking0}}}
+\fvset{hllines={, 2, 4, 5, 6, 7, 8, 11, 13,}}%
 \begin{sphinxVerbatim}[commandchars=\\\{\},numbers=left,firstnumber=1,stepnumber=1]
 \PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{k+kn}{from} \PYG{n+nn}{transitiveDigraphs} \PYG{k+kn}{import} \PYG{n}{PartialBachetRanking}
-\PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{wbr} \PYG{o}{=} \PYG{n}{PartialBachetRanking}\PYG{p}{(}\PYG{n}{gcd}\PYG{p}{,}\PYG{n}{randomized}\PYG{o}{=}\PYG{l+m+mi}{200}\PYG{p}{,}\PYG{n}{seed}\PYG{o}{=}\PYG{l+m+mi}{3}\PYG{p}{)}
+\PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{wbr} \PYG{o}{=} \PYG{n}{PartialBachetRanking}\PYG{p}{(}\PYG{n}{g}\PYG{p}{,}\PYG{n}{randomized}\PYG{o}{=}\PYG{l+m+mi}{200}\PYG{p}{,}\PYG{n}{maxNbrOfRankings}\PYG{o}{=}\PYG{l+m+mi}{5}\PYG{p}{,}\PYG{n}{seed}\PYG{o}{=}\PYG{l+m+mi}{3}\PYG{p}{)}
+\PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{wbr}\PYG{o}{.}\PYG{n}{bachetRankings}
+\PYG{g+go}{ [(0.816, [\PYGZsq{}G\PYGZsq{}, \PYGZsq{}D\PYGZsq{}, \PYGZsq{}A\PYGZsq{}, \PYGZsq{}C\PYGZsq{}, \PYGZsq{}B\PYGZsq{}, \PYGZsq{}E\PYGZsq{}, \PYGZsq{}F\PYGZsq{}]),}
+\PYG{g+go}{  (0.788, [\PYGZsq{}G\PYGZsq{}, \PYGZsq{}D\PYGZsq{}, \PYGZsq{}E\PYGZsq{}, \PYGZsq{}B\PYGZsq{}, \PYGZsq{}A\PYGZsq{}, \PYGZsq{}C\PYGZsq{}, \PYGZsq{}F\PYGZsq{}]),}
+\PYG{g+go}{  (0.778, [\PYGZsq{}A\PYGZsq{}, \PYGZsq{}D\PYGZsq{}, \PYGZsq{}C\PYGZsq{}, \PYGZsq{}G\PYGZsq{}, \PYGZsq{}E\PYGZsq{}, \PYGZsq{}B\PYGZsq{}, \PYGZsq{}F\PYGZsq{}]),}
+\PYG{g+go}{  (0.758, [\PYGZsq{}D\PYGZsq{}, \PYGZsq{}A\PYGZsq{}, \PYGZsq{}C\PYGZsq{}, \PYGZsq{}G\PYGZsq{}, \PYGZsq{}E\PYGZsq{}, \PYGZsq{}B\PYGZsq{}, \PYGZsq{}F\PYGZsq{}]),}
+\PYG{g+go}{  (0.756, [\PYGZsq{}G\PYGZsq{}, \PYGZsq{}C\PYGZsq{}, \PYGZsq{}D\PYGZsq{}, \PYGZsq{}A\PYGZsq{}, \PYGZsq{}E\PYGZsq{}, \PYGZsq{}B\PYGZsq{}, \PYGZsq{}F\PYGZsq{}])]}
 \PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{wbr}\PYG{o}{.}\PYG{n}{showTransitiveDigraph}\PYG{p}{(}\PYG{p}{)}
 \PYG{g+go}{ Ranking by Choosing and Rejecting}
 \PYG{g+go}{ 1st ranked [\PYGZsq{}A\PYGZsq{}, \PYGZsq{}C\PYGZsq{}, \PYGZsq{}D\PYGZsq{}, \PYGZsq{}G\PYGZsq{}]}
 \PYG{g+go}{    2nd ranked [\PYGZsq{}B\PYGZsq{}, \PYGZsq{}E\PYGZsq{}]}
 \PYG{g+go}{    2nd last ranked [\PYGZsq{}B\PYGZsq{}, \PYGZsq{}E\PYGZsq{}]}
 \PYG{g+go}{ 1st last ranked [\PYGZsq{}F\PYGZsq{}]}
-\PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{wbr}\PYG{o}{.}\PYG{n}{exportGraphViz}\PYG{p}{(}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{officeChoiceRanking}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{)}
+\PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{wbr}\PYG{o}{.}\PYG{n}{exportGraphViz}\PYG{p}{(}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{officeChoiceRanking}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{,}\PYG{n}{ArrowHeads}\PYG{o}{=}\PYG{k+kc}{True}\PYG{p}{)}
 \PYG{g+go}{ *\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{} exporting a dot file for GraphViz tools \PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}*}
 \PYG{g+go}{ Exporting to officeChoiceRanking.dot}
 \PYG{g+go}{ dot \PYGZhy{}Grankdir=TB \PYGZhy{}Tpng officeChoiceRanking.dot \PYGZhy{}o officeChoiceRanking.png}
@@ -2601,24 +2617,42 @@ To get a further insight in the overall strict outranking situations, we may use
 \capstart
 
 \noindent\sphinxincludegraphics[width=200\sphinxpxdimen]{{officeChoiceRanking}.png}
-\caption{Partially ranking\sphinxhyphen{}by\sphinxhyphen{}scoring from the office choice outranking digraph}\label{\detokenize{tutorial:officechoiceranking}}\end{figure}
+\caption{Partially ranking the outranking digraph}\label{\detokenize{tutorial:officechoiceranking}}\end{figure}
 
 \sphinxAtStartPar
-In this partially \sphinxstylestrong{ranking\sphinxhyphen{}by\sphinxhyphen{}scoring} method, where we operate the \sphinxstyleemphasis{epistemic fusion} of best correlated \sphinxstyleemphasis{Bachet} rankings (see the advanced topic on {\hyperref[\detokenize{tutorial:partial-ranking-tutorial-label}]{\sphinxcrossref{\DUrole{std}{\DUrole{std-ref}{partially ranking strategies}}}}} (\autopageref*{\detokenize{tutorial:partial-ranking-tutorial-label}})), alternatives \sphinxstyleemphasis{A}, \sphinxstyleemphasis{C}, \sphinxstyleemphasis{D} as well as \sphinxstyleemphasis{G} are now all first\sphinxhyphen{}ranked (see Line 7), whereas alternative \sphinxstyleemphasis{F} is clearly last\sphinxhyphen{}ranked. The overall partial ordering result shows again the important fact that the most expensive location \sphinxstyleemphasis{A}, and the cheapest location \sphinxstyleemphasis{C}, both appear incomparable with most of the other alternatives, as is apparent from the Hasse diagram  of the partial ranking result (see \hyperref[\detokenize{tutorial:officechoiceranking}]{Fig.\@ \ref{\detokenize{tutorial:officechoiceranking}}}).
+\hyperref[\detokenize{tutorial:officechoiceranking}]{Fig.\@ \ref{\detokenize{tutorial:officechoiceranking}}} makes hence again clearly apparent the important fact that the most expensive location \sphinxstyleemphasis{A} and the cheapest location \sphinxstyleemphasis{C}, both,  appear incomparable with all the other alternatives except the last\sphinxhyphen{}ranked location \sphinxstyleemphasis{F}.
 
 \sphinxAtStartPar
-The best choice recommendation appears hence depending on the very importance the CEO is attaching to each one of the three decision objectives he is considering. In the setting here, where he considers that \sphinxstyleemphasis{maximizing the future turnover} is the most important objective followed by \sphinxstyleemphasis{minimizing the Costs} and, less important, \sphinxstyleemphasis{maximizing the working conditions}, locations \sphinxstyleemphasis{D} or \sphinxstyleemphasis{G} represent actually the best choices. However, if \sphinxstyleemphasis{Costs} do not play much a role, it would be perhaps better to decide to move to the most advantageous location \sphinxstyleemphasis{A}; or if, on the contrary, \sphinxstyleemphasis{Costs} do matter a lot, moving to the cheapest alternative \sphinxstyleemphasis{C} could definitely represent a more convincing recommendation.
+We may use the best, with the outranking digraph \sphinxstyleemphasis{g} correlated (+0.816), \sphinxstyleemphasis{Bachet} ranking {[}‘G’, ‘D’, ‘A’, ‘C’, ‘B’, ‘E’, ‘F’{]}  for showing in \hyperref[\detokenize{tutorial:rankedofficechoiceheatmap}]{Fig.\@ \ref{\detokenize{tutorial:rankedofficechoiceheatmap}}} a from best to worst ranked performance heatmap of all the potential office locations.
+
+\begin{sphinxVerbatim}[commandchars=\\\{\}]
+\PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{t}\PYG{o}{.}\PYG{n}{showHTMLPerformanceHeatmap}\PYG{p}{(}\PYG{n}{actionsList}\PYG{o}{=}\PYG{n}{wbr}\PYG{o}{.}\PYG{n}{bachetRankings}\PYG{p}{[}\PYG{l+m+mi}{0}\PYG{p}{]}\PYG{p}{[}\PYG{l+m+mi}{1}\PYG{p}{]}\PYG{p}{,}
+\PYG{g+go}{   ...                              Correlations=True)}
+\end{sphinxVerbatim}
+
+\begin{figure}[H]
+\centering
+\capstart
+
+\noindent\sphinxincludegraphics[width=400\sphinxpxdimen]{{rankedOfficeChoiceHeatmap}.png}
+\caption{The ranked performance heatmap of the potential office locations}\label{\detokenize{tutorial:rankedofficechoiceheatmap}}\end{figure}
 
 \sphinxAtStartPar
-It might be worth, as an \sphinxstylestrong{exercise}, to modify these criteria significance weights in the ‘officeChoice.py’ data file in such a way that
+In view of \hyperref[\detokenize{tutorial:rankedofficechoiceheatmap}]{Fig.\@ \ref{\detokenize{tutorial:rankedofficechoiceheatmap}}}, office locations \sphinxstyleemphasis{G} or \sphinxstyleemphasis{D} make up convincing best choice recommendations with an apparent slight advantage for location \sphinxstyleemphasis{G}. This advantage is however largely due to the indifference and preference discrimination thresholds (10\% resp. 20\%) retained on the qualitative performance criteria.
+
+\sphinxAtStartPar
+A best choice recommendation appears eventually depending on the very importance the CEO is attaching to each one of the three decision objectives he is considering. In the setting here, where he considers that \sphinxstyleemphasis{maximizing the future turnover} is the most important objective followed by \sphinxstyleemphasis{minimizing the Costs} and, less important, \sphinxstyleemphasis{maximizing the working conditions}, locations \sphinxstyleemphasis{D} as well as \sphinxstyleemphasis{G} represent actually potential first choices. However, if \sphinxstyleemphasis{Costs} do not play much a role, it would perhaps be better to choose the most advantageous location \sphinxstyleemphasis{A}; or if, on the contrary, \sphinxstyleemphasis{Costs} do matter a lot, choosing the cheapest alternative \sphinxstyleemphasis{C} could definitely be a more convincing choice.
+
+\sphinxAtStartPar
+It might be worth, as an \sphinxstylestrong{exercise}, to modify the criteria significance weights in the ‘officeChoice.py’ data file in such a way that
 \begin{itemize}
 \item {} 
 \sphinxAtStartPar
-all criteria under an objective appear \sphinxstyleemphasis{equi\sphinxhyphen{}significant}, and
+all three decision objectives are considered \sphinxstyleemphasis{equally important}, and
 
 \item {} 
 \sphinxAtStartPar
-all three decision objectives are considered \sphinxstyleemphasis{equally important}.
+all criteria under an objective are considered \sphinxstyleemphasis{equi\sphinxhyphen{}significant}.
 
 \end{itemize}
 
@@ -2627,9 +2661,16 @@ What will become the best choice recommendation under this working hypothesis?
 
 
 \begin{sphinxseealso}{See also:}
+\begin{itemize}
+\item {} 
+\sphinxAtStartPar
+{\hyperref[\detokenize{tutorial:alice-tutorial-label}]{\sphinxcrossref{\DUrole{std}{\DUrole{std-ref}{Alice’s best choice: A selection case study}}}}} (\autopageref*{\detokenize{tutorial:alice-tutorial-label}})
 
+\item {} 
 \sphinxAtStartPar
 Lecture 7 notes from the MICS Algorithmic Decision Theory course: \sphinxcite{tutorial:adt-l7}.
+
+\end{itemize}
 
 
 \end{sphinxseealso}
@@ -3153,7 +3194,7 @@ Due to a 11 against 7 \sphinxstylestrong{plurality tyranny} effect, the \sphinxs
 \noindent{\hspace*{\fill}\sphinxincludegraphics[width=600\sphinxpxdimen]{{templateHeatmapNF}.png}\hspace*{\fill}}
 
 \sphinxAtStartPar
-It might be opportun to furthermore study the robustness of the apparent outranking situations when assuming only \sphinxstyleemphasis{ordinal} or \sphinxstyleemphasis{uncertain} criteria significance weights. If interested in mainly objectively \sphinxstyleemphasis{unopposed} (multipartisan) outranking situations, one might also try the \sphinxcode{\sphinxupquote{UnOpposedOutrankingDigraph}} constructor. (see the \DUrole{xref}{\DUrole{std}{\DUrole{std-ref}{advanced topics of the Digraph3 documentation}}}).
+It might be opportune to furthermore study the robustness of the apparent outranking situations when assuming only \sphinxstyleemphasis{ordinal} or \sphinxstyleemphasis{uncertain} criteria significance weights. If interested in mainly objectively \sphinxstyleemphasis{unopposed} (multipartisan) outranking situations, one might also try the \sphinxcode{\sphinxupquote{UnOpposedOutrankingDigraph}} constructor. (see the \DUrole{xref}{\DUrole{std}{\DUrole{std-ref}{advanced topics of the Digraph3 documentation}}}).
 
 \sphinxAtStartPar
 Back to {\hyperref[\detokenize{tutorial:tutorial-label}]{\sphinxcrossref{\DUrole{std}{\DUrole{std-ref}{Content Table}}}}} (\autopageref*{\detokenize{tutorial:tutorial-label}})
@@ -4227,12 +4268,12 @@ We recover in \hyperref[\detokenize{tutorial:weakcopelandranking}]{Listing \ref{
 \PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{wcop}\PYG{o}{.}\PYG{n}{exportGraphViz}\PYG{p}{(}\PYG{n}{fileName}\PYG{o}{=}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{weakCopelandRanking}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{)}
 \PYG{g+go}{ *\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{} exporting a dot file for GraphViz tools \PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}*}
 \PYG{g+go}{ Exporting to weakCopelandRanking.dot}
-\PYG{g+go}{ 0 \PYGZob{} rank = same; a5; \PYGZcb{}}
-\PYG{g+go}{ 1 \PYGZob{} rank = same; a1; a7; a6; \PYGZcb{}}
-\PYG{g+go}{ 2 \PYGZob{} rank = same; a8; \PYGZcb{}}
-\PYG{g+go}{ 3 \PYGZob{} rank = same; a4; a9\PYGZcb{}}
-\PYG{g+go}{ 4 \PYGZob{} rank = same; a3; \PYGZcb{}}
-\PYG{g+go}{ 5 \PYGZob{} rank = same; a2; \PYGZcb{}}
+\PYG{g+go}{ 0 subgraph \PYGZob{} rank = same; a5; \PYGZcb{}}
+\PYG{g+go}{ 1 subgraph \PYGZob{} rank = same; a1; a7; a6; \PYGZcb{}}
+\PYG{g+go}{ 2 subgraph \PYGZob{} rank = same; a8; \PYGZcb{}}
+\PYG{g+go}{ 3 subgraph \PYGZob{} rank = same; a4; a9\PYGZcb{}}
+\PYG{g+go}{ 4 subgraph \PYGZob{} rank = same; a3; \PYGZcb{}}
+\PYG{g+go}{ 5 subgraph \PYGZob{} rank = same; a2; \PYGZcb{}}
 \PYG{g+go}{ dot \PYGZhy{}Grankdir=TB \PYGZhy{}Tpng weakCopelandRanking.dot\PYGZbs{}}
 \PYG{g+go}{     \PYGZhy{}o weakCopelandRanking.png}
 \end{sphinxVerbatim}
@@ -4444,14 +4485,14 @@ We visualize the partial order defined by the {\hyperref[\detokenize{tutorial:ep
 \PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{wke}\PYG{o}{.}\PYG{n}{exportGraphViz}\PYG{p}{(}\PYG{n}{fileName}\PYG{o}{=}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{tutorialKemeny}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{)}
 \PYG{g+go}{ *\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{} exporting a dot file for GraphViz tools \PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}*}
 \PYG{g+go}{ Exporting to tutorialKemeny.dot}
-\PYG{g+go}{ 0 \PYGZob{} rank = same; a5; \PYGZcb{}}
-\PYG{g+go}{ 1 \PYGZob{} rank = same; a6; \PYGZcb{}}
-\PYG{g+go}{ 2 \PYGZob{} rank = same; a7; \PYGZcb{}}
-\PYG{g+go}{ 3 \PYGZob{} rank = same; a3; \PYGZcb{}}
-\PYG{g+go}{ 4 \PYGZob{} rank = same; a9; a8; \PYGZcb{}}
-\PYG{g+go}{ 5 \PYGZob{} rank = same; a4; \PYGZcb{}}
-\PYG{g+go}{ 6 \PYGZob{} rank = same; a1; \PYGZcb{}}
-\PYG{g+go}{ 7 \PYGZob{} rank = same; a2; \PYGZcb{}}
+\PYG{g+go}{ 0 subgraph \PYGZob{} rank = same; a5; \PYGZcb{}}
+\PYG{g+go}{ 1 subgraph \PYGZob{} rank = same; a6; \PYGZcb{}}
+\PYG{g+go}{ 2 subgraph \PYGZob{} rank = same; a7; \PYGZcb{}}
+\PYG{g+go}{ 3 subgraph \PYGZob{} rank = same; a3; \PYGZcb{}}
+\PYG{g+go}{ 4 subgraph \PYGZob{} rank = same; a9; a8; \PYGZcb{}}
+\PYG{g+go}{ 5 subgraph \PYGZob{} rank = same; a4; \PYGZcb{}}
+\PYG{g+go}{ 6 subgraph \PYGZob{} rank = same; a1; \PYGZcb{}}
+\PYG{g+go}{ 7 subgraph \PYGZob{} rank = same; a2; \PYGZcb{}}
 \PYG{g+go}{ dot \PYGZhy{}Grankdir=TB \PYGZhy{}Tpng tutorialKemeny.dot \PYGZhy{}o tutorialKemeny.png}
 \end{sphinxVerbatim}
 
@@ -4571,13 +4612,13 @@ We notice in \hyperref[\detokenize{tutorial:slaterranking}]{Listing \ref{\detoke
 \PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{slw}\PYG{o}{.}\PYG{n}{exportGraphViz}\PYG{p}{(}\PYG{n}{fileName}\PYG{o}{=}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{tutorialSlater}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{)}
 \PYG{g+go}{ *\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{} exporting a dot file for GraphViz tools \PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}*}
 \PYG{g+go}{ Exporting to tutorialSlater.dot}
-\PYG{g+go}{ 0 \PYGZob{} rank = same; a5; \PYGZcb{}}
-\PYG{g+go}{ 1 \PYGZob{} rank = same; a6; \PYGZcb{}}
-\PYG{g+go}{ 2 \PYGZob{} rank = same; a7; a4; \PYGZcb{}}
-\PYG{g+go}{ 3 \PYGZob{} rank = same; a1; \PYGZcb{}}
-\PYG{g+go}{ 4 \PYGZob{} rank = same; a8; a3; \PYGZcb{}}
-\PYG{g+go}{ 5 \PYGZob{} rank = same; a9; \PYGZcb{}}
-\PYG{g+go}{ 6 \PYGZob{} rank = same; a2; \PYGZcb{}}
+\PYG{g+go}{ 0 subgraph \PYGZob{} rank = same; a5; \PYGZcb{}}
+\PYG{g+go}{ 1 subgraph \PYGZob{} rank = same; a6; \PYGZcb{}}
+\PYG{g+go}{ 2 subgraph \PYGZob{} rank = same; a7; a4; \PYGZcb{}}
+\PYG{g+go}{ 3 subgraph \PYGZob{} rank = same; a1; \PYGZcb{}}
+\PYG{g+go}{ 4 subgraph \PYGZob{} rank = same; a8; a3; \PYGZcb{}}
+\PYG{g+go}{ 5 subgraph \PYGZob{} rank = same; a9; \PYGZcb{}}
+\PYG{g+go}{ 6 subgraph \PYGZob{} rank = same; a2; \PYGZcb{}}
 \PYG{g+go}{ dot \PYGZhy{}Grankdir=TB \PYGZhy{}Tpng tutorialSlater.dot \PYGZhy{}o tutorialSlater.png}
 \end{sphinxVerbatim}
 
@@ -4851,7 +4892,7 @@ To compare for instance the four rankings we have previously obtained with \sphi
 \sphinxresetverbatimhllines
 
 \sphinxAtStartPar
-By epistemic disjunctive fusion of the four \sphinxstyleemphasis{rankings}, the \sphinxcode{\sphinxupquote{transitiveDigraphs.RankingsFusionDigraph}} constructor computes a transitive asymmetrical partial digraph (see \hyperref[\detokenize{tutorial:rankingconsensus}]{Listing \ref{\detokenize{tutorial:rankingconsensus}}}  Lines 20, 32\sphinxhyphen{}33). Notice in Lines 15\sphinxhyphen{}18 the unstable ranks of alternative \sphinxstyleemphasis{a1} (rank 2,5,6 and 7) which induce contradictory ranking results leadind to many incomparability situations. Ranking and ordering of partial relations do not give now the same result when such largely incomparable alternatives do appear.
+By epistemic disjunctive fusion of the four \sphinxstyleemphasis{rankings}, the \sphinxcode{\sphinxupquote{transitiveDigraphs.RankingsFusionDigraph}} constructor computes a transitive asymmetric partial digraph (see \hyperref[\detokenize{tutorial:rankingconsensus}]{Listing \ref{\detokenize{tutorial:rankingconsensus}}}  Lines 20, 32\sphinxhyphen{}33). Notice in Lines 15\sphinxhyphen{}18 the unstable ranks of alternative \sphinxstyleemphasis{a1} (rank 2,5,6 and 7) which induce contradictory ranking results leadind to many incomparability situations. Ranking and ordering of partial relations do not give now the same result when such largely incomparable alternatives do appear.
 
 \sphinxAtStartPar
 The generic \sphinxcode{\sphinxupquote{TransitiveDigraph}} class provides therefore a \sphinxcode{\sphinxupquote{showTransitiveDigraph()}} method which iteratively extracts conjointly first and last choices \textendash{}\DUrole{xref}{\DUrole{std}{\DUrole{std-ref}{initial and terminal kernels}}}\textendash{} as shown in \hyperref[\detokenize{tutorial:rankingconsensus1}]{Listing \ref{\detokenize{tutorial:rankingconsensus1}}} Lines 2\sphinxhyphen{}6 below.
@@ -4884,10 +4925,10 @@ Topological Sort Algorithm 2.4 from \sphinxstyleemphasis{Algorithmic Graph heory
 \PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{rfdg}\PYG{o}{.}\PYG{n}{exportGraphViz}\PYG{p}{(}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{rankingsByScoringFusion}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{)}
 \PYG{g+go}{ *\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{} exporting a dot file for GraphViz tools \PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}*}
 \PYG{g+go}{ Exporting to rankingsByScoringFusion.dot}
-\PYG{g+go}{  0 \PYGZob{} rank = 0; a5; \PYGZcb{}}
-\PYG{g+go}{  1 \PYGZob{} rank = 1; a6; a1; a7; \PYGZcb{}}
-\PYG{g+go}{  2 \PYGZob{} rank = 2; a3; a8; a4; \PYGZcb{}}
-\PYG{g+go}{  3 \PYGZob{} rank = 3; a2; a9; \PYGZcb{}}
+\PYG{g+go}{  0 subgraph \PYGZob{} rank = same; a5; \PYGZcb{}}
+\PYG{g+go}{  1 subgraph \PYGZob{} rank = same; a6; a1; a7; \PYGZcb{}}
+\PYG{g+go}{  2 subgraph \PYGZob{} rank = same; a3; a8; a4; \PYGZcb{}}
+\PYG{g+go}{  3 subgraph \PYGZob{} rank = same; a2; a9; \PYGZcb{}}
 \PYG{g+go}{ dot \PYGZhy{}Grankdir=TB \PYGZhy{}Tpng rankingsByScoringFusion.dot \PYGZbs{}}
 \PYG{g+go}{                     \PYGZhy{}o rankingsByScoringFusion.png}
 \end{sphinxVerbatim}
@@ -5051,7 +5092,7 @@ It is worthwhile noticing in \hyperref[\detokenize{tutorial:weakbachetval}]{Fig.
 \capstart
 
 \noindent\sphinxincludegraphics[width=200\sphinxpxdimen]{{weakBachetval}.png}
-\caption{valued Bachet weak ranking result}\label{\detokenize{tutorial:weakbachetval}}\end{figure}
+\caption{valued Bachet partial ranking result}\label{\detokenize{tutorial:weakbachetval}}\end{figure}
 
 \sphinxAtStartPar
 This way, the \sphinxstyleemphasis{Bachet} ranking rules deliver efficient tools for constructing convincing partial rankings providing by the way a tool for computing potential first or last choice recommendations, actually the \DUrole{xref}{\DUrole{std}{\DUrole{std-ref}{initial and terminal prekernels}}} of such partial transitive digraphs. Mind however that the \sphinxstyleemphasis{Bachet} ranking rules can only handle small outranking digraphs ( \textless{} 50 ). For larger ( \textgreater{} 50 ) or big ( \textgreater{} 1000 ) outranking digraphs it is opportune to turn to order statistics and compute \sphinxstylestrong{weak rankings} \textendash{}rankings with ties\textendash{} by sorting the multicriteria performance records into relative or absolute performance \sphinxstylestrong{quantile equivalence classes}.
@@ -6223,7 +6264,7 @@ For instance, candidate \sphinxstyleemphasis{a1} is ranked four times before and
 \sphinxAtStartPar
 Notice that in the case of linear voting profiles, majority margins always verify a zero sum property: \sphinxstyleemphasis{M(x,y)} + \sphinxstyleemphasis{M(y,x)} = 0 for all candidates \sphinxstyleemphasis{x} and \sphinxstyleemphasis{y} (see \hyperref[\detokenize{tutorial:condorcetdigraph}]{Listing \ref{\detokenize{tutorial:condorcetdigraph}}} Lines 26\sphinxhyphen{}28). This is not true in general for arbitrary voting profiles. The \sphinxstyleemphasis{majority margins} digraph of linear voting profiles defines in fact a \sphinxstyleemphasis{weak tournament} and belongs, hence, to the class of \sphinxstyleemphasis{self\sphinxhyphen{}codual} bipolar\sphinxhyphen{}valued digraphs (%
 \begin{footnote}[13]\sphinxAtStartFootnote
-The class of \sphinxstyleemphasis{self\sphinxhyphen{}codual} bipolar\sphinxhyphen{}valued digraphs consists of all \sphinxstyleemphasis{weakly asymmetric} digraphs, i.e. digraphs containing only \sphinxstyleemphasis{asymmetric} and/or \sphinxstyleemphasis{indeterminate} links. Limit cases consists of, on the one side, \sphinxstyleemphasis{full tournaments} with \sphinxstyleemphasis{indeterminate reflexive links}, and, on the other side, \sphinxstyleemphasis{fully indeterminate} digraphs. In this class, the \sphinxstyleemphasis{converse} (inverse \textasciitilde{} ) operator is indeed identical to the \sphinxstyleemphasis{dual} (negation \sphinxhyphen{} ) one.
+The class of \sphinxstyleemphasis{self\sphinxhyphen{}codual} bipolar\sphinxhyphen{}valued digraphs consists of all \sphinxstyleemphasis{weakly asymmetric} digraphs, i.e. digraphs containing only \sphinxstyleemphasis{asymmetrical} and/or \sphinxstyleemphasis{indeterminate} links. Limit cases consists of, on the one side, \sphinxstyleemphasis{full tournaments} with \sphinxstyleemphasis{indeterminate reflexive links}, and, on the other side, \sphinxstyleemphasis{fully indeterminate} digraphs. In this class, the \sphinxstyleemphasis{converse} (inverse \textasciitilde{} ) operator is indeed identical to the \sphinxstyleemphasis{dual} (negation \sphinxhyphen{} ) one.
 %
 \end{footnote}).
 
@@ -9116,9 +9157,9 @@ In the relation map, shown in \hyperref[\detokenize{tutorial:alicerelationmap}]{
 \PYG{g+gp}{... }                \PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{strictOutranking}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{)}
 \PYG{g+go}{ *\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{} exporting a dot file for GraphViz tools \PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}*}
 \PYG{g+go}{  Exporting to strictOutranking.dot}
-\PYG{g+go}{   0 \PYGZob{} rank = i; I\PYGZus{}FHK; I\PYGZus{}UHB; I\PYGZus{}USB; T\PYGZus{}FHK; \PYGZcb{}}
-\PYG{g+go}{   1 \PYGZob{} rank = i; T\PYGZus{}UHB; T\PYGZus{}USB; T\PYGZus{}UD; T\PYGZus{}FHM; \PYGZcb{}}
-\PYG{g+go}{   2 \PYGZob{} rank = i; S\PYGZus{}HKK; C\PYGZus{}HKK; \PYGZcb{}}
+\PYG{g+go}{   0 subgraph \PYGZob{} rank=same ; I\PYGZus{}FHK; I\PYGZus{}UHB; I\PYGZus{}USB; T\PYGZus{}FHK; \PYGZcb{}}
+\PYG{g+go}{   1 subgraph \PYGZob{} rank=same; T\PYGZus{}UHB; T\PYGZus{}USB; T\PYGZus{}UD; T\PYGZus{}FHM; \PYGZcb{}}
+\PYG{g+go}{   2 subgraph \PYGZob{} rank=same; S\PYGZus{}HKK; C\PYGZus{}HKK; \PYGZcb{}}
 \PYG{g+go}{ dot \PYGZhy{}Grankdir=TB \PYGZhy{}Tpng strictOutranking.dot \PYGZhy{}o strictOutranking.png}
 \end{sphinxVerbatim}
 \sphinxresetverbatimhllines
@@ -9223,10 +9264,8 @@ See also the corresponding \DUrole{xref}{\DUrole{std}{\DUrole{std-ref}{Advanced 
 \begin{sphinxVerbatim}[commandchars=\\\{\},numbers=left,firstnumber=1,stepnumber=1]
 \PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{k+kn}{from} \PYG{n+nn}{outrankingDigraphs} \PYG{k+kn}{import}\PYGZbs{}
 \PYG{g+gp}{... }        \PYG{n}{ConfidentBipolarOutrankingDigraph}
-
 \PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{cdg} \PYG{o}{=} \PYG{n}{ConfidentBipolarOutrankingDigraph}\PYG{p}{(}\PYG{n}{t}\PYG{p}{,}
 \PYG{g+gp}{... }        \PYG{n}{distribution}\PYG{o}{=}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{triangular}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{,}\PYG{n}{confidence}\PYG{o}{=}\PYG{l+m+mf}{90.0}\PYG{p}{)}
-
 \PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{cdg}
 \PYG{g+go}{ *\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{} Object instance description \PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}*}
 \PYG{g+go}{ Instance class       : ConfidentBipolarOutrankingDigraph}
@@ -9333,7 +9372,7 @@ Again, when \sphinxstyleemphasis{equi\sphinxhyphen{}signficant} performance crit
 In view of her performance tableau in \hyperref[\detokenize{tutorial:aliceheatmap}]{Fig.\@ \ref{\detokenize{tutorial:aliceheatmap}}}, \sphinxstyleemphasis{Graduate Interpreter} studies at the \sphinxstyleemphasis{Technical High School Köln}, thus, represent definitely \sphinxstylestrong{Alice’s very best choice}.
 
 \sphinxAtStartPar
-For further reading about the \sphinxstyleemphasis{Rubis} Best Choice methodology, one may consult in \sphinxcite{tutorial:bis-2015} the study of a \sphinxstyleemphasis{real decision aid case} about choosing a best poster in a scientific conference.
+For further reading about the Best Choice methodology, one may consult in \sphinxcite{tutorial:bis-2015} the study of a \sphinxstyleemphasis{real decision aid case} about choosing a best poster in a scientific conference.
 
 \sphinxAtStartPar
 Back to {\hyperref[\detokenize{tutorial:tutorial-label}]{\sphinxcrossref{\DUrole{std}{\DUrole{std-ref}{Content Table}}}}} (\autopageref*{\detokenize{tutorial:tutorial-label}})
@@ -13934,9 +13973,9 @@ As mentioned before, a permutation graph and its dual are \sphinxstylestrong{tra
 \PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{dg}\PYG{o}{.}\PYG{n}{exportGraphViz}\PYG{p}{(}\PYG{p}{)}
 \PYG{g+go}{ *\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{} exporting a dot file for GraphViz tools \PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}*}
 \PYG{g+go}{ Exporting to oriented\PYGZus{}permutationGraph.dot}
-\PYG{g+go}{ 0 \PYGZob{} rank = same; 1; 2; \PYGZcb{}}
-\PYG{g+go}{ 1 \PYGZob{} rank = same; 5; 3; \PYGZcb{}}
-\PYG{g+go}{ 2 \PYGZob{} rank = same; 4; 6; \PYGZcb{}}
+\PYG{g+go}{ 0 subgraph \PYGZob{} rank = same; 1; 2; \PYGZcb{}}
+\PYG{g+go}{ 1 subgraph \PYGZob{} rank = same; 5; 3; \PYGZcb{}}
+\PYG{g+go}{ 2 subgraph \PYGZob{} rank = same; 4; 6; \PYGZcb{}}
 \PYG{g+go}{ dot \PYGZhy{}Grankdir=TB \PYGZhy{}Tpng oriented\PYGZus{}permutationGraph.dot \PYGZhy{}o oriented\PYGZus{}permutationGraph.png}
 \end{sphinxVerbatim}
 
