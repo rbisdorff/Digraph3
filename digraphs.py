@@ -3148,6 +3148,68 @@ class Digraph(object):
 
         return isCyclic
 
+    def isStronglyAsymmetric(self, Debug=False):
+        """
+        checks the strong assymetric property of self.relation by checking
+        for r(x>y) + r(y>x) <= Med !
+
+        .. warning::
+        
+            The reflexive links are ignored !!
+        """
+        Med = self.valuationdomain['med']
+        if Debug:
+            print('Med = ', Med)
+        listActions = [x for x in self.actions]
+        n = len(listActions)
+        relation = self.relation
+        
+        isStronglyAsymmetric = True
+        for i in range(n):
+            x = listActions[i]
+            for j in range(i+1,n):
+                y = listActions[j]
+                if relation[x][y] + relation[y][x] > Med:
+                    isStronglyAsymmetric = False
+                    if Debug:
+                        print('x,y,relation[x][y],relation[y][x]',\
+                              x, y, relation[x][y], relation[y][x])
+                    break
+            if not isStronglyAsymmetric:
+                break
+        return isStronglyAsymmetric
+
+    def isStronglyComplete(self, Debug=False):
+        """
+        checks the strongly completeness property of self.relation by checking
+        for r(x>=y) + r(y>=x) >= Med !
+
+        .. warning::
+        
+            The reflexive links are ignored !!
+        """
+        Med = self.valuationdomain['med']
+        if Debug:
+            print('Med = ', Med)
+        listActions = [x for x in self.actions]
+        n = len(listActions)
+        relation = self.relation
+        
+        isStronglyComplete = True
+        for i in range(n):
+            x = listActions[i]
+            for j in range(i+1,n):
+                y = listActions[j]
+                if relation[x][y] + relation[y][x] < Med:
+                    isStronglyComplete = False
+                    if Debug:
+                        print('x,y,relation[x][y],relation[y][x]',\
+                              x, y, relation[x][y], relation[y][x])
+                    break
+            if not isStronglyComplete:
+                break
+        return isStronglyComplete
+
     def isWeaklyComplete(self, Debug=False):
         """
         checks the weakly completeness property of self.relation by checking

@@ -1235,11 +1235,21 @@ All outranking digraphs, being of root type :py:class:`~digraphs.Digraph`, inher
 The strict outranking digraph
 `````````````````````````````
 
-We know from theory that bipolar-valued outranking digraphs are **weakly complete**, i.e. if :math:`r(x \geq y) < 0.0` then :math:`r(y \geq x) \geq 0.0`. A bipolar-valued outranking relation :math:`r(x \geq y)` verifies furthermore the **coduality** principle: the **converse** (the *inverse* ~) of the **dual** [14]_ (the *negation* - ) corresponds to its asymetric **strict outranking** part: :math:`\sim\big(-r(y \geq x)\big) \;=\; \sim\big(r(y \not \geq x)\big) \;=\; \sim\big(r(y < x)\big)  \;=\; r(x > y)`.
+Bipolar-valued outranking digraphs are **strongly complete**, i.e. *complete* from a *relational* as well as from an *epistemic* perspective:
+
+    :math:`r(x \succsim y) + r(y \succsim x) \geq 0.0`.
+
+They furthermore verify the **coduality** principle: the **converse** (the *inverse* ~) of the **dual** [14]_ (the *negation* - ) correspond to their asymetric **strict outranking** part:
+
+    :math:`\sim\big(-r(y \succsim x)\big) \;=\; \sim\big(r(y \not \succsim x)\big) \;=\; r(x \succnsim y)`.
+
+From both properties follows straightway that codual --*strict*-- outranking digraphs are **strongly asymmetric**:
+
+    :math:`r(x \succnsim y) + r(y \succnsim x) \leq 0.0` 
 
 See the advanced topic on :ref:`characterizing bipolar-valued outranking digraphs <Sufficiency-Tutorial-label>`, [BIS-2013]_, [ADT-L7]_ .
 
-We may visualize the **codual** (*strict*) outranking digraph with a graphviz drawing [1]_.
+We may visualize the **codual** outranking digraph *cdodg* with a graphviz drawing [1]_.
 
 .. code-block:: pycon
    :linenos:
@@ -1256,7 +1266,7 @@ We may visualize the **codual** (*strict*) outranking digraph with a graphviz dr
 
    The strict (codual) outranking digraph
 
-It becomes readily clear now from the picture above that both alternatives *a1*  and *a7* are *not outranked* by any other alternatives. Hence, *a1*  and *a7* appear as **weak Condorcet winner** and may be recommended as potential *best decision actions* in this illustrative preference modelling exercise. 
+It becomes readily clear now from the picture above that both alternatives *a1*  and *a7* are *not outranked* by any other alternatives. Hence, *a1*  and *a7* appear as :ref:`weak Condorcet winners <LinearVoting-Tutorial-label>` and may be recommended as potential *best decision actions* in a selection decision problem. 
 
 Many more tools for exploiting bipolar-valued outranking digraphs are available in the *Digraph3* resources (see the technical documentation of the :ref:`outrankingDigraphs module <outrankingDiGraphs-label>` and the :ref:`perfTabs module <perfTabs-label>`).
 
@@ -1271,7 +1281,7 @@ Considering thus each performance criterion as a subset of unanimous voters and 
 
 If the concordance argument was always well received, the discordance argument however, very confused in the beginning ([ROY-1966]_), could only be handled in an epistemically correct and logically sound way by using a bipolar-valued epistemic logic ([BIS-2013]_). The outranking situation had consequently to receive an explicit *negative* definition: An alternative *x* is said to *do not outrank* an alternative *y* when – a *significant majority* of criteria confirm that alternative *x* has to be considered as *not at least as well evaluated as* alternative *y*; and – no discordant criterion opens to significant doubt the validity of the previous confirmation by revealing a considerable *better* performance of alternative *x* compared to *y*.
 
-Furthermore, the initial conjunctive aggregation of the concordance and discordance arguments had to be replaced by a disjunctive epistemic fusion operation, polarising in a logically sound and epistemically correct way the concordance with the discordance argument. This way, bipolar-valued outranking  digraphs gained two very useful properties from a measure theoretical perspective. They are *weakly complete*; incomparability situations are no longer attested by the absence of positive outranking relations, but instead by epistemic indeterminateness. And, they verify the *coduality principle*: the negation of the epistemic '*at least as well evaluated as*' situation corresponds formally to the strict converse epistemic '*less well evaluated than*' situation.
+Furthermore, the initial conjunctive aggregation of the concordance and discordance arguments had to be replaced by a disjunctive epistemic fusion operation, polarising in a logically sound and epistemically correct way the concordance with the discordance argument. This way, bipolar-valued outranking  digraphs gained two very useful properties from a measure theoretical perspective. They are *strongly complete*; incomparability situations are no longer attested by the absence of positive outranking relations, but instead by epistemic indeterminateness. And, they verify the *coduality principle*: the negation of the epistemic '*at least as well evaluated as*' situation corresponds formally to the strict converse epistemic '*less well evaluated than*' situation.
 
 Back to :ref:`Content Table <Tutorial-label>`
 
@@ -1489,7 +1499,7 @@ In :numref:`officeChoiceOutranking` we may notice that Alternative *D* is **posi
    >>> g.computeWeakCondorcetWinners()
     ['A', 'C', 'D']
 
-For two locations *x* and *y*, the situation "*x* strictly outranks *y*", denoted :math:`(x \succnsim y)`, is given when *x* outranks *y* and *y* does not outrank *y*. From theory, we know that outranking digraphs are *weakly complete*, i.e. for all *x* and *y* in *X*, :math:`r(x \succsim y) + r(y \succsim x) \geq 0.0`. And they verify the *coduality principle*: :math:`r(x \not\succsim y) = r(y \succnsim x)` (see :ref:`On characterizing bipolar-valued outranking digraphs <Sufficiency-Tutorial-label>` and [BIS-2013]_).
+For two locations *x* and *y*, the situation "*x* strictly outranks *y*", denoted :math:`(x \succnsim y)`, is given when *x* outranks *y* and *y* does not outrank *y*. From theory, we know that outranking digraphs are *strongly complete*, i.e. for all *x* and *y* in *X*, :math:`r(x \succsim y) + r(y \succsim x) \geq 0.0`. And they verify the *coduality principle*: :math:`r(x \not\succsim y) = r(y \succnsim x)` (see :ref:`On characterizing bipolar-valued outranking digraphs <Sufficiency-Tutorial-label>` and [BIS-2013]_).
 
 We may hence compute a strict outranking digraph *gcd* with the *codual transform*, i.e. the *converse of the negation* (see Line 1 below) of digraph *g* (see tutorial on :ref:`Working with the outrankingDigraphs module <OutrankingDigraphs-Tutorial-label>`).
 

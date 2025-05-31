@@ -4535,13 +4535,13 @@ Necessary properties of the outranking digraph
 
 Bipolar-valued outranking digraphs verify two necessary properties [BIS-2013p]_:
 
-    1) They are weakly complete. For all pairs (*x*, *y*) of decision actions:
+    1) They are strongly complete. For all pairs (*x*, *y*) of decision actions:
 
-       :math:`\max \big(r(x \succsim y),r(y \succsim x)\big)\, \geqslant \, 0.0` and,
+       :math:`\big(r(x \succsim y) + r(y \succsim x)\big)\, \geqslant \, 0.0` and,
 	     
     2) The construction of the outranking relation verifies the coduality principle. For all pairs (*x*, *y*) of decision actions, :math:`r(x \not\succsim y) \;=\; r(y \succnsim x)`.
 
-Now, the codual of weakly complete digraphs correspond to the class of asymmetric digraphs i.e. *partial tournaments*. If, on the one limit, all outranking relations are symmetric, the partial tournament will be empty. On the other hand, if the outranking relation models a linear ranking, the tournament will be complete and transitive.
+Now, the codual of complete digraphs correspond to the class of asymmetric digraphs i.e. *partial tournaments*. If, on the one limit, all outranking relations are symmetric, the partial tournament will be empty. On the other hand, if the outranking relation models a linear ranking, the tournament will be complete and transitive.
 
 Let us consider for instance such a partial tournament [6]_.
 
@@ -4671,7 +4671,7 @@ From the fact that the epistemic support of a strict outranking --'*better evalu
       r(x \succsim y)\, \geqslant\, -r(y \succsim x), \quad \forall x \neq y \in X.
       :label: charODG1
 	     
-Condition :eq:`charODG1` strengthens in fact the *weakly completeness* property. Indeed:
+Condition :eq:`charODG1` strengthens in fact a *weakly completeness* property. Indeed:
 
    .. math::
       \big(\, r(x \succsim y)\, <\, 0.0\, \big) \; \Rightarrow \; \big[\, r(y \succsim x)\, \geqslant\, -r(x \succsim y)\, >\, 0.0 \,\big].
@@ -4683,7 +4683,7 @@ And,
       \big(r(x \succsim y)\, =\, 0.0\big)\; \Rightarrow \; \big(r(y \succsim x)\, \geqslant\, 0.0\big).
       :label: indODG
 
-The bipolar valuation of a valid outranking digraph is hence necessarily characterised by the following condition, algebraically equivalent to Condition :eq:`charODG1`:
+The bipolar valuation of a valid outranking digraph is hence necessarily characterised by the following **strong completeness** condition, algebraically equivalent to Condition :eq:`charODG1`:
 
    .. math::
       r(x \succsim y)\,+\,r(y \succsim x) \; \geqslant \; 0.0, \;\; \forall x \neq y \in X.

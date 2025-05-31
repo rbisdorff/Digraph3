@@ -3407,6 +3407,74 @@
         <span class="k">return</span> <span class="n">isCyclic</span></div>
 
 
+<div class="viewcode-block" id="Digraph.isStronglyAsymmetric">
+<a class="viewcode-back" href="../techDoc.html#digraphs.Digraph.isStronglyAsymmetric">[docs]</a>
+    <span class="k">def</span> <span class="nf">isStronglyAsymmetric</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">Debug</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        checks the strong assymetric property of self.relation by checking</span>
+<span class="sd">        for r(x&gt;y) + r(y&gt;x) &lt;= Med !</span>
+
+<span class="sd">        .. warning::</span>
+<span class="sd">        </span>
+<span class="sd">            The reflexive links are ignored !!</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">Med</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">valuationdomain</span><span class="p">[</span><span class="s1">&#39;med&#39;</span><span class="p">]</span>
+        <span class="k">if</span> <span class="n">Debug</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Med = &#39;</span><span class="p">,</span> <span class="n">Med</span><span class="p">)</span>
+        <span class="n">listActions</span> <span class="o">=</span> <span class="p">[</span><span class="n">x</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">actions</span><span class="p">]</span>
+        <span class="n">n</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">listActions</span><span class="p">)</span>
+        <span class="n">relation</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">relation</span>
+        
+        <span class="n">isStronglyAsymmetric</span> <span class="o">=</span> <span class="kc">True</span>
+        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
+            <span class="n">x</span> <span class="o">=</span> <span class="n">listActions</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
+            <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">,</span><span class="n">n</span><span class="p">):</span>
+                <span class="n">y</span> <span class="o">=</span> <span class="n">listActions</span><span class="p">[</span><span class="n">j</span><span class="p">]</span>
+                <span class="k">if</span> <span class="n">relation</span><span class="p">[</span><span class="n">x</span><span class="p">][</span><span class="n">y</span><span class="p">]</span> <span class="o">+</span> <span class="n">relation</span><span class="p">[</span><span class="n">y</span><span class="p">][</span><span class="n">x</span><span class="p">]</span> <span class="o">&gt;</span> <span class="n">Med</span><span class="p">:</span>
+                    <span class="n">isStronglyAsymmetric</span> <span class="o">=</span> <span class="kc">False</span>
+                    <span class="k">if</span> <span class="n">Debug</span><span class="p">:</span>
+                        <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;x,y,relation[x][y],relation[y][x]&#39;</span><span class="p">,</span>\
+                              <span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">relation</span><span class="p">[</span><span class="n">x</span><span class="p">][</span><span class="n">y</span><span class="p">],</span> <span class="n">relation</span><span class="p">[</span><span class="n">y</span><span class="p">][</span><span class="n">x</span><span class="p">])</span>
+                    <span class="k">break</span>
+            <span class="k">if</span> <span class="ow">not</span> <span class="n">isStronglyAsymmetric</span><span class="p">:</span>
+                <span class="k">break</span>
+        <span class="k">return</span> <span class="n">isStronglyAsymmetric</span></div>
+
+
+<div class="viewcode-block" id="Digraph.isStronglyComplete">
+<a class="viewcode-back" href="../techDoc.html#digraphs.Digraph.isStronglyComplete">[docs]</a>
+    <span class="k">def</span> <span class="nf">isStronglyComplete</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">Debug</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        checks the strongly completeness property of self.relation by checking</span>
+<span class="sd">        for r(x&gt;=y) + r(y&gt;=x) &gt;= Med !</span>
+
+<span class="sd">        .. warning::</span>
+<span class="sd">        </span>
+<span class="sd">            The reflexive links are ignored !!</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">Med</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">valuationdomain</span><span class="p">[</span><span class="s1">&#39;med&#39;</span><span class="p">]</span>
+        <span class="k">if</span> <span class="n">Debug</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Med = &#39;</span><span class="p">,</span> <span class="n">Med</span><span class="p">)</span>
+        <span class="n">listActions</span> <span class="o">=</span> <span class="p">[</span><span class="n">x</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">actions</span><span class="p">]</span>
+        <span class="n">n</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">listActions</span><span class="p">)</span>
+        <span class="n">relation</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">relation</span>
+        
+        <span class="n">isStronglyComplete</span> <span class="o">=</span> <span class="kc">True</span>
+        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
+            <span class="n">x</span> <span class="o">=</span> <span class="n">listActions</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
+            <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">,</span><span class="n">n</span><span class="p">):</span>
+                <span class="n">y</span> <span class="o">=</span> <span class="n">listActions</span><span class="p">[</span><span class="n">j</span><span class="p">]</span>
+                <span class="k">if</span> <span class="n">relation</span><span class="p">[</span><span class="n">x</span><span class="p">][</span><span class="n">y</span><span class="p">]</span> <span class="o">+</span> <span class="n">relation</span><span class="p">[</span><span class="n">y</span><span class="p">][</span><span class="n">x</span><span class="p">]</span> <span class="o">&lt;</span> <span class="n">Med</span><span class="p">:</span>
+                    <span class="n">isStronglyComplete</span> <span class="o">=</span> <span class="kc">False</span>
+                    <span class="k">if</span> <span class="n">Debug</span><span class="p">:</span>
+                        <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;x,y,relation[x][y],relation[y][x]&#39;</span><span class="p">,</span>\
+                              <span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">relation</span><span class="p">[</span><span class="n">x</span><span class="p">][</span><span class="n">y</span><span class="p">],</span> <span class="n">relation</span><span class="p">[</span><span class="n">y</span><span class="p">][</span><span class="n">x</span><span class="p">])</span>
+                    <span class="k">break</span>
+            <span class="k">if</span> <span class="ow">not</span> <span class="n">isStronglyComplete</span><span class="p">:</span>
+                <span class="k">break</span>
+        <span class="k">return</span> <span class="n">isStronglyComplete</span></div>
+
+
 <div class="viewcode-block" id="Digraph.isWeaklyComplete">
 <a class="viewcode-back" href="../techDoc.html#digraphs.Digraph.isWeaklyComplete">[docs]</a>
     <span class="k">def</span> <span class="nf">isWeaklyComplete</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">Debug</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
@@ -16308,7 +16376,7 @@
 
   <div role="contentinfo">
     <p>&#169; Copyright 2012-2025, Raymond Bisdorff.
-      <span class="lastupdated">Last updated on May 27, 2025.
+      <span class="lastupdated">Last updated on May 31, 2025.
       </span></p>
   </div>
 
