@@ -8907,15 +8907,15 @@ class Digraph(object):
         self.showBestChoiceRecommendation(**kwargs)
 
     def showBachetFirstChoiceRecommendation(self,
-                                          Comments=True,
+                                          Comments=False,
                                           ChoiceVector=False,
                                           CoDual=True,
                                           Debug=False,
                                           #_OldCoca=False,
                                           #BrokenCocs=True,
-                                        randomized=100,
-                                         maxNbrOfRankings=5,
-                                         seed = None,
+                                          randomized=100,
+                                          maxNbrOfRankings=5,
+                                          seed = None,
                                           ):
         """
         Shows a first choice recommendation from the partial transitive Bachet ranking.
@@ -8999,10 +8999,10 @@ class Digraph(object):
         if Debug:
             print('first and last choices: ',pbr.goodChoices,pbr.badChoices)
         t1 = time()
-        if Comments:
-            print('First Bachet choice recommendation(s) (BCR)')
-            print(' (in decreasing order of determinateness)   ')
-            print('Credibility domain: [%.2f,%.2f]' % (g.valuationdomain['min'],\
+        #if Comments:
+        print('First Bachet choice recommendation(s) (BCR)')
+        print(' (in decreasing order of determinateness)   ')
+        print('Credibility domain: [%.2f,%.2f]' % (g.valuationdomain['min'],\
                                                                         g.valuationdomain['max']) )
         Med = g.valuationdomain['med']
         bestChoice = set()
@@ -9016,38 +9016,38 @@ class Digraph(object):
                     if gch[5] == bch[5]:
                         #if gch[0] == bch[0]:
                         if gch[3] == gch[4]:
-                            if Comments:
-                                print(' === >> ambiguous first choice(s)')
-                                g.showChoiceVector(gch,choiceType='good',
+                            #if Comments:
+                            print(' === >> ambiguous first choice(s)')
+                            g.showChoiceVector(gch,choiceType='good',
                                                       ChoiceVector=ChoiceVector)
-                                print(' === >> ambiguous last choice(s)')
-                                g.showChoiceVector(bch,choiceType='bad',
+                            print(' === >> ambiguous last choice(s)')
+                            g.showChoiceVector(bch,choiceType='bad',
                                                        ChoiceVector=ChoiceVector)
                             goodChoice = False
                             if bestChoice == set():
                                 bestChoice = gch[5]
                                 bestChoiceData = gch
                         elif gch[4] > gch[3]:
-                            if Comments:
-                                print(' === >> outranked (first) choice ')
+                            #if Comments:
+                            print(' === >> outranked (first) choice ')
                                 #g.showChoiceVector(gch,choiceType='good',
                                 #                      ChoiceVector=ChoiceVector)
-                                g.showChoiceVector(bch,choiceType='bad',
+                            g.showChoiceVector(bch,choiceType='bad',
                                                       ChoiceVector=ChoiceVector)
                             goodChoice = False
                         else:
                             goodChoice = True
                 if goodChoice:
-                    if Comments:
-                        print(' === >> potential first choice(s)')
-                        g.showChoiceVector(gch,choiceType='good',ChoiceVector=ChoiceVector)
+                    #if Comments:
+                    print(' === >> potential first choice(s)')
+                    g.showChoiceVector(gch,choiceType='good',ChoiceVector=ChoiceVector)
                     if bestChoice == set():
                         bestChoice = gch[5]
                         bestChoiceData = gch
             else:
-                if Comments:
-                    print(' === >> non robust first choice(s)')
-                    g.showChoiceVector(gch,choiceType='good',ChoiceVector=ChoiceVector)
+                #if Comments:
+                print(' === >> non robust first choice(s)')
+                g.showChoiceVector(gch,choiceType='good',ChoiceVector=ChoiceVector)
         for bch in pbr.badChoices:
             if bch[0] >= Med:
                 badChoice = True
@@ -9056,24 +9056,24 @@ class Digraph(object):
                     if bch[5] == gch[5]:
                         #if gch[0] == bch[0]:
                         if bch[3] == bch[4]:
-                            if Verbose:
-                                print(' === >> ambiguous (last) choice ')
-                                g.showChoiceVector(gch,choiceType='good',ChoiceVector=ChoiceVector)
-                                g.showChoiceVector(bch,choiceType='bad',ChoiceVector=ChoiceVector)
+                            #if Verbose:
+                            print(' === >> ambiguous (last) choice ')
+                            g.showChoiceVector(gch,choiceType='good',ChoiceVector=ChoiceVector)
+                            g.showChoiceVector(bch,choiceType='bad',ChoiceVector=ChoiceVector)
                             badChoice = False
                             nullChoice = False
                         elif bch[3] > bch[4]:
-                            if Verbose:
-                                print(' === >> outranking (last) choice ')
-                                g.showChoiceVector(gch,choiceType='good',ChoiceVector=ChoiceVector)
+                            #if Verbose:
+                            print(' === >> outranking (last) choice ')
+                            g.showChoiceVector(gch,choiceType='good',ChoiceVector=ChoiceVector)
                                 #g.showChoiceVector(bch,choiceType='bad',ChoiceVector=ChoiceVector)
                             badChoice = False
                         else:
                             badChoice = True
                 if badChoice:
-                    if Comments:
-                        print(' === >> potential last choice(s) ')
-                        g.showChoiceVector(bch,choiceType='bad',ChoiceVector=ChoiceVector)
+                    #if Comments:
+                    print(' === >> potential last choice(s) ')
+                    g.showChoiceVector(bch,choiceType='bad',ChoiceVector=ChoiceVector)
                     if worstChoice == set():
                         worstChoice = bch[5]
                         worstChoiceData = bch
@@ -9086,13 +9086,13 @@ class Digraph(object):
                 #         worstChoiceData = bch
 
             else:
-                if Comments:
-                    print('=== >> non robust last choice(s)')
-                    g.showChoiceVector(bch,choiceType='bad',ChoiceVector=ChoiceVector)
-        if Comments:
-            print()
-            print('Execution time: %.3f seconds' % (t1-t0))
-            print('*****************************')
+                #if Comments:
+                print('=== >> non robust last choice(s)')
+                g.showChoiceVector(bch,choiceType='bad',ChoiceVector=ChoiceVector)
+        #if Comments:
+        print()
+        print('Execution time: %.3f seconds' % (t1-t0))
+        print('*****************************')
         self.bestChoice = bestChoice
         self.bestChoiceData = bestChoiceData
         self.worstChoice = worstChoice

@@ -3464,9 +3464,82 @@ The :py:class:`~transitiveDigraphs.PartialBachetRanking` class provides this way
    >>> cg.isComparabilityGraph()
     True
 
-*Partial Bachet* rankings make hence apparent the actual **transitive part** of outranking relations. This interesting finding opens the way to a new design of first- or last-choice recommender algorithms avoiding the necessity to arbitrarily break up potential chordless outranking circuits. The first and last levels of a topological sort of partial rankings --their **initial and terminal kernels**-- give indeed convincing candidates for a *first-choice*, respectively a *last-choice* recommendation (see :numref:`partialBachet0` Lines 7-10). An opportunity yet to be explored.
+*Partial Bachet* rankings make hence apparent the actual **transitive part** of outranking relations. This interesting finding opens the way to a new design of first- or last-choice recommender algorithms avoiding the necessity to arbitrarily break up potential chordless outranking circuits. The first and last levels of a topological sort of partial rankings --their **initial and terminal kernels**-- give indeed convincing candidates for a *first-choice*, respectively a *last-choice* recommendation (see :numref:`partialBachet0` Lines 7-10).
 
-Computing *kernels* in digraphs is the subject of the next Section.
+To explore this opportunity, a :py:meth:`digraphs.showBachetFirstChoiceRecommendation` mehod has been added (see :numref:`BachetBCR0` lines 3-4). 
+
+.. code-block:: pycon
+   :caption: *Bachet* first and last choice recommendations
+   :name: BachetBCR0
+   :emphasize-lines: 3-4,8,14,16
+
+   >>> from outrankingDigraphs import RandomBipolarOutrankingDigraph
+   >>> g = RandomBipolarOutrankingDigraph(numberOfActions=9,seed=1)
+   >>> g.showBachetFirstChoiceRecommendation(randomized=100,
+   ...                             maxNbrOfRankings=5,seed=1)
+    First Bachet choice recommendation(s) (BCR)
+    Credibility domain: [-1.00,1.00]
+    === >> potential first choice(s)
+     * choice              : ['a2']
+      independence        : 1.00
+      dominance           : 1.00
+      absorbency          : -1.00
+      covering (%)        : 75.00
+      determinateness (%) : 100.00
+     - characteristic vector = { 'a2': 1.00 }
+    === >> potential last choice(s) 
+     * choice              : ['a1', 'a7']
+      independence        : 0.00
+      dominance           : -1.00
+      absorbency          : 1.00
+      covered (%)         : 50.00
+      determinateness (%) : 50.00
+     - characteristic vector = { }
+     Execution time: 0.217 seconds
+
+Alternative *a2* appears clearly as best choice candidate, wheras both alternatives *a1* and *a7* appear last-ranked (see Lines 8,14 and 16 above).
+
+In order to provide information about the the underlying :py:class:`~transitiveDigraphs.PartialBachetRanking` digraph, the corresponding instance is stored in the *g.pbr* attribute. We may thus consult the five Bachet rankings used by the :py:class:`~transitiveDigraphs.RankingsFusionDigraph` constructor and provide the best correlated one for ranking the performance heatmap of the given performance tableau (see Lines 2 and 21 below).
+
+.. code-block:: pycon
+   :emphasize-lines: 2,8,11-12,14,16-18,21
+
+   >>> print(g.pbr.bachetRankings)
+    [(0.7585, ['a2', 'a5', 'a9', 'a6', 'a8', 'a4', 'a3', 'a7', 'a1']),
+     (0.7442, ['a2', 'a5', 'a9', 'a6', 'a4', 'a8', 'a3', 'a7', 'a1']),
+     (0.6762, ['a2', 'a5', 'a8', 'a9', 'a6', 'a4', 'a3', 'a7', 'a1']),
+     (0.6637, ['a2', 'a5', 'a9', 'a6', 'a4', 'a8', 'a1', 'a3', 'a7']),
+     (0.6619, ['a2', 'a5', 'a8', 'a9', 'a4', 'a6', 'a3', 'a7', 'a1'])]
+   >>> g.pbr.showTransitiveDigraph()
+    Ranking by Choosing and Rejecting
+     1st ranked ['a2']
+       2nd ranked ['a5']
+         3rd ranked ['a8', 'a9']
+         3rd last ranked ['a4', 'a6', 'a8'])
+       2nd last ranked ['a3'])
+     1st last ranked ['a1', 'a7'])
+   >>> g.showCorrelation(g.computeOrdinalCorrelation(g.pbr))
+    Correlation indexes:
+     Crisp ordinal correlation  : +0.806
+     Epistemic determination    :  0.336
+     Bipolar-valued equivalence : +0.271
+   >>> g.showHTMLPerformanceHeatmap(Correlations=True,
+   ...                    actionsList=g.pbr.bachetRankings[0][1])
+
+
+.. Figure:: bachetBCR.png
+   :name: bachetBCR1
+   :alt: Bachet first choice recommendation
+   :width: 450 px
+   :align: center
+
+   Bachet first choice recommendation
+
+In :numref:`bachetBCR1` we see confirmed that alternative *a2* shows indeed the very best performance profile and both alternatives *a1* and *a7* the weakest performance profiles. Notice also the contrasted performance profile of alternative *a8* resulting in an ambiguous 3rd first- and 3rd last-ranked position (see Lines 11-12 above). 
+
+As the *Bachet* first choice recommendation is based on a partial transitive digraph actually highly correlated with the given outranking digraph *g* (+0.806 see Lines 17-19 above), a unique initial and a unique terminal prekernel always exist (see Lines 8 and 14). Both these properties confer the *Bachet first choice recommendation* an advantage over the first choice recommendation based on intial and terminal prekernels directly extracted from the given outranking digraph where we must arbitrarely break, the case gven, all chordless outranking circuits.
+
+Computing initial and termnal *kernels* in digraphs is the subject of the next Section.
 
 .. note::
    
