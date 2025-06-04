@@ -291,6 +291,7 @@
 <li class="toctree-l4"><a class="reference internal" href="#digraphs.Digraph.showAll"><code class="docutils literal notranslate"><span class="pre">Digraph.showAll()</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="#digraphs.Digraph.showAttributes"><code class="docutils literal notranslate"><span class="pre">Digraph.showAttributes()</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="#digraphs.Digraph.showAutomorphismGenerators"><code class="docutils literal notranslate"><span class="pre">Digraph.showAutomorphismGenerators()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#digraphs.Digraph.showBachetFirstChoiceRecommendation"><code class="docutils literal notranslate"><span class="pre">Digraph.showBachetFirstChoiceRecommendation()</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="#digraphs.Digraph.showBadChoices"><code class="docutils literal notranslate"><span class="pre">Digraph.showBadChoices()</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="#digraphs.Digraph.showBestChoiceRecommendation"><code class="docutils literal notranslate"><span class="pre">Digraph.showBestChoiceRecommendation()</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="#digraphs.Digraph.showChoiceVector"><code class="docutils literal notranslate"><span class="pre">Digraph.showChoiceVector()</span></code></a></li>
@@ -3491,6 +3492,41 @@ Renders the sharpest of two characteristic vectors v and w.</p>
 <dt class="sig sig-object py" id="digraphs.Digraph.showAutomorphismGenerators">
 <span class="sig-name descname"><span class="pre">showAutomorphismGenerators</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/digraphs.html#Digraph.showAutomorphismGenerators"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#digraphs.Digraph.showAutomorphismGenerators" title="Link to this definition"></a></dt>
 <dd><p>Renders the generators of the automorphism group.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="digraphs.Digraph.showBachetFirstChoiceRecommendation">
+<span class="sig-name descname"><span class="pre">showBachetFirstChoiceRecommendation</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">Comments</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ChoiceVector</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">CoDual</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">Debug</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">randomized</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">100</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">maxNbrOfRankings</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">5</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">seed</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/digraphs.html#Digraph.showBachetFirstChoiceRecommendation"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#digraphs.Digraph.showBachetFirstChoiceRecommendation" title="Link to this definition"></a></dt>
+<dd><p>Shows a first choice recommendation from the partial transitive Bachet ranking.</p>
+<p>Usage example:</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">outrankingDigraphs</span> <span class="kn">import</span> <span class="o">*</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">t</span> <span class="o">=</span> <span class="n">Random3ObjectivesPerformanceTableau</span><span class="p">(</span><span class="n">seed</span><span class="o">=</span><span class="mi">5</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">g</span> <span class="o">=</span> <span class="n">BipolarOutrankingDigraph</span><span class="p">(</span><span class="n">t</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">g</span><span class="o">.</span><span class="n">showNewFirstChoiceRecommendation</span><span class="p">()</span>
+<span class="go">***********************</span>
+<span class="go">First Choice Recommendation (BCR)</span>
+<span class="go">(in decreasing order of determinateness)   </span>
+<span class="go">Credibility domain:  [-100.0, 100.0]</span>
+<span class="go">=== &gt;&gt; potential first choices</span>
+<span class="go">* choice              : [&#39;a04&#39;, &#39;a14&#39;, &#39;a19&#39;, &#39;a20&#39;]</span>
+<span class="go">   independence        : 1.19</span>
+<span class="go">   dominance           : 4.76</span>
+<span class="go">   absorbency          : -59.52</span>
+<span class="go">   covering (%)        : 75.00</span>
+<span class="go">   determinateness (%) : 57.86</span>
+<span class="go">   - most credible action(s) = { &#39;a14&#39;: 23.81, &#39;a19&#39;: 11.90, &#39;a04&#39;: 2.38, &#39;a20&#39;: 1.19, }  </span>
+<span class="go">=== &gt;&gt; potential last choices </span>
+<span class="go">* choice              : [&#39;a03&#39;, &#39;a12&#39;, &#39;a17&#39;]</span>
+<span class="go">  independence        : 4.76</span>
+<span class="go">  dominance           : -76.19</span>
+<span class="go">  absorbency          : 4.76</span>
+<span class="go">  covering (%)        : 0.00</span>
+<span class="go">  determinateness (%) : 65.39</span>
+<span class="go">  - most credible action(s) = { &#39;a03&#39;: 38.10, &#39;a12&#39;: 13.10, &#39;a17&#39;: 4.76, }</span>
+<span class="go">Execution time: 0.024 seconds</span>
+<span class="go">*****************************</span>
+</pre></div>
+</div>
 </dd></dl>
 
 <dl class="py method">
@@ -14922,7 +14958,7 @@ Components are stored in an ordered dictionary.</p>
 
   <div role="contentinfo">
     <p>&#169; Copyright 2012-2025, Raymond Bisdorff.
-      <span class="lastupdated">Last updated on May 31, 2025.
+      <span class="lastupdated">Last updated on Jun 04, 2025.
       </span></p>
   </div>
 
