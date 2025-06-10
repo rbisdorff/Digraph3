@@ -3539,7 +3539,7 @@ In :numref:`bachetBCR1` we see confirmed that alternative *a2* shows indeed the 
 
 As the *Bachet* first choice recommendation is based on a partial transitive digraph actually highly correlated with the given outranking digraph *g* (+0.806 see Lines 17-19 above), a unique initial and a unique terminal prekernel always exist (see Lines 8 and 14). Both these properties confer the *Bachet first choice recommendation* an advantage over the first choice recommendation based on intial and terminal prekernels directly extracted from the given outranking digraph where we must arbitrarely break, the case gven, all chordless outranking circuits.
 
-Computing initial and termnal *kernels* in digraphs is the subject of the next Section.
+Computing initial and terminal *prekernels* in digraphs is the subject of the next Section.
 
 .. note::
    
