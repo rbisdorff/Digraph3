@@ -8906,17 +8906,14 @@ class Digraph(object):
         """
         self.showBestChoiceRecommendation(**kwargs)
 
-    def showBachetChoiceRecommendation(self,
-                                          Comments=False,
-                                          ChoiceVector=False,
-                                          CoDual=True,
-                                          Debug=False,
-                                          #_OldCoca=False,
-                                          #BrokenCocs=True,
-                                          randomized=100,
-                                          maxNbrOfRankings=5,
-                                          seed = None,
-                                          ):
+    def showBachetChoiceRecommendation(self,randomized=100,
+                                       maxNbrOfRankings=5,
+                                       seed = None,
+                                       Comments=False,
+                                       ChoiceVector=False,
+                                       CoDual=True,
+                                       Debug=False,
+                                       ):
         """
         Shows a choice recommendation from the partial transitive Bachet ranking.
   
@@ -8925,27 +8922,10 @@ class Digraph(object):
         >>> from outrankingDigraphs import *
         >>> t = Random3ObjectivesPerformanceTableau(seed=5)
         >>> g = BipolarOutrankingDigraph(t)
-        >>> g.showBachetChoiceRecommendation()
+        >>> g.showBachetChoiceRecommendation(randomized=100,
+        ...                                  maxNbrOfRankings=5,seed=1)
         ***********************
         Bachet Choice Recommendation (BCR)
-        (in decreasing order of determinateness)   
-        Credibility domain:  [-100.0, 100.0]
-        === >> potential first choices
-        * choice              : ['a04', 'a14', 'a19', 'a20']
-           independence        : 1.19
-           dominance           : 4.76
-           absorbency          : -59.52
-           covering (%)        : 75.00
-           determinateness (%) : 57.86
-           - most credible action(s) = { 'a14': 23.81, 'a19': 11.90, 'a04': 2.38, 'a20': 1.19, }  
-        === >> potential last choices 
-        * choice              : ['a03', 'a12', 'a17']
-          independence        : 4.76
-          dominance           : -76.19
-          absorbency          : 4.76
-          covering (%)        : 0.00
-          determinateness (%) : 65.39
-          - most credible action(s) = { 'a03': 38.10, 'a12': 13.10, 'a17': 4.76, }
         Execution time: 0.024 seconds
         *****************************
 
@@ -8953,9 +8933,6 @@ class Digraph(object):
         from copy import deepcopy
         from time import time
         from transitiveDigraphs import PartialBachetRanking
-        if Comments:
-            print('****** new Bachet choice recommendaton *****************')
-        #print('RuBis BCR')
         if Debug:
             print('All comments !!!')
             Comments = True
@@ -8969,134 +8946,15 @@ class Digraph(object):
         g.recodeValuation()
         pbr = PartialBachetRanking(g,randomized=randomized,
                                         maxNbrOfRankings=maxNbrOfRankings,
-                                        seed=seed)
+                                        seed=seed,
+                                   Comments=Comments,Debug=Debug)
         self.pbr = pbr
-##        n1 = _selfwcoc.order
-##        nc = n1 - n0
-##        
-##        #self.relation_orig = deepcopy(g.relation)
-##        if b1 > 0 or nc > 0:
-##            #self.actions_orig = deepcopy(g.actions)
-##            g.actions = deepcopy(_selfwcoc.actions)
-##            g.order = len(g.actions)
-##            g.relation = deepcopy(_selfwcoc.relation)
-##        if Debug:
-##            print('List of pseudo-independent choices')
-##            print(g.actions)
-##        g.gamma = g.gammaSets()
-##        g.notGamma = g.notGammaSets()
+        print('*---- Bachet Choice Recommendations ----*')
         pbr.showTransitiveDigraph()
-        
-        #self.showPreKernels()
-        actions = set([x for x in pbr.actions])
-        pbr.computePreKernels()
-        if Comments:
-            pbr.showPreKernels()
-        if Debug:
-            print(pbr.dompreKernels,pbr.abspreKernels)
-        pbr.computeGoodChoices(Comments=Debug)
-        pbr.computeBadChoices(Comments=Debug)
-        if Debug:
-            print('first and last choices: ',pbr.goodChoices,pbr.badChoices)
-        t1 = time()
-        #if Comments:
-        print('Bachet choice recommendation(s) (BCR)')
-        print(' (in decreasing order of determinateness)   ')
-        print('Credibility domain: [%.2f,%.2f]' % (g.valuationdomain['min'],\
-                                                                        g.valuationdomain['max']) )
-        Med = g.valuationdomain['med']
-        bestChoice = set()
-        bestChoiceData = None
-        worstChoice = set()
-        worstChoiceData = None
-        for gch in pbr.goodChoices:
-            if gch[0] >= Med:
-                goodChoice = True
-                for bch in pbr.badChoices:
-                    if gch[5] == bch[5]:
-                        #if gch[0] == bch[0]:
-                        if gch[3] == gch[4]:
-                            #if Comments:
-                            print(' === >> ambiguous first choice(s)')
-                            g.showChoiceVector(gch,choiceType='good',
-                                                      ChoiceVector=ChoiceVector)
-                            print(' === >> ambiguous last choice(s)')
-                            g.showChoiceVector(bch,choiceType='bad',
-                                                       ChoiceVector=ChoiceVector)
-                            goodChoice = False
-                            if bestChoice == set():
-                                bestChoice = gch[5]
-                                bestChoiceData = gch
-                        elif gch[4] > gch[3]:
-                            #if Comments:
-                            print(' === >> outranked (first) choice ')
-                                #g.showChoiceVector(gch,choiceType='good',
-                                #                      ChoiceVector=ChoiceVector)
-                            g.showChoiceVector(bch,choiceType='bad',
-                                                      ChoiceVector=ChoiceVector)
-                            goodChoice = False
-                        else:
-                            goodChoice = True
-                if goodChoice:
-                    #if Comments:
-                    print(' === >> potential first choice(s)')
-                    g.showChoiceVector(gch,choiceType='good',ChoiceVector=ChoiceVector)
-                    if bestChoice == set():
-                        bestChoice = gch[5]
-                        bestChoiceData = gch
-            else:
-                #if Comments:
-                print(' === >> non robust first choice(s)')
-                g.showChoiceVector(gch,choiceType='good',ChoiceVector=ChoiceVector)
-        for bch in pbr.badChoices:
-            if bch[0] >= Med:
-                badChoice = True
-                nullChoice = False
-                for gch in pbr.goodChoices:
-                    if bch[5] == gch[5]:
-                        #if gch[0] == bch[0]:
-                        if bch[3] == bch[4]:
-                            #if Verbose:
-                            print(' === >> ambiguous (last) choice ')
-                            g.showChoiceVector(gch,choiceType='good',ChoiceVector=ChoiceVector)
-                            g.showChoiceVector(bch,choiceType='bad',ChoiceVector=ChoiceVector)
-                            badChoice = False
-                            nullChoice = False
-                        elif bch[3] > bch[4]:
-                            #if Verbose:
-                            print(' === >> outranking (last) choice ')
-                            g.showChoiceVector(gch,choiceType='good',ChoiceVector=ChoiceVector)
-                                #g.showChoiceVector(bch,choiceType='bad',ChoiceVector=ChoiceVector)
-                            badChoice = False
-                        else:
-                            badChoice = True
-                if badChoice:
-                    #if Comments:
-                    print(' === >> potential last choice(s) ')
-                    g.showChoiceVector(bch,choiceType='bad',ChoiceVector=ChoiceVector)
-                    if worstChoice == set():
-                        worstChoice = bch[5]
-                        worstChoiceData = bch
-                # elif nullChoice:
-                #     if Comments:
-                #         print(' === >> ambiguous choice(s)')
-                #         g.showChoiceVector(bch,choiceType='bad',ChoiceVector=ChoiceVector)
-                #     if worstChoice == set():
-                #         worstChoice = bch[5]
-                #         worstChoiceData = bch
-
-            else:
-                #if Comments:
-                print('=== >> non robust last choice(s)')
-                g.showChoiceVector(bch,choiceType='bad',ChoiceVector=ChoiceVector)
-        #if Comments:
+                  
         print()
-        print('Execution time: %.3f seconds' % (t1-t0))
+        print('Execution time: %.3f seconds' % (time() - t0))
         print('*****************************')
-        self.bestChoice = bestChoice
-        self.bestChoiceData = bestChoiceData
-        self.worstChoice = worstChoice
-        self.worstChoiceData = worstChoiceData
 
         
 #############
@@ -15534,87 +15392,9 @@ if __name__ == "__main__":
     #print(getcontext().prec)
     g = BipolarOutrankingDigraph(t,Threading=False,startMethod='spawn')
     print(g)
-    g.showBachetChoiceRecommendation(Comments=False,Debug=False,seed=2)
+    g.showBachetChoiceRecommendation(Comments=True,seed=2)
     print('Old BCR')
     g.showFirstChoiceRecommendation(Comments=True)
-    #print(g.computeWeakTransitivityDegree(Comments=True))
-    #t1=time();g.recodeValuation(-2.0,2.0);print(time()-t1)
-    #t0 = time()
-    #print(g.computeOrdinalCorrelationMP(g,Threading=True,startMethod=None,nbrOfCPUs=None))
-    #print(time()-t0)
-    #g = RandomBipolarOutrankingDigraph(10)
-    #g.showRelationTable()
-    #g.showRelationMap()
-    #g.showHTMLRelationHeatmap(colorLevels=3,ndigits=1)
-    #g.showHTMLRelationHeatmap(colorLevels=5,ndigits=2)
-    #g.showHTMLRelationHeatmap(colorLevels=7,ndigits=3)
-    #g.showHTMLRelationHeatmap(colorLevels=9,ndigits=4)
-    #ranking = g.computeNetFlowsRanking()
-    #vr = g.computeValuedRankingRelation(ranking)
-    #g.relation = vr
-    #g.showHTMLRelationTable(ndigits=3)
-    #g.showHTMLRelationHeatmap(actionsList=ranking,rankingRule=None,
-    #                          colorLevels=7,ndigits=3)                   
-                          
-    # partA = ['a1','a2']
-    # partB = ['a3','a4','a5']
-    # bpg = BipartitePartialDigraph(g,partA,partB)
-    # bpg.showRelationTable()
-    # bpg1 = BipartitePartialDigraph(g,partA,partB,Partial=False)
-    # bpg1.showRelationTable()
-    
-##    gcd = ~(-g)
-##    #g = RandomValuationDigraph()
-##    Digraph.showRelationTable(g,rankingRule='Copeland')
-##    g.recodeValuation(ndigits=4)
-##    print(g.relation)
-##    print(g.isOutrankingDigraph(Debug=False))
-##    gcd.showRelationTable(rankingRule='NetFlows')
-##    gcd.recodeValuation(ndigits=None)
-##    print(gcd.relation)
-##    print(gcd.isStrictOutrankingDigraph(Debug=False))
-##    
-    # g.recodeValuation(0,1)
-    # g.showRelationTable()
-    # print(g.isOutrankingDigraph(Debug=False))
-    # print((-g).isStrictOutrankingDigraph(Debug=False))
-    
-    #g.showChordlessCircuits(Recompute=True)
-    #g.isAsymmetricIndeterminate(Debug=True)
-    #gc = BrokenChordlessCircuitsDigraph(g)
-
-    #gcoc = BrokenCocsDigraph(g)
-    
-    #g.showObjectives()
-    #g.showHTMLPerformanceTableau(Transposed=True)
-    #g.recodeValuation(0.0,1.0)
-    #cc = CriteriaCorrelation
-    #Digraph(g,ValuedCorrelation=True,WithMedian=True)
-    #g = ConfidentBipolarOutrankingDigraph(t)
-##    cc = g.computeCriteriaCorrelationDigraph(ValuedCorrelation=True,WithMedian=True)
-    #cc.exportPrincipalImage('test',pictureFormat='pdf',fontsize='0.75',Comments=True)
-    #Digraph.exportPrincipalImage(cc,'testa',pictureFormat='pdf',fontsize='0.75',Comments=True)
-    #g.recodeValuation(0,2)
-    #g.exportPrincipalImage('testd',Reduced=True,pictureFormat='pdf',fontsize='0.75',Comments=True)
-    #g.exportPrincipalImage('testc',Colwise=True,pictureFormat='pdf',fontsize='0.75',Comments=True)
-    
-    #g.exportGraphViz(pictureFormat='png')
-##    print(g)
-##    g.showAttributes()
-##    #g.computeShortestPathLengths(Comments=True)
-##    g.computeDigraphCentres(Comments=True)
-##    g.computeDigraphCentres(WeakDistances=True,Comments=True)
-    # g.showBestChoiceRecommendation()
-    # g.showFirstChoiceRecommendation()
-    #g.showRelationTable()
-    #g.computeTransitivityDegree(Comments=True)
-    # g.computeIncomparabilityDegree(Comments=True)
-    # g.computeIncomparabilityDegree(InPercents=True,Comments=True)
-    # print(g.computeCopelandOrder())
-    # print(g.computePrincipalOrder(Comments=True))
-    # print(g.computePrincipalRanking(Comments=True))
-    # print(g.computePrincipalOrder(Colwise=True,Comments=True))
-    # print(g.computePrincipalRanking(Colwise=True,Comments=True))
 
     print('*------------------*')
     print('If you see this line all tests were passed successfully :-)')

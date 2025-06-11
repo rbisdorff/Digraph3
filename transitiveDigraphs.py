@@ -93,7 +93,7 @@ class TransitiveDigraph(Digraph):
 ##                    rankingByChoosing = self.rankingByLastChoosing['result']
         else:
             rankingByChoosing = rankingByChoosing['result']
-        print('Ranking by Choosing and Rejecting')
+        print('Ranking by recursively first and last choosing')
         space = ''
         n = len(rankingByChoosing)
         for i in range(n):
@@ -142,7 +142,7 @@ class TransitiveDigraph(Digraph):
             if WithCoverCredibility:
                 print(' %s%s%s last ranked %s (%.2f)' % (space,n-i,nstr,ch,rankingByChoosing[n-i-1][1][0]))
             else:
-                print(' %s%s%s last ranked %s)' % (space,n-i,nstr,ch) )
+                print(' %s%s%s last ranked %s' % (space,n-i,nstr,ch) )
                 
 
     def showRankingByChoosing(self,actionsList=None,rankingByChoosing=None,WithCoverCredibility=False):

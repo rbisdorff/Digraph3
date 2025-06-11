@@ -3406,58 +3406,41 @@ heat map above (see <a class="reference internal" href="#graffiti07-2"><span cla
 </pre></div>
 </div>
 <p><em>Partial Bachet</em> rankings make hence apparent the actual <strong>transitive part</strong> of outranking relations. This interesting finding opens the way to a new design of first- or last-choice recommender algorithms avoiding the necessity to arbitrarily break up potential chordless outranking circuits. The first and last levels of a topological sort of partial rankings –their <strong>initial and terminal kernels</strong>– give indeed convincing candidates for a <em>first-choice</em>, respectively a <em>last-choice</em> recommendation (see <a class="reference internal" href="#partialbachet0"><span class="std std-numref">Listing 3.50</span></a> Lines 7-10).</p>
-<p>To explore this opportunity, a <code class="xref py py-meth docutils literal notranslate"><span class="pre">digraphs.showBachetChoiceRecommendation()</span></code> mehod has been added (see <a class="reference internal" href="#bachetbcr0"><span class="std std-numref">Listing 3.51</span></a> lines 3-4).</p>
+<p>To explore this opportunity, a <code class="xref py py-meth docutils literal notranslate"><span class="pre">digraphs.showBachetChoiceRecommendation()</span></code> method has been added (see <a class="reference internal" href="#bachetbcr0"><span class="std std-numref">Listing 3.51</span></a> lines 3-4).</p>
 <div class="literal-block-wrapper docutils container" id="bachetbcr0">
 <div class="code-block-caption"><span class="caption-number">Listing 3.51 </span><span class="caption-text"><em>Bachet</em> first and last choice recommendations</span><a class="headerlink" href="#bachetbcr0" title="Link to this code"></a></div>
 <div class="highlight-pycon notranslate"><div class="highlight"><pre><span></span><span class="linenos"> 1</span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">outrankingDigraphs</span> <span class="kn">import</span> <span class="n">RandomBipolarOutrankingDigraph</span>
 <span class="linenos"> 2</span><span class="gp">&gt;&gt;&gt; </span><span class="n">g</span> <span class="o">=</span> <span class="n">RandomBipolarOutrankingDigraph</span><span class="p">(</span><span class="n">numberOfActions</span><span class="o">=</span><span class="mi">9</span><span class="p">,</span><span class="n">seed</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
 <span class="hll"><span class="linenos"> 3</span><span class="gp">&gt;&gt;&gt; </span><span class="n">g</span><span class="o">.</span><span class="n">showBachetChoiceRecommendation</span><span class="p">(</span><span class="n">randomized</span><span class="o">=</span><span class="mi">100</span><span class="p">,</span>
 </span><span class="hll"><span class="linenos"> 4</span><span class="gp">... </span>                            <span class="n">maxNbrOfRankings</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span><span class="n">seed</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
-</span><span class="linenos"> 5</span><span class="go"> Bachet choice recommendation(s) (BCR)</span>
-<span class="linenos"> 6</span><span class="go"> Credibility domain: [-1.00,1.00]</span>
-<span class="linenos"> 7</span><span class="go"> === &gt;&gt; potential first choice(s)</span>
-<span class="hll"><span class="linenos"> 8</span><span class="go">  * choice              : [&#39;a2&#39;]</span>
-</span><span class="linenos"> 9</span><span class="go">   independence        : 1.00</span>
-<span class="linenos">10</span><span class="go">   dominance           : 1.00</span>
-<span class="linenos">11</span><span class="go">   absorbency          : -1.00</span>
-<span class="linenos">12</span><span class="go">   covering (%)        : 75.00</span>
-<span class="linenos">13</span><span class="go">   determinateness (%) : 100.00</span>
-<span class="hll"><span class="linenos">14</span><span class="go">  - characteristic vector = { &#39;a2&#39;: 1.00 }</span>
-</span><span class="linenos">15</span><span class="go"> === &gt;&gt; potential last choice(s)</span>
-<span class="hll"><span class="linenos">16</span><span class="go">  * choice              : [&#39;a1&#39;, &#39;a7&#39;]</span>
-</span><span class="linenos">17</span><span class="go">   independence        : 0.00</span>
-<span class="linenos">18</span><span class="go">   dominance           : -1.00</span>
-<span class="linenos">19</span><span class="go">   absorbency          : 1.00</span>
-<span class="linenos">20</span><span class="go">   covered (%)         : 50.00</span>
-<span class="linenos">21</span><span class="go">   determinateness (%) : 50.00</span>
-<span class="linenos">22</span><span class="go">  - characteristic vector = { }</span>
-<span class="linenos">23</span><span class="go">  Execution time: 0.217 seconds</span>
-</pre></div>
+</span><span class="hll"><span class="linenos"> 5</span><span class="go"> *---- Bachet Choice Recommendations ----*</span>
+</span><span class="linenos"> 6</span><span class="go"> Ranking by recursively first and last choosing</span>
+<span class="linenos"> 7</span><span class="go">  1st ranked [&#39;a2&#39;]</span>
+<span class="hll"><span class="linenos"> 8</span><span class="go">    2nd ranked [&#39;a5&#39;]</span>
+</span><span class="linenos"> 9</span><span class="go">      3rd ranked [&#39;a9&#39;]</span>
+<span class="linenos">10</span><span class="go">        4th ranked [&#39;a6&#39;]</span>
+<span class="linenos">11</span><span class="go">        4th last ranked [&#39;a6&#39;]</span>
+<span class="linenos">12</span><span class="go">      3rd last ranked [&#39;a4&#39;]</span>
+<span class="linenos">13</span><span class="go">    2nd last ranked [&#39;a8&#39;]</span>
+<span class="hll"><span class="linenos">14</span><span class="go">  1st last ranked [&#39;a1&#39;, &#39;a3&#39;, &#39;a7&#39;]</span>
+</span></pre></div>
 </div>
 </div>
-<p>Alternative <em>a2</em> appears clearly as best choice candidate, wheras both alternatives <em>a1</em> and <em>a7</em> appear last-ranked (see Lines 8,14 and 16 above).</p>
-<p>In order to provide information about the the underlying <a class="reference internal" href="techDoc.html#transitiveDigraphs.PartialBachetRanking" title="transitiveDigraphs.PartialBachetRanking"><code class="xref py py-class docutils literal notranslate"><span class="pre">PartialBachetRanking</span></code></a> digraph, the corresponding instance is stored in the <em>g.pbr</em> attribute. We may thus consult the five Bachet rankings used by the <a class="reference internal" href="techDoc.html#transitiveDigraphs.RankingsFusionDigraph" title="transitiveDigraphs.RankingsFusionDigraph"><code class="xref py py-class docutils literal notranslate"><span class="pre">RankingsFusionDigraph</span></code></a> constructor and provide the best correlated one for ranking the performance heatmap of the given performance tableau (see Lines 2 and 21 below).</p>
+<p>Alternative <em>a2</em> appears clearly as the first-choice candidate, whereas alternatives <em>a1</em>, <em>a3</em> and <em>a7</em> appear as potential last-choice candidates (see Lines 8 and 14 above).</p>
+<p>In order to provide information about the the underlying <a class="reference internal" href="techDoc.html#transitiveDigraphs.PartialBachetRanking" title="transitiveDigraphs.PartialBachetRanking"><code class="xref py py-class docutils literal notranslate"><span class="pre">PartialBachetRanking</span></code></a> digraph, the corresponding instance is stored in the <em>g.pbr</em> attribute. We may thus consult the five Bachet rankings used by the <a class="reference internal" href="techDoc.html#transitiveDigraphs.RankingsFusionDigraph" title="transitiveDigraphs.RankingsFusionDigraph"><code class="xref py py-class docutils literal notranslate"><span class="pre">RankingsFusionDigraph</span></code></a> constructor and provide the best correlated one for ranking the performance heatmap of the given performance tableau (see Lines 2 and 12-13 below).</p>
 <div class="highlight-pycon notranslate"><div class="highlight"><pre><span></span><span class="linenos"> 1</span><span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">g</span><span class="o">.</span><span class="n">pbr</span><span class="o">.</span><span class="n">bachetRankings</span><span class="p">)</span>
-<span class="hll"><span class="linenos"> 2</span><span class="go"> [(0.7585, [&#39;a2&#39;, &#39;a5&#39;, &#39;a9&#39;, &#39;a6&#39;, &#39;a8&#39;, &#39;a4&#39;, &#39;a3&#39;, &#39;a7&#39;, &#39;a1&#39;]),</span>
-</span><span class="linenos"> 3</span><span class="go">  (0.7442, [&#39;a2&#39;, &#39;a5&#39;, &#39;a9&#39;, &#39;a6&#39;, &#39;a4&#39;, &#39;a8&#39;, &#39;a3&#39;, &#39;a7&#39;, &#39;a1&#39;]),</span>
-<span class="linenos"> 4</span><span class="go">  (0.6762, [&#39;a2&#39;, &#39;a5&#39;, &#39;a8&#39;, &#39;a9&#39;, &#39;a6&#39;, &#39;a4&#39;, &#39;a3&#39;, &#39;a7&#39;, &#39;a1&#39;]),</span>
+<span class="hll"><span class="linenos"> 2</span><span class="go"> [(0.7442, [&#39;a2&#39;, &#39;a5&#39;, &#39;a9&#39;, &#39;a6&#39;, &#39;a4&#39;, &#39;a8&#39;, &#39;a3&#39;, &#39;a7&#39;, &#39;a1&#39;]),</span>
+</span><span class="linenos"> 3</span><span class="go">  (0.6977, [&#39;a2&#39;, &#39;a5&#39;, &#39;a9&#39;, &#39;a6&#39;, &#39;a4&#39;, &#39;a8&#39;, &#39;a3&#39;, &#39;a1&#39;, &#39;a7&#39;]),</span>
+<span class="linenos"> 4</span><span class="go">  (0.6762, [&#39;a2&#39;, &#39;a5&#39;, &#39;a9&#39;, &#39;a6&#39;, &#39;a4&#39;, &#39;a8&#39;, &#39;a7&#39;, &#39;a3&#39;, &#39;a1&#39;]),</span>
 <span class="linenos"> 5</span><span class="go">  (0.6637, [&#39;a2&#39;, &#39;a5&#39;, &#39;a9&#39;, &#39;a6&#39;, &#39;a4&#39;, &#39;a8&#39;, &#39;a1&#39;, &#39;a3&#39;, &#39;a7&#39;]),</span>
-<span class="linenos"> 6</span><span class="go">  (0.6619, [&#39;a2&#39;, &#39;a5&#39;, &#39;a8&#39;, &#39;a9&#39;, &#39;a4&#39;, &#39;a6&#39;, &#39;a3&#39;, &#39;a7&#39;, &#39;a1&#39;])]</span>
-<span class="linenos"> 7</span><span class="gp">&gt;&gt;&gt; </span><span class="n">g</span><span class="o">.</span><span class="n">pbr</span><span class="o">.</span><span class="n">showTransitiveDigraph</span><span class="p">()</span>
-<span class="hll"><span class="linenos"> 8</span><span class="go"> Ranking by Choosing and Rejecting</span>
-</span><span class="linenos"> 9</span><span class="go">  1st ranked [&#39;a2&#39;]</span>
-<span class="linenos">10</span><span class="go">    2nd ranked [&#39;a5&#39;]</span>
-<span class="hll"><span class="linenos">11</span><span class="go">      3rd ranked [&#39;a8&#39;, &#39;a9&#39;]</span>
-</span><span class="hll"><span class="linenos">12</span><span class="go">      3rd last ranked [&#39;a4&#39;, &#39;a6&#39;, &#39;a8&#39;])</span>
-</span><span class="linenos">13</span><span class="go">    2nd last ranked [&#39;a3&#39;])</span>
-<span class="hll"><span class="linenos">14</span><span class="go">  1st last ranked [&#39;a1&#39;, &#39;a7&#39;])</span>
-</span><span class="linenos">15</span><span class="gp">&gt;&gt;&gt; </span><span class="n">g</span><span class="o">.</span><span class="n">showCorrelation</span><span class="p">(</span><span class="n">g</span><span class="o">.</span><span class="n">computeOrdinalCorrelation</span><span class="p">(</span><span class="n">g</span><span class="o">.</span><span class="n">pbr</span><span class="p">))</span>
-<span class="hll"><span class="linenos">16</span><span class="go"> Correlation indexes:</span>
-</span><span class="hll"><span class="linenos">17</span><span class="go">  Crisp ordinal correlation  : +0.806</span>
-</span><span class="hll"><span class="linenos">18</span><span class="go">  Epistemic determination    :  0.336</span>
-</span><span class="linenos">19</span><span class="go">  Bipolar-valued equivalence : +0.271</span>
-<span class="linenos">20</span><span class="gp">&gt;&gt;&gt; </span><span class="n">g</span><span class="o">.</span><span class="n">showHTMLPerformanceHeatmap</span><span class="p">(</span><span class="n">Correlations</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
-<span class="hll"><span class="linenos">21</span><span class="gp">... </span>                   <span class="n">actionsList</span><span class="o">=</span><span class="n">g</span><span class="o">.</span><span class="n">pbr</span><span class="o">.</span><span class="n">bachetRankings</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">1</span><span class="p">])</span>
+<span class="linenos"> 6</span><span class="go">  (0.6530, [&#39;a2&#39;, &#39;a5&#39;, &#39;a9&#39;, &#39;a6&#39;, &#39;a4&#39;, &#39;a3&#39;, &#39;a1&#39;, &#39;a8&#39;, &#39;a7&#39;])]</span>
+<span class="linenos"> 7</span><span class="gp">&gt;&gt;&gt; </span><span class="n">g</span><span class="o">.</span><span class="n">showCorrelation</span><span class="p">(</span><span class="n">g</span><span class="o">.</span><span class="n">computeOrdinalCorrelation</span><span class="p">(</span><span class="n">g</span><span class="o">.</span><span class="n">pbr</span><span class="p">))</span>
+<span class="linenos"> 8</span><span class="go"> Correlation indexes:</span>
+<span class="hll"><span class="linenos"> 9</span><span class="go">  Crisp ordinal correlation  : +0.717</span>
+</span><span class="linenos">10</span><span class="go">  Epistemic determination    :  0.369</span>
+<span class="linenos">11</span><span class="go">  Bipolar-valued equivalence : +0.265</span>
+<span class="hll"><span class="linenos">12</span><span class="gp">&gt;&gt;&gt; </span><span class="n">g</span><span class="o">.</span><span class="n">showHTMLPerformanceHeatmap</span><span class="p">(</span><span class="n">Correlations</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+</span><span class="hll"><span class="linenos">13</span><span class="gp">... </span>                   <span class="n">actionsList</span><span class="o">=</span><span class="n">g</span><span class="o">.</span><span class="n">pbr</span><span class="o">.</span><span class="n">bachetRankings</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">1</span><span class="p">])</span>
 </span></pre></div>
 </div>
 <figure class="align-center" id="bachetbcr1">
@@ -3467,8 +3450,8 @@ heat map above (see <a class="reference internal" href="#graffiti07-2"><span cla
 <p><span class="caption-number">Fig. 3.25 </span><span class="caption-text">Bachet first choice recommendation</span><a class="headerlink" href="#bachetbcr1" title="Link to this image"></a></p>
 </figcaption>
 </figure>
-<p>In <a class="reference internal" href="#bachetbcr1"><span class="std std-numref">Fig. 3.25</span></a> we see confirmed that alternative <em>a2</em> shows indeed the very best performance profile and both alternatives <em>a1</em> and <em>a7</em> the weakest performance profiles. Notice also the contrasted performance profile of alternative <em>a8</em> resulting in an ambiguous 3rd first- and 3rd last-ranked position (see Lines 11-12 above).</p>
-<p>As the <em>Bachet</em> first choice recommendation is based on a partial transitive digraph actually highly correlated with the given outranking digraph <em>g</em> (+0.806 see Lines 17-19 above), a unique initial and a unique terminal prekernel always exist (see Lines 8 and 14). Both these properties confer the <em>Bachet first choice recommendation</em> an advantage over the first choice recommendation based on intial and terminal prekernels directly extracted from the given outranking digraph where we must arbitrarely break, the case gven, all chordless outranking circuits.</p>
+<p>In <a class="reference internal" href="#bachetbcr1"><span class="std std-numref">Fig. 3.25</span></a> we see confirmed that alternative <em>a2</em> shows indeed the very best performance profile and alternatives <em>a1</em>, <em>a3</em> and <em>a7</em> the weakest performance profiles.</p>
+<p>As the <em>Bachet</em> first choice recommendation is based on a partial transitive digraph actually highly correlated with the given outranking digraph <em>g</em> (+0.717, see Line 9 above), a unique initial and a unique terminal prekernel always exist (see <a class="reference internal" href="#bachetbcr0"><span class="std std-numref">Listing 3.51</span></a> Lines 8 and 14). Both these properties confer the <em>Bachet choice recommendation</em> an advantage over the first choice recommendation based on intial and terminal prekernels directly extracted from the given outranking digraph where we must first arbitrarely break, the case gven, all chordless outranking circuits.</p>
 <p>Computing initial and terminal <em>prekernels</em> in digraphs is the subject of the next Section.</p>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
