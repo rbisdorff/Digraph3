@@ -3466,7 +3466,7 @@ The :py:class:`~transitiveDigraphs.PartialBachetRanking` class provides this way
 
 *Partial Bachet* rankings make hence apparent the actual **transitive part** of outranking relations. This interesting finding opens the way to a new design of first- or last-choice recommender algorithms avoiding the necessity to arbitrarily break up potential chordless outranking circuits. The first and last levels of a topological sort of partial rankings --their **initial and terminal kernels**-- give indeed convincing candidates for a *first-choice*, respectively a *last-choice* recommendation (see :numref:`partialBachet0` Lines 7-10).
 
-To explore this opportunity, a :py:meth:`digraphs.showBachetFirstChoiceRecommendation` mehod has been added (see :numref:`BachetBCR0` lines 3-4). 
+To explore this opportunity, a :py:meth:`digraphs.showBachetChoiceRecommendation` mehod has been added (see :numref:`BachetBCR0` lines 3-4). 
 
 .. code-block:: pycon
    :caption: *Bachet* first and last choice recommendations
@@ -3475,9 +3475,9 @@ To explore this opportunity, a :py:meth:`digraphs.showBachetFirstChoiceRecommend
 
    >>> from outrankingDigraphs import RandomBipolarOutrankingDigraph
    >>> g = RandomBipolarOutrankingDigraph(numberOfActions=9,seed=1)
-   >>> g.showBachetFirstChoiceRecommendation(randomized=100,
+   >>> g.showBachetChoiceRecommendation(randomized=100,
    ...                             maxNbrOfRankings=5,seed=1)
-    First Bachet choice recommendation(s) (BCR)
+    Bachet choice recommendation(s) (BCR)
     Credibility domain: [-1.00,1.00]
     === >> potential first choice(s)
      * choice              : ['a2']

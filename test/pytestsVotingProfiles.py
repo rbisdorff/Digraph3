@@ -48,6 +48,7 @@ def testRandomApprovalVotingProfiles():
     print(m)
     m.showRelationTable()
     m.showBestChoiceRecommendation()
+    m.showBachetChoiceRecommendation(Comments=True)
     m.showRelationMap()
 
 def testRandomVotingProfiles():

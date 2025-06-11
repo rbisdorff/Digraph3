@@ -1975,7 +1975,10 @@ class PartialBachetRanking(TransitiveDigraph):
         self.maxNbrOfRankings = maxNbrOfRankings
         self.Polarised = Polarised
         self.partialBachetCorrelation = g.computeOrdinalCorrelation(ba1)
-        self.runTimes['totalTime'] = time() - tt
+        try:
+            self.runTimes['totalTime'] = time() - tt
+        except:
+            pass
         if Comments:
             self.showTransitiveDigraph(WithCoverCredibility=False)
 

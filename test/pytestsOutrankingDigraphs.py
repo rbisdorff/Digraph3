@@ -78,6 +78,17 @@ def testComputeRubisChoice():
     g.showRubyChoice(Comments=True,_OldCoca=True)
     g.showStatistics()
     print(g)
+
+def testshowChoiceRecommendations():
+    print('*==>> Test ruby BCR ---*')
+    t = RandomPerformanceTableau(numberOfActions=7)
+    g = BipolarOutrankingDigraph(t)
+    g.showRelationTable(OddsDenotation=True)
+    g.showFirstChoiceRecommendation(ChoiceVector=True,Comments=True)
+    g.showRubyChoice(Comments=True,_OldCoca=True)
+    g.showBachetChoiceRecommendation(Comments=True)
+    g.showStatistics()
+    print(g)
     
 def testMoreOrlessRelatedPairs():
     print('*==>> test more or less unrelated pairs extraction ---*')

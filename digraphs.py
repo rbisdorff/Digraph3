@@ -8906,7 +8906,7 @@ class Digraph(object):
         """
         self.showBestChoiceRecommendation(**kwargs)
 
-    def showBachetFirstChoiceRecommendation(self,
+    def showBachetChoiceRecommendation(self,
                                           Comments=False,
                                           ChoiceVector=False,
                                           CoDual=True,
@@ -8918,16 +8918,16 @@ class Digraph(object):
                                           seed = None,
                                           ):
         """
-        Shows a first choice recommendation from the partial transitive Bachet ranking.
+        Shows a choice recommendation from the partial transitive Bachet ranking.
   
         Usage example:
         
         >>> from outrankingDigraphs import *
         >>> t = Random3ObjectivesPerformanceTableau(seed=5)
         >>> g = BipolarOutrankingDigraph(t)
-        >>> g.showNewFirstChoiceRecommendation()
+        >>> g.showBachetChoiceRecommendation()
         ***********************
-        First Choice Recommendation (BCR)
+        Bachet Choice Recommendation (BCR)
         (in decreasing order of determinateness)   
         Credibility domain:  [-100.0, 100.0]
         === >> potential first choices
@@ -8954,7 +8954,7 @@ class Digraph(object):
         from time import time
         from transitiveDigraphs import PartialBachetRanking
         if Comments:
-            print('****** new first choice recommendaton *****************')
+            print('****** new Bachet choice recommendaton *****************')
         #print('RuBis BCR')
         if Debug:
             print('All comments !!!')
@@ -8966,6 +8966,7 @@ class Digraph(object):
             g = ~(-cpself)
         else:
             g = cpself
+        g.recodeValuation()
         pbr = PartialBachetRanking(g,randomized=randomized,
                                         maxNbrOfRankings=maxNbrOfRankings,
                                         seed=seed)
@@ -8984,8 +8985,7 @@ class Digraph(object):
 ##            print(g.actions)
 ##        g.gamma = g.gammaSets()
 ##        g.notGamma = g.notGammaSets()
-        if Comments:
-            pbr.showTransitiveDigraph()
+        pbr.showTransitiveDigraph()
         
         #self.showPreKernels()
         actions = set([x for x in pbr.actions])
@@ -9000,7 +9000,7 @@ class Digraph(object):
             print('first and last choices: ',pbr.goodChoices,pbr.badChoices)
         t1 = time()
         #if Comments:
-        print('First Bachet choice recommendation(s) (BCR)')
+        print('Bachet choice recommendation(s) (BCR)')
         print(' (in decreasing order of determinateness)   ')
         print('Credibility domain: [%.2f,%.2f]' % (g.valuationdomain['min'],\
                                                                         g.valuationdomain['max']) )
@@ -15534,7 +15534,7 @@ if __name__ == "__main__":
     #print(getcontext().prec)
     g = BipolarOutrankingDigraph(t,Threading=False,startMethod='spawn')
     print(g)
-    g.showBachetFirstChoiceRecommendation(Debug=False,seed=2)
+    g.showBachetChoiceRecommendation(Comments=False,Debug=False,seed=2)
     print('Old BCR')
     g.showFirstChoiceRecommendation(Comments=True)
     #print(g.computeWeakTransitivityDegree(Comments=True))

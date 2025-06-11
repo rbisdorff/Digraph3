@@ -43,12 +43,13 @@ def testRandomValuationDigraph():
     g.save('testVal')
     gs = Digraph('testVal')
 
-def testRandomoutrankingValuationDigraph():
+def testRandomOutrankingValuationDigraph():
     print('*==>> testing RandomOutrankingValuationDigraph ----*')
     dg = RandomOutrankingValuationDigraph(order=11,weightsSum=20,seed=None)
     dg.showRelationTable()
     print('Is outranking valuation ?: %s' % dg.isOutrankingDigraph() )
     dg.showFirstChoiceRecommendation()
+    dg.showBachetChoiceRecommendation()
     (~(-dg)).exportGraphViz(fileName='outrankingValuation')
     dg.showChordlessCircuits()
 
