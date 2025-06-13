@@ -1725,7 +1725,7 @@ It might be worth, as an **exercise**, to modify the criteria significance weigh
     - all three decision objectives are considered *equally important*, and
     - all criteria under an objective are considered *equi-significant*.
 
-What will become the best choice recommendation under this working hypothesis?  
+What will become the best choice recommendation under this working hypothesis? The next tutorial shows how to create or edit a performance tableau.
 
 .. seealso::
 
@@ -1751,7 +1751,9 @@ The digraph put forward by *Bouyssou* in the October 2005 discussion is not weak
 
 Only after 2013, when the weak completeness and the coduality properties of the outranking digraph were discovered, became it obvious that the initial prekernels of the strict outranking digraph, coupled with the solution of the corresponding kernel equation system, could in fact deliver convincing best choice recommendations (see [BIS-2013]_). It stays an interesting open mathematical problem to show (or not) that both necessary conditions: --weak completeness and coduality-- are also sufficient for qualifying any bipolar-valued digraph as potential instance of an outranking digraph.
 
-*D. Bouyssou* and the critical audience of the 2005 seminar would be delighted to see twenty years later their doubts confirmed by the solution of the office location choice problem shown above. Indeed, the initial prekernel [*A*, *C*, *D*] of the corresponding outranking digraph does not retain location *G*, actually strictly outranked by location *C*, and proposes as most credible best choice candidate location *D*. This latter location is however certainly outranked by location *G*. Keeping location *G* in an indeterminate situation with being or not being a potential best choice candidate in the solution of the corresponding kernel equation system saves nevertheless our methodological approach. The new *Bachet* ranking rule based first-choice recommendation, allows now to compute a partial transitive tournament very close to the given outranking digraph. The unique initial prekernel of such a partial transitive tournament gives a convincing best choice recommendation.
+*D. Bouyssou* and the critical audience of the 2005 seminar would be delighted to see twenty years later their doubts confirmed by the solution of the office location choice problem shown above. Indeed, the initial prekernel [*A*, *C*, *D*] of the corresponding outranking digraph does not retain location *G*, actually strictly outranked by location *C*, and proposes as most credible best choice candidate location *D*. This latter location is however certainly outranked by location *G*. Keeping location *G* in an indeterminate situation with being or not being a potential best choice candidate in the solution of the corresponding kernel equation system saves nevertheless our methodological approach.
+
+The new *Bachet* ranking rule based first-choice recommendation allows nowadays to compute a partial transitive tournament very close to the given outranking digraph. The unique initial prekernel of such a transitive digraph delivers now without doubt a convincing best choice recommendation.
 
 Back to :ref:`Content Table <Tutorial-label>`
 
