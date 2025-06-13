@@ -1732,6 +1732,26 @@ What will become the best choice recommendation under this working hypothesis?
    - :ref:`Alice’s best choice: A selection case study <Alice-Tutorial-label>`  
    - Lecture 7 notes from the MICS Algorithmic Decision Theory course: [ADT-L7]_.
 
+Historical Notes
+````````````````
+Following a seminar presentation in 2005 at the LAMSADE [61]_, where the author promoted the use of kernels of the outranking digraph as suitable candidates for delivering best choice recommendations [BIS-2005]_, a critical discussion started about the methodological requirement for a convincing best choice recommendation to be internally stable (pragmatic principle **P3**). *Denis Bouyssou* illustrated his doubts with the potential outranking digraph shown in :numref:`bouyssou2005`.
+
+.. figure:: bouyssou2005.png
+   :name: bouyssou2005
+   :width: 250 px
+   :align: center
+
+   The internal stability of a best choice recommendation in question
+
+His commentary was the following: The only kernel of this digraph is the choice { *a*, *d* }; yet, it is an ambiguous recommendation, as this choice is conjointly *outranking* and *outranked*. If the instability of the best choice recommendation is, however, not considered a problem then the choice { *a*, *b* } shows the most convincing strict outranking quality and could be considered in priority for recommendation as potential best choice candidates. Adding alternative *d* to the set of potential best choice candidates is not convincing as there exists in the given digraph the node *b*, which is better evaluated than *d*. The argument that the incomparability between *a* and *d* should favour *d* as potential best choice is interesting but another hypothesis could be that *b* perhaps outranks *a*. In this latter case, it seams clear that the actual best choice recommendation should be reduced to node *b*, unless one disposes of other information, like a performance tableau and/or the actual computation method of the outranking situations. In any case, one has to be very clear about the available information when judging a best choice procedure.
+
+It became thereafter obvious for us all that both the lack of a specific performance tableau as well as the lack of a precisely defined algorithm for computing valid outranking situations do not allow to judge if a given digraph does indeed model a potential outranking relation. In our present bipolar-valued epistemic approach, a valid outranking digraph instance, following from a given performance tableau and the disjunctive epistemic fusion construction of the outranking relation, will necessarily verify the weak completeness condition and the coduality principle. As a consequence, incomparability situations are now modelled by epistemic indeterminateness not by the actual absence of a reciprocal outranking relation.
+
+The digraph put forward by *Bouyssou* in the October 2005 discussion is not weakly complete --node *a* is not outranking node *d* and vice versa-- and does hence not represent, in our present sense, a valid outranking digraph instance. Yet, it may be a partial tournament and as such it could be a strict outranking digraph, i.e. the asymmetric part --the codual-- of a valid outranking digraph. In this case, nodes *a* and *d* --the kernel of the strict outranking digraph-- would actually for sure outrank each other and, hence, represent both indifferently the natural best choice recommendation. However, in this not strict codual digraph, node *a* becomes also the unique *Condorcet* winner --outranking for sure all other nodes-- and gives hence the evident unique best choice recommendation.
+
+Only after 2013, when the weak completeness and the coduality properties of the outranking digraph were discovered, became it obvious that the initial prekernels of the strict outranking digraph, coupled with the solution of the corresponding kernel equation system, could in fact deliver convincing best choice recommendations (see [BIS-2013]_). It stays an interesting open mathematical problem to show (or not) that both necessary conditions: --weak completeness and coduality-- are also sufficient for qualifying any bipolar-valued digraph as potential instance of an outranking digraph.
+
+*D. Bouyssou* and the critical audience of the 2005 seminar would be delighted to see twenty years later their doubts confirmed by the solution of the office location choice problem shown above. Indeed, the initial prekernel [*A*, *C*, *D*] of the corresponding outranking digraph does not retain location *G*, actually strictly outranked by location *C*, and proposes as most credible best choice candidate location *D*. This latter location is however certainly outranked by location *G*. Keeping location *G* in an indeterminate situation with being or not being a potential best choice candidate in the solution of the corresponding kernel equation system saves nevertheless our methodological approach. The new *Bachet* ranking rule based first-choice recommendation, allows now to compute a partial transitive tournament very close to the given outranking digraph. The unique initial prekernel of such a partial transitive tournament gives a convincing best choice recommendation.
 
 Back to :ref:`Content Table <Tutorial-label>`
 
@@ -10879,9 +10899,11 @@ Appendices
 
 .. [CHAM-2006] Chambers J.M., James D.A., Lambert D. and Vander Wiel S. (2006) "Monitoring Networked Applications with Incremental Quantile Estimation". *Statistical Science*, Vol. 21, No.4, pp.463-475. DOI: 10 12140/088342306000000583.
 
-.. [BIS-2006a] Bisdorff R., Pirlot M. and Roubens M. (2006). "Choices and kernels from bipolar valued digraphs". *European Journal of Operational Research*, 175 (2006) 155-170. (Online) Electronic version: DOI:10.1016/j.ejor.2005.05.004 (downloadable preliminary version `PDF file 257.3Kb <http://hdl.handle.net/10993/23720>`_).
+.. [BIS-2006a] Bisdorff R., Pirlot M. and Roubens M. (2006). "Choices and kernels from bipolar valued digraphs". *European Journal of Operational Research*, 175 (2006) 155-170. (Online) Electronic version: DOI:10.1016/j.ejor.2005.05.004 (downloadable preliminary version `PDF file 257.3Kb <http://hdl.handle.net/10993/23720>`_)
 
-.. [BIS-2006b] Bisdorff R. (2006). "On enumerating the kernels in a bipolar-valued digraph". Annales du Lamsade 6, Octobre 2006, pp. 1 - 38. Université Paris-Dauphine. ISSN 1762-455X (downloadable version `PDF file 532.2 Kb <http://hdl.handle.net/10993/38741>`_).
+.. [BIS-2006b] Bisdorff R. (2006). "On enumerating the kernels in a bipolar-valued digraph". Annales du Lamsade 6, Octobre 2006, pp. 1 - 38. Université Paris-Dauphine. ISSN 1762-455X (downloadable version `PDF file 532.2 Kb <http://hdl.handle.net/10993/38741>`_)
+
+.. [BIS-2005] Bisdorff R. (2005) Exploitation en problématique du choix d'une relation de surclassement valuée (`PDF file for downloading <http://hdl.handle.net/10993/47659>`_)
 
 .. [BIS-2004a] Bisdorff R. (2004) "On a natural fuzzification of Boolean logic". In Erich Peter Klement and Endre Pap (editors), Proceedings of the 25th Linz Seminar on *Fuzzy Set Theory, Mathematics of Fuzzy Systems*. Bildungszentrum St. Magdalena, Linz (Austria), February 2004. pp. 20-26 (PDF file (133.4 Kb) for `downloading <http://hdl.handle.net/10993/38740>`_)
 
@@ -11042,7 +11064,9 @@ Appendices
 
 .. [59] See the advanced topic on :ref:`bipolar-valued relational equivalence between bipolar-valued digraphs <OrdinalCorrelation-Tutorial-label>`.
 
-.. [60] Topological Sort Algorithm 2.4 from *Algorithmic Graph heory and Perfect Graphs* p.44 [GOL-2004]_. 
+.. [60] Topological Sort Algorithm 2.4 from *Algorithmic Graph heory and Perfect Graphs* p.44 [GOL-2004]_.
+
+.. [61] Laboratoires d'Analyse et de Modélisation de Systèmes d'Aide à la Décision, Université Paris-Dauphine, UMR 7243 CNRS.
 
 ..  LocalWords:  randomDigraph Determinateness valuationdomain py png
 ..  LocalWords:  notGamma tutorialDigraph shortName func irreflexive
