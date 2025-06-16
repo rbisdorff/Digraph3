@@ -3939,9 +3939,8 @@ class BipolarOutrankingDigraph(OutrankingDigraph):
             reprString += 'Confidence level     : %.2f (%.1f%%)\n' %\
                          (self.bipolarConfidenceLevel,\
                          (self.bipolarConfidenceLevel+1.0)/2.0*100.0)
-            reprString += 'Confident majority   : %.2f (%.1f%%)\n' %\
-                (self.confidenceCutLevel,\
-                (self.confidenceCutLevel+Decimal('1.0'))/Decimal('2.0')*Decimal('100.0'))
+            reprString += 'Confident credibility: > %.1f%%\n' %\
+                ((self.confidenceCutLevel+Decimal('1.0'))/Decimal('2.0')*Decimal('100.0'))
         except:
             pass
         reprString += 'Determinateness (%%)  : %.2f\n' %\
@@ -8924,6 +8923,8 @@ class ConfidentBipolarOutrankingDigraph(BipolarOutrankingDigraph):
                  Debug=False,):
         # getting module ressources and setting the random seed
         from copy import copy, deepcopy
+        from time import time
+        t0 = time()
         # getting performance tableau
         if argPerfTab is None:
             perfTab = RandomPerformanceTableau(commonThresholds = [(10.0,0.0),(20.0,0.0),(80.0,0.0),(101.0,0.0)])
@@ -8965,6 +8966,8 @@ class ConfidentBipolarOutrankingDigraph(BipolarOutrankingDigraph):
             Debug=Debug)
         self.gamma = self.gammaSets()
         self.notGamma = self.notGammaSets()
+        self.runTimes = copy(bodg.runTimes)
+        self.runTimes['totalTime'] = time() - t0
 
     def _computeConfidentRelation(self,
                                outrankingRelation,
@@ -10218,9 +10221,9 @@ if __name__ == "__main__":
                                    numberOfCriteria=21,\
                                    weightDistribution='equiobjectives',
                                    seed=100) 
-    g = BipolarOutrankingDigraph(t,Normalized=True,Threading=True,startMethod='spawn')
+    g = BipolarOutrankingDigraph(t,Normalized=True,Threading=False,startMethod='spawn')
     print(g)
-    Threading = True
+    Threading = False
     t0 = time()
     criteriaCorrelations = g.computeMarginalVersusGlobalOutrankingCorrelations(Threading=Threading,startMethod='spawn')
     print(time()-t0)
