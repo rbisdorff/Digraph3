@@ -1,11 +1,11 @@
 # Fdb version 4
-["makeindex digraph3Pearls.idx"] 1742131581.77404 "digraph3Pearls.idx" "digraph3Pearls.ind" "digraph3Pearls" 1748342440.15373 0
-  "digraph3Pearls.idx" 1748342436.9094 0 d41d8cd98f00b204e9800998ecf8427e "pdflatex"
+["makeindex digraph3Pearls.idx"] 1742131581.77404 "digraph3Pearls.idx" "digraph3Pearls.ind" "digraph3Pearls" 1750080152.60964 0
+  "digraph3Pearls.idx" 1750080149.32938 0 d41d8cd98f00b204e9800998ecf8427e "pdflatex"
   (generated)
   "digraph3Pearls.ilg"
   "digraph3Pearls.ind"
   (rewritten before read)
-["pdflatex"] 1748342436.38077 "digraph3Pearls.tex" "digraph3Pearls.pdf" "digraph3Pearls" 1748342440.15384 0
+["pdflatex"] 1750080148.84384 "digraph3Pearls.tex" "digraph3Pearls.pdf" "digraph3Pearls" 1750080152.60975 0
   "/etc/texmf/web2c/texmf.cnf" 1697638898.09346 475 c0e671620eb5563b2130f56340a5fde8 ""
   "/home/bisdorff/.texlive2023/texmf-var/fonts/pk/ljfour/jknappen/ec/ecbx1200.600pk" 1706520336.98266 31928 219cae0d4d3156a2cb87c1cbab0a6c51 ""
   "/home/bisdorff/.texlive2023/texmf-var/fonts/pk/ljfour/jknappen/ec/ecbx1728.600pk" 1706520337.99465 49076 f6856dd67d7f0c96ea99627dcffa5999 ""
@@ -204,6 +204,7 @@
   "BachetHeatmap.png" 1740132224.87492 168896 0312344f688aed5a15180f1013aebe43 ""
   "Bouyssou4Orig.png" 1718428518.48473 18336 80bbc9bb2e66c32b19e2d16cc4457d2c ""
   "asymmetricPart.png" 1718428518.48773 88273 ca1c21b40f5142dfb491cd82bb22559d ""
+  "bachetBCR.png" 1749653293.63949 174829 9948656859f128f95cf816f13ec4644a ""
   "bestWorstOrientation.png" 1718428518.48873 48490 fb2e2ca2867c9d33ccc4561b02e6fba7 ""
   "circularHeatmap.png" 1718428518.48973 45770 11308bb88672da8b428585dce433c002 ""
   "circularPreference.png" 1718428518.62573 30214 b1e2f5159bc088903dd510a660edb1aa ""
@@ -214,11 +215,11 @@
   "correlationTable.png" 1718428518.49073 50102 7e60e3c38680cfc795a5a7bb6851b804 ""
   "criteriaCorrelationTable.png" 1718428518.49173 155055 65e3b8a8881e3ccc2c62f091801afb44 ""
   "dendogram.png" 1718428518.49173 35541 9e36c14dc4e9ad21c4aa50adc1b3ee06 ""
-  "digraph3Pearls.aux" 1748342439.86237 71226 c05181b89165646a4e5cd0a51796b386 "pdflatex"
+  "digraph3Pearls.aux" 1750080152.32836 71827 93eeb72893531d181f64c88143418391 "pdflatex"
   "digraph3Pearls.ind" 1742131581.78538 0 d41d8cd98f00b204e9800998ecf8427e "makeindex digraph3Pearls.idx"
-  "digraph3Pearls.out" 1748342439.86637 20338 34dd9848a8f2e1cbb09579f3ae6db2ad "pdflatex"
-  "digraph3Pearls.tex" 1748342435.67341 558892 7494f43a580be089fe461d31188d9880 ""
-  "digraph3Pearls.toc" 1748342439.86637 7522 2f14e9237b60e5e72355052341ce78f4 "pdflatex"
+  "digraph3Pearls.out" 1750080152.33236 20338 34dd9848a8f2e1cbb09579f3ae6db2ad "pdflatex"
+  "digraph3Pearls.tex" 1750080144.10442 565113 dba1ef382637918334fa9c13c1ce290c ""
+  "digraph3Pearls.toc" 1750080152.33236 7523 b6f5903546642cf6b4854fe97bb23a00 "pdflatex"
   "divGraph.png" 1718428518.50373 24390 b06fbd98e3345494f14c38fe9dc7657c ""
   "dualChordlessCircuit.png" 1718428518.50373 42179 2859130e8357d66ccd923f51dd2efd4b ""
   "graffiti07_1.png" 1718428518.50473 123646 fb9f8b4c40c1f2ce1c9144e7371da2fb ""
@@ -249,7 +250,7 @@
   "robustHeatmap.png" 1718428518.52573 157849 be99b1e63b93b89aa32bcbaa8c9c6d7b ""
   "simulLikelihood.png" 1718428518.52673 22562 cf4b77dc733a465112a7dad344b7c667 ""
   "sphinx.sty" 1747746702.39367 54203 ee7fe875437470f5328ee20661bb9f1d ""
-  "sphinxhighlight.sty" 1748342380.49099 7553 83fb52292c17957d9f4aadcb28c57a87 ""
+  "sphinxhighlight.sty" 1750080085.20488 7553 83fb52292c17957d9f4aadcb28c57a87 ""
   "sphinxhowto.cls" 1718428518.52773 3256 55d5772de2f18cad818d98a3e6e8e37b ""
   "sphinxlatexadmonitions.sty" 1747746702.39467 19111 5e67a0f91439018bceb7cadf319345e6 ""
   "sphinxlatexcontainers.sty" 1747746702.39467 900 d61f923db071a7b54d3cee8a1e6935d3 ""
@@ -264,7 +265,7 @@
   "sphinxlatexstylepage.sty" 1747746702.39667 2671 e63daf3b9f0f8a387a8b4ba09c515982 ""
   "sphinxlatexstyletext.sty" 1747746702.39667 6759 9e932c65374cfb62686485d331bc975c ""
   "sphinxlatextables.sty" 1747746702.39667 57643 7f1013c2fa11942370d867527bdda568 ""
-  "sphinxmessages.sty" 1748342435.71941 745 3f5fcd6cdd7964ed608767954a8ced6f ""
+  "sphinxmessages.sty" 1750080144.18542 745 3f5fcd6cdd7964ed608767954a8ced6f ""
   "sphinxoptionsgeometry.sty" 1747746702.39667 2060 6c27b3eba37bde592ae8908ab2c1ac0f ""
   "sphinxoptionshyperref.sty" 1747746702.39767 1093 e468489bae7631a7f387b4b0f7bc15d4 ""
   "sphinxpackageboxes.sty" 1747746702.39767 36106 1be2053eb1cb9b083b3a75e3657bcb24 ""

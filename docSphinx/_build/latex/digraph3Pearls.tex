@@ -67,8 +67,8 @@
 
 
 \title{Digraph3 Advanced Topics}
-\date{May 27, 2025}
-\release{3.13.3}
+\date{June 16, 2025}
+\release{3.13.5}
 \author{Raymond Bisdorff}
 \newcommand{\sphinxlogo}{\sphinxincludegraphics{introDoc3.png}\par}
 \renewcommand{\releasename}{Release}
@@ -4269,10 +4269,10 @@ Bipolar\sphinxhyphen{}valued \{\sphinxhyphen{}1,0,+1\} base 3 encoded integers a
 \begin{footnote}[20]\sphinxAtStartFootnote
 \sphinxurl{https://en.wikipedia.org/wiki/Claude\_Gaspar\_Bachet\_de\_M\%C3\%A9ziriac} \sphinxstyleemphasis{Claude Gaspar Bachet} Sieur de Méziriac (9 October 1581 \textendash{} 26 February 1638) was a French mathematician and poet who is known today for his 1622 proof of \sphinxstyleemphasis{Bézout}’s theorem stating the special case of the \sphinxstyleemphasis{Bachet\sphinxhyphen{}Bézout} identity for two coprime integers. \sphinxstyleemphasis{Étienne Bézout} actually proved this result in 1779 only for polynomials and \sphinxstyleemphasis{Bézout}’s theorem is misattributed to \sphinxstyleemphasis{Bézout} by \sphinxstyleemphasis{Bourbaki}. The general \sphinxstyleemphasis{Bachet\sphinxhyphen{}Bézout} identity is a direct algebraic consequence of \sphinxstyleemphasis{Euclid}’s division algorithm and was known before \sphinxstyleemphasis{Bachet} (see the \sphinxcode{\sphinxupquote{arithmetics.bezout()}} method). It is furthemore in a Latin Translation by \sphinxstyleemphasis{Bachet} of the Arithmetica of \sphinxstyleemphasis{Diophantus} where \sphinxstyleemphasis{Pierre de Fermat} wrote in 1638 his famous margin note about the missing proof of his last theorem.
 %
-\end{footnote}. The idea is to represent the value of an integer \sphinxstyleemphasis{n} in a base 3 positional numerotation where in each position may appear a \sphinxstylestrong{signed bit} \textendash{}one of the three symbols \sphinxstylestrong{\{\sphinxhyphen{}1,0,+1\}}\textendash{} called hereafter \sphinxstylestrong{sbits} for short.
+\end{footnote}. The idea is to represent the value of an integer \sphinxstyleemphasis{n} in a base 3 positional numeration where in each position may appear a \sphinxstylestrong{signed bit} \textendash{}one of the three symbols \sphinxstylestrong{\{\sphinxhyphen{}1,0,+1\}}\textendash{} called hereafter \sphinxstylestrong{sbits} for short.
 
 \sphinxAtStartPar
-\sphinxstyleemphasis{Bachet}’s positional \sphinxstyleemphasis{sbits} numerotation is simulating a weight balance scale where the number \sphinxstyleemphasis{n} and the potential negative powers of 3 are put on the right tray and the potential positive powers of 3 are put on the left tray. The equation for \sphinxstyleemphasis{n = 5} gives for instance \(3^2 = (n + 3^1 + 3^0)\). And the \sphinxstyleemphasis{sbits} encoding corresponds hence to the string ‘+1\sphinxhyphen{}1\sphinxhyphen{}1’. As, this representation is isomorphic to a base 3 binary encoding, every positive or negative integer may this way be represented with a unique \sphinxstyleemphasis{sbits} string. With four powers of 3, namely \({3^3, 3^2, 3^1, 3^0}\), one may for instance represent any value in the integer range \sphinxhyphen{}40 to +40. \sphinxstyleemphasis{Bachet} showed that this bipolar weighing system relies on the smallest possible number of balance weights \sphinxhyphen{}base powers\sphinxhyphen{} needed in order to balance the scale for any given integer weight \sphinxstyleemphasis{n} \sphinxcite{pearls:bac-1622p}.
+\sphinxstyleemphasis{Bachet}’s positional \sphinxstyleemphasis{sbits} numeration is simulating a weight balance scale where the number \sphinxstyleemphasis{n} and the potential negative powers of 3 are put on the right tray and the potential positive powers of 3 are put on the left tray. The equation for \sphinxstyleemphasis{n = 5} gives for instance \(3^2 = (n + 3^1 + 3^0)\). And the \sphinxstyleemphasis{sbits} encoding corresponds hence to the string ‘+1\sphinxhyphen{}1\sphinxhyphen{}1’. As, this representation is isomorphic to a base 3 binary encoding, every positive or negative integer may this way be represented with a unique \sphinxstyleemphasis{sbits} string. With four powers of 3, namely \({3^3, 3^2, 3^1, 3^0}\), one may for instance represent any value in the integer range \sphinxhyphen{}40 to +40. \sphinxstyleemphasis{Bachet} showed that this bipolar weighing system relies on the smallest possible number of balance weights \sphinxhyphen{}base powers\sphinxhyphen{} needed in order to balance the scale for any given integer weight \sphinxstyleemphasis{n} \sphinxcite{pearls:bac-1622p}.
 
 \sphinxAtStartPar
 The Digraph3 \sphinxcode{\sphinxupquote{arithmetics}} module provides with the \sphinxcode{\sphinxupquote{BachetNumber}} class an implementation for such \sphinxstyleemphasis{sbits} encoded integers. Instantiating a \sphinxstyleemphasis{Bachet} number may be done either with an integer value or with a vector of sbits (see \hyperref[\detokenize{pearls:bachetnumbers}]{Listing \ref{\detokenize{pearls:bachetnumbers}}} Lines  2, 6, 11 and 15). The class provides a binary \sphinxstyleemphasis{addition} method and unary \sphinxstyleemphasis{negating} and \sphinxstyleemphasis{reversing} methods as illustrated in Lines 20 and 32\sphinxhyphen{}33 below.
@@ -4790,7 +4790,7 @@ Max.   : +0.9541
 \end{quote}
 
 \sphinxAtStartPar
-The statistical figures confirm the expected noticeable performance enhancement one obtains first with the \sphinxstyleemphasis{BestQualified=True} and secondly even more with the \sphinxstyleemphasis{randomized=100} settings of the \sphinxstyleemphasis{Bachet} ranking rule. The latter setting renders in fact ranking results of a correlation quality very similar to the \sphinxstyleemphasis{Copeland} rule. Yet, computing ranking results just from the given ordering of the \sphinxstyleemphasis{self.actions} dictionary and its reversed ordering may render, with a first quartile correlation of +0.6678 and a median correlation of +0.7282, already satisfactory ranking results in most cases. It is finally remarquable that even the single actions ordering setting shows already, with a first quartile correlation of +0.6089 and a median correlation of +0.6854, quite acceptable results.
+The statistical figures confirm the expected noticeable performance enhancement one obtains first with the \sphinxstyleemphasis{BestQualified=True} and secondly even more with the \sphinxstyleemphasis{randomized=100} settings of the \sphinxstyleemphasis{Bachet} ranking rule. The latter setting renders in fact ranking results of a correlation quality very similar to the \sphinxstyleemphasis{Copeland} rule. Yet, computing ranking results just from the given ordering of the \sphinxstyleemphasis{self.actions} dictionary and its reversed ordering may render, with a first quartile correlation of +0.6678 and a median correlation of +0.7282, already satisfactory ranking results in most cases. It is finally remarkable that even the single actions ordering setting shows already, with a first quartile correlation of +0.6089 and a median correlation of +0.6854, quite acceptable results.
 
 \sphinxAtStartPar
 Mind finally that the \sphinxstyleemphasis{Bachet} ranking rule, even of comparable complexity \(O(n^2)\) as the \sphinxstyleemphasis{Copeland} and \sphinxstyleemphasis{NetFlows} rules, is not scalable to large performance tableaux with hundreds of performance records. The integer value range of \sphinxstyleemphasis{Bachet} numbers gets indeed quickly huge with the order of the given outranking digraph. The \sphinxcode{\sphinxupquote{PolarisedBachetRanking}} constructor provides therefore an \sphinxstyleemphasis{orderLimit} parameter set by default to 50, which allows to represent integer values in the huge range +\sphinxhyphen{} 358948993845926294385124.
@@ -4836,7 +4836,7 @@ To explore this opportunity, a new \sphinxcode{\sphinxupquote{PartialBachetRanki
 \sphinxresetverbatimhllines
 
 \sphinxAtStartPar
-The nine performance records are grouped into three performance equivalence classes. The resulting \sphinxstyleemphasis{partial ranking} is, except the rankings of alternatives \sphinxstyleemphasis{a3} and \sphinxstyleemphasis{a4}, consistent with the optimal \sphinxstyleemphasis{Kemeny} ranking {[}‘a2’, ‘a5’, ‘a9’, ‘a6’, ‘a8’, ‘a4’, ‘a3’, ‘a7’, ‘a1’{]} (see \hyperref[\detokenize{pearls:optimalkemeny1}]{Listing \ref{\detokenize{pearls:optimalkemeny1}}} Line 4) and is therefore highly correlated (+0.872) with the common determinated part of the given outranking digraph \sphinxstyleemphasis{g}  leading to a relational equivalence between both digraphs supported by a criteria significance majority of nearly 60\% (see \hyperref[\detokenize{pearls:partialbachet0}]{Listing \ref{\detokenize{pearls:partialbachet0}}} Line 13 and 15). In \hyperref[\detokenize{pearls:partialbachet1}]{Fig.\@ \ref{\detokenize{pearls:partialbachet1}}} below, is shown its \sphinxstyleemphasis{Hasse} diagram.
+The nine performance records are grouped into three performance equivalence classes. The resulting \sphinxstyleemphasis{partial ranking} is, except the rankings of alternatives \sphinxstyleemphasis{a3} and \sphinxstyleemphasis{a4}, consistent with the optimal \sphinxstyleemphasis{Kemeny} ranking {[}‘a2’, ‘a5’, ‘a9’, ‘a6’, ‘a8’, ‘a4’, ‘a3’, ‘a7’, ‘a1’{]} (see \hyperref[\detokenize{pearls:optimalkemeny1}]{Listing \ref{\detokenize{pearls:optimalkemeny1}}} Line 4) and is therefore highly correlated (+0.872) with the common determined part of the given outranking digraph \sphinxstyleemphasis{g}  leading to a relational equivalence between both digraphs supported by a criteria significance majority of nearly 60\% (see \hyperref[\detokenize{pearls:partialbachet0}]{Listing \ref{\detokenize{pearls:partialbachet0}}} Line 13 and 15). In \hyperref[\detokenize{pearls:partialbachet1}]{Fig.\@ \ref{\detokenize{pearls:partialbachet1}}} below, is shown its \sphinxstyleemphasis{Hasse} diagram.
 
 \begin{sphinxVerbatim}[commandchars=\\\{\},numbers=left,firstnumber=1,stepnumber=1]
 \PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{wb}\PYG{o}{.}\PYG{n}{exportGraphViz}\PYG{p}{(}\PYG{l+s+s1}{\PYGZsq{}}\PYG{l+s+s1}{partialBachet1}\PYG{l+s+s1}{\PYGZsq{}}\PYG{p}{)}
@@ -4864,14 +4864,74 @@ The \sphinxcode{\sphinxupquote{PartialBachetRanking}} class provides this way a 
 \end{sphinxVerbatim}
 
 \sphinxAtStartPar
-\sphinxstyleemphasis{Partial Bachet} rankings make hence apparent the actual \sphinxstylestrong{transitive part} of outranking relations. This interesting finding opens the way to a new design of first\sphinxhyphen{} or last\sphinxhyphen{}choice recommender algorithms avoiding the necessity to arbitrarily break up potential chordless outranking circuits. The first and last levels of a topological sort of partial rankings \textendash{}their \sphinxstylestrong{initial and terminal kernels}\textendash{} give indeed convincing candidates for a \sphinxstyleemphasis{first\sphinxhyphen{}choice}, respectively a \sphinxstyleemphasis{last\sphinxhyphen{}choice} recommendation (see \hyperref[\detokenize{pearls:partialbachet0}]{Listing \ref{\detokenize{pearls:partialbachet0}}} Lines 7\sphinxhyphen{}10). An opportunity yet to be explored.
+\sphinxstyleemphasis{Partial Bachet} rankings make hence apparent the actual \sphinxstylestrong{transitive part} of outranking relations. This interesting finding opens the way to a new design of first\sphinxhyphen{} or last\sphinxhyphen{}choice recommender algorithms avoiding the necessity to arbitrarily break up potential chordless outranking circuits. The first and last levels of a topological sort of partial rankings \textendash{}their \sphinxstylestrong{initial and terminal kernels}\textendash{} give indeed convincing candidates for a \sphinxstyleemphasis{first\sphinxhyphen{}choice}, respectively a \sphinxstyleemphasis{last\sphinxhyphen{}choice} recommendation (see \hyperref[\detokenize{pearls:partialbachet0}]{Listing \ref{\detokenize{pearls:partialbachet0}}} Lines 7\sphinxhyphen{}10).
 
 \sphinxAtStartPar
-Computing \sphinxstyleemphasis{kernels} in digraphs is the subject of the next Section.
+To explore this opportunity, a \sphinxcode{\sphinxupquote{showBachetChoiceRecommendation()}} method has been added (see \hyperref[\detokenize{pearls:bachetbcr0}]{Listing \ref{\detokenize{pearls:bachetbcr0}}} lines 3\sphinxhyphen{}4).
+\sphinxSetupCaptionForVerbatim{\sphinxstyleemphasis{Bachet} first and last choice recommendations}
+\def\sphinxLiteralBlockLabel{\label{\detokenize{pearls:bachetbcr0}}}
+\fvset{hllines={, 3, 4, 5, 8, 14,}}%
+\begin{sphinxVerbatim}[commandchars=\\\{\},numbers=left,firstnumber=1,stepnumber=1]
+\PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{k+kn}{from} \PYG{n+nn}{outrankingDigraphs} \PYG{k+kn}{import} \PYG{n}{RandomBipolarOutrankingDigraph}
+\PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{g} \PYG{o}{=} \PYG{n}{RandomBipolarOutrankingDigraph}\PYG{p}{(}\PYG{n}{numberOfActions}\PYG{o}{=}\PYG{l+m+mi}{9}\PYG{p}{,}\PYG{n}{seed}\PYG{o}{=}\PYG{l+m+mi}{1}\PYG{p}{)}
+\PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{g}\PYG{o}{.}\PYG{n}{showBachetChoiceRecommendation}\PYG{p}{(}\PYG{n}{randomized}\PYG{o}{=}\PYG{l+m+mi}{100}\PYG{p}{,}
+\PYG{g+gp}{... }                            \PYG{n}{maxNbrOfRankings}\PYG{o}{=}\PYG{l+m+mi}{5}\PYG{p}{,}\PYG{n}{seed}\PYG{o}{=}\PYG{l+m+mi}{1}\PYG{p}{)}
+\PYG{g+go}{ *\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{} Bachet Choice Recommendations \PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}*}
+\PYG{g+go}{ Ranking by recursively first and last choosing}
+\PYG{g+go}{  1st ranked [\PYGZsq{}a2\PYGZsq{}]}
+\PYG{g+go}{    2nd ranked [\PYGZsq{}a5\PYGZsq{}]}
+\PYG{g+go}{      3rd ranked [\PYGZsq{}a9\PYGZsq{}]}
+\PYG{g+go}{        4th ranked [\PYGZsq{}a6\PYGZsq{}]}
+\PYG{g+go}{        4th last ranked [\PYGZsq{}a6\PYGZsq{}]}
+\PYG{g+go}{      3rd last ranked [\PYGZsq{}a4\PYGZsq{}]}
+\PYG{g+go}{    2nd last ranked [\PYGZsq{}a8\PYGZsq{}]}
+\PYG{g+go}{  1st last ranked [\PYGZsq{}a1\PYGZsq{}, \PYGZsq{}a3\PYGZsq{}, \PYGZsq{}a7\PYGZsq{}]}
+\end{sphinxVerbatim}
+\sphinxresetverbatimhllines
+
+\sphinxAtStartPar
+Alternative \sphinxstyleemphasis{a2} appears clearly as the first\sphinxhyphen{}choice candidate, whereas alternatives \sphinxstyleemphasis{a1}, \sphinxstyleemphasis{a3} and \sphinxstyleemphasis{a7} appear as potential last\sphinxhyphen{}choice candidates (see Lines 8 and 14 above).
+
+\sphinxAtStartPar
+In order to provide information about the the underlying \sphinxcode{\sphinxupquote{PartialBachetRanking}} digraph, the corresponding instance is stored in the \sphinxstyleemphasis{g.pbr} attribute. We may thus consult the five Bachet rankings used by the \sphinxcode{\sphinxupquote{RankingsFusionDigraph}} constructor and provide the best correlated one for ranking the performance heatmap of the given performance tableau (see Lines 2 and 12\sphinxhyphen{}13 below).
+
+\fvset{hllines={, 2, 9, 12, 13,}}%
+\begin{sphinxVerbatim}[commandchars=\\\{\},numbers=left,firstnumber=1,stepnumber=1]
+\PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n+nb}{print}\PYG{p}{(}\PYG{n}{g}\PYG{o}{.}\PYG{n}{pbr}\PYG{o}{.}\PYG{n}{bachetRankings}\PYG{p}{)}
+\PYG{g+go}{ [(0.7442, [\PYGZsq{}a2\PYGZsq{}, \PYGZsq{}a5\PYGZsq{}, \PYGZsq{}a9\PYGZsq{}, \PYGZsq{}a6\PYGZsq{}, \PYGZsq{}a4\PYGZsq{}, \PYGZsq{}a8\PYGZsq{}, \PYGZsq{}a3\PYGZsq{}, \PYGZsq{}a7\PYGZsq{}, \PYGZsq{}a1\PYGZsq{}]),}
+\PYG{g+go}{  (0.6977, [\PYGZsq{}a2\PYGZsq{}, \PYGZsq{}a5\PYGZsq{}, \PYGZsq{}a9\PYGZsq{}, \PYGZsq{}a6\PYGZsq{}, \PYGZsq{}a4\PYGZsq{}, \PYGZsq{}a8\PYGZsq{}, \PYGZsq{}a3\PYGZsq{}, \PYGZsq{}a1\PYGZsq{}, \PYGZsq{}a7\PYGZsq{}]),}
+\PYG{g+go}{  (0.6762, [\PYGZsq{}a2\PYGZsq{}, \PYGZsq{}a5\PYGZsq{}, \PYGZsq{}a9\PYGZsq{}, \PYGZsq{}a6\PYGZsq{}, \PYGZsq{}a4\PYGZsq{}, \PYGZsq{}a8\PYGZsq{}, \PYGZsq{}a7\PYGZsq{}, \PYGZsq{}a3\PYGZsq{}, \PYGZsq{}a1\PYGZsq{}]),}
+\PYG{g+go}{  (0.6637, [\PYGZsq{}a2\PYGZsq{}, \PYGZsq{}a5\PYGZsq{}, \PYGZsq{}a9\PYGZsq{}, \PYGZsq{}a6\PYGZsq{}, \PYGZsq{}a4\PYGZsq{}, \PYGZsq{}a8\PYGZsq{}, \PYGZsq{}a1\PYGZsq{}, \PYGZsq{}a3\PYGZsq{}, \PYGZsq{}a7\PYGZsq{}]),}
+\PYG{g+go}{  (0.6530, [\PYGZsq{}a2\PYGZsq{}, \PYGZsq{}a5\PYGZsq{}, \PYGZsq{}a9\PYGZsq{}, \PYGZsq{}a6\PYGZsq{}, \PYGZsq{}a4\PYGZsq{}, \PYGZsq{}a3\PYGZsq{}, \PYGZsq{}a1\PYGZsq{}, \PYGZsq{}a8\PYGZsq{}, \PYGZsq{}a7\PYGZsq{}])]}
+\PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{g}\PYG{o}{.}\PYG{n}{showCorrelation}\PYG{p}{(}\PYG{n}{g}\PYG{o}{.}\PYG{n}{computeOrdinalCorrelation}\PYG{p}{(}\PYG{n}{g}\PYG{o}{.}\PYG{n}{pbr}\PYG{p}{)}\PYG{p}{)}
+\PYG{g+go}{ Correlation indexes:}
+\PYG{g+go}{  Crisp ordinal correlation  : +0.717}
+\PYG{g+go}{  Epistemic determination    :  0.369}
+\PYG{g+go}{  Bipolar\PYGZhy{}valued equivalence : +0.265}
+\PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{g}\PYG{o}{.}\PYG{n}{showHTMLPerformanceHeatmap}\PYG{p}{(}\PYG{n}{Correlations}\PYG{o}{=}\PYG{k+kc}{True}\PYG{p}{,}
+\PYG{g+gp}{... }                   \PYG{n}{actionsList}\PYG{o}{=}\PYG{n}{g}\PYG{o}{.}\PYG{n}{pbr}\PYG{o}{.}\PYG{n}{bachetRankings}\PYG{p}{[}\PYG{l+m+mi}{0}\PYG{p}{]}\PYG{p}{[}\PYG{l+m+mi}{1}\PYG{p}{]}\PYG{p}{)}
+\end{sphinxVerbatim}
+\sphinxresetverbatimhllines
+
+\begin{figure}[H]
+\centering
+\capstart
+
+\noindent\sphinxincludegraphics[width=450\sphinxpxdimen]{{bachetBCR}.png}
+\caption{Bachet first choice recommendation}\label{\detokenize{pearls:bachetbcr1}}\end{figure}
+
+\sphinxAtStartPar
+In \hyperref[\detokenize{pearls:bachetbcr1}]{Fig.\@ \ref{\detokenize{pearls:bachetbcr1}}} we see confirmed that alternative \sphinxstyleemphasis{a2} shows indeed the very best performance profile and alternatives \sphinxstyleemphasis{a1}, \sphinxstyleemphasis{a3} and \sphinxstyleemphasis{a7} the weakest performance profiles.
+
+\sphinxAtStartPar
+As the \sphinxstyleemphasis{Bachet} first choice recommendation is based on a partial transitive digraph actually highly correlated with the given outranking digraph \sphinxstyleemphasis{g} (+0.717, see Line 9 above), a unique initial and a unique terminal prekernel always exist (see \hyperref[\detokenize{pearls:bachetbcr0}]{Listing \ref{\detokenize{pearls:bachetbcr0}}} Lines 8 and 14). Both these properties confer the \sphinxstyleemphasis{Bachet choice recommendation} an advantage over the first choice recommendation based on initial and terminal prekernels directly extracted from the given outranking digraph where we must first arbitrarily break, the case given, all chordless outranking circuits.
+
+\sphinxAtStartPar
+Computing initial and terminal \sphinxstyleemphasis{prekernels} in digraphs is the subject of the next Section.
 
 \begin{sphinxadmonition}{note}{Note:}
 \sphinxAtStartPar
-The partial \sphinxstyleemphasis{Bachet} ranking rule illustrates convincingly the benefit one may obtain when computing, not in a binary \{0,1\} bit world like today all bit\sphinxhyphen{}wise computing devices, but instead in a bipolar\sphinxhyphen{}valued \{\sphinxhyphen{}1,0,+1\} world with \sphinxstylestrong{sbit\sphinxhyphen{}wise Bachet computers}. The power of the epistemic disjunctive fusion operator, for instance, is indeed impressive. When two arguments prove the \sphinxstyleemphasis{Truthfullness} of a logical statement, their fusion will be \sphinxstylestrong{True}. When two arguments prove the \sphinxstylestrong{Falseness} of the staement, their fusion will be \sphinxstylestrong{False}, However, when they provide conjointly a proof of Falseness and and a proof of Thruthfullness, their fusion will be \sphinxstylestrong{indeterminate} (zero knowledge). It is worthwhile noticing again the essential computational role this indeterminate \sphinxstylestrong{zero} value is taking on in such a \sphinxstyleemphasis{Bachet} computer.
+The partial \sphinxstyleemphasis{Bachet} ranking rule illustrates convincingly the benefit one may obtain when computing, not in a binary \{0,1\} bit world like today all bit\sphinxhyphen{}wise computing devices, but instead in a bipolar\sphinxhyphen{}valued \{\sphinxhyphen{}1,0,+1\} world with \sphinxstylestrong{sbit\sphinxhyphen{}wise Bachet computers}. The power of the epistemic disjunctive fusion operator, for instance, is indeed impressive. When two arguments prove the \sphinxstyleemphasis{Truthfulness} of a logical statement, their fusion will be \sphinxstylestrong{True}. When two arguments prove the \sphinxstylestrong{Falseness} of the statement, their fusion will be \sphinxstylestrong{False}, However, when they provide conjointly a proof of Falseness and and a proof of Truthfulness, their fusion will be \sphinxstylestrong{indeterminate} (zero knowledge). It is worthwhile noticing again the essential computational role this indeterminate \sphinxstylestrong{zero} value is taking on in such a \sphinxstyleemphasis{Bachet} computer.
 \end{sphinxadmonition}
 
 
@@ -6072,10 +6132,10 @@ Bipolar\sphinxhyphen{}valued outranking digraphs verify two necessary properties
 \sphinxsetlistlabels{\arabic}{enumi}{enumii}{}{)}%
 \item {} 
 \sphinxAtStartPar
-They are weakly complete. For all pairs (\sphinxstyleemphasis{x}, \sphinxstyleemphasis{y}) of decision actions:
+They are strongly complete. For all pairs (\sphinxstyleemphasis{x}, \sphinxstyleemphasis{y}) of decision actions:
 
 \sphinxAtStartPar
-\(\max \big(r(x \succsim y),r(y \succsim x)\big)\, \geqslant \, 0.0\) and,
+\(\big(r(x \succsim y) + r(y \succsim x)\big)\, \geqslant \, 0.0\) and,
 
 \item {} 
 \sphinxAtStartPar
@@ -6084,7 +6144,7 @@ The construction of the outranking relation verifies the coduality principle. Fo
 \end{enumerate}
 
 \sphinxAtStartPar
-Now, the codual of weakly complete digraphs correspond to the class of asymmetric digraphs i.e. \sphinxstyleemphasis{partial tournaments}. If, on the one limit, all outranking relations are symmetric, the partial tournament will be empty. On the other hand, if the outranking relation models a linear ranking, the tournament will be complete and transitive.
+Now, the codual of complete digraphs correspond to the class of asymmetric digraphs i.e. \sphinxstyleemphasis{partial tournaments}. If, on the one limit, all outranking relations are symmetric, the partial tournament will be empty. On the other hand, if the outranking relation models a linear ranking, the tournament will be complete and transitive.
 
 \sphinxAtStartPar
 Let us consider for instance such a partial tournament %
@@ -6227,7 +6287,7 @@ From the fact that the epistemic support of a strict outranking \textendash{}’
 \end{equation}\end{quote}
 
 \sphinxAtStartPar
-Condition \eqref{equation:pearls:charODG1} strengthens in fact the \sphinxstyleemphasis{weakly completeness} property. Indeed:
+Condition \eqref{equation:pearls:charODG1} strengthens in fact a \sphinxstyleemphasis{weakly completeness} property. Indeed:
 \begin{quote}
 \begin{equation}\label{equation:pearls:weakComp}
 \begin{split}\big(\, r(x \succsim y)\, <\, 0.0\, \big) \; \Rightarrow \; \big[\, r(y \succsim x)\, \geqslant\, -r(x \succsim y)\, >\, 0.0 \,\big].\end{split}
@@ -6241,7 +6301,7 @@ And,
 \end{equation}\end{quote}
 
 \sphinxAtStartPar
-The bipolar valuation of a valid outranking digraph is hence necessarily characterised by the following condition, algebraically equivalent to Condition \eqref{equation:pearls:charODG1}:
+The bipolar valuation of a valid outranking digraph is hence necessarily characterised by the following \sphinxstylestrong{strong completeness} condition, algebraically equivalent to Condition \eqref{equation:pearls:charODG1}:
 \begin{quote}
 \begin{equation}\label{equation:pearls:charODG2}
 \begin{split}r(x \succsim y)\,+\,r(y \succsim x) \; \geqslant \; 0.0, \;\; \forall x \neq y \in X.\end{split}

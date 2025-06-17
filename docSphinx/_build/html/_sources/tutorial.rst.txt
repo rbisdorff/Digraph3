@@ -1458,7 +1458,7 @@ A colorful comparison of all the performances is shown on :numref:`officeChoiceH
 
    Unranked heatmap of the location choice performance tableau
 	   
-Location *Ave* shows extreme and contradictory performances: highest *Costs* and no *Working Comfort* on one hand, and total satisfaction with respect to *Standing*, *Proximity* and *Parking facilities* on the other hand. Similar, but opposite, situation is given for location *Ces*: unsatisfactory *Working Space*, no *Standing* and no *Working Comfort* on the one hand, and lowest *Costs*, best *Proximity* and *Parking facilities* on the other hand. Contrary to these contradictory alternatives, we observe two appealing compromise decision alternatives: locations *Dom* and *Gar*. Finally, location *Fen* is clearly the less satisfactory alternative of all.
+Location *A* (*Ave*) shows extreme and contradictory performances: highest *Costs* and no *Working Comfort* on one hand, and total satisfaction with respect to *Standing*, *Proximity* and *Parking facilities* on the other hand. Similar, but opposite, situation is given for location *C* (*Ces*): unsatisfactory *Working Space*, no *Standing* and no *Working Comfort* on the one hand, and lowest *Costs*, best *Proximity* and *Parking facilities* on the other hand. Contrary to these contradictory alternatives, we observe two appealing compromise decision alternatives: locations *D* (*Dom*) and *G* (*Gar*). Finally, location *F* (*Fen*) is clearly the less satisfactory alternative of all.
 
 In view of :numref:`officeChoiceHeatmap`, what is now the office location we may recommend to the CEO as **first choice** ?
 
@@ -1489,7 +1489,7 @@ For computing such a bipolar-valued outranking digraph from the given performanc
 
    The office choice outranking digraph  
 
-In :numref:`officeChoiceOutranking` we may notice that Alternative *D* is **positively outranking** all other potential office locations (a *Condorcet winner*). Yet, alternatives *A* (the most expensive) and *C* (the cheapest) are *not* outranked by any other locations; they are in fact **weak** *Condorcet winners*.
+In :numref:`officeChoiceOutranking` we may notice that Alternative *D* is **positively outranking** all other potential office locations. *D* is hence a *Condorcet winner*. Yet, alternatives *A* (the most expensive) and *C* (the cheapest) are *not* outranked by any other locations; they are in fact **weak** *Condorcet winners*.
 
 .. code-block:: pycon
    :linenos:
@@ -1527,24 +1527,25 @@ We observe in the resulting strict outranking digraph *gcd* 10 valid strict outr
 Designing a best choice recommender system
 ``````````````````````````````````````````
 
-Solving a best-choice problem consists traditionally in finding *the* unique best decision alternative. We adopt here instead a modern recommender system’s approach which shows a non empty subset of decision alternatives which contains by construction the potential best alternative(s).
+Solving a best-choice problem consists traditionally in finding *the* unique best decision alternative. We adopt here instead a modern **recommender system** approach which shows a non empty subset of decision alternatives which contains by construction the potential best alternative(s).
 
 The five *pragmatic principles* for computing such a *best-choice recommendation* (BCR) are the following
 
-    - **P1**: *Elimination for well motivated reasons*; each eliminated alternative has to be strictly outranked by at least one alternative in the BCR.
+    - **P1**: *Elimination for well motivated reasons* (**external stability**); each eliminated alternative has to be strictly outranked by at least one alternative in the BCR.
       
     - **P2**: *Minimal size*; the BCR must be as limited in cardinality as possible.
       
-    - **P3**: *Efficient and informative*; The BCR must not contain a self-contained sub-recommendation.
+    - **P3**: *Efficient and informative* (**internal stability**); The BCR must not contain a self-contained sub-recommendation.
+      
     - **P4**: *Effectively better*; the BCR must not be ambiguous in the sense that it may not be both a first choice as well as a last choice recommendation.
 
     - **P5**: *Maximally determined*; the BCR is, of all potential best-choice recommendations, the most determined one in the sense of the epistemic characteristics of the bipolar-valued outranking relation.
 
 Let *X* be the set of potential decision alternatives. Let *Y* be a non empty subset of *X*, called a *choice* in the strict outranking digraph :math:`G(X,r(\succnsim))`. We can now qualify a BCR *Y* in following terms:
 
-    - *Y* is called strictly *outranking* (resp. *outranked*) when for all not selected alternative *x* there exists an alternative *y* in *X* retained such that :math:`r(y \succnsim x) > 0.0` (resp. :math:`r(x \succnsim y) > 0.0`). Such a choice verifies principle **P1**.
+    - *Y* is called strictly *outranking* (resp. *outranked*) when for all not selected alternative *x* there exists an alternative *y* in *X* retained such that :math:`r(y \succnsim x) > 0.0` (resp. :math:`r(x \succnsim y) > 0.0`). Such a choice verifies the external stability (principle **P1**).
       
-    - *Y* is called *weakly independent* when for all *x* not equal *y* in *Y* we observe :math:`r(x \succnsim y) \leq 0.0`. Such a choice verifies principle **P3** (*internal stability*).
+    - *Y* is called *weakly independent* when for all *x* not equal *y* in *Y* we observe :math:`r(x \succnsim y) \leq 0.0`. Such a choice verifies the internal stability (principle **P3**).
       
     - *Y* is conjointly a strictly *outranking* (resp. *outranked*) **and** *weakly independent* choice. Such a choice is called an *initial* (resp. *terminal*) *prekernel* (see the tutorial on :ref:`computing digraph kernels <Kernel-Tutorial-label>`). The initial prekernel now verifies principles **P1**, **P2**, **P3** and **P4**.
       
@@ -1560,16 +1561,16 @@ Mind that a given strict outranking digraph may not always admit prekernels. Thi
 
 When observing chordless odd outranking circuits, we need to break them open with the :py:class:`digraphs.BrokenCocsDigraph` class at their weakest link, before enumerating the prekernels.
 
-We are ready now for building a best choice recommendation.
+We are ready now for building a first choice recommendation.
 
-Computing the best choice recommendation
-````````````````````````````````````````
+Computing the first choice recommendation
+`````````````````````````````````````````
 
-Following the previously stated pragmatic principles, potential first choice recommendations are determined by the outranking prekernels --*weakly independent* and *strictly outranking* choices-- of the strict outranking digraph (see the tutorial on :ref:`computing digraph kernels <Kernel-Tutorial-label>`). Any detected chordless odd circuits are by default broken up (see [BIS-2008]_).
+Following the previously stated pragmatic principles, potential first choice recommendations are determined by the inbitial prekernels --*weakly independent* and *strictly outranking* choices-- of the strict outranking digraph (see the tutorial on :ref:`computing digraph kernels <Kernel-Tutorial-label>`). Any detected chordless odd outranking circuits are by default broken up (see [BIS-2008]_).
 
 .. code-block:: pycon
    :name: strictBestChoice
-   :caption: Computing the strict best choice recommendation
+   :caption: Computing the first choice recommendation
    :linenos:
    :emphasize-lines: 1,6,12-14,16
 
@@ -1598,9 +1599,9 @@ Following the previously stated pragmatic principles, potential first choice rec
 	                          'D': 0.00, 'C': 0.00, 'B': 0.00,
 				  'A': 0.00, }
 				  
-It is interesting to notice in :numref:`strictBestChoice` (Line 6) that the **strict best choice recommendation** consists in the set of weak Condorcet winners: 'A', 'C' and 'D'. In the corresponding characteristic vector (see Lines 12-14), representing the bipolar credibility degree with which each alternative may indeed be considered a best choice (see [BIS-2006a]_, [BIS-2006b]_), we find confirmed that alternative *D* is the only positively validated one, whereas both extreme alternatives - *A* (the most expensive) and *C* (the cheapest) - stay in an indeterminate situation. They **may be or not be** potential first choice candidates besides *D*. Notice furthermore that compromise alternative *G*, while not actually included in an outranking prekernel, shows as well an indeterminate situation with respect to *being or not being* a potential first choice candidate. Alternatives *B*, *E* and *F* are *negatively* included, i.e. *positively excluded* from this best choice recommendation.
+It is interesting to notice in :numref:`strictBestChoice` (Line 6) that the **first choice recommendation** consists actually in the set of weak Condorcet winners: 'A', 'C' and 'D'. In the corresponding characteristic vector (see Lines 12-14), representing the bipolar credibility degree with which each alternative may indeed be considered a first choice candidate (see [BIS-2006a]_, [BIS-2006b]_), we find confirmed that alternative *D* is the only positively validated one, whereas both extreme alternatives - *A* (the most expensive) and *C* (the cheapest) - stay in an *indeterminate* situation. They **may be or not be** potential first choice candidates besides *D*. Notice furthermore that location *G* is not included in the initial prekernel, yet, shows nevertheless an indeterminate situation with respect to *being or not being* a potential first choice candidate. Alternatives *B*, *E* and *F* are *negatively* included, i.e. *positively excluded* from this first choice recommendation.
 
-We may also notice in Line 16 that both alternatives *A* and *F* are reported as potential *strict outranked* choices, hence as **potential last choice recommendation** . The ambiguous first-ranked and last-ranked position of alternative *A* indicates its global incomparability status as shown in :numref:`bestOfficeChoice`.
+We may furthermore notice in Line 16 that both alternatives *A* and *F* are reported as potential *strict outranked* choices, hence as potential **last choice candidates** . The ambiguous first-ranked and last-ranked position of alternative *A* indicates its global incomparability status as shown in :numref:`bestOfficeChoice`.
 
 .. code-block:: pycon
    :linenos:
@@ -1619,7 +1620,7 @@ We may also notice in Line 16 that both alternatives *A* and *F* are reported as
 
    Best office choice recommendation from strict outranking digraph
 
-Let us now compare the performances of alternatives *D* and *G* in a
+To comprehend the indeterminate situation of location *G*, let us now compare the performances of alternatives *D* and *G* in a
 pairwise perspective (see below). With the given preference discrimination thresholds, we notice that alternative *G* is actually **certainly** *at least as good as* alternative *D*:  :math:`r(G \succsim D) = +145/145 = +1.0` and alternative *D* is also positively, but less credibly, *at least as good as* alternative *G*:  :math:`r(D \succsim G) = +36/145 = +0.25` (see Line 14 below).
 
 .. code-block:: pycon
@@ -1662,13 +1663,13 @@ Yet, we must as well notice that the cheapest alternative *C* is in fact **stric
     =========================================================================
     Valuation in range: -145.00 to +145.00; global concordance: +15.00/-15.00
 
-Following pragmatic principle **P3**, stating that a BCR should not contain a sub-recommendation, alternative *G* is hence dropped from our first-ranked list of alternatives. Yet, the credibility level of this outranking situation is not very high (15/145 = 0.10 = 55.2% significance majority). Considering now the usual more or less imprecise knowledge of the different criteria significance weights, it appears opportune to compute in :numref:`confidentOfficeChoice` below a 90% confident outranking digraph (see the advanced topic on :ref:`computing confident outrankings with uncertain criteria significance weights <Bipolar-Valued-Likelihood-Tutorial-label>`).
+Following pragmatic principle **P3** --the required internal stability stating that a BCR should not contain a sub-recommendation-- alternative *G* is hence dropped from our first-ranked list of alternatives. Yet, the credibility level of this outranking situation is not very high (15/145 = 0.10 = 55.2% significance majority). Considering a potential imprecise knowledge of the different criteria significance weights, it appears opportune to compute in :numref:`confidentOfficeChoice` below a 90% confident outranking digraph (see the advanced topic on :ref:`computing confident outrankings with uncertain criteria significance weights <Bipolar-Valued-Likelihood-Tutorial-label>`).
 
 .. code-block:: pycon
    :linenos:
    :name: confidentOfficeChoice
    :emphasize-lines: 1,9,12,21,27
-   :caption: Computing a confident first choice recommendation
+   :caption: Computing a 90% confident first choice recommendation
 
    >>> cg = ConfidentBipolarOutrankingDigraph(t,confidence=90.0)
    >>> cg
@@ -1681,7 +1682,7 @@ Following pragmatic principle **P3**, stating that a BCR should not contain a su
      Uncertainty model    : triangular(a=0,b=2w)
      Likelihood domain    : [-1.0;+1.0]
      Confidence level     : 0.80 (90.0%)
-     Confident credibility: > 55.2%
+     Confident credibility: > 15/145 (55.2%)
      Determinateness (%)  : 70.67
      Valuation domain     : [-1.00;1.00]
    >>> cg.showFirstChoiceRecommendation()
@@ -1706,13 +1707,13 @@ Following pragmatic principle **P3**, stating that a BCR should not contain a su
        determinateness (%) : 50.00
      - most credible action(s) = { }
 
-The :py:class:`~outrankingDigraphs.ConfidentBipolarOutrankingDigraph` constructor assumes here that the criteria significance weights are in fact triangular random variates in the range 0 to 2 times the given weights (Line 9). With this working hypothesis, we obtain a confident outranking digraph *cg* where all outranking situations with a credibility in the range ]-55.2%; +55.2%[ are put to *indeterminate* (Line 8). The outranking situation between location *C* and location *G* is hence indeed not 90% confident and our first choice recommendation now includes consequently this latter location as a further potential best choice candidate (Line 21). Notice by the way that location 'D' is no more a *Condorcet winner* as the alternative is not confidently outranking at level 90% all the other locations (Line 27).   
+The :py:class:`~outrankingDigraphs.ConfidentBipolarOutrankingDigraph` class constructor assumes here that the criteria significance weights are in fact triangular random variates in the range 0 to 2 times the given significance weights (Line 9). With this working hypothesis, we obtain a 90% confident outranking digraph *cg* where three outranking situations with a credibility in the range ]-15/145; +15/145[ are put to *indeterminate* (Line 8). The pairwise outranking situations between location *C* and location *G* are for instance not 90% confident and the first choice recommendation now includes consequently this latter location as a further potential best choice candidate (Line 21). Notice by the way that location 'D' is no more a *Condorcet winner* as the alternative is not 90% confidently outranking location *C* (Line 27).   
 
 To get a further interesting insight in the overall outranking situation, we finally make usage of the new :py:class:`~transitiveDigraphs.PartialBachetRanking` class imported from the :py:mod:`transitiveDigraphs` module, for computing a **partial ranking** of all the potential office locations (see the advanced topic on :ref:`partially ranking strategies <Partial-Ranking-Tutorial-label>`).
 
 Partially ranking the outranking digraph
 ````````````````````````````````````````
-In :numref:`BachetRanking0` Line 2, we operate the :ref:`epistemic disjunctive fusion <Epistemic-Fusion-label>` of the five best correlated linear rankings obtained from 200 random *Bachet* rankings (see Lines 4-8). In the resulting transitive partial relation, alternatives *A*, *C*, *D* as well as *G* appear all ranked before *B* and *E*, whereas alternative *F* appears always last-ranked (see Lines 11 and 14).
+In :numref:`BachetRanking0` Line 2, we operate the :ref:`epistemic disjunctive fusion <Epistemic-Fusion-label>` of the five best correlated linear rankings obtained from 200 random *Bachet* rankings (see Lines 4-8). In the resulting transitive partial outranking relation, alternatives *A*, *C*, *D* as well as *G* appear all ranked before *B* and *E*, whereas alternative *F* appears always last-ranked (see Lines 11 and 14).
 
 .. code-block:: pycon
    :name: BachetRanking0
@@ -1741,7 +1742,7 @@ In :numref:`BachetRanking0` Line 2, we operate the :ref:`epistemic disjunctive f
 
 .. figure:: officeChoiceRanking.png
    :name: officeChoiceRanking
-   :width: 200 px
+   :width: 300 px
    :align: center
 
    Partially ranking the outranking digraph
@@ -1762,14 +1763,16 @@ We may use the best, with the outranking digraph *g* correlated (+0.816), *Bache
 
 In view of :numref:`rankedOfficeChoiceHeatmap`, office locations *G* or *D* make up convincing best choice recommendations with an apparent slight advantage for location *G*. Notice that both alternatives *A* and *C*, with their highly contrasted performance profiles, appear ranked in the midfield. Indeed, as they don't compare well, they may neither be first- nor last-ranked. This is why, when such largely incomparable or extreme alternatives are observed, linear rankings may fail to deliver adequate first-choice recommendations. 
 
-A best choice recommendation appears eventually depending on the very importance the CEO is attaching to each one of the three decision objectives he is considering. In the setting here, where he considers that *maximizing the future turnover* is the most important objective followed by *minimizing the Costs* and, less important, *maximizing the working conditions*, locations *D* as well as *G* represent actually potential first choices. However, if *Costs* do not play much a role, it would perhaps be better to choose the most advantageous location *A*; or if, on the contrary, *Costs* do matter a lot, choosing the cheapest alternative *C* could definitely be a more convincing choice. 
+Our first choice recommendation appears finally depending essentially on the very importance the CEO is attaching to each one of the three decision objectives he is considering. In the setting here, where he considers that *maximizing the future turnover* is the most important objective (81/145) followed by *minimizing the Costs* (45/145) and, less important, *maximizing the working conditions* (19/145), compromise locations *D* as well as *G* represent the potential best choices candidates. However, if *Costs* do not play much a role, it would perhaps be better to choose the most advantageous location *A*; or if, on the contrary, *Costs* do matter a lot, choosing the cheapest alternative *C* could definitely give a more convincing best choice. 
 
 It might be worth, as an **exercise**, to modify the criteria significance weights in the 'officeChoice.py' data file in such a way that
 
     - all three decision objectives are considered *equally important*, and
     - all criteria under an objective are considered *equi-significant*.
 
-What will become the best choice recommendation under this working hypothesis? The next tutorial shows how to create or edit a performance tableau.
+What will become the best choice recommendation under this working hypothesis?
+
+The next tutorial shows how to create or edit a performance tableau.
 
 .. seealso::
 
@@ -1795,7 +1798,7 @@ The digraph put forward by *Bouyssou* in the October 2005 discussion is not stro
 
 Only after 2013, when the strong completeness and the coduality properties of the outranking digraph were discovered, became it obvious that the initial prekernels of the strict outranking digraph, coupled with the solution of the corresponding kernel equation system, could in fact deliver convincing best choice recommendations (see [BIS-2013]_). Yet, *D. Bouyssou* and the critical audience of the 2005 seminar would be satisfied to see their doubts somehow confirmed by the solution of the office location choice problem shown previously. Indeed, the initial prekernel {*A*, *C*, *D*} of the corresponding strict outranking digraph does not retain location *G* --as it is actually strictly outranked by location *C* -- and proposes solely location *D* as credible best choice candidate. This latter location appears however certainly outranked by location *G*. Keeping location *G* in an indeterminate situation with being or not being a potential best choice candidate in the solution of the corresponding kernel equation system shows that the resulting bipolar-valued choice vector may be an essential complement of information. Showing solely an initial prekernel appears not necessarily sufficient for determining the actual best choice alternative(s). Similarly, questioning the confidence of outranking situations showing, the case given, weak positive credibilities, may result in a more convincing first-choice recommendation.
 
-But it is the new :ref:`Bachet partial ranking rule <Partial-Ranking-Tutorial-label>` that allows nowadys to compute a partial transitive tournament, very close in a bipolar-valued  ordinal correlation sense to the actual transitive part of the given outranking digraph, that definitely supports our prekernels based recommending approach. The unique initial and terminal prekernels of such a transitive tournament, easily found via a topological sort algorithm, may indeed deliver more effectively any convincing first and/or last choice recommendations.
+But it is the new :ref:`Bachet partial ranking rule <Partial-Ranking-Tutorial-label>` that allows nowadays to compute a partial transitive tournament, very close in a bipolar-valued  ordinal correlation sense to the actual transitive part of the given outranking digraph, that definitely supports our prekernels based recommending approach. The unique initial and terminal prekernels of such a transitive tournament, easily found via a topological sort algorithm, may indeed deliver more effectively any convincing first and/or last choice recommendations.
 
 Back to :ref:`Content Table <Tutorial-label>`
 
