@@ -2362,13 +2362,16 @@ The performance evaluations of each decision alternative on each criterion are g
             actionsList = argActionsList
             rankingRule = None
             #Correlations = False
-            rankCorrelation = None
+            #rankCorrelation = None
             if SparseModel:
                 rankCorrelation = None
             else:
-                from outrankingDigraphs import BipolarOutrankingDigraph
-                g = BipolarOutrankingDigraph(self,actionsSubset=argActionsList,Normalized=True)
-                rankCorrelation = g.computeOrderCorrelation(list(reversed(actionsList)))
+                if outrankingModel == 'this':
+                    g = self
+                else:
+                    from outrankingDigraphs import BipolarOutrankingDigraph
+                    g = BipolarOutrankingDigraph(self,actionsSubset=argActionsList,Normalized=True)
+                rankCorrelation = g.computeRankingCorrelation(actionsList)
         if Debug:
             print('1',actionsList)
             print('2',rankCorrelation)
