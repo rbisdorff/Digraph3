@@ -8060,7 +8060,12 @@ Exercises
 
 We propose hereafter some decision problems which may serve as exercises and exam questions in an *Algorithmic Decision Theory* Course. They cover *selection*, *ranking* and *rating* decision problems. The exercises are marked as follows: § (warming up), §§ (home work), §§§ (research work).
 
+.. contents:: 
+	:depth: 1
+	:local:
+
 Solutions should be supported both by computational Python code using the **Digraph3** programming resources as well as by methodological and algorithmic arguments from the `Algorithmic Decision Theory <adtLectures.html>`_ Lectures.
+
 
 Who will receive the best student award? (§)
 ````````````````````````````````````````````
