@@ -3918,14 +3918,14 @@ class BipolarOutrankingDigraph(OutrankingDigraph):
         Default presentation method for BipolarOutrankingDigraph instance.
         """
         reprString = '*------- Object instance description ------*\n'
-        reprString += 'Instance class       : %s\n' % self.__class__.__name__
-        reprString += 'Instance name        : %s\n' % self.name
-        reprString += 'Actions              : %d\n' % self.order
-        reprString += 'Criteria             : %d\n' % len(self.criteria)
-        reprString += 'Size                 : %d\n' % self.computeSize()
+        reprString += 'Instance class        : %s\n' % self.__class__.__name__
+        reprString += 'Instance name         : %s\n' % self.name
+        reprString += 'Actions               : %d\n' % self.order
+        reprString += 'Criteria              : %d\n' % len(self.criteria)
+        reprString += 'Size                  : %d\n' % self.computeSize()
         try:
             oppDeg = self.computeOppositeness(InPercents=True)
-            reprString += 'Oppositeness (%%)    : %.2f\n' % (oppDeg['oppositeness'])
+            reprString += 'Oppositeness (%%)     : %.2f\n' % (oppDeg['oppositeness'])
         except:
             pass
         try:
@@ -3933,22 +3933,25 @@ class BipolarOutrankingDigraph(OutrankingDigraph):
                 reprString += 'Uncertainty model  : %s(a=%.1f,b=%.1f)\n' %\
                     (self.distribution,self.betaParameter,self.betaParameter)
             else:
-                reprString += 'Uncertainty model    : %s(a=%s,b=%s)\n' %\
+                reprString += 'Uncertainty model     : %s(a=%s,b=%s)\n' %\
                              (self.distribution,'0','2w') 
-            reprString += 'Likelihood domain    : [-1.0;+1.0]\n'
-            reprString += 'Confidence level     : %.2f (%.1f%%)\n' %\
+            reprString +=     'Likelihood domain     : [-1.0;+1.0]\n'
+            reprString +=     'Confidence level      : %.2f (%.1f%%)\n' %\
                          (self.bipolarConfidenceLevel,\
-                         (self.bipolarConfidenceLevel+1.0)/2.0*100.0)
-            reprString += 'Confident credibility: > %.1f%%\n' %\
-                ((self.confidenceCutLevel+Decimal('1.0'))/Decimal('2.0')*Decimal('100.0'))
+                         (self.bipolarConfidenceLevel+1.0)/2.0*100.0 )
+            reprString +=     'Confident credibility : > abs(%.3f) (%.1f%%)\n' %\
+                (
+                    self.confidenceCutLevel,         
+                    (self.confidenceCutLevel+Decimal('1.0'))/Decimal('2.0')*Decimal('100.0')
+                )
         except:
             pass
-        reprString += 'Determinateness (%%)  : %.2f\n' %\
+        reprString += 'Determinateness (%%)   : %.2f\n' %\
                       self.computeDeterminateness(InPercents=True)
-        reprString += 'Valuation domain     : [%.2f;%.2f]\n' \
+        reprString += 'Valuation domain      : [%.2f;%.2f]\n' \
             % (self.valuationdomain['min'],self.valuationdomain['max'])
         #reprString += 'Valuation domain : %s\n' % str(self.valuationdomain)
-        reprString += 'Attributes           : %s\n' % list(self.__dict__.keys())
+        reprString += 'Attributes            : %s\n' % list(self.__dict__.keys())
         val1 = self.runTimes['totalTime']
         val2 = self.runTimes['dataInput']
         val3 = self.runTimes['computeRelation']

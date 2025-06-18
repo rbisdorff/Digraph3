@@ -1663,7 +1663,7 @@ Yet, we must as well notice that the cheapest alternative *C* is in fact **stric
     =========================================================================
     Valuation in range: -145.00 to +145.00; global concordance: +15.00/-15.00
 
-Following pragmatic principle **P3** --the required internal stability stating that a BCR should not contain a sub-recommendation-- alternative *G* is hence dropped from our first-ranked list of alternatives. Yet, the credibility level of this outranking situation is not very high (15/145 = 0.10 = 55.2% significance majority). Considering a potential imprecise knowledge of the different criteria significance weights, it appears opportune to compute in :numref:`confidentOfficeChoice` below a 90% confident outranking digraph (see the advanced topic on :ref:`computing confident outrankings with uncertain criteria significance weights <Bipolar-Valued-Likelihood-Tutorial-label>`).
+Following pragmatic principle **P3** --the required internal stability stating that a BCR should not contain a sub-recommendation-- alternative *G* is hence dropped from our first-ranked list of alternatives. Yet, the credibility level of this outranking situation is not very high: 15/145 = 0.104 (55.2% significance majority). Considering a potential imprecise knowledge of the different criteria significance weights, it appears opportune to compute in :numref:`confidentOfficeChoice` below a 90% confident outranking digraph (see the advanced topic on :ref:`computing confident outrankings with uncertain criteria significance weights <Bipolar-Valued-Likelihood-Tutorial-label>`).
 
 .. code-block:: pycon
    :linenos:
@@ -1682,7 +1682,7 @@ Following pragmatic principle **P3** --the required internal stability stating t
      Uncertainty model    : triangular(a=0,b=2w)
      Likelihood domain    : [-1.0;+1.0]
      Confidence level     : 0.80 (90.0%)
-     Confident credibility: > 15/145 (55.2%)
+     Confident credibility: > abs(0.104) (55.2%)
      Determinateness (%)  : 70.67
      Valuation domain     : [-1.00;1.00]
    >>> cg.showFirstChoiceRecommendation()
@@ -6797,17 +6797,17 @@ To answer this question, we will consider the respective criteria significance w
    ...         distribution='triangular',confidence=90.0)
    >>> cdg
     *------- Object instance description ------*
-    Instance class       : ConfidentBipolarOutrankingDigraph
-    Instance name        : rel_AliceChoice_CLT
-    # Actions            : 10
-    # Criteria           : 9
-    Size                 : 44
-    Valuation domain     : [-1.00;1.00]
-    Uncertainty model    : triangular(a=0,b=2w) 
-    Likelihood domain    : [-1.0;+1.0] 
-    Confidence level     : 90.0% 
-    Confident majority   : 14/24 (58.3%) 
-    Determinateness (%)  : 68.19
+    Instance class         : ConfidentBipolarOutrankingDigraph
+    Instance name          : rel_AliceChoice_CLT
+    # Actions              : 10
+    # Criteria             : 9
+    Size                   : 44
+    Valuation domain       : [-1.00;1.00]
+    Uncertainty model      : triangular(a=0,b=2w) 
+    Likelihood domain      : [-1.0;+1.0] 
+    Confidence level       : 90.0% 
+    Confident credibility  : > abs(0.167) (58.3%) 
+    Determinateness (%)    : 68.19
 
 Of the original 67 valid outranking situations, we retain 44 outranking situations as being 90%-*confident* (see :numref:`aliceConfidentDigraph` Line 11). The corresponding 90%-*confident* **qualified majority** of criteria significance amounts to 14/24 = 58.3% (Line 15).  
 

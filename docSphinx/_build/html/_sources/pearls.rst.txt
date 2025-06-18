@@ -270,25 +270,25 @@ For the corresponding confident outranking digraph, we require a confidence leve
    >>> g90 = ConfidentBipolarOutrankingDigraph(t,confidence=90)
    >>> print(g90)
     *------- Object instance description ------*
-    Instance class      : ConfidentBipolarOutrankingDigraph
-    Instance name       : rel_randomperftab_CLT
-    # Actions           : 7
-    # Criteria          : 7
-    Size                : 15
-    Uncertainty model   : triangular(a=0,b=2w)
-    Likelihood domain   : [-1.0;+1.0]
-    Confidence level    : 0.80 (90.0%)
-    Confident majority  : 0.14 (57.1%)
-    Determinateness (%) : 62.07
-    Valuation domain    : [-1.00;1.00]
-    Attributes          : ['name', 'bipolarConfidenceLevel',
-			   'distribution', 'betaParameter', 'actions',
-			   'order', 'valuationdomain', 'criteria',
-			   'evaluation', 'concordanceRelation',
-			   'vetos', 'negativeVetos',
-			   'largePerformanceDifferencesCount',
-			   'likelihoods', 'confidenceCutLevel',
-			   'relation', 'gamma', 'notGamma']
+    Instance class       : ConfidentBipolarOutrankingDigraph
+    Instance name        : rel_randomperftab_CLT
+    # Actions            : 7
+    # Criteria           : 7
+    Size                 : 15
+    Uncertainty model    : triangular(a=0,b=2w)
+    Likelihood domain    : [-1.0;+1.0]
+    Confidence level     : 0.80 (90.0%)
+    Confident credibility: > abs(0.143) (57.1%)
+    Determinateness (%)  : 62.07
+    Valuation domain     : [-1.00;1.00]
+    Attributes           : ['name', 'bipolarConfidenceLevel',
+			    'distribution', 'betaParameter', 'actions',
+			    'order', 'valuationdomain', 'criteria',
+			    'evaluation', 'concordanceRelation',
+			    'vetos', 'negativeVetos',
+			    'largePerformanceDifferencesCount',
+			    'likelihoods', 'confidenceCutLevel',
+			    'relation', 'gamma', 'notGamma']
 
 The resulting 90% confident expected outranking relation is shown below.
 
@@ -314,12 +314,12 @@ The resulting 90% confident expected outranking relation is shown below.
 	   |(-0.95) (-0.00) (+0.73) (-0.95) (+0.73)  ( - )  (-0.00) 
       'a7' | +0.00   +0.71   +0.57   +0.43   +0.29   +0.00   +0.00  
 	   |(-0.65) (+1.00) (+1.00) (+0.99) (+0.95) (-0.00)  ( - )  
-    Valuation domain   : [-1.000; +1.000] 
-    Uncertainty model  : triangular(a=2.0,b=2.0) 
-    Likelihood domain  : [-1.0;+1.0] 
-    Confidence level   : 0.80 (90.0%) 
-    Confident majority : 0.14 (57.1%) 
-    Determinateness    : 0.24 (62.1%)
+    Valuation domain      : [-1.000; +1.000] 
+    Uncertainty model     : triangular(a=2.0,b=2.0) 
+    Likelihood domain     : [-1.0;+1.0] 
+    Confidence level      : 0.80 (90.0%) 
+    Confident credibility : > abs(0.14) (57.1%) 
+    Determinateness       : 0.24 (62.1%)
 
 The (*lh*) figures, indicated in the table above, correspond to bipolar likelihoods and the required bipolar confidence level equals (0.90+1.0)/2 = 0.80 (see Line 22 above). Action '*a1*' thus confidently outranks all other actions, except '*a7*' where the actual likelihood (+0.65) is lower than the required one (0.80) and we furthermore observe a considerable counter-performance on criterion '*g1*'.
 
@@ -386,12 +386,12 @@ Now, what becomes this 90%-confident outranking digraph when we require a strong
 	  | (-0.95) (-0.00) (+0.73) (-0.95) (+0.73)  ( - )  (-0.00) 
      'a7' |  +0.00   +0.71   +0.57   +0.43   +0.00   +0.00   +0.00  
 	  | (-0.65) (+1.00) (+1.00) (+0.99) (+0.95) (-0.00)  ( - )  
-    Valuation domain   : [-1.000; +1.000] 
-    Uncertainty model  : triangular(a=2.0,b=2.0) 
-    Likelihood domain  : [-1.0;+1.0] 
-    Confidence level   : 0.98 (99.0%) 
-    Confident majority : 0.29 (64.3%) 
-    Determinateness    : 0.13 (56.6%)
+    Valuation domain      : [-1.000; +1.000] 
+    Uncertainty model     : triangular(a=2.0,b=2.0) 
+    Likelihood domain     : [-1.0;+1.0] 
+    Confidence level      : 0.98 (99.0%) 
+    Confident credibility : > abs(0.286) (64.3%) 
+    Determinateness       : 0.13 (56.6%)
 
 At 99% confidence, the minimal required significance majority support amounts to 64.3% (see Line 24 above). As a result, most outranking situations don't get anymore validated, like the outranking situations between action '*a1*' and actions '*a3*', '*a4*', '*a5*' and '*a6*' (see Line 5 above). The overall epistemic determination of the digraph consequently drops from 62.1% to 56.6% (see Line 25).
 

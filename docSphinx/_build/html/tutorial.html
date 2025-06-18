@@ -1928,7 +1928,7 @@ pairwise perspective (see below). With the given preference discrimination thres
 <span class="hll"><span class="linenos">14</span><span class="go"> Valuation in range: -145.00 to +145.00; global concordance: +15.00/-15.00</span>
 </span></pre></div>
 </div>
-<p>Following pragmatic principle <strong>P3</strong> –the required internal stability stating that a BCR should not contain a sub-recommendation– alternative <em>G</em> is hence dropped from our first-ranked list of alternatives. Yet, the credibility level of this outranking situation is not very high (15/145 = 0.10 = 55.2% significance majority). Considering a potential imprecise knowledge of the different criteria significance weights, it appears opportune to compute in <a class="reference internal" href="#confidentofficechoice"><span class="std std-numref">Listing 1.13</span></a> below a 90% confident outranking digraph (see the advanced topic on <a class="reference internal" href="pearls.html#bipolar-valued-likelihood-tutorial-label"><span class="std std-ref">computing confident outrankings with uncertain criteria significance weights</span></a>).</p>
+<p>Following pragmatic principle <strong>P3</strong> –the required internal stability stating that a BCR should not contain a sub-recommendation– alternative <em>G</em> is hence dropped from our first-ranked list of alternatives. Yet, the credibility level of this outranking situation is not very high: 15/145 = 0.104 (55.2% significance majority). Considering a potential imprecise knowledge of the different criteria significance weights, it appears opportune to compute in <a class="reference internal" href="#confidentofficechoice"><span class="std std-numref">Listing 1.13</span></a> below a 90% confident outranking digraph (see the advanced topic on <a class="reference internal" href="pearls.html#bipolar-valued-likelihood-tutorial-label"><span class="std std-ref">computing confident outrankings with uncertain criteria significance weights</span></a>).</p>
 <div class="literal-block-wrapper docutils container" id="confidentofficechoice">
 <div class="code-block-caption"><span class="caption-number">Listing 1.13 </span><span class="caption-text">Computing a 90% confident first choice recommendation</span><a class="headerlink" href="#confidentofficechoice" title="Link to this code"></a></div>
 <div class="highlight-pycon notranslate"><div class="highlight"><pre><span></span><span class="hll"><span class="linenos"> 1</span><span class="gp">&gt;&gt;&gt; </span><span class="n">cg</span> <span class="o">=</span> <span class="n">ConfidentBipolarOutrankingDigraph</span><span class="p">(</span><span class="n">t</span><span class="p">,</span><span class="n">confidence</span><span class="o">=</span><span class="mf">90.0</span><span class="p">)</span>
@@ -1942,7 +1942,7 @@ pairwise perspective (see below). With the given preference discrimination thres
 <span class="hll"><span class="linenos"> 9</span><span class="go">  Uncertainty model    : triangular(a=0,b=2w)</span>
 </span><span class="linenos">10</span><span class="go">  Likelihood domain    : [-1.0;+1.0]</span>
 <span class="linenos">11</span><span class="go">  Confidence level     : 0.80 (90.0%)</span>
-<span class="hll"><span class="linenos">12</span><span class="go">  Confident credibility: &gt; 15/145 (55.2%)</span>
+<span class="hll"><span class="linenos">12</span><span class="go">  Confident credibility: &gt; abs(0.104) (55.2%)</span>
 </span><span class="linenos">13</span><span class="go">  Determinateness (%)  : 70.67</span>
 <span class="linenos">14</span><span class="go">  Valuation domain     : [-1.00;1.00]</span>
 <span class="linenos">15</span><span class="gp">&gt;&gt;&gt; </span><span class="n">cg</span><span class="o">.</span><span class="n">showFirstChoiceRecommendation</span><span class="p">()</span>
@@ -6623,17 +6623,17 @@ fecop 75.78% success rate</p>
 <span class="linenos"> 4</span><span class="gp">... </span>        <span class="n">distribution</span><span class="o">=</span><span class="s1">&#39;triangular&#39;</span><span class="p">,</span><span class="n">confidence</span><span class="o">=</span><span class="mf">90.0</span><span class="p">)</span>
 <span class="linenos"> 5</span><span class="gp">&gt;&gt;&gt; </span><span class="n">cdg</span>
 <span class="linenos"> 6</span><span class="go"> *------- Object instance description ------*</span>
-<span class="linenos"> 7</span><span class="go"> Instance class       : ConfidentBipolarOutrankingDigraph</span>
-<span class="linenos"> 8</span><span class="go"> Instance name        : rel_AliceChoice_CLT</span>
-<span class="linenos"> 9</span><span class="go"> # Actions            : 10</span>
-<span class="linenos">10</span><span class="go"> # Criteria           : 9</span>
-<span class="hll"><span class="linenos">11</span><span class="go"> Size                 : 44</span>
-</span><span class="linenos">12</span><span class="go"> Valuation domain     : [-1.00;1.00]</span>
-<span class="linenos">13</span><span class="go"> Uncertainty model    : triangular(a=0,b=2w)</span>
-<span class="linenos">14</span><span class="go"> Likelihood domain    : [-1.0;+1.0]</span>
-<span class="hll"><span class="linenos">15</span><span class="go"> Confidence level     : 90.0%</span>
-</span><span class="hll"><span class="linenos">16</span><span class="go"> Confident majority   : 14/24 (58.3%)</span>
-</span><span class="linenos">17</span><span class="go"> Determinateness (%)  : 68.19</span>
+<span class="linenos"> 7</span><span class="go"> Instance class         : ConfidentBipolarOutrankingDigraph</span>
+<span class="linenos"> 8</span><span class="go"> Instance name          : rel_AliceChoice_CLT</span>
+<span class="linenos"> 9</span><span class="go"> # Actions              : 10</span>
+<span class="linenos">10</span><span class="go"> # Criteria             : 9</span>
+<span class="hll"><span class="linenos">11</span><span class="go"> Size                   : 44</span>
+</span><span class="linenos">12</span><span class="go"> Valuation domain       : [-1.00;1.00]</span>
+<span class="linenos">13</span><span class="go"> Uncertainty model      : triangular(a=0,b=2w)</span>
+<span class="linenos">14</span><span class="go"> Likelihood domain      : [-1.0;+1.0]</span>
+<span class="hll"><span class="linenos">15</span><span class="go"> Confidence level       : 90.0%</span>
+</span><span class="hll"><span class="linenos">16</span><span class="go"> Confident credibility  : &gt; abs(0.167) (58.3%)</span>
+</span><span class="linenos">17</span><span class="go"> Determinateness (%)    : 68.19</span>
 </pre></div>
 </div>
 </div>
@@ -10838,7 +10838,7 @@ dot -Grankdir=TB -Tpng rootedTree.dot -o rootedTree.png</p>
 
   <div role="contentinfo">
     <p>&#169; Copyright 2012-2025, Raymond Bisdorff.
-      <span class="lastupdated">Last updated on Jun 17, 2025.
+      <span class="lastupdated">Last updated on Jun 18, 2025.
       </span></p>
   </div>
 

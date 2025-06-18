@@ -402,25 +402,25 @@ confidence level <em>alpha</em> %, when</p>
 <span class="hll"><span class="linenos"> 4</span><span class="gp">&gt;&gt;&gt; </span><span class="n">g90</span> <span class="o">=</span> <span class="n">ConfidentBipolarOutrankingDigraph</span><span class="p">(</span><span class="n">t</span><span class="p">,</span><span class="n">confidence</span><span class="o">=</span><span class="mi">90</span><span class="p">)</span>
 </span><span class="linenos"> 5</span><span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">g90</span><span class="p">)</span>
 <span class="linenos"> 6</span><span class="go"> *------- Object instance description ------*</span>
-<span class="linenos"> 7</span><span class="go"> Instance class      : ConfidentBipolarOutrankingDigraph</span>
-<span class="linenos"> 8</span><span class="go"> Instance name       : rel_randomperftab_CLT</span>
-<span class="linenos"> 9</span><span class="go"> # Actions           : 7</span>
-<span class="linenos">10</span><span class="go"> # Criteria          : 7</span>
-<span class="linenos">11</span><span class="go"> Size                : 15</span>
-<span class="linenos">12</span><span class="go"> Uncertainty model   : triangular(a=0,b=2w)</span>
-<span class="linenos">13</span><span class="go"> Likelihood domain   : [-1.0;+1.0]</span>
-<span class="linenos">14</span><span class="go"> Confidence level    : 0.80 (90.0%)</span>
-<span class="linenos">15</span><span class="go"> Confident majority  : 0.14 (57.1%)</span>
-<span class="linenos">16</span><span class="go"> Determinateness (%) : 62.07</span>
-<span class="linenos">17</span><span class="go"> Valuation domain    : [-1.00;1.00]</span>
-<span class="linenos">18</span><span class="go"> Attributes          : [&#39;name&#39;, &#39;bipolarConfidenceLevel&#39;,</span>
-<span class="linenos">19</span><span class="go">                        &#39;distribution&#39;, &#39;betaParameter&#39;, &#39;actions&#39;,</span>
-<span class="linenos">20</span><span class="go">                        &#39;order&#39;, &#39;valuationdomain&#39;, &#39;criteria&#39;,</span>
-<span class="linenos">21</span><span class="go">                        &#39;evaluation&#39;, &#39;concordanceRelation&#39;,</span>
-<span class="linenos">22</span><span class="go">                        &#39;vetos&#39;, &#39;negativeVetos&#39;,</span>
-<span class="linenos">23</span><span class="go">                        &#39;largePerformanceDifferencesCount&#39;,</span>
-<span class="linenos">24</span><span class="go">                        &#39;likelihoods&#39;, &#39;confidenceCutLevel&#39;,</span>
-<span class="linenos">25</span><span class="go">                        &#39;relation&#39;, &#39;gamma&#39;, &#39;notGamma&#39;]</span>
+<span class="linenos"> 7</span><span class="go"> Instance class       : ConfidentBipolarOutrankingDigraph</span>
+<span class="linenos"> 8</span><span class="go"> Instance name        : rel_randomperftab_CLT</span>
+<span class="linenos"> 9</span><span class="go"> # Actions            : 7</span>
+<span class="linenos">10</span><span class="go"> # Criteria           : 7</span>
+<span class="linenos">11</span><span class="go"> Size                 : 15</span>
+<span class="linenos">12</span><span class="go"> Uncertainty model    : triangular(a=0,b=2w)</span>
+<span class="linenos">13</span><span class="go"> Likelihood domain    : [-1.0;+1.0]</span>
+<span class="linenos">14</span><span class="go"> Confidence level     : 0.80 (90.0%)</span>
+<span class="linenos">15</span><span class="go"> Confident credibility: &gt; abs(0.143) (57.1%)</span>
+<span class="linenos">16</span><span class="go"> Determinateness (%)  : 62.07</span>
+<span class="linenos">17</span><span class="go"> Valuation domain     : [-1.00;1.00]</span>
+<span class="linenos">18</span><span class="go"> Attributes           : [&#39;name&#39;, &#39;bipolarConfidenceLevel&#39;,</span>
+<span class="linenos">19</span><span class="go">                         &#39;distribution&#39;, &#39;betaParameter&#39;, &#39;actions&#39;,</span>
+<span class="linenos">20</span><span class="go">                         &#39;order&#39;, &#39;valuationdomain&#39;, &#39;criteria&#39;,</span>
+<span class="linenos">21</span><span class="go">                         &#39;evaluation&#39;, &#39;concordanceRelation&#39;,</span>
+<span class="linenos">22</span><span class="go">                         &#39;vetos&#39;, &#39;negativeVetos&#39;,</span>
+<span class="linenos">23</span><span class="go">                         &#39;largePerformanceDifferencesCount&#39;,</span>
+<span class="linenos">24</span><span class="go">                         &#39;likelihoods&#39;, &#39;confidenceCutLevel&#39;,</span>
+<span class="linenos">25</span><span class="go">                         &#39;relation&#39;, &#39;gamma&#39;, &#39;notGamma&#39;]</span>
 </pre></div>
 </div>
 <p>The resulting 90% confident expected outranking relation is shown below.</p>
@@ -442,12 +442,12 @@ confidence level <em>alpha</em> %, when</p>
 <span class="linenos">16</span><span class="go">        |(-0.95) (-0.00) (+0.73) (-0.95) (+0.73)  ( - )  (-0.00)</span>
 <span class="linenos">17</span><span class="go">   &#39;a7&#39; | +0.00   +0.71   +0.57   +0.43   +0.29   +0.00   +0.00</span>
 <span class="linenos">18</span><span class="go">        |(-0.65) (+1.00) (+1.00) (+0.99) (+0.95) (-0.00)  ( - )</span>
-<span class="linenos">19</span><span class="go"> Valuation domain   : [-1.000; +1.000]</span>
-<span class="linenos">20</span><span class="go"> Uncertainty model  : triangular(a=2.0,b=2.0)</span>
-<span class="linenos">21</span><span class="go"> Likelihood domain  : [-1.0;+1.0]</span>
-<span class="hll"><span class="linenos">22</span><span class="go"> Confidence level   : 0.80 (90.0%)</span>
-</span><span class="hll"><span class="linenos">23</span><span class="go"> Confident majority : 0.14 (57.1%)</span>
-</span><span class="linenos">24</span><span class="go"> Determinateness    : 0.24 (62.1%)</span>
+<span class="linenos">19</span><span class="go"> Valuation domain      : [-1.000; +1.000]</span>
+<span class="linenos">20</span><span class="go"> Uncertainty model     : triangular(a=2.0,b=2.0)</span>
+<span class="linenos">21</span><span class="go"> Likelihood domain     : [-1.0;+1.0]</span>
+<span class="hll"><span class="linenos">22</span><span class="go"> Confidence level      : 0.80 (90.0%)</span>
+</span><span class="hll"><span class="linenos">23</span><span class="go"> Confident credibility : &gt; abs(0.14) (57.1%)</span>
+</span><span class="linenos">24</span><span class="go"> Determinateness       : 0.24 (62.1%)</span>
 </pre></div>
 </div>
 <p>The (<em>lh</em>) figures, indicated in the table above, correspond to bipolar likelihoods and the required bipolar confidence level equals (0.90+1.0)/2 = 0.80 (see Line 22 above). Action ‘<em>a1</em>’ thus confidently outranks all other actions, except ‘<em>a7</em>’ where the actual likelihood (+0.65) is lower than the required one (0.80) and we furthermore observe a considerable counter-performance on criterion ‘<em>g1</em>’.</p>
@@ -503,12 +503,12 @@ confidence level <em>alpha</em> %, when</p>
 <span class="linenos">17</span><span class="go">       | (-0.95) (-0.00) (+0.73) (-0.95) (+0.73)  ( - )  (-0.00)</span>
 <span class="linenos">18</span><span class="go">  &#39;a7&#39; |  +0.00   +0.71   +0.57   +0.43   +0.00   +0.00   +0.00</span>
 <span class="linenos">19</span><span class="go">       | (-0.65) (+1.00) (+1.00) (+0.99) (+0.95) (-0.00)  ( - )</span>
-<span class="linenos">20</span><span class="go"> Valuation domain   : [-1.000; +1.000]</span>
-<span class="linenos">21</span><span class="go"> Uncertainty model  : triangular(a=2.0,b=2.0)</span>
-<span class="linenos">22</span><span class="go"> Likelihood domain  : [-1.0;+1.0]</span>
-<span class="linenos">23</span><span class="go"> Confidence level   : 0.98 (99.0%)</span>
-<span class="linenos">24</span><span class="go"> Confident majority : 0.29 (64.3%)</span>
-<span class="hll"><span class="linenos">25</span><span class="go"> Determinateness    : 0.13 (56.6%)</span>
+<span class="linenos">20</span><span class="go"> Valuation domain      : [-1.000; +1.000]</span>
+<span class="linenos">21</span><span class="go"> Uncertainty model     : triangular(a=2.0,b=2.0)</span>
+<span class="linenos">22</span><span class="go"> Likelihood domain     : [-1.0;+1.0]</span>
+<span class="linenos">23</span><span class="go"> Confidence level      : 0.98 (99.0%)</span>
+<span class="linenos">24</span><span class="go"> Confident credibility : &gt; abs(0.286) (64.3%)</span>
+<span class="hll"><span class="linenos">25</span><span class="go"> Determinateness       : 0.13 (56.6%)</span>
 </span></pre></div>
 </div>
 <p>At 99% confidence, the minimal required significance majority support amounts to 64.3% (see Line 24 above). As a result, most outranking situations don’t get anymore validated, like the outranking situations between action ‘<em>a1</em>’ and actions ‘<em>a3</em>’, ‘<em>a4</em>’, ‘<em>a5</em>’ and ‘<em>a6</em>’ (see Line 5 above). The overall epistemic determination of the digraph consequently drops from 62.1% to 56.6% (see Line 25).</p>
@@ -1607,7 +1607,7 @@ confidence level <em>alpha</em> %, when</p>
 </pre></div>
 </div>
 </div>
-<p>In this example (see <a class="reference internal" href="tutorial.html#linearvotingprofilewithpolls"><span class="std std-numref">Listing 1.74</span></a> Lines 18-), we obtained 460 Party_1 supporters (46%), 436 Party_2 supporters (43.6%) and 104 other voters (10.4%). Favorite candidates of <em>Party_1</em> supporters, with more than 10%, appeared to be <em>a06</em> (19.91%), <em>a07</em> (14.27%) and <em>a03</em> (10.02%). Whereas for <em>Party_2</em> supporters, favorite candidates appeared to be <em>a11</em> (22.94%), followed by <em>a08</em> (15.65%), <em>a04</em> (15.07%) and <em>a06</em> (13.4%).</p>
+<p>In this example (see <a class="reference internal" href="tutorial.html#linearvotingprofilewithpolls"><span class="std std-numref">Listing 1.75</span></a> Lines 18-), we obtained 460 Party_1 supporters (46%), 436 Party_2 supporters (43.6%) and 104 other voters (10.4%). Favorite candidates of <em>Party_1</em> supporters, with more than 10%, appeared to be <em>a06</em> (19.91%), <em>a07</em> (14.27%) and <em>a03</em> (10.02%). Whereas for <em>Party_2</em> supporters, favorite candidates appeared to be <em>a11</em> (22.94%), followed by <em>a08</em> (15.65%), <em>a04</em> (15.07%) and <em>a06</em> (13.4%).</p>
 <p>We may convert this linear voting profile into a PerformanceTableau object where each party corresponds to a decision objective.</p>
 <div class="literal-block-wrapper docutils container" id="convertvotingprofile2perftab">
 <div class="code-block-caption"><span class="caption-number">Listing 3.24 </span><span class="caption-text">Converting a voting profile into a performance tableau</span><a class="headerlink" href="#convertvotingprofile2perftab" title="Link to this code"></a></div>
@@ -3476,7 +3476,7 @@ heat map above (see <a class="reference internal" href="#graffiti07-2"><span cla
 <section id="what-is-a-graph-kernel">
 <h4><a class="toc-backref" href="#id154" role="doc-backlink"><span class="section-number">3.3.4.1. </span>What is a graph kernel ?</a><a class="headerlink" href="#what-is-a-graph-kernel" title="Link to this heading"></a></h4>
 <p>We call <strong>choice</strong> in a graph, respectively a digraph, a subset of its vertices, resp. of its nodes or actions. A choice <em>Y</em> is called <strong>internally stable</strong> or <strong>independent</strong> when there exist <strong>no links</strong> (edges) or relations (arcs) between its members. Furthermore, a choice <em>Y</em> is called <strong>externally stable</strong> when for each vertex, node or action <em>x</em> not in <em>Y</em>, there exists at least a member <em>y</em> of <em>Y</em> such that <em>x</em> is linked or related to <em>y</em>. Now, an internally <strong>and</strong> externally stable choice is called a <strong>kernel</strong>.</p>
-<p>A first trivial example is immediately given by the maximal independent vertices sets (MISs) of the n-cycle graph (see tutorial on <a class="reference internal" href="tutorial.html#isomorphicmis-tutorial-label"><span class="std std-ref">computing isomorphic choices</span></a>). Indeed, each MIS in the n-cycle graph is by definition independent, i.e. internally stable, and each non selected vertex in the n-cycle graph is in relation with either one or even two members of the MIS. See, for instance, the four non isomorphic MISs of the 12-cycle graph as shown in <a class="reference internal" href="tutorial.html#misc12"><span class="std std-numref">Fig. 1.81</span></a>.</p>
+<p>A first trivial example is immediately given by the maximal independent vertices sets (MISs) of the n-cycle graph (see tutorial on <a class="reference internal" href="tutorial.html#isomorphicmis-tutorial-label"><span class="std std-ref">computing isomorphic choices</span></a>). Indeed, each MIS in the n-cycle graph is by definition independent, i.e. internally stable, and each non selected vertex in the n-cycle graph is in relation with either one or even two members of the MIS. See, for instance, the four non isomorphic MISs of the 12-cycle graph as shown in <a class="reference internal" href="tutorial.html#misc12"><span class="std std-numref">Fig. 1.82</span></a>.</p>
 <p>In all graph or symmetric digraph, the <em>maximality condition</em> imposed on the internal stability is equivalent to the external stability condition. Indeed, if there would exist a vertex or node not related to any of the elements of a choice, then we may safely add this vertex or node to the given choice without violating its internal stability. All kernels must hence be maximal independent choices. In fact, in a topological sense, they correspond to maximal <strong>holes</strong> in the given graph.</p>
 <p>We may illustrate this coincidence between MISs and kernels in graphs
 and symmetric digraphs with the following random 3-regular graph
@@ -5160,7 +5160,7 @@ Technologies</em>, Aachen, September 8-11, 1997}, pp 97–103.</p>
 
   <div role="contentinfo">
     <p>&#169; Copyright 2012-2025, Raymond Bisdorff.
-      <span class="lastupdated">Last updated on Jun 12, 2025.
+      <span class="lastupdated">Last updated on Jun 18, 2025.
       </span></p>
   </div>
 
