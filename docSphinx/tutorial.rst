@@ -1310,7 +1310,7 @@ Computing a best choice recommendation
 
    -- B. Roy et al. (1966)
    
-This tutorial present the *RUBIS* best choice recommender system [BIS-2008]_. Our approach is illustrated with a best office location selection problem. We show how to explore the given performance tableau and compute the corresponding bipolar-valued outranking digraph. After introducing the pragmatic principles that gouvern the *RUBIS* recommeder algorithm, we present some tools for computing a first choice recommendation.
+This tutorial presents the *RUBIS* best choice recommender system [BIS-2008]_. Our approach is illustrated with a best office location selection problem. We show how to explore the given performance tableau and compute the corresponding bipolar-valued outranking digraph. After introducing the pragmatic principles that gouvern the *RUBIS* recommeder algorithm, we present some tools for computing a first choice recommendation.
 
 .. contents:: 
 	:depth: 1
