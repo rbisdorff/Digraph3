@@ -67,7 +67,7 @@
 
 
 \title{Digraph3 Advanced Topics}
-\date{June 16, 2025}
+\date{June 19, 2025}
 \release{3.13.5}
 \author{Raymond Bisdorff}
 \newcommand{\sphinxlogo}{\sphinxincludegraphics{introDoc3.png}\par}
@@ -429,25 +429,25 @@ For the corresponding confident outranking digraph, we require a confidence leve
 \PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{g90} \PYG{o}{=} \PYG{n}{ConfidentBipolarOutrankingDigraph}\PYG{p}{(}\PYG{n}{t}\PYG{p}{,}\PYG{n}{confidence}\PYG{o}{=}\PYG{l+m+mi}{90}\PYG{p}{)}
 \PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n+nb}{print}\PYG{p}{(}\PYG{n}{g90}\PYG{p}{)}
 \PYG{g+go}{ *\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{} Object instance description \PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}*}
-\PYG{g+go}{ Instance class      : ConfidentBipolarOutrankingDigraph}
-\PYG{g+go}{ Instance name       : rel\PYGZus{}randomperftab\PYGZus{}CLT}
-\PYG{g+go}{ \PYGZsh{} Actions           : 7}
-\PYG{g+go}{ \PYGZsh{} Criteria          : 7}
-\PYG{g+go}{ Size                : 15}
-\PYG{g+go}{ Uncertainty model   : triangular(a=0,b=2w)}
-\PYG{g+go}{ Likelihood domain   : [\PYGZhy{}1.0;+1.0]}
-\PYG{g+go}{ Confidence level    : 0.80 (90.0\PYGZpc{})}
-\PYG{g+go}{ Confident majority  : 0.14 (57.1\PYGZpc{})}
-\PYG{g+go}{ Determinateness (\PYGZpc{}) : 62.07}
-\PYG{g+go}{ Valuation domain    : [\PYGZhy{}1.00;1.00]}
-\PYG{g+go}{ Attributes          : [\PYGZsq{}name\PYGZsq{}, \PYGZsq{}bipolarConfidenceLevel\PYGZsq{},}
-\PYG{g+go}{                        \PYGZsq{}distribution\PYGZsq{}, \PYGZsq{}betaParameter\PYGZsq{}, \PYGZsq{}actions\PYGZsq{},}
-\PYG{g+go}{                        \PYGZsq{}order\PYGZsq{}, \PYGZsq{}valuationdomain\PYGZsq{}, \PYGZsq{}criteria\PYGZsq{},}
-\PYG{g+go}{                        \PYGZsq{}evaluation\PYGZsq{}, \PYGZsq{}concordanceRelation\PYGZsq{},}
-\PYG{g+go}{                        \PYGZsq{}vetos\PYGZsq{}, \PYGZsq{}negativeVetos\PYGZsq{},}
-\PYG{g+go}{                        \PYGZsq{}largePerformanceDifferencesCount\PYGZsq{},}
-\PYG{g+go}{                        \PYGZsq{}likelihoods\PYGZsq{}, \PYGZsq{}confidenceCutLevel\PYGZsq{},}
-\PYG{g+go}{                        \PYGZsq{}relation\PYGZsq{}, \PYGZsq{}gamma\PYGZsq{}, \PYGZsq{}notGamma\PYGZsq{}]}
+\PYG{g+go}{ Instance class       : ConfidentBipolarOutrankingDigraph}
+\PYG{g+go}{ Instance name        : rel\PYGZus{}randomperftab\PYGZus{}CLT}
+\PYG{g+go}{ \PYGZsh{} Actions            : 7}
+\PYG{g+go}{ \PYGZsh{} Criteria           : 7}
+\PYG{g+go}{ Size                 : 15}
+\PYG{g+go}{ Uncertainty model    : triangular(a=0,b=2w)}
+\PYG{g+go}{ Likelihood domain    : [\PYGZhy{}1.0;+1.0]}
+\PYG{g+go}{ Confidence level     : 0.80 (90.0\PYGZpc{})}
+\PYG{g+go}{ Confident credibility: \PYGZgt{} abs(0.143) (57.1\PYGZpc{})}
+\PYG{g+go}{ Determinateness (\PYGZpc{})  : 62.07}
+\PYG{g+go}{ Valuation domain     : [\PYGZhy{}1.00;1.00]}
+\PYG{g+go}{ Attributes           : [\PYGZsq{}name\PYGZsq{}, \PYGZsq{}bipolarConfidenceLevel\PYGZsq{},}
+\PYG{g+go}{                         \PYGZsq{}distribution\PYGZsq{}, \PYGZsq{}betaParameter\PYGZsq{}, \PYGZsq{}actions\PYGZsq{},}
+\PYG{g+go}{                         \PYGZsq{}order\PYGZsq{}, \PYGZsq{}valuationdomain\PYGZsq{}, \PYGZsq{}criteria\PYGZsq{},}
+\PYG{g+go}{                         \PYGZsq{}evaluation\PYGZsq{}, \PYGZsq{}concordanceRelation\PYGZsq{},}
+\PYG{g+go}{                         \PYGZsq{}vetos\PYGZsq{}, \PYGZsq{}negativeVetos\PYGZsq{},}
+\PYG{g+go}{                         \PYGZsq{}largePerformanceDifferencesCount\PYGZsq{},}
+\PYG{g+go}{                         \PYGZsq{}likelihoods\PYGZsq{}, \PYGZsq{}confidenceCutLevel\PYGZsq{},}
+\PYG{g+go}{                         \PYGZsq{}relation\PYGZsq{}, \PYGZsq{}gamma\PYGZsq{}, \PYGZsq{}notGamma\PYGZsq{}]}
 \end{sphinxVerbatim}
 \sphinxresetverbatimhllines
 
@@ -474,12 +474,12 @@ The resulting 90\% confident expected outranking relation is shown below.
 \PYG{g+go}{        |(\PYGZhy{}0.95) (\PYGZhy{}0.00) (+0.73) (\PYGZhy{}0.95) (+0.73)  ( \PYGZhy{} )  (\PYGZhy{}0.00)}
 \PYG{g+go}{   \PYGZsq{}a7\PYGZsq{} | +0.00   +0.71   +0.57   +0.43   +0.29   +0.00   +0.00}
 \PYG{g+go}{        |(\PYGZhy{}0.65) (+1.00) (+1.00) (+0.99) (+0.95) (\PYGZhy{}0.00)  ( \PYGZhy{} )}
-\PYG{g+go}{ Valuation domain   : [\PYGZhy{}1.000; +1.000]}
-\PYG{g+go}{ Uncertainty model  : triangular(a=2.0,b=2.0)}
-\PYG{g+go}{ Likelihood domain  : [\PYGZhy{}1.0;+1.0]}
-\PYG{g+go}{ Confidence level   : 0.80 (90.0\PYGZpc{})}
-\PYG{g+go}{ Confident majority : 0.14 (57.1\PYGZpc{})}
-\PYG{g+go}{ Determinateness    : 0.24 (62.1\PYGZpc{})}
+\PYG{g+go}{ Valuation domain      : [\PYGZhy{}1.000; +1.000]}
+\PYG{g+go}{ Uncertainty model     : triangular(a=2.0,b=2.0)}
+\PYG{g+go}{ Likelihood domain     : [\PYGZhy{}1.0;+1.0]}
+\PYG{g+go}{ Confidence level      : 0.80 (90.0\PYGZpc{})}
+\PYG{g+go}{ Confident credibility : \PYGZgt{} abs(0.14) (57.1\PYGZpc{})}
+\PYG{g+go}{ Determinateness       : 0.24 (62.1\PYGZpc{})}
 \end{sphinxVerbatim}
 \sphinxresetverbatimhllines
 
@@ -549,12 +549,12 @@ Now, what becomes this 90\%\sphinxhyphen{}confident outranking digraph when we r
 \PYG{g+go}{       | (\PYGZhy{}0.95) (\PYGZhy{}0.00) (+0.73) (\PYGZhy{}0.95) (+0.73)  ( \PYGZhy{} )  (\PYGZhy{}0.00)}
 \PYG{g+go}{  \PYGZsq{}a7\PYGZsq{} |  +0.00   +0.71   +0.57   +0.43   +0.00   +0.00   +0.00}
 \PYG{g+go}{       | (\PYGZhy{}0.65) (+1.00) (+1.00) (+0.99) (+0.95) (\PYGZhy{}0.00)  ( \PYGZhy{} )}
-\PYG{g+go}{ Valuation domain   : [\PYGZhy{}1.000; +1.000]}
-\PYG{g+go}{ Uncertainty model  : triangular(a=2.0,b=2.0)}
-\PYG{g+go}{ Likelihood domain  : [\PYGZhy{}1.0;+1.0]}
-\PYG{g+go}{ Confidence level   : 0.98 (99.0\PYGZpc{})}
-\PYG{g+go}{ Confident majority : 0.29 (64.3\PYGZpc{})}
-\PYG{g+go}{ Determinateness    : 0.13 (56.6\PYGZpc{})}
+\PYG{g+go}{ Valuation domain      : [\PYGZhy{}1.000; +1.000]}
+\PYG{g+go}{ Uncertainty model     : triangular(a=2.0,b=2.0)}
+\PYG{g+go}{ Likelihood domain     : [\PYGZhy{}1.0;+1.0]}
+\PYG{g+go}{ Confidence level      : 0.98 (99.0\PYGZpc{})}
+\PYG{g+go}{ Confident credibility : \PYGZgt{} abs(0.286) (64.3\PYGZpc{})}
+\PYG{g+go}{ Determinateness       : 0.13 (56.6\PYGZpc{})}
 \end{sphinxVerbatim}
 \sphinxresetverbatimhllines
 

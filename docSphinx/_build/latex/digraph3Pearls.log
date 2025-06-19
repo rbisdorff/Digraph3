@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.25 (TeX Live 2023/Debian) (preloaded format=pdflatex 2024.5.23)  16 JUN 2025 15:22
+This is pdfTeX, Version 3.141592653-2.6-1.40.25 (TeX Live 2023/Debian) (preloaded format=pdflatex 2024.5.23)  19 JUN 2025 13:54
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -1360,7 +1360,7 @@ Package rerunfilecheck Info: File `digraph3Pearls.out' has not changed.
 Here is how much of TeX's memory you used:
  18200 strings out of 476182
  314741 string characters out of 5795595
- 2093975 words of memory out of 5000000
+ 2096975 words of memory out of 5000000
  39297 multiletter control sequences out of 15000+600000
  584599 words of font info for 92 fonts, out of 8000000 for 9000
  15 hyphenation exceptions out of 8191
@@ -1405,7 +1405,7 @@ lic/amsfonts/cm/cmsy6.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/ams
 fonts/cm/cmsy8.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/s
 ymbols/msam10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/sy
 mbols/msbm10.pfb>
-Output written on digraph3Pearls.pdf (145 pages, 3659507 bytes).
+Output written on digraph3Pearls.pdf (145 pages, 3659560 bytes).
 PDF statistics:
  2953 PDF objects out of 2984 (max. 8388607)
  1769 compressed objects within 18 object streams

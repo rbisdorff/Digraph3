@@ -9016,7 +9016,7 @@ Following from the separability property of the *q*-tiles sorting of each action
 On a common 2023 desktop computer
 ---------------------------------
 
-On a common 2023 Terra desktop computer [56]_, equipped with a 11th Gen Intel® Core™ i5-11400 × 12 processor and 16.0 GiB of CPU memory, working under Ubuntu 23.10 we may rank a :py:class:`~cRandPerfTabs.cRandom3ObjectivesPerformanceTableau` instance of **five hundred thousand** multicriteria performance records in about 104 seconds with about 48 seconds for the quantiles sorting step and 55 seconds for the local components ranking step (see below Lines 42-).
+On a common 2023 Terra desktop computer [56]_, equipped with a 11th Gen Intel® Core™ i5-11400 × 12 processor, 64.0 GiB of CPU memory and 762.2 GiB storage space, working under Ubuntu 23.10 we may rank a :py:class:`~cRandPerfTabs.cRandom3ObjectivesPerformanceTableau` instance of **five hundred thousand** multicriteria performance records in about 104 seconds with about 48 seconds for the quantiles sorting step and 55 seconds for the local components ranking step (see below Lines 42-).
 
 .. code-block:: bash
 
