@@ -11117,7 +11117,7 @@ Appendices
 
 .. [59] See the advanced topic on :ref:`bipolar-valued relational equivalence between bipolar-valued digraphs <OrdinalCorrelation-Tutorial-label>`.
 
-.. [60] Topological Sort Algorithm 2.4 from *Algorithmic Graph heory and Perfect Graphs* p.44 [GOL-2004]_.
+.. [60] Topological Sort Algorithm 2.4 from *Algorithmic Graph Theory and Perfect Graphs* p.44 [GOL-2004]_.
 
 .. [61] Laboratoires d'Analyse et de Modélisation de Systèmes d'Aide à la Décision, Université Paris-Dauphine, UMR 7243 CNRS.
 
