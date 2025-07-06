@@ -2029,9 +2029,13 @@ class PartialBachetRanking(TransitiveDigraph):
         """
         from outrankingDigraphs import OutrankingDigraph
         self.__class__ = OutrankingDigraph
-        cons = self.computePartialOutrankingConsensusQuality(Comments=Comments,
+        try:
+            cons = self.computePartialOutrankingConsensusQuality(Comments=Comments,
                                 ValuedCorrelation = not self.Polarised,
                                 Sorted=Sorted)
+        except:
+            print('Error: the partial ranking is not of OutrankingDigraph type !!!')
+            cons = None
         self.__class__ = PartialBachetRanking
         return cons
 

@@ -3860,7 +3860,7 @@ We may redo in :numref:`weakBachet8` below the same computation for the partial 
      Standard deviation (b)                : +0.204
      Partial ranking fairness (a)-(b)      : -0.107
 
-The valued partial Bachet ranking pays a more accurate attention to the marginal criteria significance weights: 10/60 = 0.167 for the three  Costs criteria and 3/60 = 0.050 for the Benefit criteria. Criteria *c01* and *c03* for instance, with a significance of 0.167, are hence given more attention. The weighted mean marginal correlation appears slightly lower (+0.098 vs +0.108). The standard deviation, however becomes slightly lower, resulting in a slightly better overall fairness score (-0.107 vs -0.132, Lines 19-21).    
+The valued partial Bachet ranking pays a more accurate attention to the marginal criteria significance weights: 10/60 = 0.167 for the three  Costs criteria and 3/60 = 0.050 for the Benefit criteria. Criteria *c01* and *c03* for instance, with a significance of 0.167, are hence given more attention. The weighted mean marginal correlation appears slightly lower (+0.098 vs +0.108). The standard deviation being however lower (+0.204 vs +0.240), we obtain a slightly better overall fairness score (-0.107 vs -0.132, see Lines 19-21).    
 
 .. note::
 
