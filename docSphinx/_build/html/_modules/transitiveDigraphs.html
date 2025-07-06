@@ -2194,6 +2194,22 @@
 <span class="c1">##                boostedOrdering.append(x)</span>
 <span class="c1">##        return boostedOrdering</span>
 
+<div class="viewcode-block" id="PartialBachetRanking.computePartialOutrankingConsensusQuality">
+<a class="viewcode-back" href="../techDoc.html#transitiveDigraphs.PartialBachetRanking.computePartialOutrankingConsensusQuality">[docs]</a>
+    <span class="k">def</span> <span class="nf">computePartialOutrankingConsensusQuality</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">Sorted</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+                                                 <span class="n">Comments</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Renders or shows the consensus data of apartial Bachet ranking</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="kn">from</span> <span class="nn">outrankingDigraphs</span> <span class="kn">import</span> <span class="n">OutrankingDigraph</span>
+        <span class="bp">self</span><span class="o">.</span><span class="vm">__class__</span> <span class="o">=</span> <span class="n">OutrankingDigraph</span>
+        <span class="n">cons</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">computePartialOutrankingConsensusQuality</span><span class="p">(</span><span class="n">Comments</span><span class="o">=</span><span class="n">Comments</span><span class="p">,</span>
+                                <span class="n">ValuedCorrelation</span> <span class="o">=</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">Polarised</span><span class="p">,</span>
+                                <span class="n">Sorted</span><span class="o">=</span><span class="n">Sorted</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="vm">__class__</span> <span class="o">=</span> <span class="n">PartialBachetRanking</span>
+        <span class="k">return</span> <span class="n">cons</span></div>
+
+
 <div class="viewcode-block" id="PartialBachetRanking.exportGraphViz">
 <a class="viewcode-back" href="../techDoc.html#transitiveDigraphs.PartialBachetRanking.exportGraphViz">[docs]</a>
     <span class="k">def</span> <span class="nf">exportGraphViz</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">fileName</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span><span class="n">ArrowHeads</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
@@ -2428,7 +2444,7 @@
 
   <div role="contentinfo">
     <p>&#169; Copyright 2012-2025, Raymond Bisdorff.
-      <span class="lastupdated">Last updated on Jun 18, 2025.
+      <span class="lastupdated">Last updated on Jul 06, 2025.
       </span></p>
   </div>
 

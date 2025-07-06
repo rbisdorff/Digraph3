@@ -182,6 +182,68 @@ class OutrankingDigraph(Digraph,PerformanceTableau):
                 meanMarginalCorrelation,
                 sdMarginalCorrelation)
 
+    def computePartialOutrankingConsensusQuality(self,Sorted=True,ValuedCorrelation=True,
+                                          Threading=False,nbrCores=None,
+                                          Comments=False):
+        """
+        Renders the marginal criteria correlations with a partial ranking relation with summary.
+        """
+        from math import sqrt
+        # self is an OutrankingDigraph object
+        criteria = self.criteria
+        marginalCorrelations=\
+            self.computeMarginalVersusGlobalOutrankingCorrelations(
+                Sorted=Sorted,
+                ValuedCorrelation=ValuedCorrelation,
+                Threading=Threading,nbrCores=nbrCores,
+                Comments=False)
+        ncrit = Decimal(str(len(marginalCorrelations)))
+        meanMarginalCorrelation = Decimal('0.0')
+        varMarginalCorrelation = Decimal('0.0')
+        sumWeights = Decimal('0.0')
+        for cg in marginalCorrelations:
+            #if cg[0] < Decimal('0'):
+            sumWeights += abs(criteria[cg[1]]['weight'])
+        for cg in marginalCorrelations:
+            #if cg[0] < Decimal('0'):
+            cgw = abs(criteria[cg[1]]['weight'])/sumWeights
+            meanMarginalCorrelation += cg[0]*cgw
+        for cg in marginalCorrelations:
+            #if cg[0] < Decimal('0'):
+            cgw = abs(criteria[cg[1]]['weight'])/sumWeights
+            varMarginalCorrelation += ((cg[0]-meanMarginalCorrelation)**2)*cgw
+            #varMarginalCorrelation += (cg[0]**2)*cgw
+        # #meanMarginalCriteriaCorrelation /= ncrit
+        # #varMarginalCriteriaCorrelation /= ncrit
+        # #varMarginalCorrelation -= meanMarginalCorrelation*meanMarginalCriteriaCorrelation
+        sdMarginalCorrelation = sqrt(varMarginalCorrelation) 
+        # # showing the results
+        if Comments:
+            print('Consensus quality of partial ranking:')
+            if ValuedCorrelation:
+                print('criterion (weight): bipolar-valued relational equivalence')
+                print('--------------------------------------')
+            else:
+                print('criterion (weight): ordinal correlation')
+                print('--------------------------------------')
+            for cg in marginalCorrelations:
+                print('%s (%.3f): %+.3f' % (
+                    cg[1],abs(criteria[cg[1]]['weight'])/sumWeights,cg[0]) )
+            print('Summary:')
+            if ValuedCorrelation:
+                print('Weighted mean marginal equivalence(a)  : %+.3f' %\
+                  meanMarginalCorrelation)
+            else:
+                print('Weighted mean marginal correlation (a) : %+.3f' %\
+                  meanMarginalCorrelation)                
+            print(    'Standard deviation (b)                 : %+.3f' %\
+                  sdMarginalCorrelation)
+            print(    'Partial ranking fairness (a)-(b)       : %+.3f' %\
+                  (float(meanMarginalCorrelation) - sdMarginalCorrelation) )
+        return (marginalCorrelations,
+                meanMarginalCorrelation,
+                sdMarginalCorrelation)
+
 #-----------------
 
     def showMarginalObjectivesVersusGlobalRankingCorrelations(self,ranking,

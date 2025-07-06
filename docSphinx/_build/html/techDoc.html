@@ -528,6 +528,7 @@
 <li class="toctree-l4"><a class="reference internal" href="#outrankingDigraphs.OutrankingDigraph.computePairwiseComparisons"><code class="docutils literal notranslate"><span class="pre">OutrankingDigraph.computePairwiseComparisons()</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="#outrankingDigraphs.OutrankingDigraph.computePairwiseCompleteComparison"><code class="docutils literal notranslate"><span class="pre">OutrankingDigraph.computePairwiseCompleteComparison()</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="#outrankingDigraphs.OutrankingDigraph.computePairwiseOddsMatrix"><code class="docutils literal notranslate"><span class="pre">OutrankingDigraph.computePairwiseOddsMatrix()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#outrankingDigraphs.OutrankingDigraph.computePartialOutrankingConsensusQuality"><code class="docutils literal notranslate"><span class="pre">OutrankingDigraph.computePartialOutrankingConsensusQuality()</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="#outrankingDigraphs.OutrankingDigraph.computeQuantileSortRelation"><code class="docutils literal notranslate"><span class="pre">OutrankingDigraph.computeQuantileSortRelation()</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="#outrankingDigraphs.OutrankingDigraph.computeSingletonRanking"><code class="docutils literal notranslate"><span class="pre">OutrankingDigraph.computeSingletonRanking()</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="#outrankingDigraphs.OutrankingDigraph.computeVetoesStatistics"><code class="docutils literal notranslate"><span class="pre">OutrankingDigraph.computeVetoesStatistics()</span></code></a></li>
@@ -857,6 +858,7 @@
 <li class="toctree-l3"><a class="reference internal" href="#transitiveDigraphs.KemenyWeakOrder"><code class="docutils literal notranslate"><span class="pre">KemenyWeakOrder</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="#transitiveDigraphs.KohlerArrowRaynaudFusion"><code class="docutils literal notranslate"><span class="pre">KohlerArrowRaynaudFusion</span></code></a></li>
 <li class="toctree-l3"><a class="reference internal" href="#transitiveDigraphs.PartialBachetRanking"><code class="docutils literal notranslate"><span class="pre">PartialBachetRanking</span></code></a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#transitiveDigraphs.PartialBachetRanking.computePartialOutrankingConsensusQuality"><code class="docutils literal notranslate"><span class="pre">PartialBachetRanking.computePartialOutrankingConsensusQuality()</span></code></a></li>
 <li class="toctree-l4"><a class="reference internal" href="#transitiveDigraphs.PartialBachetRanking.exportGraphViz"><code class="docutils literal notranslate"><span class="pre">PartialBachetRanking.exportGraphViz()</span></code></a></li>
 </ul>
 </li>
@@ -6120,6 +6122,12 @@ per actions pair.</p>
 </dd></dl>
 
 <dl class="py method">
+<dt class="sig sig-object py" id="outrankingDigraphs.OutrankingDigraph.computePartialOutrankingConsensusQuality">
+<span class="sig-name descname"><span class="pre">computePartialOutrankingConsensusQuality</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">Sorted</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ValuedCorrelation</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">Threading</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">nbrCores</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">Comments</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/outrankingDigraphs.html#OutrankingDigraph.computePartialOutrankingConsensusQuality"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#outrankingDigraphs.OutrankingDigraph.computePartialOutrankingConsensusQuality" title="Link to this definition"></a></dt>
+<dd><p>Renders the marginal criteria correlations with a partial ranking relation with summary.</p>
+</dd></dl>
+
+<dl class="py method">
 <dt class="sig sig-object py" id="outrankingDigraphs.OutrankingDigraph.computeQuantileSortRelation">
 <span class="sig-name descname"><span class="pre">computeQuantileSortRelation</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">Debug</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/outrankingDigraphs.html#OutrankingDigraph.computeQuantileSortRelation"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#outrankingDigraphs.OutrankingDigraph.computeQuantileSortRelation" title="Link to this definition"></a></dt>
 <dd><p>Renders the bipolar-valued relation obtained from
@@ -9452,6 +9460,12 @@ rankings that are used for constructing the <em>RankingsFusionDigraph</em> insta
 </pre></div>
 </div>
 <p>The cover credibities shown above represent in fact the mean outranking, respectively outranked, characteristic value of the complement of the nth choice or rejection.</p>
+<dl class="py method">
+<dt class="sig sig-object py" id="transitiveDigraphs.PartialBachetRanking.computePartialOutrankingConsensusQuality">
+<span class="sig-name descname"><span class="pre">computePartialOutrankingConsensusQuality</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">Sorted</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">Comments</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/transitiveDigraphs.html#PartialBachetRanking.computePartialOutrankingConsensusQuality"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#transitiveDigraphs.PartialBachetRanking.computePartialOutrankingConsensusQuality" title="Link to this definition"></a></dt>
+<dd><p>Renders or shows the consensus data of apartial Bachet ranking</p>
+</dd></dl>
+
 <dl class="py method">
 <dt class="sig sig-object py" id="transitiveDigraphs.PartialBachetRanking.exportGraphViz">
 <span class="sig-name descname"><span class="pre">exportGraphViz</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">fileName</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ArrowHeads</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">Comments</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">graphType</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'png'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">graphSize</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'7,7'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">bgcolor</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'cornsilk'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">fontSize</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">10</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">Debug</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/transitiveDigraphs.html#PartialBachetRanking.exportGraphViz"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#transitiveDigraphs.PartialBachetRanking.exportGraphViz" title="Link to this definition"></a></dt>
@@ -14902,7 +14916,7 @@ Components are stored in an ordered dictionary.</p>
 
   <div role="contentinfo">
     <p>&#169; Copyright 2012-2025, Raymond Bisdorff.
-      <span class="lastupdated">Last updated on Jun 29, 2025.
+      <span class="lastupdated">Last updated on Jul 06, 2025.
       </span></p>
   </div>
 

@@ -276,6 +276,71 @@
                 <span class="n">sdMarginalCorrelation</span><span class="p">)</span></div>
 
 
+<div class="viewcode-block" id="OutrankingDigraph.computePartialOutrankingConsensusQuality">
+<a class="viewcode-back" href="../techDoc.html#outrankingDigraphs.OutrankingDigraph.computePartialOutrankingConsensusQuality">[docs]</a>
+    <span class="k">def</span> <span class="nf">computePartialOutrankingConsensusQuality</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span><span class="n">Sorted</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span><span class="n">ValuedCorrelation</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+                                          <span class="n">Threading</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span><span class="n">nbrCores</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+                                          <span class="n">Comments</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Renders the marginal criteria correlations with a partial ranking relation with summary.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="kn">from</span> <span class="nn">math</span> <span class="kn">import</span> <span class="n">sqrt</span>
+        <span class="c1"># self is an OutrankingDigraph object</span>
+        <span class="n">criteria</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">criteria</span>
+        <span class="n">marginalCorrelations</span><span class="o">=</span>\
+            <span class="bp">self</span><span class="o">.</span><span class="n">computeMarginalVersusGlobalOutrankingCorrelations</span><span class="p">(</span>
+                <span class="n">Sorted</span><span class="o">=</span><span class="n">Sorted</span><span class="p">,</span>
+                <span class="n">ValuedCorrelation</span><span class="o">=</span><span class="n">ValuedCorrelation</span><span class="p">,</span>
+                <span class="n">Threading</span><span class="o">=</span><span class="n">Threading</span><span class="p">,</span><span class="n">nbrCores</span><span class="o">=</span><span class="n">nbrCores</span><span class="p">,</span>
+                <span class="n">Comments</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+        <span class="n">ncrit</span> <span class="o">=</span> <span class="n">Decimal</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">marginalCorrelations</span><span class="p">)))</span>
+        <span class="n">meanMarginalCorrelation</span> <span class="o">=</span> <span class="n">Decimal</span><span class="p">(</span><span class="s1">&#39;0.0&#39;</span><span class="p">)</span>
+        <span class="n">varMarginalCorrelation</span> <span class="o">=</span> <span class="n">Decimal</span><span class="p">(</span><span class="s1">&#39;0.0&#39;</span><span class="p">)</span>
+        <span class="n">sumWeights</span> <span class="o">=</span> <span class="n">Decimal</span><span class="p">(</span><span class="s1">&#39;0.0&#39;</span><span class="p">)</span>
+        <span class="k">for</span> <span class="n">cg</span> <span class="ow">in</span> <span class="n">marginalCorrelations</span><span class="p">:</span>
+            <span class="c1">#if cg[0] &lt; Decimal(&#39;0&#39;):</span>
+            <span class="n">sumWeights</span> <span class="o">+=</span> <span class="nb">abs</span><span class="p">(</span><span class="n">criteria</span><span class="p">[</span><span class="n">cg</span><span class="p">[</span><span class="mi">1</span><span class="p">]][</span><span class="s1">&#39;weight&#39;</span><span class="p">])</span>
+        <span class="k">for</span> <span class="n">cg</span> <span class="ow">in</span> <span class="n">marginalCorrelations</span><span class="p">:</span>
+            <span class="c1">#if cg[0] &lt; Decimal(&#39;0&#39;):</span>
+            <span class="n">cgw</span> <span class="o">=</span> <span class="nb">abs</span><span class="p">(</span><span class="n">criteria</span><span class="p">[</span><span class="n">cg</span><span class="p">[</span><span class="mi">1</span><span class="p">]][</span><span class="s1">&#39;weight&#39;</span><span class="p">])</span><span class="o">/</span><span class="n">sumWeights</span>
+            <span class="n">meanMarginalCorrelation</span> <span class="o">+=</span> <span class="n">cg</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">*</span><span class="n">cgw</span>
+        <span class="k">for</span> <span class="n">cg</span> <span class="ow">in</span> <span class="n">marginalCorrelations</span><span class="p">:</span>
+            <span class="c1">#if cg[0] &lt; Decimal(&#39;0&#39;):</span>
+            <span class="n">cgw</span> <span class="o">=</span> <span class="nb">abs</span><span class="p">(</span><span class="n">criteria</span><span class="p">[</span><span class="n">cg</span><span class="p">[</span><span class="mi">1</span><span class="p">]][</span><span class="s1">&#39;weight&#39;</span><span class="p">])</span><span class="o">/</span><span class="n">sumWeights</span>
+            <span class="n">varMarginalCorrelation</span> <span class="o">+=</span> <span class="p">((</span><span class="n">cg</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">-</span><span class="n">meanMarginalCorrelation</span><span class="p">)</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span><span class="o">*</span><span class="n">cgw</span>
+            <span class="c1">#varMarginalCorrelation += (cg[0]**2)*cgw</span>
+        <span class="c1"># #meanMarginalCriteriaCorrelation /= ncrit</span>
+        <span class="c1"># #varMarginalCriteriaCorrelation /= ncrit</span>
+        <span class="c1"># #varMarginalCorrelation -= meanMarginalCorrelation*meanMarginalCriteriaCorrelation</span>
+        <span class="n">sdMarginalCorrelation</span> <span class="o">=</span> <span class="n">sqrt</span><span class="p">(</span><span class="n">varMarginalCorrelation</span><span class="p">)</span> 
+        <span class="c1"># # showing the results</span>
+        <span class="k">if</span> <span class="n">Comments</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Consensus quality of partial ranking:&#39;</span><span class="p">)</span>
+            <span class="k">if</span> <span class="n">ValuedCorrelation</span><span class="p">:</span>
+                <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;criterion (weight): bipolar-valued relational equivalence&#39;</span><span class="p">)</span>
+                <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;--------------------------------------&#39;</span><span class="p">)</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;criterion (weight): ordinal correlation&#39;</span><span class="p">)</span>
+                <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;--------------------------------------&#39;</span><span class="p">)</span>
+            <span class="k">for</span> <span class="n">cg</span> <span class="ow">in</span> <span class="n">marginalCorrelations</span><span class="p">:</span>
+                <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;</span><span class="si">%s</span><span class="s1"> (</span><span class="si">%.3f</span><span class="s1">): </span><span class="si">%+.3f</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="p">(</span>
+                    <span class="n">cg</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span><span class="nb">abs</span><span class="p">(</span><span class="n">criteria</span><span class="p">[</span><span class="n">cg</span><span class="p">[</span><span class="mi">1</span><span class="p">]][</span><span class="s1">&#39;weight&#39;</span><span class="p">])</span><span class="o">/</span><span class="n">sumWeights</span><span class="p">,</span><span class="n">cg</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span> <span class="p">)</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Summary:&#39;</span><span class="p">)</span>
+            <span class="k">if</span> <span class="n">ValuedCorrelation</span><span class="p">:</span>
+                <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Weighted mean marginal equivalence(a)  : </span><span class="si">%+.3f</span><span class="s1">&#39;</span> <span class="o">%</span>\
+                  <span class="n">meanMarginalCorrelation</span><span class="p">)</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Weighted mean marginal correlation (a) : </span><span class="si">%+.3f</span><span class="s1">&#39;</span> <span class="o">%</span>\
+                  <span class="n">meanMarginalCorrelation</span><span class="p">)</span>                
+            <span class="nb">print</span><span class="p">(</span>    <span class="s1">&#39;Standard deviation (b)                 : </span><span class="si">%+.3f</span><span class="s1">&#39;</span> <span class="o">%</span>\
+                  <span class="n">sdMarginalCorrelation</span><span class="p">)</span>
+            <span class="nb">print</span><span class="p">(</span>    <span class="s1">&#39;Partial ranking fairness (a)-(b)       : </span><span class="si">%+.3f</span><span class="s1">&#39;</span> <span class="o">%</span>\
+                  <span class="p">(</span><span class="nb">float</span><span class="p">(</span><span class="n">meanMarginalCorrelation</span><span class="p">)</span> <span class="o">-</span> <span class="n">sdMarginalCorrelation</span><span class="p">)</span> <span class="p">)</span>
+        <span class="k">return</span> <span class="p">(</span><span class="n">marginalCorrelations</span><span class="p">,</span>
+                <span class="n">meanMarginalCorrelation</span><span class="p">,</span>
+                <span class="n">sdMarginalCorrelation</span><span class="p">)</span></div>
+
+
 <span class="c1">#-----------------</span>
 
 <div class="viewcode-block" id="OutrankingDigraph.showMarginalObjectivesVersusGlobalRankingCorrelations">
@@ -10602,7 +10667,7 @@
 
   <div role="contentinfo">
     <p>&#169; Copyright 2012-2025, Raymond Bisdorff.
-      <span class="lastupdated">Last updated on Jun 18, 2025.
+      <span class="lastupdated">Last updated on Jul 06, 2025.
       </span></p>
   </div>
 

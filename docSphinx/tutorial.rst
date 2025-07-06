@@ -3800,49 +3800,45 @@ It is worthwhile noticing in :numref:`weakBachetval` that alternative *a1* appea
 
 Consensus quality of the partial Bachet rankings
 ````````````````````````````````````````````````
-Let us now verify in :numref:`weakBachet7` the consensus quality of the partial polarised Bachet ranking *wb*. We must therefore temporarily indicate that the partial ranking models in fact an outranking digraph (Line 2)
+Let us now verify in :numref:`weakBachet7` below the consensus quality of the partial *polarised* Bachet ranking *wb*.
 
 .. code-block:: pycon
    :caption: Consensus quality of the partial polarised Bachet ranking
    :name: weakBachet7
-   :emphasize-lines: 2-3,7-8,23
+   :emphasize-lines: 1,5-6,21
 
-   >>> from outrankingDigrahs import OutrankingDigraph
-   >>> wb.__class__ = OutrankingDigraph
-   >>> wb.computeOutrankingConsensusQuality(Comments=True)
+   >>> wb.computePartialOutrankingConsensusQuality(Comments=True)
     Consensus quality of partial polarised Bachet ranking
     criterion (weight): bipolar-valued relational equivalence
     -------------------------------
-     c01 (0.167): +0.333
-     b09 (0.050): +0.333
-     b02 (0.050): +0.264
-     b08 (0.050): +0.222
-     b04 (0.050): +0.194
-     b01 (0.050): +0.153
-     c02 (0.167): +0.056
+     c01 (0.167): +0.444
+     b09 (0.050): +0.444
+     b02 (0.050): +0.358
+     b08 (0.050): +0.296
+     b04 (0.050): +0.259
+     b01 (0.050): +0.208
+     c02 (0.167): +0.074
      b05 (0.050): +0.000
-     b10 (0.050): -0.056
-     b07 (0.050): -0.083
-     c03 (0.167): -0.111
-     b03 (0.050): -0.139
-     b06 (0.050): -0.181
+     b10 (0.050): -0.095
+     b07 (0.050): -0.111
+     c03 (0.167): -0.148
+     b03 (0.050): -0.185
+     b06 (0.050): -0.245
     Summary:
-     Weighted mean marginal correlation (a): +0.082
-     Standard deviation (b)                : +0.179
-     Partial ranking fairness (a)-(b)      : -0.097
-   >>> wb.__class__ = PartialBachetRanking
+     Weighted mean marginal correlation (a) : +0.108
+     Standard deviation (b)                 : +0.240
+     Partial ranking fairness (a)-(b)       : -0.132
 
-Best correlated (+0.333) with the partial ranking appear *Cost* criterion *c01* and Benefit criterion *b09*. The relational equivalences are supported by a two third significance majority (Lines 7-8). Eight out of thirteen criteria show a non negative equivalence and the weighted mean marginal equivalence is slightly positive (+0.82, Line 21). With a standrad deviation of +0.179, we obtain an overall fairness score of -0.097 for the partial polarised Bachet ranking.
+Best correlated (+0.444) with the partial ranking appear *Cost* criterion *c01* and Benefit criterion *b09*. The relational equivalences are supported by a nearly 75% significance majority (Lines 5-6). Eight out of thirteen criteria show a non negative equivalence and the weighted mean marginal equivalence is slightly positive (+0.108, Line 19). With a standard deviation of +0.240, we obtain however an overall negative fairness score of -0.132 for the partial polarised Bachet ranking.
 
-We may redo the same computation also for the partial valued Bachet ranking. 
+We may redo in :numref:`weakBachet8` below the same computation for the partial *valued* Bachet ranking. 
 
 .. code-block:: pycon
    :caption: Consensus quality of the partial valued Bachet ranking
    :name: weakBachet8
-   :emphasize-lines: 2,6-7,17,20-22
+   :emphasize-lines: 1,5-6,16,19-21
 		     
-   >>> wbv.__class__ = OutrankingDigraph
-   >>> wbv.computeOutrankingConsensusQuality(Comments=True)
+   >>> wbv.computePartialOutrankingConsensusQuality(Comments=True)
     Consensus quality of the partial valued Bachet ranking
     criterion (weight): bipolar-valued relational equivalence
     --------------------------------------
@@ -3863,13 +3859,12 @@ We may redo the same computation also for the partial valued Bachet ranking.
      Weighted mean marginal correlation (a): +0.098
      Standard deviation (b)                : +0.204
      Partial ranking fairness (a)-(b)      : -0.107
-   >>> wbv.__class__ = PartialRankingDigraph
 
-The valued partial Bachet ranking pays a more accurate attention to the marginal criteria significance weights. 10/60 = 0.167 for the three  Costs criteria and 3/60 = 0.050 for the Benefit criteria. Criteria *c01* and *c03*, with a significance of 10/60 = 0.167, is hence given more attention. The weighted mean marginal correlation appears therefore slightly better (+0.098 vs +0.082). The standard deviation, however becomes slightly higher, resulting in a slightly lesser overall fairness score (-0.107 vs -0.097, Lines 20-22).    
+The valued partial Bachet ranking pays a more accurate attention to the marginal criteria significance weights: 10/60 = 0.167 for the three  Costs criteria and 3/60 = 0.050 for the Benefit criteria. Criteria *c01* and *c03* for instance, with a significance of 0.167, are hence given more attention. The weighted mean marginal correlation appears slightly lower (+0.098 vs +0.108). The standard deviation, however becomes slightly lower, resulting in a slightly better overall fairness score (-0.107 vs -0.132, Lines 19-21).    
 
 .. note::
 
-   As documented above, the *Bachet* ranking rules effectively deliver new methods for constructing convincing partial rankings providing by the way a tool for computing potential first or last choice recommendations, actually the :ref:`initial and terminal prekernels <Bipolar-Valued-Kernels-Tutorial-label>` of such partial transitive digraphs. Mind however that the *Bachet* ranking rules can only handle small outranking digraphs ( < 50 ). For larger ( > 50 ) or big ( > 1000 ) outranking digraphs it is opportune to turn to order statistics and compute **weak rankings** --rankings with ties-- by sorting the multicriteria performance records into *relative* or *absolute* performance **quantile equivalence classes**.
+   As shown above, the *Bachet* ranking rules may effectively deliver new methods for constructing convincing partial rankings and, by the way, a tool for computing potential first or last choice recommendations. Actually the :ref:`initial and terminal prekernels <Bipolar-Valued-Kernels-Tutorial-label>` of such partial transitive digraphs. Mind however that the *Bachet* ranking rules can only handle small outranking digraphs ( < 50 ). For larger ( > 50 ) or big ( > 1000 ) outranking digraphs it is opportune to turn to order statistics and compute **weak rankings** --rankings with ties-- by sorting the multicriteria performance records into *relative* or *absolute* performance **quantile equivalence classes**.
 
    This order statistics based **rating** approach is presented in the following tutorials.  
 

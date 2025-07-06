@@ -3815,70 +3815,65 @@ three modes at 0.3 (-), 0.5 (~), respectively 0.7 (+) of the common scale span a
 </section>
 <section id="consensus-quality-of-the-partial-bachet-rankings">
 <h4><a class="toc-backref" href="#id342" role="doc-backlink"><span class="section-number">1.3.5.3. </span>Consensus quality of the partial Bachet rankings</a><a class="headerlink" href="#consensus-quality-of-the-partial-bachet-rankings" title="Link to this heading"></a></h4>
-<p>Let us now verify in <a class="reference internal" href="#weakbachet7"><span class="std std-numref">Listing 1.53</span></a> the consensus quality of the partial polarised Bachet ranking <em>wb</em>. We must therefore temporarily indicate that the partial ranking models in fact an outranking digraph (Line 2)</p>
+<p>Let us now verify in <a class="reference internal" href="#weakbachet7"><span class="std std-numref">Listing 1.53</span></a> below the consensus quality of the partial <em>polarised</em> Bachet ranking <em>wb</em>.</p>
 <div class="literal-block-wrapper docutils container" id="weakbachet7">
 <div class="code-block-caption"><span class="caption-number">Listing 1.53 </span><span class="caption-text">Consensus quality of the partial polarised Bachet ranking</span><a class="headerlink" href="#weakbachet7" title="Link to this code"></a></div>
-<div class="highlight-pycon notranslate"><div class="highlight"><pre><span></span><span class="linenos"> 1</span><span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">outrankingDigrahs</span> <span class="kn">import</span> <span class="n">OutrankingDigraph</span>
-<span class="hll"><span class="linenos"> 2</span><span class="gp">&gt;&gt;&gt; </span><span class="n">wb</span><span class="o">.</span><span class="vm">__class__</span> <span class="o">=</span> <span class="n">OutrankingDigraph</span>
-</span><span class="hll"><span class="linenos"> 3</span><span class="gp">&gt;&gt;&gt; </span><span class="n">wb</span><span class="o">.</span><span class="n">computeOutrankingConsensusQuality</span><span class="p">(</span><span class="n">Comments</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
-</span><span class="linenos"> 4</span><span class="go"> Consensus quality of partial polarised Bachet ranking</span>
-<span class="linenos"> 5</span><span class="go"> criterion (weight): bipolar-valued relational equivalence</span>
-<span class="linenos"> 6</span><span class="go"> -------------------------------</span>
-<span class="hll"><span class="linenos"> 7</span><span class="go">  c01 (0.167): +0.333</span>
-</span><span class="hll"><span class="linenos"> 8</span><span class="go">  b09 (0.050): +0.333</span>
-</span><span class="linenos"> 9</span><span class="go">  b02 (0.050): +0.264</span>
-<span class="linenos">10</span><span class="go">  b08 (0.050): +0.222</span>
-<span class="linenos">11</span><span class="go">  b04 (0.050): +0.194</span>
-<span class="linenos">12</span><span class="go">  b01 (0.050): +0.153</span>
-<span class="linenos">13</span><span class="go">  c02 (0.167): +0.056</span>
-<span class="linenos">14</span><span class="go">  b05 (0.050): +0.000</span>
-<span class="linenos">15</span><span class="go">  b10 (0.050): -0.056</span>
-<span class="linenos">16</span><span class="go">  b07 (0.050): -0.083</span>
-<span class="linenos">17</span><span class="go">  c03 (0.167): -0.111</span>
-<span class="linenos">18</span><span class="go">  b03 (0.050): -0.139</span>
-<span class="linenos">19</span><span class="go">  b06 (0.050): -0.181</span>
-<span class="linenos">20</span><span class="go"> Summary:</span>
-<span class="linenos">21</span><span class="go">  Weighted mean marginal correlation (a): +0.082</span>
-<span class="linenos">22</span><span class="go">  Standard deviation (b)                : +0.179</span>
-<span class="hll"><span class="linenos">23</span><span class="go">  Partial ranking fairness (a)-(b)      : -0.097</span>
-</span><span class="linenos">24</span><span class="gp">&gt;&gt;&gt; </span><span class="n">wb</span><span class="o">.</span><span class="vm">__class__</span> <span class="o">=</span> <span class="n">PartialBachetRanking</span>
-</pre></div>
+<div class="highlight-pycon notranslate"><div class="highlight"><pre><span></span><span class="hll"><span class="linenos"> 1</span><span class="gp">&gt;&gt;&gt; </span><span class="n">wb</span><span class="o">.</span><span class="n">computePartialOutrankingConsensusQuality</span><span class="p">(</span><span class="n">Comments</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+</span><span class="linenos"> 2</span><span class="go"> Consensus quality of partial polarised Bachet ranking</span>
+<span class="linenos"> 3</span><span class="go"> criterion (weight): bipolar-valued relational equivalence</span>
+<span class="linenos"> 4</span><span class="go"> -------------------------------</span>
+<span class="hll"><span class="linenos"> 5</span><span class="go">  c01 (0.167): +0.444</span>
+</span><span class="hll"><span class="linenos"> 6</span><span class="go">  b09 (0.050): +0.444</span>
+</span><span class="linenos"> 7</span><span class="go">  b02 (0.050): +0.358</span>
+<span class="linenos"> 8</span><span class="go">  b08 (0.050): +0.296</span>
+<span class="linenos"> 9</span><span class="go">  b04 (0.050): +0.259</span>
+<span class="linenos">10</span><span class="go">  b01 (0.050): +0.208</span>
+<span class="linenos">11</span><span class="go">  c02 (0.167): +0.074</span>
+<span class="linenos">12</span><span class="go">  b05 (0.050): +0.000</span>
+<span class="linenos">13</span><span class="go">  b10 (0.050): -0.095</span>
+<span class="linenos">14</span><span class="go">  b07 (0.050): -0.111</span>
+<span class="linenos">15</span><span class="go">  c03 (0.167): -0.148</span>
+<span class="linenos">16</span><span class="go">  b03 (0.050): -0.185</span>
+<span class="linenos">17</span><span class="go">  b06 (0.050): -0.245</span>
+<span class="linenos">18</span><span class="go"> Summary:</span>
+<span class="linenos">19</span><span class="go">  Weighted mean marginal correlation (a) : +0.108</span>
+<span class="linenos">20</span><span class="go">  Standard deviation (b)                 : +0.240</span>
+<span class="hll"><span class="linenos">21</span><span class="go">  Partial ranking fairness (a)-(b)       : -0.132</span>
+</span></pre></div>
 </div>
 </div>
-<p>Best correlated (+0.333) with the partial ranking appear <em>Cost</em> criterion <em>c01</em> and Benefit criterion <em>b09</em>. The relational equivalences are supported by a two third significance majority (Lines 7-8). Eight out of thirteen criteria show a non negative equivalence and the weighted mean marginal equivalence is slightly positive (+0.82, Line 21). With a standrad deviation of +0.179, we obtain an overall fairness score of -0.097 for the partial polarised Bachet ranking.</p>
-<p>We may redo the same computation also for the partial valued Bachet ranking.</p>
+<p>Best correlated (+0.444) with the partial ranking appear <em>Cost</em> criterion <em>c01</em> and Benefit criterion <em>b09</em>. The relational equivalences are nearly supported by a 75% significance majority (Lines 5-6). Eight out of thirteen criteria show a non negative equivalence and the weighted mean marginal equivalence is slightly positive (+0.108, Line 19). With a standard deviation of +0.240, we obtain however an overall negative fairness score of -0.132 for the partial polarised Bachet ranking.</p>
+<p>We may redo in <a class="reference internal" href="#weakbachet8"><span class="std std-numref">Listing 1.54</span></a> below the same computation for the partial <em>valued</em> Bachet ranking.</p>
 <div class="literal-block-wrapper docutils container" id="weakbachet8">
 <div class="code-block-caption"><span class="caption-number">Listing 1.54 </span><span class="caption-text">Consensus quality of the partial valued Bachet ranking</span><a class="headerlink" href="#weakbachet8" title="Link to this code"></a></div>
-<div class="highlight-pycon notranslate"><div class="highlight"><pre><span></span><span class="linenos"> 1</span><span class="gp">&gt;&gt;&gt; </span><span class="n">wbv</span><span class="o">.</span><span class="vm">__class__</span> <span class="o">=</span> <span class="n">OutrankingDigraph</span>
-<span class="hll"><span class="linenos"> 2</span><span class="gp">&gt;&gt;&gt; </span><span class="n">wbv</span><span class="o">.</span><span class="n">computeOutrankingConsensusQuality</span><span class="p">(</span><span class="n">Comments</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
-</span><span class="linenos"> 3</span><span class="go"> Consensus quality of the partial valued Bachet ranking</span>
-<span class="linenos"> 4</span><span class="go"> criterion (weight): bipolar-valued relational equivalence</span>
-<span class="linenos"> 5</span><span class="go"> --------------------------------------</span>
-<span class="hll"><span class="linenos"> 6</span><span class="go">  c01 (0.167): +0.472</span>
-</span><span class="hll"><span class="linenos"> 7</span><span class="go">  b09 (0.050): +0.222</span>
-</span><span class="linenos"> 8</span><span class="go">  b05 (0.050): +0.194</span>
-<span class="linenos"> 9</span><span class="go">  b04 (0.050): +0.167</span>
-<span class="linenos">10</span><span class="go">  b01 (0.050): +0.139</span>
-<span class="linenos">11</span><span class="go">  b02 (0.050): +0.125</span>
-<span class="linenos">12</span><span class="go">  c02 (0.167): +0.083</span>
-<span class="linenos">13</span><span class="go">  b08 (0.050): +0.083</span>
-<span class="linenos">14</span><span class="go">  b07 (0.050): -0.056</span>
-<span class="linenos">15</span><span class="go">  b03 (0.050): -0.111</span>
-<span class="linenos">16</span><span class="go">  b10 (0.050): -0.111</span>
-<span class="hll"><span class="linenos">17</span><span class="go">  c03 (0.167): -0.111</span>
-</span><span class="linenos">18</span><span class="go">  b06 (0.050): -0.181</span>
-<span class="linenos">19</span><span class="go"> Summary:</span>
-<span class="hll"><span class="linenos">20</span><span class="go">  Weighted mean marginal correlation (a): +0.098</span>
-</span><span class="hll"><span class="linenos">21</span><span class="go">  Standard deviation (b)                : +0.204</span>
-</span><span class="hll"><span class="linenos">22</span><span class="go">  Partial ranking fairness (a)-(b)      : -0.107</span>
-</span><span class="linenos">23</span><span class="gp">&gt;&gt;&gt; </span><span class="n">wbv</span><span class="o">.</span><span class="vm">__class__</span> <span class="o">=</span> <span class="n">PartialRankingDigraph</span>
-</pre></div>
+<div class="highlight-pycon notranslate"><div class="highlight"><pre><span></span><span class="hll"><span class="linenos"> 1</span><span class="gp">&gt;&gt;&gt; </span><span class="n">wbv</span><span class="o">.</span><span class="n">computePartialOutrankingConsensusQuality</span><span class="p">(</span><span class="n">Comments</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+</span><span class="linenos"> 2</span><span class="go"> Consensus quality of the partial valued Bachet ranking</span>
+<span class="linenos"> 3</span><span class="go"> criterion (weight): bipolar-valued relational equivalence</span>
+<span class="linenos"> 4</span><span class="go"> --------------------------------------</span>
+<span class="hll"><span class="linenos"> 5</span><span class="go">  c01 (0.167): +0.472</span>
+</span><span class="hll"><span class="linenos"> 6</span><span class="go">  b09 (0.050): +0.222</span>
+</span><span class="linenos"> 7</span><span class="go">  b05 (0.050): +0.194</span>
+<span class="linenos"> 8</span><span class="go">  b04 (0.050): +0.167</span>
+<span class="linenos"> 9</span><span class="go">  b01 (0.050): +0.139</span>
+<span class="linenos">10</span><span class="go">  b02 (0.050): +0.125</span>
+<span class="linenos">11</span><span class="go">  c02 (0.167): +0.083</span>
+<span class="linenos">12</span><span class="go">  b08 (0.050): +0.083</span>
+<span class="linenos">13</span><span class="go">  b07 (0.050): -0.056</span>
+<span class="linenos">14</span><span class="go">  b03 (0.050): -0.111</span>
+<span class="linenos">15</span><span class="go">  b10 (0.050): -0.111</span>
+<span class="hll"><span class="linenos">16</span><span class="go">  c03 (0.167): -0.111</span>
+</span><span class="linenos">17</span><span class="go">  b06 (0.050): -0.181</span>
+<span class="linenos">18</span><span class="go"> Summary:</span>
+<span class="hll"><span class="linenos">19</span><span class="go">  Weighted mean marginal correlation (a): +0.098</span>
+</span><span class="hll"><span class="linenos">20</span><span class="go">  Standard deviation (b)                : +0.204</span>
+</span><span class="hll"><span class="linenos">21</span><span class="go">  Partial ranking fairness (a)-(b)      : -0.107</span>
+</span></pre></div>
 </div>
 </div>
-<p>The valued partial Bachet ranking pays a more accurate attention to the marginal criteria significance weights. 10/60 = 0.167 for the three  Costs criteria and 3/60 = 0.050 for the Benefit criteria. Criteria <em>c01</em> and <em>c03</em>, with a significance of 10/60 = 0.167, is hence given more attention. The weighted mean marginal correlation appears therefore slightly better (+0.098 vs +0.082). The standard deviation, however becomes slightly higher, resulting in a slightly lesser overall fairness score (-0.107 vs -0.097, Lines 20-22).</p>
+<p>The valued partial Bachet ranking pays a more accurate attention to the marginal criteria significance weights: 10/60 = 0.167 for the three  Costs criteria and 3/60 = 0.050 for the Benefit criteria. Criteria <em>c01</em> and <em>c03</em> for instance, with a significance of 0.167, are hence given more attention. The weighted mean marginal correlation appears slightly lower (+0.098 vs +0.108). The standard deviation, however becomes slightly lower, resulting in a slightly better overall fairness score (-0.107 vs -0.132, Lines 19-21).</p>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
-<p>As documented above, the <em>Bachet</em> ranking rules effectively deliver new methods for constructing convincing partial rankings providing by the way a tool for computing potential first or last choice recommendations, actually the <a class="reference internal" href="pearls.html#bipolar-valued-kernels-tutorial-label"><span class="std std-ref">initial and terminal prekernels</span></a> of such partial transitive digraphs. Mind however that the <em>Bachet</em> ranking rules can only handle small outranking digraphs ( &lt; 50 ). For larger ( &gt; 50 ) or big ( &gt; 1000 ) outranking digraphs it is opportune to turn to order statistics and compute <strong>weak rankings</strong> –rankings with ties– by sorting the multicriteria performance records into <em>relative</em> or <em>absolute</em> performance <strong>quantile equivalence classes</strong>.</p>
+<p>As shown above, the <em>Bachet</em> ranking rules may effectively deliver new methods for constructing convincing partial rankings and, by the way, a tool for computing potential first or last choice recommendations. Actually the <a class="reference internal" href="pearls.html#bipolar-valued-kernels-tutorial-label"><span class="std std-ref">initial and terminal prekernels</span></a> of such partial transitive digraphs. Mind however that the <em>Bachet</em> ranking rules can only handle small outranking digraphs ( &lt; 50 ). For larger ( &gt; 50 ) or big ( &gt; 1000 ) outranking digraphs it is opportune to turn to order statistics and compute <strong>weak rankings</strong> –rankings with ties– by sorting the multicriteria performance records into <em>relative</em> or <em>absolute</em> performance <strong>quantile equivalence classes</strong>.</p>
 <p>This order statistics based <strong>rating</strong> approach is presented in the following tutorials.</p>
 </div>
 <p>Back to <a class="reference internal" href="#tutorial-label"><span class="std std-ref">Content Table</span></a></p>

@@ -2022,6 +2022,19 @@ class PartialBachetRanking(TransitiveDigraph):
 ##                boostedOrdering.append(x)
 ##        return boostedOrdering
 
+    def computePartialOutrankingConsensusQuality(self,Sorted=True,
+                                                 Comments=False):
+        """
+        Renders or shows the consensus data of apartial Bachet ranking
+        """
+        from outrankingDigraphs import OutrankingDigraph
+        self.__class__ = OutrankingDigraph
+        cons = self.computePartialOutrankingConsensusQuality(Comments=Comments,
+                                ValuedCorrelation = not self.Polarised,
+                                Sorted=Sorted)
+        self.__class__ = PartialBachetRanking
+        return cons
+
     def exportGraphViz(self,fileName=None,ArrowHeads=False,
                        Comments=True,graphType='png',
                        graphSize='7,7',bgcolor='cornsilk',
