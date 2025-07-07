@@ -1748,9 +1748,33 @@ In :numref:`BachetRanking0` Line 2, we operate the :ref:`epistemic disjunctive f
 
    Partially ranking the outranking digraph
 	   
-:numref:`officeChoiceRanking` makes hence again clearly apparent the important fact that the most expensive location *A* and the cheapest location *C*, both,  appear incomparable with all the other alternatives except the last-ranked location *F*.
+:numref:`officeChoiceRanking` makes hence again clearly apparent the important fact that the most expensive location *A* and the cheapest location *C*, both,  appear incomparable with all the other alternatives except the last-ranked location *F*. With the :py:meth:`~transitiveDigraphs.PartialBachetRanking.computePartialOutrankingConsensusQuality` method, we may check in :numref:`PartialBachetRanking1` the consensus quality of this partial ranking with respect to the marginal criterion rankings. 
 
-We may use the best, with the outranking digraph *g* correlated (+0.816), *Bachet* ranking ['G', 'D', 'A', 'C', 'B', 'E', 'F']  for showing in :numref:`rankedOfficeChoiceHeatmap` a from best to worst ranked performance heatmap of all the potential office locations.
+.. code-block:: pycon
+   :name: PartialBachetRanking1
+   :caption: Consensus quality of the partial Bachet ranking
+   :linenos:
+   :emphasize-lines: 1,5,7,8,10-11,13
+	
+   >>> wbr.computePartialOutrankingConsensusQuality(Comments=True)
+    Consensus quality of partial ranking:
+    Criterion (weight)    : ordinal correlation
+    ---------------------------------------
+     Proximity (0.221)    : +1.000
+     Parking (0.021)      : +0.900
+     Visibility (0.179)   : +0.700
+     Costs (0.310)        : +0.500
+     Working Space (0.069): +0.500
+     Standing (0.159)     : -0.300
+     Comfort (0.041)      : -0.700
+    Summary:
+     Weighted mean marginal correlation (a) : +0.478
+     Standard deviation (b)                 : +0.476
+     Partial ranking fairness (a)-(b)       : +0.002
+
+The partial Bachet ranking is a 100% consistent with the *Proximity* criterion, 85% consistent with *Visibility* and 75% consistent with the *Costs* criterion. These three criteria are the most significant ones (see Lines 5 aand 7). The least considered criteria are the *Standing* and even more the *Comfort* criterion. The partial Bachet ranking is indeed  only 35% consistent with the *Standing* and only 15% consistent with the latter one (see Lines 10-11). The mean weighted marginal ordinal correlation index (+0.478, Line 13) over all the criteria shows eventually a partial ranking consensus supported by a nearly 75% significance majority.   
+
+We may finally use the best, with the outranking digraph *g* correlated (+0.816), *Bachet* ranking ['G', 'D', 'A', 'C', 'B', 'E', 'F']  for showing in :numref:`rankedOfficeChoiceHeatmap` a from best to worst ranked performance heatmap of all the potential office locations.
 
 >>> t.showHTMLPerformanceHeatmap(actionsList=wbr.bachetRankings[0][1],
    ...                              Correlations=True)
@@ -1762,9 +1786,9 @@ We may use the best, with the outranking digraph *g* correlated (+0.816), *Bache
 
    The ranked performance heatmap of the potential office locations
 
-In view of :numref:`rankedOfficeChoiceHeatmap`, office locations *G* or *D* make up convincing best choice recommendations with an apparent slight advantage for location *G*. Notice that both alternatives *A* and *C*, with their highly contrasted performance profiles, appear ranked in the midfield. Indeed, as they don't compare well, they may neither be first nor last ranked. This is why, when such largely incomparable or extreme alternatives are observed, linear rankings may fail to deliver adequate first-choice recommendations. 
+In view of :numref:`rankedOfficeChoiceHeatmap`, office locations *G* or *D* make up convincing best choice recommendations with an apparent slight advantage for location *G*. Notice that both alternatives *A* and *C*, with their highly contrasted performance profiles, appear ranked in the midfield. Indeed, as they don't compare well, they may neither be first nor last ranked. This is why, when such largely incomparable or extreme alternatives are observed, linear rankings may fail to deliver adequate first-choice recommendations. Notice finally in the *tau* row above similar marginal ordinal correlation indexes as observed before in :numref:`PartialBachetRanking1` Lines 5-11.  
 
-Our first choice recommendation appears finally depending essentially on the very importance the CEO is attaching to each one of the three decision objectives he is considering. In the setting here, where he considers that *maximizing the future turnover* is the most important objective (81/145) followed by *minimizing the Costs* (45/145) and, less important, *maximizing the working conditions* (19/145), compromise locations *D* as well as *G* represent the potential best choices candidates. However, if *Costs* do not play much a role, it would perhaps be better to choose the most advantageous location *A*; or if, on the contrary, *Costs* do matter a lot, choosing the cheapest alternative *C* could definitely give a more convincing best choice. 
+Our first choice recommendation appears essentially depending on the very importance the CEO is eventually attaching to each one of the three decision objectives he is considering. In the setting here, where he considers that *maximizing the future turnover* is the most important objective (81/145 = 0.56) followed by *minimizing the Costs* (45/145 = 0.31) and, less important, *maximizing the working conditions* (19/145 = 0.13), compromise locations *D* as well as *G* become the potential best choices candidates. However, if minimizing the *Costs* does not play much a role, it would perhaps be better to recommend the most advantageous location *A*; or if, on the contrary, the *Costs* objective does matter a lot, recommending the cheapest alternative *C* could definitely become the more convincing best choice recommendation. 
 
 It might be worth, as an **exercise**, to modify the criteria significance weights in the 'officeChoice.py' data file in such a way that
 
