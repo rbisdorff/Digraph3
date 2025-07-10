@@ -4116,8 +4116,8 @@ We may hence rank this extended actions attribute as follows with the *NetFlows*
      'a19', 'a43', 'a49', 'a50', 'a40', 'a28', 'a38', 'a25',
      'a45', 'a18', 'a16', 'a36', 'a35', 'a30', 'a23', 'a34',
      'a15', '2-M', 'a10', 'a26', 'a04', 'a44', '1-M']
-     >>> rqr.showRatingByQuantilesRanking()
-     *-------- rating by quantiles ranking result ---------
+   >>> rqr.showRatingByQuantilesRanking()
+    *-------- rating by quantiles ranking result ---------
      ]0.60 - 0.80] ['a22', 'a42', 'a07', 'a33', 'a03', 'a01',
                     'a39', 'a48', 'a37', 'a29', 'a41', 'a11',
 		    'a27', 'a05', 'a46', 'a02', 'a17', 'a32']

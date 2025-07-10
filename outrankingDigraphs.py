@@ -7945,7 +7945,9 @@ class RobustOutrankingDigraph(BipolarOutrankingDigraph):
     def __init__(self, filePerfTab = None,Debug=False,hasNoVeto=True):
         
         import copy
-        
+        from time import time
+        t0 = time()
+        self.runTimes = {}
         if filePerfTab is None:
             filePerfTab = 'randomPerf'
             t = RandomPerformanceTableau()
@@ -7953,6 +7955,8 @@ class RobustOutrankingDigraph(BipolarOutrankingDigraph):
             self.name='newrobust_randomPerf'
         else:
             self.name = 'robust_' + filePerfTab.name
+        self.runTimes['dataInput'] = time() - t0
+        t1 = time()        
         cardinal = BipolarOutrankingDigraph(filePerfTab,Normalized=True,WithConcordanceRelation=True,WithVetoCounts=True)
         ordinal  = OrdinalOutrankingDigraph(filePerfTab,hasNoVeto=hasNoVeto)
         ordinal.recodeValuation(-1,1)
@@ -7960,7 +7964,6 @@ class RobustOutrankingDigraph(BipolarOutrankingDigraph):
         equisignificant.recodeValuation(-1,1)
         unanimous = UnanimousOutrankingDigraph(filePerfTab,hasNoVeto=hasNoVeto)
         unanimous.recodeValuation(-1,1)
-        
         if Debug:
             print('unanimous')
             print(unanimous.valuationdomain)
@@ -8003,8 +8006,12 @@ class RobustOutrankingDigraph(BipolarOutrankingDigraph):
         self.stability = self._constructRelation()
         if Debug:
             self.showRelationTable(hasStabilityDenotation=True)
+        self.runTimes['computeRelation'] = time() - t1
+        t2 = time()
         self.gamma = self.gammaSets()
         self.notGamma = self.notGammaSets()
+        self.runTimes['gammaSets'] = time() - t2
+        self.runTimes['totalTime'] = time() - t0
 
     def _constructRelation(self):
         """
