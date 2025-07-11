@@ -1,0 +1,30 @@
+digraph G {
+graph [ bgcolor = cornsilk, ordering = out, fontname = "Helvetica-Oblique",
+ fontsize = 12,
+ label = "\nDigraph3 (graphviz)\n R. Bisdorff, 2020", size="7,7",fontsize=10];
+T1 [shape = "circle", label = "T1", fontsize=10];
+T2 [shape = "circle", label = "T2", fontsize=10];
+T3 [shape = "circle", label = "T3", fontsize=10];
+T4 [shape = "circle", label = "T4", fontsize=10];
+T5 [shape = "circle", label = "T5", fontsize=10];
+T6 [shape = "circle", label = "T6", fontsize=10];
+T7 [shape = "circle", label = "T7", fontsize=10];
+T8 [shape = "circle", label = "T8", fontsize=10];
+subGraph { rank = same; T2; }
+subGraph { rank = same; T1; T3; }
+subGraph { rank = same; T5; T8; }
+subGraph { rank = same; }
+subGraph { rank = same; T6; }
+subGraph { rank = same; T4; T7; }
+T2-> T1 [style="setlinewidth(1)",color=black,arrowhead=none] ;
+T2-> T3 [style="setlinewidth(1)",color=black,arrowhead=none] ;
+T1-> T8 [style="setlinewidth(1)",color=black,arrowhead=none] ;
+T3-> T5 [style="setlinewidth(1)",color=black,arrowhead=none] ;
+T3-> T8 [style="setlinewidth(1)",color=black,arrowhead=none] ;
+T5-> T6 [style="setlinewidth(1)",color=black,arrowhead=none] ;
+T5-> T7 [style="setlinewidth(1)",color=black,arrowhead=none] ;
+T8-> T6 [style="setlinewidth(1)",color=black,arrowhead=none] ;
+T8-> T7 [style="setlinewidth(1)",color=black,arrowhead=none] ;
+T6-> T4 [style="setlinewidth(1)",color=black,arrowhead=none] ;
+}
+ 
