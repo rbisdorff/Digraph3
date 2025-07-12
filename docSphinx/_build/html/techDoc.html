@@ -3505,10 +3505,22 @@ Renders the sharpest of two characteristic vectors v and w.</p>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">g</span> <span class="o">=</span> <span class="n">BipolarOutrankingDigraph</span><span class="p">(</span><span class="n">t</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">g</span><span class="o">.</span><span class="n">showBachetChoiceRecommendation</span><span class="p">(</span><span class="n">randomized</span><span class="o">=</span><span class="mi">100</span><span class="p">,</span>
 <span class="gp">... </span>                                 <span class="n">maxNbrOfRankings</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span><span class="n">seed</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
-<span class="go">***********************</span>
-<span class="go">Bachet Choice Recommendation (BCR)</span>
-<span class="go">Execution time: 0.024 seconds</span>
-<span class="go">*****************************</span>
+<span class="go"> *---- Bachet Choice Recommendations ----*</span>
+<span class="go">  Ranking by recursively first and last choosing</span>
+<span class="go">   1st ranked [&#39;p11&#39;, &#39;p19&#39;, &#39;p20&#39;]</span>
+<span class="go">    2nd ranked [&#39;p06&#39;, &#39;p13&#39;, &#39;p14&#39;]</span>
+<span class="go">      3rd ranked [&#39;p04&#39;, &#39;p05&#39;, &#39;p07&#39;, &#39;p18&#39;]</span>
+<span class="go">        4th ranked [&#39;p15&#39;]</span>
+<span class="go">        4th last ranked [&#39;p15&#39;]</span>
+<span class="go">      3rd last ranked [&#39;p08&#39;, &#39;p09&#39;, &#39;p10&#39;, &#39;p16&#39;]</span>
+<span class="go">    2nd last ranked [&#39;p01&#39;, &#39;p02&#39;, &#39;p12&#39;, &#39;p17&#39;]</span>
+<span class="go">  1st last ranked [&#39;p03&#39;]</span>
+<span class="go"> Quality of partial Bachet ranking</span>
+<span class="go">  Crisp ordinal correlation  : +0.954</span>
+<span class="go">  Epistemic determination    : +0.383</span>
+<span class="go">  Bipolar-valued equivalence : +0.365</span>
+<span class="go"> Execution time: 0.673 seconds</span>
+<span class="go"> *****************************</span>
 </pre></div>
 </div>
 </dd></dl>
@@ -14916,7 +14928,7 @@ Components are stored in an ordered dictionary.</p>
 
   <div role="contentinfo">
     <p>&#169; Copyright 2012-2025, Raymond Bisdorff.
-      <span class="lastupdated">Last updated on Jul 10, 2025.
+      <span class="lastupdated">Last updated on Jul 12, 2025.
       </span></p>
   </div>
 

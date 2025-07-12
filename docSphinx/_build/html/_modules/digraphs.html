@@ -9581,10 +9581,22 @@
 <span class="sd">        &gt;&gt;&gt; g = BipolarOutrankingDigraph(t)</span>
 <span class="sd">        &gt;&gt;&gt; g.showBachetChoiceRecommendation(randomized=100,</span>
 <span class="sd">        ...                                  maxNbrOfRankings=5,seed=1)</span>
-<span class="sd">        ***********************</span>
-<span class="sd">        Bachet Choice Recommendation (BCR)</span>
-<span class="sd">        Execution time: 0.024 seconds</span>
-<span class="sd">        *****************************</span>
+<span class="sd">         *---- Bachet Choice Recommendations ----*</span>
+<span class="sd">          Ranking by recursively first and last choosing</span>
+<span class="sd">           1st ranked [&#39;p11&#39;, &#39;p19&#39;, &#39;p20&#39;]</span>
+<span class="sd">            2nd ranked [&#39;p06&#39;, &#39;p13&#39;, &#39;p14&#39;]</span>
+<span class="sd">              3rd ranked [&#39;p04&#39;, &#39;p05&#39;, &#39;p07&#39;, &#39;p18&#39;]</span>
+<span class="sd">                4th ranked [&#39;p15&#39;]</span>
+<span class="sd">                4th last ranked [&#39;p15&#39;]</span>
+<span class="sd">              3rd last ranked [&#39;p08&#39;, &#39;p09&#39;, &#39;p10&#39;, &#39;p16&#39;]</span>
+<span class="sd">            2nd last ranked [&#39;p01&#39;, &#39;p02&#39;, &#39;p12&#39;, &#39;p17&#39;]</span>
+<span class="sd">          1st last ranked [&#39;p03&#39;]</span>
+<span class="sd">         Quality of partial Bachet ranking</span>
+<span class="sd">          Crisp ordinal correlation  : +0.954</span>
+<span class="sd">          Epistemic determination    : +0.383</span>
+<span class="sd">          Bipolar-valued equivalence : +0.365</span>
+<span class="sd">         Execution time: 0.673 seconds</span>
+<span class="sd">         *****************************</span>
 
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="kn">from</span> <span class="nn">copy</span> <span class="kn">import</span> <span class="n">deepcopy</span>
@@ -9608,8 +9620,11 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">pbr</span> <span class="o">=</span> <span class="n">pbr</span>
         <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;*---- Bachet Choice Recommendations ----*&#39;</span><span class="p">)</span>
         <span class="n">pbr</span><span class="o">.</span><span class="n">showTransitiveDigraph</span><span class="p">()</span>
-                  
-        <span class="nb">print</span><span class="p">()</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Quality of partial Bachet ranking&#39;</span><span class="p">)</span>
+        <span class="n">corr</span> <span class="o">=</span> <span class="n">g</span><span class="o">.</span><span class="n">computeOrdinalCorrelation</span><span class="p">(</span><span class="n">pbr</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s1">&#39; Crisp ordinal correlation  : </span><span class="si">%+.3f</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="n">corr</span><span class="p">[</span><span class="s1">&#39;correlation&#39;</span><span class="p">])</span>          
+        <span class="nb">print</span><span class="p">(</span><span class="s1">&#39; Epistemic determination    : </span><span class="si">%+.3f</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="n">corr</span><span class="p">[</span><span class="s1">&#39;determination&#39;</span><span class="p">])</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s1">&#39; Bipolar-valued equivalence : </span><span class="si">%+.3f</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="n">corr</span><span class="p">[</span><span class="s1">&#39;correlation&#39;</span><span class="p">]</span><span class="o">*</span><span class="n">corr</span><span class="p">[</span><span class="s1">&#39;determination&#39;</span><span class="p">])</span> <span class="p">)</span>
         <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Execution time: </span><span class="si">%.3f</span><span class="s1"> seconds&#39;</span> <span class="o">%</span> <span class="p">(</span><span class="n">time</span><span class="p">()</span> <span class="o">-</span> <span class="n">t0</span><span class="p">))</span>
         <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;*****************************&#39;</span><span class="p">)</span></div>
 
@@ -16355,7 +16370,7 @@
 
   <div role="contentinfo">
     <p>&#169; Copyright 2012-2025, Raymond Bisdorff.
-      <span class="lastupdated">Last updated on Jul 10, 2025.
+      <span class="lastupdated">Last updated on Jul 12, 2025.
       </span></p>
   </div>
 

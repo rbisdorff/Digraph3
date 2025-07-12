@@ -8924,10 +8924,22 @@ class Digraph(object):
         >>> g = BipolarOutrankingDigraph(t)
         >>> g.showBachetChoiceRecommendation(randomized=100,
         ...                                  maxNbrOfRankings=5,seed=1)
-        ***********************
-        Bachet Choice Recommendation (BCR)
-        Execution time: 0.024 seconds
-        *****************************
+         *---- Bachet Choice Recommendations ----*
+          Ranking by recursively first and last choosing
+           1st ranked ['p11', 'p19', 'p20']
+            2nd ranked ['p06', 'p13', 'p14']
+              3rd ranked ['p04', 'p05', 'p07', 'p18']
+                4th ranked ['p15']
+                4th last ranked ['p15']
+              3rd last ranked ['p08', 'p09', 'p10', 'p16']
+            2nd last ranked ['p01', 'p02', 'p12', 'p17']
+          1st last ranked ['p03']
+         Quality of partial Bachet ranking
+          Crisp ordinal correlation  : +0.954
+          Epistemic determination    : +0.383
+          Bipolar-valued equivalence : +0.365
+         Execution time: 0.673 seconds
+         *****************************
 
         """
         from copy import deepcopy
@@ -8951,8 +8963,11 @@ class Digraph(object):
         self.pbr = pbr
         print('*---- Bachet Choice Recommendations ----*')
         pbr.showTransitiveDigraph()
-                  
-        print()
+        print('Quality of partial Bachet ranking')
+        corr = g.computeOrdinalCorrelation(pbr)
+        print(' Crisp ordinal correlation  : %+.3f' % corr['correlation'])          
+        print(' Epistemic determination    : %+.3f' % corr['determination'])
+        print(' Bipolar-valued equivalence : %+.3f' % (corr['correlation']*corr['determination']) )
         print('Execution time: %.3f seconds' % (time() - t0))
         print('*****************************')
 
