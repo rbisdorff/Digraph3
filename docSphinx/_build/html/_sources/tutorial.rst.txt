@@ -9377,7 +9377,7 @@ Restricted to these ten best-ranked alternatives, the *Copeland*, the *NetFlows*
 On the MeluXina EuroHPC supercomputer [54]_
 -------------------------------------------
 
-Summer 2024, the author was granted the opportunity to use the large memory HPC resources of the MeluXina EuroHPC supercomputer [55]_  (https://www.luxprovide.lu/meluxina/). Computing nodes on this HPC platform offer a large RAM for particularly demanding workloads. Each node is composed of 2 AMD Rome CPUs (64 core @ 2.6 GHz, 256HT cores total), has 4 TB of memory (4096 GB) and 1.92 TB of local storage.
+Summer 2024, the author was granted the opportunity to use HPC resources of the MeluXina EuroHPC supercomputer [55]_  (https://www.luxprovide.lu/meluxina/). Special large memory computing nodes on this HPC platform offer a large RAM for particularly demanding workloads. Each such node is composed of 2 AMD Rome CPUs (64 core @ 2.6 GHz, 256HT cores total), has 4 TB of memory (4096 GB) and 1.92 TB of local storage.
 
 Following timings (see :numref:`meluxina`) could be achieved with a specially designed :py:mod:`cQuantilesRankingDigraphs` module [57]_ when q-tiling and ranking multiple incommensurable performance records of 21 criteria assessing three decision objectives, namely economic, environmental and societal aspects ( see the :ref:`tutorial <Three-Objectives-Performance-Tableau-label>` on generating random three-objectives performance tableaux).
 
