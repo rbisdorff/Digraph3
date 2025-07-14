@@ -2997,7 +2997,7 @@ Ranking-by-scoring with bipolar-valued base 3 encoded numbers
 `````````````````````````````````````````````````````````````
 
 .. epigraph::
-   "*Estant proposee telle quantité qu'on voudra pesant un nombre de livres despuis 1. iusques à 40. inclusivement (sans toutefois admettre les fractions ) on demande combien de pois pour le moins il faudrait employer à cet effect.*" [24]_
+   "*Being proposed to assess with a weight balance a quantity weighing an integer number of pounds between 1 and 40 included, how many balance weights at minimum are needed for being able to do so*" [24]_
 
    -- Cl. G. Bachet (1622)
 
@@ -5377,7 +5377,7 @@ Appendix
 
 .. [23] To prove the *Condorcet consistency* property of the *Bachet* ranking rule, it is sufficient to notice that the contributions of a transitive triplet *'ai' > 'aj' > 'ak'* to the corresponding *Bachet* ranking scores will respect the actual ordering of the triplet with all positional permutations of [..., ai, ..., aj, ...,ak, ...] in a relation table.
 
-.. [24] "*Being proposed to assess with a weight balance a quantity weighing an integer number of pounds between 1 and 40 included, how many balance weights at minimum are needed for being able to do so*".
+.. [24] "*Estant proposee telle quantité qu'on voudra pesant un nombre de livres despuis 1. iusques à 40. inclusivement (sans toutefois admettre les fractions ) on demande combien de pois pour le moins il faudrait employer à cet effect.*".
 
 .. raw:: latex
 
