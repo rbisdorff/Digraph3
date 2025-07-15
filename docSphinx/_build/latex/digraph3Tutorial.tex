@@ -67,7 +67,7 @@
 
 
 \title{Tutorials for the Digraph3 Python software resources}
-\date{June 19, 2025}
+\date{July 15, 2025}
 \release{3.13.5}
 \author{Raymond Bisdorff}
 \newcommand{\sphinxlogo}{\sphinxincludegraphics{introDoc3.png}\par}
@@ -1478,7 +1478,7 @@ All outranking digraphs, being of root type \sphinxcode{\sphinxupquote{Digraph}}
 
 \begin{sphinxadmonition}{warning}{Warning:}
 \sphinxAtStartPar
-Notice that the reflexive self comparison characteristic \(r(x,x)\) is set above by default to the median indeterminate valuation value 0; the reflexive terms of binary relation being generalr(x not geq y)ly ignored in most of the \sphinxstyleemphasis{Digraph3} resources.
+Notice that the reflexive self comparison characteristic \(r(x,x)\) is set above by default to the median indeterminate valuation value 0; the reflexive terms of binary relation being generally ignored in most of the \sphinxstyleemphasis{Digraph3} resources.
 \end{sphinxadmonition}
 
 
@@ -2689,10 +2689,34 @@ In \hyperref[\detokenize{tutorial:bachetranking0}]{Listing \ref{\detokenize{tuto
 \caption{Partially ranking the outranking digraph}\label{\detokenize{tutorial:officechoiceranking}}\end{figure}
 
 \sphinxAtStartPar
-\hyperref[\detokenize{tutorial:officechoiceranking}]{Fig.\@ \ref{\detokenize{tutorial:officechoiceranking}}} makes hence again clearly apparent the important fact that the most expensive location \sphinxstyleemphasis{A} and the cheapest location \sphinxstyleemphasis{C}, both,  appear incomparable with all the other alternatives except the last\sphinxhyphen{}ranked location \sphinxstyleemphasis{F}.
+\hyperref[\detokenize{tutorial:officechoiceranking}]{Fig.\@ \ref{\detokenize{tutorial:officechoiceranking}}} makes hence again clearly apparent the important fact that the most expensive location \sphinxstyleemphasis{A} and the cheapest location \sphinxstyleemphasis{C}, both,  appear incomparable with all the other alternatives except the last\sphinxhyphen{}ranked location \sphinxstyleemphasis{F}. With the \sphinxcode{\sphinxupquote{computePartialOutrankingConsensusQuality()}} method, we may check in \hyperref[\detokenize{tutorial:partialbachetranking1}]{Listing \ref{\detokenize{tutorial:partialbachetranking1}}} the consensus quality of this partial ranking with respect to the marginal criterion rankings.
+\sphinxSetupCaptionForVerbatim{Consensus quality of the partial Bachet ranking}
+\def\sphinxLiteralBlockLabel{\label{\detokenize{tutorial:partialbachetranking1}}}
+\fvset{hllines={, 1, 5, 7, 8, 10, 11, 13,}}%
+\begin{sphinxVerbatim}[commandchars=\\\{\},numbers=left,firstnumber=1,stepnumber=1]
+\PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{wbr}\PYG{o}{.}\PYG{n}{computePartialOutrankingConsensusQuality}\PYG{p}{(}\PYG{n}{Comments}\PYG{o}{=}\PYG{k+kc}{True}\PYG{p}{)}
+\PYG{g+go}{ Consensus quality of partial ranking:}
+\PYG{g+go}{ Criterion (weight)    : ordinal correlation}
+\PYG{g+go}{ \PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}}
+\PYG{g+go}{  Proximity (0.221)    : +1.000}
+\PYG{g+go}{  Parking (0.021)      : +0.900}
+\PYG{g+go}{  Visibility (0.179)   : +0.700}
+\PYG{g+go}{  Costs (0.310)        : +0.500}
+\PYG{g+go}{  Working Space (0.069): +0.500}
+\PYG{g+go}{  Standing (0.159)     : \PYGZhy{}0.300}
+\PYG{g+go}{  Comfort (0.041)      : \PYGZhy{}0.700}
+\PYG{g+go}{ Summary:}
+\PYG{g+go}{  Weighted mean marginal correlation (a) : +0.478}
+\PYG{g+go}{  Standard deviation (b)                 : +0.476}
+\PYG{g+go}{  Partial ranking fairness (a)\PYGZhy{}(b)       : +0.002}
+\end{sphinxVerbatim}
+\sphinxresetverbatimhllines
 
 \sphinxAtStartPar
-We may use the best, with the outranking digraph \sphinxstyleemphasis{g} correlated (+0.816), \sphinxstyleemphasis{Bachet} ranking {[}‘G’, ‘D’, ‘A’, ‘C’, ‘B’, ‘E’, ‘F’{]}  for showing in \hyperref[\detokenize{tutorial:rankedofficechoiceheatmap}]{Fig.\@ \ref{\detokenize{tutorial:rankedofficechoiceheatmap}}} a from best to worst ranked performance heatmap of all the potential office locations.
+The partial Bachet ranking is a 100\% consistent with the \sphinxstyleemphasis{Proximity} criterion, 85\% consistent with \sphinxstyleemphasis{Visibility} and 75\% consistent with the \sphinxstyleemphasis{Costs} criterion. These three criteria are the most significant ones (see Lines 5 aand 7). The least considered criteria are the \sphinxstyleemphasis{Standing} and even more the \sphinxstyleemphasis{Comfort} criterion. The partial Bachet ranking is indeed  only 35\% consistent with the \sphinxstyleemphasis{Standing} and only 15\% consistent with the latter one (see Lines 10\sphinxhyphen{}11). The mean weighted marginal ordinal correlation index (+0.478, Line 13) over all the criteria shows eventually a partial ranking consensus supported by a nearly 75\% significance majority.
+
+\sphinxAtStartPar
+We may finally use the best, with the outranking digraph \sphinxstyleemphasis{g} correlated (+0.816), \sphinxstyleemphasis{Bachet} ranking {[}‘G’, ‘D’, ‘A’, ‘C’, ‘B’, ‘E’, ‘F’{]}  for showing in \hyperref[\detokenize{tutorial:rankedofficechoiceheatmap}]{Fig.\@ \ref{\detokenize{tutorial:rankedofficechoiceheatmap}}} a from best to worst ranked performance heatmap of all the potential office locations.
 
 \begin{sphinxVerbatim}[commandchars=\\\{\}]
 \PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{t}\PYG{o}{.}\PYG{n}{showHTMLPerformanceHeatmap}\PYG{p}{(}\PYG{n}{actionsList}\PYG{o}{=}\PYG{n}{wbr}\PYG{o}{.}\PYG{n}{bachetRankings}\PYG{p}{[}\PYG{l+m+mi}{0}\PYG{p}{]}\PYG{p}{[}\PYG{l+m+mi}{1}\PYG{p}{]}\PYG{p}{,}
@@ -2707,10 +2731,10 @@ We may use the best, with the outranking digraph \sphinxstyleemphasis{g} correla
 \caption{The ranked performance heatmap of the potential office locations}\label{\detokenize{tutorial:rankedofficechoiceheatmap}}\end{figure}
 
 \sphinxAtStartPar
-In view of \hyperref[\detokenize{tutorial:rankedofficechoiceheatmap}]{Fig.\@ \ref{\detokenize{tutorial:rankedofficechoiceheatmap}}}, office locations \sphinxstyleemphasis{G} or \sphinxstyleemphasis{D} make up convincing best choice recommendations with an apparent slight advantage for location \sphinxstyleemphasis{G}. Notice that both alternatives \sphinxstyleemphasis{A} and \sphinxstyleemphasis{C}, with their highly contrasted performance profiles, appear ranked in the midfield. Indeed, as they don’t compare well, they may neither be first nor last ranked. This is why, when such largely incomparable or extreme alternatives are observed, linear rankings may fail to deliver adequate first\sphinxhyphen{}choice recommendations.
+In view of \hyperref[\detokenize{tutorial:rankedofficechoiceheatmap}]{Fig.\@ \ref{\detokenize{tutorial:rankedofficechoiceheatmap}}}, office locations \sphinxstyleemphasis{G} or \sphinxstyleemphasis{D} make up convincing best choice recommendations with an apparent slight advantage for location \sphinxstyleemphasis{G}. Notice that both alternatives \sphinxstyleemphasis{A} and \sphinxstyleemphasis{C}, with their highly contrasted performance profiles, appear ranked in the midfield. Indeed, as they don’t compare well, they may neither be first nor last ranked. This is why, when such largely incomparable or extreme alternatives are observed, linear rankings may fail to deliver adequate first\sphinxhyphen{}choice recommendations. Notice finally in the \sphinxstyleemphasis{tau} row above similar marginal ordinal correlation indexes as observed before in \hyperref[\detokenize{tutorial:partialbachetranking1}]{Listing \ref{\detokenize{tutorial:partialbachetranking1}}} Lines 5\sphinxhyphen{}11.
 
 \sphinxAtStartPar
-Our first choice recommendation appears finally depending essentially on the very importance the CEO is attaching to each one of the three decision objectives he is considering. In the setting here, where he considers that \sphinxstyleemphasis{maximizing the future turnover} is the most important objective (81/145) followed by \sphinxstyleemphasis{minimizing the Costs} (45/145) and, less important, \sphinxstyleemphasis{maximizing the working conditions} (19/145), compromise locations \sphinxstyleemphasis{D} as well as \sphinxstyleemphasis{G} represent the potential best choices candidates. However, if \sphinxstyleemphasis{Costs} do not play much a role, it would perhaps be better to choose the most advantageous location \sphinxstyleemphasis{A}; or if, on the contrary, \sphinxstyleemphasis{Costs} do matter a lot, choosing the cheapest alternative \sphinxstyleemphasis{C} could definitely give a more convincing best choice.
+Our first choice recommendation appears essentially depending on the very importance the CEO is eventually attaching to each one of the three decision objectives he is considering. In the setting here, where he considers that \sphinxstyleemphasis{maximizing the future turnover} is the most important objective (81/145 = 0.56) followed by \sphinxstyleemphasis{minimizing the Costs} (45/145 = 0.31) and, less important, \sphinxstyleemphasis{maximizing the working conditions} (19/145 = 0.13), compromise locations \sphinxstyleemphasis{D} as well as \sphinxstyleemphasis{G} become the potential best choices candidates. However, if minimizing the \sphinxstyleemphasis{Costs} does not play much a role, it would perhaps be better to recommend the most advantageous location \sphinxstyleemphasis{A}; or if, on the contrary, the \sphinxstyleemphasis{Costs} objective does matter a lot, recommending the cheapest alternative \sphinxstyleemphasis{C} could definitely become the more convincing best choice recommendation.
 
 \sphinxAtStartPar
 It might be worth, as an \sphinxstylestrong{exercise}, to modify the criteria significance weights in the ‘officeChoice.py’ data file in such a way that
@@ -2756,7 +2780,7 @@ Following a seminar presentation in 2005 at the LAMSADE %
 \begin{footnote}[61]\sphinxAtStartFootnote
 Laboratoires d’Analyse et de Modélisation de Systèmes d’Aide à la Décision, Université Paris\sphinxhyphen{}Dauphine, UMR 7243 CNRS.
 %
-\end{footnote}, where the author promoted the use of kernels of the outranking digraph as suitable candidates for delivering best choice recommendations \sphinxcite{tutorial:bis-2005}, a critical discussion started about the methodological requirement for a convincing best choice recommendation to be internally stable (pragmatic principle \sphinxstylestrong{P3}). \sphinxstyleemphasis{Denis Bouyssou} illustrated his doubts with the potential outranking digraph shown in \hyperref[\detokenize{tutorial:bouyssou2005}]{Fig.\@ \ref{\detokenize{tutorial:bouyssou2005}}}.
+\end{footnote}, where the author promoted the use of kernels of the outranking digraph as suitable candidates for delivering best choice recommendations \sphinxcite{tutorial:bis-2005}, a critical discussion started about the methodological requirement for a convincing best choice recommendation to be \sphinxstyleemphasis{internally stable} (pragmatic principle \sphinxstylestrong{P3}). \sphinxstyleemphasis{Denis Bouyssou} illustrated his doubts with the potential outranking digraph shown in \hyperref[\detokenize{tutorial:bouyssou2005}]{Fig.\@ \ref{\detokenize{tutorial:bouyssou2005}}}.
 
 \begin{figure}[H]
 \centering
@@ -2766,7 +2790,7 @@ Laboratoires d’Analyse et de Modélisation de Systèmes d’Aide à la Décisi
 \caption{The internal stability of a best choice recommendation in question}\label{\detokenize{tutorial:bouyssou2005}}\end{figure}
 
 \sphinxAtStartPar
-His commentary was the following: The only initial kernel of this digraph is the choice \{\sphinxstyleemphasis{a}, \sphinxstyleemphasis{d}\}. Yet, it is an ambiguous recommendation, as this choice is conjointly and initial \textendash{}\sphinxstyleemphasis{outranking}\textendash{} and terminal \textendash{}\sphinxstyleemphasis{outranked}\textendash{} prekernel. If the instability of the best choice recommendation is, however, not considered a problem then the choice \{\sphinxstyleemphasis{a}, \sphinxstyleemphasis{b}\} shows the most convincing strict outranking quality and could be recommended in priority as best choice candidates. Adding alternative \sphinxstyleemphasis{d} to the set of potential best choice candidates is not convincing as there exists in the given digraph the node \sphinxstyleemphasis{b}, which is better evaluated than \sphinxstyleemphasis{d}. The argument that the incomparability between \sphinxstyleemphasis{a} and \sphinxstyleemphasis{d} should favour \sphinxstyleemphasis{d} as potential best choice is interesting but another hypothesis could be that \sphinxstyleemphasis{b} perhaps outranks \sphinxstyleemphasis{a}. In this latter case, it seams clear that the actual best choice recommendation should be reduced to node \sphinxstyleemphasis{b}, unless one disposes of other information, like a performance tableau and/or the actual computation method of the outranking situations. In any case, one has to be very clear about the available information when judging a best choice procedure.
+His commentary was the following: The only initial kernel of this digraph is the choice \{\sphinxstyleemphasis{a}, \sphinxstyleemphasis{d}\}. Yet, it is an ambiguous recommendation, as this choice is conjointly an \sphinxstyleemphasis{initial} \textendash{}\sphinxstylestrong{outranking}\textendash{} and \sphinxstyleemphasis{terminal} \textendash{}\sphinxstylestrong{outranked}\textendash{} \sphinxstyleemphasis{prekernel}. If the instability of the best choice recommendation is, however, not considered a problem then the choice \{\sphinxstyleemphasis{a}, \sphinxstyleemphasis{b}\} shows the most convincing strict outranking quality and could be recommended in priority as best choice candidates. Adding alternative \sphinxstyleemphasis{d} to the set of potential best choice candidates is not convincing as there exists in the given digraph the node \sphinxstyleemphasis{b}, which is better evaluated than \sphinxstyleemphasis{d}. The argument that the incomparability between \sphinxstyleemphasis{a} and \sphinxstyleemphasis{d} should favour \sphinxstyleemphasis{d} as potential best choice is interesting but another hypothesis could be that \sphinxstyleemphasis{b} perhaps outranks \sphinxstyleemphasis{a}. In this latter case, it seams clear that the actual best choice recommendation should be reduced to node \sphinxstyleemphasis{b}, unless one disposes of other information, like a performance tableau and/or the actual computation method of the outranking situations. In any case, one has to be very clear about the available information when judging a best choice procedure.
 
 \sphinxAtStartPar
 It became thereafter obvious for us all that both the lack of a specific performance tableau as well as the lack of a precisely defined algorithm for computing valid outranking situations do not allow to judge if a given digraph does indeed model a potential outranking relation. In our present bipolar\sphinxhyphen{}valued epistemic approach, a valid outranking digraph instance, following from a given performance tableau and the disjunctive epistemic fusion construction of the outranking relation, will necessarily verify the \DUrole{xref}{\DUrole{std}{\DUrole{std-ref}{strong completeness condition and the coduality principle}}}. As a consequence, incomparability situations are now modelled by epistemic indeterminateness not by the actual absence of a reciprocal outranking relation.
@@ -4957,6 +4981,10 @@ Back to {\hyperref[\detokenize{tutorial:tutorial-label}]{\sphinxcrossref{\DUrole
 \sphinxAtStartPar
 \phantomsection\label{\detokenize{tutorial:id341}}{\hyperref[\detokenize{tutorial:on-partially-ranking-with-the-bachet-rules}]{\sphinxcrossref{On partially ranking with the Bachet rules}}} (\autopageref*{\detokenize{tutorial:on-partially-ranking-with-the-bachet-rules}})
 
+\item {} 
+\sphinxAtStartPar
+\phantomsection\label{\detokenize{tutorial:id342}}{\hyperref[\detokenize{tutorial:consensus-quality-of-the-partial-bachet-rankings}]{\sphinxcrossref{Consensus quality of the partial Bachet rankings}}} (\autopageref*{\detokenize{tutorial:consensus-quality-of-the-partial-bachet-rankings}})
+
 \end{itemize}
 \end{sphinxcontents}
 
@@ -5032,7 +5060,7 @@ The nine alternatives are gathered into four levels. Mind that alternative \sphi
 \sphinxAtStartPar
 The drawing of partial rankings makes usage of a topological sort algorithm %
 \begin{footnote}[60]\sphinxAtStartFootnote
-Topological Sort Algorithm 2.4 from \sphinxstyleemphasis{Algorithmic Graph heory and Perfect Graphs} p.44 \sphinxcite{tutorial:gol-2004}.
+Topological Sort Algorithm 2.4 from \sphinxstyleemphasis{Algorithmic Graph Theory and Perfect Graphs} p.44 \sphinxcite{tutorial:gol-2004}.
 %
 \end{footnote} (see \hyperref[\detokenize{tutorial:rankingconsensus2}]{Listing \ref{\detokenize{tutorial:rankingconsensus2}}} Lines 4\sphinxhyphen{}7).
 \sphinxSetupCaptionForVerbatim{Inspecting a partial ranking}
@@ -5211,11 +5239,82 @@ It is worthwhile noticing in \hyperref[\detokenize{tutorial:weakbachetval}]{Fig.
 \noindent\sphinxincludegraphics[width=200\sphinxpxdimen]{{weakBachetval}.png}
 \caption{Valued Bachet partial ranking result}\label{\detokenize{tutorial:weakbachetval}}\end{figure}
 
+
+\subsubsection{Consensus quality of the partial Bachet rankings}
+\label{\detokenize{tutorial:consensus-quality-of-the-partial-bachet-rankings}}
 \sphinxAtStartPar
-This way, the \sphinxstyleemphasis{Bachet} ranking rules deliver efficient tools for constructing convincing partial rankings providing by the way a tool for computing potential first or last choice recommendations, actually the \DUrole{xref}{\DUrole{std}{\DUrole{std-ref}{initial and terminal prekernels}}} of such partial transitive digraphs. Mind however that the \sphinxstyleemphasis{Bachet} ranking rules can only handle small outranking digraphs ( \textless{} 50 ). For larger ( \textgreater{} 50 ) or big ( \textgreater{} 1000 ) outranking digraphs it is opportune to turn to order statistics and compute \sphinxstylestrong{weak rankings} \textendash{}rankings with ties\textendash{} by sorting the multicriteria performance records into relative or absolute performance \sphinxstylestrong{quantile equivalence classes}.
+Let us now verify in \hyperref[\detokenize{tutorial:weakbachet7}]{Listing \ref{\detokenize{tutorial:weakbachet7}}} below the consensus quality of the partial \sphinxstyleemphasis{polarised} Bachet ranking \sphinxstyleemphasis{wb}.
+\sphinxSetupCaptionForVerbatim{Consensus quality of the partial polarised Bachet ranking}
+\def\sphinxLiteralBlockLabel{\label{\detokenize{tutorial:weakbachet7}}}
+\fvset{hllines={, 1, 5, 6, 21,}}%
+\begin{sphinxVerbatim}[commandchars=\\\{\},numbers=left,firstnumber=1,stepnumber=1]
+\PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{wb}\PYG{o}{.}\PYG{n}{computePartialOutrankingConsensusQuality}\PYG{p}{(}\PYG{n}{Comments}\PYG{o}{=}\PYG{k+kc}{True}\PYG{p}{)}
+\PYG{g+go}{ Consensus quality of partial polarised Bachet ranking}
+\PYG{g+go}{ criterion (weight): bipolar\PYGZhy{}valued relational equivalence}
+\PYG{g+go}{ \PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}}
+\PYG{g+go}{  c01 (0.167): +0.444}
+\PYG{g+go}{  b09 (0.050): +0.444}
+\PYG{g+go}{  b02 (0.050): +0.358}
+\PYG{g+go}{  b08 (0.050): +0.296}
+\PYG{g+go}{  b04 (0.050): +0.259}
+\PYG{g+go}{  b01 (0.050): +0.208}
+\PYG{g+go}{  c02 (0.167): +0.074}
+\PYG{g+go}{  b05 (0.050): +0.000}
+\PYG{g+go}{  b10 (0.050): \PYGZhy{}0.095}
+\PYG{g+go}{  b07 (0.050): \PYGZhy{}0.111}
+\PYG{g+go}{  c03 (0.167): \PYGZhy{}0.148}
+\PYG{g+go}{  b03 (0.050): \PYGZhy{}0.185}
+\PYG{g+go}{  b06 (0.050): \PYGZhy{}0.245}
+\PYG{g+go}{ Summary:}
+\PYG{g+go}{  Weighted mean marginal correlation (a) : +0.108}
+\PYG{g+go}{  Standard deviation (b)                 : +0.240}
+\PYG{g+go}{  Partial ranking fairness (a)\PYGZhy{}(b)       : \PYGZhy{}0.132}
+\end{sphinxVerbatim}
+\sphinxresetverbatimhllines
+
+\sphinxAtStartPar
+Best correlated (+0.444) with the partial ranking appear \sphinxstyleemphasis{Cost} criterion \sphinxstyleemphasis{c01} and Benefit criterion \sphinxstyleemphasis{b09}. The relational equivalences are supported by a nearly 75\% significance majority (Lines 5\sphinxhyphen{}6). Eight out of thirteen criteria show a non negative equivalence and the weighted mean marginal equivalence is slightly positive (+0.108, Line 19). With a standard deviation of +0.240, we obtain however an overall negative fairness score of \sphinxhyphen{}0.132 for the partial polarised Bachet ranking.
+
+\sphinxAtStartPar
+We may redo in \hyperref[\detokenize{tutorial:weakbachet8}]{Listing \ref{\detokenize{tutorial:weakbachet8}}} below the same computation for the partial \sphinxstyleemphasis{valued} Bachet ranking.
+\sphinxSetupCaptionForVerbatim{Consensus quality of the partial valued Bachet ranking}
+\def\sphinxLiteralBlockLabel{\label{\detokenize{tutorial:weakbachet8}}}
+\fvset{hllines={, 1, 5, 6, 16, 19, 20, 21,}}%
+\begin{sphinxVerbatim}[commandchars=\\\{\},numbers=left,firstnumber=1,stepnumber=1]
+\PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{wbv}\PYG{o}{.}\PYG{n}{computePartialOutrankingConsensusQuality}\PYG{p}{(}\PYG{n}{Comments}\PYG{o}{=}\PYG{k+kc}{True}\PYG{p}{)}
+\PYG{g+go}{ Consensus quality of the partial valued Bachet ranking}
+\PYG{g+go}{ criterion (weight): bipolar\PYGZhy{}valued relational equivalence}
+\PYG{g+go}{ \PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}}
+\PYG{g+go}{  c01 (0.167): +0.472}
+\PYG{g+go}{  b09 (0.050): +0.222}
+\PYG{g+go}{  b05 (0.050): +0.194}
+\PYG{g+go}{  b04 (0.050): +0.167}
+\PYG{g+go}{  b01 (0.050): +0.139}
+\PYG{g+go}{  b02 (0.050): +0.125}
+\PYG{g+go}{  c02 (0.167): +0.083}
+\PYG{g+go}{  b08 (0.050): +0.083}
+\PYG{g+go}{  b07 (0.050): \PYGZhy{}0.056}
+\PYG{g+go}{  b03 (0.050): \PYGZhy{}0.111}
+\PYG{g+go}{  b10 (0.050): \PYGZhy{}0.111}
+\PYG{g+go}{  c03 (0.167): \PYGZhy{}0.111}
+\PYG{g+go}{  b06 (0.050): \PYGZhy{}0.181}
+\PYG{g+go}{ Summary:}
+\PYG{g+go}{  Weighted mean marginal correlation (a): +0.098}
+\PYG{g+go}{  Standard deviation (b)                : +0.204}
+\PYG{g+go}{  Partial ranking fairness (a)\PYGZhy{}(b)      : \PYGZhy{}0.107}
+\end{sphinxVerbatim}
+\sphinxresetverbatimhllines
+
+\sphinxAtStartPar
+The valued partial Bachet ranking pays a more accurate attention to the marginal criteria significance weights: 10/60 = 0.167 for the three  Costs criteria and 3/60 = 0.050 for the Benefit criteria. Criteria \sphinxstyleemphasis{c01} and \sphinxstyleemphasis{c03} for instance, with a significance of 0.167, are hence given more attention. The weighted mean marginal correlation appears slightly lower (+0.098 vs +0.108). The standard deviation being however lower (+0.204 vs +0.240), we obtain a slightly better overall fairness score (\sphinxhyphen{}0.107 vs \sphinxhyphen{}0.132, see Lines 19\sphinxhyphen{}21).
+
+\begin{sphinxadmonition}{note}{Note:}
+\sphinxAtStartPar
+As shown above, the \sphinxstyleemphasis{Bachet} ranking rules may effectively deliver new methods for constructing convincing partial rankings and, by the way, a tool for computing potential first or last choice recommendations. Actually the \DUrole{xref}{\DUrole{std}{\DUrole{std-ref}{initial and terminal prekernels}}} of such partial transitive digraphs. Mind however that the \sphinxstyleemphasis{Bachet} ranking rules can only handle small outranking digraphs ( \textless{} 50 ). For larger ( \textgreater{} 50 ) or big ( \textgreater{} 1000 ) outranking digraphs it is opportune to turn to order statistics and compute \sphinxstylestrong{weak rankings} \textendash{}rankings with ties\textendash{} by sorting the multicriteria performance records into \sphinxstyleemphasis{relative} or \sphinxstyleemphasis{absolute} performance \sphinxstylestrong{quantile equivalence classes}.
 
 \sphinxAtStartPar
 This order statistics based \sphinxstylestrong{rating} approach is presented in the following tutorials.
+\end{sphinxadmonition}
 
 \sphinxAtStartPar
 Back to {\hyperref[\detokenize{tutorial:tutorial-label}]{\sphinxcrossref{\DUrole{std}{\DUrole{std-ref}{Content Table}}}}} (\autopageref*{\detokenize{tutorial:tutorial-label}})
@@ -5231,15 +5330,15 @@ Back to {\hyperref[\detokenize{tutorial:tutorial-label}]{\sphinxcrossref{\DUrole
 \begin{itemize}
 \item {} 
 \sphinxAtStartPar
-\phantomsection\label{\detokenize{tutorial:id342}}{\hyperref[\detokenize{tutorial:performance-quantile-sorting-on-a-single-criterion}]{\sphinxcrossref{Performance quantile sorting on a single criterion}}} (\autopageref*{\detokenize{tutorial:performance-quantile-sorting-on-a-single-criterion}})
+\phantomsection\label{\detokenize{tutorial:id343}}{\hyperref[\detokenize{tutorial:performance-quantile-sorting-on-a-single-criterion}]{\sphinxcrossref{Performance quantile sorting on a single criterion}}} (\autopageref*{\detokenize{tutorial:performance-quantile-sorting-on-a-single-criterion}})
 
 \item {} 
 \sphinxAtStartPar
-\phantomsection\label{\detokenize{tutorial:id343}}{\hyperref[\detokenize{tutorial:rating-by-sorting-into-relative-multicriteria-performance-quantiles}]{\sphinxcrossref{Rating\sphinxhyphen{}by\sphinxhyphen{}sorting into relative multicriteria performance quantiles}}} (\autopageref*{\detokenize{tutorial:rating-by-sorting-into-relative-multicriteria-performance-quantiles}})
+\phantomsection\label{\detokenize{tutorial:id344}}{\hyperref[\detokenize{tutorial:rating-by-sorting-into-relative-multicriteria-performance-quantiles}]{\sphinxcrossref{Rating\sphinxhyphen{}by\sphinxhyphen{}sorting into relative multicriteria performance quantiles}}} (\autopageref*{\detokenize{tutorial:rating-by-sorting-into-relative-multicriteria-performance-quantiles}})
 
 \item {} 
 \sphinxAtStartPar
-\phantomsection\label{\detokenize{tutorial:id344}}{\hyperref[\detokenize{tutorial:rating-by-ranking-with-relative-quantile-limits}]{\sphinxcrossref{Rating\sphinxhyphen{}by\sphinxhyphen{}ranking with relative quantile limits}}} (\autopageref*{\detokenize{tutorial:rating-by-ranking-with-relative-quantile-limits}})
+\phantomsection\label{\detokenize{tutorial:id345}}{\hyperref[\detokenize{tutorial:rating-by-ranking-with-relative-quantile-limits}]{\sphinxcrossref{Rating\sphinxhyphen{}by\sphinxhyphen{}ranking with relative quantile limits}}} (\autopageref*{\detokenize{tutorial:rating-by-ranking-with-relative-quantile-limits}})
 
 \end{itemize}
 \end{sphinxcontents}
@@ -5504,8 +5603,8 @@ We may hence rank this extended actions attribute as follows with the \sphinxsty
 \PYG{g+go}{  \PYGZsq{}a19\PYGZsq{}, \PYGZsq{}a43\PYGZsq{}, \PYGZsq{}a49\PYGZsq{}, \PYGZsq{}a50\PYGZsq{}, \PYGZsq{}a40\PYGZsq{}, \PYGZsq{}a28\PYGZsq{}, \PYGZsq{}a38\PYGZsq{}, \PYGZsq{}a25\PYGZsq{},}
 \PYG{g+go}{  \PYGZsq{}a45\PYGZsq{}, \PYGZsq{}a18\PYGZsq{}, \PYGZsq{}a16\PYGZsq{}, \PYGZsq{}a36\PYGZsq{}, \PYGZsq{}a35\PYGZsq{}, \PYGZsq{}a30\PYGZsq{}, \PYGZsq{}a23\PYGZsq{}, \PYGZsq{}a34\PYGZsq{},}
 \PYG{g+go}{  \PYGZsq{}a15\PYGZsq{}, \PYGZsq{}2\PYGZhy{}M\PYGZsq{}, \PYGZsq{}a10\PYGZsq{}, \PYGZsq{}a26\PYGZsq{}, \PYGZsq{}a04\PYGZsq{}, \PYGZsq{}a44\PYGZsq{}, \PYGZsq{}1\PYGZhy{}M\PYGZsq{}]}
-\PYG{g+go}{  \PYGZgt{}\PYGZgt{}\PYGZgt{} rqr.showRatingByQuantilesRanking()}
-\PYG{g+go}{  *\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{} rating by quantiles ranking result \PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}}
+\PYG{g+gp}{\PYGZgt{}\PYGZgt{}\PYGZgt{} }\PYG{n}{rqr}\PYG{o}{.}\PYG{n}{showRatingByQuantilesRanking}\PYG{p}{(}\PYG{p}{)}
+\PYG{g+go}{ *\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{} rating by quantiles ranking result \PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}\PYGZhy{}}
 \PYG{g+go}{  ]0.60 \PYGZhy{} 0.80] [\PYGZsq{}a22\PYGZsq{}, \PYGZsq{}a42\PYGZsq{}, \PYGZsq{}a07\PYGZsq{}, \PYGZsq{}a33\PYGZsq{}, \PYGZsq{}a03\PYGZsq{}, \PYGZsq{}a01\PYGZsq{},}
 \PYG{g+go}{                 \PYGZsq{}a39\PYGZsq{}, \PYGZsq{}a48\PYGZsq{}, \PYGZsq{}a37\PYGZsq{}, \PYGZsq{}a29\PYGZsq{}, \PYGZsq{}a41\PYGZsq{}, \PYGZsq{}a11\PYGZsq{},}
 \PYG{g+go}{                 \PYGZsq{}a27\PYGZsq{}, \PYGZsq{}a05\PYGZsq{}, \PYGZsq{}a46\PYGZsq{}, \PYGZsq{}a02\PYGZsq{}, \PYGZsq{}a17\PYGZsq{}, \PYGZsq{}a32\PYGZsq{}]}
@@ -5538,15 +5637,15 @@ Back to {\hyperref[\detokenize{tutorial:tutorial-label}]{\sphinxcrossref{\DUrole
 \begin{itemize}
 \item {} 
 \sphinxAtStartPar
-\phantomsection\label{\detokenize{tutorial:id345}}{\hyperref[\detokenize{tutorial:id67}]{\sphinxcrossref{Introduction}}} (\autopageref*{\detokenize{tutorial:id67}})
+\phantomsection\label{\detokenize{tutorial:id346}}{\hyperref[\detokenize{tutorial:id67}]{\sphinxcrossref{Introduction}}} (\autopageref*{\detokenize{tutorial:id67}})
 
 \item {} 
 \sphinxAtStartPar
-\phantomsection\label{\detokenize{tutorial:id346}}{\hyperref[\detokenize{tutorial:incremental-learning-of-historical-performance-quantiles}]{\sphinxcrossref{Incremental learning of historical performance quantiles}}} (\autopageref*{\detokenize{tutorial:incremental-learning-of-historical-performance-quantiles}})
+\phantomsection\label{\detokenize{tutorial:id347}}{\hyperref[\detokenize{tutorial:incremental-learning-of-historical-performance-quantiles}]{\sphinxcrossref{Incremental learning of historical performance quantiles}}} (\autopageref*{\detokenize{tutorial:incremental-learning-of-historical-performance-quantiles}})
 
 \item {} 
 \sphinxAtStartPar
-\phantomsection\label{\detokenize{tutorial:id347}}{\hyperref[\detokenize{tutorial:rating-by-ranking-new-performances-with-quantile-norms}]{\sphinxcrossref{Rating\sphinxhyphen{}by\sphinxhyphen{}ranking new performances with quantile norms}}} (\autopageref*{\detokenize{tutorial:rating-by-ranking-new-performances-with-quantile-norms}})
+\phantomsection\label{\detokenize{tutorial:id348}}{\hyperref[\detokenize{tutorial:rating-by-ranking-new-performances-with-quantile-norms}]{\sphinxcrossref{Rating\sphinxhyphen{}by\sphinxhyphen{}ranking new performances with quantile norms}}} (\autopageref*{\detokenize{tutorial:rating-by-ranking-new-performances-with-quantile-norms}})
 
 \end{itemize}
 \end{sphinxcontents}
@@ -6174,23 +6273,23 @@ Back to {\hyperref[\detokenize{tutorial:tutorial-label}]{\sphinxcrossref{\DUrole
 \begin{itemize}
 \item {} 
 \sphinxAtStartPar
-\phantomsection\label{\detokenize{tutorial:id348}}{\hyperref[\detokenize{tutorial:linear-voting-profiles}]{\sphinxcrossref{Linear voting profiles}}} (\autopageref*{\detokenize{tutorial:linear-voting-profiles}})
+\phantomsection\label{\detokenize{tutorial:id349}}{\hyperref[\detokenize{tutorial:linear-voting-profiles}]{\sphinxcrossref{Linear voting profiles}}} (\autopageref*{\detokenize{tutorial:linear-voting-profiles}})
 
 \item {} 
 \sphinxAtStartPar
-\phantomsection\label{\detokenize{tutorial:id349}}{\hyperref[\detokenize{tutorial:computing-the-winner}]{\sphinxcrossref{Computing the winner}}} (\autopageref*{\detokenize{tutorial:computing-the-winner}})
+\phantomsection\label{\detokenize{tutorial:id350}}{\hyperref[\detokenize{tutorial:computing-the-winner}]{\sphinxcrossref{Computing the winner}}} (\autopageref*{\detokenize{tutorial:computing-the-winner}})
 
 \item {} 
 \sphinxAtStartPar
-\phantomsection\label{\detokenize{tutorial:id350}}{\hyperref[\detokenize{tutorial:the-condorcet-winner}]{\sphinxcrossref{The \sphinxstyleemphasis{Condorcet} winner}}} (\autopageref*{\detokenize{tutorial:the-condorcet-winner}})
+\phantomsection\label{\detokenize{tutorial:id351}}{\hyperref[\detokenize{tutorial:the-condorcet-winner}]{\sphinxcrossref{The \sphinxstyleemphasis{Condorcet} winner}}} (\autopageref*{\detokenize{tutorial:the-condorcet-winner}})
 
 \item {} 
 \sphinxAtStartPar
-\phantomsection\label{\detokenize{tutorial:id351}}{\hyperref[\detokenize{tutorial:cyclic-social-preferences}]{\sphinxcrossref{Cyclic social preferences}}} (\autopageref*{\detokenize{tutorial:cyclic-social-preferences}})
+\phantomsection\label{\detokenize{tutorial:id352}}{\hyperref[\detokenize{tutorial:cyclic-social-preferences}]{\sphinxcrossref{Cyclic social preferences}}} (\autopageref*{\detokenize{tutorial:cyclic-social-preferences}})
 
 \item {} 
 \sphinxAtStartPar
-\phantomsection\label{\detokenize{tutorial:id352}}{\hyperref[\detokenize{tutorial:on-generating-realistic-random-linear-voting-profiles}]{\sphinxcrossref{On generating realistic random linear voting profiles}}} (\autopageref*{\detokenize{tutorial:on-generating-realistic-random-linear-voting-profiles}})
+\phantomsection\label{\detokenize{tutorial:id353}}{\hyperref[\detokenize{tutorial:on-generating-realistic-random-linear-voting-profiles}]{\sphinxcrossref{On generating realistic random linear voting profiles}}} (\autopageref*{\detokenize{tutorial:on-generating-realistic-random-linear-voting-profiles}})
 
 \end{itemize}
 \end{sphinxcontents}
@@ -6680,35 +6779,35 @@ Back to {\hyperref[\detokenize{tutorial:tutorial-label}]{\sphinxcrossref{\DUrole
 \begin{itemize}
 \item {} 
 \sphinxAtStartPar
-\phantomsection\label{\detokenize{tutorial:id353}}{\hyperref[\detokenize{tutorial:the-fair-intergroup-pairing-problem}]{\sphinxcrossref{The fair intergroup pairing problem}}} (\autopageref*{\detokenize{tutorial:the-fair-intergroup-pairing-problem}})
+\phantomsection\label{\detokenize{tutorial:id354}}{\hyperref[\detokenize{tutorial:the-fair-intergroup-pairing-problem}]{\sphinxcrossref{The fair intergroup pairing problem}}} (\autopageref*{\detokenize{tutorial:the-fair-intergroup-pairing-problem}})
 
 \item {} 
 \sphinxAtStartPar
-\phantomsection\label{\detokenize{tutorial:id354}}{\hyperref[\detokenize{tutorial:generating-the-set-of-potential-maximal-matchings}]{\sphinxcrossref{Generating the set of potential maximal matchings}}} (\autopageref*{\detokenize{tutorial:generating-the-set-of-potential-maximal-matchings}})
+\phantomsection\label{\detokenize{tutorial:id355}}{\hyperref[\detokenize{tutorial:generating-the-set-of-potential-maximal-matchings}]{\sphinxcrossref{Generating the set of potential maximal matchings}}} (\autopageref*{\detokenize{tutorial:generating-the-set-of-potential-maximal-matchings}})
 
 \item {} 
 \sphinxAtStartPar
-\phantomsection\label{\detokenize{tutorial:id355}}{\hyperref[\detokenize{tutorial:measuring-the-fitness-of-a-matching-from-a-personal-perspective}]{\sphinxcrossref{Measuring the fitness of a matching from a personal perspective}}} (\autopageref*{\detokenize{tutorial:measuring-the-fitness-of-a-matching-from-a-personal-perspective}})
+\phantomsection\label{\detokenize{tutorial:id356}}{\hyperref[\detokenize{tutorial:measuring-the-fitness-of-a-matching-from-a-personal-perspective}]{\sphinxcrossref{Measuring the fitness of a matching from a personal perspective}}} (\autopageref*{\detokenize{tutorial:measuring-the-fitness-of-a-matching-from-a-personal-perspective}})
 
 \item {} 
 \sphinxAtStartPar
-\phantomsection\label{\detokenize{tutorial:id356}}{\hyperref[\detokenize{tutorial:computing-the-fairest-intergroup-pairing}]{\sphinxcrossref{Computing the fairest intergroup pairing}}} (\autopageref*{\detokenize{tutorial:computing-the-fairest-intergroup-pairing}})
+\phantomsection\label{\detokenize{tutorial:id357}}{\hyperref[\detokenize{tutorial:computing-the-fairest-intergroup-pairing}]{\sphinxcrossref{Computing the fairest intergroup pairing}}} (\autopageref*{\detokenize{tutorial:computing-the-fairest-intergroup-pairing}})
 
 \item {} 
 \sphinxAtStartPar
-\phantomsection\label{\detokenize{tutorial:id357}}{\hyperref[\detokenize{tutorial:fair-versus-stable-pairings}]{\sphinxcrossref{Fair versus stable pairings}}} (\autopageref*{\detokenize{tutorial:fair-versus-stable-pairings}})
+\phantomsection\label{\detokenize{tutorial:id358}}{\hyperref[\detokenize{tutorial:fair-versus-stable-pairings}]{\sphinxcrossref{Fair versus stable pairings}}} (\autopageref*{\detokenize{tutorial:fair-versus-stable-pairings}})
 
 \item {} 
 \sphinxAtStartPar
-\phantomsection\label{\detokenize{tutorial:id358}}{\hyperref[\detokenize{tutorial:relaxing-the-requirement-for-complete-linear-voting-profiles}]{\sphinxcrossref{Relaxing the requirement for complete linear voting profiles}}} (\autopageref*{\detokenize{tutorial:relaxing-the-requirement-for-complete-linear-voting-profiles}})
+\phantomsection\label{\detokenize{tutorial:id359}}{\hyperref[\detokenize{tutorial:relaxing-the-requirement-for-complete-linear-voting-profiles}]{\sphinxcrossref{Relaxing the requirement for complete linear voting profiles}}} (\autopageref*{\detokenize{tutorial:relaxing-the-requirement-for-complete-linear-voting-profiles}})
 
 \item {} 
 \sphinxAtStartPar
-\phantomsection\label{\detokenize{tutorial:id359}}{\hyperref[\detokenize{tutorial:using-copeland-scores-for-guiding-the-fairness-enhancement}]{\sphinxcrossref{Using Copeland scores for guiding the fairness enhancement}}} (\autopageref*{\detokenize{tutorial:using-copeland-scores-for-guiding-the-fairness-enhancement}})
+\phantomsection\label{\detokenize{tutorial:id360}}{\hyperref[\detokenize{tutorial:using-copeland-scores-for-guiding-the-fairness-enhancement}]{\sphinxcrossref{Using Copeland scores for guiding the fairness enhancement}}} (\autopageref*{\detokenize{tutorial:using-copeland-scores-for-guiding-the-fairness-enhancement}})
 
 \item {} 
 \sphinxAtStartPar
-\phantomsection\label{\detokenize{tutorial:id360}}{\hyperref[\detokenize{tutorial:starting-the-fairness-enhancement-from-a-best-determined-copeland-matching}]{\sphinxcrossref{Starting the fairness enhancement from a best determined Copeland matching}}} (\autopageref*{\detokenize{tutorial:starting-the-fairness-enhancement-from-a-best-determined-copeland-matching}})
+\phantomsection\label{\detokenize{tutorial:id361}}{\hyperref[\detokenize{tutorial:starting-the-fairness-enhancement-from-a-best-determined-copeland-matching}]{\sphinxcrossref{Starting the fairness enhancement from a best determined Copeland matching}}} (\autopageref*{\detokenize{tutorial:starting-the-fairness-enhancement-from-a-best-determined-copeland-matching}})
 
 \end{itemize}
 \end{sphinxcontents}
@@ -8018,23 +8117,23 @@ Back to {\hyperref[\detokenize{tutorial:tutorial-label}]{\sphinxcrossref{\DUrole
 \begin{itemize}
 \item {} 
 \sphinxAtStartPar
-\phantomsection\label{\detokenize{tutorial:id361}}{\hyperref[\detokenize{tutorial:the-fair-intragroup-pairing-problem}]{\sphinxcrossref{The fair intragroup pairing problem}}} (\autopageref*{\detokenize{tutorial:the-fair-intragroup-pairing-problem}})
+\phantomsection\label{\detokenize{tutorial:id362}}{\hyperref[\detokenize{tutorial:the-fair-intragroup-pairing-problem}]{\sphinxcrossref{The fair intragroup pairing problem}}} (\autopageref*{\detokenize{tutorial:the-fair-intragroup-pairing-problem}})
 
 \item {} 
 \sphinxAtStartPar
-\phantomsection\label{\detokenize{tutorial:id362}}{\hyperref[\detokenize{tutorial:generating-random-intragroup-bipolar-approval-voting-profiles}]{\sphinxcrossref{Generating random intragroup bipolar approval voting profiles}}} (\autopageref*{\detokenize{tutorial:generating-random-intragroup-bipolar-approval-voting-profiles}})
+\phantomsection\label{\detokenize{tutorial:id363}}{\hyperref[\detokenize{tutorial:generating-random-intragroup-bipolar-approval-voting-profiles}]{\sphinxcrossref{Generating random intragroup bipolar approval voting profiles}}} (\autopageref*{\detokenize{tutorial:generating-random-intragroup-bipolar-approval-voting-profiles}})
 
 \item {} 
 \sphinxAtStartPar
-\phantomsection\label{\detokenize{tutorial:id363}}{\hyperref[\detokenize{tutorial:the-set-of-potential-intragroup-pairing-decisions}]{\sphinxcrossref{The set of potential ìntragroup pairing decisions}}} (\autopageref*{\detokenize{tutorial:the-set-of-potential-intragroup-pairing-decisions}})
+\phantomsection\label{\detokenize{tutorial:id364}}{\hyperref[\detokenize{tutorial:the-set-of-potential-intragroup-pairing-decisions}]{\sphinxcrossref{The set of potential ìntragroup pairing decisions}}} (\autopageref*{\detokenize{tutorial:the-set-of-potential-intragroup-pairing-decisions}})
 
 \item {} 
 \sphinxAtStartPar
-\phantomsection\label{\detokenize{tutorial:id364}}{\hyperref[\detokenize{tutorial:computing-the-fairest-intragroup-pairing}]{\sphinxcrossref{Computing the fairest intragroup pairing}}} (\autopageref*{\detokenize{tutorial:computing-the-fairest-intragroup-pairing}})
+\phantomsection\label{\detokenize{tutorial:id365}}{\hyperref[\detokenize{tutorial:computing-the-fairest-intragroup-pairing}]{\sphinxcrossref{Computing the fairest intragroup pairing}}} (\autopageref*{\detokenize{tutorial:computing-the-fairest-intragroup-pairing}})
 
 \item {} 
 \sphinxAtStartPar
-\phantomsection\label{\detokenize{tutorial:id365}}{\hyperref[\detokenize{tutorial:fairness-enhancing-of-a-given-pairing-decision}]{\sphinxcrossref{Fairness enhancing of a given pairing decision}}} (\autopageref*{\detokenize{tutorial:fairness-enhancing-of-a-given-pairing-decision}})
+\phantomsection\label{\detokenize{tutorial:id366}}{\hyperref[\detokenize{tutorial:fairness-enhancing-of-a-given-pairing-decision}]{\sphinxcrossref{Fairness enhancing of a given pairing decision}}} (\autopageref*{\detokenize{tutorial:fairness-enhancing-of-a-given-pairing-decision}})
 
 \end{itemize}
 \end{sphinxcontents}
@@ -8557,19 +8656,19 @@ This part of the tutorails presents three decision making case studies, followed
 \begin{itemize}
 \item {} 
 \sphinxAtStartPar
-\phantomsection\label{\detokenize{tutorial:id366}}{\hyperref[\detokenize{tutorial:alice-s-best-choice-a-selection-case-study-19}]{\sphinxcrossref{Alice’s best choice: A \sphinxstyleemphasis{selection} case study }}} (\autopageref*{\detokenize{tutorial:alice-s-best-choice-a-selection-case-study-19}})
+\phantomsection\label{\detokenize{tutorial:id367}}{\hyperref[\detokenize{tutorial:alice-s-best-choice-a-selection-case-study-19}]{\sphinxcrossref{Alice’s best choice: A \sphinxstyleemphasis{selection} case study }}} (\autopageref*{\detokenize{tutorial:alice-s-best-choice-a-selection-case-study-19}})
 
 \item {} 
 \sphinxAtStartPar
-\phantomsection\label{\detokenize{tutorial:id367}}{\hyperref[\detokenize{tutorial:the-best-academic-computer-science-depts-a-ranking-case-study}]{\sphinxcrossref{The best academic \sphinxstyleemphasis{Computer Science} Depts: a \sphinxstyleemphasis{ranking} case study}}} (\autopageref*{\detokenize{tutorial:the-best-academic-computer-science-depts-a-ranking-case-study}})
+\phantomsection\label{\detokenize{tutorial:id368}}{\hyperref[\detokenize{tutorial:the-best-academic-computer-science-depts-a-ranking-case-study}]{\sphinxcrossref{The best academic \sphinxstyleemphasis{Computer Science} Depts: a \sphinxstyleemphasis{ranking} case study}}} (\autopageref*{\detokenize{tutorial:the-best-academic-computer-science-depts-a-ranking-case-study}})
 
 \item {} 
 \sphinxAtStartPar
-\phantomsection\label{\detokenize{tutorial:id368}}{\hyperref[\detokenize{tutorial:the-best-students-where-do-they-study-a-rating-case-study}]{\sphinxcrossref{The best students, where do they study? A \sphinxstyleemphasis{rating} case study}}} (\autopageref*{\detokenize{tutorial:the-best-students-where-do-they-study-a-rating-case-study}})
+\phantomsection\label{\detokenize{tutorial:id369}}{\hyperref[\detokenize{tutorial:the-best-students-where-do-they-study-a-rating-case-study}]{\sphinxcrossref{The best students, where do they study? A \sphinxstyleemphasis{rating} case study}}} (\autopageref*{\detokenize{tutorial:the-best-students-where-do-they-study-a-rating-case-study}})
 
 \item {} 
 \sphinxAtStartPar
-\phantomsection\label{\detokenize{tutorial:id369}}{\hyperref[\detokenize{tutorial:exercises}]{\sphinxcrossref{Exercises}}} (\autopageref*{\detokenize{tutorial:exercises}})
+\phantomsection\label{\detokenize{tutorial:id370}}{\hyperref[\detokenize{tutorial:exercises}]{\sphinxcrossref{Exercises}}} (\autopageref*{\detokenize{tutorial:exercises}})
 
 \end{itemize}
 \end{sphinxcontents}
@@ -8585,19 +8684,19 @@ This case study is inspired by a \sphinxstyleemphasis{Multiple Criteria Decision
 \begin{itemize}
 \item {} 
 \sphinxAtStartPar
-\phantomsection\label{\detokenize{tutorial:id370}}{\hyperref[\detokenize{tutorial:the-decision-problem}]{\sphinxcrossref{The decision problem}}} (\autopageref*{\detokenize{tutorial:the-decision-problem}})
+\phantomsection\label{\detokenize{tutorial:id371}}{\hyperref[\detokenize{tutorial:the-decision-problem}]{\sphinxcrossref{The decision problem}}} (\autopageref*{\detokenize{tutorial:the-decision-problem}})
 
 \item {} 
 \sphinxAtStartPar
-\phantomsection\label{\detokenize{tutorial:id371}}{\hyperref[\detokenize{tutorial:id100}]{\sphinxcrossref{The performance tableau}}} (\autopageref*{\detokenize{tutorial:id100}})
+\phantomsection\label{\detokenize{tutorial:id372}}{\hyperref[\detokenize{tutorial:id100}]{\sphinxcrossref{The performance tableau}}} (\autopageref*{\detokenize{tutorial:id100}})
 
 \item {} 
 \sphinxAtStartPar
-\phantomsection\label{\detokenize{tutorial:id372}}{\hyperref[\detokenize{tutorial:building-a-best-choice-recommendation}]{\sphinxcrossref{Building a best choice recommendation}}} (\autopageref*{\detokenize{tutorial:building-a-best-choice-recommendation}})
+\phantomsection\label{\detokenize{tutorial:id373}}{\hyperref[\detokenize{tutorial:building-a-best-choice-recommendation}]{\sphinxcrossref{Building a best choice recommendation}}} (\autopageref*{\detokenize{tutorial:building-a-best-choice-recommendation}})
 
 \item {} 
 \sphinxAtStartPar
-\phantomsection\label{\detokenize{tutorial:id373}}{\hyperref[\detokenize{tutorial:robustness-analysis}]{\sphinxcrossref{Robustness analysis}}} (\autopageref*{\detokenize{tutorial:robustness-analysis}})
+\phantomsection\label{\detokenize{tutorial:id374}}{\hyperref[\detokenize{tutorial:robustness-analysis}]{\sphinxcrossref{Robustness analysis}}} (\autopageref*{\detokenize{tutorial:robustness-analysis}})
 
 \end{itemize}
 \end{sphinxcontents}
@@ -9505,15 +9604,15 @@ Back to {\hyperref[\detokenize{tutorial:tutorial-label}]{\sphinxcrossref{\DUrole
 \begin{itemize}
 \item {} 
 \sphinxAtStartPar
-\phantomsection\label{\detokenize{tutorial:id374}}{\hyperref[\detokenize{tutorial:the-the-performance-tableau}]{\sphinxcrossref{The THE performance tableau}}} (\autopageref*{\detokenize{tutorial:the-the-performance-tableau}})
+\phantomsection\label{\detokenize{tutorial:id375}}{\hyperref[\detokenize{tutorial:the-the-performance-tableau}]{\sphinxcrossref{The THE performance tableau}}} (\autopageref*{\detokenize{tutorial:the-the-performance-tableau}})
 
 \item {} 
 \sphinxAtStartPar
-\phantomsection\label{\detokenize{tutorial:id375}}{\hyperref[\detokenize{tutorial:ranking-with-multiple-incommensurable-criteria-of-ordinal-significance}]{\sphinxcrossref{Ranking with multiple incommensurable criteria of ordinal significance}}} (\autopageref*{\detokenize{tutorial:ranking-with-multiple-incommensurable-criteria-of-ordinal-significance}})
+\phantomsection\label{\detokenize{tutorial:id376}}{\hyperref[\detokenize{tutorial:ranking-with-multiple-incommensurable-criteria-of-ordinal-significance}]{\sphinxcrossref{Ranking with multiple incommensurable criteria of ordinal significance}}} (\autopageref*{\detokenize{tutorial:ranking-with-multiple-incommensurable-criteria-of-ordinal-significance}})
 
 \item {} 
 \sphinxAtStartPar
-\phantomsection\label{\detokenize{tutorial:id376}}{\hyperref[\detokenize{tutorial:how-to-judge-the-quality-of-a-ranking-result}]{\sphinxcrossref{How to judge the quality of a ranking result?}}} (\autopageref*{\detokenize{tutorial:how-to-judge-the-quality-of-a-ranking-result}})
+\phantomsection\label{\detokenize{tutorial:id377}}{\hyperref[\detokenize{tutorial:how-to-judge-the-quality-of-a-ranking-result}]{\sphinxcrossref{How to judge the quality of a ranking result?}}} (\autopageref*{\detokenize{tutorial:how-to-judge-the-quality-of-a-ranking-result}})
 
 \end{itemize}
 \end{sphinxcontents}
@@ -10368,23 +10467,23 @@ Back to {\hyperref[\detokenize{tutorial:tutorial-label}]{\sphinxcrossref{\DUrole
 \begin{itemize}
 \item {} 
 \sphinxAtStartPar
-\phantomsection\label{\detokenize{tutorial:id377}}{\hyperref[\detokenize{tutorial:id127}]{\sphinxcrossref{The performance tableau}}} (\autopageref*{\detokenize{tutorial:id127}})
+\phantomsection\label{\detokenize{tutorial:id378}}{\hyperref[\detokenize{tutorial:id127}]{\sphinxcrossref{The performance tableau}}} (\autopageref*{\detokenize{tutorial:id127}})
 
 \item {} 
 \sphinxAtStartPar
-\phantomsection\label{\detokenize{tutorial:id378}}{\hyperref[\detokenize{tutorial:rating-by-ranking-with-lower-closed-quantile-limits}]{\sphinxcrossref{Rating\sphinxhyphen{}by\sphinxhyphen{}ranking with lower\sphinxhyphen{}closed quantile limits}}} (\autopageref*{\detokenize{tutorial:rating-by-ranking-with-lower-closed-quantile-limits}})
+\phantomsection\label{\detokenize{tutorial:id379}}{\hyperref[\detokenize{tutorial:rating-by-ranking-with-lower-closed-quantile-limits}]{\sphinxcrossref{Rating\sphinxhyphen{}by\sphinxhyphen{}ranking with lower\sphinxhyphen{}closed quantile limits}}} (\autopageref*{\detokenize{tutorial:rating-by-ranking-with-lower-closed-quantile-limits}})
 
 \item {} 
 \sphinxAtStartPar
-\phantomsection\label{\detokenize{tutorial:id379}}{\hyperref[\detokenize{tutorial:inspecting-the-bipolar-valued-outranking-digraph}]{\sphinxcrossref{Inspecting the bipolar\sphinxhyphen{}valued outranking digraph}}} (\autopageref*{\detokenize{tutorial:inspecting-the-bipolar-valued-outranking-digraph}})
+\phantomsection\label{\detokenize{tutorial:id380}}{\hyperref[\detokenize{tutorial:inspecting-the-bipolar-valued-outranking-digraph}]{\sphinxcrossref{Inspecting the bipolar\sphinxhyphen{}valued outranking digraph}}} (\autopageref*{\detokenize{tutorial:inspecting-the-bipolar-valued-outranking-digraph}})
 
 \item {} 
 \sphinxAtStartPar
-\phantomsection\label{\detokenize{tutorial:id380}}{\hyperref[\detokenize{tutorial:rating-by-quantiles-sorting}]{\sphinxcrossref{Rating by quantiles sorting}}} (\autopageref*{\detokenize{tutorial:rating-by-quantiles-sorting}})
+\phantomsection\label{\detokenize{tutorial:id381}}{\hyperref[\detokenize{tutorial:rating-by-quantiles-sorting}]{\sphinxcrossref{Rating by quantiles sorting}}} (\autopageref*{\detokenize{tutorial:rating-by-quantiles-sorting}})
 
 \item {} 
 \sphinxAtStartPar
-\phantomsection\label{\detokenize{tutorial:id381}}{\hyperref[\detokenize{tutorial:to-conclude}]{\sphinxcrossref{To conclude}}} (\autopageref*{\detokenize{tutorial:to-conclude}})
+\phantomsection\label{\detokenize{tutorial:id382}}{\hyperref[\detokenize{tutorial:to-conclude}]{\sphinxcrossref{To conclude}}} (\autopageref*{\detokenize{tutorial:to-conclude}})
 
 \end{itemize}
 \end{sphinxcontents}
@@ -10801,23 +10900,23 @@ We propose hereafter some decision problems which may serve as exercises and exa
 \begin{itemize}
 \item {} 
 \sphinxAtStartPar
-\phantomsection\label{\detokenize{tutorial:id382}}{\hyperref[\detokenize{tutorial:who-will-receive-the-best-student-award}]{\sphinxcrossref{Who will receive the best student award? (\S{})}}} (\autopageref*{\detokenize{tutorial:who-will-receive-the-best-student-award}})
+\phantomsection\label{\detokenize{tutorial:id383}}{\hyperref[\detokenize{tutorial:who-will-receive-the-best-student-award}]{\sphinxcrossref{Who will receive the best student award? (\S{})}}} (\autopageref*{\detokenize{tutorial:who-will-receive-the-best-student-award}})
 
 \item {} 
 \sphinxAtStartPar
-\phantomsection\label{\detokenize{tutorial:id383}}{\hyperref[\detokenize{tutorial:how-to-fairly-rank-movies}]{\sphinxcrossref{How to fairly rank movies (\S{})}}} (\autopageref*{\detokenize{tutorial:how-to-fairly-rank-movies}})
+\phantomsection\label{\detokenize{tutorial:id384}}{\hyperref[\detokenize{tutorial:how-to-fairly-rank-movies}]{\sphinxcrossref{How to fairly rank movies (\S{})}}} (\autopageref*{\detokenize{tutorial:how-to-fairly-rank-movies}})
 
 \item {} 
 \sphinxAtStartPar
-\phantomsection\label{\detokenize{tutorial:id384}}{\hyperref[\detokenize{tutorial:what-is-your-best-choice-recommendation}]{\sphinxcrossref{What is your best choice recommendation? (\S{})}}} (\autopageref*{\detokenize{tutorial:what-is-your-best-choice-recommendation}})
+\phantomsection\label{\detokenize{tutorial:id385}}{\hyperref[\detokenize{tutorial:what-is-your-best-choice-recommendation}]{\sphinxcrossref{What is your best choice recommendation? (\S{})}}} (\autopageref*{\detokenize{tutorial:what-is-your-best-choice-recommendation}})
 
 \item {} 
 \sphinxAtStartPar
-\phantomsection\label{\detokenize{tutorial:id385}}{\hyperref[\detokenize{tutorial:what-is-the-best-public-policy}]{\sphinxcrossref{What is the best public policy? (\S{}\S{})}}} (\autopageref*{\detokenize{tutorial:what-is-the-best-public-policy}})
+\phantomsection\label{\detokenize{tutorial:id386}}{\hyperref[\detokenize{tutorial:what-is-the-best-public-policy}]{\sphinxcrossref{What is the best public policy? (\S{}\S{})}}} (\autopageref*{\detokenize{tutorial:what-is-the-best-public-policy}})
 
 \item {} 
 \sphinxAtStartPar
-\phantomsection\label{\detokenize{tutorial:id386}}{\hyperref[\detokenize{tutorial:a-fair-diploma-validation-decision}]{\sphinxcrossref{A fair diploma validation decision (\S{}\S{}\S{})}}} (\autopageref*{\detokenize{tutorial:a-fair-diploma-validation-decision}})
+\phantomsection\label{\detokenize{tutorial:id387}}{\hyperref[\detokenize{tutorial:a-fair-diploma-validation-decision}]{\sphinxcrossref{A fair diploma validation decision (\S{}\S{}\S{})}}} (\autopageref*{\detokenize{tutorial:a-fair-diploma-validation-decision}})
 
 \end{itemize}
 \end{sphinxcontents}
@@ -11356,15 +11455,15 @@ This part introduces python resources for tackling large and big outranking digr
 \begin{itemize}
 \item {} 
 \sphinxAtStartPar
-\phantomsection\label{\detokenize{tutorial:id387}}{\hyperref[\detokenize{tutorial:sparse-bipolar-valued-outranking-digraphs}]{\sphinxcrossref{Sparse bipolar\sphinxhyphen{}valued outranking digraphs}}} (\autopageref*{\detokenize{tutorial:sparse-bipolar-valued-outranking-digraphs}})
+\phantomsection\label{\detokenize{tutorial:id388}}{\hyperref[\detokenize{tutorial:sparse-bipolar-valued-outranking-digraphs}]{\sphinxcrossref{Sparse bipolar\sphinxhyphen{}valued outranking digraphs}}} (\autopageref*{\detokenize{tutorial:sparse-bipolar-valued-outranking-digraphs}})
 
 \item {} 
 \sphinxAtStartPar
-\phantomsection\label{\detokenize{tutorial:id388}}{\hyperref[\detokenize{tutorial:using-digraph3-multiprocessing-resources}]{\sphinxcrossref{Using Digraph3 multiprocessing resources}}} (\autopageref*{\detokenize{tutorial:using-digraph3-multiprocessing-resources}})
+\phantomsection\label{\detokenize{tutorial:id389}}{\hyperref[\detokenize{tutorial:using-digraph3-multiprocessing-resources}]{\sphinxcrossref{Using Digraph3 multiprocessing resources}}} (\autopageref*{\detokenize{tutorial:using-digraph3-multiprocessing-resources}})
 
 \item {} 
 \sphinxAtStartPar
-\phantomsection\label{\detokenize{tutorial:id389}}{\hyperref[\detokenize{tutorial:on-ranking-big-outranking-digraphs}]{\sphinxcrossref{On ranking big outranking digraphs}}} (\autopageref*{\detokenize{tutorial:on-ranking-big-outranking-digraphs}})
+\phantomsection\label{\detokenize{tutorial:id390}}{\hyperref[\detokenize{tutorial:on-ranking-big-outranking-digraphs}]{\sphinxcrossref{On ranking big outranking digraphs}}} (\autopageref*{\detokenize{tutorial:on-ranking-big-outranking-digraphs}})
 
 \end{itemize}
 \end{sphinxcontents}
@@ -11376,11 +11475,11 @@ This part introduces python resources for tackling large and big outranking digr
 \begin{itemize}
 \item {} 
 \sphinxAtStartPar
-\phantomsection\label{\detokenize{tutorial:id390}}{\hyperref[\detokenize{tutorial:the-sparse-pre-ranked-outranking-digraph-model}]{\sphinxcrossref{The sparse pre\sphinxhyphen{}ranked outranking digraph model}}} (\autopageref*{\detokenize{tutorial:the-sparse-pre-ranked-outranking-digraph-model}})
+\phantomsection\label{\detokenize{tutorial:id391}}{\hyperref[\detokenize{tutorial:the-sparse-pre-ranked-outranking-digraph-model}]{\sphinxcrossref{The sparse pre\sphinxhyphen{}ranked outranking digraph model}}} (\autopageref*{\detokenize{tutorial:the-sparse-pre-ranked-outranking-digraph-model}})
 
 \item {} 
 \sphinxAtStartPar
-\phantomsection\label{\detokenize{tutorial:id391}}{\hyperref[\detokenize{tutorial:ranking-pre-ranked-sparse-outranking-digraphs}]{\sphinxcrossref{Ranking pre\sphinxhyphen{}ranked sparse outranking digraphs}}} (\autopageref*{\detokenize{tutorial:ranking-pre-ranked-sparse-outranking-digraphs}})
+\phantomsection\label{\detokenize{tutorial:id392}}{\hyperref[\detokenize{tutorial:ranking-pre-ranked-sparse-outranking-digraphs}]{\sphinxcrossref{Ranking pre\sphinxhyphen{}ranked sparse outranking digraphs}}} (\autopageref*{\detokenize{tutorial:ranking-pre-ranked-sparse-outranking-digraphs}})
 
 \end{itemize}
 \end{sphinxcontents}
@@ -11567,15 +11666,15 @@ Back to {\hyperref[\detokenize{tutorial:tutorial-label}]{\sphinxcrossref{\DUrole
 \begin{itemize}
 \item {} 
 \sphinxAtStartPar
-\phantomsection\label{\detokenize{tutorial:id392}}{\hyperref[\detokenize{tutorial:computing-with-multiple-threads-in-parallel}]{\sphinxcrossref{Computing with multiple threads in parallel}}} (\autopageref*{\detokenize{tutorial:computing-with-multiple-threads-in-parallel}})
+\phantomsection\label{\detokenize{tutorial:id393}}{\hyperref[\detokenize{tutorial:computing-with-multiple-threads-in-parallel}]{\sphinxcrossref{Computing with multiple threads in parallel}}} (\autopageref*{\detokenize{tutorial:computing-with-multiple-threads-in-parallel}})
 
 \item {} 
 \sphinxAtStartPar
-\phantomsection\label{\detokenize{tutorial:id393}}{\hyperref[\detokenize{tutorial:using-the-mpoutrankingdigraphs-module}]{\sphinxcrossref{Using the mpOutrankingDigraphs module}}} (\autopageref*{\detokenize{tutorial:using-the-mpoutrankingdigraphs-module}})
+\phantomsection\label{\detokenize{tutorial:id394}}{\hyperref[\detokenize{tutorial:using-the-mpoutrankingdigraphs-module}]{\sphinxcrossref{Using the mpOutrankingDigraphs module}}} (\autopageref*{\detokenize{tutorial:using-the-mpoutrankingdigraphs-module}})
 
 \item {} 
 \sphinxAtStartPar
-\phantomsection\label{\detokenize{tutorial:id394}}{\hyperref[\detokenize{tutorial:setting-the-threading-parameters}]{\sphinxcrossref{Setting the Threading parameters}}} (\autopageref*{\detokenize{tutorial:setting-the-threading-parameters}})
+\phantomsection\label{\detokenize{tutorial:id395}}{\hyperref[\detokenize{tutorial:setting-the-threading-parameters}]{\sphinxcrossref{Setting the Threading parameters}}} (\autopageref*{\detokenize{tutorial:setting-the-threading-parameters}})
 
 \end{itemize}
 \end{sphinxcontents}
@@ -11771,23 +11870,23 @@ Back to {\hyperref[\detokenize{tutorial:tutorial-label}]{\sphinxcrossref{\DUrole
 \begin{itemize}
 \item {} 
 \sphinxAtStartPar
-\phantomsection\label{\detokenize{tutorial:id395}}{\hyperref[\detokenize{tutorial:c-compiled-python-modules}]{\sphinxcrossref{C\sphinxhyphen{}compiled Python modules}}} (\autopageref*{\detokenize{tutorial:c-compiled-python-modules}})
+\phantomsection\label{\detokenize{tutorial:id396}}{\hyperref[\detokenize{tutorial:c-compiled-python-modules}]{\sphinxcrossref{C\sphinxhyphen{}compiled Python modules}}} (\autopageref*{\detokenize{tutorial:c-compiled-python-modules}})
 
 \item {} 
 \sphinxAtStartPar
-\phantomsection\label{\detokenize{tutorial:id396}}{\hyperref[\detokenize{tutorial:big-data-performance-tableaux}]{\sphinxcrossref{Big Data performance tableaux}}} (\autopageref*{\detokenize{tutorial:big-data-performance-tableaux}})
+\phantomsection\label{\detokenize{tutorial:id397}}{\hyperref[\detokenize{tutorial:big-data-performance-tableaux}]{\sphinxcrossref{Big Data performance tableaux}}} (\autopageref*{\detokenize{tutorial:big-data-performance-tableaux}})
 
 \item {} 
 \sphinxAtStartPar
-\phantomsection\label{\detokenize{tutorial:id397}}{\hyperref[\detokenize{tutorial:c-implemented-integer-valued-outranking-digraphs}]{\sphinxcrossref{C\sphinxhyphen{}implemented integer\sphinxhyphen{}valued outranking digraphs}}} (\autopageref*{\detokenize{tutorial:c-implemented-integer-valued-outranking-digraphs}})
+\phantomsection\label{\detokenize{tutorial:id398}}{\hyperref[\detokenize{tutorial:c-implemented-integer-valued-outranking-digraphs}]{\sphinxcrossref{C\sphinxhyphen{}implemented integer\sphinxhyphen{}valued outranking digraphs}}} (\autopageref*{\detokenize{tutorial:c-implemented-integer-valued-outranking-digraphs}})
 
 \item {} 
 \sphinxAtStartPar
-\phantomsection\label{\detokenize{tutorial:id398}}{\hyperref[\detokenize{tutorial:the-sparse-outranking-digraph-implementation}]{\sphinxcrossref{The sparse outranking digraph implementation}}} (\autopageref*{\detokenize{tutorial:the-sparse-outranking-digraph-implementation}})
+\phantomsection\label{\detokenize{tutorial:id399}}{\hyperref[\detokenize{tutorial:the-sparse-outranking-digraph-implementation}]{\sphinxcrossref{The sparse outranking digraph implementation}}} (\autopageref*{\detokenize{tutorial:the-sparse-outranking-digraph-implementation}})
 
 \item {} 
 \sphinxAtStartPar
-\phantomsection\label{\detokenize{tutorial:id399}}{\hyperref[\detokenize{tutorial:ranking-big-sets-of-decision-alternatives}]{\sphinxcrossref{Ranking big sets of decision alternatives}}} (\autopageref*{\detokenize{tutorial:ranking-big-sets-of-decision-alternatives}})
+\phantomsection\label{\detokenize{tutorial:id400}}{\hyperref[\detokenize{tutorial:ranking-big-sets-of-decision-alternatives}]{\sphinxcrossref{Ranking big sets of decision alternatives}}} (\autopageref*{\detokenize{tutorial:ranking-big-sets-of-decision-alternatives}})
 
 \end{itemize}
 \end{sphinxcontents}
@@ -12263,15 +12362,15 @@ Following from the separability property of the \sphinxstyleemphasis{q}\sphinxhy
 \begin{itemize}
 \item {} 
 \sphinxAtStartPar
-\phantomsection\label{\detokenize{tutorial:id400}}{\hyperref[\detokenize{tutorial:on-a-common-2023-desktop-computer}]{\sphinxcrossref{On a common 2023 desktop computer}}} (\autopageref*{\detokenize{tutorial:on-a-common-2023-desktop-computer}})
+\phantomsection\label{\detokenize{tutorial:id401}}{\hyperref[\detokenize{tutorial:on-a-common-2023-desktop-computer}]{\sphinxcrossref{On a common 2023 desktop computer}}} (\autopageref*{\detokenize{tutorial:on-a-common-2023-desktop-computer}})
 
 \item {} 
 \sphinxAtStartPar
-\phantomsection\label{\detokenize{tutorial:id401}}{\hyperref[\detokenize{tutorial:on-the-hpc-platform-of-the-university-of-luxembourg-spring-2018}]{\sphinxcrossref{On the HPC platform of the University of Luxembourg (Spring 2018)}}} (\autopageref*{\detokenize{tutorial:on-the-hpc-platform-of-the-university-of-luxembourg-spring-2018}})
+\phantomsection\label{\detokenize{tutorial:id402}}{\hyperref[\detokenize{tutorial:on-the-hpc-platform-of-the-university-of-luxembourg-spring-2018}]{\sphinxcrossref{On the HPC platform of the University of Luxembourg (Spring 2018)}}} (\autopageref*{\detokenize{tutorial:on-the-hpc-platform-of-the-university-of-luxembourg-spring-2018}})
 
 \item {} 
 \sphinxAtStartPar
-\phantomsection\label{\detokenize{tutorial:id402}}{\hyperref[\detokenize{tutorial:on-the-meluxina-eurohpc-supercomputer-54}]{\sphinxcrossref{On the MeluXina EuroHPC supercomputer }}} (\autopageref*{\detokenize{tutorial:on-the-meluxina-eurohpc-supercomputer-54}})
+\phantomsection\label{\detokenize{tutorial:id403}}{\hyperref[\detokenize{tutorial:on-the-meluxina-eurohpc-supercomputer-summer-2024-54}]{\sphinxcrossref{On the MeluXina EuroHPC supercomputer (Summer 2024) }}} (\autopageref*{\detokenize{tutorial:on-the-meluxina-eurohpc-supercomputer-summer-2024-54}})
 
 \end{itemize}
 \end{sphinxcontents}
@@ -12572,18 +12671,18 @@ It is therefore \sphinxstyleemphasis{important} to always keep in mind that, bas
 \end{sphinxadmonition}
 
 
-\subsection{On the MeluXina EuroHPC supercomputer \sphinxfootnotemark[54]}
-\label{\detokenize{tutorial:on-the-meluxina-eurohpc-supercomputer-54}}\label{\detokenize{tutorial:hpc-meluxina-tutorial-label}}%
+\subsection{On the MeluXina EuroHPC supercomputer (Summer 2024) \sphinxfootnotemark[54]}
+\label{\detokenize{tutorial:on-the-meluxina-eurohpc-supercomputer-summer-2024-54}}\label{\detokenize{tutorial:hpc-meluxina-tutorial-label}}%
 \begin{footnotetext}[54]\sphinxAtStartFootnote
 The kind support of the \sphinxstyleemphasis{Faculty of Science Technology and Medecine} of the \sphinxstyleemphasis{University of Luxembourg} (\sphinxurl{https://www.uni.lu/fstm-en/}) and of \sphinxstyleemphasis{LUXPROVIDE} (\sphinxurl{https://www.luxprovide.lu/}) is gratefully acknowledged.
 %
 \end{footnotetext}\ignorespaces 
 \sphinxAtStartPar
-Summer 2024, the author was granted the opportunity to use the large memory HPC resources of the MeluXina EuroHPC supercomputer %
+Summer 2024, the author was granted the opportunity to use HPC resources of the MeluXina EuroHPC supercomputer %
 \begin{footnote}[55]\sphinxAtStartFootnote
 The acquisition and operation of the EuroHPC supercomputer is funded jointly by the EuroHPC Joint Undertaking, through the European Union’s Connecting Europe Facility and the Horizon 2020 research and innovation programme, as well as the Grand Duché du Luxembourg.
 %
-\end{footnote}  (\sphinxurl{https://www.luxprovide.lu/meluxina/}). Computing nodes on this HPC platform offer a large RAM for particularly demanding workloads. Each node is composed of 2 AMD Rome CPUs (64 core @ 2.6 GHz, 256HT cores total), has 4 TB of memory (4096 GB) and 1.92 TB of local storage.
+\end{footnote}  (\sphinxurl{https://www.luxprovide.lu/meluxina/}). Special big memory computing nodes on this HPC platform offer a large RAM for particularly demanding workloads. Each such node is composed of 2 AMD Rome CPUs (64 core @ 2.6 GHz, 256HT cores total), has 4 TB of memory (4096 GB) and 1.92 TB of local storage.
 
 \sphinxAtStartPar
 Following timings (see \hyperref[\detokenize{tutorial:meluxina}]{Table \ref{\detokenize{tutorial:meluxina}}}) could be achieved with a specially designed \sphinxcode{\sphinxupquote{cQuantilesRankingDigraphs}} module %
@@ -13000,19 +13099,19 @@ This last part of the tutorials introduces Python resources for working with und
 \begin{itemize}
 \item {} 
 \sphinxAtStartPar
-\phantomsection\label{\detokenize{tutorial:id403}}{\hyperref[\detokenize{tutorial:working-with-the-graphs-module}]{\sphinxcrossref{Working with the \sphinxcode{\sphinxupquote{graphs}} module}}} (\autopageref*{\detokenize{tutorial:working-with-the-graphs-module}})
+\phantomsection\label{\detokenize{tutorial:id404}}{\hyperref[\detokenize{tutorial:working-with-the-graphs-module}]{\sphinxcrossref{Working with the \sphinxcode{\sphinxupquote{graphs}} module}}} (\autopageref*{\detokenize{tutorial:working-with-the-graphs-module}})
 
 \item {} 
 \sphinxAtStartPar
-\phantomsection\label{\detokenize{tutorial:id404}}{\hyperref[\detokenize{tutorial:computing-the-non-isomorphic-miss-of-the-12-cycle-graph}]{\sphinxcrossref{Computing the non isomorphic MISs of the 12\sphinxhyphen{}cycle graph}}} (\autopageref*{\detokenize{tutorial:computing-the-non-isomorphic-miss-of-the-12-cycle-graph}})
+\phantomsection\label{\detokenize{tutorial:id405}}{\hyperref[\detokenize{tutorial:computing-the-non-isomorphic-miss-of-the-12-cycle-graph}]{\sphinxcrossref{Computing the non isomorphic MISs of the 12\sphinxhyphen{}cycle graph}}} (\autopageref*{\detokenize{tutorial:computing-the-non-isomorphic-miss-of-the-12-cycle-graph}})
 
 \item {} 
 \sphinxAtStartPar
-\phantomsection\label{\detokenize{tutorial:id405}}{\hyperref[\detokenize{tutorial:about-split-interval-and-permutation-graphs}]{\sphinxcrossref{About split, interval and permutation graphs}}} (\autopageref*{\detokenize{tutorial:about-split-interval-and-permutation-graphs}})
+\phantomsection\label{\detokenize{tutorial:id406}}{\hyperref[\detokenize{tutorial:about-split-interval-and-permutation-graphs}]{\sphinxcrossref{About split, interval and permutation graphs}}} (\autopageref*{\detokenize{tutorial:about-split-interval-and-permutation-graphs}})
 
 \item {} 
 \sphinxAtStartPar
-\phantomsection\label{\detokenize{tutorial:id406}}{\hyperref[\detokenize{tutorial:on-tree-graphs-and-graph-forests}]{\sphinxcrossref{On tree graphs and graph forests}}} (\autopageref*{\detokenize{tutorial:on-tree-graphs-and-graph-forests}})
+\phantomsection\label{\detokenize{tutorial:id407}}{\hyperref[\detokenize{tutorial:on-tree-graphs-and-graph-forests}]{\sphinxcrossref{On tree graphs and graph forests}}} (\autopageref*{\detokenize{tutorial:on-tree-graphs-and-graph-forests}})
 
 \end{itemize}
 \end{sphinxcontents}
@@ -13028,27 +13127,27 @@ This last part of the tutorials introduces Python resources for working with und
 \begin{itemize}
 \item {} 
 \sphinxAtStartPar
-\phantomsection\label{\detokenize{tutorial:id407}}{\hyperref[\detokenize{tutorial:structure-of-a-graph-object}]{\sphinxcrossref{Structure of a \sphinxcode{\sphinxupquote{Graph}} object}}} (\autopageref*{\detokenize{tutorial:structure-of-a-graph-object}})
+\phantomsection\label{\detokenize{tutorial:id408}}{\hyperref[\detokenize{tutorial:structure-of-a-graph-object}]{\sphinxcrossref{Structure of a \sphinxcode{\sphinxupquote{Graph}} object}}} (\autopageref*{\detokenize{tutorial:structure-of-a-graph-object}})
 
 \item {} 
 \sphinxAtStartPar
-\phantomsection\label{\detokenize{tutorial:id408}}{\hyperref[\detokenize{tutorial:q-coloring-of-a-graph}]{\sphinxcrossref{q\sphinxhyphen{}coloring of a graph}}} (\autopageref*{\detokenize{tutorial:q-coloring-of-a-graph}})
+\phantomsection\label{\detokenize{tutorial:id409}}{\hyperref[\detokenize{tutorial:q-coloring-of-a-graph}]{\sphinxcrossref{q\sphinxhyphen{}coloring of a graph}}} (\autopageref*{\detokenize{tutorial:q-coloring-of-a-graph}})
 
 \item {} 
 \sphinxAtStartPar
-\phantomsection\label{\detokenize{tutorial:id409}}{\hyperref[\detokenize{tutorial:mis-and-clique-enumeration}]{\sphinxcrossref{MIS and clique enumeration}}} (\autopageref*{\detokenize{tutorial:mis-and-clique-enumeration}})
+\phantomsection\label{\detokenize{tutorial:id410}}{\hyperref[\detokenize{tutorial:mis-and-clique-enumeration}]{\sphinxcrossref{MIS and clique enumeration}}} (\autopageref*{\detokenize{tutorial:mis-and-clique-enumeration}})
 
 \item {} 
 \sphinxAtStartPar
-\phantomsection\label{\detokenize{tutorial:id410}}{\hyperref[\detokenize{tutorial:line-graphs-and-maximal-matchings}]{\sphinxcrossref{Line graphs and maximal matchings}}} (\autopageref*{\detokenize{tutorial:line-graphs-and-maximal-matchings}})
+\phantomsection\label{\detokenize{tutorial:id411}}{\hyperref[\detokenize{tutorial:line-graphs-and-maximal-matchings}]{\sphinxcrossref{Line graphs and maximal matchings}}} (\autopageref*{\detokenize{tutorial:line-graphs-and-maximal-matchings}})
 
 \item {} 
 \sphinxAtStartPar
-\phantomsection\label{\detokenize{tutorial:id411}}{\hyperref[\detokenize{tutorial:grids-and-the-ising-model}]{\sphinxcrossref{Grids and the Ising model}}} (\autopageref*{\detokenize{tutorial:grids-and-the-ising-model}})
+\phantomsection\label{\detokenize{tutorial:id412}}{\hyperref[\detokenize{tutorial:grids-and-the-ising-model}]{\sphinxcrossref{Grids and the Ising model}}} (\autopageref*{\detokenize{tutorial:grids-and-the-ising-model}})
 
 \item {} 
 \sphinxAtStartPar
-\phantomsection\label{\detokenize{tutorial:id412}}{\hyperref[\detokenize{tutorial:simulating-metropolis-random-walks}]{\sphinxcrossref{Simulating Metropolis random walks}}} (\autopageref*{\detokenize{tutorial:simulating-metropolis-random-walks}})
+\phantomsection\label{\detokenize{tutorial:id413}}{\hyperref[\detokenize{tutorial:simulating-metropolis-random-walks}]{\sphinxcrossref{Simulating Metropolis random walks}}} (\autopageref*{\detokenize{tutorial:simulating-metropolis-random-walks}})
 
 \end{itemize}
 \end{sphinxcontents}
@@ -13529,19 +13628,19 @@ Back to {\hyperref[\detokenize{tutorial:tutorial-label}]{\sphinxcrossref{\DUrole
 \begin{itemize}
 \item {} 
 \sphinxAtStartPar
-\phantomsection\label{\detokenize{tutorial:id413}}{\hyperref[\detokenize{tutorial:id166}]{\sphinxcrossref{Introduction}}} (\autopageref*{\detokenize{tutorial:id166}})
+\phantomsection\label{\detokenize{tutorial:id414}}{\hyperref[\detokenize{tutorial:id166}]{\sphinxcrossref{Introduction}}} (\autopageref*{\detokenize{tutorial:id166}})
 
 \item {} 
 \sphinxAtStartPar
-\phantomsection\label{\detokenize{tutorial:id414}}{\hyperref[\detokenize{tutorial:computing-the-maximal-independent-sets-miss}]{\sphinxcrossref{Computing the maximal independent sets (MISs)}}} (\autopageref*{\detokenize{tutorial:computing-the-maximal-independent-sets-miss}})
+\phantomsection\label{\detokenize{tutorial:id415}}{\hyperref[\detokenize{tutorial:computing-the-maximal-independent-sets-miss}]{\sphinxcrossref{Computing the maximal independent sets (MISs)}}} (\autopageref*{\detokenize{tutorial:computing-the-maximal-independent-sets-miss}})
 
 \item {} 
 \sphinxAtStartPar
-\phantomsection\label{\detokenize{tutorial:id415}}{\hyperref[\detokenize{tutorial:computing-the-automorphism-group}]{\sphinxcrossref{Computing the automorphism group}}} (\autopageref*{\detokenize{tutorial:computing-the-automorphism-group}})
+\phantomsection\label{\detokenize{tutorial:id416}}{\hyperref[\detokenize{tutorial:computing-the-automorphism-group}]{\sphinxcrossref{Computing the automorphism group}}} (\autopageref*{\detokenize{tutorial:computing-the-automorphism-group}})
 
 \item {} 
 \sphinxAtStartPar
-\phantomsection\label{\detokenize{tutorial:id416}}{\hyperref[\detokenize{tutorial:computing-the-isomorphic-miss}]{\sphinxcrossref{Computing the isomorphic MISs}}} (\autopageref*{\detokenize{tutorial:computing-the-isomorphic-miss}})
+\phantomsection\label{\detokenize{tutorial:id417}}{\hyperref[\detokenize{tutorial:computing-the-isomorphic-miss}]{\sphinxcrossref{Computing the isomorphic MISs}}} (\autopageref*{\detokenize{tutorial:computing-the-isomorphic-miss}})
 
 \end{itemize}
 \end{sphinxcontents}
@@ -13750,19 +13849,19 @@ Back to {\hyperref[\detokenize{tutorial:tutorial-label}]{\sphinxcrossref{\DUrole
 \begin{itemize}
 \item {} 
 \sphinxAtStartPar
-\phantomsection\label{\detokenize{tutorial:id417}}{\hyperref[\detokenize{tutorial:a-multiply-perfect-graph}]{\sphinxcrossref{A multiply \sphinxstyleemphasis{perfect} graph}}} (\autopageref*{\detokenize{tutorial:a-multiply-perfect-graph}})
+\phantomsection\label{\detokenize{tutorial:id418}}{\hyperref[\detokenize{tutorial:a-multiply-perfect-graph}]{\sphinxcrossref{A multiply \sphinxstyleemphasis{perfect} graph}}} (\autopageref*{\detokenize{tutorial:a-multiply-perfect-graph}})
 
 \item {} 
 \sphinxAtStartPar
-\phantomsection\label{\detokenize{tutorial:id418}}{\hyperref[\detokenize{tutorial:who-is-the-liar}]{\sphinxcrossref{Who is the liar ?}}} (\autopageref*{\detokenize{tutorial:who-is-the-liar}})
+\phantomsection\label{\detokenize{tutorial:id419}}{\hyperref[\detokenize{tutorial:who-is-the-liar}]{\sphinxcrossref{Who is the liar ?}}} (\autopageref*{\detokenize{tutorial:who-is-the-liar}})
 
 \item {} 
 \sphinxAtStartPar
-\phantomsection\label{\detokenize{tutorial:id419}}{\hyperref[\detokenize{tutorial:generating-permutation-graphs}]{\sphinxcrossref{Generating permutation graphs}}} (\autopageref*{\detokenize{tutorial:generating-permutation-graphs}})
+\phantomsection\label{\detokenize{tutorial:id420}}{\hyperref[\detokenize{tutorial:generating-permutation-graphs}]{\sphinxcrossref{Generating permutation graphs}}} (\autopageref*{\detokenize{tutorial:generating-permutation-graphs}})
 
 \item {} 
 \sphinxAtStartPar
-\phantomsection\label{\detokenize{tutorial:id420}}{\hyperref[\detokenize{tutorial:recognizing-permutation-graphs}]{\sphinxcrossref{Recognizing permutation graphs}}} (\autopageref*{\detokenize{tutorial:recognizing-permutation-graphs}})
+\phantomsection\label{\detokenize{tutorial:id421}}{\hyperref[\detokenize{tutorial:recognizing-permutation-graphs}]{\sphinxcrossref{Recognizing permutation graphs}}} (\autopageref*{\detokenize{tutorial:recognizing-permutation-graphs}})
 
 \end{itemize}
 \end{sphinxcontents}
@@ -14364,19 +14463,19 @@ Back to {\hyperref[\detokenize{tutorial:tutorial-label}]{\sphinxcrossref{\DUrole
 \begin{itemize}
 \item {} 
 \sphinxAtStartPar
-\phantomsection\label{\detokenize{tutorial:id421}}{\hyperref[\detokenize{tutorial:generating-random-tree-graphs}]{\sphinxcrossref{Generating random tree graphs}}} (\autopageref*{\detokenize{tutorial:generating-random-tree-graphs}})
+\phantomsection\label{\detokenize{tutorial:id422}}{\hyperref[\detokenize{tutorial:generating-random-tree-graphs}]{\sphinxcrossref{Generating random tree graphs}}} (\autopageref*{\detokenize{tutorial:generating-random-tree-graphs}})
 
 \item {} 
 \sphinxAtStartPar
-\phantomsection\label{\detokenize{tutorial:id422}}{\hyperref[\detokenize{tutorial:recognizing-tree-graphs}]{\sphinxcrossref{Recognizing tree graphs}}} (\autopageref*{\detokenize{tutorial:recognizing-tree-graphs}})
+\phantomsection\label{\detokenize{tutorial:id423}}{\hyperref[\detokenize{tutorial:recognizing-tree-graphs}]{\sphinxcrossref{Recognizing tree graphs}}} (\autopageref*{\detokenize{tutorial:recognizing-tree-graphs}})
 
 \item {} 
 \sphinxAtStartPar
-\phantomsection\label{\detokenize{tutorial:id423}}{\hyperref[\detokenize{tutorial:spanning-trees-and-forests}]{\sphinxcrossref{Spanning trees and forests}}} (\autopageref*{\detokenize{tutorial:spanning-trees-and-forests}})
+\phantomsection\label{\detokenize{tutorial:id424}}{\hyperref[\detokenize{tutorial:spanning-trees-and-forests}]{\sphinxcrossref{Spanning trees and forests}}} (\autopageref*{\detokenize{tutorial:spanning-trees-and-forests}})
 
 \item {} 
 \sphinxAtStartPar
-\phantomsection\label{\detokenize{tutorial:id424}}{\hyperref[\detokenize{tutorial:maximum-determined-spanning-forests}]{\sphinxcrossref{Maximum determined spanning forests}}} (\autopageref*{\detokenize{tutorial:maximum-determined-spanning-forests}})
+\phantomsection\label{\detokenize{tutorial:id425}}{\hyperref[\detokenize{tutorial:maximum-determined-spanning-forests}]{\sphinxcrossref{Maximum determined spanning forests}}} (\autopageref*{\detokenize{tutorial:maximum-determined-spanning-forests}})
 
 \end{itemize}
 \end{sphinxcontents}
