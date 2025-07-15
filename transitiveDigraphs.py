@@ -1929,20 +1929,31 @@ class PartialBachetRanking(TransitiveDigraph):
         actions = [x for x in g.actions]
         import random
         random.seed(seed)
+        j = 0
         for i in range(randomized):
             random.shuffle(actions)
             ba = BachetRanking(g,actionsList=actions,BestQualified=False)
             corrKey = '%.4f' % ba.correlation
             try:
-                statistics[corrKey]['freq'] += 1
-                statistics[corrKey]['rankings'].actions
+                statistics[corrKey]['rankings'] = actions
                 statistics[corrKey]['optimal'] = ba.bachetRanking
+                j += 1
+                statistics[corrKey]['freq'] = j
+                if Debug:
+                    print(corrKey,j)
             except:
-                statistics[corrKey] = {'freq':1,
-                                       'rankings':actions,
+                j = 1
+                if Debug:
+                    print(corrKey,j)
+                statistics[corrKey] = {'freq': j,
+                                       'rankings': actions,
                                        'optimal': ba.bachetRanking}
+
+        if Debug:
+            print(statistics)
         resStat = [(float(x),statistics[x]) for x in statistics]
         resStat = list(sorted(resStat,reverse=True))
+        print(len(resStat))
         bachetRankings = []
         if len(resStat) < maxNbrOfRankings:
             maxNbrOfRankings = len(resStat)
@@ -2221,27 +2232,13 @@ if __name__ == "__main__":
     ****************************************************
     """)
 
-    # v = RandomLinearVotingProfile(numberOfVoters=99,                                numberOfCandidates=9,seed=201)
-    # g = CondorcetDigraph(v)
-####    g = RandomBipolarOutrankingDigraph(Normalized=True)
-##    rbc = RankingByChoosingDigraph(g,Threading=False,Debug=True)
-##    rbc.showRankingByChoosing()
-##    print(rbc)
-##    rbc.exportTopologicalGraphViz('test')
-##    rbc.exportGraphViz('test1')
-## 
     pt = RandomCBPerformanceTableau(numberOfActions=9,numberOfCriteria=13,seed=100)
     g = BipolarOutrankingDigraph(pt)
-    wbg = PartialBachetRanking(g,seed=100,Polarised=True,Comments=False)
-    print(wbg)
-    wbg.showTransitiveDigraph()
-    wbg.exportGraphViz('wbg')
-    TransitiveDigraph.exportGraphViz(wbg,'test')
-    #wbg.showTransitiveDigraph(WithCoverCredibility=True)
-    #wcg = WeakCopelandOrder(g,WithFairestRanking=True)
-    #print(wcg.copelandPermutations)
-    #print(wcg.copelandPreRanking)
-    #print(wcg.fairestCopelandRanking)
+    pbr = PartialBachetRanking(g,randomized=200,seed=1,Polarised=True,Comments=False,Debug=True)
+    print(pbr)
+    pbr.showTransitiveDigraph()
+    pbr.exportGraphViz('wbg')
+    TransitiveDigraph.exportGraphViz(pbr,'test')
 
     print('*------------------*')
     print('If you see this line all tests were passed successfully :-)')

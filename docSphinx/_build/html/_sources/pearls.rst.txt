@@ -3520,7 +3520,7 @@ In order to provide information about the the underlying :py:class:`~transitiveD
 
 In :numref:`bachetBCR1` we see confirmed that alternative *a2* shows indeed the very best performance profile and alternatives *a1*, *a3* and *a7* the weakest performance profiles. 
 
-As the *Bachet* first choice recommendation is based on a partial transitive asymmetric digraph, actually highly correlated with the given outranking digraph *g* (+0.717, see Line 9 above), a unique initial and a unique terminal prekernel always exist (see :numref:`BachetBCR0` Lines 8 and 14). Both these properties confer the *Bachet choice recommendation* an computational advantage over the Rubis first choice recommendation based on initial and terminal prekernels directly extracted from the given outranking digraph where we must first arbitrarily break, the case given, all chordless outranking circuits.
+As the *Bachet* first choice recommendation is based on a partial transitive asymmetric digraph, actually highly correlated with the given outranking digraph *g* (+0.717, see Line 9 above), a unique initial and a unique terminal prekernel always exist (see :numref:`BachetBCR0` Lines 8 and 14). Both these properties confer the *Bachet choice recommendation* a computational advantage over the Rubis first choice recommendation based on initial and terminal prekernels directly extracted from the given outranking digraph where we, first, must arbitrarily break, the case given, all chordless outranking circuits.
 
 Computing initial and terminal *prekernels* in digraphs is the subject of the next Section.
 

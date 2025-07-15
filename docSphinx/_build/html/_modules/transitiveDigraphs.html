@@ -2101,20 +2101,31 @@
         <span class="n">actions</span> <span class="o">=</span> <span class="p">[</span><span class="n">x</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">g</span><span class="o">.</span><span class="n">actions</span><span class="p">]</span>
         <span class="kn">import</span> <span class="nn">random</span>
         <span class="n">random</span><span class="o">.</span><span class="n">seed</span><span class="p">(</span><span class="n">seed</span><span class="p">)</span>
+        <span class="n">j</span> <span class="o">=</span> <span class="mi">0</span>
         <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">randomized</span><span class="p">):</span>
             <span class="n">random</span><span class="o">.</span><span class="n">shuffle</span><span class="p">(</span><span class="n">actions</span><span class="p">)</span>
             <span class="n">ba</span> <span class="o">=</span> <span class="n">BachetRanking</span><span class="p">(</span><span class="n">g</span><span class="p">,</span><span class="n">actionsList</span><span class="o">=</span><span class="n">actions</span><span class="p">,</span><span class="n">BestQualified</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
             <span class="n">corrKey</span> <span class="o">=</span> <span class="s1">&#39;</span><span class="si">%.4f</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="n">ba</span><span class="o">.</span><span class="n">correlation</span>
             <span class="k">try</span><span class="p">:</span>
-                <span class="n">statistics</span><span class="p">[</span><span class="n">corrKey</span><span class="p">][</span><span class="s1">&#39;freq&#39;</span><span class="p">]</span> <span class="o">+=</span> <span class="mi">1</span>
-                <span class="n">statistics</span><span class="p">[</span><span class="n">corrKey</span><span class="p">][</span><span class="s1">&#39;rankings&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">actions</span>
+                <span class="n">statistics</span><span class="p">[</span><span class="n">corrKey</span><span class="p">][</span><span class="s1">&#39;rankings&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">actions</span>
                 <span class="n">statistics</span><span class="p">[</span><span class="n">corrKey</span><span class="p">][</span><span class="s1">&#39;optimal&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">ba</span><span class="o">.</span><span class="n">bachetRanking</span>
+                <span class="n">j</span> <span class="o">+=</span> <span class="mi">1</span>
+                <span class="n">statistics</span><span class="p">[</span><span class="n">corrKey</span><span class="p">][</span><span class="s1">&#39;freq&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">j</span>
+                <span class="k">if</span> <span class="n">Debug</span><span class="p">:</span>
+                    <span class="nb">print</span><span class="p">(</span><span class="n">corrKey</span><span class="p">,</span><span class="n">j</span><span class="p">)</span>
             <span class="k">except</span><span class="p">:</span>
-                <span class="n">statistics</span><span class="p">[</span><span class="n">corrKey</span><span class="p">]</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;freq&#39;</span><span class="p">:</span><span class="mi">1</span><span class="p">,</span>
-                                       <span class="s1">&#39;rankings&#39;</span><span class="p">:</span><span class="n">actions</span><span class="p">,</span>
+                <span class="n">j</span> <span class="o">=</span> <span class="mi">1</span>
+                <span class="k">if</span> <span class="n">Debug</span><span class="p">:</span>
+                    <span class="nb">print</span><span class="p">(</span><span class="n">corrKey</span><span class="p">,</span><span class="n">j</span><span class="p">)</span>
+                <span class="n">statistics</span><span class="p">[</span><span class="n">corrKey</span><span class="p">]</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;freq&#39;</span><span class="p">:</span> <span class="n">j</span><span class="p">,</span>
+                                       <span class="s1">&#39;rankings&#39;</span><span class="p">:</span> <span class="n">actions</span><span class="p">,</span>
                                        <span class="s1">&#39;optimal&#39;</span><span class="p">:</span> <span class="n">ba</span><span class="o">.</span><span class="n">bachetRanking</span><span class="p">}</span>
+
+        <span class="k">if</span> <span class="n">Debug</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="n">statistics</span><span class="p">)</span>
         <span class="n">resStat</span> <span class="o">=</span> <span class="p">[(</span><span class="nb">float</span><span class="p">(</span><span class="n">x</span><span class="p">),</span><span class="n">statistics</span><span class="p">[</span><span class="n">x</span><span class="p">])</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">statistics</span><span class="p">]</span>
         <span class="n">resStat</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="nb">sorted</span><span class="p">(</span><span class="n">resStat</span><span class="p">,</span><span class="n">reverse</span><span class="o">=</span><span class="kc">True</span><span class="p">))</span>
+        <span class="nb">print</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">resStat</span><span class="p">))</span>
         <span class="n">bachetRankings</span> <span class="o">=</span> <span class="p">[]</span>
         <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">resStat</span><span class="p">)</span> <span class="o">&lt;</span> <span class="n">maxNbrOfRankings</span><span class="p">:</span>
             <span class="n">maxNbrOfRankings</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">resStat</span><span class="p">)</span>
@@ -2412,27 +2423,13 @@
 <span class="s2">    ****************************************************</span>
 <span class="s2">    &quot;&quot;&quot;</span><span class="p">)</span>
 
-    <span class="c1"># v = RandomLinearVotingProfile(numberOfVoters=99,                                numberOfCandidates=9,seed=201)</span>
-    <span class="c1"># g = CondorcetDigraph(v)</span>
-<span class="c1">####    g = RandomBipolarOutrankingDigraph(Normalized=True)</span>
-<span class="c1">##    rbc = RankingByChoosingDigraph(g,Threading=False,Debug=True)</span>
-<span class="c1">##    rbc.showRankingByChoosing()</span>
-<span class="c1">##    print(rbc)</span>
-<span class="c1">##    rbc.exportTopologicalGraphViz(&#39;test&#39;)</span>
-<span class="c1">##    rbc.exportGraphViz(&#39;test1&#39;)</span>
-<span class="c1">## </span>
     <span class="n">pt</span> <span class="o">=</span> <span class="n">RandomCBPerformanceTableau</span><span class="p">(</span><span class="n">numberOfActions</span><span class="o">=</span><span class="mi">9</span><span class="p">,</span><span class="n">numberOfCriteria</span><span class="o">=</span><span class="mi">13</span><span class="p">,</span><span class="n">seed</span><span class="o">=</span><span class="mi">100</span><span class="p">)</span>
     <span class="n">g</span> <span class="o">=</span> <span class="n">BipolarOutrankingDigraph</span><span class="p">(</span><span class="n">pt</span><span class="p">)</span>
-    <span class="n">wbg</span> <span class="o">=</span> <span class="n">PartialBachetRanking</span><span class="p">(</span><span class="n">g</span><span class="p">,</span><span class="n">seed</span><span class="o">=</span><span class="mi">100</span><span class="p">,</span><span class="n">Polarised</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span><span class="n">Comments</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
-    <span class="nb">print</span><span class="p">(</span><span class="n">wbg</span><span class="p">)</span>
-    <span class="n">wbg</span><span class="o">.</span><span class="n">showTransitiveDigraph</span><span class="p">()</span>
-    <span class="n">wbg</span><span class="o">.</span><span class="n">exportGraphViz</span><span class="p">(</span><span class="s1">&#39;wbg&#39;</span><span class="p">)</span>
-    <span class="n">TransitiveDigraph</span><span class="o">.</span><span class="n">exportGraphViz</span><span class="p">(</span><span class="n">wbg</span><span class="p">,</span><span class="s1">&#39;test&#39;</span><span class="p">)</span>
-    <span class="c1">#wbg.showTransitiveDigraph(WithCoverCredibility=True)</span>
-    <span class="c1">#wcg = WeakCopelandOrder(g,WithFairestRanking=True)</span>
-    <span class="c1">#print(wcg.copelandPermutations)</span>
-    <span class="c1">#print(wcg.copelandPreRanking)</span>
-    <span class="c1">#print(wcg.fairestCopelandRanking)</span>
+    <span class="n">pbr</span> <span class="o">=</span> <span class="n">PartialBachetRanking</span><span class="p">(</span><span class="n">g</span><span class="p">,</span><span class="n">randomized</span><span class="o">=</span><span class="mi">200</span><span class="p">,</span><span class="n">seed</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span><span class="n">Polarised</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span><span class="n">Comments</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span><span class="n">Debug</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">pbr</span><span class="p">)</span>
+    <span class="n">pbr</span><span class="o">.</span><span class="n">showTransitiveDigraph</span><span class="p">()</span>
+    <span class="n">pbr</span><span class="o">.</span><span class="n">exportGraphViz</span><span class="p">(</span><span class="s1">&#39;wbg&#39;</span><span class="p">)</span>
+    <span class="n">TransitiveDigraph</span><span class="o">.</span><span class="n">exportGraphViz</span><span class="p">(</span><span class="n">pbr</span><span class="p">,</span><span class="s1">&#39;test&#39;</span><span class="p">)</span>
 
     <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;*------------------*&#39;</span><span class="p">)</span>
     <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;If you see this line all tests were passed successfully :-)&#39;</span><span class="p">)</span>
@@ -2448,7 +2445,7 @@
 
   <div role="contentinfo">
     <p>&#169; Copyright 2012-2025, Raymond Bisdorff.
-      <span class="lastupdated">Last updated on Jul 12, 2025.
+      <span class="lastupdated">Last updated on Jul 15, 2025.
       </span></p>
   </div>
 
