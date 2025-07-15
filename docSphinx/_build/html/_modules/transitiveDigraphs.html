@@ -2061,9 +2061,9 @@
 <span class="sd">    &gt;&gt;&gt; from outrankingDigraphs import BipolarOutrankingDigraph</span>
 <span class="sd">    &gt;&gt;&gt; g = BipolarOutrankingDigraph(t)</span>
 <span class="sd">    &gt;&gt;&gt; from transitiveDigraphs import PartialBachetRanking</span>
-<span class="sd">    &gt;&gt;&gt; wg = PartialBachetRanking(g,randomized=100,seed=100,</span>
+<span class="sd">    &gt;&gt;&gt; pbr = PartialBachetRanking(g,randomized=100,seed=100,</span>
 <span class="sd">    ...                       maxNbrOfRankings=10)</span>
-<span class="sd">    &gt;&gt;&gt; wg.showTransitiveDigraph(WithCoverCredibility=True)</span>
+<span class="sd">    &gt;&gt;&gt; pbr.showTransitiveDigraph(WithCoverCredibility=True)</span>
 <span class="sd">     Ranking by Choosing and Rejecting</span>
 <span class="sd">      1st ranked [&#39;a04&#39;] (1.00)</span>
 <span class="sd">        2nd ranked [&#39;a02&#39;, &#39;a05&#39;, &#39;a06&#39;, &#39;a11&#39;, &#39;a18&#39;, &#39;a20&#39;] (0.70)</span>
@@ -2071,9 +2071,9 @@
 <span class="sd">          3rd last ranked [&#39;a09&#39;, &#39;a10&#39;, &#39;a14&#39;]) (0.33)</span>
 <span class="sd">        2nd last ranked [&#39;a01&#39;, &#39;a03&#39;, &#39;a12&#39;, &#39;a13&#39;, &#39;a15&#39;]) (0.60)</span>
 <span class="sd">      1st last ranked [&#39;a07&#39;, &#39;a08&#39;, &#39;a17&#39;, &#39;a19&#39;]) (0.80)</span>
-<span class="sd">    &gt;&gt;&gt; vwg = PartialBachetRanking(g,Polarised=False,randomized=100,</span>
+<span class="sd">    &gt;&gt;&gt; vpbr = PartialBachetRanking(g,Polarised=False,randomized=100,</span>
 <span class="sd">    ...                      seed=100,maxNbrOfRankings=10)</span>
-<span class="sd">    &gt;&gt;&gt; vwg.showTransitiveDigraph(WithCoverCredibility=True)</span>
+<span class="sd">    &gt;&gt;&gt; vpbr.showTransitiveDigraph(WithCoverCredibility=True)</span>
 <span class="sd">     Ranking by Choosing and Rejecting</span>
 <span class="sd">      1st ranked [&#39;a04&#39;] (1.00)</span>
 <span class="sd">        2nd ranked [&#39;a02&#39;, &#39;a05&#39;, &#39;a06&#39;, &#39;a18&#39;] (0.77)</span>
@@ -2107,10 +2107,8 @@
             <span class="n">ba</span> <span class="o">=</span> <span class="n">BachetRanking</span><span class="p">(</span><span class="n">g</span><span class="p">,</span><span class="n">actionsList</span><span class="o">=</span><span class="n">actions</span><span class="p">,</span><span class="n">BestQualified</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
             <span class="n">corrKey</span> <span class="o">=</span> <span class="s1">&#39;</span><span class="si">%.4f</span><span class="s1">&#39;</span> <span class="o">%</span> <span class="n">ba</span><span class="o">.</span><span class="n">correlation</span>
             <span class="k">try</span><span class="p">:</span>
-                <span class="n">statistics</span><span class="p">[</span><span class="n">corrKey</span><span class="p">][</span><span class="s1">&#39;rankings&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">actions</span>
-                <span class="n">statistics</span><span class="p">[</span><span class="n">corrKey</span><span class="p">][</span><span class="s1">&#39;optimal&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">ba</span><span class="o">.</span><span class="n">bachetRanking</span>
+                <span class="n">statistics</span><span class="p">[</span><span class="n">corrKey</span><span class="p">][</span><span class="s1">&#39;freq&#39;</span><span class="p">]</span> <span class="o">+=</span> <span class="mi">1</span>
                 <span class="n">j</span> <span class="o">+=</span> <span class="mi">1</span>
-                <span class="n">statistics</span><span class="p">[</span><span class="n">corrKey</span><span class="p">][</span><span class="s1">&#39;freq&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">j</span>
                 <span class="k">if</span> <span class="n">Debug</span><span class="p">:</span>
                     <span class="nb">print</span><span class="p">(</span><span class="n">corrKey</span><span class="p">,</span><span class="n">j</span><span class="p">)</span>
             <span class="k">except</span><span class="p">:</span>
@@ -2118,8 +2116,8 @@
                 <span class="k">if</span> <span class="n">Debug</span><span class="p">:</span>
                     <span class="nb">print</span><span class="p">(</span><span class="n">corrKey</span><span class="p">,</span><span class="n">j</span><span class="p">)</span>
                 <span class="n">statistics</span><span class="p">[</span><span class="n">corrKey</span><span class="p">]</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;freq&#39;</span><span class="p">:</span> <span class="n">j</span><span class="p">,</span>
-                                       <span class="s1">&#39;rankings&#39;</span><span class="p">:</span> <span class="n">actions</span><span class="p">,</span>
-                                       <span class="s1">&#39;optimal&#39;</span><span class="p">:</span> <span class="n">ba</span><span class="o">.</span><span class="n">bachetRanking</span><span class="p">}</span>
+                                       <span class="s1">&#39;permutation&#39;</span><span class="p">:</span> <span class="n">actions</span><span class="p">,</span>
+                                       <span class="s1">&#39;ranking&#39;</span><span class="p">:</span> <span class="n">ba</span><span class="o">.</span><span class="n">bachetRanking</span><span class="p">}</span>
 
         <span class="k">if</span> <span class="n">Debug</span><span class="p">:</span>
             <span class="nb">print</span><span class="p">(</span><span class="n">statistics</span><span class="p">)</span>
@@ -2130,10 +2128,10 @@
         <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">resStat</span><span class="p">)</span> <span class="o">&lt;</span> <span class="n">maxNbrOfRankings</span><span class="p">:</span>
             <span class="n">maxNbrOfRankings</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">resStat</span><span class="p">)</span>
         <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">maxNbrOfRankings</span><span class="p">):</span>
-            <span class="n">bachetRankings</span><span class="o">.</span><span class="n">append</span><span class="p">((</span><span class="n">resStat</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="mi">0</span><span class="p">],</span><span class="n">resStat</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="mi">1</span><span class="p">][</span><span class="s1">&#39;optimal&#39;</span><span class="p">]))</span>
+            <span class="n">bachetRankings</span><span class="o">.</span><span class="n">append</span><span class="p">((</span><span class="n">resStat</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="mi">0</span><span class="p">],</span><span class="n">resStat</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="mi">1</span><span class="p">][</span><span class="s1">&#39;ranking&#39;</span><span class="p">]))</span>
         <span class="n">rankings</span> <span class="o">=</span> <span class="p">[</span><span class="n">bachetRankings</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="mi">1</span><span class="p">]</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">maxNbrOfRankings</span><span class="p">)]</span>
         <span class="k">if</span> <span class="n">Debug</span><span class="p">:</span>
-            <span class="nb">print</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">rankings</span><span class="p">),</span><span class="n">rankings</span><span class="p">)</span>
+            <span class="nb">print</span><span class="p">(</span><span class="n">bachetRankings</span><span class="p">)</span>
         <span class="n">ba1</span> <span class="o">=</span> <span class="n">RankingsFusionDigraph</span><span class="p">(</span><span class="n">g</span><span class="p">,</span><span class="n">rankings</span><span class="p">)</span>
         <span class="c1">#ba1.resStat = resStat</span>
         <span class="n">ba1</span><span class="o">.</span><span class="n">bachetRankings</span> <span class="o">=</span> <span class="n">bachetRankings</span>

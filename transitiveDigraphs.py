@@ -1889,9 +1889,9 @@ class PartialBachetRanking(TransitiveDigraph):
     >>> from outrankingDigraphs import BipolarOutrankingDigraph
     >>> g = BipolarOutrankingDigraph(t)
     >>> from transitiveDigraphs import PartialBachetRanking
-    >>> wg = PartialBachetRanking(g,randomized=100,seed=100,
+    >>> pbr = PartialBachetRanking(g,randomized=100,seed=100,
     ...                       maxNbrOfRankings=10)
-    >>> wg.showTransitiveDigraph(WithCoverCredibility=True)
+    >>> pbr.showTransitiveDigraph(WithCoverCredibility=True)
      Ranking by Choosing and Rejecting
       1st ranked ['a04'] (1.00)
         2nd ranked ['a02', 'a05', 'a06', 'a11', 'a18', 'a20'] (0.70)
@@ -1899,9 +1899,9 @@ class PartialBachetRanking(TransitiveDigraph):
           3rd last ranked ['a09', 'a10', 'a14']) (0.33)
         2nd last ranked ['a01', 'a03', 'a12', 'a13', 'a15']) (0.60)
       1st last ranked ['a07', 'a08', 'a17', 'a19']) (0.80)
-    >>> vwg = PartialBachetRanking(g,Polarised=False,randomized=100,
+    >>> vpbr = PartialBachetRanking(g,Polarised=False,randomized=100,
     ...                      seed=100,maxNbrOfRankings=10)
-    >>> vwg.showTransitiveDigraph(WithCoverCredibility=True)
+    >>> vpbr.showTransitiveDigraph(WithCoverCredibility=True)
      Ranking by Choosing and Rejecting
       1st ranked ['a04'] (1.00)
         2nd ranked ['a02', 'a05', 'a06', 'a18'] (0.77)
@@ -1935,10 +1935,8 @@ class PartialBachetRanking(TransitiveDigraph):
             ba = BachetRanking(g,actionsList=actions,BestQualified=False)
             corrKey = '%.4f' % ba.correlation
             try:
-                statistics[corrKey]['rankings'] = actions
-                statistics[corrKey]['optimal'] = ba.bachetRanking
+                statistics[corrKey]['freq'] += 1
                 j += 1
-                statistics[corrKey]['freq'] = j
                 if Debug:
                     print(corrKey,j)
             except:
@@ -1946,8 +1944,8 @@ class PartialBachetRanking(TransitiveDigraph):
                 if Debug:
                     print(corrKey,j)
                 statistics[corrKey] = {'freq': j,
-                                       'rankings': actions,
-                                       'optimal': ba.bachetRanking}
+                                       'permutation': actions,
+                                       'ranking': ba.bachetRanking}
 
         if Debug:
             print(statistics)
@@ -1958,10 +1956,10 @@ class PartialBachetRanking(TransitiveDigraph):
         if len(resStat) < maxNbrOfRankings:
             maxNbrOfRankings = len(resStat)
         for i in range(maxNbrOfRankings):
-            bachetRankings.append((resStat[i][0],resStat[i][1]['optimal']))
+            bachetRankings.append((resStat[i][0],resStat[i][1]['ranking']))
         rankings = [bachetRankings[i][1] for i in range(maxNbrOfRankings)]
         if Debug:
-            print(len(rankings),rankings)
+            print(bachetRankings)
         ba1 = RankingsFusionDigraph(g,rankings)
         #ba1.resStat = resStat
         ba1.bachetRankings = bachetRankings
