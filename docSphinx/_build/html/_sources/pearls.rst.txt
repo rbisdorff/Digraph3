@@ -3471,7 +3471,7 @@ To explore this opportunity, a :py:meth:`~digraphs.Digraph.showBachetChoiceRecom
 .. code-block:: pycon
    :caption: *Bachet* first and last choice recommendations
    :name: BachetBCR0
-   :emphasize-lines: 3-5,8,14
+   :emphasize-lines: 3-4,7,14
 
    >>> from outrankingDigraphs import RandomBipolarOutrankingDigraph
    >>> g = RandomBipolarOutrankingDigraph(numberOfActions=9,seed=1)
@@ -3488,7 +3488,7 @@ To explore this opportunity, a :py:meth:`~digraphs.Digraph.showBachetChoiceRecom
        2nd last ranked ['a8']
      1st last ranked ['a1', 'a3', 'a7']
 
-Alternative *a2* appears clearly as the first-choice candidate, whereas alternatives *a1*, *a3* and *a7* appear as potential last-choice candidates (see Lines 8 and 14 above).
+Alternative *a2* appears clearly as the first-choice candidate, whereas alternatives *a1*, *a3* and *a7* appear as potential last-choice candidates (see Lines 7 and 14 above).
 
 In order to provide information about the the underlying :py:class:`~transitiveDigraphs.PartialBachetRanking` digraph, the corresponding instance is stored in the *g.pbr* attribute. We may thus consult the five Bachet rankings used by the :py:class:`~transitiveDigraphs.RankingsFusionDigraph` constructor and provide the best correlated one for ranking the performance heatmap of the given performance tableau (see Lines 2 and 12-13 below).
 
