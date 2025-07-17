@@ -2993,14 +2993,13 @@ Back to :ref:`Content Table <Pearls-label>`
 
 .. _Bachet-Tutorial-label:
 
-Ranking-by-scoring with bipolar-valued base 3 encoded numbers
-`````````````````````````````````````````````````````````````
-
+Ranking-by-scoring with bipolar-valued base 3 encoded Bachet numbers
+````````````````````````````````````````````````````````````````````
 .. epigraph::
-   "*Being proposed to assess with a weight balance a quantity weighing an integer number of pounds between 1 and 40 included, how many balance weights at minimum are needed for being able to do so*" [24]_
+   
+   "*Estant proposee telle quantité qu'on voudra pesant un nombre de livres despuis 1. iusques à 40. inclusivement (sans toutefois admettre les fractions ) on demande combien de pois pour le moins il faudrait employer à cet effect.*" 
 
-   -- Cl. G. Bachet (1622)
-
+   -- Cl. G. Bachet (1622) [24]_
 
 .. contents:: 
    :depth: 1
@@ -3009,7 +3008,7 @@ Ranking-by-scoring with bipolar-valued base 3 encoded numbers
 Bipolar-valued base 3 encoded Bachet numbers
 ............................................
 
-Bipolar-valued {-1,0,+1} base 3 encoded integers are due to *Claude Gaspard Bachet de Méziriac* (1581-1638) [20]_. The idea is to represent the value of an integer *n* in a base 3 positional numeration where in each position may appear a **signed bit** --one of the three symbols **{-1,0,+1}**-- called hereafter **sbits** for short.
+Bipolar-valued {-1,0,+1} base 3 encoded integers are due to *Claude Gaspard Bachet Sieur de Méziriac* (1581-1638) [20]_. The idea is to represent the value of an integer *n* in a base 3 positional numeration where in each position may appear a **signed bit** --one of the three symbols **{-1,0,+1}**-- called hereafter **sbits** for short.
 
 *Bachet*'s positional *sbits* numeration is simulating a weight balance scale where the number *n* and the potential negative powers of 3 are put on the right tray and the potential positive powers of 3 are put on the left tray. The equation for *n = 5* gives for instance :math:`3^2 = (n + 3^1 + 3^0)`. And the *sbits* encoding corresponds hence to the string '+1-1-1'. As, this representation is isomorphic to a base 3 binary encoding, every positive or negative integer may this way be represented with a unique *sbits* string. With four powers of 3, namely :math:`{3^3, 3^2, 3^1, 3^0}`, one may for instance represent any value in the integer range -40 to +40. *Bachet* showed that this bipolar weighing system relies on the smallest possible number of balance weights -base powers- needed in order to balance the scale for any given integer weight *n* [BAC-1622p]_.
 
@@ -3127,7 +3126,7 @@ If we reverse however the given ordering of the *actions* dictionary, we may obt
    :caption: Importance of the actions ordering
    :name: actionsOrdering
    :linenos:
-   :emphasize-lines: 1,5-8,15,21,24
+   :emphasize-lines: 1-2,6-9,16,22,25
 
    >>> pg.showRelationTable(actionsSubset=['a4','a3','a2','a1'],
    ...                      RefelxiveTerms=False)
@@ -5377,7 +5376,7 @@ Appendix
 
 .. [23] To prove the *Condorcet consistency* property of the *Bachet* ranking rule, it is sufficient to notice that the contributions of a transitive triplet *'ai' > 'aj' > 'ak'* to the corresponding *Bachet* ranking scores will respect the actual ordering of the triplet with all positional permutations of [..., ai, ..., aj, ...,ak, ...] in a relation table.
 
-.. [24] "*Estant proposee telle quantité qu'on voudra pesant un nombre de livres despuis 1. iusques à 40. inclusivement (sans toutefois admettre les fractions ) on demande combien de pois pour le moins il faudrait employer à cet effect.*".
+.. [24] "*Being proposed to assess with a weight balance a quantity weighing an integer number of pounds between 1 and 40 included, how many balance weights at minimum are needed for being able to do so*".
 
 .. raw:: latex
 

@@ -118,7 +118,7 @@
 <li class="toctree-l4"><a class="reference internal" href="#exploring-the-better-rated-and-the-as-well-as-rated-opinions">3.3.2.5. Exploring the <em>better rated</em>  and the <em>as well as rated</em> opinions</a></li>
 </ul>
 </li>
-<li class="toctree-l3"><a class="reference internal" href="#ranking-by-scoring-with-bipolar-valued-base-3-encoded-numbers">3.3.3. Ranking-by-scoring with bipolar-valued base 3 encoded numbers</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#ranking-by-scoring-with-bipolar-valued-base-3-encoded-bachet-numbers">3.3.3. Ranking-by-scoring with bipolar-valued base 3 encoded Bachet numbers</a><ul>
 <li class="toctree-l4"><a class="reference internal" href="#bipolar-valued-base-3-encoded-bachet-numbers">3.3.3.1. Bipolar-valued base 3 encoded Bachet numbers</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#examples-of-sbits-encoded-bachet-numbers">3.3.3.2. Examples of sbits encoded Bachet numbers</a></li>
 <li class="toctree-l4"><a class="reference internal" href="#the-bachet-ranking-rule-a-new-ranking-by-scoring-method">3.3.3.3. The Bachet ranking rule, a new ranking-by-scoring method</a></li>
@@ -2540,7 +2540,7 @@ confidence level <em>alpha</em> %, when</p>
 <ul class="simple">
 <li><p><a class="reference internal" href="#coping-with-missing-data-and-indeterminateness" id="id137">Coping with missing data and indeterminateness</a></p></li>
 <li><p><a class="reference internal" href="#ordinal-correlation-equals-bipolar-valued-relational-equivalence" id="id138">Ordinal correlation equals bipolar-valued relational equivalence</a></p></li>
-<li><p><a class="reference internal" href="#ranking-by-scoring-with-bipolar-valued-base-3-encoded-numbers" id="id139">Ranking-by-scoring with bipolar-valued base 3 encoded numbers</a></p></li>
+<li><p><a class="reference internal" href="#ranking-by-scoring-with-bipolar-valued-base-3-encoded-bachet-numbers" id="id139">Ranking-by-scoring with bipolar-valued base 3 encoded Bachet numbers</a></p></li>
 <li><p><a class="reference internal" href="#on-computing-digraph-kernels" id="id140">On computing digraph kernels</a></p></li>
 <li><p><a class="reference internal" href="#bipolar-valued-kernel-membership-characteristic-vectors" id="id141">Bipolar-valued kernel membership characteristic vectors</a></p></li>
 <li><p><a class="reference internal" href="#on-characterizing-bipolar-valued-outranking-digraphs" id="id142">On characterizing bipolar-valued outranking digraphs</a></p></li>
@@ -2939,11 +2939,11 @@ heat map above (see <a class="reference internal" href="#graffiti07-2"><span cla
 <hr class="docutils" />
 </section>
 </section>
-<section id="ranking-by-scoring-with-bipolar-valued-base-3-encoded-numbers">
-<span id="bachet-tutorial-label"></span><h3><a class="toc-backref" href="#id139" role="doc-backlink"><span class="section-number">3.3.3. </span>Ranking-by-scoring with bipolar-valued base 3 encoded numbers</a><a class="headerlink" href="#ranking-by-scoring-with-bipolar-valued-base-3-encoded-numbers" title="Link to this heading"></a></h3>
+<section id="ranking-by-scoring-with-bipolar-valued-base-3-encoded-bachet-numbers">
+<span id="bachet-tutorial-label"></span><h3><a class="toc-backref" href="#id139" role="doc-backlink"><span class="section-number">3.3.3. </span>Ranking-by-scoring with bipolar-valued base 3 encoded Bachet numbers</a><a class="headerlink" href="#ranking-by-scoring-with-bipolar-valued-base-3-encoded-bachet-numbers" title="Link to this heading"></a></h3>
 <blockquote class="epigraph">
-<div><p>“<em>Being proposed to assess with a weight balance a quantity weighing an integer number of pounds between 1 and 40 included, how many balance weights at minimum are needed for being able to do so</em>” <a class="footnote-reference brackets" href="#id100" id="id37" role="doc-noteref"><span class="fn-bracket">[</span>24<span class="fn-bracket">]</span></a></p>
-<p class="attribution">—Cl. G. Bachet (1622)</p>
+<div><p>“<em>Estant proposee telle quantité qu’on voudra pesant un nombre de livres despuis 1. iusques à 40. inclusivement (sans toutefois admettre les fractions ) on demande combien de pois pour le moins il faudrait employer à cet effect.</em>”</p>
+<p class="attribution">—Cl. G. Bachet (1622) <a class="footnote-reference brackets" href="#id100" id="id37" role="doc-noteref"><span class="fn-bracket">[</span>24<span class="fn-bracket">]</span></a></p>
 </div></blockquote>
 <nav class="contents local" id="id38">
 <ul class="simple">
@@ -2956,7 +2956,7 @@ heat map above (see <a class="reference internal" href="#graffiti07-2"><span cla
 </nav>
 <section id="bipolar-valued-base-3-encoded-bachet-numbers">
 <h4><a class="toc-backref" href="#id149" role="doc-backlink"><span class="section-number">3.3.3.1. </span>Bipolar-valued base 3 encoded Bachet numbers</a><a class="headerlink" href="#bipolar-valued-base-3-encoded-bachet-numbers" title="Link to this heading"></a></h4>
-<p>Bipolar-valued {-1,0,+1} base 3 encoded integers are due to <em>Claude Gaspard Bachet de Méziriac</em> (1581-1638) <a class="footnote-reference brackets" href="#id96" id="id39" role="doc-noteref"><span class="fn-bracket">[</span>20<span class="fn-bracket">]</span></a>. The idea is to represent the value of an integer <em>n</em> in a base 3 positional numeration where in each position may appear a <strong>signed bit</strong> –one of the three symbols <strong>{-1,0,+1}</strong>– called hereafter <strong>sbits</strong> for short.</p>
+<p>Bipolar-valued {-1,0,+1} base 3 encoded integers are due to <em>Claude Gaspard Bachet Sieur de Méziriac</em> (1581-1638) <a class="footnote-reference brackets" href="#id96" id="id39" role="doc-noteref"><span class="fn-bracket">[</span>20<span class="fn-bracket">]</span></a>. The idea is to represent the value of an integer <em>n</em> in a base 3 positional numeration where in each position may appear a <strong>signed bit</strong> –one of the three symbols <strong>{-1,0,+1}</strong>– called hereafter <strong>sbits</strong> for short.</p>
 <p><em>Bachet</em>’s positional <em>sbits</em> numeration is simulating a weight balance scale where the number <em>n</em> and the potential negative powers of 3 are put on the right tray and the potential positive powers of 3 are put on the left tray. The equation for <em>n = 5</em> gives for instance <img class="math" src="_images/math/925d3cdbf9761dd4bbab603ccc18d0d1af510fb0.png" alt="3^2 = (n + 3^1 + 3^0)"/>. And the <em>sbits</em> encoding corresponds hence to the string ‘+1-1-1’. As, this representation is isomorphic to a base 3 binary encoding, every positive or negative integer may this way be represented with a unique <em>sbits</em> string. With four powers of 3, namely <img class="math" src="_images/math/a7719c02539a8a801d939b912bd5be0b45761912.png" alt="{3^3, 3^2, 3^1, 3^0}"/>, one may for instance represent any value in the integer range -40 to +40. <em>Bachet</em> showed that this bipolar weighing system relies on the smallest possible number of balance weights -base powers- needed in order to balance the scale for any given integer weight <em>n</em> <a class="reference internal" href="#bac-1622p" id="id40"><span>[BAC-1622p]</span></a>.</p>
 <p>The Digraph3 <a class="reference internal" href="techDoc.html#module-arithmetics" title="arithmetics"><code class="xref py py-mod docutils literal notranslate"><span class="pre">arithmetics</span></code></a> module provides with the <a class="reference internal" href="techDoc.html#arithmetics.BachetNumber" title="arithmetics.BachetNumber"><code class="xref py py-class docutils literal notranslate"><span class="pre">BachetNumber</span></code></a> class an implementation for such <em>sbits</em> encoded integers. Instantiating a <em>Bachet</em> number may be done either with an integer value or with a vector of sbits (see <a class="reference internal" href="#bachetnumbers"><span class="std std-numref">Listing 3.43</span></a> Lines  2, 6, 11 and 15). The class provides a binary <em>addition</em> method and unary <em>negating</em> and <em>reversing</em> methods as illustrated in Lines 20 and 32-33 below.</p>
 <div class="literal-block-wrapper docutils container" id="bachetnumbers">
@@ -3058,31 +3058,31 @@ heat map above (see <a class="reference internal" href="#graffiti07-2"><span cla
 <div class="literal-block-wrapper docutils container" id="actionsordering">
 <div class="code-block-caption"><span class="caption-number">Listing 3.45 </span><span class="caption-text">Importance of the actions ordering</span><a class="headerlink" href="#actionsordering" title="Link to this code"></a></div>
 <div class="highlight-pycon notranslate"><div class="highlight"><pre><span></span><span class="hll"><span class="linenos"> 1</span><span class="gp">&gt;&gt;&gt; </span><span class="n">pg</span><span class="o">.</span><span class="n">showRelationTable</span><span class="p">(</span><span class="n">actionsSubset</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;a4&#39;</span><span class="p">,</span><span class="s1">&#39;a3&#39;</span><span class="p">,</span><span class="s1">&#39;a2&#39;</span><span class="p">,</span><span class="s1">&#39;a1&#39;</span><span class="p">],</span>
-</span><span class="linenos"> 2</span><span class="gp">... </span>                     <span class="n">RefelxiveTerms</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
-<span class="linenos"> 3</span><span class="go"> * ---- Relation Table -----</span>
+</span><span class="hll"><span class="linenos"> 2</span><span class="gp">... </span>                     <span class="n">RefelxiveTerms</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+</span><span class="linenos"> 3</span><span class="go"> * ---- Relation Table -----</span>
 <span class="linenos"> 4</span><span class="go">    S   | &#39;a4&#39; &#39;a3&#39; &#39;a2&#39; &#39;a1&#39;</span>
-<span class="hll"><span class="linenos"> 5</span><span class="go">  ------|----------------------</span>
-</span><span class="hll"><span class="linenos"> 6</span><span class="go">   &#39;a4&#39; |   -    1    1    1</span>
+<span class="linenos"> 5</span><span class="go">  ------|----------------------</span>
+<span class="hll"><span class="linenos"> 6</span><span class="go">   &#39;a4&#39; |   -    1    1    1</span>
 </span><span class="hll"><span class="linenos"> 7</span><span class="go">   &#39;a3&#39; |  -1    -    1    1</span>
 </span><span class="hll"><span class="linenos"> 8</span><span class="go">   &#39;a2&#39; |  -1   -1    -    1</span>
-</span><span class="linenos"> 9</span><span class="go">   &#39;a1&#39; |  -1    1    0    -</span>
-<span class="linenos">10</span><span class="go">  Valuation domain: [-1;+1]</span>
+</span><span class="hll"><span class="linenos"> 9</span><span class="go">   &#39;a1&#39; |  -1    1    0    -</span>
+</span><span class="linenos">10</span><span class="go">  Valuation domain: [-1;+1]</span>
 <span class="linenos">11</span><span class="gp">&gt;&gt;&gt; </span><span class="n">ra4</span> <span class="o">=</span> <span class="n">BachetNumber</span><span class="p">(</span><span class="n">vector</span><span class="o">=</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">])</span>
 <span class="linenos">12</span><span class="gp">&gt;&gt;&gt; </span><span class="n">ra3</span> <span class="o">=</span> <span class="n">BachetNumber</span><span class="p">(</span><span class="n">vector</span><span class="o">=</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">])</span>
 <span class="linenos">13</span><span class="gp">&gt;&gt;&gt; </span><span class="n">ra2</span> <span class="o">=</span> <span class="n">BachetNumber</span><span class="p">(</span><span class="n">vector</span><span class="o">=</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">])</span>
 <span class="linenos">14</span><span class="gp">&gt;&gt;&gt; </span><span class="n">ra1</span> <span class="o">=</span> <span class="n">BachetNumber</span><span class="p">(</span><span class="n">vector</span><span class="o">=</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">0</span><span class="p">])</span>
-<span class="hll"><span class="linenos">15</span><span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span> <span class="n">ra1</span><span class="o">.</span><span class="n">value</span><span class="p">(),</span> <span class="n">ra2</span><span class="o">.</span><span class="n">value</span><span class="p">(),</span> <span class="n">ra3</span><span class="o">.</span><span class="n">value</span><span class="p">(),</span> <span class="n">ra4</span><span class="o">.</span><span class="n">value</span><span class="p">()</span> <span class="p">)</span>
-</span><span class="linenos">16</span><span class="go"> -6 -11 -5 13</span>
-<span class="linenos">17</span><span class="gp">&gt;&gt;&gt; </span><span class="n">ca4</span> <span class="o">=</span> <span class="n">BachetNumber</span><span class="p">(</span><span class="n">vector</span><span class="o">=</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span>
+<span class="linenos">15</span><span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span> <span class="n">ra1</span><span class="o">.</span><span class="n">value</span><span class="p">(),</span> <span class="n">ra2</span><span class="o">.</span><span class="n">value</span><span class="p">(),</span> <span class="n">ra3</span><span class="o">.</span><span class="n">value</span><span class="p">(),</span> <span class="n">ra4</span><span class="o">.</span><span class="n">value</span><span class="p">()</span> <span class="p">)</span>
+<span class="hll"><span class="linenos">16</span><span class="go"> -6 -11 -5 13</span>
+</span><span class="linenos">17</span><span class="gp">&gt;&gt;&gt; </span><span class="n">ca4</span> <span class="o">=</span> <span class="n">BachetNumber</span><span class="p">(</span><span class="n">vector</span><span class="o">=</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span>
 <span class="linenos">18</span><span class="gp">&gt;&gt;&gt; </span><span class="n">ca3</span> <span class="o">=</span> <span class="n">BachetNumber</span><span class="p">(</span><span class="n">vector</span><span class="o">=</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">])</span>
 <span class="linenos">19</span><span class="gp">&gt;&gt;&gt; </span><span class="n">ca2</span> <span class="o">=</span> <span class="n">BachetNumber</span><span class="p">(</span><span class="n">vector</span><span class="o">=</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">0</span><span class="p">])</span>
 <span class="linenos">20</span><span class="gp">&gt;&gt;&gt; </span><span class="n">ca1</span> <span class="o">=</span> <span class="n">BachetNumber</span><span class="p">(</span><span class="n">vector</span><span class="o">=</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">])</span>
-<span class="hll"><span class="linenos">21</span><span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span> <span class="n">ca1</span><span class="o">.</span><span class="n">value</span><span class="p">(),</span> <span class="n">ca2</span><span class="o">.</span><span class="n">value</span><span class="p">(),</span> <span class="n">ca3</span><span class="o">.</span><span class="n">value</span><span class="p">(),</span> <span class="n">ca4</span><span class="o">.</span><span class="n">value</span><span class="p">()</span> <span class="p">)</span>
-</span><span class="linenos">22</span><span class="go"> 13 12 7 -13</span>
-<span class="linenos">23</span><span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span> <span class="n">ra4</span><span class="o">.</span><span class="n">value</span><span class="p">()</span><span class="o">-</span><span class="n">ca4</span><span class="o">.</span><span class="n">value</span><span class="p">(),</span> <span class="n">ra3</span><span class="o">.</span><span class="n">value</span><span class="p">()</span><span class="o">-</span><span class="n">ca3</span><span class="o">.</span><span class="n">value</span><span class="p">(),</span>
-<span class="hll"><span class="linenos">24</span><span class="gp">... </span>       <span class="n">ra2</span><span class="o">.</span><span class="n">value</span><span class="p">()</span><span class="o">-</span><span class="n">ca2</span><span class="o">.</span><span class="n">value</span><span class="p">(),</span> <span class="n">ra1</span><span class="o">.</span><span class="n">value</span><span class="p">()</span><span class="o">-</span><span class="n">ca1</span><span class="o">.</span><span class="n">value</span><span class="p">())</span>
-</span><span class="linenos">25</span><span class="go"> 26 -12 -23 -19</span>
-</pre></div>
+<span class="linenos">21</span><span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span> <span class="n">ca1</span><span class="o">.</span><span class="n">value</span><span class="p">(),</span> <span class="n">ca2</span><span class="o">.</span><span class="n">value</span><span class="p">(),</span> <span class="n">ca3</span><span class="o">.</span><span class="n">value</span><span class="p">(),</span> <span class="n">ca4</span><span class="o">.</span><span class="n">value</span><span class="p">()</span> <span class="p">)</span>
+<span class="hll"><span class="linenos">22</span><span class="go"> 13 12 7 -13</span>
+</span><span class="linenos">23</span><span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span> <span class="n">ra4</span><span class="o">.</span><span class="n">value</span><span class="p">()</span><span class="o">-</span><span class="n">ca4</span><span class="o">.</span><span class="n">value</span><span class="p">(),</span> <span class="n">ra3</span><span class="o">.</span><span class="n">value</span><span class="p">()</span><span class="o">-</span><span class="n">ca3</span><span class="o">.</span><span class="n">value</span><span class="p">(),</span>
+<span class="linenos">24</span><span class="gp">... </span>       <span class="n">ra2</span><span class="o">.</span><span class="n">value</span><span class="p">()</span><span class="o">-</span><span class="n">ca2</span><span class="o">.</span><span class="n">value</span><span class="p">(),</span> <span class="n">ra1</span><span class="o">.</span><span class="n">value</span><span class="p">()</span><span class="o">-</span><span class="n">ca1</span><span class="o">.</span><span class="n">value</span><span class="p">())</span>
+<span class="hll"><span class="linenos">25</span><span class="go"> 26 -12 -23 -19</span>
+</span></pre></div>
 </div>
 </div>
 <p>With the reversed <em>Bachet</em> numbers we obtain the ranking ‘a4’ (26) &gt; ‘a3’ (-12) &gt; ‘a1’ (-19) &gt; ‘a2’ (-23). This ranking result is less well correlated (+0.526) with the given outranking digraph, but corresponds in fact to the actual <em>Copeland</em> ranking.</p>
@@ -5093,7 +5093,7 @@ Technologies</em>, Aachen, September 8-11, 1997}, pp 97–103.</p>
 </aside>
 <aside class="footnote brackets" id="id100" role="doc-footnote">
 <span class="label"><span class="fn-bracket">[</span><a role="doc-backlink" href="#id37">24</a><span class="fn-bracket">]</span></span>
-<p>“<em>Estant proposee telle quantité qu’on voudra pesant un nombre de livres despuis 1. iusques à 40. inclusivement (sans toutefois admettre les fractions ) on demande combien de pois pour le moins il faudrait employer à cet effect.</em>”.</p>
+<p>“<em>Being proposed to assess with a weight balance a quantity weighing an integer number of pounds between 1 and 40 included, how many balance weights at minimum are needed for being able to do so</em>”.</p>
 </aside>
 </aside>
 </section>
@@ -5111,7 +5111,7 @@ Technologies</em>, Aachen, September 8-11, 1997}, pp 97–103.</p>
 
   <div role="contentinfo">
     <p>&#169; Copyright 2012-2025, Raymond Bisdorff.
-      <span class="lastupdated">Last updated on Jul 16, 2025.
+      <span class="lastupdated">Last updated on Jul 17, 2025.
       </span></p>
   </div>
 
