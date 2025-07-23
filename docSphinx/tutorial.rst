@@ -1569,7 +1569,7 @@ We are ready now for building a first choice recommendation.
 Computing the first choice recommendation
 `````````````````````````````````````````
 
-Following the previously stated pragmatic principles, potential first choice recommendations are determined by the inbitial prekernels --*weakly independent* and *strictly outranking* choices-- of the strict outranking digraph (see the tutorial on :ref:`computing digraph kernels <Kernel-Tutorial-label>`). Any detected chordless odd outranking circuits are by default broken up (see [BIS-2008]_).
+Following the previously stated pragmatic principles, potential first choice recommendations are determined by the initial prekernels --*weakly independent* and *strictly outranking* choices-- of the strict outranking digraph (see the tutorial on :ref:`computing digraph kernels <Kernel-Tutorial-label>`). Any detected chordless odd outranking circuits are by default broken up (see [BIS-2008]_).
 
 .. code-block:: pycon
    :name: strictBestChoice

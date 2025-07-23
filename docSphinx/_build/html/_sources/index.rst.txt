@@ -137,7 +137,7 @@ The documentation contains, first, a set of tutorials introducing the main objec
 
 The second Section concerns the **extensive reference manual** of the collection of provided Python3 modules, classes and methods. The main classes in this collection are the :py:class:`digraphs.Digraph` overall root class, the :py:class:`perfTabs.PerformanceTableau` class and the :py:class:`outrankingDigraphs.BipolarOutrankingDigraph` class. The technical documentation also provides insight into the complete source code of all modules, classes and methods.
 
-The third Section exhibits some pearls of **bipolar-valued epistemic logic** that enrich the Digraph3 resources. These short topics illustrate well the very computational benefit one may get when working in a bipolar-valued logical framework. And, more specifically, the essential part the *logically neutral* **undeterminate** value is judiciously playing therein.  
+The third Section exhibits some pearls of **bipolar-valued epistemic logic** that enrich the Digraph3 resources. These short topics illustrate well the very computational benefit one may get when working in a bipolar-valued logical framework. And, more specifically, the essential part the *logically neutral* **indeterminate** value is judiciously playing therein.  
 
 The fourth and fifth sections provide 2x2-reduced notes of the author's lectures on **Algorithmic Decision Theory** and **Computational Statistics** given at the University of Luxembourg in Autumn 2019 and Spring 2020.
 
