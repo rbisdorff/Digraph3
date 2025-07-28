@@ -3749,7 +3749,7 @@ In :numref:`weakBachet3` Line 6, we notice that we sample 100 *Bachet* rankings 
        2nd ranked ['a6']
        2nd last ranked ['a1', 'a3', 'a4', 'a7'])
      1st last ranked ['a2', 'a8', 'a9'])
-   >>> pbr.showCorrelation(wb.partialBachetCorrelation)
+   >>> pbr.showCorrelation(pbr.partialBachetCorrelation)
     Correlation indexes:
      Crisp ordinal correlation  : +0.806
      Epistemic determination    :  0.179
@@ -3768,7 +3768,7 @@ In :numref:`weakBachet3` Line 6, we notice that we sample 100 *Bachet* rankings 
 
 The resulting *partial ranking* is highly correlated with the common determinated part of the given outranking digraph *g* (+0.806) leading to a *relational equivalence* with the given outranking digraph *g* supported by a criteria significance majority of 57.2% (see Lines 9-11 above).
 
-We recover with the *Bachet* ranking rule a ranking consensus actually very similar to the previous consensus obtained from of all four *ranking-by-scoring* results (see :numref:`rankingConsensusFigure`).
+We recover with the *Bachet* ranking rule a ranking consensus actually very similar to the previous consensus obtained from all four *ranking-by-scoring* results (see :numref:`rankingConsensusFigure`).
 
 The :py:class:`~transitiveDigraphs.PartialBachetRanking` constructor uses by default the *polarised* version of the *Bachet* ranking rule. Due to its *Condorcet consistency* property, the partial ranking result obtained in :numref:`weakBachetpol` represents in fact a ranking consensus respecting the actual **transitive parts** of the given outranking digraph (see the advanced topic dedicated to the :ref:`Bachet ranking rules <Bachet-Tutorial-label>`).
 
@@ -3803,7 +3803,7 @@ In :numref:`weakBachet6` Lines 3-6 we observe now a partial ranking taking into 
        2nd ranked ['a7'], 
        2nd last ranked [''a3', 'a8'])
      1st last ranked ['a1', 'a2', 'a4', 'a9'])
-   >>> pvbr.showCorrelation(wbv.weakBachetCorrelation)
+   >>> pvbr.showCorrelation(pvbr.weakBachetCorrelation)
     Correlation indexes:
      Crisp ordinal correlation  : +0.888
      Epistemic determination    :  0.157
