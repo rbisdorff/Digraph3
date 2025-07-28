@@ -1723,20 +1723,20 @@ In :numref:`BachetRanking0` Line 2, we operate the :ref:`epistemic disjunctive f
    :emphasize-lines: 2,4-8,11,14
 
    >>> from transitiveDigraphs import PartialBachetRanking
-   >>> wbr = PartialBachetRanking(g,randomized=200,maxNbrOfRankings=5,seed=3)
-   >>> wbr.bachetRankings
+   >>> pbr = PartialBachetRanking(g,randomized=200,maxNbrOfRankings=5,seed=3)
+   >>> pbr.bachetRankings
     [(0.816, ['G', 'D', 'A', 'C', 'B', 'E', 'F']),
      (0.788, ['G', 'D', 'E', 'B', 'A', 'C', 'F']),
      (0.778, ['A', 'D', 'C', 'G', 'E', 'B', 'F']),
      (0.758, ['D', 'A', 'C', 'G', 'E', 'B', 'F']),
      (0.756, ['G', 'C', 'D', 'A', 'E', 'B', 'F'])]
-   >>> wbr.showTransitiveDigraph()
+   >>> pbr.showTransitiveDigraph()
     Ranking by Choosing and Rejecting
     1st ranked ['A', 'C', 'D', 'G']
        2nd ranked ['B', 'E']
        2nd last ranked ['B', 'E']
     1st last ranked ['F']
-   >>> wbr.exportGraphViz('officeChoiceRanking',ArrowHeads=True)
+   >>> pbr.exportGraphViz('officeChoiceRanking',ArrowHeads=True)
     *---- exporting a dot file for GraphViz tools ---------*
     Exporting to officeChoiceRanking.dot
     dot -Grankdir=TB -Tpng officeChoiceRanking.dot -o officeChoiceRanking.png
@@ -1756,7 +1756,7 @@ In :numref:`BachetRanking0` Line 2, we operate the :ref:`epistemic disjunctive f
    :linenos:
    :emphasize-lines: 1,5,7,8,10-11,13
 	
-   >>> wbr.computePartialOutrankingConsensusQuality(Comments=True)
+   >>> pbr.computePartialOutrankingConsensusQuality(Comments=True)
     Consensus quality of partial ranking:
     Criterion (weight)    : ordinal correlation
     ---------------------------------------
@@ -1776,7 +1776,7 @@ The partial Bachet ranking is a 100% consistent with the *Proximity* criterion, 
 
 We may finally use the best, with the outranking digraph *g* correlated (+0.816), *Bachet* ranking ['G', 'D', 'A', 'C', 'B', 'E', 'F']  for showing in :numref:`rankedOfficeChoiceHeatmap` a from best to worst ranked performance heatmap of all the potential office locations.
 
->>> t.showHTMLPerformanceHeatmap(actionsList=wbr.bachetRankings[0][1],
+>>> t.showHTMLPerformanceHeatmap(actionsList=pbr.bachetRankings[0][1],
    ...                              Correlations=True)
 
 .. figure:: rankedOfficeChoiceHeatmap.png
@@ -3715,8 +3715,8 @@ As we have noticed before, the randomized *polarised Bachet* ranking rule produc
    ...                       numberOfCriteria=13,seed=200)
    >>> g = BipolarOutrankingDigraph(t,Normalized=True)
    >>> from transitiveDigraphs import PartialBachetRanking
-   >>> wb = PartialBachetRanking(g,randomized=100,seed=1,maxNbrOfRankings=5)
-   >>> wb
+   >>> pbr = PartialBachetRanking(g,randomized=100,seed=1,maxNbrOfRankings=5)
+   >>> pbr
     *------- Digraph instance description ------*
      Instance class      : PartialBachetRanking
      Instance name       : rel_randomCBperftab_wk
@@ -3729,7 +3729,7 @@ As we have noticed before, the randomized *polarised Bachet* ranking rule produc
                             'randomized', 'seed', 'bachetRankings',
 		            'maxNbrOfRankings','Polarised',
 			    'partialBachetCorrelation']
-   >>> wb.bachetRankings
+   >>> pbr.bachetRankings
     [(0.6824, ['a5', 'a6', 'a3', 'a4', 'a1', 'a7', 'a8', 'a9', 'a2']),
      (0.6523, ['a5', 'a6', 'a4', 'a7', 'a1', 'a3', 'a9', 'a2', 'a8']),
      (0.6482, ['a5', 'a6', 'a4', 'a1', 'a7', 'a3', 'a9', 'a2', 'a8']),
@@ -3743,18 +3743,18 @@ In :numref:`weakBachet3` Line 6, we notice that we sample 100 *Bachet* rankings 
    :name: weakBachet4
    :emphasize-lines: 2-6,9-11
 
-   >>> wb.showTransitiveDigraph()
+   >>> pbr.showTransitiveDigraph()
     Ranking by Choosing and Rejecting
      1st ranked ['a5']
        2nd ranked ['a6']
        2nd last ranked ['a1', 'a3', 'a4', 'a7'])
      1st last ranked ['a2', 'a8', 'a9'])
-   >>> wb.showCorrelation(wb.partialBachetCorrelation)
+   >>> pbr.showCorrelation(wb.partialBachetCorrelation)
     Correlation indexes:
      Crisp ordinal correlation  : +0.806
      Epistemic determination    :  0.179
      Bipolar-valued equivalence : +0.144
-   >>> wb.exportGraphViz('weakBachetpol')
+   >>> pbr.exportGraphViz('weakBachetpol')
     *---- exporting a dot file for GraphViz tools ---------*
      Exporting to weakBachetpol.dot
      dot -Grankdir=TB -Tpng weakBachetpol.dot -o weakBachetpol.png
@@ -3779,9 +3779,9 @@ The :py:class:`~transitiveDigraphs.PartialBachetRanking` now provides a "**Polar
    :name: weakBachet5
    :emphasize-lines: 1,4-8
 
-   >>> wbv = PartialBachetRanking(g,Polarised=False,
+   >>> pvbr = PartialBachetRanking(g,Polarised=False,
    ...            randomized=100,seed=1,maxNbrOfRankings=5)
-   >>> wbv.bachetRankings
+   >>> pvbr.bachetRankings
     [(0.6764, ['a6', 'a5', 'a7', 'a4', 'a1', 'a8', 'a3', 'a2', 'a9']),
      (0.6583, ['a5', 'a6', 'a7', 'a1', 'a3', 'a8', 'a2', 'a4', 'a9']),
      (0.6543, ['a5', 'a6', 'a1', 'a7', 'a3', 'a8', 'a2', 'a4', 'a9']),
@@ -3797,18 +3797,18 @@ In :numref:`weakBachet6` Lines 3-6 we observe now a partial ranking taking into 
    :name: weakBachet6
    :emphasize-lines: 3-6,9-11
 
-   >>> wbv.showTransitiveDigraph()
+   >>> pvbr.showTransitiveDigraph()
     Ranking by Choosing and Rejecting
      1st ranked ['a5', 'a6']
        2nd ranked ['a7'], 
        2nd last ranked [''a3', 'a8'])
      1st last ranked ['a1', 'a2', 'a4', 'a9'])
-   >>> wbv.showCorrelation(wbv.weakBachetCorrelation)
+   >>> pvbr.showCorrelation(wbv.weakBachetCorrelation)
     Correlation indexes:
      Crisp ordinal correlation  : +0.888
      Epistemic determination    :  0.157
      Bipolar-valued equivalence : +0.139
-   >>> wbv.exportGraphViz('weakBachetval')
+   >>> pvbr.exportGraphViz('weakBachetval')
     *---- exporting a dot file for GraphViz tools ---------*
      Exporting to weakBachetval.dot
      dot -Grankdir=TB -Tpng weakBachetval.dot -o weakBachetval.png
@@ -3831,7 +3831,7 @@ Let us now verify in :numref:`weakBachet7` below the consensus quality of the pa
    :name: weakBachet7
    :emphasize-lines: 1,5-6,21
 
-   >>> wb.computePartialOutrankingConsensusQuality(Comments=True)
+   >>> pbr.computePartialOutrankingConsensusQuality(Comments=True)
     Consensus quality of partial polarised Bachet ranking
     criterion (weight): bipolar-valued relational equivalence
     -------------------------------
@@ -3862,7 +3862,7 @@ We may redo in :numref:`weakBachet8` below the same computation for the partial 
    :name: weakBachet8
    :emphasize-lines: 1,5-6,16,19-21
 		     
-   >>> wbv.computePartialOutrankingConsensusQuality(Comments=True)
+   >>> pvbr.computePartialOutrankingConsensusQuality(Comments=True)
     Consensus quality of the partial valued Bachet ranking
     criterion (weight): bipolar-valued relational equivalence
     --------------------------------------
