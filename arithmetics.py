@@ -331,10 +331,11 @@ class BachetNumber(object):
         Renders the integer corresponding to the Bachet number
         """
         result_int = 0
-        basePower = 1   # 3**0
-        for i in range(len(self.vector)):
-            result_int += basePower*self.vector[len(self.vector)-i-1]
-            basePower *= 3 # 3**i
+        nv = len(self.vector)
+        base3Power = 1   # 3**0
+        for i in range(nv):
+            result_int += base3Power*self.vector[nv-i-1]
+            base3Power *= 3 # 3**i
         return result_int
 
     def __len__(self):
