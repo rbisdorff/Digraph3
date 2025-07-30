@@ -350,9 +350,10 @@ class BachetNumber(object):
         """
         from copy import deepcopy
         rev = deepcopy(self)
-        result = [0 for i in range(len(self.vector))]
-        for i in range(len(self.vector)):
-            result[i] = self.vector[len(self.vector)-i-1]
+        nv = len(self.vector)
+        result = [0 for i in range(nv)]
+        for i in range(nv):
+            result[i] = self.vector[nv-i-1]
         rev.vector = result
         return rev
 
