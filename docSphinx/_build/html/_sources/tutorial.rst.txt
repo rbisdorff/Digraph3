@@ -3824,7 +3824,7 @@ It is worthwhile noticing in :numref:`weakBachetval` that alternative *a1* appea
 
 Consensus quality of the partial Bachet rankings
 ````````````````````````````````````````````````
-Let us now verify in :numref:`weakBachet7` below the consensus quality of the partial *polarised* Bachet ranking *wb*.
+Let us now verify in :numref:`weakBachet7` below the consensus quality of the partial *polarised* Bachet ranking *pbr*.
 
 .. code-block:: pycon
    :caption: Consensus quality of the partial polarised Bachet ranking

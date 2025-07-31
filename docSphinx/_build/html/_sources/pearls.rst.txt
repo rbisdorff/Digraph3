@@ -3424,14 +3424,14 @@ To explore this opportunity, a new :py:class:`~transitiveDigraphs.PartialBachetR
    >>> from outrankingDigraphs import RandomBipolarOutrankingDigraph
    >>> g = RandomBipolarOutrankingDigraph(numberOfActions=9,seed=1)
    >>> from transitiveDigraphs import PartialBachetRanking
-   >>> wb = PartialBachetRanking(g,randomized=10,seed=4,maxNbrOfRankings=5)
-   >>> wb.showTransitiveDigraph()
+   >>> pbr = PartialBachetRanking(g,randomized=10,seed=4,maxNbrOfRankings=5)
+   >>> pbr.showTransitiveDigraph()
     Ranking by Choosing and Rejecting
      1st ranked ['a2', 'a5', 'a9']
        2nd ranked ['a3', 'a6', 'a8']
        2nd last ranked ['a3', 'a6', 'a8'])
      1st last ranked ['a1', 'a4', 'a7'])
-   >>> g.computeOrdinalCorrelation(wb)
+   >>> g.computeOrdinalCorrelation(pbr)
     Correlation indexes:
      Crisp ordinal correlation  : +0.872
      Epistemic determination    :  0.228
@@ -3441,7 +3441,7 @@ The nine performance records are grouped into three performance equivalence clas
 
 .. code-block:: pycon
 
-   >>> wb.exportGraphViz('partialBachet1')
+   >>> pbr.exportGraphViz('partialBachet1')
     *---- exporting a dot file for GraphViz tools ---------*
     dot -Grankdir=TB -Tpng partialBachet1.dot -o partialBachet1.png
 
@@ -3459,7 +3459,7 @@ The :py:class:`~transitiveDigraphs.PartialBachetRanking` class provides this way
 
 .. code-block:: pycon
 
-   >>> cg = wb.digraph2Graph(ConjunctiveConversion=False)
+   >>> cg = pbr.digraph2Graph(ConjunctiveConversion=False)
    >>> cg.isComparabilityGraph()
     True
 
