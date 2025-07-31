@@ -3407,7 +3407,7 @@ Mind however that the *Bachet* ranking rule, even of comparable complexity :math
    >>> n.value()
     358948993845926294385124
 
-In Python, the range of integers is luckily only limited by the available CPU memory and the *orderLimit* parameter may be adjusted to tackle, if required, outranking digraphs of orders > 50. The randomized *Bachet* ranking rule might however need in these cases a smart permutohedron sampling strategy in order to achieve convincingly correlated ranking results. But this issue has still to be explored.
+In Python, the range of integers is luckily only limited by the available CPU memory and the *orderLimit* parameter may be adjusted to tackle, if required, outranking digraphs of orders > 50. The randomized *Bachet* ranking rule might however need in these cases a smart permutohedron sampling strategy in order to achieve convincingly correlated ranking results. But this trail has still to be explored.
 
 The Bachet rule: a new method for partially ranking 
 ...................................................
