@@ -3396,7 +3396,7 @@ When comparing now the ranking results obtained from *single*, *best-qualified* 
       Max.   : +0.9047    Max.   : +0.9047    Max.   : +0.9557    Max.   : +0.9541  
      ==================  ==================  ==================  ==================
 
-The statistical figures confirm the expected noticeable performance enhancement one obtains first with the *BestQualified=True* and secondly even more with the *randomized=500* settings of the *Bachet* ranking rule. The latter setting renders in fact ranking results in less than 8 sec. of a correlation quality slightly better than the *Copeland* rule. Yet, computing ranking results just from the given ordering of the *self.actions* dictionary and its reversed ordering may render, with a first quartile correlation of +0.6678 and a median correlation of +0.7282, already satisfactory ranking results in most cases. It is finally remarkable that even the single actions ordering setting shows already, with a first quartile correlation of +0.6089 and a median correlation of +0.6854, quite acceptable results.
+The statistical figures confirm the expected noticeable performance enhancement one obtains first with the *BestQualified=True* and secondly even more with the *randomized=500* settings of the *Bachet* ranking rule. With run times less than 8 sec. the latter setting renders in fact ranking results of a correlation quality slightly better than the *Copeland* rule. Yet, computing ranking results just from the given ordering of the *self.actions* dictionary and its reversed ordering may render, with a first quartile correlation of +0.6678 and a median correlation of +0.7282, already satisfactory ranking results in most cases. It is finally remarkable that even the single given actions ordering setting, with a first quartile correlation of +0.6089 and a median correlation of +0.6854, shows already quite acceptable results.
    
 Mind however that the *Bachet* ranking rule, even of comparable complexity :math:`O(n^2)` as the *Copeland* and *NetFlows* rules, is not scalable to large performance tableaux with hundreds of performance records. The integer value range of *Bachet* numbers gets indeed quickly huge with the order of the given outranking digraph. The :py:class:`~linearOrders.PolarisedBachetRanking` constructor provides therefore an *orderLimit* parameter set by default to 50, which allows to represent integer values in the huge range +- 358948993845926294385124.
 
@@ -3407,7 +3407,7 @@ Mind however that the *Bachet* ranking rule, even of comparable complexity :math
    >>> n.value()
     358948993845926294385124
 
-In Python, the range of integers is luckily only limited by the available CPU memory and the *orderLimit* parameter may be adjusted to tackle, if required, outranking digraphs of orders > 50. The randomized *Bachet* ranking rule might however need in these cases a smart permutohedron sampling strategy in order to achieve convincingly correlated ranking results. But this trail has still to be explored.
+In Python, the range of integers is luckily only limited by the available CPU memory and the *orderLimit* parameter may be adjusted to tackle, if required, outranking digraphs of orders > 50. The randomized *Bachet* ranking rule might however need in these cases a smart permutohedron sampling strategy in order to achieve convincingly correlated ranking results. But this challenging trail has still to be explored.
 
 The Bachet rule: a new method for partially ranking 
 ...................................................
