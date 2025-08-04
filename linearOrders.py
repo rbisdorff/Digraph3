@@ -1601,6 +1601,65 @@ class PolarisedBachetOrder(PolarisedBachetRanking):
     """
     Dummy for PolarisedBachetRanking class
     """
+#------------
+
+class RandomizedBachetRanking(PolarisedBachetRanking):
+    """
+    Optimized sampling of the permutohedron
+    """
+    def __init__(self,g,CoDual=False,actionsList=None,
+                 orderLimit=50,
+                 randomized=100,seed=None,
+                 Comments=False,Debug=False):
+
+        from copy import deepcopy
+        import random as rd
+        
+        rd.seed(seed)
+        gcd = ~(-g)
+        triples = gcd.computeTransitivityDegree(ReturnIntransitiveTriples=True)
+        nt = len(triples)
+        self.intransitiveTriples = triples
+        if Debug:
+            print(nt)
+        sampleLength = randomized
+        if nt > sampleLength:
+            rdIndex = rd.sample(range(nt),sampleLength)
+        else:
+            rdIndex = range(nt)
+        if Debug:
+            print(len(rdIndex))
+            print(len(triples))
+        t0 = time()
+        al = [x for x in g.actions]
+        bestCorr = 0.0
+        bestList = al
+        bestBa = PolarisedBachetRanking(gcd)
+        for i in rdIndex:
+            tr = triples[i]
+            if Debug:
+                print(tr)
+            xi = al.index(tr[0])
+            yi = al.index(tr[1])
+            al[xi] = tr[1]
+            al[yi] = tr[0]
+            ba = PolarisedBachetRanking(gcd,actionsList=al)
+            corr = g.computeRankingCorrelation(ba.bachetRanking)
+            if corr['correlation'] > bestCorr:
+                bestList = al
+                bestCorr = corr['correlation']
+                bestBa = PolarisedBachetRanking(gcd,actionsList=bestList)
+            yi = al.index(tr[2])
+            #al[xi] = tr[1]
+            al[yi] = tr[2]
+            ba = PolarisedBachetRanking(gcd,actionsList=al)
+            corr = g.computeRankingCorrelation(ba.bachetRanking)
+            if corr['correlation'] > bestCorr:
+                bestList = al
+                bestCorr = corr['correlation']
+                bestBa = PolarisedBachetRanking(gcd,actionsList=bestList)
+        for att in bestBa.__dict__:
+            self.__dict__[att] = bestBa.__dict__[att]
 
 #------------
 class ValuedBachetRanking(LinearOrder):
@@ -2662,7 +2721,8 @@ if __name__ == "__main__":
                                         corrba2['correlation'],
                                         corrnf['correlation']) )
     res.close()
-        
+    ba4 = RandomizedBachetRanking(g,Debug=True,randomized=100)
+    print(ba4)
     
      
     print('*------------------*')
