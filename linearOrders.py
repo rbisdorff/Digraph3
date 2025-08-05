@@ -1607,9 +1607,9 @@ class SmartBachetRanking(PolarisedBachetRanking):
     """
     Smart sampling of the permutohedron
     """
-    def __init__(self,g,CoDual=False,actionsList=None,
-                 orderLimit=50,
-                 randomized=100,seed=None,
+    def __init__(self,g,actionsList=None,
+                 orderLimit=50,Polarised=False,
+                 sampleSize=100,seed=None,
                  Comments=False,Debug=False):
 
         from copy import deepcopy
@@ -1618,11 +1618,12 @@ class SmartBachetRanking(PolarisedBachetRanking):
         rd.seed(seed)
         #gcd = ~(-g)
         triples = g.computeTransitivityDegree(ReturnIntransitiveTriples=True)
-        nt = len(triples)
         self.intransitiveTriples = triples
+        nt = len(triples)
         if Debug:
             print(nt)
-        sampleLength = randomized
+        sampleLength = sampleSize
+        
         if nt > sampleLength:
             rdIndex = rd.sample(range(nt),sampleLength)
         else:
@@ -1630,13 +1631,21 @@ class SmartBachetRanking(PolarisedBachetRanking):
         if Debug:
             print(len(rdIndex))
             print(len(triples))
+        self.sampleSize = nt
         t0 = time()
-        al = [x for x in g.actions]
+        if actionsList is None:
+            al = [x for x in g.actions]
+        else:
+            al = actionsList
         if Debug:
             print(al)
         bestCorr = 0.0
         bestList = al
-        bestBa = PolarisedBachetRanking(g)
+        if Polarised:
+            BachetRanking = PolarisedBachetRanking
+        else:
+            BachetRanking = ValuedBachetRanking
+        bestBa = BachetRanking(g)
         for i in rdIndex:
             tr = triples[i]
             if Debug:
@@ -1647,24 +1656,28 @@ class SmartBachetRanking(PolarisedBachetRanking):
             al[yi] = tr[0]
             if Debug:
                 print(al)
-            ba = PolarisedBachetRanking(g,actionsList=al)
+            ba = BachetRanking(g,actionsList=al,
+                               orderLimit=orderLimit)
             corr = g.computeRankingCorrelation(ba.bachetRanking)
             if corr['correlation'] > bestCorr:
                 bestList = al
                 bestCorr = corr['correlation']
-                bestBa = PolarisedBachetRanking(g,actionsList=bestList)
+                bestBa = BachetRanking(g,actionsList=bestList,
+                                       orderLimit=orderLimit)
             yi = al.index(tr[1])
             zi = al.index(tr[2])
             al[yi] = tr[2]
             al[zi] = tr[1]
             if Debug:
                 print(al)
-            ba = PolarisedBachetRanking(g,actionsList=al)
+            ba = BachetRanking(g,actionsList=al,
+                               orderLimit=orderLimit)
             corr = g.computeRankingCorrelation(ba.bachetRanking)
             if corr['correlation'] > bestCorr:
                 bestList = al
                 bestCorr = corr['correlation']
-                bestBa = PolarisedBachetRanking(g,actionsList=bestList)
+                bestBa = BachetRanking(g,actionsList=bestList,
+                                       orderLimit=orderLimit)
         for att in bestBa.__dict__:
             self.__dict__[att] = bestBa.__dict__[att]
 
@@ -2654,7 +2667,7 @@ if __name__ == "__main__":
     print('*-------- Testing class and methods -------')
 
     Threading = False
-    res = open('testrandomized.csv','w')
+    res = open('testsmart.csv','w')
     res.write('"seed","ba1","cop","ba2","nf"\n')
     sampleSize = 1
     #t = Random3ObjectivesPerformanceTableau(numberOfActions=10,seed=1)
@@ -2671,8 +2684,8 @@ if __name__ == "__main__":
         #g = RandomDigraph(order=7)
         revba1 = [x for x in reversed(g.actions)]
         ba1 = ValuedBachetRanking(g,CoDual=True,
-                            orderLimit=75,BestQualified=True,
-                            Comments=True,Debug=True,
+                            orderLimit=75,randomized=100,seed=sample,
+                            Comments=False,Debug=False,
                             actionsList=g.actions,
                             )
         #print(ba1)
@@ -2681,7 +2694,7 @@ if __name__ == "__main__":
         cop = CopelandRanking(g,Comments=False,Gamma=False)
         print(cop.copelandRanking)
         corrcop = g.computeRankingCorrelation(cop.copelandRanking)
-        print('cop',cop.copelandRanking,corrcop)
+##        print('cop',cop.copelandRanking,corrcop)
 ##        wcop1 = _WeightedCopelandRanking(g,Comments=False,Debug=False)
 ##        print(wcop1.copelandRanking)
 ##        corrwcop1 = g.computeRankingCorrelation(wcop1.copelandRanking)
@@ -2694,31 +2707,34 @@ if __name__ == "__main__":
 ##        print('wcop2',wcop2.copelandRanking,corrwcop2)
         nf = NetFlowsRanking(g)
         corrnf = g.computeRankingCorrelation(nf.netFlowsRanking)
-        print('nf',nf.netFlowsRanking,corrnf)
-        ke = KemenyRanking(g,orderLimit=9)
-        corrke = g.computeRankingCorrelation(ke.kemenyRanking)
-        print('ke',ke.kemenyRanking,corrke)
-        randomActions = [x for x in g.actions]
-        #print(randomActions)
-        random.shuffle(randomActions)
-        #revba1 = [x for x in reversed(ba1.bachetRanking)]
-        revba2 = [x for x in reversed(g.actions)]
-        #print(randomActions)
-        #print(revba1)
-        ba2 = ValuedBachetRanking(g,Comments=False,
-                            CoDual=True,
-                            randomized=100,seed=11,
-                            #actionsList=g.actions,
-                            )
+##        print('nf',nf.netFlowsRanking,corrnf)
+##        ke = KemenyRanking(g,orderLimit=9)
+##        corrke = g.computeRankingCorrelation(ke.kemenyRanking)
+##        print('ke',ke.kemenyRanking,corrke)
+##        randomActions = [x for x in g.actions]
+##        #print(randomActions)
+##        random.shuffle(randomActions)
+##        #revba1 = [x for x in reversed(ba1.bachetRanking)]
+##        revba2 = [x for x in reversed(g.actions)]
+##        #print(randomActions)
+##        #print(revba1)
+##        ba2 = ValuedBachetRanking(g,Comments=False,
+##                            CoDual=True,
+##                            randomized=100,seed=11,
+##                            #actionsList=g.actions,
+##                            )
         #print(ba2)
+        ba2 = SmartBachetRanking(g,Debug=False,
+                                 sampleSize=100,Polarised=False,seed=seed)
         corrba2 = g.computeRankingCorrelation(ba2.bachetRanking)
+        print('Smart Bachet Ranking')
         print('ba2',ba2.bachetRanking,corrba2)
-        ba3 = ValuedBachetRanking(g,Comments=False,BestQualified=False,
-                            CoDual=True,
-                            Optimal=True,Debug=True,
-                            )
-        corrba3 = g.computeRankingCorrelation(ba3.bachetRanking)
-        print('ba3',ba3.bachetRanking,corrba3)
+##        ba3 = ValuedBachetRanking(g,Comments=False,BestQualified=False,
+##                            CoDual=True,
+##                            Optimal=True,Debug=True,
+##                            )
+##        corrba3 = g.computeRankingCorrelation(ba3.bachetRanking)
+##        print('ba3',ba3.bachetRanking,corrba3)
         print('%d,%.4f,%.4f,%.4f,%.4f\n' % (seed,corrba1['correlation'],
                                            corrcop['correlation'],
                                         corrba2['correlation'],
@@ -2728,9 +2744,8 @@ if __name__ == "__main__":
                                         corrba2['correlation'],
                                         corrnf['correlation']) )
     res.close()
-    ba4 = SmartBachetRanking(g,Debug=True,randomized=100)
-    print(ba4)
-    print(ba4.correlation)
+##    print(ba4)
+##    print(ba4.correlation)
     
      
     print('*------------------*')
