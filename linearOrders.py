@@ -1219,6 +1219,22 @@ class _OutFlowsOrder(LinearOrder):
             for x in reversed(self.outFlows):
                 print('%s \t %.2f' %(x[1],x[0]))
 #------------
+
+class BachetRanking(LinearOrder):
+    """
+    abstract class for Bachet ranking rules.
+    """
+    def showScores(self,direction='descending'):
+        print('Bachet scores in %s order' % direction)
+        print('action \t score')
+        if direction == 'descending':
+            for x in self.decBachetScores:
+                print('%s \t %.2f' %(x[1],x[0]))
+        else:
+            for x in self.incBachetScores:
+                print('%s \t %.2f' %(x[1],x[0]))
+         
+    
 class PolarisedBachetRanking(LinearOrder):
     """    
     Instantiates the Bachet Ranking and Ordering from a given bipolar-valued *Digraph* instance *other*.
@@ -1587,28 +1603,18 @@ class PolarisedBachetRanking(LinearOrder):
         runTimes['totalTime'] = time() - tt
         self.runTimes = runTimes
 
-    def showScores(self,direction='descending'):
-        print('Bachet scores in %s order' % direction)
-        print('action \t score')
-        if direction == 'descending':
-            for x in self.decBachetScores:
-                print('%s \t %.2f' %(x[1],x[0]))
-        else:
-            for x in self.incBachetScores:
-                print('%s \t %.2f' %(x[1],x[0]))
-         
 class PolarisedBachetOrder(PolarisedBachetRanking):
     """
     Dummy for PolarisedBachetRanking class
     """
 #------------
 
-class SmartBachetRanking(PolarisedBachetRanking):
+class RandomizedBachetRanking(BachetRanking):
     """
     Smart sampling of the permutohedron
     """
     def __init__(self,g,actionsList=None,
-                 orderLimit=50,Polarised=False,
+                 orderLimit=50,Polarised=True,
                  sampleSize=100,seed=None,
                  Comments=False,Debug=False):
 
@@ -1622,7 +1628,10 @@ class SmartBachetRanking(PolarisedBachetRanking):
         nt = len(triples)
         if Debug:
             print(nt)
-        sampleLength = sampleSize
+        if sampleSize is None:
+            sampleLength = nt
+        else:
+            sampleLength = sampleSize
         
         if nt > sampleLength:
             rdIndex = rd.sample(range(nt),sampleLength)
@@ -1642,10 +1651,11 @@ class SmartBachetRanking(PolarisedBachetRanking):
         bestCorr = 0.0
         bestList = al
         if Polarised:
-            BachetRanking = PolarisedBachetRanking
+            _BachetRanking = PolarisedBachetRanking
         else:
-            BachetRanking = ValuedBachetRanking
-        bestBa = BachetRanking(g)
+            _BachetRanking = ValuedBachetRanking
+        bestBa = _BachetRanking(g,actionsList=al,
+                                orderLimit=orderLimit)
         for i in rdIndex:
             tr = triples[i]
             if Debug:
@@ -1656,13 +1666,13 @@ class SmartBachetRanking(PolarisedBachetRanking):
             al[yi] = tr[0]
             if Debug:
                 print(al)
-            ba = BachetRanking(g,actionsList=al,
+            ba = _BachetRanking(g,actionsList=al,
                                orderLimit=orderLimit)
             corr = g.computeRankingCorrelation(ba.bachetRanking)
             if corr['correlation'] > bestCorr:
                 bestList = al
                 bestCorr = corr['correlation']
-                bestBa = BachetRanking(g,actionsList=bestList,
+                bestBa = _BachetRanking(g,actionsList=bestList,
                                        orderLimit=orderLimit)
             yi = al.index(tr[1])
             zi = al.index(tr[2])
@@ -1670,13 +1680,13 @@ class SmartBachetRanking(PolarisedBachetRanking):
             al[zi] = tr[1]
             if Debug:
                 print(al)
-            ba = BachetRanking(g,actionsList=al,
+            ba = _BachetRanking(g,actionsList=al,
                                orderLimit=orderLimit)
             corr = g.computeRankingCorrelation(ba.bachetRanking)
             if corr['correlation'] > bestCorr:
                 bestList = al
                 bestCorr = corr['correlation']
-                bestBa = BachetRanking(g,actionsList=bestList,
+                bestBa = _BachetRanking(g,actionsList=bestList,
                                        orderLimit=orderLimit)
         for att in bestBa.__dict__:
             self.__dict__[att] = bestBa.__dict__[att]
@@ -2655,7 +2665,7 @@ if __name__ == "__main__":
     print("""
     ****************************************************
     * Digraph3 linearOrders module                     *
-    * Copyright (C) 2011-2021 Raymond Bisdorff         *
+    * Copyright (C) 2011-2025 Raymond Bisdorff         *
     * The module comes with ABSOLUTELY NO WARRANTY     *
     * to the extent permitted by the applicable law.   *
     * This is free software, and you are welcome to    *
@@ -2669,24 +2679,24 @@ if __name__ == "__main__":
     Threading = False
     res = open('testsmart.csv','w')
     res.write('"seed","ba1","cop","ba2","nf"\n')
-    sampleSize = 1
+    sampleSize = 100
     #t = Random3ObjectivesPerformanceTableau(numberOfActions=10,seed=1)
     for sample in range(sampleSize):
         print(sample)
         seed = random.randint(1,1000000)
-        seed = 1
+        seed = sample + 1
     ##    t = CircularPerformanceTableau()
         #t.showHTMLPerformanceHeatmap(Correlations=True,colorLevels=5)
         #t = PerformanceTableau('testLin')
         t = RandomCBPerformanceTableau(numberOfActions=7,
-                                       numberOfCriteria=13,seed=20)
+                                       numberOfCriteria=13,seed=sample+1)
         g = BipolarOutrankingDigraph(t)
         #g = RandomDigraph(order=7)
         revba1 = [x for x in reversed(g.actions)]
-        ba1 = ValuedBachetRanking(g,CoDual=True,
-                            orderLimit=75,randomized=100,seed=sample,
+        ba1 = RandomizedBachetRanking(g,
+                            orderLimit=75,sampleSize=100,seed=seed,
                             Comments=False,Debug=False,
-                            actionsList=g.actions,
+                            actionsList=None,
                             )
         #print(ba1)
         corrba1 = g.computeRankingCorrelation(ba1.bachetRanking)
@@ -2724,7 +2734,7 @@ if __name__ == "__main__":
 ##                            #actionsList=g.actions,
 ##                            )
         #print(ba2)
-        ba2 = SmartBachetRanking(g,Debug=False,
+        ba2 = RandomizedBachetRanking(g,Debug=False,
                                  sampleSize=100,Polarised=False,seed=seed)
         corrba2 = g.computeRankingCorrelation(ba2.bachetRanking)
         print('Smart Bachet Ranking')
