@@ -1235,7 +1235,7 @@ class BachetRanking(LinearOrder):
                 print('%s \t %.2f' %(x[1],x[0]))
          
     
-class PolarisedBachetRanking(LinearOrder):
+class PolarisedBachetRanking(BachetRanking):
     """    
     Instantiates the Bachet Ranking and Ordering from a given bipolar-valued *Digraph* instance *other*.
 
@@ -1691,8 +1691,13 @@ class RandomizedBachetRanking(BachetRanking):
         for att in bestBa.__dict__:
             self.__dict__[att] = bestBa.__dict__[att]
 
+class RandomizedBachetOrder(RandomizedBachetRanking):
+    """
+    Dummy for RandomizedBachetRanking class
+    """
+
 #------------
-class ValuedBachetRanking(LinearOrder):
+class ValuedBachetRanking(BachetRanking):
     """    
     Instantiates the Bachet Ranking and Ordering from a given bipolar-valued *Digraph* instance *other*.
 
@@ -2043,16 +2048,6 @@ class ValuedBachetRanking(LinearOrder):
         self.notGamma = self.notGammaSets()
         runTimes['totalTime'] = time() - tt
         self.runTimes = runTimes
-
-    def showScores(self,direction='descending'):
-        print('Bachet scores in %s order' % direction)
-        print('action \t score')
-        if direction == 'descending':
-            for x in self.decBachetScores:
-                print('%s \t %.2f' %(x[1],x[0]))
-        else:
-            for x in self.incBachetScores:
-                print('%s \t %.2f' %(x[1],x[0]))
          
 class ValuedBachetOrder(ValuedBachetRanking):
     """
