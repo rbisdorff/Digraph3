@@ -1774,21 +1774,36 @@
         <span class="n">triples</span> <span class="o">=</span> <span class="n">g</span><span class="o">.</span><span class="n">computeTransitivityDegree</span><span class="p">(</span><span class="n">ReturnIntransitiveTriples</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">intransitiveTriples</span> <span class="o">=</span> <span class="n">triples</span>
         <span class="n">nt</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">triples</span><span class="p">)</span>
+        <span class="n">rankedTriples</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="k">for</span> <span class="n">tr</span> <span class="ow">in</span> <span class="n">triples</span><span class="p">:</span>
+            <span class="n">x</span> <span class="o">=</span> <span class="n">tr</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+            <span class="n">y</span> <span class="o">=</span> <span class="n">tr</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+            <span class="n">z</span> <span class="o">=</span> <span class="n">tr</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span>
+            <span class="n">score</span> <span class="o">=</span> <span class="n">g</span><span class="o">.</span><span class="n">relation</span><span class="p">[</span><span class="n">x</span><span class="p">][</span><span class="n">y</span><span class="p">]</span> <span class="o">+</span> <span class="n">g</span><span class="o">.</span><span class="n">relation</span><span class="p">[</span><span class="n">y</span><span class="p">][</span><span class="n">z</span><span class="p">]</span> <span class="o">+</span> <span class="n">g</span><span class="o">.</span><span class="n">relation</span><span class="p">[</span><span class="n">x</span><span class="p">][</span><span class="n">z</span><span class="p">]</span>
+            <span class="n">rankedTriples</span><span class="o">.</span><span class="n">append</span><span class="p">((</span><span class="n">score</span><span class="p">,</span><span class="n">tr</span><span class="p">))</span>
+        <span class="kn">from</span> <span class="nn">digraphsTools</span> <span class="kn">import</span> <span class="n">scoredTuplesSort</span>
+        <span class="n">scoredTuplesSort</span><span class="p">(</span><span class="n">rankedTriples</span><span class="p">,</span><span class="n">reverse</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
         <span class="k">if</span> <span class="n">Debug</span><span class="p">:</span>
             <span class="nb">print</span><span class="p">(</span><span class="n">nt</span><span class="p">)</span>
+            <span class="nb">print</span><span class="p">(</span><span class="n">rankedTriples</span><span class="p">)</span>
         <span class="k">if</span> <span class="n">sampleSize</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
             <span class="n">sampleLength</span> <span class="o">=</span> <span class="n">nt</span>
         <span class="k">else</span><span class="p">:</span>
             <span class="n">sampleLength</span> <span class="o">=</span> <span class="n">sampleSize</span>
-        
-        <span class="k">if</span> <span class="n">nt</span> <span class="o">&gt;</span> <span class="n">sampleLength</span><span class="p">:</span>
-            <span class="n">rdIndex</span> <span class="o">=</span> <span class="n">rd</span><span class="o">.</span><span class="n">sample</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="n">nt</span><span class="p">),</span><span class="n">sampleLength</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">sampleSize</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">sampleSize</span> <span class="o">=</span> <span class="n">nt</span>
+        <span class="k">if</span> <span class="n">nt</span> <span class="o">&gt;</span> <span class="n">sampleSize</span><span class="p">:</span>
+            <span class="n">rdIndex</span> <span class="o">=</span> <span class="nb">range</span><span class="p">(</span><span class="n">sampleSize</span><span class="p">)</span>
         <span class="k">else</span><span class="p">:</span>
             <span class="n">rdIndex</span> <span class="o">=</span> <span class="nb">range</span><span class="p">(</span><span class="n">nt</span><span class="p">)</span>
-        <span class="k">if</span> <span class="n">Debug</span><span class="p">:</span>
-            <span class="nb">print</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">rdIndex</span><span class="p">))</span>
-            <span class="nb">print</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">triples</span><span class="p">))</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">sampleSize</span> <span class="o">=</span> <span class="n">nt</span>
+<span class="c1">##        if nt &gt; sampleLength:</span>
+<span class="c1">##            rdIndex = rd.sample(range(nt),sampleLength)</span>
+<span class="c1">##        else:</span>
+<span class="c1">##            rdIndex = range(nt)</span>
+<span class="c1">##        if Debug:</span>
+<span class="c1">##            print(len(rdIndex))</span>
+<span class="c1">##            #print(len(triples))</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">sampleSize</span> <span class="o">=</span> <span class="n">sampleLength</span>
         <span class="n">t0</span> <span class="o">=</span> <span class="n">time</span><span class="p">()</span>
         <span class="k">if</span> <span class="n">actionsList</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
             <span class="n">al</span> <span class="o">=</span> <span class="p">[</span><span class="n">x</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">g</span><span class="o">.</span><span class="n">actions</span><span class="p">]</span>
@@ -1805,7 +1820,7 @@
         <span class="n">bestBa</span> <span class="o">=</span> <span class="n">_BachetRanking</span><span class="p">(</span><span class="n">g</span><span class="p">,</span><span class="n">actionsList</span><span class="o">=</span><span class="n">al</span><span class="p">,</span>
                                 <span class="n">orderLimit</span><span class="o">=</span><span class="n">orderLimit</span><span class="p">)</span>
         <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">rdIndex</span><span class="p">:</span>
-            <span class="n">tr</span> <span class="o">=</span> <span class="n">triples</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
+            <span class="n">tr</span> <span class="o">=</span> <span class="n">rankedTriples</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="mi">1</span><span class="p">]</span>
             <span class="k">if</span> <span class="n">Debug</span><span class="p">:</span>
                 <span class="nb">print</span><span class="p">(</span><span class="n">tr</span><span class="p">)</span>
             <span class="n">xi</span> <span class="o">=</span> <span class="n">al</span><span class="o">.</span><span class="n">index</span><span class="p">(</span><span class="n">tr</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
@@ -2853,7 +2868,7 @@
     <span class="n">Threading</span> <span class="o">=</span> <span class="kc">False</span>
     <span class="n">res</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="s1">&#39;testsmart.csv&#39;</span><span class="p">,</span><span class="s1">&#39;w&#39;</span><span class="p">)</span>
     <span class="n">res</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s1">&#39;&quot;seed&quot;,&quot;ba1&quot;,&quot;cop&quot;,&quot;ba2&quot;,&quot;nf&quot;</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)</span>
-    <span class="n">sampleSize</span> <span class="o">=</span> <span class="mi">10</span>
+    <span class="n">sampleSize</span> <span class="o">=</span> <span class="mi">100</span>
     <span class="c1">#t = Random3ObjectivesPerformanceTableau(numberOfActions=10,seed=1)</span>
     <span class="k">for</span> <span class="n">sample</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">sampleSize</span><span class="p">):</span>
         <span class="nb">print</span><span class="p">(</span><span class="n">sample</span><span class="p">)</span>
@@ -2953,7 +2968,7 @@
 
   <div role="contentinfo">
     <p>&#169; Copyright 2012-2025, Raymond Bisdorff.
-      <span class="lastupdated">Last updated on Aug 06, 2025.
+      <span class="lastupdated">Last updated on Aug 07, 2025.
       </span></p>
   </div>
 

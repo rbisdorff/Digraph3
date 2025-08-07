@@ -1626,21 +1626,36 @@ class SmartBachetRanking(BachetRanking):
         triples = g.computeTransitivityDegree(ReturnIntransitiveTriples=True)
         self.intransitiveTriples = triples
         nt = len(triples)
+        rankedTriples = []
+        for tr in triples:
+            x = tr[0]
+            y = tr[1]
+            z = tr[2]
+            score = g.relation[x][y] + g.relation[y][z] + g.relation[x][z]
+            rankedTriples.append((score,tr))
+        from digraphsTools import scoredTuplesSort
+        scoredTuplesSort(rankedTriples,reverse=True)
         if Debug:
             print(nt)
+            print(rankedTriples)
         if sampleSize is None:
             sampleLength = nt
         else:
             sampleLength = sampleSize
-        
-        if nt > sampleLength:
-            rdIndex = rd.sample(range(nt),sampleLength)
+        if sampleSize is None:
+            sampleSize = nt
+        if nt > sampleSize:
+            rdIndex = range(sampleSize)
         else:
             rdIndex = range(nt)
-        if Debug:
-            print(len(rdIndex))
-            print(len(triples))
-        self.sampleSize = nt
+##        if nt > sampleLength:
+##            rdIndex = rd.sample(range(nt),sampleLength)
+##        else:
+##            rdIndex = range(nt)
+##        if Debug:
+##            print(len(rdIndex))
+##            #print(len(triples))
+        self.sampleSize = sampleLength
         t0 = time()
         if actionsList is None:
             al = [x for x in g.actions]
@@ -1657,7 +1672,7 @@ class SmartBachetRanking(BachetRanking):
         bestBa = _BachetRanking(g,actionsList=al,
                                 orderLimit=orderLimit)
         for i in rdIndex:
-            tr = triples[i]
+            tr = rankedTriples[i][1]
             if Debug:
                 print(tr)
             xi = al.index(tr[0])
@@ -2674,7 +2689,7 @@ if __name__ == "__main__":
     Threading = False
     res = open('testsmart.csv','w')
     res.write('"seed","ba1","cop","ba2","nf"\n')
-    sampleSize = 1
+    sampleSize = 100
     #t = Random3ObjectivesPerformanceTableau(numberOfActions=10,seed=1)
     for sample in range(sampleSize):
         print(sample)
